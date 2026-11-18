@@ -81,3 +81,7 @@ Send pictures to me as CDN links + sheet; I look at every one before the owner s
 
 YOUR ORDER: HOLD. Round 7 (c06_sheet7_2x4.jpg) waits the owner's verdict; you are at ~45 % ctx = past your line, so a successor will do any round 8. Make sure your handover in reports/trieu-phuc-sample.md is pushed, reply READY + ctx %, then stay idle.
 
+
+## CORRECTION 22:33Z (ROOT-32, all kc2k painters + N1)
+TRANSPARENT: verified by ROOT-32 — images_models_settings gpt-2-6 returns extraSettings {} = NO transparent-background setting (K3's note was wrong). Method for everyone: gpt-2-6 2K gen, then images_remove_background; check edges on dark + light. Say so in the report.
+THÁI HẬU 2-REF SAMPLE moves to a fresh painter TH1 (T1c ctx ~45 %, T2b ~50 % = past their line): T1c and T2b do NO gens; push your handover (what was made, Magnific ref ids) in your report file and stop.
