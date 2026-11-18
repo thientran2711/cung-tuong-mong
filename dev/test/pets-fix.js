@@ -40,7 +40,7 @@ const fresh=`(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();d
   await p.evaluate(()=>{tab='inv';render();const e=document.querySelector('#panel .keq[data-keq="pets"]');if(e)e.scrollIntoView({block:'center'})});await shot('00-oldsave-inv');A.push(await audit('oldsave'))}
  await p.evaluate(fresh);await sleep(800);
  /* --- 1. Tư trang: two pets, one followed (chip) — the row is aligned --- */
- await p.evaluate(()=>{S.inv=S.inv.filter(e=>e.w||e.h);S.pets=[];S.petTip=1;S.rank=3;S.bac=900;S.mat=4;petAdd(S,'meo','Nhờ thái giám mua','buy');petAdd(S,'vet','Nhờ thái giám mua','buy');S.petOn=0;S.pets[1].stg=2;tab='inv';render()});
+ await p.evaluate(()=>{S.inv=S.inv.filter(e=>e.w||e.h);S.pets=[];S.petTip=1;S.rank=3;S.bac=900;tmPlace(S,4);petAdd(S,'meo','Nhờ thái giám mua','buy');petAdd(S,'vet','Nhờ thái giám mua','buy');S.petOn=0;S.pets[1].stg=2;tab='inv';render()});
  await sleep(600);await p.evaluate(()=>{const e=document.querySelector('#panel .keq[data-keq="pets"]');if(e)e.scrollIntoView({block:'center'})});
  R.row=await p.evaluate(()=>{const out={};const R=e=>e.getBoundingClientRect();const sp=a=>a.length?+(Math.max(...a)-Math.min(...a)).toFixed(2):0;
   for(const k of ['pets','tutrang']){const q=document.querySelector(`#panel .keq[data-keq="${k}"]`);if(!q)continue;const C=[...q.querySelectorAll('.keqc,.keqrc')];const rows={};C.forEach(c=>{const y=Math.round(R(c).top);(rows[y]=rows[y]||[]).push(c)});

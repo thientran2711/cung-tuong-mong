@@ -18,7 +18,7 @@ let SIZES=args.slice(1).filter((a,i,A)=>a!=='--shots'&&A[i-1]!=='--shots');if(!S
   await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof dawn==='function',null,{timeout:0});await p.waitForTimeout(2500);
   const R=await p.evaluate(()=>{for(const id of ['kload','kroul']){const x=document.getElementById(id);if(x)x.remove()}try{localStorage.clear()}catch(e){}SLOT=3;window.__nlInner=1;document.getElementById('title').hidden=true;
    Math.random=(()=>{let s=777;return()=>{s=(s*16807)%2147483647;return s/2147483647}})();window.__forceOrigin='cn';
-   for(let i=0;i<60;i++){start();if(!isSrv()&&S.emp)break}Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;render();window.__bot=true;S.mat=12;
+   for(let i=0;i<60;i++){start();if(!isSrv()&&S.emp)break}Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;render();window.__bot=true;tmPlace(S,12);
    S.logs.length=0;S.logSeq=0;S.wkSnap=wkSnap();S.wkSnap.seq=0;
    const L=liveRivals(false);const hh=L.find(v=>v.queen)||L[0],a=L.find(v=>!v.queen&&v!==hh)||L[1],c=L.find(v=>!v.queen&&v!==hh&&v!==a)||L[2];kn();for(const v of L)S.met[v.id]=wk();
    /* the real changes first, the lines the game writes after */
