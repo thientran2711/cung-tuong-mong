@@ -6,7 +6,7 @@
    env NOIMG=1: do not load CDN pictures (fast scan, layout only); default loads them through curl (sandbox) for shots. Prints one JSON line per kind + a table. */
 const {chromium}=require('playwright');const fs=require('fs');const D=require('./lib/device');const {execFileSync}=require('child_process');
 const [,,ROOT,SZ,OUT,KINDS]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.split('x').map(Number);
-const kinds=(KINDS||'stranger,consort,queen,maid,elder,emp,th,kid').split(',');const cache={};
+const kinds=(KINDS||'stranger,consort,queen,maid,elder,serv,kid,ty,fallen,emp,th').split(',');const cache={};
 (async()=>{const srv=await D.serveRoot(ROOT);const b=await chromium.launch();
  const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+DPR,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce'});
  await ctx.route(/ctm-img\.victoria-tntt\.workers\.dev/,r=>{if(process.env.NOIMG)return r.abort();const u=r.request().url();try{if(!cache[u]){const f=process.env.CTM_CACHE?process.env.CTM_CACHE+'/'+require('crypto').createHash('md5').update(u).digest('hex'):'';if(f&&fs.existsSync(f))cache[u]=fs.readFileSync(f);else{cache[u]=execFileSync('curl',['-sSf','-m','30',u],{maxBuffer:60e6,stdio:['ignore','pipe','ignore']});if(f)fs.writeFileSync(f,cache[u])}}r.fulfill({status:200,body:cache[u],contentType:u.endsWith('.json')?'application/json':'image/webp',headers:{'access-control-allow-origin':'*'}})}catch(e){r.abort()}});
@@ -23,7 +23,10 @@ const kinds=(KINDS||'stranger,consort,queen,maid,elder,emp,th,kid').split(',');c
    else if(k==='queen'){const v=R.find(x=>x.queen);if(!v)return 'no';try{k61Meet(v,"scan",3)}catch(e){}pe=rp(v)}
    else if(k==='emp')pe={kind:"emp",name:"Hoàng thượng",ini:"Đế",col:"#f0d070",info:`${empName()} · ${MOODS[S.emp.mood][0].toLowerCase()}`};
    else if(k==='th')pe={kind:"th",name:"Thái hậu",ini:"Hậu",col:"#c0a0d0",info:"Thái hậu"};
-   else{S.place="home";S.visit={k:"home",people:homePeople(),talked:false,tk:{}};const L=S.visit.people;const i=L.findIndex(x=>x.kind===k);if(i<0)return 'no';pe=null;S.__scanIdx=i}
+   else if(k==='kid'){let kk=S.kids.find(x=>x.alive);if(!kk){kk=mkKid("m",8);kk.bt=S.turn-8*12;kk.alive=true;kk.hp=kk.hp||80;S.kids.push(kk)}pe={kind:"kid",ref:kk,name:kk.name,ini:"Tử",col:"#c9a0e0",info:`${kk.age} tuổi · Sức khỏe ${kk.hp} · Tài ${kk.tal} · Hoàng thượng thương ${kk.fond}`}}
+   else if(k==='ty')pe={kind:"ty",name:(S.court&&S.court.ty&&S.court.ty.name)||"Thái y",ini:"Y",col:"#8fc38a",info:"Thái y viện"};
+   else if(k==='fallen'){const v=R.find(x=>!x.queen&&x.alive);if(!v)return 'no';pe={kind:"fallen",ref:v,name:v.name,ini:"L",col:"#6a7a8a",info:"Phế phi"}}
+   else{if(k==='kid'&&!S.kids.some(x=>x.alive)){const kk=mkKid("m",8);kk.bt=S.turn-8*12;kk.alive=true;kk.hp=kk.hp||80;S.kids.push(kk)}S.place="home";S.visit={k:"home",people:homePeople(),talked:false,tk:{}};renderStage();const L=S.visit.people;const i=L.findIndex(x=>x.kind===k);if(i<0)return 'no:'+L.map(x=>x.kind).join(',');pe=null;S.__scanIdx=i}
    if(pe){S.place="vuon";S.visit={k:"vuon",people:[pe],talked:false,tk:{}};S.__scanIdx=0}
    popIdx=null;popMsg="";renderStage();return 'ok'}catch(e){return 'ERR '+e.message}},k);
   if(made!=='ok'){rows.push({kind:k,skip:made});continue}
