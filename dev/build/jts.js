@@ -17,7 +17,8 @@ function tsNm(p){try{if(p===S)return"ngươi";return (p.queen?"Hoàng hậu":RAN
 function tsBot(){return typeof window.__bot!=="undefined"}
 function tsLast(){return BUOI.length-1}
 /* ---------- one option card: odds word + Được / Mất / Kèm (+ costs in fx → Tốn) + Cần (need) ---------- */
-function tsOpt(o){const sure=o.odds==null||o.odds>=100;const L=[sure?"Chắc chắn":word(cl(Math.round(o.odds),5,95))];
+function tsOpt(o){const sure=o.odds==null||o.odds>=100;const L=[sure?"":word(oddsCl(Math.round(o.odds)))];
+ if(o.ton&&o.ton.length)L.push("tốn: "+o.ton.join(", "));/* a cost that is not a number of BAL keys (a piece given away: "<món> −1") */
  if(o.duoc&&o.duoc.length)L.push("thành: "+o.duoc.join(" · "));if(o.mat&&o.mat.length)L.push("hỏng: "+o.mat.join(" · "));else if(!sure)L.push("hỏng: không mất gì");
  if(o.kem&&o.kem.length)L.push("kèm: "+o.kem.join(" · "));if(o.note)L.push(`(${o.note})`);
  const need=(o.need||[]).filter(Boolean);return{n:o.n,fx:o.fx||{},x:L.join(" · "),go:o.go,need,tsDis:need.some(x=>!x.ok),tsLater:!!o.later}}
@@ -93,7 +94,7 @@ function tsEngSteer(box,env){const C=kg82Canvas(box,1.05,470),{g,W,H}=C;const lv
  raf=requestAnimationFrame(frame);return()=>{stop=true;cancelAnimationFrame(raf)}}
 Object.assign(KG82_ENG,{tspluck:tsEngPluck,tssteer:tsEngSteer});
 /* tsGame({kind, art, title, odds (cơ may thường 0–100), risk, ctx, intro:[rows], onDone(res)}): res {raw 0–10, skipped, guard} */
-function tsGame(o){const odds=cl(Math.round(o.odds||50),5,95);const skipRes=()=>{const ok=roll(odds);return{raw:ok?7:3,skipped:true,ok,guard:o.risk?(roll(odds)?1:0):null}};
+function tsGame(o){const odds=oddsCl(Math.round(o.odds||50));const skipRes=()=>{const ok=roll(odds);return{raw:ok?7:3,skipped:true,ok,guard:o.risk?(roll(odds)?1:0):null}};
  if(tsBot()||typeof kg82Open!=="function"){const r=skipRes();setTimeout(()=>o.onDone(r),0);return}
  const K=KG82_KIND[o.kind];KG82.ctx=o.ctx||"hoc";KG82.tsRisk=o.risk||null;KG82.tsGuard=null;try{mgSet(o.kind,{occ:o.occ||"trieu"})}catch(e){KG82.lv=0}kg82Preload(o.kind);
  const d=kg82Open({art:o.art||K.n,title:o.title||K.t,how:K.how,pic:typeof kg82Pic==="function"?kg82Pic(o.kind):""});if(!d){o.onDone(skipRes());return}const box=kg82Box();
@@ -101,7 +102,7 @@ function tsGame(o){const odds=cl(Math.round(o.odds||50),5,95);const skipRes=()=>
   if(o.risk)rows.push(["Hộ giá",r.guard?"kịp lúc":"không kịp, cấm quân lo liệu",r.guard?"g":"n"]);if(o.note)rows.push(["Ghi chú",o.note,"n"]);
   kg82ShowRes(tsRows(rows)+`<div class="kg82act"><button class="kbtn" id="kg82ok">Đã hiểu</button></div>`,r.skipped?!!r.ok:r.raw>=5);kg82Set("score",`${r.raw}/10`);kg82Set("time","đã hết");
   $("kg82ok").onclick=()=>{kg82Close();try{o.onDone(r)}catch(e){console.error(e)}}};
- KG82.phase="intro";box.innerHTML=(o.intro?tsRows(o.intro):"")+`<div class="kg82act"><button class="kbtn" id="kg82go">Bắt đầu</button><button class="kbtn alt" id="kg82skip">Bỏ qua<small>tính theo cơ may thường: ${word(odds)}</small></button></div>`;
+ KG82.phase="intro";box.innerHTML=(o.intro?tsRows(o.intro):"")+`<div class="kg82act"><button class="kbtn" id="kg82go">Bắt đầu</button>${kitQuick({id:"kg82skip",n:"Bỏ qua",sub:`tính theo cơ may thường: ${word(odds)}`})}</div>`;
  $("kg82go").onclick=()=>kg82Play(o.kind,raw=>fin({raw,skipped:false,guard:o.risk?(KG82.tsGuard?1:0):null}));$("kg82skip").onclick=()=>fin(skipRes())}
 window.tsGame=tsGame;
 
@@ -122,30 +123,74 @@ function tsDangerPanel(){if(!S||S.dead)return;const D=tsDangerOf(S,true);
  const sec=`<div class="kpsec"><h4 class="kpst">Thanh chung</h4>${tsRows([["Nguy hiểm chung",`${D.n} · ${tsDWord(D.n)}`,D.n>=BAL.tsDanger.hot?"r":"t"],["Gộp từ",`${D.top.length} người ngươi đã rõ lòng`,"n"],D.unk?["Chưa rõ",`${D.unk} người ngươi chưa rõ lòng (dò la, tai mắt để biết)`,"n"]:null].filter(Boolean))}</div>`+
   `<div class="kpsec"><h4 class="kpst">Cách tính</h4>${tsRows([["Mỗi người","Ghen, Oán hoặc ghét (lấy cao nhất) + tính nết → mức hại (thang nguy hiểm)","n"],["Gộp","cơ một tháng có ít nhất một người ra tay với ngươi, từ 0 đến 100","n"],["Áp cho","mọi phi tần, cùng một cách tính","n"]])}</div>`+
   (facts.length?`<div class="kpsec"><h4 class="kpst">Người nặng lòng nhất</h4>${tsFacts(facts)}</div>`:"");
- const g=tsS().guard>wk();const opts=[tsOptGuard(),tsOptGifts(D),tsOptGiftsItem(D),{n:"Thôi",fx:{}}].filter(Boolean);/* "Thôi" = the kit ✕ (KIT 32.10), never a button */
+ const g=tsS().guard>wk();const opts=[tsOptGuard(),tsOptGifts(D),{n:"Thôi",fx:{}}].filter(Boolean);/* "Thôi" = the kit ✕ (KIT 32.10), never a button */
  Q.unshift({t:"Nguy hiểm chung",h:sec,opts,showOut:true,tsk:"danger"});showModal()}
 function tsOptGuard(){const s=tsS();if(s.guard>wk())return tsOpt({n:"Đóng cửa giữ mình",need:[{t:`chưa giữ mình (còn ${s.guard-wk()} tuần)`,ok:false}],duoc:["kẻ muốn hại khó ra tay"]});
  return tsOpt({n:"Đóng cửa giữ mình",fx:{sung:-2},need:[{t:"không cấm túc",ok:!S.confined}],duoc:["2 tuần: mưu hại nhắm vào ngươi thành ít đi một nửa"],kem:["ít gặp Hoàng thượng"],go:()=>{s.guard=wk()+2;log("Ngươi đóng cửa cung, dặn kẻ hầu canh giữ nghiêm, hai tuần không ra ngoài nhiều.")}})}
-function tsOptGifts(D){const L=D.top.filter(x=>x.b>=1).slice(0,4);if(!L.length)return null;const G=BAL.tsGift,c=L.length*G.bac;
- return tsOpt({n:"Biếu quà làm lành",fx:{bac:-c},need:[tsNeedBac(c)],duoc:L.map(x=>`${x.v.name} bớt ghen ${G.ghen}, bớt oán ${G.oan}`),go:()=>{for(const x of L){x.v.ghen=cl((x.v.ghen||0)-G.ghen,0,100);oanAdd(x.v,S,-G.oan);tsAff(x.v,G.aff)}log(`Ngươi sai người mang quà sang ${kitNameList(L.map(x=>x.v))}, lời lẽ mềm mỏng.`)}})}
-/* D19 (owner OD:L752): "Biếu quà làm lành" also takes a handmade work or an item of equal worth instead of bạc, for the person who bears the most
-   ill will. Worth = the same rules as any gift: a work by wkEval (tastes, fatigue, chân tình), an item by giftVal (her tastes) + jlux.luxGift (a
-   mọn piece is not enough). BAL.tsGift.eq = the least worth; the item itself goes through giveTo (one gift rule for her and every consort). */
-function tsGiftWorth(e,v){if(!e||e.h)return{ok:false,why:"",q:-1};
- if(e.wk){const ev=wkEval(S,e.wk,v);if(!ev.ok)return{ok:false,why:ev.why||"nàng không nhận đồ này",q:-1};const ok=ev.v>=BAL.tsGift.eq;return{ok,why:ok?"":"tác phẩm còn mỏng, chưa đủ lễ",q:ev.v,note:ev.notes.join("; ")}}
- const it=IT[e.k];if(!it)return{ok:false,why:"",q:-1};if(e.t)return{ok:false,why:"đồ đã tẩm, không thể biếu",q:-1};
- const q=giftVal(Object.assign({k:e.k},it),v);let lg=null;try{lg=luxGift(e.k,S,v)}catch(x){}
- const mon=lg&&lg.st==="mon";const ok=q>=BAL.tsGift.eq&&!mon;return{ok,why:ok?"":(mon?"quà mọn, chưa đủ lễ":"nàng không ưa món này, chưa đủ lễ"),q,note:lg?lg.word:""}}
-function tsOptGiftsItem(D){const L=D.top.filter(x=>x.b>=1).slice(0,4);if(!L.length||!S.inv.some(e=>!e.h))return null;const x=L[0],G=BAL.tsGift;
- return tsOpt({n:"Biếu quà làm lành bằng đồ",duoc:[`${x.v.name} bớt ghen ${G.ghen}, bớt oán ${G.oan}`],kem:["một món trong rương thay cho bạc"],note:"người nặng lòng nhất",go:()=>{pushDil(mkP("tsgiftpick",{v:x.v.id}),"Biếu quà làm lành")}})}
-PEND.tsgiftpick=p=>{const v=RV(p.v);if(!v)return null;const G=BAL.tsGift;const items=S.inv.map((e,i)=>[e,i]).filter(([e])=>!e.h);
- return{who:pv(v),t:`<p>Chọn món đồ biếu ${v.name} để làm lành. Món phải đáng giá một phần lễ bạc (${G.bac} bạc), hợp ý nàng.</p>`,o:items.map(([e,i])=>{const w=tsGiftWorth(e,v);
-  return{n:giftName(e),ik:i,fx:{},x:w.ok?`Chắc chắn · thành: nàng bớt ghen ${G.ghen}, bớt oán ${G.oan}${w.note?" · "+w.note:""}`:"",need:w.ok?[]:[{t:w.why||"không biếu được",ok:false}],tsDis:!w.ok,
-   go:()=>{if(!w.ok)return;spend(G.khac);const r=giveTo(S,v,i);v.ghen=cl((v.ghen||0)-G.ghen,0,100);oanAdd(v,S,-G.oan);log(`${r}Lời lẽ mềm mỏng, lòng nàng dịu đi.`)}}}).concat([{n:"Thôi",fx:{}}])}};
+/* =============== D19 (owner OD:L752) · BIẾU QUÀ LÀM LÀNH — ONE act, three roads (review/d19-gift-work) ===============
+   The act "Biếu quà làm lành" (Nguy hiểm chung panel + the maid's warning) opens ONE choice of three kit option cards:
+   · Lễ bạc — as before: every person who bears her ill will (≤ 4) gets BAL.tsGift.bac bạc of gifts;
+   · Tác phẩm tự tay làm / Đồ trong rương — ONE piece for the person who bears the most ill will, instead of her share of bạc.
+   Equivalent value (OD:L582): a piece stands in for the bạc share when it is worth at least BAL.tsGift.bac bạc TO THE RECEIVER: its sale
+   price (econPrice, the ONE sale API) × her taste on the ONE gift scale — a work by wkEval (her tastes, fatigue, chân tình, Tham vọng /
+   Kiêu ngạo, material), an item by giftVal (her tastes). So a liked piece costs her what the bạc does; a piece she does not care for costs
+   more (taste matters); jlux.luxGift's word (mọn / vừa / hợp / quá hậu) is shown as a note. The
+   card says what she gives up ("mất: <món> · bán được N bạc") and what she gets (thiện cảm by the piece: the ONE gift preview giftEval).
+   The piece goes through giveTo (ONE gift rule for her and every consort). The same functions serve every NPC (tsNpcGift): a consort whom
+   many want to harm sends the cheapest road that is enough. Ghen is only ever aimed at her (j28 danger), so a consort's gift eases oán. */
+function tsGiftL(D){return D.top.filter(x=>x.b>=1).slice(0,4)}
+function tsGiftNo(e){if(!e||e.h)return true;try{if(typeof wdIsNt==="function"&&wdIsNt(e))return true;if(typeof isDh==="function"&&isDh(e))return true}catch(x){}return e.k==="mcnt"}
+/* worth of a piece TO THE RECEIVER, in bạc: what it sells for (econPrice) × her taste (the ONE gift scale: wkEval v / WVAL of its grade for a
+   work — chân tình, her art, Tham vọng, fatigue; giftVal / its value to someone who likes it for an item). Enough = at least the bạc share. */
+function tsGiftWorth(e,v,a){a=a||S;if(tsGiftNo(e))return{ok:false,why:"",q:-1,bac:0,wb:0};const G=BAL.tsGift;let bac=0;try{bac=econPrice(a,e)}catch(x){}
+ const fin=(f,why0,note)=>{const wb=Math.round(bac*f),ok=wb>=G.bac;return{ok,why:ok?"":why0,q:Math.round(f*100)/100,bac,wb,note}};
+ if(e.wk){const ev=wkEval(a,e.wk,v);if(!ev.ok)return{ok:false,why:ev.why||"nàng không nhận đồ này",q:-1,bac,wb:0};const b0=WVAL[Math.max(0,Math.min(3,e.wk.ti|0))]||1;
+  return fin(ev.v/b0,"tác phẩm còn mỏng, chưa đủ lễ",ev.notes.join("; "))}
+ const it=IT[e.k];if(!it)return{ok:false,why:"",q:-1,bac,wb:0};if(e.t)return{ok:false,why:"đồ đã tẩm, không thể biếu",q:-1,bac,wb:0};
+ const q=giftVal(Object.assign({k:e.k},it),v),full=giftVal(Object.assign({k:e.k},it,{tg:["rv","hh"]}),v)||1;let lg=null;try{lg=luxGift(e.k,a,v)}catch(x){}
+ return fin(q/full,q<full?"nàng không ưa món này, chưa đủ lễ":"món còn nhẹ, chưa đủ lễ",lg?lg.word:"")}
+/* the pieces of a kind ("wk" works, "it" items, null both) that could go to v: [{e,i,w}], enough first, then the cheapest to give up */
+function tsGiftPieces(a,v,kind){return (a.inv||[]).map((e,i)=>({e,i})).filter(({e})=>!tsGiftNo(e)&&(kind==null||(kind==="wk")===!!e.wk)).map(o=>Object.assign(o,{w:tsGiftWorth(o.e,v,a)}))
+ .sort((x,y)=>(y.w.ok-x.w.ok)||(x.w.bac-y.w.bac))}
+/* what the gift eases: ghen (aimed only at her) and oán toward the giver */
+function tsGiftEase(a,v){const G=BAL.tsGift;if(a===S)v.ghen=cl((v.ghen||0)-G.ghen,0,100);oanAdd(v,a,-G.oan)}
+function tsGiftEaseTxt(a,v){const G=BAL.tsGift;return a===S?`${v.name} bớt ghen ${G.ghen}, bớt oán ${G.oan}`:`${v.name} bớt oán ${G.oan}`}
+/* road 1: bạc (her or any consort; her bạc is taken by the option's fx) */
+function tsGiftBac(a,L){const G=BAL.tsGift;if(a!==S)ap(a,{bac:-L.length*G.bac});for(const v of L){tsGiftEase(a,v);relAdd(a,v,G.aff)}}
+/* roads 2 and 3: one piece (her or any consort) */
+function tsGiftPiece(a,v,i){const e=a.inv[i];const w=tsGiftWorth(e,v,a);if(!w.ok)return"";const nm=giftName(e);const r=giveTo(a,v,i);if(!r)return"";
+ /* review r1: she may refuse it (jdis: a piece she does not like stays in the chest) → nothing eased, nothing lost (no free peace) */
+ if((a.inv||[]).includes(e))return{r,nm,bac:w.bac,kept:true};tsGiftEase(a,v);return{r,nm,bac:w.bac}}
+/* the act card (one card, in the panel and in the warning) */
+function tsOptGifts(D){const L=tsGiftL(D);if(!L.length)return null;const G=BAL.tsGift,c=L.length*G.bac,x=L[0];
+ const nW=tsGiftPieces(S,x.v,"wk").filter(o=>o.w.ok).length,nI=tsGiftPieces(S,x.v,"it").filter(o=>o.w.ok).length;
+ return tsOpt({n:"Biếu quà làm lành",need:[{t:`Bạc ${c} (có ${S.bac}), hoặc một tác phẩm hay món đồ đủ lễ`,ok:S.bac>=c||nW+nI>0}],duoc:L.map(y=>tsGiftEaseTxt(S,y.v)),
+  kem:[`trả bằng lễ bạc (${G.bac} bạc mỗi người), hoặc một tác phẩm tự tay làm hay một món trong rương cho ${x.v.name}`],go:()=>{pushDil(mkP("tsgift",{L:L.map(y=>y.v.id)}),"Biếu quà làm lành")}})}
+PEND.tsgift=p=>{const L=(p.L||[]).map(RV).filter(v=>v&&v.alive!==false&&!v.out);if(!L.length)return null;const G=BAL.tsGift,c=L.length*G.bac,v=L[0];
+ const P=k=>tsGiftPieces(S,v,k).filter(o=>o.w.ok),W=P("wk"),I=P("it");const cheap=A=>A.length?Math.min(...A.map(o=>o.w.bac)):0;
+ const piece=(k,n,A,what)=>tsOpt({n,need:[{t:`${what} đủ lễ với ${v.name} (có ${A.length})`,ok:A.length>0}],duoc:[tsGiftEaseTxt(S,v),"thiện cảm theo món quà, nàng ưa thì thêm"],
+  ton:A.length?[`${what} −1 (rẻ nhất bán được ${cheap(A)} bạc)`]:[],kem:[`thay cho ${G.bac} bạc lễ của ${v.name}`],go:()=>{pushDil(mkP("tsgiftpick",{v:v.id,k}),"Biếu quà làm lành")}});
+ return{who:pv(v),t:`<p>Biếu quà làm lành: một phần lễ là ${G.bac} bạc mỗi người. Thay bạc, có thể biếu ${v.name} (người nặng lòng nhất) một tác phẩm tự tay làm hay một món trong rương, miễn nàng thấy đủ lễ.</p>`,
+  o:[tsOpt({n:"Lễ bạc",fx:{bac:-c},need:[tsNeedBac(c)],duoc:L.map(y=>tsGiftEaseTxt(S,y)),kem:[`${L.length} người, ${G.bac} bạc mỗi người`],
+     go:()=>{tsGiftBac(S,L);log(`Ngươi sai người mang quà sang ${kitNameList(L)}, lời lẽ mềm mỏng. Được: ${L.map(y=>tsGiftEaseTxt(S,y)).join("; ")}. Mất: ${c} bạc.`)}}),
+   piece("wk","Tác phẩm tự tay làm",W,"tác phẩm"),piece("it","Đồ trong rương",I,"món đồ"),{n:"Thôi",fx:{}}]}};
+/* the piece picker (k: "wk" / "it"; an old save's pending picker has no k = both) */
+PEND.tsgiftpick=p=>{const v=RV(p.v);if(!v)return null;const G=BAL.tsGift;const A=tsGiftPieces(S,v,p.k||null);
+ return{who:pv(v),t:`<p>Chọn ${p.k==="wk"?"tác phẩm":p.k==="it"?"món đồ":"món"} biếu ${v.name} để làm lành. Món phải đáng một phần lễ bạc (${G.bac} bạc) trong mắt nàng: nàng ưa món nào thì món ấy nặng hơn.</p>`,o:A.map(({e,i,w})=>{
+  let gain="";try{const ge=giftEval(e,v);const m=ge&&ge.ok&&/thành: (.*?)(?: · kèm: |$)/.exec(ge.x||"");gain=m?m[1]:""}catch(x){}
+  return{cap:0,n:giftName(e),ik:i,fx:{},x:w.ok?`${capW()} · tốn: ${G.khac} khắc, ${giftName(e)} −1 (bán được ${w.bac} bạc; nàng coi như ${w.wb} bạc) · thành: ${tsGiftEaseTxt(S,v)}${gain?", "+gain:""}${w.note?" · kèm: "+w.note:""}`:"",need:w.ok?[]:[{t:(w.why||"không biếu được")+(w.q>=0?` (nàng coi như ${w.wb} bạc, cần ${G.bac})`:""),ok:false}],tsDis:!w.ok,
+   go:()=>{if(!w.ok)return;const R=tsGiftPiece(S,v,i);if(!R)return;spend(G.khac);/* khắc only when the piece really went (review r1) */if(R.kept){log(`${R.r}Lễ làm lành không thành, lòng nàng chưa dịu.`);return}log(`${R.r}Lời lẽ mềm mỏng, lòng nàng dịu đi. Được: ${tsGiftEaseTxt(S,v)}. Mất: ${R.nm} (bán được ${R.bac} bạc).`)}}}).concat([{n:"Thôi",fx:{}}])}};
+/* both are pickers she opened herself: full act cards (Được / Mất), not hidden event outcomes (jk2b KIT_ACT_PIDS, as jpoison) */
+try{KIT_ACT_PIDS.add("tsgift");KIT_ACT_PIDS.add("tsgiftpick")}catch(e){}
+/* NPC side, the same rule: the cheapest road that is enough (a piece worth less bạc than her bạc share, else bạc, else nothing) */
+function tsNpcGift(a,D){const L=tsGiftL(D);if(!L.length)return"";const G=BAL.tsGift,v=L[0].v;const A=tsGiftPieces(a,v,null).filter(o=>o.w.ok&&o.w.bac<=G.bac*L.length);
+ if(A.length){const R=tsGiftPiece(a,v,A[0].i);if(R&&!R.kept)return R.r}
+ if((a.bac||0)>=L.length*G.bac){tsGiftBac(a,L.map(x=>x.v));return `${rkName(a)} ${a.name} sai người mang quà sang ${kitNameList(L.map(x=>x.v))}.`}return""}
 /* the guard: same rule for everyone (a target who keeps to herself is harder to reach) */
 (function(){if(typeof npcAct!=="function")return;const n0=npcAct;npcAct=function(v,t){try{const g=t===S?tsS().guard:t&&t.tsGuard;if(g>wk()&&roll(50))return""}catch(e){}return n0.apply(this,arguments)}})();
 /* NPC side: a consort whom many want to harm closes her doors / sends gifts, by her own nature (same costs) */
-function tsNpcDanger(){for(const v of liveRivals(true)){if(!v.alive||v.out||v.tsGuard>wk())continue;const D=tsDangerOf(v,false);if(D.n<BAL.tsDanger.act)continue;const care=nv(v,"tsCare");if(!roll(care))continue;v.tsGuard=wk()+2;v.sung=cl((v.sung||0)-2,0,100)}}
+function tsNpcDanger(){for(const v of liveRivals(true)){if(!v.alive||v.out||v.tsGuard>wk())continue;const D=tsDangerOf(v,false);if(D.n<BAL.tsDanger.act)continue;const care=nv(v,"tsCare");if(!roll(care))continue;v.tsGuard=wk()+2;v.sung=cl((v.sung||0)-2,0,100);
+  /* D19: and she sends a peace gift by the same rule as the player (tsNpcGift) */try{const t=tsNpcGift(v,D);if(t&&typeof newsAdd==="function")newsAdd(v,"gift",t)}catch(e){console.error("tsNpcGift",e)}}}
 /* the HUD chip (Tình trạng row) + điềm báo when her own known bar climbs a step */
 /* review ts-a FAIL 2: the chip sits in the stage's right column (K3_RIGHT), never on the top bar's buổi line (it broke the date line on Fold) */
 if(window.K3_RIGHT)window.K3_RIGHT.push("tsnh");
@@ -154,7 +199,7 @@ if(window.K3_RIGHT)window.K3_RIGHT.push("tsnh");
 document.addEventListener("click",e=>{const b=e.target.closest('[data-hx="tsnh"],[data-k3="tsnh"]');if(!b||!tsOn())return;e.stopPropagation();e.preventDefault();if(Q.length)return;tsDangerPanel()},true);
 function tsDangerOmen(){const s=tsS();const D=tsDangerOf(S,true);const st=TS_DW.filter(x=>D.n>=x[0]).length-1;const was=s.dStep||0;s.dStep=st;if(st<=was||st<2||!D.top.length)return;
  const x=D.top[0];tsPanel({t:"Lời cảnh báo",who:pMaid(),h:`<p>${S.maid.name} khẽ thưa: ${kLine("ts:warn",kTP("ts:warn")||TS_WARN,{sp:{srv:"f"},ls:S,t:kToneSt(S.maid,S.maid&&S.maid.name)}).replace(/\{V\}/g,x.v.name)}</p>${tsRows([["Nguy hiểm chung",`${D.n} · ${tsDWord(D.n)}`,"r"]])}`,
-  opts:[tsOptGuard(),tsOptGifts(D),tsOptGiftsItem(D),tsOpt({n:"Ghi nhớ, cứ như thường",duoc:["không tốn gì"],kem:["kẻ muốn hại vẫn rình"]})].filter(Boolean)})}
+  opts:[tsOptGuard(),tsOptGifts(D),tsOpt({n:"Ghi nhớ, cứ như thường",duoc:["không tốn gì"],kem:["kẻ muốn hại vẫn rình"]})].filter(Boolean)})}
 
 /* =============== Ý 5 · NGƯỠNG XÉT PHẨM HIỆN TRƯỚC (promoReqP j8: cùng điều kiện cho mọi phi tần) =============== */
 function tsPromoRows(){const L=promoReqP(S);return L.map(([ok,t])=>[ok?"Đủ":"Thiếu",t,ok?"g":"r"])}
@@ -253,18 +298,18 @@ function tsSummonMe(k){const E=S.emp;/* a private summons: she is face to face w
 const TS_DEN=["nguyentieu","thattich","trungthu"];
 function tsDenFest(){try{const f=festToday();return f&&TS_DEN.includes(f.k)?f:null}catch(e){return null}}
 function tsDenCard(){const f=tsDenFest();if(!f||!tsOn()||S.out)return null;const s=tsS();const key=`${S.year}-${f.k}`;
- return{n:"Thả đèn hoa đăng",t:`Đêm ${f.name}, cung nhân thả đèn trên hồ Thái Dịch. Viết điều cầu vào đèn rồi thả trôi.`,c:{bac:-10},o:100,w:{},k:2,b:tsLast(),dom:"Giao thiệp",done:s.den===key?1:0,x:"chọn điều cầu ở bước sau",go:()=>{s.den=key;tsDenWish(f)}}}
+ return{n:"Thả đèn hoa đăng",t:`Đêm ${f.name}, cung nhân thả đèn trên hồ Thái Dịch. Viết điều cầu vào đèn rồi thả trôi.`,c:{bac:-10},o:100,w:{},k:2,b:tsLast(),fix:1,dom:"Giao thiệp",done:s.den===key?1:0,x:"chọn điều cầu ở bước sau",go:()=>{s.den=key;tsDenWish(f)}}}
 (function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(Array.isArray(deck)&&tsOn()){const c=tsDenCard();if(c)deck.unshift(c)}}catch(e){}return r}})();
 function tsDenSeen(){const E=S.emp;return (E.mood||0)<=1&&(S.sung||0)>=BAL.tsx.denSung}
 function tsDenWish(f){const s=tsS();const pdLeft=Math.max(0,6-(s.denPD||0));const hos=liveRivals(true).filter(v=>bandOf(danger(v,S))>=1&&!(S.dKnown&&S.dKnown[v.id])&&!knows(v));
  const odds=45+(S.tai||0)/4+(S.arts&&S.arts.hoa||0)*4;const seen=tsDenSeen();
  const play=(kind,after)=>{const b=tsPre();tsGame({kind:"den",art:"Hoa đăng",title:`Thả đèn đêm ${f.name}`,odds,intro:[["Điều cầu",kind,"t"],["Ghi chú","đèn trôi xa và sáng thì người bên hồ trông thấy","n"]],onDone:res=>{const far=res.raw>=6;after(far);tsRes("Thả đèn hoa đăng",b,true);render()}})};
  tsPanel({t:`Đêm ${f.name}: thả đèn`,art:f.k==="nguyentieu"?"img/ev-le-xuan-2.webp":"img/ev-le-thu-2.webp",who:pMaid(),h:`<p>${S.maid.name} đã dán sẵn chiếc đèn hoa sen. Ngươi cầm bút, nghĩ xem nên cầu điều gì.</p>`,opts:[
-  tsOpt({n:"Cầu tin tức người nhà",odds:hos.length?Math.min(95,odds):null,duoc:hos.length?["người hầu ngoài bờ nghe được chuyện: biết lòng một người đang muốn hại ngươi"]:["người nhà cũng thả đèn, nhờ người gửi thư vào: Thư nhà"],note:"đèn trôi xa thì nghe rõ hơn",later:1,
+  tsOpt({n:"Cầu tin tức người nhà",odds:hos.length?oddsCl(odds):null,duoc:hos.length?["người hầu ngoài bờ nghe được chuyện: biết lòng một người đang muốn hại ngươi"]:["người nhà cũng thả đèn, nhờ người gửi thư vào: Thư nhà"],note:"đèn trôi xa thì nghe rõ hơn",later:1,
    go:()=>play("tin tức",far=>{if(hos.length&&(far||roll(odds))){const v=hos.sort((a,b)=>danger(b,S)-danger(a,S))[0];kn();S.dKnown=S.dKnown||{};S.dKnown[v.id]=wk();noteAdd(v.id,`nghe được bên hồ đêm ${f.name}: nàng có ý hại ngươi (mức ${BANDS[bandOf(danger(v,S))][1]})`);log(`Đêm ${f.name}, người hầu nghe được bên hồ: ${v.name} có ý hại ngươi (mức ${BANDS[bandOf(danger(v,S))][1]}).`)}
     else if(!hos.length&&s.thuY!==S.year){s.thuY=S.year;S.inv.push({k:"thunha",from:"home"});log("Người nhà gửi thư vào cung nhân đêm hoa đăng. Được Thư nhà.")}else log("Đèn trôi chưa xa, chưa nghe được tin gì.")})}),
   tsOpt({n:"Cầu bình an",duoc:pdLeft?[`Phúc duyên +2 (kiếp này còn được ${pdLeft})`,`Đức ${balSg(BAL.eff.jts.ducGo)}`]:[`Đức ${balSg(BAL.eff.jts.ducGo)}`],note:"Phúc duyên từ đèn có giới hạn: 6 mỗi kiếp",later:1,go:()=>play("bình an",far=>{apply({duc:BAL.eff.jts.ducGo});if(pdLeft&&typeof pdAdd==="function"){s.denPD=(s.denPD||0)+2;pdAdd(2,`thả đèn cầu bình an đêm ${f.name}`)}else log("Ngươi thả đèn cầu bình an.")})}),
-  tsOpt({n:"Cầu thánh ân",odds:seen?Math.min(95,odds):null,duoc:seen?["Hoàng thượng dạo bên hồ, trông thấy đèn: Sủng +3, Ân tình +2"]:["Đức +1"],kem:seen?[]:[`đêm nay Hoàng thượng không ra hồ (ngài đang phiền, hoặc Sủng của ngươi dưới ${BAL.tsx.denSung})`],later:1,
+  tsOpt({n:"Cầu thánh ân",odds:seen?oddsCl(odds):null,duoc:seen?["Hoàng thượng dạo bên hồ, trông thấy đèn: Sủng +3, Ân tình +2"]:["Đức +1"],kem:seen?[]:[`đêm nay Hoàng thượng không ra hồ (ngài đang phiền, hoặc Sủng của ngươi dưới ${BAL.tsx.denSung})`],later:1,
    go:()=>play("thánh ân",far=>{if(seen&&(far||roll(odds))){apply({sung:3});S.an=cl((S.an||0)+2,0,100);log(`Đêm ${f.name}, Hoàng thượng dạo bên hồ, trông thấy đèn của ngươi trôi xa, dừng lại hỏi han.`)}else{apply({duc:1});log("Ngươi thả đèn, lặng lẽ cầu thánh ân.")}})}),
   tsOpt({n:"Thôi, không thả nữa",duoc:["không mất thêm gì"]})]})}
 /* NPCs float lanterns too, by the same rule (seen by the Emperor when he walks there and they are in favour) */
@@ -344,7 +389,7 @@ function tsDressGame(th,done){tsTagsFresh();const T=TS_THEME[th];const P={};cons
   box.innerHTML=`<div class="ts-slots">${TS_SLOT.map(([sl,lab])=>`<div class="ts-slot"><small>${lab}</small>${P[sl]?kitItem({name:itm(P[sl]).n,src:src(P[sl]),grade:grade(P[sl]),size:"sm"}):kitItem({empty:true,name:"trống",size:"sm"})}</div>`).join("")}</div>`+
    `<div class="ts-items">${inv.length?inv.map(({e,i})=>{const on=Object.values(P).includes(e.k);return `<button type="button" class="ts-it${on?" ts-on":""}" aria-pressed="${on}" data-tsi="${i}">${kitItem({name:itm(e.k).n,src:src(e.k),grade:grade(e.k),size:"sm",sel:selI===i})}</button>`}).join(""):`<p class="past">Rương chưa có trang sức, vải vóc hay hương phấn nào.</p>`}</div>`+
    `<div class="ts-det">${detHTML()}</div>`+
-   `<div class="kg82act"><button class="kbtn" id="tsdgo">Ra mắt</button><button class="kbtn alt" id="tsdskip">Bỏ qua<small>${S.maid?S.maid.name:"cung nữ"} chọn giúp (có hợp ý hay không tùy thiện cảm của ${S.maid?S.maid.name:"cung nữ"} với ngươi: ${word(S.maid?S.maid.loyal:50)})</small></button></div>`;
+   `<div class="kg82act"><button class="kbtn" id="tsdgo">Ra mắt</button>${kitQuick({id:"tsdskip",n:"Bỏ qua",sub:`${S.maid?S.maid.name:"cung nữ"} chọn giúp (có hợp ý hay không tùy thiện cảm của ${S.maid?S.maid.name:"cung nữ"} với ngươi: ${word(S.maid?S.maid.loyal:50)})`})}</div>`;
   /* KIT §70 (owner 15/11): a tap shows the piece (kitItemDetail) with "Đặt vào …" / "Bỏ ra"; nothing is placed on a blind tap */
   box.querySelectorAll("[data-tsi]").forEach(b=>b.onclick=()=>{const i=+b.dataset.tsi;selI=selI===i?null:i;try{sfx("tap")}catch(x){}paint()});
   box.querySelectorAll("[data-tsact]").forEach(b=>b.onclick=()=>{if(b.disabled)return;const e=S.inv[selI];if(!e)return;const s=TS_SLOT.find(([,,fit])=>fit(e.k));if(!s)return;P[s[0]]=b.dataset.tsact==="off"?null:e.k;paint()});

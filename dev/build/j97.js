@@ -251,7 +251,7 @@ function r97Note(A,o){const d=R97[A.a];if(!d||!o)return;const q=A.q97||(A.q97={p
  if(r97Hit(o.n,d.bad))q.b=1;else if(r97Hit(o.n,d.path))q.p++}
 function r97IsX(A,bid){const a=ARC67[A.a];return !!(a&&bid&&(a.p[3]||[]).includes(bid))}
 function r97Gate(A){if(!A||A.r97||!A.nb||!R97[A.a]||!r97IsX(A,A.nb))return;const d=R97[A.a];const c=r97Cond(A,d);
- const p=Math.min(.95,(d.p||.1)*(R97CFG.p||1));A.r97={c:c?1:0,ok:c&&rnd67()<p?1:0};
+ const p=(d.p||.1)*(R97CFG.p||1);A.r97={c:c?1:0,ok:c&&roll(p*100)?1:0};
  try{const st=S.r97s||(S.r97s={c:0,n:0,ok:0});st.n++;if(c)st.c++;if(A.r97.ok)st.ok++}catch(e){}}
 (function(){const f0=fireBeat67;fireBeat67=function(A){try{r97Gate(A)}catch(e){console.error(e)}return f0.apply(this,arguments)}})();
 /* record every choice of the arc against its rare path */

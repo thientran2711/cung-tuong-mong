@@ -45,7 +45,7 @@ function mbAffK(v){if(!mbOn())return 0;if(v==null)v=mbS().v;const a=Math.abs(v),
 function mbLocked(a){if(!a||!mbOn())return false;return mbBand().i<=-2&&B().lock.includes(a.n)}
 window.mbS=mbS;window.mbBand=mbBand;window.mbOdPts=mbOdPts;window.mbAdd=mbAdd;window.mbAffK=mbAffK;
 /* odds: her acts only (NPCs keep jemo's own small emotion rule) */
-(function(){if(typeof odA!=="function")return;const o0=odA;odA=function(a,b){const r=o0.apply(this,arguments);try{if(a===S&&mbOn()){const m=mbOdPts();if(m){MOOD_N.odN++;MOOD_N.odSum+=m;MOOD_N.odMax=Math.max(MOOD_N.odMax,Math.abs(m));return cl2(r+m,5,95)}}}catch(e){}return r}})();
+(function(){if(typeof odA!=="function")return;const o0=odA;odA=function(a,b){const r=o0.apply(this,arguments);try{if(a===S&&mbOn()){const m=mbOdPts();if(m){MOOD_N.odN++;MOOD_N.odSum+=m;MOOD_N.odMax=Math.max(MOOD_N.odMax,Math.abs(m));return oddsCl(r+m)}}}catch(e){}return r}})();
 /* "Vì sao <bậc>?": the real formula re-run with her mood at calm (whyDiff), and the deck cards (static odds) name it too */
 (function(){if(typeof whyDiff!=="function")return;const w0=whyDiff;whyDiff=function(fn,subj){const L=w0.apply(this,arguments);try{if(!mbOn()||!(subj||[]).some(x=>x&&x[0]===S))return L;const M=mbS(),v=M.v;if(!mbOdPts(v))return L;
   let o0,o1;try{o0=fn();M.v=0;o1=fn()}finally{M.v=v}if(o0!=null&&o1!=null&&o0!==o1)L.push([`Tâm trạng ngươi: ${mbBand(v).name.toLowerCase()}`,o0-o1])}catch(e){}return L}})();
@@ -143,6 +143,26 @@ function mbTile(){try{if(!mbOn()||typeof kitSkillCard!=="function")return"";cons
 window.mbTile=mbTile;
 (function(){if(typeof selfCardHTML!=="function")return;const s0=selfCardHTML;selfCardHTML=function(){const h=s0.apply(this,arguments);try{const t=mbTile();if(!t)return h;
   const i=h.indexOf('data-g="Tư chất"');if(i<0)return h;const j=h.indexOf('<div class="pcg',i);const at=j<0?h.lastIndexOf("</div></div>"):h.lastIndexOf("</div>",j);if(at<0)return h;return h.slice(0,at)+t+h.slice(at)}catch(e){return h}}})();
+/* ---------- TOP BAR (owner 18/11 ~05:40Z: "cho cái thanh tâm trạng nằm ở thanh trên cố định của game, sắp xếp sao cho đẹp") ----------
+   ONE part, every screen that has the fixed top bar (header.hud, last child, one full-width grid row): her mood seal + band word + kitSignedBar (KIT §49.1: calm at the
+   centre, red left = low, green right = high) + the signed number. Tap = the existing mood box (data-emo-open="me", jpcf). ONE accessor for the number:
+   kitMoodVal() reads moodBar(S) when the npc-chain model is live, else S.mood.v — no second number.
+   Owner picked this full-row layout (18/11 ~06:05Z, "kiểu 1"). */
+window.kitMoodVal=function(){try{if(typeof moodBar==="function"){const x=moodBar(S);const n=typeof x==="number"?x:x&&x.v;if(typeof n==="number"&&isFinite(n))return Math.round(n)}}catch(e){}return S&&S.mood&&typeof S.mood.v==="number"?Math.round(S.mood.v):0};
+function mbHud(){try{const hd=document.querySelector("header.hud");if(!hd)return;let el=document.getElementById("hud-mood"); if(!mbOn()){if(el)el.hidden=true;return}
+ if(!el){el=document.createElement("div");el.id="hud-mood";el.setAttribute("role","button");el.tabIndex=0;el.dataset.emoOpen="me";hd.appendChild(el);
+  el.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();el.click()}})}
+ el.className="kstm";el.hidden=false;const v=kitMoodVal(),bd=mbBand(v),sg=v>0?"+"+v:String(v);let seal="";try{seal=typeof emoBadge==="function"?emoBadge(S):""}catch(e){}
+ const h=`<span class="kmd-seal">${seal}</span><small class="kmd-l">Tâm trạng</small><b class="kmd-w ef ${bd.cls}">${bd.name}</b>${typeof kitSignedBar==="function"?kitSignedBar(v):""}<span class="kmd-n">${sg}</span>`;
+ if(el.dataset.h!==h){el.dataset.h=h;el.innerHTML=h;el.title=`Tâm trạng ${bd.name} ${sg} · chạm để xem vì sao`}}catch(e){}}
+(function(){const st=document.createElement("style");st.id="kit-moodhud";st.textContent=`
+header.hud>.kstm{grid-area:auto;grid-column:1/-1;box-sizing:border-box;display:flex;align-items:center;gap:7px;height:20px;margin-top:2px;padding:2px 4px 0;cursor:pointer;min-width:0;border-top:1px solid var(--k-hair,#e6d3ac)}
+.kstm .kmd-seal{display:inline-flex;width:18px;height:18px;flex:0 0 18px}.kstm .kmd-seal img.kemo{width:18px;height:18px;border-radius:50%;object-fit:cover;margin:0;position:static}
+.kstm .kmd-l{font-size:.7rem;color:var(--dim);white-space:nowrap}.kstm .kmd-w{font-family:var(--display);font-size:.85rem;white-space:nowrap;min-width:3.6em}
+.kstm .ksbar{flex:1 1 auto;width:auto;min-width:40px;height:8px}.kstm .kmd-n{font-family:var(--display);font-size:.85rem;font-variant-numeric:tabular-nums;min-width:2.4em;text-align:right;color:var(--ink)}
+`;document.head.appendChild(st)})();
+if(typeof renderHUD==="function"){const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);mbHud();return r}}
+window.mbHud=mbHud;
 /* measuring hook */
 window.moodStat=function(){return Object.assign({v:S&&S.mood?S.mood.v:null},MOOD_N)};
 })();

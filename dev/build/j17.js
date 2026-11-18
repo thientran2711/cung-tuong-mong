@@ -54,7 +54,7 @@ function faceFor(o,kind,age){const k=bandKeys(kind,age)[0];if(o.fc==null||o.fk!=
    servants = the FIGURE identity pool (FIGIX, j39): women servants (cung nữ, ma ma) <= maid + mama identities, young cung nữ <= maid identities,
    in both cases minus the maid / mama identities consorts wear (j88: a raised maid keeps hers); eunuchs (household + the court eunuchs) <= eunuch identities.
    Before the manifests load, the face lists (FPOOL) stand in; never the old face-*.webp load probe (FAV), so missing old files never stop hiring.
-   Consorts: unchanged, the face pool as before (the consort ceiling is CAPC, j27). */
+   Consorts: unchanged, the face pool as before (the consort ceiling is BAL.harem.cap through roomFor, j27). */
 function roomFor(role){if(!S)return true;
  if(role==="maid"||role==="eunuch"){const IX=typeof FIGIX!=="undefined"&&FIGIX?FIGIX:{};const K=r=>Object.keys(IX[r]||{}).filter(k=>IX[r][k]&&IX[r][k].length);
   const SV=typeof allServ==="function"?allServ():[];
@@ -78,8 +78,8 @@ function faceInit(){if(!S)return;faceFor(S,"consort",S.age);(rivals||[]).forEach
 /* under cấm túc a consort's palace is watched: no crimes can be set in motion (every consort alike) */
 const CRIME=["poison","kpoison","kframe","pond","musk","catswap","frame","plant"];
 CRIME.forEach(k=>{const A2=ACT[k];if(!A2)return;const o=A2.ok;A2.ok=(a,t)=>!a.confined&&o(a,t)});
-/* ===== EVERY CHOICE SHOWS: an odds word ('Chắc chắn' when nothing is rolled), 'thành: …', 'hỏng: …' for rolled ones, and known risks ===== */
-const ODDW=/(Chắc chắn|Nắm chắc|Rất chắc|Khá chắc|Năm ăn năm thua|Chắc|Khó|Liều)/;
+/* ===== EVERY CHOICE SHOWS: an odds word (none when nothing is rolled; ODDS CAP: a formerly-sure act shows the cap word, Nắm chắc), 'thành: …', 'hỏng: …' for rolled ones, and known risks ===== */
+const ODDW=/(Nắm chắc|Rất chắc|Khá chắc|Năm ăn năm thua|Chắc|Khó|Liều)/;
 function caughtW(){/* previews: caught */return `có thể bị người của nàng phát giác: nàng nắm ${balAb(BAL.eff.j8.evCaught)} chứng cứ`}/* the caught() line of a scheme (j8 caught: evA(t,a,BAL.eff.j8.evCaught)); a function, not a const: j17 loads before BAL.eff (review/one-core-dup3 r1) */
 /* aoLz(a,b): an AOUT outcome pair whose function items are read lazily (array-element getters): j17 loads before BAL.eff (jbaleff), so a preview that
    prints the amount its j8 rule reads (ONE CORE OD:L1267) builds the words when shown. Still a plain array (jaudit §13 wraps it like the others). */
@@ -92,13 +92,13 @@ const AOUT={spy:aoLz(()=>`chứng cứ ${balSg(BAL.eff.jtruth.evN)}, Tâm cơ +2
  vp:aoLz("đồ của nàng bị tịch thu, Danh nàng -8, nàng bị phạt",()=>`Danh -3, nàng thù ${balSg(BAL.eff.j8.vpAccuse_2)}`),plant:aoLz("món đồ nằm trong rương nàng",()=>`kẻ cài bị bắt: nàng nắm ${balAb(BAL.eff.j8.evPlantItem)} chứng cứ, thù ${balSg(BAL.eff.j8.plantItem)}`),steal:aoLz(()=>`đoạt đêm nay · kèm: nàng ghen ${balSg(BAL.steal.ghen)}, quý ngươi ${balSg(-BAL.steal.rel)}, oán ngươi +${balOan(-BAL.steal.rel,"hurt")}`,()=>`Sủng ${balSg(-BAL.steal.failSung)}`),road:aoLz(()=>`đoạt đêm nay · kèm: nàng ghen ${balSg(BAL.steal.ghen)}, quý ngươi ${balSg(-BAL.steal.rel)}, oán ngươi +${balOan(-BAL.steal.rel,"hurt")}`,()=>`Sủng ${balSg(-BAL.steal.failSung)}`),gift:["thiện cảm thêm theo món quà",""]};
 const ACAUGHT=["rumor","frame","poison","block","musk","ksab","kpoison","pond","kframe"];
 /* the small line of a scheme button */
-function actLine(k,oddsWord,costHtml){const w=AOUT[k]||["",""];const rolled=oddsWord!=="Chắc chắn";const L=[oddsWord,costHtml?"tốn: "+costHtml:"",w[0]?"thành: "+w[0]:"",rolled?"hỏng: "+(w[1]&&w[1]!=="—"?w[1]:"không mất gì"):"",ACAUGHT.includes(k)?caughtW():""];return L.filter(Boolean).join(" · ")}
+function actLine(k,oddsWord,costHtml){const w=AOUT[k]||["",""];const rolled=!!oddsWord;const L=[oddsWord,costHtml?"tốn: "+costHtml:"",w[0]?"thành: "+w[0]:"",rolled?"hỏng: "+(w[1]&&w[1]!=="—"?w[1]:"không mất gì"):"",ACAUGHT.includes(k)?caughtW():""];return L.filter(Boolean).join(" · ")}
 /* the small line of any option object {o, c, w, l, x, lock} */
-function optLine(a){const o=a.o==null?100:a.o;const rolled=o<100&&!a.lock;const gain=[fmt(a.w||{}),a.x].filter(Boolean).join(" · ");
- return [rolled?word(o):"Chắc chắn",a.c&&fmt(a.c)?"tốn: "+fmt(a.c):"",gain?"thành: "+gain:"",rolled?"hỏng: "+(fmt(a.l||{})||"không mất gì"):""].filter(Boolean).join(" · ")}
+function optLine(a){const o=oddsOf(a),capd=oddsCapped(a);const rolled=o<100&&!a.lock;const gain=[fmt(a.w||{}),a.x].filter(Boolean).join(" · ");
+ return [rolled?word(o):"",a.c&&fmt(a.c)?"tốn: "+fmt(a.c):"",gain?"thành: "+gain:"",rolled?"hỏng: "+(capd?kitSoftW(a.c):fmt(a.l||{})||"không mất gì"):""].filter(Boolean).join(" · ")}
 /* a dilemma option {n, fx, x, go}: x usually already holds 'word · thành · hỏng'; fill what is missing */
 function dilLine(c){const fx=fmt(c.fx||{}),x=c.x||"";const src=String(c.go||"")+String(c.fail||"");let s=x;
- if(!ODDW.test(x)&&!CHW.test(x)){if(/roll\(/.test(src))s="Khó lường · "+x;else{if(!fx&&!x)return /^Thôi|^Im lặng|^Để /.test(c.n||"")?"Chắc chắn · không được mất gì":c.go||c.open?"Chắc chắn · chọn rồi xem kết quả ở bước sau":"Chắc chắn · không được mất gì";return ["Chắc chắn",fx?"ngay: "+fx:"",x?(/^\s*(?:<[^>]+>)*\s*(tốn|thành|hỏng|ngay|kèm|được|mất)\s*:/i.test(x)?x:"thành: "+x):""].filter(Boolean)/* kit-option-rows s34: a sure option whose x already leads with a label keeps it (was "thành: thành: …" -> literal "thành:" under ĐƯỢC) */.join(" · ")}}
+ if(!ODDW.test(x)&&!CHW.test(x)){if(/roll\(/.test(src))s="Khó lường · "+x;else{if(!fx&&!x)return /^Thôi|^Im lặng|^Để /.test(c.n||"")?"không được mất gì":c.go||c.open?"chọn rồi xem kết quả ở bước sau":"không được mất gì";return [fx?"ngay: "+fx:"",x?(/^\s*(?:<[^>]+>)*\s*(tốn|thành|hỏng|ngay|kèm|được|mất)\s*:/i.test(x)?x:"thành: "+x):""].filter(Boolean)/* kit-option-rows s34: a sure option whose x already leads with a label keeps it (was "thành: thành: …" -> literal "thành:" under ĐƯỢC) */.join(" · ")}}
  if(!/hỏng/.test(s))s+=" · hỏng: không mất gì";return [fx?"ngay: "+fx:"",s].filter(Boolean).join(" · ")}
 const dilLineRaw=dilLine;/* the raw kit line of a dialog option (before kitParse), read by the kit hint (jk2b kitHint) */
 /* the real speaker of an event: a named eunuch of that palace or of the court, a spy of hers; no speaker -> the place art */

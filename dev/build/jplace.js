@@ -27,7 +27,7 @@ function kitPlaceHost(k){try{if(!S||!k||k==="home"||typeof relPerson!=="function
  if(k!=="kn"&&k[0]!=="r")return null;const h=typeof accHost==="function"?accHost(k):null;
  if(!h||h===S||!h.alive||h.out||(typeof whereOf==="function"&&whereOf(h)!==k))return null;return relPerson(h.id)}catch(e){return null}}
 window.kitPlaceHost=kitPlaceHost;
-function kitPlaceDress(m,k){if(!m||!k||m.placeK)return;m.placeK=k;const a=kitPlaceArt(k);if(a)m.headArt=a;m.h=kitPlaceInfo(k,m.h);if(m.opts)m.optLayout=undefined}
+function kitPlaceDress(m,k){if(!m||!k||m.placeK)return;m.placeK=k;m.stage=[];/* ONE look: a place card never carries a person column (OD 18/11 map-tap-go; she is in the people list / her card) */const a=kitPlaceArt(k);if(a)m.headArt=a;m.h=kitPlaceInfo(k,m.h);if(m.opts)m.optLayout=undefined}
 /* KIT §8.2: the place card carries .kplace only as a tag for tests; it has no layout of its own */
 function kitPlaceSil(){try{const m=Q[0];const d=document.querySelector("#modal .dlg");if(d)d.classList.toggle("kplace",!!(m&&m.placeK))}catch(e){}}
 /* tag the cards: each builder's own card (after all its wrappers) is dressed once, then shown again */

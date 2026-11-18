@@ -35,6 +35,8 @@ Thi hành: `dev/build/j84.js` (module cuối trong assemble.py) sửa dữ liệ
 | Tab kẻ hầu | Cung nhân (mục con của Hậu cung) | Kẻ hầu (tên tab; trong câu vẫn dùng "kẻ hầu") |
 | Tab con cái | Hoàng tự | Con cái (tên tab) |
 | Tab rương | Tư trang (chữ ngắn cũng "Tư trang") | Rương đồ, Rương |
+| Phòng bày đồ quý (owner OD 17/11 ~21:22Z) | **Đa Bảo Các** (thanh trái, đầu bảng; phòng người khác: "Đa Bảo Các của <tên>") | Nơi trưng bày, Phòng trưng bày, Kệ trưng bày |
+| Bộ đồ bày (display-set-bonus) | «Bộ <tên>: Đức +2.» · «Bộ <tên>: còn thiếu <món>.» · «Bộ <tên> khuyết: <món> héo úa.» · «Bộ <tên> đủ lại.» · tới trần: «Bộ <tên>: đủ bộ, nhưng đã tới mức, không thêm.» | set, combo, bonus, điểm bộ |
 | Tab phe | Phe phái (chữ ngắn "Phe") | — |
 | Việc học một môn (Tài nghệ, Tứ đức) (sếp 15/11) | Tự học · Học với thầy · Học với ma ma · Học với Thái hậu (tên thật người dạy giữ trong lời, vd. "ma ma giáo tập") | Tự rèn, Tự luyện, Theo ma ma giáo tập, Xin Thái hậu cho học cùng |
 | Khoảng số trên thẻ việc (sếp 15/11) | "tiến bộ Thi một hai phần", "Sủng +3 đến +8" | "+1..2", "0..10" |
@@ -61,7 +63,7 @@ Thi hành: `dev/build/j84.js` (module cuối trong assemble.py) sửa dữ liệ
 | Tên kẻ hầu | không trùng trong cả cung, không có số ("Thúy 2") | tên kèm số |
 | Số đo (Sắc, Tài, Sủng…) | gọi đúng tên; khi chung chung: "không đổi gì" | chỉ số, stat, điểm |
 | Điểm thi (tuyển tú, thi tài) | phần: "nàng mất 2 phần" | điểm |
-| Bậc may rủi (CHỈ cơ may thành/hỏng của chính việc làm: một chữ ở góc thẻ / cạnh lựa chọn) | Liều / Khó / Năm ăn năm thua / Khá chắc / Chắc / Rất chắc / Nắm chắc (việc chắc không ghi chữ) | %, Chắc chắn, random |
+| Bậc may rủi (CHỈ cơ may thành/hỏng của chính việc làm: một chữ ở góc thẻ / cạnh lựa chọn) | Liều / Khó / Năm ăn năm thua / Khá chắc / Chắc / Rất chắc / Nắm chắc. TRẦN (sếp 17/11): không việc may rủi nào chắc chắn — cao nhất là Nắm chắc (BAL.odds.hi); việc xưa nay "chắc ăn" nay ghi Nắm chắc và hỏng thì hỏng nhẹ ("hỏng: chỉ uổng công, không mất gì khác", j63 kitSoftW). Việc không phải may rủi (đi lại, mua theo giá, mở bảng, quyết định trong sự kiện) không ghi chữ | %, Chắc chắn, random |
 | Khả năng của một điều kèm theo (có thai, được ban thưởng, lật thẻ, bị lộ, bị phạt, chết… trong Được / Mất / Kèm, thẻ kết quả, Sổ ghi, lời dặn, ô trạng thái) | Rất thấp / Thấp / Vừa / Cao / Rất cao (không có thì "Không có"); trong dòng: "có thai: khả năng thấp · được ban thưởng: khả năng vừa"; ô: "Có thai: Thấp"; sổ ghi: "(khả năng: vừa)". Hàm `chanceW` / `chanceLvl` (j1) | "có thai: Liều", "được ban thưởng: Khó", "cơ may: …" cho điều kèm theo |
 | Chờ / đang xử lý (mọi dòng chờ) | một bảng duy nhất `CTM_WAIT` (dev/site/kwait.js): "Cửa cung đang mở…", "Tranh luân hồi đang trải các thân phận…", "đường xa" (mạng), "mở lại" (tải lại), "khớp sổ" (đồng bộ) | tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt |
 | Chạm màn hình (lời dặn) | chạm | bấm, click, nhấn |

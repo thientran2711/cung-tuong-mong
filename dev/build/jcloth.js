@@ -23,7 +23,7 @@ Object.assign(BAL.looks,{xoc:{on:1,
 /* r4 TASK 2: stain DECALS on the cloth (tra = tea, uot = wet, bun = mud). Decal art = CDN img/fx-stain-<kind>-<n>.webp (transparent webp); code places it on ANY figure through the cloth mask.
    on:0 = live feature OFF. lv[1..3] (nhẹ / vừa / nặng): n = decals, sc = decal width as a share of the robe width, op = opacity, wet = overall cloth darkening (wet cloth), pos = anchors tried in order
    (fx, fy = share of the robe box: chest / sleeve / hem), blend = multiply | soft | normal (folds and the robe's own pattern show through), variants = how many decal files exist per kind. */
-Object.assign(BAL.looks,{stain:{on:{uot:1,bun:1,tra:0}/* per kind: wet + mud ON (owner approved), tea OFF until the owner approves tea (flip tra to 1) */,
+Object.assign(BAL.looks,{stain:{on:{uot:1,bun:1,tra:1}/* per kind: wet + mud + tea ON (all owner approved) */,
  lv:[null,{n:1,sc:.16,op:.6,wet:.5},{n:2,sc:.2,op:.72,wet:.78},{n:3,sc:.26,op:.85,wet:1}],
  anchor:{chest:[.5,.27],sleeve:[.2,.5],hem:[.5,.93],hemL:[.22,.94],hemR:[.78,.94],hemH1:[.5,.85],hemH2:[.28,.79],hemH3:[.72,.76],hemH4:[.45,.7],sleeveL:[.14,.6],sleeveR:[.86,.6],lap:[.42,.66]},
  kind:{tra:{pos:["chest","lap","sleeve"],blend:"stain",variants:3,wet:0,scm:1.4,dy:0,opm:1,tint:[135,82,38],tm:.9,lv:[null,{n:1,sc:.3,op:1.3},{n:2,sc:.36,op:1.2},{n:3,sc:.44,op:1.15}]},uot:{pos:["hem","sleeveL","sleeveR","hemL","hemR"],blend:"wet",variants:2,wet:1,scm:1.15,dy:0,opm:1,rotm:.4,deep:{k:.95,dark:.2,pow:1,paleP:.5,satMin:.07,warm:[1,.97,.88],rad:5,cling:2.2,hem:.84,hemV:.34,hemF:11,nx:5,ny:1.1,front:[0,.5,.75,1],floor:[0,0,.6,.92],darkL:[0,.2,.22,.3]}},bun:{pos:["hem"],blend:"mud",tm:.35,variants:8,base:2,wet:0,scm:1,tilt:.5,scatter:1,lv:[null,{n:8,sc:.32,op:.9},{n:9,sc:.34,op:.92},{n:12,sc:.38,op:1}],
@@ -35,7 +35,7 @@ Object.assign(BAL.looks,{stain:{on:{uot:1,bun:1,tra:0}/* per kind: wet + mud ON 
   tide:[null,{h:.08,v:.6,f:9,soft:.03,op:.42},{h:.15,v:.55,f:9,soft:.045,op:.55},{h:.23,v:.5,f:9,soft:.06,op:.7}],col:[122,84,50],warm:.35,shoe:.85}},
  rot:.5,jit:.05,
  /* r6e tea look: translucent amber (core = inside darkness, ring = tide-line edge, cap = max strength, pull = how far it is pulled toward tea brown on saturated red / orange cloth) */
- tea:{core:.5,ring:.25,cap:.5,mix:.9,tint:[170,98,42],base:1,texK:.3,texMin:.7,texMax:1.3,at:[.3,.28],rot:0,dripX:[-.12,.14,0],dripY:.2,dripLen:[.05,.04,.03],dripW:.006,dripOp:.7,
+ tea:{core:.52,ring:.5,cap:.75,mix:1,tint:[130,70,24],base:.9,texK:.8,texMin:.55,texMax:1.4,at:[.5,.27],band:[.2,.34],xr:[.28,.72],clear:.8,full:.9,ky:1.6,rot:0,dripX:[-.12,.14,0],dripY:.2,dripLen:[.05,.04,.03],dripW:.006,dripOp:.7,
   /* r6h: one fixed splash (decal 1, no turn, no size jitter) for every costume; sc = width share of the robe; drips = thin runs down the grain */
   lv:[null,{sc:.14,op:1,drips:1},{sc:.2,op:1,drips:2},{sc:.27,op:1,drips:3}]}}});
 /* ---------- tiny deterministic noise ---------- */
@@ -192,7 +192,7 @@ function clothDecalMip(dec,dw){let m=dec;while(m.w>dw*2&&m.w>8&&m.h>8){if(!m.hal
 let clothTeaDec=null;
 function clothTeaShape(){if(clothTeaDec)return clothTeaDec;const N=128,data=new Uint8ClampedArray(N*N*4);for(let y=0;y<N;y++)for(let x=0;x<N;x++){const dx=(x+.5-N/2)/(N/2),dy=(y+.5-N/2)/(N/2),r=Math.hypot(dx,dy),t=Math.atan2(dy,dx),R=.62*(1+.1*Math.cos(2*t+1)+.08*Math.cos(3*t+2)+.05*Math.cos(5*t+.5)),a=1-clothSmooth(R-.22,R+.04,r);const i=(y*N+x)*4;data[i]=data[i+1]=data[i+2]=200;data[i+3]=Math.round(255*a)}return clothTeaDec={w:N,h:N,data}}
 let clothTeaLm=150;
-function clothTeaMix(out,i,sv){const T=BAL.looks.stain.tea,r=out[i*4],g=out[i*4+1],b=out[i*4+2],L=r*.3+g*.59+b*.11,tx=Math.min(T.texMax,Math.max(T.texMin,L/clothTeaLm)),k=T.base+T.texK*(tx-1),a=Math.min(1,sv/T.cap*T.mix);
+function clothTeaMix(out,i,sv){const T=BAL.looks.stain.tea,r=out[i*4],g=out[i*4+1],b=out[i*4+2],L=r*.3+g*.59+b*.11,tx=Math.min(T.texMax,Math.max(T.texMin,L/clothTeaLm)),k=T.base+T.texK*(tx-1),a=Math.min(1,sv*T.mix);
  const tr=T.tint[0]*k,tg=T.tint[1]*k,tb=T.tint[2]*k,nr=r+(tr-r)*a,ng=g+(tg-g)*a,nb=b+(tb-b)*a,NL=nr*.3+ng*.59+nb*.11,f=NL>L&&NL>0?L/NL:1;out[i*4]=nr*f;out[i*4+1]=ng*f;out[i*4+2]=nb*f}
 function drawDecalOnCloth(out,W,H,mk,dec,ax,ay,scale,rot,op,blend,tint,tm){const B=BAL.looks.stain;const fw=mk.x1-mk.x0+1,dw=Math.max(2,fw*scale);if(blend!=="shade")dec=clothDecalMip(dec,dw);const sc=dw/dec.w,dh=dec.h*sc,c=Math.cos(rot),sn=Math.sin(rot),R=Math.hypot(dw,dh)/2+1;let n=0;
  for(let y=Math.max(0,Math.floor(ay-R));y<=Math.min(H-1,Math.ceil(ay+R));y++)for(let x=Math.max(0,Math.floor(ax-R));x<=Math.min(W-1,Math.ceil(ax+R));x++){const i=y*W+x,mm0=(blend==="shade"?mk.m:mk.mS)[i];if(mm0<.5)continue;const mm=clothSmooth(.5,.97,mm0);
@@ -204,7 +204,7 @@ function drawDecalOnCloth(out,W,H,mk,dec,ax,ay,scale,rot,op,blend,tint,tm){const
   const a=Math.min(1,(blend==="stain"?1:wedge)*da*op*mm*ef*ef*(3-2*ef)*(1-(blend==='shade'?Math.min(1,Math.max(mk.protS[i]*1.6,mk.prot[i]*1.2)):mk.protL[i])));if(a<.003)continue;
   const mx0=Math.max(1,out[i*4],out[i*4+1],out[i*4+2]);
   if(blend==="stain"){/* translucent stain: only the decal SHAPE is used; multiply by a tea-brown factor so the fabric texture and folds stay visible; darker tide-line ring at the edge, lighter centre */
-   if(!dec.A)clothDecalRing(dec);const ii=(Math.round(v)*dec.w+Math.round(u)),sv=Math.min(B.tea.cap,op*mm*ef*(1-mk.protL[i])*(B.tea.core*dec.A[ii]+B.tea.ring*dec.ring[ii]));if(sv<.01)continue;
+   if(!dec.A)clothDecalRing(dec);const ii=(Math.round(v)*dec.w+Math.round(u)),sv=Math.min(B.tea.cap,op*mm*ef*(mk.protL[i]>.04?0:1)*(B.tea.core*dec.A[ii]+B.tea.ring*dec.ring[ii]));if(sv<.01)continue;
    clothTeaMix(out,i,sv);n++;continue}/* r6e: on saturated red / orange cloth a tea-brown multiply stays red: pull toward a deeper tea brown by the cloth's saturation (BAL tra.tm), never lighter */
   for(let q=0;q<3;q++){let dc=D[j+q]*w0+D[j+4+q]*w1+D[j+k+q]*w2+D[j+k+4+q]*w3;if(tint)dc=dc+(tint[q]-dc)*tm;const b=out[i*4+q];let o;
    if(blend==="shade"){if(dec.mid==null)clothDecalMid(dec);const dl=dc/255-dec.mid;const sat=1-b/mx0;/* shade tinted to the robe: the weaker channels darken more, so shadows are the robe's own deeper hue, not neutral grey */o=b*(1+BAL.looks.xoc.dec.shadeK*(dl<0?dl*(1+.9*sat):dl*.45))}else if(blend==="normal")o=dc;else if(blend==="soft")o=dc<128?2*b*dc/255:255-2*(255-b)*(255-dc)/255;else if(blend==="mud"){const sat=1-Math.min(out[i*4],out[i*4+1],out[i*4+2])/mx0,e=Math.min(1,tm*sat*2.2);o=Math.min(b,b*dc/255*(1-e)+dc*.85*e)}else o=b*dc/255;/* mud (r6e): multiply, pulled toward the mud colour on saturated cloth; multiply: the robe's folds and pattern show through */
@@ -246,11 +246,17 @@ function clothStainBake(d,W,H,kind,lv,decals,opt){opt=opt||{};const B=BAL.looks.
  const T=kind==="tra"&&B.tea&&B.tea.lv?B.tea:null;
  if(T&&decals&&decals.length){/* r6h owner: ONE cup of tea, ONE identical splash (same decal, same turn, same size, same amber) on every costume, high on the chest clear of the elbow fold; lv3 = a bit larger + more drips */
   let ls=0,lc=0;for(let i=0;i<W*H;i+=5)if(mk.mS[i]>.9){ls+=d[i*4]*.3+d[i*4+1]*.59+d[i*4+2]*.11;lc++}clothTeaLm=Math.max(60,lc?ls/lc:150);
-  const TL=T.lv[cl(lv|0,1,3)],dec=clothTeaShape(),sc=TL.sc,ax=mk.x0+fw*T.at[0],ay=mk.y0+fh*T.at[1];
+  const TL=T.lv[cl(lv|0,1,3)],dec=clothTeaShape(),sc=TL.sc;
+  /* r6h5 owner: on the VISIBLE chest cloth (below the collar, above the sash), never under hands / a cup / a sleeve: the chest band is scanned for the spot nearest the centre-front where a square of the lv3 splash size holds only free cloth (cloth mask, no skin / item / hair); same rule and same size for every figure and level */
+  const rr=Math.max(3,Math.round(fw*T.lv[3].sc*T.clear/2)),ok=new Uint8Array(W*H);for(let y=mk.y0;y<=mk.y1;y++)for(let x=mk.x0;x<=mk.x1;x++){const i=y*W+x;ok[i]=mk.mS[i]>.6&&mk.protL[i]<.08?1:0}
+  const S2=new Int32Array((W+1)*(H+1));for(let y=0;y<H;y++){let r=0;for(let x=0;x<W;x++){r+=ok[y*W+x];S2[(y+1)*(W+1)+x+1]=S2[y*(W+1)+x+1]+r}}
+  const box=(x,y)=>{const x0=Math.max(0,x-rr),x1=Math.min(W,x+rr+1),y0=Math.max(0,y-rr),y1=Math.min(H,y+rr+1);return(S2[y1*(W+1)+x1]-S2[y0*(W+1)+x1]-S2[y1*(W+1)+x0]+S2[y0*(W+1)+x0])/((2*rr+1)*(2*rr+1))};
+  let bx=mk.x0+fw*T.at[0],by=mk.y0+fh*T.at[1],bs=1e9;for(let y=Math.round(mk.y0+fh*T.band[0]);y<=mk.y0+fh*T.band[1];y+=2)for(let x=Math.round(mk.x0+fw*T.xr[0]);x<=mk.x0+fw*T.xr[1];x+=2){if(box(x,y)<T.full)continue;const d=Math.hypot((x-(mk.x0+fw*T.at[0]))/fw,(y-(mk.y0+fh*T.at[1]))/fh*T.ky);if(d<bs){bs=d;bx=x;by=y}}
+  const ax=bx,ay=by;
   count+=drawDecalOnCloth(out,W,H,mk,dec,ax,ay,sc,T.rot,TL.op,"stain",T.tint,0);
   const dw=fw*sc;for(let q=0;q<TL.drips;q++){/* drip runs: thin, tapered, straight down from the lower edge of the splash, fixed places */
    const dx=ax+dw*T.dripX[q],dy0=ay+dw*T.dripY,len=fh*T.dripLen[q],sg=Math.max(.8,fw*T.dripW);
-   for(let y=dy0|0;y<Math.min(H,dy0+len);y++){const t=(y-dy0)/len,a=TL.op*T.dripOp*(1-t)*Math.min(1,t*6+.3);for(let x=Math.floor(dx-sg*3);x<=dx+sg*3;x++){if(x<0||x>=W)continue;const i=y*W+x,k=mk.mS[i]*(1-mk.protL[i]);if(k<.3)continue;clothTeaMix(out,i,Math.min(T.cap,a*Math.exp(-.5*((x-dx)/sg)**2)*k*T.cap))}}}}
+   for(let y=dy0|0;y<Math.min(H,dy0+len);y++){const t=(y-dy0)/len,a=TL.op*T.dripOp*(1-t)*Math.min(1,t*6+.3);for(let x=Math.floor(dx-sg*3);x<=dx+sg*3;x++){if(x<0||x>=W)continue;const i=y*W+x,k=mk.protL[i]>.04?0:mk.mS[i];if(k<.3)continue;clothTeaMix(out,i,Math.min(T.cap,a*Math.exp(-.5*((x-dx)/sg)**2)*k*T.cap))}}}}
  const D0=K.base?decals.slice(0,K.base):decals;
  if(D0&&D0.length&&!K.wet&&!T)for(let q=0;q<L.n;q++){const nm=K.pos[q%K.pos.length],an=B.anchor[nm],dec=D0[Math.floor(R()*D0.length)%D0.length];
   if(K.scatter){/* r5 mud follows the cloth grain: each streak is the strip decal turned VERTICAL, its foot on the hem line, running UP along the pleat, lengths vary, thinning with level; never a horizontal mark */
@@ -273,27 +279,36 @@ window.drawDecalOnCloth=drawDecalOnCloth;window.clothStainBake=clothStainBake;
 window.clothXocBake=clothXocBake;window.clothMask=clothMask;
 /* ---------- game wiring (only when the game is there): looks-2 CLOTHES "xoc" -> baked figure layer in the kit fx path ---------- */
 if(typeof KIT_FACEFX!=="undefined"&&typeof lkItem==="function"){
- const CLO={},CLQ=[],BLANK="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
- try{const st=document.createElement("style");st.textContent="img.kclo{pointer-events:none}img.kclo-on{clip-path:inset(100%)!important}";document.head.appendChild(st)}catch(e){}
+ const CLO={},CLQ=[];let CLID=0;const BLANK="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+ try{const st=document.createElement("style");st.textContent="img.kclo{pointer-events:none}img.kclo-wait{opacity:0}img.kclo-on{clip-path:inset(100%)!important}";document.head.appendChild(st)}catch(e){}
  /* the figure picture -> canvas -> clothXocBake -> data URL (async, once per picture + level, cached 24); a redraw of the stage puts it in */
  /* decal files (transparent webp) fetched once per kind+variant, cached; a missing file just means that decal is skipped */
  const DEC={};function clothDecalKey(key){if(!DEC[key])DEC[key]=fetch(IMG_U("img/"+key+".webp"),{mode:"cors"}).then(r=>r.ok?r.blob():Promise.reject()).then(bl=>createImageBitmap(bl)).then(bm=>{const c=document.createElement("canvas");c.width=bm.width;c.height=bm.height;const g=c.getContext("2d",{willReadFrequently:true});g.drawImage(bm,0,0);const id=g.getImageData(0,0,c.width,c.height);return{w:c.width,h:c.height,data:id.data}}).catch(()=>null);return DEC[key]}
  function clothDecal(kind,n){return clothDecalKey("fx-stain-"+kind+"-"+n)}
  /* the figure picture -> canvas -> xoc bake (creases) -> stain decals (tra / uot / bun) -> data URL (async, once per picture + effect set, cached 24); a redraw of the stage puts it in */
+/* HD TRANSFER (cloth-hd, owner via main 18/11 "whole figure softer at lv1-3"): the stage shows the HD twin (img/hd, 2x the 900 px file, listed in KFHD.map) but the bake reads the 900 px file, so a layer that replaces the picture was softer everywhere. The edit (bake minus source, both at 900 px) is upscaled and ADDED to the HD picture: out = HD + up(bake) - up(source). Untouched pixels = the HD picture byte for byte (equal sharpness), edits keep their size. No HD twin / any failure = the 900 px layer as before. */
+ function clothHD(file,S,B,W,H){const ent=window.KFHD&&KFHD.map&&!KFHD.bad[file]&&KFHD.map[file];if(!ent)return Promise.resolve(null);
+  return fetch(IMG_U("img/hd/"+file),{mode:"cors"}).then(r=>r.ok?r.blob():Promise.reject()).then(bl=>createImageBitmap(bl)).then(bm=>{const HW=bm.width,HH=bm.height;if(HW<W*1.5||HH<H*1.5)return null;
+   const lo=(d)=>{const c=document.createElement("canvas");c.width=W;c.height=H;c.getContext("2d").putImageData(new ImageData(d,W,H),0,0);return c};
+   const u=document.createElement("canvas");u.width=HW;u.height=HH;const g=u.getContext("2d",{willReadFrequently:true});g.imageSmoothingEnabled=true;g.imageSmoothingQuality="high";
+   const grab=(src)=>{g.clearRect(0,0,HW,HH);g.drawImage(src,0,0,HW,HH);return g.getImageData(0,0,HW,HH).data};
+   const hd=grab(bm),su=grab(lo(S)),bu=grab(lo(B)),out=new Uint8ClampedArray(hd.length);for(let i=0;i<hd.length;i++)out[i]=hd[i]+bu[i]-su[i];return{data:out,w:HW,h:HH}}).catch(()=>null)}
  function clothPaint(file,fx,e){fetch(IMG_U("img/"+file),{mode:"cors"}).then(r=>r.blob()).then(bl=>createImageBitmap(bl)).then(bm=>{const W=bm.width,H=bm.height,c=document.createElement("canvas");c.width=W;c.height=H;const g=c.getContext("2d",{willReadFrequently:true});g.drawImage(bm,0,0);
-  const id=g.getImageData(0,0,W,H);let face=null;try{const f=window.KIT_VEIL&&KIT_VEIL.fit&&KIT_VEIL.fit[file];if(f)face={x:f[0]/100*W,y:f[1]/100*H,w:f[2]/100*W,h:f[3]/100*H}}catch(x){}
+  const id=g.getImageData(0,0,W,H),S0=new Uint8ClampedArray(id.data);let face=null;try{const f=window.KIT_VEIL&&KIT_VEIL.fit&&KIT_VEIL.fit[file];if(f)face={x:f[0]/100*W,y:f[1]/100*H,w:f[2]/100*W,h:f[3]/100*H}}catch(x){}
   let sd=7;for(const ch of file)sd=(sd*31+ch.charCodeAt(0))%9973;let cur=id.data,mk=null;
   let pre=Promise.resolve(null);if(fx.xoc&&BAL.looks.xoc.dec.mode==="decal")pre=Promise.all([[1,2,3,4].map(i=>clothDecalKey("fx-crease-"+i)),[clothDecalKey("fx-crease-knot-1")],[clothDecalKey("fx-crease-hem-1")]].map(a=>Promise.all(a))).then(r=>({patch:r[0].filter(Boolean),knot:r[1].filter(Boolean),hem:r[2].filter(Boolean)}));
   return pre.then(dc=>{if(fx.xoc){const o=clothXocBake(cur,W,H,fx.xoc,{face,seed:sd,decals:dc});cur=o.data;mk=o.mask}
   const kinds=["tra","uot","bun"].filter(k=>fx[k]);let wait=Promise.resolve();
   for(const k of kinds)wait=wait.then(()=>Promise.all(Array.from({length:BAL.looks.stain.kind[k].variants},(_,i)=>clothDecal(k,i+1)))).then(ds=>{const o=clothStainBake(id.data,W,H,k,fx[k],ds.filter(Boolean),{face,seed:sd,base:cur,mask:mk});cur=o.data;mk=o.mask});
-  return wait.then(()=>{g.putImageData(new ImageData(cur,W,H),0,0);e.src=c.toDataURL("image/png");try{if(typeof kitFigFx==="function")kitFigFx()}catch(x){}})})}).catch(()=>{e.src=""})}
+  return wait.then(()=>clothHD(file,S0,cur,W,H)).then(hd=>{const CW=hd?hd.w:W,CH=hd?hd.h:H;c.width=CW;c.height=CH;g.putImageData(new ImageData(hd?hd.data:cur,CW,CH),0,0);e.src=c.toDataURL("image/png");clothPatch(e);try{if(typeof kitFigFx==="function")kitFigFx()}catch(x){}})})}).catch(()=>{e.src=""})}
+ /* COLD CACHE (cloth-bake-static): every static path (Dư đồ / event-stage figure, mirror close-up, mirror reveal, podium) prints the layer ONCE; a bake still running prints a blank WAIT layer (same box, same kit slot) and the finished bake is put into every wait layer in the page, so cold = warm */
+ function clothPatch(e){try{document.querySelectorAll('img.kclo-wait[data-kclo="'+e.id+'"]').forEach(i=>{i.src=e.src;i.classList.remove("kclo-wait");const f=i.closest(".kfxf"),im=f&&f.__img;if(im)im.classList.add("kclo-on")})}catch(x){}}/* kitFxPut paths (podium, token): the plain picture hides under the finished layer, same as warm */
  function clothXocLayer(file,fx){if(!/^fig-/.test(file))return"";if(typeof fx==="number")fx={xoc:fx};const on={};if(BAL.looks.xoc.on&&fx.xoc)on.xoc=fx.xoc;for(const k of["tra","uot","bun"])if(BAL.looks.stain.on[k]&&fx[k])on[k]=fx[k];if(!Object.keys(on).length)return"";
-  const key=file+"|"+JSON.stringify(on);let e=CLO[key];if(!e){e=CLO[key]={src:"",t:0};CLQ.push(key);if(CLQ.length>24)delete CLO[CLQ.shift()];clothPaint(file,on,e)}
-  return e.src?`<img class="kclo" src="${e.src}" alt="" aria-hidden="true" style="--fleft:0%;--ftop:0%;--fwidth:100%;--fheight:100%">`:""}
+  const key=file+"|"+JSON.stringify(on);let e=CLO[key];if(!e){e=CLO[key]={src:"",t:0,id:++CLID};CLQ.push(key);if(CLQ.length>8)delete CLO[CLQ.shift()]/* HD layers are ~4 MB decoded each: keep 8 */;clothPaint(file,on,e)}
+  return `<img class="${e.src?"kclo":"kclo kclo-wait"}"${e.src?"":' data-kclo="'+e.id+'"'} src="${e.src||BLANK}" alt="" aria-hidden="true" style="--fleft:0%;--ftop:0%;--fwidth:100%;--fheight:100%">`}
  const ent=KIT_FACEFX.get("lkcloth");if(ent){const h0=ent.html;ent.html=(p,file,z)=>{const fx={};for(const a of z.L)if(a[0]==="xoc"||a[0]==="tra"||a[0]==="uot"||a[0]==="bun")fx[a[0]]=a[1].lv;return Object.keys(fx).length?clothXocLayer(kitFile(file),fx):h0.apply(this,arguments)}}
  /* the cloth layer goes UNDER every face mark and the makeup (it repaints only the robe; the head is the picture's own) */
- (function(){if(typeof kitFxLayers!=="function")return;const f0=kitFxLayers;kitFxLayers=function(p,file){const h=f0.apply(this,arguments);if(!h||h.indexOf("kclo")<0)return h;const M=[];const rest=h.replace(/<img class="kclo"[^>]*>/g,m=>{M.push(m);return""});return M.join("")+rest}})();
+ (function(){if(typeof kitFxLayers!=="function")return;const f0=kitFxLayers;kitFxLayers=function(p,file){const h=f0.apply(this,arguments);if(!h||h.indexOf("kclo")<0)return h;const M=[];const rest=h.replace(/<img class="kclo[ "][^>]*>/g,m=>{M.push(m);return""});return M.join("")+rest}})();
  /* hide the plain picture under a finished cloth layer; toggled on every put so a cleared effect shows the picture again */
- (function(){if(typeof kitFxPut!=="function")return;const p0=kitFxPut;kitFxPut=function(img,p,host){const r=p0.apply(this,arguments);try{if(img)img.classList.toggle("kclo-on",!!(host&&host.querySelector(".kfxf img.kclo")))}catch(e){}return r}})();
- window.clothXocLayer=clothXocLayer}
+ (function(){if(typeof kitFxPut!=="function")return;const p0=kitFxPut;kitFxPut=function(img,p,host){const r=p0.apply(this,arguments);try{if(img)img.classList.toggle("kclo-on",!!(host&&host.querySelector(".kfxf img.kclo:not(.kclo-wait)")))}catch(e){}return r}})();
+ window.clothXocLayer=clothXocLayer;window.clothCacheReset=function(){for(const k of CLQ.splice(0))delete CLO[k]}/* tests: a cold cache on demand */}
