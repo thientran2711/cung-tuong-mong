@@ -5,3 +5,4 @@
 poison-road-r2-rv | review/poison-road-r2-rv | session_01964izEFTD1Fs4DqpreEzX8 | LIVE 12a1e4be | 18/11 11:40Z | owner D #1
 | NPC LANDER #5 (opus; ag-all-2-land + npc-chain-land; succ. LANDER #4) | review/ag-all-2-land, review/npc-chain-land | C-AG #12 | session_01UV1SzmC4Vsob8611uh6nPK | RUNNING | 18/11 11:52Z |
 | AG2-PERF (opus; ag-all-2 perf fix, outcome-identical) | review/ag2-perf | C-AG #12 | session_01UV1SzgvfBYs38MJqH9wsxK | RUNNING | 18/11 11:55Z |
+| E1r2 | session_01DgYSWq2J1J1agw2gLRXGDw | review/grand-endings-engine 177c730b | BIG review round 2 | Foreman E | 18/11 11:58Z |
