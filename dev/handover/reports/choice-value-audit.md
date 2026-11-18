@@ -96,3 +96,34 @@ review/parallel-time: it also edits jstip sends — expect token-level only.
 Touched (#2): dev/build/{j7,j24,j71,jbal,jil,jration,jstip}.js, dev/tools/choice-value-scan.js, index.html, sw.js (+ #1 list above).
 OWNER FLAGS (#2 adds): «Hoảng sợ đứng nhìn» removed from Cứu giá (2 options left: Lao vào / Hô thị vệ) — MAIN may prefer giving it a gain instead;
 «Nhịn» (embezzled stipend) now Đức +1 (forbearance) — same family as «Đứng yên»; HINT-NO-GAIN treats the GỢI Ý line as part of law 3.
+
+## #3 FINISH — review FAIL 5 @84ca6625 fixed (worker #3 session_01964izCHK28tcRj4VBLZSQH; START_CTX ≈ 5 % of 1M → rollover 30 %)
+Merged LIVE e16e1d66 first (only index.html / sw.js conflicted → regenerated). Commits d1a27621 (merge), 1e5a06ff (fixes), 55e5f652 (seed 31 find), + report.
+### FAIL 1 — the owner's own family: decline Hoàng thượng (ONE row BAL.cv.decl = {suc:6, duc:2, sung:2, an:2})
+| card | before (live) | after |
+|---|---|---|
+| j8 PEND.ksp «Cáo bệnh» (lật thẻ) | Tốn Sủng −2 · Ân tình −2 (typed), «Được»: nhường đêm (a loss) | Tốn Sủng −decl.sung · Được Sức +decl.suc, «nghỉ trọn một đêm cho lại sức» · Kèm nhường đêm, Ân tình −decl.an |
+| jagmaid PEND.amNight «Cáo bệnh» (cung nữ road) | Sủng −D.decline, nothing | + Được Sức +decl.suc (same words) |
+| jts «Hoàng thượng triệu đàn / cờ / du hồ» «Cáo bệnh» | Mất Sủng only | Được Sức +decl.suc · Mất Sủng sungGo_2 |
+| jworld trip «Cáo bệnh ở lại» (×4 kinds te/san/tuan/chinh) | Danh −1 only; dominated by free «Theo hầu» | Được Sức +decl.suc, «ở lại nghỉ, khỏi đường xa vất vả» · Kèm Danh −1 (no longer dominated: each road has its own gain) |
+| jcmaid PEND.cmTt «Dặn … chỉ viết chuyện vặt» | Lòng −10 · Bạc −30, «Được» = loss words | Được Đức +decl.duc, «không dò ý Hoàng thượng, giữ đạo bề tôi, Sủng không suy» · Kèm cha giận, không gửi bạc |
+Why 6: «Cáo bệnh» to him = a whole night of rest = «Nghỉ ngơi một lát» (Sức +6, j76) — bigger than the stay-away family's Sức +BAL.cv.rest (3), because declining HIM costs more (Sủng / Ân).
+Receiver-choice #2 (session_01964izGVAWwV6DabthJTS1n, review/receiver-choice) agreed by send_message: the summoned NPC's «Cáo bệnh» reads the SAME key
+BAL.cv.decl.suc (ap(p,{sung:BAL.eff.jts.sungGo_2,suc:…})), guarded until this branch lands.
+### FAIL 2 — scan gate holes closed (dev/tools/choice-value-scan.js)
+- a. LOSS WORDS: a green word that names her own loss (nhường…, mất…, bị…, phải…, chịu…, thua, không gửi / không được, cha giận, … giận / oán / thù / nghi ngươi) is a COST, never a gain. Others' loss («Thái giám X …») stays her gain.
+  Every cost + word-only-gain option is printed with `--words` as a hand-check list (WORD-GAIN rows; table below).
+- `--plant` self-test (kept, part of the gate): plants cost-only {bac:-10}, dominated {bac:-10,duc:2} vs {bac:-10,duc:3}, fake-green {sung:-2,x:"nhường đêm"} → **PLANT OK · caught 3/3** (exit 1 = all caught; exit 3 = gate broken).
+- b. COVERAGE: drives the gated builders directly — every MF7 merit × variant (PEND j71m), every FV7 festival × variant (j71f / j71i), every FX7 contest (j71x),
+  every WORLD event card (window.WORLD_EVD[k].card, her among the chosen; trip × 4 kinds), every TSA panel builder (Hoàng thượng triệu đàn / cờ / du hồ …), and
+  the cung-nữ-road night (amNight). Modals per seed-7 run: 158 → 333+.
+- New rows the wider scan found, fixed (whole group): MF7 «Không can dự / Không dính vào ×2 / Không ra mặt / Mặc kệ ×2 / Bỏ qua» (nothing, dominated by a free gain road) → Được Sức +BAL.cv.rest (decline family);
+  festival «Chuẩn bị kỹ rồi dự thi» (×9 festivals, same odds word as free entry) → offered only when it lifts her odds word (as the tutor), bạc → BAL.cv.tutor.fest;
+  hội phối đồ «Mượn áo …» (gain words read neutral, card showed no Được) → «mặc … dự hội: hợp đề, dễ được chấm cao hơn». Festival dragon-boat «Cược …» added to the BET exemption (payout follows true odds).
+### FAIL 3 — jstip regressions
+- «Nhịn»: risk now «kèm: có thể bị bớt xén nữa vào tháng sau» → red Kèm (hint: «được tiếng hiền; nhưng có thể bị bớt xén nữa…»).
+- «Tố lên Hoàng hậu / Thái hậu»: «Thái giám X phải chịu đòn» → GREEN under Được beside «được trả lại bạc và đồ tốt»; hint reads «được trả lại bạc và đồ tốt» (no HINT-NO-GAIN).
+### FAIL 4 — law 4 on touched lines → BAL.cv
+newgirl thiện cảm ±: BAL.cv.ngAff {warm:20, cold:-10} (text + newGirl()); guardrumour «Đút bạc»: BAL.cv.rumor {bac:40, danh:2}; contest tutor: BAL.cv.tutor {fest:20, fx:30};
+j24 borrow chance (card chanceW + monthly roll): BAL.cv.loanBack 40 — LANDER: balance-final names the same chance BAL.rk.loanBack; keep ONE when both land.
+### FAIL 5 — report: KEY FINDING rewritten at the top (the owner's example IS live game content, the five cards above).
