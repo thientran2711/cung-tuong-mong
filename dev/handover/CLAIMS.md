@@ -521,3 +521,4 @@ B8 SAMPLE c01 a18 t1–t8 colour-only | _review CDN consort-tiers/c01/b7 + hando
 
 M1 emperors emp1..4 a26/a36/a51 | _review CDN men/emperor | C | session_011xDdVQBz2KHs59V8xnTA4S | RUNNING | 2026-11-18T06:05Z
 Audit live consort figures c01–c32 (2K redo / m09 skin) | handover reports/consort-live-audit.md | C | session_011xDdVQBTXU7CBRNL2FPEVf | RUNNING | 2026-11-18T06:05Z
+| REVIEW lyf-tier 22dac5c (SMALL; sonnet; prompt inline) | review/lyf-tier | MAIN ROOT-46 | session_01UV1SzkwG1gCApRdP2jjZYj | RUNNING | 18/11 06:09Z |
