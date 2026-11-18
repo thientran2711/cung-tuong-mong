@@ -115,3 +115,15 @@ receiver-choice audit (ORDER MAIN ~21:16Z, OD 21:15Z/21:30Z; shares C-AG role-pa
 | ge-writers-w1 remerge #2 main fa411d6f (sonnet E11w1m2) | review/ge-writers-w1 | E ROOT #7 | session_01DgYSWpCmGwUZc92fd7aPTE | RUNNING | 18/11 20:49Z |
 | questline-q2 BIG REVIEW (opus E13r) | review/questline-q2 a8cd0551 | Foreman E ROOT #6 | session_01DgYSWmBrrumpeuqy7XfMzM | DONE: FAIL (law 2 help>betray + carrier tests) · K-Q2-1 confirmed | 18/11 20:49Z |
 | questline-q2 round-2 fixes (opus E13b, successor of E13) | review/questline-q2 | E ROOT #7 | session_01DgYSWodAwDdNEBivJkzbFg | RUNNING | 18/11 20:52Z |
+| a51 dark sample c13/c05 (W90) (sonnet painter; brief root30-mass) | handover reports/root30-* | Foreman C ROOT-30 | session_01PEhRbwC7NWirynejADqr8T | RUNNING | 18/11 20:52Z |
+| a65 t7/t8 c01-c08 (W91) (sonnet painter; brief root30-mass) | handover reports/root30-* | Foreman C ROOT-30 | session_01PEhRbuHsqCCRnVoS8ur8xr | RUNNING | 18/11 20:52Z |
+| a65 t7/t8 c09-c16 (W92) (sonnet painter; brief root30-mass) | handover reports/root30-* | Foreman C ROOT-30 | session_01PEhRbwa6Tb7NRvyfM61v4B | RUNNING | 18/11 20:52Z |
+| a65 t7/t8 c17-c24 (W93) (sonnet painter; brief root30-mass) | handover reports/root30-* | Foreman C ROOT-30 | session_01PEhRbwZbwVikQRoZvAGY2Y | RUNNING | 18/11 20:52Z |
+| a65 t7/t8 c25-c32 (W94) (sonnet painter; brief root30-mass) | handover reports/root30-* | Foreman C ROOT-30 | session_01PEhRbvm1kSHJ7SSgCJcryY | RUNNING | 18/11 20:52Z |
+| t1-t6 B a18 c01-c04 (W95) (sonnet painter; brief root30-mass) | handover reports/root30-* | Foreman C ROOT-30 | session_01PEhRby2Qmtr1TZQbfHYhY7 | RUNNING | 18/11 20:52Z |
+| t1-t6 B a18 c05-c08 (W96) (sonnet painter; brief root30-mass) | handover reports/root30-* | Foreman C ROOT-30 | session_01PEhRbxdLCdkmu5eNCxnNeE | RUNNING | 18/11 20:52Z |
+| t1-t6 B a18 c09-c12 (W97) (sonnet painter; brief root30-mass) | handover reports/root30-* | Foreman C ROOT-30 | session_01PEhRbvKAkbpbKfwgPkGMKt | RUNNING | 18/11 20:52Z |
+| t1-t6 B a18 c13-c16 (W98) (sonnet painter; brief root30-mass) | handover reports/root30-* | Foreman C ROOT-30 | session_01PEhRbuKnvPmVNjJS1WrW5C | RUNNING | 18/11 20:52Z |
+| t1-t6 B a18 c17-c20 (W99) (sonnet painter; brief root30-mass) | handover reports/root30-* | Foreman C ROOT-30 | session_01PEhRbuZ3tPo7YsKZBmBLae | RUNNING | 18/11 20:52Z |
+| t1-t6 B a18 c21-c24 (W100) (sonnet painter; brief root30-mass) | handover reports/root30-* | Foreman C ROOT-30 | session_01PEhRbtfZ35UPRApi8HqZ9h | RUNNING | 18/11 20:52Z |
+| t1-t6 B a18 c25-c28 (W101) (sonnet painter; brief root30-mass) | handover reports/root30-* | Foreman C ROOT-30 | session_01PEhRbwV1c2vgHjysY1gx2Q | RUNNING | 18/11 20:52Z |
