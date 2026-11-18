@@ -8,8 +8,8 @@ PRIORITY #1 CHECK: OD Chí tôn 4 + Cung nhân 9 + place banner 18/11 ~02:50Z/~0
 - "+N people" chip corner: j59chips sets `--kgrb`; column max-height subtracts it → overlap 0 px.
 - Fixed while testing: personal-maid chip showed a garbled value (hud text) → now S.maid.loyal.
 ## Test
-`node dev/test/stage-rightcol.js <out>` (needs built index.html): Fold 755x1000@2 + iPad 1180x820@2 × 1 / 6 servants (rank 6) × closed / Cung nhân open / Chí tôn open × places home + Ngự hoa viên = 24/24 PASS: chip overlap 0, name over column 0, name/column over figure body 0, closed column never scrolls, name ≤2 lines, no frame on name, no cut text, 0 page errors. Open Cung nhân with 6 on iPad scrolls inside the column (by design, capped above the chip). Not run: old-save load, quickcheck, phone sizes (not a separate path; only column + name layer touched).
+`node dev/test/stage-rightcol.js <out>` (needs built index.html): Fold 755x1000@2 + iPad 1180x820@2 × 1 / 6 servants (rank 6) × closed / Cung nhân open / Chí tôn open × places home + Ngự hoa viên = 24/24 PASS: chip overlap 0, name over column 0, name/column over figure body 0, closed column never scrolls, name ≤2 lines, no frame on name, no cut text, 0 page errors. Open Cung nhân with 6 on iPad scrolls inside the column (by design, capped above the chip). Also run (20:10Z): oldsave-r1 16/16 ok (Fold, iPad 1180, 1366); dev/tools/quickcheck.sh PASS (core gates, old save ok, perf new/live render 147/174 ms). Not run: phone sizes.
 Shots: dev/handover/shots/stage-rightcol/ (8 jpg), each looked.
 ## Caveat
 Open list shows "Thiện cảm" label (existing module rewrites "Lòng"). Entry-line chip at top (jplst) is untouched.
-~85% xong / ~85% chơi được
+~95% xong / ~95% chơi được
