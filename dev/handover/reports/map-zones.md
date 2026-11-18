@@ -73,3 +73,6 @@ Merged origin/main 13bb8c88 (shop-panel r3).
 ### Shots (LOOKED) dev/handover/shots/map-zones/: fold-/ipad- r2-overview-day, r2-overview-night, r2-courtyard (@2). Old zone shots 1–4 deleted (cancelled). 5-/6- still valid.
 Seen: the 3 lower-west courts are painted only, no tag; Fold right-edge tags (Trường Môn viện, Thái y viện) cut at the map pan edge = existing family, waiting for map-labels-missing r3 "Fold edge-clip fix" (merge it when pushed).
 ### Still open: TODO 2 (switch mapzStaffNow to j95here/j95whereId when C-AG live-servants lands), TODO 3 (ART Đức Thọ courtyard; courtyard edge tags), drop/merge list items 1–6 wait for MAIN.
+
+### r2b — on main 790cda59 (map-labels-missing live) — **review/map-zones @ 635c406**
+Merged origin/main 790cda59 (only index.html/sw.js conflicted → rebuilt). Re-run: quickcheck **PASS** (old save ok, core gates PASS, perf new/live render 281/278, tab 489/476, buổi 1266/1397 ms); pal-trim-oldsave **PASS**; map-labels-scan DSF=2 Fold 755x1000 + iPad 1180x820, day + night **PASS** (leaders 0, 0 overlaps), courtyards 10 **PASS** (both first try). Shots fold-/ipad- r2-overview-day/-night/-courtyard replaced with this build, LOOKED: the 3 dropped palaces are gone (their courts are painted only), tags clean, no clipping on iPad.
