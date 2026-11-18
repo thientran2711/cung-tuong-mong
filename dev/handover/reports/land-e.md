@@ -14,3 +14,22 @@ Not run: steal-mg-nf.js (needs a local balance-chain merge, not on main; prints 
 HELD for C-AG (MAIN ROOT-50 order): after ag-all-2-land + npc-chain-land land, MAIN FFs; then merge newest main into this stack and re-run gates.
 
 LAND READY 5bb5042494e0456b003589d8684488d97ad744db (HELD for C-AG)
+
+---
+# ROUND 2 (MAIN ROOT-51 GO 18/11 11:51Z): rebuilt on origin/main 12a1e4be
+
+review/land-e force-pushed (round 1 stack on a2ad2401 is replaced). Stack, each its own merge commit, no side picked (index.html/sw.js/assets.json rebuilt, assemble.py module list UNION):
+
+| step | branch | merge sha | result |
+|---|---|---|---|
+| 1 | review/questline-q0-ff 98737806 | 708447e7 | auto-merge (docs) |
+| 2 | review/hall-names d5d389e8 | — LEFT OUT | SOURCE conflict dev/build/jpm.js kitPalaceMap(): main now has `here=h=>(!!k&&S.place===k&&kpmHall()&&kpmHall().part===h)||(S.place==="home"&&kpmMine(slot)===h)`; branch has `role=h=>h==="cungnhan"||!kpmIsPlace(slot)?hallRole(h):""` + older `here`. Fix = keep both (branch's `role` line + main's `here`); needs the hall-names owner |
+| 3 | review/monthly-ration-r6 287a0b79 | — LEFT OUT | touches dev/build/jtoil.js (MAIN rule: jtoil* out) |
+| 4 | review/steal-minigame 6b5414a8 | 3f45eda9 | assemble.py union (+jsmg.js); j82.js/jbal2.js auto-merged |
+| 5 | review/questline-q1-land c0d48adf | 809d5ab0d37fb35f4c8c7cf9cf6930c011f0fd4c | assemble.py union (+jnrask, jnrask_b, jnrask_m); assets.json rebuilt |
+| 6 | review/questline-q3 dcc822b1 | — LEFT OUT | SOURCE conflict dev/build/jbal2.js ~line 398 (HEAD vs q3 hunk, after q1) + assemble.py; jbal* family |
+
+Gates on final 809d5ab0: one-core-guard 0 fails; quickcheck PASS (old save ok, render 274/231, tab 436/420, buoi 1114/1080, tasks>200ms 16/18, core gates PASS); coop-e2e 63/63; steal-mg-unit PASS (0 page errors); mg-skip-audit 21/21; nrask-scan, nrask-m-scan, nrask-engine ALL PASS. Not run: npc-roads-men.js (needs a served http url; q1 touched it), steal-mg-nf.js (needs balance-chain).
+Touched files vs main 12a1e4be: assets.json dev/build/assemble.py j82.js jbal2.js(+7 lines, steal-minigame) jnrask.js jnrask_b.js jnrask_m.js jnroad.js jnroadm.js jsmg.js dev/kit/KIT.md dev/story/ROAD_MAP.md + tests (npc-roads-men, nrask-*, steal-mg-*) + built index.html sw.js. None of jag*/j95*/jtoil*/jbal.js/jcoop*/save. NOTE jbal2.js IS touched (steal-minigame rung table +7 lines) — MAIN decide if that counts under "jbal*".
+
+LAND READY 809d5ab0d37fb35f4c8c7cf9cf6930c011f0fd4c (FF from 12a1e4be0dfc4e7fc769159c500f10a645afcc24)
