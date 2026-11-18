@@ -26,3 +26,44 @@ Non-art duplicates seen: kit-first rule appears in START_CORE laws 9–11 + OD:L
 
 ## HANDOVER TO SUCCESSOR (rollover; coordinator opens it)
 Next steps: (1) answer/park the QUESTIONS; (2) per file group move still-valid art lines verbatim into FIGURE_GATE under their topic (new sections after H: ART OTHER-TOPICS: faces/figures, costumes, events/effects, scenes, frames/kit, items/pets, animations) and replace the old file by the pointer line; check with `grep -rn '\[OD:L' dev/rules/topic/art-*.md` that every kept line carries its tag; (3) re-run the table. Read order: this report, FIGURE_GATE (183→~180 lines, 100 KB, read with offset/limit ~40 lines), then the art file you take.
+
+## R1b (worker R1b of ROOT-33, 18/11 ~23:10Z) — costumes, faces-figures, STYLE_ANCHOR, OWNER_ART_RULES, START_ART, FIGURE_GATE A0–H
+PRIORITY #1 CHECK: OD 0 new | ledger 0 | claims 0 | main 0 | review/* 0 | archive 0. Method: moved/deleted by [tag] with a script (moved text is copied byte for byte; only 2 worker-written lines edited, listed below). Upstream REFERENCES (22:55Z) now allows a 3rd image (royal swatch) for t6+ → R1 QUESTION 2 is answered, dropped.
+FIGURE_GATE: 100.7 KB → 112 KB (+11 KB: ~25 KB moved in, ~14 KB of old files' duplicates stayed out). New blocks: C8 (costume families), D4 (style anchor text), D6 (face/appearance/makeup lines), E3 (approval/completeness lines).
+
+### TABLE (topic | kept line (source) | removed (file:line) | moved from → to)
+| topic | kept | removed | moved |
+|---|---|---|---|
+| style anchor | FIGURE_GATE D4 + 9 STYLE_ANCHOR lines (prefix, Never, output, beauty rule, rejected eyes, nobody poor, men colours) | STYLE_ANCHOR:16 (smile = dup of D4b); START_ART ART/STYLE_ANCHOR.md:L2–L14 copies (older, open-mouth prefix); sentence "pass 2–3 consort portraits as style refs" cut from STYLE_ANCHOR:2 (superseded by REFERENCES) | STYLE_ANCHOR:2,3,4,5,6,8,10,12,14 → FG D4 |
+| huadian | OD:L592 (8.5 %), OD:L9, OD:L1104 (motif: flowers/leaves/butterfly/phoenix) | art-costumes OD:L512, L216 (objects→flowers, replaced by L1104), L231, L97, L103, L152, L240, L245, L476, L212 (older size/status); START_ART OD:L490 (replaced by L592); art-faces HANDOVER:L92 | OD:L592, L9, L1104 → FG C8 |
+| veils / trung y / dress items / khuê các+nghèo | OD:L12; OD:L392; OD:L685; OD:L211 | art-costumes OD:L391, L460 (status); L206, L209, L210, L214 (khuê các/poor: replaced by FG 21:00Z + 22:05Z blocks) | those four → FG C8 |
+| foreign princesses | OD:L1206, L1207, L1212, L1238, L1239, L1256 | art-costumes OD:L1209 (sample work order), L1210 (home maid → "palace maid uniform", withdrawn by L1239) | → FG C8 |
+| one colour per person / rank | C-ROOT-6 ~12:44Z ("84 different colours, nobody alike") | C-ROOT-6 ~12:46Z (13 ranks each its own design: replaced by 4a/4b "recolour only"), ~12:48Z (embroidery = FG C1 dup); C-ROOT-15 03:35/02:43/03:45/04:05(×2)/04:00/04:08Z (all already in FG A0/WHO/F/B1); 03:50Z (a51 "hands in front", replaced by the 15:55Z a51 pose); ROOT-52 16:42Z (= FG 3e) | C-ROOT-6 ~12:44Z → FG C8 |
+| makeup | OD:L747 (8+8), L420, L555, L778, L687 | art-costumes OD:L472 (older tone, replaced by L687) | → FG D6 |
+| faces/appearance | OD:L8, L10, L13, L100, L107, L121, L126, L130, L305, L1166, L1305 (no rosy layer), L1160/L1018 (HD) , HANDOVER:L53 (clause "refs consort-01/05/12/18" cut, superseded) | art-faces OD:L11 + HANDOVER:L93 ("calm standing, no flying sleeves, may turn at an angle": replaced by A0 rule 3 + D3a facing rule); START_ART OD:L122 (save credits: replaced by OD:L751 "draw everything") , OD:L48, OD:L29 | → FG D6 |
+| process | OD:L93 (pilot → approval → roll out), OD:L751, OD:L98 (HD previews), OD:L567 (4 age bands × every rank) | — | → FG E3 |
+| FG t6 | T6 FINAL, 22:40Z swatch line, 22:10Z line | FG: 22:12Z (t6 small yellow), 23:25Z T6 vs T7 (cancelled proposal), 21:50Z "style ref B" block (style B = pink image, never again) | — |
+| FG emperor | EMPEROR 23:15Z, 22:25Z builder, 23:00Z, 22:02Z redraw rule | FG: 21:50Z e2–e4 redo, 22:35Z e2–e4 rewrite (replaced by 23:15Z) | — |
+| FG ages | a51/a65 lines 22:50Z, 22:55Z, 22:58Z, ELDER COLOURS 21:06Z | FG: AGE 51 t7/t8 EXCEPTION 19:55Z (overridden), a65 "same colours darker" 22:30Z and AGE COLOURS 22:45Z (replaced by 22:50Z trầm = lower saturation + ELDER COLOURS); the "COLOUR two levels" segment inside the 15:55Z AGE 51 line (the rest of that line kept) | — |
+| FG refs | text in 109 "(art-costumes.md OD:…)" → "(section C8 below …)"; D4 pointer to STYLE_ANCHOR.md replaced by the moved text | — | — |
+Old files: art-costumes.md, art-faces-figures.md, STYLE_ANCHOR.md, OWNER_ART_RULES.md (index, no rules) → pointer line "Art rules live ONLY in dev/art/FIGURE_GATE.md (owner 18/11 ~22:45Z)." START_ART.md keeps its gate-zero and "approved forms first" lines + the pointer.
+
+### Left in place on purpose (NOT figure-art rules; unclear → not deleted) — FOR MAIN / R1c
+- art-costumes.md under "NOT ART RULES": OD:L382, L384, L473, L475, L605, L746(heading), L761, L1106, L128 (outfit-slot / minigame / contest mechanics, status).
+- art-faces-figures.md (86 lines left): stage/portrait/dialog/Tuần lục/podium/news-card display and bug tickets (OD:L177, L167, L498, L510, L554, L831, L833, L1026, L1187, L940, L949 …), roster/NPC lines (L1120, L1121, L642), handover lines HANDOVER:L32/L49/L75/L77/L80/L104, work orders (L183, L294, L297, L749). Kit/people topics → kit-ui.md / people-life.md.
+- START_ART.md "OTHER ART/PROCESS LINES": events/effects/perf/CDN/pets/scene lines (OD:L364, L659, L663, L713–719, L1230, L203, L141, L399, L662, L775, L385 …) → R1c (FIGURE_GATE I) or MAIN.
+
+### QUESTIONS (not decided, nothing deleted for these)
+1. makeup: OD:L687 (6–7 looks, 3 cool + 4 warm) vs OD:L747 (8+8, 4 cool + 4 warm, newer): only the count is superseded; both lines kept (L687 also has the tone rule). OK to drop the count?
+2. huadian: OD:L9 still says "size t1 = c03 t1, grows ~5 %/tier" vs OD:L592 8.5 %; and FG D2 says "bare forehead, hoa điền is an item". Is huadian on figures still painted at all?
+3. calm: OD:L11 and HANDOVER:L93 ("no flying sleeves/sashes/swirling hems for ALL figures") deleted as replaced by A0 rule 3 ("low ranks may be lively, sleeves moving"). Confirm she wants sleeves moving at low ranks.
+4. C-ROOT-6 ~12:46Z deleted: it also had "modest cloud-collar (vân kiên) growing from Tần/Phi up, never bulky" (only "not bulky" survives in C5). Re-add the collar?
+5. Emperor yellow: FG "EMPEROR COLOURS NOW" says THE YELLOW = emp1 a26; 20:08Z says same C2 yellow as consorts. Kept both (owner words); which wins?
+6. STYLE_ANCHOR prompt prefix (D4) vs build.py builders: is the prefix still pasted by hand anywhere, or only inside build.py?
+7. Older R1 questions 1, 3–7 still open (see above).
+
+### FOR MAIN (added)
+Art lines still in non-art books: START_WORKER.md (WORKER_BRIEF:L17 / PREAMBLE art lines, consort-01/05/12/18 style refs superseded), PRIORITY_RULES (2), WORKER_BRIEF:L17, OWNER_DECISIONS (128 hits, history, untouched). Mechanic lines listed above should move to kit-ui.md / people-life.md.
+
+### HANDOVER
+R1b done and pushed (commit "rulebook-cleanup R1b …"). Nothing pending except the QUESTIONS. R1c edits only FIGURE_GATE section I at the end (no overlap).
