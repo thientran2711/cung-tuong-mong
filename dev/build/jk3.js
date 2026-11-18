@@ -215,7 +215,7 @@ html body .kshR{position:absolute;top:8px;right:8px;width:var(--kgrw,150px);min-
 .kshR .k3r>b{white-space:normal;text-align:right}
 /* owner 11/15: people may stand under the right column — its plaques float on top on a SOLID card */
 .kshR .k3p,.kshR .k3c{background:rgb(255,250,240)!important;backdrop-filter:none}
-.ksh .k3p,.ksh .k3c{pointer-events:auto;background:var(--k3pl);border:1px solid var(--line);border-radius:8px;box-shadow:0 1px 4px #3a20101f;backdrop-filter:blur(2px)}
+.ksh .k3p,.ksh .k3c,.kpname{pointer-events:auto;background:var(--k3pl);border:1px solid var(--line);border-radius:8px;box-shadow:0 1px 4px #3a20101f;backdrop-filter:blur(2px)}
 .ksh .k3p{display:flex;flex-direction:column;padding:3px 6px;gap:0}
 .ksh .k3h{font-family:var(--display);font-size:.7rem;color:var(--gold);letter-spacing:.03em;border-bottom:1px solid var(--k-hair,#e6d3ac);margin-bottom:1px}
 .ksh .k3r{display:flex!important;align-items:center;gap:4px;border:0;background:none;padding:1px 0;margin:0;font:inherit;font-size:.75rem;line-height:1.25;color:var(--ink);text-align:left;cursor:pointer;min-height:0;width:100%}
