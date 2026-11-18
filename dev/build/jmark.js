@@ -36,7 +36,7 @@ function kmmHead(src,cb){const o=KMM_HEAD[src];if(o&&o.v)return o.v;if(o){o.w.pu
 function kitMeMapMark(){try{const r=kmmCur();if(r==null)return"";return `<span class="kmmapmk${kmmMotion()?" kmmove":""}" aria-hidden="true" style="--kmm-mapsc:${((KIT_MEMARK.sc[r]||1)*(KIT_MEMARK.big||1)).toFixed(3)}"><img alt="" draggable="false" src="${kmmSrc(r)}" onerror="this.parentNode.style.display='none'"></span>`}catch(e){return""}}
 function kmmMotion(){try{if(matchMedia("(prefers-reduced-motion: reduce)").matches)return false;return!(typeof OPT!=="undefined"&&OPT&&OPT.fxon===false)}catch(e){return false}}
 function kmmIsMe(fig){return!!fig&&(fig.id==="mefig"||!!fig.closest(".kesme"))}
-function kmmAvoid(){const L=[];document.querySelectorAll("#sc-t h2,#kshL,#kshR,.k3chips,.kchip,.kmnote,#j59metag .tag").forEach(e=>{const r=e.getBoundingClientRect();if(r.width>0&&r.height>0)L.push(r)});return L}
+function kmmAvoid(){const L=[];document.querySelectorAll("#sc-t,#kshL,#kshR,.k3chips,.kchip,.kmnote,#j59metag .tag").forEach(e=>{const r=e.getBoundingClientRect();if(r.width>0&&r.height>0)L.push(r)});return L}
 /* the drawn picture box inside an <img> (object-fit: contain) */
 function kmmBox(fig){const fr=fig.getBoundingClientRect();let bx=fr.left,by=fr.top,bw=fr.width,bh=fr.height;const nw=fig.naturalWidth,nh=fig.naturalHeight;
  if(nw&&nh){const ar=nw/nh;if(bw/bh>ar){const w=bh*ar;bx+=(bw-w)/2;bw=w}else{const h=bw/ar;by+=(bh-h)/2;bh=h}}return{bx,by,bw,bh}}
@@ -53,8 +53,8 @@ function kitMeMark(fig){try{
  const cx=B.bx+B.bw*hd.x,headTop=B.by+B.bh*hd.t,gap=Math.max(1,B.bh*K.gap),bottom=headTop-gap;
  /* room above the head: the host's top edge, and anything the marker must not cover (scene title, plaques, chips) */
  /* dialogs: the room above the figure is the figure column (the free space over the head inside the dialog), not just the figure box */
- let roomTop=hr.top+1;const col=fig.id==="mefig"?null:fig.closest(".kesf");if(col){const cb=(col.parentElement||col).getBoundingClientRect();roomTop=Math.min(roomTop,cb.top+2)}for(const q of kmmAvoid()){const W=H*ar;if(cx+W/2>q.left&&cx-W/2<q.right&&q.bottom<=bottom&&q.bottom>roomTop-1)roomTop=Math.max(roomTop,q.bottom+1)}
- if(bottom-roomTop<H)H=Math.max(K.tiny,Math.floor(bottom-roomTop));
+ let roomTop=hr.top+1;const col=fig.id==="mefig"?null:fig.closest(".kesf");if(col){const cb=(col.parentElement||col).getBoundingClientRect();roomTop=Math.min(roomTop,cb.top+2)}for(const q of kmmAvoid()){const W=H*ar;if(cx+W/2>q.left&&cx-W/2<q.right&&q.bottom>roomTop-1&&q.top<bottom)roomTop=Math.max(roomTop,q.bottom+1)}/* place-banner (owner 18/11): the marker never covers the stage plaque, even when her head already stands under it */
+ if(bottom-roomTop<H)H=Math.floor(bottom-roomTop);if(H<K.tiny){mk.style.visibility="hidden";return mk}mk.style.visibility="";
  const W=Math.round(H*ar),top=bottom-H;
  mk.style.cssText=`left:${(cx-hr.left-W/2+host.scrollLeft).toFixed(1)}px;top:${(top-hr.top+host.scrollTop).toFixed(1)}px;width:${W}px;height:${H}px`;
  mk.dataset.r=r;mk.dataset.gap=(headTop-(top+H)).toFixed(1);mk.classList.toggle("kmmove",kmmMotion());return mk}catch(e){console.error("kitMeMark",e);return null}}
