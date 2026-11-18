@@ -15,3 +15,6 @@ gens: every figure 1 gen. IoU %: v0 t1-8: 96.5 96.0 99.0 99.2 96.5 96.8 96.4 94.
 Magnific live uploads c31 t1..t8: kspI4Yj16B SymuAXjUb8 SymuA8xUb8 0eSPaUnTfW 1let9ohr4r N2HrMrP6D9 WDlOh4YcXe Lwoa3HcswO.
 
 ~100% xong (c31 B10) / ~0% chơi được (review only)
+
+## ROOT-20 fix round (W49, 18/11 ~08:05Z)
+Foreman fault: t7 v1/v2 yellow read as main robe. Regenerated (1 gen each, same refs): outer robe/sleeves/skirt now rose (v1) / powder blue (v2), deep golden yellow only inner front panel, borders, sash; fan ivory (contrasting); phoenix = flat thread embroidery. t7 v0 checked at native res: stitched, not pasted -> kept. Table: person | t7 version | pasted? | redrawn: c31 | v0 | no | 0 ; c31 | v1 | yellow-main fault | 1 ; c31 | v2 | yellow-main fault | 1. New IoU t7: v1 95.7, v2 94.6. Files re-uploaded under the same names + sheet.

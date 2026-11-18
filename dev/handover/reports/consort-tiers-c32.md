@@ -14,3 +14,6 @@ C1 embroidery sentence in every prompt yes; zoom t7 v1/v2, t8 v0/v1 native: stit
 Magnific live uploads c32 t1..t8: VXw9rbLMMU 9ZF1mIhNYZ w4vFdBy7EI N2HrhEQ6D9 s78fV8zl8e rgdmWoWxtc MB7Nx9fDCm CqzVNDGEEy.
 
 ~100% xong (c32 B10; W49 people c31+c32 done) / ~0% chơi được (review only)
+
+## ROOT-20 fix round (W49, 18/11 ~08:05Z)
+Same yellow-main fault found by me on c32 t7 v1/v2 -> regenerated (1 gen each): sage / lilac outer robe, yellow only inner panel/borders/sash, ivory fan. c32 t7 v0 phoenix looked raised/relief (pasted) -> redrawn (1 gen) with flat-stitch wording, checked at native res. Table: c32 | v0 | yes | 1 ; c32 | v1 | yellow-main | 1 ; c32 | v2 | yellow-main | 1. New IoU t7: v0 95.6, v1 95.1, v2 97.1. Re-uploaded same names + sheet. Colour families: c31 green/rose/blue, c32 cream+blue-grey/sage/lilac — v1/v2 are not near shades of v0 except c32 v1 sage vs c31-style none; held items contrast the robe. Hairpin rule (v1/v2 new pins) arrived after these people were drawn: not redone per owner ("lỡ vẽ giống nhau thì thôi").
