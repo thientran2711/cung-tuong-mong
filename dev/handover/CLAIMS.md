@@ -454,7 +454,7 @@ c12 a18 Nữ đế sample (first step of t10 tier) | claude/cung-tuong-mong-hand
 | NPC-PURPOSE (opus): every NPC action from a goal, no dice-only events (owner 18/11 04:08Z); phase 1 scan now, phase 2 after ag-all-2 live | review/npc-purpose | C-AG #9 | session_01UV1SziWp3UtGjdFMm4o1Vd | ROLLED OVER → Szk6vem (archived) | 18/11 03:55Z |
 | RESIDENCE-SEATS r2 re-merge on newest main (opus; MAIN s43 03:32Z) | review/residence-seats-r2 | D | session_01964izDkKFe51gntX9F2gZ9 | RUNNING | 18/11 03:58Z |
 c12 a18 regen ±3% t2,t3,t5,t6,t7,t8 + Nữ đế (Round 38, auto-regen + gen count) | claude/cung-tuong-mong-handover-hj0h8w (art, _review CDN) | session_011xDdVPnjHecS9RjeTvnfBe | DONE 18fbb3d (archived) | 2026-11-18T04:00Z (Foreman C ROOT-16)
-nam mẫu v2 (wider head/neck, height +7% approved) | claude/cung-tuong-mong-handover-hj0h8w (art, img/_review/male-proportion) | session_011xDdVQFLRu1hiQA6r1onWU | RUNNING | 2026-11-18T04:00Z (Foreman C ROOT-16)
+nam mẫu v2 (wider head/neck, height +7% approved) | claude/cung-tuong-mong-handover-hj0h8w (art, img/_review/male-proportion) | session_011xDdVQFLRu1hiQA6r1onWU | DONE 132d878 (archived) | 2026-11-18T04:00Z (Foreman C ROOT-16)
 | NPC-PURPOSE G2 (opus): monthly no-actor chains → npcWhy | review/npc-purpose-g2 | C-AG #9 | session_01UV1SzjwFk9CyyTmPZT589k | RUNNING | 18/11 04:18Z |
 | NPC-PURPOSE G3 (opus): witness/target picks + agent-layer dice → npcWit/npwPick | review/npc-purpose-g3 | C-AG #9 | session_01UV1SzjE9iRFchoQnRUZm9r | RUNNING | 18/11 04:18Z |
 | NPC-PURPOSE G1 #2 + integrator (opus; successor of SziWp3U) | review/npc-purpose | C-AG #9 | session_01UV1Szk6vemeEmLFXUGhr2b | RUNNING | 18/11 04:24Z |
