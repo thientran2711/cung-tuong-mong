@@ -91,4 +91,4 @@ style-ref test A/B/C c06 t1–t3 | CDN _review only | W79 session_011xDdVSouZw85
 | maid6-sample (sonnet SAMPLE: right column with 6 maids; OD 19:45Z (6)) | review/maid6-sample | MAIN ROOT-54 | session_01Rc5AsKdV3XxBzzwBixbNBN | RUNNING | 18/11 19:33Z |
 | errand-scene (sonnet UI/motion: maid walks off/on stage for every errand; OD 20:05Z) | review/errand-scene | MAIN ROOT-54 | session_01Rc5AsLfkFKRGnjiTepddVL | RUNNING | 18/11 19:38Z |
 parallel-time (ORDER ROOT-54 ~20:22Z + ADD ~20:37Z) | review/parallel-time | session_01964izEDFWH8uK569yeSGJt | RUNNING | 18/11 19:52Z | owner D #3
-| REVIEW ag-deed-perf (opus reviewer; env cung-tuong-mong = CDN allowed) | review/ag-deed-perf 9e0e1928 | C-AG #14 | (opening 19:58Z) | RUNNING | 18/11 19:58Z |
+| REVIEW ag-deed-perf (opus reviewer; env cung-tuong-mong = CDN allowed) | review/ag-deed-perf 9e0e1928 | C-AG #14 | session_01Rc5AsKgufafrSAB6Xyw8k7 | RUNNING | 18/11 19:58Z |
