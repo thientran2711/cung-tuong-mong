@@ -988,4 +988,4 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | cloth-xoc r6 (c30 grey→own-hue wet + mud lv2/3 from bun-1..8; opus; brief briefs/cloth-xoc-r6.md) | review/cloth-xoc | MAIN s41 | session_01UV1SzjMK4RUBPdS1ZMuLds | RUNNING | 18/11 01:09Z |
 | REVIEW staff-cap-fix a2389cc (BIG; brief briefs/review-staff-cap-fix.md) | review/staff-cap-fix-r6 | MAIN s41 | session_01UV1SzkW9AbJs8kAvGGWzkv | RUNNING | 18/11 01:12Z |
 | STAFF-CAP TABLE (measure only: B2/D1/D2/D3/A/low-rank, avg + worst case, Fold 4x perf, co-op, thân cận-brain variant; opus; brief briefs/staff-cap-table.md) | review/staff-cap-table | MAIN s41 | session_01UV1SzkENdmyJBzB9tXt38F | RUNNING | 18/11 03:30Z |
-| smudge-code r16 (extra short run at nặng, big-size darker, +10/+20 % options; sonnet; brief briefs/smudge-r16.md) | review/smudge-code | MAIN s41 | (opening) | RUNNING | 18/11 01:24Z |
+| smudge-code r16 (extra short run at nặng, big-size darker, +10/+20 % options; sonnet; brief briefs/smudge-r16.md) | review/smudge-code | MAIN s41 | session_01UV1SzhMG33iYZzEKjZvDzg | RUNNING | 18/11 01:23Z |
