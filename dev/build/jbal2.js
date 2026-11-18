@@ -366,6 +366,9 @@ Object.assign(BAL,{nroad:{
  /* help options (r1, ONE CORE): odds of the Sức road / bạc road / dò la / che chở / tự sắc thuốc, the loss sizes l2/l3 on a failed try,
     the Đức a betrayal costs, the bond the dò-la target loses */
  op:{pS:55,pB:75,pDo:70,pChe:60,pY:50,l2:2,l3:3,betray:3,rbDo:4},
+ /* Q1 (audit D-Q2, OD:L1601 (2) "xin tiền xin bạc … không phải là phụ tuyến"): the help kinds an NPC may ask; the first is the fallback of a
+    chapter whose cast maps to none. «bac» is OFF (money stays only as a cost inside an ask); add "bac" here to deal it again (one key) */
+ kinds:["thu","emp","th","hh","do","y","che"],
  /* rank thresholds of the bạc cost: index = how many of these ranks her rank reaches (RANKS index) */
  bacRk:[2,4,6],
  /* palace news lines a month (NPC chapter ends), at most */
