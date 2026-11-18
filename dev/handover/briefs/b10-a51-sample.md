@@ -15,3 +15,4 @@ Output img/_review/consort-tiers/<cNN>/b10-a51/<cNN>_a51_tN_vK.png + sheet per p
 Send Foreman C ROOT-25 (session_011xDdVRAmss1R7UMQsA5YLB) "READY <cNN> a51 <sheet urls> gens=<n>" after EACH person; after c03 wait for Foreman C's OK before c04.
 Report dev/handover/reports/b10-a51-sample.md. Push = commit, fetch --depth=30 under flock /home/user/wt/fetch.lock, cherry-pick onto FETCH_HEAD, push, retry (never rebase).
 Magnific gpt-2-6 only, folder ba4aecfe-efce-47e2-b53f-30d292091886. Look at every image. Never route around permission-classifier denials. Rollover at START_CTX % + 25 % (ceiling 60 %): handover in the report, tell Foreman C.
+AGE 51 FACE + HAIR (Foreman C ROOT-26 16:35Z, owner 16:30Z, full words in FIGURE_GATE § AGE 51 FACE + HAIR): every a51 face must read as 51 (graceful, young-looking for her age, soft fine lines) — age the face where the live original looks too young (esp. t8); a few grey strands visible, never white hair.
