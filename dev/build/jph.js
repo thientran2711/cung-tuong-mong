@@ -103,6 +103,7 @@ img[data-kwait]{background:radial-gradient(ellipse at 50% 42%,#fbf4e4 0,#f3e7cf 
 img[data-kwait="s"],img[data-kwait="fs"],img[data-kwait="ms"]{animation:none}
 img[data-kwait^="f"],img[data-kwait^="m"]{background:url("img/kit/unknown-fig-f.webp") center bottom/contain no-repeat;opacity:.55}
 img[data-kwait^="m"]{background-image:url("img/kit/unknown-fig-m.webp")}
+img[data-kwait^="f"]{aspect-ratio:730/1350}img[data-kwait^="m"]{aspect-ratio:616/1350}
 @keyframes kphBreathF{50%{opacity:.3}}
 img[data-kwait="f"],img[data-kwait="m"]{animation-name:kphBreathF}
 @keyframes kphBreath{50%{opacity:.62}}
