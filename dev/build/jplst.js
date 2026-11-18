@@ -26,7 +26,7 @@ function lay(){try{const st=$("stage");if(!st)return;let nm=$("kpname"),en=$("kp
   if(raw&&!/^Không gặp ai\.?$/.test(raw.replace(/<[^>]+>/g,"").trim()))line=raw}
  let toast="";if(line&&!/<button/i.test(line)){toast=line.replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim();line=""}
  /* once per visit + line (renders repeat; a new visit, even to the same place with the same text, toasts again) */
- const tk=S&&S.visit?S.visit:null;if(toast&&live){if(lay.v!==tk||lay.t!==toast){lay.v=tk;lay.t=toast;(window.kitLineToast||kitLineToast)(toast)}}else if(!toast){lay.v=tk;lay.t=""}
+ const tk=S&&S.visit?S.visit:null;if(toast&&live){if(lay.v!==tk||lay.t!==toast){lay.v=tk;lay.t=toast;(window.kitLineToast||kitLineToast)(toast)}}else if(!toast&&live){lay.v=tk;lay.t=""}/* stage-here: a hidden stage (map tab, Fold panel tab) is not a new visit line: coming back never re-toasts it */
  /* (2) place name, top of the right column */
  if(name){if(!nm){nm=document.createElement("div");nm.id="kpname";nm.className="k3p kpname";st.appendChild(nm)}if(nm.textContent!==name)nm.textContent=name;nm.hidden=false;
   const h=Math.ceil(nm.getBoundingClientRect().height)+6;st.style.setProperty("--kpnh",h+"px");st.classList.add("kpn")}
