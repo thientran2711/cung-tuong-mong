@@ -423,3 +423,7 @@ RUNNING (all report to MAIN — tell them the new main id):
 OWNER PENDING: cào step per level (ladder lv2/lv3 sent, e.g. "vừa 2, nặng 3"; steps 3–5 need stroke cut at zones); stage size 1–4 (after re-shoot); book r5c OK?; tea; opt-card A/B/C; Thử tay CTM-CAL.
 LESSONS: workers' test harness randomised makeup → false 'glow' (now forced off); CSS keep-out mask was inert until R7 (python sim said 0) → always check in the browser; size ladders must freeze outfit/pose.
 - (18/11 04:44Z) ROOT-44 FINAL: successor MAIN ROOT-45 = session_01UV1SzikTZwNu6Q6dJKkcGi (depth 1). ROOT-44 stops (relays owner words + worker reports only). ROOT-44 wake trig_01GXUgyTwb8mP38JXXBzFqVj stays until ROOT-45 deletes it.
+
+## ROOT-45 (main; child of ROOT-44 session_01UV1SziV7qFecFU6EkEmtfe)
+- (18/11 04:44Z) MAIN = ROOT-45 session_01UV1SzikTZwNu6Q6dJKkcGi; START_CTX ≈ 7 % (estimate; context_usage reads 0) → rollover at 32 %, ceiling 60 %; depth 1. Brief template briefs/root45-common.md (copy of root44-common). LIVE main 94a93759.
+- (18/11 04:44Z) LOAD: main running 6 (owner bugs/UI/looks only: look-fx-wire #3 SzkGvAo, place-stage r4 SzjeRxj, book-figsize r5 Szkhy, cloth-tea SzghNEr, opt-card-short Szk6j15, + C-AG #9 relay) | B 2 ORDERS 04:35Z (life-preload-fu, cloth-bake-static) | C ROOT-16/17 art | D #12 running 4 + staff-cap-row3 | E waiting owner to open | moved: none (no non-UI item held by main).
