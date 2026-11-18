@@ -229,3 +229,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
   QUEUE: GE W3 (ch ×4, thd ×4, cnv_chu/ban/ma) per briefs/E11-ge-writers.md — open when W1 or W2 lands (assemble.py/jbalge.js same lines) · Q2 when review/npc-chain-land is LIVE · GE step 4 (bd_*) waits owner D2 · PL#6 K-GE-3 kit, PL#7 C-AG hook, PL#2 owner key.
   Standby E: session_01DgYSWnviLVKiXURQJSTGYz (TAKE OVER NOW only if create_session is refused). My hourly wake trig_01BbnJ3Hc3wVtxLZMFv9B4rP — successor DISABLES it (update_trigger enabled=false; delete is refused by the permission check) and sets its own (minute 47). Old trig_01Jqg9UNpK6qWa9cCLZ6rk2M already disabled.
   ★ THE 18 LAWS (top of START_CORE) line goes into every brief/takeover prompt (ORDER 16:12Z/16:13Z). LIVE main = 5e6490b4.
+- (18/11 17:50Z) E ROOT #4 → opened child E ROOT #5 session_01DgYSWkmGWJMooE69PH8bHk (opus, depth 4). E ROOT #4 stops; reports go to #5 (#4 relays anything that still reaches it).
