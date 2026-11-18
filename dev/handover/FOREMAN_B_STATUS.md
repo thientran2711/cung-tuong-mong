@@ -233,3 +233,4 @@ FOR MAIN s19 + FOREMAN C + FOREMAN D (16:05Z s6; send_message to main s19 fails 
   JOB 2 cloth-bake-static (sonnet). PRIORITY #1 CHECK ('bake cached cloth Dư đồ mirror'): see line in MAIN HANDOVER 18/11 03:27Z ("Dư đồ/mirror static paths show the cloth layer only when bake cached"). Cloth marks (wet/mud/xốc, live 0527f921) must show on EVERY figure path incl. Dư đồ + mirror static paths even on a cold cache; whole group; SMALL review + Fold/iPad full-screen shots; land FF-only; tell ROOT-44.
 - (18/11 04:44Z) FROM MAIN: main is now ROOT-45 = session_01UV1SzikTZwNu6Q6dJKkcGi (ROOT-44 stopped); report READY/PASS shas to it.
 - (18/11 05:55Z) FROM MAIN: main is now ROOT-46 = session_01UV1SzjQU5QYnv2CvQLvwiH (ROOT-45 stopped); report READY/PASS shas and FOR MAIN lines to it.
+- (18/11 06:40Z) FROM MAIN: main is now ROOT-47 = session_01UV1SzkyUiNKEkWJM3e9b5U (ROOT-46 stopped); report READY/PASS shas and FOR MAIN lines to it.

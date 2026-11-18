@@ -487,3 +487,7 @@ RUNNING MAIN WORKERS / REVIEWERS (all report to main; tell them the new id):
 - C-AG #10 SzjAd8BYMMz2rKFZitp: ag-all-2-land + npc-chain-land PASS ~07:30Z → main lands FF.
 FOREMEN: B (life-preload-fu, cloth-bake-static landed 9bbd78b) | C (art: B7 consort a18, W32 emperors, E icons, act art 6 + placeholder, c16 smear, c01 cut-out) | D (toil-react-top ORDER 05:55Z, staff-cap-row3 FAIL 1 fixing, title-stale-sel) | E (E4f, E7a/b/c). Owner has ROOT paste blocks B/C/D (TAKEOVER_FOREMAN_{B,C,D}_ROOT.md; C generic new file).
 - ROOT-46 FINAL (18/11 06:30Z): successor MAIN ROOT-47 = session_01UV1SzkyUiNKEkWJM3e9b5U (depth 3). ROOT-46 stops (relays owner words + worker reports only). ROOT-46 wake trig_01U8sQRxMroSJNk4y3MCkQyk stays until ROOT-47 deletes it.
+
+## ROOT-47 (main; child of ROOT-46 session_01UV1SzjQU5QYnv2CvQLvwiH)
+- (18/11 06:40Z) MAIN = ROOT-47 session_01UV1SzkyUiNKEkWJM3e9b5U; START_CTX ≈ 6 % (estimate; context_usage reads 0) → rollover at 31 %, ceiling 60 %; depth 3. Brief template briefs/root47-common.md. LIVE main 4cb3a9e.
+- (18/11 06:40Z) LOAD: main running 14 (owner bugs/UI/looks only — ROOT-46 → ROOT-47 list) | B 2 (life-preload-fu…) | C art (B8 samples c01–c03, M1 emperors, c01 cut-out ORDER) | D PASS odds-cap-r1 591cedf + title-stale-sel 4842ab4 need final merge on 4cb3a9e by D's reviewer (built files only) | E 7/12 | C-AG #10 | moved: none.

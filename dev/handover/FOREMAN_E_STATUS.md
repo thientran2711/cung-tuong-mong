@@ -65,3 +65,4 @@ FOR MAIN (open): READY to FF main: review/hall-names 282865b7e5127821b64931f327f
 - (18/11 06:26Z) E7ar FAIL 98cb395 q1a (4 fixes: hh to queen asker/player; {me}/{call} via jvoice kAddr per VANPHONG §2; skip {B} asks when no rival; dead dup-key check) → archived. FIX 1 ordered to E7a (tells E7b/E7c2 of shape changes). Sibling notes in that review are on OLD q1b/q1c shas (already fixed in 255f5b2a/c6015bd). Load 8/12 (E1b, E4f, E7a, E7b, E7c2-idle, E7cr, E8).
 - (18/11 06:26Z) E7cr: FAIL b99f4bc questline-q1c — 6 fixes in dev/handover/reports/questline-q1c-review.md
 - (18/11 06:27Z) E7cr FAIL b99f4bc q1c (= c6015bd content; 6 text fixes, reports/questline-q1c-review.md) → archived. FIX 1 ordered to E7c2 (+ nrVoiceM VANPHONG check; rebase on E7a's fixed q1a). Load 7/12 (E1b, E4f, E7a, E7b, E7c2, E8).
+- (18/11 06:40Z) FROM MAIN: main is now ROOT-47 = session_01UV1SzkyUiNKEkWJM3e9b5U (ROOT-46 stopped); report READY/PASS shas and FOR MAIN lines to it.
