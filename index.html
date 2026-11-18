@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"231cd3b3+","t":"2026-11-18T03:27Z","c":"review display-set-bonus: VANPHONG rows (Đa Bảo Các + set wording); cap line drops 'điểm'; j8 'Điểm trang lộng lẫy' night quality reads wor…","b":"0f3ac34be48b","h":[{"s":"bd8547f2+","t":"2026-11-18T03:28Z","c":"men-forbidden r6: old saves drop officials / festival princes standing in the hậu cung on load (menLoadFix, same ONE rule)"},{"s":"c743265c+","t":"2026-11-18T03:18Z","c":"review life-preload r6: title prefetch chained on undefined (lWant returns its promise); gate cap really 25 s (no re-run after cap / Vào cu…"},{"s":"2aca2aac+","t":"2026-11-18T03:17Z","c":"review cloth-tea-r6: kclo-on hides the picture by clip-path, not visibility (visibility:hidden made kfxGeom hide the cloth layer too: her f…"},{"s":"2b1b0701","t":"2026-11-18T03:00Z","c":"review staff-cap-apply r6: site rebuilt on db24027f"},{"s":"64488e4f+","t":"2026-11-18T02:38Z","c":"cloth-xoc r6e: rebuild site"},{"s":"af71f94a+","t":"2026-11-18T02:17Z","c":"smudge r16: stage4 + avatar probe tests, options script score fix (look tier by score), FINAL mode"},{"s":"e1f60927+","t":"2026-11-18T02:25Z","c":"result-reason: every result card line says a short why (kitWhy, KIT 7); values left-aligned next to labels"},{"s":"29385ec6+","t":"2026-11-18T02:07Z","c":"greet-stranger: site rebuilt"},{"s":"3b69182e","t":"2026-11-18T01:50Z","c":"hoa-dien r3 onto main 3da5720a (makeup-lux live): hoa-dien (jhd.js + hooks) replayed on the new main, replacing the old stacked branch. Sha…"},{"s":"631a703e","t":"2026-11-18T01:37Z","c":"review staff-cap-fix r6: hire pick refused at the cap gives the silver back (+ staff-cap.js case); site rebuilt"}]};
+window.CTM_BI={"s":"a95e8d41+","t":"2026-11-18T04:59Z","c":"review display-set-bonus: merge origin/main 94a9375 (generated files from main, site rebuilt)","b":"458ebc6b2c4f","h":[{"s":"231cd3b3+","t":"2026-11-18T03:27Z","c":"review display-set-bonus: VANPHONG rows (Đa Bảo Các + set wording); cap line drops 'điểm'; j8 'Điểm trang lộng lẫy' night quality reads wor…"},{"s":"bd8547f2+","t":"2026-11-18T03:28Z","c":"men-forbidden r6: old saves drop officials / festival princes standing in the hậu cung on load (menLoadFix, same ONE rule)"},{"s":"c743265c+","t":"2026-11-18T03:18Z","c":"review life-preload r6: title prefetch chained on undefined (lWant returns its promise); gate cap really 25 s (no re-run after cap / Vào cu…"},{"s":"2aca2aac+","t":"2026-11-18T03:17Z","c":"review cloth-tea-r6: kclo-on hides the picture by clip-path, not visibility (visibility:hidden made kfxGeom hide the cloth layer too: her f…"},{"s":"2b1b0701","t":"2026-11-18T03:00Z","c":"review staff-cap-apply r6: site rebuilt on db24027f"},{"s":"64488e4f+","t":"2026-11-18T02:38Z","c":"cloth-xoc r6e: rebuild site"},{"s":"af71f94a+","t":"2026-11-18T02:17Z","c":"smudge r16: stage4 + avatar probe tests, options script score fix (look tier by score), FINAL mode"},{"s":"e1f60927+","t":"2026-11-18T02:25Z","c":"result-reason: every result card line says a short why (kitWhy, KIT 7); values left-aligned next to labels"},{"s":"29385ec6+","t":"2026-11-18T02:07Z","c":"greet-stranger: site rebuilt"},{"s":"3b69182e","t":"2026-11-18T01:50Z","c":"hoa-dien r3 onto main 3da5720a (makeup-lux live): hoa-dien (jhd.js + hooks) replayed on the new main, replacing the old stacked branch. Sha…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -29553,9 +29553,9 @@ function lyEntry(info){const y=lyAlive();return y?{kind:"fallen",lid:"c:ly",name
 function lcPeople(info){const n=(BAL.mort&&BAL.mort.ly&&BAL.mort.ly.lcShow)||3;const L=rivals.filter(v=>v.alive&&v.out).slice(0,n).map(v=>({kind:"fallen",ref:v,name:v.name,ini:v.name.split(" ").pop()[0],col:"#6a7a8a",info}));
  const q=lyEntry("Phế phi");if(q)L.push(q);return L}
 (function(){const w0=figWho;figWho=function(p){try{if(p&&p.kind==="fallen"&&!p.ref){const o=lyFallen();if(lyArt()&&o.fid&&!/^fallen:/.test(o.fid)){delete o.fid}return o}const n=npcFixOf(p);if(n)return n}catch(e){}return w0.apply(this,arguments)};
- const r0=figRoles;figRoles=function(who){if(who&&who.lyF)return lyArt()?["fallen"]:["consort"];if(who&&who.npcFix)return[NPCFIX[who.npcFix].role];return r0.apply(this,arguments)};
- const t0=figTierOf;figTierOf=function(who){if(who&&who.lyF)return -1;return t0.apply(this,arguments)};
- if(typeof f88Wear==="function"){const e0=f88Wear;f88Wear=function(who){if(who&&(who.lyF||who.npcFix))return true;return e0.apply(this,arguments)}}
+ const r0=figRoles;figRoles=function(who){if(who&&who.lyF===1)return lyArt()?["fallen"]:["consort"];if(who&&who.npcFix)return[NPCFIX[who.npcFix].role];return r0.apply(this,arguments)};
+ const t0=figTierOf;figTierOf=function(who){if(who&&who.lyF===1)return -1;return t0.apply(this,arguments)};
+ if(typeof f88Wear==="function"){const e0=f88Wear;f88Wear=function(who){if(who&&(who.lyF===1||who.npcFix))return true;return e0.apply(this,arguments)}}
  if(typeof pFaceOf==="function"){const f0=pFaceOf;pFaceOf=function(p){const r=f0.apply(this,arguments);try{if(p&&((p.kind==="fallen"&&!p.ref)||npcFixOf(p))){const src=figFor(p,"por");if(src)return Object.assign({},r,{src,hue:0})}}catch(e){}return r}}})();
 /* ================= j89 TRANH SỰ KIỆN (data only: no CSS, no HTML, no UI) =================
    img/EVENTS.json = {default, categories:{cat:{title,files:[...]}}, events:{eventId:cat}}; art = img/ev-<cat>[-n].webp, 3:4, no faces.
@@ -31086,7 +31086,7 @@ function grpOf(p,K){return p===S?"me":p===S.emp?"emp":K.has(p)?"kid":"adult"}
 function nm(p){return p===S.emp?"Hoàng thượng":p===S.thO?"Thái hậu":p.name||"người hầu"}
 /* give p a lifespan once */
 function assign(p,K,oldSave){if(!p||typeof p!=="object"||p.tho>0||p.nb)return;const a=ageOf(p);if(!(a>=0))return;const g=grpOf(p,K);
- let fl=g==="me"?M.life.floorMe:g==="emp"?M.life.floorEmp:p.lyF&&M.ly?M.ly.floor:0;if(oldSave&&(g==="me"||g==="emp"))fl=Math.max(fl,M.oldFloor);
+ let fl=g==="me"?M.life.floorMe:g==="emp"?M.life.floorEmp:p.lyF===1&&M.ly?M.ly.floor:0;if(oldSave&&(g==="me"||g==="emp"))fl=Math.max(fl,M.oldFloor);
  p.tho=mortRoll(g,a,fl);p.thoM=1+R(12);if((p.tho-a)*12+(p.thoM-(S.month||1))<M.life.minMo)p.tho=a+1;p.thoO=Math.random()*100<M.sudden?0:M.omen[0]+R(M.omen[1]-M.omen[0]+1);
  if(p===S&&M.life.show){const w=p.tho<BAL.cut.tho[0]?"yểu mệnh":p.tho<BAL.cut.tho[1]?"trung thọ":p.tho<BAL.cut.tho[2]?"thượng thọ":"hạc thọ";
   log(`Thầy tướng xem tay ngươi, phán: số ${w}${M.life.show>=2?`, thọ chừng ${p.tho} tuổi`:""}.`)}}
@@ -31101,14 +31101,14 @@ const left=p=>(p.tho-ageOf(p))*12+(p.thoM-S.month);
 const OFFICIAL={tq:"Tổng quản thái giám",ksp:"Thái giám Kính sự phòng",ped:"Thái giám Nội vụ phủ",ty:"Thái y"},HEIRN=["Vương","Trần","Phùng","Tô","Cao","Lưu","Hà","Đỗ"];
 /* a person reaches the end of the lifespan (or an accident): remove them the way the game already does for that kind of person */
 /* death ledger for audits / bots: S.mort.dl = [{g group, a age, c cause, y year}] (last 300) */
-function note(p,why,K){try{const g=p===S?"me":p===S.emp?"emp":p===S.thO?"th":p.lyF?"ly":K.has(p)?"kid":rivals.includes(p)?"consort":p===S.maid?"maid":(S.men||[]).includes(p)?"men":Object.values(S.court||{}).includes(p)?"court":"staff";
+function note(p,why,K){try{const g=p===S?"me":p===S.emp?"emp":p===S.thO?"th":p.lyF===1?"ly":K.has(p)?"kid":rivals.includes(p)?"consort":p===S.maid?"maid":(S.men||[]).includes(p)?"men":Object.values(S.court||{}).includes(p)?"court":"staff";
  const c=!why?"lifespan":/Thích khách|độc/.test(why)?"plot":/ngã|nghẹn|ngất|trượt|cảm hàn sau|trúng phong|chè hạt sen/.test(why)&&p.tho-ageOf(p)>0?"accident":"lifespan";
  (S.mort.dl=S.mort.dl||[]).push({g,a:ageOf(p),c,y:S.year});if(S.mort.dl.length>300)S.mort.dl.shift()}catch(e){}}
 function kill(p,why,K){let ev="";note(p,why,K);
  if(p===S){S.mort.cause=why;die(why);return ""}
  /* D4 (owner OD:L641–643): every NPC can die; the dead person's portrait, figure and name are retired (npcRetire, jnpcd) so a replacement is a NEW person */
  if(p!==S.emp&&p!==S.thO&&!K.has(p)&&typeof npcRetire==="function")npcRetire(p);
- if(p.lyF)return typeof lyDie==="function"?lyDie(p,why):(p.dead=1,"");
+ if(p.lyF===1)return typeof lyDie==="function"?lyDie(p,why):(p.dead=1,"");
  if(p===S.emp){S.mort.empDue=why||(p.thoO?"Ngài lâm trọng bệnh đã lâu, thuốc thang vô hiệu":"Ngài trúng phong đột ngột giữa đêm");return ""}
  if(p===S.thO){if(!S.thDead){S.thDead=true;S.th=0;S.thIll=null;ev+=`<b>Thái hậu băng hà, thọ ${S.thAge} tuổi.</b> ${why?why+". ":""}`}return ev}
  if(K.has(p)){const mine=(S.kids||[]).includes(p);return kidDie(p,why||p.nbWhy||(p.nb?"yểu mệnh khi chưa đầy tháng":p.age<BAL.mortx.youngAge?pick(["mất vì đậu mùa","mất vì sốt cao","nhiễm dịch mà mất"]):"lâm bệnh mà mất"),mine)}
@@ -68049,7 +68049,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="0f3ac34be48b";window.CTM_BUILD=BUILD;
+const BUILD="458ebc6b2c4f";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
