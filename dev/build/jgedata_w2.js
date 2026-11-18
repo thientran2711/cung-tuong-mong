@@ -36,12 +36,12 @@ Object.assign(GE_DATA,{
   {pull:["Tự thức canh, mời thái y khác","Xin cho con học ở Thượng thư phòng cùng Thái tử","Xin được trông nom","Đưa con đến hầu Thái hậu mỗi ngày","Mời thầy giỏi kèm riêng","Lão Hàn lâm nghiêm khắc","Tự thức canh, mời thái y khác","Đưa con đứng gần Hoàng thượng","@st_dong=win","@ke14=win","Xin {eun} giữ lão lại","Gửi {v} thuốc bổ","Xin Hoàng hậu xét lại bổng lộc",
     /* ác side (ha: cướp con của chủ) */"Lật lại chuyện con nàng","Gặp {v} cảnh cáo","Đứng xem"],
    close:["Lùi lại, nhường bậc","Lặng lẽ để ngài tự chọn","Xin Hoàng hậu tự phán"],
-   cond:[["seat","TM"],["s","sung"],["s","tamco"]],fo:[["seatT","TM"]],
-   cw:"cần Sủng cao, Tâm cơ sâu và ngôi mẹ vua sau này còn trống",
-   t:"Đứa trẻ ngươi bế từ cung chủ cũ năm ấy nay lên ngôi. Ngày đăng cơ, nó quỳ lạy hai người: ngươi, và bài vị của người đã sinh ra nó. Ngươi dặn nó mỗi năm đến thắp hương cho mẹ ruột, và nó chưa từng quên.",
-   a:"Đứa trẻ ngươi đem về từ cung chủ cũ nay ngồi trên ngai vàng. Nó chỉ biết một người mẹ là ngươi; tên người sinh ra nó bị xóa khỏi ngọc điệp, và ai trong cung còn nhắc đều bị đưa đi xa.",
-   ht:"nuôi con của chủ cũ thành vua, dạy vua nhớ mẹ ruột",ha:"giành con của chủ cũ, nuôi thành vua mà xóa tên người sinh",
-   fail:"Con trả về chủ",ft:"Tông nhân phủ trả đứa trẻ về cung chủ cũ. Nó khóc đòi ngươi suốt ba đêm, rồi thôi."}]},
+   cond:[["son"],["seat","TM"],["s","sung"],["s","tamco"]],fo:[["seatT","TM"]],
+   cw:"cần một hoàng tử ngươi nuôi, Sủng cao, Tâm cơ sâu và ngôi mẹ vua sau này còn trống",
+   t:"Hoàng tử ngươi nuôi lớn nay lên ngôi. Ngày đăng cơ, nó quỳ lạy hai người: ngươi, và bài vị của người đã sinh ra nó. Ngươi dặn nó mỗi năm đến thắp hương cho mẹ ruột, và nó chưa từng quên.",
+   a:"Hoàng tử ngươi nuôi lớn nay ngồi trên ngai vàng. Nó chỉ biết một người mẹ là ngươi; tên người sinh ra nó bị xóa khỏi ngọc điệp, và ai trong cung còn nhắc đều bị đưa đi xa.",
+   ht:"nuôi hoàng tử thành vua, dạy vua nhớ ơn mẹ ruột",ha:"nuôi hoàng tử thành vua mà xóa tên người đã sinh ra nó",
+   fail:"Con trả về chủ",ft:"Tông nhân phủ trả hoàng tử về cung người đã sinh ra nó. Nó khóc đòi ngươi suốt ba đêm, rồi thôi."}]},
  /* ---------- cn_tinh · Mối tình thuở hầu trà ---------- */
  cn_tinh:{lean:{
    p:["Âm thầm cứu hắn","Gặp hắn một lần, nói rõ","Gửi bạc nuôi mẹ hắn","Gửi áo rét theo đoàn","Gửi bạc lo chỗ ở cho bà","Nhờ {eun} cho bà gặp con","Gửi hắn chiếc khăn cũ","Không dùng điều ấy","Gửi áo ấm vào chỗ giam","Bỏ bạc xin đừng dụng hình","Lo cho mẹ hắn trước","“Cứ nói thật.”","Xin Hoàng thượng tha cho hắn trước","Thưa thật mọi điều, xin tha cho hắn","Bảo nàng cứ nói thật","Nhận thật: chuyện trước khi được sủng hạnh","Để {maid} đưa một gói thuốc"],
@@ -202,10 +202,10 @@ Object.assign(GE_DATA,{
    close:["Lạnh lùng với sứ thần","Từ chối gặp","Không. Thiếp là người Đại Hy"],
    cond:[["s","tai"],["s","duc"]],fo:[],
    cw:"cần Tài đủ khiến người phương xa nhớ mãi và Đức đủ để người ấy tin",
-   t:"Người sứ trẻ ở Hội Đồng quán năm nào nay về làm quan coi trạm dịch nơi biên giới. Hoàng thượng thương ngươi một đời xa xứ, chuẩn cho ngươi theo đoàn sứ về nam rồi ở lại. Trạm dịch nhỏ ấy có thêm một bà chủ biết nói hai thứ tiếng và hát những bài của cả hai nước.",
-   a:"Ngươi dùng chàng sứ trẻ ở Hội Đồng quán như dùng một tấm lộ dẫn. Chàng mở đường cho ngươi ra khỏi kinh thành, tin rằng ngươi theo chàng vì tình. Đến trạm dịch biên giới, ngươi đã có người khác chờ, và chàng chỉ còn lại một chiếc khăn thơm.",
-   ht:"theo người sứ năm xưa về trạm dịch biên giới, sống giữa hai nước",ha:"lấy tình của chàng sứ trẻ làm tấm lộ dẫn ra khỏi kinh thành",
-   fail:"Quán dịch vắng người",ft:"Đoàn sứ đi mà không có ngươi. Người ở Hội Đồng quán bị gọi về nước, và Hoàng thượng hỏi ngươi vì sao lại khóc."}]},
+   t:"Người ấy ở bên ngươi suốt những năm mật lệnh mà chưa từng hỏi một câu. Hoàng thượng thương ngươi một đời xa xứ, chuẩn cho hai người theo đoàn sứ ra biên giới rồi ở lại. Trạm dịch nhỏ nơi ấy có thêm một bà chủ biết nói hai thứ tiếng và hát những bài của cả hai nước.",
+   a:"Ngươi dùng người ấy như dùng một tấm lộ dẫn. Người ấy mở đường cho ngươi ra khỏi kinh thành, tin rằng ngươi đi vì tình. Đến trạm dịch biên giới, ngươi đã có đường riêng, và người ấy chỉ còn lại một chiếc khăn thơm.",
+   ht:"theo người mình gắn bó về trạm dịch biên giới, sống giữa hai nước",ha:"lấy tình của người mình gắn bó làm tấm lộ dẫn ra khỏi kinh thành",
+   fail:"Quán dịch vắng người",ft:"Đoàn sứ đi mà không có ngươi. Người ấy ở lại ngoài cổng thành một đêm rồi đi, và Hoàng thượng hỏi ngươi vì sao lại khóc."}]},
  /* ---------- nc_su · Sứ đoàn cố quốc ---------- */
  nc_su:{lean:{
    p:["Âm thầm thay bằng ngọc của ngươi","Nói giúp với Hoàng thượng","Khuyên huynh đổi cống lấy mở chợ biên","Bồi thường riêng cho êm","Đề nghị minh ước hữu hảo mười năm","Gửi lễ vật bù cho sứ đoàn","Mời {v} dự yến đón sứ","Đề nghị lễ ba quỳ ba cúi","Tự tay thêu lại","Gửi trả thỏi bạc cho {v}","Sai người đến xem {pa} có bị thương","Quỳ xin cho huynh, nhận một nửa tội thay","Nhắn {pa} giữ sức","Gửi trà và một lời khuyên nhường cho cả hai bên","Xin Hoàng thượng sửa: mỗi bên thu một nửa","Chia cho nhà {v} một phần chợ muối","Xin Hoàng thượng cho thái y theo sứ đoàn","Cắt một lọn tóc gửi mẹ","Gửi lễ hòa giải","Xin ngài viết: nàng là cầu của hai nước","Sai thái giám thân tín đến chỗ cấm quân giữ người","Sai người đổi rượu thành nước trà"],
@@ -284,10 +284,10 @@ Object.assign(GE_DATA,{
    close:["Thưa: thiếp là người của Đại Hy","Xin một phong hiệu cho mình","Khuyên Hoàng thượng buộc phe thua quy thuận"],
    cond:[["s","tamco"]],fo:[],
    cw:"cần đủ khôn ngoan để lọt qua mọi trạm ải",
-   t:"Người hoàng tử cố quốc mất ngôi sống lưu vong ở một thành nhỏ ven biển. Ngươi rời cung theo người ấy, mang theo mẹ già và mấy rương sách. Hai người không còn ngai, không còn cờ; chỉ còn một khu vườn nhìn ra biển, và một đời yên.",
-   a:"Ngươi rời cung theo người hoàng tử mất ngôi, mang theo danh sách những kẻ đã phản người ấy. Ở thành nhỏ ven biển, hai người mở một quán trọ cho thương nhân phương nam, và mỗi năm lại có một cái tên trong danh sách bị gạch đi.",
-   ht:"rời cung theo người hoàng tử mất ngôi, sống một đời yên bên biển",ha:"theo người hoàng tử mất ngôi đi lưu vong, mỗi năm gạch đi một kẻ phản",
-   fail:"Người đi ta ở",ft:"Người ấy rời kinh trong đêm, không kịp chờ ngươi. Sáng ra cửa ải đã đóng, và ngươi chỉ còn một bức thư không đề tên."}]},
+   t:"Hoàng huynh mất ngôi, sống lưu vong ở một thành nhỏ ven biển. Ngươi rời cung theo huynh, mang theo mẹ già và mấy rương sách. Hai người không còn ngai, không còn cờ; chỉ còn một khu vườn nhìn ra biển, và một đời yên.",
+   a:"Ngươi rời cung theo hoàng huynh mất ngôi, mang theo danh sách những kẻ đã phản huynh. Ở thành nhỏ ven biển, hai người mở một quán trọ cho thương nhân phương nam, và mỗi năm lại có một cái tên trong danh sách bị gạch đi.",
+   ht:"rời cung theo hoàng huynh mất ngôi, sống một đời yên bên biển",ha:"theo hoàng huynh mất ngôi đi lưu vong, mỗi năm gạch đi một kẻ phản",
+   fail:"Người đi ta ở",ft:"Hoàng huynh rời kinh trong đêm, không kịp chờ ngươi. Sáng ra cửa ải đã đóng, và ngươi chỉ còn một bức thư không đề tên."}]},
  /* ---------- td_an · Lật lại án cũ ---------- */
  td_an:{lean:{
    p:["Giấu ông ở Tân Giả khố","Đưa ông ra khỏi kinh","Cho người cứu hồ sơ","Chỉ xin truy phong cho cha, không đòi trị tội ai","Trả nợ cho hắn","Đáp: tìm để thắp hương cho cha","Thuê nhà cho lão ở gần cung","Gửi lão vào chùa Hộ Quốc","Cho người đón lão","Đổi chỗ ở cho lão","Đưa lão chạy","Thừa nhận lão quản gia là người nhà cũ","Từ chối thẳng","Tâu: tiên đế bị lừa, không phải sai","Đáp: tội ai người nấy chịu","Hứa không đòi máu đàn bà trẻ nhỏ","Gửi than và áo ấm đến","Lập danh sách xin tha","Gửi bạc ra biên lo trước","Viết: tiên đế bị kẻ gian lừa","Chỉ xin rửa oan","Nhờ Ngự sử xin đối chiếu sổ xuất ấn Binh bộ","Cho người báo Ngự sử đài","Viết: án sai thì sửa","Viết: chỉ xin Tam ty xét lại"],
@@ -447,9 +447,9 @@ Object.assign(GE_DATA,{
     /* ác side (ha: lấy tình làm dao) */"Giả nhận để dò","Lặng lẽ ghi nhớ","Đổi lời bà lấy lời hứa xin Hoàng thượng khoan cho bà"],
    close:["Tố cả cha lẫn con","Đóng cửa không tiếp","Trách nàng không ngăn được cha"],
    cond:[["s","danh"],["s","duc"]],fo:[],
-   cw:"cần Đức đủ để nhà kia mở cửa và tiếng ngươi đủ sạch cho người ấy dám theo",
-   t:"Người con trai nhà kẻ thù, kẻ từng quỳ cùng mẹ trước cửa cung ngươi, nay xin Hoàng thượng cho đón ngươi đi. Ngài thở dài mà chuẩn. Mối oán giữa hai nhà khép lại bằng một mái nhà nhỏ ngoài kinh, nơi bài vị hai họ đặt cạnh nhau.",
-   a:"Người con trai nhà kẻ thù yêu ngươi thật lòng, và ngươi để hắn yêu. Hắn đưa ngươi ra khỏi cung, đưa ngươi về phủ, giao cho ngươi chìa khóa mọi rương sổ của cha hắn. Một năm sau, phủ ấy không còn gì để giữ nữa.",
-   ht:"theo người con trai nhà kẻ thù, để bài vị hai họ đặt cạnh nhau",ha:"lấy tình của người con trai nhà kẻ thù làm con dao cuối cùng",
-   fail:"Oán ngăn đôi bờ",ft:"Nhà kia đóng cửa, người ấy không đến. Chuyện phi tần dan díu với con nhà tội thần thành lời đồn khắp cung."}]}
+   cw:"cần Đức đủ để nhà kia mở cửa và tiếng ngươi đủ sạch cho nàng dám theo",
+   t:"Con gái kẻ thù, người từng quỳ cùng mẹ trước cửa cung ngươi, nay là người ngươi tin nhất. Hai người cùng xin rời cung; Hoàng thượng thở dài mà chuẩn. Mối oán giữa hai nhà khép lại bằng một mái nhà nhỏ ngoài kinh, nơi bài vị hai họ đặt cạnh nhau.",
+   a:"Con gái kẻ thù thương ngươi thật lòng, và ngươi để nàng thương. Nàng cùng ngươi ra khỏi cung, đưa ngươi về phủ, giao cho ngươi chìa khóa mọi rương sổ của cha nàng. Một năm sau, phủ ấy không còn gì để giữ nữa.",
+   ht:"cùng con gái kẻ thù rời cung, để bài vị hai họ đặt cạnh nhau",ha:"lấy tình của con gái kẻ thù làm con dao cuối cùng",
+   fail:"Oán ngăn đôi bờ",ft:"Nhà kia đóng cửa, nàng không đến. Chuyện con gái tội thần kết thân với con gái kẻ thù thành lời đồn khắp cung."}]}
 });
