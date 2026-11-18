@@ -43,7 +43,9 @@ Object.assign(BAL,{looks:{
  /* KEEP-OUT (owner 18/11 standing rule: a face mark NEVER covers the eyes or the lips): ellipses [cx,cy,rx,ry] in VEIL-ROW units (u = x/rowW, v = y/rowH from the row's left/top),
     measured on 158 por pictures (Haar eyes + lip colour, dev/test/look-fx-keepout.py) and constant for every por-/fig- row because every row is cut from the face rect by the same ratios.
     Face-square marks are masked by it (lkKeepCss), the scratch rows (scar-fit) are generated so the box stays inside the cheek zone: cheek = [left,top,w,h,rot offset] of the veil row: the OLD diagonal across the cheek below the eye (owner 18/11: never vertical), ~1.4x the R3 length, as long as the keep-out allows. pad = ONE margin: every ellipse is grown by it (mask, scratch test). */
- keep:{eye:[[.31,.08,.15,.17],[.72,.08,.15,.17]],mouth:[.47,.655,.27,.11],nose:[.51,.36,.11,.2],pad:1.45,cheek:[.08,.30,.28,.20,5]},
+ keep:{eye:[[.31,.08,.15,.17],[.72,.08,.15,.17]],mouth:[.47,.655,.27,.11],nose:[.51,.36,.11,.2],pad:1.45,cheek:[.08,.30,.28,.20,5],
+ /* FACE CLIP (owner 18/11 ~04:58Z: no mark past the face skin onto hair / ear / neck / background): ONE polygon in face-square units (0..1 of the square of lkSquareRect), measured on 180 por pictures (skin segmentation, dev/test/look-fx-faceclip.py); every mark layer (face-square marks, cào, smudge) is clipped to it by lkFaceClipAll */
+ face:[[.23,.19],[.5,.14],[.77,.19],[.88,.34],[.90,.52],[.84,.70],[.72,.87],[.5,.96],[.28,.87],[.16,.70],[.10,.52],[.12,.34]]},
  pox:{thuydau:{sea:["Xuân"],cont:1,die:0},sac:{thuydau:[0,3,5,8],daumua:[0,6,10,14]},spread:35,spreadWk:3,scar:[0,1,1,2]},
  /* SMUDGE = a CODE effect on her makeup colours (owner 17/11 ~23:30Z), per level 0..3 = không / nhẹ / vừa / nặng. Lengths in u = the distance between the two eyes
     (so portrait, figure, mirror all match); a = strength of that colour. blush/lid run DOWN the cheek (vertical, gravity), tear = grey lash-run lines, lip = colour
@@ -304,6 +306,18 @@ function lkKeepCss(){try{const K=BAL.looks.keep,E=[...K.eye,K.mouth,K.nose],gr="
  const a=im.join(","),b=sz.join(","),c=ps.join(","),x=im.map((_,i)=>i?"exclude":"add").join(",").replace("add","add"),xw=im.map((_,i)=>i?"source-over":"xor").join(",");
  return `;-webkit-mask-image:${a}!important;mask-image:${a}!important;-webkit-mask-size:${b}!important;mask-size:${b}!important;-webkit-mask-position:${c}!important;mask-position:${c}!important;-webkit-mask-repeat:no-repeat!important;mask-repeat:no-repeat!important;-webkit-mask-composite:${xw}!important;mask-composite:${im.map((_,i)=>i?"add":"exclude").join(",")}!important`}catch(e){return""}}
 window.lkKeepCss=lkKeepCss;
+/* FACE CLIP: every mark layer (img.kpox / img.klk / img.kscar, incl. the code-drawn smudge) gets clip-path = the BAL.looks.face polygon mapped from the face-square into THAT layer's own box (position, rotation, flip, origin from its --f vars).
+   Done once, in the last kitFxLayers wrap below, so stage, portrait, mirror and every avatar frame clip alike. A = picture width / height (por 384x506; stage figures ~384x900): only the small row rotation depends on it. */
+function lkClipFor(file,sty){try{const sq=lkSquareRect(file);if(!sq)return"";const g=k=>{const m=new RegExp("--f"+k+":\\s*(-?[\\d.]+)%").exec(sty);return m?+m[1]:null},L=g("left"),T=g("top"),W=g("width"),H=g("height");if(L==null||T==null||W==null||H==null)return"";
+ const tf=/--ftf:\s*([^;]*)/.exec(sty),rot=tf&&/rotate\((-?[\d.]+)deg\)/.exec(tf[1]),fl=!!(tf&&/scaleX\(-1\)/.test(tf[1])),to=/--fto:\s*([\d.]+)%\s+([\d.]+)%/.exec(sty);
+ const A=/^por-/.test(String(file).split("/").pop())?.759:.43,D=Math.PI/180;
+ const e={l:L,t:T,w:W,h:H,r:(rot?+rot[1]:0)*D,ox:to?+to[1]/100:.5,oy:to?+to[2]/100:.5,f:fl},q={l:sq[0],t:sq[1],w:sq[2],h:sq[3],r:sq[4]*D,ox:.5,oy:KIT_RASH.RB,f:false};
+ const toPic=(b,s,t)=>{if(b.f)s=2*b.ox-s;const dx=(s-b.ox)*b.w*A,dy=(t-b.oy)*b.h,c=Math.cos(b.r),n=Math.sin(b.r);return[(b.l+b.ox*b.w)*A+dx*c-dy*n,b.t+b.oy*b.h+dx*n+dy*c]};
+ const toLoc=(b,X,Y)=>{X-=(b.l+b.ox*b.w)*A;Y-=b.t+b.oy*b.h;const c=Math.cos(b.r),n=Math.sin(b.r),dx=X*c+Y*n,dy=-X*n+Y*c;let s=dx/(b.w*A)+b.ox;if(b.f)s=2*b.ox-s;return[s,dy/b.h+b.oy]};
+ const pts=BAL.looks.face.map(([s,t])=>{const P=toPic(q,s,t),Q=toLoc(e,P[0],P[1]);return(Q[0]*100).toFixed(1)+"% "+(Q[1]*100).toFixed(1)+"%"}).join(",");
+ return `;clip-path:polygon(${pts});-webkit-clip-path:polygon(${pts})`}catch(err){return""}}
+function lkFaceClipAll(h,file){if(!h||!file)return h;return h.replace(/<img class="((?:kpox|klk|kscar)[ "][^>]*?)style="([^"]*)"/g,(m,a,sty)=>m.slice(0,m.length-sty.length-1)+sty+lkClipFor(file,sty)+'"')}
+window.lkFaceClipAll=lkFaceClipAll;window.lkClipFor=lkClipFor;
 function lkFaceImg(cls,f,st,file){if(!st)return"";if(/^fx-muc-\d\.png$/.test(f)&&lkMirror(file))f=f.replace(".png","-m.png");const m=/^fx-(muc|muoi)-/.exec(f);
  return lkArt(f)?`<img class="${cls}" src="img/${f}" alt="" aria-hidden="true" style="${kitFxVars(st)}${m?kitToneCss(m[1],null):""}${lkKeepCss()}" onerror="this.remove()">`:""}
 /* the same face-square as KIT_RASH.style as a [l,t,w,h,deg] rect */
@@ -321,8 +335,8 @@ KIT_FACEFX.add({id:"lkhair",z:27,ready:true,state:p=>{const L=lkItems(p,LK_HAIR)
 KIT_FACEFX.add({id:"lkcloth",z:80,ready:true,state:p=>{const L=lkItems(p,LK_CLOTH);return L.length?{L}:null},seen:p=>fxSeen(p),sac:(p,z)=>lkSac(z.L),chip:(p,z)=>[lkChips(z.L),"hot"],html:()=>""});
 for(const k in LK_ACT)KIT_FACEFX.deny[k]={emp:1,thaihau:1};
 /* ---------- LAYER LAW: one last wrap — every makeup tag under every mark ---------- */
-(function(){if(typeof kitFxLayers!=="function")return;const f0=kitFxLayers;kitFxLayers=function(p,file){const h=f0.apply(this,arguments);
- if(!h||h.indexOf("kmkl")<0)return h;const M=[];const rest=h.replace(/<img class="kmkl[^>]*>/g,m=>{M.push(m);return""});return M.join("")+rest}})();
+(function(){if(typeof kitFxLayers!=="function")return;const f0=kitFxLayers;kitFxLayers=function(p,file){let h=f0.apply(this,arguments);
+ if(!h)return h;h=lkFaceClipAll(h,file);if(h.indexOf("kmkl")<0)return h;const M=[];const rest=h.replace(/<img class="kmkl[^>]*>/g,m=>{M.push(m);return""});return M.join("")+rest}})();
 /* co-op: marks the friend's seat put on HER entry arrive in the act's res message (jcoopworld resApply) → merged into her own bags (higher level wins) */
 function lkMergeIn(p,key,bag){if(!p||!bag||!bag.it)return;const part=key==="stain"?"cloth":"face";const T=lkBag(p,part);
  for(const id in bag.it){const n=bag.it[id],c=lkB().cat[id];if(!c||!n||!(n.lv>0))continue;const dst=c.part==="cloth"?lkBag(p,"cloth"):T;const o=dst.it[id];if(!o||o.lv<n.lv)dst.it[id]=Object.assign({},n,{at:lkNow()})}
