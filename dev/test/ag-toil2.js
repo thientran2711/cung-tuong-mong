@@ -2,9 +2,11 @@
    1 choice varies by nết: histogram of the chosen way (moc / nha / cauky / dam) over many NPC-days, vain (Kiêu ngạo / Tham vọng) vs modest
      (Khiêm nhường / Ân cần); never one way only; once per NPC per day (cached v.tl2, the second read does not choose again)
    2 fallback: BAL.ag.toil2.on = 0 or BAL.ag.on = 0 → the old toilNpc hash look (no choice record)
-   3 consequences = the player's functions: an NPC with a Diêm dúa face is judged by Thái hậu through toilFx (the same "dung nhan Diêm dúa"
-     part and number the player gets for the same face), the regard row moves by exactly that; a consort who sees her mocks her by the player's
-     rule (toilSeeRule, the same verdict toilRival gives on the player's Diêm dúa face) and she answers with toilAns (Đáp lại: her Sức / Danh by
+   3 consequences = the player's functions: an NPC with a Vụng về face (makeup-lux OD L1638: no Diêm dúa face level any more; diêm dúa = the
+     dress verdict) is judged by Thái hậu through toilFx (the same "dung nhan Vụng về" part and number the player gets for the same face), on a
+     day whose WHOLE verdict is negative (her clothes hợp phẩm, a Thái hậu who minds a clumsy face), so the regard row moves by exactly that and
+     the reprimand is logged; a consort who sees her mocks her by the player's rule (toilSeeRule, the same verdict toilRival gives on the
+     player's Vụng về face) and she answers with toilAns (Đáp lại: her Sức / Danh by
      BAL.toil); the meeting pass (tl2Meet) logs both when the player stands there
    4 co-op: the host's records (toil2Wire, sent with "where") are read by a guest (agOn false), who never chooses; before they come the guest
      shows the old look; old save (no v.tl2) loads and chooses on first need
@@ -37,12 +39,20 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   delete v.tl2;BAL.ag.on=0;const c=toilNpc(v);BAL.ag.on=1;delete v.tl2;return{a:a.k||null,aRec:!!v.tl2,c:c.k||null,look:a.look||null,mk:a.makeup}});
  ok(!r2.a&&!r2.c&&!r2.aRec,'switch off (toil2.on=0 / ag.on=0): the old hash look, no choice record',r2);
  /* 3 consequences */
- const r3=await p.evaluate(()=>{const R=liveRivals(false).filter(v=>!v.coop&&toilOn(v)&&!v.queen);const w=R[0],x=R.find(v=>v!==w&&!traitsOf(v).some(t=>t==="Ân cần"||t==="Khiêm nhường"))||R[1];
-  const col=Object.assign({},TOIL_PRE.find(z=>z[2]==="diem")[4],{want:"diem"});
-  w.tl2={wk:toilWk(),k:"dam",rec:{makeup:true,score:72,look:"diem",col,k:"dam"}};delete w.tlSeen;
-  /* the player with the same face */
-  const tl0=S.toilette,sn0=S.toilSeen;S.toilette={wk:toilWk(),day:toilWk()*10,makeup:true,score:72,look:"diem",col,dv:"hopdip",style:"fit"};S.toilSeen=null;
-  const tMe=toilFx(S,"th",toilFOf("th"),"ok");const me=tMe&&tMe.why.find(z=>/dung nhan/.test(z[0]));
+ const r3=await p.evaluate(()=>{const frugal=v=>traitsOf(v).some(t=>t==="Ân cần"||t==="Khiêm nhường");
+  /* Thái hậu's kind is the world's (her nết): one who does not mind a Vụng về face (frugal: vung 0) cannot reprimand it, so pin her to "normal" then */
+  const hk0=toilHostKind("th"),hkFix=(BAL.toil.react[hk0]||BAL.toil.react.normal).vung<0?null:"normal";const thk=toilHostKind;if(hkFix)toilHostKind=function(h){return h==="th"?hkFix:thk.apply(this,arguments)};const lv0=luxVerdict;
+  try{
+  const R=liveRivals(false).filter(v=>!v.coop&&toilOn(v)&&!v.queen);const rec={makeup:true,score:20,look:"vung",col:{seed:3},k:"cauky"};
+  /* her: a Vụng về face she chose, on a day her real clothes read hợp phẩm (jlux luxVerdict pinned for her: the world's wardrobe decides it
+     otherwise, and hợp dịp +1 would cancel a normal Thái hậu's −1), so the whole verdict is negative */
+  const RH=BAL.toil.react[toilHostKind("th")]||BAL.toil.react.normal;const w=R[0];luxVerdict=function(p){return p===w?{v:"hoppham",style:"fit"}:lv0.apply(this,arguments)};
+  w.tl2={wk:toilWk(),k:"cauky",rec:Object.assign({},rec)};const n=toilNpc(w);
+  if(n.dv!=="hoppham"||(RH[n.dv]||0)+RH.vung>=0)return{noFixture:1,hk:toilHostKind("th"),dv:n.dv,mk:toilMk(n)};delete w.tlSeen;
+  const x=R.find(v=>v!==w&&!frugal(v))||R.find(v=>v!==w);
+  /* the player with the same face (face part only: her own clothes are another verdict) */
+  const tl0=S.toilette,sn0=S.toilSeen;S.toilette={wk:toilWk(),day:toilWk()*10,makeup:true,score:20,look:"vung",col:{seed:3},dv:"hopdip",style:"fit"};S.toilSeen=null;
+  const tMe=toilFx(S,"th",toilFOf("th"),"plain");const me=tMe&&tMe.why.find(z=>/dung nhan/.test(z[0]));
   const L=toilLook();const ruleMe=toilSeeRule(x,L);const rv=toilRival(x,false);S.toilette=tl0;S.toilSeen=sn0;
   /* her: judged by Thái hậu */
   const th0=w.th||0;const tW=toilFx(w,"th",toilFOf("th"),"ok");const her=tW&&tW.why.find(z=>/dung nhan/.test(z[0]));const t=toilJudgeNpc(w,"th");const d=(w.th||0)-th0;const again=toilJudgeNpc(w,"th");
@@ -50,13 +60,13 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const Lw=toilLookP(w);const ruleHer=toilSeeRule(x,Lw);const s0=w.suc,dn0=w.danh;const mp=mindPick,r0=roll;mindPick=O=>O.some(o=>o[0]==="reply")?"reply":mp(O);roll=()=>true;let line="";
   try{line=tl2See(x,w,Lw)}finally{mindPick=mp;roll=r0}const dA={suc:w.suc-s0,danh:w.danh-dn0};/* review ag-all-2 r2 fix2: her answer's own gain, read before the meeting pass below (there a second mocker and the Thái hậu may move her Danh again by their own rules: suite run dDanh 2 = reply 1 + meet 1) */
   /* the meeting pass with the player there: Thái hậu + another consort see w */
-  const y=R.find(v=>v!==w&&v!==x)||x;delete w.tlSeen;const gp=gmPlaces;gmPlaces=()=>[[0,{ngu:["v"+w.id,"v"+y.id,"me","th"]}]];S.tl2m=null;let L2=[];const q0=S.logSeq||0;
+  const y=R.find(v=>v!==w&&v!==x&&!frugal(v))||R.find(v=>v!==w&&v!==x)||x;delete w.tlSeen;const gp=gmPlaces;gmPlaces=()=>[[0,{ngu:["v"+w.id,"v"+y.id,"me","th"]}]];S.tl2m=null;let L2=[];const q0=S.logSeq||0;
   const mp2=mindPick;mindPick=O=>O.some(o=>o[0]==="smile")?"smile":mp2(O);try{tl2Meet();L2=(S.logs||[]).slice(0,(S.logSeq||0)-q0).map(e=>String(e).replace(/<[^>]+>/g,""))}finally{gmPlaces=gp;mindPick=mp2}
   /* what the shared ap gives an NPC for that gain (jdh addGains applies to NPC gains, the same as anywhere else) */const e0=w.danh;ap(w,{danh:BAL.toil.replyDanh});const expD=w.danh-e0;w.danh=e0;
   return{me,her,aff:tW&&tW.aff,d,expD,again:again===null,ruleMe:ruleMe&&ruleMe.k,ruleHer:ruleHer&&ruleHer.k,rv:rv&&rv.txt,line,dSuc:dA.suc,dDanh:dA.danh,dDanhAll:w.danh-dn0,B:{s:BAL.toil.replySuc,d:BAL.toil.replyDanh},
-   L2:L2.slice(0,4)/* names show as the player knows them (k61), so no name filter */}});
- ok(r3.me&&r3.her&&r3.me[0]===r3.her[0]&&r3.me[1]===r3.her[1],'Thái hậu judges her Diêm dúa face with the player\'s toilFx part',r3);
- ok(r3.d===r3.aff&&r3.aff<0&&r3.again,'reprimand: her Thái hậu regard moves by exactly that verdict, once a day',r3);
+   L2:L2.slice(0,4)/* names show as the player knows them (k61), so no name filter */,hk:toilHostKind("th"),hkFix,dv:toilNpc(w).dv}}finally{toilHostKind=thk;luxVerdict=lv0}});
+ ok(r3.me&&r3.her&&r3.me[0]===r3.her[0]&&r3.me[1]===r3.her[1],'Thái hậu judges her Vụng về face with the player\'s toilFx part',r3);
+ ok(r3.d===r3.aff&&r3.aff<0&&r3.again,'reprimand: her Thái hậu regard moves by exactly that (negative) verdict, once a day',r3);
  ok(r3.ruleMe==="tease"&&r3.ruleHer==="tease"&&/che miệng cười/.test(r3.rv||"")&&/che miệng cười/.test(r3.line),'mocked by the player\'s rule (toilSeeRule = toilRival\'s verdict)',r3);
  ok(r3.dSuc===-r3.B.s&&r3.dDanh===r3.expD&&r3.dDanh>0,'her answer Đáp lại = the player\'s toilAns (Sức, Danh from BAL.toil)',r3);
  ok(r3.L2.some(z=>/quở trách/.test(z))&&r3.L2.some(z=>/che miệng cười/.test(z)),'two-way: standing there, the player reads the reprimand and the mockery in the log',r3.L2);
