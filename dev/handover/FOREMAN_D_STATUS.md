@@ -1,6 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 18/11 08:50Z — FOREMAN D ROOT (depth 0) HANDING OVER to D #1 — see HANDOVER ROOT → #1 at the end
+last wake: 18/11 08:55Z — FOREMAN D #1 (depth 1) session_01964izGKDEJJjzBBQAqWeWg in charge
 s7 START_CTX ≈ 6 % of 1M window (get_session reads 0; own estimate ~60k after start reading); rollover at 31 %, ceiling 60 %.
 - (17/11 12:40Z) s7 STOPPED: old Foreman D s7 (session_01DgYSWo6WxULHyNN9yjfAPm) woke after a ~14 h stall, saw FOREMAN D #9 already in charge, deleted its own hourly wake trig_01WRgJzWBhmuoRbMvDPTXtqt, touched no worker and no claim. s7 context 37 % (past its 31 % rollover). Nothing to hand over beyond this file.
 - 21:43Z: suc-khoe-fix SẴN SÀNG KIỂM da50857d (F1–F10 fixed; F6 waits KIT REQUEST y-duoc + art; coop-e2e 60/60 incl. new 'NPC Sức khỏe guest = host'; D57 births fix ≈ base 0.14–0.16; her deaths 25–27 vs 17–25 per 40 lives) — worker archived → opus BIG reviewer r2 session_01DgYSWmYNeB92ubrzxwYmXs.
@@ -271,3 +271,4 @@ D STANDBY = session_01964izCXnfxr3WLK6fnrdr5 (depth 0, idle). MAIN = ROOT-49 ses
 Owner asleep (OD 07:39Z; standby blocks already pasted). Free slots 8 — no other real D item queued.
 LESSONS: grep WHOLE STATUS for ORDER/FROM MAIN each wake; push brief BEFORE create_session; source-conflict re-merges = opus worker + short re-review; my push helper = fetch → detached checkout FETCH_HEAD → edit → commit → push, retry.
 - (18/11 08:51Z) D ROOT STOPPED (depth 0, context 64 %): successor FOREMAN D #1 = session_01964izGKDEJJjzBBQAqWeWg (depth 1) opened with the handover above (prompt carries ROLLOVER 3 lines + LINEAGE + SLEEP verbatim). D ROOT hourly wake trig_01H6sanzmcfCgLsM9yMsrjSk deleted. Workers report to #1. D STANDBY session_01964izCXnfxr3WLK6fnrdr5 stays idle.
+- (18/11 08:55Z) PICKUP by FOREMAN D #1 = session_01964izGKDEJJjzBBQAqWeWg; depth 1 (limit 8; parent D ROOT session_01964izDDniLutRAXZ66jBdy). START_CTX ≈ 7 % of 1M (get_session reads 0; own estimate ~70k after start reading) → rollover at 32 %, ceiling 60 %. MAIN = ROOT-50 session_01UV1SzkQbY6CG7anj9iuHK5 (FROM MAIN 08:50Z). LIVE main = 36e574fa. RUNNING 4 (residence-seats-r2-rv, balance-final, poison-road-rv, odds-cap-r2-rv) — each told once "Foreman D = #1". D STANDBY = session_01964izCXnfxr3WLK6fnrdr5.
