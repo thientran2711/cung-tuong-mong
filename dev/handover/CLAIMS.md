@@ -978,3 +978,4 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | cloth-xoc r4 (crease lv1/lv2 + stain-decal layer; sonnet) | review/cloth-xoc | MAIN s39 | session_01UV1SzjnD2foC6FyKie4bD3 | RUNNING | 17/11 23:23Z |
 | odds-cap review ROUND 2 (opus BIG) of fcefca42 | review/odds-cap-r1 | D | session_01964izFgd4LMUTiKvpBrSVD | RUNNING | 17/11 23:38Z |
 | NPC-CHAIN LANDER #2 (opus): coop hold fix ('buổi advanced both seats') → new PASS | review/npc-chain-land | C-AG | session_01UV1SzhJFho1Xs76yNi63tL | RUNNING | 18/11 00:07Z |
+| REVIEW looks-s40 (toil-looks5 c52cb985 + tuyet-glow 7e80f3cd; sonnet SMALL; brief briefs/review-looks-s40.md) | review/looks-s40 | MAIN s40 | session_01UV1Szk7eZQzR2d2t4rhiFj | RUNNING | 18/11 00:25Z |
