@@ -1,6 +1,6 @@
 # START_REVIEWER — verbatim owner rules
 
-## ★ REVIEWERS FAIL any work that breaks a GAME LAW (top of START_CORE, owner 18/11 ~16:20Z): two-way, equal-value choices, gain-and-loss, one core, harder as she climbs, REAL-WORLD (real evidence / real people / real objects), cổ trang wording, history → expert first. Check each law that the work touches and write the result in the review.
+## ★ REVIEWERS FAIL any work that breaks one of THE 18 LAWS (top of START_CORE, owner 18/11 ~16:20Z/~16:25Z). Check each law that the work touches and write the result in the review.
 
 ## ⛔ GATE ZERO — PRIORITY RULE #1 FIRST (owner OD:L5 + 17/11 02:55Z): before writing any code, git grep origin/main + origin/review/* and grep OD/OWNER_LEDGER for what your task touches; reuse what exists; your report starts with "PRIORITY #1 CHECK: …" (hits). Reviewers FAIL a brief or report without it. Full text: top of START_CORE.md.
 

@@ -1,7 +1,7 @@
 # START_CORE — verbatim owner rules
 
-## ★ GAME LAWS — READ FIRST, ABOVE EVERYTHING (owner 18/11 ~16:20Z: "Bất kỳ một cái chat nào mở ra nó phải đọc những cái này trước tiên ... nó phải là cái nằm ở trên cùng, để không có ai bỏ lỡ. Để mà khi thợ hay là người duyệt mà có làm á thì phải theo cái luật này cho tao.")
-Every chat (main, foreman, worker, reviewer, art) reads this block FIRST. Every design, build and review must follow it; reviewers FAIL any work that breaks one of these laws. Laws 1–6 are her top priority.
+## ★ THE 18 LAWS — READ FIRST, ABOVE EVERYTHING (owner 18/11 ~16:20Z: "Bất kỳ một cái chat nào mở ra nó phải đọc những cái này trước tiên ... nó phải là cái nằm ở trên cùng, để không có ai bỏ lỡ. Để mà khi thợ hay là người duyệt mà có làm á thì phải theo cái luật này cho tao.")
+Every chat (main, foreman, worker, reviewer, art) reads this block FIRST (all 18 laws, owner 18/11 ~16:25Z: "tổng cộng 18 cái luật này phải là nằm đầu tiên"). Every design, build and review must follow it; reviewers FAIL any work that breaks one of these laws. Laws 1–6 are her top priority.
 1. TWO-WAY LAW (luật hai chiều): whatever others can do to her, she can do back to them, and the reverse (OD:L33, L1534).
 2. EQUAL-VALUE CHOICES (luật lựa chọn ngang giá): all options of one choice have equivalent value; none clearly better; a bạc road always has another road of equal cost (OD:L582, OD 18/11 ~09:20Z).
 3. GAIN-AND-LOSS (luật được–mất): no option is cost-only with no gain; gain-only is fine (time/khắc is its cost) (OD 18/11 ~09:20Z).
@@ -10,7 +10,19 @@ Every chat (main, foreman, worker, reviewer, art) reads this block FIRST. Every 
 6. REAL-WORLD LAW (luật thế giới thực) = (a) REAL EVIDENCE: others can frame her and win, her defence can fail; proof must truly exist (OD:L1109); (b) REAL PEOPLE: every person is a living NPC with her own life, schedule and goals; a person named in any road really exists (OD:L1246, L1385, L1389); (c) REAL OBJECTS: every item that appears in the game really exists somewhere — it never vanishes, is never unfindable; it is owned, stored, given, sold, stolen or used up, always traceable (OD 18/11 ~16:20Z).
 7. CỔ TRANG WORDING: no %, odds in words (Liều / Khó / Năm ăn năm thua / Khá chắc / Chắc / Rất chắc / Nắm chắc) (VANPHONG.md).
 8. HISTORY / DRAMA IDEAS → EXPERT FIRST (OD:L1327).
-UI laws (KIT FIRST, frame → layout → S/M/L buttons, fix the whole group, Fold + iPad) and work laws (gate zero, canon overwrite, verbatim, never change a working rule, never re-ask, feature freeze) follow below.
+UI LAWS
+9. KIT FIRST: every frame, button, card, chip comes from the one shared kit; a missing part → stop, kit keeper builds it first (OD:L491, L1090).
+10. FRAME → LAYOUT → BUTTON SIZE: frames S/M/L/XL first, then the layout (long rows or 2 columns, picked by text), then ONE fixed size per button tier S/M/L = the largest that tier needs across all layouts phone→iPad; only tall frames grow to screen ratio; a big scene picture only when the content fits without scrolling (OD:L1375, L1430, OD 18/11 ~16:05Z/~16:10Z/~16:15Z).
+11. FIX THE WHOLE GROUP: one reported fault ⇒ fix every element of that kind, scan script + before/after table (OD:L52, L474).
+12. TWO DEVICES FIRST: Samsung Fold portrait 755x1000 + iPad landscape 1180x820; every picture to her = both devices together, full screen, looked 3× (HANDOVER:L83, OD 18/11 ~07:25Z).
+WORK LAWS
+13. PRIORITY RULE #1 / GATE ZERO: before any brief, order, answer or proposal, check OD + ledger + handover + progress, git grep main + review/*, CLAIMS + foreman STATUS; reuse what exists (OD:L5).
+14. CANON OVERWRITE: a new rule replaces the old one in its place; never two versions side by side (OD:L1232).
+15. VERBATIM: her rules reach every worker word for word, never a summary (OD:L1231).
+16. NEVER change or undo a working rule without asking her first (OD:L1148).
+17. NEVER re-ask what she already ruled (OD:L1143).
+18. FEATURE FREEZE: new ideas go to the parking lot (Foreman E may build parking-lot items) (OD:L1402, OD 18/11 ~04:50Z).
+All 18 laws sit here at the top; the detailed rule lines follow below.
 
 
 ## ⛔ GATE ZERO — PRIORITY RULE #1 FIRST, ALWAYS (owner OD:L5 + 17/11 ~02:55Z, angry: "mày cho chó gặm rồi")
