@@ -11,7 +11,7 @@
      hole   = a visible kit picture box (portrait chip, side card, stage) that holds NO picture at all (no <img>, no background)
      acts   = act cards in the Hành sự panel (0 while the panel is open = the empty tab of her shot)
      stage  = people on the room stage (tokens) / room picture painted
-     emptyBox = a visible picture still on its way shown as the §59.1 paper (small slots carry no line: to her it is an empty box)
+     emptyBox = a visible picture still on its way shown as bare §59.1 paper (no kit silhouette; small slots carry no line: to her it is an empty box)
    FAIL (bad>0) when an uncovered sample shows a blank, an empty box, a hole, an empty or hidden stage; KLOAD must leave 'check' (big). */
 const {chromium}=require('playwright');const fs=require('fs'),path=require('path'),http=require('http');const D=require('./lib/device');
 const [,,OUT='/tmp/eb',DEVS='fold,ipadAir',PATHS='cont,upd,cold',MBPS='1.5']=process.argv;fs.mkdirSync(OUT,{recursive:true});
@@ -27,12 +27,12 @@ function serve(){const T={'.html':'text/html; charset=utf-8','.js':'text/javascr
 /* one shared line for the picture CDN (also reaches the service worker's fetches, unlike CDP throttling) */
 function line(ctx,mbps){if(!+mbps)return;let free=Date.now();const bps=(+mbps)*1e6/8;
  return ctx.route(/workers\.dev\/img\//,async rt=>{if(!line.on){return rt.continue()}let resp;try{resp=await rt.fetch()}catch(e){return rt.abort()}const body=await resp.body();
-  const now=Date.now();const start=Math.max(now,free);free=start+body.length/bps*1000;await sleep(free-now+80);try{await rt.fulfill({response:resp,body})}catch(e){}})}
-const SAMPLE=()=>{const vis=e=>{const r=e.getBoundingClientRect();if(r.width<24||r.height<24||r.bottom<0||r.top>innerHeight||r.right<0||r.left>innerWidth)return false;let n=e;while(n&&n.nodeType===1){const cs=getComputedStyle(n);if(cs.display==='none'||cs.visibility==='hidden'||+cs.opacity===0)return false;n=n.parentElement}return true};
+  const now=Date.now();const start=Math.max(now,free);free=start+body.length/bps*1000;if(process.env.LINELOG)(line.log=line.log||[]).push([now,Math.round(body.length/1024),rt.request().url().split('/').pop().slice(0,40),rt.request().serviceWorker()?'sw':'pg']);await sleep(free-now+80);try{await rt.fulfill({response:resp,body})}catch(e){}})}
+const SAMPLE=()=>{const process_dbg=1;const vis=e=>{const r=e.getBoundingClientRect();if(r.width<24||r.height<24||r.bottom<0||r.top>innerHeight||r.right<0||r.left>innerWidth)return false;let n=e;while(n&&n.nodeType===1){const cs=getComputedStyle(n);if(cs.display==='none'||cs.visibility==='hidden'||+cs.opacity===0)return false;n=n.parentElement}return true};
  const top=document.elementFromPoint(innerWidth/2,innerHeight/2);const cover=top&&top.closest&&top.closest('#kload,#klife');if(cover)return{cover:cover.id};
  const tUp=(()=>{const t=document.getElementById('title');return !!t&&!t.hidden})();if(tUp)return{cover:'title'};
  const seen=im=>{const r=im.getBoundingClientRect();const t=document.elementFromPoint(Math.min(innerWidth-1,Math.max(0,r.left+r.width/2)),Math.min(innerHeight-1,Math.max(0,r.top+r.height/2)));return !!t&&(t===im||(im.parentElement&&im.parentElement.contains(t)))};
- const inc=[...document.images].filter(im=>vis(im)&&seen(im)&&im.getAttribute('src')&&!(im.complete&&im.naturalWidth));const bl=inc.filter(im=>!im.hasAttribute('data-kwait'));const wl=inc.filter(im=>im.hasAttribute('data-kwait')).slice(0,4).map(im=>(im.getAttribute('src')||'').split('/').pop().slice(0,32));
+ const inc=[...document.images].filter(im=>vis(im)&&seen(im)&&im.getAttribute('src')&&!(im.complete&&im.naturalWidth));const bl=inc.filter(im=>!im.hasAttribute('data-kwait'));/* §59.1 with a kit silhouette (figure f|m, portrait pf|pm) is a drawn stand-in, not an empty box; bare paper (1|s) is */const lined=im=>!!(im.parentElement&&im.parentElement.closest('[data-kwaitp],[data-kwaitq]'));const paper=inc.filter(im=>/^(1|s)$/.test(im.getAttribute('data-kwait')||'')&&!lined(im));/* paper WITH the «Đang thỉnh tranh…» line = the brief's allowed placeholder */const wl=paper.slice(0,4).map(im=>{const r=im.getBoundingClientRect(),p=im.parentElement;return (im.getAttribute('src')||'').split('/').pop().slice(0,32)+(process_dbg?'|'+Math.round(r.width)+'x'+Math.round(r.height)+'|'+getComputedStyle(p).position+'|'+p.className.slice(0,30)+'|kwp:'+p.hasAttribute('data-kwaitp')+'|kwr:'+(im.dataset.kwr||'')+'|anc:'+!!(p.closest('[data-kwaitp]')):'')});
  /* holes: kit picture boxes that hold nothing — portrait chip / side person card / top bar icons */
  const box=[...document.querySelectorAll('header.hud .kchip, header.hud img, #side .kpc, #side .kpcard, .kside .kpc, #rail img, .kpor, .kpframe')].filter(vis);
  const holes=box.filter(b=>{const im=b.tagName==='IMG'?b:b.querySelector('img');if(im)return !im.getAttribute('src');const bg=getComputedStyle(b).backgroundImage;return !bg||bg==='none'?false:false});
@@ -41,8 +41,8 @@ const SAMPLE=()=>{const vis=e=>{const r=e.getBoundingClientRect();if(r.width<24|
  const st=document.getElementById('stage');const toks=st?st.querySelectorAll('#tokens .tok').length:-1;const stBg=st?getComputedStyle(st).backgroundImage:'';
  const hidStage=st?st.classList.contains('j59wait'):false;
  const hsWhy=hidStage?[...st.querySelectorAll('#mefig, #tokens .tok .figimg')].map(im=>{const s=im.getAttribute('src')||'';const fb=(window.__KITFB||{})[s];return s.split('/').pop().slice(0,26)+(im.complete?(im.naturalWidth?':ok':':fail'):':load')+(fb?(fb.v?':m':':mw'):':nom')}).concat([typeof J59U!=='undefined'?JSON.stringify(J59U):'noJ59U']):null;
- return{cover:false,blank:bl.length,wait:inc.length-bl.length,holes:holes.length,tab,acts,toks,stBg:stBg&&stBg!=='none'?1:0,hidStage,hsWhy,which:bl.slice(0,6).map(im=>(im.getAttribute('src')||'').split('/').pop().slice(0,32)),
-  waitWhich:wl,hasWaitLine:document.body.innerText.includes('Đang thỉnh tranh')}};
+ return{cover:false,blank:bl.length,wait:paper.length,sil:inc.length-bl.length-paper.length,holes:holes.length,tab,acts,toks,stBg:stBg&&stBg!=='none'?1:0,hidStage,hsWhy,which:bl.slice(0,6).map(im=>(im.getAttribute('src')||'').split('/').pop().slice(0,32)),
+  waitWhich:wl,hasWaitLine:document.querySelectorAll('[data-kwaitp],[data-kwaitq]').length}};
 (async()=>{const srv=await serve();const b=await chromium.launch();const R={};
  for(const dev of DEVS.split(','))for(const pth of PATHS.split(',')){BUMP=0;line.on=false;ROOT=OLD||NEW;
   const ctx=await D.newDeviceContext(b,dev,{serviceWorkers:'allow'});await line(ctx,MBPS);const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
@@ -97,5 +97,6 @@ const SAMPLE=()=>{const vis=e=>{const r=e.getBoundingClientRect();if(r.width<24|
    first:ok[0],worst:bad[0]||null,gates:await g.evaluate(()=>(window.KLOAD&&KLOAD.lifes||[]).map(x=>({why:x.why,n:x.n,ms:x.ms,late:x.late,cached:!!x.cached}))).catch(()=>null),
    silbb:await g.evaluate(async()=>{if(!window.KIT_SILBB)return'no KIT_SILBB';const out={};for(const k of ['f','m']){const u=IMG_BASE+'img/kit/unknown-fig-'+k+'.webp?silcheck=1';const v=await new Promise(ok=>{const x=kitFigBody(u,()=>ok(kitFigBody(u)));if(x)ok(x)});
    out[k]=['l','r','ar','cl','cr','b'].every(f=>Math.abs((v[f]||0)-(KIT_SILBB[k][f]||0))<.01)?'ok':JSON.stringify(v).slice(0,120)}return out}).catch(e=>String(e)),longTasks:await g.evaluate(()=>window.__lt&&__lt.filter(x=>x[1]>150)).catch(()=>null),ksw:await g.evaluate(()=>window.KSW&&{resumed:KSW.resumed,applied:KSW.applied,build:KSW.build}).catch(()=>null),errs:errs.slice(0,5)};
+  if(process.env.LINELOG&&line.log){const L=line.log.filter(x=>x[0]>=t0-30000);console.log('LINE',tag,L.length,'reqs',L.reduce((a,x)=>a+x[1],0),'KB since t0-30s');console.log(L.slice(0,80).map(x=>((x[0]-t0)/1000).toFixed(1)+'s '+x[1]+'K '+x[3]+' '+x[2]).join('\n'));line.log=[]}
   console.log(tag,JSON.stringify(R[tag]));await p.screenshot({path:`${OUT}/${tag}-end.png`});await ctx.close()}
  fs.writeFileSync(OUT+'/entry-blank.json',JSON.stringify(R,null,1));await b.close();srv.close()})().catch(e=>{console.error(e);process.exit(1)});

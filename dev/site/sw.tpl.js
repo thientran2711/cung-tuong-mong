@@ -15,7 +15,7 @@
    Only same-origin GETs and the picture CDN IMG are handled: the co-op worker (ctm-coop…workers.dev, fetch + WebSocket) and any other origin go
    straight to the network.
    Pictures (img/…) live on Cloudflare (dev/art/CDN.md, review/cdn-images): IMG = IMG_BASE of dev/build/jcdn.js; their ASSETS key is
-   IMG+'img/…?h=<md5/16>' (fetched in CORS mode, never opaque); manifests IMG+'img/*.json' are network first with a SHELL copy for offline.
+   IMG+'img/…?h=<md5/16>' (fetched in CORS mode, never opaque); manifests IMG+'img/*.json' answer from the SHELL copy (precached) and refresh it in the background (entry-blank-r3).
    Old same-origin img/ entries in ASSETS are left for jload.js to move over (not pruned here). */
 const V='__V__';
 const SHELL='ctm-shell-'+V, ASSETS='ctm-assets';
@@ -58,10 +58,17 @@ async function ranged(req,res){const rg=req.headers.get('range');if(!rg||!res||r
  const m=/bytes=(\d*)-(\d*)/.exec(rg);if(!m)return res;const b=await res.blob(),n=b.size;
  let s=m[1]===''?Math.max(0,n-(+m[2])):+m[1],t=m[1]===''||m[2]===''?n-1:Math.min(+m[2],n-1);if(s>=n)return new Response(null,{status:416,headers:{'Content-Range':'bytes */'+n}});
  return new Response(b.slice(s,t+1),{status:206,headers:{'Content-Type':res.headers.get('Content-Type')||'application/octet-stream','Content-Range':`bytes ${s}-${t}/${n}`,'Content-Length':String(t-s+1),'Accept-Ranges':'bytes'}})}
+/* entry-blank-r3 (review item 6): ONE download per picture. The life gate (jload lWant) and the <img> on screen ask for the same picture at
+   the same time; each used to go to the network (twice the bytes on a slow line, so nothing arrived for long). The second waits for the first
+   and is answered from the cache. */
+const INF=new Map();
 async function asset(e,p,h){const key=new URL(p+'?h='+h,baseOf(p)).href,c=await caches.open(ASSETS);
  const r=await c.match(key);if(r)return ranged(e.request,r);
- const net=await fetch(key,IMG&&key.startsWith(IMG)?{...CORS,cache:'no-cache'}:{cache:'no-cache'});if(!net.ok)return net;
- const put=c.put(key,net.clone()).catch(()=>{});
+ const d0=INF.get(key);if(d0){await d0;const r2=await c.match(key);if(r2)return ranged(e.request,r2)}
+ let done;const d=new Promise(ok=>{done=ok});INF.set(key,d);const end=()=>{if(INF.get(key)===d)INF.delete(key);done()};
+ let net;try{net=await fetch(key,IMG&&key.startsWith(IMG)?{...CORS,cache:'no-cache'}:{cache:'no-cache'})}catch(err){end();throw err}
+ if(!net.ok){end();return net}
+ const put=c.put(key,net.clone()).catch(()=>{});put.then(end,end);
  if(e.request.headers.get('range')){await put;return ranged(e.request,net)}
  e.waitUntil(put);return net}
 self.addEventListener('fetch',e=>{const q=e.request;if(q.method!=='GET')return;const u=new URL(q.url);const cdn=!!IMG&&q.url.startsWith(IMG);if(!cdn&&u.origin!==location.origin)return;
@@ -81,7 +88,14 @@ self.addEventListener('fetch',e=>{const q=e.request;if(q.method!=='GET')return;c
       the iframe then always runs the same build as its host (review/perf-r1) */
    const give=r=>{if(q.mode==='navigate'&&q.destination==='document'&&!u.searchParams.has('krot')){HOSTR=r&&r.ok?{t:Date.now(),r:r.clone()}:null}return r};
    try{return give(await Promise.race([net,slow]))}catch(err){return give((await old)||Response.error())}})());return}
- if(/\.json$/.test(p)||p==='manifest.webmanifest'){const jk=new URL(p,baseOf(p)).href;e.respondWith(fetch(cdn?new Request(jk,{...CORS,cache:'no-cache'}):q,{cache:'no-cache'}).then(r=>{if(r.ok&&!/^assets\.json$/.test(p)){const cp=r.clone();e.waitUntil(caches.open(SHELL).then(c=>c.put(jk,cp)))}return r}).catch(()=>caches.match(jk,{ignoreSearch:true})));return}
+ if(/\.json$/.test(p)||p==='manifest.webmanifest'){const jk=new URL(p,baseOf(p)).href;const net=()=>fetch(cdn?new Request(jk,{...CORS,cache:'no-cache'}):q,{cache:'no-cache'}).then(r=>{if(r.ok&&!/^assets\.json$/.test(p)){const cp=r.clone();e.waitUntil(caches.open(SHELL).then(c=>c.put(jk,cp)))}return r});
+  /* entry-blank-r3 (review item 6): the picture CDN's data files (img/*.json: FIGURES*, *-fit, POR_FACE2, _index… ~10 MB) were network first on
+     EVERY open — on a slow line (or when the browser's own HTTP cache was emptied: no 304) they took the line before any picture of the first screen.
+     They are precached in this build's shell at install, so the shell copy answers at once and the network copy refreshes it in the background,
+     20 s later (one open behind at most). Same-origin JSON (assets.json, audio) stays network first. */
+  if(cdn){e.respondWith(caches.open(SHELL).then(c=>c.match(jk)).then(hit=>{if(!hit)return net().catch(()=>caches.match(jk,{ignoreSearch:true}));
+    e.waitUntil(new Promise(ok=>setTimeout(ok,20000)).then(()=>net()).catch(()=>{}));return hit}));return}
+  e.respondWith(net().catch(()=>caches.match(jk,{ignoreSearch:true})));return}
  e.respondWith((async()=>{const m=await man(),h=m.get(p);
   if(h){try{return await asset(e,p,h)}catch(err){const c=await caches.open(ASSETS);const any=await c.match(new URL(p,baseOf(p)).href,{ignoreSearch:true});return any?ranged(q,any):Response.error()}}
   const hit=await caches.match(q,{ignoreSearch:true});if(hit)return ranged(q,hit);

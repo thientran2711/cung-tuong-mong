@@ -211,7 +211,7 @@ const lAbs=u=>{u=String(u||"");if(!u||/^(data|blob):/.test(u))return"";try{retur
 let SIZE=null;function sizeOf(u){try{if(!MAN)return 0;if(!SIZE){SIZE=new Map();for(const f of MAN.files)SIZE.set(f[0],f[2])}const m=/img\/[^?#]*/.exec(u);return m?SIZE.get(decodeURIComponent(m[0]))||0:0}catch(e){return 0}}
 const lOk=u=>LIFE.done.has(u)||((LIFE.keep.get(u)||{}).ok!=null);
 /* one picture: load + decode (kept alive meanwhile, so it paints at once); raw = the string the game itself uses (PORK key of j39 porOf) */
-function lWant(u,raw){if(LIFE.done.has(u))return Promise.resolve(true);let e=LIFE.keep.get(u);if(e)return e.p;const im=new Image();im.decoding="async";e={im,ok:null};LIFE.keep.set(u,e);LIFE.busy++;
+function lWant(u,raw){if(LIFE.done.has(u))return Promise.resolve(true);let e=LIFE.keep.get(u);if(e)return e.p;const im=new Image();im.decoding="async";e={im,ok:null,u};LIFE.keep.set(u,e);LIFE.busy++;
  let res;e.p=new Promise(r=>{res=r});
  const fin=ok=>{if(e.ok!=null)return;e.ok=ok;LIFE.busy--;res(ok);
   /* entry-blank-r3: a full-body figure is measured (kit body box, kitFigBody) as soon as it is here — the room stage hides its people until every
@@ -219,7 +219,18 @@ function lWant(u,raw){if(LIFE.done.has(u))return Promise.resolve(true);let e=LIF
   if(ok&&/\/fig-/.test(u))try{if(typeof kitFigBody==="function")setTimeout(()=>{try{kitFigBody(raw||u,null)}catch(x){}},0)}catch(x){}
   if(ok&&/\/por-/.test(u))try{if(typeof PORK!=="undefined"){[u,raw].forEach(k=>{if(k&&PORK[k]!==1){PORK[k]=1;LIFE.dirty=1}})}}catch(x){}
   setTimeout(()=>{LIFE.keep.delete(u);LIFE.done.add(u)},90000)};
- im.onload=()=>{(im.decode?im.decode().catch(()=>0):Promise.resolve()).then(()=>fin(true))};im.onerror=()=>fin(false);im.src=u;setTimeout(()=>fin(false),45000)/* review r6: a picture that never answers (stalled line) no longer holds LIFE.busy (fig pool, title prefetch) forever */;return e.p/* review r6: the title prefetch chains on it (was undefined: pPump threw after the first picture) */}
+ e.go=()=>{LQN++;const f0=fin;const done=ok=>{if(e.ok==null){LQN--;setTimeout(lPump,0)}f0(ok)};
+  im.onload=()=>{(im.decode?im.decode().catch(()=>0):Promise.resolve()).then(()=>done(true))};im.onerror=()=>done(false);im.src=u;setTimeout(()=>done(false),45000)/* review r6: a picture that never answers (stalled line) no longer holds LIFE.busy (fig pool, title prefetch) forever */};
+ LQ.push(e);lPump();return e.p/* review r6: the title prefetch chains on it (was undefined: pPump threw after the first picture) */}
+/* entry-blank-r3 (review item 6): the life set no longer asks for ~45 pictures at once. A small queue (8 at a time under the gate cover) and, once the
+   game is open while a picture ON SCREEN is still on its way (after the 25 s cap / 'Vào cung ngay'), only 1 off-screen picture at a time, so the
+   line goes to what she sees (portrait chip, side cards, stage) first. lFront moves wanted on-screen pictures to the head of the queue. */
+const LQ=[];let LQN=0,LVIS=0;
+function lPump(){const cap=LIFE.on?8:LVIS?1:6;while(LQN<cap&&LQ.length){const e=LQ.shift();if(e.ok==null)e.go()}}
+function lFront(urls){if(!urls.length)return;const S2=new Set(urls.map(u=>lAbs(u)||u));const a=[],b=[];for(const e of LQ)((S2.has(e.im&&e.u)||S2.has(e.u))?a:b).push(e);if(!a.length)return;LQ.length=0;LQ.push(...a,...b);lPump()}
+/* after the gate opens with pictures still out: watch the visible ones for up to 90 s */
+function lAfter(){const t0=Date.now();clearInterval(lAfter.t);lAfter.n=0;lAfter.bg=null;lAfter.t=setInterval(()=>{try{const p=lPending();/* the room scene and other on-screen CSS pictures too (a full style scan: every 2 s) */if(!(lAfter.n++%5))lAfter.bg=lBgs().filter(u=>!lCore(u));(lAfter.bg||[]).forEach(u=>{if(!lOk(u)&&!p.includes(u))p.push(u)});LVIS=p.length;if(p.length){p.forEach(u=>{const a=lAbs(u);if(a&&!lOk(a)&&!LIFE.keep.has(a))lWant(a,u)});lFront(p)}else lPump();
+  if(!p.length&&!LQ.length||Date.now()-t0>90000){LVIS=0;clearInterval(lAfter.t);lPump()}}catch(e){}},400)}
 /* the pictures of THIS life (raw strings → absolute); never assigns a figure to someone who has none yet (figFor would pick one) */
 function kitLifeSet(){const M=new Map();const add=r=>{if(r&&typeof r==="string"){const a=lAbs(r);if(a)M.set(a,r)}};
  try{if(typeof S==="undefined"||!S||typeof figFor!=="function")return M;
@@ -263,7 +274,7 @@ async function lifeGate(why){(LIFE.calls=LIFE.calls||[]).push(why);/* test count
   const pd=lPending().filter(u=>{const a=lAbs(u);return !lOk(a)&&!lCore(a)});KLOAD.lifeMiss=mw.concat(pd.map(u=>u.split("/").pop())).slice(0,12);if(!miss&&!pd.length){(KLOAD.lifes=KLOAD.lifes||[]).push({why,n:L.size,bytes:0,ms:0,late:0,cached:true});return}}
  LIFE.on=true;LIFE.go=false;const t0=Date.now();lCover();
  const st=KLOAD.life={why,n:0,bytes:0,ms:0,late:0};(KLOAD.lifes=KLOAD.lifes||[]).push(st);const all=new Set();let quiet=0,it=0,fin=false;
- try{for(;;){const L=kitLifeSet();if(it++%5===0)lBgs().forEach(u=>{if(!L.has(u))L.set(u,u)});L.forEach((raw,u)=>{lWant(u,raw);all.add(u)});const pend=lPending();pend.forEach(u=>all.add(u));
+ try{for(;;){const L=kitLifeSet();if(it++%5===0)lBgs().forEach(u=>{if(!L.has(u))L.set(u,u)});L.forEach((raw,u)=>{lWant(u,raw);all.add(u)});const pend=lPending();pend.forEach(u=>all.add(u));lFront(pend);
    if(LIFE.dirty&&![...L.keys()].some(u=>!lOk(u))&&Date.now()-t0<25000){LIFE.dirty=0;try{if(typeof S!=="undefined"&&S&&typeof render==="function")render()}catch(e){}quiet=0;await lSleep(60);continue}
    const lp=[...L.keys()].filter(u=>!lOk(u)),pset=new Set(pend);let have=0;all.forEach(u=>{if(!pset.has(u)&&(lOk(u)||!L.has(u)))have++});
    const slow=Date.now()-t0>6000;lPaint(have,Math.max(1,all.size),slow);
@@ -273,6 +284,7 @@ async function lifeGate(why){(LIFE.calls=LIFE.calls||[]).push(why);/* test count
    await lSleep(120)}}catch(e){console.error("life gate",e)}
  st.n=all.size;st.bytes=[...all].reduce((s,u)=>s+sizeOf(u),0);st.ms=Date.now()-t0;
  const c=lel;lel=null;if(c){c.classList.add("out");setTimeout(()=>c.remove(),500)}
+ if(st.late||LQ.length)lAfter();
  LIFE.on=false;/* review r6: the loop above already re-reads kitLifeSet() of the CURRENT S every round; a re-run after the 25 s cap or 'Vào cung ngay' covered the game again for the same pictures (25 s + 25 s, one flash between) */
  if(LIFE.again){LIFE.again=false;if(!st.late&&!LIFE.go)setTimeout(()=>lifeGate("again"),0)}}
 window.kitLifeGate=lifeGate;
