@@ -454,8 +454,10 @@ html body .pc:has(>.pcr>.pcx){position:relative}
 html body #popw{z-index:41!important}
 html body .pc>.pcr>.pcx{position:absolute!important;top:6px;right:6px;margin:0!important;z-index:8;translate:0 var(--kpcxy,0px)}
 html body .pc:has(>.pcr>.pcx)>.pcl>.kpnm{padding-right:46px}
-/* KIT 32.10: the ✕ owns the card's top-right corner — the first act card starts under it, never under the ✕ */
-html body .pc>.pcr>.pcx+*{margin-top:42px!important}
+/* KIT 32.10: the ✕ owns the card's top-right corner — the first act card starts under it, never under the ✕.
+   person-dialog-restore (owner 18/11 06:10Z): ONLY when the ✕ is the first child. kitPcFix (jk2b) prepends the sticky info block (.kpstick) BEFORE the ✕, so
+   the old ".pcx+*" rule hit the act list under the sticky block and left a 42 px empty band between them (every person card, every result/tab state). */
+html body .pc>.pcr>.pcx:first-child+*{margin-top:42px!important}
 /* kit panels (report / story / info dialogs): the close row "Đã hiểu" is pinned at the dialog's bottom, the body scrolls under it */
 html body .dlg.kpanel>.mr{position:sticky;bottom:0;z-index:9;background:linear-gradient(rgba(255,250,240,0),var(--k-card,#fffaf0) 10px);padding-top:8px}
 `;document.head.appendChild(st)})();
