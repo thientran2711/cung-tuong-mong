@@ -54,3 +54,10 @@ BEFORE (r1 build, same scan rules, reviewer): union overlap + dot under tags + c
 Tests: QUICKCHECK PASS 183 s (render 242/224, tab 448/413, buổi 1191/1291; core gates PASS; build matches). Run: `DSF=2 NODE_PATH=$(npm root -g) node dev/test/map-labels-scan.js <url> <dir|-> 755x1000,1180x820 [-,3,6]`.
 Shots (LOOKED 3x, DSF 2, JPG, CDN upload not used): dev/handover/shots/map-labels-missing/{755x1000,1180x820}-{day,night,courtyard}.jpg (rank 4 save). Delete after verdict.
 Not done: no old-save variants beyond quickcheck; solver can in theory leave a rule broken in an extremely crowded layout (never seen in ~40 runs; then tags stay, none hidden).
+
+## r2b (MAIN ROOT-55: tags cut by the Fold edge) — READY 718c249b (merged main 13bb8c88)
+Cause: the Fold map is zoomed to height and pans; tags of buildings at the visible edge were placed on the whole map, so the screen edge cut them.
+Fix (whole group, kmSolve vp rule, j38): after the default scroll is placed, the solver runs again with the visible map box. A tag whose building centre is in view lies WHOLE inside it; a tag of a building out of view stays WHOLE outside it; a building within 60 px of the edge (mostly cut; 120/200 px only if no clean layout exists) may have its tag WHOLE outside. Never straddling. Courtyard (.kpmv) hall tags step in from the edge (jmapc kmEdge). Pan after open is the player's own.
+Scan adds: cut = 0 (tag box crossing the visible edge) + 412x1058 + courtyard wait. PASS Fold 755x1000, iPad 1180x820, 412x1058 (DSF 2), day/night, ranks 2,3,6, courtyards 13 slots. QUICKCHECK PASS 171 s.
+Shots (looked): dev/handover/shots/map-labels-missing/*.jpg (Fold, iPad day/night/courtyard; 412 is the rotate-phone screen).
+Known: where buildings sit right at the Fold's east edge the tag is just off-screen (pan to see it), with its dot/leader at the edge; one Fold night shot shows a long leader (Cảnh Phúc, ~480 px) - a crowded east edge; offer: fit the whole map width on Fold if sếp prefers (contradicts §85.8).
