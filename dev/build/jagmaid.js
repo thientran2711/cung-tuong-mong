@@ -88,7 +88,7 @@ function amMeNight(){const m=srvM();amNightGain(S);empMet(S,"night",1);const d=a
 PEND.amNight=()=>{if(!isSrv()||(S.age||0)<18)return null;const m=srvM();const room=roomFor("consort");const D=amD();
  const k=empMemK(S);const mem=EMPMEM[k]?`<p class="past">Ngài còn nhớ ${EMPMEM[k]} hôm trước của ngươi.</p>`:"";
  return{t:`<p>Tổng quản Càn Thanh cung đến truyền: đêm nay Hoàng thượng cho gọi ngươi đến Dưỡng Hòa điện hầu.</p>${mem}`,who:pEmp(),o:[
-  {n:"Tắm gội chờ giá",fx:{},x:`Nắm chắc · thành: được sủng hạnh${room?`, rồi được phong ${RANKS[0].n}`:"; hậu cung không còn chỗ phong, ngươi vẫn là cung nữ"}${m?` · kèm: chủ ghen, Chủ tin -${amJealN(m)}: ${chanceW(amJealP(m))}`:""}`,go:()=>amMeNight()},
+  {n:"Tắm gội chờ giá",fx:{},x:`thành: được sủng hạnh${room?`, rồi được phong ${RANKS[0].n}`:"; hậu cung không còn chỗ phong, ngươi vẫn là cung nữ"}${m?` · kèm: chủ ghen, Chủ tin -${amJealN(m)}: ${chanceW(amJealP(m))}`:""}`,go:()=>amMeNight()},
   {n:"Cáo bệnh",fx:{sung:-D.decline},x:`nhường đêm; Hoàng thượng để ý -${D.decline}`,go:()=>{AMN.decline++}}]}};
 /* the kit scene of the summons: the Kính sự phòng picture (jevban KIT_DLGMAP, the same as the consort's "ksp") */
 try{if(typeof KIT_DLGMAP==="object"&&KIT_DLGMAP.ksp&&!KIT_DLGMAP.amNight)KIT_DLGMAP.amNight=KIT_DLGMAP.ksp}catch(e){}
@@ -98,7 +98,7 @@ function amSendQ(v){if(!amOn())return false;try{const m=v&&v.maid;if(!m)return f
   const u=(N.rest*BAL.ag.restW+ill)*(1+((m.loyal||0)>=BAL.mline.riseLoy?N.ally:0))*BAL.ag.needW*amD().send*agMW(v,"scheme");if(!(u>0))return false;
   return mindPick([["keep",BAL.ag.routine/BAL.ag.unit],["send",u]],v)==="send"}catch(e){agErr("send",e);return false}}
 function amSendX(){const m=S.maid;if(!m)return"";const B=BAL.mline;
- return `Nắm chắc · thành: ${m.name} hầu thay đêm nay, được sủng hạnh${roomFor("consort")?`, rồi được phong ${RANKS[0].n}, ${(m.loyal||0)>=B.riseLoy?"vẫn là người của ngươi":"trở mặt với ngươi"} · kèm: mất ${m.name}, cung nữ mới lòng 45`:"; hậu cung không còn chỗ phong, nàng vẫn ở lại hầu ngươi"}`}
+ return `thành: ${m.name} hầu thay đêm nay, được sủng hạnh${roomFor("consort")?`, rồi được phong ${RANKS[0].n}, ${(m.loyal||0)>=B.riseLoy?"vẫn là người của ngươi":"trở mặt với ngươi"} · kèm: mất ${m.name}, cung nữ mới lòng 45`:"; hậu cung không còn chỗ phong, nàng vẫn ở lại hầu ngươi"}`}
 /* ---------- 6 wiring ---------- */
 /* the help line of "Hoàng thượng để ý" (j42 HX.nt) follows the rule in force: with the loop on there is no 45 gate */
 try{const h0=HX.nt;Object.defineProperty(HX,"nt",{get(){return amOn()?`Hoàng thượng để ý: ngài có nhớ mặt ngươi không (0-100). Mỗi việc ngươi làm gần ngài (dâng trà, chạy việc, rót rượu…) ngài nhớ ${BAL.ag.emp.met.keep} tuần; càng để ý, đêm ngài càng dễ cho gọi ngươi đến hầu.`:h0},configurable:true,enumerable:true})}catch(e){}

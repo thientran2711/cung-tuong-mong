@@ -32,7 +32,7 @@ window.__kvS=null;window.__kvDue={};
 (function(){const m0=mindMenu;mindMenu=function(v,t){const K=window.__kvS;if(!K||K.v!==v||K.t!==t)return m0.apply(this,arguments);
  try{const b=bandOf(danger(v,t)+K.m);const allow=BANDS.slice(1,b+1).flatMap(x=>x[2]);const tc=witOf(v);const O=[];v.fails=v.fails||{};
   for(const [k,w0] of KVACT){const a=ACT[k];if(!a||!allow.includes(k))continue;let ok=false;try{ok=a.ok(v,t)}catch(e){}if(!ok)continue;
-   let w=w0*persW(v,k)*(1+K.m/40);let od=null;try{od=a.o?a.o(v,t):null}catch(e){}if(od!=null&&tc>=BAL.wit.lo)w*=Math.pow(cl(od,5,95)/50,(tc-BAL.wit.lo)/BAL.wit.mid);
+   let w=w0*persW(v,k)*(1+K.m/40);let od=null;try{od=a.o?a.o(v,t):null}catch(e){}if(od!=null&&tc>=BAL.wit.lo)w*=Math.pow(oddsCl(od)/50,(tc-BAL.wit.lo)/BAL.wit.mid);
    const f=v.fails[k]||0;if(f)w*=tc<BAL.wit.mid?1+.6*f:Math.pow(.5,f);if(w>0)O.push([k,w])}
   return O}catch(e){return[]}}})();
 /* con bị nhắm: con trai đứng cao nhất trong thứ tự kế vị */
@@ -53,7 +53,7 @@ window.__kvS=null;window.__kvDue={};
  try{if(!S||S.dead)return ev;const run=()=>{let e="";const o=kvOrder();if(o.length<2)return e;
    for(const v of liveRivals(true)){if(!v.alive||v.out||v.plan)continue;const T=kvTargets(v,o);if(!T.length)continue;
     let r=Math.random()*T.reduce((a,b)=>a+b[1],0),i=0;while(r>T[i][1]&&i<T.length-1){r-=T[i][1];i++}const [t,m]=T[i];
-    let c=KV.c*m/KV.base;if(t.shield)c*=.5;if(t===S&&S.guardWarn)c*=.5;if(Math.random()>=c)continue;
+    let c=KV.c*m/KV.base;if(t.shield)c*=.5;if(t===S&&S.guardWarn)c*=.5;if(!roll(c*100))continue;/* ODDS CAP: the one roll */
     window.__kvS={v,t,m};let res="";try{res=npcAct(v,t)}finally{window.__kvS=null}
     if(v.plan&&v.plan.t===key(t)&&KVACT.some(z=>z[0]===v.plan.k))v.plan.kv=m;
     e+=seenNPC(v,t,res);if(S.dead)return e}return e};

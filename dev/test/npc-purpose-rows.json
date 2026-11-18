@@ -1797,7 +1797,7 @@
 "status": "LIVE-OFF",
 "group": "G3",
 "event": "mind slips; heir plot; crisis night; study/charity",
-"fp": "f(t===S&&S.guardWarn)c*=.5;if(Math.random()>=c)continue;"
+"fp": "f(t===S&&S.guardWarn)c*=.5;if(!roll(c*100))continue;"
 },
 {
 "f": "j55.js",

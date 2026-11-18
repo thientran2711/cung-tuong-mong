@@ -65,7 +65,7 @@ function mkMan96(k){try{menInit()}catch(e){}if(!S.men)return null;const V=TM96V[
  const m={id:"m96",role:V.role,rw:V.role.toLowerCase(),haunts:V.haunts.slice(),age,name:nm,trait:tr,loyal:70+R(25),af:20,tinh:62+R(14),letters:0,trysts:0,alive:true,knowsMe:[],tm96:k,known:1};
  S.men=S.men.filter(x=>x.id!=="m96");S.men.push(m);return m}
 function tmRoll96(k){if(!window.TM96_ON)return false;let f=null;try{f=localStorage.getItem("ctm-tm96")}catch(e){}if(f==="0")return false;if(!TM96V[k])return false;if(f==="1")return true;
- let w=TM96_W[k]||0;const h=(hist67()["tm"]||[]);if(h[0]==="tm96a")w*=.6;return rnd67()<w}
+ let w=TM96_W[k]||0;const h=(hist67()["tm"]||[]);if(h[0]==="tm96a")w*=.6;return roll(w*100)}
 /* a new life: maybe weave the three chapters into the plan */
 (function(){const i0=a67init;a67init=function(k){const r=i0.apply(this,arguments);try{rareReg96();if(!tmRoll96(k))return r;const c=S.st&&S.st.ch;if(!c||!c.plan)return r;const m=mkMan96(k);if(!m)return r;
  S.tm96={k,mid:m.id,h:72,sus:0,ev:0,rise:0,tok:1,v:1};const P=c.plan;

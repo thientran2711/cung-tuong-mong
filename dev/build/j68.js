@@ -55,10 +55,10 @@ function c6(n,s){s=s||{};if(s.pw&&s.c&&s.c.bac<0){/* review ag-all-2 r2 A5: pw =
   const P=-s.c.bac,c0=Object.assign({},s.c),l0=Object.assign({},s.l||{});delete c0.bac;delete l0.bac;
   s=Object.assign({},s,{c:c0,w:Object.assign({},s.w||{},{bac:-P}),l:l0,lt:(s.lt||[]).concat(["không mất bạc"]),need:(s.need||[]).concat([{t:`cần ${P} bạc`,ok:(S.bac||0)>=P}])})}
  const wt=fx6(s.w).concat((s.r||[]).map(([a,v])=>relTok(a,v)),s.wt||[]).filter(Boolean),lt=fx6(s.l).concat((s.lr||[]).map(([a,v])=>relTok(a,v)),s.lt||[]).filter(Boolean);
- const p=s.p==null?null:cl(Math.round(s.p),5,95);let x;
+ const p=s.p==null?null:oddsCl(Math.round(s.p));let x;
  if(p!=null)x=`${word(p)} · thành: ${wt.join(", ")||G6("êm chuyện")} · hỏng: ${lt.join(", ")||"không mất gì"}`;else x=wt.join(", ");
  if(s.k&&s.k.length)x+=(x?" · ":"")+"kèm: "+s.k.join(", ");
- const c={n,fx:s.c||{},x,go:()=>{let ok=true;if(p!=null)ok=Math.random()*100<p;
+ const c={n,fx:s.c||{},x,go:()=>{let ok=true;if(p!=null)ok=roll(oddsCl(p));
    if(ok){ap6(s.w);(s.r||[]).forEach(([a,v])=>relDo(a,v));let t="";try{t=s.ok?s.ok():""}catch(e){}log(t||s.wl||"Mọi việc êm xuôi.")}
    else{ap6(s.l);(s.lr||[]).forEach(([a,v])=>relDo(a,v));let t="";try{t=s.no?s.no():""}catch(e){}log(`<span class="r">Không thành:</span> ${t||s.ll||n+"."}`)}}};
  if(s.c&&s.c.suc&&S.suc+s.c.suc<5)c.n+=" (mệt)";if(s.need&&typeof kitOffNeed==="function")kitOffNeed(c,s.need);return c}

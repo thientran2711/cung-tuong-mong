@@ -222,7 +222,7 @@ try{KIT_CAT["loi-rieng"]=["Lối riêng","#2c6e5a"]}catch(e){}
   if(a.lx){const nm=effList(fmt(a.l||{})||"không mất gì","r");const lx=effList([fmt(a.l||{}),a.lx].filter(Boolean),"r");if(h.includes(nm))h=h.replace(nm,lx)}}catch(e){console.error(e)}return h}})();
 /* ---------- dialogs (PEND: survive save / load; full act cards, not hidden: owner rule for route choices) ---------- */
 function rtPush(id,pp){const d=mkP(id,pp);if(!d)return;Q.push({t:d.ti,h:d.t,opts:d.o,stage:d.stage,headArt:d.headArt,optLayout:"rows",showOut:true,pid:d.pid,pp:d.pp});if(!window.__bot)try{showModal()}catch(e){}}
-function rtX(o,thanh,hong,kem){const j=t=>String(t||"").split(" · ").join(" — ");return `${o>=100?"Chắc cy":word(o)} · thành: ${thanh}${o<100?` · hỏng: ${j(hong)||"không mất gì"}`:""}${kem?` · kèm: ${kem}`:""}`}
+function rtX(o,thanh,hong,kem){const j=t=>String(t||"").split(" · ").join(" — ");return `${o>=100?"":word(o)+" · "}thành: ${thanh}${o<100?` · hỏng: ${j(hong)||"không mất gì"}`:""}${kem?` · kèm: ${kem}`:""}`}
 function rtOpt(n,fx,x,go){return{n,fx:fx||{},x,go,showOut:true}}
 (function(){const d0=deserQ;deserQ=function(L){const out=d0.apply(this,arguments);try{out.forEach(q=>{if(q.pid&&/^rt/.test(q.pid)){const d=mkP(q.pid,q.pp);if(d){q.t=d.ti;q.stage=d.stage;q.headArt=d.headArt;q.optLayout="rows";q.showOut=true}}})}catch(e){}return out}})();
 PEND.rtBm=pp=>{const T=S&&S.rt;const v=RV(pp.v);const B=T&&T.bm;if(!v||!v.alive||!B)return null;const m=manById(B.mid);const n=B.n;const ev=typeof evG==="function"?evG(v,S):2;
@@ -339,7 +339,7 @@ PEND.rtNg=pp=>{const T=S&&S.rt;const k=rtNgKid();if(!T||!T.ng||!k)return null;co
   stage:[k].concat(v?[v]:[]),headArt:{src:RT_ART.con,label:"Nghiệm thân"},o:O}};
 /* her own estimate (what she knows: her preps, what her spies saw; a rival accuser may have tampered ~1 in 3) */
 function rtNgEst(){const T=S.rt,N=T.ng,P=N.P,k=rtNgKid();if(!k)return 50;const pc=((P.alum||P.swap)?rtMgO(rtNgN())/100:1)*(P.bribe?(100-BAL.route.cheat)/100:1);
- let pm;if(P.bribe||P.alum)pm=1;else{const oil=N.saw?1:(P.spy?0:(RV(N.acc)?BAL.route.oil/100:0));pm=P.swap?(k.tf?0:1):(k.tf?0:1-oil)}return cl(Math.round(pc*pm*100),5,95)}
+ let pm;if(P.bribe||P.alum)pm=1;else{const oil=N.saw?1:(P.spy?0:(RV(N.acc)?BAL.route.oil/100:0));pm=P.swap?(k.tf?0:1):(k.tf?0:1-oil)}return oddsCl(Math.round(pc*pm*100))}
 function rtNgShown(fresh){const T=S.rt,N=T.ng,P=N.P,k=rtNgKid();const truth=!k.tf;if(fresh)return truth;if(P.bribe||P.alum)return true;if(N.oil&&!P.swap)return false;return truth}
 function rtAfter(){try{if(!S.dead){showModal();render()}}catch(e){}}
 function rtNgN(){const N=S.rt.ng;return 3+(RV(N.acc)?1:0)}

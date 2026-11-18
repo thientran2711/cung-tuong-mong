@@ -42,7 +42,7 @@ function adCharityCard(){if(!S||S.out||typeof charityFx!=="function")return null
 (function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(!S||S.dead||!Array.isArray(deck)||adSrv())return r;
   /* every pool card is dealt (no random five): same objects, same wrappers (j83 WFOLD, jrest) */
   let P=[];try{P=pool()||[]}catch(e){}const have=new Set(deck.map(a=>a&&a.n));
-  for(const a of P){if(a&&!have.has(a.n)){try{if(typeof vOddsFor==="function"){const b=vOddsFor(a);if(b&&a.o!=null&&a.o<100)a.o=cl(a.o+b,5,95)}}catch(e){}deck.push(a);have.add(a.n)}}
+  for(const a of P){if(a&&!have.has(a.n)){try{if(typeof vOddsFor==="function"){const b=vOddsFor(a);if(b&&a.o!=null&&a.o<100)a.o=oddsCl(a.o+b)}}catch(e){}deck.push(a);have.add(a.n)}}
   for(const a of adMaidCards())if(!have.has(a.n)){deck.push(a);have.add(a.n)}
   {const a=adCharityCard();if(a&&!have.has(a.n)){deck.push(a);have.add(a.n)}}
   deck=deck.filter(a=>!(a&&AD_OUT.test(a.n||"")));
@@ -55,7 +55,7 @@ if(typeof kitActArt==="function"){const k0=kitActArt;kitActArt=function(name){tr
 /* cards that open a picker / run a text act (the pop-up's own code), and the door stamp on every shared card */
 (function(){const a0=act;act=function(i){const a=deck&&deck[i];
  if(a&&a.ad&&(a.adOpen||a.adRun)){if(a.done||S.dead||Q.length||a.lock||!can(cardCost(a)))return;const k=cardCost(a);
-  if(a.adRun){spend(k);a.done=1;adDoorMark(a.n);let t="";try{t=a.adRun()||""}catch(e){console.error(e)}if(t){log(`${a.n}: ${t}`);pushModal({t:a.n,h:`<p>${t}</p>`});showModal()}render();return}
+  if(a.adRun){spend(k);a.done=1;adDoorMark(a.n);let t="";try{t=oddsCapped(a)&&!roll(BAL.odds.hi)?oddsSoft("",a.c):a.adRun()||""}catch(e){console.error(e)}/* ODDS CAP soft fail */if(t){log(`${a.n}: ${t}`);pushModal({t:a.n,h:`<p>${t}</p>`});showModal()}render();return}
   spend(k);window.__adPend=a;try{a.adOpen()}catch(e){console.error(e);window.__adPend=null}render();return}
  const r=a0.apply(this,arguments);try{if(a&&AD_DOOR[a.n]&&a.done)adDoorMark(a.n)}catch(e){}return r}})();
 /* the dò la picker: the card is done (and the door shut) only when someone is picked; "Thôi" refunds the khắc as before */
@@ -66,7 +66,7 @@ const AD_ACTNAME={"Bỏ độc vào trà nàng":"poison","Bỏ xạ hương vào
 (function(){const t0=talkOpts;talkOpts=function(p){let A=t0.apply(this,arguments);try{if(!p||!Array.isArray(A)||adSrv())return A;
   if(p.kind==="ty")A=A.filter(a=>a&&a.n!=="Học hỏi y lý");
   if(p.kind==="fallen")A=A.filter(a=>a&&a.n!=="Đưa cơm áo");
-  if(p.kind==="maid"&&S.maid){const i=A.findIndex(a=>a&&a.n==="Tâm sự");if(i>=0)A[i]={n:"Trò chuyện với cung nữ",o:100,w:{},x:`lòng +${BAL.ag.cx2.maidTalk.w.maid} · có khi nghe được tin`,go:()=>{maidTalkDo(S)}}}
+  if(p.kind==="maid"&&S.maid){const i=A.findIndex(a=>a&&a.n==="Tâm sự");if(i>=0)A[i]={n:"Trò chuyện với cung nữ",o:100,inner:1,w:{},x:`lòng +${BAL.ag.cx2.maidTalk.w.maid} · có khi nghe được tin`,go:()=>{maidTalkDo(S)}}}
   if(p.kind==="peddler")A=[{n:"Xem hàng Nội vụ phủ",o:100,x:`hàng mua từ ngoài cung${adRare()?" · tuần này có một món hiếm":""} · không tốn khắc`,adShop:1}];
   if(p.kind==="rival"||p.kind==="hh")A=A.map(a=>{const k=a&&AD_ACTNAME[a.n];return k&&ACT[k]&&ACT[k].n?Object.assign({},a,{n:ACT[k].n}):a});
   A=A.map(a=>{const n=a&&adDoorOfPop(p.kind,a.n);return n&&adDoorUsed(n)?Object.assign({},a,{lock:true,t:(AD_DOOR[n][2]==="buoi"?"đã làm buổi này":(AD_DOOR_WHY[p.kind]||"đã làm tuần này"))}):a})
@@ -77,9 +77,9 @@ const AD_ACTNAME={"Bỏ độc vào trà nàng":"poison","Bỏ xạ hương vào
  try{if(p&&a&&!a.open){const n=adDoorOfPop(p.kind,a.n);if(n&&((typeof used!=="undefined"&&used!==u0)||(S.logSeq||0)!==l0))adDoorMark(n)}}catch(e){}return r}})();
 /* ---------- 3. Hoàng tự: "Chữa bệnh cho con" moved from Hành sự (Y thuật ≥4, Sức -10, Sức khỏe con +30) ---------- */
 if(typeof kidActs==="function"){const k0=kidActs;kidActs=function(k){const L=k0.apply(this,arguments);try{if(k&&k.alive&&S.arts&&S.arts.y>=4&&k.hp<70&&!adSrv()){const t2=whyTime(2);
-  L.push(pbtn(`data-kid="heal" data-kn="${k.name}"`,"Tự bốc thuốc cho con",`Chắc chắn · tốn: 2 khắc, Sức -10 · thành: Sức khỏe con +30 (Y thuật của ngươi)`,t2||(S.suc<BAL.sucNeed.yKid?"thiếu Sức":"")))}}catch(e){}return L}}
+  L.push(pbtn(`data-kid="heal" data-kn="${k.name}"${capAt(BAL.btn.kidHeal)}`,"Tự bốc thuốc cho con",`${capW()} · tốn: ${BAL.btn.kidHeal.k} khắc, Sức -${BAL.btn.kidHeal.suc} · thành: Sức khỏe con +30 (Y thuật của ngươi)`,t2||(S.suc<BAL.sucNeed.yKid?"thiếu Sức":"")))}}catch(e){}return L}}
 if(typeof kidAct==="function"){const k0=kidAct;kidAct=function(a,name){if(a!=="heal")return k0.apply(this,arguments);const k=S.kids.find(x=>x.name===name&&x.alive);
- if(!k||S.dead||Q.length||!can(2)||S.suc<BAL.sucNeed.yKid||!(S.arts.y>=4))return;const b=rsnap();spend(2);apply({suc:-10});k.hp=Math.min(100,k.hp+BAL.eff.jact.hpTop);log(`Ngươi tự bốc thuốc cho ${k.name}: Sức khỏe con ${balSg(BAL.eff.jact.hpTop)}.`);resultShow("Việc của con",b,"sure");render()}}
+ const K=BAL.btn.kidHeal;if(!k||S.dead||Q.length||!can(K.k)||S.suc<BAL.sucNeed.yKid||!(S.arts.y>=4))return;const b=rsnap();spend(K.k);apply({suc:-K.suc});k.hp=Math.min(100,k.hp+BAL.eff.jact.hpTop);log(`Ngươi tự bốc thuốc cho ${k.name}: Sức khỏe con ${balSg(BAL.eff.jact.hpTop)}.`);resultShow("Việc của con",b,"sure");render()}}
 /* ---------- 4. grey card tap = the reason (kit popover). A disabled button gets no click: open on pointerup, and keep the
    click that follows (on touch it can come later) from closing the popover at once. ---------- */
 window.addEventListener("click",e=>{const R=window.__adGreyR;if(R&&Date.now()-(window.__adGreyT||0)<1500&&e.clientX>=R.left&&e.clientX<=R.right&&e.clientY>=R.top&&e.clientY<=R.bottom){e.stopPropagation();e.preventDefault()}},true);

@@ -147,6 +147,8 @@ Object.assign(BAL,{
   thuongBac:10,     /* Thưởng: bạc paid, and bạc needed */
   phatDuc:3,        /* Phạt vô cớ: Đức -N (card text) */
   cheDanh:2,        /* Che chở (servant accused): Danh -N */
+  tra:{base:55,tcDiv:4,loyal:25},   /* Tra khảo a planted spy (a chance, owner 17:00Z): odds he names his master = base + her Tâm cơ/tcDiv − loyal when loyal by nature; hỏng: he holds his tongue, stays */
+  che:{base:45,danhDiv:4,rank:4,failLoy:8}, /* Che chở before Thận Hình ti (a chance): base + her Danh/danhDiv + rank×rank; hỏng: the Danh is spent, he is grateful (lòng +failLoy) */
   lookBac:15,       /* Xem người: bạc paid, and bạc needed */
   upBac:30,         /* Tiến cử: bạc paid, and bạc needed */
   upDanh:2,         /* Tiến cử: Danh -N */
@@ -258,7 +260,7 @@ BAL.staff={retire:[63,68],gift:20,giftAf:10,talk:2,succAge:[46,54],
    such a role takes, when it can, someone whose thiện cảm both ways is under friend.
    ctx (OD:L1253, this life's context for a story option, sum clamped to ±cap): the cast person's thiện cảm / aff (at most ±affCap), her oán / oan
    (at most oanCap), her trait (tr), the player's Tâm cơ (tam: [neutral, per]) and Đức (duc: [neutral, per]), and how many consorts with oán ≥ foeOan
-   watch her (at most foeCap). odds = [min, max] odds of a chancy story option after the context.
+   watch her (at most foeCap). (its odds clamp to the one cap BAL.odds.lo / hi, ODDS CAP).
    shift: an ending no roll decides moves one step worse with base − c × slope and one step better with base + c × slope (each between min and max,
    c = context + (Lợi thế − 1) × sc); base is the same both ways, so a neutral life leans neither way.
    q = tutorial quests of chapters 1–3 (jtq14.js, review/tut-quests): bac = Bạc paid the moment one quest is done (c consort, s cung nữ who still
@@ -267,7 +269,7 @@ BAL.staff={retire:[63,68],gift:20,giftAf:10,talk:2,succAge:[46,54],
 Object.assign(BAL,{st14:{max:14,parts:[[1,3],[4,11],[12,14]],lim:{nhap:6,nhapCnv:8,nhapHi:9,hiR:3,sung:10,tap:8},
  goal:{sung:25,rel:20,art:2,tin:60,nt:14},danh:{nhap:3,sung:2,tap:2,len:4},rw:{nhap:0,sung:1,tap:1,len:2},
  hate:{min:25,base:15,friend:20},tr:{"Xảo quyệt":-5,"Tham vọng":-3,"Kiêu ngạo":-2,"Khiêm nhường":2,"Ân cần":4,"Trung hậu":3},
- ctx:{aff:6,affCap:6,oan:10,oanCap:5,tam:[40,15],duc:[50,20],foeOan:30,foeCap:4,cap:15},odds:[5,95],
+ ctx:{aff:6,affCap:6,oan:10,oanCap:5,tam:[40,15],duc:[50,20],foeOan:30,foeCap:4,cap:15},
  shift:{base:15,slope:2,sc:2,min:5,max:40},
  q:{bac:{c:15,s:3},need:{ban:1},narr:{c:"gt",s:"kn"}}},
 /* cung nữ được sủng hạnh (j42 cnvName): from Hoàng thượng để ý ≥ at, each time he notices her the odds he asks her name and raises her
@@ -277,7 +279,15 @@ function ntRiseOdds(){return Math.max(0,(S.nt||0)/BAL.ntRise.div-BAL.ntRise.sub)
 /* ONE CORE odds ladder (review/one-core-dup; VANPHONG odds words Liều … Nắm chắc, words in KIT_ODDS j79): an odds value o reaches word
    step i when o ≥ cut[i-1]; lo / hi = the lowest / highest odds a chancy option shows. Read by j1 word(), j79 kitOddsLv, jsgame sgLv /
    SG_LO / SG_HI (before: the cuts were typed in all four). */
-Object.assign(BAL,{odds:{cut:[31,46,56,66,81,91],lo:5,hi:95}});
+/* ODDS CAP (owner 17/11 ~17:35Z "Trần 95%"): lo / hi are ALSO the one cap of every roll in the game (j1 roll / oddsCl): nothing is ever above hi
+   nor (for an act's odds) below lo. softFail = what a formerly-sure act spends when it fails at the cap (owner "chỉ hỏng nhẹ" + 17:10Z (1)
+   "không thành công thì sao tốn bạc"): its khắc are spent, and of its cost only the keys in spend (the effort: Sức); the bạc and every other
+   cost (Danh, Đức…) are NOT taken; nothing is gained, nothing else lost. */
+Object.assign(BAL,{confess:{base:70,sungDiv:4,thDiv:5},
+ /* BUTTON ACTS that roll at the odds cap (j63 capAt): k = khắc, suc = Sức each one costs. The handler, its hint and its soft-fail gate read
+    the SAME key (one core); a soft fail spends of it only BAL.odds.softFail.spend (khắc + Sức), never the bạc. */
+ btn:{courtHoi:{k:2},kidTeach:{k:2},kidCare:{k:2},kidGuard:{k:2},cnv:{k:1},h54Thu:{k:1},wkShow:{k:2},h54Day:{k:2,suc:5},kidHeal:{k:2,suc:10},htAsk:{k:1},loSneak:{k:1}},/* Thú tội tư thông (a chance, the Emperor's mercy): base + Sủng/sungDiv + Thái hậu/thDiv; hỏng: bị ban chết */
+ odds:{cut:[31,46,56,66,81,91],lo:5,hi:95,simN:200,softFail:{spend:["suc"]}}});
 function oddsLv(o){let i=0;for(const c of BAL.odds.cut)if(o>=c)i++;return i}
 /* ONE CORE number formatters for player texts (review/one-core-dup r2, OD:L1267 "text prints the constant"): balSg(n) = the signed amount as the
    texts show it ("+4" / "-4"), balAb(n) = the amount without sign ("4"). A text that shows a BAL.eff / BAL.road / BAL.arc amount prints it with these

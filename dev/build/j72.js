@@ -214,12 +214,12 @@ const MN72=["giêng","hai","ba","tư","năm","sáu","bảy","tám","chín","mư�
 function q72Date(){try{if(window.VP&&typeof VP.date==="function")return VP.date(S.month,S.year,S.tuan)}catch(e){}return `Tháng ${MN72[S.month-1]} · năm thứ ${YN72[S.year]||S.year}`}
 function q72Npc(){const q=q72();if(!q72On())return"";const L=liveRivals(true).filter(v=>!v.confined);if(L.length<2)return"";let ev="";
  for(const o of npcWhyAll("npcFavor",{L}).sort((x,y)=>y.s-x.s).slice(0,BAL.ag.why.fav.max)){const a=o.who,b=o.tgt;
-  const tr=(()=>{try{return traitsOf(b)}catch(e){return[b.trait]}})();const p=cl(40+aff(b,a)/2+(tr.includes("Ân cần")?20:0)+(tr.includes("Khiêm nhường")?10:0)-(tr.includes("Kiêu ngạo")?15:0)-(tr.includes("Xảo quyệt")?10:0),5,95);
+  const tr=(()=>{try{return traitsOf(b)}catch(e){return[b.trait]}})();const p=oddsCl(40+aff(b,a)/2+(tr.includes("Ân cần")?20:0)+(tr.includes("Khiêm nhường")?10:0)-(tr.includes("Kiêu ngạo")?15:0)-(tr.includes("Xảo quyệt")?10:0));
   const what=o.why;const ok=roll(p);relAdd(a,b,ok?BAL.eff.j72.q72Npc[0]:BAL.eff.j72.q72Npc[1]);const k=[a.id,b.id].join(">");q.nd=q.nd||{};if(ok)q.nd[k]=(q.nd[k]||0)+1;
   const txt=ok?`${a.name} nhờ ${b.name} ${what}; ${b.name} giúp, hai người thân hơn.`:`${a.name} nhờ ${b.name} ${what}; ${b.name} từ chối, hai người sinh hiềm khích.`;
   q.np.unshift({w:q72Date(),t:txt,a:a.id,b:b.id});if(q.np.length>8)q.np.length=8;try{const s=seenNPC(b,a,txt+" ");if(s)ev+=s}catch(e){}}
  /* Thái hậu / Hoàng hậu give errands to the consort they trust (npc-purpose ladyJob); she hears of it only through someone who tells her (npcTell) */
- for(const o of npcWhyAll("ladyJob",{L})){const v=o.tgt,byTh=o.who===NPW1_TH;const p=cl(45+(v.tai||40)/4,5,95);const ok=roll(p);v.q72job=wk();
+ for(const o of npcWhyAll("ladyJob",{L})){const v=o.tgt,byTh=o.who===NPW1_TH;const p=oddsCl(45+(v.tai||40)/4);const ok=roll(p);v.q72job=wk();
   if(byTh){ap(v,{th:ok?3:-2})}else{relAdd(o.who,v,ok?BAL.eff.j72.q72Npc_2[0]:BAL.eff.j72.q72Npc_2[1])}
   const txt=`${byTh?"Thái hậu":"Hoàng hậu"} tin cậy, nhờ ${v.name} ${o.why}; ${ok?"nàng làm chu đáo, được khen":"nàng làm hỏng, bị chê"}.`;q.np.unshift({w:q72Date(),t:txt,a:v.id});if(q.np.length>8)q.np.length=8;
   if(npcTell(v,{place:whereOf(v)}))ev+=txt+" "}
