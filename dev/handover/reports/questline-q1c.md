@@ -1,4 +1,4 @@
-# Q1c — men help asks (jnrask_m.js) — fix 2 at 65a1421 (rebase on E7a2 q1a pending, then SẴN SÀNG KIỂM)
+# Q1c — men help asks (jnrask_m.js) — SẴN SÀNG KIỂM b013ddf (fix 2, on q1a a615eb7)
 PRIORITY #1 CHECK: OD L644/L1072/L1243/L1252 | main none (Q1 engine not on main yet) | review/questline-q1a 1b6005a (engine + shared nrask-scan, hz exempt), review/questline-q1b 344e1e9 (no clash), review/questline-q1c (this) | claims E7c2 session_01DgYSWkXhh7hPLBJjzFYMWJ (successor of E7c session_01DgYSWmbeLw227mrkMikC5W)
 START_CTX ~5 % · lineage depth 2 · worker (no children).
 
@@ -52,3 +52,7 @@ Tests on 99aa2c5: nrask-scan ALL PASS (also with q1b b34eaed: no men failure, no
 | future-dated words vs the card deadline (rằm, tết, ngày giỗ, future «N tháng»); past ones («đêm qua», «tuần trước», «đã nửa tháng») and durations of the ask («hoãn một năm») kept | 10 | gd_tinh_5#0/#1 (đêm rằm → đêm hẹn, title + label too), st_uoc_10#0 (đợi ba tháng / ở được một tháng → còn xa / không thể ở lâu), off_dan_6#1 (quà tết ×3 → quà ban dịp lễ), vg_dat_8#1 (áo tết → sắp tới), hs_hoa_10#1 (ngày giỗ → lễ cúng sắp tới) | 0 |
 nrask-m-scan carries both rules. ksp_so_7 (hh when the player is Hoàng hậu) is covered by E7a2's engine queen-alias filter (Foreman E).
 Tests on 65a1421: nrask-m-scan PASS, nrask-scan ALL PASS, nrask-engine ALL PASS. Quickcheck/shots to be re-run after the rebase on E7a2's sha (text-only change since 99aa2c5, which passed both).
+
+## REBASE on q1a a615eb7 (E7a2, rebuilt on main b2a9d34) → b013ddf
+review/questline-q1c = 01cc869 + 782eed7 + 4c039a2 + 91d8ab1 (my 4 commits, data unchanged from 65a1421) + b013ddf (site rebuilt) on a615eb7; force-with-lease over 65a1421. Diff vs q1a: only assemble.py (+jnrask_m.js after jnrask.js), jnrask_m.js, nrask-m-scan.js, nrask-m-shots.js (+ generated index.html/sw.js).
+Tests on b013ddf: nrask-m-scan PASS; nrask-scan ALL PASS (with q1b b34eaed added: 7 fails, all Q1b keys, 0 men keys); nrask-engine ALL PASS (7c loads every jnrask*.js); nrask-m-shots SHOTS OK Fold + iPad (local only, CDN 401); quickcheck PASS (open 1336 ms, old save ok, perf render 151/156, tab 354/362, buổi 875/781) — core gates: G3 kit-conform FAIL only «tutorial: 0 intro pages (want 4)», the known tutorial flake (Foreman E: not q1c's).
