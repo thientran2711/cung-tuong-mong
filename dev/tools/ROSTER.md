@@ -35,6 +35,8 @@ node dev/tools/roster.js <save> --who <name | id | role> [--all] [--json]
 - `<name>`: any part of the name, accents optional (`"hai duong"` finds Hải Đường). `<id>`: a record id (`me`, `mm:me`, `s34`, `v12`, `emp`, `th`, `k:me:0`, `m3`…).
 - `<role>`: `"cung nữ của ta"` (her close maid + her maids), `"thái giám của ta"`, `"người hầu của ta"` (all her people), `"cung nữ thân tín của ta"`,
   or the role exactly as the record writes it (`"cung nữ của Tô Uyển Dung"`, `"Hoàng hậu"`).
+- Also per person: `rest / sleep today` (her sleep / rest turn / night watch / break rows of today), `entourage today` (a mistress: the day's
+  pick and why), `knows` (from `S.knw`: what she saw where, or heard from whom and at which hand).
 - Prints per person: `now: <place>, khắc k of buổi b (week w), doing <act>, with <target>, because <reason>` (the khắc the save stopped at), then her
   TIMELINE: every buổi the record keeps (`S.rlog` = this week + 4 before, and the current buổi; khắc after the save's khắc are marked `(plan)`),
   consecutive equal khắc merged. Default the last 8 buổi; `--all` = everything kept; `--json` = machine form.
@@ -65,13 +67,20 @@ Trả về `{at,total,rows,dup,miss,mapMismatch,ok}` và in bảng bằng `conso
 
 ## 3b. Live servants and reasons (j95s, owner OD L1901 points 2 + 3)
 
-- Every maid / eunuch (hers and everyone's, and Thái hậu's household) has her own per-khắc day in the record: serve, clean, meals, breaks, sleep and one
-  night watch at her palace, and at most one walk out per buổi (an errand to Nội vụ phủ / Thái y viện / Kính sự phòng / Tân Giả khố, or a visit to a
-  friend in another palace) which takes the whole buổi. Numbers: `BAL.slv` (dev/build/j95s.js).
-- When her mistress (any consort, Hoàng hậu, Thái hậu, AND the player) goes out, a RETINUE follows: size = ceil(`BAL.slv.ret[rank]` × `BAL.slv.occ[place]`)
-  (Hoàng hậu up to 5, Thái hậu `retTh`), capped by who is free; the close maid goes first if free, else the others by trust; the rest stay
-  ("ở lại trông cung") or keep their own day. Reasons: "Hoàng hậu sang Ngự hoa viên, cung nữ thân cận theo hầu" / "cung nữ thân cận X đang bận (…), nên
-  Hoàng hậu chọn Y theo hầu" / "… chọn theo hầu (tùy tùng n người)". Her own retinue walking with her is her party (not counted as bóng).
+- Every maid / eunuch (hers and everyone's, and Thái hậu's household) has her own per-khắc day in the record: serve, clean, meals, breaks, at most one
+  walk out per buổi (an errand to Nội vụ phủ / Thái y viện / Kính sự phòng / Tân Giả khố, or a visit to a friend in another palace, the whole buổi), and
+  her REST RHYTHM (MAIN 18/11 20:07Z): one rest turn a day ("nghỉ theo lượt", buổi by `BAL.slv.rest.buoi`, `rest.len` khắc), her bedtime in tối from
+  `BAL.slv.sleepFrom` (+0..`sleepJit`), the household's night watch (`BAL.slv.night` servants) rotating day by day, last night's watcher sleeping in for
+  `afterWatch` khắc of sáng. Numbers: `BAL.slv` (dev/build/j95s.js).
+- ENTOURAGE (owner OD 18/11 ~19:45Z (4); replaced the old rank retinue): the PLAYER picks who follows her in one card the first time each day she
+  leaves her palace (any number, among her people present AND free; the busy / absent / asleep greyed with the reason; no adding once out; stored in
+  `S.ent = {d, ids, at}`). Every NPC mistress picks once a day at her first outing by her own reasons (`BAL.slv.ent`: base share × trait × formal
+  place × low mood; trust picks who; the discreet / scheming take only the most trusted), stored in `S.entN = {d, P:{oid:{ids, why}}}`. Each outing:
+  followers = the day's pick ∩ who is free then. Reasons: "Hoàng hậu sang Ngự hoa viên: Hoàng hậu chọn 3 người theo hầu (kiêu ngạo)" /
+  "cung nữ thân cận X không rảnh, …" / "ngươi chọn 2 người theo hầu hôm nay". The rest stay ("ở lại trông cung") or keep their own day.
+- WITNESSES + GOSSIP (`S.knw`, jagknow end): a deed that lands (any NPC's, and the player's shared deeds) is known by the servants whose row stands
+  there at that khắc (her companions see her day; those at home do not); servants who meet in a talking act pass it on (`BAL.slv.gos`), and each tells
+  her mistress by the kn chain's tell / keep choice (to the player: a TIN BÁO line). `S.knw.I` = the things, `S.knw.K[id] = {item: [from, hand]}`.
 - Kept rows: a planned / landed deed (`ag_*`), a secret meeting, a forced list (rest, Tân Giả khố, cấm túc, lãnh cung), a walk to a deed — the pass never
   overwrites them; moves made after the plan are written into the same rows by their own code.
 - Reason guard: no empty / filler reason ("", "phận sự trong cung", "phận sự") stays in the record for anyone; it is replaced by the cause read from the row.
@@ -80,8 +89,9 @@ Trả về `{at,total,rows,dup,miss,mapMismatch,ok}` và in bảng bằng `conso
 
 ## 4. Kiểm tự động
 
-- `node dev/test/live-servants.test.js <index.html> [lives=3]`: retinue size by rank, close-maid-busy fallback, the player's maids, no filler reason,
-  roster.js self-check on real saves + `--who`. `node dev/test/live-servants-probe.js <index.html> [N] [seed]`: one maid's day + reason stats.
+- `node dev/test/live-servants.test.js <index.html> [lives=3]`: T1 NPC day picks, T2 close-maid-busy, T3 the player's picker (present + free
+  only, once a day, no adding, alone), T4 no filler reason, T5 roster.js self-check on real saves + `--who` (entourage, knows), T6 witnesses + gossip,
+  T7 rest rhythm. `node dev/test/live-servants-probe.js <index.html> [N] [seed]`: one maid's day + reason stats.
 - `node dev/test/roster_sim.js [tuần=50] [đời=6]`: độ khó đoán (đoán theo tuần trước) + bất biến mỗi khắc (mô phỏng thẳng).
 - `[NB=4] node dev/test/roster_audit.js <sens|rand> <số đời> <out.json> [shard]`: bot chơi thật (harness dev/measure), mọi xuất thân
   kể cả cung nữ, 2 năm mỗi đời, 3 buổi (mặc định) hoặc 4 buổi (NB=4), kiểm 9 bất biến (a)–(i). Kết quả: dev/test/ROSTER_AUDIT.md.
