@@ -8,4 +8,6 @@ PRIORITY #1 CHECK: OD 0 | ledger 2 | claims 7 | main 1 | review/* 3 | archive 23
 4. Gates on final merge (origin/main 3ff8196 merged in): toil-react.js PASS 3x Fold + 1x iPad 1180x820@2; one-core-guard 0 fails; quickcheck PASS (old save ok; render 198/182 ms, tab 447/420, buổi 1059/1020, tasks>200ms 15/18). (An earlier run on main 550dd1b was also PASS; one buổi median 1163/985 was noise, test-only diff.) Fold + iPad shots LOOKED at: modal on top, no overlap, no cut text; empty picture slots only because the sandbox has no CDN. Ran via file://. Shots in scratchpad only, none in git, no CDN review folder used.
 Note: worker said CLAIMS entry not added; harmless.
 
-PASS fcbe1634fa23a5aaab437b2731384820c346730e
+(origin/main moved to 4cb3a9e after the full run: merged, re-ran toil-react Fold, layers Fold, one-core-guard = PASS; diff still test-only)
+
+PASS 84de2423db0265f4caeaf5a0971ed2853f0308a4
