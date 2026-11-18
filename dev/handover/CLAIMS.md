@@ -10,3 +10,4 @@ shown-odds-one-path | review/shown-odds-one-path | session_01964izErPfcSMFt3TCCH
 | E11b | session_01DgYSWpWi1g7SyTG9ZiYekG | review/ge-writers-w2 (jgedata_w2.js) | GE writers W2 cn/nc/td | Foreman E | 18/11 13:52Z |
 | AG-DEED-PERF (opus; follow-up perf, outcome-identical) | review/ag-deed-perf | C-AG #12 | session_01UV1SzjwvRPnDTMQuN3wnw9 | RUNNING | 18/11 14:10Z |
 shown-odds-one-path-rv | review/shown-odds-one-path-rv | session_01964izEojRf2ME8Lmxpkd5x | RUNNING | 18/11 14:20Z | owner D #1
+| FOREMAN C-AG #13 (opus; successor of #12, opened by #12) | handover FOREMAN_C_STATUS | C-AG #12 | session_01UV1Szgvw457GueTtE27whc | RUNNING | 18/11 14:38Z |
