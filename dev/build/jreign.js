@@ -384,7 +384,10 @@ function rgLNext(){if(!rgOn()||typeof q72CanOffer!=="function"||!q72CanOffer())r
   const tid=RGL[k].q[Math.min(l.st,2)];return !act.has(tid)&&!RGL[k].q.some(t=>act.has(t))});
  if(!C.length)return null;const k=pick(C);const l=L[k]||{st:0};const T=T72I[RGL[k].q[Math.min(l.st,2)]];if(!T)return null;
  const A=rgLA(k);if(!A)return null;const x=q72Make(T,A);if(!x)return null;L._t=S.turn;return x}
-(function(){if(typeof q72Tick!=="function")return;const t0=q72Tick;q72Tick=function(){const r=t0.apply(this,arguments);try{if(rgOn()&&S.tuan===1&&Q.length<=1&&!evBusy()){const x=rgLNext();if(x){q72Offer(x,"");evBusyMark()}}}catch(e){console.error(e)}return r}})();
+/* npc-purpose G1 #10: the line person asks FIRST at tuần 1 (her open step is a standing reason); the generic errand (q72Tick, every BAL.ag.why.q72.gap
+   tuần = one month, so it sat on the same tuần each month) then finds the tuần busy and waits. Before: the errand took tuần 1 first and the
+   'Tâm nguyện' offers fell 50 → 9 in 12 × 200 tuần (rate gate 'Phụ tuyến · Tâm nguyện … (#/#)' 22 → 3). q72Tick's step / deadline pass still runs. */
+(function(){if(typeof q72Tick!=="function")return;const t0=q72Tick;q72Tick=function(){try{if(rgOn()&&S.tuan===1&&Q.length<=1&&!evBusy()){const x=rgLNext();if(x){q72Offer(x,"");evBusyMark()}}}catch(e){console.error(e)}return t0.apply(this,arguments)}})();
 
 /* ---------- Mệnh truyện › Triều cục / Tâm nguyện (kit: kitSubTabs, kitSkillCard, rows67/kitRows, kitChecks, kchip, pbtn) ---------- */
 function rgPWord(p){const Bg=BAL.rg;return p>=Bg.B?"bệ hạ nắm được triều chính":p>=Bg.B-6?"thế bệ hạ đang lên":p<Bg.A?"nhà Tể tướng nắm triều chính":p<Bg.A+6?"nhà Tể tướng đang mạnh":"ba phe giằng co"}
