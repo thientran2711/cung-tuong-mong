@@ -53,3 +53,9 @@ For main's kit keeper (jpres.js KPO_ART / kitFigFx / jfxkit §68.8). All files a
 2. **A2 baby sprite**: `img/kit/kpo-baby.webp` 256x256, 18 KB, swaddled bundle, no face, tilted held look → birth moment (replaces lotus-light placeholder).
 3. **A3 red-thread JOIN sheet**: `img/kit/kpo-join-sheet.webp` 1024x576, 4x4 cells of 256x144 (same grid as fx/thread-sheet.webp: cols 4, rows 4, n 16), play forward 0→15 (slack → taut → loop → knot → golden glow + petals), ~7 fps; 87 KB (over the 40 KB sprite budget because of the glow gradients; load on demand). Replaces the reversed snap sheet.
 - (17/11 ~14:08Z, MAIN s32) KIT REQUEST: person key strip (acquaintance chip + compact two-way relation + likes, kitPcKey of person-leftcol-r1 e06e38a1) also in the ksz3/kdper event dialogs (left column has no key strip there). Low priority; for the kit keeper after person-leftcol is live.
+
+## (18/11, poison-road reviewer session_01964izDCmCqN7i5oYiFbonX for Foreman D) KIT REQUEST — kpanel intro covered by a long option list
+`.kpb` in a kdscroll kpanel shrinks below its own content (jk4 `.kpb{flex:0 1 auto!important;min-height:0}`), so `.opts` starts on top of the intro / facts / item card.
+Seen on live a2ad2401 in "Bỏ độc vào quà" (pgpick: .kpb 48 px vs .kpmain 163 px, 2nd paragraph hidden) and worse with the D8 royal rows (.kpb 66 vs 274 px:
+dish card + warning text hidden), Fold 755x1000@2 and iPad 1180x820@2. Whole family: every kdscroll picker with many options (pgpick, giftpick, taintpick, …).
+Blocks review/poison-road PASS (reports/review-poison-road.md FAIL 1).
