@@ -8,7 +8,8 @@
      S2 a card whose ONLY option is a pure close ("Đã rõ", no effect) shows just the kit ✕ (KIT_CLOSE_W / kitCancelIx): the shared test clear() presses
         the ✕ and the card is gone (main before: clear() returned 'stuck' = the C4 / coop-e2e "Q [Điềm báo …], week never ends" flake);
      S3 guard: Q non-empty + no dialog open + nothing over it -> the next render shows it;
-     S4 a full week with such ✕-only cards queued on both seats ends once on both. */
+     S4 a full week with such ✕-only cards queued on both seats ends once on both.
+     (review r1) S2b a REAL pointer tap on the ✕ closes the pure-close card; S5 negative: a truly hidden card / an invisible ✕ is never "cleared". */
 const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),path=require('path');
 const WURL=process.argv[2]||'https://ctm-coop.victoria-tntt.workers.dev';const LVL=+(process.argv[3]||3);const SWAP=+(process.argv[4]||0);
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,c?300:2500):''))};
@@ -60,9 +61,29 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   const s2=await o.p.evaluate(()=>{const M=document.getElementById('modal');return{hidden:M.hidden,btn:[...M.querySelectorAll('button')].filter(b=>b.offsetParent!==null).map(b=>b.className||b.textContent.trim())}});
   const c2=await clear(o);const q2=await o.p.evaluate(()=>({q:Q.map(m=>m.t),hidden:document.getElementById('modal').hidden}));
   ok(!s2.hidden&&s2.btn.some(c=>/kit-x/.test(c))&&!q2.q.includes('Điềm báo')&&q2.hidden,'S2 '+nm+': a pure-close card shows the kit ✕ and the shared clear() closes it',{s2,c2,q2});
+  /* S2b (review r1): a REAL pointer tap on the ✕ (Playwright hit-test: on screen, not covered) closes it, as the player's finger would */
+  await o.p.evaluate(()=>{Q.push({t:'Điềm báo',kind:'notice',act:1,h:'<p>Chạm ✕.</p>',opts:[{n:'Đã rõ',fx:{},go:()=>{}}]});showModal()});
+  /* other layers the harness leaves open (the life-start roulette, edict movies, panels) sit above the dialog; a player closes those first.
+     For this one check every other layer lets taps through (pointer-events), so the tap proves the ✕ is on screen, not covered inside the dialog, and works. */
+  await o.p.evaluate(()=>{const st=document.createElement('style');st.id='c4pe';st.textContent='body *{pointer-events:none!important}#modal,#modal *{pointer-events:auto!important}';document.head.appendChild(st)});
+  let tap='';try{await o.p.locator('#modal .dlg .kit-x').first().click({timeout:5000});tap='tapped'}catch(e){tap=(String(e.message).match(/<[^\n]*intercepts pointer events/)||[String(e.message).slice(-300)])[0].replace(/src=\S+/g,'').slice(0,700)}
+  await o.p.evaluate(()=>{const s=document.getElementById('c4pe');if(s)s.remove()});
+  const q2b=await until(o,()=>!Q.some(m=>m.t==='Điềm báo')&&document.getElementById('modal').hidden,null,5000);
+  ok(tap==='tapped'&&q2b,'S2b '+nm+': a real tap on the kit ✕ closes the pure-close card ("Đã rõ" = the ✕)',{tap});
   /* S3 */
   await o.p.evaluate(()=>{Q.push({t:'Thử C4b',h:'<p>x</p>'});document.getElementById('modal').hidden=true;render()});
   ok(await until(o,()=>!document.getElementById('modal').hidden&&Q[0]&&Q[0].t==='Thử C4b',null,8000),'S3 '+nm+': Q non-empty + no dialog open → shown again');
+  for(let i=0;i<3;i++)await clear(o);
+  /* S5 negative (review r1): the shared clear() must NOT hide a real stuck state.
+     (a) a card queued but the dialog truly hidden: clear() presses nothing and the card stays queued;
+     (b) a pure-close card whose kit ✕ is not on screen: clear() reports 'stuck' (it never clicks an invisible ✕). */
+  const n5a=await o.p.evaluate(()=>{Q.length=0;Q.push({t:'Thử C4n',h:'<p>x</p>'});document.getElementById('modal').hidden=true;return Q.length});
+  const c5a=await clear(o,1);const q5a=await o.p.evaluate(()=>Q.map(m=>m.t));
+  ok(n5a===1&&c5a!=='x'&&q5a[0]==='Thử C4n','S5 '+nm+': a hidden queued card is not "cleared" by the test helper',{c5a,q5a});
+  await o.p.evaluate(()=>{Q.length=0;Q.push({t:'Điềm báo',kind:'notice',act:1,h:'<p>✕ khuất.</p>',opts:[{n:'Đã rõ',fx:{},go:()=>{}}]});showModal();
+   const st=document.createElement('style');st.id='c4nx';st.textContent='#modal .dlg .kit-x{display:none!important}';document.head.appendChild(st)});
+  const c5b=await clear(o,1);const q5b=await o.p.evaluate(()=>{const r=Q.map(m=>m.t);document.getElementById('c4nx').remove();return r});
+  ok(c5b==='stuck'&&q5b[0]==='Điềm báo','S5 '+nm+': an invisible ✕ is never pressed (clear() says stuck)',{c5b,q5b});
   for(let i=0;i<3;i++)await clear(o)}
  /* S4 */
  for(const o of [H,G])await o.p.evaluate(()=>{Q.push({t:'Điềm báo',kind:'notice',act:1,h:'<p>Cuối tuần.</p>',opts:[{n:'Đã rõ',fx:{},go:()=>{}}]});showModal()});
