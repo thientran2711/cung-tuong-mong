@@ -102,16 +102,19 @@ function kitToastClear(el,dir){try{const rs=[...document.querySelectorAll(KIT_TO
  for(let i=0;i<16;i++){const t=el.getBoundingClientRect();const hit=rs.filter(r=>r.left<t.right&&r.right>t.left&&r.top<t.bottom&&r.bottom>t.top);if(!hit.length)return true;
   if(dir==="down"){const y=Math.max(...hit.map(r=>r.bottom))+6;if(y+t.height>innerHeight-4)return false;el.style.bottom="auto";el.style.top=Math.round(y)+"px"}
   else{const y=Math.min(...hit.map(r=>r.top))-6;if(y-t.height<4)return false;el.style.top="auto";el.style.bottom=Math.round(innerHeight-y)+"px"}}return false}catch(e){return false}}
-window.kitToastClear=kitToastClear;window.kitLinePos=kitLinePos;
+window.kitToastClear=kitToastClear;window.kitLinePos=kitLinePos;window.KIT_TOAST_KEEP=KIT_TOAST_KEEP;
 /* refit after a screen change (tab switch, shell swap): the toasts already up go back to their home spot and clear again */
 function kitToastRefit(){try{const a=document.getElementById("ktbtoast");if(a){const h=document.querySelector("header.hud"),r=h&&h.getClientRects().length?h.getBoundingClientRect():null;a.style.bottom="auto";a.style.top=(r?Math.round(r.bottom+6):6)+"px";if(!kitToastClear(a,"down"))kitLinePos(a)}
  const b=document.getElementById("kupdline");if(b)kitLinePos(b)}catch(e){}}
 window.kitToastRefit=kitToastRefit;
+/* while a toast is up it re-checks every 300 ms (tab switches that skip render, sticky bars that move with scroll); stops when it is gone */
+function kitToastWatch(){try{if(kitToastWatch.t)return;kitToastWatch.t=setInterval(()=>{if(!document.getElementById("ktbtoast")&&!document.getElementById("kupdline")){clearInterval(kitToastWatch.t);kitToastWatch.t=0;return}kitToastRefit()},300)}catch(e){}}
+window.kitToastWatch=kitToastWatch;
 function kitLineCss(){if(document.getElementById("kit-line"))return;const st=document.createElement("style");st.id="kit-line";st.textContent=`
 .kupdline{position:fixed;left:50%;transform:translateX(-50%);z-index:9750;max-width:calc(100vw - 24px);margin:0;padding:5px 14px;border-radius:14px;border:1px solid var(--gold,#b8892b);background:#fffaf0f4;color:var(--ink,#3a2418);font:600 .82rem/1.3 var(--body,inherit);box-shadow:0 4px 14px #0004;text-align:center;pointer-events:none;transition:opacity .5s}
 .kupdline.out{opacity:0}`;document.head.appendChild(st)}
 function kitLine(text,ms){kitLineCss();try{if(typeof kShort==="function")text=kShort(text)}catch(e){}let el=document.getElementById("kupdline");if(!el){el=document.createElement("div");el.id="kupdline";el.className="kupdline";el.setAttribute("role","status");document.body.appendChild(el)}
- el.textContent=text;el.classList.remove("out");kitLinePos(el);clearTimeout(kitLine.t);if(ms)kitLine.t=setTimeout(()=>{el.classList.add("out");setTimeout(()=>{if(el.classList.contains("out"))el.remove()},600)},ms);return el}
+ el.textContent=text;el.classList.remove("out");kitLinePos(el);kitToastWatch();clearTimeout(kitLine.t);if(ms)kitLine.t=setTimeout(()=>{el.classList.add("out");setTimeout(()=>{if(el.classList.contains("out"))el.remove()},600)},ms);return el}
 window.kitLine=kitLine;
 
 /* ---------- 5. ONE Sức NEED PER CARD (owner 17:12Z: "Múa trong yến tiệc": "cần Sức trên 20 (có 17)" AND "Sức ≥5 (có 17)") ----------

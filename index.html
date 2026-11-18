@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"b0ab1562+","t":"2026-11-18T20:22Z","c":"stage-here r2: KIT.md §42.2 keep-clear toasts, §77.2 stay = Lẻn vào","b":"6e427201e0c1","h":[{"s":"6aab33ad","t":"2026-11-18T20:05Z","c":"KIT_REQUESTS: K-Q2-1 DONE 048f3c7"},{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"},{"s":"a5013222+","t":"2026-11-18T18:03Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)"},{"s":"08774c0e+","t":"2026-11-18T17:38Z","c":"ag-stf2 (test only): bribe histogram picks a servant whose lòng moves her bribe odds. Root of the 'disloyal one takes more' red (npc ~3/20,…"},{"s":"0351e140","t":"2026-11-18T16:48Z","c":"shop-panel: «Để ta xem» outside option, 3-column Mua/Bán grid, smallest picture strip, test"},{"s":"ebf25660+","t":"2026-11-18T15:29Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…"},{"s":"9f9c6c2b+","t":"2026-11-18T14:26Z","c":"shown-odds-one-path r1: plant on the spot is done in person (actCtx x.here, no sent-servant pen); Vì sao names spy knowledge (whyKnow); tes…"},{"s":"aa997f3c+","t":"2026-11-18T13:46Z","c":"look-fx r13: index.html / sw.js rebuilt from merged sources"},{"s":"4475ea24+","t":"2026-11-18T12:33Z","c":"grand-endings-engine: site rebuilt (index.html / sw.js / assets.json) after fix 4 + main merge"},{"s":"68cbbb28+","t":"2026-11-18T12:00Z","c":"review life-preload-fu r2v: no half-drawn / empty figure while the HD twin comes (whole group: every fig-* img)"}]};
+window.CTM_BI={"s":"c1a1c438+","t":"2026-11-18T20:23Z","c":"stage-here r2: KIT.md §42.2 keep-clear toasts, §77.2 stay = Lẻn vào","b":"4bbcff6539f1","h":[{"s":"6aab33ad","t":"2026-11-18T20:05Z","c":"KIT_REQUESTS: K-Q2-1 DONE 048f3c7"},{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"},{"s":"a5013222+","t":"2026-11-18T18:03Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)"},{"s":"08774c0e+","t":"2026-11-18T17:38Z","c":"ag-stf2 (test only): bribe histogram picks a servant whose lòng moves her bribe odds. Root of the 'disloyal one takes more' red (npc ~3/20,…"},{"s":"0351e140","t":"2026-11-18T16:48Z","c":"shop-panel: «Để ta xem» outside option, 3-column Mua/Bán grid, smallest picture strip, test"},{"s":"ebf25660+","t":"2026-11-18T15:29Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…"},{"s":"9f9c6c2b+","t":"2026-11-18T14:26Z","c":"shown-odds-one-path r1: plant on the spot is done in person (actCtx x.here, no sent-servant pen); Vì sao names spy knowledge (whyKnow); tes…"},{"s":"aa997f3c+","t":"2026-11-18T13:46Z","c":"look-fx r13: index.html / sw.js rebuilt from merged sources"},{"s":"4475ea24+","t":"2026-11-18T12:33Z","c":"grand-endings-engine: site rebuilt (index.html / sw.js / assets.json) after fix 4 + main merge"},{"s":"68cbbb28+","t":"2026-11-18T12:00Z","c":"review life-preload-fu r2v: no half-drawn / empty figure while the HD twin comes (whole group: every fig-* img)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -46297,16 +46297,19 @@ function kitToastClear(el,dir){try{const rs=[...document.querySelectorAll(KIT_TO
  for(let i=0;i<16;i++){const t=el.getBoundingClientRect();const hit=rs.filter(r=>r.left<t.right&&r.right>t.left&&r.top<t.bottom&&r.bottom>t.top);if(!hit.length)return true;
   if(dir==="down"){const y=Math.max(...hit.map(r=>r.bottom))+6;if(y+t.height>innerHeight-4)return false;el.style.bottom="auto";el.style.top=Math.round(y)+"px"}
   else{const y=Math.min(...hit.map(r=>r.top))-6;if(y-t.height<4)return false;el.style.top="auto";el.style.bottom=Math.round(innerHeight-y)+"px"}}return false}catch(e){return false}}
-window.kitToastClear=kitToastClear;window.kitLinePos=kitLinePos;
+window.kitToastClear=kitToastClear;window.kitLinePos=kitLinePos;window.KIT_TOAST_KEEP=KIT_TOAST_KEEP;
 /* refit after a screen change (tab switch, shell swap): the toasts already up go back to their home spot and clear again */
 function kitToastRefit(){try{const a=document.getElementById("ktbtoast");if(a){const h=document.querySelector("header.hud"),r=h&&h.getClientRects().length?h.getBoundingClientRect():null;a.style.bottom="auto";a.style.top=(r?Math.round(r.bottom+6):6)+"px";if(!kitToastClear(a,"down"))kitLinePos(a)}
  const b=document.getElementById("kupdline");if(b)kitLinePos(b)}catch(e){}}
 window.kitToastRefit=kitToastRefit;
+/* while a toast is up it re-checks every 300 ms (tab switches that skip render, sticky bars that move with scroll); stops when it is gone */
+function kitToastWatch(){try{if(kitToastWatch.t)return;kitToastWatch.t=setInterval(()=>{if(!document.getElementById("ktbtoast")&&!document.getElementById("kupdline")){clearInterval(kitToastWatch.t);kitToastWatch.t=0;return}kitToastRefit()},300)}catch(e){}}
+window.kitToastWatch=kitToastWatch;
 function kitLineCss(){if(document.getElementById("kit-line"))return;const st=document.createElement("style");st.id="kit-line";st.textContent=`
 .kupdline{position:fixed;left:50%;transform:translateX(-50%);z-index:9750;max-width:calc(100vw - 24px);margin:0;padding:5px 14px;border-radius:14px;border:1px solid var(--gold,#b8892b);background:#fffaf0f4;color:var(--ink,#3a2418);font:600 .82rem/1.3 var(--body,inherit);box-shadow:0 4px 14px #0004;text-align:center;pointer-events:none;transition:opacity .5s}
 .kupdline.out{opacity:0}`;document.head.appendChild(st)}
 function kitLine(text,ms){kitLineCss();try{if(typeof kShort==="function")text=kShort(text)}catch(e){}let el=document.getElementById("kupdline");if(!el){el=document.createElement("div");el.id="kupdline";el.className="kupdline";el.setAttribute("role","status");document.body.appendChild(el)}
- el.textContent=text;el.classList.remove("out");kitLinePos(el);clearTimeout(kitLine.t);if(ms)kitLine.t=setTimeout(()=>{el.classList.add("out");setTimeout(()=>{if(el.classList.contains("out"))el.remove()},600)},ms);return el}
+ el.textContent=text;el.classList.remove("out");kitLinePos(el);kitToastWatch();clearTimeout(kitLine.t);if(ms)kitLine.t=setTimeout(()=>{el.classList.add("out");setTimeout(()=>{if(el.classList.contains("out"))el.remove()},600)},ms);return el}
 window.kitLine=kitLine;
 
 /* ---------- 5. ONE Sức NEED PER CARD (owner 17:12Z: "Múa trong yến tiệc": "cần Sức trên 20 (có 17)" AND "Sức ≥5 (có 17)") ----------
@@ -74399,6 +74402,7 @@ function kitLineToast(text){try{if(!text)return null;try{const md=document.getEl
  const r=hud&&hud.getClientRects().length?hud.getBoundingClientRect():null;el.style.top=(r?Math.round(r.bottom+6):6)+"px";document.body.appendChild(el);
  /* keep-clear (jclose kitToastClear): below the tab rows / place name; no room left → the bottom spot above the tab bar, sliding up */
  try{if(typeof kitToastClear==="function"&&!kitToastClear(el,"down")&&typeof kitLinePos==="function")kitLinePos(el)}catch(e){}
+ try{if(typeof kitToastWatch==="function")kitToastWatch()}catch(e){}
  el.addEventListener("click",()=>el.remove());clearTimeout(kitLineToast.t);kitLineToast.t=setTimeout(()=>{el.classList.add("out");setTimeout(()=>{if(el.classList.contains("out"))el.remove()},500)},window.__toastKeep?60000:BAL.entryToastMs);return el}catch(e){return null}}
 window.kitLineToast=window.kitLineToast||kitLineToast;
 function lay(){try{const st=$("stage");if(!st)return;let nm=$("kpname"),en=$("kpent");
@@ -75804,7 +75808,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="6e427201e0c1";window.CTM_BUILD=BUILD;
+const BUILD="4bbcff6539f1";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

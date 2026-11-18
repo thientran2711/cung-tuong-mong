@@ -33,12 +33,13 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
     const gm=document.querySelector('.game').className;const pn=document.getElementById('panel');const pr=pn&&pn.getClientRects().length?pn.getBoundingClientRect():null;
     const alert=!!document.querySelector('#krail [data-rail="closing"]');
     return{t,tab,place:S.place,imgOk:!!wantImg&&im.indexOf(wantImg)>=0,roomImg:k!=="home"&&im.indexOf(SCIMG.home||'@@')>=0,stageVis:vis,panelVis:!!pr&&pr.width>40,
-     spread:kitView().pages===2,maptab:/maptab/.test(gm),alert,chips:window.__chips.slice(),cs:S.closeSeen,sc:JSON.stringify(stClose()),md:!document.getElementById("modal").hidden,ttl:!document.getElementById("title").hidden}},[k,t]);
+     spread:kitView().pages===2,maptab:/maptab/.test(gm),alert,chips:window.__chips.slice(),cs:S.closeSeen,sc:JSON.stringify(stClose()),cover:(()=>{const t=document.getElementById('ktbtoast');if(!t||!t.getClientRects().length||t.classList.contains('out'))return '';const T=t.getBoundingClientRect();const h=[...document.querySelectorAll(window.KIT_TOAST_KEEP)].filter(e=>e.getClientRects().length&&getComputedStyle(e).visibility!=='hidden').filter(e=>{const r=e.getBoundingClientRect();return r.width>2&&r.height>2&&r.height<innerHeight*.5&&r.left<T.right&&r.right>T.left&&r.top<T.bottom&&r.bottom>T.top});return h.map(e=>e.id||e.className).join(',').slice(0,80)})(),md:!document.getElementById("modal").hidden,ttl:!document.getElementById("title").hidden}},[k,t]);
    r.case=lab;r.want=want;
    /* faults: stage picture is not her place; room picture while away; two-page screen: a panel tab without the stage beside it; alert wrong (only where the stage is visible) */
    r.fault=[];if(!r.imgOk)r.fault.push('img');if(r.roomImg)r.fault.push('room');
    if(r.spread&&!r.maptab&&r.panelVis&&!r.stageVis)r.fault.push('nostage');
    if(r.stageVis&&!r.maptab&&r.alert!==want)r.fault.push('alert');
+   if(r.cover)r.fault.push('toast-cover');/* r2: the toast never covers a tab row, the place name or a figure name (KIT §42.2 KEEP-CLEAR) */
    if(r.fault.length)bad++;rows.push(r);
    if(out&&(t==='act'||t==='rel'))await p.screenshot({path:`${out}/${dev}-${lab}-${t}.jpg`,type:'jpeg',quality:80});
   }
