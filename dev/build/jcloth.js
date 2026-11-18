@@ -35,7 +35,7 @@ Object.assign(BAL.looks,{stain:{on:{uot:1,bun:1,tra:0}/* per kind: wet + mud ON 
   tide:[null,{h:.08,v:.6,f:9,soft:.03,op:.42},{h:.15,v:.55,f:9,soft:.045,op:.55},{h:.23,v:.5,f:9,soft:.06,op:.7}],col:[122,84,50],warm:.35,shoe:.85}},
  rot:.5,jit:.05,
  /* r6e tea look: translucent amber (core = inside darkness, ring = tide-line edge, cap = max strength, pull = how far it is pulled toward tea brown on saturated red / orange cloth) */
- tea:{core:.5,ring:.25,cap:.5,mix:.9,tint:[170,98,42],base:1,texK:.3,texMin:.7,texMax:1.3,at:[.3,.28],rot:0,dripX:[-.12,.14,0],dripY:.2,dripLen:[.05,.04,.03],dripW:.006,dripOp:.7,
+ tea:{core:.4,ring:.5,cap:.75,mix:1,tint:[146,82,30],base:.9,texK:.8,texMin:.55,texMax:1.4,at:[.46,.27],rot:0,dripX:[-.12,.14,0],dripY:.2,dripLen:[.05,.04,.03],dripW:.006,dripOp:.7,
   /* r6h: one fixed splash (decal 1, no turn, no size jitter) for every costume; sc = width share of the robe; drips = thin runs down the grain */
   lv:[null,{sc:.14,op:1,drips:1},{sc:.2,op:1,drips:2},{sc:.27,op:1,drips:3}]}}});
 /* ---------- tiny deterministic noise ---------- */
@@ -192,7 +192,7 @@ function clothDecalMip(dec,dw){let m=dec;while(m.w>dw*2&&m.w>8&&m.h>8){if(!m.hal
 let clothTeaDec=null;
 function clothTeaShape(){if(clothTeaDec)return clothTeaDec;const N=128,data=new Uint8ClampedArray(N*N*4);for(let y=0;y<N;y++)for(let x=0;x<N;x++){const dx=(x+.5-N/2)/(N/2),dy=(y+.5-N/2)/(N/2),r=Math.hypot(dx,dy),t=Math.atan2(dy,dx),R=.62*(1+.1*Math.cos(2*t+1)+.08*Math.cos(3*t+2)+.05*Math.cos(5*t+.5)),a=1-clothSmooth(R-.22,R+.04,r);const i=(y*N+x)*4;data[i]=data[i+1]=data[i+2]=200;data[i+3]=Math.round(255*a)}return clothTeaDec={w:N,h:N,data}}
 let clothTeaLm=150;
-function clothTeaMix(out,i,sv){const T=BAL.looks.stain.tea,r=out[i*4],g=out[i*4+1],b=out[i*4+2],L=r*.3+g*.59+b*.11,tx=Math.min(T.texMax,Math.max(T.texMin,L/clothTeaLm)),k=T.base+T.texK*(tx-1),a=Math.min(1,sv/T.cap*T.mix);
+function clothTeaMix(out,i,sv){const T=BAL.looks.stain.tea,r=out[i*4],g=out[i*4+1],b=out[i*4+2],L=r*.3+g*.59+b*.11,tx=Math.min(T.texMax,Math.max(T.texMin,L/clothTeaLm)),k=T.base+T.texK*(tx-1),a=Math.min(1,sv*T.mix);
  const tr=T.tint[0]*k,tg=T.tint[1]*k,tb=T.tint[2]*k,nr=r+(tr-r)*a,ng=g+(tg-g)*a,nb=b+(tb-b)*a,NL=nr*.3+ng*.59+nb*.11,f=NL>L&&NL>0?L/NL:1;out[i*4]=nr*f;out[i*4+1]=ng*f;out[i*4+2]=nb*f}
 function drawDecalOnCloth(out,W,H,mk,dec,ax,ay,scale,rot,op,blend,tint,tm){const B=BAL.looks.stain;const fw=mk.x1-mk.x0+1,dw=Math.max(2,fw*scale);if(blend!=="shade")dec=clothDecalMip(dec,dw);const sc=dw/dec.w,dh=dec.h*sc,c=Math.cos(rot),sn=Math.sin(rot),R=Math.hypot(dw,dh)/2+1;let n=0;
  for(let y=Math.max(0,Math.floor(ay-R));y<=Math.min(H-1,Math.ceil(ay+R));y++)for(let x=Math.max(0,Math.floor(ax-R));x<=Math.min(W-1,Math.ceil(ax+R));x++){const i=y*W+x,mm0=(blend==="shade"?mk.m:mk.mS)[i];if(mm0<.5)continue;const mm=clothSmooth(.5,.97,mm0);
