@@ -961,3 +961,4 @@ LESSONS s39: look at neighbours side by side before asking her to pick (A/B/C gl
 - (18/11 02:16Z) makeup-lux r2v 0e6489f6 never landed (B PASS 22:52Z) → builder s37a batch s40b re-merge onto eb3675a6; then looks-s40 + hoa-dien rebase on it. hoa-dien b3dc5195 (drop mai+bac via BAL.hd.drop, old-save map) still on old 'nhạt tươi' tone → sat options pushed again.
 - (18/11 02:21Z) OWNER smudge pick 20 % all levels + makeup LOD at small sizes + mascara a bit darker → smudge worker r14.
 - (18/11 02:24Z) cloth-xoc c3dbe95 mud vertical but reads as grass tufts, hem edge clean → Magnific mud decals (hem band, drops, drip streaks). Not shown to owner.
+- (18/11 02:31Z) OWNER: wet front panel white/washed → cloth-xoc: wet never lighter than dry (measure L), thin specular only.
