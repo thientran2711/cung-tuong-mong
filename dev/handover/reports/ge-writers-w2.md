@@ -1,4 +1,4 @@
-# ge-writers-w2 — W2 (cn_* ×4 · nc_gian nc_su nc_vuong · td_* ×4) — READY 6e0426df (E11b → E11b2)
+# ge-writers-w2 — W2 (cn_* ×4 · nc_gian nc_su nc_vuong · td_* ×4) — READY r2 2e37bdc9 (r1 6e0426df FAIL) (E11b → E11b2)
 PRIORITY #1 CHECK ('grand ending' / 'ge-writers-w2'): OD 5 | main engine LIVE (jge.js/jgedata.js/jbalge.js) | review/ge-writers-w2 = this branch (reused, nothing rebuilt) ; review/ge-writers-w1 df30265f (shared test block source) | claims E11b → E11b2 session_01DgYSWmfFdwEVWhdEJkhbTh.
 
 Branch `review/ge-writers-w2` = **6e0426df** (merged LIVE main 94d11623). No push to main, no PR. FOR B: none (every option name is a real road option; no road patch).
@@ -43,6 +43,21 @@ Open at .11: 11/11 IN. Shading: 11/11 roads, 44/44 lives IN. 0 page errors.
 
 ## Files
 dev/build/jgedata_w2.js (new) · dev/build/jbalge.js (44 rows in the literals) · dev/build/assemble.py (one name) · dev/test/ge-guard.js + ge-engine.js + dev/measure/ge-measure.js (= W1 df30265f) · index.html / sw.js rebuilt.
+
+## ROUND 2 (review E11r-w2 FAIL 6e0426df → fixes) — E11b2, branch a2774fa8 (merged main 13bb8c88)
+| fix | before | after |
+|---|---|---|
+| 1 law 6b/c | cn_chu_4 «người đã sinh ra nó» (tablet, ngọc điệp, Tông nhân phủ returns him to her) | Foreman E route (b): text true for EVERY son — she bows-in the new king, «ngai vàng là của thiên hạ»; a: tấu chương through her hands; ft: Tông nhân phủ takes him to Đông cung for the thầy; fail «Con rời tay mẹ» |
+| 1 | cn_than_2 «dòng máu tiên triều» (t/a/ha/ft) | the Thẩm case cleared, «dòng máu họ Thẩm» as the banner; ft: Thẩm enemies raise the old case; fail kept |
+| 1 | td_an_4 «hũ tro của cha … chùa ngoài thành» | the road's grave: «dời mộ cha về quê cũ» (= option «Xin dời mộ cha về quê»); fail «Mộ cha chưa dời»; dropped «cây hồng mẹ từng trồng» (no road fact) |
+| 1 | nc_su_3 a «mất chức ở Binh bộ» | «tờ sớ của người cha không còn ai nghe» (the salt house whose father dâng sớ) |
+| 2 terms | td_ke_2 «kẻ đã cầm dao … người cầm dao» | road words «con dao năm xưa» / «bàn tay sau màn» (jrd_td: «bàn tay sau màn năm ấy»; the review's «bàn tay cầm dao» is not in the road) |
+| 3 dups | cn_chu lean.p «Xin {eun} giữ lão lại» ×2, cn_chu_4 pull «Tự thức canh, mời thái y khác» ×2 | once each; dev/test/ge-guard.js +1 line «no name twice in one list» (pilots 0, W1 fd7c6775 0, W2 0 → W1 can take the line unchanged) |
+| 4 place/scene | cn_tinh_4 «am Tĩnh Thủy» (nowhere in game), same altar+Sư bà scene as td_tha_3 | chùa Hộ Quốc (jrd_td/jrd_ch); scene = leaves the old khăn thêu at the gate, sweeps leaves; no Sư bà (ft «Nhà chùa») |
+| 4 polish | stock fail frames «Lời xin ra cung bị bác/gác lại», «Chứng cứ … bị bác/gọi là …», «… vững hơn ngươi tưởng» on cn_than_3/4, nc_su_3, td_an_1/4, td_ke_1 | each W2 ft reworded (none of the three frames left in W2) |
+| 5 measure (6 lives k+c each) | nc_vuong 2.50 (n4) · cn_chu 1.33 (m2) | nc_vuong **2.17 IN** (m10) · cn_chu **3.20 OUT** (m10: ge2 target closed nothing) → 3 sibling Khóa: ge1 ← «Chào {v} trước, như xưa» (ge2 Chuỗi .8), ge2 ← «Đứng chờ {v} chào theo phẩm» (ge1 Chuỗi .8), ge3 ← «Xin Hoàng hậu xét lại bổng lộc» (ge4 Chuỗi .9) → m11 (6 lives): cn_chu **2.00 IN**, kind→thiện 3/3, cruel→ác 3/3 |
+Family scan (all 44, t/a/ht/ha/ft/cw): places/offices/kin/named objects checked against the road's own text (jrd_<o>.js + j67 .4 + ch12–14): after the fixes no fact is missing from its road; outside-road names left are real game places only (td_song_2 Dưỡng Tâm / Chính Dương). Ending-created objects (rương, gấm, áo vải) are outcomes, not road facts. td_tha_1/3 letters = the road's «đốt thư».
+**READY r2 = 2b8c96f3** (main fa411d6f merged). Tests: ge-guard 6/6 · ge-engine all 456/456 · one-core PASS · build_site OK · quickcheck PASS (alone). assemble.py: W1 not on main yet → line = jgedata.js, jgedata_w2.js; when W1 lands first the order is jgedata.js, jgedata_w1.js, jgedata_w2.js (the re-merge keeps both).
 
 ---
 ## E11b history (1e499220, kept for the reviewer)
