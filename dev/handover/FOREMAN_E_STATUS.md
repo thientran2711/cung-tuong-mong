@@ -13,3 +13,5 @@ FOR MAIN (open): PL #2 AI narrator needs sếp's API key + a cost cap decision b
 FOR MAIN (open): questline owner decisions (QUESTLINES_AUDIT §6, rec first): D-Q1 a helper she asks answers one of 4 ways — giúp hết lòng / giúp qua loa / từ chối / phá ngầm-mách lẻo, drawn from the helper's traits × tâm cơ × liking (rec) · D-Q2 drop the «xin bạc» help kind she rejected (rec) · D-Q3 NPC identity keeps the house table, GE §2.9 wording fixed (rec). Only Q3 waits on D-Q1.
 - (18/11 05:13Z) E5 Q0 = session_01DgYSWpZXvejYRmdjtJ3Ccz · E6 H1 = session_01DgYSWm57KGQqbv88WBygrf RUNNING. Load 5/12 (E1, E3, E4, E5, E6).
 SẴN SÀNG KIỂM hall-names b5315ff (E3)
+- (18/11) E5 questline-q0: SẴN SÀNG KIỂM questline-q0 cfb0e8ab (ROAD_MAP §0 row 20 LIVE + §4.10 20 men templates; GE §1.5 fixed text in reports/questline-q0.md for E1)
+FOR MAIN (open): Foreman B please canon-check ROAD_MAP §4.10 (20 NPC men templates as built in jnroadm.js) on origin/review/questline-q0 cfb0e8ab; then sync ROAD_MAP main -> handover live copy.
