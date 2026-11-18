@@ -20,3 +20,9 @@ Total gens 15 (12 final + 3 discarded style-B) + 12 cut-outs (+3 discarded).
 ## HANDOVER (rollover: ctx past START+25 %) — c21–c24 NOT started
 Successor (opened by ROOT-31): run the same command per person/age; refs c21–c24 ids above (a65 uses the a51 id). Prompt differences per person (items/colours) come out of build.py automatically: c21 ruby + kingfisher phoenix fan; c22 orchid purple + ruyi; c23 crimson + phoenix seal box; c24 scarlet + jewel casket. Look at every image (≤600 px), regen max 3, cut-out, download, sheet (a36|a51|a65 on parchment, 900 px high), CDN push: worktree /home/user/wt/cdn2 (origin/main sparse dev/site), `CLOUDFLARE_API_TOKEN=proxy-injected python3 dev/site/cdn_sync.py img/_review/thaihau`. Scratch scripts at /tmp/claude-0/.../scratchpad/w (may be gone).
 ~50% xong (c17–c20 of c17–c24) / ~0% chơi được (waiting review)
+
+## T2b (c21 Thai hau 2-ref sample, per ROOT-32 order)
+START_CTX ~15 %. Old 1-ref --nostyle gens (void): jUogj0FLD0 / 3zKGZe4REY / Lw8UlK2swO (cut-outs vQAufE2a47 / rgXljkMxtc / VX7dpqfMMU).
+New 2-ref (own t1 id 8aihWLhIrU a36, eIPoA1GdqL a51+a65; style eIyOFEidqL; `build.py c21 --state thaihau --age aXX`, no --nostyle): gens gOmJOIsSXO / YMlVMl1WeC / 4RF3RqW9Aa; cut-outs UPvy4zjwny / aFGQHlefSh / SyhOPY6Ub8. 3 gens, no regen.
+Check: faces consistent with her t1; stiff squared shoulder piece + standing collar + jade button; fan only; lips closed, no forehead mark; a51 silver streaks modest, a65 clearly silver-grey.
+CDN: https://ctm-img.victoria-tntt.workers.dev/img/_review/thaihau-2ref/c21_sheet.jpg (row1 old, row2 new) + c21_a36/a51/a65.png. STOPPED; c22-c24 not started, waiting for ROOT-32 GO.
