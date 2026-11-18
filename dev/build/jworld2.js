@@ -301,5 +301,5 @@ if(typeof framed==="function"){const f0=framed;framed=function(p,why){const r=f0
 try{const K=typeof ACT!=="undefined"&&ACT.kframe;if(K&&K.f){const f0=K.f;K.f=function(a,t){const r=f0.apply(this,arguments);if(/đào được hình nhân/.test(String(r||"")))vucoCause(t,a);return r}}}catch(e){wErr("kframe",e)}
 })();
 /* NPC-PURPOSE G3 kind: who pins the theft on whom — the consort with the strongest grudge (≥ BAL.ag.why.g3.scape.min) against another */
-npwReg("g3scape",{who:()=>liveR().filter(v=>!v.out&&!v.confined),why:a=>{const L=liveR().filter(t=>t!==a&&!t.out);const t=npwPick(L,x=>hostility(a,x));
+npwReg("g3scape",{who:()=>liveRivals(true).filter(v=>!v.out&&!v.confined),why:a=>{const L=liveRivals(true).filter(t=>t!==a&&!t.out);const t=npwPick(L,x=>hostility(a,x));
  const s=t?hostility(a,t):0;return t&&s>=BAL.ag.why.g3.scape.min?{s:Math.min(100,s),t,r:"oán "+npwNm(t)}:null}});
