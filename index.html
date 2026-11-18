@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"aff9a51d+","t":"2026-11-18T01:43Z","c":"life-preload: dialog waits for its picture with opacity 0 (text stays readable to tools; time-spill guard PASS); warm-continue probe","b":"7f39977cc643","h":[{"s":"4eac30bc+","t":"2026-11-17T22:57Z","c":"review coop-thin-c r1 #2: her NPC pack resend (F1) listens on any guest seat, not only while the C switch is on: a level drop / build hold …"},{"s":"c7375c0c+","t":"2026-11-17T22:33Z","c":"batch s38a: dudo-blank-r1 2270c4c5 merged onto main 99f3978d; site rebuilt"},{"s":"99f3978d+","t":"2026-11-17T21:07Z","c":"batch s37a: display-shelf-r3rv 41418cd8 merged onto main 4c8568f5; site rebuilt"},{"s":"4c8568f5+","t":"2026-11-17T20:30Z","c":"batch s36a: main 60b0e3bf (display-shelf) merged; jdisp gated on BAL.shelf.ui (=0, room hidden); site rebuilt"},{"s":"da86e866","t":"2026-11-17T20:29Z","c":"Thẻ hành sự chia hai khối THÀNH và BẠI cho rõ được mất; khung dài có chữ \"Kéo xuống\" nhắc còn nữa; thẻ người chỉ ghi tước vị một lần, không…"},{"s":"9c6292d3+","t":"2026-11-17T20:17Z","c":"review display-shelf r2: Thái hậu rebuke through the one stat path ap (favour runs -100..100; cl(...,0,100) RAISED a negative favour to 0);…"},{"s":"85545ce7+","t":"2026-11-17T20:02Z","c":"world_check2 §1: a kind she died in is played again on a new life (fresh() kept as window.__wcFresh) — her random death mid-loop failed tha…"},{"s":"fc7c649f+","t":"2026-11-17T19:42Z","c":"review looks-2 r2: looks-2 layer scan follows the owner's AVATAR = ID CARD rule (17/11 ~18:10Z, main kit-fx-register): portrait/avatar rows…"},{"s":"0a508368+","t":"2026-11-17T18:53Z","c":"wx-anim: site rebuilt"},{"s":"25c3b626","t":"2026-11-17T19:06Z","c":"Dư đồ dựng dọc gọn hơn, dấu ! sáng và to hơn; thẻ người nêu thẳng điều đã biết, chạm dòng gạch chấm mới thấy cách biết; Bảng vàng giữ đúng …"}]};
+window.CTM_BI={"s":"c9978c89+","t":"2026-11-18T01:49Z","c":"life-preload: life-set re-check off the render path (idle callback)","b":"a50ce160c827","h":[{"s":"4eac30bc+","t":"2026-11-17T22:57Z","c":"review coop-thin-c r1 #2: her NPC pack resend (F1) listens on any guest seat, not only while the C switch is on: a level drop / build hold …"},{"s":"c7375c0c+","t":"2026-11-17T22:33Z","c":"batch s38a: dudo-blank-r1 2270c4c5 merged onto main 99f3978d; site rebuilt"},{"s":"99f3978d+","t":"2026-11-17T21:07Z","c":"batch s37a: display-shelf-r3rv 41418cd8 merged onto main 4c8568f5; site rebuilt"},{"s":"4c8568f5+","t":"2026-11-17T20:30Z","c":"batch s36a: main 60b0e3bf (display-shelf) merged; jdisp gated on BAL.shelf.ui (=0, room hidden); site rebuilt"},{"s":"da86e866","t":"2026-11-17T20:29Z","c":"Thẻ hành sự chia hai khối THÀNH và BẠI cho rõ được mất; khung dài có chữ \"Kéo xuống\" nhắc còn nữa; thẻ người chỉ ghi tước vị một lần, không…"},{"s":"9c6292d3+","t":"2026-11-17T20:17Z","c":"review display-shelf r2: Thái hậu rebuke through the one stat path ap (favour runs -100..100; cl(...,0,100) RAISED a negative favour to 0);…"},{"s":"85545ce7+","t":"2026-11-17T20:02Z","c":"world_check2 §1: a kind she died in is played again on a new life (fresh() kept as window.__wcFresh) — her random death mid-loop failed tha…"},{"s":"fc7c649f+","t":"2026-11-17T19:42Z","c":"review looks-2 r2: looks-2 layer scan follows the owner's AVATAR = ID CARD rule (17/11 ~18:10Z, main kit-fx-register): portrait/avatar rows…"},{"s":"0a508368+","t":"2026-11-17T18:53Z","c":"wx-anim: site rebuilt"},{"s":"25c3b626","t":"2026-11-17T19:06Z","c":"Dư đồ dựng dọc gọn hơn, dấu ! sáng và to hơn; thẻ người nêu thẳng điều đã biết, chạm dòng gạch chấm mới thấy cách biết; Bảng vàng giữ đúng …"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -42231,10 +42231,10 @@ function kitLifeSet(){const M=new Map();const add=r=>{if(r&&typeof r==="string")
  try{if(typeof S==="undefined"||!S||typeof figFor!=="function")return M;
   const ppl=[S,{kind:"emp"},{kind:"th"},S.maid,S.court&&S.court.ty,S.court&&S.court.ksp].concat(S.staff||[]);
   try{if(typeof curPeople==="function")curPeople().forEach(p=>ppl.push(p))}catch(e){}
-  const hc=[];try{(typeof rivals!=="undefined"&&rivals||[]).forEach(v=>{if(v&&!v.dead){if(v.fid)ppl.push(v);else hc.push(v)}})}catch(e){}
-  for(const p of ppl){if(!p)continue;try{add(figFor(p,"por"));add(figFor(p))}catch(e){}}
-  /* Hậu cung list: the portrait of every living consort (a figure is chosen for her here, as the list itself would do on first open) */
-  for(const v of hc.slice(0,24)){try{add(figFor(v,"por"))}catch(e){}}
+  try{(typeof rivals!=="undefined"&&rivals||[]).forEach(v=>{if(v&&!v.dead&&v.fid)ppl.push(v)})}catch(e){}
+  /* only people whose figure is already chosen (fid): never choose one here — a choice made on a save's copy (title prefetch) would differ
+     from the one the game makes later, and someone without one has not been on screen yet (the gate's DOM scan covers the first screen) */
+  for(const p of ppl){if(!p)continue;try{const w=typeof figWho==="function"?figWho(p):p;if(!w||!w.fid)continue;add(figFor(p,"por"));add(figFor(p))}catch(e){}}
   try{if(typeof evArt==="function")add(evArt())}catch(e){}
   try{if(typeof Q!=="undefined"&&typeof kitEvArt==="function")Q.slice(0,3).forEach(m=>{const a=kitEvArt(m);if(a&&a.src)add(a.src)})}catch(e){}}catch(e){}
  return M}
@@ -42247,6 +42247,8 @@ function lPending(root){const out=[],H=innerHeight,W=innerWidth;for(const im of 
 function lBgs(){const out=[],H=innerHeight,W=innerWidth;for(const e of document.body.getElementsByTagName("*")){const bg=getComputedStyle(e).backgroundImage;if(!bg||bg==="none"||bg.indexOf("url(")<0)continue;
  if(e.closest("#klife,#kload"))continue;const r=e.getBoundingClientRect();if(!r.width||!r.height||r.bottom<0||r.top>H||r.right<0||r.left>W)continue;
  for(const m of bg.matchAll(/url\("?([^")]+)"?\)/g)){const u=lAbs(m[1]);if(u&&!/^data:/.test(u))out.push(u)}}return out}
+/* a core picture is in the local cache since the first loading screen: never a reason to show the gate */
+let CORE=null;function lCore(u){try{if(!MAN)return true;if(!CORE)CORE=new Set(MAN.files.filter(f=>f[3]==="core").map(f=>f[0]));const m=/img\/[^?#]*/.exec(u);return !!m&&CORE.has(decodeURIComponent(m[0]))}catch(e){return true}}
 let lel=null;
 function lCover(){if(lel)return lel;lel=document.createElement("div");lel.id="klife";lel.className="modal kpscene kload klife";
  try{kitBackdrop(lel,"title")}catch(e){}
@@ -42258,7 +42260,9 @@ function lPaint(have,total,slow){if(!lel)return;const b=lel.querySelector(".klb"
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-klife]");if(!b)return;e.stopPropagation();LIFE.go=true},true);
 const lSleep=t=>new Promise(ok=>setTimeout(ok,t));
 async function lifeGate(why){if(LIFE.off)return;/* test hook: KLIFE.off = no gate (mid-load shots of §59.1) */if(LIFE.on){LIFE.again=true;return}
- if(why!=="start"){const L=kitLifeSet();lBgs().forEach(u=>L.set(u,u));let miss=0;/* a background not yet seen this session counts as missing: a short gate (local cache) rather than one empty frame */L.forEach((raw,u)=>{if(!lOk(u)){miss++;lWant(u,raw)}});if(!miss&&!lPending().length){(KLOAD.lifes=KLOAD.lifes||[]).push({why,n:L.size,bytes:0,ms:0,late:0,cached:true});return}}
+ if(why!=="start"){const L=kitLifeSet();lBgs().forEach(u=>{if(!lCore(u))L.set(u,u)});let miss=0;/* a background not yet seen this session counts as missing: a short gate (local cache) rather than one empty frame */const mw=[];L.forEach((raw,u)=>{if(!lOk(u)&&!lCore(u)){miss++;mw.push(u.split("/").pop());lWant(u,raw)}});
+  /* pictures already on the device (core set, or brought in by the title prefetch) paint within a frame: not a reason for the screen */
+  const pd=lPending().filter(u=>{const a=lAbs(u);return !lOk(a)&&!lCore(a)});KLOAD.lifeMiss=mw.concat(pd.map(u=>u.split("/").pop())).slice(0,12);if(!miss&&!pd.length){(KLOAD.lifes=KLOAD.lifes||[]).push({why,n:L.size,bytes:0,ms:0,late:0,cached:true});return}}
  LIFE.on=true;LIFE.go=false;const t0=Date.now();lCover();
  const st=KLOAD.life={why,n:0,bytes:0,ms:0,late:0};(KLOAD.lifes=KLOAD.lifes||[]).push(st);const all=new Set();let quiet=0,it=0,fin=false;
  try{for(;;){const L=kitLifeSet();if(it++%5===0)lBgs().forEach(u=>{if(!L.has(u))L.set(u,u)});L.forEach((raw,u)=>{lWant(u,raw);all.add(u)});const pend=lPending();pend.forEach(u=>all.add(u));
@@ -42276,15 +42280,15 @@ window.kitLifeGate=lifeGate;
 /* TITLE PREFETCH (owner 18/11 02:06Z "không lẽ bây giờ tôi cứ bấm từng kiếp"): as soon as the game opens, the life sets of EVERY saved life
    (all slots, newest first) come in the background, 4 at a time, before the generic 'fig' set (it waits while LIFE.busy) — so tapping any life
    is usually instant and the gate above shows nothing. The set of a save is read by lending its S / rivals to kitLifeSet for one synchronous call. */
-function kitSaveLifeSet(d){const M=new Map();if(!d||!d.S||typeof S==="undefined")return M;const S0=S,R0=rivals;
- try{S=d.S;rivals=Array.isArray(d.R)?d.R:[];return kitLifeSet()}catch(e){return M}finally{S=S0;rivals=R0}}
+function kitSaveLifeSet(d){const M=new Map();if(!d||!d.S)return M;const S0=S,R0=rivals;
+ try{S=d.S;rivals=Array.isArray(d.R)?d.R:[];try{if(!S.origin&&typeof originByKey==="function")S.origin=originByKey(d.ok)}catch(e){}return kitLifeSet()}catch(e){KLOAD.prefetchErr=String(e);return M}finally{S=S0;rivals=R0}}
 window.kitSaveLifeSet=kitSaveLifeSet;
 const PQ=[];let pAct=0;function pPump(){while(pAct<4&&PQ.length){const [u,raw]=PQ.shift();if(lOk(u))continue;pAct++;lWant(u,raw).then(()=>{pAct--;pPump()})}}
 function titlePrefetch(){try{if(window.__bot||typeof SK!=="function"||typeof loadSlot!=="function")return;
  const L=[];for(let n=1;n<=3;n++){const d=loadSlot(n);if(d&&d.S)L.push(d)}L.sort((a,b)=>(b.at||0)-(a.at||0));
  const seen=new Set();let n=0,bytes=0;for(const d of L)kitSaveLifeSet(d).forEach((raw,u)=>{if(seen.has(u)||lOk(u))return;seen.add(u);PQ.push([u,raw]);n++;bytes+=sizeOf(u)});
  KLOAD.prefetch={lives:L.length,n,bytes};pPump()}catch(e){console.error("title prefetch",e)}}
-(function wait(k){try{if(typeof FIGS!=="undefined"&&FIGS.length&&!(typeof S!=="undefined"&&S)){titlePrefetch();return}}catch(e){}if(k<90)setTimeout(()=>wait(k+1),1000)})(0);
+(function wait(k){try{if(typeof FIGIX!=="undefined"&&Object.keys(FIGIX).length&&!(typeof S!=="undefined"&&S)){titlePrefetch();return}}catch(e){}if(k<90)setTimeout(()=>wait(k+1),1000)})(0);/* FIGIX (the figure index) is built a moment after FIGS */
 /* a dialog never opens with an empty picture box: hidden (layout kept) until its pictures are in, at most 3 s */
 function lDlgWait(){try{const M=document.getElementById("modal");if(!M||M.hidden||LIFE.on)return;const d=M.querySelector(".dlg");if(!d)return;
  if(!lPending(d).length){M.classList.remove("klifewait");return}const t0=Date.now();M.classList.add("klifewait");clearInterval(lDlgWait.t);
@@ -66827,7 +66831,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="7f39977cc643";window.CTM_BUILD=BUILD;
+const BUILD="a50ce160c827";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

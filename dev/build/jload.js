@@ -216,10 +216,10 @@ function kitLifeSet(){const M=new Map();const add=r=>{if(r&&typeof r==="string")
  try{if(typeof S==="undefined"||!S||typeof figFor!=="function")return M;
   const ppl=[S,{kind:"emp"},{kind:"th"},S.maid,S.court&&S.court.ty,S.court&&S.court.ksp].concat(S.staff||[]);
   try{if(typeof curPeople==="function")curPeople().forEach(p=>ppl.push(p))}catch(e){}
-  const hc=[];try{(typeof rivals!=="undefined"&&rivals||[]).forEach(v=>{if(v&&!v.dead){if(v.fid)ppl.push(v);else hc.push(v)}})}catch(e){}
-  for(const p of ppl){if(!p)continue;try{add(figFor(p,"por"));add(figFor(p))}catch(e){}}
-  /* Hậu cung list: the portrait of every living consort (a figure is chosen for her here, as the list itself would do on first open) */
-  for(const v of hc.slice(0,24)){try{add(figFor(v,"por"))}catch(e){}}
+  try{(typeof rivals!=="undefined"&&rivals||[]).forEach(v=>{if(v&&!v.dead&&v.fid)ppl.push(v)})}catch(e){}
+  /* only people whose figure is already chosen (fid): never choose one here — a choice made on a save's copy (title prefetch) would differ
+     from the one the game makes later, and someone without one has not been on screen yet (the gate's DOM scan covers the first screen) */
+  for(const p of ppl){if(!p)continue;try{const w=typeof figWho==="function"?figWho(p):p;if(!w||!w.fid)continue;add(figFor(p,"por"));add(figFor(p))}catch(e){}}
   try{if(typeof evArt==="function")add(evArt())}catch(e){}
   try{if(typeof Q!=="undefined"&&typeof kitEvArt==="function")Q.slice(0,3).forEach(m=>{const a=kitEvArt(m);if(a&&a.src)add(a.src)})}catch(e){}}catch(e){}
  return M}
@@ -232,6 +232,8 @@ function lPending(root){const out=[],H=innerHeight,W=innerWidth;for(const im of 
 function lBgs(){const out=[],H=innerHeight,W=innerWidth;for(const e of document.body.getElementsByTagName("*")){const bg=getComputedStyle(e).backgroundImage;if(!bg||bg==="none"||bg.indexOf("url(")<0)continue;
  if(e.closest("#klife,#kload"))continue;const r=e.getBoundingClientRect();if(!r.width||!r.height||r.bottom<0||r.top>H||r.right<0||r.left>W)continue;
  for(const m of bg.matchAll(/url\("?([^")]+)"?\)/g)){const u=lAbs(m[1]);if(u&&!/^data:/.test(u))out.push(u)}}return out}
+/* a core picture is in the local cache since the first loading screen: never a reason to show the gate */
+let CORE=null;function lCore(u){try{if(!MAN)return true;if(!CORE)CORE=new Set(MAN.files.filter(f=>f[3]==="core").map(f=>f[0]));const m=/img\/[^?#]*/.exec(u);return !!m&&CORE.has(decodeURIComponent(m[0]))}catch(e){return true}}
 let lel=null;
 function lCover(){if(lel)return lel;lel=document.createElement("div");lel.id="klife";lel.className="modal kpscene kload klife";
  try{kitBackdrop(lel,"title")}catch(e){}
@@ -243,7 +245,9 @@ function lPaint(have,total,slow){if(!lel)return;const b=lel.querySelector(".klb"
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-klife]");if(!b)return;e.stopPropagation();LIFE.go=true},true);
 const lSleep=t=>new Promise(ok=>setTimeout(ok,t));
 async function lifeGate(why){if(LIFE.off)return;/* test hook: KLIFE.off = no gate (mid-load shots of §59.1) */if(LIFE.on){LIFE.again=true;return}
- if(why!=="start"){const L=kitLifeSet();lBgs().forEach(u=>L.set(u,u));let miss=0;/* a background not yet seen this session counts as missing: a short gate (local cache) rather than one empty frame */L.forEach((raw,u)=>{if(!lOk(u)){miss++;lWant(u,raw)}});if(!miss&&!lPending().length){(KLOAD.lifes=KLOAD.lifes||[]).push({why,n:L.size,bytes:0,ms:0,late:0,cached:true});return}}
+ if(why!=="start"){const L=kitLifeSet();lBgs().forEach(u=>{if(!lCore(u))L.set(u,u)});let miss=0;/* a background not yet seen this session counts as missing: a short gate (local cache) rather than one empty frame */const mw=[];L.forEach((raw,u)=>{if(!lOk(u)&&!lCore(u)){miss++;mw.push(u.split("/").pop());lWant(u,raw)}});
+  /* pictures already on the device (core set, or brought in by the title prefetch) paint within a frame: not a reason for the screen */
+  const pd=lPending().filter(u=>{const a=lAbs(u);return !lOk(a)&&!lCore(a)});KLOAD.lifeMiss=mw.concat(pd.map(u=>u.split("/").pop())).slice(0,12);if(!miss&&!pd.length){(KLOAD.lifes=KLOAD.lifes||[]).push({why,n:L.size,bytes:0,ms:0,late:0,cached:true});return}}
  LIFE.on=true;LIFE.go=false;const t0=Date.now();lCover();
  const st=KLOAD.life={why,n:0,bytes:0,ms:0,late:0};(KLOAD.lifes=KLOAD.lifes||[]).push(st);const all=new Set();let quiet=0,it=0,fin=false;
  try{for(;;){const L=kitLifeSet();if(it++%5===0)lBgs().forEach(u=>{if(!L.has(u))L.set(u,u)});L.forEach((raw,u)=>{lWant(u,raw);all.add(u)});const pend=lPending();pend.forEach(u=>all.add(u));
@@ -261,15 +265,15 @@ window.kitLifeGate=lifeGate;
 /* TITLE PREFETCH (owner 18/11 02:06Z "không lẽ bây giờ tôi cứ bấm từng kiếp"): as soon as the game opens, the life sets of EVERY saved life
    (all slots, newest first) come in the background, 4 at a time, before the generic 'fig' set (it waits while LIFE.busy) — so tapping any life
    is usually instant and the gate above shows nothing. The set of a save is read by lending its S / rivals to kitLifeSet for one synchronous call. */
-function kitSaveLifeSet(d){const M=new Map();if(!d||!d.S||typeof S==="undefined")return M;const S0=S,R0=rivals;
- try{S=d.S;rivals=Array.isArray(d.R)?d.R:[];return kitLifeSet()}catch(e){return M}finally{S=S0;rivals=R0}}
+function kitSaveLifeSet(d){const M=new Map();if(!d||!d.S)return M;const S0=S,R0=rivals;
+ try{S=d.S;rivals=Array.isArray(d.R)?d.R:[];try{if(!S.origin&&typeof originByKey==="function")S.origin=originByKey(d.ok)}catch(e){}return kitLifeSet()}catch(e){KLOAD.prefetchErr=String(e);return M}finally{S=S0;rivals=R0}}
 window.kitSaveLifeSet=kitSaveLifeSet;
 const PQ=[];let pAct=0;function pPump(){while(pAct<4&&PQ.length){const [u,raw]=PQ.shift();if(lOk(u))continue;pAct++;lWant(u,raw).then(()=>{pAct--;pPump()})}}
 function titlePrefetch(){try{if(window.__bot||typeof SK!=="function"||typeof loadSlot!=="function")return;
  const L=[];for(let n=1;n<=3;n++){const d=loadSlot(n);if(d&&d.S)L.push(d)}L.sort((a,b)=>(b.at||0)-(a.at||0));
  const seen=new Set();let n=0,bytes=0;for(const d of L)kitSaveLifeSet(d).forEach((raw,u)=>{if(seen.has(u)||lOk(u))return;seen.add(u);PQ.push([u,raw]);n++;bytes+=sizeOf(u)});
  KLOAD.prefetch={lives:L.length,n,bytes};pPump()}catch(e){console.error("title prefetch",e)}}
-(function wait(k){try{if(typeof FIGS!=="undefined"&&FIGS.length&&!(typeof S!=="undefined"&&S)){titlePrefetch();return}}catch(e){}if(k<90)setTimeout(()=>wait(k+1),1000)})(0);
+(function wait(k){try{if(typeof FIGIX!=="undefined"&&Object.keys(FIGIX).length&&!(typeof S!=="undefined"&&S)){titlePrefetch();return}}catch(e){}if(k<90)setTimeout(()=>wait(k+1),1000)})(0);/* FIGIX (the figure index) is built a moment after FIGS */
 /* a dialog never opens with an empty picture box: hidden (layout kept) until its pictures are in, at most 3 s */
 function lDlgWait(){try{const M=document.getElementById("modal");if(!M||M.hidden||LIFE.on)return;const d=M.querySelector(".dlg");if(!d)return;
  if(!lPending(d).length){M.classList.remove("klifewait");return}const t0=Date.now();M.classList.add("klifewait");clearInterval(lDlgWait.t);
