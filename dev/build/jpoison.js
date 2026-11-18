@@ -22,13 +22,13 @@
       right Bạc·Sức): no extra cell; Ân tình also shows in the stage "Ân sủng" panel (owner-approved 17:55Z). */
 /* BAL.pg = the ONE rule table of every poisoned dish (jpoison rivals + jpq Hoàng thượng / Thái hậu; OD:L1267, review/poison-road-fix):
    tamDiv / trustDiv = Tâm cơ / the target's trust are divided by these in the odds; seeDiv = the target's watchfulness (oSee) / this = her guard;
-   lo / hi = clamp of a rival's odds; weak = odds lost when her Sức < weakSuc; cp = a failed try traced back: oSee − fac × (her faction size − 1), clamped lo..hi;
+   hi = top of a rival's odds (then the one ODDS CAP oddsCl, BAL.odds.lo / hi); weak = odds lost when her Sức < weakSuc; cpFac: a failed try is traced back with oSee − cpFac × (her faction size − 1) (oddsCl);
    khac = khắc a try costs (her card + spend); duc = Đức lost per poison; hacSuc = Sức hit of Hạc đỉnh hồng; sickMo / blockWk = months ill (Độc ngấm dần) /
-   weeks without the night card (Mê dược); taste = clamp of her maid's tasting odds; npc.w = weight of the act in an NPC's mind menu,
+   weeks without the night card (Mê dược); npc.w = weight of the act in an NPC's mind menu,
    npc.cook = monthly odds a poison-holding NPC keeps a dish, npc.mat / npc.raw = that dish's wkMake material / raw skill */
 Object.assign(BAL,{pg:{base:42,grade:6,doctor:15,needle:30,maid:12,hhEv:1,weakSuc:30/* review/one-core-jkc: Sức below this = she is weak (the odds line names the cut) */,
- weak:15,tamDiv:4,trustDiv:4,seeDiv:3,lo:3,hi:92,cp:{fac:4,lo:5,hi:95},khac:2,duc:{hacdinh:10,docngam:6,phanhuy:5,xahuong:10,meduoc:3},
- hacSuc:-120,sickMo:3,blockWk:1,taste:{lo:5,hi:95},npc:{w:2,cook:30,mat:0,raw:4}},
+ weak:15,tamDiv:4,trustDiv:4,seeDiv:3,hi:92,cpFac:4,khac:2,duc:{hacdinh:10,docngam:6,phanhuy:5,xahuong:10,meduoc:3},
+ hacSuc:-120,sickMo:3,blockWk:1,npc:{w:2,cook:30,mat:0,raw:4}},
  gift:{an:30,rel:40,th:40,askW:2,sinc:{emp:1,oth:2,tr:1}/* Chân tình bonus (gfSincere → wkEval): to the Emperor / to others, + a kind recipient */}});
 const PGE=BAL.eff.jpoison,PGB=BAL.pg;
 /* ---------- poisons ---------- */
@@ -56,10 +56,10 @@ function pgGuard(t){const L=[];const v=Math.round(oSee(t,true)/BAL.pg.seeDiv);L.
  if(t.maid&&(t.maid.loyal||0)>=BAL.loy.trust)L.push([`Cung nữ trung thành của ${pgNm(t)} nếm trước`,-BAL.pg.maid]);return L}
 /* the one formula (her card, the roll, every NPC): {o, F: kit "Vì sao" factors, cp: chance that a failed try is traced back (caught())} */
 function pgOdds(a,t,e){const P=BAL.pg;const G=pgGuard(t);const tr=Math.round((rel(t,a)||0)/P.trustDiv),tc=Math.round((a.tamco||0)/P.tamDiv),gr=pgGrade(e)*P.grade;
- const raw=P.base+tc+tr+gr+G.reduce((s,x)=>s+x[1],0);const o=cl(Math.round(odA(a,raw)),P.lo,P.hi);
+ const raw=P.base+tc+tr+gr+G.reduce((s,x)=>s+x[1],0);const o=oddsCl(Math.min(Math.round(odA(a,raw)),P.hi));
  const F=[[`Tâm cơ ${pgNm(a)} ${a.tamco|0}`,tc],[`${pgNm(t,1)} ${tr>=0?"tin":"ngờ"} ${pgNm(a)}`,tr],
   [e&&e.wk?`Món ${WTIER[e.wk.ti|0]} che vị`:`${e&&IT[e.k]?itm(e.k).n:"Món"} che vị`,gr]].concat(G);if((a.suc||0)<BAL.pg.weakSuc)F.push([`Sức ${pgNm(a)} dưới ${P.weakSuc}`,-P.weak]);
- const cp=cl(oSee(t,true)-P.cp.fac*(facN(a)-1),P.cp.lo,P.cp.hi);return{o,F,cp}}
+ const cp=oddsCl(oSee(t,true)-P.cpFac*(facN(a)-1));return{o,F,cp}}
 function pgEffect(a,t,pk){const nm=t===S?"Ngươi":`${rkName(t)} ${t.name}`;
  if(pk==="hacdinh"){if(t===S){die("Trúng độc, không qua khỏi");return `<span class="r">Ngươi trúng độc.</span> `}ap(t,{suc:BAL.pg.hacSuc});try{dieIf(t,"Trúng độc, không qua khỏi")}catch(e){}return `<span class="r">${nm} trúng độc nặng.</span> `}
  if(pk==="docngam"){ap(t,{suc:BAL.eff.jpoison.sucPgEffect});t.sick=Math.max(t.sick||0,BAL.pg.sickMo);return `${nm} ăn xong thì người mệt dần, thái y bảo trúng hàn khí (Sức ${balSg(BAL.eff.jpoison.sucPgEffect)}, ốm ${kitNumVi(BAL.pg.sickMo)} tháng). `}
@@ -93,7 +93,7 @@ PEND.pgin=p=>{const f=byKey(p.f);if(!f)return null;const P=p.pk?PGX[p.pk]:null;c
  const clean=how=>{log(`${how}: ${p.dn} không có gì lạ.`);keep()};
  const O=[{n:"Nhận ngay",fx:{},x:`Khó lường · thành: cất vào rương · kèm: món có độc thì ngươi dùng phải, độc nặng thì mất mạng`,hint:"cất món vào rương; món có độc thì ta dùng phải, độc nặng thì mất mạng",risk:"liều",go:()=>{if(!P)return keep();if(roll(p.o))hit();else{log(`Ngươi thấy ${p.dn} có vị lạ, bỏ đi.`);relAdd(S,f,BAL.eff.jpoison.go)}}}];
  {const kb={n:"Thử bằng kim bạc",fx:{},x:`tốn: Kim bạc thử độc -1 · thành: biết món có độc hay không · có độc thì ngươi nắm ${balAb(BAL.eff.jpoison.evFound)} chứng cứ của nàng`,hint:"dùng hết một kim bạc; biết chắc món có độc hay không, có độc thì nắm chứng cứ",risk:"an toàn",go:()=>{S.inv.splice(nd,1);if(P)found("Kim bạc đen lại");else clean("Kim bạc không đổi màu")}};if(nd<0)kitOff(kb,kitWhyItem("kim bạc"),kitWhenItem());O.push(kb)}
- if(m){const om=cl(m.loyal||0,BAL.pg.taste.lo,BAL.pg.taste.hi);O.push({n:`Nhờ ${m.name} nếm trước`,fx:{},x:`${word(om)} · thành: biết món có độc hay không · có độc thì ngươi nắm ${balAb(BAL.eff.jpoison.evFound)} chứng cứ của nàng · hỏng: món có độc thì ${m.name} trúng độc · Lòng ${m.name} -${balAb(BAL.eff.jpoison.loyalGo)}`,hint:lv=>`biết món có độc hay không; ${lv>=1?`${m.name} càng trung thành càng tinh ý; `:""}món có độc thì ${m.name} có thể trúng độc`,risk:"có rủi ro",
+ if(m){const om=oddsCl(m.loyal||0);O.push({n:`Nhờ ${m.name} nếm trước`,fx:{},x:`${word(om)} · thành: biết món có độc hay không · có độc thì ngươi nắm ${balAb(BAL.eff.jpoison.evFound)} chứng cứ của nàng · hỏng: món có độc thì ${m.name} trúng độc · Lòng ${m.name} -${balAb(BAL.eff.jpoison.loyalGo)}`,hint:lv=>`biết món có độc hay không; ${lv>=1?`${m.name} càng trung thành càng tinh ý; `:""}món có độc thì ${m.name} có thể trúng độc`,risk:"có rủi ro",
   go:()=>{if(!P)return clean(`${m.name} nếm thử`);if(roll(om))found(`${m.name} nếm thấy lạ`);else{m.loyal=cl((m.loyal||0)-BAL.eff.jpoison.loyalGo,0,100);log(`${m.name} nếm phải độc, ngã bệnh.`);Q.push({t:"Cung nữ trúng độc",h:`<p class="r">${m.name} nếm ${p.dn} rồi ngã bệnh. Lòng -${balAb(BAL.eff.jpoison.loyalGo)}.</p>`})}}})}
  O.push({n:"Trả lại quà",fx:{},x:`thành: không động đến món ăn · kèm: ${f.name} với ngươi ${balSg(BAL.eff.jpoison.go_2)}`,hint:lv=>`không động đến món ăn; nhưng ${lv>=1?f.name:"người tặng"} phật ý`,risk:"an toàn",go:()=>relAdd(S,f,BAL.eff.jpoison.go_2)});
  return{who:pv(f),t:`<p>${f.name} sai người mang <b>${p.dn}</b> sang tặng ngươi.</p><p class="past">Đồ ăn của người khác: có thể thử trước bằng kim bạc hay nhờ cung nữ nếm.</p>`,o:O}};
@@ -106,7 +106,7 @@ for(const k of ["giftpick","wkgive"])(function(k){const g0=PEND[k];if(!g0)return
   d.o=d.o.filter(o=>!(o&&/^Lén bỏ Hạc đỉnh hồng/.test(o.n||"")));const e=S.inv[p.ix];
   if(e&&pgFood(e)&&pgHeld(S).length){const i=d.o.findIndex(o=>o&&(o.kgx||o.n==="Thôi"));d.o.splice(i<0?d.o.length:i,0,pgRow(p.ix))}}}catch(x){console.error("pg gift",x)}return d}})(k);
 /* NPC act (same function): a malicious consort with a poison and a dish */
-A("pgift","Tặng quà ăn có độc",{c:{},ok:(a,t)=>a!==t&&pgHeld(a).length>0&&(a.inv||[]).some(pgFood),o:(a,t)=>{const e=(a.inv||[]).find(pgFood);return e?pgOdds(a,t,e).o:BAL.pg.lo},x:"nàng trúng độc nếu ăn",
+A("pgift","Tặng quà ăn có độc",{c:{},ok:(a,t)=>a!==t&&pgHeld(a).length>0&&(a.inv||[]).some(pgFood),o:(a,t)=>{const e=(a.inv||[]).find(pgFood);return e?pgOdds(a,t,e).o:BAL.odds.lo},x:"nàng trúng độc nếu ăn",
  why:(a,t)=>{const e=(a.inv||[]).find(pgFood);return e?pgOdds(a,t,e).F:[]},
  f:(a,t)=>{const ix=(a.inv||[]).findIndex(pgFood);const L=pgHeld(a).filter(k=>!PGX[k].preg||(t.preg&&!t.hidden));if(ix<0||!L.length)return"";return pgGive(a,t,ix,L.sort((x,y)=>PGX[y].duc-PGX[x].duc)[0])}});
 try{ACTDOM.pgift="Mưu kế";J78VERB.pgift="tặng {t} quà ăn có độc";const G=RVGRP.find(x=>x[0]==="Sát hại");if(G&&!G[1].includes("pgift"))G[1].push("pgift");if(BANDS[3]&&!BANDS[3][2].includes("pgift"))BANDS[3][2].push("pgift");

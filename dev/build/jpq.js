@@ -8,7 +8,7 @@
       Co-op: the Emperor's death stays muted (jmort / jcoopworld rule) → the Emperor is never offered; Thái hậu only on the host (host-only rolls).
    2. ODDS (pqOdds, kit "Vì sao"): BAL.pg.base + Tâm cơ/BAL.pg.tamDiv + the target's trust/BAL.pg.trustDiv (one table with jpoison pgOdds; khắc = BAL.pg.khac) + dish grade − the three royal checks (người nếm, Ngự thiện phòng
       kiểm hai lượt, đũa bạc) [− the kitchen alert after a failed try] [+ slow poison passes the taster] [+ the Vương gia's men] [+ a trusted maid];
-      clamped to BAL.pq.min..max (never better than "Năm ăn năm thua" band at the top: ladder words only, no %).
+      capped at BAL.pq.max, then the one ODDS CAP oddsCl (BAL.odds.lo / hi) (never better than "Năm ăn năm thua" band at the top: ladder words only, no %).
    3. FAIL: the kitchens go on alert BAL.pq.guard.alertMo months; traced (cp) → treason: the doer dies ("Ban chết", over() / jmort kill) and her house
       falls (j55 tdPowAdd, members' Danh). SUCCESS: Hạc đỉnh hồng = death now (Emperor: S.mort.empDue → j3 emperorDies next month; Thái hậu: jmort kill →
       thShift); Độc ngấm dần = lifespan −BAL.pq.slowCut years (jmort omen + death later). After a royal death a poisoning is investigated
@@ -17,7 +17,7 @@
       Quý phi, or he fails and she dies; "hận" road / her son heir → the existing succession flow (j3 / jmort / j99succ) runs unchanged.
    5. NPCs: same gates, same odds, same consequences (pqNpc in npcMonthly, host only), weighted by persW(v,"pgift"), one try per BAL.pq.npc.cd months
       in the whole palace (no runaway regicide). */
-Object.assign(BAL,{pq:{duc:12,min:3,max:60,trustLo:-8,
+Object.assign(BAL,{pq:{duc:12,max:60,trustLo:-8,
  gate:{sung:15,an:10,th:-20,harsh:["nghiem","danghi","quyen"]},
  guard:{taster:12,twoPot:6,touch:8,alert:15,alertMo:6},
  help:{slow:12,vg:12,maid:6},
@@ -56,7 +56,7 @@ function pqGuard(a,who,k){const G=BAL.pq.guard,H=BAL.pq.help;const L=[["Thái gi
 /* the one formula (her card, the roll, every NPC): o = success, cp = a failed try traced to the doer, inq = a success traced later */
 function pqOdds(a,who,e,k,cover){const P=BAL.pg,Q=BAL.pq;const tc=Math.round((a.tamco||0)/P.tamDiv);const tr=Math.max(Q.trustLo,Math.round((who==="emp"?(a.sung||0):pqThReg(a))/P.trustDiv));const gr=pgGrade(e)*P.grade;
  const F=[[`Tâm cơ ${pgNm(a)} ${a.tamco|0}`,tc],[`${PQ_N[who]} ${tr>=0?"tin":"ngờ"} ${pgNm(a)}`,tr],[e&&e.wk?`Món ${WTIER[e.wk.ti|0]} che vị`:`${e&&IT[e.k]?itm(e.k).n:"Món"} che vị`,gr]].concat(pqGuard(a,who,k));
- const o=cl(Math.round(P.base+F.reduce((s,x)=>s+x[1],0)),Q.min,Q.max);
+ const o=oddsCl(Math.min(Math.round(P.base+F.reduce((s,x)=>s+x[1],0)),Q.max));
  const cp=cl(Q.caught.base+(pqS().alert>0?Q.guard.alert:0)-Math.round((a.tamco||0)/Q.caught.tam),Q.caught.lo,Q.caught.hi);
  return{o,F,cp,inq:pqInqO(a,k,cover)}}
 function pqInqO(a,k,cover){const I=BAL.pq.inq;return cl(I.base+(k==="hacdinh"?I.fast:I.slow)-Math.round((a.tamco||0)/I.tam)-(cover?I.cover:0),I.lo,I.hi)}

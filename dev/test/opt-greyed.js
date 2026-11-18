@@ -11,7 +11,7 @@ const {chromium}=require('playwright');const [,,URL,DIR,SIZES]=process.argv;cons
   for(let i=0;i<15;i++){await sleep(400);const srv=await p.evaluate(()=>{const s=isSrv();if(s)start();return s});if(!srv)break}
   const r=await p.evaluate(async()=>{Q.length=0;document.getElementById('modal').hidden=true;S.bac=3;
    const hit=[];const o1=kitOff({n:"Ma ma giáo tập (thử)",fx:{},x:"Nắm chắc · tốn: 2 khắc, Sức -10, Bạc -40 · thành: tiến bộ +2..3",go:()=>{window.__took=1}},kitWhyBac(40),kitWhenBac());
-   const o2={n:"Việc bình thường",fx:{},x:"Chắc chắn · tốn: 1 khắc · thành: không đổi gì",go:()=>{window.__ok=1}};
+   const o2={n:"Việc bình thường",fx:{},x:"tốn: 1 khắc · thành: không đổi gì",go:()=>{window.__ok=1}};
    Q.push({t:"Thử lựa chọn xám",h:"<p>Một lựa chọn đã biết nhưng chưa thể chọn.</p>",opts:[o1,o2,{n:"Thôi",fx:{},x:""}]});showModal();await new Promise(r=>setTimeout(r,700));
    const bs=[...document.querySelectorAll("#modal .opt")];const g=bs.find(x=>/Ma ma/.test(x.textContent));
    const out={n:bs.length,dis:g&&g.disabled,txt:g&&g.textContent.replace(/\s+/g," "),grey:g&&g.classList.contains("kdis")};

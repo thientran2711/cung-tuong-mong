@@ -17,7 +17,7 @@ function bacV1(k){const V=BAL.bacVal;if(k==="suc")return (BAL.restLatK)/(BAL.res
 function bacFx(o){let v=0;for(const [k,x] of Object.entries(o||{}))if(typeof x==="number")v+=x*bacV1(k);return v}
 function bacRel(L){let v=0;for(const [a,x] of (L||[]))v+=x*(a&&a.k==="emp"?BAL.bacVal.sung:BAL.bacVal.rel);return v}
 /* E of one c6 spec (khắc), and its parts */
-function bacE(s){const c=s.c||{};const p=s.p==null?1:Math.max(5,Math.min(95,Math.round(s.p)))/100;
+function bacE(s){const c=s.c||{};const p=s.p==null?1:oddsCl(Math.round(s.p))/100;
  const gain=bacFx(s.w)+bacRel(s.r)+(c.suc>0?c.suc*bacV1("suc"):0)+bacTok(s.wt,"g")+bacTok(s.k,"g"),loss=-(bacFx(s.l)+bacRel(s.lr))+bacTok(s.lt,"r");
  let cost=bacTok(s.k,"r");for(const [k,x] of Object.entries(c))if(typeof x==="number"&&x<0)cost-=x*bacV1(k);return{p,gain,loss,cost,e:p*gain-(1-p)*loss-cost}}
 function bacRound(b){return b>=10?Math.round(b/5)*5:Math.max(1,Math.round(b))}

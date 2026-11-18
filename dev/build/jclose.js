@@ -18,7 +18,7 @@ function cbGreetTodo(k){try{if(!S||S.dead||!k||S.place!==k||S.out||S.confined)re
 function cbGreetMark(k){S.acGreet=S.acGreet||{};S.acGreet[k]=bkey();if(S.j76carry&&(S.buoi||0)<B4L){S.acGreetNx=S.acGreetNx||{};S.acGreetNx[k]=wk()+"-"+((S.buoi||0)+1)}}
 function cbGreetCard(k){const h=cbGreetTodo(k);if(!h)return false;const C=ACC_ETQ,nm=accName(k),hn=`${accRkName(h)} ${h.name}`,sh=h.name.split(" ").pop(),left=Math.max(0,BAL.time.khac-used);
  const L=[`<p>${hn} là chủ vị ${nm}, đang ở cung. Ngươi đang ở đây mà chưa bái kiến trong ${String(BUOI[S.buoi||0]).toLowerCase()}.</p>`];const opts=[];
- if(dayFit(C.khac))opts.push({n:`Bái kiến ${accRkName(h)}`,fx:{},x:`Chắc chắn · tốn: ${C.khac} khắc · thành: ${sh}: ${typeof pvRel==="function"?pvRel(h,C.okAff):"quý ngươi +"+C.okAff}`,go:()=>setTimeout(()=>cbGreetGo(k),0)});
+ if(dayFit(C.khac))opts.push({n:`Bái kiến ${accRkName(h)}`,fx:{},x:`tốn: ${C.khac} khắc · thành: ${sh}: ${typeof pvRel==="function"?pvRel(h,C.okAff):"quý ngươi +"+C.okAff}`,go:()=>setTimeout(()=>cbGreetGo(k),0)});
  else L.push(`<p class="past">Bái kiến: ${j77Bound(C.khac)}.</p>`);
  opts.push({n:"Thôi",fx:{},x:"",go:()=>setTimeout(()=>{S.acSeen=S.acSeen||{};S.acSeen[k]=bkey();window.__fromMap=1;tab="act";render()},0)});
  Q.push({t:nm,h:L.join(""),opts});const m=Q[Q.length-1];try{if(typeof kitPlaceDress==="function")kitPlaceDress(m,k)}catch(e){}showModal();return true}
