@@ -106,13 +106,13 @@ function keepRobbed(p,w,mode){try{const M=BAL.steal.m[mode==="road"?"road":"feig
 /* the word() ladder (BAL.odds.cut): odds o dropped n rungs, keeping its place inside the band */
 function rungDown(o,n){const F=[0].concat(BAL.odds.cut),top=100;let i=0;for(let j=0;j<F.length;j++)if(o>=F[j])i=j;const lo=F[i],hi=i+1<F.length?F[i+1]:top;
  const t=Math.max(0,i-(n|0)),lo2=F[t],hi2=t+1<F.length?F[t+1]:top;return Math.max(5,Math.round(lo2+(o-lo)*(hi2-lo2)/Math.max(1,hi-lo)))}
-/* ---- the bậc effect texts print the constants (one core): Tài/Sắc per bậc (BAL.art.stUp), Danh at bậc 3/5 (BAL.art.danh), "dễ thành hơn"
+/* ---- the bậc effect texts print the constants (one core): Tài/Sắc per bậc (BAL.art.stUp), Danh at the bậc keys of BAL.art.danh, "dễ thành hơn"
    = BAL.art.odds[bậc] (passive weights: × BAL.art.side), Tứ đức Dung / Ngôn odds = the same ladder ---- */
 (function(){try{const O=BAL.art.odds,side=x=>Math.round(x*BAL.art.side*10)/10;
  const SIDE={ky:[1],vu:[1],y:[1]};/* passive weights: mưu kế (Kỳ 1), lật thẻ (Vũ 1, Y 1) */
  for(const k in ARTFX){ARTFX[k].forEach((s,i,arr)=>{const l=i+1;
   s=s.replace(/^(Tài|Sắc) \+(\d+)/,(m,st,n)=>`${st} +${BAL.art.stUp+(+n-2)}`);
-  if(BAL.art.danh[l])s=s.replace(/^((?:Tài|Sắc) \+\d+), Danh \+\d+/,`$1, Danh +${BAL.art.danh[l]}`);
+  {const c=s.indexOf(" · "),h=c<0?s:s.slice(0,c);s=h.replace(/, Danh \+\d+/,"")+(c<0?"":s.slice(c))}if(BAL.art.danh[l])s=s.replace(/^((?:Tài|Sắc) \+\d+)/,`$1, Danh +${BAL.art.danh[l]}`);/* review/balance-final: Danh sits at the bậc BAL.art.danh names */
   if(k==="vu"&&l===2)s=s.replace(/Múa trong yến tiệc \(mỗi bậc \+\d+\), Chặn ngự giá \(mỗi bậc \+\d+\) dễ thành hơn/,`Múa trong yến tiệc dễ thành hơn (+${O[l]})`);
   s=s.replace(/\(mỗi bậc \+[\d,]+\)/g,()=>`(+${(SIDE[k]||[]).includes(l)?String(side(O[l])).replace(".",","):O[l]})`);
   arr[i]=s})}/* in place: ARTMS (j82) holds the same arrays */
