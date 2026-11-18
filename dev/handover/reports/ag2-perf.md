@@ -104,3 +104,23 @@ The "live got faster" puzzle = measurement noise on this shared box, not a live 
 ### Handover
 Depth 8: no children. Scratch (container only): /home/user/wt/ag2out (bench*.sh/log, deeds json). Worktrees ag2p2 (branch), ag2base (02466132), ag2live (12a1e4be), ag2live2 (94a93759), ag2live3 (f60b4024).
 ~83% xong / ~62% chơi được
+
+## Follow-up — review/ag-deed-perf (C-AG #12 14:01Z: cut a landing deed's cost in spend(1), OUTCOME-IDENTICAL, target 4x per-khắc ≤ +10 % vs live) — AG2-PERF #2 ROLLOVER HANDOVER
+PRIORITY #1 CHECK: B renderAfter/__rdefer (jlag2), F1 J78MEMO, F2 TL2M memo, AGD.oc agOptsG keep (agDrawB→agDecideDay) already exist; reuse them.
+Branch review/ag-deed-perf = ece17b1b + 41fec094 (dev/test/ag2perf-prof.js). No game code changed yet. Rolled over at ctx ≈ 27 % (START_CTX 5 % + 25 % line ≈ 30 %).
+Profile (4x CPU, seed 1, 40 buổi × 3 khắc, samples under spend(1) only; ms total; ag = ece17b1b, live = f60b4024):
+| function (inclusive) | ag | live | note |
+|---|---|---|---|
+| spend(1) total | 700.6 | 200.5 | profiler inflates both; ratio ≈ 3.5× |
+| agRdTick → agRdDeliver → agHeard | 214.7 → 167.1 → 163.8 | 0 | a consort hears news (TIN BÁO timing) |
+|   agOptsG inside agHeard | 155.9 | 0 | builds ALL her options, then .filter(o.t===info.who) — biggest lever |
+| agWatch / agLand / agLand0 | 144.8 / 133.5 / 110.0 | 32.3 / 29.7 / 28.4 | deed landings |
+| renderStage in step (jplst.js:L? `renderStage` wrapper → lay2 → lay) | 125.5 (lay2 79.4, getBoundingClientRect self 75.1) | 0 | jplst wraps renderStage with lay2() = forced layout reads inside the sim step; NOT routed through renderAfter, so B's __rdefer does not defer it |
+| agPlaceTxt / placeName / places | 32 | 0 | |
+| j95ppl / plxPeople / j95stage | 77 / 34 / 31 | 55 / 23 / 14 | stage people |
+Next levers (in order, each must keep dev/test/ag2perf-diff.js seeded diff 0 vs ece17b1b, seeds 1-3 × 160):
+1. jplst.js `renderStage=function(){…lay2()…}` → `renderAfter("plst-lay",lay2)` (layout-only; ~75-80 ms of 700 = ~11 %). Check jplst lay/placeEnt write nothing into S.
+2. agHeard: agOptsG(v,N,null) then filter by target. Check whether the providers draw Math.random (an option builder that rolls makes a skip change the RNG stream → not identical). If they don't roll: ask only target-relevant providers, or memo agOptsG per (consort, record key, khắc, state stamp) for repeated news in one khắc. If they roll: memo is the only identical path.
+3. agLand0 chain (jagharm/jagknow/jshelf wrappers) and agPlaceTxt/placeName: per-khắc memo of place names.
+Tools: ag2perf-prof.js (profile), ag2perf-probe.js (timing, ×9 alternating vs live f60b4024; judge medians too: the mean swings ±40 % between sets), ag2perf-deeds.js, ag2perf-diff.js. Scratch (container only): /home/user/wt/ag2out (pA1.json / pL1.json profiles). Worktrees: ag2p2 (now on review/ag-deed-perf), ag2live3 (f60b4024), ag2base (02466132), ag2m (84bd47c4 + ece17b1b local merge, not pushed).
+~84% xong / ~62% chơi được
