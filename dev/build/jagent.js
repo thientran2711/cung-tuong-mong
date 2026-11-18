@@ -174,16 +174,19 @@ function agTick(){if(!agOn())return;const z=agZ();const key=agKey();if(z.key===k
    (consort deed slices agSlice, staff slices agLzRun, the khắc view resync agSyncNow, the news scan adHapNow). Rules:
    (1) a job belongs to the world (S) and the buổi it was queued in: on another world / buổi it is dropped, never run there;
    (2) agDrain() at every buổi / week boundary (nextBuoi, endTurn: outermost wrappers below; co-op onBuoi / nightEnd in jcoopworld) runs every
-       pending light job NOW (view resync, news scan: they can queue a dialog) and DROPS the pending slices ({slice:1}: the consorts / staff not
-       reached keep their schedule, as before) — so no timer ever crosses a buổi or a week, and the step costs no extra decisions;
+       pending light job NOW (view resync, news scan: they can queue a dialog) and leaves the pending slices ({slice:1}) to their frames:
+       they die by their buổi pin once the step happened (the consorts / staff not reached keep their schedule, as before) — so no timer ever crosses a buổi or a week, and the step costs no extra decisions;
    (3) a dialog a job queued (Q) is shown at once (agQShow). Before: the "Có người bán tin" offer (knSellTick inside j95sync) was pushed from the
        deferred resync and sat in Q unseen; the next "Sẵn sàng" was refused by the Q guard → co-op seats stuck on "Chờ hảo hữu…" (MAIN s40 hold). */
 const AGL={L:[],t:0,run:0,stat:{run:0,drop:0,drain:0}};
 function agBk(){try{return S?wk()+"-"+(S.buoi||0):""}catch(e){return""}}
-function agLater(k,fn,o){if(AGL.L.some(x=>x.k===k))return;AGL.L.push({k,fn,sl:!!(o&&o.slice),w:typeof S!=="undefined"?S:null,b:agBk()});if(!AGL.t)AGL.t=setTimeout(agLaterRun,0)}
+function agLater(k,fn,o){const w=typeof S!=="undefined"?S:null,b=agBk(),i=AGL.L.findIndex(x=>x.k===k);if(i>=0){if(AGL.L[i].w===w&&AGL.L[i].b===b)return;AGL.L.splice(i,1);AGL.stat.drop++}/* review ag-later: a stale twin (other world / buổi, its timer not fired yet) is dropped, never blocks the new job */AGL.L.push({k,fn,sl:!!(o&&o.slice),w,b});if(!AGL.t)AGL.t=setTimeout(agLaterRun,0)}
 function agLaterRun(cut){if(AGL.t){clearTimeout(AGL.t);AGL.t=0}if(AGL.run)return;AGL.run=1;
- try{for(const x of AGL.L.splice(0)){if(x.w!==S||x.b!==agBk()||cut&&x.sl){AGL.stat.drop++;continue}AGL.stat.run++;try{x.fn()}catch(e){agErr("later:"+x.k,e)}}}finally{AGL.run=0}agQShow()}
-function agDrain(){if(AGL.run||!AGL.L.length)return;AGL.stat.drain++;let n=0;while(AGL.L.length&&n++<20)agLaterRun(1)}
+ const keep=[];try{for(const x of AGL.L.splice(0)){if(x.w!==S||x.b!==agBk()){AGL.stat.drop++;continue}if(cut&&x.sl){keep.push(x);continue}AGL.stat.run++;try{x.fn()}catch(e){agErr("later:"+x.k,e)}}}finally{AGL.run=0}
+ /* review ag-later: the drain does NOT drop a slice — the press may be refused (a dialog it showed, a co-op seat waiting for the friend) and her buổi goes on;
+    the slice keeps running in later frames and dies by its buổi pin once the step really happened (the consorts / staff not reached keep their schedule) */
+ if(keep.length){AGL.L.unshift(...keep);if(!AGL.t)AGL.t=setTimeout(agLaterRun,0)}agQShow()}
+function agDrain(){if(AGL.run||!AGL.L.some(x=>!x.sl))return;AGL.stat.drain++;let n=0;while(AGL.L.some(x=>!x.sl)&&n++<20)agLaterRun(1)}
 function agQShow(){try{if(!Q.length||!S||S.dead||S.mg||window.__bot)return;const M=$("modal");if(M&&M.hidden&&!document.querySelector(".kbk-bar"))showModal()}catch(e){}}
 /* outermost: installed after every module's own nextBuoi / endTurn wrapper (the same load-time pattern as jagday W1) */
 setTimeout(()=>{try{const n0=nextBuoi;nextBuoi=function(){try{agDrain()}catch(e){agErr("drain",e)}return n0.apply(this,arguments)};window.nextBuoi=nextBuoi;
