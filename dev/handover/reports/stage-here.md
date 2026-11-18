@@ -107,3 +107,32 @@ SUCCESSOR TODO (MAIN ROOT-56 20:50Z + 20:55Z, received after rollover; verbatim 
 2. Merge review/stage-rightcol a1d5ea3d. New buttons: .kgfbtns (first child of #kshR) > .kgfbtn.krailb.krailt (data-kgf="cn"/"ct"); open list #kshR .kgf.kgfopen; phone Dư đồ rail [data-rail="kgf-cn"/"kgf-ct"] + #kgfdrop. kitToastPlace already keeps every button/[role=button]/.k3p clear — verify with `DEV=fold|ipadAir node dev/test/stage-here.js` (toast-cover 0) incl. an open group list; rebuild index.html/sw.js (`bash dev/site/build_site.sh`, take --ours on conflicts then rebuild).
 3. OPEN (1) above: Fold Giao tình portrait faces.
 4. quickcheck, Fold + iPad shots (Hành sự + Giao tình) LOOKED → dev/handover/shots/stage-here/, SẴN SÀNG KIỂM <sha> to ROOT-56 session_01Rc5AsMXM16MfHRicSPRHEC.
+
+## r3 (session_01Rc5AsMY7PgErES6LptdBUE, depth 4, START_CTX ~3 %)
+PRIORITY #1 CHECK ('stage-here toast'): OD 18/11 ~19:45Z (5), ~19:55Z, ~20:00Z | main jclose kitToastPlace (§42.2) on review/stage-here 1f33d3c | review/stage-rightcol f2fbe3b (r5, PASS line; merged) | claims stage-here r2 → me
+Branch `review/stage-here`, head **ff28fd6** (1f33d3c + merge origin/main 790cda59 + merge review/stage-rightcol f2fbe3b + rebuild + r3 code + KIT.md).
+
+### MAIN LOOK of 1f33d3c: toast on people — whole group
+- PEOPLE kept (jclose `KIT_TOAST_PEOPLE` / `kitToastPeopleRects`, part of `kitToastKeepRects`, any size): stage figures `#mefig`, `.figimg`, `.tok.fig`, `.kfig` by the TOP 60 % of their box (head + upper body); face chips `.tok`, `.pface`; portrait frames `.kfr/.kpor/.pframe/.kpf` and card scene-art frames `.ksart` = the whole frame.
+- Found on the way (same group, main 790cda59's map): Dư đồ place labels `.mspot/.mlab` were not kept (toast lay over Đức Thọ cung…Cần Ninh cung on Fold) → keep set + `[data-ak]`, `[onclick]`, `[tabindex]`.
+- Narrower widths (down to .36 of the column) so it fits a real gap (Fold Giao tình: right of «Ta» above the portraits) instead of hiding.
+- NO FREE SPOT → it does not float: hides and COLLAPSES into the stage rail «!» = kitStageRail item `tnote` (glyph «!» + kbusy + kbadge, same button family as the §77.2 closing alert; while the closing «!» is up that button carries it, one «!» only). Tap = the same line, placed keeping only people + top bar + tab bar (tap/time closes it). No new private part (kit rail item, no new CSS). A screen with no stage (Fold panel page) has no rail: the «!» shows when she is back on a stage.
+- KIT.md §42.2 updated in place (law 14).
+
+### Scan (stage-here.js; fault toast-cover = kept / outside-column / **person**, people measured by the TEST itself (not via the kit list); new fault collapse-no-rail; 6 cases × 18 tabs)
+| build | Fold 755x1000 | iPad 1180x820 |
+|---|---|---|
+| 1f33d3c (before) | toast over portrait faces (Giao tình), over map labels (Dư đồ) | toast over her bust + maid face chip (Hành sự) |
+| ff28fd6 | **0/114** (86 shown, 4 collapsed on court tab where no stage) | **0/114** (90 shown, 0 collapsed) |
+Open group list (stage-rightcol .kgf.kgfopen / #kgfdrop): toast overlap false on both (shots r3-*-kgf).
+
+### Gap rulings (ROOT-56 20:50Z) → ACT_PLACE
+Phát bạc cứu giúp cung nhân nghèo → cnh · Để ý một nam nhân (route card tt0) → vuon · Xin ban hôn cho <tên> (hl_hon, matched by card id / name prefix) → home · Xin về quê phụng dưỡng cha mẹ (hl_que) → home. act-place-audit fold + ipadAir: 28 acts, 24 bound, **0 bad, unbound = only ACT_REMOTE** (Mời thái y, Cài tai mắt, Sai cung nữ đi dò la, Nghe ngóng chung).
+
+### Tests (ff28fd6 code)
+stage-here.js fold 0 / ipadAir 0, old save ok, no h-overflow, no page errors · stage-stay.js fold + ipadAir ok (rolled once, chip odds word, old save ok) · act-place-audit 0 bad · **QUICKCHECK PASS** (bd3c953+ksart build, 389 s, core gates PASS, old save ok, perf new/live render 228/263, tab 517/466, buổi 1265/1506 ms).
+
+### Shots (CDN, LOOKED; away in Ngự hoa viên, closing alert up; delete after verdict: `python3 dev/site/cdn_sync.py --wipe-review stage-here`)
+Fold: https://ctm-img.victoria-tntt.workers.dev/img/_review/stage-here/r3-fold-hanhsu.jpg · https://ctm-img.victoria-tntt.workers.dev/img/_review/stage-here/r3-fold-giaotinh.jpg · https://ctm-img.victoria-tntt.workers.dev/img/_review/stage-here/r3-fold-dudo.jpg · https://ctm-img.victoria-tntt.workers.dev/img/_review/stage-here/r3-fold-kgf.jpg
+iPad: https://ctm-img.victoria-tntt.workers.dev/img/_review/stage-here/r3-ipadAir-hanhsu.jpg · https://ctm-img.victoria-tntt.workers.dev/img/_review/stage-here/r3-ipadAir-giaotinh.jpg · https://ctm-img.victoria-tntt.workers.dev/img/_review/stage-here/r3-ipadAir-dudo.jpg · https://ctm-img.victoria-tntt.workers.dev/img/_review/stage-here/r3-ipadAir-kgf.jpg (open Cung nhân list)
+Note: in iPad Hành sự the toast sits on the stage over the Emperor's lower robe (below the 60 % line) — faces/busts/name tags clear.
