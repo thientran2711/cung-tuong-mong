@@ -23,7 +23,7 @@ B10 consorts c02/c03/c05/c22–c32 | claude/cung-tuong-mong-handover-hj0h8w | se
 | FOREMAN C-AG #10 (opus; successor of #9) | handover FOREMAN_C_STATUS | C-AG #9 | session_01UV1SzjAd8BYMMz2rKFZitp | ROLLED OVER → #11 SzkgegQ | 18/11 05:00Z |
 | FOREMAN C-AG #11 (opus; successor of #10, opened by C-AG #10) | handover FOREMAN_C_STATUS | C-AG #10 | session_01UV1SzkgegQEiMEPpSv12RN | RUNNING | 18/11 07:37Z |
 | look-fx-wire #9 (R9g: remaining fit rows whole group, Điểm trang, LOOK Fold+iPad) | review/look-fx-wire | MAIN ROOT-49 | session_01UV1Szk4s8h69ckG1XyZmaC | RUNNING | 18/11 07:39Z |
-| cloth-tea #2 (in-game tea shots, kclo 0px fix, stain.on.tra 1) | review/cloth-tea-look | MAIN ROOT-49 | session_01UV1SzgzwRA3dbdx1hNjUkf | RUNNING | 18/11 07:39Z |
+| cloth-tea #2 (in-game tea shots, kclo 0px fix, stain.on.tra 1) | review/cloth-tea-look | MAIN ROOT-49 | session_01UV1SzgzwRA3dbdx1hNjUkf | READY dfbf1df4 (r6h6) | 18/11 07:39Z |
 B10 consorts c05, c14, c15 | claude/cung-tuong-mong-handover-hj0h8w | session_011xDdVS4Xbmpzp16X7meadr (W41, Foreman C) | RUNNING | 2026-11-18T07:44Z
 B10 consorts c16, c17 | claude/cung-tuong-mong-handover-hj0h8w | session_011xDdVPiT4kdg8znkAyHX73 (W42, Foreman C) | RUNNING | 2026-11-18T07:44Z
 B10 consorts c18, c19 | claude/cung-tuong-mong-handover-hj0h8w | session_011xDdVQdxDP3b4j6yvJdVcN (W43, Foreman C) | RUNNING | 2026-11-18T07:44Z
