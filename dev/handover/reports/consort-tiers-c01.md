@@ -50,3 +50,7 @@ CDN img/_review/consort-tiers/c01/b8/: c01_a18_t1..t8.png (recoloured), c01_a18_
 | t8 | soft golden yellow + muted coral/jade | +1.2% / +1.5% | 2 + 2 |
 All within ±1.5%. Pose/turn/cut/headdress/held item identical to live by eye (t2 keeps the live teacup). Earlier one-step B8 set (same CDN names) replaced.
 Credits: step 1 20 gens + step 2 16 gens = 36 x 135 = 4860 (plus the earlier one-step 18 gens ~2430 and the cancelled c24 queue ~2560 wasted).
+
+### B8s update (ROOT-18 correction: m09 style ref = DRAWING STYLE + SKIN + FABRIC)
+Step 2 redone for all 8 ranks with "Exactly matching the rendering, skin and fabric of the style reference (near-3D semi-realistic drawing style, luminous porcelain skin, soft silk fabric); the style reference is never for body, pose or face" (ref = step-1 copy + m09 style slot). Step-1 copies unchanged (their prompt already read "rendering, fabric and skin only"). The b8s recolours were replaced at the same CDN names.
+bbox w/h diff recolour vs live now: t1 +3.6% FAIL, t2 +1.1, t3 +0.8, t4 +0.3, t5 -0.3, t6 0.0, t7 +0.8, t8 +1.9% FAIL (t1, t8 best-effort after max gens, not stretched). Extra gens: 8 x 135 = 1080 credits.
