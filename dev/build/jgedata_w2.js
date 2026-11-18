@@ -281,7 +281,7 @@ Object.assign(GE_DATA,{
    fail:"Mộng lớn hóa tro",ft:"Quân Đại Hy sa lầy ở phương nam. Triều thần đổ tội cho người đã khuyên đánh, và ngươi bị cấm bàn việc binh từ đó."},
   {pull:["Nhận trang ấp","Bỏ bạc chuộc người","Xin Hoàng thượng cho để tang","Gửi bạc riêng giúp huynh","Nói theo lòng mình","Khuyên đứng ngoài","Gửi thư mừng tân {quan}","Sai người mang trà sữa ra sứ quán","Hứa với mẹ sẽ giục cho sớm","Khóc một đêm, sáng ra tính việc","Xin Thái hậu một lời","Quỳ xin Hoàng thượng cho quân biên đón mẹ về ải","Nuốt nước mắt, không xin gì","Gửi thư hỏi {mh}","Nghe lời mẹ","Xin được về thăm mẹ một lần","Gửi quà cho cả hai đoàn",
     /* ác side (ha: lưu vong phục thù) */"Đòi thả người trước, rồi mới nói","Giữ mật thư, dùng khi cần","Đòi trả người làm điều kiện trước hội"],
-   close:["Thưa: thiếp là người của Đại Hy","Xin một phong hiệu cho mình","Khuyên Hoàng thượng buộc phe thua quy thuận"],
+   close:["Thưa: thiếp là người của Đại Hy","Xin một phong hiệu cho mình","Khuyên Hoàng thượng buộc phe thua quy thuận","Khuyên xuất quân giúp tân {quan} lấy lại ba thành"],
    cond:[["s","tamco"]],fo:[],
    cw:"cần đủ khôn ngoan để lọt qua mọi trạm ải",
    t:"Hoàng huynh mất ngôi, sống lưu vong ở một thành nhỏ ven biển. Ngươi rời cung theo huynh, mang theo mẹ già và mấy rương sách. Hai người không còn ngai, không còn cờ; chỉ còn một khu vườn nhìn ra biển, và một đời yên.",
