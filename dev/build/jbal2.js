@@ -934,9 +934,8 @@ Object.assign(BAL,{odb:{
 /* FACE REVEAL motion (owner 18/11 ~06:20Z, KIT §79 jreveal.js): ms = the grey veil clears from the face outward; lite = Gọn / reduced motion short fade;
    win = how long after a face is learned every place that first draws it (frame, avatar, stage figure) still plays its one reveal */
 Object.assign(BAL,{faceReveal:{ms:Math.round(1000*BAL.pace),lite:350,win:8000}});
-/* FULL-BODY FRAME (owner 18/11 ~06:45Z + ~06:55Z, KIT §56.3): the figure frame of a Tuần lục person page is the TIGHT box of the widest approved person (c03 a18 t6 alpha bbox,
-   union of t1..t8 = 1292 x 2678 px of the 1520 x 2688 canvas): ar = frame w / h = .4824. Every figure is fitted into it by its painted box, aspect kept, nothing cut;
-   the frame is as wide as its height needs (ar x column height), at most maxCol of the page's inner width (a narrow phone page then scales the figure down, never cuts it) */
-Object.assign(BAL,{bookFrame:{ar:.4824,maxCol:.56,cw:1520,ch:2688,fw:1292,fh:2678,ox:117,body:.9947}});
-/* ONE SCALE (owner via ROOT-47 18/11 ~07:00Z): the frame is bookFrame.ar x its width (= the column width, capped by maxCol); a c03 canvas (cw x ch) is drawn through the crop box (ox, 0, fw x fh) so every tier has the SAME body height;
-   body = head-top-to-feet of c03 = .9947 of the frame height; an old figure gets that same body height (centred, feet on the frame floor), scaled down only when its painted box would not fit the frame (never cut) */
+/* FULL-BODY FRAME (owner 18/11 ~06:45Z + ~06:55Z + ~07:00Z, KIT §56.3): ONE body size for everybody = SKULL TOP (kitFigBody ht, the head-top table / face mesh; never the crown, bun or hat) to FEET.
+   The frame holds the TALLEST crown (cMax = max (skull top - painted top) / body over the 1759 sampled adult figures, 18/11: .132 = maid t8) and the WIDEST robe (wMax = max painted width / body, .647)
+   at that one body size, so nobody is ever cut or shrunk: frame aspect = wMax/(1+cMax); frame width = the column (capped at maxCol of the inner page width); body = frame width / wMax; feet on the frame floor.
+   kid = child size by KIT_FIG.fac. Measured by dev/test/fullbody-frame-scan.js / the 18/11 catalog scan (report fullbody-frame.md). */
+Object.assign(BAL,{bookFrame:{maxCol:.56,wMax:.65,cMax:.132}});

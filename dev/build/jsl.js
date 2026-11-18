@@ -109,12 +109,13 @@ var KBK_ART_LINE=window.KBK_ART_LINE={b:.0244};
       INTO it by its PAINTED box (l..r x t..b, kitFigBody), aspect kept: whole figure visible (crown, hands, sleeves, hem, feet), nothing cut, never squeezed; centred in the frame, feet on its floor. */
    let dyF=0,dxF=0;{const i1=f.querySelector("img"),s1=i1&&i1.getAttribute("src"),b1=s1?kitFigBody(s1,soon):null,Hc=por.clientHeight,BF=BAL.bookFrame;
     if(!b1||!Hc){f.style.visibility="hidden"}else{const inEl0=box.closest(".kbk-in"),inW=(inEl0&&inEl0.clientWidth)||box.clientWidth;
-     const wantW=Math.max(60,Math.min(Math.round(Hc*BF.ar),Math.floor(inW*BF.maxCol)));if(Math.abs((parseFloat(box.dataset.kfw)||0)-wantW)>.5){box.dataset.kfw=wantW;box.style.setProperty("--porf",wantW+"px");soon();return}
-     const pwc=por.clientWidth,ar1=i1.naturalWidth&&i1.naturalHeight?i1.naturalWidth/i1.naturalHeight:b1.ar,sp=Math.max(.05,b1.b-b1.t),sw=Math.max(.05,b1.r-b1.l),FH=Math.min(Hc,pwc/BF.ar);
-     /* ONE SCALE: a c03 canvas through the crop box (same body height for every tier, t6 touches both sides); any other figure at the same body height, fitted (smaller) only if its painted box exceeds the frame */
-     let ih,dx,dy=null;if(Math.abs(ar1-BF.cw/BF.ch)<.003){ih=FH*BF.ch/BF.fh;dx=-BF.ox/BF.cw*ih*ar1;dy=ih*(BF.ch-BF.fh)/BF.ch}
-     else{const bd=Math.max(.2,b1.b-kitFigTop(b1));ih=Math.min(BF.body*FH/bd,FH/sp,pwc/(sw*ar1));dx=(pwc-sw*ih*ar1)/2-b1.l*ih*ar1}
-     const iw=ih*ar1;dyF=dy!=null?dy:ih*(1-b1.b);dxF=dx;
+     const ARF=BF.wMax/(1+BF.cMax),wantW=Math.max(60,Math.min(Math.round(Hc*ARF),Math.floor(inW*BF.maxCol)));if(Math.abs((parseFloat(box.dataset.kfw)||0)-wantW)>.5){box.dataset.kfw=wantW;box.style.setProperty("--porf",wantW+"px");soon();return}
+     /* ONE BODY SIZE: skull top (kitFigTop = head-top table) -> feet is the same px for every person (kids by KIT_FIG.fac); the frame is built for the tallest crown and the widest robe at that size, so the fit
+        guard below only ever fires on art outside the measured catalog (flagged data-kfit) */
+     const pwc=por.clientWidth,ar1=i1.naturalWidth&&i1.naturalHeight?i1.naturalWidth/i1.naturalHeight:b1.ar,sp=Math.max(.05,b1.b-b1.t),sw=Math.max(.05,b1.r-b1.l),FH=Math.min(Hc,pwc/ARF),kid=/fig-kid-/.test(s1)&&typeof KIT_FIG==="object"?KIT_FIG.fac(s1):1;
+     const bd=Math.max(.2,b1.b-kitFigTop(b1));let ih=pwc/BF.wMax*kid/bd;const lim=Math.min(FH/sp,pwc/(sw*ar1));f.dataset.kfit=ih>lim+.5?"1":"";ih=Math.min(ih,lim);
+     const cx=((b1.cl!=null?b1.cl:b1.l)+(b1.cr!=null?b1.cr:b1.r))/2,iw=ih*ar1;let dx=pwc/2-cx*iw;dx=Math.max(-b1.l*iw,Math.min(pwc-b1.r*iw,dx));   /* body core on the frame centre, painted box kept inside */
+     dyF=ih*(1-b1.b);dxF=dx;
      f.style.height=ih.toFixed(1)+"px";f.style.width=iw.toFixed(1)+"px";f.style.visibility="";f.dataset.kbody=(ih*(b1.b-kitFigTop(b1))).toFixed(1);}}
    const w0=f.offsetWidth;if(!w0||!box.offsetWidth)return;
    f.style.transformOrigin="50% 100%";const t=Math.abs(dyF)>0.5||Math.abs(dxF)>0.5?`translate(${dxF.toFixed(1)}px,${dyF.toFixed(1)}px)`:"";if(f.style.transform!==t)f.style.transform=t})}catch(e){}}
