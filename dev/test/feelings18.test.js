@@ -74,7 +74,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  /* 8 acts */
  const r8=await p.evaluate(()=>{const o={};const A=BAL.feel.act;const ALL=Object.keys(EMO).filter(k=>k!=="binh");
   o.cover=ALL.filter(k=>!A.main[k]);o.uniq=new Set(Object.values(A.main)).size;o.react=Object.values(A.main).filter(k=>!EA_REACT.some(r=>r.k===k&&r.who==="c"));
-  const v=__F.R()[0];const o0=A.o;A.o=1000;try{oanAdd(v,__F.R()[1],60)}catch(e){}const ran={},fail={};const t0=v.bac,mp=moodBar,et=window.eaTemper;window.eaTemper=q=>Object.assign(et(q),{k:"even",stingy:false});
+  /* odds-cap (j1 roll caps every roll at BAL.odds.hi): A.o=1000 no longer means "always" — each act then failed 1 in 20 (17 feelings → the flaky red). The test's sure odds (A.o 1000 × temper, ≥ 100 = sure before the cap) pass; every other roll is the real one (test only) */const rl0=roll;roll=o=>o>=100||rl0(o);const v=__F.R()[0];const o0=A.o;A.o=1000;try{oanAdd(v,__F.R()[1],60)}catch(e){}const ran={},fail={};const t0=v.bac,mp=moodBar,et=window.eaTemper;window.eaTemper=q=>Object.assign(et(q),{k:"even",stingy:false});
   for(const k of ALL){__F.clean(v);v.fcd={};v.bac=999;v.staff=v.staff&&v.staff.length?v.staff:allServ().slice(0,2);
    const good=feelGood(k);window.moodBar=q=>q===v?(good?90:-90):mp(q);emoSet(v,k,90,"thử "+k,emoKey(__F.R()[1]));
    if(k==="hon"||k==="ghen"){v.mk.forEach(m=>m.t=emoKey(__F.R()[1]))}
@@ -94,7 +94,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   S.emp.fa=null;S.emp.fcd={};S.emp.mk=[];S.emp.emo=null;window.moodBar=q=>q===S.emp?-90:mp(q);A.o=1000;emoSet(S.emp,"gian",90,"thử");feelActTick(S.emp);o.emp=S.emp.fa&&[S.emp.fa.k,S.emp.fa.face];
   /* host-only: a co-op guest never writes NPC acts */
   const wo=window.worldOn;window.worldOn=()=>false;const y=__F.R()[1];__F.clean(y);y.fcd={};window.moodBar=q=>q===y?-90:mp(q);emoSet(y,"buon",90,"thử");feelActTick(y);o.guest=!y.fa;window.worldOn=wo;
-  window.moodBar=mp;A.o=o0;S.emp.fa=null;return o});
+  window.moodBar=mp;A.o=o0;S.emp.fa=null;roll=rl0;return o});
  ok(r8.cover.length===0&&r8.uniq===17&&r8.react.length===0,'17 acts, one per feeling, every one in the ONE reaction table',r8);
  ok(Object.values(r8.ran).filter(Boolean).length===17&&Object.keys(r8.fail).length===0&&Object.entries(r8.ran).every(([k,x])=>!x||x[1]==="act-"+k),'every feeling fires its own act with face act-<feeling> (heavy + bar)',r8.ran);
  ok(r8.noBar&&r8.light,'gate: heavy level AND bar past the line (neither alone)',{b:r8.noBar,l:r8.light});
