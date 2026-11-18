@@ -148,7 +148,7 @@ if(typeof kpmParts==="function"){
  const pm0=kitPalaceMap;kitPalaceMap=function(o){let h=pm0.apply(this,arguments);try{const k=o.k;const mh=typeof kpmMine==="function"?kpmMine(o.slot):null;if(k!=="kn"&&k!=="tn"&&k!=="home"&&!mh)return h;
    if(k==="home"||mh){/* her people, by name, where the record puts them now */const N=mapzStaffNow("home");if(!N)return h;
     const inL=[].concat(N.in.chinh,N.in.dong,N.in.tay).map(x=>x[0]);const away=N.away.map(([n,pk])=>`${n} (ở ${mapzPlaceName(pk)})`);
-    const line=`<span class="kpm-rs kpm-who">${inL.length?"Trong cung: "+inL.join(", "):"Không ai ở nhà"}${away.length?` · Đi vắng: ${away.join(", ")}`:""}</span>`;
+    const line=`<span class="kpm-rs kpm-who">${inL.length?"Trong cung: "+inL.join(", "):"Không ai ở trong cung"}${away.length?` · Đi vắng: ${away.join(", ")}`:""}</span>`;
     const rp=k==="home"&&!mh?"cungnhan":mh;h=h.replace(new RegExp('(<button class="btn kpm-row[^"]*" data-kpmpart="'+rp+'">[\\s\\S]*?)(</button>)'),(a,x,y)=>x+line+y);
     return h}
    const SP=kpmSplit(k);const add=(t,n)=>/^vắng/.test(t)?`${n} cung nhân`:`${t} · ${n} cung nhân`;
