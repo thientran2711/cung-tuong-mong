@@ -56,3 +56,24 @@ Host cost = ser/toCanon of the bigger world: 6 ms → 8–15 ms. Weekly world fr
 ## Recommendation (gain vs risk)
 Perf is no reason to pick a lower table: even 76 people did not lag beyond noise (risk of lag from servants: rare / small / caught by play-perf.js). Pick by her ~25–27 goal: **D2** is the only table that stays 26.4–27.1 at every moment while keeping her Quý nhân 2, Phi 2+1, HQP 3+1, HH 4+1 and TH 3 + ma ma; cost = Tần and Quý phi lose the eunuch she named (likely she notices: medium; fix = one BAL row). E is the best worst case (41 at 20) but cuts Quý nhân to 1 against her words. B2 (her ladder as said) = ~31, above her 25–27. → Được lớn hơn with D2: hits her number with the fewest changes to her ladder; servant lag is not a real risk.
 Apply after her pick = staff-cap-fix HANDOVER item 4 (BAL row + printed texts + NPC seeding + face pool + tests).
+
+## V TABLE (owner proposal OD 18/11 ~01:45Z, L1789; harness review/staff-cap-table 4b1d9a2c)
+| | ĐƯ | TT | QN | Tần | Phi | QP | HQP | HH | TH |
+|---|---|---|---|---|---|---|---|---|---|
+| V1 | 1+0 | 1+0 | 2+0 | 2+0 | 2+1 | 2+1 | 3+1 | 3+1 | 4+1 |
+| V2 | 1+0 | 1+0 | 2+0 | 2+0 | 2+1 | 2+1 | 3+1 | **4+1** | **3 + ma ma** |
+
+| table | avg start | avg +2y | avg +5y | worst 12 | worst 16 | worst 20 |
+|---|---|---|---|---|---|---|
+| V1 | **26.4** | **26.9** | **26.5** | 36 | 44 | 52 |
+| V2 | **26.4** | **27.1** | **26.9** | 36 | 44 | 52 |
+(same bot snapshots and worst palace as above; V2 = D2's exact totals, V1 = 1 fewer cung nữ + 1 more thái giám at the top.)
+
+| perf at worst 20 (Fold, 4×) | people | buổi ms med / worst | render ms | heap MB | DOM | world KB raw / gz | save KB | ser ms |
+|---|---|---|---|---|---|---|---|---|
+| V1 | 52 | 599 / 819 | 100 | 39.2 | 1704 | 46.6 / 8.0 | 146 | 7 |
+| V2 | 52 | 646 / 862 | 113 | 39.1 | 2013 | 47.8 / 7.9 | 148 | 8 |
+Same reading as above: inside the LIVE noise band (529 / 731, ±40 %); co-op world frame 8 KB gz < 16 KB target. Both hit her 25–27 at every moment. Brain estimate as for D2 (33 staff at worst 20: ~6 … ~60 ms/buổi, sliced).
+
+## Nữ đế (OD:L88)
+Exists in code as the succession CHOICE, not a rank/seat: dev/build/j99succ.js (succBegin("c") → title "Nữ đế", 3-chapter epilogue, endings c_ok / c_abd / c_bad / c_rare / c_fail). No RANKS entry, no BAL.promo.cap row, no seat. Staff today: capOf(S) keeps reading her LAST consort row (S.rank, usually Hoàng hậu = row 7 → under V1 3+1, under V2 4+1); Hoàng thái hậu path (a) also stays on her own row (BAL.promo.capTh is only for the NPC Thái hậu S.thO). During the epilogue the world is paused (S.succ.on), so the row matters only for what the epilogue shows. A Nữ đế / player-Thái hậu row = new BAL row + capOf branch on S.succ.p, when she rules it.
