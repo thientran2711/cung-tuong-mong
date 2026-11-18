@@ -1,0 +1,10 @@
+★ THE 18 LAWS FIRST: read the "★ THE 18 LAWS — READ FIRST" block at the top of dev/rules/START_CORE.md (handover branch) before anything; reviewers FAIL work that breaks any law it touches.
+PRIORITY #1 CHECK ('fullbody-frame'): OD 7 | ledger 0 | claims 8 (s1–s3 done/stopped) | main 2 | review/* 3 (review/fullbody-frame-s3 c9d355bd = latest) | claims none running
+JOB (sonnet, SMALL UI, worker fullbody-frame-s4 for MAIN ROOT-53). Read dev/handover/briefs/root53-common.md first (all of it binds).
+CONTINUE from dev/handover/reports/fullbody-frame.md "### S3 HANDOVER" (branch review/fullbody-frame-s3 @ c9d355bd; keep pushing to that branch). DONE in s3: (1) no fade/line on the figure, (2) head at horizontal centre (KIT 56.5).
+STILL TO DO — owner words VERBATIM in dev/OWNER_DECISIONS.md tail: 18/11 ~09:25Z (L1878), ~09:30Z point (1)+(3) as CANON-OVERWRITTEN by ~16:10Z:
+ (a) SCENE PICTURE SIZE (16:10Z): the picture may stay BIG only when everything under it (a few lines or 1–2 short buttons) fits in the frame with NO scroll; otherwise it shrinks by KIT_SIZE picture class (down to the smallest) so content fits. Per frame, from KIT_SIZE, never ad hoc. Kit part, whole group, scan table (frame | content | picture class before/after | scrolls? before/after) on Fold + iPad.
+ (b) PHONE Luân hồi / Thân phận kiếp này: REVERT to the old approved layout (figure left, one long vertical info box right) — git log/grep the earlier live version, reuse it.
+ (c) quickcheck + old save.
+ Open point for owner (do NOT decide): robe overflow at left edge to reach 0 offset — show it in the shots.
+DONE = merge newest origin/main, quickcheck PASS, scan table, Fold 755x1000@2 + iPad 1180x820@2 shots on CDN img/_review/fullbody-frame/, report "### S4" in reports/fullbody-frame.md, send_message MAIN "SẴN SÀNG XEM fullbody-frame <sha>".
