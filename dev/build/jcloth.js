@@ -26,7 +26,7 @@ Object.assign(BAL.looks,{xoc:{on:0,
 Object.assign(BAL.looks,{stain:{on:0,
  lv:[null,{n:1,sc:.16,op:.6,wet:.5},{n:2,sc:.2,op:.72,wet:.78},{n:3,sc:.26,op:.85,wet:1}],
  anchor:{chest:[.5,.27],sleeve:[.2,.5],hem:[.5,.93],hemL:[.22,.94],hemR:[.78,.94],hemH1:[.5,.85],hemH2:[.28,.79],hemH3:[.72,.76],hemH4:[.45,.7],sleeveL:[.14,.6],sleeveR:[.86,.6]},
- kind:{tra:{pos:["chest","hem","sleeve"],blend:"stain",variants:3,wet:0,scm:1.4,dy:0,opm:1,tint:[135,82,38],tm:1,lv:[null,{n:1,sc:.24,op:.9},{n:2,sc:.3,op:1},{n:3,sc:.42,op:1.15}]},uot:{pos:["hem","sleeveL","sleeveR","hemL","hemR"],blend:"multiply",variants:2,wet:1,scm:1.15,dy:0,opm:1,tint:[110,95,85],tm:.4},bun:{pos:["hem"],blend:"multiply",variants:2,wet:0,scm:2.4,dy:-.045,rotm:1,jy:.035,scatter:1,reach:[0,.1,.2,.3],lv:[null,{n:5,sc:.2,op:.9},{n:10,sc:.21,op:1},{n:18,sc:.22,op:1}]}},
+ kind:{tra:{pos:["chest","hem","sleeve"],blend:"stain",variants:3,wet:0,scm:1.4,dy:0,opm:1,tint:[135,82,38],tm:1,lv:[null,{n:1,sc:.24,op:1.3},{n:2,sc:.3,op:1.15},{n:3,sc:.42,op:1.15}]},uot:{pos:["hem","sleeveL","sleeveR","hemL","hemR"],blend:"multiply",variants:2,wet:1,scm:1.15,dy:0,opm:1,tint:[110,95,85],tm:.4},bun:{pos:["hem"],blend:"multiply",variants:2,wet:0,scm:1,tilt:.5,scatter:1,lv:[null,{n:7,sc:.3,op:.9},{n:13,sc:.38,op:1},{n:22,sc:.46,op:1}]}},
  rot:.5,jit:.05}});
 /* ---------- tiny deterministic noise ---------- */
 function clothHash(x,y,s){let h=(x*374761393+y*668265263+s*2147483647)|0;h=(h^(h>>>13))*1274126177|0;return((h^(h>>>16))>>>0)/4294967295}
@@ -179,7 +179,7 @@ function drawDecalOnCloth(out,W,H,mk,dec,ax,ay,scale,rot,op,blend,tint,tm){const
   const a=Math.min(1,wedge*da*op*mm*ef*ef*(3-2*ef)*(1-Math.min(1,Math.max((blend==='shade'?mk.protS[i]*1.6:mk.protF[i]*1.5),mk.prot[i]*1.2))));if(a<.003)continue;
   const mx0=Math.max(1,out[i*4],out[i*4+1],out[i*4+2]);
   if(blend==="stain"){/* translucent stain: only the decal SHAPE is used; multiply by a tea-brown factor so the fabric texture and folds stay visible; darker tide-line ring at the edge, lighter centre */
-   if(!dec.A)clothDecalRing(dec);const ii=(Math.round(v)*dec.w+Math.round(u)),sv=Math.min(.62,wedge*op*mm*ef*(1-Math.min(1,Math.max(mk.protF[i]*1.5,mk.prot[i]*1.2)))*(.3*dec.A[ii]+.75*dec.ring[ii]));if(sv<.01)continue;
+   if(!dec.A)clothDecalRing(dec);const ii=(Math.round(v)*dec.w+Math.round(u)),sv=Math.min(.66,wedge*op*mm*ef*(1-Math.min(1,Math.max(mk.protF[i]*1.5,mk.prot[i]*1.2)))*(.38*dec.A[ii]+.75*dec.ring[ii]));if(sv<.01)continue;
    for(let q=0;q<3;q++)out[i*4+q]*=(1-sv)+sv*tint[q]/255;n++;continue}
   for(let q=0;q<3;q++){let dc=D[j+q]*w0+D[j+4+q]*w1+D[j+k+q]*w2+D[j+k+4+q]*w3;if(tint)dc=dc+(tint[q]-dc)*tm;const b=out[i*4+q];let o;
    if(blend==="shade"){if(dec.mid==null)clothDecalMid(dec);const dl=dc/255-dec.mid;const sat=1-b/mx0;/* shade tinted to the robe: the weaker channels darken more, so shadows are the robe's own deeper hue, not neutral grey */o=b*(1+BAL.looks.xoc.dec.shadeK*(dl<0?dl*(1+.9*sat):dl*.45))}else if(blend==="normal")o=dc;else if(blend==="soft")o=dc<128?2*b*dc/255:255-2*(255-b)*(255-dc)/255;else o=b*dc/255;/* multiply: the robe's folds and pattern show through */
@@ -190,7 +190,7 @@ function clothStainBake(d,W,H,kind,lv,decals,opt){opt=opt||{};const B=BAL.looks.
  mk=opt.mask||clothMask(d,W,H,opt.face||null,BAL.looks.xoc),out=new Uint8ClampedArray(opt.base||d),R=clothRng(seed*131+kind.charCodeAt(0)),fw=mk.x1-mk.x0+1,fh=mk.y1-mk.y0+1;let count=0;
  /* wet cloth (r5): soaked silk = UNEVEN wet zones (shoulders, sleeves, hem) with soft irregular edges: the robe's own colour deeper there (self-multiply + a little darker), a thin sheen along the wet edge, a few drip runs under sleeve ends / hem; a faint cling tint everywhere; clear of skin / hair / items */
  if(K.wet&&L.wet){const lvl=cl(lv|0,1,3),ws=L.wet,t0=.6-.1*lvl,Wf=new Float32Array(W*H),Lm=new Float32Array(W*H);for(let i=0;i<W*H;i++)Lm[i]=out[i*4]*.3+out[i*4+1]*.59+out[i*4+2]*.11;const Lb=clothBlur(Lm,W,H,4);
-  for(let y=mk.y0;y<=mk.y1;y++){const fy=(y-mk.y0)/fh;for(let x=mk.x0;x<=mk.x1;x++){const i=y*W+x;if(mk.m[i]<.5)continue;const u=Math.abs((x-mk.cx)/fw),n=clothFbm(x/fw*3.4+seed*.37,y/fh*3.4,seed+21,3),
+  for(let y=mk.y0;y<=mk.y1;y++){const fy=(y-mk.y0)/fh;for(let x=mk.x0;x<=mk.x1;x++){const i=y*W+x;if(mk.m[i]<.5)continue;const u=Math.abs((x-mk.cx)/fw),n=clothFbm(x/fw*3.4+seed*.37,y/fh*1.3,seed+21,3),
     zone=Math.max(clothSmooth(.05,.16,fy)*(1-clothSmooth(.27,.4,fy))*.9,clothSmooth(.18,.32,u)*clothSmooth(.2,.3,fy)*(1-clothSmooth(.7,.85,fy))*.8,clothSmooth(.68,.86,fy));
     Wf[i]=clothSmooth(t0,t0+.22,n*.62+zone*(.5+.9*clothFbm(x/fw*2.1+9,y/fh*2.1+3,seed+33,2))*.62)*clothSmooth(mk.chin,mk.chin+fh*.07,y)*(1-(1-clothSmooth(.05,.15,u))*(1-clothSmooth(mk.y0+fh*.2,mk.y0+fh*.3,y)))}}
   const Wb=clothBlur(Wf,W,H,2);
@@ -199,8 +199,11 @@ function clothStainBake(d,W,H,kind,lv,decals,opt){opt=opt||{};const B=BAL.looks.
   const dn=1+lvl*2;for(let q=0;q<dn;q++){/* drip runs under the sleeve ends / hem: thin vertical dark streaks */
    const fx=R()<.5?.1+.14*R():.76+.14*R(),fyy=(R()<.55?.6:.88)+.05*R(),dx=mk.x0+fw*fx,dy0=mk.y0+fh*fyy,len=fh*(.05+.05*R()),sg=Math.max(1,fw*.006);
    for(let y=dy0|0;y<Math.min(H,dy0+len);y++){const t=(y-dy0)/len,a=Math.sin(Math.PI*Math.min(1,t*1.3))*.3*ws;for(let x=Math.floor(dx-sg*3);x<=dx+sg*3;x++){if(x<0||x>=W)continue;const i=y*W+x,k=mk.m[i]*(1-Math.min(1,Math.max(mk.protF[i]*1.5,mk.prot[i]*1.2)));if(k<.5)continue;const g=a*Math.exp(-.5*((x-dx)/sg)**2)*k;for(let c=0;c<3;c++)out[i*4+c]*=1-g}}}}
- if(decals&&decals.length)for(let q=0;q<L.n;q++){const nm=K.pos[q%K.pos.length],an=B.anchor[nm],dec=decals[Math.floor(R()*decals.length)%decals.length],
-  ax=K.scatter?mk.x0+fw*(.12+.76*R()):mk.x0+fw*(an[0]+(R()-.5)*B.jit*2),ay=K.scatter?mk.y0+fh*(.965-Math.pow(R(),2)*K.reach[cl(lv|0,1,3)]):mk.y0+fh*(an[1]+(K.dy||0)+(R()-.5)*(K.jy||B.jit)*2);
+ if(decals&&decals.length)for(let q=0;q<L.n;q++){const nm=K.pos[q%K.pos.length],an=B.anchor[nm],dec=decals[Math.floor(R()*decals.length)%decals.length];
+  if(K.scatter){/* r5 mud follows the cloth grain: each streak is the strip decal turned VERTICAL, its foot on the hem line, running UP along the pleat, lengths vary, thinning with level; never a horizontal mark */
+   const Ls=L.sc*K.scm*(.55+.6*R()),Lp=Ls*fw,ax=mk.x0+fw*(.1+.8*R()),ay=mk.y0+fh*.975-Lp*(.35+.2*R());
+   count+=drawDecalOnCloth(out,W,H,mk,dec,ax,ay,Ls,Math.PI/2+(R()-.5)*K.tilt,L.op*(.9+.2*R()),K.blend,K.tint,K.tm);continue}
+  const ax=mk.x0+fw*(an[0]+(R()-.5)*B.jit*2),ay=mk.y0+fh*(an[1]+(K.dy||0)+(R()-.5)*(K.jy||B.jit)*2);
   count+=drawDecalOnCloth(out,W,H,mk,dec,ax,ay,L.sc*(K.scm||1)*(.85+.3*R()),(R()-.5)*2*B.rot*(K.rotm||1),L.op*(K.opm||1)*(.9+.2*R()),K.blend,K.tint,K.tm)}
  return{data:out,mask:mk,count}}
 window.drawDecalOnCloth=drawDecalOnCloth;window.clothStainBake=clothStainBake;
