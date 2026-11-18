@@ -119,3 +119,39 @@ ONE CORE: no number typed in any jnrask*.js (scan: no digits); costs / odds / de
 
 ### Re-review
 Text-only: diff of jnrask_b.js + nrask-scan / nrask-engine on the merge.
+
+# ROUND 4 — reviewer E7r4 (opus, delta re-review of q1a + q1b + q1c), 18/11
+PRIORITY #1 CHECK ('questline-q1'): OD 0 | main 0 (no NRASK on main a2ad240) | review/* questline-q1a 90796d3 · q1b 7f12b48c · q1c 154506f (the three under review) | claims E7a2 / E7b / E7c2 (this slice)
+START_CTX ≈ 3 % (own estimate).
+Setup: LOCAL merge origin/main a2ad240 + q1a 90796d3 + q1b 7f12b48c + q1c 154506f (not pushed). Only conflict: assemble.py list (q1b and q1c both add after jnrask.js) → jnroadm → jnrask → jnrask_b → jnrask_m, jplst.js kept; index.html/sw.js rebuilt with build_site.sh.
+Method: read EVERY h / label / loss line of all three data files for the family, with my own sweeps beyond the shared regex: fixed dates, festivals/seasons, «(sáng|chiều|tối|trưa|đêm|ngày|hôm) (mai|nay|kia|mốt)», «tuần/tháng/năm sau», N ngày|đêm|hôm|tuần|tháng, bare «mai», and hour-scale words (từ chiều, trưa, trước giờ, giờ ấy, cửa cung đóng, canh, khắc, kiệu sắp, ngay, lập tức). Festivals / «cuối năm» / «đầu xuân» checked against the road text on main (jrd_*.js): every one is the chapter's own scene (tt_tranh_10 «bữa gia yến cuối năm», muoi_lau_5 «trước kỳ Diêm vận ty đốt sổ cũ cuối năm», nc_su «Sương giáng», nc_tuc_5 «Nguyên đán», nc_tuc_9 «Phật đản», ch_bi «Thanh minh», td_ke_10 «Triều hội đầu xuân», muoi «yến Trung thu») → allowed.
+
+## VERDICT: q1a FAIL · q1b FAIL · q1c rebase OK
+The time-word family is NOT gone as a whole family: 1 fixed date the shared scan does not catch («chiều mai», q1b) and 3 hour-scale deadlines («before the palace gates close tonight», «the palanquin is at the door / fever since this afternoon»), each shown directly above the chip «hạn 6 tuần».
+
+## Tests (merged tree, built)
+| test | result |
+|---|---|
+| node dev/test/nrask-scan.js | ALL PASS · 636 asks, 1759 sentences, 1272 labels / loss lines — but misses «chiều mai» (regex gap, q1a fix 2 below) |
+| node dev/test/nrask-m-scan.js | PASS (204 asks) |
+| node dev/test/nrask-engine.js | ALL PASS (1–9, 7b, 7c; NRSELF 648 queen offers) |
+| bash dev/tools/quickcheck.sh | QUICKCHECK PASS first run · 397 s · core gates PASS (no G3 tutorial float) · time-spill PASS · open 1513 ms · old save ok · perf new/live render 210/182, tab 369/396, buổi 943/1023 ms |
+| shots Fold 755x1000@2 + iPad 1180x820@2 (nrask-shots; tt_co_10:1, cn_chu_10:1 from q1a; td_ke_9:0, cnv_mat_8:0 from q1b; local scratch, deleted; not in git, CDN not used) | SHOTS OK ×16 (no overflow, no raw slot, no page error; kit j72 card + KIT §6.2 option rows). LOOKED: cn_chu_10 (Fold tab + iPad offer) «Đêm hẹn ở gian trà nhỏ năm xưa» = round 3 fault fixed; td_ke_9 Fold offer «…đến Ngự hoa viên vào chiều mai» above «hạn 6 tuần»; tt_co_10 iPad offer «…phải ra khỏi cung trước khi cửa cung đóng» above «hạn 6 tuần»; cnv_mat_8 iPad offer «Kiệu sắp đến cửa… chỉ bảo bổn cung trước giờ ấy» above «hạn 6 tuần» |
+| rounds 1–3 | no regression: NRQX queen filter + 7c, {B}-free ask per chapter (scan), «ngươi» in labels 0, player's-past family 0 (q1b), no digits in jnrask*.js (ONE CORE) |
+| q1c 154506f | `git diff b013ddf 154506f` on jnrask_m.js / nrask-m-scan.js / nrask-m-shots.js = empty; assemble.py only gains main's jplst.js → rebase only, data unchanged; PASS b013ddf stands |
+| q1a branch | `git log origin/main..90796d3` = 8 q1a commits only, origin/main a2ad240 is its ancestor |
+
+## q1b — FAIL 7f12b48c (the 18 asks of round 3 + 15 more reworded, read each: fixed; family not closed)
+| round 3 item | state |
+|---|---|
+| the 18 listed asks (nc_gian_6/9/10, nc_su_6, nc_vuong_7, td_song_8, ch_benh_9/10, ch_bi_10, thd_tho_10, thd_sach_10, cnv_chu_10, cnv_ma_5/7/8) | FIXED (read each; «sắp …», «chờ ngày tra», «đóng dấu cho kịp», «Ngày xét án»; nc_gian_10 «trước giờ ấy» = before the emperor's summons, event-relative, fine) |
+| whole family | NOT CLOSED — 3 asks below |
+
+### Fixes (numbered)
+1. **jnrask_b.js:90–91 td_ke_9#0** — «{call} xin ngài đến Ngự hoa viên vào chiều mai» (a fixed date; seen on the Fold offer above «hạn 6 tuần»; the shared regex misses it — q1a fix 2). Reword event-relative, e.g. «…vào đúng buổi bẫy sập»; label «Mời Hoàng thượng dạo vườn vào giờ ấy» then fits.
+2. **jnrask_b.js:260 cnv_mat_8#0** — «Kiệu sắp đến cửa, mà {me} không biết một phép nào của đêm hầu giá… chỉ bảo {me} trước giờ ấy» — the palanquin is at the door = minutes, under a 6-week deadline (seen on iPad). Reword to the scene without hour-scale, e.g. «Đêm hầu giá đầu tiên đã định, mà {me} không biết một phép nào… chỉ bảo {me} trước đêm ấy».
+3. **jnrask_b.js:523 cnv_mat_8#1** — «Kiệu sắp đến, mà {me} sốt nhẹ từ chiều» — same family («từ chiều» pins now to this afternoon). E.g. «Đêm hầu giá đã định, mà mấy hôm nay {me} sốt nhẹ»; label/loss lines to match.
+Then rerun nrask-scan with q1a's widened TIME rule on the q1a+q1b+q1c merge: ALL PASS.
+
+### Re-review
+Text-only: diff of jnrask_b.js + nrask-scan on the merge.
