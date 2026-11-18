@@ -6,8 +6,8 @@ Core gates = coregates.sh G2/G3 + quickcheck.d hooks + emotion-acts + coop-e2e (
 import re,sys,glob,os
 R=os.path.join(os.path.dirname(os.path.abspath(__file__)),'..','..')
 CORE=['rules-one-source','coop-one-world','mk-layer-scan','time-spill-guard','kit-conform','emotion-acts','coop-e2e']
-files=sorted(glob.glob(os.path.join(R,'dev/test/*.js'))) if '--all' in sys.argv else [os.path.join(R,'dev/test',c+'.js') for c in CORE]
-pat=re.compile(r'(?:\bsleep|waitForTimeout)\((\d+)\)')
+files=sorted(glob.glob(os.path.join(R,'dev/test/*.js'))+[os.path.join(R,'dev/tools/quickcheck.js')]) if '--all' in sys.argv else [os.path.join(R,'dev/test',c+'.js') for c in CORE]+[os.path.join(R,'dev/tools/quickcheck.js'),os.path.join(R,'dev/test/odds-cap.js')]  # review r1: quickcheck.js (gate 2) + odds-cap (hook 40) were not scanned
+pat=re.compile(r'(?:\bsleep|\bsl|waitForTimeout)\((\d+)\)')  # r1: also the sl(ms) helper of quickcheck.js
 tot=0
 for f in files:
     if not os.path.exists(f): continue

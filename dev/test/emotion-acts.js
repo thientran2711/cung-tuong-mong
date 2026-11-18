@@ -20,15 +20,15 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,S
    Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;for(let i=0;i<3;i++){try{nextBuoi()}catch(e){}Q.length=0}
    Q.length=0;m.hidden=true;const w=document.getElementById('dawn');if(w){w.hidden=true;w.innerHTML='';w.classList.remove('on')}document.body.classList.remove('kbk-open');
    const t=document.getElementById('rtoast');if(t)t.classList.remove('on');mbS();S.mood.v=0;S.emo=null;eaS0();render()};
-  const shot=async(nm,fn,again)=>{await fresh1();await p.evaluate(`(${fresh.toString()})()`.replace('eaS0()','(S.ea={})'));await p.waitForFunction(()=>typeof S!=='undefined'&&!!S&&!!S.mood&&typeof deck!=='undefined',null,{timeout:30000});const r0=await p.evaluate(fn);if(again)await p.evaluate(again);
+  const shot=async(nm,fn,again)=>{let nodlg=0;await fresh1();await p.evaluate(`(${fresh.toString()})()`.replace('eaS0()','(S.ea={})'));await p.waitForFunction(()=>typeof S!=='undefined'&&!!S&&!!S.mood&&typeof deck!=='undefined',null,{timeout:30000});const r0=await p.evaluate(fn);if(again)await p.evaluate(again);
    /* wait for the real condition: the case's dialog is up and laid out (was fixed 800+600+5400 ms timers); the three no-dialog cases settle on 2 frames */
-   if(!['gian','vui','oldsave'].includes(nm))await p.waitForFunction(()=>{const M=document.getElementById('modal');const d=M&&!M.hidden&&M.querySelector('.dlg');return !!(d&&d.getBoundingClientRect().width>0)},null,{timeout:30000}).catch(()=>{});
+   if(!['gian','vui','oldsave'].includes(nm)){try{await p.waitForFunction(()=>{const M=document.getElementById('modal');const d=M&&!M.hidden&&M.querySelector('.dlg');return !!(d&&d.getBoundingClientRect().width>0)},null,{timeout:30000})}catch(e){nodlg=1}}/* review r1: a dialog that never shows FAILS the case (the wait used to swallow its timeout) */
    await p.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));
    const m=await p.evaluate(()=>{const M=document.getElementById('modal');const d=M&&!M.hidden&&M.querySelector('.dlg');const dr=d&&d.getBoundingClientRect();
     const over=d?[...d.querySelectorAll('*')].filter(e=>{const r=e.getBoundingClientRect();return r.width&&r.right>dr.right+1}).map(e=>e.className||e.tagName).slice(0,4):[];
     const opts=d?[...d.querySelectorAll('.opts > button')].map(b=>(b.disabled?"[x] ":"")+b.textContent.replace(/\s+/g," ").trim().slice(0,110)):[];
     return{modal:!!d,title:d?(d.querySelector('.kph,h3,h2')||{}).textContent:"",hscroll:document.documentElement.scrollWidth>innerWidth+1,over,opts}});
-   res[nm]=Object.assign({r0},m);if(m.hscroll||m.over.length||(r0&&r0.ok===false))bad++;await p.screenshot({path:`${OUT}/${wh}-${nm}.jpg`,type:'jpeg',quality:60})};
+   res[nm]=Object.assign({r0},m,nodlg?{nodlg:1}:{});if(m.hscroll||m.over.length||nodlg||(r0&&r0.ok===false))bad++;await p.screenshot({path:`${OUT}/${wh}-${nm}.jpg`,type:'jpeg',quality:60})};
   const card=n=>`(()=>{try{const g=document.querySelector('.game.k3home');const t=document.querySelector('#tabs [data-tab="act"]');if(g&&t)t.click()}catch(e){}const c=[...document.querySelectorAll('[data-i]')].find(b=>/${n}/.test(b.textContent));if(c)c.scrollIntoView({block:'center'});return !!c})()`;
   await shot('gian',`(()=>{S.mood.v=-45;S.emo={k:"gian",v:60,why:"bị làm nhục",w:wk()};render();const n=deck.filter(a=>a.ea).map(a=>a.n);return {n,ok:n.join()==="Đập đồ,Mắng cung nữ"&&${card("Đập đồ")}}})()`,`${card("Đập đồ")}`);
   await shot('vui',`(()=>{S.mood.v=45;render();const n=deck.filter(a=>a.ea).map(a=>a.n);return {n,ok:n.join()==="Đàn hát tự thưởng"&&${card("Đàn hát tự thưởng")}}})()`,`${card("Đàn hát tự thưởng")}`);
