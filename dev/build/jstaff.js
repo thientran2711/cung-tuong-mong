@@ -34,10 +34,9 @@ function mk(post,i,age){const nm=post.names[i%post.names.length];if(typeof sidN!
  return{sid:typeof sidN!=="undefined"?++sidN:Date.now(),eid:post.id,n:i,name:nm[0],call:nm[1],role:"maid",rk:post.rk,age,retire:rint(...(B().retire||[63,68])),
   tr:post.tr||"trung",loyal:70+R(16),spyFor:null,lover:null,af:{},hue:0,face:-1,fc:"",fk:"",fid:"",elder:1,since:S?S.year:1}}
 const elderCallOf=m=>{const st=(m.staff||[]).find(s=>s.eid);return st?st.call:"ma ma"};
-/* keep the household rule: a master over her cap sends an ordinary maid back to Nội vụ phủ (never a named one, a spy of hers, a lover) */
-function fitCap(m){try{if(!m||!m.staff||m===S.thO)return;const cap=capOf(m)[0];let n=hhHas(m)[0];
- while(n>cap){/* a servant coming home (j10 srvHome mark, staff-root-fix-1) is never the one sent away here either */const L=m.staff.filter(s=>s.role==="maid"&&!s.eid&&!s.home&&s.spyFor!=="me"&&!s.lover);const x=L[L.length-1]||m.staff.find(s=>s.role==="maid"&&!s.eid&&!s.home);if(!x)break;
-  m.staff.splice(m.staff.indexOf(x),1);try{if(x.fid){const U=figUsed();const i=U.indexOf(x.fid);if(i>=0)U.splice(i,1)}}catch(e){}n--;if(m===S)log(`Nội vụ phủ điều ${x.name} sang cung khác để ${elderCallOf(m)} về hầu.`)}}catch(e){}}
+/* keep the household rule: a master over her cap sends ordinary servants back to Nội vụ phủ (never a named one) — the ONE trim (j10 capTrim,
+   review/staff-cap-fix): same order, and she is told of every removal */
+function fitCap(m){try{if(!m||!m.staff||m===S.thO)return;capTrim(m)}catch(e){}}
 /* every post filled, each woman in the right household; her rank within the master's cap (srkMax) */
 function place(st){const post=postOf(st.eid);if(!post)return;const m=masterFor(post);if(!m)return;if(!m.staff)m.staff=[];
  for(const o of [S,S.thO].concat(rivals||[]))if(o&&o!==m&&Array.isArray(o.staff)&&o.staff.includes(st))o.staff.splice(o.staff.indexOf(st),1);

@@ -213,7 +213,30 @@ function kaSentence(before){const n=Math.max(0,Math.min(S.logs.length,(S.logSeq|
 /* owner 11/15: other people's feelings (ghen / oán of the consorts) are not HER gains or losses — they go to a separate KÈM line,
    collapsed ("12 phi tần ghen thêm 8"), tap to see who; a person she has not met is "người chưa quen" (no name) */
 function kaNamed(v){try{return v===S||typeof k61Named!=="function"||k61Named(v)}catch(e){return true}}
-function kaResultRows(before){const G=[],B=[];const K=[];const skip=new Set();
+/* KIT PART kitWhy (KIT 7, owner 18/11 09:03Z): every result line says SHORTLY WHY. ONE source = the Sổ ghi lines of this span (S.logs since before.seq),
+   never a second wording: a clause "lead: … Sức +10" gives the lead; a person is matched by name in the log; no log clause → the act's own title →
+   a short fixed cause per stat (KA_WHYD). Never a colon, never a % — it stays one short phrase after the value ("Sức +18 · nghỉ qua đêm"). */
+const KA_WHYD={suc:{"+":"nghỉ ngơi","-":"mệt vì việc trong cung"},sung:{"+":"được Hoàng thượng để mắt","-":"lâu không được gặp Hoàng thượng"},bac:{"+":"bổng lộc và quà tặng","-":"chi tiêu trong cung"},danh:{"+":"tiếng lành đồn xa","-":"tiếng không hay đồn ra"},duc:{"+":"giữ nết tốt","-":"lỡ lời lỡ việc"},sac:{"+":"chăm dưỡng nhan sắc","-":"nhan sắc kém đi"},tai:{"+":"luyện thêm tài nghệ","-":"bỏ bê tài nghệ"},tamco:{"+":"thêm kinh nghiệm cung đình","-":"bớt cảnh giác"},tin:{"+":"được tin cậy","-":"mất lòng tin"}};
+const KA_WHYM="chuyện trong cung";const KA_WHYBAD=/^(thành|hỏng|bại|không thành|thành công|thất bại)[.!]?$/i;
+function kaWhyClip(t){t=String(t||"").replace(/\s+/g," ").replace(/[:：]/g," ").replace(/\s*\([^)]*\)\s*$/,"").replace(/[\s.!?…·,;]+$/,"").trim();if(!t)return"";t=t.charAt(0).toLocaleLowerCase("vi")+t.slice(1);if(t.length>44){t=t.slice(0,44);const i=t.lastIndexOf(" ");t=(i>20?t.slice(0,i):t).replace(/[\s,;]+$/,"")+"…"}return t}
+function kaWhyCl(before){try{const n=Math.max(0,Math.min(S.logs.length,(S.logSeq||0)-before.seq));const out=[];for(const h of S.logs.slice(0,n).reverse()){const t=plain(String(h).replace(/<span class="ld">[^<]*<\/span>/,""));for(const s of t.split(kRx("(?<=[.!?…])\\s+(?=[A-ZÀ-Ỹ\"“])",""))){for(const c of s.split(/\s·\s/))if(c.trim())out.push(c.trim())}}return out}catch(e){return[]}}
+function kaWhyLead(c,i){const m=c.match(/^([^:]{3,50}):\s/);return m&&!/^Vì sao/i.test(m[1])&&!/→|\d/.test(m[1])&&!KA_WHYBAD.test(m[1].trim())?m[1]:null}
+/* stat line: the clause of the log that states this stat's change */
+function kaWhyStat(C,nm,d,title,key){const re=new RegExp("(^|[^\\p{L}])"+nm.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"\\s*(?:[+−-]\\s*\\d|\\d+\\s*→)","u");const sg=d>0?"+":"-";
+ let c=C.find(x=>re.test(x));let r=c&&kaWhyLead(c);
+ if(!r&&key==="bac"){c=C.find(x=>/[+−-]\s*\d+\s*bạc/i.test(x)&&(d>0)===!/[−-]\s*\d+\s*bạc/i.test(x));r=c&&kaWhyLead(c)}
+ if(!r&&title&&!/^Trong cung vừa qua$/.test(title))r=title;
+ if(!r&&KA_WHYD[key])r=KA_WHYD[key][sg];
+ return kaWhyClip(r||KA_WHYM)}
+/* person line: "Vì sao: <name>: <why> → …" first, then the log sentence that names her (strangers: "chưa quen biết …"), then the act title */
+function kaWhyWho(C,v,named,title){try{const nm=v&&v.name;const subj=named&&nm?nm:null;
+ const vs=subj&&C.find(x=>/^Vì sao:/i.test(x)&&x.includes(subj));if(vs){const m=vs.replace(/^Vì sao:\s*/i,"").replace(subj,"").replace(/^[^:]*?:\s*/,"").replace(/\s*→.*$/,"");if(m.trim().length>3)return kaWhyClip(m)}
+ const hit=C.find(x=>!/^Vì sao:/i.test(x)&&!/→/.test(x)&&(subj?x.includes(subj):/chưa quen biết/.test(x)));
+ if(hit){let t=hit;if(subj)t=t.replace(new RegExp("^.*?"+subj.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"\\s*"),"");else t=t.replace(/^.*?chưa quen biết\s*/,"");t=t.replace(/\s*\(.*$/,"");if(t.length>3){const c=kaWhyClip(t);if(c&&!KA_WHYBAD.test(c))return c}}
+ }catch(e){}
+ return kaWhyClip(title&&!/^Trong cung vừa qua$/.test(title)?title:KA_WHYM)}
+function kaWhyHtml(r){return r?`<span class="kwy"> · ${r}</span>`:""}
+function kaResultRows(before,title){const G=[],B=[];const K=[];const skip=new Set();const WC=kaWhyCl(before);
  const q=typeof queenP==="function"?queenP():null;const R=before.rel||{};
  const per=[];const U={g:[],b:[]};/* [who, goodParts, badParts] */
  for(const v of (typeof rivals!=="undefined"?rivals:[])){const b=R[v.id];if(!b)continue;const a=aff(v,S),m=aff(S,v),e=v.ev||0,g=v.ghen||0,o=Math.round(oan(v,S));const gp=[],bp=[];
@@ -223,21 +246,25 @@ function kaResultRows(before){const G=[],B=[];const K=[];const skip=new Set();
   if(g!==b.g)K.push({v,k:"ghen",d:g-b.g});
   if(o!==b.o)K.push({v,k:"oán",d:o-b.o});
   if(e!==b.e)(e>b.e?gp:bp).push(`chứng cứ về nàng ${kaN(e-b.e)}`);
-  if(gp.length||bp.length){if(kaNamed(v))per.push([kaWho(v),gp,bp]);else{/* name-mask: strangers are ONE aggregate row per direction, never "<tước> ???" rows */if(gp.some(t=>/^(quý ngươi|ngươi quý)/.test(t)))U.g.push(v);if(bp.some(t=>/^(ghét ngươi|ngươi bớt)/.test(t)))U.b.push(v)}}}
- {/* the ONE shared list helper kitNameList: all strangers -> "N vị chưa quen biết" */if(U.g.length)per.push([kitNameList(U.g),["quý ngươi hơn"],[]]);if(U.b.length)per.push([kitNameList(U.b),[],["ghét ngươi hơn"]])}
+  if(gp.length||bp.length){if(kaNamed(v))per.push([kaWho(v),gp,bp,kaWhyWho(WC,v,true,title)]);else{/* name-mask: strangers are ONE aggregate row per direction, never "<tước> ???" rows */if(gp.some(t=>/^(quý ngươi|ngươi quý)/.test(t)))U.g.push(v);if(bp.some(t=>/^(ghét ngươi|ngươi bớt)/.test(t)))U.b.push(v)}}}
+ {/* the ONE shared list helper kitNameList: all strangers -> "N vị chưa quen biết" */if(U.g.length)per.push([kitNameList(U.g),["quý ngươi hơn"],[],kaWhyWho(WC,null,false,title)]);if(U.b.length)per.push([kitNameList(U.b),[],["ghét ngươi hơn"],kaWhyWho(WC,null,false,title)])}
  for(const [k,nm] of RKEYS){if(skip.has(k))continue;const now=S[k]||0,d=now-(before[k]||0);if(!d)continue;
-  if(k==="th"||k==="hh"){const who=k==="th"?"Thái hậu":(q&&q!==S?kaWho(q):"Hoàng hậu");per.push([who,d>0?[`quý ngươi hơn (${before[k]}→${now}, ${kaN(d)})`]:[],d<0?[`ghét ngươi hơn (${before[k]}→${now}, ${kaN(d)})`]:[]]);continue}
-  {const up=typeof kGood==="function"?kGood(k,d):d>0;(up?G:B).push(`<span class="ef ${up?"g":"r"}">${nm} ${before[k]}→${now} (${kaN(d)})</span>`)}}
- if(S.maid&&before.maid!=null&&S.maid.loyal!==before.maid){const d=S.maid.loyal-before.maid;(d>0?G:B).push(`<span class="ef ${d>0?"g":"r"}">Lòng ${S.maid.name} ${before.maid}→${S.maid.loyal} (${kaN(d)})</span>`)}
- for(const [who,gp,bp] of per){if(gp.length)G.push(`<span class="ef t">${who}:</span> <span class="ef g">${gp.join(", ")}</span>`);if(bp.length)B.push(`<span class="ef t">${who}:</span> <span class="ef r">${bp.join(", ")}</span>`)}
+  if(k==="th"||k==="hh"){const who=k==="th"?"Thái hậu":(q&&q!==S?kaWho(q):"Hoàng hậu");per.push([who,d>0?[`quý ngươi hơn (${before[k]}→${now}, ${kaN(d)})`]:[],d<0?[`ghét ngươi hơn (${before[k]}→${now}, ${kaN(d)})`]:[],kaWhyWho(WC,k==="th"?{name:"Thái hậu"}:(q&&q!==S?q:{name:"Hoàng hậu"}),true,title)]);continue}
+  {const up=typeof kGood==="function"?kGood(k,d):d>0;(up?G:B).push(`<span class="ef ${up?"g":"r"}">${nm} ${before[k]}→${now} (${kaN(d)})</span>`+kaWhyHtml(kaWhyStat(WC,nm,d,title,k)))}}
+ if(S.maid&&before.maid!=null&&S.maid.loyal!==before.maid){const d=S.maid.loyal-before.maid;(d>0?G:B).push(`<span class="ef ${d>0?"g":"r"}">Lòng ${S.maid.name} ${before.maid}→${S.maid.loyal} (${kaN(d)})</span>`+kaWhyHtml(kaWhyStat(WC,"Lòng",d,title,"maid")))}
+ for(const [who,gp,bp,why] of per){const W=kaWhyHtml(why);if(gp.length)G.push(`<span class="ef t">${who}:</span> <span class="ef g">${gp.join(", ")}</span>${W}`);if(bp.length)B.push(`<span class="ef t">${who}:</span> <span class="ef r">${bp.join(", ")}</span>${W}`)}
+ K.why=WC;K.ttl=title;
  return [G,B,K]}
 /* KIT PART kitKemRow(K) (KIT 7 + 28.6, kit sample page): the KÈM line of a result — other people's feelings, one summary per kind and
    direction ("12 phi tần ghen thêm 8" / "3 phi tần bớt oán 2–5"), the names behind a tap (.kkem.on); K = [{v, k:"ghen"|"oán", d}] */
+/* the reason of a KÈM line (ghen / oán of the others): a Sổ ghi clause naming that feeling, else the act title, else the fixed cause */
+const KA_WHYK={ghen:{"+":"lời đồn về ngươi lan ra","-":"lòng ghen nguôi dần theo ngày"},"oán":{"+":"chuyện cũ chưa nguôi","-":"oán nguôi dần theo ngày"}};
+function kaWhyKem(K,k,up){try{const C=K.why||[];const c=C.find(x=>new RegExp("(^|[^\\p{L}])"+k+"\\s*(?:[+−-]\\s*\\d)","u").test(x));const r=c&&kaWhyLead(c);if(r)return kaWhyClip(r);const t=K.ttl;if(t&&!/^Trong cung vừa qua$/.test(t))return kaWhyClip(t);return KA_WHYK[k][up?"+":"-"]}catch(e){return""}}
 function kitKemRow(K){if(!K||!K.length)return"";const grp={};for(const x of K){const key=x.k+(x.d>0?"+":"-");(grp[key]=grp[key]||[]).push(x)}
  const parts=Object.entries(grp).map(([key,L])=>{const up=key.endsWith("+"),k=key.slice(0,-1);const ds=L.map(x=>Math.abs(x.d));const lo=Math.min(...ds),hi=Math.max(...ds);
   const amt=lo===hi?`${lo}`:`${lo}–${hi}`;const verb=up?`${k} thêm ${amt}`:`bớt ${k} ${amt}`;
   const names=L.map(x=>`${kaNamed(x.v)?kaWho(x.v):"người chưa quen"} ${up?"+":"−"}${Math.abs(x.d)}`);
-  return `<span class="kkem" role="button" tabindex="0" aria-expanded="false"><span class="kkems">${L.length} ${L.length>1?"phi tần":"người"} ${verb}</span><span class="kkeml">${names.join(" · ")}</span></span>`});
+  const wy=kaWhyHtml(kaWhyKem(K,k,up));return `<span class="kkem" role="button" tabindex="0" aria-expanded="false"><span class="kkems">${L.length} ${L.length>1?"phi tần":"người"} ${verb}</span>${wy}<span class="kkeml">${names.join(" · ")}</span></span>`});
  return `<span class="kr kr-kem"><span class="krl">Kèm</span><span class="krv">${parts.join('<span class="ksep">·</span>')}</span></span>`}
 const kaKemHTML=kitKemRow;
 /* KIT PART oddsSoft(n,c) — the ONE soft failure of a formerly-sure act (ODDS CAP, owner 17/11 ~17:35Z "việc chắc ăn mà hỏng thì chỉ hỏng nhẹ"):
@@ -261,7 +288,7 @@ document.addEventListener("click",e=>{const b=e.target&&e.target.closest&&e.targ
 /* KIT PART kitResultSeal(ok) (KIT 7): the result seal — true → THÀNH (.ok), false → BẠI (.bad), no roll → "KẾT QUẢ" (.sure, the kit's grey seal, no stamp) */
 function kitResultSeal(ok){return ok===true?{cls:"ok",t:"THÀNH"}:ok===false?{cls:"bad",t:"BẠI"}:{cls:"sure",t:"KẾT QUẢ"}}
 resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;
- const [G,B,K]=kaResultRows(before);const n=Math.max(0,(S.logSeq||0)-before.seq);let sen="";try{sen=kaSentence(before)}catch(e){}if(sen&&kaPlain(sen).replace(/[.!…\s]+$/,"").toLowerCase()===kaPlain(title||"").replace(/[.!…\s]+$/,"").toLowerCase())sen="";
+ const [G,B,K]=kaResultRows(before,title);const n=Math.max(0,(S.logSeq||0)-before.seq);let sen="";try{sen=kaSentence(before)}catch(e){}if(sen&&kaPlain(sen).replace(/[.!…\s]+$/,"").toLowerCase()===kaPlain(title||"").replace(/[.!…\s]+$/,"").toLowerCase())sen="";
  const why=S.logs.slice(0,Math.min(n,S.logs.length)).map(plain).join(" ");
  /* the seal follows the outcome FOR HER (net real changes + what the log says), not which branch fired */
  const failTxt=/chặn kịp|phát giác|bị lộ|bị bắt|không thành|hỏng|từ chối|không ai tin|trách ngươi|quở|bị phạt|mắng|thư giả|vu khống|thất bại|không dò ra|không biết gì|cũng không biết|không thấy gì|không tìm ra|chưa duyệt/i.test(why);/* act audit: a failed search/scout read THÀNH */
@@ -291,7 +318,9 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;
 .rtoast.karesult .ksen{color:var(--ink);line-height:1.35}
 .rtoast.karesult .kb{grid-template-columns:3.4rem minmax(0,1fr);font-size:.8rem;line-height:1.4}
 .rtoast.karesult .kb .ef{font-weight:600}.rtoast.karesult .kb .ef.t{color:var(--ink);font-weight:700}
-.rtoast.karesult .kitem{display:block}
+.rtoast.karesult .kitem{display:block;text-align:left;align-items:flex-start;justify-content:flex-start;width:auto;min-width:0}/* .kitem is also the item cell (centred): a result line is left-aligned, value next to its label */
+.rtoast.karesult .kwy,.kb .kwy{color:var(--dim);font-weight:400;font-size:.74rem}
+
 .kb .kr-kem .krl{color:var(--dim)}
 .kb .kkem{display:block;cursor:pointer;color:var(--ink)}
 .kb .kkem .kkems{text-decoration:underline dotted;text-underline-offset:3px}

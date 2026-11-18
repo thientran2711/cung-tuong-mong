@@ -63,7 +63,10 @@ function kitPgEvOpts(){const W=o=>typeof word==="function"?word(o):"Khó lườn
 function kitPgSeals(){const s=ok=>{const r=kitResultSeal(ok);return `<span class="rtoast karesult ${r.cls}"><b class="seal">${r.t}</b></span>`};return `<div class="kitpg-row kitpg-seal">${s(true)}${s(false)}${s(null)}</div>`}
 function kitPgKem(){let L=[];try{L=liveRivals(true).slice(0,3)}catch(e){}if(!L.length)L=[{name:"Phi tần A"},{name:"Phi tần B"}];
  return `<span class="kb" onclick="const k=event.target.closest('.kkem');if(k)k.classList.toggle('on')">${kitKemRow(L.map((v,i)=>({v,k:"ghen",d:4+i*2})))}</span>`}
+function kitPgWhy(){const w=(c,t,r)=>`<span class="kitem"><span class="ef ${c}">${t}</span>${kaWhyHtml(r)}</span>`;
+ return `<span class="kb rtoast karesult" style="position:static;display:grid"><span class="kr kr-duoc"><span class="krl">Được</span><span class="krv">${w("g","Sức 56→74 (+18)","nghỉ qua đêm")}</span></span><span class="kr kr-mat"><span class="krl">Mất</span><span class="krv">${w("r","Sủng 26→25 (−1)","lâu không được gặp Hoàng thượng")}${w("r","Bạc 80→65 (−15)","sai tai mắt dò chủ hội")}</span></span></span>`}
 KIT_SAMPLES.push(
+ {id:"§7",title:"Result card lines: value · short why (one source = Sổ ghi)",html:kitPgWhy},
  {id:"§53",title:"kitChip tones · kitRisk",html:()=>`<p>${kitChip("Sủng",3)}${kitChip("Danh",-2)}${kitChip("Thường","n")}${kitChip("có rủi ro","w")}${kitChip("đủ Sức","ok")}${kitChip("thiếu bạc","no")}</p><p>${kitRisk("an toàn")}${kitRisk("có rủi ro")}${kitRisk("liều")}</p>`},
  {id:"§53",title:"Event option in cost mode: Tốn + kitHintRow + kitRisk (no Tốn when free)",html:kitPgEvOpts},
  {id:"§53",title:"kitResultSeal: THÀNH · BẠI · KẾT QUẢ",html:kitPgSeals},
