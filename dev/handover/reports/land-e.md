@@ -58,3 +58,7 @@ Gates: one-core-guard 0 fails; quickcheck PASS (old save ok, render 270/271, tab
 Touched vs main: assets.json assemble.py j67 jbalge jchap jdh jge jgecat jgedata jroad jst14 jtabs KIT_REQUESTS.md measure/ge-measure.js tests ge-engine/ge-guard/ge-shots + ge_guard/*.py + built index/sw. None of jag*/j95*/jtoil*/jbal.js/jcoop*/save.
 
 LAND READY 4475ea24023ba59671680054e069a39238d3d302 (FF from 636193f88e35985ab3d6ea8ec8f251179933480e)
+
+ROUND 4 FINAL: main moved to ecd1aed4 (life-preload-fu; no overlap) → merged into the stack, index/sw rebuilt: final sha a8a10c66b78f0841b0d87759333e5db14a8675de (FF from ecd1aed4). one-core-guard 0; quickcheck PASS (render 251/266, tab 470/493, buoi 1187/1354, old save ok); ge-guard 6/6; ge-engine 104/104.
+
+LAND READY a8a10c66b78f0841b0d87759333e5db14a8675de (FF from ecd1aed4)
