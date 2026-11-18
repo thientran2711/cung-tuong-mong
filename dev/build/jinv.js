@@ -414,7 +414,7 @@ function kitShopTile(o,x,i){const key=o.key||"shop",u=x.unit||"bạc";const g=KI
  return `<div class="kshc${mx<1?" kshno":""}" ${A}>`+
   `<button type="button" class="kshpic" ${A} data-kshdet="1" aria-label="Xem ${x.name}">${kitItem({src:x.src,name:x.name,grade:x.grade,lux:x.lux,qty:q,size:"slot",mark:x.mark,tip:`${x.name} · chạm để xem`})}</button>`+
   `<span class="kshn" style="color:${g.c}" title="${x.name}">${x.name}</span><span class="kshe"${x.eff?` title="${x.eff}"`:""}>${x.eff||""}</span>`+
-  `<span class="kshp">${x.sell?"bán ":""}${x.price} ${u}${x.sell&&x.have?` · có ${x.have()}`:""}</span>`+
+  `<span class="kshp">${x.price} ${u}</span>`+
   `<span class="kshst"><button type="button" class="kbtn alt kshqb" ${A} data-kshq="-" aria-label="Bớt một"${q<=1?" disabled":""}>−</button><b class="kshqn" aria-live="polite">${q}</b>`+
   `<button type="button" class="kbtn alt kshqb" ${A} data-kshq="+" aria-label="Thêm một"${q>=mx?" disabled":""}>+</button></span>`+
   `<button type="button" class="kbtn kshgo" ${A} data-kshbuy="1"${why?` disabled title="${why}"`:""}>${lab}</button></div>`}
@@ -431,7 +431,7 @@ function kitShopDet(o){const x=(o.list||[]).find(y=>y.k===o.det);if(!x)return"";
 function kitShopBody(o){const key=o.key||"shop";const money=o.money?o.money():0;o.list=kitShopList(o);o.q=o.q||{};
  const tabs=o.sell?`<div class="pctabs kcattabs kshtabs" role="tablist">${kitTabRowHTML([{k:"buy",label:"Mua"},{k:"sell",label:"Bán"}],o.mode==="sell"?"sell":"buy",`data-kshop="${key}" data-kshtab`)}</div>`:"";
  const empty=o.mode==="sell"&&!o.list.length?`<p class="past kshempty">${(o.sell&&o.sell.empty)||"Chưa có gì để bán."}</p>`:"";
- return `<div class="kshop" data-kshop="${key}"><div class="kshl">${o.info||""}<span class="kshm">Ta có <b>${money}</b> ${o.unit||"bạc"}</span></div>${tabs}`+
+ return `<div class="kshop" data-kshop="${key}"><div class="kshl">${o.info||""}</div>${tabs}`+
   (empty||`<div class="kshg">${o.list.map((x,i)=>kitShopTile(o,x,i)).join("")}</div>`)+(o.det!=null?kitShopDet(o):"")+`</div>`}
 function kitShop(o){o=o||{};const key=o.key||"shop";o.q={};o.det=null;o.mode="buy";KSHOP.reg[key]=o;
  return kitModal({kind:"info",title:o.title||"Mua đồ",html:kitShopBody(o),btn:o.btn||"Đóng",shop:key,stage:o.stage,onClose:o.onClose})}
@@ -453,7 +453,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){for(const k in KSHO
 .dlg.kshopd #mr{display:none!important}
 .dlg.kshopd.kdper>#mb>.kpb>.kpmain{grid-row:1/-1;min-height:0;display:flex;flex-direction:column;position:static}
 /* review/care-overlap: a shop / care dialog (kshopd) with the KIT 50 banner (kdpban, row 1 of the right column): the body starts UNDER the picture, never beside it in the same row (it spanned rows 1 to -1 and the picture covered the bars / first tiles); the banner is part of #mb's grid, so every kshopd dialog (pet shop, errand shop, pet care) gets the same rows */
-.dlg.kshopd.kdper.kdpbanner>#mb>.kpb>.kpmain{grid-row:2/-1;overflow-y:auto;overscroll-behavior:contain}
+.dlg.kshopd.kdper.kdpbanner>#mb>.kpb>.kpmain{grid-row:1/-1;overflow-y:auto;overscroll-behavior:contain}
 .kshop{display:flex;flex-direction:column;gap:8px;min-width:0;min-height:0;flex:1 1 auto}
 .kshl{display:flex;flex-direction:column;gap:4px;min-width:0;flex:none}
 .kshl p{margin:0;line-height:1.4}
@@ -463,7 +463,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){for(const k in KSHO
 /* KIT 28.13e tile grid: equal columns, every tile the same fixed rows → everything on one line across a row */
 .kshg{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;display:grid;grid-template-columns:repeat(auto-fill,minmax(var(--kshsz,118px),1fr));
  grid-auto-rows:max-content;align-content:start;gap:10px 6px;padding:8px;border:1px solid var(--k-hair,#e6d3ac);border-radius:10px;background:#f4ead8;box-shadow:inset 0 1px 3px #5a3a2018}
-.kshc{--kshl:1.2;display:grid;grid-template-rows:auto calc(2rem * 1.2 * .8) calc(2rem * 1.2 * .72) calc(1rem * 1.3 * .8) 30px 34px;row-gap:4px;
+.kshc{--kshl:1.2;display:grid;grid-template-rows:auto calc(2rem * 1.2 * .8) calc(1rem * 1.2 * .72) calc(1rem * 1.3 * .8) 30px 34px;row-gap:4px;
  justify-items:center;align-items:start;min-width:0;text-align:center;border-radius:8px;padding:4px 3px 5px}
 .kshpic{all:unset;box-sizing:border-box;display:block;width:100%;max-width:84px;aspect-ratio:1;cursor:zoom-in;border-radius:6px}
 .kshpic:focus-visible{box-shadow:0 0 0 2px var(--gold,#c9a46a)}
@@ -473,7 +473,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){for(const k in KSHO
 .kshc.kshno .kshpic>.kitem-slot{filter:grayscale(.85) brightness(.92);opacity:.7}
 .kshn,.kshe{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;line-height:var(--kshl);overflow-wrap:anywhere;width:100%;align-self:start}
 .kshn{font-weight:700;font-size:.8rem}
-.kshe{font-size:.72rem;color:var(--ink2,#6a5040);align-self:start}
+.kshe{-webkit-line-clamp:1;white-space:nowrap;text-overflow:ellipsis;display:block;font-size:.72rem;color:var(--ink2,#6a5040);align-self:start}
 .kshp{font-size:.8rem;line-height:1.3;font-weight:600;color:var(--ink,#3a2418);white-space:nowrap;align-self:end}
 .kshst{display:flex;align-items:center;justify-content:center;gap:6px;height:30px;width:100%}
 .kshst .kbtn.kshqb{min-height:0;height:30px;width:30px;padding:0;font-size:1rem;line-height:1;flex:none}
@@ -481,7 +481,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){for(const k in KSHO
 .kshc .kbtn.kshgo{min-height:0;height:34px;width:100%;padding:0 6px;font-size:.8rem;white-space:nowrap;align-self:end}
 .kshc .kbtn:disabled{filter:grayscale(1);opacity:.55;cursor:default}
 /* pick mode (28.13e, j83 recipes): no stepper row, the picture is not a zoom button */
-.kshc.kshpick{grid-template-rows:auto calc(2rem * 1.2 * .8) calc(2rem * 1.2 * .72) calc(1rem * 1.3 * .8) 34px}
+.kshc.kshpick{grid-template-rows:auto calc(2rem * 1.2 * .8) calc(1rem * 1.2 * .72) calc(1rem * 1.3 * .8) 34px}
 .kshc.kshpick>.kshpic{cursor:default}
 /* the floating kit item card */
 .dlg.kshopd{position:relative}
@@ -498,15 +498,17 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){for(const k in KSHO
 .kshop[data-kshop] .kshg{grid-template-columns:repeat(3,minmax(0,1fr))}
 .kshop[data-kshop] .kshc .kbtn.kshgo{padding:0 3px;font-size:.74rem}
 /* the grid always needs to scroll, so the scene picture takes the kit's smallest strip (KIT_SIZE.pic.NS, owner 18/11 16:10Z: a big picture only when the content under it fits without scrolling) */
-html body #modal .dlg.kshopd.kdper>#mb>.kdlgart.kdpban>.ksart{height:${window.KIT_SIZE?KIT_SIZE.pic.NS.h:56}px!important}
+/* review/shop-panel-r2 (owner 18/11 ~18:30Z): NO picture strip on a shop panel: the seller figure is on the left, the tabs start at the very top of the right column */
+html body #modal .dlg.kshopd.kdper>#mb>.kdlgart.kdpban{display:none!important}
 /* short landscape screens (phone landscape): the seller's line is dropped, "Ta có N bạc" sits left of the tab row, smaller pictures → a whole tile row shows */
 
 `;document.head.appendChild(st)})();
 /* Nội vụ phủ: "Nhờ thái giám mua đồ" (j8 PEND.shop items S.shop, price itm(k).pr) through kitShop */
-function kitShopEff(k){const it=IT[k];if(!it)return"";if(it.dr)return `may áo: Sắc +${it.dr}, 3 tháng`;
- if(it.sl&&it.w){const v={hair:"cài tóc",wrist:"đeo tay",waist:"đeo eo",scent:"đeo"}[it.sl]||"đeo";return `${v}: ${kinvPlain(it.w)}`}
- if(it.use){const u=kinvPlain(it.use);if(u)return `dùng: ${u}`}if(it.anti)return"giải độc một lần";if(it.ant)return"an thai";if(it.fert)return `${it.fert} tháng dễ thụ thai`;
- if(it.w){const u=kinvPlain(it.w);if(u)return u}if(it.gv)return"đem tặng: hợp ý";return String(it.d||"").split(/[.;]/)[0].slice(0,40)}
+function kitShopEff(k){const it=IT[k];if(!it)return"";if(it.dr)return `Sắc +${it.dr} · 3 tháng`;
+ /* review/shop-panel-r2 (owner 18/11 ~18:30Z): ONE gain row «Sắc +2 · Danh +1», never the slot / kind word (đeo tay, cài tóc, dùng) */
+ if(it.sl&&it.w)return kinvPlain(it.w).replace(/, /g," · ");
+ if(it.use){const u=kinvPlain(it.use);if(u)return u.replace(/, /g," · ")}if(it.anti)return"giải độc một lần";if(it.ant)return"an thai";if(it.fert)return `${it.fert} tháng dễ thụ thai`;
+ if(it.w){const u=kinvPlain(it.w);if(u)return u.replace(/, /g," · ")}if(it.gv)return"đem tặng: hợp ý";return String(it.d||"").split(/[.;]/)[0].slice(0,40)}
 /* sell data (coordinator 11/15): the economy worker exposes econSellable(S) / econPrice(item) over j83's handmade works (IT.tp entries {k:"tp",
    wk:{n,kind,ti…}}, wkName, wkSellVal, wkSell) on review/balance-unified. The shop calls THEM when they exist; until they land, kitShopSellable /
    kitShopPrice below do the same from the inventory: each handmade work is its own tile (wk.n, wkSellVal, sold by wkSell = j83's odds), plus
