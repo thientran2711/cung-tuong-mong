@@ -13,7 +13,8 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
  const names=await g.evaluate(()=>{try{deal()}catch(e){}return deck.map(a=>a.n)});
  const rows=[];
  for(const n of names){
-  const r=await g.evaluate(async n=>{Q.length=0;document.getElementById('modal').hidden=true;S.dead=false;S.confined=0;S.out=0;S.buoi=0;used=0;S.suc=100;S.bac=9999;S.place="home";S.visit={k:"home",people:homePeople(),talked:false,tk:{}};S.acPass={};S.adDoor={};
+  const r=await g.evaluate(async ([n,__START])=>{Q.length=0;document.getElementById('modal').hidden=true;S.dead=false;S.confined=0;S.out=0;S.buoi=0;used=0;S.suc=100;S.bac=9999;S.place="home";S.visit={k:"home",people:homePeople(),talked:false,tk:{}};S.acPass={};S.adDoor={};
+   /* r2: start AWAY (Ngự hoa viên) so home-bound acts must really bring her home */const st0=__START;if(st0!=="home"){accGrant(S,st0);const uu=used;try{goTo(st0)}catch(e){}used=uu;if(S.place!==st0){S.place=st0;S.visit={k:st0,people:[],talked:false,tk:{}}}Q.length=0;document.getElementById("modal").hidden=true}
    try{deal()}catch(e){}const i=deck.findIndex(a=>a.n===n);if(i<0)return{n,skip:'not dealt'};const a=deck[i];a.done=0;a.lock=false;
    const want=typeof actPlace==="function"?actPlace(a):null;const cost=typeof cardCost==="function"?cardCost(a):(a.k||1);const u0=used;
    try{act(i)}catch(e){return{n,err:String(e).slice(0,120)}}
@@ -21,7 +22,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
    const done=!!deck[i]&&!!deck[i].done;const placeAfter=S.place;const spent=used-u0;
    /* stays: render once more (a later render must not send her back) */try{render()}catch(e){}const stays=S.place===placeAfter;
    const im=(document.getElementById('scimg').style.backgroundImage||'');const stageOk=im.indexOf(SCIMG[placeOf(S.place).sc]||'@@')>=0;
-   return{n,place:want||'-',ran:done,moved:want?placeAfter===want:placeAfter!=="home",stays,stageOk,cost,spent,once:!done||spent===cost}},n);
+   return{n,start:__START,place:want||'-',remote:!!(window.ACT_REMOTE&&ACT_REMOTE[n]),ran:done,moved:want?placeAfter===want:placeAfter!==__START,stays,stageOk,cost,spent,once:!done||spent===cost}},[n,process.env.START||'vuon']);
   rows.push(r)}
  const bound=rows.filter(r=>r.place&&r.place!=='-');const bad=bound.filter(r=>r.ran&&(!r.moved||!r.stays||!r.stageOk||!r.once)).concat(rows.filter(r=>r.place==='-'&&r.moved));
  console.log(JSON.stringify({sum:{acts:rows.length,bound:bound.length,ran:bound.filter(r=>r.ran).length,bad:bad.length,errs:errs.slice(0,3)},rows},null,0));

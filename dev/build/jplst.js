@@ -16,6 +16,8 @@ function kitLineToast(text){try{if(!text)return null;try{const md=document.getEl
  const hud=document.querySelector("header.hud");let el=document.getElementById("ktbtoast");if(el)el.remove();
  el=document.createElement("div");el.id="ktbtoast";el.className="ktbt";el.setAttribute("role","status");el.innerHTML=`<span>${esc(text)}</span>`;
  const r=hud&&hud.getClientRects().length?hud.getBoundingClientRect():null;el.style.top=(r?Math.round(r.bottom+6):6)+"px";document.body.appendChild(el);
+ /* keep-clear (jclose kitToastClear): below the tab rows / place name; no room left → the bottom spot above the tab bar, sliding up */
+ try{if(typeof kitToastClear==="function"&&!kitToastClear(el,"down")&&typeof kitLinePos==="function")kitLinePos(el)}catch(e){}
  el.addEventListener("click",()=>el.remove());clearTimeout(kitLineToast.t);kitLineToast.t=setTimeout(()=>{el.classList.add("out");setTimeout(()=>{if(el.classList.contains("out"))el.remove()},500)},window.__toastKeep?60000:BAL.entryToastMs);return el}catch(e){return null}}
 window.kitLineToast=window.kitLineToast||kitLineToast;
 function lay(){try{const st=$("stage");if(!st)return;let nm=$("kpname"),en=$("kpent");
@@ -44,6 +46,7 @@ function placeEnt(){try{const en=$("kpent"),st=$("stage");if(!en||en.hidden||!st
   if(q.right>c.left-4&&q.left<c.right+4&&q.top<c.bottom+2&&q.bottom>c.top-2)en.style.left=Math.round(q.right-R.left+8)+"px"}}catch(e){}}
 function lay2(){lay();placeEnt();clearTimeout(lay2.a);clearTimeout(lay2.b);lay2.a=setTimeout(placeEnt,400);lay2.b=setTimeout(placeEnt,1300)}
 const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);lay2();return r};
+if(typeof render==="function"){const rr=render;render=function(){const r=rr.apply(this,arguments);try{requestAnimationFrame(()=>{try{kitToastRefit()}catch(e){}})}catch(e){}return r}}/* toasts keep clear after every screen change */
 try{addEventListener("resize",()=>{clearTimeout(lay.__t);lay.__t=setTimeout(lay2,90)})}catch(e){}
 /* (1) the count chip: the kit rail's first slot */
 try{if(window.kitStageRail)kitStageRail.add({id:"here",order:0,chip:()=>{const n=hereN();return n&&typeof j59ico==="function"?`<span class="kchip n j59hchip" role="img" aria-label="Ở đây còn ${n} người">${j59ico()}<span class="j59n">${n}</span></span>`:""},when:()=>hereN()>0&&onStage()})}catch(e){}

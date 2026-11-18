@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"e8e5afe5+","t":"2026-11-18T19:59Z","c":"stage-here r1b: Hành sự acts bound to a place really move her there, stay, one cost (owner OD 18/11 ~19:55Z + ~20:00Z)","b":"a8a86907e853","h":[{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"},{"s":"a5013222+","t":"2026-11-18T18:03Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)"},{"s":"08774c0e+","t":"2026-11-18T17:38Z","c":"ag-stf2 (test only): bribe histogram picks a servant whose lòng moves her bribe odds. Root of the 'disloyal one takes more' red (npc ~3/20,…"},{"s":"0351e140","t":"2026-11-18T16:48Z","c":"shop-panel: «Để ta xem» outside option, 3-column Mua/Bán grid, smallest picture strip, test"},{"s":"ebf25660+","t":"2026-11-18T15:29Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…"},{"s":"9f9c6c2b+","t":"2026-11-18T14:26Z","c":"shown-odds-one-path r1: plant on the spot is done in person (actCtx x.here, no sent-servant pen); Vì sao names spy knowledge (whyKnow); tes…"},{"s":"aa997f3c+","t":"2026-11-18T13:46Z","c":"look-fx r13: index.html / sw.js rebuilt from merged sources"},{"s":"4475ea24+","t":"2026-11-18T12:33Z","c":"grand-endings-engine: site rebuilt (index.html / sw.js / assets.json) after fix 4 + main merge"},{"s":"68cbbb28+","t":"2026-11-18T12:00Z","c":"review life-preload-fu r2v: no half-drawn / empty figure while the HD twin comes (whole group: every fig-* img)"},{"s":"a8036600+","t":"2026-11-18T12:06Z","c":"Rebuild index.html/sw.js after merging origin/main"}]};
+window.CTM_BI={"s":"90e3e979+","t":"2026-11-18T20:12Z","c":"stage-rightcol: kitGroupFold (Cung nhân/Chí tôn), place name as plain text, +N chip corner free, test + KIT.md","b":"3f9fd4f4e6c4","h":[{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"},{"s":"a5013222+","t":"2026-11-18T18:03Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)"},{"s":"08774c0e+","t":"2026-11-18T17:38Z","c":"ag-stf2 (test only): bribe histogram picks a servant whose lòng moves her bribe odds. Root of the 'disloyal one takes more' red (npc ~3/20,…"},{"s":"0351e140","t":"2026-11-18T16:48Z","c":"shop-panel: «Để ta xem» outside option, 3-column Mua/Bán grid, smallest picture strip, test"},{"s":"ebf25660+","t":"2026-11-18T15:29Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…"},{"s":"9f9c6c2b+","t":"2026-11-18T14:26Z","c":"shown-odds-one-path r1: plant on the spot is done in person (actCtx x.here, no sent-servant pen); Vì sao names spy knowledge (whyKnow); tes…"},{"s":"aa997f3c+","t":"2026-11-18T13:46Z","c":"look-fx r13: index.html / sw.js rebuilt from merged sources"},{"s":"4475ea24+","t":"2026-11-18T12:33Z","c":"grand-endings-engine: site rebuilt (index.html / sw.js / assets.json) after fix 4 + main merge"},{"s":"68cbbb28+","t":"2026-11-18T12:00Z","c":"review life-preload-fu r2v: no half-drawn / empty figure while the HD twin comes (whole group: every fig-* img)"},{"s":"a8036600+","t":"2026-11-18T12:06Z","c":"Rebuild index.html/sw.js after merging origin/main"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -46287,7 +46287,21 @@ function kitLinePos(el){try{const nx=document.getElementById("next");let bot=inn
  if(bar){const r=bar.getBoundingClientRect();if(r.height&&r.top>innerHeight*.5)bot=r.top}
  /* a dialog is open: the pill sits just above the dialog box (or under it), never on its title or buttons */
  const M=document.getElementById("modal"),d=M&&!M.hidden?M.querySelector(".dlg"):null;if(d){const r=d.getBoundingClientRect();if(r.top>=44){el.style.bottom="auto";el.style.top=Math.round(r.top-38)+"px";return}if(innerHeight-r.bottom>=44)bot=Math.min(bot,innerHeight-2)}
- el.style.top="auto";el.style.bottom=Math.round(innerHeight-bot+10)+"px"}catch(e){}}
+ el.style.top="auto";el.style.bottom=Math.round(innerHeight-bot+10)+"px";kitToastClear(el,"up")}catch(e){}}
+/* KEEP-CLEAR (owner via MAIN ROOT-55 18/11 ~20:08Z, review/stage-here r2: "the toast covers the sub-tab bar + the place name"): every one-line
+   toast (§42.2 kitLine #kupdline, §87 kitLineToast #ktbtoast) is moved off the things that must always read: the top bar, tab bars and
+   sub-tab rows, the place name, figure name tags and plaques, a dialog title. dir "down" = slide below what it hits (top toast), "up" = slide
+   above it (bottom pill). Returns false when no free spot is left on that side (the caller may try the other side). */
+const KIT_TOAST_KEEP='header.hud,#tabs,.pctabs,.kpbar,[role="tablist"],#kpname,#sc-t,.tok .tag,.j59n,.kpod-plq,.dlg h2,.dlg .dlgt';
+function kitToastClear(el,dir){try{const rs=[...document.querySelectorAll(KIT_TOAST_KEEP)].filter(e=>!el.contains(e)&&e.getClientRects().length&&getComputedStyle(e).visibility!=="hidden").map(e=>e.getBoundingClientRect()).filter(r=>r.width>2&&r.height>2&&r.height<innerHeight*.5);
+ for(let i=0;i<16;i++){const t=el.getBoundingClientRect();const hit=rs.filter(r=>r.left<t.right&&r.right>t.left&&r.top<t.bottom&&r.bottom>t.top);if(!hit.length)return true;
+  if(dir==="down"){const y=Math.max(...hit.map(r=>r.bottom))+6;if(y+t.height>innerHeight-4)return false;el.style.bottom="auto";el.style.top=Math.round(y)+"px"}
+  else{const y=Math.min(...hit.map(r=>r.top))-6;if(y-t.height<4)return false;el.style.top="auto";el.style.bottom=Math.round(innerHeight-y)+"px"}}return false}catch(e){return false}}
+window.kitToastClear=kitToastClear;window.kitLinePos=kitLinePos;
+/* refit after a screen change (tab switch, shell swap): the toasts already up go back to their home spot and clear again */
+function kitToastRefit(){try{const a=document.getElementById("ktbtoast");if(a){const h=document.querySelector("header.hud"),r=h&&h.getClientRects().length?h.getBoundingClientRect():null;a.style.bottom="auto";a.style.top=(r?Math.round(r.bottom+6):6)+"px";if(!kitToastClear(a,"down"))kitLinePos(a)}
+ const b=document.getElementById("kupdline");if(b)kitLinePos(b)}catch(e){}}
+window.kitToastRefit=kitToastRefit;
 function kitLineCss(){if(document.getElementById("kit-line"))return;const st=document.createElement("style");st.id="kit-line";st.textContent=`
 .kupdline{position:fixed;left:50%;transform:translateX(-50%);z-index:9750;max-width:calc(100vw - 24px);margin:0;padding:5px 14px;border-radius:14px;border:1px solid var(--gold,#b8892b);background:#fffaf0f4;color:var(--ink,#3a2418);font:600 .82rem/1.3 var(--body,inherit);box-shadow:0 4px 14px #0004;text-align:center;pointer-events:none;transition:opacity .5s}
 .kupdline.out{opacity:0}`;document.head.appendChild(st)}
@@ -74377,6 +74391,8 @@ function kitLineToast(text){try{if(!text)return null;try{const md=document.getEl
  const hud=document.querySelector("header.hud");let el=document.getElementById("ktbtoast");if(el)el.remove();
  el=document.createElement("div");el.id="ktbtoast";el.className="ktbt";el.setAttribute("role","status");el.innerHTML=`<span>${esc(text)}</span>`;
  const r=hud&&hud.getClientRects().length?hud.getBoundingClientRect():null;el.style.top=(r?Math.round(r.bottom+6):6)+"px";document.body.appendChild(el);
+ /* keep-clear (jclose kitToastClear): below the tab rows / place name; no room left → the bottom spot above the tab bar, sliding up */
+ try{if(typeof kitToastClear==="function"&&!kitToastClear(el,"down")&&typeof kitLinePos==="function")kitLinePos(el)}catch(e){}
  el.addEventListener("click",()=>el.remove());clearTimeout(kitLineToast.t);kitLineToast.t=setTimeout(()=>{el.classList.add("out");setTimeout(()=>{if(el.classList.contains("out"))el.remove()},500)},window.__toastKeep?60000:BAL.entryToastMs);return el}catch(e){return null}}
 window.kitLineToast=window.kitLineToast||kitLineToast;
 function lay(){try{const st=$("stage");if(!st)return;let nm=$("kpname"),en=$("kpent");
@@ -74405,6 +74421,7 @@ function placeEnt(){try{const en=$("kpent"),st=$("stage");if(!en||en.hidden||!st
   if(q.right>c.left-4&&q.left<c.right+4&&q.top<c.bottom+2&&q.bottom>c.top-2)en.style.left=Math.round(q.right-R.left+8)+"px"}}catch(e){}}
 function lay2(){lay();placeEnt();clearTimeout(lay2.a);clearTimeout(lay2.b);lay2.a=setTimeout(placeEnt,400);lay2.b=setTimeout(placeEnt,1300)}
 const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);lay2();return r};
+if(typeof render==="function"){const rr=render;render=function(){const r=rr.apply(this,arguments);try{requestAnimationFrame(()=>{try{kitToastRefit()}catch(e){}})}catch(e){}return r}}/* toasts keep clear after every screen change */
 try{addEventListener("resize",()=>{clearTimeout(lay.__t);lay.__t=setTimeout(lay2,90)})}catch(e){}
 /* (1) the count chip: the kit rail's first slot */
 try{if(window.kitStageRail)kitStageRail.add({id:"here",order:0,chip:()=>{const n=hereN();return n&&typeof j59ico==="function"?`<span class="kchip n j59hchip" role="img" aria-label="Ở đây còn ${n} người">${j59ico()}<span class="j59n">${n}</span></span>`:""},when:()=>hereN()>0&&onStage()})}catch(e){}
@@ -74435,7 +74452,8 @@ html body .stage .kmnote.kmslot[hidden]{display:none!important}
        kitLineToast, the "tai mắt" chip) says it for BAL.entryToastMs; tapping the icon shows the chip again. It stays until she leaves or the
        place opens again. Hours come from the ONE access rule (j41 accessOf + ACC_DAY + B4L) and BAL.time.khac: no number of its own.
        Painted icon: KIT_REQUESTS K-ICO-ALERT (https://ctm-img.victoria-tntt.workers.dev/img/kit/ico-alert.webp); until it exists the rail's text glyph is used (§77.1 glyph mode).
-   Staying past closing: no new penalty here (the existing j41 stay rule applies). Old saves: S.closeSeen is optional. */
+   Staying past closing = Lẻn vào (r2, stayRoll below): one caught roll per buổi turn with the existing sneak odds/loss; the chip says the odds.
+   Old saves: S.closeSeen / S.stayRoll are optional. */
 (function(){try{
 const nm=k=>{try{return typeof accName==="function"?accName(k):placeOf(k).n}catch(e){return k}};
 /* {k, now:bool closed now, next:bool closes at the next khắc, why} or null */
@@ -74448,7 +74466,8 @@ function stClose(){try{if(typeof S==="undefined"||!S||S.dead||S.out)return null;
  const b0=S.buoi;let n;try{S.buoi=b+1;n=accessOf(S,k)}finally{S.buoi=b0}
  return n&&!n.ok?{k,now:false,next:true,why:n.why||""}:null}catch(e){return null}}
 window.stClose=stClose;
-function line(c){const p=nm(c.k),w=c.why?` (${c.why})`:"";return c.now?`${p} đã đóng cửa${w}, ngươi vẫn ở lại.`:`${p} sắp đóng cửa sau khắc này${w}.`}
+function stayWord(k){try{return typeof accSneakO==="function"&&typeof word==="function"?word(accSneakO(k)):""}catch(e){return ""}}
+function line(c){const p=nm(c.k),w=c.why?` (${c.why})`:"",o=stayWord(c.k),t=o?` Ở lại = như lẻn vào: ${o}.`:"";return (c.now?`${p} đã đóng cửa${w}, ngươi vẫn ở lại.`:`${p} sắp đóng cửa sau khắc này${w}.`)+t}
 function key(c){try{return [typeof bkey==="function"?bkey():"",c.k,c.now?1:0].join("|")}catch(e){return ""}}
 function chip(c){try{return typeof kitLineToast==="function"?kitLineToast(line(c)):null}catch(e){return null}}
 function tick(){try{const c=stClose();if(!c)return;const kk=key(c);if(S.closeSeen===kk)return;
@@ -74462,9 +74481,19 @@ if(typeof render==="function"){const r0=render;render=function(){const r=r0.appl
    the trip, so the walk khắc is not charged again (the j9 load idiom `const u=used; goTo(k); used=u`). The act itself is the permission
    to enter for this buổi (accGrant). Invites ("Mời thái y…") keep her where she is. Table: dev/test/act-place-audit.js. */
 const ACT_PLACE={"Thỉnh an Thái hậu":"tn","Nhờ Thái hậu nói giúp":"tn","Thỉnh an Hoàng hậu":"kn","Hối lộ Kính sự phòng":"ksp","Xem sổ nguyệt sự":"ksp",
- "Xem lén sổ nguyệt sự":"ksp","Xin rút thẻ bài, đóng cửa tĩnh dưỡng":"ksp","Sang Thái y viện xin bắt mạch":"tyv"};
+ "Xem lén sổ nguyệt sự":"ksp","Xin rút thẻ bài, đóng cửa tĩnh dưỡng":"ksp","Sang Thái y viện xin bắt mạch":"tyv",
+ /* r2 (MAIN ROOT-55 20:08Z (b)): places not on Dư đồ → the nearest EXISTING map place: the ancestral incense hall → Đức Thọ cung (incense,
+    the Thái hậu's prayers); the court banquet → Cần Chính điện (the festival banquets already sit there, jact2 AS_FPLACE newyear/giaothua) */
+ "Cầu tự ở Phụng Tiên điện":"tn","Múa trong yến tiệc":"thu",
+ /* r2 (a): acts done in her own palace (her bed, mirror, books, her own maids) bring her home; goTo("home") is the free walk (j2), so one cost */
+ "Nghỉ ngơi một lát":"home","Điểm trang":"home","Đọc sách giải khuây":"home","Dưỡng nhan":"home","Giả bệnh":"home","Trò chuyện với cung nữ":"home",
+ "Đọc binh thư, sử sách":"home","Nghỉ ngơi dưỡng sức":"home","Nghĩ cách trốn khỏi cung":"home","Dâng biểu xin xuất gia":"home"};
+/* r2 (c): acts done from afar / by others for her — no move. "Cài tai mắt" belongs to parallel time (Foreman D review/parallel-time): the hook
+   ACT_REMOTE lets that module decide (window.actRemoteHook(a) → a place key to walk to, or null = stay). */
+const ACT_REMOTE={"Cài tai mắt":1,"Sai cung nữ đi dò la":1,"Nghe ngóng chung":1,"Mời thái y bắt mạch":1};
+window.ACT_REMOTE=ACT_REMOTE;
 window.ACT_PLACE=ACT_PLACE;
-function actPlace(a){try{if(!a)return null;const k=ACT_PLACE[a.n];if(!k)return null;if(k==="kn"&&!(typeof qOn==="function"&&qOn()))return null;return k}catch(e){return null}}
+function actPlace(a){try{if(!a)return null;if(ACT_REMOTE[a.n])return typeof window.actRemoteHook==="function"?window.actRemoteHook(a)||null:null;const k=ACT_PLACE[a.n];if(!k)return null;if(k==="kn"&&!(typeof qOn==="function"&&qOn()))return null;return k}catch(e){return null}}
 window.actPlace=actPlace;
 function actMove(k){try{if(!k||!S||S.dead||S.out||S.confined||S.place===k)return false;if(typeof isSrv==="function"&&isSrv())return false;
  if(typeof accGrant==="function")accGrant(S,k);const u=used,q=window.__accSilent;window.__accSilent=1;try{used=0;goTo(k)}finally{used=u;window.__accSilent=q}
@@ -74473,6 +74502,20 @@ window.actMove=actMove;
 if(typeof act==="function"){const a0=act;act=function(i){const a=typeof deck!=="undefined"&&deck?deck[i]:null;const was=!!(a&&a.done),k=actPlace(a);const r=a0.apply(this,arguments);
  try{if(k&&a&&a.done&&!was){if(Q.length)window.__actPend={k,bk:typeof bkey==="function"?bkey():""};/* goTo waits while the result card is up */
   else if(actMove(k)&&typeof render==="function")render()}}catch(e){}return r}}
+/* r2 (d) STAYING AFTER CLOSING = LẺN VÀO (MAIN ROOT-55 20:08Z (d), BIG review): at a buổi turn that finds her still inside a place that is
+   now closed to her (accessOf says no; not her own palace), the existing «Lẻn vào» caught row is rolled ONCE for that buổi: j41 accSneakO(k)
+   odds (the same number the map's Lẻn vào button shows), caught = BAL.sneak.danh + punish (exactly accSneak's fail branch) and the guards
+   walk her home (a caught sneak never stays inside). No new number. Seen key S.stayRoll (optional, old saves fine). */
+function stayRoll(k,bk0){try{if(!S||S.dead||S.out||S.confined||!k||k==="home"||S.place!==k)return;if(typeof isSrv==="function"&&isSrv())return;
+ const bk=typeof bkey==="function"?bkey():"";if(bk===bk0||S.stayRoll===bk+"|"+k)return;if(typeof accOwn==="function"&&accOwn(S,k))return;
+ if(typeof accessOf!=="function"||accessOf(S,k).ok||typeof accSneakO!=="function")return;S.stayRoll=bk+"|"+k;
+ const n=nm(k);if(roll(accSneakO(k))){log(`Ở lại ${n} sau giờ đóng cửa: không ai hay.`);return}
+ apply({danh:-BAL.sneak.danh});log(`<span class="r">Ở lại ${n} sau giờ đóng cửa, bị thị vệ bắt gặp: Danh -${BAL.sneak.danh}.</span>`);punish(S,`ở lại ${n} sau giờ đóng cửa`,1);
+ window.__actPend=null;try{goTo("home")}catch(e){}
+ Q.push({t:"Bị bắt",h:`<p>Thị vệ ${n} bắt gặp ngươi còn nán lại sau giờ đóng cửa, giải về tẩm cung. Chuyện truyền khắp lục cung.</p><p class="r">Danh -${BAL.sneak.danh} ·${S.confined?` cấm túc ${S.confined} tháng`:" bị phạt"}</p>`});
+ try{showModal()}catch(e){}}catch(e){console.error("stayRoll",e)}}
+window.stayRoll=stayRoll;
+if(typeof nextBuoi==="function"){const nb0=nextBuoi;nextBuoi=function(){const k=S&&S.place,bk0=typeof bkey==="function"?bkey():"";const r=nb0.apply(this,arguments);try{stayRoll(k,bk0)}catch(e){}return r}}
 /* the pending trip runs when the act's cards are closed, in the same buổi (a day/buổi turn in between cancels it: she is elsewhere by then) */
 function actPendRun(){try{const P=window.__actPend;if(!P||Q.length)return;window.__actPend=null;if((typeof bkey==="function"?bkey():"")!==P.bk)return;if(actMove(P.k))setTimeout(()=>{try{render()}catch(e){}},0)}catch(e){}}
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§77.2",title:"Báo sắp đóng cửa · nút ! trên cột trái sân khấu + chip tin báo",
@@ -75755,7 +75798,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="a8a86907e853";window.CTM_BUILD=BUILD;
+const BUILD="3f9fd4f4e6c4";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

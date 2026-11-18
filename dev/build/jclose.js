@@ -92,7 +92,21 @@ function kitLinePos(el){try{const nx=document.getElementById("next");let bot=inn
  if(bar){const r=bar.getBoundingClientRect();if(r.height&&r.top>innerHeight*.5)bot=r.top}
  /* a dialog is open: the pill sits just above the dialog box (or under it), never on its title or buttons */
  const M=document.getElementById("modal"),d=M&&!M.hidden?M.querySelector(".dlg"):null;if(d){const r=d.getBoundingClientRect();if(r.top>=44){el.style.bottom="auto";el.style.top=Math.round(r.top-38)+"px";return}if(innerHeight-r.bottom>=44)bot=Math.min(bot,innerHeight-2)}
- el.style.top="auto";el.style.bottom=Math.round(innerHeight-bot+10)+"px"}catch(e){}}
+ el.style.top="auto";el.style.bottom=Math.round(innerHeight-bot+10)+"px";kitToastClear(el,"up")}catch(e){}}
+/* KEEP-CLEAR (owner via MAIN ROOT-55 18/11 ~20:08Z, review/stage-here r2: "the toast covers the sub-tab bar + the place name"): every one-line
+   toast (§42.2 kitLine #kupdline, §87 kitLineToast #ktbtoast) is moved off the things that must always read: the top bar, tab bars and
+   sub-tab rows, the place name, figure name tags and plaques, a dialog title. dir "down" = slide below what it hits (top toast), "up" = slide
+   above it (bottom pill). Returns false when no free spot is left on that side (the caller may try the other side). */
+const KIT_TOAST_KEEP='header.hud,#tabs,.pctabs,.kpbar,[role="tablist"],#kpname,#sc-t,.tok .tag,.j59n,.kpod-plq,.dlg h2,.dlg .dlgt';
+function kitToastClear(el,dir){try{const rs=[...document.querySelectorAll(KIT_TOAST_KEEP)].filter(e=>!el.contains(e)&&e.getClientRects().length&&getComputedStyle(e).visibility!=="hidden").map(e=>e.getBoundingClientRect()).filter(r=>r.width>2&&r.height>2&&r.height<innerHeight*.5);
+ for(let i=0;i<16;i++){const t=el.getBoundingClientRect();const hit=rs.filter(r=>r.left<t.right&&r.right>t.left&&r.top<t.bottom&&r.bottom>t.top);if(!hit.length)return true;
+  if(dir==="down"){const y=Math.max(...hit.map(r=>r.bottom))+6;if(y+t.height>innerHeight-4)return false;el.style.bottom="auto";el.style.top=Math.round(y)+"px"}
+  else{const y=Math.min(...hit.map(r=>r.top))-6;if(y-t.height<4)return false;el.style.top="auto";el.style.bottom=Math.round(innerHeight-y)+"px"}}return false}catch(e){return false}}
+window.kitToastClear=kitToastClear;window.kitLinePos=kitLinePos;
+/* refit after a screen change (tab switch, shell swap): the toasts already up go back to their home spot and clear again */
+function kitToastRefit(){try{const a=document.getElementById("ktbtoast");if(a){const h=document.querySelector("header.hud"),r=h&&h.getClientRects().length?h.getBoundingClientRect():null;a.style.bottom="auto";a.style.top=(r?Math.round(r.bottom+6):6)+"px";if(!kitToastClear(a,"down"))kitLinePos(a)}
+ const b=document.getElementById("kupdline");if(b)kitLinePos(b)}catch(e){}}
+window.kitToastRefit=kitToastRefit;
 function kitLineCss(){if(document.getElementById("kit-line"))return;const st=document.createElement("style");st.id="kit-line";st.textContent=`
 .kupdline{position:fixed;left:50%;transform:translateX(-50%);z-index:9750;max-width:calc(100vw - 24px);margin:0;padding:5px 14px;border-radius:14px;border:1px solid var(--gold,#b8892b);background:#fffaf0f4;color:var(--ink,#3a2418);font:600 .82rem/1.3 var(--body,inherit);box-shadow:0 4px 14px #0004;text-align:center;pointer-events:none;transition:opacity .5s}
 .kupdline.out{opacity:0}`;document.head.appendChild(st)}

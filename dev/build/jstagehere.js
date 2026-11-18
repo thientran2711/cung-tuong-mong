@@ -8,7 +8,8 @@
        kitLineToast, the "tai mắt" chip) says it for BAL.entryToastMs; tapping the icon shows the chip again. It stays until she leaves or the
        place opens again. Hours come from the ONE access rule (j41 accessOf + ACC_DAY + B4L) and BAL.time.khac: no number of its own.
        Painted icon: KIT_REQUESTS K-ICO-ALERT (img/kit/ico-alert.webp); until it exists the rail's text glyph is used (§77.1 glyph mode).
-   Staying past closing: no new penalty here (the existing j41 stay rule applies). Old saves: S.closeSeen is optional. */
+   Staying past closing = Lẻn vào (r2, stayRoll below): one caught roll per buổi turn with the existing sneak odds/loss; the chip says the odds.
+   Old saves: S.closeSeen / S.stayRoll are optional. */
 (function(){try{
 const nm=k=>{try{return typeof accName==="function"?accName(k):placeOf(k).n}catch(e){return k}};
 /* {k, now:bool closed now, next:bool closes at the next khắc, why} or null */
@@ -21,7 +22,8 @@ function stClose(){try{if(typeof S==="undefined"||!S||S.dead||S.out)return null;
  const b0=S.buoi;let n;try{S.buoi=b+1;n=accessOf(S,k)}finally{S.buoi=b0}
  return n&&!n.ok?{k,now:false,next:true,why:n.why||""}:null}catch(e){return null}}
 window.stClose=stClose;
-function line(c){const p=nm(c.k),w=c.why?` (${c.why})`:"";return c.now?`${p} đã đóng cửa${w}, ngươi vẫn ở lại.`:`${p} sắp đóng cửa sau khắc này${w}.`}
+function stayWord(k){try{return typeof accSneakO==="function"&&typeof word==="function"?word(accSneakO(k)):""}catch(e){return ""}}
+function line(c){const p=nm(c.k),w=c.why?` (${c.why})`:"",o=stayWord(c.k),t=o?` Ở lại = như lẻn vào: ${o}.`:"";return (c.now?`${p} đã đóng cửa${w}, ngươi vẫn ở lại.`:`${p} sắp đóng cửa sau khắc này${w}.`)+t}
 function key(c){try{return [typeof bkey==="function"?bkey():"",c.k,c.now?1:0].join("|")}catch(e){return ""}}
 function chip(c){try{return typeof kitLineToast==="function"?kitLineToast(line(c)):null}catch(e){return null}}
 function tick(){try{const c=stClose();if(!c)return;const kk=key(c);if(S.closeSeen===kk)return;
@@ -35,9 +37,19 @@ if(typeof render==="function"){const r0=render;render=function(){const r=r0.appl
    the trip, so the walk khắc is not charged again (the j9 load idiom `const u=used; goTo(k); used=u`). The act itself is the permission
    to enter for this buổi (accGrant). Invites ("Mời thái y…") keep her where she is. Table: dev/test/act-place-audit.js. */
 const ACT_PLACE={"Thỉnh an Thái hậu":"tn","Nhờ Thái hậu nói giúp":"tn","Thỉnh an Hoàng hậu":"kn","Hối lộ Kính sự phòng":"ksp","Xem sổ nguyệt sự":"ksp",
- "Xem lén sổ nguyệt sự":"ksp","Xin rút thẻ bài, đóng cửa tĩnh dưỡng":"ksp","Sang Thái y viện xin bắt mạch":"tyv"};
+ "Xem lén sổ nguyệt sự":"ksp","Xin rút thẻ bài, đóng cửa tĩnh dưỡng":"ksp","Sang Thái y viện xin bắt mạch":"tyv",
+ /* r2 (MAIN ROOT-55 20:08Z (b)): places not on Dư đồ → the nearest EXISTING map place: the ancestral incense hall → Đức Thọ cung (incense,
+    the Thái hậu's prayers); the court banquet → Cần Chính điện (the festival banquets already sit there, jact2 AS_FPLACE newyear/giaothua) */
+ "Cầu tự ở Phụng Tiên điện":"tn","Múa trong yến tiệc":"thu",
+ /* r2 (a): acts done in her own palace (her bed, mirror, books, her own maids) bring her home; goTo("home") is the free walk (j2), so one cost */
+ "Nghỉ ngơi một lát":"home","Điểm trang":"home","Đọc sách giải khuây":"home","Dưỡng nhan":"home","Giả bệnh":"home","Trò chuyện với cung nữ":"home",
+ "Đọc binh thư, sử sách":"home","Nghỉ ngơi dưỡng sức":"home","Nghĩ cách trốn khỏi cung":"home","Dâng biểu xin xuất gia":"home"};
+/* r2 (c): acts done from afar / by others for her — no move. "Cài tai mắt" belongs to parallel time (Foreman D review/parallel-time): the hook
+   ACT_REMOTE lets that module decide (window.actRemoteHook(a) → a place key to walk to, or null = stay). */
+const ACT_REMOTE={"Cài tai mắt":1,"Sai cung nữ đi dò la":1,"Nghe ngóng chung":1,"Mời thái y bắt mạch":1};
+window.ACT_REMOTE=ACT_REMOTE;
 window.ACT_PLACE=ACT_PLACE;
-function actPlace(a){try{if(!a)return null;const k=ACT_PLACE[a.n];if(!k)return null;if(k==="kn"&&!(typeof qOn==="function"&&qOn()))return null;return k}catch(e){return null}}
+function actPlace(a){try{if(!a)return null;if(ACT_REMOTE[a.n])return typeof window.actRemoteHook==="function"?window.actRemoteHook(a)||null:null;const k=ACT_PLACE[a.n];if(!k)return null;if(k==="kn"&&!(typeof qOn==="function"&&qOn()))return null;return k}catch(e){return null}}
 window.actPlace=actPlace;
 function actMove(k){try{if(!k||!S||S.dead||S.out||S.confined||S.place===k)return false;if(typeof isSrv==="function"&&isSrv())return false;
  if(typeof accGrant==="function")accGrant(S,k);const u=used,q=window.__accSilent;window.__accSilent=1;try{used=0;goTo(k)}finally{used=u;window.__accSilent=q}
@@ -46,6 +58,20 @@ window.actMove=actMove;
 if(typeof act==="function"){const a0=act;act=function(i){const a=typeof deck!=="undefined"&&deck?deck[i]:null;const was=!!(a&&a.done),k=actPlace(a);const r=a0.apply(this,arguments);
  try{if(k&&a&&a.done&&!was){if(Q.length)window.__actPend={k,bk:typeof bkey==="function"?bkey():""};/* goTo waits while the result card is up */
   else if(actMove(k)&&typeof render==="function")render()}}catch(e){}return r}}
+/* r2 (d) STAYING AFTER CLOSING = LẺN VÀO (MAIN ROOT-55 20:08Z (d), BIG review): at a buổi turn that finds her still inside a place that is
+   now closed to her (accessOf says no; not her own palace), the existing «Lẻn vào» caught row is rolled ONCE for that buổi: j41 accSneakO(k)
+   odds (the same number the map's Lẻn vào button shows), caught = BAL.sneak.danh + punish (exactly accSneak's fail branch) and the guards
+   walk her home (a caught sneak never stays inside). No new number. Seen key S.stayRoll (optional, old saves fine). */
+function stayRoll(k,bk0){try{if(!S||S.dead||S.out||S.confined||!k||k==="home"||S.place!==k)return;if(typeof isSrv==="function"&&isSrv())return;
+ const bk=typeof bkey==="function"?bkey():"";if(bk===bk0||S.stayRoll===bk+"|"+k)return;if(typeof accOwn==="function"&&accOwn(S,k))return;
+ if(typeof accessOf!=="function"||accessOf(S,k).ok||typeof accSneakO!=="function")return;S.stayRoll=bk+"|"+k;
+ const n=nm(k);if(roll(accSneakO(k))){log(`Ở lại ${n} sau giờ đóng cửa: không ai hay.`);return}
+ apply({danh:-BAL.sneak.danh});log(`<span class="r">Ở lại ${n} sau giờ đóng cửa, bị thị vệ bắt gặp: Danh -${BAL.sneak.danh}.</span>`);punish(S,`ở lại ${n} sau giờ đóng cửa`,1);
+ window.__actPend=null;try{goTo("home")}catch(e){}
+ Q.push({t:"Bị bắt",h:`<p>Thị vệ ${n} bắt gặp ngươi còn nán lại sau giờ đóng cửa, giải về tẩm cung. Chuyện truyền khắp lục cung.</p><p class="r">Danh -${BAL.sneak.danh} ·${S.confined?` cấm túc ${S.confined} tháng`:" bị phạt"}</p>`});
+ try{showModal()}catch(e){}}catch(e){console.error("stayRoll",e)}}
+window.stayRoll=stayRoll;
+if(typeof nextBuoi==="function"){const nb0=nextBuoi;nextBuoi=function(){const k=S&&S.place,bk0=typeof bkey==="function"?bkey():"";const r=nb0.apply(this,arguments);try{stayRoll(k,bk0)}catch(e){}return r}}
 /* the pending trip runs when the act's cards are closed, in the same buổi (a day/buổi turn in between cancels it: she is elsewhere by then) */
 function actPendRun(){try{const P=window.__actPend;if(!P||Q.length)return;window.__actPend=null;if((typeof bkey==="function"?bkey():"")!==P.bk)return;if(actMove(P.k))setTimeout(()=>{try{render()}catch(e){}},0)}catch(e){}}
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§77.2",title:"Báo sắp đóng cửa · nút ! trên cột trái sân khấu + chip tin báo",
