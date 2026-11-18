@@ -3272,7 +3272,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "family whereabouts per buổi (pre-palace)",
-"done": "const p=kcHab(L);/* npc-purpose G2: her own day duties (habits), near-best only */"
+"done": "function kcHab(L){const x=npwPick(L,y=>y[1]);"
 },
 {
 "f": "jkc.js",
@@ -3288,7 +3288,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "family whereabouts per buổi (jkc2 roads)",
-"done": "const p=kcHab(L);/* npc-purpose G2: her own day duties */"
+"done": "const p=(npwPick(L,y=>y[1])||[\"\"])[0];"
 },
 {
 "f": "jkc.js",
