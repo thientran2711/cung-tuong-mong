@@ -1083,3 +1083,4 @@ RUNNING (all report to MAIN; tell them s43):
 OWNER PENDING: 4 stage makeup shots (sent Lượt 24, her pick of mirror vs stage strength) + avatar answer (portraits are painted por-*.webp, no makeup layer — asked which frame if she sees change); mud uneven-tide thought (not an order).
 Wake: trig_01XziXcTa6TV3ACMFhLctFAr 02:34Z fires into s42 → s42 relays; s43 sets its own hourly wake at :32.
 - (18/11 02:21Z) s42 FINAL: successor MAIN s43 = (see next line).
+- (18/11 02:22Z) s42 FINAL: successor MAIN s43 = session_01UV1Szine3C2fgBgQ8qCx5w (depth 6 → workers only; owner opens a ROOT at its rollover). s42 stops (relays only). s42 wake trig_01XziXcTa6TV3ACMFhLctFAr 02:34Z → relay to s43.
