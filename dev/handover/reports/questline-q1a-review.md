@@ -161,3 +161,17 @@ The time-word family is NOT gone as a whole family: 1 fixed date the shared scan
 
 ### Re-review
 Small: diff of jnrask.js + nrask-scan.js; nrask-scan on the q1a+q1b+q1c merge.
+
+# ROUND 5 — reviewer E7r5 (sonnet, delta re-review of q1a + q1b + q1c), 18/11
+PRIORITY #1 CHECK ('questline-q1'): OD 0 | main 0 | review/* q1a a77e7cb · q1b 40b28fd · q1c 628ca5d (this slice) | claims E7a2 / E7b / E7c2 (this slice).
+START_CTX ≈ 3 % (own estimate). Local merge origin/main 33e9899 + q1a + q1b + q1c (not pushed; assemble.py list = q1a+q1b, then jnrask_m.js after jnrask_b.js; site rebuilt).
+
+## VERDICT: q1a PASS · q1b PASS · q1c OK
+| check | result |
+|---|---|
+| (1) fixes | jnrask.js tt_co_10#1 «trước buổi triều ấy» (+ label «Sai thái giám… mang thư ra khỏi cung»); jnrask_b.js td_ke_9#0 «vào đúng buổi bẫy sập» (label «giờ ấy» = that event); cnv_mat_8#0 «Đêm hầu giá đầu tiên đã định… trước đêm ấy», #1 «Đêm hầu giá đã định, mà mấy hôm nay {me} sốt nhẹ» — all FIXED, read |
+| (2) widened TIME (nrask-scan.js:43) | scratch sample lines: «chiều mai», «trưa mai», «sáng mốt», «tuần sau», «tháng sau», «trước giờ Tý», «cửa cung đóng», «đêm nay» → all HIT. «Đêm giỗ năm xưa», «Yến Trung thu cuối năm», «Triều hội đầu xuân» → not flagged. No scene word newly flagged (scan ALL PASS on all 636 asks) |
+| (3) whole-family read | swept jnrask.js + jnrask_b.js for every hour/date/period word (nay, mai, kịp, gấp, sắp, vừa, giờ, canh, tuần, tháng, kỳ hạn); remaining: «sắp …» = event-relative; td_an_6 «ba tháng nữa» (thư lại leaves in 3 months — longer than 6 weeks, no clash); nc_tuc_6 «một hạn ngắn» (vague, ok); «giờ ấy» (nc_gian_10, td_ke_9) = the event's hour, ok. No clash with «hạn 6 tuần» left |
+| (4) tests ×3 | nrask-scan ALL PASS (636 asks, 1759 sentences, 1272 labels), nrask-m-scan PASS, nrask-engine ALL PASS — 3/3 runs identical; **engine flake: NO** (checks 5/6 stable) |
+| quickcheck | PASS (first run said NOT BUILT only because my local merge index.html was not rebuilt/committed; after rebuild: PASS 132 s, open 1380 ms, old save ok, core gates PASS, perf new/live render 135/140, tab 388/294, buổi 858/766) |
+| q1c 628ca5d | its commit touches only index.html + sw.js; jnrask_m.js / nrask-m-scan.js last changed in d1f19e6 (fix 2). PASS sha b013ddf is not in the shallow history (could not diff literally); data = unchanged since fix 2 → rebase OK |
