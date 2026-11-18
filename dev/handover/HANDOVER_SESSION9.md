@@ -374,7 +374,7 @@ Wake: s43 trigger trig_01DnGumsCEWwRGKJbfBNDc4D (:32) → DELETE it when the ROO
 - (18/11 03:36Z) OWNER: tai-mắt-báo badge/chip still not live → it is review/tinbao-ui (PASS r6r 220359da, r7r 58a8c39c), queued to land with C-AG ag-all-2. Asked C-AG #9 for status/ETA; place-stage SziagD5 told to build on tinbao-ui-r7r part.
 - (18/11 03:34Z) WAKE. Context 488k/1M = 49 % (ceiling 60 %) → s43 STOPS taking work; only relays until the owner opens the ROOT main (paste block s43 Lượt 7, unchanged).
 ### S43 FINAL STATE (for the ROOT main; supersedes the RUNNING list above)
-LIVE main 0527f921 (cloth wet/mud/xốc ON, tea OFF). ROLLBACK chain … → e24d5838 → 0527f921. Landed by s43: greet-stranger, result-reason, smudge r16, cloth-xoc r6, staff-cap-apply, cloth switches.
+LIVE main 9393889d (life-preload, 03:37Z). ROLLBACK chain … → e24d5838 → 0527f921 → 9393889d. Landed by s43: greet-stranger, result-reason, smudge r16, cloth-xoc r6, staff-cap-apply, cloth switches.
 RUNNING:
 - REVIEW life-preload SzjKPEGVua6n1rUEV2S: PASS c743265c on e24d5838 → asked re-merge 0527f921 → PASS → LAND FIRST (URGENT); then archive it + worker SzgmQZwF1XMsH7EzhLL.
 - REVIEW men-forbidden Szh3jq9brqAHDsVQitM: re-gating 8f27d7be (merge of 95d5f767) → will need main re-merge → land; worker SziLuyrJEqfUqguNP1W idle.
@@ -389,3 +389,4 @@ RUNNING:
 OWNER PENDING: muội/cào R4 look; tea look OK?; opt-card A/B/C; place-stage shots; book r5 shots; Thử tay CTM-CAL code; connectors decision (tài khoản dành riêng cho game → tắt kết nối thừa).
 S43 LESSONS: check OD rulings, not only live code, before giving her numbers (seats 12/16/20 mix-up); compare book pages against the kit layout; LOOK marks at 3× against eye/lip boxes; workers roll over fast (~25 %) — keep briefs short.
 - (18/11 03:35Z) C-AG #9: tinbao r7r 58a8c39c is built ON ag-all-2 (uses its adapters) → cannot land alone; after ag-all-2-land live (PASS ETA ~05:00–05:30Z) tinbao worker session_01UV1Szjhrq5VUWD5Haiagxz rebases r7 → its reviewer → ROOT main lands (~+1 h). place-stage depends on it for the chip.
+- (18/11 03:37Z) LIVE: main 0527f921 → 9393889d (life-preload, URGENT owner bug; reviewer SzjKPEG PASS + 3 jload fixes; follow-ups A–E in reports/review-life-preload.md). ROLLBACK 0527f921. Reviewer + worker archived. men-forbidden reviewer told to merge 9393889d.
