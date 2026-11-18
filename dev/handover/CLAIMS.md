@@ -43,7 +43,7 @@ b10-a26-c01-c11 (cont.) | CDN _review only | W58e session_011xDdVNrdf8gvcg7zDe4w
 b10-a36-c12-c22 (cont.) | CDN _review only | W62e session_011xDdVRHqnGWdfeQAXcEkYk | DONE d40c5b17 | 2026-11-18T17:43Z (Foreman C ROOT-29)
 b10-a36-c01-c11 (cont.) | CDN _review only | W61f session_011xDdVNsx3B6YpBjrLj4ghK | DONE 56dd541b | 2026-11-18T17:35Z (Foreman C ROOT-29)
 | E12r REVIEW test-flaky-sure (sonnet SMALL) | review/test-flaky-sure | E | session_01DgYSWm6WeSjdcix5VMfR27 | DONE PASS (round 2) | 18/11 16:41Z | START_CTX ~0 % |
-| REVIEW coop-thin-f1 r1 (opus BIG) of 433da4de | review/coop-thin-f1-r1 | B | session_01N1tNP6GkdUZ2X1wV9UKnVH | PASS review/coop-thin-f1-r1 8fb5a48a (descends main a2ce736a; reviewer fix 590f6748 result card; waits jcoop* freeze) | 18/11 16:42Z |
+| REVIEW coop-thin-f1 r1 (opus BIG) of 433da4de | review/coop-thin-f1-r1 | B | session_01N1tNP6GkdUZ2X1wV9UKnVH | ROLLED OVER at 311ccbde (final merge d3ea24e8; coop-cyc L6 flaky after AG main: handover in reports/coop-thin-f1.md) — B opens successor | 18/11 |
 b10-a26-c23-c32 (cont.) | CDN _review only | W60c session_011xDdVR4vPftTrZ2LNoa9N1 | RUNNING | 2026-11-18T16:44Z (Foreman C ROOT-27)
 b10-a26-c12-c22 (cont.) | CDN _review only | W59c session_011xDdVSp5UYKyVUagQ99Qxe | RUNNING | 2026-11-18T16:55Z (Foreman C ROOT-27)
 a18-scan-2 (D4b/D3e + sheets) | CDN _review only | W65b session_011xDdVP6v9KEJDivhyAkbCb | RUNNING | 2026-11-18T16:55Z (Foreman C ROOT-27)
