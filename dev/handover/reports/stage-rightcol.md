@@ -1,4 +1,4 @@
-# stage-rightcol — branch review/stage-rightcol 5f00b0c (depth 2)
+# stage-rightcol — branch review/stage-rightcol f36d01e (r1 after ROOT-55 notes) (depth 2)
 PRIORITY #1 CHECK: OD Chí tôn 4 + Cung nhân 9 + place banner 18/11 ~02:50Z/~03:02Z + ~20:55Z | main jk3 k3court/k3maid, jplst #kpname, j59chips | review/* maid6-sample eb73871 (mock), stage-here (not touched) | claims maid6-sample -> this worker.
 
 ## Done
@@ -13,3 +13,7 @@ Shots: dev/handover/shots/stage-rightcol/ (8 jpg), each looked.
 ## Caveat
 Open list shows "Thiện cảm" label (existing module rewrites "Lòng"). Entry-line chip at top (jplst) is untouched.
 ~95% xong / ~95% chơi được
+
+## r1 (ROOT-55 notes 20:06Z)
+(1) based on live main 13bb8c88 (no merge needed). (2) oldsave-r1 16/16. (3) quickcheck PASS. (4) Dư đồ map column now uses kitGroupFold too (kv1 portrait: two folds side by side in the top row, open list drops over the map; iPad kv2: same column as the stage); k3maid removed (one version); map added to dev/test/stage-rightcol.js: 36/36 PASS (stage home/Ngự hoa viên + map, Fold + iPad, 1/6 servants, closed/Cung nhân/Chí tôn). (5) label = «Thiện cảm» (VANPHONG L55: servant toward her = thiện cảm; the old "Lòng" was only a code name rewritten at runtime) now written directly. Shots +6 (map, open lists), all looked.
+~97% xong / ~97% chơi được
