@@ -48,8 +48,10 @@ function pcfIntel(e){try{if(e.id==null||typeof kitRows!=="function")return"";con
  const rows=L.slice(0,2).map(x=>({l:"Tin",f:x.f,d:x}));
  const chips=[n?`<button class="chip kchipb" data-kintel="${e.id}">Đã biết: ${n} tin ›</button>`:"",ev?`<button class="chip hot kchipb" data-kev="${e.id}" title="Xem chứng cứ">Chứng cứ ${ev} ›</button>`:""].filter(Boolean);
  return `<div class="kpsec pcf-i"><h4 class="kpst">Đã biết</h4>${rows.length?kitFactRows(rows):`<div class="kpnote">Chưa biết gì thêm. Dò la, hỏi kẻ hầu để biết.</div>`}${chips.length?`<div class="kchips">${chips.join(" ")}</div>`:""}</div>`}catch(x){return""}}
+/* greet-stranger (owner 18/11 01:38Z: the result read twice): the line the open result note (popMsg) already shows is not repeated as "Dạo này" */
+function pcfShown(t){try{const P=typeof popMsg==="string"&&popMsg?plain(popMsg).replace(/\s+/g," "):"";if(!P)return false;const s=String(t).replace(/\s+/g," ").trim().split(/(?<=[.!?])\s/)[0].replace(/[.!?]+$/,"").replace(/^[^:]{1,40}:\s*/,"").trim();return s.length>=8&&P.includes(s)}catch(x){return false}}
 function pcfLog(e){try{const nm=pcfName(e);if(!nm||!S.logs)return"";const parts=nm.split(" ");const key=isEmp(e)||isTh(e)?nm:parts.slice(-2).join(" ");const mark=`T${S.month}/${S.year} `;const rows=[];
- for(const h of S.logs){const m=/^<span class="ld">(T\d+\/\d+) ([^<]*)<\/span>([\s\S]*)$/.exec(h);if(!m||(m[1]+" ")!==mark)continue;const t=plain(m[3]);if(!t.includes(key)&&!(isEmp(e)&&/Hoàng thượng|ngài /i.test(t)))continue;
+ for(const h of S.logs){const m=/^<span class="ld">(T\d+\/\d+) ([^<]*)<\/span>([\s\S]*)$/.exec(h);if(!m||(m[1]+" ")!==mark)continue;const t=plain(m[3]);if(!t.includes(key)&&!(isEmp(e)&&/Hoàng thượng|ngài /i.test(t)))continue;if(pcfShown(t))continue;
   rows.push({l:"Chuyện",f:m[3],d:{when:`${m[1]} ${m[2]}`}});if(rows.length>=1)break}
  if(!rows.length)return `<div class="kpsec"><h4 class="kpst">Dạo này</h4><div class="kpnote">Tháng này ngươi chưa có chuyện gì với ${isEmp(e)||isTh(e)?"người":typeof nrHe==="function"?nrHe(e):"nàng"}.</div></div>`;
  return `<div class="kpsec"><h4 class="kpst">Dạo này</h4>${kitFactRows(rows)}</div>`}catch(x){return""}}
