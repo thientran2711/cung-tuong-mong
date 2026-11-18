@@ -26,7 +26,7 @@ function adDoorOfPop(kind,on){for(const n in AD_DOOR){const d=AD_DOOR[n];if(d[0]
 const AD_DOOR_WHY={th:"đã thỉnh an tuần này",hh:"đã thỉnh an tuần này",ksp:"đã lo việc thẻ bài tuần này",maid:"đã sai nàng việc này"};
 /* ---------- 2. what leaves Hành sự (and where it lives now) ---------- */
 const AD_OUT=/^(Tự học |Tự luyện |Phát chẩn cho cung nhân$|Tụng kinh, làm việc thiện$|Đánh đàn ở ngự hoa viên$|Chữa bệnh cho con$|Dạy (hoàng tử|công chúa)|Dạy dỗ|Đưa con đến thỉnh an Hoàng thượng$|Luyện cầm kỳ thi họa$|Thưởng cung nữ$)/;
-function adSrv(){try{return !!(S&&(S.out||S.srv||(typeof isSrv==="function"&&isSrv())))}catch(e){return false}}
+function adSrv(){try{return !!(S&&(S.out||(S.srv&&!S.srv.risen)||(typeof isSrv==="function"&&isSrv())))/* ROLE PARITY: a maid risen to consort has the consort doors (was: any S.srv) */}catch(e){return false}}
 /* maid acts dealt as Hành sự cards (the same option objects her pop-up shows: jwhy spy formula, j76 talk) */
 function adMaidCards(){if(!S||S.out||!S.maid)return[];const A=[];let O=[];try{O=talkOpts({kind:"maid"})||[]}catch(e){return A}
  const sp=O.find(a=>a&&a.n==="Sai đi dò la"),ng=O.find(a=>a&&a.n==="Nghe ngóng chung");
