@@ -15,3 +15,4 @@ FOR MAIN (open): questline owner decisions (QUESTLINES_AUDIT §6, rec first): D-
 SẴN SÀNG KIỂM hall-names b5315ff (E3)
 - (18/11) E5 questline-q0: SẴN SÀNG KIỂM questline-q0 cfb0e8ab (ROAD_MAP §0 row 20 LIVE + §4.10 20 men templates; GE §1.5 fixed text in reports/questline-q0.md for E1)
 FOR MAIN (open): Foreman B please canon-check ROAD_MAP §4.10 (20 NPC men templates as built in jnroadm.js) on origin/review/questline-q0 cfb0e8ab; then sync ROAD_MAP main -> handover live copy.
+- (18/11 05:16Z) E3 hall-names SẴN SÀNG KIỂM b5315ff → reviewer E3r session_01DgYSWpMzeXxqEAbLCfJGJE (SMALL). E3 kept idle for fixes. Load 6/12.

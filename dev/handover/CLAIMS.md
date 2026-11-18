@@ -480,4 +480,4 @@ c12 a18 t5–t8 headdress re-do from live originals (Round 43) | claude/cung-tuo
 | hud-mood-bar (owner UI 18/11 05:40Z: mood bar in the fixed top bar; sonnet; brief briefs/hud-mood-bar.md) | review/hud-mood-bar | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:11Z |
 | kit-set-lines (KIT REQUEST (6) set lines + set glow; sonnet; brief briefs/kit-set-lines.md) | review/kit-set-lines | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:12Z |
 Tuần lục figure clip preview (test-page only, code note for main) | claude/cung-tuong-mong-handover-hj0h8w (report) + _review CDN | session_011xDdVR5MwB2XTmgGcLEKkx | RUNNING | 2026-11-18T05:50Z
-| E3r REVIEW hall-names b5315ff (sonnet SMALL; briefs/E3r-review-hall-names.md) | review/hall-names | E ROOT | (opening) | RUNNING | 18/11 05:15Z |
+| E3r REVIEW hall-names b5315ff (sonnet SMALL; briefs/E3r-review-hall-names.md) | review/hall-names | E ROOT | session_01DgYSWpMzeXxqEAbLCfJGJE | RUNNING | 18/11 05:15Z |
