@@ -112,3 +112,33 @@ nrask-scan: new rule for ALL jnrask*.js — a chapter whose every ask names {B} 
 | npc-roads 1 120 / -saves (vs main b2a9d34) / -tokscan / -men 1 120 / -maids 1 120 | 14/14 · 6/6 · tagBad 0, errs 0 · 16/16 · 15/15 |
 | quickcheck | QUICKCHECK PASS · core gates PASS · old save ok · perf new/live render 233/200, tab 454/439, buổi 1214/1171 ms (first run had a G3 tutorial float flake under parallel load; kit-conform alone on this build and on main: both exit 0, floats none) |
 | nrask-shots Fold + iPad (tt_mat_7 peer, muoi_lau_9 queen) | SHOTS OK; looked at the Fold queen offer: kit j72 card, no overflow, no raw slot, no queen alias. Local only, deleted |
+
+## Fix 3 (E7a2, 18/11) — review/questline-q1a @ 90796d37dbca227e0862ed566dfe6226dc276f26
+PRIORITY #1 CHECK ('questline-q1|NRASK|TIME|nrask-scan'): OD 0 new | main none | review/* questline-q1a (this), q1b 2f79ae26, q1c b013ddf (TIME rule source nrask-m-scan.js:37) | claims E7a2 (this), E7b, E7c2
+Branch rebuilt on origin/main a2ad240 (newest at push) with ONLY the 7 q1a commits + this one; assemble.py = main's list (jplst.js kept) + jnrask.js after jnroadm.js.
+
+### 1. Time words vs «hạn 6 tuần» (8 asks + optional dtq_binh_7)
+| ask | before | after |
+|---|---|---|
+| tt_co_10#0 | «Sáng mai triều hội… Đêm nay {call} được hầu» | «Triều hội sắp quyết… Nếu {call} được hầu trước buổi triều ấy» |
+| tt_co_10#1 | «ngay đêm nay… trước canh ba» (+ label) | «trước buổi triều hội… trước khi cửa cung đóng»; label «…trước giờ đóng cửa cung» |
+| tt_oan_10#0 | «Ngày mai Hoàng thượng phán án» | «Hoàng thượng sắp phán án» |
+| tt_tranh_6#0 | «trước Tết» | «trước khi lão ngả hẳn» |
+| cn_chu_10#0 | «Đêm mai {B} mời {me}» | «{B} hẹn {me} một đêm» |
+| cn_chu_10#1 | «Đêm mai {me} phải đến» | «Đêm hẹn ở gian trà nhỏ năm xưa» |
+| cn_tinh_6#0 | «hạn trước rằm» | «ai trả cao thì bán» |
+| cn_tinh_6#1 | «khai trước rằm» | «bị ép khai» |
+| dtq_binh_7#0 (optional) | «Đêm trước {call} được hầu» (fact) | «Nếu {call} được hầu trước ngày yến» |
+
+### 2. TIME rule in the shared nrask-scan (every jnrask*.js)
+q1c's regex + đêm mai, tối mai, «Mai …» at a sentence start, «<word> ngày/hôm nữa», cuối tháng, (trong|còn|hạn|đợi|ở được) + vài/mấy/number + ngày/hôm/tuần/tháng/năm. Checks h, step title, labels, loss lines.
+| tree | before fix | after fix |
+|---|---|---|
+| q1a jnrask.js | 8 FAIL (exactly the review list) | ALL PASS |
+| + q1c b013ddf jnrask_m.js | 0 | ALL PASS |
+| + q1b 2f79ae26 jnrask_b.js | 23 lines (18 asks) | 23 — E7b's data (nc_gian_6/9/10, nc_su_6, nc_tuc_6, nc_vuong_7, td_an_9, td_song_8, ch_benh_9/10, ch_bi_10, thd_tho_10, thd_sach_10, cnv_chu_10, cnv_ban_9, cnv_ma_5/7/8) |
+nrask-m-scan keeps its own copy (q1c's file); the shared rule is a superset.
+
+### Tests (90796d3, built)
+nrask-scan ALL PASS (192 asks) · nrask-engine ALL PASS (7c 21 chapters, 504 draws) · quickcheck PASS · core gates PASS · old save ok · perf new/live render 188/209, tab 430/435, buổi 1139/952 ms.
+Not done (Foreman E's call, reviewer notes B/C): render-time re-check of the queen filter in nrAskOf; nrPickRoad dealing tt_mat to the queen NPC.
