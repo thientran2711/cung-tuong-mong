@@ -1,3 +1,5 @@
+# RE-MERGE 2 — PASS 9c58140 (review/map-tap-go-r9, for MAIN ROOT-49): c571aae + origin/main e0b9662 (place-stage, touches jk4/jkit); only index.html/sw.js conflicted -> rebuilt; FF of e0b9662. quickcheck PASS; map-tap-go.js fold + ipadAir ALL OK (place card still has no person column after jk4 changes). coop-e2e 63/63 on c571aae (no co-op file in this merge).
+
 # RE-MERGE map-tap-go — PASS c571aae (review/map-tap-go-r9, for MAIN ROOT-48)
 r8 f2a3bfc + origin/main b2a9d34 (includes 09b1bba coop-thin-e + person-dialog-restore); only index.html/sw.js conflicted -> rebuilt from merged sources; c571aae = FF of b2a9d34. Run alone, in order: quickcheck PASS (core gates, time-spill, old save, perf render 140/134 tab 301/325 buổi 665/794 ms), map-tap-go.js fold + ipadAir ALL OK, coop-e2e 63/63. Main moved again to e0b9662 after the push (merge + rebuild once more at landing if not FF). Review content unchanged from the r8 entry below.
 
