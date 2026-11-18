@@ -114,3 +114,4 @@ receiver-choice audit (ORDER MAIN ~21:16Z, OD 21:15Z/21:30Z; shares C-AG role-pa
 | MAIN ROOT-56 (opus; child of ROOT-55) | handover HANDOVER_SESSION9 | ROOT-55 | session_01Rc5AsMXM16MfHRicSPRHEC | RUNNING | 18/11 22:15Z |
 | ge-writers-w1 remerge #2 main fa411d6f (sonnet E11w1m2) | review/ge-writers-w1 | E ROOT #7 | session_01DgYSWpCmGwUZc92fd7aPTE | RUNNING | 18/11 20:49Z |
 | questline-q2 BIG REVIEW (opus E13r) | review/questline-q2 a8cd0551 | Foreman E ROOT #6 | session_01DgYSWmBrrumpeuqy7XfMzM | DONE: FAIL (law 2 help>betray + carrier tests) · K-Q2-1 confirmed | 18/11 20:49Z |
+| questline-q2 round-2 fixes (opus E13b, successor of E13) | review/questline-q2 | E ROOT #7 | session_01DgYSWodAwDdNEBivJkzbFg | RUNNING | 18/11 20:52Z |
