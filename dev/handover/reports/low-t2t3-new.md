@@ -41,3 +41,17 @@ PRIORITY #1 CHECK: OD verdict relayed by Foreman C (21:23Z) | build.py TIER_LOW 
 
 Sample: 4 new gens (c06 t2,t3; c25 t2,t3), 0 rejected, looked at all 4 (long wide sleeves, closed smile, pins up, no cloud collar/phoenix/yellow). Sheet https://ctm-img.victoria-tntt.workers.dev/img/_review/low-B/t2t3-new/sheet2.jpg (rows c06,c25; t1|t2|t3|t4; singles in .../t2t3-new/v2/). t1/t4 reused from t8-reprompt/t1t6 (their items are the older ones).
 Honest check: t2 vs t1 vs t3 clearly different. t3 vs t4 still both wide-sleeved with an over-layer (t3 capelet vs t4 cloud collar + gold headdress); t4 reads richer by its cloud collar, heavier gold and bigger headdress.
+
+---
+# ROUND 3 (ROOT-31, owner ~21:36Z on Lượt 43: t2 looked like modern "cách tân"; t3 too close to Phi; compare with current Phi; Phi needs its own collar)
+PRIORITY #1 CHECK: owner verdict relayed by ROOT-31 | build.py TIER_LOW, low_outfit t5 | claims 0. Only TIER_LOW[2],[3] + one flagged t5 line changed; `test_low_all.py` OK 2304 builds, golden_low t2/t3 regenerated, default t5 byte-identical.
+| | t1 (unchanged) | t2 NEW | t3 NEW |
+|---|---|---|---|
+| cut | one-piece robe | Tang ruqun: crossed-collar upper garment + skirt tied high at the chest (no standing collar any more) | long straight-front beizi coat hanging OPEN over crossed-collar inner top + chest-tied skirt |
+| sleeves | long wide | long wide, wide embroidered cuffs, sheer undersleeve | long wide |
+| sash | soft sash | broad chest ribbon band, two long ribbons | ribbon at chest with ONE jade ring pendant (no brocade belt, no sheer capelet/shawl) |
+| embroidery | collar/sleeves/hem | sprays on the top + wide hem band, skirt lighter tone | wide bands along coat fronts and hem |
+Dropped from round 2 t3 because it matched Phi: sheer capelet, brocade waist belt with jade pendants and tassels.
+**Phi (t5) collar finding:** the current t5 text has NO collar word (t4 = cloud collar, t6 = pearl-edged collar + cape, t7 = jewelled cloud-collar cape). Proposal on flag `--phicollar` only (default t5 unchanged): "a broad stand-up rounded collar of gold brocade fastened with a small jade clasp at the throat". Visible in the new image.
+Sample: 6 new gens (c06+c25: t2, t3, t5 with new collar), 0 rejected, looked at all. Sheet https://ctm-img.victoria-tntt.workers.dev/img/_review/low-B/t2t3-new/sheet3.jpg — columns t1|t2|t3|t4|t5 (current, as is)|t5 NEW collar; singles in .../t2t3-new/v3/. t1/t4/t5 current are the older t1t6 images (older item lists; the new-collar t5 uses the current 3f items, so its held item differs from the current t5).
+Honest check: t2 vs t3 are now both ruqun-family (t3 = t2 + open coat); differ by outer coat, border bands, no cuff sheer. t3 vs t5: t5 is heavier gold brocade, shawl, big headdress; t3 is plain silk with embroidered bands.
