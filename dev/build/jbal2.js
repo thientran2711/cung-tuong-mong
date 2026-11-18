@@ -1329,5 +1329,14 @@ Object.assign(BAL,{ptime:{on:1,kinds:{
  bribe:{o:1,n:2},   /* Mua chuộc / Cài người vào cung khác (the servant sent) */
  clothes:{o:0,n:2}, /* Sai cung nữ đến Nội vụ phủ xin y phục (jeitem): the option's own Sức is the order (no khắc, as before) */
  buy:{o:1,n:2},     /* Sai cung nữ thân tín mua lén ngoài cung (the goods still come next tuần) */
- errand:{o:1,n:2}   /* maid road: Việc chủ sai (receiver side: her own walk + task) */
+ errand:{o:1,n:2},  /* maid road: Việc chủ sai (receiver side: her own walk + task) */
+ ask:{o:0,n:2},     /* Sai <cung nữ> đi đòi (jstip, the monthly cắt xén card: no khắc before, none now; the result at the due khắc) */
+ vlbuy:{o:1,n:2},   /* Sai người mua lén ngoài cung (jveil mạng che mặt; the bạc is paid at the order, the veil comes with the person) */
+ mktspy:{o:0,n:2},  /* Sai tai mắt dò bên chủ hội (jmkt; bạc paid at the order, no khắc before, none now) */
+ summon:{o:1,n:2},  /* SUMMON (D ruling 18/11: a send): Truyền thái y · Mời thái y bắt mạch · Truyền họa sư / nhạc sư vào cung: the messenger goes,
+                       the person called comes at the due khắc and does the work then (the old k was the visit: o = 1 = the order) */
+ giftin:{o:0,n:2},  /* TWO-WAY: an NPC sends a servant with a gift to her (the NPC's deed already paid its khắc): the servant is away n, the gift arrives at due */
+ npcinv:{o:0,n:2},  /* TWO-WAY: an NPC host sends word (AG cx3:invite2): her servant is away n, the guest / her invitation lands at due */
+ shop:{o:0,n:2},    /* Nhờ thái giám mua đồ (PEND.shop): the eunuch goes for the tray (no khắc before, none now), the tray comes at due */
+ half:15            /* the receiver's «làm qua loa» answer: the order's odds − half (same number on both sides, OD 18/11 ~21:15Z) */
 }}});

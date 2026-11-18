@@ -223,3 +223,65 @@ function ptErrFrame(){if(!ptOn()||!isSrv()||!S.srv||S.dead)return false;const er
 ptReg("taste",a=>{if(!S.maid)return{ok:null};let r=null;try{r=rcpPeople().find(x=>ledgerId(x)===a.a.rid)}catch(e){}if(!r){log(`${S.maid.name} trở về: không hỏi được người ấy.`);return{ok:null}}
  if(roll(a.a.o)){const u=rcpUnknown(r);if(u.length)log(rcpLearn(r,pick(u),`${S.maid.name} dò la`));return{ok:true,t:`${S.maid.name} dò la khẩu vị trở về`}}
  S.maid.loyal=cl((S.maid.loyal||0)-BAL.eff.jrcp.loyalGo_2,0,100);log(`${S.maid.name} dò la không ra gì, còn bị mắng.`);return{ok:false,t:`${S.maid.name} dò la khẩu vị trở về`}});
+/* =============================== ROUND 2 (worker #2, Foreman D #3 rulings 18/11: (a) summons = sends, (c) NPC giftin / invite / shop = sends) ===============================
+   The same adapter pattern: the button pays its order (BAL.ptime.kinds[kind].o), the person carrying it is away n khắc, the result at the due khắc. */
+/* ---- 12. Sai <cung nữ> đi đòi (jstip, the monthly cắt xén card): the maid goes to Nội vụ phủ; she comes back with the goods (or scolded) ---- */
+function ptGLite(G){return(G||[]).map(g=>({k:g.k,k0:g.k0,n0:g.n0,kem:g.kem,lost:g.lost,E:(g.E||[]).map(e=>S.inv.indexOf(e))}))}
+function ptGBack(L){/* the real pieces again (law 6c): by index when it still holds that piece, else the first pieces of that kind */const used=new Set();
+ return(L||[]).map(g=>{const E=[];for(const i of g.E||[]){let e=i>=0?S.inv[i]:null;if(!e||e.k!==g.k||used.has(e))e=S.inv.find(x=>x&&x.k===g.k&&!used.has(x))||null;if(e){used.add(e);E.push(e)}}return Object.assign({},g,{E})})}
+(function(){try{if(typeof stipEvent!=="function")return;const s0=stipEvent;stipEvent=function(G,SK){const ev=s0.apply(this,arguments);try{if(!ptOn()||!ev||!Array.isArray(ev.opts)||!S.maid)return ev;const m=S.maid;
+  ev.opts=ev.opts.map(o=>{if(!o||o.n!==`Sai ${m.name} đi đòi`)return o;const why=ptLockWhy("mm:me");
+   return Object.assign({},o,{x:ptX("ask",o.x)},why?{lock:true,x:why,go:()=>{}}:{go:()=>{ptSend({who:"mm:me",nm:m.name,kind:"ask",place:"nvp",a:{G:ptGLite(G),bac:SK.bac||0,sup:SK.sup?key(SK.sup):null},lbl:"đến Nội vụ phủ đòi phần"});if(ptRow("ask").o)spend(ptRow("ask").o)}})})}catch(e){ptErr("stipEvent",e)}return ev}}catch(e){ptErr("stip wire",e)}})();
+ptReg("ask",a=>{const m=S.maid;if(!m){return{ok:null}}const SK={bac:a.a.bac,sup:a.a.sup?byKey(a.a.sup):null};const od=stipAskOdds(m,SK);const eun=stipEunName();const st=stipSt(S);
+ if(roll(od)){if(SK.bac)apply({bac:SK.bac});stipRestore(S,ptGBack(a.a.G));log(`${m.name} đến Nội vụ phủ đòi đủ phần. ${eun} đành ${SK.bac?"trả lại bạc và ":""}đổi đồ tốt.`);return{ok:true,t:`${m.name} đi đòi trở về`}}
+ m.loyal=cl((m.loyal||0)-BAL.eff.jstip.loyalGo,0,100);st.spite=S.turn;log(`<span class="r">${m.name} bị ${eun} mắng đuổi về.</span> Lòng cung nữ -${balAb(BAL.eff.jstip.loyalGo)}.`);return{ok:false,t:`${m.name} đi đòi trở về`}});
+/* ---- 13. Sai người mua lén ngoài cung (jveil PEND.vlout): the bạc is paid at the order (the card's fx), the person brings the veil at due ---- */
+(function(){try{const v0=PEND.vlout;if(!v0)return;PEND.vlout=function(pp){const d=v0.apply(this,arguments);try{if(!d||!ptOn()||PT.landing)return d;const ag=vlAgent(S);if(!ag)return d;const id=ptPid(ag);const why=ptLockWhy(id);
+  d.o=(d.o||[]).map(o=>{const m=o&&o.fx&&o.fx.bac<0?/^(.+?) · /.exec(o.n||""):null;const k=m?(vlOutList(S)||[]).find(x=>itm(x).n===m[1]):null;if(!k)return o;
+   const j=String(o.j67||"").replace(/(\d+) khắc/,`${ptRow("vlbuy").o} khắc · ${ptWaitTxt("vlbuy")}`);
+   return Object.assign({},o,{j67:j},why?{lock:true,j67:why,go:()=>{}}:{go:()=>{ptSend({who:id,nm:ag.name,kind:"vlbuy",place:typeof J95OUT_!=="undefined"?J95OUT_:null,a:{k,pr:vlOutPrice(k),sid:ag.sid!=null?ag.sid:null},lbl:`lén ra ngoài cung mua ${itm(k).n}`});if(ptRow("vlbuy").o)spend(ptRow("vlbuy").o)}})})}catch(e){ptErr("vlout",e)}return d}}catch(e){ptErr("vlout wire",e)}})();
+ptReg("vlbuy",a=>{const ag=vlAgent(S);const k=a.a.k;if(!ag){apply({bac:a.a.pr});log("Người được sai mua mạng không trở về; bạc hoàn lại rương.");return{ok:null}}
+ apply({bac:a.a.pr});/* the bạc was paid at the order: vlBuyOut pays it again, net once */const r=vlBuyOut(S,k);if(r)log(r);return{ok:!/lộ ra/.test(r||""),t:`${ag.name} mua mạng ngoài cung trở về`}});
+/* ---- 14. Sai tai mắt dò bên chủ hội (jmkt tsMkScoutOpts): her runner goes (a real person), bạc at the order, the answer at due ---- */
+(function(){try{if(typeof tsMkScoutOpts!=="function")return;const t0=tsMkScoutOpts;tsMkScoutOpts=function(th,mo){const L=t0.apply(this,arguments);try{if(!ptOn()||PT.landing||!Array.isArray(L))return L;
+  return L.map(o=>{if(!o||o.n!=="Sai tai mắt dò bên chủ hội"||o.tsDis)return o;const r=ptRunner();if(!r)return Object.assign({},o,{lock:true,x:ptNoRunner(),go:()=>{}});const B=BAL.toil.taste.scout;
+   return Object.assign({},o,{x:ptX("mktspy",o.x),go:()=>{apply({bac:-B.spy.cost});ptSend({who:ptPid(r),nm:r.name,kind:"mktspy",place:"cnh",a:{th,m:mo,o:tsMkSpyO(),sid:r.sid!=null?r.sid:null},lbl:"đi dò bên chủ hội"});if(ptRow("mktspy").o)spend(ptRow("mktspy").o)}})})}catch(e){ptErr("tsMkScout",e);return L}}}catch(e){ptErr("mkt wire",e)}})();
+ptReg("mktspy",a=>{const p=ptPerson(a.a);const nm=p?p.name:"Tai mắt";const w=tsMkWant(a.a.th,a.a.m);
+ if(roll(a.a.o)){tsMkLearn(w,{tone:1,bold:1});log(`${nm}: đề ${TS_THEME[a.a.th].n} chuộng ${tsMkWantTxt(w,{tone:1,bold:1})}.`);return{ok:true,t:`${nm} dò bên chủ hội trở về`}}
+ log(`${nm} về tay không.`);return{ok:false,t:`${nm} dò bên chủ hội trở về`}});
+/* ---- 15. SUMMONS (ruling (a)): asking a person to come is a send. The messenger goes, the person called is away from his post for the walk,
+   she gets him at the due khắc (the work then runs as before, already paid). Truyền thái y (j13) · Mời thái y bắt mạch (jthaiy) · Truyền họa sư / nhạc sư (jroute) ---- */
+function ptDocId(){try{const c=S.court&&S.court.ty;if(c)return typeof ledgerId==="function"?ledgerId(c)||"ty":"ty"}catch(e){}return"ty"}
+function ptDocNm(){try{const c=S.court&&S.court.ty;return c&&c.name&&(typeof k61Named!=="function"||k61Named(c))?c.name:"Thái y"}catch(e){return"Thái y"}}
+function ptSummonThy(road,card){/* road "treat" = Truyền thái y (j13: bạc 40, treat(S,"ty")), "pay" = Mời thái y bắt mạch (jthaiy: thyCost, thyReq("pay",true)); card = the deck card already paid its c + k */
+ const id=ptDocId();if(ptBusy(id))return false;if(!card&&road==="pay"){if(window.thyWhy&&thyWhy("pay"))return false;apply({bac:-thyCost()})}
+ const a=ptSend({paid:card?ptRow("summon").o:0,who:id,nm:ptDocNm(),kind:"summon",place:S.out?"lc":"home",tgt:"me",a:{run:road==="pay"?"thyPay":"thyTreat"},lbl:road==="pay"?"đến cung ngươi bắt mạch":"đến cung ngươi chữa bệnh"});
+ if(a&&!card&&ptRow("summon").o)spend(ptRow("summon").o);try{render()}catch(e){}return!!a}
+ptReg("thyTreat",a=>{if(!illOf(S)){log(`${a.nm} đến nơi, ngươi đã khỏi bệnh.`);return{ok:null}}const r=treat(S,"ty");if(r)log(r);return{ok:!illOf(S),t:`${a.nm} đến chữa bệnh`}});
+ptReg("thyPay",a=>{PT.landing=1;try{if(window.thyReq)thyReq("pay",true)}finally{PT.landing=0}return{ok:null,t:`${a.nm} đến bắt mạch`}});
+(function(){try{if(typeof illCards!=="function")return;const c0=illCards;illCards=function(){const A=c0.apply(this,arguments);try{if(!ptOn()||!Array.isArray(A))return A;const why=ptLockWhy(ptDocId());
+  return A.map(c=>{if(!c)return c;if(c.n==="Truyền thái y")return Object.assign({},c,{k:ptRow("summon").o,x:ptX("summon",c.x)},why?{lock:true,t:why}:{go:()=>{ptSummonThy("treat",1)}});
+   if(c.n==="Mời thái y bắt mạch"&&!c.lock)return Object.assign({},c,{k:ptRow("summon").o,x:ptX("summon",c.x)},why?{lock:true,t:why}:{go:()=>{ptSummonThy("pay",1)}});return c})}catch(e){ptErr("illCards",e);return A}}}catch(e){ptErr("illCards wire",e)}})();
+(function(){try{if(typeof courtAct!=="function")return;const c0=courtAct;courtAct=function(a,k){if(ptOn()&&k==="ty"&&a==="bm"&&S&&!S.dead&&!(typeof Q!=="undefined"&&Q.length)){if(ptBusy(ptDocId())){try{kitLine(ptLockWhy(ptDocId()),2600)}catch(e){}return}if(can(ptRow("summon").o)){ptSummonThy("pay")}return}return c0.apply(this,arguments)};window.courtAct=courtAct}catch(e){ptErr("courtAct wire",e)}})();
+/* the nausea notice's «Mời thái y bắt mạch» (jthaiy endTurn): the same summon */
+(function(){try{if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(ptOn()&&typeof Q!=="undefined")for(const q of Q){for(const o of q&&q.opts||[]){if(o&&o.n==="Mời thái y bắt mạch"&&!o.__pt){o.__pt=1;o.x=ptX("summon",o.x);o.go=()=>{setTimeout(()=>{if(ptBusy(ptDocId()))return;ptSummonThy("pay")},0)}}}}}catch(e){ptErr("nausea",e)}return r}}catch(e){ptErr("endTurn wire",e)}})();
+/* Truyền họa sư / nhạc sư vào cung (jroute rtCard ttord): Nội vụ phủ sends for him; he is in her palace from the due khắc (the week's cớ gặp) */
+(function(){try{if(typeof rtCard!=="function")return;const r0=rtCard;rtCard=function(o){try{if(ptOn()&&o&&o.id==="ttord"&&typeof o.go==="function"&&!PT.landing){const g=o.go;const nm=/^Truyền (.+) vào cung$/.exec(o.n||"");
+   o=Object.assign({},o,{x:ptX("summon",o.x),go:function(){const a=ptSend({who:"rt:"+(nm?nm[1]:"thầy"),nm:nm?nm[1][0].toUpperCase()+nm[1].slice(1):"Thầy",kind:"summon",place:S.out?"lc":"home",tgt:"me",a:{run:"rtOrd"},lbl:"vào cung ngươi"});
+    if(a){PT.cl=PT.cl||{};PT.cl[a.id]=g}}})}}catch(e){ptErr("rtCard",e)}return r0.apply(this,[o].concat([].slice.call(arguments,1)))}}catch(e){ptErr("rtCard wire",e)}})();
+ptReg("rtOrd",a=>{const g=PT.cl&&PT.cl[a.id];if(g){delete PT.cl[a.id];try{g()}catch(e){ptErr("rtOrd",e)}}else{try{rtS().order=wk();rtHeat(3)}catch(e){}log(`${a.nm} vào cung ngươi theo lệnh Nội vụ phủ.`)}return{ok:true,t:`${a.nm} vào cung`}});
+/* ---- 16. TWO-WAY (ruling (c)): NPC senders — a gift carried by her servant (PEND.giftin), an NPC host's invitation (AG cx3:invite2) ---- */
+function ptNpcCarrier(v){if(!v)return null;if(v.maid&&v.maid.name&&!ptBusy("mm:"+v.id))return{id:"mm:"+v.id,nm:v.maid.name};try{const s=bestSent(v);if(s)return{id:ptPid(s,v),nm:s.name}}catch(e){}return null}
+(function(){try{const p0=pushDil;pushDil=function(d,title){try{if(ptOn()&&!PT.landing&&d&&d.pid==="giftin"&&d.pp&&d.pp.f!=null){const f=byKey(d.pp.f);
+   if(f&&f!==S&&f.id!=null&&typeof RV==="function"&&RV(f.id)===f){const w=ptNpcCarrier(f);if(w){ptSend({who:w.id,nm:w.nm,kind:"giftin",by:"v"+f.id,byNm:f.name,place:S.out?"lc":"home",tgt:"me",a:{run:"giftin",pp:d.pp,title:title||"Quà tặng"},lbl:"mang quà sang cung ngươi"});PT.stat.npc++;return""}}}}catch(e){ptErr("giftin",e)}return p0.apply(this,arguments)};window.pushDil=pushDil}catch(e){ptErr("pushDil wire",e)}})();
+ptReg("giftin",a=>{PT.landing=1;try{const d=mkP("giftin",a.a.pp);if(d)pushDil(d,a.a.title);else log(`${a.nm} mang quà đến, nhưng người tặng không còn.`)}finally{PT.landing=0}return null});
+PT_NPC["cx3:invite2"]={kind:"npcinv",who:v=>{/* one invitation out at a time per host: the runner still out = busy (the deed is dropped) */const p=ptZ().find(a=>!a.back&&a.a&&a.a.npc==="cx3:invite2"&&a.a.v===v.id);return p?{id:p.who,nm:p.nm}:ptNpcCarrier(v)},lbl:t=>`đi mời ${t===S?"ngươi":t&&t.name?t.name:"khách"}`,land:1};
+try{ptNpcWire()}catch(e){ptErr("npcWire2",e)}
+/* the invitation lands at the due khắc (not at the next buổi on top: no double wait) */
+(function(){const n0=PT.run.npc;ptReg("npc",a=>{const r=n0(a);try{const D=PT_NPC[a.a.npc];if(D&&D.land&&typeof p3InvLand==="function")p3InvLand()}catch(e){ptErr("npcinv land",e)}return r})})();
+/* ---- 17. Nhờ thái giám mua đồ (j8 invAct "shop" → PEND.shop): the eunuch goes for the tray; it comes at the due khắc ---- */
+const PT_EUN="eun:nvp";
+(function(){try{if(typeof invAct!=="function")return;const i0=invAct;invAct=function(a){if(a==="shop"&&ptOn()&&S&&!S.dead&&!(typeof Q!=="undefined"&&Q.length)){
+   if(ptBusy(PT_EUN)){try{kitLine(ptLockWhy(PT_EUN),2600)}catch(e){}return}ptSend({who:PT_EUN,nm:"Thái giám Nội vụ phủ",kind:"shop",place:"nvp",a:{run:"shop"},lbl:"đi lấy khay đồ ngoài cung"});if(ptRow("shop").o)spend(ptRow("shop").o);render();return}
+  return i0.apply(this,arguments)};window.invAct=invAct}catch(e){ptErr("invAct wire",e)}})();
+ptReg("shop",a=>{PT.landing=1;try{pushDil(mkP("shop"),"Nhờ thái giám mua đồ")}finally{PT.landing=0}return{ok:null,t:"Thái giám mang khay đồ đến"}});
