@@ -34,7 +34,7 @@ const npcs=()=>(rivals||[]).filter(v=>v&&!v.coop);
 const other=()=>CW.seat==="a"?"b":"a";
 
 /* ---------- GUEST ---------- */
-const BAD=new Set(["thq","thpn","heir","hr","buoi"]);/* buoi: the room's step, the host's alone (a number travels as a delta: her copy must never move it) *//* cyb travels with her diff: the host reads her cycle flags from her person (row 10) */
+const BAD=new Set(["thq","thpn","heir","hr","buoi","origin"]);/* origin (her thân phận): the host's, set by her life intent (part B); her diff never carries it (a first ready sent ["-",["origin"]] → the host's ser of her threw "reading 'k'") *//* buoi: the room's step, the host's alone (a number travels as a delta: her copy must never move it) *//* cyb travels with her diff: the host reads her cycle flags from her person (row 10) */
 function curP(){const o=J(ser().S);for(const k of X.W_KEYS)delete o[k];for(const k of BAD)delete o[k];return o}
 const PACK=15000;
 /* her ops in packs the Worker takes (an intent over DOMAX 20 000 chars is refused); one op too big alone is counted, not sent */
@@ -43,12 +43,35 @@ function packs(ops){const out=[];let cur=[],n=2;for(const o of ops){const s=JSON
 function gReady(){if(!S||S.dead||Q.length||S.mg||CW.inLife)return;const b=S.buoi||0;const k=bk();if(E.mine===k)return;
  const V=TH.view,P=V&&V.o&&V.o.P&&V.o.P[CW.seat];
  if(V&&V.o){const mx=Math.max(0,...(V.o.pq||[]).map(x=>x.n|0));if((S.thpn||0)<mx){try{TH.gSync(V)}catch(e){}if((S.thpn||0)<mx){lg(["wait-pq",S.thpn||0,mx]);return}}}
- let ops=[];if(P)try{const base=J(P);for(const k of BAD)delete base[k];for(const k of X.W_KEYS)delete base[k];ops=TH.pDiff(base,curP())}catch(e){console.error("thin E diff",e)}
+ let ops=[],cur=null;if(P)try{cur=curP();ops=TH.pDiff(E.base(V),cur)}catch(e){console.error("thin E diff",e)}
  const L=packs(ops);const id="r"+Date.now().toString(36);
- L.forEach((ops,i)=>{TH.doSend("erd",{id,i,ops});E.stat.ops+=ops.length});
+ L.forEach((ops,i)=>{TH.doSend("erd",{id,i,ops});E.stat.ops+=ops.length});if(cur)E.sent(cur);
  if(b>=LAST()){try{CW.nightReady()}catch(e){console.error(e)}}
  TH.doSend("ready",{w:COOP.state.week||0,b,id,n:L.length});E.mine=k;E.stat.rd++;lg(["ready",k,ops.length,L.length]);
  try{CW.lockNext();render()}catch(e){}}
+/* thin F1 (review/coop-thin-f1): ONE guest baseline for her person diff (`do erd` here, the act intents of jcoopthinf): what the host holds of
+   her. Taken from the view (her copy P.<seat>) only when the host has answered every intent she sent (view dr = her last id) and she applied
+   every patch; else the copy she last sent, with the host's patches she applied since put on it too. Before: two diffs sent before the view
+   caught up both carried the same change (a number added twice on the host). */
+E.bs=null;E.pn=0;E.last="";E.curP=curP;E.packs=packs;
+E.base=function(V){const o=V&&V.o;const mx=o?Math.max(0,...(o.pq||[]).map(x=>x.n|0)):0;const done=!E.last||!!(o&&o.dr&&o.dr.id===E.last);
+ if(!E.bs||done&&(S.thpn||0)>=mx){const P=o&&o.P&&o.P[CW.seat];if(P){const b=J(P);for(const k of BAD)delete b[k];for(const k of X.W_KEYS)delete b[k];E.bs=b;E.pn=mx}}
+ return E.bs||{}};
+E.sent=function(cur){E.bs=J(cur);E.pn=(S&&S.thpn)||0};
+COOP.on("thinview",V=>{try{if(!on()||host()||!E.bs||!V||!V.o)return;const top=(S&&S.thpn)||0;for(const x of V.o.pq||[])if(x.n>E.pn&&x.n<=top){TH.pApply(E.bs,x.p);E.pn=x.n}}catch(e){console.error("thin E base",e)}});
+{const ds=TH.doSend;TH.doSend=function(op){const id=ds.apply(this,arguments);if(id&&!host()){E.last=id;if(op==="erd"||op==="ready"){EID.push(id);if(EID.length>20)EID.shift()}}return id}}
+/* review coop-thin-f1 r1 #2 (net): her ready on a socket that died. A phone's socket can look open while it is dead (4G, sleep): her erd +
+   ready sent on it are lost, the socket then closes and COOP reconnects, and nobody sent them again: the host waited for her, her #next
+   said "Chờ hảo hữu…", the room stood (coop-cyc THIN=6: her maid's card never asked; dev/test/coop-thin-e-net.js N1–N4). Now: after her
+   reconnect (room), or a Worker "nohost" for one of her erd / ready (his socket was gone), her baseline is the host's copy (E.bs null: the
+   resent diff starts from what he really holds, nothing doubled) and, at the next view, if she still waits on that same buổi, her ready is
+   sent again (once per loss; the host's ready is idempotent; a buổi he already stepped arrives in that view and nothing is resent). */
+const EID=[];let rr=0;
+COOP.on("room",()=>{E.bs=null;E.pn=0;E.last="";if(!host()&&E.mine)rr=1});COOP.on("week",()=>{E.bs=null});
+COOP.on("thin",()=>{if(rr&&!host())setTimeout(()=>{try{reNet()}catch(e){console.error(e)}},0)});
+COOP.on("error",m=>{try{if(host()||!m||m.code!=="nohost"||!m.id||!EID.includes(m.id))return;E.bs=null;E.last="";if(E.mine)rr=1;lg(["nohost",m.id])}catch(e){}});
+function reNet(){if(!rr)return;if(host()||!E.mine||E.mine!==bk()){rr=0;return}if(!on()||!TH.view||!S||S.dead||Q.length||S.mg||CW.inLife)return;/* the room level comes back after the reconnect snapshot ("thin"): wait for it */
+ rr=0;lg(["re-net",E.mine]);E.stat.reNet=(E.stat.reNet|0)+1;E.mine="";setTimeout(()=>{try{gReady()}catch(x){console.error(x)}},0)}
 CW.eAsked=()=>on()&&(host()?(E.hr===bk()||E.forced===bk()):E.mine===bk());
 CW.eWait=()=>!!(on()&&!host()&&E.mine&&E.mine===bk()&&((S&&S.buoi)||0)<LAST());
 /* her buổi moved by the host's patch: what lives outside S on her phone (display / per-seat counters) */
@@ -65,11 +88,13 @@ function gView(V){if(!on()||host()||!S||!V||!V.o)return;const k=bk();
  seen=k;const e=V.o.e;try{CW.tnView(e)}catch(x){console.error(x)}
  /* the host reloaded after her ready (his page holds her ready in memory only): send it again, against his reloaded copy of her */
  if(e&&e.boot){if(E.boot&&E.boot!==e.boot&&E.mine===bk()){lg(["re-ready",E.boot,e.boot]);E.stat.reRd++;E.mine="";E.boot=e.boot;setTimeout(()=>{try{gReady()}catch(x){console.error(x)}},0)}else E.boot=e.boot}
+ if(e&&typeof e.net==="number"){if(E.net!=null&&E.net!==e.net&&e.boot===E.boot&&E.mine&&E.mine===bk()){E.bs=null;E.last="";rr=1;E.stat.hNet=(E.stat.hNet|0)+1;lg(["host-net",E.net,e.net])}E.net=e.net}
  if(e&&e.go===wkx()&&CW.ngoW!==e.go&&(S.buoi||0)>=LAST()){CW.ngoW=e.go;E.stat.go++;lg(["go",e.go]);try{CW.nCheck()}catch(x){console.error(x)}}
+ reNet();
  try{CW.lockNext()}catch(x){}}
 COOP.on("thinview",V=>{try{gView(V)}catch(e){console.error("thin E view",e)}});
 let wasMg=false;
-if(typeof render==="function"){const f=render;render=function(){const r=f.apply(this,arguments);try{const mg=!!(S&&S.mg);const left=wasMg&&!mg;wasMg=mg;if(left&&on()&&!host()&&S&&!S.dead&&!Q.length){const V=TH.view;
+if(typeof render==="function"){const f=render;render=function(){const r=f.apply(this,arguments);try{if(rr)reNet()/* net: her dialog was open at the view */}catch(e){}try{const mg=!!(S&&S.mg);const left=wasMg&&!mg;wasMg=mg;if(left&&on()&&!host()&&S&&!S.dead&&!Q.length){const V=TH.view;
   if(V&&V.o&&V.o.w===(COOP.state.week||0)&&typeof V.o.buoi==="number"&&V.o.buoi>(S.buoi||0)&&E.mine!==bk())gReady()}}catch(e){}return r}}
 COOP.on("week",()=>{E.mine="";seen="";/* her ready for the NEW week may arrive before this event (race): keep it */const w=COOP.state.week||0;for(const k of Object.keys(E.rd))if((E.rd[k].w|0)<w)delete E.rd[k];E.hr="";E.forced=""});
 
@@ -128,6 +153,16 @@ CW.herNight=()=>{if(!on()||!host()||CW.ctx)return;const w=COOP.state.week||0;if(
  D.later(other(),()=>{if(!S||S.dead||S.out)return;const had=S.tonight==="me";S.tonight="me";try{if(typeof ntTake==="function")ntTake(S)}catch(e){}
   if(!had)try{pushDil(mkP("ksp"),"Kính sự phòng báo tin")}catch(e){console.error("thin E ksp",e)}})};
 COOP.on("week",()=>{if(on()&&host())setTimeout(()=>{try{if(CW.tnHer())CW.herNight()}catch(e){console.error(e)}},0)});
+/* E-fix 'cyAsk on host' (Foreman B 18/11): her Kỳ nguyệt sự card. Her flip (jcycle cyAsk) ran only on her phone inside her week-end world
+   frame, so the card and its flags were dropped (coop-cyc). At level 5+ the HOST asks it in her context b (jcycle cyAsk → pushDil cyrep →
+   part-D card on her phone), her pick runs there (do pick), her stored person holds S.cyb (the one fact; the patch brings it to her phone),
+   and the host's held draw (jcoopworld cyWait / cyFree) runs once she has answered. Her phone never asks it (cyAsk = false on the guest). */
+CW.herCy=g=>{if(!on()||!host()||CW.ctx||E.cyA===g)return;E.cyA=g;E.stat.cyA=(E.stat.cyA|0)+1;lg(["her-cy",g]);
+ D.later(other(),()=>{let asked=false;try{asked=!!(S&&!S.dead&&typeof window.cyAsk==="function"&&window.cyAsk())}catch(e){console.error("thin E cy",e)}
+  if(!asked){D.after(()=>{CW.cyNo=g;try{CW.cyFree()}catch(e){console.error(e)}})}})};
+window.cyHostOwns=()=>on()&&!host()&&!CW.ctx;
+/* in her context on the host her card waits as a part-D card (S.thq), not in Q: it is still open, so her week end must not answer it for her */
+window.cyCardOpen=()=>{try{return on()&&!!CW.ctx&&Array.isArray(S.thq)&&S.thq.some(c=>c&&c.pid==="cyrep")}catch(e){return false}};/* jcycle: her phone neither asks the card nor auto-answers it at her week end (her flags come in the host patch) */
 /* world windows' end() on HER household (ORDER s34 16:22Z, reports/coop-thin-c.md 'For part E'): the host's worldTick ends a window for the
    world and his own household (jworld2 EVD.<k>.end → EVD.<k>.home for S); her household (her choice S.wwMe in her person) runs the same
    EVD.<k>.home in her context (D.later: from the top of the event loop), with the world's outcome the end found (vu cổ: the culprit), so the
@@ -184,7 +219,12 @@ E.wSnap=wSnap;E.wRestore=wRestore;
 /* the night: his go rides the view (the guest reads o.e.go), never the ctm-nr relay */
 /* boot: this page load of the host (a host reload loses her ready, held in memory: her phone sends it again when boot changes) */
 const BOOT=Date.now().toString(36)+Math.random().toString(36).slice(2,6);
-{const hv=TH.hostView;TH.hostView=function(){const o=hv.apply(this,arguments);if(o&&on()){o.e={go:CW.ngo===(COOP.state.week||0)?CW.ngo:-1,w:COOP.state.week||0,tnb:CW.tnb|0,boot:BOOT}}return o}}
+/* review coop-thin-f1 r1 #3 (net, the HOST's side): his socket can look open while it is dead too; her erd + ready relayed to it are lost
+   (the Worker took them, no "nohost"), he reconnects and the room stood (coop-cyc THIN=6: host 'room 2.0', her ready 2:1 never arrived,
+   both on "Chờ hảo hữu…"). Each reconnect of his counts in the view (net); her phone, still waiting on that buổi, sends her ready again
+   against his copy of her (the same re-net path as her own reconnect: nothing doubled, his ready is idempotent). */
+let HNET=0;COOP.on("room",()=>{if(host())HNET++});/* the new count reaches her in the snapshot jcoopthin sends when his level is back (snapNow) */
+{const hv=TH.hostView;TH.hostView=function(){const o=hv.apply(this,arguments);if(o&&on()){o.e={go:CW.ngo===(COOP.state.week||0)?CW.ngo:-1,w:COOP.state.week||0,tnb:CW.tnb|0,boot:BOOT,net:HNET}}return o}}
 /* her in-week change of the night (Tranh sủng, Chặn ngự giá, cáo bệnh …): the intent replaces the ctm-tn claim; runs in the host's context */
 TH.onDo("tn",(a,m)=>{const base=m&&m.base;E.stat.tn++;setTimeout(()=>{try{CW.tnDo(a,base)}catch(e){console.error("thin E tn",e)}},0);return {ok:1}});
 /* the OUTERMOST nextBuoi (this module is the last one): 12 modules after jcoopworld wrap nextBuoi with after-step work (jexam exTick,
