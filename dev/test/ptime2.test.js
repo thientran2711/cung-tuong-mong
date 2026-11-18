@@ -26,7 +26,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   E("treat",()=>{toB0();S.bac=500;S.ill={k:Object.keys(ILL)[0],st:1};const c=illCards().find(x=>x.n==="Truyền thái y");if(!c)return"no card";const u0=used;spend(c.k);apply(c.c||{});c.go();
    const a=land("summon");const r={k:c.k,x:c.x,u:used-u0,away:!!PTIME.away(ptDocId()),run:a&&a.a.run};const c2=illCards().find(x=>x.n==="Truyền thái y");r.lock2=!!(c2&&c2.lock);r.why=c2&&c2.t;
    spend(R.summon.n-R.summon.o);r.back=!!(a&&a.back);r.rep=a&&a.rep&&a.rep.t;S.ill=null;return r});
-  E("bm",()=>{toB0();Q.length=0;S.bac=500;const u0=used;courtAct("bm","ty");const a=land("summon");const r={u:used-u0,run:a&&a.a.run,q0:Q.length};spend(R.summon.n-R.summon.o);r.back=!!(a&&a.back);r.q=Q.map(x=>x.t);Q.length=0;return r});
+  E("bm",()=>{toB0();Q.length=0;S.bac=500;const u0=used;courtAct("bm","ty");const a=land("summon");const r={u:used-u0,run:a&&a.a.run,q0:Q.filter(x=>/Thái y bắt mạch/.test(x.t||"")).length};/* only the verdict card counts (a random world event may queue on its own) */spend(R.summon.n-R.summon.o);r.back=!!(a&&a.back);r.q=Q.map(x=>x.t);Q.length=0;return r});
   /* 16 two-way */
   E("giftin",()=>{toB0();Q.length=0;const v=liveRivals(true).find(x=>x.alive&&!x.out);v.inv=v.inv||[];v.inv.push({k:"tramngoc"in IT?"tramngoc":Object.keys(IT)[0]});const ln=giveTo(v,S,v.inv.length-1);
    const a=S.away.filter(x=>x.kind==="giftin").pop();const r={ln,q0:Q.length,by:a&&a.by,who:a&&a.who};spend(R.giftin.n);r.back=!!(a&&a.back);r.q=Q.map(x=>x.t);Q.length=0;return r});
@@ -45,7 +45,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    /* NPC maid away = locked for her other deeds */S.away.push({id:"t-m",who:"mm:"+v.id,nm:"x",kind:"spy",by:"v"+v.id,t0:ptNow(),due:ptNow()+2,back:0,a:{},lbl:""});
    x.maidLock=AGRUN["cx2:maidTalk"]?AGRUN["cx2:maidTalk"](v)==="":true;S.away=S.away.filter(z=>z.id!=="t-m");return x});
   /* 19 Cài người hầu vào cung (j10 plantsv): the servant walks over, placed at due (BAL.ptime.kinds.bribe true) */
-  E("plantsv",()=>{toB0();Q.length=0;if(!(S.staff||[]).length)return null;S.bac=Math.max(S.bac||0,BAL.house.plantBac+50);const d=PEND.plantsv({});const op=d&&d.o.find(x=>x.kgt);if(!op)return null;
+  E("plantsv",()=>{toB0();Q.length=0;if(!(S.staff||[]).length)return null;S.bac=Math.max(S.bac||0,BAL.house.plantBac+50);const d=PEND.plantsv({});const op=d&&d.o.find(x=>x.kgt);if(!op||op.lock)return null;/* no free servant: nothing to send */
    const u0=used,t0=ptNow();op.go();const a=S.away.filter(z=>z.kind==="bribe").pop();const x={x:op.x,u:used-u0,away:!!a,due:a?a.due-t0:null};spend(BAL.ptime.kinds.bribe.n);x.back=!!(a&&a.back);return x});
   /* FAIL 7 item 1: jptime never re-registers «tin» on render, and stays off it when MAIN's jerr errIcon is in the build */
   E("icon",()=>{const x={};let n=0;const s0=kitStatusIcon.set;kitStatusIcon.set=function(id){if(id==="tin")n++;return s0.apply(this,arguments)};try{render();render();x.onRender=n;
