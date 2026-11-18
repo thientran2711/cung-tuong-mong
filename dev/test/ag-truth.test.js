@@ -21,11 +21,17 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   ev(m,t){try{return evG(m,t)}catch(e){return 0}}}});
  /* 1 loyal: failure reported as failure */
  const r1=await p.evaluate(()=>{const s=__T.srv(),t=__T.rv();s.loyal=100;s.spyFor=null;const n0=__T.bao().length;const c=[];
-  for(let i=0;i<6;i++)c.push(knErr(s,S,"scoutF",t));const L=__T.bao().slice(n0);const c2=knErr(s,S,"listenF",null);const L2=__T.bao().slice(n0+L.length);
-  return {c,c2,L,L2,who:spyWho(t)}});
+  /* deterministic (review ag-later #2: 6 random draws with tells>=5 flaked ~1 in 4): the WORDING is checked on forced "tell" picks,
+     the loyal servant's CHOICE share over 200 draws (knErrPick only, no report) */
+  const pk0=knErrPick;window.knErrPick=knErrPick=()=>"tell";
+  try{for(let i=0;i<6;i++)c.push(knErr(s,S,"scoutF",t))}finally{window.knErrPick=knErrPick=pk0}const L=__T.bao().slice(n0);
+  window.knErrPick=knErrPick=()=>"tell";let c2;try{c2=knErr(s,S,"listenF",null)}finally{window.knErrPick=knErrPick=pk0}const L2=__T.bao().slice(n0+L.length);
+  const C={};for(let i=0;i<200;i++){const k=knErrPick(s,S);C[k]=(C[k]||0)+1}
+  return {c,c2,L,L2,who:spyWho(t),C}});
  const tells=r1.c.filter(x=>x==="tell").length;
- ok(tells>=5&&r1.L.length===tells&&r1.L.every(l=>/có đi dò la .* nhưng không dò được gì/.test(l)&&l.includes(r1.who)),'loyal servant: a failed scouting is reported as failed, naming the real target',{c:r1.c,line:r1.L[0]});
- ok(r1.c2!=="tell"||/chưa nghe được chuyện gì/.test(r1.L2[0]||""),'loyal servant: a failed listen is reported as "nothing heard"',r1.L2[0]);
+ ok(tells===6&&r1.L.length===6&&r1.L.every(l=>/có đi dò la .* nhưng không dò được gì/.test(l)&&l.includes(r1.who)),'loyal servant: a failed scouting is reported as failed, naming the real target',{c:r1.c,line:r1.L[0]});
+ ok((r1.C.tell||0)>=120&&!(r1.C.sell),'loyal servant (lòng 100): tells most of the time over 200 picks, never sells',r1.C);
+ ok(/chưa nghe được chuyện gì/.test(r1.L2[0]||""),'loyal servant: a failed listen is reported as "nothing heard"',r1.L2[0]);
  /* 2 slack */
  const r2=await p.evaluate(()=>{const s=__T.srv(),t=__T.rv();s.loyal=0;s.spyFor=null;const n0=__T.bao().length;const q0=(S.knQ||[]).length;const e0=__T.ev(S,t);const C={};
   for(let i=0;i<40;i++){const c=knErr(s,S,"scout",t);C[c]=(C[c]||0)+1}
