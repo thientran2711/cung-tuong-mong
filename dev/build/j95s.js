@@ -83,7 +83,11 @@ function j95sFriend(q,o){const s=q.sv;if(!s||!s.af)return null;let best=null,ba=
 function j95sServeWhy(c,ow){return ["hầu "+ow+" chải đầu, dâng trà sáng","dọn bữa trưa, hầu "+ow,"hầu "+ow+" buổi chiều","hầu "+ow+" dùng bữa tối, sửa soạn nghỉ"][c]||"hầu "+ow}
 /* ---------- the rest rhythm (MAIN 18/11 20:07Z): per servant and DAY — her rest turn, her bedtime, the household's night watch by turns ---------- */
 /* perf (outcome-identical): the rhythm is a pure function of (day, life seed, person, place in her household, household size, BAL.slv): memo per day */
-function j95sRhythm(q,ix,n){const d=j95sDay(),sd=j95seed(),B=BAL.slv;const bs=B.rest.buoi.join()+"/"+B.rest.len.join()+"/"+B.sleepFrom+"/"+B.sleepJit+"/"+B.night;
+/* (perf, same answer) the BAL key string is rebuilt only when one of its parts changed (same arrays, same numbers): the joins were most of this call */
+function j95sRhSame(a,c){if(a.length!==c.length)return false;for(let i=0;i<a.length;i++)if(a[i]!==c[i])return false;return true}
+function j95sRhBs(B){const c=J95S.rhb,R=B.rest;if(c&&c.f===B.sleepFrom&&c.j===B.sleepJit&&c.n===B.night&&j95sRhSame(R.buoi,c.a)&&j95sRhSame(R.len,c.l))return c.bs;
+ const bs=R.buoi.join()+"/"+R.len.join()+"/"+B.sleepFrom+"/"+B.sleepJit+"/"+B.night;J95S.rhb={a:R.buoi.slice(),l:R.len.slice(),f:B.sleepFrom,j:B.sleepJit,n:B.night,bs};return bs}
+function j95sRhythm(q,ix,n){const d=j95sDay(),sd=j95seed(),B=BAL.slv;const bs=j95sRhBs(B);
  const M=J95S.rh&&J95S.rh.d===d&&J95S.rh.sd===sd&&J95S.rh.bs===bs?J95S.rh.M:(J95S.rh={d,sd,bs,M:new Map()}).M;
  const k=q.id+"|"+ix+"|"+n;let v=M.get(k);if(!v){v=j95sRhythm0(q,ix,n);M.set(k,v)}return Object.assign({},v)}
 function j95sRhythm0(q,ix,n){const B=BAL.slv;const d=j95sDay();const r=j95rng(j95hash(j95seed()+"|rest|"+d+"|"+q.id));
@@ -193,7 +197,7 @@ function j95sWhy(R,id,i,x,kind){const a=x[1]||"",k=x[0],t=x[2];const tn=t?((R.wh
  if(a==="rest"||a==="here")return k==="home"||/^r\d+$/.test(k||"")?"ở cung mình nghỉ ngơi":`nghỉ ở ${pn}`;
  return`${a?j95sActW(a):"ở"} ở ${pn}`}
 function j95sGuard(R,kh,ppl){let n=0;let K=null;const OK=J95S.ok||(J95S.ok=new WeakSet());/* a row checked once is not checked again (rows are replaced, never edited in place) */
- for(const id in R.P){if(id==="me")continue;const e=R.P[id];for(let i=kh;i<4;i++){const x=e[i];if(!x||OK.has(x))continue;OK.add(x);if(!x[0]||x[0]===J95OUT_)continue;const w=x[3]==null?"":String(x[3]).trim();if(!J95S_FILL.has(w))continue;
+ for(const id in R.P){if(id==="me")continue;const e=R.P[id];for(let i=kh;i<4;i++){const x=e[i];if(!x)continue;{const w0=x[3];/* (perf, same answer) a real reason (a string, not filler, no edge blanks) is never touched: skip before the WeakSet */if(typeof w0==="string"&&w0.length>8&&w0!=="phận sự trong cung"&&w0.charCodeAt(0)>32&&w0.charCodeAt(w0.length-1)>32)continue}if(OK.has(x))continue;OK.add(x);if(!x[0]||x[0]===J95OUT_)continue;const w=x[3]==null?"":String(x[3]).trim();if(!J95S_FILL.has(w))continue;
    if(!K){K={};for(const p of ppl)K[p.id]=p.kind}
    const nw=j95sWhy(R,id,i,x,K[id]);if(nw&&nw!==w){e[i]=[x[0],x[1],x[2],nw];n++;J95S.guardBy[K[id]||id[0]]=(J95S.guardBy[K[id]||id[0]]||0)+1}}}
  J95S.stat.guard+=n;return n}
