@@ -43,3 +43,12 @@ Facts: origin/main 790cda59 is an ancestor (FF ok). Diff vs ef509c22 = main's fi
 quickcheck PASS (open 1461 ms, old save ok, perf render 219/252, tab 427/367, buổi 1160/1175), core gates incl. G4 PASS. Standard checks from the ef509c22 run still hold (same content): edge >= 12 px, name over crown 0, cut 0, same class = same body, real-event scroll Fold 26 / iPad 12 (main 27/26).
 Still FAIL (1, minor): Fold person dialog with fig-consort-c09 (rose): rose tip ~3 px into the first text column (re-checked on 44513236, shot 755x1000 pdlg hh-c09). Needs a figure-over-text scan column + kitPersonDlgFit fix.
 FAIL 1 item (Fold pdlg prop over text).
+
+## FINAL RE-REVIEW review/fullbody-frame-s4 @ 3c8a2888 (for MAIN ROOT-57)
+PRIORITY #1 CHECK: worker report (707d89d5 fix «prop over text», BAL.figWideRef .65) + my FAIL on 44513236; same scans reused, no duplicate.
+- origin/main e16e1d66 is an ancestor (FF ok). Rebuild (build_site.sh) differs from committed index.html only in the build line window.CTM_BI.
+- quickcheck PASS (open 1893 ms, old save ok, perf render 249/216, tab 376/423, buổi 1282/1258); core gates incl. G4 PASS.
+- figure-head-fade-scan (80 rows, new column «figure over text», Fold 755x1000@2 + iPad 1180x820@2, 10 figures x news/choice/pdlg/idcard/shop): ALL OK. name over figure 0, cut 0, left margin >= 12 px everywhere.
+- My FAIL fixed: person dialog (coach/tips) figure over text 0.0 px on both devices (fig-consort-c09 rose now clear of the text, LOOKED 755x1000 pdlg hh-c09), idcard 0, shop 0.
+- Not 0 (printed only, worker flagged for the owner): news/choice M3/L3/XL3 frames, robe/hem bottom spreads under the text/buttons column up to 29 px (news) / 60 px (choice widest-robe), 13-20 px for tallest-crown / old-maid-wide / hh-c09. LOOKED 755x1000 choice widest-robe: only the gown hem passes under the lower option button edge, text and buttons stay fully legible, crown/face untouched. It follows the owner's existing figure rule (KIT 56.4); needs the owner's look, not a code fail.
+PASS LAND READY 3c8a2888 (FF from e16e1d66)
