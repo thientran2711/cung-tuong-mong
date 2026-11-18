@@ -277,7 +277,9 @@
   "thCall": "the Thái hậu calls her: needs Thái hậu regard ≥ ap.th and wins the visitor rotation (0-15 per run)",
   "exposeMe": "j95b a foe exposes her lie: needs an open lie case and hostility ≥ lie.expose (0-10 per run)",
   "f7Gamble": "festival gambling contest variant only (0-3 per run)",
-  "omen": "weekly comet card: hostility ≥ dil.omenBar (40) and a 36-tuần cd (0-3 per run)"
+  "omen": "weekly comet card: hostility ≥ dil.omenBar (40) and a 36-tuần cd (0-3 per run)",
+  "repay": "a debtor repays her: needs a loan she gave and the debtor's silver (0-2 per run)",
+  "wdSpy": "her tai mắt dig at Nội vụ phủ for a hostile consort's outfit (0-6 per run)"
  },
  "base": {
   "_srvWeeks": 308,
