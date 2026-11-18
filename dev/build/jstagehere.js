@@ -43,13 +43,17 @@ const ACT_PLACE={"Thỉnh an Thái hậu":"tn","Nhờ Thái hậu nói giúp":"t
  "Cầu tự ở Phụng Tiên điện":"tn","Múa trong yến tiệc":"thu",
  /* r2 (a): acts done in her own palace (her bed, mirror, books, her own maids) bring her home; goTo("home") is the free walk (j2), so one cost */
  "Nghỉ ngơi một lát":"home","Điểm trang":"home","Đọc sách giải khuây":"home","Dưỡng nhan":"home","Giả bệnh":"home","Trò chuyện với cung nữ":"home",
- "Đọc binh thư, sử sách":"home","Nghỉ ngơi dưỡng sức":"home","Nghĩ cách trốn khỏi cung":"home","Dâng biểu xin xuất gia":"home"};
+ "Đọc binh thư, sử sách":"home","Nghỉ ngơi dưỡng sức":"home","Nghĩ cách trốn khỏi cung":"home","Dâng biểu xin xuất gia":"home",
+ /* r3 — MAIN ROOT-56 20:50Z gap rulings */
+ "Phát bạc cứu giúp cung nhân nghèo":"cnh","Để ý một nam nhân":"vuon","Để ý một nam nhân áo gấm":"vuon","Xin ban hôn cho Vương gia":"home","Xin về quê phụng dưỡng cha mẹ":"home"};
+/* route cards with a name built from a person ("Xin ban hôn cho <tên>") are matched by their card id */
+const ACT_PLACE_ID={tt0:"vuon",hl_hon:"home",hl_que:"home"};window.ACT_PLACE_ID=ACT_PLACE_ID;
 /* r2 (c): acts done from afar / by others for her — no move. "Cài tai mắt" belongs to parallel time (Foreman D review/parallel-time): the hook
    ACT_REMOTE lets that module decide (window.actRemoteHook(a) → a place key to walk to, or null = stay). */
 const ACT_REMOTE={"Cài tai mắt":1,"Sai cung nữ đi dò la":1,"Nghe ngóng chung":1,"Mời thái y bắt mạch":1};
 window.ACT_REMOTE=ACT_REMOTE;
 window.ACT_PLACE=ACT_PLACE;
-function actPlace(a){try{if(!a)return null;if(ACT_REMOTE[a.n])return typeof window.actRemoteHook==="function"?window.actRemoteHook(a)||null:null;const k=ACT_PLACE[a.n];if(!k)return null;if(k==="kn"&&!(typeof qOn==="function"&&qOn()))return null;return k}catch(e){return null}}
+function actPlace(a){try{if(!a)return null;if(ACT_REMOTE[a.n])return typeof window.actRemoteHook==="function"?window.actRemoteHook(a)||null:null;const k=ACT_PLACE[a.n]||ACT_PLACE_ID[a.id]||(/^Xin ban hôn cho /.test(a.n||"")?"home":null);if(!k)return null;if(k==="kn"&&!(typeof qOn==="function"&&qOn()))return null;return k}catch(e){return null}}
 window.actPlace=actPlace;
 function actMove(k){try{if(!k||!S||S.dead||S.out||S.confined||S.place===k)return false;if(typeof isSrv==="function"&&isSrv())return false;
  if(typeof accGrant==="function")accGrant(S,k);const u=used,q=window.__accSilent;window.__accSilent=1;try{used=0;goTo(k)}finally{used=u;window.__accSilent=q}

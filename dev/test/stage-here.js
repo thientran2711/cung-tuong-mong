@@ -10,7 +10,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
  await p.addInitScript(()=>{window.__toastKeep=1;let a=+(new URLSearchParams(location.search).get('seed')||123456789);Math.random=function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}});/* seeded: the same run every time */
  const g=await D.openHost(p,srv.url);await g.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function');await sleep(1500);
  await g.evaluate(()=>{window.__forceOrigin='thd';SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;S.buoi=0;used=0;S.rank=Math.max(S.rank,2);render();
-  const s=document.createElement('style');s.textContent='#kroul,#kload,.kmov,.kmfls,#kpodov,#dawn,.krbox{display:none!important}';document.head.appendChild(s);
+  const s=document.createElement('style');s.textContent='#kroul,#kload,#klife,.kmov,.kmfls,#kpodov,#dawn,.krbox{display:none!important}';document.head.appendChild(s);
   window.__chips=[];const o=window.kitLineToast;window.kitLineToast=function(t){window.__chips.push(t);return o.apply(this,arguments)}});
  await sleep(1200);
  const ALL=await g.evaluate(()=>[...document.querySelectorAll('#tabs [data-tab]')].map(b=>b.dataset.tab));
@@ -33,13 +33,17 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
     const gm=document.querySelector('.game').className;const pn=document.getElementById('panel');const pr=pn&&pn.getClientRects().length?pn.getBoundingClientRect():null;
     const alert=!!document.querySelector('#krail [data-rail="closing"]');
     return{t,tab,place:S.place,imgOk:!!wantImg&&im.indexOf(wantImg)>=0,roomImg:k!=="home"&&im.indexOf(SCIMG.home||'@@')>=0,stageVis:vis,panelVis:!!pr&&pr.width>40,
-     spread:kitView().pages===2,maptab:/maptab/.test(gm),alert,chips:window.__chips.slice(),cs:S.closeSeen,sc:JSON.stringify(stClose()),tst:(()=>{const t=document.getElementById('ktbtoast');return !t||t.classList.contains('out')?'none':getComputedStyle(t).visibility==='hidden'?'waits':'shown'})(),cover:(()=>{const t=document.getElementById('ktbtoast');if(!t||!t.getClientRects().length||t.classList.contains('out')||getComputedStyle(t).visibility==='hidden')return '';const T=t.getBoundingClientRect();const C=kitToastCol();const f=[];if(T.left<C.left-1||T.right>C.right+1||T.top<C.top-1||T.bottom>C.bottom+1)f.push('outside-column');const n=kitToastKeepRects(t).filter(r=>r.left<T.right-1&&r.right>T.left+1&&r.top<T.bottom-1&&r.bottom>T.top+1).length;if(n)f.push(n+' kept');return f.join(',')})(),md:!document.getElementById("modal").hidden,ttl:!document.getElementById("title").hidden}},[k,t]);
+     spread:kitView().pages===2,maptab:/maptab/.test(gm),alert,chips:window.__chips.slice(),cs:S.closeSeen,sc:JSON.stringify(stClose()),tst:(()=>{const t=document.getElementById('ktbtoast');return !t||t.classList.contains('out')?'none':getComputedStyle(t).visibility==='hidden'?'waits':'shown'})(),cover:(()=>{const t=document.getElementById('ktbtoast');if(!t||!t.getClientRects().length||t.classList.contains('out')||getComputedStyle(t).visibility==='hidden')return '';const T=t.getBoundingClientRect();const C=kitToastCol();const f=[];if(T.left<C.left-1||T.right>C.right+1||T.top<C.top-1||T.bottom>C.bottom+1)f.push('outside-column');const n=kitToastKeepRects(t).filter(r=>r.left<T.right-1&&r.right>T.left+1&&r.top<T.bottom-1&&r.bottom>T.top+1).length;if(n)f.push(n+' kept');
+     /* r3 (ROOT-56): PEOPLE, measured here on its own (not through the kit list): figure box top 60 %, face chips, portrait frames (whole) */
+     let pp=0;for(const e of document.querySelectorAll('#mefig,.figimg,.tok,.pface,.kfr,.kpor')){if(!e.getClientRects().length||e.closest('#krail'))continue;const cs=getComputedStyle(e);if(cs.visibility==='hidden'||+cs.opacity===0)continue;const r=e.getBoundingClientRect();if(r.width<2||r.height<2)continue;const bot=e.matches('#mefig,.figimg,.tok.fig')?r.top+r.height*.6:r.bottom;if(r.left<T.right-1&&r.right>T.left+1&&r.top<T.bottom-1&&bot>T.top+1)pp++}if(pp)f.push(pp+' person');return f.join(',')})(),
+     rail:[...document.querySelectorAll('#krail [data-rail]')].map(b=>b.dataset.rail).join(' '),md:!document.getElementById("modal").hidden,ttl:!document.getElementById("title").hidden}},[k,t]);
    r.case=lab;r.want=want;
    /* faults: stage picture is not her place; room picture while away; two-page screen: a panel tab without the stage beside it; alert wrong (only where the stage is visible) */
    r.fault=[];if(!r.imgOk)r.fault.push('img');if(r.roomImg)r.fault.push('room');
    if(r.spread&&!r.maptab&&r.panelVis&&!r.stageVis)r.fault.push('nostage');
    if(r.stageVis&&!r.maptab&&r.alert!==want)r.fault.push('alert');
-   if(r.cover)r.fault.push('toast-cover');/* r2: the toast never covers a tab row, the place name or a figure name (KIT §42.2 KEEP-CLEAR) */
+   if(r.cover)r.fault.push('toast-cover');
+   if(r.tst==='waits'&&r.stageVis&&!/closing|tnote/.test(r.rail))r.fault.push('collapse-no-rail');/* r3: no free spot → the rail «!» carries it *//* r2: the toast never covers a tab row, the place name or a figure name (KIT §42.2 KEEP-CLEAR) */
    if(r.fault.length)bad++;rows.push(r);
    if(out&&(t==='act'||t==='rel'))await p.screenshot({path:`${out}/${dev}-${lab}-${t}.jpg`,type:'jpeg',quality:80});
   }
