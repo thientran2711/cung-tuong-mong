@@ -65,3 +65,20 @@ Code state: branch review/book-figsize @ a302d5e6 contains the REJECTED per-page
 
 ## HANDOVER (context ~near ceiling; main opens the successor)
 START_CTX ~0 %; now above START_CTX+25 %. Everything above is pushed (branch a302d5e6, handover report). Open: owner/MAIN decision A/B above, then revert per-page column and re-scan, before|after full-page shots of her page / HH / pink QP / widest robe on Fold + iPad, CDN img/_review/book-figsize/ (delete after verdict).
+
+# r5 (worker, successor; MAIN s43) — branch review/book-figsize-r5 @ 1c4579d4 (from live main)
+PRIORITY #1 CHECK: OD L934 + L949 + 18/11 ~03:35Z + ~03:45Z UTC (verbatim read); main jsl.js kitBookFigClamp / jkit kitBookFig; r4 code (per-page column, a302d5e6) NOT on main = nothing to revert; no other review/* touches it.
+## What (KIT 34.6, only jsl.js kitBookFigClamp + KIT.md)
+- ONE layout: --porf = .36 of inner width (unchanged) = same x/width on every page.
+- Body = Hc x .935 for EVERY adult (women and men: the +7 % men factor is not applied on a book page, it pushed hats above the column). Children keep the child factor (kid(age), smaller). Nobody is shrunk to fit.
+- Wider than the column (robe, train, sleeves, child art, silhouette) = CROPPED at the column edge (.kbk-por overflow:hidden), centred on the body core cl..cr; narrower = live place (left edge).
+- Emperor = exactly as live (fitted by painted width, no crop; his sizes identical before/after).
+- Gap code no longer lowers a tall figure past the column floor (feet were cut).
+## Scan dev/test/book-figsize-scan.js (+cases.json, 37 kinds incl. SELF/silhouettes/kids) Fold 755x1000 + iPad 1180x820 : column x/width identical (0), adult body spread 0.01 % (Fold 741.1..741.2, iPad 589.7..589.8), kids 629.6 / 501.0 (.85 of adult), face band crop 0, text overlap 0, feet cut 0, aspect +-1 %, crown cut <= 3.6 px (widest maid hat only). 1366x1024, 412x1058, 390x844 NOT scanned (time).
+BEFORE (main) her figure 481.8 (wide cloak) / 640 (slim); Hoang hau 671; wide pink 412; kid 349; spread 31 %.
+## OPEN POINT for owner/MAIN
+"Her live p.5 body" moved with her outfit on main (the live rule shrank wide outfits to the column: 482..642). Now nobody is shrunk, so the standard is the kit rule = 0.935 x column height (Fold 741 / iPad 590) and her own figure is that size too (bigger than her live shot by 15..54 %). If she wants the smaller live size instead, lower the .935 in kitBookFig (one number).
+Chip "?": sits at the right edge of the column; with the centred crop a wide crown can touch it (pink maid: tassels) — LOOK.
+## Shots (CDN, delete after verdict; wipe: cdn_sync.py --wipe-review book-figsize) LOOKED 3x
+https://ctm-img.victoria-tntt.workers.dev/img/_review/book-figsize/r5-<dev>-<name>.jpg , dev fold|ipad, name SELF | fig-thaihau-1 (Hoang hau) | fig-consort-c09-ty6-a36 | fig-emperor-a18-1 | fig-kid-p16-a51 (child art) | fig-maid-m50-t6-a51 (widest robe, pink). Left half BEFORE main, right AFTER; column at the same x in every AFTER. Pages = real kitBook renderer with real catalog figures (no live save in sandbox).
+~90% xong / ~80% chơi được.
