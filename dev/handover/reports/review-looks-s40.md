@@ -29,3 +29,10 @@ Tests on 347a8ee8: quickcheck PASS (278 s; core gates incl. one-core-guard/rules
 Looks: hoa-dien test shots Fold 755x1000@2 and iPad 1180x820@2 of the stage with hoa dien placed, forehead zoomed 3x: crisp sprite edges, no blob, no petal drawn over it, small at rank size (11.5 %). Previous looks sheets (lips, ladder, glow) still hold after this merge only through the tests above (no new look code touched).
 CDN with landing: same 37 files (img/mk-fit/consort-c01..c32.json, player-look1..4.json, img/toil-fit2.json); hoa-dien adds no CDN JSON.
 Scratch shots only, none in git/CDN.
+
+---
+# r4 — hoa-dien r3b on live main 62a6846f — PASS f986ff6a (branch review/hoa-dien-r3c)
+PRIORITY #1 CHECK: OD 18/11 hoa dien rulings | main 62a6846f (contains looks f6ee11b1) | review/hoa-dien-r3b 8b2468cb | claims MAIN s42.
+review/hoa-dien-r3c f986ff6a = origin/main 62a6846f + hoa-dien r3b 8b2468cb only (main is an ancestor). Only generated assets.json/index.html/sw.js conflicted (main side taken, rebuilt); no source conflict. Supersedes 347a8ee8 (that one carried looks already landed as f6ee11b1).
+Tests: quickcheck PASS (310 s, core gates PASS, old save ok, perf render 149/154); one-core x4 PASS; hoa-dien.js Fold mouse, Fold touch, iPad ALL OK; toilette, makeup-lux, makeup-theme Fold + iPad PASS; luxury PASS; toil-tease 25/25; toil-overlay, toil-react, toil-draw PASS; coop-toil-look 29/29. Rulings (up .38, size by rank 11.5/12.5/13.5, sat .85 only, drop TEMP, gradients kept) and the forehead 3x look as in r3 (same hoa-dien code).
+No new CDN files from hoa-dien (the 37 looks JSON are already live).
