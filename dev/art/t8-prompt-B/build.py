@@ -856,6 +856,8 @@ def spec5pose(o,c,t):
     # FACING (FIGURE_GATE D.3a, owner 18/11 ~22:10Z): never back turned / looking back over the shoulder -> skip to the next pose of the same list ((i+t)%6, (i+t+1)%6 ...)
     # CALM WITH RANK AND AGE (APPROVED_PROMPTS rule 3): t6-t8 and a51/a65 never dance / twirl / skip / swirl -> same skip
     _bad=[r"look(?:ing)? back"]+([r"twirl",r"skipping",r"dance",r"swirl",r"light turn"] if (t>=6 or AGE in ("a51","a65")) else [])
+    # N2 r10b (ROOT-33, owner A0 rule 3): Nữ đế (--state nude) = top rank -> also skip walking / mid-step / turning / skirt-lifting / hairpin-adjusting frames (only affects --state nude)
+    if globals().get("STATE")=="nude": _bad+=[r"walking",r"mid-step",r"turning",r"lifting her skirt",r"adjusting"]
     for _k in range(6):
         raw=SPEC5_POSES[tr][(i+t-1+_k)%6]
         if "{prop}" not in raw: raw=SPEC5_ADAPT[raw]
@@ -931,7 +933,8 @@ if __name__=="__main__":
             _o=_o.replace(_old8,"a FULL tall imperial crown, clearly taller and wider than a noble consort's crown, "+HEAD[_k]+";").replace(_old7,HEAD[_k]+".")
     if NUDE2: _o=nude2(_o,a[0],NUDE2)
     # owner 18/11 ~22:55Z (FIGURE_GATE A0 REFERENCES): ROYAL cases (--trieu N>=6, --state nude, --state bd6) = 3 images, image 3 = royal-yellow swatch. One flag-independent sentence; every other output byte-identical.
-    if (TRIEUN is not None and TRIEUN>=6) or STATE in ("nude","bd6"):
+    # N2 r10b (ROOT-33): bd6 keeps swatch as image 3 but its robe is teal with no royal-yellow part (FIGURE_GATE C8 has no yellow rule for Bắc Địch Quý phi) -> no image-3 sentence for bd6
+    if (TRIEUN is not None and TRIEUN>=6) or STATE=="nude":
         _r=" Image 3 is only a colour reference for the royal yellow, never copy anything but its colour; the royal yellow in the robe is exactly that colour."
         assert _o.count(END)==1 and _o.endswith(END),"END not at end"
         _o=_o[:-len(END)]+_r+END
