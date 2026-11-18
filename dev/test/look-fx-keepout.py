@@ -33,10 +33,14 @@ def overlaps(scar, v, W, H, margin=0):
 new_rows = {}; rows = 0; ob = 0; oa = 0; byk = {'por': [0, 0, 0], 'fig': [0, 0, 0]}
 for k, v in vf.items():
     W, H = size(k); vx, vy, vw, vh = box_px(v, W, H)
-    for nudge in (0, .01, .02, .03, .04, -.01, -.02):   # a rotated row that still touches a grown ellipse slides down the cheek (rare: 1 row at the pad 1.2 setting)
+    for nudge in (0, .01, .02, .03, .04, -.01, -.02, -.03, -.04, .05, .06):   # a rotated row that still touches a grown ellipse slides down the cheek (rare: 1 row at the pad 1.2 setting)
         l = vx + cheek[0] * vw; t = vy + (cheek[1] + nudge) * vh   # box = cheek [left, top, w, h] of the veil row (BAL.looks.keep.cheek)
         new_rows[k] = [round(l / W * 100, 2), round(t / H * 100, 2), round(cheek[2] * vw / W * 100, 2), round(cheek[3] * vh / H * 100, 2), round(v[4] + cheek[4], 1)]
         if not overlaps(new_rows[k], v, W, H): break
+    else:   # still touching a grown ellipse (very tilted row): shrink the box toward its top-left until clear
+        for f in (.9, .8, .7, .6, .5):
+            r = new_rows[k]; r2 = [r[0], r[1], round(r[2] * f, 2), round(r[3] * f, 2), r[4]]
+            if not overlaps(r2, v, W, H): new_rows[k] = r2; break
     b = overlaps(old[k], v, W, H) > 0; a = overlaps(new_rows[k], v, W, H) > 0; g = byk[k[:3]]; g[0] += 1; g[1] += b; g[2] += a; rows += 1; ob += b; oa += a
 new = new_rows
 print(f'SCRATCH rows checked {rows}: overlapping keep-out OLD {ob} -> NEW {oa}')

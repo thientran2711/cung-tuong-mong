@@ -18,7 +18,7 @@ const {chromium}=require('playwright');const D=require('./lib/device');const fs=
    kitFace=function(q){const f=kf0.apply(this,arguments);if(q===S&&f&&f.src){const h=Object.assign({},f,{src:String(f.src).replace(/[^/]*$/,por)});if(f.__kp)h.__kp=f.__kp;return h}return f};
    kitFigOf=function(q){const s=kg0.apply(this,arguments);return q===S?String(s).replace(/[^/?]*(\?.*)?$/,fig):s};window.__lfw.por=por;window.__lfw.fig=fig};
   window.__lfw.clear=()=>{S.ill=null;S.pz=null;S.rash=null;S.slap=null;S.scar=null;S.sc70=null;S.lk=null;S.stain=null;try{const t=toilToday(S);if(t)delete t.lk}catch(e){}};
-  window.__lfw.mark=(m,lv)=>{const c=window.__lfw.clear;c();try{toilAuto()}catch(e){}const T=S.toilette;if(T&&!T.makeup){T.makeup=true;T.look='dep'}
+  window.__lfw.mark=(m,lv)=>{const c=window.__lfw.clear;c();try{toilAuto()}catch(e){}const T=S.toilette;if(T){T.makeup=false} /* marks sheets: makeup OFF so no blush/lip layer is mixed in (the auto toilette gave a random makeup per run: pink glow on the cheek / lip corner in some runs) */
    if(m==='thuydau'||m==='daumua')S.ill={k:m,st:lv,known:true};
    else if(m==='poxscar'){S.scar={sev:lv,d:5,need:3,pg:0,veil:0,tr:0,cure:0,by:null,at:wk(),how:'daumua',known:true}}
    else if(m==='cao'){S.scar={sev:lv,d:5,need:3,pg:0,veil:0,tr:0,cure:0,by:null,at:wk(),how:'test',known:true,known:true}}
