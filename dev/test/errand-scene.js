@@ -68,6 +68,15 @@ const W=+W0||755,H=+H0||1000,tag=`${W}x${H}`;const SLOW=+process.env.SLOW||6;con
  const ot=await p.evaluate(async()=>{document.querySelector('.kmerr-bang').click();await new Promise(r=>setTimeout(r,1500));const md=document.getElementById('modal');const dlg=md&&md.querySelector('.dlg');return{modal:!!(md&&!md.hidden),txt:md?md.innerText.slice(0,400):'',maid:S.maid.name,hasMaid:!!md&&md.innerText.includes(S.maid.name),nLines:md?md.innerText.split('\n').filter(x=>x.trim().length>12).length:0,h:dlg?dlg.getBoundingClientRect().height:0,bang:document.querySelectorAll('.kmerr-bang').length}});
  ck('on-stage runner: tap «!» opens the report, chip gone',ot.modal&&ot.bang===0,ot);ck('report names the person who went (law 6b) and carries the result lines',ot.hasMaid&&ot.nLines>=2,ot);await p.screenshot({path:`${OUT}/onstage-5report-${tag}.jpg`,type:'jpeg',quality:70});
  await p.evaluate(()=>{const md=document.getElementById('modal');if(md)md.hidden=true;try{kmReset()}catch(e){}});
+ /* receiver side: a PTIME stub with ONE order → the ONE «tin» icon shows the badge, the panel lists the order row + «Nghe lệnh», its button calls PTIME.answer */
+ await clean();await p.evaluate(()=>{try{kmReset()}catch(e){}});
+ R.ord=await p.evaluate(async()=>{const Wt=t=>new Promise(r=>setTimeout(r,t));S.erra=[];Q.length=0;window.__ans=null;
+  window.PTIME={on:()=>true,now:()=>bid()*BAL.time.khac+used,when:K=>'khắc '+K,orders:()=>[{id:'o1',pid:'cnvOrd',byNm:'Chưởng sự cô cô',title:'Lệnh của Chưởng sự cô cô',due:bid()*BAL.time.khac+used+2}],ordWhen:o=>'trả lời trước khắc 3',answer:id=>{window.__ans=id;return true}};
+  render();await Wt(400);const it=kitStatusIcon.items().includes('tin');const badge=!!document.querySelector('.krail .kbadge');
+  kitStatusIcon.open('tin');await Wt(1200);const md=document.getElementById('modal');const txt=md?md.innerText:'';
+  const btn=[...document.querySelectorAll('#modal button,#modal .opt')].find(b=>/Nghe lệnh/.test(b.innerText));if(btn)btn.click();await Wt(600);
+  const r={txt:txt.slice(0,300),it,badge,row:/Chưởng sự cô cô/.test(txt)&&/có lệnh cho (ngươi|ta)/.test(txt),btn:!!btn,ans:window.__ans,has:kitStatusIcon.has('tin')};delete window.PTIME;const md2=document.getElementById('modal');if(md2)md2.hidden=true;Q.length=0;render();return r});
+ ck('receiver side: PTIME order → badge + row + «Nghe lệnh» → PTIME.answer',R.ord.it&&R.ord.badge&&R.ord.row&&R.ord.btn&&R.ord.ans==='o1'&&R.ord.has,R.ord);
  /* runner NOT on the stage in view (crowded "+N" / other swipe page): still drawn by kitErrandSpot */
  await clean();
  const crowd=await p.evaluate(async(SLOWK)=>{const Wt=t=>new Promise(r=>setTimeout(r,t));Q.length=0;S.buoi=0;used=0;S.erra=[];ERR.slow=SLOWK;render();await Wt(1200);

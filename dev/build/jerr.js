@@ -57,7 +57,13 @@ function errTick(){if(errOn()||!S||S.dead)return;const now=errNow();let ch=false
 /* the report panel: ONE implementation for both adapters. kitPanel info spec: subject = the person who REALLY went and came back (law 6b), facts = what she learned
    (the act's own log lines), sections = the gain / loss chips (kit chips), «Đợi tin» only with the parallel-time core */
 function errRead(t){try{t.read=1;if(errOn()&&Array.isArray(S.away)){const a=S.away.find(x=>x&&x.id===t.id);if(a)a.read=1}}catch(e){}}
-function errPanel(){const N=errNews(),W=errMine();const facts=[],sec=[];let subj=null;
+/* RECEIVER SIDE (OD 18/11 ~21:15Z): orders / requests that wait for HER as notices (jptime S.ordQ) are read through the parallel-time reader API
+   (PTIME.orders / ordWhen / answer) — this file owns the ONE «tin» panel, so their badge + rows + «Nghe lệnh / Xem lời nhờ» buttons live here too. No PTIME = none. */
+function errOrders(){try{return window.PTIME&&typeof PTIME.orders==="function"?(PTIME.orders()||[]):[]}catch(e){return[]}}
+function errOrdIs(o){return !!o&&(o.pid==="cnvOrd"||o.pid==="err")}
+function errOrdWhen(o){try{return PTIME.ordWhen(o)}catch(e){return o&&o.due!=null?"trả lời trước "+errWhen(o.due):""}}
+function errPanel(){const N=errNews(),W=errMine(),OQ=errOrders();const facts=[],sec=[];let subj=null;
+ for(const o of OQ)facts.push(`${o.byNm} ${errOrdIs(o)?"có lệnh cho ngươi":"có lời nhờ"} · ${errOrdWhen(o)} (quá hạn: coi như từ chối).`);
  for(const t of N){const r=t.rep||{},p=errPerson(t.who);if(!subj&&p)subj=p;
   facts.push(r.t||`${t.nm} đã về.`);
   /* gain / loss chips right under the title line (kit chips, visible without scrolling); the lines below are only what she learned */
@@ -65,10 +71,11 @@ function errPanel(){const N=errNews(),W=errMine();const facts=[],sec=[];let subj
   (r.L||[]).forEach(l=>facts.push(l));errRead(t)}
  for(const t of W){const p=errPerson(t.who);if(!subj&&p)subj=p;facts.push(`${t.nm} đang ${t.lbl||"đi việc"} · về ${errWhen(t.due)}.`)}
  if(!facts.length)facts.push("Không có ai đang đi việc.");
- const opts=[];try{if(errOn()&&PTIME.waitOk&&PTIME.waitOk()){const K=PTIME.next();opts.push({n:"Đợi tin",x:`ngồi chờ đến ${errWhen(K)}, khi người được sai trở về`,fx:{},go:()=>{setTimeout(()=>PTIME.wait(),0)}})}}catch(e){}
+ const opts=OQ.map(o=>({n:errOrdIs(o)?"Nghe lệnh":"Xem lời nhờ",x:`${o.title||("Lệnh của "+o.byNm)} · ${errOrdWhen(o)}, quá hạn coi như từ chối`,fx:{},go:()=>{setTimeout(()=>{try{PTIME.answer(o.id)}catch(e){console.error(e)}},0)}}));
+ try{if(errOn()&&PTIME.waitOk&&PTIME.waitOk()){const K=PTIME.next();opts.push({n:"Đợi tin",x:`ngồi chờ đến ${errWhen(K)}, khi người được sai trở về`,fx:{},go:()=>{setTimeout(()=>PTIME.wait(),0)}})}}catch(e){}
  setTimeout(()=>errSync(),0);const sp={title:"Tin chờ người sai đi",facts,sections:sec,opts};if(subj)try{const f=kitFace(subj);if(f)sp.subject=Object.assign({},f,{rk:typeof f.rk==='string'?f.rk:undefined})}catch(e){}return sp}
 function errIcon(){try{if(typeof kitStatusIcon==="undefined")return;kitStatusIcon.set("tin",{title:"Người được sai đi",glyph:"信",order:30,
- show:()=>!!(S&&!S.dead&&(errMine().length||errNews().length)),busy:()=>!!(S&&errMine().length&&!errNews().length),badge:()=>!!(S&&errNews().length),panel:errPanel});kitStatusIcon.refresh()}catch(e){console.error("jerr icon",e)}}
+ show:()=>!!(S&&!S.dead&&(errMine().length||errNews().length||errOrders().length)),busy:()=>!!(S&&errMine().length&&!errNews().length&&!errOrders().length),badge:()=>!!(S&&(errNews().length||errOrders().length)),panel:errPanel});kitStatusIcon.refresh()}catch(e){console.error("jerr icon",e)}}
 function errOpen(){try{if(typeof kitStatusIcon!=="undefined")kitStatusIcon.open("tin")}catch(e){console.error(e)}}
 /* the gate: run an errand action; in the fallback the action runs ONCE as before (no double charge, no deferred report), then the task is recorded */
 function errAdd(sv,spec,L,dl){const t0=errNow();/* fallback: away n khắc counted from the END of her order (the act's own khắc already paid); jptime counts from the tap with its own o/n rows */const w=ERRV[spec.k]||ERRV_DEFAULT;const t={id:"e"+(++ER.n)+"-"+t0,who:errId(sv),nm:sv.name,k:spec.k,lbl:"đi "+w,t0,due:t0+errN(spec.k),back:0,read:0,rep:{t:`${sv.name} ${w} trở về`,ok:null,L:L.length?L:[`${sv.name} đã về.`],d:dl||[]}};
