@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"cd525600+","t":"2026-11-18T16:37Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)","b":"8436d1edcec9","h":[{"s":"ebf25660+","t":"2026-11-18T15:29Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…"},{"s":"9f9c6c2b+","t":"2026-11-18T14:26Z","c":"shown-odds-one-path r1: plant on the spot is done in person (actCtx x.here, no sent-servant pen); Vì sao names spy knowledge (whyKnow); tes…"},{"s":"aa997f3c+","t":"2026-11-18T13:46Z","c":"look-fx r13: index.html / sw.js rebuilt from merged sources"},{"s":"4475ea24+","t":"2026-11-18T12:33Z","c":"grand-endings-engine: site rebuilt (index.html / sw.js / assets.json) after fix 4 + main merge"},{"s":"68cbbb28+","t":"2026-11-18T12:00Z","c":"review life-preload-fu r2v: no half-drawn / empty figure while the HD twin comes (whole group: every fig-* img)"},{"s":"a8036600+","t":"2026-11-18T12:06Z","c":"Rebuild index.html/sw.js after merging origin/main"},{"s":"3f45eda9+","t":"2026-11-18T11:52Z","c":"steal-minigame FIX 1: PEND flag (chooseM renders before the game opens: the stale-'mg' reset no longer cancels a real async game); KIT.md §…"},{"s":"19a23498+","t":"2026-11-18T11:03Z","c":"review poison-road r2 (ONE CORE OD:L1267): the weak-Sức odds rule had two sources — j9 odA typed suc\u003c30 → −15 while the poison card 'Vì sao…"},{"s":"421a2362+","t":"2026-11-18T11:04Z","c":"live-test-reds r1: emotion-acts scold/scoldlive pin the ODDS CAP roll (act failed softly ~5 %, no pick queued)"},{"s":"d795be81+","t":"2026-11-18T10:34Z","c":"residence-seats-r2: a consort out of the palace gives up her side-hall room (palFix); jworld đại xá re-houses at once"}]};
+window.CTM_BI={"s":"3e118ba9+","t":"2026-11-18T17:05Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)","b":"7a1ce69953fd","h":[{"s":"0351e140","t":"2026-11-18T16:48Z","c":"shop-panel: «Để ta xem» outside option, 3-column Mua/Bán grid, smallest picture strip, test"},{"s":"ebf25660+","t":"2026-11-18T15:29Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…"},{"s":"9f9c6c2b+","t":"2026-11-18T14:26Z","c":"shown-odds-one-path r1: plant on the spot is done in person (actCtx x.here, no sent-servant pen); Vì sao names spy knowledge (whyKnow); tes…"},{"s":"aa997f3c+","t":"2026-11-18T13:46Z","c":"look-fx r13: index.html / sw.js rebuilt from merged sources"},{"s":"4475ea24+","t":"2026-11-18T12:33Z","c":"grand-endings-engine: site rebuilt (index.html / sw.js / assets.json) after fix 4 + main merge"},{"s":"68cbbb28+","t":"2026-11-18T12:00Z","c":"review life-preload-fu r2v: no half-drawn / empty figure while the HD twin comes (whole group: every fig-* img)"},{"s":"a8036600+","t":"2026-11-18T12:06Z","c":"Rebuild index.html/sw.js after merging origin/main"},{"s":"3f45eda9+","t":"2026-11-18T11:52Z","c":"steal-minigame FIX 1: PEND flag (chooseM renders before the game opens: the stale-'mg' reset no longer cancels a real async game); KIT.md §…"},{"s":"19a23498+","t":"2026-11-18T11:03Z","c":"review poison-road r2 (ONE CORE OD:L1267): the weak-Sức odds rule had two sources — j9 odA typed suc\u003c30 → −15 while the poison card 'Vì sao…"},{"s":"421a2362+","t":"2026-11-18T11:04Z","c":"live-test-reds r1: emotion-acts scold/scoldlive pin the ODDS CAP roll (act failed softly ~5 %, no pick queued)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -38022,6 +38022,11 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){for(const k in KSHO
 .kshdn{font-family:var(--display);font-size:1.05rem}
 .kshds{font-size:.8rem;color:var(--ink2,#6a5040)}
 /* kv:(min-width:1000px) */.kshg{--kshsz:124px}
+/* review/shop-panel (owner 18/11): the buy / sell panel is ALWAYS 3 columns (seller figure stays left, tabs Mua | Bán on top, the grid scrolls down); other 28.13e grids (pick, works) keep auto-fill */
+.kshop[data-kshop] .kshg{grid-template-columns:repeat(3,minmax(0,1fr))}
+.kshop[data-kshop] .kshc .kbtn.kshgo{padding:0 3px;font-size:.74rem}
+/* the grid always needs to scroll, so the scene picture takes the kit's smallest strip (KIT_SIZE.pic.NS, owner 18/11 16:10Z: a big picture only when the content under it fits without scrolling) */
+html body #modal .dlg.kshopd.kdper>#mb>.kdlgart.kdpban>.ksart{height:${window.KIT_SIZE?KIT_SIZE.pic.NS.h:56}px!important}
 /* short landscape screens (phone landscape): the seller's line is dropped, "Ta có N bạc" sits left of the tab row, smaller pictures → a whole tile row shows */
 
 `;document.head.appendChild(st)})();
@@ -38061,7 +38066,7 @@ function kitShopNvp(){const c=S.court&&S.court.ped;let nm=c&&c.name?c.name:"";
    eff:kitShopEff(k),rows:kitItemRows(k),stock:5,have:()=>S.inv.filter(e=>e.k===k&&!e.h).length,
    onBuy:(x,q)=>{apply({bac:-x.price*q});for(let i=0;i<q;i++)S.inv.push({k});log(`Mua ${it.n}${q>1?` ×${q}`:""}. Bạc -${x.price*q}`)}}});
  return kitShop({key:"nvp",title:"Nhờ thái giám mua đồ",carry:9,
-  info:(()=>{const xc=kSay({srv:"m"},S,"{goi}")/* one address core (jvoice) */;return `<p>Thái giám Nội vụ phủ bưng vào một khay đồ mua từ ngoài cung, dâng lên cho ta chọn: “Đồ mới mang vào, xin ${xc} xem qua.”</p>`})(),
+  info:"",
   stage:[{__fig:"https://ctm-img.victoria-tntt.workers.dev/img/fig-eunuch-ndp-tray.webp",__cap:nm,__role:"Thái giám Nội vụ phủ",age:28,sex:"m"}],items,money:()=>S.bac,
   sell:{items:kitShopSellItems,empty:"Chưa có gì để bán. Đồ thêu, tranh, chữ… làm ra khi luyện tài nghệ (mục Tài nghệ); đồ trong rương Tư trang cũng bán được."}})}
 if(typeof invAct==="function"){const ia0=invAct;invAct=function(a){if(a==="shop"&&S&&!S.dead&&!Q.length&&typeof kitShop==="function"){try{kitShopNvp();render();return}catch(e){console.error("kitShop",e)}}return ia0.apply(this,arguments)}}
@@ -62702,7 +62707,7 @@ const AD_ACTNAME={"Bỏ độc vào trà nàng":"poison","Bỏ xạ hương vào
   if(p.kind==="ty")A=A.filter(a=>a&&a.n!=="Học hỏi y lý");
   if(p.kind==="fallen")A=A.filter(a=>a&&a.n!=="Đưa cơm áo");
   if(p.kind==="maid"&&S.maid){const i=A.findIndex(a=>a&&a.n==="Tâm sự");if(i>=0)A[i]={n:"Trò chuyện với cung nữ",o:100,inner:1,w:{},x:`lòng +${BAL.ag.cx2.maidTalk.w.maid} · có khi nghe được tin`,go:()=>{maidTalkDo(S)}}}
-  if(p.kind==="peddler")A=[{n:"Xem hàng Nội vụ phủ",o:100,x:`hàng mua từ ngoài cung${adRare()?" · tuần này có một món hiếm":""} · không tốn khắc`,adShop:1}];
+  if(p.kind==="peddler")A=[{n:"Để ta xem",o:100,x:`hàng mua từ ngoài cung${adRare()?" · tuần này có một món hiếm":""} · không tốn khắc`,adShop:1}];
   if(p.kind==="rival"||p.kind==="hh")A=A.map(a=>{const k=a&&AD_ACTNAME[a.n];return k&&ACT[k]&&ACT[k].n?Object.assign({},a,{n:ACT[k].n}):a});
   A=A.map(a=>{const n=a&&adDoorOfPop(p.kind,a.n);return n&&adDoorUsed(n)?Object.assign({},a,{lock:true,t:(AD_DOOR[n][2]==="buoi"?"đã làm buổi này":(AD_DOOR_WHY[p.kind]||"đã làm tuần này"))}):a})
  }catch(e){console.error("jact talkOpts",e)}return A}})();
@@ -74815,7 +74820,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="8436d1edcec9";window.CTM_BUILD=BUILD;
+const BUILD="7a1ce69953fd";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
