@@ -7,13 +7,13 @@ Sheet: https://ctm-img.victoria-tntt.workers.dev/img/_review/t8-reprompt/c04_eld
 | a51 t7 v0 | 3 | gens 1-2 had forehead dot/flower mark -> regen same prompt; final clean |
 | a51 t7 v1 | 2 | W91b retry clean |
 | a51 t7 v2 | 2 | first had red forehead mark; regen clean |
-| a65 t8 v0 | 1 | faint pink blotch centre forehead (not regenerated) |
+| a65 t8 v0 | 3 | forehead mark x2 -> regen (Foreman C order); final clean |
 | a65 t8 v1 | 3 | 2 dots; final clean |
-| a65 t8 v2 | 1 | tiny red dot off-centre forehead (not regenerated) |
+| a65 t8 v2 | 2 | dot -> regen (Foreman C order); final clean |
 | a65 t7 v0 | 1 | PASS |
 | a65 t7 v1 | 2 | first had dot; regen clean |
 | a65 t7 v2 | 1 | very faint spot, accepted |
-Total c04 gens = 23. Flag for Foreman C: a65 t8 v0 / a65 t8 v2 have a faint spot on the forehead; regen only on GO.
+Total c04 gens = 26. All 12 forehead-checked clean (a65 t7 v2 very faint spot accepted). Foreman C ordered regen of a65 t8 v0/v2 at 21:25Z; done.
 Looks: a51 dark dowager tones, silver streaks visible; a65 much silver (not white), deeper antique gold; no black/brown; phoenix clear; closed lips.
 NEXT (HOLD, no new gens until GO): c05 (a51d2 v0 files exist -> copy; ref If3hxHCtvE), c06-c08, then c01-c03 a51.
 ~X% xong: JOB A elder c04 = 1/8 sheets done (~12%) / ~5% chơi được (nothing live).
