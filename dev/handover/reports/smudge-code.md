@@ -69,7 +69,15 @@ PRIORITY #1 CHECK: OD 17/11 ~23:30Z (smudge = CODE on the makeup layer, not Magn
 ## r15 (s41: pale vertical streaks left of the grey run at nặng)
 - Cause (inferred, not isolated): the 2 extra thin lash runs per eye at nặng (n 3) read as pale vertical bands beside the main run on the pink cheek. nặng is now ONE grey run per eye (BAL.looks.smuFx.tear.n [0,1,1,1]); grey run itself unchanged. Re-shot lod-3-face/stage/chip + look-* (CDN img/_review/smudge/); 3x zoom of both cheeks at lod-3-face: only the grey run, no pale streak.
 
-## HANDOVER (worker budget turn 30)
+## r16 (s41, owner 18/11 01:23Z + 02:20Z) — sha 7f4d2ad
+PRIORITY #1 CHECK: OD 18/11 ~01:23Z + ~02:20Z | main none (smudge not on main) | review/smudge-code 69243ef -> 7f4d2ad | claims smudge-code r16 (this session).
+- (1) nặng: ONE extra short grey run per face (BAL.looks.smuFx.tear.extra n [0,0,0,1], len .33 of the main, off .075u beside it, seeded eye), solid, same colour/strength as the main run, starts at the lash line. Zoom 3x both cheeks: reads as a short second trail beside the main run; no pale streak. Measure (big face, pixel diff vs no-smudge): 0 pixels lighter than skin in the eye-run area; the only lighter pixels (36-172, max +7..9 lum) are at the lip corner (lip smear), identical at 0/10/20.
+- (2) big faces: BAL.looks.smuFx.big {at 100, max 130, boost 1.25, steps 3} (face px on the makeup LOD scale; the big kitFaceZoom measures ~132): grey runs up to x1.25 darker via lkSmuStep (10+k steps through the same toilLodPass; small sizes still use toilLodStep). Big-face nặng: max darkening -58 -> -72 lum. Images big-off / big-on.
+- (3) knob BAL.looks.smuFx.tear.dark (x on grey-run opacity, all levels), default 1 = r15. Options (big face, Kiều diễm, big boost off so only the knob differs): CDN img/_review/smudge/lem-<nhe|vua|nang>-<0|10|20>.png (0 = r15 ref). Pick -> set tear.dark 1.1 / 1.2 (ONE line).
+- Blush/lip smear stay 20 %. Test: dev/test/smudge-code.js all checks true, 0 page errors; MODE=opt / MODE=big new (LOCALFIT=1 CLOSEUP=fig).
+- Samples + shots only on CDN img/_review/smudge/; wipe after verdict (cdn_sync.py --wipe-review smudge).
+
+## HANDOVER (worker budget turn 30, r15)
 - State: branch review/smudge-code 69243ef pushed, SẴN SÀNG KIỂM r15; all code in dev/build/jlooks.js (lkSmu* block + BAL.looks.smuFx), test dev/test/smudge-code.js (modes: default, PCT=5..20, MODE=lod, MODE=looks; env LOCALFIT=1 CLOSEUP=fig for the tuyet-glow face fig-consort-c11-tcold-a18).
 - Samples are shot on a scratch worktree /home/user/wt/sc = review/toil-looks5 + this branch (LOD + lip fit need toil-looks5; repo dev/art/mkfit, not the CDN table). Rebuild there: copy dev/build/jlooks.js + dev/test/smudge-code.js, bash dev/site/build_site.sh.
 - Open: size-aware LOD is a no-op on main until toil-looks5 lands; CDN img/mk-fit != repo dev/art/mkfit (c11 lips off with CDN); no makeup + crying = LOOK_DECALS B red eyes, not in this branch. After the verdict: python3 dev/site/cdn_sync.py --wipe-review smudge.
