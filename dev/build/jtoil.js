@@ -674,8 +674,77 @@ function toilMakeupSvg(file,look,col,noLip){const L=TOIL_LOOKS[look];const v=toi
  return TOIL_SVGC[key]="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(svg)}
 window.toilMakeupSvg=toilMakeupSvg;window.TOIL_FIT=TOIL_FIT;
 /* her face layers: skin light + blush (SVG, as approved) under the colour layer (lips, eyelids, brows painted from the picture itself, §60) */
+/* ---------- KHUYNH THÀNH SKIN SHINE v4 (owner 17/11 ~21:50Z, ~21:55Z, ~22:35Z): real dewy / glass-skin shine. The light CATCHES the skin's own high points (cheekbones, nose bridge + tip, brow bone, cupid's bow, chin, a touch on the forehead)
+   and those highlights shimmer softly IN PLACE, each breathing on its own slow phase (2 / 3 / 6 s), plus an occasional tiny soft glint on one high point. NO travelling band, NO global brightness pulse.
+   ONE kit-fx layer over the whole picture box (<i class="kff kglw">), built once per picture (canvas, cached): for each high point a small image of HER OWN skin luminance (skin pixels brighter than their surroundings = the picture's real specular,
+   lifted to a soft additive pink-white with a slight bloom, falling off to nothing); the face points are only READ to place the zones. Screen blend, CSS only (opacity breathing). Numbers: BAL.toil.glow (variant A subtle / B medium / C stronger). */
+Object.assign(BAL.toil,{glow:{use:"B",col:[255,242,238],/* pink-white, never yellow, never grey */tolG:.028,tolB:.04,tolK:2,/* skin hue tolerance (ratios g/r, b/r) */
+ v:{A:{amp:.4,bloom:.3,gl:0,glA:.6,rad:1,haze:.1,st:8,eye:1},B:{amp:.62,bloom:.5,gl:0,glA:.85,rad:1.1,haze:.18,st:13,eye:1},C:{amp:.85,bloom:.7,gl:0,glA:1,rad:1.2,haze:.27,st:19,eye:1}},/* haze = dreamy bloom on the skin, st = twinkling stars on the face, eye = catchlight twinkles in both irises (owner ~23:05Z: glam moment of the dress-up games) */
+ per:[2,4,8],/* s: breathing periods (all divide the 16 s sample loop) */auto:true,first:3000,gap:[8000,15000],burstMs:2600,/* owner 17/11 23:10Z: sparkle is NOT constant: calm glowing skin, then every 8-15 s (random) a 1-2 s twinkle burst (stars + iris catchlights), then it settles */scope:"face",stars:7,size:.72,/* star + iris-twinkle size x (owner 18/11 00:47Z: grains a little smaller than v7 = 1) *//* stars per burst, one in each of this many randomly chosen zones, scattered over the WHOLE face (owner 17/11 23:2xZ: whole face, fewer at once) */zones:[["fore",[[-.45,-.95,0],[.45,-1,0]]],["templeL",[[-1.05,-.6,0],[-.95,-.15,0]]],["templeR",[[1.05,-.6,0],[.95,-.15,0]]],["cheekL",[[-.62,-.1,.5],[-.45,.1,.56]]],["cheekR",[[.62,-.1,.5],[.45,.1,.56]]],["nose",[[0,0,.28],[0,0,.46]]],["eyeL",[[-.95,-.15,0],[-.85,.1,0]]],["eyeR",[[.95,-.15,0],[.85,.1,0]]],
+ ["chin",[[-.14,.4,1],[.14,.45,1]],1],["jawL",[[-.62,.25,.92],[-.8,.05,.8]],1],["jawR",[[.62,.25,.92],[.8,.05,.8]],1],["lowCheekL",[[-.66,.1,.78],[-.55,.3,.72]],1],["lowCheekR",[[.66,.1,.78],[.55,.3,.72]],1]],loMin:2,/* >= this many of the stars of a burst go to the LOWER face (zones marked 1: chin, jaw, lower cheeks; owner 23:3xZ "cả phần cằm nữa") *//* [name,[[x in u from the eye midpoint, y in u, y in mouth distances]...]] two candidate spots each; never on the lips *//* "face" now; "body" = same burst on the body skin, reserved for the dressing result (owner 23:10Z) */lo:.4,/* breathing floor (share of amp) */glSize:.13/* glint radius x eye distance */}});
+const TOIL_GLC={},TOIL_GLQ=[];
+function toilGlowLayer(file,col){const v=MK_FIT.get(file);if(!v)return"";const G=BAL.toil.glow,key=file+"|"+G.use;let e=TOIL_GLC[key];if(!e){e=TOIL_GLC[key]={inner:"",pend:1};TOIL_GLQ.push(key);if(TOIL_GLQ.length>40)delete TOIL_GLC[TOIL_GLQ.shift()];toilGlowPaint(file,v,e,key)}
+ return `<i class="kff kglw" data-gk="${key}" aria-hidden="true" style="--fleft:0%;--ftop:0%;--fwidth:100%;--fheight:100%">${e.inner}</i>`}
+function toilGlowPaint(file,v,e,key){const im=new Image();im.crossOrigin="anonymous";im.decoding="async";
+ im.onload=()=>{try{e.inner=toilGlowBuild(im,v,key)}catch(x){e.inner=""}e.pend=0;document.querySelectorAll("i.kglw").forEach(x=>{if(x.dataset.gk===key)x.innerHTML=e.inner})};
+ im.src=IMG_U("img/"+file)}
+function toilGlowBuild(im,v,key){const G=BAL.toil.glow,V=G.v[G.use]||G.v.B,W=im.naturalWidth,H=im.naturalHeight,K=Math.max(1,Math.min(3,360/W)),cw=Math.round(W*K),ch=Math.round(H*K);
+ const c=document.createElement("canvas");c.width=cw;c.height=ch;const g=c.getContext("2d",{willReadFrequently:true});g.drawImage(im,0,0,cw,ch);const D=g.getImageData(0,0,cw,ch).data;
+ const P=toilMkPts(v).map(([x,y])=>[x/100*cw,y/100*ch]);const Gm=toilMkGeom(P,{blr:1}),{u,ang,mid,eyeY,mY,cheeks,lc}=Gm;const d=mY-eyeY,cs=Math.cos(ang),sn=Math.sin(ang);
+ /* her skin colour (read-only face points: cheeks + forehead windows) and a per-pixel skin-likeness (hue by ratios, so cream cloth / gold thread / hair / lips drop out) */
+ const win=[...cheeks.map(q=>[q.x,q.y]),[mid[0],mid[1]-.55*u]];const a3=[[],[],[]];win.forEach(([px,py])=>{const rr=Math.max(2,Math.round(u*.07));for(let y=-rr;y<=rr;y++)for(let x=-rr;x<=rr;x++){const X=Math.round(px+x),Y=Math.round(py+y);if(X<0||Y<0||X>=cw||Y>=ch)continue;const j=(Y*cw+X)*4;if(D[j+3]>200){a3[0].push(D[j]);a3[1].push(D[j+1]);a3[2].push(D[j+2])}}});
+ const med=a=>{a.sort((x,y)=>x-y);return a.length?a[a.length>>1]:200};const ref=[med(a3[0]),med(a3[1]),med(a3[2])],Lr=.299*ref[0]+.587*ref[1]+.114*ref[2],rg=ref[1]/ref[0],rb=ref[2]/ref[0];
+ const N=cw*ch,S=new Float32Array(N),L=new Float32Array(N);
+ for(let i=0,j=0;i<N;i++,j+=4){const l=.299*D[j]+.587*D[j+1]+.114*D[j+2];L[i]=l;if(D[j+3]<200||D[j]<60)continue;const kk=l/Lr;if(kk<.5||kk>1.4)continue;const dg=(D[j+1]/D[j]-rg)/G.tolG,db=(D[j+2]/D[j]-rb)/G.tolB,dd=Math.sqrt(dg*dg+db*db);S[i]=Math.max(0,Math.min(1,G.tolK-dd))}
+ /* local brightness (box blur) → how much a pixel stands above its surroundings = the picture's own specular */
+ const R=Math.max(2,Math.round(u*.3)),B=new Float32Array(N),T=new Float32Array(N);
+ for(let y=0;y<ch;y++){let s=0;for(let x=-R;x<=R;x++)s+=L[y*cw+Math.min(cw-1,Math.max(0,x))];for(let x=0;x<cw;x++){T[y*cw+x]=s/(2*R+1);s+=L[y*cw+Math.min(cw-1,x+R+1)]-L[y*cw+Math.max(0,x-R)]}}
+ for(let x=0;x<cw;x++){let s=0;for(let y=-R;y<=R;y++)s+=T[Math.min(ch-1,Math.max(0,y))*cw+x];for(let y=0;y<ch;y++){B[y*cw+x]=s/(2*R+1);s+=T[Math.min(ch-1,y+R+1)*cw+x]-T[Math.max(0,y-R)*cw+x]}}
+ const fx=(X,Y)=>[mid[0]+X*cs-Y*sn,mid[1]+X*sn+Y*cs];/* face frame (X along the eye line, Y down, units px) → picture px */
+ const bro=i=>{const q=P.slice(40+i*10,50+i*10);const m=q.reduce((a,p)=>[a[0]+p[0]/q.length,a[1]+p[1]/q.length],[0,0]);return m};const b0=bro(0),b1=bro(1);
+ const top=P.slice(0,12).reduce((a,p)=>p[1]<a[1]?p:a,P[0]);
+ const sg=cheeks.map(c=>c.x>=mid[0]?1:-1);
+ /* zones: [name, centre px, radius (x u), weight] */
+ const Z=[["cheekA",[cheeks[0].x,cheeks[0].y-.17*u],.3,1],["cheekB",[cheeks[1].x,cheeks[1].y-.17*u],.3,1],["noseBridge",fx(0,.32*d),.14,.85],["browA",[b0[0],b0[1]-.16*u],.26,.7],["browB",[b1[0],b1[1]-.16*u],.26,.7],["forehead",fx(0,-.85*u),.3,.5]];
+ const rad=V.rad,cc=G.col,pp=[],inner=[];let gi=0;const url=cv=>cv.toDataURL("image/png");
+ Z.forEach(([nm,[cx0,cy0],r0,w],zi)=>{const r=r0*u*rad,x0=Math.max(0,Math.floor(cx0-r)),y0=Math.max(0,Math.floor(cy0-r)),x1=Math.min(cw,Math.ceil(cx0+r)),y1=Math.min(ch,Math.ceil(cy0+r)),zw=x1-x0,zh=y1-y0;if(zw<3||zh<3)return;
+  /* this zone's own specular: skin pixels brighter than their surroundings */const sp=new Float32Array(zw*zh);let mx=0,bx=cx0,by=cy0;
+  for(let y=0;y<zh;y++)for(let x=0;x<zw;x++){const i=(y0+y)*cw+x0+x,dx=(x0+x-cx0)/r,dy=(y0+y-cy0)/r,q=Math.sqrt(dx*dx+dy*dy);if(q>=1)continue;const f=Math.pow(1-q*q,2),ex=Math.max(0,L[i]-B[i]+.25*Math.max(0,L[i]-Lr*.96)),s=S[i]*ex*f;sp[y*zw+x]=s;if(s>mx){mx=s;bx=x0+x;by=y0+y}}
+  const o=document.createElement("canvas");o.width=zw;o.height=zh;const og=o.getContext("2d"),id=og.createImageData(zw,zh),O=id.data;
+  for(let y=0;y<zh;y++)for(let x=0;x<zw;x++){const i=(y0+y)*cw+x0+x,dx=(x0+x-cx0)/r,dy=(y0+y-cy0)/r,q=Math.sqrt(dx*dx+dy*dy);if(q>=1||S[i]<=0)continue;const f=Math.pow(1-q*q,2),sn2=mx>0?sp[y*zw+x]/mx:0,a=Math.min(1,f*(.22+.78*sn2)*S[i]*w);const j=(y*zw+x)*4;O[j]=cc[0];O[j+1]=cc[1];O[j+2]=cc[2];O[j+3]=Math.round(a*255)}
+  og.putImageData(id,0,0);/* slight bloom: the same shine blurred under the sharp one */const o2=document.createElement("canvas");o2.width=zw;o2.height=zh;const g2=o2.getContext("2d");g2.filter=`blur(${Math.max(.8,r*.12).toFixed(1)}px)`;g2.globalAlpha=V.bloom;g2.drawImage(o,0,0);g2.filter="none";g2.globalAlpha=1;g2.drawImage(o,0,0);
+  const per=G.per[(zi*7+3)%G.per.length],del=-(((zi*37+11)%60)/10).toFixed(1),pc=v=>(v*100).toFixed(2)+"%";
+  inner.push(`<b class="kg-hl" style="left:${pc(x0/cw)};top:${pc(y0/ch)};width:${pc(zw/cw)};height:${pc(zh/ch)};background-image:url(${url(o2)});--amp:${V.amp*w>1?1:(V.amp).toFixed(2)};--lo:${G.lo};--per:${per}s;--del:${del}s"></b>`);pp.push([nm,bx,by,w])});
+ /* twinkling 4-point stars (soft, pink-white / pale gold, varied size) popping and fading on cheekbones, brow bone, temple, outer eye corners, forehead; never on the lips */
+ const rnd=toilRnd(97),pc2=v=>(v*100).toFixed(2)+"%",ex=P.slice(20,40).map(q=>q[0]),eA=P.slice(20,30),eB=P.slice(30,40),ec=a=>a.reduce((q,p)=>[q[0]+p[0]/a.length,q[1]+p[1]/a.length],[0,0]);
+ const oA=eA.reduce((a,p)=>p[0]<a[0]?p:a,eA[0]),oB=eB.reduce((a,p)=>p[0]>a[0]?p:a,eB[0]);
+ const R2=G.zones;R2.forEach(([zn,cand,lo],zi)=>cand.forEach(([zx,zy,zd],ci)=>{const [sx,sy]=fx(zx*u,zy*u+zd*d),sz=u*(.18+.24*rnd())*G.size,dur=(1+.5*rnd()).toFixed(2),del=(rnd()*.9).toFixed(2),rot=(rnd()*30-15).toFixed(0),gold=(zi+ci)%3===1;
+  inner.push(`<b class="kg-st${gold?" gold":""}" data-z="${zi}" data-lo="${lo?1:0}" style="left:${pc2((sx-sz/2)/cw)};top:${pc2((sy-sz/2)/ch)};width:${pc2(sz/cw)};height:${pc2(sz/ch)};--sd:${dur}s;--sl:${del}s;--sr:${rot}deg"></b>`)}));
+ /* both irises: tiny twinkling catchlights (the eye ring centre, slightly up-left) */
+ if(V.eye)[eA,eB].forEach((E,i)=>{const c0=ec(E),sz=u*.27*G.size;[[-.07,-.06,1,3],[.06,.05,.55,6]].forEach(([dx,dy,sc,dur],j)=>{const x=c0[0]+dx*u,y=c0[1]+dy*u,z=sz*sc;inner.push(`<b class="kg-st eye" style="left:${pc2((x-z/2)/cw)};top:${pc2((y-z/2)/ch)};width:${pc2(z/cw)};height:${pc2(z/ch)};--sd:${(1+.4*j).toFixed(2)}s;--sl:${(.1+i*.15+j*.25).toFixed(2)}s;--sr:0deg"></b>`)})});
+ /* dreamy haze on her skin: her skin pixels (face blobs only) blurred into a soft pink-white bloom, very slow breathing */
+ {const hz=document.createElement("canvas");hz.width=cw;hz.height=ch;const hg=hz.getContext("2d"),hd=hg.createImageData(cw,ch),HD=hd.data;for(let i=0,j=0;i<N;i++,j+=4){const s=S[i];if(s<=0)continue;const dx=(i%cw-mid[0])/(1.9*u),dy=((i/cw|0)-(eyeY+.25*d))/(2.3*u);if(dx*dx+dy*dy>=1)continue;HD[j]=cc[0];HD[j+1]=cc[1];HD[j+2]=cc[2];HD[j+3]=Math.round(255*s*(1-dx*dx-dy*dy))}
+  hg.putImageData(hd,0,0);const h2=document.createElement("canvas");h2.width=cw;h2.height=ch;const g3=h2.getContext("2d");g3.filter=`blur(${Math.max(1,u*.09).toFixed(1)}px)`;g3.drawImage(hz,0,0);inner.unshift(`<b class="kg-hz" style="left:0;top:0;width:100%;height:100%;background-image:url(${url(h2)});--haze:${V.haze}"></b>`)}
+ return inner.join("")}
+(function(){const st=document.createElement("style");st.id="kglow-css";st.textContent=`.kfx>i.kglw,.kfxf>i.kglw{position:absolute;display:block;pointer-events:none;left:var(--fleft);top:var(--ftop);width:var(--fwidth);height:var(--fheight)}
+.kglw>b{position:absolute;display:block;mix-blend-mode:screen}
+.kglw>b.kg-hl{background-size:100% 100%;background-repeat:no-repeat;opacity:calc(var(--amp,.6)*var(--lo,.4));animation:kghl var(--per,3s) ease-in-out var(--del,0s) infinite}
+.kglw>b.kg-hz{background-size:100% 100%;opacity:var(--haze,.18);animation:kghz 8s ease-in-out infinite}
+.kglw>b.kg-st{opacity:0;background:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3CradialGradient id='g'%3E%3Cstop offset='0' stop-color='%23fff' stop-opacity='1'/%3E%3Cstop offset='.18' stop-color='%23fff2f0' stop-opacity='.95'/%3E%3Cstop offset='1' stop-color='%23ffe4e8' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='24' fill='url(%23g)' opacity='.75'/%3E%3Cpath d='M50 0C52 36 64 48 100 50C64 52 52 64 50 100C48 64 36 52 0 50C36 48 48 36 50 0Z' fill='url(%23g)'/%3E%3C/svg%3E") center/100% 100% no-repeat;}
+.kglw.on>b.kg-st.pk,.kglw.on>b.kg-st.eye{animation:kgst var(--sd,1.2s) ease-in-out var(--sl,0s) 1 both}
+.kglw>b.kg-st.gold{filter:sepia(.55) saturate(1.6) hue-rotate(-10deg) brightness(1.05)}
+@keyframes kghz{0%,100%{opacity:calc(var(--haze,.18)*.7)}50%{opacity:var(--haze,.18)}}
+@keyframes kgst{0%,100%{opacity:0;transform:scale(.25) rotate(var(--sr,0deg))}30%{opacity:1;transform:scale(1) rotate(calc(var(--sr,0deg) + 18deg))}65%{opacity:.9;transform:scale(.8) rotate(calc(var(--sr,0deg) + 32deg))}}`;(document.head||document.documentElement).appendChild(st)})();
+window.toilGlowLayer=toilGlowLayer;
+/* the burst clock: every 8-15 s (random) add .on to every glow layer for burstMs, then remove it */
+/* the burst clock: every 8-15 s (random) one burst: per layer pick BAL.toil.glow.stars zones at random (one candidate star in each), mark them .pk, add .on for burstMs, then remove */
+function toilGlowOn(x){const G=BAL.toil.glow,Z=G.zones,sh=a=>{for(let k=a.length-1;k>0;k--){const m=Math.floor(Math.random()*(k+1));[a[k],a[m]]=[a[m],a[k]]}return a},lo=sh(Z.map((z,i)=>z[2]?i:-1).filter(i=>i>=0)),up=sh(Z.map((z,i)=>z[2]?-1:i).filter(i=>i>=0)),nl=Math.min(lo.length,G.loMin+(Math.random()<.4?1:0));
+ const pick=new Set([...lo.slice(0,nl),...up.slice(0,Math.max(0,G.stars-nl))]);
+ x.querySelectorAll("b.kg-st").forEach(b=>b.classList.remove("pk"));const by={};x.querySelectorAll("b.kg-st[data-z]").forEach(b=>{(by[b.dataset.z]=by[b.dataset.z]||[]).push(b)});pick.forEach(z=>{const L=by[z];if(L&&L.length)L[Math.floor(Math.random()*L.length)].classList.add("pk")});x.classList.remove("on");void x.offsetWidth;x.classList.add("on")}
+window.toilGlowOn=toilGlowOn;
+(function(){const go=()=>{const G=BAL.toil.glow;if(G.auto===false){setTimeout(go,1000);return}document.querySelectorAll("i.kglw").forEach(toilGlowOn);setTimeout(()=>document.querySelectorAll("i.kglw.on").forEach(x=>x.classList.remove("on")),G.burstMs);setTimeout(go,G.gap[0]+Math.random()*(G.gap[1]-G.gap[0]))};if(typeof window!=="undefined")setTimeout(go,BAL.toil.glow.first)})();
 function toilFaceLayer(p,file){const lk=toilLookOfP(p);if(!lk)return"";const col=toilColOfP(p);const mk=toilMkLayer(file,lk,col);const src=mk?"":toilMakeupSvg(file,lk,col,false);if(!src&&!mk)return"";
- return (src?`<img class="kmkl kmkl-${lk}" src="${src}" alt="" aria-hidden="true" style="--fleft:0%;--ftop:0%;--fwidth:100%;--fheight:100%">`:"")+mk}
+ return (src?`<img class="kmkl kmkl-${lk}" src="${src}" alt="" aria-hidden="true" style="--fleft:0%;--ftop:0%;--fwidth:100%;--fheight:100%">`:"")+mk+(lk==="tuyet"?toilGlowLayer(file,col):"")}
 if(typeof kitFxLayers==="function"){const fx0=kitFxLayers;kitFxLayers=function(p,file){const h=fx0.apply(this,arguments);let m="";try{m=toilFaceLayer(p,file)}catch(e){}return m+h}}
 
 /* ================= §60 MAKEUP COLOURS · kitSwatches (owner 15/11 19:05Z, review/mk-colour) =================
