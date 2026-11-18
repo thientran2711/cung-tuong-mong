@@ -45,3 +45,14 @@ By eye (c04_t678_live_vs_new.jpg): design/embroidery/crown/cape identical to the
 Credits: 6 gens = 810 cr (3 v1 + 3 v2 redesign gens = 810 superseded). Gen ids: copies t6 vQ2Wq74a47 t7 P3u528V42C t8 ksp8SWN16B; recolours t6 N2H1nsA6D9 t7 vQ2WbpBa47 t8 dtP3ftnXSL.
 Files CDN img/_review/consort-tiers/c04/b9/: c04_a18_t6/t7/t8.png (new), *_v2.png, *_prev.png, row8, live_vs_new (live|copy|final), c04_t678_live_vs_new.jpg, c04_t5678_full/zoom.jpg.
 ~100% xong c04 / ~0% chơi được.
+
+
+## B9 v4 — c04 t6/t7/t8 with the owner's ONE-GEN method (ROOT-18: m09 STYLE slot + live original, "copy EXACTLY … ONLY change the robe colour", no soft words)
+Supersedes v3 (two-step; kept as c04_a18_t6_v3/t7_v3/t8_v3.png). One gen per figure: image ref = the LIVE original, style slot = m09 eIyOFEidqL; prompt "Copy EXACTLY everything from image 1: hair, headdress, face, costume, pose, proportions, fabric material and stitching. ONLY change the robe colour to <tone>." Forced swaps only: t6 phoenix embroidery → peonies+butterflies (owner: t1–t6 never a phoenix), t8 teacup → small round fan.
+| rank | colour | bbox w/h live → new | gens |
+|---|---|---|---|
+| t6 | soft coral-rose | 0.376 → 0.384 (+2.2 %) | 1 PASS ±3 % |
+| t7 | misty blue-grey + soft golden-yellow inner/borders/sash, phoenix kept | 0.368 → 0.395 (+7.2 %) | 1 (over ±3 %) |
+| t8 | warm golden yellow, original design/phoenix kept, fan | 0.317 → 0.361 (+13.9 %) | 1 (over ±3 %; cup→fan changes the arm) |
+By eye (c04_t678_live_vs_new.jpg): design, embroidery, crown, cape, fabric identical to the original, colour only; closer to the original look than v3. Credits 3 gens = 405 cr. Gen ids t6 JNfHG0ROq4, t7 O6CqzMSynm, t8 MB79akmDCm. Files CDN img/_review/consort-tiers/c04/b9/: c04_a18_t6/t7/t8.png (v4), *_v3.png, *_v2.png, *_prev.png, row8, live_vs_new (live|copy|final, t6–8 copy = v3 copy), c04_t678_live_vs_new.jpg, c04_t5678_full/zoom.jpg. t1–t5 unchanged.
+~100% xong c04 / ~0% chơi được.
