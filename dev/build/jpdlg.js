@@ -34,7 +34,9 @@ function kitPersonDlgFit(root){try{const R=root||document;R.querySelectorAll(".k
  const ar=im.naturalWidth&&im.naturalHeight?im.naturalWidth/im.naturalHeight:(b.ar||.45);
  const Hf=fl?Math.max(40,Math.min(H,fl.lb-fl.G-box.getBoundingClientRect().top)):H;/* feet one gap above the lower line */
  const span=Math.max(.2,b.b-b.t);let ih=(Hf-4)*rel/(1+((typeof BAL==="object"&&BAL.bookFrame&&BAL.bookFrame.cRef)||.131))/Math.max(.2,b.b-kitFigTop(b)),iw=ih*ar;/* KIT 56.4: the ONE body = the column height / (1 + the tallest Hoàng hậu crown); never sized by this person's own crown *//* review/fig-headtop: body = head top .. feet at the kit ratio; the crown never leaves the column *//* the painted body (head-top .. feet) fills the column between the gaps; KIT 56.4 (owner 18/11 ~07:50Z): a wide hem / sleeve is NOT cut, it spreads right under the text (drawn on top) */
- const fx=kitFullFigX(b,iw,W,(box.getBoundingClientRect().left-(col.closest(".kpdlg")||col).getBoundingClientRect().left-((typeof KIT_SIZE==="object"&&KIT_SIZE.edge)||12)));
+ /* KIT 56.14 (reviewer ROOT-56): the person column holds the widest painted figure (BAL.figWideRef x body + edge + gap), as far as the text column keeps its kit minimum; --kpdcw is set once, then the figure is laid again */
+ try{const dbE=col.closest(".kpdb");if(dbE&&(dbE.__cwTry||0)<3){const wr=(typeof BAL==="object"&&BAL.figWideRef)||.65,eg=(typeof KIT_SIZE==="object"&&KIT_SIZE.edge)||12,mr=(typeof KIT_SIZE==="object"&&KIT_SIZE.v3&&KIT_SIZE.v3.narrow.minRight)||274;const bodyPx=ih*(b.b-kitFigTop(b)),need=Math.ceil(wr*bodyPx+eg+8),cs=getComputedStyle(dbE),inner=dbE.clientWidth-parseFloat(cs.paddingLeft)-parseFloat(cs.paddingRight),gap=parseFloat(cs.columnGap)||12,cur=col.getBoundingClientRect().width,want=Math.min(need,Math.max(cur,inner-gap-mr));if(want>cur+1){dbE.__cwTry=(dbE.__cwTry||0)+1;dbE.style.setProperty("--kpdcw",Math.round(want)+"px");again();return}}}catch(e){}
+ const fx=kitFullFigX(b,iw,W,(box.getBoundingClientRect().left-(col.closest(".kpdlg")||col).getBoundingClientRect().left-((typeof KIT_SIZE==="object"&&KIT_SIZE.edge)||12)),W);
  f.style.cssText="position:absolute;left:0;top:0;width:100%;height:100%;margin:0";
  const wr=f.querySelector(".kesfi");if(wr)wr.style.cssText=`position:absolute;left:${fx.toFixed(1)}px;top:${(Hf-ih*b.b).toFixed(1)}px;width:${iw.toFixed(1)}px;height:${ih.toFixed(1)}px;margin:0;max-width:none`;
  im.style.cssText=`width:${iw.toFixed(1)}px;height:${ih.toFixed(1)}px;max-width:none;max-height:none`;col.dataset.kpdfit="1"})}catch(e){console.error("kitPersonDlgFit",e)}}
@@ -43,7 +45,7 @@ window.kitPersonDlg=kitPersonDlg;window.kitPersonDlgFit=kitPersonDlgFit;
 (function(){const st=document.createElement("style");st.id="kit-pdlg";st.textContent=`
 html body .dlg.kpanel.kpdlg{box-sizing:border-box;width:var(--kpw);min-width:0;max-width:var(--kpw);height:var(--kph);min-height:var(--kph);max-height:var(--kph);display:flex;flex-direction:column;overflow:hidden;margin:0}
 .kpdlg>.kph{flex:none}
-.kpdlg>.kpdb{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:clamp(110px,38%,248px) minmax(0,1fr);gap:12px;padding:8px 14px 4px}
+.kpdlg>.kpdb{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:var(--kpdcw,clamp(110px,38%,248px)) minmax(0,1fr);gap:12px;padding:8px 14px 4px}
 .kpdlg .kpsubj.kes{position:relative;z-index:0;display:flex;flex-direction:column;align-items:center;min-height:0;min-width:0;overflow:visible}
 .kpdlg .kpdcap{flex:none;margin:0 0 2px;text-align:center;max-width:100%}
 .kpdlg .kpdfig{position:relative;flex:1 1 auto;min-height:0;width:100%;overflow:visible}
@@ -61,5 +63,5 @@ html body .dlg.kpanel.kpdlg{box-sizing:border-box;width:var(--kpw);min-width:0;m
 .kpdlg .kpdt .ktut-do{color:var(--gold);font-weight:600}
 .kpdlg>.kpopts{flex:none;display:flex;justify-content:flex-end;flex-wrap:wrap;gap:8px;padding:6px 14px 12px;margin:0;position:static;min-height:0}
 .kpdlg>.kpopts .kbtn{min-height:40px;padding:6px 16px;font-size:.86rem}
-/* kv3:.kv1 */:where(.kv1) .kpdlg>.kpdb{grid-template-columns:clamp(84px,32%,140px) minmax(0,1fr);gap:9px;padding:8px 10px 2px}:where(.kv1) .kpdlg .kpdt{font-size:.84rem}:where(.kv1) .kpdlg>.kpopts{padding:6px 10px 10px}
+/* kv3:.kv1 */:where(.kv1) .kpdlg>.kpdb{grid-template-columns:var(--kpdcw,clamp(84px,32%,140px)) minmax(0,1fr);gap:9px;padding:8px 10px 2px}:where(.kv1) .kpdlg .kpdt{font-size:.84rem}:where(.kv1) .kpdlg>.kpopts{padding:6px 10px 10px}
 `;document.head.appendChild(st)})();
