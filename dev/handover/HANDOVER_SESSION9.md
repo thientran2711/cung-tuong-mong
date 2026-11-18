@@ -705,3 +705,4 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - (18/11 ~18:50Z) ROOT-53: owner APPROVED shop-panel-r2 (OD) → land on reviewer PASS (session_01Rc5AsJ78eHZK5L59d6XtTP).
 - (18/11 ~18:56Z) ROOT-53: owner 18:55Z (OD) → shop panel needs kind sub-tabs (kitSubTabs) → landing of shop-panel-r2 HELD; worker shop-panel-r3 on the same branch; reviewer told to stop at PASS, not land.
 - (18/11 ~18:43Z) ROOT-53: opt-card-short #3 code done ce8706b7 (tall only L/XL; KIT_OPT 1/2-col; one size per tier; inline one-colour «!»), no CDN → archived; #4 session_01Rc5AsMxWaub8yKfYn3AbWS on CDN env does real build + LOOK + shots.
+- (18/11 ~18:49Z) ROOT-53: shop-panel-r2 reviewer PASS LAND READY f9449133 (FF from 94d11623) — NOT landed (owner 18:55Z hold for kind sub-tabs); reviewer archived; shop-panel-r3 session_01Rc5AsJv1gjknuBXYWL6yeS starts from f9449133.
