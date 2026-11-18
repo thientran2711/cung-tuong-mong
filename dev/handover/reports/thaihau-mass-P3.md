@@ -25,3 +25,6 @@ Made under the OLD rule (ONE ref = own live t1, --nostyle; a51 and a65 both used
 Ref ids uploaded (folder ba4aecfe...): c11 a36 TdwpnhUVNR, a51 gOm7LxTSXO; c12 a36 xSBlkk7jfW, a51 vQAEtmRa47; c13 a36 If3amultvE, a51 xSBgLJHjfW (c10: u5WqobwQLD / Lw8SFwvswO from P3).
 Method notes: prompt per person = build.py output with only face line, colour word, item and hands line changing; a51/a65 differ only in the age clause (+ darker-colour sentence). Gen with width 1024 height 2304 resolution 2k mode gpt-2-6; cdn_sync lives on origin/main (copy dev/site/cdn_sync.py + manifest_guard.py into the worktree, then delete). Sheet script: 3 cutouts at 420 px on parchment (236,224,200).
 NEXT (after GO): redo c10..c16 with refs = [own t1 of that age (a65 -> a51), style m09 eIyOFEidqL], command without --nostyle.
+
+### P3b FINAL (18/11 ~22:40Z, owner via ROOT-31: "Thái hậu ok rồi, thôi đừng có vẽ vời gì nữa hết")
+STOPPED for good: no more gens, no redo. c10, c11, c12 (a36|a51|a65 v0 + sheets on CDN img/_review/thaihau/) are kept as is. c13 discarded (never uploaded). The "redo with 2 refs" NEXT line above is cancelled. c14-c16 never started.
