@@ -32,3 +32,48 @@ PRIORITY #1 CHECK: OD L644/L1072/L1243/L1252/L1601(2) + audit D-Q2 | main dev/bu
 - Both must pass nrask-scan of the merged set, and pick up fixes 1–3 automatically once they rebase.
 
 Shots kept local only (scratch, deleted with this verdict); nothing uploaded, nothing in git.
+
+---
+# ROUND 2 — review/questline-q1a @ 54f10e85 (reviewer E7ar2, opus, BIG)
+
+PRIORITY #1 CHECK ('questline-q1|NRASK|nrAskPick'): OD L644/L1072/L1252/L1601(2) | main: none (jnroad.js stock nr_* only) | review/* questline-q1a 54f10e8 (this), q1b 2b80a8a, q1c 99aa2c5, display-set-bonus a95e8d4 (inside q1a, see note C) | claims E7a/E7b/E7c2 + E7ar/E7br/E7cr (this slice)
+
+Method: LOCAL merge q1a + q1b + q1c (newest origin/main 94a9375 is an ancestor of q1a); only conflicts = generated files + the assemble.py list (kept jnrask.js, jnrask_b.js, jnrask_m.js in order); site rebuilt with build_site.sh; not pushed.
+
+## VERDICT: FAIL 54f10e85
+
+## Prior fixes (round 1 + q1b item 6 + nrVoiceM)
+| # | item | state |
+|---|---|---|
+| 1 | no hh kind when asker or player is Hoàng hậu (stock + NRASK, 3 offer sites) | FIXED for the KIND (NRSELF + nrMeQueen in nrAskPick/nrKind; nrask-engine 7/7b). Text family NOT fixed → FIX 1 below |
+| 2 | consort voice via jvoice kAddr (8 stock cards + slots) | FIXED. Probe: Quý phi→Thường tại «bổn cung … muội muội», Thường tại→Quý phi «tần thiếp … Quý phi nương nương», Quý phi→HH «thần thiếp … Hoàng hậu nương nương», queen→Quý nhân «bổn cung … Quý nhân»; mood floor cool (no «ngươi»); stock card texts use call() only at sentence start |
+| 3 | no {B} ask / no stock «do» without a real rival | FIXED in the engine (hasB at nrOffer/nrMOffer/nrMenOffer; maid rival is never S). Data side NOT done for jnrask.js → FIX 2 |
+| 4 | nrask-scan dup-key check real | FIXED (own sandbox per file; merged set: no shared key) |
+| q1b-6 | asker = target of its own kind (queen ≠ hh, Thái y ≠ y) | FIXED for kinds (648 queen offers, 0 hh; Thái y never y). The 4 extra asks the q1b review named (tt_mat_6/8/9/10) NOT fixed → FIX 1 |
+| nrVoiceM | men by trade | FIXED: Thái y / quan / sứ thần / họa sư / nhạc sư «vi thần», Thị vệ + thái giám «nô tài», Vương gia «bản vương»; player called via kAddr({srv:"m"}) (tiểu chủ / nương nương / Hoàng hậu nương nương) per VANPHONG §2 |
+
+## FIXES (numbered)
+1. **The Hoàng hậu still speaks of / is sent to «Hoàng hậu» (whole family = every ask whose text names the queen as a third person, not only kind hh).** Probe on the built merged game (40 draws each):
+   - queen NPC asker: tt_mat_9[0] «Ở thọ yến, bổn cung, phụ thân và Hoàng hậu sẽ có một khắc ngồi riêng…» (40/40; seen on the Fold + iPad shots, card title «Hoàng hậu Đường Lan Chi: «Mật ước với Hoàng hậu»»); tt_mat_8[0] «Hàn Thanh Liên muốn cùng Hoàng hậu viết một mật ước mới… đã đem gì đến Khôn Ninh cung» (40/40); tt_mat_6[1] «…Trung cung sẽ không đòi được»; tt_mat_10[1] «…ngôi Trung cung sẽ đổ».
+   - player is Hoàng hậu: tt_mat_6[1] «Trung cung sẽ không đòi được. Hoàng hậu nương nương được gần thánh giá, xin khéo nhắc»; tt_mat_8[0] (asks the queen what was brought to her own Khôn Ninh cung); jnrask_m.js ksp_so_7[1] «…đã bị ai đó chỉ cho Hoàng hậu xem trước… dò giúp kẻ ấy đã nói gì» (q1c data, same engine family).
+   Fix in the ENGINE (one rule for all three files): in nrAskPick, when who has "queen" or nrMeQueen(), skip every ask whose h/c/labels/loss lines name the queen (Hoàng hậu | Trung cung | Khôn Ninh — keep the pattern in one table next to NRSELF); none left → stock of an allowed kind. Extend nrask-engine 7/7b to the text (queen asker + queen player → no ask naming the queen). Recommended with it (pre-existing on main, decide with Foreman E): the queen NPC should not be dealt a road whose premise IS the Hoàng hậu (tt_mat «Mật ước với Hoàng hậu») in nrPickRoad.
+2. **19 jnrask.js chapters have NO {B}-free ask**, so with no real rival (rival = the player, or gone) they always fall back to the stock card and the story is lost — brief E7r2 (2) «every chapter keeps ≥1 {B}-free ask»; q1b and q1c already did this for their files, q1a's own data did not: tt_oan_7 tt_tranh_7 tt_mat_8 dtq_bien_7 muoi_tuoc_7 muoi_tuoc_9 muoi_lau_6 muoi_no_6 muoi_no_7 muoi_no_8 muoi_no_10 cn_chu_5 cn_chu_6 cn_chu_7 cn_chu_8 cn_chu_9 cn_chu_10 cn_tinh_6 cn_tinh_8. Reword one ask per chapter so it does not name {B} (keep the two kinds different; not «do»), and add the rule to nrask-scan for ALL jnrask*.js files (today only nrask-m-scan checks it, men only).
+
+## Notes (not q1a fixes)
+A. **Merged set nrask-scan: 1 FAIL from q1c data** — jnrask_m.js ksp_so_10[0] label «Nói với Hoàng thượng ngươi tin sổ ấy» («ngươi» in a label; j84 turns it into «ta» on screen → meaning flips). For the q1c reviewer; the merged set must be green before landing.
+B. Vương gia calls the player «tiểu chủ / nương nương» like a servant (kAddr srv). VANPHONG §2 has no Vương gia row; not blocking — Foreman E may ask the kit keeper for a row («nương nương» / «hoàng tẩu»).
+C. **q1a carries review/display-set-bonus a95e8d4** (PASS by its own reviewer, not yet on main). A fast-forward of q1a lands it too — land a95e8d4 first or knowingly together.
+D. Edge: a rival who dies between offer and render still prints «kẻ kia» in a {B} ask (X.B null). Not blocking.
+
+## Tests (merged q1a+q1b+q1c, local 1aab860, built)
+| test | result |
+|---|---|
+| nrask-scan | 1 FAIL (note A, q1c) · 318 chapters, 636 asks, 1272 labels/loss lines, kinds thu/emp/th/hh/do/y/che |
+| nrask-m-scan | PASS (204 asks) |
+| nrask-engine | ALL PASS (1, 2, 3 = 1272 cards both voices, 4, 5 old saves, 6, 7, 7b, 8 voice + men, 9 no-B) — does not cover FIX 1 text |
+| quickcheck | QUICKCHECK PASS · 374 s · core gates PASS · old save ok · perf new/live render 223/211, tab 425/444, buổi 1022/1154 ms |
+| own scans (jnrask.js) | 0 digits/%; no bạn/tôi/em/anh (hits = «chị em cũ», «chị dâu», label «mình»); queen-naming asks of non-hh kinds: 6 (4 q1a, 2 q1c); {B}-free coverage: 19 chapters 0 |
+| shots (nrask-shots) Fold 755x1000@2 + iPad 1180x820@2 · tt_mat_9:0 queen + cn_ban_6:0 peer, offer + Việc nhờ tab | SHOTS OK, kit j72 card + kit option cards, ladder words (Năm ăn năm thua / Khá chắc), no overflow / raw slot / page error. Looked: tt_mat_9 queen card shows FIX 1; cn_ban_6 Quý phi «bổn cung … Xin muội muội giữ giúp ít hôm» right. Local only (no CDN, not in git), deleted with this verdict |
+
+## Re-review
+FIX 1 (engine + test) and FIX 2 (data + scan) → small re-review: diff + nrask-scan/-engine on the merged set + one queen shot.
