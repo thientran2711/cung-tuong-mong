@@ -25,8 +25,8 @@ Object.assign(BAL.looks,{xoc:{on:0,
    (fx, fy = share of the robe box: chest / sleeve / hem), blend = multiply | soft | normal (folds and the robe's own pattern show through), variants = how many decal files exist per kind. */
 Object.assign(BAL.looks,{stain:{on:0,
  lv:[null,{n:1,sc:.16,op:.6,wet:.09},{n:2,sc:.2,op:.72,wet:.2},{n:3,sc:.26,op:.85,wet:.3}],
- anchor:{chest:[.5,.27],sleeve:[.2,.5],hem:[.5,.93],hemL:[.22,.94],hemR:[.78,.94],sleeveL:[.14,.6],sleeveR:[.86,.6]},
- kind:{tra:{pos:["chest","sleeve","hem"],blend:"multiply",variants:3,wet:0,scm:1.4,dy:0,opm:.6,tint:[150,95,45],tm:.65},uot:{pos:["hem","sleeveL","sleeveR","hemL","hemR"],blend:"multiply",variants:2,wet:1,scm:1.15,dy:0,opm:1,tint:[110,95,85],tm:.4},bun:{pos:["hem","hemL","hemR"],blend:"multiply",variants:2,wet:0,scm:2.8,dy:-.045,rotm:2.2,jy:.035}},
+ anchor:{chest:[.5,.27],sleeve:[.2,.5],hem:[.5,.93],hemL:[.22,.94],hemR:[.78,.94],hemH1:[.5,.85],hemH2:[.28,.79],hemH3:[.72,.76],hemH4:[.45,.7],sleeveL:[.14,.6],sleeveR:[.86,.6]},
+ kind:{tra:{pos:["chest","hem","sleeve"],blend:"multiply",variants:3,wet:0,scm:1.4,dy:0,opm:.68,tint:[125,75,32],tm:.6,lv:[null,{n:1,sc:.24,op:.85},{n:2,sc:.3,op:.92},{n:3,sc:.42,op:1}]},uot:{pos:["hem","sleeveL","sleeveR","hemL","hemR"],blend:"multiply",variants:2,wet:1,scm:1.15,dy:0,opm:1,tint:[110,95,85],tm:.4},bun:{pos:["hem","hemL","hemR","hemH1","hemH2","hemH3","hemH4","hemH1"],blend:"multiply",variants:2,wet:0,scm:2.8,dy:-.045,rotm:2.2,jy:.035,lv:[null,{n:3,sc:.26,op:.85},{n:5,sc:.28,op:.93},{n:8,sc:.3,op:1}]}},
  rot:.5,jit:.05}});
 /* ---------- tiny deterministic noise ---------- */
 function clothHash(x,y,s){let h=(x*374761393+y*668265263+s*2147483647)|0;h=(h^(h>>>13))*1274126177|0;return((h^(h>>>16))>>>0)/4294967295}
@@ -178,14 +178,19 @@ function drawDecalOnCloth(out,W,H,mk,dec,ax,ay,scale,rot,op,blend,tint,tm){const
    out[i*4+q]=b+(o-b)*a}n++}
  return n}
 /* kind = "tra" | "uot" | "bun", lv 1..3, decals = [{w,h,data}] (variants of that kind); opt.base = RGBA already shaded (e.g. the xoc bake) else the picture; returns {data,mask,count} */
-function clothStainBake(d,W,H,kind,lv,decals,opt){opt=opt||{};const B=BAL.looks.stain,L=B.lv[cl(lv|0,1,3)],K=B.kind[kind],seed=opt.seed==null?BAL.looks.xoc.seed:opt.seed,
+function clothStainBake(d,W,H,kind,lv,decals,opt){opt=opt||{};const B=BAL.looks.stain,K=B.kind[kind],L=(K.lv||B.lv)[cl(lv|0,1,3)],seed=opt.seed==null?BAL.looks.xoc.seed:opt.seed,
  mk=opt.mask||clothMask(d,W,H,opt.face||null,BAL.looks.xoc),out=new Uint8ClampedArray(opt.base||d),R=clothRng(seed*131+kind.charCodeAt(0)),fw=mk.x1-mk.x0+1,fh=mk.y1-mk.y0+1;let count=0;
- /* wet cloth (r4): the robe's OWN colour deeper and a bit richer (colour multiplied by itself), a little darker toward the hem, a few soft glossy highlights; no grey tint; nothing near skin / hair / items */
- if(K.wet&&L.wet){const sat=L.wet*2.2;for(let i=0;i<W*H;i++){const k=mk.m[i]*(1-Math.min(1,Math.max(mk.protS[i]*3,mk.prot[i]*2)));if(k<.02)continue;const y=(i/W)|0,gy=.7+.6*Math.min(1,Math.max(0,(y-mk.y0)/fh)),w=Math.min(.6,sat*gy*k);
-   for(let q=0;q<3;q++){const v=out[i*4+q];out[i*4+q]=(v*(1-w)+(v*v/255)*w)*(1-L.wet*.3*gy*k)}}
-  const hn=Math.max(0,lv-1)*2;for(let q=0;q<hn;q++){const hx=mk.x0+fw*(.3+.4*R()),hy=mk.y0+fh*(.5+.38*R()),rx=fw*.025,ry=fh*.06;/* soft vertical sheen along a fold */
-   for(let y=Math.max(0,hy-ry*3|0);y<Math.min(H,hy+ry*3);y++)for(let x=Math.max(0,hx-rx*3|0);x<Math.min(W,hx+rx*3);x++){const i=y*W+x,k=mk.m[i]*(1-Math.min(1,Math.max(mk.protS[i]*3,mk.prot[i]*2)));if(k<.5)continue;const g=Math.exp(-.5*(((x-hx)/rx)**2+((y-hy)/ry)**2))*.16*k;
-    for(let c=0;c<3;c++)out[i*4+c]+=(255-out[i*4+c])*g}}}
+ /* wet cloth (r5): soaked silk = UNEVEN wet zones (shoulders, sleeves, hem) with soft irregular edges: the robe's own colour deeper there (self-multiply + a little darker), a thin sheen along the wet edge, a few drip runs under sleeve ends / hem; a faint cling tint everywhere; clear of skin / hair / items */
+ if(K.wet&&L.wet){const lvl=cl(lv|0,1,3),ws=L.wet/.3,t0=.66-.1*lvl,Wf=new Float32Array(W*H);
+  for(let y=mk.y0;y<=mk.y1;y++){const fy=(y-mk.y0)/fh;for(let x=mk.x0;x<=mk.x1;x++){const i=y*W+x;if(mk.m[i]<.5)continue;const u=Math.abs((x-mk.cx)/fw),n=clothFbm(x/fw*3.4+seed*.37,y/fh*3.4,seed+21,3),
+    zone=Math.max(clothSmooth(.05,.16,fy)*(1-clothSmooth(.27,.4,fy))*.9,clothSmooth(.18,.32,u)*clothSmooth(.2,.3,fy)*(1-clothSmooth(.7,.85,fy))*.8,clothSmooth(.68,.86,fy));
+    Wf[i]=clothSmooth(t0,t0+.22,n*.62+zone*(.5+.9*clothFbm(x/fw*2.1+9,y/fh*2.1+3,seed+33,2))*.62)*clothSmooth(mk.chin,mk.chin+fh*.07,y)}}
+  const Wb=clothBlur(Wf,W,H,2);
+  for(let i=0;i<W*H;i++){const w0=Wb[i];const k=mk.m[i]*(1-Math.min(1,Math.max(mk.protS[i]*3,mk.prot[i]*2)));if(k<.02)continue;const edge=w0*(1-w0)*4,wv=Math.min(.7,(w0*.75+.06)*ws*k);
+   for(let q=0;q<3;q++){const v=out[i*4+q];let o=(v*(1-wv)+(v*v/255)*wv)*(1-.22*w0*ws*k);o+= (255-o)*edge*.1*ws*k;out[i*4+q]=o}}
+  const dn=1+lvl*2;for(let q=0;q<dn;q++){/* drip runs under the sleeve ends / hem: thin vertical dark streaks */
+   const fx=R()<.5?.1+.14*R():.76+.14*R(),fyy=(R()<.55?.6:.88)+.05*R(),dx=mk.x0+fw*fx,dy0=mk.y0+fh*fyy,len=fh*(.05+.05*R()),sg=Math.max(1,fw*.006);
+   for(let y=dy0|0;y<Math.min(H,dy0+len);y++){const t=(y-dy0)/len,a=Math.sin(Math.PI*Math.min(1,t*1.3))*.3*ws;for(let x=Math.floor(dx-sg*3);x<=dx+sg*3;x++){if(x<0||x>=W)continue;const i=y*W+x,k=mk.m[i]*(1-Math.min(1,Math.max(mk.protS[i]*3,mk.prot[i]*2)));if(k<.5)continue;const g=a*Math.exp(-.5*((x-dx)/sg)**2)*k;for(let c=0;c<3;c++)out[i*4+c]*=1-g}}}}
  if(decals&&decals.length)for(let q=0;q<L.n;q++){const nm=K.pos[q%K.pos.length],an=B.anchor[nm],dec=decals[Math.floor(R()*decals.length)%decals.length],
   ax=mk.x0+fw*(an[0]+(R()-.5)*B.jit*2),ay=mk.y0+fh*(an[1]+(K.dy||0)+(R()-.5)*(K.jy||B.jit)*2);
   count+=drawDecalOnCloth(out,W,H,mk,dec,ax,ay,L.sc*(K.scm||1)*(.85+.3*R()),(R()-.5)*2*B.rot*(K.rotm||1),L.op*(K.opm||1)*(.9+.2*R()),K.blend,K.tint,K.tm)}
