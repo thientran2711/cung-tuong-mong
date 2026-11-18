@@ -130,10 +130,10 @@ function nrMenPlay(e){const p=e.p,N=p.nr,A=nrCh(N.r,N.n);if(!A){N.n=nrNext(N.r,N
 function nrMenAsk(e){try{if(isSrv()||S.out||nrLearn()||!e.a)return false;const M=nrB().men,p=e.p;
  if(e.g==="men")return (p.tinh||0)>=M.askTinh;const af=(p.af&&p.af.me)||0;if(af>=M.askAf)return true;
  if(e.g==="off"){const h=tdHouse(S);return !!(h&&tdRel(e.c,h)>=M.askRel)}return false}catch(x){return false}}
-function nrMenOffer(e){const N=e.p.nr,A=nrCh(N.r,N.n);if(!A||!e.a||typeof q72!=="function")return false;const hk=nrKind(A);if(!T72I["nr_"+hk])return false;const q=q72();if(!q)return false;
+function nrMenOffer(e){const N=e.p.nr,A=nrCh(N.r,N.n);if(!A||!e.a||typeof q72!=="function")return false;const K=typeof nrAskPick==="function"?nrAskPick(N,A):{hk:nrKind(A),av:-1},hk=K.hk;if(!T72I["nr_"+hk])return false;const q=q72();if(!q)return false;
  const [rk,ri]=e.a;if(q.ch.concat(q.a).some(c=>nrSameA(c,rk,ri)&&/^nr_/.test(c.tid)))return false;
  const riv=nrMenRival(e);let bk=null,bi=null;if(e.g==="men"&&riv){bk="man";bi=riv.id}else if(e.g==="off"&&riv){bk="off";bi=riv}else if(e.g==="court"&&riv&&riv!==S){bk=riv.queen?"hh":"rv";bi=riv.id}
- q.ch.push({tid:"nr_"+hk,at:wk(),rk,ri,bk,bi,p:{nr:N.r,nn:N.n}});N.hk=hk;N.hs=1;N.t=Math.max(N.t,S.turn+Math.ceil((nrB().dl+2)/3));return true}
+ q.ch.push({tid:"nr_"+hk,at:wk(),rk,ri,bk,bi,p:{nr:N.r,nn:N.n,av:K.av}});N.hk=hk;N.hs=1;N.t=Math.max(N.t,S.turn+Math.ceil((nrB().dl+2)/3));return true}
 function nrMenMonth(news){const B=nrB();let n=news||0;
  for(const e of nrMenL()){try{const N=e.p.nr||nrMenInit(e);if(!N||N.x||!N.n||S.turn<N.t)continue;
   if(N.h&&N.n===N.h&&!N.hs&&nrMenAsk(e)&&nrMenOffer(e))continue;
