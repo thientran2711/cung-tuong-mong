@@ -321,7 +321,7 @@ Wake: trig_01XziXcTa6TV3ACMFhLctFAr 02:34Z fires into s42 → s42 relays; s43 se
 
 ## S43 → ROOT MAIN HANDOVER (18/11 02:35Z real; s43 context 28 % measured, rollover line 31 %; depth 6 → owner opens a ROOT main from claude.ai)
 FOR MAIN: s43 stops at depth 6. The OWNER opens a ROOT main from claude.ai with the paste block given in the s43 chat (Lượt 7). Read this section + "## S43 (main, child of s42)" above.
-LIVE: main 95d5f767 (cloth-xoc r6 OFF, 02:57Z). ROLLBACK chain … → b32cdb39 → db24027f → 95d5f767.
+LIVE: main e24d5838 (staff-cap-apply, 03:08Z). ROLLBACK chain … → db24027f → 95d5f767 → e24d5838.
 OWNER RULINGS s43 (OD tail from "(18/11 ~09:25Z owner clock" to the end, VERBATIM): stage + avatar makeup = mirror strength (avatar frames get the makeup layer, whole group); book: everyone UP to her Tổng lược size, no shrink/crop; face marks already approved with C → ship the 24 finals; TONE LADDER for ink/soot/scratch (100/85/70/55/40 %); PLACE BANNER = one plaque, line 1 icon+name+count, line 2 happening line; every shot to her = FULL SCREEN, whole figure, same character when comparing size (she was angry at a cropped sheet).
 LAND ORDER (FF-only from live main; wipe img/_review/<topic> after verdict; tell C-AG each new main): life-preload (URGENT) → men-forbidden → result-reason (regate on f8276cdb) → cloth-xoc (r6 sha) → smudge r16 → staff-cap-apply → AG after C-AG BIG PASS.
 RUNNING (all report to MAIN — tell them the new main id):
@@ -359,3 +359,4 @@ Wake: s43 trigger trig_01DnGumsCEWwRGKJbfBNDc4D (:32) → DELETE it when the ROO
 - (18/11 03:05Z) look-fx-wire cc0633a9: 24 finals on live CDN keys (md5 ok; game still gated by LOOKS_ART on main), fx-muoi-3 new, 787 fig rows re-measured, keep-out BAL.looks.keep: scratch overlap 1574→0, face-square keep-out px 7295→0 (dev/test/look-fx-keepout.py). One face-layer fn kitFxLayers(p,file) (jk2b.js) → told avatar-makeup SzhLWPw to build on it. MARKS R3 sheets next.
 - (18/11 03:06Z) cloth-tea 7b23023d (per-kind switches, on 95d5f767) → SMALL reviewer Szk6Fim (lands wet+mud+xốc ON). Tea look round → worker SzghNEr on review/cloth-tea-look.
 - (18/11 03:07Z) avatar-makeup SzhLWPw rolled over after r1 f6ffb09a (makeup-only on every avatar frame, step 0) → archived; widened avatar scope (full kitFxLayers on avatars) folded into look-fx-wire Szm7mHX (one review for all face layers).
+- (18/11 03:08Z) LIVE: main 95d5f767 → e24d5838 (staff-cap-apply: owner table, roomFor FIGIX, figGC face-leak fix; BIG reviewer Szjx5c2 PASS; note: thin co-op needs figGC guard before it goes live). ROLLBACK 95d5f767. Reviewer + worker SzkNqcj archived.
