@@ -25,7 +25,7 @@ const GAME=process.argv[2]||path.join(__dirname,'..','index.html');
   ok("2a frugal host: 88/100 at thỉnh an is phô trương, normal host hợp dịp",vN==="hopdip"&&vF==="photruong",[vN,vF]);
   S.luxEdict={until:S.turn+3,at:S.turn,by:"th"};const vE=luxVerdict(S,1,null).v;const tl=aaThieuLe0(S);
   luxOf=()=>({lv:1,sc:10,bud:100});const tl2=aaThieuLe0(S);S.luxEdict=null;
-  ok("2b edict: 88/100 is phô trương, plain is never thiếu lễ",vE==="photruong"&&!tl2,[vE,tl2]);
+  ok("2b edict: 88/100 is phô trương (far above its ceiling: diêm dúa, makeup-lux BAL.lux.diem), plain is never thiếu lễ",(vE==="photruong"||vE==="diem")&&!tl2,[vE,tl2]);
   const wt=S.wdTang;S.wdTang=S.turn+3;luxOf=()=>({lv:1,sc:60,bud:100});const vT=luxVerdict(S,1,null);S.wdTang=wt;
   ok("2c quốc tang caps the range",vT.R.ctx==="tang"&&(vT.v==="photruong"||vT.v==="tang"),[vT.v,vT.R.pts]);
   /* 3. extras on the card = applied: phô trương before Thái hậu at thỉnh an costs Đức −1 and shows on the rider text */

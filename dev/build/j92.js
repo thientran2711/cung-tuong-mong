@@ -289,7 +289,7 @@ function wdAccuse(a,t){const c=wdCause(a,t);const truth=wdStatus(t);const judge=
  if(truth==="ok"){ap(a,{danh:-5});ap(t,{danh:2});relAdd(a,t,BAL.eff.j92.wdAccuse);
   return `${A0} hặc ${T0} ${c?WD_ST_WORD[c.st]:"ăn mặc sai phẩm"}; <span class="${a===S?"r":"g"}">tra xét ra ${T0} ăn vận đúng phẩm</span>, ${a===S?"ngươi":wdNm(a)} bị quở vì hặc bừa. Danh -5, ${T0} Danh +2. `}
  if(!roll(oVP(a))){ap(a,{danh:BAL.eff.j92.danhWdAccuse_2});relAdd(a,t,BAL.eff.j92.wdAccuse_2);return `${A0} hặc ${T0} ${WD_ST_WORD[truth]}, ${judge} bỏ qua, chỉ dặn lần sau giữ ý. ${a===S?`Danh ${balSg(BAL.eff.j92.danhWdAccuse_2)}. `:""}`}
- relAdd(a,t,BAL.eff.j92.wdAccuse_3);ap(a,{danh:2});const w=wdOf(t);
+ relAdd(a,t,BAL.eff.j92.wdAccuse_3);ap(a,{danh:BAL.eff.j92.danhWdAccuseA});const w=wdOf(t);
  if(truth==="over"){const gone=[];for(const sl of ["tram","y"]){const e=w[sl],it=wdItem(e);if(it&&wdP(e,t)>wdPOf(t)&&!(it.nt&&e.own===wdKey(t))){gone.push(it.n);w[sl]=null;const k=wdDefault(t,sl);if(k)w[sl]={k,from:"base"}}}
   ap(t,{danh:BAL.eff.j92.danhWdAccuse_3});punish(t,"ăn mặc vượt phẩm",1);return `${A0} hặc ${T0} vượt phẩm: <span class="${t===S?"r":"g"}">thành</span>. ${gone.length?gone.join(", ")+" bị tịch thu. ":""}${wdNmC(t)} Danh ${balSg(BAL.eff.j92.danhWdAccuse_3)}. `}
  if(truth==="under"){ap(t,{danh:BAL.eff.j92.danhWdAccuse_4});return `${A0} hặc ${T0} ăn vận quá giản dị, làm mất thể diện hoàng gia: <span class="${t===S?"r":"g"}">thành</span>. ${wdNmC(t)} bị quở, Danh ${balSg(BAL.eff.j92.danhWdAccuse_4)}. `}
