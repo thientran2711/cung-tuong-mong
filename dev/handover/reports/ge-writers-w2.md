@@ -82,3 +82,10 @@ Family scan (all 44, t/a/ht/ha/ft/cw): places/offices/kin/named objects checked 
 | nc_vuong | 6 | 1.00 | **2.83 OUT** | 3/3 | 3/3 |
 | td_an | 5 | .80 | 1.80 | 3/3 | 2/2 |
 Shading: 44/44 IN so far. Open-at-.11 band [1,2.6]: 3 roads just above. In-char rate above .60 on most roads (sens bot maxes stats → gates always met, odds at cap 88) — same engine numbers as pilots; not tuned (BAL.ge.odds is shared ONE CORE; report to Foreman E).
+
+## §ROUND 3 REMERGE (E11w2m, 18/11)
+- review/ge-writers-w2 now **101c67e7** (was 2e37bdc9); merged origin/main three times as it moved: e16e1d66 (W1 jgedata_w1.js + map-zones r6) → 884ce97 (doc-90-women-r1) → ddbf9c7 (entry-blank-r3). No content changes.
+- Conflicts: assemble.py (list = main's whole list, `jgedata.js, jgedata_w1.js, jgedata_w2.js`); jbalge.js (3 literals gate/fail/rw: W1 block then W2 block, no value changes, all keys of both waves present); index.html + sw.js each time (took main's copy, regenerated with assemble.py + `bash dev/site/build_site.sh`, markers 0). ge-guard.js auto-merged clean (W1 content + W2's «no name twice in one list» line).
+- map-zones r6 dropped palaces Trữ Tú cung, Hàm Phúc cung, Thái Cực điện: grep of jgedata_w2.js (and w1) for those names = 0 hits; the only palace named in W2 is Dưỡng Tâm điện (live). No content decision needed.
+- Tests on 101c67e7: ge-guard **6/6** (ERRORS 0, 26 live branches, dup line over W1+W2 clean) · ge-engine `- all` **808/808** · one-core-guard **PASS** · GE measure W2 roads (11 roads, kind+cruel, sens, 22 lives, PAR 2; run on 9725667, later merges touched no GE code): 22/22 lives ok, page errors 0, inChar .41 IN, random 0 IN, open11 2.33 IN, shade kind→thiện 1.00 / cruel→ác 1.00 on every road IN · quickcheck ALONE **PASS** on 49a12174 and again on 101c67e7 (open 1526 ms, old save ok, render 189/205, tab 411/471, buổi 1198/1433 new/live).
+- Pushed with main ddbf9c7 already contained (fetched right before the push).
