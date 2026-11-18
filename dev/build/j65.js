@@ -159,8 +159,10 @@ try{const rs1=resultShow;resultShow=function(title,before){try{fixTrue(before)}c
  const tk0=talk;talk=function(oi){let ttl="";try{ttl=talkOpts(curPeople()[popIdx])[oi].n}catch(e){}const b=rsnap();nrTalk={};let r;
   try{r=tk0.apply(this,arguments)}finally{const pend=nrTalk.args;nrTalk=null;
    try{fixTrue(b);popMsg=onePop(popMsg,ttl,b)}catch(e){console.error(e)}
-   const shown=popIdx!=null&&popMsg&&!(document.getElementById("modal")&&!document.getElementById("modal").hidden);
-   if(pend&&!shown)resultShow.apply(null,pend);try{renderStage()}catch(e){}}
+   /* person-dialog-restore (owner 18/11 06:10Z, OD:L1852): the result of an act in a person dialog ("Ta đã biết: đó là …", "Hỏi han: thành …") is the
+      standard bottom result card, never a box in the dialog column (it pushed the act cards down and left an empty band). An act that logs
+      but has no result call of its own (greet) gets the card from its log lines + the snapshot taken before. */
+   try{if(pend)resultShow.apply(null,pend);else if(popIdx!=null&&popMsg&&b&&(S.logSeq||0)>b.seq){window.__kaSenOvr=plain(popMsg).replace(/\s+/g," ").trim();try{resultShow(ttl,b,null)}finally{window.__kaSenOvr=null}}}catch(e){console.error(e)}try{renderStage()}catch(e){}}
   return r}}catch(e){console.error(e)}
 /* pop card result: one statement; later lines that only repeat it are dropped */
 function onePop(h,ttl,b){if(!h)return h;const seg=h.split("<br>");if(seg.length<2)return h;const first=T(seg[0]);
@@ -172,9 +174,20 @@ function onePop(h,ttl,b){if(!h)return h;const seg=h.split("<br>");if(seg.length<
    if(!items.length)continue;if(items.length===t.split("·").length){out.push(sgm);continue}
    out.push(items.map(x=>`<span class="ef ${/→ /.test(x)&&(+x.split("→")[1]>+x.split("→")[0].split(" ").pop())?"g":"r"}">${x}</span>`).join('<span class="ksep">·</span>'));continue}
   if(f){for(const v of [`${ttl}. ${f}`,`${ttl}: ${f}`,`${ttl}. Thành. ${f}`,`${ttl}. Hỏng. ${f}`,`${ttl}. Bại. ${f}`,f])t=t.split(v).join("");t=t.replace(/\s+/g," ").trim();if(!t||/^[.·\s]*$/.test(t))continue;
-   if(t!==T(sgm)){out.push(`<span class="past">${t}</span>`);continue}}
+   if(t!==T(sgm)){const d=popDedup(t,first,ttl);if(d)out.push(`<span class="past">${d}</span>`);continue}}
+  {const d=popDedup(t,first,ttl);if(!d)continue;if(d!==t){out.push(`<span class="past">${d}</span>`);continue}}
   out.push(sgm)}
  return out.join("<br>")}
+/* greet-stranger (owner 18/11 01:38Z "Người nghe gật gù…" ×2, "Chào hỏi đúng lễ" ×2): the Sổ ghi line appended under the result (j21) is
+   "<literary line> <title>. <facts>" — a different order than line one, so the whole-string strip above missed it. Sentence by sentence:
+   drop a sentence line one already says, the bare title / Thành / Hỏng, and "X a → b" items whose label line one already moved. Every action. */
+function popDedup(t,first,ttl){const F=T(first).replace(/\s+/g," ");const lab=x=>{const m=x.match(/^(.+?) -?\d+ → -?\d+(?: \([^)]*\))?$/);return m?m[1]:null};
+ const has=l=>{const al=S&&S.maid&&l==="Lòng "+S.maid.name?"Lòng cung nữ":l;return F.includes(l+" ")||F.includes(al+" ")};
+ const keep=[];for(const s0 of String(t).split(/(?<=[.!?])\s+/)){const s=s0.trim().replace(/[.!?]+$/,"").trim();if(!s)continue;
+  if(s===ttl||/^(Thành|Hỏng|Bại|thành|hỏng|bại)$/.test(s)||F.includes(s))continue;
+  const it=s.split("·").map(x=>x.trim()).filter(Boolean);if(it.length&&it.every(lab)){const k=it.filter(x=>!has(lab(x)));if(k.length)keep.push(k.join(" · ")+".");continue}
+  keep.push(s0.trim())}
+ return keep.join(" ").trim()}
 /* pop card: numbers read live (the visit list keeps a snapshot "lòng 97") */
 try{const pc0=popCard;popCard=function(p){try{if(p&&p.info){if(p.kind==="maid"&&S.maid)p.info=p.info.replace(/lòng -?\d+/,"lòng "+S.maid.loyal);if(p.kind==="th")p.info=p.info.replace(/lòng -?\d+/,"lòng "+S.th)}}catch(e){}return pc0.apply(this,arguments)}}catch(e){}
 /* review/lag-play-2: fixTitles only drops tooltips (no visible change) but reads scrollWidth = a forced layout in the middle of a render;

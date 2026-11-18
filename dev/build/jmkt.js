@@ -149,7 +149,7 @@ function tsMkNpc(v,w,cid){if(v&&v.coop){const r=toilFriendRec(v);if(r&&r.makeup)
  const bold=knows?w.bold:mktR(h+":b")<BAL.toil.play.diemPre,tone=knows?w.tone:(mktR(h+":t")<.5?"w":"c");
  const L=TOIL_PRE.filter(x=>(x[2]==="diem")===bold&&(x[3]==="warm"?"w":"c")===tone);const col=Object.assign({},(L.length?L:TOIL_PRE)[h%(L.length||TOIL_PRE.length)][4]);if(bold)col.want="diem";
  let hoa=0;try{hoa=kg82Lv(v,"hoa")||0}catch(e){}const sk=Math.max(0,Math.min(1,(v.sac||50)/BAL.toil.sacDiv+hoa/BAL.toil.hoaDiv));
- const R=toilNpcPlay(sk,h,col,bold?"diem":"","fit",["fest"],v.rank);return{makeup:true,score:R.score,look:R.look,col,knows}}
+ const HD=typeof hdNpc==="function"?hdNpc(v,h,sk):null;const R=toilNpcPlay(sk,h,col,bold?"diem":"","fit",["fest"],v.rank,HD?HD.q:null);return Object.assign({makeup:true,score:R.score,look:R.look,col,knows},HD?{hd:HD}:{})}
 /* the makeup points of one entrant (rec = a toilette record) against the want; returns {pts, add (to the total), mk, tone, bold} */
 function tsMkPts(rec,w){const P=BAL.toil.taste.pts;let s=0;const mk=toilMk(rec);const o={mk,tone:"",bold:false};
  if(!rec||!rec.makeup)s=P.moc;else{s=toilLv(mk).dep-BAL.toil.lvBase;if(mk!=="vung"){const t=toilToneOf(rec.col);o.tone=t;s+=t===w.tone?P.toneOk:(t==="w"||t==="c")?P.toneBad:0;
@@ -157,9 +157,9 @@ function tsMkPts(rec,w){const P=BAL.toil.taste.pts;let s=0;const mk=toilMk(rec);
  o.pts=s;o.add=Math.round(s*BAL.toil.taste.w);return o}
 /* her sitting before presenting: the ONE morning mirror (jtoil colour pick → three hồi → reveal), judged as a festival; the bot sits from skill */
 function tsMkSit(th,m,done){const w=tsMkWant(th,m);if(toilToday(S)){done();return}const occ=[{k:"fest",n:`Hội phối đồ · ${TS_THEME[th].n}`,F:2}];
- if(tsBot()||typeof kg82Open!=="function"){const d=toilDress(S,2),sk=toilSkill(),col=toilColFix(S.toilette&&S.toilette.col);const R=toilNpcPlay(sk.sk,mktH(String(S.name||"")+":hoi:"+toilWk()),col,col.want||"",d.style,["fest"],S.rank);
-  S.toilette={day:toilWk()*10,wk:toilWk(),score:R.score,makeup:true,style:d.style,dv:d.v,F:2,occ:["fest"],look:R.look,slip:R.slip,parts:R.parts,col,auto:1};setTimeout(done,0);return}
- KG82.ctx="hoc";const d=kg82Open({art:"Điểm trang",title:`Trước gương đồng · ${TS_THEME[th].n}`,how:`Trước khi ra mắt: chọn son phấn hợp đề, rồi kẻ mày, đánh phấn, chấm son. Không có đường chỉ: tay vụng thì mặt vụng.`});
+ if(tsBot()||typeof kg82Open!=="function"){const d=toilDress(S,2),sk=toilSkill(),col=toilColFix(S.toilette&&S.toilette.col);const h0=mktH(String(S.name||"")+":hoi:"+toilWk()),HD=typeof hdNpc==="function"?hdNpc(S,h0,sk.sk):null;const R=toilNpcPlay(sk.sk,h0,col,col.want||"",d.style,["fest"],S.rank,HD?HD.q:null);
+  S.toilette={day:toilWk()*10,wk:toilWk(),score:R.score,makeup:true,style:d.style,dv:d.v,F:2,occ:["fest"],look:R.look,slip:R.slip,parts:R.parts,col,auto:1};if(HD)S.toilette.hd=HD;setTimeout(done,0);return}
+ KG82.ctx="hoc";const d=kg82Open({art:"Điểm trang",title:`Trước gương đồng · ${TS_THEME[th].n}`,how:`Trước khi ra mắt: chọn son phấn hợp đề, rồi kẻ mày, đánh phấn, chấm son, dán hoa điền nếu có. Không có đường chỉ: tay vụng thì mặt vụng.`});
  if(!d){setTimeout(done,0);return}["chai-bg","chai-brow","chai-puff","chai-rouge"].forEach(n=>{try{kg82Img(n)}catch(e){}});try{KIT_VEIL.load()}catch(e){}
  TOIL.st={occ,F:2,parts:{},dv:null,start:wdCur(S),hoi:{th,want:w,key:w.key}};TOIL.after=done;try{toilMkPre()}catch(e){}toilHUD({score:"–",round:"2/4",time:"không hạn"});toilColUI()}
 /* leaving the mirror any way (Đã hiểu after the reveal, ✕, Esc) hands the contest back: exactly once */

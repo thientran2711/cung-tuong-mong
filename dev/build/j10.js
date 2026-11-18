@@ -3,9 +3,10 @@
 const EUN=["Tiểu Lộ Tử","Tiểu Phúc Tử","Tiểu Thuận Tử","Tiểu An Tử","Tiểu Hỉ Tử","Tiểu Quế Tử","Tiểu Lâm Tử","Tiểu Đức Tử","Tiểu Thọ Tử","Tiểu Xuân Tử"];
 let sidN=0;
 /* ONE household table (owner 17/11 OD 02:50Z + 04:48Z, review/staff-root): BAL.promo.cap[rank] = [maids INCLUDING the personal (close) maid, eunuchs],
-   for her AND every NPC consort (two-way law); cold palace = the lowest row; Thái hậu = BAL.promo.capTh; a cung nữ (servant road) keeps no household.
+   for her AND every NPC consort (two-way law); cold palace = the lowest row; Thái hậu = BAL.promo.capTh; Nữ đế (succession path c) = BAL.promo.capNd; a cung nữ (servant road) keeps no household.
    hhHas(p) = the same count of what the household holds now: the personal maid (S.maid / an NPC's own maid) is the "+1", counted once, here only. */
 function capOf(p){const B=BAL.promo,C=B.cap;if(S&&p&&p===S.thO)return B.capTh.slice();if(p===S&&typeof isSrv==="function"&&isSrv())return C[0].map(()=>0);
+ if(p===S&&S.succ&&S.succ.p==="c"&&B.capNd)return B.capNd.slice();
  return C[p&&p.out?0:Math.max(0,Math.min(C.length-1,rkOf(p)||0))].slice()}
 function hhHas(p){const L=(p&&p.staff)||[];return[L.filter(s=>s.role==="maid").length+1,L.filter(s=>s.role==="eunuch").length]}
 function mkServ(role){const n=role==="maid"?(AV.maids||[]).length:0;const used=allServ().map(x=>x.name);const pool=(role==="maid"?MAIDS:EUN).filter(x=>!used.includes(x));
