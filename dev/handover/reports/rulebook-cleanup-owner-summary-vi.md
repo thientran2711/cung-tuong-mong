@@ -104,3 +104,9 @@ Từ nay chỉ còn **một sổ duy nhất**: FIGURE_GATE. Các sổ cũ (art-c
 ## OWNER ANSWERS 23:25Z (18/11)
 - Đã chốt: câu 2, 3, 5, 8, 10, 11, 12, 13. Câu 2/3/5/8/13 đã ghi vào FIGURE_GATE; câu 10/11/12 chuyển cho main ghi vào sổ UI.
 - Còn mở: câu 1 (trang điểm), 4 (cổ vân kiên), 6 (mảnh vàng cũ), 7 (4 chân dung phi tần), 9 (hình tạm); sếp hỏi lại câu 1, 6, 7, 9 nên em phải giải thích trước; câu 4 chưa trả lời.
+
+## OWNER ANSWERS 23:36Z (18/11)
+- Câu 1 đã chốt: trang điểm 8+8 kiểu; dòng 6–7 kiểu cũ đã xóa (FIGURE_GATE, OD:L687).
+- Câu 6 đã chốt: màu vàng hoàng gia = C2 (mẫu TdwDfOyVNR, hình thứ 3 của các hình hoàng gia, = vàng của Nữ đế đã duyệt); mảnh luật vàng cũ đã xóa.
+- Câu 9 đã chốt: giữ 4 hình tạm (sự kiện sáng/tối, hành sự sáng/tối) làm hình dự phòng DUY NHẤT; không gán hình lung tung; duyệt sổ thấy hình tạm trên nút nào thì Foreman C vẽ hình cho sự kiện đó hoặc ráp vào hình nhóm nghĩa đúng.
+- Câu 7: đã gửi hình, chờ sếp trả lời (còn mở). Câu 4: còn mở.
