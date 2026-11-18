@@ -465,3 +465,4 @@ c12 in-game preview (room HH+Tần, Tuần lục Nữ đế), screenshots only |
 handsome man prompt-only sample (no proportion gate) | claude/cung-tuong-mong-handover-hj0h8w (art, img/_review/male-proportion) | session_011xDdVPS1M9BiswAUUGNhtg | DONE (archived ROOT-17 04:55Z) | 2026-11-18T04:32Z (Foreman C ROOT-16)
 c12 a18 Nữ đế #2 (r8 first) soft-smile (Round 42) | claude/cung-tuong-mong-handover-hj0h8w (art, _review CDN) | session_011xDdVQzK53ocBsDVyee2N3 | RUNNING | 2026-11-18T05:10Z
 | FOREMAN C-AG #10 (opus; successor of #9, opened by C-AG #9) | handover FOREMAN_C_STATUS | C-AG #9 | session_01UV1SzjAd8BYMMz2rKFZitp | RUNNING | 18/11 05:00Z |
+c12 a18 t5–t8 headdress re-do from live originals (Round 43) | claude/cung-tuong-mong-handover-hj0h8w (art, _review CDN) | session_011xDdVPdhZPQct6rWX6fDaZ | RUNNING | 2026-11-18T05:16Z
