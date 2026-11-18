@@ -95,3 +95,5 @@ Open claim: t9 Hoàng thái hậu + t10 Nữ đế consort tiers (CLAIMS row 17/
 1. Any figure outside the gate (A–D) is regenerated automatically — no asking — until it passes; keep the approved design (colour, pins, costume) of that rank.
 2. Every report states the NUMBER OF GENS per figure until PASS (table: figure | gens | final face % | pass). The owner uses it to decide whether to change the ±5% ceiling.
 3. Safety stop: after 6 failed gens on one figure, stop that figure and report it with the best one and its %.
+
+AGE LOOK a36/a51 (OWNER 18/11 ~21:35Z, verbatim): "Ừ, cái tuổi 36 á, đừng có vẽ cho kiểu đúng tuổi 36 nha, tức là tôi muốn vẽ giống như là kiểu trẻ trước tuổi á, thậm chí là tuổi 51 có già đi chăng nữa cũng là kiểu già trước tuổi, mà già kiểu đẹp lão á, hiểu không?" → a36 = young for her age (barely more mature than a26, no lines); a51 = visibly older but beautifully aged (đẹp lão), elegant, few silver strands, never haggard. build.py AGE_TXT a36/a51 updated; a18/a26 unchanged. (She also praised c13/c05 a26 t7/t8: "Đẹp. Đẹp lắm.")
