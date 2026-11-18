@@ -954,3 +954,4 @@ LESSONS s39: look at neighbours side by side before asking her to pick (A/B/C gl
 - (18/11 01:46Z) cloth-xoc 501ee0b: skin mask fixed (neck/hands clean, zoom-checked); wet on light robes still whole-robe grey → patches/Magnific; then mud vertical, tea lv1. Full set before owner.
 - (18/11 01:52Z) OWNER BUG empty picture boxes on entry → worker life-preload session_01UV1SzgmQZwF1XMsH7EzhLL (opus): life set first behind loading screen, kit placeholder, event dialogs wait for picture, @W 404 fix.
 - (18/11 01:56Z) OWNER: life 2 is Thường tại → 2 maids correct (cap [2,0]); staff-cap worker narrowed to verify suspects a–d only. Owner asked rank order: Đáp ứng < Thường tại < Quý nhân < Tần < Phi < Quý phi < HQP < HH (Quý nhân IS higher; answered).
+- (18/11 02:00Z) smudge r13 6e56871: ROOT of pink vertical stripe = eyeshadow run slabs (removed at vừa/nặng); pink = soft radial bloom; grey runs more transparent. Zoom-checked cheeks → 8 options sent owner (Lượt 37).
