@@ -999,3 +999,4 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | staff-cap-APPLY (owner table A + QN 2+0, roomFor FIGIX fix; opus BIG; brief briefs/staff-cap-apply.md) | review/staff-cap-apply | MAIN s41 | session_01UV1SzkNqcjf9atNLxPVz8y | RUNNING | 18/11 01:45Z |
 | REVIEW AG LATER #2 (opus BIG; successor of SzkmyAX; final re-gate) | review/ag-all-2-land, review/npc-chain-land | C-AG | session_01UV1Szk6Tdgr6dBwZ498fDY | RUNNING | 18/11 01:46Z |
 | OWNER UI BUG place-banner (count icon missing, chip on chip, banner covers head/ornament; options A/B/C; sonnet; brief briefs/place-banner.md) | review/place-banner | MAIN s42 | session_01UV1SzmHEoDtWWruq6yMGnZ | RUNNING | 18/11 01:49Z |
+| OWNER UI BUG opt-card-short (option cards too tall: stretched picture, long notes; options A/B/C; sonnet; brief briefs/opt-card-short.md) | review/opt-card-short | MAIN s42 | session_01UV1Szk6j15PHjAL8gMSR9z | RUNNING | 18/11 01:58Z |
