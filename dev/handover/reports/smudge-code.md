@@ -57,9 +57,12 @@ PRIORITY #1 CHECK: OD 17/11 ~23:30Z (smudge = CODE on the makeup layer, not Magn
 ## r11 (owner: the smudge's own pink much paler — the makeup blush is already pink below)
 - BAL.looks.smuFx.blush.wash [0,0,.055,.075] (about 1/3 of r10): only a hint of a smeared spread, no new colour. Grey runs, lip drag, nhẹ untouched. Checked at 420 px.
 
+## r12 (owner 00:58Z: pick the smear strength by numbers)
+- ONE knob family BAL.looks.smuFx.pct = {blush:[0,0,P,P], lip:[0,0,P,P]} = opacity of the smudge's own pink smear and of the lip smear at vừa / nặng (null = older wash / lip.a numbers). Default .10. Grey eye runs + nhẹ untouched. Options rendered with both at the same %: CDN img/_review/smudge/opt-<2|3>-<5|10|15|20>.png (2 = vừa, 3 = nặng), c11-tcold, labels 'Lem vừa · 5 %' … 'Lem nặng · 20 %'. Test: PCT=10 node dev/test/smudge-code.js <url> <outdir>.
+
 ## Open items / follow-ups
 - Small figure faces (~40 px): nhẹ barely visible, vừa/nặng read as a tear stain.
 - Shots outside git; built root files not committed.
 
 ## State
-branch review/smudge-code 46f6903 (pushed). Waiting for verdict.
+branch review/smudge-code b4239ee (pushed). Waiting for verdict.
