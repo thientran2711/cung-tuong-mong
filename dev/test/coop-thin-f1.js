@@ -102,6 +102,9 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  {const ms=table.filter(x=>typeof x.ms==='number').map(x=>x.ms).sort((a,b)=>a-b);if(ms.length)console.log('LATENCY tap→answer ms (LAG '+(+process.env.LAG||0)+', host CPU ×'+(+process.env.CPU||1)+'): n='+ms.length+' median='+ms[ms.length>>1]+' min='+ms[0]+' max='+ms[ms.length-1])}
  {const L=table.filter(x=>x.sp&&!x.sp.tries);const med=f=>{const a=L.map(f).filter(v=>typeof v==='number').sort((a,b)=>a-b);return a.length?a[a.length>>1]:null};
   if(L.length)console.log('LATENCY split (median ms, no resend, n='+L.length+'): total='+med(x=>x.ms)+' network(2 legs)='+med(x=>x.sp.net)+' host run='+med(x=>x.sp.run)+' host wait='+med(x=>x.sp.q)+' host view+diff+send='+med(x=>x.sp.v)+' guest apply+render='+med(x=>x.sp.ap)+' | guest pre-send='+med(x=>x.sp.pre)+' guest pending render='+med(x=>x.sp.pr))}
+ if(TRIPSRC){const t=await G.p.evaluate(()=>window.__trip&&__trip()).catch(e=>({err:e.message}));
+  const ent=Object.entries((t&&t.entries)||{}).filter(([k])=>/^F1\|/.test(k));
+  console.log('TRIPWIRE F1 act table (guest writes outside fromCanon during the ACT loop): total',t&&t.total,'state',t&&t.state,'· statePart',JSON.stringify(t&&t.statePart),'· F1 entries',JSON.stringify(ent),'· F1 top',JSON.stringify(((t&&t.parts)||{}).F1||[]).slice(0,600))}
  console.log('ACT table:');for(const x of table)console.log(' ',JSON.stringify(x).slice(0,300));
  if(process.env.OUT){fs.mkdirSync(process.env.OUT,{recursive:true});fs.writeFileSync(path.join(process.env.OUT,`f1-acts-L${LVL}-s${SWAP}.json`),JSON.stringify(table,null,1))}
  /* F3: the old relay messages for acts are not sent at level 6 (counted on both pages during F2): res / actr / act invite / do inv */
@@ -131,7 +134,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
    await stageP(B);await stageP(A);await H.p.evaluate(()=>{try{COOPW.thin.flush()}catch(e){}});await sync();
    if(A===G)await G.p.evaluate(()=>{S.pets=[];});/* her own pets: none, so petsteal has room (petHasFree) */
    /* the host sees her staged kid / pets on her entry before he acts on her (her fam reaches his entry of her) */
-   if(A===H)await until(H,()=>{const f=COOPW.friend();return !!(f&&(f.kids||[]).some(k=>k&&k.alive!==false))},null,15000);
+   if(A===H)await until(H,()=>{const f=COOPW.friend();return !!(f&&tKid(f))},null,20000);
    const a0=await pers(A),t0=await pers(B);await force(true);
    const r=await A.p.evaluate(k=>{const f=COOPW.friend();if(!f)return {err:'no friend'};const A2=ACT[k];let okd=false;try{okd=!A2.ok||A2.ok(S,f)}catch(e){okd='EXC '+e.message}
     if(okd!==true)return {err:'not ok '+okd};const ex=k==='gift'?S.inv.findIndex(e=>e&&!e.h&&e.k==='yensao'):undefined;let out='';
