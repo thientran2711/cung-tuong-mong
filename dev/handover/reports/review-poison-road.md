@@ -74,3 +74,29 @@ No tool or model refused anything during this review.
 - jpq's pqHit for the Emperor relies on BAL.mort.on=1 (with mort off, the legacy j3 roll ignores empDue). Today on=1.
 
 FAIL 3 @118436cc08ea83c7d46da37089155b93f03bf1e4 + list above (1 = KIT REQUEST to the kit keeper, 2–3 = worker fix round; merge newest origin/main 33e98993+)
+
+---
+## ROUND 2 — BIG re-review of review/poison-road-fix @1c177a23 (opus, reviewer session_01964izEFTD1Fs4DqpreEzX8)
+PRIORITY #1 CHECK ('taintDuc|odds\.weak|weakSuc|BAL\.pg\.weak'): OD 0 | ledger 0 | claims 0 | main 7 (jpoison BAL.pg.weakSuc = moved here; jweather BAL.wx.weakSuc / jface weakSuc = other rules) | review/* 0 | archive 0
+START_CTX ≈ 4 % (own estimate); finished ≈ 30 %, no rollover. No tool or model refused anything.
+Verdict branch `review/poison-road-r2-rv` = 1c177a23 + merge main 2850c45b (fd0bab90) + 2 reviewer fixes (5f361fa4, 752edb18) + final-merges main 13e2b834 (7901c540, kit-kpb live) → 5103d561 (46fa3bc6) → b3d2ccc7 (**19a23498**). Every merge: index.html / sw.js conflicts only, rebuilt with build_site.sh; poison-road 35/35 + guard 0 re-run after each.
+
+### Checks
+1. **FAIL 2 ONE CORE — fixed, + 2 reviewer fixes (family).** jpq pqOdds + jpoison pgOdds read one BAL.pg (tamDiv, trustDiv, seeDiv, hi, cpFac, khac, duc{}, hacSuc, sickMo, blockWk, npc{}); texts print BAL (picker shows "2 khắc", "Đức -10/-12", "Sức -120").
+   Guard kind `div` re-proven: re-typing `(a.tamco||0)/4` in jpq → `FAIL NEW inline rule number: jpq.js [div] .tamco||0)/4 (0 → 1)`. Its 439 frozen sites are all `.stat(||0)/N` rule formulas (tamco 176, tai 63, sung 48, danh 39, sac 26, duc 31 …) — no unrelated code blocked; it does not see divisors of a call (`oSee(...)/5`), so it is narrow, not unfair.
+   **Family scan (OD:L474) found 2 more, fixed by the reviewer (values unchanged):**
+   a. j8 taint chain (Tẩm đồ): Đức `-3` typed TWICE (taintItem + taintpick card fx = the owner's "two places" example), taintHit xạ hương `roll(35)`/`Sức -20`, chì `{sac:-1,suc:-3}`, lông mèo `-8/-1`, bùa `-3`, "khó chịu" sense `oSee/5`, inspect/search mưu kế `×6`/`×5` → BAL.eff.j8.taintDuc/taintXaSuc/taintHit + BAL.odb.j8.taintXa/taintFeelDiv/matInspect/matSearch (5f361fa4).
+   b. Weak-Sức odds had two sources: j9 odA typed `suc<30 → −15` while the poison "Vì sao" line printed copies BAL.pg.weakSuc/BAL.pg.weak → one key BAL.odds.weak{suc:30,pen:15}, odA reads it, jpoison prints it; pg copies removed (752edb18).
+   Own identity check (real build): 219 cases SAME — odA (7 Sức × 21 bases), pgOdds o + cp + weak line vs the old literal formula (6 targets × 5 Tâm cơ × 2 Sức), taint keys = old literals, taintHit chì ×2 on an NPC = Sức −6 Sắc −2. Guard baseline shrinks 4222 → 4212.
+   Left (NOT this branch, for a whole-game one-core owner): other typed `suc<30` rules (j76 sleep, j80 regen, jkc, jemo) and punish(…, 2) severities; TAINT item table c (bạc prices, like IT.pr).
+2. **ODDS CAP — OK.** pgOdds/pqOdds/maid taste go through main's oddsCl (BAL.odds lo 5 / hi 95) with the road tops min(…, BAL.pg.hi 92 / BAL.pq.max 60). pq.min 3 was below the cap floor 5 → removal right. Ladder words via word()/KIT_ODDS: iPad Thái hậu row at floor shows "Liều", top 60 = "Khá chắc". NOTE: jpq header comment says the top is "Năm ăn năm thua" — with max 60 it is "Khá chắc" (comment only, pre-existing).
+3. **FAIL 3 tests — real.** Broken build (Đức ×2 in pqGive, NPC persW ×0): `32/35 · 3 FAIL` (Đức 50 → 26, NPC caught, NPC hit). Restored: 35/35.
+4. **Gates @7901c540:** poison-road.js 35/35 · one-core-guard/text/bind/text-rule 0 fails · coop-e2e **63/63** first run · quickcheck --runs 6: 752edb18 vs 2850c45b PASS (render 206/218, buổi 833/922) · 7901c540 vs 13e2b834 PASS (render 229/196, buổi 1332/1011, noise: other runs new faster) · 46fa3bc6 vs 5103d561 PASS (render 200/229, buổi 1204/1315) · 19a23498 vs b3d2ccc7 run 1 FAIL G3 kit-conform float "tutorial: 0 intro pages" = flake (G3 alone re-run on the same build: floats none, MISSING 3 vs live 4), run 2 **QUICKCHECK PASS** (render 250/191, tab 451/493, buổi 1191/1155, core gates PASS, old save ok) · bots `poison-road-bots.js 20 8` (paired short run, 0 page errors): hate 28 tries/11 hits/12 executed, harsh 17/3/9, vg 24/12/13 (VG throne 5 won/3 lost), world NPC 0, max 4 tries a life → same shape as r1 (60×8), no runaway.
+   Old save: quickcheck old save from live loads + plays a buổi, 0 errors (also on 752edb18 vs 2850c45b: PASS, render 206/218, buổi 833/922).
+   Shots Fold 755x1000@2 + iPad Air 1180x820@2 (poison-road-shots.js, scratch only, nothing uploaded, nothing to wipe) LOOKED: picker, royal rows (Emperor/Thái hậu portraits, closed Thái hậu row greyed with reason), fail card, both endings; 0 page errors.
+5. **Final merge:** newest main at the time b3d2ccc7 merged → 19a23498, FF from b3d2ccc7. NOTE: while the last quickcheck ran main moved to 55db864a (live-test-reds) → the lander re-merges once (generated files) or asks me.
+6. **FAIL 1 (kit .kpb) — LIVE now** (main 13e2b834 = kit-kpb: jk4 `.kpb{flex:0 0 auto!important;min-height:auto}`). On the merged build the picker intro, the royal warning "Hoàng thượng và Thái hậu luôn có người nếm thử: chỉ khi có nguyên cớ mới dám, bị lần ra là tội chết, nhà mẹ đẻ liên lụy." and "Thành hay bại tùy…" are fully visible on Fold AND iPad; the option list scrolls below them. No private CSS.
+
+Notes kept from r1 (not FAIL): NPC Sủng saturation (balance-final), Vương gia lookup by S.vgAlly, one S.pq.slow slot.
+
+**PASS 19a23498f55775e86f087d51ad837948c5374b8c** (LAND READY on b3d2ccc7; main now 55db864a → one generated-files re-merge before the FF push).
