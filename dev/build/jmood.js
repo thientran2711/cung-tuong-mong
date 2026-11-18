@@ -69,7 +69,7 @@ window.mbS=mbS;window.mbBand=mbBand;window.mbOdPts=mbOdPts;window.mbAdd=mbAdd;wi
 (function(){if(typeof runOpt!=="function")return;const r0=runOpt;runOpt=function(a){const rolled=!!(a&&a.o!=null&&a.o<100&&!a.exam);const r=r0.apply(this,arguments);
  try{if(rolled&&(r===true||r===false)&&mbOn()){MOOD_N.acts++;const nm=String(a.n||"").replace(/<[^>]+>/g,"").slice(0,30);r?mbAdd(B().ok,nm,"ok"):mbAdd(B().fail,nm,"fail")}}catch(e){}return r}})();
 /* consort acts (Hậu cung): read the act's own result words */
-(function(){if(typeof runAct!=="function")return;const r0=runAct;runAct=function(a,t,k){const r=r0.apply(this,arguments);try{if(a===S&&mbOn()&&r){const A=ACT[k];let o=100;try{o=A&&A.o?A.o(S,t):100}catch(e){}
+(function(){if(typeof runAct!=="function")return;const r0=runAct;runAct=function(a,t,k){const r=r0.apply(this,arguments);try{if(a===S&&mbOn()&&r){const A=ACT[k];let o=100;try{o=A&&A.o?actOdds(S,t,k):100}catch(e){}
   if(o<100){MOOD_N.acts++;const bad=(typeof FAILRE!=="undefined"?FAILRE:/hỏng|không thành|bị phát hiện|bị lộ/).test(String(r).replace(/<[^>]+>/g,""));const nm=String(A.n||k).replace(/<[^>]+>/g,"").slice(0,30);bad?mbAdd(B().fail,nm,"fail"):mbAdd(B().ok,nm,"ok")}}}catch(e){}return r}})();
 /* rest cards lift a low mood (up to restCap): the card says so in Được */
 function mbRestGain(a){const M=mbS();if(!M||!a)return 0;const g=a.rest==="ds"?B().restDs:B().rest;return Math.max(0,Math.min(g,B().restCap-M.v))}

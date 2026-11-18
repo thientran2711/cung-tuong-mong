@@ -49,7 +49,7 @@ BAL.nwq={shift:0,free:2,hint:.5,auto:.25,miss:.8,xaMiss:.9,xaFloor:0,peek:8,idle
 /* the Emperor tires of accusations: every accusation an accuser brought in the last 36 tuần (a year) lowers the odds of her/his next one by accTire points
    (same rule for every accuser; the odds word shown is the real one) */
 Object.assign(BAL,{accTire:10});
-(function(){try{const A=ACT.accuse,f0=A.f;A.f=function(a,t){try{a.accL=(a.accL||[]).filter(w=>wk()-w<36);a.accL.push(wk())}catch(e){}return f0.apply(this,arguments)}}catch(e){}
+(function(){try{const A=ACT.accuse,f0=A.f;A.f=function(a,t){const r=f0.apply(this,arguments);/* recorded AFTER the roll: this charge tires the NEXT one, not itself (shown == rolled) */try{a.accL=(a.accL||[]).filter(w=>wk()-w<36);a.accL.push(wk())}catch(e){}return r}}catch(e){}
  const o0=oAccuse;oAccuse=function(a,t){const o=o0.apply(this,arguments);if(!BAL.accTire||!a)return o;const n=(a.accL||[]).filter(w=>wk()-w<36).length;return n?oddsCl(o-BAL.accTire*n):o}})();
 /* one charge at a time (balance 11/14, measured: without it an angry palace brought ~40-60 charges a life against her, ~30 stuck, each a fall of two ranks
    or the cold palace): a person just accused, whether the charge stuck or not, cannot be accused again by anyone for BAL.accCdT tuần.
@@ -1308,3 +1308,6 @@ Object.assign(BAL,{faceReveal:{ms:Math.round(1000*BAL.pace),lite:350,win:8000}})
 /* BOOK FIGURE (owner 18/11 ~07:10Z + ~07:20Z, KIT §56.3): ONE body size for everybody = SKULL TOP to FEET = figure column width / bookFigW (her p.5 shot: Fold col 220 -> 641, iPad col 183 -> 534). Layout = live; nothing cut, nobody shrunk, the text is drawn on top.
    cRef = the tallest Hoàng hậu crown above the skull top / body (catalog scan 18/11: thaihau-h3-a36 .072); gap = px the crown keeps under the running-head rule; footGap = px the feet keep above the page's bottom line when the feet line is moved down for her crown. */
 BAL.bookFigW=.343;Object.assign(BAL,{bookFrame:{cRef:.072,gap:8,footGap:10}});
+/* DOING AN ACT ON THE SPOT (review/shown-odds-one-path): "Cài đồ vào rương nàng" done in her own palace is easier than sending
+   someone by actHere.plant (was a typed -15 pen in j8 plantpick + a typed +15 on the j2 chest card); both read it through actCtx (j9). */
+Object.assign(BAL,{actHere:{plant:15}});
