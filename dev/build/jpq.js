@@ -6,7 +6,7 @@
       Hoàng thượng · "Vương gia": a living Vương gia she is bound to (j24 S.vgAlly + tình ý ≥ BAL.tinhLv.ally; an NPC: her child's real father / vgAlly);
       Thái hậu · "nghiêm": the life's Thái hậu archetype is harsh (BAL.pq.gate.harsh, jtrong TH_ARCH) AND Thái hậu quý ≤ BAL.pq.gate.th.
       Co-op: the Emperor's death stays muted (jmort / jcoopworld rule) → the Emperor is never offered; Thái hậu only on the host (host-only rolls).
-   2. ODDS (pqOdds, kit "Vì sao"): BAL.pg.base + Tâm cơ/4 + the target's trust/4 + dish grade − the three royal checks (người nếm, Ngự thiện phòng
+   2. ODDS (pqOdds, kit "Vì sao"): BAL.pg.base + Tâm cơ/BAL.pg.tamDiv + the target's trust/BAL.pg.trustDiv (one table with jpoison pgOdds; khắc = BAL.pg.khac) + dish grade − the three royal checks (người nếm, Ngự thiện phòng
       kiểm hai lượt, đũa bạc) [− the kitchen alert after a failed try] [+ slow poison passes the taster] [+ the Vương gia's men] [+ a trusted maid];
       clamped to BAL.pq.min..max (never better than "Năm ăn năm thua" band at the top: ladder words only, no %).
    3. FAIL: the kitchens go on alert BAL.pq.guard.alertMo months; traced (cp) → treason: the doer dies ("Ban chết", over() / jmort kill) and her house
@@ -17,7 +17,7 @@
       Quý phi, or he fails and she dies; "hận" road / her son heir → the existing succession flow (j3 / jmort / j99succ) runs unchanged.
    5. NPCs: same gates, same odds, same consequences (pqNpc in npcMonthly, host only), weighted by persW(v,"pgift"), one try per BAL.pq.npc.cd months
       in the whole palace (no runaway regicide). */
-Object.assign(BAL,{pq:{khac:2,duc:12,min:3,max:60,trustLo:-8,
+Object.assign(BAL,{pq:{duc:12,min:3,max:60,trustLo:-8,
  gate:{sung:15,an:10,th:-20,harsh:["nghiem","danghi","quyen"]},
  guard:{taster:12,twoPot:6,touch:8,alert:15,alertMo:6},
  help:{slow:12,vg:12,maid:6},
@@ -54,7 +54,7 @@ function pqGuard(a,who,k){const G=BAL.pq.guard,H=BAL.pq.help;const L=[["Thái gi
  const vg=who==="emp"&&pqVg(a);if(vg)L.push([`Người của ${pqMN(vg)} trong Ngự thiện phòng`,H.vg]);
  if(a.maid&&(a.maid.loyal||0)>=BAL.loy.trust)L.push([`Cung nữ tâm phúc của ${pgNm(a)} lo đường đưa món`,H.maid]);return L}
 /* the one formula (her card, the roll, every NPC): o = success, cp = a failed try traced to the doer, inq = a success traced later */
-function pqOdds(a,who,e,k,cover){const P=BAL.pg,Q=BAL.pq;const tc=Math.round((a.tamco||0)/4);const tr=Math.max(Q.trustLo,Math.round((who==="emp"?(a.sung||0):pqThReg(a))/4));const gr=pgGrade(e)*P.grade;
+function pqOdds(a,who,e,k,cover){const P=BAL.pg,Q=BAL.pq;const tc=Math.round((a.tamco||0)/P.tamDiv);const tr=Math.max(Q.trustLo,Math.round((who==="emp"?(a.sung||0):pqThReg(a))/P.trustDiv));const gr=pgGrade(e)*P.grade;
  const F=[[`Tâm cơ ${pgNm(a)} ${a.tamco|0}`,tc],[`${PQ_N[who]} ${tr>=0?"tin":"ngờ"} ${pgNm(a)}`,tr],[e&&e.wk?`Món ${WTIER[e.wk.ti|0]} che vị`:`${e&&IT[e.k]?itm(e.k).n:"Món"} che vị`,gr]].concat(pqGuard(a,who,k));
  const o=cl(Math.round(P.base+F.reduce((s,x)=>s+x[1],0)),Q.min,Q.max);
  const cp=cl(Q.caught.base+(pqS().alert>0?Q.guard.alert:0)-Math.round((a.tamco||0)/Q.caught.tam),Q.caught.lo,Q.caught.hi);
@@ -123,13 +123,13 @@ function pqNpc(v){if(!pqHost()||!S||S.dead||!v||!v.alive||v.out||v.confined)retu
 (function(){if(typeof npcMonthly!=="function")return;const m0=npcMonthly;npcMonthly=function(v){const r=m0.apply(this,arguments);let x="";try{x=pqNpc(v)}catch(e){console.error("pq npc",e)}return x?(r||"")+x:r}})();
 /* her card: two more targets in jpoison's "Bỏ độc vào…" picker (kit options; closed ones say why) */
 function pqLine(who,k,X){const P=PGX[k],Q=BAL.pq;const won=k==="hacdinh"?`${PQ_N[who]} băng hà`:`${PQ_N[who]} suy dần, thọ bớt ${Q.slowCut} năm`;
- return `${word(X.o)} · tốn: ${Q.khac} khắc, ${P.n} -1, Đức -${Q.duc} · thành: ${won} · hỏng: Ngự thiện phòng tra xét ${Q.guard.alertMo} tháng · kèm: hỏng mà bị lần ra (khả năng ${chanceLo(X.cp)}): ban chết, nhà mẹ đẻ liên lụy · thành rồi vẫn có thể bị tra ra (khả năng ${chanceLo(X.inq)})`}
+ return `${word(X.o)} · tốn: ${BAL.pg.khac} khắc, ${P.n} -1, Đức -${Q.duc} · thành: ${won} · hỏng: Ngự thiện phòng tra xét ${Q.guard.alertMo} tháng · kèm: hỏng mà bị lần ra (khả năng ${chanceLo(X.cp)}): ban chết, nhà mẹ đẻ liên lụy · thành rồi vẫn có thể bị tra ra (khả năng ${chanceLo(X.inq)})`}
 (function(){const g0=PEND.pgpick;if(!g0)return;PEND.pgpick=function(p){const d=g0.apply(this,arguments);try{if(!d||!d.o)return d;const e=S.inv[p.ix];if(!e||!pgFood(e))return d;const dn=e.wk?e.wk.n:itm(e.k).n;
   d.t=String(d.t).replace("Hoàng thượng và Thái hậu luôn có người nếm thử, không thể.","Hoàng thượng và Thái hậu luôn có người nếm thử: chỉ khi có nguyên cớ mới dám, bị lần ra là tội chết, nhà mẹ đẻ liên lụy.");
   const R=[];for(const who of ["emp","th"]){if(who==="th"&&S.thDead)continue;const M=pqMotive(S,who);
    for(const k of pqKinds(S)){const vgC=M.ok&&M.road==="vg";const X=pqOdds(S,who,e,k,vgC||!!(S.heir&&S.heir.k&&S.heir.k.alive&&!S.heir.v));
     const O={n:`${PGX[k].n} vào ${dn} dâng ${PQ_N[who]}`,fx:{},kgt:who/* kit: the target's own portrait (jopic kitOptPic), like every other target row */,x:pqLine(who,k,X),o:X.o,base:BAL.pg.base,why:()=>pqOdds(S,who,e,k).F,
-     go:()=>{spend(BAL.pq.khac);const i=S.inv.indexOf(e);const r=pqGive(S,who,i,k);if(r&&!S.dead){log(r);Q.push({t:`Dâng món lên ${PQ_N[who]}`,who:who==="emp"?pEmp():pTH(),h:`<p>${r}</p>`})}}};
+     go:()=>{spend(BAL.pg.khac);const i=S.inv.indexOf(e);const r=pqGive(S,who,i,k);if(r&&!S.dead){log(r);Q.push({t:`Dâng món lên ${PQ_N[who]}`,who:who==="emp"?pEmp():pTH(),h:`<p>${r}</p>`})}}};
     if(!M.ok)kitOff(O,M.miss,"mở khi có nguyên cớ");R.push(O)}}
   if(R.length){const i=d.o.findIndex(o=>o&&o.n==="Thôi");d.o.splice(i<0?d.o.length:i,0,...R)}}catch(x){console.error("pq pick",x)}return d}})();
 /* the gift-dialog row text follows (jpoison pgRow) */

@@ -37,8 +37,8 @@ const {chromium}=require('playwright');const fs=require('fs');const path=require
   life();ix=arm();hate();force({hit:0,cp:1});const c=tdHouse(S);const pw0=c?tdPow(c):null;let r=pqGive(S,"emp",ix,"hacdinh");
   ok("emp caught → dead",S.dead&&END&&/Ban chết vì mưu hại Hoàng thượng/.test(END.fate),END&&END.fate);ok("emp caught → house falls",END&&/liên lụy|tra xét/.test(END.t)&&(!c||tdPow(c)<pw0),END&&END.t);
   /* 4. Emperor · hate · fail not traced → alert */
-  life();ix=arm();hate();force({hit:0,cp:0});r=pqGive(S,"emp",ix,"hacdinh");ok("emp fail untraced → alive + kitchens alert",!S.dead&&S.pq.alert===BAL.pq.guard.alertMo,r);
-  ok("Đức cost applied once",true);ok("poison + dish used up",!S.inv.some(e=>e.k==="hacdinh")&&!S.inv.some(e=>e.k==="yensao"));
+  life();ix=arm();hate();force({hit:0,cp:0});S.duc=50;const duc0=S.duc;r=pqGive(S,"emp",ix,"hacdinh");const duc1=S.duc;ok("emp fail untraced → alive + kitchens alert",!S.dead&&S.pq.alert===BAL.pq.guard.alertMo,r);
+  ok("Đức cost applied once (= −BAL.pq.duc)",duc1===duc0-BAL.pq.duc,duc0+" → "+duc1);ok("poison + dish used up",!S.inv.some(e=>e.k==="hacdinh")&&!S.inv.some(e=>e.k==="yensao"));
   /* 5. Emperor · hate · success → dies next month → inquest exposed */
   life();ix=arm();hate();force({hit:1,inq:1});r=pqGive(S,"emp",ix,"hacdinh");ok("emp hit → death due",S.mort.empDue&&S.pq.done,r);tick(1);
   ok("emp hit + inquest exposed → Ban chết",S.dead&&END&&/mưu hại Hoàng thượng/.test(END.fate),END&&END.t);
@@ -62,9 +62,10 @@ const {chromium}=require('playwright');const fs=require('fs');const path=require
   life();ix=arm();S.sung=60;S.an=40;force({hit:1});ok("closed gate: act does nothing",pqGive(S,"emp",ix,"hacdinh")===""&&!S.mort.empDue);
   /* 11. NPC two-way: same gate, same consequences */
   life();let v=liveRivals(false)[0];v.sung=0;v.an=0;v.inv=(v.inv||[]).concat([{k:"hacdinh"},{k:"yensao"}]);force({hit:0,cp:1});BAL.pq.npc.try=1000;
-  const pdA=persW(v,"pgift");r=pqNpc(v);ok("NPC caught → NPC dies + house",pdA<=0||(!v.alive&&/mưu hại Hoàng thượng/.test(r)),r);
-  life();v=liveRivals(false)[0];v.sung=0;v.an=0;v.inv=(v.inv||[]).concat([{k:"hacdinh"},{k:"yensao"}]);force({hit:1,inq:1});BAL.pq.npc.try=1000;r=pqNpc(v);
-  const due=!!S.mort.empDue;tick(1);ok("NPC hit → Emperor dies, inquest names the NPC",persW(v,"pgift")<=0||(due&&S.dead&&!v.alive),END&&END.t);
+  const pW0=persW;const wOn=x=>{persW=(p,k)=>k==="pgift"&&p===x?1:pW0(p,k)};const wOff=()=>{persW=pW0};
+  wOn(v);r=pqNpc(v);wOff();ok("NPC caught → NPC dies + house",!!r&&!v.alive&&/mưu hại Hoàng thượng/.test(r),r);
+  life();v=liveRivals(false)[0];v.sung=0;v.an=0;v.inv=(v.inv||[]).concat([{k:"hacdinh"},{k:"yensao"}]);force({hit:1,inq:1});BAL.pq.npc.try=1000;wOn(v);r=pqNpc(v);wOff();
+  const due=!!S.mort.empDue;tick(1);ok("NPC hit → Emperor dies, inquest names the NPC",!!r&&due&&S.dead&&!v.alive,END&&END.t);
   life();v=liveRivals(false)[0];v.sung=0;v.an=0;v.inv=(v.inv||[]).concat([{k:"hacdinh"},{k:"yensao"}]);reset();BAL.pq.npc.try=1000;pqS().cd=5;ok("NPC cooldown blocks a second try",pqNpc(v)==="");
   /* 12. old save: no S.pq → month runs, card opens */
   life();delete S.pq;let e12="";try{tick(1);mkP("pgpick",{ix:arm()})}catch(x){e12=String(x)}ok("old save without S.pq",!e12&&S.pq,e12);
