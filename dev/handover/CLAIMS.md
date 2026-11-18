@@ -26,3 +26,5 @@ b10-a36-c01-c11 | CDN _review only | W61 session_011xDdVSKCA72y4oaX835Anu | RUNN
 b10-a36-c12-c22 | CDN _review only | W62 session_011xDdVS7v1P9E9VBhhoCzUA | RUNNING | 2026-11-18T15:58Z (Foreman C ROOT-25)
 b10-a36-c23-c32 | CDN _review only | W63 session_011xDdVR2azVrSAvuz8jSdAR | RUNNING | 2026-11-18T15:58Z (Foreman C ROOT-25)
 b10-a51-sample c03/c04/c12 | CDN _review only | W64 session_011xDdVQJWBGEQCg7HMWeLs1 | RUNNING | 2026-11-18T15:58Z (Foreman C ROOT-25)
+shown-odds-r2 (spend-before-roll, ORDER ROOT-52 15:30Z) | review/shown-odds-r2 | (opening) | RUNNING | 18/11 15:52Z | owner D #2
+NPC-PURPOSE G1 #8 (opus integrator; seat opened by D #2 for C-AG #13, OPEN NOW #2 15:31Z) | review/npc-purpose | C-AG #13 | session_01964izG7FPwnw4eEwFEt7t7 | RUNNING | 18/11 15:49Z |
