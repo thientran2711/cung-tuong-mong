@@ -71,7 +71,3 @@ Finding that explains the bug: the slim t1 is ALSO shrunk today (to 614 of 767 b
 Open point for sếp (not decided here): robe cut is on the RIGHT edge only (left edge aligned to the page); centring a wide figure so both sides are cut equally would keep her centred but breaks the "painted left edge on the page's left edge" rule (OD 17/11 03:12Z).
 
 ~100% xong / ~100% chơi được for this preview.
-
-### W29 follow-up: "Thường tại Mạnh Lan Chi" vs m09 (owner 18/11 ~06:35Z)
-Her figure in the tuanluc_*_clip room shots = `img/fig-consort-c06-tcold-a18.webp` (matched by eye: same dress/jade pendant/sash; the player is random per run, the name "Mạnh Lan Chi" cannot be reproduced). FIGURE_GATE A (`overlay_m09.py`, head top = lm10 − .30·F, skull top → feet on the red lines, hd/fig-consort-c06-tcold-a18.webp vs hd/fig-maid-m09-a18.webp): **face height −2.9 % vs m09** (m09 = 0). Image: https://ctm-img.victoria-tntt.workers.dev/img/_review/c12-ingame/lanchi_vs_m09.jpg (md5 verified; left m09, right Lan Chi).
-Note: her wide sleeves/hem overflow m09's outline on both sides (tcold dress is wider than m09's), height and face match.
