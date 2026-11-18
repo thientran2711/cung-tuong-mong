@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"668e0bf4+","t":"2026-11-18T21:26Z","c":"map-zones r6 (reviewer fix on r3 5a83694): a head in a dropped palace with a stale resHead to another dropped house got a second migration …","b":"659fbe0bf96b","h":[{"s":"b02879db+","t":"2026-11-18T20:49Z","c":"ge-writers-w1: carry jrd_muoi ch8 c3 «Thư sinh Giang Nam» (forced from s1/s2 every life) + BAL muoi_no_8.c3, by MAIN ORDER 18:45Z; muoi_no_…"},{"s":"fcff501a+","t":"2026-11-18T20:41Z","c":"map-labels-missing r2c: tag touches its own building or keeps a short leader (\u003c=90px) ending on the real slip/info rect, dot >=40px from ot…"},{"s":"c67d248d+","t":"2026-11-18T19:53Z","c":"ag-deed-perf: site build (index.html, sw.js)"},{"s":"6aab33ad","t":"2026-11-18T20:05Z","c":"KIT_REQUESTS: K-Q2-1 DONE 048f3c7"},{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"},{"s":"a5013222+","t":"2026-11-18T18:03Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)"},{"s":"08774c0e+","t":"2026-11-18T17:38Z","c":"ag-stf2 (test only): bribe histogram picks a servant whose lòng moves her bribe odds. Root of the 'disloyal one takes more' red (npc ~3/20,…"},{"s":"0351e140","t":"2026-11-18T16:48Z","c":"shop-panel: «Để ta xem» outside option, 3-column Mua/Bán grid, smallest picture strip, test"},{"s":"ebf25660+","t":"2026-11-18T15:29Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…"},{"s":"9f9c6c2b+","t":"2026-11-18T14:26Z","c":"shown-odds-one-path r1: plant on the spot is done in person (actCtx x.here, no sent-servant pen); Vì sao names spy knowledge (whyKnow); tes…"}]};
+window.CTM_BI={"s":"f6b89cbc","t":"2026-11-18T22:17Z","c":"errand scene r2: gain/loss only in the Được · mất kit chips (top of the report), lines carry only what she learned","b":"322b3b7152ac","h":[{"s":"668e0bf4+","t":"2026-11-18T21:26Z","c":"map-zones r6 (reviewer fix on r3 5a83694): a head in a dropped palace with a stale resHead to another dropped house got a second migration …"},{"s":"b02879db+","t":"2026-11-18T20:49Z","c":"ge-writers-w1: carry jrd_muoi ch8 c3 «Thư sinh Giang Nam» (forced from s1/s2 every life) + BAL muoi_no_8.c3, by MAIN ORDER 18:45Z; muoi_no_…"},{"s":"fcff501a+","t":"2026-11-18T20:41Z","c":"map-labels-missing r2c: tag touches its own building or keeps a short leader (\u003c=90px) ending on the real slip/info rect, dot >=40px from ot…"},{"s":"c67d248d+","t":"2026-11-18T19:53Z","c":"ag-deed-perf: site build (index.html, sw.js)"},{"s":"6aab33ad","t":"2026-11-18T20:05Z","c":"KIT_REQUESTS: K-Q2-1 DONE 048f3c7"},{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"},{"s":"a5013222+","t":"2026-11-18T18:03Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)"},{"s":"08774c0e+","t":"2026-11-18T17:38Z","c":"ag-stf2 (test only): bribe histogram picks a servant whose lòng moves her bribe odds. Root of the 'disloyal one takes more' red (npc ~3/20,…"},{"s":"0351e140","t":"2026-11-18T16:48Z","c":"shop-panel: «Để ta xem» outside option, 3-column Mua/Bán grid, smallest picture strip, test"},{"s":"ebf25660+","t":"2026-11-18T15:29Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -5506,7 +5506,7 @@ function mapFit(){try{const sc=document.querySelector(".game.maptab .mapsc");if(
  const kp=!!sc.closest(".kpmv");
  /* KIT §85.8 (owner 17/11 ~13:12Z "dư đồ nhỏ xíu"): PORTRAIT (kv1) = people cards row above, Ân sủng + Nguy hiểm row below (jmapc grid on #kshR); the map spans the full width between them: the margins come from the REAL row heights, the zoom FITS THE FREE HEIGHT (pan sideways), the open view is centred on her place + the "!" places */
  const one=!kp&&kitView().pages===1;
- const rowsM=()=>{const mv=sc.closest(".mapv"),R=document.getElementById("kshR");if(!mv||!R||R.hidden)return null;const mr=mv.getBoundingClientRect(),tc=R.querySelector(".k3cs"),tb=tc?tc.getBoundingClientRect():null,bt=[...R.querySelectorAll(".k3p")].map(e=>e.getBoundingClientRect()).filter(r=>r.height>0);return[mv,Math.round(tb&&tb.height>0?tb.bottom-mr.top+6:46),Math.round(bt.length?mr.bottom-Math.min(...bt.map(r=>r.top))+6:0)]};
+ const rowsM=()=>{const mv=sc.closest(".mapv"),R=document.getElementById("kshR");if(!mv||!R||R.hidden)return null;const mr=mv.getBoundingClientRect(),tc=R.querySelector(".k3cs"),tb=tc?tc.getBoundingClientRect():null,bt=[...R.querySelectorAll(".k3p:not(.kgf)")].map(e=>e.getBoundingClientRect()).filter(r=>r.height>0);return[mv,Math.round(tb&&tb.height>0?tb.bottom-mr.top+6:46),Math.round(bt.length?mr.bottom-Math.min(...bt.map(r=>r.top))+6:0)]};
  if(one){const m=rowsM();if(m){m[0].style.setProperty("--kmv-ft",m[1]+"px");m[0].style.setProperty("--kmv-fb",m[2]+"px");/* the rows can still settle after this (fonts, wrapped card text): look again next frame, redo the fit if they moved (max 3 times) */requestAnimationFrame(()=>{try{const n=rowsM();if(n&&(Math.abs(n[1]-m[1])>1||Math.abs(n[2]-m[2])>1)&&(window.__mfRe=(window.__mfRe||0)+1)<4)mapFit();else window.__mfRe=0}catch(e){}})}}
  const cs=getComputedStyle(w),mL=parseFloat(cs.marginLeft)||0,mR=parseFloat(cs.marginRight)||0,mT=parseFloat(cs.marginTop)||0,mB=parseFloat(cs.marginBottom)||0,cw=Math.max(1,sc.clientWidth);
  const port=sc.clientHeight>cw;/* KIT §85.7 (main s31 12:48Z): on PORTRAIT (Fold) the fit-all uses the full map width; its faded right edge runs under the right column, the pan can still bring that end flush with the column */const availW=Math.max(120,cw-mL-(port&&!kp?0:mR)),availH=Math.max(120,sc.clientHeight-mT-mB);
@@ -8411,6 +8411,7 @@ function j59hdrCount(){return;/* place-stage: the plaque is gone; the count chip
   m.innerHTML=` <span class="kchip n j59hchip">${j59ico()}<span class="j59n">${r[1]}</span></span>`+(t.length>r[0].length?" · "+t.slice(r[0].length):"");m.classList.add("j59hc");m.setAttribute("aria-label",`Ở đây còn ${r[1]} người`);m.dataset.j59h=m.innerHTML}catch(e){}}
 function j59chips(st,R,P,again){/* morechip-fix: placed once now and once more on the next frame, after the side column (k3Stage) has its full height */if(!again)requestAnimationFrame(()=>{try{if(st.isConnected)j59chips(st,R,P,1)}catch(e){}});/* KIT 33.9 swipe stage: P: {pg, pages, before, after, xl, xr}. NO arrow buttons — two "+N" chips in the top corners of the backdrop: LEFT = people already passed (left of the view), RIGHT = people still to come; hidden at 0. Pure kit chip, not tappable (the row is swiped) */
  for(const side of ["l","r"]){let c=st.querySelector(".j59more.j59m"+side);const n=P&&P.pages>1?(side==="r"?P.after:P.before):0;
+  if(side==="r"){const hn=n>0?Math.ceil((c?c.getBoundingClientRect().height:0)||44)+10:0;if(st.style.getPropertyValue("--kgrb")!==hn+"px")st.style.setProperty("--kgrb",hn+"px")}
   if(!(n>0)){if(c)c.remove();continue}
   if(!c){c=document.createElement("div");c.className="kchip n j59more j59m"+side;st.appendChild(c)}
   /* morechip-sil (owner 17/11 ~14:05Z): the kit chip shows the grey gender-neutral figure icon + the number (no "+") — ONE kit function j59chipIco(n) for every chip, both corners, all sizes */
@@ -32053,6 +32054,9 @@ BAL.bookFigW=.343;Object.assign(BAL,{bookFrame:{cRef:.072,gap:8,footGap:10}});
 /* DOING AN ACT ON THE SPOT (review/shown-odds-one-path): "Cài đồ vào rương nàng" done in her own palace is easier than sending
    someone by actHere.plant (was a typed -15 pen in j8 plantpick + a typed +15 on the j2 chest card); both read it through actCtx (j9). */
 Object.assign(BAL,{actHere:{plant:15}});
+/* ERRAND SCENE (owner OD 18/11 ~20:05Z..~20:20Z, jerr): n = khắc the person she sends stays away (counted from the tap, the walk included) when the parallel-time core
+   (jptime BAL.ptime.kinds[k].n) is not in the build; the scene reads the ONE state through the jerr adapter either way. msWalk = one walk off / on stage (ms, x BAL.pace via kitPace). */
+Object.assign(BAL,{errand:{n:2,msWalk:650}});
 /* ================= jbalge: ONE CORE (OD:L1267) rulebook of the GRAND ENDINGS (Đại kết cục, jge.js; design dev/design/GRAND_ENDINGS.md §2.14, r3) =================
    Every number the grand-ending engine uses or a text prints lives here; jge.js / jgedata.js hold words, option names and logic only.
    Loads after jbal2.js (BAL exists), before jgedata.js / jge.js. Set by measurement: dev/measure/ge-measure.js (bands BAL.ge.target).
@@ -37089,8 +37093,38 @@ function k3court(){let R=[];try{R=typeof kitCourtRows==="function"?kitCourtRows(
   let att="";if(r.k==="th"||r.k==="hh"){const n=r.k==="th"?(S.th|0):(S.hh|0);const known=typeof window.kitCourtKnown!=="function"||window.kitCourtKnown(r.k)!==false;
    if(known)att=`<span class="k3v"><small>quý ngươi</small> <span class="ef ${n>0?"g":n<0?"r":"n"}">${n>0?"+":""}${n}</span></span>`}
   return `<button type="button" class="k3c kcrow" data-kc="${r.k}" title="${r.who} · chạm để xem thẻ">${mdH(r.f,"xs")}<span class="k3ct"><b>${r.who}</b>${moodTxt}${att}</span></button>`}).join("")}
-function k3maid(){const b=k3hc("maid");if(!b||!S.maid||(typeof isSrv==="function"&&isSrv()))return"";let f="";try{f=mdH(pMaid(),"xs")}catch(e){}
- const v=k3val(b),n=+v;return `<button type="button" class="k3c" data-k3go="staff" title="Cung nữ thân tín · chạm để xem">${f}<span class="k3ct"><b>${esc(S.maid.name)}</b><span class="k3v"><small>Lòng</small> <span class="ef ${n>=BAL.loy.close?"g":n<BAL.loy.warn?"r":"n"}">${esc(v)}</span></span></span></button>`}
+/* KIT PART kitGroupFold (owner 18/11 ~20:55Z, review/stage-rightcol; KIT_REQUESTS kitCrewPlaque renamed): ONE generic group accordion for the stage right column.
+   Closed = one kit row "Label · N ›" (no faces, same look as "Ân sủng ›"); tap = the group's person cards DROP DOWN in place ("Label · N ‹" folds), never another frame.
+   ONE group open at a time; the open key lives in window.__kgfOpen (kept for the whole session, not per place). kitGroupFold(key,label,n,itemsHTML) -> html. */
+function kitGroupFold(key,label,n,items){if(!n||!items||window.__kgfOpen!==key)return"";
+ return `<div class="k3p kgf kgfopen" data-kgfbox="${key}"><button type="button" class="k3h kgf-t" data-kgf="${key}" title="${esc(label)} · ${n} · chạm để thu lại"><span>${esc(label)} · ${n}</span><b>‹</b></button><div class="kgf-l">${items}</div></div>`}
+/* the two small group buttons (right column: top of #kshR on the stage and the iPad map): number over label, same square kit button as the rail; tap = drop list under them */
+function kitGroupBtns(){const d=[["cn","Cung nhân"],["ct","Chí tôn"]].map(([k,l])=>[k,l,kgfCount(k)]).filter(x=>x[2]>0);if(!d.length)return"";
+ return `<div class="kgfbtns">${d.map(([k,l,n])=>{const on=window.__kgfOpen===k;return `<button type="button" class="krailb krailt kgfbtn${on?" kopen":""}" data-kgf="${k}" aria-pressed="${on}" title="${l} · ${n} · chạm để ${on?"thu lại":"mở"}"><b>${n}</b><span>${l}</span></button>`}).join("")}</div>`}
+window.kitGroupFold=kitGroupFold;window.kitGroupBtns=kitGroupBtns;
+/* «Cung nhân» = her household: the personal maid + every maid / eunuch of S.staff (same person cards as the Cung nhân tab; tap = that tab) */
+function k3crewChip(f,name,loy,tip){const n=+loy;return `<button type="button" class="k3c" data-k3go="staff" title="${esc(tip)} · chạm để xem">${f}<span class="k3ct"><b>${esc(name)}</b><span class="k3v"><small>Lòng</small> <span class="ef ${n>=BAL.loy.close?"g":n<BAL.loy.warn?"r":"n"}">${esc(String(loy))}</span></span></span></button>`}
+function k3crewList(){if(!S||(typeof isSrv==="function"&&isSrv()))return"";let h="";
+ if(S.maid){let f="";try{f=mdH(pMaid(),"xs")}catch(e){}h+=k3crewChip(f,S.maid.name,S.maid.loyal|0,"Cung nữ thân tín")}
+ (S.staff||[]).forEach(s=>{if(!s||s===S.maid)return;let f="";try{f=mdH(pServ(s),"xs")}catch(e){}h+=k3crewChip(f,typeof shortN==="function"?shortN(s.name):s.name,s.loyal|0,s.role==="eunuch"?"Thái giám":"Cung nữ")});
+ return h}
+function k3crewN(){return kgfCount("cn")}
+function k3crew(){return kitGroupFold("cn","Cung nhân",kgfCount("cn"),k3crewList())}
+function k3chitonG(){let R=[];try{R=typeof kitCourtRows==="function"?kitCourtRows():[]}catch(e){}return kitGroupFold("ct","Chí tôn",R.length,k3court())}
+/* PHONE DƯ ĐỒ (owner 18/11 ~21:40Z): no full-width group bars. «Cung nhân» / «Chí tôn» = TWO small kit rail buttons (number over label) right under the book / scroll icons;
+   tap = that group's people list drops down in the empty left strip of the map under the buttons (#kgfdrop, one open at a time, tap again closes). */
+function kgfPhoneMap(){try{const m=kitSideHost();return !!m&&m.classList.contains("mapv")&&kitView().pages===1}catch(e){return false}}
+function kgfCount(k){try{if(!S||S.dead)return 0;if(k==="cn"){if(typeof isSrv==="function"&&isSrv())return 0;return(S.maid?1:0)+(S.staff||[]).filter(s=>s&&s!==S.maid).length}return(typeof kitCourtRows==="function"?kitCourtRows():[]).length}catch(e){return 0}}
+function kgfDrop(){try{let d=document.getElementById("kgfdrop");const k=window.__kgfOpen,mv=kitSideHost();
+ if(!k||!kgfPhoneMap()||!mv||!S||S.dead){if(d)d.remove();return}
+ const lab=k==="cn"?"Cung nhân":"Chí tôn",n=kgfCount(k);if(!n){if(d)d.remove();return}
+ const items=k==="cn"?k3crewList():k3court();
+ if(!d){d=document.createElement("div");d.id="kgfdrop";d.className="ksh kgfdrop"}if(d.parentNode!==mv)mv.appendChild(d);
+ const h=`<div class="k3p kgf kgfopen"><div class="k3h kgf-t" style="cursor:default"><span>${esc(lab)} · ${n}</span></div><div class="kgf-l">${items}</div></div>`;if(d.__h!==h){d.innerHTML=h;d.__h=h}
+ const rl=document.getElementById("krail"),m0=mv.getBoundingClientRect(),r0=rl?rl.getBoundingClientRect():null;d.style.top=Math.round((r0&&r0.height?r0.bottom-m0.top:52)+6)+"px";
+ const ar=document.querySelector("#kshR .kas,#kshR .k3py");const bot=ar?ar.getBoundingClientRect().top-m0.top-6:m0.height-8;d.style.maxHeight=Math.max(120,Math.round(bot-parseFloat(d.style.top)))+"px"}catch(e){console.error("kgfDrop",e)}}
+function kgfRail(){try{if(kgfRail.done||typeof kitStageRail!=="object")return;kgfRail.done=1;
+ [["cn","Cung nhân",1],["ct","Chí tôn",2]].forEach(([k,lab,o])=>kitStageRail.add({id:"kgf-"+k,order:60+o,label:lab,title:lab+" · chạm để mở danh sách",count:()=>kgfCount(k),active:()=>window.__kgfOpen===k,when:()=>kgfPhoneMap()&&kgfCount(k)>0,onTap:()=>{window.__kgfOpen=window.__kgfOpen===k?null:k;const R=$$("kshR");if(R)R.dataset.full="";k3Stage();kgfDrop()}}))}catch(e){}}
 /* Ân sủng chips (owner 11/15 04:05Z): Tai mắt + the Ân sủng facts under the court chips, same plaque card and column width, one value per line,
    labels never cut. Có thai / Lật thẻ on the chance scale (chanceLvl, j1: Rất thấp…Rất cao), never the act ladder. Bổng lộc lives only here. */
 function k3AsRows(){/* consort-only facts (Lật thẻ, Có thai, Bổng lộc…): none on the cung nữ road nor in lãnh cung (review/small-bugs-2) */if(!S||S.dead||(window.kitRoad&&kitRoad()))return[];const L=[];const hv=k=>{const b=k3hc(k);return b?k3val(b):""};
@@ -37107,6 +37141,9 @@ function k3AsCrowded(st,R){try{const s=st.getBoundingClientRect(),r=R.getBoundin
  const hit=q=>Math.min(q.right,r.right)-Math.max(q.left,r.left)>1&&Math.min(q.bottom,r.bottom)-Math.max(q.top,r.top)>1;
  const figs=typeof kitFigRects==="function"?kitFigRects():[];if(figs.some(hit))return true;
  return [...st.querySelectorAll(".tok .nm, .tok .tag, .ftag")].some(e=>e.offsetParent&&!R.contains(e)&&hit(e.getBoundingClientRect()))}catch(e){return false}}
+document.addEventListener("click",e=>{const a=e.target.closest&&e.target.closest("#kshR [data-kgf]");if(!a)return;e.stopPropagation();
+ const k=a.dataset.kgf;window.__kgfOpen=window.__kgfOpen===k?null:k;const R=$$("kshR");if(R)R.dataset.full="";k3Stage();
+ const R2=$$("kshR");if(R2&&window.__kgfOpen){const o=R2.querySelector(".kgfopen");if(o)o.scrollIntoView({block:"nearest"})}},true);
 /* "Ân sủng ›" opens IN PLACE (owner 11/15 17:40Z + reference shot): the folded chip becomes the full Ân sủng card in the right column,
    column width, label left / value right — never a floating popover; its title "Ân sủng ‹" folds it again */
 document.addEventListener("click",e=>{const a=e.target.closest&&e.target.closest("#kshR [data-kas], #kshR [data-kasall], #kshR [data-kasfold]");if(!a)return;e.stopPropagation();
@@ -37136,7 +37173,7 @@ function k3Stage(){try{const st=$$("stage");if(!st)return;{const pk=S?(S.place||
  if(L.dataset.h!==hL){L.innerHTML=hL;L.dataset.h=hL}
  /* right: court chips · servant · servant-road facts */
  let y="";K3_RIGHT.forEach(k=>{const b=k3hc(k);if(!b)return;y+=k3row(k,esc(k3lab(b)),esc(k3val(b)),b.classList.contains("hot")?"hot":b.classList.contains("ok")?"ok":"")});
- const hR0=`<div class="k3cs">${k3court()}${k3maid()}</div>`,hY=y?`<div class="k3p k3py">${y}</div>`:"";
+ const phoneMap=!!mv&&kgfPhoneMap();const hR0=phoneMap?"":kitGroupBtns()+k3crew()+k3chitonG(),hY=y?`<div class="k3p k3py">${y}</div>`:"";
  const full=hR0+k3AnSung(false)+hY;
  /* Ân sủng under the court chips; when the column would run past the stage floor or onto a figure / name tag -> ONE "Ân sủng ›" chip */
  if(R.dataset.full!==full||R.dataset.w!==String(st.clientWidth)+"x"+st.clientHeight){R.classList.remove("kasx");R.innerHTML=full;R.dataset.full=full;R.dataset.w=st.clientWidth+"x"+st.clientHeight;R.dataset.h=full;
@@ -37147,6 +37184,7 @@ function k3Stage(){try{const st=$$("stage");if(!st)return;{const pk=S?(S.place||
      vertical column at the stage's right edge — the tassel-fix two-column block (.k3c2) is gone; a column taller than the stage
      scrolls inside itself (.kasx) */}
  R.classList.add("kasx");
+ kgfRail();kgfDrop();
  k3Gut()}catch(e){console.error("k3Stage",e)}}
 function kitSideHost(){try{const gm=document.querySelector(".game");if(gm&&gm.classList.contains("maptab")){const m=document.querySelector("#panel .mapv");if(m&&m.getClientRects().length)return m}}catch(e){}return $$("stage")}
 window.kitSideHost=kitSideHost;window.k3Stage=k3Stage;window.k3row=k3row;/* the top-bar row builder, for modules that add a row (jtoil "Hôm nay: …") */
@@ -37167,7 +37205,7 @@ function k3Gut(){const st=$$("stage");if(!st)return;const W=st.clientWidth;if(!W
  const gl=Math.max(need(L),0),gr=Math.max(need(R),0);const ol=st.style.getPropertyValue("--kgl"),or=st.style.getPropertyValue("--kgr");
  st.style.setProperty("--kgl",gl+"px");st.style.setProperty("--kgr",gr+"px");
  if((ol!==gl+"px"||or!==gr+"px")&&typeof window.j59lay==="function"){try{window.j59lay()}catch(e){}}}
-document.addEventListener("click",e=>{const p=e.target.closest&&e.target.closest("#kshL [data-k3], #kshR [data-k3], #kshR [data-k3go], .k3p[data-k3sheet], #k3tt [data-k3]");if(!p)return;
+document.addEventListener("click",e=>{const p=e.target.closest&&e.target.closest("#kshL [data-k3], #kshR [data-k3], #kshR [data-k3go], #kgfdrop [data-k3go], .k3p[data-k3sheet], #k3tt [data-k3]");if(!p)return;
  if(p.classList.contains("kmwx"))return;e.stopPropagation();
  if(p.dataset.k3go){const b=document.querySelector(`[data-tab="${p.dataset.k3go}"]`);if(b)b.click();return}
  const k=p.dataset.k3,h=$$("hud2");if(!h)return;
@@ -37248,7 +37286,7 @@ html body .kshR{position:absolute;top:8px;right:8px;width:var(--kgrw,150px);min-
 .kshR .k3r>b{white-space:normal;text-align:right}
 /* owner 11/15: people may stand under the right column — its plaques float on top on a SOLID card */
 .kshR .k3p,.kshR .k3c{background:rgb(255,250,240)!important;backdrop-filter:none}
-.ksh .k3p,.ksh .k3c,.kpname{pointer-events:auto;background:var(--k3pl);border:1px solid var(--line);border-radius:8px;box-shadow:0 1px 4px #3a20101f;backdrop-filter:blur(2px)}
+.ksh .k3p,.ksh .k3c{pointer-events:auto;background:var(--k3pl);border:1px solid var(--line);border-radius:8px;box-shadow:0 1px 4px #3a20101f;backdrop-filter:blur(2px)}
 .ksh .k3p{display:flex;flex-direction:column;padding:3px 6px;gap:0}
 .ksh .k3h{font-family:var(--display);font-size:.7rem;color:var(--gold);letter-spacing:.03em;border-bottom:1px solid var(--k-hair,#e6d3ac);margin-bottom:1px}
 .ksh .k3r{display:flex!important;align-items:center;gap:4px;border:0;background:none;padding:1px 0;margin:0;font:inherit;font-size:.75rem;line-height:1.25;color:var(--ink);text-align:left;cursor:pointer;min-height:0;width:100%}
@@ -37276,7 +37314,20 @@ html body .kshR{position:absolute;top:8px;right:8px;width:var(--kgrw,150px);min-
 /* Ân sủng plaque under the court chips (owner 11/15 04:05Z) */
 .ksh .kas .k3r{column-gap:8px}.ksh .kas .k3r>b{color:var(--ink)}
 .ksh .kas .kasfold{all:unset;box-sizing:border-box;display:flex;justify-content:space-between;align-items:baseline;width:100%;cursor:pointer;font-family:var(--display);font-size:.7rem;color:var(--gold);letter-spacing:.03em;border-bottom:1px solid var(--k-hair,#e6d3ac);margin-bottom:1px}
-.kshR.kasx{max-height:calc(100% - 16px);overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:thin}
+/* kitGroupFold (stage right column): closed row like "Ân sủng ›"; open = header + the person cards stacked in place */
+.ksh .kgf.kgfopen{padding:3px 4px 4px}.ksh .kgf-t{all:unset;box-sizing:border-box;display:flex;justify-content:space-between;align-items:baseline;width:100%;cursor:pointer;font-family:var(--display);font-size:.7rem;color:var(--gold);letter-spacing:.03em;border-bottom:1px solid var(--k-hair,#e6d3ac);margin-bottom:3px;padding:1px 2px}
+.kgfbtns{display:flex;gap:6px;flex:none}.kgfbtns .kgfbtn.krailb{flex:1 1 0;width:auto;min-width:0;padding:2px}
+.ksh .kgf-l{display:flex;flex-direction:column;gap:3px}.ksh .kgf-l .k3c{flex:none;box-shadow:none;border-color:var(--k-hair,#e6d3ac)}
+.kshR>.kgf,.kshR>.kgfbtns,.kshR>.kas,.kshR>.k3py{flex:none}
+
+/* kitGroupFold on the phone Dư đồ: the drop list stands in the left strip of the map under the rail buttons */
+.kgfdrop{position:absolute;left:6px;width:var(--kgrw,140px);z-index:9;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:thin;pointer-events:auto}
+
+.krailb.krailt{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:0;line-height:1.05;color:var(--ink,#3a2418)}
+.krailb.krailt b{font-size:1.05rem;font-weight:800;color:var(--gold,#9a6b12)}
+.krailb.krailt span{font-size:.46rem;font-weight:700;white-space:nowrap;letter-spacing:0}
+.krailb.krailt.kopen{box-shadow:0 0 0 2px var(--gold,#b8892b),0 1px 4px #3a20101f}
+.kshR.kasx{max-height:calc(100% - 16px - var(--kgrb,0px));overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:thin}
 .ksh .kas1{padding:2px 6px}.ksh .kas-one .k3l{font-weight:700;color:var(--gold)}.ksh .kas-one>b{color:var(--gold)}
 `;document.head.appendChild(css);
 
@@ -37387,7 +37438,7 @@ html body .stage #sc-t h2 .rmsg{font-size:.88rem!important;line-height:1.25;font
    line, the trailing note ("… đi vắng, đang ở …") wraps under it */
 html body .stage.k3g #sc-t{width:max-content!important;max-width:calc(var(--k3stw,100vw) - var(--kgr,0px) - 24px)!important}
 html body .stage.k3g #sc-t h2{white-space:normal!important}html body .stage.k3g #sc-t h2>*:not(:first-child),html body .stage.k3g #sc-t h2>*:not(:first-child) *{white-space:normal!important}
-html body .stage .tok .tag,html body .stage #j59metag .tag{background:none!important;border:0!important;box-shadow:none!important;padding:0!important;white-space:nowrap!important;color:#2a1a12!important;font-weight:600;text-shadow:0 0 2px #fff8ee,0 0 5px #fff8ee,0 0 9px #fff8eecc}
+html body .stage .tok .tag,html body .stage #j59metag .tag{background:none!important;border:0!important;box-shadow:none!important;padding:0!important;white-space:nowrap!important;color:#2a1a12!important;font-weight:600;text-shadow:var(--kts,0 0 2px #fff8ee,0 0 5px #fff8ee,0 0 9px #fff8eecc)}
 /* KIT 33.5 STAGE NAME CHIP (owner 11/15 iPad): TWO lines — rank / role on top (small), name below (bigger); both tinted by the person's
    rank colour (--tc from j59col = the kit rank palette RCOL / maid MRCOL / eunuch ERCOL / Emperor gold / Thái hậu amber), darkened for legibility */
 html body .stage .tok .tag,html body .stage #j59metag .tag{text-align:center!important}
@@ -43486,13 +43537,14 @@ function htAct(a,b){if(!S||S.dead||Q.length)return;const r0=rsnap();
  if(a==="ask"){const x=b.dataset.hk==="q"?qnById(+b.dataset.hid):h54Son(+b.dataset.hid);if(!x||htKn(x)||!can(BAL.btn.htAsk.k)||S.bac<BAL.bacFee.htAsk)return;spend(BAL.btn.htAsk.k);apply({bac:-BAL.bacFee.htAsk});htKnow(x);
   const n=bestSent&&bestSent(S);log(`${n?n.name+" dò hỏi":"Ngươi dò hỏi"} gia thế: ${b.dataset.hk==="q"?qLine(x):h54SonLine(x)}.`);resultShow("Dò hỏi gia thế",r0,"sure");render();return}
  if(a==="go"){tab=b.dataset.t;if(b.dataset.pi!=null)PG[tab]=+b.dataset.pi;render()}}
-document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-ht]");if(b&&!b.disabled){e.preventDefault();e.stopPropagation();htAct(b.dataset.ht,b)}},true);
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-ht]");if(b&&!b.disabled){e.preventDefault();e.stopPropagation();(window.htAct||htAct)(b.dataset.ht,b)}},true);
 /* the son's own card (Con của ngươi) gets the marriage button + state, like the daughters' */
 (function(){const kc=kidCard;kidCard=function(k){let h=kc.apply(this,arguments);try{if(k&&k.alive&&k.sex==="m"&&(k.age>=BAL.age.matchShow||k.pB||k.pW)){
   h=h.replace('<div class="pcinfo">',`<div class="pcinfo"><span>Hôn sự: ${pkState(k)}</span>`);const bt=pkBtn(k);if(bt)h=h.replace('<div class="pcr">',`<div class="pcr"><h5>Hôn sự</h5><div class="pcb">${bt}</div>`)}}catch(e){}return h}})();
 function pkState(k){if(k.pW){const W=k.pW;return `chính phi ${W.chinh.name}, con gái ${W.chinh.off}${W.trac.length?` · trắc phi ${W.trac.map(x=>x.name).join(", ")}`:""}`}
  if(k.pB){const q=qnById(k.pB.q);return `đã hứa hôn với ${q?q.name+", con gái "+q.off:"quý nữ"}${k.age<BAL.age.wed?", cưới khi tròn "+(BAL.age.wed)+"":""}`}return k.age>=BAL.age.betroth?"chưa bàn hôn sự":"chưa đến tuổi bàn hôn sự (16)"}
 window.pkState=pkState;
+window.htAct=htAct;/* jerr (errand scene) wraps the "ask" errand: Dò hỏi gia thế */
 
 /* ---------- STRANGER RULE for children (owner 11/15): a child she has never met shows the grey child silhouette everywhere (strip, card,
    Kế vị, stage); the name is public (announced at birth, j61 k61Pub). Met = her own children (from birth), a palace visit to the mother,
@@ -51215,6 +51267,7 @@ HX.pl67="Việc trong Mệnh truyện ngươi đã nhận lời lo liệu. Chạ
 /* kit page #kit sample of the K3_STATE hook (KIT 31.2): a module's state chip in the top-bar state row, drawn by jk3 k3row (review r6) */
 if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§31.2",title:"K3_STATE: chip trạng thái ở hàng đầu trang (hạn lo liệu)",html:()=>typeof k3row!=="function"?"":
  `<div class="k3tc"><span class="k3tt"><span class="kstl k3l1">${k3row("pl67","Hạn lo liệu","4 buổi","hot")} ${k3row("fake","Giả bệnh","","hot")}</span></span></div>`});
+if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§31.2b",title:"kitGroupFold: nút nhóm sổ xuống (Cung nhân · N, Chí tôn · N), đóng + mở",html:()=>{if(typeof kitGroupFold!=="function")return"";const c=n=>`<button type="button" class="k3c"><span class="k3ct"><b>${n}</b><span class="k3v"><small>Lòng</small> <span class="ef g">70</span></span></span></button>`;const o=window.__kgfOpen;window.__kgfOpen=null;const a=kitGroupFold("cn","Cung nhân",3,c("Thanh Trúc")+c("Bạch Lan")+c("Lâm Tử"));window.__kgfOpen="cn";const b=kitGroupFold("cn","Cung nhân",3,c("Thanh Trúc")+c("Bạch Lan")+c("Lâm Tử"));window.__kgfOpen=o;return `<div class="ksh" style="position:static;width:150px;display:flex;flex-direction:column;gap:4px">${a}${b}</div>`}});
 (function(){const h0=renderHud2;renderHud2=function(){const r=h0.apply(this,arguments);try{const P=pl67();const el=$("hud2");if(P&&el&&!el.querySelector('[data-hx="pl67"]')){const left=P.due-absB67();
   el.insertAdjacentHTML("beforeend",`<button class="hc hot" data-hx="pl67">Hạn lo liệu <b>${dlT67(left)}</b></button>`);if(typeof k3Stage==="function")k3Stage()}}catch(e){}return r}})();
 window.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest('[data-k3="pl67"],[data-hx="pl67"],[data-pl67]');if(!t)return;e.stopPropagation();e.preventDefault();pl67Open()},true);
@@ -57312,6 +57365,7 @@ function sgRun(id,k,m){const v=RV(id),i=rivals.indexOf(v);if(i<0)return;SG.mod=m
      kitStageRail.add({id, icon:"https://ctm-img.victoria-tntt.workers.dev/img/kit/….webp", title:"Tên", onTap:fn, badge:()=>bool, when:()=>bool, order:20})
    Status-icon extras (§77.1, used by kitStatusIcon in jstatus.js): icon:()=>path (painted state icon, ico-download / ico-update) or glyph:"↓" (text, fallback only), busy:()=>bool (tiny CSS-only motion on the glyph),
    done:()=>bool (still, green), onTitle:true (also shown in a fixed bottom-left dock while no game is on screen).
+   Label+count variant (KIT §31.2b, review/stage-rightcol): {id,label:"Cung nhân",count:()=>n,active:()=>bool,title,onTap,when,order} = the same square button with a bold number over a tiny label (no painted icon); used by the phone Dư đồ group buttons.
      kitStageRail.remove(id) · kitStageRail.paint() (re-draw now; it also re-draws after every renderStage / render and on resize).
    Kit look: the square kit icon button (card paper, gold hairline, soft shadow) with a painted icon; the badge = the kit seal-red dot.
    Old saves load unchanged: S.goalSeen is new and optional. */
@@ -57333,7 +57387,7 @@ function paint(){try{const st=document.getElementById("stage");let el=document.g
  let calm=false;try{calm=typeof reducedMotion==="function"&&reducedMotion()}catch(e){}
  const L=R.filter(x=>(live||x.onTitle)&&val(x.when,true));if(!L.length){if(el)el.remove();return}
  if(!el){el=document.createElement("nav");el.id="krail";el.className="krail";el.setAttribute("aria-label","Lối tắt")}
- const h=L.map(x=>{if(x.chip)return `<div class="krailc" data-rail="${x.id}">${val(x.chip,"")}</div>`;const b=val(x.badge,false),bz=val(x.busy,false)&&!calm,dn=val(x.done,false);return `<button type="button" data-g="${String(x.title||"").trim().charAt(0)}" class="krailb${x.glyph?"":" kld"}${b?" kbadge":""}${bz?" kbusy":""}${dn?" kdone":""}${x.glyph?" kglyph":""}" data-rail="${x.id}" aria-label="${x.title}${b?" (có mới)":""}" title="${x.title}">${x.glyph?`<span class="krailg" aria-hidden="true">${val(x.glyph,"")}</span>`:`<img src="${val(x.icon,"")}" alt="" decoding="async" onload="this.parentNode.classList.remove('kld')" onerror="this.parentNode.classList.remove('kld');this.parentNode.classList.add('kerr')">`}</button>`}).join("");
+ const h=L.map(x=>{if(x.chip)return `<div class="krailc" data-rail="${x.id}">${val(x.chip,"")}</div>`;const b=val(x.badge,false),bz=val(x.busy,false)&&!calm,dn=val(x.done,false);if(x.label){const on=val(x.active,false);return `<button type="button" class="krailb krailt${on?" kopen":""}" data-rail="${x.id}" aria-label="${x.title}" aria-pressed="${on}" title="${x.title}"><b>${val(x.count,"")}</b><span>${x.label}</span></button>`}return `<button type="button" data-g="${String(x.title||"").trim().charAt(0)}" class="krailb${x.glyph?"":" kld"}${b?" kbadge":""}${bz?" kbusy":""}${dn?" kdone":""}${x.glyph?" kglyph":""}" data-rail="${x.id}" aria-label="${x.title}${b?" (có mới)":""}" title="${x.title}">${x.glyph?`<span class="krailg" aria-hidden="true">${val(x.glyph,"")}</span>`:`<img src="${val(x.icon,"")}" alt="" decoding="async" onload="this.parentNode.classList.remove('kld')" onerror="this.parentNode.classList.remove('kld');this.parentNode.classList.add('kerr')">`}</button>`}).join("");
  const host=live?(onMap?mvh:st):document.body;el.classList.toggle("kstdock",!live);
  if(el.__h!==h){el.innerHTML=h;el.__h=h;el.querySelectorAll(".krailb.kld").forEach(b=>{const i=b.querySelector("img");if(i&&i.complete&&i.naturalWidth)b.classList.remove("kld")})}if(el.parentNode!==host)host.appendChild(el);
  if(live){place(el,onMap?mvh:st);el.style.bottom=""}else{el.style.top="";const tb=document.getElementById("tabs");const q=!onTitle&&tb&&tb.getClientRects().length?tb.getBoundingClientRect():null;el.style.bottom=q?`${Math.round(innerHeight-q.top+6)}px`:""}
@@ -74933,7 +74987,9 @@ function lay(){try{const st=$("stage");if(!st)return;let nm=$("kpname"),en=$("kp
  /* once per visit + line (renders repeat; a new visit, even to the same place with the same text, toasts again) */
  const tk=S&&S.visit?S.visit:null;if(toast&&live){if(lay.v!==tk||lay.t!==toast){lay.v=tk;lay.t=toast;(window.kitLineToast||kitLineToast)(toast)}}else if(!toast){lay.v=tk;lay.t=""}
  /* (2) place name, top of the right column */
- if(name){if(!nm){nm=document.createElement("div");nm.id="kpname";nm.className="k3p kpname";st.appendChild(nm)}if(nm.textContent!==name)nm.textContent=name;nm.hidden=false;
+ if(name){if(!nm){nm=document.createElement("div");nm.id="kpname";nm.className="kpname";st.appendChild(nm)}
+  /* owner 18/11 ~20:55Z: plain TEXT on the scene picture, no plaque / frame, not fixed-width; hall on line 1, palace on line 2 */
+  const parts=name.split(/\s*·\s*/).filter(Boolean).slice(0,2),hh=parts.map(x=>`<span>${esc(x)}</span>`).join("");if(nm.__h!==hh){nm.innerHTML=hh;nm.__h=hh}nm.hidden=false;
   const h=Math.ceil(nm.getBoundingClientRect().height)+6;st.style.setProperty("--kpnh",h+"px");st.classList.add("kpn")}
  else{if(nm)nm.hidden=true;st.style.setProperty("--kpnh","0px");st.classList.remove("kpn")}
  /* (3) entry line chip, top of the stage */
@@ -74954,10 +75010,12 @@ try{addEventListener("resize",()=>{clearTimeout(lay.__t);lay.__t=setTimeout(lay2
 /* (1) the count chip: the kit rail's first slot */
 try{if(window.kitStageRail)kitStageRail.add({id:"here",order:0,chip:()=>{const n=hereN();return n&&typeof j59ico==="function"?`<span class="kchip n j59hchip" role="img" aria-label="Ở đây còn ${n} người">${j59ico()}<span class="j59n">${n}</span></span>`:""},when:()=>hereN()>0&&onStage()})}catch(e){}
 const css=document.createElement("style");css.id="kit-plst";css.textContent=`
+:root{--kts:0 0 2px #fff8ee,0 0 5px #fff8ee,0 0 9px #fff8eecc}
 html body .stage #sc-t{display:none!important}
-.kpname{position:absolute;top:8px;right:8px;width:var(--kgrw,150px);z-index:3;box-sizing:border-box;padding:4px 8px;text-align:center;font-weight:800;font-size:1.1rem;line-height:1.2;color:#3a1d10;overflow-wrap:anywhere;background:rgb(255,250,240)}
+.kpname{position:absolute;top:8px;right:10px;z-index:3;box-sizing:border-box;display:flex;flex-direction:column;align-items:flex-end;max-width:calc(100% - 80px);pointer-events:none;text-align:right;font-weight:800;font-size:1.1rem;line-height:1.2;color:#2a1a12;text-shadow:var(--kts)}
+.kpname>span{white-space:nowrap}
 html body .stage.kpn .kshR{top:calc(8px + var(--kpnh,0px))}
-html body .stage.kpn .kshR.kasx{max-height:calc(100% - 16px - var(--kpnh,0px))}
+html body .stage.kpn .kshR.kasx{max-height:calc(100% - 16px - var(--kpnh,0px) - var(--kgrb,0px))}
 html body .stage .kmnote.kmslot{position:absolute!important;top:6px!important;bottom:auto!important;left:62px;right:calc(var(--kgrw,150px) + 16px);translate:none!important;max-width:none;animation:none;display:flex;justify-content:center;z-index:6;pointer-events:none}
 html body .stage .kmnote.kmslot[hidden]{display:none!important}
 .kmnote.kmslot .kchip{font-size:.74rem;line-height:1.25;padding:3px 10px;white-space:normal;text-align:center;max-width:100%;pointer-events:auto}
@@ -75103,6 +75161,166 @@ let NFON=0;function nfInstall(){if(NFON||typeof window.nfStep!=="function"||type
 /* jnf may load after this file (assemble order): install now, else once the page has loaded */
 nfInstall();if(!NFON)try{window.addEventListener("load",nfInstall)}catch(e){}
 window.stealMgDebug=()=>({tok:[...TOK.entries()].map(([a,t])=>[a===S?"me":a&&a.id,t]),nfup:NFUP,frup:FRUP,frw:FRW,ghold:GHOLD,held:!!HELD,busy:BUSY,st:ST.slice(-20)});
+})();
+/* jerr.js — ERRAND SCENE r2, NON-BLOCKING (owner OD 18/11 ~20:05Z "tôi muốn thấy con nhỏ đi ra khỏi sân khấu … rồi nó về", ~20:10Z CANON OVERWRITE "KHÔNG BAO GIỜ chặn chơi",
+   ~20:15Z + ~20:20Z parallel time, EVERY button where she asks / sends another person; review/errand-scene; MOTION.md "Sai người đi").
+   The scene is a PICTURE OF ONE STATE: "person P is away until khắc K" (task {who, nm, k, lbl, t0, due, back, read, rep}).
+   - tap = time moves AT ONCE as always (no hold, no deferred result, no shield, no wait): the person walks off the stage in the background, her slot shows
+     the kit chip «đang đi dò la…» (errWord) while she is away;
+   - at khắc K (her clock moved: spend / nextBuoi) she walks back ON in the background and a small kit «!» chip stands on her; tap the chip = read the report
+     (the kit status icon panel «tin», §77.1 — never a forced modal);
+   - runner ALWAYS drawn: she walks with her own painted figure (kitFigOf) from / to the kit errand spot (kitErrandSpot) when her token is not on the page
+     in view (crowded stage, swipe pages "+N", resting elsewhere) — one kit rule, no private variant.
+   ONE ADAPTER (errTasks / errAwayOf / errNews / errNow / errWhen): when the parallel-time core is in the build (window.PTIME, jptime S.away, BAL.ptime) the adapter
+   READS ITS state (ptSend creates the task, ptTick lands it, its status icon owns the panel); without it the adapter keeps the same shape in S.erra (created here at the
+   gates, landed here at the due khắc, panel registered here). Nothing is computed twice; numbers from BAL (BAL.errand / BAL.ptime). Old saves: S.erra is created lazily.
+   Gates (fallback only; the scan table lists every act): runAct (every ACT sent to someone elsewhere, 46 acts) + scout, invite, h54Act thu, tdAct gift, htAct ask.
+   KIT: motion layer `.kmfly.kmerr` (cleaned by kmReset), notice = kitLine (§42.2), chips = the kit chip (kchip n / r), icon = kitStatusIcon; no private frame / chip. */
+(function(){
+const ER=window.ERR={n:0,live:0,seen:{},base:null,walk:{},skips:0};
+/* wording per errand (VANPHONG: cổ trang, no %, no odds numbers). Key = ACT key or a named flow. Harm acts all read as a quiet errand. */
+const ERRV={spy:"dò la",ally:"đưa lời kết giao",bribe:"mua chuộc người",bribel:"đưa quà lót tay",block:"lo việc thẻ bài",blockf:"nhờ ơn người quen",rumor:"rỉ tai tin đồn",lygian:"gieo lời ly gián",
+ tocao:"đưa chứng cứ tố tội",expose:"đưa tin tư tình",xinhh:"dâng lời lên Hoàng hậu",laydo:"lấy đồ",laydol:"lấy đồ",plant:"cài đồ",petcare:"chăm thú nuôi",
+ scout:"dò nơi ở",invite:"đưa lời mời",letter:"gửi thư, quà",tdgift:"biếu quà, đưa thư",kin:"dò hỏi gia thế",listen:"nghe ngóng"};
+const ERRV_DEFAULT="làm việc kín";
+/* acts where she goes HERSELF (no servant leaves): jecon spyk "Tự đi dò la" */
+ER.self=["spyk"];
+function errWord(k){return "đang đi "+(ERRV[k]||ERRV_DEFAULT)+"…"}
+window.errWord=errWord;
+/* ---------------------------------------------------------------- the ONE ADAPTER ---------------------------------------------------------------- */
+function errOn(){try{return !!(window.PTIME&&PTIME.on&&PTIME.on())}catch(e){return false}}
+function errKH(){try{return BAL.time.khac||4}catch(e){return 4}}
+function errNow(){try{if(errOn())return PTIME.now();return bid()*errKH()+Math.max(0,Math.min(errKH(),typeof used==="number"?used:0))}catch(e){return 0}}
+function errN(k){try{if(BAL.ptime&&BAL.ptime.kinds){const r=BAL.ptime.kinds[k]||BAL.ptime.kinds.def;if(r&&r.n!=null)return r.n}}catch(e){}return(BAL.errand&&BAL.errand.n)||2}
+function errWhen(K){if(errOn()&&PTIME.when)try{return PTIME.when(K)}catch(e){}
+ const kh=errKH(),b=Math.floor(K/kh),i=K-b*kh,nb=bid();let B4=4;try{B4=B4N}catch(e){}
+ if(b===nb)return`khắc ${i+1}`;if(Math.floor(b/B4)===Math.floor(nb/B4)){let n="";try{n=BUOI[b%B4].toLowerCase()}catch(e){}return`${n}, khắc ${i+1}`}return"ngày mai"}
+function errZ(){if(!S)return[];if(!Array.isArray(S.erra))S.erra=[];return S.erra}
+/* every send of HERS, normalised: the parallel-time core's S.away rows (by "me") or the fallback rows */
+function errTasks(){try{if(!S)return[];if(errOn())return(Array.isArray(S.away)?S.away:[]).filter(a=>a&&a.by==="me").map(a=>({id:a.id,who:a.who,nm:a.nm,lbl:a.lbl,k:a.kind,t0:a.t0,due:a.due,back:!!a.back,read:!!a.read,rep:a.rep}));return errZ()}catch(e){return[]}}
+function errAwayOf(id){for(const t of errTasks())if(t.who===id&&!t.back)return t;return null}
+function errNews(){return errTasks().filter(t=>t.back&&t.rep&&!t.read)}
+function errMine(){return errTasks().filter(t=>!t.back)}
+/* ledger id of one of her people ↔ the person */
+function errId(sv){if(!sv)return null;return sv.sid!=null?"s"+sv.sid:"mm:me"}
+function errPerson(id){if(!S||!id)return null;if(id==="mm:me")return S.maid||null;if(id[0]==="s"){const sid=+id.slice(1);for(const s of S.staff||[])if(s&&s.sid===sid)return s}return null}
+/* the runner = the servant the game sends (bestSent), else her maid; a person already away is never sent again (law 6b) */
+function errRunner(){let sv=null;try{sv=typeof bestSent==="function"?bestSent(S):null}catch(e){}if(sv&&!errAwayOf(errId(sv)))return sv;
+ for(const s of(S.staff||[]).slice().sort((a,b)=>(b.loyal||0)-(a.loyal||0)))if(s&&s!==sv&&!s.spyFor&&!errAwayOf(errId(s)))return s;
+ return S.maid&&S.maid.name&&!errAwayOf("mm:me")?S.maid:null}
+function errReduced(){try{return typeof kmReduced==="function"?kmReduced():false}catch(e){return false}}
+function errCan(){try{return !!(typeof S!=="undefined"&&S&&!S.dead&&!window.__bot&&!(typeof quiet!=="undefined"&&quiet)&&!(window.COOPW&&COOPW.on)&&!(typeof isSrv==="function"&&isSrv()))}catch(e){return false}}
+/* fallback ledger (law 6b): a person away is away on the roster; same rows as jptime ptLedger */
+function errLedger(){if(errOn()||!S||typeof j95on!=="function"||!j95on())return;const R=S.roster;if(!R||!R.P)return;const kh=errKH(),b0=bid()*kh;let ch=false;
+ for(const a of errZ()){if(a.back||!R.P[a.who])continue;const e=R.P[a.who];for(let i=0;i<e.length;i++){const K=b0+i;if(K>=a.t0&&K<a.due&&(!e[i]||e[i][1]!=="errand")){e[i]=[(e[i]&&e[i][0])||"ngoai","errand",null,"đi việc cho chủ"];ch=true}}}
+ if(ch)try{const k=j95kh();S.where=j95view(R,k);R.m[k]=j95counts(R,k);if(typeof j95stage==="function")j95stage(R,k)}catch(e){}}
+/* fallback landing: her clock reached khắc K */
+function errTick(){if(errOn()||!S||S.dead)return;const now=errNow();let ch=false;
+ for(const t of errZ())if(!t.back&&t.due<=now){t.back=1;ch=true;try{if(typeof kitLine==="function"&&errCan())kitLine(`${t.nm} đã về: có tin báo.`,2600)}catch(e){}}
+ if(ch){try{const day=errKH()*3;S.erra=errZ().filter(t=>!t.back||(!t.read&&t.rep)||now-t.due<day)}catch(e){}errLedger();errIcon()}}
+/* the report panel: ONE implementation for both adapters. kitPanel info spec: subject = the person who REALLY went and came back (law 6b), facts = what she learned
+   (the act's own log lines), sections = the gain / loss chips (kit chips), «Đợi tin» only with the parallel-time core */
+function errRead(t){try{t.read=1;if(errOn()&&Array.isArray(S.away)){const a=S.away.find(x=>x&&x.id===t.id);if(a)a.read=1}}catch(e){}}
+function errPanel(){const N=errNews(),W=errMine();const facts=[],sec=[];let subj=null;
+ for(const t of N){const r=t.rep||{},p=errPerson(t.who);if(!subj&&p)subj=p;
+  facts.push(r.t||`${t.nm} đã về.`);
+  /* gain / loss chips right under the title line (kit chips, visible without scrolling); the lines below are only what she learned */
+  if((r.d||[]).length&&typeof kitChips==="function")facts.push({text:"Được · mất: "+kitChips(r.d),kind:"me"});
+  (r.L||[]).forEach(l=>facts.push(l));errRead(t)}
+ for(const t of W){const p=errPerson(t.who);if(!subj&&p)subj=p;facts.push(`${t.nm} đang ${t.lbl||"đi việc"} · về ${errWhen(t.due)}.`)}
+ if(!facts.length)facts.push("Không có ai đang đi việc.");
+ const opts=[];try{if(errOn()&&PTIME.waitOk&&PTIME.waitOk()){const K=PTIME.next();opts.push({n:"Đợi tin",x:`ngồi chờ đến ${errWhen(K)}, khi người được sai trở về`,fx:{},go:()=>{setTimeout(()=>PTIME.wait(),0)}})}}catch(e){}
+ setTimeout(()=>errSync(),0);const sp={title:"Tin chờ người sai đi",facts,sections:sec,opts};if(subj)try{const f=kitFace(subj);if(f)sp.subject=Object.assign({},f,{rk:typeof f.rk==='string'?f.rk:undefined})}catch(e){}return sp}
+function errIcon(){try{if(typeof kitStatusIcon==="undefined")return;kitStatusIcon.set("tin",{title:"Người được sai đi",glyph:"信",order:30,
+ show:()=>!!(S&&!S.dead&&(errMine().length||errNews().length)),busy:()=>!!(S&&errMine().length&&!errNews().length),badge:()=>!!(S&&errNews().length),panel:errPanel});kitStatusIcon.refresh()}catch(e){console.error("jerr icon",e)}}
+function errOpen(){try{if(typeof kitStatusIcon!=="undefined")kitStatusIcon.open("tin")}catch(e){console.error(e)}}
+/* the gate: run an errand action; in the fallback the action runs ONCE as before (no double charge, no deferred report), then the task is recorded */
+function errAdd(sv,spec,L,dl){const t0=errNow();/* fallback: away n khắc counted from the END of her order (the act's own khắc already paid); jptime counts from the tap with its own o/n rows */const w=ERRV[spec.k]||ERRV_DEFAULT;const t={id:"e"+(++ER.n)+"-"+t0,who:errId(sv),nm:sv.name,k:spec.k,lbl:"đi "+w,t0,due:t0+errN(spec.k),back:0,read:0,rep:{t:`${sv.name} ${w} trở về`,ok:null,L:L.length?L:[`${sv.name} đã về.`],d:dl||[]}};
+ errZ().push(t);ER.seen[t.id]={fresh:1};try{if(typeof kitLine==="function")kitLine(`${t.nm} đã đi ${w}, về ${errWhen(t.due)}.`,2600)}catch(e){}errIcon();return t}
+function errRun(fn,ctx,args,spec){
+ if(!errCan()||errOn())return fn.apply(ctx,args);/* jptime builds its own task at the button (ptSend); this file only draws it */
+ const sv=errRunner();if(!sv)return fn.apply(ctx,args);
+ const u0=used,l0=S.logSeq||0,b0=typeof rsnap==="function"?rsnap():null;const r=fn.apply(ctx,args);
+ if(!spec.always&&used===u0&&(S.logSeq||0)===l0&&!(typeof Q!=="undefined"&&Q.length))return r;
+ const t=errAdd(sv,{k:spec.k},[],[]);
+ /* the act finishes its own log lines and result card AFTER runAct returns (doAct): read them at the end of this tick = this act's report, nothing else can run in between */
+ setTimeout(()=>{try{const n=Math.max(0,Math.min((S.logs||[]).length,(S.logSeq||0)-l0));
+  const L=(S.logs||[]).slice(0,n).map(x=>String(x).split(/ — (?=<span class="[gr]">)/)[0]).map(x=>typeof plain==="function"?plain(x):String(x).replace(/<[^>]*>/g,"")).map(x=>x.replace(/^T\d+\/\d+\s+\S+\s+tuần\s*/,"").replace(/\s*\(sai [^)]*đi\)\s*/,' ').replace(/\s+—\s+/g,' · ').trim()).filter(Boolean).reverse();
+  const dl=[];if(b0)for(const [k,nm] of RKEYS){const x=(S[k]||0)-(b0[k]||0);if(x)dl.push([nm,x])}
+  if(t.rep){if(L.length)t.rep.L=L;t.rep.d=dl}}catch(e){console.error(e)}},0);
+ errLedger();try{errSync()}catch(e){console.error(e)}return r}
+ER.run=errRun;ER.tasks=errTasks;ER.awayOf=errAwayOf;ER.news=errNews;ER.now=errNow;ER.when=errWhen;ER.tick=errTick;ER.open=errOpen;ER.adapter=()=>errOn()?"ptime":"fallback";
+/* ---------------------------------------------------------------- the PICTURE of that state ---------------------------------------------------------------- */
+function errCss(){if(document.getElementById("kerr-css"))return;const s=document.createElement("style");s.id="kerr-css";s.textContent=`
+.kmerr-lay{position:absolute;inset:0;width:100%;height:100%;overflow:hidden;pointer-events:none;z-index:40;filter:none}/* beats .kmfly (fixed, 56x56) */
+.kmerr-fig{position:absolute;will-change:transform;pointer-events:none;transition:transform var(--kme-t,650ms) cubic-bezier(.5,0,.8,.6)}
+.kmerr-fig.on{transition-timing-function:cubic-bezier(.2,.5,.4,1)}
+.kmerr-fig img{display:block;width:100%;height:100%;object-fit:contain;transform-origin:50% 100%;animation:kmerrbob .32s ease-in-out infinite}
+@keyframes kmerrbob{0%,100%{transform:translateY(0) rotate(-.8deg)}50%{transform:translateY(-6px) rotate(.8deg)}}
+.kmerr-lay .kmerr-slot,.kmerr-lay .kmerr-bang{position:absolute;transform:translateX(-50%);white-space:nowrap;max-width:92%}
+.kmerr-lay .kmerr-bang{pointer-events:auto;cursor:pointer;font-weight:700;min-width:22px;justify-content:center;box-shadow:0 0 0 2px #fff}
+`;document.head.appendChild(s)}
+function errTok(p){const tk=document.getElementById("tokens");if(!tk||!p)return null;return[...tk.querySelectorAll(".tok.fig")].find(x=>{const g=x.querySelector(".tag");return g&&g.textContent.includes(p.name)&&x.offsetParent!==null})||null}
+/* KIT RULE «runner always drawn» (kitErrandSpot): where a person with no token in view walks from / to: the left slot of the stage on the kit floor line, at the kit figure height.
+   Used by every walk (off / on) when her token is not on the page in view; stage-here / j59 keep their own slot logic untouched. */
+function kitErrandSpot(st){const H=st.clientHeight||st.getBoundingClientRect().height,W=st.clientWidth||st.getBoundingClientRect().width;let fl=0;try{fl=kitSlotFloor(H)}catch(e){fl=H*.03}
+ const h=Math.round(H*(window.KIT_FIG&&KIT_FIG.h||.79));return{h,top:Math.max(0,H-fl-h),left:Math.round(W*.14)}}
+window.kitErrandSpot=kitErrandSpot;
+function errLay(st){let l=st.querySelector(":scope>.kmerr-lay");if(!l){l=document.createElement("div");l.className="kmfly kmerr kmerr-lay";st.appendChild(l)}return l}
+function errMs(){let m=(BAL.errand&&BAL.errand.msWalk)||650;try{if(typeof kitPace==="function")m=kitPace(m)}catch(e){}return m*(ER.slow||1)}
+/* one walk of one person: dir "off" (toward the left edge) or "on" (back from it); the real token stays hidden meanwhile */
+function errWalk(t,dir){
+ const st=document.getElementById("stage");const p=errPerson(t.who);if(!st||!p||errReduced()||!errCan()||(typeof kmOn==="function"&&!kmOn()))return;
+ errCss();const lay=errLay(st),tok=errTok(p);let src="",l,tp,w,h;const sr=st.getBoundingClientRect(),sc=st.offsetWidth?sr.width/st.offsetWidth:1;
+ const img=tok&&(tok.querySelector(".figimg")||tok.querySelector("img"));
+ if(img){const r=img.getBoundingClientRect();src=img.currentSrc||img.src;l=(r.left-sr.left)/sc;tp=(r.top-sr.top)/sc;w=r.width/sc;h=r.height/sc}
+ else{try{src=kitFigOf(p)||""}catch(e){}if(!src)return;const k=kitErrandSpot(st);l=k.left;tp=k.top;h=k.h;w=0}
+ const fig=document.createElement("div");fig.className="kmerr-fig"+(dir==="on"?" on":"");const ms=errMs();
+ fig.style.cssText=`--kme-t:${ms}ms;left:${l}px;top:${tp}px;height:${h}px;width:${w?w+"px":"auto"};${dir==="on"?"transition:none;":""}`;
+ const c=document.createElement("img");c.src=src;c.alt="";c.draggable=false;if(!w){c.style.width="auto";c.style.maxWidth="none"}fig.appendChild(c);lay.appendChild(fig);ER.walk[t.id]=dir;
+ const out=-(l+(w||fig.offsetWidth||h*.45)+24);ER.live++;let d=0;
+ const fin=()=>{if(d)return;d=1;ER.live=Math.max(0,ER.live-1);try{fig.remove()}catch(e){}delete ER.walk[t.id];try{errSync()}catch(e){}};
+ if(dir==="off"){requestAnimationFrame(()=>requestAnimationFrame(()=>{fig.style.transform=`translateX(${out}px)`}))}
+ else{fig.style.transform=`translateX(${out}px)`;requestAnimationFrame(()=>requestAnimationFrame(()=>{fig.style.transition=`transform ${ms}ms cubic-bezier(.2,.5,.4,1)`;fig.style.transform="translateX(0)"}))}
+ setTimeout(fin,ms+120);try{kmOnReset(fin)}catch(e){}}
+/* the state → the screen, idempotent: called after every render / layout / clock move */
+function errSync(){if(!S||S.dead||ER.syncing)return;ER.syncing=1;try{
+ if(ER.base!==S){ER.base=S;ER.seen={};for(const t of errTasks())ER.seen[t.id]={off:1,on:t.back?1:0}}/* a loaded life never replays an old walk */
+ const st=document.getElementById("stage");const T=errTasks();
+ for(const t of T){const q=ER.seen[t.id]||(ER.seen[t.id]={fresh:1});
+  if(!t.back&&!q.off){q.off=1;q.fresh=0;errWalk(t,"off")}
+  if(t.back&&!q.on){q.on=1;q.off=1;errWalk(t,"on")}}
+ if(!st||!errCan())return;const lay=errLay(st);errCss();lay.querySelectorAll(".kmerr-slot,.kmerr-bang").forEach(e=>e.remove());
+ const sr=st.getBoundingClientRect(),sc=st.offsetWidth?sr.width/st.offsetWidth:1;
+ for(const t of T){const p=errPerson(t.who);const tok=errTok(p);if(!tok)continue;const open=!t.back,walking=!!ER.walk[t.id],news=t.back&&t.rep&&!t.read;
+  tok.style.visibility=(open||walking)?"hidden":"";if(walking||(!open&&!news))continue;
+  const img=tok.querySelector(".figimg")||tok.querySelector("img");const r=(img||tok).getBoundingClientRect();const cx=(r.left+r.width/2-sr.left)/sc;
+  if(open){const c=document.createElement("span");c.className="kchip n kmerr-slot";c.textContent=errWord(t.k);c.style.left=cx+"px";c.style.top=((r.top+r.height*.45-sr.top)/sc)+"px";lay.appendChild(c)}
+  else{const c=document.createElement("button");c.type="button";c.className="kchip r kmerr-bang";c.textContent="!";c.title=`${t.nm} đã về: có tin báo`;c.setAttribute("aria-label",c.title);c.style.left=((r.right-sr.left)/sc-14)+"px";c.style.top=(Math.max(2,(r.top-sr.top)/sc+6))+"px";
+   c.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();errOpen();setTimeout(errSync,60)});lay.appendChild(c)}}
+ /* a person whose task is over and read: nobody keeps her hidden */
+ for(const x of document.querySelectorAll("#tokens .tok.fig")){const g=x.querySelector(".tag");if(!g||x.style.visibility!=="hidden")continue;const nm=g.textContent;
+  const hold=T.some(t=>{const p=errPerson(t.who);return p&&nm.includes(p.name)&&(!t.back||ER.walk[t.id])});if(!hold)x.style.visibility=""}
+ }finally{ER.syncing=0}}
+ER.sync=errSync;
+/* ---- wiring: the clock and the stage ---- */
+try{kmOnReset(()=>{for(const l of document.querySelectorAll(".kmerr-lay .kmerr-fig"))l.remove();ER.walk={};ER.live=0})}catch(e){}
+{const sp=spend;spend=function(){const r=sp.apply(this,arguments);try{errTick();errLedger();errSync()}catch(e){console.error(e)}return r}}
+if(typeof nextBuoi==="function"){const nb=nextBuoi;nextBuoi=function(){const r=nb.apply(this,arguments);try{errTick();errLedger();errSync()}catch(e){console.error(e)}return r}}
+{const r0=render;render=function(){const r=r0.apply(this,arguments);try{errIcon();errSync()}catch(e){console.error(e)}return r}}
+if(typeof j59lay==="function"){const j0=j59lay;j59lay=function(){const r=j0.apply(this,arguments);try{errSync()}catch(e){}return r}}
+/* ---- entry points (the scan table in dev/handover/reports/errand-scene.md lists every one) ---- */
+{/* every ACT sent to someone elsewhere: runAct, the one gate for player acts (doAct, the card game, the picked plant / gift flows) */
+ const r0=runAct;runAct=function(a,t,k,extra){if(a!==S||typeof together!=="function"||together(a,t)||ACT_NOSEND.includes(k)||ER.self.includes(k)||(typeof sameHouse==="function"&&sameHouse(a,t)))return r0.apply(this,arguments);
+  /* doAct already spent the khắc before runAct: this call IS the errand (always) */
+  return errRun(r0,this,arguments,{k,n:(typeof BAL==="object"&&BAL.time&&BAL.time.cost&&BAL.time.cost.harm)||1,always:1})}}
+{const f0=scout;scout=function(){return errRun(f0,this,arguments,{k:"scout"})}}
+{const f0=invite;invite=function(){return errRun(f0,this,arguments,{k:"invite"})}}
+/* her child far away: letter + gift (j54 h54Act "thu") and the in-law house gift (j55 tdAct "gift") */
+{const f0=h54Act;h54Act=function(a){return a==="thu"?errRun(f0,this,arguments,{k:"letter"}):f0.apply(this,arguments)}}
+{const f0=tdAct;tdAct=function(a){return a==="gift"?errRun(f0,this,arguments,{k:"tdgift"}):f0.apply(this,arguments)}}
+/* jht "Dò hỏi gia thế" (htAct is exposed on window by jht.js) */
+if(typeof window.htAct==="function"){const f0=window.htAct;window.htAct=function(a,b){return a==="ask"?errRun(f0,this,arguments,{k:"kin"}):f0.apply(this,arguments)}}
 })();
 /* ================= jmapz: SECOND LEVEL OF CÀN NINH / ĐỨC THỌ + HER PEOPLE WHERE THEY REALLY ARE (KIT §85.10) =================
    Owner OD 18/11 ~19:25Z (4)(5) + ~19:45Z (verbatim in dev/OWNER_DECISIONS.md). The Dư đồ ZONES of 19:25Z (1)(2) were CANCELLED by the owner
@@ -76296,7 +76514,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="659fbe0bf96b";window.CTM_BUILD=BUILD;
+const BUILD="322b3b7152ac";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
