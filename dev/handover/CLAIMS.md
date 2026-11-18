@@ -372,7 +372,7 @@
 | BUILDER s37a (sonnet): batch s37a = display-shelf-r3rv 41418cd8 on 4c8568f5, then hourly batches of PASS shas (brief briefs/s37-builder-a.md) | review/batch-s37a | MAIN s37 | session_01UV1SzjA6P5mZskv3JKn3BV | RUNNING | 17/11 21:06Z |
 | REVIEW face-fit 7068619d (sonnet SMALL; live CDN fit stale, repo right) | review/face-fit | MAIN s37 | session_01UV1SzgZrXwRJ3PMdetbaaf | RUNNING | 17/11 21:08Z |
 | toil-looks9: blush-step sheet IN ROOM (full figure, outfit; rows today / middle / very light; repo fit) (sonnet; owner OD 21:15Z) | review/toil-looks5 | MAIN s37 | session_01UV1SzivMP4MnTx1SiyB2oo | RUNNING | 17/11 21:11Z |
-| DISPLAY SET BONUS build (opus; OD 21:15Z approved, s37 order 21:16Z) | review/display-set-bonus | C-AG | session_01UV1SzjpfceWSitedZq3R6g | RUNNING | 17/11 21:11Z |
+| DISPLAY SET BONUS build (opus; OD 21:15Z approved, s37 order 21:16Z) | review/display-set-bonus | C-AG | session_01UV1SzjpfceWSitedZq3R6g | DONE → LIVE a95e8d4 (archived) | 17/11 21:11Z |
 | odds-cap fix round 2 (opus; r1 FAIL 5 @bc58dd46) | review/odds-cap | D | session_01964izBuoCyMCGvstmPMb5T | DONE SẴN SÀNG KIỂM fcefca42 (archived) | 17/11 21:15Z |
 | ART hoa-dien-art #2 (opus; successor of R5e4: fig/hd/tn twins, W2c/W12 keys, HD_ANCHOR; POR stays with R5e4) | handover reports/hoa-dien-art.md | C ROOT-10 | session_011xDdVNfSx9r7wqg7ooEXKn | RUNNING | 17/11 21:15Z |
 | REVIEW coop-thin-c reviewer #2 (successor of 4NkEVbfk at f65b5b6c; opus BIG; brief briefs/review-coop-thin-c-2.md) | review/coop-thin-c-r1 | B | session_01N1tNP6cMqcMNhStqaraUuW | PASS review/coop-thin-c-r1 eb3675a6 (READY FF; golive dry run checks OK; report reports/review-coop-thin-c.md ## REVIEWER #2) | 17/11 23:10Z |
@@ -381,7 +381,7 @@
 | NPC-CHAIN LANDER (opus; one head ag-all-2+MOODKNOW+mood-mem+feelings-18+kit-figure-mood r6 on main; s37 21:17Z) | review/npc-chain-land | C-AG | session_01UV1Szi7UbTAbk3W9QSD6h7 | ROLLED OVER → SzhJFho (archived) | 17/11 21:26Z |
 | FOREMAN C-AG #7 (opus; successor of #6, opened by MAIN s38) | handover FOREMAN_C_STATUS | MAIN s38 | session_01UV1SzgaEMtM9LvcYPr6tdR | ROLLED OVER → SzgXTgL | 17/11 21:36Z |
 | toil blush final (owner row 3, OD L1721): BAL.toil dep bl .2304 / tuyet bl .2428 on toil-looks5 v18 → SMALL review → batch (sonnet) | review/toil-looks5 | MAIN s38 | session_01UV1SzhA7otHzXMdiSEqbyd | SẴN SÀNG KIỂM 79060f5a+ (owner picks applied: Doan 60 %, Kieu 60 %, Khuynh 80 %, Cam anh do; QC PASS; reports/toil-looks5.md v24) | 18/11 00:25Z |
-| REVIEW display-set-bonus (opus BIG; successor of SzkUH3p) | review/display-set-bonus | C-AG | session_01UV1SzmDekHiFMVcVBmxdRT | RUNNING | 17/11 21:38Z |
+| REVIEW display-set-bonus (opus BIG; successor of SzkUH3p) | review/display-set-bonus | C-AG | session_01UV1SzmDekHiFMVcVBmxdRT | PASS a95e8d4 → LIVE (archived) | 17/11 21:38Z |
 | tuyet-glow SAMPLE (Khuynh thành glossy glowing skin + moving light streak; owner OD ~21:55Z; sample first) (sonnet) | review/tuyet-glow | MAIN s38 | session_01UV1SzjKnHbwdNpGhhNLbnS | DONE v8 1c4ea403 APPROVED, in review/looks-s40; CDN shots wiped | 17/11 21:53Z |
 base-body test (m09 body template, edit clothes only) | img/_review/maid-consort-sample | session_011xDdVQzeuta29DT66RfH38 | DONE-DROPPED by owner 01:16Z | 2026-11-17T23:52Z (Foreman C ROOT-12 → ROOT-13)
 | hoa-dien SAMPLES sheet (đẹp vs vụng × 4 designs, in-room; owner OD ~22:12Z) (sonnet) | review/hoa-dien-r2 (read only) | MAIN s38 | session_01UV1SziQZkLLitwkfqjx3Bq | DONE: sheet at CDN img/_review/hoa-dien/hoa-dien-samples.png (report reports/hoa-dien-samples.md) | 17/11 22:40Z |
