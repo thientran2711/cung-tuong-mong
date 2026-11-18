@@ -386,7 +386,7 @@ function kitFxLayers(p,file){if(!p||!file)return"";let h="";const sc=kitScarOf(p
 const kitFile=src=>String(src||"").split("?")[0].split("/").pop();
 /* ---------- AVATAR = ID CARD (owner 17/11 ~18:10Z, OD "Avatar … cái thẻ nhân viên"; review/kit-fx-register) ----------
    EVERY avatar-class frame (pcp tall, span.md / kmini / kfc, list rows, cards, pickers: everything made by pcPort / mdH) shows the BASE PORTRAIT +
-   LASTING marks only (hủy dung scar; plug-in point KIT_LASTING.add for pox scars etc.). NO makeup, NO temporary marks (slap, rash, pallor, poison, ink…).
+   LASTING marks + the MAKEUP colour layer at mirror strength (jtoil toilAvatarMk, owner 18/11 ~09:25Z; plug-in point KIT_LASTING.add). NO temporary marks (slap, rash, pallor, poison, ink…).
    The lasting marks are BAKED with the photo into ONE image (canvas -> blob URL, cached per picture + marks + size, scaled by the browser like any
    photo) — there is no overlay box any more, so no registration error is possible. A person without a lasting mark gets the plain photo (no cost).
    Stage figures + the mirror close-up keep the full look (kitFxLayers / kitFxPut, unchanged). ---------- */
@@ -402,7 +402,7 @@ const KIT_BAKE={cache:{},order:[],pend:{},W:{tall:384,sm:192},max:80,
  touch:function(k){const i=this.order.indexOf(k);if(i>=0)this.order.splice(i,1);this.order.push(k)},
  make:function(k,p,url,file,kind){if(this.pend[k])return;this.pend[k]=1;const L=KIT_LASTING.of(p,file);const abs=/^(https?:|blob:|data:)/.test(url)?url:(typeof IMG_U==="function"?IMG_U(url):url);
   const load=src=>new Promise((ok,no)=>{const im=new Image();im.crossOrigin="anonymous";im.decoding="async";im.onload=()=>ok(im);im.onerror=()=>no(0);im.src=src});
-  Promise.all([load(abs),...L.map(l=>load(/^(https?:|blob:|data:)/.test(l.src)?l.src:(typeof IMG_U==="function"?IMG_U(l.src):l.src)))]).then(([ph,...ls])=>{
+  Promise.all([load(abs),...L.map(l=>Promise.resolve(typeof l.src==="function"?l.src():l.src).then(sr=>load(/^(https?:|blob:|data:)/.test(sr)?sr:(typeof IMG_U==="function"?IMG_U(sr):sr))))]).then(([ph,...ls])=>{
    const nw=ph.naturalWidth,nh=ph.naturalHeight,K=Math.min(1,this.W[kind]/nw),W=Math.max(1,Math.round(nw*K)),H=Math.max(1,Math.round(nh*K));const cv=document.createElement("canvas");cv.width=W;cv.height=H;const g=cv.getContext("2d");g.imageSmoothingQuality="high";g.drawImage(ph,0,0,W,H);
    ls.forEach((im,i)=>{const l=L[i],r=l.rect,x=r[0]/100*W,y=r[1]/100*H,w=r[2]/100*W,h=r[3]/100*H;g.save();g.globalAlpha=l.alpha==null?1:l.alpha;g.translate(x+w*l.o[0],y+h*l.o[1]);g.rotate((r[4]||0)*Math.PI/180);g.drawImage(im,-w*l.o[0],-h*l.o[1],w,h);g.restore()});
    cv.toBlob(b=>{delete this.pend[k];if(!b)return;const u=URL.createObjectURL(b);this.cache[k]=u;this.touch(k);while(this.order.length>this.max){const o=this.order.shift(),ou=this.cache[o];delete this.cache[o];setTimeout(()=>{try{URL.revokeObjectURL(ou)}catch(e){}},60000)}

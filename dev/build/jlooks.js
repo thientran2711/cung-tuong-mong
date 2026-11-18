@@ -196,7 +196,7 @@ function lkLodMul(lod,cue){const L=window.BAL&&BAL.toil&&BAL.toil.lod;if(!L||!lo
 /* face px -> step: 0..steps = small (the makeup layer's own toilLodStep), 10+k = large face (k 1..big.steps, BAL.looks.smuFx.big), 0 = the approved strength in between */
 function lkSmuStep(px){const s=window.toilLodStep?toilLodStep(px):0;if(s>0)return s;const B=lkB().smuFx.big;if(!(px>B.at))return 0;return 10+Math.min(B.steps,Math.max(1,Math.round(Math.min(1,(px-B.at)/(B.max-B.at))*B.steps)))}
 function lkLodPass(){try{if(typeof toilLodStep!=="function")return;document.querySelectorAll("img.klk-smu").forEach(im=>{const cur=im.dataset.lsk||"",base=cur.replace(/\|L\d+$/,""),A=LK_SMA[base];if(!A)return;const w=im.getBoundingClientRect().width;if(!(w>0))return;
-  const st=lkSmuStep(w/1.6),have=+((/\|L(\d+)$/.exec(cur)||[])[1]||0);if(st===have)return;const r=lkSmuLayer(A[0],A[1],A[2],A[3],st);if(!r)return;im.dataset.lsk=r.key;if(r.e.src)im.src=r.e.src})}catch(x){}}
+  const st=window.toilStageEl&&toilStageEl(im)?0:lkSmuStep(w/1.6),have=+((/\|L(\d+)$/.exec(cur)||[])[1]||0);if(st===have)return;const r=lkSmuLayer(A[0],A[1],A[2],A[3],st);if(!r)return;im.dataset.lsk=r.key;if(r.e.src)im.src=r.e.src})}catch(x){}}
 if(typeof toilLodPass==="function"){const tp0=toilLodPass;toilLodPass=function(){tp0();lkLodPass()};window.toilLodPass=toilLodPass}
 function lkSmuSeed(file,cols){let h=cols?cols.seed|0:0;for(let i=0;i<file.length;i++)h=(Math.imul(h,31)+file.charCodeAt(i))|0;return h}
 function lkSmuDraw(im,v,lv,why,cols,box,seed,lod,big){lod=lod||0;big=big||0;const W=im.naturalWidth,H=im.naturalHeight,F=lkB().smuFx;
