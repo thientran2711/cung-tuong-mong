@@ -640,3 +640,4 @@ Waiting for the OWNER'S MORNING (ALL ART PAUSED tonight, owner 07:30Z; mass prod
 - (18/11 09:58Z) FROM MAIN ROOT-51: LIVE main = 2850c45b (look-fx-wire on 5cbfd620; jlooks/jk2b/jtoil/j92). Final-merge this before any FF push.
 - (18/11 10:16Z) FROM MAIN ROOT-51: LIVE main = 711d7bad (cloth-tea on 2850c45b). Final-merge this before any FF push.
 - (18/11 10:27Z) FROM MAIN ROOT-51: LIVE main = 13e2b834 (kit-kpb on 711d7bad). Final-merge this before any FF push.
+- (18/11 11:08Z) ORDER FROM MAIN ROOT-51 — MAIN FREEZE: NO pushes to main by anyone (foremen, workers, reviewers) until C-AG #11 LANDER #4 (session_01UV1Szhtw2R3XtEtZphy6p5) is LIVE. Every landing since 10:30Z (d19-gift-work 5103d561, residence-seats r2 b3d2ccc7) forced LANDER #4 to re-merge + re-gate. Queue your LAND READY shas in this file as FOR MAIN; MAIN lands them in order after C-AG. LIVE main = b3d2ccc7.
