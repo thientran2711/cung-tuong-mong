@@ -5,7 +5,7 @@ START_CTX ≈ 5 % of the window (get_session read 0 at start; estimate). Rollove
 
 Branch **review/live-servants** from main 94d11623. Commits: 22de1d1d (code, tests, tool, docs) + 560014be (build).
 
-## STATUS: SẴN SÀNG KIỂM 560014be WITHDRAWN (scope changed 19:55Z + 20:07Z, see HANDOVER at the end) — the work below stays on the branch as the base
+## STATUS: SẴN SÀNG KIỂM c137b7c — all gates PASS except PERF (4x per-khắc +33 % mean vs live after an outcome-identical cut from +52 %; the rest is the feature's own cost → MAIN PERF RULING needed). See "LIVE-SERVANTS #3" at the end.
 
 ## What changed (REUSE: S.roster/S.rlog + j95 plans + jagday/jagstaff deed slots + roster.js; nothing parallel)
 - **NEW dev/build/j95s.js** (after jagstaff.js in assemble.py), numbers in `BAL.slv` (one core; one-core-guard PASS):
@@ -140,3 +140,42 @@ TO DO for #3:
 1. PERF (only open gate): profile `spend(1)` on new vs live (dev/test/ag2perf-prof.js arrived with fa411d6f). Suspects: (a) knwGossip runs on every j95sync — it iterates all R.P twice per khắc; memo is per R.key:kh but j95sync may run before the khắc changes → make it run once per khắc AFTER the clock moves, and skip whole when S.knw has no items (`Object.keys(Z.K).length===0` early-out); (b) knwSee on every agLand iterates R.P (fine) but knwUp→knTell→mindPick per servant; (c) j95sPass signature build each sync (S.ent JSON / households) — the skip path; (d) j95sRhythm called per servant per pass (hash + rng) — cache per day in J95S. Target: khắc mean ≤ live +10 %.
 2. Re-run: live-servants.test (3 lives), quickcheck.sh, deeds+perf loop (bash /home/user/wt/ls-shots/deeds.sh after re-copying new.html), coop-e2e (BLOCKED here unless the Worker host is allowed).
 3. Write SẴN SÀNG KIỂM <sha> here + send_message to C-AG #15 with one line per point (2)(3)(4 picker)(5) and the gate table.
+
+## LIVE-SERVANTS #3 (opus, session_01Rc5AsKjmZakFtxrVGvMvW9, START_CTX ~3 %) — PERF, outcome-identical
+PRIORITY #1 CHECK: OD perf ruling 13:52Z (FOREMAN_C_STATUS L697) | main fa411d6f (not moved) | review/live-servants e3dce64 (this work) | claims: this session (brief live-servants #3).
+### SẴN SÀNG KIỂM c137b7c (review/live-servants = e3dce64 + perf commit; origin/main still fa411d6f, no merge needed)
+What changed (no behaviour, no number; law 4 untouched — every number still from BAL):
+- jagknow.js knwGossip: knHit(g|gk|a>b|iid) = the same FNV (knH) run from a cached hash of the fixed head (seed|g<gk>|a>) + per-listener state; group know-counts C
+  (exact: +1 per add, −1 on the oldest dropped past gos.keep) skip a thing the whole group already knows (the b loop would skip all); T.u = things not all
+  know → whole teller loop skipped at 0; each teller's keys read once (for-in order) and reused unless she was told something since; knwObj memo per pass
+  (+ sid table); qv of a teller whose nết is already drawn read from a table by her nết (pure: traitsOf = s.net then); undrawn nết → qv itself (the lazy draw
+  happens exactly as before). knwAddC = knwAdd + the count.
+- j95s.js: j95sHouses builds one sid → servant table per call (j95sv's own order, first match) instead of j95sv per person; j95sRhythm memo per
+  (day, life seed, BAL.slv rest/sleep/night numbers, person, index, household size) — pure; j95party wrapper: cheap rejects before p0 (p0 pure, same answer).
+Proof outcome-identical: ag2perf-diff K=4 (spend ×4 per buổi) e3dce64 vs c137b7c: seeds 1–5 × 40 buổi diff 0, final state same, same Math.random count;
+seeds 1–3 × 160 buổi diff 0 (seed 1 player died at buổi 120 in both). S.knw hash changes every buổi in those runs (gossip exercised). Deeds identical to #2.
+### PERF (ag2perf-probe, 24 buổi × 4 khắc, CPU 4x, ×9 interleaved live/new, seeds 1–5 cycling)
+| build | khắc mean (live → new) | khắc median | buổi median |
+|---|---|---|---|
+| e3dce64 (before) | 3.03 → 4.60 ms (+51.6 %) | 1.77 → 3.37 (+90 %) | +20.7 % |
+| c137b7c (after) | 2.86 → 3.79 ms (+32.7 %) | 1.60 → 2.84 (+78 %) | +9.4 % |
+Why it stops here (CDP profile 4x, 3 seeds, same build BAL.slv.on 1 vs 0: khắc step 368 → 516 ms per 96 khắc): the remaining ≈ +1 ms/khắc is the feature
+working, not waste: (1) the gossip pass ≈ 0.4–0.5 ms/khắc — every khắc it must look at every talking group (≈5 groups, ≈15 things each) and, for each new
+learner, run the chain's own tell/keep/sell choice (knwUp → knTell → mindPick, ≈0.13 ms, outcome-bound); (2) j95sPass + houses + guard (her people's own day
+re-checked each sync) ≈ 0.25 ms; (3) witnesses per landing deed (knwSee) ≈ 0.05 ms; (4) downstream work caused by the new knowledge/TIN BÁO (mkSync, agTell,
+k61Scrub, stage counts) ≈ 0.2–0.3 ms. Getting to ≤ +10 % needs fewer gossip rounds (e.g. once per buổi, or only when a group changes) or fewer groups =
+a behaviour change (who learns what, when) → not done (law 4 / brief). MAIN decides (like PERF RULING 13:52Z): (a) accept as the feature's cost
+(buổi step is +9.4 %, quickcheck perf smoke PASS); (b) order a behaviour-changing gossip cadence (then the owner's wording on "truyền tay nhau" applies).
+### GATES (c137b7c)
+| gate | result |
+|---|---|
+| live-servants.test.js (3 lives) ×3 | PASS ×3 (T5 roster.js self-check 3 lives × 6/6/5 saves inside) |
+| quickcheck.sh (own build, core gates G1 one-core-guard · G2 rules-one-source · G3 kit-conform · G4 hooks 5 incl coop-one-world, time-spill, open, old live save, perf smoke) | PASS · render 225/198 ms · tab 365/309 · buổi 1027/1057 · tasks>200ms 16/14 · 335 s |
+| ag-*.test.js (14) | 14/14 PASS (ag-all failed its p95 draw budget only when run 4-parallel; alone PASS p95 5.7 ms, live 6.4) |
+| deeds ag2perf-deeds 160 buổi × seeds 1–5 (K=3) | live 615/569/594/609/514 = 2901 · new 608/505/596/613/564 = 2886 (identical to #2's numbers: perf work changed no deed) |
+| seeded diff e3dce64 vs c137b7c | 0 (5 × 40, 3 × 160) |
+| coop-e2e | BLOCKED: co-op Worker host refused by this env's proxy (CONNECT 403); j95s/knw are off in co-op (j95on) and untouched paths |
+Points (unchanged code from #2, all PASS): (2) live servants' own day + reasons; (3) roster.js --who rest/entourage/knows; (4) entourage picker (player, once a day,
+kit parts only) + NPC day picks + witnesses/gossip S.knw; (5) rest rhythm (rest turn, bedtime, rotating night watch).
+Scratch (container only): /home/user/wt/ls-shots (live.html, new0…new7.html, tools/bench.sh ×9 interleaved, tools/fnprof.js per-function timer,
+tools/prof.js CDP profile with PRE, tools/lineprof.js line ticks, b-*.txt bench logs, d*/L* diff dumps).
