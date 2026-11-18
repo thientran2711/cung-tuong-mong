@@ -359,7 +359,7 @@ function cnvFrameOpts(a,s,m){const fr=a===S?srvFriendList().length:(typeof asFri
    go:ok=>{if(ok){const P=BAL.ag.stf2.accPen;if(s===S)apply({tin:-P});else{s.loyal=cl(s.loyal-P,0,100);s.trouble=wk()}stfLike(s,a,-20);return a===S?`Ngươi thanh minh được; ${s.name} bị phạt vì vu cáo.`:`${a.name} thanh minh được; ${stfNm(s)} bị phạt vì vu cáo.`}
     if(a===S){log(`${m.name} không tin ngươi, sai đánh đòn.`);if(S.suc<=0)die("Bị đánh đòn vì tội trộm cắp, không qua khỏi");else if(S.tin<8)srvLaundry(`${m.name} cho rằng ngươi là kẻ cắp.`,6);return""}
     a.trouble=wk();if((a.suc||0)<=0&&typeof asOut==="function")asOut(a,"dead");else if((a.loyal||0)<8&&typeof asOut==="function")asOut(a,"tgk");return `${m.name} không tin ${a.name}, sai đánh đòn.`}},
-  {id:"confess",n:"Nhận tội, xin tha",tag:"confess",fx:{tin:-6,suc:-8},x:"",go:()=>{if(a!==S)a.trouble=wk();return""}},
+  {id:"confess",n:"Nhận tội, xin tha",tag:"confess",fx:{tin:-6,suc:-8},x:"thành: tránh được trận đòn, không bị đẩy xuống giặt",go:()=>{if(a!==S)a.trouble=wk();return""}},
   {id:"pay",n:`Đút bạc cho ${s.name} rút lời`,tag:"bribe",fx:{bac:-10},x:`${s.name} thôi tố, người ấy quý ngươi +10`,lock:(a===S?S.bac:(a.bac||0))<10,go:()=>{stfLike(s,a,10);return""}}]}
 /* ===== ONE CORE (AG-ALL-2e4 parity, OD 17/11 ~15:25Z (3)): the maid's other dilemmas, built ONCE for the maid player's PEND card / person-card buttons
    and an NPC maid (jagacts3: stf2Pick by her needs × nết, mindPick slip). Numbers BAL.ag.par3.cnv; odds clamped BAL.odds.lo/hi (cnvOd). ===== */

@@ -117,7 +117,7 @@ PEND.nc1=p=>{const st=S.st;return {t:"Mật sứ Nam Chiếu trao thư của ph�
    {n:"Dâng thư lên Hoàng thượng",fx:{th:15,danh:5,sung:3},x:"đoạn tuyệt cố quốc",go:()=>{st.path="court";st.step=1}}]}};
 PEND.td1=p=>{const st=S.st;return {t:`Lão thái giám họ Vương, nhân chứng còn sống của vụ án nhà ngươi, đang bị người của ${S.foeDad} truy sát.`,o:[
    {n:"Giấu ông ở Tân Giả Khố",fx:{bac:-40},x:"giữ được nhân chứng",go:()=>{st.wit=1}},
-   {n:"Mặc kệ",fx:{},x:evSg(-BAL.ag.ev.one),go:()=>{S.caseEv=Math.max(0,S.caseEv-BAL.ag.ev.one);log(`<span class="r">Xác lão Vương nổi trên sông Kim Thủy.</span>`)}}]}};
+   {n:"Mặc kệ",fx:{suc:BAL.cv.rest},x:evSg(-BAL.ag.ev.one),go:()=>{S.caseEv=Math.max(0,S.caseEv-BAL.ag.ev.one);log(`<span class="r">Xác lão Vương nổi trên sông Kim Thủy.</span>`)}}]}};
 PEND.ch1=p=>{const st=S.st,q=rivals[0];return {who:pTH(),t:kSay("th",S,'Thái hậu gọi ngươi vào Đức Thọ cung: “Hoàng hậu bất tài. {Goi} phải thay nàng ta. Trước hết, dò xem Càn Ninh cung giấu gì.”'),o:[
    {n:"Vâng mệnh cô mẫu",fx:{th:8},x:`chứng cứ Hoàng hậu ${balSg(BAL.eff.j4.evGo)}`,go:()=>{evStory(q,BAL.eff.j4.evGo,"giấu chuyện riêng trong Càn Ninh cung");st.tool++;st.step=1}},{n:"Thoái thác",fx:{th:-15,duc:2},go:()=>{st.step=1}}]}};
 PEND.ch2=p=>{const st=S.st,q=rivals[0],o=p.o;return {who:pTH(),t:'Thái hậu dúi vào tay ngươi một gói thuốc: “Bỏ vào trà của Hoàng hậu.”',o:[

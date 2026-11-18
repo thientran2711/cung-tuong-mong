@@ -19,7 +19,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   chooseM(0);await W(900);const t=document.getElementById('rtoast');out.result=t?{text:t.innerText.replace(/\s+/g,' ').slice(0,160),art:(t.querySelector('img')||{}).src||''}:null;
   Q.length=0;showModal();
   /* 2. borrow -> Cho mượn */
-  Q.push({t:"Có người đến",who:pv(v),h:`<p>${v.name} ngượng ngùng hỏi mượn 20 lượng bạc.</p>`,opts:[{n:"Cho mượn",fx:{bac:-20},x:"",go:()=>{}},{n:"Từ chối",fx:{},x:"",go:()=>{}}]});chooseM(0);Q.length=0;showModal();
+  Q.push({t:"Có người đến",who:pv(v),h:`<p>${v.name} ngượng ngùng hỏi mượn 20 lượng bạc.</p>`,opts:[{n:"Cho mượn",fx:{bac:-20},x:"thân +12",go:()=>{}},{n:"Từ chối",fx:{suc:3},x:"thân -6",go:()=>{}}]});chooseM(0);Q.length=0;showModal();
   /* 3. acts */
   for(const n of ["Làm thơ dâng lên","Thỉnh an Hoàng hậu","Thỉnh an Thái hậu"]){const i=deck.findIndex(a=>a.n===n);if(i>=0){deck[i].done=0;deck[i].o=100;Q.length=0;used=0;S.buoi=0;try{act(i)}catch(e){}await W(300);Q.length=0;showModal()}else out["missing "+n]=deck.map(a=>a.n).slice(0,40)}
   /* 4. a walk on the last khắc -> Đi */

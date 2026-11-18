@@ -37,7 +37,7 @@ const MEAS=`(()=>{const M=document.getElementById('modal');let d;const vis=e=>e&
   await sleep(800);const rows=[];
   for(const k of (process.env.ONLY?process.env.ONLY.split(','):KINDS)){const ok=await p.evaluate(async k=>{const W=t=>new Promise(r=>setTimeout(r,t));Q.length=0;const md=document.getElementById('modal');md.hidden=true;
     const R0=liveRivals(true).filter(v=>!v.queen);R0.slice(0,3).forEach(v=>S.met[v.id]=1);const v=R0[0],v2=R0[1]||R0[0];
-    const o=[{n:'Tiếp',fx:{},x:'thân +3',go:()=>{}},{n:'Từ chối khéo rồi lui về cung',fx:{bac:-10},x:'thân -3',hint:'giữ được thể diện',go:()=>{}}];
+    const o=[{n:'Tiếp',fx:{suc:-3},x:'thân +3',go:()=>{}},{n:'Từ chối khéo rồi lui về cung',fx:{suc:3},x:'thân -3',hint:'giữ được thể diện',go:()=>{}}];
     const many=[1,2,3,4,5].map(i=>({n:'Cách thứ '+i+' để đối đáp cho phải lẽ',fx:{suc:-i},hint:'thành bại khó đoán, hỏng thì càng phật ý người trên',risk:'có rủi ro',go:()=>{}}));
     const j24=re=>{for(let i=0;i<400;i++){let m=null;try{m=approachOne()}catch(e){}if(m&&re.test(String(m.t||''))&&kitStagePeople(m).length)return m}return null};
     const seal={choice:1,news:1,result:1,notice:1,night:1,info:1,rule:1,intel:1,evidence:1,reward:1,threat:1,person:1,end:1};

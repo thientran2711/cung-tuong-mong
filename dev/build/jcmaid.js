@@ -75,7 +75,7 @@ PEND.cmSec=pp=>{const B=cmB(),m=S.maid;if(!m||!m.sec)return null;const k=m.sec.k
  const t=k==="debt"?`${m.name} quỳ xuống thú thật: nàng ta nợ cờ bạc ngoài cung, chủ nợ dọa báo lên Nội vụ phủ.`:k==="family"?`${m.name} khóc, kể mẹ già ở quê bệnh nặng, không có tiền thuốc.`:
   `${m.name} thú thật: trước kia nàng ta từng nhận bạc của ${v?v.name:"người cung khác"} để kể chuyện cung ngươi.`;
  const o=k==="spy"?[{n:"Giữ lại, dặn nàng ta chỉ báo chuyện vô hại",fx:{maid:B.secLoy},x:"từ nay không còn lộ chuyện"},{n:"Trả nàng ta về Nội vụ phủ",fx:{danh:-B.spyDanh},x:"Nội vụ phủ đưa người khác đến",go:()=>cmReplace("noi")}]:
-  [{n:k==="debt"?`Trả nợ thay (${B.secPay} lượng)`:`Gửi tiền thuốc (${B.secPay} lượng)`,fx:{bac:-B.secPay,maid:B.secLoy*2},x:"nàng ta mang ơn"},{n:"Mặc kệ",fx:{maid:-B.secLoy},x:k==="debt"?"nợ vẫn còn đó":"nàng ta tủi thân"}];
+  [{n:k==="debt"?`Trả nợ thay (${B.secPay} lượng)`:`Gửi tiền thuốc (${B.secPay} lượng)`,fx:{bac:-B.secPay,maid:B.secLoy*2},x:"nàng ta mang ơn"},{n:"Mặc kệ",fx:{maid:-B.secLoy},x:`thành: giữ lại ${B.secPay} lượng bạc · kèm: ${k==="debt"?"nợ vẫn còn đó":"nàng ta tủi thân"}`}];
  return{who:pMaid(),t,o:o.map(x=>Object.assign(x,{go:(g=>()=>{if(g)g();if(S.maid===m)m.sec.done=1})(x.go)}))}};
 function cmReplace(src){const B=cmB();const m=newMaid(pick(MAIDS.filter(x=>x!==(S.maid&&S.maid.name))),B.newLoy);S.maid=m;cmInit(m,src||"noi");m.loyal=B.newLoy;cmC("replace")}
 

@@ -152,7 +152,7 @@ PEND.adStroll=()=>{const K=S.emp.known,L=S.emp.likes;const C=qinCard(S);/* 2e4: 
  return{who:pEmp(),t:`<p>Hoàng thượng đang dạo bước trong Ngự hoa viên, thái giám theo hầu cách xa mấy bước.</p>`,o:[
   {n:"Đánh đàn chờ ngự giá",fx:{...C.c},x:`${word(o)} · thành: Sủng +${w}${K.music?` (tấu ${L.music}, khúc ngài thích)`:""} · hỏng: Sủng ${balSg(C.l.sung)}`,go:()=>{const b=rsnap();if(agTry(o)){apply({sung:w});log(`Tiếng đàn làm Hoàng thượng dừng bước. Sủng +${w}.`)}else if(agSoft(o))agSoftTxt(S,"Đánh đàn chờ ngự giá");else{apply({sung:C.l.sung});log(`Ngài đi qua, không để ý tiếng đàn. Sủng ${balSg(C.l.sung)}.`)}}},
   {n:"Ra vấn an",fx:{},x:"chạm vào ngài trên cảnh để nói chuyện"},
-  {n:"Lánh đi lối khác",fx:{},x:"không được không mất"}]}};
+  {n:"Lánh đi lối khác",fx:{suc:BAL.cv.rest},x:"giữ sức, không gặp ngài"}]}};
 (function(){const st=document.createElement("style");st.textContent=`
 /* KIT 78 (owner 11/16 15:00Z 5.6): the place icon sits ABOVE the name, centred, never left of it — map chips, map tiles, the stage title, the kit sample */
 .ic.kplic{display:block;margin:0 auto 1px;flex:none}

@@ -388,3 +388,8 @@ Object.assign(BAL,{evWipe:-99});
 Object.assign(BAL,{cut:{nightPrep:[1,2] /* night preparation q (j8 night1: Để mộc 1, Tắm 2, Tập 1+bậc) → why word sơ sài ≤[0] / chu đáo ≥[1] (jwhyn) */,rhythm:[8,13],facRel:20,tuanDays:[10,20],clanRel:25,form:[35,50,65],virCong:[2,3,5],wkQ:[25,45,65,85],
  tho:[40,60,75],succEnd:{an:5,q:6},veil:[6,10,14],lost:[40,100,200],kidHp:[35,60],exTier:[3,5],luxRep:[2,3],
  rgTrust:[15,35,60],summon:[3,5,8],sgStep:{up:7,down:3}}});
+/* CHOICE VALUE (owner OD:L582 + OD 18/11 ~09:20Z; START_CORE laws 2 + 3; review/choice-value-audit): no option is cost-only, none is clearly better.
+   rest = Sức she keeps when she declines / stays in her palace (the gain of every "Khéo từ chối / Không đến / Cáo bệnh / Mặc kệ / Lánh đi" option);
+   duc = Đức of a virtuous refusal (burning a man's love poem); skipAff = thiện cảm the host loses when she skips a tấn phong feast (was a typed 6 in jts);
+   vulan = the three Vu Lan roads at equal value (bạc road ↔ Sức road ↔ scheming road); reign = Tân quân lập uy c1a: Sủng ↔ Đức trade. */
+Object.assign(BAL,{cv:{ransom:60,/* bạc to ransom the maid's parents (j7 maidhostage) */coldAid:30,/* bạc a lãnh cung consort begs for medicine (j3 coldletter) */servAsk:10,/* bạc a servant asks for her sick mother (j24 Kẻ hầu xin) */rest:3,duc:1,skipAff:6,vulan:{den:{bac:-10,duc:4,danh:2},cung:{suc:-10,duc:4},cungMaid:8},reign:{nhan:{sung:1,duc:1},mai:{sung:2}}}});

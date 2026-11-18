@@ -115,8 +115,8 @@ EVD.ret={place:()=>"home",
   return `Tuyết lớn phủ kín cung cấm; than sưởi chia theo phẩm, cung thấp và lãnh cung rét cóng.${Sh.length?` Chia than cho các cung thấp: ${nmList(Sh)}.`:""}${Su.length?` Chịu rét: ${nmList(Su)}.`:""}`},
  end(){phongAfter(B().ret.phongP,"Sau trận đại hàn, Hoàng thượng cho giảm bớt người trong cung");return "Tuyết đã tan; Nội vụ phủ phát than như thường."},
  card(w){const b=B().ret;if(!meCons())return info(w);if(rkOf(S)<=b.rank)return Object.assign(info(w),{opts:[{n:"Bỏ bạc mua thêm than",fx:{bac:-b.buy.bac},x:"thành: qua mùa rét yên ổn"},
-   {n:"Chịu rét cho qua",fx:{suc:-b.cold.suc},x:"kèm: có thể bị nhiễm phong hàn",go:()=>{if(roll(b.catch)){const r=catchIll(S,b.ill);if(r)log(r)}}}]});
-  return Object.assign(info(w),{opts:[{n:"Chia than cho các cung thấp",fx:{bac:-b.share.bac},x:`thành: Đức +${b.share.duc}, Danh +${b.share.danh}`,go:()=>apply({duc:b.share.duc,danh:b.share.danh})},{n:"Giữ than cho cung mình",fx:{},x:"không được mất gì"}]})},
+   {n:"Chịu rét cho qua",fx:{suc:-b.cold.suc},x:`thành: giữ lại ${b.buy.bac} lượng bạc · kèm: có thể bị nhiễm phong hàn`,go:()=>{if(roll(b.catch)){const r=catchIll(S,b.ill);if(r)log(r)}}}]});
+  return Object.assign(info(w),{opts:[{n:"Chia than cho các cung thấp",fx:{bac:-b.share.bac},x:`thành: Đức +${b.share.duc}, Danh +${b.share.danh}`,go:()=>apply({duc:b.share.duc,danh:b.share.danh})},{n:"Giữ than cho cung mình",fx:{},x:`thành: giữ lại ${b.share.bac} lượng bạc`}]})},
  night(){return false}};
 /* ---------- 8 NẠN CHÂU CHẤU (row 8): a flood / drought whose relief failed (j55) left Kho lúa low but not yet famine (dis.kho..kho),
    in the growing months. Kho lúa falls more, pay in kind cut (stipend gate), the Emperor eats less; NPCs donate or hoard; plague may follow. */
@@ -126,7 +126,7 @@ EVD.trung={place:()=>"cnh",
   return `Châu chấu kéo qua đồng, lúa mất trắng; Kho lúa -${b.khoCut}, giá gạo trong cung lên cao, bổng lộc bớt ${Math.round(b.payCut*10)} phần 10.${G.length?` Quyên bạc mua gạo: ${nmList(G)}.`:""}`},
  end(w){if(roll(B().trung.xaP))ws("xa","Qua nạn châu chấu, ban ân điển");return "Nạn châu chấu đã qua; giá gạo trở lại."},
  card(w){const b=B().trung;if(!meCons())return info(w);return Object.assign(info(w),{opts:[{n:"Quyên bạc mua gạo",fx:{bac:-b.give},x:`thành: Danh +${b.giveDanh}, Thái hậu +${b.giveTh}`,go:()=>apply({danh:b.giveDanh,th:b.giveTh})},
-  {n:"Bớt chi dùng trong cung",fx:{},x:`thành: Đức +${b.thrift.duc}`,go:()=>apply(b.thrift)},{n:"Làm như không biết",fx:{},x:"không được mất gì"}]})},
+  {n:"Bớt chi dùng trong cung",fx:{},x:`thành: Đức +${b.thrift.duc}`,go:()=>apply(b.thrift)},{n:"Làm như không biết",fx:{suc:BAL.cv.rest},x:"giữ sức, không bớt gì của cung mình"}]})},
  night(){return false},pay:1};
 /* ---------- 10 ĐẠI ÁN VU CỔ (row 10): a REAL bùa frame is found (j8 frame / j42 plant / month search / jtruth → framed()) while the
    Emperor, Thái hậu or a child is ill. Every cung searched: planted spies may be caught (s.spyFor), the real planter may be caught by her
@@ -170,8 +170,8 @@ EVD.trom={place:()=>"home",
  end(w){const b=B().trom;let n=(w.x.C||0)+EVD.trom.home(w);
   let r="";if(!n&&roll(b.scape)){const v=pick(liveR().filter(v=>!v.out));if(v){ap(v,{danh:b.scapeDanh});r=` Không bắt được ai; cung ${v.name} bị đổ tiếng.`}}
   phongAfter(b.phongP,"Sau án trộm, Hoàng thượng cho giảm bớt người trong cung");return `Án trộm ngự khố đã xong.${r}`},
- card(w){const b=B().trom;if(!meCons())return info(w);return Object.assign(info(w),{opts:[{n:"Mở kho cung mình cho kiểm",fx:{},x:"thành: kẻ gian trong cung ngươi có thể bị bắt",go:()=>{meSet(w,"me","open")}},
-  {n:"Lo lót Nội vụ phủ cho qua",fx:{bac:-b.bribe.bac},x:`kèm: Đức ${b.bribe.duc}`,go:()=>{meSet(w,"me","bribe");apply({duc:b.bribe.duc})}},
+ card(w){const b=B().trom;if(!meCons())return info(w);return Object.assign(info(w),{opts:[{n:"Mở kho cung mình cho kiểm",fx:{},x:"thành: tỏ ra trong sạch, kẻ gian trong cung ngươi lộ mặt",go:()=>{meSet(w,"me","open")}},
+  {n:"Lo lót Nội vụ phủ cho qua",fx:{bac:-b.bribe.bac},x:`thành: kho cung ngươi không bị lục · kèm: Đức ${b.bribe.duc}`,go:()=>{meSet(w,"me","bribe");apply({duc:b.bribe.duc})}},
   {n:"Tự tra người của mình",fx:{},x:`thành: kẻ tham trong cung ngươi bị lôi ra, Đức +${b.self.duc}`,go:()=>{meSet(w,"me","self");apply({duc:b.self.duc})}}]})},
  night(){return false},pay:1};
 /* ---------- 13 ĐẠI PHÓNG CUNG NHÂN (row 13): maids at BAL.srvAge.ask (j42 rule, ageing j17) leave every household at once (spring, or

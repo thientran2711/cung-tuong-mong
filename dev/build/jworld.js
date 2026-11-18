@@ -160,7 +160,7 @@ EVD.dis={place:w=>"cnh",
  end(w){if(roll(B().xa.afterDis))worldStart("xa","Qua cơn thiên tai, ban ân điển");return "Nạn đói đã qua, cung cấm thôi giảm thiện."},
  card(w){const b=B().dis;const o=meCons()?[{n:"Quyên bạc cứu đói",fx:{bac:-b.give},x:`thành: Danh +${b.giveDanh}, Thái hậu +${b.giveTh}`,go:()=>apply({danh:b.giveDanh,th:b.giveTh})},
    {n:"Bớt chi dùng trong cung",fx:{},x:`thành: Đức +${b.thrift.duc}`,go:()=>apply(b.thrift)},
-   {n:"Làm như không biết",fx:{},x:(S.bac||0)>=b.stingyBac?`kèm: bị chê keo kiệt, Danh ${b.stingyDanh}`:"không được mất gì",go:()=>{if((S.bac||0)>=b.stingyBac)apply({danh:b.stingyDanh})}}]:null;
+   {n:"Làm như không biết",fx:{suc:BAL.cv.rest},x:(S.bac||0)>=b.stingyBac?`giữ sức · kèm: bị chê keo kiệt, Danh ${b.stingyDanh}`:"giữ sức",go:()=>{if((S.bac||0)>=b.stingyBac)apply({danh:b.stingyDanh})}}]:null;
   return{t:wName(w),who:pEmp(),h:`<p>${w.cause}.</p><p>${w.txt||""}</p>`,opts:o||undefined}},
  night(w,p){return false},feast:1,pay:1};
 /* 6 ÔN DỊCH (row 6): a famine that does not lift turns to plague. Reuses j13 illness rulebook (catchIll, ILL cont, illMonthP stages,
@@ -172,7 +172,7 @@ EVD.dich={place:w=>"tyv",
    if(roll(b.catch*(safe?b.safeMul:1))){const r=catchIll(p,b.ill);if(p===S&&r)log(r);n++}}if(n)WW.stat.ill=(WW.stat.ill||0)+n},
  end(w){if(roll(B().xa.afterDis))worldStart("xa","Dịch đã qua, ban ân điển");return "Dịch đã lui, cửa cung mở lại."},
  card(w){const b=B().dich;return{t:"Ôn dịch",who:pEmp(),h:`<p>${w.cause}.</p><p>${w.txt||""}</p>`,
-  opts:[{n:"Đóng cửa cung, xông ngải",fx:{bac:-b.safeBac},x:"thành: khó nhiễm bệnh hơn cho đến khi hết dịch",go:()=>{S.wSafe=w.id}},{n:"Vẫn đi lại như thường",fx:{},x:"kèm: có thể bị nhiễm bệnh"}]}},
+  opts:[{n:"Đóng cửa cung, xông ngải",fx:{bac:-b.safeBac},x:"thành: khó nhiễm bệnh hơn cho đến khi hết dịch",go:()=>{S.wSafe=w.id}},{n:"Vẫn đi lại như thường",fx:{},x:`thành: giữ lại ${b.safeBac} lượng bạc · kèm: có thể bị nhiễm bệnh`}]}},
  night(w,p){return true}};
 /* 7 SỨ ĐOÀN (row 1): j55 "cong" (Sứ thần các nước vào triều cống) while Biên cương is strong. Reuses j55 cong, FEST/jact2 place
    (Cần Chính điện banquet), the j67 s_su / jrd_nc arcs stay as they are. Invited consorts (rank >= BAL) may show a talent. */
