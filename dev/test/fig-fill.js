@@ -14,7 +14,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function');await sleep(2500);
   await p.addStyleTag({content:'#kroul{display:none!important}'});
   await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;
-   for(let i=0;i<400;i++){start();if(!isSrv())break}Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;
+   for(let i=0;i<400;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;
    render()});
    await sleep(1000);
    for(let tr=0;tr<4;tr++){await p.evaluate(k=>{Q.length=0;const md=document.getElementById("modal");md.hidden=true;const R0=liveRivals(true).filter(v=>!v.queen);const R=R0.filter(v=>k61St(v)>=1).concat(R0.filter(v=>k61St(v)<1));kn();R.slice(0,2).forEach(v=>S.met[v.id]=1);const v=R[0],v2=R[1]||R[0];

@@ -13,7 +13,7 @@ const kinds=(KINDS||'stranger,consort,queen,maid,elder,serv,kid,ty,fallen,emp,th
  const p=await ctx.newPage();p.setDefaultTimeout(120000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
  const g=await D.openHost(p,srv.url);await p.waitForTimeout(2500);
  await g.addStyleTag({content:'#kroul,.kroul,[id^=kroul]{display:none!important}'});
- await g.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<400;i++){start();if(!isSrv())break}Q.length=0;document.querySelectorAll('[id^=kroul]').forEach(e=>e.remove());const md=document.getElementById('modal');if(md)md.hidden=true;try{NLP=null}catch(e){}render()});
+ await g.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<400;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0;document.querySelectorAll('[id^=kroul]').forEach(e=>e.remove());const md=document.getElementById('modal');if(md)md.hidden=true;try{NLP=null}catch(e){}render()});
  await p.waitForTimeout(2500);
  const rows=[];
  for(const k of kinds){

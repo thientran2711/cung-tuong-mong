@@ -3,7 +3,7 @@
 const {chromium}=require('playwright');const [,,URL,OUT]=process.argv;
 (async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:1280,height:800},serviceWorkers:'block'})).newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
  await p.goto(URL);await p.waitForFunction(()=>typeof start==='function');await p.waitForTimeout(2500);
- await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();localStorage.clear();SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;document.querySelectorAll('#kroulw,.kroul').forEach(x=>x.remove());render()});
+ await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();localStorage.clear();SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0;document.querySelectorAll('#kroulw,.kroul').forEach(x=>x.remove());render()});
  const keys=await p.evaluate(()=>Object.keys(FEST));const res=[];
  for(const k of keys){
   const r=await p.evaluate(k=>{const f=FEST[k];S.month=f.m;S.tuan=f.t[0];const ft=festToday();const maps={};for(let bu=0;bu<3;bu++){S.buoi=bu;maps[BUK[bu]]=mapImg().split('/').pop()}

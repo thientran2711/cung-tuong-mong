@@ -7,7 +7,7 @@ const [,,URL,SZ,OUT]=process.argv;const [WH]=SZ.split('@');const [W,H]=WH.split(
  const fe=await p.waitForSelector('#krotf');const f=await fe.contentFrame();f.page&&0;
  const fr=()=>p.frames().find(x=>/krot=1/.test(x.url()));await p.waitForTimeout(1500);const F=fr();F.on&&0;
  await F.waitForFunction(()=>typeof start==='function');await p.waitForTimeout(2500);
- await F.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!isSrv())break}});
+ await F.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}});
  for(let i=0;i<40;i++){const st=await F.evaluate(()=>{const k=document.getElementById('kroul');if(k){const b=[...k.querySelectorAll('button')].find(b=>/Bỏ qua/.test(b.textContent));if(b)b.click();return 'r'}return document.getElementById('kroulw')?'w':'n'});if(st==='n'&&i>4)break;await p.waitForTimeout(700)}
  await F.evaluate(()=>{try{nlAccept(true)}catch(e){}});await p.waitForTimeout(2000);await F.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;kitSamplePage();const s=document.querySelector('#kitpage [data-kit="§8"]');s.scrollIntoView({block:'start'})});
  await p.waitForTimeout(1500);await p.screenshot({path:`${OUT}/kitpage-s8-${W}x${H}.jpg`,type:'jpeg',quality:70});
