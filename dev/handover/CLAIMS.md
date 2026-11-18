@@ -157,3 +157,4 @@ receiver-choice audit (ORDER MAIN ~21:16Z, OD 21:15Z/21:30Z; shares C-AG role-pa
 | questline-q2 BIG REVIEW round 2 (opus E13r) | review/questline-q2 451b4d1e → r6 cb0c97b7 | Foreman E ROOT #7 | session_01DgYSWmBrrumpeuqy7XfMzM | DONE: PASS cb0c97b7 | 18/11 22:11Z |
 | Nữ đế r10 (copy HH form, dragon) + BD Quý phi 2-ref (sonnet N1) | handover: dev/art/t8-prompt-B + img/_review/states-r10 | Foreman C ROOT-32 | session_01PEhRbvKvsx8JgQUBCgh9jr | RUNNING | 18/11 22:29Z |
 | Thái hậu 2-ref sample c04+c21 (sonnet TH1) | handover: img/_review/thaihau-2ref | Foreman C ROOT-32 | session_01PEhRbvkcCRGgoweKsRDvPB | CANCELLED (T1c/T2b had already made the sample; archived) | 18/11 22:36Z |
+| kc/ngheo 2K c25–c32 (sonnet K2b, successor of K2) | handover: img/_review/kc2k | Foreman C ROOT-32 | session_01PEhRbvmLbSjUp4e4zTzVGt | RUNNING | 18/11 22:34Z |
