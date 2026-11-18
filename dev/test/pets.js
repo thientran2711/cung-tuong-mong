@@ -26,7 +26,7 @@ const [,,BASE,SZ,OUT,TAG,OLD]=process.argv;const [WH,DPR]=SZ.split('@');const [W
   await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);}
  await p.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;try{store.set(NL_KEY,null)}catch(e){}window.__kroulKey=null;start()});
  await p.waitForTimeout(2500);
- await p.evaluate(()=>{for(let i=0;i<20&&(S.origin.k==='cnv'||(typeof isSrv==='function'&&isSrv()));i++){try{store.set(NL_KEY,null)}catch(e){}start()}const k=document.getElementById('kroul');if(k)k.remove();window.kmPush=function(){};document.querySelectorAll('.kmov').forEach(e=>e.remove());Q.length=0;showModal();S.inv=[];S.pets=[];S.petOn=-1;S.petTip=1;S.rank=3;S.bac=600;S.mat=4;render();((document.querySelector('#panel .keq')&&document.getElementById('panel').getBoundingClientRect().height>50)||document.querySelector('#tabs [data-tab=inv]').click())});
+ await p.evaluate(()=>{for(let i=0;i<20&&(S.origin.k==='cnv'||(typeof isSrv==='function'&&isSrv()));i++){try{store.set(NL_KEY,null)}catch(e){}start()}const k=document.getElementById('kroul');if(k)k.remove();window.kmPush=function(){};document.querySelectorAll('.kmov').forEach(e=>e.remove());Q.length=0;showModal();S.inv=[];S.pets=[];S.petOn=-1;S.petTip=1;S.rank=3;S.bac=600;tmPlace(S,4);render();((document.querySelector('#panel .keq')&&document.getElementById('panel').getBoundingClientRect().height>50)||document.querySelector('#tabs [data-tab=inv]').click())});
  await p.waitForTimeout(900);await shot('01-inv-empty');A.push(await audit('inv-empty'));
  /* empty slot → buy list */
  await p.click('#panel [data-keqk="pets"][data-keqi="0"]');await p.waitForTimeout(800);await shot('02-slot-buy');A.push(await audit('slot-buy'));

@@ -6,6 +6,13 @@ chơi bằng thao tác thật (kéo, chạm, vẽ, nhớ, canh nhịp).
 Mã: `dev/build/j82.js` (khung thi, chấm điểm, 5 trò cũ) + `dev/build/j91.js` (10 trò mới, gắn lại bảng môn). Mọi nơi gọi trò đều đi qua j82:
 `startContest` (hội thi j71, thi tài trong Tranh ghế), `playArt` (tác phẩm j83, tự luyện), `openMG` (học trong tab Tài nghệ: mỗi tài nghệ chơi đúng trò của môn mình).
 
+## RULE: every new minigame ships with its «Thử tay» entry (owner 17/11 ~17:10Z, AG-ALL-2d2)
+The owner-only calibration (dev/build/jmgcal.js, Thiết lập «Thử tay tài nghệ», flag `?hieuchuan=1`) sets every NPC's hand per kind from HER play (BAL.ag.mg2.cal.k).
+A NEW minigame must: (1) register in KG82_KIND with `n` (name), `t`, `how` and an engine in KG82_ENG — then mgCalKinds() lists it automatically in the one 30+-kind run
+(«Thử hết cả N môn» / «Thử tiếp các môn còn lại», resumes at the next kind not done) and the per-kind list; (2) read the board ease (env.lv / mgTier) so the 5 rounds d −2…+2 really get harder;
+(3) pass `node dev/test/ag-mgcal.js` (§5b starts every kind's real board from the test). Until she has played it, NPCs use the default band (BAL.ag.mg2.hand).
+Applying her code: dev/handover/reports/ag-all.md §23.2 (python3 dev/tools/mgcal_apply.py "CTM-CAL …", merges).
+
 ## Bảng môn → cơ chế
 
 | Môn (khóa) | Trò | Thao tác | Cách chấm (0–10 phần màn thi) | Bậc tài nghệ làm dễ hơn |
