@@ -65,7 +65,7 @@ balance-final #2 (opus; balance chain + AG arms) | review/balance-final | sessio
 | fullbody-frame-s4 (sonnet SMALL UI; 16:10Z picture size + phone Luân hồi revert) | review/fullbody-frame-s3 | MAIN ROOT-53 | session_01Rc5AsJUiBBwT9LH4J89i4E | RUNNING | 18/11 18:00Z |
 | land-m (sonnet LANDER: shown-odds-r2-rv cf1fc746 + monthly-ration-r6 287a0b79) | review/land-m | MAIN ROOT-53 | session_01Rc5AsJwMJVJdiZUsCPNM9T | LAND READY 3fdfb437 | 18/11 18:00Z |
 t8-mass-B c12–c22 a18 | CDN _review only | W74 session_011xDdVPGrS8Vtu3vK8hiwa9 | RUNNING | 2026-11-18T18:03Z (Foreman C ROOT-29)
-t8-mass-B c23–c32 a18 | CDN _review only | W75 session_011xDdVQ3iBaXTG6FnsDeBS8 | RUNNING | 2026-11-18T18:03Z (Foreman C ROOT-29)
+t8-mass-B c23–c32 a18 | CDN _review only | W75b session_011xDdVT4Jjz5JL6BHCuf4qx (W75 archived) | RUNNING | 2026-11-18T18:03Z (Foreman C ROOT-29)
 t8-mass-B c01–c11 a18 + frozen builder dev/art/t8-prompt-B | CDN _review only | W72 session_011xDdVNW3uEET1o4R4muEUH | RUNNING | 2026-11-18T18:03Z (Foreman C ROOT-29)
 | map-labels-missing (sonnet OWNER BUG: Dư đồ palace names missing) | review/map-labels-missing | MAIN ROOT-53 | session_01Rc5AsJKHtNXkYtCxgvCzAL | RUNNING | 18/11 18:22Z |
 | entry-blank-r3 (opus OWNER BUG: blank first screen again after life-preload) | review/entry-blank-r3 | MAIN ROOT-53 | session_01Rc5AsJn6SQf4eq1uMdP1U5 | RUNNING | 18/11 18:27Z |
