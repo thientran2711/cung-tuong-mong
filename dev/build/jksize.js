@@ -510,7 +510,9 @@ function kitFrameFitsLive3(dlg,strict){const K=dlg.dataset.ksz;if(K==="XL"&&!str
  const M=document.getElementById("modal"),room=M?M.clientHeight-24:9999;
  if(dlg.dataset.pres==="fig")return need<=lh+2&&dlg.offsetHeight<=room;const btn=dlg.querySelector("#mb>.k3btns");
  const body=Math.max(need,lh,KIT_SIZE.v3.picMinS);return (L?need<=lh+2:body<=KIT_SIZE.v3.bodyS)&&body+(btn?btn.offsetHeight:0)<=KIT_SIZE.v3.capS[kitSzMode()]}
-function kszLiveLay3(dlg,K){const X=dlg.__ksz3;if(!X)return;const V=KIT_SIZE.v3,pres=V.pres[K]||"fig",foc=V.focus[X.kind]||"person",nar=/^N/.test(K);
+/* a live 3-part frame is still the one on screen: its body is in #mb and its options (if any) were not replaced by a rebuild */
+function kszLive3Ok(dlg){const X=dlg&&dlg.__ksz3;return !!(X&&X.body.isConnected&&X.mb.isConnected&&X.mb.contains(X.body)&&(!X.opts||X.mb.contains(X.opts)))}
+function kszLiveLay3(dlg,K){const X=dlg.__ksz3;if(!X||!kszLive3Ok(dlg))return;const V=KIT_SIZE.v3,pres=V.pres[K]||"fig",foc=V.focus[X.kind]||"person",nar=/^N/.test(K);
  Object.assign(dlg.dataset,{ksz:K,pres,focus:foc,lay:K});if(nar)dlg.dataset.narrow="1";else delete dlg.dataset.narrow;
  if(nar&&KIT_SIZE.fig[K+"3"]){const Z=V.narrow[K],F=KIT_SIZE.fig[K+"3"],Mm=document.getElementById("modal"),mh=Mm?Mm.clientHeight:900;F.h=Math.round(Math.min(Z.max,Z.f*mh));F.cw=Z.cw;dlg.style.setProperty("--kszfh",F.h+"px");dlg.style.setProperty("--kszcw",F.cw+"px")}else{dlg.style.removeProperty("--kszfh");dlg.style.removeProperty("--kszcw")}
  const body=X.body,right=X.right;[...body.children].forEach(c=>{if(c!==right)c.remove()});right.querySelectorAll(":scope>.k3ev").forEach(c=>c.remove());
@@ -527,8 +529,10 @@ function kszLiveLay3(dlg,K){const X=dlg.__ksz3;if(!X)return;const V=KIT_SIZE.v3,
 function kszNarrow3(dlg){const V=KIT_SIZE.v3,M=document.getElementById("modal"),a=M?M.clientWidth-16:0;/* a = the width the screen leaves a frame; the M frame (the smallest figure + right column layout) needs 24 + 12 + its figure column + minRight */return a>0&&a-24-12-KIT_SIZE.fig3.M.cw<V.narrow.minRight}
 function kszLivePick3(dlg){if(kszNarrow3(dlg)){for(const K of["NL","NM","NS"]){kszLiveLay3(dlg,K);if(K==="NS"||kitFrameFitsLive3(dlg))return K}}
  for(const K of ["S","M","L","XL"]){kszLiveLay3(dlg,K);if(kitFrameFitsLive3(dlg))return K}return"XL"}
-let kszRepT=0;function kszLiveRepick3(dlg){clearTimeout(kszRepT);kszRepT=setTimeout(()=>{try{if(dlg.isConnected&&dlg.__ksz3)kszLivePick3(dlg)}catch(e){console.error("kszLiveRepick3",e)}},30)}
+let kszRepT=0;function kszLiveRepick3(dlg){clearTimeout(kszRepT);kszRepT=setTimeout(()=>{try{if(dlg.isConnected&&kszLive3Ok(dlg))kszLivePick3(dlg)}catch(e){console.error("kszLiveRepick3",e)}},30)}
 function kitFrameLive3(m){try{const M=document.getElementById("modal"),mb=document.getElementById("mb");if(!M||M.hidden||!mb)return false;const dlg=M.querySelector(".dlg.kpanel");
+ /* the same .dlg can be filled again (kpBuild rebuilds #mb while the dialog stays open): the old __ksz3 then points at nodes that left the page; drop it, lay the new body out again */
+ if(dlg&&dlg.__ksz3&&!kszLive3Ok(dlg))delete dlg.__ksz3;
  if(!dlg||dlg.classList.contains("kp-person")||dlg.__ksz3||dlg.contains(document.getElementById("kload")))return false;
  const kind=dlg.dataset.kind;if(!KIT_SIZE.v3.focus[kind])return false;const body=mb.querySelector(":scope > .kpb");if(!body||body.matches(".kpid"))return false;
  const main=body.querySelector(":scope > .kpmain");if(!main||main.querySelector(KSZ_LIVE_SKIP)||body.querySelector(":scope > .kpsubj.kes2"))return false;

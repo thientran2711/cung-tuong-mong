@@ -558,6 +558,18 @@ BAL.steal.m={feign:{b:30,w:{sung:.35},art:.75,win:{sung:1},lose:{sung:-3,duc:-1}
 BAL.steal.art={fav:1,dis:.75,neu:0};
 BAL.steal.keep={base:35,sung:.3,sac:.1,art:1,rung:1,gain:2,oan:1.5,npcP:.85};/* names agreed with night-final (jnf nfOdds "keep"): odds = base + Sủng×sung + Sắc×sac + best art×art + mood; gain = Sủng when nobody took her night; oan = × of the robbed hit; npcP = chance a flipped NPC presses it, costs nothing (night-final value) */
 BAL.steal.ea={mat:5,r0:5,rMat:4,disc:35};
+/* THE FLIP CHOICE timing (owner OD 16/11 22:45Z "Phải quyết định trong vòng 10 giây thôi"; jnf.js §2): ms = the countdown (timeout = Thôi);
+   waitMs = the co-op host's cap waiting for the friend's choice. (keep.npcP lives in BAL.steal.keep above.) */
+BAL.steal.choice={ms:10000,waitMs:90000};
+/* THE 10-NIGHT LEDGER (owner OD 16/11 18:10Z / 18:40Z / 19:00Z / 19:05Z; jledger.js; spec reports/night-time.md V3-B §6): days = nights a tuần
+   (each its own summons: the chance he calls anyone that night is BAL.ag.emp.summon [calm, busy] (jagemp AG2, OD 18:10Z keeps 90 / 65; ONE
+   CORE, review r1: the ledger's own summon / summonBusy copies are gone)); customDays = days of the month he spends at the Hoàng hậu's palace by custom (mùng một, rằm; her card is then never on the tray);
+   extraFx = what a NOT-played night gives the woman (Sủng +sung with sungP chance, Ân tình +an; night-time.md [M]); concF = × on conceiveCh,
+   applied as a FLOAT at the roll (spec 7: keeps NPC births ≈ 0.10 per consort-year with 10 nights, [M] night-time-bot3). on:false = old flip. */
+/* RULES THAT COUNT RECENT NIGHTS (review r1 §5.2 / §5.3, LUẬT SỬA CẢ NHÓM): j8 anMonth (Ân fades), j75 favNow (FAIRN.fav) and satN
+   (FAIRN.sat / satO) divide the nights of their window by days (jledger ntPace: one night a tuần stood for the tuần's 10 days), so they keep
+   the one-night-a-tuần pace (bot before/after: report review-night-ledger-r1.md). extraFx.anP = chance a NOT-played night gives Ân +an. */
+BAL.nt={on:true,days:10,customDays:[1,15],extraFx:{sungP:50,sung:1,anP:25,an:1},concF:.065};
 
 /* review/suc-khoe (jkh.js, owner 16/11 18:05–19:00Z; spec dev/handover/reports/suc-khoe.md §4.1–4.7 with the owner changes):
    kh  SỨC KHỎE = ONLY the Sức MAX ceiling (owner 18:05Z: "giữ cái trần của cái sức"; Sức regen unchanged, no second cut; jmort `tired` folded in).

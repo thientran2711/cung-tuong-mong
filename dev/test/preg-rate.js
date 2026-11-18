@@ -17,7 +17,7 @@ const {chromium}=require('playwright');const path=require('path');
   const v=liveRivals(true).find(q=>cyAge(q)<50);if(v){const o=v.preg;v.preg=3;if(cyPhase(v))f.push('phase while pregnant');v.preg=o;const a=v.age;v.age=50;if(cyPhase(v))f.push('phase at 50');v.age=a}
   if(cyPhase({name:S.name})!==cyPhase(S))f.push('friend entry phase differs');
   /* trysts / affairs (reviewer r1): one function trystCh = BAL.trystC bounds on the raw chance, then the cycle factor; no typed roll left */
-  {const T=BAL.trystC;const keep=Object.assign({},F);for(let tu=0;tu<3;tu++){S.tuan=tu;const h=cyPhase(S);BAL.cyc.fert={peak:1,low:1,cyc:1};const raw=conceiveCh(S);BAL.cyc.fert=keep;
+  {const T=BAL.trystC;const keep=Object.assign({},F);for(let tu=0;tu<3;tu++){S.tuan=tu;const h=cyPhase(S);BAL.cyc.fert={peak:1,low:1,cyc:1};/* a tryst is not a Kính sự phòng night: its chance never carries the ledger's BAL.nt.concF (jledger) */const nt0=BAL.nt&&BAL.nt.on;if(BAL.nt)BAL.nt.on=false;const raw=conceiveCh(S);if(BAL.nt)BAL.nt.on=nt0;BAL.cyc.fert=keep;
     const want=Math.min(T[1],Math.round(Math.max(T[0],Math.min(T[1],raw))*F[h]));if(trystCh(S)!==want)f.push(`trystCh ${h}: ${trystCh(S)} vs ${want}`)}
    /* main's j24/j95 wrap tryst / affairMonth: read the j22 bodies from the page source, not the wrappers */const src=[...document.scripts].map(x=>x.text).join('\n').split(/\nfunction (?=tryst\(|affairMonth\()/).slice(1).map(x=>x.split('\nfunction ')[0]).join('\n');if(/roll\((5|15)\)\)\{/.test(src)||!/trystCh/.test(src))f.push('tryst/affair roll not via trystCh')}
   /* notice */

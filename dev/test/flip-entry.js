@@ -1,7 +1,9 @@
 /* review/flip-entry (owner bug 16/11 ~20:58Z): the card-flip (Kính sự phòng lật thẻ) must NEVER open on entry — new game (each origin),
-   new life (Luân hồi), loading a save, tutorial start; it may open only when buổi tối starts (OD 14:00Z (4)).
+   new life (Luân hồi), loading a save, tutorial start. Since review/night-final (owner OD 16/11 22:45Z FINAL: tối keeps its 4 khắc) the flip
+   plays only when tối's 4th khắc ENDS ("Sang ngày mới" = the commit, jnf.js §1/§3); jfe.js (the start-of-tối stop-gap) is deleted.
    Each case: enter → close every entry card (identity, Nhập cung …) → wait → no .kmov.kcf, no card-flip queued (__cfdbg 'push'), no
-   Kính sự phòng summons (pid ksp) in the queue, tonight not decided yet; then walk the day to buổi tối → the flip runs there (nightWhy of today).
+   Kính sự phòng summons (pid ksp) in the queue, tonight not decided yet; walk the day to buổi tối → STILL no flip (the tablet waits, S.nfP);
+   end tối ("Sang ngày mới") → the flip runs there (S.nfF / S.nfX of today, or the scene queued).
    usage: node dev/test/flip-entry.js <url> [W]x[H]@dpr → lines + "ALL OK" / "FAIL n"  (co-op entry: dev/test/coop-e2e.js) */
 const {chromium}=require('playwright');
 const [,,URL,SZ]=process.argv;const [WH,DPR]=(SZ||'755x1000@1').split('@');const [W,H]=WH.split('x').map(Number);
@@ -23,10 +25,19 @@ const [,,URL,SZ]=process.argv;const [WH,DPR]=(SZ||'755x1000@1').split('@');const
  const fresh=()=>p.evaluate(()=>{(window.__cfdbg||[]).length=0;document.querySelectorAll('.kmov').forEach(e=>e.remove());try{kmReset()}catch(e){}});
  const noFlip=async(label)=>{await p.waitForTimeout(3500);const s=await state();
    ck(label+': no card-flip on entry',s.kcf===0&&s.push===0&&!s.ksp&&!s.today,s);return s};
- const toEvening=async(label)=>{for(let i=0;i<6;i++){const s=await p.evaluate(()=>{try{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;S.mg=null}catch(e){}
-     if((S.buoi||0)>=(typeof B4L==='number'?B4L:2))return 'tối';nextBuoi();return S.buoi});if(s==='tối')break;await p.waitForTimeout(400)}
-   await p.waitForTimeout(800);const s=await state();
-   if(!s.srv)ck(label+': at buổi tối the flip has run (today decided)',s.today||s.push>0,s);return s};
+ /* walk to buổi tối and end it in ONE synchronous step (the game's own buổi clock / auto "Sang ngày mới" must not move time between the checks) */
+ const toEvening=async(label)=>{
+   const r=await p.evaluate(()=>{const B4=typeof B4L==='number'?B4L:2;const cf=()=>(window.__cfdbg||[]).filter(x=>/^push/.test(x)).length;
+     const clr=()=>{try{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;S.mg=null}catch(e){}};
+     const d0=wk();for(let i=0;i<6&&(S.buoi||0)<B4&&wk()===d0;i++){clr();used=0;nextBuoi()}clr();
+     const a={d:wk(),buoi:S.buoi||0,same:wk()===d0,today:!!((S.nightWhy&&S.nightWhy.wk===wk())||S.nfF===wk()),nfP:S.nfP===wk(),push:cf(),kcf:document.querySelectorAll('.kmov.kcf').length,ksp:Q.some(e=>e&&e.pid==='ksp'),srv:typeof isSrv==='function'&&isSrv()};
+     const d=wk();window.__bot=1;try{used=4;nextBuoi()}catch(e){}window.__bot=0;
+     const e={d,nfF:S.nfF===d,nfX:!!(S.nfX&&S.nfX.d===d),why:!!(S.nightWhy&&S.nightWhy.wk===d),push:cf()};
+     try{clr();document.querySelectorAll('.kmov').forEach(x=>x.remove());kmReset()}catch(err){}return {a,e}});
+   if(r.a.srv)return r.a;
+   ck(label+': at the START of buổi tối no flip yet (4 khắc kept)',r.a.same&&r.a.buoi>=0&&!r.a.today&&r.a.nfP&&r.a.push===0&&!r.a.ksp,r.a);
+   ck(label+': at the END of tối the flip runs',r.e.nfF||r.e.nfX||r.e.why||r.e.push>0,r.e);
+   await p.waitForTimeout(300);return r.a};
  /* 1. new game, each origin */
  const ks=await p.evaluate(()=>ORIGINS.map(o=>o.k));
  for(const k of ks){await fresh();await p.evaluate(k=>{window.__forceOrigin=k;try{$("title").hidden=true}catch(e){}start()},k);await enter();

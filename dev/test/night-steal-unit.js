@@ -6,7 +6,7 @@ const {chromium}=require('playwright');const path=require('path');
  await p.goto('file://'+path.resolve(process.argv[2]),{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
  const R=await p.evaluate(()=>{const out=[];const ok=(n,c,x)=>out.push([c?"PASS":"FAIL",n,x==null?"":JSON.stringify(x)]);
   window.__bot=1;document.getElementById('title').hidden=true;window.render=function(){};
-  for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;S.mg=0;S.rank=Math.max(S.rank,2);S.sung=40;S.duc=60;S.suc=70;
+  BAL.visit.cap=0;/* his own visit (jvisit) is not what these cases test */for(let i=0;i<60;i++){start();if(!isSrv()&&!(typeof isKc==="function"&&isKc()))break}/* a palace start: the home route (jkc) has no flip choice */Q.length=0;S.mg=0;S.rank=Math.max(S.rank,2);S.sung=40;S.duc=60;S.suc=70;
   const R0=liveRivals(true).filter(v=>!v.coop);/* r2: the same list stealPass draws from, so reset() covers every possible thief */const keep=JSON.stringify(BAL.steal);
   const reset=()=>{S.ntk=null;S.ntTry=null;Q.length=0;for(const v of R0){v.preg=0;v.confined=0;v.block=0;v.out=0;v.suc=70;v.duc=60;v.ill=null}S.cyb={};if(window.cyBase)S.tuan=(cyBase(S).t+1)%3};  /* r2: her cycle (jcycle, by tuần) is never on during a test try; forced tries use odds 100 / .001 (still wanted, never won) so the unit run is not a coin flip */
   const force=()=>{BAL.steal.k=1e6;BAL.steal.pMax=1;BAL.steal.maxTry=1};const o0=oSteal;
@@ -17,13 +17,13 @@ const {chromium}=require('playwright');const path=require('path');
   S.tonight="me";Q.push({t:"x",pid:"ksp"});const v1=R0[0];const d0=v1.duc,s0=v1.suc;let r=stealPass(S,{live:true});Math.random=mathR;
   ok("NPC steals HER night (live): holder moves",r.tries===1&&tonightOf()!==S&&tonightOf()===r.holder,{tries:r.tries,h:r.holder&&r.holder.name});
   ok("…her Kính sự phòng prep card is withdrawn, the news card is shown",!Q.some(q=>q.pid==="ksp")&&Q.some(q=>q.t==="Kính sự phòng"));
-  const d=r.holder;ok("…the NPC paid the player's cost",(d.duc===60-BAL.steal.cost.feign.duc&&d.suc===70)||(d.suc===70-BAL.steal.cost.road.suc&&d.duc===60),{duc:d.duc,suc:d.suc});
+  const d=r.holder;ok("…a flip-choice try costs nothing (OD 22:45Z: no Sức, no khắc — only gain and loss)",d.duc===60&&d.suc===70,{duc:d.duc,suc:d.suc});
   ok("…one try each per night (j75): she cannot try again",!stealEligible(d,S));
   /* 3 · NPC → NPC */
   reset();const A=R0[0],Bv=R0[1];S.tonight=A;r=stealPass(A,{live:true});
   ok("NPC steals another NPC's night",r.tries===1&&tonightOf()!==A&&tonightOf()!==S,{h:tonightOf()&&tonightOf().name});
   /* 4 · her → NPC (her deck card, same act) */
-  reset();S.tonight=A;Q.length=0;const sd=S.duc;let s=stealNight(S,A,"feign");
+  reset();S.tonight=A;Q.length=0;const sd=S.duc;let s=stealNight(S,A,"feign");/* night-final multi-steal: the act only records the try (cost paid now); the night is resolved once at the commit */if(window.nfOn&&nfOn()&&S.nfA&&S.nfA.L.length){S.nfA.L.forEach(x=>{if(x.w==="me")x.o=100});const sw=window.stealWant;window.stealWant=()=>({u:0,p:0,mode:null});try{window.stealPass(A,{live:true})}finally{window.stealWant=sw}}
   ok("HER Tranh sủng against an NPC: she wins with the same act and cost",S.tonight==="me"&&S.duc===sd-BAL.steal.cost.feign.duc,{t:S.tonight,duc:[sd,S.duc]});
   oSteal=o0;Object.assign(BAL.steal,JSON.parse(keep));
   /* 5 · the agent's choice: self-interest, personality, relation */
@@ -56,8 +56,8 @@ const {chromium}=require('playwright');const path=require('path');
   reset();A.coop=true;ok("the co-op friend (a human) is never an NPC stealer",!stealEligible(A,S));delete A.coop;
   oSteal=o0;Object.assign(BAL.steal,JSON.parse(keep));
   /* 11 · the real flip runs the pass: with forced odds, a week's flip ends stolen on some week */
-  reset();BAL.steal.k=1e6;BAL.steal.pMax=1;oSteal=function(){return 95};let st=0;for(let i=0;i<30;i++){reset();S.buoi=B4L;S.nfF=null;S.nightWhy=null;/* flip-entry: the flip runs at buổi tối (jfe) */flip();const d=S.nightWhy;if(d&&d.cause==="stolen")st++}
-  ok("flip() → steal pass → nightWhy.cause 'stolen' (card-flip reads it)",st>0,{st});
+  reset();BAL.steal.k=1e6;BAL.steal.pMax=1;oSteal=function(){return 95};const cu0=FAIRN.custom;FAIRN.custom=[0,0];/* no mùng 1 / rằm custom night */let st=0;for(let i=0;i<30;i++){reset();S.nfC=null;S.nfX=null;S.nfN=null;S.nfF=null;S.nightWhy=null;/* a fresh tablet each try (the day of the earlier cases is already flipped) */S.buoi=B4L;used=4;flip();Q.length=0;const w0=wk();const bo=window.__bot;window.__bot=1;try{endTurn();const k=Q.findIndex(m=>m.pid==="nfch");if(k>=0){Q.unshift(Q.splice(k,1)[0]);chooseM(Q[0].opts.findIndex(o=>o.n==="Thôi"))}}catch(e){}window.__bot=bo;Q.length=0;const d=S.nightWhy;if(d&&d.wk===w0&&d.cause==="stolen")st++;else window.__nsuDbg={on:nfOn(),x:S.nfX,nw:d&&{wk:d.wk,cause:d.cause,pick:d.pick,flip0:d.flip0},w0,ntk:S.ntk,orig:S.origin&&S.origin.k,ill:S.emp&&S.emp.ill,rank:S.rank,elig:R0.map(v=>[nightCh(v),stealEligible(v,S.tonight&&S.tonight!=="me"?S.tonight:S)])}}/* night-final (OD 22:45Z): the flip at the end of tối, then the choice (she: Thôi); the NPCs choose at the same moment, one resolve */
+  FAIRN.custom=cu0;ok("end-of-tối flip → choice → NPC attack → nightWhy.cause 'stolen'",st>0,st>0?{st}:{st,dbg:window.__nsuDbg});
   oSteal=o0;Object.assign(BAL.steal,JSON.parse(keep));
   ok("SOC 'steal' folded into the one choice",SOC.steal.ok(R0[0],S)===false);
   /* 12 · symmetry (night-steal-2): an NPC weighs HER exactly like an NPC holder in her position (same rank, thiện cảm, oán; custom night as Empress) */
