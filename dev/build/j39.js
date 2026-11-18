@@ -43,6 +43,21 @@ function figPick(who){const roles=figRoles(who);if(!roles.length)return null;con
   const sc=k=>{const L=M[k];const b=figBest(L,tier,age);let s=-figDist(b,tier,age);if((S.men||[]).includes(who))s+=4*Math.max(...L.map(f=>figSubOk(who,f)));s+=3*Math.max(...L.map(f=>figLook(who,f)));return s};
   let best=-1e9;for(const k of free)best=Math.max(best,sc(k));const top=free.filter(k=>sc(k)>=best-.5);const k=pick(top);who.fid=k;figUsed().push(k);return k}
  return null}
+/* SERVANT FACES ARE FREED (review/staff-cap-apply, MAIN s42: faces ran out after ~52 maids over one life). A servant identity (maid / mama /
+   eunuch) belongs to a person while anyone in the game still holds her: when a servant needs a face and every identity of her group is taken,
+   figGC frees the servant identities no live person holds any more (sent away, dismissed, dead, married out — every removal path at once, no
+   per-path code). Held = any fid / pid / fromMaid value reachable from S and the consorts (households, the Thái hậu's women, the court, the
+   Nội vụ phủ candidates, records). Consort identities are never freed. The co-op guest never writes the face list (a host world key). */
+const FIG_SERV=["maid","mama","eunuch"];
+function figGC(){try{if(!S||(window.COOPW&&COOPW.on&&COOPW.seat==="b"))return 0;const U=figUsed();const sig=S.turn+"|"+U.length;if(figGC.sig===sig)return 0;
+ const held=new Set(),seen=new Set();const SKIP={fidUsed:1,fseen:1,usedFaces:1};
+ const walk=(o,d)=>{if(!o||typeof o!=="object"||seen.has(o)||d>40)return;seen.add(o);if(Array.isArray(o)){for(const x of o)walk(x,d+1);return}
+  for(const k in o){if(SKIP[k])continue;const v=o[k];if(typeof v==="string"){if(k==="fid"||k==="pid"||k==="fromMaid")held.add(v)}else if(v&&typeof v==="object")walk(v,d+1)}};
+ walk(S,0);walk(typeof rivals!=="undefined"?rivals:[],0);
+ const keep=U.filter(k=>!FIG_SERV.includes(String(k).split(":")[0])||held.has(k));const n=U.length-keep.length;
+ if(n){S.fidUsed=keep}figGC.sig=S.turn+"|"+S.fidUsed.length;return n}catch(e){console.error("figGC",e);return 0}}
+(function(){const p0=figPick;figPick=function(who){try{if(who&&!who.fid&&S&&who!==S){const roles=figRoles(who).map(norm).filter(r=>FIG_SERV.includes(r));
+  if(roles.length){const U=new Set(figUsed());if(!roles.some(r=>Object.keys(FIGIX[r]||{}).some(k=>!U.has(k))))figGC()}}}catch(e){}return p0.apply(this,arguments)}})();
 figFor=function(p,kind){try{if(!FIGS.length||!p||!S)return"";const who=figWho(p);if(!who)return"";const k=figPick(who);if(!k)return"";const r=k.split(":")[0];const L=(FIGIX[r]||{})[k];if(!L||!L.length)return"";
  const f=figBest(L,figTierOf(who),figAgeOf(who));if(!f)return"";if(kind==="por")return figPath(f.por);return figPath(f.file||f.src)}catch(e){return""}};
 /* round portraits: the identity's por-*.webp once it has loaded; the old face until then (or if it fails) */
