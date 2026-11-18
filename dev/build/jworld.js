@@ -115,7 +115,7 @@ EVD.away={place:w=>"thu",
  card(w){const me=(w.x.f||[]).includes("me");if(!me)return{t:wName(w),who:pEmp(),h:`<p>${w.cause}.</p><p>${w.txt||""}</p>`};
   const b=B().away;return{t:wName(w),who:pEmp(),h:`<p>${w.cause}.</p><p>${w.txt||""}</p><p>Thái giám truyền chỉ: ngươi được chọn theo hầu.</p>`,
    opts:[{n:"Theo hầu ngự giá",fx:{},x:`thành: đi cùng ngài, hết chuyến Sủng +${b.folSung}`},
-    {n:"Cáo bệnh ở lại",fx:{},x:`kèm: nhường chỗ cho người khác, Danh ${b.stayDanh}`,go:()=>{w.x.f=(w.x.f||[]).filter(x=>x!=="me");apply({danh:b.stayDanh});
+    {n:"Cáo bệnh ở lại",fx:{suc:BAL.cv.decl.suc},x:`thành: ở lại nghỉ, khỏi đường xa vất vả · kèm: nhường chỗ cho người khác, Danh ${b.stayDanh}`,go:()=>{w.x.f=(w.x.f||[]).filter(x=>x!=="me");apply({danh:b.stayDanh});
       const C=liveR().filter(v=>!v.preg&&!v.confined&&!(w.x.f||[]).includes(v.id));if(C.length){const v=npcPick(null,C.map(v=>[v,Math.max(1,rawNight(v))*mW(v,"social")]));if(v){w.x.f.push(v.id);log(`${v.name} theo hầu thay ngươi.`)}}}}]}},
  night(w,p){return !(w.x.f||[]).includes(pid(p))},emp:1};
 /* 3 ĐẠI TUYỂN TÚ NỮ (row 2): every 3 years at the KC.ty clock (the player's own road already runs on it). Reuses newRival/drawFace/palFix

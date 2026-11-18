@@ -55,7 +55,7 @@ function cmAskPick(){if(cmOff()||!S.maid)return;const k=S.origin&&S.origin.k;if(
 function cmFoe(){const L=liveRivals(true).filter(v=>v!==S&&!v.coop);if(!L.length)return null;return L.slice().sort((a,b)=>hostility(b,S)-hostility(a,S))[R(Math.min(3,L.length))]}
 PEND.cmTt=()=>{const B=cmB(),m=S.maid;return{who:pMaid(),t:`Thư phủ Tể tướng gửi vào qua tay ${m.name}: cha muốn ngươi dò ý Hoàng thượng về việc triều chính, viết lại cho người.`,o:[
  {n:"Làm theo lời cha",fx:{danh:B.ttDanh,sung:-B.ttSung},x:"phe cha mạnh thêm; Hoàng thượng thấy ngươi dò ý"},
- {n:`Dặn ${m.name} chỉ viết chuyện vặt`,fx:{maid:-B.ttLoy,bac:-B.ttBac},x:"cha giận, tháng này không gửi bạc vào cung"}]}};
+ {n:`Dặn ${m.name} chỉ viết chuyện vặt`,fx:{maid:-B.ttLoy,bac:-B.ttBac,duc:BAL.cv.decl.duc},x:"thành: không dò ý Hoàng thượng, giữ đạo bề tôi, Sủng không suy · kèm: cha giận, tháng này không gửi bạc vào cung"}]}};
 PEND.cmBrawl=pp=>{const B=cmB(),m=S.maid,v=RV(pp.v);if(!v)return null;return{who:pMaid(),t:`${m.name} nóng tính, cãi rồi xô ngã cung nữ của ${v.name} ở Nội vụ phủ. Người bên ấy đòi ngươi xử.`,o:[
  {n:`Phạt ${m.name} trước mặt người ta`,fx:{maid:-B.brLoy,danh:B.brDanh},x:`${v.name} bớt oán`,go:()=>{oanAdd(v,S,-B.brOan)}},
  {n:"Bênh người của mình",fx:{maid:B.brLoy,danh:-B.brDanh},x:`${v.name} oán ngươi thêm`,go:()=>{oanAdd(v,S,B.brOan)}}]}};

@@ -294,7 +294,7 @@ function tsSummonMe(k){const E=S.emp;/* a private summons: she is face to face w
   h:`<p>Thái giám Càn Thanh cung đến truyền: “Hoàng thượng rảnh việc triều chính, cho mời ${tsGoi()} sang ${nm}.”${likes}</p>`,
   opts:[tsOpt({n:`Vâng chỉ, sang ${nm}`,fx:{suc:-5},need:[tsNeedSuc(5)],odds,duoc:[`Sủng +${g3.sung}..+${g7.sung}`,`Ân tình +${g3.an}..+${g7.an}`],mat:["ngài lơ đãng: chỉ Sủng +1"],kem:kem,note:"thành bại theo trò nhỏ hoặc theo cơ may khi bỏ qua",later:1,go}),
    reb?tsOpt({n:"Xin ngài đổi sang ngắm hoa trong vườn",fx:{suc:-3},duoc:[`Sủng ${balSg(BAL.eff.jts.sungGo)}`],note:"tránh hồ khi có tin loạn đảng",go:()=>{apply({sung:BAL.eff.jts.sungGo});log("Ngươi khéo xin Hoàng thượng đổi sang ngắm hoa trong ngự hoa viên.")}}):null,
-   tsOpt({n:"Cáo bệnh",mat:[`Sủng ${balSg(BAL.eff.jts.sungGo_2)}`],go:()=>{apply({sung:BAL.eff.jts.sungGo_2});log(`Ngươi cáo bệnh, không sang ${nm}.`)}})].filter(Boolean)})}
+   tsOpt({n:"Cáo bệnh",duoc:[`Sức +${BAL.cv.decl.suc}`],mat:[`Sủng ${balSg(BAL.eff.jts.sungGo_2)}`],go:()=>{apply({sung:BAL.eff.jts.sungGo_2,suc:BAL.cv.decl.suc});log(`Ngươi cáo bệnh, không sang ${nm}, ở lại nghỉ cho lại sức.`)}})].filter(Boolean)})}
 
 /* =============== Ý 14 · THẢ ĐÈN HOA ĐĂNG (Nguyên tiêu, Thất tịch, Trung thu): điều cầu gắn với nguyên nhân thật =============== */
 const TS_DEN=["nguyentieu","thattich","trungthu"];
