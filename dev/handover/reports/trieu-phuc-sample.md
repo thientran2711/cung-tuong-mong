@@ -41,3 +41,8 @@ Rewrite of `--trieu` (v2, build.py TRIEU/TRIEU_MAIN/TRIEU_CUT/build_trieu):
 Sample: c06 a18 t1..t8, 8 gens, 0 regens. Sheets (CDN): img/_review/trieu-phuc/c06_sheet2.jpg (8 in a row 1400px) and c06_sheet2_2x4.jpg (readable); PNGs c06_a18_trieu2_t1..t8.png; v1 files moved to .../v1/ ... (not re-uploaded, old v1 URLs under trieu-phuc/ root remain on the CDN).
 Checks: all other build.py outputs byte-identical (md5 of the 190-prompt battery equal before/after on current branch head), test_low_all OK, golden c06 ok.
 Own critique: t1 shoulder piece reads small/flat (as intended); t6 shoulder piece and t5 are close in size; t7 vs t8 differ by size, embroidery and crown; FAB 'never stiff' sentence did not hurt the stiff shoulder. ~100% sample / ~0% playable.
+
+## 5. ROUND 3 (owner add ~21:38Z via Foreman C)
+Owner (verbatim): "cái bộ triều phục á, thậm chí là ngay cả cái đường viền cầu vai á, càng lên cao thì cái nó có ngọc trong đó, chẳng hạn trân châu này nọ đó, nhìn cho nó cái độ xa hoa của nó ngay từ trên những cái bộ trang phục như vậy luôn."
+build.py `TRIEU_EDGE` (shoulder-piece edge jewels by rank, restrained): t1 plain gold-stitched, t2 tiny seed pearls, t3 small pearls, t4 pearls + few jade beads, t5 pearls + jade + few gems, t6 rich band of pearls/jade/gems, t7 pearls + gem beads (ruby, jade) + pearl drops, t8 double row pearls + gems + pearl drops. Everything else of round 2 unchanged.
+Sample: c06 a18 t1..t8, 8 gens, 0 regens, sheets img/_review/trieu-phuc/c06_sheet3.jpg (row) and c06_sheet3_2x4.jpg (readable), PNGs c06_a18_trieu3_t1..t8.png. Visible result: edge goes plain -> pearl row -> pearl fringe -> pearl drops and gems at t7/t8. Other outputs byte-identical (md5 battery equal), test_low_all OK.
