@@ -426,6 +426,44 @@ def low_items(c):
         r=[_art(f"simple {B}"),_art(f"neat {B}"),_art(f"finely made {B}"),f"{_art('fine '+B)} {w(tr[0])}",f"{_art('fine '+B)} {w(tr[1])}",f"{_art(B)} {w(tr[2])}"]
     return {t+1:(r[t],hk) for t in range(6)}
 for _c in LOW_SIG: ITEMS_LOW[_c]=low_items(_c)
+
+# ITEMS t1-t6 = FIGURE_GATE 3f FIXED LISTS (Foreman C ROOT-30, 18/11 ~21:22Z real). OWNER (verbatim): "Ủa sao mày vẽ? Tao đang coi C05 nè, mày vẽ ai cũng cầm quạt vậy? Bậc nào cũng cầm quạt vậy, đâu phải. Ủa? Cái luật cầm đồ của tao đâu? Mày bỏ sót cái luật món cầm trên tay rồi. Và thêm một cái nữa là ai cũng có một Bậc nào cũng sẽ có một cái món đồ riêng cầm trên tay. Đã có một người làm cái danh sách đó rồi mà tại sao mày không làm theo? Rồi họ còn phải tương tác với cái món đồ đó nữa. ..."
+# The old LOW_SIG ladder (her signature item stepped up) is REPLACED: every rank takes ONE item from ITS OWN 3f list, spread so neighbouring people differ and one person never holds the same KIND of item at two ranks; each item kind has its own hand interaction (HAND_LOW).
+L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered silk handkerchief","kerchief"),("a small woven bamboo flower basket","basket"),("a sprig of fresh plum blossoms","sprig"),("a plain paper folding fan","ffan"),("a thread-bound book","book"),("a small embroidery hoop with silk","hoop"),("a small bamboo flute","flute"),("a small silk lantern on a short bamboo stick","lantern"),("a simple embroidered cloth sachet","dangle")],
+2:[("a silk round fan with a lacquered handle and a small tassel","rfan"),("an embroidered silk sachet with a tassel","dangle"),("a painted paper folding fan","ffan"),("a poetry book with a silk cover","book"),("a small porcelain vase with a flower sprig","vase"),("an embroidery hoop with a fine silk scene","hoop"),("a jade-bead tassel ornament","dangle"),("a silk-covered lantern with a tassel","lantern"),("a small lacquered comb box","box"),("a bamboo flute with a silk tassel","flute")],
+3:[("an embroidered silk round fan with a silk tassel","rfan"),("a small red-lacquered box","box"),("a painted scroll with wooden rollers","scroll"),("a painted silk folding fan with bone ribs","ffan"),("a small celadon vase with a flower sprig","vase"),("a silver hand mirror","mirror"),("an embroidered silk palace lantern","lantern"),("a silver-mounted thread-bound book","book"),("a carved peach-wood comb in a silk case","box"),("a small silver-wire flower basket","basket")],
+4:[("a round fan with a carved jade handle and jade tassel","rfan"),("a sandalwood folding fan with carved ribs","ffan"),("a lacquered jewel box","box"),("a scroll with jade rollers","scroll"),("a jade disc pendant on a silk cord","dangle"),("a silver-and-enamel hand mirror","mirror"),("a small cloisonné vase with flowers","vase"),("a gauze palace lantern with a jade pendant","lantern"),("a silver-mounted book box","box"),("a small white-jade vase with blossoms","vase")],
+5:[("a round fan with a gold-inlaid handle and gem tassel","rfan"),("a gilded lacquer box","box"),("a painted scroll with gold fittings","scroll"),("an ivory folding fan with gold leaf","ffan"),("a cloisonné enamel vase with flowers","vase"),("a gold-and-jade hand mirror","mirror"),("a gilded silver flower basket","basket"),("a silver-gilt palace lantern with pearl tassels","lantern"),("a coral-and-pearl bead tassel ornament","dangle"),("a gold-mounted embroidered silk book","book")],
+6:[("a white-jade ruyi","ruyi"),("a jewelled box","box"),("a round fan with a carved jade-and-gold handle and pearls","rfan"),("a gold-and-pearl hand mirror","mirror"),("a white-jade vase with gold mounts and flowers","vase"),("a pearl-embroidered silk folding fan with jade ribs","ffan"),("a carved jade incense box","box"),("a small coral branch on a gold stand","stand"),("a pearl-tasselled silk lantern with a jade top","lantern"),("a gold-mounted jade pendant on a silk cord","dangle")]}
+HAND_LOW={"rfan":"the round fan held up in one hand at chest height, gently turned to show its painting, the other hand lightly touching its tassel, body turned slightly three-quarters to the {d}",
+"ffan":"the folding fan half-open in one hand at waist height, her fingers spreading its ribs, the other hand resting on her sash, body turned slightly three-quarters to the {d}",
+"kerchief":"the handkerchief draped over the fingers of one hand, lifted gently at waist height, the other hand smoothing its edge, body turned slightly three-quarters to the {d}",
+"basket":"the basket hanging from the crook of one arm, the other hand arranging a flower in it, body turned slightly three-quarters to the {d}",
+"sprig":"the sprig held up in one hand at chest height below the chin, the other hand touching a blossom, body turned slightly three-quarters to the {d}",
+"book":"the book open in both hands at waist height as if she was just reading it, head up toward the viewer, a slight turn of the body",
+"hoop":"the hoop held in one hand at waist height, the other hand drawing a silk thread from it, body turned slightly three-quarters to the {d}",
+"flute":"the flute held horizontally in both hands at chest height (not at the lips), fingers resting on its holes, a slight turn of the body",
+"lantern":"the lantern hanging from its handle in one hand beside her at hip height, the other hand steadying its tassel, body turned slightly three-quarters to the {d}",
+"dangle":"the ornament dangling from the fingers of one hand at chest height, the other hand cupped beneath it, body turned slightly three-quarters to the {d}",
+"vase":"the vase cradled in both hands at waist height, one hand under its base, a slight turn of the body, head tilted gently toward the viewer",
+"box":"the box in both hands at waist height, one hand lifting its lid slightly, body turned slightly three-quarters to the {d}",
+"scroll":"the rolled scroll in one hand lowered at her side, the other hand lifting her sleeve slightly, body turned slightly three-quarters to the {d}",
+"mirror":"the hand mirror held in one hand at waist height with its back turned outward, the other hand touching a hairpin, body turned slightly three-quarters to the {d}",
+"ruyi":"the ruyi held across both palms at waist height, presenting it, a slight turn of the body, head tilted gently toward the viewer",
+"stand":"the stand presented in both hands at waist height, a slight turn of the body, head tilted gently toward the viewer"}
+def low_hand(hk,right):
+    if hk in HAND_LOW: return HAND_LOW[hk].format(d="right" if right else "left")
+    return hand7(hk if hk in ('one','two','box') else 'one',right) if hk!='scroll' else 'the scroll in one hand lowered at her side, the other hand lifting her sleeve slightly, body turned slightly three-quarters to the right'
+def items3f(c):
+    n=int(c[1:]); used=set(); out={}
+    for t in range(1,7):
+        L=L3F[t]; k=__import__('random').Random(f'item3f-{c}-{t}').randrange(10)
+        for j in range(10):
+            it,kind=L[(k+j)%10]
+            if kind not in used: break
+        used.add(kind); out[t]=(it,kind)
+    return out
+for _c in [f"c{i:02d}" for i in range(1,33)]: ITEMS_LOW[_c]=items3f(_c)
 LOWNAME={"c06":("vermilion","coral red"),"c25":("deep cherry red","brick rust red")}
 for _c in DATA:
     if _c not in LOWNAME and _c in ORIG1: LOWNAME[_c]=(DATA[_c][0].split(" and ")[0],ORIG1[_c][0].split(" silk")[0])
@@ -525,7 +563,7 @@ def build_low(c,t,v="v0"):
     else: s+=f" COLOUR RULE: all colours fresh, clear and luminous, never dusty or greyed; this version's robe colour is {LV[0]} silk like {LV[1]} (a different colour family from her first reference), the main colour of the robe, sleeves and any cape, with {(LV[2]+' like '+LV[3]) if LV[3]!=LV[1] else 'a slightly deeper tone of the same colour'} in the inner robe and linings; gold only as thin accents."
     hairs=" Hair: her own hairstyle as described in the outfit, with silver, pearl and fresh flowers, little gold. " if t<=3 else " Hair: her own hairstyle decorated with fresh flowers and several gold hairpins (trâm) with dangles, rich like her rank. "
     s+=hairs+"No phoenix anywhere on the robe or in the hair: only flowers, birds, butterflies or other motifs. All flowers, birds and butterflies are fine silk-thread embroidery stitched directly into the fabric, flat and integrated with the cloth, following its folds, not appliqué, not pasted patches, not raised. "+(FAB_LOW if t<=3 else FAB)
-    s+=f" Pose: calm standing pose; she holds {item} in a contrasting colour, not the robe colour, the item held below the chin, the hand really gripping it, the whole face fully visible. Her hands interact naturally with the item (gently presenting, turning or touching it), lively and natural, while her head stays up facing the viewer, eyes open, lips closed, never looking down. Her hands and body: {hand7(hk if hk in ('one','two','box') else 'one',right) if hk!='scroll' else 'the scroll in one hand lowered at her side, the other hand lifting her sleeve slightly, body turned slightly three-quarters to the right'}."
+    s+=f" Pose: calm standing pose; she holds {item} in a contrasting colour, not the robe colour, the item held below the chin, the hand really gripping it, the whole face fully visible. Her hands interact naturally with the item (gently presenting, turning or touching it), lively and natural, while her head stays up facing the viewer, eyes open, lips closed, never looking down. Her hands and body: {low_hand(hk,right)}."
     s+=" Every hairpin is inserted into the hair pointing upward or backward with dangles hanging down, no hairpin horizontal or sticking out to the side. Luminous smooth porcelain skin, bare clean forehead with no forehead mark and no flower mark, eyes open, floor-length robe with slippers visible, no train, no cup, nothing covering the face."
     return s+END
 # ---------- STATES (SAMPLES ONLY, owner 18/11 ~21:00Z real; brief dev/handover/briefs/states-sample.md): --state nude|thaihau|kc|ngheo|nc1|nc6|bd1|bd6 ----------
@@ -536,7 +574,7 @@ PDATA={"nc":("dusty teal-blue and silver","oval face with soft cheeks, gentle al
 PTALL={"nc":"Nam Chiếu (Nanzhao, Yunnan) princess","bd":"Bắc Địch (northern steppe) princess"}
 IDENT=" From the identity reference keep ONLY her face, facial features and hairstyle colour; do NOT copy the outfit, hair ornaments or accessories of the reference, dress her in the NEW outfit below. The style reference image is only for skin, drawing style, fabric and embroidery: never copy its face, body or pose."
 def _pose(item,hk,right):
-    return f" Pose: calm standing pose; she holds {item} in a contrasting colour, not the robe colour, the item held below the chin, the hand really gripping it, the whole face fully visible. Her hands interact naturally with the item (gently presenting, turning or touching it), lively and natural, while her head stays up facing the viewer, eyes open, lips closed, never looking down. Her hands and body: {hand7(hk if hk in ('one','two','box') else 'one',right) if hk!='scroll' else 'the scroll in one hand lowered at her side, the other hand lifting her sleeve slightly, body turned slightly three-quarters to the right'}."
+    return f" Pose: calm standing pose; she holds {item} in a contrasting colour, not the robe colour, the item held below the chin, the hand really gripping it, the whole face fully visible. Her hands interact naturally with the item (gently presenting, turning or touching it), lively and natural, while her head stays up facing the viewer, eyes open, lips closed, never looking down. Her hands and body: {low_hand(hk,right)}."
 CLOSE=" Every hairpin is inserted into the hair pointing upward or backward with dangles hanging down, no hairpin horizontal or sticking out to the side. Luminous smooth porcelain skin, bare clean forehead with no forehead mark and no flower mark, eyes open, floor-length robe with slippers visible, no train, no cup, nothing covering the face."
 EMB_NOPH="No phoenix anywhere on the robe or in the hair: only flowers, birds, butterflies or other motifs. All flowers, birds and butterflies are fine silk-thread embroidery stitched directly into the fabric, flat and integrated with the cloth, following its folds, not appliqué, not pasted patches, not raised. "
 # Nu de: per person crown/shoulder variety (owner: every person her OWN robe and crown; front tassels vary; shoulder piece stiff + short, pointed or not)
