@@ -1,6 +1,6 @@
 /* walk spill test (KIT 34.1d, owner 11/15 09:05Z; updated 15/11 review/khac-day-r1 for 4 buổi + the current start()): a walk longer than the khắc left spills into the next buổi.
    usage: node dev/test/walk-spill.js <site url> <W>x<H>@dpr <outdir> [oldsave.json]
-   1 spill: morning, 1 khắc left, Thái y viện (2 khắc dry / 3 rain) → card "Đi (đến nơi vào buổi sau)" → arrives in buổi trưa with 4-(walk-1) khắc left, sees who is there
+   1 spill: morning, 1 khắc left, Thái y viện (2 khắc dry / 3 rain) → tap goes AT ONCE (map-tap-go 18/11: no confirm card; the buổi turn card is closed) → arrives in buổi trưa with 4-(walk-1) khắc left, sees who is there
    2 night: buổi tối (B4L), too few khắc → no spill, night rule ("Đợi sáng mai")
    3 closed: buổi chiều → Thái y viện closed in buổi tối → no spill, reason shown
    4 old save (optional) loads and the walk card still works */
@@ -17,7 +17,6 @@ const [,,URL,SZ,OUT,OLD]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=W
  const R={};const B4=await p.evaluate(()=>typeof B4L==='number'?B4L:BUOI.length-1);
  /* 1 spill */
  R.spill={setup:await setup(0,3,'tyv')};await p.waitForTimeout(900);R.spill.card=await card();await shot('spill-1-card');
- await p.evaluate(()=>{const b=[...document.querySelectorAll('#modal button')].find(x=>/đến nơi vào buổi sau/.test(x.innerText));if(b)b.click()});
  for(let i=0;i<20;i++){await p.waitForTimeout(500);const st=await p.evaluate(()=>{const M=document.getElementById('modal');if(M&&!M.hidden){const t=document.getElementById('mt').textContent;const b=M.querySelector('#mb .opts button')||M.querySelector('.dlg .btn, .dlg button.kbtn, #mclose, .dlg button');if(b)b.click();return'closed '+t}return S.place});R.spill['step'+i]=st;if(st==='tyv')break}
  await p.waitForTimeout(800);
  R.spill.after=await p.evaluate(()=>({place:S.place,buoi:S.buoi,buoiName:BUOI[S.buoi],used,left:4-used,people:(S.visit&&S.visit.people||[]).map(x=>x.name),pending:!!window.__walkSpill}));
