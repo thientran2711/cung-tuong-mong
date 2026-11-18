@@ -113,7 +113,7 @@ function oddsCapped(a){return !!a&&(a.o==null||a.o>=100)&&!oddsSure(a)}
 function oddsOf(a){if(a&&a.inner)return a.oi!=null?oddsCl(+a.oi):100;const o=a.o==null?100:a.o;return o>=100?(oddsSure(a)?100:BAL.odds.hi):o}
 /* capRes(ok, o) = a result that came from noise draws (a contest / exam score, not roll) keeps its odds inside the ONE cap: o = the raw odds
    of that result (0..100); above hi a win is undone with the right share, below lo a loss is turned with the right share, so P(ok) = oddsCl(o). */
-function capRes(ok,o){o=+o||0;const H=BAL.odds.hi,L=BAL.odds.lo;if(o>H)return !!ok&&roll(H/o*100);if(o<L)return !!ok||roll((L-o)/(100-o)*100);return !!ok}
+function capRes(ok,o){o=+o||0;const H=BAL.odds.hi,L=BAL.odds.lo;if(o>H)return !!ok&&Math.random()*o<H;if(o<L)return !!ok||Math.random()*(100-o)<L-o;return !!ok}
 function capW(){return word(BAL.odds.hi)}
 function has(t){return S.emp.traits.includes(t)}
 function mm(){return [10,0,-8,-15][S.emp.mood]}
