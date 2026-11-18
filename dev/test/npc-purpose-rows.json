@@ -1329,7 +1329,7 @@
 "group": "G1",
 "event": "monthly outfit remark (speaker random); who overhears; NPC re-dress",
 "fp": "ction wdNpcDress(v){if(!v.wd||roll(70)&&!wdTang())return;wdAutoFor(v,w",
-"done": "function wdNpcDress(v){if(!v.wd||!(wdTang()||npcWhy(\"wdDress\",{v})))return;"
+"done": "function wdNpcDress(v){if(!v.wd||!(wdTang()||npcWhy(\"wdDress\",{v},()=>roll(npw1B(\"wd\").dressGo)"
 },
 {
 "f": "j92.js",
