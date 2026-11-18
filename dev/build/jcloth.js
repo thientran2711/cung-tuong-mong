@@ -26,12 +26,13 @@ Object.assign(BAL.looks,{xoc:{on:0,
 Object.assign(BAL.looks,{stain:{on:0,
  lv:[null,{n:1,sc:.16,op:.6,wet:.5},{n:2,sc:.2,op:.72,wet:.78},{n:3,sc:.26,op:.85,wet:1}],
  anchor:{chest:[.5,.27],sleeve:[.2,.5],hem:[.5,.93],hemL:[.22,.94],hemR:[.78,.94],hemH1:[.5,.85],hemH2:[.28,.79],hemH3:[.72,.76],hemH4:[.45,.7],sleeveL:[.14,.6],sleeveR:[.86,.6]},
- kind:{tra:{pos:["chest","hem","sleeve"],blend:"stain",variants:3,wet:0,scm:1.4,dy:0,opm:1,tint:[135,82,38],tm:1,lv:[null,{n:1,sc:.24,op:1.3},{n:2,sc:.3,op:1.15},{n:3,sc:.42,op:1.15}]},uot:{pos:["hem","sleeveL","sleeveR","hemL","hemR"],blend:"wet",variants:2,wet:1,scm:1.15,dy:0,opm:1,rotm:.4,deep:{k:.95,dark:.2,pow:1,paleP:.5,satMin:.07,warm:[1,.97,.88],rad:5,cling:2.2,hem:.84,hemV:.34,hemF:11,nx:5,ny:1.1,front:[0,.5,.75,1],floor:[0,0,.6,.92],darkL:[0,.2,.22,.3]}},bun:{pos:["hem"],blend:"multiply",variants:8,base:2,wet:0,scm:1,tilt:.5,scatter:1,lv:[null,{n:7,sc:.3,op:.9},{n:8,sc:.32,op:.9},{n:9,sc:.34,op:.92}],
+ kind:{tra:{pos:["chest","hem","sleeve"],blend:"stain",variants:3,wet:0,scm:1.4,dy:0,opm:1,tint:[135,82,38],tm:1,lv:[null,{n:1,sc:.24,op:1.3},{n:2,sc:.3,op:1.15},{n:3,sc:.42,op:1.15}]},uot:{pos:["hem","sleeveL","sleeveR","hemL","hemR"],blend:"wet",variants:2,wet:1,scm:1.15,dy:0,opm:1,rotm:.4,deep:{k:.95,dark:.2,pow:1,paleP:.5,satMin:.07,warm:[1,.97,.88],rad:5,cling:2.2,hem:.84,hemV:.34,hemF:11,nx:5,ny:1.1,front:[0,.5,.75,1],floor:[0,0,.6,.92],darkL:[0,.2,.22,.3]}},bun:{pos:["hem"],blend:"mud",tm:.35,variants:8,base:2,wet:0,scm:1,tilt:.5,scatter:1,lv:[null,{n:8,sc:.32,op:.9},{n:9,sc:.34,op:.92},{n:12,sc:.38,op:1}],
   /* r6 lv2/lv3 = lv1 (owner OK) + painted mud pieces placed by code: d = decal number (fx-stain-bun-d), n = how many, sc = width share of the robe, at "hem" = its bottom edge on the real hem of that column, else fy = height of its bottom edge (0 top .. 1 hem), x = horizontal range, op = opacity */
-  add:[null,[],[{d:3,n:2,sc:.11,fy:[.8,.88],x:[.15,.85],op:.5},{d:5,n:2,sc:.055,fy:[.82,.9],x:[.2,.8],op:.5}],
-   [{d:3,n:4,sc:.12,fy:[.72,.88],x:[.12,.88],op:.55},{d:5,n:3,sc:.06,fy:[.72,.88],x:[.15,.85],op:.55},{d:4,n:1,sc:.24,at:"hem",x:[.25,.75],op:.4}]],
-  /* soft tide-mark band climbing the pleats unevenly (code, not a decal): h = max height above the hem (share of figure height) per level, v = how uneven, f = column frequency, soft = blurred top edge, op = darkness, col = mud colour; shoe = how clean the shoes stay. Owner 18/11 ~02:40Z: lv1 a little tide too (less than lv2), lv2 marks higher, lv3 marks AND tide higher */
-  tide:[null,{h:.03,v:.6,f:9,soft:.02,op:.3},{h:.08,v:.6,f:9,soft:.03,op:.42},{h:.15,v:.55,f:9,soft:.045,op:.55}],col:[122,84,50],shoe:.85}},
+  /* owner 18/11 (after 02:40Z panels): new lv1 = old lv2, new lv2 = old lv3, new lv3 = darker + higher + more marks; must read on warm / red robes too */
+  add:[null,[{d:3,n:2,sc:.11,fy:[.8,.88],x:[.15,.85],op:.5},{d:5,n:2,sc:.055,fy:[.82,.9],x:[.2,.8],op:.5}],
+   [{d:3,n:4,sc:.12,fy:[.72,.88],x:[.12,.88],op:.55},{d:5,n:3,sc:.06,fy:[.72,.88],x:[.15,.85],op:.55},{d:4,n:1,sc:.24,at:"hem",x:[.25,.75],op:.4}],
+   [{d:3,n:6,sc:.13,fy:[.62,.86],x:[.1,.9],op:.7},{d:5,n:4,sc:.065,fy:[.64,.86],x:[.12,.88],op:.7},{d:4,n:2,sc:.26,at:"hem",x:[.2,.8],op:.55}]],
+  tide:[null,{h:.08,v:.6,f:9,soft:.03,op:.42},{h:.15,v:.55,f:9,soft:.045,op:.55},{h:.23,v:.5,f:9,soft:.06,op:.7}],col:[122,84,50],warm:.35,shoe:.85}},
  rot:.5,jit:.05}});
 /* ---------- tiny deterministic noise ---------- */
 function clothHash(x,y,s){let h=(x*374761393+y*668265263+s*2147483647)|0;h=(h^(h>>>13))*1274126177|0;return((h^(h>>>16))>>>0)/4294967295}
@@ -195,7 +196,7 @@ function drawDecalOnCloth(out,W,H,mk,dec,ax,ay,scale,rot,op,blend,tint,tm){const
    if(!dec.A)clothDecalRing(dec);const ii=(Math.round(v)*dec.w+Math.round(u)),sv=Math.min(.66,wedge*op*mm*ef*(1-mk.protL[i])*(.38*dec.A[ii]+.75*dec.ring[ii]));if(sv<.01)continue;
    for(let q=0;q<3;q++)out[i*4+q]*=(1-sv)+sv*tint[q]/255;n++;continue}
   for(let q=0;q<3;q++){let dc=D[j+q]*w0+D[j+4+q]*w1+D[j+k+q]*w2+D[j+k+4+q]*w3;if(tint)dc=dc+(tint[q]-dc)*tm;const b=out[i*4+q];let o;
-   if(blend==="shade"){if(dec.mid==null)clothDecalMid(dec);const dl=dc/255-dec.mid;const sat=1-b/mx0;/* shade tinted to the robe: the weaker channels darken more, so shadows are the robe's own deeper hue, not neutral grey */o=b*(1+BAL.looks.xoc.dec.shadeK*(dl<0?dl*(1+.9*sat):dl*.45))}else if(blend==="normal")o=dc;else if(blend==="soft")o=dc<128?2*b*dc/255:255-2*(255-b)*(255-dc)/255;else o=b*dc/255;/* multiply: the robe's folds and pattern show through */
+   if(blend==="shade"){if(dec.mid==null)clothDecalMid(dec);const dl=dc/255-dec.mid;const sat=1-b/mx0;/* shade tinted to the robe: the weaker channels darken more, so shadows are the robe's own deeper hue, not neutral grey */o=b*(1+BAL.looks.xoc.dec.shadeK*(dl<0?dl*(1+.9*sat):dl*.45))}else if(blend==="normal")o=dc;else if(blend==="soft")o=dc<128?2*b*dc/255:255-2*(255-b)*(255-dc)/255;else if(blend==="mud"){const sat=1-Math.min(out[i*4],out[i*4+1],out[i*4+2])/mx0,e=Math.min(1,tm*sat*2.2);o=Math.min(b,b*dc/255*(1-e)+dc*.85*e)}else o=b*dc/255;/* mud (r6e): multiply, pulled toward the mud colour on saturated cloth; multiply: the robe's folds and pattern show through */
    out[i*4+q]=b+(o-b)*a}n++}
  return n}
 /* r6 wet colour: local robe colour (blurred over the cloth only) gives the HUE; each channel is scaled by (channel / brightest channel)^P, so the weaker channels drop more: the robe's own hue gets deeper and richer, never neutral grey. Very pale / near-white cloth borrows the hue of the robe around it (wider blur) and a warm floor, so ivory turns deeper warm ivory, not grey. */
@@ -242,11 +243,11 @@ function clothStainBake(d,W,H,kind,lv,decals,opt){opt=opt||{};const B=BAL.looks.
   const base=new Uint8ClampedArray(out),hemY=new Int32Array(W);for(let x=0;x<W;x++){hemY[x]=mk.y1;for(let y=mk.y1;y>=mk.y0;y--)if(mk.mS[y*W+x]>.5){hemY[x]=y;break}}
   const T=K.tide&&K.tide[cl(lv|0,1,3)];if(T){const F=new Float32Array(W*H);for(let x=mk.x0;x<=mk.x1;x++){const ht=fh*T.h*(1-T.v+T.v*clothFbm(x/fw*T.f+seed*.21,.3,seed+57,3)),sf=fh*T.soft;
     for(let y=Math.max(mk.y0,Math.floor(hemY[x]-ht-sf*2));y<=hemY[x];y++){const i=y*W+x;if(mk.mS[i]<.5)continue;const up=hemY[x]-y;F[i]=(1-clothSmooth(ht-sf,ht+sf,up))*(.55+.45*(1-up/(ht+sf)))+.25*Math.exp(-.5*((up-ht)/(sf*.5+1))**2)}}/* darker at the hem, faint tide line at the top */
-   const Fb=clothBlur(F,W,H,2);for(let i=0;i<W*H;i++){const f=Fb[i];if(f<.004)continue;const k=f*T.op*mk.mS[i]*(1-mk.protL[i]);if(k<.003)continue;for(let q=0;q<3;q++)out[i*4+q]*=1-k+k*K.col[q]/255;count++}}
+   const Fb=clothBlur(F,W,H,2);for(let i=0;i<W*H;i++){const f=Fb[i];if(f<.004)continue;const k=f*T.op*mk.mS[i]*(1-mk.protL[i]);if(k<.003)continue;const v0=out[i*4],v1=out[i*4+1],v2=out[i*4+2],mx=Math.max(1,v0,v1,v2),sat=1-Math.min(v0,v1,v2)/mx,e=Math.min(1,K.warm*sat*k*2.2);for(let q=0;q<3;q++){const m=out[i*4+q]*(1-k+k*K.col[q]/255);out[i*4+q]=Math.min(out[i*4+q],m*(1-e)+K.col[q]*.72*e)}count++}}/* r6e: on saturated (red / orange) cloth a brown multiply stays red: pull toward real mud brown there, never lighter */
   const R2=clothRng(seed*977+lv*13);for(const a of K.add[cl(lv|0,1,3)]){const dec=decals[a.d-1];if(!dec||!dec.w)continue;for(let q=0;q<a.n;q++){
    const fx=a.x[0]+(a.x[1]-a.x[0])*((q+.15+.7*R2())/a.n),ax=mk.x0+fw*fx,xi=cl(Math.round(ax),0,W-1),sc=a.sc*(.85+.3*R2()),dh=dec.h*(fw*sc/dec.w);
    const by=a.at==="hem"?hemY[xi]+dh*.04:mk.y0+fh*(a.fy[0]+(a.fy[1]-a.fy[0])*R2()),ay=by-dh/2;
-   count+=drawDecalOnCloth(out,W,H,mk,dec,ax,ay,sc,(R2()-.5)*.12,a.op*(.9+.2*R2()),"multiply")}}
+   count+=drawDecalOnCloth(out,W,H,mk,dec,ax,ay,sc,(R2()-.5)*.12,a.op*(.9+.2*R2()),"mud",null,K.warm)}}
   if(K.shoe){/* shoes peek out under the centre of the hem: keep them mostly clean (a few drops may stay) */for(let y=Math.floor(mk.y1-fh*.05);y<=mk.y1;y++)for(let x=mk.x0;x<=mk.x1;x++){const i=y*W+x,u=Math.abs(x-mk.cx)/fw,z=K.shoe*(1-clothSmooth(.1,.18,u))*clothSmooth(mk.y1-fh*.05,mk.y1-fh*.03,y);if(z<=0)continue;for(let q=0;q<3;q++)out[i*4+q]=out[i*4+q]+(base[i*4+q]-out[i*4+q])*z}}}
  return{data:out,mask:mk,count}}
 window.drawDecalOnCloth=drawDecalOnCloth;window.clothStainBake=clothStainBake;
