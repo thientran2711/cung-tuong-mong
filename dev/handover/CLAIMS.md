@@ -83,7 +83,7 @@ style-ref test A/B/C c06 t1–t3 | CDN _review only | W79 session_011xDdVSouZw85
 | FOREMAN E ROOT #6 (opus; successor of #5; depth 5, START_CTX ~4 %) | handover FOREMAN_E_STATUS | E | session_01DgYSWn4eJjW3cuV1M7wtaa | HANDED OVER → E ROOT #7 session_01DgYSWmtdZ1kLd9QYXs3qmb | 18/11 20:01Z |
 | E13 questline-q2 | review/questline-q2 @ a8cd0551 | session_01DgYSWn8UViuUxqiymRM9sf | SẴN SÀNG KIỂM (K-Q2-1 open) | 2026-11-18T18:59Z | START_CTX ~5 % |
 | map-labels-r2 (sonnet OWNER BUG round 2) | review/map-labels-missing | MAIN ROOT-53 | session_01Rc5AsN8Rec5Ewr4xGzqVCe | READY 01256d36 | 18/11 19:08Z |
-| map-zones (opus: Dư đồ zones + zoom/fog + 2nd level HH/TH + live servants; owner 19:25Z) | review/map-zones | MAIN ROOT-53 | session_01Rc5AsJdJ7NfUTTcbii1sqc | READY 5692c687 (report map-zones.md) | 18/11 19:27Z |
+| map-zones (opus: Dư đồ zones + zoom/fog + 2nd level HH/TH + live servants; owner 19:25Z) | review/map-zones | MAIN ROOT-53 | session_01Rc5AsJdJ7NfUTTcbii1sqc | ROLLOVER 8f8dadb9 (re-scoped: zones removed; HANDOVER + trim TODO in report map-zones.md) | 18/11 19:27Z |
 | MAIN ROOT-54 (opus; child of ROOT-53) | handover HANDOVER_SESSION9 | ROOT-53 | session_01Rc5AsMSQ6cKyjRvG4MA9kQ | RUNNING | 18/11 19:21Z |
 | review fullbody-frame-s5 (sonnet SMALL REVIEWER) | review/fullbody-frame-s4 | MAIN ROOT-54 | session_01Rc5AsKnrN1RoAAQZmo5oSJ | PASS LAND READY af700c81 | 18/11 19:23Z |
 | LIVE-SERVANTS (opus; OD L1901 pts 2+3: retinue + servant day plans + NPC move log + roster.js --who) | review/live-servants | C-AG #14 | session_01Rc5AsM1HkYcxpG9VcjpeVt | RUNNING | 18/11 19:40Z |

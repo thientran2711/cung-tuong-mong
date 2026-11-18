@@ -30,3 +30,29 @@ fold-/ipad- 1-overview-day, 2-overview-night, 3-zone-dong-fog-day, 4-zone-noivu-
 - **ART REQUEST (Foreman C)**: Đức Thọ courtyard painting (3 halls). It uses the Càn Ninh courtyard with the kit "tạm" chip until then.
 - **C-AG item**: household servants have place-level locations in S.roster but no in-palace daily rhythm (rest/sleep/meals). The rooms come only from the activity code, so Tây phối điện is usually empty; Thái hậu's household is always "serve". The stage draws no household servants of other palaces (j95vis), so a side-hall room line says "N cung nhân đang … ở đây" while the stage stays empty.
 - **Existing family issue, not new**: on the courtyard level the side-hall tags at the far left/right of the panned painting are cut at the page edge (every consort courtyard on main does this; the hall rows below list every hall). Belongs to the map-labels courtyard family.
+
+---
+## RE-SCOPE 18/11 ~20:10Z (owner OD ~19:45Z: no zones; main ROOT-54/55: trim 13 → 10 palaces, keep the 2nd levels) — branch now **review/map-zones @ 8f8dadb9**
+Done on the branch:
+- Zone layer, zoom and fog are **removed**. Consort palaces show their own tags exactly as on r2. The old zone code is kept in history at 5692c687 (jmapz.js sections 1–2) and can be reused if a zoom is ever wanted.
+- **Kept**: the Càn Ninh / Đức Thọ second level (3 halls, servants counted from S.roster by activity, "Cung nhân: X trong cung · Y đi vắng", locked → «Lẻn vào» tap kept) and her palace naming HER people in/away from the ledger. KIT §85.10 is rewritten in place. map-labels-scan is back to the r2 version: PASS on Fold + iPad, day + night, courtyards 13.
+- Shots in dev/handover/shots/map-zones/: 5- (Càn Ninh) and 6- (her palace, maid away) are still valid; 1–4 show the cancelled zones, so ignore them.
+
+## HANDOVER (rollover: context limit) — next worker on review/map-zones
+TODO 1 — **TRIM 13 → 10 consort palaces** (OD 19:45Z: "Ba cái cung dư ra … bỏ luôn"; "Trữ Tú cung chỗ cho tú nữ học … bỏ qua chỗ khác"):
+- Data: jpal.js adds 5 west palaces (Vĩnh Thọ, Dực Khôn, Trữ Tú, Hàm Phúc, Thái Cực điện) to MAPH.rivalSlots/PALN. Main must name which 3 to drop. Suggestion: Trữ Tú (named by the owner), Hàm Phúc, Thái Cực điện, which keeps the two west palaces next to Ngọc Thanh các.
+- Every reference: PALN indices (S.pal, v.pal), HALL_PN rows (jhall), BAL.res/BAL.seat/harem cap (pending 19:35Z residence decision at main, Tần/Phi rooms 2), palCeremony free list, kpm slots, residenceArt keys, jpal comment header, j27 mapSpots.
+- Save migration: on deser, anyone with pal in a dropped slot (player or NPC) → palFix re-houses them into a kept free slot, else a side hall, with one log line. Keep the palace list data-driven (one table), because the owner may change 13/10 again.
+- «Tú nữ học» (Trữ Tú): grep its uses (tuyenTu / jtut / any "tú nữ" scene) and move them to an existing place (suggest Nội vụ phủ or Kính sự phòng picture) with no own map spot.
+TODO 2 — when C-AG review/live-servants (session_01Rc5AsM1HkYcxpG9VcjpeVt) lands: switch mapzStaffNow (jmapz.js) from reading R.P directly to its accessors j95here(k)/j95whereId(id) (dev/build/j95s.js). Ask that worker for a "hall/act" field if halls should be finer than the activity code.
+TODO 3 — open items carried over: ART REQUEST Đức Thọ courtyard; courtyard edge tags cut on pan (existing family issue).
+
+## Dư đồ — what else to DROP / MERGE / ADD (for MAIN to put to the owner; reasons from the map + j41/jplx/jmen rules)
+1. **Ngoại triều** — DROP the tag. It is always «cấm nữ quyến bước vào», a dead end she can never use; keep it painted only.
+2. **A ca sở, Thượng thư phòng, Đông cung** — SHOW ONLY WHEN THEY MATTER: A ca sở / Thượng thư phòng once she has a child of 6–17 (before that they are locked for her below Tần), Đông cung once a Thái tử exists. They are 3 grey tags most lives never use.
+3. **Trường Môn viện (lãnh cung)** — show only when someone lives there or she is sent there; otherwise it is a locked dead end.
+4. **Tân Giả khố → merge into Nội vụ phủ** (the laundry is an office of Nội vụ phủ): one tag; its punished maids and overseer become people at Nội vụ phủ.
+5. **Tích Cần viện (servants' quarters)** — keep for the maid road (it is her home there); on the consort road it is locked at night and has little use → show it only on the maid road.
+6. **Dưỡng Hòa điện + Cần Chính điện** — both "chỉ vào khi được triệu" for most of the game. Keep them (owner: the Emperor's places are not grouped), but candidate: one tag "Dưỡng Hòa điện" while she has no access, both when she can enter.
+7. **ADD: nothing.** The places the acts need already exist (OD 19:55Z: Hành sự acts must walk to their place). Act → place mapping is a separate job.
+Result if all are taken: overview ~28 → ~17 tags (10 palaces + Càn Ninh, Đức Thọ, Dưỡng Hòa, Cần Chính, Ngự hoa viên, Thái y viện, Kính sự phòng, Nội vụ phủ, her palace).
