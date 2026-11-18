@@ -1,0 +1,7 @@
+# look-fx-wire #5 (successor of #4 session_01UV1SzinFydJD4HFsLp5Qn7) — sonnet
+PRIORITY #1 CHECK: same as briefs/look-fx-wire-4.md | review/look-fx-wire 89d973c (continue) | claims look-fx WIRE MAIN (now #5).
+READ: dev/handover/briefs/root45-common.md, briefs/look-fx-wire-4.md (job A–D), dev/handover/reports/look-fx-wire.md "R9b" (state, caches, resume steps), OD lines 1820, 1821, 1834–1839 VERBATIM.
+MAIN DECISIONS (ROOT-45 05:36Z):
+1) CÀO: lv1 + lv2 + lv3 ALL = ladder STEP 3 (owner ~05:00Z overwrite; #4 left lv1 unchanged — fix).
+2) KEEP-OUT too wide (owner rule OD:L1820 = avoid EYES and LIPS, not the whole upper/lower face): shrink it to the features themselves — eye ellipses = the eye opening + lashes only (no brow, no cheek), mouth ellipse = the lips only; pad 1.45 → ~1.15 (pad was a coordinator number, not the owner's). Re-run dev/tools/look-fx-replace.py. Targets: muội lv3 must look like the owner-APPROVED R8 (613a7c2d art; only clipped to the face skin, OD ~04:58Z); bụi / mực / mồ hôi / muội lv2–3 keep their big blobs (≥ 90 % kept); nothing on eyes/lips; nothing past the face outline. Before/after kept-share table per mark.
+3) D: final FULL-SCREEN shots Fold 755x1000@2 + iPad 1180x820@2 (stage panel must render — fix the harness), every mark lv1–3 incl. cào lv1–3 + muội lv3, LOOK each 3×, upload to CDN img/_review/look-fx-wire/, ALL in ONE message → "R9 READY <sha>" to MAIN ROOT-45. Live CDN untouched until review PASS.
