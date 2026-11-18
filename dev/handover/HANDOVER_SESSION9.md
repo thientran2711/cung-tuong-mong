@@ -738,3 +738,4 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - (18/11 ~20:12Z) ROOT-54: errand-scene brief CANON OVERWRITE per OD 20:10Z (non-blocking: background walk-off/on, «!» on return, tap to read).
 - (18/11 ~20:14Z) ROOT-54: fullbody-frame-s5 reviewer PASS LAND READY af700c81 (FF from 94d11623). FF push to main REFUSED by this session's permission classifier → asked owner for an explicit go ("đẩy lên") in chat; then push. Reviewer + s5 worker can be archived after landing.
 - (18/11 ~20:16Z) ROOT-54: OD 20:15Z errands in parallel = ROOT-53 recommendation PENDING owner yes; on yes → opus worker / Foreman D (core time + BAL); errand-scene told to drive motion from one "away until khắc K" state.
+- (18/11 ~20:22Z) ROOT-54: OD 20:20Z APPROVED parallel time (every ask/send-another-person button) → ORDER Foreman D (non-UI core time; opus worker + BAL equal value); errand-scene (main UI) reads one "away until khắc K" state.
