@@ -1,4 +1,4 @@
-ARCHIVE of dev/handover/FOREMAN_C_STATUS.md — finished entries older than 24 h moved out on 18/11/2026 02:56Z (source lines in original order; entries from 15/11 to 17/11 02:56Z 17/11-18/11 range). Pull back with: grep in this file.
+ARCHIVE of dev/handover/FOREMAN_C_STATUS.md — finished entries older than 24 h (15/11–17/11) moved out of the live file on 18/11/2026 ~03:10Z; lines in their original order, appended newest block last. To pull one back: grep here, paste into the live file.
 
 <!-- moved 18/11/2026 02:56Z: 1402 lines from FOREMAN_C_STATUS.md -->
 ## HANDOVER (Foreman C ROOT-14 session_011xDdVScDqvym1tqCBqwYTD → ROOT-15, ~02:35Z 18/11)

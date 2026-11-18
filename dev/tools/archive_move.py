@@ -95,7 +95,7 @@ ap = os.path.join(ad, f'{name}-{stamp}.md')
 new = not os.path.exists(ap)
 with open(ap, 'a', encoding='utf-8') as f:
     if new:
-        f.write(f'ARCHIVE of dev/handover/{name}.md — finished entries older than 24 h moved out on {now:%d/%m/%Y %H:%MZ} (source lines in original order; entries from 15/11 to {cutoff:%d/%m %H:%MZ} 17/11-18/11 range). Pull back with: grep in this file.\n')
+        f.write(f'ARCHIVE of dev/handover/{name}.md — finished entries older than 24 h moved out of the live file on {now:%d/%m/%Y %H:%MZ}; lines in their original order, newest block last. To pull one back: grep here, paste into the live file.\n')
     f.write(f'\n<!-- moved {now:%d/%m/%Y %H:%MZ}: {len(moved)} lines from {name}.md -->\n')
     f.write('\n'.join(moved) + '\n')
 open(path, 'w', encoding='utf-8').write('\n'.join(live) + ('\n' if trailing_nl else ''))

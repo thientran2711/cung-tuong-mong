@@ -1,4 +1,4 @@
-ARCHIVE of dev/handover/HANDOVER_SESSION9.md — finished entries older than 24 h moved out on 18/11/2026 02:56Z (source lines in original order; entries from 15/11 to 17/11 02:56Z 17/11-18/11 range). Pull back with: grep in this file.
+ARCHIVE of dev/handover/HANDOVER_SESSION9.md — finished entries older than 24 h (15/11–17/11) moved out of the live file on 18/11/2026 ~03:10Z; lines in their original order, appended newest block last. To pull one back: grep here, paste into the live file.
 
 <!-- moved 18/11/2026 02:56Z: 674 lines from HANDOVER_SESSION9.md -->
 Decided this session (all in OD): faction win → every side direct rank with its own loss; first prince direct rank, later sons/princess exam waived; full seat → large one-off compensation, no seat claim; every reward has a gain and a loss; related items to one foreman (D41 → C, D51 wiring → main art); C's non-art D-list → B; art samples main / mass C.

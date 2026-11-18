@@ -1,4 +1,4 @@
-ARCHIVE of dev/handover/FOREMAN_B_STATUS.md — finished entries older than 24 h moved out on 18/11/2026 02:56Z (source lines in original order; entries from 15/11 to 17/11 02:56Z 17/11-18/11 range). Pull back with: grep in this file.
+ARCHIVE of dev/handover/FOREMAN_B_STATUS.md — finished entries older than 24 h (15/11–17/11) moved out of the live file on 18/11/2026 ~03:10Z; lines in their original order, appended newest block last. To pull one back: grep here, paste into the live file.
 
 <!-- moved 18/11/2026 02:56Z: 398 lines from FOREMAN_B_STATUS.md -->
 23:30Z (ROOT-2): hoa-dien r4 pushed cb376b6e0 (review/hoa-dien-r4 = makeup-lux-r2v 0e6489f6 + hoa-dien r1-r3 commits + main eb3675a6; quickcheck PASS, hoa-dien.js 35/35, reports/hoa-dien.md §r4). NO B reviewer opened: per MAIN s38 22:41Z hoa-dien is MAIN's (one owner, OD:L1080). Worker 6SdCcvsQ ARCHIVED. FOR MAIN s39: hand cb376b6e0 to your hoa-dien r3 worker QZkLLitw (rebase r3 on it, or take what it needs) — B will not touch jhd.js again.
