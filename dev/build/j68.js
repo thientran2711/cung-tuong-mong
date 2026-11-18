@@ -52,10 +52,10 @@ function fx6(o){return Object.entries(o||{}).filter(([k,v])=>v&&(NAMES[k]||k==="
 function ap6(o){o=Object.assign({},o||{});if(o.an){S.an=cl((S.an||0)+o.an,0,100);delete o.an}apply(o)}
 /* one choice. s: {c immediate fx, p odds, w/l fx on success/fail, r/lr [[actor,n]] relation on success/fail, wt/lt/k extra tokens, ok/no callbacks, wl/ll log lines} */
 function c6(n,s){s=s||{};const wt=fx6(s.w).concat((s.r||[]).map(([a,v])=>relTok(a,v)),s.wt||[]).filter(Boolean),lt=fx6(s.l).concat((s.lr||[]).map(([a,v])=>relTok(a,v)),s.lt||[]).filter(Boolean);
- const p=s.p==null?null:cl(Math.round(s.p),5,95);let x;
+ const p=s.p==null?null:oddsCl(Math.round(s.p));let x;
  if(p!=null)x=`${word(p)} · thành: ${wt.join(", ")||G6("êm chuyện")} · hỏng: ${lt.join(", ")||"không mất gì"}`;else x=wt.join(", ");
  if(s.k&&s.k.length)x+=(x?" · ":"")+"kèm: "+s.k.join(", ");
- const c={n,fx:s.c||{},x,go:()=>{let ok=true;if(p!=null)ok=Math.random()*100<p;
+ const c={n,fx:s.c||{},x,go:()=>{let ok=true;if(p!=null)ok=roll(oddsCl(p));
    if(ok){ap6(s.w);(s.r||[]).forEach(([a,v])=>relDo(a,v));let t="";try{t=s.ok?s.ok():""}catch(e){}log(t||s.wl||"Mọi việc êm xuôi.")}
    else{ap6(s.l);(s.lr||[]).forEach(([a,v])=>relDo(a,v));let t="";try{t=s.no?s.no():""}catch(e){}log(`<span class="r">Không thành:</span> ${t||s.ll||n+"."}`)}}};
  if(s.c&&s.c.suc&&S.suc+s.c.suc<5)c.n+=" (mệt)";if(s.need&&typeof kitOffNeed==="function")kitOffNeed(c,s.need);return c}

@@ -12,7 +12,7 @@
    SIZE: KIT_FIGSEAL.k × the figure's body height (kitFigBody head top → feet), between min and max px — it grows and shrinks with the figure.
    NEVER covers the face (it stands beside the head, the face is inside the head edge), never clipped (clamped inside the stage / dialog), never above the head (that place is the
    "this is you" marker kitMeMark of jmark).  Off switch for measuring: window.__emoOff=1 (the same as the portrait seals). ===== */
-window.KIT_FIGSEAL=window.KIT_FIGSEAL||{k:.105,min:22,max:50,gap:.012,rows:3,face:.5};
+window.KIT_FIGSEAL=window.KIT_FIGSEAL||{k:.105,min:22,max:50,dx:.194,dy:.916};/* dx/dy = seal centre from the standing anchor, in body heights (owner 18/11 ~06:20Z: one fixed offset for everybody) */
 const KFS_REG=new Map();let KFS_ID=0;
 /* kitStageFig is the one maker of img.kesimg: remember WHOSE figure it is (never read from the picture) */
 (function(){if(typeof kitStageFig!=="function")return;const f0=kitStageFig;kitStageFig=function(p,o){let h=f0.apply(this,arguments);try{const q=p&&(p.__kp||p);
@@ -28,7 +28,7 @@ function kfsBox(fig){const r=fig.getBoundingClientRect();let bx=r.left,by=r.top,
  if(nw&&nh&&bw>0&&bh>0){const ar=nw/nh;if(bw/bh>ar){const w=bh*ar;bx+=(bw-w)/2;bw=w}else{const h=bw/ar;by+=(bh-h)/2;bh=h}}return{bx,by,bw,bh}}
 const KFS_SEAL=new WeakMap();
 /* the element the seal is a child of: the nearest ancestor of the figure that does not clip its children (a figure picture box such as .kszfs is overflow:hidden), made a positioning parent (.kfshost) when it is static */
-function kfsHost(fig){let e=fig.parentElement;while(e&&e!==document.body){const c=getComputedStyle(e);if(c.overflowX==="visible"&&c.overflowY==="visible"){if(c.position==="static")e.classList.add("kfshost");return e}e=e.parentElement}return fig.offsetParent||fig.parentElement}
+function kfsHost(fig){{const bk=fig.closest&&fig.closest(".kbk-person.kbk-full");if(bk){if(getComputedStyle(bk).position==="static")bk.classList.add("kfshost");return bk}}/* KIT 34.6 r5: on a book person page the seal belongs to the page, not to the clipped figure column */let e=fig.parentElement;while(e&&e!==document.body){const c=getComputedStyle(e);if(c.overflowX==="visible"&&c.overflowY==="visible"){if(c.position==="static")e.classList.add("kfshost");return e}e=e.parentElement}return fig.offsetParent||fig.parentElement}
 function kfsDrop(fig){const s=KFS_SEAL.get(fig);if(s){s.remove();KFS_SEAL.delete(fig)}}
 function kitFigSeal(fig){try{
  if(!fig||!fig.isConnected||typeof emoOn!=="function"||!emoOn())return kfsDrop(fig);
@@ -44,17 +44,18 @@ function kitFigSeal(fig){try{
  const B=kfsBox(fig);if(B.bh<60){el.style.display="none";return}
  const K=KIT_FIGSEAL,ht=b.ht!=null?b.ht:b.t,body=Math.max(20,(b.b-ht)*B.bh);
  const s=Math.round(Math.max(K.min,Math.min(K.max,body*K.k)));
+ /* KIT 34.6 r5 (owner 18/11 ~03:35Z "figure runs under the ? chip"): on a BOOK person page the seal sits in ONE fixed slot, the right end of the name row of the text column (padding reserved by .kbk-phead), never on any figure, the same slot on every page */
+ if(host.matches&&host.matches(".kbk-person.kbk-full")){const ph=host.querySelector(":scope>.kbk-phead");if(ph){const q=Math.min(s,46),css=`left:${ph.offsetLeft+ph.offsetWidth-q}px;top:${ph.offsetTop+2}px;width:${q}px;height:${q}px`;if(el.style.cssText!==css)el.style.cssText=css;el.dataset.kfsb="book";return}}
  const k=Math.min(20,Math.max(1,K.rows|0)),rr=b.wr&&b.wr[k]!=null?b.wr[k]:null,ll=b.wl&&b.wl[k]!=null?b.wl[k]:null;
- const cx=B.bx+B.bw*((b.cl!=null&&b.cr>b.cl)?(b.cl+b.cr)/2:.5),gap=Math.max(2,body*K.gap);
- const edgeR=rr!=null?B.bx+B.bw*rr:cx+body*.09,edgeL=ll!=null?B.bx+B.bw*ll:cx-body*.09;
- const headTop=B.by+B.bh*ht;const cy=headTop+Math.min(body*.085,s*1.1);/* the seal's centre: the middle of the head, never lower than its first ~8.5 % */
+ /* owner 18/11 ~06:20Z: ONE fixed offset from the figure's standing anchor (ax = slot centre, feet = floor line), in body heights, so it scales with the figure and sits at the same spot for everyone: centre = ax ± dx x body, feet − dy x body (right first; left when the right would leave the frame) */
+ const ax=B.bx+B.bw/2,feet=B.by+B.bh*b.b;/* standing anchor: picture centre = slot centre, painted feet = floor line */
  const bd=fig.closest("#stage")||fig.closest(".kszfig,.kesf")||fig.closest(".dlg")||host;const bb=bd.getBoundingClientRect(),hr=host.getBoundingClientRect();
- let L=edgeR+gap;if(L+s>bb.right-2){const L2=edgeL-gap-s;if(L2>=bb.left+2||L2>bb.right-2-s-0)L=L2;if(L2<bb.left+2)L=Math.max(bb.left+2,Math.min(L,bb.right-2-s))}
+ let L=ax+K.dx*body-s/2;if(L+s>bb.right-2)L=ax-K.dx*body-s/2;
  L=Math.max(bb.left+2,Math.min(L,bb.right-2-s));
- let T=cy-s/2;T=Math.max(bb.top+2,Math.min(T,bb.bottom-2-s));
+ let T=feet-K.dy*body-s/2;T=Math.max(bb.top+2,Math.min(T,bb.bottom-2-s));
  const css=`left:${(L-hr.left+host.scrollLeft).toFixed(1)}px;top:${(T-hr.top+host.scrollTop).toFixed(1)}px;width:${s}px;height:${s}px`;
  if(el.style.cssText!==css){el.style.cssText=css}
- el.dataset.kfsb=body.toFixed(0)}catch(e){console.error("kitFigSeal",e)}}
+ el.dataset.kfsb=body.toFixed(0);el.dataset.kfsa=ax.toFixed(1);el.dataset.kfsf=feet.toFixed(1)}catch(e){console.error("kitFigSeal",e)}}
 function kfsSweep(){document.querySelectorAll("img.kfseal").forEach(s=>{const f=s.__fig;if(!f||!f.isConnected)s.remove()})}
 function kfsAll(){kfsSweep();kfsFigs().forEach(kitFigSeal)}
 let kfsT=0,kfsT2=0,kfsQ=0;function kfsSched(){clearTimeout(kfsT);clearTimeout(kfsT2);if(!kfsQ)kfsQ=requestAnimationFrame(()=>{kfsQ=0;kfsAll()});kfsT=setTimeout(()=>{kfsAll();kfsT2=setTimeout(kfsAll,700)},250)}
