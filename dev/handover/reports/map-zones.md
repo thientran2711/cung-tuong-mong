@@ -56,3 +56,20 @@ TODO 3 — open items carried over: ART REQUEST Đức Thọ courtyard; courtyar
 6. **Dưỡng Hòa điện + Cần Chính điện** — both "chỉ vào khi được triệu" for most of the game. Keep them (owner: the Emperor's places are not grouped), but candidate: one tag "Dưỡng Hòa điện" while she has no access, both when she can enter.
 7. **ADD: nothing.** The places the acts need already exist (OD 19:55Z: Hành sự acts must walk to their place). Act → place mapping is a separate job.
 Result if all are taken: overview ~28 → ~17 tags (10 palaces + Càn Ninh, Đức Thọ, Dưỡng Hòa, Cần Chính, Ngự hoa viên, Thái y viện, Kính sự phòng, Nội vụ phủ, her palace).
+
+## r2 — trim 13 → 10 consort palaces (MAIN ROOT-55 ruling) — branch **review/map-zones @ 7e398b9**
+PRIORITY #1 CHECK: OD 18/11 ~19:35Z (residence, 10 palaces), ~19:45Z ("Ba cái cung dư ra … bỏ luôn", Trữ Tú «tú nữ học» elsewhere) | main 13bb8c88: jpal.js west table (5), j27 PALN = MAPH.rivalSlots, jhall HALL_PN, jbal BAL.staff.posts gt (palace "Trữ Tú cung"), BAL.seat/res/harem | review/*: map-zones 8f8dadb9 (base), map-labels-missing r2 01256d36 (already in), r3 NOT pushed yet (not merged) | claims: this session only. START_CTX ~4 % (depth 3).
+Merged origin/main 13bb8c88 (shop-panel r3).
+### What
+1. **One palace table**: jpal.js `PAL_WEST` = Vĩnh Thọ, Dực Khôn (east 8 stay in MAPH). PALN = 10. Dropped Trữ Tú, Hàm Phúc, Thái Cực điện = the old tail slots 10–12, so every kept palace keeps its slot index in every save. Changing the count again = edit PAL_WEST only (+ `PAL_GONE` names for the log line). jhall rows of the 3 removed.
+2. **Save migration** (palFix, runs on every deser): anyone (player or NPC) with pal outside PALN → re-housed by the normal palFix path: a chủ vị gets a free palace (the player gets NO Ban-cung ceremony, her palCer is restored), a lone lower consort a side hall (or a free palace). One log line each: "«Trữ Tú cung» đóng cửa; ngươi dời sang Thừa Minh cung." / "… ; Quý phi X dời sang Cảnh Phúc cung." / "…; Quý nhân Y dời sang thiên điện Hàm An cung."
+3. **«Tú nữ học»** moves to **Nội vụ phủ** (no own map spot): BAL.staff.posts gt palace, jstaff duty row / tutorial lines, jentry «Phúc tuyển» judge, jkc kcPhucD scene text. The Giáo tập ma ma's location logic (Đức Thọ / her room while new) is unchanged.
+4. **Capacity (no seat counts changed)**: palaces 10 ≥ chủ vị seats 7 (HQP 1 + QP 1 + Phi 2 + Tần 3); hosts 6 × resCap 2 = 12 side seats; HH 1 + HQP 1 + 6 + 12 = 20 = BAL.harem.cap 20 → fits; 3 palaces spare (palLone overflow / favour).
+### Tests
+- quickcheck: **PASS** (old save ok, core gates PASS, perf new/live render 287/290, tab 502/535, buổi 1672/1317 ms).
+- NEW dev/test/pal-trim-oldsave.js: player + Quý phi + lone Quý nhân put in slots 10/11/12, saved, reloaded → all re-housed, 3 log lines, palCer 0, every PALN has hall rows, 0 page errors: **PASS** (prints the capacity numbers above).
+- map-labels-scan DSF=2: Fold 755x1000 day/night PASS, courtyards 10 PASS; iPad 1180x820 day/night PASS, courtyards 10 PASS. (Its game setup is flaky on iPad: 3 of 5 runs got S=undefined before any check; base 8f8dadb passes the same way when it gets a game. Not from this change.)
+- one-core grep: no typed palace count in code (only PALN.length; jres resPalIdx keeps an old `:8` fallback for when PALN is undefined — never at runtime).
+### Shots (LOOKED) dev/handover/shots/map-zones/: fold-/ipad- r2-overview-day, r2-overview-night, r2-courtyard (@2). Old zone shots 1–4 deleted (cancelled). 5-/6- still valid.
+Seen: the 3 lower-west courts are painted only, no tag; Fold right-edge tags (Trường Môn viện, Thái y viện) cut at the map pan edge = existing family, waiting for map-labels-missing r3 "Fold edge-clip fix" (merge it when pushed).
+### Still open: TODO 2 (switch mapzStaffNow to j95here/j95whereId when C-AG live-servants lands), TODO 3 (ART Đức Thọ courtyard; courtyard edge tags), drop/merge list items 1–6 wait for MAIN.

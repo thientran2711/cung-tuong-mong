@@ -103,7 +103,7 @@ parallel-time (ORDER ROOT-54 ~20:22Z + ADD ~20:37Z) | review/parallel-time | ses
 | ge-writers-w1 remerge main 13bb8c88 (sonnet E11w1m) | review/ge-writers-w1 | E ROOT #7 | session_01DgYSWkZN9pWgeEfv5WDMRV | DONE dca5550f | 18/11 20:22Z |
 | errand-scene r2 (sonnet UI/motion, non-blocking redo, whole group) | review/errand-scene | MAIN ROOT-55 | session_01Rc5AsLFZhaSRGU7o57KkKy | RUNNING | 18/11 20:05Z |
 | stage-here r2 (opus; successor; gaps a–d + LOOK fixes, on stage-rightcol) | review/stage-here | MAIN ROOT-55 | session_01Rc5AsHiLwk4MGH662uw5L3 | RUNNING | 18/11 20:10Z |
-| map-zones r2 (opus; trim 13→10: drop Trữ Tú, Hàm Phúc, Thái Cực điện; save migration) | review/map-zones | MAIN ROOT-55 | session_01Rc5AsLenCtDZkYpKqUFs18 | RUNNING | 18/11 20:11Z |
+| map-zones r2 (opus; trim 13→10: drop Trữ Tú, Hàm Phúc, Thái Cực điện; save migration) | review/map-zones | MAIN ROOT-55 | session_01Rc5AsLenCtDZkYpKqUFs18 | SẴN SÀNG KIỂM 7e398b9 (report ## r2) | 18/11 21:05Z |
 | review kit-subtabs-overflow (sonnet SMALL REVIEWER) | review/kit-subtabs-overflow 9366028 | MAIN ROOT-55 | session_01Rc5AsM4NJ1z3nqEtwQX6Tf | LIVE 9366028 | 18/11 20:17Z |
 | review entry-blank-r3 (opus BIG REVIEWER, OWNER BUG, CDN env) | review/entry-blank-r3 faf2b893 | MAIN ROOT-55 | session_01Rc5AsMhWSwNH8bFZFtfMQB | RUNNING | 18/11 20:20Z |
 | review map-labels (sonnet SMALL REVIEWER) | review/map-labels-missing 718c249b | MAIN ROOT-55 | session_01Rc5AsMauKQhsTB6uLuFcE6 | RUNNING | 18/11 20:25Z |
