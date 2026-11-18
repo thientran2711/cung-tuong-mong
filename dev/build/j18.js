@@ -1,4 +1,4 @@
-/* ================= DAY TRANSITIONS: a title-only banner between buổi; night -> dawn curtain with the week summary at a new tuần ================= */
+/* ================= DAY TRANSITIONS: a light sky shift between buổi; night -> dawn curtain with the week's summary at a new tuần ================= */
 window.__dawnOn=true;
 function wkKey(){return `${S.year}-${S.month}-${S.tuan}`}
 function wkSnap(){return{sung:S.sung,danh:S.danh,suc:S.suc,bac:S.bac,rank:S.rank,kids:S.kids.length,seq:S.logSeq||0,key:wkKey()}}

@@ -31,7 +31,7 @@ function kmFree(){const d=document.getElementById("dawn");if(d&&!d.hidden&&d.cla
 function kmPush(fn){KMQ.push(fn);kmPump()}
 /* kmReset (FIX-THE-WHOLE-GROUP, review/flip-newlife): everything that belongs to ONE life must not outlive it. A new life / a loaded slot / the title
    screen calls this: the queue is emptied, the running job's finish is voided (kmGen), every .kmov scene (card-flip, ink, reward, reveal…) and the
-   podium / reward / buổi-banner overlays are removed, and modules that keep their own timers register a hook with kmOnReset(fn). */
+   podium / reward / buổi-transition overlays are removed, and modules that keep their own timers register a hook with kmOnReset(fn). */
 let kmGen=0;const KMR=[];function kmOnReset(f){KMR.push(f)}
 lifeStore("kaLastResult",()=>{window.kaLastResult=undefined});
 function kmReset(){kmGen++;KMQ.length=0;kmBusy=false;clearTimeout(kmPump.t);
@@ -262,7 +262,7 @@ function kmDiff(){if(!kmOn()){return}if(KMS!==S||!KMSNAP){KMS=S;KMSNAP=kmSnap();
  W("flip",o=>function(){const r=o.apply(this,arguments);try{if(kmOn()&&!S.dead&&S.tonight){const t=S.tonight==="me"?S:S.tonight;if(t===S)kitFlipTablet(t,{me:true});else kitFlipNote(t)}}catch(e){console.error(e)}return r});
  /* result card */
  W("resultShow",o=>function(){const r=o.apply(this,arguments);try{const t=document.getElementById("rtoast");if(t&&t.classList.contains("on")&&kmOn())kitResultFx(t)}catch(e){console.error(e)}return r});
- /* buổi change: the incense curtain was replaced by the buổi banner (jbuoi.js, KIT §74); kitDayShift stays for old callers */
+ /* buổi change: the incense curtain was replaced by the painted time-of-day transition (jbuoi.js, KIT §71); kitDayShift stays for old callers */
  /* death: ink spreads, then the Kiếp này / Sổ luân hồi panel underneath */
  W("over",o=>function(h){const was=S&&S.dead;const r=o.apply(this,arguments);try{if(S&&S.dead&&!was&&!window.__bot)kitInk({title:h||"Hồng nhan bạc mệnh"})}catch(e){}return r});
  /* the lot shown again (Gieo lại, Phật đường, the HUD chip): play the tube in the panel */

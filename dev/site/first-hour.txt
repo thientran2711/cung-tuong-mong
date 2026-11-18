@@ -488,6 +488,9 @@ img/fig-thaihau-h2-a51.webp
 img/fig-thaihau-h3-a51.webp
 img/fx/ash.webp
 img/fx/brush.webp
+img/fx/buoi-hills.webp
+img/fx/buoi-orb.webp
+img/fx/buoi-wash.webp
 img/fx/coin.webp
 img/fx/fireworks.webm
 img/fx/fireworks.webp
