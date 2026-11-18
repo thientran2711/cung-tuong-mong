@@ -9,7 +9,7 @@ poison-road-r2-rv | review/poison-road-r2-rv | session_01964izEFTD1Fs4DqpreEzX8 
 | REVIEW kit-kpb 19953e93 (sonnet SMALL UI; brief briefs/root51-review-kit-kpb.md) | review/kit-kpb-rv | MAIN ROOT-51 | session_01UV1Szm7d7V45EoFwfke8CE | RUNNING | 18/11 10:12Z |
 | REVIEW look-fx r10 DATA cand-face-fit-r10.json (sonnet SMALL; brief briefs/root51-review-look-fx-r10.md) | (CDN only) | MAIN ROOT-51 | session_01UV1Szkyjqhi5rdi3n2xVgj | RUNNING | 18/11 10:13Z |
 | E9r2 re-review questline-q3 18f638ed (opus BIG) | review/questline-q3 | E ROOT #3 | session_01DgYSWpR9QcYpQS62jgFNzt | DONE FAIL r2 (small) | 18/11 10:35Z |
-| look-fx-wire #10 r11 ink family fix (opus; successor of #9, handover 3d98ea23) | review/look-fx-wire-r11 | MAIN ROOT-51 | session_01UV1SziPxXf3Q5rnjZnnNVU | RUNNING | 18/11 10:29Z |
+| look-fx-wire #10 r11 ink family fix (opus; successor of #9, handover 3d98ea23) | review/look-fx-wire-r11 | MAIN ROOT-51 | session_01UV1SziPxXf3Q5rnjZnnNVU | ROLLED 11:01Z → #11 | 18/11 10:29Z |
 | E1b GRAND ENDINGS ENGINE steps 2–5 (opus; successor of E1; report reports/grand-endings-engine.md) | review/grand-endings-engine | E ROOT #3 | session_01DgYSWm7nnt9krNfbr1w92u | READY TO CHECK 2ae4715 | 18/11 10:40Z |
 | E1r review grand-endings-engine 2ae4715 (opus BIG) | review/grand-endings-engine | E ROOT #3 | session_01DgYSWovXDKzaubrVVDf2g5 | RUNNING | 18/11 10:37Z |
 | FOREMAN C-AG #11 (opus; successor of #10) | handover FOREMAN_C_STATUS | C-AG #10 | session_01UV1SzkgegQEiMEPpSv12RN | RUNNING | 18/11 07:37Z |
@@ -21,3 +21,4 @@ poison-road-r2-rv | review/poison-road-r2-rv | session_01964izEFTD1Fs4DqpreEzX8 
 | d19-gift-work LIVE 5103d561 (main 13e2b834 → 5103d561, B) | review/d19-gift-work-r1 | B | session_01N1tNP33iyLFhRjyAqZVTqZ | LIVE 5103d561 | 18/11 10:45Z |
 | E9r3 delta review questline-q3 dcc822b1 (sonnet) | review/questline-q3 | E ROOT #3 | session_01DgYSWkvsxGUxGcrdbTazE9 | DONE PASS | 18/11 10:44Z |
 residence-seats-r2-rv | review/residence-seats-r2-rv | session_01964izDpndwoqRKNLpJhQ4y | LIVE b3d2ccc7 | 18/11 11:02Z | owner D #1
+| look-fx-wire #11 r11 ink placement (opus; successor of #10, handover 69750210; branch at ae0c3840) | review/look-fx-wire-r11 | MAIN ROOT-51 | session_01UV1SzjXr5FNc4Q7m5frdgJ | RUNNING | 18/11 11:02Z |
