@@ -274,7 +274,7 @@ window.clothXocBake=clothXocBake;window.clothMask=clothMask;
 /* ---------- game wiring (only when the game is there): looks-2 CLOTHES "xoc" -> baked figure layer in the kit fx path ---------- */
 if(typeof KIT_FACEFX!=="undefined"&&typeof lkItem==="function"){
  const CLO={},CLQ=[],BLANK="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
- try{const st=document.createElement("style");st.textContent="img.kclo{pointer-events:none}img.kclo-on{visibility:hidden!important}";document.head.appendChild(st)}catch(e){}
+ try{const st=document.createElement("style");st.textContent="img.kclo{pointer-events:none}img.kclo-on{clip-path:inset(100%)!important}";document.head.appendChild(st)}catch(e){}
  /* the figure picture -> canvas -> clothXocBake -> data URL (async, once per picture + level, cached 24); a redraw of the stage puts it in */
  /* decal files (transparent webp) fetched once per kind+variant, cached; a missing file just means that decal is skipped */
  const DEC={};function clothDecalKey(key){if(!DEC[key])DEC[key]=fetch(IMG_U("img/"+key+".webp"),{mode:"cors"}).then(r=>r.ok?r.blob():Promise.reject()).then(bl=>createImageBitmap(bl)).then(bm=>{const c=document.createElement("canvas");c.width=bm.width;c.height=bm.height;const g=c.getContext("2d",{willReadFrequently:true});g.drawImage(bm,0,0);const id=g.getImageData(0,0,c.width,c.height);return{w:c.width,h:c.height,data:id.data}}).catch(()=>null);return DEC[key]}
