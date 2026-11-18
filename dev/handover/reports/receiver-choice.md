@@ -58,3 +58,35 @@ Successor: worktree from origin/review/receiver-choice (sparse; `python3 dev/bui
 Touched files: dev/build/jrcv.js (new), assemble.py (module list), jbal2.js (BAL.rcv), jagacts3.js (helpAsk moved), j9.js (her Nhờ card word), j8.js (giveTo NPC receiver, giftin chk), jts.js (summons NPC answer, sumSuc), dev/tools/receiver-choice-scan.js (new), dev/tools/role-parity-table.md + role-parity-open.json (receiver rows), dev/test/receiver-choice.test.js + receiver-choice-shots.js (new), dev/test/role-parity.test.js (receiver rows filtered), index.html + sw.js (site build).
 
 SHA: **review/receiver-choice b25ead7af** (pushed).
+
+
+---
+# WORKER #2 (opus, session_01964izGVAWwV6DabthJTS1n) — SẴN SÀNG KIỂM **88de83c5f** (review/receiver-choice)
+START_CTX ≈ 4 % of 1M (get_session read 0 at start; own estimate) → rollover ≈ 29 %; finished at ≈ 30 % (only report + push left).
+PRIORITY #1 CHECK: OD L1876 / 18-11 ~21:15Z / ~21:30Z | main: jroad rdHpW (L1876 weights), j42 cnvBribeOpts / jagstf2 stf2Bribe (bribe weights), j7+jvisit PEND.empnight (her Ngự giá card) — all REUSED | review/*: review/parallel-time f4eb517a5 (ptOrdAdd notice, one path), review/choice-value-audit (BAL.cv.decl) | claims: parallel-time #3 session_01964izGM3cyQq9y9byHFKnV, choice-value-audit #3 session_01964izCHK28tcRj4VBLZSQH.
+Merged origin/main (22 commits; assemble.py module list conflict → main's list + jrcv.js).
+
+## Fixes (whole group, ONE core jrcv.js — no new frame, kit dialog only)
+ONE shape for every request / proposal: rcvYesO (slot 0 full: the act + asker quý +af[0], cost Sức BAL.rcv.prop.suc; slot 1 qua loa: the act lighter, +af[1]) · rcvNoO (slot 2 «Từ chối» = BAL.rcv.kw[2] for every card — the parallel-time deadline answer; both likings −BAL.ag.cx2.help.fail; a named gain: bạc kept / Danh +BAL.rcv.prop.danh) · rcvSabO (slot 3 Mách lẻo: Hoàng hậu quý +qAf; Đức −, asker oán +, asker Danh −). Nhờ giúp đỡ now uses rcvNoO / rcvSabO too (same texts).
+RCVK[k] + rcvAsk(k, asker, receiver, x): NPC receiver = rcvPick (L1876 weights × mindPick, never argmax); HER = one saveable card PEND.rcvAsk {k,a,x}.
+- Kết giao (j8 ACT.ally + cx:ally): the lễ BAL.actBac.ally travels to the receiver (Nhận lời / Nhận lễ giữ khoảng cách / Từ chối = lễ returned / Mách lẻo); her button shows rcvWord (no odds): ACT.xw in j6 rvButtons.
+- Lập phe cùng (her j10 «lap», cx3:facFound, facMonth), Xin vào phe (askJoin → the leader answers; facMonth NPC join too), Mời vào phe (facInvite + the facMonth «Lời mời vào phe» notice that had no answer → now her 4-answer card). Her buttons show rcvWord instead of inviteOdds.
+- Ghé chơi (TW call, jshelf): Tiếp đón nồng hậu / Tiếp qua loa / Từ chối / Tiếp rồi đem chuyện đi kể.
+- Hòa giải (TW mediate → see:mediate): Nghe lời bỏ qua / Nguôi một nửa / Từ chối / Mách lẻo.
+- Nhờ ơn người quen (jecon ACT.blockf): the acquaintance answers; the plot rcvBlockGo stays in jecon (qua loa = odds − BAL.selfMinus).
+- Ngự giá (emp:visit): an NPC consort answers with HER card's roads (Thắp đèn / Phô tài BAL.visit.show / Khuyên ngài BAL.visit.adviseDuc/adviseSung).
+- Mua chuộc cung nữ (j8 ACT.bribe, G10): the target's maid — HER OWN maid too — chooses take / tell / quiet (cnvBribeOpts ids, stf2Bribe weights); «quiet» = no bạc, no evidence.
+- Summoned NPC «Cáo bệnh» also Sức BAL.cv.decl.suc (choice-value-audit's key, guarded until it lands).
+- Notice: rcvCard → parallel-time ptOrdAdd (S.ordQ + 信, answered when her act ends, expiry = «Từ chối» with its cost) when present, else a queued dialog. parallel-time #3 confirmed the API and changed its wording for non-order pids (f4eb517a5).
+Numbers: BAL.rcv.prop {suc:4, danh:1}; BAL.rcv.kw[1] = «Giúp qua loa» (L1876 words, same as j42 cnvOrdOpts).
+
+## Scan / table
+receiver-choice-scan.js: servant receivers (bribe, bribeSrv, bribel: her side = her servant's pick) + third-party receiver probe (blockf: she as the acquaintance). AFTER: rows 82 · SAME 12 · OK 67 · FORCED 3. role-parity-table.md § RECEIVER CHOICE rows refreshed (BEFORE → AFTER). role-parity-open.json role «receiver»: 12 → 3: ag:cx3:invite2 + act:bribel (parallel-time send buttons, theirs) and ag:cx3:staffUp Tiến cử (written reason: request to Nội vụ phủ, an office; recommend() is the same for her and every NPC; the servant only gains — law 3).
+
+## Gates (88de83c5f)
+- receiver-choice.test.js ALL PASS (now 13 rows SAME; every RCVK card: 4 answers, «Từ chối» slot, gain on every answer + cost on yes / no / mách, no %; NPC draws all 4 for ally / facFound / facJoin / facInvite / call / mediate / blockf; old-save rcvAsk round trip; own maid take/tell/quiet; Ngự giá go/show/adv).
+- coop-e2e.js 63/63 PASS (co-op first). quickcheck: QUICKCHECK PASS · core gates PASS (G1 guard + bind fixed on the way) · coop one-world probe PASS · open 1411 ms · old save ok · perf render 200/204, tab 413/421.
+- role-parity.test.js: 2 FAIL — the SAME 2 FAIL on the merge base faff20e5e before my change (random probe gaps + talkGossip promotion) → C-AG's, not mine.
+- Shots Fold 755x1000@2 + iPad 1180x820@2: fold/ipad-rcv-{help,ally,call}.png at /home/user/wt/rc-shots (not in git; `node dev/test/receiver-choice-shots.js <dir>`). Kit dialog; iPad two-column answers, Fold long rows.
+Touched: dev/build/jrcv.js, jbal2.js, j8.js, j6.js, j10.js, j17.js, jagacts3.js, jagacts2.js, jshelf.js, jtwoway.js, jecon.js, jts.js, assemble.py; dev/tools/receiver-choice-scan.js, role-parity-table.md, role-parity-open.json; dev/test/receiver-choice.test.js, receiver-choice-shots.js; index.html, sw.js.
+Note for review: L1876 «mách lẻo» is drawn often for NPC receivers (~25–30 %, the BAL.road.hp weights as already approved for Nhờ giúp đỡ) — tunable via BAL.rcv.k.
