@@ -1053,3 +1053,4 @@ LESSONS s41: verify any worker art/asset count on the CDN before telling her (52
 - (18/11 02:10Z) IN greet-stranger SẴN SÀNG KIỂM 54431a1 (root: jmen talkOpts kind 'min' skipped k61 gate) → reviewer (sonnet, trial-merge with men-forbidden).
 - (18/11 02:14Z) OWNER asked about tea + other marks. Fact: ALL LOOK_DECALS decals are on CDN (15 keys checked 200); tea redo (OD 00:18Z) never done → cloth-xoc next; others never shown to her → worker look-fx (samples).
 - (18/11 02:12Z) LIVE: main 62a6846f → f986ff6a (hoa-dien r3c = r3b sat .85/up .38/sizeByRank/drop; reviewer Szk7eZQ PASS, report review-looks-s40 r4). ROLLBACK 62a6846f. img/_review/hoa-dien wiped. Told C-AG #8 + running workers.
+- (18/11 02:17Z) OWNER: mud APPROVED (7270a76) → SMALL reviewer; tea continues on review/cloth-tea (new branch from 7270a76).
