@@ -26,7 +26,10 @@ Object.assign(BAL.looks,{xoc:{on:0,
 Object.assign(BAL.looks,{stain:{on:0,
  lv:[null,{n:1,sc:.16,op:.6,wet:.5},{n:2,sc:.2,op:.72,wet:.78},{n:3,sc:.26,op:.85,wet:1}],
  anchor:{chest:[.5,.27],sleeve:[.2,.5],hem:[.5,.93],hemL:[.22,.94],hemR:[.78,.94],hemH1:[.5,.85],hemH2:[.28,.79],hemH3:[.72,.76],hemH4:[.45,.7],sleeveL:[.14,.6],sleeveR:[.86,.6]},
- kind:{tra:{pos:["chest","hem","sleeve"],blend:"stain",variants:3,wet:0,scm:1.4,dy:0,opm:1,tint:[135,82,38],tm:1,lv:[null,{n:1,sc:.24,op:1.3},{n:2,sc:.3,op:1.15},{n:3,sc:.42,op:1.15}]},uot:{pos:["hem","sleeveL","sleeveR","hemL","hemR"],blend:"wet",variants:2,wet:1,scm:1.15,dy:0,opm:1,rotm:.4,deep:{k:.95,dark:.2,pow:1,paleP:.5,satMin:.07,warm:[1,.97,.88],rad:5,cling:2.2,hem:.84,hemV:.34,hemF:11,nx:5,ny:1.1,front:[0,.5,.75,1]}},bun:{pos:["hem"],blend:"multiply",variants:2,wet:0,scm:1,tilt:.5,scatter:1,lv:[null,{n:7,sc:.3,op:.9},{n:13,sc:.38,op:1},{n:22,sc:.46,op:1}]}},
+ kind:{tra:{pos:["chest","hem","sleeve"],blend:"stain",variants:3,wet:0,scm:1.4,dy:0,opm:1,tint:[135,82,38],tm:1,lv:[null,{n:1,sc:.24,op:1.3},{n:2,sc:.3,op:1.15},{n:3,sc:.42,op:1.15}]},uot:{pos:["hem","sleeveL","sleeveR","hemL","hemR"],blend:"wet",variants:2,wet:1,scm:1.15,dy:0,opm:1,rotm:.4,deep:{k:.95,dark:.2,pow:1,paleP:.5,satMin:.07,warm:[1,.97,.88],rad:5,cling:2.2,hem:.84,hemV:.34,hemF:11,nx:5,ny:1.1,front:[0,.5,.75,1]}},bun:{pos:["hem"],blend:"multiply",variants:8,base:2,wet:0,scm:1,tilt:.5,scatter:1,lv:[null,{n:7,sc:.3,op:.9},{n:8,sc:.32,op:.9},{n:9,sc:.34,op:.92}],
+  /* r6 lv2/lv3 = lv1 (owner OK) + painted mud pieces placed by code: d = decal number (fx-stain-bun-d), n = how many, sc = width share of the robe, at "hem" = its bottom edge on the real hem of that column, else fy = height of its bottom edge (0 top .. 1 hem), x = horizontal range, op = opacity */
+  add:[null,[],[{d:7,n:2,sc:.4,at:"hem",x:[.25,.75],op:.45},{d:3,n:2,sc:.1,fy:[.9,.95],x:[.15,.85],op:.5},{d:5,n:1,sc:.055,fy:[.92,.96],x:[.2,.8],op:.5}],
+   [{d:7,n:3,sc:.38,at:"hem",x:[.15,.85],op:.55},{d:3,n:4,sc:.11,fy:[.86,.94],x:[.12,.88],op:.55},{d:5,n:2,sc:.06,fy:[.88,.95],x:[.15,.85],op:.55},{d:4,n:2,sc:.24,at:"hem",x:[.2,.8],op:.45},{d:6,n:3,sc:.05,at:"hem",x:[.12,.88],op:.55}]]}},
  rot:.5,jit:.05}});
 /* ---------- tiny deterministic noise ---------- */
 function clothHash(x,y,s){let h=(x*374761393+y*668265263+s*2147483647)|0;h=(h^(h>>>13))*1274126177|0;return((h^(h>>>16))>>>0)/4294967295}
@@ -218,12 +221,19 @@ function clothStainBake(d,W,H,kind,lv,decals,opt){opt=opt||{};const B=BAL.looks.
   for(let i=0;i<W*H;i++){const w0=Wb[i];const k=mk.m[i]*(1-Math.min(1,Math.max(mk.protF[i]*1.5,mk.prot[i]*1.2)));if(k<.02||w0<.002)continue;const lm=Lm[i];
    const s=Math.min(1,w0*ws*k*(1-.3*lm/255)*WP.k+Math.max(0,Lb[i]-lm)/255*WP.cling*w0*ws*k);/* cloth clings: the SHADOW side of the folds deepens a little more */
    clothWetDeepen(out,i,C,s,WP)}}
- if(decals&&decals.length&&!K.wet)for(let q=0;q<L.n;q++){const nm=K.pos[q%K.pos.length],an=B.anchor[nm],dec=decals[Math.floor(R()*decals.length)%decals.length];
+ const D0=K.base?decals.slice(0,K.base):decals;
+ if(D0&&D0.length&&!K.wet)for(let q=0;q<L.n;q++){const nm=K.pos[q%K.pos.length],an=B.anchor[nm],dec=D0[Math.floor(R()*D0.length)%D0.length];
   if(K.scatter){/* r5 mud follows the cloth grain: each streak is the strip decal turned VERTICAL, its foot on the hem line, running UP along the pleat, lengths vary, thinning with level; never a horizontal mark */
    const Ls=L.sc*K.scm*(.55+.6*R()),Lp=Ls*fw,ax=mk.x0+fw*(.1+.8*R()),ay=mk.y0+fh*.975-Lp*(.35+.2*R());
    count+=drawDecalOnCloth(out,W,H,mk,dec,ax,ay,Ls,Math.PI/2+(R()-.5)*K.tilt,L.op*(.9+.2*R()),K.blend,K.tint,K.tm);continue}
   const ax=mk.x0+fw*(an[0]+(R()-.5)*B.jit*2),ay=mk.y0+fh*(an[1]+(K.dy||0)+(R()-.5)*(K.jy||B.jit)*2);
   count+=drawDecalOnCloth(out,W,H,mk,dec,ax,ay,L.sc*(K.scm||1)*(.85+.3*R()),(R()-.5)*2*B.rot*(K.rotm||1),L.op*(K.opm||1)*(.9+.2*R()),K.blend,K.tint,K.tm)}
+ if(K.add&&K.add[cl(lv|0,1,3)]&&decals){/* r6 mud pieces (lv2/lv3): vertical shapes standing on the real hem, rising up the pleats; never horizontal rows */
+  const hemY=new Int32Array(W);for(let x=0;x<W;x++){hemY[x]=mk.y1;for(let y=mk.y1;y>=mk.y0;y--)if(mk.m[y*W+x]>.5){hemY[x]=y;break}}
+  const R2=clothRng(seed*977+lv*13);for(const a of K.add[cl(lv|0,1,3)]){const dec=decals[a.d-1];if(!dec||!dec.w)continue;for(let q=0;q<a.n;q++){
+   const fx=a.x[0]+(a.x[1]-a.x[0])*((q+.15+.7*R2())/a.n),ax=mk.x0+fw*fx,xi=cl(Math.round(ax),0,W-1),sc=a.sc*(.85+.3*R2()),dh=dec.h*(fw*sc/dec.w);
+   const by=a.at==="hem"?hemY[xi]+dh*.04:mk.y0+fh*(a.fy[0]+(a.fy[1]-a.fy[0])*R2()),ay=by-dh/2;
+   count+=drawDecalOnCloth(out,W,H,mk,dec,ax,ay,sc,(R2()-.5)*.12,a.op*(.9+.2*R2()),"multiply")}}}
  return{data:out,mask:mk,count}}
 window.drawDecalOnCloth=drawDecalOnCloth;window.clothStainBake=clothStainBake;
 window.clothXocBake=clothXocBake;window.clothMask=clothMask;
