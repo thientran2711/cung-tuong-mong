@@ -21,3 +21,7 @@ Branch reviewed: review/test-flaky-sure @ 36b82f75, merged locally onto origin/m
 
 Touched by this review: dev/handover/CLAIMS.md (row) + this file. Branch not modified, no push to main, no PR.
 ~START_CTX 0 %, ended ~12 %; no rollover needed.
+
+## THE 18 LAWS — per-law result (added after Foreman E's order 16:12Z; test-only branch, no game/UI/design change)
+Law 11 FIX THE WHOLE GROUP: **FAIL** — 49 files with the same fault not fixed (fix list 1-2). Law 4 ONE CORE: PASS — the "sure" fixes force the roll (`window.roll=()=>true`, restored in finally); no test types its own number into the game, the cap stays BAL.odds.hi; odds-cap.js/steal-mg-unit still read BAL. Law 13 PRIORITY #1: PASS — worker report and this review both open with the CHECK line; reused the forced-roll and neutral-eye idioms. Law 14 CANON OVERWRITE: PASS (no rule text changed). Law 16 never undo a working rule: PASS (no assert weakened beyond the two ordered patterns; coop-e2e accept-both judged correct). Law 18 FEATURE FREEZE: PASS (no feature; the same-house minigame finding is parked, not built).
+Laws 1, 2, 3, 5, 6, 7, 8, 9, 10, 12, 15, 17: not touched (no game code, no UI, no player-visible text, no art, no design change; only dev/test scripts + one dev/tools scan script). Re-runs were done on origin/main a2ce736a + branch; LIVE main is now e18697fe — re-merge it for the re-review of the new tip.
