@@ -214,3 +214,20 @@ Mud table (r6c, look unchanged except embroidery now takes mud too):
 | c30 | 2 | 19713 | -52.9 | -10.9 | 0 | +3.48 | 0 | -3.3 |
 | c30 | 3 | 27181 | -63.6 | -16.6 | 0 | +5.39 | 0 | -3.9 |
 Samples (CDN img/_review/cloth-xoc/): drywet-{uot,bun}-{c01,c30,c03,c12}.png (DRY | lv1 | lv2 | lv3, waist->hem, 2x), stain-{uot,bun}-1..3.png (2400 px full), wet-lighter-map.png. Looked at 3-5x zooms of hands/beads/cup/branch/neck on all 4: no halo ring, no dry lobes; the remaining light folds are in the dry art too (uniform multiplicative deepen, s .76-.95 measured there).
+
+## r6d (owner OD 18/11 ~02:40Z on mud panels, relayed by s41) — SẴN SÀNG KIỂM review/cloth-xoc 504b228 (QUICKCHECK PASS; wet = r6c unchanged)
+Mud: lv1 now has a small soft tide band at the hem (h .03, op .3) under its strips; lv2 tide h .08 and drops/drips reach higher (fy .8-.9); lv3 tide h .15 (climbs highest) + drops up to fy .72, drips, one splash. Shoes ~clean. Panels re-shot: CDN img/_review/cloth-xoc/drywet-bun-{c01,c30,c03,c12}.png + stain-bun-1..3.png. Table:
+| fig | lv | changed px | min dL* | mean dL* | lighter px | mean dC* | greyer px (dC*<-3) | mean dhue° |
+|---|---|---|---|---|---|---|---|---|
+| c01 | 1 | 12241 | -49.0 | -6.8 | 0 | +0.84 | 0 | +0.1 |
+| c01 | 2 | 22320 | -55.1 | -10.8 | 0 | +1.28 | 44 | +0.1 |
+| c01 | 3 | 36677 | -65.6 | -14.9 | 0 | +1.60 | 241 | +0.3 |
+| c03 | 1 | 13081 | -49.0 | -7.4 | 0 | +0.81 | 100 | -3.9 |
+| c03 | 2 | 23926 | -56.2 | -11.5 | 0 | +1.45 | 308 | -5.4 |
+| c03 | 3 | 40728 | -63.7 | -15.5 | 0 | +1.77 | 999 | -7.5 |
+| c12 | 1 | 14717 | -45.0 | -7.6 | 0 | +1.54 | 0 | -3.6 |
+| c12 | 2 | 25247 | -54.0 | -12.1 | 0 | +2.51 | 0 | -5.2 |
+| c12 | 3 | 40577 | -66.2 | -16.7 | 0 | +3.38 | 1 | -6.6 |
+| c30 | 1 | 14053 | -48.6 | -7.7 | 0 | +2.40 | 2 | -2.4 |
+| c30 | 2 | 24273 | -52.9 | -12.3 | 0 | +3.85 | 5 | -3.2 |
+| c30 | 3 | 39644 | -64.0 | -16.9 | 0 | +5.52 | 4 | -3.4 |
