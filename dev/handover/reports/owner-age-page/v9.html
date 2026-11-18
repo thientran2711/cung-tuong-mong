@@ -1,0 +1,101 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>32 Phi Tần B10</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif:wght@500;700&family=Be+Vietnam+Pro:wght@400;600&display=swap">
+<style>
+/* Layout: pick one person; 8 ranks as transparent figures; tap one = overlay with that rank's 3 outfits */
+:root{
+  --bg:#f3eee6; --panel:#fbf8f2; --fg:#2b2320; --muted:#76675c; --line:#dccfbd; --accent:#9b3b2e; --shade:rgba(243,238,230,.97);
+  --display:"Noto Serif",Georgia,serif; --body:"Be Vietnam Pro",system-ui,sans-serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d1916;--panel:#27211d;--fg:#efe6da;--muted:#b3a393;--line:#3d342d;--accent:#e08a74;--shade:rgba(29,25,22,.97);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1d1916;--panel:#27211d;--fg:#efe6da;--muted:#b3a393;--line:#3d342d;--accent:#e08a74;--shade:rgba(29,25,22,.97);color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:16px 48px}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.wrap{max-width:1400px;margin:0 auto;display:flex;flex-direction:column;gap:16px}
+h1{font-family:var(--display);font-weight:700;font-size:clamp(1.4rem,3vw,2rem);margin:0;text-wrap:balance}
+.lead{color:var(--muted);margin:4px 0 0;max-width:65ch;line-height:1.5}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);padding-block:10px;border-bottom:1px solid var(--line);display:flex;flex-wrap:wrap;gap:6px}
+nav a{font-variant-numeric:tabular-nums;text-decoration:none;color:var(--fg);border:1px solid var(--line);border-radius:6px;padding:5px 9px;font-size:14px;background:var(--panel)}
+nav a:hover,nav a:focus-visible{border-color:var(--accent);color:var(--accent);outline:none}
+nav a[aria-current="page"]{background:var(--accent);border-color:var(--accent);color:var(--panel)}
+h2{font-family:var(--display);font-weight:700;margin:0;font-size:1.6rem}
+h2 b{color:var(--accent)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.card{all:unset;cursor:pointer;display:flex;flex-direction:column;gap:6px;min-width:0;border-radius:8px;padding:6px}
+.card:hover,.card:focus-visible{outline:2px solid var(--accent)}
+.thumb{width:100%;aspect-ratio:640/1150;background-repeat:no-repeat;background-size:300% 100%;background-position:0 0}
+.card span{text-align:center;font-size:14px}
+.card small{display:block;color:var(--muted);font-size:12px}
+.pager{display:flex;justify-content:space-between;gap:10px}
+.pager a{color:var(--accent);text-decoration:none;font-weight:600}
+#lb{position:fixed;inset:0;z-index:20;background:var(--shade);display:flex;flex-direction:column;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 12px) max(16px,env(safe-area-inset-right,0px)) calc(env(safe-area-inset-bottom,0px) + 12px) max(16px,env(safe-area-inset-left,0px))}
+#lb header{display:flex;justify-content:space-between;align-items:center;gap:10px}
+#lb h3{font-family:var(--display);margin:0;font-size:1.3rem}
+#lb .ctl{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+#lb header{flex-wrap:wrap}
+#lb button.main{background:var(--accent);border-color:var(--accent);color:var(--panel);font-weight:600}
+#lb button{font:inherit;font-size:15px;border:1px solid var(--line);background:var(--panel);color:var(--fg);border-radius:6px;padding:6px 12px;cursor:pointer}
+#lb button:focus-visible{outline:2px solid var(--accent)}
+#lb .stage{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;gap:6px}
+#lb img{flex:1;min-height:0;max-width:100%;object-fit:contain;width:100%}
+#lb .caps{display:grid;grid-template-columns:repeat(3,1fr);width:min(100%,var(--capw,100%));text-align:center;color:var(--muted);font-size:14px}
+</style>
+<div class="wrap">
+  <div>
+    <h1>32 phi tần · từng tấm</h1>
+    <p class="lead">Chọn một người ở thanh trên. Bấm vào một bậc để xem người đó với 3 bộ đồ (màu gốc · màu mới 1 · màu mới 2), nền trong suốt.</p>
+  </div>
+  <nav id="jump"></nav>
+  <main id="view" class="wrap"></main>
+</div>
+<div id="lb" hidden role="dialog" aria-modal="true" aria-labelledby="lbt">
+  <header><h3 id="lbt"></h3><div class="ctl"><button id="lbpp" type="button">⇠ Người trước</button><button id="lbp" type="button">← Bậc trước</button><button id="lbn" type="button">Bậc sau →</button><button id="lbnp" type="button" class="main">Người tiếp ⇢</button><button id="lbx" type="button">Đóng ✕</button></div></header>
+  <div class="stage"><img id="lbi" alt=""><div class="caps" id="lbc"><span>Màu gốc</span><span>Màu mới 1</span><span>Màu mới 2</span></div></div>
+</div>
+<script>
+const RANKS=['Đáp ứng','Thường tại','Quý nhân','Tần','Phi','Quý phi','Hoàng quý phi','Hoàng hậu'];
+const IDS=[...Array(32)].map((_,i)=>'c'+String(i+1).padStart(2,'0')).concat(['congchua','cungnu']);
+const nav=document.getElementById('jump'),view=document.getElementById('view');
+const lb=document.getElementById('lb'),lbi=document.getElementById('lbi'),lbt=document.getElementById('lbt'),lbc=document.getElementById('lbc');
+const lbl=x=>x==='congchua'?'Công chúa':x==='cungnu'?'Cung nữ lên phi':x.toUpperCase();
+IDS.forEach(id=>{const a=document.createElement('a');a.href='#'+id;a.textContent=lbl(id);nav.appendChild(a);});
+let cur='c01',rank=1;
+function open(id,t){cur=id;rank=t;lbi.src=`x/${id}_t${t}.webp`;lbi.alt=`${lbl(id)} t${t} ${RANKS[t-1]}: 3 bộ đồ`;lbt.textContent=`${lbl(id)} · t${t} ${RANKS[t-1]}`;lbc.hidden=false;lb.hidden=false;document.getElementById('lbx').focus();}
+function openPrincess(f,name){lbi.src=f.startsWith('cn/')?`${f}.webp`:`x/${f}.webp`;lbi.alt=name;lbt.textContent=(f.startsWith('cn/')?'':'Công chúa ')+name;lbc.hidden=true;rank=0;lb.hidden=false;document.getElementById('lbx').focus();}
+const PEOPLE=IDS.filter(x=>/^c\d+$/.test(x));
+function person(d){if(!rank)return;let k=(PEOPLE.indexOf(cur)+d+PEOPLE.length)%PEOPLE.length;open(PEOPLE[k],1);}
+function step(d){if(!rank)return;let t=rank+d;if(t<1){person(-1);open(cur,8);return;}if(t>8){person(1);return;}open(cur,t);}
+document.getElementById('lbx').onclick=()=>{lb.hidden=true;};
+document.getElementById('lbp').onclick=()=>step(-1);
+document.getElementById('lbn').onclick=()=>step(1);
+document.getElementById('lbpp').onclick=()=>person(-1);
+document.getElementById('lbnp').onclick=()=>person(1);
+lbi.style.cursor='pointer';lbi.onclick=()=>step(1);
+addEventListener('keydown',e=>{if(lb.hidden)return;if(e.key==='Escape')lb.hidden=true;if(e.key==='ArrowLeft')step(-1);if(e.key==='ArrowRight')step(1);if(e.key==='ArrowDown'||e.key==='Enter'){e.preventDefault();person(1);}if(e.key==='ArrowUp'){e.preventDefault();person(-1);}});
+lbi.addEventListener('load',()=>{const r=lbi.getBoundingClientRect();lbc.style.setProperty('--capw',Math.round(Math.min(r.width,r.height*lbi.naturalWidth/lbi.naturalHeight))+'px');});
+function show(){
+  let id=(location.hash||'#c01').slice(1); if(!IDS.includes(id)) id='c01';
+  [...nav.children].forEach(a=>{if(a.getAttribute('href')==='#'+id)a.setAttribute('aria-current','page');else a.removeAttribute('aria-current');});
+  const k=IDS.indexOf(id), prev=IDS[(k+IDS.length-1)%IDS.length], next=IDS[(k+1)%IDS.length];
+  const pager=`<div class="pager"><a href="#${prev}">← ${lbl(prev)}</a><a href="#${next}">${lbl(next)} →</a></div>`;
+  let h;
+  if(id==='cungnu'){
+    h=`<h2>Cung nữ lên phi <b>vẫn mặc đồ cung nữ</b></h2><p class="lead">Hình đang dùng trong game, đủ các bậc. Mỗi hàng là một cung nữ: lúc làm cung nữ → t1 Đáp ứng → … → t8 Hoàng hậu. Cả 8 bậc vẫn một màu, một kiểu áo như lúc làm cung nữ. Hàng cuối là mẫu cũ (phiên trước) vẽ m09 mỗi bậc một màu, chưa đưa vào game. Bấm vào hàng để xem lớn.</p><div class="wrap">`+
+      [['m09','Cung nữ m09 (hồng) · đủ bậc'],['m03','Cung nữ m03 (xanh xám) · đủ bậc'],['m07','Cung nữ m07 (xanh lá) · đủ bậc'],['m09_ladder','Mẫu cũ: m09 lên phi, mỗi bậc một màu (chưa vào game)']].map(([m,n])=>`<button class="card" type="button" data-p="cn/${m}_cmp" data-n="${n}"><img src="cn/${m}_cmp.webp" alt="${n}" style="width:100%"><span>${n}</span></button>`).join('')+`</div>`;
+  } else if(id==='congchua'){
+    h=`<h2>Công chúa <b>Nam Chiếu</b> · <b>Bắc Địch</b></h2><div class="grid">`+
+      [['namchieu_a18_s1','Nam Chiếu'],['bacdich_a18_s1','Bắc Địch']].map(([f,n])=>`<button class="card" type="button" data-p="${f}" data-n="${n}"><img src="x/${f}.webp" alt="${n}" style="width:100%"><span>${n}<small>mẫu a18, chờ sếp duyệt</small></span></button>`).join('')+`</div>`;
+  } else {
+    h=`<h2>Phi tần <b>${id.toUpperCase()}</b></h2><div class="grid">`;
+    for(let t=1;t<=8;t++) h+=`<button class="card" type="button" data-t="${t}" aria-label="${id} t${t} ${RANKS[t-1]}: xem 3 bộ đồ"><div class="thumb" style="background-image:url('x/${id}_t${t}.webp')"></div><span>t${t}<small>${RANKS[t-1]}</small></span></button>`;
+    h+=`</div>`;
+  }
+  view.innerHTML=h+pager;
+  view.querySelectorAll('.card').forEach(b=>b.onclick=()=>b.dataset.p?openPrincess(b.dataset.p,b.dataset.n):open(id,+b.dataset.t));
+  lb.hidden=true; window.scrollTo(0,0);
+}
+addEventListener('hashchange',show); show();
+</script>
+
+</body></html>
