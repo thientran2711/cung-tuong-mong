@@ -1,3 +1,17 @@
+# opt-card-short #2 — ROUND 2 (MAIN ROOT-49 fixes) sha **173f5888** (quickcheck PASS)
+1. Row labels: the Được slot is ALWAYS labelled "Được" (rolled Thành row included); Cần/Bại/Kèm/Ghi chú never show as rows (disabled card: its "!" is RED). Scan of visible row labels per card, BEFORE (origin/main) vs NOW, 12 cases x Fold/iPad:
+| case | BEFORE visible labels | NOW |
+|---|---|---|
+| mat / mat2 | Ghi chú · Tốn/Được/Ghi chú | Tốn/Được |
+| dress | Cần/Thành(/Bại/Kèm) · Được | Tốn/Được |
+| choice, visit, thtrieu, fest | Gợi ý · Tốn/Gợi ý | Tốn/Được |
+| two, night, man, child | Được · Tốn/Mất | Tốn/Được |
+| many | Tốn only | Tốn/Được |
+All 24 case-sizes now show exactly Tốn + Được on every card (scan column `vis`).
+2. Empty band: cards are content-centred (picture + text vertically centred), min 104 px, tighter title; one height = tallest card of that dialog (mat2 Fold 124 -> 114; most dialogs 104). A band remains only where a sibling card has a 3-line title (equal height rule).
+3. Dress dialog: Xa xỉ range + Lưu ý + Son phấn hint all behind the dialog "!" (key rows Bốn chỗ / Ta có stay) -> both cards fully visible on Fold (shot fold-dress).
+Shots re-shot + LOOKED (Fold + iPad x mat2/dress/night/visit), CDN img/_review/opt-card-short/{fold,ipad}-<case>.jpg (old set wiped).
+
 # opt-card-short #2 — FINAL BUILD of the owner's 18/11 ~07:25Z verdict (worker session_01UV1Szke4R4h6YSy7KRfqhR, depth n/a)
 PRIORITY #1 CHECK: OD 3 (07:25Z verdict) | main none (old tall/square rule jk4 kitOptFit0 replaced) | review/* opt-card-short only | claims this row.
 Branch review/opt-card-short sha **5a21d8ef** on origin (main merged: 9c581406). quickcheck PASS on a4cf19e7 (core gates, time-spill, open, old save, perf); the last commit only touches jts.js + rebuilt site.
