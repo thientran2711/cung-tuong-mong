@@ -57,9 +57,9 @@ function herGame(mode,o,cb){const B=M();const kind=B.art&&B.art[mode];const nm=m
  const fin=(raw,sk)=>{const up=!sk&&raw>=B.win?(B.rung||1):0;stat({w:day(),who:"me",mode,up,by:"mg",raw:sk?null:raw,path:"her"});BUSY=0;
   if(up)try{log(`${nm}: ${KG82_KIND[kind].n.toLowerCase()} được ${raw}/10, cơ hội lần này lên ${word(stealRungUp(o,up))}.`)}catch(e){}
   try{cb(up,raw,sk)}catch(e){console.error(e)}};
- if(typeof window.__smgFake==="function"){BUSY=1;const r=window.__smgFake(mode)||{};setTimeout(()=>fin(+r.raw||0,!!r.skipped),0);return}
+ if(typeof window.__smgFake==="function"){BUSY=1;const r=window.__smgFake(mode)||{};if(r.sync)fin(+r.raw||0,!!r.skipped);else setTimeout(()=>fin(+r.raw||0,!!r.skipped),0);return}   /* tests */
  if(!B.on||!kind||topRung(o)||typeof window.__bot!=="undefined"||typeof playArt!=="function"||typeof KG82_KIND!=="object"||!KG82_KIND[kind]){try{cb(0,null,true)}catch(e){console.error(e)}return}
- BUSY=1;const n1=word(stealRungUp(o,B.rung||1)),n0=word(o),diff=()=>{try{return mgDiffTxt(KG82.tier,kind)}catch(e){return ""}};
+ BUSY=1;const n1=word(stealRungUp(o,B.rung||1)),n0=word(o),diff=()=>{try{return mgDiffTxt(mgTier(kind,{occ:B.occ}),kind)}catch(e){return ""}};
  const pa=()=>playArt({art:kind,artName:nm,occ:B.occ,rowsHead:"Trước khi ra tay",
   rows:[["Thắng",`cơ hội lần này lên một bậc: ${n0} → ${n1}`,"g"],["Thua hay không chơi",`cơ hội giữ nguyên ${n0}, không mất thêm gì`,"n"]].concat(diff()?[["Độ khó",diff(),"n"]]:[]),
   go:"Bắt đầu",skip:"Thôi, không chơi",skipSub:`giữ nguyên ${n0}`,
