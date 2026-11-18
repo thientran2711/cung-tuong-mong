@@ -28,7 +28,9 @@ function paint(){try{const st=document.getElementById("stage");let el=document.g
  const live=typeof S!=="undefined"&&S&&!S.dead&&!!st&&!onTitle&&stOn;
  /* no game on screen (title / loading): only items flagged onTitle (status icons, §77.1) live in a fixed corner dock; the game's own shortcuts wait */
  let calm=false;try{calm=typeof reducedMotion==="function"&&reducedMotion()}catch(e){}
- const L=R.filter(x=>(live||x.onTitle)&&val(x.when,true));if(!L.length){if(el)el.remove();return}
+ /* dock:true (alert items: closing §77.2, tin báo «!» §42.2): on a game screen whose stage is hidden (Fold panel tab) they stand in the same corner dock */
+ const dockOn=typeof S!=="undefined"&&S&&!S.dead&&!onTitle&&!live;
+ const L=R.filter(x=>(live||x.onTitle||(x.dock&&dockOn))&&val(x.when,true));if(!L.length){if(el)el.remove();return}
  if(!el){el=document.createElement("nav");el.id="krail";el.className="krail";el.setAttribute("aria-label","Lối tắt")}
  const h=L.map(x=>{if(x.chip)return `<div class="krailc" data-rail="${x.id}">${val(x.chip,"")}</div>`;const b=val(x.badge,false),bz=val(x.busy,false)&&!calm,dn=val(x.done,false);if(x.label){const on=val(x.active,false);return `<button type="button" class="krailb krailt${on?" kopen":""}" data-rail="${x.id}" aria-label="${x.title}" aria-pressed="${on}" title="${x.title}"><b>${val(x.count,"")}</b><span>${x.label}</span></button>`}return `<button type="button" data-g="${String(x.title||"").trim().charAt(0)}" class="krailb${x.glyph?"":" kld"}${b?" kbadge":""}${bz?" kbusy":""}${dn?" kdone":""}${x.glyph?" kglyph":""}" data-rail="${x.id}" aria-label="${x.title}${b?" (có mới)":""}" title="${x.title}">${x.glyph?`<span class="krailg" aria-hidden="true">${val(x.glyph,"")}</span>`:`<img src="${val(x.icon,"")}" alt="" decoding="async" onload="this.parentNode.classList.remove('kld')" onerror="this.parentNode.classList.remove('kld');this.parentNode.classList.add('kerr')">`}</button>`}).join("");
  const host=live?(onMap?mvh:st):document.body;el.classList.toggle("kstdock",!live);

@@ -29,8 +29,8 @@ function chip(c){try{return typeof kitLineToast==="function"?kitLineToast(line(c
 function tick(){try{const c=stClose();if(!c)return;const kk=key(c);if(S.closeSeen===kk)return;
  const md=document.getElementById("modal");if(md&&!md.hidden)return;/* the chip waits for the modal to close (next render) */
  if(chip(c))S.closeSeen=kk}catch(e){}}
-if(window.kitStageRail)kitStageRail.add({id:"closing",order:2,glyph:"!",title:"Sắp đóng cửa",when:()=>!!stClose(),busy:()=>true,badge:()=>true,
- onTap:()=>{const c=stClose();if(c)chip(c)}});
+if(window.kitStageRail)kitStageRail.add({id:"closing",order:2,glyph:"!",title:"Sắp đóng cửa",dock:true,when:()=>!!stClose(),busy:()=>true,badge:()=>true,
+ onTap:()=>{const c=stClose();if(!c)return;if(typeof kitToastTap==="function")kitToastTap(line(c));else chip(c)}});/* no free spot → kit card (§42.2) */
 if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);try{actPendRun()}catch(e){}try{tick()}catch(e){}return r}}
 /* (3) ACT = A PLACE (owner OD 18/11 ~19:55Z + ~20:00Z): a Hành sự act that means going somewhere really moves her there on Dư đồ (the ONE
    walk: goTo → S.place, S.visit, location ledger), she STAYS there, the stage shows it. ONE cost: the act's own khắc/sức already include

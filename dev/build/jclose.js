@@ -100,22 +100,22 @@ function kitLinePos(el){try{const nx=document.getElementById("next");let bot=inn
    column it belongs to (the stage column) and never crosses the split; on one page the column = between the top bar and the bottom bar.
    Search: widths (column − 16, ×.8, ×.65) × rows (6 px) × left/centre/right; top toast = the highest free spot, bottom pill = the lowest;
    nothing free → the toast waits hidden (refit every 300 ms shows it again when there is room; never placed over a kept thing). */
-const KIT_TOAST_KEEP='header.hud,#tabs,.pctabs,.ktsub,.kpbar,[role="tablist"],#kpname,#sc-t,.tok .tag,.j59n,.kpod-plq,.dlg h2,.dlg .dlgt,button,a[href],[role="button"],[role="tab"],[data-tab],input,select,.kchip,.chip,.kmchip,.kwhy,.kodds,.k3p,.kat,.kan,.kr,.krl,.krv,.kr2b,.kname,.knr,.krt,[class*="name"],h1,h2,h3,h4,.mspot,.mlab,[data-ak],[onclick],[tabindex]:not([tabindex="-1"])';
-/* PEOPLE (MAIN ROOT-56 LOOK of 1f33d3c, owner OD 18/11 ~19:45Z (5) chip "trên cái nền"): a toast never covers a person. Stage figures count by
-   the TOP 60 % of their box (head + upper body), face chips (.tok, .pface) and portrait frames (.kfr/.kpor/.pframe/.kpf) and card scene-art frames (.ksart, people painted in them): the whole frame by
-   their whole box, whatever their size (a big portrait is still a face). */
+const KIT_TOAST_KEEP='header.hud,#tabs,.pctabs,.ktsub,.kpbar,[role="tablist"],#kpname,#sc-t,.tok .tag,.j59n,.kpod-plq,.dlg h2,.dlg .dlgt,button,a[href],[role="button"],[role="tab"],[data-tab],input,select,.kchip,.chip,.kmchip,.kwhy,.kodds,.k3p,.kat,.kan,.kr,.krl,.krv,.kr2b,.kname,.knr,.krt,[class*="name"],h1,h2,h3,h4,.card,.kcard,.mspot,.mlab,[data-ak],[onclick],[tabindex]:not([tabindex="-1"])';
+/* PEOPLE (MAIN ROOT-56 LOOK of 1f33d3c + ROOT-57 BACK 21:58Z): a toast never covers ANY part of a person. Stage figures by their WHOLE
+   box (head to feet, robe included), face chips (.tok, .pface), name labels, portrait frames (.kfr/.kpor/.pframe/.kpf) and card scene-art
+   frames (.ksart, people painted in them): the whole box, whatever their size. */
 const KIT_TOAST_PEOPLE='#mefig,.figimg,.tok.fig,.kfig,.tok,.pface,.kfr,.kpor,.pframe,.kpf,.ksart';
-const KIT_TOAST_FIG='#mefig,.figimg,.tok.fig,.kfig';
 function kitToastPeopleRects(el){const H=innerHeight,out=[];
  for(const e of document.querySelectorAll(KIT_TOAST_PEOPLE)){if(el&&(el===e||el.contains(e)))continue;if(e.closest("#ktbtoast,#kupdline,#krail"))continue;if(!e.getClientRects().length)continue;
   const r=e.getBoundingClientRect();if(r.width<2||r.height<2||r.bottom<0||r.top>H)continue;const cs=getComputedStyle(e);if(cs.visibility==="hidden"||+cs.opacity===0)continue;
-  out.push({left:r.left,right:r.right,top:r.top,bottom:e.matches(KIT_TOAST_FIG)?r.top+r.height*.6:r.bottom,person:1})}
+  out.push({left:r.left,right:r.right,top:r.top,bottom:r.bottom,person:1})}
  return out}
 function kitToastKeepRects(el,relax){const H=innerHeight,W=innerWidth,out=kitToastPeopleRects(el);
  if(relax){for(const e of document.querySelectorAll('header.hud,#tabs,#krail')){if(!e.getClientRects().length)continue;const r=e.getBoundingClientRect();out.push({left:r.left,right:r.right,top:r.top,bottom:r.bottom})}return out}
  for(const e of document.querySelectorAll(KIT_TOAST_KEEP)){if(el&&(el===e||el.contains(e)))continue;if(e.closest("#ktbtoast,#kupdline"))continue;if(!e.getClientRects().length)continue;
   const r=e.getBoundingClientRect();if(r.width<2||r.height<2||r.bottom<0||r.top>H)continue;
-  if(r.height>H*.4||r.width*r.height>W*H*.15){if(e.matches('button,[role="button"],.card'))out.push({left:r.left,right:r.right,top:r.top,bottom:r.top+Math.min(r.height,64)});continue}
+  /* a big box: an action card / tappable row counts WHOLE (ROOT-57: never over an action card); a big non-tappable box (panel, list) does not */
+  if(r.height>H*.4||r.width*r.height>W*H*.15){if(e.matches('button,[role="button"],.card,.kcard,a[href],[onclick]'))out.push({left:r.left,right:r.right,top:Math.max(r.top,0),bottom:Math.min(r.bottom,H)});continue}
   if(getComputedStyle(e).visibility==="hidden")continue;out.push({left:r.left,right:r.right,top:r.top,bottom:r.bottom})}
  return out}
 function kitToastCol(){const H=innerHeight,W=innerWidth;try{const st=document.getElementById("stage");const two=typeof kitView==="function"&&kitView().pages===2;
@@ -134,24 +134,26 @@ function kitToastPlace(el,dir,relax){try{const C=kitToastCol(),R=kitToastKeepRec
   let hit=null;
   scan:for(const y of ys)for(const x of xs){const a=ov(x,y,w,h);if(!a){hit={x,y,w,h,mw,A,B};break scan}}
   if(hit&&(!best||(dir==="down"?hit.y<best.y:hit.y>best.y)))best=hit}
- const c=best;if(!c){el.style.visibility="hidden";if(!relax&&el.dataset.tap!=="1")kitToastCollapse(el);return false}el.style.maxWidth=Math.floor(c.mw/s)+"px";el.style.left=((c.x-c.A)/s).toFixed(1)+"px";el.style.top=((c.y-c.B)/s).toFixed(1)+"px";
+ const c=best;if(!c){el.style.visibility="hidden";if(!relax)kitToastCollapse(el);return false}el.style.maxWidth=Math.floor(c.mw/s)+"px";el.style.left=((c.x-c.A)/s).toFixed(1)+"px";el.style.top=((c.y-c.B)/s).toFixed(1)+"px";
  /* no free spot on this screen (a map full of hotspots, a dense list): the toast waits hidden and comes back when a refit finds room (the "!" icon shows it again) */
  el.style.visibility="";if(el.id==="ktbtoast"&&kitToastPend.t===el.textContent)kitToastPendSet("");return true}catch(e){return false}}
 /* NO FREE SPOT (owner rule via ROOT-56): the alert does not float. It collapses into the stage rail «!» (KIT §77 kitStageRail, glyph mode +
-   kbusy + kbadge, the same button family as the closing alert §77.2); tapping it shows the same line, placed with only the people + top bar +
-   tab bar kept (she asked to read it; a tap or its time closes it). While the closing alert «!» is up, that button carries it (one «!»). */
+   kbusy + kbadge, the same button family as the closing alert §77.2); tapping it shows the same line as the toast if a free spot exists now, else
+   as a kit dialog card «Tin báo» (never floated over a person or a card). While the closing alert «!» is up, that button carries it (one «!»).
+   On a screen without a stage (Fold panel tabs) the rail's alert items stand in the rail's fixed corner dock above the tab bar (`dock:true`, §77). */
 function kitToastPend(){return kitToastPend.t||""}
 function kitToastPendSet(t){if(kitToastPend.t===t)return;kitToastPend.t=t;try{if(window.kitStageRail)kitStageRail.paint()}catch(e){}}
 function kitToastCollapse(el){try{if(el.id!=="ktbtoast")return;const t=el.textContent||"";if(!t)return;kitToastPendSet(t);
- if(window.kitStageRail&&!kitToastCollapse.reg){kitToastCollapse.reg=1;kitStageRail.add({id:"tnote",order:3,glyph:"!",title:"Tin báo",
+ if(window.kitStageRail&&!kitToastCollapse.reg){kitToastCollapse.reg=1;kitStageRail.add({id:"tnote",order:3,glyph:"!",title:"Tin báo",dock:true,
   when:()=>!!kitToastPend.t&&!(typeof stClose==="function"&&stClose()),busy:()=>true,badge:()=>true,onTap:()=>kitToastTap(kitToastPend.t)})}}catch(e){}}
-function kitToastTap(t){try{if(!t||typeof kitLineToast!=="function")return;kitToastTap.on=1;const el=kitLineToast(t);kitToastTap.on=0;
- if(el&&getComputedStyle(el).visibility==="hidden"&&kitToastPlace(el,"down",1)){el.dataset.tap="1";kitToastPendSet("")}}catch(e){kitToastTap.on=0}}
+function kitToastTap(t){try{if(!t)return;kitToastPendSet("");const el=typeof kitLineToast==="function"?kitLineToast(t):null;
+ if(el&&getComputedStyle(el).visibility!=="hidden")return;/* a free spot now: the line shows as the toast */
+ if(el)el.remove();if(typeof Q!=="undefined"&&typeof showModal==="function"){Q.push({t:"Tin báo",h:`<p>${typeof esc==="function"?esc(t):t}</p>`});showModal()}}catch(e){}}
 window.kitToastPend=kitToastPend;window.kitToastTap=kitToastTap;window.kitToastPeopleRects=kitToastPeopleRects;window.KIT_TOAST_PEOPLE=KIT_TOAST_PEOPLE;
 function kitToastClear(el,dir){return kitToastPlace(el,dir)}/* old name kept for callers */
 window.kitToastClear=kitToastClear;window.kitToastPlace=kitToastPlace;window.kitToastKeepRects=kitToastKeepRects;window.kitToastCol=kitToastCol;window.kitLinePos=kitLinePos;window.KIT_TOAST_KEEP=KIT_TOAST_KEEP;
 /* refit after a screen change (tab switch, shell swap) */
-function kitToastRefit(){try{const a=document.getElementById("ktbtoast");if(a){if(a.dataset.tap==="1"){if(!kitToastPlace(a,"down"))kitToastPlace(a,"down",1)}else kitToastPlace(a,"down")}const b=document.getElementById("kupdline");if(b)kitLinePos(b)}catch(e){}}
+function kitToastRefit(){try{const a=document.getElementById("ktbtoast");if(a)kitToastPlace(a,"down");const b=document.getElementById("kupdline");if(b)kitLinePos(b)}catch(e){}}
 window.kitToastRefit=kitToastRefit;
 /* while a toast is up it re-checks every 300 ms (tab switches that skip render, sticky bars that move with scroll); stops when it is gone */
 function kitToastWatch(){try{if(kitToastWatch.t)return;kitToastWatch.t=setInterval(()=>{if(!document.getElementById("ktbtoast")&&!document.getElementById("kupdline")){clearInterval(kitToastWatch.t);kitToastWatch.t=0;return}kitToastRefit()},300)}catch(e){}}
