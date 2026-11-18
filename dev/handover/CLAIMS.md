@@ -481,3 +481,7 @@ c12 a18 t5–t8 headdress re-do from live originals (Round 43) | claude/cung-tuo
 | kit-set-lines (KIT REQUEST (6) set lines + set glow; sonnet; brief briefs/kit-set-lines.md) | review/kit-set-lines | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:12Z |
 Tuần lục figure clip preview (test-page only, code note for main) | claude/cung-tuong-mong-handover-hj0h8w (report) + _review CDN | session_011xDdVR5MwB2XTmgGcLEKkx | RUNNING | 2026-11-18T05:50Z
 | E3r REVIEW hall-names b5315ff (sonnet SMALL; briefs/E3r-review-hall-names.md) | review/hall-names | E ROOT | session_01DgYSWpMzeXxqEAbLCfJGJE | RUNNING | 18/11 05:15Z |
+c02 a18 consort rank set t1–t8 + Nữ đế (B6) | claude/cung-tuong-mong-handover-hj0h8w (art, _review CDN) | session_011xDdVQ6wQsN4MEMRE9p7uH | RUNNING | 2026-11-18T05:58Z
+c03 a18 consort rank set t1–t8 + Nữ đế (B6) | claude/cung-tuong-mong-handover-hj0h8w (art, _review CDN) | session_011xDdVPb927er8REUxdUaCc | RUNNING | 2026-11-18T05:58Z
+men: Hoàng thượng 4 faces a18 (prompt-only) | claude/cung-tuong-mong-handover-hj0h8w (art, _review CDN) | session_011xDdVSAtqavbvzVpkVAnqt | RUNNING | 2026-11-18T05:58Z
+art-matrix planner (MAIN s43 order) | claude/cung-tuong-mong-handover-hj0h8w (reports/art-matrix.md) | session_011xDdVS6wU7hJj7qWmYtDa8 | RUNNING | 2026-11-18T05:58Z
