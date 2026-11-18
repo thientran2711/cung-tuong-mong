@@ -1,7 +1,7 @@
 # place-stage — report (worker; sonnet; MAIN s43)
 PRIORITY #1 CHECK: OD 1813/1814/1818 | main: j59.js kitHereCount/j59ico, jrail.js kitStageRail, j93.js .kmnote, jk3.js kshR | review/*: ag-all-2-land, npc-chain-land, stage-caption searched, no stage-top news chip | claims: place-banner (superseded).
 
-STATUS: SHOTS READY. Branch review/place-stage sha e40b8df3 on live main e24d5838 (one commit).
+STATUS: SHOTS READY. Branch review/place-stage sha 9e35fc49 (r2) on live main e24d5838. r1 e40b8df3 is superseded.
 Kept from place-banner: kitHereCount for every place (chip built from the ONE head count). NOT kept: .j59ln, J59EASE, #sc-t plaque, kmmAvoid change (not needed: the chip steps right of her marker itself).
 
 ## What changed (dev/build/jplst.js new, last in assemble.py)
@@ -25,7 +25,7 @@ NOTE: owner's "top-frame yellow ! + popup chip" does not exist in code (told MAI
 Real news still lives in its log/Q card (unchanged code); the chip is the same text, shown once.
 
 ## Scan (host mode, seeded Math.random, 18 places x 5 devices, live vs mine) — dev/test/place-stage-scan.js
-Per cell: count chip(n) / name / entry line / ... all 90 cells: plaque none, count chip first in left rail (when people), name at top of right column with cards below it, line present, her marker visible, 0 page errors. Examples (Fold / iPad Air / iPad Pro / Pixel / iPhone14): vuon C4/N/L, tn C6, kn C10, r3 C5, r4 C2, r5 C2, lc C1, nvp C1 (all N/L, marker M in every cell). Figure max height: Fold live 485-523 → mine 523 everywhere (full size, no cap). Entry chip vs figure image boxes (img box includes transparent margin) touches in some cells; visually clear of heads on Fold/iPad (looked).
+r2 scan (18 places x 5 devices, dev/test/place-stage-scan.js): name-plate gap to frame bottom = 8 px in all 90 cells; head/marker min top = 8 (Fold) / 13 (others) px, never outside; 0 plaque, count chip + name everywhere, marker visible everywhere (one Fold r3 timing outlier re-run: 8/13). Per cell (r1 table kept): count chip(n) / name / entry line / ... all 90 cells: plaque none, count chip first in left rail (when people), name at top of right column with cards below it, line present, her marker visible, 0 page errors. Examples (Fold / iPad Air / iPad Pro / Pixel / iPhone14): vuon C4/N/L, tn C6, kn C10, r3 C5, r4 C2, r5 C2, lc C1, nvp C1 (all N/L, marker M in every cell). Figure max height: Fold live 485-523 → mine 523 everywhere (full size, no cap). Entry chip vs figure image boxes (img box includes transparent margin) touches in some cells; visually clear of heads on Fold/iPad (looked).
 ## Shots (LOOKED 3x: Fold full, iPad full, composite)
 Live | mine, same character Kiều Thủy Tiên, Ngự hoa viên, 4 people (outfit differs: random pick):
 - Fold 755x1000: https://ctm-img.victoria-tntt.workers.dev/img/_review/place-stage/sbs-fold-vuon.jpg
