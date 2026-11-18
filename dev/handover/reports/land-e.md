@@ -49,3 +49,12 @@ Gates on 636193f8: one-core-guard 0 fails; quickcheck PASS (old save ok, render 
 Touched vs main 809d5ab0: assemble.py jbal2.js jhall.js jkc2.js jplx.js jpm.js jrdhp.js jres.js jroad.js KIT.md road-hp-bal.js + tests (act-split-scan hall-names-scan roadhp-*) + built index/sw.
 
 LAND READY 636193f8 (FF from 809d5ab0)
+
+---
+# ROUND 4 (MAIN ROOT-51/52, 18/11 12:33Z): review/grand-endings-engine 177c730b on main 636193f8
+
+review/land-e force-pushed = main 636193f8 + merge 4475ea24023ba59671680054e069a39238d3d302. Conflicts only in assemble.py (UNION +jbalge, jgecat, jgedata, jge) and built index.html/sw.js (rebuilt). No source conflict.
+Gates: one-core-guard 0 fails; quickcheck PASS (old save ok, render 270/271, tab 523/457, buoi 1403/1139 — slower than live in this run, quickcheck's own gate PASS; machine was noisy in earlier rounds too, MAIN may re-run), ge-guard 6/6 (ERRORS 0), ge-engine 104/104, mg-skip-audit 21/21. Not run: ge-shots.js.
+Touched vs main: assets.json assemble.py j67 jbalge jchap jdh jge jgecat jgedata jroad jst14 jtabs KIT_REQUESTS.md measure/ge-measure.js tests ge-engine/ge-guard/ge-shots + ge_guard/*.py + built index/sw. None of jag*/j95*/jtoil*/jbal.js/jcoop*/save.
+
+LAND READY 4475ea24023ba59671680054e069a39238d3d302 (FF from 636193f88e35985ab3d6ea8ec8f251179933480e)
