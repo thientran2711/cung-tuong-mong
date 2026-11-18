@@ -998,3 +998,4 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | staff-cap-fix LIVE 62a6846f (main f6ee11b1 → 62a6846f; ROLLBACK f6ee11b1): capTrim one rule + every removal told + hireCard refund | review/staff-cap-fix-r6 | MAIN s41 | session_01UV1SzkW9AbJs8kAvGGWzkv | LIVE | 18/11 01:43Z |
 | staff-cap-APPLY (owner table A + QN 2+0, roomFor FIGIX fix; opus BIG; brief briefs/staff-cap-apply.md) | review/staff-cap-apply | MAIN s41 | session_01UV1SzkNqcjf9atNLxPVz8y | RUNNING | 18/11 01:45Z |
 | REVIEW AG LATER #2 (opus BIG; successor of SzkmyAX; final re-gate) | review/ag-all-2-land, review/npc-chain-land | C-AG | session_01UV1Szk6Tdgr6dBwZ498fDY | RUNNING | 18/11 01:46Z |
+| OWNER UI BUG place-banner (count icon missing, chip on chip, banner covers head/ornament; options A/B/C; sonnet; brief briefs/place-banner.md) | review/place-banner | MAIN s42 | session_01UV1SzmHEoDtWWruq6yMGnZ | RUNNING | 18/11 01:49Z |
