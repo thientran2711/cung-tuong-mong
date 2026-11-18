@@ -1,0 +1,4 @@
+# trung-y-review (W80, 18/11)
+PRIORITY #1 CHECK: jty.js + FIGURES-ty.json (2688 = 84 faces x ty1..ty8 x 4 ages), owner-age-page manifest (mislabel found), PROGRESS_player-dress.md.
+KEY TABLE: ty1..ty8 = TRUNG Y (inner robe; tier colour 1 ngà..8 vàng nhạt). tm0 = Cung nữ thô sử/Tân Giả khố, tm1 = Cung nữ (consort faces only; maid faces use plain fig-maid-mXX), tm2 = Đại cung nữ, tm3 = Chưởng sự cô cô, tm4 = Nữ quan (Ma ma wears m4). t1..t8 consort tiers, tcold/cold lãnh cung, kc/ngheo outside. "ty" in code (S.court.ty) = thái y, unrelated.
+Page: https://claude.ai/artifact/Q9qFG6JJXqf2eGjpioGU1c (private). Ticks: ArtifactData collection "ticks", doc id = "<person>-<age>-ty<n>" e.g. c01-a18-ty3, {checked,ts}. manifest.json: id|person|age|variant|url (CDN). page.html = source (index.html adds MAN data); mk.py builds 336 strips s/<age>/<id>.webp (8 tiers each, 300x823 cells).
