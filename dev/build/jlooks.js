@@ -44,7 +44,7 @@ Object.assign(BAL,{looks:{
     measured on 158 por pictures (Haar eyes + lip colour, dev/test/look-fx-keepout.py) and constant for every por-/fig- row because every row is cut from the face rect by the same ratios.
     Face-square marks are masked by it (lkKeepCss), the scratch rows (scar-fit) are generated so the box stays inside the cheek zone: cheek = [left,top,w,h,rot offset] of the veil row: the OLD diagonal across the cheek below the eye (owner 18/11: never vertical), ~1.4x the R3 length, as long as the keep-out allows. pad = ONE margin: every ellipse is grown by it (mask, scratch test). */
  keep:{eye:[[.31,.08,.15,.17],[.72,.08,.15,.17]],mouth:[.47,.655,.27,.11],nose:[.51,.36,.11,.2],pad:1.45,cheek:[.08,.30,.28,.20,5],
- /* VẾT CÀO lv2 + lv3 (owner pick 18/11 ~04:50Z, OD:L1839): ladder STEP 3 = 1.6 x the R6 box [.28 x .26] of the veil row, left 0, top .20, old diagonal, flipped, below the eye; it crosses the eye / nose / mouth zones, so the strokes are CUT at the zones by the stroke-level mask (lkKeepScar). lv1 stays the scar-fit row. */
+ /* VẾT CÀO lv1 + lv2 + lv3 (owner 18/11 ~04:50Z + ~05:00Z "chốt bậc 3 cho mức nhẹ luôn"): ladder STEP 3 = 1.6 x the R6 box [.28 x .26] of the veil row, left 0, top .20, old diagonal, flipped, below the eye; it crosses the eye / nose / mouth zones, so the strokes are CUT at the zones by the stroke-level mask (lkKeepScar). lv1 stays the scar-fit row. */
  cheek3:[0,.20,.448,.416,0],
  /* FACE CLIP (owner 18/11 ~04:58Z: no mark past the face skin onto hair / ear / neck / background): ONE polygon in face-square units (0..1 of the square of lkSquareRect), measured on 180 por pictures (skin segmentation, dev/test/look-fx-faceclip.py); every mark layer (face-square marks, cào, smudge) is clipped to it by lkFaceClipAll */
  face:[[.23,.19],[.5,.14],[.77,.19],[.88,.34],[.90,.52],[.84,.70],[.72,.87],[.5,.96],[.28,.87],[.16,.70],[.10,.52],[.12,.34]]},
@@ -322,7 +322,7 @@ function lkClipFor(file,sty){try{const sq=lkSquareRect(file);if(!sq)return"";con
  return `;clip-path:polygon(${pts});-webkit-clip-path:polygon(${pts})`}catch(err){return""}}
 /* kscar layers: lv2 / lv3 use the ladder STEP 3 box (BAL.looks.keep.cheek3 of the veil row), then ALL levels get the stroke-level keep-out: the eye / nose / mouth ellipses (BAL.looks.keep, same pad + fade as lkKeepCss) mapped from the veil row into THIS layer's own box (position, rotation, flip), cut out with the same xor mask */
 function lkScarFix(file,sty,sev){try{const n=String(file).split("/").pop(),v=KIT_VEIL.fit&&KIT_VEIL.fit[n];if(!v)return sty;let o=sty;
- if(sev>=2){const c=BAL.looks.keep.cheek3,r=(x,y)=>x+";"+y;const L=v[0]+c[0]*v[2],T=v[1]+c[1]*v[3],W=c[2]*v[2],H=c[3]*v[3],R=v[4]+c[4];
+ {const c=BAL.looks.keep.cheek3,r=(x,y)=>x+";"+y;const L=v[0]+c[0]*v[2],T=v[1]+c[1]*v[3],W=c[2]*v[2],H=c[3]*v[3],R=v[4]+c[4];
   o=o.replace(/--fleft:[^;]*/,"--fleft:"+L.toFixed(2)+"%").replace(/--ftop:[^;]*/,"--ftop:"+T.toFixed(2)+"%").replace(/--fwidth:[^;]*/,"--fwidth:"+W.toFixed(2)+"%").replace(/--fheight:[^;]*/,"--fheight:"+H.toFixed(2)+"%").replace(/--ftf:\s*rotate\(-?[\d.]+deg\)/,"--ftf:rotate("+R.toFixed(1)+"deg)")}
  const g=k=>{const m=new RegExp("--f"+k+":\\s*(-?[\\d.]+)%").exec(o);return m?+m[1]:null},L=g("left"),T=g("top"),W=g("width"),H=g("height");if(L==null||T==null||W==null||H==null)return o;
  const tf=/--ftf:\s*([^;]*)/.exec(o),rot=tf&&/rotate\((-?[\d.]+)deg\)/.exec(tf[1]),fl=!!(tf&&/scaleX\(-1\)/.test(tf[1])),to=/--fto:\s*([\d.]+)%\s+([\d.]+)%/.exec(o),A=/^por-/.test(n)?.759:.43,D=Math.PI/180;
