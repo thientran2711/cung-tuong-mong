@@ -55,3 +55,36 @@ Pointers for the successor (from E13's code knowledge):
 - Unit test dev/test/nroadhp-unit.js: carriers srv (give v a staff servant with loyal 100, force roll true, mindPick→tell), sell (an S.staff servant with spyFor=key(v)), co-op guest (window.COOPW={on:1,seat:'b'} → no record/no month), save round trip (ser()/deser() or JSON of rivals+S, then nhList and v.nr.hp intact). Read the review report for its exact check list.
 - Shots: dev/test/nroadhp-shots.js <url> <outdir> (kills kload/klife overlays); shots outside git.
 - Worktree /home/user/wt/q2 (sparse, branch review/questline-q2), merge newest origin/main under flock fetch; rebuild with bash dev/site/build_site.sh; serve with python3 -m http.server 8731 --bind 127.0.0.1; quickcheck.sh ALONE before SẴN SÀNG KIỂM.
+
+## ROUND 2 (worker E13b, session_01DgYSWodAwDdNEBivJkzbFg; START_CTX ~3 %) — review/questline-q2 @ 451b4d1e
+PRIORITY #1 CHECK ('nhTip|mách tin|nroad\.fin|nr\.hp|kitSubTabs wrap'): OD law 2/3 (OD:L582, OD 18/11 ~09:20Z), law 1 (OD:L33, L1534) | main fa411d6f (K-Q2-1 wrap live 048f3c71; no tip/two-way code) | review/* questline-q2 only | claims E13 → E13b. Reused: jnroad nrHelped/hb/BAL.nroad.help, j72 q72DebtAdd/q72Key, jnroadhp nhAfter/nhFin/nhSnap; no new BAL key.
+
+### 1. Law 2/3 + law 1 — a betrayal is help to the rival told (two-way, equal value)
+- jnroadhp.js `nhTip(B,v)` (called from the nrHelped wrapper on how<0): when the told rival B has an open road, she gets a record `[her chapter, 2, turn]` on HER road (sign 2 = «mách tin», counts as help), her next chapter gains BAL.nroad.help (the same +15 a help gives A; no stacking when she already carries a bonus), and she joins the «Phụ tuyến» list. So B's chapter line («Nhờ tin ngươi mách, nàng qua được …»), B's finale reward BAL.nroad.fin and the list work through the same nhAfter/nhFin path. B without an open road: she owes the player BAL.nroad.fin.owe nợ ân at once (j72 ledger) besides the j72 bond (relB). Help-hồi line adds «B có tin ngươi mách, chương «…» của nàng thêm phần chắc.» / «B nợ ngươi một ân vì tin này.». List row «Ngươi đã: mách tin giúp ở chương n». All numbers BAL (reused help / fin / owe; jbal2 comment updated).
+- NPC side: A −help, B +help → net zero on NPC odds (no harem inflation: HH seat 50–75 % in all styles, noise).
+- No fin/sb retune needed (measured below): sb.oan 15 / mo 6 and fin unchanged.
+
+Measure dev/measure/nroadhp-bal.js, bond player, 12 years, 20 lives per style × 2 runs (run 1 off,help,betray; run 2 betray,help,off), pooled 40 lives per style:
+| build | style | death % (run1/run2) | pooled death % | Danh pooled | finale rewards/life (via mách) | betrayals found out / made |
+|---|---|---|---|---|---|---|
+| BEFORE (merged a8cd0551) | off | 30 / 35 | 32.5 | 14.3 | 0 | — |
+| BEFORE | help | 30 / 45 | 37.5 | 16.7 | 2.65 | — |
+| BEFORE | betray | 25 / 35 | 30.0 | 15.9 | 0 | 3.6 / 10.8 |
+| AFTER mid (tip, no debt) | off | 35 / 40 | 37.5 | 15.2 | 0 | — |
+| AFTER mid | help | 35 / 45 | 40.0 | 16.2 | 3.15 | — |
+| AFTER mid | betray | 40 / 40 | 40.0 | 15.6 | 1.3 (1.3) | 3.0 / 8.2 |
+| AFTER 451b4d1e | off | 45 / 30 | 37.5 | 16.7 | 0 | — |
+| AFTER 451b4d1e | help | 45 / 25 | 35.0 | 16.8 | 2.0 | — |
+| AFTER 451b4d1e | betray | 40 / 45 | 42.5 | 19.0 | 1.35 (1.35) | 3.25 / 9.3 |
+Pooled AFTER (80 lives per style, both after builds): death off 37.5 / help 37.5 / betray 41.3 %; Danh 15.9 / 16.5 / 17.3. → help ≈ betray and help(Q2 on) ≈ off, all within run noise (one 20-life run swings 25↔45 %; SE of a 40-life death % ≈ 7.7 points).
+How the reward affects death: the finale reward comes ~2–3 times per life (Danh +2…6, bond +4…10, one nợ ân); the measure floors Danh at 15 and never calls in a debt, so it cannot move death in a visible way — the round-1 gap (help ≈28 % vs off ≈53 %) came from 10-life batches; with 40 lives the BEFORE build already shows help 37.5 % vs off 32.5 % (gap reversed). Death is driven by the existing danger paths, not by Q2. Betray-style lives get fewer tip finales than help-style lives get help finales (1.35 vs 2.0) because that style betrays EVERY asker, so many told rivals carry her own −1 and are not eligible — a style artefact; a mixed player gets the same reward from either option. Betray still carries its real risk (found out ~1 in 3, oán 15) against its Đức cost; help carries Sức/bạc + fail odds.
+
+### 2. Tests
+- dev/test/nroadhp-unit.js: 26 → 40 checks, PASS ×5 runs, 0 page errors. Added: tip record [n,2,turn] on the told rival, her chapter + BAL.nroad.help, no double bonus, «nhờ tin ngươi mách» line, list «mách tin giúp», told rival's finale reward (BAL changed → seen), no-road rival owes fin.owe, carrier "srv" (her servant hears + tells; line «…, người hầu của nàng, nghe ngóng được rồi bẩm lại»), carrier "sell" (player's servant bought by her; «có kẻ bên ngươi đã bán tin»), co-op guest (COOPW seat b → no record, no list change), save round trip (ser → JSON → deser keeps v.nr.hp, the tip, the betrayal fact, S.nrpt). (Test fix: Q cleared before each q72Do — "đang có việc chờ" made the old help() flaky.)
+- dev/test/nroadhp-vp.js: PASS 52 strings (+ mách tin lines ×6, tip line, debt line).
+- nrask-engine ALL PASS · npc-roads (2 × 96) 22/22, gain-and-loss scan 24/24 · subtabs-overflow PASS (no overflow, no overlap) · quickcheck.sh 451b4d1e ALONE: QUICKCHECK PASS · old save ok · core gates PASS · perf new/live render 215/232, tab 361/368, buổi 971/1111 ms.
+
+### 3. K-Q2-1 live
+Merged origin/main fa411d6f (conflicts only index.html/sw.js — rebuilt — and KIT_REQUESTS.md: main's K-Q2-1 DONE line kept). Shots (scratch, outside git; looked 3×): iPad 1180x820@2 — 6 tabs Chương này · Sắc phong · Đã qua · Phụ tuyến 4 · Triều cục · Tâm nguyện in one row, ⓘ «Phụ tuyến» on its own line by the kit wrap rule, no overlap, no sideways scroll (sw 1180 = cw); Fold 755x1000@2 — 6 tabs + ⓘ in one row, 4 cards, no overflow. No private CSS (jnroadhp only adds a list item to kitSubTabs). Note: in the last shot run the card origin pictures were still loading (CDN timing), first run showed them.
+
+Ready: SẴN SÀNG KIỂM questline-q2 451b4d1e. Context at end ~12 %.
