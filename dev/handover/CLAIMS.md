@@ -75,3 +75,4 @@ t8-mass-B c01–c11 + t7 v1/v2 builder | CDN _review only | W77 session_011xDdVS
 t8-mass-B c13–c22 | CDN _review only | W78 session_011xDdVNV77LznMbhox2RSiy (W74 archived) | RUNNING | 2026-11-18T18:32Z (Foreman C ROOT-29)
 style-ref test A/B/C c06 t1–t3 | CDN _review only | W79 session_011xDdVSouZw85AxragQqu2a (W67 archived) | RUNNING | 2026-11-18T18:34Z (Foreman C ROOT-29)
 | fullbody-frame-s5 (sonnet; s4 code 8b62c6bd + (d)(e)(f) on CDN env) | review/fullbody-frame-s4 | MAIN ROOT-53 | session_01Rc5AsN3VydxRkMokeiihJw | RUNNING | 18/11 18:41Z |
+| shop-panel-r3 (sonnet SMALL UI owner 18:55Z: kind sub-tabs in Mua/Bán) | review/shop-panel-r2 | MAIN ROOT-53 | (opening) | RUNNING | 18/11 18:56Z |
