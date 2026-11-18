@@ -69,6 +69,8 @@ function kpmMulti(slot,k){return kpmParts(slot,k===undefined?kpmKeyOf(slot):k).l
 
 /* ---------- the component ---------- */
 /* kitPalaceMap({slot,k}) → HTML of the palace detail map, inside the Dư đồ leather (.mapv, kitLeather §32.1b). */
+/* owner 18/11 ~19:05Z: the kit grey state (.mgrey) on every hall tag of a courtyard she cannot enter now (empty palace, or a palace that is locked / out of khắc and her place is elsewhere); look only, the tap keeps its dialog */
+function kpmGrey(k,h,here){try{if(here(h))return false;if(!k)return true;const st=accState(k);return !!(st&&st.why&&!st.here)}catch(e){return false}}
 function kitPalaceMap(o){const slot=o.slot,k=o.k;const A=kpmArt(slot);const nm=kpmName(slot);const SP=kpmSplit(k);
  const spots=A&&KPM_DATA.spots&&KPM_DATA.spots[A.dir]||{};const why=o.why||"";
  const PARTS=kpmParts(slot,k,nm);
@@ -77,7 +79,7 @@ function kitPalaceMap(o){const slot=o.slot,k=o.k;const A=kpmArt(slot);const nm=k
  return `<div class="mapv kpmv" data-kpm="${slot}"><div class="maptools"><span><button class="btn mz kpm-back" data-kpmback="1" aria-label="Về Dư đồ">‹ Dư đồ</button></span><span class="past kpm-t"><b>${nm}</b>${why?` · <em>${why}</em>`:""}</span></div>
  <div class="mapsc"><div class="mapw" style="width:100%">${A?`<img class="mapimg" src="${A.src}" alt="Sân ${nm} nhìn từ trên cao">`:`<img class="mapimg" src="${mapImg()}" alt="${nm}">`}
  ${PARTS.map(([h,hn])=>{const b=spots[h];if(!b||!(KPM_HALLS[A.dir]||[]).includes(h))return"";const s=SP[h]; /* only halls painted in this picture get a hotspot; the others stay in the kit list below */
-  return `<button class="mspot kpm-spot${here(h)?" here":""}" data-go="kpm:${h}" title="${hn}${role(h)?" ("+role(h)+")":""}${s.res.length?" · ở: "+s.res.map(kpmResLine).join(", "):""}" style="left:${b.x*100}%;top:${b.y*100}%;width:${b.w*100}%;height:${b.h*100}%"><span class="mlab">${hn}${chip(s.n,h)}</span>${h==="cungnhan"?"":kpmSil(s.n,s.ppl)}</button>`}).join("")}
+  return `<button class="mspot kpm-spot${here(h)?" here":""}${kpmGrey(k,h,here)?" mgrey":""}" data-go="kpm:${h}" title="${hn}${role(h)?" ("+role(h)+")":""}${s.res.length?" · ở: "+s.res.map(kpmResLine).join(", "):""}" style="left:${b.x*100}%;top:${b.y*100}%;width:${b.w*100}%;height:${b.h*100}%"><span class="mlab">${hn}${chip(s.n,h)}</span>${h==="cungnhan"?"":kpmSil(s.n,s.ppl)}</button>`}).join("")}
  ${kitTam(!A||A.tam)}</div></div>
  <div class="kpm-list${PARTS.length===1?" one":""}">${PARTS.map(([h,hn])=>{const s=SP[h];return `<button class="btn kpm-row${here(h)?" sel":""}" data-kpmpart="${h}"><b class="kpm-rn">${hn}</b><span class="kpm-rs">${role(h)?role(h)+" · ":""}${h==="cungnhan"?`${s.n} cung nhân của ngươi`:s.n?`${s.n} bóng người`:"vắng người"}</span>${kpmIsPlace(slot)||h==="cungnhan"?"":`<span class="kpm-rs">${s.res.length?"Người ở: "+s.res.map(kpmResLine).join(", "):"Chưa ai ở"}</span>`}</button>`}).join("")}</div></div>`}
 
