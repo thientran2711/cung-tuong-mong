@@ -1105,7 +1105,7 @@ Wake: trig_01XziXcTa6TV3ACMFhLctFAr 02:34Z fires into s42 → s42 relays; s43 se
 
 ## S43 → ROOT MAIN HANDOVER (18/11 02:35Z real; s43 context 28 % measured, rollover line 31 %; depth 6 → owner opens a ROOT main from claude.ai)
 FOR MAIN: s43 stops at depth 6. The OWNER opens a ROOT main from claude.ai with the paste block given in the s43 chat (Lượt 7). Read this section + "## S43 (main, child of s42)" above.
-LIVE: main b32cdb39 (result-reason, 02:38Z). ROLLBACK chain … → f986ff6a → f8276cdb → b32cdb39.
+LIVE: main db24027f (smudge r16, 02:48Z). ROLLBACK chain … → f8276cdb → b32cdb39 → db24027f.
 OWNER RULINGS s43 (OD tail from "(18/11 ~09:25Z owner clock" to the end, VERBATIM): stage + avatar makeup = mirror strength (avatar frames get the makeup layer, whole group); book: everyone UP to her Tổng lược size, no shrink/crop; face marks already approved with C → ship the 24 finals; TONE LADDER for ink/soot/scratch (100/85/70/55/40 %); PLACE BANNER = one plaque, line 1 icon+name+count, line 2 happening line; every shot to her = FULL SCREEN, whole figure, same character when comparing size (she was angry at a cropped sheet).
 LAND ORDER (FF-only from live main; wipe img/_review/<topic> after verdict; tell C-AG each new main): life-preload (URGENT) → men-forbidden → result-reason (regate on f8276cdb) → cloth-xoc (r6 sha) → smudge r16 → staff-cap-apply → AG after C-AG BIG PASS.
 RUNNING (all report to MAIN — tell them the new main id):
@@ -1132,3 +1132,4 @@ Wake: s43 trigger trig_01DnGumsCEWwRGKJbfBNDc4D (:32) → DELETE it when the ROO
 - (18/11 02:44Z) LADDER R2 (muội lv3 ash, cào flipped/smaller at 85 %) LOOKED → sent owner, asked 1/2. book-figsize r3 7285ea2b sent back: target must be HER live p.5 size exactly (Fold 641 / iPad 567), not 667/555.
 - (18/11 02:46Z) cloth-tea 18edc72 (one-cup tea, BAL.looks.stain.tea) LOOKED full body c01/c30 (small amber splash at chest, drips, lap drop at lv3; light cloth clean) → sent owner. Worker SzjMK4R near rollover (handover in reports/cloth-xoc.md) → if owner wants another round, open a successor; if approved → SMALL reviewer on review/cloth-tea after cloth-xoc r6 lands.
 - (18/11 03:10Z) OWNER: muội APPROVED; cào still crosses the eye (s43 missed it) → look-fx-wire; tea: one shape on every costume + move up to chest → successor of cloth worker (SzjMK4R at rollover).
+- (18/11 02:48Z) LIVE: main b32cdb39 → db24027f (smudge r16, reviewer SzitaUh PASS). ROLLBACK b32cdb39. Reviewer archived; smudge worker SzhMG33 → avatar-makeup (brief briefs/avatar-makeup.md).
