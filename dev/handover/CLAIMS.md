@@ -70,4 +70,4 @@ t8-mass-B c01–c11 a18 + frozen builder dev/art/t8-prompt-B | CDN _review only 
 | map-labels-missing (sonnet OWNER BUG: Dư đồ palace names missing) | review/map-labels-missing | MAIN ROOT-53 | session_01Rc5AsJKHtNXkYtCxgvCzAL | RUNNING | 18/11 18:22Z |
 | entry-blank-r3 (opus OWNER BUG: blank first screen again after life-preload) | review/entry-blank-r3 | MAIN ROOT-53 | session_01Rc5AsJn6SQf4eq1uMdP1U5 | RUNNING | 18/11 18:27Z |
 choice-value-audit (ORDER ROOT-52 15:56Z) | review/choice-value-audit | session_01964izBnYA5PzbmC6qJfmDG | RUNNING | 18/11 18:20Z | owner D #2
-| shop-panel-r2 (sonnet SMALL UI owner 18:30Z: no strip, no bạc line, 1-row gains, sell price) | review/shop-panel-r2 | MAIN ROOT-53 | (opening) | RUNNING | 18/11 18:33Z |
+| shop-panel-r2 (sonnet SMALL UI owner 18:30Z: no strip, no bạc line, 1-row gains, sell price) | review/shop-panel-r2 | MAIN ROOT-53 | session_01Rc5AsMyVsQxLMS5ePwwpjT | RUNNING | 18/11 18:33Z |
