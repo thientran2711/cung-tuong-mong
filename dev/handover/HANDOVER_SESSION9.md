@@ -981,3 +981,8 @@ RUNNING (all report to MAIN; tell them s41):
 OWNER PENDING: hoa điền sat pick (+ hd_lan keep/drop); staff table pick; smudge r14 look; cloth stains set; C ROOT-13 must be opened by her from claude.ai (dev/handover/TAKEOVER_FOREMAN_C_ROOT13.md) — C has the hoa điền repaint order + cabinet/6 pieces.
 LESSONS s40: zoom 3× before sending any face/cloth image (I missed the smudge stripe twice); for colour-strength asks send numbered options at once; owner tables that are "measured, pending" must be tracked to LIVE (staff caps lost since 17/11); always explain how a feature works (layer on top of what) before asking her to judge it.
 - (18/11 02:42Z) s40 FINAL: successor MAIN s41 = session_01UV1SzjRPt1nbRqDVLL4KQJ (depth 4). s40 wake trigger deleted; s40 stops (relays only if the owner keeps typing here).
+
+## S41 (main, child of s40)
+- (18/11 00:56Z real) MAIN SESSION 41 = session_01UV1SzjRPt1nbRqDVLL4KQJ; START_CTX ≈ 4 % (estimate; context_usage reads 0) → rollover at 29 %, ceiling 60 %; depth 4.
+- (18/11 00:56Z) LOAD: main running 7 (builder s37a s40b makeup-lux, REVIEW looks-s40, smudge r14, hoa-dien r3 sat options, cloth-xoc r4, staff-cap D1–D3, life-preload — all owner looks/bugs) | B ROOT-2 active (coop-thin-e #2) | C ROOT-13 not opened (owner) | D #11 RUNNING 2, free 10 | C-AG #7 running | moved: none. PRIORITY #1 CHECK ('s41 takeover'): OD 0 | ledger 0 | claims 0 | main 0 | review/* 0. Brief common = briefs/s41-common.md.
+- (18/11 00:56Z) Told s41 to builder s37a, looks-s40, smudge, hoa-dien r3, cloth-xoc r4, staff-cap, life-preload, C-AG #7. tuyet-glow SzjKnHb ARCHIVED (done, CDN cleaned). Wake trig_01SUPYTxS9qwuZN99Cep4VT2 01:32Z (hourly at :32). s40 trigger delete refused by permission (s40 FINAL says it already deleted it).

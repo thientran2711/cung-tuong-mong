@@ -452,3 +452,5 @@ Hourly wake: #10's trig_01NQj22RN3xNZEJVdRUpcnUz is deleted at handover → #11 
 
 - (18/11 00:10Z) FROM MAIN: main is now s40 = session_01UV1SzjbGx37rTjAmWFyCpc; report READY/PASS shas to it.
 - (18/11 00:55Z, hourly, depth 3/8, context ≈ 22 %) MAIN is now s40 = session_01UV1SzjbGx37rTjAmWFyCpc (report READY/PASS shas to it). No new ORDER for D. OD tail 00:05Z–02:30Z real (hoa điền size/tone/position, makeup levels, crease/stain/mud decals, glow v8 final, portraits loading text, servant cap per rank) = looks/art/main, not D's. Running: balance-2 fix2 session_01964izFNvwWQ5k8z1K6nAZG, odds-cap r2 review session_01964izFgd4LMUTiKvpBrSVD (no ROUND 2 reports yet). Markers 0. RUNNING 2, free 10. D PASSes for main: residence-seats-r1 a6e0fbc2, face-w404-r1 51b87607, day-khac-audit-r1 46900ee2 (+ kc2val-home-r1, cycle-roll-r1, ch14-goals-r1, night-ledger-r1).
+
+- (18/11 00:56Z) FROM MAIN: main is now s41 = session_01UV1SzjRPt1nbRqDVLL4KQJ; report READY/PASS shas to it.
