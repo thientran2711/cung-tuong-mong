@@ -532,3 +532,4 @@ FOREMEN: B (life-preload-fu) | C (art; c03 go-live HELD; B8 samples; emperors) |
 - (18/11 07:24Z) Owner OD ~07:22Z: main line rolls over to children up to depth 7; the depth-7 main sends "TAKE OVER NOW" to the owner-opened ROOT STANDBY (id: pending — it messages ROOT-48).
 - (18/11 07:27Z) Owner OD ~07:26Z overwrites 07:22Z: trigger is NOT depth 7 but 'cannot open the next main' (create_session refused/failed or depth limit) → then send TAKE OVER NOW to ROOT STANDBY.
 - (18/11 07:38Z) Owner APPROVED tea stain (OD ~07:38Z) with care: never over hands → cloth-tea worker SzghNEr: hand/prop mask + stain.on.tra 1 + in-game Fold/iPad shots → SMALL review → land (jbal one key: same exception as place-stage vs C-AG hold).
+- ROOT-49 STANDBY = session_01UV1Szhw9yX7J9du6HoL1xM, depth 0 (opened 11/18/2026 07:25Z; waiting for TAKE OVER NOW)
