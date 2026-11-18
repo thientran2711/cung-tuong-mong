@@ -666,6 +666,70 @@ def build_trieu(c,t,v="v0"):
     s+=" Pose: calm formal court standing pose, no held item; her hands folded formally in front of her at waist height with the wide sleeves falling over them, upright dignified posture, body turned very slightly three-quarters, the whole face fully visible, head up facing the viewer, eyes open, lips closed, never looking down."
     s+=" Every hairpin is inserted into the hair pointing upward or backward with dangles hanging down, no hairpin horizontal or sticking out to the side. Luminous smooth porcelain skin, bare clean forehead with no forehead mark and no flower mark, eyes open, floor-length robe with slippers visible, no train, no cup, nothing covering the face."
     return s+END
+# ---------- SPEC5 POSES (owner 18/11 ~21:55Z, FIGURE_GATE D.3a): flag --spec5pose ----------
+# The ORIGINAL pose system that made the live 32 consorts = dev/figwork/spec5.py POSES[personality][(i+t-1)%6] (+ suffix ", poised" t5-t6, ", with stately grace" t7-t8),
+# COPIED WORD FOR WORD (POSES below is a verbatim copy; i = index-1 from dev/figwork/consorts_ids.json; a18 = ps[0] = this entry). Only changes: {prop} = the rank's 3f item,
+# and a pose that holds a teacup / a second object / no object keeps its movement but holds the rank item instead (ADAPT, one item only). Without --spec5pose nothing changes.
+SPEC5_POSES={"kieungao":["walking mid-step, raising {prop} beside her cheek with one hand, chin slightly lifted, the other long sleeve floating out",
+ "walking forward mid-step, long sleeves flowing behind her, {prop} held at her side",
+ "turning to look back over her shoulder, body in three-quarter view, {prop} held near her waist",
+ "turning mid-step while adjusting a gold hairpin with one raised hand, her sleeve sliding back, {prop} in the other hand",
+ "standing as a breeze lifts her long silk stole, one hand catching the stole, {prop} in the other hand",
+ "lifting her skirt hem slightly with one hand as if stepping up a stair, {prop} in the other hand"],
+"numi":["offering {prop} forward with both hands, head tilted gently",
+ "gazing sideways at a small butterfly resting on her raised finger, {prop} in the other hand",
+ "holding a small round palace lantern in one hand and {prop} in the other, mid-step",
+ "a small songbird perched on her raised finger, feeding it, {prop} in the other hand",
+ "skipping lightly forward, holding {prop} at her chest, skirt and ribbons fluttering",
+ "twirling one long sleeve in a light dance step, {prop} in the other hand"],
+"hienlanh":["walking lightly forward holding {prop}, looking down at it tenderly, sleeves swaying",
+ "walking mid-step carrying {prop}, long sleeves swaying",
+ "stepping forward to offer a small teacup in both hands, sleeves swinging",
+ "raising a small plum blossom branch up to her face to smell it",
+ "a light little twirl, hands clasped at her chest, skirt swirling out",
+ "walking forward holding a small round palace lantern, sleeves and sash swaying"],
+"dangi":["raising {prop} open beside her cheek, glancing over it",
+ "turning to look back over her shoulder, {prop} in hand",
+ "twirling a long silk ribbon in a graceful dance step",
+ "adjusting a hairpin with one raised hand, {prop} in the other hand",
+ "walking mid-step with sleeves flowing, {prop} held open at her side",
+ "swaying in a light turn, {prop} held up near her shoulder, skirt swirling"],
+"thamvong":["walking forward mid-step with sleeves flowing, {prop} in one hand",
+ "turning to look back over her shoulder, holding {prop}",
+ "walking while reading an unrolled scroll held open in both hands, sleeves trailing",
+ "walking forward holding {prop} raised, glancing at it, stole flowing",
+ "standing as a breeze lifts her long stole, one hand holding {prop}",
+ "adjusting a gold hairpin with one raised hand, the other hand holding {prop}"],
+"thanhnha":["playing a jade flute held to her lips while stepping forward, sleeves fluttering",
+ "walking with a pipa held upright, plucking it, skirt swirling",
+ "walking while reading an unrolled scroll held open in both hands, sleeves trailing",
+ "walking slowly while reading {prop} held open in one hand",
+ "turning mid-step with a raised writing brush in one hand and a sheet of paper in the other, sleeves flowing",
+ "turning lightly with a small teacup in both hands, sash fluttering"]}
+# ADAPT: the spec5 poses that hold a teacup / second object / nothing -> same movement, rank item ({prop}); (not needed for c06/c25 except c25 t1)
+SPEC5_ADAPT={
+"holding a small round palace lantern in one hand and {prop} in the other, mid-step":"holding {prop} in one hand, mid-step, the other hand lifting her sleeve",
+"stepping forward to offer a small teacup in both hands, sleeves swinging":"stepping forward to offer {prop} in both hands, sleeves swinging",
+"raising a small plum blossom branch up to her face to smell it":"raising {prop} up beside her cheek, glancing at it",
+"a light little twirl, hands clasped at her chest, skirt swirling out":"a light little twirl, holding {prop} at her chest, skirt swirling out",
+"walking forward holding a small round palace lantern, sleeves and sash swaying":"walking forward holding {prop}, sleeves and sash swaying",
+"twirling a long silk ribbon in a graceful dance step":"a graceful dance step, twirling one long sleeve, {prop} in the other hand",
+"walking while reading an unrolled scroll held open in both hands, sleeves trailing":"walking while holding {prop} in both hands, sleeves trailing",
+"playing a jade flute held to her lips while stepping forward, sleeves fluttering":"stepping forward holding {prop} raised in one hand, sleeves fluttering",
+"walking with a pipa held upright, plucking it, skirt swirling":"walking with {prop} held upright in one hand, skirt swirling",
+"turning mid-step with a raised writing brush in one hand and a sheet of paper in the other, sleeves flowing":"turning mid-step with {prop} raised in one hand, sleeves flowing",
+"turning lightly with a small teacup in both hands, sash fluttering":"turning lightly with {prop} in both hands, sash fluttering"}
+SPEC5_IDS={"c%02d"%n:(t,m) for t,rng in (("kieungao",range(1,7)),("numi",range(7,13)),("hienlanh",range(13,18)),("dangi",range(18,23)),("thamvong",range(23,28)),("thanhnha",range(28,33))) for m,n in enumerate(rng,1)}
+def spec5pose(o,c,t):
+    m=re.search(r" Pose: calm standing pose; she holds (.+?) in a contrasting colour",o); assert m,"pose paragraph not found"
+    prop=m.group(1); tr,mi=SPEC5_IDS[c]; i=mi-1
+    raw=SPEC5_POSES[tr][(i+t-1)%6]
+    if "{prop}" not in raw: raw=SPEC5_ADAPT[raw]
+    pose=raw.format(prop=prop)+(", with stately grace" if t>=7 else ", poised" if t>=5 else "")
+    a=o.index(" Pose: calm standing pose;"); b=o.index(" Every hairpin is inserted")
+    new=f" Pose: {pose}. The item is in a contrasting colour, not the robe colour, and the hand really grips it; the whole face fully visible with the head up toward the viewer, eyes open, lips closed, never looking down, nothing covering the face."
+    o=o[:a]+new+o[b:]
+    return o.replace("do NOT copy the outfit, hair ornaments or accessories of the reference","do NOT copy the reference's poses, outfit, hair ornaments or accessories",1)
 if __name__=="__main__":
     if "--age" in sys.argv: AGE=sys.argv[sys.argv.index("--age")+1]; sys.argv[sys.argv.index("--age"):sys.argv.index("--age")+2]=[]
     STATE=None
@@ -676,6 +740,9 @@ if __name__=="__main__":
     if "--trieu" in sys.argv: i=sys.argv.index("--trieu"); TRIEUN=int(sys.argv[i+1]); sys.argv[i:i+2]=["--trieu"]
     a=[x for x in sys.argv[1:] if not x.startswith("--")]
     _o=build_state(a[0],STATE,a[1] if len(a)>1 else "v0") if STATE else build_trieu(a[0],TRIEUN,a[1] if len(a)>1 else "v0") if "--trieu" in sys.argv else build_low(a[0],LOWN,a[1] if len(a)>1 else "v0") if "--low" in sys.argv else build_t7(a[0],a[1] if len(a)>1 else "v0") if "--t7" in sys.argv else build(a[0],a[1] if len(a)>1 else "v0","--golden" in sys.argv)
+    if "--spec5pose" in sys.argv:
+        _t=LOWN if "--low" in sys.argv else 7 if "--t7" in sys.argv else 8
+        _o=spec5pose(_o,a[0],_t)
     # a51 DARK (Foreman C ROOT-30, owner 23:05Z "màu tối giống như là ma hoặc là Thái hậu"): W90 found the shared "fresh, clear and luminous" clause kept c13 a51 bright; a51 only swaps it, every other age byte-identical
     # OWNER 18/11 ~21:06Z real (verbatim): "51 tuổi và 65 tuổi là phải dùng của những cái màu của những người già xài á, không có dùng cái màu tươi rói nha ... mặc dù già nhưng không có nghĩa là màu đen hay màu nâu ... Mà nó là một cái màu nó sang, mà cái kiểu mình nhìn vô mình thấy nó là một cái người đã lớn tuổi, trầm tĩnh lớn tuổi" → a51 AND a65 use the elder clause (a51 text = the approved a51d2 sample)
     if AGE in ("a51","a65"): _o=_o.replace("all colours fresh, clear and luminous, never dusty or greyed; ","all colours in the DEEPER, DARKER mature shades described above (rich and dignified, never bright, never pastel, never dusty or washed-out); the colour names and hex values below are her young colours, darken them as described above; "+("elegant, luxurious elder colours that read as a calm, dignified older lady, never vivid or fresh bright colours, yet never black or brown; " if AGE=="a65" else "")).replace("one fresh accent","one accent").replace("a fresh ","a ")
