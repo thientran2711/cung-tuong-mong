@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"4ba4fc15+","t":"2026-11-18T01:20Z","c":"coop-thin-e #2: buoi travels as its value in part-D patches (no delta drift); guest adopts the host's buổi after a reload; catch-up ready o…","b":"ac2e3884d670","h":[{"s":"eb3675a6+","t":"2026-11-17T22:59Z","c":"review coop-thin-c r1 #2: merge origin/main b048e495 (kit-display-room r2, jdisp/jshelf only; generated files from main + site rebuilt)"},{"s":"4eac30bc+","t":"2026-11-17T22:57Z","c":"review coop-thin-c r1 #2: her NPC pack resend (F1) listens on any guest seat, not only while the C switch is on: a level drop / build hold …"},{"s":"c7375c0c+","t":"2026-11-17T22:33Z","c":"batch s38a: dudo-blank-r1 2270c4c5 merged onto main 99f3978d; site rebuilt"},{"s":"99f3978d+","t":"2026-11-17T21:07Z","c":"batch s37a: display-shelf-r3rv 41418cd8 merged onto main 4c8568f5; site rebuilt"},{"s":"4c8568f5+","t":"2026-11-17T20:30Z","c":"batch s36a: main 60b0e3bf (display-shelf) merged; jdisp gated on BAL.shelf.ui (=0, room hidden); site rebuilt"},{"s":"da86e866","t":"2026-11-17T20:29Z","c":"Thẻ hành sự chia hai khối THÀNH và BẠI cho rõ được mất; khung dài có chữ \"Kéo xuống\" nhắc còn nữa; thẻ người chỉ ghi tước vị một lần, không…"},{"s":"9c6292d3+","t":"2026-11-17T20:17Z","c":"review display-shelf r2: Thái hậu rebuke through the one stat path ap (favour runs -100..100; cl(...,0,100) RAISED a negative favour to 0);…"},{"s":"85545ce7+","t":"2026-11-17T20:02Z","c":"world_check2 §1: a kind she died in is played again on a new life (fresh() kept as window.__wcFresh) — her random death mid-loop failed tha…"},{"s":"fc7c649f+","t":"2026-11-17T19:42Z","c":"review looks-2 r2: looks-2 layer scan follows the owner's AVATAR = ID CARD rule (17/11 ~18:10Z, main kit-fx-register): portrait/avatar rows…"},{"s":"0a508368+","t":"2026-11-17T18:53Z","c":"wx-anim: site rebuilt"}]};
+window.CTM_BI={"s":"6b17fe4f","t":"2026-11-18T01:39Z","c":"coop-thin-e #3: her stored buổi never ahead of the host's (week base carries her tối: clamp at store build; guest adopts only up to the vie…","b":"3bf0026c26d2","h":[{"s":"eb3675a6+","t":"2026-11-17T22:59Z","c":"review coop-thin-c r1 #2: merge origin/main b048e495 (kit-display-room r2, jdisp/jshelf only; generated files from main + site rebuilt)"},{"s":"4eac30bc+","t":"2026-11-17T22:57Z","c":"review coop-thin-c r1 #2: her NPC pack resend (F1) listens on any guest seat, not only while the C switch is on: a level drop / build hold …"},{"s":"c7375c0c+","t":"2026-11-17T22:33Z","c":"batch s38a: dudo-blank-r1 2270c4c5 merged onto main 99f3978d; site rebuilt"},{"s":"99f3978d+","t":"2026-11-17T21:07Z","c":"batch s37a: display-shelf-r3rv 41418cd8 merged onto main 4c8568f5; site rebuilt"},{"s":"4c8568f5+","t":"2026-11-17T20:30Z","c":"batch s36a: main 60b0e3bf (display-shelf) merged; jdisp gated on BAL.shelf.ui (=0, room hidden); site rebuilt"},{"s":"da86e866","t":"2026-11-17T20:29Z","c":"Thẻ hành sự chia hai khối THÀNH và BẠI cho rõ được mất; khung dài có chữ \"Kéo xuống\" nhắc còn nữa; thẻ người chỉ ghi tước vị một lần, không…"},{"s":"9c6292d3+","t":"2026-11-17T20:17Z","c":"review display-shelf r2: Thái hậu rebuke through the one stat path ap (favour runs -100..100; cl(...,0,100) RAISED a negative favour to 0);…"},{"s":"85545ce7+","t":"2026-11-17T20:02Z","c":"world_check2 §1: a kind she died in is played again on a new life (fresh() kept as window.__wcFresh) — her random death mid-loop failed tha…"},{"s":"fc7c649f+","t":"2026-11-17T19:42Z","c":"review looks-2 r2: looks-2 layer scan follows the owner's AVATAR = ID CARD rule (17/11 ~18:10Z, main kit-fx-register): portrait/avatar rows…"},{"s":"0a508368+","t":"2026-11-17T18:53Z","c":"wx-anim: site rebuilt"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -41081,8 +41081,10 @@ CW.b4Fest=(t,kk)=>{const L=pullFriend();CW.pulled=L;try{return festival(t,kk)}fi
 COOP.on("res",m=>{try{if(!m||!m.fest||m.from===CW.seat||!CW.on||!S)return;const j=S.j71&&S.j71.fx&&S.j71.fx[m.fest.f];if(j&&j.y===m.fest.y)j.done=1}catch(e){}});
 
 CW.snap=()=>{if(!CW.on||!S||S.dead||!CW.base||CW.inLife)return null;let d;try{d=ser()}catch(e){return null}
- return {room:COOP.state.room,seat:CW.seat,week:wk(),buoi:S.buoi||0,used,d,c:{nrdy:CW.nrdy,sent:CW.sent,pend:CW.pend,whereKey:CW.whereKey,lastWhere:CW.lastWhere,fpos:CW.fpos,mine:CW.mine||null,life:CW.life||0,p2:CW.p2,news:CW.news||""}}};
-CW.restore=o=>{if(!o||!o.d||!CW.on||o.seat!==CW.seat||o.week!==wk()||o.c.pend||o.c.sent===wk()||(CW.rweek===wk()&&typeof CW.rbuoi==="number"&&CW.rbuoi<o.buoi))return false;
+ return {room:COOP.state.room,seat:CW.seat,week:wk(),buoi:S.buoi||0,used,d,c:{nrdy:CW.nrdy,sent:CW.sent,pend:CW.pend,whereKey:CW.whereKey,lastWhere:CW.lastWhere,fpos:CW.fpos,mine:CW.mine||null,life:CW.life||0,p2:CW.p2,news:CW.news||"",thl:(CW.thin&&CW.thin.lvl)||0}}};
+/* thin E (room level 5, also when the level message has not arrived yet: the snapshot's own level): the server's buổi stays at the week's
+   start, the host's own copy is the room's buổi (his snapshot wins; her buổi is adopted from the host's view, jcoopthine gView) */
+CW.restore=o=>{if(!o||!o.d||!CW.on||o.seat!==CW.seat||o.week!==wk()||o.c.pend||o.c.sent===wk()||(!(eW()||(o.c.thl|0)>=5)&&CW.rweek===wk()&&typeof CW.rbuoi==="number"&&CW.rbuoi<o.buoi))return false;
  quiet=true;try{if(o.d)o.d.tab="act";/* owner 16/11: rejoin opens her room (Hành sự) */deser(o.d)}finally{quiet=false}used=o.used||0;try{deal()}catch(e){}  /* the hand of acts is not in a sổ: dealt again, as the title's Tiếp tục does */
  Object.assign(CW,o.c);CW.bend=false;CW.pendBuoi=null;CW.posKey="";CW.inLife=false;
  /* her "Sẵn sàng" of this buổi survives too: the room still holds her bend (the night's ready is re-sent by nResync) */
@@ -66929,7 +66931,7 @@ const CW=window.COOPW;if(!CW||!CW.thin||!CW.X||typeof COOP!=="object")return;
 const TH=CW.thin,X=CW.X,J=X.J,D=TH.D,LV=5;
 const host=()=>CW.seat==="a",on=()=>TH.on(LV);
 const LAST=()=>typeof B4L==="number"?B4L:2;
-const E=TH.E={on,stat:{rd:0,erd:0,ops:0,big:0,step:0,her:0,herSkip:0,forced:0,wrW:0,wrR:0,addDrop:0,rmBack:0,ridBack:0,curtain:0,go:0,cyb:0,tn:0,wwEnd:0,night:0,owe:0,adopt:0},rd:{},hr:"",forced:"",mine:"",log:[]};
+const E=TH.E={on,stat:{rd:0,erd:0,ops:0,big:0,step:0,her:0,herSkip:0,forced:0,wrW:0,wrR:0,addDrop:0,rmBack:0,ridBack:0,curtain:0,go:0,cyb:0,tn:0,wwEnd:0,night:0,owe:0,adopt:0,reRd:0,hostBack:0,clamp:0},rd:{},hr:"",forced:"",mine:"",log:[]};
 const lg=x=>{E.log.push(x);if(E.log.length>80)E.log.shift()};
 const bk=()=>(COOP.state.week||0)+":"+((S&&S.buoi)||0);
 const wkx=()=>typeof wk==="function"?wk():0;
@@ -66960,8 +66962,10 @@ let seen="";
 function gView(V){if(!on()||host()||!S||!V||!V.o)return;const k=bk();
  if(seen&&seen!==k){const [w0]=seen.split(":");if(+w0===(COOP.state.week||0)){used=0;popIdx=null;popMsg="";try{if(typeof curtain==="function"&&!S.dead){curtain();E.stat.curtain++}}catch(e){}}E.mine="";try{render()}catch(e){}}
  /* her phone behind / ahead of her own buổi on the host (a reload rebuilt her week): the host's copy wins (buoi is the host's), once no patch is pending */
- {const P=V.o.P&&V.o.P[CW.seat],mx=Math.max(0,...(V.o.pq||[]).map(x=>x.n|0));if(P&&V.o.w===(COOP.state.week||0)&&typeof P.buoi==="number"&&P.buoi!==(S.buoi||0)&&(S.thpn||0)>=mx&&!S.mg&&!Q.length){lg(["adopt",S.buoi,P.buoi]);S.buoi=P.buoi;used=0;popIdx=null;popMsg="";E.stat.adopt++;try{render()}catch(x){}}}
+ {const P=V.o.P&&V.o.P[CW.seat],mx=Math.max(0,...(V.o.pq||[]).map(x=>x.n|0));if(P&&V.o.w===(COOP.state.week||0)&&typeof P.buoi==="number"&&P.buoi!==(S.buoi||0)&&P.buoi<=(typeof V.o.buoi==="number"?V.o.buoi:0)&&(S.thpn||0)>=mx&&!S.mg&&!Q.length){lg(["adopt",S.buoi,P.buoi]);S.buoi=P.buoi;used=0;popIdx=null;popMsg="";E.stat.adopt++;try{render()}catch(x){}}}
  seen=k;const e=V.o.e;try{CW.tnView(e)}catch(x){console.error(x)}
+ /* the host reloaded after her ready (his page holds her ready in memory only): send it again, against his reloaded copy of her */
+ if(e&&e.boot){if(E.boot&&E.boot!==e.boot&&E.mine===bk()){lg(["re-ready",E.boot,e.boot]);E.stat.reRd++;E.mine="";E.boot=e.boot;setTimeout(()=>{try{gReady()}catch(x){console.error(x)}},0)}else E.boot=e.boot}
  if(e&&e.go===wkx()&&CW.ngoW!==e.go&&(S.buoi||0)>=LAST()){CW.ngoW=e.go;E.stat.go++;lg(["go",e.go]);try{CW.nCheck()}catch(x){console.error(x)}}
  try{CW.lockNext()}catch(x){}}
 COOP.on("thinview",V=>{try{gView(V)}catch(e){console.error("thin E view",e)}});
@@ -67038,6 +67042,18 @@ COOP.on("week",()=>{if(on()&&host())setTimeout(()=>{try{if(CW.tnHer())CW.herNigh
     D.later(seat,()=>{if(!S||S.dead)return;try{ev.home(wc,{got})}catch(e){console.error("thin E ww home",k,e)}});return r}}
   /* vu cổ: she is the culprit (her entry on the host): her own choice ("clean" / "open") read from her person */
   if(EV.vuco)EV.vuco.meOf=(w,key)=>{try{if(!on()||!host())return undefined;const B=TH.seatOf(other());const M=B&&B.S&&B.S.wwMe;return M&&M[w.id]?M[w.id][key]:undefined}catch(e){return undefined}}}}
+/* a HOST reload: his copy of her person (her store) is rebuilt from the week's base, which knows none of her buổi steps this week (her
+   step would run again from buổi sáng). Her store is kept per room with D's cards / patches (D.save, after every withSeat) and taken
+   back once per store when it is the same week, seat and life. */
+const ELS=()=>"ctm-thin-e:"+(COOP.state.room||"");
+{const sv=D.save;D.save=function(){const r=sv.apply(this,arguments);try{if(on()&&host()){const seat=other();const B=TH.seatOf(seat);
+  if(B&&B.S&&B.wk===(COOP.state.week||0))localStorage.setItem(ELS(),JSON.stringify({w:B.wk,seat,life:B.S.life||0,name:B.S.name||"",S:B.S}))}}catch(e){}return r}}
+{const so=TH.seatOf;TH.seatOf=function(seat){const B=so.apply(this,arguments);try{if(B&&!B.eL&&on()&&host()&&seat===other()){B.eL=1;B.wk=COOP.state.week||0;/* the week this store was built in (a save after the week merged, before the store is rebuilt, is the OLD week: never saved) */
+  const o=JSON.parse(localStorage.getItem(ELS())||"null");
+  if(o&&o.S&&o.seat===seat&&o.w===(COOP.state.week||0)&&(o.life||0)===(B.S.life||0)&&(o.name||"")===(B.S.name||"")&&(o.S.buoi||0)>=(B.S.buoi||0)){
+   const thq=B.S.thq;B.S=o.S;if(thq)B.S.thq=thq;E.stat.hostBack++;lg(["her-back",o.w,o.S.buoi])}
+  /* her buổi is never ahead of the room's (= the host's): the week's base carries the buổi she ended the last week in (tối) */
+  const Sh=CW.ctx?TH.outerS:S,hb=(Sh&&Sh.buoi)||0;if((B.S.buoi||0)>hb){lg(["clamp",B.S.buoi,hb]);B.S.buoi=hb;E.stat.clamp++}}}catch(e){console.error("thin E her back",e)}return B}}
 /* ---------- the world is read-only in her step (put back at its end) ---------- */
 const ROWF=new Set(["rel","oan","ghen","ev"]);
 /* one field as text; other NPCs / S inside it are written as refs so the copy never drags the world along */
@@ -67065,7 +67081,9 @@ function wRestore(o){const L=npcs(),R=new Set(L.concat(o.L));
  if(rid!==o.rid){rid=o.rid;E.stat.ridBack++}}
 E.wSnap=wSnap;E.wRestore=wRestore;
 /* the night: his go rides the view (the guest reads o.e.go), never the ctm-nr relay */
-{const hv=TH.hostView;TH.hostView=function(){const o=hv.apply(this,arguments);if(o&&on())o.e={go:CW.ngo===(COOP.state.week||0)?CW.ngo:-1,w:COOP.state.week||0,tnb:CW.tnb|0};return o}}
+/* boot: this page load of the host (a host reload loses her ready, held in memory: her phone sends it again when boot changes) */
+const BOOT=Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+{const hv=TH.hostView;TH.hostView=function(){const o=hv.apply(this,arguments);if(o&&on()){o.e={go:CW.ngo===(COOP.state.week||0)?CW.ngo:-1,w:COOP.state.week||0,tnb:CW.tnb|0,boot:BOOT}}return o}}
 /* her in-week change of the night (Tranh sủng, Chặn ngự giá, cáo bệnh …): the intent replaces the ctm-tn claim; runs in the host's context */
 TH.onDo("tn",(a,m)=>{const base=m&&m.base;E.stat.tn++;setTimeout(()=>{try{CW.tnDo(a,base)}catch(e){console.error("thin E tn",e)}},0);return {ok:1}});
 /* his ready / clock / a closed dialog: try the step again */
@@ -67101,7 +67119,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="ac2e3884d670";window.CTM_BUILD=BUILD;
+const BUILD="3bf0026c26d2";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
