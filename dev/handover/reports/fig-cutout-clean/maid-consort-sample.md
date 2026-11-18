@@ -197,3 +197,21 @@ Face check by eye (faces3 sheet = c12 por + 8 crops): all 8 faces read as one wo
 
 Gate: Haar ratio (m09 = 0.0993): t1 and t8 in range, t2/t6/t7 0.096, t3–t5 0.089–0.092 (below 0.098). Haar noisy; 50% overlay (scale by hairline->feet, face centre aligned) shows bodies/shoulders/faces coinciding closely. Weak spots: t7/t8 crowns only 11–17 px from the top edge; t3 smallest face.
 Files: https://ctm-img.victoria-tntt.workers.dev/img/_review/maid-consort-sample/c12_a18_v2_tK_fresh.png (768x2000 transparent), c12_a18_v2_tK_overlay50.jpg, c12_a18_v2_overlay_sheet.jpg, c12_a18_v2_faces_vs_por.jpg. md5-verified. Round 20 files kept (superseded). Nothing live.
+
+## Round 22 — consort c12 a18 t1–t8 v3 (own face + fixes + richer hairpin ladder + real-embroidery rule), ROOT-12 04:05Z
+
+v3 = v2 prompt + owner fixes: t3 bigger face ("LARGE head, face exactly 1/10 hairline->feet, NOT small"), t6/t7/t8 "TOP 12 percent of the canvas empty headroom above the crown", t1+all "hem ends just above the floor, BOTH embroidered slippers clearly visible, empty space below the feet", embroidery clause ("real silk EMBROIDERY: fine satin-stitch threads, slight thread texture, stitched into the cloth, following folds and shading, NOT pasted/printed/AI-looking motifs"), face ref = c12 live por only (face-consort-12 caused fringe in v2 tests; "centre parting, NO bangs, bare forehead" clause kept). Hairpin ladder per rank: t1 one simple gold trâm + 1 pearl dangle, one side | t2 trâm + small flower + 2 pearl dangles, one side | t3 two trâm with dangles+tassels, one side | t4 ornate centre piece + two trâm with long dangles, one side | t5 centre ornament + trâm with LONG dangles/tassels both sides | t6 phoenix crown | t7 larger crown, more dangles | t8 phượng quan, richest, longest dangles. 8 gens (640 cr) + 8 bg removals; no regens.
+Gens -> cuts: t1 WDlSfhEcXe->Bh961kSoQR | t2 nVLlvmlYQD->aFAzSS1fSh | t3 SymvnntUb8->dtP9KKYXSL | t4 1leXiR2r4r->w4vfc0S7EI | t5 rgdB32bxtc->w4vfcTU7EI | t6 tC3ZjSUmZJ->kspdiZq16B | t7 bxVD4RX5Y2->eIy45rWdqL | t8 N2HbemE6D9->bxVD9Rd5Y2.
+Checks: feet/slippers visible on all 8 (by eye). Embroidery at 2x zoom (t4 and t6 checked): reads as stitched thread, following folds. Faces: face sheet m09 | c12 por | t1..t8 — all 8 read as one woman, none reads as m09; the cheeks/rendering stay soft like m09 (rendering ref), shape closer to c12 por.
+| rank | Haar face h | ratio | top px |
+|---|---|---|---|
+| t1 | 191 (hand near face) | 0.1032 | 34 |
+| t2 | 179 | 0.1008 | 91 |
+| t3 | 166 | 0.0974 | 142 |
+| t4 | 160 | 0.0917 | 104 |
+| t5 | 173 | 0.0967 | 23 (crown tight) |
+| t6 | 158 | 0.0926 | 124 |
+| t7 | 154 | 0.0973 | 140 |
+| t8 | 159 | 0.0943 | 69 |
+Gate: Haar 0.098–0.107 only t1/t2 pass; t3, t5, t7 0.097; t4/t6/t8 0.092–0.094 (m09 = 0.0993 same detector). t3 face fixed (0.089 -> 0.097); t6/t7/t8 headroom fixed (124/140/69 px); t5 crown now tight (23 px) — new weak spot. 50% overlays on m09 coincide closely by eye.
+Files: c12_a18_v3_tK_fresh.png (768x2000 transparent), c12_a18_v3_tK_overlay50.jpg, c12_a18_v3_overlay_sheet.jpg, c12_a18_v3_face_sheet_m09_por_t1-t8.jpg under https://ctm-img.victoria-tntt.workers.dev/img/_review/maid-consort-sample/ . md5-verified. v1/v2 kept, superseded. Nothing live.
