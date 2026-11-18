@@ -1114,7 +1114,6 @@ Object.assign(BAL,{odb:{
  j40:{rbMindBelief:30},
  j42:{odSrvTalk:45,odSrvTalk_2:40,odSrvTalk_3:30,odSrvTalk_4:30,odSrvTalk_5:55,odSrvTalk_6:55,odSrvTalk_7:40,odSrvErrandDone:30,odO:70,odO_2:20,odO_3:50,odO_4:60,odO_5:55,odO_6:75,odO_7:70,rbSrvMonth:1.2,rbSrvMonth_2:2,odO_8:40,odO_9:30,odO_10:40,odO_11:30,odOf:30,odTop:55,odTop_2:60,odTop_3:45,odTop_4:45,rbTop:1.5,rbTop_2:2},
  j43:{rbTop:30},
- j5:{odInnerHTML:35},
  j54:{odO:30,odO2:55,odO_2:40},
  j55:{rbCorrupt:25,rbDadT:25,odO:15},
  j61:{odO:45},
@@ -1129,7 +1128,6 @@ Object.assign(BAL,{odb:{
  j77:{odAccLeadO:35},
  j78:{odTop:40},/* odO: Kể tội reads odO_18 through P3C.tell (merge r2 M1) */
  j8:{rbInspect:40,rbSearch:35,odO1:30,odO3:40,odO1_2:45,odO2:30,rbSeenNPC:15},
- j83:{odPts:35},
  j92:{rbWdRemark:30},
  jact:{odO:35},
  jeitem:{rbEitReWk:100},
@@ -1213,3 +1211,13 @@ BAL.ag.bt={off:15,offMax:3,hon:5,honMax:3,mood:{gian:5,thuong:-5},fear:4,fearTim
  /* sell base (review ag-all-2 r2 C6, OD 17/11 ~17:00Z (3)): only the greedy (tham) offer on their own; any other nết stays ≤ 0 with the low-lòng band and an angry mood
     (−15 + 10 + 5), so a non-greedy servant offers only once her master offended a chữ she holds (off, 17:20Z (2)) */
  sell:{base:{tham:60,lanh:-15,chuyen:-15,nhat:-15,trung:-20,_:-15},tr:{"Thanh liêm":-40},loy:[[25,10],[50,0],[70,-20],[101,-60]],v:{"Nghĩa":-10,"Trung":-10,"Tín":-10,"Liêm":-5}}};
+/* ---- review/mg-skip-all (owner 18/11 ~05:45Z + ~05:55Z): the ONE quick option of every mini-game ("Để trời định" / "Học nhanh" / "Điểm trang nhanh" …) ----
+   od  = the odds base of the quick roll, read by every game through kitQuickRoll() (KIT §13.6); replaces BAL.odb.j5.odInnerHTML + BAL.odb.j83.odPts (35 → 40).
+   raw = the play mark a won quick roll counts as where a game needs one (virtue lessons: the partial progress of a middling play); a lost roll counts 0.
+   care = the share (0..1) of a care game's gain a won quick roll gives (pet care, watering): half of a good play, never more.
+   Outcome table (a quick result never beats a good own play): lessons won = tiến bộ một phần, lost = 0 · works / crafts = never a product ·
+   makeup won = the middle tier (Đoan trang, BAL.toil.tier[0]), lost = Vụng về · care won = BAL.skip.care of the gain, lost = 0. */
+Object.assign(BAL,{skip:{od:40,raw:5,care:.5}});
+/* FACE REVEAL motion (owner 18/11 ~06:20Z, KIT §79 jreveal.js): ms = the grey veil clears from the face outward; lite = Gọn / reduced motion short fade;
+   win = how long after a face is learned every place that first draws it (frame, avatar, stage figure) still plays its one reveal */
+Object.assign(BAL,{faceReveal:{ms:Math.round(1000*BAL.pace),lite:350,win:8000}});
