@@ -7,7 +7,7 @@
    Two caches:
    - SHELL  'ctm-shell-<v>'  index.html, manifest, assets.json, the JSON data files, icons. Small; replaced on every build that changes them.
    - ASSETS 'ctm-assets'     every image and sound, keyed by content: '<path>?h=<sha256/16>'. Long-lived, NEVER wiped by a build:
-                             a changed file gets a new key (only it downloads), a removed/changed file's old key is pruned on activate.
+                             a changed file gets a new key (only it downloads), a removed/changed file's old key is pruned after activate (PRUNE list, never a whole-cache walk).
    PERFORMANCE BUDGET (dev/PROGRESS_perf.md): assets.json groups = core (first hour, blocks entry), fig (background, capped), lazy + fx (on use only):
    this worker caches any of them under the same content key the first time the game shows it, so nothing needs listing here and a new build only
    changes keys of changed files. The shell cache (PRE) stays small: index.html, manifest, JSON data (~1.6 MB) — never pictures or sounds.
@@ -26,16 +26,27 @@ let MAN=null;
 function man(){if(MAN)return MAN;MAN=caches.open(SHELL).then(c=>c.match('assets.json')).then(r=>r?r:fetch('assets.json',{cache:'no-store'})).then(r=>r.json()).then(j=>{const m=new Map();for(const f of j.files)m.set(f[0],f[1]);return m}).catch(e=>{MAN=null;return new Map()});return MAN}
 self.addEventListener('install',e=>{e.waitUntil(caches.open(SHELL).then(c=>c.addAll(PRE.map(u=>new Request(u,{cache:'reload'})))).then(()=>self.skipWaiting()))});
 self.addEventListener('activate',e=>{e.waitUntil((async()=>{
- const ks=await caches.keys();
+ const ks=await caches.keys();const olds=ks.filter(k=>k.startsWith('ctm-shell-')&&k!==SHELL);
+ /* entry-blank-r3: before the old shells go, note which picture keys this build replaced (old manifest vs new): the ONLY keys pruning
+    deletes (written to the new shell as PRUNE, so a worker stopped before it ran still does it on its next start) */
+ try{let om=null;for(const k of olds){const r=await (await caches.open(k)).match('assets.json');if(r){om=await r.json();break}}
+  if(om&&om.files){MAN=null;const m=await man();const todo=[];for(const f of om.files){if(m.get(f[0])!==f[1])todo.push([f[0],f[1]])}
+   if(todo.length)await (await caches.open(SHELL)).put(PRUNE,new Response(JSON.stringify(todo),{headers:{'Content-Type':'application/json'}}))}}catch(err){}
  /* old shells go; legacy 'ctm-<timestamp>' caches stay until jload.js has moved their matching files into ASSETS */
- await Promise.all(ks.filter(k=>k.startsWith('ctm-shell-')&&k!==SHELL).map(k=>caches.delete(k)));
+ await Promise.all(olds.map(k=>caches.delete(k)));
  MAN=null;await self.clients.claim()})());
- /* pruning assets no longer in assets.json walks ~10k keys: done after activation (outside waitUntil) so fetches, and the page
-    reopening on the new build, never wait for it */
- setTimeout(prune,3000)});
-let pruned=false;
-async function prune(){if(pruned)return;pruned=true;try{const m=await man();if(!m.size)return;const c=await caches.open(ASSETS);
- for(const r of await c.keys()){const u=new URL(r.url),p=relPath(u);if(p===null)continue;if(IMG&&p.startsWith('img/')&&!u.href.startsWith(IMG))continue;if(m.get(p)!==u.searchParams.get('h'))await c.delete(r)}}catch(e){pruned=false}}
+ setTimeout(prune,PRUNE_WAIT)});
+/* entry-blank-r3 (owner 18/11 ~18:25Z "khi vào game nó cứ màn hình trống"): pruning used to walk EVERY key of ASSETS (cache.keys()) — on
+   activation AND on the first fetch of every worker start (Android stops idle workers, so: every time she opened the game), and again on every
+   fetch after a failure. A player's ASSETS holds every picture ever shown (10–20 thousand keys): that walk is one long serialized cache read the
+   first screen's pictures wait behind, and past ~18 000 keys Chrome refuses it ("Operation too large") → it failed and re-ran on EVERY picture
+   request → nothing painted for a minute. Now: only the keys the last build replaced (PRUNE list), deleted one by one, once, well after the
+   first screen; never retried per fetch. */
+const PRUNE='ctm-prune.json',PRUNE_WAIT=15000;
+let pruned=false,pruneT=0;
+async function prune(){if(pruned)return;pruned=true;try{const sh=await caches.open(SHELL);const r=await sh.match(PRUNE);if(!r)return;const todo=await r.json();const c=await caches.open(ASSETS);
+ for(const [p,h] of todo){try{await c.delete(new URL(p+'?h='+h,baseOf(p)).href)}catch(err){}}
+ await sh.delete(PRUNE)}catch(e){}}
 /* a page may ask a waiting worker to take over (swreg.js), or ask which build answers it (tests) */
 self.addEventListener('message',e=>{const d=e.data||{};if(d.ctm==='skip')self.skipWaiting();else if(d.ctm==='v'&&e.source)e.source.postMessage({ctm:'v',v:V})});
 function scopePath(){return new URL(self.registration.scope).pathname}
@@ -55,7 +66,7 @@ async function asset(e,p,h){const key=new URL(p+'?h='+h,baseOf(p)).href,c=await 
  e.waitUntil(put);return net}
 self.addEventListener('fetch',e=>{const q=e.request;if(q.method!=='GET')return;const u=new URL(q.url);const cdn=!!IMG&&q.url.startsWith(IMG);if(!cdn&&u.origin!==location.origin)return;
  const p=relPath(u);if(p===null)return;
- if(!pruned&&p!==''&&p!=='index.html'&&q.mode!=='navigate')e.waitUntil(prune());
+ if(!pruned&&!pruneT&&p!==''&&p!=='index.html'&&q.mode!=='navigate'){pruneT=1;setTimeout(prune,PRUNE_WAIT)}  /* a PRUNE list left by a stopped worker: once per worker start, later */
  if(q.headers.get('x-ctm-load')||u.searchParams.has('ctmload'))return;  /* jload.js fills the cache itself */
  /* the design-canvas iframe (rot.js, ?krot=1) is the same ~5 MB index.html the host page was just served: answer it with that very response
     (one download instead of two, always the same build as its host); only within 30 s and once, else the normal network-first path below.
