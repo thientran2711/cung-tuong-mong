@@ -98,7 +98,10 @@ const nrKOk=k=>!!k&&nrB().kinds.includes(k)&&!!(typeof T72I==="object"&&T72I["nr
    to — the Hoàng hậu is not asked to be spoken for «trước Hoàng hậu» (hh), the Thái y of the court not asked to find a thái y (y).
    The Emperor and the Thái hậu have no NPC road (jreign / Tâm nguyện), so emp / th have no asker of their own here. Table: who → kinds. */
 const NRSELF={queen:["hh"],ty:["y"]};
-function nrSelfOf(who){return who?[].concat(...Object.keys(NRSELF).filter(r=>who===r||(Array.isArray(who)&&who.includes(r))).map(r=>NRSELF[r])):[]}
+/* the player herself is Hoàng hậu (jvoice who(): rank ≥ BAL.voice.hq, not in lãnh cung): nobody asks her to speak «trước Hoàng hậu» either */
+const nrMeQueen=()=>{try{return (S.rank|0)>=BAL.voice.hq&&!S.cold}catch(e){return false}};
+function nrSelfOf(who){const L=who?[].concat(...Object.keys(NRSELF).filter(r=>who===r||(Array.isArray(who)&&who.includes(r))).map(r=>NRSELF[r])):[];
+ return nrMeQueen()?L.concat(NRSELF.queen):L}
 function nrKind(A,no){no=no||[];const ok=k=>nrKOk(k)&&!no.includes(k);const w=A&&A.w;let k=NRHK[w]||"bac";let ws=[];try{const B=A.B||{};ws=Object.keys(B).map(b=>B[b].w).filter(Boolean);if(!NRHK[w]&&ws.length)k=NRHK[pick(ws)]||k}catch(e){}
  if(ok(k))return k;const L=ws.map(x=>NRHK[x]).filter(ok);return L.length?L[0]:nrB().kinds.find(ok)||nrB().kinds[0]}
 /* Q1 — the help hồi tells the real story (OD:L644, L1252, L1601 (2); audit §4 Q1; reports/questline-expert.md B2/B4):
@@ -113,14 +116,18 @@ function nrAskL(r,n){const E=window.NRASK&&NRASK[nrAskId(r,n)];return E?[].conca
 const nrAskOk=a=>!!(a&&nrKOk(a.k)&&a.h&&a.o&&a.o.length>=2&&a.o[0]&&a.o[1]);
 /* the kind and the ask of a help hồi (consorts, maids, eunuchs, men: every offer site) */
 /* who = the asker's role(s) for NRSELF ("queen", a men kind like "ty") */
-function nrAskPick(N,A,who){const no=nrSelfOf(who);const L=nrAskL(N.r,N.n);const ix=L.map((a,i)=>nrAskOk(a)&&!no.includes(a.k)?i:-1).filter(i=>i>=0);
+/* hasB = the quest has a real rival {B} (fix r2, true information HANDOVER L46): with none (her rival is the player, or gone) an ask that names
+   {B} is never drawn, nor the stock «do» card (it spies on {B}) — no «kẻ kia» standing in for a person */
+function nrAskPick(N,A,who,hasB){const no=nrSelfOf(who).concat(hasB===false?["do"]:[]);const L=nrAskL(N.r,N.n);
+ const ix=L.map((a,i)=>nrAskOk(a)&&!no.includes(a.k)&&(hasB!==false||!/\{B\}/.test(a.h+a.o.join(" ")+(a.c||"")))?i:-1).filter(i=>i>=0);
  if(ix.length){const i=ix[R(ix.length)];return{hk:L[i].k,av:i}}return{hk:nrKind(A,no),av:-1}}
 function nrAskOf(X){const p=X&&X.p;if(!p||!p.nr||p.av==null||p.av<0)return null;const a=nrAskL(p.nr,p.nn)[p.av];return nrAskOk(a)&&X.T&&X.T.id==="nr_"+a.k?a:null}
 window.NRSELF=NRSELF;window.nrSelfOf=nrSelfOf;window.nrAskId=nrAskId;window.nrAskL=nrAskL;window.nrAskPick=nrAskPick;window.nrAskOf=nrAskOf;
-function nrOffer(v){const N=v.nr,A=nrCh(N.r,N.n);if(!A||typeof q72!=="function")return false;const K=nrAskPick(N,A,v.queen?"queen":""),hk=K.hk;if(!T72I["nr_"+hk])return false;const q=q72();if(!q)return false;
+function nrOffer(v){const N=v.nr,A=nrCh(N.r,N.n);if(!A||typeof q72!=="function")return false;const q=q72();if(!q)return false;
  if(q.ch.concat(q.a).some(c=>nrIsV(c,v)&&/^nr_/.test(c.tid)))return false;
  if(typeof rgL==="function"){try{const L=rgL();if(v.queen&&L.hh&&!L.hh.done&&L.hh.st>0)return false}catch(e){}}
  const riv=nrRival(v);const bk=riv&&riv!==S?(riv.queen?"hh":"rv"):null;
+ const K=nrAskPick(N,A,v.queen?"queen":"",!!bk),hk=K.hk;if(!T72I["nr_"+hk])return false;
  q.ch.push({tid:"nr_"+hk,at:wk(),rk:v.queen?"hh":"rv",ri:v.id,bk,bi:bk?riv.id:null,p:{nr:N.r,nn:N.n,av:K.av}});N.hk=hk;N.hs=1;N.t=Math.max(N.t,S.turn+Math.ceil((nrB().dl+2)/3));return true}
 /* result of the help hồi → her chapter (called by the j72 outcome fn) */
 function nrHelped(X,how){try{const v=X.A&&X.A.o;if(!v||!v.nr)return"";const N=v.nr,B=nrB(),he=nrHe(v);N.hs=2;
@@ -171,8 +178,13 @@ window.nrRoads=nrRoads;window.nrCh=nrCh;window.nrInit=nrInit;window.nrMonth=nrMo
     says thần / nô tài / bản vương by his kind (nrVoice); a consort as above */
  const mv=X=>typeof nrVoice==="function"?nrVoice(X):null;
  const cap=t=>t.charAt(0).toUpperCase()+t.slice(1);
- const call=X=>{const m=mv(X);return m?cap(m.call):hi(X)?"Muội muội":"Tỷ tỷ"};
- const me=X=>{const m=mv(X);if(m)return m.me;const v=X.A&&X.A.o;return v&&v.queen?"bổn cung":hi(X)?"tỷ":"muội"};
+ /* fix r2 (VANPHONG §2 ONE CORE): a consort / the Hoàng hậu speaks through jvoice kAddr(asker, player) — bổn cung / tần thiếp / thần thiếp,
+    muội muội / ‹phẩm› nương nương / Hoàng hậu nương nương by both ranks; she is asking a favour, so never the cold «ngươi» (mood floor cool).
+    The old tỷ/muội pair stays only as the fallback when jvoice is not loaded. */
+ const kv=X=>{try{if(typeof kAddr!=="function"||typeof kSpk!=="function")return null;const sp=kSpk(X.A);if(!sp)return null;let a=kAddr(sp,S);if(a.m==="cold")a=kAddr(sp,S,{m:"cool"});return a&&a.goi&&a.xung?a:null}catch(e){return null}};
+ const callR=X=>{const m=mv(X);if(m)return m.call;const a=kv(X);return a?a.goi:hi(X)?"muội muội":"tỷ tỷ"};/* as said mid-sentence: a title keeps its capitals */
+ const call=X=>cap(callR(X));
+ const me=X=>{const m=mv(X);if(m)return m.me;const a=kv(X);if(a)return a.xung;const v=X.A&&X.A.o;return v&&v.queen?"bổn cung":hi(X)?"tỷ":"muội"};
  const Me=X=>cap(me(X));
  const ok={r:0,d:1,fn:X=>nrHelped(X,1)},bad={fn:X=>nrHelped(X,-1)};
  const def=(k,h,steps)=>T7("nr_"+k,"social",{fu:1,r:"rv",t:head,h,dl:B().dl,s:[steps],ok:Object.assign({},ok,{r:B().rel}),no:{get r(){return -B().no}},bad:Object.assign({},bad,{r:B().relBad,rb:B().relB})});
@@ -203,8 +215,8 @@ window.nrRoads=nrRoads;window.nrCh=nrCh;window.nrInit=nrInit;window.nrMonth=nrMo
   O("Góp công thay bạc: đi lo liệu giúp",{c:{suc:-B().suc},p:B().op.pS,sk:"tamco",l:{danh:-B().op.l2},lx:X=>`việc không xong, ${nrHe(X.A&&X.A.o)} mất lòng tin`,to:"ok"}),betray));
  /* Q1: a help hồi with its own ask (NRASK, see nrAskOf) speaks of the asker's chapter — the ask, the step title and the two option labels and
     loss lines; costs / odds / losses stay the stock ones of its kind. Every other card (no entry, old saves) reads the stock text unchanged. */
- const tx=(t,X)=>{const he=nrHe(X.A&&X.A.o),c=call(X);return String(t||"").replace(/\{(me|Me|call|Call|he|B)\}/g,(m,k,i,src)=>{
-   const w=k==="me"?me(X):k==="Me"?Me(X):k==="Call"?c:k==="call"?c.charAt(0).toLowerCase()+c.slice(1):k==="he"?he:X.B?X.B.n:"kẻ kia";
+ const tx=(t,X)=>{const he=nrHe(X.A&&X.A.o),c=callR(X);return String(t||"").replace(/\{(me|Me|call|Call|he|B)\}/g,(m,k,i,src)=>{
+   const w=k==="me"?me(X):k==="Me"?Me(X):k==="Call"?cap(c):k==="call"?c:k==="he"?he:X.B?X.B.n:"kẻ kia";
    return i===0||/[.!?:“]\s*$/.test(src.slice(0,i))?cap(w):w})};
  const val=(f,X)=>typeof f==="function"?f(X):f;
  /* the step title of an ask with no title of its own (a.c): true for every ask of that kind (the stock titles name one errand only) */
@@ -265,9 +277,10 @@ function nrMPlay(s){const N=s.nr,A=nrCh(N.r,N.n);if(!A){N.n=nrNext(N.r,N.n+1);if
    mistress (bond or a shared side) — never for a maid whose mistress is cold to the player */
 function nrMAsk(s){try{if(isSrv()||S.out||nrLearn())return false;const ms=nrMis(s);if(!ms)return false;if(ms===S)return (s.loyal||0)>=nrB().m.askLoy;
  if(aff(ms,S)>=nrB().askRel)return true;const f=facOf(ms);return !!(f&&f===facOf(S))}catch(e){return false}}
-function nrMOffer(s){const N=s.nr,A=nrCh(N.r,N.n);if(!A||typeof q72!=="function")return false;const K=nrAskPick(N,A),hk=K.hk;if(!T72I["nr_"+hk])return false;const q=q72();if(!q)return false;
+function nrMOffer(s){const N=s.nr,A=nrCh(N.r,N.n);if(!A||typeof q72!=="function")return false;const q=q72();if(!q)return false;
  const [rk,ri]=nrMK(s);if(q.ch.concat(q.a).some(c=>nrSameA(c,rk,ri)&&/^nr_/.test(c.tid)))return false;
  const riv=nrMRival(s);const bb=riv?nrMK(riv):[null,null];
+ const K=nrAskPick(N,A,"",!!bb[0]),hk=K.hk;if(!T72I["nr_"+hk])return false;
  q.ch.push({tid:"nr_"+hk,at:wk(),rk,ri,bk:bb[0],bi:bb[1],p:{nr:N.r,nn:N.n,av:K.av}});N.hk=hk;N.hs=1;N.t=Math.max(N.t,S.turn+Math.ceil((nrB().dl+2)/3));return true}
 function nrMMonth(news){const B=nrB();let n=news||0;
  for(const s of nrMaidL().concat(nrServL("eunuch"))){try{const N=s.nr||nrMInit(s);if(!N||N.x||!N.n||S.turn<N.t)continue;

@@ -26,11 +26,14 @@ const men=fs.readFileSync(path.join(B,'jnroadm.js'),'utf8');
 /* men templates that can ask: the hz (NPC princes) templates never ask (jnroadm nrMenL: a son has e.a=null) — no coverage owed there */
 const menIds=[...new Set([...men.matchAll(/\bdef\("([a-z0-9_]+)","([a-z]+)",/g)].filter(m=>m[2]!=="hz").map(m=>m[1]))];
 const isHelp=n=>n>=helpN[0]&&n<=helpN[1];
-/* load every jnrask file in one sandbox (the files share window.NRASK) */
+/* each file alone in its own sandbox (its own keys; fix r2: a key defined by two files would be silently overwritten by Object.assign),
+   then all files together in one sandbox (they share window.NRASK, as in the game) */
 const sb={window:{}};sb.window.window=sb.window;vm.createContext(sb);
-const per={};
-for(const f of files){const before=new Set(Object.keys(sb.window.NRASK||{}));try{vm.runInContext(fs.readFileSync(path.join(B,f),'utf8'),sb,{filename:f})}catch(e){fail(f+': does not load',e.message);continue}
- const N=sb.window.NRASK||sb.NRASK||{};per[f]=Object.keys(N).filter(k=>!before.has(k));for(const k of per[f])if(before.has(k))fail(f+': key also in another file',k)}
+const per={},owner={};
+for(const f of files){const src=fs.readFileSync(path.join(B,f),'utf8');const one={window:{}};one.window.window=one.window;vm.createContext(one);
+ try{vm.runInContext(src,one,{filename:f})}catch(e){fail(f+': does not load',e.message);continue}
+ per[f]=Object.keys(one.window.NRASK||{});for(const k of per[f]){if(owner[k])fail(`${f}: key ${k} already defined in ${owner[k]}`,k);else owner[k]=f}
+ try{vm.runInContext(src,sb,{filename:f})}catch(e){}}
 const NR=sb.window.NRASK||sb.NRASK||{};
 const SLOT=new Set(['me','Me','call','Call','he','B']);
 const BAN=[/%/,/\d/,/Chắc chắn/i,/[«»"…]/,/\b(OK|buff|stat|level|combo|random|bot|test|game|click|tab|slot)\b/i,
