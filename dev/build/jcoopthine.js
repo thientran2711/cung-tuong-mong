@@ -140,6 +140,14 @@ CW.herNight=()=>{if(!on()||!host()||CW.ctx)return;const w=COOP.state.week||0;if(
  D.later(other(),()=>{if(!S||S.dead||S.out)return;const had=S.tonight==="me";S.tonight="me";try{if(typeof ntTake==="function")ntTake(S)}catch(e){}
   if(!had)try{pushDil(mkP("ksp"),"Kính sự phòng báo tin")}catch(e){console.error("thin E ksp",e)}})};
 COOP.on("week",()=>{if(on()&&host())setTimeout(()=>{try{if(CW.tnHer())CW.herNight()}catch(e){console.error(e)}},0)});
+/* E-fix 'cyAsk on host' (Foreman B 18/11): her Kỳ nguyệt sự card. Her flip (jcycle cyAsk) ran only on her phone inside her week-end world
+   frame, so the card and its flags were dropped (coop-cyc). At level 5+ the HOST asks it in her context b (jcycle cyAsk → pushDil cyrep →
+   part-D card on her phone), her pick runs there (do pick), her stored person holds S.cyb (the one fact; the patch brings it to her phone),
+   and the host's held draw (jcoopworld cyWait / cyFree) runs once she has answered. Her phone never asks it (cyAsk = false on the guest). */
+CW.herCy=g=>{if(!on()||!host()||CW.ctx||E.cyA===g)return;E.cyA=g;E.stat.cyA=(E.stat.cyA|0)+1;lg(["her-cy",g]);
+ D.later(other(),()=>{let asked=false;try{asked=!!(S&&!S.dead&&typeof window.cyAsk==="function"&&window.cyAsk())}catch(e){console.error("thin E cy",e)}
+  if(!asked){D.after(()=>{CW.cyNo=g;try{CW.cyFree()}catch(e){console.error(e)}})}})};
+if(typeof window.cyAsk==="function"){const ca=window.cyAsk;window.cyAsk=function(){if(on()&&!host()&&!CW.ctx)return false;return ca.apply(this,arguments)}}
 /* world windows' end() on HER household (ORDER s34 16:22Z, reports/coop-thin-c.md 'For part E'): the host's worldTick ends a window for the
    world and his own household (jworld2 EVD.<k>.end → EVD.<k>.home for S); her household (her choice S.wwMe in her person) runs the same
    EVD.<k>.home in her context (D.later: from the top of the event loop), with the world's outcome the end found (vu cổ: the culprit), so the

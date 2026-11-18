@@ -4,7 +4,7 @@
    E3 the host steps both once (his step + her step in withSeat b), her buổi arrives as a part-D patch · E4 her own change of this buổi
    (bac, a log line) reaches the host's copy before her step and is not undone · E5 the world is read-only in her step (unit: an NPC
    number + a world key put back, her viewer row kept) · E6 host clock: a forced step runs both with her not ready ·
-   E7 buổi tối: both ready → the night runs → week merged once · E9 cycle flags by do cyb · E10 night by do tn + the view ·
+   E7 buổi tối: both ready → the night runs → week merged once · E9 cycle flags = the host's (patch, no do cyb) · E10 night by do tn + the view ·
    E11 her summons = a part-D card built on the host · E12 a world window's end on her household runs on the host · E13 no raw ref left in her S · E14 her ready from behind catches her up (host reload lost E.owe) · E15 vu cổ: her accusation of the caught host hits · E16 her hand of acts after the host's step · E8 no page errors. */
 const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),path=require('path');
 const WURL=process.argv[2]||'https://ctm-coop.victoria-tntt.workers.dev';const LVL=+(process.argv[3]||5);const SWAP=+(process.argv[4]||0);
@@ -96,12 +96,15 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  const fin=[await st(H),await st(G)];ok(fin[0].b===fin[1].b,'E7 same buổi both seats after the week',fin.map(x=>[x.w,x.b]));
  console.log('E stat host',JSON.stringify(fin[0].E),'guest',JSON.stringify(fin[1].E));
  console.log('E log host',JSON.stringify(await H.p.evaluate(()=>COOPW.thin.E.log.slice(-25))));
- /* E9: her cycle flags reach the host's copy of her by the intent do cyb (no ctm-p2 relay); the host reads them from her person */
+ /* E9 (E-fix 'cyAsk on host', f1 #2): her cycle flags are the HOST's — her maid's card is asked and answered in her context on the host
+    (coop-cyc checks the card itself); they reach her phone in the part-D patch; her phone sends no do cyb and no ctm-p2 cyb relay */
  for(let i=0;i<3;i++){await clear(H);await clear(G);await sleep(300)}
- await G.p.evaluate(()=>{window.__sent=[];S.cyb=S.cyb||{};S.cyb.back=wk();S.cyb.rk=wk();S.cyb.rv='lui';render()});
+ await G.p.evaluate(()=>{window.__sent=[]});
  const w9=await G.p.evaluate(()=>wk());
- ok(await until(H,w=>{const c=COOPW.fcyb();const B=COOPW.thin.seatOf('b');return c&&c.back===w&&B.S.cyb&&B.S.cyb.rv==='lui'},w9,15000),'E9 her cycle answer is in the host copy of her (fcyb reads her person)',await H.p.evaluate(()=>[COOPW.fcyb(),COOPW.thin.E.stat.cyb]));
- {const s9=await G.p.evaluate(()=>window.__sent.slice());ok(s9.includes('do:cyb')&&!s9.some(x=>/^act:ctm-p2:cyb/.test(x)),'E9 sent as do cyb, no ctm-p2 cyb relay',s9)}
+ await H.p.evaluate(w=>{COOPW.thin.withSeat('b',()=>{S.cyb=S.cyb||{};S.cyb.back=w;S.cyb.rk=w;S.cyb.rv='lui'});try{COOPW.thin.flush()}catch(e){}},w9);
+ ok(await until(H,w=>{const c=COOPW.fcyb();const B=COOPW.thin.seatOf('b');return c&&c.back===w&&B.S.cyb&&B.S.cyb.rv==='lui'},w9,15000),'E9 her cycle answer is in the host copy of her (fcyb reads her person)',await H.p.evaluate(()=>[COOPW.fcyb()]));
+ ok(await until(G,w=>S.cyb&&S.cyb.back===w&&S.cyb.rv==='lui',w9,15000),'E9 her cycle flags reached her phone in the patch (one fact)',await G.p.evaluate(()=>S.cyb));
+ {const s9=await G.p.evaluate(()=>window.__sent.slice());ok(!s9.includes('do:cyb')&&!s9.some(x=>/^act:ctm-p2:cyb/.test(x)),'E9 no do cyb, no ctm-p2 cyb relay from her phone (the host owns her cycle flags)',s9)}
  /* E10: the night (tn) without the ctm-tn relay: her claim = do tn; the host's own change rides the view */
  await G.p.evaluate(()=>{window.__sent=[];S.tonight='me';render()});
  ok(await until(H,()=>!!(S.tn&&S.tn.w===wk()&&S.tn.who===902&&S.tonight===COOPW.friend()),null,15000),'E10 her claim (do tn) taken by the host: his S.tn = her',await H.p.evaluate(()=>[S.tn,S.tonight&&S.tonight.id]));

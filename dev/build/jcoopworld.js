@@ -692,6 +692,8 @@ COOP.on("act",m=>{if(!m||m.k!==TK||!CW.on||eW()||m.from===CW.seat||!S||S.dead||m
  const who=tnDec(m.who);if(who!==tnWho())tnTake(who);else CW.tnLast=JSON.stringify([wk(),tnWho()]);
  render()});
 (function(){if(typeof flip!=="function")return;const f=flip;flip=function(){if(!CW.on)return f.apply(this,arguments);
+ /* E-fix: her maid-card answer ran on the host in her context (jcycle done → flip): no draw in her context; the host's held draw runs once her context closes */
+ if(CW.ctx&&eW()){CW.thin.D.after(()=>{try{cyFree()}catch(e){console.error(e)}});return S.tonight}
  if(!host()){/* the guest draws nothing: her night comes from the host's tn with the merged week */const r0=S.tonight;
   if(CW.inTurn){S.tonight=null;try{if(typeof pregFind==="function")pregFind()}catch(e){}return}return r0}
  /* host: the friend's entry is in the deck (endTurn took her out) */const L=CW.pulled;
@@ -922,8 +924,11 @@ function evOut(tg,n){const T=CW.thin;if(CW.ctx)T.D.after(()=>evIn(tg,n));else if
 CW.fcyb=()=>{if(eW()){const T=CW.thin;try{if(CW.ctx)return (T.outerS&&T.outerS.cyb)||{};if(host()){const B=T.seatOf(fs());return (B&&B.S&&B.S.cyb)||{}}
   const P=T.view&&T.view.o&&T.view.o.P&&T.view.o.P[fs()];return (P&&P.cyb)||{}}catch(e){return {}}}
  const P=CW.base&&CW.base.P&&CW.base.P[fs()],r=CW.fcy;if(r&&(!P||r.life===(P.life||0)))return r.c||{};return (P&&P.S&&P.S.cyb)||{}};
-function cySend(){if(!CW.on||!S||S.dead||CW.inTurn/* mid-week-end: the new week's card is not asked yet */||typeof window.cyRec!=="function")return;const r=window.cyRec();r.life=CW.life||0;const k=JSON.stringify(r);if(k===CW.cyK)return;CW.cyK=k;if(eW()){if(!host()&&!CW.ctx)CW.thin.doSend("cyb",r);return}p2say("cyb",r)}
+function cySend(){if(eW())return;/* E-fix: at level >= 5 her cycle flags are the host's (asked + answered in her context there; the patch brings them) */if(!CW.on||!S||S.dead||CW.inTurn/* mid-week-end: the new week's card is not asked yet */||typeof window.cyRec!=="function")return;const r=window.cyRec();r.life=CW.life||0;const k=JSON.stringify(r);if(k===CW.cyK)return;CW.cyK=k;if(eW()){if(!host()&&!CW.ctx)CW.thin.doSend("cyb",r);return}p2say("cyb",r)}
 function cyWait(fe){if(!fe||fe.out||fe.alive===false||typeof window.cycOn!=="function"||typeof window.cyWk!=="function"||!window.cycOn(fe))return false;
+ /* E-fix (cyAsk on host, level >= 5): her maid's card is asked BY THE HOST in her context (CW.herCy: jcycle cyAsk → part-D card) and
+    answered there; the draw waits until her stored person holds this week's answer (or her maid had nothing to ask: CW.cyNo) */
+ if(eW()&&host()){const g=window.cyWk(),c=CW.fcyb();if(c.rk===g||CW.cyNo===g)return false;if(c.df!==g&&CW.herCy)CW.herCy(g);return true}
  const r=CW.fcy,g=window.cyWk();if(r&&r.w===g&&!r.pend)return false;const e=COOP.state.ended||{};return !e[fs()]}
 function cyFree(){if(CW.cyHold==null||!CW.on||!S)return;if(!S.dead&&cyWait(friendEntry()))return;T("cyFree "+CW.cyHold);CW.cyHold=null;if(S.dead)return;
  const c=S.cyb||{},g=window.cyWk();/* her own maid card still open: its answer runs the flip */if(!(c.df===g&&c.rk!==g))try{flip()}catch(e){console.error(e)}

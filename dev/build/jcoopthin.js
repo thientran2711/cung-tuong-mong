@@ -268,7 +268,7 @@ const jq=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
 /* thin E: the room's step is the host's alone: it travels as its value, never as a delta (a delta on a seat that is already there drifted to buổi 4) */
 const ABS=new Set(["buoi"]);
 function pDiff(a,b,pre,out){out=out||[];pre=pre||[];
- for(const k of new Set([...Object.keys(a||{}),...Object.keys(b||{})])){if(!pre.length&&SKIP.has(k))continue;if(BADK.test(k))continue;
+ for(const k of new Set([...Object.keys(a||{}),...Object.keys(b||{})])){if(!pre.length&&SKIP.has(k)&&!(k==="cyb"&&TH.on(5)/* E-fix: her cycle flags are the host's at level 5+: they travel in the patch */))continue;if(BADK.test(k))continue;
   const x=a[k],y=b[k],p=pre.concat([k]);if(jq(x,y))continue;
   if(!(k in b)){out.push(["-",p]);continue}
   if(typeof x==="number"&&typeof y==="number"){out.push(p.length===1&&ABS.has(k)?["=",p,y]:["+",p,y-x]);continue}

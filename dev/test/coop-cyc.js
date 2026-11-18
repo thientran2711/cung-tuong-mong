@@ -83,8 +83,8 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   if(process.env.CYC_DBG)await B.p.evaluate(()=>{if(window.__flw)return;window.__flw=1;window.__fl=[];const f=flip;flip=function(){try{window.__fl.push([S.tuan,wk(),cycOn(S),!!S.maid,COOPW.inTurn,JSON.stringify(S.cyb||{}).slice(0,60),cyBase(S).t,S.name]);if(window.__fl.length>8)window.__fl.shift()}catch(e){}return f.apply(this,arguments)}});
   const w0=await wkA();let held=null,asked=false;
   for(let i=0;i<60&&!(asked&&held);i++){await clear(A);if((await clearB())==='cy')asked=true;await press1(A);if(!asked)await press1(B);await sleep(700);
-   if(asked&&!held)held=await A.p.evaluate(()=>COOPW.pend&&COOPW.cyHold!=null&&COOPW.sent!==(COOP.state.week||0)?{hold:COOPW.cyHold}:null)}
-  ok(asked,`${k}: B (guest) gets her maid's Kỳ nguyệt sự card`,nb);if(!asked&&process.env.CYC_DBG)console.log('dbg B',JSON.stringify(await B.p.evaluate(()=>({tr:COOPW.tr.slice(-30),cyb:S.cyb,tuan:S.tuan,wk:wk(),name:S.name,maid:!!S.maid,on:cycOn(S),t:cyBase(S).t,E:COOPW.thin.E&&COOPW.thin.E.log.slice(-6),fl:window.__fl}))));
+   if(asked&&!held)held=await A.p.evaluate(th=>th?(COOPW.cyHold!=null&&COOPW.cyHold===wk()&&!(S.tn&&S.tn.w===wk())?{hold:COOPW.cyHold,thin:1}:null)/* thin: the host's draw of THIS week is held (no night drawn) */:COOPW.pend&&COOPW.cyHold!=null&&COOPW.sent!==(COOP.state.week||0)?{hold:COOPW.cyHold}:null,THIN)}
+  ok(asked,`${k}: B (guest) gets her maid's Kỳ nguyệt sự card`,nb);if(!asked&&process.env.CYC_DBG)console.log('dbg A',JSON.stringify(await A.p.evaluate(()=>{const f=COOPW.friend();const T=COOPW.thin;return{cyA:T.E&&T.E.stat.cyA,elog:T.E&&T.E.log.slice(-12),tr:COOPW.tr.filter(x=>/cy/.test(x)).slice(-6),fcyb:COOPW.fcyb(),f:f&&[f.name,cycOn(f),cyBase(f).t],tuan:S.tuan,wk:wk(),herS:(()=>{const B=T.seatOf('b');return B&&[B.S.name,!!B.S.maid,B.S.tuan,JSON.stringify(B.S.cyb)]})()}})));if(!asked&&process.env.CYC_DBG)console.log('dbg B',JSON.stringify(await B.p.evaluate(()=>({tr:COOPW.tr.slice(-30),cyb:S.cyb,tuan:S.tuan,wk:wk(),name:S.name,maid:!!S.maid,on:cycOn(S),t:cyBase(S).t,E:COOPW.thin.E&&COOPW.thin.E.log.slice(-6),fl:window.__fl}))));
   ok(!!held,`${k}: the host's week draw waits for her answer (no draw, no week end sent)`,held);
   if(!before.length){await shot(B,'cyc-guest-card-1180x820');await shot(A,'cyc-host-wait-755x1000')}
   const d0=await B.p.evaluate(()=>({duc:S.duc,ghen:liveRivals(true).filter(v=>!v.coop).reduce((a,v)=>a+(v.ghen||0),0)}));
@@ -100,7 +100,7 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   ok(tapped&&d1.rk&&d1.rv===k,`${k}: B answered "${k}"`,d1);
   ok(d1.duc-d0.duc===dDuc,`${k}: her cost lands once on her side (Đức ${dDuc})`,[d0.duc,d1.duc]);
   if(k==='giau')ok(d1.ghen>d0.ghen,'giau: the palace grows jealous (ghen up, on her side)',[d0.ghen,d1.ghen]);
-  ok(await until(A,w=>{const r=COOPW.fcy;return r&&r.w===w&&!r.pend},d1.w,15000),`${k}: her answer reached the host before the host's draw`);
+  ok(await until(A,([w,th])=>{if(th){const c=COOPW.fcyb();return c.rk===w}const r=COOPW.fcy;return r&&r.w===w&&!r.pend},[d1.w,THIN],15000),`${k}: her answer reached the host before the host's draw`);
   await merge(w0,`${k}: the week merges`,true);
   for(let i=0;i<10&&!(await A.p.evaluate(()=>!!(S.tn&&S.tn.w===COOP.state.week))&&await B.p.evaluate(()=>!!(S.tn&&S.tn.w===COOP.state.week)));i++)await sleep(500);
   const a=await A.p.evaluate(()=>{const f=COOPW.friend();return{w:COOP.state.week,tn:S.tn,t:S.tonight==='me'?'me':S.tonight&&S.tonight.id,off:f?cyTray(f):null,on:f?cycOn(f):null,duc:f&&f.duc,hold:COOPW.cyHold}});
