@@ -1,6 +1,6 @@
 
-| doc-90-women (sonnet; ORDER MAIN ROOT-56 21:05Z; 90 nhân vật nữ canon sweep) | review/doc-90-women | B | session_01N1tNP4QKEhpW3E5H9NGbvd | RUNNING | 18/11 21:19Z |
-| role-parity-4 B4 (opus; ORDER C-AG #16 21:10Z + AMEND 21:16Z; illicit buys / j22 affair / harm:xx+vp) | review/role-parity-4 | B | session_01N1tNP4sYMPtChGLSuuz2Nq | RUNNING | 18/11 21:19Z |
+| doc-90-women (sonnet; ORDER MAIN ROOT-56 21:05Z; 90 nhân vật nữ canon sweep) | review/doc-90-women | B | session_01N1tNP3tS9mLEuh2PPHPqBr | RUNNING | 18/11 21:21Z |
+| role-parity-4 B4 (opus; ORDER C-AG #16 21:10Z + AMEND 21:16Z; illicit buys / j22 affair / harm:xx+vp) | review/role-parity-4 | B | session_01N1tNP4ot5eXFn8KFS9CsoB | RUNNING | 18/11 21:21Z |
 | REVIEW coop-thin-f1 r1 #2 (opus BIG; final merge + coop-cyc L6 flake + cyAsk miss) | review/coop-thin-f1-r1 | B | session_01N1tNP2MU2xPmvYHmhJHMtL | RUNNING | 18/11 19:21Z |
 | REVIEW shop-panel r1 (sonnet SMALL) of 0bf5fe60 | review/shop-panel-r1 | B | session_01N1tNP4ptMsAWwqLRcdVjQR | LIVE 5e6490b4 (ARCHIVED) | 18/11 16:58Z |
 | shop-panel (sonnet UI SMALL; ORDER ROOT-52 16:03Z) | review/shop-panel | B | session_01N1tNP3Cr9vpq7qJTUrjtow | LIVE 5e6490b4 (ARCHIVED) | 18/11 16:58Z |
