@@ -739,9 +739,9 @@ ${T}{font-family:var(--display,"Noto Serif",Georgia,serif)!important;font-weight
  color:var(--rt,color-mix(in srgb,var(--rc,var(--tc,#7a5a30)) 80%,#000))!important;text-shadow:none!important;
  background:none!important;box-shadow:none!important;line-height:1.2!important;padding:0 2px!important}
 ${N}{color:var(--krt-ink)!important;font-weight:700;text-shadow:none!important}
-${PT}{color:var(--rt,color-mix(in srgb,var(--rc,var(--tc,#7a5a30)) 80%,#000))!important;/* 48.1d/e: rank line on a painting = its rank tone; right around the letters the glow is a LIGHT tint of its own rank colour (stacked so letter vs halo >= 3:1, scan stage-tag-contrast.py), then the saturated rank colour further out (the neon); 1 px paper rim (no dark hairline: it darkens the halo behind the letters) */
- text-shadow:0 0 1px #fff8ee,0 0 3px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 14%,#fff),0 0 3px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 14%,#fff),0 0 5px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 20%,#fff),0 0 5px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 20%,#fff),0 0 8px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 30%,#fff),0 0 11px var(--tc,var(--rc,var(--rt)))!important}
-${HT}{text-shadow:0 0 1px #fff8ee,0 0 3px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 14%,#fff),0 0 3px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 14%,#fff),0 0 5px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 20%,#fff),0 0 5px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 20%,#fff),0 0 8px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 30%,#fff),0 0 11px var(--tc,var(--rc,var(--rt))),0 0 16px var(--tc,var(--rc,var(--rt)))!important}
+${PT}{color:color-mix(in srgb,var(--rt,var(--rc,var(--tc,#7a5a30))) 72%,#000)!important;/* place-stage r4 (owner OD:L532/L702/L866): the stage tag's RANK line keeps its RANK hue (a deeper, saturated shade of the rank tone for contrast) and gets the SAME light-paper halo as the NAME line (no coloured glow: it was faded on a light floor) */
+ text-shadow:0 0 1px #fff8ee,0 0 3px #ffe9a8,0 0 7px #f3cf6a,0 0 11px #e8bd4a99!important}
+${HT}{text-shadow:0 0 1px #fff8ee,0 0 3px #ffe9a8,0 0 7px #f3cf6a,0 0 11px #e8bd4a99!important}
 ${PN}{text-shadow:0 0 1px #fff8ee,0 0 3px #ffe9a8,0 0 7px #f3cf6a,0 0 11px #e8bd4a99!important}
 html body .kpsn .kname .kti{display:block;font-size:.84rem!important}
 /* stage side cards (.ksh .k3c, review/pick-hint-r1): a person's title + name (kitRankNamePaint / kitName) stack as rank line over name,
