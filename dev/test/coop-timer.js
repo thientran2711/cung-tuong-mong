@@ -87,7 +87,8 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   const l1=(await K(A)).v.left;await sleep(3000);const v2=(await K(A)).v;ok(v2.pz&&Math.abs(v2.left-l1)<600,'3: paused clock does not run',[l1,v2.left]);
   ok(await until(A,()=>{const v=COOPW.tm.view();return v&&!v.pz&&v.run},null,10000),'3: after the cap the clock runs again',await K(A));
   ok(await until(A,k=>COOPW.tm.myKey()!==k,k0,20000),'3: time out → A steps');const ms=Date.now()-t0;ok(ms>=12000,'3: time out came after cap + length',ms);
-  await until(B,()=>!!COOPW.pendBuoi,null,8000);const b1=await K(B);ok(b1.k===k0&&b1.pb&&b1.mg,'3: B still in the mini game, her step waits (pendBuoi)',b1);
+  const eL=await B.p.evaluate(()=>!!(COOPW.eW&&COOPW.eW()));/* thin E (level 5): no pendBuoi; the host owes her step (E.owe) */
+  await until(B,eL=>eL?COOPW.tm.roomKey()!==COOPW.tm.myKey():!!COOPW.pendBuoi,eL,8000);const b1=await K(B);ok(b1.k===k0&&(eL||b1.pb)&&b1.mg,'3: B still in the mini game, her step waits (pendBuoi; level 5: the host owes it)',b1);
   await B.p.evaluate(()=>{S.mg=null;render()});
   ok(await until(B,k=>COOPW.tm.myKey()!==k,k0,10000),'3: mini game over → B steps',await B.p.evaluate(()=>({k:COOPW.tm.myKey(),S:S.buoi,used,pend:COOPW.pend,sent:COOPW.sent,tr:(COOPW.tr||[]).slice(-25)})));
   await sleep(1500);const a=await K(A),bb=await K(B);ok(a.k===bb.k&&+bb.k.split(':')[1]===+k0.split(':')[1]+1,'3: B stepped exactly once',[k0,a.k,bb.k])}}

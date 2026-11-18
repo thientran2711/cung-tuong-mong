@@ -37,7 +37,9 @@ const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"
 const LAST=()=>typeof B4L==="number"?B4L:2;
 const wkN=()=>COOP.state.week||0;
 const live=()=>CW.on&&typeof S!=="undefined"&&!!S;
-function roomKey(){const w=wkN();const b=(CW.rweek===w&&typeof CW.rbuoi==="number")?CW.rbuoi:((typeof S!=="undefined"&&S&&S.buoi)||0);return w+":"+b}
+/* thin E (level 5): no server `buoi` (no bend): the room's buổi is the host's own (host) / the host's in the view (guest) */
+function eRoomB(){try{if(!(CW.eW&&CW.eW()))return null;if(host())return (S&&S.buoi)||0;const V=CW.thin&&CW.thin.view;return V&&V.o&&V.o.w===wkN()&&typeof V.o.buoi==="number"?V.o.buoi:null}catch(e){return null}}
+function roomKey(){const w=wkN();const eb=eRoomB();const b=eb!=null?eb:(CW.rweek===w&&typeof CW.rbuoi==="number")?CW.rbuoi:((typeof S!=="undefined"&&S&&S.buoi)||0);return w+":"+b}
 function myKey(){return wkN()+":"+((typeof S!=="undefined"&&S&&S.buoi)||0)}
 const frozenRoom=()=>!CW.on||!CW.base||(CW.isFrozen?CW.isFrozen():!!COOP.frozen);
 function say(mode,o){try{COOP.send(Object.assign({t:"act",k:"ctm-tm",mode},o||{}))}catch(e){}}
@@ -58,7 +60,7 @@ function lenPick(){try{const n=+localStorage.getItem(LENK);return TB().lens.incl
 function lenMs(){const n=lenPick();return n?n*60000:TB().buoiMs}
 /* choosing a thân phận (first life / rebirth: Luân hồi), a death screen, the title: the clock stands still, no pause budget spent */
 function myLife(){if(!CW.on)return false;if(typeof S==="undefined"||!S||S.dead||CW.inLife)return true;const T=$("title");return !!(T&&!T.hidden)||!!document.getElementById("kroul")}
-function myRd(){if(!live()||S.dead)return false;if(myKey()!==roomKey())return false;return !!(CW.bend||CW.pend||CW.sent===wkN()||(CW.nReady&&CW.nReady()))}
+function myRd(){if(!live()||S.dead)return false;if(myKey()!==roomKey())return false;return !!(CW.bend||CW.pend||CW.sent===wkN()||(CW.nReady&&CW.nReady())||(CW.eAsked&&CW.eAsked()))}
 const ST={key:"",pz:false,rd:false,lf:false,bz:false,kh:0,at:0};
 const FS={key:"",pz:false,rd:false,lf:false,bz:false,kh:0};
 /* busy (owner 16/11 friend chip "! Đang bận"): a dialog / event / mini game is open on her screen — the friend only ever sees "đang bận" */
@@ -67,6 +69,7 @@ const myKh=()=>{try{return Math.max(0,4-(+used||0))}catch(e){return 0}};
 let bended={a:false,b:false},bkeyB="";
 function sendSt(force){const k=roomKey(),pz=myPz(),rd=myRd(),lf=myLife(),bz=myBz(),kh=myKh(),t=pnow();if(!force&&ST.key===k&&ST.pz===pz&&ST.rd===rd&&ST.lf===lf&&ST.bz===bz&&ST.kh===kh&&t-ST.at<10000)return;
  ST.key=k;ST.pz=pz;ST.rd=rd;ST.lf=lf;ST.bz=bz;ST.kh=kh;ST.at=t;say("st",{key:k,pz,rd,lf,bz,kh})}
+CW.frPz=()=>!!FS.pz;/* thin E: the host does not step her buổi while she is in a mini game (her step waits, as pendBuoi did) */
 function frReady(){const k=roomKey(),o=other();if(bkeyB===k&&bended[o])return true;if(FS.key===k&&FS.rd)return true;
  const e=COOP.state.ended||{};const b=+k.split(":")[1];return b>=LAST()&&!!e[o]}
 /* ---------- the clock: host ---------- */

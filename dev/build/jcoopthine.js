@@ -25,7 +25,7 @@ const CW=window.COOPW;if(!CW||!CW.thin||!CW.X||typeof COOP!=="object")return;
 const TH=CW.thin,X=CW.X,J=X.J,D=TH.D,LV=5;
 const host=()=>CW.seat==="a",on=()=>TH.on(LV);
 const LAST=()=>typeof B4L==="number"?B4L:2;
-const E=TH.E={on,stat:{rd:0,erd:0,ops:0,big:0,step:0,her:0,herSkip:0,forced:0,wrW:0,wrR:0,addDrop:0,rmBack:0,ridBack:0,curtain:0,go:0,cyb:0,tn:0,wwEnd:0,night:0},rd:{},hr:"",forced:"",mine:"",log:[]};
+const E=TH.E={on,stat:{rd:0,erd:0,ops:0,big:0,step:0,her:0,herSkip:0,forced:0,wrW:0,wrR:0,addDrop:0,rmBack:0,ridBack:0,curtain:0,go:0,cyb:0,tn:0,wwEnd:0,night:0,owe:0},rd:{},hr:"",forced:"",mine:"",log:[]};
 const lg=x=>{E.log.push(x);if(E.log.length>80)E.log.shift()};
 const bk=()=>(COOP.state.week||0)+":"+((S&&S.buoi)||0);
 const wkx=()=>typeof wk==="function"?wk():0;
@@ -59,12 +59,17 @@ function gView(V){if(!on()||host()||!S||!V||!V.o)return;const k=bk();
  if(e&&e.go===wkx()&&CW.ngoW!==e.go&&(S.buoi||0)>=LAST()){CW.ngoW=e.go;E.stat.go++;lg(["go",e.go]);try{CW.nCheck()}catch(x){console.error(x)}}
  try{CW.lockNext()}catch(x){}}
 COOP.on("thinview",V=>{try{gView(V)}catch(e){console.error("thin E view",e)}});
+if(typeof render==="function"){const f=render;render=function(){const r=f.apply(this,arguments);try{if(on()&&!host()&&S&&!S.dead&&!S.mg&&!Q.length){const V=TH.view;
+  if(V&&V.o&&V.o.w===(COOP.state.week||0)&&typeof V.o.buoi==="number"&&V.o.buoi>(S.buoi||0)&&E.mine!==bk())gReady()}}catch(e){}return r}}
 COOP.on("week",()=>{E.mine="";seen="";E.rd={};E.hr="";E.forced=""});
 
 /* ---------- HOST ---------- */
 /* her ops onto her stored person (in her context: runDo); the part-D patch then starts after them (they are hers, never echoed back) */
 TH.onDo("erd",a=>{a=a||{};const n=TH.pApply(S,Array.isArray(a.ops)?a.ops:[]);try{D.rebase()}catch(e){}E.stat.erd++;return {n}});
-TH.onDo("ready",a=>{a=a||{};const seat=CW.ctx;E.rd[seat]={w:a.w|0,b:a.b|0,at:Date.now()};lg(["her-ready",seat,a.w,a.b]);
+TH.onDo("ready",a=>{a=a||{};const seat=CW.ctx;
+ /* behind the host (her step was owed while she played a mini game): catch her up now, from the top of the event loop */
+ if(on()&&E.owe&&(a.w|0)===(COOP.state.week||0)&&TH.outerS&&(a.b|0)<((TH.outerS.buoi)||0)&&!busy){const Wh=E.owe;E.owe=null;busy=true;lg(["catch-up",a.b]);
+  setTimeout(()=>{try{herStep(Wh)}finally{busy=false;try{TH.flush()}catch(e){}try{CW.lockNext()}catch(e){}}},0);return {ok:1,up:1}}E.rd[seat]={w:a.w|0,b:a.b|0,at:Date.now()};lg(["her-ready",seat,a.w,a.b]);
  if((a.b|0)>=LAST()&&(a.w|0)===(COOP.state.week||0))CW.nfr=a.w|0;
  setTimeout(()=>{try{check();if((a.b|0)>=LAST())CW.nCheck()}catch(e){console.error(e)}},0);return {ok:1}});
 function hReady(){if(!S||S.dead||Q.length||S.mg)return;const b=S.buoi||0;if(b>=LAST()){try{CW.nightReady()}catch(e){console.error(e)}return}
@@ -81,6 +86,9 @@ function check(){if(!on()||!host()||busy||!S||S.dead)return;const w=COOP.state.w
  CW.allow=true;try{nextBuoi()}catch(e){console.error("thin E own step",e)}finally{CW.allow=false}
  E.hr="";E.forced="";delete E.rd[other()];
  const Wh=whereOut();
+ /* her clock ran out while she is in a mini game (not ready): her step waits until she is out of it (her ready then catches her up: owe) */
+ if(!r&&CW.frPz&&CW.frPz()){E.owe=Wh;E.stat.owe++;lg(["owe",k]);busy=false;try{TH.flush()}catch(e){}try{CW.lockNext()}catch(e){}return}
+ E.owe=null;
  setTimeout(()=>{try{herStep(Wh)}finally{busy=false;try{TH.flush()}catch(e){}try{CW.lockNext()}catch(e){}}},0)}
 /* the host's NPC places, from his perspective → room form (his pid for "me"); her side maps them back in her context */
 function whereOut(){if(!S||!S.where)return null;const W=X.mapMe(J(S.where),true,901);delete W["902"];return {W,menW:S.menW?J(S.menW):null}}
