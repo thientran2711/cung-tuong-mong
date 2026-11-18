@@ -130,3 +130,5 @@ receiver-choice audit (ORDER MAIN ~21:16Z, OD 21:15Z/21:30Z; shares C-AG role-pa
 | t1-t6 B a18 c21-c24 (W100) (sonnet painter; brief root30-mass) | handover reports/root30-* | Foreman C ROOT-30 | session_01PEhRbtfZ35UPRApi8HqZ9h | RUNNING | 18/11 20:52Z |
 | t1-t6 B a18 c25-c28 (W101) (sonnet painter; brief root30-mass) | handover reports/root30-* | Foreman C ROOT-30 | session_01PEhRbwV1c2vgHjysY1gx2Q | RUNNING | 18/11 20:52Z |
 | t1-t6 B a18 c13-c16 (W98b, successor of W98 archived; c13 t1 done) | handover reports/root30-* | Foreman C ROOT-30 | session_01PEhRbuK7jnKixb2YKTD1AD | RUNNING | 18/11 20:57Z |
+| a65 t7/t8 c18-c24 (W93b, successor of W93 archived; c17 done) | handover reports/root30-* | Foreman C ROOT-30 | session_01PEhRbwkvpUCLkUR7Px8uzB | RUNNING | 18/11 20:58Z |
+| states-sample (W102; Nữ đế/Thái hậu/khuê các/nhà nghèo/NC+BD princess SAMPLES, owner 21:00Z; W90 a51d DONE + archived) | handover reports/states-sample | Foreman C ROOT-30 | session_01PEhRbwi7fEXZQzQ53o2SJP | RUNNING | 18/11 21:02Z |
