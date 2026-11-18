@@ -60,3 +60,7 @@ t8-v0-reprompt-sample (+A/B fabric) | CDN _review only | W72 session_011xDdVNW3u
 owner-page-90 (90 nhân vật nữ states) | CDN _review + artifact WFjg87H9M2Ch5kebxT8BmJ | W73 (see STATUS) | RUNNING | 2026-11-18T17:59Z (Foreman C ROOT-29)
 ge-writers-w1 fix round 2 | review/ge-writers-w1 | E11a2 session_01DgYSWoSMJso8hGSAFMN9W6 (E11a archived) (reviewer E11r-w1 session_01DgYSWmTELUPTfw8Lqf2S4Y) | RUNNING | 2026-11-18T17:55Z (Foreman E ROOT #5 session_01DgYSWkmGWJMooE69PH8bHk)
 balance-final #2 (opus; balance chain + AG arms) | review/balance-final | session_01964izFstyuseJzaqthXyhP (#1 session_01964izCP81mLjwwymWk5t2Q rolled over 17:54Z) | RUNNING | 18/11 17:54Z | owner D #2
+| FOREMAN C-AG #14 (opus ROOT; successor of #13) | handover FOREMAN_C_STATUS | MAIN ROOT-53 | session_01Rc5AsKgBX7W8FiEwCJjgBR | RUNNING | 18/11 18:00Z |
+| opt-card-short #3 (sonnet SMALL UI; OD L1877 as corrected 16:05Z/16:15Z, 09:30Z «!») | review/opt-card-short | MAIN ROOT-53 | session_01Rc5AsHxLKCb415DxYbpiHP | RUNNING | 18/11 18:00Z |
+| fullbody-frame-s4 (sonnet SMALL UI; 16:10Z picture size + phone Luân hồi revert) | review/fullbody-frame-s3 | MAIN ROOT-53 | session_01Rc5AsJUiBBwT9LH4J89i4E | RUNNING | 18/11 18:00Z |
+| land-m (sonnet LANDER: shown-odds-r2-rv cf1fc746 + monthly-ration-r6 287a0b79) | review/land-m | MAIN ROOT-53 | session_01Rc5AsJwMJVJdiZUsCPNM9T | RUNNING | 18/11 18:00Z |
