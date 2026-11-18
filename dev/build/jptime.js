@@ -207,10 +207,10 @@ function ptRecvGo(k,kind,run){const N=ptRow(kind).n;const t0=ptNow();let ok=true
 function ptRecvRow(kind,o,gain,loss){return[o!=null&&o<100?word(o):"",`tốn: ${ptRow(kind).n} khắc (cả đường đi)`,gain?"thành: "+gain:"",loss?"hỏng: "+loss:""].filter(Boolean).join(" · ")}
 /* (a) her master orders a dò la (j42 srvOrder k "spy" → PEND.cnvOrd): the mirror of the consort's "Sai đi dò la" (jwhy spyRoll, j78 evN, jwhy loyalSpyMaidRun, j78 oán) */
 (function(){try{const c0=PEND.cnvOrd;if(!c0)return;PEND.cnvOrd=function(pp){if(!ptOn()||!pp||pp.k!=="spy")return c0.apply(this,arguments);const m=srvM(),t=RV(pp.t);if(!isSrv()||!m||!t||!t.alive||t.out)return null;
-  const o=spyRoll(m,t,knMeAg());const L=BAL.eff.jwhy.loyalSpyMaidRun;
-  return{t:`<p>${m.name} gọi ngươi vào: “Ngươi đi dò la cung ${t.name}, xem nàng gặp ai, nói gì.”</p>`,who:pv(m),o:[{n:"Đi",fx:{},x:ptRecvRow("spy",o,`${m.name} nắm ${balSg(BAL.eff.j78.evN)} chứng cứ của ${t.name} nếu nàng từng làm điều sai`,`Chủ tin -${balAb(L)} (hoảng sợ), ${t.name} đoán ra: oán ${m.name} ${balSg(BAL.eff.j78.j78maidFail)}`),
-   go:()=>{ptRecvGo(palaceOf(t),"spy",()=>{if(roll(o)){const n=evA(m,t,BAL.eff.j78.evN);srvMerit(BAL.eff.j42.srvDoOrder_2);log(n?`Ngươi dò la được chuyện của ${t.name}, về bẩm ${m.name}: chủ nắm thêm ${balAb(BAL.eff.j78.evN)} chứng cứ.`:`Ngươi dò la ${t.name}: không tìm ra điều gì sai trái.`)}
-    else{apply({tin:-L});oanAdd(t,m,BAL.eff.j78.j78maidFail);log(`<span class="r">Ngươi nấp nghe ngoài cửa sổ cung ${t.name} thì bị bắt gặp, hoảng sợ chạy về.</span> Chủ tin -${balAb(L)}.`)}})}}]}};
+  const o=spyRoll(m,t,knMeAg());const L=BAL.eff.jwhy.loyalSpyMaidRun,F=BAL.eff.j78.j78maidFail,E=BAL.eff.j78.evN;
+  return{t:`<p>${m.name} gọi ngươi vào: “Ngươi đi dò la cung ${t.name}, xem nàng gặp ai, nói gì.”</p>`,who:pv(m),o:[{n:"Đi",fx:{},x:ptRecvRow("spy",o,`${m.name} nắm ${balSg(E)} chứng cứ của ${t.name} nếu nàng từng làm điều sai`,`Chủ tin -${balAb(L)} (hoảng sợ), ${t.name} đoán ra: oán ${m.name} ${balSg(F)}`),
+   go:()=>{ptRecvGo(palaceOf(t),"spy",()=>{if(roll(o)){const n=evA(m,t,E);srvMerit(BAL.eff.j42.srvDoOrder_2);log(n?`Ngươi dò la được chuyện của ${t.name}, về bẩm ${m.name}: chủ nắm thêm ${balAb(E)} chứng cứ.`:`Ngươi dò la ${t.name}: không tìm ra điều gì sai trái.`)}
+    else{apply({tin:-L});oanAdd(t,m,F);log(`<span class="r">Ngươi nấp nghe ngoài cửa sổ cung ${t.name} thì bị bắt gặp, hoảng sợ chạy về.</span> Chủ tin -${balAb(L)}.`)}})}}]}};
  }catch(e){ptErr("cnvOrd wire",e)}})();
 /* (b) «Việc chủ sai» (j42 srvErrPick: lấy thuốc, hái hoa, mang canh, mang kinh, mang quà): the order frame pops up when the master gives it */
 function ptErrKind(er){return er&&er.v!=null?"gift":"errand"}

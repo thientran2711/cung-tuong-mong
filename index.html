@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"a5013222+","t":"2026-11-18T18:03Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)","b":"eefb4215d015","h":[{"s":"08774c0e+","t":"2026-11-18T17:38Z","c":"ag-stf2 (test only): bribe histogram picks a servant whose lòng moves her bribe odds. Root of the 'disloyal one takes more' red (npc ~3/20,…"},{"s":"0351e140","t":"2026-11-18T16:48Z","c":"shop-panel: «Để ta xem» outside option, 3-column Mua/Bán grid, smallest picture strip, test"},{"s":"ebf25660+","t":"2026-11-18T15:29Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…"},{"s":"9f9c6c2b+","t":"2026-11-18T14:26Z","c":"shown-odds-one-path r1: plant on the spot is done in person (actCtx x.here, no sent-servant pen); Vì sao names spy knowledge (whyKnow); tes…"},{"s":"aa997f3c+","t":"2026-11-18T13:46Z","c":"look-fx r13: index.html / sw.js rebuilt from merged sources"},{"s":"4475ea24+","t":"2026-11-18T12:33Z","c":"grand-endings-engine: site rebuilt (index.html / sw.js / assets.json) after fix 4 + main merge"},{"s":"68cbbb28+","t":"2026-11-18T12:00Z","c":"review life-preload-fu r2v: no half-drawn / empty figure while the HD twin comes (whole group: every fig-* img)"},{"s":"a8036600+","t":"2026-11-18T12:06Z","c":"Rebuild index.html/sw.js after merging origin/main"},{"s":"3f45eda9+","t":"2026-11-18T11:52Z","c":"steal-minigame FIX 1: PEND flag (chooseM renders before the game opens: the stale-'mg' reset no longer cancels a real async game); KIT.md §…"},{"s":"19a23498+","t":"2026-11-18T11:03Z","c":"review poison-road r2 (ONE CORE OD:L1267): the weak-Sức odds rule had two sources — j9 odA typed suc\u003c30 → −15 while the poison card 'Vì sao…"}]};
+window.CTM_BI={"s":"a3c93b6a+","t":"2026-11-18T20:08Z","c":"parallel time: harm by sent servant, plant, gift by hand, illicit maid buy, NVP clothes; receiver order frames «Đi» (Việc chủ sai, master's…","b":"faadea2d19c9","h":[{"s":"a5013222+","t":"2026-11-18T18:03Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)"},{"s":"08774c0e+","t":"2026-11-18T17:38Z","c":"ag-stf2 (test only): bribe histogram picks a servant whose lòng moves her bribe odds. Root of the 'disloyal one takes more' red (npc ~3/20,…"},{"s":"0351e140","t":"2026-11-18T16:48Z","c":"shop-panel: «Để ta xem» outside option, 3-column Mua/Bán grid, smallest picture strip, test"},{"s":"ebf25660+","t":"2026-11-18T15:29Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…"},{"s":"9f9c6c2b+","t":"2026-11-18T14:26Z","c":"shown-odds-one-path r1: plant on the spot is done in person (actCtx x.here, no sent-servant pen); Vì sao names spy knowledge (whyKnow); tes…"},{"s":"aa997f3c+","t":"2026-11-18T13:46Z","c":"look-fx r13: index.html / sw.js rebuilt from merged sources"},{"s":"4475ea24+","t":"2026-11-18T12:33Z","c":"grand-endings-engine: site rebuilt (index.html / sw.js / assets.json) after fix 4 + main merge"},{"s":"68cbbb28+","t":"2026-11-18T12:00Z","c":"review life-preload-fu r2v: no half-drawn / empty figure while the HD twin comes (whole group: every fig-* img)"},{"s":"a8036600+","t":"2026-11-18T12:06Z","c":"Rebuild index.html/sw.js after merging origin/main"},{"s":"3f45eda9+","t":"2026-11-18T11:52Z","c":"steal-minigame FIX 1: PEND flag (chooseM renders before the game opens: the stale-'mg' reset no longer cancels a real async game); KIT.md §…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -1371,8 +1371,10 @@ function talkOpts(p){const E=S.emp,K=E.known,L=E.likes,b=bestArt(),v=p.ref;
    {n:"Tâm sự",o:100,w:{...BAL.ag.cx2.maidTalk.w}},
    {n:"Sai đi dò la",o:od(cx2O(S,"maidSpy")),w:{},l:{...BAL.ag.cx2.maidSpy.l},x:`${evSg(BAL.ag.ev.one)} về một phi tần từng làm điều sai`,go:()=>{const x=evGuilty(S,liveRivals(true));if(x&&evA(S,x,BAL.ag.ev.one))log(`${S.maid.name} nghe lén được chuyện của ${x.name}: ${evSg(BAL.ag.ev.one)}.`);else{const y=pick(liveRivals(true));log(y?`${S.maid.name} nghe lén ${y.name}: không có gì sai trái, chỉ biết ${harmTxt(y)}.`:`${S.maid.name} không nghe được gì.`)}}}];
  return []}
+/* khắc of a talk option (ONE rule for its card line and its pay): a parallel-time order (a.pk, jptime BAL.ptime) costs only the order */
+function talkK(a){try{if(a&&a.pk&&typeof ptOn==="function"&&ptOn())return ptRow(a.pk).o}catch(e){}return a&&a.act?BAL.time.cost.talkAct:BAL.time.cost.talk}
 function talk(oi){if(popIdx==null||!S.visit||S.visit.talked===true||S.dead||Q.length)return;S.visit.tk=S.visit.tk||{};if(S.visit.tk[popIdx])return;const p=curPeople()[popIdx];if(!p)return;const a=talkOpts(p)[oi];if(!a||!canPay(a))return;
- const tcost=a.act?BAL.time.cost.talkAct:BAL.time.cost.talk;if(!can(tcost))return;spend(tcost);
+ const tcost=talkK(a);if(!can(tcost))return;spend(tcost);
  if(a.run){S.visit.tk[popIdx]=1;if(oddsCapped(a)&&!roll(BAL.odds.hi)){popMsg=`${a.n}: ${oddsSoft(a.n,a.c)}`;render();return}/* ODDS CAP soft fail */if(a.c)apply(a.c);popMsg=fzRun(a.o,typeof a.k==="string"?a.k:null,()=>a.run())||"";/* a.o was read before the spend: the act rolls the odds on the card (j9 fzRun) */if(popMsg)log(`${a.n}: ${popMsg}`);render();return}
  if(a.open){a.open();render();return}
  S.visit.tk[popIdx]=1;const s0=S.logSeq||0;const ok=runOpt(a);
@@ -2409,9 +2411,10 @@ function artW2(p,k){const l=p.arts[k];return l*(((["cam","ky","thi","hoa"].inclu
 
 /* ================= PLAYER-SIDE UI for acts and items ================= */
 function wk2(){return 0}
-function doAct(i,k){const v=rivals[i],a=ACT[k];if(!v||!a||!can(BAL.time.cost.harm)||S.dead||Q.length||!v.alive||v.out||!a.ok(S,v))return;
+function doAct(i,k){const v=rivals[i],a=ACT[k];const hk=typeof harmK==="function"?harmK(v,k):BAL.time.cost.harm;if(!v||!a||!can(hk)||S.dead||Q.length||!v.alive||v.out||!a.ok(S,v))return;
  if(k==="plant"||k==="gift"){pushDil(mkP(k==="plant"?"plantpick":"giftpick",{v:v.id}),k==="plant"?"Cài đồ vào rương":"Tặng quà");render();return}
- const fz=ACTFZ&&ACTFZ.k===k?ACTFZ.o:actOdds(S,v,k);/* the odds she saw, read before the spend (j9 fzRun); from the card game (jsgame sgRun) = its result odds */spend(BAL.time.cost.harm);const r=fzRun(fz,k,()=>runAct(S,v,k));if(r)log(r);render()}
+ const fz=ACTFZ&&ACTFZ.k===k?ACTFZ.o:actOdds(S,v,k);/* the odds she saw, read before the spend (j9 fzRun); from the card game (jsgame sgRun) = its result odds */
+ /* parallel time (jptime): a deed done by a SENT servant — she pays the order, the servant goes, the deed lands at the due khắc */if(typeof ptHarmSend==="function"&&ptHarmSend(v,k,fz)){spend(hk);render();return}spend(BAL.time.cost.harm);const r=fzRun(fz,k,()=>runAct(S,v,k));if(r)log(r);render()}
 function empAct(i,k){const v=rivals[i];if(!v||S.rank<7||!can(2)||S.dead||Q.length)return;let r="";if(k==="cutpay"){spend(2);v.cutPay=1;v.cutBy="Hoàng hậu";relAdd(S,v,BAL.eff.j8.empAct);log(`Ngươi sai Nội vụ phủ khất bổng lộc của ${v.name} tháng tới.`);render();return}
  if(k==="judge"){if(evG(S,v)<2)return;r=judge(S,v)}
  else if(k==="conf"){const j=v.inv.findIndex(e=>(IT[e.k]||{}).kd==="Trang sức"&&!e.h);if(j<0)return;if(evG(S,v)<1&&!vpItems(v).length){apply(BAL.tw.confNo);log(`Tịch thu vô cớ: Danh ${BAL.tw.confNo.danh}, Thái hậu ${BAL.tw.confNo.th}.`)}const n=iname(v.inv[j]);v.inv.splice(j,1);relAdd(S,v,-BAL.tw.g.conf[0]);v.hh-=BAL.tw.g.conf[1];r=`Ngươi tịch thu ${n} của ${v.name}.`}
@@ -4173,8 +4176,8 @@ function shortN(nm){const a=String(nm).split(" ");return a.length>2?a.slice(-2).
 const RVGRP=[["Giao thiệp",["ally","gift"]],["Hại nhỏ",["rumor","spy","trip"]],["Hại nặng",["frame","plant","block","bribe","accuse","vp","ksab","takeaway","steal","road"]],["Sát hại",["poison","kpoison","pond","pushp","musk","catswap","kframe"]]];
 function rvGroups(v,i){const G=[];
  const b=k=>{const a=ACT[k];if(!a||(a.kid&&!a.ok(S,v)))return"";const ok=a.ok(S,v),o=a.o?actOdds(S,v,k):null;
-  const why=!v.alive?"đã mất":v.out?"ở lãnh cung":whyTime(2)||(S.confined&&CRIME.includes(k)?"đang cấm túc: cung bị canh giữ":"")||(!ok?(a.x||"chưa đủ điều kiện"):"");
-  const deadly=/ban chết/.test(a.x||"");const ow=o!=null?word(oddsCl(o)):"";const sm=actLineRaw(k,ow+(o!=null?lotTag(ACTDOM[k],o-lotB(S,ACTDOM[k])):""),fmt(a.c))+(deadly?" · bị lộ: ban chết":"")+(a.x&&!AOUT[k]?" · "+a.x:"")+(ducWarnTxt(a.c)?" · "+ducWarnTxt(a.c):"");
+  const hk=typeof harmK==="function"?harmK(v,k):2;const why=!v.alive?"đã mất":v.out?"ở lãnh cung":whyTime(hk)||(S.confined&&CRIME.includes(k)?"đang cấm túc: cung bị canh giữ":"")||(!ok?(a.x||"chưa đủ điều kiện"):"");
+  const deadly=/ban chết/.test(a.x||"");const ow=o!=null?word(oddsCl(o)):"";const sm=actLineRaw(k,ow+(o!=null?lotTag(ACTDOM[k],o-lotB(S,ACTDOM[k])):""),fmt(a.c))+(deadly?" · bị lộ: ban chết":"")+(a.x&&!AOUT[k]?" · "+a.x:"")+(ducWarnTxt(a.c)?" · "+ducWarnTxt(a.c):"")+(typeof ptHarmX==="function"?ptHarmX(v,k):"");
   return pbtn(`data-r="${i}" data-a="${k}"`,(k==="poison"||k==="kpoison"?ic("doc",14):"")+a.n,sm,why)};
  if(!sameHouse(S,v))for(const [hd,ks] of RVGRP)G.push([hd,ks.map(b)]);
  if(S.rank>=7){const t=whyTime(2);G.push(["Quyền Hoàng hậu",[pbtn(`data-e="${i}" data-k="judge"`,"Xử tội","theo chứng cứ",t||(evG(S,v)<BAL.ag.ev.judge?`cần ${BAL.ag.ev.judge} chứng cứ`:"")),pbtn(`data-e="${i}" data-k="conf"`,evG(S,v)>=1||vpItems(v).length?"Tịch thu trang sức (có cớ)":"Tịch thu vô cớ",evG(S,v)>=1||vpItems(v).length?`thành: trang sức của nàng bị thu · kèm: ${typeof pvRel==="function"?pvRel(v,-BAL.tw.g.conf[0]):"thiện cảm -"+BAL.tw.g.conf[0]}`:`thành: trang sức của nàng bị thu · tốn: Danh ${BAL.tw.confNo.danh}, Thái hậu ${BAL.tw.confNo.th} (xử bất công) · kèm: ${typeof pvRel==="function"?pvRel(v,-BAL.tw.g.conf[0]):"thiện cảm -"+BAL.tw.g.conf[0]}`,t),pbtn(`data-e="${i}" data-k="reward"`,"Ban thưởng",`tốn: Bạc ${BAL.tw.reward.bac} · thành: ${typeof pvRel==="function"?pvRel(v,BAL.tw.g.reward[0]):"thiện cảm +"+BAL.tw.g.reward[0]}, Danh nàng +${BAL.tw.g.reward[2]}`,t||(S.bac<-BAL.tw.reward.bac?`cần ${-BAL.tw.reward.bac} bạc`:"")),v.confined?pbtn(`data-e="${i}" data-k="pardon"`,"Ân xá",`thành: nàng hết cấm túc, ${typeof pvRel==="function"?pvRel(v,30):"thiện cảm +30"}, Đức +2`,t):"",pbtn(`data-e="${i}" data-k="cutpay"`,"Khất bổng lộc",`thành: bổng tháng tới của nàng bớt 3 phần 10 · kèm: ${typeof pvRel==="function"?pvRel(v,-15):"thiện cảm -15"}`,t||(v.cutPay?"đã khất tháng này":""))]])}
@@ -4225,7 +4228,7 @@ function popCard(p,i){const opts=talkOpts(p),done=S.visit&&(S.visit.talked===tru
  else if(p.kind==="emp"){rank="Hoàng thượng";lines=[tuoi(S.emp.age),`Tâm trạng: <b>${MOODS[S.emp.mood][0]}</b>`,`Ngài sủng ngươi <b>${S.sung}</b>`]}
  else if(p.kind==="th"){rank="Thái hậu";lines=[tuoi(S.thAge),`Thái hậu → ta: thiện cảm <b>${S.th}</b>`]}
  else{const a=String(p.info||"").split(" · ");rank=a.shift()||"";lines=a;const ag=p.kind==="maid"?S.maid.age:p.kind==="ty"?(S.court&&S.court.ty||{}).age:p.kind==="ksp"?(S.court&&S.court.ksp||{}).age:p.kind==="peddler"?(S.court&&S.court.ped||{}).age:p.kind==="kid"&&p.ref?p.ref.age:p.kind==="fallen"&&v?v.age:0;if(ag&&p.kind!=="kid")lines.unshift(tuoi(ag))}
- const B=opts.map((a,j)=>{const o=a.o==null?100:a.o;const tc=a.act?2:1;const poor=a.c&&a.c.bac&&S.bac+a.c.bac<0;
+ const B=opts.map((a,j)=>{const o=a.o==null?100:a.o;const tc=talkK(a);const poor=a.c&&a.c.bac&&S.bac+a.c.bac<0;
   const why=a.lock?a.t:poor?"không đủ bạc":whyTime(tc);const sm=optLine(a);
   return pbtn(`class="opt" data-o="${j}"`,a.n,sm,why)});
  /* person-dialog-restore (owner 18/11 06:10Z, OD:L1852): the acts are split into GROUP TABS (the Hành sự categories, KIT_CAT via kitActCat; the same
@@ -4598,12 +4601,14 @@ function seeBtn(v){if(!v||v===S||!v.alive||v.out||together(S,v)||!locKnown(v))re
  return pbtn(`data-see="${v.id}" class="seeb"`,`Đến gặp ${v.name.split(" ").pop()}`,walkLate(k,tc)?`tốn: ${tc} khắc · thành: đến nơi buổi sau, có khi nàng đã đi chỗ khác`:`tốn: ${tc} khắc · thành: gặp mặt, mọi việc làm tại chỗ, dễ hơn sai người`,why)}
 document.addEventListener("click",e=>{const s=e.target.closest("[data-see]");if(s&&!s.disabled){e.preventDefault();e.stopPropagation();goSee(+s.dataset.see);return}const f=e.target.closest("[data-follow]");if(f){e.preventDefault();e.stopPropagation();goSee(+f.dataset.follow)}},true);
 /* finding someone: send her eyes (1 khắc), or invite her over */
-function scoutBtn(v){if(!v||!v.alive||v.out||locKnown(v)||together(S,v))return"";const o=od(BAL.odb.j21.odO+eyes(S)*8+S.tamco/10);return pbtn(`data-scout="${v.id}"`,"Sai tai mắt dò nơi ở",`${word(o)} · tốn: 1 khắc · thành: biết nàng ở đâu buổi này · hỏng: không dò ra`,whyTime(1))}
-function inviteBtn(v){/* previews: placeWhere (the invite is answered there, relAdd BAL.eff.j21.top) */if(!v||!v.alive||v.out||sameHouse(S,v))return"";const pend=S.invite&&S.invite.id===v.id;const o=inviteO(S,v);return pbtn(`data-invite="${v.id}"`,"Mời đến cung ta",`${word(o)} · tốn: 1 khắc · thành: buổi sau nàng sang cung ngươi · hỏng: nàng từ chối, thiện cảm ${balSg(BAL.eff.j21.top)}`,pend?"đã mời, chờ buổi sau":whyTime(1)||(aff(v,S)<BAL.invite.hate?"nàng ghét ngươi, sẽ không đến":""))}
-function scout(id){const v=rivals.find(x=>x.id===id);if(!v||!can(1)||S.dead||Q.length)return;const o=od(BAL.odb.j21.odO+eyes(S)*8+S.tamco/10);/* odds read before the spend (shown-odds r2) */spend(1);if(roll(o)){seeLoc(v);log(`Tai mắt báo: ${v.name} đang ở ${placeName(whereOf(v))} buổi này.`)}else log(`Tai mắt không dò ra ${v.name} ở đâu.`);render()}
+function scoutBtn(v){if(!v||!v.alive||v.out||locKnown(v)||together(S,v))return"";const o=od(BAL.odb.j21.odO+eyes(S)*8+S.tamco/10);const pk=typeof ptOn==="function"&&ptOn();const k=pk?ptRow("scout").o:1;const busy=pk&&!ptRunner()?ptNoRunner():"";return pbtn(`data-scout="${v.id}"`,"Sai tai mắt dò nơi ở",`${word(o)} · tốn: ${k} khắc${pk?", "+ptWaitTxt("scout"):""} · thành: biết nàng ở đâu · hỏng: không dò ra`,busy||whyTime(k))}
+function inviteBtn(v){/* previews: placeWhere (the invite is answered there, relAdd BAL.eff.j21.top) */if(!v||!v.alive||v.out||sameHouse(S,v))return"";const pend=S.invite&&S.invite.id===v.id;const o=inviteO(S,v);const pk=typeof ptOn==="function"&&ptOn();const k=pk?ptRow("invite").o:1;const pend2=pk&&ptInvPend(v.id);const busy=pk&&!pend2&&!ptRunner()?ptNoRunner():"";return pbtn(`data-invite="${v.id}"`,"Mời đến cung ta",`${word(o)} · tốn: ${k} khắc${pk?", "+ptWaitTxt("invite"):""} · thành: ${pk?"nàng sang cung ngươi":"buổi sau nàng sang cung ngươi"} · hỏng: nàng từ chối, thiện cảm ${balSg(BAL.eff.j21.top)}`,pend2?"đã sai người đi mời, chờ tin":pend?"đã mời, chờ buổi sau":busy||whyTime(k)||(aff(v,S)<BAL.invite.hate?"nàng ghét ngươi, sẽ không đến":""))}
+function scout(id){const v=rivals.find(x=>x.id===id);const pk=typeof ptOn==="function"&&ptOn();const k=pk?ptRow("scout").o:1;if(!v||!can(k)||S.dead||Q.length)return;const o=od(BAL.odb.j21.odO+eyes(S)*8+S.tamco/10);/* odds read before the spend (shown-odds r2) */
+ /* parallel time (jptime): her runner goes; the answer comes at the due khắc */if(pk){const m=ptRunner();if(!m)return;const a=ptSend({who:ptPid(m),nm:m.name,kind:"scout",place:palaceOf(v),tgt:"v"+v.id,a:{v:v.id,o,sid:m.sid!=null?m.sid:null},lbl:`đi dò nơi ở ${v.name}`});spend(k);render();return}spend(1);if(roll(o)){seeLoc(v);log(`Tai mắt báo: ${v.name} đang ở ${placeName(whereOf(v))} buổi này.`)}else log(`Tai mắt không dò ra ${v.name} ở đâu.`);render()}
 /* ONE rule for every invitation (her button and an NPC host, AG-ALL-2e3 cx3:invite): the guest's odds of coming */
 function inviteO(h,g){const I=BAL.invite;return od(BAL.odb.j21.odO_2+aff(g,h)/I.affD+(rkOf(h)-rkOf(g))*I.rk)}
-function invite(id){const v=rivals.find(x=>x.id===id);if(!v||!can(1)||S.dead||Q.length)return;const o=inviteO(S,v);/* the odds on the button, read before the spend (shown-odds r2-rv) */spend(1);S.invite={id:v.id,o};log(`Ngươi sai người mời ${v.name} buổi sau sang cung.`);render()}
+function invite(id){const v=rivals.find(x=>x.id===id);const pk=typeof ptOn==="function"&&ptOn();const k=pk?ptRow("invite").o:1;if(!v||!can(k)||S.dead||Q.length)return;const o=inviteO(S,v);/* the odds on the button, read before the spend (shown-odds r2-rv) */
+ /* parallel time (jptime): the messenger walks to her palace; the answer and the guest come at the due khắc */if(pk){if(ptInvPend(v.id))return;const m=ptRunner();if(!m)return;ptSend({who:ptPid(m),nm:m.name,kind:"invite",place:palaceOf(v),tgt:"v"+v.id,a:{v:v.id,o,sid:m.sid!=null?m.sid:null},lbl:`đi mời ${v.name}`});spend(k);render();return}spend(1);S.invite={id:v.id,o};log(`Ngươi sai người mời ${v.name} buổi sau sang cung.`);render()}
 document.addEventListener("click",e=>{const s=e.target.closest("[data-scout]");if(s&&!s.disabled){e.stopPropagation();scout(+s.dataset.scout);return}const i=e.target.closest("[data-invite]");if(i&&!i.disabled){e.stopPropagation();invite(+i.dataset.invite)}},true);
 /* invitations land when the next buổi's places are drawn; rivals may invite her too */
 (function(){const pw=placeWhere;placeWhere=function(){pw.apply(this,arguments);try{if(S.invite){const v=rivals.find(x=>x.id===S.invite.id);const o=S.invite.o;S.invite=null;if(v&&v.alive&&!v.out&&!v.confined){if(roll(o)){S.where[v.id]="home";seeLoc(v,"home");log(`${v.name} nhận lời, sang cung ngươi buổi này.`)}else{relAdd(S,v,BAL.eff.j21.top);log(`${v.name} từ chối lời mời.`)}}}
@@ -4835,12 +4840,12 @@ const RISKRE=/(lộ:|mách lại|nắm thóp|có thể (mách|nắm|bị|lật)|
   if(a.n==="Khiêu khích"){a.risk=a.x;a.x=""}
   return a})}})();
 /* the talk line: cost in khắc, gains green, risks and failure red, needs as disabled reasons */
-optLine=function(a){const o=oddsOf(a),capd=oddsCapped(a);const rolled=o<100&&!a.lock;const tc=a.act?2:1;
+optLine=function(a){const o=oddsOf(a),capd=oddsCapped(a);const rolled=o<100&&!a.lock;const tc=talkK(a);
  if(a.k&&AOUT[a.k]){return actLineRaw(a.k,rolled?word(o):"",[`${tc} khắc`,fmt(a.c||{})].filter(Boolean).join(", "))}
- const xs=String(a.x||"").split(" · ").filter(Boolean);const gain=xs.filter(s=>!RISKRE.test(s)),risk=xs.filter(s=>RISKRE.test(s)).concat(a.risk?[a.risk]:[]);
- return kitParse([rolled?word(o):"",`tốn: ${tc} khắc${a.c&&fmt(a.c)?", "+fmt(a.c):""}`,[fmt(a.w||{}),...gain].filter(Boolean).length?"thành: "+[fmt(a.w||{}),...gain].filter(Boolean).join(", "):"",rolled?"hỏng: "+(capd||agSoft(o)?kitSoftW(a.c):payWinFail(a,fmt(a.l||{}))||(a.fail?"có hậu quả, xem kết quả":"không được gì")):"",risk.length?"hỏng: "+risk.join(", "):""].filter(Boolean).join(" · "))};
+ const xs0=String(a.x||"").split(" · ").filter(Boolean);const wt=xs0.filter(s=>/^chờ \d+ khắc$/.test(s)),xs=xs0.filter(s=>!wt.includes(s));const gain=xs.filter(s=>!RISKRE.test(s)),risk=xs.filter(s=>RISKRE.test(s)).concat(a.risk?[a.risk]:[]);
+ return kitParse([rolled?word(o):"",`tốn: ${tc} khắc${a.c&&fmt(a.c)?", "+fmt(a.c):""}${wt.length?", "+wt.join(", "):""}`,[fmt(a.w||{}),...gain].filter(Boolean).length?"thành: "+[fmt(a.w||{}),...gain].filter(Boolean).join(", "):"",rolled?"hỏng: "+(capd||agSoft(o)?kitSoftW(a.c):payWinFail(a,fmt(a.l||{}))||(a.fail?"có hậu quả, xem kết quả":"không được gì")):"",risk.length?"hỏng: "+risk.join(", "):""].filter(Boolean).join(" · "))};
 /* R-E: a gift or a planted item spends the time only when an item is chosen */
-(function(){const t1=talk;talk=function(oi){const p=S&&curPeople()[popIdx];const a=p&&talkOpts(p)[oi];if(a&&a.open){if(a.lock||S.dead||Q.length)return;const tc=a.act?2:1;if(!can(tc))return;S.payOnPick=tc;S.visit.tk=S.visit.tk||{};a.open();render();return}return t1.apply(this,arguments)}})();
+(function(){const t1=talk;talk=function(oi){const p=S&&curPeople()[popIdx];const a=p&&talkOpts(p)[oi];if(a&&a.open){if(a.lock||S.dead||Q.length)return;const tc=talkK(a);if(!can(tc))return;S.payOnPick=tc;S.visit.tk=S.visit.tk||{};a.open();render();return}return t1.apply(this,arguments)}})();
 ["giftpick","plantpick"].forEach(id=>{const b0=PEND[id];if(!b0)return;PEND[id]=function(){const d=b0.apply(this,arguments);if(d&&d.o)d.o=d.o.map(o=>/^Thôi/.test(o.n)?Object.assign({},o,{go:()=>{S.payOnPick=0;if(o.go)o.go()}}):Object.assign({},o,{go:()=>{if(S.payOnPick){spend(S.payOnPick);S.payOnPick=0;if(popIdx!=null&&S.visit){S.visit.tk=S.visit.tk||{};S.visit.tk[popIdx]=1}}if(o.go)o.go()}}));return d};});
 /* gifts list their gain per target and a face */
 (function(){const g0=PEND.giftpick;PEND.giftpick=function(p){const d=g0.apply(this,arguments);try{const e=S.inv[p&&p.ix!=null?p.ix:-1];if(d&&d.o)d.o.forEach(o=>{if(/^Thôi/.test(o.n))return;if(e){const r=/Hoàng thượng/.test(o.n)?"emp":/Thái hậu/.test(o.n)?"th":rivals.find(v=>o.n.includes(v.name));if(r){const g=giftVal(Object.assign({k:e.k},IT[e.k]),r);o.x=o.x||`${r==="emp"?"Sủng":r==="th"?"Thái hậu quý ngươi":"nàng quý ngươi"} +${g}`}}})}catch(x){}return d}})();
@@ -24486,7 +24491,8 @@ setTimeout(()=>{try{if(typeof kpodName!=="function")return;const k0=kpodName;kpo
    kitParse() now returns these rows; kaNorm() rebuilds every button of the game into the frame (cards, .pcb, .opt, .btn, .rbtn). Spec: dev/kit/KIT.md "Act card". */
 const KA_ROWS=[["why","Cần"],["ton","Tốn"],["duoc","Được"],["mat","Mất"],["kem","Kèm"],["note","Ghi chú"]];
 const KA_ODDS=/^(Nắm chắc|Rất chắc|Khá chắc|Năm ăn năm thua|Chắc|Khó lường|Khó|Liều)$/;
-const KA_TIME=/^(?:[●○]+\s*)?\d+(?:\s*[-–]\s*\d+)?\s*(khắc|việc)$/i;
+/* "chờ N khắc" (parallel time, jptime: the khắc the person sent is away) sits in the Tốn row beside the order khắc */
+const KA_TIME=/^(?:[●○]+\s*)?(?:chờ\s+)?\d+(?:\s*[-–]\s*\d+)?\s*(khắc|việc)$/i;
 const KA_STAT=/^(Bạc|Sức|Sủng|Danh|Đức|Sắc|Tài|Tâm cơ|Tai mắt|Ân tình|Thai)\s*-\s?\d/;
 const kaPlain=h=>String(h||"").replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim();
 /* sentiment of one value for her: g gain, r loss, n neutral word */
@@ -31980,6 +31986,26 @@ BAL.bookFigW=.343;Object.assign(BAL,{bookFrame:{cRef:.072,gap:8,footGap:10}});
 /* DOING AN ACT ON THE SPOT (review/shown-odds-one-path): "Cài đồ vào rương nàng" done in her own palace is easier than sending
    someone by actHere.plant (was a typed -15 pen in j8 plantpick + a typed +15 on the j2 chest card); both read it through actCtx (j9). */
 Object.assign(BAL,{actHere:{plant:15}});
+/* PARALLEL TIME (owner OD 18/11 ~20:15Z/~20:20Z/~20:35Z; jptime): every button where she asks / sends ANOTHER person.
+   o = khắc the SENDER pays to give the order (her card's Tốn); n = khắc the person sent is away, counted from the tap, walk included
+   (= the RECEIVER's own act length when she plays the receiver: the maid road order frame shows the same n). The result lands at tap + n.
+   Equal value (laws 2/3/4, D check): every send costs the same 1 khắc order and keeps the person away 2 khắc; what each send gives and risks
+   stays the button's own BAL rows (odds, evidence, loyalty −, oán …), shown on the sender card and on the receiver's frame alike.
+   on = 0: every button runs at once as before. */
+Object.assign(BAL,{ptime:{on:1,kinds:{
+ def:{o:1,n:2},
+ spy:{o:1,n:2},     /* Sai đi dò la (her maid / a servant) · NPC cx2:maidSpy */
+ listen:{o:1,n:2},  /* Nghe ngóng chung */
+ scout:{o:1,n:2},   /* Sai tai mắt dò nơi ở (her runner) */
+ invite:{o:1,n:2},  /* Mời đến cung ta (messenger; the guest comes at the due khắc) */
+ harm:{o:1,n:2},    /* a deed on a consort done by a sent servant (not together: "phải sai người đi", j8 doAct / bestSent) */
+ plant:{o:1,n:2},   /* Sai người lẻn vào cung cài đồ */
+ gift:{o:1,n:2},    /* Tặng quà by hand when not together (a servant carries it) */
+ bribe:{o:1,n:2},   /* Mua chuộc / Cài người vào cung khác (the servant sent) */
+ clothes:{o:0,n:2}, /* Sai cung nữ đến Nội vụ phủ xin y phục (jeitem): the option's own Sức is the order (no khắc, as before) */
+ buy:{o:1,n:2},     /* Sai cung nữ thân tín mua lén ngoài cung (the goods still come next tuần) */
+ errand:{o:1,n:2}   /* maid road: Việc chủ sai (receiver side: her own walk + task) */
+}}});
 /* ================= jbalge: ONE CORE (OD:L1267) rulebook of the GRAND ENDINGS (Đại kết cục, jge.js; design dev/design/GRAND_ENDINGS.md §2.14, r3) =================
    Every number the grand-ending engine uses or a text prints lives here; jge.js / jgedata.js hold words, option names and logic only.
    Loads after jbal2.js (BAL exists), before jgedata.js / jge.js. Set by measurement: dev/measure/ge-measure.js (bands BAL.ge.target).
@@ -62912,8 +62938,8 @@ function adSrv(){try{return !!(S&&(S.out||S.srv||(typeof isSrv==="function"&&isS
 /* maid acts dealt as Hành sự cards (the same option objects her pop-up shows: jwhy spy formula, j76 talk) */
 function adMaidCards(){if(!S||S.out||!S.maid)return[];const A=[];let O=[];try{O=talkOpts({kind:"maid"})||[]}catch(e){return A}
  const sp=O.find(a=>a&&a.n==="Sai đi dò la"),ng=O.find(a=>a&&a.n==="Nghe ngóng chung");
- if(sp)A.push({n:"Sai cung nữ đi dò la",t:`Sai ${S.maid.name} đi dò la một phi tần (chọn người khi sai đi).`,k:2,c:{},o:sp.o==null?100:sp.o,dom:sp.dom||"Mưu kế",x:sp.x||"",lock:!!sp.lock,adT:sp.t,why:sp.why,adOpen:sp.open,ad:1});
- if(ng)A.push({n:"Nghe ngóng chung",t:`${S.maid.name} đi một vòng nghe ngóng chuyện trong cung.`,k:1,c:{},o:100,dom:"Giao thiệp",x:ng.x||"",adRun:ng.run,ad:1});
+ if(sp)A.push({n:"Sai cung nữ đi dò la",t:`Sai ${S.maid.name} đi dò la một phi tần (chọn người khi sai đi).`,k:typeof ptK==="function"?ptK("spy",2):2,c:{},o:sp.o==null?100:sp.o,dom:sp.dom||"Mưu kế",x:sp.x||"",lock:!!sp.lock,adT:sp.t,why:sp.why,adOpen:sp.open,ad:1});
+ if(ng)A.push({n:"Nghe ngóng chung",t:`${S.maid.name} đi một vòng nghe ngóng chuyện trong cung.`,k:typeof ptK==="function"?ptK("listen",1):1,c:{},o:100,dom:"Giao thiệp",x:ng.x||"",adRun:ng.run,ad:1});
  return A}
 /* the Tài nghệ charity as a Hành sự card (danh-p1, owner P1 16/11: "shared Hành sự door"): the same act (j85 charityFx), the same
    monthly lock (S.charM); khắc spent by the card path above, like the maid cards */
@@ -71393,6 +71419,227 @@ agReg("consort","par3qin",(v,N,need)=>{const O=[];if(!p3On()||v===S||v.out||v.co
  const x=p3O(v,"qin",qinCard(v),N,X.g,"art",()=>"vuon");if(x)O.push(x)}catch(e){agdErr("par3qin",e)}return O});
 agRunReg("cx3:qin",v=>p3Run(v,qinCard(v),"qin"));
 Object.assign(window,{helpAsk,maidTalkDo,maidSpyT,qinCard});
+/* ================= jptime: PARALLEL TIME — every button where she asks / sends ANOTHER person (owner OD 18/11 ~20:15Z, ~20:20Z, ~20:35Z) =================
+   Owner (20:20Z): "bất cứ cái nút nào mà mình nhờ vả người khác, có liên quan tới một người khác, thì mình nên áp dụng cái cách này."
+   ONE mechanism, ONE state, ONE BAL table (BAL.ptime, jbal2):
+   - ORDER: the sender pays only the order (BAL.ptime.kinds[kind].o khắc, read by the card's own k); the person sent is AWAY for n khắc counted
+     from the tap (BAL.ptime.kinds[kind].n; n includes the walk, no double charge, OD 20:00Z) on the same day clock.
+   - HER CLOCK moves only by her own acts (absolute khắc ptNow() = bid() × BAL.time.khac + used). When it reaches the due khắc the result lands:
+     the person walks back in the background (MAIN's errand-scene reads ptAwayOf / PTIME.away), the report waits behind a kit status icon
+     (§77.1 kitStatusIcon "tin": bobbing while someone is away, seal-red dot when news is back; tap → kit info panel with the reports and the
+     one optional «Đợi tin» = jump to the next return khắc). Nothing blocks play; no forced modal (OD 20:10Z).
+   - ONE STATE: S.away = [{id, who (ledger id: "mm:me" | "s<sid>" | "mm:<vid>" …), nm, kind, by ("me" | ledger id), t0, due (absolute khắc),
+     place, tgt, a (runner args), fz (frozen shown odds), lbl, back, rep, read}]. Old saves: created lazily, nothing else changes.
+   - BUSY: an away person cannot follow her (ledger slot = errand, not "follow") nor be sent again until back (ptLockWhy(id)).
+   - LEDGER (j95 S.roster / S.rlog): every away khắc of the person is written as [place, "errand", target, why] (law 6b: a person away is away).
+   - TWO-WAY: NPC senders (AG deeds through AGRUN, e.g. cx2:maidSpy) use the SAME kinds: their servant is away n khắc and the deed lands at the
+     due khắc (ptNpc); when she is the RECEIVER (maid road) her master's order opens a kit order frame with ONE option «Đi» showing the SAME
+     row (n khắc, the same gains and losses) — jptime2 / ptRecv.
+   Runners are registered by kind (ptReg) so a task survives save / load (no closures in S).
+   Off switch: BAL.ptime.on = 0 (every button runs at once as before).
+   ===================================================================================================================== */
+const PT={run:{},stat:{sent:0,back:0,wait:0,npc:0,errs:[]},seq:0};
+function ptErr(w,e){try{if(PT.stat.errs.length<20)PT.stat.errs.push(w+": "+(e&&e.message||e));console.error("jptime",w,e)}catch(x){}}
+function ptOn(){try{return !!(BAL.ptime&&BAL.ptime.on&&typeof S!=="undefined"&&S&&!S.dead)}catch(e){return false}}
+function ptKH(){try{return BAL.time.khac||4}catch(e){return 4}}
+/* her clock, absolute (khắc since the first buổi): moves only through spend / a new buổi */
+function ptNow(){try{return bid()*ptKH()+Math.max(0,Math.min(ptKH(),typeof used==="number"?used:0))}catch(e){return 0}}
+function ptRow(kind){const K=(BAL.ptime&&BAL.ptime.kinds)||{};return K[kind]||K.def||{o:1,n:2}}
+function ptZ(){if(!S)return[];if(!Array.isArray(S.away))S.away=[];return S.away}
+/* THE state reader: the open task of a person (ledger id), or null — "person away until khắc K" */
+function ptAwayOf(id){if(!S||!id)return null;for(const a of ptZ())if(a.who===id&&!a.back)return a;return null}
+function ptBusy(id){return !!ptAwayOf(id)}
+/* khắc → words: "khắc 3" (this buổi) · "buổi chiều, khắc 1" · "ngày mai" */
+function ptWhen(K){const kh=ptKH();const b=Math.floor(K/kh),i=K-b*kh;const nb=bid();
+ let B4=3;try{B4=B4N}catch(e){}
+ if(b===nb)return`khắc ${i+1}`;if(Math.floor(b/B4)===Math.floor(nb/B4)){let n="";try{n=BUOI[b%B4].toLowerCase()}catch(e){}return`${n}, khắc ${i+1}`}return"ngày mai"}
+function ptLockWhy(id){const a=ptAwayOf(id);return a?`${a.nm} đang ${a.lbl||"đi việc"}, về ${ptWhen(a.due)}`:""}
+/* the short line for the SENDER's card (OD 20:35Z: "tốn 1 khắc được cái gì đó, cần chờ 2 khắc"): the cost is the card's own Tốn row (k = o) */
+function ptWaitTxt(kind){return`chờ ${ptRow(kind).n} khắc`}
+function ptX(kind,x){const w=ptWaitTxt(kind);return x?`${w} · ${x}`:w}
+function ptReg(kind,fn){PT.run[kind]=fn}
+/* send: called by a button after the person is chosen and BEFORE the order khắc is paid (t0 = now) */
+function ptSend(o){if(!S||!o||!o.who)return null;const r=ptRow(o.kind);/* the tap's khắc: a button that already paid its order passes paid (t0 = before the pay) */const now=Math.max(0,ptNow()-(o.paid||0));
+ const a={byNm:o.byNm||"",id:++PT.seq+"-"+now+"-"+Math.floor(Math.random()*1e4),who:o.who,nm:o.nm||"",kind:o.kind,by:o.by||"me",t0:now,due:now+(o.n!=null?o.n:r.n),place:o.place||null,tgt:o.tgt||null,a:o.a||{},fz:o.fz==null?null:o.fz,lbl:o.lbl||"",back:0,rep:null,read:0};
+ ptZ().push(a);PT.stat.sent++;try{ptLedger()}catch(e){ptErr("ledger",e)}
+ if(a.by==="me"){try{if(typeof kitLine==="function")kitLine(`${a.nm} đã đi ${a.lbl||"làm việc"}, về ${ptWhen(a.due)}.`,2600)}catch(e){}ptIcon()}
+ return a}
+/* land every task whose khắc has come (her clock moved); results of HER sends wait as reports behind the status icon */
+let ptBusyTick=false;
+function ptTick(){if(ptBusyTick||!S||S.dead)return;const now=ptNow();const L=ptZ().filter(a=>!a.back&&a.due<=now);if(!L.length)return;ptBusyTick=true;
+ try{for(const a of L.sort((x,y)=>x.due-y.due))ptLand(a)}finally{ptBusyTick=false}
+ /* keep the list short: read reports and NPC tasks older than a day go */
+ try{const now2=ptNow(),day=ptKH()*3;S.away=ptZ().filter(a=>!a.back||(a.by==="me"&&!a.read)||now2-a.due<day)}catch(e){}
+ try{ptLedger()}catch(e){ptErr("ledger",e)}ptIcon()}
+function ptLand(a){a.back=1;PT.stat.back++;const fn=a.a&&a.a.npc?PT.run.npc:PT.run[a.kind];if(!fn){a.rep={t:a.lbl||"Đã về",ok:null,L:[`${a.nm} đã về.`],d:[]};return}
+ const me=a.by==="me";const b=me&&typeof rsnap==="function"?rsnap():null;const s0=S.logSeq||0;let r=null;
+ try{r=a.fz!=null&&typeof fzRun==="function"?fzRun(a.fz,null,()=>fn(a)):fn(a)}catch(e){ptErr("run "+a.kind,e)}
+ if(!me)return;
+ const n=Math.max(0,Math.min((S.logs||[]).length,(S.logSeq||0)-s0));const L=(S.logs||[]).slice(0,n).map(x=>typeof plain==="function"?plain(x):String(x).replace(/<[^>]*>/g,"")).map(x=>x.replace(/^T\d+\/\d+\s+\S+\s+tuần\s*/,"")).reverse();
+ const d=[];try{if(b)for(const [k,nm] of RKEYS){const x=(S[k]||0)-(b[k]||0);if(x)d.push([nm,x])}if(b&&S.maid&&S.maid.loyal!==b.maid)d.push(["Lòng cung nữ",S.maid.loyal-b.maid])}catch(e){}
+ const ok=r&&typeof r==="object"&&"ok" in r?r.ok:(r===false?false:r===true?true:window.__lastOk!=null?!!window.__lastOk:null);
+ a.rep={t:(r&&r.t)||a.lbl||"Tin báo",ok,L:L.length?L:[(r&&r.txt)||`${a.nm} đã về.`],d};
+ try{if(typeof kitLine==="function")kitLine(`${a.nm} đã về: có tin báo.`,2600)}catch(e){}}
+/* the jump of «Đợi tin»: to the next return khắc of HER sends (this day only; past the night = "Sang ngày mới" as always) */
+function ptNext(){let m=null;for(const a of ptZ())if(!a.back&&a.by==="me"&&(m==null||a.due<m))m=a.due;return m}
+function ptWaitOk(){const K=ptNext();if(K==null||!S||S.dead||(typeof Q!=="undefined"&&Q.length)||S.mg)return false;let B4=3;try{B4=B4N}catch(e){}
+ return Math.floor(Math.floor(K/ptKH())/B4)===Math.floor(bid()/B4)}
+function ptWait(){if(!ptWaitOk())return false;const K=ptNext();PT.stat.wait++;let guard=6;
+ while(ptNow()<K&&guard-->0){if(typeof Q!=="undefined"&&Q.length)break;const kh=ptKH();const b=Math.floor(K/kh);
+  if(b===bid()){const d=K-ptNow();if(d>0)spend(d);break}
+  /* a later buổi of today: the rest of this buổi passes (the same step as "Sang buổi") */
+  if(typeof nextBuoi==="function")nextBuoi();else break}
+ ptTick();try{render()}catch(e){}return true}
+/* reports of HER sends that came back and were not read */
+function ptNews(){return ptZ().filter(a=>a.by==="me"&&a.back&&a.rep&&!a.read)}
+function ptMine(){return ptZ().filter(a=>a.by==="me"&&!a.back)}
+/* ---------- the kit status icon (§77.1): away = bobbing, news = seal-red dot, tap = info panel ---------- */
+function ptPanel(){const N=ptNews(),W=ptMine();const rows=[];
+ for(const a of N){const r=a.rep;rows.push(`<p><b>${r.t}</b>${r.ok===true?" · <span class=\"g\">thành</span>":r.ok===false?" · <span class=\"r\">hỏng</span>":""}</p>`+(typeof kitFacts==="function"?kitFacts(r.L):`<p>${r.L.join(" ")}</p>`)+(r.d.length&&typeof kitChips==="function"?kitChips(r.d):""))}
+ for(const a of W)rows.push(`<p>${a.nm} đang ${a.lbl||"đi việc"} · về ${ptWhen(a.due)}.</p>`);
+ const opts=[];if(ptWaitOk()){const K=ptNext();opts.push({n:"Đợi tin",x:`ngồi chờ đến ${ptWhen(K)}, khi người được sai trở về`,fx:{},go:()=>{setTimeout(()=>ptWait(),0)}})}
+ for(const a of N)a.read=1;
+ return{title:"Tin chờ người sai đi",h:rows.join("")||"<p>Không có ai đang đi việc.</p>",opts}}
+function ptIcon(){try{if(typeof kitStatusIcon==="undefined")return;kitStatusIcon.set("tin",{title:"Người được sai đi",glyph:"信",order:30,
+  show:()=>!!(S&&!S.dead&&(ptMine().length||ptNews().length)),busy:()=>!!(S&&ptMine().length&&!ptNews().length),badge:()=>!!(S&&ptNews().length),panel:ptPanel});kitStatusIcon.refresh()}catch(e){ptErr("icon",e)}}
+/* ---------- the ledger: a person away is away (law 6b) ---------- */
+function ptLedger(){if(!S||typeof j95on!=="function"||!j95on())return false;const R=S.roster;if(!R||!R.P)return false;const kh=ptKH(),b0=bid()*kh;let ch=false;
+ for(const a of ptZ()){if(a.back||!R.P[a.who])continue;const e=R.P[a.who];
+  for(let i=0;i<e.length;i++){const K=b0+i;if(K>=a.t0&&K<a.due){const why=`${a.by==="me"?"ngươi":a.byNm||"chủ"} sai ${a.lbl||"đi việc"}`;const x=[a.place||e[i][0],"errand",a.tgt||null,why];
+    if(!e[i]||e[i][0]!==x[0]||e[i][1]!=="errand"){e[i]=x;ch=true}}}}
+ if(ch)try{const k=j95kh();S.where=j95view(R,k);R.m[k]=j95counts(R,k);if(typeof j95stage==="function")j95stage(R,k)}catch(e){ptErr("view",e)}
+ return ch}
+/* ---------- wiring: the clock ---------- */
+(function(){try{
+ const sp0=spend;spend=function(){const r=sp0.apply(this,arguments);try{if(ptOn())ptTick()}catch(e){ptErr("spend",e)}return r};
+ if(typeof nextBuoi==="function"){const nb0=nextBuoi;nextBuoi=function(){const r=nb0.apply(this,arguments);try{if(ptOn()){ptTick();ptLedger()}}catch(e){ptErr("buoi",e)}return r}}
+ if(typeof j95sync==="function"){const js0=j95sync;j95sync=function(){const r=js0.apply(this,arguments);try{if(ptOn()&&ptZ().length)ptLedger()}catch(e){ptErr("j95sync",e)}return r}}
+ if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);try{if(S&&Array.isArray(S.away))ptIcon()}catch(e){}return r}}
+}catch(e){ptErr("wire",e)}})();
+window.PTIME={on:ptOn,now:ptNow,row:ptRow,away:ptAwayOf,busy:ptBusy,lockWhy:ptLockWhy,send:ptSend,tick:ptTick,wait:ptWait,waitOk:ptWaitOk,next:ptNext,news:ptNews,mine:ptMine,when:ptWhen,reg:ptReg,x:ptX,stat:PT.stat};
+/* =============================== ADAPTERS — the whole group (dev/handover/reports/parallel-time.md, before/after table) ===============================
+   Each button keeps its own odds, gains and losses (the same functions run at the due khắc, with the odds frozen when she gave the order);
+   only WHEN changes: the order khắc now, the result at the due khắc. */
+function ptK(kind,def){return ptOn()?ptRow(kind).o:def}
+/* ledger id of one of her (or an NPC's) people: the trusted maid "mm:<owner>", a household servant "s<sid>" */
+function ptPid(s,owner){if(!s)return null;if(s.sid!=null)return"s"+s.sid;const o=owner||S;if(o===S||!o)return"mm:me";return"mm:"+o.id}
+function ptPerson(a){if(!a)return null;if(a.sid!=null){for(const s of S.staff||[])if(s&&s.sid===a.sid)return s;return null}return S.maid||null}
+function ptFree(s,owner){const id=ptPid(s,owner);return !!s&&!ptBusy(id)}
+/* the person she sends for a task with no named servant (đưa lời mời, dò nơi ở, …): her runner (jhc), else the best free servant, else her maid */
+function ptRunner(){try{const b=bestSent(S);if(b&&ptFree(b))return b}catch(e){}if(S.maid&&S.maid.name&&ptFree(S.maid))return S.maid;return null}
+function ptNoRunner(){return"không còn ai rảnh để sai (người hầu đang đi việc)"}
+/* ---- busy servants are never picked to be sent (her runner, NPC mistresses too: two-way) ---- */
+(function(){try{if(typeof bestSent!=="function")return;const b0=bestSent;bestSent=function(p){const r=b0.apply(this,arguments);try{if(!ptOn()||!r||!p)return r;if(!ptBusy(ptPid(r,p)))return r;
+  const L=(p.staff||[]).filter(s=>s&&s!==r&&!s.spyFor&&!ptBusy(ptPid(s,p)));if(!L.length)return null;return L.sort((a,b)=>(b.loyal||0)-(a.loyal||0))[0]}catch(e){return r}}}catch(e){ptErr("bestSent",e)}})();
+/* ---- 1. Sai đi dò la (her maid / any servant of her household; Hành sự card, maid pop-up, Cung nhân) ---- */
+(function(){try{if(typeof spyMaidRun!=="function")return;const s0=spyMaidRun;spyMaidRun=function(t,ag){if(!ptOn()||PT.landing||!t)return s0.apply(this,arguments);
+  const m=ag||S.maid;const id=ptPid(m);const fz=typeof ACTFZ!=="undefined"&&ACTFZ?ACTFZ.o:null;
+  /* the order is given (and already paid: payOnPick / the card): the door and the day stamp exactly as the old run set them */
+  try{const p=window.__adPend;window.__adPend=null;if(p)p.done=1;if(typeof adDoorMark==="function")adDoorMark("Sai cung nữ đi dò la")}catch(e){}
+  try{S.mspy={b:spyBk(),id:t.id}}catch(e){}
+  const a=ptSend({who:id,nm:m.name,kind:"spy",paid:ptRow("spy").o,place:palaceOf(t),tgt:"v"+t.id,a:{v:t.id,sid:ag&&ag.sid!=null?ag.sid:null},fz,lbl:`đi dò la ${t.name}`});
+  window.__lastOk=null;return null}}catch(e){ptErr("spy",e)}})();
+ptReg("spy",a=>{const t=RV(a.a.v);const m=ptPerson(a.a);if(!m)return{txt:`Người được sai đi dò la không trở về.`,ok:false};if(!t||!t.alive){log(`${m.name} trở về: người cần dò la không còn trong cung.`);return{ok:null}}
+ PT.landing=1;try{const ok=spyMaidRun(t,a.a.sid!=null?m:undefined);return{ok:!!ok,t:`${m.name} dò la ${t.name} trở về`}}finally{PT.landing=0}});
+/* ---- 2. Nghe ngóng chung ---- */
+function ptListen(m){if(!ptOn()||PT.landing)return spyNews(m);const a=ptSend({who:ptPid(m),nm:m.name,kind:"listen",paid:ptRow("listen").o,place:"cnh",a:{sid:m.sid!=null?m.sid:null},lbl:"đi nghe ngóng"});
+ return a?`${m.name} đi nghe ngóng, về ${ptWhen(a.due)}.`:spyNews(m)}
+ptReg("listen",a=>{const m=ptPerson(a.a);if(!m)return{txt:"Người được sai đi nghe ngóng không trở về.",ok:false};const r=spyNews(m);if(r)log(`${m.name} nghe ngóng trở về: ${r}`);return{ok:true,t:`${m.name} nghe ngóng trở về`}});
+/* the two options on her maid's / a servant's pop-up (talkOpts kinds maid / serv): order khắc, "chờ N khắc", busy lock */
+(function(){try{const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(!ptOn()||!p||!Array.isArray(A)||(p.kind!=="maid"&&p.kind!=="serv"))return A;
+  const m=p.kind==="serv"?p.ref:S.maid;if(!m)return A;const why=ptLockWhy(ptPid(m));
+  return A.map(a=>{if(!a)return a;if(a.n==="Sai đi dò la"&&a.open&&!a.lock){return Object.assign({},a,{pk:"spy",x:ptX("spy",a.x)},why?{lock:true,t:why}:{open:()=>spyPick(ptRow("spy").o,p.kind==="serv"?m:undefined)})}
+   if(a.n==="Nghe ngóng chung"&&a.run&&!a.lock){return Object.assign({},a,{pk:"listen",x:ptX("listen",a.x)},why?{lock:true,t:why}:{run:()=>ptListen(m)})}
+   if(why&&/^(Tâm sự|Trò chuyện với cung nữ|Hỏi chuyện)$/.test(a.n))return Object.assign({},a,{lock:true,t:why});return a})}catch(e){ptErr("talkOpts",e);return A}}}catch(e){ptErr("talkOpts wire",e)}})();
+/* ---- 3. Sai tai mắt dò nơi ở (j21): a real person goes (her runner) ---- */
+ptReg("scout",a=>{const v=RV(a.a.v);const m=ptPerson(a.a);const nm=m?m.name:"Người được sai";if(!v||!v.alive){log(`${nm} trở về: người cần dò không còn trong cung.`);return{ok:null}}
+ if(roll(a.a.o)){seeLoc(v);log(`${nm} báo: ${v.name} đang ở ${placeName(whereOf(v))}.`);return{ok:true,t:`${nm} dò nơi ở ${v.name} trở về`}}log(`${nm} không dò ra ${v.name} ở đâu.`);return{ok:false,t:`${nm} dò nơi ở ${v.name} trở về`}});
+/* ---- 4. Mời đến cung ta (j21): the messenger goes, the answer (and the guest) comes at the due khắc ---- */
+function ptInvPend(id){return ptZ().some(a=>a.kind==="invite"&&!a.back&&a.a&&a.a.v===id)}
+ptReg("invite",a=>{const v=RV(a.a.v);const m=ptPerson(a.a);const nm=m?m.name:"Người được sai";if(!v||!v.alive||v.out||v.confined){log(`${nm} trở về: ${v?v.name:"nàng"} không thể nhận lời lúc này.`);return{ok:null}}
+ if(roll(a.a.o)){try{S.where[v.id]="home";seeLoc(v,"home");const R=S.roster;if(R&&R.P&&R.P["v"+v.id]&&typeof j95kh==="function"){for(let i=j95kh();i<R.P["v"+v.id].length;i++)R.P["v"+v.id][i]=[S.out?"lc":"home","visit","me","nhận lời mời sang chơi"];if(typeof j95sync==="function")j95sync()}}catch(e){ptErr("inviteLand",e)}
+  log(`${v.name} nhận lời, sang cung ngươi.`);return{ok:true,t:`${nm} mời ${v.name} trở về`}}
+ relAdd(S,v,BAL.eff.j21.top);log(`${v.name} từ chối lời mời.`);return{ok:false,t:`${nm} mời ${v.name} trở về`}});
+/* ---- 5. TWO-WAY: NPC senders obey the same rule (AG deeds through AGRUN: the NPC pays her deed's khắc, the person sent is away n khắc,
+   the deed lands at the due khắc with the same function, odds and news as before) ---- */
+const PT_NPC={"cx2:maidSpy":{kind:"spy",who:v=>v&&v.maid&&v.maid.name?{id:"mm:"+v.id,nm:v.maid.name}:null,lbl:t=>`đi dò la ${t&&t.name?t.name:""}`.trim()}};
+function ptNpcWire(){if(typeof AGRUN==="undefined")return;for(const k in PT_NPC){const f0=AGRUN[k];if(!f0||f0.__pt)continue;const D=PT_NPC[k];
+ const f=function(v,t,pd){if(!ptOn()||PT.landing||!v||v===S)return f0.apply(this,arguments);const w=D.who(v);if(!w)return f0.apply(this,arguments);
+  if(ptBusy(w.id))return"";/* her person is still out on the last errand: no second order (the deed is dropped, as an NPC with no maid) */
+  let tid=null;try{tid=ledgerId(t)}catch(e){tid=t===S?"me":t&&t.id!=null?"v"+t.id:null}
+  ptSend({who:w.id,nm:w.nm,kind:D.kind,by:"v"+v.id,byNm:v.name,place:t&&t!==S?palaceOf(t):t===S?(S.out?"lc":"home"):null,tgt:tid,a:{npc:k,v:v.id,t:tid},lbl:D.lbl(t)});PT.stat.npc++;return""};
+ f.__pt=1;AGRUN[k]=f;PT.npc0=PT.npc0||{};PT.npc0[k]=f0}}
+ptReg("npc",a=>{const k=a.a.npc;const f0=PT.npc0&&PT.npc0[k];const v=RV(a.a.v);if(!f0||!v||!v.alive||v.out)return null;let t=null;try{t=agPerson(a.a.t)}catch(e){}if(a.a.t&&!t)return null;
+ PT.landing=1;let r="";try{r=f0(v,t,null)||""}catch(e){ptErr("npc "+k,e)}finally{PT.landing=0}
+ try{if(r){const me=t===S;newsAdd(v,k,r,me);if(me)log(`${r}.`)}}catch(e){}return null});
+try{ptNpcWire()}catch(e){ptErr("npcWire",e)}
+/* ---- 6. deeds on a consort done by a SENT servant (j8 doAct: not together → "phải sai người đi", j9 actCtx / bestSent) ---- */
+function ptHarmSent(v,k){try{return ptOn()&&!!v&&v!==S&&!!ACT[k]&&k!=="plant"&&k!=="gift"&&!together(S,v)&&!ACT_NOSEND.includes(k)}catch(e){return false}}
+function harmK(v,k){return ptHarmSent(v,k)&&bestSent(S)?ptRow("harm").o:BAL.time.cost.harm}
+function ptHarmX(v,k){if(!ptHarmSent(v,k))return"";const s=bestSent(S);return s?` · ${ptWaitTxt("harm")} (sai ${s.name})`:` · ${ptNoRunner()}`}
+function ptHarmSend(v,k,fz){if(!ptHarmSent(v,k))return false;const s=bestSent(S);if(!s)return false;
+ ptSend({who:ptPid(s),nm:s.name,kind:"harm",place:palaceOf(v),tgt:"v"+v.id,a:{v:v.id,k,sid:s.sid},fz:null,lbl:`đi ${String(ACT[k].n||"làm việc").toLowerCase()} ${v.name}`});
+ const a=ptZ()[ptZ().length-1];if(a)a.a.fz=fz;return true}
+ptReg("harm",a=>{const v=RV(a.a.v),k=a.a.k;const s=ptPerson(a.a);const nm=s?s.name:"Người được sai";
+ if(!v||!v.alive||v.out||!ACT[k]||!ACT[k].ok(S,v)){log(`${nm} trở về: việc «${ACT[k]?ACT[k].n:k}» không làm được nữa.`);return{ok:null}}
+ const r=fzRun(a.a.fz,k,()=>runAct(S,v,k));if(r)log(r);return{t:`${nm} ${String(ACT[k].n).toLowerCase()} ${v.name} trở về`}});
+/* ---- 7. Sai người lẻn vào cung … cài đồ (PEND.plantpick, not "tại cung nàng"): the servant carries the item (it leaves her chest), lands at due ---- */
+(function(){try{const b0=PEND.plantpick;if(!b0)return;PEND.plantpick=function(p){const d=b0.apply(this,arguments);try{if(!d||!ptOn()||p.here)return d;const v=RV(p.v);const s=bestSent(S);
+  if(!s){d.o=(d.o||[]).map(o=>o.ik!=null?Object.assign({},o,{lock:true,x:ptNoRunner()}):o);return d}
+  d.t=(d.t||"")+`<p class="past">${s.name} đi · tốn ${ptRow("plant").o} khắc, ${ptWaitTxt("plant")}</p>`;
+  d.o=(d.o||[]).map(o=>o.ik==null?o:Object.assign({},o,{go:()=>{const fz=actOdds(S,v,"plant");const e=S.inv[o.ik];if(!e)return;S.inv.splice(o.ik,1);
+   ptSend({who:ptPid(s),nm:s.name,kind:"plant",place:palaceOf(v),tgt:"v"+v.id,a:{v:v.id,sid:s.sid,item:e,fz},lbl:`lẻn vào cung ${v.name}`});spend(ptRow("plant").o)}}))}catch(e){ptErr("plantpick",e)}return d}}catch(e){ptErr("plant wire",e)}})();
+ptReg("plant",a=>{const v=RV(a.a.v);const s=ptPerson(a.a);const nm=s?s.name:"Người được sai";const e=a.a.item;if(e)S.inv.push(e);/* the item is real (law 6c): back in her chest, then used */
+ if(!e)return{ok:null};if(!v||!v.alive||v.out){log(`${nm} trở về, mang ${iname(e)} về lại rương.`);return{ok:null}}
+ const i=S.inv.indexOf(e);let r="";fzRun(a.a.fz,"plant",()=>{r=runAct(S,v,"plant",i)});if(r)log(r);return{t:`${nm} lẻn vào cung ${v.name} trở về`}});
+/* ---- 8. Tặng quà by hand (PEND.giftpick from her card, not together): a servant carries the gift ---- */
+(function(){try{const b0=PEND.giftpick;if(!b0)return;PEND.giftpick=function(p){const d=b0.apply(this,arguments);try{if(!d||!ptOn()||p.v==null)return d;const v=RV(p.v);if(!v||together(S,v))return d;const s=bestSent(S);
+  if(!s){d.o=(d.o||[]).map(o=>o.ik!=null?Object.assign({},o,{lock:true,x:ptNoRunner()}):o);return d}
+  d.t=(d.t||"")+`<p class="past">${s.name} mang quà đi · tốn ${ptRow("gift").o} khắc, ${ptWaitTxt("gift")}</p>`;
+  d.o=(d.o||[]).map(o=>o.ik==null?o:Object.assign({},o,{go:()=>{const e=S.inv[o.ik];if(!e)return;S.inv.splice(o.ik,1);
+   ptSend({who:ptPid(s),nm:s.name,kind:"gift",place:palaceOf(v),tgt:"v"+v.id,a:{v:v.id,sid:s.sid,item:e},lbl:`mang quà sang cung ${v.name}`});spend(ptRow("gift").o)}}))}catch(e){ptErr("giftpick",e)}return d}}catch(e){ptErr("gift wire",e)}})();
+ptReg("gift",a=>{const v=RV(a.a.v);const s=ptPerson(a.a);const nm=s?s.name:"Người được sai";const e=a.a.item;if(e)S.inv.push(e);if(!e)return{ok:null};
+ if(!v||!v.alive||v.out){log(`${nm} trở về, mang ${iname(e)} về lại rương.`);return{ok:null}}
+ const r=giveTo(S,v,S.inv.indexOf(e));if(r)log(r);return{t:`${nm} mang quà sang cung ${v.name} trở về`}});
+/* ---- 9. Sai cung nữ thân tín mua lén ngoài cung (j83 IROUTE.maid): she leaves by the Thần Vũ gate; caught or not is known when she is back
+   (the goods still come next tuần, as before); the bạc was paid when she was sent (the option's fx) ---- */
+(function(){try{if(typeof illBuy!=="function"||typeof IROUTE==="undefined"||!IROUTE.maid)return;const R0=IROUTE.maid;
+ const n0=R0.need;R0.need=function(p){const w=n0.apply(this,arguments);if(w||p!==S||!ptOn())return w;return ptLockWhy("mm:me")};
+ const w0=R0.when;Object.defineProperty(R0,"when",{get:()=>ptOn()?`${ptWaitTxt("buy")} biết thành bại, ${w0}`:w0,configurable:true});
+ const ib0=illBuy;illBuy=function(p,r,k,from,paid){if(p!==S||r!=="maid"||!ptOn()||PT.landing||!S.maid)return ib0.apply(this,arguments);
+  if(!paid){const c=R0.cost(k);if(S.bac<c)return"";apply({bac:-c})}
+  const a=ptSend({who:"mm:me",nm:S.maid.name,kind:"buy",paid:ptRow("buy").o,place:typeof J95OUT_!=="undefined"?J95OUT_:null,a:{k},lbl:`lén ra cửa Thần Vũ mua ${itm(k).n}`});
+  return a?`Ngươi sai ${S.maid.name} lén ra cửa Thần Vũ mua ${itm(k).n}; nàng về ${ptWhen(a.due)}. `:""}}catch(e){ptErr("illBuy wire",e)}})();
+ptReg("buy",a=>{if(!S.maid)return{ok:null};PT.landing=1;let r="";try{r=illBuy(S,"maid",a.a.k,null,1)}finally{PT.landing=0}if(r)log(r);return{t:`${S.maid.name} lén mua đồ trở về`,ok:!/không thành/.test(r)}});
+/* ---- 10. Sai cung nữ đến Nội vụ phủ xin y phục (jeitem eitReOpts): the same option runs when she is back ---- */
+(function(){try{if(typeof eitReOpts!=="function")return;const e0=eitReOpts;eitReOpts=function(){const O=e0.apply(this,arguments);try{if(!ptOn()||PT.landing||!Array.isArray(O))return O;
+  return O.map(o=>{const m=o&&/^Sai (.+) đến Nội vụ phủ xin$/.exec(o.n||"");if(!m)return o;const s=[S.maid].concat(S.staff||[]).find(x=>x&&x.name===m[1]);if(!s)return o;const why=ptLockWhy(ptPid(s));
+   return Object.assign({},o,{x:String(o.x||"").replace("có y phục mặc ngay",`${ptWaitTxt("clothes")}, nàng mang y phục về`),go:why?()=>{}:()=>{ptSend({who:ptPid(s),nm:s.name,kind:"clothes",place:"nvp",a:{sid:s.sid!=null?s.sid:null,nm:s.name},lbl:"đến Nội vụ phủ xin y phục"});if(ptRow("clothes").o)spend(ptRow("clothes").o)}},why?{lock:true,x:why}:{})})}catch(e){ptErr("eitRe",e);return O}}}catch(e){ptErr("eit wire",e)}})();
+ptReg("clothes",a=>{PT.landing=1;try{const O=eitReOpts(false)||[];const o=O.find(x=>x&&x.n===`Sai ${a.a.nm} đến Nội vụ phủ xin`);if(o&&o.go){o.go();return{t:`${a.a.nm} đến Nội vụ phủ xin y phục trở về`}}
+ log(`${a.a.nm} trở về: Nội vụ phủ không còn việc ấy nữa.`);return{ok:null}}finally{PT.landing=0}});
+/* =============================== RECEIVER SIDE (owner OD 18/11 ~20:35Z, law 1 two-way) ===============================
+   When she plays the person SENT (maid road) and her master gives the order: a kit order frame pops up with ONE option «Đi» (servants never refuse
+   an errand) showing the SAME row as the sender's card: n khắc (BAL.ptime, her walk included: no double charge, OD 20:00Z), the same gain, the same
+   loss (e.g. dò la: fail → Chủ tin −BAL.eff.jwhy.loyalSpyMaidRun "hoảng sợ" = the sender's "Lòng cung nữ −5"). She really walks on Dư đồ to the place
+   (srvGoTo, S.place + ledger), the rest of the n khắc is the task, then the result. */
+function ptRecvGo(k,kind,run){const N=ptRow(kind).n;const t0=ptNow();let ok=true;try{ok=srvGoTo(k)!==false}catch(e){ok=false}
+ if(!ok)return false;const w=ptNow()-t0;const rest=Math.max(0,N-w);if(rest&&can(rest))spend(rest);else if(rest)used=Math.min(ptKH(),used+rest);
+ try{run()}catch(e){ptErr("recv "+kind,e)}try{render()}catch(e){}return true}
+function ptRecvRow(kind,o,gain,loss){return[o!=null&&o<100?word(o):"",`tốn: ${ptRow(kind).n} khắc (cả đường đi)`,gain?"thành: "+gain:"",loss?"hỏng: "+loss:""].filter(Boolean).join(" · ")}
+/* (a) her master orders a dò la (j42 srvOrder k "spy" → PEND.cnvOrd): the mirror of the consort's "Sai đi dò la" (jwhy spyRoll, j78 evN, jwhy loyalSpyMaidRun, j78 oán) */
+(function(){try{const c0=PEND.cnvOrd;if(!c0)return;PEND.cnvOrd=function(pp){if(!ptOn()||!pp||pp.k!=="spy")return c0.apply(this,arguments);const m=srvM(),t=RV(pp.t);if(!isSrv()||!m||!t||!t.alive||t.out)return null;
+  const o=spyRoll(m,t,knMeAg());const L=BAL.eff.jwhy.loyalSpyMaidRun,F=BAL.eff.j78.j78maidFail,E=BAL.eff.j78.evN;
+  return{t:`<p>${m.name} gọi ngươi vào: “Ngươi đi dò la cung ${t.name}, xem nàng gặp ai, nói gì.”</p>`,who:pv(m),o:[{n:"Đi",fx:{},x:ptRecvRow("spy",o,`${m.name} nắm ${balSg(E)} chứng cứ của ${t.name} nếu nàng từng làm điều sai`,`Chủ tin -${balAb(L)} (hoảng sợ), ${t.name} đoán ra: oán ${m.name} ${balSg(F)}`),
+   go:()=>{ptRecvGo(palaceOf(t),"spy",()=>{if(roll(o)){const n=evA(m,t,E);srvMerit(BAL.eff.j42.srvDoOrder_2);log(n?`Ngươi dò la được chuyện của ${t.name}, về bẩm ${m.name}: chủ nắm thêm ${balAb(E)} chứng cứ.`:`Ngươi dò la ${t.name}: không tìm ra điều gì sai trái.`)}
+    else{apply({tin:-L});oanAdd(t,m,F);log(`<span class="r">Ngươi nấp nghe ngoài cửa sổ cung ${t.name} thì bị bắt gặp, hoảng sợ chạy về.</span> Chủ tin -${balAb(L)}.`)}})}}]}};
+ }catch(e){ptErr("cnvOrd wire",e)}})();
+/* (b) «Việc chủ sai» (j42 srvErrPick: lấy thuốc, hái hoa, mang canh, mang kinh, mang quà): the order frame pops up when the master gives it */
+function ptErrKind(er){return er&&er.v!=null?"gift":"errand"}
+function ptErrFrame(){if(!ptOn()||!isSrv()||!S.srv||S.dead)return false;const er=S.srv.err;if(!er||er.none||er.acc||er.pop||(typeof Q!=="undefined"&&Q.length))return false;const m=srvM();if(!m)return false;er.pop=1;const kind=ptErrKind(er);
+ const gain=`công lao +${BAL.eff.j42.srvErrandDone_2}${er.v!=null?` · ${m.name} thêm thân với người nhận quà`:""}`;
+ Q.push({t:"Việc chủ sai",who:pv(m),h:`<p>${m.name} sai ngươi: ${er.n}.</p>`,opts:[{n:"Đi",fx:{},x:ptRecvRow(kind,null,gain,""),go:()=>{er.acc=1;S.srv.sent={k:er.k,n:er.n,until:bid(),done:0,v:er.v||null};
+  if(!ptRecvGo(er.k,kind,()=>{const r=srvErrandDone();if(r)log(r)})){/* the place is shut right now: the order stays on her Phận sự list (the old card) */er.acc=0}}}]});try{showModal()}catch(e){}return true}
+(function(){try{if(typeof srvCards!=="function")return;const s0=srvCards;srvCards=function(){const X=s0.apply(this,arguments);try{if(ptOn()&&S.srv&&S.srv.err&&!S.srv.err.none&&!S.srv.err.acc){setTimeout(()=>{try{if(ptErrFrame())render()}catch(e){}},0)}}catch(e){ptErr("srvCards",e)}return X}}catch(e){ptErr("srvCards wire",e)}})();
 /* jmgcal — OWNER-ONLY MINIGAME CALIBRATION (AG-ALL-2d2; owner OD 17/11 ~16:20Z (f) + ~16:40Z option 1, verbatim key words:
    "cần cho tôi một cái bài test để tôi chơi thử ... mỗi một cái mini game ... 3 vòng hoặc là 5 vòng ... mỗi một vòng là mỗi cái khó hơn ... chỉ có cái tài
    khoản của tôi là mới test kiểu này thôi ... bất kỳ người nào chơi thì người đó cũng sẽ đi chơi theo cái con số của tôi" / "chỉ có tôi test và cái số
@@ -75656,7 +75903,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="eefb4215d015";window.CTM_BUILD=BUILD;
+const BUILD="faadea2d19c9";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
