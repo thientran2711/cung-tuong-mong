@@ -171,3 +171,4 @@ Thái hậu missing c04–c08,c13–c16 | handover | session_01PEhRbx66FNstJGDVk
 Thái hậu missing c21–c24,c28–c32 | handover | session_01PEhRbvnAhxnHAp1NLbsThf (TH3, Foreman C ROOT-33) | RUNNING | 2026-11-18T23:00Z
 | questline-q2 remerge main 53544bd8 (sonnet E13m) | review/questline-q2-r6 | E ROOT #7 | session_01DgYSWqCgqc7epxUFcw8svY | RUNNING | 18/11 22:47Z |
 | GE step 4: Bắc Địch own 4 roads (opus lead E14; bd_san, bd_soi + PLAN) | review/bd-roads | E ROOT #7 | session_01DgYSWpL9XTiCMTRqdrD58G | RUNNING | 18/11 22:49Z |
+| rel-picker r2 (sonnet; owner bug Giao tình picker space, OD L898 + 22:10Z) | review/rel-picker-r2 | MAIN ROOT-58 | session_01Rc5AsJZVez3V2TABepBaUE | RUNNING | 18/11 22:54Z |
