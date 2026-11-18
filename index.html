@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"2b1b0701","t":"2026-11-18T03:00Z","c":"review staff-cap-apply r6: site rebuilt on db24027f","b":"d93afa39b8a9","h":[{"s":"64488e4f+","t":"2026-11-18T02:38Z","c":"cloth-xoc r6e: rebuild site"},{"s":"af71f94a+","t":"2026-11-18T02:17Z","c":"smudge r16: stage4 + avatar probe tests, options script score fix (look tier by score), FINAL mode"},{"s":"e1f60927+","t":"2026-11-18T02:25Z","c":"result-reason: every result card line says a short why (kitWhy, KIT 7); values left-aligned next to labels"},{"s":"29385ec6+","t":"2026-11-18T02:07Z","c":"greet-stranger: site rebuilt"},{"s":"3b69182e","t":"2026-11-18T01:50Z","c":"hoa-dien r3 onto main 3da5720a (makeup-lux live): hoa-dien (jhd.js + hooks) replayed on the new main, replacing the old stacked branch. Sha…"},{"s":"631a703e","t":"2026-11-18T01:37Z","c":"review staff-cap-fix r6: hire pick refused at the cap gives the silver back (+ staff-cap.js case); site rebuilt"},{"s":"4cdcffa9+","t":"2026-11-18T00:44Z","c":"review looks-s40: site rebuilt from merged sources (glow v8)"},{"s":"eb3675a6+","t":"2026-11-17T22:59Z","c":"review coop-thin-c r1 #2: merge origin/main b048e495 (kit-display-room r2, jdisp/jshelf only; generated files from main + site rebuilt)"},{"s":"4eac30bc+","t":"2026-11-17T22:57Z","c":"review coop-thin-c r1 #2: her NPC pack resend (F1) listens on any guest seat, not only while the C switch is on: a level drop / build hold …"},{"s":"c7375c0c+","t":"2026-11-17T22:33Z","c":"batch s38a: dudo-blank-r1 2270c4c5 merged onto main 99f3978d; site rebuilt"}]};
+window.CTM_BI={"s":"e24d5838+","t":"2026-11-18T03:00Z","c":"review staff-cap-apply r6: site rebuilt on 95d5f767","b":"860bd8559572","h":[{"s":"2b1b0701","t":"2026-11-18T03:00Z","c":"review staff-cap-apply r6: site rebuilt on db24027f"},{"s":"64488e4f+","t":"2026-11-18T02:38Z","c":"cloth-xoc r6e: rebuild site"},{"s":"af71f94a+","t":"2026-11-18T02:17Z","c":"smudge r16: stage4 + avatar probe tests, options script score fix (look tier by score), FINAL mode"},{"s":"e1f60927+","t":"2026-11-18T02:25Z","c":"result-reason: every result card line says a short why (kitWhy, KIT 7); values left-aligned next to labels"},{"s":"29385ec6+","t":"2026-11-18T02:07Z","c":"greet-stranger: site rebuilt"},{"s":"3b69182e","t":"2026-11-18T01:50Z","c":"hoa-dien r3 onto main 3da5720a (makeup-lux live): hoa-dien (jhd.js + hooks) replayed on the new main, replacing the old stacked branch. Sha…"},{"s":"631a703e","t":"2026-11-18T01:37Z","c":"review staff-cap-fix r6: hire pick refused at the cap gives the silver back (+ staff-cap.js case); site rebuilt"},{"s":"4cdcffa9+","t":"2026-11-18T00:44Z","c":"review looks-s40: site rebuilt from merged sources (glow v8)"},{"s":"eb3675a6+","t":"2026-11-17T22:59Z","c":"review coop-thin-c r1 #2: merge origin/main b048e495 (kit-display-room r2, jdisp/jshelf only; generated files from main + site rebuilt)"},{"s":"4eac30bc+","t":"2026-11-17T22:57Z","c":"review coop-thin-c r1 #2: her NPC pack resend (F1) listens on any guest seat, not only while the C switch is on: a level drop / build hold …"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -8050,7 +8050,7 @@ function j59sel(st,tk,me){let pi=null;try{pi=typeof popIdx==="number"?popIdx:nul
 function j59person(p){return !!p&&p.kind!=="chest"&&p.kind!=="task"&&!(p.kind==="srv"&&p.sk==="task")}
 /* KIT 33.9 head-count icon (owner 17/11 ~14:15Z): the grey GROUP of three (man, woman, child) img/kit/unknown-ico-n.webp (192 px tall, ~145 px wide, ONE file, no srcset so the jcdn CDN fallback works).
    j59ico(h) is the only place that draws it: the swipe-stage "+N" chips (j59chipIco) AND the place header "Ngọc Thanh các [icon] 5" (j59hdrCount) use it. Decorative alt="". */
-function j59ico(){return `<img class="j59ico" src="https://ctm-img.victoria-tntt.workers.dev/img/kit/unknown-ico-n.webp" alt="" draggable="false">`}
+function j59ico(){return `<img class="j59ico" src="https://ctm-img.victoria-tntt.workers.dev/img/kit/unknown-ico-n.webp" alt="" draggable="false">`}window.j59ico=j59ico;
 function j59chipIco(n){return j59ico()+`<span class="j59n">+${n}</span>`}
 /* place header (every place with people): "Ở đây còn N người." -> [icon] N (the rest of a longer stage line is kept); "Không gặp ai." stays text */
 function j59hdrCount(){try{const m=document.querySelector("#sc-t .rmsg");if(!m||m.dataset.j59h===m.innerHTML)return;const t=m.innerHTML;const r=/^\s*·?\s*Ở đây (?:có|còn) (\d+) người\.?\s*/.exec(t);if(!r)return;
@@ -32590,7 +32590,7 @@ function kitFlipTablet(p,o){o=o||{};if(!p)return;const me=p===S||o.me;const nm=p
 
 /* someone else's tablet: one short line under the top bar (kit chip), no backdrop, never takes a tap, fades by itself */
 function kitFlipNote(p){if(!p||p===S)return;const nm=p.name||"";const rk=kmRankName(typeof rkOf==="function"?rkOf(p):0);
- kmPush(done=>{document.querySelectorAll(".kmnote").forEach(e=>e.remove());const n=document.createElement("div");n.className="kmnote";n.setAttribute("role","status");
+ kmPush(done=>{document.querySelectorAll(".kmnote:not(.kmslot)").forEach(e=>e.remove());const n=document.createElement("div");n.className="kmnote";n.setAttribute("role","status");
   let face="";try{face=mdH(pv(p),"xs")}catch(e){}
   n.innerHTML=`<span class="kchip n">${face}<span>Tối nay Hoàng thượng lật thẻ <b>${kmEsc(rk)} ${kmEsc(nm)}</b></span></span>`;
   const hb=document.getElementById("hud2")||document.querySelector(".hud,header");const hr=hb&&hb.getBoundingClientRect();if(hr&&hr.bottom>0&&hr.bottom<innerHeight*.4)n.style.top=Math.round(hr.bottom+6)+"px";
@@ -35811,7 +35811,7 @@ html body .kshR{position:absolute;top:8px;right:8px;width:var(--kgrw,150px);min-
 .kshR .k3r>b{white-space:normal;text-align:right}
 /* owner 11/15: people may stand under the right column — its plaques float on top on a SOLID card */
 .kshR .k3p,.kshR .k3c{background:rgb(255,250,240)!important;backdrop-filter:none}
-.ksh .k3p,.ksh .k3c{pointer-events:auto;background:var(--k3pl);border:1px solid var(--line);border-radius:8px;box-shadow:0 1px 4px #3a20101f;backdrop-filter:blur(2px)}
+.ksh .k3p,.ksh .k3c,.kpname{pointer-events:auto;background:var(--k3pl);border:1px solid var(--line);border-radius:8px;box-shadow:0 1px 4px #3a20101f;backdrop-filter:blur(2px)}
 .ksh .k3p{display:flex;flex-direction:column;padding:3px 6px;gap:0}
 .ksh .k3h{font-family:var(--display);font-size:.7rem;color:var(--gold);letter-spacing:.03em;border-bottom:1px solid var(--k-hair,#e6d3ac);margin-bottom:1px}
 .ksh .k3r{display:flex!important;align-items:center;gap:4px;border:0;background:none;padding:1px 0;margin:0;font:inherit;font-size:.75rem;line-height:1.25;color:var(--ink);text-align:left;cursor:pointer;min-height:0;width:100%}
@@ -53429,7 +53429,7 @@ function paint(){try{const st=document.getElementById("stage");let el=document.g
  let calm=false;try{calm=typeof reducedMotion==="function"&&reducedMotion()}catch(e){}
  const L=R.filter(x=>(live||x.onTitle)&&val(x.when,true));if(!L.length){if(el)el.remove();return}
  if(!el){el=document.createElement("nav");el.id="krail";el.className="krail";el.setAttribute("aria-label","Lối tắt")}
- const h=L.map(x=>{const b=val(x.badge,false),bz=val(x.busy,false)&&!calm,dn=val(x.done,false);return `<button type="button" data-g="${String(x.title||"").trim().charAt(0)}" class="krailb${x.glyph?"":" kld"}${b?" kbadge":""}${bz?" kbusy":""}${dn?" kdone":""}${x.glyph?" kglyph":""}" data-rail="${x.id}" aria-label="${x.title}${b?" (có mới)":""}" title="${x.title}">${x.glyph?`<span class="krailg" aria-hidden="true">${val(x.glyph,"")}</span>`:`<img src="${val(x.icon,"")}" alt="" decoding="async" onload="this.parentNode.classList.remove('kld')" onerror="this.parentNode.classList.remove('kld');this.parentNode.classList.add('kerr')">`}</button>`}).join("");
+ const h=L.map(x=>{if(x.chip)return `<div class="krailc" data-rail="${x.id}">${val(x.chip,"")}</div>`;const b=val(x.badge,false),bz=val(x.busy,false)&&!calm,dn=val(x.done,false);return `<button type="button" data-g="${String(x.title||"").trim().charAt(0)}" class="krailb${x.glyph?"":" kld"}${b?" kbadge":""}${bz?" kbusy":""}${dn?" kdone":""}${x.glyph?" kglyph":""}" data-rail="${x.id}" aria-label="${x.title}${b?" (có mới)":""}" title="${x.title}">${x.glyph?`<span class="krailg" aria-hidden="true">${val(x.glyph,"")}</span>`:`<img src="${val(x.icon,"")}" alt="" decoding="async" onload="this.parentNode.classList.remove('kld')" onerror="this.parentNode.classList.remove('kld');this.parentNode.classList.add('kerr')">`}</button>`}).join("");
  const host=live?(onMap?mvh:st):document.body;el.classList.toggle("kstdock",!live);
  if(el.__h!==h){el.innerHTML=h;el.__h=h;el.querySelectorAll(".krailb.kld").forEach(b=>{const i=b.querySelector("img");if(i&&i.complete&&i.naturalWidth)b.classList.remove("kld")})}if(el.parentNode!==host)host.appendChild(el);
  if(live){place(el,onMap?mvh:st);el.style.bottom=""}else{el.style.top="";const tb=document.getElementById("tabs");const q=!onTitle&&tb&&tb.getClientRects().length?tb.getBoundingClientRect():null;el.style.bottom=q?`${Math.round(innerHeight-q.top+6)}px`:""}
@@ -66827,6 +66827,54 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§89",title:"kitDi
  html:()=>{let F=null;try{F=mkFix()}catch(e){}const placed=F?F.placed:{};const m={groups:GFIX,placed};
   return `<div class="kitpg-row" style="position:relative;height:420px;overflow:hidden"><div class="kdr" style="position:absolute;inset:0;--kdr-bg:url('${KDR_BG}')">${kitDisplayRoomHTML(m)}</div></div>`}})}catch(e){}
 }catch(e){console.error("jdisp",e)}})();
+/* ================= jplst: PLACE STAGE LAYOUT (owner 18/11 ~02:50Z + ~03:02Z, s43 chat; OD:L1814, OD:L1818) =================
+   NO plaque over the stage (#sc-t stays in the DOM as the carrier of the place name + visit line, but is hidden).
+   (1) people-count chip = TOP of the left button column (kitStageRail item "here", kit chip j59ico + number),
+   (2) place name = TOP of the right column (#kpname, kit paper .k3p, bigger font); the court cards (#kshR) stand under it,
+   (3) the place-entry line (S.visit.msg: "Thái giám chặn cửa", "Hoàng thượng không ra vườn hôm nay"…) = ONE small kit note chip
+       (.kmnote.kmslot > .kchip: the same part as the "Tối nay Hoàng thượng lật thẻ" note, new slot = top of the stage, between the two columns),
+   (4) figures keep their full size; nothing is drawn over a head (the chip is one line high, the columns are at the edges). */
+(function(){try{
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
+function hereN(){try{return typeof kitHereCount==="function"?kitHereCount():0}catch(e){return 0}}
+const onStage=()=>{try{return typeof kitSideHost!=="function"||kitSideHost()===$("stage")}catch(e){return true}};
+function lay(){try{const st=$("stage");if(!st)return;let nm=$("kpname"),en=$("kpent");
+ const t=$("sc-t"),live=!!t&&!!S&&!S.dead&&onStage()&&st.getBoundingClientRect().height>40;
+ const name=live?((t.querySelector(".rt1")||{}).textContent||"").trim():"";
+ let line="";if(live){const m=t.querySelector(".rmsg");let raw=m?m.innerHTML:"";
+  raw=raw.replace(/^\s*·\s*/,"").replace(/^\s*Ở đây (?:có|còn) \d+ người\.?\s*/,"").trim();/* the count is the icon now; a longer line keeps its own text */
+  if(raw&&!/^Không gặp ai\.?$/.test(raw.replace(/<[^>]+>/g,"").trim()))line=raw}
+ /* (2) place name, top of the right column */
+ if(name){if(!nm){nm=document.createElement("div");nm.id="kpname";nm.className="k3p kpname";st.appendChild(nm)}if(nm.textContent!==name)nm.textContent=name;nm.hidden=false;
+  const h=Math.ceil(nm.getBoundingClientRect().height)+6;st.style.setProperty("--kpnh",h+"px");st.classList.add("kpn")}
+ else{if(nm)nm.hidden=true;st.style.setProperty("--kpnh","0px");st.classList.remove("kpn")}
+ /* (3) entry line chip, top of the stage */
+ if(line){if(!en){en=document.createElement("div");en.id="kpent";en.className="kmnote kmslot";en.setAttribute("role","status")}
+  const h='<span class="kchip n">'+line+'</span>';if(en.__h!==h){en.innerHTML=h;en.__h=h}if(en.parentNode!==st)st.appendChild(en);en.hidden=false}
+ else if(en)en.hidden=true;
+ }catch(e){console.error("jplst",e)}}
+/* the chip never covers her marker (the flower above her head): if they meet, the chip starts to the right of the marker */
+function placeEnt(){try{const en=$("kpent"),st=$("stage");if(!en||en.hidden||!st)return;en.style.left="";const ch=en.querySelector(".kchip");if(!ch)return;const mk=document.querySelector(".kmemark");
+ if(mk&&mk.getClientRects().length){const R=st.getBoundingClientRect(),q=mk.getBoundingClientRect(),c=ch.getBoundingClientRect();
+  if(q.right>c.left-4&&q.left<c.right+4&&q.top<c.bottom+2&&q.bottom>c.top-2)en.style.left=Math.round(q.right-R.left+8)+"px"}}catch(e){}}
+function lay2(){lay();placeEnt();clearTimeout(lay2.a);clearTimeout(lay2.b);lay2.a=setTimeout(placeEnt,400);lay2.b=setTimeout(placeEnt,1300)}
+const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);lay2();return r};
+try{addEventListener("resize",()=>{clearTimeout(lay.__t);lay.__t=setTimeout(lay2,90)})}catch(e){}
+/* (1) the count chip: the kit rail's first slot */
+try{if(window.kitStageRail)kitStageRail.add({id:"here",order:0,chip:()=>{const n=hereN();return n&&typeof j59ico==="function"?`<span class="kchip n j59hchip" role="img" aria-label="Ở đây còn ${n} người">${j59ico()}<span class="j59n">${n}</span></span>`:""},when:()=>hereN()>0&&onStage()})}catch(e){}
+const css=document.createElement("style");css.id="kit-plst";css.textContent=`
+html body .stage #sc-t{display:none!important}
+.kpname{position:absolute;top:8px;right:8px;width:var(--kgrw,150px);z-index:3;box-sizing:border-box;padding:4px 8px;text-align:center;font-weight:800;font-size:1.1rem;line-height:1.2;color:#3a1d10;overflow-wrap:anywhere;background:rgb(255,250,240)}
+html body .stage.kpn .kshR{top:calc(8px + var(--kpnh,0px))}
+html body .stage.kpn .kshR.kasx{max-height:calc(100% - 16px - var(--kpnh,0px))}
+html body .stage .kmnote.kmslot{position:absolute!important;top:6px!important;bottom:auto!important;left:62px;right:calc(var(--kgrw,150px) + 16px);translate:none!important;max-width:none;animation:none;display:flex;justify-content:center;z-index:6;pointer-events:none}
+html body .stage .kmnote.kmslot[hidden]{display:none!important}
+.kmnote.kmslot .kchip{font-size:.74rem;line-height:1.25;padding:3px 10px;white-space:normal;text-align:center;max-width:100%;pointer-events:auto}
+.kmnote.kmslot .kchip .btn,.kmnote.kmslot .kchip button{pointer-events:auto;margin-left:6px}
+.krailc{pointer-events:none;display:flex}
+`;document.head.appendChild(css);
+}catch(e){console.error("jplst init",e)}})();
 
 /* jcoopthin: CO-OP THIN GUEST, part A = foundations (review/coop-thin-a; audit dev/handover/reports/coop-thin-guest-audit.md §2-3;
    owner GO 17/11: host-authoritative thin guest, part by part, end state = the guest only displays the host's state).
@@ -67762,7 +67810,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="d93afa39b8a9";window.CTM_BUILD=BUILD;
+const BUILD="860bd8559572";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

@@ -81,7 +81,7 @@ function j59sel(st,tk,me){let pi=null;try{pi=typeof popIdx==="number"?popIdx:nul
 function j59person(p){return !!p&&p.kind!=="chest"&&p.kind!=="task"&&!(p.kind==="srv"&&p.sk==="task")}
 /* KIT 33.9 head-count icon (owner 17/11 ~14:15Z): the grey GROUP of three (man, woman, child) img/kit/unknown-ico-n.webp (192 px tall, ~145 px wide, ONE file, no srcset so the jcdn CDN fallback works).
    j59ico(h) is the only place that draws it: the swipe-stage "+N" chips (j59chipIco) AND the place header "Ngọc Thanh các [icon] 5" (j59hdrCount) use it. Decorative alt="". */
-function j59ico(){return `<img class="j59ico" src="img/kit/unknown-ico-n.webp" alt="" draggable="false">`}
+function j59ico(){return `<img class="j59ico" src="img/kit/unknown-ico-n.webp" alt="" draggable="false">`}window.j59ico=j59ico;
 function j59chipIco(n){return j59ico()+`<span class="j59n">+${n}</span>`}
 /* place header (every place with people): "Ở đây còn N người." -> [icon] N (the rest of a longer stage line is kept); "Không gặp ai." stays text */
 function j59hdrCount(){try{const m=document.querySelector("#sc-t .rmsg");if(!m||m.dataset.j59h===m.innerHTML)return;const t=m.innerHTML;const r=/^\s*·?\s*Ở đây (?:có|còn) (\d+) người\.?\s*/.exec(t);if(!r)return;

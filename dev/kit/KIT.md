@@ -1638,6 +1638,9 @@ under 1000 px; the choice is remembered per tab (`hclh-kcat-<tab>-<n>`).
 Fold/phones: a compact row under the name/stats; iPad (≥ 1000 px): the empty middle of the bar, two columns. The stage keeps only the place name
 (text on the painting, one line, light halo), the court chips and the figures; name tags under figures are text on the painting too (rank + name, one line).
 Floating notes (`.kmnote`) sit just above the bottom tab bar.
+PLACE STAGE LAYOUT (owner 18/11 ~02:50Z + ~03:02Z, OD:L1814/L1818; `dev/build/jplst.js`, review/place-stage): NO plaque over the stage (`#sc-t` stays in the DOM as the data carrier, hidden).
+  Slots: (1) people-count chip (`.kchip.j59hchip` = kit person icon + number) = FIRST item of the stage rail (kitStageRail item `{id:"here",order:0,chip:()=>html}`, new `chip` item kind: a non-button, never tappable), V/L/M stand under it; none at 0 people.
+  (2) place name = top of the right column (`#kpname`, kit paper like `.k3p`, 1.1rem bold); the court cards (`#kshR`) are shifted down by `--kpnh` (name height + 6). (3) the place-entry line (`S.visit.msg` minus the count: "Thái giám chặn cửa", "Hoàng thượng không ra vườn hôm nay"…) = ONE small `.kmnote.kmslot > .kchip` (the same kit note chip as "Tối nay Hoàng thượng lật thẻ", new slot: top of the stage between the rail and the right column, .74rem, wraps to 2 lines at most, starts right of her marker when they would meet); never over a head. Figures keep the full kit size (no plaque cap).
 
 ### 31.13 SELECTED STATE — ONE look for every picker (jk3 §8, owner 11/14 approved; kit owner #2)
 Dung mạo faces (`kitPicker .kpki`), consort / servant / kid picker strips (`.pface`), origin wheel tiles (`.krt`), pressed kit toggles (`.ksel`):
