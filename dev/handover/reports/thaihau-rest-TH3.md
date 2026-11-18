@@ -18,6 +18,6 @@ CDN (img/_review/thaihau/, https://ctm-img.victoria-tntt.workers.dev/ + path): c
 | c30 (moonlight blue) | gilded bronze hand censer | 1/1/1, 0 regen | pointed chin matches; a65 reads ~60 (silver streaks + lines, a little young) | PASS |
 | c31 (pale jade) | small white-jade ruyi | 1/1/1, 0 regen (+2 remove-bg on a51 baked bg, a65 smudge) | square jaw matches, ruyi at chest | PASS |
 | c32 (ivory) | jade-headed dragon-head staff | 1/1/1, 0 regen | wide-cheek face matches; same staff note as c29 | PASS (flag) |
-All 9 people done, 27 gens, 0 regens. Extra: 7 images_remove_background (c22 a36, c24 a51+a65, c28 a51, c31 a51+a65 = 6, plus none other) -> 6 x 3 cr.
+All 9 people done, 27 gens, 0 regens. Extra: 6 images_remove_background (c22 a36, c24 a51, c24 a65, c28 a51, c31 a51, c31 a65).
 Credits: 27 gens x 135 = 3645 + 6 remove-bg x 3 = 18.
 Notes: transparentBackground worked on most gens but ~1/3 had a baked parchment background or stains (listed above); fixed with images_remove_background, otherwise local alpha cleanup only. Thin hair dangles can be slightly trimmed by remove-bg (c24 a65).
