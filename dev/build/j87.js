@@ -17,7 +17,7 @@
 const KBK_ART={cover:"img/book-cover.webp",left:"img/book-left.webp",right:"img/book-right.webp",end:"img/book-end.webp",title:"img/title-tuanluc-d4s.webp"};
 /* KBK_TITLE_IMG: the cover label's written title as a picture (owner 11/15: vertical brush title d4 + the game's Trân nữ seal, KIT §27.1). A cover page whose
    title has a picture here draws it in the label (art cover only); any other title keeps the text. */
-const KBK_FIG_COL=.42;   /* figure column ≤ 36 % of the page (KIT T3) */
+const KBK_FIG_COL=.5;   /* figure column ≤ 36 % of the page (KIT T3) */
 const KBK_TITLE_IMG={"Tuần lục":KBK_ART.title};
 const KBK_HAVE={};
 /* lag-play (owner 16/11 15:05Z): ONE coalesced book re-layout. Every picture that arrived (book art, each figure's size/head measure)

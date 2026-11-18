@@ -109,20 +109,22 @@ var KBK_ART_LINE=window.KBK_ART_LINE={b:.0244};
    let dyF=0,dxF=0;{const i1=f.querySelector("img"),s1=i1&&i1.getAttribute("src"),b1=s1?kitFigBody(s1,soon):null,Hc=por.clientHeight;
     if(!b1||!Hc){f.style.visibility="hidden"}else{const kf=parseFloat(getComputedStyle(box).getPropertyValue("--kfr"))||1;
      const ar1=i1.naturalWidth&&i1.naturalHeight?i1.naturalWidth/i1.naturalHeight:b1.ar,pwc=por.clientWidth;
-     /* review/book-figsize (owner 18/11 "Cái gì mà mỗi người một size vậy trời?"): ONE body for everyone. The old per-figure shrink (kk = column / painted width) made every
-        figure a different size (a wide gown shrank to .46 of the column, a slim one to .8, scan 53 % spread). Now the standard body is fixed by the COLUMN, never by the
-        figure: body = min(column height / man, column width / KIT_BOOK.wmax) × fac. A figure wider than the column is NOT scaled: it is centred on the column and its
-        hem / sleeve tips are cut at both column edges (KIT 32.2a). */
-     const Hs=pwc?Math.min(Hc,KIT_FIG.man*pwc/(window.KIT_BOOK?KIT_BOOK.wmax:.5)):Hc,g=kitBookFig(Object.assign({},b1,{ar:ar1}),kf*KIT_FIG.man,Hs);const pw1=Math.max(.2,(b1.r||1)-(b1.l||0))*g.iw;
-     dyF=g.dy;dxF=pwc&&pw1>pwc?pwc/2-((b1.l||0)+(b1.r||1))/2*g.iw:-(b1.l||0)*g.iw;   /* narrower than the column: painted left edge on the column's left edge; wider: centred, cut at both edges */
-     f.style.height=g.ih.toFixed(1)+"px";f.style.width=g.iw.toFixed(1)+"px";f.style.visibility="";f.dataset.kbody=g.body.toFixed(1);
+     /* review/book-figsize (owner 18/11 "Cái gì mà mỗi người một size vậy trời?" + "never cropped", KIT 32.8): ONE body for everyone, ZERO crop. The old per-figure shrink
+        (kk = column / own painted width) gave every figure another size (scan spread 53 %). Now the standard body is fixed by the COLUMN, never by the figure:
+        body(woman) = min(column height / man, column width / (KIT_BOOK.wmax × KIT_BOOK.fmax)); men ×fac on top. wmax is the widest painted art of the whole catalog (+ the
+        grey silhouettes, whose art fills the picture width: kitFigBody reports them as a standard figure, so their true extent is 0..1 here). A figure that is STILL wider
+        (never seen in the catalog scan) is scaled to fit — wider than the column is never cut. */
+     const KB=window.KIT_BOOK||{wmax:.65,fmax:1.07},sil=/unknown-fig-/.test(s1),L0=sil?0:(b1.l||0),R0=sil?1:(b1.r||1);
+     const Hs=pwc?Math.min(Hc,KIT_FIG.man*pwc/(KB.wmax*KB.fmax)):Hc,g=kitBookFig(Object.assign({},b1,{ar:ar1}),kf*KIT_FIG.man,Hs);const pw1=Math.max(.2,R0-L0)*g.iw;
+     const kk=pwc&&pw1>pwc?pwc/pw1:1;dyF=g.dy*kk;dxF=-L0*g.iw*kk;   /* painted left edge on the column's left edge */
+     f.style.height=(g.ih*kk).toFixed(1)+"px";f.style.width=(g.iw*kk).toFixed(1)+"px";f.style.visibility="";f.dataset.kbody=(g.body*kk).toFixed(1);if(kk<1)f.dataset.kfit=kk.toFixed(3);
      /* KIT 32.2b EQUAL GAPS (owner 16/11 s21/s22, whole group): the two frame lines round the figure are the running-head rule (.kbk-rh)
         and the page frame's bottom line: the painted border's inner edge on art pages (KBK_ART_LINE.b of the page height, measured on
         book-right/left.webp), the drawn .kbk-in frame on plain pages. Gap above the painted head = gap under the feet: the figure is raised
         by half the difference (never lowered past its column floor — the page number row — never above the column top). */
      try{const inEl=box.closest(".kbk-in"),rh=inEl&&inEl.querySelector(":scope > .kbk-rh");const rel=e=>{let y=0,x=e;while(x&&x!==inEl){y+=x.offsetTop;x=x.offsetParent}return x===inEl?y:null};const pt=inEl?rel(por):null;
       const pgE=box.closest(".kbk-pg"),art=!!(pgE&&(pgE.classList.contains("r")&&box.closest(".kbk.art-right")||pgE.classList.contains("l")&&box.closest(".kbk.art-left")));
-      if(pt!=null){const lt=rh&&rh.offsetParent?rh.offsetTop+rh.offsetHeight:0,lb=art?pgE.offsetHeight*(1-KBK_ART_LINE.b)-inEl.offsetTop:inEl.clientHeight,figH=g.ih*Math.max(.2,b1.b-b1.t),feet=pt+Hc;
+      if(pt!=null){const lt=rh&&rh.offsetParent?rh.offsetTop+rh.offsetHeight:0,lb=art?pgE.offsetHeight*(1-KBK_ART_LINE.b)-inEl.offsetTop:inEl.clientHeight,figH=g.ih*kk*Math.max(.2,b1.b-b1.t),feet=pt+Hc;
        const s=Math.max(-(Hc-figH),Math.min(0,((lb-feet)-(feet-figH-lt))/2));dyF+=s;f.dataset.kgap=Math.round(feet+s-figH-lt)+"/"+Math.round(lb-feet-s)}}catch(e){}}}
    const w0=f.offsetWidth;if(!w0||!box.offsetWidth)return;
    f.style.transformOrigin="50% 100%";const t=Math.abs(dyF)>0.5||Math.abs(dxF)>0.5?`translate(${dxF.toFixed(1)}px,${dyF.toFixed(1)}px)`:"";if(f.style.transform!==t)f.style.transform=t})}catch(e){}}
