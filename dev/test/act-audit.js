@@ -73,7 +73,7 @@ AA.scen=(n)=>{AA.fresh();
  /* every state but "dau": she already knows everyone (names, faces), so the person acts are open */
  if(n!=="dau"){try{k61Know(rivals.filter(v=>v.alive),"",true,3)}catch(e){}try{kn();for(const v of rivals)S.met[v.id]=wk()}catch(e){}}
  if(n==="toi"){S.buoi=BUOI.length-1;used=0}
- if(n==="cao"){S.rank=5;S.sung=65;S.danh=60;S.th=55;S.tamco=55;S.mat=3;S.duc=60;try{fillStaff(S,true)}catch(e){}}
+ if(n==="cao"){S.rank=5;S.sung=65;S.danh=60;S.th=55;S.tamco=55;tmPlace(S,3);S.duc=60;try{fillStaff(S,true)}catch(e){}}
  if(n==="con"){try{const k=mkKid("m",4);S.kids.push(k);const k2=mkKid("f",2);S.kids.push(k2)}catch(e){AA.errs.push("mkKid "+e.message)}S.preg=0}
  if(n==="hau"){try{S.rank=Math.max(S.rank,3);fillStaff(S,true)}catch(e){}}
  if(n==="hh"){S.rank=7;const q=rivals.find(v=>v.queen);if(q){q.queen=false;q.rank=6}S.sung=70;S.danh=70;try{fillStaff(S,true)}catch(e){}}
