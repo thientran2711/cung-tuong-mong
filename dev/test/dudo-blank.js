@@ -12,7 +12,7 @@ const [,,PAGEURL,DIR,SIZES,MAXS]=process.argv;const sleep=t=>new Promise(r=>setT
   await p.goto(PAGEURL,{waitUntil:'domcontentloaded'});await p.addStyleTag({content:'#kroul,#kroulw,.kroul,.kcf,#krottip{display:none!important}'});
   await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function',null,{timeout:180000});await sleep(2500);
   await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;window.__forceOrigin='tt';document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}});
-  for(let i=0;i<15;i++){await sleep(400);const srv=await p.evaluate(()=>{const s=isSrv();if(s)start();return s});if(!srv)break}
+  for(let i=0;i<15;i++){await sleep(400);const srv=await p.evaluate(()=>{const s=isSrv();if(s)try{nlNew()}catch(e){}start();return s});if(!srv)break}
   await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;window.__mapZ=0;window.__mapKey2=null;tab='go';render()});
   const t0=Date.now();let last=null,okAt=null;
   const probe=()=>p.evaluate(()=>{const w=document.querySelector('.mapw'),v=document.querySelector('.mapv'),sc=document.querySelector('.game.maptab .mapsc');if(!w)return{nomap:1};const R=e=>{const r=e.getBoundingClientRect();return{w:Math.round(r.width),h:Math.round(r.height)}};

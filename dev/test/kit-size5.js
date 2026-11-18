@@ -32,7 +32,7 @@ const CASES={
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.addStyleTag({content:'#kroul,#kroulw,.kroul{display:none!important}'});
   await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function',null,{timeout:180000});await sleep(2500);
   await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}});
-  for(let i=0;i<15;i++){await sleep(400);const srv=await p.evaluate(()=>{const s=isSrv();if(s)start();return s});if(!srv)break}
+  for(let i=0;i<15;i++){await sleep(400);const srv=await p.evaluate(()=>{const s=isSrv();if(s)try{nlNew()}catch(e){}start();return s});if(!srv)break}
   await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;window.kitKnown=()=>true;window.isKnown61=()=>true;tab='act';render()});await sleep(1200);
   const R={};
   for(const [name,fn] of Object.entries(CASES)){if(ONLY&&!ONLY.split(',').includes(name))continue;

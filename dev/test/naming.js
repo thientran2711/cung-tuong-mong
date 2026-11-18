@@ -12,7 +12,7 @@ const [,,URL,SZ,OUT,TAG]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=W
  await p.waitForTimeout(800);await shot('1-title');
  R.title=await p.evaluate(()=>[...document.querySelectorAll('#title button')].map(b=>b.innerText.replace(/\s+/g,' ')).join(' | '));
  await p.evaluate(()=>{try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}});
- for(let i=0;i<15;i++){await p.waitForTimeout(400);if(!await p.evaluate(()=>{const s=isSrv();if(s){Q.length=0;start()}return s}))break}
+ for(let i=0;i<15;i++){await p.waitForTimeout(400);if(!await p.evaluate(()=>{const s=isSrv();if(s){Q.length=0;try{nlNew()}catch(e){}start()}return s}))break}
  await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;render()});
  const scan=()=>p.evaluate(()=>{const out=[];const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n;
   while((n=w.nextNode())){const e=n.parentElement;if(!e||!e.offsetParent||/SCRIPT|STYLE/.test(e.tagName))continue;const s=n.nodeValue.replace(/“[^”]*(”|$)/g,"").replace(/^[^“”]*”/,"");if(/(^|[^\p{L}])[Nn]gươi([^\p{L}]|$)/u.test(s))out.push(n.nodeValue.trim().slice(0,70))}return out});

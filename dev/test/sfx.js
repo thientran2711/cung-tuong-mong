@@ -13,7 +13,7 @@ const [,,URL,SZ,OUT]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=WH.sp
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof kitSfx==='function');await p.waitForTimeout(2500);
  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}
   const s=document.createElement("style");s.textContent=".kroul{display:none!important}";document.head.appendChild(s)});
- for(let i=0;i<15;i++){await p.waitForTimeout(400);const srv=await p.evaluate(()=>{const s=isSrv();if(s){Q.length=0;start()}return s});if(!srv)break}
+ for(let i=0;i<15;i++){await p.waitForTimeout(400);const srv=await p.evaluate(()=>{const s=isSrv();if(s){Q.length=0;try{nlNew()}catch(e){}start()}return s});if(!srv)break}
  await p.evaluate(()=>{document.querySelectorAll(".kroul,#kroul").forEach(e=>e.remove());Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;tab="go";render()});
  /* sound on, as after the first tap with "Tiếng" on */
  await p.mouse.click(5,5);await p.evaluate(()=>{OPT.snd=true;OPT.mute=false;OPT.sfx=.7;OPT.fxon=true;AU.unlocked=true;window.__bot=false});
