@@ -180,8 +180,10 @@ function talkOpts(p){const E=S.emp,K=E.known,L=E.likes,b=bestArt(),v=p.ref;
    {n:"Tâm sự",o:100,w:{...BAL.ag.cx2.maidTalk.w}},
    {n:"Sai đi dò la",o:od(cx2O(S,"maidSpy")),w:{},l:{...BAL.ag.cx2.maidSpy.l},x:`${evSg(BAL.ag.ev.one)} về một phi tần từng làm điều sai`,go:()=>{const x=evGuilty(S,liveRivals(true));if(x&&evA(S,x,BAL.ag.ev.one))log(`${S.maid.name} nghe lén được chuyện của ${x.name}: ${evSg(BAL.ag.ev.one)}.`);else{const y=pick(liveRivals(true));log(y?`${S.maid.name} nghe lén ${y.name}: không có gì sai trái, chỉ biết ${harmTxt(y)}.`:`${S.maid.name} không nghe được gì.`)}}}];
  return []}
+/* khắc of a talk option (ONE rule for its card line and its pay): a parallel-time order (a.pk, jptime BAL.ptime) costs only the order */
+function talkK(a){try{if(a&&a.pk&&typeof ptOn==="function"&&ptOn())return ptRow(a.pk).o}catch(e){}return a&&a.act?BAL.time.cost.talkAct:BAL.time.cost.talk}
 function talk(oi){if(popIdx==null||!S.visit||S.visit.talked===true||S.dead||Q.length)return;S.visit.tk=S.visit.tk||{};if(S.visit.tk[popIdx])return;const p=curPeople()[popIdx];if(!p)return;const a=talkOpts(p)[oi];if(!a||!canPay(a))return;
- const tcost=a.act?BAL.time.cost.talkAct:BAL.time.cost.talk;if(!can(tcost))return;spend(tcost);
+ const tcost=talkK(a);if(!can(tcost))return;spend(tcost);
  if(a.run){S.visit.tk[popIdx]=1;if(oddsCapped(a)&&!roll(BAL.odds.hi)){popMsg=`${a.n}: ${oddsSoft(a.n,a.c)}`;render();return}/* ODDS CAP soft fail */if(a.c)apply(a.c);popMsg=fzRun(a.o,typeof a.k==="string"?a.k:null,()=>a.run())||"";/* a.o was read before the spend: the act rolls the odds on the card (j9 fzRun) */if(popMsg)log(`${a.n}: ${popMsg}`);render();return}
  if(a.open){a.open();render();return}
  S.visit.tk[popIdx]=1;const s0=S.logSeq||0;const ok=runOpt(a);

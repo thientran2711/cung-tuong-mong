@@ -84,7 +84,7 @@ function popCard(p,i){const opts=talkOpts(p),done=S.visit&&(S.visit.talked===tru
  else if(p.kind==="emp"){rank="Hoàng thượng";lines=[tuoi(S.emp.age),`Tâm trạng: <b>${MOODS[S.emp.mood][0]}</b>`,`Ngài sủng ngươi <b>${S.sung}</b>`]}
  else if(p.kind==="th"){rank="Thái hậu";lines=[tuoi(S.thAge),`Thái hậu → ta: thiện cảm <b>${S.th}</b>`]}
  else{const a=String(p.info||"").split(" · ");rank=a.shift()||"";lines=a;const ag=p.kind==="maid"?S.maid.age:p.kind==="ty"?(S.court&&S.court.ty||{}).age:p.kind==="ksp"?(S.court&&S.court.ksp||{}).age:p.kind==="peddler"?(S.court&&S.court.ped||{}).age:p.kind==="kid"&&p.ref?p.ref.age:p.kind==="fallen"&&v?v.age:0;if(ag&&p.kind!=="kid")lines.unshift(tuoi(ag))}
- const B=opts.map((a,j)=>{const o=a.o==null?100:a.o;const tc=a.act?2:1;const poor=a.c&&a.c.bac&&S.bac+a.c.bac<0;
+ const B=opts.map((a,j)=>{const o=a.o==null?100:a.o;const tc=talkK(a);const poor=a.c&&a.c.bac&&S.bac+a.c.bac<0;
   const why=a.lock?a.t:poor?"không đủ bạc":whyTime(tc);const sm=optLine(a);
   return pbtn(`class="opt" data-o="${j}"`,a.n,sm,why)});
  /* person-dialog-restore (owner 18/11 06:10Z, OD:L1852): the acts are split into GROUP TABS (the Hành sự categories, KIT_CAT via kitActCat; the same

@@ -1311,3 +1311,23 @@ BAL.bookFigW=.343;Object.assign(BAL,{bookFrame:{cRef:.072,gap:8,footGap:10}});
 /* DOING AN ACT ON THE SPOT (review/shown-odds-one-path): "Cài đồ vào rương nàng" done in her own palace is easier than sending
    someone by actHere.plant (was a typed -15 pen in j8 plantpick + a typed +15 on the j2 chest card); both read it through actCtx (j9). */
 Object.assign(BAL,{actHere:{plant:15}});
+/* PARALLEL TIME (owner OD 18/11 ~20:15Z/~20:20Z/~20:35Z; jptime): every button where she asks / sends ANOTHER person.
+   o = khắc the SENDER pays to give the order (her card's Tốn); n = khắc the person sent is away, counted from the tap, walk included
+   (= the RECEIVER's own act length when she plays the receiver: the maid road order frame shows the same n). The result lands at tap + n.
+   Equal value (laws 2/3/4, D check): every send costs the same 1 khắc order and keeps the person away 2 khắc; what each send gives and risks
+   stays the button's own BAL rows (odds, evidence, loyalty −, oán …), shown on the sender card and on the receiver's frame alike.
+   on = 0: every button runs at once as before. */
+Object.assign(BAL,{ptime:{on:1,kinds:{
+ def:{o:1,n:2},
+ spy:{o:1,n:2},     /* Sai đi dò la (her maid / a servant) · NPC cx2:maidSpy */
+ listen:{o:1,n:2},  /* Nghe ngóng chung */
+ scout:{o:1,n:2},   /* Sai tai mắt dò nơi ở (her runner) */
+ invite:{o:1,n:2},  /* Mời đến cung ta (messenger; the guest comes at the due khắc) */
+ harm:{o:1,n:2},    /* a deed on a consort done by a sent servant (not together: "phải sai người đi", j8 doAct / bestSent) */
+ plant:{o:1,n:2},   /* Sai người lẻn vào cung cài đồ */
+ bribe:{o:1,n:2},   /* Mua chuộc / Cài người vào cung khác (the servant sent) */
+ fetch:{o:1,n:2},   /* Sai cung nữ đến Nội vụ phủ xin · Nhờ thái giám tìm thú nuôi */
+ buy:{o:1,n:2},     /* Sai cung nữ thân tín mua lén ngoài cung (the goods still come next tuần) */
+ doctor:{o:1,n:2},  /* Truyền thái y (the physician walks over) */
+ errand:{o:1,n:2}   /* maid road: Việc chủ sai (receiver side: her own walk + task) */
+}}});
