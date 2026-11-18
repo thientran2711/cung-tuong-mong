@@ -66,9 +66,17 @@ PRIORITY #1 CHECK: OD 17/11 ~23:30Z (smudge = CODE on the makeup layer, not Magn
 - Measure (dev/test/smudge-code.js, pink layer alone, row through the cheek band, 20 %): max ABSOLUTE alpha step between neighbouring pixels = .012 at vừa and nặng (≈ 3/255 per pixel, threshold .02) = smooth, no step. Looked at 3x crops of both cheeks at nặng 20 % and vừa: no vertical line / edge.
 - Options re-rendered: CDN img/_review/smudge/opt-<2|3>-<5|10|15|20>.png.
 
+## r15 (s41: pale vertical streaks left of the grey run at nặng)
+- Cause (inferred, not isolated): the 2 extra thin lash runs per eye at nặng (n 3) read as pale vertical bands beside the main run on the pink cheek. nặng is now ONE grey run per eye (BAL.looks.smuFx.tear.n [0,1,1,1]); grey run itself unchanged. Re-shot lod-3-face/stage/chip + look-* (CDN img/_review/smudge/); 3x zoom of both cheeks at lod-3-face: only the grey run, no pale streak.
+
+## HANDOVER (worker budget turn 30)
+- State: branch review/smudge-code 69243ef pushed, SẴN SÀNG KIỂM r15; all code in dev/build/jlooks.js (lkSmu* block + BAL.looks.smuFx), test dev/test/smudge-code.js (modes: default, PCT=5..20, MODE=lod, MODE=looks; env LOCALFIT=1 CLOSEUP=fig for the tuyet-glow face fig-consort-c11-tcold-a18).
+- Samples are shot on a scratch worktree /home/user/wt/sc = review/toil-looks5 + this branch (LOD + lip fit need toil-looks5; repo dev/art/mkfit, not the CDN table). Rebuild there: copy dev/build/jlooks.js + dev/test/smudge-code.js, bash dev/site/build_site.sh.
+- Open: size-aware LOD is a no-op on main until toil-looks5 lands; CDN img/mk-fit != repo dev/art/mkfit (c11 lips off with CDN); no makeup + crying = LOOK_DECALS B red eyes, not in this branch. After the verdict: python3 dev/site/cdn_sync.py --wipe-review smudge.
+
 ## Open items / follow-ups
 - Small figure faces (~40 px): nhẹ barely visible, vừa/nặng read as a tear stain.
 - Shots outside git; built root files not committed.
 
 ## State
-branch review/smudge-code 6e56871 (pushed). Waiting for verdict.
+branch review/smudge-code 69243ef (pushed). Waiting for verdict.
