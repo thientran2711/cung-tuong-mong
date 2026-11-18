@@ -103,3 +103,22 @@ ge-guard 6/6 · ge-engine all 456/456 ×2 (+ 1 cold 241, above) · one-core PASS
 2 equal-value / 3 gain-and-loss / 4 ONE CORE: OK for W1 data; the FOR B patch needs its BAL row (a.1). 6b real people: OK for 43 endings; muoi_no_4 waits on (a). 7 cổ trang: OK (no %, no digits; «y» for a man in the patch). 11 whole group: each fix done as a family with tables. Others n/a or unchanged from round 1.
 
 ## Still FOR E (from round 1 + the worker): engine term «the followed / needed person alive» (tt_mat_2/4 Queen, every FOLLOW ending); one HH seat rule for all HH endings incl. cnv_mat_2; inChar .89 vs Chuỗi length; game-wide palace aliases (Càn Ninh / Khôn Ninh, Từ Ninh / Đức Thọ) for the wording owner.
+
+---
+# ROUND 3 — small delta df30265f (on top of PASS 46aeac92), order from Foreman E ROOT #5
+PRIORITY #1 CHECK ('ge-writers|GE writer|jgedata'): OD 0 | ledger 0 | claims 8 | main 5 | review/* 2 | archive 0. 18 LAWS re-read.
+
+## VERDICT: **PASS df30265f — land after the B patch (muoi_no ch8 c3) + muoi_no_4 follow-up**; re-merge with newest main at landing.
+
+| item | result |
+|---|---|
+| 1 merge of main 5e6490b4 | OK — branch vs 5e6490b4 = only W1 files (assemble.py one line, jbalge rows, jgedata_w1.js, ge-engine / ge-guard / ge-measure, built files). assemble order = main's list + `jgedata_w1.js` right after `jgedata.js`. **Main has moved again (94d11623, +49 commits; jration / jmoodknow / jfeel on the same assemble line) → textual conflict again; resolve the same way at landing.** On that local merge: build OK. |
+| 2 timing fix | OK — ge-engine `__life` and ge-measure `__ge` now wait for `S.st.f14.rd===road` (15 s cap, then the road check reports clearly). Cold runs on the merge with main 94d11623: **456/456, 456/456** (each right after a fresh build). ge-guard 6/6 · one-core PASS · quickcheck PASS (core gates PASS, open 1626 ms, old save ok, perf render 296/248, tab 505/466, buổi 1449/1417, tasks>200 20/24; only «NOT BUILT» = my uncommitted local merge). |
+| 3 FOR B item 1 (final) | **Exact: `git apply --check` clean on origin/main 94d11623 AND on df30265f.** Mechanism verified in j67.js: an option's `to` / `tf` sets `A.force` (j67:143), `pickNext67` plays a valid `A.force` before the pool (j67:105), and the chapter seq always has ≥ 1 c-slot after s, so c3 (no `if` / `need`) plays in EVERY life of muoi_no ch8 → law 6(b) OK for the scholar. Law 2 equal value: c3 row = bạc −40 → Đức +3 · Sức −3 → Danh +2 · Đức −2 → Tâm cơ +3 (each sc:1), the same sizes as that chapter's c2 row — OK. Law 3: each option one cost + one gain — OK, and the words match the numbers (lx «hiệu buôn mất một món bạc» = bạc, «lo nghĩ hao sức» = Sức, «ép người lúc cùng đường» = Đức). Law 4: numbers only in jbalroad.js — OK. Law 7: «y» for a man, no digits — OK. |
+
+**One correction to the worker's claim «the ~2-of-3 draw is untouched» (not blocking):** c3 takes the FIRST c-slot, and ch8 plays nc = min(2, 1 + rI67(3)) c-beats (j67:82), so c1 / c2 drop from being seen in about 5 lives of 6 to about 1 in 3. Their option names sit in muoi_no_1 (4 names), muoi_no_2 (2) and muoi_no_4 (3) Chuỗi (chains of 16–24 names, one option taken per beat), so the loss is ≈ one pull at most. Therefore, when B lands the patch: the W1 successor adds c3's three names to muoi_no_4 pull + lean (thiện: «Xóa nợ, chúc y thi đỗ», «Cho hoãn, đỗ rồi hãy trả»; ác: «Giữ giấy nợ, đợi y làm quan») and **reruns the muoi_no measure (kind + cruel, 4 lives) + ge-guard** — all 4 endings must stay IN for both shadings. A light re-check of that one diff is enough (any reviewer).
+
+Old saves: a life saved mid-ch8 after its s-beat does not meet the scholar in that chapter (no crash; the ending simply keeps a smaller pull) — acceptable.
+
+## 18 LAWS (round 3)
+2 / 3 / 4: OK (patch row). 6(b): OK once the patch lands (scholar met every life). 7: OK. 11: timing fix done for the whole family (both helpers). Others n/a.
