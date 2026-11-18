@@ -140,3 +140,41 @@ Mud table (dL* on changed px; strong local darkening is expected for mud):
 ### Samples (2400 px tall, c01 | c30 | c03 | c12, label in Vietnamese)
 https://ctm-img.victoria-tntt.workers.dev/img/_review/cloth-xoc/stain-uot-1.png (-2, -3) and stain-bun-1.png (-2, -3). Older r5 crops stain-uot-*-neck/hand-* still there (stale). Tea unchanged. Wipe after verdict: python3 dev/site/cdn_sync.py --wipe-review cloth-xoc
 Tests: cloth-stain.js OK (+wet never lighter/greyer), cloth-xoc.js OK, one-core-guard PASS, quickcheck PASS (b5d7efe, site rebuilt).
+
+## r6b (after MAIN s41 FAIL on b5d7efe: mud speckle/spikes/shoe; wet needs dry panels; c03 lotus glow) — SẴN SÀNG KIỂM review/cloth-xoc 11648eb (QUICKCHECK PASS, tests OK, effects OFF)
+Root causes + fixes (jcloth.js):
+1. Mud speckle = the 768 px decals were drawn at 20-60 px by point-sampling one bilinear tap per screen pixel (no prefilter) -> aliased dots. `clothDecalMip`: premultiplied 2x2 box halvings cached on the decal, every non-crease decal draw (mud, tea, wet shapes) samples a copy <= 2x its drawn size -> soft edges as on the decal sheet. Creases ('shade' blend, approved) untouched. Side effect: lv1 mud strips + tea are now soft-edged too (same shapes/positions; lv1 no longer byte-identical, only anti-aliased).
+2. Mud lv2/lv3: no more bun-6 wicks / bun-7 rows. New soft TIDE BAND in code (BAL bun.tide): per-column uneven height (fbm), darker at the hem, blurred top edge with a faint tide line, multiply mud colour [122,84,50]; + sparse pieces: lv2 drops bun-3 x2 + drip bun-5 x1; lv3 drops x3 + drips x2 + one splash bun-4. Shoes: centre bottom 5 % restored to 85 % clean (BAL bun.shoe).
+3. c03 lotus 'glow' was NOT the art (dry panel shows no glow): the stain protect map (skin colour test + held-item colour test, blurred wide) caught the pink lotus embroidery, so wet/mud left a dry halo round it. New mk.protL for stain layers only: protect fades out below .55-.65 of the figure (hands never go there; BAL xoc.lowA/lowB). Creases keep protS/prot unchanged.
+4. Found while checking 3: black specks on c01 lv2/3 — local robe colour = 0 where the mask was excluded; now the local colour uses protL and falls back to the pixel's own colour. Fixed (min dL* back to -22).
+Wet table (r6b):
+| fig | lv | changed px | min dL* | mean dL* | lighter px | mean dC* | greyer px (dC*<-3) | mean dhue° |
+|---|---|---|---|---|---|---|---|---|
+| c01 | 1 | 45468 | -11.1 | -6.3 | 0 | +4.16 | 0 | -2.1 |
+| c01 | 2 | 99850 | -17.5 | -9.4 | 0 | +6.45 | 0 | -2.7 |
+| c01 | 3 | 120449 | -22.1 | -13.5 | 0 | +9.33 | 0 | -3.4 |
+| c03 | 1 | 78548 | -9.5 | -4.0 | 0 | +2.91 | 0 | -1.4 |
+| c03 | 2 | 102545 | -15.1 | -7.4 | 0 | +5.23 | 0 | -2.4 |
+| c03 | 3 | 136113 | -18.5 | -10.8 | 0 | +7.31 | 13 | -3.5 |
+| c12 | 1 | 36427 | -8.5 | -3.1 | 0 | +1.95 | 0 | -1.2 |
+| c12 | 2 | 50011 | -13.7 | -7.0 | 0 | +4.17 | 0 | -2.4 |
+| c12 | 3 | 104887 | -17.9 | -8.6 | 0 | +5.18 | 0 | -3.0 |
+| c30 | 1 | 38765 | -8.3 | -4.6 | 0 | +1.49 | 0 | -1.6 |
+| c30 | 2 | 67497 | -12.8 | -6.4 | 0 | +1.91 | 0 | -2.0 |
+| c30 | 3 | 108120 | -16.1 | -9.0 | 0 | +2.55 | 106 | -3.0 |
+Mud table (r6b):
+| fig | lv | changed px | min dL* | mean dL* | lighter px | mean dC* | greyer px (dC*<-3) | mean dhue° |
+|---|---|---|---|---|---|---|---|---|
+| c01 | 1 | 3340 | -46.6 | -7.8 | 0 | +1.36 | 0 | -0.2 |
+| c01 | 2 | 16481 | -54.3 | -9.4 | 0 | +1.18 | 11 | +0.0 |
+| c01 | 3 | 24718 | -65.4 | -13.4 | 0 | +1.49 | 116 | +0.1 |
+| c03 | 1 | 3576 | -42.1 | -8.4 | 0 | +0.18 | 80 | -6.2 |
+| c03 | 2 | 18078 | -47.4 | -10.3 | 0 | +1.28 | 203 | -5.1 |
+| c03 | 3 | 26817 | -59.2 | -15.0 | 0 | +1.88 | 670 | -7.2 |
+| c12 | 1 | 4701 | -40.2 | -8.6 | 0 | +1.72 | 0 | -5.2 |
+| c12 | 2 | 20356 | -52.9 | -10.9 | 0 | +2.29 | 0 | -4.8 |
+| c12 | 3 | 28600 | -61.1 | -16.0 | 0 | +3.34 | 0 | -6.6 |
+| c30 | 1 | 4758 | -44.9 | -9.0 | 0 | +3.04 | 2 | -2.7 |
+| c30 | 2 | 19713 | -52.9 | -10.9 | 0 | +3.48 | 0 | -3.3 |
+| c30 | 3 | 27181 | -63.6 | -16.6 | 0 | +5.39 | 0 | -3.9 |
+Samples (CDN img/_review/cloth-xoc/): drywet-uot-{c01,c30,c03,c12}.png and drywet-bun-{c01,c30,c03,c12}.png = DRY | lv1 | lv2 | lv3, waist->hem, 2x; stain-{uot,bun}-1..3.png full figures 2400 px. Looked at all: no grey, no speckle, no lotus halo, shoes clean, neck/hands clean.
