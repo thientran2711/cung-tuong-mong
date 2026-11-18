@@ -19,3 +19,10 @@ t8-v2-yellow | CDN _review only | W55 session_011xDdVQTwxN7jGoVprySAoD | DONE f8
 b10-pose-eyes | CDN _review only | W56 session_011xDdVPNX13rhPHjdfkbyXh | RUNNING | 2026-11-18T15:52Z (Foreman C ROOT-25)
 live-open-eyes | CDN _review (then live) | W57 session_011xDdVPo2tyAFP5faQKZ1Xe | RUNNING | 2026-11-18T15:52Z (Foreman C ROOT-25)
 | E12 test-flaky-sure (sonnet; test-only) | review/test-flaky-sure @c3b9d58c | Foreman E | session_01DgYSWmvDYnmfLCrNGtw5Uu | DONE, SẴN SÀNG KIỂM | 18/11 |
+b10-a26-c01-c11 | CDN _review only | W58 (opening) | RUNNING | 2026-11-18T15:58Z (Foreman C ROOT-25)
+b10-a26-c12-c22 | CDN _review only | W59 (opening) | RUNNING | 2026-11-18T15:58Z (Foreman C ROOT-25)
+b10-a26-c23-c32 | CDN _review only | W60 (opening) | RUNNING | 2026-11-18T15:58Z (Foreman C ROOT-25)
+b10-a36-c01-c11 | CDN _review only | W61 (opening) | RUNNING | 2026-11-18T15:58Z (Foreman C ROOT-25)
+b10-a36-c12-c22 | CDN _review only | W62 (opening) | RUNNING | 2026-11-18T15:58Z (Foreman C ROOT-25)
+b10-a36-c23-c32 | CDN _review only | W63 (opening) | RUNNING | 2026-11-18T15:58Z (Foreman C ROOT-25)
+b10-a51-sample c03/c04/c12 | CDN _review only | W64 (opening) | RUNNING | 2026-11-18T15:58Z (Foreman C ROOT-25)
