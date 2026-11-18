@@ -743,3 +743,4 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - (18/11 ~20:30Z) ROOT-54: maid6-sample eb73871 → LOOKED + SENT owner (A current overflow / B one «Cung nữ · 6» card, tap opens list; KIT_REQUESTS kitCrewPlaque). Waiting her pick; on B → kit keeper builds kitCrewPlaque, then real build.
 - (18/11 ~20:38Z) ROOT-54: owner 20:35Z (OD) two-way order pop-up for the receiver (one option «Đi», same N khắc/gains/losses) → added to Foreman D parallel-time job.
 - (18/11 ~20:45Z) ROOT-54: opt-card-short #5 ad86bcc0 (law 10 fix + new KIT_SIZE.fig) LOOKED + sent owner (Fold+iPad many/mat2); SMALL reviewer opened (brief review-opt-card-short.md, stops at verdict).
+- (18/11 ~20:50Z) ROOT-54: LIVE main 94d11623 → 13bb8c88 = shop-panel-r3 (owner approved 19:45Z; reviewer PASS session_01Rc5AsK7Vjz8vR2ZXexdh7h). ROLLBACK 94d11623. Foremen told.
