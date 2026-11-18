@@ -5,11 +5,11 @@
 | NPC-PURPOSE G1 #7 (opus; integrator) | review/npc-purpose | C-AG #12 | session_01UV1Szm5ZanhFs7Ye4GwSCZ | RUNNING | 18/11 13:28Z |
 | NPC LANDER #6 (opus; ag-all-2-land + npc-chain-land) | review/ag-all-2-land, review/npc-chain-land | C-AG #12 | session_01UV1SzgbHcTuGMRy7HBkdcc | RUNNING | 18/11 13:35Z |
 | REVIEW AG LATER #3 (opus BIG reviewer; ag-all-2-land + npc-chain-land + ag2-perf) | review/ag-all-2-land, review/npc-chain-land | C-AG #12 | session_01UV1SziGFScPvg84cnnNiFu | RUNNING | 18/11 13:39Z |
-shown-odds-one-path | review/shown-odds-one-path | session_01964izErPfcSMFt3TCCHZbd | RUNNING | 18/11 13:52Z | owner D #1
+shown-odds-one-path | review/shown-odds-one-path | session_01964izErPfcSMFt3TCCHZbd | LIVE a2ce736a (worker archived) | 18/11 13:52Z | owner D #1
 | E11a | session_01DgYSWmGi5DMjQqQpadvKCr | review/ge-writers-w1 (jgedata_w1.js) | GE writers W1 tt/dtq/muoi | Foreman E | 18/11 13:52Z |
 | E11b | session_01DgYSWpWi1g7SyTG9ZiYekG | review/ge-writers-w2 (jgedata_w2.js) | GE writers W2 cn/nc/td | Foreman E | 18/11 13:52Z |
 | AG-DEED-PERF (opus; follow-up perf, outcome-identical) | review/ag-deed-perf | C-AG #12 | session_01UV1SzjwvRPnDTMQuN3wnw9 | RUNNING | 18/11 14:10Z |
-shown-odds-one-path-rv | review/shown-odds-one-path-rv | session_01964izEojRf2ME8Lmxpkd5x | RUNNING | 18/11 14:20Z | owner D #1
+shown-odds-one-path-rv | review/shown-odds-one-path-rv | session_01964izEojRf2ME8Lmxpkd5x | LIVE a2ce736a (archived) | 18/11 14:20Z | owner D #1
 | FOREMAN C-AG #13 (opus; successor of #12, opened by #12; also does lander work: no LANDER #7, depth 8) | handover FOREMAN_C_STATUS, review/npc-chain-land, review/ag-all-2-land | C-AG #13 | session_01UV1Szgvw457GueTtE27whc | RUNNING | 18/11 14:55Z |
 | REVIEW npc-purpose BIG (opus) — seat opened by D #1 for C-AG #13 (ORDER ROOT-52 14:44Z SEAT HELP) | review/npc-purpose (see reports/review-npc-purpose.md §HANDOVER) | C-AG #13 | session_01964izEUgw5hZTBxuEguL4K | RUNNING | 18/11 14:49Z |
 shown-odds-one-path-rv | review/shown-odds-one-path-rv | session_01964izEojRf2ME8Lmxpkd5x | LIVE a2ce736a | 18/11 15:05Z | owner D #1
