@@ -158,3 +158,4 @@ receiver-choice audit (ORDER MAIN ~21:16Z, OD 21:15Z/21:30Z; shares C-AG role-pa
 | Nữ đế r10 (copy HH form, dragon) + BD Quý phi 2-ref (sonnet N1) | handover: dev/art/t8-prompt-B + img/_review/states-r10 | Foreman C ROOT-32 | session_01PEhRbvKvsx8JgQUBCgh9jr | RUNNING | 18/11 22:29Z |
 | Thái hậu 2-ref sample c04+c21 (sonnet TH1) | handover: img/_review/thaihau-2ref | Foreman C ROOT-32 | session_01PEhRbvkcCRGgoweKsRDvPB | CANCELLED (T1c/T2b had already made the sample; archived) | 18/11 22:36Z |
 | kc/ngheo 2K c25–c32 (sonnet K2b, successor of K2) | handover: img/_review/kc2k | Foreman C ROOT-32 | session_01PEhRbvmLbSjUp4e4zTzVGt | RUNNING | 18/11 22:34Z |
+| MAIN ROOT-58 (opus; child of ROOT-57) | handover HANDOVER_SESSION9 | ROOT-57 | session_01Rc5AsHvFYTJwaE5mFs48oR | RUNNING | 18/11 22:34Z |

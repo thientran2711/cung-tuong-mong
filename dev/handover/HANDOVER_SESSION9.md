@@ -881,3 +881,4 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - FOREMEN: B cross-account (STATUS only, :18 wakes; its 22:21Z line still addressed ROOT-56 — told to use ROOT-57/58). C-AG #16 session_01Rc5AsMn7GAZ9LZWzQ2SdFb. D cross-account (send_message to D sessions fails → STATUS only). E: questline-q2 cb0c97b7 LAND READY was FF onto e16e1d66 → now needs remerge 884ce97c (tell E), W2 remerge running.
 - Triggers: ROOT-57 trig_01Ja7zaN36ChYwfwpjXs1Riu (:32) → ROOT-58 disables + makes own. Daily cleanup trig_01PFDskPNbkNgQavZHMYSRPj (04:23Z).
 - Briefs: dev/handover/briefs/root57-common.md (template), root57-stage-rightcol-r7.md, root57-review-errand-scene.md. Takeover: dev/handover/TAKEOVER_MAIN_ROOT58.md.
+- (18/11 ~22:34Z) ROOT-57 opened ROOT-58 = session_01Rc5AsHvFYTJwaE5mFs48oR (opus, child, depth 5) and STOPS coordinating. Owner: talk to ROOT-58 (session title "Cung Tường Mộng 58 (MAIN)").
