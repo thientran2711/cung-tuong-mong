@@ -75,3 +75,18 @@ t1–t4, t6, t8 pass; t5 and t7 are outside ±1.5 % (copy step already hit the 3
 Credits: single-step first attempt 18 gens + no-style two-step 20 gens + with-style copies 16 gens (two rounds of 8; 1st round leaked pink) + with-style recolours 8 gens = 62 gens x 135 = ~8370 cr.
 Files (md5-verified): https://ctm-img.victoria-tntt.workers.dev/img/_review/consort-tiers/c02/b8-style/ — c02_a18_t1..t8.png (final recoloured), c02_a18_copy_t1..t8.png (step-1 copies used), c02_a18_row8.jpg (uniform scale, skull top on the red line), c02_a18_live_vs_new.jpg (live | copy | recolour). Nothing live.
 ~100% xong c02 B8 / ~0% chơi được.
+
+## B9 soft (W34, 18/11; ROOT-18 owner order: costumes must be soft and flowing like the approved c03 b8 set; t7/t8 more soft yellow + a clear PHOENIX)
+PRIORITY #1 CHECK: reused the c02 b8-style recolours (CDN c02/b8-style/), the owner-approved c03 b8 t4/t5 as softness refs, m09 in the STYLE slot; no new method.
+Compared every rank with the c03 standard (soft translucent layered silk, relaxed sleeves, flared layered hem):
+| rank | verdict | action | gens |
+|---|---|---|---|
+| t1 lavender, t2 peach, t3 blue-grey | already soft, light silks, relaxed sleeves | kept (b8-style) | 0 |
+| t4 sage, t5 blush pink | soft, layered, flowing like c03 t4/t5 | kept | 0 |
+| t6 periwinkle | STIFF: hard pearl cape + rigid vertical embroidered panel | redrawn costume soft (translucent layers, flared hem), kept trâm/face/pose/lantern, phoenix stitched | 1 |
+| t7 Hoang quy phi | stiff column, heavy rose | redrawn soft: dusty rose + MORE soft pale yellow (inner robe, borders, sash), large golden PHOENIX on the skirt and sleeve, kept crown/trâm/face/pose/scroll | 2 |
+| t8 Hoang hau | stiff column, heavy sleeves, yellow barely there | redrawn soft: mostly soft golden yellow, gentle jade/blush accents on borders, large golden PHOENIX, kept phoenix crown/face/pose/round fan | 2 |
+Refs: her current figure (image 1) + c03 t4 + c03 t5 (image refs, softness only) + m09 (style slot); t7/t8 second pass edited the first soft result for yellow + bolder phoenix. Looked at every image: faces same, forehead bare, closed smile, crown/trâm kept, phoenix clearly visible at row size, colours soft, nothing glaring. bbox w/h vs live: t6 +1.6 %, t7 +11.7 %, t8 +10.2 % (the soft flared hem/sleeves are wider than the old stiff column; intended, not re-measured as a pass criterion).
+Credits: 5 gens x 135 = 675 cr.
+Files (md5-verified) https://ctm-img.victoria-tntt.workers.dev/img/_review/consort-tiers/c02/b8-style/ — c02_a18_t1..t8.png (final), c02_a18_t6/t7/t8_prev.png (previous), c02_a18_soft.jpg (t1..t8 one row on the red skull-top/feet lines). Nothing live.
+~100% xong c02 soft / ~0% chơi được.
