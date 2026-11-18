@@ -143,23 +143,22 @@ FAB="The silk has real weight: the wide sleeves and robe hang and fold naturally
 YEL_GOLDEN="fresh royal golden yellow, lighter depth, 18K gold tone, not pale cream, not beige/tan/ochre, not heavy mustard, not lemon"
 # measured from c25 B (img/_review/t8-reprompt/c25_a18_t8_ab_B.png): yellow pixels median #F2C985, IQR #E1BA73..#FBD493, HSV ~37deg 45% 95%
 YEL_NEW="rich warm royal golden yellow, a honey-gold close to hex #F2C985 (light-medium depth, 18K gold tone), not pale cream, not beige/tan/ochre, not heavy mustard, not lemon"
-# ORIGINAL robe colours of each person's OLD Hoang hau v0 (img/_review/consort-tiers/<cNN>/b10/<cNN>_a18_t8_v0.png): hex = median of the main robe area
-# (head/skin/gold excluded, measure.py) checked by eye; (main, second). Owner 18:25Z: v0 must keep the original colour of the same rank.
-ORIG8={
-"c01":("coral red silk like #D06958","a lighter coral like #E28A74"),
-"c02":("royal sapphire blue silk like #4F62A0","a deeper navy like #3E486A"),
-"c03":("deep forest green silk like #3F6B4A","a muted leaf green like #747B61"),
-"c04":("violet purple silk like #9A5FA8","a soft lilac like #C9A8D8"),
-"c05":("deep peacock teal silk like #2F6F6A","a softer sea green like #79867C"),
-"c06":("vermilion-orange silk like #D46341","a lighter coral-orange like #E5865F"),
-"c07":("pale lavender silk like #CDB8E2","a soft pink like #E0C0C2"),
-"c08":("soft salmon pink silk like #F0A892","a peach like #E5AF9A"),
-"c09":("pale powder blue silk like #B8CCE4","a silvery grey-blue like #AEB0BE"),
-"c10":("apricot peach silk like #F2B77E","a light cream-peach like #F0CFA8"),
-"c11":("soft lilac silk like #CDB4DA","a pale pink like #E6C8C1"),
-"c16":("sage olive green silk like #979070","a cream like #D7BD9C"),
-"c20":("warm rose pink silk like #E6A89E","a deeper rose like #D49186"),
-"c25":("rust crimson red silk like #A24E3F","a deeper wine red like #823A2E"),
+# ORIGINAL robe colour of each person = the robe colour of her own t1 figure (img/_review/consort-tiers/<cNN>/b10/<cNN>_a18_t1_v0.png), image 1 of every v0 gen
+# (owner 18:35Z: one original colour for all ranks; NO third reference image). hex = median of the robe area of that t1 (head/skin/gold excluded, measure.py), checked by eye.
+# People not listed fall back to the jobs.json palette (colour family) until measured.
+ORIG1={
+"c01":("soft coral pink silk like #F19489","a deeper coral like #E17A70"),
+"c02":("muted blue silk like #838AA1","a silvery grey like #B3ADB4"),
+"c03":("muted olive green silk like #97946D","a deeper olive like #747250"),
+"c04":("mauve purple silk like #9B688D","a soft pink-lilac like #D7B0C2"),
+"c05":("muted teal silk like #697974","a grey-sage like #8F9486"),
+"c06":("coral red silk like #D5745E","a deeper coral red like #BA5F49"),
+"c07":("soft rose pink silk like #E2B8B8","a dusty rose like #CDA2A6"),
+"c09":("pale silver grey-blue silk like #CAC6C8","a silvery grey like #A8A9AD"),
+"c11":("soft pink-grey silk like #D6BFC3","a dusty rose like #B198A0"),
+"c16":("muted sage green silk like #9CA283","a cream like #E6DCC0"),
+"c20":("soft rose pink silk like #E9B5AE","a pale pink like #F0D6CF"),
+"c25":("brick rust red silk like #8C4D40","a warmer red like #B86457"),
 }
 # 3f t8 list (10 items): (text, hand-template key)
 ITEMS=[("a gold ruyi set with gems","one"),("an imperial phoenix-embroidered round fan with a gold-and-jade handle and pearl tassels","two"),
@@ -184,7 +183,7 @@ def colour(c,v,golden):
     pal,_=DATA[c]; main=pal.split(" and ")[0]; fam=pal
     if golden: return (f"her own signature colour {main} (colour family {fam}, as in her first reference) stays clearly visible as a main colour of the robe, sleeves and mantle, mixed with a golden yellow in the inner robe, borders, sash and large areas of the sleeves and skirt; the yellow is {YEL_GOLDEN}; the crown, hairpin and jewellery gold in the same 18K tone; gold only as thin accents on the borders; NOT an all-yellow robe.",main)
     fresh="all colours fresh, clear and luminous, never dusty or greyed; "
-    if v=="v0" and c in ORIG8: return (f"{fresh}her ORIGINAL robe colour is kept: {ORIG8[c][0]} as the main colour of the robe, sleeves and mantle, with {ORIG8[c][1]} in the inner robe and linings (the same colours as her old Empress figure), mixed with a golden yellow in the inner robe, borders, sash and large areas of the sleeves and skirt; the yellow is {YEL_NEW}; the crown, hairpin and jewellery gold in the same 18K tone; gold only as thin accents on the borders; NOT an all-yellow robe.",ORIG8[c][0].split(" silk")[0])
+    if v=="v0" and c in ORIG1: return (f"{fresh}her ORIGINAL robe colour is kept exactly as in image 1 (her first reference): {ORIG1[c][0]} as the main colour of the robe, sleeves and mantle, with {ORIG1[c][1]} in the inner robe and linings, mixed with a golden yellow in the inner robe, borders, sash and large areas of the sleeves and skirt; the yellow is {YEL_NEW}; the crown, hairpin and jewellery gold in the same 18K tone; gold only as thin accents on the borders; NOT an all-yellow robe.",ORIG1[c][0].split(" silk")[0])
     if v=="v0": return (f"{fresh}her own signature colour {main} (colour family {fam}, as in her first reference) stays clearly visible as a main colour of the robe, sleeves and mantle, mixed with a golden yellow in the inner robe, borders, sash and large areas of the sleeves and skirt; the yellow is {YEL_NEW}; the crown, hairpin and jewellery gold in the same 18K tone; gold only as thin accents on the borders; NOT an all-yellow robe.",main)
     if v=="v1": return (f"{fresh}the royal golden yellow is the MAIN colour of the robe, mantle and sleeves, with one fresh accent of her colour {main} (inner robe, collar and a few borders); the yellow is {YEL_NEW}; the crown, hairpin and jewellery gold in the same 18K tone; NOT dusty, NOT pale.",main)
     f=V2[c]; return (f"{fresh}a fresh {f} (a different colour family from her first reference) is the main colour of the robe, sleeves and mantle, mixed with a golden yellow in the inner robe, borders, sash and large areas of the sleeves and skirt; the yellow is {YEL_NEW}; the crown, hairpin and jewellery gold in the same 18K tone; gold only as thin accents on the borders; NOT an all-yellow robe.",f)
@@ -201,7 +200,6 @@ def build(c,v="v0",golden=False):
     return s+END
 
 # ---------- t7 Hoang quy phi variant (same method; colour slot: ORIGINAL t7 colour MAIN + royal yellow ONLY as parts) ----------
-ORIG7={"c06":("coral red silk like #C95F49","a deeper terracotta red like #A34532"),"c25":("rust crimson red silk like #9D4E3F","a deeper wine red like #7D3931")}
 ITEMS7=[("a gilded hand censer","c"),("an imperial round fan with a gold filigree frame and gems","two"),("a gold-filigree jewel casket set with gems","box"),
 ("a kingfisher-feather folding fan with gold ribs","two"),("a gold lotus-shaped incense box","box"),("a gold hand mirror set with gems","one"),
 ("a gold-mounted jade vase with peonies","one"),("a gold-filigree palace lantern with gem tassels","two"),("a gold flower basket set with gems","box"),
@@ -215,11 +213,11 @@ def hand7(key,right):
     return f"the item held in both hands at waist height before her, body turned slightly three-quarters to the {d}"
 def build_t7(c):
     pal,face=DATA[c]; n=int(c[1:]); i=GOLDEN7.get(c,(n*3+5)%10); item,hk=ITEMS7[i]; right=(c=="c25") if c in GOLDEN7 else n%2==1
-    m,m2=ORIG7[c] if c in ORIG7 else (pal.split(" and ")[0]+" silk",pal.split(" and ")[-1])
+    m,m2=ORIG1[c] if c in ORIG1 else (pal.split(" and ")[0]+" silk",pal.split(" and ")[-1])
     main=m.split(" silk")[0]
     s=PRE+f" An imperial consort. Her face: {face}. From the identity reference keep ONLY her face, facial features, hairstyle colour and signature colour family; do NOT copy the outfit, hair ornaments or accessories of the reference, dress her in the NEW outfit below. The style reference image is only for skin, drawing style, fabric and embroidery: never copy its face, body or pose. about 22, youthful adult."
     s+=f" Outfit (rank-7 imperial noble consort (Hoàng quý phi), clearly much richer and more splendid than the lower ranks): a near-empress ceremonial robe of {main} silk, embroidered with phoenixes, peonies and auspicious clouds in gold thread on the chest and along the borders, a jewelled cloud-collar cape edged with pearls and gold over the shoulders, strands of pearls across the chest, a jade-and-gold belt with long tassels, floor-length robe with slippers visible; tall grand chignon crowned by a LARGE ornate gold phoenix crown (one large gold phoenix with spreading wings, grander and taller than a noble consort's headdress, but clearly simpler than the Empress's nine-phoenix crown) with pearl strands, kingfisher-blue inlay and a few gold tassels."
-    s+=f" COLOUR RULE: all colours fresh, clear and luminous, never dusty or greyed; her ORIGINAL robe colour is kept: {m} is the MAIN colour of the robe, cape and sleeves, with {m2} in the linings (the same colours as her old Hoàng quý phi figure); yellow only as parts (the borders, the sash, the collar and a narrow inner panel of the robe) in {YEL_NEW}; the crown, hairpin and jewellery gold in the same 18K tone; NOT an all-yellow robe."
+    s+=f" COLOUR RULE: all colours fresh, clear and luminous, never dusty or greyed; her ORIGINAL robe colour is kept exactly as in image 1 (her first reference): {m} is the MAIN colour of the robe, cape and sleeves, with {m2} in the linings; yellow only as parts (the borders, the sash, the collar and a narrow inner panel of the robe) in {YEL_NEW}; the crown, hairpin and jewellery gold in the same 18K tone; NOT an all-yellow robe."
     s+=" All flowers, birds and the phoenix are fine silk-thread embroidery stitched directly into the fabric, flat and integrated with the cloth, following its folds, not appliqué, not pasted patches, not raised. "+FAB
     s+=f" Pose: calm standing pose; she holds {item} in a contrasting colour, not the robe colour, the item held below the chin, the hand really gripping it, the whole face fully visible. Her hands and body: {hand7(hk,right)}."
     s+=" Every hairpin is inserted into the hair pointing upward or backward with dangles hanging down, no hairpin horizontal or sticking out to the side. Luminous smooth porcelain skin, bare clean forehead with no forehead mark and no flower mark, eyes open, floor-length robe with slippers visible, no train, no cup, nothing covering the face."
