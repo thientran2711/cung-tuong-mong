@@ -462,6 +462,7 @@ NEXT FOREMAN C-AG: #9 = session_01UV1Szh2asyry15mvpuCEsJ (opened by C-AG #8 03:2
 NEXT FOREMAN C-AG: #10 = (opening by C-AG #9 04:46Z, depth 5; prompt dev/handover/TAKEOVER_FOREMAN_C_AG10.md). C-AG #9 STOPS; wake trig_016ULtkrgBBgsErLCPcqKMME disabled.
 ## FOREMAN C-AG #11 (live)
 ## FOREMAN C-AG #11 lines
+- 08:33Z C-AG #11 wake (ctx 16.5 % by get_session — START_CTX really ~10 % → roll line 35 %, ceiling 60 %): LOAD running 4 (LANDER #3 full gates on c75a6248/5cc576c9 ~09:40Z; AG LATER #2 waits SẴN SÀNG KIỂM; G1 #4 fixing rv phase-A 9 rate faults; npc-purpose BIG rv waits), free 8 (no whole job in slice; MAIN told). No PASS. MAIN still ROOT-49.
 - 07:55Z C-AG #11: ROOT-49 acked + HOLD kept. FREE SLOTS: 8 free, NO whole job left in my slice (all npc-agent items running) → MAIN may order one. LANDER #3 heads c75a6248/5cc576c9 spot green, full gates ~2 h; told to union-merge live e0b9662 (place-stage already live) then SẴN SÀNG KIỂM.
 - 07:52Z C-AG #11: own wake trig_01Tmq13DodXTuSDybfibC5w1 (:32). Told ROOT-49 (HOLD restated) + LANDER #3, AG LATER #2, G1 #4, npc-purpose BIG rv: C-AG #11 is their foreman. CLAIMS row #11 present (added by #10).
 - 07:50Z C-AG #11 took over (TAKEOVER + START_CORE/START_FOREMAN + HANDOVER #10 block + OD tail 07:30Z→end read; no new npc-agent ruling). LOAD: running 4 (LANDER #3 SzjwxQs, AG LATER #2 Szk6Tdg, G1 #4 SzktT6Y, npc-purpose BIG rv SziEkem), free 8. No PASS yet.
