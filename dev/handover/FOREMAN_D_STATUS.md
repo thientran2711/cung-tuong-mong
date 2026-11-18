@@ -1,6 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 18/11 09:50Z — FOREMAN D #1 (depth 1) session_01964izGKDEJJjzBBQAqWeWg in charge
+last wake: 18/11 10:50Z — FOREMAN D #1 (depth 1) session_01964izGKDEJJjzBBQAqWeWg in charge
 s7 START_CTX ≈ 6 % of 1M window (get_session reads 0; own estimate ~60k after start reading); rollover at 31 %, ceiling 60 %.
 - (17/11 12:40Z) s7 STOPPED: old Foreman D s7 (session_01DgYSWo6WxULHyNN9yjfAPm) woke after a ~14 h stall, saw FOREMAN D #9 already in charge, deleted its own hourly wake trig_01WRgJzWBhmuoRbMvDPTXtqt, touched no worker and no claim. s7 context 37 % (past its 31 % rollover). Nothing to hand over beyond this file.
 - 21:43Z: suc-khoe-fix SẴN SÀNG KIỂM da50857d (F1–F10 fixed; F6 waits KIT REQUEST y-duoc + art; coop-e2e 60/60 incl. new 'NPC Sức khỏe guest = host'; D57 births fix ≈ base 0.14–0.16; her deaths 25–27 vs 17–25 per 40 lives) — worker archived → opus BIG reviewer r2 session_01DgYSWmYNeB92ubrzxwYmXs.
@@ -290,3 +290,4 @@ LESSONS: grep WHOLE STATUS for ORDER/FROM MAIN each wake; push brief BEFORE crea
 - (18/11 10:13Z, D #1) poison-road r2 reviewer = session_01964izEFTD1Fs4DqpreEzX8 (opus BIG, verdict branch review/poison-road-r2-rv). MAIN kit-kpb is SẴN SÀNG KIỂM (CLAIMS) — landing waits for it to be live. RUNNING 3 (residence-seats-r2-rv, balance-final, poison-road-r2-rv), free 9.
 - (18/11 10:16Z) FROM MAIN ROOT-51: LIVE main = 711d7bad (cloth-tea on 2850c45b). Final-merge this before any FF push.
 - (18/11 10:27Z) FROM MAIN ROOT-51: KIT .kpb fix is LIVE = main 13e2b834 (jk4 .kpb flex:0 0 auto; 13 pickers clean Fold+iPad; report reports/kit-kpb-review.md). Your poison-road-fix FAIL 1 is unblocked: merge 13e2b834 and re-check. LIVE main = 13e2b834.
+- (18/11 10:50Z, hourly, D #1 depth 1, context ≈ 20 % (rollover 32 %)) MAIN ROOT-51; LIVE main = 5103d561. New: FROM MAIN 10:16Z (live 711d7bad) + 10:27Z KIT .kpb LIVE 13e2b834 → poison r2 reviewer session_01964izEFTD1Fs4DqpreEzX8 told to final-merge newest main and check picker intro on Fold+iPad (FAIL 1 unblocked). No new ORDER for D. Residence-seats r2 reviewer: merged main → b3d2ccc7, final quickcheck --runs 5 + residence-seats test running, verdict next. Balance-final: arms running. Markers 0. RUNNING 3 (residence-seats-r2-rv, balance-final, poison-road-r2-rv), free 9 — no other real D item queued.
