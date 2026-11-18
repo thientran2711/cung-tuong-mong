@@ -87,3 +87,10 @@ No shots taken for the verdict (no UI change); CDN review folder not used.
 Verdict: **PASS FULL review/coop-c4-stuck-r1 ca661db3** (waits for the freeze) · **PASS SPLIT review/coop-c4-stuck-r1-tests f60b4024** (may land now).
 Touched files FULL: dev/build/jcoopworld.js, index.html, sw.js, dev/test/{coop-ask-srvprobe,coop-b1,coop-b2b5,coop-bot,coop-c4-stuck,coop-chat,coop-cyc,coop-dbg-hostdeath,coop-e2e,coop-guest-maid,coop-looks-act,coop-looks,coop-night,coop-one-world-play,coop-p2,coop-pets,coop-play,coop-r2,coop-rejoin-stats,coop-rev2,coop-sleep,coop-timer-lag,coop-timer,coop-toil-look,oldroom-r1,show-why-coop,sw-update}.js. SPLIT: the same dev/test files only.
 Side note (not this task): in co-op the life-start Luân hồi roulette (#kroul) can stay on screen over a running world when nobody picks; harmless for a player (she taps it first) but worth knowing for later harness work.
+
+### REVIEW r1 — final merge after F1 LIVE (18/11 ~23:10Z)
+- Merged main 53544bd8 (coop-thin-f1 LIVE) into review/coop-c4-stuck-r1 → **1130a49e** (1130a49edade358c627742e94633e3c35c44f698), descends from origin/main 53544bd8.
+- F1 landed the SAME reshowQ guard in a fuller form (qBlocked: the book only when visible, or a mini game up). Conflict resolved by keeping F1's guard as is and adding only the test hooks (CW.qN counter, CW.reshowQ, CW.qArmed) so coop-c4-stuck S1 runs again. Checked: no double timer (render arms only when !qT), no loop beyond the blocked time, solo untouched. coop-cyc / coop-e2e: main already held the split's lines (+ F1's nrdy), taken from main.
+- Diff vs main now: dev/build/jcoopworld.js (+2 lines: counter + hooks), index.html, sw.js (rebuilt).
+- Gates on 1130a49e (live Worker): coop-c4-stuck L3 ×3 17–18/17–18 (S1 runs, both seats) · L0 17/17 · L5 swap 17/17 · coop-e2e 63/63 + COOP_SWAP 63/63 · coop-thin-c L3 16/16 · coop-thin-e-net L6 20/20 · one-core PASS · quickcheck PASS (176 s, old save ok).
+- Verdict: **PASS review/coop-c4-stuck-r1 1130a49e — READY FF.**
