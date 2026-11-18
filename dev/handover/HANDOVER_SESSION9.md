@@ -918,3 +918,7 @@ FOREMEN: B ROOT-2 session_01N1tNP5otr7BnxsT5Fytb4i active (coop-thin-e #2). C RO
 ARCHIVED by s39: cloth-xoc r1/r2/r3, kit-figure-mood, kit-display-room, look-decals (32 decals on CDN incl. fx-crease-*).
 LESSONS s39: look at neighbours side by side before asking her to pick (A/B/C glow were identical); one option per image with big faces; workers ask 'choose 1/2/3' and stall — check get_session status_bucket BLOCKED on every wake.
 - (18/11 00:06Z) s39 FINAL: successor MAIN s40 = session_01UV1SzjbGx37rTjAmWFyCpc (depth 3). s39 wake trigger deleted; s39 stops (relays only if the owner keeps typing here).
+
+## S40 (main, child of s39)
+- (18/11 00:10Z) MAIN SESSION 40 = session_01UV1SzjbGx37rTjAmWFyCpc; START_CTX ≈ 7 % (estimate; context_usage reads 0) → rollover at 32 %, ceiling 60 %; depth 3.
+- (18/11 00:10Z) LOAD: main running 7 (builder s37a batch s39a, toil-looks5 waits kk pick, tuyet-glow READY v7, smudge r10 waits OK, hoa-dien r3 tone samples, cloth-xoc r4 wet fix, C-AG #7) | B ROOT-2 active (coop-thin-e #2) | C ROOT-13 not opened (owner) | D #11 RUNNING 2, free 10 | moved: none (all main items are owner looks/UI). PRIORITY #1 CHECK ('hoa-dien tone'): OD 0 | ledger 0 | claims 0 | main 0 | review/* 0. Brief common = briefs/s40-common.md.
