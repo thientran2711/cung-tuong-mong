@@ -31,8 +31,8 @@ const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];let C
   for(let i=rows.length-1;i>=0;i--)if(rows[i].name==='warmup')rows.splice(i,1);
   const f1=x=>x==null?'-':(+x).toFixed(1);
   for(const r of rows)console.log(`${W}x${H} ${(r.name||'').padEnd(30)} ${r.err||`fac ${r.fac.toFixed(2)} body ${f1(r.body)} (${(r.body/r.col).toFixed(3)} col${f1(r.col)}) figW ${f1(r.figW)}/colW ${f1(r.colW)} foot ${f1(r.foot)} src ${r.src} crop ${f1(r.crop)} face ${f1(r.face)} topcut ${f1(r.topcut)} over ${r.over} textOvl ${r.ovl}${r.fit?' FIT '+r.fit:''} asp ${r.asp.toFixed(3)} ${r.dbg}`}`);
-  const grp={};rows.filter(r=>!r.err).forEach(r=>{const k=r.fac.toFixed(2);(grp[k]=grp[k]||[]).push(r.body)});
-  for(const k in grp){const a=grp[k],sp=(Math.max(...a)-Math.min(...a))/Math.max(...a);console.log(`${W}x${H} fac ${k}: n ${a.length} min ${Math.min(...a).toFixed(1)} max ${Math.max(...a).toFixed(1)} spread ${(sp*100).toFixed(1)} %`);if(sp>.03)bad++}
+  const grp={};rows.filter(r=>!r.err&&!r.kid&&!r.emp).forEach(r=>{const k='adults(no kids, no emperor)';(grp[k]=grp[k]||[]).push(r.body)});
+  for(const k in grp){const a=grp[k],sp=(Math.max(...a)-Math.min(...a))/Math.max(...a);console.log(`${W}x${H} ${k}: n ${a.length} min ${Math.min(...a).toFixed(1)} max ${Math.max(...a).toFixed(1)} spread ${(sp*100).toFixed(1)} %`);if(sp>.03)bad++}
   {const ok=rows.filter(r=>!r.err),x0=ok[0];
    for(const r of ok){if(Math.abs(r.colX-x0.colX)>.6||Math.abs(r.colWd-x0.colWd)>.6){bad++;console.log('FAIL column x/width',r.name,r.colX,r.colWd,'vs',x0.colX,x0.colWd)}
     if(r.foot<-1){bad++;console.log('FAIL feet cut',r.name,r.foot)}if(r.topcut>6){bad++;console.log('FAIL head/crown cut at column top',r.name,r.topcut)}if(r.face>1){bad++;console.log('FAIL face crop',r.name,r.face)}if(r.ovl){bad++;console.log('FAIL text overlap',r.name,r.ovl)}}
