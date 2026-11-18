@@ -9,7 +9,7 @@ const C3=n=>['c03-t'+n,'img/_review/consort-tiers/c03/b8/c03_a18_t'+n+'.png'];
 const C3HT=process.env.C3HT?JSON.parse(fs.readFileSync(process.env.C3HT)):{};
 let CASES=[C3(1),C3(6),C3(8),['hoang-hau','img/fig-thaihau-1.webp'],['crown-tallest','img/fig-maid-m50-t8-a18.webp'],['widest-robe','img/fig-maid-m48-t8-a51.webp'],['old-maid-wide','img/fig-maid-m50-t6-a51.webp'],['man','img/fig-man-bacdich-1-a36.webp'],['old-emperor','img/fig-emperor-a18-1.webp'],['SELF','SELF']];
 if(process.env.CASES)CASES=CASES.filter(c=>process.env.CASES.split(',').includes(c[0]));
-const KINDS=(process.env.KINDS||'news,notice,choice,pdlg,idcard').split(',');
+const KINDS=(process.env.KINDS||'news,notice,choice,pdlg,idcard,shop').split(',');
 (async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});let bad=0;const html=fs.readFileSync(SRC);
  for(const [W,H] of SZ){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:process.env.SHOTS?+(process.env.DSF||2):1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',ignoreHTTPSErrors:true});await ctx.addInitScript(()=>{window.__bot=1;let s=12345;Math.random=()=>{s=(s*1664525+1013904223)%4294967296;return s/4294967296}});
   await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:html,contentType:'text/html; charset=utf-8'}));
@@ -32,12 +32,15 @@ const KINDS=(process.env.KINDS||'news,notice,choice,pdlg,idcard').split(',');
      dlg=document.querySelector('#modal:not([hidden]) .dlg.kszf');if(!dlg)return{err:'no frame'};sel='.kszfs img';txt='.k3right';frame=dlg}
     else if(kind==='pdlg'){root=document.createElement('div');root.id='kscanpd';root.style.cssText='position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;background:#0006';
      root.innerHTML=kitPersonDlg({kind:'guide',title:'Lời dặn',sub:'thử',p:who,fig:kitFigOf(who),name:'<b>Một người</b>',pic:{src:'',lab:''},html:'<p>'+'Một lời dặn dài hơn một chút. '.repeat(8)+'</p>',btns:[{k:'a',t:'Đã rõ'}]});document.body.appendChild(root);
-     const t0=Date.now();while(Date.now()-t0<25000){kitPersonDlgFit(root);const i=root.querySelector('.kpdfig img');if(i&&i.complete&&i.naturalWidth&&root.querySelector('.kpsubj.kes').dataset.kpdfit)break;await sleep(250)}await sleep(800);
+     const t0=Date.now();while(Date.now()-t0<25000){kitPersonDlgFit(root);const i=root.querySelector('.kpdfig img');if(i&&i.complete&&i.naturalWidth&&root.querySelector('.kpsubj.kes').dataset.kpdfit)break;await sleep(250)}await sleep(800);kitPersonDlgFit(root);await sleep(500);kitPersonDlgFit(root);await sleep(300);
      dlg=root.querySelector('.kpdlg');if(!dlg)return{err:'no pdlg'};sel='.kpdfig img';txt='.kpdr';frame=dlg}
-    else if(kind==='idcard'){if(self)return{err:'skip'};/* the identity card shows the player's own figure */const F=kitFigOf;
+    else if(kind==='shop'){if(name!=='warmup')return{err:'skip'};S.shop=Object.keys(IT).filter(k=>IT[k].pr).slice(0,8);kitShopNvp();
+     const t0=Date.now();while(Date.now()-t0<25000){const i=document.querySelector('#modal .kpsubj.kes .kesimg');if(i&&i.complete&&i.naturalWidth&&document.querySelector('#modal .kpsubj.kes').dataset.kdpfit)break;await sleep(250)}await sleep(1500);
+     dlg=document.querySelector('#modal:not([hidden]) .dlg');if(!dlg)return{err:'no shop'};sel='.kpsubj.kes .kesimg';txt='.kpmain,.opts';frame=dlg}
+    else if(kind==='idcard'){if(self)return{err:'skip'};/* the identity card shows the player's own figure: figFor is overridden */const ff0=window.__ff0||(window.__ff0=figFor);window.figFor=figFor=function(p){return p===S?IMG_BASE+FIG:ff0.apply(this,arguments)};
      Q.push({nl:1,t:'Nhập cung',h:'<p>x</p>'});showModal();const t0=Date.now();while(Date.now()-t0<25000){const i=document.querySelector('#modal img.kidfig2');if(i&&i.complete&&i.naturalWidth&&!i.classList.contains('kidlo'))break;await sleep(250)}await sleep(1200);
      const i=document.querySelector('#modal img.kidfig2');if(!i)return{err:'no id card'};dlg=document.querySelector('#modal .dlg');sel='img.kidfig2';txt='.kpid,.kstgrid,.kpnote';frame=document.getElementById('modal');root=document.getElementById('modal')}
-    const im=document.querySelector(kind==='pdlg'?'#kscanpd '+sel:'#modal '+sel);if(!im)return{err:'no figure'};
+    const im=document.querySelector(kind==='pdlg'?'#kscanpd '+sel:'#modal '+sel);if(kind==='idcard')window.figFor=figFor=window.__ff0;if(!im)return{err:'no figure'};
     const src=im.getAttribute('src'),bd=await new Promise(res=>{const v=kitFigBody(src,()=>res(kitFigBody(src)));if(v)res(v)});
     const r=im.getBoundingClientRect(),fr=frame.getBoundingClientRect();
     const L=r.left+bd.l*r.width,Rr=r.left+bd.r*r.width,T=r.top+bd.t*r.height,Bm=r.top+bd.b*r.height,sk=r.top+kitFigTop(bd)*r.height;
@@ -51,7 +54,7 @@ const KINDS=(process.env.KINDS||'news,notice,choice,pdlg,idcard').split(',');
     close();return out;function LONG_(n){return '<p>'+'Một tin dài hơn rất nhiều, nói về chuyện trong cung và nhiều điều khác nữa. '.repeat(n)+'</p>'}},[kind,name,FIG]);
    r.kind=kind;r.name=name;
    if(process.env.SHOTS&&OUT&&name!=='warmup'&&!r.err){/* re-open for the picture */}
-   if(name!=='warmup')rows.push(r)}
+   if((name!=='warmup'||kind==='shop')&&r.err!=='skip'){if(kind==='shop')r.name='eunuch-nvp';rows.push(r)}}
   const f1=x=>(+x).toFixed(1);
   for(const r of rows){console.log(`${W}x${H} ${r.kind.padEnd(7)} ${r.name.padEnd(14)} ${r.err||`${r.ksz||'-'} skull>feet ${f1(r.skull)} | fig ${f1(r.figW)}x${f1(r.figH)} frame ${f1(r.frameW)}x${f1(r.frameH)} | cut ${f1(r.cut)} ${r.clip.join(';')} | text lines under figure ${r.ovl} | squeeze ${r.asp.toFixed(3)} shrink ${r.shrink} ${r.src}`}`);
    if(!r.err){if(r.cut>1){bad++;console.log('FAIL cut',r.kind,r.name,f1(r.cut))}if(Math.abs(r.asp-1)>.01){bad++;console.log('FAIL squeeze',r.kind,r.name)}}}

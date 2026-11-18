@@ -903,11 +903,11 @@ function kpIdLay(M){try{const im=M.querySelector(":scope > img.kidfig2"),d=M.que
  const fb=fb0||{t:0,b:1,ht:0,l:0,r:1,ar:(im.naturalWidth&&im.naturalHeight)?im.naturalWidth/im.naturalHeight:.33};if(!fb0&&!im.naturalWidth)im.addEventListener("load",()=>kpIdLay(M),{once:true});
  const A=lb-lt,G=typeof KIT_DP_GAP!=="undefined"?Math.max(KIT_DP_GAP.min,KIT_DP_GAP.pct*A):Math.max(14,A*.05);
  const ar=fb.ar||.35,bf=Math.max(.3,fb.b-kitFigTop(fb)),pf=Math.max(bf,fb.b-fb.t);/* body = head top → feet (28.11a); painted = top of the crown / hairpin → feet (the gap is measured on it) */
- let Hs=Math.min((A-2*G)*bf/pf,H*(port?.80:.84));/* the standard body height: same for every face on this screen */
+ const cRef=(typeof BAL==="object"&&BAL.bookFrame&&BAL.bookFrame.cRef)||.072;let Hs=Math.min((A-2*G)/(1+cRef),H*(port?.80:.84));/* KIT 56.4: body = the room of the tallest Hoàng hậu crown, never this face's own crown *//* the standard body height: same for every face on this screen */
  /* ONE body for every face on this screen (KIT 28.11a, 56.4): head top → feet; no per-face shrink and no cap for the widest robe */
  /* KIT 56.4 (owner 18/11 ~07:50Z, step 2 of 56.3): the old per-screen cap that shrank EVERY face for the widest robe (KPID_WR) is gone — never shrink the whole set for outliers; a wide robe / sleeve spreads under the panel, which is drawn on top (z-index 1), and nothing is cut */
  Hs=Math.max(40,Hs);let ih=Hs/bf,iw=ih*ar;
- const floor=lb-(A-ih*pf)/2;/* 32.2b: the painted figure centred between the two lines → gap above the crown = gap under the feet */
+ const floor=lb-(A-Hs*(1+cRef))/2;/* 32.2b: the painted figure centred between the two lines → gap above the crown = gap under the feet */
  let left=Math.round(colL+kitFullFigX(fb,iw,colW));const top=Math.round(floor-fb.b*ih);
  Object.assign(im.style,{left:left+"px",top:top+"px",bottom:"auto",width:Math.round(iw)+"px",height:Math.round(ih)+"px",objectFit:"fill"});
  im.style.removeProperty("-webkit-mask-image");im.style.removeProperty("mask-image");
