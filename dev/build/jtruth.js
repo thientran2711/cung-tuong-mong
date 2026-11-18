@@ -148,7 +148,7 @@ function npcFrame(){const T=BAL.truth;const L=liveRivals(false).filter(v=>v&&v.a
  const A=L.filter(v=>(v.malice||0)>=T.npcFrameMal&&!v.plan);if(!A.length)return"";
  /* npc-purpose G2: the framer = a spiteful woman with a real target (someone above her in favour or rank she envies or hates); the target = her worst
     grudge/envy (tFrameV); npcFrameP = the success; nobody with a reason → nothing */
- const o=npcWhy("tFrame",{A,L});if(!o||!o.tgt||!roll(T.npcFrameP))return"";const a=o.who,t=o.tgt;let r="";try{r=runAct(a,t,"frame")||""}catch(e){console.error("npcFrame",e)}
+ const o=npcWhy("tFrame",{A,L},x=>!!x.tgt&&roll(T.npcFrameP));if(!o)return"";const a=o.who,t=o.tgt;let r="";try{r=runAct(a,t,"frame")||""}catch(e){console.error("npcFrame",e)}
  try{window.__npcFrameTry=(window.__npcFrameTry||0)+1}catch(e){}return typeof seenNPC==="function"?seenNPC(a,t,r):""}
 (function(){const e0=endTurn;endTurn=function(){const run=S&&!S.dead&&!Q.length&&!S.mg;const r=e0.apply(this,arguments);
  try{if(run&&S&&!S.dead){const x=npcFrame();if(x)log(x)}}catch(e){}return r}})();

@@ -361,7 +361,7 @@ function tmFear(p,quietLog){try{const sv=typeof bestSent==="function"?bestSent(p
 if(tmOdds0)bribeOdds=tmOdds;
 /* who could be asked: a servant of another living palace, nobody's spy yet */
 function tmCands(p){return tmSrv().filter(/* 2f2: live list */s=>{if(s.spyFor!=null)return false;const o=ownerOf(s);return !!o&&o!==p&&(o===S||(o.alive&&!o.out))})}
-function tmRefuse(p,s){const o=ownerOf(s);if(!o||!npcWhy("tmTell",{s,o})||!roll(agCap(tmB().tell)))return"";/* npc-purpose G2a: a loyal servant goes to tell her master */affAdd(o,p,-tmB().oan);
+function tmRefuse(p,s){const o=ownerOf(s);if(!o||!npcWhy("tmTell",{s,o},()=>roll(agCap(tmB().tell))))return"";/* npc-purpose G2a: a loyal servant goes to tell her master */affAdd(o,p,-tmB().oan);
  if(o===S&&p!==S)knBao(s,S,`${p.name} vừa sai người tới mua chuộc {xung} làm tai mắt, {xung} không nhận`,knPal(p));return"tell"}
 /* one try: the recruiter turns to the most promising person (by the same odds); that person decides */
 function tmTry(p,why){const C=tmCands(p);if(!C.length)return null;let best=null,bo=-1;for(const s of C){const o=tmOdds(p,s);if(o>bo){bo=o;best=s}}

@@ -1,0 +1,146 @@
+{
+ "note": "npc-purpose rate gate (dev/test/npc-purpose-rates.js). track = the review's rate table (review-npc-purpose.md §6) + the visitor card spread; ratio = (head+1)/(base+1) must stay in band (row band or the default); rows with base+head < minN are not judged. rare = registered kinds allowed to fire 0 times in the bot run, each with the reason. base = counts of the build without npc-purpose (written by --base <f> --write-base).",
+ "band": [
+  0.4,
+  2.5
+ ],
+ "minN": 8,
+ "track": [
+  {
+   "n": "drop-in visit 'ghé chơi' (jshelf g3call)",
+   "f": "l",
+   "re": "ghé chơi"
+  },
+  {
+   "n": "maid road: mistress mood 'Chủ thưởng' (j42 srvCard)",
+   "f": "c",
+   "re": "^Chủ thưởng"
+  },
+  {
+   "n": "maid road: 'quở mắng' (j42 srvCard)",
+   "f": "l",
+   "re": "quở mắng"
+  },
+  {
+   "n": "maid road: 'Bạc lạ' bribe (j42 srvCard)",
+   "f": "c",
+   "re": "^Bạc lạ"
+  },
+  {
+   "n": "poisoning sign 'môi tím tái' (jface)",
+   "f": "l",
+   "re": "môi tím tái"
+  },
+  {
+   "n": "NPC 'Lập công' (j71 f7Merit)",
+   "f": "l",
+   "re": "^Lập công$"
+  },
+  {
+   "n": "NPC mood 'đắc ý' (jemoact)",
+   "f": "l",
+   "re": "đắc ý"
+  },
+  {
+   "n": "NPC mood 'ưu uất' (jemoact)",
+   "f": "l",
+   "re": "ưu uất"
+  },
+  {
+   "n": "NPC mood 'khóc suốt' (jemoact)",
+   "f": "l",
+   "re": "khóc suốt"
+  },
+  {
+   "n": "NPC mood 'vui vẻ' (jemoact)",
+   "f": "l",
+   "re": "vui vẻ"
+  },
+  {
+   "n": "NPC 'sang cung' (jemoact)",
+   "f": "l",
+   "re": "sang cung"
+  },
+  {
+   "n": "NPC 'khoe khoang' (jemoact)",
+   "f": "l",
+   "re": "khoe khoang"
+  },
+  {
+   "n": "letters 'gửi thư / viết thư'",
+   "f": "l",
+   "re": "gửi thư|viết thư"
+  },
+  {
+   "n": "festival nights (Nguyên tiêu / Thất tịch / Trung thu)",
+   "f": "l",
+   "re": "Nguyên tiêu|Thất tịch|Trung thu"
+  },
+  {
+   "n": "visitor card 'Có người đến' (j24)",
+   "f": "c",
+   "re": "^Có người đến$"
+  },
+  {
+   "n": "visitor card 'Một ánh mắt' (j24 manPoem)",
+   "f": "c",
+   "re": "^Một ánh mắt"
+  },
+  {
+   "n": "visitor card 'Thái hậu triệu' (j24 thCall)",
+   "f": "c",
+   "re": "^Thái hậu triệu"
+  },
+  {
+   "n": "visitor card 'Lời cảnh báo' (j24 maidWarn)",
+   "f": "c",
+   "re": "^Lời cảnh báo"
+  },
+  {
+   "n": "visitor card 'Kẻ hầu xin' (j24 svAsk)",
+   "f": "c",
+   "re": "^Kẻ hầu xin"
+  },
+  {
+   "n": "news seller 'Có người bán tin' (jagknow knSell)",
+   "f": "c",
+   "re": "^Có người bán tin"
+  },
+  {
+   "n": "omen 'Điềm báo' (jty tyPlot)",
+   "f": "c",
+   "re": "^Điềm báo"
+  },
+  {
+   "n": "NPC affair 'tư thông' (j22)",
+   "f": "l",
+   "re": "tư thông"
+  }
+ ],
+ "rare": {},
+ "base": {
+  "drop-in visit 'ghé chơi' (jshelf g3call)": 62,
+  "maid road: mistress mood 'Chủ thưởng' (j42 srvCard)": 6,
+  "maid road: 'quở mắng' (j42 srvCard)": 12,
+  "maid road: 'Bạc lạ' bribe (j42 srvCard)": 2,
+  "poisoning sign 'môi tím tái' (jface)": 12,
+  "NPC 'Lập công' (j71 f7Merit)": 6,
+  "NPC mood 'đắc ý' (jemoact)": 82,
+  "NPC mood 'ưu uất' (jemoact)": 53,
+  "NPC mood 'khóc suốt' (jemoact)": 26,
+  "NPC mood 'vui vẻ' (jemoact)": 26,
+  "NPC 'sang cung' (jemoact)": 60,
+  "NPC 'khoe khoang' (jemoact)": 41,
+  "letters 'gửi thư / viết thư'": 28,
+  "festival nights (Nguyên tiêu / Thất tịch / Trung thu)": 146,
+  "visitor card 'Có người đến' (j24)": 262,
+  "visitor card 'Một ánh mắt' (j24 manPoem)": 13,
+  "visitor card 'Thái hậu triệu' (j24 thCall)": 3,
+  "visitor card 'Lời cảnh báo' (j24 maidWarn)": 32,
+  "visitor card 'Kẻ hầu xin' (j24 svAsk)": 8,
+  "news seller 'Có người bán tin' (jagknow knSell)": 28,
+  "omen 'Điềm báo' (jty tyPlot)": 15,
+  "NPC affair 'tư thông' (j22)": 1
+ },
+ "baseInfo": "5 seeds × 200 tuần, npbase/index.html"
+}

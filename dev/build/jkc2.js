@@ -226,7 +226,7 @@ function kc2Week(){if(Q.length>2)return;const E=[];const K=S.kc;K.evT=K.evT||{};
  else{const th=kcR("thuc"),mu=kcR("muoi"),cha=kcR("cha");
   if(K.sx&&S.month===6)add("n_hoi",3);if(mu&&K.sx)add("n_muoi",(tv({"Kiêu ngạo":1.2,"Tham vọng":1.4},mu)||.4));if(cha)add("n_benh",.35);
   if(K.sx&&S.month>=5&&S.month<=8)add("n_le",1.2);if(K.sx&&S.kap>=BAL.kc2.st.nc.thich)add("n_thich",.5+S.kap/100);if(th)add("n_yen",.6)}
- const o=npcWhy("kcWeek",{E});if(!o||!roll(KC.ev))return;/* npc-purpose G2: the strongest motive acts */const e=o.who.e;const d=mkP("kcE",{e});if(d){K.evT[e]=S.turn;pushDil(d,KCE[e].t)}}
+ const o=npcWhy("kcWeek",{E},()=>roll(KC.ev));if(!o)return;/* npc-purpose G2: the strongest motive acts */const e=o.who.e;const d=mkP("kcE",{e});if(d){K.evT[e]=S.turn;pushDil(d,KCE[e].t)}}
 (function(){const m0=kcMonth;kcMonth=function(){if(!S||!S.kc||!S.kc.kd)return m0.apply(this,arguments);return kc2Month()}})();
 function kc2Month(){S.turn++;const K=S.kc;const d=K.kd;
  if(d==="dan"){S.kap+=BAL.eff.jkc2.kapKc2Month;if(S.kap>=BAL.kc2.st.dan.siet&&!K.ev.d_siet){K.ev.d_siet=1;pushDil(mkP("kcE",{e:"d_siet"}),"Chủ nợ đến nhà")}apply({bac:BAL.kc2.kc2Month_o_bac})}

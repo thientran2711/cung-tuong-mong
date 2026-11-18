@@ -83,8 +83,8 @@ function dhHieuNotice(h,it,why){const d=H().danhG;log(`Hoàng thượng ban hi�
 const KIND={cold:"vào lãnh cung",giang:"bị giáng phẩm",cam:"bị cấm túc"};
 function wornK(p){const w=p===S?S.titleWorn:p.titleWorn;return typeof w==="string"&&/^dh-/.test(w)?w.slice(3).split("@")[0]:null}
 function dhConfiscate(p,kind,why){if(!p||!alive(p))return null;const P=(C().p||{})[kind];if(!P)return null;const out={hieu:"",title:"",items:[]};
- if(p.hieu&&npcWhy("dhConf",{p,kind,i:0})&&roll(P[0])){/* npc-purpose G2: the Emperor takes it back from his own anger vs his favour for her (P = the old odds, now the success) */out.hieu=p.hieu;p.hieu="";for(const k of DK)for(const y of findAll(pk(p),k))if(y.p===p){const i=p.inv.indexOf(y.e);if(i>=0){p.inv.splice(i,1);toStore(p,y.e,"conf");out.items.push(y.e)}}}
- const wk0=wornK(p);if(wk0&&p.dh&&p.dh[wk0]&&npcWhy("dhConf",{p,kind,i:1})&&roll(P[1])){p.dh[wk0].conf=1;if(typeof dhWear==="function")dhWear(p,null,true);out.title=wk0}
+ if(p.hieu&&npcWhy("dhConf",{p,kind,i:0},()=>roll(P[0]))){/* npc-purpose G2: the Emperor takes it back from his own anger vs his favour for her (P = the old odds, now the success) */out.hieu=p.hieu;p.hieu="";for(const k of DK)for(const y of findAll(pk(p),k))if(y.p===p){const i=p.inv.indexOf(y.e);if(i>=0){p.inv.splice(i,1);toStore(p,y.e,"conf");out.items.push(y.e)}}}
+ const wk0=wornK(p);if(wk0&&p.dh&&p.dh[wk0]&&npcWhy("dhConf",{p,kind,i:1},()=>roll(P[1]))){p.dh[wk0].conf=1;if(typeof dhWear==="function")dhWear(p,null,true);out.title=wk0}
  if(!out.hieu&&!out.title)return null;
  const c=p.dhConf||(p.dhConf={});if(out.hieu)c.hieu=out.hieu;if(out.title){c.titles=c.titles||[];if(!c.titles.includes(out.title))c.titles.push(out.title)}
  c.at=S.turn;c.kind=kind;c.why=why||KIND[kind];delete c.open;delete c.kn;delete c.d0;delete c.ask;
@@ -153,7 +153,7 @@ PEND.dhlost=pp=>{const c=typeof loGet==="function"?loGet(pp.id):null;if(!c||c.st
  add("cct","Báo Cung Chính ti tra xét","chứng cứ thật mới thành án; báo lên thì ai cũng biết");add("ask","Lặng lẽ hỏi cung nhân","kín đáo, có khi dò ra dấu vết");
  O.push({n:"Để sau",fx:{},j67:`kèm: tra xét sau ở Tư trang › Việc › Đồ thất lạc; không tìm lại được thì Danh -${I().lostDanh}`,go:()=>{}});
  return{who:typeof pMe==="function"?pMe():null,t:`<p><b>${nm}</b> ngự ban của ngươi không còn trong rương.</p><p>Mất ấn tín Hoàng thượng ban là tội không nhỏ. Tra xét ngay, hay âm thầm tìm?</p>`,o:O}};
-function lostTick(){for(const p of people()){if(!alive(p))continue;if(p!==S&&!npcOK())continue;for(const e of slots(p))if(isDh(e)&&e.own===pk(p)&&!e.lo){const o=npcWhy("dhTake",{p});if(o&&roll(I().lose))window.dhLose(p,e,o);break}}}
+function lostTick(){for(const p of people()){if(!alive(p))continue;if(p!==S&&!npcOK())continue;for(const e of slots(p))if(isDh(e)&&e.own===pk(p)&&!e.lo){const o=npcWhy("dhTake",{p},()=>roll(I().lose));if(o)window.dhLose(p,e,o);break}}}
 /* a case closed and the piece not back with its owner → Danh −lostDanh once (the piece still sits somewhere: conservation) */
 function lostPenalty(){for(const c of S.lost||[]){if(!c||!c.dh||c.st!=="done"||c.dhPen)continue;const o=byK(c.own);c.dhPen=1;if(!o||!alive(o))continue;
  const back=slots(o).some(e=>isDh(e)&&e.dhid===c.e.dhid);if(back)continue;const d=I().lostDanh;ap(o,{danh:-d});
@@ -176,7 +176,7 @@ window.dhCensus=census;
 function seed(){for(const p of people()){if(p.hieu&&!p.dhSeed){p.dhSeed=1;giveItems(p,p.hieu,true)}if(!Array.isArray(p.dhSn))p.dhSn=snap(p)}}
 /* ---------- the turn: weekly state check + census; monthly grant / atonement / loss ---------- */
 function dhMonth(){for(const p of people()){if(!alive(p))continue;if(p!==S&&!npcOK())continue;
- if(dhHieuOK(p).ok&&npcWhy("dhHieu",{p})&&roll(H().p))/* npc-purpose G2: the Emperor bestows from his favour */window.dhHieuGrant(p,"month");confTick(p)}lostTick()}
+ if(dhHieuOK(p).ok&&npcWhy("dhHieu",{p},()=>roll(H().p)))/* npc-purpose G2: the Emperor bestows from his favour */window.dhHieuGrant(p,"month");confTick(p)}lostTick()}
 function dhWeek(){seed();for(const p of people()){if(p!==S&&!npcOK())continue;dhCheck(p)}lostPenalty();census()}
 window.dhMonth=dhMonth;window.dhWeek=dhWeek;
 (function(){if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const t0=S&&S.turn,w0=S&&wk();const r=e0.apply(this,arguments);

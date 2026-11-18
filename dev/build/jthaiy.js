@@ -78,7 +78,7 @@ function routine(){if(off())return;const z=thy();if(z.last===S.turn)return;z.las
  else if(w===2||lateHint())P.push(`<p class="past">Thái y dặn ăn uống điều độ; tháng sau nếu kỳ kinh vẫn chậm thì mời bắt mạch lại.</p>`);
  if(!tr)P.push(`<p class="past">Mạch án được ghi vào sổ Thái y viện.</p>`);
  rec("routine",vd);
- if(by&&npcWhy("thyLeak",{p:doc(),by})&&roll(T().leak))leak(by,F);/* npc-purpose G2c: the physician leaks when the briber holds him more than the player does */
+ if(by&&npcWhy("thyLeak",{p:doc(),by},()=>roll(T().leak)))leak(by,F);/* npc-purpose G2c: the physician leaks when the briber holds him more than the player does */
  log(`Thỉnh bình an mạch: ${vd}.`);
  if(cls!=="g"||P.some(x=>/class="r"/.test(x))||Q.length<3)Q.push({t:"Thỉnh bình an mạch",kind:"notice",who:pDoc(),h:P.join("")})}
 (function(){if(typeof monthTick!=="function")return;const m0=monthTick;monthTick=function(){const r=m0.apply(this,arguments);try{if(S&&!S.dead)routine()}catch(e){console.error(e)}return r};window.monthTick=monthTick})();
@@ -116,7 +116,7 @@ function req(road,paid){const self=road==="self";if(!paid){if(why(road))return""
  else if(!S.preg)P.push(`<p class="past">Chưa có hỉ mạch.</p>`);
  if(!tr)P.push(`<p class="past">Mạch án được ghi vào sổ Thái y viện.</p>`);
  rec(self?"self":"pay",vd);
- if(by&&npcWhy("thyLeak",{p:doc(),by})&&roll(T().leak))leak(by,F);/* npc-purpose G2c: the physician leaks when the briber holds him more than the player does */
+ if(by&&npcWhy("thyLeak",{p:doc(),by},()=>roll(T().leak)))leak(by,F);/* npc-purpose G2c: the physician leaks when the briber holds him more than the player does */
  /* her own road: seen at Thái y viện */
  if(self){const W0=npcWit("tyv",null,{pool:liveRivals(true).filter(rv),vs:S});const v=W0.length&&roll(T().seen)?W0[0].p:null;/* npc-purpose G2c: only one really at Thái y viện sees her */if(v){try{newsAdd(v,"ty",`${S.name} đích thân sang Thái y viện xin bắt mạch`,false)}catch(e){}
   if(S.preg&&S.hidden&&roll(T().seenPreg)){S.hidden=false;noteAdd(v.id,`thấy ngươi sang Thái y viện, đoán ngươi đã có thai`);P.push(`<p class="r">Lúc ra về, ngươi thấy người của ${v.name} đứng nhìn theo.</p>`)}}}
@@ -137,7 +137,7 @@ window.thyCardLines=function(){if(!S)return[];const z=thy();const L=[];const r=z
   if(k==="ty"&&(a==="bm"||a==="bm2")){if(!S||S.dead||Q.length)return;req(a==="bm"?"pay":"self");return}
   /* Hỏi chuyện: a physician who likes her tells her a rival's mạch án */
   if(k==="ty"&&a==="hoi"&&S&&!S.dead&&!Q.length&&can(2)&&doc()){const c=doc();const me=c.af.me||0;
-   if(me>=T().askAf&&npcWhy("thyTell",{p:c,me})&&roll(cl(T().askBase+me/2,5,95))){/* npc-purpose G2c: he tells because he likes her */const L=liveRivals(true).filter(v=>rv(v)&&((v.preg&&v.hidden)||(illOf(v)&&!illKnown(v))));const v=npwPick(L,x=>1+Math.max(0,-((c.af||{})[x.id]||0)));/* npc-purpose G2c: he tells on the one he likes least */
+   if(me>=T().askAf&&npcWhy("thyTell",{p:c,me},()=>roll(cl(T().askBase+me/2,5,95)))){/* npc-purpose G2c: he tells because he likes her */const L=liveRivals(true).filter(v=>rv(v)&&((v.preg&&v.hidden)||(illOf(v)&&!illKnown(v))));const v=npwPick(L,x=>1+Math.max(0,-((c.af||{})[x.id]||0)));/* npc-purpose G2c: he tells on the one he likes least */
     if(v){spend(2);c.af.me=me+1;let t;if(v.preg&&v.hidden){t=`${v.name} đang mang thai, còn giấu`;noteAdd(v.id,"thái y kể: nàng ta đang mang thai, còn giấu")}else{v.ill.known=true;t=`${v.name} mắc ${ILL[v.ill.k].n.toLowerCase()}`;noteAdd(v.id,`thái y kể: nàng ta mắc ${ILL[v.ill.k].n.toLowerCase()}`)}
      log(`${c.name} hạ giọng kể mạch án: ${t}.`);render();return}}}
   return c0.apply(this,arguments)};window.courtAct=courtAct})();
@@ -161,7 +161,7 @@ function npcMonth(){let ev="";const c=doc();if(!c)return ev;c.af=c.af||{};
  for(const v of liveRivals(true)){if(!rv(v)||v.confined)continue;
   /* a hostile rival buys the physician (aims: her, or a rival who carries a child / holds the favour) */
   if((v.bac||0)>=T().npcBribeBac*2){const tg=[S].concat(liveRivals(true).filter(x=>rv(x)&&x!==v)).filter(t=>{try{return hostility(v,t)>=T().bribeHost&&(t.preg||(t===S?S.sung:t.sung||0)>=40)}catch(e){return false}});
-   const ev2=nv(v,"thyEv");if(tg.length&&npcWhy("thyBribe",{p:v,tg})&&roll(T().npcBribe+ev2)){/* npc-purpose G2c: she buys him for the one she hates most */ap(v,{bac:-T().npcBribeBac});c.af[v.id]=(c.af[v.id]||0)+T().npcBribeAf;try{newsAdd(v,"ty",`Có người thấy ${v.name} cho mời thái y sang cung trò chuyện rất lâu`)}catch(e){}}}
+   const ev2=nv(v,"thyEv");if(tg.length&&npcWhy("thyBribe",{p:v,tg},()=>roll(T().npcBribe+ev2))){/* npc-purpose G2c: she buys him for the one she hates most */ap(v,{bac:-T().npcBribeBac});c.af[v.id]=(c.af[v.id]||0)+T().npcBribeAf;try{newsAdd(v,"ty",`Có người thấy ${v.name} cho mời thái y sang cung trò chuyện rất lâu`)}catch(e){}}}
   /* her monthly visit finds a hidden harm in her */
   const tl=tainted(v);const bad=bribedBy(v);if(tl.length&&!bad&&roll(T().npcFind+(v.doctor?T().npcFindDoc:0))){const e=pick(tl);v.inv.splice(v.inv.indexOf(e),1);const by=byKey(e.by);
    if(by&&by!==v){evA(v,by,BAL.eff.jthaiy.evNpcMonth);try{oanAdd(v,by,BAL.eff.jthaiy.npcMonth)}catch(x){}}try{newsAdd(v,"ty",`Thái y bắt mạch cho ${v.name}, thấy dấu ${TAINT[e.t].n}; món đồ ấy bị đem đi`,by===S)}catch(x){}

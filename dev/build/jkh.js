@@ -133,8 +133,8 @@ window.khWorld=function(){let ev="";if(!S||S.dead||khGuest())return ev;
  for(const m of moms){if(m!==S&&(!m.alive||m.out))continue;if(m===S&&S.out)continue;for(const k of (m===S?S.kids:m.kids)||[]){if(!k.alive||!k.dateOff||k.tfOk||(k.age||0)>P.ageMax)continue;
   if(m===S&&S.rt&&S.rt.ng)break;
   const Lc=liveRivals(true).filter(v=>v!==m&&v.alive&&!v.out&&khMotive(v,m,k)&&evG(v,m)>=P.accEv&&(typeof rtGateT!=="function"||rtGateT(v,m,"accuse").ok));
-  const o=Lc.length?npcWhy("khAcc",{m,L:Lc}):null;const acc=o&&o.who;/* npc-purpose G2: the accuser = the schemer whose grudge pushes her most; accP = the success */
-  if(!o||!roll(P.accP))continue;
+  const o=Lc.length?npcWhy("khAcc",{m,L:Lc},()=>roll(P.accP)):null;const acc=o&&o.who;/* npc-purpose G2: the accuser = the schemer whose grudge pushes her most; accP = the success */
+  if(!o)continue;
   if(m===S){khStat("lech_set");if(typeof rtNgSet==="function"){rtNgSet(k,acc.id);ev+=`${acc.name} vốn ${o.why}, cầm chuyện ${k.name} lệch ngày trong sổ Kính sự phòng, tâu xin trích huyết nghiệm thân. `}}
   else ev+=khNgNpc(acc,m,k);break}}return ev};
 const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments);try{ev+=khWorld()}catch(e){console.error(e)}return ev};

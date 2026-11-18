@@ -19,7 +19,7 @@ npwReg("h54Plead",{grp:"G2",who:c=>c.p?[c.p]:[],why:(p,c)=>{const B=g2bB().plead
 npwReg("h54Sad",{grp:"G2",who:c=>c.k?[c.k]:[],why:(k,c)=>({s:Math.max(0,g2bB().sad.joy0-(c.W.joy||0))*g2bB().sad.w,r:"khổ vì nhà chồng"})});
 npwReg("h54Hoa",{grp:"G2",who:c=>c.p?[c.p]:[],why:(p,c)=>g2bAmb(p)?{s:g2bB().hoa.base+Math.max(0,g2bB().hoa.fond0-(c.k.fond||0))*g2bB().hoa.fond,r:"tham vọng, dâng con gái cầu thân lấy thưởng"}:null});
 /* ---- j53: a mother asks the Emperor for a famed master ---- */
-npwReg("ktFav",{grp:"G2",who:c=>c.p?[c.p]:[],why:(p,c)=>{const B=g2bB().fav;const s=((p.sung||0)-B.sung0)*B.w+(g2bAmb(p)?B.amb:0);return s>0?{s,r:"cậy được sủng, xin Hoàng thượng cử danh sư cho con"}:null}});
+npwReg("ktFav",{grp:"G2",who:c=>c.p?[c.p]:[],why:(p,c)=>{const B=g2bB().fav;if((p.sung||0)<B.sung0)return null;const s=B.base+((p.sung||0)-B.sung0)*B.w+(g2bAmb(p)?B.amb:0);return {s,r:"cậy được sủng, xin Hoàng thượng cử danh sư cho con"}}});
 /* ---- j70: a plot only from a motive; the Emperor / Thái hậu guard from regard; a scarred face mended by care for beauty ---- */
 npwReg("j70Plot",{grp:"G2",who:c=>c.p?[c.p]:[],why:(v,c)=>{const t=c.t,d=danger(v,t)*g2bB().plot.d;
  const r=c.mo==="ghen"?"ghen vì "+npwNm(t)+" được sủng":c.mo==="nhuc"?"bị nhục, oán "+npwNm(t):c.mo==="ngoi"?"tranh ngôi cho con":"oán "+npwNm(t);return {s:d,t,r}}});

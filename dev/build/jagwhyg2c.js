@@ -6,7 +6,7 @@ npwReg("fxSrvHarm",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(s,c)=>{const B=BAL.ag.why
 npwReg("fxRivSrv",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(v,c)=>{const B=BAL.ag.why.fxSrv,h=hostility(v,S);if(h<B.hot)return null;
  const t=npwPick((S.staff||[]).concat(S.maid&&typeof S.maid==="object"?[S.maid]:[]),x=>KIT_FACEFX.live(x)?1+Math.max(0,x.loyal||0):0);if(!t)return null;
  return {s:h*mindW(v,"scheme"),t,r:"oán ngươi, ra tay với người hầu của ngươi"}}});
-npwReg("fxRivSrv2",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(v,c)=>{const B=BAL.ag.why.fxSrv;const t=npwPick(liveRivals(true).filter(x=>x!==v&&(x.staff||[]).length),x=>hostility(v,x)-B.hot);if(!t)return null;
+npwReg("fxRivSrv2",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(v,c)=>{const B=BAL.ag.why.fxSrv;const t=npwPick(liveRivals(true).filter(x=>x!==v&&(x.staff||[]).length),x=>hostility(v,x)-B.hot2);if(!t)return null;
  return {s:hostility(v,t)*mindW(v,"scheme"),t,r:"oán "+npwNm(t)}}});
 npwReg("fxSlapBack",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(m,c)=>{const B=BAL.ag.why.fxSrv;let a=0;try{a=Math.max(0,-aff(m,S))}catch(e){}
  const s=B.slapBase+Math.max(0,netQ(m,"spite"))*B.spite+a-Math.max(0,netQ(m,"timid"))*B.timidSl;return s>0?{s,t:S,r:"giận vì bị cãi lại"}:null}});

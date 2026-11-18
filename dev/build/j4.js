@@ -87,7 +87,7 @@ thd:{t:"Tài nữ nhà nho",n:3,goal:"Thơ ngươi sẽ làm rạng danh cha. Đ
  hint:()=>["Luyện Thi tới bậc 2 hoặc Tài 60","Dự thi Tài nữ (Thi bậc 3 hoặc Tài 70)","Xin khắc in sách của cha (Danh 40)"][S.st.step]||"",
  month(){const st=S.st;
   if(st.step===0&&(S.arts.thi>=2||S.tai>=60)){st.step=1;apply({danh:BAL.eff.j4.danhMonth_11});return `Thơ ngươi truyền ra ngoài cung. ${st.stu}, học trò cũ của cha ngươi, đem bình khắp kinh thành. Danh ${balSg(BAL.eff.j4.danhMonth_11)}. `}
-  if(st.step>=1){const th=npcWhy("meHarm",{h:"provoke"});if(th){const v=th.who,o1=od(BAL.odb.j4.odO1+S.tai/2+artW("thi",S.arts.thi)*8),o2=od(BAL.odb.j4.odO2);
+  if(st.step>=1){const th=npcWhy("thdTaunt",{});if(th){const v=th.who,o1=od(BAL.odb.j4.odO1+S.tai/2+artW("thi",S.arts.thi)*8),o2=od(BAL.odb.j4.odO2);
    return setDil(mkP("thd1",{v:v.id,o1,o2}))}}
   return""},
  acts(){const st=S.st;

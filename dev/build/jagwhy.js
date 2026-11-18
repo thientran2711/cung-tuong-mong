@@ -7,38 +7,44 @@
    the deed with its BAL odds (unchanged, in the caller). No reason → nothing happens (a quiet day is fine, OD 17/11 ~13:15Z).
    API (every caller uses these; no per-event helper, no per-event number):
    - npwReg(kind, def): register an event kind. def = { who(ctx) → [people who could act], why(p, ctx) → {s, t?, r, k?} | null,
-       cd?: key of BAL.ag.why.cd (default: kind; else BAL.ag.why.<kind>.cd — keeps one-core-guard's one key per name), cdOf?(p) → tuần for that person (a BAL value), grp?: label }. s = how strongly her goal pushes her (0..100, from her real state),
+       cd?: key of BAL.ag.why.cd (default: kind; else BAL.ag.why.<kind>.cd — keeps one-core-guard's one key per name), cdOf?(p) → tuần for that person (a BAL value), shared?: true = ONE cooldown for the kind across all actors (a palace occasion
+       that comes rarely, e.g. a merit deed: N actors must not mean N times the old rate), grp?: label }. s = how strongly her goal pushes her (0..100, from her real state),
        t = her target (a person), r = the reason (player-visible, Vietnamese per VANPHONG), k = place key.
-   - npcWhy(kind, ctx) → {kind, who, tgt, why, place, s} | null. Asks every candidate why(); keeps reasons with s ≥ BAL.ag.why.min that are off
-       cooldown; picks among the goal-valid top options (npwPick); stamps the cooldown (S.npw, lazy: old saves load).
+   - npcWhy(kind, ctx, done?) → {kind, who, tgt, why, place, s} | null. Asks every candidate why(); keeps reasons with s ≥ BAL.ag.why.min that are off
+       cooldown; picks among the goal-valid top options (npwPick); stamps the cooldown (S.npw, lazy: old saves load). done(o) (optional) = the
+       chance / success roll of the deed (its BAL odds): false → no deed, NO stamp (counted "miss"), she may try again next time (rates review 18/11:
+       the cooldown follows a real deed, never a failed chance).
    - npcWhyAll(kind, ctx) → every actor with a reason this time (for events where several people may act), each once, cooldowns stamped.
-   - npwPick(L, score) → one of L: only options within BAL.ag.why.near × the best score, at most BAL.ag.why.top of them, weighted by score^pow.
+   - npwPick(L, score, o?) → one of L: only options within BAL.ag.why.near × the best score, at most BAL.ag.why.top of them, weighted by score^pow.
+       o.all = every option with score > 0, weighted by score (for lists where EVERY option is already her own goal-valid act, e.g. the
+       reactions her temper allows: keeps the old spread, rates review 18/11).
    - npcWit(place, kh, o) → [{p, s}] people REALLY at the place (day record row at khắc kh, else whereOf), best watcher first:
        eyes × wit.eye + (o.vs ? hostility(p, o.vs) × wit.host : 0); o.not = people to leave out.
    - npcTell(about, o) → {who, to, why} | null: who carries a fact about `about` to `o.to` (default: the player) — a witness at o.place/o.kh, or
        o.from (people who already know it), choosing to tell by grudge against `about` (tell.host) or liking for the one told (tell.friend).
    - npwNm(p) → the name the player reads ("ngươi" / "<rank> <name>").
    Numbers: BAL.ag.why (jbal2). Off: BAL.ag.why.on = 0 → npcWhy returns null (callers keep their old path only while their row is unconverted).
-   Counters: NPW.stat (fire / quiet / cd per kind). Scan test: dev/test/npc-purpose-scan.js (rows: dev/test/npc-purpose-rows.json).
+   Counters: NPW.stat (fire / quiet / cd / miss per kind). Scan test: dev/test/npc-purpose-scan.js (rows: dev/test/npc-purpose-rows.json).
    ===================================================================================================================================== */
 const NPW={reg:{},stat:{}};
 function npwB(){return (typeof BAL!=="undefined"&&BAL.ag&&BAL.ag.why)||null}
 function npwOn(){try{const B=npwB();return !!(B&&B.on&&typeof S!=="undefined"&&S&&!S.dead)}catch(e){return false}}
-function npwSt(kind,k){const s=NPW.stat[kind]||(NPW.stat[kind]={fire:0,quiet:0,cd:0});s[k]=(s[k]||0)+1}
+function npwSt(kind,k){const s=NPW.stat[kind]||(NPW.stat[kind]={fire:0,quiet:0,cd:0,miss:0});s[k]=(s[k]||0)+1}
 function npwReg(kind,def){if(!kind||!def||typeof def.who!=="function"||typeof def.why!=="function")throw new Error("npwReg "+kind);NPW.reg[kind]=def;return def}
 function npwId(p){try{return p===S?"me":(typeof ledgerId==="function"&&ledgerId(p))||p.id||p.sid||p.name}catch(e){return p&&(p.id||p.name)}}
 function npwCdN(kind,p){const B=npwB(),d=NPW.reg[kind];if(d&&typeof d.cdOf==="function"&&p){const n=+d.cdOf(p);if(n>=0)return n}const c=B.cd||{};const k=(d&&d.cd)||kind;if(c[k]!=null)return c[k];const o=B[kind];return o&&o.cd!=null&&!Array.isArray(o.cd)?o.cd:(c._||0)}
-function npwCdOk(kind,p){if(!S.npw)return true;const w=S.npw[npwId(p)+"|"+kind];return w==null||wk()>=w}
-function npwStamp(kind,p){S.npw=S.npw||{};S.npw[npwId(p)+"|"+kind]=wk()+npwCdN(kind,p)}
-function npwPick(L,score){const B=npwB();const R=(L||[]).map(x=>[x,+score(x)||0]).filter(r=>r[1]>0).sort((a,b)=>b[1]-a[1]);if(!R.length)return null;
- const top=R.filter(r=>r[1]>=R[0][1]*B.near).slice(0,Math.max(1,B.top));if(top.length===1)return top[0][0];
- const w=top.map(r=>Math.pow(r[1],B.pow));let x=Math.random()*w.reduce((a,b)=>a+b,0);for(let i=0;i<top.length;i++){x-=w[i];if(x<=0)return top[i][0]}return top[top.length-1][0]}
+function npwCk(kind,p){const d=NPW.reg[kind];return (d&&d.shared?"*":npwId(p))+"|"+kind}
+function npwCdOk(kind,p){if(!S.npw)return true;const w=S.npw[npwCk(kind,p)];return w==null||wk()>=w}
+function npwStamp(kind,p){S.npw=S.npw||{};S.npw[npwCk(kind,p)]=wk()+npwCdN(kind,p)}
+function npwPick(L,score,o){const B=npwB();const R=(L||[]).map(x=>[x,+score(x)||0]).filter(r=>r[1]>0).sort((a,b)=>b[1]-a[1]);if(!R.length)return null;const all=!!(o&&o.all);
+ const top=all?R:R.filter(r=>r[1]>=R[0][1]*B.near).slice(0,Math.max(1,B.top));if(top.length===1)return top[0][0];
+ const w=top.map(r=>all?r[1]:Math.pow(r[1],B.pow));let x=Math.random()*w.reduce((a,b)=>a+b,0);for(let i=0;i<top.length;i++){x-=w[i];if(x<=0)return top[i][0]}return top[top.length-1][0]}
 function npwAsk(kind,ctx){const d=NPW.reg[kind];if(!d)throw new Error("npcWhy: unknown kind "+kind);const B=npwB();const O=[];let cd=0;
  for(const p of (d.who(ctx||{})||[])){if(!p)continue;let r=null;try{r=d.why(p,ctx||{})}catch(e){console.error("npcWhy "+kind,e);r=null}
   if(!r||!(r.s>=B.min))continue;if(!npwCdOk(kind,p)){cd++;continue}O.push({kind,who:p,tgt:r.t||null,why:r.r||"",place:r.k||null,s:r.s})}
  if(cd)npwSt(kind,"cd");return O}
-function npcWhy(kind,ctx){if(!npwOn())return null;const O=npwAsk(kind,ctx);const o=npwPick(O,x=>x.s);if(!o){npwSt(kind,"quiet");return null}
- npwStamp(kind,o.who);npwSt(kind,"fire");return o}
+function npcWhy(kind,ctx,done){if(!npwOn())return null;const O=npwAsk(kind,ctx);const o=npwPick(O,x=>x.s);if(!o){npwSt(kind,"quiet");return null}
+ if(typeof done==="function"&&!done(o)){npwSt(kind,"miss");return null}npwStamp(kind,o.who);npwSt(kind,"fire");return o}
 function npcWhyAll(kind,ctx){if(!npwOn())return[];const O=npwAsk(kind,ctx);if(!O.length){npwSt(kind,"quiet");return[]}
  for(const o of O){npwStamp(kind,o.who);npwSt(kind,"fire")}return O}
 function npwAt(p,kh){try{if(kh!=null&&typeof agRec==="function"&&agRec()&&typeof agAt==="function")return agAt(p,kh)}catch(e){}return whereOf(p)}
