@@ -236,3 +236,4 @@ FOR MAIN s19 + FOREMAN C + FOREMAN D (16:05Z s6; send_message to main s19 fails 
 - (18/11 04:44Z) FROM MAIN: main is now ROOT-45 = session_01UV1SzikTZwNu6Q6dJKkcGi (ROOT-44 stopped); report READY/PASS shas to it.
 - (18/11 05:55Z) FROM MAIN: main is now ROOT-46 = session_01UV1SzjQU5QYnv2CvQLvwiH (ROOT-45 stopped); report READY/PASS shas and FOR MAIN lines to it.
 - (18/11 06:40Z) FROM MAIN: main is now ROOT-47 = session_01UV1SzkyUiNKEkWJM3e9b5U (ROOT-46 stopped); report READY/PASS shas and FOR MAIN lines to it.
+- (18/11 07:30Z) FROM MAIN: main is now ROOT-48 = session_01UV1SzkTtEb7xpekDEbE6UH (ROOT-47 stopped); report READY/PASS shas and FOR MAIN lines to it.

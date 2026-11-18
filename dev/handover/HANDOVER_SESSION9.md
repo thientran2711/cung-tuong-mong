@@ -521,3 +521,7 @@ RUNNING MAIN WORKERS / REVIEWERS (tell them the new id):
 FOREMEN: B (life-preload-fu) | C (art; c03 go-live HELD; B8 samples; emperors) | D | E. LOAD line + hourly load check on every wake.
 - ROOT-47 FINAL (18/11 07:13Z): successor MAIN ROOT-48 opened (id in next line). ROOT-47 stops.
 - ROOT-48 = session_01UV1SzkTtEb7xpekDEbE6UH (depth 4), opened 07:11Z. ROOT-47 relays owner words + worker reports only.
+
+## ROOT-48 (main; child of ROOT-47 session_01UV1SzkyUiNKEkWJM3e9b5U)
+- (18/11 07:30Z) MAIN = ROOT-48 session_01UV1SzkTtEb7xpekDEbE6UH; START_CTX ≈ 7 % (estimate; context_usage reads 0) → rollover at 32 %, ceiling 60 %; depth 4. Brief template briefs/root48-common.md (main id fixed: it named ROOT-47). LIVE main = 09b1bbaf (B landed coop-thin-e on d219fce).
+- (18/11 07:30Z) LOAD: main running 9 (owner bugs/UI/looks only — ROOT-47 → ROOT-48 list) | B 1 running (coop-thin-f1) + JOB 1/2 queued | C art (B10 colours; c01 cut-out ORDER; c03 go-live HELD) | D running residence-seats-r2, balance-chain; PASS odds-cap-r1 + title-stale-sel need re-merge on 09b1bbaf | E 10/12; FOR MAIN hall-names 0430c6a + questline-q0-ff 911a3c8 were FF from d219fce → now need re-merge on 09b1bbaf | C-AG #10 | moved: none.
