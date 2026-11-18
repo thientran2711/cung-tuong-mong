@@ -1,4 +1,4 @@
-# REVIEW coop-thin-e r1 — PASS review/coop-thin-e-r1 a9b68c4b
+# REVIEW coop-thin-e r1 — PASS review/coop-thin-e-r1 a9b68c4b → READY FF bd2dd3f7 (main 4cb3a9e5 merged)
 
 PRIORITY #1 CHECK ('coop-thin-e' / 'deal' / 'E.owe' / 'vuco home' / '#panel'): OD 0 new (thin guest 17/11 ~01:40Z/~02:05Z/~02:15Z + L1487/L1489/L1493/L1494 read) | main 94a93759→4dcd50e7 (no part E; jcoopthin A–D) | review/* review/coop-thin-e d3396d96 only | claims row 403 (this reviewer).
 Reviewer session_01N1tNP4ndRrNNvpxebeB5b9 (opus), depth 2, START_CTX ≈ 3 % of 1M (used_tokens reads 0; estimate), finished ≈ 20 %. Coordinator Foreman B ROOT-2 session_01N1tNP5otr7BnxsT5Fytb4i.
@@ -31,3 +31,6 @@ LOOK (scratch only, nothing uploaded): host Fold 755x1000@2 and guest iPad 1180x
 
 ## Known limits carried (not E; FOR B)
 phóng cung START counts only the host's aged maids (w.x.mine); punish() of HER entry as vu cổ culprit lands on her stand-in; her week end (endTurn + month) stays on her phone until part G; acts she makes after pressing Sẵn sàng reach the host only at her next ready (part F moves acts to the host).
+
+## Re-merge for FF (Foreman B 06:28Z): READY FF bd2dd3f7
+origin/main 4cb3a9e5 merged (conflicts = generated index.html / sw.js only; assemble + build_site rebuilt; main touched no co-op file). Gates on bd2dd3f7: coop-thin-e L5 32/32 + swap 33/33 · coop-night THIN=5 105/105 · coop-timer THIN=5 43/43 · coop-thin-c L5 16/16 · coop-e2e 63/63 · COOP_SWAP=1 62/63 then rerun 63/63 (level 0 case 'friend starts as Người lạ' with a servant friend: random origin, eW off, not E) · coop-one-world seeds 1–10 PASS · one-core-guard PASS · quickcheck PASS (core gates, old save ok, buổi 1006/987 ms).
