@@ -328,7 +328,7 @@
 | REVIEW mirror-center r1 of ad226ed0 (sonnet SMALL) | review/mirror-center-r1 | MAIN s35 | session_01UV1SziReys4L5kSo9SXu1s | PASS 0f0954fb (r2) | 17/11 18:25Z |
 | MOOD-MEM memory 2 layers + ghen feeling label (opus; OD L1678 (b)(g); after ag-moodknow) | review/mood-mem | C-AG | session_01UV1SzgwGeesPrLKFMeBNdz | RUNNING | 17/11 18:27Z |
 | WX-ANIM weather animation audit + fill + no 2nd icon (sonnet; OD L1678 (h)(i)) | review/wx-anim | C-AG | session_01UV1Szj67Gao9H4xeEuLrY9 | DONE be36f27 (archived) | 17/11 18:27Z |
-| day-khac review ROUND 2 (opus BIG, successor reviewer) of 9e7ddc14 | review/day-khac-audit-r1 | D | session_01964izEHVzU6h14EnvhUm8C | RUNNING | 17/11 18:30Z |
+| day-khac review ROUND 2 (opus BIG, successor reviewer) of 9e7ddc14 | review/day-khac-audit-r1 | D | session_01964izEHVzU6h14EnvhUm8C | PASS 46900ee2 (FOR MAIN; fixed by D ROOT 18/11 06:08Z) | 17/11 18:30Z |
 | day-khac review ROUND 2 verdict | review/day-khac-audit-r1 | D | session_01964izEHVzU6h14EnvhUm8C | DONE PASS 46900ee2 → FOR MAIN (builder lands; archived) | 17/11 19:05Z |
 | DISPLAY ROOM kit UI (owner option 1, OD ~18:33Z (3)): full-screen room, shelves 2×6 / 1×12, per-shelf tư trang drawer filtered by group — kit part for C-AG display-shelf builder | review/kit-display-room | MAIN s35 | session_01UV1SzisVVpBnxyKZsxjCfY | RUNNING | 17/11 18:34Z |
 | REVIEW hoa-dien fa483a8ed delta on makeup-lux (opus BIG; brief briefs/review-hoa-dien.md) | review/hoa-dien-r1 | B | session_01N1tNP4LhhQaE7j3FQW5NGV | PASS review/hoa-dien-r1 67b18b1e (reviewer fixes: tolD .45→.24 medium 26 % top, sprite fallback; lands after makeup-lux; report reports/review-hoa-dien.md) | 17/11 18:40Z |
@@ -346,7 +346,7 @@
 | toil-looks7: finish toil-looks5 (V2-B smaller, final sheet v17, merge main) (sonnet; brief briefs/s36-toil-looks7.md) | review/toil-looks5 | MAIN s36 | session_01UV1SzknrVcN46ftwSGV7f9 | SẴN SÀNG KIỂM 8fe3f7b7 (v17) | 17/11 19:36Z |
 | REVIEW display-shelf (opus BIG) of e0a86875 | review/display-shelf | C-AG | session_01UV1SzkUH3pxqYSkZMUQX7v | ROLLED OVER → SzmDekH (archived) | 17/11 19:09Z |
 | REVIEW kit-figure-mood r3 of 5758b6e3 (sonnet SMALL; brief briefs/s36-review-kit-figure-mood-r3.md) | review/kit-figure-mood-r3 | MAIN s36 | session_01UV1Szh4nqVY4zaK7Nk1kui | RUNNING | 17/11 19:12Z |
-| odds-cap review r1 (opus BIG) of d3589f39 | review/odds-cap-r1 | D | session_01964izEqMuRVcBrUFRY8F3P | RUNNING | 17/11 19:15Z |
+| odds-cap review r1 (opus BIG) of d3589f39 | review/odds-cap-r1 | D | session_01964izEqMuRVcBrUFRY8F3P | DONE (superseded by r2/r3; fixed by D ROOT 18/11 06:08Z) | 17/11 19:15Z |
 | REVIEW moodknow final + mood-mem step0 (opus) of 8e2ac171 | review/mood-mem-r1 | C-AG | session_01UV1SzgWE17y4bj2Nh4xG1c | RUNNING | 17/11 19:16Z |
 | MOOD-MEM #2 (opus): memory 2 layers (b) on 8e2ac171 + step0 test runs | review/mood-mem | C-AG | session_01UV1Szigr35QvLkVSd2Vb9L | RUNNING | 17/11 19:17Z |
 | batch s36a-1 LIVE 579e8976 (main d4a850ce → 579e8976; ROLLBACK d4a850ce): kit-figure-mood-r2 + kit-fx-register-r1 | review/batch-s32a | MAIN s36 | session_01UV1SzgWoEmnjTTEv7UgBNP | LIVE | 17/11 19:19Z |
