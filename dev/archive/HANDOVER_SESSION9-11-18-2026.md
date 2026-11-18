@@ -675,3 +675,115 @@ OWNER RULINGS TODAY (OD tail from 21:37Z, read VERBATIM): blush Đoan trang 60 %
 ## S41 (main, child of s40)
 ## S42 (main, child of s41)
 ## S43 (main, child of s42)
+
+<!-- moved 18/11/2026 03:01Z: 110 lines from HANDOVER_SESSION9.md -->
+
+LIVE: main = f5220eaa (batch-0032: kit-size-r7, kit-size-8, opt-greyed-2, time-spill-seed, diemtrang-score, kit-size-9, coop-stable-r1). Before: 744b80e7 (batch-2300). Co-op Worker deployed by s27 = f7d52a7d (rollback: cd coop/worker && npx wrangler rollback 49ec67a6-b1f1-49d2-9dbf-4ea38af6eeba); coop-e2e vs it 60/60. Deploy recipe works here: CLOUDFLARE_API_TOKEN=dummy (proxy injects) npx wrangler deploy.
+OWNER WAITING ON: nothing asked right now. Next owner-facing items: balance-core corrected §7 table (from worker #2) → ask her 1 approve / 2 approve with edits; Sủng curve question after; coop-thin progress (tripwire count) after each part; C's backdrop samples.
+BATCH BUILDER session_01UV1Szgb3UbRCJaMcocuGrF: batch-0132 from f5220eaa = coop-main-faults PASS 608309dc + kit-size-10 PASS 8ab00ede (+ OI and coop-contest-fix when PASS); told to ship alone if nothing else in ~30 min. On BATCH READY: LOOK at the 2 shots (rules in START: ratio ≈.79, her room stage, no overlap, no back-turned looking-back pose, clean cut-outs) then push sha:refs/heads/main under flock, CLAIMS LIVE row, tell owner.
+RUNNING (report to main; when they roll over, open successors with their handover + the 3 rollover lines):
+- balance-core #2 session_01UV1SzikYHwChrtLtsPGaQy (10 r1 items, real-path re-measure, §7 owner table) → reviewer session_01UV1SzhHhDwddRtuuW6hpL9 (ctx ~22 % at 00:08; may need fresh reviewer). Ship only after owner OK + PASS.
+- night-final #5 session_01UV1SzjKzCNds3XdRTnsRep (co-op night part; then night-ledger on its own branch review/night-ledger — not opened yet).
+- coop-contest-fix #2 session_01UV1Szi4hQiZFyPBLG2tQue (re-merge, one ghen core) → reviewer session_01UV1SziJoyYJ3o5iLXG8BuP waits r3.
+- coop-stable #2 session_01UV1SzmJ6eZ5av9w4VjKgrt (OPEN items: #next 'Chờ hảo hữu' lock, 22 co-op tests, coop-e2e start-friend fails, coop-night 'sees the wait', names-unique divergence) — needs an opus reviewer when ready.
+- oi-perf session_01UV1SziJLwwyFFAvzGMHcyD (origin-intros life-card 1.3–1.5 s long task; review/batch-0032-oi) — needs reviewer or goes to builder after quickcheck ×3 PASS (perf-only fix: SMALL review).
+- it-key-guard worker session_01UV1SzhtmrVzHNMoDZ13Wac (READY ce1eda7b) + reviewer session_01UV1SzkM4xXVtuGJCpS4Sdh (r1 running).
+- coop-thin A worker session_01UV1SzhV65dmdFBM2xfFYvT (foundations, flag off; Worker change not deployed until PASS) → needs opus co-op reviewer; then Part B.
+
+LIVE: main = 7abaf07ac (batch-0132: kit-size-10 on 0f61ff928 coop-main-faults). Co-op Worker f7d52a7d (rollback 49ec67a6-…).
+OWNER RULINGS TODAY (details in OD tail): no more co-op patching — co-op = thin-guest rebuild only, waves A → B‖D → C → E → F1–F6 → G → H, parts B→H owned by Foreman B; she plays solo only and will not play for ~3 days (until ~20/11) → finish work fast; main also fixes every unfixed owner bug itself; numbers decided by us; staff table EXISTS (BAL.promo.cap) — fix the root (second table capOf in all40.js etc.), no new table; duplicate-rule hunt (B).
+OWNER WAITING ON: balance-core §7 table approval (asked s28 Lượt 4: 1 duyệt / 2 duyệt có sửa / 3 làm lại — no answer yet; r2b early-death check running). Nothing else asked.
+RUNNING (all report to main; forward any SẴN SÀNG KIỂM to a reviewer, PASS → builder):
+- BATCH BUILDER batch-0232 session_01UV1SzkcNCwgZaSP59sonVH: B PASSes road-b2-fix-r2 fba2b5de → road-b3-fix2-r1 b837b0d1 → emotion-acts-3-r1 2118d118 → diff-remeasure-r1 ebe9ab2d → tut-followups-r1 92cce50b, + it-key-guard 02561fca, + fig-feet-crop-2-r1 d431dc3db, + CLAUDE.md GATE ZERO line. On BATCH READY: LOOK at shots (Fold + iPad; feet + tag in VIỆC Kính sự phòng) → push sha:refs/heads/main under flock (FF only) → CLAIMS LIVE row → tell owner.
+- coop-thin-a review r1 (opus) session_01UV1SzgchwneMvxW4bNtCDm on 89a9dc78 (+ Worker deploy verdict). On PASS: builder ships the client; main deploys the Worker (recipe in START), then write Foreman B: parts B‖D start (B owns them).
+- balance-core r2b (opus) session_01UV1Szk2uZjmbYdXJKyXFCH (early-death ≥150 lives) → result in reports/review-balance-core-r2.md; balance family now owned by Foreman D; ship only after owner OK.
+- save-dlg-fix (sonnet kit keeper) session_01UV1SzhRZF6zDmg7pUydbUm: Chọn sổ done 668e4692; finishing Tuần lục column (figure left, right frame WIDER, text size unchanged) + kitRelTable 'on paper' → then open a SMALL sonnet reviewer.
+- tuanluc-sync (opus) session_01UV1Szh89kMUtnfZPTNysLY: one-time lines repeating (Lối riêng ×9), log-only info shown in play, attribution to the right person, filler line j87.js:323 removed, Sổ ghi keeps every KẾT QUẢ in full, overnight card causes + 'Tin trong cung' block.
+- newlife-reset (opus) session_01UV1SzgyQP6eCJz2hmcnLrF: brand-new game shows the old game's healed-wound/veil line → per-life/per-slot reset registry (new-game + switch-slot first).
+- fig-rank-match (sonnet) session_01UV1SzjZ3ki1nnfEWtJvRjW: exact dress tier = rank. FACT found by s28: live FIGURES.json has 32 consort identities × tiers 1–4 × 4 ages only (no t5–t8 age-banded art) → Hoàng hậu shows a t4 dress; C's W2 'consort-ty 1024' = 32×8×4 should fill it — worker checks W2 covers t5–t8.
+- wx-fx-size (sonnet) session_01UV1SzjkM9jo2gPxyFWVcaP: petals too big + over text; weather inside the stage.
+- kit-ico-rank (sonnet) session_01UV1Szgrzg6rs6qWkr3xzsH, scenes-3 (sonnet) session_01UV1SzjdXNvKV2hkH4Y9s2y, presentation-wiring (sonnet) session_01UV1SziPP4d9141LvjeJ4wM (from owner-bug-sweep, reports/owner-bug-sweep.md).
+
+OWNER WAITING ON s29 QUESTIONS: (1) makeup tier names (s29 Lượt 49: Bộ 1 Mặt mộc/Lem luốc/Tươm tất/Mỹ lệ/Khuynh thành + style 'Lộng lẫy' (recommended) | Bộ 2 Tố nhan/Vụng về/Đoan trang/Kiều diễm/Khuynh quốc khuynh thành + 'Lộng lẫy' | own names). (2) vụng/vừa new samples (toil-looks worker will send 2 faces × 6 panels: mặt mộc | vụng | vừa | đẹp | tuyệt | Kiều diễm) → LOOK, then SendUserFile to her. balance-core §7 table approval still open from s28.
+OWNER RULINGS s29 (all in OD tail): strangers keep grey silhouette; vụng must be pretty (no thick brows); vừa = light đẹp layer, mặt mộc = no layer; residence 1 chủ vị + max 2 (1 Đông + 1 Tây), player assigned too; seats halved {HH1,HQP1,QP1,Phi2,Tần3}; NPC two-way: NPCs do makeup (AG-TOIL), she can react to their looks, symmetry audit #2 (C); Dư đồ + app fill the screen; option cards same picture size; Fold page = iPad page.
+RUNNING (all report to main):
+- builder batch-0415 session_01UV1SzjhxXkcba8uS4TZeVm (save-dlg-fix 711d018, fig-rank-match-r2 2558a2f1, wx-fx-size 5b2664116) → on BATCH READY: LOOK at shots, push sha:refs/heads/main under flock (FF only), CLAIMS LIVE row.
+- reviewers: kit-ico-rank r1 session_01UV1Szh3wz6vc9DcUjfYN4f (+ ctm-rank Worker/D1 deploy steps; main deploys after PASS; KIT §86 renumber); newlife-reset r1 session_01UV1Szj7gGyXgBXgvj6d6xG (keep it-key-guard migration); mg-clutter r1 session_01UV1SzhB4ckkvjk7TVuS92E; toil chain r1 session_01UV1SzgsZQKGbpwSCbZt39u (verdict on review/toil-overlay 71d804787; then s30 uploads mk-fit CDN data it lists: dev/art/mkfit/*.json + toil-fit2.json via cdn_sync); app-edge r1 session_01UV1Szi6Up9sVYdCYyMqqwW; map-full r1 session_01UV1Szipn2t9xXY2WubCJ1T (+ trial-merge app-edge; ship the two together).
+- workers: toil-looks (same toil worker session_01UV1SzhkR4i2bVXfUL54aTE; samples → owner before SẴN SÀNG); opt-pic-same session_01UV1SzhEnrDEEXPkBwigyNF; fig-tag-chip session_01UV1Szj9BoSnbTTWB4gZJ5B; tuanluc-sync #2 session_01UV1SzhADWZHmWHmXNzN7eb (items 6–10); presentation-wiring #3 session_01UV1SzgVfmcmRfZLnXZowvp; night-final #6 session_01UV1SzkcuhnxeSAywiQC2hz (TEMP for D; D reviews); balance-core r2b session_01UV1Szk2uZjmbYdXJKyXFCH (D family; ship after owner OK).
+LESSONS s29: open every worker WITH source_url=https://github.com/thientran2711/cung-tuong-mong + clone_depth 30 (else add_repo may be denied); s28 kept opening duplicates — s28 is now told to only record OD + forward; three branches fixed the same S.vl root → GATE ZERO must also grep open review/* diffs; cdn_sync now allowed by settings.local.json.
+NO BUILDER: batch builder session_01UV1SzjhxXkcba8uS4TZeVm rolled over (archived); its handover = end of dev/handover/reports/morechip-fix.md. OPEN a successor builder: batch = presentation-wiring-r1 bc8461cc → kit-ico-rank-r1 a1c7a37c (then main deploys ctm-rank Worker per reports/review-kit-ico-rank-r1.md) → fig-headtop-r1 f95f5a92 (+ morechip-fix eba25768 on PASS). LOOK at Fold+iPad shots before FF.
+STILL RUNNING: map-full reviewer session_01UV1Szipn2t9xXY2WubCJ1T (accepts jobs from main; now reviewing morechip-fix eba25768); fig-headtop worker session_01UV1SziNzVtVrRy8QmSoLTB (done, PASS f95f5a92 → archive it).
+ 8. toil-looks successor (reports/toil-reveal-fix.md, review/toil-looks2: lip-on-chin render on turned faces + 6-level ladder + palette colour + samples).
+ 9. tuanluc-sync #3 (opus; end of reports/tuanluc-sync.md).
+ 10. kit bug 'được/mất' one word per line in 2-column option cards at M 755; Fold Dư đồ labels under the right column at rest (map-full follow-up); Pixi 'r.updateLocalTransform' page error (pre-existing).
+FOREMAN ORDERS written by s30 (in their STATUS files): C = 3-trait pool (24 traits, 4 symmetric pairs per group, male/female pools, every trait good+bad), SHOW WHY A NUMBER (moved from main), greeting name rule by rank+trait, AG-MEET (NPCs approach her at a place), voice by tính tình, per-subject Học thành tài paintings (scene-thanhtai one-off CANCELLED), plus art queue; B = makeup names + Hiểm độc→Xảo quyệt rename + minigame snap/auto-aim audit (Thêu theo nét) + staff caps; D = cycle length rolled 5/6/7 per month (OD:L1397, never built), residence/seats, inpage6 bot fix.
+LESSONS s30: depth limit 8 kills a chained main — owner opens mains/foremen as ROOT sessions; reviewers refuse peer-assigned jobs unless they are continuations; don't order art before checking a working picture exists; read the code before stating a root cause (s30 guessed the stage-caption root wrong once).
+LIVE: main = c29866a6 (batch s31a: presentation-wiring-r1 + fig-headtop-r1; before it batch-d8 6ca04148). Co-op Worker unchanged.
+RUNNING (main s31 children; all report to main by send_message — they will message s32 once told):
+- builder s31b session_01UV1SzhfMi68Cmn88G2Yqze (brief briefs/s31-builder-b.md): fig-tag-chip-r1 7582405e, morechip-fix-r1 3bed78e3 + morechip-corners-r1 a66f274c, kit-rcol-top-r1 8c84e6be, stage-caption-r1 d59541fe, learn-scene-fix 41836865, opt-pic-same-r2 9b2f7821 + KPM_LOG clear → on BATCH READY: LOOK Fold+iPad shots, FF main under flock, CLAIMS LIVE row.
+- kit-ico-rank r2 session_01UV1Szi6oANLyE5bWQnjMQv (co-op rebirth blocked by rank board/end card) → reviewer (opus BIG co-op) → next batch; main deploys ctm-rank Worker after live (rank-worker.yml auto-deploys on rank/worker/** push).
+- map-portrait session_01UV1SzgdgEdCimFsVYDscwL (on review/map-me-mark-r1 a86ea58c, HELD from batches): portrait cards row above/below + zoomed map + weather sky + '!' bright glow/anim → reviewer → ship with map-me-mark-r1. CHECK its shots are the real Dư đồ (an earlier worker shot the start screen).
+- narrow-t3 session_01UV1SzgsQDt2y7LHaYSDb8g (412/390 T3 narrow mode + dup option list) → reviewer.
+- person-leftcol #2 session_01UV1SzjHhXKnA5TKza26b1V; tuanluc-sync #3 session_01UV1SziJFVGaiWpZGPF2Egd (opus) → reviewers on SẴN SÀNG.
+OWNER WAITING: makeup ?v=5 sheets; AG-ALL gap table (info); portrait Dư đồ shots. Not yet given to her (s30 list): co-op thin-guest status table, monthly items report (reports/item-list-ration.md, monthly-ration-history.md), balance-core §7 table OK (r2b baff0824 waits; D's night-final-r2/night-ledger wait on it).
+FOREMEN: B (session 5) told to land its own PASSes (OD:L1370) — makeup-theme-r1 FIRST; D told the same (kc2val-home, cycle-roll, ch14-goals; balance chain held on §7).
+
+- LOAD: main running 9 (owner bugs/UI/go-live: builder s31b, kit-ico-rank r2, toil-looks3 + toil-looks2 r1 reviewer, map-portrait, narrow-t3, person-leftcol, tuanluc-sync; + C-AG on main account for AG-ALL) | B free ? (landing its PASSes + coop-thin-c + dup3) | C busy (art) | D blocked: cannot open a session that pushes main → kc2val-home-r1 1845a0ed landing falls to main (go-live) | moved: none (all main items are UI/owner bugs/go-live).
+- LESSON s32: person-leftcol #2 reported d1c121b1 but never pushed it; archived → work lost. Every brief: push before reporting; coordinator checks `git ls-remote` for the reported sha BEFORE archiving.
+
+LIVE: main = 25bfd7cf (makeup-theme-r1 landed by B; voice-trait by C before it).
+RUNNING (main s32 children unless noted; all report to main by send_message):
+- morechip-sil worker session_01UV1Szi57hvzWiNmX4GRXYk (aed1c258+): fixing header "[icon] N" contrast on dark scenes → then open a sonnet reviewer (brief briefs/s32-review-morechip-sil.md exists; update sha) → batch.
+- pcard-facts worker session_01UV1Szh5bDFLJ7XCmCJoDvp: re-shooting (popup shot was the Luân hồi screen; person with real facts; 5 sizes) → main LOOK → reviewer → batch.
+- toil-looks2 reviewer session_01UV1Szhz851NPoNbAv8MGF7: checking v8 delta 630eaa633 → r4. Makeup ships ONLY after owner OKs ?v=8 (sheets sent s32 Lượt 16); toil-looks3 worker archived, HANDOVER in reports/toil-looks2.md (open a successor if she wants another round). Before live: CDN upload list in review-toil-looks2-r1.md (mkfit consort-c01..c32 + player-look1..4 → img/mk-fit/; toil-fit2 held).
+- FOREMAN C-AG session_01UV1Szh1sUAVP6FUuqZgkYs (main account): AG-ALL r1 FAIL → fixes + AG-ALL-2 (G1–G12 + no '!' cap + start/end khắc + Tai mắt filter + TIN BÁO API + own maids act + parity) as ONE r2; world-events part 1 BIG review running (C-AG FFs on PASS), part 2 (18 events) building. TIN BÁO top-bar badge + card UI = MAIN's kit job when C-AG sends the API.
+OWNER WAITING (ask one at a time, numbered options at the end): makeup ?v=8 OK?; cast 47: s32 Lượt 21 options (1 keep 27 + watch board + slim relation map — recommended / 2 cut to ~15, low ranks share the chủ cung's staff / 3 cut, no board); grand endings type: s32 Lượt 19 options (1 = C: grand = goal reached with thiện/ác shading, rare variants = kỳ ngộ — recommended / 2 = A / 3 = B) → pass her pick to D.
+LESSONS s32: check `git ls-remote` for a reported sha BEFORE archiving (person-leftcol #2 lost d1c121b1); LOOK at every worker shot (pcard popup shot was the start screen; morechip shots wiped by the worker); owner small asks = small steps but not invisible ones (v6 too subtle, v7 too heavy).
+
+LIVE: main = 7e0250ec (B landed staff-root-fix-1; before: mg-snap-r1, trait-rename-r1; C-AG world-events part 1 abe056c3).
+RUNNING (main s33 children; all report to main by send_message — tell them "main = s34"):
+- BUILDER s32a session_01UV1SzgWoEmnjTTEv7UgBNP (opus; brief briefs/s33-builder-s32a.md): STEP 1 land batch-s31b 17e6c4b4 on newest main (FF itself, authorised); STEP 2 batch s32a (list in brief; toil-looks2-r5 97f57862 ONLY after owner OK ?v=9 — tell the builder); STEP 3 balance chain.
+- learn-scene-fix-2 session_01UV1SzikmgZjJmYQFugTW3f (opus): jorder kmHold↔kmPump deadlock (co-op stall after rebirth) → review → batch.
+- tinbao-ui worker session_01UV1Szjhrq5VUWD5Haiagxz READY a0327a6b (r2 fixes) + reviewer session_01UV1Szjrj8Z1MLukab13oZM re-checking (lands right AFTER ag-all-2).
+- pcard-facts-2 worker session_01UV1Szh5bDFLJ7XCmCJoDvp READY 7ec2aa9b + reviewer session_01UV1SzhQ2iUk4UXLNwCnsgN → on PASS: add to builder batch.
+- loading-words-2 worker session_01UV1SzkaNQaeHGcLrqFrzzQ READY 8816f08ee + reviewer session_01UV1Szi9DmFFUQLdYo4pocU → on PASS: add to batch.
+- FOREMAN C-AG #2 session_01UV1SziUGzeqJM9bXyR2ehR: AG-ALL-2 2d (khắc chain/shared clock/hand ceiling) + 2e (63 buttons parity) → one r2 BIG review; world-events-2 review. API tinBao* on review/ag-all-2.
+- FOREMAN C (art, STATUS): gold calligraphy "Xa xỉ" label → main kit job xa xỉ TOTAL display (Tư trang, room panel, Dư đồ) when B's luxTotal + C's label exist.
+- FOREMAN D #10 (other account): grand-endings design (4 grand + 2 kỳ ngộ, branch chart) + IMAGE SWEEP order.
+OWNER WAITING (one at a time, numbered options at the end): (1) keep the 3 scheme-lie mechanics (bribed physician, false rumours, frame-up) — s33 Lượt 23, recommended keep → tell C-AG; (2) Vụng A ?v=9 OK? (Lượt 17; https://ctm-img.victoria-tntt.workers.dev/img/_review/toil-looks/toil-looks-v9.png) → on OK tell builder to include toil-looks2-r5 97f57862 + CDN upload list; (3) staff caps table after B's count.
+LESSONS s33: workers' branches can drop a reviewer's ONE CORE fix — always land the reviewer's r-branch sha; worker shots often polluted (result cards) — reviewers take their own; foremen on other accounts can't get send_message (write STATUS).
+
+LIVE: main = e9bbc4d6 (builder landed batch s31b) — newer if C-AG FF'd ag-all-2 / builder s32a.
+RUNNING (main children; all report to main by send_message — tell them "main = s35"):
+- BUILDER s32a session_01UV1SzgWoEmnjTTEv7UgBNP: batch s32a on e9bbc4d6 (+ pcard-facts-2-r1 ab50f1c5, loading-words-2-r1 64e303045; score.js rulebook OK if no BAL twin); then balance chain. NOT toil-looks until owner OK.
+- toil-looks5 session_01UV1SzjoLym3Q8XoYNGrcgt: Vụng A ?v=11 b9efd241 (sent to owner Lượt 61, verdict pending) → now r6 size-aware makeup LOD + 3 real-size samples (room stage figure, avatar frame, close-up) → show owner.
+- kit-rank-name session_01UV1SzhABncWo5Voyf4aTrz (stacked title/rank/name vs one line) — no report yet.
+- kit-option-rows part 1 3dabd1f7 → REVIEW session_01UV1Szhb1246Fs6RgQcMEqb running. Part 2 kit-thanh-bai session_01UV1SzhiWiAzVtxCHuZo9Zy (THÀNH/BẠI blocks; soft-fail wording).
+- kit-figure-mood session_01UV1SzjLSjT2E1w24wsPwS5 (mood seal beside head of interactable full-body figures).
+- harm-acts-expert session_01UV1SzhJvtkPFYjL1ee1Y1P → DESIGN READY → show owner, then B folds into looks-2.
+- tinbao-ui worker session_01UV1Szjhrq5VUWD5Haiagxz + reviewer session_01UV1Szjrj8Z1MLukab13oZM: PASS 58a8c39c (review/tinbao-ui-r7r); after ag-all-2 lands → worker rebases + restores 390x844 badge observer fix → short re-check → land.
+- REVIEW learn-scene-fix-2 (opus) session_01UV1SziXvWUAbjGtoEq234J of 8c30a85d → on PASS to builder batch.
+- FOREMAN C-AG #3 session_01UV1Szh8FwC7dVrdZpdtNPP: AG-ALL-2 (2d3 assembler incl. calibration ?hieuchuan=1, 2e4 parity, 2f2 Tai mắt earned/odds/virtues/bribe-cost, 2g sellers) → one BIG r2 review → FF; weather-khac + WEATHER-KHAC-2 (all kinds per khắc); world-ret-phong in review. Will send the calibration URL + landed sha.
+- FOREMAN B (STATUS file): makeup-lux, staff caps count, looks-2 (smudge levels, stains, ink, pox, layer law, ALL weather effects, harm acts), HOA ĐIỀN item + placing minigame, coop-thin-c scope line (guest household window end).
+- FOREMAN D (STATUS): bisect G4 coop-one-world seed 7; DAY-KHẮC audit; ODDS-CAP audit (95/5 + soft fail, drop "Chắc chắn").
+OWNER WAITING (one at a time, numbered options at the end): (1) Lượt 62 tin báo timing — (1) by real walk khắc [rec] / (2) always k+2 / (3) other; (2) Lượt 61 Vụng A ?v=11 OK?; then show her the 3-size LOD samples; harm-acts design; C-AG formula table (virtues worked example).
+LESSONS s34: route EVERY part of an owner idea (s34 sent only rain → she was angry); reviewers often lag one round behind the worker — always tell the reviewer the newest sha; workers must base on the reviewer's PASS sha.
+
+LIVE: main 03a776e4 (weather-khac) — newer if builder landed s32a.
+OWNER WAITING: s35 Lượt 55 emotion set (1 approve the Sims-style table incl. dropping Mưu as a seal / 2 edit). Then queue: display-shelf item list (dev/research/display-shelf-items.md, 12 groups/70 items) → harm-acts §7 ×3 (review/harm-acts-design e6e36106) → virtues gaps (reports/ag-all.md §21.9b) → toil stage sample (toil-looks6) → avatar ID-card sample → mirror fix → seal animation pilot (C) → weather A/B table (B looks-2) → WX-ANIM table (C-AG).
+RUNNING main children (all report to main by send_message — tell them "main = s36"):
+- builder s32a session_01UV1SzgWoEmnjTTEv7UgBNP: batch s32a (+learn-scene-fix-2 f8ac2f08, +kit-rank-name-land 330c8bde; G1 A; pcard-facts-2 OUT; perf bisect tuanluc-sync >15 % ⇒ out); rebase on 03a776e4; BATCH READY → FF.
+- toil-looks6 session_01UV1SzkpQ27MXeaU77haA2o: stage re-render (Vụng cell 5 softer powder + visible blush, lip smear SUBTLE, Kiều diễm −few %, Khuynh thành = v13, diacritic labels) → URL; then AVATAR ID CARD bake on review/kit-fx-register.
+- mirror-center session_01UV1SzkWgty5ackK6juMHCE: r1 FAIL ad226ed0 (self-referential test; real offset 30–37 px left at Fold) → fix by pixels; reviewer session_01UV1SziReys4L5kSo9SXu1s re-checks.
+- kit-thanh-bai worker session_01UV1SzhiWiAzVtxCHuZo9Zy (e3c1583f) + reviewer session_01UV1Szhb1246Fs6RgQcMEqb (kit-option-rows r2 PASS 6a818dea; thanh-bai review running) → land both via builder.
+- kit-display-room session_01UV1SzisVVpBnxyKZsxjCfY (review/kit-display-room; owner option 1).
+CLEANUP: CDN img/_review/emo-samples/, toil-looks lod-*/vung-pick/v9–v11 after verdicts; s35 wake trigger trig_01CuT6qneeeLddLWB6psULup (delete if still there).
+LESSONS s35: workers' self-made tests can be self-referential (mirror) — always look at the shot yourself; messages to workers cross — re-state the full current target in each order; LINEAGE line now in START_FOREMAN.
+- LOAD: main running 9 (owner bugs/UI/go-live/kit only: builder s32a, toil-looks6, mirror-center + reviewer, kit-figure-mood + reviewer, kit-thanh-bai + reviewer, kit-display-room) | B free ? (ROOT pending) | C-AG #5 running 5 | D free 8 | moved: none (no non-UI item held by main).
+
+LIVE: main 03f97e15 (C-AG wx-anim on top of 579e8976; rollback 579e8976). Before that 579e8976 (kit-figure-mood-r2 + kit-fx-register-r1 on top of batch-s32a; rollback d4a850ce). Still to land: kit-rank-name-land 330c8bde, kit-display-room-r1 c6d84567, mirror-center-r2 0f0954fb (+ kit-thanh-bai r2).
+RUNNING main children (tell them "main = s37"):
+- kit-display-room worker session_01UV1SzisVVpBnxyKZsxjCfY (PASS; idle; got lux API change from C-AG) — archive when display-shelf lands.
+- ui-fixes-1 session_01UV1SzjovTp4KY9Xq1JSKvC (4 pre-existing UI faults; brief s36-ui-fixes-1.md) → needs a SMALL reviewer on SẴN SÀNG KIỂM.
+- toil-looks7 session_01UV1SzknrVcN46ftwSGV7f9 (finish review/toil-looks5: Vụng V2-B smaller, show Vụng A + Vụng B (diêm dúa) on final sheet v17; LOOK, send owner) → then SMALL reviewer → batch. Next for the toil line: FACE-FIT re-fit from pixels (fit files up to 10 % right).
+
