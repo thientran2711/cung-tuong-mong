@@ -1,11 +1,12 @@
 /* map-labels-scan: every place on Dư đồ must show its kit name tag (OD L1032/L1417, owner bug 18/11 "Tên của những cung khác đâu").
    Per place: tag present, visible (not display:none / zero size), not overlapped by another visible tag, inside the map. Day + night.
-   usage: node dev/test/map-labels-scan.js <url> <shotdir|-> [WxH,..] ; exit 1 if any place has no visible tag */
+   r2 (OD L1416 + 19:05/19:10/19:15Z): per place on the UNION box (.mlab+.mmeta): visible, inside the map, no union-box overlap, no leader dot in/beside another tag, no leader line through another tag, no leader crossing; grey (.mgrey) == unreachable (accState why / empty palace), empty palace shows «cung trống», every grey place with st.kind still opens its dialog with «Lẻn vào».
+   usage: [DSF=2] node dev/test/map-labels-scan.js <url> <shotdir|-> [WxH,..] [ranks e.g. -,3,6 (- = keep)] ; exit 1 on any failure */
 const {chromium}=require('playwright');const fs=require('fs');const CDN='https://ctm-img.victoria-tntt.workers.dev/';const CACHE=(process.env.MFK_CACHE||'/home/user/wt/mfk-cache')+'/';fs.mkdirSync(CACHE,{recursive:true});
-const [,,URL_,DIR,SIZES]=process.argv;const sl=t=>new Promise(r=>setTimeout(r,t));
+const [,,URL_,DIR,SIZES,RK]=process.argv;const DSF=+(process.env.DSF||1);const sl=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch({proxy:process.env.HTTPS_PROXY?{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}:undefined});let bad=0;
 for(const sz of (SIZES||'755x1000,1180x820').split(',')){const [W,H]=sz.split('x').map(Number);const errs=[];
- const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce',ignoreHTTPSErrors:true});
+ const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:DSF,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce',ignoreHTTPSErrors:true});
  await ctx.route(u=>u.href.startsWith(CDN),async r=>{const u=new URL(r.request().url()),c=CACHE+u.pathname.slice(1).replace(/\//g,'__');const ct=u.pathname.endsWith('.json')?'application/json':u.pathname.endsWith('.webp')?'image/webp':'application/octet-stream';
   if(!u.pathname.endsWith('.json')&&fs.existsSync(c))return r.fulfill({status:200,body:fs.readFileSync(c),contentType:ct});
   for(let i=0;i<4;i++){try{const res=await r.fetch();const body=await res.body();if(res.status()===200&&!u.pathname.endsWith('.json'))fs.writeFileSync(c,body);return r.fulfill({status:res.status(),body,contentType:ct})}catch(e){}}return r.abort()});
@@ -14,15 +15,41 @@ for(const sz of (SIZES||'755x1000,1180x820').split(',')){const [W,H]=sz.split('x
  await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function');await sl(2500);
  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;window.__forceOrigin='tt';document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!isSrv())break}});
  for(let i=0;i<15;i++){await sl(400);const s=await p.evaluate(()=>{const s=isSrv();if(s)start();return s});if(!s)break}
- for(const buoi of [0,-1]){
-  await p.evaluate(b=>{Q.length=0;document.getElementById('modal').hidden=true;S.buoi=b<0?BUOI.length-1:b;window.__mapZ=0;tab='go';render()},buoi);await sl(2500);
-  const rows=await p.evaluate(()=>{const spots=[...document.querySelectorAll('.game.maptab .mapw .mspot')];const mapr=document.querySelector('.game.maptab .mapsc').getBoundingClientRect();
-   const info=spots.map(s=>{const l=s.querySelector('.mlab');const r=l&&l.getBoundingClientRect();const cs=l&&getComputedStyle(l);const vis=!!l&&cs.display!=='none'&&cs.visibility!=='hidden'&&r.width>2&&r.height>2;const sr=s.getBoundingClientRect(),t=(s.style.translate||'0 0').split(' ').map(parseFloat);const dist=l?Math.round(Math.hypot((r.left+r.right)/2-(sr.left+sr.width/2-t[0]),(r.top+r.bottom)/2-(sr.top+sr.height/2-(t[1]||0)))):0;return{dist,lead:!!s.querySelector('.mlead'),mv:s.style.translate||'',k:s.dataset.go||s.dataset.ak||'(empty)',name:l?l.textContent.trim().slice(0,22):'',hide:s.classList.contains('kmhide'),vis,r:vis?{l:r.left,t:r.top,r:r.right,b:r.bottom}:null,fs:l?parseFloat(cs.fontSize)*(parseFloat(cs.zoom)||1):0}});
-   info.forEach(a=>{a.overlap=0;if(!a.vis)return;info.forEach(c=>{if(c===a||!c.vis)return;if(Math.min(a.r.r,c.r.r)-Math.max(a.r.l,c.r.l)>1&&Math.min(a.r.b,c.r.b)-Math.max(a.r.t,c.r.t)>1)a.overlap++})});
-   return{buoi:S.buoi,img:(document.querySelector('.mapimg')||{}).src,mls:window.__mapMls,z:window.__mapZ,fit:window.__mapFit,info}});
-  const tot=rows.info.length,hid=rows.info.filter(x=>!x.vis),ov=rows.info.filter(x=>x.overlap);
-  console.log(sz,buoi<0?'night':'day',`places=${tot} visible=${tot-hid.length} hidden=${hid.length} overlapping=${ov.length} maxDist=${Math.max(...rows.info.map(x=>x.dist))}px mls=${rows.mls} S.buoi=${rows.buoi} ${(rows.img||'').split('/').pop()}`,hid.length?'HIDDEN: '+hid.map(x=>x.k+(x.hide?'(kmhide)':'')).join(','):'');
-  if(DIR&&DIR!=='-'){await p.evaluate(()=>{const m=document.getElementById('modal');if(m){m.hidden=true;m.style.setProperty('display','none','important')}for(let i=0;i<8;i++){const e=document.elementFromPoint(innerWidth/2,innerHeight/2);if(!e||e.closest('.game'))break;const t=e.closest('[id],[class]')||e;console.log('cover',t.id||t.className);t.style.setProperty('display','none','important')}});await sl(400);fs.mkdirSync(DIR,{recursive:true});fs.writeFileSync(`${DIR}/${sz}-${buoi<0?'night':'day'}.tsv`,rows.info.map(x=>[x.k,x.name,x.vis?'visible':'HIDDEN',x.overlap?'overlap':'clear',x.mv||'',Math.round(x.dist)+'px',x.lead?'leader':''].join('\t')).join('\n'));await p.screenshot({path:`${DIR}/${sz}-${buoi<0?'night':'day'}.png`})}
-  if(hid.length||ov.length)bad++}
+ for(const rk of (RK||'-').split(','))for(const buoi of [0,-1]){
+  await p.evaluate(([b,rk])=>{if(rk!=='-'){S.rank=Math.min(+rk,RANKS.length-1)}Q.length=0;document.getElementById('modal').hidden=true;S.buoi=b<0?BUOI.length-1:b;window.__mapZ=0;tab='go';render()},[buoi,rk]);await sl(2500);
+  const rows=await p.evaluate(()=>{const spots=[...document.querySelectorAll('.game.maptab .mapw .mspot')];const mapr=document.querySelector('.game.maptab .mapsc .mapw').getBoundingClientRect();
+   const U=s=>{const q=[...s.querySelectorAll('.mlab,.mmeta')].map(e=>({e,r:e.getBoundingClientRect(),cs:getComputedStyle(e)})).filter(x=>x.cs.display!=='none'&&x.cs.visibility!=='hidden'&&x.r.width>1&&x.r.height>1);return q.length?[Math.min(...q.map(x=>x.r.left)),Math.min(...q.map(x=>x.r.top)),Math.max(...q.map(x=>x.r.right)),Math.max(...q.map(x=>x.r.bottom))]:null};
+   const info=spots.map(s=>{const l=s.querySelector('.mlab');const ub=U(s);const sr=s.getBoundingClientRect(),K=s.offsetWidth?sr.width/s.offsetWidth:1;const t=(s.style.translate||'0px 0px').split(' ').map(parseFloat);const A=[sr.left+sr.width/2-(t[0]||0)*K,sr.top+sr.height/2-(t[1]||0)*K];const k=s.dataset.go||s.dataset.ak||'(empty)';
+    let st={};try{st=k==='(empty)'?{why:'cung trống',empty:1}:accState(k)}catch(e){}
+    const grey=s.classList.contains('mgrey');const unreach=!!(st.empty||(st.why&&!st.here));
+    const meta=s.querySelector('.mmeta');
+    return{k,title:s.title||'',name:l?l.textContent.trim().slice(0,22):'',vis:!!ub,u:ub,A,lead:!!s.querySelector('.mlead'),mv:s.style.translate||'',grey,unreach,kind:st.kind||'',empty:!!st.empty,metaTxt:meta?meta.textContent.trim():'',hide:s.classList.contains('kmhide'),
+     dist:ub?Math.round(Math.hypot((ub[0]+ub[2])/2-A[0],(ub[1]+ub[3])/2-A[1])):0,inMap:!!ub&&ub[0]>=mapr.left-1&&ub[2]<=mapr.right+1&&ub[1]>=mapr.top-1&&ub[3]<=mapr.bottom+1,
+     fs:l?parseFloat(getComputedStyle(l).fontSize)*(parseFloat(getComputedStyle(l).zoom)||1):0}});
+   const ov=(a,b)=>Math.min(a[2],b[2])-Math.max(a[0],b[0])>1&&Math.min(a[3],b[3])-Math.max(a[1],b[1])>1,inR=(r,p,pad)=>p[0]>=r[0]-pad&&p[0]<=r[2]+pad&&p[1]>=r[1]-pad&&p[1]<=r[3]+pad;
+   const segR=(p,q,r)=>{let t0=0,t1=1;const dx=q[0]-p[0],dy=q[1]-p[1];for(const [pp,qq] of [[-dx,p[0]-r[0]],[dx,r[2]-p[0]],[-dy,p[1]-r[1]],[dy,r[3]-p[1]]]){if(pp===0){if(qq<0)return false}else{const u=qq/pp;if(pp<0){if(u>t1)return false;if(u>t0)t0=u}else{if(u<t0)return false;if(u<t1)t1=u}}}return t0<=t1};
+   const cr=(a,b,c)=>(b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0]),segX=(p,q,r,s)=>cr(p,q,r)*cr(p,q,s)<0&&cr(r,s,p)*cr(r,s,q)<0;
+   const N=(A,u)=>[Math.min(Math.max(A[0],u[0]),u[2]),Math.min(Math.max(A[1],u[1]),u[3])];const bad={union:[],dot:[],lineTag:[],cross:[],hid:[],outside:[]};
+   info.forEach((a,i)=>{if(!a.vis){bad.hid.push(a.k);return}if(!a.inMap)bad.outside.push(a.k);info.forEach((c,j)=>{if(i===j||!c.vis)return;
+     if(j>i&&ov(a.u,c.u))bad.union.push(a.k+'|'+c.k);
+     if(a.lead&&inR(c.u,a.A,4))bad.dot.push(a.k+'>'+c.k);
+     if(a.lead&&segR(a.A,N(a.A,a.u),[c.u[0]-2,c.u[1]-2,c.u[2]+2,c.u[3]+2]))bad.lineTag.push(a.k+'>'+c.k);
+     if(j>i&&a.lead&&c.lead&&segX(a.A,N(a.A,a.u),c.A,N(c.A,c.u)))bad.cross.push(a.k+'x'+c.k)})});
+   const greyBad=info.filter(a=>a.grey!==a.unreach).map(a=>a.k+(a.grey?':grey-but-reachable':':unreachable-not-grey'));
+   const emptyBad=info.filter(a=>a.empty&&(!a.metaTxt||(/cung trống$/.test(a.title)&&a.metaTxt!=='cung trống'))).map(a=>a.name);
+   return{err:window.__mapErr,ms:window.__mapMs,buoi:S.buoi,rank:S.rank,img:(document.querySelector('.mapimg')||{}).src,mls:window.__mapMls,z:window.__mapZ,fit:window.__mapFit,solve:window.__mapSolve,info,bad,greyBad,emptyBad}});
+  /* every locked place stays tappable with its dialog + «Lẻn vào» (GREY IS LOOK ONLY, OD 18/11 ~19:15Z) */
+  const lockBad=[];for(const a of rows.info.filter(x=>x.grey&&x.kind)){const ok=await p.evaluate(k=>{const sp=document.querySelector('.game.maptab .mapw .mspot[data-ak="'+k+'"]');if(!sp)return 'no-spot';Q.length=0;sp.click();const m=document.getElementById('modal');const txt=(m&&!m.hidden?m.innerText:'')+Q.map(q=>q.h||'').join('');const has=/Lẻn vào/.test(txt);Q.length=0;if(m)m.hidden=true;return has?'ok':'no-lenvao'},a.k);if(ok!=='ok')lockBad.push(a.k+':'+ok)}
+  await p.evaluate(()=>{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;try{render()}catch(e){}});
+  const tot=rows.info.length,B=rows.bad,nbad=B.union.length+B.dot.length+B.lineTag.length+B.cross.length+B.hid.length+B.outside.length+rows.greyBad.length+rows.emptyBad.length+lockBad.length;
+  console.log(sz+'@'+DSF,buoi<0?'night':'day','rank='+rows.rank,`places=${tot} grey=${rows.info.filter(x=>x.grey).length} moved=${rows.info.filter(x=>x.mv).length} leaders=${rows.info.filter(x=>x.lead).length} maxDist=${Math.max(...rows.info.map(x=>x.dist))}px mls=${rows.mls} ms=${Math.round(rows.ms)}${rows.err?' SOLVERR '+rows.err:''} oneLine=${rows.solve&&rows.solve.oneLine} solverHard=${rows.solve&&rows.solve.hard} ${rows.solve&&rows.solve.bad}`,nbad?'FAIL '+JSON.stringify({...B,greyBad:rows.greyBad,emptyBad:rows.emptyBad,lockBad}):'PASS');
+  if(DIR&&DIR!=='-'){await p.evaluate(()=>{const m=document.getElementById('modal');if(m){m.hidden=true;m.style.setProperty('display','none','important')}for(let i=0;i<8;i++){const e=document.elementFromPoint(innerWidth/2,innerHeight/2);if(!e||e.closest('.game'))break;const t=e.closest('[id],[class]')||e;console.log('cover',t.id||t.className);t.style.setProperty('display','none','important')}});await sl(400);fs.mkdirSync(DIR,{recursive:true});fs.writeFileSync(`${DIR}/${sz}-${buoi<0?'night':'day'}-r${rk}.tsv`,rows.info.map(x=>[x.k,x.name,x.vis?'visible':'HIDDEN',x.grey?'grey':'',x.mv||'',Math.round(x.dist)+'px',x.lead?'leader':''].join('\t')).join('\n'));await p.screenshot({path:`${DIR}/${sz}-${buoi<0?'night':'day'}-r${rk}.png`})}
+  if(nbad)bad++}
+ /* courtyard level (.kpmv): every hall tag of a courtyard she cannot enter now (empty palace / locked / out of khắc) wears the kit grey state, and none of a courtyard she can enter does */
+ {const cy=await p.evaluate(()=>{const out=[];Q.length=0;document.getElementById('modal').hidden=true;S.buoi=0;for(let i=0;i<PALN.length;i++){let art=null;try{art=kpmArt(i)}catch(e){}if(!art)continue;const k=kpmKeyOf(i);window.__kpm={slot:i,k,empty:!k};window.__mapZ=0;tab='go';render();
+   const sp=[...document.querySelectorAll('.game .kpmv .mspot.kpm-spot')];const st=k?accState(k):{why:'cung trống'};const want=!!(!k||(st.why&&!st.here));const bad=sp.filter(e=>!e.classList.contains('here')&&e.classList.contains('mgrey')!==want).length;out.push({slot:i,k:k||'(empty)',halls:sp.length,want,bad})}
+  window.__kpm=null;render();return out});
+  const cb=cy.filter(x=>x.bad);console.log(sz,'courtyards',cy.length,'grey',cy.filter(x=>x.want).length,cb.length?'FAIL '+JSON.stringify(cb):'PASS');if(cb.length)bad++;
+  if(DIR&&DIR!=='-'){const pick=cy.find(x=>x.want&&x.halls>1)||cy[0];if(pick){await p.evaluate(sl=>{window.__kpm={slot:sl,k:kpmKeyOf(sl),empty:!kpmKeyOf(sl)};tab='go';render()},pick.slot);await sl(2500);await p.evaluate(()=>{const m=document.getElementById('modal');if(m){m.hidden=true;m.style.setProperty('display','none','important')}});await p.screenshot({path:`${DIR}/${sz}-courtyard.png`})}}}
  await ctx.close();if(errs.length)console.log('errs',errs.join('|'))}
 await b.close();process.exit(bad?1:0)})();
