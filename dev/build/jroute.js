@@ -218,7 +218,7 @@ try{KIT_CAT["loi-rieng"]=["Lối riêng","#2c6e5a"]}catch(e){}
   if(a.lx){const nm=effList(fmt(a.l||{})||"không mất gì","r");const lx=effList([fmt(a.l||{}),a.lx].filter(Boolean),"r");if(h.includes(nm))h=h.replace(nm,lx)}}catch(e){console.error(e)}return h}})();
 /* ---------- dialogs (PEND: survive save / load; full act cards, not hidden: owner rule for route choices) ---------- */
 function rtPush(id,pp){const d=mkP(id,pp);if(!d)return;Q.push({t:d.ti,h:d.t,opts:d.o,stage:d.stage,headArt:d.headArt,optLayout:"rows",showOut:true,pid:d.pid,pp:d.pp});if(!window.__bot)try{showModal()}catch(e){}}
-function rtX(o,thanh,hong,kem){const j=t=>String(t||"").split(" · ").join(" — ");return `${o>=100?"Chắc cy":word(o)} · thành: ${thanh}${o<100?` · hỏng: ${j(hong)||"không mất gì"}`:""}${kem?` · kèm: ${kem}`:""}`}
+function rtX(o,thanh,hong,kem){const j=t=>String(t||"").split(" · ").join(" — ");return `${o>=100?"":word(o)+" · "}thành: ${thanh}${o<100?` · hỏng: ${j(hong)||"không mất gì"}`:""}${kem?` · kèm: ${kem}`:""}`}
 function rtOpt(n,fx,x,go){return{n,fx:fx||{},x,go,showOut:true}}
 (function(){const d0=deserQ;deserQ=function(L){const out=d0.apply(this,arguments);try{out.forEach(q=>{if(q.pid&&/^rt/.test(q.pid)){const d=mkP(q.pid,q.pp);if(d){q.t=d.ti;q.stage=d.stage;q.headArt=d.headArt;q.optLayout="rows";q.showOut=true}}})}catch(e){}return out}})();
 PEND.rtBm=pp=>{const T=S&&S.rt;const v=RV(pp.v);const B=T&&T.bm;if(!v||!v.alive||!B)return null;const m=manById(B.mid);const n=B.n;const ev=typeof evG==="function"?evG(v,S):2;

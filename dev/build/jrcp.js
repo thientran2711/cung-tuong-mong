@@ -248,8 +248,8 @@ function rcpTchCons(k){const l=S.arts[k]||0;return liveRivals(true).filter(v=>v.
 tchFee=function(k){return RCPT.k===k&&rcpTchV()?0:rcpFeeNq()};
 tchPaid=function(k){try{const v=RCPT.k===k?rcpTchV():null;if(v){relAdd(S,v,-BAL.rcp.tFavor);S.askAt=S.askAt||{};S.askAt[v.id]=wk();log(`${rkName(v)} ${v.name} dạy ta ${ARTS.find(a=>a.k===k).n}: ta nợ nàng ta một ân (thiện cảm -${BAL.rcp.tFavor}).`)}}catch(e){}RCPT.started=1;RCPT.k=null;RCPT.t=null};
 function rcpTchAsk(k,then){const a=ARTS.find(x=>x.k===k),fee=rcpFeeNq(),O=[];const t2=whyTime(2);
- O.push(kitOffBac({n:rcpTchName(k),fx:{},x:`Nắm chắc · tốn: 2 khắc, Sức -10, Bạc -${fee} · thành: tiến bộ +2..3, dạy được mọi lối`,go:()=>{RCPT.k=k;RCPT.t="nq";then()}},fee));
- for(const v of rcpTchCons(k))O.push({n:`${rkName(v)} ${v.name} (${a.n} bậc ${v.arts[k]})`,fx:{},x:`Nắm chắc · tốn: 2 khắc, Sức -10 · thành: tiến bộ +2..3, dạy các lối nàng ta biết · kèm: nợ nàng ta một ân, thiện cảm -${BAL.rcp.tFavor}, ${BAL.gift.askW} tuần quà tặng nàng ta không thành chân tình`,go:()=>{RCPT.k=k;RCPT.t=String(v.id);then()}});
+ O.push(kitOffBac({n:rcpTchName(k),fx:{},x:`tốn: 2 khắc, Sức -10, Bạc -${fee} · thành: tiến bộ +2..3, dạy được mọi lối`,go:()=>{RCPT.k=k;RCPT.t="nq";then()}},fee));
+ for(const v of rcpTchCons(k))O.push({n:`${rkName(v)} ${v.name} (${a.n} bậc ${v.arts[k]})`,fx:{},x:`tốn: 2 khắc, Sức -10 · thành: tiến bộ +2..3, dạy các lối nàng ta biết · kèm: nợ nàng ta một ân, thiện cảm -${BAL.rcp.tFavor}, ${BAL.gift.askW} tuần quà tặng nàng ta không thành chân tình`,go:()=>{RCPT.k=k;RCPT.t=String(v.id);then()}});
  if(O.length===0){log(`Chưa có ai dạy: nữ quan cần ${fee} bạc, chưa có phi tần giỏi ${a.n} quý ta (thiện cảm ${BAL.rcp.tRel}).`);return}
  O.push({n:"Thôi",fx:{}});
  Q.push({act:1,t:`Học ${a.n}: ai dạy?`,who:pMe(),h:`<p>Thầy dạy giỏi hơn tự học, và chỉ thầy mới mở được lối mới (tự học chỉ lên bậc).</p><p class="past">${rcpTchName(k)} nhận bạc theo bổng của ta (${fee} bạc${S.bac<fee?", ta chưa đủ":""}). Phi tần giỏi nghề dạy không lấy bạc, nhưng ta nợ nàng ta một ân.${t2?" "+t2:""}</p>`,opts:O});showModal();render()}
@@ -291,7 +291,7 @@ function rcpSpyO(){return oddsCl(Math.round(BAL.rcp.spyO+((S.maid&&S.maid.loyal)
   for(const a of ARTS){const ks=wkKindsOf(a.k).filter(x=>RCP_ST[x]);if(!ks.length)continue;const n=ks.reduce((t,x)=>t+rcpKnown()[x].length,0),m=ks.reduce((t,x)=>t+RCP_ST[x].length,0);
    h=h.replace(new RegExp(`(data-skill="wk-${a.k}"[\\s\\S]*?<div class="kskdo">)`),`$1<span class="kchip n">lối đã học ${n}/${m}</span> `)}
   const fee=rcpPayTy(),acts=[pbtn(`data-rcpq="ty"`,"Hỏi thái y kiêng kỵ",`tốn: 1 khắc, Bạc -${fee} · thành: biết một người kiêng thứ gì`,whyTime(1)||(S.bac<fee?`thiếu bạc (cần ${fee})`:"")),
-   pbtn(`data-rcpq="maid"`,"Sai cung nữ dò la khẩu vị",`${S.maid?word(rcpSpyO()):"Khó"} · tốn: 2 khắc · thành: biết thêm một điều một người thích, chê hay kiêng · hỏng: Lòng cung nữ -3`,whyTime(2)||(!S.maid?"chưa có cung nữ thân tín":""))];
+   pbtn(`data-rcpq="maid"`,"Sai cung nữ dò la khẩu vị",`${word(rcpSpyO())} · tốn: 2 khắc · thành: biết thêm một điều một người thích, chê hay kiêng · hỏng: Lòng cung nữ -3`,whyTime(2)||(!S.maid?"chưa có cung nữ thân tín":""))];
   h+=kitSkillCard({kind:"wk",k:"taste",name:"Khẩu vị, kiêng kỵ",max:0,img:"",desc:`<div class="kinvrows">${kitRows(rcpTasteRows())}</div>`,acts,can:true})}catch(e){console.error("rcp works",e)}return h}})();
 /* ---------- learning tastes by the old roads ---------- */
 (function(){const d0=discover;discover=function(){const r=d0.apply(this,arguments);try{if(!r||roll(40)){const u=rcpUnknown("emp");if(u.length){log(rcpLearn("emp",pick(u)));return true}}}catch(e){}return r}})();

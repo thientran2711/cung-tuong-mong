@@ -144,7 +144,7 @@ function kitPopSample(k){try{if(typeof S==="undefined"||!S||typeof kitModal!=="f
    opts:[{n:"Cúi đầu nhận lỗi",fx:{duc:2},x:"Chắc · nàng thiện cảm +5 · Sủng -1",go:nop},{n:"Thưa rằng do Hoàng thượng định",fx:{danh:1},x:"Năm ăn năm thua · thành: Danh +2 · hỏng: nàng oán +8",go:nop},{n:"Dâng lễ vật xin bỏ qua",fx:{bac:-20},x:"Khá chắc · Bạc -20 · nàng thiện cảm +8",go:nop}]},
   result:q&&{kind:"result",title:"Kết quả: Thỉnh an Hoàng hậu",sub:"Thượng tuần · buổi sáng",subject:q,facts:[{who:q,text:"hài lòng vì ta giữ lễ.",chips:[["Thiện cảm",5]]},{who:S,kind:"me",text:"được tiếng hiền thục trong cung.",chips:[["Đức",2],["Sức",-10]]}],btn:"Đã hiểu"},
   long:{kind:"choice",title:"Việc dài lời kể",sub:"Thượng tuần · buổi sáng",facts:Array.from({length:9},(_,i)=>"Lời kể số "+(i+1)+": người trong cung kể rằng chuyện này kéo dài suốt cả buổi, hết người này đến người khác đến thưa, nên khung phải cuộn phần chữ mà giữ nguyên tiêu đề, tranh và các lựa chọn."),
-   opts:[{n:"Nghe hết rồi mới định",fx:{...BAL.kitpage.listen},x:`Chắc · Đức +${BAL.kitpage.listen.duc}`,go:nop},{n:"Cho lui, để mai bàn",fx:{},x:"Chắc",go:nop}]},
+   opts:[{n:"Nghe hết rồi mới định",fx:{...BAL.kitpage.listen},x:`thành: Đức +${BAL.kitpage.listen.duc}`,go:nop},{n:"Cho lui, để mai bàn",fx:{},x:"",go:nop}]},
   news:{kind:"news",title:"Tin trong cung",sub:"Tháng 3 · Năm 1",facts:[v2?{who:v2,text:"được lật thẻ bài đêm qua",chips:[["Sủng",3]]}:"Đêm qua Hoàng thượng lật thẻ bài.","Tháng này: Được mùa khắp nơi. Kho lúa +12."],btn:"Đã rõ"}};
  /* kit-size #8: the two real-path cards the §84 samples open (place card = ONE place picture left + kit rows; option naming a person = that person's portrait) */
  if(k==="place"||k==="personopt"){let m=null;
