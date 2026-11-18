@@ -41,7 +41,7 @@ b10-a36-c23-c32 (cont.) | CDN _review only | W63d session_011xDdVNxbaxsJ1Mg9QwjJ
 owner-age-page | CDN _review + artifact WFjg87H9M2Ch5kebxT8BmJ | W66 session_011xDdVNiXzQbPgFB8psRugn | RUNNING | 2026-11-18T16:48Z (Foreman C ROOT-27)
 b10-a26-c01-c11 (cont.) | CDN _review only | W58e session_011xDdVNrdf8gvcg7zDe4w5q (W58d archived) | RUNNING | 2026-11-18T17:09Z (Foreman C ROOT-28)
 b10-a36-c12-c22 (cont.) | CDN _review only | W62e session_011xDdVRHqnGWdfeQAXcEkYk (W62d archived) | RUNNING | 2026-11-18T17:43Z (Foreman C ROOT-29)
-b10-a36-c01-c11 (cont.) | CDN _review only | W61e session_011xDdVPjSLttuxhePTVM5xA (W61d archived) | RUNNING | 2026-11-18T17:35Z (Foreman C ROOT-29)
+b10-a36-c01-c11 (cont.) | CDN _review only | W61f session_011xDdVNsx3B6YpBjrLj4ghK (W61e archived) | RUNNING | 2026-11-18T17:35Z (Foreman C ROOT-29)
 | E12r REVIEW test-flaky-sure (sonnet SMALL) | review/test-flaky-sure | E | session_01DgYSWm6WeSjdcix5VMfR27 | DONE PASS (round 2) | 18/11 16:41Z | START_CTX ~0 % |
 | REVIEW coop-thin-f1 r1 (opus BIG) of 433da4de | review/coop-thin-f1-r1 | B | session_01N1tNP6GkdUZ2X1wV9UKnVH | PASS review/coop-thin-f1-r1 8fb5a48a (descends main a2ce736a; reviewer fix 590f6748 result card; waits jcoop* freeze) | 18/11 16:42Z |
 b10-a26-c23-c32 (cont.) | CDN _review only | W60c session_011xDdVR4vPftTrZ2LNoa9N1 | RUNNING | 2026-11-18T16:44Z (Foreman C ROOT-27)
@@ -55,7 +55,7 @@ b10-a26-c23-c32 (cont.) | CDN _review only | W60e session_011xDdVNMP1z6WhDLur1sg
 b10-a36-c23-c32 (cont.) | CDN _review only | W63f session_011xDdVNP9vpwSWD4MCe2jrh (W63e archived) | RUNNING | 2026-11-18T17:39Z (Foreman C ROOT-29)
 a18-scan-2 regens | CDN _review only | W65d session_011xDdVQVsntxHXp735x2for (W65c archived) | RUNNING | 2026-11-18T17:40Z (Foreman C ROOT-29)
 quoc-tang-sample | CDN _review only | W70 session_011xDdVSaNiUfxn72JcAYZo8 | DONE (archived) | 2026-11-18T17:17Z (Foreman C ROOT-28)
-a18-t7t8-scan | scan only, no gens | W71 session_011xDdVRiT8Bh4RBNGVwjVBv | RUNNING | 2026-11-18T17:45Z (Foreman C ROOT-29)
+a18-t7t8-scan | scan only, no gens | W71 session_011xDdVRiT8Bh4RBNGVwjVBv | DONE 92101292 | 2026-11-18T17:45Z (Foreman C ROOT-29)
 t8-v0-reprompt-sample (+A/B fabric) | CDN _review only | W72 session_011xDdVNW3uEET1o4R4muEUH | RUNNING | 2026-11-18T17:48Z (Foreman C ROOT-29)
 owner-page-90 (90 nhân vật nữ states) | CDN _review + artifact WFjg87H9M2Ch5kebxT8BmJ | W73 (see STATUS) | RUNNING | 2026-11-18T17:59Z (Foreman C ROOT-29)
 ge-writers-w1 fix round 2 | review/ge-writers-w1 | E11a2 session_01DgYSWoSMJso8hGSAFMN9W6 (E11a archived) (reviewer E11r-w1 session_01DgYSWmTELUPTfw8Lqf2S4Y) | RUNNING | 2026-11-18T17:55Z (Foreman E ROOT #5 session_01DgYSWkmGWJMooE69PH8bHk)
