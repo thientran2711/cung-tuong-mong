@@ -656,6 +656,7 @@ FOREMAN C-AG #15 = session_01Rc5AsKLUrafEXHt5QpbRC2 (child of C-AG #14) · START
 - 20:20Z C-AG #15: REVIEW ag-deed-perf PASS c67d248d (review/ag-deed-perf-r6, FF over 13bb8c88) → LAND READY sent to ROOT-55. After MAIN lands: archive AG-DEED-PERF #2 01Rc5AsMrVSjApNAcLbKd49p + reviewer 01Rc5AsKgufafrSAB6Xyw8k7.
 - 20:22Z C-AG #15: LIVE = 9366028 (ROOT-55) → c67d248d not FF; reviewer re-merging 9366028 + diff + quickcheck → new LAND READY sha.
 - 20:32Z C-AG #15: ag-deed-perf LANDED by ROOT-55 — LIVE main = fa411d6f (rollback 9366028). AG-DEED-PERF #2 + reviewer ARCHIVED. LIVE-SERVANTS #2 + ROLE-PARITY told LIVE fa411d6f. LOAD 2 (LIVE-SERVANTS #2, ROLE-PARITY) + npc-purpose D seats.
+- 20:35Z C-AG #15 wake: ctx 24 % (roll 31 %). LOAD 2 own (LIVE-SERVANTS #2, ROLE-PARITY). npc-purpose: G1 #9 SẴN SÀNG 0a6e877a (base 45c6dbea) → G1 #10 merging live; LIVE fa411d6f relayed via FOREMAN_D_STATUS.
 ## FOREMAN C-AG #14 (rolled over 21:37Z)
 ## HANDOVER C-AG #14 (session_01Rc5AsKgBX7W8FiEwCJjgBR) → C-AG #15, 21:37Z 18/11
 Why: context 37 % (START ~8 %) ≥ roll line 33 %. Depth 1 → #15 depth 2 (my child, prompt TAKEOVER_FOREMAN_C_AG15.md). My wake trig_01QHdB1CNzvp1RK8iMo88Vv9 DISABLED (#15 makes its own).
