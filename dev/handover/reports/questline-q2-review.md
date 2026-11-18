@@ -35,3 +35,36 @@ iPad 1180x820@2, palace-start life (every new life is S.ps=1): Mệnh truyện s
 - Reviewer script (srv carrier, sell carrier, co-op guest, tab bar order on every sub-tab, save round trip): 7/7 ok, 0 page errors.
 - Measure nroadhp-bal: tables in FAIL 1.
 Shots: scratch only (deleted with this verdict); no CDN review folder used.
+
+## ROUND 2 — PASS cb0c97b7 (review/questline-q2-r6; worker sha 451b4d1e + 2 reviewer commits + merge of origin/main e16e1d66)
+PRIORITY #1 CHECK ('nhTip|mách tin|nroad\.fin|nr\.hp'): OD law 1/2/3 lines | main e16e1d66 (K-Q2-1 wrap live 048f3c71; no tip code) | review/* questline-q2 only | claims E13 → E13b.
+Base: 451b4d1e did not include the newest main → merged 790cda59, then e16e1d66 (conflicts only index.html/sw.js + assemble.py module line: main's jmapz.js + jgedata_w1.js kept, jnroadhp.js after jagknow.js). cb0c97b7 has origin/main e16e1d66 as ancestor → fast-forward ready.
+
+### Round-1 findings
+1. **Law 2/3 + law 1 — FIXED.** nhTip: a betrayal is help to the rival who was told (record [n,2,turn] «mách tin» on HER road, next chapter +BAL.nroad.help, her finale reward BAL.nroad.fin, list line «mách tin giúp»; no open road → nợ ân BAL.nroad.fin.owe at once). No new BAL key. NPC odds net zero (A −help, B +help).
+   My own measure (bond player, 12 y, 20 lives/style × 2 runs, order swapped; cb0c97b7's engine):
+   | run | style | death % | Danh | HH seat % | finale (via mách) | found out / betrayals (carrier) |
+   |---|---|---|---|---|---|---|
+   | 1 off,help,betray | off | 25 | 15.1 | 50 | 0 | — |
+   | 1 | help | 55 | 15.0 | 85 | 1.9 | — |
+   | 1 | betray | 40 | 19.3 | 65 | 1.8 (1.8) | 4.0/10.7 (srv 48, eye 31) |
+   | 2 betray,help,off | betray | 30 | 15.8 | 50 | 1.5 (1.5) | 4.7/11.3 (srv 57, eye 35, sell 1) |
+   | 2 | help | 40 | 15.7 | 80 | 2.5 | — |
+   | 2 | off | 15 | 14.7 | 70 | 0 | — |
+   Pooled 40 lives: death off 20 / help 47.5 / betray 35 %; Danh 14.9 / 15.4 / 17.6. Worker pooled 80: death 37.5 / 37.5 / 41.3; Danh 15.9 / 16.5 / 17.3. All 200 lives: death off ≈32 / help ≈41 / betray ≈39 %. The death gaps change sign between runs (round 1: help lower; now help higher) → run noise, as the worker said; Q2 adds no death path. Danh: betray ≈ +1…2 over help, and betray pays for it with ~4 grudges per life (oán 15 each, real carriers) + j72's Đức cost; help is the safe road → a trade, neither clearly better. **Law 2/3 PASS.**
+   Harem: HH seat 50–85 % in every style (noise); Q2 changes no NPC stat except oán toward her and ±help on chapter odds (net zero) → no inflation. PASS.
+2. **Tests — FIXED.** nroadhp-unit 40 checks (srv, sell, co-op guest, save round trip, tip record/bonus/no double, tip finale, no-road debt) PASS; nroadhp-vp 52 strings PASS.
+
+### Round-2 checks asked by Foreman E
+- **Law 1 — her being the one betrayed:** the NPC side of Q2 is symmetric (the betrayed NPC strikes back; the told NPC repays). An NPC betraying HER when SHE asks for help is Q3 («phá ngầm / mách lẻo», QUESTLINES_AUDIT §4 Q3, review/questline-q3 still in review) — out of Q2's scope by the spec; not a Q2 fail. Q3 must reuse nhTip/nhCarrier's two-way pattern.
+- **Law 6c (real objects/records):** Q2 has no item. Every record is traceable: v.nr.hp / v.nr.sb on the person (saved with her), S.nrpt list (capped hpMax, survives her death), nợ ân in the j72 ledger (q72DebtAdd). Save round trip checked (unit + my script). PASS.
+- **K-Q2-1 bar (live on main):** iPad 1180x820@2 — 6 tabs in one row, ⓘ «Phụ tuyến» on its own line by the kit wrap rule, no overlap, no sideways scroll; Fold 755x1000@2 — 6 tabs + ⓘ in one row, 4 cards (incl. the «mách tin» card «Đã qua 0/8»), no overflow. Looked 3×. subtabs-overflow PASS. (In one Fold run the random life gave only 1 list line — the shot script's life; 2 re-runs gave 4/4.)
+
+### Reviewer fix (small, on r6)
+- jnroadhp nhTip: `if(!NB.hb)` treated a PENALTY (hb −15 from another betrayal) as "already has a bonus" and gave the tip nothing; now `if(!(NB.hb>0))NB.hb=(NB.hb||0)+help` (penalty offset to 0, a bonus never stacks). Checked in page: −15 → 0, +15 stays 15, closed road → nợ ân +1, self-tip → nothing.
+
+### Tests on my box (cb0c97b7)
+build_site OK · nroadhp-unit 40 PASS · nroadhp-vp 52 PASS · nrask-engine ALL PASS · subtabs-overflow PASS · npc-roads 2×96: 22/22 (one earlier run 20/22: the test's one random life stopped finishing help quests after the first betrayal; I replayed all 16 kinds × help/betray in 3 tip modes (no road / closed / open) — none ever blocks, so it is a test-life flake, not Q2; FOR E: parking item to make that test pick a fresh asker per kind) · quickcheck.sh ALONE on cb0c97b7: QUICKCHECK PASS · old save ok · core gates PASS · perf new/live render 184/182, tab 407/383, buổi 896/1131 ms · co-op guest host-only ok · 0 page errors.
+Shots: scratch only, deleted with this verdict.
+
+**VERDICT ROUND 2: PASS cb0c97b7** (laws 1–7, 9, 10/12 checked; K-Q2-1 done on main).
