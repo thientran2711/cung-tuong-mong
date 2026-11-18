@@ -467,7 +467,7 @@ c12 a18 Nữ đế #2 (r8 first) soft-smile (Round 42) | claude/cung-tuong-mong-
 | FOREMAN C-AG #10 (opus; successor of #9, opened by C-AG #9) | handover FOREMAN_C_STATUS | C-AG #9 | session_01UV1SzjAd8BYMMz2rKFZitp | RUNNING | 18/11 05:00Z |
 c12 a18 t5–t8 headdress re-do from live originals (Round 43) | claude/cung-tuong-mong-handover-hj0h8w (art, _review CDN) | session_011xDdVPdhZPQct6rWX6fDaZ | CANCELLED (owner: c12 OK, no redraw; 05:22Z) | 2026-11-18T05:16Z
 | NPC-PURPOSE G1 #3 + integrator (opus; successor of Szk6vem, head 9bf916a) | review/npc-purpose | C-AG #10 | session_01UV1Szm7n34pm29edeDhQ3Q | ROLLED OVER → SzktT6Y (archived) | 18/11 04:52Z |
-| odds-cap FIX round 3 (opus; FAIL 3 @9df9204d) | review/odds-cap | D | session_01964izEqWZyqkxnqjANpVWT (BIG review r3 of 27713d87; worker archived) | RUNNING | 18/11 04:57Z |
+| odds-cap FIX round 3 (opus; FAIL 3 @9df9204d) | review/odds-cap | D | session_01964izEqWZyqkxnqjANpVWT (BIG review r3 of 27713d87; worker archived) | PASS 591cedf921e914d256dbbd8d2b7077760beec31c (review/odds-cap-r1) FOR MAIN | 18/11 04:57Z |
 | staff-cap-row3 + stale test selectors (sonnet; ROOT-44 04:25Z/04:36Z) | review/staff-cap-row3 | D | session_01964izEx1FJGwuf2f9nao6f (FIX r2 after review FAIL 1 @bc7640dd) | RUNNING | 18/11 04:57Z |
 | E1 GRAND ENDINGS ENGINE + 3 pilots (opus; BIG; brief briefs/E1-grand-endings-engine.md) | review/grand-endings-engine | E ROOT | E1b session_01DgYSWm7nnt9krNfbr1w92u (successor of session_01DgYSWkyBNQQuQ6GZfMzcqU) | RUNNING | 18/11 05:51Z |
 | E2 QUESTLINE AUDIT (opus; design only; brief briefs/E2-questline-audit.md) | review/questline-audit | E ROOT | session_01DgYSWmeNZ5LoMYj22wm73X | SẴN SÀNG KIỂM b42a7c70 (report reports/questline-audit.md) | 18/11 04:59Z |
