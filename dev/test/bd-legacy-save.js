@@ -5,7 +5,7 @@
 const {chromium}=require('playwright');const [,,URL,NL]=process.argv;
 (async()=>{const b=await chromium.launch();const errs=[];let fail=0;const chk=(n,c,x)=>{if(!c)fail++;console.log(c?'PASS':'FAIL',n,c?'':JSON.stringify(x).slice(0,600))};
  const boot=async()=>{const ctx=await b.newContext({viewport:{width:1180,height:820},serviceWorkers:'block'});const p=await ctx.newPage();p.setDefaultTimeout(0);
-  p.on('pageerror',e=>errs.push(e.message.slice(0,200)));await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});
+  p.on('pageerror',e=>errs.push(e.message.slice(0,200)));await p.goto(URL,{timeout:0});
   await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function'&&typeof ROAD14==='object',null,{timeout:0});await p.waitForTimeout(1200);return p};
  const PLAY=`window.__play=(stop)=>{let err=null;for(let mon=0;mon<500&&!S.st.ch.all;mon++){if(S.dead||S.out){S.dead=false;S.out=0;S.suc=60}const A=S.st.M;
    if(stop&&stop())return{err};try{if(A&&!A.done&&!A.cur&&A.nb){A.due=0;fireBeat67(A)}if(A&&A.cur){const bd=beatDef67(A,A.cur);const O=opts67(A,bd);const i=Math.floor(Math.random()*O.length);const o=O[i];

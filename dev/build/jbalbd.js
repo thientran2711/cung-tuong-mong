@@ -5,7 +5,7 @@ BAL.road.bd=BAL.road.bd||{};
 /* ---- lead block (E14): bd_san, bd_soi ---- */
 /* the option shapes (law 2 / 3: every option of a beat has a cost and a level gain; odds harder with rank, law 5: −rk per rank step) */
 BAL.road.bd.rk=1;
-BAL.road.bd.man={age:{d:30,lie:48,olac:17,thatmoc:32,asnc:58,phong:24},trait:{thatmoc:"tham vọng",phong:"trung hậu",olac:"cẩn trọng"},loyal:60};/* steppe men in the capital (S.men) */
+BAL.road.bd.man={age:{d:30,lie:48,olac:17,thatmoc:32,asnc:58,phong:24},trait:{thatmoc:"tham vọng",phong:"trung hậu",olac:"cẩn trọng"},loyal:60,away:1e9};/* steppe men in the capital (S.men) */
 BAL.road.bd.conf={san10:2,soi8:2};/* months of cấm túc a lost chapter puts her under (S.confined) */
 const bdR=(st,w,l,c,b)=>({c:c||{suc:-2},o:[b||45,["d",st,5],["-m","rank",BAL.road.bd.rk]],w,l,sc:1});/* risky: odds on one stat */
 const bdS=(c,w)=>({c,w});/* sure: a cost and a smaller gain */
@@ -114,7 +114,7 @@ Object.assign(BAL.road.fx,{
   E:Object.assign(bdE({duc:4,danh:3},{danh:-3,sung:-2}),{lose:{fx:{danh:-3,sung:-2},k:-1,g:[-2]}})},
  bd_soi_9:{s1:[bdR("suc",{danh:5},{danh:-3}),bdS({bac:-50},{duc:2,danh:1}),bdS({suc:-2},{duc:3})],
   s2:[bdS({tamco:-1},{duc:2}),bdS({mat:-1},{duc:2,danh:1}),bdS({bac:-40},{duc:3})],
-  c1:[bdR("duc",{mat:1,danh:1},{danh:-2},{bac:-50}),bdR("tamco",{tamco:3},{danh:-4},{bac:-80,duc:-1}),bdS({tamco:-1},{duc:2})],
+  c1:[bdR("duc",{mat:1,danh:1},{danh:-2},{bac:-50}),bdR("tamco",{tamco:3,mat:1},{danh:-3},{bac:-60}),bdS({tamco:-1},{duc:2})],
   c2:[bdG(bdS({sung:-1},{danh:3}),[2]),bdS({danh:-1},{duc:2}),bdG(bdR("duc",{duc:2},{sung:-1},{tamco:-1}),[2,-1])],
   c3:[bdS({sung:-2},{danh:4}),bdS({tamco:-1},{danh:2,duc:1}),bdS({danh:-1},{sung:3})],
   t1:[bdS({bac:-60},{duc:3}),bdS({tamco:-1},{danh:2}),bdR("danh",{danh:4},{danh:-3},{suc:-1})],

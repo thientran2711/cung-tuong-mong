@@ -25,7 +25,7 @@ const bdAlive=id=>bdP(id,"alive")!==-1;/* dead = -1 (0 is the book's "unset") */
 /* a steppe man who is IN the capital stands in the world like every man (S.men, jmen schedule: an embassy member keeps the envoy's
    places and lawful reasons), and leaves it when he goes home or dies (law 6b). Women guests and the stable groom: see report FOR E. */
 const bdMan=id=>{try{if(typeof menInit==="function")menInit()}catch(e){}if(!S.men||!BDP[id]||!BDP[id].man)return"";const mid="mbd_"+id,M=BAL.road.bd.man;
- const on=bdAlive(id)&&bdP(id,"w")==="kinh";const had=S.men.find(m=>m.id===mid);if(had){if(!on)had.alive=bdAlive(id),had.away=1;else had.away=0;return""}
+ const on=bdAlive(id)&&bdP(id,"w")==="kinh";const had=S.men.find(m=>m.id===mid);if(had){had.alive=bdAlive(id);if(on){had.away=0;delete had.ban}else{had.away=1;had.ban=BAL.road.bd.man.away}return""}/* away = off the jmen schedule (menBanned), kept in S.men */
  if(on)S.men.push({id:mid,role:"Sứ thần",rw:"sứ thần",haunts:["thu"],age:M.age[id]||M.age.d,name:BDP[id].n,trait:M.trait[id]||"cẩn trọng",loyal:M.loyal,af:0,tinh:0,letters:0,trysts:0,alive:true,knowsMe:[],bdp:id,known:1});return""};
 const bdKill=id=>{bdP(id,"alive",-1);bdMan(id);return ""};
 const bdMove=(id,w)=>{bdP(id,"w",w);bdMan(id);return ""};
