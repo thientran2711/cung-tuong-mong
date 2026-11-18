@@ -18,7 +18,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
  const fresh=()=>p.evaluate(()=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;window.__bot=1;quiet=false;Q.length=0;
   try{deal()}catch(e){}render();return{n:liveRivals(true).length}});
- await fresh();
+ /* a fresh world with at least 2 consorts who sit at the mirror (a random start can have none yet: then every check below would be empty) */
+ for(let i=0;i<8;i++){await fresh();if(await p.evaluate(()=>liveRivals(true).filter(v=>!v.coop&&toilOn(v)).length>=2))break}
  /* 1 histogram */
  const r1=await p.evaluate(()=>{const H={vain:{},modest:{},other:{}},T0=S.turn;let n=0,ms=0,cache=true;const R=liveRivals(true).filter(v=>!v.coop&&toilOn(v));
   const grp=v=>{const T=traitsOf(v);return T.some(t=>t==="Kiêu ngạo"||t==="Tham vọng")?"vain":T.some(t=>t==="Khiêm nhường"||t==="Ân cần")?"modest":"other"};
@@ -31,7 +32,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const sh=(h,ks)=>ks.reduce((a,k)=>a+(h[k]||0),0)/Math.max(1,Object.values(h).reduce((a,b)=>a+b,0));
   return{H,n,msPer:+(ms/n).toFixed(2),cache,vainBold:+sh(H.vain,["cauky","dam"]).toFixed(2),modBold:+sh(H.modest,["cauky","dam"]).toFixed(2),
    vainPlain:+sh(H.vain,["moc","nha"]).toFixed(2),modPlain:+sh(H.modest,["moc","nha"]).toFixed(2),kinds:new Set(Object.keys(H.vain).concat(Object.keys(H.modest))).size}});
- ok(r1.vainBold>r1.modBold&&r1.modPlain>r1.vainPlain,'choice by nết: vain consorts take the cầu kỳ ways more, modest ones mặt mộc / thanh nhã more',r1);
+ ok(r1.n>0&&r1.vainBold>r1.modBold&&r1.modPlain>r1.vainPlain,'choice by nết: vain consorts take the cầu kỳ ways more, modest ones mặt mộc / thanh nhã more',r1);
  ok(r1.kinds>=3,'never one way only (human slip / weights)',r1.H);ok(r1.cache,'once per NPC per day: the second read is the stored choice');
  ok(r1.msPer<5,'cheap: ms per choice',r1.msPer);
  /* 2 fallback */
