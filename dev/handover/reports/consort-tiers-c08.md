@@ -17,3 +17,9 @@ By eye (sheet incl. live row): pose/headdress/face/cut/embroidery as live, colou
 Credits 24 × 135 = 3240 cr. Gen ids v0 t1 mERnTtUhJQ t2 gOtCqwYSXO t3 gOtCqOESXO t4 VXw4R8YMMU t5 lJIfHixgv9 t6 jUBhuiVLD0 t7 ovN2W1P829 t8 EbnVXyQuuO; v1 t1 EbnVXhAuuO t2 w4vQKUR7EI t3 w4vQkOA7EI t4 vQ2WpQ9a47 t5 MB792mHDCm t6 yiEbjY1PW9 t7 rgdtE6mxtc t8 s78aHGal8e; v2 t1 xSXmuHYjfW t2 9ZFklJQNYZ t3 UPhuKSowny t4 xSXmQlLjfW t5 O6Cqji9ynm t6 w4vQ1ic7EI t7 aFAcd1zfSh t8 JNfHxnoOq4.
 Files CDN img/_review/consort-tiers/c08/b10/: c08_a18_tN_v0|v1|v2.png, c08_a18_sheet.jpg (rows v0/v1/v2 × t1–t8).
 ~100% xong c08 / ~0% chơi được.
+
+
+## B10 FIX 1 (W39, 18/11, foreman ROOT-19 after owner): t7 yellow rule
+PRIORITY #1 CHECK: FIGURE_GATE C4c t7 rule (owner ~08:30Z), C4d phoenix, D3, D2; re-read before the fix. t7 v1 had yellow as the MAIN robe (fault). Now: v1 = her own pink as MAIN robe + yellow only on inner robe/borders/sleeve linings/sash in the SAME deeper warm golden yellow as her t8 v1 (t8 v1 as image 2 for the shade only; gen ovNAFxF829); v2 = misty celadon MAIN + the same deep yellow parts (gen lJIC6cCgv9). Phoenix kept, one held item, bare forehead. Old versions kept as c08_a18_t7_v1_allyellow.png and c08_a18_t7_v2_pale.png (not in the sheet).
+Sheet c08_a18_sheet.jpg rebuilt. Credits ~270 (2 gens).
+~100% xong c08 / ~0% chơi được.

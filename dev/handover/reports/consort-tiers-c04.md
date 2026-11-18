@@ -81,3 +81,11 @@ By eye: pose/headdress/face/embroidery as live, bare forehead, one held item, no
 Gens: 15 + 2 redo = 17 × 135 = 2295 cr (v1 reused). Gen ids v0 t1 SymEMoHUb8 t2 s78aT58l8e t3 mERnJozhJQ t4 u5YM6ElQLD t5 WDlJ5TTcXe t6 w4vQdPa7EI t7 LwovMrZswO t8 gOtCD65SXO; v2 t1 CqzTNciEEy t2 lJIfMfLgv9 t3 xSXmcaIjfW t4 KLDozv2kqp t5 eIyisWFdqL t6 ksp8nH216B t7 tC3zyIemZJ t8 5jMBG5ZKxe.
 Files CDN img/_review/consort-tiers/c04/b10/: c04_a18_tN_v0|v1|v2.png (1520x2688 RGBA), c04_a18_sheet.jpg (rows v0/v1/v2 × t1–t8).
 ~100% xong c04 / ~0% chơi được.
+
+## B10 FIX 1 (W39, 18/11, foreman ROOT-19 after owner): t7 yellow rule + t2 one item
+PRIORITY #1 CHECK: FIGURE_GATE C4c (t7 rule owner ~08:30Z), D3 one item; re-read before the fix. Ticked: C4c own colour MAIN + yellow only on inner robe/borders/sash in t8's deeper warm golden yellow ✓; C4d phoenix kept ✓; D3 one item ✓; D2 bare forehead ✓.
+- t7 v1: source = b9 c04_a18_t7_v4.png (blue-grey + pale yellow), image 2 = c04 t8 v1 as yellow shade only; one gen (VXw9maJMMU): blue-grey MAIN, yellow parts now the deep t8 yellow. All-yellow t7 kept as c04_a18_t7_allyellow.png (b10 + b9), not in the sheet.
+- t7 v2: misty celadon MAIN + deep t8 yellow parts (gen vQ2cKLga47); old pale one kept as c04_a18_t7_v2_pale.png.
+- t2 v0/v1/v2: live t2 held branch + round fan → ONE item (branch) in all three (gens YMsJBf9WeC, DoJ6vKVpcl, mERYbOPhJQ); old ones kept as c04_a18_t2_v?_twoitems.png (b10; b9 t2 old as c04_a18_t2_twoitems.png). b9/c04_a18_t2.png and b9/c04_a18_t7.png = the new v1.
+- Sheet c04_a18_sheet.jpg rebuilt. 5 gens = 675 cr.
+~100% xong c04 / ~0% chơi được.
