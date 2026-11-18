@@ -415,7 +415,7 @@ function rtNgSleight(kind,n,cb){const o=rtMgO(n);if(!rtMgOn()){cb(roll(o));retur
  const what={alum:"bỏ phèn vào bát",swap:"đổi bát nước",oil:"nhỏ dầu vào bát"}[kind]||"ra tay";
  const d=kg82Open({art:"Nghiệm thân",title:`Lén ${what}`,how:`Ánh mắt của ${n} người quét qua lại trong điện. Chạm «Ra tay» lúc không ánh mắt nào chạm vào bát. Ba hồi, cần thành hai.`});if(!d){cb(roll(o));return}
  kg82Set("score","0/2");kg82Set("round","1/3");kg82Set("time","–");const box=kg82Box();
- box.innerHTML=`<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu</button><button class="${kg82Btn(true)}" id="kg82skip">Để Tâm cơ quyết định<small>${word(o)}</small></button></div>`;
+ box.innerHTML=`<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu</button>${kitQuick({id:"kg82skip",n:"Để Tâm cơ quyết định",sub:`${word(o)}`})}</div>`;
  const done=ok=>{const res=typeof kitGameResult==="function"?kitGameResult({parts:[["Ra tay",ok?"không ai thấy":"bị nhìn thấy"],["Người canh",`${n} người`]],note:ok?"Bát nước đã như ý ngươi.":"Có người đã thấy tay ngươi động vào bát."}):"";
   kg82ShowRes(res+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`,!!ok);$("kg82ok").onclick=()=>{kg82Close();cb(ok)}};/* merge-train-4: result sound (result-sfx) */
  $("kg82skip").onclick=()=>{rtStat("mg_skip");done(roll(o))};
