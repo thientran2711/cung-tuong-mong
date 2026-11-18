@@ -68,3 +68,20 @@ By eye (live | copy | recolour sheet): pose/turn, cut, headdress, face, held ite
 Credits this v2: 12 copies... counted: copies 8+4=12, recolours 8 = 20 gens × 135 = 2700 cr (plus the 18 gens of the first B8 = 2430 cr, superseded).
 Gen ids: copies t1 SymCBL7Ub8→0eSOsA2TfW(kept) t2 3z5xQ6sREY(kept)→aFAWRIAfSh t3 huZn6aqvqL t4 bxVdW1g5Y2 t5 fHGcRqFCDY t6 WDl7xXVcXe(kept)→0eSOsYnTfW t7 ovNZyQR829 t8 huZn6rUvqL→u5YVGukQLD(kept); recolours t1 w4vuh2a7EI t2 rgdIe9qxtc t3 w4vumOd7EI t4 JNfFv9mOq4 t5 tC3G6EXmZJ t6 0eSOgCvTfW t7 O6CHaZMynm t8 lJIa8zVgv9. Nothing live.
 ~100% xong c03 B8 v2 / ~0% chơi được.
+
+## B8 v3 — two-step + m09 STYLE ref (supersedes v1/v2 above; ROOT-18 addenda 1+2)
+Method: STEP 1 exact copy of the live figure (image ref = live fig only; m09 hd eIyOFEidqL in the STYLE slot for rendering, skin and fabric; clauses "Luminous smooth porcelain skin, soft even light, no grey or dark shading on the face, no nasolabial or under-eye lines, dewy flawless complexion" + "near-3D semi-realistic rendering, soft volumetric shading on face and hair, NO dark contour line around face, nose or jaw, natural eye size, soft individual hair strands, exactly matching the rendering, skin and fabric of the style reference"); STEP 2 recolour edit of the step-1 copy (image ref = copy only + same style slot), colour only. m09 never an image ref (no body/pose/face).
+Files (CDN img/_review/consort-tiers/c03/b8/, overwritten): c03_a18_t1..t8.png, c03_a18_row8.jpg, c03_a18_live_vs_new.jpg = live | copy | recolour.
+| rank | colour | bbox w/h live | copy (Δ) | recolour (Δ) | gens (copy+recolour) |
+|---|---|---|---|---|---|
+| t1 | pale apricot | 0.377 | 0.390 (+3.3 %) | +3.4 % | 1+1 |
+| t2 | powder blue | 0.314 | 0.326 (+3.7 %) | +3.5 % | 1+1 |
+| t3 | soft sage | 0.381 | 0.390 (+2.4 %) | +2.6 % | 1+1 |
+| t4 | dusty pink | 0.371 | 0.375 (+1.2 %) | +1.3 % | 1+1 PASS |
+| t5 | soft lavender-grey | 0.393 | 0.403 (+2.6 %) | +2.4 % | 1+1 |
+| t6 | muted coral | 0.379 | 0.386 (+1.6 %) | +1.7 % | 1+1 |
+| t7 | muted teal + pale imperial yellow | 0.419 | 0.434 (+3.6 %) | +3.6 % | 1+1 |
+| t8 | soft golden yellow + dusty rose + jade | 0.380 | 0.391 (+3.0 %) | +3.1 % | 1+1 |
+Only t4 is inside ±1.5 %; the others are +1.7…+3.6 % wider than live (with the m09 style slot the model widens sleeves/skirt a bit more than v2). By eye pose/turn/cut/headdress/face/held item match; skin smoother, soft pastel colours. No regen rounds run (first gen of each step, to hand over fast): up to 2 more per step available.
+Credits: 16 gens × 135 = 2160 cr (v1 2430 + v2 2700 superseded). Gen ids: copies t1 5jMXpkOKxe t2 nVLUl0pYQD t3 1le8Xlur4r t4 6Aq15nAiJO t5 huZnAbKvqL t6 KLDBe7pkqp t7 iGbrKMs3uK t8 SymCvGRUb8; recolours t1 Xm436yZBfo t2 aFAWnGrfSh t3 lJIahhpgv9 t4 SymCaCmUb8 t5 s78vmfHl8e t6 79aQE5AJAL t7 tC3G2V9mZJ t8 gOtfvkGSXO. Nothing live.
+~100% xong c03 B8 v3 / ~0% chơi được.
