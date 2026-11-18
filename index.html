@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"c1104d92+","t":"2026-11-18T05:41Z","c":"face-zoom-aspect test: SEED / FORCE options for same-character before/after shots","b":"5040ba3ccfb6","h":[{"s":"16b4dad8+","t":"2026-11-18T05:32Z","c":"cloth-bake-static: cloth layer on every static figure path on a cold cache (wait layer + patch on bake done); test + report"},{"s":"231cd3b3+","t":"2026-11-18T03:27Z","c":"review display-set-bonus: VANPHONG rows (Đa Bảo Các + set wording); cap line drops 'điểm'; j8 'Điểm trang lộng lẫy' night quality reads wor…"},{"s":"bd8547f2+","t":"2026-11-18T03:28Z","c":"men-forbidden r6: old saves drop officials / festival princes standing in the hậu cung on load (menLoadFix, same ONE rule)"},{"s":"c743265c+","t":"2026-11-18T03:18Z","c":"review life-preload r6: title prefetch chained on undefined (lWant returns its promise); gate cap really 25 s (no re-run after cap / Vào cu…"},{"s":"2aca2aac+","t":"2026-11-18T03:17Z","c":"review cloth-tea-r6: kclo-on hides the picture by clip-path, not visibility (visibility:hidden made kfxGeom hide the cloth layer too: her f…"},{"s":"2b1b0701","t":"2026-11-18T03:00Z","c":"review staff-cap-apply r6: site rebuilt on db24027f"},{"s":"64488e4f+","t":"2026-11-18T02:38Z","c":"cloth-xoc r6e: rebuild site"},{"s":"af71f94a+","t":"2026-11-18T02:17Z","c":"smudge r16: stage4 + avatar probe tests, options script score fix (look tier by score), FINAL mode"},{"s":"e1f60927+","t":"2026-11-18T02:25Z","c":"result-reason: every result card line says a short why (kitWhy, KIT 7); values left-aligned next to labels"},{"s":"29385ec6+","t":"2026-11-18T02:07Z","c":"greet-stranger: site rebuilt"}]};
+window.CTM_BI={"s":"1304d17d","t":"2026-11-18T06:33Z","c":"steal-minigame: Độ khó row reads mgTier of the occasion; sync test hook; jnf (balance-chain) scan steal-mg-nf.js; device shot script","b":"730385e27a06","h":[{"s":"c1104d92+","t":"2026-11-18T05:41Z","c":"face-zoom-aspect test: SEED / FORCE options for same-character before/after shots"},{"s":"16b4dad8+","t":"2026-11-18T05:32Z","c":"cloth-bake-static: cloth layer on every static figure path on a cold cache (wait layer + patch on bake done); test + report"},{"s":"231cd3b3+","t":"2026-11-18T03:27Z","c":"review display-set-bonus: VANPHONG rows (Đa Bảo Các + set wording); cap line drops 'điểm'; j8 'Điểm trang lộng lẫy' night quality reads wor…"},{"s":"bd8547f2+","t":"2026-11-18T03:28Z","c":"men-forbidden r6: old saves drop officials / festival princes standing in the hậu cung on load (menLoadFix, same ONE rule)"},{"s":"c743265c+","t":"2026-11-18T03:18Z","c":"review life-preload r6: title prefetch chained on undefined (lWant returns its promise); gate cap really 25 s (no re-run after cap / Vào cu…"},{"s":"2aca2aac+","t":"2026-11-18T03:17Z","c":"review cloth-tea-r6: kclo-on hides the picture by clip-path, not visibility (visibility:hidden made kfxGeom hide the cloth layer too: her f…"},{"s":"2b1b0701","t":"2026-11-18T03:00Z","c":"review staff-cap-apply r6: site rebuilt on db24027f"},{"s":"64488e4f+","t":"2026-11-18T02:38Z","c":"cloth-xoc r6e: rebuild site"},{"s":"af71f94a+","t":"2026-11-18T02:17Z","c":"smudge r16: stage4 + avatar probe tests, options script score fix (look tier by score), FINAL mode"},{"s":"e1f60927+","t":"2026-11-18T02:25Z","c":"result-reason: every result card line says a short why (kitWhy, KIT 7); values left-aligned next to labels"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -27704,12 +27704,15 @@ function startContest(o){o=o||{};if(typeof S==="undefined"||!S){if(o.onDone)o.on
  intro()}
 
 /* =============== playArt: the same mini-game for works / lessons, no rivals =============== */
+/* optional (review/steal-minigame, jsmg): o.rows = intro rows (kit rows, heading o.rowsHead) · o.go / o.skip / o.skipSub = the two intro button labels ·
+   o.resRows(raw, skipped) = the result rows instead of "Màn chơi" + note. Absent → unchanged. */
 function playArt(o){o=o||{};const kind=kg82Kind(o.art,o.artName,true),K=KG82_KIND[kind];KG82.ctx="hoc";kg82Preload(kind);try{mgSet(kind,{occ:o.occ||"hoc"})}catch(e){KG82.lv=0}
  const d=kg82Open({art:o.artName||K.n,title:o.title||K.t,how:K.how,pic:kg82Pic(kind)});if(!d){if(o.onDone)o.onDone(5);return}const box=kg82Box();
  const done=(raw,skipped)=>{KG82.phase="result";const html=kg82Rows([["Màn chơi",`${raw}/10 · ${kg82Word(raw)}${skipped?" (để trời định)":""}`,"t"]].concat(o.note?[["Ghi chú",o.note,"n"]]:[]))+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`;
-  kg82ShowRes(html,raw>=5);kg82Set("score",`${raw}/10`);kg82Set("time","đã hết");KG82.last={raw,skipped};
+  kg82ShowRes(o.resRows?kg82Rows(o.resRows(raw,skipped))+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`:html,raw>=5);kg82Set("score",`${raw}/10`);kg82Set("time","đã hết");KG82.last={raw,skipped};
   $("kg82ok").onclick=()=>{kg82Close();try{if(o.onDone)o.onDone(raw,{skipped})}catch(e){console.error(e)}}};
- KG82.phase="intro";box.innerHTML=`<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu</button><button class="${kg82Btn(true)}" id="kg82skip">Để trời định<small>tính 5/10</small></button></div>`;
+ KG82.phase="intro";if(o.rows)box.classList.add("kgintro");
+ box.innerHTML=(o.rows?`<h4 class="kpst">${o.rowsHead||"Phần của ngươi"}</h4>`+kg82Rows(o.rows):"")+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">${o.go||"Bắt đầu"}</button><button class="${kg82Btn(true)}" id="kg82skip">${o.skip||"Để trời định"}<small>${o.skipSub||"tính 5/10"}</small></button></div>`;
  $("kg82go").onclick=()=>kg82Play(kind,raw=>done(raw,false));$("kg82skip").onclick=()=>done(5,true)}
 window.startContest=startContest;window.playArt=playArt;
 
@@ -30203,6 +30206,13 @@ Object.assign(BAL,{spread:{cap:2,maxWait:4,codeWait:2}});
 BAL.relOan={hurt:.6,doer:.2,mend:.3};
 BAL.steal={cost:{feign:{duc:4},road:{suc:5}},failSung:3,rel:15,ghen:25,
  need:{fav:1,rank:.6,heir:.8},heirHas:.25,friend:60,friendMin:.15,oanW:.5,fear:{gap:3,f:.5},custom:.3,k:.25,pMax:.55,maxTry:2,sucMin:20};
+/* STEAL MINI-GAME (owner 16/11 ~22:20Z, PARKING_LOT #3b; jsmg.js): before a Tranh sủng / Chặn ngự giá try the one who tries may play ONE short tài nghệ
+   game (an existing one, KIT tài nghệ frame). raw ≥ win → THAT try's odds go up `rung` rung(s) on the word ladder (BAL.odds.cut, keeping the place inside
+   the band; capped at Nắm chắc / BAL.odds.hi); lose or skip → unchanged (no extra loss). art = the game per act (feign: Hát, road: Múa — "múa một khúc
+   dưới đèn lồng"); occ = the mgTier occasion that sets the board (hầu Hoàng thượng). NPCs (never the co-op friend, who plays her own) "play" by the
+   same NPC game roll as every contest (kg82NpcRaw: BAL.mgTier.npc by her bậc in that art) against the same win; npcP = chance an NPC plays at all.
+   win 5 = the pass line every game result shows green (kg82ShowRes raw ≥ 5). One game per try (j75: one try a night each), so no cooldown key. */
+BAL.steal.mg={on:1,win:5,rung:1,art:{feign:"hat",road:"mua"},occ:"trieu",npcP:1};
 /* TÁT, three tiers (owner 16/11; jface act "tat", jslap game). Index 1..3 = nhẹ / vừa / nặng. sac = Sắc the target loses while the mark lasts; wk = weeks the mark stays
    (+1 with chance wkX); duc = the slapper's Đức; rel / oan = grudge (relAdd / extra oán on the target); hoang/sung = Hoàng thượng hears (chance, Sủng) when the target's Sủng
    ≥ hoangMin; thau = Thái hậu rebukes a nặng slap (chance, Danh); evT = the target keeps evidence against the slapper, evW = a witness does (chance per slap);
@@ -67124,6 +67134,115 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§89",title:"kitDi
  html:()=>{let F=null;try{F=mkFix()}catch(e){}const placed=F?F.placed:{};const m={groups:GFIX,placed};
   return `<div class="kitpg-row" style="position:relative;height:420px;overflow:hidden"><div class="kdr" style="position:absolute;inset:0;--kdr-bg:url('${KDR_BG}')">${kitDisplayRoomHTML(m)}</div></div>`}})}catch(e){}
 }catch(e){console.error("jdisp",e)}})();
+/* ================= jsmg: THE STEAL MINI-GAME (owner 16/11 ~22:20Z, PARKING_LOT row 3b; numbers BAL.steal.mg, jbal2) =================
+   Owner: "nếu mà tôi win cái mini game đó thì sẽ tăng cái cơ hội tranh sủng của tôi lên một bậc. Từ 5 ăn 5 thua lên thành chắc hay cái gì đó,
+   nói chung là lên một bậc. Tranh sủng với lại có hai option ... tranh sủng với lại chặn ngự giá đó."
+   1. Before a Tranh sủng / Chặn ngự giá TRY the one who tries may play ONE short game: an EXISTING tài nghệ game (BAL.steal.mg.art: Hát for
+      Tranh sủng, Múa for Chặn ngự giá) inside the KIT tài nghệ frame (j82 playArt → kg82Open / kitGameFrame), board set by mgTier occasion
+      BAL.steal.mg.occ. raw ≥ BAL.steal.mg.win → THAT try's odds go up BAL.steal.mg.rung rung(s) on the word ladder (stealRungUp: BAL.odds.cut,
+      the place inside the band kept, capped at Nắm chắc / BAL.odds.hi). Lose or skip ("Thôi, không chơi") → odds unchanged, nothing else lost.
+      Already at Nắm chắc → no game (nothing to win).
+   2. ONE odds path for everyone: the rung rides on oSteal(a, mode) (j8, the formula every try reads — her deck card, her person-menu act, the
+      NPC stealNight, and review/balance-chain's nfOdds) through a per-try token; the token is made once per try and dropped when the try ends.
+      NPCs (never the co-op friend, who plays her own game on her own seat): the same game "played" by the NPC roll every contest uses
+      (kg82NpcRaw: BAL.mgTier.npc by her bậc in that art) against the same win line; BAL.steal.mg.npcP = chance an NPC plays at all.
+   3. Words: the odds words come from word() (the ladder); no typed odds text, no %.
+   4. Night rule of review/balance-chain (OD 16/11 22:45Z FINAL, jnf): when jnf is present, her pick "Tranh sủng" / "Chặn ngự giá" in the
+      flip choice opens the game AFTER her 10-second choice and BEFORE the one resolve (S.nfX.st "mg" holds jnf's step; back to "open" after);
+      NPC attackers roll at the resolve. Absent jnf → nothing of this part runs.
+   Save: nothing new (tokens live in memory; a save made while the game is open reopens the choice step as "open", without the rung).
+   ======================================================================================================================== */
+(function(){
+if(typeof oSteal!=="function"||typeof stealNight!=="function")return;
+const M=()=>(BAL.steal&&BAL.steal.mg)||{};
+const mo=m=>m==="road"?"road":"feign";
+/* the word ladder moved n rungs UP, keeping the place inside the band (mirror of balance-chain jbalcore rungDown) */
+function stealRungUp(o,n){const F=[0].concat(BAL.odds.cut),top=100;let i=0;for(let j=0;j<F.length;j++)if(o>=F[j])i=j;const lo=F[i],hi=i+1<F.length?F[i+1]:top;
+ const t=Math.min(F.length-1,i+(n|0)),lo2=F[t],hi2=t+1<F.length?F[t+1]:top;
+ return Math.min(BAL.odds.hi,Math.max(o,Math.min(t+1<F.length?hi2-1:top,Math.round(lo2+(o-lo)*(hi2-lo2)/Math.max(1,hi-lo)))))}
+window.stealRungUp=stealRungUp;
+const topRung=o=>oddsLv(o)>=BAL.odds.cut.length;
+const ST=window.__smgSt=window.__smgSt||[];   /* measuring / tests only, never saved */
+const stat=r=>{ST.push(r);if(ST.length>3000)ST.splice(0,1000)};
+const TOK=new Map();   /* actor → {mode, up, by} for the try running now */
+let BUSY=0;
+const day=()=>{try{return wk()}catch(e){return 0}};
+
+/* ---------- the one odds hook: oSteal + this try's rung ---------- */
+const o0=oSteal;
+oSteal=function(a,m){const o=o0.apply(this,arguments);let t=TOK.get(a);
+ if(!t){const z=nfCtxUp(a,mo(m));if(z)t=z}
+ if(!t||t.mode!==mo(m)||!t.up)return o;return stealRungUp(o,t.up)};
+
+/* ---------- NPC: the contest roll of the same game ---------- */
+function npcUp(v,mode){const B=M();if(!B.on||!v||v===S||v.coop||!(Math.random()<(B.npcP==null?1:B.npcP)))return 0;let raw=0;
+ try{raw=kg82NpcRaw(v,B.art[mode])}catch(e){return 0}return raw>=B.win?(B.rung||1):0}
+window.stealMgNpc=npcUp;
+
+/* every try that runs through stealNight (her person-menu act, every NPC try on main): the token lives exactly for this call */
+const sn0=stealNight;
+stealNight=function(a,t,mode){const m=mo(mode);let mine=false;
+ if(a&&!TOK.has(a)&&a!==S&&!a.coop){TOK.set(a,{mode:m,up:npcUp(a,m),by:"npc"});mine=true}
+ const k=TOK.get(a);let r;try{r=sn0.apply(this,arguments)}
+ finally{if(r&&k)stat({w:day(),who:a===S?"me":a.id,mode:m,up:k.up||0,by:k.by,path:"stealNight"});if(mine||(k&&k.by==="mg"))TOK.delete(a)}
+ return r};
+
+/* ---------- her game ---------- */
+/* cb(up, raw, skipped) — up = rungs won (0 on lose / skip). Bots and pages without the kit frame skip at once. */
+function herGame(mode,o,cb){const B=M();const kind=B.art&&B.art[mode];const nm=mode==="road"?"Chặn ngự giá":"Tranh sủng";
+ const fin=(raw,sk)=>{const up=!sk&&raw>=B.win?(B.rung||1):0;stat({w:day(),who:"me",mode,up,by:"mg",raw:sk?null:raw,path:"her"});BUSY=0;
+  if(up)try{log(`${nm}: ${KG82_KIND[kind].n.toLowerCase()} được ${raw}/10, cơ hội lần này lên ${word(stealRungUp(o,up))}.`)}catch(e){}
+  try{cb(up,raw,sk)}catch(e){console.error(e)}};
+ if(typeof window.__smgFake==="function"){BUSY=1;const r=window.__smgFake(mode)||{};if(r.sync)fin(+r.raw||0,!!r.skipped);else setTimeout(()=>fin(+r.raw||0,!!r.skipped),0);return}   /* tests */
+ if(!B.on||!kind||topRung(o)||typeof window.__bot!=="undefined"||typeof playArt!=="function"||typeof KG82_KIND!=="object"||!KG82_KIND[kind]){try{cb(0,null,true)}catch(e){console.error(e)}return}
+ BUSY=1;const n1=word(stealRungUp(o,B.rung||1)),n0=word(o),diff=()=>{try{return mgDiffTxt(mgTier(kind,{occ:B.occ}),kind)}catch(e){return ""}};
+ const pa=()=>playArt({art:kind,artName:nm,occ:B.occ,rowsHead:"Trước khi ra tay",
+  rows:[["Thắng",`cơ hội lần này lên một bậc: ${n0} → ${n1}`,"g"],["Thua hay không chơi",`cơ hội giữ nguyên ${n0}, không mất thêm gì`,"n"]].concat(diff()?[["Độ khó",diff(),"n"]]:[]),
+  go:"Bắt đầu",skip:"Thôi, không chơi",skipSub:`giữ nguyên ${n0}`,
+  resRows:(raw,sk)=>[["Kết quả",sk?`không chơi: cơ hội giữ nguyên ${n0}`:raw>=B.win?`${raw}/10 · ${kg82Word(raw)}: cơ hội lên ${n1}`:`${raw}/10 · ${kg82Word(raw)}: cơ hội giữ nguyên ${n0}`,!sk&&raw>=B.win?"g":"n"]],
+  onDone:(raw,x)=>fin(raw,!!(x&&x.skipped))});
+ /* jaudit's playArt hook marks a paid game (window.__aaL); this game is free: keep its mark as it was */
+ const L=window.__aaL;try{pa()}catch(e){console.error(e);BUSY=0;try{cb(0,null,true)}catch(e2){}}finally{window.__aaL=L}}
+window.stealMgPlay=herGame;
+
+/* her Hành sự deck cards (j2 deal; j75 marks them __steal where its buổi check matches): the game first, then the card as before with that try's odds */
+const isStealCard=a=>!!(a&&a.o!=null&&(a.__steal||((a.n==="Tranh sủng"||a.n==="Chặn ngự giá")&&a.b===(typeof B4L==="number"?B4L:2))));
+if(typeof act==="function"){const a0=act;act=function(i){const a=Array.isArray(deck)&&deck[i];
+ if(!isStealCard(a)||BUSY||!M().on||(a.b!=null&&(S.buoi||0)!==a.b)||!can(cardCost(a))||a.done||S.dead||Q.length||!canPay(a)||a.lock)return a0.apply(this,arguments);
+ const self=this,args=arguments,mode=a.n==="Chặn ngự giá"?"road":"feign";
+ herGame(mode,a.o,up=>{const ob=a.o;if(up)a.o=stealRungUp(ob,up);try{a0.apply(self,args)}finally{a.o=ob}try{render()}catch(e){}})}}
+
+/* her person-menu act (j8 doAct "steal" / "road"): the game first, then the act with the token on */
+if(typeof doAct==="function"){const d0=doAct;doAct=function(i,k){if((k!=="steal"&&k!=="road")||BUSY||!M().on)return d0.apply(this,arguments);
+ const v=typeof rivals!=="undefined"&&rivals[i],A=typeof ACT==="object"&&ACT[k];
+ if(!v||!A||!can(BAL.actK||2)||S.dead||Q.length||!v.alive||v.out||!A.ok(S,v))return d0.apply(this,arguments);
+ const self=this,args=arguments,mode=k==="road"?"road":"feign";
+ herGame(mode,o0(S,mode),up=>{TOK.set(S,{mode,up,by:"mg"});try{d0.apply(self,args)}finally{TOK.delete(S)}try{render()}catch(e){}})}}
+
+/* ---------- review/balance-chain night (jnf): her choice → game → the one resolve; NPCs roll at the resolve ---------- */
+let NFUP=null;const NPCR=new Map();let PASS=0;
+function nfX(){const x=S&&S.nfX;return x&&x.d===day()?x:null}
+function inResolve(){const x=nfX();return !!(x&&x.st==="done"&&!x.def)}
+function nfCtxUp(a,mode){if(typeof window.nfStep!=="function"||!a)return null;
+ const live=inResolve();if(!live&&!PASS)return null;
+ if(a===S){if(live&&NFUP&&NFUP.d===day()&&NFUP.mode===mode)return{mode,up:NFUP.up,by:"mg"};return null}
+ if(a.coop)return null;const key=`${day()}|${a.id}|${mode}`;
+ if(!NPCR.has(key)){if(NPCR.size>400)NPCR.clear();const up=npcUp(a,mode);NPCR.set(key,up);stat({w:day(),who:a.id,mode,up,by:"npc",path:live?"nfResolve":"nfPass"})}
+ return{mode,up:NPCR.get(key),by:"npc"}}
+let NFON=0;function nfInstall(){if(NFON||typeof window.nfStep!=="function"||typeof chooseM!=="function")return;NFON=1;
+ const cm0=chooseM;chooseM=function(j){const m=Q[0],op=m&&m.pid==="nfch"&&m.opts&&m.opts[j];const mode=op&&(op.n==="Tranh sủng"?"feign":op.n==="Chặn ngự giá"?"road":null);
+  const x=nfX();if(!mode||!x||x.st!=="open"||BUSY||!M().on)return cm0.apply(this,arguments);
+  const o=typeof stealShown==="function"?stealShown(S,mode):o0(S,mode);
+  x.st="mg";let r;try{r=cm0.apply(this,arguments)}catch(e){x.st="open";throw e}
+  herGame(mode,o,up=>{NFUP=up?{d:day(),mode,up}:null;const y=nfX();if(y&&y.st==="mg")y.st="open";try{window.nfStep()}catch(e){console.error(e)}});
+  return r};
+ /* a save made while the game was open: the choice stands, the step resumes (no rung) */
+ if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);try{const x=nfX();if(x&&x.st==="mg"&&!BUSY){x.st="open";setTimeout(()=>{try{window.nfStep()}catch(e){}},0)}}catch(e){}return r}}
+ if(typeof window.stealPass==="function"){const sp0=window.stealPass;window.stealPass=function(){PASS++;try{return sp0.apply(this,arguments)}finally{PASS--}}}}
+/* jnf may load after this file (assemble order): install now, else once the page has loaded */
+nfInstall();if(!NFON)try{window.addEventListener("load",nfInstall)}catch(e){}
+window.stealMgDebug=()=>({tok:[...TOK.entries()].map(([a,t])=>[a===S?"me":a&&a.id,t]),nfup:NFUP,busy:BUSY,st:ST.slice(-20)});
+})();
 
 /* jcoopthin: CO-OP THIN GUEST, part A = foundations (review/coop-thin-a; audit dev/handover/reports/coop-thin-guest-audit.md §2-3;
    owner GO 17/11: host-authoritative thin guest, part by part, end state = the guest only displays the host's state).
@@ -68059,7 +68178,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="5040ba3ccfb6";window.CTM_BUILD=BUILD;
+const BUILD="730385e27a06";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
