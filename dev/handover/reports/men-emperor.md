@@ -20,3 +20,19 @@ Weak points: the 4 faces share one "gpt-2-6 handsome" look (same eye/brow family
 
 ## v2 — emp3 redo (owner 18/11 ~06:08Z: emp1/2/4 OK; emp3 "hơi bị 2D", different feel)
 emp3 redone keeping design (golden-yellow + crimson robe, miện with bead strings to the brow, gentle face idea) with emp1 raw gen as STYLE ref + prompt "near-3D, same fabric/skin texture, NOT flat 2D". 2 gens (count 2), picked gen 2 (clearer soft smile, strings reach the brow); 1 cut. 163 cr (2x80+3); running total 575 cr; emp3 gens 3 of max 3. Files CDN img/_review/men/emperor/: emp3_a18_v2.png, emp_a18_row_v2.jpg (1,2,3v2,4), md5 OK, nothing live. Weak: emp3 v2 face sits closer to emp1's family (style-ref pull) — still distinguishable by crown, brows, jaw.
+
+## v3 — proportion redo of all four (Foreman C addendum, owner ~06:30Z: use the live emperor's proportion as the men standard)
+Tool: MediaPipe FaceLandmarker (lm10→152 = F, skull top = y10 − 0.30·F, feet = alpha bottom), same as overlay_m09. Standard = live fig-emperor-a18-1 F/(skull→feet) = 0.0841 (foreman's 0.083 → band 0.079–0.087). Refs per gen: image 1 = the approved emp raw gen (design/face), image 2 = live fig-emperor-a18-1 (proportion). Before redo: emp1 0.0753, emp2 0.0732, emp3 0.0780, emp4 0.0726 (heads ~12 % too small).
+
+| who | gens (this redo) | F/body | vs live 0.0841 | vs 0.083 | verdict |
+|---|---|---|---|---|---|
+| live a18-1 | – | 0.0841 | 0 | +1.3 % | standard |
+| emp1 | 4 (0.1093 stubby / 0.0894 / 0.0918 / 0.0764) → alt 0.0894 kept | 0.0897 | +6.7 % | +8.1 % | OUT of ±5 % (head ~7 % big); gens at cap 4 — not regenerated |
+| emp2 | 3 (0.1033 stubby / 0.0786 / 0.0816) | 0.0826 | −1.8 % | −0.5 % | PASS |
+| emp3 | 3 (0.0998 / 0.0848 / 0.0906) | 0.0873 | +3.9 % | +5.2 % | PASS vs live, on the edge vs 0.083 |
+| emp4 | 3 (0.0927 / 0.0831 / 0.0777) | 0.0832 | −1.1 % | +0.2 % | PASS |
+
+Lesson: prompting "head as large as reference 2" overshoots (stubby, child-like heads at 0.100–0.109); "head ~8–12 % larger than reference 1 + natural 7.5 heads tall" lands near the band (the prompt % overshoots ~1.6×). Designs, faces, colours kept; emp3 keeps the near-3D rendering. Rough pre-cut estimates (colour-diff alpha) were used to pick candidates; final numbers above are on the cut images.
+Files (CDN img/_review/men/emperor/, md5 OK, nothing live): emp1_a18_v2.png, emp2_a18_v2.png, emp3_a18_v2.png (OVERWRITES the earlier emp3_a18_v2 near-3D-only version: same design, new proportion), emp4_a18_v2.png, emp_a18_v2_vs_live.jpg (live | 1 | 2 | 3 | 4 on red skull-top/feet lines with F/body). Older emp_a18_row_v2.jpg is now outdated (old proportions).
+Credits this redo: 13 gens × 80 = 1040 + 9 cuts × 3 = 27 → 1067 cr. Overall men-emperor total ≈ 1642 cr.
+Weak points: emp1 head still ~7 % big (decision needed: accept, or +1–2 gens beyond the cap-4); emp3 edge of band; sleeves wide/bulky; a26/a36/a51 not drawn.
