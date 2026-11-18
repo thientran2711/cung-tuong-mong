@@ -8,7 +8,7 @@ const {chromium}=require('playwright');const [,,URL,VP,SHOT]=process.argv;const 
  await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.origin,null,{timeout:120000});await p.waitForTimeout(3000);
  await p.evaluate(()=>{Q.length=0;try{closeModal()}catch(e){}});
  const fails=[],rows=[];
- for(const kind of ['uot','bun','xoc']){for(const path of ['stage','eventstage','mirrorzoom','mirrorreveal']){for(const temp of ['cold','warm']){
+ for(const kind of ['uot','bun','xoc']){for(const path of ['stage','eventstage','mirrorzoom','mirrorreveal','put']){for(const temp of ['cold','warm']){
   const r=await p.evaluate(async([kind,path,temp])=>{
    if(temp==='cold')clothCacheReset();
    S.stain={w:wk(),it:{}};S.stain.it[kind]={lv:3,at:lkNow()};
@@ -19,13 +19,14 @@ const {chromium}=require('playwright');const [,,URL,VP,SHOT]=process.argv;const 
    else{host=document.createElement('div');host.id='kcbs';host.style.cssText='position:fixed;left:0;top:0;width:100%;height:100%;z-index:99999;background:#222;display:flex;gap:8px;justify-content:center';document.body.appendChild(host);
     if(path==='eventstage')host.innerHTML='<div style="width:40%">'+kitStageFig(S)+'</div>';
     else if(path==='mirrorzoom')host.innerHTML='<div style="width:60%;aspect-ratio:1">'+kitFaceZoom(S,file)+'</div>';
+    else if(path==='put'){host.innerHTML='<div style="position:relative;width:40%"><img id="kcbsimg" src="'+IMG_U('img/'+file)+'" style="width:100%;display:block"></div>';const im=host.querySelector('#kcbsimg');await new Promise(r=>{if(im.complete&&im.naturalWidth)r();else im.onload=r});kitFxPut(im,S,im.parentElement)}
     else host.innerHTML='<div style="position:relative;width:40%"><img src="'+IMG_U('img/'+file)+'" style="width:100%;display:block"><span class="kfxf" style="position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none">'+kitFxLayers(S,file)+'</span></div>'}
    const t0=performance.now();let first=host.querySelectorAll('img.kclo').length;
    while(performance.now()-t0<(+window.__W||40000)&&!ready()){await new Promise(r=>setTimeout(r,200))}
    if(path==='stage')await new Promise(r=>setTimeout(r,600));
    const L=[...host.querySelectorAll('img.kclo')].filter(i=>!i.classList.contains('kclo-wait'));
-   return{first,done:L.length,wait:host.querySelectorAll('img.kclo-wait').length,ms:Math.round(performance.now()-t0)}},[kind,path,temp]);
-  const ok=r.done>0&&r.wait===0;rows.push([kind,path,temp,r.first?'layer':'none',ok?'BAKED':'MISSING',r.ms]);if(!ok)fails.push([kind,path,temp,r]);
+   const pi=host.querySelector('#kcbsimg');return{first,hid:pi?pi.classList.contains('kclo-on'):null,done:L.length,wait:host.querySelectorAll('img.kclo-wait').length,ms:Math.round(performance.now()-t0)}},[kind,path,temp]);
+  const ok=r.done>0&&r.wait===0&&r.hid!==false;rows.push([kind,path,temp,r.first?'layer':'none',ok?'BAKED':'MISSING',r.ms]);if(!ok)fails.push([kind,path,temp,r]);
   if(SHOT&&temp==='cold'&&kind==='xoc'&&path!=='stage'){await p.screenshot({path:SHOT+'/'+path+'-'+kind+'-cold.png'})}
  }}}
  await p.evaluate(()=>{const h=document.getElementById('kcbs');if(h)h.remove()});
