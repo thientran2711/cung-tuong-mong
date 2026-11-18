@@ -246,3 +246,25 @@ ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 
 - Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
 - Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
 LINEAGE (owner 17/11; threshold overwritten by owner 18/11 ~07:33Z): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child foreman (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover + send "TAKE OVER NOW" to your line's standby (FOREMAN B ROOT STANDBY id in FOREMAN_B_STATUS) or a FOR MAIN line if none. Every takeover prompt copies this line.
+
+## REVIEW r2 — PASS review/coop-thin-f1-r1 53544bd8 (descends from origin/main ddbf9c7) — reviewer r1 #3 session_01N1tNP5p1YYUdf12hpmTewC (depth 3, START_CTX ~3 %)
+PRIORITY #1 CHECK: OD thin guest 17/11 (via brief) | main ddbf9c7: no jcoop*/jcycle change since fa411d6f; part E net resend = this branch only | review/* none on host-side net loss | claims: this reviewer.
+**Bisect of the coop-cyc THIN=6 reds (OPEN of r1 #2): NOT fa411d6f.** jplst + jagday hunks of fa411d6f reverted: 73, 68, 71 /73 (still red); unreverted 41, 69, 71, 41. Two classes:
+1. **GAME, part E (LIVE on main for every thin room): the HOST's socket dies silently.** Host tr 'room 2.0' / 'room 0.0'; her `do erd` + `do ready` relayed to his dead socket were lost (the Worker took them: no nohost to her), and r1 #2's resend only covers HER reconnect → both on "Chờ hảo hữu…", her maid's card never asked (41/73). Second face: he pressed Sẵn sàng in the gap after his reconnect before the server's "thin" answer (level 0 → the old road's bend), CW.bend stayed set at thin level (onBuoi / rebend are off there) → his #next stuck (27/73).
+   Fix (2 commits): jcoopthine — the host counts his reconnects in the view (e.net, rides the snapshot jcoopthin sends when his level is back); her phone, still waiting on that buổi, takes the re-net path (baseline = his copy, ready resent once; his ready idempotent). jcoopworld — lockNext locks while a thin room (>= 5) is back at level 0 (coopLinking word); when the level returns a leftover bend is cleared and run as CW.eNext (the press is kept). Level 0–4 rooms unchanged (lvWas < 5).
+   dev/test/coop-thin-e-net.js +N6–N11 (host deaf to her `do` then reconnect; host press in a held level gap): BEFORE 15/16 (N7 stall) and N11 red; AFTER 20/20 at L6, L6 swap, L5.
+2. **TEST:** "host drew her: who null" (forced deck) — the AG emperor's own summon (jagemp empSummon) was not forced; coop-cyc forced flip now forces it too (+ CYC_DBG dumps host #next lock parts and the forced flips).
+### Gates (on 0dc8f18 = merge 884ce97 unless noted; merges 884ce97 / ddbf9c7 = comments + entry-blank loader, no jcoop*/jcycle change)
+| gate | result |
+|---|---|
+| coop-cyc THIN=6 / 6 / swap (after both fixes, main e16e1d6) | 73/73, 73/73, 73/73 |
+| coop-thin-e L5 / swap | 33/33 / 33/33 |
+| coop-thin-e-net L6 / L6 swap / L5 | 20/20 / 20/20 / 20/20 |
+| coop-thin-f1 L6 / swap | 22/22 / 22/22 |
+| coop-e2e (e16e1d6 merge; again on 53544bd8) | 63/63; 63/63 |
+| one-core guard / text / text-rule / bind | PASS ×4 |
+| quickcheck 0dc8f18 / 53544bd8 | PASS (old save ok; buổi 1078/1158, 1357/1097 ms new/live under parallel load; core gates PASS) |
+Laws touched: 1/2/3 n/a (no choice changed); 4 ONE CORE PASS; 6 co-op state only; 9–12 no UI part changed (lock text = existing CTM_WAIT.coopLinking); 11 whole family: every lost-intent path (her reconnect, nohost, his reconnect, the level gap) now resends or locks.
+**Touched files vs main:** REVIEW r1 list + dev/build/jcoopthine.js (net resend her + his side) + dev/build/jcoopworld.js (gap lock / unbend) + dev/test/coop-thin-e-net.js (new) + dev/test/coop-cyc.js + dev/test/coop-thin-f1.js + index.html / sw.js / assets.json.
+FOR MAIN (via B): part E stall when either phone's socket dies silently (4G / sleep) was LIVE on main for every thin room; fixed here, ships with F1. Latency FOR MAIN line of REVIEW r1 still stands (owner call).
+Shots: none taken in r1 #3 (no UI change); nothing on the CDN.
