@@ -1049,3 +1049,4 @@ LESSONS s41: verify any worker art/asset count on the CDN before telling her (52
 - (18/11 02:05Z) OWNER ANGRY: option cards mixed forms in one dialog + title one word per line (KIT FIRST breach) → added to opt-card-short brief (same §6.2 kit part).
 - (18/11 02:06Z) cloth-xoc 504b228 (r6d mud per owner 02:40Z + wet r6c) SẴN SÀNG KIỂM; full-body panels uot/bun c01+c30 LOOKED → sent owner (Lượt 13); waiting her mud word, then SMALL review → land.
 - (18/11 02:07Z) OWNER UI BUG result card no reasons (OD ~09:03Z) → worker result-reason. C-AG #8: Thử tay preview = separate-origin Pages build of ag-all-2-land (her save untouched) → s42 said GO; land ETA 04:00–04:30Z.
+- (18/11 02:08Z) OWNER: wet FINAL; mud shift up one level (lv1=old lv2, lv2=old lv3, lv3 stronger) → cloth-xoc r6.
