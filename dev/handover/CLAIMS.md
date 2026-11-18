@@ -459,3 +459,4 @@ nam mẫu v2 (wider head/neck, height +7% approved) | claude/cung-tuong-mong-han
 | NPC-PURPOSE G3 (opus): witness/target picks + agent-layer dice → npcWit/npwPick | review/npc-purpose-g3 | C-AG #9 | session_01UV1SzjE9iRFchoQnRUZm9r | RUNNING | 18/11 04:18Z |
 | NPC-PURPOSE G1 #2 + integrator (opus; successor of SziWp3U) | review/npc-purpose | C-AG #9 | session_01UV1Szk6vemeEmLFXUGhr2b | RUNNING | 18/11 04:24Z |
 c12 a18 soft-smile fix, 9 approved figures (Round 40) | claude/cung-tuong-mong-handover-hj0h8w (art, _review CDN) | session_011xDdVRtgH56yp9P6XctSiU | RUNNING | 2026-11-18T04:26Z (Foreman C ROOT-16)
+c12 a18 Nữ đế with Emperor-style crown (miện, feminine) trial (Round 41) | claude/cung-tuong-mong-handover-hj0h8w (art, _review CDN) | session_011xDdVNQBvg9H3E3fUUWbZV | RUNNING | 2026-11-18T04:28Z (Foreman C ROOT-16)
