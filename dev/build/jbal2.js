@@ -1124,7 +1124,7 @@ Object.assign(BAL,{odb:{
  j68h:{odP:40,odP_2:50,odP_3:35,odP_4:40,odP_5:40},
  j7:{odO:35,odX:50,odO_2:40,odO_3:40,odX_2:45,odO_4:50,odO_5:40,odO_6:40,odO_7:30,odO_8:40,odO_9:35,odO_10:35,odO_11:35,odO_12:35,odO_13:30,odO_14:30,odO_15:45,odO_16:40},
  j71:{odP:35,odP2:30,odP_2:30,odP_3:30,odP_4:40,odP_5:55,odP_6:40,odP_7:70,odP_8:25,odP_9:20,odP_10:20,odP_11:50,odP_12:30,odP_13:30,odP_14:40,odP_15:25,odP_16:30},
- j72:{rbQ72Npc:30},
+
  j75:{odOP:40,rbFit:35,rbTop:10,rbTop_2:20},
  j77:{odAccLeadO:35},
  j78:{odTop:40},/* odO: Kể tội reads odO_18 through P3C.tell (merge r2 M1) */
@@ -1236,3 +1236,11 @@ Object.assign(BAL.ag.why,{dil:{gap:4,world:25,arsonBar:45,omenBar:40,coldFriend:
 Object.assign(BAL.ag.why,{ap:{max:2,fr:10,ally:40,gift:25,poor:40,sorry:20,th:10,poem:10,repay:40}});
 Object.assign(BAL.ag.why.cd,{apFriend:4,apTaunt:4,apSorry:8,empTea:3,thCall:4,svAsk:12,maidWarn:6,manPoem:4,svDefect:8,repay:2,svSell:12,svCause:8});
 Object.assign(BAL.ag.why.cd,{meHarm:6,meAlly:24,hhCane:8,hhMe:12,hhGreed:24,empAsk:24,coldAsk:12,loveFound:12,arson:24,rvHarm:6,rvFeud:6,omen:36});
+/* npc-purpose G1 part 4 (j68 life events, j72 favours; jagwhy1). e68: gap = tuần between two j68 events (≈ the old 25 %/tuần), visitGap = tuần between two
+   j68 visits that fill in when no stock visitor has a reason (old 15 % swap), greed = weight of a greedy servant as the thief. fav: aff = liking to ask / be asked,
+   max = favours a month (old 2 × 55 %), w = weight of each need, jobW = tuần an errand stays to do, thLow / th = cold vs warm Thái hậu regard, host = grudge
+   to want news, tai / taiB = weak art vs a teacher, home = Sủng under which she is homesick. job: th / aff = trust of the Thái hậu / Hoàng hậu, tai = gift for
+   the banquet. q72: gap = tuần between two requests to her (≈ the old 30 %/tuần), debt = weight per favour owed */
+Object.assign(BAL.ag.why,{e68:{gap:4,visitGap:6,greed:40},fav:{aff:10,max:2,jobW:4,thLow:20,th:40,host:40,tai:40,taiB:60,home:15,
+ w:{poor:60,ill:55,job:50,th:35,spy:40,preg:30,love:45,maid:25,art:20,home:25}},job:{th:20,aff:10,tai:60},q72:{gap:3,debt:10}});
+Object.assign(BAL.ag.why.cd,{npcFavor:6,ladyJob:12,q72Collect:4});

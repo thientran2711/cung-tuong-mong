@@ -1056,7 +1056,8 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "NPC asks NPC a favour; TH/HH errand to random consort",
-"fp": " for(let t=0;t<2;t++){if(!roll(Q72CFG.npc*100))continue;const a=pi"
+"fp": " for(let t=0;t<2;t++){if(!roll(Q72CFG.npc*100))continue;const a=pi",
+"done": "for(const o of npcWhyAll(\"npcFavor\",{L})"
 },
 {
 "f": "j72.js",
@@ -1064,7 +1065,8 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "NPC asks NPC a favour; TH/HH errand to random consort",
-"fp": "th.max(.1,10+aff(a,v)));let r=Math.random()*w.reduce((x,y)=>x+y),i=0;w"
+"fp": "th.max(.1,10+aff(a,v)));let r=Math.random()*w.reduce((x,y)=>x+y),i=0;w",
+"done": "for(const o of npcWhyAll(\"npcFavor\",{L})"
 },
 {
 "f": "j72.js",
@@ -1072,7 +1074,8 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "NPC asks NPC a favour; TH/HH errand to random consort",
-"fp": "  const what=pick(NPCQ72);const ok=roll(p);relAdd(a,b"
+"fp": "  const what=pick(NPCQ72);const ok=roll(p);relAdd(a,b",
+"done": "for(const o of npcWhyAll(\"npcFavor\",{L})"
 },
 {
 "f": "j72.js",
@@ -1080,7 +1083,8 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "NPC asks NPC a favour; TH/HH errand to random consort",
-"fp": " if(roll(35)){const v=pick(L.filter(x=>!x.qu"
+"fp": " if(roll(35)){const v=pick(L.filter(x=>!x.qu",
+"done": "for(const o of npcWhyAll(\"ladyJob\",{L}))"
 },
 {
 "f": "j72.js",
@@ -1088,7 +1092,8 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "NPC asks NPC a favour; TH/HH errand to random consort",
-"fp": ":\"Hoàng hậu\"} nhờ ${v.name} ${pick([\"chép kinh\",\"thêu bình phong\",\"lo "
+"fp": ":\"Hoàng hậu\"} nhờ ${v.name} ${pick([\"chép kinh\",\"thêu bình phong\",\"lo ",
+"done": "for(const o of npcWhyAll(\"ladyJob\",{L}))"
 },
 {
 "f": "j72.js",
@@ -1096,7 +1101,8 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "NPC asks NPC a favour; TH/HH errand to random consort",
-"fp": "  if(roll(BAL.odb.j72.rbQ72Npc+eyes(S)*5))ev+"
+"fp": "  if(roll(BAL.odb.j72.rbQ72Npc+eyes(S)*5))ev+",
+"done": "for(const o of npcWhyAll(\"ladyJob\",{L}))"
 },
 {
 "f": "j72.js",
@@ -1104,7 +1110,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "favour asked of her; debt collected",
-"fp": ".d){if(q.d[k]>=0)continue;if(!roll(25))continue;const [kind,...r]=k.sp"
+"fp": ".d){if(q.d[k]>=0)continue;if(!roll(25))continue;const [kind,...r]=k.sp",
+"done": "const o=npcWhy(\"q72Collect\",{C})"
 },
 {
 "f": "j72.js",
@@ -1112,7 +1119,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "favour asked of her; debt collected",
-"fp": " if(!roll(Q72CFG.p*100))return;"
+"fp": " if(!roll(Q72CFG.p*100))return;",
+"done": "const z=npwPick(L,y=>y[1]);if(!z)break;L.splice(L.indexOf(z),1);const x=q72Make(z[0],rq,place)"
 },
 {
 "f": "j72.js",
@@ -1120,7 +1128,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "favour asked of her; debt collected",
-"fp": " let x=null;if(S.tuan===1&&roll(40))x=q72Collect();if(!x)x=q72Choos"
+"fp": " let x=null;if(S.tuan===1&&roll(40))x=q72Collect();if(!x)x=q72Choos",
+"done": "const z=npwPick(L,y=>y[1]);if(!z)break;L.splice(L.indexOf(z),1);const x=q72Make(z[0],rq,place)"
 },
 {
 "f": "j75.js",
@@ -1640,7 +1649,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "weekly life event (visits, Emperor whims, servant events, rumours, kid",
-"fp": " if(evBusy()||!roll(E68CFG.p*100))return;const r=e68Fir"
+"fp": " if(evBusy()||!roll(E68CFG.p*100))return;const r=e68Fir",
+"done": "const r=e68Fire(null,L=>npwPick(L,x=>x[1]))"
 },
 {
 "f": "j68.js",
@@ -1648,7 +1658,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "weekly life event (visits, Emperor whims, servant events, rumours, kid",
-"fp": "if(e68On()&&!window.__e68off&&roll(E68CFG.swap*100)){const r=e68Fire(["
+"fp": "if(e68On()&&!window.__e68off&&roll(E68CFG.swap*100)){const r=e68Fire([",
+"done": "const r=e68Fire([\"visit\",\"day\",\"serv\",\"rumor\",\"kid\",\"emp\"],L=>npwPick(L,x=>x[1]))"
 },
 {
 "f": "j68.js",
@@ -1656,7 +1667,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "weekly life event (visits, Emperor whims, servant events, rumours, kid",
-"fp": "gth)return null;if(!wf)return pick(L).id;const w=L.map(v=>Math.max(.01"
+"fp": "gth)return null;if(!wf)return pick(L).id;const w=L.map(v=>Math.max(.01",
+"done": "const v=npwPick(L,v=>wf?Math.max(.01,wf(v))"
 },
 {
 "f": "j68e.js",
@@ -1664,7 +1676,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "servant gamble / hairpin thief; \"rỉ tai\"",
-"fp": "st a=sv6(s=>netIs(s,\"greed\")||R(3)===0);return a==null?null:{a0:a}},w:"
+"fp": "st a=sv6(s=>netIs(s,\"greed\")||R(3)===0);return a==null?null:{a0:a}},w:",
+"done": "const g=npwPick((S.staff||[]).filter(s=>s&&s.sid!=null),s=>(netIs(s,\"greed\")"
 },
 {
 "f": "j68f.js",
@@ -1672,7 +1685,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "servant gamble / hairpin thief; \"rỉ tai\"",
-"fp": ".length<3)return null;const T=shuf(L.slice()).slice(0,3);const g=T.fin"
+"fp": ".length<3)return null;const T=shuf(L.slice()).slice(0,3);const g=T.fin",
+"done": "const G=npwPick(L,s=>(netIs(s,\"greed\")"
 },
 {
 "f": "j68h.js",
@@ -1680,7 +1694,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "servant gamble / hairpin thief; \"rỉ tai\"",
-"fp": "filter(y=>aff(v,y)<0);const x=pick(hate.length?hate:L);ap(x,{danh:-1})"
+"fp": "filter(y=>aff(v,y)<0);const x=pick(hate.length?hate:L);ap(x,{danh:-1})",
+"done": "const x=npwPick(L,y=>Math.max(0,hostility(v,y)))"
 },
 {
 "f": "j40.js",

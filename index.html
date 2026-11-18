@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"c1453834+","t":"2026-11-18T04:35Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…","b":"5799de0b4354","h":[{"s":"bd8547f2+","t":"2026-11-18T03:28Z","c":"men-forbidden r6: old saves drop officials / festival princes standing in the hậu cung on load (menLoadFix, same ONE rule)"},{"s":"c743265c+","t":"2026-11-18T03:18Z","c":"review life-preload r6: title prefetch chained on undefined (lWant returns its promise); gate cap really 25 s (no re-run after cap / Vào cu…"},{"s":"2aca2aac+","t":"2026-11-18T03:17Z","c":"review cloth-tea-r6: kclo-on hides the picture by clip-path, not visibility (visibility:hidden made kfxGeom hide the cloth layer too: her f…"},{"s":"2b1b0701","t":"2026-11-18T03:00Z","c":"review staff-cap-apply r6: site rebuilt on db24027f"},{"s":"64488e4f+","t":"2026-11-18T02:38Z","c":"cloth-xoc r6e: rebuild site"},{"s":"af71f94a+","t":"2026-11-18T02:17Z","c":"smudge r16: stage4 + avatar probe tests, options script score fix (look tier by score), FINAL mode"},{"s":"e1f60927+","t":"2026-11-18T02:25Z","c":"result-reason: every result card line says a short why (kitWhy, KIT 7); values left-aligned next to labels"},{"s":"29385ec6+","t":"2026-11-18T02:07Z","c":"greet-stranger: site rebuilt"},{"s":"3b69182e","t":"2026-11-18T01:50Z","c":"hoa-dien r3 onto main 3da5720a (makeup-lux live): hoa-dien (jhd.js + hooks) replayed on the new main, replacing the old stacked branch. Sha…"},{"s":"631a703e","t":"2026-11-18T01:37Z","c":"review staff-cap-fix r6: hire pick refused at the cap gives the silver back (+ staff-cap.js case); site rebuilt"}]};
+window.CTM_BI={"s":"9bf916ae+","t":"2026-11-18T04:44Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…","b":"d9c998ef8699","h":[{"s":"bd8547f2+","t":"2026-11-18T03:28Z","c":"men-forbidden r6: old saves drop officials / festival princes standing in the hậu cung on load (menLoadFix, same ONE rule)"},{"s":"c743265c+","t":"2026-11-18T03:18Z","c":"review life-preload r6: title prefetch chained on undefined (lWant returns its promise); gate cap really 25 s (no re-run after cap / Vào cu…"},{"s":"2aca2aac+","t":"2026-11-18T03:17Z","c":"review cloth-tea-r6: kclo-on hides the picture by clip-path, not visibility (visibility:hidden made kfxGeom hide the cloth layer too: her f…"},{"s":"2b1b0701","t":"2026-11-18T03:00Z","c":"review staff-cap-apply r6: site rebuilt on db24027f"},{"s":"64488e4f+","t":"2026-11-18T02:38Z","c":"cloth-xoc r6e: rebuild site"},{"s":"af71f94a+","t":"2026-11-18T02:17Z","c":"smudge r16: stage4 + avatar probe tests, options script score fix (look tier by score), FINAL mode"},{"s":"e1f60927+","t":"2026-11-18T02:25Z","c":"result-reason: every result card line says a short why (kitWhy, KIT 7); values left-aligned next to labels"},{"s":"29385ec6+","t":"2026-11-18T02:07Z","c":"greet-stranger: site rebuilt"},{"s":"3b69182e","t":"2026-11-18T01:50Z","c":"hoa-dien r3 onto main 3da5720a (makeup-lux live): hoa-dien (jhd.js + hooks) replayed on the new main, replacing the old stacked branch. Sha…"},{"s":"631a703e","t":"2026-11-18T01:37Z","c":"review staff-cap-fix r6: hire pick refused at the cap gives the silver back (+ staff-cap.js case); site rebuilt"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -21073,7 +21073,7 @@ window.eg12=eg12;
    Anti-repetition: per-life cooldown per template and per variant; cross-life history in localStorage 'ctm-e68h' (last 6 lives) lowers the weight of what was seen.
    Hook for other storyline modules: e68Busy() is true if j68 fired a big beat this month; j68 honours storyBusy() if defined. */
 const E68=[],E68I={},Q68=[],Q68I={};
-const E68CFG={p:.25,swap:.15,cd:54};
+const E68CFG={cd:54}; /* npc-purpose: the weekly p / visit-swap rolls are gone: BAL.ag.why.e68.gap; a j68 visit only when no stock visitor has a reason */
 const G6=t=>`<span class="g">${t}</span>`,R6=t=>`<span class="r">${t}</span>`;
 function e68(){if(!S)return null;const e=S.e68=S.e68||{};e.cd=e.cd||{};e.vu=e.vu||{};e.fu=e.fu||[];e.q=e.q||[];e.qcd=e.qcd||{};e.ch=e.ch||{};e.n=e.n||0;e.qn=e.qn||0;e.cong=e.cong||0;e.qdone=e.qdone||0;e.qfail=e.qfail||0;e.npcq=e.npcq||[];
  if(!e.lid){e.lid=Date.now().toString(36)+R(1000);try{const H=JSON.parse(localStorage.getItem("ctm-e68h")||"{}");H.L=[[]].concat(H.L||[]).slice(0,6);H.cur=e.lid;localStorage.setItem("ctm-e68h",JSON.stringify(H))}catch(x){}}return e}
@@ -21087,8 +21087,8 @@ function e68On(){return !!(S&&!S.dead&&!S.out&&!(typeof isSrv==="function"&&isSr
 /* ---------- actors ---------- */
 const NM6=p=>p?p.name:"";
 function tr6(v){try{return traitsOf(v)}catch(x){return[v&&v.trait]}}
-function rv6(f,wf){const L=liveRivals(true).filter(v=>!v.confined&&(!f||f(v)));if(!L.length)return null;if(!wf)return pick(L).id;const w=L.map(v=>Math.max(.01,wf(v)));let r=Math.random()*w.reduce((a,b)=>a+b),i=0;while(r>w[i]&&i<L.length-1){r-=w[i];i++}return L[i].id}
-function sv6(f){const L=(S.staff||[]).filter(s=>s&&s.sid!=null&&(!f||f(s)));return L.length?pick(L).sid:null}
+function rv6(f,wf){const L=liveRivals(true).filter(v=>!v.confined&&(!f||f(v)));const v=npwPick(L,v=>wf?Math.max(.01,wf(v)):npwB().min+Math.abs(aff(v,S))+hostility(v,S)/2);return v?v.id:null} /* npc-purpose: the one whose tie / goal fits the template most (never a random consort) */
+function sv6(f,wf){const L=(S.staff||[]).filter(s=>s&&s.sid!=null&&(!f||f(s)));const s=npwPick(L,s=>wf?Math.max(.01,wf(s)):npwB().min+Math.abs((s.loyal||50)-50)+(netIs(s,"greed")?BAL.ag.why.e68.greed:0));return s?s.sid:null}
 function kid6(f){const L=(S.kids||[]).filter(k=>k.alive&&(!f||f(k)));return L.length?pick(L).name:null}
 function man6(rw){const L=(S.men||[]).filter(m=>m.alive!==false&&(!rw||m.rw===rw));return L.length?pick(L).id:null}
 function A6(kind,id){try{
@@ -21142,24 +21142,24 @@ function e68Cands(fams,big){const e=e68(),C=e68Ctx(),now=wk(),out=[];const story
  for(const s of E68){if(fams&&!fams.includes(s.fam))continue;if(s.fam==="plot"||s.fu)continue;if(big===false&&s.big)continue;if(s.big&&story)continue;
   const last=e.cd[s.id];if(last!=null&&now-last<(s.cd||E68CFG.cd))continue;let w=0;try{w=s.w?s.w(C):1}catch(x){w=0}if(!(w>0))continue;
   w*=Math.pow(.5,e68Past(s.id,true));out.push([s,w])}return out}
-function e68Pick(L){const t=L.reduce((a,x)=>a+x[1],0);let r=Math.random()*t,i=0;while(i<L.length-1&&r>L[i][1]){r-=L[i][1];i++}return L[i]}
+function e68Pick(L){return npwPick(L,x=>x[1])} /* npc-purpose: weighted among the situations that fit best (no flat draw) */
 /* params + a variant she has not seen lately (this life first, then the last five lives) */
 function e68Make(s){const e=e68();let p=null;try{p=s.pp?s.pp():{}}catch(x){p=null}if(!p)return null;const V=s.v||[""];
  let all=[...V.keys()];if(s.vf){let ok=null;try{ok=s.vf(p)}catch(x){}if(ok&&ok.length)all=all.filter(i=>ok.includes(i));else if(ok)return null}const used=e.vu[s.id]||[];let pool=all.filter(i=>!used.includes(i));if(!pool.length){pool=all.slice();e.vu[s.id]=(e.vu[s.id]||[]).filter(i=>!all.includes(i))}
  const fresh=pool.filter(i=>!e68Past(s.id+":"+i));p.vi=pick(fresh.length?fresh:pool);
  const d=mkP("e68"+s.id,p);if(!d)return null;e.cd[s.id]=wk();(e.vu[s.id]=e.vu[s.id]||[]).push(p.vi);e.n++;if(s.big)e.bigM=S.turn;e68Mark(s.id+":"+p.vi);return d}
-function e68Fire(fams){const L=e68Cands(fams);for(let t=0;t<4&&L.length;t++){const x=e68Pick(L);L.splice(L.indexOf(x),1);const d=e68Make(x[0]);if(d)return [d,x[0]]}return null}
+function e68Fire(fams,pk){const L=e68Cands(fams);for(let t=0;t<4&&L.length;t++){const x=(pk||e68Pick)(L);if(!x)break;L.splice(L.indexOf(x),1);const d=e68Make(x[0]);if(d)return [d,x[0]]}return null}
 function e68Push(d,s,front){const m={t:s.t||FAM6[s.fam]||"Chuyện trong cung",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp};if(front)Q.unshift(m);else Q.push(m);return m}
 /* follow-ups: a template flagged fu fires on its due tuần (params carried) */
 function fu6(id,dt,p){const e=e68();e.fu.push({id,at:wk()+dt,p:p||{}})}
 function e68FuTick(){const e=e68(),now=wk();for(const f of e.fu.slice()){if(f.at>now)continue;e.fu.splice(e.fu.indexOf(f),1);const s=E68I[f.id];if(!s)continue;const p=Object.assign({},f.p);if(p.vi==null)p.vi=R((s.v||[""]).length);const d=mkP("e68"+s.id,p);if(d){e68Push(d,s);return true}}return false}
 /* the stock visit is sometimes swapped for a j68 event (same number of modals) */
-(function(){const a0=approachOne;approachOne=function(){try{if(e68On()&&!window.__e68off&&roll(E68CFG.swap*100)){const r=e68Fire(["visit","day","serv","rumor","kid","emp"]);if(r){const[d,s]=r;return{t:s.t||FAM6[s.fam],h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp}}}}catch(x){console.error(x)}return a0.apply(this,arguments)}})();
+(function(){const a0=approachOne;approachOne=function(){const r0=a0.apply(this,arguments);if(r0)return r0;try{const e=e68();if(e68On()&&!window.__e68off&&e&&wk()>=(e.vx||0)){const r=e68Fire(["visit","day","serv","rumor","kid","emp"],L=>npwPick(L,x=>x[1]));if(r){e.vx=wk()+BAL.ag.why.e68.visitGap;const[d,s]=r;return{t:s.t||FAM6[s.fam],h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp}}}}catch(x){console.error(x)}return r0}})();
 /* the tuần tick */
 function e68Tick(){const e=e68();if(!e)return;e.tick=(e.tick||0)+1;let added=0;
  if(Q.length>2)return;
  try{if(e68FuTick()){evBusyMark();return}}catch(x){console.error(x)}
- if(evBusy()||!roll(E68CFG.p*100))return;const r=e68Fire(null);if(r){e68Push(r[0],r[1]);if(r[1].big)evBusyMark()}}
+ if(evBusy()||wk()<(e.nx||0))return;const r=e68Fire(null,L=>npwPick(L,x=>x[1]));if(r){e.nx=wk()+BAL.ag.why.e68.gap;e68Push(r[0],r[1]);if(r[1].big)evBusyMark()}}
 (function(){const e0=endTurn;endTurn=function(){const w0=S&&!S.dead?wk():null;const r=e0.apply(this,arguments);try{if(e68On()&&!window.__e68off&&w0!=null&&wk()!==w0){e68Tick();if(Q.length&&$("modal").hidden)showModal()}}catch(x){console.error(x)}return r}})();
 /* ---------- debugging / testing helpers (in-page) ---------- */
 window.e68Test=function(id,p){const s=E68I[id];if(!s)return null;const d=e68Make(s);if(d){e68Push(d,s,true).must=1;showModal()}return !!d};
@@ -21303,7 +21303,7 @@ EV6("flowerBloom","sea",{a:[],pp:()=>({}),w:C=>(C.sea==="Xuân"||C.sea==="Thu")?
  o:X=>[c6("Mời Hoàng thượng thưởng hoa",{p:od(BAL.odb.j68e.odP_12+S.sung/2+mm()),w:{sung:4},l:{danh:-1},lt:[R6("ngài bận, cả cung biết ngươi bị từ chối")]}),
   c6("Ngắt hoa dâng Thái hậu",{c:{suc:-2},w:{th:4},k:[R6("vườn trơ trụi, cung nhân tiếc")]}),
   c6("Mời các phi tần ngắm hoa",{c:{bac:-15},w:{danh:2},k:[R6(`người ghen thêm: phi tần ghen +${ghenN(BAL.ghen.flowerParty)}`)],ok:()=>{ghenAll(BAL.ghen.flowerParty);return "Buổi thưởng hoa vui vẻ, ai cũng khen cung ngươi."}})]});
-EV6("servGamble","serv",{a:["sv"],pp:()=>{const a=sv6(s=>netIs(s,"greed")||R(3)===0);return a==null?null:{a0:a}},w:C=>1,
+EV6("servGamble","serv",{a:["sv"],pp:()=>{const g=npwPick((S.staff||[]).filter(s=>s&&s.sid!=null),s=>(netIs(s,"greed")?BAL.ag.why.e68.greed:0)+Math.max(0,BAL.loy.bad-(s.loyal||50)));return g?{a0:g.sid}:null},w:C=>1,
  v:["{A} bị bắt quả tang đánh bạc với đám thái giám gác cổng, thua sạch tiền tháng.","Người ta đồn {A} mang đồ cũ của cung ngươi ra ngoài bán lấy tiền tiêu.","{A} nợ tiền một thái giám bên Ngự thiện phòng, hắn đến tận cửa đòi.","{A} lén nhận bạc của người lạ để chuyển thư ra ngoài cung."],
  o:X=>[c6("Trả nợ, răn đe",{c:{bac:-15},r:[[X.A,10]],k:[R6("dễ quen thói")]}),
   c6("Phạt theo phép cung",{w:{danh:1},r:[[X.A,-12]]}),
@@ -21501,7 +21501,7 @@ EV6("rumorEmpLove","rumor",{a:["rv"],pp:()=>{const a=rv6();return a==null?null:{
   c6("Lan thêm lời đồn",{p:od(BAL.odb.j68f.odP_18+S.tamco/3),wt:[G6(`${X.A.n} bị soi mói`)],w:{tamco:1},l:{danh:-3,duc:-2},lt:[R6("bị lần ra kẻ tung tin")],k:[R6(`Đức ${balSg(BAL.eff.j68f.ducOk_2)}`)],ok:()=>{apply({duc:BAL.eff.j68f.ducOk_2});X.A.o.danh=Math.max(0,(X.A.o.danh||20)-3);return `Lời đồn lan rộng; danh tiếng ${X.A.n} giảm.`}})]});
 /* ---------- CHUYỆN LẠ CẦN TRA (small mysteries; the culprit is real and fixed when the event fires) ---------- */
 const MYST6=["cây trâm hồ điệp bằng vàng","ấn tín nhỏ của cung","túi bạc tháng","phong thư nhà gửi","lọ thuốc an thần","chuỗi hạt trầm Thái hậu ban"];
-EV6("hairpinThief","myst",{a:["sv","sv","sv"],big:true,items:MYST6,pp:()=>{const L=(S.staff||[]).filter(s=>s.sid!=null);if(L.length<3)return null;const T=shuf(L.slice()).slice(0,3);const g=T.findIndex(s=>netIs(s,"greed"));return{a0:T[0].sid,a1:T[1].sid,a2:T[2].sid,g:g>=0&&roll(70)?g:R(3),it:R(MYST6.length)}},w:C=>hasStaff6(3)?1.4:0,
+EV6("hairpinThief","myst",{a:["sv","sv","sv"],big:true,items:MYST6,pp:()=>{const L=(S.staff||[]).filter(s=>s.sid!=null);if(L.length<3)return null;const G=npwPick(L,s=>(netIs(s,"greed")?BAL.ag.why.e68.greed:0)+Math.max(0,BAL.loy.mid-(s.loyal||50)));if(!G)return null;const T=shuf(L.filter(s=>s!==G)).slice(0,2);T.splice(R(3),0,G);return{a0:T[0].sid,a1:T[1].sid,a2:T[2].sid,g:T.indexOf(G),it:R(MYST6.length)}},w:C=>hasStaff6(3)?1.4:0,
  v:["Sáng ra, {it} trong tráp của ngươi biến mất. Đêm qua chỉ {A}, {B} và {C} ra vào buồng trong.","{it} mất ngay sau buổi dọn dẹp; ba người có mặt: {A}, {B}, {C}.","Tráp khóa còn nguyên mà {it} không thấy; chìa khóa chỉ {A}, {B} và {C} từng cầm.","Mất {it} giữa ban ngày. {M} nhớ lại chỉ {A}, {B}, {C} lui tới gần đó."],
  o:X=>{const G=[X.A,X.B,X.C][X.p.g];return[
   c6("Tra xét kỹ từng manh mối",{c:{suc:-6},p:od(BAL.odb.j68f.odP_19+S.tamco/3+eyes(S)*4),w:{tamco:1},wt:[G6("tìm ra kẻ lấy, lấy lại đồ")],r:[[G,-25]],l:{danh:-1},lt:[R6("không ra manh mối, đồ mất")],ok:()=>`Vết sáp nến trên tay áo và lời chứng của tiểu thái giám chỉ đúng ${G.n}; đồ tìm thấy dưới gối ${G.n}.`,no:()=>"Manh mối đứt, không ai bị buộc tội oan."}),
@@ -21659,7 +21659,7 @@ function fact6(x){if(!x)return null;const L=[];const kn=(x.kids||[]).filter(k=>k
 function factAny6(not){const L=liveRivals(true).filter(x=>x!==not);for(let i=0;i<6&&L.length;i++){const x=pick(L);const f=fact6(x);if(f)return f}return null}
 const G6set=(id,o)=>{const s=E68I[id];if(s)Object.assign(s,o)};
 /* --- stock sources --- */
-try{if(typeof SOC==="object"&&SOC.gossip)SOC.gossip.run=(v,t)=>{const L=liveRivals(true).filter(y=>y!==v);if(!L.length)return"";const hate=L.filter(y=>aff(v,y)<0);const x=pick(hate.length?hate:L);ap(x,{danh:-1});const f=fact6(x);
+try{if(typeof SOC==="object"&&SOC.gossip)SOC.gossip.run=(v,t)=>{const L=liveRivals(true).filter(y=>y!==v);if(!L.length)return"";const x=npwPick(L,y=>Math.max(0,hostility(v,y)))||npwPick(L,y=>Math.max(0,(y.sung||0)-(v.sung||0)));if(!x)return"";ap(x,{danh:-1});const f=fact6(x);
  return f?`${v.name} rỉ tai với cung nhân rằng ${f} (danh tiếng ${x.name} -1)`:`${v.name} nói xấu ${x.name} với cung nhân (danh tiếng ${x.name} -1)`}}catch(e){}
 (function(){const a0=approachOne;approachOne=function(){const r=a0.apply(this,arguments);try{if(r&&/sang chơi, kể chuyện trong cung\./.test(r.h||"")){const v=r.who&&r.who.w&&RV(r.who.w[1]);const f=factAny6(v);
   r.h=r.h.replace(/sang chơi, kể chuyện trong cung\./,f?`sang chơi, kể: ${f}. (Lời nàng kể; ngươi có thể tự dò cho chắc.)`:"sang chơi, kể chuyện ai đang được sủng.")}}catch(e){}return r}})();
@@ -22173,7 +22173,7 @@ function mgX7(big,f){return typeof mgWith==="function"?mgWith({occ:"hoi",big:!!b
    (who owes whom a favour, both ways: she can call a favour in, they can come to collect), rewards, risks (cấm túc, chứng cứ, can chính of j55).
    NPCs ask each other too (monthly). Cadence: ≤2 offers a month, ≤4 open quests; skips a tuần when evBusy()/storyBusy().
    Anti-repetition: a template once per life; templates seen in the last 5 lives are avoided (evHistSeen). Wraps only. ================= */
-const Q72CFG={mo:2,max:4,p:.30,npc:.55,cdAsk:3,cdCall:4};
+const Q72CFG={mo:2,max:4,cdAsk:3,cdCall:4}; /* npc-purpose: the weekly p / monthly npc rolls are gone (BAL.ag.why.q72.gap, npcFavor, ladyJob) */
 const T72=[],T72I={};
 const KIND72={craft:"Tìm vật, làm đồ",social:"Giao thiệp",inv:"Tra xét",pro:"Che chở",love:"Giúp duyên",trade:"Đổi ơn",risk:"Việc liều",court:"Việc triều",fam:"Việc nhà"};
 const G72=t=>`<span class="g">${t}</span>`,R72=t=>`<span class="r">${t}</span>`;
@@ -22293,7 +22293,7 @@ function q72Cands(place){const q=q72(),C=q72Ctx(),out=[];const act=new Set(q.a.m
   if(T.or&&!T.or.includes(C.or))continue;if(T.rk&&(S.rank<T.rk[0]||S.rank>T.rk[1]))continue;if(T.sea&&!T.sea.includes(C.sea))continue;
   const seen=evHistSeen("j72:"+T.id);w*=Math.pow(.12,seen);out.push([T,w,seen])}
  const fresh=out.filter(z=>!z[2]);return fresh.length>=3?fresh:out}
-function q72Choose(L,place,rq){L=L.slice();for(let t=0;t<30&&L.length;t++){const tot=L.reduce((a,z)=>a+z[1],0);let r=Math.random()*tot,i=0;while(i<L.length-1&&r>L[i][1]){r-=L[i][1];i++}const T=L[i][0];L.splice(i,1);const x=q72Make(T,rq,place);if(x)return x}return null}
+function q72Choose(L,place,rq){L=L.slice();for(let t=0;t<30&&L.length;t++){const z=npwPick(L,y=>y[1]);if(!z)break;L.splice(L.indexOf(z),1);const x=q72Make(z[0],rq,place);if(x)return x}return null}
 
 /* VOICE BY TÍNH TÌNH (W-C): the asker's own tone — a lead-in ("‹A› hấp tấp kéo ngươi lại, nói liền một hơi:") before her quoted request, and her reaction when a
    quest of hers ends with no line of its own written. Pools in jtone_c.js (TONE_POOL.askLead / askOk / askNo); only for a named woman who speaks (rv / hh / fallen / rsv) */
@@ -22381,21 +22381,21 @@ const NPCQ72=["chép hộ một quyển kinh","thêu hộ đôi gối","dò hộ
 const MN72=["giêng","hai","ba","tư","năm","sáu","bảy","tám","chín","mười","mười một","chạp"],YN72=["","nhất","hai","ba","tư","năm","sáu","bảy","tám","chín","mười"];
 function q72Date(){try{if(window.VP&&typeof VP.date==="function")return VP.date(S.month,S.year,S.tuan)}catch(e){}return `Tháng ${MN72[S.month-1]} · năm thứ ${YN72[S.year]||S.year}`}
 function q72Npc(){const q=q72();if(!q72On())return"";const L=liveRivals(true).filter(v=>!v.confined);if(L.length<2)return"";let ev="";
- for(let t=0;t<2;t++){if(!roll(Q72CFG.npc*100))continue;const a=pick(L);const others=L.filter(v=>v!==a);
-  const w=others.map(v=>Math.max(.1,10+aff(a,v)));let r=Math.random()*w.reduce((x,y)=>x+y),i=0;while(r>w[i]&&i<others.length-1){r-=w[i];i++}const b=others[i];
+ for(const o of npcWhyAll("npcFavor",{L}).sort((x,y)=>y.s-x.s).slice(0,BAL.ag.why.fav.max)){const a=o.who,b=o.tgt;
   const tr=(()=>{try{return traitsOf(b)}catch(e){return[b.trait]}})();const p=cl(40+aff(b,a)/2+(tr.includes("Ân cần")?20:0)+(tr.includes("Khiêm nhường")?10:0)-(tr.includes("Kiêu ngạo")?15:0)-(tr.includes("Xảo quyệt")?10:0),5,95);
-  const what=pick(NPCQ72);const ok=roll(p);relAdd(a,b,ok?BAL.eff.j72.q72Npc[0]:BAL.eff.j72.q72Npc[1]);const k=[a.id,b.id].join(">");q.nd=q.nd||{};if(ok)q.nd[k]=(q.nd[k]||0)+1;
+  const what=o.why;const ok=roll(p);relAdd(a,b,ok?BAL.eff.j72.q72Npc[0]:BAL.eff.j72.q72Npc[1]);const k=[a.id,b.id].join(">");q.nd=q.nd||{};if(ok)q.nd[k]=(q.nd[k]||0)+1;
   const txt=ok?`${a.name} nhờ ${b.name} ${what}; ${b.name} giúp, hai người thân hơn.`:`${a.name} nhờ ${b.name} ${what}; ${b.name} từ chối, hai người sinh hiềm khích.`;
   q.np.unshift({w:q72Date(),t:txt,a:a.id,b:b.id});if(q.np.length>8)q.np.length=8;try{const s=seenNPC(b,a,txt+" ");if(s)ev+=s}catch(e){}}
- /* Thái hậu / Hoàng hậu give errands to consorts too: the same favour for anyone who does it */
- if(roll(35)){const v=pick(L.filter(x=>!x.queen));if(v){const byTh=!S.thDead&&roll(60);const p=cl(45+(v.tai||40)/4,5,95);const ok=roll(p);
-  if(byTh){ap(v,{th:ok?3:-2})}else{const qn=queenP();if(qn&&qn!==S&&qn!==v)relAdd(qn,v,ok?BAL.eff.j72.q72Npc_2[0]:BAL.eff.j72.q72Npc_2[1])}
-  const txt=`${byTh?"Thái hậu":"Hoàng hậu"} nhờ ${v.name} ${pick(["chép kinh","thêu bình phong","lo việc yến","thăm người ốm"])}; ${ok?"nàng làm chu đáo, được khen":"nàng làm hỏng, bị chê"}.`;q.np.unshift({w:q72Date(),t:txt,a:v.id});if(q.np.length>8)q.np.length=8;
-  if(roll(BAL.odb.j72.rbQ72Npc+eyes(S)*5))ev+=txt+" "}}
+ /* Thái hậu / Hoàng hậu give errands to the consort they trust (npc-purpose ladyJob); she hears of it only through someone who tells her (npcTell) */
+ for(const o of npcWhyAll("ladyJob",{L})){const v=o.tgt,byTh=o.who===NPW1_TH;const p=cl(45+(v.tai||40)/4,5,95);const ok=roll(p);v.q72job=wk();
+  if(byTh){ap(v,{th:ok?3:-2})}else{relAdd(o.who,v,ok?BAL.eff.j72.q72Npc_2[0]:BAL.eff.j72.q72Npc_2[1])}
+  const txt=`${byTh?"Thái hậu":"Hoàng hậu"} tin cậy, nhờ ${v.name} ${o.why}; ${ok?"nàng làm chu đáo, được khen":"nàng làm hỏng, bị chê"}.`;q.np.unshift({w:q72Date(),t:txt,a:v.id});if(q.np.length>8)q.np.length=8;
+  if(npcTell(v,{place:whereOf(v)}))ev+=txt+" "}
  return ev}
 /* monthly: those she owes may come to collect (two-way) */
-function q72Collect(){const q=q72();for(const k in q.d){if(q.d[k]>=0)continue;if(!roll(25))continue;const [kind,...r]=k.split(":");const id=r.join(":");const a=q72A(kind,kind==="rv"||kind==="hh"||kind==="fallen"||kind==="sv"||kind==="rsv"?+id:id||undefined);if(!a)continue;
-  const L=q72Cands().filter(z=>{const sp=z[0].r;return (a.k==="rv"&&/^rv/.test(sp))||sp===a.k||(a.k==="man"&&sp==="man:"+a.o.rw)||(a.k==="off"&&sp==="off")||(a.k==="sv"&&/^sv/.test(sp))});const x=q72Choose(L,null,a);if(x){x.collect=1;return x}}return null}
+function q72Collect(){const q=q72();const C=[];for(const k in q.d){if(q.d[k]>=0)continue;const [kind,...r]=k.split(":");const id=r.join(":");const a=q72A(kind,kind==="rv"||kind==="hh"||kind==="fallen"||kind==="sv"||kind==="rsv"?+id:id||undefined);if(!a)continue;
+  const L=q72Cands().filter(z=>{const sp=z[0].r;return (a.k==="rv"&&/^rv/.test(sp))||sp===a.k||(a.k==="man"&&sp==="man:"+a.o.rw)||(a.k==="off"&&sp==="off")||(a.k==="sv"&&/^sv/.test(sp))});if(L.length)C.push({id:"q72:"+k,a,L,n:-q.d[k]})}
+ const o=npcWhy("q72Collect",{C});if(!o)return null;const x=q72Choose(o.who.L,null,o.who.a);if(x){x.collect=1;return x}return null}
 
 /* ---------- the tuần tick ---------- */
 function q72Tick(){const q=q72();if(!q)return;
@@ -22406,8 +22406,8 @@ function q72Tick(){const q=q72();if(!q)return;
  if(Q.length>3||!q72CanOffer())return;if(evBusy())return;
  /* due follow-ups first */
  const now=wk();const f=q.ch.find(c=>c.at<=now);if(f){q.ch.splice(q.ch.indexOf(f),1);const T=T72I[f.tid];const A=q72A(f.rk,f.ri);if(T&&A){const x=q72Make(T,A);if(x){if(f.p)x.p=Object.assign({},f.p,x.p);q72Offer(x,"fu");evBusyMark();return}}}
- if(!roll(Q72CFG.p*100))return;
- let x=null;if(S.tuan===1&&roll(40))x=q72Collect();if(!x)x=q72Choose(q72Cands());if(x){q72Offer(x,x.collect?"collect":"");evBusyMark()}}
+ if(wk()<(q.nx||0))return;
+ let x=null;if(S.tuan===1)x=q72Collect();if(!x)x=q72Choose(q72Cands());if(x){q.nx=wk()+BAL.ag.why.q72.gap;q72Offer(x,x.collect?"collect":"");evBusyMark()}}
 (function(){const e0=endTurn;endTurn=function(){const w0=S&&!S.dead?wk():null;const r=e0.apply(this,arguments);try{if(q72On()&&!q72Off()&&w0!=null&&wk()!==w0){q72Tick();if(Q.length&&$("modal").hidden)showModal()}}catch(x){console.error(x)}return r}})();
 
 /* ---------- the Việc nhờ tab (kit only: .ph header, pbtn, pager + pcard, chips, pcrow rows, logs) ---------- */
@@ -31207,7 +31207,7 @@ Object.assign(BAL,{odb:{
  j68h:{odP:40,odP_2:50,odP_3:35,odP_4:40,odP_5:40},
  j7:{odO:35,odX:50,odO_2:40,odO_3:40,odX_2:45,odO_4:50,odO_5:40,odO_6:40,odO_7:30,odO_8:40,odO_9:35,odO_10:35,odO_11:35,odO_12:35,odO_13:30,odO_14:30,odO_15:45,odO_16:40},
  j71:{odP:35,odP2:30,odP_2:30,odP_3:30,odP_4:40,odP_5:55,odP_6:40,odP_7:70,odP_8:25,odP_9:20,odP_10:20,odP_11:50,odP_12:30,odP_13:30,odP_14:40,odP_15:25,odP_16:30},
- j72:{rbQ72Npc:30},
+
  j75:{odOP:40,rbFit:35,rbTop:10,rbTop_2:20},
  j77:{odAccLeadO:35},
  j78:{odTop:40},/* odO: Kể tội reads odO_18 through P3C.tell (merge r2 M1) */
@@ -31319,6 +31319,14 @@ Object.assign(BAL.ag.why,{dil:{gap:4,world:25,arsonBar:45,omenBar:40,coldFriend:
 Object.assign(BAL.ag.why,{ap:{max:2,fr:10,ally:40,gift:25,poor:40,sorry:20,th:10,poem:10,repay:40}});
 Object.assign(BAL.ag.why.cd,{apFriend:4,apTaunt:4,apSorry:8,empTea:3,thCall:4,svAsk:12,maidWarn:6,manPoem:4,svDefect:8,repay:2,svSell:12,svCause:8});
 Object.assign(BAL.ag.why.cd,{meHarm:6,meAlly:24,hhCane:8,hhMe:12,hhGreed:24,empAsk:24,coldAsk:12,loveFound:12,arson:24,rvHarm:6,rvFeud:6,omen:36});
+/* npc-purpose G1 part 4 (j68 life events, j72 favours; jagwhy1). e68: gap = tuần between two j68 events (≈ the old 25 %/tuần), visitGap = tuần between two
+   j68 visits that fill in when no stock visitor has a reason (old 15 % swap), greed = weight of a greedy servant as the thief. fav: aff = liking to ask / be asked,
+   max = favours a month (old 2 × 55 %), w = weight of each need, jobW = tuần an errand stays to do, thLow / th = cold vs warm Thái hậu regard, host = grudge
+   to want news, tai / taiB = weak art vs a teacher, home = Sủng under which she is homesick. job: th / aff = trust of the Thái hậu / Hoàng hậu, tai = gift for
+   the banquet. q72: gap = tuần between two requests to her (≈ the old 30 %/tuần), debt = weight per favour owed */
+Object.assign(BAL.ag.why,{e68:{gap:4,visitGap:6,greed:40},fav:{aff:10,max:2,jobW:4,thLow:20,th:40,host:40,tai:40,taiB:60,home:15,
+ w:{poor:60,ill:55,job:50,th:35,spy:40,preg:30,love:45,maid:25,art:20,home:25}},job:{th:20,aff:10,tai:60},q72:{gap:3,debt:10}});
+Object.assign(BAL.ag.why.cd,{npcFavor:6,ladyJob:12,q72Collect:4});
 /* ================= jnwq: NO WORD GAMES, family C (owner 16/11 07:20Z + 07:25Z, s11, review/nw-quiz) =================
    The four vấn đáp / quiz kinds of the promotion exam (jexam EXK: le, tc, xa, thq) are now SKILL games of the same subject, winnable by what is SHOWN
    (same easy rules as mg-easy: Gợi ý button, first-time demo card, tier by level, wrong tries bounce back, quiet auto-hint when she stalls):
@@ -67518,6 +67526,26 @@ npwReg("svDefect",{grp:"srv",who:()=>{const L=[];for(const v of liveRivals(true)
 npwReg("repay",{grp:"consort",who:c=>c.v?[c.v]:[],why(v){return (v.bac||0)>=npw1B("ap").repay&&aff(v,S)>=0?{s:npwB().min,t:S,r:"giữ chữ tín"}:null}});
 npwReg("svSell",{grp:"srv",who:c=>c.g?[c.g]:[],why(g){let b=null;for(const v of liveRivals(true)){const o=npw1Mot(v,S,"spy");if(o&&(!b||o.s>b.s))b={s:npwB().min+(BAL.loy.out-(g.loyal||0)),t:v,r:"ôm hận ngươi phạt oan"}}return b}});
 npwReg("svCause",{grp:"srv",who:()=>(S.staff||[]).filter(s=>!s.cause),why(s){return {s:npwB().min,t:S,r:"tính nết"}}});
+/* ---- G1 part 4: life events (j68 actors / tick / visit swap, j68e/f/h) and favours (j72 NPC↔NPC, Thái hậu / Hoàng hậu errands, debts). BAL.ag.why.{e68,fav,job,q72} ----
+   npcFavor   a consort asks a friend (aff ≥ fav.aff) for help only with a NEED of her own (fav.w by need: short of silver, ill, an errand to do, cold
+              Thái hậu, a rival to watch, with child, a lover's letters, a maid's fault, a weak art, homesick when unfavoured); the helper fits the need
+   ladyJob    the Thái hậu / Hoàng hậu give an errand to the consort they trust (Thái hậu: regard ≥ job.th; Hoàng hậu: liking ≥ job.aff); the task
+              follows the palace (someone ill → visit her; a gifted one → the banquet; else copying sutras / embroidery)
+   q72Collect one she owes comes to collect when there is a matching need now (a valid request of that kind), the bigger the debt the sooner */
+function npw1Fr(a,L,f){return npwPick(L.filter(b=>b!==a&&aff(a,b)>=npw1B("fav").aff&&(!f||f(b))),b=>10+aff(a,b))}
+function npw1Need(a){const F=npw1B("fav"),W=F.w,O=[];const rv=liveRivals(true).filter(x=>x!==a);
+ if((a.bac||0)<npw1B("ap").poor)O.push([W.poor,3]);if(a.ill)O.push([W.ill,6]);if(a.q72job!=null&&wk()-a.q72job<=F.jobW)O.push([W.job,0]);
+ if((a.th||0)<F.thLow)O.push([W.th,4,b=>(b.th||0)>=F.th]);
+ let foe=null,h=0;for(const x of rv){const y=hostility(a,x);if(y>h){h=y;foe=x}}if(foe&&h>=F.host)O.push([W.spy,2,b=>b!==foe&&aff(b,foe)<F.aff]);
+ if(a.preg)O.push([W.preg,1]);if(a.affair)O.push([W.love,5]);if((a.staff||[]).some(s=>(s.loyal||50)<BAL.loy.bad))O.push([W.maid,9]);
+ if((a.tai||0)<F.tai)O.push([W.art,7,b=>(b.tai||0)>=F.taiB]);if((a.sung||0)<F.home)O.push([W.home,8]);return O.sort((x,y)=>y[0]-x[0])}
+npwReg("npcFavor",{grp:"consort",who:c=>c.L,why(a,c){for(const n of npw1Need(a)){const b=npw1Fr(a,c.L,n[2]);if(b)return {s:n[0],t:b,r:NPCQ72[n[1]]}}return null}});
+function npw1Job(lady,v){const J=npw1B("job");if(liveRivals(true).some(x=>x!==v&&x.ill))return "thăm người ốm";if((v.tai||0)>=J.tai)return "lo việc yến";return lady===NPW1_TH?"chép kinh":"thêu bình phong"}
+npwReg("ladyJob",{grp:"lady",who:()=>{const L=[];if(!S.thDead)L.push(NPW1_TH);const q=typeof queenP==="function"?queenP():null;if(q&&q!==S)L.push(q);return L},
+ why(lady,c){const J=npw1B("job");const L=c.L.filter(v=>!v.queen&&v!==lady);
+  const v=lady===NPW1_TH?npwPick(L.filter(v=>(v.th||0)>=J.th),v=>v.th):npwPick(L.filter(v=>aff(lady,v)>=J.aff),v=>aff(lady,v));
+  return v?{s:npwB().min+(lady===NPW1_TH?v.th:aff(lady,v))/2,t:v,r:npw1Job(lady,v)}:null}});
+npwReg("q72Collect",{grp:"debt",who:c=>c.C,why(c){return {s:npwB().min+c.n*npw1B("q72").debt,r:"cần đến ân tình ngươi còn nợ"}}});
 /* jmgcal — OWNER-ONLY MINIGAME CALIBRATION (AG-ALL-2d2; owner OD 17/11 ~16:20Z (f) + ~16:40Z option 1, verbatim key words:
    "cần cho tôi một cái bài test để tôi chơi thử ... mỗi một cái mini game ... 3 vòng hoặc là 5 vòng ... mỗi một vòng là mỗi cái khó hơn ... chỉ có cái tài
    khoản của tôi là mới test kiểu này thôi ... bất kỳ người nào chơi thì người đó cũng sẽ đi chơi theo cái con số của tôi" / "chỉ có tôi test và cái số
@@ -71077,7 +71105,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="5799de0b4354";window.CTM_BUILD=BUILD;
+const BUILD="d9c998ef8699";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

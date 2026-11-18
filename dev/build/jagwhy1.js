@@ -82,3 +82,23 @@ npwReg("svDefect",{grp:"srv",who:()=>{const L=[];for(const v of liveRivals(true)
 npwReg("repay",{grp:"consort",who:c=>c.v?[c.v]:[],why(v){return (v.bac||0)>=npw1B("ap").repay&&aff(v,S)>=0?{s:npwB().min,t:S,r:"giữ chữ tín"}:null}});
 npwReg("svSell",{grp:"srv",who:c=>c.g?[c.g]:[],why(g){let b=null;for(const v of liveRivals(true)){const o=npw1Mot(v,S,"spy");if(o&&(!b||o.s>b.s))b={s:npwB().min+(BAL.loy.out-(g.loyal||0)),t:v,r:"ôm hận ngươi phạt oan"}}return b}});
 npwReg("svCause",{grp:"srv",who:()=>(S.staff||[]).filter(s=>!s.cause),why(s){return {s:npwB().min,t:S,r:"tính nết"}}});
+/* ---- G1 part 4: life events (j68 actors / tick / visit swap, j68e/f/h) and favours (j72 NPC↔NPC, Thái hậu / Hoàng hậu errands, debts). BAL.ag.why.{e68,fav,job,q72} ----
+   npcFavor   a consort asks a friend (aff ≥ fav.aff) for help only with a NEED of her own (fav.w by need: short of silver, ill, an errand to do, cold
+              Thái hậu, a rival to watch, with child, a lover's letters, a maid's fault, a weak art, homesick when unfavoured); the helper fits the need
+   ladyJob    the Thái hậu / Hoàng hậu give an errand to the consort they trust (Thái hậu: regard ≥ job.th; Hoàng hậu: liking ≥ job.aff); the task
+              follows the palace (someone ill → visit her; a gifted one → the banquet; else copying sutras / embroidery)
+   q72Collect one she owes comes to collect when there is a matching need now (a valid request of that kind), the bigger the debt the sooner */
+function npw1Fr(a,L,f){return npwPick(L.filter(b=>b!==a&&aff(a,b)>=npw1B("fav").aff&&(!f||f(b))),b=>10+aff(a,b))}
+function npw1Need(a){const F=npw1B("fav"),W=F.w,O=[];const rv=liveRivals(true).filter(x=>x!==a);
+ if((a.bac||0)<npw1B("ap").poor)O.push([W.poor,3]);if(a.ill)O.push([W.ill,6]);if(a.q72job!=null&&wk()-a.q72job<=F.jobW)O.push([W.job,0]);
+ if((a.th||0)<F.thLow)O.push([W.th,4,b=>(b.th||0)>=F.th]);
+ let foe=null,h=0;for(const x of rv){const y=hostility(a,x);if(y>h){h=y;foe=x}}if(foe&&h>=F.host)O.push([W.spy,2,b=>b!==foe&&aff(b,foe)<F.aff]);
+ if(a.preg)O.push([W.preg,1]);if(a.affair)O.push([W.love,5]);if((a.staff||[]).some(s=>(s.loyal||50)<BAL.loy.bad))O.push([W.maid,9]);
+ if((a.tai||0)<F.tai)O.push([W.art,7,b=>(b.tai||0)>=F.taiB]);if((a.sung||0)<F.home)O.push([W.home,8]);return O.sort((x,y)=>y[0]-x[0])}
+npwReg("npcFavor",{grp:"consort",who:c=>c.L,why(a,c){for(const n of npw1Need(a)){const b=npw1Fr(a,c.L,n[2]);if(b)return {s:n[0],t:b,r:NPCQ72[n[1]]}}return null}});
+function npw1Job(lady,v){const J=npw1B("job");if(liveRivals(true).some(x=>x!==v&&x.ill))return "thăm người ốm";if((v.tai||0)>=J.tai)return "lo việc yến";return lady===NPW1_TH?"chép kinh":"thêu bình phong"}
+npwReg("ladyJob",{grp:"lady",who:()=>{const L=[];if(!S.thDead)L.push(NPW1_TH);const q=typeof queenP==="function"?queenP():null;if(q&&q!==S)L.push(q);return L},
+ why(lady,c){const J=npw1B("job");const L=c.L.filter(v=>!v.queen&&v!==lady);
+  const v=lady===NPW1_TH?npwPick(L.filter(v=>(v.th||0)>=J.th),v=>v.th):npwPick(L.filter(v=>aff(lady,v)>=J.aff),v=>aff(lady,v));
+  return v?{s:npwB().min+(lady===NPW1_TH?v.th:aff(lady,v))/2,t:v,r:npw1Job(lady,v)}:null}});
+npwReg("q72Collect",{grp:"debt",who:c=>c.C,why(c){return {s:npwB().min+c.n*npw1B("q72").debt,r:"cần đến ân tình ngươi còn nợ"}}});
