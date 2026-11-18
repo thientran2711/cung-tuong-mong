@@ -42,8 +42,8 @@ PROMPT: `build.py c13|c16 v0 --state kc|ngheo --spec5pose` pasted UNCHANGED; ONL
 | c16 kc | embroidery hoop with half-finished flower | small woven flower basket lined with silk (kc #6) |
 | c13 ngheo | embroidered handkerchief | small woven bamboo basket with a few wild flowers (ngheo #1) |
 | c16 ngheo | embroidered handkerchief | plain bamboo-leaf fan (ngheo #9) |
-REFS (2, A0 non-royal): (1) her own t1 a18 figure (img/hd/fig-consort-cNN-t1-a18.webp, uploaded as face-cNN-t1.webp) = face only; (2) style m09 eIyOFEidqL. No live kc/ngheo image, no --nostyle.
-GEN: gpt-2-6, 1024x2304, 2k, count 1, folder ba4aecfe…, extraSettings transparentBackground true. Gens: 4 (1 each, none regenerated). c13 kc came back with a baked smoky backdrop (alpha 6..252) → cut out with images_remove_background (alpha 0..255); the other 3 had real alpha at gen (0..254).
+REFS (2, A0 non-royal; updated per ROOT-33 23:45Z change, FIGURE_GATE a3d2b08): (1) STYLE = style3_girls Xm9tPkMBfo (m09 + c06 + c25); (2) her own t1 a18 figure (uploaded as face-cNN-t1.webp) = face only. No live kc/ngheo image, no --nostyle. (First round used m09 eIyOFEidqL alone; discarded and overwritten on the CDN.)
+GEN: gpt-2-6, 1024x2304, 2k, count 1, folder ba4aecfe…, extraSettings transparentBackground true. Gens: 8 total = 4 (m09-only, superseded) + 4 final with style3_girls (1 each, none regenerated for quality). Final set: c13 kc + c13 ngheo transparent at gen (alpha 0..254); c16 kc + c16 ngheo had a smoky halo left from gen → cut out with images_remove_background (alpha 0..255, checked on a dark background).
 LOOKED AT all 4: nhà nghèo reads poor (cotton jacket, linen apron, wooden/simple pins, no gold/jade/necklace) but neat and pretty; khuê các refined home wear, jade bracelet + small pearl earrings only, no gold; closed-lip smile no teeth; bare forehead; item below chin, face clear; items contrast with robes; frontal/three-quarter.
 CDN: https://ctm-img.victoria-tntt.workers.dev/img/_review/kc2k/ — cNN_a18_kc_new.png, cNN_a18_ngheo_new.png (c13, c16), sheet_c13_new.jpg, sheet_c16_new.jpg (old 2K | new kc, old 2K | new ngheo).
 K4 HANDOVER: done; nothing pending.
