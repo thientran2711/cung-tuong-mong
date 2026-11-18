@@ -1,8 +1,0 @@
-[0s] boot http://127.0.0.1:37277/_old.html
-[2s] ready
-[3s] old saved keys hclh-slot:1,hclh-h2c:1,cung-colms:110,hclh-save-v2-3:71265,hclh-save-v2-1:52755,ctm-e68h:33
-[3s] boot http://127.0.0.1:37277/_aa.html
-[4s] ready
-[4s] old loaded {"ok":true,"turn":0,"rank":0}
-[5s] rules done
-[5s] core done []

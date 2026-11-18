@@ -1,4 +1,0 @@
-# REVIEW face-zoom-stretch 717c0c0 (SMALL UI, kit part) — sonnet reviewer
-READ: dev/handover/briefs/root45-common.md + dev/rules/START_REVIEWER.md, brief briefs/face-zoom-stretch.md, report dev/handover/reports/face-zoom-stretch.md, KIT §60.
-NOTE: main already pushed the corrected img/toil-fit2.json live (18/11 ~05:45Z; v[8] fixed for 2062 fig rows).
-CHECK: review/face-zoom-stretch 717c0c0 is a fast-forward of live main a95e8d4 (else FAIL rebase); fix is in the kit part (kitFaceZoom / reveal piece), whole group of callers; picture aspect within 1 % at 755x1000, 1180x820, 1366x1024, 390x844 (412x1058 shows the rotate prompt — skip); face layers (makeup / marks) still on the face; quickcheck + old-save load + one-core guard; LOOK the before/after shots img/_review/face-zoom-stretch/. Verdict → dev/handover/reports/review-face-zoom-stretch.md + send_message "PASS 717c0c0" / "FAIL …" to MAIN ROOT-45; wipe img/_review/face-zoom-stretch after PASS.

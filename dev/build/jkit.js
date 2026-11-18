@@ -1,4 +1,0 @@
-/* ================= ONE ACT CARD SIZE: every act card the same width and height at each breakpoint; long text clamps, ⓘ opens the full card ================= */
-(function(){const ch=cardH;cardH=function(a,i){let h=ch(a,i);return h.replace(/<\/button>\s*$/,`<span class="kinfo" role="button" tabindex="0" data-kinfo="${i}" aria-label="Xem đủ thẻ" title="Xem đủ">ⓘ</span></button>`)}})();
-document.addEventListener("click",e=>{const k=e.target.closest("[data-kinfo]");if(!k)return;e.stopPropagation();e.preventDefault();try{const a=deck[+k.dataset.kinfo];if(!a)return;const full=cardH(a,+k.dataset.kinfo).replace(/^<button[^>]*>/,"").replace(/<\/button>\s*$/,"").replace(/<span class="kinfo"[^>]*>ⓘ<\/span>/,"");
- Q.unshift({t:a.n,h:`<div class="kfull">${full}</div>`});showModal()}catch(err){}},true);

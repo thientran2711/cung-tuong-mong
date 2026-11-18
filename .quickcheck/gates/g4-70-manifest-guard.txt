@@ -1,1 +1,0 @@
-MANIFEST GUARD PASS (live manifests >= floor, every listed file on the CDN)

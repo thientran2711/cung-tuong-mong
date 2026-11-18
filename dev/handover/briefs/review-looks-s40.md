@@ -1,9 +1,0 @@
-PRIORITY #1 CHECK ('toil-looks5 tuyet-glow'): OD 0 | ledger 0 | claims 0 | main 0 | review/* review/toil-looks5 c52cb985, review/tuyet-glow 7e80f3cd | claims MAIN s39/s40 workers SzhA7ot, SzjKnHb
-# REVIEW looks-s40 (sonnet SMALL, UI/art) — opened by MAIN s40
-Read dev/handover/briefs/s40-common.md first (laws, report, rollover).
-WHAT: one SMALL review over two owner-approved look branches, landed together:
-1. review/toil-looks5 c52cb985 — makeup levels (BAL.toil.level {dep .6, tuyet .8}, owner pick 00:13Z "60% kiều diễm là 80% khuynh thành"), blush BAL.toil.blush, warm TOIL_COL = "Cam ánh đỏ" (owner 00:08Z). Report reports/toil-looks5.md v24.
-2. review/tuyet-glow 7e80f3cd — Khuynh thành glow v7 (whole face incl. chin, ~7 stars/burst, never lips; OD ~23:20Z + 23:40Z). Built on toil-looks5 2712920c (older) → merge onto c52cb985.
-STEPS: build branch review/looks-s40 = latest origin/main + toil-looks5 c52cb985 + tuyet-glow 7e80f3cd (resolve conflicts; if review/makeup-lux-r2v 0e6489f6 has reached main, follow the jtoil conflict recipe in reports/review-makeup-lux.md §r2). Rebuild generated files via assemble.py / build_site.sh, never hand-merge generated output.
-CHECK: quickcheck PASS; toil tests + one-core guard; old-save load; Fold 755x1000@2 + iPad 1180x820@2 room/face shots of Đoan trang 60 / Kiều diễm 60 / Khuynh thành 80, warm set and default pink set; LOOK at each: lips ON the mouth (use the dev/art/mkfit table from toil-looks5 — note live CDN img/mk-fit is the OLD table; your shots must load the branch table), glow never on lips, no colour leak outside the face. Kit: no new private UI. Perf: glow must not add >10 % to room render vs live.
-OUTPUT: PASS/FAIL sha of review/looks-s40, report reports/review-looks-s40.md, list of mkfit JSON files that must go to CDN img/mk-fit/ in the same landing (exact paths + count). Then send_message MAIN s40 one line.

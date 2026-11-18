@@ -1,2 +1,0 @@
-# reign-road — PASS 0a311183f6 (review/reign-road-r1, parent = main a363cc14a6, fast-forwardable now). Emperor side story + factions + Tâm nguyện. Reviewer fixes: Hoàng thượng-side win = immediate EXAM (exGrace), not a free rank; court stops after the Emperor dies or during succession; kit templates 87/87. Balance 48/56/61 per side.
-- Notes: dialogs where the speaker is her own figure leave an empty left column (game-wide); the Đổi phe picture is the banquet scene (chapter art is a follow-up for Foreman D).

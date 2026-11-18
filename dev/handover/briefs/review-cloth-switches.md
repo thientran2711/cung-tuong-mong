@@ -1,4 +1,0 @@
-# REVIEW cloth-tea 7b23023d = per-kind switches ON (sonnet SMALL) — MAIN s43
-PRIORITY #1 CHECK ('stain.on|xoc.on|BAL.looks.stain'): OD owner approved WET (≈09:05Z owner clock) + MUD (≈09:15Z) | main 95d5f767 cloth-xoc r6 ships OFF | review/cloth-tea 7b23023d | claims MAIN s43 SzghNEr.
-READ: briefs/s43-common.md + START_REVIEWER.md; reports/cloth-xoc.md r6h + r6h-2; reports/review-cloth-xoc.md.
-CHECK: BAL.looks.stain.on {uot:1,bun:1,tra:0} + xoc.on=1 is the ONLY gate (one core; tra truly never draws); wet/mud/xốc appear in game on the approved levels (c01 + c30 + 2 other costumes, Fold 755x1000 + iPad 1180x820 FULL SCREEN in mirror + stage + Dư đồ figure), never on face/neck/hands, perf vs main (cloth canvas cost), old save, quickcheck, co-op guest sees the same. FF of live main (merge + regate if main moved). Report reports/review-cloth-switches.md; MAIN "PASS <sha>" / "FAIL <list>".

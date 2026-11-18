@@ -1,4 +1,0 @@
-# REVIEW smudge-code r16 50939b0 (sonnet, SMALL: look code) — MAIN s42
-PRIORITY #1 CHECK ('smudge|smuFx|tear.dark|lem'): OD 18/11 ~01:23Z + ~02:05Z (+20 % FINAL) | main smudge code live (looks batch) | review/smudge-code-r16 50939b0 (old review/smudge-code obsolete) | claims MAIN smudge r16 SzhMG33.
-READ: briefs/s42-common.md + START_REVIEWER.md; reports/smudge-code.md; OD lines above VERBATIM.
-CHECK: BAL smuFx.tear.dark 1.2 only source; nặng has the extra short grey run; big sizes darker; no pale streaks/pink stripes (zoom 3×) at stage (LOD step 2–3) and mirror (step 0) on Fold 755x1000 + iPad 1180x820; blush/lip smear unchanged 20 %; perf (quickcheck render/tab/buổi numbers vs main); old-save load; one-core. Must be FF of live main f986ff6a (merge + re-gate). Report reports/review-smudge-r16.md; MAIN "PASS <sha>" / "FAIL <list>".

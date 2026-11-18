@@ -1,1 +1,0 @@
-# book-fig — PASS 251d62276 (review/book-fig-r1, base 63cf7b12a; cherry-picked). Book figures and silhouettes share one body height and foot line; kfa shadow. Needs a re-merge onto main. Pre-existing: book-figwide fails at 844x390 on main too (narrow text column) → UI task.

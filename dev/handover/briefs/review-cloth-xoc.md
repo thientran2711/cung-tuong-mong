@@ -1,4 +1,0 @@
-# REVIEW cloth-xoc 7270a76 (sonnet, SMALL: look/art code) — MAIN s42
-PRIORITY #1 CHECK ('cloth-xoc|jcloth|stain|wet|mud'): OD 18/11 ~09:05Z (wet FINAL) + ~09:15Z (mud APPROVED) owner clock | main jcloth.js (crease live) | review/cloth-xoc 7270a76 | claims MAIN cloth-xoc r6 SzjMK4R.
-READ: briefs/s42-common.md + START_REVIEWER.md; reports/cloth-xoc.md (r6c–r6e); the OD lines above VERBATIM.
-CHECK: the panels the owner approved (CDN img/_review/cloth-xoc/full-uot-*, full-bun-*) = what the game draws in situ (stage, mirror, dialogs) on Fold 755x1000 + iPad 1180x820; no lighter-than-dry pixels, no grey blotches, no speckle, nothing on skin/neck/hands; LOD/perf (render time per figure, memory of decal mips) on Fold; old-save load; quickcheck; one-core (levels from BAL). Must be FF of live main f986ff6a (merge + re-gate if not). Report reports/review-cloth-xoc.md; MAIN "PASS <sha>" / "FAIL <list>".

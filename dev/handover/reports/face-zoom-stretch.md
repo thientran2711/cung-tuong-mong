@@ -1,8 +1,0 @@
-# face-zoom-stretch report (worker, branch review/face-zoom-stretch, sha 717c0c0)
-PRIORITY #1 CHECK: OD 18/11 05:25Z (bug new); main jtoil.js kitFaceZoom §60 + toilReveal; review/* none; claims none.
-ROOT CAUSE: toil-fit2.json row aspect v[8] is stale for 2053 of 6463 fig-*.webp (32 %, real h/w vs v[8] from 0.58x to 2.49x; por-* all fine). kitFaceZoom forced the img into a box height = zw*v[8] (img 100x100 %) so a wrong v[8] stretched the picture; toilReveal sized the portrait patch (.ktrv-pw) height from v[8] while the figure box followed the real picture -> patch squashed/stretched sideways (owner's iPad shot).
-FIX (jtoil.js, KIT part only): KIT_PICAR cache of real aspect (document load listener + kitPicArLoad), toilRow() returns the row with true v[8]; kitFaceZoom: img width 100 % height auto, top 60 % + translateY(-v1 %) (no aspect needed); toilReveal waits (<=2.5 s) for real aspects of fig + portrait; makeup SVG key includes aspect.
-SCAN (dev/test/face-zoom-aspect.js, 50 pictures kitFaceZoom + reveal; ratio rendered/file aspect, must be 1 +-1 %): before kitFaceZoom 36/50 ok worst 0.82..1.43 at every viewport; after 50/50 (1.00). Reveal portrait patch before 0.998/0.891/1.002/0.838/0.731 (Fold/iPad/1366/412/390), after 0.998/0.997/0.997/1.000/0.997. Errors 0.
-SHOTS: reveal Dep look iPad looked at (natural proportions, makeup on face); kitFaceZoom before/after c01-t1/ngheo/t4 looked. Not uploaded (scratch /home/user/wt/fzs-shots).
-QUICKCHECK PASS.
-FOLLOW-UP (not done, needs CDN write): refresh v[8] of 2053 rows in img/toil-fit2.json from real file dims (dims list reproducible: Range 0-40 webp header). Residual: makeup SVG blush shape uses v[8] until a picture has loaded once.

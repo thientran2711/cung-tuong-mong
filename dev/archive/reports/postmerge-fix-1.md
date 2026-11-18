@@ -1,4 +1,0 @@
-# postmerge-fix-1 — DONE (relayed by session 8). Branch review/postmerge-fix-1 (needs a reviewer + re-merge).
-- Full regression on main 4f5e5f3b3: NO game bug found (coop-timer 43/43, coop-e2e 59/59, stage-fig-size, stage-slots, panel-size, rank-colour, thaiy, month-cal, promo-rules, cardflip, stat-fx, buoi-transition, gift-pick, real act, old save, rotate).
-- Owner add-on: the buổi tint is removed (0a93563139 + 8c7f781bc2): j12 lightTick draws no per-buổi wash, the jsl b4Light override and KIT_SCENE_TINT are gone; weather washes kept. All 12 scenes have full 4 seasons × 4 buổi in SCN_VAR (the CDN files not checked one by one). Ngọc Thanh các was not tinted on main; the brown look came from the painting itself or an older build.
-- New test case: panel-size.js kpshort centring (eec501086c).

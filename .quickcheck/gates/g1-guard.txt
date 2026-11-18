@@ -1,2 +1,0 @@
-{"modules":333,"inlineNow":4211,"baseline":4212,"balKeys":342,"fails":0}
-PASS: one core (no second value, no typed core text, no new inline rule number)

@@ -1,2 +1,0 @@
-{"DIFF":0,"TYPED":0,"frozen":0,"per":{}}
-PASS: every help / gloss / tip / card threshold matches a rule cut and prints its key

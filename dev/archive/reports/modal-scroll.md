@@ -1,1 +1,0 @@
-# modal-scroll — PASS f6cddf761d (review/modal-scroll-r1, base eba64ead4). NOT fast-forwarded: main moved to a363cc14a. LIVE BUG (owner cannot swipe the Học Cầm picker) → merge onto main first. 0 STUCK at 5 sizes; panel-size ok (btnOut PEND:plantpick pre-existing).
