@@ -75,7 +75,7 @@ const HTML=process.argv[2]||'dev/index.html';const res=[];const ok=(c,m,x)=>{res
   /* Xin son phấn (cx4:rougeBeg): she as the Hoàng hậu gets the card; Mượn son phấn (cx4:rougeBorrow): the NPC lender answers through rcvOddsPick */
   {const rk1=S.rank;S.rank=7;Q.length=0;const g=V.find(z=>!z.queen)||a;g.inv=[];g.lxBeg={};let r0="";try{r0=AGRUN["cx4:rougeBeg"](g,null,{k:"cx4:rougeBeg",vid:g.id,id:"v"+g.id,key:"rc"})}catch(e){r0="ERR "+e.message}
    out.beg={q:Q.map(m=>(m.opts||[]).map(o=>o.n+" | "+o.x)),r:String(r0).slice(0,80),miss:lxMiss(g).length};Q.length=0;S.rank=rk1;
-   const BR={};for(let i=0;i<80;i++){a.inv=[];window.__rcvN={};try{AGRUN["cx4:rougeBorrow"](a,null,{k:"cx4:rougeBorrow",vid:a.id,id:"v"+a.id,key:"rc"})}catch(e){}const id=Object.keys(window.__rcvN).find(z=>/rougeBorrow/.test(z))||"?";BR[id]=(BR[id]||0)+1}out.borrow=BR}
+   const BR={};const ln=V.find(z=>z!==a&&!z.coop);for(let i=0;i<80;i++){a.inv=[];const M=lxMiss(a);if(M.length&&ln){ln.inv=(ln.inv||[]).filter(e=>!/^lx/.test(String(e.k)));ln.inv.push({k:lxKey(M[0],3),d:S.turn});try{lxFix(ln)}catch(e){}}window.__rcvN={};try{AGRUN["cx4:rougeBorrow"](a,null,{k:"cx4:rougeBorrow",vid:a.id,id:"v"+a.id,key:"rc"})}catch(e){}const id=Object.keys(window.__rcvN).find(z=>/rougeBorrow/.test(z))||"?";BR[id]=(BR[id]||0)+1}out.borrow=BR}
   out.oneCore={kw:BAL.rcv.kw===undefined,w:/stf2BribeW/.test(rcvMaidBribe.toString())&&/stf2BribeW/.test(stf2Bribe.toString())&&/stf2Tr/.test(stf2BribeW.toString())};
   Q.length=0;return out});
  ok(r7.half.half>0&&r7.half.sucOk===r7.half.half&&r7.half.seen>0&&r7.half.seen<r7.half.half,'NPC «qua loa» (Kết giao): Sức − prop.suc × half every time, seen-through sometimes (BAL.road.hp.half)',r7.half);
