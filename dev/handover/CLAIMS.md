@@ -70,7 +70,7 @@ t8-mass-B c01–c11 a18 + frozen builder dev/art/t8-prompt-B | CDN _review only 
 | map-labels-missing (sonnet OWNER BUG: Dư đồ palace names missing) | review/map-labels-missing | MAIN ROOT-53 | session_01Rc5AsJKHtNXkYtCxgvCzAL | RUNNING | 18/11 18:22Z |
 | entry-blank-r3 (opus OWNER BUG: blank first screen again after life-preload) | review/entry-blank-r3 | MAIN ROOT-53 | session_01Rc5AsJn6SQf4eq1uMdP1U5 | RUNNING | 18/11 18:27Z |
 choice-value-audit (ORDER ROOT-52 15:56Z) | review/choice-value-audit | session_01964izBnYA5PzbmC6qJfmDG | RUNNING | 18/11 18:20Z | owner D #2
-| shop-panel-r2 (sonnet SMALL UI owner 18:30Z: no strip, no bạc line, 1-row gains, sell price) | review/shop-panel-r2 | MAIN ROOT-53 | session_01Rc5AsMyVsQxLMS5ePwwpjT | RUNNING | 18/11 18:33Z |
+| shop-panel-r2 (sonnet SMALL UI owner 18:30Z: no strip, no bạc line, 1-row gains, sell price) | review/shop-panel-r2 | MAIN ROOT-53 | session_01Rc5AsMyVsQxLMS5ePwwpjT | SẴN SÀNG KIỂM 9f61f1c2 | 18/11 18:33Z |
 t8-mass-B c01–c11 + t7 v1/v2 builder | CDN _review only | W77 session_011xDdVSWNNShBkrnfEYAfeo (W72 archived) | RUNNING | 2026-11-18T18:32Z (Foreman C ROOT-29)
 t8-mass-B c13–c22 | CDN _review only | W78 session_011xDdVNV77LznMbhox2RSiy (W74 archived) | RUNNING | 2026-11-18T18:32Z (Foreman C ROOT-29)
 style-ref test A/B/C c06 t1–t3 | CDN _review only | W79 session_011xDdVSouZw85AxragQqu2a (W67 archived) | RUNNING | 2026-11-18T18:34Z (Foreman C ROOT-29)
