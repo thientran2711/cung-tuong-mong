@@ -32,3 +32,16 @@ Files (CDN img/_review/consort-tiers/c04/b9/): c04_a18_t1..t8.png, c04_a18_row8.
 Method: 1 gen each. Image 1 = the step-1 copy (soft-shoulder, no cup) of that rank, image 2 = c04 t5 final (celadon) as FABRIC reference, m09 eIyOFEidqL STYLE slot. Prompts: fabric like image 2 (smooth silk with body, soft natural drape; NOT thin voile, NOT rippled/frilly layers); t6 soft coral-rose, peonies+butterflies only, handkerchief really held; t7 blue-grey outer + generous soft golden-yellow inner robe/borders/sash, large central phoenix as main stitched embroidery, hand grips the round fan; t8 clearly golden YELLOW main colour (not glaring), large central phoenix main motif stitched with thread texture following folds, flowers secondary, hands grip the round fan.
 Zoom check (torso crops): embroidery reads as stitched (thread texture, follows folds), hands wrap the handle/handkerchief, no floating item. Gens: 3 (405 cr); ids t6 fHG0F8UCDY, t7 P3u5i7l42C, t8 4RQK34W9Aa. Old v1 t6–t8 kept as c04_a18_t6_prev.png … Files in CDN img/_review/consort-tiers/c04/b9/: c04_a18_t6/t7/t8.png (new), *_prev.png, row8, live_vs_new (live | copy | final; t6–t8 final = new), c04_t5678_full.jpg and c04_t5678_zoom.jpg.
 ~100% xong c04 / ~0% chơi được.
+
+
+## B9 v3 — c04 t6/t7/t8: ORIGINAL design, RECOLOUR ONLY (ROOT-18 change after owner: "ảnh gốc rất đẹp … màu tím của hoàng hậu cũng cực kỳ đẹp … chỉ đổi màu")
+Supersedes the v2 redesign (fabric/phoenix-main redraw; kept in CDN as c04_a18_t6_v2/t7_v2/t8_v2.png, and v1 soft redesign as *_prev.png). Method: STEP 1 exact copy of the ORIGINAL live figure (no redesign, no soft-shoulder change; only two forced swaps: t8 teacup → small round fan in the same hand position; t6 phoenix embroidery → peonies+butterflies in the same places per the owner's "t1–t6 never a phoenix"), STEP 2 recolour of the copy (m09 eIyOFEidqL STYLE slot + skin clause), every design detail/pearl cape/layers/embroidery/crown/richness kept.
+| rank | colour | live bbox w/h | copy | recolour (Δ live) | gens |
+|---|---|---|---|---|---|
+| t6 | soft coral-rose | 0.376 | 0.397 | 0.401 (+6.5 %) | 1+1 |
+| t7 | misty blue-grey outer + soft golden-yellow inner/borders/sash (phoenix kept) | 0.368 | 0.382 | 0.386 (+4.7 %) | 1+1 |
+| t8 | warm golden yellow, original purple design kept in yellow (phoenix kept, one fan) | 0.317 | 0.340 | 0.342 (+7.9 %) | 1+1 |
+By eye (c04_t678_live_vs_new.jpg): design/embroidery/crown/cape identical to the original, only colour (+ the two forced swaps). bbox over ±3 % because the pose is the same but the model redraws the sleeves a bit wider. t1–t5 unchanged from v1.
+Credits: 6 gens = 810 cr (3 v1 + 3 v2 redesign gens = 810 superseded). Gen ids: copies t6 vQ2Wq74a47 t7 P3u528V42C t8 ksp8SWN16B; recolours t6 N2H1nsA6D9 t7 vQ2WbpBa47 t8 dtP3ftnXSL.
+Files CDN img/_review/consort-tiers/c04/b9/: c04_a18_t6/t7/t8.png (new), *_v2.png, *_prev.png, row8, live_vs_new (live|copy|final), c04_t678_live_vs_new.jpg, c04_t5678_full/zoom.jpg.
+~100% xong c04 / ~0% chơi được.
