@@ -11,7 +11,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  await p.evaluate(()=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;let g=0;do{start();g++}while(isSrv()&&g<30);window.__nlInner=0;window.__bot=1;quiet=false;Q.length=0;try{deal()}catch(e){}render()});
  const r=await p.evaluate(()=>{const o={};const L=liveRivals(false);o.n=L.length;
   const cold=()=>{for(const v of rivals){v.sung=S.sung=20;v.oan=0;v.ghen=0;v.rel=0;v.ro={};v.rl={};v.confined=0;for(const s of (v.staff||[]))s.loyal=Math.max(s.loyal,BAL.loy.bad)}
-   for(const m of (S.men||[]))m.tinh=0;if(S.maid)S.maid.loyal=0;S.th=0;for(const s of (S.staff||[])){s.loyal=0;s.grudge=0}S.loans=[]};
+   for(const m of (S.men||[])){m.tinh=0;m.likeV=null;m.seen=null}for(const m of (S.men||[])){try{netOf(m)}catch(e){}if(Array.isArray(m.net))m.net=m.net.map(t=>t==="Ham vui"?"An phận":t)}/* G1 #8: no man of a roving / fancying nết (Ham vui) in this fixture */if(S.maid)S.maid.loyal=0;S.th=0;for(const s of (S.staff||[])){s.loyal=0;s.grudge=0}S.loans=[]};
   window.__e68off=1;const AK=new Set(AP_K);const st0=npwStamp;let got=[];npwStamp=function(k,p){if(AK.has(k))got.push([k,p&&p.id!=null?p.id:p&&p.name]);return st0.apply(this,arguments)};
   const draw=n=>{const c=[];for(let i=0;i<n;i++){delete S.npw;got=[];try{approachOne()}catch(e){o.err=e.message}c.push(...got)}return c};
   cold();const c1=draw(60);o.c1=c1;o.w1=c1.length===0;

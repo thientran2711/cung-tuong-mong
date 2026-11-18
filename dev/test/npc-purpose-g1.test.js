@@ -11,7 +11,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
  await p.evaluate(()=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;let g=0;do{start();g++}while(isSrv()&&g<30);window.__nlInner=0;window.__bot=1;quiet=false;Q.length=0;try{deal()}catch(e){}render()});
  const r=await p.evaluate(()=>{const o={};menInit();const L=liveRivals(false).filter(v=>!v.queen&&(v.age||20)>=18);o.n=L.length;o.men=(S.men||[]).length;
-  for(const v of liveRivals(true)){v.affair=null;v.evm={}}for(const m of S.men)m.likeV=null;delete S.npw;
+  for(const v of liveRivals(true)){v.affair=null;v.evm={}}for(const m of S.men)m.likeV=null;for(const m of S.men){try{netOf(m)}catch(e){}if(Array.isArray(m.net))m.net=m.net.map(t=>t==="Ham vui"?"An phận":t)}/* G1 #8: no man of a roving / fancying nết (Ham vui) in this fixture */delete S.npw;
   const [a,c,f]=L;const m=S.men.find(x=>x.alive);a.sung=0;a.duc=0;c.sung=0;c.duc=0;f.sung=90;f.duc=0;m.likeV=a.id;
   const ds0=deathSentence;deathSentence=()=>{};let got=0;
   try{affairMonth();o.a1=a.affair===m.id;o.c1=!c.affair;o.f1=!f.affair;

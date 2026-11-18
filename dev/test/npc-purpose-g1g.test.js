@@ -20,7 +20,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   calm();const a=L[0],b=L[1];a.sung=0;b.sung=20;const E=npcWhyAll("f7Enter",{NP:L}).sort((x,y)=>y.s-x.s);o.e=E.map(x=>x.who.name);o.w5=E.length===2&&E[0].who===a;
   calm();o.w6=!npcWhy("f7Merit",{L});
   calm();o.w7=L.every(x=>!npcWhy("lieMe",{x})&&!npcWhy("blameMe",{a:x})&&!npcWhy("frameMe",{a:x}));
-  calm();const sp=L[0],fr=L[1];sp.ro={};try{relAdd(sp,fr,60)}catch(e){}fr.ro={};let hit=0;for(let i=0;i<10;i++)if(j95bListener(sp)===fr)hit++;o.w8=hit>=4;o.h8=hit;
+  calm();const LC=L.filter(y=>!sameHouse(y,S)&&aff(y,S)>-30);/* G1 #8: two the listener rule can reach (another house, not hostile to her); the first two of L were sometimes out of it by the start */const sp=L[0],fr=LC.find(y=>y!==sp)||L[1];sp.ro={};try{relAdd(sp,fr,60)}catch(e){}fr.ro={};let hit=0;for(let i=0;i<10;i++)if(j95bListener(sp)===fr)hit++;o.w8=hit>=4;o.h8=hit;
   traitsOf=tr0;return o});
  ok(r.n>=4,'setup',r.n);ok(r.w1,'1 nobody resents her → no book check');ok(r.w2a&&r.w2b,'2 story step waits for its plan clock',[r.w2a,r.w2b]);ok(r.w3,'3 no motive → no mockery');ok(r.w4,'4 no reason → nobody calls');
  ok(r.w5,'5 entrants = those who want his eye, most eager first',r.e);ok(r.w6,'6 nobody seeks a name → no merit deed');ok(r.w7,'7 no motive → no lie / blame / frame');ok(r.w8,'8 the listener is one the spreader likes',r.h8);
