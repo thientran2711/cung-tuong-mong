@@ -83,7 +83,7 @@ style-ref test A/B/C c06 t1–t3 | CDN _review only | W79 session_011xDdVSouZw85
 | map-labels-r2 (sonnet OWNER BUG round 2: reviewer FAIL NE corner + grey rule 19:05Z/19:10Z/19:15Z) | review/map-labels-missing | MAIN ROOT-53 | session_01Rc5AsN8Rec5Ewr4xGzqVCe | RUNNING | 18/11 19:08Z |
 | map-zones (opus: Dư đồ zones + zoom/fog + 2nd level HH/TH + live servants; owner 19:25Z) | review/map-zones | MAIN ROOT-53 | session_01Rc5AsJdJ7NfUTTcbii1sqc | RUNNING | 18/11 19:27Z |
 | MAIN ROOT-54 (opus; child of ROOT-53) | handover HANDOVER_SESSION9 | ROOT-53 | session_01Rc5AsMSQ6cKyjRvG4MA9kQ | RUNNING | 18/11 19:21Z |
-| review fullbody-frame-s5 (sonnet SMALL REVIEWER) | review/fullbody-frame-s4 | MAIN ROOT-54 | session_01Rc5AsKnrN1RoAAQZmo5oSJ | RUNNING | 18/11 19:23Z |
+| review fullbody-frame-s5 (sonnet SMALL REVIEWER) | review/fullbody-frame-s4 | MAIN ROOT-54 | session_01Rc5AsKnrN1RoAAQZmo5oSJ | PASS LAND READY af700c81 | 18/11 19:23Z |
 | LIVE-SERVANTS (opus; OD L1901 pts 2+3: retinue + servant day plans + NPC move log + roster.js --who) | review/live-servants | C-AG #14 | session_01Rc5AsM1HkYcxpG9VcjpeVt | RUNNING | 18/11 19:40Z |
 | AG-DEED-PERF #2 (opus; merge live + re-measure 514143ec; #1 silent) | review/ag-deed-perf | C-AG #14 | session_01Rc5AsMrVSjApNAcLbKd49p | RUNNING | 18/11 19:40Z |
 | review shop-panel-r3 (sonnet SMALL REVIEWER + lander; owner approved 19:45Z) | review/shop-panel-r3 | MAIN ROOT-54 | session_01Rc5AsK7Vjz8vR2ZXexdh7h | RUNNING | 18/11 19:33Z |
