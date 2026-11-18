@@ -115,6 +115,8 @@ function thShift(){let ev="Quốc tang ba tháng. ";const q=typeof queenP==="fun
  if(q&&q!==S){ap(q,{danh:M.thDanh});ev+=`Hoàng hậu ${q.name} một mình nắm quyền lục cung. `}else if(S.rank>=7){apply({danh:M.thDanh});ev+=`Ngươi một mình nắm quyền lục cung. Danh +${M.thDanh}. `}
  if(S.emp)S.emp.mood=2;return ev}
 window.mortMonth=monthMort;
+/* D8 poison road (jpq): one way to remove a person, the same as a lifespan death */
+window.mortKill=function(p,why){return kill(p,why,kidSet())};
 /* hooks: the monthly pass runs inside illMonth (once a month, before rivals); the omen illnesses are kept away from the old cure rolls */
 (function(){const i0=illMonth;illMonth=function(){if(!M.on||!S)return i0.apply(this,arguments);
  const e=S.emp&&S.emp.ill&&S.emp.ill.mort?S.emp.ill:null,t=S.thIll&&S.thIll.mort?S.thIll:null;if(e)S.emp.ill=null;if(t)S.thIll=null;
