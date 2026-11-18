@@ -1013,3 +1013,4 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | REVIEW life-preload 4ff10ae (opus, URGENT; brief briefs/review-life-preload.md) | review/life-preload | MAIN s42 | session_01UV1SzjKPEGVua6n1rUEV2S | RUNNING (merge r6 caa3ffe0 on main f986ff6a) | 18/11 02:22Z |
 | REVIEW result-reason 0db60e0e (sonnet SMALL; brief briefs/review-result-reason.md) | review/result-reason | MAIN s43 | session_01UV1SziWJ2pGVgUMJzwxqQF | RUNNING | 18/11 02:24Z |
 | REVIEW staff-cap-apply fc470e4 (opus BIG; brief briefs/review-staff-cap-apply.md) | review/staff-cap-apply | MAIN s43 | (opening) | RUNNING | 18/11 02:30Z |
+| look-fx WIRE (upload 24 approved face finals + LOOKS_ART + fig fit rows re-measure; sonnet; brief briefs/look-fx-wire.md) | review/look-fx-wire | MAIN s43 | session_01UV1SzhzDHZiWyYW2YZdA9A | RUNNING | 18/11 02:31Z |
