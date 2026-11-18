@@ -18,7 +18,7 @@ phoenix-t1t6-fix | review/phoenix-t1t6-fix (CDN _review only) | W53 session_011x
 c03-v1-t678 (+c26 v0 t1–t4, c29 instrument) | CDN _review + c03 live | W54 session_011xDdVRCEBrDDZRTJBtFKxq | DONE 7500754 (archived) | 2026-11-18T15:42Z (Foreman C ROOT-24)
 t8-v2-yellow | CDN _review only | W55 session_011xDdVQTwxN7jGoVprySAoD | DONE f8b4e6d (archived) | 2026-11-18T15:45Z (Foreman C ROOT-24)
 b10-pose-eyes | CDN _review only | W56 + W56b DONE 6da6355 (archived) | DONE | 2026-11-18T15:52Z (Foreman C ROOT-25)
-live-open-eyes | CDN _review (then live) | W57 session_011xDdVPo2tyAFP5faQKZ1Xe | ROLLED OVER→W57b session_011xDdVQHrV2EKBxjJfUpYBx RUNNING | 2026-11-18T15:52Z (Foreman C ROOT-25)
+live-open-eyes | CDN _review (then live) | W57 session_011xDdVPo2tyAFP5faQKZ1Xe | ROLLED OVER→W57b session_011xDdVQHrV2EKBxjJfUpYBx (D2 done) ROLLED OVER→W57c session_011xDdVP5kh5q2wGJ1mspzTP RUNNING (live push) | 2026-11-18T15:52Z (Foreman C ROOT-25)
 | E12 test-flaky-sure (sonnet; test-only) | review/test-flaky-sure @c3b9d58c | Foreman E | session_01DgYSWmvDYnmfLCrNGtw5Uu | DONE, SẴN SÀNG KIỂM | 18/11 |
 b10-a26-c01-c11 | CDN _review only | W58 session_011xDdVNiYzKSQRPxRRQTe9a | ROLLED OVER→W58b session_011xDdVRPiVoxb2X6E9mvNW8 RUNNING | 2026-11-18T15:58Z (Foreman C ROOT-25)
 b10-a26-c12-c22 | CDN _review only | W59 session_011xDdVSuVQfgnp6Q21U5fzP | ROLLED OVER→W59b session_011xDdVQdJHQhTfZZ8iFUwdU RUNNING | 2026-11-18T15:58Z (Foreman C ROOT-25)
