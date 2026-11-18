@@ -1,7 +1,7 @@
 PRIORITY #1 CHECK ('cloth bake' / 'bake cached cloth Dư đồ mirror'): OD 0 | ledger 0 | claims 0 for this (MAIN cloth items: cloth-xoc LIVE 0527f921, cloth-tea r3 / cloth-tea-look RUNNING at MAIN — do NOT touch tea) | main 0 hits for the follow-up | review/* review/cloth-tea, cloth-tea-look, cloth-tea-r6, cloth-xoc(-r6) | archive 0 — source: dev/handover/HANDOVER_SESSION9.md 18/11 03:18Z + 03:27Z lines | review/cloth-bake-static 16b4dad8 SẴN SÀNG KIỂM
 
 You are a fresh sonnet REVIEWER (SMALL tier: UI/art layer only), cloth-bake-static r1. Coordinator = FOREMAN B ROOT-2 = session_01N1tNP5otr7BnxsT5Fytb4i (send_message there). You never talk to the owner. Read also dev/rules/START_REVIEWER.md.
-LINEAGE (owner 17/11, every foreman and main): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; at depth ≥ 6 never open a child foreman — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
+LINEAGE (owner 17/11, every foreman and main): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; at depth ≥ 7 (limit 8) never open a child foreman, and any main/foreman that CANNOT open its child (create_session refused) does the same — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
 
 ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
 - The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
