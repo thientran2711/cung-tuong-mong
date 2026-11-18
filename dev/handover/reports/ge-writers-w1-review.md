@@ -122,3 +122,30 @@ Old saves: a life saved mid-ch8 after its s-beat does not meet the scholar in th
 
 ## 18 LAWS (round 3)
 2 / 3 / 4: OK (patch row). 6(b): OK once the patch lands (scholar met every life). 7: OK. 11: timing fix done for the whole family (both helpers). Others n/a.
+
+---
+# ROUND 4 — delta fd7c6775 (on top of PASS df30265f), E11r-w1b, order from Foreman E ROOT #6
+PRIORITY #1 CHECK ('ge-writers|GE writer|jgedata'): OD 0 | ledger 0 | claims 8 | main 5 | review/* 2 | archive 0 — reuse: round 4 of this review. 18 LAWS re-read. LINEAGE: E11r-w1b · session_01DgYSWomcRfvKompgyDqVXJ (depth 6) · START_CTX ~4 % (own estimate) · ended ~9 %.
+
+## VERDICT: **PASS fd7c6775 — ready to land** (origin/main 94d11623 is its ancestor → fast-forward; main has not moved).
+
+| item | result |
+|---|---|
+| 1 jrd_muoi ch8 c3 patch | Same text as the round-3 checked FOR B patch. s1 + s2: all 6 options carry `to:"c3",tf:"c3"`; c3 «Thư sinh Giang Nam» (w:maid, no `if` / `need`) is NOT in `p` (pool unchanged `[["s1","s2"],["c1","c2"],["t1"],["x1"]]`). j67:143 sets `A.force` from to/tf on win AND fail; j67:105 plays it when `beatOk67` (true: no if/need) → met in EVERY muoi_no life. |
+| law 2 equal value | `muoi_no_8.c3` (jbalroad.js:191) = bạc −40 → Đức +3 · Sức −3 → Danh +2 · Đức −2 → Tâm cơ +3, each sc:1 — same sizes as that chapter's c2 row; none clearly better. OK |
+| law 3 gain-and-loss | every option one cost + one gain; wx/lx words match the numbers (bạc / hao sức / ép người). OK |
+| law 4 one core | numbers only in the BAL row; one-core-guard PASS (fails 0). OK |
+| law 6b / 6c | the scholar named by muoi_no_4 «Thư sinh trả nợ» now exists in every life (6b OK). Objects (tờ giấy nợ kept «trong tráp», giấy hẹn, bài thơ) are story lines, not inventory items — same as every other road's papers; nothing vanishes. OK |
+| law 7 | cổ trang, no %, no digits, «y» for a man; «ứng thí / khoa thi / trọ ngoài cửa thành» fit. OK |
+| 2 muoi_no_4 pull + lean | pull += «Xóa nợ, chúc y thi đỗ», «Cho hoãn, đỗ rồi hãy trả», «Giữ giấy nợ, đợi y làm quan» (exact c3 names); lean.p += first two, lean.m += third. OK |
+| 3 main 94d11623 merge | branch − main = only W1 files (assemble.py, jbalge.js, jbalroad.js, jgedata_w1.js, jrd_muoi.js, ge-measure.js, ge-engine.js, ge-guard.js + built index/sw/site). assemble.py diff = one added entry `'jgedata_w1.js'` after `'jgedata.js'`; main's whole list kept. OK |
+
+## Tests (own box, clean worktree at fd7c6775, fresh build_site before each engine run)
+build_site OK (only the build line in index.html changes) · ge-guard **6/6** · ge-engine `- all` cold ×2 **456/456, 456/456** · one-core-guard PASS · muoi_no measure `MODES=kind,cruel … - 2 2 … muoi_no sens`: 4/4 lives ok, page errors 0, open .8 3.00, open .11 **2.25 IN**, kind→thiện **1.00 IN**, cruel→ác **1.00 IN**, inChar .50 IN, per ending 0/1 1/1 0/1 1/1 (n = 4, random draw) · quickcheck ALONE: run 1 **FAIL perf buổi only** (new runs 3764 / 933 / 3798 vs live 2034 / 1034 / 1069 — bimodal, live also spiked), run 2 **PASS** (core gates PASS, open 1397 ms, old save ok, render 191/201, tab 325/365, buổi 956/995, tasks>200 14/16). A words-and-one-beat change cannot triple buổi time → noise.
+
+## Notes (non-blocking, FOR E)
+- buổi perf in quickcheck is bimodal (~1 s vs ~3.8 s) on this box, on live too (2034) — the median-of-3 can fail on noise; same family as the test-flaky work (main 94d11623). Worth one look by whoever owns quickcheck.
+- Still FOR E from rounds 1–3: «followed / needed person alive» term; one HH seat rule; palace aliases.
+
+## 18 LAWS (round 4)
+2 / 3 / 4: OK (c3 row). 6(b): OK — scholar every life. 6(c): OK. 7: OK. 11: patch + the ending's pull/lean done together. Others n/a.
