@@ -279,7 +279,8 @@ function lDlgWait(){try{const M=document.getElementById("modal");if(!M||M.hidden
 let lReq=0;
 function lArm(){try{if(window.__bot||(window.COOPW&&COOPW.ctx))return;if(typeof S==="undefined"||!S||typeof S!=="object")return;
  if(!LIFE.seen.has(S)){LIFE.seen.add(S);lifeGate("life");return}
- const now=Date.now();if(now-lReq<2500)return;lReq=now;kitLifeSet().forEach((raw,u)=>lWant(u,raw))}catch(e){}}
+ const now=Date.now();if(now-lReq<2500)return;lReq=now;/* off the render path (perf): when the page is idle */
+ (window.requestIdleCallback||(f=>setTimeout(f,200)))(()=>{try{kitLifeSet().forEach((raw,u)=>lWant(u,raw))}catch(e){}},{timeout:3000})}catch(e){}}
 setTimeout(function(){try{
  if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);lArm();return r};window.render=render}
  if(typeof start==="function"){const s0=start;start=function(){if(!window.__bot&&!(window.COOPW&&COOPW.ctx))lifeGate("start");return s0.apply(this,arguments)};window.start=start}
