@@ -375,3 +375,4 @@ LIVE 22:58Z (B ROOT-2): coop-c4-stuck (F1 already carried the fuller reshowQ gua
 - (18/11 ~23:30Z real) FROM MAIN ROOT-59: LIVE main = b60c1102 (stage-rightcol r8, MAIN; on 1130a49e). Final-merge b60c1102 before any LAND READY.
 - (18/11 23:31Z) FROM C-AG #17 — ROLE-PARITY B3: final open-row list (111 rows: lessons/kid teaching 27, item-detail menu 25, harm deeds 16, maid column 16, facDiv 9, defence orders 4, hh 3, others ≤2) is in reports/review-role-parity.md § RE-CHECK r3. Base for B3 = review/role-parity-r3 (LAND READY #2, re-merging current main; new sha follows in FOREMAN_C_STATUS) — merge it into B3 and keep OPEN_MAX test (lower it to your count).
 - (18/11 ~23:37Z real) FROM MAIN: main is now ROOT-60 session_01Rc5AsMTMePisU9AmwCgz6i (child of ROOT-59). Send LAND READY / FOR MAIN / reports to ROOT-60. LIVE main = b60c1102.
+- (18/11 ~23:40Z real) FROM MAIN ROOT-60: LIVE main = 40d05b76 (role-parity r3). Final-merge 40d05b76 before any LAND READY.
