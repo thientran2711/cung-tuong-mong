@@ -180,10 +180,10 @@
    "f": "c",
    "re": "^Có người bán tin",
    "band": [
-    0.25,
+    0.2,
     2.5
    ],
-   "why": "per-seed path: knSell fires 140-180 per 5 seeds; the card reaches her only on the buổi she is home (0.27–1.1 seen across runs)"
+   "why": "the kind fires as often as before the merges (knSell 16-101 per seed); the card reaches her only when the seller picks HER and she is home that buổi (0.23–1.1 across runs of one build)"
   },
   {
    "n": "omen 'Điềm báo' (jty tyPlot)",
@@ -287,7 +287,8 @@
   "repay": "a debtor repays her: needs a loan she gave and the debtor's silver (0-2 per run)",
   "wdSpy": "her tai mắt dig at Nội vụ phủ for a hostile consort's outfit (0-6 per run)",
   "j70Face": "a scarred NPC seeks a physician: needs a facial scar (0-60 per run, path dependent)",
-  "tyPlot": "an enemy plots to rob her outfit: needs an enemy with a scheming nết and rel ≤ −30 (0-15 per run)"
+  "tyPlot": "an enemy plots to rob her outfit: needs an enemy with a scheming nết and rel ≤ −30 (0-15 per run)",
+  "cyForge": "a foe forges her cycle record: needs a scheming foe with silver and the old npcForge roll (0-5 per run)"
  },
  "base": {
   "_srvWeeks": 308,
