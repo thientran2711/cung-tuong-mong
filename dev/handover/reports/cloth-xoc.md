@@ -268,3 +268,26 @@ Root cause: same as mud — tea-brown multiply on saturated red/orange stays red
 
 ## Branch note (r6f) — tea moved to review/cloth-tea
 MAIN s42 order (arrived after the tea push): freeze review/cloth-xoc at 7270a76 (mud + wet, owner-approved), tea on review/cloth-tea. Done: review/cloth-tea = be9d08e (= 7270a76 + 4 tea-only commits 542a907, 4ce7c71, f98eae5, be9d08e: jcloth.js tea params + 'stain' saturation pull + site rebuild). review/cloth-xoc still points at be9d08e because my force-push back to 7270a76 was refused by the session permission guard. Reviewer of cloth-xoc: review sha 7270a76 (`git diff 7270a76 be9d08e` = tea only). Coordinator may reset review/cloth-xoc to 7270a76 or keep it.
+
+## r6g TEA (owner via s43: looked like mud thrown, too much for one cup; lv1 OK on orange, too big on light cloth; new lv3 ~ old lv2) — SẴN SÀNG KIỂM review/cloth-tea 18edc72 (QUICKCHECK PASS)
+Tea = ONE cup: one translucent amber splash at the chest (+ lv3 one small splash on the lap), 1/2/3 thin drips running DOWN the grain from its lower edge. Sizes .2/.27/.34 of robe width x (1 - .35 x paleness) so light robes get smaller marks; lighter amber tint [158,104,50], core .26 / ring .6 / cap .52, saturation pull .5 on red/orange. All values in BAL.looks.stain.tea (tea.lv[1..3] = sc, op, drips, sc2). Full body: CDN img/_review/cloth-xoc/full-tra-{c01,c30,c03,c12}.png. Table:
+| fig | lv | changed px | min dL* | mean dL* | lighter px | mean dC* | greyer px (dC*<-3) | mean dhue° |
+|---|---|---|---|---|---|---|---|---|
+| c01 | 1 | 1187 | -30.9 | -10.1 | 0 | -3.27 | 673 | +8.1 |
+| c01 | 2 | 2287 | -32.5 | -10.4 | 0 | -2.23 | 1010 | +7.7 |
+| c01 | 3 | 5091 | -40.4 | -11.0 | 0 | -0.56 | 1421 | +6.7 |
+| c03 | 1 | 1228 | -21.6 | -8.0 | 0 | -0.05 | 8 | -17.8 |
+| c03 | 2 | 2387 | -25.7 | -8.2 | 0 | +0.44 | 6 | -16.1 |
+| c03 | 3 | 4690 | -37.0 | -10.3 | 0 | +1.47 | 27 | -13.9 |
+| c12 | 1 | 1350 | -37.0 | -8.3 | 0 | +2.52 | 0 | -4.7 |
+| c12 | 2 | 2429 | -43.2 | -9.0 | 0 | +2.88 | 0 | -5.2 |
+| c12 | 3 | 4657 | -43.4 | -10.5 | 0 | +3.29 | 0 | -6.9 |
+| c30 | 1 | 1150 | -30.8 | -10.3 | 0 | +6.14 | 1 | +0.0 |
+| c30 | 2 | 2025 | -29.5 | -11.1 | 0 | +6.69 | 0 | -0.1 |
+| c30 | 3 | 3683 | -43.3 | -12.5 | 0 | +7.39 | 0 | -2.7 |
+
+## HANDOVER (r6 session_01UV1SzjMK4RUBPdS1ZMuLds, context near rollover)
+State: review/cloth-xoc-r6 (main's reviewer branch) = 7270a76 mud + wet, OWNER-APPROVED (wet r6c, mud r6e). review/cloth-xoc head = be9d08e (has older tea; leave it, main said so). review/cloth-tea = 18edc72 (tea r6g), waiting owner verdict. Effects still OFF (BAL.looks.xoc.on / stain.on = 0).
+Key code (dev/build/jcloth.js): clothDecalMip (no aliasing), clothMask -> mS / skinT / protL (stain-only masks; creases keep m/protS/prot), clothWetDeepen + clothLocalColour (wet own hue), clothFieldDecal (wet shapes), mud 'mud' blend + tide band (BAL bun.tide/add/tm), tea block (BAL stain.tea).
+Harness (scratch /home/user/wt/cxs, rebuild in minutes): h/run.js <jcloth> <fig> <kind> <lv> <out.raw> (env NODEC, OV), h/met.py (ΔL*/ΔC* table), h/full.py (whole-figure lighter check), h/sheet.py, full-body panel snippet in report history; figures c01/c03/c12/c30 t2-a26 + decals from CDN img/.
+Next if owner FAILs tea: tune BAL.looks.stain.tea only (sizes lv[].sc, core/ring/cap, tint). Wipe review images after verdict: python3 dev/site/cdn_sync.py --wipe-review cloth-xoc.
