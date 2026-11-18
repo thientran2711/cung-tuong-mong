@@ -1,3 +1,10 @@
+# opt-card-short #5 (worker #4 continued, MAIN ROOT-54 FAIL fix) sha **ad86bcc0**, quickcheck PASS incl. core gates
+PRIORITY #1 CHECK: START_CORE LAW 10 | main 0 | review/opt-card-short reused | claims this row.
+1. LAW 10 (big scene picture only when content fits without scrolling): kit rule `kszEvLaw10` (jksize, after kszPicStep3): options list scrolls -> picture shrinks to the short strip (evMin 56); still scrolls -> picture dropped (`data-evfit` s / x). Whole group = every live option frame, every tier, Fold + iPad. Scan line SCROLLBIG (opt-card-scan.js): `scroll with big picture` = 0 in all 12 cases x Fold/iPad (iPad mat/mat2/visit/fest now fit=s, ev 56, all 3 options visible; before: ipad-mat2 280 px picture + «Kéo xuống»).
+2. Strict tier height (was +1 px slack): dress Fold 105 vs 104 -> now tier L (128); TIERCHK bad 0/n everywhere.
+3. Merged review/fullbody-frame-s4 af700c81 (new KIT_SIZE.fig crown sizes) and main; fold-mat2/dress empty band under options = XL tall frame by rule (16:05Z), kept.
+Shots (re-shot, looked) dev/handover/shots/opt-card-short/{fold,ipad}-{mat2,dress,night,many,choice,short,thtrieu,info}.jpg (CDN write refused 403).
+
 # opt-card-short #4 (worker #4, env with CDN read OK; CDN WRITE refused 403 -> shots in dev/handover/shots/opt-card-short/ on this branch)
 PRIORITY #1 CHECK: OD 18/11 16:05Z/16:15Z/09:30Z(4) | main 0 | review/opt-card-short reused (ce8706b7 -> b800648e) | claims this row.
 Branch **review/opt-card-short @ b800648e** (origin/main merged, real build with CDN index, quickcheck PASS incl. core gates; first G1 FAIL = 4 inline numbers in my kit sample page -> now BAL.kitpage.demo; one G4 FAIL was a transient CDN IncompleteRead, re-run PASS).
