@@ -147,7 +147,7 @@ receiver-choice audit (ORDER MAIN ~21:16Z, OD 21:15Z/21:30Z; shares C-AG role-pa
 | low t1+t4-t6 c01-c04 (W105; W95 archived) | handover reports/root30-* | Foreman C ROOT-30 | session_01PEhRbx9yQMNChSMdCPkAEQ | RUNNING | 18/11 21:12Z |
 | low t1+t4-t6 c13 + c09-c12 (W106; W97/W98c archived) | handover reports/root30-* | Foreman C ROOT-30 | session_01PEhRbtzt8grnMaPJuBdsGx | RUNNING | 18/11 21:12Z |
 | low t1+t4-t6 c25-c28 (W107; W101 archived) | handover reports/root30-* | Foreman C ROOT-30 | session_01PEhRbxaGPoBTcdK9mJAmsY | RUNNING | 18/11 21:12Z |
-| stage-here r3 (opus; toast never on people, collapse to rail «!»; merge 790cda59 + stage-rightcol) | review/stage-here | MAIN ROOT-56 | session_01Rc5AsMY7PgErES6LptdBUE | SẴN SÀNG KIỂM ff28fd6 | 18/11 22:20Z |
+| stage-here r3 (opus; toast never on people, collapse to rail «!»; merge 790cda59 + stage-rightcol) | review/stage-here | MAIN ROOT-57 | session_01Rc5AsMY7PgErES6LptdBUE | SẴN SÀNG KIỂM f9f1894 | 18/11 22:45Z |
 | MAIN ROOT-57 (opus; child of ROOT-56; trig_01Ja7zaN36ChYwfwpjXs1Riu) | handover HANDOVER_SESSION9 | ROOT-56 | session_01Rc5AsKYmXLRoL6C62yZq4r | RUNNING | 18/11 21:37Z |
 | ge-writers-w2 remerge after W1 (sonnet E11w2m) | review/ge-writers-w2 | E ROOT #7 | session_01DgYSWpbQHujHaQRWp5BQX1 | RUNNING | 18/11 21:50Z |
 | GE writers W3 (ch, thd, cnv_chu/ban/ma; opus E11c) | review/ge-writers-w3 | E ROOT #7 | session_01DgYSWpWugHTejVTtLoKV8s | RUNNING | 18/11 21:50Z |
