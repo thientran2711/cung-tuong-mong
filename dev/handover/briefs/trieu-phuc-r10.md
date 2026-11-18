@@ -10,7 +10,7 @@ JOB (c06 a18, option B):
 2. GENERATE B t1..t8 (8 gens; settings as in §14). LOOK at every image. Extra check: is any large area of the robe left plain? → regen (max 3).
 3. Make two sheets and cdn_sync them to img/_review/trieu-phuc/:
    - c06_sheet10_2x4.jpg = B t1..t8.
-   - c06_sheet10_vsHH.jpg = t8 | approved Hoàng hậu c06_a18_t8_v0 | Nữ đế A (states-r10).
+   - c06_sheet10_vsHH.jpg = t8 | approved prompt-B Hoàng hậu t8-reprompt/c06_a18_t8_v0 | Nữ đế A (states-r10).
    Note: dev/site/cdn_sync.py lives on main; use it untracked.
 4. Report §15, push the handover branch, send READY to Foreman C ROOT-34 (session_01PEhRbxEqMo11RRz1YMMxN4).
 Roll over at START_CTX+25 % (ceiling 60 %): write the handover in the report and tell me; I open the successor.
