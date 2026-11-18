@@ -14,7 +14,7 @@ const bdO=(k,v)=>{const r=RD_FL("bd.o."+k,v);return v!=null?"":r};
 Object.assign(RTHEME67,{bd_tuyet:"emp",bd_hen:"emp"});
 
 /* ---------- bd_tuyet · Năm tuyết trắng (Thiên hạ; GE ge1 Mẹ của thảo nguyên · ge2 Lương thảo đổi hòa · ge3 Mở cửa ải bắc · ge4 Khúc ca tuyết trắng) ---------- */
-ARC67.bd_tuyet=arcFx("bd_tuyet",{o:"bd",t:"Năm tuyết trắng",w:"emp",sj:"mùa đông trắng ở {land}",g:"Tuyết rơi trắng thảo nguyên suốt một mùa đông, đàn ngựa đàn dê chết cóng trong chuồng. A Sử Na Cát, trưởng lão bộ lạc sát biên, dẫn người đến quỳ trước cửa ải Nhạn Môn xin lương. Biên thư về đến kinh, và Hoàng thượng hỏi ngươi.",
+ARC67.bd_tuyet=bdArc("bd_tuyet",{o:"bd",t:"Năm tuyết trắng",w:"emp",sj:"mùa đông trắng ở {land}",g:"Tuyết rơi trắng thảo nguyên suốt một mùa đông, đàn ngựa đàn dê chết cóng trong chuồng. A Sử Na Cát, trưởng lão bộ lạc sát biên, dẫn người đến quỳ trước cửa ải Nhạn Môn xin lương. Biên thư về đến kinh, và Hoàng thượng hỏi ngươi.",
  p:[["s1","s2"],["c1","c2","G.rumor","G.hh"],["t1"],["x1"]],
  B:{
  s1:{h:"Thư cấp báo từ Nhạn Môn",w:"emp",t:"Thư cấp báo từ ải Nhạn Môn: người bộ lạc biên quỳ trong tuyết trước cửa ải, xin lương. Người dẫn đầu là A Sử Na Cát, trưởng lão năm xưa từng bế ngươi lên lưng ngựa.",o:[
@@ -296,7 +296,7 @@ RD97L.push(rdRare({a:"bd_tuyet_11",tag:"Bia đá bên ải Nhạn Môn",w:"emp",
 /* Thác Bạt Phong (BDP phong): .4 rides into the capital with the embassy guard (w "kinh"), lodges at Hội Đồng quán; .9 jailed in Đại Lý tự (w "nguc");
    .10 freed (kinh) · exiled (tn) · dies (alive −1, the road's revenge branch); .11 leaves with the embassy (tn) or his coffin does. */
 const bdPh=()=>bdAlive("phong");
-ARC67.bd_hen=arcFx("bd_hen",{o:"bd",t:"Lời thề bên đống đá",w:"emp",sj:"lời thề bên đống đá thiêng",g:"Năm ấy, trước ngày ngươi lên xe hoa sang Đại Hy, Thác Bạt Phong đặt một hòn đá lên đống đá thiêng trên đồi, thề sống chết không quên. Nay sứ đoàn {land} vào kinh nghị việc biên, và người cầm đầu đoàn hộ vệ chính là chàng.",
+ARC67.bd_hen=bdArc("bd_hen",{o:"bd",t:"Lời thề bên đống đá",w:"emp",sj:"lời thề bên đống đá thiêng",g:"Năm ấy, trước ngày ngươi lên xe hoa sang Đại Hy, Thác Bạt Phong đặt một hòn đá lên đống đá thiêng trên đồi, thề sống chết không quên. Nay sứ đoàn {land} vào kinh nghị việc biên, và người cầm đầu đoàn hộ vệ chính là chàng.",
  p:[["s1","s2"],["c1","c2","G.rumor","G.hh"],["t1"],["x1"]],
  B:{
  s1:{h:"Đoàn hộ vệ vào kinh",w:"emp",t:"Sứ đoàn {land} qua Ngọ môn. Người cưỡi ngựa đi đầu đoàn hộ vệ ngẩng mặt nhìn lên lầu, nơi các phi tần đứng xem: Thác Bạt Phong.",o:[
