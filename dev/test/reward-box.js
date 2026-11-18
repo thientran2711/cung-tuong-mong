@@ -7,7 +7,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,BASE,OUT]
  await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&window.kitGain,null,{timeout:180000});
  await p.waitForFunction(()=>!document.getElementById('kload')||(window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)),null,{timeout:240000}).catch(()=>{});
  const R=await p.evaluate(async()=>{const wait=t=>new Promise(o=>setTimeout(o,t));
-  document.querySelectorAll('#kload').forEach(e=>e.remove());SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;
+  document.querySelectorAll('#kload').forEach(e=>e.remove());SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;
   document.querySelectorAll('[id^=kroul],#dawn,.kmov').forEach(e=>e.remove());render();await wait(300);
   const box=[];const o=window.kitReward;window.kitReward=function(s){if(!KFX.inBest)box.push({kind:s.kind,title:s.title,from:s.from,items:(s.items||[]).map(i=>i.n+'|'+i.tier+'|'+(i.img?'pic':'NOPIC')),bac:s.bac||0});return o.apply(this,arguments)};
   const drain=async()=>{for(let i=0;i<30;i++){const v=document.querySelector('.kmov');if(!v){await wait(150);if(!document.querySelector('.kmov')&&!(window.KMQ&&KMQ.length))break;continue}v.click();await wait(300)}};

@@ -12,7 +12,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof render==='function');await sleep(2500);
   await p.addStyleTag({content:'#kroul{display:none!important}'});
   const inj=await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();SLOT=3;document.getElementById('title').hidden=true;
-   for(let i=0;i<400;i++){start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;
+   for(let i=0;i<400;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;
    const base=(deck||[]).find(a=>a&&!a.done&&a.c)||(deck||[])[0];if(!base)return 'no deck';
    deck.push(Object.assign({},base,{n:"Tranh sủng",x:"Tối nay thẻ bài của một phi tần được lật. Sai cung nữ giả cớ ngươi đau tim, mời Hoàng thượng sang.",b:3,done:false,lock:false}));
    deck.push(Object.assign({},base,{n:"Dâng canh lên ngự thư phòng",x:"Tự tay nấu canh, mang tới ngự thư phòng dâng Hoàng thượng.",done:false,lock:false}));

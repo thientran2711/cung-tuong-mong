@@ -10,7 +10,7 @@ const [,,BASE,SZ,OUT,OLD]=process.argv;const [WH,DPR]=(SZ||'755x1000@2').split('
 const T0=Date.now(),lg=m=>console.error('['+Math.round((Date.now()-T0)/1000)+'s] '+m);const sleep=t=>new Promise(r=>setTimeout(r,t));
 const prox=process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{};
 const fresh=`(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();document.querySelectorAll('.krbox').forEach(e=>e.remove());try{localStorage.clear()}catch(e){}
- SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<400;i++){start();if(!isSrv())break}Q.length=0;const md=document.getElementById('modal');if(md)md.hidden=true;try{NLP=null}catch(e){}
+ SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<400;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0;const md=document.getElementById('modal');if(md)md.hidden=true;try{NLP=null}catch(e){}
  const kr=document.getElementById('kroul');if(kr)kr.remove();const dw=document.getElementById('dawn');if(dw)dw.remove();document.body.classList.remove('kbk-open');window.kmPush=function(){};document.querySelectorAll('.kmov').forEach(e=>e.remove());render()})()`;
 (async()=>{const b=await chromium.launch(prox);const R={size:SZ};const errs=[],errsOld=[];
  const mk=()=>b.newContext(Object.assign({viewport:{width:W,height:H},deviceScaleFactor:+(DPR||1),hasTouch:true,isMobile:W<1100,reducedMotion:'reduce',serviceWorkers:'block',ignoreHTTPSErrors:true}));

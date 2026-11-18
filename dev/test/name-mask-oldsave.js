@@ -6,7 +6,7 @@ const {chromium}=require('playwright');const path=require('path');const [,,U,VP,
  const url=/^https?:/.test(U)?U:'file://'+path.resolve(U);
  await p.goto(url);await p.waitForFunction(()=>typeof start==='function'&&typeof newsHTML==='function',null,{timeout:120000});await p.waitForTimeout(1500);
  const info=await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;
-  for(let i=0;i<40;i++){start();if(S.ps&&S.origin.k!=='tt')break}Q.length=0;$("modal").hidden=true;
+  for(let i=0;i<40;i++){try{nlNew()}catch(e){}start();if(S.ps&&S.origin.k!=='tt')break}Q.length=0;$("modal").hidden=true;
   const un=rivals.filter(v=>v.alive&&!v.out&&!v.queen&&!kitKnownName(v)&&v.name.split(' ').length>=3).slice(0,3);
   const kn=rivals.filter(v=>v.alive&&kitKnownName(v)&&v.name.split(' ').length>=3).slice(0,1);
   /* raw, un-masked lines exactly as an old build stored them */

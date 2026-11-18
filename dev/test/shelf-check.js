@@ -45,7 +45,7 @@ const sl=t=>new Promise(r=>setTimeout(r,t));
   /* 3 EFFECTS: a superior and a peer see a lavish room; then a fitting one */
   const sup=liveRivals(true).find(x=>x.alive&&rkOf(x)>S.rank)||null,peer=liveRivals(true).find(x=>x.alive&&rkOf(x)<=S.rank)||v;
   for(const k of ["remchau","sanho","chuongngoc","binhsu"]){S.inv.push({k,from:"emp"});shelfPut(S,S.inv.length-1)}
-  const a0=sup?sup.rel:0,g0=peer.ghen||0;if(sup){sup.shR={};shelfSee(sup,S,"test")}peer.shR={};shelfSee(peer,S,"test");
+  const a0=sup?sup.rel:0,g0=peer.ghen||0;{const st1=shelfTaste;shelfTaste=x=>x===sup||x===peer?0:st1(x);/* neutral eye for both (their random once-per-life taste made the frown / envy flaky) */try{if(sup){sup.shR={};shelfSee(sup,S,"test")}peer.shR={};shelfSee(peer,S,"test")}finally{shelfTaste=st1}}
   out.T.fx={lv:shelfLux(S).name,supRel:sup?[a0,sup.rel]:"no superior",peerGhen:[g0,peer.ghen],peerProof:!!(peer.shn&&peer.shn.me&&peer.shn.me.pf)};
   F(!sup||sup.rel<a0,"superior did not frown on a lavish room");F(peer.ghen>g0,"peer did not envy");
   /* mood */
@@ -54,7 +54,7 @@ const sl=t=>new Promise(r=>setTimeout(r,t));
   {const st1=shelfTaste;shelfTaste=x=>x===peer?0:st1(x);shelfLook(peer,S,"tận mắt",true);shelfTaste=st1}/* r2 reviewer: a neutral eye (the peer's random once-per-life taste made this flaky) */
   F(!!(ACT.xx&&ACT.xx.ok(peer,S)),"Tố xa xỉ not open to a visitor who saw it");
   /* owner (d): a TIP (rumour) is enough to accuse; with nothing seen or heard an NPC does not (her monthly guess pass aside); the player may always guess */
-  const rm=w&&w!==peer?w:liveRivals(true).find(x=>x!==peer&&x.alive);if(rm){rm.shn={};F(!ACT.xx.ok(rm,S)||(typeof dressNow==="function"&&dressNow(rm,S)),"NPC accuses with nothing seen or heard");shelfLook(rm,S,"tin đồn",false);
+  const rm=w&&w!==peer?w:liveRivals(true).find(x=>x!==peer&&x.alive);if(rm){rm.shn={};F(!ACT.xx.ok(rm,S)||(typeof dressNow==="function"&&dressNow(rm,S)),"NPC accuses with nothing seen or heard");{const st1=shelfTaste;shelfTaste=x=>x===rm?0:st1(x);shelfLook(rm,S,"tin đồn",false);shelfTaste=st1}/* neutral eye, as for the peer above: her random once-per-life taste made the tip flaky 1/20 */
    out.T.tip={how:(shelfCause(rm,S,"xx")||{}).how||"none",ok:!!ACT.xx.ok(rm,S)};F(out.T.tip.ok&&out.T.tip.how==="tip","a rumour (tip) is not enough to accuse")}
   out.T.guess={xx:(shelfCause(S,v,"xx")||{}).how||"none",vp:(shelfCause(S,v,"vp")||{}).how||"none",act:!!(ACT.vp.ok(S,v)&&ACT.xx.ok(S,v))};
   F(out.T.guess.act,"the player cannot accuse on a guess");

@@ -5,7 +5,7 @@ const {chromium}=require('playwright');const [,,URL,OUT]=process.argv;
 for(const [w,h] of [[755,1000],[1180,820]]){
  const ctx=await b.newContext({viewport:{width:w,height:h},serviceWorkers:'block',reducedMotion:'reduce'});const p=await ctx.newPage();p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof goTo==='function');await p.waitForTimeout(2500);
- await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0});
+ await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0});
  await p.waitForTimeout(1500);for(let i=0;i<6;i++){const bt=p.locator('button:has-text("Bỏ qua"), button:has-text("Tiếp")').first();if(await bt.count()&&await bt.isVisible().catch(()=>false)){await bt.click().catch(()=>{});await p.waitForTimeout(800)}}
  await p.evaluate(()=>{document.querySelectorAll('.krbox').forEach(e=>{let n=e;while(n.parentElement&&n.parentElement!==document.body)n=n.parentElement;n.remove()});Q.length=0;try{render()}catch(e){}});
  await p.waitForFunction(()=>typeof FIGIX!=='undefined'&&FIGIX.fallen&&FIGIX.steward&&FIGIX.tutor,null,{timeout:120000}).catch(()=>{});

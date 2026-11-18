@@ -8,7 +8,7 @@ const {chromium}=require('playwright');const path=require('path');const [,,PAGE,
   const A={harmMe:0,harmNpc:0,pairsMe:0,pairsNpc:0,affMe:[],affNpc:[],dMe:[],dNpc:[],socMe:0,socNpc:0};let on=false;
   const na=npcAct;npcAct=function(v,t){const r=na.apply(this,arguments);if(on&&r){if(t===S)A.harmMe++;else A.harmNpc++}return r};
   const ra=relAdd;relAdd=function(x,y,n){if(on&&x!==S&&x&&y){if(y===S)A.socMe+=n;else if(y!==S)A.socNpc+=n}return ra.apply(this,arguments)};
-  for(let l=0;l<n;l++){try{localStorage.clear()}catch(e){}on=false;for(let i=0;i<60;i++){start();if(!(typeof isSrv==="function"&&isSrv()))break}Q.length=0;S.mg=0;on=true;
+  for(let l=0;l<n;l++){try{localStorage.clear()}catch(e){}on=false;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!(typeof isSrv==="function"&&isSrv()))break}Q.length=0;S.mg=0;on=true;
    for(let w=0;w<Y*36&&!S.dead;w++){S.sung=Math.max(S.sung,25);S.danh=Math.max(S.danh,15);S.suc=Math.max(S.suc,60);S.duc=Math.max(S.duc,55);S.bac=Math.max(S.bac,80);S.rank=Math.max(S.rank,2);
     if(G0)for(const v of liveRivals(true))v.ghen=0;
     if(S.tonight==="me"){S.tonight=null;try{night(S)}catch(e){}}Q.length=0;S.mg=0;try{endTurn()}catch(e){break}Q.length=0;S.mg=0;
