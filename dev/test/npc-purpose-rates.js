@@ -4,7 +4,7 @@
    Checks (numbers + reasons in dev/test/npc-purpose-rates.json):
    1 every registered kind (NPW.reg) fires ≥ 1 over all seeds, unless "rare": {kind: written reason}
    2 every tracked event (the review's table + the card spread) stays inside its band: (head + 1) / (base + 1) in [lo, hi] (band per row or the
-     default "band"; per:"srv" rows scale base by the maid-road tuần of each run); rows with base + head < "minN" are reported, not judged (too few to tell)
+     default "band"; per:"srv" rows scale base by the maid-road tuần of each run, the others by the tuần lived as a consort); rows with base + head < "minN" are reported, not judged (too few to tell)
    3 no page error
    Base counts are committed in the json ("base", from the build without npc-purpose) so the gate runs without the base build.
    usage: node dev/test/npc-purpose-rates.js <index.html> [tuần=200] [seeds=5] [--base <base index.html>] [--write-base]
@@ -52,8 +52,8 @@ function count(R){const t={_srvWeeks:R.reduce((a,r)=>a+(r.srvW||0),0)};for(const
  const rareFired=Object.keys(rare).filter(k=>fire[k]>0);if(rareFired.length)console.log('note: kinds listed rare that fired this run: '+rareFired.map(k=>k+' '+fire[k]).join(' '));
  const stale=Object.keys(rare).filter(k=>!reg.includes(k));ok(!stale.length,'every "rare" entry is a registered kind',stale);
  /* 2 tracked events inside their band */
- const HC=count(H);const D=J.band||[.4,2.5];const minN=J.minN||8;console.log('event | base | head | ratio | band   (maid-road tuần base/head: '+(BC._srvWeeks||0)+'/'+HC._srvWeeks+')');
+ const HC=count(H);const D=J.band||[.4,2.5];const minN=J.minN||8;console.log('event | base | head | ratio (per tuần on its road) | band   (maid-road tuần base/head: '+(BC._srvWeeks||0)+'/'+HC._srvWeeks+')');
  for(const row of J.track){const bb=BC[row.n]||0,h=HC[row.n]||0;/* per:"srv" = a maid-road event: judged per tuần spent on the cung nữ road (seed paths decide how long a life stays there) */
-  const sw=row.per==="srv"?Math.max(1,HC._srvWeeks||0)/Math.max(1,BC._srvWeeks||0):1;const r=(h+1)/(bb*sw+1);const [lo,hi]=row.band||D;const judged=bb+h>=minN;
-  const line=`${row.n} | ${bb} | ${h} | ${r.toFixed(2)} | ${lo}–${hi}${judged?'':' (too few, not judged)'}`;if(!judged){console.log('    '+line);continue}ok(r>=lo&&r<=hi,line)}
+  const tw=NS*WK,sw=row.per==="srv"?Math.max(1,HC._srvWeeks||0)/Math.max(1,BC._srvWeeks||0):Math.max(1,tw-(HC._srvWeeks||0))/Math.max(1,tw-(BC._srvWeeks||0));/* every other row: per tuần lived as a consort (a seed may spend its life on the maid road in one build and not the other) */const r=(h+1)/(bb*sw+1);const [lo,hi]=row.band||D;const judged=bb+h>=minN&&!row.report;
+  const line=`${row.n} | ${bb} | ${h} | ${r.toFixed(2)} | ${lo}–${hi}${judged?'':row.report?' (reported, not judged: see json why)':' (too few, not judged)'}`;if(!judged){console.log('    '+line);continue}ok(r>=lo&&r<=hi,line)}
  const nf=res.filter(x=>!x).length;console.log(nf?`FAIL npc-purpose-rates: ${nf} check(s)`:'PASS npc-purpose-rates');process.exit(nf?1:0)})().catch(e=>{console.error(e);process.exit(1)});

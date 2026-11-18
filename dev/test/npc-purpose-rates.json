@@ -52,7 +52,8 @@
     0.15,
     4
    ],
-   "why": "3–45 lines seen in 5-seed runs of the same head build and 12–19 in two base runs: the poison kind is one of three random effects of fxHarm (tát / nổi mẩn / độc) and the bot life path; fxRivSrv/fxRivSrv2/fxSrvHarm themselves fire monthly by grudge with the old odds"
+   "why": "reported only: the line shows only when she sees the victim (fxSeen && fxObservant) and the poison is one of three random effects of fxHarm; same-build 5-seed runs gave 0–45 lines (base runs 12–19). The deed rate is checked by the fx kinds firing (fxSrvHarm / fxRivSrv / fxRivSrv2, monthly, old odds in done)",
+   "report": true
   },
   {
    "n": "NPC 'Lập công' (j71 f7Merit)",
@@ -177,7 +178,12 @@
   {
    "n": "news seller 'Có người bán tin' (jagknow knSell)",
    "f": "c",
-   "re": "^Có người bán tin"
+   "re": "^Có người bán tin",
+   "band": [
+    0.25,
+    2.5
+   ],
+   "why": "per-seed path: knSell fires 140-180 per 5 seeds; the card reaches her only on the buổi she is home (0.27–1.1 seen across runs)"
   },
   {
    "n": "omen 'Điềm báo' (jty tyPlot)",
@@ -279,7 +285,9 @@
   "f7Gamble": "festival gambling contest variant only (0-3 per run)",
   "omen": "weekly comet card: hostility ≥ dil.omenBar (40) and a 36-tuần cd (0-3 per run)",
   "repay": "a debtor repays her: needs a loan she gave and the debtor's silver (0-2 per run)",
-  "wdSpy": "her tai mắt dig at Nội vụ phủ for a hostile consort's outfit (0-6 per run)"
+  "wdSpy": "her tai mắt dig at Nội vụ phủ for a hostile consort's outfit (0-6 per run)",
+  "j70Face": "a scarred NPC seeks a physician: needs a facial scar (0-60 per run, path dependent)",
+  "tyPlot": "an enemy plots to rob her outfit: needs an enemy with a scheming nết and rel ≤ −30 (0-15 per run)"
  },
  "base": {
   "_srvWeeks": 308,
