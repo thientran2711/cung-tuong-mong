@@ -104,6 +104,7 @@ OPEN OWNER QUESTIONS: (B) explicit OK to overwrite live fig-maid-*-ty* with the 
 IDLE (C's): art lead #7 session_011xDdVNkgEgTqsZJxUh9Xd8; W8 mama session_011xDdVRWZVWQYAYYva3YuqJ. ROOT-6 session_011xDdVQNdyTACuGN42yEBQZ stopped (ROOT-5's child; not archived by C).
 
 FOREMAN C ROOT-14 (art) = session_011xDdVScDqvym1tqCBqwYTD · START_CTX ~5% (get_session reads 0, own estimate; window 1M) → roll over at >= 30%, ceiling 60% · depth 1 (lineage 1/8) · own hourly wake (:32) · reports to MAIN s39 session_01UV1Szhxyd4MUci6x4DtVQ3 via this file.
+- 01:42Z 18/11 W15 v10: bụi OK (queued for owner with lạnh v5 + muội v6); mồ hôi v10 drops under eyes read as tears + sticker look → fix (forehead/temple/upper lip only, skin-blended, visible trickle lv3).
 - 01:45Z 18/11 ARCHIVED lead #7 (nothing open; state in BATCH_PLAN.md LEAD #7) + hoa-điền #2 (succeeded by #3). W15 next set LOOKED by C: OK = sẹo rỗ v9, lem phấn v5, lạnh v5, muội v6; FIX = mồ hôi v5 (dense tiny-bead field on forehead, lv3≈lv2 → few bigger drops, clear steps) + bụi v6 lv2 (forehead parallel stripes → soft patch). SENT owner sẹo rỗ v9 1/2/3 + lem phấn v5 1/2/3. Queued for owner: lạnh v5, muội v6.
 - 01:36Z 18/11 TOOK OVER from ROOT-13 (handover read). Telling RUNNING workers W10, W15, hoa-điền #3, W14, lead #7 that ROOT-14 is their foreman. Open owner questions carried: thủy đậu v9 + đậu mùa v9; c12 t6 v9; W14 try-on v2; a36 consort-ty age look (parked).
 
