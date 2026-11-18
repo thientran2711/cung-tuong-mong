@@ -267,7 +267,7 @@ NEXT FOREMAN C-AG: #5 = session_01UV1SzkwHkU5MoXKRsprFyU (opened by C-AG #4 18:3
 NEXT FOREMAN C-AG: #9 = session_01UV1Szh2asyry15mvpuCEsJ (opened by C-AG #8 03:20Z, depth 4; prompt dev/handover/TAKEOVER_FOREMAN_C_AG9.md). C-AG #8 STOPS; wake trig_01TRu7DaRSREmn8KFD24wdcM disabled.
 NEXT FOREMAN C-AG: #10 = (opening by C-AG #9 04:46Z, depth 5; prompt dev/handover/TAKEOVER_FOREMAN_C_AG10.md). C-AG #9 STOPS; wake trig_016ULtkrgBBgsErLCPcqKMME disabled.
 ## HANDOVER C-AG #9 (session_01UV1Szh2asyry15mvpuCEsJ) → C-AG #10, 04:46Z 18/11
-Why: context ~28 % (START ~7 % est) → line 32 %. Depth 4 → #10 depth 5 (#10 may open ONE more child foreman at depth 6? NO — at depth >= 6 never open a child foreman; #10's successor must be a ROOT opened by the owner via MAIN).
+Why: context ~28 % (START ~7 % est) → line 32 %. Depth 4 → #10 depth 5 (#10 may open #11 at depth 6; #11 (depth 6) must NOT open a child foreman → FOR MAIN line so the owner opens a ROOT).
 MAIN = ROOT-45 session_01UV1SzikTZwNu6Q6dJKkcGi (verified child of ROOT-44 SziV7qF). PASS shas → ROOT-45.
 RUNNING (7; free 5):
 - NPC LANDER #3 opus SzjwxQs: full redo gates on review/ag-all-2-land 47568e9b + review/npc-chain-land 2ec0014e (= rv heads 98ac3cbe/d729bba6 + live main 93938893) → SẴN SÀNG KIỂM per branch to AG LATER #2 + C-AG (~06:00Z). Pre-existing on live (FOR MAIN, sent): staff-cap-apply.js row 3; dev/test/outside/route.js stale selector '#slots button[data-new="1"]'.
