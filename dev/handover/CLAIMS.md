@@ -9,7 +9,7 @@
 | life-preload-fu LIVE ecd1aed4 (main 636193f8 → ecd1aed4, B) | review/life-preload-fu-r2v | B | session_01N1tNP55xTbEXtQ5JMTp7Y3 | LIVE ecd1aed4 | 18/11 12:40Z |
 | REVIEW coop-c4-stuck r1 (opus BIG) of a4f193e5 | review/coop-c4-stuck-r1 (+ -tests split) | B | session_01N1tNP4qzpqrMB5FZNZNqSm | PASS review/coop-c4-stuck-r1 1130a49e (after F1 LIVE; tests split LIVE f60b4024) | 18/11 22:56Z |
 | AG2-PERF #2 (opus; ag2-perf deeds floor) | review/ag2-perf | C-AG #12 | session_01UV1SzimZ43DghURhgEAv8W | ARCHIVED | 18/11 13:19Z |
-| residence-qp-alone (opus; BIG; ORDER MAIN ROOT-58 23:15Z; QP/HQP/HH alone, Tần/Phi 2 per room, BAL.res) | review/residence-qp-alone | B | (opening) | RUNNING | 18/11 22:59Z |
+| residence-qp-alone (opus; BIG; ORDER MAIN ROOT-58 23:15Z; QP/HQP/HH alone, Tần/Phi 2 per room, BAL.res) | review/residence-qp-alone | B | session_01N1tNP6NYP5kf382x8ggEJQ | RUNNING | 18/11 22:59Z |
 | coop-thin F2 (opus BIG; places/goTo/visits as intents on TH.F.reg) | review/coop-thin-f2 | B | session_01N1tNP3eu44fWyHnBJfJHuj | RUNNING (step 0 written) | 18/11 22:55Z |
 | role-parity-3 B3 (opus; alias 9 + probe rows consort+hh; only B editor of role-parity-scan.js) | review/role-parity-3 | B | session_01N1tNP5LzLhxHn4SfWgKpNQ | RUNNING | 18/11 22:55Z |
 | role-parity-4b B4 (opus; probe rows maid+srv+promoted; scan changes via B3) | review/role-parity-4b | B | session_01N1tNP2gQKk2oaABEKk69p3 | RUNNING | 18/11 22:55Z |
