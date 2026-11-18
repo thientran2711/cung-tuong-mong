@@ -7,7 +7,7 @@ const {chromium}=require('playwright');const [,,URL,OUT,SZ]=process.argv;const s
   const p=await ctx.newPage();p.setDefaultTimeout(120000);p.setDefaultTimeout(30000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.addStyleTag({content:'#kroul,#kroulw,.kroul,.kcf{display:none!important}'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function',null,{timeout:120000});await p.waitForTimeout(2500);
   await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}});
-  for(let i=0;i<15;i++){await p.waitForTimeout(400);const srv=await p.evaluate(()=>{const s=isSrv();if(s){start()}return s});if(!srv)break}
+  for(let i=0;i<15;i++){await p.waitForTimeout(400);const srv=await p.evaluate(()=>{const s=isSrv();if(s){try{nlNew()}catch(e){}start()}return s});if(!srv)break}
   await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;document.querySelectorAll('.kroul,#kroul,#kcoach,.kcoach,.kcf,#kcf,.kflip,#kflip').forEach(e=>e.remove());try{S.tutDone=1}catch(e){}tab='act';render()});await p.waitForTimeout(1500);
   const r=await p.evaluate(()=>{const q=e=>{const r=e.getBoundingClientRect();return[Math.round(r.left),Math.round(r.top),Math.round(r.width),Math.round(r.height)]};
    const rail=document.getElementById('krail');const st=document.getElementById('stage');const B=rail?[...rail.querySelectorAll('[data-rail]')]:[];

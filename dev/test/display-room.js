@@ -11,7 +11,7 @@ async function viaCurl(ctx){await ctx.route(/ctm-img\.victoria-tntt\.workers\.de
   const fr=await D.openHost(pg,URL);const p={evaluate:(...a)=>fr.evaluate(...a),click:(...a)=>fr.click(...a),$:(...a)=>fr.$(...a),waitForTimeout:(n)=>pg.waitForTimeout(n),screenshot:(o)=>pg.screenshot(o)};
   const W=sz,H='';await fr.addStyleTag({content:'#kroul,#kroulw,.kroul,.kcf{display:none!important}'});await fr.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function',null,{timeout:120000});await p.waitForTimeout(2500);
   await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}});
-  for(let i=0;i<15;i++){await p.waitForTimeout(400);const srv=await p.evaluate(()=>{const s=isSrv();if(s){start()}return s});if(!srv)break}
+  for(let i=0;i<15;i++){await p.waitForTimeout(400);const srv=await p.evaluate(()=>{const s=isSrv();if(s){try{nlNew()}catch(e){}start()}return s});if(!srv)break}
   await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;document.querySelectorAll('.kroul,#kroul,#kcoach,.kcoach,.kcf,#kcf,.kflip,#kflip').forEach(e=>e.remove());try{S.tutDone=1}catch(e){}tab='act';render()});await p.waitForTimeout(1200);
   const r={};
   r.apiHidden=await p.evaluate(()=>!document.querySelector('#krail [data-rail=disp]')||typeof shelfOf==='function'); /* no jshelf on main: rail icon must stay hidden */

@@ -10,7 +10,7 @@ NL='try{nlNew()}catch(e){}'
 RB=re.compile(r'(?:\.o\s*=\s*(?:100|1000)\b|\bo\s*:\s*(?:100|1000)\b|BAL\.[\w.]*\.o\s*=\s*(?:100|1000)\b)')
 FP={"weather-port.js","ag-soft.test.js"}  # weather-port: o:100 only feeds the pure predicate wxOutAct (no roll); ag-soft.test.js: o:100 is the SOFT-FAIL case on purpose (Math.random pinned to .999)
 # A2: other retry forms: `if(s)start()`, `if(s){Q.length=0;start()}`, `if(isSrv())start()`, `S=null;start()`
-RA2=re.compile(r'((?:if\(\w+\)\s*|if\(\w+\)\{[^{}]{0,40};|if\(\s*isSrv\(\)\s*\)\s*|S\s*=\s*null\s*;\s*))(start\(\)\s*[;)}\]])')
+RA2=re.compile(r'((?:if\([\w()!]+\)\s*\{(?:[^{}]{0,40};)?\s*|if\([\w()!]+\)\s*|S\s*=\s*null\s*;\s*|for\s*\(\s*let\s+\w+\s*=\s*0\s*;[^;]*;\s*\w+\+\+\s*\)\s*(?:\{\s*try\s*\{\s*)?))(start\(\)\s*[;)}\]]?)')
 def skip2(t,m):return 'window.__nlInner=1' in t[max(0,m.start()-200):m.end()] or 'nlNew()' in t[max(0,m.start()-40):m.end()]
 def skip(t,m):return 'window.__nlInner=1' in t[max(0,m.start()-200):m.end()] or 'nlNew()' in t[m.start():m.end()+60]
 rows=[];bad=0
