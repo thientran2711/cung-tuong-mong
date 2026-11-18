@@ -74,3 +74,15 @@ Wait for LANDER #3 SẴN SÀNG KIỂM on heads that contain 98ac3cbe / d729bba6 
 Runner scripts (container-local): /home/user/wt/rvlog/run.sh <wt> <tag> <coopN> <g4N>, /home/user/wt/rvlog/long.sh <wt> <tag> [extra tests].
 
 ~74% xong / ~60% chơi được (two faults fixed; final gate waits for the lander's merge of live main e24d5838)
+
+### REVIEWER #2 — round 2 (18/11 ~05:00–06:40Z) on lander heads 72adff05 / b620b051 (live main 94a93759)
+| gate | ag-all-2-land 72adff05 | npc-chain-land b620b051 |
+|---|---|---|
+| quickcheck --runs 5 --cpu 4 | PASS · old save ok · buổi 792/728 | PASS · old save ok · buổi 817/744 |
+| G4 7+3 ×5 (2 busy loops) | 10/10 | 10/10 |
+| coop-e2e ×9 (2 busy loops) | 8/9 — 1 host stall (Q=[Điềm báo…], #modal hidden) = lander's reshowQ root (Tuần lục bar open at week end) | 8/9 — same |
+| long suite (2 suites in parallel) | green except perf p95 (load) + finding #3 + ag-truth invariant (test) | green except perf p95 (load) |
+Finding #3 (fixed, pushed, heads 49122cf5 / 0863517a): the Thái hậu's household (S.thO; jstaff wraps allServ/ownerOf) has no .name → TIN BÁO pass-by line 'X, người hầu cung undefined, …' and taiMatList placedName undefined. Root fix NM/NMc → 'Thái hậu' for S.thO without a name; placedName via NM. Test dev/test/th-name.js 2 FAIL → 4/4. Test fix: ag-truth bot-run invariant counts the player as living (S has no .alive; after #2 an NPC's late scout on her correctly reaches knErrGive with t=S).
+Known flake (pre-existing, not blocking): ag-know 'ONE RULE (NPC)' fixture skip/null ~1 in 4 (red before and after #3).
+Next: LANDER #3 merges 49122cf5 / 0863517a + reshowQ fix + main a95e8d4 → SẴN SÀNG KIỂM → my re-gate (review reshowQ/qBlocked, coop-e2e ×9 under busy loops, quickcheck ×2, set-bonus-check, shelf-check, th-name/kn-late/toil-harsh) → PASS ag-all-2-land first → C-AG #10 + MAIN ROOT-46.
+~79% xong / ~60% chơi được
