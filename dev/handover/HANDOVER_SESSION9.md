@@ -1046,3 +1046,4 @@ LESSONS s41: verify any worker art/asset count on the CDN before telling her (52
 - (18/11 02:00Z) OWNER: wet APPROVED; wants full-body panels → cloth-xoc r6 ordered full-* wet + mud full body.
 - (18/11 02:01Z) IN men-forbidden SẴN SÀNG KIỂM 13286b4 (menLawful one rule; scan 316 bad → 0) → BIG reviewer (opus). Owner asked '30 mini game test link' — GATE ZERO 0 records in CTM → asked her (Đại Hy? / CTM missed? Lượt 8).
 - (18/11 02:04Z) OWNER: book figure sizes differ (KIT §34.6 broken) → worker book-figsize. OWNER angry: '30 mini game link' = THỬ TAY calibration ?hieuchuan=1 in C-AG ag-all-2-land (not live) — s42 Lượt 8 wrongly said no record (grep missed 'thử tay/hiệu chuẩn'). Asked C-AG #8 for ETA + early preview.
+- (18/11 02:05Z) OWNER ANGRY: option cards mixed forms in one dialog + title one word per line (KIT FIRST breach) → added to opt-card-short brief (same §6.2 kit part).
