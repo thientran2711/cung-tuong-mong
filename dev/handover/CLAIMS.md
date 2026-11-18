@@ -470,7 +470,7 @@ c12 a18 t5–t8 headdress re-do from live originals (Round 43) | claude/cung-tuo
 | odds-cap FIX round 3 (opus; FAIL 3 @9df9204d) | review/odds-cap | D | session_01964izECUsWiXJp3oXeZY7A | RUNNING | 18/11 04:57Z |
 | staff-cap-row3 + stale test selectors (sonnet; ROOT-44 04:25Z/04:36Z) | review/staff-cap-row3 | D | session_01964izBkYM6cmkq3vk8mUDm | RUNNING | 18/11 04:57Z |
 | E1 GRAND ENDINGS ENGINE + 3 pilots (opus; BIG; brief briefs/E1-grand-endings-engine.md) | review/grand-endings-engine | E ROOT | session_01DgYSWkyBNQQuQ6GZfMzcqU | RUNNING | 18/11 04:59Z |
-| E2 QUESTLINE AUDIT (opus; design only; brief briefs/E2-questline-audit.md) | review/questline-audit | E ROOT | session_01DgYSWmeNZ5LoMYj22wm73X | RUNNING | 18/11 04:59Z |
+| E2 QUESTLINE AUDIT (opus; design only; brief briefs/E2-questline-audit.md) | review/questline-audit | E ROOT | session_01DgYSWmeNZ5LoMYj22wm73X | SẴN SÀNG KIỂM b42a7c70 (report reports/questline-audit.md) | 18/11 04:59Z |
 | E3 HALL NAMES (PL #3; sonnet; expert first; brief briefs/E3-hall-names.md) | review/hall-names | E ROOT | session_01DgYSWpUv86PhL9wq2MeDFC | RUNNING | 18/11 05:10Z |
 | E4 MONTHLY RATION BUILD (PL #5; opus; brief briefs/E4-monthly-ration.md) | review/monthly-ration | E ROOT | session_01DgYSWp99V1RuDJRSBs4SyJ | RUNNING | 18/11 05:10Z |
 | act-pic-match (owner bug 18/11 05:20Z: wrong/shared act pictures, whole group; sonnet; brief briefs/act-pic-match.md) | review/act-pic-match | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:04Z |
