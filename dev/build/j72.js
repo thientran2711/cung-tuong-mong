@@ -185,7 +185,7 @@ function q72Line(x,X,st,o){const s=o||st;const k=o?(o.k==null?1:o.k):st.k;const 
  return `${od<100?word(od)+" · ":""}tốn: ${cost.join(", ")} · thành: ${w.join(", ")}${od<100?` · hỏng: ${l.join(", ")}`:""}${bad.length?` · kèm: bại lộ thì ${bad.join(", ")}`:""}`}
 function q72Do(u,oi){const q=q72();const x=q.a.find(z=>z.u===u);if(!x)return;const X=q72X(x);if(!X){q72End(x,"gone");render();return}
  const st=X.T.s[x.st];if(!st||st.w)return;const o=st.ch?st.ch[oi]:null;if(st.ch&&!o)return;if(q72Why(x,X,st,o))return;
- const b=rsnap();const s=o||st;const k=o?(o.k==null?1:o.k):st.k;spend(k);q72Ap(s.c);const rolled=o?o.p!=null:st.b<100;const od=rolled?q72Odds(o?o.p:st.b,s.sk,X):100;const ok=!rolled||roll(od);
+ const b=rsnap();const s=o||st;const k=o?(o.k==null?1:o.k):st.k;const rolled=o?o.p!=null:st.b<100;const od=rolled?q72Odds(o?o.p:st.b,s.sk,X):100;/* odds read before the spend (shown-odds r2) */spend(k);q72Ap(s.c);const ok=!rolled||roll(od);
  const nm=q72Txt(s.n,X);let txt="";
  if(ok){q72Ap(s.w);if(s.r)q72Rel(X.A,s.r);if(s.rb&&X.B)q72Rel(X.B,s.rb);let e="";if(s.fn)try{e=s.fn(X,x,true)||""}catch(er){console.error(er)}txt=`${nm}: ${q72Txt(s.ok||"được việc",X)}. ${e}`.trim();log(`${q72Title(X)} · ${txt}`);q72Go(x,X,o?o.to:null,txt)}
  else{q72Ap(s.l);if(s.lr)q72Rel(X.A,s.lr);if(s.lrb&&X.B)q72Rel(X.B,s.lrb);let e="";if(s.fn)try{e=s.fn(X,x,false)||""}catch(er){}const fm=o?(o.lto||"fail"):st.f;txt=`${nm}: không thành, ${q72Txt(s.no||(fm==="r"?"phải làm lại":"hỏng việc"),X)}. ${e}`.trim();log(`${q72Title(X)} · ${txt}`);

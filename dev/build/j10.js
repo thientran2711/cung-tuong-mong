@@ -79,16 +79,16 @@ function cheO(){const C=BAL.house.che;return oddsCl(Math.round(C.base+(S.danh||0
 function servAct(a,id){const s=servById(id);if(!s||S.dead||Q.length)return;const o=ownerOf(s);let r="";window.__servOk=true;
  if(o===S){if(a==="thuong"){if(S.bac<BAL.house.thuongBac)return;apply({bac:-BAL.house.thuongBac});s.loyal=cl(s.loyal+BAL.eff.j10.loyalServAct,0,100);r=`Thưởng ${s.name}: lòng ${balSg(BAL.eff.j10.loyalServAct)}.`}
   else if(a==="phat"){s.loyal=cl(s.loyal-BAL.eff.j10.loyalServAct_2,0,100);if(s.spyFor&&!roll(traO(s))&&!(window.__servOk=false))r=`Tra khảo ${s.name}: <span class="r">hỏng</span>, ${s.role==="eunuch"?"hắn":"nàng"} cắn răng không khai: lòng -${balAb(BAL.eff.j10.loyalServAct_2)}.`;else if(s.spyFor){const m=byKey(s.spyFor);r=`Tra khảo ${s.name}: khai là tai mắt của ${m?NM(m):"kẻ khác"}. Đuổi khỏi cung.`;S.staff.splice(S.staff.indexOf(s),1);if(m&&m!==S)evA(S,m,BAL.eff.j10.evServAct)}else r=`Phạt ${s.name}: lòng -${balAb(BAL.eff.j10.loyalServAct_2)}.`}
-  else if(a==="hoi"){if(!can(2))return;spend(2);const f=Object.keys(s.af).map(x=>servById(+x)).find(x=>x&&s.af[x.sid]>=20);const o2=f&&ownerOf(f);
-   if(o2&&o2!==S&&roll(nv(s,"askTalk"))){r=evA(S,o2,BAL.eff.j10.evServAct_2)?`${s.name} kể chuyện nghe từ ${f.name} bên cung ${o2.name}: chứng cứ ${balSg(BAL.eff.j10.evServAct_2)}.`:`${s.name} kể chuyện nghe từ ${f.name} bên cung ${o2.name}: không có gì sai trái, chỉ biết ${harmTxt(o2)}.`}else r=`${s.name} không biết gì mới.`;
+  else if(a==="hoi"){if(!can(2))return;const oAsk=nv(s,"askTalk");/* odds read before the spend (shown-odds r2) */spend(2);const f=Object.keys(s.af).map(x=>servById(+x)).find(x=>x&&s.af[x.sid]>=20);const o2=f&&ownerOf(f);
+   if(o2&&o2!==S&&roll(oAsk)){r=evA(S,o2,BAL.eff.j10.evServAct_2)?`${s.name} kể chuyện nghe từ ${f.name} bên cung ${o2.name}: chứng cứ ${balSg(BAL.eff.j10.evServAct_2)}.`:`${s.name} kể chuyện nghe từ ${f.name} bên cung ${o2.name}: không có gì sai trái, chỉ biết ${harmTxt(o2)}.`}else r=`${s.name} không biết gì mới.`;
    const dt=allServ().find(x=>x.lover&&!(S.knowDT||[]).includes(x.sid)&&ownerOf(x)!==S);if(dt&&roll(30)){S.knowDT=(S.knowDT||[]).concat([dt.sid,dt.lover]);r+=` Lại nghe đồn ${dt.name} và ${(servById(dt.lover)||{}).name} đối thực.`}}
   else if(a==="doi"){S.staff.splice(S.staff.indexOf(s),1);r=`Trả ${s.name} về Nội vụ phủ.`}
   else if(a==="che"){apply({danh:BAL.eff.j10.danhServAct});if(!roll(cheO())){window.__servOk=false;s.loyal=cl(s.loyal+BAL.house.che.failLoy,0,100);r=`Che chở ${s.name}: <span class="r">hỏng</span>, Thận Hình ti không nể mặt: Danh ${balSg(BAL.eff.j10.danhServAct)}, lòng +${BAL.house.che.failLoy} (biết ơn ngươi đã ra mặt).`}else{s.loyal=cl(s.loyal+BAL.eff.j10.loyalServAct_3,0,100);r=`Che chở ${s.name} trước Thận Hình ti: lòng ${balSg(BAL.eff.j10.loyalServAct_3)}, Danh ${balSg(BAL.eff.j10.danhServAct)}.`}}}
- else if(o){if(!can(2))return;if(a==="mua"){spend(2);r=bribeServ(S,s)}else if(a==="doa"){spend(2);r=threatServ(S,s)}}
+ else if(o){if(!can(2))return;if(a==="mua"){const fz=sgServOdds(s);/* odds read before the spend (shown-odds r2; one formula with the jsgame card) */spend(2);r=fzRun(fz,null,()=>bribeServ(S,s))}else if(a==="doa"){spend(2);r=threatServ(S,s)}}
  if(r)log(r);render()}
 function courtAct(a,k){const c=S.court[k];if(!c||S.dead||Q.length)return;let r="";
  if(a==="thuong"){if(S.bac<BAL.bacFee.court)return;apply({bac:-BAL.bacFee.court});c.af.me=(c.af.me||0)+BAL.eff.j10.meCourtAct;r=`Biếu ${c.name} 20 lượng: người ấy quý ngươi ${balSg(BAL.eff.j10.meCourtAct)}.`}
- if(a==="hoi"){if(!can(BAL.btn.courtHoi.k))return;spend(BAL.btn.courtHoi.k);c.af.me=(c.af.me||0)+BAL.eff.j10.meCourtAct_2;if(k==="tq"&&roll(BAL.odb.j10.rbCourtAct+(c.af.me||0)/2)){discover();r=`${c.name} hé lộ một sở thích của Hoàng thượng.`}else if(k==="ksp")r="Sổ thị tẩm: "+kitNameList(liveRivals(true),x=>`${x.name} ${x.nights}`)+`; ngươi ${S.nights}.`;else r=`${c.name} chỉ cười, không nói gì.`}
+ if(a==="hoi"){if(!can(BAL.btn.courtHoi.k))return;const oHoi=BAL.odb.j10.rbCourtAct+(c.af.me||0)/2;/* the odds on the card, read before the spend (shown-odds r2) */spend(BAL.btn.courtHoi.k);c.af.me=(c.af.me||0)+BAL.eff.j10.meCourtAct_2;if(k==="tq"&&roll(oHoi)){discover();r=`${c.name} hé lộ một sở thích của Hoàng thượng.`}else if(k==="ksp")r="Sổ thị tẩm: "+kitNameList(liveRivals(true),x=>`${x.name} ${x.nights}`)+`; ngươi ${S.nights}.`;else r=`${c.name} chỉ cười, không nói gì.`}
  if(r)log(r);render()}
 function tqAf(p){return S.court&&S.court.tq?(S.court.tq.af[key(p)]||0):0}
 function npcCourt(v){if(roll(10)&&v.bac>=40&&S.court){ap(v,{bac:-BAL.bacFee.court});S.court.tq.af[v.id]=(S.court.tq.af[v.id]||0)+10}}
@@ -116,7 +116,7 @@ function found(a,b){if(facOf(a)||facOf(b))return"";S.facs=S.facs||[];const f={id
 function joinFac(p,f){if(facOf(p)||!f)return"";f.m.push(key(p));return `${NMc(p)} gia nhập ${f.name}. `}
 function leaveFac(p){const f=facOf(p);if(!f)return"";f.m=f.m.filter(k=>k!==key(p));facMembers(f).forEach(x=>relAdd(p,x,-10));if(facMembers(f).length<2)S.facs=S.facs.filter(x=>x!==f);return `${NMc(p)} rời ${f.name}. `}
 function inviteOdds(a,t){const f=facOf(a);return odA(a,30+aff(t,a)/2+(f?facStr(f)/10:0)+(clanOf(a)===clanOf(t)?15:0))}
-function facInvite(a,t){const f=facOf(a);if(!f||facOf(t))return"";if(roll(inviteOdds(a,t)))return joinFac(t,f);relAdd(a,t,-3);return `${NMc(t)} khéo từ chối lời mời của ${NM(a)}. `}
+function facInvite(a,t){const f=facOf(a);if(!f||facOf(t))return"";if(aRoll(inviteOdds(a,t),a))return joinFac(t,f);relAdd(a,t,-3);return `${NMc(t)} khéo từ chối lời mời của ${NM(a)}. `}
 function askJoin(a,f){const l=facLeader(f);if(!l||facOf(a))return"";if(roll(odA(a,30+aff(l,a)/2+(clanOf(a)===clanOf(l)?15:0)+rkOf(a)*3)))return joinFac(a,f);return `${l===S?"Ngươi":l.name} chưa nhận ${NM(a)} vào phe. `}
 function sellOut(a){const f=facOf(a);if(!f)return"";const M=facMembers(f).filter(x=>x!==a);const q=queenP()&&queenP()!==a?queenP():null;leaveFac(a);
  for(const m of M){oanAdd(m,a,40);if(q)evA(q,m,BAL.eff.j10.evSellOut);else if(roll(40))punish(m,"bị đồng đảng tố giác",1)}ap(a,{danh:5,sung:3});if(roll(40))bestow(a,"accuse");return `${NMc(a)} bán đứng ${f.name}, đem chuyện của ${M.map(NM).join(", ")} dâng lên ${q?(q===S?"ngươi":"Hoàng hậu"):"Hoàng thượng"}. `}
@@ -124,7 +124,7 @@ function divide(a,f){const M=facMembers(f).filter(x=>x!==a);if(M.length<2)return
 /* ONE odds of a joint scheme (review/shown-odds-one-path): the faction card (her "Hợp mưu hạ") and the roll read the leader's, not hers */
 function jointO(f){const M=facMembers(f),l=facLeader(f);return odA(l,oFrame(l)+5*(M.length-1))}
 function jointScheme(f,t){const M=facMembers(f),l=facLeader(f);const o=jointO(f);
- if(roll(o)){fall(t,`bị ${f.name} hợp mưu tố tội`);M.forEach(m=>ap(m,{tamco:1}));return `${f.name} hợp mưu hạ ${NM(t)}: thành. `}
+ if(aRoll(o)){fall(t,`bị ${f.name} hợp mưu tố tội`);M.forEach(m=>ap(m,{tamco:1}));return `${f.name} hợp mưu hạ ${NM(t)}: thành. `}
  M.forEach(m=>punish(m,`hợp mưu vu cáo ${NM(t)}`,2));return `<span class="r">${f.name} hợp mưu hạ ${NM(t)} bị lộ, cả phe bị phạt.</span> `}
 function facMonth(){let ev="";S.facs=(S.facs||[]).filter(f=>facMembers(f).length>=2);
  for(const p of consorts())if(p.dad==null)p.dad=30+R(40);for(const p of consorts())if(roll(15))p.dad=cl(p.dad+(R(2)?8:-8),0,100);
@@ -150,6 +150,6 @@ function facHTML(){const mine=facOf(S),F=S.facs||[];let h=`<div class="ph"><span
  return h}
 function facAct(a,d){if(S.dead||Q.length)return;let r="";const v=d.fv?RV(+d.fv):null,f=d.ff?(S.facs||[]).find(x=>x.id===+d.ff):null;
  if(a==="roi"){r=leaveFac(S)}
- else{if(!can(2))return;spend(2);
-  if(a==="lap"&&v)r=found(S,v);else if(a==="moi"&&v)r=facInvite(S,v);else if(a==="xin"&&f)r=askJoin(S,f);else if(a==="ban")r=sellOut(S);else if(a==="ly"&&f)r=divide(S,f);else if(a==="hop"&&v&&facOf(S))r=jointScheme(facOf(S),v);else spend(-2)}
+ else{if(!can(2))return;const fz=a==="moi"&&v?inviteOdds(S,v):a==="hop"&&v&&facOf(S)?jointO(facOf(S)):null;/* the odds on the card, read before the spend (j9 fzRun) */spend(2);
+  r=fzRun(fz,null,()=>{let r;if(a==="lap"&&v)r=found(S,v);else if(a==="moi"&&v)r=facInvite(S,v);else if(a==="xin"&&f)r=askJoin(S,f);else if(a==="ban")r=sellOut(S);else if(a==="ly"&&f)r=divide(S,f);else if(a==="hop"&&v&&facOf(S))r=jointScheme(facOf(S),v);else spend(-2);return r})}
  if(r)log(r);render()}

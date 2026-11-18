@@ -208,7 +208,7 @@ seeBtn=function(v){if(!v||v===S||!v.alive||v.out||together(S,v)||!locKnown(v))re
 function accLeadO(k){return od(BAL.odb.j77.odAccLeadO+(S.danh||0)/8+(typeof mm==="function"?mm():0))}
 function accLeadCost(){return 15}
 function accLead(k){if(!S||S.dead||Q.length||S.out||S.confined)return;const tc=travel(S.place,k);if(!dayFit(tc+1)||S.bac<accLeadCost())return;const nm=accName(k);
- spend(1);apply({bac:-accLeadCost()});if(roll(accLeadO(k))){accGrant(S,k);log(`Nhờ thái giám dẫn vào ${nm}: được dẫn vào (Bạc -${accLeadCost()}).`);j77In(k);if(S.place!==k)render();return}
+ const o=accLeadO(k);/* odds read before the spend (shown-odds r2) */spend(1);apply({bac:-accLeadCost()});if(roll(o)){accGrant(S,k);log(`Nhờ thái giám dẫn vào ${nm}: được dẫn vào (Bạc -${accLeadCost()}).`);j77In(k);if(S.place!==k)render();return}
  log(`Nhờ thái giám dẫn vào ${nm}: hắn nhận bạc rồi từ chối (Bạc -${accLeadCost()}).`);Q.push({t:"Không được dẫn vào",h:`<p>Thái giám nhận bạc, rồi lắc đầu: “Không có khẩu dụ, nô tài không dám.”</p><p class="r">Bạc -${accLeadCost()}</p>`});showModal();render()}
 /* the closed-place card gains the eunuch and the 'chờ được triệu' line */
 (function(){const c0=j77Card;j77Card=function(k,empty){const n0=Q.length;c0.apply(this,arguments);try{if(empty||Q.length===n0)return;const m=Q[Q.length-1];const a=accessOf(S,k);if(!a.lead)return;

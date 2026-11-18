@@ -111,7 +111,7 @@ function wkGive(a,r,ix,quietLog){const e=a.inv[ix];if(!e||!e.wk)return"";const w
 function wkSellVal(w){return 0}/* replaced by jecon (BAL.craftSell) */
 function wkSellO(p){return oddsCl(75+((p.mat||0)*3))}
 function wkSell(p,ix){const e=p.inv[ix];if(!e||!e.wk)return"";const w=e.wk;p.inv.splice(ix,1);const nm=p===S?"Ngươi":`${rkName(p)} ${p.name}`;
- if(roll(wkSellO(p))){ap(p,{bac:wkSellVal(w)});return `${nm} nhờ người mang ${w.n} ra cửa Thần Vũ bán. Bạc +${wkSellVal(w)}. `}
+ if(aRoll(wkSellO(p),p)){ap(p,{bac:wkSellVal(w)});return `${nm} nhờ người mang ${w.n} ra cửa Thần Vũ bán. Bạc +${wkSellVal(w)}. `}
  ap(p,{danh:BAL.eff.j83.danhWkSell});if(p!==S)newsAdd(p,"sell",`${nm} lén bán đồ tự làm ra ngoài cung, bị bắt gặp.`,false);return `<span class="r">${nm} lén bán ${w.n} ra ngoài cung thì bị thị vệ cửa Thần Vũ bắt gặp, đồ bị tịch thu.</span> Danh ${balSg(BAL.eff.j83.danhWkSell)}. `}
 /* show at a banquet: Danh by tier, once per work, the work stays */
 function wkShow(ix){const e=S.inv[ix];if(!e||!e.wk||e.wk.show||!can(BAL.btn.wkShow.k))return;spend(BAL.btn.wkShow.k);e.wk.show=1;const w=e.wk;const f={danh:WSHOW[w.ti]};apply(f);if(w.ti===3)ghenAll(BAL.ghen.showTreasure);
@@ -177,7 +177,7 @@ PEND.wkgive=p=>{const e=S.inv[p.ix];if(!e||!e.wk)return null;const w=e.wk;const 
  return{t:`<p>Dâng, tặng <b>${w.n}</b> (${WTIER[w.ti]}, ${w.bn==="ngươi"?"tự tay ngươi làm":"của "+w.bn}) cho ai? Tốn 2 khắc.</p><p class="past">Đồ quý mua bằng bạc giá trị hơn: Tranh cổ, Đàn cổ dâng Hoàng thượng Sủng +5. Đồ tự tay làm được thêm chân tình với người hiền hậu, thêm hợp ý khi trúng sở thích.${no.length?"<br>"+no.join("<br>"):""}</p>`,o:O}};
 function wkAct(a,ix){const e=S.inv[ix];if(!e||!e.wk||S.dead||Q.length)return;
  if(a==="give"){if(!can(2))return;pushDil(mkP("wkgive",{ix}),"Dâng, tặng tác phẩm");render();return}
- if(a==="sell"){if(!can(1))return;spend(1);log(wkSell(S,ix));render();return}
+ if(a==="sell"){if(!can(1))return;const fz=wkSellO(S);/* read before the spend (j9 fzRun) */spend(1);log(fzRun(fz,null,()=>wkSell(S,ix)));render();return}
  if(a==="show"){wkShow(ix);return}}
 if(typeof wrapR==="function")wrapR("wkAct",(a,ix)=>({give:"Dâng, tặng",sell:"Bán ra ngoài cung",show:"Bày ở yến tiệc"})[a]||"");
 function wkCardsHTML(){const L=S.inv.map((e,i)=>[e,i]).filter(([e])=>e.wk&&!e.h);if(!L.length)return"";const t2=whyTime(2),t1=whyTime(1);
