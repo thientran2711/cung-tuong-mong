@@ -137,3 +137,43 @@ Left, in order:
 4. Shots host Fold + guest iPad at a buổi step + a night result (scratch only; CDN img/_review/coop-thin-e/ only if the reviewer asks).
 5. '## Done': deleted/bypassed table (rows 1–12 of 0b, all bypassed through eW() + the outer nextBuoi guard), tripwire before/after, tests, sha; CLAIMS 'SẴN SÀNG KIỂM <sha>'; send_message Foreman B.
 Known limits (state in Done): phóng cung START counts only the host's aged maids (w.x.mine); punish() of HER entry as vu cổ culprit lands on her stand-in (B4 / world) — not E. Her ready lives in host memory (re-sent on host boot change); her owed step (E.owe) is lost on a host reload (her next ready catches up through the normal step).
+
+## #4 progress (worker session_01N1tNP3GFXs5DQCFkLeZqTm) — review/coop-thin-e @ d3396d96
+PRIORITY #1 CHECK ('pApply|unref|\$r|fixRefs|allowN|coop-thin-trip'): OD L1487/L1489/L1493/L1494 | main f986ff6a (merged in) | review/* no other E | claims row 402 (this worker).
+START_CTX ≈ 3 % of 1M (used_tokens reads 0; estimate) → rollover at ≈ 28 %; finished below it.
+1. Merged origin/main f986ff6a (hoa-dien r3c, staff-cap-fix r6, looks-s40); generated files rebuilt (ca38647e).
+2. RED FOUND + FIXED (whole family, a170bc68): part-D `pApply` (jcoopthin.js, on main) copied patch values raw, so a person ref travelled as `{$r:id}` / `{$k:name}` and stayed raw in her S → guest page error `rkOfFace … reading 'n'` (pFaceOf → pv(p.ref={$r})), seen 2 of 4 coop-thin-c L5 runs (at L5 her whole buổi arrives as patches, so it shows up there; the bug is any level). Fix: ONE de-reference `unref()` (the stored-state `fixRefs` logic, now shared) applied to every "=" / "a" patch value on her S (W keys and kids excluded exactly as fixRefs), and "r" (remove) matches a ref element to its live person. Same path on the host for her `erd` diff (her store in context b). Before/after: coop-thin-c L5 page error 2/4 runs → 0/14 runs. New test E13 (coop-thin-e): no raw ref left in her S.
+3. Tripwire meter (coop-thin-trip.js): the night's go (COOPW.allowN: nextBuoi → S.buoi=0 → endTurn, then the after-step wrappers) is her WEEK end → counted G, not E.
+4. coop-thin-e: SHOTS=<dir> option (host + guest at a buổi step E3 and at her night card E11; the Luân hồi intro overlay hidden for the shot).
+
+## Done (review/coop-thin-e @ d3396d96; site built at e2b342a0, d3396d96 = test file only)
+### Deleted / bypassed paths (rows 1–12 of 0b): all through ONE switch eW() = TH.on(5) + the outermost nextBuoi guard (jcoopthine)
+| # | old guest path | at level 5 |
+|---|---|---|
+| 1 | #next → bend | `do ready` (+ `do erd` her person diff); bend off |
+| 2 | server buoi → onBuoi → her local nextBuoi | host runs her step in withSeat("b"); result = part-D patch; onBuoi off |
+| 3 | bended / badbuoi / rebend / catch-up loop | off |
+| 4 | pendBuoi | off (her cards are part-D cards) |
+| 5 | needWhere / where relay / guest placeWhere | off; her places come in the host's step |
+| 6 | night gate rd/go/q (ctm-nr), nCheck / forceNight on her phone | her tối ready = same intent; host's go rides the view |
+| 7 | tn relay + versions (ctm-tn) | off; `do tn` + view |
+| 8 | resolveTonight / her night on her phone | host in context b (Kính sự phòng summons = part-D card in her context) |
+| 9 | jnight → nightEnd → bend | nightEnd = her ready |
+| 10 | cyb relay / P2H.cyb | `do cyb`; host reads her stored S.cyb |
+| 11 | jcooptimer guest clock (forceBend / forceNight on her phone) | host clock only |
+| 12 | syncRoom re-bend / CW.restore bend flag | off (week re-end stays: G/H) |
+| + | world windows' end() on her household (ORDER s34) | host runs EVD.<k>.home in her context (D.later), patch |
+| + | 12 after-step wrappers ran on every press on both seats | outermost nextBuoi guard: a press = CW.eNext only |
+### Tripwire (guest writes outside fromCanon, coop-bot 4 weeks, random bot ±30 %)
+| | E (buổi + night) | C/H (onBuoi etc.) |
+|---|---|---|
+| L4 (#3 trip4f) | 96 | 643 (onBuoi 605) |
+| L5 9f596384 (#3) | 96 | 39 |
+| L5 a170bc68 (this, allowN = G) | **16** | 37 (onBuoi 0) |
+E residual 16 = `drawF → S.fseen` under the #next press: renderPanel0 → faceInit → faceFor lazily drawing a face during a render (render side effect, not the buổi step; parts F/H). No category rose except D·patch (by design: her step arrives as the patch). L4 4-week bot gets stuck at a host "Biếu quà làm lành" card on this branch AND on main f986ff6a (trip4m 2/4) = bot/main, not E.
+### Gates (final code a170bc68..d3396d96; W = live Worker)
+coop-thin-e L5 28/28 + swap 28/28 (E13 incl.) · coop-thin-c L5 16/16 (11 of the last 11 runs; C4 'week merged once' failed 3/16 runs, all while 3 heavy lanes shared 4 CPUs; 0 failures with ≤ 2 lanes) · coop-thin-c L4 PASS · coop-night THIN=5 105/105 (one 96/98 under load: case 2 + a CDN CORS fetch; rerun 105/105) · coop-timer THIN=5 43/43 · coop-thin-a L1 24/24 (one 19/24 flake; main 24/24, rerun 24/24) · coop-thin-b L4 PASS · coop-thin-d L4 48/52 = the 4 known kit data-kfsp sameDom FAILs (same on main) · coop-e2e 63/63 + COOP_SWAP=1 63/63 · coop-p2 45/45 · coop-one-world seeds 1–10 PASS · quickcheck PASS (core gates incl. one-core-guard / rules-one-source / kit-conform / coop-one-world; old save ok; buổi 811 vs live 892 ms median).
+Perf (CPU ×4, host Fold 686x880, L5, n=11): host own buổi 253 ms (7.3 without render) · her step in context b 22.1 ms · swap alone 16.1 ms · both 275 ms → **+22 ms (+9 %) per buổi on the host** (plan budget ≤ 1.5 s).
+LOOK (scratch /home/user/wt/cte-shots, not uploaded): host Fold + guest iPad after one step: same buổi (trưa) on both, her HUD / stats / place right. Her night shot caught the dawn curtain (new week) over the card. Seen in passing, NOT E (same at L4): in coop-thin-e's iPad guest the Hành sự #panel is empty (25 chars) before and after a step and after renderPanel() → for Foreman B to check on main.
+### Known limits
+phóng cung START counts only the host's aged maids (w.x.mine); punish() of HER entry as vu cổ culprit lands on her stand-in (B4 / world); her ready lives in host memory (re-sent on host boot change); her owed step (E.owe) is lost on a host reload (her next ready catches up); her week end (endTurn + month) stays on her phone until part G.
