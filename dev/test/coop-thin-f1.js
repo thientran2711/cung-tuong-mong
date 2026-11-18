@@ -109,7 +109,8 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  /* F2: acts between the two, both directions. Each act is checked on the TARGET's real person (guest→host: the host's S; host→guest: her
     phone's S after the patch) and on the actor. Every act runs on the host (hers as an intent), so success is forced there for the act:
     roll()→true (but j29's 30 = a loyal servant refusing a dirty job), caught()→"" (restored after). Her person is staged through the host's store (withSeat b → patch), never on her phone. */
- const force=v=>H.p.evaluate(v=>{if(v){if(!window.__fr){window.__fr=[roll,caught];roll=o=>o!==30;caught=()=>''}}else if(window.__fr){[roll,caught]=window.__fr;delete window.__fr}},v);
+ /* every roll succeeds; j29's loyal servant (netIs 'loyal' + roll(30)) is the one refusal, switched off by its trait, not by the odds value (an act whose own odds were 30 failed: laydo) */
+ const force=v=>H.p.evaluate(v=>{if(v){if(!window.__fr){window.__fr=[roll,caught,netIs];const n0=netIs;roll=o=>true;caught=()=>'';netIs=function(s,n){return n==='loyal'?false:n0.apply(this,arguments)}}}else if(window.__fr){[roll,caught,netIs]=window.__fr;delete window.__fr}},v);
  const STP=()=>{S.kids=(S.kids||[]).filter(k=>k.alive!==false);if(!S.kids.length)S.kids.push(mkKid('f',4));for(const k of S.kids)k.hp=100;
   S.pets=[{t:Object.keys(PET)[0],from:'',src:'',care:80,at:tsbWk(),full:40,clean:40,joy:40,aff:50}];S.inv=S.inv||[];
   const lk=Object.keys(IT).find(k=>typeof loOk==='function'&&loOk({k}));for(const k of [lk||'tranhco','yensao','yensao'])S.inv.push({k});S.bac=Math.max(S.bac||0,5000);S.confined=0;S.suc=Math.max(S.suc||0,90)};
@@ -129,6 +130,8 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   for(const [k,what,chk] of PAIRS){for(let i=0;i<3;i++){await clear(H);await clear(G)}
    await stageP(B);await stageP(A);await H.p.evaluate(()=>{try{COOPW.thin.flush()}catch(e){}});await sync();
    if(A===G)await G.p.evaluate(()=>{S.pets=[];});/* her own pets: none, so petsteal has room (petHasFree) */
+   /* the host sees her staged kid / pets on her entry before he acts on her (her fam reaches his entry of her) */
+   if(A===H)await until(H,()=>{const f=COOPW.friend();return !!(f&&(f.kids||[]).some(k=>k&&k.alive!==false))},null,15000);
    const a0=await pers(A),t0=await pers(B);await force(true);
    const r=await A.p.evaluate(k=>{const f=COOPW.friend();if(!f)return {err:'no friend'};const A2=ACT[k];let okd=false;try{okd=!A2.ok||A2.ok(S,f)}catch(e){okd='EXC '+e.message}
     if(okd!==true)return {err:'not ok '+okd};const ex=k==='gift'?S.inv.findIndex(e=>e&&!e.h&&e.k==='yensao'):undefined;let out='';

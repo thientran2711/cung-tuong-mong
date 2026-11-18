@@ -212,15 +212,18 @@ function diff(a,b,pre,set,del){for(const k of Object.keys(b)){if(BADK.test(k)||k
 TH.diff=(a,b)=>{const set={},del=[];diff(a||{},b||{},"",set,del);return {set,del}};
 let lastSent=null;
 TH.snapSend=function(o){if(!host()||!TH.on(1))return false;lastSent=J(o);TH.hv++;return COOP.send({t:"snap",v:TH.hv,o:lastSent})};
-TH.deltaSend=function(o){if(!host()||!TH.on(1))return false;if(!lastSent)return TH.snapSend(o);const d=TH.diff(lastSent,o);
- if(!Object.keys(d.set).length&&!d.del.length)return false;lastSent=J(o);const base=TH.hv;TH.hv++;return COOP.send({t:"delta",v:TH.hv,base,set:d.set,del:d.del})};
+TH.deltaSend=function(o){if(!host()||!TH.on(1))return false;if(!lastSent)return TH.snapSend(o);const t=performance.now();const d=TH.diff(lastSent,o);
+ if(!Object.keys(d.set).length&&!d.del.length)return false;lastSent=J(o);const base=TH.hv;TH.hv++;const r=COOP.send({t:"delta",v:TH.hv,base,set:d.set,del:d.del});
+ /* F1 latency: every intent answered since the last send leaves now (q = its wait on the host, v = view build + diff + send) */
+ try{if(latP.length){const now=performance.now(),v=Math.round(now-t+(TH.hvMs||0));for(const x of latP.splice(0))latN({id:x.id,op:x.op,run:Math.round(x.run),q:Math.round(t-(TH.hvMs||0)-x.t1),v})}}catch(e){}return r};
 /* part A pipe: what the host sends (grows per part) */
-TH.hostView=function(){if(!S)return null;const d=ser();let b=null;try{const B=TH.seatOf(CW.seat==="a"?"b":"a");b=B&&J(B.S)}catch(e){}
- return {w:COOP.state.week||0,buoi:S.buoi||0,P:{a:d.S,b},R:d.R,rid,dn:TH.dn,dr:TH.dr}};
+TH.hostView=function(){if(!S)return null;const t0=performance.now();try{return hostView0()}finally{TH.hvMs=performance.now()-t0}};
+function hostView0(){const d=ser();let b=null;try{const B=TH.seatOf(CW.seat==="a"?"b":"a");b=B&&J(B.S)}catch(e){}
+ return {w:COOP.state.week||0,buoi:S.buoi||0,P:{a:d.S,b},R:d.R,rid,dn:TH.dn,dr:TH.dr}}
 function snapNow(){try{const o=TH.hostView();if(o)TH.snapSend(o)}catch(e){console.error("thin snap",e)}}
-let dT=0;function deltaSoon(ms){clearTimeout(dT);dT=setTimeout(()=>{const t=performance.now(),L=latP;latP=null;try{const o=TH.hostView();if(o)TH.deltaSend(o)}catch(e){console.error("thin delta",e)}
- if(L&&TH.lat)latN({id:L.id,op:L.op,run:Math.round(L.run),q:Math.round(t-L.t1),v:Math.round(performance.now()-t)})},ms==null?1200:ms)}
-TH.flush=()=>{clearTimeout(dT);try{const o=TH.hostView();if(o)TH.deltaSend(o)}catch(e){console.error(e)}};
+/* F1 latency: a later render's deltaSoon() (1200 ms) must never push back a sooner send already due (an intent's answer: deltaSoon(0)) */
+let dT=0,dDue=0;function deltaSoon(ms){ms=ms==null?1200:ms;const due=Date.now()+ms;if(dT&&dDue<=due)return;clearTimeout(dT);dDue=due;dT=setTimeout(()=>{dT=0;dDue=0;try{const o=TH.hostView();if(o)TH.deltaSend(o)}catch(e){console.error("thin delta",e)}},ms)}
+TH.flush=()=>{clearTimeout(dT);dT=0;dDue=0;try{const o=TH.hostView();if(o)TH.deltaSend(o)}catch(e){console.error(e)}};
 COOP.on("error",m=>{if(!m)return;if(m.code==="snapresync"&&host()&&TH.on(1)){TH.hv=Math.max(TH.hv,m.v|0);snapNow()}});
 COOP.on("week",()=>{if(host()&&TH.on(1))setTimeout(snapNow,0)});
 if(typeof render==="function"){const f=render;render=function(){const r=f.apply(this,arguments);try{if(!CW.ctx&&host()&&TH.on(1))deltaSoon()}catch(e){}return r}}
@@ -238,12 +241,12 @@ function runDo(m){const fn=DO[m.op];let r=null;TH.curDo=m.op;
  TH.curDo=null;/* D r1: call-scoped (a later D.later must not see a stale op) */return r}
 /* F1 latency split (report only): TH.lat = host times per intent id: run = her intent's run (withSeat + the act), q = wait from the run's end
    to the delta timer, v = view build + diff + send (the guest's network time = her tap→answer minus these and her own apply) */
-TH.lat=[];const latN=x=>{TH.lat.push(x);if(TH.lat.length>40)TH.lat.shift()};let latP=null;
+TH.lat=[];const latN=x=>{TH.lat.push(x);if(TH.lat.length>60)TH.lat.shift()};let latP=[];
 COOP.on("do",m=>{if(!host()||!m||!TH.on(1))return;let r;const t0=performance.now();
  /* B r2 (seam): her intents other than the life itself wait while her rolled life is held (they run on her accepted person) */
  if(m.op!=="life"&&m.op!=="probe"&&TH.held(m.from||"b")){D.defer(m.from||"b",{op:m.op,args:m.args===undefined?null:J(m.args),m:{from:m.from||"b",id:m.id}});r={held:1}}
  else r=runDo(m);
- TH.dn=m.n|0;TH.dr={id:m.id,op:m.op,r:r===undefined?null:J(r)};latP={id:m.id,op:m.op,run:performance.now()-t0,t1:performance.now()};deltaSoon(0)});
+ TH.dn=m.n|0;TH.dr={id:m.id,op:m.op,r:r===undefined?null:J(r)};latP.push({id:m.id,op:m.op,run:performance.now()-t0,t1:performance.now()});if(latP.length>20)latP.shift();deltaSoon(0)});
 /* part A test intent: read her person in context b (no change) */
 TH.onDo("probe",()=>({name:S.name,used,ctx:CW.ctx,host:(rivals.find(v=>v.coop)||{}).id||null}));
 
