@@ -395,8 +395,8 @@ Object.assign(window,{agHeard,agTell,agRdTick,agRdDeliver});
 function agShOn(){try{return agKhOn()&&BAL.ag.kh2.sh&&BAL.ag.kh2.sh.on}catch(e){return false}}
 function agShKh(p){return BAL.ag.kh2.sh.kh}/* owner (OD ~16:00Z ONE SHARED CLOCK, sub-line): staying to talk costs exactly ONE khắc in all — her answers inside add none */
 function agShOpts(p,v){const n=agShKh(p);const lock=agWhyDay(n);/* the DAY gate (OD L852) */const O=[];
- O.push({n:"Tiếp chuyện",r:"rec",fx:{},x:`Nắm chắc · tốn: ${n} khắc · thành: cùng ${v.name} trải qua khắc này`,go:()=>{if(!agCanDay(n)){agShDecl(p,v);return}try{const k=agKh(),old=agK1(p);p.k1=Math.min(old,k+n-1);agShClear(p,p.k1+1,old)}catch(e){}/* the comer's act ends with hers: both move to the next khắc together */spend(n);AGD.stat.shMe=(AGD.stat.shMe||0)+1;const r=agLand(p,true);if(r)log(`${r}.`)}});
- O.push({n:"Không tiếp",r:"dec",fx:{},x:`Nắm chắc · thành: ${v.name} ra về, khắc của ngươi còn nguyên`,go:()=>agShDecl(p,v)});
+ O.push({n:"Tiếp chuyện",r:"rec",fx:{},x:`tốn: ${n} khắc · thành: cùng ${v.name} trải qua khắc này`,go:()=>{if(!agCanDay(n)){agShDecl(p,v);return}try{const k=agKh(),old=agK1(p);p.k1=Math.min(old,k+n-1);agShClear(p,p.k1+1,old)}catch(e){}/* the comer's act ends with hers: both move to the next khắc together */spend(n);AGD.stat.shMe=(AGD.stat.shMe||0)+1;const r=agLand(p,true);if(r)log(`${r}.`)}});
+ O.push({n:"Không tiếp",r:"dec",fx:{},x:`thành: ${v.name} ra về, khắc của ngươi còn nguyên`,go:()=>agShDecl(p,v)});
  if(lock)kitOff(O[0],lock,"");return O}
 /* review ag-all-2 r2 B7: the khắc a cut / dropped deed no longer holds show the NPC's row of the khắc before (she goes back to what she was doing) */
 function agShClear(p,from,to){try{const R=agRec();if(!R||p.key!==R.key)return;const row=R.P[p.id];if(!row)return;const b4=p.kh>0&&row[p.kh-1]?row[p.kh-1]:null;const prev=[b4&&!/^ag_/.test(b4[1]||"")?b4[0]:p.pl,b4&&!/^ag_/.test(b4[1]||"")?b4[1]:"go",null,""];

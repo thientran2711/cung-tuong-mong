@@ -17,7 +17,7 @@ function coldActsOf(p){const me=p===S,A=[],X=BAL.ag.par3.cold,odP=b=>odA(p,b),fr
  if((p.an||0)>=X.poem.an)A.push({n:"Gửi bài thơ cũ",t:"Chép lại bài thơ đêm nào ngài khen, nhờ người lén dâng.",c:{},o:odP(BAL.odb.j14.odO_4+(p.an||0)/X.poem.anD+((p.arts&&p.arts.thi)||0)*X.poem.thi),k:2,w:{},l:{},x:"ngài nhớ chuyện cũ",go:()=>free(false,"Hoàng thượng đọc bài thơ cũ, nhớ chuyện xưa")});
  if(son)A.push({n:`Nhờ ${son.name} cầu xin`,t:"Con quỳ trước Dưỡng Hòa điện xin cho mẹ.",c:{},o:odP(BAL.odb.j14.odO_5+(son.fond||0)/X.son.fondD),k:1,w:{},l:{},x:"được tha",go:()=>free(false,`${son.name} quỳ khóc xin cho mẹ`)});
  A.push({n:"Chép kinh, giữ đức",t:"Ngày ngày chép kinh Kim Cương.",c:{...X.sutra.c},o:100,k:2,w:{...X.sutra.w}},{n:"Trồng rau",t:"Cuốc đất sau sân, trồng rau mà ăn.",c:{},o:100,k:2,w:{...X.veg.w}},{n:"Thêu khăn bán",t:"Nhờ lính gác đem ra ngoài bán.",c:{...X.embro.c},o:odP(BAL.odb.j14.odO_6),k:2,w:{...X.embro.w},l:{}},
-  {n:"Xuất gia",t:"Cắt tóc đi tu, rời bỏ hồng trần.",c:{},o:100,k:4,w:{},x:"kết thúc kiếp này, yên ổn (sẽ hỏi lại)",go:()=>me?xgConfirm(()=>over("Xuất gia",`${S.name} cạo tóc, vào chùa Bảo Hoa tu hành, sống nốt quãng đời thanh tịnh.`,"Xuất gia")):p3Nun(p)});
+  {n:"Xuất gia",t:"Cắt tóc đi tu, rời bỏ hồng trần.",c:{},o:100,fix:1,k:4,w:{},x:"kết thúc kiếp này, yên ổn (sẽ hỏi lại)",go:()=>me?xgConfirm(()=>over("Xuất gia",`${S.name} cạo tóc, vào chùa Bảo Hoa tu hành, sống nốt quãng đời thanh tịnh.`,"Xuất gia")):p3Nun(p)});
  return A}
 function coldMonth(){let ev="";
  if(S.out){apply({bac:2});const w=SEASON[S.month-1]==="Đông";apply({suc:w?-12:-6});if(w&&roll(8)){apply({suc:BAL.eff.j14.sucColdMonth});ev+=`<span class="r">Đêm đông giá buốt, lãnh cung không than sưởi.</span> Sức ${balSg(BAL.eff.j14.sucColdMonth)}. `}

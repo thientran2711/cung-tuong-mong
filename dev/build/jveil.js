@@ -120,7 +120,7 @@ function vlBuyOut(p,k){const ag=vlAgent(p);const pr=vlOutPrice(k);if(!ag||(p.bac
  if(roll(vlLeak(p,ag))){ap(p,{danh:-VL.outDanh});r+=`<span class="r">Chuyện lộ ra: cả cung xì xào ${p===S?"ngươi":p.name} lén mua đồ ngoài cung.</span> Danh -${VL.outDanh}. `;if(p!==S)try{newsAdd(p,"wd",`${NMc(p)} sai người lén mua mạng che mặt ngoài cung.`)}catch(x){}}
  return r}
 /* ask a bestowal: Hoàng hậu (when she is not the asker) or Thái hậu; odds by their favour */
-function vlGivers(p){const L=[];try{const q=queenP();if(q&&q!==p&&q.alive!==false)L.push({k:"hh",n:"Hoàng hậu",o:cl(VL.askHH+(p.hh||0)/2,5,90)})}catch(e){}if(!S.thDead)L.push({k:"th",n:"Thái hậu",o:cl(VL.askTH+(p.th||0)/2,5,90)});return L}
+function vlGivers(p){const L=[];try{const q=queenP();if(q&&q!==p&&q.alive!==false)L.push({k:"hh",n:"Hoàng hậu",o:oddsCl(Math.min(VL.askHH+(p.hh||0)/2,90))})}catch(e){}if(!S.thDead)L.push({k:"th",n:"Thái hậu",o:oddsCl(Math.min(VL.askTH+(p.th||0)/2,90))});return L}
 function vlAsk(p,gk){const G=vlGivers(p).find(x=>x.k===gk);if(!G)return"";const nm=p===S?"Ngươi":`${rkName(p)} ${p.name}`;
  if(roll(G.o)){const k=vlKey(Math.min(8,wdPOf(p)),1);vlGain(p,k,{from:gk,giver:G.n,known:`${G.n} ban theo phẩm`});return `${nm} xin ${G.n} ban mạng che mặt: <span class="g">thành</span>. ${G.n} ban ${itm(k).n} (Tinh phẩm). `}
  ap(p,{[gk]:-VL.askFail});return `${nm} xin ${G.n} ban mạng che mặt; ${G.n} không ban, còn chê phiền. ${G.n} với ${p===S?"ngươi":"nàng"} -${VL.askFail}. `}

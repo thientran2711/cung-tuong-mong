@@ -37,15 +37,20 @@ BAL.nwq={shift:0,free:2,hint:.5,auto:.25,miss:.8,xaMiss:.9,xaFloor:0,peek:8,idle
  cScore7=function(E,kindOf,prep,meB,her){return E.map(p=>{const kind=kindOf(p);if(p===S&&her&&her.score!=null)return{p,kind,t:Math.round(her.score),pr:0,lk:0,s:Math.round(her.score),mg:1};
   const t=Math.round(SC7[kind].f(p));let pr=0;if(p===S)pr=meB;else if(prep.includes(p.id)&&(p.bac||0)>=20){ap(p,{bac:-20});pr=J71.prep}const lk=Math.round(raw7(p,kind)/10*J71.luck);return{p,kind,t,pr,lk,s:t+pr+lk}}).sort((a,b)=>b.s-a.s)};
  cOdds7=function(kind,E,prep,meB,seed){const f=SC7[kind].f;const base=E.map(p=>f(p)+(prep.includes(p.id)?J71.prep:0));const mi=E.indexOf(S);if(mi<0)return 0;base[mi]+=meB;const r=rng7(seed);let w=0;const N=500;
-  for(let t=0;t<N;t++){let b=-1,bi=-1;for(let i=0;i<E.length;i++){const s=base[i]+smp7(E[i],kind,r);if(s>b){b=s;bi=i}}if(bi===mi)w++}return cl(Math.round(100*w/N),3,97)};
+  for(let t=0;t<N;t++){let b=-1,bi=-1;for(let i=0;i<E.length;i++){const s=base[i]+smp7(E[i],kind,r);if(s>b){b=s;bi=i}}if(bi===mi)w++}return oddsCl(Math.round(100*w/N))};
  fxOdds7=function(F,art,meB,seed){const E=[S].concat(liveRivals(true).filter(present7));const r=rng7(seed);let w=0;const N=500;const K=E.map(p=>p===S?art:fxBest7(p,F.arts));const base=E.map((p,i)=>p===S?SC7[art].f(S)+meB:SC7[K[i]].f(p));
-  for(let t=0;t<N;t++){let b=-1,bi=-1;for(let i=0;i<E.length;i++){const x=base[i]+smp7(E[i],K[i],r);if(x>b){b=x;bi=i}}if(bi===0)w++}return cl(Math.round(100*w/N),3,97)};
+  for(let t=0;t<N;t++){let b=-1,bi=-1;for(let i=0;i<E.length;i++){const x=base[i]+smp7(E[i],K[i],r);if(x>b){b=x;bi=i}}if(bi===0)w++}return oddsCl(Math.round(100*w/N))};
+ /* ODDS CAP: when her place comes from the luck draw (she did not play the round herself), her first place keeps its odds inside the one cap:
+    P(first | the others' scores) is sampled from her own luck draw and capRes moves her just above / below the best other score. */
+ capRank7=function(L){try{const i=L.findIndex(x=>x.p===S);if(i<0||L[i].mg||L.length<2)return L;const me=L[i],O=L.filter(x=>x!==me),best=Math.max(...O.map(x=>x.s));
+  let w=0;const N=BAL.odds.simN;for(let t=0;t<N;t++)if(me.t+me.pr+Math.round(raw7(S,me.kind)/10*J71.luck)>best)w++;
+  const win=i===0,fin=capRes(win,100*w/N);if(fin===win)return L;const s=fin?best+1:best-1;me.lk+=s-me.s;me.s=s;return L.sort((a,b)=>b.s-a.s)}catch(e){console.error(e);return L}};
 })();
 /* the Emperor tires of accusations: every accusation an accuser brought in the last 36 tuần (a year) lowers the odds of her/his next one by accTire points
    (same rule for every accuser; the odds word shown is the real one) */
 Object.assign(BAL,{accTire:10});
 (function(){try{const A=ACT.accuse,f0=A.f;A.f=function(a,t){try{a.accL=(a.accL||[]).filter(w=>wk()-w<36);a.accL.push(wk())}catch(e){}return f0.apply(this,arguments)}}catch(e){}
- const o0=oAccuse;oAccuse=function(a,t){const o=o0.apply(this,arguments);if(!BAL.accTire||!a)return o;const n=(a.accL||[]).filter(w=>wk()-w<36).length;return n?cl(o-BAL.accTire*n,5,95):o}})();
+ const o0=oAccuse;oAccuse=function(a,t){const o=o0.apply(this,arguments);if(!BAL.accTire||!a)return o;const n=(a.accL||[]).filter(w=>wk()-w<36).length;return n?oddsCl(o-BAL.accTire*n):o}})();
 /* one charge at a time (balance 11/14, measured: without it an angry palace brought ~40-60 charges a life against her, ~30 stuck, each a fall of two ranks
    or the cold palace): a person just accused, whether the charge stuck or not, cannot be accused again by anyone for BAL.accCdT tuần.
    Same rule for every target, her included; she cannot bring a charge against someone inside the window either. */
@@ -203,7 +208,7 @@ Object.assign(BAL,{coopBribe:{pay:20,tin:5}});
 Object.assign(BAL,{visit:{minSung:20,base:.3,slope:.07,anK:.01,cap:8,datinh:1.5,lanhlung:.5,gap:9,illSt:2,q:2,
  sung:3,danh:3,ghen:6,lostGhen:15,lostRel:8,hh:3,thP:25,thNeg:15,thLoss:4,adviseDuc:3,adviseSung:1,adviseTh:2,
  show:{o:40,w:8,suc:5,sung:6,danh:2},tea:{minSung:60,p:50,sung:2,an:2}},
- night:{sung:3,an:2,ghen:8,bestow:10,bestowS:4,stealS:3,mood:[1,0,-1,-2] /* his mood 0..3 (vui, thường, buồn, giận) → night score add-on (j8 night1; jwhyn reads it) */}});
+ night:{sung:3,an:2,ghen:8,bestow:10,bestowS:4,stealS:3,vO:[40,50,60,75,85] /* night score v ≤-1 / 0 / 1 / 2 / ≥3 → odds read by word() (Khó … Rất chắc) */,mood:[1,0,-1,-2] /* his mood 0..3 (vui, thường, buồn, giận) → night score add-on (j8 night1; jwhyn reads it) */}});
 /* ACTIVE MAID LINE (jmline.js, review/servant-system, owner 16/11): % per month unless named. eye[rank] = the Emperor's eye by servant rank
    (thô sử, cung nữ, đại cung nữ, chưởng sự, nữ quan; was 0/0/1.2/1.2/1.2), eyeSung = ×(1 + master Sủng/100 × eyeSung), eyeAge = ages that can rise;
    seekStart (× nết: tham 2, lanh 1.5, trung/nhát 0.3) for seekMonths months, maids up to seekAge, seekMul on the eye while seeking;
@@ -625,7 +630,7 @@ BAL.srvGate={rew:60,rec:50,get frameLoy(){return -BAL.eff.j42.loyalSrvStaffAct},
    -tamco/tc, clamp min..max); srvGrant = the Ban gả trigger (Chủ tin >= tin, roll(base + bond if a sworn man), loyalty -stayLoy if she asks to stay);
    srvMp = công lao per bậc (need (bậc+1)*srvMp); srvLoyal = a new servant's loyalty base+R(r) */
 BAL.srvRisk={vuon:28,thu:34,tyv:20,tn:40,home:18,def:26,fr:4,tc:10,min:6,max:92};
-BAL.caught={fac:4,min:5,max:95};/* j8 caughtOdds */
+BAL.caught={fac:4};/* j8 caughtOdds (clamped by the ONE odds cap, oddsCl) */
 BAL.srvGrant={tin:55,get base(){return BAL.odb.j42.rbTop_2},bond:3,stayLoy:5};BAL.srvMp=5;BAL.srvLoyal={base:45,r:36};/* promotion loyalty: BAL.eff.j14.loyalServRanks */
 BAL.ag.staff={st:{duc:[10,40],tamco:[10,40],danh:[0,10],suc:[60,90],bac:[0,20]},goal:{tin:70,suc:60,bac:40,sac:60,tai:40,duc:40,friend:2},
  nw:{tin:1.2,mp:1,suc:1.2,bac:.6,self:.4,ally:.5,sung:1,love:.3,spite:.4},greed:2,mpS:4,sc:{af:.3,tinh:.3,spite:.3,sung:.25},
@@ -910,10 +915,6 @@ BAL.ag.harm={spiteD:100,needs:["spite","sung","kid","safe","danh","ally"],
  hap:{wit:["provoke","humil","gossip","flaunt","effort","mediate","ksp","pray","harm:trip","harm:pushp","harm:rumor","harm:pond","harm:accuse","harm:vp","harm:xx","harm:takeaway"],pub:{effort:["vuon"],flaunt:["vuon"]}}};
 /* AG-ALL HYBRID day: intentW = × on the weight of a need that is part of her day intent when she picks her buổi; two = % she sets a second goal for the day */
 Object.assign(BAL.ag.day,{intentW:3,two:40});
-/* SOFT FAIL (owner OD 17/11 ~17:35Z "Trần 95%, việc chắc ăn mà hỏng thì chỉ hỏng nhẹ"): an act whose raw odds reached the cap (>= BAL.odds.hi:
-   sure before the cap) and fails only because of the cap fails SOFTLY: the cost / khắc already paid stays spent, nothing gained, no failure
-   consequence. me / npc = the ONE BẠI line ({n} = her name). Defined only if absent: Foreman D's game-wide BAL.odds.softFail wins on merge. */
-BAL.odds.softFail=BAL.odds.softFail||{me:"Việc tưởng nắm chắc, nào ngờ trời chẳng chiều người: công đã bỏ, chẳng được gì, cũng chẳng mất gì thêm.",npc:"{n} tưởng việc nắm chắc mà không thành; chẳng được gì, cũng chẳng mất gì thêm."};
 /* AG-ALL-2 (jagacts2.js; design dev/handover/reports/ag-all.md §16): the consort cards an NPC lacked + the Emperor's own visit / tea / bestowal.
    cx2     the player's cards read the SAME entries (j2 talkOpts / deck, j9 topicOpts, j20) through cx2O (j8): o base odds, sd / dd / td / thi / mat / y = the
            stat divisors / multipliers of the old literals, w gain, l loss, c cost; g = the need points an NPC's deed serves (BAL.ag.unit = one whole need).
@@ -1040,7 +1041,7 @@ BAL.ag.mg2.hand={on:1,lo:3,hi:9.5,w:4,skew:1.6};
 BAL.ag.mg2.cal={on:1,d:[-2,-1,0,1,2],up:1,dn:4,min:1,max:9.5,k:{}};
 /* j71 odds words under mg2: the same draw (mgNpcRaw, seeded by the plan) for every entrant, her included, on this contest's board (j71 mgX7) */
 (function(){if(typeof cOdds7!=="function"||typeof fxOdds7!=="function")return;const c0=cOdds7,f0=fxOdds7;
- const win=(E,base,kindAt,mi,r)=>{let w=0;const N=500;for(let t=0;t<N;t++){let b=-1,bi=-1;for(let i=0;i<E.length;i++){const x=base[i]+mgNpcRaw(kindAt(i),E[i],{rnd:r})/10*J71.luck;if(x>b){b=x;bi=i}}if(bi===mi)w++}return cl(Math.round(100*w/N),3,97)};
+ const win=(E,base,kindAt,mi,r)=>{let w=0;const N=500;for(let t=0;t<N;t++){let b=-1,bi=-1;for(let i=0;i<E.length;i++){const x=base[i]+mgNpcRaw(kindAt(i),E[i],{rnd:r})/10*J71.luck;if(x>b){b=x;bi=i}}if(bi===mi)w++}return oddsCl(Math.round(100*w/N))};
  cOdds7=function(kind,E,prep,meB,seed){if(!mg2On())return c0.apply(this,arguments);const mi=E.indexOf(S);if(mi<0)return 0;const f=SC7[kind].f;
   const base=E.map(p=>f(p)+(prep.includes(p.id)?J71.prep:0));base[mi]+=meB;return win(E,base,()=>kind,mi,rng7(seed))};
  fxOdds7=function(F,art,meB,seed){if(!mg2On())return f0.apply(this,arguments);const E=[S].concat(liveRivals(true).filter(present7));const K=E.map(p=>p===S?art:fxBest7(p,F.arts));
@@ -1137,7 +1138,7 @@ Object.assign(BAL,{odb:{
  jpet:{rbGo:100},
  jroute:{odRtSeeO:80,odO:62,odO_2:55,odO_3:55,odO_4:55,odO_5:42,odO_6:85,odO_7:50,odO_8:35,odO_9:22,odO_10:14,odO_11:38,odOA:30,odO_12:35,odOT:55,odOB:45,odOM:40,odO_13:45,odO_14:50,odO_15:30,odOV:45,odOR:38,odRtMgO:62},
  jts:{rbSmart:40},
- jtsb:{odOr:30,odTd:38,odTc:34,odTsbMockO:44}
+ jtsb:{odOr:30,odTd:38,odTc:34,odTsbMockO:44,leakO:35 /* Thu làm tai mắt: the turned servant also sells HER news (side chance) */}
 }});
 /* AG-ALL-2b merge (ONE CORE): evidence a deed gives / clears where the player and NPC share one code path (j2 cx2 cards, j9 help, j10 servants,
    j42 dilemma builders, jcmaid, jpromsv, jeitem): one = 1 piece, two = 2 pieces (a Mật báo), all = clear every piece; rel = liking lost by a bribe told to the master */

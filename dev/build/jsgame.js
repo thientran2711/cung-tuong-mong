@@ -226,7 +226,7 @@ SG_THOI.forEach(k=>{if(!ACT[k]||!ACT[k].o||SG.K[k])return;
    j:"over"  "Nghe lén câu chuyện" at a place (j78 overhear) → Nghe ngóng          {pi}
    j:"serv"  "Mua chuộc" a servant of another palace (bribeServ j29 / j10 / j15) → Mặc cả   {sid}
    job = {gk (SG.K key), t (game title), v (target, for the game), name, p0() (odds now), line(word) (card text), ask, cost (silver text), pay()→bool (take the time/silver), run(m) (act under the step), art} */
-function sgOdds(v,k){const a=ACT[k];const o=a&&a.o?a.o(S,v):50;return cl(Math.round(o+(typeof lotB==="function"?lotB(S,ACTDOM[k]):0)),5,95)}
+function sgOdds(v,k){const a=ACT[k];const o=a&&a.o?a.o(S,v):50;return oddsCl(Math.round(o+(typeof lotB==="function"?lotB(S,ACTDOM[k]):0)))}
 function sgLine(v,k,w,c){const prev=typeof J78!=="undefined"?J78.cardV:null;try{if(typeof J78!=="undefined")J78.cardV=v;return actLineRaw(k,w,c)}finally{if(typeof J78!=="undefined")J78.cardV=prev}}
 function sgCan(i,k){const v=rivals[i],a=ACT[k];if(!v||!a||!SG.K[k]||typeof S==="undefined"||!S||S.dead||Q.length||!v.alive||v.out||!can(BAL.actK)||!a.ok(S,v))return false;
  if(typeof k61Named==="function"&&!k61Named(v))return false;if(S.confined&&typeof CRIME!=="undefined"&&CRIME.includes(k))return false;if(k==="bribe"&&!v.maid)return false;return true}
