@@ -368,7 +368,7 @@ window.KIT_SCAR={src:function(sev){return `img/scar-${Math.max(1,Math.min(3,sev|
  on:function(p){try{if(!p||!p.scar)return false;return (typeof S!=="undefined"&&p===S)||(typeof knows==="function"&&!!knows(p))}catch(e){return false}},
  of:function(p){if(!this.on(p))return null;const sev=p.scar.sev|0;return{sev,src:this.src(sev),label:`Hủy dung (${this.names[sev]||""})`}},
  rect:function(file){const n=String(file||"").split("/").pop();return this.fit&&this.fit[n]||null},
- style:function(file){const r=this.rect(file);if(!r)return "";return `left:${r[0]}%;top:${r[1]}%;width:${r[2]}%;height:${r[3]}%;transform:rotate(${r[4]}deg);transform-origin:${this.origin}`},
+ style:function(file){const r=this.rect(file);if(!r)return "";return `left:${r[0]}%;top:${r[1]}%;width:${r[2]}%;height:${r[3]}%;transform:rotate(${r[4]}deg) scaleX(-1);transform-origin:${this.origin}`},
  load:function(){if(this.fit||this._ld)return;this._ld=1;try{fetch(this.fitUrl).then(r=>r.ok?r.json():null).then(j=>{if(j)KIT_SCAR.fit=j}).catch(()=>{})}catch(e){}}};
 try{KIT_SCAR.load()}catch(e){}
 }
@@ -380,8 +380,10 @@ try{KIT_SCAR.load()}catch(e){}
 kitVeiled=function(){return false};
 function kitVeilOn(p){try{if(!p)return false;if(window.KIT_VEIL&&typeof KIT_VEIL.on==="function"&&KIT_VEIL.on(p))return true;if(typeof scarOf==="function"){const s=scarOf(p);return !!(s&&s.veil)}}catch(e){}return false}
 function kitScarOf(p){try{if(!p||!p.scar||!window.KIT_SCAR)return null;const on=KIT_SCAR.on(p)||!!p.scar.known;if(!on)return null;const sev=Math.max(1,Math.min(3,p.scar.sev|0||1));return{sev,src:KIT_SCAR.src(sev)}}catch(e){return null}}
+/* TONE (owner 18/11 pick, BAL.looks.tone[id] = strength 0..1): opacity x strength + a lighter, less saturated colour (CSS stand-in for "pulled toward skin"; the ladder sheets used the per-pixel pull) */
+function kitToneCss(id,base){try{const k=BAL.looks.tone[id];if(!(k>0)||k>=1)return base==null?"":`;opacity:${base}`;const d=1-k;return `;opacity:${((base==null?1:base)*k).toFixed(3)};filter:saturate(${(1-d*.6).toFixed(3)}) brightness(${(1+d*.5).toFixed(3)})`}catch(e){return base==null?"":`;opacity:${base}`}}
 const kitFxVars=st=>st.replace(/(^|;)\s*(left|top|width|height|transform|transform-origin):/g,(m,a,k)=>`${a}--f${k.replace('transform-origin','to').replace('transform','tf')}:`);
-function kitFxLayers(p,file){if(!p||!file)return"";let h="";const sc=kitScarOf(p);if(sc&&window.KIT_SCAR){const st=KIT_SCAR.style(file);if(st)h+=`<img class="kscar" src="${sc.src}" alt="" aria-hidden="true" style="${kitFxVars(st)}" onerror="this.remove()">`}
+function kitFxLayers(p,file){if(!p||!file)return"";let h="";const sc=kitScarOf(p);if(sc&&window.KIT_SCAR){const px=/fx-pox-scar/.test(sc.src);/* sẹo rỗ (đậu mùa) is a face-square final, never the cheek scratch box */const st=px?(typeof lkSquare==="function"?lkSquare(file):""):KIT_SCAR.style(file);if(st)h+=`<img class="${px?"kpox":"kscar"}" src="${sc.src}" alt="" aria-hidden="true" style="${kitFxVars(st)}${px?"":kitToneCss("cao",.85)}" onerror="this.remove()">`}
  if(kitVeilOn(p)&&window.KIT_VEIL&&KIT_VEIL.style){const t=KIT_VEIL.tierOf(p);const st=KIT_VEIL.style(file,t);if(st)h+=`<img class="kveil2" src="${KIT_VEIL.src(t)}" alt="" aria-hidden="true" style="${kitFxVars(st)}" onerror="this.remove()">`}return h}
 const kitFile=src=>String(src||"").split("?")[0].split("/").pop();
 /* ---------- AVATAR = ID CARD (owner 17/11 ~18:10Z, OD "Avatar … cái thẻ nhân viên"; review/kit-fx-register) ----------
@@ -393,9 +395,9 @@ const kitFile=src=>String(src||"").split("?")[0].split("/").pop();
 window.KIT_LASTING={list:[],add:function(d){if(!d||!d.id)return;this.list=this.list.filter(x=>x.id!==d.id);this.list.push(d)},
  /* layers of person p on picture file: [{id,src,rect:[l,t,w,h,deg],o:[ox,oy]}] (rect = % of the WHOLE picture, the scar-fit / veil-fit rows) */
  of:function(p,file){const out=[];if(!p||!file)return out;for(const d of this.list){let r=null;try{r=d.layers(p,file)}catch(e){r=null}if(r&&r.length)out.push(...r)}return out}};
-KIT_LASTING.add({id:"scar",layers:(p,file)=>{const sc=kitScarOf(p);if(!sc||!window.KIT_SCAR||!KIT_SCAR.rect)return null;const r=KIT_SCAR.rect(file);if(!r)return null;return[{id:"scar"+sc.sev,src:sc.src,rect:r.slice(0,5),o:[.5,.5],alpha:.85}]}});
+KIT_LASTING.add({id:"scar",layers:(p,file)=>{const sc=kitScarOf(p);if(!sc||!window.KIT_SCAR||!KIT_SCAR.rect)return null;if(/fx-pox-scar/.test(sc.src)){const q=typeof lkSquareRect==="function"?lkSquareRect(file):null;return q?[{id:"pscar"+sc.sev,src:sc.src,rect:q,o:[.5,.47],alpha:1}]:null}const r=KIT_SCAR.rect(file);if(!r)return null;return[{id:"scar"+sc.sev,src:sc.src,rect:r.slice(0,5),o:[.5,.5],alpha:.85*((BAL.looks.tone&&BAL.looks.tone.cao)||1),flip:1}]}});
 const KIT_BAKE={cache:{},order:[],pend:{},W:{tall:384,sm:192},max:80,
- key:function(p,file,kind){const L=KIT_LASTING.of(p,file);if(!L.length)return"";return file+"|"+kind+"|"+L.map(l=>l.id+":"+l.rect.join(",")).join(";")},
+ key:function(p,file,kind){const L=KIT_LASTING.of(p,file);if(!L.length)return"";return file+"|"+kind+"|"+L.map(l=>l.id+":"+l.rect.join(",")+(l.flip?"f":"")+(l.alpha==null?"":"a"+l.alpha)).join(";")},
  /* the src to print into the avatar <img> + an attribute that lets the finished bake replace it */
  pick:function(p,url,kind){try{const file=kitFile(url);const k=this.key(p,file,kind||"sm");if(!k)return{src:url,attr:""};const c=this.cache[k];if(c){this.touch(k);return{src:c,attr:` data-kbk="${k.replace(/"/g,"")}"`}}
    this.make(k,p,url,file,kind||"sm");return{src:url,attr:` data-kbk="${k.replace(/"/g,"")}"`}}catch(e){return{src:url,attr:""}}},
@@ -404,7 +406,7 @@ const KIT_BAKE={cache:{},order:[],pend:{},W:{tall:384,sm:192},max:80,
   const load=src=>new Promise((ok,no)=>{const im=new Image();im.crossOrigin="anonymous";im.decoding="async";im.onload=()=>ok(im);im.onerror=()=>no(0);im.src=src});
   Promise.all([load(abs),...L.map(l=>load(/^(https?:|blob:|data:)/.test(l.src)?l.src:(typeof IMG_U==="function"?IMG_U(l.src):l.src)))]).then(([ph,...ls])=>{
    const nw=ph.naturalWidth,nh=ph.naturalHeight,K=Math.min(1,this.W[kind]/nw),W=Math.max(1,Math.round(nw*K)),H=Math.max(1,Math.round(nh*K));const cv=document.createElement("canvas");cv.width=W;cv.height=H;const g=cv.getContext("2d");g.imageSmoothingQuality="high";g.drawImage(ph,0,0,W,H);
-   ls.forEach((im,i)=>{const l=L[i],r=l.rect,x=r[0]/100*W,y=r[1]/100*H,w=r[2]/100*W,h=r[3]/100*H;g.save();g.globalAlpha=l.alpha==null?1:l.alpha;g.translate(x+w*l.o[0],y+h*l.o[1]);g.rotate((r[4]||0)*Math.PI/180);g.drawImage(im,-w*l.o[0],-h*l.o[1],w,h);g.restore()});
+   ls.forEach((im,i)=>{const l=L[i],r=l.rect,x=r[0]/100*W,y=r[1]/100*H,w=r[2]/100*W,h=r[3]/100*H;g.save();g.globalAlpha=l.alpha==null?1:l.alpha;g.translate(x+w*l.o[0],y+h*l.o[1]);g.rotate((r[4]||0)*Math.PI/180);if(l.flip)g.scale(-1,1);g.drawImage(im,-w*l.o[0],-h*l.o[1],w,h);g.restore()});
    cv.toBlob(b=>{delete this.pend[k];if(!b)return;const u=URL.createObjectURL(b);this.cache[k]=u;this.touch(k);while(this.order.length>this.max){const o=this.order.shift(),ou=this.cache[o];delete this.cache[o];setTimeout(()=>{try{URL.revokeObjectURL(ou)}catch(e){}},60000)}
     document.querySelectorAll("img[data-kbk]").forEach(e=>{if(e.getAttribute("data-kbk")===k.replace(/"/g,"")&&e.src!==u)e.src=u})},"image/webp",.92)}).catch(()=>{delete this.pend[k]})}};
 window.KIT_BAKE=KIT_BAKE;
