@@ -278,7 +278,7 @@ function tsSummonWeek(){if(!S||S.dead||S.out||(typeof isSrv==="function"&&isSrv(
 /* his summons of one person (the weekly roll above, or his day plan's choice: jagacts emp:summon) */
 function tsSummonGo(p){const k=tsSummonKind(p);
  /* RECEIVER CHOICE (jrcv, OD 18/11 ~21:15Z law 1): the summoned NPC answers with HER two answers (tsSummonMe): Vâng chỉ (Sức − BAL.rcv.sumSuc · her game) or Cáo bệnh (Sủng sungGo_2) */
- if(p!==S&&typeof rcvPick==="function"&&!p.coop){const c=rcvPick(p,"emp",[{i:[0,1],id:"go",lk:()=>(p.suc||0)<BAL.rcv.sumSuc},{i:[2,3],id:"ill"}]);
+ if(p!==S&&typeof rcvPick==="function"&&!p.coop){const c=rcvPick(p,"emp",[{i:[0,1],id:"go",lk:()=>(p.suc||0)<BAL.rcv.sumSuc},{i:[2,3],id:"ill"}],"emp");
   if(c&&c.id==="ill"){ap(p,{sung:BAL.eff.jts.sungGo_2});if(knows(p)||eyes(S)>=2)log(`${p.name} cáo bệnh, không sang hầu Hoàng thượng.`);return}if(c)ap(p,{suc:-BAL.rcv.sumSuc})}
  if(p!==S){const raw=typeof kg82NpcRaw==="function"?(typeof mg2On==="function"&&mg2On()?kg82NpcRaw(p,k,{occ:"trieu"}):kg82NpcRaw(p,k==="duho"?"dan":k)):5;/* mg2: her own game kind on the summons board (occ trieu, as tsGame) */const g=tsSummonGain(raw);ap(p,{sung:g.sung});p.an=cl((p.an||0)+g.an,0,100);
   if(k==="duho"&&tsRebel()&&roll(40)){if(roll(tsSummonOdds(p,k)))ap(p,{sung:4,danh:3})}if(knows(p)||eyes(S)>=2)log(`${p.name} được Hoàng thượng triệu ${k==="dan"?"đánh đàn":k==="co"?"đánh cờ":"du hồ"}.`);return}

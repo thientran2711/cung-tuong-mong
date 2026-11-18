@@ -9,7 +9,7 @@ const path=require('path');const fs=require('fs');const {scan}=require('../tools
 const HTML=process.argv[2]||'dev/index.html';const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{
  const R=await scan(HTML);
- const OPEN=JSON.parse(fs.readFileSync(path.join(__dirname,'../tools/role-parity-open.json'),'utf8'));const okOpen=new Set(OPEN.map(g=>g.role+"|"+g.key));
+ const OPEN=JSON.parse(fs.readFileSync(path.join(__dirname,'../tools/role-parity-open.json'),'utf8')).filter(g=>g.role!=="receiver");/* receiver rows: dev/test/receiver-choice.test.js */const okOpen=new Set(OPEN.map(g=>g.role+"|"+g.key));
  const fresh=R.gaps.filter(g=>!okOpen.has(g.role+"|"+g.key));const seen=new Set(R.gaps.map(g=>g.role+"|"+g.key));const gone=OPEN.filter(g=>!seen.has(g.role+"|"+g.key));
  ok(fresh.length===0,'no NEW role-parity gap (every role × act cell is held by both sides, exempt, or a listed open gap)',fresh.slice(0,25).map(g=>g.role+":"+g.side+":"+g.key));
  if(gone.length)console.log('note: open-list entries now closed (trim role-parity-open.json): '+gone.map(g=>g.role+":"+g.key).join(", "));

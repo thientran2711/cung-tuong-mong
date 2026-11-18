@@ -2,7 +2,7 @@
    "đâu có cái option nào mà có thể ép một người ... phải làm một cái hành động mà họ không muốn ... Chẳng qua là nó sẽ có cái giá".
    ONE core for the receiver of a request / order / gift that is NOT a send-order button (those: jptime receiver frame, review/parallel-time):
    rcvP(t,a) the receiver t's helper profile toward the asker a (the L1876 shape of jroad rdHpWho for a consort) · rcvW = its 4 weights
-   [full, half, no, sab] (jroad rdHpW, BAL.road.hp) · rcvPick(t,a,opts) = the NPC receiver's pick among the SAME option list her card shows
+   [full, half, no, sab] (jroad rdHpW, BAL.road.hp) · rcvPick(t,a,opts,kind) = the NPC receiver's pick (weights × BAL.rcv.k[kind]) among the SAME option list her card shows
    (each option names its slot i, or its own weight w), jmind mindPick with the receiver as chooser (the jmind slip; never argmax) ·
    rcvWord = the willingness word on the asker's card (rdHpWord, never odds).
    Wired here: Nhờ giúp đỡ (cx2:help / her j9 card, helpAsk) both ways + her card when an NPC asks HER (PEND.rcvHelp);
@@ -17,7 +17,7 @@ function rcvP(t,a){const B=BAL.road.hp,cap=B.affCap,c=x=>Math.max(-cap,Math.min(
  return P}
 function rcvW(t,a){try{return rdHpW(null,rcvP(t,a))}catch(e){return BAL.road.hp.w.v.slice()}}
 function rcvWord(t,a){try{const P=rcvP(t,a);return rdHpWord(P,rdHpW(null,P))}catch(e){return""}}
-function rcvPick(t,a,O){O=(O||[]).filter(o=>o&&!(typeof o.lk==="function"&&o.lk()));if(!O.length)return null;const w=rcvW(t,a);
+function rcvPick(t,a,O,kind){O=(O||[]).filter(o=>o&&!(typeof o.lk==="function"&&o.lk()));if(!O.length)return null;const K=(BAL.rcv.k||{})[kind]||[1,1,1,1];const w=rcvW(t,a).map((x,i)=>x*K[i]);
  const W=O.map(o=>[o,Math.max(BAL.mind.pickMin,o.w!=null?o.w:o.i!=null?(Array.isArray(o.i)?o.i.reduce((s,i)=>s+w[i],0):w[o.i]):0)]);
  const c=mindPick(W,t)||O[0];(window.__rcvN=window.__rcvN||{})[(c.id||c.i)+""]=((window.__rcvN||{})[(c.id||c.i)+""]||0)+1;return c}
 const rcvNm=x=>x===S?"ngươi":x.name;
@@ -39,7 +39,7 @@ function rcvHelpOpts(p,t){const X=BAL.ag.cx2.help,R=BAL.rcv.help,H=BAL.road.hp,q
     return{ok:0,r:p===S?`${t.name} nhận lời rồi đem chuyện ngươi nhờ đi kể${tq?" với "+(tq.queen?"Hoàng hậu":tq.name):""}. Danh ${balSg(-R.danh)}.`:me?`Ngươi đem chuyện ${p.name} nhờ đi kể${tq?" với "+(tq.queen?"Hoàng hậu":tq.name):""}.`:`${t.name} đem chuyện ${p.name} nhờ đi kể khắp nơi`}}}]}
 /* the asker's side (her j9 card and cx2:help): the receiver NPC answers now; when the receiver is HER, her card comes (PEND.rcvHelp) */
 function helpAsk(p,t){if(t===S){pushDil(mkP("rcvHelp",{a:p.id}),"Lời nhờ");return{ok:1,r:`${p.name} sai người sang nhờ ngươi giúp`}}
- const c=rcvPick(t,p,rcvHelpOpts(p,t));return c.go()}
+ const c=rcvPick(t,p,rcvHelpOpts(p,t),"help");return c.go()}
 PEND.rcvHelp=pp=>{const p=RV(pp.a);if(!p||!p.alive||p.out)return null;
  return{who:pv(p),t:`<p>${p.name} sai người sang: “Nương nương nhà ta gặp chuyện khó, mong được giúp một tay.”</p><p class="past">Ngươi có thể giúp hết lòng, làm qua loa, từ chối, hoặc đem chuyện đi mách.</p>`,
   o:rcvHelpOpts(p,S).map(o=>({n:o.n,fx:o.fx,x:o.x,go:()=>{const r=o.go();if(r&&r.r)log(r.r)}}))}};
@@ -49,5 +49,5 @@ function rcvGiftIn(f,t,e){if(!t||t===S||t.coop||!e)return null;const it=itm(e.k)
   {i:2,id:"back",go:()=>{if(f===S)S.inv.push(Object.assign({},e));else{f.inv=f.inv||[];f.inv.push(Object.assign({},e))}relAdd(t,f,hi?BAL.eff.j8.go_2[0]:BAL.eff.j8.go_2[1]);return"back"}},
   {i:3,id:"check",lk:()=>(t.bac||0)<10,go:()=>{ap(t,{bac:-10});if(tg&&roll(oddsCl(oSee(t,true)+25))){evA(t,f,BAL.eff.j8.evGo);if(typeof ilGone==="function")ilGone(t,Object.assign({},e),"evid",{own:key(f)});return"found"}
    relAdd(t,f,BAL.eff.j8.go_3);return"check"}}];
- const c=rcvPick(t,f,O);return c?c.go():null}
+ const c=rcvPick(t,f,O,"gift");return c?c.go():null}
 Object.assign(window,{rcvP,rcvW,rcvWord,rcvPick,rcvHelpOpts,helpAsk,rcvGiftIn});

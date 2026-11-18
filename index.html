@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI=null;
+window.CTM_BI={"s":"cf9fb11d+","t":"2026-11-18T21:00Z","c":"receiver-choice: scan (3 directions, live executors) + jrcv core (L1876 weights via mindPick); Nhờ giúp đỡ 4 answers both ways + her card; …","b":"0866e9277982","h":[{"s":"c67d248d+","t":"2026-11-18T19:53Z","c":"ag-deed-perf: site build (index.html, sw.js)"},{"s":"6aab33ad","t":"2026-11-18T20:05Z","c":"KIT_REQUESTS: K-Q2-1 DONE 048f3c7"},{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"},{"s":"a5013222+","t":"2026-11-18T18:03Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)"},{"s":"08774c0e+","t":"2026-11-18T17:38Z","c":"ag-stf2 (test only): bribe histogram picks a servant whose lòng moves her bribe odds. Root of the 'disloyal one takes more' red (npc ~3/20,…"},{"s":"0351e140","t":"2026-11-18T16:48Z","c":"shop-panel: «Để ta xem» outside option, 3-column Mua/Bán grid, smallest picture strip, test"},{"s":"ebf25660+","t":"2026-11-18T15:29Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…"},{"s":"9f9c6c2b+","t":"2026-11-18T14:26Z","c":"shown-odds-one-path r1: plant on the spot is done in person (actCtx x.here, no sent-servant pen); Vì sao names spy knowledge (whyKnow); tes…"},{"s":"aa997f3c+","t":"2026-11-18T13:46Z","c":"look-fx r13: index.html / sw.js rebuilt from merged sources"},{"s":"4475ea24+","t":"2026-11-18T12:33Z","c":"grand-endings-engine: site rebuilt (index.html / sw.js / assets.json) after fix 4 + main merge"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -2185,7 +2185,11 @@ function giveTo(a,r,ix){const e=a.inv[ix];if(!e||e.h)return"";window.__giftTaint
  relAdd(a,r,g+3);if(r.queen||(r===S&&S.rank>=7))ap(a,{hh:g});
  const ent={k:e.k,from:key(a)};if(e.iu)ent.iu=e.iu;/* the same piece (item ledger jil) */if(e.t){ent.t=e.t;ent.by=e.by}
  if(r===S){pushDil(mkP("giftin",{f:key(a),e:ent}),"Quà tặng");return `${a.name} sai người mang ${it.n} sang tặng ngươi. `}
- r.inv.push(ent);if(e.t&&roll(oSee(r,true))){r.inv.pop();/*evok: tainted gift (taint = scheme)*/evA(r,a,BAL.eff.j8.evGiveTo);relAdd(a,r,BAL.eff.j8.giveTo);return `${r.name} nhận ${it.n} của ${NM(a)} nhưng người của nàng phát hiện đồ có vấn đề: nàng nắm ${balAb(BAL.eff.j8.evGiveTo)} chứng cứ. `}
+ /* RECEIVER CHOICE (jrcv rcvGiftIn, OD 18/11 ~21:15Z law 1): the NPC answers with HER giftin answers, the same numbers */
+ const ans=typeof rcvGiftIn==="function"?rcvGiftIn(a,r,ent):null;
+ if(ans==="back")return `${r.name} trả lại ${it.n} cho ${NM(a)}. `;
+ if(ans==="found")return `${r.name} đem ${it.n} của ${NM(a)} đến Thái y viện xét: đồ có vấn đề, nàng nắm ${balAb(BAL.eff.j8.evGo)} chứng cứ. `;
+ r.inv.push(ent);if(ans!=="check"&&e.t&&roll(oSee(r,true))){r.inv.pop();/*evok: tainted gift (taint = scheme)*/evA(r,a,BAL.eff.j8.evGiveTo);relAdd(a,r,BAL.eff.j8.giveTo);return `${r.name} nhận ${it.n} của ${NM(a)} nhưng người của nàng phát hiện đồ có vấn đề: nàng nắm ${balAb(BAL.eff.j8.evGiveTo)} chứng cứ. `}
  if(itm(e.k).sl&&(IT[e.k]||{}).rk>rkOf(r)&&(hasT(r,"Kiêu ngạo")||hasT(r,"Tham vọng")||roll(25)))wear(r,r.inv.length-1);
  return `${NMc(a)} tặng ${it.n} cho ${r.name}: thiện cảm +${g+3}. `}
 function plantItem(a,t,ix){const e=a.inv[ix];if(!e||e.h)return"";if(typeof ilUid==="function")ilUid(e);a.inv.splice(ix,1);e.w=0;a.schemes=(a.schemes||0)+1;
@@ -3473,7 +3477,7 @@ function topicOpts(v){const f=chatF(v),g=n=>Math.max(1,Math.round(n*f)),third=li
  const same=sameHouse(S,v);
  /* AG-ALL-2e: the four talk topics are built ONCE by P3T.<k>(speaker, listener) (jagacts3) — her talk and an NPC↔NPC talk run the same card */
  const TK=BAL.talk;A.push(P3T.health(S,v));A.push(P3T.praise(S,v));if(third)A.push(P3T.gossip(S,v,third));A.push(P3T.secret(S,v));
- A.push({n:"Nhờ giúp đỡ",o:100,inner:1,x:aff(v,S)>=BAL.ag.cx2.help.aff?"nàng thân với ngươi":`nàng chưa đủ quý ngươi (cần ${BAL.ag.cx2.help.aff}): nàng quý ngươi -${BAL.ag.cx2.help.fail}`,run:()=>{chatMark(v);return helpAsk(S,v).r}});
+ A.push({n:"Nhờ giúp đỡ",o:100,inner:1,x:typeof rcvWord==="function"?`${rcvWord(v,S)} · nàng có thể giúp hết lòng, làm qua loa, từ chối, hoặc đem chuyện đi mách`:"",run:()=>{chatMark(v);return helpAsk(S,v).r}});
  const foe=liveRivals(true).filter(x=>x!==v&&oan(x,v)>=TK.warn.foe)[0];
  A.push({n:"Cảnh báo nàng",o:100,x:foe?`có kẻ đang oán nàng: nàng quý ngươi +${g(TK.warn.hit)}`:`không có căn cứ: nàng quý ngươi -${TK.warn.miss}`,run:()=>{chatMark(v);if(foe){affAdd(v,S,g(TK.warn.hit));oanAdd(v,foe,TK.warn.oan);return `Ngươi nhắc ${v.name} coi chừng ${foe.name}. Nàng quý ngươi +${g(TK.warn.hit)}.`}affAdd(v,S,-TK.warn.miss);return `${v.name} nghi ngươi gây chia rẽ. Nàng quý ngươi -${TK.warn.miss}.`}});
  if(oan(v,S)>0){A.push({n:"Tạ lỗi",o:100,c:{danh:-1},x:`oán ${balSg(BAL.eff.j9.run_8)}`,run:()=>{oanAdd(v,S,BAL.eff.j9.run_8);chatMark(v);return `Ngươi hạ mình tạ lỗi. ${v.name} oán ${balSg(BAL.eff.j9.run_8)}.`}});
@@ -31981,6 +31985,20 @@ BAL.bookFigW=.343;Object.assign(BAL,{bookFrame:{cRef:.072,gap:8,footGap:10}});
 /* DOING AN ACT ON THE SPOT (review/shown-odds-one-path): "Cài đồ vào rương nàng" done in her own palace is easier than sending
    someone by actHere.plant (was a typed -15 pen in j8 plantpick + a typed +15 on the j2 chest card); both read it through actCtx (j9). */
 Object.assign(BAL,{actHere:{plant:15}});
+/* RECEIVER CHOICE (owner OD 18/11 ~21:15Z, law 1 + 2 + 3; jrcv.js): every receiver of a request / order (she or any NPC) answers one of the SAME
+   4 answers as a helper (OD L1876): 0 giúp hết lòng · 1 làm qua loa · 2 từ chối · 3 mách lẻo–phá ngầm. An NPC receiver draws by the L1876 weights
+   (BAL.road.hp: role row v / hh × nết × liking toward the asker × tâm cơ, jroad rdHpW) through jmind mindPick (never argmax); she picks on her card.
+   Each answer has a gain and a cost for the receiver (law 3), of equal value (law 2):
+   help (Nhờ giúp đỡ, helpAsk): full = lends BAL.ag.cx2.help.bac (or tells a secret / receives warmly) · the asker's liking +af[0];
+   half = lends bac × half · liking +af[1]; no = keeps the bạc · both likings − BAL.ag.cx2.help.fail; sab = keeps it, tells the Hoàng hậu
+   (her liking of the receiver +qAf) · Đức − road.hp.sab.duc, the asker's oán + road.hp.sab.oan, the asker's Danh − danh.
+   ord (an order from above, two-option cards: Vâng / Cáo bệnh …): the NPC receiver weighs «obey» = full + half, «decline» = no (+ sab) — the SAME
+   options and numbers as her card. */
+BAL.rcv={kw:["Giúp hết lòng","Làm qua loa","Từ chối","Mách lẻo"],help:{af:[8,3],half:.5,qAf:5,danh:2},
+ /* the Sức a summons costs (her «Vâng chỉ» card jts tsSummonMe and the summoned NPC, one number) */
+ sumSuc:5,
+ /* per-kind factor on the L1876 weights [full, half, no, sab] (tunable): refusing the throne is rare, sending a gift back less common than keeping it */
+ k:{help:[1,1,1,1],gift:[1,1,.5,1],emp:[1,1,.2,.2]}};
 /* ================= jbalge: ONE CORE (OD:L1267) rulebook of the GRAND ENDINGS (Đại kết cục, jge.js; design dev/design/GRAND_ENDINGS.md §2.14, r3) =================
    Every number the grand-ending engine uses or a text prints lives here; jge.js / jgedata.js hold words, option names and logic only.
    Loads after jbal2.js (BAL exists), before jgedata.js / jge.js. Set by measurement: dev/measure/ge-measure.js (bands BAL.ge.target).
@@ -46660,6 +46678,11 @@ if(typeof q72HTML==="function")q72HTML=function(){return ktQ72HTML()};
 /* the tab bar's trailing info slot: pinned to the RIGHT END of the bar (stays visible while the tabs scroll) */
 .pctabs>.pctinfo{flex:0 0 auto;margin-left:auto;align-self:center;position:sticky;right:0;padding:0 2px 0 10px;background:var(--panel);white-space:nowrap}
 .pctabs>.pctinfo .kgl{font-size:.82rem}
+/* KIT RULE (review/kit-subtabs-overflow, K-Q2-1, laws 10+11): a kitSubTabs bar NEVER scrolls sideways and the ⓘ never covers a tab: when the tabs do not fit
+   one line they WRAP to a 2nd row at the SAME fixed tab size (one size per tier; no shrinking, no clipping); ⓘ keeps the right end of the last row.
+   Every kitSubTabs bar (.ktsub: Tài nghệ, Mệnh truyện, Việc nhờ, Ân oán pickers, outside Người nhà/Ra phố, kit page) = this one rule. */
+html body :is(#panel,#kitpage) .kcattabs.ktsub{flex-wrap:wrap!important;overflow:visible!important;row-gap:4px}
+html body :is(#panel,#kitpage) .kcattabs.ktsub>.pctinfo{position:static}
 /* a section header row: title left, chips + ⓘ right, one line */
 .ksech{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 10px;margin:0 0 8px}.ksech .ksechr{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap}
 .ktinfo .kgl{font-size:.82rem;color:var(--gold,#8a5a12);font-weight:600;cursor:pointer;border-bottom:1px dotted currentColor}
@@ -47053,6 +47076,7 @@ KIT_SAMPLES.push(
   kitSkillCard({kind:"story",k:"x",kicker:"Chương 2",name:"Tên chương",level:1,max:4,word:"Hồi",bar:false,next:"",img:kitInfoArt("Mệnh truyện").src})+
   kitEmpty("Việc nhờ","Chưa ai nhờ ngươi việc gì.")+`</div>`},
  {id:"§33.40",title:"kitSubTabs: ⓘ ở cuối thanh tab · kitSecHead: tiêu đề mục + chip + ⓘ",html:()=>{const t=kitSubTabs("kitpg33",[{k:"a",label:"Cầm",doable:2,total:3},{k:"b",label:"Kỳ",doable:0,total:2}],typeof kitInfo==="function"?kitInfo("Việc nhờ"):"");return t.html+kitSecHead("Tứ đức",kitChip("Đức",20,"g"))}},
+ {id:"§46.1",title:"kitSubTabs đầy hàng: 6 tab + ⓘ — xuống hàng 2, cùng cỡ, ⓘ không đè tab",html:()=>{const L=["Luật chương","Nhiệm vụ","Triều cục","Tâm nguyện","Phụ tuyến","Hậu duệ"].map((t,i)=>({k:"t"+i,label:t,n:""}));return kitSubTabs("kitpg46",L,typeof kitInfo==="function"?kitInfo("Luật chương"):"").html}},
  {id:"§46",title:"kitChecks · kitInfo",html:()=>kitChecks([[false,"Sủng 8 (cần 38)"],[true,"Danh 33 (cần 30)"]])+(typeof kitInfo==="function"?kitInfo("Việc nhờ"):"")},
  {id:"§43",title:"Việc gọn (cột hẹp, kpanec)",html:()=>`<div class="pcb ktacts"><div class="kpanec">${pbtn('data-kitsample="3"',"Hỏi han ở tẩm cung ta: ai cần giúp?","tốn: 1 khắc · thành: người ở đây có việc thì ngỏ lời nhờ","")}</div></div>`},
  {id:"§43.1",title:"Việc gọn: dấu ! mở chi tiết (kitActZoom)",html:()=>`<div class="pcb ktacts"><div class="kpanec">${pbtn('data-kitsample="3"',"Hỏi han ở tẩm cung ta: ai cần giúp?","tốn: 1 khắc · thành: người ở đây có việc thì ngỏ lời nhờ","")}</div></div>`});
@@ -54442,6 +54466,9 @@ function tsSummonWeek(){if(!S||S.dead||S.out||(typeof isSrv==="function"&&isSrv(
  const w=C.map(tsSummonW);let r=Math.random()*w.reduce((a,b)=>a+b,0),i=0;while(r>w[i]&&i<w.length-1){r-=w[i];i++}tsSummonGo(C[i])}
 /* his summons of one person (the weekly roll above, or his day plan's choice: jagacts emp:summon) */
 function tsSummonGo(p){const k=tsSummonKind(p);
+ /* RECEIVER CHOICE (jrcv, OD 18/11 ~21:15Z law 1): the summoned NPC answers with HER two answers (tsSummonMe): Vâng chỉ (Sức − BAL.rcv.sumSuc · her game) or Cáo bệnh (Sủng sungGo_2) */
+ if(p!==S&&typeof rcvPick==="function"&&!p.coop){const c=rcvPick(p,"emp",[{i:[0,1],id:"go",lk:()=>(p.suc||0)<BAL.rcv.sumSuc},{i:[2,3],id:"ill"}],"emp");
+  if(c&&c.id==="ill"){ap(p,{sung:BAL.eff.jts.sungGo_2});if(knows(p)||eyes(S)>=2)log(`${p.name} cáo bệnh, không sang hầu Hoàng thượng.`);return}if(c)ap(p,{suc:-BAL.rcv.sumSuc})}
  if(p!==S){const raw=typeof kg82NpcRaw==="function"?(typeof mg2On==="function"&&mg2On()?kg82NpcRaw(p,k,{occ:"trieu"}):kg82NpcRaw(p,k==="duho"?"dan":k)):5;/* mg2: her own game kind on the summons board (occ trieu, as tsGame) */const g=tsSummonGain(raw);ap(p,{sung:g.sung});p.an=cl((p.an||0)+g.an,0,100);
   if(k==="duho"&&tsRebel()&&roll(40)){if(roll(tsSummonOdds(p,k)))ap(p,{sung:4,danh:3})}if(knows(p)||eyes(S)>=2)log(`${p.name} được Hoàng thượng triệu ${k==="dan"?"đánh đàn":k==="co"?"đánh cờ":"du hồ"}.`);return}
  tsSummonMe(k)}
@@ -54457,7 +54484,7 @@ function tsSummonMe(k){const E=S.emp;/* a private summons: she is face to face w
  const g7=tsSummonGain(8),g3=tsSummonGain(3);
  tsPanel({t:`Hoàng thượng triệu ${nm}`,who:pEmp(),art:k==="duho"?"https://ctm-img.victoria-tntt.workers.dev/img/ev-le-ha.webp":k==="co"?"https://ctm-img.victoria-tntt.workers.dev/img/ev-hoang-de-vui-2.webp":"https://ctm-img.victoria-tntt.workers.dev/img/ev-tai-nghe.webp",
   h:`<p>Thái giám Càn Thanh cung đến truyền: “Hoàng thượng rảnh việc triều chính, cho mời ${tsGoi()} sang ${nm}.”${likes}</p>`,
-  opts:[tsOpt({n:`Vâng chỉ, sang ${nm}`,fx:{suc:-5},need:[tsNeedSuc(5)],odds,duoc:[`Sủng +${g3.sung}..+${g7.sung}`,`Ân tình +${g3.an}..+${g7.an}`],mat:["ngài lơ đãng: chỉ Sủng +1"],kem:kem,note:"thành bại theo trò nhỏ hoặc theo cơ may khi bỏ qua",later:1,go}),
+  opts:[tsOpt({n:`Vâng chỉ, sang ${nm}`,fx:{suc:-BAL.rcv.sumSuc},need:[tsNeedSuc(BAL.rcv.sumSuc)],odds,duoc:[`Sủng +${g3.sung}..+${g7.sung}`,`Ân tình +${g3.an}..+${g7.an}`],mat:["ngài lơ đãng: chỉ Sủng +1"],kem:kem,note:"thành bại theo trò nhỏ hoặc theo cơ may khi bỏ qua",later:1,go}),
    reb?tsOpt({n:"Xin ngài đổi sang ngắm hoa trong vườn",fx:{suc:-3},duoc:[`Sủng ${balSg(BAL.eff.jts.sungGo)}`],note:"tránh hồ khi có tin loạn đảng",go:()=>{apply({sung:BAL.eff.jts.sungGo});log("Ngươi khéo xin Hoàng thượng đổi sang ngắm hoa trong ngự hoa viên.")}}):null,
    tsOpt({n:"Cáo bệnh",mat:[`Sủng ${balSg(BAL.eff.jts.sungGo_2)}`],go:()=>{apply({sung:BAL.eff.jts.sungGo_2});log(`Ngươi cáo bệnh, không sang ${nm}.`)}})].filter(Boolean)})}
 
@@ -69124,7 +69151,7 @@ function agHeard(v,info){if(!agRdOn()||!v||v===S||typeof v!=="object"||!v.alive|
 function agWalk(a,b){try{const B=BAL.ag.kh2.rd;if(!agRdOn()||!((B.see||0)+(B.go||0)))return 0}catch(e){return 0}if(!a||!b||a===b)return 1;
  const W=window.__walkSpill;window.__walkSpill=null;/* her own half-walk (travel's special case) is not the bearer's road */let w=1;try{w=travel(a,b)}catch(e){}finally{window.__walkSpill=W}return Math.max(1,w||1)}
 /* a servant who stands at pl in khắc kh tells her master (not the player — her own servants are part 2c's TIN BÁO) by her own choice */
-function agTell(R,pl,kh,why,who,interest){const B=BAL.ag.kh2.rd;let n=0;
+function agTell(R,pl,kh,why0,who,interest){const B=BAL.ag.kh2.rd;let n=0;let why=null;const wy=()=>why!=null?why:(why=typeof why0==="function"?why0():why0);/* ag-deed-perf: the line (a place name: places() through every wrapper) is built only when a servant tells */
  for(const id in R.P){if(!/^s\d+$/.test(id))continue;const e=R.P[id][kh];if(!e||e[0]!==pl)continue;const s=servById(+id.slice(1));if(!s||s.out)continue;const m=ownerOf(s);
   if(!m||m===S||m===who||!m.alive||m.out)continue;const it=interest?interest(m):1;if(!(it>0))continue;
   const c=mindPick([["tell",B.tell*cl((s.loyal||0)/100,0,1)*it],["quiet",B.quiet]],s);if(c!=="tell")continue;
@@ -69133,9 +69160,9 @@ function agTell(R,pl,kh,why,who,interest){const B=BAL.ag.kh2.rd;let n=0;
   let mp=null;try{mp=R.P["v"+m.id]&&R.P["v"+m.id][Math.min(ks,J95.KH-1)]?R.P["v"+m.id][Math.min(ks,J95.KH-1)][0]:palaceOf(m)}catch(e){}mp=mp||palaceOf(m);
   const due=ks+Math.max(1,agWalk(pl,mp));/* OD 17/11 ~17:55Z (3): she sets off from pl the khắc she saw it; her REAL walk to her master (near 1 / far 2); he hears at the start of khắc due */
   let kg=J95.KH;/* the khắc rows she spends on the road (a far walk: the khắc between); none for a near one */
-  for(let q=ks+1;q<due&&q<J95.KH;q++){const e=R.P[id][q];if(!e||busy(q)||e[1]==="tryst"||e[1]==="meet")break;if(kg===J95.KH)kg=q;R.P[id][q]=[mp,"ag_tell",ledgerId(m),why]}
-  agRdLog(R,id,kh,"ag:tell",ledgerId(m),why,pl);n++;AGD.stat.tell=(AGD.stat.tell||0)+1;
-  const z=agZ();z.rq=z.rq||[];z.rq.push({key:R.key,due,kg,sid:id,m:ledgerId(m),pl,who:who===S?"me":who&&typeof who==="object"?ledgerId(who):null,why,by:ledgerId(s),kh});if(z.rq.length>B.qMax)z.rq.shift()}
+  for(let q=ks+1;q<due&&q<J95.KH;q++){const e=R.P[id][q];if(!e||busy(q)||e[1]==="tryst"||e[1]==="meet")break;if(kg===J95.KH)kg=q;R.P[id][q]=[mp,"ag_tell",ledgerId(m),wy()]}
+  agRdLog(R,id,kh,"ag:tell",ledgerId(m),wy(),pl);n++;AGD.stat.tell=(AGD.stat.tell||0)+1;
+  const z=agZ();z.rq=z.rq||[];z.rq.push({key:R.key,due,kg,sid:id,m:ledgerId(m),pl,who:who===S?"me":who&&typeof who==="object"?ledgerId(who):null,why:wy(),by:ledgerId(s),kh});if(z.rq.length>B.qMax)z.rq.shift()}
  return n}
 /* deliver the news whose khắc has come (her clock passed the teller's khắc): the master hears at the START of that khắc (agHeard k0 = due).
    BAL cap on re-deciders per khắc (low-end phones, OD L1638): over the cap the news waits one khắc. A news due after the buổi's last khắc
@@ -69156,9 +69183,9 @@ function agRdTick(){try{agSpillAll()}catch(e){agdErr("spillAll",e)}if(!agRdOn()|
    /* the khắc she ENTERED: the finished khắc whose result put her there (her walk khắc: her row shows the place from the khắc after it); the
       servants there react the khắc after that (OD L1638: "k1 she enters → k2 maid present / scouts → k3 master knows + acts → k4 visible") */
    let a=kh;try{if(R.P.me)while(a>0&&R.P.me[a-1]&&R.P.me[a-1][0]===me)a--}catch(e){}/* = the first khắc she STANDS there (owner: k1 her walk, k2 seen + the maid walks, k3 the master knows) */
-   if(moved&&me&&me!=="home")agTell(R,me,a,`nghe tin ngươi đến ${agPlaceTxt(me)}`,S,m=>{let x=0;try{x=agNeedsC(m)}catch(e){}return x?1:0})}
+   if(moved&&me&&me!=="home")agTell(R,me,a,()=>`nghe tin ngươi đến ${agPlaceTxt(me)}`,S,m=>{let x=0;try{x=agNeedsC(m)}catch(e){}return x?1:0})}
   for(const p of agZ().pend){if(p.key!==R.key||p.st||p.kh>kh||p.drop||p.gone)continue;p.st=1;const d=agTgt(p.id),t=agTgt(p.t);
-   agTell(R,p.pl,kh,`nghe tin ${d&&d.name?d.name:""} ${p.act} ở ${agPlaceTxt(p.pl)}`,t&&t!==S?t:d,m=>{const a=typeof d==="object"&&d&&d!==m?Math.abs(aff(m,d)):0,b=typeof t==="object"&&t&&t!==m?Math.abs(aff(m,t)):0;return (a+b)/100})}}
+   agTell(R,p.pl,kh,()=>`nghe tin ${d&&d.name?d.name:""} ${p.act} ở ${agPlaceTxt(p.pl)}`,t&&t!==S?t:d,m=>{const a=typeof d==="object"&&d&&d!==m?Math.abs(aff(m,d)):0,b=typeof t==="object"&&t&&t!==m?Math.abs(aff(m,t)):0;return (a+b)/100})}}
  catch(e){agdErr("rd",e)}finally{AG.inRd=0}}
 /* 2d3 (ag-kh2 G9 red on base): a servant sent to rest / punished in the middle of a buổi (j95 jplx list → her row "offduty" / "laundry" from now)
    is not free any more: her deeds not over yet on those khắc drop (the agSlot rule: an off-duty khắc is not hers), so no deed claims a row it
@@ -71385,11 +71412,8 @@ Object.assign(window,{p3MaidMonth});
    the NPC names a target (maidSpyT, mindPick) and uses her odds spyRoll(p,t,maid), her gain (chứng cứ BAL.eff.j78.evN) and her failure (lòng −, target oán) ·
    jgreet (an NPC comes to her): Hỏi han / Khen / Chia sẻ bí mật / Bàn tán = P3T.<k>(v,S), Cảnh báo / Khiêu khích = twDo(v,S,k) (her TW buttons) ·
    Soát quà (TW.check) = j8 inspect (her Kiểm tra đồ) · cx:study = npcStudyDo with mindPick (j85) · Đánh đàn chờ ngự giá (jact adStroll) = qinCard(p), NPC cx3:qin */
-function helpAsk(p,t){const X=BAL.ag.cx2.help,me=p===S;if(aff(t,p)<X.aff){affAdd(t,p,-X.fail);return{ok:0,r:me?`${t.name} khéo từ chối. Nàng quý ngươi -${X.fail}.`:`${t.name} khéo từ chối lời nhờ của ${p.name}`}}
- if(roll(cnvOd(X.p))&&(t.bac||0)>=X.bac){ap(t,{bac:-X.bac});if(me)apply({bac:X.bac});else ap(p,{bac:X.bac});return{ok:1,r:me?`${t.name} cho ngươi mượn ${X.bac} lượng.`:`${t.name} cho ${p.name} mượn ${X.bac} lượng`}}
- const x=evGuilty(p,others(p).filter(y=>y&&y!==p&&y!==t&&(y===S||y.alive)));if(x&&evA(p,x,BAL.ag.ev.one))return{ok:1,r:me?`${t.name} kể cho ngươi một chuyện về ${x.name}: ${evSg(BAL.ag.ev.one)}.`:`${t.name} kể cho ${p.name} một chuyện về ${agcNm(x)}`};
- return{ok:1,r:me?`${t.name} tiếp ngươi ân cần.`:`${t.name} tiếp ${p.name} ân cần`}}
-agRunReg("cx2:help",(v,t)=>{if(!t||t===S)return"";const h=helpAsk(v,t);return ag2Res(v,"help",h.ok,h.r)});
+/* helpAsk(p,t) = jrcv.js (RECEIVER CHOICE, OD 18/11 ~21:15Z): the receiver answers with the 4 answers (L1876), she gets her card when asked */
+agRunReg("cx2:help",(v,t)=>{if(!t)return"";const h=helpAsk(v,t);return ag2Res(v,"help",h.ok,h.r)});
 function maidTalkDo(p){const X=BAL.ag.cx2.maidTalk,m=p===S?S.maid:p.maid;if(!m)return"";if(p===S)apply({maid:X.w.maid});else m.loyal=cl((m.loyal||0)+X.w.maid,0,100);
  if(p===S&&roll(cnvOd(X.hear))){const t=liveRivals(true);if(t.length){const v=pick(t);try{seeLoc&&seeLoc(v)}catch(e){}log(`${S.maid.name} kể: ${v.name} đang ở ${placeName(whereOf(v))} buổi này.`)}}/* an NPC reads places from the record (agAt): information only */
  return p===S?"":`${p.name} trò chuyện với ${m.name}`}
@@ -71418,6 +71442,59 @@ agReg("consort","par3qin",(v,N,need)=>{const O=[];if(!p3On()||v===S||v.out||v.co
  const x=p3O(v,"qin",qinCard(v),N,X.g,"art",()=>"vuon");if(x)O.push(x)}catch(e){agdErr("par3qin",e)}return O});
 agRunReg("cx3:qin",v=>p3Run(v,qinCard(v),"qin"));
 Object.assign(window,{helpAsk,maidTalkDo,maidSpyT,qinCard});
+/* ================= jrcv: RECEIVER CHOICE (owner OD 18/11 ~21:15Z, law 1 two-way + law 2 equal value + law 3 gain-and-loss) =================
+   "đâu có cái option nào mà có thể ép một người ... phải làm một cái hành động mà họ không muốn ... Chẳng qua là nó sẽ có cái giá".
+   ONE core for the receiver of a request / order / gift that is NOT a send-order button (those: jptime receiver frame, review/parallel-time):
+   rcvP(t,a) the receiver t's helper profile toward the asker a (the L1876 shape of jroad rdHpWho for a consort) · rcvW = its 4 weights
+   [full, half, no, sab] (jroad rdHpW, BAL.road.hp) · rcvPick(t,a,opts,kind) = the NPC receiver's pick (weights × BAL.rcv.k[kind]) among the SAME option list her card shows
+   (each option names its slot i, or its own weight w), jmind mindPick with the receiver as chooser (the jmind slip; never argmax) ·
+   rcvWord = the willingness word on the asker's card (rdHpWord, never odds).
+   Wired here: Nhờ giúp đỡ (cx2:help / her j9 card, helpAsk) both ways + her card when an NPC asks HER (PEND.rcvHelp);
+   a gift to an NPC (giveTo → the NPC answers with her giftin answers: Nhận / Trả lại quà / Đem đến Thái y viện xét nghiệm);
+   Hoàng thượng triệu an NPC (tsSummonGo → Vâng chỉ / Cáo bệnh, her tsSummonMe numbers). Audit: dev/tools/receiver-choice-scan.js.
+   ================================================================================================================================== */
+function rcvP(t,a){const B=BAL.road.hp,cap=B.affCap,c=x=>Math.max(-cap,Math.min(cap,+x||0));
+ const P={role:t.queen?"hh":"v",type:"rv",p:t,sp:t,net:[],tone:null,aff:0,tc:t.tamco,known:true,name:t.name||"",dk:null};
+ try{P.aff=c(a==="emp"?(t.sung||0)-B.mid.emp:a&&typeof a==="object"?aff(t,a):0)}catch(e){}
+ try{P.net=(Array.isArray(t.net)?t.net:traitsOf(t))||[]}catch(e){}
+ if(a===S)P.dk={k:t.queen?"hh":"rv",id:t.id};/* nợ ân (j72) counts only toward her: an NPC's debt ledger is hers */
+ return P}
+function rcvW(t,a){try{return rdHpW(null,rcvP(t,a))}catch(e){return BAL.road.hp.w.v.slice()}}
+function rcvWord(t,a){try{const P=rcvP(t,a);return rdHpWord(P,rdHpW(null,P))}catch(e){return""}}
+function rcvPick(t,a,O,kind){O=(O||[]).filter(o=>o&&!(typeof o.lk==="function"&&o.lk()));if(!O.length)return null;const K=(BAL.rcv.k||{})[kind]||[1,1,1,1];const w=rcvW(t,a).map((x,i)=>x*K[i]);
+ const W=O.map(o=>[o,Math.max(BAL.mind.pickMin,o.w!=null?o.w:o.i!=null?(Array.isArray(o.i)?o.i.reduce((s,i)=>s+w[i],0):w[o.i]):0)]);
+ const c=mindPick(W,t)||O[0];(window.__rcvN=window.__rcvN||{})[(c.id||c.i)+""]=((window.__rcvN||{})[(c.id||c.i)+""]||0)+1;return c}
+const rcvNm=x=>x===S?"ngươi":x.name;
+/* ---- Nhờ giúp đỡ: the 4 answers of the receiver t to the asker p (one list for her card and the NPC's pick) ---- */
+function rcvHelpOpts(p,t){const X=BAL.ag.cx2.help,R=BAL.rcv.help,H=BAL.road.hp,q=queenP(),me=t===S,half=Math.round(X.bac*R.half);
+ const pay=(n)=>{if((me?S.bac:t.bac||0)<n)return false;if(me)apply({bac:-n});else ap(t,{bac:-n});if(p===S)apply({bac:n});else ap(p,{bac:n});return true};
+ const tq=q&&q!==t&&q!==p?q:null;
+ return [
+  {i:0,id:"full",n:BAL.rcv.kw[0],fx:{},x:`mất: ${X.bac} lượng bạc · được: ${rcvNm(p)==="ngươi"?"ngươi":p.name} quý ${me?"ngươi":t.name} ${balSg(R.af[0])}`,
+   go:()=>{affAdd(p,t,R.af[0]);if(pay(X.bac))return{ok:1,r:p===S?`${t.name} cho ngươi mượn ${X.bac} lượng.`:me?`Ngươi cho ${p.name} mượn ${X.bac} lượng.`:`${t.name} cho ${p.name} mượn ${X.bac} lượng`};
+    const x=evGuilty(p,others(p).filter(y=>y&&y!==p&&y!==t&&(y===S||y.alive)));if(x&&evA(p,x,BAL.ag.ev.one))return{ok:1,r:p===S?`${t.name} kể cho ngươi một chuyện về ${x.name}: ${evSg(BAL.ag.ev.one)}.`:`${rcvNm(t)} kể cho ${p.name} một chuyện về ${agcNm(x)}`};
+    return{ok:1,r:p===S?`${t.name} tiếp ngươi ân cần.`:`${me?"Ngươi":t.name} tiếp ${p.name} ân cần`}}},
+  {i:1,id:"half",n:BAL.rcv.kw[1],fx:{},x:`mất: ${half} lượng bạc · được: quý ${balSg(R.af[1])}`,
+   go:()=>{affAdd(p,t,R.af[1]);if(pay(half))return{ok:1,r:p===S?`${t.name} miễn cưỡng đưa ngươi ${half} lượng.`:`${me?"Ngươi":t.name} đưa ${p.name} ${half} lượng cho có`};return{ok:1,r:p===S?`${t.name} tiếp ngươi qua loa.`:`${me?"Ngươi":t.name} tiếp ${p.name} qua loa`}}},
+  {i:2,id:"no",n:BAL.rcv.kw[2],fx:{},x:`được: giữ bạc · mất: hai bên quý nhau ${balSg(-X.fail)}`,
+   go:()=>{affAdd(t,p,-X.fail);affAdd(p,t,-X.fail);return{ok:0,r:p===S?`${t.name} khéo từ chối. Nàng quý ngươi -${X.fail}.`:me?`Ngươi khéo từ chối ${p.name}.`:`${t.name} khéo từ chối lời nhờ của ${p.name}`}}},
+  {i:3,id:"sab",n:BAL.rcv.kw[3]+(tq?` với ${tq.queen?"Hoàng hậu":tq.name}`:""),fx:{duc:-H.sab.duc},x:`được: ${tq?(tq.queen?"Hoàng hậu":tq.name)+" quý "+(me?"ngươi":t.name)+" "+balSg(R.qAf):"giữ bạc"} · mất: Đức ${balSg(-H.sab.duc)}, ${p===S?"ngươi":p.name} oán ${balSg(H.sab.oan)}, Danh ${p===S?"ngươi":p.name} ${balSg(-R.danh)}`,
+   go:()=>{if(!me)ap(t,{duc:-H.sab.duc});if(tq&&tq!==S)affAdd(tq,t,R.qAf);oanAdd(p,t,H.sab.oan);if(p===S)apply({danh:-R.danh});else ap(p,{danh:-R.danh});
+    return{ok:0,r:p===S?`${t.name} nhận lời rồi đem chuyện ngươi nhờ đi kể${tq?" với "+(tq.queen?"Hoàng hậu":tq.name):""}. Danh ${balSg(-R.danh)}.`:me?`Ngươi đem chuyện ${p.name} nhờ đi kể${tq?" với "+(tq.queen?"Hoàng hậu":tq.name):""}.`:`${t.name} đem chuyện ${p.name} nhờ đi kể khắp nơi`}}}]}
+/* the asker's side (her j9 card and cx2:help): the receiver NPC answers now; when the receiver is HER, her card comes (PEND.rcvHelp) */
+function helpAsk(p,t){if(t===S){pushDil(mkP("rcvHelp",{a:p.id}),"Lời nhờ");return{ok:1,r:`${p.name} sai người sang nhờ ngươi giúp`}}
+ const c=rcvPick(t,p,rcvHelpOpts(p,t),"help");return c.go()}
+PEND.rcvHelp=pp=>{const p=RV(pp.a);if(!p||!p.alive||p.out)return null;
+ return{who:pv(p),t:`<p>${p.name} sai người sang: “Nương nương nhà ta gặp chuyện khó, mong được giúp một tay.”</p><p class="past">Ngươi có thể giúp hết lòng, làm qua loa, từ chối, hoặc đem chuyện đi mách.</p>`,
+  o:rcvHelpOpts(p,S).map(o=>({n:o.n,fx:o.fx,x:o.x,go:()=>{const r=o.go();if(r&&r.r)log(r.r)}}))}};
+/* ---- a gift to an NPC (j8 giveTo): «take» / «check» (nothing found) keep it — giveTo stores it; «back» / «found» are done here. She answers with HER giftin answers (Nhận / Trả lại quà / Đem đến Thái y viện xét nghiệm), the same numbers ---- */
+function rcvGiftIn(f,t,e){if(!t||t===S||t.coop||!e)return null;const it=itm(e.k),hi=rkOf(f)>rkOf(t);const tg=!!e.t;
+ const O=[{i:[0,1],id:"take",go:()=>"take"},
+  {i:2,id:"back",go:()=>{if(f===S)S.inv.push(Object.assign({},e));else{f.inv=f.inv||[];f.inv.push(Object.assign({},e))}relAdd(t,f,hi?BAL.eff.j8.go_2[0]:BAL.eff.j8.go_2[1]);return"back"}},
+  {i:3,id:"check",lk:()=>(t.bac||0)<10,go:()=>{ap(t,{bac:-10});if(tg&&roll(oddsCl(oSee(t,true)+25))){evA(t,f,BAL.eff.j8.evGo);if(typeof ilGone==="function")ilGone(t,Object.assign({},e),"evid",{own:key(f)});return"found"}
+   relAdd(t,f,BAL.eff.j8.go_3);return"check"}}];
+ const c=rcvPick(t,f,O,"gift");return c?c.go():null}
+Object.assign(window,{rcvP,rcvW,rcvWord,rcvPick,rcvHelpOpts,helpAsk,rcvGiftIn});
 /* jmgcal — OWNER-ONLY MINIGAME CALIBRATION (AG-ALL-2d2; owner OD 17/11 ~16:20Z (f) + ~16:40Z option 1, verbatim key words:
    "cần cho tôi một cái bài test để tôi chơi thử ... mỗi một cái mini game ... 3 vòng hoặc là 5 vòng ... mỗi một vòng là mỗi cái khó hơn ... chỉ có cái tài
    khoản của tôi là mới test kiểu này thôi ... bất kỳ người nào chơi thì người đó cũng sẽ đi chơi theo cái con số của tôi" / "chỉ có tôi test và cái số
@@ -74385,7 +74462,10 @@ function placeEnt(){try{const en=$("kpent"),st=$("stage");if(!en||en.hidden||!st
  if(mk&&mk.getClientRects().length){const R=st.getBoundingClientRect(),q=mk.getBoundingClientRect(),c=ch.getBoundingClientRect();
   if(q.right>c.left-4&&q.left<c.right+4&&q.top<c.bottom+2&&q.bottom>c.top-2)en.style.left=Math.round(q.right-R.left+8)+"px"}}catch(e){}}
 function lay2(){lay();placeEnt();clearTimeout(lay2.a);clearTimeout(lay2.b);lay2.a=setTimeout(placeEnt,400);lay2.b=setTimeout(placeEnt,1300)}
-const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);lay2();return r};
+/* ag-deed-perf (C-AG #12 18/11): a stage redraw INSIDE a sim step (j95 final wrapper, window.__rdefer > 0) queues lay2 (layout reads only:
+   getBoundingClientRect + the toast/name/chip DOM; nothing in S) with the other stage fits for the next frame (jlag2 renderAfter, coalesced;
+   a render() before then flushes it); every other redraw runs it at once, as before */
+const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);if(window.__rdefer>0&&typeof window.renderAfter==="function")renderAfter("plst-lay",lay2);else lay2();return r};
 try{addEventListener("resize",()=>{clearTimeout(lay.__t);lay.__t=setTimeout(lay2,90)})}catch(e){}
 /* (1) the count chip: the kit rail's first slot */
 try{if(window.kitStageRail)kitStageRail.add({id:"here",order:0,chip:()=>{const n=hereN();return n&&typeof j59ico==="function"?`<span class="kchip n j59hchip" role="img" aria-label="Ở đây còn ${n} người">${j59ico()}<span class="j59n">${n}</span></span>`:""},when:()=>hereN()>0&&onStage()})}catch(e){}
@@ -75681,7 +75761,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="55c75e90cbcd";window.CTM_BUILD=BUILD;
+const BUILD="0866e9277982";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
