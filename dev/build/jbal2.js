@@ -934,3 +934,7 @@ Object.assign(BAL,{odb:{
 /* FACE REVEAL motion (owner 18/11 ~06:20Z, KIT §79 jreveal.js): ms = the grey veil clears from the face outward; lite = Gọn / reduced motion short fade;
    win = how long after a face is learned every place that first draws it (frame, avatar, stage figure) still plays its one reveal */
 Object.assign(BAL,{faceReveal:{ms:Math.round(1000*BAL.pace),lite:350,win:8000}});
+/* FULL-BODY FRAME (owner 18/11 ~06:45Z + ~06:55Z, KIT §56.3): the figure frame of a Tuần lục person page is the TIGHT box of the widest approved person (c03 a18 t6 alpha bbox,
+   union of t1..t8 = 1292 x 2678 px of the 1520 x 2688 canvas): ar = frame w / h = .4824. Every figure is fitted into it by its painted box, aspect kept, nothing cut;
+   the frame is as wide as its height needs (ar x column height), at most maxCol of the page's inner width (a narrow phone page then scales the figure down, never cuts it) */
+Object.assign(BAL,{bookFrame:{ar:.4824,maxCol:.56}});

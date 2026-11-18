@@ -1,0 +1,41 @@
+/* fullbody-frame-scan.js — owner 18/11 ~06:45Z/06:55Z (full-body frame redo): on a Tuần lục person page the whole painted figure must sit INSIDE the figure frame
+   (aspect kept, nothing cut). Measures frame / painted figure / text column per case and viewport; exit 1 on any cut or squeeze.
+   usage: node dev/test/fullbody-frame-scan.js <index.html> <outdir>   env SZ=[[W,H],..] SHOTS=1 CASES=name,name */
+const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=process.argv;if(OUT)fs.mkdirSync(OUT,{recursive:true});
+const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
+const C3=n=>['c03-t'+n,'img/_review/consort-tiers/c03/b8/c03_a18_t'+n+'.png'];
+let CASES=[C3(1),C3(6),C3(8),['old-maid-wide','img/fig-maid-m50-t6-a51.webp'],['old-emperor','img/hd2/fig-emperor-a18-1.webp'],['old-consort','img/hd/fig-consort-c09-ty6-a36.webp']];
+if(process.env.CASES)CASES=CASES.filter(c=>process.env.CASES.split(',').includes(c[0]));
+(async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});let bad=0;const html=fs.readFileSync(SRC);
+ for(const [W,H] of SZ){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:process.env.SHOTS?+(process.env.DSF||2):1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',ignoreHTTPSErrors:true});await ctx.addInitScript(()=>{window.__bot=1;let s=12345;Math.random=()=>{s=(s*1664525+1013904223)%4294967296;return s/4294967296}});
+  await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:html,contentType:'text/html; charset=utf-8'}));
+  const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(String(e)));await p.goto('http://ctm.test/index.html',{waitUntil:'domcontentloaded',timeout:120000});
+  await p.waitForFunction(()=>typeof start==='function'&&typeof kitBook==='function',null,{timeout:120000});
+  await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;
+   for(const e of [...document.body.querySelectorAll('*')]){const cs=getComputedStyle(e);if(cs.position==='fixed'&&/Luân hồi/.test(e.textContent||''))e.remove()}});
+  await p.evaluate(()=>document.fonts&&document.fonts.ready);await p.waitForTimeout(4000);const rows=[];CASES=[['warmup',CASES[0][1]],['warmup',CASES[0][1]],...CASES];
+  for(const [name,FIG] of CASES){
+   const r=await p.evaluate(async([name,FIG])=>{
+    const k0=window.__k0||(window.__k0=kitFigOf);
+    window.kitFigOf=kitFigOf=function(q){if(q&&q.__t)return IMG_BASE+FIG;return k0.apply(this,arguments)};
+    const who=Object.assign({},S.thO||{kind:'th',name:'Thái hậu',age:60},{age:36,__t:1,name:'Nhân vật'});
+    let w=document.getElementById('dawn');if(!w){w=document.createElement('div');w.id='dawn';document.body.appendChild(w)}w.innerHTML='';w.hidden=false;w.className='dawn kbkdawn on';w.style.zIndex=2147483000;
+    const facts=[];for(let i=0;i<4;i++)facts.push({text:`Mục${i}: khen ngươi hiếu thuận, dặn giữ lễ nghi trong cung.`,kind:'world',auto:false});
+    kitBook({pages:[{kind:'person',who,title:'Thử',blocks:[{facts}],n:4}],head:'Tuần lục · thử',host:w,label:'Tuần lục',onClose:()=>{}});
+    const t0=Date.now();while(Date.now()-t0<25000){const f=[...document.querySelectorAll('#dawn .kbk-person.kbk-full .kesfi')].find(e=>e.offsetParent);const i=f&&f.querySelector('img');if(i&&i.complete&&i.naturalWidth&&f.style.visibility!=='hidden')break;await new Promise(r=>setTimeout(r,200))}
+    await new Promise(r=>setTimeout(r,2200));
+    const f=[...document.querySelectorAll('#dawn .kbk-person.kbk-full .kesfi')].find(e=>e.offsetParent&&e.closest('.kbk-sheet')&&e.closest('.kbk-sheet').style.transform==='')||document.querySelector('#dawn .kbk-person.kbk-full .kesfi');
+    if(!f)return{err:'no figure'};const im=f.querySelector('img'),src=im.getAttribute('src'),b=await new Promise(res=>{const v=kitFigBody(src,()=>res(kitFigBody(src)));if(v)res(v)});
+    const r=im.getBoundingClientRect(),por=f.closest('.kbk-por').getBoundingClientRect(),ph=f.closest('.kbk-person').querySelector(':scope>.kbk-phead').getBoundingClientRect(),fl=f.closest('.kbk-person').querySelector(':scope>.kbk-flow');
+    const L=r.left+b.l*r.width,R=r.left+b.r*r.width,T=r.top+b.t*r.height,B=r.top+b.b*r.height;
+    let ovl=0;f.closest('.kbk-person').querySelectorAll('.kbk-phead *,.kbk-flow *').forEach(e=>{if(e.children.length||!(e.textContent||'').trim())return;const q=e.getBoundingClientRect();if(q.width&&q.right>L+.5&&q.left<R-.5&&q.bottom>T&&q.top<B)ovl++});
+    return{src:src.split('/').pop(),frameW:por.width,frameH:por.height,frameX:por.left,frameY:por.top,figW:R-L,figH:B-T,imgW:r.width,imgH:r.height,cutL:Math.max(0,por.left-L),cutR:Math.max(0,R-por.right),cutT:Math.max(0,por.top-T),cutB:Math.max(0,B-por.bottom),textW:ph.width,textX:ph.left,ovl,asp:(r.width/r.height)/(im.naturalWidth/im.naturalHeight),fit:+(Math.min(por.width/(R-L),por.height/(B-T))).toFixed(3),ar:(R-L)/(B-T)}},[name,FIG]);
+   r.name=name;rows.push(r);
+   if(process.env.SHOTS&&OUT){await p.evaluate(()=>{for(const c of document.body.children)c.style.visibility=c.id==='dawn'?'visible':'hidden'});await p.screenshot({path:`${OUT}/${W}x${H}-${name}.jpg`,type:'jpeg',quality:70});await p.evaluate(()=>{for(const c of document.body.children)c.style.visibility=''})}}
+  for(let i=rows.length-1;i>=0;i--)if(rows[i].name==='warmup')rows.splice(i,1);
+  const f1=x=>(+x).toFixed(1);
+  for(const r of rows){console.log(`${W}x${H} ${r.name.padEnd(14)} ${r.err||`frame ${f1(r.frameW)}x${f1(r.frameH)} (asp ${(r.frameW/r.frameH).toFixed(4)}) fig ${f1(r.figW)}x${f1(r.figH)} (asp ${r.ar.toFixed(4)}) text ${f1(r.textW)} cut L${f1(r.cutL)} R${f1(r.cutR)} T${f1(r.cutT)} B${f1(r.cutB)} textOvl ${r.ovl} squeeze ${r.asp.toFixed(3)} ${r.src}`}`);
+   if(!r.err){const cut=r.cutL+r.cutR+r.cutT+r.cutB;if(cut>1.5){bad++;console.log('FAIL cut',r.name,f1(cut))}if(r.ovl){bad++;console.log('FAIL text overlap',r.name)}if(Math.abs(r.asp-1)>.01){bad++;console.log('FAIL squeeze',r.name,r.asp)}}}
+  if(errs.filter(e=>!/Unexpected token '<'/.test(e)).length){bad++;console.log('PAGE ERRORS',errs.slice(0,3))}
+  await ctx.close()}
+ await b.close();console.log(bad?`FAIL ${bad}`:'ALL OK');process.exit(bad?1:0)})().catch(e=>{console.error(e);process.exit(2)});
