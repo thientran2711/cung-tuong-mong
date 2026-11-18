@@ -1,0 +1,11 @@
+t8 PROMPT B -- generation settings (frozen by W72, 18/11)
+tool: Magnific images_generate, mode gpt-2-6, folderReference ba4aecfe-efce-47e2-b53f-30d292091886
+size: width 1024 height 2304, resolution 2k (the transparentBackground flag is NOT relied on: every gen is then cut with images_remove_background -> transparent PNG)
+references (exactly TWO, in this order):
+  1. {type: image, identifier: <upload of img/_review/consort-tiers/<cNN>/b10/<cNN>_a18_t1_v0.png, uploaded under the neutral name face-<cNN>-t1.png>}   (identity: face only)
+  2. {type: style, identifier: eIyOFEidqL}   (m09: drawing style, skin, fabric, embroidery)
+NEVER a praised figure, never the old t8, never the C2 image (yellow is in WORDS only).
+seed: A/B test used seed 7172 (same for A and B). Production: no seed (random), count 1; look at every gen, regen max 6 per figure.
+prompt: python3 build.py cNN v0|v1|v2 (no edits by hand; only the colour slot varies by version)
+select (owner 18:15Z): phoenix clearly dominates; costume rich; sleeves hang soft (never one stiff flat layer); yellow close to c25 B (#F2C985) by eye/dE, regen if paler/duller; face = her t1 face; closed lips; nothing covers the face; not side/back.
+output: img/_review/t8-reprompt/<cNN>_a18_t8_v<k>.png ; cdn_sync + md5.
