@@ -201,8 +201,11 @@ window.nrRoads=nrRoads;window.nrCh=nrCh;window.nrInit=nrInit;window.nrMonth=nrMo
    const w=k==="me"?me(X):k==="Me"?Me(X):k==="Call"?c:k==="call"?c.charAt(0).toLowerCase()+c.slice(1):k==="he"?he:X.B?X.B.n:"kẻ kia";
    return i===0||/[.!?:“]\s*$/.test(src.slice(0,i))?cap(w):w})};
  const val=(f,X)=>typeof f==="function"?f(X):f;
+ /* the step title of an ask with no title of its own (a.c): true for every ask of that kind (the stock titles name one errand only) */
+ const askT={emp:"Nói giúp {he} trước mặt Hoàng thượng",th:"Thưa giúp {he} trước Thái hậu",hh:"Thưa giúp {he} trước Hoàng hậu",thu:"Lo giúp {he} việc ngoài cung",
+  do:"Dò la giúp {he}",y:"Lo thuốc thang giúp {he}",che:"Che chở người {he} gửi gắm"};
  for(const id of Object.keys(T72I)){if(!/^nr_/.test(id))continue;const T=T72I[id],st=T.s&&T.s[0];if(!st||!st.ch||st.ch.length<2)continue;
-  const h0=T.h,n0=st.n;T.h=X=>{const a=nrAskOf(X);return a?`“${tx(a.h,X)}”`:val(h0,X)};st.n=X=>{const a=nrAskOf(X);return a&&a.c?tx(a.c,X):val(n0,X)};
+  const h0=T.h,n0=st.n;T.h=X=>{const a=nrAskOf(X);return a?`“${tx(a.h,X)}”`:val(h0,X)};st.n=X=>{const a=nrAskOf(X);return a?tx(a.c||askT[a.k]||"",X)||val(n0,X):val(n0,X)};
   st.ch.slice(0,2).forEach((o,i)=>{const on=o.n,ol=o.lx;o.n=X=>{const a=nrAskOf(X);return a?tx(a.o[i][0],X):val(on,X)};
    o.lx=X=>{const a=nrAskOf(X);return a&&a.o[i][1]?tx(a.o[i][1],X):val(ol,X)}})}
 })();
