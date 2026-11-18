@@ -16,6 +16,8 @@ const {chromium}=require('playwright');const D=require('./lib/device');
  p.on('pageerror',e=>errs.push(e.message.slice(0,300)));
  await D.openDirect(p,srv.url);const g=p;
  await g.waitForFunction(()=>typeof start==='function'&&typeof nrAskPick==='function'&&window.NRASK,null,{timeout:0});await g.waitForTimeout(1500);
+ const FS=require('fs'),PA=require('path');const BD=PA.join(__dirname,'..','build');const NRF=FS.readdirSync(BD).filter(f=>/^jnrask.*\.js$/.test(f)).sort();
+ for(const f of NRF)await g.addScriptTag({content:FS.readFileSync(PA.join(BD,f),'utf8')});console.log('jnrask files scanned:',NRF.join(' '));
  const R=await g.evaluate(()=>{const out={};document.getElementById('title').hidden=true;quiet=true;window.__forceOrigin='thd';start();quiet=false;Q.length=0;
   const roads=Object.keys(ROAD14).concat(Object.keys(NRM));
   /* 1. kinds */
@@ -79,6 +81,20 @@ const {chromium}=require('playwright');const D=require('./lib/device');
    const a=K.av>=0?[].concat(NRASK[id])[K.av]:null;if(K.hk==="do"||a&&/\{B\}/.test(a.h+a.o.join(" "))){nb.push([id,K]);break}}}
   v.nr=v.nr||{};Object.assign(v.nr,{r:"tt_tranh",n:7,h:7,hs:0,c:"me",x:0,o:"tt"});clear();const offB=nrOffer(v);const cB=q.ch.find(c=>/^nr_/.test(c.tid));let kk="";if(cB){const X=q72X(cB);kk=plain(q72Txt(X.T.h,X))}
   out.noB={nb:nb.slice(0,5),n:nb.length,offB,cB:cB&&{tid:cB.tid,bk:cB.bk,av:cB.p.av},kk};
+  /* 7c. (fix 2, review E7ar2 FIX 1) the queen is never spoken of as a third person to herself: queen asker (who "queen") or player Hoàng hậu
+     → no drawn ask (any kind, any jnrask*.js file) whose text names her by an alias of NRQX; the live offer of a queen consort neither */
+  const qx=[];let qn=0;const qhits=Object.keys(NRASK).filter(id=>[].concat(NRASK[id]).some(a=>NRQX.test(nrAskTxt(a))));
+  for(const mode of ["asker","player"]){const r0=S.rank;if(mode==="player")S.rank=BAL.voice.hq;
+   for(const id of qhits){const m=id.match(/^(.+)_(\d+)$/);const A=nrCh(m[1],+m[2]);if(!A)continue;for(let t=0;t<12;t++){qn++;
+    const K=nrAskPick({r:m[1],n:+m[2]},A,mode==="asker"?"queen":"",true);const a=K.av>=0?[].concat(NRASK[id])[K.av]:null;
+    if(a&&NRQX.test(nrAskTxt(a))){qx.push([mode,id,K.av,a.h.slice(0,90)]);break}}}S.rank=r0}
+  const qo=[];for(const id of qhits){const m=id.match(/^(.+)_(\d+)$/);if(!ROAD14[m[1]])continue;for(let t=0;t<4;t++){clear();v.queen=true;
+   v.nr=v.nr||{};Object.assign(v.nr,{r:m[1],n:+m[2],h:+m[2],hs:0,c:w.id,x:0,o:m[1].split('_')[0]});if(nrOffer(v)){const c=q.ch.find(c=>/^nr_/.test(c.tid));
+    const a=c&&c.p&&c.p.av>=0?[].concat(NRASK[id])[c.p.av]:null;if(a&&NRQX.test(nrAskTxt(a)))qo.push([id,c.p.av])}}}
+  /* a non-queen asker still gets those asks (the filter is for the queen only) */
+  let other=0;for(const id of qhits){const m=id.match(/^(.+)_(\d+)$/);const A=nrCh(m[1],+m[2]);if(!A)continue;for(let t=0;t<8;t++){const K=nrAskPick({r:m[1],n:+m[2]},A,"",true);
+   const a=K.av>=0?[].concat(NRASK[id])[K.av]:null;if(a&&NRQX.test(nrAskTxt(a))){other++;break}}}
+  out.qx={hits:qhits.length,draws:qn,bad:qx.slice(0,6),nb:qx.length,off:qo.slice(0,6),no:qo.length,other};
   v.queen=false;out.self={bad:self.slice(0,6),nb:self.length,qOff,qs:qs.slice(0,6),nq:qs.length};clear();return out});
  if(R.err){chk('setup',false,R.err)}else{
   console.log('kinds dealt (default):',JSON.stringify(R.kinds));console.log('kinds dealt (+bac):',JSON.stringify(R.kinds2));
@@ -90,6 +106,8 @@ const {chromium}=require('playwright');const D=require('./lib/device');
   chk('5. old save quests (no p.av, nr_bac) open with stock text and end',!R.old.length,R.old);
   chk('6. ask quest played: option 0 → hb>0 or honest fail',R.play[0].done&&(R.play[0].hb>0||R.play[0].hist==='fail'),R.play[0]);
   chk('6. ask quest betrayed → hb<0',R.play[1].done&&R.play[1].hb<0&&R.play[1].hist==='bad',R.play[1])
+  chk(`7c. queen asker / player Hoàng hậu → no ask naming the queen (NRQX; ${R.qx.hits} chapters with such asks, ${R.qx.draws} draws, live queen offers)`,R.qx.nb===0&&R.qx.no===0&&R.qx.hits>0,R.qx);
+  chk(`7c. other askers still draw those asks (${R.qx.other} chapters)`,R.qx.other>0,R.qx);
   chk(`7b. player is Hoàng hậu → no hh ask / stock card`,R.nMeQ===0,R.meQ);
   for(const z of R.voice.samples)console.log('   voice',z);
   chk('8. consort voice = jvoice kAddr by rank pair (bổn cung / tần thiếp / thần thiếp …), never a bare tỷ/muội across ranks',!R.voice.bad.length,R.voice.bad);

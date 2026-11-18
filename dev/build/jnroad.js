@@ -118,11 +118,17 @@ const nrAskOk=a=>!!(a&&nrKOk(a.k)&&a.h&&a.o&&a.o.length>=2&&a.o[0]&&a.o[1]);
 /* who = the asker's role(s) for NRSELF ("queen", a men kind like "ty") */
 /* hasB = the quest has a real rival {B} (fix r2, true information HANDOVER L46): with none (her rival is the player, or gone) an ask that names
    {B} is never drawn, nor the stock «do» card (it spies on {B}) — no «kẻ kia» standing in for a person */
-function nrAskPick(N,A,who,hasB){const no=nrSelfOf(who).concat(hasB===false?["do"]:[]);const L=nrAskL(N.r,N.n);
- const ix=L.map((a,i)=>nrAskOk(a)&&!no.includes(a.k)&&(hasB!==false||!/\{B\}/.test(a.h+a.o.join(" ")+(a.c||"")))?i:-1).filter(i=>i>=0);
+/* fix 2 (review E7ar2 FIX 1, whole family «the queen is spoken of as a third person»): when the asker is the Hoàng hậu or the player is
+   (nrSelfOf gives "hh"), no ask whose text (h, c, labels, loss lines) names the queen by ANY alias is drawn, whatever its kind — she is not
+   told «bổn cung, phụ thân và Hoàng hậu» nor asked what was brought to her own Khôn Ninh cung. ONE table of aliases (ch roads: «cô mẫu» =
+   the queen, jrd_ch). None left → stock card of an allowed kind. */
+const NRQX=/Hoàng hậu|Trung cung|Khôn Ninh|cô mẫu|ngôi hậu|hậu vị|phượng ấn|mẫu nghi/iu;
+const nrAskTxt=a=>a.h+" "+(a.c||"")+" "+a.o.map(x=>[].concat(x).join(" ")).join(" ");
+function nrAskPick(N,A,who,hasB){const no=nrSelfOf(who).concat(hasB===false?["do"]:[]);const L=nrAskL(N.r,N.n);const nq=no.includes("hh");
+ const ix=L.map((a,i)=>nrAskOk(a)&&!no.includes(a.k)&&(hasB!==false||!/\{B\}/.test(nrAskTxt(a)))&&!(nq&&NRQX.test(nrAskTxt(a)))?i:-1).filter(i=>i>=0);
  if(ix.length){const i=ix[R(ix.length)];return{hk:L[i].k,av:i}}return{hk:nrKind(A,no),av:-1}}
 function nrAskOf(X){const p=X&&X.p;if(!p||!p.nr||p.av==null||p.av<0)return null;const a=nrAskL(p.nr,p.nn)[p.av];return nrAskOk(a)&&X.T&&X.T.id==="nr_"+a.k?a:null}
-window.NRSELF=NRSELF;window.nrSelfOf=nrSelfOf;window.nrAskId=nrAskId;window.nrAskL=nrAskL;window.nrAskPick=nrAskPick;window.nrAskOf=nrAskOf;
+window.NRSELF=NRSELF;window.NRQX=NRQX;window.nrAskTxt=nrAskTxt;window.nrSelfOf=nrSelfOf;window.nrAskId=nrAskId;window.nrAskL=nrAskL;window.nrAskPick=nrAskPick;window.nrAskOf=nrAskOf;
 function nrOffer(v){const N=v.nr,A=nrCh(N.r,N.n);if(!A||typeof q72!=="function")return false;const q=q72();if(!q)return false;
  if(q.ch.concat(q.a).some(c=>nrIsV(c,v)&&/^nr_/.test(c.tid)))return false;
  if(typeof rgL==="function"){try{const L=rgL();if(v.queen&&L.hh&&!L.hh.done&&L.hh.st>0)return false}catch(e){}}
