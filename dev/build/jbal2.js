@@ -970,7 +970,7 @@ BAL.ag.sell={o:15,kh:1,min:70,val:{plan:100,scheme:85,schemeMe:95,evme:90,affair
  q:{tham:1,lanh:.4,chuyen:.3},never:["Thanh liêm"],loy:70,try:6,fav:{d:15},npc:{buy:1,no:1}};
 /* AG-ALL-2 G11 (jagtoil): an NPC's face of the day is HER CHOICE among the player's own ways at the mirror (owner 17/11 ~14:50Z: NPCs pay the same
    costs and suffer the same consequences, and choose by their own nết, not always the best). Host only (agOn); the result is the player's toilNpcPlay.
-   opt     the ways: moc = no sitting (mặt mộc), nha = Kiểu thanh nhã, cauky = Kiểu cầu kỳ, dam = cầu kỳ with thick powder (BAL.toil.play.cakeOver)
+   opt     the ways: moc = no sitting (mặt mộc), nha = Kiểu thanh nhã, cauky = Kiểu cầu kỳ, dam = cầu kỳ with thick powder (makeup-lux: no thicker level — the bold presets top out at Khuynh thành, so dam reads as cầu kỳ; cake is kept as data only)
    est     sittings she imagines per way to weigh it (her own hand, toilNpcSk); each scored by the REAL judgement toilFx of today's hosts
    host    weight of each host's verdict (Thái hậu / Hoàng hậu / Hoàng thượng); emp × (1 + sungK × how far her Sủng is below sungRef)
    peer    what she expects from the consorts: tease (a Diêm dúa / Vụng về face) × (1 + her caution), envy (a showy or Khuynh thành look) × her vanity

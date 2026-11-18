@@ -26,7 +26,7 @@ function serve(){return new Promise(r=>{const s=http.createServer((q,a)=>{const 
    for(const [bd,rx] of Object.entries(ONLY))if(rx.test(x)&&!(bands.length===1&&bands[0]===bd))fail.push(`${name}: band-only words (${bd}) in a line said to [${bands}]: ${x}`);
    if(/^emp-/.test(k)){const w=x.replace(TAG,"").replace(/[“”.,?!…]/g,"").trim().split(/\s+/).length;if(w>10)fail.push(`${name}: Hoàng thượng line too long (${w} words): ${x}`)}}
   /* runtime: every reaction pool × band × 12 tuần */
-  const RK={lo:1,mid:3,hi:5,hq:7};const LOOK=[{mk:"moc",dress:"doan"},{mk:"vung",dress:"doan"},{mk:"diem",dress:"doan"},{mk:"vua",dress:"giandi"},{mk:"vua",dress:"photruong"},{mk:"dep",dress:"doan"}];
+  const RK={lo:1,mid:3,hi:5,hq:7};const LOOK=[{mk:"moc",dress:"doan"},{mk:"vung",dress:"doan"},{mk:"tuyet",dress:"diem"},{mk:"vua",dress:"giandi"},{mk:"vua",dress:"photruong"},{mk:"dep",dress:"doan"}];
   const v=rivals.find(x=>!x.queen&&x.alive),q=rivals.find(x=>x.queen);
   for(const [bd,r] of Object.entries(RK)){S.rank=r;S.sung=bd==="hi"||bd==="hq"?60:10;S.th=bd==="lo"?-40:20;counts[bd]=0;
    for(const k of Object.keys(TOIL_SAY)){if(bd==="hq"&&/^hh-/.test(k))continue;const host=/^th/.test(k)?"th":/^emp/.test(k)?"emp":/^hh/.test(k)?q:v;if(!host)continue;
@@ -38,7 +38,7 @@ function serve(){return new Promise(r=>{const s=http.createServer((q,a)=>{const 
    for(const kind of ["th","emp","hh"]){if(bd==="hq"&&kind==="hh")continue;for(let i=0;i<10;i++){S.tuan=(S.tuan+1)%3;if(!S.tuan)S.turn++;const o=kOutcome(kind,i%2===0);
      for(const [ob,rx] of Object.entries(ONLY))if(ob!==bd&&rx.test(o))fail.push(`runtime ${bd}: kOutcome ${kind} ${ob}-only: ${o}`)}}
    /* 10 samples per band: reactions of Thái hậu / Hoàng thượng / Hoàng hậu / a consort, then a talk result */
-   const SM=[["th-praise","th",{mk:"vua",dress:"doan"}],["th-scold","th",{mk:"diem",dress:"doan"}],["emp-like","emp",{mk:"dep",dress:"doan"}],["emp-dislike","emp",{mk:"moc",dress:"doan"}],
+   const SM=[["th-praise","th",{mk:"vua",dress:"doan"}],["th-scold","th",{mk:"tuyet",dress:"diem"}],["emp-like","emp",{mk:"dep",dress:"doan"}],["emp-dislike","emp",{mk:"moc",dress:"doan"}],
     ["hh-praise",q,{mk:"vua",dress:"giandi"}],["hh-scold",q,{mk:"vua",dress:"photruong"}],["rival-jealous",v,{mk:"vua",dress:"photruong"}],["rival-praise",v,{mk:"vua",dress:"giandi"}],["crowd-jealous",v,{mk:"vua",dress:"photruong"}],["th-praise","th",{mk:"vua",dress:"giandi"}]];
    S.vmem={};for(const [k,host,L] of SM){if(bd==="hq"&&/^hh-/.test(k)){S.tuan=(S.tuan+1)%3;if(!S.tuan)S.turn++;samples[bd].push(`Hoàng thượng (talk result): ${kOutcome("emp",true)}`);continue}
     S.tuan=(S.tuan+1)%3;if(!S.tuan)S.turn++;samples[bd].push(`${TOIL_EV[k]}: ${toilSay(k,Object.assign({host},L))}`)}}
