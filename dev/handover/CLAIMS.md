@@ -526,3 +526,12 @@ Audit live consort figures c01–c32 (2K redo / m09 skin) | handover reports/con
 | REVIEW face-reveal-anim 8f5ea90 (SMALL; sonnet; prompt inline) | review/face-reveal-anim | MAIN ROOT-46 | session_01UV1SzimcXuUf9Ahi1zHTBi | PASS 97de885 | 18/11 06:13Z |
 | look-fx-wire #7 (real-game shots, c30/daumua/poxscar 3x, veil halo, mồ hôi; sonnet; briefs/look-fx-wire-7.md; #6 Szj7AXE stopped) | review/look-fx-wire | MAIN ROOT-46 | session_01UV1Szhm9U5aM2PN8e5HgtG | RUNNING | 18/11 06:15Z |
 | review-act-pic-match (small reviewer; brief briefs/review-act-pic-match.md) | review/act-pic-match-r6 | MAIN ROOT-46 | reviewer sonnet | PASS 48d7a30 (FF of main 550dd1b) | 18/11 06:30Z |
+| REVIEW buoi-banner 8b50182 (SMALL; keep animation, drop backdrop; owner opacity pick in the morning) | review/buoi-banner | MAIN ROOT-46 | session_01UV1SzgYgbwU8fMtXp6MSMc | RUNNING | 18/11 06:10Z |
+| face-reveal-anim (owner 18/11 06:20Z: grey avatar/silhouette → real face appears in place; sonnet; brief briefs/face-reveal-anim.md) | review/face-reveal-anim | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:43Z |
+| buoi-banner (owner 18/11 06:20Z canon overwrite: buổi title only, light frame under the top bar, 70-85 % ladder; sonnet; brief briefs/buoi-banner.md) | review/buoi-banner | MAIN ROOT-45 | session_01UV1Szgw3GFqKAN87sYCdcE | READY FOR CHECK be73c79 | 18/11 05:43Z |
+| REVIEW face-zoom-stretch 717c0c0 (SMALL; sonnet; brief briefs/review-face-zoom-stretch.md) | review/face-zoom-stretch | MAIN ROOT-45 | session_01UV1SziAxSDPpYWySX2aPeP | RUNNING | 18/11 05:43Z |
+| toil-react-top (live test fail 'modal is on top' ×2; ORDER ROOT-46 05:55Z) | review/toil-react-top | D | (to open) | ORDERED | 18/11 05:55Z |
+| FOREMAN E ROOT #2 (opus; successor of E ROOT SzmtCW13) | handover FOREMAN_E_STATUS | E ROOT | session_01DgYSWqAEkHoFF4gFWC5Yxg | RUNNING | 18/11 05:57Z |
+| REVIEW hud-mood-bar 04bb279 (SMALL; sonnet; brief briefs/review-hud-mood-bar.md) | review/hud-mood-bar | MAIN ROOT-46 | session_01UV1Szgt5ATvToTiS3v5M3Z | RUNNING | 18/11 05:54Z |
+| place-stage r5 (owner pick B 501 + vivid marker + 4-person iPad trial; sonnet; brief briefs/place-stage-r5.md; r4 SzjeRxj archived) | review/place-stage | MAIN ROOT-46 | session_01UV1SzkV3Bc1u4BHrVH1jFj | RUNNING | 18/11 05:54Z |
+| REVIEW questline-q1b 255f5b2a (BIG; E7br) | review/questline-q1b | E ROOT | session_01DgYSWkpB8TxDvheFX6vvwn | FAIL 255f5b2a (reports/questline-q1b-review.md) | 18/11 06:22Z |
