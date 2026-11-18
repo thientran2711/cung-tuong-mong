@@ -69,13 +69,27 @@ PRIORITY #1 CHECK: OD 17/11 ~23:30Z (smudge = CODE on the makeup layer, not Magn
 ## r15 (s41: pale vertical streaks left of the grey run at nặng)
 - Cause (inferred, not isolated): the 2 extra thin lash runs per eye at nặng (n 3) read as pale vertical bands beside the main run on the pink cheek. nặng is now ONE grey run per eye (BAL.looks.smuFx.tear.n [0,1,1,1]); grey run itself unchanged. Re-shot lod-3-face/stage/chip + look-* (CDN img/_review/smudge/); 3x zoom of both cheeks at lod-3-face: only the grey run, no pale streak.
 
-## r16 (s41, owner 18/11 01:23Z + 02:20Z) — sha 7f4d2ad
+## r16 (s41, owner 18/11 01:23Z + 02:20Z) — sha 980ca8a (code 7f4d2ad + tests)
 PRIORITY #1 CHECK: OD 18/11 ~01:23Z + ~02:20Z | main none (smudge not on main) | review/smudge-code 69243ef -> 7f4d2ad | claims smudge-code r16 (this session).
 - (1) nặng: ONE extra short grey run per face (BAL.looks.smuFx.tear.extra n [0,0,0,1], len .33 of the main, off .075u beside it, seeded eye), solid, same colour/strength as the main run, starts at the lash line. Zoom 3x both cheeks: reads as a short second trail beside the main run; no pale streak. Measure (big face, pixel diff vs no-smudge): 0 pixels lighter than skin in the eye-run area; the only lighter pixels (36-172, max +7..9 lum) are at the lip corner (lip smear), identical at 0/10/20.
 - (2) big faces: BAL.looks.smuFx.big {at 100, max 130, boost 1.25, steps 3} (face px on the makeup LOD scale; the big kitFaceZoom measures ~132): grey runs up to x1.25 darker via lkSmuStep (10+k steps through the same toilLodPass; small sizes still use toilLodStep). Big-face nặng: max darkening -58 -> -72 lum. Images big-off / big-on.
 - (3) knob BAL.looks.smuFx.tear.dark (x on grey-run opacity, all levels), default 1 = r15. Options (big face, Kiều diễm, big boost off so only the knob differs): CDN img/_review/smudge/lem-<nhe|vua|nang>-<0|10|20>.png (0 = r15 ref). Pick -> set tear.dark 1.1 / 1.2 (ONE line).
 - Blush/lip smear stay 20 %. Test: dev/test/smudge-code.js all checks true, 0 page errors; MODE=opt / MODE=big new (LOCALFIT=1 CLOSEUP=fig).
 - Samples + shots only on CDN img/_review/smudge/; wipe after verdict (cdn_sync.py --wipe-review smudge).
+
+### r16 STEP 0 — where the makeup / smudge layer is drawn (dev/test/makeup-places.js; faceW = layer width/1.6 on the toilLodStep scale, fullAt 95 / maxAt 25 / steps 3 / boost 1.9)
+| place | Fold 755x1000@2 | iPad 1180x820@2 | makeup / smudge |
+|---|---|---|---|
+| Room stage, herself | face 41 px, step 2 | 30-33 px, step 3 | yes / yes |
+| Mirror reveal (toilReveal) start: figure / portrait close-up | 55 / 64 px, step 2 / 1 | 40 / 35 px, step 2 / 3 | yes / yes |
+| Mirror reveal END (full zoom) | 162-188 px, step 0 (smudge 'big' step) | 179-208 px, step 0 | yes / yes |
+| kitFaceZoom 200 css px circle | 72-95 px, step 0-1 | 74 px, step 1 | yes / yes |
+| Avatars: tab rows (29 px wide), lists, pcPort frames, cards | face 4-7 px | same | NO / NO (ID-card law OD 17/11 18:10Z) |
+| New-life card (kidfig2) | 24-25 px | same | NO / NO |
+| Other women on stage tokens | 42 px | | no layer (not hers) |
+| Event dialog figure (kitStageFig) | not opened live in the harness; code draws both | | yes / yes (stage-class size) |
+Owner belief confirmed for the top list (no makeup). Correction: the avatar frame shows no makeup at all; the strongest (LOD step 3) place is the stage (esp. iPad); the only big face is the mirror reveal end frame.
+Options at the REAL places (smudge-options-real.js, big boost off, grey runs dark 1 / 1.1 / 1.2): CDN img/_review/smudge/lem-A-<nhe|vua|nang>-<0|10|20>.png (A = stage figure real size, Fold) and lem-B-... (B = mirror reveal end frame). Old chip-size lem-<lvl>-<n>.png + big-*.png still on the CDN (wipe with the verdict).
 
 ## HANDOVER (worker budget turn 30, r15)
 - State: branch review/smudge-code 69243ef pushed, SẴN SÀNG KIỂM r15; all code in dev/build/jlooks.js (lkSmu* block + BAL.looks.smuFx), test dev/test/smudge-code.js (modes: default, PCT=5..20, MODE=lod, MODE=looks; env LOCALFIT=1 CLOSEUP=fig for the tuyet-glow face fig-consort-c11-tcold-a18).
