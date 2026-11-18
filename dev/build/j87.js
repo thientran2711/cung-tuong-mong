@@ -583,7 +583,9 @@ function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.
 /* full-page figure (owner 04:30Z): the figure column spans the whole page body; the figure's height = the body height (men ×1, women
    ×1/KIT_FIG.man through --kfr); the text column beside it scrolls into a "(tiếp theo)" page, the figure never shrinks */
 .kbk-person.kbk-full,.kbk.narrow .kbk-person.kbk-full{grid-template-columns:var(--porf) minmax(0,1fr);grid-template-areas:"por head" "por flow";grid-template-rows:auto minmax(0,1fr);height:100%}
-.kbk-person.kbk-full>.kbk-por{align-self:stretch;height:100%;min-height:0;position:relative;display:flex;justify-content:flex-start;align-items:flex-end;overflow:hidden}
+.kbk-person.kbk-full>.kbk-phead{box-sizing:border-box;padding-right:52px}/* KIT 34.6 r5: room for the mood seal slot (jfigseal), the same on every page */
+.kbk-person.kbk-full>.kbk-por{align-self:stretch;height:100%;min-height:0;position:relative;display:flex;justify-content:flex-start;align-items:flex-end;overflow:visible}
+.kbk-person.kbk-full>.kbk-por{z-index:0}.kbk-person.kbk-full>.kbk-phead,.kbk-person.kbk-full>.kbk-flow{position:relative;z-index:1}/* KIT 56.3: the figure (transparent) may spread under the text; the text is drawn ON TOP */
 .kbk-person.kbk-full>.kbk-por>.kesf{height:100%;margin:0;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;min-height:0;max-width:100%}
 .kbk-person.kbk-full>.kbk-por .kesfi{display:block;position:relative;height:calc(100% * var(--kfr,1));width:auto;max-width:none;flex:0 0 auto}
 .kbk-person.kbk-full>.kbk-por .kesfi>.kesimg{display:block;height:100%!important;width:auto!important;max-width:none!important;max-height:none!important}
