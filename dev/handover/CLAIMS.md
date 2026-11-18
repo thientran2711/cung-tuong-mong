@@ -447,3 +447,4 @@ c12 a18 t1+t4 head fix (Round 37) | claude/cung-tuong-mong-handover-hj0h8w (art,
 | BALANCE CHAIN RE-DO (opus; MAIN s37 21:06Z: balance-core-r2 → night-final-r2 → night-ledger-r1 on newest main) | review/balance-chain | D | session_01964izE1x6qUogL4pcSrLjd | RUNNING | 18/11 03:05Z |
 | REVIEW cloth switches 7b23023d (xoc+uot+bun ON, tra OFF; sonnet SMALL; brief briefs/review-cloth-switches.md) | review/cloth-tea | MAIN s43 | session_01UV1Szk6FimApZS1a8pXbax | RUNNING | 18/11 03:06Z |
 male proportion standard (nam mẫu) | claude/cung-tuong-mong-handover-hj0h8w (art, img/_review/male-proportion) | session_011xDdVPUwCzpXaNaKCq9BQr | RUNNING | 2026-11-18T03:10Z (Foreman C ROOT-15)
+| place-stage (owner layout: no plaque, entry lines as tai-mắt chip, count top-left, name top-right, full size; sonnet; successor of SzmHEoD) | review/place-stage | MAIN s43 | session_01UV1SziagD584pr6UpyJayd | RUNNING | 18/11 03:12Z |
