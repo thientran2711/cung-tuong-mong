@@ -1009,7 +1009,7 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | hoa-dien r3c LIVE f986ff6a (main 62a6846f → f986ff6a; ROLLBACK 62a6846f) | review/hoa-dien-r3c | MAIN s42 | session_01UV1Szk7eZQzR2d2t4rhiFj | LIVE | 18/11 02:12Z |
 | REVIEW cloth-xoc 7270a76 (wet FINAL + mud approved; sonnet SMALL; brief briefs/review-cloth-xoc.md) | review/cloth-xoc | MAIN s42 | (opening) | RUNNING | 18/11 02:17Z |
 | REVIEW smudge r16 50939b0 (sonnet SMALL; brief briefs/review-smudge-r16.md) | review/smudge-code-r16 | MAIN s42 | session_01UV1SzitaUhhFRRJBAbEgHM | DONE PASS af71f94a (review/smudge-code-r16-rv) | 18/11 02:20Z |
-| OWNER UI BUG book-figsize (one body height on every book figure; sonnet; brief briefs/book-figsize.md) | review/book-figsize | MAIN s42 | session_01UV1Szgp1qDfnHSk36y8CPg | READY-FOR-REVIEW b0a69e2b | 18/11 02:03Z |
+| OWNER UI BUG book-figsize (one body height on every book figure; sonnet; brief briefs/book-figsize.md) | review/book-figsize | MAIN s42 | session_01UV1Szgp1qDfnHSk36y8CPg | READY-FOR-REVIEW 7285ea2b | 18/11 02:03Z |
 | REVIEW life-preload 4ff10ae (opus, URGENT; brief briefs/review-life-preload.md) | review/life-preload | MAIN s42 | session_01UV1SzjKPEGVua6n1rUEV2S | RUNNING (merge r6 caa3ffe0 on main f986ff6a) | 18/11 02:22Z |
 | REVIEW result-reason 0db60e0e (sonnet SMALL; brief briefs/review-result-reason.md) | review/result-reason | MAIN s43 | session_01UV1SziWJ2pGVgUMJzwxqQF | RUNNING | 18/11 02:24Z |
 | REVIEW staff-cap-apply fc470e4 (opus BIG; brief briefs/review-staff-cap-apply.md) | review/staff-cap-apply | MAIN s43 | session_01UV1Szjx5c2mp4L6PXwg2zG | RUNNING | 18/11 02:30Z |
