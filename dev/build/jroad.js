@@ -202,7 +202,7 @@ function rdHpLine(A,P,k){const L=window.RDHPL&&RDHPL[P.type];if(!L)return"";let 
  const sp=P.sp||(/\{(goi|Goi|xung|Xung)\}/.test(s)?RDHP_SP[P.role]||{srv:"f"}:null);
  try{if(sp&&typeof kSay==="function")s=kSay(sp,S,s,P.role==="maid"?{}:sp.srv?{own:false}:{})}catch(e){}return s.charAt(0).toUpperCase()+s.slice(1)}
 /* how the card names the helper in front of the word */
-function rdHpLab(P){const R={dad:"Cha",bro:"Huynh trưởng",mom:"Mẫu thân",fam:"Người nhà",srv:"Kẻ hầu ấy",doc:"Thái y",off:"Vị quan ấy",dan:"Người ấy",go:"Người được nhờ"};
+function rdHpLab(P){const R={dad:"Cha",bro:"Huynh trưởng",mom:"Mẫu thân",fam:"Người nhà",srv:"Kẻ hầu ấy",doc:"Thái y",off:"Vị quan ấy",dan:"Người ấy",si:"Vị ấy",go:"Người được nhờ"};
  return R[P.role]||P.name||"Người được nhờ"}
 function rdHpNote(P,k){try{if(window.__hpLog)(window.__hpS=window.__hpS||[]).push({role:P.role,type:P.type,k:rdHpLk(P,k)?4:k,net:rdHpTones(P).slice(),aff:P.aff,word:P.word})}catch(e){}}
 /* refused options of the open hồi leave its option list (A.hpNo = {b: beat id, i: [raw indexes]}) */
