@@ -1014,3 +1014,4 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | REVIEW result-reason 0db60e0e (sonnet SMALL; brief briefs/review-result-reason.md) | review/result-reason | MAIN s43 | session_01UV1SziWJ2pGVgUMJzwxqQF | RUNNING | 18/11 02:24Z |
 | REVIEW staff-cap-apply fc470e4 (opus BIG; brief briefs/review-staff-cap-apply.md) | review/staff-cap-apply | MAIN s43 | session_01UV1Szjx5c2mp4L6PXwg2zG | RUNNING | 18/11 02:30Z |
 | look-fx WIRE (upload 24 approved face finals + LOOKS_ART + fig fit rows re-measure; sonnet; brief briefs/look-fx-wire.md) | review/look-fx-wire | MAIN s43 | session_01UV1Szm7mHXbyLu55N39V6f | RUNNING | 18/11 02:31Z |
+c12 a18 t1-t3 full hairpins (Round 35) | claude/cung-tuong-mong-handover-hj0h8w (art, _review CDN) | session_011xDdVR9qZRXuyczR6JVteS | RUNNING | 2026-11-18T02:46Z (Foreman C ROOT-15)
