@@ -173,3 +173,47 @@ LOOK: host Fold 755x1000@2 + guest iPad 1180x820@2 (coop-thin-f1 SHOTS, scratch 
 - Reviewer: coop-thin-f1 swap rerun (`… 6 1`), LOOK at an act result on both devices; part F6/meter: the coop-bot tripwire "F1" regex includes `act` (deck cards).
 - Known (unchanged from #2): guest-side log writers after a world delta (F6/G); her plots in her week end (part G); ctm-fam / pos still sent (part H list).
 SẴN SÀNG KIỂM 433da4de
+
+## REVIEW r1 — PASS review/coop-thin-f1-r1 8fb5a48a (descends from origin/main a2ce736a)
+Reviewer session_01N1tNP6GkdUZ2X1wV9UKnVH (opus, depth 1, START_CTX ≈ 6 % of 1M). Coordinator Foreman B ROOT-1 session_01N1tNP5Vc1tA6GYpa7VVuaM.
+PRIORITY #1 CHECK ('runAct intent|TH.F.reg|cyAsk|resultShow|rtoast|rsnap'): OD 0 new (thin guest 17/11 verbatim via the brief) | main a2ce736a: no part F; the kit result card resultShow/wrapR (j19:60-62, j63) reused, not rebuilt | review/* only review/coop-thin-f1 | claims: this reviewer only.
+Branch = review/coop-thin-f1 433da4de + merges of origin/main 5103d561, a8a10c66, a2ce736a (shown-odds-one-path: runAct rewritten upstream; the F1 wrapper wraps it by name, re-tested) + reviewer commits. Generated files rebuilt at each merge.
+**Touched files vs main (landing waits for the jcoop* freeze):** dev/build/assemble.py, jcoopthin.js, jcoopthinc.js, jcoopthine.js, jcoopthinf.js (new), jcoopworld.js, jcycle.js; dev/test/coop-cyc.js, coop-thin-e.js, coop-thin-f1.js; generated index.html, sw.js, assets.json.
+Housekeeping: CLAIMS.md had 18 rows wiped by b01fdfbf / 2d5bb638 — restored from afba97cf (e78b8783).
+
+### Reviewer fix — one player-visible bug (590f6748; whole family)
+At level 6 her Hành động acts showed **no result card** on her phone. Solo, the host and a level ≤ 5 guest get the kit result card (#rtoast resultShow "KẾT QUẢ · <act> · Được / Mất / Kèm") from the caller that snapshots her stats before the act (rsnap: wrapR doAct j19:62, the place pop-up j65:165, every rsnap→resultShow caller). At L6 the act returns "" and its result comes later in the host's answer, so the caller's change check saw nothing. Fix (jcoopthinf only, no kit change): the snapshot the caller took in the same tick rides with the pending intent; when the answer + her patch land, resultShow(title, snapshot) runs once — the same kit card, title (ACT[k].n) and rows as solo. A caller that never snapshots had no card in solo either → none. TH.F.reg takes an optional title(args) so F2–F5 get it free. New check "F1 a real tap (doAct)": card once, only after the answer; host gets none.
+LOOK (scratch only, nothing uploaded; host Fold 755x1000@2, guest iPad 1180x820@2, screens cleared of life-start cards first): tap → pending at once (#next locked, act buttons off, no flicker) → her iPad shows the kit card "KẾT QUẢ · Dò la · Mất: Bạc 140→125 (−15) · Hoàng hậu …: ghét ta hơn (0→−8) · Kèm: 1 người oán thêm 7 · Xem đầy đủ trong Sổ ghi"; host Fold shows only his own screen. No overflow, 0 page errors, kit parts only, VANPHONG words (no %).
+Test-staging fixes (no assertion weakened): her kid for the harm acts is 3+ (tKid: a baby alone is no target — this was the root cause of the "kpoison host→guest" reds: 4/5 red before, 7/7 green after); the real-tap target is a person she knows by name (j61 doAct gate) and not confined (same staging as the table); red rows print the stat diff.
+
+### Brief checks
+1. **Every ACT kind from the guest** (F1 table L6, 30+ runs incl. swap / 4G): 52/52–53/53 normally. Isolated reds were all log-only (stats equal on both phones): her act line pushed out of her newest 8 lines by her phone's own lines (evidence "Ngươi có thêm chứng cứ…", k61 "Ngươi đã thấy mặt…", cấm túc) = the known guest-side log writers (F6/G); the same kinds alone 3/3 green. One early pair of reds = the host's 5:00 clock ran out while 2 suites shared the CPU (green alone). **Acts on the friend both directions** (F2: petcare, petsteal, gift, laydo, kpoison) green; kpoison host→guest ×3 swap green as asked (+7/7 after the staging fix). One run had the host +2 items on his laydo (26 other runs +1; target −1 every time): not reproduced, most likely a host-side gain in the same 400 ms (watch item, not a FAIL). No lost / duplicated tap (pending + dbl === 1 every kind; resend deduped by id).
+2. **Level gate**: CAP 6, Worker THINMAX 9, level = min(want, cap a, cap b); default want 0. Old levels unchanged: a1 24/24 + swap, b4 136/136, c4 16/16, d4 46/52 = main 46/52 (same 6 kit sameDom IMG-attribute reds), e5 33/33 + swap, night5 105/105, cyc5 74/74, e2e/p2/timer at L0 green. coop-b1 (L0) is flaky on main too: the host sometimes never gets the friend's consort entry within 30 s under load (main 2/6, branch 3/7 in parallel runs; alone 4/4 green) — pre-existing, not this branch.
+3. **Old guest path**: runAct never runs on her phone at L6 (worker tripwire runAct 5313 → 0; table local:false, npcOps 0); resApply on the guest = oldRan no-op (F8 {} both seats); F3: no res / actr / act invite / do inv. Bypassed branches stay until L6 is the default (part H), same rule as C/E.
+4. **cyAsk fix** (24168022 + 15adffc8, checked as part-E code): asked once per week (E.cyA + c.df in her stored person, survives a host reload), answered once (part-D pick on the host; her phone neither asks nor auto-answers), the host's own card unchanged. coop-cyc THIN=6 73/73 + swap 73/73, THIN=5 73–74/74 on every merge. **L4 not worse than main**: raw 61/73 vs main 63/73 came from the báo lùi odds roll, which the test forces only on the host while at L4 her card is answered on her phone (main fails it too: CYC_ONLY=lui 27/31). With the roll forced on both phones: branch 63/66/64 vs main 67/63/66 — same red list (L4 relay hold probe, som night, mixed), noise.
+5. **LOOK**: above.
+6. **Latency** (LAG 85 ms each way per message on both phones + host CPU ×4, ≥ 50 acts, 5 runs): median 750 / 833 / 930 / 990 ms (worker 917); network (2 legs) 547–715 ms ≈ 70 %, host run 40–127, host wait 1, view+diff+send 23–67, her apply+render 121–157; no throttle 300–460 ms. Network-bound, confirmed.
+   **FOR MAIN (owner call, not a FAIL):** on slow 4G a co-op guest's act waits ≈ 0.8–1 s before its result (≈ 0.3–0.5 s on good network); the pending state shows at once, a double tap is ignored, the result card now shows when it lands. Accept, or order an optimistic local preview (bigger job, needs its own undo design)?
+
+### For later parts (not blockers)
+- Part H / F2: the host's entry of her (kids, bag, pets) still comes from her phone's ctm-fam relay, not from her stored person — step 0 said otherwise; a just-changed kid / item can lag one relay on the host.
+- F6/G: guest-side log writers (evidence, k61, staff cap) still write S.logs on her phone.
+- coop-b1 pairing flake (main too); coop-thin-d 6 kit sameDom reds (main too).
+
+### Gates on review/coop-thin-f1-r1 (final rows = merge a2ce736a unless noted)
+| gate | result |
+|---|---|
+| coop-thin-f1 L6 / swap (final, after staging fixes) | 22/22, 22/22, 22/22 / 22/22, 21/23 (accuse log-only; alone 3/3) |
+| coop-thin-f1 4G (LAG 85, CPU ×4) | 21/22 before the kid-staging fix (that red), real-tap green |
+| coop-thin-a L1 / swap | 24/24 / 24/24 (a8a1) |
+| coop-thin-b L4 / c L4 / d L4 (+swap) | 136/136 / 16/16 / 46/52 = main |
+| coop-thin-e L5 / swap | 33/33 / 33/33 |
+| coop-e2e / COOP_SWAP=1 | 63/63 / 63/63 (a8a1) |
+| coop-p2 / coop-timer | 45/45 / 43/43 (a8a1) |
+| coop-b1 | flaky on main too (see 2); 43/43 on the 5103 merge |
+| coop-night THIN=5 / 6 | 105/105 / 105/105 (a8a1) |
+| coop-cyc THIN=6 / swap / 5 / 4 | 73/73 / 73/73 / 74/74 / = main (see 4) |
+| coop-one-world | seeds 1–10 PASS (5103), 1/3/4/5/9 PASS (later merges) |
+| one-core-guard / text / text-rule / bind | PASS ×4 |
+| quickcheck (8fb5a48a) | PASS — old save ok; render 156/168, tab 425/312, buổi 714/963 ms new/live; core gates PASS |
+Shots: scratch only (never uploaded, no CDN folder to wipe), deleted with the verdict.

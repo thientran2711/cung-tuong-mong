@@ -41,3 +41,4 @@ b10-a26-c01-c11 (cont.) | CDN _review only | W58c session_011xDdVPYYVz3XP6dvfzwG
 b10-a36-c12-c22 (cont.) | CDN _review only | W62c session_011xDdVSaNy5wjmZhMgLKgQJ | RUNNING | 2026-11-18T16:52Z (Foreman C ROOT-27)
 b10-a36-c01-c11 (cont.) | CDN _review only | W61c session_011xDdVPHqiYixx1Gs7LcrFK | RUNNING | 2026-11-18T16:41Z (Foreman C ROOT-27)
 | E12r REVIEW test-flaky-sure (sonnet SMALL) | review/test-flaky-sure | E | session_01DgYSWm6WeSjdcix5VMfR27 | RUNNING | 18/11 16:41Z | START_CTX ~0 % |
+| REVIEW coop-thin-f1 r1 (opus BIG) of 433da4de | review/coop-thin-f1-r1 | B | session_01N1tNP6GkdUZ2X1wV9UKnVH | PASS review/coop-thin-f1-r1 8fb5a48a (descends main a2ce736a; reviewer fix 590f6748 result card; waits jcoop* freeze) | 18/11 16:42Z |
