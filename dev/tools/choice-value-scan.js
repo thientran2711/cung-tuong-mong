@@ -97,25 +97,25 @@ function fixtureRows(){const R=[];const dir=path.join(ROOT,'dev/test');
  /* LOSS WORDS (review FAIL 2a): a green word that names her own loss is not a gain. Others' loss («Thái giám X bị phạt», «nàng ta bị trách») is her gain and stays. */
  const LOSSW=/^(nhường|mất |bị |phải |chịu |thua|không (gửi|được)|cha giận|(nàng|người|ngài|hắn|cha|mẹ) (giận|oán|thù|ghét|nghi)|.*(giận|oán|thù|ghét|nghi) ngươi|.*ngươi bị )/i;
  const geq=(a,b)=>Object.keys(b).every(k=>(a[k]||0)>=b[k]);
- /* EXEMPT (documented in dev/handover/reports/choice-value-audit.md): the better option depends on what she has LEARNED (his / her taste),
-    or the options differ in LOOK only. These rows are listed, never failing. */
+ /* EXEMPT from LAW 2 only (MAIN ROOT-59 ~23:05Z; documented in dev/handover/reports/choice-value-audit.md): the better option depends on what she has LEARNED (his / her taste),
+    or the options form a LOOK price ladder. These rows are listed and never fail LAW 2 (dominance); LAW 3 (cost-only) is still judged on them. */
  const EX={night1:'KNOWLEDGE: each answer fits one of his tastes (j8 night1, trait → odds); finding his taste is the play',
-  vnight:'KNOWLEDGE: same night answers as night1',ge1:'ENDING: the end-branch outcome is hidden on purpose until the last line (jge, owner ending design)',ge2:'ENDING: as ge1',vlout:'LOOK: veils of the same cover at different prices; the paid part is the look'};
+  vnight:'KNOWLEDGE: same night answers as night1',ge1:'ENDING: the end-branch outcome is hidden on purpose until the last line (jge, owner ending design)',ge2:'ENDING: as ge1',vlout:'LOOK: a price / cover ladder of veils (che được ít … khá kín): a dearer veil covers more and looks finer — a fair price / quality ladder'};
  const exWhy=m=>EX[m.pid]||(/Đặt cược/.test(m.title)||m.cs.filter(c=>/^Cược /.test(c.t)).length>=2?'BET: the payout follows each boat\'s true odds; the odds word groups several real odds':'')||(m.cs.some(c=>/^Chia sẻ bí mật/.test(c.t))?'KNOWLEDGE: talk topics follow her taste (jagacts3 p3ChatF); learning what she likes is the play':'');
  const rows=[],exempt=[];
- for(const m of modals){if(exWhy(m)){exempt.push({src:m.tag,title:m.title,why:exWhy(m)});continue}const V=m.cs.map(vec);
+ for(const m of modals){const exm=exWhy(m);if(exm)exempt.push({src:m.tag,title:m.title,why:exm});/* MAIN ROOT-59 ~23:05Z: exempt classes are exempt from LAW 2 only — law 3 (cost-only, hint) still applies */const V=m.cs.map(vec);
   m.cs.forEach((c,i)=>{if(c.dis)return;const v=V[i];const hasCost=Object.keys(v.C).length>0;const hasGain=Object.keys(v.G).length>0||v.words.length>0;
    const base={src:m.tag,pid:m.pid,title:m.title,opt:c.t,ton:[...c.rows.ton,...c.rows.mat,...c.rows.kem.filter(x=>x.c==='r')].map(x=>x.h).join(' · '),duoc:c.rows.duoc.map(x=>x.h).join(' · '),odds:c.odds};
    if(hasCost&&!hasGain){rows.push({...base,flag:'COST-ONLY'});return}
    /* law 3 in play: an event card hides its rows and shows a GỢI Ý line; a real gain must not read «chẳng được gì» there */
    if(hasGain&&/^chẳng được gì/.test(c.hint||'')){rows.push({...base,flag:'HINT-NO-GAIN',duoc:base.duoc+' | gợi ý: '+c.hint});return}
-   for(let j=0;j<m.cs.length;j++){if(j===i||m.cs[j].dis)continue;const w=V[j];
+   if(exm)return;for(let j=0;j<m.cs.length;j++){if(j===i||m.cs[j].dis)continue;const w=V[j];
     const better=geq(w.G,v.G)&&Object.keys(w.C).every(k=>(v.C[k]||0)>=w.C[k])&&v.words.every(x=>w.words.includes(x));
     const oddsOk=w.o===99||(v.o!==99&&w.o>=v.o);/* sure ≥ any odds; between ladders the higher word is better */
     const strict=Object.keys(w.G).some(k=>(w.G[k]||0)>(v.G[k]||0))||Object.keys(v.C).some(k=>(v.C[k]||0)>(w.C[k]||0));/* a word-only edge is not «clearly better»: words carry no comparable value */
     if(better&&oddsOk&&strict){rows.push({...base,flag:'DOMINATED',by:m.cs[j].t});break}}})}
  /* hand-check table (not failing): every option whose only gain under Được is a word (no number) while it has a cost — reviewer reads these */
- const wordOnly=[];for(const m of modals){if(exWhy(m))continue;m.cs.forEach(c=>{if(c.dis)return;const v=vec(c);if(Object.keys(v.C).length&&!Object.keys(v.G).length&&v.words.length)wordOnly.push({src:m.tag,title:m.title,opt:c.t,ton:Object.keys(v.C).join(', '),words:v.words.join(' · ')})})}
+ const wordOnly=[];for(const m of modals){m.cs.forEach(c=>{if(c.dis)return;const v=vec(c);if(Object.keys(v.C).length&&!Object.keys(v.G).length&&v.words.length)wordOnly.push({src:m.tag,title:m.title,opt:c.t,ton:Object.keys(v.C).join(', '),words:v.words.join(' · ')})})}
  const fx=fixtureRows();rows.push(...fx);
  const res={wordOnly,modals:modals.length,pend:pend.length,turns:TURNS,seed:SEED,errors:errs.slice(0,10),rows,exempt,all:modals};
  if(OUT)fs.writeFileSync(OUT,JSON.stringify(res,null,1));
