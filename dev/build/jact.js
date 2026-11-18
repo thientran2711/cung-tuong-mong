@@ -66,7 +66,7 @@ const AD_ACTNAME={"Bỏ độc vào trà nàng":"poison","Bỏ xạ hương vào
 (function(){const t0=talkOpts;talkOpts=function(p){let A=t0.apply(this,arguments);try{if(!p||!Array.isArray(A)||adSrv())return A;
   if(p.kind==="ty")A=A.filter(a=>a&&a.n!=="Học hỏi y lý");
   if(p.kind==="fallen")A=A.filter(a=>a&&a.n!=="Đưa cơm áo");
-  if(p.kind==="maid"&&S.maid){const i=A.findIndex(a=>a&&a.n==="Tâm sự");if(i>=0)A[i]={n:"Trò chuyện với cung nữ",o:100,inner:1,w:{maid:3},x:"có khi nghe được tin",go:()=>{if(roll(15)){const t=liveRivals(true);if(t.length){const v=pick(t);try{seeLoc&&seeLoc(v)}catch(e){}log(`${S.maid.name} kể: ${v.name} đang ở ${placeName(whereOf(v))} buổi này.`)}}}}}
+  if(p.kind==="maid"&&S.maid){const i=A.findIndex(a=>a&&a.n==="Tâm sự");if(i>=0)A[i]={n:"Trò chuyện với cung nữ",o:100,inner:1,w:{},x:`lòng +${BAL.ag.cx2.maidTalk.w.maid} · có khi nghe được tin`,go:()=>{maidTalkDo(S)}}}
   if(p.kind==="peddler")A=[{n:"Xem hàng Nội vụ phủ",o:100,x:`hàng mua từ ngoài cung${adRare()?" · tuần này có một món hiếm":""} · không tốn khắc`,adShop:1}];
   if(p.kind==="rival"||p.kind==="hh")A=A.map(a=>{const k=a&&AD_ACTNAME[a.n];return k&&ACT[k]&&ACT[k].n?Object.assign({},a,{n:ACT[k].n}):a});
   A=A.map(a=>{const n=a&&adDoorOfPop(p.kind,a.n);return n&&adDoorUsed(n)?Object.assign({},a,{lock:true,t:(AD_DOOR[n][2]==="buoi"?"đã làm buổi này":(AD_DOOR_WHY[p.kind]||"đã làm tuần này"))}):a})
@@ -137,7 +137,8 @@ function adHapNow(){if(!S||S.dead||adSrv()||S.out)return[];let b="";try{b=bkey()
 function adHapAt(k){return adHapNow().find(h=>h.k===k&&!h.done)||null}
 const AD_HAP_T={emp:"Hoàng thượng dạo vườn",quarrel:"Hai phi tần cãi nhau",gossip:"Nghe lỏm chuyện",favour:"Có người nhờ việc"};
 const AD_HAP_FIRE={};/* id → (h,k) => fired (jact2 adds fest, cold) */
-function adHapArrive(k){if(S.place!==k||S.dead)return;let any=false;for(let i=0;i<2;i++){const h=adHapAt(k);if(!h)break;if(adHapFire1(h,k))any=true}if(any){try{showModal()}catch(e){}}}
+/* AG-ALL-2c G1 (owner OD 17/11 ~14:50Z "có bao nhiêu sự kiện có thể xảy ra là nó đều xuất hiện"): no cap — every happening of that place fires on arrival */
+function adHapArrive(k){if(S.place!==k||S.dead)return;let any=false;const n=adHapNow().length;for(let i=0;i<n;i++){const h=adHapAt(k);if(!h)break;if(adHapFire1(h,k))any=true;else h.done=1}if(any){try{showModal()}catch(e){}}}
 function adHapFire1(h,k){h.done=1;let fired=false;if(AD_HAP_FIRE[h.id]){try{fired=!!AD_HAP_FIRE[h.id](h,k)}catch(e){console.error("jact fire",e)}return fired}
  if(h.id==="emp"&&(S.where||{}).emp==="vuon"){const d=mkP("adStroll",{});if(d){pushDil(d,AD_HAP_T.emp);fired=true}}
  else if(h.id==="quarrel"){const R=liveRivals(true).filter(v=>!v.confined);const here=adPresent(k);const a=here[0]||pick(R);const b=here.find(v=>v!==a)||pick(R.filter(v=>v!==a));
@@ -147,9 +148,9 @@ function adHapFire1(h,k){h.done=1;let fired=false;if(AD_HAP_FIRE[h.id]){try{fire
  else if(h.id==="favour"&&h.x){try{if(q72X(h.x)&&q72CanOffer()){q72().a.push(h.x);fired=q72Offer(h.x,"meet");if(!fired){const q=q72();q.a.splice(q.a.indexOf(h.x),1)}}}catch(e){console.error(e)}}
  return fired}
 /* the Emperor in the garden: "Đánh đàn ở ngự hoa viên" (was a Hành sự card) now lives here, same numbers */
-PEND.adStroll=()=>{const K=S.emp.known,L=S.emp.likes,tt=has("trongtai")?2:1;const o=od(BAL.odb.jact.odO+S.tai/3+S.arts.cam*4*tt+(K.music?15:0)+mm());const w=K.music?9:7;
+PEND.adStroll=()=>{const K=S.emp.known,L=S.emp.likes;const C=qinCard(S);/* 2e4: ONE card with the NPC (jagacts3 qinCard, BAL.ag.par3.qin) */const o=C.o;const w=C.w.sung;
  return{who:pEmp(),t:`<p>Hoàng thượng đang dạo bước trong Ngự hoa viên, thái giám theo hầu cách xa mấy bước.</p>`,o:[
-  {n:"Đánh đàn chờ ngự giá",fx:{suc:-10},x:`${word(o)} · thành: Sủng +${w}${K.music?` (tấu ${L.music}, khúc ngài thích)`:""} · hỏng: Sủng ${balSg(BAL.eff.jact.sungGo)}`,go:()=>{const b=rsnap();if(roll(o)){apply({sung:w});log(`Tiếng đàn làm Hoàng thượng dừng bước. Sủng +${w}.`)}else{apply({sung:BAL.eff.jact.sungGo});log("Ngài đi qua, không để ý tiếng đàn. Sủng -1.")}}},
+  {n:"Đánh đàn chờ ngự giá",fx:{...C.c},x:`${word(o)} · thành: Sủng +${w}${K.music?` (tấu ${L.music}, khúc ngài thích)`:""} · hỏng: Sủng ${balSg(C.l.sung)}`,go:()=>{const b=rsnap();if(agTry(o)){apply({sung:w});log(`Tiếng đàn làm Hoàng thượng dừng bước. Sủng +${w}.`)}else if(agSoft(o))agSoftTxt(S,"Đánh đàn chờ ngự giá");else{apply({sung:C.l.sung});log(`Ngài đi qua, không để ý tiếng đàn. Sủng ${balSg(C.l.sung)}.`)}}},
   {n:"Ra vấn an",fx:{},x:"chạm vào ngài trên cảnh để nói chuyện"},
   {n:"Lánh đi lối khác",fx:{},x:"không được không mất"}]}};
 (function(){const st=document.createElement("style");st.textContent=`

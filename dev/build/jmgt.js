@@ -22,7 +22,7 @@ function mgRankOf(p){try{p=p||S;if(typeof rkOf==="function")return cl(+rkOf(p)||
 function mgTier(kind,o){o=o||{};const B=BAL.mgTier;const occ=B.occ[o.occ]?o.occ:"hoc";const [b0,pr]=B.occ[occ];
  const rank=o.rank!=null?cl(+o.rank||0,0,7):mgRankOf(o.p);
  let lv=o.lv;if(lv==null){try{lv=kg82LvFor(o.p||S,kind)}catch(e){lv=0}}lv=cl(+lv||0,0,5);
- const stake=cl(b0+pr*rank+(o.big?B.big:0),0,B.stakeMax);const d=stake-lv;
+ const stake=cl(b0+pr*rank+(o.big?B.big:0),0,B.stakeMax);const d=o.d!=null&&isFinite(+o.d)?+o.d:stake-lv;/* o.d: a fixed gap (jmgcal rounds) */
  const ease=cl(B.mid-B.slope*d+((B.kAdj||{})[kind]||0),B.easeMin,5);
  const tier=d<=-B.band?0:d>=B.band?2:1;
  return{occ,occName:MGT_OCCN[occ],rank,stake,lv,d,tier,word:["Dễ","Vừa","Khó"][tier],ease:Math.round(ease*10)/10}}
@@ -55,6 +55,44 @@ function mgLev(env,kind,name){const L=((BAL.mgTier.lev||{})[kind]||{})[name];if(
    jlant lamp, j82 go): a right answer found quickly is Tuyệt phẩm, a right answer found slowly is Tinh xảo. */
 function mgPace(env,kind,el,lim){const P=BAL.mgTier.pace,e=cl(env&&env.lv!=null?+env.lv:5,0,5)/5,at=(n)=>{const v=mgLev(env,kind,n);return v!=null?v:P[n][0]+(P[n][1]-P[n][0])*e};
  const f=cl(at("fast"),0,.99),k=cl(at("keep"),0,1),u=cl((+el||0)/Math.max(1,+lim||1),0,1);return u<=f?1:1-(1-k)*(u-f)/(1-f)}
+/* ===== AG-ALL-2b mg2 · NPC MINI-GAMES = ONE DRAW FROM HER OWN CURVE (owner OD 17/11 ~15:25Z (3): "lúc nào tôi có thì NPC cũng phải có …
+   đổ xí ngầu cho nó … lỡ như nó chơi khôn quá … coi lại như thế nào để cho nó công bằng với tôi"). ONE CORE for every tiered game an NPC takes part in:
+     t   = mgNpcTier(kind, p, o): mgTier with HIS/HER own rank and art level (o.occ, o.big, o.rank, o.lv as the player's call would pass them)
+           = the very board the player would get in that seat (same stake, same gap d = stake − level);
+     med = mgMedD(t.d): the median graded play of the skilled bot at that gap (BAL.ag.mg2.med, the measured Dễ / Vừa / Khó rows of
+           dev/PROGRESS_mg-balance.md + _mg-balance-2.md), linear between the points and beyond them;
+     raw = clamp(round(med + (u − .5)·BAL.ag.mg2.w), 0, 10), u = mean of 3 draws of o.rnd (default Math.random; seeded for odds / co-op).
+   So an NPC plays like a good player of her level on that board: never a perfect player, never a sure win (spread ±w/2 round the median).
+   mgSkipRaw(t) = the median at her own gap = "Để tài nghệ quyết định". Switch: mg2On() = agOn() && BAL.ag.mg2.on; off (co-op guest,
+   BAL.ag.on 0) = the old kg82NpcMean (BAL.mgTier.npc) paths, untouched. MGX.o = the occasion of the NPC rows being scored (mgWith; j71 contests). */
+const MGX={o:null,n:0};
+function mg2On(){try{return typeof agOn==="function"&&agOn()&&!!(BAL.ag&&BAL.ag.mg2&&BAL.ag.mg2.on)}catch(e){return false}}
+function mgWith(o,f){const k=MGX.o;MGX.o=o;try{return f()}finally{MGX.o=k}}
+function mgMedD(d){const P=BAL.ag.mg2.med;d=+d||0;let i=0;while(i<P.length-2&&d>P[i+1][0])i++;const [a,ma]=P[i],[b,mb]=P[i+1];return cl(ma+(mb-ma)*(d-a)/(b-a),0,10)}
+function mgNpcTier(kind,p,o){o=o||{};return mgTier(kind,{occ:o.occ,big:!!o.big,rank:o.rank!=null?o.rank:mgRankOf(p),lv:o.lv,p})}
+function mgNpcRaw(kind,p,o){o=Object.assign({},MGX.o||{},o||{});const r=o.rnd||Math.random,u=(r()+r()+r())/3;MGX.n++;const d=o.d!=null?o.d:mgNpcTier(kind,p,o).d;
+ const H=BAL.ag.mg2.hand;if(H&&H.on&&p!==S){/* AG-ALL-2d HAND CEILING: a roll under her own ceiling, then the board's ease (the same gap shift the player's board gives) */
+  const c=mgHand(kind,p);return cl(Math.round(c-(1-u)*H.w+(mgMedD(d)-mgMedD(0))),0,10)}
+ return cl(Math.round(mgMedD(d)+(u-.5)*BAL.ag.mg2.w),0,10)}/* o.d: a known gap (no person: the matching level 0) */
+/* ===== AG-ALL-2d · MINIGAME HAND CEILING (owner OD 17/11 ~16:00Z L1640, verbatim key words: "tất cả NPC đều phải có một cái mức trần chơi game, rồi
+   sau đó là mới được cộng thêm dựa theo cái tài, cái phẩm ... mỗi game mỗi người sẽ có một cái mức trần khác nhau ... Có người chơi giỏi, người chơi dở").
+   Her Tài never adds points: her art level only eases the BOARD (mgTier gap d). So every NPC has a hidden HAND per minigame kind = the best graded play her
+   hands reach on a matching board, drawn ONCE per NPC per kind between BAL.ag.mg2.hand.lo (a clumsy hand) and .hi (the measured skilled human bot of
+   dev/measure/mg-bots.js: median 7.5 at the matching board ⇒ hi − w/2 = 7.5), mean of two draws raised to BAL.ag.mg2.hand.skew (most hands weak-to-middling, strong hands rare — owner ~16:20Z (f)).
+   Her play = a roll UNDER that ceiling (c − (1 − u)·w, u = mean of 3 draws), THEN the same board ease the player gets from her own art level / rank /
+   occasion (mgMedD(d) − mgMedD(0): the skilled bot's measured shift between an easy / matching / hard board). Never a perfect player: even the best hand
+   rolls below its ceiling most of the time. Saved on the person (p.mgH[kind]); the draw is hashed on the person + kind, so an old save (no p.mgH) and a
+   co-op guest roll the very same hand lazily. Off: BAL.ag.mg2.hand.on = 0 (one skilled-bot curve for everyone, as part 2b). */
+function mgHashU(str){let h=2166136261;for(let i=0;i<str.length;i++){h^=str.charCodeAt(i);h=Math.imul(h,16777619)}h^=h>>>13;h=Math.imul(h,0x5bd1e995);h^=h>>>15;return (h>>>0)/4294967296}
+function mgHand(kind,p){const H=BAL.ag.mg2.hand;if(!p||typeof p!=="object"){const Bd=typeof mgCalBand==="function"?mgCalBand(kind):H;return Bd.lo+(Bd.hi-Bd.lo)*Math.pow(.5,H.skew||1)}let M=p.mgH;if(!M||typeof M!=="object")M=p.mgH={};
+ /* AG-ALL-2d2: the band per kind comes from the owner's calibration (jmgcal mgCalBand: BAL.ag.mg2.cal.k) or the BAL default; p.mgHv[kind] = the band it was
+    rolled in — a changed band re-rolls the SAME hash draw inside the new band (old saves without p.mgHv re-roll identically under the default band) */
+ const Bd=typeof mgCalBand==="function"?mgCalBand(kind):{lo:H.lo,hi:H.hi,sig:H.lo+"/"+H.hi};let V=p.mgHv;if(!V||typeof V!=="object")V=p.mgHv={};
+ if(M[kind]==null||V[kind]!==Bd.sig){const id=(p.name||"")+"|"+(p.id!=null?p.id:p.sid!=null?"s"+p.sid:"")+"|"+kind;const b=(mgHashU(id+"|a")+mgHashU(id+"|b"))/2;M[kind]=Math.round((Bd.lo+(Bd.hi-Bd.lo)*Math.pow(b,H.skew||1))*100)/100;V[kind]=Bd.sig;MGX.hand=(MGX.hand||0)+1}
+ return M[kind]}
+window.mgHand=mgHand;
+function mgSkipRaw(t){return cl(Math.round(mgMedD(t&&t.d!=null?t.d:0)),0,10)}
+window.mg2On=mg2On;window.mgWith=mgWith;window.mgMedD=mgMedD;window.mgNpcTier=mgNpcTier;window.mgNpcRaw=mgNpcRaw;window.mgSkipRaw=mgSkipRaw;window.MGX=MGX;
 /* the ONE trace score (review/mg-snap, owner 17/11 07:10Z: a traced line is judged by where HER finger went, never snapped onto the guide):
    G = the guide path (dense points), U = her line (points [x,y,…]), tol = px. coverage = share of the guide within tol of her line; accuracy = share of
    her line within tol of the guide; score 0..1 = coverage × (1 − a + a·accuracy), a = BAL.mgTier.trace.acc (was a typed .5: a scribble

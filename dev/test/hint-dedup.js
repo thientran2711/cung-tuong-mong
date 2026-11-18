@@ -12,7 +12,7 @@ const {chromium}=require('playwright');const fs=require('fs');const path=require
   const T=s=>String(s||'').replace(/<[^>]+>/g,'').replace(/\s+/g,' ').trim();
   const dupN=L=>{const c={};L.forEach(h=>{if(h)c[h]=(c[h]||0)+1});return L.filter(h=>h&&c[h]>1).length};
   const read=(m,key)=>{if(!m||!m.opts||m.opts.length<2||!kitIsEventChoice(m))return;
-   for(const [lvN,tc] of [["vague",5],["plain",30]]){S.tamco=tc;S.mat=0;
+   for(const [lvN,tc] of [["vague",5],["plain",30]]){S.tamco=tc;tmPlace(S,0);
     m.opts.forEach(o=>{if(o&&o.__dhA){delete o.hint;delete o.risk;delete o.__dhA}});
     const before=m.opts.map(o=>kitHint(o,m).hint);evbDedup(m);const after=m.opts.map(o=>kitHint(o,m).hint);
     let canFix=0;try{for(let l=kitHintLevel()+1;l<=2;l++){const L=m.opts.map(o=>{const c=Object.assign({},o);if(c.__dhA){delete c.hint;delete c.risk}return kitHint(c,m,l).hint});if(dupN(L)<dupN(after))canFix=1}}catch(e){}

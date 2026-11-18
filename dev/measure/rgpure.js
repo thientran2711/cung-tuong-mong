@@ -13,7 +13,7 @@ const [,,PAGE,SIDES,NS,MO]=process.argv;const N=+NS||200,MONTHS=+MO||42;
   const r=await p.evaluate(([side,N,MONTHS,RAMP,MT])=>{document.getElementById('title').hidden=true;window.__nlInner=1;window.__bot=1;quiet=true;render=function(){};showModal=function(){};
    const L=[];for(let n=0;n<N;n++){let k=0;do{start();k++}while((S.origin.k==='cnv'||(typeof isSrv==='function'&&isSrv())||!S.ps)&&k<30);Q.length=0;
     window.__rgDbg={};const s0={tamco:S.tamco,mat:S.mat||0,tai:S.tai,duc:S.duc,danh:S.danh,sung:S.sung,hh:S.hh};let beats=0,oks=0;
-    for(let m=1;m<=MONTHS;m++){if(!MT){S.turn++;S.month=(S.month%12)+1}if(RAMP){const f=m/MONTHS;S.tamco=Math.round(s0.tamco+(60-s0.tamco)*f*.6);S.mat=Math.round(s0.mat+3*f);S.danh=Math.round(s0.danh+(60-s0.danh)*f*.6);S.duc=Math.round(s0.duc+(50-s0.duc)*f*.5);S.sung=Math.max(S.sung,Math.round(20+40*f));S.tai=Math.max(S.tai,s0.tai)}
+    for(let m=1;m<=MONTHS;m++){if(!MT){S.turn++;S.month=(S.month%12)+1}if(RAMP){const f=m/MONTHS;S.tamco=Math.round(s0.tamco+(60-s0.tamco)*f*.6);tmPlace(S,Math.round(s0.mat+3*f));S.danh=Math.round(s0.danh+(60-s0.danh)*f*.6);S.duc=Math.round(s0.duc+(50-s0.duc)*f*.5);S.sung=Math.max(S.sung,Math.round(20+40*f));S.tai=Math.max(S.tai,s0.tai)}
      S.suc=80;S.bac=Math.max(S.bac,150);if(MT){S.tuan=2;try{monthTick()}catch(e){}if(S.dead)break}else{try{rgMonth()}catch(e){}}
      let q=0;while(Q.length&&q++<10){const mm=Q[0];if(mm.pid==='rg'&&mm.opts&&mm.opts.length){beats++;const LL=mm.opts.map((c,i)=>[c,i]);let i;
        if(side==='ngoai')i=(LL.find(([c])=>/đứng ngoài|Đứng ngoài|Cáo bệnh|Đóng cửa|giữ mình|Lấy cớ/.test(c.n+c.j67))||LL[LL.length-1])[1];

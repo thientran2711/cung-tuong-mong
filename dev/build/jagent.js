@@ -27,6 +27,20 @@ function agErr(w,e){try{AG.errs.push(w+": "+(e&&e.message||e));if(AG.errs.length
 function agGuest(){try{return !!(window.COOPW&&COOPW.on&&COOPW.seat!=="a")}catch(e){return false}}
 function agOn(){try{return !!(typeof S!=="undefined"&&S&&!S.dead&&BAL.ag&&BAL.ag.on&&!window.__agOff&&!agGuest())}catch(e){return false}}
 function agOwn(k){return !!(BAL.ag&&BAL.ag.own.includes(k))}
+/* AG-ALL-2d2 · NOTHING IS EVER 100 % (owner 17/11 ~17:00Z, global): every odds of an act (her or an NPC: success, being caught, persuading) is clamped
+   to BAL.odds.lo..hi (the j13 ladI pattern); a chance / frequency roll (a rare gift, a re-plan, an illness) is only capped at BAL.odds.hi (never sure;
+   its floor is not raised, so a rare event stays rare). Every AG-ALL-2 roll of a computed number goes through one of these two. */
+function agOdd(o){return cl(Math.round(+o||0),BAL.odds.lo,BAL.odds.hi)}
+function agCap(o){return Math.min(+o||0,BAL.odds.hi)}
+/* SOFT FAIL — ONE path for every ag-all-2 roll (owner OD 17/11 ~17:35Z): agTry(o) = the capped roll; agSoft(o) = a failure at this RAW o is soft
+   (o reached the cap = the act was sure before it): cost already spent, nothing gained, the failure branch (punishment, lòng / thiện cảm loss,
+   caught, refusal) is skipped; agSoftTxt(p,n,c) = the ONE BẠI line = j63 oddsSoft (ODDS CAP): her → oddsSoft(n,c) itself (it logs the line and charges
+   oddsSoftCost(c) once: Sức only, never bạc); an NPC (or a servant, pay = asAp) → the same words and pay(oddsSoftCost(c)), never S. c = the cost NOT yet
+   paid (a caller that paid before the roll rolls first instead; nothing is charged twice). Her callers never log it again. AGSOFT.n counts soft fails. */
+const AGSOFT={n:0};
+function agSoft(o){return(+o||0)>=BAL.odds.hi}
+function agTry(o){const ok=roll(agOdd(o));if(!ok&&agSoft(o))AGSOFT.n++;return ok}
+function agSoftTxt(p,n,c,pay){if(p===S)return oddsSoft(n||"",c);const x=oddsSoftCost(c);if(p&&Object.keys(x).length)(pay||(d=>ap(p,d)))(x);return `${p&&p.name||""}: <span class="r">bại</span> — người tính không bằng trời tính: ${kitSoftW(c)}.`}
 function agZ(){const z=S.ag=S.ag||{};z.pend=z.pend||[];z.log=z.log||[];return z}
 function agKey(){return wk()+"-"+(S.buoi||0)}
 function agRec(){try{return j95on()&&S.roster&&S.roster.key===j95key()?S.roster:null}catch(e){return null}}
@@ -46,7 +60,7 @@ function agNeeds(v){const G=BAL.ag.goal,W=BAL.ag.road[agOrg(v)]||BAL.ag.road._;c
  for(const x of liveRivals(true))if(x!==v)sf=Math.max(sf,bandOf(danger(x,v)));
  let q=null;try{q=queenP()}catch(e){}
  return{sung:gap(G.sung,v.sung)*W.sung,th:S.thDead?0:gap(G.th,v.th)*W.th,hh:q&&q!==v&&!v.queen?gap(G.hh,v.hh)*W.hh:0,danh:gap(G.danh,v.danh)*W.danh,duc:gap(G.duc,v.duc)*W.duc,
-  kid:!sonsOf(v).length&&!v.preg&&(v.age||20)<G.kidAge?W.kid:0,ally:gap(G.ally,fr)*W.ally,spite:cl(sp/100,0,1)*W.spite,safe:cl(sf/Math.max(1,BANDS.length-1),0,1)*W.safe,
+  kid:!sonsOf(v).length&&!v.preg&&(v.age||20)<G.kidAge?W.kid:0,ally:gap(G.ally,fr)*W.ally,spite:agSpN(sp)*W.spite,safe:cl(sf/Math.max(1,BANDS.length-1),0,1)*W.safe,
   rest:gap(G.rest,v.suc)}}
 /* r1 fault 8: a spite deed SERVES the spite need (its gain BAL.tw.g closes it, BAL.ag.unit points = one whole need), like every other need —
    before, the deed fed the need it served (provoke lowers thiện cảm → hostility ↑ → spite ↑ → provoke again, ~40×/year on her).
@@ -54,6 +68,10 @@ function agNeeds(v){const G=BAL.ag.goal,W=BAL.ag.road[agOrg(v)]||BAL.ag.road._;c
 function agVentM(m){return m?Math.max(0,m[1]-(wk()-m[0])*BAL.ag.vent.fade):0}
 function agVentL(v,x){const V=v&&v.ag&&v.ag.vent;if(!V)return 0;return agVentM(V[key(x)])+agVentM(V["*"])}
 function agSpite(v,x){return Math.max(0,hostility(v,x))*(1-Math.min(1,agVentL(v,x)/BAL.ag.unit))}
+/* the spite NEED from a hostility (0..1): hostility / BAL.ag.spiteD (schemes: BAL.ag.harm.spiteD, kept at the old 100 so the pass raises quarrels, not schemes) (AG-ALL r1 F5 weight pass; was /100 typed in six places) */
+function agAskHer(v){let k="";try{k=agKey()}catch(e){}if(!AG.askc||AG.askc.k!==k){let c=false;/* once per buổi (perf): a request is on offer (q72); who asks is matched when the '!' fires */
+  try{c=!!(typeof q72CanOffer==="function"&&q72CanOffer()&&q72Cands().length)}catch(e){}AG.askc={k,c}}return AG.askc.c}
+function agSpN(h,d){return cl((h||0)/(d||BAL.ag.spiteD),0,1)}
 function agVent(v,t,k){const s=Object.keys(AGSOC).find(x=>AGSOC[x][0]===k);const g=s?AGSOC[s][3](BAL.tw.g):AGSELF[k]?AGSELF[k].g(v).g:null;const pts=g&&g.spite;if(!(pts>0))return;
  v.ag=v.ag||{};const V=v.ag.vent=v.ag.vent||{};const kk=t?key(t):"*";V[kk]=[wk(),agVentM(V[kk])+pts];for(const q in V)if(!agVentM(V[q]))delete V[q]}
 /* she weighs her needs once a day (tuần) and again after she acted (perf §4: "cache needs per agent") */
@@ -96,7 +114,7 @@ function agMW(v,tag){const C=AG.mwc=AG.mwc||{};const k=(v===S?"me":v.id)+":"+tag
 /* the khắc she can do it: from now to the end of the buổi, at a place she may enter, not while she keeps a secret meeting */
 /* a khắc the words of a card or a told deed already put her somewhere (j95b bind / turn-of-buổi act) is hers to keep: the loop never overwrites it */
 function agBound(id,kh,key){try{return typeof J95B!=="undefined"&&J95B.bind.some(b=>b.id===id&&b.kh===kh&&b.key===key)}catch(e){return false}}
-function agSlot(v,at,t){const R=agRec(),k0=agKh(),id="v"+v.id,L=[];for(let kh=k0;kh<J95.KH;kh++){const k=at(kh,v,t);if(!k||k==="thu"&&(S.buoi||0)===0)continue;
+function agSlot(v,at,t,c){const R=agRec(),k0=agKh(),id="v"+v.id,L=[];for(let kh=k0;kh<J95.KH;kh++){if(c&&typeof agFitDay==="function"&&typeof agKhC==="function"&&!agFitDay(kh,agKhC(c,v)))continue;/* the DAY must hold the whole deed (review ag-all-2 r2 B3) */const k=at(kh,v,t);if(!k||k==="thu"&&(S.buoi||0)===0)continue;
   if(v.confined&&k!==palaceOf(v))continue;if(!j95acc(v,k)&&k!=="home"&&k!==palaceOf(v))continue;if(R&&R.P[id]&&R.P[id][kh]&&(R.P[id][kh][1]==="tryst"||R.P[id][kh][1]==="meet"))continue;if(R&&agBound(id,kh,R.key))continue;L.push([kh,k])}
  return L.length?L[Math.floor(Math.random()*L.length)]:null}
 /* the people a SOC deed could aim at: kept per tuần and per what she did since (perf §4 "cache SOC target lists"); the living are re-checked */
@@ -110,9 +128,10 @@ function agOpts(v,N,need){const O=[];
   /* worth looking for a target at all? (the best case: odds sure, the need as it stands) */
   if(agU(v,N,100,{g:gf(BAL.tw.g),l:{}},twCost(k),tag)<=0)continue;
   const C=agSocT(v,s,so,()=>T=T||others(v).filter(x=>x&&x!==v&&x.alive!==false&&!(x.out&&x!==S)));if(!C.length)continue;
-  const t=mindPickBy(C,x=>host?BAL.mind.pick.ag.base+agSpite(v,x):BAL.mind.pick.ag.base+Math.max(0,aff(v,x))+(nd==="safe"?danger(x,v):0),v);if(!t)continue;
+  const ask=!host&&C.includes(S)&&agAskHer(v)?BAL.ag.favAsk:0;/* F5: a consort with a favour to ask of her (q72) is drawn to seek her out */
+  const t=mindPickBy(C,x=>host?BAL.mind.pick.ag.base+agSpite(v,x):BAL.mind.pick.ag.base+Math.max(0,aff(v,x))+(nd==="safe"?danger(x,v):0)+(x===S?ask:0),v);if(!t)continue;
   const g=motiveOK(v,t,host?"provoke":"visit");if(!g.ok)continue;
-  const N2=Object.assign({},N);if(host)N2.spite=cl(agSpite(v,t)/100,0,1)*((BAL.ag.road[agOrg(v)]||BAL.ag.road._).spite);
+  const N2=Object.assign({},N);if(host)N2.spite=agSpN(agSpite(v,t))*((BAL.ag.road[agOrg(v)]||BAL.ag.road._).spite);
   const o=TW[k].o?TW[k].o(v,t):100;const u=agU(v,N2,o,{g:gf(BAL.tw.g),l:{},f:ff?ff(BAL.tw.g,t):0},twCost(k),tag);if(u<=0)continue;
   O.push({k,t:k==="follow"?twFollowT(v):t,u,tag,at:(kh,vv,tt)=>tt===S?"home":agAt(tt,kh),act:AGACTW[k]||k,mot:g.why})}
  /* her Sủng deck act (the player's dance / zither / chess / small gift cards) */
@@ -134,7 +153,7 @@ function agDecide0(v){let N;const tn0=performance.now();try{N=agNeedsC(v)}catch(
  const need=agPw(NL);if(!need)return 0;/* her slip (jmind) is in the second step, once */
  const ta=performance.now();const O=agOpts(v,N,need);AG.tm.opts+=performance.now()-ta;if(!O.length)return 0;
  const c=mindPick(O.map(o=>[o,o.u]),v);if(!c)return 0;c.need=need;
- const sl=agSlot(v,c.at,c.t);if(!sl)return 0;agPlan(v,c,N,sl[0],sl[1]);return 1}
+ const sl=agSlot(v,c.at,c.t,c);if(!sl)return 0;agPlan(v,c,N,sl[0],sl[1]);return 1}
 function agSlice(first){const Q=AG.q;if(!Q||AG.inSlice)return;const key=agKey();if(Q.key!==key){if(Q.L.length)AG.stat.qdrop+=Q.L.length;AG.q=null;return}
  AG.inSlice=1;const t0=performance.now();const tm0=Object.assign({},AG.tm);const z=agZ();let acts=0;AG.now=0;AG.mwc={};
  const B=BAL.ag.perf.slice;
@@ -143,16 +162,37 @@ function agSlice(first){const Q=AG.q;if(!Q||AG.inSlice)return;const key=agKey();
   const R=agRec();const old=z.pend.some(p=>p.key!==key);
   while(Q.L.length&&!old){if(performance.now()-t0>=B&&!Q.all)break;const v=RV(Q.L.shift());if(!v||!v.alive||v.out)continue;try{acts+=agDecide(v)}catch(e){agErr("tick",e)}}
   if(!R){for(const p of z.pend.slice())if(p.key===key)agLand(p)}/* no ledger (co-op host, record off): the act lands at once */
-  else if(AG.now){if(Q.all){const ts=performance.now();try{j95sync()}catch(e){}AG.tm.sync+=performance.now()-ts}else if(!AG.syQ){AG.syQ=1;setTimeout(agSyncNow,0)}}/* the views of the khắc now change only when an act starts now: in its own frame (perf §4: no full resync inside the tick) */
+  else if(AG.now){if(Q.all){const ts=performance.now();try{j95sync()}catch(e){}AG.tm.sync+=performance.now()-ts}else agLater("sync",agSyncNow)}/* the views of the khắc now change only when an act starts now: in its own frame (perf §4: no full resync inside the tick) */
  }catch(e){agErr("tick",e)}finally{AG.inSlice=0}
  const ms=performance.now()-t0;const d={};for(const k in AG.tm)d[k]=+(AG.tm[k]-(tm0[k]||0)).toFixed(2);
  if(ms>(AG.slow&&AG.slow.ms||0))AG.slow={ms,tm:d,tick:AG.stat.tick,left:Q.L.length};if(ms>BAL.ag.perf.p95){AG.over=AG.over||[];AG.over.push({ms:+ms.toFixed(1),tm:d,n:AG.last||[]});if(AG.over.length>20)AG.over.shift()}AG.last=[];window.__agMs=ms;AG.ms.push(ms);if(AG.ms.length>BAL.ag.perf.n)AG.ms.shift();AG.stat.acts+=acts;AG.stat.slice++;
  Q.ms+=ms;if(!Q.L.length){AG.bt.push(Q.ms);if(AG.bt.length>BAL.ag.perf.n)AG.bt.shift();AG.q=null}
- else if(!Q.tm){Q.tm=1;setTimeout(()=>{if(AG.q===Q){Q.tm=0;agSlice()}},0)}}
+ else agLater("slice",()=>{if(AG.q)agSlice()},{slice:1})}
 function agTick(){if(!agOn())return;const z=agZ();const key=agKey();if(z.key===key)return;z.key=key;AG.stat.tick++;
  if(AG.q&&AG.q.L.length)AG.stat.qdrop+=AG.q.L.length;/* a buổi gone by before her turn came (only in a run with no frames between buổi): she kept her schedule */
  const R=agRec();window.__agN=R?Object.keys(R.P).length:liveRivals(true).length+2;
  AG.q={key,L:liveRivals(true).filter(v=>v.alive&&!v.out).map(v=>v.id),ms:0,tm:0,all:!!window.__agAll};agSlice(1)}
+/* AG LATER (npc-chain-land #2, 18/11; LUẬT SỬA CẢ NHÓM over every deferred ag path): the ONE way ag code defers work to a later frame
+   (consort deed slices agSlice, staff slices agLzRun, the khắc view resync agSyncNow, the news scan adHapNow). Rules:
+   (1) a job belongs to the world (S) and the buổi it was queued in: on another world / buổi it is dropped, never run there;
+   (2) agDrain() at every buổi / week boundary (nextBuoi, endTurn: outermost wrappers below; co-op onBuoi / nightEnd in jcoopworld) runs every
+       pending light job NOW (view resync, news scan: they can queue a dialog) and leaves the pending slices ({slice:1}) to their frames:
+       they die by their buổi pin once the step happened (the consorts / staff not reached keep their schedule, as before) — so no timer ever crosses a buổi or a week, and the step costs no extra decisions;
+   (3) a dialog a job queued (Q) is shown at once (agQShow). Before: the "Có người bán tin" offer (knSellTick inside j95sync) was pushed from the
+       deferred resync and sat in Q unseen; the next "Sẵn sàng" was refused by the Q guard → co-op seats stuck on "Chờ hảo hữu…" (MAIN s40 hold). */
+const AGL={L:[],t:0,run:0,stat:{run:0,drop:0,drain:0}};
+function agBk(){try{return S?wk()+"-"+(S.buoi||0):""}catch(e){return""}}
+function agLater(k,fn,o){const w=typeof S!=="undefined"?S:null,b=agBk(),i=AGL.L.findIndex(x=>x.k===k);if(i>=0){if(AGL.L[i].w===w&&AGL.L[i].b===b)return;AGL.L.splice(i,1);AGL.stat.drop++}/* review ag-later: a stale twin (other world / buổi, its timer not fired yet) is dropped, never blocks the new job */AGL.L.push({k,fn,sl:!!(o&&o.slice),w,b});if(!AGL.t)AGL.t=setTimeout(agLaterRun,0)}
+function agLaterRun(cut){if(AGL.t){clearTimeout(AGL.t);AGL.t=0}if(AGL.run)return;AGL.run=1;
+ const keep=[];try{for(const x of AGL.L.splice(0)){if(x.w!==S||x.b!==agBk()){AGL.stat.drop++;continue}if(cut&&x.sl){keep.push(x);continue}AGL.stat.run++;try{x.fn()}catch(e){agErr("later:"+x.k,e)}}}finally{AGL.run=0}
+ /* review ag-later: the drain does NOT drop a slice — the press may be refused (a dialog it showed, a co-op seat waiting for the friend) and her buổi goes on;
+    the slice keeps running in later frames and dies by its buổi pin once the step really happened (the consorts / staff not reached keep their schedule) */
+ if(keep.length){AGL.L.unshift(...keep);if(!AGL.t)AGL.t=setTimeout(agLaterRun,0)}agQShow()}
+function agDrain(){if(AGL.run||!AGL.L.some(x=>!x.sl))return;AGL.stat.drain++;let n=0;while(AGL.L.some(x=>!x.sl)&&n++<20)agLaterRun(1)}
+function agQShow(){try{if(!Q.length||!S||S.dead||S.mg||window.__bot)return;const M=$("modal");if(M&&M.hidden&&!document.querySelector(".kbk-bar"))showModal()}catch(e){}}
+/* outermost: installed after every module's own nextBuoi / endTurn wrapper (the same load-time pattern as jagday W1) */
+setTimeout(()=>{try{const n0=nextBuoi;nextBuoi=function(){try{agDrain()}catch(e){agErr("drain",e)}return n0.apply(this,arguments)};window.nextBuoi=nextBuoi;
+ const e0=endTurn;endTurn=function(){try{agDrain()}catch(e){agErr("drain",e)}return e0.apply(this,arguments)};window.endTurn=endTurn}catch(e){agErr("drainWrap",e)}},0);
 function agSyncNow(){AG.syQ=0;const ts=performance.now();try{j95sync()}catch(e){}const ms=performance.now()-ts;AG.tm.sync+=ms;AG.sms=AG.sms||[];AG.sms.push(ms);if(AG.sms.length>BAL.ag.perf.n)AG.sms.shift()}
 /* finish the buổi's deciders now (tests / bot that need every decision before they read the record) */
 function agFlush(){if(AG.q){AG.q.all=1;agSlice()}}
@@ -171,7 +211,10 @@ function agPlan(v,c,N,kh,k){const z=agZ(),R=agRec(),id="v"+v.id;const why=agWhy(
  try{if(R){const A=R.acts=R.acts||[];A.push({id,kh,k:"ag:"+c.k,t:tid,why,ok:1,ag:1});if(A.length>60)A.shift()}}catch(e){}}
 /* a second plan of the same buổi (j95 re-plans on every placeWhere) keeps the acts already decided at their place/khắc */
 function agReapply(){const R=agRec();if(!R||!S.ag)return;let ch=0;for(const p of S.ag.pend){if(p.key!==R.key||!R.P[p.id])continue;const e=R.P[p.id][p.kh];if(e&&e[1]==="ag_"+p.k&&e[0]===p.pl)continue;
-  if(e&&(e[1]==="tryst"||e[1]==="meet"))continue;if(agBound(p.id,p.kh,R.key)){p.drop=1;continue}R.P[p.id][p.kh]=[p.pl,"ag_"+p.k,p.t,p.why];ch=1}if(ch)try{j95sync()}catch(e){}}
+  if(e&&(e[1]==="tryst"||e[1]==="meet"))continue;if(agBound(p.id,p.kh,R.key)){p.drop=1;continue}R.P[p.id][p.kh]=[p.pl,"ag_"+p.k,p.t,p.why];ch=1;
+  /* AG-ALL-2d: the deed's whole window [kh, k1] and the walk before it (a re-decide, OD L1638) come back with it */
+  for(let q=p.kh+1;q<=agK1(p)&&q<J95.KH;q++){const x=R.P[p.id][q];if(x&&x[1]!=="tryst"&&x[1]!=="meet"&&!agBound(p.id,q,R.key))R.P[p.id][q]=[p.pl,"ag_"+p.k,p.t,p.why]}
+  if(p.go)for(let q=p.go[0];q<p.go[1];q++){const x=R.P[p.id][q];if(x&&x[1]!=="tryst"&&x[1]!=="meet"&&!agBound(p.id,q,R.key))R.P[p.id][q]=[p.pl,"go",null,p.why]}}if(ch)try{j95sync()}catch(e){}}
 function agPerson(id){if(!id)return null;if(id==="me")return S;if(id[0]==="v")return RV(+id.slice(1));return null}
 /* the deed happens (its own function: cost, odds, effect) */
 function agLand(p,seen){const t9=performance.now();try{return agLand0(p,seen)}finally{(AG.last=AG.last||[]).push("l"+p.k+":"+(performance.now()-t9).toFixed(1))}}
@@ -189,27 +232,33 @@ function agHereKh(){try{const R=agRec();if(!R)return null;const kh=agKh();return
 /* every player witnesses, a consort or a servant-start (OD:L1386 one world): a servant stands in the same places; her reactions = the ones that fit her (agReact: no joining a consort's deed) */
 function agWatch(){if(!agOn()||S.out)return;const H=agHereKh();if(!H)return;const z=agZ();let n=0;
  for(const p of z.pend.slice()){if(p.key!==H.R.key)continue;{const e=H.R.P[p.id];p.gone=!e||!e[p.kh]||e[p.kh][1]!=="ag_"+p.k?1:0}/* a card / told deed moved her since: the act did not happen */
-  if(p.kh<H.kh){agLand(p);continue}if(p.gone)continue;
-  if(p.kh!==H.kh||p.pl!==H.k||p.seen)continue;const v=RV(p.vid);if(!v||!v.alive)continue;if(H.k==="home"&&sameHouse(S,v)&&p.t!=="me"){continue}
+  /* G9: a deed lasts its khắc window [kh, k1] (k1 = kh + its khắc cost − 1); it lands when her clock passes its END, she can walk in on it while it lasts */
+  if(agK1(p)<H.kh){agLand(p);continue}if(p.gone)continue;
+  if(p.kh>H.kh||p.pl!==H.k||p.seen)continue;const v=RV(p.vid);if(!v||!v.alive)continue;if(H.k==="home"&&sameHouse(S,v)&&p.t!=="me"){continue}
   p.seen=1;AG.stat.wit++;n++;agScene(p,v)}
  if(n)try{showModal()}catch(e){}}
 function agPlaceTxt(k){try{return placeName(k)}catch(e){return k}}
 function agScene(p,v){const t=agPerson(p.t);const W=agPlaceTxt(p.pl);
- if(t===S){const r=agLand(p,true);Q.push({t:"Có người tìm đến",who:pv(v),h:`<p>${v.name} ${p.act} ngươi ở ${W}.</p>${r?`<p>${r}.</p>`:""}`});return}
+ if(t===S){if(typeof agShOn==="function"&&agShOn()){Q.push({t:"Có người tìm đến",who:pv(v),h:`<p>${v.name} tìm đến ngươi ở ${W}: nàng muốn ${p.act} ngươi.</p>`,opts:agShOpts(p,v)});return}/* AG-ALL-2d one shared act (OD L1641) */
+  const r=agLand(p,true);Q.push({t:"Có người tìm đến",who:pv(v),h:`<p>${v.name} ${p.act} ngươi ở ${W}.</p>${r?`<p>${r}.</p>`:""}`});return}
  const tn=t?` ${t.name}`:"";Q.push({t:"Ngươi bắt gặp",who:pv(v),h:`<p>Ở ${W}, ngươi thấy ${v.name} đang ${p.act}${tn}.</p>`,opts:agReact(p,v,t)})}
 /* the deeds she may join where she sees them done (the same deed for her: her cost, her odds, her gains — BAL.tw, one source).
    The option is named by the player's own act of that deed (its kit act picture, KIT §6.2 kitOptPic "act"), so every reaction row has a picture. */
 const AGJOIN={thTH:{n:"Thỉnh an Thái hậu",x:()=>{const g=BAL.tw.g.thTH;return `thành: Thái hậu +${g[0]} · Danh +${g[1]} · Đức +${g[2]} · hỏng: Thái hậu ${g[3]}`}},
  thHH:{n:"Thỉnh an Hoàng hậu",x:()=>{const g=BAL.tw.g.thHH;return `thành: Hoàng hậu +${g[0]} · Danh +${g[1]} · Đức +${g[2]} · hỏng: Hoàng hậu ${g[3]}`}},
  pray:{n:"Cầu tự",x:()=>"thành: lòng thành cầu tự, dễ có thai hơn"},ksp:{n:"Đút lót Kính sự phòng",x:()=>"thành: thẻ bài của ngươi dễ được lật hơn"}};
-function agHearO(){return od(BAL.ag.wit.hear+(S.mat||0)*BAL.ag.wit.mat)}
+/* the odds to overhear a deed: ONE function for her and every NPC who stands there (G9 agSeeNpc) */
+function agHearOf(a){return odA(a,BAL.ag.wit.hear+eyes(a)*BAL.ag.wit.mat)}
+function agHearO(){return agHearOf(S)}
+/* the last khắc of a deed (G9): planned deeds carry k1; older ones (saves before AG-ALL-2) last one khắc */
+function agK1(p){return p&&p.k1!=null?p.k1:p?p.kh:0}
 /* a reaction that takes her time costs BAL.ag.kh khắc, like the player's talk options (j15 pbtn): no khắc left → the kit greyed option (KIT §84 kitOff) with its reason */
 function agKhLock(){const k=BAL.ag.kh;return typeof can==="function"&&!can(k)?(typeof whyTime==="function"&&whyTime(k)||"hết khắc buổi này"):""}
 function agSpendKh(){const k=BAL.ag.kh;if(!can(k))return false;spend(k);return true}
 function agReact(p,v,t){const O=[];const B=BAL.ag.wit;const harm=AGHOST.has(p.k)||p.k==="fakeIll"||p.k==="fakePreg";const o=agHearO();const kh=BAL.ag.kh;const lock=agKhLock();
  O.push({n:"Nghe lén",r:"hear",fx:{},x:`${word(o)} · tốn: ${kh} khắc · thành: biết rõ nàng ${p.act} vì đâu${harm?` · chứng cứ về nàng ${balSg(BAL.eff.jagent.evGo)}`:""} · hỏng: nàng bắt gặp, nàng quý ngươi -${B.caught}`,
-  go:()=>{if(!agSpendKh()){agLand(p);return}if(roll(o)){noteAdd(v.id,`nghe lén: nàng ${p.act} — ${p.why}`);if(harm)evA(S,v,BAL.eff.jagent.evGo);log(`Ngươi nghe lén: ${v.name} ${p.act}, vì ${p.why}.${harm?` Chứng cứ về nàng ${balSg(BAL.eff.jagent.evGo)}.`:""}`)}
-   else{affAdd(v,S,-B.caught);log(`${v.name} bắt gặp ngươi đứng nghe lén.`)}agLand(p)}});
+  go:()=>{if(!agSpendKh()){agLand(p);return}if(agTry(o)){noteAdd(v.id,`nghe lén: nàng ${p.act} — ${p.why}`);if(harm)evA(S,v,BAL.eff.jagent.evGo);log(`Ngươi nghe lén: ${v.name} ${p.act}, vì ${p.why}.${harm?` Chứng cứ về nàng ${balSg(BAL.eff.jagent.evGo)}.`:""}`)}
+   else if(agSoft(o))agSoftTxt(S,"Nghe lén");else{affAdd(v,S,-B.caught);log(`${v.name} bắt gặp ngươi đứng nghe lén.`)}agLand(p)}});
  const D=TW[p.k],J=AGJOIN[p.k];if(D&&J&&!(typeof isSrv==="function"&&isSrv())&&(!D.req||D.req(S,p.k==="thHH"?queenP():t))&&twCanPay(S,p.k)&&!(p.k==="thHH"&&queenP()===S)){const oj=D.o?D.o(S,t):100;const c=twCost(p.k);
   const ct=Object.keys(c).map(f=>`${(typeof NAMES==="object"&&NAMES[f])||(typeof HXN==="object"&&HXN[f])||f} ${c[f]}`).join(", ");
   O.push({n:J.n,r:"join",fx:{},x:`${word(oj)} · tốn: ${ct?ct+", ":""}${kh} khắc · cùng nàng · ${J.x()}`,go:()=>{if(!agSpendKh()){agLand(p);return}const r=twDo(S,p.k==="thHH"?queenP():t,p.k);if(r)log(`${r}.`);agLand(p)}})}/* her deed: the twDo wrapper lets the others there see it */
@@ -231,8 +280,13 @@ function agSeeHer(k,t,joined){if(!agOn())return;const H=agHereKh();if(!H)return;
   const c=mindPick([["ignore",B.w.ignore],["hear",hu],["join",ju*B.w.join]],v);AG.stat.witNpc++;
   const why=c==="join"?"thấy ngươi làm nên cũng làm theo":c==="hear"?`để ý ngươi (thù ghét ${Math.round(ho)})`:"";
   if(c!=="ignore")agUse(v);/* the reaction IS her deed of this buổi (same rule as the player's khắc) */
-  if(c==="hear"){const o=odA(v,B.hear);const zz=j95z();if(roll(o)){zz.meK[v.id]={k:H.k,c:j95c(),w:wk()};noteAdd(v.id,"nàng để ý chỗ ngươi hay lui tới")}else{affAdd(S,v,-B.caught);log(`Ngươi bắt gặp ${v.name} đứng nghe ngóng.`)}}
-  else if(c==="join"){AG.inTick++;let r="";try{r=twDo(v,k==="thHH"?queenP():t,k)||""}finally{AG.inTick--}if(r)log(`${r}.`)}
+  /* review ag-all-2 r2 B2 (owner ~15:45Z "people present see her at once (react next khắc)"): she chooses now; the reaction is her deed of the
+     NEXT khắc at this place (agSeePlan, the one day gate), landing through the ledger like any deed (AGRUN "see:hearMe" / "see:joinMe") */
+  if(!(typeof agKhOn==="function"&&agKhOn())){/* the one-deed-per-buổi world (BAL.ag.kh2.on 0): the old inline reaction */
+   if(c==="hear"){const o=odA(v,B.hear);const zz=j95z();if(agTry(o)){zz.meK[v.id]={k:H.k,c:j95c(),w:wk()};noteAdd(v.id,"nàng để ý chỗ ngươi hay lui tới")}else if(!agSoft(o)){affAdd(S,v,-B.caught);log(`Ngươi bắt gặp ${v.name} đứng nghe ngóng.`)}}
+   else if(c==="join"){AG.inTick++;let r="";try{r=twDo(v,k==="thHH"?queenP():t,k)||""}finally{AG.inTick--}if(r)log(`${r}.`)}}
+  else if(c==="hear"&&typeof agSeePlan==="function")agSeePlan(v,H.R,H.kh+1,H.k,"see:hearMe","",null,"để ý ngươi",why);
+  else if(c==="join"&&typeof agSeePlan==="function")agSeePlan(v,H.R,H.kh+1,H.k,"see:joinMe",k,k==="thHH"?null:(t&&t!==S?ledgerId(t):null),"cũng làm theo",why);
   if(c!=="ignore"){const L={w:wk(),b:S.buoi||0,kh:H.kh,id:"v"+v.id,k:"see:"+c,t:"me",pl:H.k,why};z.log.push(L);if(z.log.length>60)z.log.shift();
    try{const A=H.R.acts=H.R.acts||[];A.push({id:"v"+v.id,kh:H.kh,k:"ag:see:"+c,t:"me",why,ok:1,ag:1});if(A.length>60)A.shift()}catch(x){}}}}
 
@@ -249,4 +303,4 @@ function agSeeHer(k,t,joined){if(!agOn())return;const H=agHereKh();if(!H)return;
  /* labels of the ledger activities (dev table, tai mắt lines) */
  try{for(const k in AGSELF)ACT95["ag_"+k]=AGSELF[k].act;for(const k in AGACTW)ACT95["ag_"+k]=AGACTW[k];ACT95.ag_effort="tìm cách được Hoàng thượng để mắt"}catch(e){}
 })();
-Object.assign(window,{agTick,agFlush,agOn,agNeeds,agOpts,agOrg,agZ,agPlan,agWatch,AG});
+Object.assign(window,{agLater,agDrain,agQShow,AGL,agK1,agHearOf,agTick,agFlush,agOn,agNeeds,agOpts,agOrg,agZ,agPlan,agWatch,AG});

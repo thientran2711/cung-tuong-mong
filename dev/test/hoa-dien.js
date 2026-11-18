@@ -31,7 +31,7 @@ fs.mkdirSync(DIR,{recursive:true});let fail=0;const ck=(n,c,x)=>{console.log((c?
  /* 2. one formula: toilRaw without hd = the old .4/.3/.3; hdQ falls with distance and tilt; NPC by the same q, hashed, cap 95 % */
  const f=await p.evaluate(()=>{const P={brow:.8,powder:.6,son:.7};const old=Math.round(100*(.4*.8+.3*.6+.3*.7));
   const q=[hdQ(0,0,0,1),hdQ(.1,5,0,1),hdQ(.3,15,0,1),hdQ(.6,40,0,1),hdQ(.3,15,1,1)];
-  const v=rivals.find(x=>x.alive&&x!==S);v.inv=(v.inv||[]).filter(e=>!WD_ITEMS[e.k]||WD_ITEMS[e.k].sl!=='hd');v.inv.push({k:'hd_mai'},{k:'hd_phuong'});
+  const v=rivals.find(x=>x.alive&&x!==S);v.inv=(v.inv||[]).filter(e=>!WD_ITEMS[e.k]||WD_ITEMS[e.k].sl!=='hd');v.inv.push({k:'hd_mai'},{k:'hd_phuong'});delete v.tl2;/* AG (jagtoil G11): her face of the day is chosen once, at first need; she chose it before these were in her chest, so she sits again */
   const a=hdNpc(v,12345,.6),b2=hdNpc(v,12345,.6);let mx=0;for(let i=0;i<400;i++)mx=Math.max(mx,hdNpc(v,i,1).q);
   const rec=toilNpc(v);const lx=luxOf(v).sc,parts=luxParts(v);
   return{raw:toilRaw(P),old,rawHd:toilRaw(Object.assign({hd:1},P)),q,a,same:JSON.stringify(a)===JSON.stringify(b2),mx,cap:BAL.hd.npcCap,rec:rec.hd||null,mk:rec.makeup,lx,parts,

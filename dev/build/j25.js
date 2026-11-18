@@ -8,14 +8,14 @@ const RISKRE=/(lộ:|mách lại|nắm thóp|có thể (mách|nắm|bị|lật)|
   if(a.n==="Cảnh báo nàng"&&/không có căn cứ/.test(a.x||"")){a.lock=true;a.t="chưa biết ai đang hại nàng"}
   if(a.open&&!S.inv.some(e=>!e.h)){a.lock=true;a.t="rương trống"}
   if(/^Bàn tán về/.test(a.n)&&/mách lại/.test(a.x||"")){a.x="";a.x=`nàng quý ngươi ${balSg(-BAL.talk.gossip.miss)}`;a.risk=`nàng mách lại, ${a.n.replace(/^Bàn tán về /,"")} oán ngươi ${balSg(BAL.talk.gossip.tellOan)}: ${chanceW(BAL.talk.gossip.tell)}`}
-  if(a.n==="Chia sẻ bí mật"&&/nắm thóp/.test(a.x||"")){a.x=a.x.replace(/ · nàng có thể nắm thóp ngươi/,"");a.risk=`nàng nắm ${balAb(BAL.eff.j9.evRun)} chứng cứ của ngươi: ${chanceW(50)}`}
+  if(a.n==="Chia sẻ bí mật"&&/nắm thóp/.test(a.x||"")){a.x=a.x.replace(/ · nàng có thể nắm thóp ngươi/,"");a.risk=`nàng nắm ${balAb(BAL.ag.ev.one)} chứng cứ của ngươi: ${chanceW(BAL.talk.secretGrab)}`}
   if(a.n==="Khiêu khích"){a.risk=a.x;a.x=""}
   return a})}})();
 /* the talk line: cost in khắc, gains green, risks and failure red, needs as disabled reasons */
 optLine=function(a){const o=oddsOf(a),capd=oddsCapped(a);const rolled=o<100&&!a.lock;const tc=a.act?2:1;
  if(a.k&&AOUT[a.k]){return actLineRaw(a.k,rolled?word(o):"",[`${tc} khắc`,fmt(a.c||{})].filter(Boolean).join(", "))}
  const xs=String(a.x||"").split(" · ").filter(Boolean);const gain=xs.filter(s=>!RISKRE.test(s)),risk=xs.filter(s=>RISKRE.test(s)).concat(a.risk?[a.risk]:[]);
- return kitParse([rolled?word(o):"",`tốn: ${tc} khắc${a.c&&fmt(a.c)?", "+fmt(a.c):""}`,[fmt(a.w||{}),...gain].filter(Boolean).length?"thành: "+[fmt(a.w||{}),...gain].filter(Boolean).join(", "):"",rolled?"hỏng: "+(capd?kitSoftW(a.c):fmt(a.l||{})||(a.fail?"có hậu quả, xem kết quả":"không được gì")):"",risk.length?"hỏng: "+risk.join(", "):""].filter(Boolean).join(" · "))};
+ return kitParse([rolled?word(o):"",`tốn: ${tc} khắc${a.c&&fmt(a.c)?", "+fmt(a.c):""}`,[fmt(a.w||{}),...gain].filter(Boolean).length?"thành: "+[fmt(a.w||{}),...gain].filter(Boolean).join(", "):"",rolled?"hỏng: "+(capd||agSoft(o)?kitSoftW(a.c):payWinFail(a,fmt(a.l||{}))||(a.fail?"có hậu quả, xem kết quả":"không được gì")):"",risk.length?"hỏng: "+risk.join(", "):""].filter(Boolean).join(" · "))};
 /* R-E: a gift or a planted item spends the time only when an item is chosen */
 (function(){const t1=talk;talk=function(oi){const p=S&&curPeople()[popIdx];const a=p&&talkOpts(p)[oi];if(a&&a.open){if(a.lock||S.dead||Q.length)return;const tc=a.act?2:1;if(!can(tc))return;S.payOnPick=tc;S.visit.tk=S.visit.tk||{};a.open();render();return}return t1.apply(this,arguments)}})();
 ["giftpick","plantpick"].forEach(id=>{const b0=PEND[id];if(!b0)return;PEND[id]=function(){const d=b0.apply(this,arguments);if(d&&d.o)d.o=d.o.map(o=>/^Thôi/.test(o.n)?Object.assign({},o,{go:()=>{S.payOnPick=0;if(o.go)o.go()}}):Object.assign({},o,{go:()=>{if(S.payOnPick){spend(S.payOnPick);S.payOnPick=0;if(popIdx!=null&&S.visit){S.visit.tk=S.visit.tk||{};S.visit.tk[popIdx]=1}}if(o.go)o.go()}}));return d};});

@@ -44,7 +44,7 @@ function TWD(k,o){o.k=k;TW[k]=o}
 /* run deed k: pays (unless the caller already paid, as the player's talk() does with a.c), rolls the shared odds, applies the effect */
 function twDo(a,t,k,paid){const D=TW[k];if(!D||!a)return"";try{if(D.req&&!D.req(a,t))return"";if(!paid){if(!twCanPay(a,k))return"";twPay(a,k)}
  const o=D.o?D.o(a,t):100;/* ODDS CAP: a sure deed rolls at the cap too (hers through talk() already rolled: paid) and fails softly, nothing happens */
- if(o>=100&&!(a===S&&paid)&&!roll(BAL.odds.hi))return a===S?oddsSoft("",null):"";const ok=o>=100||roll(o);return D.run(a,t,ok)||""}catch(e){console.error(e);return""}}
+ if(o>=100&&!(a===S&&paid)&&!roll(BAL.odds.hi))return a===S?oddsSoft("",null):"";const ok=o>=100||aRoll(o,a);/* her deed inside fzRun (talk card, j2) rolls the odds she saw (j9) */return D.run(a,t,ok)||""}catch(e){console.error(e);return""}}
 const G=()=>BAL.tw.g;
 /* --- deeds both sides had (NPC side now pays and rolls like hers) --- */
 TWD("help",{n:"Giúp đỡ nàng",req:(a,t)=>!!t,run:(a,t)=>{relAdd(a,t,G().help);oanAdd(t,a,-G().helpOan);return `${twNm(a)} sang giúp ${NM(t)} việc khó`}});
@@ -71,7 +71,7 @@ TWD("test",{n:"Thử lòng",req:(a,t)=>!!t&&aff(a,t)>=0,o:()=>G().test[2],run:(a
 TWD("drop",{n:"Lạnh nhạt",req:(a,t)=>!!t&&aff(a,t)>=30&&((t.sung||0)<25||!!t.confined),run:(a,t)=>{affAdd(a,t,-G().drop);return `${twNm(a)} lạnh nhạt với ${NM(t)} lúc sa cơ`}});
 TWD("follow",{n:"Nương theo",req:(a,t)=>!!t&&rkOf(t)>rkOf(a)+1,run:(a,t)=>{relAdd(a,t,G().follow);return `${twNm(a)} nép theo ${NM(t)}`}});
 TWD("gossip",{n:"Rỉ tai chuyện trong cung",req:(a,t)=>!!t,run:(a,t)=>{const x=pick(liveRivals(true).filter(y=>y!==a&&y!==t));if(x)ap(x,{danh:-G().gossip});return `${twNm(a)} rỉ tai ${NM(t)} chuyện trong cung`}});
-TWD("check",{n:"Soát quà được tặng",req:a=>(a.inv||[]).some(e=>!e.h),run:a=>{const i=(a.inv||[]).findIndex(e=>e.t);if(i>=0){const x=a.inv.splice(i,1)[0];/* tang vật (item ledger jil), as j28 check */if(typeof ilGone==="function")ilGone(a,x,"evid");return `${twNm(a)} cho soát quà, vứt bỏ một món có độc`}return `${twNm(a)} cho thái y soát lại quà được tặng`}});
+TWD("check",{n:"Soát quà được tặng",req:a=>(a.inv||[]).some(e=>!e.h),run:a=>{/* 2e4: her "Kiểm tra đồ" detection (j8 inspect: oSee odds per item, trail evidence) */const f=inspect(a);return f.length?`${twNm(a)} cho soát quà, tìm ra: ${f.join("; ")}`:`${twNm(a)} cho soát lại quà được tặng, không thấy gì lạ`}});
 TWD("admon",{n:"Khuyên Hoàng thượng mưa móc đều khắp",req:(a,t)=>{if(!t||t===a||!(a===S?S.rank>=7:a.queen))return false;const f=typeof favNow==="function"?favNow():null;return !!f&&f.p===t&&!(t.admonWk!=null&&wk()-t.admonWk<G().admonCd)},
  run:(a,t)=>{twAp(t,{sung:-G().admon});t.admonWk=wk();return `${twNm(a)} khuyên Hoàng thượng “mưa móc đều khắp”, đừng chỉ sủng ${NM(t)}`}});
 /* whom t resents most (not the doer): the quarrel a mediator can settle */
