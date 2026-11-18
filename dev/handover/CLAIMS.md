@@ -494,5 +494,5 @@ art-matrix planner (MAIN s43 order) | claude/cung-tuong-mong-handover-hj0h8w (re
 | E7b QUESTLINE Q1b help-hồi text (opus; briefs/E7-questline-q1.md) | review/questline-q1b | E ROOT | (opening) | RUNNING | 18/11 05:22Z |
 | E7c QUESTLINE Q1c help-hồi text (opus; briefs/E7-questline-q1.md) | review/questline-q1c | E ROOT | (opening) | RUNNING | 18/11 05:22Z |
 | map-tap-go (owner 18/11 06:00Z: two dialog looks for one place + tap = go at once with undo toast; sonnet; brief briefs/map-tap-go.md) | review/map-tap-go | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:17Z |
-| life-preload-fu (follow-ups A,B,D,E; sonnet; brief briefs/life-preload-fu.md; ORDER ROOT-44 04:35Z) | review/life-preload-fu | B | (opening) | RUNNING | 18/11 05:25Z |
-| cloth-bake-static (cloth layer on every figure path on a cold cache; sonnet; brief briefs/cloth-bake-static.md; ORDER ROOT-44 04:35Z) | review/cloth-bake-static | B | (opening) | RUNNING | 18/11 05:25Z |
+| life-preload-fu (follow-ups A,B,D,E; sonnet; brief briefs/life-preload-fu.md; ORDER ROOT-44 04:35Z) | review/life-preload-fu | B | session_01N1tNP49F8cp5bBg81G3WX5 | RUNNING | 18/11 05:25Z |
+| cloth-bake-static (cloth layer on every figure path on a cold cache; sonnet; brief briefs/cloth-bake-static.md; ORDER ROOT-44 04:35Z) | review/cloth-bake-static | B | session_01N1tNP6bXEreygYxkwtX5Vx | RUNNING | 18/11 05:25Z |
