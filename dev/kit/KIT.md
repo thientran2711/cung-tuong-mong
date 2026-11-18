@@ -352,6 +352,7 @@ Mất   Đức 30→26 (−4) · Hoàng hậu Liễu Họa Mi: ghét ngươi hơ
 - One group per person; the two-way relation is ONE plain phrase (her feeling toward you; yours only if hers did not move);
   "Hoàng hậu với ngươi" merges into the queen's group. Lines with "→" lists, "thành:/kèm:" previews are never used as the sentence;
   a sentence that only repeats the act name is dropped.
+- EVERY line says SHORTLY WHY (owner 18/11 09:03Z): `value · reason` on ONE row, label column left, value next to its label (left-aligned, never a centred floating column), the reason dim after the value: `Sức 56→74 (+18) · nghỉ qua đêm`, `Sủng 26→25 (−1) · lâu không được gặp Hoàng thượng`, `1 vị chưa quen biết: ghét ta hơn · ghé chơi cung ngươi`, KÈM `8 phi tần bớt ghen 1 · lòng ghen nguôi dần theo ngày`. Part `kitWhy` (j63: kaWhyCl / kaWhyStat / kaWhyWho / kaWhyKem / kaWhyHtml `.kwy`): the reason is read from the SAME Sổ ghi lines of the span (clause "lead: … Sức +10" → lead; a person matched by name; strangers stay unnamed), else the act's own title, else a short fixed cause per stat (KA_WHYD); max 44 chars, no colon, no %. Every result card (between-buổi "Trong cung vừa qua", act, event, night, co-op) goes through kaResultRows, so one part changes all. Kit sample page §7.
 - Rows are arrays: one fact per line (`.kitem`), never joined sentences; also exposed as `window.kaLastResult {title, ok, sentence, rows:[{k,label,items[]}]}`.
 - Same `.kb` row grid and colours as the act card; no change at all → Ghi chú "không đổi chỉ số". Stays 9 s; tap closes.
 
