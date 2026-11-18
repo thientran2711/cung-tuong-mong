@@ -49,3 +49,4 @@ FOR MAIN (open): Foreman E is now session_01DgYSWqAEkHoFF4gFWC5Yxg (E ROOT #2). 
 - (18/11 06:15Z) E7a SẴN SÀNG KIỂM questline-q1a 98cb395522dc387aef7036261bec345619038cd4 (engine hook 3 offer sites + BAL.nroad.kinds «bac» off + jnrask.js 96 ch × 2 asks; nrask-scan/engine/shots + npc-roads + quickcheck PASS; CDN 401 → shots re-makeable via nrask-shots.js). reports/questline-q1a.md
 - (18/11 05:59Z) E7a SẴN SÀNG KIỂM questline-q1a 98cb395 → BIG reviewer E7ar session_01DgYSWpCXPTeYeHGVi3ZVZ2 (opus). E7b HOLD lifted: rebase/convert q1b on q1a. E7c2 told to base on q1a. E7a kept idle for fixes. Load 9/12 (E1b, E3-idle, E3r2, E4f, E7a-idle, E7ar, E7b, E7c2).
 - (18/11 06:00Z) E7a new READY sha questline-q1a 1b6005a (98cb395 + nrask-scan hz skip) → E7ar told to review 1b6005a.
+- (18/11 06:02Z) E3r2 PASS cfe819b hall-names → archived. main moved to 550dd1b (not FF) → E3 ordered: merge newest main + rebuild only, then READY FF sha. Load 8/12.
