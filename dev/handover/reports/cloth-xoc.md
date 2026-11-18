@@ -231,3 +231,20 @@ Mud: lv1 now has a small soft tide band at the hem (h .03, op .3) under its stri
 | c30 | 1 | 14053 | -48.6 | -7.7 | 0 | +2.40 | 2 | -2.4 |
 | c30 | 2 | 24273 | -52.9 | -12.3 | 0 | +3.85 | 5 | -3.2 |
 | c30 | 3 | 39644 | -64.0 | -16.9 | 0 | +5.52 | 4 | -3.4 |
+
+## r6e (owner via s42: WET FINAL all 3 levels (r6c); MUD shift: new lv1 = old lv2, new lv2 = old lv3, new lv3 darker + higher; must read on warm/red robes) — SẴN SÀNG KIỂM review/cloth-xoc 7270a76 (QUICKCHECK PASS)
+Mud: BAL bun.lv/add/tide shifted one level; lv3 = 12 strips, 6 drop clusters up to fy .62, 4 drips, 2 splashes, tide h .23 op .7. Root cause of 'nhẹ hầu như không thấy' on orange/red: brown MULTIPLY on saturated red stays red. New blend 'mud' (drawDecalOnCloth) + tide: multiply then pull toward the mud colour by saturation (BAL bun.tm/warm .35), never lighter. Zoom 3x c01 lv1/lv3: soft, brown, no grey, no speckle. Full-body panels: CDN img/_review/cloth-xoc/full-bun-{c01,c30,c03,c12}.png. Table:
+| fig | lv | changed px | min dL* | mean dL* | lighter px | mean dC* | greyer px (dC*<-3) | mean dhue° |
+|---|---|---|---|---|---|---|---|---|
+| c01 | 1 | 22489 | -54.1 | -12.2 | 0 | +0.78 | 376 | +0.8 |
+| c01 | 2 | 36768 | -63.4 | -16.7 | 0 | +0.84 | 2854 | +1.2 |
+| c01 | 3 | 53929 | -66.7 | -21.2 | 0 | +0.84 | 8012 | +1.6 |
+| c03 | 1 | 24180 | -55.8 | -12.5 | 0 | +1.43 | 289 | -5.8 |
+| c03 | 2 | 40952 | -62.8 | -16.9 | 0 | +1.67 | 948 | -8.0 |
+| c03 | 3 | 58574 | -67.9 | -22.2 | 0 | +2.17 | 2131 | -10.8 |
+| c12 | 1 | 25210 | -53.7 | -13.2 | 0 | +2.49 | 0 | -5.3 |
+| c12 | 2 | 40956 | -65.3 | -17.9 | 0 | +3.27 | 102 | -6.7 |
+| c12 | 3 | 59066 | -69.6 | -23.5 | 0 | +4.26 | 467 | -8.8 |
+| c30 | 1 | 24079 | -53.4 | -12.8 | 0 | +3.99 | 6 | -3.2 |
+| c30 | 2 | 40550 | -62.9 | -17.1 | 0 | +5.52 | 1 | -3.4 |
+| c30 | 3 | 58257 | -65.7 | -22.8 | 0 | +7.55 | 39 | -3.4 |
