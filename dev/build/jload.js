@@ -205,8 +205,9 @@ const lAbs=u=>{u=String(u||"");if(!u||/^(data|blob):/.test(u))return"";try{retur
 let SIZE=null;function sizeOf(u){try{if(!MAN)return 0;if(!SIZE){SIZE=new Map();for(const f of MAN.files)SIZE.set(f[0],f[2])}const m=/img\/[^?#]*/.exec(u);return m?SIZE.get(decodeURIComponent(m[0]))||0:0}catch(e){return 0}}
 const lOk=u=>LIFE.done.has(u)||((LIFE.keep.get(u)||{}).ok!=null);
 /* one picture: load + decode (kept alive meanwhile, so it paints at once); raw = the string the game itself uses (PORK key of j39 porOf) */
-function lWant(u,raw){if(LIFE.done.has(u))return;let e=LIFE.keep.get(u);if(e)return;const im=new Image();im.decoding="async";e={im,ok:null};LIFE.keep.set(u,e);LIFE.busy++;
- const fin=ok=>{if(e.ok!=null)return;e.ok=ok;LIFE.busy--;
+function lWant(u,raw){if(LIFE.done.has(u))return Promise.resolve(true);let e=LIFE.keep.get(u);if(e)return e.p;const im=new Image();im.decoding="async";e={im,ok:null};LIFE.keep.set(u,e);LIFE.busy++;
+ let res;e.p=new Promise(r=>{res=r});
+ const fin=ok=>{if(e.ok!=null)return;e.ok=ok;LIFE.busy--;res(ok);
   if(ok&&/\/por-/.test(u))try{if(typeof PORK!=="undefined"){[u,raw].forEach(k=>{if(k&&PORK[k]!==1){PORK[k]=1;LIFE.dirty=1}})}}catch(x){}
   setTimeout(()=>{LIFE.keep.delete(u);LIFE.done.add(u)},90000)};
  im.onload=()=>{(im.decode?im.decode().catch(()=>0):Promise.resolve()).then(()=>fin(true))};im.onerror=()=>fin(false);im.src=u}
@@ -215,8 +216,10 @@ function kitLifeSet(){const M=new Map();const add=r=>{if(r&&typeof r==="string")
  try{if(typeof S==="undefined"||!S||typeof figFor!=="function")return M;
   const ppl=[S,{kind:"emp"},{kind:"th"},S.maid,S.court&&S.court.ty,S.court&&S.court.ksp].concat(S.staff||[]);
   try{if(typeof curPeople==="function")curPeople().forEach(p=>ppl.push(p))}catch(e){}
-  try{(typeof rivals!=="undefined"&&rivals||[]).forEach(v=>{if(v&&v.fid&&!v.dead)ppl.push(v)})}catch(e){}
+  const hc=[];try{(typeof rivals!=="undefined"&&rivals||[]).forEach(v=>{if(v&&!v.dead){if(v.fid)ppl.push(v);else hc.push(v)}})}catch(e){}
   for(const p of ppl){if(!p)continue;try{add(figFor(p,"por"));add(figFor(p))}catch(e){}}
+  /* Hậu cung list: the portrait of every living consort (a figure is chosen for her here, as the list itself would do on first open) */
+  for(const v of hc.slice(0,24)){try{add(figFor(v,"por"))}catch(e){}}
   try{if(typeof evArt==="function")add(evArt())}catch(e){}
   try{if(typeof Q!=="undefined"&&typeof kitEvArt==="function")Q.slice(0,3).forEach(m=>{const a=kitEvArt(m);if(a&&a.src)add(a.src)})}catch(e){}}catch(e){}
  return M}
@@ -235,10 +238,12 @@ function lPaint(have,total,slow){if(!lel)return;const b=lel.querySelector(".klb"
  const want=slow?`<button class="kbtn alt" data-klife="go">${CTM_WAIT.lifeGo}</button>`:"";if(o.innerHTML!==want)o.innerHTML=want}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-klife]");if(!b)return;e.stopPropagation();LIFE.go=true},true);
 const lSleep=t=>new Promise(ok=>setTimeout(ok,t));
-async function lifeGate(why){if(LIFE.on){LIFE.again=true;return}LIFE.on=true;LIFE.go=false;const t0=Date.now();lCover();
+async function lifeGate(why){if(LIFE.on){LIFE.again=true;return}
+ if(why!=="start"){const L=kitLifeSet();let miss=0;L.forEach((raw,u)=>{if(!lOk(u)){miss++;lWant(u,raw)}});if(!miss&&!lPending().length){(KLOAD.lifes=KLOAD.lifes||[]).push({why,n:L.size,bytes:0,ms:0,late:0,cached:true});return}}
+ LIFE.on=true;LIFE.go=false;const t0=Date.now();lCover();
  const st=KLOAD.life={why,n:0,bytes:0,ms:0,late:0};(KLOAD.lifes=KLOAD.lifes||[]).push(st);const all=new Set();let quiet=0;
  try{for(;;){const L=kitLifeSet();L.forEach((raw,u)=>{lWant(u,raw);all.add(u)});const pend=lPending();pend.forEach(u=>all.add(u));
-   if(LIFE.dirty&&![...L.keys()].some(u=>!lOk(u))){LIFE.dirty=0;try{if(typeof S!=="undefined"&&S&&typeof render==="function")render()}catch(e){}quiet=0;await lSleep(60);continue}
+   if(LIFE.dirty&&![...L.keys()].some(u=>!lOk(u))&&Date.now()-t0<25000){LIFE.dirty=0;try{if(typeof S!=="undefined"&&S&&typeof render==="function")render()}catch(e){}quiet=0;await lSleep(60);continue}
    const lp=[...L.keys()].filter(u=>!lOk(u)),pset=new Set(pend);let have=0;all.forEach(u=>{if(!pset.has(u)&&(lOk(u)||!L.has(u)))have++});
    const slow=Date.now()-t0>6000;lPaint(have,Math.max(1,all.size),slow);
    if(!pend.length&&!lp.length){if(++quiet>=2)break}else quiet=0;
@@ -248,6 +253,18 @@ async function lifeGate(why){if(LIFE.on){LIFE.again=true;return}LIFE.on=true;LIF
  const c=lel;lel=null;if(c){c.classList.add("out");setTimeout(()=>c.remove(),500)}
  LIFE.on=false;if(LIFE.again){LIFE.again=false;setTimeout(()=>lifeGate("again"),0)}}
 window.kitLifeGate=lifeGate;
+/* TITLE PREFETCH (owner 18/11 02:06Z "không lẽ bây giờ tôi cứ bấm từng kiếp"): as soon as the game opens, the life sets of EVERY saved life
+   (all slots, newest first) come in the background, 4 at a time, before the generic 'fig' set (it waits while LIFE.busy) — so tapping any life
+   is usually instant and the gate above shows nothing. The set of a save is read by lending its S / rivals to kitLifeSet for one synchronous call. */
+function kitSaveLifeSet(d){const M=new Map();if(!d||!d.S||typeof S==="undefined")return M;const S0=S,R0=rivals;
+ try{S=d.S;rivals=Array.isArray(d.R)?d.R:[];return kitLifeSet()}catch(e){return M}finally{S=S0;rivals=R0}}
+window.kitSaveLifeSet=kitSaveLifeSet;
+const PQ=[];let pAct=0;function pPump(){while(pAct<4&&PQ.length){const [u,raw]=PQ.shift();if(lOk(u))continue;pAct++;lWant(u,raw).then(()=>{pAct--;pPump()})}}
+function titlePrefetch(){try{if(window.__bot||typeof SK!=="function"||typeof loadSlot!=="function")return;
+ const L=[];for(let n=1;n<=3;n++){const d=loadSlot(n);if(d&&d.S)L.push(d)}L.sort((a,b)=>(b.at||0)-(a.at||0));
+ const seen=new Set();let n=0,bytes=0;for(const d of L)kitSaveLifeSet(d).forEach((raw,u)=>{if(seen.has(u)||lOk(u))return;seen.add(u);PQ.push([u,raw]);n++;bytes+=sizeOf(u)});
+ KLOAD.prefetch={lives:L.length,n,bytes};pPump()}catch(e){console.error("title prefetch",e)}}
+(function wait(k){try{if(typeof FIGS!=="undefined"&&FIGS.length&&!(typeof S!=="undefined"&&S)){titlePrefetch();return}}catch(e){}if(k<90)setTimeout(()=>wait(k+1),1000)})(0);
 /* a dialog never opens with an empty picture box: hidden (layout kept) until its pictures are in, at most 3 s */
 function lDlgWait(){try{const M=document.getElementById("modal");if(!M||M.hidden||LIFE.on)return;const d=M.querySelector(".dlg");if(!d)return;
  if(!lPending(d).length){M.classList.remove("klifewait");return}const t0=Date.now();M.classList.add("klifewait");clearInterval(lDlgWait.t);
