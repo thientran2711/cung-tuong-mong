@@ -115,7 +115,7 @@ function agDayList(){const L=[];if(S.emp)L.push([S.emp,"emp","emp"]);if(!S.thDea
  for(const f of AGDRAW){try{for(const x of (f()||[]))L.push(x)}catch(e){agdErr("drawReg",e)}}return L}
 function agIntentOf(id){const D=agDz();const I=D.I&&D.I[id];return I&&I.g||[]}
 function agIntent(p,id){const D=agDz();D.I=D.I||{};let N;try{N=agNeedsG(p)}catch(e){N={}}const MF=agMoodF(p);const L=[];for(const n in N)if(N[n]>0)L.push([n,N[n]*(MF[n]||1)]);
- const g=[];if(L.length){const a=agPw(L);g.push(a);const L2=L.filter(x=>x[0]!==a);if(L2.length&&roll(agCap(BAL.ag.day.two)))g.push(agPw(L2))}
+ const g=[];if(L.length){const a=agPw(L);g.push(a);const L2=L.filter(x=>x[0]!==a);/* G3: a 2nd goal only when that need is nearly as strong as the 1st (BAL.ag.why.g3.two), chosen among her near-best needs */const a1=(L.find(x=>x[0]===a)||[0,0])[1];const b2=npwPick(L2.filter(x=>x[1]>=a1*BAL.ag.why.g3.two),x=>x[1]);if(b2)g.push(b2[0])}
  D.I[id]={g,why:g.map(n=>AGWHY[n]||n).join(", ")};try{D.T[id]=agTop(N)}catch(e){}return D.I[id]}
 function agDayDraw(){const t0=performance.now();const D=agDz();D.d=wk();D.P={};D.T={};D.I={};D.rb=null;AGD.stat.draw++;const b0=agDayB();agLzNew(b0);
  const L=agDayList();for(const [p,id,kind] of L){if(agLzKind(kind)){agLzPush(p,id,kind,b0,1);continue}try{agIntent(p,id);agDrawPerson(p,id,b0,kind,b0)}catch(e){agdErr("draw0",e)}}D.rb=wk()+"-"+b0;
@@ -146,7 +146,10 @@ function agReplanB(){const D=agDz();if(D.d!==wk())return;const b=agDayB();if(D.r
   if(kind==="consort"&&D.I&&D.I[id]){const v=p;let ill=false;try{ill=!!illOf(v)}catch(e){}const prev=D.P[id]&&D.P[id][b-1];
    /* LIFE: plans broken by rain on a garden plan, or by falling ill: she always re-thinks her day then */
    if((rain&&prev&&prev.pl==="vuon")||(ill&&!(D.ill||{})[id])){(D.ill=D.ill||{})[id]=ill?1:0;agIntent(v,id);AGD.stat.replan++}
-   else{let ch=0;try{ch=agTop(agNeedsG(v))!==D.T[id]?R.need:0}catch(e){}if(T[id])ch=Math.max(ch,R.touch);if(ch&&roll(agCap(ch))){agIntent(v,id);AGD.stat.replan++}else AGD.stat.keep++}}
+   else{let ch=0;try{ch=agTop(agNeedsG(v))!==D.T[id]?R.need:0}catch(e){}if(T[id])ch=Math.max(ch,R.touch);
+    /* G3: she re-thinks only when the new top need outweighs the goal she set out with (touched: + R.touch), near-best of the two — never a coin */
+    let rp=false;if(ch){let N2={};try{N2=agNeedsG(v)}catch(e){}const cur=(D.I[id].g||[])[0],nw=agTop(N2);rp=npwPick(["new","keep"],x=>x==="new"?(N2[nw]||0)+(T[id]?R.touch:0):(N2[cur]||0))==="new"}
+    if(rp){agIntent(v,id);AGD.stat.replan++}else AGD.stat.keep++}}
   else if(agLzKind(kind)){agLzPush(p,id,kind,b,0);continue}/* staff: sliced (agLzRun) */
   else if(!D.I||!D.I[id])agIntent(p,id);
   agDrawPerson(p,id,b,kind,b)}catch(e){agdErr("buoi",e)}}
@@ -179,7 +182,7 @@ function agTickX(){if(!agDOn())return;const D=agDz();if(D.d!==wk())return;const 
   (z.didX=z.didX||{})[id]=key;
   /* the khắc she can do it: from now on, not one a card / told deed / secret meeting already holds (same rule as a consort's agSlot) */
   const R=agRec();const free=[];for(let kh=k0;kh<J95.KH;kh++){const e=R&&R.P[id]&&R.P[id][kh];if(e&&(e[1]==="tryst"||e[1]==="meet"||e[1]==="offduty"||e[1]==="laundry"))continue;/* off duty / punished: her khắc is not hers */if(R&&agBound(id,kh,R.key))continue;free.push(kh)}
-  if(!free.length){AGD.stat.miss++;continue}agPlanX(id,s,free[Math.floor(Math.random()*free.length)]);AGD.stat.land++}
+  if(!free.length){AGD.stat.miss++;continue}/* G3: the near-best khắc from now (agSoon), never a random one */agPlanX(id,s,npwPick(free,kh=>agSoon(kh,k0)));AGD.stat.land++}
  if(!agRec()){for(const p of z.pend.slice())if(p.key===key&&p.vid==null)agLand(p)}}
 (function(){
  const l0=agLand0;agLand0=function(p,seen){const f=AGRUN[p.k];if(!f)return l0.apply(this,arguments);

@@ -271,9 +271,11 @@ function eaTarget(p){try{const e=p.emo;if(e&&e.t!=null){const t=byKey(e.t);if(t&
 /* the Emperor / Thái hậu with no named target: the consort they think least of now (Sủng / Thái hậu regard), her included */
 function eaTargetET(p){const t=eaTarget(p);if(t&&(t===S||(rivals||[]).includes(t)))return t;try{const L=[S].concat(liveC()).filter(x=>!(x===S&&(S.out||S.dead)));const f=p===S.thO?"th":"sung";return L.sort((a,b)=>(a[f]||0)-(b[f]||0))[0]||null}catch(e){return null}}
 function eaRival(p){const t=eaTarget(p);if(t&&(t===S||(rivals||[]).includes(t)))return t;try{const L=[S].concat(liveC()).filter(x=>x!==p&&!(x===S&&S.out));let best=null,bv=-1;for(const x of L){const h=(p===S?(S.ro&&S.ro[x.id]||0):oan(p,x))-(p===S?(S.rl&&S.rl[x.id]||0):aff(p,x))/2;if(h>bv){bv=h;best=x}}return bv>10?best:null}catch(e){return null}}
-function eaOtherMaid(p){const t=eaRival(p);if(t&&t!==p){const L=maidOf(t);if(L.length)return{who:t,m:pick(L)}}return null}
+function eaOtherMaid(p){const t=eaRival(p);if(t&&t!==p){const L=maidOf(t);if(L.length)return{who:t,m:eaVictim(L)}}return null}
+/* G3: the maid an outburst falls on = the one her mistress is least pleased with (lowest lòng), near-best — not a random maid */
+function eaVictim(L){return npwPick(L,m=>101-(m.loyal||0))||L[0]}
 function eaSuperior(p){try{const hh=liveC().find(v=>v.queen);if(p===S){if(S.out||S.rank>=7)return null;return hh||null}if(p.queen)return null;if(hh&&hh!==p)return hh;return null}catch(e){return null}}
-function eaPick(p,g){const T=eaTemper(p),kd=eaKind(p);const L=R_.filter(r=>r.who===kd&&r.g===g&&r.ok(p,T));if(!L.length)return null;const w=L.map(r=>Math.max(0,r.w(T)));let s=w.reduce((a,b)=>a+b,0);if(!s)return null;let x=Math.random()*s;for(let i=0;i<L.length;i++){x-=w[i];if(x<=0)return{r:L[i],T}}return{r:L[L.length-1],T}}
+function eaPick(p,g){const T=eaTemper(p),kd=eaKind(p);const L=R_.filter(r=>r.who===kd&&r.g===g&&r.ok(p,T));if(!L.length)return null;const w=L.map(r=>Math.max(0,r.w(T)));/* NPC-PURPOSE G3: the reaction her temper ranks highest, near-best (never a weight-blind draw) */const i=npwPick(L.map((r,j)=>j),j=>w[j]);return i==null?null:{r:L[i],T}}
 window.eaPick=eaPick;
 /* ======================= (3) OUTBURSTS: what each reaction does ======================= */
 /* returns {h: story lines, past: the real numbers} for her event; NPC: applies and returns a news line */
@@ -281,7 +283,7 @@ function eaDo(p,r){const F=BAL.ea.fx[r.k]||{vent:10},me=p===S,res=[];let h="",ta
  /* the outburst spends the feeling: her bar moves toward calm (down from joy, up from a low mood) */
  const vent=()=>{if(me){const d=ventMe((S.mood&&S.mood.v>0?-1:1)*F.vent,lc1(r.n));if(d)add(`tâm trạng ${sgn(d)}`)}else ventNpc(p,F.vent)};
  const pay=(o)=>{if(me){apply(o)}else ap(p,o);for(const k in o){const lb=EA_LB[k]||(typeof NAMES!=="undefined"&&NAMES[k]);if(o[k]&&lb)add(me?`${lb} ${sgn(o[k])}`:eaN(p,lb,o[k]))}};
- const ml=maidOf(p);const M=ml.length?pick(ml):null;
+ const ml=maidOf(p);const M=ml.length?eaVictim(ml):null;
  switch(r.k){
  case"dapdo":pay({bac:-Math.min(F.bac,me?S.bac:(p.bac||0)),danh:-F.danh});h=me?"Cơn giận dồn nén mấy hôm bỗng trào lên. Ngươi hất tay, chén trà, bình hoa vỡ tan dưới đất; cung nhân sợ hãi quỳ rạp thu dọn.":`${Nm(p)} nổi giận đập vỡ đồ trong cung.`;break;
  case"mang":loyAdd(M,-F.loy);add(`lòng ${me?"cung nữ":M.name} −${F.loy}`);h=me?`Một chuyện nhỏ cũng khiến ngươi phát cáu. Ngươi quát mắng ${M.name} một trận; nàng cúi đầu, mắt đỏ hoe.`:`${Nm(p)} quát mắng cung nữ ${M.name} một trận.`;try{emoEv(M,"loyalDown","bị chủ nhân quát mắng")}catch(e){}break;
@@ -306,7 +308,7 @@ function eaDo(p,r){const F=BAL.ea.fx[r.k]||{vent:10},me=p===S,res=[];let h="",ta
   if(t===S&&!me)eaHitMe(p,"cham");break}
  case"thuong":{const st=staffOf(p);const b=Math.min(F.bac,me?S.bac:(p.bac||0));pay({bac:-b});for(const s of st)loyAdd(s,F.loy);add(`lòng cung nhân +${F.loy}`);h=me?"Lòng vui như mở hội, ngươi mở rương, thưởng bạc cho cả cung. Cung nhân mừng rỡ tạ ơn.":`${Nm(p)} vui vẻ thưởng bạc cho cung nhân.`;break}
  case"khoe":pay({danh:F.danh});try{if(me)ghenAll(F.ghen);else for(const x of liveC())if(x!==p)oanAdd(x,p,Math.round(F.ghen/2))}catch(e){}if(me)add(`kẻ ganh ghen +${F.ghen}`);h=me?"Vui quá hóa đắc ý, ngươi kể chuyện ân sủng của mình với các phi tần. Có người cười theo, có người tái mặt.":`${Nm(p)} khoe khoang ân sủng với các phi tần.`;break;
- case"tiec":{pay({bac:-Math.min(F.bac,me?S.bac:(p.bac||0))});const fr=liveC().filter(x=>x!==p).sort(()=>Math.random()-.5).slice(0,2);for(const x of fr)affAdd(x,p,F.aff);if(me&&fr.length)add(`${fr.map(x=>nm(x)).join(", ")} thiện cảm +${F.aff}`);
+ case"tiec":{pay({bac:-Math.min(F.bac,me?S.bac:(p.bac||0))});/* G3: she asks the two she likes best */const fr=[];{const P=liveC().filter(x=>x!==p);for(let n=0;n<2&&P.length;n++){const x=npwPick(P,y=>1+Math.max(0,aff(p,y)));if(!x)break;fr.push(x);P.splice(P.indexOf(x),1)}}for(const x of fr)affAdd(x,p,F.aff);if(me&&fr.length)add(`${fr.map(x=>nm(x)).join(", ")} thiện cảm +${F.aff}`);
   h=me?"Lòng vui, ngươi bày tiệc trà, mời mấy vị tỷ muội sang ngắm hoa, chuyện trò đến chiều.":`${Nm(p)} bày tiệc trà mời các phi tần.`;break}
  case"hat":pay({suc:-F.suc,tai:F.tai});h=me?"Vui quá, ngươi ôm đàn ca hát đến tận khuya, sáng ra mệt rã rời.":`${Nm(p)} ca hát thâu đêm.`;break;
  case"ban":{const L=liveC();for(const x of L)ap(x,{bac:F.bac});try{const T=S.trieu,N=NK().e;if(T&&T.kho!=null){T.kho=clp(T.kho-N.kho,0,100);add(`quốc khố −${N.kho}`)}}catch(x){}
@@ -358,7 +360,7 @@ function eaDo(p,r){const F=BAL.ea.fx[r.k]||{vent:10},me=p===S,res=[];let h="",ta
   else if(kd==="e"){p.eaQ=W();p.eaQx=N.e.away;cost="tuần này ít vào hậu cung"}
   else if(kd==="t"){if(!S.thIll&&roll(Math.round(N.t.ill*a))){eaIll(p,"phonghan");cost="nhiễm phong hàn"}else cost="miễn thỉnh an một buổi"}
   h=`${Nm(p)} ${lc1(r.n)} cho nguôi lòng${cost?`, ${cost}`:""}.`;break}
- case"cai":{const o=(eaOwner(p)?staffOf(eaOwner(p)):[]).filter(s=>s!==p);const q=o.length?pick(o):null;loyAdd(p,-F.loy);loyAdd(q,-F.loy);h=`${p.name} cãi nhau${q?` với ${q.name}`:""}.`;break}
+ case"cai":{const o=(eaOwner(p)?staffOf(eaOwner(p)):[]).filter(s=>s!==p);/* G3: the quarrel is with the one she gets on worst with */const q=npwPick(o,x=>101+Math.min(100,-(((p.af||{})[x.sid])||0)))||null;loyAdd(p,-F.loy);loyAdd(q,-F.loy);h=`${p.name} cãi nhau${q?` với ${q.name}`:""}.`;break}
  case"sk":loyAdd(p,-F.loy);h=`${p.name} ${lc1(r.n)}.`;break;
  case"hang":loyAdd(p,F.loy);h=`${p.name} ${lc1(r.n)}.`;break;
  default:h=`${Nm(p)} ${lc1(r.n)}.`}
@@ -478,8 +480,8 @@ function eaNpcWeek(){if(!eaHost())return;const N=E().npc;try{eaMinFeel()}catch(e
   if(e.v>=N.outV){const ch=N.outCh*(E().out.t[T.k]||1);if(roll(ch)){const P=eaPick(p,g);if(P){const o=eaDo(p,P.r);if(o){cnt(EA_N.npcOut,kd+":"+P.r.k);cnt(EA_N.npcOutT,T.k);eaSay(p,o.h,o.target===S)}}}}
   else if(e.v>=N.actV&&ag2Ch(p,N.actCh*(window.agOn&&agOn()?Math.min(BAL.ag.emo2.max,e.v/N.actV):1))){/* AG-ALL-2: the stronger her feeling, the likelier she acts on it (her own inclination, BAL.ag.emo2) *//* the same emotion acts as hers, chosen to calm down: vent + the act's own price */
    const C=E().card,cg=g==="ghen"?"buon":g;
-   if(kd==="c"){const L=Object.keys(C).filter(k=>C[k].g===cg);if(!L.length)continue;const k=pick(L),c=C[k];if(c.bac&&(p.bac||0)<c.bac)continue;const o={};if(c.bac)o.bac=-c.bac;if(c.suc)o.suc=-c.suc;if(c.danh)o.danh=-c.danh;if(c.tai)o.tai=c.tai;if(c.duc)o.duc=c.duc;ap(p,o);
-    let m=null;if(c.loy){const ml=maidOf(p);if(ml.length){m=pick(ml);loyAdd(m,-c.loy)}}if(c.oan)for(const x of liveC())if(x!==p)oanAdd(x,p,c.oan);
+   if(kd==="c"){const L=Object.keys(C).filter(k=>C[k].g===cg&&!(C[k].bac&&(p.bac||0)<C[k].bac));if(!L.length)continue;/* G3: the way to calm down she can afford that eases her most, near-best */const k=npwPick(L,x=>1+(C[x].emo||Math.abs(C[x].mood||0))),c=C[k];const o={};if(c.bac)o.bac=-c.bac;if(c.suc)o.suc=-c.suc;if(c.danh)o.danh=-c.danh;if(c.tai)o.tai=c.tai;if(c.duc)o.duc=c.duc;ap(p,o);
+    let m=null;if(c.loy){const ml=maidOf(p);if(ml.length){m=eaVictim(ml);loyAdd(m,-c.loy)}}if(c.oan)for(const x of liveC())if(x!==p)oanAdd(x,p,c.oan);
     ventNpc(p,c.emo||Math.abs(c.mood));cnt(EA_N.npcAct,kd+":"+k);const nmA={dapdo:"Đập đồ",mang:"Mắng cung nữ",khoc:"Khóc thầm",thu:"Viết thư nhà",dan:"Đàn hát tự thưởng",huong:"Thắp hương cầu an"}[k];
     const cost=Object.keys(o).map(x=>EA_LB[x]?eaN(p,EA_LB[x],o[x]):"").concat(m?[`lòng ${m.name} −${c.loy}`]:[]);
     eaSay(p,eaL(`${Nm(p)} ${lc1(nmA)} cho nguôi lòng`,cost))}

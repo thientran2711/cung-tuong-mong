@@ -134,7 +134,7 @@ function j95week(){const z=j95z();if(z.itWk===wk())return;z.itWk=wk();if(z.mo!==
  for(const k in z.me){z.me[k]*=.75;if(z.me[k]<.3)delete z.me[k]}
  const pat=Object.entries(z.me).filter(x=>x[1]>=2.5).sort((a,b)=>b[1]-a[1])[0];
  for(const id in z.meK){const m=z.meK[id];if(!z.me[m.c+":"+m.k]||z.me[m.c+":"+m.k]<1.5)delete z.meK[id]}
- z.it={};z.sec=[];const cs=j95cs();z.mood={};for(const v of rivals)z.mood[v.id]=+(0.4+Math.random()*1.5).toFixed(2);z.nb={};for(const v of liveRivals(true)){const L=liveRivals(true).filter(x=>x!==v&&!sameHouse(v,x));z.nb[v.id]=L.sort(()=>Math.random()-.5).slice(0,2).map(x=>x.id)}
+ z.it={};z.sec=[];const cs=j95cs();z.mood={};for(const v of rivals)z.mood[v.id]=j95moodF(v);z.nb={};for(const v of liveRivals(true)){const L=liveRivals(true).filter(x=>x!==v&&!sameHouse(v,x));const n=[];for(let i=0;i<2&&L.length;i++){/* NPC-PURPOSE G3: her neighbours = the two she likes best (near-best), not a shuffle */const x=npwPick(L,y=>1+Math.max(0,aff(v,y)));if(!x)break;n.push(x.id);L.splice(L.indexOf(x),1)}z.nb[v.id]=n}
  for(const v of liveRivals(true)){if(v.confined)continue;j95hab(v);
   if(pat&&!z.meK[v.id]&&hostility(v,S)>=45){let sp=false;try{sp=spyIn70(v,S)}catch(e){}if(j95dice(15+eyes(v)*12+(sp?30:0))){const [c,k]=pat[0].split(":");z.meK[v.id]={c:+c,k,w:wk()}}}
   const it=j95intent(v,cs);if(it)z.it[v.id]=it;
@@ -148,7 +148,11 @@ function j95week(){const z=j95z();if(z.itWk===wk())return;z.itWk=wk();if(z.mo!==
    const c=cs[1+Math.floor(Math.random()*(cs.length-1))];const sp=r&&r.pl?[r.pl,placeName(r.pl)]:SPOT95[Math.floor(Math.random()*SPOT95.length)];
    z.sec.push({a:"v"+v.id,b:s?"s"+s.sid:null,c,kh:[1+Math.floor(Math.random()*3)],k:sp[0],spot:sp[1],kind:"meet",plot:p.id,tgt:t?j95id(t):null,why:`chuẩn bị mưu: ${r?r.n.toLowerCase():"mưu hại"} nhắm vào ${t===S?"ngươi":t?t.name:"người khác"}`,wk:wk()})}}catch(e){}}
  /* the Emperor's week: a heavy court week sometimes; one personal leaning */
- z.emp=z.emp||{lean:{c:[1,2,3][Math.floor(Math.random()*3)],k:"vuon"}};z.empWk={busy:j95dice(20)};if(j95dice(10))z.emp.lean={c:[1,2,3][Math.floor(Math.random()*3)],k:j95dice(60)?"vuon":"thu"}}
+ /* NPC-PURPOSE G3: a heavy week = a real cause (ill / Chăm chính / court crisis: jagemp empBusy); his leaning = the buổi the one he favours is out and about (her week intent), near-best */
+  const L0=BAL.ag.why.g3.lean;z.emp=z.emp||{lean:{c:L0.c,k:L0.k}};let bz="";try{bz=typeof empBusy==="function"?empBusy():""}catch(e){}z.empWk={busy:!!bz,why:bz};
+  try{const f=typeof favNow==="function"&&favNow();const it=f&&f.p&&z.it[f.p.id];if(it&&it.s&&it.s.length){const c=npwPick(it.s.filter(x=>x>=1&&x<=3),x=>x===L0.c?2:1);if(c)z.emp.lean={c,k:L0.k}}}catch(e){}}
+/* G3: weekly stay-home factor from her real feeling (jemo: glad → goes out, sad / angry → stays in), BAL.ag.why.g3.mood */
+function j95moodF(v){const M=BAL.ag.why.g3.mood;const e=v&&v.emo;const d=e&&e.v?(e.k==="vui"?1:-1)*e.v:0;return +cl(M.b+d/M.div,M.lo,M.hi).toFixed(2)}
 function j95intent(v,cs){const O=[],z=j95z();const af=aff(v,S),ho=hostility(v,S);
  O.push(["emp",(nv(v,"empW"))*((v.sung||0)<50?1.4:.7)*(.5+(v.ghen||0)/60),null,`tranh sủng (Sủng ${Math.round(v.sung||0)}, ghen ${v.ghen||0})`]);
  const al=others(v).filter(x=>x!==S&&x.alive&&!x.out&&!sameHouse(v,x)).map(x=>[x,aff(v,x)]).sort((p,q)=>q[1]-p[1])[0];
@@ -223,11 +227,11 @@ function j95planOther(p,c,P){const kh=[0,1,2,3];
  if(p.kind==="court"){const c2=p.id.slice(2);
   if(c2==="tq")return kh.map(i=>[P.emp?P.emp[i][0]:"dtd","attend","emp","tổng quản luôn hầu bên Hoàng thượng"]);
   if(c2==="ksp")return kh.map(()=>["ksp","book",null,"phận sự Kính sự phòng"]);
-  if(c2==="ty"){const sick=liveRivals(true).filter(v=>v.preg||(v.suc||80)<50);const v=sick.length&&j95dice(25)?sick[Math.floor(Math.random()*sick.length)]:null;const s=1+Math.floor(Math.random()*3);
+  if(c2==="ty"){const sick=liveRivals(true).filter(v=>v.preg||(v.suc||80)<50);/* NPC-PURPOSE G3: he goes to the one most in need (an expectant mother, then the weakest), at the first khắc his rounds allow — not a random patient / khắc */const v=sick.length&&j95dice(25)?npwPick(sick,x=>(x.preg?BAL.ag.why.g3.ty.preg:0)+100-(x.suc||80)):null;const s=npwPick([1,2,3],x=>agSoon(x,1));
    return kh.map(i=>v&&i===s?[palaceOf(v),"heal","v"+v.id,v.preg?"bắt mạch an thai":"bắt mạch cho người yếu sức"]:["tyv","brew",null,"trực Thái y viện"])}
   /* main jact (Dư đồ Nội vụ phủ, 16/11): the Nội vụ phủ eunuch stands at Nội vụ phủ every khắc (jact draws him there) — one place (r1) */
   if(j95nvp())return kh.map(()=>["nvp","sell",null,"bày hàng mua từ ngoài cung ở Nội vụ phủ"]);
-  const Lp=["vuon","ksp","tyv"];return kh.map(()=>{const k=Lp[Math.floor(Math.random()*Lp.length)];return[k,"sell",null,"đi bán hàng rong kiếm lời"]})}
+  const Lp=["vuon","ksp","tyv"];/* NPC-PURPOSE G3: he hawks where the buyers are (most people there), near-best */const kS=npwPick(Lp,k=>1+liveRivals(true).filter(v=>whereOf(v)===k).length)||Lp[0];return kh.map(()=>[kS,"sell",null,"đi bán hàng rong kiếm lời"])}
  if(p.kind==="man"){const m=p.ref;const w=null;const k=p.home||"vuon";const a=m.rw==="thái y"?"heal":m.rw==="thị vệ"?"guard":m.rw==="nhạc sư"?"music":m.rw==="họa sư"?"paint":m.rw==="sứ thần"&&k==="thu"?"audience":"walk";
   return kh.map(()=>[k,a,null,w?"nơi hắn hay lui tới":"phận sự"])}
  if(p.kind==="ly")return kh.map(()=>["lc",c===3?"sleep":"rest",null,"Phế phi ở Trường Môn viện"]);
@@ -431,7 +435,7 @@ function j95accuse(v,m,s,to){if(typeof can==="function"&&can(BAL.m95.k))spend(BA
  showModal()}
 function j95hold(v){const z=j95z();z.hold[v.id]=wk();j95ctx({how:"Ngươi giữ kín chuyện tận mắt thấy làm con bài",proves:`${v.name} có chuyện kín bị ngươi bắt gặp`},()=>evA(S,v,BAL.eff.j95.evJ95hold));log(`Ngươi giữ kín chuyện của ${v.name}, chờ lúc dùng.`)}
 function j95silent(v){if(typeof can==="function"&&can(BAL.m95.k))spend(BAL.m95.k);const z=j95z();
- if((v.malice||0)>=70&&j95dice(25)&&motiveOK(v,S,"harm").ok){oanAdd(v,S,BAL.eff.j95.j95silent);noteAdd(v.id,"nhận lời hứa im lặng nhưng vẫn coi ngươi là mối nguy");log(`${v.name} gật đầu, ánh mắt lạnh tanh.`);return}
+ if((v.malice||0)>=70&&npwPick(["refuse","owe"],x=>x==="refuse"?hostility(v,S):Math.max(0,aff(v,S))+BAL.ag.why.min)==="refuse"&&motiveOK(v,S,"harm").ok)/* G3: a spiteful one breaks the promise when her grudge outweighs her regard */{oanAdd(v,S,BAL.eff.j95.j95silent);noteAdd(v.id,"nhận lời hứa im lặng nhưng vẫn coi ngươi là mối nguy");log(`${v.name} gật đầu, ánh mắt lạnh tanh.`);return}
  relAdd(v,S,BAL.eff.j95.j95silent_2);oanAdd(v,S,BAL.eff.j95.j95silent_3);z.owe[v.id]=(z.owe[v.id]||0)+1;log(`${v.name} nợ ngươi một ân tình vì giữ kín chuyện.`)}
 /* two-way: NPCs present where she meets her lover may catch HER, same odds, same choices (decided by their real feelings) */
 function j95npcCatch(m){const R=S.roster;if(!R)return;const kh=j95kh();const k=S.place;
@@ -439,7 +443,7 @@ function j95npcCatch(m){const R=S.roster;if(!R)return;const kh=j95kh();const k=S
   if(out==="one"){evA(v,S,BAL.eff.j95.evJ95npcCatch_2);continue}evA(v,S,BAL.eff.j95.evJ95npcCatch_3);v.j95saw={w:wk(),m:m.id};
   if(out==="rev")Q.push({t:"Có người thấy",who:pv(v),h:`<p>Lúc trở ra, ngươi thấy bóng ${v.name} khuất sau cửa. Nàng đã thấy ngươi đi cùng ${m.name}.</p>`});
   const hard=motiveOK(v,S,"expose");
-  if(hard.ok&&hostility(v,S)>=40&&evG(v,S)>=2&&j95dice(40)){const o=cl(25+evG(v,S)*15,5,90);if(j95dice(o)){affairExposed(m,`${v.name} tố giác:`);return}/* two-way law: a failed accusation costs the accuser what it costs her (Danh -8, resentment +25, regard -20, punishment) */ap(v,{danh:-BAL.tw.g.accFail[0]});oanAdd(S,v,BAL.tw.g.accFail[1]);affAdd(S,v,-BAL.tw.g.accFail[2]);punish(v,"vu cáo người khác tư thông",1)}
+  if(hard.ok&&hostility(v,S)>=40&&evG(v,S)>=2&&npwPick(["tell","hold"],x=>x==="tell"?hostility(v,S):Math.max(0,100-hostility(v,S)))==="tell"){/* G3: she accuses when her grudge outweighs keeping the card for later */const o=cl(25+evG(v,S)*15,5,90);if(j95dice(o)){affairExposed(m,`${v.name} tố giác:`);return}/* two-way law: a failed accusation costs the accuser what it costs her (Danh -8, resentment +25, regard -20, punishment) */ap(v,{danh:-BAL.tw.g.accFail[0]});oanAdd(S,v,BAL.tw.g.accFail[1]);affAdd(S,v,-BAL.tw.g.accFail[2]);punish(v,"vu cáo người khác tư thông",1)}
   else if(aff(v,S)>=20){j95z().owe["by:"+v.id]=wk()}}}
 
 /* ---------------- 8. DATA FOR THE KIT: habits she knows ---------------- */

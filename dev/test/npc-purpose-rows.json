@@ -192,7 +192,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "Emperor names Thái tử",
-"fp": "\"m\"&&k.age>=6);if(!c.length||!roll(15))return\"\";"
+"out": "dead code: j51.js:68 reassigns heirMonth (loaded later); the live heir choice is j51:71-72 (G3 done: npwPick by lệ đích/trưởng/hiền weights)"
 },
 {
 "f": "j4.js",
@@ -1168,7 +1168,7 @@
 "status": "DICE-ONLY",
 "group": "G3",
 "event": "maid's chat names a random rival's location",
-"fp": "\"Giao thiệp\",j76:1,go:()=>{if(roll(15)){const t=liveRivals(true);if(t."
+"done": "const v=npwPick(liveRivals(true),x=>1+Math.max(0,hostility(x,S)));"
 },
 {
 "f": "j78.js",
@@ -1176,7 +1176,7 @@
 "status": "DICE-ONLY",
 "group": "G3",
 "event": "her maid's dò la target",
-"fp": ".mspy.id))S.mspy={b:bkey(),id:pick(L).id};return RV(S.mspy.id)}"
+"done": "S.mspy={b:bkey(),id:npwPick(L,v=>1+Math.max(0,hostility(v,S))).id};"
 },
 {
 "f": "j83.js",
@@ -1328,7 +1328,7 @@
 "status": "DICE-ONLY",
 "group": "G3",
 "event": "Emperor busy week / leaning; weekly mood ×, random neighbours; hawker ",
-"fp": "||{lean:{c:[1,2,3][Math.floor(Math.random()*3)],k:\"vuon\"}};z.empWk={bu"
+"done": "const c=npwPick(it.s.filter(x=>x>=1&&x<=3),x=>x===L0.c?2:1);"
 },
 {
 "f": "j95.js",
@@ -1336,7 +1336,7 @@
 "status": "DICE-ONLY",
 "group": "G3",
 "event": "Emperor busy week / leaning; weekly mood ×, random neighbours; hawker ",
-"fp": " of rivals)z.mood[v.id]=+(0.4+Math.random()*1.5).toFixed(2);z.nb={};fo"
+"done": "const x=npwPick(L,y=>1+Math.max(0,aff(v,y)));if(!x)break;n.push(x.id);"
 },
 {
 "f": "j95.js",
@@ -1344,7 +1344,7 @@
 "status": "DICE-ONLY",
 "group": "G3",
 "event": "Emperor busy week / leaning; weekly mood ×, random neighbours; hawker ",
-"fp": "ap(()=>{const k=Lp[Math.floor(Math.random()*Lp.length)];return[k,\"sell"
+"done": "const kS=npwPick(Lp,k=>1+liveRivals(true).filter(v=>whereOf(v)===k).length)||Lp[0];"
 },
 {
 "f": "j95.js",
@@ -1352,7 +1352,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "rival follows intent 70 %; TH garden walk; thái y walk; plot errand; w",
-"fp": "c===1||c===2)&&j95seaV(c)>=1&&j95dice(15)){k=\"vuon\";a=\"walk\";why=\"trời"
+"out": "Thái hậu's own wish with a real reason (fine-season buổi, j95seaV); odds = her inclination"
 },
 {
 "f": "j95.js",
@@ -1360,7 +1360,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "rival follows intent 70 %; TH garden walk; thái y walk; plot errand; w",
-"fp": "|80)<50);const v=sick.length&&j95dice(25)?sick[Math.floor(Math.random("
+"done": "npwPick(sick,x=>(x.preg?BAL.ag.why.g3.ty.preg:0)+100-(x.suc||80)):null;const s=npwPick([1,2,3],x=>agSoon(x,1));"
 },
 {
 "f": "j95.js",
@@ -1368,7 +1368,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "rival follows intent 70 %; TH garden walk; thái y walk; plot errand; w",
-"fp": "d);if(p&&(window.agOn&&agOn()?ag2Ch((v.staff||[]).find(x=>x.role===\"eu"
+"out": "the plotter (a real plot in prep, j70) sends her eunuch on an errand: ag2Ch = her inclination by his loyalty while the agent layer is on (OD 17/11 ~17:00Z cap BAL.odds.hi)"
 },
 {
 "f": "j95.js",
@@ -1376,7 +1376,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "rival follows intent 70 %; TH garden walk; thái y walk; plot errand; w",
-"fp": " if((v.malice||0)>=70&&j95dice(25)&&motiveOK(v,S,\"harm\").ok){oa"
+"done": "npwPick([\"refuse\",\"owe\"],x=>x===\"refuse\"?hostility(v,S):Math.max(0,aff(v,S))+BAL.ag.why.min)===\"refuse\""
 },
 {
 "f": "j95.js",
@@ -1384,7 +1384,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "rival follows intent 70 %; TH garden walk; thái y walk; plot errand; w",
-"fp": "Roll(v,S);if(out===\"flee\"){if(j95dice(35))evA(v,S,BAL.eff.j95.evJ95npc"
+"out": "success odds only (BAL, never 100 %): a REAL witness at the place (day record row = her khắc) who fled glimpses the pair"
 },
 {
 "f": "j95.js",
@@ -1392,7 +1392,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "rival follows intent 70 %; TH garden walk; thái y walk; plot errand; w",
-"fp": "tility(v,S)>=40&&evG(v,S)>=2&&j95dice(40)){const o=cl(25+evG(v,S)*15,5"
+"done": "npwPick([\"tell\",\"hold\"],x=>x===\"tell\"?hostility(v,S):Math.max(0,100-hostility(v,S)))===\"tell\""
 },
 {
 "f": "j95.js",
@@ -1512,7 +1512,7 @@
 "status": "DICE-ONLY",
 "group": "G3",
 "event": "random consort gains evidence of the secret exchange",
-"fp": "2[1].sus[1]});if(!ok){const v=pick(liveRivals(true));if(v)evA(v,S,BAL."
+"done": "const w=npcWit(loc96(),null,{vs:S,not:[S]})[0];"
 },
 {
 "f": "j96.js",
@@ -1520,7 +1520,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "sweetheart note; guest greets; learns who; tai mắt reports plot; tutor",
-"fp": "ote.tinh&&(t.h||0)>=M.note.h&&roll(M.note.p)){adj96(BAL.arc.h96.month)"
+"out": "the man's own longing drives it (m.tinh ≥ note.tinh and her h ≥ note.h): odds he risks a note (BAL.arc.h96.note)"
 },
 {
 "f": "j61.js",
@@ -1528,7 +1528,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "sweetheart note; guest greets; learns who; tai mắt reports plot; tutor",
-"fp": "(a!==b&&!S.nkn[kb][\"r\"+a.id]&&roll(35))npcLearn(a,b)}}"
+"done": "for(const w of npcWit(npwAt(b,null),null,{pool:U}))npcLearn(w.p,b);"
 },
 {
 "f": "j61.js",
@@ -1536,7 +1536,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "sweetheart note; guest greets; learns who; tai mắt reports plot; tutor",
-"fp": "cludes(a)&&!npcKnows(a,t)){if(roll(50))npcLearn(a,t);return\"\"}"
+"out": "success odds only (BAL, never 100 %): she tries a real act on someone she does not know yet; half the time she only learns who it is"
 },
 {
 "f": "j43.js",
@@ -1544,7 +1544,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "sweetheart note; guest greets; learns who; tai mắt reports plot; tutor",
-"fp": " if(!roll(cl(c,5,80)))return;const s=m43repor"
+"out": "success odds only (BAL, never 100 %): the player's watchfulness (eyes, sharp staff, witness count) catching a REAL tell of a real plot"
 },
 {
 "f": "j43.js",
@@ -1552,7 +1552,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "sweetheart note; guest greets; learns who; tai mắt reports plot; tutor",
-"fp": "r!==\"me\"&&(s.spyFor===key(v)||roll(50))){mindLog(v,\"_tellWithheld\");re"
+"done": "(s.spyFor===key(v)||npwPick([\"keep\",\"tell\"],"
 },
 {
 "f": "j53.js",
@@ -1600,7 +1600,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "sweetheart note; guest greets; learns who; tai mắt reports plot; tutor",
-"fp": "x.k.heir&&x.k.age>=6);if(!d||!roll(KV.deb))return\"\";S.kvDeb=S.turn;con"
+"out": "court ministers' memorial: minister agent PARKED (C-AG 18/11 (c), PARKING_LOT #7); the reason is real (a đích son ≥ 6 exists)"
 },
 {
 "f": "j51.js",
@@ -1608,7 +1608,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "sweetheart note; guest greets; learns who; tai mắt reports plot; tutor",
-"fp": " if(roll(p)){setHeir(d.k,d.v);fx(\"gold\");ret"
+"out": "Hoàng thượng's decision on the memorial: odds from the two sons' real Tài / được thương / age (printed as chanceLo)"
 },
 {
 "f": "j51.js",
@@ -1616,7 +1616,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "sweetheart note; guest greets; learns who; tai mắt reports plot; tutor",
-"fp": " if(!roll(wait?5:15))return\"\";"
+"out": "Hoàng thượng's own timing to name an heir (sons ≥ 6 exist; waits while a đích son is small); whom = j51:72 npwPick"
 },
 {
 "f": "j51.js",
@@ -1624,7 +1624,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "sweetheart note; guest greets; learns who; tai mắt reports plot; tutor",
-"fp": " let r=Math.random()*c.reduce((a,b)=>a+b.w,0),i"
+"done": "const x=npwPick(c,y=>y.w)||c[0];setHeir(x.k,x.v);"
 },
 {
 "f": "j53.js",
@@ -2168,7 +2168,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "keeps secret; TH frees random cold-palace consort; random shop/gift it",
-"fp": "const t=L.length?L[Math.floor(Math.random()*L.length)]:null;if(t)O.pus"
+"done": "const t=npwPick(L,x=>1+Math.max(0,x.th||0));if(t)O.push({k:\"th:release\""
 },
 {
 "f": "jagacts.js",
@@ -2176,7 +2176,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "keeps secret; TH frees random cold-palace consort; random shop/gift it",
-"fp": ".length){const k=L[Math.floor(Math.random()*L.length)];const u=agcU(v,"
+"done": "const k=npwPick(L,x=>itm(x).pr);const u=agcU("
 },
 {
 "f": "jagacts.js",
@@ -2184,7 +2184,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "keeps secret; TH frees random cold-palace consort; random shop/gift it",
-"fp": "return\"\";const k=L[Math.floor(Math.random()*L.length)];return buy(v,k)"
+"done": "const k=npwPick(L,x=>itm(x).pr);return buy(v,k)"
 },
 {
 "f": "jagacts.js",
@@ -2192,7 +2192,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "keeps secret; TH frees random cold-palace consort; random shop/gift it",
-"fp": " k=BAL.ag.th.items[Math.floor(Math.random()*BAL.ag.th.items.length)];p"
+"done": "const k=npwPick(BAL.ag.th.items,"
 },
 {
 "f": "jagacts2.js",
@@ -2200,7 +2200,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "keeps secret; TH frees random cold-palace consort; random shop/gift it",
-"fp": "  const g=roll(agCap(w));/* his inclination = the "
+"out": "his inclination = the site's % × his regard for her (ag2Reg: Sủng, an, his memory of her deeds, mood, nết); the comment keeps a straight draw on purpose (a slip would bend a rare gift's rate)"
 },
 {
 "f": "jagacts2.js",
@@ -2208,7 +2208,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "keeps secret; TH frees random cold-palace consort; random shop/gift it",
-"fp": "  return roll(agCap(w))};})();"
+"out": "Thái hậu's inclination = the site's % × her favour for that consort (BAL.ag.give.th); same rule as empGive"
 },
 {
 "f": "jagday.js",
@@ -2216,7 +2216,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "agent-layer internal dice (re-plan, 2nd goal, slot, summon, seat, jeal",
-"fp": "  if(roll(cl(100-F.leave,O.lo,O.hi))){AGD.sta"
+"out": "owner OD ~18:05Z (review ag-all-2 r2 W1): staying indoors in a storm is 'the NPC's own choice, by odds' — her own outdoor plan vs shelter, both goal-valid; odds BAL.wx.fx.storm.leave"
 },
 {
 "f": "jagday.js",
@@ -2224,7 +2224,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "agent-layer internal dice (re-plan, 2nd goal, slot, summon, seat, jeal",
-"fp": "er(x=>x[0]!==a);if(L2.length&&roll(agCap(BAL.ag.day.two)))g.push(agPw("
+"done": "const b2=npwPick(L2.filter(x=>x[1]>=a1*BAL.ag.why.g3.two),x=>x[1]);"
 },
 {
 "f": "jagday.js",
@@ -2232,7 +2232,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "agent-layer internal dice (re-plan, 2nd goal, slot, summon, seat, jeal",
-"fp": "h=Math.max(ch,R.touch);if(ch&&roll(agCap(ch))){agIntent(v,id);AGD.stat"
+"done": "rp=npwPick([\"new\",\"keep\"],"
 },
 {
 "f": "jagday.js",
@@ -2240,7 +2240,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "agent-layer internal dice (re-plan, 2nd goal, slot, summon, seat, jeal",
-"fp": "}agPlanX(id,s,free[Math.floor(Math.random()*free.length)]);AGD.stat.la"
+"done": "agPlanX(id,s,npwPick(free,kh=>agSoon(kh,k0)));"
 },
 {
 "f": "jagent.js",
@@ -2248,7 +2248,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "agent-layer internal dice (re-plan, 2nd goal, slot, summon, seat, jeal",
-"fp": " return L.length?L[Math.floor(Math.random()*L.length)]:null}"
+"done": "return L.length?npwPick(L,x=>agSoon(x[0],k0)):null}"
 },
 {
 "f": "jagemp.js",
@@ -2256,7 +2256,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "agent-layer internal dice (re-plan, 2nd goal, slot, summon, seat, jeal",
-"fp": "empD().summon[b?1:0];const ok=roll(agOdd(o));const z=empWhyZ();z.k=ok?"
+"out": "his own choice between two goal-valid options (call / rest) weighted by his real state (empBusy: ill / Chăm chính / court crisis → BAL.ag.emp.summon); reason recorded in S.empWhy for nightWhy (C-AG 18/11 (a))"
 },
 {
 "f": "jagemp.js",
@@ -2264,7 +2264,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "agent-layer internal dice (re-plan, 2nd goal, slot, summon, seat, jeal",
-"fp": "ty()*(S.thDead?1:D.th);return roll(agOdd(c))}"
+"out": "his own choice to fill the vacant Hoàng hậu seat: mourning months × his duty nết × Thái hậu (BAL.ag.emp.seat), goal-valid; whom = empSeatPick (mindPick by regard)"
 },
 {
 "f": "jagstaff.js",
@@ -2272,7 +2272,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "agent-layer internal dice (re-plan, 2nd goal, slot, summon, seat, jeal",
-"fp": " nvp(s){if(roll(SRVA.nvp.bully)){asAp(s,SRVA.nvp.bu"
+"done": "const by=npwPick(L,x=>-(((x.af||{})[s.sid])||0));if(by&&roll(SRVA.nvp.bully))"
 },
 {
 "f": "jagstaff.js",
@@ -2280,7 +2280,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "agent-layer internal dice (re-plan, 2nd goal, slot, summon, seat, jeal",
-"fp": ",m,man){const B=asB();asOut(s,roll(B.expel)?\"expel\":\"tgk\");if(man&&man"
+"out": "the master's punishment of a maid caught in a real tryst (asCaught): actor + reason real; expel vs Tân Giả khố and the man's exile are the punishment's odds (BAL.ag.staff, = the player maid's rule)"
 },
 {
 "f": "jagstaff.js",
@@ -2288,7 +2288,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "agent-layer internal dice (re-plan, 2nd goal, slot, summon, seat, jeal",
-"fp": "   if(sch&&roll(B.secSee))s.sec=(s.sec||0)+1;/* she"
+"out": "perception odds of a REAL act: her master's own schemes at home, seen by her maid who lives there (BAL.ag.staff.secSee = the player maid's 'Biết chuyện của chủ')"
 },
 {
 "f": "jagstaff.js",
@@ -2296,7 +2296,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "agent-layer internal dice (re-plan, 2nd goal, slot, summon, seat, jeal",
-"fp": "   if(s.betray&&roll(agCap(nv(p,\"betrayFind\")))){s.betra"
+"out": "success odds only (BAL, never 100 %): the master hunts the betrayer by her nết (nv betrayFind); the betrayal is a real past deed"
 },
 {
 "f": "jagstaff.js",
@@ -2304,7 +2304,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "agent-layer internal dice (re-plan, 2nd goal, slot, summon, seat, jeal",
-"fp": "BAL.srvGrant.tin)&&srk(s)>=1&&roll(BAL.srvGrant.base+(s.vow?BAL.srvGra"
+"out": "the master's grant (Ban gả) on the player maid's own trigger (loyalty ≥ BAL.srvGrant.tin, age, rank) with BAL.srvGrant odds; the maid then chooses by her needs (mindPick)"
 },
 {
 "f": "jmind.js",
@@ -2312,7 +2312,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "agent-layer internal dice (re-plan, 2nd goal, slot, summon, seat, jeal",
-"fp": "th)return null;if(O.length>1&&roll(BAL.mind.slip)){return O[Math.floor"
+"done": "const o=npwPick(O,x=>x[1]);if(o)return o[0]}"
 },
 {
 "f": "jmind.js",
@@ -2320,7 +2320,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "agent-layer internal dice (re-plan, 2nd goal, slot, summon, seat, jeal",
-"fp": "  if(O.length>1&&roll(BAL.mind.slip))return O.map(o=>[o[0"
+"done": "const x=npwPick(O,o=>o[1]*mindW(v,MENU_TAG[o[0]]||\"scheme\"));"
 },
 {
 "f": "jshelf.js",
@@ -2328,7 +2328,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "agent-layer internal dice (re-plan, 2nd goal, slot, summon, seat, jeal",
-"fp": ".visit;if(r||!v||v.confined||!roll(V.dayP))return r;"
+"done": "const w=npcWhy(\"g3call\",{v});"
 },
 {
 "f": "jemo.js",
@@ -2400,7 +2400,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "sad consort refuses; outburst + victim; acts on feeling; Emperor drink",
-"fp": "+b,0);if(!s)return null;let x=Math.random()*s;for(let i=0;i<L.length;i"
+"done": "const i=npwPick(L.map((r,j)=>j),j=>w[j]);"
 },
 {
 "f": "jemoact.js",
@@ -2408,7 +2408,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "sad consort refuses; outburst + victim; acts on feeling; Emperor drink",
-"fp": "l=maidOf(p);const M=ml.length?pick(ml):null;"
+"done": "function eaVictim(L){return npwPick(L,m=>101-(m.loyal||0))||L[0]}"
 },
 {
 "f": "jht.js",
@@ -2656,7 +2656,7 @@
 "status": "DICE-ONLY",
 "group": "G3",
 "event": "lost token / intercepted letter found by random rival; hostile rival p",
-"fp": " fail:()=>{rtHeat(12);const v=pick(liveRivals(true).filter(x=>eyes(x)>"
+"done": "const w=npcWit(k,null,{pool:liveRivals(true).filter(x=>eyes(x)>=2),vs:S})[0];return w?w.p:null}"
 },
 {
 "f": "jroute.js",
@@ -2664,7 +2664,7 @@
 "status": "DICE-ONLY",
 "group": "G3",
 "event": "lost token / intercepted letter found by random rival; hostile rival p",
-"fp": ",fail:()=>{rtHeat(15);const v=pick(liveRivals(true).filter(x=>eyes(x)>"
+"done": "const w=npcWit(k,null,{pool:liveRivals(true).filter(x=>eyes(x)>=2),vs:S})[0];return w?w.p:null}"
 },
 {
 "f": "jroute.js",
@@ -2672,7 +2672,7 @@
 "status": "DICE-ONLY",
 "group": "G3",
 "event": "lost token / intercepted letter found by random rival; hostile rival p",
-"fp": "an();if(m&&T.heat>=40&&!T.bm&&roll(T.heat/4)){const foes=liveRivals(tr"
+"done": "const v=npwPick(foes,x=>eyes(x)*BAL.ag.why.wit.eye+Math.max(0,hostility(x,S))*BAL.ag.why.wit.host);"
 },
 {
 "f": "jroute.js",
@@ -2680,7 +2680,7 @@
 "status": "DICE-ONLY",
 "group": "G3",
 "event": "lost token / intercepted letter found by random rival; hostile rival p",
-"fp": "k.age||0)>=3&&(k.age||0)<=12&&roll(RTC.kidRoll)){rtPush(\"rtKid\",{k:k.n"
+"done": "const tl=npcTell(S,{from:liveRivals(true),to:S.emp||{}});if(tl&&roll(RTC.kidRoll))"
 },
 {
 "f": "jroute.js",
@@ -2688,7 +2688,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "tryst witness pick; blackmail; Emperor blood test; NPC escape/nun; tes",
-"fp": " const v=W.length?pick(W):null;"
+"done": "const w0=npcWit(k,null,{pool:W,vs:S})[0];const v=w0?w0.p:null;"
 },
 {
 "f": "jroute.js",
@@ -2696,7 +2696,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "tryst witness pick; blackmail; Emperor blood test; NPC escape/nun; tes",
-"fp": "/Tham|Xảo quyệt/);if((greedy||roll(BAL.route.bmRoll))&&rtGate(v,\"uyhie"
+"done": "const bm=greedy||npwPick([\"bm\",\"tell\"],"
 },
 {
 "f": "jroute.js",
@@ -2704,7 +2704,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "tryst witness pick; blackmail; Emperor blood test; NPC escape/nun; tes",
-"fp": "ời ra tiếng vào +15`),()=>{if(roll(oT))log(\"Thái y bẩm trẻ con lớn lên"
+"out": "Hoàng thượng's suspicion after the player's failed defence (a real event): BAL.route.kidTyAsk"
 },
 {
 "f": "jroute.js",
@@ -2712,7 +2712,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "tryst witness pick; blackmail; Emperor blood test; NPC escape/nun; tes",
-"fp": "ời ra tiếng vào +20`),()=>{if(roll(oB))log(\"Ngươi kể về người cậu bên "
+"out": "Hoàng thượng's suspicion after the player's failed blame (a real event): BAL.route.kidBlameAsk"
 },
 {
 "f": "jroute.js",
@@ -2720,7 +2720,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "tryst witness pick; blackmail; Emperor blood test; NPC escape/nun; tes",
-"fp": "sc&&(v.affair||v.out)&&weary&&roll(RTC.npcEsc)){v.rtEsc={since:S.turn}"
+"out": "her own despair road: weary (Sủng < 20, no child, after year 1) + a lover or the cold palace; odds = her inclination (RTC.npcEsc)"
 },
 {
 "f": "jroute.js",
@@ -2728,7 +2728,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "tryst witness pick; blackmail; Emperor blood test; NPC escape/nun; tes",
-"fp": "Esc&&S.turn-v.rtEsc.since>=3&&roll(BAL.route.npcTry)){/* same odds as "
+"out": "success odds only (BAL, never 100 %): her escape attempt after ≥ 3 months of preparation; the same odds as the player's (base + help)"
 },
 {
 "f": "jroute.js",
@@ -2736,7 +2736,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "tryst witness pick; blackmail; Emperor blood test; NPC escape/nun; tes",
-"fp": "t ở cổng Thần Vũ.</span> `;if(roll(BAL.route.escDeath))deathSentence(v"
+"out": "success odds only (BAL, never 100 %): the sentence for a caught runaway (BAL.route.escDeath)"
 },
 {
 "f": "jroute.js",
@@ -2744,7 +2744,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "tryst witness pick; blackmail; Emperor blood test; NPC escape/nun; tes",
-"fp": "v.out&&!kids&&(v.sung||0)<10&&roll(.8)){v.alive=false;v.nun=1;rtStat(\""
+"out": "her own despair: in the cold palace, no child, Sủng < 10 → she petitions to become a nun; odds = her inclination"
 },
 {
 "f": "jroute.js",
@@ -2752,7 +2752,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "tryst witness pick; blackmail; Emperor blood test; NPC escape/nun; tes",
-"fp": "live&&!k.tfOk&&(k.age||0)>=3&&roll(k.tf?1:.15)){ev+=rtNgNpcAuto(v,k);b"
+"out": "a real fact (the child is not the Emperor's: k.tf) growing visible with age; odds of it being noticed"
 },
 {
 "f": "jroute.js",
@@ -2760,7 +2760,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "tryst witness pick; blackmail; Emperor blood test; NPC escape/nun; tes",
-"fp": "===S.place&&S.place!==\"home\"&&roll(RTC.npcSee)){v.rtEsc.seen=1;try{if("
+"out": "success odds only (BAL, never 100 %): the player really stands where a runaway prepares (same place, night) and notices"
 },
 {
 "f": "jts.js",
@@ -2968,7 +2968,7 @@
 "status": "DICE-ONLY",
 "group": "G3",
 "event": "room rumour spreads per pair; luxury accusation / TH rebuke",
-"fp": "||shelfSeen(o,t))continue;if(!roll(B.o))continue;shelfLook(o,t,\"tin đồ"
+"done": "const tl=npcTell(t,{from:P.filter(w=>w!==o&&w!==t&&w!==S&&shelfSeen(w,t)),to:o});if(!tl||!roll(B.o))continue;"
 },
 {
 "f": "jshelf.js",
@@ -2976,7 +2976,7 @@
 "status": "DICE-ONLY",
 "group": "G3",
 "event": "room rumour spreads per pair; luxury accusation / TH rebuke",
-"fp": "   if(kind?!roll(B.npcO):!roll(B.guessO))continue;if"
+"done": "const w=npcWhy(\"g3acc\",{a,T});"
 },
 {
 "f": "jshelf.js",
@@ -2984,7 +2984,7 @@
 "status": "DICE-ONLY",
 "group": "G3",
 "event": "room rumour spreads per pair; luxury accusation / TH rebuke",
-"fp": "t&&shelfSeen(o,t));if(!talk||!roll(B.o))continue;"
+"done": "const tl=npcTell(t,{from:P.filter(o=>o!==t&&o!==S&&shelfSeen(o,t)),to:S.thO||{}});if(!tl||!roll(B.o))continue;"
 },
 {
 "f": "jthaiy.js",
@@ -3056,7 +3056,7 @@
 "status": "DICE-ONLY",
 "group": "G3",
 "event": "gossip deed: whom it is about",
-"fp": "a,t)=>!!t,run:(a,t)=>{const x=pick(liveRivals(true).filter(y=>y!==a&&y"
+"done": "const x=npwPick(liveRivals(true).filter(y=>y!==a&&y!==t),y=>Math.max(0,hostility(a,y)-BAL.ag.why.min));"
 },
 {
 "f": "jworld.js",
@@ -3064,7 +3064,7 @@
 "status": "DICE-ONLY",
 "group": "G3",
 "event": "new-consort welcome/ambush target; \"có kẻ đồn\" Vương gia; scapegoat",
-"fp": "S||!N.length)continue;const t=pick(N);const k=npcPick(v,[[\"welcome\",mW"
+"done": "const t=npwPick(N,x=>1+(x.sung||0)+rkOf(x)*BAL.ag.why.g3.newRk);"
 },
 {
 "f": "jworld2.js",
@@ -3072,7 +3072,7 @@
 "status": "DICE-ONLY",
 "group": "G3",
 "event": "new-consort welcome/ambush target; \"có kẻ đồn\" Vương gia; scapegoat",
-"fp": ".sung||0)/b.sungDiv)]));if(v&&roll(b.gossip)){g=v;ap(v,{danh:b.meet.da"
+"done": "const tl=v&&npcTell(v,{from:L.filter(x=>x!==v),to:S});"
 },
 {
 "f": "jworld2.js",
@@ -3080,7 +3080,7 @@
 "status": "DICE-ONLY",
 "group": "G3",
 "event": "new-consort welcome/ambush target; \"có kẻ đồn\" Vương gia; scapegoat",
-"fp": "  let r=\"\";if(!n&&roll(b.scape)){const v=pick(liveR().filt"
+"done": "const o=npcWhy(\"g3scape\",{});const v=o&&o.tgt;"
 },
 {
 "f": "jnroadm.js",
@@ -3088,7 +3088,7 @@
 "status": "DICE-ONLY",
 "group": "G3",
 "event": "NPC road chapter counterpart",
-"fp": "!L.length)return null;const q=pick(L);N.c=q.id;N.cn=q.name;return q}"
+"done": "const q=npwPick(L,m=>1+Math.max(0,m.tinh||0))||L[0];"
 },
 {
 "f": "jnroadm.js",
@@ -3096,7 +3096,7 @@
 "status": "DICE-ONLY",
 "group": "G3",
 "event": "NPC road chapter counterpart",
-"fp": "!L.length)return null;const q=pick(L);N.c=q.name;return q}"
+"done": "const q=npwPick(L,k=>1+(k.tal||0)+(k.fond||0))||L[0];"
 },
 {
 "f": "jtruth.js",
@@ -3168,7 +3168,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "NPC frames; plants contraband; veil buy/craft/ask/gift; workshop piece",
-"fp": " const T=thDispl();if(T.p&&roll(T.p)){apply({th:-T.loss});P.push(`T"
+"done": "const tl=T.p?npcTell(S,{from:(lost?[lost]:[]).concat(liveRivals(true).filter(x=>x!==lost)),to:S.thO||{}}):null;"
 },
 {
 "f": "jmline.js",
@@ -3176,7 +3176,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "NPC frames; plants contraband; veil buy/craft/ask/gift; workshop piece",
-"fp": "  if(!roll(B.seeNotice))continue;s.seek.seen=1"
+"out": "success odds only (BAL, never 100 %): her master notices a maid really seeking the Emperor's eye (asOn path: the maid's own Quỳ dâng trà choice); the master's reaction = asSeekReact"
 },
 {
 "f": "jsteal.js",
@@ -3184,7 +3184,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "NPC frames; plants contraband; veil buy/craft/ask/gift; workshop piece",
-"fp": "1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[L[i],L[j]]=[L[j],L"
+"done": "const v=npwPick([...W0.keys()],x=>W0.get(x).u)||[...W0.keys()][0];"
 },
 {
 "f": "jsteal.js",
@@ -3192,7 +3192,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "NPC frames; plants contraband; veil buy/craft/ask/gift; workshop piece",
-"fp": "=\"function\"?haStealTry(v,t,w):Math.random()<w.p))continue;/* AG-ALL C:"
+"out": "her own choice via jagharm haStealTry (mindPick on her want); the bare odds remain only in haStealTry's agent-off path (LIVE-OFF)"
 },
 {
 "f": "jmline.js",

@@ -96,7 +96,9 @@ function npcLearn(a,b){if(!S||!S.nkn||!a||!b)return;const kb=b===S?"me":"r"+b.id
 function npcLearnAll(){if(S)S.nkn={}}
 function k61Week(){if(!S||!S.known)return;S.nkn=S.nkn||{};S.kRids=S.kRids||rivals.map(v=>v.id);
  for(const v of rivals)if(!S.kRids.includes(v.id)){S.kRids.push(v.id);if(v.alive&&!v.out)S.nkn["r"+v.id]={}}
- for(const kb in S.nkn){const b=kb==="me"?S:RV(+kb.slice(1));if(!b||(b!==S&&(!b.alive||b.out))){delete S.nkn[kb];continue}for(const a of liveRivals(true))if(a!==b&&!S.nkn[kb]["r"+a.id]&&roll(35))npcLearn(a,b)}}
+ for(const kb in S.nkn){const b=kb==="me"?S:RV(+kb.slice(1));if(!b||(b!==S&&(!b.alive||b.out))){delete S.nkn[kb];continue}/* NPC-PURPOSE G3: she learns who b is from a real source — she stood where b is (npcWit), or one who knows b tells her (npcTell: a grudge against b or a liking for her) */
+  const U=liveRivals(true).filter(a=>a!==b&&!S.nkn[kb]["r"+a.id]);if(!U.length)continue;for(const w of npcWit(npwAt(b,null),null,{pool:U}))npcLearn(w.p,b);
+  const K=liveRivals(true).filter(k=>k!==b&&npcKnows(k,b));for(const a of U)if(!S.nkn[kb]["r"+a.id]&&npcTell(b,{from:K.filter(k=>k!==a),to:a}))npcLearn(a,b)}}
 /* ---- a new life: who she knows from the first day ---- */
 function k61InitNew(){if(!S)return;S.known={me:3};k61SeedChiTon();S.nkn={me:{}};S.kRids=rivals.map(v=>v.id);const K=e=>{if(e)S.known[kOf61(e)]=3},o=S.origin&&S.origin.k;
  K(S.maid);(S.staff||[]).forEach(K);(S.kids||[]).forEach(K);

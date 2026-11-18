@@ -1220,3 +1220,14 @@ BAL.ag.bt={off:15,offMax:3,hon:5,honMax:3,mood:{gian:5,thuong:-5},fear:4,fearTim
    wit   witness rank: eye × eyes(p) + host × hostility toward the one watched
    tell  a witness carries a fact when her grudge against its subject ≥ host, or her liking for the one told ≥ friend */
 BAL.ag.why={on:1,min:20,near:.6,top:3,pow:1.5,cd:{_:4},wit:{eye:10,host:1},tell:{host:40,friend:30}};
+// G3 kinds (NPC-PURPOSE G3: witness / target picks + agent-layer dice; report dev/handover/reports/npc-purpose.md §G3)
+/* g3.soon   a planned deed's khắc: score 100 − soon × khắc from now (she does what she wants soon; npwPick keeps the near-best khắc)
+   g3.two    a 2nd goal of the day when its need ≥ two × the 1st one's
+   g3.newRk  a newcomer's weight per rank step (whom an old consort welcomes / ambushes: Sủng + rank)
+   g3.bmBac  she blackmails for silver when her bạc is under this (need = bmBac − bạc), else she would rather report (hostility)
+   g3.mood   weekly stay-home factor: base + her joy / div (sad → stays in, glad → goes out), held to [lo, hi]
+   g3.maid   a maid's chat: odds o she has heard where someone is (the player's foe first)
+   g3.call   a drop-in visit (jshelf): her ally need must reach min (the kind's cd = cd.g3call tuần)
+   g3.scape  a scapegoat (jworld2 án trộm): the accuser's hostility to her target must reach min */
+BAL.ag.why.g3={soon:12,two:.7,newRk:10,bmBac:60,mood:{b:1,div:120,lo:.4,hi:1.9},maid:{o:15},call:{min:25},scape:{min:30},lean:{c:2,k:"vuon"},ty:{preg:50}};
+Object.assign(BAL.ag.why.cd,{g3call:1,g3scape:8,g3acc:1});
