@@ -87,7 +87,7 @@ td_ke_7:[{k:"che",h:"Trong cung {me} đã có người bị mua, {me} không bi�
  o:[["Cho Tiểu Hà ở nhờ cung mình","người ta bàn ngươi chứa người của nhà tội thần"],["Bỏ bạc lo cho Tiểu Hà một chỗ ở khác","chỗ ấy không kín, kẻ kia tìm ra Tiểu Hà"]]}],
 td_ke_8:[{k:"thu",h:"Một người như hắn không chỉ hại nhà {me}. Có một phu nhân ngoài kinh cũng mang thù với hắn. {Me} muốn gửi một lá thư cho bà, mà không để ai trong cung biết hai nhà đã nói chuyện.",
  o:[["Bỏ bạc nhờ thái giám đưa thư ra phủ bà","thư bị đọc trộm, kẻ kia biết có người kết bè"],["Gửi thư theo người nhà mình","người nhà ngươi bị kéo vào mối thù của người khác"]]}],
-td_ke_9:[{k:"emp",h:"Cái bẫy đã giăng, chỉ cần Hoàng thượng có mặt đúng lúc kẻ đứng sau ra tay. {Me} không có cách giữ chân ngài. {call} xin ngài đến Ngự hoa viên vào chiều mai, đừng hỏi vì sao.",
+td_ke_9:[{k:"emp",h:"Cái bẫy đã giăng, chỉ cần Hoàng thượng có mặt đúng lúc kẻ đứng sau ra tay. {Me} không có cách giữ chân ngài. {call} xin ngài đến Ngự hoa viên vào đúng buổi bẫy sập, đừng hỏi vì sao.",
  o:[["Mời Hoàng thượng dạo vườn vào giờ ấy","Hoàng thượng thấy ngươi bày chuyện, ngài phật ý"],["Dâng lễ nhờ thái giám hầu giá dẫn đường","thái giám lỡ lời, kẻ kia biết có bẫy"]]}],
 td_ke_10:[{k:"hh",h:"Người làm chứng của {me} đã có, chỉ thiếu một lời cho phép vào cung khai. Trung cung nói được câu ấy. {call} thưa với Hoàng hậu giúp {me}, trước buổi triều hội đầu xuân.",
  o:[["Thỉnh an Hoàng hậu, xin cho người làm chứng vào","Hoàng hậu cho rằng ngươi kéo hậu cung vào việc triều"],["Dâng Khôn Ninh cung một lễ, xin cho người làm chứng","lễ bị trả về, kẻ kia nghe tin trước"]]}],
@@ -257,7 +257,7 @@ cnv_mat_6:[{k:"emp",h:"Hoàng thượng đã mấy lần gọi {me} giữa đư�
  o:[["Nhân lúc hầu giá, khéo nói đỡ cho nàng","Hoàng thượng phật ý vì ngươi xen vào chuyện của ngài"],["Dâng lễ nhờ thái giám hầu giá nói khéo","thái giám nói vụng, ngài càng để ý đến nàng"]]}],
 cnv_mat_7:[{k:"do",h:"Tên {me} đã vào sổ Kính sự phòng, mà {me} chưa từng xin. {Me} nghi {B} đã đưa tên lên. {call} giúp {me} biết là ai, và người ấy muốn gì.",
  o:[["Sai người hỏi ở Kính sự phòng","Kính sự phòng báo lên có người dò sổ"],["Tự hỏi chuyện các thái giám quen","ngươi bị đồn lo chuyện thị tẩm của kẻ hầu"]]}],
-cnv_mat_8:[{k:"che",h:"Kiệu sắp đến cửa, mà {me} không biết một phép nào của đêm hầu giá. Sai một bước là mang tội. {call} cho {me} một vị ma ma biết lễ, chỉ bảo {me} trước giờ ấy.",
+cnv_mat_8:[{k:"che",h:"Đêm hầu giá đầu tiên đã định, mà {me} không biết một phép nào. Sai một bước là mang tội. {call} cho {me} một vị ma ma biết lễ, chỉ bảo {me} trước đêm ấy.",
  o:[["Tự dạy nàng phép hầu giá","việc trong cung ngươi bỏ dở cả buổi"],["Bỏ bạc mời ma ma Kính sự phòng chỉ bảo","ma ma kể chuyện ra ngoài"]]}],
 cnv_mat_9:[{k:"hh",h:"Từ đêm được gọi hầu giá, các cung nữ cùng phòng không ai nói với {me} một câu, có người còn xé áo của {me}. {Me} vẫn là kẻ hầu, chỉ xin được ở yên. {call} thưa với Hoàng hậu giúp, cho {me} đổi sang phòng khác.",
  o:[["Thỉnh an Hoàng hậu, xin đổi phòng cho nàng","Hoàng hậu cho rằng ngươi bênh một cung nữ mới được gọi"],["Dâng lễ nhờ nữ quan Khôn Ninh cung đổi phòng","nữ quan đem chuyện ra làm trò cười"]]}],
@@ -520,7 +520,7 @@ add("cnv_mat_6",A("hh","Hoàng thượng gọi {me} giữa đường ba lần, n
  "Thỉnh an Hoàng hậu, xin đổi đường đi cho nàng","Hoàng hậu cho rằng ngươi lo cho một cung nữ quá mức","Dâng lễ nhờ nữ quan Trung cung đổi phiên","nữ quan đổi phiên lộ, người ta bàn thêm"));
 add("cnv_mat_7",A("che","Tên {me} đã vào sổ Kính sự phòng, từ đó có người ngày đêm đứng ngoài phòng {me}. {Call} cho {me} sang ngủ ở chỗ khác mấy đêm.",
  "Cho nàng sang ngủ ở hậu viện cung mình","người ta bàn ngươi giấu người đã vào sổ thị tẩm","Bỏ bạc lo cho nàng chỗ ngủ ở Châm công cục","chỗ ấy không kín, kẻ đứng ngoài tìm đến"));
-add("cnv_mat_8",A("y","Kiệu sắp đến, mà {me} sốt nhẹ từ chiều. Hầu giá mà sốt là tội, khai bệnh thì mất dịp. {Call} xin giúp {me} một thang thuốc hạ sốt.",
+add("cnv_mat_8",A("y","Đêm hầu giá đã định, mà mấy hôm nay {me} sốt nhẹ. Hầu giá mà sốt là tội, khai bệnh thì mất dịp. {Call} xin giúp {me} một thang thuốc hạ sốt.",
  "Mời thái y quen cắt thuốc hạ sốt cho nàng","Thái y viện ghi lại, Kính sự phòng biết chuyện","Tự pha một bát nước gừng mang sang","nước gừng làm nàng đỏ mặt, người ta bàn tán"));
 add("cnv_mat_9",A("do","Từ đêm được gọi hầu giá, phần áo mùa đông của {me} bị Nội vụ phủ cắt mất một nửa. {Me} nghi người của {B} đã nói với Nội vụ phủ, xin {call} dò xem ai đã ký phiếu cắt.",
  "Sai người tra sổ cấp đồ của Nội vụ phủ","người tra sổ cấp đồ bị quản sự mắng đuổi","Tự hỏi chuyện các thái giám phát đồ","ngươi hỏi lộ, Nội vụ phủ cắt thêm"));
