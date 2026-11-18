@@ -1368,9 +1368,8 @@ Test: dev/test/inv-grade.js checks on every panel tab that each act card's botto
   min(100dvh − 32 px, 720 px)), same header, same figure column: the seller full-body at the kit figure scale (KIT_FIG, never a private
   size), two-line name chip under the feet. `stage` takes a pseudo person `{__fig: src, __cap: name, __role}` (kitFigOf / kitName pass it
   through). NO size of its own: test = its box equals a plain 32.7 dialog with the same person ±1 px.
-- RIGHT column (where a person dialog has text + options): the seller's line + "Ta có N bạc", the kit tab row "Mua" | "Bán"
-  (kitTabRowHTML, `.pctabs.kcattabs`), then the TILE GRID (28.13e), the only thing that scrolls. Short landscape screens (height ≤ 500 px,
-  phone landscape): the seller's line is dropped and "Ta có N bạc" sits left of the tab row so a whole tile row shows.
+- RIGHT column (where a person dialog has text + options): the kit tab row "Mua" | "Bán" at the very top (no "Ta có N bạc": the money is on the main screen)
+  (kitTabRowHTML, `.pctabs.kcattabs`), then the TILE GRID (28.13e), the only thing that scrolls.
 - No buy panel under the grid (never repeat the item). Buying is ON the tile (28.13e). Tap a tile picture → the kit item card floats over
   the dialog (`.kshdet`: kitItem + name + kind · grade + kitRows "Tốn: Bạc −N mỗi món" (Bán: "Được: Bạc +N mỗi món") + kitItemRows
   Phẩm / Được / Mất / Ghi chú), closed by its ✕ (kit-x), a tap outside it or Esc.
@@ -1384,7 +1383,7 @@ Test: dev/test/inv-grade.js checks on every panel tab that each act card's botto
   Until they exist jinv's fallback (`kitShopSellable` / `kitShopPrice`) does the same from the bag: each handmade work its own tile
   (wk.n, wkSellVal, sold by wkSell with j83's odds) + items with a price (half price, j8 sellItem).
 Used by: Nội vụ phủ "Nhờ thái giám mua đồ" (`kitShopNvp`, seller `img/fig-eunuch-ndp-tray.webp` = Nội vụ phủ eunuch holding a tray, stock 5, carry 9).
-**Shop panel layout (review/shop-panel, owner 18/11):** outside option on the seller = «Để ta xem» (never a 2-item list); the panel keeps the seller figure LEFT; RIGHT = tabs «Mua» | «Bán» + a fixed 3-COLUMN `.kshg` (`.kshop[data-kshop] .kshg`, the grid scrolls down); the scene picture takes the smallest strip `KIT_SIZE.pic.NS` because the grid always scrolls (picture rule 18/11 16:10Z). Test: `dev/test/shop-panel.js`.
+**Shop panel layout (review/shop-panel, owner 18/11):** outside option on the seller = «Để ta xem» (never a 2-item list); the panel keeps the seller figure LEFT; RIGHT = tabs «Mua» | «Bán» + a fixed 3-COLUMN `.kshg` (`.kshop[data-kshop] .kshg`, the grid scrolls down); **review/shop-panel-r2 (owner 18/11 ~18:30Z): NO picture strip on top (`.kdpban` hidden in `.kshopd`), NO "Ta có N bạc"; a tile shows ONE gain row «Sắc +2 · Danh +1» (`kitShopEff`, never the slot/kind word đeo tay / cài tóc / dùng; one line, ellipsis); the Bán tile shows the price only «25 bạc» (no "bán", no "có N").** **review/shop-panel-r3 (owner 18/11 ~18:55Z): under «Mua» | «Bán» ONE more row of the kit tab row (`.pctabs.kcattabs.kshkinds`, `kitTabRowHTML`, the same part as the Tư trang chest tabs and kitSubTabs; scrolls sideways when narrow) = item KIND, the SAME groups as the chest (`KINV_CATS`: Trang sức / Y phục / Vải vóc / Thuốc men / Hương liệu / Lễ vật / Thư từ / Tác phẩm / Tạp vật; Trang sức split by wear slot `KEQ_TT`: Cài tóc, Đeo tay, Đeo eo, Túi thơm…). First tab «Tất cả» (as the chest), a kind filters the 3-col grid; only kinds present in the current list; no row when the list has one kind (pet shop). Each item carries `cat` (`kitShopCat(k, crafted)`); the pick is remembered per mode (`o.cat[mode]`), so Mua and Bán each keep their own. Same in Nội vụ phủ, Tư trang «Nhờ thái giám mua đồ» and the Bán tab.** Test: `dev/test/shop-panel.js` (kind row, filter, buy + sell).
 Next buying screens (Tư trang buy, gifts, peddler) must call kitShop, not dialog option cards.
 Test: `node dev/test/shop-fix.js <build url> <outdir> [WxH@dpr,…]` (box = plain person dialog, row alignment, buy ×2 → bag ×2, sell, item card,
 ✕). Shots before / after: dev/shots/shop-fix/ (755x1000, 1000x755, 1180x820, 844x390).
