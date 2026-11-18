@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"ac87fe73+","t":"2026-11-18T03:37Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…","b":"1ed519d861a8","h":[{"s":"c743265c+","t":"2026-11-18T03:18Z","c":"review life-preload r6: title prefetch chained on undefined (lWant returns its promise); gate cap really 25 s (no re-run after cap / Vào cu…"},{"s":"2aca2aac+","t":"2026-11-18T03:17Z","c":"review cloth-tea-r6: kclo-on hides the picture by clip-path, not visibility (visibility:hidden made kfxGeom hide the cloth layer too: her f…"},{"s":"2b1b0701","t":"2026-11-18T03:00Z","c":"review staff-cap-apply r6: site rebuilt on db24027f"},{"s":"64488e4f+","t":"2026-11-18T02:38Z","c":"cloth-xoc r6e: rebuild site"},{"s":"af71f94a+","t":"2026-11-18T02:17Z","c":"smudge r16: stage4 + avatar probe tests, options script score fix (look tier by score), FINAL mode"},{"s":"e1f60927+","t":"2026-11-18T02:25Z","c":"result-reason: every result card line says a short why (kitWhy, KIT 7); values left-aligned next to labels"},{"s":"29385ec6+","t":"2026-11-18T02:07Z","c":"greet-stranger: site rebuilt"},{"s":"3b69182e","t":"2026-11-18T01:50Z","c":"hoa-dien r3 onto main 3da5720a (makeup-lux live): hoa-dien (jhd.js + hooks) replayed on the new main, replacing the old stacked branch. Sha…"},{"s":"631a703e","t":"2026-11-18T01:37Z","c":"review staff-cap-fix r6: hire pick refused at the cap gives the silver back (+ staff-cap.js case); site rebuilt"},{"s":"4cdcffa9+","t":"2026-11-18T00:44Z","c":"review looks-s40: site rebuilt from merged sources (glow v8)"}]};
+window.CTM_BI={"s":"47568e9b+","t":"2026-11-18T03:41Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…","b":"82160f249abd","h":[{"s":"bd8547f2+","t":"2026-11-18T03:28Z","c":"men-forbidden r6: old saves drop officials / festival princes standing in the hậu cung on load (menLoadFix, same ONE rule)"},{"s":"c743265c+","t":"2026-11-18T03:18Z","c":"review life-preload r6: title prefetch chained on undefined (lWant returns its promise); gate cap really 25 s (no re-run after cap / Vào cu…"},{"s":"2aca2aac+","t":"2026-11-18T03:17Z","c":"review cloth-tea-r6: kclo-on hides the picture by clip-path, not visibility (visibility:hidden made kfxGeom hide the cloth layer too: her f…"},{"s":"2b1b0701","t":"2026-11-18T03:00Z","c":"review staff-cap-apply r6: site rebuilt on db24027f"},{"s":"64488e4f+","t":"2026-11-18T02:38Z","c":"cloth-xoc r6e: rebuild site"},{"s":"af71f94a+","t":"2026-11-18T02:17Z","c":"smudge r16: stage4 + avatar probe tests, options script score fix (look tier by score), FINAL mode"},{"s":"e1f60927+","t":"2026-11-18T02:25Z","c":"result-reason: every result card line says a short why (kitWhy, KIT 7); values left-aligned next to labels"},{"s":"29385ec6+","t":"2026-11-18T02:07Z","c":"greet-stranger: site rebuilt"},{"s":"3b69182e","t":"2026-11-18T01:50Z","c":"hoa-dien r3 onto main 3da5720a (makeup-lux live): hoa-dien (jhd.js + hooks) replayed on the new main, replacing the old stacked branch. Sha…"},{"s":"631a703e","t":"2026-11-18T01:37Z","c":"review staff-cap-fix r6: hire pick refused at the cap gives the silver back (+ staff-cap.js case); site rebuilt"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -31285,6 +31285,13 @@ BAL.ag.bt={off:15,offMax:3,hon:5,honMax:3,mood:{gian:5,thuong:-5},fear:4,fearTim
  /* sell base (review ag-all-2 r2 C6, OD 17/11 ~17:00Z (3)): only the greedy (tham) offer on their own; any other nết stays ≤ 0 with the low-lòng band and an angry mood
     (−15 + 10 + 5), so a non-greedy servant offers only once her master offended a chữ she holds (off, 17:20Z (2)) */
  sell:{base:{tham:60,lanh:-15,chuyen:-15,nhat:-15,trung:-20,_:-15},tr:{"Thanh liêm":-40},loy:[[25,10],[50,0],[70,-20],[101,-60]],v:{"Nghĩa":-10,"Trung":-10,"Tín":-10,"Liêm":-5}}};
+/* NPC-PURPOSE (jagwhy, owner OD 18/11 ~04:08Z: every NPC deed has a goal, no luck):
+   min   a reason weaker than this (0..100) does not make her act (quiet day)
+   near  goal-valid options kept for the pick: score ≥ near × the best;  top = at most this many;  pow = weight power between them
+   cd    tuần before the same person acts again in the same kind (_ = default; per kind: cd.<kind>)
+   wit   witness rank: eye × eyes(p) + host × hostility toward the one watched
+   tell  a witness carries a fact when her grudge against its subject ≥ host, or her liking for the one told ≥ friend */
+BAL.ag.why={on:1,min:20,near:.6,top:3,pow:1.5,cd:{_:4},wit:{eye:10,host:1},tell:{host:40,friend:30}};
 /* ================= jnwq: NO WORD GAMES, family C (owner 16/11 07:20Z + 07:25Z, s11, review/nw-quiz) =================
    The four vấn đáp / quiz kinds of the promotion exam (jexam EXK: le, tc, xa, thq) are now SKILL games of the same subject, winnable by what is SHOWN
    (same easy rules as mg-easy: Gợi ý button, first-time demo card, tier by level, wrong tries bounce back, quiet auto-hint when she stalls):
@@ -67348,6 +67355,58 @@ agReg("consort","par3qin",(v,N,need)=>{const O=[];if(!p3On()||v===S||v.out||v.co
  const x=p3O(v,"qin",qinCard(v),N,X.g,"art",()=>"vuon");if(x)O.push(x)}catch(e){agdErr("par3qin",e)}return O});
 agRunReg("cx3:qin",v=>p3Run(v,qinCard(v),"qin"));
 Object.assign(window,{helpAsk,maidTalkDo,maidSpyT,qinCard});
+/* ================= jagwhy: NPC-PURPOSE — every NPC event comes from a PERSON with a GOAL (ONE shared helper) =================
+   Owner (verbatim, OD 18/11 ~04:08Z): "Ủa sao tôi nói là bất kỳ điều gì NPC làm ở trong game đều phải có mục đích. Nó phải phù hợp với cái mục tiêu
+   của cuộc đời nó. Không có gì gọi là hên xui ở đây hết mà." (restates OD:L1386 NPC = agent playing the game, OD:L35 motive gate, OD:L188 men's
+   intrusions plan-driven). Report + row table: dev/handover/reports/npc-purpose.md (handover branch).
+   RULE: WHETHER an NPC event fires, WHO does it, at WHOM and WHERE come from that person's own goal (needs, grudges, ties, plans, what she knows).
+   Dice may only (1) weight between options that are ALL goal-valid (C-AG #9 18/11: "a mistake, never a random act") and (2) roll the SUCCESS of
+   the deed with its BAL odds (unchanged, in the caller). No reason → nothing happens (a quiet day is fine, OD 17/11 ~13:15Z).
+   API (every caller uses these; no per-event helper, no per-event number):
+   - npwReg(kind, def): register an event kind. def = { who(ctx) → [people who could act], why(p, ctx) → {s, t?, r, k?} | null,
+       cd?: key of BAL.ag.why.cd (default: kind), grp?: label }. s = how strongly her goal pushes her (0..100, from her real state),
+       t = her target (a person), r = the reason (player-visible, Vietnamese per VANPHONG), k = place key.
+   - npcWhy(kind, ctx) → {kind, who, tgt, why, place, s} | null. Asks every candidate why(); keeps reasons with s ≥ BAL.ag.why.min that are off
+       cooldown; picks among the goal-valid top options (npwPick); stamps the cooldown (S.npw, lazy: old saves load).
+   - npcWhyAll(kind, ctx) → every actor with a reason this time (for events where several people may act), each once, cooldowns stamped.
+   - npwPick(L, score) → one of L: only options within BAL.ag.why.near × the best score, at most BAL.ag.why.top of them, weighted by score^pow.
+   - npcWit(place, kh, o) → [{p, s}] people REALLY at the place (day record row at khắc kh, else whereOf), best watcher first:
+       eyes × wit.eye + (o.vs ? hostility(p, o.vs) × wit.host : 0); o.not = people to leave out.
+   - npcTell(about, o) → {who, to, why} | null: who carries a fact about `about` to `o.to` (default: the player) — a witness at o.place/o.kh, or
+       o.from (people who already know it), choosing to tell by grudge against `about` (tell.host) or liking for the one told (tell.friend).
+   - npwNm(p) → the name the player reads ("ngươi" / "<rank> <name>").
+   Numbers: BAL.ag.why (jbal2). Off: BAL.ag.why.on = 0 → npcWhy returns null (callers keep their old path only while their row is unconverted).
+   Counters: NPW.stat (fire / quiet / cd per kind). Scan test: dev/test/npc-purpose-scan.js (rows: dev/test/npc-purpose-rows.json).
+   ===================================================================================================================================== */
+const NPW={reg:{},stat:{}};
+function npwB(){return (typeof BAL!=="undefined"&&BAL.ag&&BAL.ag.why)||null}
+function npwOn(){try{const B=npwB();return !!(B&&B.on&&typeof S!=="undefined"&&S&&!S.dead)}catch(e){return false}}
+function npwSt(kind,k){const s=NPW.stat[kind]||(NPW.stat[kind]={fire:0,quiet:0,cd:0});s[k]=(s[k]||0)+1}
+function npwReg(kind,def){if(!kind||!def||typeof def.who!=="function"||typeof def.why!=="function")throw new Error("npwReg "+kind);NPW.reg[kind]=def;return def}
+function npwId(p){try{return p===S?"me":(typeof ledgerId==="function"&&ledgerId(p))||p.id||p.sid||p.name}catch(e){return p&&(p.id||p.name)}}
+function npwCdN(kind){const B=npwB(),d=NPW.reg[kind];const c=B.cd||{};const k=(d&&d.cd)||kind;return c[k]!=null?c[k]:(c._||0)}
+function npwCdOk(kind,p){if(!S.npw)return true;const w=S.npw[npwId(p)+"|"+kind];return w==null||wk()>=w}
+function npwStamp(kind,p){S.npw=S.npw||{};S.npw[npwId(p)+"|"+kind]=wk()+npwCdN(kind)}
+function npwPick(L,score){const B=npwB();const R=(L||[]).map(x=>[x,+score(x)||0]).filter(r=>r[1]>0).sort((a,b)=>b[1]-a[1]);if(!R.length)return null;
+ const top=R.filter(r=>r[1]>=R[0][1]*B.near).slice(0,Math.max(1,B.top));if(top.length===1)return top[0][0];
+ const w=top.map(r=>Math.pow(r[1],B.pow));let x=Math.random()*w.reduce((a,b)=>a+b,0);for(let i=0;i<top.length;i++){x-=w[i];if(x<=0)return top[i][0]}return top[top.length-1][0]}
+function npwAsk(kind,ctx){const d=NPW.reg[kind];if(!d)throw new Error("npcWhy: unknown kind "+kind);const B=npwB();const O=[];let cd=0;
+ for(const p of (d.who(ctx||{})||[])){if(!p)continue;let r=null;try{r=d.why(p,ctx||{})}catch(e){console.error("npcWhy "+kind,e);r=null}
+  if(!r||!(r.s>=B.min))continue;if(!npwCdOk(kind,p)){cd++;continue}O.push({kind,who:p,tgt:r.t||null,why:r.r||"",place:r.k||null,s:r.s})}
+ if(cd)npwSt(kind,"cd");return O}
+function npcWhy(kind,ctx){if(!npwOn())return null;const O=npwAsk(kind,ctx);const o=npwPick(O,x=>x.s);if(!o){npwSt(kind,"quiet");return null}
+ npwStamp(kind,o.who);npwSt(kind,"fire");return o}
+function npcWhyAll(kind,ctx){if(!npwOn())return[];const O=npwAsk(kind,ctx);if(!O.length){npwSt(kind,"quiet");return[]}
+ for(const o of O){npwStamp(kind,o.who);npwSt(kind,"fire")}return O}
+function npwAt(p,kh){try{if(kh!=null&&typeof agRec==="function"&&agRec()&&typeof agAt==="function")return agAt(p,kh)}catch(e){}return whereOf(p)}
+function npwPeople(){const L=liveRivals(true).slice();try{if(S.emp&&!S.thDead)L.push(S.emp)}catch(e){}return L}
+function npcWit(place,kh,o){o=o||{};const B=npwB().wit;const not=new Set(o.not||[]);const L=(o.pool||npwPeople().concat([S])).filter(p=>p&&!not.has(p)&&npwAt(p,kh)===place);
+ return L.map(p=>({p,s:(typeof eyes==="function"?eyes(p):0)*B.eye+(o.vs&&p!==o.vs&&typeof hostility==="function"?Math.max(0,hostility(p,o.vs))*B.host:0)})).sort((a,b)=>b.s-a.s)}
+function npcTell(about,o){o=o||{};const B=npwB().tell;const to=o.to||S;const from=o.from||(o.place?npcWit(o.place,o.kh,{not:[about,to]}).map(x=>x.p):[]);
+ const O=[];for(const w of from){if(!w||w===about||w===to)continue;const g=about&&typeof hostility==="function"?hostility(w,about):0;const f=typeof aff==="function"?aff(w,to):0;
+  if(g>=B.host)O.push({who:w,to,s:g,why:"oán "+npwNm(about)});else if(f>=B.friend)O.push({who:w,to,s:f,why:"thân với "+npwNm(to)})}
+ const x=npwPick(O,y=>y.s);return x?{who:x.who,to:x.to,why:x.why}:null}
+function npwNm(p){if(!p)return"";if(p===S)return"ngươi";try{if(S.emp&&p===S.emp)return"Hoàng thượng"}catch(e){}try{return rkName(p)+" "+p.name}catch(e){return p.name||""}}
 /* jmgcal — OWNER-ONLY MINIGAME CALIBRATION (AG-ALL-2d2; owner OD 17/11 ~16:20Z (f) + ~16:40Z option 1, verbatim key words:
    "cần cho tôi một cái bài test để tôi chơi thử ... mỗi một cái mini game ... 3 vòng hoặc là 5 vòng ... mỗi một vòng là mỗi cái khó hơn ... chỉ có cái tài
    khoản của tôi là mới test kiểu này thôi ... bất kỳ người nào chơi thì người đó cũng sẽ đi chơi theo cái con số của tôi" / "chỉ có tôi test và cái số
@@ -70907,7 +70966,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="1ed519d861a8";window.CTM_BUILD=BUILD;
+const BUILD="82160f249abd";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

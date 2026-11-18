@@ -1213,3 +1213,10 @@ BAL.ag.bt={off:15,offMax:3,hon:5,honMax:3,mood:{gian:5,thuong:-5},fear:4,fearTim
  /* sell base (review ag-all-2 r2 C6, OD 17/11 ~17:00Z (3)): only the greedy (tham) offer on their own; any other nết stays ≤ 0 with the low-lòng band and an angry mood
     (−15 + 10 + 5), so a non-greedy servant offers only once her master offended a chữ she holds (off, 17:20Z (2)) */
  sell:{base:{tham:60,lanh:-15,chuyen:-15,nhat:-15,trung:-20,_:-15},tr:{"Thanh liêm":-40},loy:[[25,10],[50,0],[70,-20],[101,-60]],v:{"Nghĩa":-10,"Trung":-10,"Tín":-10,"Liêm":-5}}};
+/* NPC-PURPOSE (jagwhy, owner OD 18/11 ~04:08Z: every NPC deed has a goal, no luck):
+   min   a reason weaker than this (0..100) does not make her act (quiet day)
+   near  goal-valid options kept for the pick: score ≥ near × the best;  top = at most this many;  pow = weight power between them
+   cd    tuần before the same person acts again in the same kind (_ = default; per kind: cd.<kind>)
+   wit   witness rank: eye × eyes(p) + host × hostility toward the one watched
+   tell  a witness carries a fact when her grudge against its subject ≥ host, or her liking for the one told ≥ friend */
+BAL.ag.why={on:1,min:20,near:.6,top:3,pow:1.5,cd:{_:4},wit:{eye:10,host:1},tell:{host:40,friend:30}};
