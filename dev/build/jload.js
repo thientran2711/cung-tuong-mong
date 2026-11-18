@@ -285,7 +285,9 @@ let lReq=0;
 function lArm(){try{if(window.__bot||(window.COOPW&&COOPW.ctx))return;if(typeof S==="undefined"||!S||typeof S!=="object")return;
  if(!LIFE.seen.has(S)){LIFE.seen.add(S);
   /* review/life-preload-fu (B): in co-op every week merge (fromCanon → deser) builds a NEW S for the SAME life; the cover is only for a REAL life change = this seat's life counter (COOPW.life) or her name changed since the last gate. Same life: no cover, no full DOM scan — the pictures are fetched quietly (set below) and §59.1 covers any that is late. Both seats run the same rule on their own S. */
-  const cw=window.COOPW;if(cw&&cw.on){const k=(cw.life||0)+"|"+(S.name||"");if(LIFE.ck===k){try{kitLifeSet().forEach((raw,u)=>lWant(u,raw))}catch(e){}return}LIFE.ck=k}
+  const cw=window.COOPW;if(cw&&cw.on){const k=(cw.life||0)+"|"+(S.name||"");if(LIFE.ck===k){try{kitLifeSet().forEach((raw,u)=>lWant(u,raw))}catch(e){}
+   /* r2 (review r1 FAIL: 2/10 co-op runs left a queued dialog hidden, week never ended): the old per-merge gate ended with one render(), and the co-op render wrap (jcoopworld reshowQ) re-shows a queued dialog the merge rebuild dropped. Keep exactly that ONE post-merge redraw, without the cover, only when a dialog is queued. */
+   setTimeout(()=>{try{if(cw.on&&typeof Q!=="undefined"&&Q&&Q.length&&typeof render==="function")render()}catch(e){}},150);return}LIFE.ck=k}
   lifeGate("life");return}
  const now=Date.now();if(now-lReq<2500)return;lReq=now;/* off the render path (perf): when the page is idle */
  (window.requestIdleCallback||(f=>setTimeout(f,200)))(()=>{try{kitLifeSet().forEach((raw,u)=>lWant(u,raw))}catch(e){}},{timeout:3000})}catch(e){}}
