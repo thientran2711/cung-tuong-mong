@@ -69,7 +69,7 @@ npwReg("omen",{grp:"consort",who:()=>liveRivals(true),why(a,c){return npw1Best(a
              (aff ≥ ap.ally, no faction), bring a gift when fond (aff ≥ ap.gift), else chat · apTaunt a consort with a motive (provoke)
    apSorry   a consort who wronged her and is not scheming (oán ≥ ap.sorry, not Xảo quyệt, not hating her) · empTea the Emperor (Sủng ≥ tea.minSung)
    thCall    the Thái hậu when she favours her (Thái hậu ≥ ap.th) · svAsk a loyal servant (lòng ≥ loy.mid) · maidWarn her loyal maid, about the
-             most dangerous consort · manPoem a man whose tình ý ≥ ap.poem, who has met her, or of romantic nature (MEN_FANCY) · svDefect a maid unhappy with her mistress (lòng < loy.bad)
+             most dangerous consort · manPoem a man of the palace (pull: tình ý, met her, romantic nature) · svDefect a maid unhappy with her mistress (lòng < loy.bad)
    repay     a debtor repays when she has the silver (bac ≥ ap.repay) · svSell a servant with a grudge sells news to the consort most set against her
    svCause   a servant's own nature shows (SCAUSE by nết), one servant a tuần, each every cd.svCause tuần */
 const NPW1_TH={id:"th",name:"Thái hậu"};
@@ -82,7 +82,8 @@ npwReg("empTea",{grp:"emp",who:()=>{const VT=BAL.visit.tea;return S.emp&&S.sung>
 npwReg("thCall",{grp:"th",who:()=>!S.thDead&&S.th>=npw1B("ap").th?[NPW1_TH]:[],why(){return {s:npwB().min+S.th/4,t:S,r:"muốn có người hầu chuyện"}}});
 npwReg("svAsk",{grp:"srv",who:()=>(S.staff||[]).filter(s=>(s.loyal||0)>=BAL.loy.mid),why(s){return {s:npwB().min+((s.loyal||0)-BAL.loy.mid)/2,t:S,r:"nhà có việc ngặt"}}});
 npwReg("maidWarn",{grp:"srv",who:()=>S.maid&&S.maid.loyal>=BAL.loy.firm?[S.maid]:[],why(){let b=null,d=-1;for(const v of liveRivals(true)){const x=danger(v,S);if(bandOf(x)>=2&&x>d){d=x;b=v}}return b?{s:npwB().min+d,t:b,r:"thấy người bên ấy dò hỏi"}:null}});
-npwReg("manPoem",{grp:"man",shared:true,who:()=>(S.men||[]).filter(m=>m.alive&&((m.tinh||0)>=npw1B("ap").poem||m.seen!=null||MEN_FANCY.some(t=>hasT(m,t)))&&!(typeof menBanned==="function"&&menBanned(m))),why(m){/* tình ý for her, a man who has met her (m.seen), or a romantic nature (MEN_FANCY); shared cd: one stray poem at a time in the palace */return {s:npwB().min+(m.tinh||0),t:S,r:(m.tinh||0)>=npw1B("ap").poem?"đem lòng thương ngươi":"tính đa tình, mến ngươi"}}});
+npwReg("manPoem",{grp:"man",shared:true,who:()=>(S.men||[]).filter(m=>m.alive&&!(typeof menBanned==="function"&&menBanned(m))),why(m){/* every man of the hậu cung sees the consorts at rites and feasts; the pull: his tình ý for her, + met her (m.seen), + a romantic nature (MEN_FANCY); shared cd: one stray poem at a time in the palace */
+ const A=npw1B("ap"),t=m.tinh||0,f=MEN_FANCY.some(x=>hasT(m,x));return {s:npwB().min+t+(m.seen!=null?A.poemSeen:0)+(f?A.poemFancy:0),t:S,r:t>=A.poem?"đem lòng thương ngươi":f?"tính đa tình, mến ngươi":"từng trông thấy ngươi, sinh lòng mến mộ"}}});
 npwReg("svDefect",{grp:"srv",who:()=>{const L=[];for(const v of liveRivals(true))for(const s of (v.staff||[]))if(s.role==="maid"&&s.loyal<BAL.loy.bad&&s.spyFor!=="me")L.push(s);return L},
  why(s){const v=liveRivals(true).find(x=>(x.staff||[]).includes(s));return v?{s:npwB().min+(BAL.loy.bad-s.loyal),t:v,r:"bất mãn với chủ"}:null}});
 npwReg("repay",{grp:"consort",who:c=>c.v?[c.v]:[],why(v){return (v.bac||0)>=npw1B("ap").repay&&aff(v,S)>=0?{s:npwB().min,t:S,r:"giữ chữ tín"}:null}});

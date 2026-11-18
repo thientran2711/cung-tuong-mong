@@ -1235,9 +1235,9 @@ BAL.ag.why.men={ty:{ill:60,preg:30,suc:40,b:1},tell:{own:100,like:60,_:20}};
 Object.assign(BAL.ag.why,{dil:{gap:4,world:25,arsonBar:45,omenBar:40,coldFriend:20,allyAff:20,greed:30,greedT:["Tham lam","Tham tiền","Ham lợi"],
  emp:{want:8,k:6},cold:{base:15,aff:.5,duc:.1},love:{base:30,eye:4}}});
 /* npc-purpose G1 part 3 (j24 visitors, jagwhy1): fr / ally / gift = her liking; poor = bac under which a friend borrows; sorry = oán to apologise;
-   th = Thái hậu regard to call her; poem = a man's tình ý (or he has met her; cd.manPoem is palace-wide: the old 40 % × one card type in ~5 ≈ a poem every half year); repay = silver a debtor needs to repay; max = visitors a tuần (old 1-3, mean 1.75) */
-Object.assign(BAL.ag.why,{ap:{max:2,fr:10,ally:40,gift:25,poor:40,sorry:20,th:10,poem:10,repay:40}});
-Object.assign(BAL.ag.why.cd,{apFriend:4,apTaunt:4,apSorry:8,empTea:3,thCall:4,svAsk:6,maidWarn:6,manPoem:26,svDefect:8,repay:2,svSell:12,svCause:8});
+   th = Thái hậu regard to call her; poem = a man's tình ý for the 'đem lòng thương' line (+ poemSeen if he met her, + poemFancy for a romantic nature; any man of the palace may write; cd.manPoem is palace-wide: the old 40 % × one card type in ~5 ≈ a poem every 9 months in the bot); repay = silver a debtor needs to repay; max = visitors a tuần (old 1-3, mean 1.75) */
+Object.assign(BAL.ag.why,{ap:{max:2,fr:10,ally:40,gift:25,poor:40,sorry:20,th:10,poem:10,poemSeen:10,poemFancy:10,repay:40}});
+Object.assign(BAL.ag.why.cd,{apFriend:4,apTaunt:4,apSorry:8,empTea:3,thCall:4,svAsk:6,maidWarn:6,manPoem:36,svDefect:8,repay:2,svSell:12,svCause:8});
 Object.assign(BAL.ag.why.cd,{meHarm:6,thdTaunt:30,meAlly:24,hhCane:8,hhMe:12,hhGreed:24,empAsk:24,coldAsk:12,loveFound:12,arson:24,rvHarm:6,rvFeud:6,omen:36});
 /* npc-purpose G1 part 4 (j68 life events, j72 favours; jagwhy1). e68: gap = tuần between two j68 events (≈ the old 25 %/tuần), visitGap = tuần between two
    j68 visits that fill in when no stock visitor has a reason (old 15 % swap), greed = weight of a greedy servant as the thief. fav: aff = liking to ask / be asked,
@@ -1257,10 +1257,10 @@ Object.assign(BAL.ag.why.cd,{wdRemark:4,wdSpy:4,wdPawn:4});
    × his mood weight (fallback only), want / denB / k = Sủng under which she floats a lantern for favour (s = denB + (want − Sủng) × k: wanting favour is her reason; the Emperor sees it only at Sủng ≥ 20), duc / pray = Đức and push of a devout one. bul: pay = silver
    under which a bully takes a thing, wantT = coveting nết, host = resentment to complain, wait = tuần a planned harm waits [plain, Kín đáo], fire = tai mắt × eye +
    Đức × duc to heed. j8: mercyK / kid = the Emperor's mercy per Sủng / per child, birthBar = hostility to plant a midwife, eye = tai mắt weight to check gifts,
-   illTam / pregTam = Tâm cơ to feign, want / fakeB / k = Sủng under which she feigns (s = fakeB + (want − Sủng) × k; cd fakeIll / fakePreg = the old 3 % / 2 % a month per scheming consort), pregRk / pregUp = rank from which a false pregnancy guards her place, raidK = push per forbidden piece */
+   sellP = monthly % a buyer reaches a disloyal maid (old roll 15; cd.maidSell 3 after a sale), illTam / pregTam = Tâm cơ to feign, want / fakeB / k = Sủng under which she feigns (s = fakeB + (want − Sủng) × k; cd fakeIll / fakePreg = the old 3 % / 2 % a month per scheming consort), pregRk / pregUp = rank from which a false pregnancy guards her place, raidK = push per forbidden piece */
 Object.assign(BAL.ag.why,{ts:{guardK:4,moodK:1.2,want:60,denB:20,k:1,duc:60,pray:22},bul:{pay:15,wantT:["Kiêu ngạo","Tham lam","Xa hoa"],host:30,wait:[1,2],fire:{eye:6,duc:.3}},
- j8:{mercyK:.6,kid:12,birthBar:50,eye:6,illTam:45,pregTam:50,want:30,fakeB:20,k:1.5,pregRk:2,pregUp:10,raidK:15}});
-Object.assign(BAL.ag.why.cd,{empSummon:6,tsDen:4,maidSell:24,giftCheck:6,fakeIll:96,fakePreg:150,raid:12});
+ j8:{mercyK:.6,kid:12,birthBar:50,eye:6,illTam:45,pregTam:50,sellP:15,want:30,fakeB:20,k:1.5,pregRk:2,pregUp:10,raidK:15}});
+Object.assign(BAL.ag.why.cd,{empSummon:6,tsDen:4,maidSell:3,giftCheck:6,fakeIll:96,fakePreg:150,raid:12});
 /* npc-purpose G1 part 7 (j22 affairs; jagwhy1). j22: host = grudge to check the Kính sự phòng book (old 10 %/tháng), ksp = push when the eunuchs talk (old +15),
    eye = push per tai mắt point (a foe learning of a tryst, her own tai mắt reporting; old 4 % / 10 %) */
 Object.assign(BAL.ag.why,{j22:{host:40,ksp:15,eye:6}});

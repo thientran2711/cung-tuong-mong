@@ -389,7 +389,7 @@
 "group": "G1",
 "event": "death→lãnh cung; midwife plant; maid bought by rival",
 "fp": "(!p.maid)p.maid=p===S?newMaid(pick(MAIDS),45):{name:pick(MAIDS),loyal:",
-"done": "!npcWhy(\"maidSell\",{m,p})"
+"done": "!npcWhy(\"maidSell\",{m,p}"
 },
 {
 "f": "j9.js",
@@ -983,7 +983,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "weekly new plot (NPC→her, NPC→NPC)",
-"done": "const k=(npwPick(O,x=>x[1])||[])[0]"
+"done": "const k=(npwPick(O,x=>x[1]"
 },
 {
 "f": "j70.js",
