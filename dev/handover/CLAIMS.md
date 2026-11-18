@@ -1002,5 +1002,5 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | OWNER UI BUG opt-card-short (option cards too tall: stretched picture, long notes; options A/B/C; sonnet; brief briefs/opt-card-short.md) | review/opt-card-short | MAIN s42 | session_01UV1Szk6j15PHjAL8gMSR9z | RUNNING | 18/11 01:58Z |
 | REVIEW men-forbidden 13286b4 (opus BIG; brief briefs/review-men-forbidden.md) | review/men-forbidden | MAIN s42 | session_01UV1Szh3jq9brqAHDsVQitM | RUNNING | 18/11 02:01Z |
 | OWNER UI BUG book-figsize (one body height on every book figure; sonnet; brief briefs/book-figsize.md) | review/book-figsize | MAIN s42 | session_01UV1Szh... (worker, this session) | RUNNING | 18/11 02:03Z |
-| OWNER UI BUG result-reason (result card lines need short WHY; whole group; sonnet; brief briefs/result-reason.md) | review/result-reason | MAIN s42 | (opening) | RUNNING | 18/11 02:07Z |
+| OWNER UI BUG result-reason (result card lines need short WHY; whole group; sonnet; brief briefs/result-reason.md) | review/result-reason | MAIN s42 | session_01UV1SzirzUecQTMVipMrcQ1 | RUNNING | 18/11 02:07Z |
 | CAL PREVIEW (sonnet; s42 order 02:04Z): ag-all-2-land on Cloudflare Pages, ?hieuchuan=1 | (deploy only) | C-AG | session_01UV1SzgwDRVVjeacdPPtR47 | RUNNING | 18/11 02:05Z |
