@@ -42,7 +42,7 @@ function nhSnap(N,p,nm){try{const w=N&&N.hpk;if(!w)return null;const L=nhPt();le
    of the j72 bond B gets (BAL.nroad.relB). */
 function nhTip(B,v){try{const o=B&&B.o,NB=o&&o.nr;if(!B||o===v)return"";
  if(!NB||NB.x||!NB.n){const ow=nhB().fin.owe||0;if(!ow||!o)return"";q72DebtAdd(B,ow);return ` ${B.n} nợ ngươi ${ow>1?ow+" ân":"một ân"} vì tin này.`}
- nhHp(NB).push([NB.n,2,S.turn]);NB.hpk=q72Key(B);NB.hpa=[B.k,B.id];if(!NB.hb)NB.hb=nrB().help;nhSnap(NB,o,B.n);
+ nhHp(NB).push([NB.n,2,S.turn]);NB.hpk=q72Key(B);NB.hpa=[B.k,B.id];if(!(NB.hb>0))NB.hb=(NB.hb||0)+nrB().help;nhSnap(NB,o,B.n);
  return ` ${B.n} có tin ngươi mách, chương «${nrChT(o)}» của ${nrHe(o)} thêm phần chắc.`}catch(e){console.error(e);return""}}
 /* ---------- (b) + (c) chapter end ---------- */
 const NHQ=[];/* lines of this month, logged after the palace news (nrMonth) */
