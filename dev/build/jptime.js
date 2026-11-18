@@ -152,3 +152,70 @@ ptReg("npc",a=>{const k=a.a.npc;const f0=PT.npc0&&PT.npc0[k];const v=RV(a.a.v);i
  PT.landing=1;let r="";try{r=f0(v,t,null)||""}catch(e){ptErr("npc "+k,e)}finally{PT.landing=0}
  try{if(r){const me=t===S;newsAdd(v,k,r,me);if(me)log(`${r}.`)}}catch(e){}return null});
 try{ptNpcWire()}catch(e){ptErr("npcWire",e)}
+/* ---- 6. deeds on a consort done by a SENT servant (j8 doAct: not together → "phải sai người đi", j9 actCtx / bestSent) ---- */
+function ptHarmSent(v,k){try{return ptOn()&&!!v&&v!==S&&!!ACT[k]&&k!=="plant"&&k!=="gift"&&!together(S,v)&&!ACT_NOSEND.includes(k)}catch(e){return false}}
+function harmK(v,k){return ptHarmSent(v,k)&&bestSent(S)?ptRow("harm").o:BAL.time.cost.harm}
+function ptHarmX(v,k){if(!ptHarmSent(v,k))return"";const s=bestSent(S);return s?` · ${ptWaitTxt("harm")} (sai ${s.name})`:` · ${ptNoRunner()}`}
+function ptHarmSend(v,k,fz){if(!ptHarmSent(v,k))return false;const s=bestSent(S);if(!s)return false;
+ ptSend({who:ptPid(s),nm:s.name,kind:"harm",place:palaceOf(v),tgt:"v"+v.id,a:{v:v.id,k,sid:s.sid},fz:null,lbl:`đi ${String(ACT[k].n||"làm việc").toLowerCase()} ${v.name}`});
+ const a=ptZ()[ptZ().length-1];if(a)a.a.fz=fz;return true}
+ptReg("harm",a=>{const v=RV(a.a.v),k=a.a.k;const s=ptPerson(a.a);const nm=s?s.name:"Người được sai";
+ if(!v||!v.alive||v.out||!ACT[k]||!ACT[k].ok(S,v)){log(`${nm} trở về: việc «${ACT[k]?ACT[k].n:k}» không làm được nữa.`);return{ok:null}}
+ const r=fzRun(a.a.fz,k,()=>runAct(S,v,k));if(r)log(r);return{t:`${nm} ${String(ACT[k].n).toLowerCase()} ${v.name} trở về`}});
+/* ---- 7. Sai người lẻn vào cung … cài đồ (PEND.plantpick, not "tại cung nàng"): the servant carries the item (it leaves her chest), lands at due ---- */
+(function(){try{const b0=PEND.plantpick;if(!b0)return;PEND.plantpick=function(p){const d=b0.apply(this,arguments);try{if(!d||!ptOn()||p.here)return d;const v=RV(p.v);const s=bestSent(S);
+  if(!s){d.o=(d.o||[]).map(o=>o.ik!=null?Object.assign({},o,{lock:true,x:ptNoRunner()}):o);return d}
+  d.t=(d.t||"")+`<p class="past">${s.name} đi · tốn ${ptRow("plant").o} khắc, ${ptWaitTxt("plant")}</p>`;
+  d.o=(d.o||[]).map(o=>o.ik==null?o:Object.assign({},o,{go:()=>{const fz=actOdds(S,v,"plant");const e=S.inv[o.ik];if(!e)return;S.inv.splice(o.ik,1);
+   ptSend({who:ptPid(s),nm:s.name,kind:"plant",place:palaceOf(v),tgt:"v"+v.id,a:{v:v.id,sid:s.sid,item:e,fz},lbl:`lẻn vào cung ${v.name}`});spend(ptRow("plant").o)}}))}catch(e){ptErr("plantpick",e)}return d}}catch(e){ptErr("plant wire",e)}})();
+ptReg("plant",a=>{const v=RV(a.a.v);const s=ptPerson(a.a);const nm=s?s.name:"Người được sai";const e=a.a.item;if(e)S.inv.push(e);/* the item is real (law 6c): back in her chest, then used */
+ if(!e)return{ok:null};if(!v||!v.alive||v.out){log(`${nm} trở về, mang ${iname(e)} về lại rương.`);return{ok:null}}
+ const i=S.inv.indexOf(e);let r="";fzRun(a.a.fz,"plant",()=>{r=runAct(S,v,"plant",i)});if(r)log(r);return{t:`${nm} lẻn vào cung ${v.name} trở về`}});
+/* ---- 8. Tặng quà by hand (PEND.giftpick from her card, not together): a servant carries the gift ---- */
+(function(){try{const b0=PEND.giftpick;if(!b0)return;PEND.giftpick=function(p){const d=b0.apply(this,arguments);try{if(!d||!ptOn()||p.v==null)return d;const v=RV(p.v);if(!v||together(S,v))return d;const s=bestSent(S);
+  if(!s){d.o=(d.o||[]).map(o=>o.ik!=null?Object.assign({},o,{lock:true,x:ptNoRunner()}):o);return d}
+  d.t=(d.t||"")+`<p class="past">${s.name} mang quà đi · tốn ${ptRow("gift").o} khắc, ${ptWaitTxt("gift")}</p>`;
+  d.o=(d.o||[]).map(o=>o.ik==null?o:Object.assign({},o,{go:()=>{const e=S.inv[o.ik];if(!e)return;S.inv.splice(o.ik,1);
+   ptSend({who:ptPid(s),nm:s.name,kind:"gift",place:palaceOf(v),tgt:"v"+v.id,a:{v:v.id,sid:s.sid,item:e},lbl:`mang quà sang cung ${v.name}`});spend(ptRow("gift").o)}}))}catch(e){ptErr("giftpick",e)}return d}}catch(e){ptErr("gift wire",e)}})();
+ptReg("gift",a=>{const v=RV(a.a.v);const s=ptPerson(a.a);const nm=s?s.name:"Người được sai";const e=a.a.item;if(e)S.inv.push(e);if(!e)return{ok:null};
+ if(!v||!v.alive||v.out){log(`${nm} trở về, mang ${iname(e)} về lại rương.`);return{ok:null}}
+ const r=giveTo(S,v,S.inv.indexOf(e));if(r)log(r);return{t:`${nm} mang quà sang cung ${v.name} trở về`}});
+/* ---- 9. Sai cung nữ thân tín mua lén ngoài cung (j83 IROUTE.maid): she leaves by the Thần Vũ gate; caught or not is known when she is back
+   (the goods still come next tuần, as before); the bạc was paid when she was sent (the option's fx) ---- */
+(function(){try{if(typeof illBuy!=="function"||typeof IROUTE==="undefined"||!IROUTE.maid)return;const R0=IROUTE.maid;
+ const n0=R0.need;R0.need=function(p){const w=n0.apply(this,arguments);if(w||p!==S||!ptOn())return w;return ptLockWhy("mm:me")};
+ const w0=R0.when;Object.defineProperty(R0,"when",{get:()=>ptOn()?`${ptWaitTxt("buy")} biết thành bại, ${w0}`:w0,configurable:true});
+ const ib0=illBuy;illBuy=function(p,r,k,from,paid){if(p!==S||r!=="maid"||!ptOn()||PT.landing||!S.maid)return ib0.apply(this,arguments);
+  if(!paid){const c=R0.cost(k);if(S.bac<c)return"";apply({bac:-c})}
+  const a=ptSend({who:"mm:me",nm:S.maid.name,kind:"buy",paid:ptRow("buy").o,place:typeof J95OUT_!=="undefined"?J95OUT_:null,a:{k},lbl:`lén ra cửa Thần Vũ mua ${itm(k).n}`});
+  return a?`Ngươi sai ${S.maid.name} lén ra cửa Thần Vũ mua ${itm(k).n}; nàng về ${ptWhen(a.due)}. `:""}}catch(e){ptErr("illBuy wire",e)}})();
+ptReg("buy",a=>{if(!S.maid)return{ok:null};PT.landing=1;let r="";try{r=illBuy(S,"maid",a.a.k,null,1)}finally{PT.landing=0}if(r)log(r);return{t:`${S.maid.name} lén mua đồ trở về`,ok:!/không thành/.test(r)}});
+/* ---- 10. Sai cung nữ đến Nội vụ phủ xin y phục (jeitem eitReOpts): the same option runs when she is back ---- */
+(function(){try{if(typeof eitReOpts!=="function")return;const e0=eitReOpts;eitReOpts=function(){const O=e0.apply(this,arguments);try{if(!ptOn()||PT.landing||!Array.isArray(O))return O;
+  return O.map(o=>{const m=o&&/^Sai (.+) đến Nội vụ phủ xin$/.exec(o.n||"");if(!m)return o;const s=[S.maid].concat(S.staff||[]).find(x=>x&&x.name===m[1]);if(!s)return o;const why=ptLockWhy(ptPid(s));
+   return Object.assign({},o,{x:String(o.x||"").replace("có y phục mặc ngay",`${ptWaitTxt("clothes")}, nàng mang y phục về`),go:why?()=>{}:()=>{ptSend({who:ptPid(s),nm:s.name,kind:"clothes",place:"nvp",a:{sid:s.sid!=null?s.sid:null,nm:s.name},lbl:"đến Nội vụ phủ xin y phục"});if(ptRow("clothes").o)spend(ptRow("clothes").o)}},why?{lock:true,x:why}:{})})}catch(e){ptErr("eitRe",e);return O}}}catch(e){ptErr("eit wire",e)}})();
+ptReg("clothes",a=>{PT.landing=1;try{const O=eitReOpts(false)||[];const o=O.find(x=>x&&x.n===`Sai ${a.a.nm} đến Nội vụ phủ xin`);if(o&&o.go){o.go();return{t:`${a.a.nm} đến Nội vụ phủ xin y phục trở về`}}
+ log(`${a.a.nm} trở về: Nội vụ phủ không còn việc ấy nữa.`);return{ok:null}}finally{PT.landing=0}});
+/* =============================== RECEIVER SIDE (owner OD 18/11 ~20:35Z, law 1 two-way) ===============================
+   When she plays the person SENT (maid road) and her master gives the order: a kit order frame pops up with ONE option «Đi» (servants never refuse
+   an errand) showing the SAME row as the sender's card: n khắc (BAL.ptime, her walk included: no double charge, OD 20:00Z), the same gain, the same
+   loss (e.g. dò la: fail → Chủ tin −BAL.eff.jwhy.loyalSpyMaidRun "hoảng sợ" = the sender's "Lòng cung nữ −5"). She really walks on Dư đồ to the place
+   (srvGoTo, S.place + ledger), the rest of the n khắc is the task, then the result. */
+function ptRecvGo(k,kind,run){const N=ptRow(kind).n;const t0=ptNow();let ok=true;try{ok=srvGoTo(k)!==false}catch(e){ok=false}
+ if(!ok)return false;const w=ptNow()-t0;const rest=Math.max(0,N-w);if(rest&&can(rest))spend(rest);else if(rest)used=Math.min(ptKH(),used+rest);
+ try{run()}catch(e){ptErr("recv "+kind,e)}try{render()}catch(e){}return true}
+function ptRecvRow(kind,o,gain,loss){return[o!=null&&o<100?word(o):"",`tốn: ${ptRow(kind).n} khắc (cả đường đi)`,gain?"thành: "+gain:"",loss?"hỏng: "+loss:""].filter(Boolean).join(" · ")}
+/* (a) her master orders a dò la (j42 srvOrder k "spy" → PEND.cnvOrd): the mirror of the consort's "Sai đi dò la" (jwhy spyRoll, j78 evN, jwhy loyalSpyMaidRun, j78 oán) */
+(function(){try{const c0=PEND.cnvOrd;if(!c0)return;PEND.cnvOrd=function(pp){if(!ptOn()||!pp||pp.k!=="spy")return c0.apply(this,arguments);const m=srvM(),t=RV(pp.t);if(!isSrv()||!m||!t||!t.alive||t.out)return null;
+  const o=spyRoll(m,t,knMeAg());const L=BAL.eff.jwhy.loyalSpyMaidRun;
+  return{t:`<p>${m.name} gọi ngươi vào: “Ngươi đi dò la cung ${t.name}, xem nàng gặp ai, nói gì.”</p>`,who:pv(m),o:[{n:"Đi",fx:{},x:ptRecvRow("spy",o,`${m.name} nắm ${balSg(BAL.eff.j78.evN)} chứng cứ của ${t.name} nếu nàng từng làm điều sai`,`Chủ tin -${balAb(L)} (hoảng sợ), ${t.name} đoán ra: oán ${m.name} ${balSg(BAL.eff.j78.j78maidFail)}`),
+   go:()=>{ptRecvGo(palaceOf(t),"spy",()=>{if(roll(o)){const n=evA(m,t,BAL.eff.j78.evN);srvMerit(BAL.eff.j42.srvDoOrder_2);log(n?`Ngươi dò la được chuyện của ${t.name}, về bẩm ${m.name}: chủ nắm thêm ${balAb(BAL.eff.j78.evN)} chứng cứ.`:`Ngươi dò la ${t.name}: không tìm ra điều gì sai trái.`)}
+    else{apply({tin:-L});oanAdd(t,m,BAL.eff.j78.j78maidFail);log(`<span class="r">Ngươi nấp nghe ngoài cửa sổ cung ${t.name} thì bị bắt gặp, hoảng sợ chạy về.</span> Chủ tin -${balAb(L)}.`)}})}}]}};
+ }catch(e){ptErr("cnvOrd wire",e)}})();
+/* (b) «Việc chủ sai» (j42 srvErrPick: lấy thuốc, hái hoa, mang canh, mang kinh, mang quà): the order frame pops up when the master gives it */
+function ptErrKind(er){return er&&er.v!=null?"gift":"errand"}
+function ptErrFrame(){if(!ptOn()||!isSrv()||!S.srv||S.dead)return false;const er=S.srv.err;if(!er||er.none||er.acc||er.pop||(typeof Q!=="undefined"&&Q.length))return false;const m=srvM();if(!m)return false;er.pop=1;const kind=ptErrKind(er);
+ const gain=`công lao +${BAL.eff.j42.srvErrandDone_2}${er.v!=null?` · ${m.name} thêm thân với người nhận quà`:""}`;
+ Q.push({t:"Việc chủ sai",who:pv(m),h:`<p>${m.name} sai ngươi: ${er.n}.</p>`,opts:[{n:"Đi",fx:{},x:ptRecvRow(kind,null,gain,""),go:()=>{er.acc=1;S.srv.sent={k:er.k,n:er.n,until:bid(),done:0,v:er.v||null};
+  if(!ptRecvGo(er.k,kind,()=>{const r=srvErrandDone();if(r)log(r)})){/* the place is shut right now: the order stays on her Phận sự list (the old card) */er.acc=0}}}]});try{showModal()}catch(e){}return true}
+(function(){try{if(typeof srvCards!=="function")return;const s0=srvCards;srvCards=function(){const X=s0.apply(this,arguments);try{if(ptOn()&&S.srv&&S.srv.err&&!S.srv.err.none&&!S.srv.err.acc){setTimeout(()=>{try{if(ptErrFrame())render()}catch(e){}},0)}}catch(e){ptErr("srvCards",e)}return X}}catch(e){ptErr("srvCards wire",e)}})();

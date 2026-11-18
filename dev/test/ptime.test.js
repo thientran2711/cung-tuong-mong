@@ -63,5 +63,25 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r.old,"7 old save without S.away");
  ok(r.offK===2&&!r.offPk&&r.offAway===0,"7 off switch = old instant behaviour",{k:r.offK,away:r.offAway});
  ok(!r.errs.length,"no jptime errors",r.errs);
+
+ /* 9 harm deed by a sent servant · 10 receiver side (maid road) */
+ const r2=await p.evaluate(()=>{const o={};BAL.ptime.on=1;Q.length=0;S.adDoor={};
+  const toB0=()=>{for(let i=0;i<12&&!((S.buoi||0)===0&&used===0);i++){Q.length=0;S.mg=0;try{nextBuoi()}catch(e){}Q.length=0}};toB0();
+  if(!(S.staff||[]).some(s=>s&&s.sid!=null))S.staff=(S.staff||[]).concat([mkServ("maid")]);
+  const i=rivals.findIndex(v=>v&&v.alive&&!v.out&&!together(S,v)&&(typeof k61Named!=="function"||k61Named(v))&&ACT.rumor&&ACT.rumor.ok(S,v));o.hv=i>=0;
+  if(i>=0){const v=rivals[i];o.hk=harmK(v,"rumor");o.hx=ptHarmX(v,"rumor");const u0=used;window.__j70inst=1;doAct(i,"rumor");window.__j70inst=0;Q.length=0;const a=ptZ().find(x=>x.kind==="harm"&&!x.back);o.ha=a?{due:a.due,k:a.a.k}:null;o.hu=used-u0;spend(1);o.hback=!!(a&&a.back)}
+  /* maid road */
+  localStorage.clear();for(let k=0;k<40;k++){window.__nlInner=1;start();window.__nlInner=0;if(isSrv())break}o.srv=isSrv();if(!o.srv)return o;Q.length=0;S.mg=0;toB0();
+  S.srv.err={b:bid(),k:"vuon",n:"Ra Ngự hoa viên hái hoa cắm bình"};const p0=S.place,u0=used;o.fr=ptErrFrame();const d=Q[Q.length-1];o.nopt=d&&d.opts.length;o.on=d&&d.opts[0].n;o.ox=d&&d.opts[0].x;
+  if(d){Q.pop();d.opts[0].go()}Q.length=0;o.place=[p0,S.place];o.used=used-u0;o.done=!!(S.srv.sent&&S.srv.sent.done);
+  const m=srvM();const t=liveRivals(true).find(v=>v!==m&&v.alive&&!v.out);if(t){const c=PEND.cnvOrd({k:"spy",t:t.id});o.cn=c&&c.o.length;o.cnn=c&&c.o[0].n;o.cnx=c&&c.o[0].x}
+  o.errs=PT.stat.errs.slice();return o});
+ console.log(JSON.stringify(r2));
+ ok(!r2.hv||(r2.hk===R.o&&/chờ 2 khắc/.test(r2.hx)&&r2.ha&&r2.hu===R.o&&r2.hback),"9 harm deed by a sent servant: order khắc, servant away, lands at due",{hk:r2.hk,hx:r2.hx,ha:r2.ha,hu:r2.hu});
+ ok(!r2.srv||(r2.fr&&r2.nopt===1&&r2.on==="Đi"&&/tốn: 2 khắc \(cả đường đi\)/.test(r2.ox)),"10 receiver: Việc chủ sai = order frame, ONE option «Đi», n khắc incl. walk",r2.ox);
+ ok(!r2.srv||(r2.place[1]==="vuon"&&r2.used===R.n&&r2.done),"10 receiver walks there; total = n khắc (no double charge); errand done",{place:r2.place,used:r2.used});
+ ok(!r2.srv||(r2.cn===1&&r2.cnn==="Đi"&&/Chủ tin -5 \(hoảng sợ\)/.test(r2.cnx)),"10 receiver: master's dò la order mirrors the sender row (fail Chủ tin −5 hoảng sợ)",r2.cnx);
+ ok(r2.srv!==false,"10 a maid-road life was started",r2.srv);
+ ok(!(r2.errs||[]).length,"no jptime errors (part 2)",r2.errs);
  ok(!errs.length,"8 no page errors",errs.slice(0,3));
  await b.close();const f=res.filter(x=>!x).length;console.log(f?`${f} FAIL`:'ALL OK');process.exit(f?1:0)})();

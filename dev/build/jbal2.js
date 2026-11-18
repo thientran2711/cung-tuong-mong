@@ -1325,9 +1325,9 @@ Object.assign(BAL,{ptime:{on:1,kinds:{
  invite:{o:1,n:2},  /* Mời đến cung ta (messenger; the guest comes at the due khắc) */
  harm:{o:1,n:2},    /* a deed on a consort done by a sent servant (not together: "phải sai người đi", j8 doAct / bestSent) */
  plant:{o:1,n:2},   /* Sai người lẻn vào cung cài đồ */
+ gift:{o:1,n:2},    /* Tặng quà by hand when not together (a servant carries it) */
  bribe:{o:1,n:2},   /* Mua chuộc / Cài người vào cung khác (the servant sent) */
- fetch:{o:1,n:2},   /* Sai cung nữ đến Nội vụ phủ xin · Nhờ thái giám tìm thú nuôi */
+ clothes:{o:0,n:2}, /* Sai cung nữ đến Nội vụ phủ xin y phục (jeitem): the option's own Sức is the order (no khắc, as before) */
  buy:{o:1,n:2},     /* Sai cung nữ thân tín mua lén ngoài cung (the goods still come next tuần) */
- doctor:{o:1,n:2},  /* Truyền thái y (the physician walks over) */
  errand:{o:1,n:2}   /* maid road: Việc chủ sai (receiver side: her own walk + task) */
 }}});
