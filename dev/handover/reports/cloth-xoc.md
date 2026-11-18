@@ -298,3 +298,6 @@ Root cause of "two kinds": splash decal picked at random per costume + size x pa
 Full body panels (each = dry, lv1, lv2, lv3): CDN img/_review/cloth-xoc/full-tra-{c01,c30,c03,c12}.png. Looked 3x at 4 figures: same amber blob + drips on orange c01, white c30, green c03/c12.
 Quickcheck: PASS part (open 1282 ms, old save ok, perf new/live render 155/178). Core gate G1 FAIL "frozen list 3843 vs live 3842": NOT from this change (inlineNow == baseline 3843; branch baseline already grew with cloth-xoc stain layer db5189b9; coordinator may refresh the baseline after rebase on main).
 Wipe after verdict: python3 dev/site/cdn_sync.py --wipe-review cloth-xoc
+
+## r6h-2 (MAIN s43 add) - review/cloth-tea REBASED on main 95d5f767 = 7b23023d (force-updated; old b2d6837c superseded)
+Branch = origin/main + jcloth.js tea r6h + switches. BAL: xoc.on = 1; stain.on is now per kind {uot:1, bun:1, tra:0} (wet + mud ON, tea OFF until the owner approves; flip tra to 1). clothXocLayer reads stain.on[kind]. Tests cloth-stain / cloth-xoc updated (OK). QUICKCHECK PASS in full incl. core gates (G1 fixed by the rebase). Panels unchanged: CDN img/_review/cloth-xoc/full-tra-*.png (tea shown by calling the bake directly; in game tea stays hidden).
