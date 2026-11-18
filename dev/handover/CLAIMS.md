@@ -1004,7 +1004,7 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | REVIEW men-forbidden 13286b4 (opus BIG; brief briefs/review-men-forbidden.md) | review/men-forbidden | MAIN s42 | session_01UV1Szh3jq9brqAHDsVQitM | RUNNING | 18/11 02:01Z |
 | OWNER UI BUG result-reason (result card lines need short WHY; whole group; sonnet; brief briefs/result-reason.md) | review/result-reason | MAIN s42 | session_01UV1SzirzUecQTMVipMrcQ1 | SẴN SÀNG KIỂM 0db60e0e | 18/11 02:07Z |
 | CAL PREVIEW (sonnet; s42 order 02:04Z): ag-all-2-land on Cloudflare Pages, ?hieuchuan=1 | (deploy only) | C-AG | session_01UV1SzgwDRVVjeacdPPtR47 | RUNNING | 18/11 02:05Z |
-| REVIEW greet-stranger 54431a1 (sonnet; brief briefs/review-greet-stranger.md) | review/greet-stranger | MAIN s42 | (opening) | RUNNING | 18/11 02:10Z |
+| REVIEW greet-stranger 54431a1 (sonnet; brief briefs/review-greet-stranger.md) | review/greet-stranger | MAIN s42 | session_01UV1SzhBWuWNyXoAhfWtFxm | PASS f8276cdb (r6) | 18/11 02:10Z |
 | LOOK FX SAMPLES (face/hair/small cloth marks; full-body panels for owner; sonnet; brief briefs/look-fx-samples.md) | review/look-fx | MAIN s42 | session_01UV1SzhzDHZiWyYW2YZdA9A | REPORT READY (reports/look-fx-samples.md) | 18/11 02:14Z |
 | hoa-dien r3c LIVE f986ff6a (main 62a6846f → f986ff6a; ROLLBACK 62a6846f) | review/hoa-dien-r3c | MAIN s42 | session_01UV1Szk7eZQzR2d2t4rhiFj | LIVE | 18/11 02:12Z |
 | REVIEW cloth-xoc 7270a76 (wet FINAL + mud approved; sonnet SMALL; brief briefs/review-cloth-xoc.md) | review/cloth-xoc | MAIN s42 | (opening) | RUNNING | 18/11 02:17Z |
