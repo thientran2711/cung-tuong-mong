@@ -25,3 +25,5 @@ v1: 98.2 | 95.5 | 98.4 | 98.7 | 97.3 | 97.4 | 98.1 | 95.3 (all 1 gen)
 v2: 97.1 | 96.7 | 99.1 | 98.4 | t5 2 gens 97.4 (1st 93.7) | 97.3 | 96.4 | 95.9
 Total 25 gens for 24 figures; the only regen = v2 t5 (sleeve wider than live, 93.7 %).
 ~100% xong (c19) / ~90% chơi được (ảnh nháp review, chưa nối vào game)
+## t7 embroidery rescan (ROOT-20 order, W43)
+Native-res scan of t7 v0/v1/v2: peony clusters + phoenix read slightly raised/embossed -> all three t7 REDRAWN (1 extra gen each, same colours, prompt: satin/long-and-short stitch lines, matte thread sheen = cloth, no outline/shadow/highlight/relief). Files re-uploaded under the same names; sheet refreshed. After: motifs flatter, thread texture visible; IoU t7 97.1/95.7/97.2.

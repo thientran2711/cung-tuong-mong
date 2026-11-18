@@ -25,3 +25,5 @@ v1: t1 1 97.5 | t2 2 95.3 | t3 1 98.1 | t4 1 97.7 | t5 2 97.6 | t6 1 97.4 | t7 3
 v2: t1 1 97.6 | t2 1 97.7 | t3 1 96.2 | t4 1 97.7 | t5 2 96.5 | t6 1 97.8 | t7 2 95.7 (1st 92.5) | t8 1 96.9
 Total 31 gens for 24 figures. Regen reason = silhouette/sleeve wider than live (added "exactly the same silhouette, sleeve width and skirt width"). v1 t7 stopped at 94.0 % after 3 gens (looks same pose, slightly wider sleeves) — foreman may accept or ask a 4th.
 ~100% xong (c18) / ~90% chơi được (ảnh nháp review, chưa nối vào game)
+## t7 embroidery rescan (ROOT-20 order, W43)
+Native-res scan of t7 v0/v1/v2: peonies read flat/sticker-like (pale, outlined, no thread texture) -> all three t7 REDRAWN (1 extra gen each, same colours, prompt: satin/long-and-short stitch lines, matte thread sheen = cloth, no outline/shadow/highlight/relief). Files re-uploaded under the same names; sheet refreshed. After: motifs flatter, thread texture visible; IoU t7 97.7/93.6/96.9 (v1 slightly wide sleeves, as before).
