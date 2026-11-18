@@ -40,9 +40,11 @@ Object.assign(BAL,{shelf:{
   caithao:{g:"ngoc",rk:4,gr:3,pr:200,src:"n"},ngocson:{g:"ngoc",imp:1,gr:4,pr:320},ngocty:{g:"ngoc",imp:1,gr:4,pr:460},
   /* 4 Thư họa (+ her own Bức tranh / Bức thư pháp, BAL.shelf.tp; the Biển vàng / Biển ngự bút hang at the door, never on the shelf) */
   tranhco:{g:"thuhoa",rk:1,src:"mp"},caudoi:{g:"thuhoa",rk:1,gr:0,pr:120,src:"mpv"},chuphuc:{g:"thuhoa",rk:2,gr:1,pr:240,src:"n"},mynhan:{g:"thuhoa",rk:4,gr:2,pr:220,src:"n"},
+  sonthuy:{g:"thuhoa",rk:2,gr:1,pr:200,src:"mp"},hoadieu:{g:"thuhoa",rk:2,gr:1,pr:200,src:"mp"},/* NEW (set Danh gia cổ họa, display-set-bonus D) */
   /* 5 Hương lô */
   huongtram:{g:"huong",rk:0,per:1,src:"mp"},luhuong:{g:"huong",rk:0,gr:0,pr:100,src:"mp"},tuyenduc:{g:"huong",rk:2,gr:1,pr:200,src:"np"},
   phaplam:{g:"huong",rk:4,gr:2,pr:240,src:"n"},luhac:{g:"huong",rk:3,gr:1,pr:240,src:"p"},hoannghi:{g:"huong",rk:2,gr:1,pr:180,src:"p"},
+  hophuong:{g:"huong",rk:1,gr:0,pr:100,src:"m"},/* NEW (set Đồng khí) */
   /* 6 Chuông gió */
   chuongso:{g:"chuong",rk:0,gr:0,pr:20,src:"mp"},chuonggio:{g:"chuong",rk:0,gr:0,pr:80,src:"m"},chuongngoc:{g:"chuong",rk:2,gr:1,pr:180,src:"np"},
   chuongpl:{g:"chuong",rk:4,gr:2,pr:260,src:"n"},thietma:{g:"chuong",rk:3,gr:1,pr:140,src:"mv"},
@@ -52,6 +54,7 @@ Object.assign(BAL,{shelf:{
   /* 8 Đồ Tây dương */
   tuminh:{g:"tay",rk:3,gr:2,pr:300,src:"n"},hopnhac:{g:"tay",rk:2,gr:1,pr:280,src:"n"},guongtay:{g:"tay",rk:2,gr:1,pr:220,src:"n"},
   kinhvv:{g:"tay",rk:4,gr:2,pr:220,src:"n"},diacau:{g:"tay",rk:5,gr:2,pr:200,src:"n"},
+  nhatquy:{g:"tay",rk:4,gr:2,pr:240,src:"n"},/* NEW (set Thiên văn) */
   /* 9 Quạt */
   quattron:{g:"quat",rk:0,gr:0,pr:60,src:"mp"},quatgap:{g:"quat",rk:1,gr:0,pr:120,src:"mp"},quatdh:{g:"quat",rk:2,gr:1,pr:200,src:"n"},
   quatcong:{g:"quat",rk:4,gr:2,pr:280,src:"n"},quattri:{g:"quat",imp:1,gr:4,pr:210},
@@ -63,7 +66,8 @@ Object.assign(BAL,{shelf:{
   ngocdich:{g:"nhac",rk:4,gr:2,pr:260,src:"n"},
   /* 12 Văn phòng, đèn */
   nghien:{g:"van",rk:1,src:"mp"},tranchi:{g:"van",rk:1,gr:1,pr:120,src:"mp"},thaiho:{g:"van",rk:3,gr:2,pr:200,src:"np"},cungdang:{g:"van",rk:0,gr:0,pr:60,src:"mv"},
-  daminh:{g:"van",rk:5,gr:3,pr:280,src:"n"}},
+  daminh:{g:"van",rk:5,gr:3,pr:280,src:"n"},
+  butlong:{g:"van",rk:1,gr:0,pr:80,src:"m"},muchuy:{g:"van",rk:1,gr:0,pr:100,src:"m"}},/* NEW (set Ngũ bảo thư phòng) */
  per:5,            /* owner OD 17/11 ~22:05Z: each group holds UP TO per pieces (12 groups × per). Slots: "<g>" (the first, old saves) then "<g>~1" … "<g>~(per-1)" */
  wt:[1,.5,.3,.2,.1],/* room xa xỉ of one group: its best piece counts in full, the next ones these falling shares (owner: luxury must not explode; 5 cheap never beat 1 fine) */
  tp:{tranh:"thuhoa",tho:"thuhoa",bhoa:"hoa"},/* her own handmade works (j83 IT.tp, wk.kind) that may stand on the shelf; luxury by bậc (kit grade) */
@@ -134,7 +138,10 @@ Object.assign(BAL,{shelf:{
  saotruc:["Sáo trúc treo giá","Ống sáo trúc treo trên giá"],tyba:["Tỳ bà lưng ngà","Tỳ bà khảm ngà"],dantranh:["Đàn tranh nhỏ","Đàn tranh dây tơ"],
  ngocdich:["Sáo ngọc","Sáo chạm bằng ngọc, hiếm có"],
  tranchi:["Chặn giấy ngọc","Chặn giấy bằng ngọc trên bàn viết"],thaiho:["Đá Thái Hồ nhỏ","Hòn đá Thái Hồ dáng lạ, kẻ sĩ ưa chuộng"],
- cungdang:["Cung đăng lụa","Đèn lụa treo trong điện"],daminh:["Dạ minh châu","Ngọc châu sáng trong đêm"]};
+ cungdang:["Cung đăng lụa","Đèn lụa treo trong điện"],daminh:["Dạ minh châu","Ngọc châu sáng trong đêm"],
+ sonthuy:["Sơn thủy cổ họa","Bức sơn thủy cổ, núi sông mờ sương, cùng một tay danh gia"],hoadieu:["Hoa điểu cổ họa","Bức hoa điểu cổ, chim đậu cành hoa, cùng một tay danh gia"],
+ hophuong:["Hạp hương đồng","Hộp hương đồng nắp tròn, kèm muỗng và kẹp gắp hương"],nhatquy:["Nhật quy nhỏ","Mặt nhật quy bằng đồng thau của Tây dương, xem bóng biết giờ"],
+ butlong:["Bút lông","Bút lông cán trúc gác trên giá ngọc"],muchuy:["Mực Huy","Thỏi mực Huy Châu đen nhánh, khắc chữ vàng"]};
  const P=BAL.shelf.it;for(const k in D){if(IT[k])continue;const s=P[k];IT[k]={n:D[k][0],kd:"Bày biện",d:`${D[k][1]} · bày ở Đa Bảo Các`,pr:s.imp?0:s.pr|0,/* imperial: no price, so no shop / weekly rare item can ever offer it */rk:0,tg:s.dead||s.imp?[]:["rv","th","hh"],gv:3}}})();
 /* the Nội vụ phủ tray offers only décor within her rank (reviewer r1 fix (1), kept by builder #2): a BUYING rule — OD 17/11 ~19:50Z lifts only the DISPLAY block (an over-rank piece she owns, from a gift or bought before a demotion, may still stand) */
 /* Nội vụ phủ tray + ngự ban: décor joins without changing the old lists' balance */
@@ -178,9 +185,9 @@ function shelfWhyNot(p,e){if(!e||!IT[e.k])return"không có món này";const g=s
 function shelfSlotFor(p,g){const z=shelfOf(p),S0=shelfSlots(g),fr=S0.find(s=>!z.g[s]);if(fr)return fr;return S0.slice().sort((a,b)=>shelfPiece(z.g[a])-shelfPiece(z.g[b]))[0]}
 function shelfPut(p,ix,slot){const e=(p.inv||[])[ix];const why=shelfWhyNot(p,e);if(why)return{ok:false,why};const z=shelfOf(p),g=shelfGrpE(e);
  const s=slot&&shelfSlotG(slot)===g&&shelfSlots(g).includes(slot)?slot:shelfSlotFor(p,g),old=z.g[s];
- p.inv.splice(ix,1);if(old)p.inv.push(old);if(shelfIsPlant(e)&&e.pc==null){e.pc=BAL.shelf.plant.start;e.pz=0}e.shw=wk();z.g[s]=e;return{ok:true,g,slot:s,old:old?shelfNm(old):"",n:shelfNm(e)}}
+ p.inv.splice(ix,1);if(old)p.inv.push(old);if(shelfIsPlant(e)&&e.pc==null){e.pc=BAL.shelf.plant.start;e.pz=0}e.shw=wk();z.g[s]=e;if(old)shelfSetSync(p);return{ok:true,g,slot:s,old:old?shelfNm(old):"",n:shelfNm(e)}}
 function shelfNm(e){if(!e)return"";if(e.k==="tp"&&e.wk)return e.wk.n||itm("tp").n;return itm(e.k).n}
-function shelfTake(p,g){const z=shelfOf(p),e=z.g[g];if(!e)return"";delete z.g[g];p.inv=p.inv||[];p.inv.push(e);return shelfNm(e)}
+function shelfTake(p,g){const z=shelfOf(p),e=z.g[g];if(!e)return"";delete z.g[g];p.inv=p.inv||[];p.inv.push(e);shelfSetSync(p);return shelfNm(e)}
 /* the one luxury number of a displayed piece: table / IT pieces = jlux luxPiece; her handmade work = the kit grade of its bậc (LUX_V); a living piece in bad care counts witherLux */
 function shelfPiece(e){if(!e)return 0;let v=0;try{if(e.k==="tp"){const a=itemArt(e);v=LUX_V[a?a.grade|0:0]}else v=luxPiece(e.k)}catch(x){v=0}if(shelfBad(e))v=Math.round(v*BAL.shelf.plant.witherLux);return v}
 /* the DWELLING score: sum of the displayed pieces vs the rank allowance × allowF (never shown to anyone: owner (d); the player learns it from consequences) */
@@ -343,7 +350,7 @@ function shelfRumour(){const B=BAL.shelf.rum;const P=[S].concat(liveRivals(true)
 /* co-op: the world (NPC shelves, rumours, NPC charges, Thái hậu, reputation) is computed once on the host (jcoopone rule); the guest runs only her own room */
 function shelfGuest(){try{return typeof worldOn==="function"&&!worldOn()}catch(e){return false}}
 function shelfWeek(){if(!S||S.dead)return;try{shelfAccHook()}catch(e){}const gu=shelfGuest();const P=(gu?[S]:[S].concat(liveRivals(true))).filter(p=>p&&p.alive!==false);
- for(const p of P){try{if(p.out){if(p.shelf&&p.shelf.g)for(const g in p.shelf.g)shelfTake(p,g);continue}if(p!==S)shelfArrange(p);shelfPlantWeek(p);shelfMood(p)}catch(e){console.error("shelfWeek",e)}}
+ for(const p of P){try{if(p.out){if(p.shelf&&p.shelf.g)for(const g in p.shelf.g)shelfTake(p,g);shelfSetSync(p);continue}if(p!==S)shelfArrange(p);shelfPlantWeek(p);shelfSetCheck(p);shelfMood(p)}catch(e){console.error("shelfWeek",e)}}
  if(gu)return;try{shelfRumour()}catch(e){console.error("shelfRumour",e)}
  if(S.shM!==S.turn){S.shM=S.turn;for(const p of P){try{if(shelfLux(p).lv>=3)p.luxRep=Math.min(BAL.lux.repMax,(p.luxRep|0)+BAL.shelf.rep)}catch(e){}}try{shelfNpcAccuse()}catch(e){console.error("shelfNpcAccuse",e)}try{shelfThRebuke()}catch(e){console.error("shelfThRebuke",e)}}}
 window.shelfWeek=shelfWeek;
@@ -351,7 +358,7 @@ window.shelfWeek=shelfWeek;
 
 /* ---------- jil: a displayed piece is still the owner's (one ledger, conservation law) ---------- */
 (function(){if(typeof ilSlots==="function"){const s0=ilSlots;ilSlots=function(p){const o=s0.apply(this,arguments);try{if(p&&p.shelf&&p.shelf.g)for(const g in p.shelf.g){const e=p.shelf.g[g];if(e&&e.k)o.push(e)}}catch(e){}return o}}
- if(typeof ilOut==="function"){const o0=ilOut;ilOut=function(p,e){try{if(p&&p.shelf&&p.shelf.g)for(const g in p.shelf.g)if(p.shelf.g[g]===e){delete p.shelf.g[g];return}}catch(x){}return o0.apply(this,arguments)}}})();
+ if(typeof ilOut==="function"){const o0=ilOut;ilOut=function(p,e){try{if(p&&p.shelf&&p.shelf.g)for(const g in p.shelf.g)if(p.shelf.g[g]===e){delete p.shelf.g[g];shelfSetSync(p);return}}catch(x){}return o0.apply(this,arguments)}}})();
 
 /* ---------- PLANT CARE (owner (4)): the act "Chăm sóc" lists pets + plants; plant screen = the jpetcare kit screen shape ---------- */
 const SHPC={g:null,game:null};
@@ -398,12 +405,96 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
 function shelfOpen(p){p=p||S;const V=shelfView(p),me=p===S;const rows=[],acts=[];
  for(const x of V.groups)for(const it of x.items){rows.push([x.n,[it.name+(it.plant&&it.plant.wither?` (${it.plant.bad})`:"")+(it.over?" · quá phẩm":"")],it.plant&&it.plant.wither?"r":"n"]);
   if(me)acts.push(pbtn(it.take,`Cất ${it.name.toLowerCase()}`,"thành: về rương · tặng, bán, dùng được lại","")+(it.plant?pbtn(`data-shc="plant" data-g="${it.slot}"`,`Chăm ${it.name.toLowerCase()}`,`tốn: ${BAL.shelf.plant.khacSelf} khắc · thành: ${it.plant.fresh}`,whyTime(BAL.shelf.plant.khacSelf)):""))}
- kitModal({kind:"info",title:me?"Đa Bảo Các":`Đa Bảo Các của ${p.name}`,html:(rows.length?kitRows(rows):kitFacts([V.known?"Chưa bày món nào.":"Chưa thấy phòng nàng bày gì."]))+(V.lux?kitFacts([`Phòng ốc: ${V.lux.name.toLowerCase()}`]):"")+(acts.length?`<div class="rbtn">${acts.join("")}</div>`:""),btn:"Lui"})}
+ kitModal({kind:"info",title:me?"Đa Bảo Các":`Đa Bảo Các của ${p.name}`,html:(rows.length?kitRows(rows):kitFacts([V.known?"Chưa bày món nào.":"Chưa thấy phòng nàng bày gì."]))+(V.lux?kitFacts([`Phòng ốc: ${V.lux.name.toLowerCase()}`]):"")+(V.sets&&V.sets.length?kitFacts(V.sets.map(x=>x.t)):"")+(acts.length?`<div class="rbtn">${acts.join("")}</div>`:""),btn:"Lui"})}
 window.shelfOpen=shelfOpen;
 /* the data the kit shelf part draws (KIT REQUEST 17/11 display-shelf): per group UP TO BAL.shelf.per cut-out pieces side by side (owner OD 17/11 ~22:05Z), no frame.
    groups[i] = {g, n, per, items:[{slot, k, name, src, plant, over, from, take}] (best first), item: items[0] (kept for the old one-piece shape)} */
-function shelfView(p){p=p||S;const z=shelfOf(p),me=p===S;let known=me?null:shelfSeen(S,p);
- const one=(s,e)=>({slot:s,k:e.k,name:shelfNm(e),src:typeof kitItemSrc==="function"?kitItemSrc(e.k==="tp"?e:e.k,""):"",plant:shelfIsPlant(e)?{care:Math.round(e.pc|0),wither:shelfBad(e),kind:shelfCareK(e),bad:shelfWord(e).bad,fresh:shelfWord(e).fresh}:null,over:shelfOver(p,e),from:e.from||"",take:me?`data-shelftake="${s}"`:""});
+function shelfView(p){p=p||S;const z=shelfOf(p),me=p===S;let known=me?null:shelfSeen(S,p);const SST=me||known?shelfSetState(p):[];/* set glow (owner OD 17/11 ~21:20Z): items[i].set */
+ const one=(s,e)=>({slot:s,k:e.k,name:shelfNm(e),src:typeof kitItemSrc==="function"?kitItemSrc(e.k==="tp"?e:e.k,""):"",plant:shelfIsPlant(e)?{care:Math.round(e.pc|0),wither:shelfBad(e),kind:shelfCareK(e),bad:shelfWord(e).bad,fresh:shelfWord(e).fresh}:null,over:shelfOver(p,e),from:e.from||"",take:me?`data-shelftake="${s}"`:"",set:shelfSetOfE(p,e,SST)});
  return{who:me?"me":wdKey(p),per:BAL.shelf.per,groups:BAL.shelf.groups.map(([g,n])=>{const items=me||known?shelfIn(p,g).sort((a,b)=>shelfPiece(b[1])-shelfPiece(a[1])).map(x=>one(x[0],x[1])):[];return{g,n,per:BAL.shelf.per,items,item:items[0]||null}}),
-  lux:me||known?{lv:me?shelfLux(p).lv:known.lv,name:me?shelfLux(p).name:SHELF_LV[known.lv]}:null,known:me||!!known}}
+  lux:me||known?{lv:me?shelfLux(p).lv:known.lv,name:me?shelfLux(p).name:SHELF_LV[known.lv]}:null,known:me||!!known,
+  sets:me?shelfSetLines(p):[]/* set bonus lines (owner OD 17/11 ~20:47Z): only her own room; [{id,on,t}] */}}
 window.shelfView=shelfView;
+
+/* ================= SET BONUS (bộ) of the display shelf — owner OD 17/11 ~20:42Z/~20:47Z (sets 2 / 3 / 5 inside a group), ~21:10Z (random pieces: room xa xỉ only),
+   ~21:15Z APPROVED table dev/research/display-set-bonus.md @500faf22 (26 sets / 12 groups). Brief: dev/handover/briefs/display-set-bonus-build.md.
+   · ONE table BAL.shelf.set (numbers) + SHELF_SET_N (player words). A piece belongs to ONE set; pieces outside a set give nothing.
+   · a set is WHOLE when every member stands on the shelf (any slot of its group) and none is withered / dead (shelfBad; caykho / longtrong are not members)
+     or above the owner's rank without being ngự ban (a vượt phẩm charge waits on it). Burnt incense, given away, confiscated, sold = not on the shelf.
+   · checked ONCE a tuần (shelfWeek → shelfSetCheck): only that check GIVES; any break TAKES BACK at once (shelfSetSync on put / take / ledger out),
+     regained at the next whole check. Old saves (no p.shSet): nothing until the first check.
+   · stats through the EXISTING paths (no new bonus path): Sắc = the ONE wearBonus (one more wrapper, never ×1.5); Danh / Đức / Tài / Tâm cơ and the minus
+     (Danh, Thái hậu / Hoàng hậu favour) = the title flat apply / take-back (jdh dhApplyFx pattern): applied amounts kept in p.shSet.on, taken back exactly.
+   · cap: plus points of one person ≤ cap, Danh ≤ capDanh; never Sủng. NPCs: the same table and check in the weekly shelf pass (host only in co-op). */
+Object.assign(BAL.shelf,{set:{cap:6,capDanh:3,size:{2:1,3:2,5:3},/* pair +1, triple +2, five +3 of the set's stat */
+ /* id: g group · m members (BAL.shelf.it keys; "tp:<kind>" = her own handmade work, j83) · st the stat · minus (always, while the set is whole) */
+ s:{tqt:{g:"hoa",m:["lanquy","cuc","maitrang"],st:"duc"},ngocduong:{g:"hoa",m:["maudon","haiduong"],st:"danh"},hoatet:{g:"hoa",m:["thuytien","phatthu"],st:"sac"},
+  lambach:{g:"su",m:["binhsu","maibinh"],st:"danh"},ngudieu:{g:"su",m:["cuudao","phanthai","dauthai"],st:"danh",minus:{th:-1,hh:-1}},
+  phuctu:{g:"ngoc",m:["holo","caithao"],st:"duc"},nhuy:{g:"ngoc",m:["nhuy","sanho"],st:"sac",minus:{danh:-1}},
+  tayminh:{g:"thuhoa",m:["tp:tranh","tp:tho"],st:"tai"},tetlien:{g:"thuhoa",m:["caudoi","chuphuc"],st:"danh"},danhgia:{g:"thuhoa",m:["tranhco","sonthuy","hoadieu"],st:"tai"},
+  dongkhi:{g:"huong",m:["luhuong","tuyenduc","hophuong"],st:"tamco"},huongcung:{g:"huong",m:["phaplam","luhac"],st:"sac"},
+  phonglinh:{g:"chuong",m:["chuonggio","thietma"],st:"duc"},daychuong:{g:"chuong",m:["chuongso","chuongngoc","chuongpl"],st:"duc"},
+  remha:{g:"phong",m:["remtruc","remlua"],st:"tamco"},bpto:{g:"phong",m:["banbinh","bpxacu"],st:"danh"},
+  cogioi:{g:"tay",m:["tuminh","hopnhac"],st:"danh",minus:{th:-1}},thienvan:{g:"tay",m:["kinhvv","diacau","nhatquy"],st:"tai"},
+  quatmua:{g:"quat",m:["quattron","quatgap"],st:"sac"},quatquy:{g:"quat",m:["quatdh","quatcong"],st:"danh"},
+  chimlong:{g:"chim",m:["hoami","vet"],st:"tamco"},thuvui:{g:"chim",m:["de","kimngu"],st:"sac",minus:{danh:-1}},
+  day:{g:"nhac",m:["dancoc","tyba","dantranh"],st:"tai"},saongoc:{g:"nhac",m:["saotruc","ngocdich"],st:"tai"},
+  ngubao:{g:"van",m:["nghien","tranchi","thaiho","butlong","muchuy"],st:"tai"},denda:{g:"van",m:["cungdang","daminh"],st:"danh"}}}});
+/* player words (VANPHONG, cổ trang): set name + the minus reason */
+const SHELF_SET_N={tqt:["Tam quân tử"],ngocduong:["Ngọc đường phú quý"],hoatet:["Hoa Tết"],lambach:["Lam bạch Cảnh Đức Trấn"],
+ ngudieu:["Ngự diêu","chủ vị không ưa khoe của"],phuctu:["Phúc tử"],nhuy:["Như ý cát tường","người ta chê khoe của"],tayminh:["Tay mình"],tetlien:["Tết liễn"],
+ danhgia:["Danh gia cổ họa"],dongkhi:["Đồng khí"],huongcung:["Hương cung đình"],phonglinh:["Phong linh"],daychuong:["Dây chuông"],remha:["Rèm hạ"],
+ bpto:["Bình phong Tô thêu"],cogioi:["Cơ giới Tây","Thái hậu không ưa đồ ngoại bang"],thienvan:["Thiên văn"],quatmua:["Quạt mùa"],quatquy:["Quạt quý"],
+ chimlong:["Chim lồng"],thuvui:["Thú vui nhàn","người ta chê mê chơi"],day:["Dây"],saongoc:["Sáo ngọc"],ngubao:["Ngũ bảo thư phòng"],denda:["Đèn dạ"]};
+const SHELF_SET_STAT={sac:"Sắc",danh:"Danh",duc:"Đức",tai:"Tài",tamco:"Tâm cơ",th:"Thái hậu thiện cảm",hh:"Hoàng hậu thiện cảm"};
+/* member id of a shelf entry: a table key, or "tp:<kind>" for her own handmade work */
+function shelfSetMem(e){if(!e)return"";if(e.k==="tp")return e.wk&&e.wk.kind?"tp:"+e.wk.kind:"";return e.k}
+function shelfSetMemNm(m){if(m.startsWith("tp:")){const k=m.slice(3);return k==="tranh"?"Bức tranh tự vẽ":k==="tho"?"Bức thư pháp tự viết":"Đồ tự làm"}return IT[m]?IT[m].n:m}
+/* why a standing member does not count ("" = it counts) */
+function shelfSetBreak(p,e){if(shelfBad(e))return shelfWord(e).bad;if(shelfOver(p,e)&&e.from!=="emp")return"quá phẩm, chờ tra xét";return""}
+/* every set's state for a person: have / miss / bad members, whole */
+function shelfSetState(p){const T=BAL.shelf.set.s,out=[];if(!p||!p.shelf||!p.shelf.g)return out;const by={};
+ for(const sl in p.shelf.g){const e=p.shelf.g[sl],m=shelfSetMem(e);if(!m)continue;if(!(m in by)||(shelfSetBreak(p,by[m])&&!shelfSetBreak(p,e)))by[m]=e}/* two of one kind count once (the sound one) */
+ for(const id in T){const x=T[id],have=[],miss=[],bad=[];for(const m of x.m){const e=by[m];if(!e){miss.push(m);continue}have.push(m);const w=shelfSetBreak(p,e);if(w)bad.push([m,w])}
+  out.push({id,x,have,miss,bad,whole:!miss.length&&!bad.length})}return out}
+/* the points the given sets give (caps: plus ≤ cap, Danh ≤ capDanh; order = biggest set first, table order); minus always */
+function shelfSetPts(ids){const B=BAL.shelf.set,o={},per={};let tot=0,dn=0;
+ const L=(ids||[]).filter(id=>B.s[id]).sort((a,b)=>B.s[b].m.length-B.s[a].m.length);
+ for(const id of L){const x=B.s[id];let v=B.size[x.m.length]|0;v=Math.max(0,Math.min(v,B.cap-tot));if(x.st==="danh")v=Math.max(0,Math.min(v,B.capDanh-dn));
+  if(v){o[x.st]=(o[x.st]||0)+v;tot+=v;if(x.st==="danh")dn+=v}per[id]={st:x.st,v,minus:x.minus||null};for(const k in (x.minus||{}))o[k]=(o[k]||0)+x.minus[k]}
+ return{o,per}}
+/* the sets that count NOW = the last check's sets still whole (a break takes back at once) */
+function shelfSetLive(p){const z=p&&p.shSet;if(!z||!Array.isArray(z.ids)||!z.ids.length)return[];const W=new Set(shelfSetState(p).filter(x=>x.whole).map(x=>x.id));return z.ids.filter(id=>W.has(id))}
+/* apply / take back the non-Sắc part exactly (the jdh dhApplyFx pattern; Thái hậu / Hoàng hậu favour runs −100…100) */
+function shelfSetApply(p){if(!p||p.coop)return;const z=p.shSet;if(!z)return;const P=shelfSetPts(z.ids).o,want={};for(const k in P)if(k!=="sac"&&P[k])want[k]=P[k];const on=z.on||{};
+ for(const s of new Set(Object.keys(on).concat(Object.keys(want)))){const d=(want[s]||0)-(on[s]||0);if(!d)continue;const lo=s==="th"||s==="hh"?-100:0;
+  const before=p[s]||0;p[s]=Math.max(lo,Math.min(100,before+d));on[s]=(on[s]||0)+((p[s]||0)-before)/* read back: hh is the Empress's own regard (j24 hhSet → affAdd) */;if(!on[s])delete on[s]}z.on=on}
+function shelfSetTxt(id,v){const x=BAL.shelf.set.s[id],N=SHELF_SET_N[id]||[id];const mi=x.minus?Object.keys(x.minus).map(k=>`${SHELF_SET_STAT[k]} ${x.minus[k]}`).join(", "):"";
+ return `Bộ ${N[0]}: ${v?`${SHELF_SET_STAT[x.st]} +${v}`:"đủ bộ, nhưng đã tới mức, không thêm"}${mi?`, ${mi}, vì ${N[1]}`:""}.`}
+function shelfSetQuiet(p){return p!==S||(typeof tsbBot==="function"&&tsbBot())}
+/* break → take back at once (never gives) */
+function shelfSetSync(p){try{const z=p&&p.shSet;if(!z||!Array.isArray(z.ids)||!z.ids.length)return;const live=shelfSetLive(p);if(live.length===z.ids.length)return;
+ const st=shelfSetState(p),lost=z.ids.filter(id=>!live.includes(id));z.ids=live;shelfSetApply(p);
+ if(!shelfSetQuiet(p))for(const id of lost){const r=st.find(x=>x.id===id);const why=r&&r.bad.length?`${shelfSetMemNm(r.bad[0][0]).toLowerCase()} ${r.bad[0][1]}`:r&&r.miss.length?`${shelfSetMemNm(r.miss[0]).toLowerCase()} không còn bày`:"";
+  log(`Bộ ${(SHELF_SET_N[id]||[id])[0]} khuyết${why?": "+why:""}.`)}}catch(e){console.error("shelfSetSync",e)}}
+/* the weekly check: the whole sets now count (gain); others are dropped */
+function shelfSetCheck(p){try{if(!p)return;const z=p.shSet=p.shSet&&typeof p.shSet==="object"?p.shSet:{ids:[],on:{}};const old=Array.isArray(z.ids)?z.ids.slice():[];
+ const ids=shelfSetState(p).filter(x=>x.whole).map(x=>x.id);z.ids=ids;z.w=wk();z.ev=z.ev||[];shelfSetApply(p);
+ if(!shelfSetQuiet(p)){const per=shelfSetPts(ids).per;for(const id of ids)if(!old.includes(id)){const back=z.ev.includes(id);log(back?`Bộ ${(SHELF_SET_N[id]||[id])[0]} đủ lại.`:shelfSetTxt(id,per[id]?per[id].v:0))}}
+ for(const id of ids)if(!z.ev.includes(id))z.ev.push(id)}catch(e){console.error("shelfSetCheck",e)}}
+window.shelfSetState=shelfSetState;window.shelfSetPts=shelfSetPts;window.shelfSetLive=shelfSetLive;window.shelfSetCheck=shelfSetCheck;window.shelfSetSync=shelfSetSync;
+/* Sắc = the ONE wearBonus (effSac reads it), like the title's Sắc (jdh): one more wrapper, never ×1.5; b.shSac names this part (the night-prep jewellery reader leaves it out) */
+(function(){if(typeof wearBonus!=="function")return;const w0=wearBonus;wearBonus=function(p){const b=w0.apply(this,arguments);try{if(p&&p.shSet&&!p.coop){const v=shelfSetPts(shelfSetLive(p)).o.sac|0;if(v){b.sac=(b.sac||0)+v;b.shSac=v}}}catch(e){}return b};window.wearBonus=wearBonus})();
+/* the player's set lines for the shelf screen (owner: she must know what to collect; random pieces show nothing) */
+function shelfSetLines(p){const live=shelfSetLive(p),per=shelfSetPts(live).per;const L=[];
+ for(const r of shelfSetState(p)){if(!r.have.length)continue;const N=(SHELF_SET_N[r.id]||[r.id])[0];
+  if(live.includes(r.id))L.push({id:r.id,on:1,t:shelfSetTxt(r.id,per[r.id]?per[r.id].v:0)});
+  else if(r.whole)L.push({id:r.id,on:0,t:`Bộ ${N}: đã đủ món, tuần sau mới được tính.`});
+  else if(r.bad.length)L.push({id:r.id,on:0,t:`Bộ ${N} khuyết: ${r.bad.map(([m,w])=>shelfSetMemNm(m).toLowerCase()+" "+w).join(", ")}.`});
+  else L.push({id:r.id,on:0,t:`Bộ ${N}: còn thiếu ${r.miss.map(shelfSetMemNm).join(", ")}.`})}return L}
+window.shelfSetLines=shelfSetLines;
+/* the set of one displayed piece for the shelf view (owner OD 17/11 ~21:20Z: a whole set GLOWS so she sees it is one set): {id, name, full} or null.
+   full = every member stands and none is broken (the same test the weekly check uses); random pieces: null */
+function shelfSetOfE(p,e,st){const m=shelfSetMem(e);if(!m)return null;const T=BAL.shelf.set.s;const id=Object.keys(T).find(i=>T[i].m.includes(m));if(!id)return null;
+ const r=(st||shelfSetState(p)).find(x=>x.id===id);return{id,name:(SHELF_SET_N[id]||[id])[0],full:!!(r&&r.whole)}}
+window.shelfSetOfE=shelfSetOfE;
