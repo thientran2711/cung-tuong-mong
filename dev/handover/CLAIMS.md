@@ -509,3 +509,6 @@ art-matrix planner (MAIN s43 order) | claude/cung-tuong-mong-handover-hj0h8w (re
 B7 consort a18 t1–t8 + Nữ đế, painter A (c02,c04,c07,…c32) | _review CDN consort-tiers/<cNN>/b7 + handover reports | C | session_011xDdVQrs6nBYoBQAva6sSz | RUNNING | 2026-11-18T05:40Z
 B7 consort a18 t1–t8 + Nữ đế, painter B (c03,c06,c08,…c31) | _review CDN consort-tiers/<cNN>/b7 + handover reports | C | session_011xDdVSniP7aH2vrv4nFbVT | RUNNING | 2026-11-18T05:40Z
 B7 consort c01 a18 t1–t8 + Nữ đế (owner waits) | _review CDN consort-tiers/c01/b7 + handover reports | C | session_011xDdVP3CQJqrW5i6JLZ14G | RUNNING | 2026-11-18T05:41Z
+| face-reveal-anim (owner 18/11 06:20Z: grey avatar/silhouette → real face appears in place; sonnet; brief briefs/face-reveal-anim.md) | review/face-reveal-anim | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:43Z |
+| buoi-banner (owner 18/11 06:20Z canon overwrite: buổi title only, light frame under the top bar, 70-85 % ladder; sonnet; brief briefs/buoi-banner.md) | review/buoi-banner | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:43Z |
+| REVIEW face-zoom-stretch 717c0c0 (SMALL; sonnet; brief briefs/review-face-zoom-stretch.md) | review/face-zoom-stretch | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:43Z |
