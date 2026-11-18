@@ -678,3 +678,4 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - WAITING OWNER: opt-card-short new look; fullbody-frame-s3 pictures; shop-panel pictures (all phone+iPad together).
 - Hourly wake: ROOT-52 had NONE (depth 8 refuses triggers); ROOT-51's trig_012ZQ2AFcqnUZVE39GJofFUk is DISABLED. New main sets its own wake at :32.
 - ROOT STANDBY session_01UV1Szhw9yX7J9du6HoL1xM (this account) — not used for the account move.
+- (16:15Z) ROOT-52: opt-card-short r3 6e5777ad (SẴN SÀNG XEM) was built BEFORE the owner's 16:05Z/16:15Z corrections (it grows ALL dialogs to tall; no button-tier rule) → NOT shown to owner; next worker applies 16:05Z (only L/XL tall) + 16:15Z (one size per tier) on top. C-AG: ag-all-2-land-r4 e18697fe (code 8b4ee331 + CLAUDE.md 18 LAWS line) + npc 78b7196f SẴN SÀNG KIỂM at AG LATER #3.
