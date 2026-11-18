@@ -14,7 +14,7 @@ shown-odds-one-path-rv | review/shown-odds-one-path-rv | session_01964izEojRf2ME
 | REVIEW npc-purpose BIG (opus) — seat opened by D #1 for C-AG #13 (ORDER ROOT-52 14:44Z SEAT HELP) | review/npc-purpose (see reports/review-npc-purpose.md §HANDOVER) | C-AG #13 | session_01964izEUgw5hZTBxuEguL4K | RUNNING | 18/11 14:49Z |
 shown-odds-one-path-rv | review/shown-odds-one-path-rv | session_01964izEojRf2ME8Lmxpkd5x | LIVE a2ce736a | 18/11 15:05Z | owner D #1
 phoenix-t1t6-fix | review/phoenix-t1t6-fix (CDN _review only) | W53 session_011xDdVQ2xYEQ7eJpk5cBiTm | DONE (c03 t5/t6 live 15:28Z) | 2026-11-18T15:05Z (Foreman C ROOT-24)
-c03-v1-t678 | CDN _review (then live) | W54 session_011xDdVRCEBrDDZRTJBtFKxq | RUNNING | 2026-11-18T15:42Z (Foreman C ROOT-24)
+c03-v1-t678 (+c26 v0 t1–t4, c29 instrument) | CDN _review + c03 live | W54 session_011xDdVRCEBrDDZRTJBtFKxq | DONE 7500754 (archived) | 2026-11-18T15:42Z (Foreman C ROOT-24)
 t8-v2-yellow | CDN _review only | W55 session_011xDdVQTwxN7jGoVprySAoD | DONE f8b4e6d (archived) | 2026-11-18T15:45Z (Foreman C ROOT-24)
 b10-pose-eyes | CDN _review only | W56 session_011xDdVPNX13rhPHjdfkbyXh DONE 910f867 (archived) → tail W56b session_011xDdVSFzRabfiMRHynwVdq | RUNNING | 2026-11-18T15:52Z (Foreman C ROOT-25)
 live-open-eyes | CDN _review (then live) | W57 session_011xDdVPo2tyAFP5faQKZ1Xe | RUNNING | 2026-11-18T15:52Z (Foreman C ROOT-25)
