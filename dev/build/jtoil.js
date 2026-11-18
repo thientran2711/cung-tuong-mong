@@ -641,7 +641,7 @@ function toilBack(host,n,p){if(!n)return;if(p&&p!==S){if(host==="th")p.th=cl((p.
  if(host==="th")apply({th:n});else if(host==="emp")apply({sung:n>0?1:-1});else if(host&&host!==S)affAdd(host,S,n)}
 /* the answer to a reaction to one's look (Xin lỗi / Cười trừ / Đáp lại / Đáp trả gay gắt): ONE function for her (the dialog below) and for an NPC (jagtoil, G11).
    r = {host, n, v (the consort who reacted)}; → true / false for a reply that went well / badly, null otherwise. Her Sức for "Đáp lại" is the option's fx. */
-function toilAns(p,r,c){const B=BAL.toil;if(c==="sorry"){toilBack(r.host,Math.ceil(Math.abs(r.n)*B.sorryBack),p);return null}if(c!=="reply")return null;
+function toilAns(p,r,c){const B=BAL.toil;if(c==="sorry"){toilBack(r.host,Math.ceil(Math.abs(r.n)*B.sorryBack),p);return null}if(c!=="reply"&&c!=="harsh")return null;
  const me=!p||p===S;if(c==="harsh"){toilBack(r.host,-B.harshAff,p);if(roll(B.harshWin)){if(me)apply({danh:B.replyDanh});else ap(p,{danh:B.replyDanh});if(r.v)r.v.ghen=cl((r.v.ghen||0)-B.harshGhen,0,100);return true}
   if(me)apply({danh:B.harshDanh,duc:B.harshDuc});else ap(p,{danh:B.harshDanh,duc:B.harshDuc});return false}
  if(!me)ap(p,{suc:B.replySuc})/* replySuc = the Sức change (main: −2); her own is the option fx */;if(roll(B.replyWin)){if(me)apply({danh:B.replyDanh});else ap(p,{danh:B.replyDanh});return true}
