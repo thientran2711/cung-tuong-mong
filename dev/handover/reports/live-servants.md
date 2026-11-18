@@ -192,3 +192,6 @@ tools/prof.js CDP profile with PRE, tools/lineprof.js line ticks, b-*.txt bench 
 | ag-*.test.js (14, serial) on 43943be | 14/14 PASS; ag-carry is FLAKY on the live-servants branch (unseeded 8-day bot: §5 "carry 0" = no last-khắc news in that sample): branch 2/10 FAIL, e3dce64+main (no perf work) 1/5, live 0/7 — the feature's thinner news (servants know less), not perf; reviewer may want that sample made robust |
 | deeds 160 × seeds 1–5 | live 615/569/594/609/514 · new 608/505/596/613/564 = pre-perf merged build byte-for-byte |
 | coop-e2e | BLOCKED (co-op Worker host: proxy CONNECT 403) |
+
+## PERF RULING (MAIN ROOT-57, 18/11 ~22:30Z, relayed by C-AG #16)
+(a) ACCEPT as feature cost (same as 13:52Z ruling): per-buổi +9.5 % is inside the ≤+10 % budget; per-khắc +26.9 % accepted because the remaining cost is the owner-ordered gossip/witness behaviour (OD 19:30Z, 19:45Z). No cadence change. Reviewer judges: per buổi ≤ +10 %, no long-task regression > +10 %, all gates PASS.
