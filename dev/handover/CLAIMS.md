@@ -515,3 +515,4 @@ B8 SAMPLE c01 a18 t1–t8 colour-only | _review CDN consort-tiers/c01/b7 + hando
 | FOREMAN E ROOT #2 (opus; successor of E ROOT SzmtCW13) | handover FOREMAN_E_STATUS | E ROOT | session_01DgYSWqAEkHoFF4gFWC5Yxg | RUNNING | 18/11 05:57Z |
 | REVIEW hud-mood-bar 04bb279 (SMALL; sonnet; brief briefs/review-hud-mood-bar.md) | review/hud-mood-bar | MAIN ROOT-46 | session_01UV1Szgt5ATvToTiS3v5M3Z | RUNNING | 18/11 05:54Z |
 | place-stage r5 (owner pick B 501 + vivid marker + 4-person iPad trial; sonnet; brief briefs/place-stage-r5.md; r4 SzjeRxj archived) | review/place-stage | MAIN ROOT-46 | session_01UV1SzkV3Bc1u4BHrVH1jFj | RUNNING | 18/11 05:54Z |
+| look-fx-wire #6 (R9c LOOK fails: hard wedge/box edge round marks, mouth speck, harness shots; sonnet; brief briefs/look-fx-wire-6.md; #5 archived) | review/look-fx-wire | MAIN ROOT-46 | (opening) | RUNNING | 18/11 06:02Z |
