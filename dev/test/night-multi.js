@@ -47,7 +47,7 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
  ok("1 several successes → higher Sủng; equal → seeded (order-free)",r.me.me===1&&r.me.B===0&&r.B.B===1&&r.B.me===0&&r.me.A===0&&r.B.A===0&&r.tie[0]===r.tie[1]&&(r.tie[2]==null||r.tie[2]>=2),r);
  /* 2. NPC vs NPC: B's agent choice is made AT the flip (the commit), resolved once; B only; the Sổ ghi line is true */
  r=await p.evaluate(()=>{const L=T.setup();const [A,B]=L;window.stealWant=(v,t)=>v===B&&t===A?{u:1,p:1,mode:"feign"}:{u:0,p:0,mode:null};const n0=T.recs(L);
-  const a={pre:S.tonight==null};const mr=Math.random;Math.random=()=>.001;let lg0=(S.log||[]).length;try{T.commitA(A)}finally{Math.random=mr}
+  const a={pre:S.tonight==null};const mr=Math.random;Math.random=()=>.001;const sl=BAL.mind&&BAL.mind.slip;if(BAL.mind)BAL.mind.slip=0;/* the .001 stub would also force the Emperor agent's mindPick slip (jmind: pick the first candidate) */let lg0=(S.log||[]).length;try{T.commitA(A)}finally{Math.random=mr;if(BAL.mind)BAL.mind.slip=sl}
   const e=T.recs(L);a.A=e.r0-n0.r0;a.B=e.r1-n0.r1;a.me=e.me-n0.me;const LG=(S.log||[]).map(x=>String(x.t||x)).join(" | ");a.wrong=new RegExp("thẻ bài của "+B.name+" được lật").test(LG);T.fin();return a});
  ok("2 NPC vs NPC at the flip: thief only, true line",r.pre&&r.B===1&&r.A===0&&r.me===0&&!r.wrong,r);
  /* 3. a failed try = stealFail: the mode's own loss from BAL.steal.m[mode].lose (Chặn ngự giá costs more than Tranh sủng) */
