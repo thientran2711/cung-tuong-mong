@@ -8,7 +8,7 @@
    Continuity (ROAD_MAP §5): the people of a road (A.act: rival, enemy, mistress …) are cast ONCE and carried from chapter to chapter
    (S.st.f14.act); a person who died or left is recast and the chapter's cast() decides if that is allowed. The ending of each chapter is kept
    (S.st.f14.re) so the next chapter opens on the hồi that follows from it (beat if:()=>rdPrev(...)). Chapter .11 is the road's finale and
-   closes the origin story (replaces the j67 «Kết cục xuất thân» milestone for this life).
+   closes the origin story (replaces the j67 «Khép nẻo đời» milestone for this life).
    ONE CORE (OD:L1267): chapter-level numbers live in BAL.road (jbal2.js). Kit only: every screen is the j67 card / kit event frame. */
 const ROAD14={};
 /* shared helpers for every road data file (jrd_<origin>.js): hostile/friendly roles are REAL both ways (OD:L1247) */
@@ -93,8 +93,8 @@ function rdFinale(A,E,fb){const c=S.st.ch,rd=S.st.f14.rd,Q0=QUEST67[c.k]||QUEST6
  const T=BAL.road.finTier,t=E.k>0?T.win:E.k<0?T.lose:T.mid;const R=reward67("family",t);
  const L=Object.keys(S.st.f14.ends).map(Number).sort((x,y)=>x-y).map(n=>{const id=n===BAL.road.first-1?rd:ROAD14[rd][n];const p=c.past.find(x=>x.a===id);return p?`Chương ${p.n}: ${ARC67[id].t} · <span class="${p.k>0?"g":p.k<0?"r":""}">${p.tag}</span>`:""}).filter(Boolean);
  if(!fb)L.push(`Chương ${c.n}: ${ARC67[A.a].t} · <span class="${E.k>0?"g":E.k<0?"r":""}">${A.tag}</span>`);
- log(`<b class="${E.k>0?"g":E.k<0?"r":""}">Kết cục xuất thân «${Q0.t}»: ${A.tag}.</b>${R?` Phần thưởng: ${itm(R.k).n}.`:""}`);
- card67("result",`Kết cục xuất thân: ${Q0.t}`,[["Tuyến",ARC67[rd].t],["Kết cục",A.tag,E.k>0?"g":E.k<0?"r":""],["Các chương",L.join("<br>")],R&&R.row,["Về sau","Mệnh truyện còn tiếp: con cái, ngôi Trung cung"]],pMe())}
+ log(`<b class="${E.k>0?"g":E.k<0?"r":""}">Khép nẻo đời «${Q0.t}»: ${A.tag}.</b>${R?` Phần thưởng: ${itm(R.k).n}.`:""}`);
+ card67("result",`Khép nẻo đời: ${Q0.t}`,[["Tuyến",ARC67[rd].t],["Kết quả",A.tag,E.k>0?"g":E.k<0?"r":""],["Các chương",L.join("<br>")],R&&R.row,["Về sau","Mệnh truyện còn tiếp: con cái, ngôi Trung cung"]],pMe())}
 window.rdPrev=rdPrev;window.rdEnd=rdEnd;window.rdFull=rdFull;
 /* the sign of the latest chapter's ending of this road (1 won, 0 middle, −1 lost); opening hồi pick on it */
 function rdK(){try{const r=S.st.f14.re;return r?r.k:0}catch(e){return 0}}
@@ -136,7 +136,7 @@ window.rdR97=rdR97;
 setTimeout(()=>{try{if(typeof wrap67==="function")Object.keys(STORY).forEach(wrap67)}catch(e){console.error(e)}},0);
 /* the road's .11 could not run (its cast is gone and jst14 put a shared arc in its slot, or the road was cut short): once the main story has
    passed chapter BAL.road.last, the origin ending is still told — from the last road chapter that ran (its ending and sign → finTier), so every
-   full-road life gets its «Kết cục xuất thân» (B3 finding, every origin) */
+   full-road life gets its «Khép nẻo đời» (B3 finding, every origin) */
 (function(){const a0=chAdvance67;chAdvance67=function(E){const r=a0.apply(this,arguments);try{if(rdOn()){const c=S.st.ch,f=S.st.f14,rd=f.rd;
   if(c&&!c.fin&&c.n>BAL.road.last&&f.re){const n=f.re.n,id=n===BAL.road.first-1?rd:ROAD14[rd][n],p=c.past.slice().reverse().find(x=>x.a===id);
    if(p)rdFinale({a:id,tag:p.tag},{k:p.k},1)}}}catch(e){console.error(e)}return r}})();
