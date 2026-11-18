@@ -47,3 +47,43 @@ OPEN — MAIN ROOT-55 order 20:08Z (session_01Rc5AsNFnALGujUFYDSjs4g, verbatim p
 3. Then merge newest origin/main, quickcheck + old save + the 3 tests (fold + ipadAir), Fold 755x1000 + iPad 1180x820 shots LOOKED, CDN img/_review/stage-here/ (403 here → dev/handover/shots/stage-here/), report SẴN SÀNG KIỂM <sha> to ROOT-55.
 4. Reply to ROOT-55 on K-ICO-ALERT: missing kit icon = `img/kit/ico-alert.webp` (square rail icon, ico-cal/ico-goal family; motif: half-closed palace gate or small bell) — already sent in this handover message.
 Worktree /home/user/wt/stage-here (sparse) can be reused or deleted.
+
+## r2 (successor session_01Rc5AsHiLwk4MGH662uw5L3, depth 3, START_CTX ~3 %)
+PRIORITY #1 CHECK ('toast' / 'Lẻn vào' / 'ở lại' / 'ACT_PLACE'): OD 18/11 ~19:45Z (5), ~19:55Z, ~20:00Z + MAIN ROOT-55 order 20:08Z | main jplst kitLineToast (§87), jclose kitLine/kitLinePos (§42.2), j41 accSneak/accSneakO/BAL.sneak.danh, j2 goTo("home") free walk, jplx PLX places, jact2 AS_FPLACE (banquets at thu) | review/stage-rightcol 5f00b0c MERGED (built on it) | claims stage-here #1 rolled over → me
+Branch `review/stage-here`, head **d0d3779** (merge stage-rightcol 90e3e97 · r2 code · merge origin/main 9366028 · toast watch).
+
+### LOOK (1) toast covers tab row / place name — whole toast group (KIT §42.2 KEEP-CLEAR)
+`kitToastClear(el,dir)` (jclose, kit) moves every one-line toast — §87 `#ktbtoast` (kitLineToast) and §42.2 `#kupdline` (kitLine) — off `KIT_TOAST_KEEP`: top bar, `#tabs`, `.pctabs`, `.ktsub`, `.kpbar`, `[role=tablist]`, place name `#kpname`/`#sc-t`, figure name tags `.tok .tag`/`.j59n`, podium plaques, dialog titles. Top toast slides down (no room → bottom spot above the tab bar, sliding up); bottom pill slides up. `kitToastRefit()` after every render + `kitToastWatch()` every 300 ms while a toast is up (tab switches that skip render). No private position anywhere. The result card `#rtoast` (bottom card, §28.10) was not moved: it is a card, not a one-line toast — say if MAIN wants it in the group.
+Scan (`DEV=fold|ipadAir node dev/test/stage-here.js`, new fault `toast-cover`, 6 cases × 18 tabs):
+| build | Fold rows covering | iPad rows covering |
+|---|---|---|
+| e8e5afe (before; toast fixed at hud+6) | every toast row (sub-tab row / place name under it, see r1 shots) | same |
+| refit on render only (intermediate) | 25 | 4 |
+| d0d3779 (clear + watch) | **0** | **0** |
+(2) Fold: stage = S.place on every tab that has a stage (place page = Ngự hoa viên painting, toast clear of place name + figure names) — shot r2-fold-vuon-place.jpg.
+
+### Gaps a–d (MAIN rulings)
+(a) home acts → ACT_PLACE "home": Nghỉ ngơi một lát, Điểm trang, Đọc sách giải khuây, Dưỡng nhan, Giả bệnh, Trò chuyện với cung nữ, Đọc binh thư sử sách, Nghỉ ngơi dưỡng sức, Nghĩ cách trốn khỏi cung, Dâng biểu xin xuất gia. goTo("home") has no walk spend (j2:124) → one cost.
+(b) «Cầu tự ở Phụng Tiên điện» → tn (Đức Thọ cung, incense hall of the Thái hậu); «Múa trong yến tiệc» → thu (Cần Chính điện, where the festival banquets already sit: jact2 AS_FPLACE newyear/giaothua). No map spot added. MAIN: change the key in ACT_PLACE if another place is wanted.
+(c) `ACT_REMOTE` = Cài tai mắt, Sai cung nữ đi dò la, Nghe ngóng chung, Mời thái y bắt mạch: no move; hook `window.actRemoteHook(a)` → place key or null for Foreman D parallel-time.
+(d) staying after closing = Lẻn vào: `stayRoll` (jstagehere, wraps nextBuoi) — at a buổi turn that finds her still inside a place now closed to her, ONE roll for that buổi with j41 `accSneakO(k)`; caught = Danh -`BAL.sneak.danh` + `punish` (accSneak's fail branch) + guards walk her home + card «Bị bắt»; not caught = stays + log line. Chip: «… sắp đóng cửa sau khắc này (đóng cửa tối). Ở lại = như lẻn vào: Khá chắc.» No new number. NOTE for BIG review: `accSneakO` bases (25/30/35/45/55) are pre-existing typed numbers in j41 (not BAL) — reused, not changed. Two-way: NPCs never stay in a barred place (j41 placeWhere sends them home) — unchanged.
+
+### Act audit (`node dev/test/act-place-audit.js`, start AWAY in Ngự hoa viên; fold + ipadAir: 28 acts, 20 bound, 0 bad)
+| act | place | moves | stays | stage | charged once (card = spent) |
+|---|---|---|---|---|---|
+| Thỉnh an Thái hậu / Nhờ Thái hậu nói giúp / Cầu tự ở Phụng Tiên điện | tn | yes | yes | yes | 2=2 / 1=1 / 2=2 |
+| Thỉnh an Hoàng hậu | kn | yes | yes | yes | 2=2 |
+| Hối lộ KSP / Xem sổ nguyệt sự / Xem lén / Xin rút thẻ bài | ksp | yes | yes | yes | 2=2 / 1=1 / 2=2 / 1=1 |
+| Sang Thái y viện xin bắt mạch | tyv | yes | yes | yes | 3=3 |
+| Múa trong yến tiệc | thu | yes | yes | yes | 4=4 |
+| 10 home acts (list a) | home | yes (from vườn) | yes | yes | yes |
+| Cài tai mắt, Sai cung nữ đi dò la, Nghe ngóng chung, Mời thái y | remote | no | — | — | yes |
+**GAPS FOR MAIN** (not bound, need a ruling): «Phát bạc cứu giúp cung nhân nghèo» (person act → cnh Dãy cung nhân?), «Để ý một nam nhân áo gấm», «Xin ban hôn cho Vương gia», «Xin về quê phụng dưỡng cha mẹ» (petitions: written at home, or Cần Chính điện?).
+
+### Tests (d0d3779 unless noted)
+- stage-here.js fold **0/114**, ipadAir **0/114** (incl. toast-cover), old save ok, no h-overflow, no page errors.
+- stage-stay.js (new) ipadAir + fold: caught → home, Danh -8 (= BAL.sneak.danh), «Bị bắt», rolled once; free → stays, no loss; own palace never rolls; chip carries the odds word; old save ok.
+- act-place-audit.js ipadAir + fold: 0 bad. stage-here-scan.js ipadAir: every place × act/rel/inv = her place picture. stage-rightcol.js: bad 0.
+- quickcheck (c1a1c43): build ok, old save ok, perf new/live render 222/236, tab 398/425, buổi 1210/1501 ms; **CORE GATE G3 kit-conform FAIL = PRE-EXISTING**: dialog `contest` MISSING also on origin/main 9366028 (same script, same box); `cold-palace` MISSING once was flaky (passed on 2 reruns). **Final sha d0d3779: QUICKCHECK PASS · 153 s · old save ok · core gates PASS (G3 passed this run) · perf new/live render 160/196, tab 323/389, buổi 1087/917 ms.**
+### Shots (CDN 403 → dev/handover/shots/stage-here/, LOOKED; delete after verdict)
+r2-fold-vuon-place.jpg (Fold 755x1000: away in Ngự hoa viên, stage painting, "!" + chip below the top bar, place name + figure names clear) · r2-ipadAir-vuon-act.jpg (iPad 1180x820 Hành sự: stage = vườn | cards; chip under the sub-tab row and the place name) · r2-ipadAir-vuon-rel.jpg (Giao tình: same rule).
