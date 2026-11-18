@@ -63,7 +63,7 @@ for j in J.values():
             for a,b in REPL: j[kk]=j[kk].replace(a,b)
 json.dump(J,open("jobs.json","w"),indent=0)
 # HUADIAN.md
-L=["# Hoa điền (huadian) — bảng kiểu cho phi tần c01–c32 (art7, luật sếp 11/14)","","Xem thêm dev/figwork/HUADIAN_C.md: kiểu của 52 cung nữ lên phi tần (thợ Part C), phải khác hết 32 kiểu dưới đây.","",
+L=["# Hoa điền (huadian) — bảng kiểu cho phi tần c01–c32 (art7, luật sếp 11/14)","","Xem thêm dev/figwork/HUADIAN_C.md: kiểu của m01–m52 ở bậc phi tần (thợ Part C), phải khác hết 32 kiểu dưới đây.","",
 "Mỗi người một hoạ tiết riêng, giữ suốt đời (mọi bậc, mọi tuổi); bậc càng cao càng sang nhờ chất liệu, độ cầu kỳ, số chi tiết (8 nấc dưới đây).",
 "LUẬT CỠ (sếp nới, 11/14): t1 = cỡ hoa son c03 t1; mỗi bậc to thêm khoảng 5%; t8 (phượng/mẫu đơn Hoàng hậu) to nhất ≈ 1.4 lần t1. Không bao giờ to đùng; nằm gọn giữa hai mày; bậc cao sang hơn chủ yếu nhờ chất liệu, độ cầu kỳ, số chi tiết;",
 "không bao giờ che trán, không lan xuống mày/má. Chỉ phi tần có hoa điền (không cung nữ, ma ma...). Lãnh cung (tcold): KHÔNG hoa điền.",
