@@ -426,6 +426,7 @@ Owner's «CTM-CAL …» code (if it arrives) → dev/tools/mgcal_apply.py "<code
 DONE this shift: SET BONUS a95e8d4 LIVE (builder + rv archived; tickets: run_par not reproducible; set UI waits KIT REQUEST (6), BAL.shelf.ui=0; 6 décor pieces no art). G1 #2/#3, G2, G3, C-AG #9 archived.
 FOR MAIN still open (sent): emotion-acts.js, toil-react 'modal is on top', staff-cap-apply row 3 fail on live (D owns the last two).
 ## FOREMAN C-AG #10 lines
+- 07:38Z C-AG #10: opened FOREMAN C-AG #11 = session_01UV1SzkgegQEiMEPpSv12RN (my child, depth 6); my wake trig_017iVnbRribCEHMb3A9ZxBwL DISABLED; stopping.
 FOREMAN C-AG #10 = session_01UV1SzjAd8BYMMz2rKFZitp (main's account, child of C-AG #9) · START_CTX ~9 % (est; get_session reads 0) → roll over at >= 34 %, ceiling 60 % · depth 5 (may open #11 at depth 6; #11 must NOT open a child foreman) · own hourly wake (:32) · reports to MAIN ROOT-45 session_01UV1SzikTZwNu6Q6dJKkcGi.
 - 07:38Z C-AG #10: MAIN is now ROOT-49 session_01UV1SzicNuc6RxVvcxNUHKK (verified parent ROOT-48); live e0b9662 (place-stage + kit, no co-op core). Rolled over → C-AG #11.
 - 07:35Z C-AG #10: npc-purpose BIG rv SziEkem PHASE A on b723a1e = FAIL, 9 blocking, one family = event RATES (dead kinds e.g. drop-in visits 0/17977; tryst/seek/affair dead zones; story clock re-fires monthly; npcTell without knowledge; cooldowns stamped before the chance roll; srvCard/poison/Lập công 8–10× shifts). PASS parts: one helper, one-core (G2 guard fix correct), old save, perf ≈0. Report reports/review-npc-purpose.md. G1 #4 fixes → rv re-gates → PHASE B after LIVE.
