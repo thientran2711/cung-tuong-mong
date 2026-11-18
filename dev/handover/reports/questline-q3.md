@@ -75,3 +75,8 @@ Re-tag table (before → after):
 | td_an_8:x1:1 | người đủ cao (unnamed) | go |
 | nc_su_6:c1:0 · bd_hoa_6:c1:0 | {pa} = Hoàng huynh / Đại huynh | bro |
 `off` now 38 (Ngự sử, Hàn lâm / học sĩ, Lại bộ, Lễ bộ, Hộ bộ, sứ thần / sứ quán / sứ đoàn, phó tướng, Thái bộc, lão quan bộ Lễ). Roles: off 38 · go 31 · dad 25 · bro 18 · eun 18 · fam 18 · dan 14 · th 12 · srv 11 · n1 9 · hh 5 · v 4 · emp 4 · doc 3 · mom 2 · maid / man / foe / mis 1. Answer lines 80 (16 types × 5).
+
+## FIX 2 (review E9r2 ROUND 2) — review/questline-q3 dcc822b1, rebased on origin/main 13e2b834
+- Gentry are not commoners: new role/type `si` («Vị ấy», BAL w [40,30,25,5], 5 own lines, no shared sentence) for nc_vuong_6:s2:2 · nc_vuong_9:c1:1 · bd_hoang_6:s2:2 · bd_hoang_9:c1:1 (phu nhân Thượng thư Lễ bộ), thd_sach_11:s2:2 (sĩ lâm), thd_sach_8:c1:2 (học trò của cha).
+- The 8 remaining `dan` tags (thầy kiện ×2, thợ cung, đội trưởng canh phòng, a clerk, lái buôn, trạm dịch quân, đoàn quân lương — palace and frontier alike) get neutral lines: no «tiền công», «chuyện trong cung», «quán trà».
+- Rebased (built files only differ; assemble.py = main + jrdhp.js), rebuilt. roadhp-scan PASS (4 320 rendered lines, 0 leftover) · roadhp-unit PASS · quickcheck PASS (150 s, old save ok, core gates PASS). Answer lines 85 (17 types × 5).
