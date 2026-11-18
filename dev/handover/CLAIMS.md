@@ -403,7 +403,7 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | REVIEW coop-thin-e r1 (opus BIG) of d3396d96 | review/coop-thin-e-r1 | B | session_01N1tNP4ndRrNNvpxebeB5b9 | RUNNING | 18/11 04:30Z |
 | cloth-xoc r3 (crease look redo + stain-decal layer; opus: hard rendering root cause after 2 FAILs) | review/cloth-xoc | MAIN s39 | session_01UV1SzkYmApqhLJ8fozxZi3 | ROLLED OVER @57afd8a (crease look improved, lv1/2 weak; stain not started; handover in reports/cloth-xoc.md r3) | 17/11 23:12Z |
 | cloth-xoc r4 (crease lv1/lv2 + stain-decal layer; sonnet) | review/cloth-xoc | MAIN s39 | session_01UV1SzjnD2foC6FyKie4bD3 | ROLLED OVER @8dab3d4 → r6 | 17/11 23:23Z |
-| odds-cap review ROUND 2 (opus BIG) of fcefca42 | review/odds-cap-r1 | D | session_01964izFgd4LMUTiKvpBrSVD | RUNNING | 17/11 23:38Z |
+| odds-cap review ROUND 2 (opus BIG) of fcefca42 | review/odds-cap-r1 | D | session_01964izFgd4LMUTiKvpBrSVD | FAIL 3 @9df9204d (archived) | 17/11 23:38Z |
 | NPC-CHAIN LANDER #2 (opus): coop hold fix ('buổi advanced both seats') → new PASS | review/npc-chain-land | C-AG | session_01UV1SzhJFho1Xs76yNi63tL | ROLLED OVER → SzjwxQs (archived) | 18/11 00:07Z |
 | REVIEW looks-s40 (toil-looks5 c52cb985 + tuyet-glow 7e80f3cd; sonnet SMALL; brief briefs/review-looks-s40.md) | review/looks-s40 | MAIN s40 | session_01UV1Szk7eZQzR2d2t4rhiFj | RUNNING | 18/11 00:25Z |
 | OWNER BUG staff-cap (servant cap by rank not enforced/told in all lives; opus; brief briefs/staff-cap-bug.md) | review/staff-cap-fix | MAIN s40 | session_01UV1SziJshKyRMZV2hXkoFD | SẴN SÀNG KIỂM a2389cc | 18/11 01:15Z |
@@ -467,3 +467,5 @@ c12 a18 Nữ đế #2 (r8 first) soft-smile (Round 42) | claude/cung-tuong-mong-
 | FOREMAN C-AG #10 (opus; successor of #9, opened by C-AG #9) | handover FOREMAN_C_STATUS | C-AG #9 | session_01UV1SzjAd8BYMMz2rKFZitp | RUNNING | 18/11 05:00Z |
 c12 a18 t5–t8 headdress re-do from live originals (Round 43) | claude/cung-tuong-mong-handover-hj0h8w (art, _review CDN) | session_011xDdVPdhZPQct6rWX6fDaZ | CANCELLED (owner: c12 OK, no redraw; 05:22Z) | 2026-11-18T05:16Z
 | NPC-PURPOSE G1 #3 + integrator (opus; successor of Szk6vem, head 9bf916a) | review/npc-purpose | C-AG #10 | session_01UV1Szm7n34pm29edeDhQ3Q | RUNNING | 18/11 04:52Z |
+| odds-cap FIX round 3 (opus; FAIL 3 @9df9204d) | review/odds-cap | D | session_01964izECUsWiXJp3oXeZY7A | RUNNING | 18/11 04:57Z |
+| staff-cap-row3 + stale test selectors (sonnet; ROOT-44 04:25Z/04:36Z) | review/staff-cap-row3 | D | session_01964izBkYM6cmkq3vk8mUDm | RUNNING | 18/11 04:57Z |
