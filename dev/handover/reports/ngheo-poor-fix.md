@@ -18,7 +18,7 @@ CDN: https://ctm-img.victoria-tntt.workers.dev/img/_review/kc2k/ cNN_a18_ngheo_n
 ## REDRAWS
 | person | item (H nhà nghèo #) | gens | cut-out | note |
 |---|---|---|---|---|
-| c09 | wooden spindle with spun thread (7) | 1 | none needed | songbird of her spec5 pose kept |
+| c09 | wooden spindle with spun thread (7) | 3 (r1 FAIL: songbird + spindle = two items, background haze; r2 mole on cheek; r3 PASS) | none needed (r3) | ROOT-34 order: songbird dropped, K3 'IGNORE its background… NOTHING behind or around her' sentence appended |
 | c10 | bunch of fresh herbs tied with straw (4) | 1 | yes | |
 | c11 | plain bamboo-leaf fan (9) | 1 | yes | |
 | c12 | small basket of mulberry leaves (5) | 1 | none | |
@@ -31,7 +31,7 @@ CDN: https://ctm-img.victoria-tntt.workers.dev/img/_review/kc2k/ cNN_a18_ngheo_n
 | c32 | skein of hemp thread (2) | 1 | yes | |
 | c09 kc | small bamboo flute (khuê các 7) | 1 | yes | was fan + handkerchief; builder hoop replaced by one item, her spec5 songbird pose kept |
 | c11 kc | small painted-silk sachet with a cord (khuê các 9) | 1 | yes | was fan + handkerchief; one item |
-All looked at: reads poor but neat/pretty (cotton jacket, linen apron, one or two plain wooden pins + one fresh flower from the builder, no gold, no jade, no necklace), closed lips, bare forehead, item below the chin, frontal/three-quarter. 13 gens total (11 nhà nghèo + 2 khuê các), 0 regens, 10 cut-outs with images_remove_background (alpha 0..255; the rest had real alpha). Sheets sheet_cNN_new.jpg (c09/c11 sheets show nhà nghèo then khuê các, old 2K | new).
+All looked at: reads poor but neat/pretty (cotton jacket, linen apron, one or two plain wooden pins + one fresh flower from the builder, no gold, no jade, no necklace), closed lips, bare forehead, item below the chin, frontal/three-quarter. 15 gens total (11 nhà nghèo + 2 khuê các + 2 c09 regens), 10 cut-outs with images_remove_background (alpha 0..255; the rest had real alpha). Sheets sheet_cNN_new.jpg (c09/c11 sheets show nhà nghèo then khuê các, old 2K | new).
 Prompt deviations (documented, all item-driven): c30 pose verb 'reading' -> 'looking at' (comb), c08 lantern removed (one item). Everything else = build.py output with only the item phrase swapped.
 
 ## HANDOVER K5: DONE, nothing pending. Foreman may want to rule: c05/c08 were flagged by K5 (not on the owner list) and redrawn too.
