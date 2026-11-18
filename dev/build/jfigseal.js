@@ -28,7 +28,7 @@ function kfsBox(fig){const r=fig.getBoundingClientRect();let bx=r.left,by=r.top,
  if(nw&&nh&&bw>0&&bh>0){const ar=nw/nh;if(bw/bh>ar){const w=bh*ar;bx+=(bw-w)/2;bw=w}else{const h=bw/ar;by+=(bh-h)/2;bh=h}}return{bx,by,bw,bh}}
 const KFS_SEAL=new WeakMap();
 /* the element the seal is a child of: the nearest ancestor of the figure that does not clip its children (a figure picture box such as .kszfs is overflow:hidden), made a positioning parent (.kfshost) when it is static */
-function kfsHost(fig){let e=fig.parentElement;while(e&&e!==document.body){const c=getComputedStyle(e);if(c.overflowX==="visible"&&c.overflowY==="visible"){if(c.position==="static")e.classList.add("kfshost");return e}e=e.parentElement}return fig.offsetParent||fig.parentElement}
+function kfsHost(fig){{const bk=fig.closest&&fig.closest(".kbk-person.kbk-full");if(bk){if(getComputedStyle(bk).position==="static")bk.classList.add("kfshost");return bk}}/* KIT 34.6 r5: on a book person page the seal belongs to the page, not to the clipped figure column */let e=fig.parentElement;while(e&&e!==document.body){const c=getComputedStyle(e);if(c.overflowX==="visible"&&c.overflowY==="visible"){if(c.position==="static")e.classList.add("kfshost");return e}e=e.parentElement}return fig.offsetParent||fig.parentElement}
 function kfsDrop(fig){const s=KFS_SEAL.get(fig);if(s){s.remove();KFS_SEAL.delete(fig)}}
 function kitFigSeal(fig){try{
  if(!fig||!fig.isConnected||typeof emoOn!=="function"||!emoOn())return kfsDrop(fig);
@@ -44,6 +44,8 @@ function kitFigSeal(fig){try{
  const B=kfsBox(fig);if(B.bh<60){el.style.display="none";return}
  const K=KIT_FIGSEAL,ht=b.ht!=null?b.ht:b.t,body=Math.max(20,(b.b-ht)*B.bh);
  const s=Math.round(Math.max(K.min,Math.min(K.max,body*K.k)));
+ /* KIT 34.6 r5 (owner 18/11 ~03:35Z "figure runs under the ? chip"): on a BOOK person page the seal sits in ONE fixed slot, the right end of the name row of the text column (padding reserved by .kbk-phead), never on any figure, the same slot on every page */
+ if(host.matches&&host.matches(".kbk-person.kbk-full")){const ph=host.querySelector(":scope>.kbk-phead");if(ph){const q=Math.min(s,46),css=`left:${ph.offsetLeft+ph.offsetWidth-q}px;top:${ph.offsetTop+2}px;width:${q}px;height:${q}px`;if(el.style.cssText!==css)el.style.cssText=css;el.dataset.kfsb="book";return}}
  const k=Math.min(20,Math.max(1,K.rows|0)),rr=b.wr&&b.wr[k]!=null?b.wr[k]:null,ll=b.wl&&b.wl[k]!=null?b.wl[k]:null;
  const cx=B.bx+B.bw*((b.cl!=null&&b.cr>b.cl)?(b.cl+b.cr)/2:.5),gap=Math.max(2,body*K.gap);
  const edgeR=rr!=null?B.bx+B.bw*rr:cx+body*.09,edgeL=ll!=null?B.bx+B.bw*ll:cx-body*.09;
