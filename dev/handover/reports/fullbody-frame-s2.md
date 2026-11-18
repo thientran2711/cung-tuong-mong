@@ -16,3 +16,7 @@ Caveat: file names ending -widest-robe show the real m48 art; the Hoang hau name
 Quickcheck: dev/test/quickcheck.sh does not exist on this branch; ran build_site.sh (media-check + img-allowlist OK), fullbody-frames-scan ALL OK, fullbody-frame-scan (book r5) ALL OK, no page errors except the known harness "Unexpected token '<'". G3 / place:vuon / contest flakes not run.
 Known: frames at XL on Fold are scaled by the frame cap (shrink .86) the same for everybody; 2-person stages still scale to the column width (so they never overlap) — the only per-frame exception.
 ~85% xong / ~75% chơi được (owner shot check + go-live of c03 a18 pending).
+
+## r2 (ROOT-49 request): owner-format shots + real quickcheck
+QUICKCHECK PASS 3849dddf vs live 9c581406 (dev/tools/quickcheck.sh): core gates PASS, time-spill PASS, open 1403 ms, old save ok, perf new/live render 152/170, tab 464/433, buoi 1078/932, long tasks 16/16. (The earlier "quickcheck missing" note was wrong.)
+AFTER-ONLY pairs, Fold 755x1000@2 left | iPad 1180x820@2 right, widest-robe art (fig-maid-m48-t8-a51), LOOKED: https://ctm-img.victoria-tntt.workers.dev/img/_review/fullbody-frame-s2/{news,choice,pdlg,idcard,shop,event}-fold-ipad-after.jpg ; event = real PEND event "ch1" (Thai hau goi ta vao Duc Tho cung, 2 real options). Note: on the event the tag "Thai hau" sits over the tall crown (tag above, crown behind).
