@@ -47,8 +47,16 @@ fs.mkdirSync(DIR,{recursive:true});let fail=0;const ck=(n,c,x)=>{console.log((c?
   const r1=rkOf(v);const sv=BAL.hd.shop;BAL.hd.shop=100;restock();BAL.hd.shop=sv;return{n0,n1,r0,r1,shop:S.shop.filter(k=>WD_ITEMS[k]&&WD_ITEMS[k].sl==='hd')}});
  ck('promotion gives one hoa điền',pr.r1<=pr.r0||pr.n1===pr.n0+1,pr);ck('restock can carry a hoa điền',pr.shop.length>=1,pr.shop);
 
+ /* 3b. r3: dropped designs (BAL.hd.drop): never given out, an old save owning one maps to the nearest kept design by phẩm, no crash */
+ const dr=await p.evaluate(()=>{const D=BAL.hd.drop.slice();const pools=[1,2,3,4,5,6,7,8].map(P=>wdPool('hd',P));const given=new Set();for(let i=0;i<200;i++)for(let P=1;P<=8;P++){const k=wdPickAt(P,'hd',0);if(k)given.add(k)}
+  const v=rivals.find(x=>x.alive&&x!==S);v.inv=(v.inv||[]).filter(e=>!WD_ITEMS[e.k]||WD_ITEMS[e.k].sl!=='hd');v.inv.push({k:D[0]},{k:D[1]});const own=hdOwned(v).map(e=>e.k);
+  S.toilette={day:toilWk()*10,wk:toilWk(),score:60,makeup:true,look:'vua',hd:{k:D[1],q:.9}};const sh=hdShown(S);
+  return{D,empty:pools.map(a=>a.length),given:[...given],own,map:D.map(k=>hdMap(k)),shown:sh&&sh.k}});
+ ck('dropped designs are never given out (pool / pick), empty phẩm falls back to a kept one',dr.D.every(k=>!dr.given.includes(k))&&dr.empty.every(n=>n>0),dr);
+ ck('old save owning a dropped design maps to a kept one (no crash)',dr.own.length>0&&dr.own.every(k=>!dr.D.includes(k))&&dr.map.every(k=>!dr.D.includes(k))&&!dr.D.includes(dr.shown),dr);
+
  /* 4. the makeup step, played: give her two hoa điền, run the morning sitting fast, pick one, drag it onto the forehead, straighten it, Dán */
- async function sitting(good){await p.evaluate(()=>{Q.length=0;S.buoi=0;used=0;S.suc=90;S.toilette=null;S.toilSeen=null;S.inv=(S.inv||[]).filter(e=>!WD_ITEMS[e.k]||WD_ITEMS[e.k].sl!=='hd');S.inv.push({k:'hd_dao'},{k:'hoadien_bac'});
+ async function sitting(good){await p.evaluate(()=>{Q.length=0;S.buoi=0;used=0;S.suc=90;S.toilette=null;S.toilSeen=null;S.inv=(S.inv||[]).filter(e=>!WD_ITEMS[e.k]||WD_ITEMS[e.k].sl!=='hd');S.inv.push({k:'hd_dao'},{k:'hd_sen'});
    try{closeModal()}catch(e){}deal();render()});await p.waitForTimeout(500);
   for(let i=0;i<4;i++){try{await require('./lib/roulette').clearMoments(p)}catch(e){}await p.evaluate(()=>document.querySelectorAll('.kfgain').forEach(e=>e.remove()));await p.waitForTimeout(200)}
   await p.evaluate(()=>{const c=document.querySelector('#k3tt [data-k3="toil"]');if(c)c.click();else toilOpen()});await p.waitForSelector('#kg82 .toilw');await p.waitForTimeout(500);
@@ -58,8 +66,8 @@ fs.mkdirSync(DIR,{recursive:true});let fail=0;const ck=(n,c,x)=>{console.log((c?
   await p.waitForSelector('#kg82 [data-hdk]',{timeout:60000});await p.waitForTimeout(400);
   const pick=await p.evaluate(()=>({n:document.querySelectorAll('#kg82 [data-hdk]').length,lbl:[...document.querySelectorAll('#kg82 [data-hdk]')].map(b=>b.textContent)}));
   await p.screenshot({path:`${DIR}/hd-${tag}-1-pick${good?'':'-miss'}.jpg`,quality:70});
-  await p.click('#kg82 [data-hdk="hoadien_bac"]');await p.waitForFunction(()=>HD.peek&&HD.peek(),null,{timeout:20000});await p.waitForTimeout(300);
-  await p.waitForFunction(()=>{const i=kg82Img('chai-bg');const h=HD_IMG.hoadien_bac;return i.complete&&i.naturalWidth&&h&&h.complete&&h.naturalWidth},null,{timeout:90000}).catch(()=>{});await p.waitForTimeout(800);
+  await p.click('#kg82 [data-hdk="hd_sen"]');await p.waitForFunction(()=>HD.peek&&HD.peek(),null,{timeout:20000});await p.waitForTimeout(300);
+  await p.waitForFunction(()=>{const i=kg82Img('chai-bg');const h=HD_IMG.hd_sen;return i.complete&&i.naturalWidth&&h&&h.complete&&h.naturalWidth},null,{timeout:90000}).catch(()=>{});await p.waitForTimeout(800);
   const pk=await p.evaluate(()=>HD.peek());const tx=good?pk.anchor.x:pk.anchor.x+pk.ed*.5,ty=good?pk.anchor.y:pk.anchor.y-pk.ed*.3;
   /* drag from a point on the board (relative drag: the finger never covers the target) */
   const sx=pk.at.x-40,sy=pk.at.y+30,ex=sx+(tx-pk.at.x),ey=sy+(ty-pk.at.y);
