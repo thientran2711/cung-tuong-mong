@@ -12,7 +12,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));let bad=0;const ck=(n,ok,d)=>{con
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function');await sleep(2500);
   await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;
    for(let i=0;i<400;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;try{NLP=null}catch(e){}render()});
-  await sleep(1200);await p.addStyleTag({content:'#kroul,#kboot,#kbootw,#kload{display:none!important}'});
+  await sleep(1200);await p.addStyleTag({content:'#kroul,#kboot,#kbootw,#kload,#klife{display:none!important}'});
   const imgs=()=>p.evaluate(()=>Promise.all([...document.querySelectorAll('#modal img')].map(i=>i.complete?0:new Promise(r=>{i.onload=i.onerror=r;setTimeout(r,8000)}))));
   const shot=async n=>{await imgs();await sleep(700);for(let t=0;t<3;t++){try{await p.screenshot({path:`${OUT}/${n}-${wh}.jpg`,type:'jpeg',quality:80,timeout:120000});break}catch(e){await sleep(2000)}}};
   const geo=()=>p.evaluate(()=>{const M=document.getElementById('modal'),d=M&&M.querySelector('.dlg'),g=M&&M.querySelector('.kshg');if(!d||!g)return null;const R=e=>e.getBoundingClientRect();
@@ -24,10 +24,10 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));let bad=0;const ck=(n,ok,d)=>{con
   /* r3: sub-tab row by item kind: shown only with >1 kind, first = Tất cả, a kind filters the grid to exactly its items (buy + sell) */
   const kindCheck=async(key,mode,tag)=>{const k0=await geo();ck(`${wh} ${tag}: kind row under Mua|Bán, first «Tất cả», ≥2 kinds`,!!k0&&k0.kinds[0]==='all'&&k0.kinds.length>=3&&k0.kindOn==='all',k0&&k0.kinds);
    const all=await p.evaluate(k=>KSHOP.reg[k].list.length,key);const picks=k0?k0.kinds.slice(1):[];let lastN=0;
-   for(const [i,kd] of picks.slice(0,2).entries()){await p.click(`.kshop[data-kshop="${key}"] [data-kshkind="${kd}"]`,{force:true});await sleep(1800);
+   for(const [i,kd] of picks.slice(0,2).entries()){await p.click(`.kshop[data-kshop="${key}"] [data-kshkind="${kd}"]`,{force:true});await sleep(3000);
     const r=await p.evaluate(k=>{const o=KSHOP.reg[k];return{n:o.list.length,cats:[...new Set(o.list.map(x=>x.cat||'tap'))],cur:o.cat[o.mode],tiles:document.querySelectorAll('.kshop[data-kshop="'+k+'"] .kshc').length}},key);
     ck(`${wh} ${tag} kind «${kd}»: grid = only that kind`,r.cats.length===1&&r.cats[0]===kd&&r.cur===kd&&r.n===r.tiles&&r.n<all,{r,all});await shot(`${tag}-kind${i+1}`);lastN=r.n}
-   await p.click(`.kshop[data-kshop="${key}"] [data-kshkind="all"]`,{force:true});await sleep(1800)};
+   await p.click(`.kshop[data-kshop="${key}"] [data-kshkind="all"]`,{force:true});await sleep(3000)};
   const closeAll=()=>p.evaluate(()=>{Q.length=0;KSHOP.reg={};const m=document.getElementById('modal');m.hidden=true;try{closeModal()}catch(e){}});
   /* 1. eunuch's outside option «Để ta xem» */
   await p.evaluate(()=>{window.SHOPKEYS=()=>{const L=Object.keys(IT).filter(k=>IT[k].pr>0&&IT[k].pr<200&&!IT[k].il);const plain=L.filter(k=>!(window.WD_ITEMS&&WD_ITEMS[k])&&!IT[k].keep);const seen={},var3=plain.filter(k=>{const d=IT[k].kd+'|'+(IT[k].sl||'');return seen[d]?0:(seen[d]=1)}).slice(0,6);return var3.concat(plain.filter(k=>!var3.includes(k))).slice(0,9)||plain.slice(0,3).concat(L.filter(k=>!plain.slice(0,3).includes(k))).slice(0,9)}});
