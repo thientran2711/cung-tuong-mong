@@ -574,3 +574,8 @@ RUNNING MAIN WORKERS:
 - look-fx-wire #9 session_01UV1Szk4s8h69ckG1XyZmaC — remaining fit rows whole group + Điểm trang + LOOK Fold+iPad → owner → BIG review.
 FOREMEN: C-AG #11 session_01UV1SzkgegQEiMEPpSv12RN (depth 6) HOLD jcoop*/jag*/j95*/jtoil*/jbal*/assemble/save until ag-all-2-land + npc-chain-land (~10:00Z), PASS shas come to main for FF. D: landed 2 of 4 (staff-cap-row3 3810c2e + odds-cap pending), D8 poison road SẴN SÀNG KIỂM 4ce4cbf in D review. E: q1c PASS, q1a/q1b FIX 3; Q3 ordered; monthly-ration/hall-names/q0 land orders. B: live-test-reds + D19 Biếu quà ordered (check B started them). C: D14 học thành tài ordered.
 - ROOT-49 FINAL (08:33Z): successor MAIN ROOT-50 = session_01UV1SzkQbY6CG7anj9iuHK5 (depth 6). ROOT-49 relays owner words + worker reports only.
+
+## ROOT-50 (session_01UV1SzkQbY6CG7anj9iuHK5)
+- MAIN = ROOT-50 session_01UV1SzkQbY6CG7anj9iuHK5; START_CTX ≈ 5 % (get_session reads 0; estimate) → rollover at 30 %, ceiling 60 %; depth 6 (limit 8).
+- LOAD (18/11 08:50Z): main running 4 (opt-card-short #2 idle/owner, fullbody-frame-s2, cloth-tea #2, look-fx-wire #9) + 1 new lander | B free ~10 (d19-gift-work, live-test-reds) | C/C-AG busy (B10 W40–W49, D14) | D free ~7 (balance-final, land-d4, poison-road review, odds-cap-r2, residence-seats r2) | E free ~8 (q1a/b fix 3) | moved: E's 4 PASS landings → MAIN lander review/land-e (E cannot push main). §7 NOT DONE left without a free-seat home: D23 mole audit (paused, after repaint), D43 (needs owner), D44 (rides fig-cutout-clean), D36 (blocked on kit parts) — nothing to give.
+- fullbody-frame-s2 SẴN SÀNG KIỂM b0155afe (relayed by ROOT-49): next = script scan of every dialog with the scroll cue, LOOK shop+event, owner pair, then ONE UI review r5+s2.
