@@ -7,7 +7,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+dpr,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce'});
   const p=await ctx.newPage();p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof render==='function');await sleep(2500);
-  await p.addStyleTag({content:'#kroul{display:none!important}'});
+  await p.addStyleTag({content:'#kroul,#kboot{display:none!important}'});
   await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;
    for(let i=0;i<400;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;try{NLP=null}catch(e){}
    const L=liveRivals(true);S.met=S.met||{};tmPlace(S,0);L.forEach(v=>{S.met[v.id]=1;try{S.known[kOf61(v)]=3}catch(e){}});
@@ -23,7 +23,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
     panelScroll:P.scrollHeight>P.clientHeight+1}});
   const shot=async n=>{await p.evaluate(()=>Promise.all([...document.querySelectorAll('#panel img')].map(i=>i.complete?0:new Promise(r=>{i.onload=i.onerror=r;setTimeout(r,6000)}))));await sleep(400);
    await p.screenshot({path:`${OUT}/rp-${TAG}-${n}-${wh}.jpg`,type:'jpeg',quality:72,timeout:120000})};
-  const res={sz,errs};res.def=await meas();await shot('ta');
+  const res={sz,errs};await sleep(3000);await p.evaluate(()=>{tab="rel";relSel="me";PG.rel=null;PG.relY=null;render()});await sleep(1500);res.def=await meas();await shot('ta');
   await p.evaluate(()=>{const f=[...document.querySelectorAll('#panel .krelpk .pface')];const q=f.find(x=>/Hoàng thượng/.test(x.textContent));if(q)q.click()});await sleep(500);
   await p.evaluate(()=>{tab="rel";relSel=(liveRivals(true).find(v=>!v.queen)||{}).id;PG.rel=null;PG.relY=null;render()});await sleep(900);
   res.pick=await meas();await shot('pick');
