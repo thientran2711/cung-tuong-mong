@@ -56,3 +56,70 @@ TODO for the successor (in order):
    Root rule: in co-op, run the deferred agent work synchronously inside the buổi step (as with window.__agAll), or flush it before the seat sends. Never let a timer cross a buổi/week boundary.
 5. ag-all-2 rv #2 = session_01UV1SziCw1gnLVkS7bUSAPM, head review/ag-all-2-r2 0a627b59. It has 2 flaky reds (ag-all day plan / ag-walk far news, suspected jshelf/jdisp/jemocause wrapper blocking agDayEnsure) in the same lazy-queue family. Make ONE root fix for both, and tell it directly.
 6. Gates on top of live main (same list as above) → new PASS sha → s40 + C-AG #7. Update this report.
+
+## LANDER #2 (session_01UV1SzhJFho1Xs76yNi63tL, 18/11) — ROOT FIX of the s39a coop hold
+PRIORITY #1 CHECK: OD ag-all-2 rulings | main none (no agLater/agDrain/wantB) | review/npc-chain-land a090dd3e, review/ag-all-2-r2 1f8aaf30 | claims ag-all-2 rv #2 SziCw1g (archived), BIG reviewer SzkmyAXY
+START_CTX ≈ 3 %. depth 3.
+
+### Root (seen in a trace of every "Sẵn sàng" press, coop-e2e at load)
+The host seat had `Q=1` with `#modal` HIDDEN: ":Có người bán tin" (jagknow `knSellTick`, which runs inside `j95sync`) was pushed from the DEFERRED view resync
+(`agSyncNow` in a `setTimeout`). Nothing showed it and `#next` stayed enabled. The co-op `nextBuoi` wrapper's `Q.length` guard then swallowed the press: no `bend`
+was sent, so the other seat sat on "Chờ hảo hữu…" for ever. It comes from the ag-all-2 delta (that is why 1f8aaf30 alone failed too). Live main has none of these paths.
+
+### Fix — ONE rule for the whole family (LUẬT SỬA CẢ NHÓM): AG LATER (jagent)
+- `agLater(k,fn,{slice})` is now the only way ag code defers work. That covers the deed slices `agSlice`, the staff slices `agLzRun`, 6 `agSyncNow` sites, the KN news scan (`adHapNow`) and `AG.now`.
+  A job is pinned to its world `S` and its buổi; on another world or buổi it is dropped.
+- `agDrain()` runs at every buổi/week boundary. It is in the outermost `nextBuoi` and `endTurn` wrappers, and in co-op `onBuoi` and `CW.nightEnd`, where it runs BEFORE their Q checks.
+  It runs the pending light jobs (resync, news scan, which can queue a dialog) and drops the pending slices. The consorts and staff it did not reach keep their schedule,
+  as before (an earlier "run-all" version cost buổi 1243/823 ms in quickcheck). No timer ever crosses a buổi or a week.
+- `agQShow()`: a dialog queued by a job is shown at once.
+- Co-op (jcoopworld): a "Sẵn sàng" press is never lost. If it is pressed while a dialog or mini game is up, or before the host's places have arrived, it is kept as `CW.wantB`
+  and done in `tryEnd` once they clear. A room step or a new week drops it.
+- Guards: `dev/test/ag-later-scan.js` (no raw setTimeout / rIC / queueMicrotask in jag* / jmoodknow / jfeel / jworld* / jnpcd, except load-time
+  wrapper installs) and `dev/test/ag-later.test.js` (7 checks: dialog shown, drain-first, slice dropped, other world dropped, other buổi dropped, real play, 0 errors).
+
+| deferred path | before | after |
+|---|---|---|
+| agSlice next slice (jagent) | raw setTimeout (Q.tm) | agLater slice (dropped at boundary) |
+| agLzGo / agLzRun staff slices (jagday) | raw setTimeout (AGD.lzT) + a090dd3e world pin | agLater slice |
+| agSyncNow: jagent tick, jagday lz / shadow / shClear / place (5) | raw setTimeout (AG.syQ) | agLater sync (drained) |
+| AG.now resync (jagknow) | raw setTimeout | agLater sync |
+| KN news scan sc() (jagknow) | raw setTimeout (KN.q) | agLater kn (drained) |
+| placeWhere wxNpcHit wrap (jagday W1), drain install | load-time setTimeout | unchanged (allowed: runs once at load) |
+| co-op press blocked by Q / mg / needWhere | silently dropped | kept (CW.wantB), sent when clear |
+
+### Other fixes found on the way
+- jmoodknow `mkMigrate`: the old-save bar moved by 1 when the feeling sum was x.5 (`Math.round(-31.5)=-31` → bar −29 for −30). The rest is now exact.
+- ag-moodknow "odds clamped" check: 12 → 40 rounds (~200 draws; 60 draws at 95 % are all hits 5 % of the time). Both reds appeared only after the ag-all-2 merge (state/RNG shift).
+- coop-e2e `press()`: a tối already ended by the room clock (jcooptimer `dueTick` → `nightReady` on a slow machine) counts as pressed. This was red on the pre-fix build too.
+
+### Branches
+- review/ag-all-2-land = 1f8aaf30 + a090dd3e + AG LATER + coop-e2e press fix (FF over live eb3675a6).
+- review/npc-chain-land = 7f96f559 + merge live eb3675a6 + merge 1f8aaf30 (assemble.py = main order + jmoodknow/jfeel) + the same fixes + mood fixes.
+
+### Gates done before the 3da5720a merge (heads 4df5f38 / fb4544c)
+- coop-e2e, 4 streams in parallel: ag-all-2-land **16/16 clean**; npc-chain-land **14/16 clean** plus 2 network-only reds (rank-worker CORS console line; ws 1006 ×3 at join). There were 0 reds in the buổi family.
+  Before the fix, on the batch-equivalent build: 1 bad in 6 runs (3 FAIL lines "buổi 1:1 advanced for both", "week 2: fold/ipad advanced"). Fix e6c1ce7 alone: 16/16.
+- quickcheck --runs 5 --cpu 4 on a43ca34 (npc-chain): PASS (core gates, time-spill, old save). The buổi perf was 1243/823 ms with the old drain-runs-all; changed to "drain light jobs only" (then the reviewer made slices stay queued: 6285dc9 / e6be4f8).
+- coop-one-world seeds 7/3/5 PASS; ag-later 9/9 (reviewer); ag-later-scan PASS; ag-carry / ag-walk / ag-sell / ag-know PASS (ag-know is flaky at load, and its baseline was red too); mood-mem 16/16, feelings18 34/34,
+  moodknow-step0 19/19, ag-moodknow 33/33 (after the mkMigrate + draws fix). ag-all perf p95 was red only under load (4 burners + 2 coop streams); recheck it unloaded.
+
+### Main 3da5720a (makeup-lux r2v) merged into both — pushed, NOT final (C-AG #7: hold the final gates until the LOOKS batch is on main)
+- review/ag-all-2-land **aeae7cc3** = reviewer 6285dc94 + main 3da5720a. review/npc-chain-land **ff76d2d2** = reviewer e6be4f87 + main 3da5720a.
+- "diem": live main's meaning wins (OD L1638: "làm maximum là khuynh thành"; TOIL_OLDLV diem→tuyet; "diêm dúa" = the dress/lux verdict TOIL_DV.diem). toilNpcPlay = main's (no toilHeavy / toilAllow / diemOdds; the ov arg is gone).
+  ag-all-2's ONE rule toilSeeRule / toilLookP / toilJudgeNpc is kept and re-mapped: tease = `L.dv==="diem"` or a Vụng về face (main's wording "lối ăn vận diêm dúa"); the toilRival wrapper keeps BAL.toil.teaseN;
+  host-reprimand news and the jagtoil reprimand log = Vụng về only; the jagtoil peer-tease utility = vung only; no cakeOver arg (jbal2 opt `dam` now reads as cầu kỳ, comment says so).
+  jbaleff: ag j9 + main j92.danhWdAccuseA. assemble.py: main order (NOTE: ag-all-2-r2 had jdisp before jlooks; it is main's jlooks→jdisp now) + jdress + ag modules (+ jmoodknow/jfeel on npc-chain).
+  npc-chain jinv luxMonth: main's `luxOf(p,{noMk:1})` + the mood chain's ghenUp; jtoil ghenUp rows kept.
+- Spot tests on aeae7cc: makeup-lux PASS, makeup-theme PASS, luxury PASS, dress-offence ALL PASS, one-core-guard PASS, ag-later 9/9.
+  **OPEN 1: ag-toil2 4/16 FAIL.** The test's §3 fixture is built on the dropped "Diêm dúa FACE" (look:"diem" → it now reads as Khuynh thành, which is praised, so no reprimand or tease). It needs a re-map to the new meaning:
+  the reprimand / tease case = a Vụng về face (score 20, look "vung", slip). With that, 3 still fail: her Thái hậu total is 0 (dress hợp dịp +1, face −1), and the player's toilFx has no "dung nhan" row for vung (per-person taste).
+  So pick a fixture whose total is negative, or check the face row only. The test edit is not committed (reverted).
+  **OPEN 2: coop-toil-look 26/29 on aeae7cc** (main 29/29, pre-merge 4df5f38 29/29): "B herself = B as seen on A" — A sees B as vung / hoppham −3, B sees herself as vua / hopdip +1.
+  The suspect is how the friend's (p.coop) look is read after the merge: main's toilMkRec(p) p.coop path vs ag-all-2's toilLookP / toilFriendRec, or jagtoil tl2 for a coop entry. Not looked at yet.
+
+## HANDOVER (lander #2 → successor; rollover at ≈ START_CTX 3 % + 25 %)
+Next steps: (1) fix OPEN 1 + OPEN 2 on review/ag-all-2-land, port them to review/npc-chain-land; (2) when C-AG #7 says the LOOKS batch (toil-looks5 + glow v8 + hoa-dien r3b) is on main, merge it into both
+(it touches jtoil: the same rule, live meaning wins); (3) rebuild the site and run the gates per branch: coop-e2e ≥15 at load, G4 ×10 at load, quickcheck --runs 5, and on npc-chain also feelings18 / mood-mem / moodknow-step0 / ag-moodknow /
+emotion-acts / fig-seal Fold+iPad; (4) send "SẴN SÀNG KIỂM <sha>" per branch to the BIG reviewer session_01UV1SzkmyAXYnCFY6utjvkF + C-AG #7.
+Tools: a traced coop-e2e (logs every #next press: used, Q, hidden modal, bend, whereKey) = copy dev/test/coop-e2e.js and add the PRESS trace in press() (see this report's root section); run-ce.sh = burners + N runs.
