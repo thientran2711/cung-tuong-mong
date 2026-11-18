@@ -53,7 +53,10 @@ const GE_DATA={
    p:["Quỳ nhận lỗi về mình","Xin ơn cho {mis}","Thưa thật với chủ: nô tỳ không dám quên ơn","Khuyên Hoàng thượng đến cung {mis}","Xin ngài nhớ đến {mis}","Đỡ nàng ta dậy, hỏi ai sai","Rủ họ cùng làm việc như xưa"],
    m:["Lặng lẽ cho người thấy tay {mis} hất","Đưa bạc cho thái giám, trước kỳ lật thẻ","Bắt tay {v} chèn {mis}","Kể lại một chuyện cũ của {mis}","Đổi chỗ với {mis} mà không nói","Đem chuyện gói bùa ra nói lại","Trả bạc cao hơn {v}","Gọi họ lại, dạy phép",
      /* review E1r fix 4: cruel cnv_mat lives met beats with no ác option (lean −2..−4) — harsh REAL options of beats 5 / 8 / 10 */
-     "Lặng lẽ tìm {v} xin chỗ dựa","Lên kiệu, không ngoái lại","Gọi thị vệ đến","Gọi thái giám cung mình giữ nàng ta lại","Xin khám luôn phòng người khác","Cho {mis} biết {v} cũng định kéo nàng vào"]},
+     "Lặng lẽ tìm {v} xin chỗ dựa","Lên kiệu, không ngoái lại","Gọi thị vệ đến","Gọi thái giám cung mình giữ nàng ta lại","Xin khám luôn phòng người khác","Cho {mis} biết {v} cũng định kéo nàng vào",
+     /* E1c fix 4: the chains of cnv_mat_3 «Gác ô ra đi» / cnv_mat_4 «Tỷ muội cùng hầu» held gentle options only (cruel lean −1.5..−2.7) — the scheming REAL
+        options of those chains (secrets kept / leverage over {mis}) are ác and pull their ending, so «Bẻ ô ra đi» / «Mượn chị lên cao» are reachable */
+     "Nhờ người dò ai giữ lại","Giữ kín, chờ thời","Gặp {v} hỏi chuyện cung {mis}","Đổi lấy một lời hứa"]},
   e:[
   {pull:["Hát khẽ bài dân ca bên giếng","Gửi lại cành mai, không đến","Thưa: muốn, nhưng không dám","Không đưa, chờ ngài tự lật","Tin vào lời ngài đã nói","Kể chuyện mùa gặt","Nói một câu thật lòng","Không xin gì, chỉ cúi đầu","Đứng chờ dưới mái hiên cũ","Xin ngài đừng quên chiều mưa ấy","Đứng yên, để ngài bước đến"],
    close:["Đưa bạc cho thái giám, trước kỳ lật thẻ","Trả bạc cao hơn {v}","Bắt tay {v} chèn {mis}"],
@@ -71,7 +74,8 @@ const GE_DATA={
    t:"Ngày đội mũ phượng, ngươi bước xuống đỡ chủ cũ đứng dậy trước cả lục cung. Kẻ hầu kháo nhau: Trung cung từng xách nước như chúng ta, và chưa bao giờ quên.",
    ha:"từ kẻ xách nước lên ngôi Trung cung, lấy uy mà trị lục cung",ht:"từ kẻ xách nước lên ngôi Trung cung mà không quên người cũ",
    fail:"Ngã từ bậc phượng",ft:"Mưu tính của ngươi bị lật ra trước lục cung. Ngươi bị giáng một bậc, chủ cũ nhìn ngươi bằng ánh mắt khác."},
-  {pull:["Gửi lại cành mai, không đến","Cảm ơn mà từ chối","Xin rút thẻ một kỳ","Cáo ốm ở lại","Thôi ngóng, sống ngày của mình","Gửi lại ô, kèm một lời","Cúi đầu, lui vào trong","Xin ơn cho {mis}"],
+  {pull:["Gửi lại cành mai, không đến","Cảm ơn mà từ chối","Xin rút thẻ một kỳ","Cáo ốm ở lại","Thôi ngóng, sống ngày của mình","Gửi lại ô, kèm một lời","Cúi đầu, lui vào trong","Xin ơn cho {mis}",
+    /* ác side of the leave (ha: «mang theo … bí mật hậu cung»): secrets she gathers and holds */"Nhờ người dò ai giữ lại","Giữ kín, chờ thời","Đem chuyện gói bùa ra nói lại"],
    close:["Bước đến che ô cho ngài","Bắt tay {v} chèn {mis}"],
    cond:[["s","duc"],["s","maid"]],fo:[],
    cw:"cần Đức dày và lòng cung nữ theo ngươi",
@@ -79,7 +83,8 @@ const GE_DATA={
    a:"Ngươi ra khỏi cổng Thần Vũ với ân thưởng của Hoàng thượng và mọi bí mật của hậu cung ngươi từng giữ. Tiệm thêu bên sông mở bằng bạc của những người không muốn ngươi nói ra. Ngươi không ngoái lại.",
    ht:"gác lại ân sủng, xin cho mình và người hầu được ra cung",ha:"mang theo ân thưởng và bí mật hậu cung mà ra đi",
    fail:"Cổng Thần Vũ đóng",ft:"Lời xin ra cung bị bác. Ngươi ở lại, và cả lục cung biết ngươi từng muốn đi."},
-  {pull:["Thưa thật với chủ: nô tỳ không dám quên ơn","Khuyên Hoàng thượng đến cung {mis}","Từ chối, báo {mis}","Báo cho {mis} biết {v} đang dụ ngươi","Quỳ tạ, rồi tạ {mis}","Ra chào {mis} trước khi đi","Xin ngài nhớ đến {mis}","Xin ngồi sau {mis}","Đến xin {mis} nói giúp","Thưa: là tỷ muội","Xin ơn cho {mis}"],
+  {pull:["Thưa thật với chủ: nô tỳ không dám quên ơn","Khuyên Hoàng thượng đến cung {mis}","Từ chối, báo {mis}","Báo cho {mis} biết {v} đang dụ ngươi","Quỳ tạ, rồi tạ {mis}","Ra chào {mis} trước khi đi","Xin ngài nhớ đến {mis}","Xin ngồi sau {mis}","Đến xin {mis} nói giúp","Thưa: là tỷ muội","Xin ơn cho {mis}",
+    /* ác side (ha: «mượn tên chủ cũ mà lên, để nàng ta nợ ngươi»): a bond kept by leverage */"Gặp {v} hỏi chuyện cung {mis}","Đổi lấy một lời hứa","Cho {mis} biết {v} cũng định kéo nàng vào"],
    close:["Bắt tay {v} chèn {mis}","Kể lại một chuyện cũ của {mis}","Lặng lẽ cho người thấy tay {mis} hất"],
    cond:[["mis"]],fo:[["misD"]],
    cw:"cần chủ cũ còn ở bên và còn thương ngươi",
