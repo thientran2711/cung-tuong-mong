@@ -160,16 +160,33 @@ function agSlice(first){const Q=AG.q;if(!Q||AG.inSlice)return;const key=agKey();
   const R=agRec();const old=z.pend.some(p=>p.key!==key);
   while(Q.L.length&&!old){if(performance.now()-t0>=B&&!Q.all)break;const v=RV(Q.L.shift());if(!v||!v.alive||v.out)continue;try{acts+=agDecide(v)}catch(e){agErr("tick",e)}}
   if(!R){for(const p of z.pend.slice())if(p.key===key)agLand(p)}/* no ledger (co-op host, record off): the act lands at once */
-  else if(AG.now){if(Q.all){const ts=performance.now();try{j95sync()}catch(e){}AG.tm.sync+=performance.now()-ts}else if(!AG.syQ){AG.syQ=1;setTimeout(agSyncNow,0)}}/* the views of the khắc now change only when an act starts now: in its own frame (perf §4: no full resync inside the tick) */
+  else if(AG.now){if(Q.all){const ts=performance.now();try{j95sync()}catch(e){}AG.tm.sync+=performance.now()-ts}else agLater("sync",agSyncNow)}/* the views of the khắc now change only when an act starts now: in its own frame (perf §4: no full resync inside the tick) */
  }catch(e){agErr("tick",e)}finally{AG.inSlice=0}
  const ms=performance.now()-t0;const d={};for(const k in AG.tm)d[k]=+(AG.tm[k]-(tm0[k]||0)).toFixed(2);
  if(ms>(AG.slow&&AG.slow.ms||0))AG.slow={ms,tm:d,tick:AG.stat.tick,left:Q.L.length};if(ms>BAL.ag.perf.p95){AG.over=AG.over||[];AG.over.push({ms:+ms.toFixed(1),tm:d,n:AG.last||[]});if(AG.over.length>20)AG.over.shift()}AG.last=[];window.__agMs=ms;AG.ms.push(ms);if(AG.ms.length>BAL.ag.perf.n)AG.ms.shift();AG.stat.acts+=acts;AG.stat.slice++;
  Q.ms+=ms;if(!Q.L.length){AG.bt.push(Q.ms);if(AG.bt.length>BAL.ag.perf.n)AG.bt.shift();AG.q=null}
- else if(!Q.tm){Q.tm=1;setTimeout(()=>{if(AG.q===Q){Q.tm=0;agSlice()}},0)}}
+ else agLater("slice",()=>{if(AG.q)agSlice()})}
 function agTick(){if(!agOn())return;const z=agZ();const key=agKey();if(z.key===key)return;z.key=key;AG.stat.tick++;
  if(AG.q&&AG.q.L.length)AG.stat.qdrop+=AG.q.L.length;/* a buổi gone by before her turn came (only in a run with no frames between buổi): she kept her schedule */
  const R=agRec();window.__agN=R?Object.keys(R.P).length:liveRivals(true).length+2;
  AG.q={key,L:liveRivals(true).filter(v=>v.alive&&!v.out).map(v=>v.id),ms:0,tm:0,all:!!window.__agAll};agSlice(1)}
+/* AG LATER (npc-chain-land #2, 18/11; LUẬT SỬA CẢ NHÓM over every deferred ag path): the ONE way ag code defers work to a later frame
+   (consort deed slices agSlice, staff slices agLzRun, the khắc view resync agSyncNow, the news scan adHapNow). Rules:
+   (1) a job belongs to the world (S) and the buổi it was queued in: on another world / buổi it is dropped, never run there;
+   (2) agDrain() runs every pending job NOW, finishing the slices; it runs at every buổi / week boundary (nextBuoi, endTurn: outermost wrappers
+       below; co-op onBuoi / nightEnd in jcoopworld), so no timer ever crosses a buổi or a week;
+   (3) a dialog a job queued (Q) is shown at once (agQShow). Before: the "Có người bán tin" offer (knSellTick inside j95sync) was pushed from the
+       deferred resync and sat in Q unseen; the next "Sẵn sàng" was refused by the Q guard → co-op seats stuck on "Chờ hảo hữu…" (MAIN s40 hold). */
+const AGL={L:[],t:0,run:0,stat:{run:0,drop:0,drain:0}};
+function agBk(){try{return S?wk()+"-"+(S.buoi||0):""}catch(e){return""}}
+function agLater(k,fn){if(AGL.L.some(x=>x.k===k))return;AGL.L.push({k,fn,w:typeof S!=="undefined"?S:null,b:agBk()});if(!AGL.t)AGL.t=setTimeout(agLaterRun,0)}
+function agLaterRun(){if(AGL.t){clearTimeout(AGL.t);AGL.t=0}if(AGL.run)return;AGL.run=1;
+ try{for(const x of AGL.L.splice(0)){if(x.w!==S||x.b!==agBk()){AGL.stat.drop++;continue}AGL.stat.run++;try{x.fn()}catch(e){agErr("later:"+x.k,e)}}}finally{AGL.run=0}agQShow()}
+function agDrain(){if(AGL.run||!AGL.L.length)return;AGL.stat.drain++;try{if(AG.q&&AG.q.L.length)AG.q.all=1}catch(e){}let n=0;while(AGL.L.length&&n++<100)agLaterRun()}
+function agQShow(){try{if(!Q.length||!S||S.dead||S.mg||window.__bot)return;const M=$("modal");if(M&&M.hidden&&!document.querySelector(".kbk-bar"))showModal()}catch(e){}}
+/* outermost: installed after every module's own nextBuoi / endTurn wrapper (the same load-time pattern as jagday W1) */
+setTimeout(()=>{try{const n0=nextBuoi;nextBuoi=function(){try{agDrain()}catch(e){agErr("drain",e)}return n0.apply(this,arguments)};window.nextBuoi=nextBuoi;
+ const e0=endTurn;endTurn=function(){try{agDrain()}catch(e){agErr("drain",e)}return e0.apply(this,arguments)};window.endTurn=endTurn}catch(e){agErr("drainWrap",e)}},0);
 function agSyncNow(){AG.syQ=0;const ts=performance.now();try{j95sync()}catch(e){}const ms=performance.now()-ts;AG.tm.sync+=ms;AG.sms=AG.sms||[];AG.sms.push(ms);if(AG.sms.length>BAL.ag.perf.n)AG.sms.shift()}
 /* finish the buổi's deciders now (tests / bot that need every decision before they read the record) */
 function agFlush(){if(AG.q){AG.q.all=1;agSlice()}}
@@ -280,4 +297,4 @@ function agSeeHer(k,t,joined){if(!agOn())return;const H=agHereKh();if(!H)return;
  /* labels of the ledger activities (dev table, tai mắt lines) */
  try{for(const k in AGSELF)ACT95["ag_"+k]=AGSELF[k].act;for(const k in AGACTW)ACT95["ag_"+k]=AGACTW[k];ACT95.ag_effort="tìm cách được Hoàng thượng để mắt"}catch(e){}
 })();
-Object.assign(window,{agK1,agHearOf,agTick,agFlush,agOn,agNeeds,agOpts,agOrg,agZ,agPlan,agWatch,AG});
+Object.assign(window,{agLater,agDrain,agQShow,AGL,agK1,agHearOf,agTick,agFlush,agOn,agNeeds,agOpts,agOrg,agZ,agPlan,agWatch,AG});
