@@ -1,5 +1,9 @@
 [
 {
+"reason": "UI only (person-card kit tab «Chuyện cũ», jpcf.js data-pct — a tab header, not an act; reviewer role-parity r2)",
+"label": "Chuyện cũ"
+},
+{
 "reason": "UI only (a tab / group header / pager / navigation button, not an act)",
 "re": "^label:.*\\d+/\\d+$"
 },
