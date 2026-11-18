@@ -1251,7 +1251,7 @@ Object.assign(BAL.ag.why,{g2b:{
  guard:{sung:70,th:60,base:20},   /* j70 j70Guard: Emperor guards her at Sủng ≥ sung, Thái hậu at regard ≥ th: s = base + excess */
  face:{sac:.4,sev:5,cureSev:2,cureBac:120},  /* j70 j70Face: scarred NPC seeks a physician / buys the cure: s = Sắc × sac + severity × sev; cure needs severity ≥ cureSev, bạc ≥ cureBac */
  joint:{min:25,w:1},              /* j10 facJoint: joint scheme only on a foe the faction's average grudge ≥ min; s = that average × w */
- ask:{size:5,need:8,aff:.5,foe:.5},          /* j10/j25 facAsk: leader invites her: liking × aff + (size − members) × need + shared grudge × foe */
+ ask:{size:6,need:6,aff:.6,foe:.6},          /* j10/j25 facAsk: leader invites her: liking × aff + (size − members) × need + shared grudge × foe */
  div:{w:.5},                      /* j10 facDiv: another leader divides her faction: hostility toward her × w */
  queen:{base:20,mo0:18,mo:2},     /* j34 empQueen: Emperor names a queen by decree: base + months past mo0 empty × mo */
  td:{deg:15,host:.5,need:30,backW:2.5,ask:10,sung0:50,askW:.5},  /* j55 consort court act: leak = deG × deg + hostility × host; gift = need − backing × backW; probe = hostility × host; ask = ask + (sung0 − Sủng) × askW */
