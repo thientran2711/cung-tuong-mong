@@ -824,7 +824,7 @@ const kpReEsc=s=>s.replace(/[.+?^$|()[\]{}\\]/g,"\\$&");
 var KAK_SRC=null,KAK_C=new Map();
 function kitActKey(name){if(KAK_SRC!==KIT_ACTS){KAK_SRC=KIT_ACTS;KAK_C=new Map()}const k=typeof name==="string"?name:String(name==null?"":name);let v=KAK_C.get(k);
  if(v===undefined){v=kitActKey0(name);if(KAK_C.size>5000)KAK_C.clear();KAK_C.set(k,v)}return v}
-function kitActKey0(name){const A=KIT_ACTS.acts||{},P=KIT_ACTS.prefix||{};name=kpPlain(name);if(!name)return"";if(A[name])return A[name];const sl=kpSlug(name);if(A[sl])return A[sl];
+function kitActKey0(name){const A=KIT_ACTS.acts||{},P=KIT_ACTS.prefix||{};name=kpPlain(name);if(!name)return"";if(A[name])return A[name]==="-"?"":A[name];const sl=kpSlug(name);if(A[sl])return A[sl]==="-"?"":A[sl];/* review/act-pic-match: manifest value "-" = this act has NO picture of its own: stop here (no prefix / longer-name / log-rule borrow), the kit placeholder shows */
  let best="",key="";const take=(n,k)=>{if(n.length>best.length){best=n;key=k}};
  for(const p in P)if(name.startsWith(p))take(p,P[p]);
  for(const n in A){if(n.includes("*")){if(new RegExp("^"+n.split("*").map(kpReEsc).join(".+")+"$").test(name))take(n,A[n])}

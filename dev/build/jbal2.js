@@ -936,3 +936,6 @@ Object.assign(BAL,{odb:{
    Outcome table (a quick result never beats a good own play): lessons won = tiến bộ một phần, lost = 0 · works / crafts = never a product ·
    makeup won = the middle tier (Đoan trang, BAL.toil.tier[0]), lost = Vụng về · care won = BAL.skip.care of the gain, lost = 0. */
 Object.assign(BAL,{skip:{od:40,raw:5,care:.5}});
+/* FACE REVEAL motion (owner 18/11 ~06:20Z, KIT §79 jreveal.js): ms = the grey veil clears from the face outward; lite = Gọn / reduced motion short fade;
+   win = how long after a face is learned every place that first draws it (frame, avatar, stage figure) still plays its one reveal */
+Object.assign(BAL,{faceReveal:{ms:Math.round(1000*BAL.pace),lite:350,win:8000}});
