@@ -30,7 +30,7 @@ b10-a36-c12-c22 | CDN _review only | W62 session_011xDdVS7v1P9E9VBhhoCzUA | ROLL
 b10-a36-c23-c32 | CDN _review only | W63 session_011xDdVR2azVrSAvuz8jSdAR | ROLLED OVER→W63b session_011xDdVPRsuRZG7dw2QAufA3 RUNNING | 2026-11-18T15:58Z (Foreman C ROOT-25)
 b10-a51-sample c03/c04/c12 | CDN _review only | W64 session_011xDdVQJWBGEQCg7HMWeLs1 (c03 done 93e8cd8, archived) → W64b session_011xDdVQ5R8zmXosTMAV85mu | RUNNING | 2026-11-18T15:58Z (Foreman C ROOT-25)
 shown-odds-r2 (spend-before-roll, ORDER ROOT-52 15:30Z) | review/shown-odds-r2 | session_01964izERxj8PUG495V4QTjS | RUNNING | 18/11 15:52Z | owner D #2
-NPC-PURPOSE G1 #8 (opus integrator; seat opened by D #2 for C-AG #13, OPEN NOW #2 15:31Z) | review/npc-purpose | C-AG #13 | session_01964izG7FPwnw4eEwFEt7t7 | RUNNING | 18/11 15:49Z |
+NPC-PURPOSE G1 #8 (opus integrator; seat opened by D #2 for C-AG #13, OPEN NOW #2 15:31Z) | review/npc-purpose | C-AG #13 | session_01964izG7FPwnw4eEwFEt7t7 | ROLLED OVER → G1 #9 session_01964izGMMUHo5FeP7TACDxE (RUNNING, 17:45Z) | 18/11 15:49Z |
 | FOREMAN E ROOT #4 (opus; successor of #3; depth 3, START_CTX ~5 %) | handover FOREMAN_E_STATUS | E | session_01DgYSWokbRMfu3opDuSCw15 | RUNNING | 18/11 15:55Z |
 | fullbody-frame-s3 (sonnet SMALL UI; owner 09:25Z OD L1878: no fade on figure + head centred, kit, whole group) | review/fullbody-frame-s3 | MAIN ROOT-52 | session_01UV1SzhJ3JicrwJmcbMVHSA | RUNNING | 18/11 15:57Z |
 | E11r-w1 REVIEW ge-writers-w1 (opus BIG) | review/ge-writers-w1 | E | session_01DgYSWmTELUPTfw8Lqf2S4Y | RUNNING | 18/11 16:02Z | START_CTX ~3 % |
