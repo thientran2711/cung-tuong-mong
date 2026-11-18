@@ -845,6 +845,8 @@ def nude2(o,c,opt):
     if opt in "BC":                                                      # (e)
         a=o.index("her ORIGINAL robe colour is kept exactly"); b=o.index("the royal golden yellow is the DOMINANT")
         o=o[:a]+o[b:]
+        import re as _re; _m=_re.search(r"golden yellow silk mixed with ([a-z ]+?),",o); assert _m  # outfit sentence names her colour too: colour slot (e)
+        o=o.replace(_m.group(0),"golden yellow silk mixed with "+("deep wine-crimson" if opt=="B" else "black")+",",1)
         assert o.count("her colour is the second colour")==1
         o=o.replace("her colour is the second colour",NUDE2_COL[opt]+" is the second colour",1)
     assert "phoenix" not in o.lower()
