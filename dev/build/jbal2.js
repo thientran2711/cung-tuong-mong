@@ -937,7 +937,7 @@ BAL.ag.emp3={desire:5,visB:[3],tea:.4,teaB:[1,2],teaGap:6};
 BAL.ag.give={b:1,ref:40,div:60,anDiv:200,lo:.4,hi:2,tr:{datinh:1.2,lanhlung:.7},th:{ref:40,div:60,lo:.4,hi:2}};
 /* AG-ALL-2 consort ↔ servants (jagacts2): maidTalk = Tâm sự with her confidant maid (below = her lòng under which she bothers), maidSpy = Sai đi dò la
    (o + lòng / ld), bribeSrv = Mua chuộc a servant of a rival (the j29 bribeServ cost / odds), plantSrv = Cài người vào cung khác (j10 plantServ); g = need points */
-Object.assign(BAL.ag.cx2,{maidTalk:{w:{"maid":6},below:70,g:{safe:2}},maidSpy:{get o(){return BAL.odb.j2.odO_23},ld:3,l:{"maid":-5},g:{spite:3,safe:2}},bribeSrv:{g:{safe:3,spite:2}},plantSrv:{get cost(){return BAL.house.plantBac},g:{spite:3,safe:1}}});
+Object.assign(BAL.ag.cx2,{maidTalk:{w:{"maid":6},below:70,g:{safe:2}},maidSpy:{get o(){return BAL.odb.j2.odO_23},ld:3,l:{"maid":-5},g:{spite:3,safe:2}},bribeSrv:{tcDiv:5,g:{safe:3,spite:2}},plantSrv:{tcDiv:4,get cost(){return BAL.house.plantBac},g:{spite:3,safe:1}}});
 /* AG-ALL-2 emotion cards (jemoact eaNpcWeek): an NPC acts on a feeling with the old % × (feeling strength / actV), at most × max */
 BAL.ag.emo2={max:2};
 
@@ -1113,7 +1113,7 @@ Object.assign(BAL,{odb:{
  j34:{rbI:40},
  j4:{odO:25,odO_2:40,odO_3:65,odO_4:45,odO_5:50,odO_6:35,odMonth:30,odO_7:55,odO_8:70,odO_9:40,odO_10:45,odO_11:40,odO1:30,odO2:60,odO_12:35,odO_13:45},
  j40:{rbMindBelief:30},
- j42:{odSrvTalk:45,odSrvTalk_2:40,odSrvTalk_3:30,odSrvTalk_4:30,odSrvTalk_5:55,odSrvTalk_6:55,odSrvTalk_7:40,odSrvErrandDone:30,odO:70,odO_2:20,odO_3:50,odO_4:60,odO_5:55,odO_6:75,odO_7:70,rbSrvMonth:1.2,rbSrvMonth_2:2,odO_8:40,odO_9:30,odO_10:40,odO_11:30,odOf:30,odTop:55,odTop_2:60,odTop_3:45,odTop_4:45,rbTop:1.5,rbTop_2:2},
+ j42:{frTcDiv:2,frDucDiv:5,odSrvTalk:45,odSrvTalk_2:40,odSrvTalk_3:30,odSrvTalk_4:30,odSrvTalk_5:55,odSrvTalk_6:55,odSrvTalk_7:40,odSrvErrandDone:30,odO:70,odO_2:20,odO_3:50,odO_4:60,odO_5:55,odO_6:75,odO_7:70,rbSrvMonth:1.2,rbSrvMonth_2:2,odO_8:40,odO_9:30,odO_10:40,odO_11:30,odOf:30,odTop:55,odTop_2:60,odTop_3:45,odTop_4:45,rbTop:1.5,rbTop_2:2},
  j43:{rbTop:30},
  j54:{odO:30,odO2:55,odO_2:40},
  j55:{rbCorrupt:25,rbDadT:25,odO:15},
@@ -1164,7 +1164,7 @@ BAL.ag.par3={on:1,
  /* household: Nghiệm độc (her button + NPC; bạc, odds bonus over oSee), Thêm cung nữ / thái giám (bạc), Tiến cử (công lao), Tâm sự / Tra xét / Dọa tố worth */
  test:{o:25,g:{"safe":2}},hire:{g:{"safe":1,"danh":1}},/* bạc: BAL.bacFee.itTest / BAL.house.hireBac (ONE CORE, merge r2) */house:{merit:5,tamBelow:50,upLoyal:70,gTam:{"safe":1},gUp:{"danh":3,"safe":1},gSearch:{"safe":3},gThreat:{"spite":2,"safe":1}},
  /* phe phái (j10 facAct for her, cx3:fac* for an NPC): khắc of her button; friend bar to found; worth per deed */
- fac:{k:2,frAff:35,clanAff:15,sharedOan:30,foeOan:25,gFound:{"ally":3},gJoin:{"ally":2,"safe":1},gLeave:{"safe":1},gSell:{"hh":1,"safe":1},gDiv:{"spite":3}},
+ fac:{k:2,frAff:35,clanAff:15,sharedOan:30,foeOan:25,gFound:{"ally":3},gJoin:{"ally":2,"safe":1},gLeave:{"safe":1},gSell:{"hh":1,"safe":1},gDiv:{"spite":3},gDivTc:3},
  /* Uống thuốc thúc sinh (P3C.drug): worth = the book-mismatch danger she escapes */
  drug:{g:{"safe":4,"kid":2}},
  /* 2e3: Mời đến cung ta (cx3:invite, worth = the liking she would win), Phòng bị (cx3:def_<order>, worth per order; spite bar for the theo dõi target) */
