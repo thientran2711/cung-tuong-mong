@@ -991,3 +991,6 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | smudge-code r16 (extra short run at nặng, big-size darker, +10/+20 % options; sonnet; brief briefs/smudge-r16.md) | review/smudge-code | MAIN s41 | session_01UV1SzhMG33iYZzEKjZvDzg | READY | SẴN SÀNG KIỂM r16 7f4d2ad 18/11 |
 | NPC LANDER #3 (opus): ag-toil2 + coop-toil-look fixes, looks-batch merge, gates → SẴN SÀNG KIỂM | review/ag-all-2-land, review/npc-chain-land | C-AG | session_01UV1SzjwxQsdQj14imrii9S | RUNNING | 18/11 01:30Z |
 | FOREMAN C-AG #8 (opus; successor of #7, opened by C-AG #7) | handover FOREMAN_C_STATUS | C-AG #7 | session_01UV1SzgXTgLe5k9TFs9zfGm | RUNNING | 18/11 01:40Z |
+| smudge-code r16 (extra short run at nặng, big-size darker, +10/+20 % options; sonnet; brief briefs/smudge-r16.md) | review/smudge-code | MAIN s41 | session_01UV1SzhMG33iYZzEKjZvDzg | RUNNING | 18/11 01:23Z |
+| OWNER BUG greet-stranger (male stranger: no face/name after greeting + duplicate result lines; opus; brief briefs/greet-stranger-bug.md) | review/greet-stranger | MAIN s41 | (opening) | RUNNING | 18/11 01:40Z |
+| looks batch LIVE f6ee11b1 (main 3da5720a → f6ee11b1; ROLLBACK 3da5720a): toil-looks5 + tuyet-glow v8; CDN 38 JSON | review/looks-s40 | MAIN s41 | session_01UV1Szk7eZQzR2d2t4rhiFj | LIVE | 18/11 01:36Z |
