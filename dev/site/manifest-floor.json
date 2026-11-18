@@ -1,4 +1,12 @@
 {
+ "ACTS.json": {
+  "by": {
+   "acts": 332,
+   "log": 836,
+   "prefix": 10
+  },
+  "n": 0
+ },
  "FIGURES-congtu.json": {
   "by": {
    "man|None": 80

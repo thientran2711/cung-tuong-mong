@@ -312,10 +312,11 @@ def main():
         if r and k.endswith(".json") and not a.force and st.get(k) and st[k] != r[0]:
             held.append(k)
             continue
-        if k.startswith("img/") and os.path.basename(k) in GUARD.GUARDED and not a.allow_shrink:
+        if k.startswith("img/") and k.count("/") == 1 and os.path.basename(k) in GUARD.GUARDED + tuple(GUARD.DICT_GUARDED) and not a.allow_shrink:
             # NEVER-SHRINK GUARD (17/11: the live FIGURES.json lost its consort t5–t8 entries): a figure manifest may not drop entries / counts
             try:
-                bad = GUARD.check(os.path.basename(k), json.loads(src[k]()), live=GUARD.fetch(os.path.basename(k)) if r else None, floor=GUARD.load_floor())
+                bn = os.path.basename(k); nj = json.loads(src[k]()); lj = GUARD.fetch(bn) if r else None
+                bad = GUARD.dcheck(bn, nj, live=lj, floor=GUARD.load_floor()) if bn in GUARD.DICT_GUARDED else GUARD.check(bn, nj, live=lj, floor=GUARD.load_floor())
             except Exception as e:
                 bad = [f"{k}: guard could not run ({e})"]
             if bad:
