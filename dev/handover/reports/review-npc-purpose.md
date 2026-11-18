@@ -106,3 +106,12 @@ Gate spot-check (to-do (3)): yes, check 4 judges every card title and every name
 Minor code NOTE: jlost loCauseOf picks cause "mis" by matching the text `o.why==="cất nhầm chỗ"` because npwAsk drops `mis:1`; pass a flag through npwAsk instead (text edits would silently turn misplacing into theft).
 FIX for G1 #7: R1 the 9 shifted rows above (Tin đồn, Ân oán chưa dứt, Kẻ hầu ăn bớt, Đại phóng cung nhân, the wardrobe remark/search family = wdRemark pickAll balance, Lư pháp lam gift) fixed or given a written why with old vs new rate; 'vì oán' gets a reword why; 'khoe khoang' in band or explained. R2 merge ag-all-2-land 45c6dbea; re-write the base from ≥ 2 base runs (or make base deterministic). Then send "SẴN SÀNG KIỂM <sha>"; the reviewer re-runs rates ×2 + quickcheck ×5 + PHASE B.
 Not run yet (they wait for the real head): quickcheck --runs 5 perf, PHASE B.
+
+### 18 LAWS check (MAIN ROOT-52 order 16:12Z; reviewer read START_CORE ★ block + START_REVIEWER) — laws this review touches, status on caa2902a/c402a630
+- L4 ONE CORE: one-core-guard PASS; typed-number should-fix list from PHASE A stays a must for the next head (rates json `why`/`rare` are text, fine).
+- L6(b) REAL PEOPLE / goals: this is the npc-purpose subject; every actor comes from npcWhy with s ≥ BAL.ag.why.min, `pickAll`/`each` keep that floor → OK. The rate gate guards "events need a reason but must not vanish".
+- L6(c) REAL OBJECTS: jlost endings (mat / nvp / expire) go through ilGone into the item ledger, same code as base → traceable, OK; the next head's "jlost ways + dearest piece" change is re-checked on that sha.
+- L11 FIX THE WHOLE GROUP: the gate judges EVERY card title + log head (not a track list) → OK; the open rows in RE-CHECK 2 are each a group (wardrobe remark/search family, rumor family) and must be fixed as a group.
+- L14 CANON OVERWRITE / L16: npcWhy changes no owner rule; BAL.ag.why.on = 0 is a kill switch (noted).
+- L1/L2/L3/L5/L7/L9/L10/L12: not touched by this branch's logic (no new choices / UI); PHASE B quickcheck + kit-conform cover the UI side.
+Base for the next head: ag-all-2-land is LIVE → base = live main e18697fe (the head must contain it).
