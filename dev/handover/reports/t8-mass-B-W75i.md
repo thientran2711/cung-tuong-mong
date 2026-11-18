@@ -9,3 +9,5 @@ Existing uploads (folder ba4aecfe): c28 a36=1ldxW2Vr4r, c28 a51=rgXjcz0xtc, c29 
 - Magnific: images_generate width 1024 height 2304 resolution 2k count 1 mode gpt-2-6; 3 in flight; images_remove_background each; creations_wait.
 - Look: tools/w75c/rawsheet.py (one contact sheet) ; finish: tools/w75c/fin2.py (edit S path + needs $S/cdnroot/dev/site/{cdn_sync.py,manifest_guard.py,manifest-floor.json} from origin/main). Send READY with mcp__claude-code-remote__send_message to session_011xDdVS7JY8KJW8hzKtoquL.
 - Observed: a36/a51 faces now read clearly older (fuller, fine lines, few grey strands); a51 reads ~48-52 — fine. Yellow dominant on t8, larger yellow parts on t7.
+## LATE NOTE (Foreman C, owner 21:35Z)
+build.py AGE_TXT a36/a51 changed again on handover branch (c6bc9510): a36 must look YOUNG for her age, a51 visibly older but aging beautifully. Pull before any a36/a51 gen (c30). Already-made sheets (c28/c29 a36/a51 above) stay as they are.
