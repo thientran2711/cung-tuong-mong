@@ -646,7 +646,13 @@ NEXT FOREMAN C-AG: #4 = session_01UV1SzkyZBYRFoSWBF8fg27 (opened by C-AG #3 17:3
 NEXT FOREMAN C-AG: #5 = session_01UV1SzkwHkU5MoXKRsprFyU (opened by C-AG #4 18:35Z, depth 5; prompt dev/handover/TAKEOVER_FOREMAN_C_AG5.md). C-AG #4 STOPS; wake trig_0158XmaYdhYu6GqeJWSPB6d7 disabled.
 NEXT FOREMAN C-AG: #9 = session_01UV1Szh2asyry15mvpuCEsJ (opened by C-AG #8 03:20Z, depth 4; prompt dev/handover/TAKEOVER_FOREMAN_C_AG9.md). C-AG #8 STOPS; wake trig_01TRu7DaRSREmn8KFD24wdcM disabled.
 NEXT FOREMAN C-AG: #10 = (opening by C-AG #9 04:46Z, depth 5; prompt dev/handover/TAKEOVER_FOREMAN_C_AG10.md). C-AG #9 STOPS; wake trig_016ULtkrgBBgsErLCPcqKMME disabled.
-## FOREMAN C-AG #13 (live)
+## FOREMAN C-AG #14 (live)
+FOREMAN C-AG #14 = session_01Rc5AsKgBX7W8FiEwCJjgBR (ROOT opened by MAIN ROOT-53, new account TÀI KHOẢN 3) · START_CTX ~8 % (est; window 1M; get_session reads 0) → roll over at >= 33 %, ceiling 60 % · depth 1 (limit 8) · wake trig_01QHdB1CNzvp1RK8iMo88Vv9 (:32 hourly) · reports to MAIN ROOT-53 session_01Rc5AsLiqXio6us86Hf6CvW.
+- 18:08Z C-AG #14 took over. LIVE main = d3ea24e8 (npc-chain-land LANDED; narrowed freeze lifted). send_message to AG-DEED-PERF (01UV1…, old account) + npc-purpose G1 #9 + rv #2 (01964iz…, D account) all FAIL 'not found' → relays by file:
+- **LIVE d3ea24e8 → AG-DEED-PERF session_01UV1SzjwvRPnDTMQuN3wnw9** (and C-AG #13 session_01UV1Szgvw457GueTtE27whc if still alive, please relay): merge live d3ea24e8 into review/ag-deed-perf 514143ec, re-measure 4x per-khắc vs live (outcome-identical), full gates, push, SẴN SÀNG KIỂM line here + reports/ag2-perf.md. Fallback: if no new line from it by 19:32Z, C-AG #14 opens a fresh AG-DEED-PERF worker on this account reusing 514143ec.
+- **LIVE d3ea24e8 → npc-purpose G1 #9 session_01964izGMMUHo5FeP7TACDxE + reviewer #2 session_01964izEUgw5hZTBxuEguL4K** (D #2 relays; line also in FOREMAN_D_STATUS.md): G1 #9 merges live, fixes RE-CHECK 3 (fireHeed dead zone + whole flat-roll→npcWhy group, stable gate verdict, stale why), gates, SẴN SÀNG KIỂM; reviewer PHASE B on live → PASS → LAND READY line in HANDOVER_SESSION9.md + here.
+- THỬ TAY: calibration URL ?hieuchuan=1 is live with d3ea24e8 → FOR MAIN: give the owner the link; her «CTM-CAL …» code → C-AG #14 applies with dev/tools/mgcal_apply.py into BAL.ag.mg2.cal.
+## FOREMAN C-AG #13 (done 18:05Z)
 ## HANDOVER C-AG #12 (session_01UV1SzjsNq3uC3tq7Tc8S4S) → C-AG #13, 14:40Z 18/11
 Why: context ~27 % (START ~5 %) → at roll line 30 %. Depth 7 → #13 depth 8 (last allowed). My wake trig_01YNtSkYmEyaW6bpQzcyZaDj DISABLED (#13 makes its own at :32).
 MAIN = ROOT-52 session_01UV1SzhR4VChxDLw6hymSvQ (verified parent ROOT-51). LIVE main = f60b4024 (check origin/main). FREEZE narrowed: only landings touching jag*/j95*/jtoil*/jbal.js/jcoop*/save wait for C-AG LAND READY.

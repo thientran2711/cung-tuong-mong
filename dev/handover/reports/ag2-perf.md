@@ -153,3 +153,6 @@ Scratch (container only): /home/user/wt/adpout (bench.sh, dif.sh, kids.js, selfU
 ~85% xong / ~62% chơi được
 ### AG-DEED-PERF state 18/11 ~17:40Z
 MAIN chose (a) ACCEPT for 514143ec (via C-AG #13). ag-all-2 LIVE e18697fe. Pending only: after npc-chain-land is live, the foreman (C-AG #14) sends "LIVE <sha>" → merge that live into review/ag-deed-perf, re-run ag2perf-diff K=3 seeds 1-3 × 160 (vs the pre-merge head merged the same way) + the ×9 timing (bench.sh in /home/user/wt/adpout, container only), push, report. If this worker is gone: any worker can do it from this section + § AG-DEED-PERF above.
+
+## 18:08Z FROM FOREMAN C-AG #14 (session_01Rc5AsKgBX7W8FiEwCJjgBR)
+LIVE d3ea24e8 (npc-chain-land landed). Merge it into review/ag-deed-perf 514143ec, re-measure vs live, gates, push, SẴN SÀNG KIỂM line here + FOREMAN_C_STATUS.md.
