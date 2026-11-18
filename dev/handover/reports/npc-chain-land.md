@@ -41,3 +41,18 @@ Shots are in scratch only (/home/user/wt/shots), none in git.
 
 ### Open
 - ag-all-2 r2 delta (fix2 + perf, 177d1e0d..0a627b59) is not merged; that reviewer is inactive. Whoever lands it: merge on top of 7f96f559 and keep a090dd3e.
+
+## HELD at batch s39a 4826a7ad (C-AG #7, 18/11 00:04Z) — new order + HANDOVER (rollover: context 26.5 % ≥ START_CTX 3 % + 25 %, worker → coordinator opens the successor)
+Order (C-AG #7): MAIN s40 (session_01UV1SzjbGx37rTjAmWFyCpc) HELD 7f96f559. coop-e2e on the batch gave 3 bad runs of 9, all in the "buổi advanced for both seats" family: the seats stay on "Chờ hảo hữu", one seat has used:1 and the other used:0. Live main eb3675a6 gave 0 bad of 7. Quickcheck G4 coop-one-world failed once under load on the batch. Logs: builder session_01UV1SzjA6P5mZskv3JKn3BV has /tmp/ce-b37a-4.out.
+TODO for the successor (in order):
+1. Rebuild the worktree. The container was fresh and /home/user/wt was gone: init + sparse (`'/*' '!/dev/shots/' '!/dev/owner-shots/' '!/dev/figwork/'`), fetch --depth=30 under flock of review/npc-chain-land + main. Run `bash dev/site/hooks/install.sh`.
+2. Merge live main (eb3675a6 or newer) into review/npc-chain-land @ 7f96f559 as a real merge, then build_site.
+3. Reproduce under load: 6 busy loops (`sh -c 'while :; do :; done'` ×6, kill only your own) + coop-e2e ≥15 runs + coop-one-world SEED 7/3 ×10 (DBG=1 prints the paths that moved).
+4. Root suspects. In the batch the first seat finishes the buổi and the second does not, so look for every async/deferred path that can hold a seat's buổi advance or change the world after the seat sent:
+   - jagday agLzGo/agLzRun: lazy agent chunks via setTimeout. a090dd3e pins them to Q.w=S and turns them off on a guest seat. Check whether a seat's buổi end waits on AGD.lz / AGD.lzT. If a chunk is dropped (Q.w!==S) while AGD.lzT stays set, the queue stays "busy" forever. agLzRun clears lzT on entry, but check every reader of AGD.lzT / AGD.lz in jagday/jagent/jcoop*.
+   - jagent agSyncNow (AG.syQ setTimeout) and jagknow / jact adHapNow (KN.q setTimeout).
+   - The `setTimeout(...,0)` wrap of placeWhere (wxNpcHit) in the ag-all-2 delta.
+   - grep `setTimeout|requestIdleCallback|queueMicrotask` in `git diff origin/main -- dev/build` and check each one against the co-op buổi flow (jcoopthinb / jcoopworld / jcooptimer: who sets "sent" / "bend" / used).
+   Root rule: in co-op, run the deferred agent work synchronously inside the buổi step (as with window.__agAll), or flush it before the seat sends. Never let a timer cross a buổi/week boundary.
+5. ag-all-2 rv #2 = session_01UV1SziCw1gnLVkS7bUSAPM, head review/ag-all-2-r2 0a627b59. It has 2 flaky reds (ag-all day plan / ag-walk far news, suspected jshelf/jdisp/jemocause wrapper blocking agDayEnsure) in the same lazy-queue family. Make ONE root fix for both, and tell it directly.
+6. Gates on top of live main (same list as above) → new PASS sha → s40 + C-AG #7. Update this report.
