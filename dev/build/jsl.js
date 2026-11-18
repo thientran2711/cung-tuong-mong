@@ -105,20 +105,17 @@ var KBK_ART_LINE=window.KBK_ART_LINE={b:.0244};
    const por=box.querySelector(":scope>.kbk-por"),pg=box.closest(".kbk-pg");if(!por)return;
    f.style.transform="";{const i0=f.querySelector("img");if(i0&&i0.style.maskImage){i0.style.maskImage="";i0.style.webkitMaskImage=""}}
    /* KIT 56.3 FULL-BODY FRAME (owner 18/11 ~06:45Z + ~06:55Z, overwrites the 17/11 narrow-column and the 18/11 "wide robes cropped" rules): the frame is the TIGHT box of the widest
-      approved person, aspect BAL.bookFrame.ar, as wide as the column height needs (capped at BAL.bookFrame.maxCol of the inner page width; the text column takes the rest). The figure is fitted
+      approved person (BAL.bookFrame): ONE SCALE below; frame aspect ar, as wide as the column height needs (capped at BAL.bookFrame.maxCol of the inner page width; the text column takes the rest). The figure is fitted
       INTO it by its PAINTED box (l..r x t..b, kitFigBody), aspect kept: whole figure visible (crown, hands, sleeves, hem, feet), nothing cut, never squeezed; centred in the frame, feet on its floor. */
    let dyF=0,dxF=0;{const i1=f.querySelector("img"),s1=i1&&i1.getAttribute("src"),b1=s1?kitFigBody(s1,soon):null,Hc=por.clientHeight,BF=BAL.bookFrame;
     if(!b1||!Hc){f.style.visibility="hidden"}else{const inEl0=box.closest(".kbk-in"),inW=(inEl0&&inEl0.clientWidth)||box.clientWidth;
      const wantW=Math.max(60,Math.min(Math.round(Hc*BF.ar),Math.floor(inW*BF.maxCol)));if(Math.abs((parseFloat(box.dataset.kfw)||0)-wantW)>.5){box.dataset.kfw=wantW;box.style.setProperty("--porf",wantW+"px");soon();return}
-     const pwc=por.clientWidth,ar1=i1.naturalWidth&&i1.naturalHeight?i1.naturalWidth/i1.naturalHeight:b1.ar,sp=Math.max(.05,b1.b-b1.t),sw=Math.max(.05,b1.r-b1.l);
-     const ih=Math.min(Hc/sp,pwc/(sw*ar1)),iw=ih*ar1;dyF=ih*(1-b1.b);dxF=(pwc-sw*iw)/2-b1.l*iw;
-     f.style.height=ih.toFixed(1)+"px";f.style.width=iw.toFixed(1)+"px";f.style.visibility="";f.dataset.kbody=(ih*sp).toFixed(1);
-     /* KIT 32.2b EQUAL GAPS (whole group): a figure that does not fill the frame's height (a wide old figure fitted by width) is raised by half the difference between the gap above and the gap under it
-        (never lowered past the column floor, never above the column top). A c03 figure fills the frame: no slack, no move. */
-     try{const inEl=box.closest(".kbk-in"),rh=inEl&&inEl.querySelector(":scope > .kbk-rh");const rel=e=>{let y=0,x=e;while(x&&x!==inEl){y+=x.offsetTop;x=x.offsetParent}return x===inEl?y:null};const pt=inEl?rel(por):null;
-      const pgE=box.closest(".kbk-pg"),art=!!(pgE&&(pgE.classList.contains("r")&&box.closest(".kbk.art-right")||pgE.classList.contains("l")&&box.closest(".kbk.art-left")));
-      if(pt!=null){const lt=rh&&rh.offsetParent?rh.offsetTop+rh.offsetHeight:0,lb=art?pgE.offsetHeight*(1-KBK_ART_LINE.b)-inEl.offsetTop:inEl.clientHeight,figH=ih*sp,feet=pt+Hc;
-       const s=Math.max(-(Hc-figH),Math.min(0,((lb-feet)-(feet-figH-lt))/2));dyF+=s;f.dataset.kgap=Math.round(feet+s-figH-lt)+"/"+Math.round(lb-feet-s)}}catch(e){}}}
+     const pwc=por.clientWidth,ar1=i1.naturalWidth&&i1.naturalHeight?i1.naturalWidth/i1.naturalHeight:b1.ar,sp=Math.max(.05,b1.b-b1.t),sw=Math.max(.05,b1.r-b1.l),FH=Math.min(Hc,pwc/BF.ar);
+     /* ONE SCALE: a c03 canvas through the crop box (same body height for every tier, t6 touches both sides); any other figure at the same body height, fitted (smaller) only if its painted box exceeds the frame */
+     let ih,dx,dy=null;if(Math.abs(ar1-BF.cw/BF.ch)<.003){ih=FH*BF.ch/BF.fh;dx=-BF.ox/BF.cw*ih*ar1;dy=ih*(BF.ch-BF.fh)/BF.ch}
+     else{const bd=Math.max(.2,b1.b-kitFigTop(b1));ih=Math.min(BF.body*FH/bd,FH/sp,pwc/(sw*ar1));dx=(pwc-sw*ih*ar1)/2-b1.l*ih*ar1}
+     const iw=ih*ar1;dyF=dy!=null?dy:ih*(1-b1.b);dxF=dx;
+     f.style.height=ih.toFixed(1)+"px";f.style.width=iw.toFixed(1)+"px";f.style.visibility="";f.dataset.kbody=(ih*(b1.b-kitFigTop(b1))).toFixed(1);}}
    const w0=f.offsetWidth;if(!w0||!box.offsetWidth)return;
    f.style.transformOrigin="50% 100%";const t=Math.abs(dyF)>0.5||Math.abs(dxF)>0.5?`translate(${dxF.toFixed(1)}px,${dyF.toFixed(1)}px)`:"";if(f.style.transform!==t)f.style.transform=t})}catch(e){}}
  function soon(){if(!q){q=requestAnimationFrame(clamp);setTimeout(clamp,450);setTimeout(clamp,1300)}}
