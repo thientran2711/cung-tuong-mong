@@ -1,0 +1,10 @@
+# live-open-eyes (W57 sonnet painter, 18/11) — IN PROGRESS (handover state)
+PRIORITY #1 CHECK: OD 0 | ledger 0 | claims 1 (fig-style-audit 17/11 list, reused) | main 0 | review/* 0 | archive 0 (brief line).
+Method: ONE gen per figure, gpt-2-6 2K transparent 1024x2304, folder ba4aecfe, refs = live img/hd image (uploaded) + style m09 eIyOFEidqL; prompt = "Copy image 1 EXACTLY ... change ONLY the eyes: open, soft warm round-almond, looking at viewer ... soft closed-lip faint smile ... style ref image 2 ... transparent". Check: tools check.py (MediaPipe blink + IoU vs live), sheet.py (old|new full + face crops), looked at every sheet.
+Work dir (container, may be gone): /home/user/wt/w57-work (live/ = 56 live hd webp, new/ = results, gens.txt = key|upload id|gen id, results.txt = blink/IoU, tools/).
+Credits: 135/gen.
+## Done 33 consorts (all PASS, 1 gen unless noted; blink live ~.5-.8 -> new <=.02; IoU .91-.99)
+c01-t2-a51 c01-t4-a26 c02-t6-a36 c03-t1-a36 c03-t3-a51 c04-t6-a51 c05-t2-a36 c07-t3-a36 c09-t2-a26 c10-t1-a51 c10-t3-a51 c10-t6-a36 c12-t2-a51 c12-t6-a36 c13-t1-a18 c13-t4-a18 c13-t7-a18 c13-t8-a26 c14-t1-a36 c14-t4-a18 c14-t6-a18 c14-tcold-a18 (2 gens: gen1 dropped the wooden bowl) c15-t5-a18 c16-t2-a36 c20-t2-a26 c20-t4-a51 c21-t1-a51 c23-t2-a51 c25-t3-a36 c26-t4-a51 c27-t2-a26 c29-t1-a26 c29-t3-a36
+## Borderline decision (looked at faces + blink): INCLUDE c06-t6-a26 c14-t3-a51 c18-t1-a26 c22-t4-a36 c31-t2-a26 c31-t4-a36 (gaze down, lids closed); LEAVE c10-t6-a51 (lids low, blink .21/.36, not closed) and maid-m32-ty1-a36 (open, .03).
+## TODO: the 6 borderline consorts + 15 maids (m28 m33 m38 m43 m48 x ty1,ty2,ty3 a51); then upload img/_review/live-open-eyes/<key>.png + before_after sheets (<=8 pairs) + md5, READY to Foreman C.
+## Noticed, NOT fixed (brief: don't fix others): forehead marks (hoa dien) already in live on c07-t3-a36 c10-t1/t3/t6 c12-t2/t6 c13-t8 c15-t5 c16-t2 c20-t2/t4 c25-t3 c29-t3; new eyes are slightly larger/doll-like (STYLE_ANCHOR round-almond ok).
