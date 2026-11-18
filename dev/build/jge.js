@@ -47,6 +47,7 @@ function geTerm(s,i,t){const k=t[0];
 function geCond(s,i){return (D(s).e[i].cond||[]).every(t=>geTerm(s,i,t))}
 /* fail-only states from the world (a seat taken, the person gone, a chapter that ended badly) */
 function geLive(s){if(!s)return;(D(s).e||[]).forEach((e,i)=>{if(s.st[i]==="o"&&(e.fo||[]).some(t=>geTerm(s,i,t)))s.st[i]="f"})}
+window.geLive=geLive;
 function geOpenN(s){return s.st.filter(x=>x==="o").length}
 /* ---------- choices feed the branch ---------- */
 function geNote(name){const s=geS();if(!s||s.done)return;const n=String(name||"");if(!n)return;const B=D(s),P=GB().pull;
@@ -93,6 +94,8 @@ function geResolve(r2,force){const s=geS();if(!s||s.done)return null;if(r2!=null
  res.n=E[res.i][0];res.fail=Bd.e[res.i].fail;res.t=S.turn;res.life=geLifeNo();s.res=res;s.done=1;
  try{geApply(s,res)}catch(e){console.error("ge",e)}
  try{pushDil(mkP("geR",{}),res.ok?"Đại kết cục":"Kết cục")}catch(e){console.error("ge",e)}
+ /* the title notice (jdh kit reward panel) comes AFTER the event */
+ if(res.ok)try{if(typeof dhInc==="function")dhInc(S,geKey(s.b,res.i,res.sh))}catch(e){console.error("ge",e)}
  return res}
 window.geResolve=geResolve;
 /* the whole answer in one call (bots, tests): r1, r2 indexes; force = true/false skips the roll */
@@ -116,7 +119,6 @@ function geApply(s,res){const id=s.b+"_"+(res.i+1);const out=[];
   const k=GB().kimsach;if(IT[k]){S.inv=S.inv||[];S.inv.push({k,from:"ge",own:"me",giver:"Hoàng thượng",d:S.turn,nt:1,ti:res.ti});out.push(`Phần thưởng: ${IT[k].n} khắc «${res.ti}» (đã vào Rương)`)}
   S.gePt=(S.gePt||0)+GB().pt;
   geBoardAdd(S,res.ti,res.sh,s.b);geBook(s,res);
-  try{const key=geKey(s.b,res.i,res.sh);if(typeof dhInc==="function")dhInc(S,key)}catch(e){console.error("ge",e)}
   log(`<b class="g">Đại kết cục · ${res.ti}.</b> Thiên hạ truyền tai: ${S.name} đã thành “${res.ti}”.`)}
  else{const L=(!res.quiet||GB().quietLoss)?(GB().fail[id]||{}):{};const fx={};STATK.forEach(k=>{if(L[k])fx[k]=L[k]});if(Object.keys(fx).length)apply(fx);res.fx=fx;
   const rk=geRank(L.rank||0);if(rk)out.push(rk);if(L.mis){const v=geMis();if(v&&v.alive){relAdd(S,v,L.mis);out.push(`${v.name} xa cách ngươi`)}}
@@ -177,6 +179,8 @@ window.geBoardPanel=geBoardPanel;
 /* ---------- the Kim sách item (one kind) ---------- */
 try{IT[GB().kimsach]=IT[GB().kimsach]||{n:"Kim sách Thiên mệnh",kd:"Kỷ vật",d:"Sách vàng khắc danh hiệu Thiên mệnh của ngươi; không bán, không tặng, không mất",pr:0,keep:1,tg:[]}}catch(e){}
 /* ---------- the triggers ---------- */
+/* a new life of a live branch gets its state at once (Đức at the start = the lean's zero) */
+(function(){if(typeof a67init!=="function")return;const i0=a67init;a67init=function(){const r=i0.apply(this,arguments);try{if(S)S.ge=null;geS()}catch(e){console.error("ge",e)}return r}})();
 (function(){const a0=chAdvance67;chAdvance67=function(){const r=a0.apply(this,arguments);try{if(geReady())geAsk()}catch(e){console.error("ge",e)}return r}})();
 (function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(geReady())geAsk()}catch(e){console.error("ge",e)}return r}})();
 /* ---------- Sơ đồ nhánh data API (the page waits for kit part K-GE-1 kitBranchMap; BAL.ge.mapOn) ---------- */
