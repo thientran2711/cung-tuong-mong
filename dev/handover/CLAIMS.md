@@ -83,3 +83,4 @@ style-ref test A/B/C c06 t1–t3 | CDN _review only | W79 session_011xDdVSouZw85
 | map-labels-r2 (sonnet OWNER BUG round 2: reviewer FAIL NE corner + grey rule 19:05Z/19:10Z/19:15Z) | review/map-labels-missing | MAIN ROOT-53 | session_01Rc5AsN8Rec5Ewr4xGzqVCe | RUNNING | 18/11 19:08Z |
 | map-zones (opus: Dư đồ zones + zoom/fog + 2nd level HH/TH + live servants; owner 19:25Z) | review/map-zones | MAIN ROOT-53 | session_01Rc5AsJdJ7NfUTTcbii1sqc | RUNNING | 18/11 19:27Z |
 | MAIN ROOT-54 (opus; child of ROOT-53) | handover HANDOVER_SESSION9 | ROOT-53 | session_01Rc5AsMSQ6cKyjRvG4MA9kQ | RUNNING | 18/11 19:21Z |
+| review fullbody-frame-s5 (sonnet SMALL REVIEWER) | review/fullbody-frame-s4 | MAIN ROOT-54 | session_01Rc5AsKnrN1RoAAQZmo5oSJ | RUNNING | 18/11 19:23Z |
