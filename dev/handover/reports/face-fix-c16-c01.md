@@ -43,3 +43,42 @@ Test c01 t2 a26 hd (before|after at 2.5x, looked): speck by the mouth REMOVED, j
 - Nothing uploaded, 0 gens, 0 credits.
 
 ~20% xong / ~0% chơi được
+
+---
+# W51b FINAL — READY face-fix-c16-c01 (18/11, sonnet)
+PRIORITY #1 CHECK: brief + W51 report read in full; FIGURE_GATE D1/D2/D4b re-read (face stays the live figure's own, forehead untouched, mouth untouched); dev/art/face-fix tools reused; no other fix on main/review (brief check 0).
+## Method (what worked)
+1. Magnific gpt-2-6 was tried FIRST and REJECTED: whole-figure regen (pilot c01 t2 a26) redesigned face/hairpins; gpt-2-6 head-crop regen redrew the face (sharper, added a mole) and cannot be blended back; images_retouch has no gpt-2-6 model (rule: gpt-2-6 only). 2 gens, 160 credits spent on the pilot, thrown away.
+2. Fix used: live file composited on an opaque beige, images_remove_background (Magnific, 3 credits each) = fresh matte of the SAME pixels; new alpha/colour taken ONLY in the face-edge zone (right cheek/jaw/hair edge, feathered), everything else is the untouched live pixel. fig = hd resized to the live fig size; por re-matted on its own (por is a separate source). 1 file = c16 t2 a18 had a real pixel fault (pale haze on right cheek beside the mouth, in the source colour too): skin-tone inpaint of that patch (hd + por).
+3. Faults removed: dark/blue speck beside the mouth, semi-transparent smudge, ragged cheek/jaw edge, holes in the right hair edge. Face, mouth, forehead, eyes untouched.
+## Table (hd + fig + por, all sizes; 20 sets = 60 files)
+| fig | age/tier | fault | fix | gens |
+|---|---|---|---|---|
+| c01 | a26 t1 | ragged cheek edge, speck | re-matte zone | rm 2 (hd,por) |
+| c01 | a26 t2 | speck by mouth | re-matte | 2 |
+| c01 | a26 t3 | speck by mouth | re-matte | 2 |
+| c01 | a36 t1 | speck by mouth | re-matte | 2 |
+| c01 | a36 t5 | smear by mouth | re-matte | 2 |
+| c01 | a51 t1 | dark speck by mouth | re-matte | 2 |
+| c01 | a51 t3 | mild edge | re-matte | 2 |
+| c01 | a51 t5 | mild edge | re-matte | 2 |
+| c16 | a18 t1 | ragged jaw/cheek edge | re-matte | 2 |
+| c16 | a18 t2 | brown/dark smear + pale haze by mouth (reviewer's fault) | re-matte + haze inpaint | 2 |
+| c16 | a18 t4 | ragged hair/cheek strands | re-matte | 2 |
+| c16 | a18 t5 | ragged cheek edge | re-matte | 2 |
+| c16 | a26 t1 / t4 / t5 | ragged edge, smear at t5, strand patch at t4 | re-matte | 2 each |
+| c16 | a36 t1 / t4 / t5 | ragged edge | re-matte | 2 each |
+| c16 | a51 t5 / t6 | ragged edge | re-matte | 2 each |
+Scanned and left UNTOUCHED (no visible fault or only hair-wisp softness): c01 a18 all, a26 t4-t8, a36 t2-t4/t6-t8, a51 t2/t4/t6-t8; c16 a18 t3/t6, a26 t2/t3/t6, a36 t2/t3/t6, a51 t1-t4; t7/t8 crown tiers of both figures (their fringe is crown pearls/tassels, not the cheek). Re-matte was also run on c16 t1-t6 x 4 ages (48 files) and c01 flagged sets to judge; only the sets above are shipped.
+Open/noticed, not mine: c16 t2 a36 eyes closed, hoa dien visible on c16 t4 a18 / t5 a51 etc. (FIGURE_GATE D2/D1 matters, other task).
+## Gens / credits
+Magnific gpt-2-6 gens: 2 (160 cr, rejected pilot). images_remove_background: 1 pilot + 16 c01 + 48 c16 = 65 x 3 = 195 cr. Total ~355 cr. Final shipped files: 60 (20 sets x hd/fig/por), 0 gpt-2-6 pixels in them.
+## URLs (CDN _review only, nothing live, no JSON)
+- c01: https://ctm-img.victoria-tntt.workers.dev/img/_review/face-fix/c01/{hd/fig-consort-c01-tT-aA.webp, fig-consort-c01-tT-aA.webp, por-consort-c01-tT-aA.webp}; 3x sheet https://ctm-img.victoria-tntt.workers.dev/img/_review/face-fix/c01/before-after-3x-c01.png
+- c16: https://ctm-img.victoria-tntt.workers.dev/img/_review/face-fix/c16/... same layout; 3x sheet https://ctm-img.victoria-tntt.workers.dev/img/_review/face-fix/c16/before-after-3x-c16.png
+- intermediates (opaque sources) https://ctm-img.victoria-tntt.workers.dev/img/_review/face-fix/_src/ (wipe with the verdict: cdn_sync.py --wipe-review face-fix)
+- tools: dev/art/face-fix/ (merge/haze logic was inline; re-matte = Magnific images_remove_background on an opaque composite).
+## To go live
+Copy the 60 files over img/hd/fig-*, img/fig-*, img/por-* with the same names (same sizes as live; checked hd dims match, fig = live size) after owner/MAIN OK.
+READY face-fix-c16-c01
+~90% xong / ~0% chơi được (chưa lên live, chờ sếp duyệt)
