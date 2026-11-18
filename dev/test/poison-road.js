@@ -1,6 +1,6 @@
 /* D8 poison road (jpq) — topic tests in the real build (dev/index.html; run python3 dev/build/assemble.py first).
    Each motive road + the caught / success / inquest paths, NPC two-way, co-op gate, the her-card rows, old save (no S.pq).
-   Odds are forced through BAL.pq clamps (max with the ODDS CAP BAL.odds lifted, caught.lo/hi, inq.lo/hi, vg.lo/hi) so every path is deterministic.
+   Odds are forced (success = pqOdds result set to 0 / 100, BAL.odds.hi lifted; BAL.pq clamps caught.lo/hi, inq.lo/hi, vg.lo/hi) so every path is deterministic.
    usage: node dev/test/poison-road.js   → exit 1 on any failed check */
 const {chromium}=require('playwright');const fs=require('fs');const path=require('path');const R=path.resolve(__dirname,'../..');
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:1000,height:755},reducedMotion:'reduce'});
@@ -10,8 +10,9 @@ const {chromium}=require('playwright');const fs=require('fs');const path=require
  const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.goto('http://ts.local/dev/index.html',{waitUntil:'domcontentloaded',timeout:120000});await p.waitForTimeout(2500);
  const res=await p.evaluate(()=>{const out=[];const ok=(n,c,x)=>out.push({n,ok:!!c,x:x==null?"":String(x).replace(/<[^>]+>/g,"").slice(0,160)});
-  const B0=JSON.parse(JSON.stringify(BAL.pq)),OD0=JSON.parse(JSON.stringify(BAL.odds));const reset=()=>{BAL.pq=JSON.parse(JSON.stringify(B0));BAL.odds=JSON.parse(JSON.stringify(OD0))};
-  const force=(o)=>{reset();BAL.odds.lo=0;BAL.odds.hi=100;/* forced paths: lift the one ODDS CAP (j1 roll / oddsCl) so 0 / 100 are exact */if(o.hit!=null){BAL.pq.max=o.hit?100:0}if(o.cp!=null){BAL.pq.caught.lo=BAL.pq.caught.hi=o.cp?100:0}if(o.inq!=null){BAL.pq.inq.lo=BAL.pq.inq.hi=o.inq?100:0}if(o.vg!=null){BAL.pq.vg.lo=BAL.pq.vg.hi=o.vg?100:0}};
+  const B0=JSON.parse(JSON.stringify(BAL.pq)),OD0=JSON.parse(JSON.stringify(BAL.odds));let FH=null;const pqO0=pqOdds;pqOdds=function(){const X=pqO0.apply(this,arguments);if(FH!=null)X.o=FH;return X};/* a forced hit / miss sets the success odds exactly */
+  const reset=()=>{FH=null;BAL.pq=JSON.parse(JSON.stringify(B0));Object.assign(BAL.odds,JSON.parse(JSON.stringify(OD0)))};
+  const force=(o)=>{reset();BAL.odds.hi=100;/* forced paths: lift the top of the one ODDS CAP (j1 roll) so 100 is exact */if(o.hit!=null)FH=o.hit?100:0;if(o.cp!=null){BAL.pq.caught.lo=BAL.pq.caught.hi=o.cp?100:0}if(o.inq!=null){BAL.pq.inq.lo=BAL.pq.inq.hi=o.inq?100:0}if(o.vg!=null){BAL.pq.vg.lo=BAL.pq.vg.hi=o.vg?100:0}};
   let END=null;const o0=over;over=function(h,t,fate,alive){END={h,fate:String(fate),t:String(t).replace(/<[^>]+>/g,""),alive:!!alive};return o0.apply(this,arguments)};
   const life=()=>{SLOT=3;try{store.set(NL_KEY,null)}catch(e){}END=null;start();Q.length=0;S.tho=999;S.suc=90;S.bac=200;S.rank=Math.max(S.rank,2);S.mort=S.mort||{};delete S.pq;
    if(S.thDead){S.thDead=false;S.th=0}S.thO=S.thO||{};S.thO.tho=999;S.emp.tho=999;S.inv=S.inv.filter(e=>!["hacdinh","docngam"].includes(e.k))};
@@ -69,7 +70,7 @@ const {chromium}=require('playwright');const fs=require('fs');const path=require
   life();v=liveRivals(false)[0];v.sung=0;v.an=0;v.inv=(v.inv||[]).concat([{k:"hacdinh"},{k:"yensao"}]);reset();BAL.pq.npc.try=1000;pqS().cd=5;ok("NPC cooldown blocks a second try",pqNpc(v)==="");
   /* 12. old save: no S.pq → month runs, card opens */
   life();delete S.pq;let e12="";try{tick(1);mkP("pgpick",{ix:arm()})}catch(x){e12=String(x)}ok("old save without S.pq",!e12&&S.pq,e12);
-  reset();return out});
+  reset();pqOdds=pqO0;return out});
  let fail=0;for(const r of res){if(!r.ok)fail++;console.log((r.ok?"PASS ":"FAIL ")+r.n+(r.x?"  · "+r.x:""))}
  const pe=errs.filter(e=>!/ResizeObserver|Failed to fetch|NetworkError|Load failed/.test(e));if(pe.length){fail++;console.log("PAGE ERRORS",pe.slice(0,5))}
  console.log(`poison-road: ${res.length-fail+(pe.length?1:0)}/${res.length} PASS${fail?` · ${fail} FAIL`:""}`);await b.close();process.exit(fail?1:0)})();
