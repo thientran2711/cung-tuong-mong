@@ -67,8 +67,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    L2:L2.slice(0,4)/* names show as the player knows them (k61), so no name filter */,hk:toilHostKind("th"),hkFix,dv:toilNpc(w).dv}}finally{toilHostKind=thk;luxVerdict=lv0}});
  ok(r3.me&&r3.her&&r3.me[0]===r3.her[0]&&r3.me[1]===r3.her[1],'Thái hậu judges her Vụng về face with the player\'s toilFx part',r3);
  ok(r3.d===r3.aff&&r3.aff<0&&r3.again,'reprimand: her Thái hậu regard moves by exactly that (negative) verdict, once a day',r3);
- ok(r3.ruleMe==="tease"&&r3.ruleHer==="tease"&&/che miệng cười/.test(r3.rv||"")&&/che miệng cười/.test(r3.line),'mocked by the player\'s rule (toilSeeRule = toilRival\'s verdict)',r3);
- ok(r3.dSuc===-r3.B.s&&r3.dDanh===r3.expD&&r3.dDanh>0,'her answer Đáp lại = the player\'s toilAns (Sức, Danh from BAL.toil)',r3);
+ ok(r3.ruleMe==="tease"&&r3.ruleHer==="tease"&&/bớt ghen/.test(r3.rv||"")/* her line: toil-looks5 wording (main) */&&/che miệng cười/.test(r3.line),'mocked by the player\'s rule (toilSeeRule = toilRival\'s verdict)',r3);
+ ok(r3.dSuc===r3.B.s/* BAL.toil.replySuc = the Sức change (−2, main) */&&r3.dDanh===r3.expD&&r3.dDanh>0,'her answer Đáp lại = the player\'s toilAns (Sức, Danh from BAL.toil)',r3);
  ok(r3.L2.some(z=>/quở trách/.test(z))&&r3.L2.some(z=>/che miệng cười/.test(z)),'two-way: standing there, the player reads the reprimand and the mockery in the log',r3.L2);
  /* 4 co-op + old save */
  const r4=await p.evaluate(()=>{const R=liveRivals(true).filter(v=>!v.coop&&toilOn(v));for(const v of R)delete v.tl2;const host=R.map(v=>{const o=toilNpc(v);return[v.id,o.k,o.look,o.score]});
