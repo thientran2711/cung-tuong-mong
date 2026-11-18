@@ -50,9 +50,9 @@ Object.assign(BAL,{looks:{
  cheek3:[0,.20,.448,.416,0],
  /* INK PLACEMENT (r11, review look-fx-r10 FAIL: the painted ink head sits at the far left edge of the face square = the temple, so a correct face clip either left it on the hair lock or cut it to nothing):
     the ink layer (fx-muc-N, + -m) is MOVED per picture so the stroke's head lands on the upper cheek just below + outside the viewer-side eye of THAT picture (its keep-fit row, lkKeepFor):
-    target = eye centre - at[0] x eye half-width (outward), + at[1] x eye half-height (down), in face-square units; the layer = the face square scaled by k about the art's head point an[lv-1] (art units, per level);
+    target = eye centre - at[0] x eye half-width (outward), + at[1] x eye half-height (down), in face-square units; the layer = the face square scaled by k about the art's head point an[lv-1] (art units, per level) and turned rot deg about it (the painted stroke runs eye-level-to-mouth: turned flatter it lies across the cheekbone instead of reaching the lips; LOOK r11);
     box = the main stroke only (art units [x0,y0,x1,y1], clip-path inset; drops the lv3 splash at the chin). A picture whose cheek is narrow (3/4 face, hair lock) carries its own [at0, at1] x1000 as items 13-14 of its keep-fit row (written by the scan --fit, outliers only). Constants from the whole-group scan dev/test/look-fx-inkscan.py (17800 pictures). No keep-fit row = the old square. */
- ink:{at:[.6,1.6],k:1,an:[[.086,.507],[.042,.443],[0,.407]],box:[0,.33,.37,.64]},
+ ink:{at:[.3,1.6],k:.75,rot:-25,an:[[.086,.507],[.042,.443],[0,.407]],box:[0,.33,.37,.64]},
  /* FACE CLIP (owner 18/11 ~04:58Z: no mark past the face skin onto hair / ear / neck / background): ONE polygon in face-square units (0..1 of the square of lkSquareRect), measured on 180 por pictures (skin segmentation, dev/test/look-fx-faceclip.py); every mark layer (face-square marks, cào, smudge) is clipped to it by lkFaceClipAll */
  face:[[.23,.19],[.5,.14],[.77,.19],[.88,.34],[.90,.52],[.84,.70],[.72,.87],[.5,.96],[.28,.87],[.16,.70],[.10,.52],[.12,.34]]},
  pox:{thuydau:{sea:["Xuân"],cont:1,die:0},sac:{thuydau:[0,3,5,8],daumua:[0,6,10,14]},spread:35,spreadWk:3,scar:[0,1,1,2]},
@@ -369,7 +369,7 @@ function lkInkBox(file,lv,mir){try{const nm=String(file||"").split("/").pop();if
  const se=(e[0]+.04)/1.08,te=(e[1]+.3826)/1.165,ex=e[2]/1.08,ey=e[3]/1.165,Ts=mir?se+at0[0]*ex:se-at0[0]*ex,Tt=te+at0[1]*ey;
  const A=/^por-/.test(nm)?.759:.43,r=sq[4]*Math.PI/180,c=Math.cos(r),n=Math.sin(r),oy=KIT_RASH.RB,dx=(Ts-.5)*sq[2]*A,dy=(Tt-oy)*sq[3],X=(sq[0]+.5*sq[2])*A+dx*c-dy*n,Y=sq[1]+oy*sq[3]+dx*n+dy*c;
  const W=sq[2]*I.k,H=sq[3]*I.k,L=X/A-as*W,T=Y-at*H,B=I.box,ins=mir?[B[1],B[0],1-B[3],1-B[2]]:[B[1],1-B[2],1-B[3],B[0]];
- return{st:`left:${L.toFixed(2)}%;top:${T.toFixed(2)}%;width:${W.toFixed(2)}%;height:${H.toFixed(2)}%;transform:rotate(${sq[4]}deg);transform-origin:${(as*100).toFixed(1)}% ${(at*100).toFixed(1)}%`,clip:`;clip-path:inset(${ins.map(x=>(x*100).toFixed(1)+"%").join(" ")})`}}catch(e){return""}}
+ return{st:`left:${L.toFixed(2)}%;top:${T.toFixed(2)}%;width:${W.toFixed(2)}%;height:${H.toFixed(2)}%;transform:rotate(${(sq[4]+(mir?-1:1)*(I.rot||0)).toFixed(1)}deg);transform-origin:${(as*100).toFixed(1)}% ${(at*100).toFixed(1)}%`,clip:`;clip-path:inset(${ins.map(x=>(x*100).toFixed(1)+"%").join(" ")})`}}catch(e){return""}}
 window.lkInkBox=lkInkBox;
 function lkFaceImg(cls,f,st,file){if(!st)return"";const mi=/^fx-muc-(\d)\.png$/.exec(f),mir=!!(mi&&lkMirror(file));if(mir)f=f.replace(".png","-m.png");const m=/^fx-(muc|muoi)-/.exec(f);if(!lkArt(f))return"";
  const ib=mi?lkInkBox(file,+mi[1],mir):"";if(ib){const v=kitFxVars(ib.st);return `<img class="${cls}" src="img/${f}" alt="" aria-hidden="true" style="${v}${kitToneCss("muc",null)}${lkKeepBox(file,v)}${ib.clip}" onerror="this.remove()">`}

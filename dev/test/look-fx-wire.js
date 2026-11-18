@@ -14,7 +14,7 @@ const {chromium}=require('playwright');const D=require('./lib/device');const fs=
  await g.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name&&S.known,null,{timeout:60000});await p.waitForTimeout(4000);
  await g.waitForFunction(()=>window.TOIL_FIT&&TOIL_FIT.fit&&window.KIT_VEIL&&KIT_VEIL.fit&&KIT_SCAR.fit,null,{timeout:60000}).catch(()=>{});
  await g.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;window.__lfw={};
-  window.__lfw.set=(id)=>{const T=window.__lfwT||'t2',por='por-consort-'+id+'-'+T+'-a26.webp',fig='fig-consort-'+id+'-'+T+'-a26.webp';const kf0=window.__kf0||(window.__kf0=kitFace),kg0=window.__kg0||(window.__kg0=kitFigOf);
+  window.__lfw.set=(id)=>{const T=window.__lfwT||'t2',X=/-a\d+$/.test(id)?id:null/* r11: a full picture name (e.g. man-congtu-10-a36, consort-c19-t2-a26) */,por=X?'por-'+X+'.webp':'por-consort-'+id+'-'+T+'-a26.webp',fig=X?'fig-'+X+'.webp':'fig-consort-'+id+'-'+T+'-a26.webp';const kf0=window.__kf0||(window.__kf0=kitFace),kg0=window.__kg0||(window.__kg0=kitFigOf);
    kitFace=function(q){const f=kf0.apply(this,arguments);if(q===S&&f&&f.src){const h=Object.assign({},f,{src:String(f.src).replace(/[^/]*$/,por)});if(f.__kp)h.__kp=f.__kp;return h}return f};
    kitFigOf=function(q){const s=kg0.apply(this,arguments);return q===S?String(s).replace(/[^/?]*(\?.*)?$/,fig):s};window.__lfw.por=por;window.__lfw.fig=fig};
   window.__lfw.clear=()=>{S.ill=null;S.pz=null;S.rash=null;S.slap=null;S.scar=null;S.sc70=null;S.lk=null;S.stain=null;try{const t=toilToday(S);if(t)delete t.lk}catch(e){}};

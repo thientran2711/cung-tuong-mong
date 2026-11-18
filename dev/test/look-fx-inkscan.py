@@ -20,9 +20,11 @@ jl = lambda x: json.loads(re.sub(r'(?<![\d])\.(\d)', r'0.\1', x))
 FIT = {'eye': jl(re.search(r'fit:\{eye:(\[.*?\])', src).group(1)), 'mouth': jl(re.search(r'fit:\{eye:\[.*?\],mouth:(\[.*?\])', src).group(1))}
 T = re.search(r'mouth:\[.*?\]\},mouth:(\[.*?\]),nose:(\[.*?\]),pad:([\d.]+)', src); NOSE = jl(T.group(2)); PAD = float(T.group(3))
 POLY = np.array(jl(re.search(r'face:(\[\[.*?\]\])\}', src).group(1))); FEATH = float(re.search(r'keep:\{feather:([\d.]+)', src).group(1))
-m = re.search(r'ink:\{at:(\[.*?\]),k:([\d.]+),an:(\[\[.*?\]\])', src)
+m = re.search(r'ink:\{at:(\[.*?\]),k:([\d.]+),(?:rot:-?[\d.]+,)?an:(\[\[.*?\]\])', src)
 PLACE_NEW = (jl(m.group(1)) + [float(m.group(2))] + sum(jl(m.group(3)), [])) if m else None   # [a, b, k, an_s1, an_t1, an_s2, an_t2, an_s3, an_t3]
 mb = re.search(r'ink:\{.*?box:(\[.*?\])', src); BOX = jl(mb.group(1)) if mb else None
+mr = re.search(r'ink:\{.*?rot:(-?[\d.]+)', src); ROT = float(mr.group(1)) if mr else 0.
+if '--rot' in a: ROT = float(opt('--rot', '0'))
 if '--box' in a: BOX = [float(x) for x in opt('--box', '').split(',')]
 if '--place' in a: PLACE_NEW = [float(x) for x in opt('--place', '').split(',')]
 ART = {n: cv2.resize(np.asarray(Image.open(f'{D}/art/fx-muc-{n}.png').convert('RGBA'))[..., 3].astype(np.float32) / 255, (S, S), interpolation=cv2.INTER_AREA) for n in (1, 2, 3)}
@@ -69,7 +71,8 @@ def placed(n, r, P, mir):   # the art under placement P = [a, b, k, an_s, an_t];
     se = (e[0] + .04) / 1.08; te = (e[1] + .3826) / 1.165; ex = e[2] / 1.08; ey = e[3] / 1.165
     Ts = se + a_ * ex if mir else se - a_ * ex; Tt = te + b_ * ey; ans = 1 - an_s if mir else an_s
     # layer box scaled by k about the art's anchor, anchor moved onto the target: art px (s0,t0) -> (Ts + k (s0 - ans), Tt + k (t0 - an_t))
-    s0 = ans + (SS - Ts) / k_; t0 = an_t + (TT - Tt) / k_
+    rt = np.deg2rad(-ROT if mir else ROT); c_, n_ = np.cos(rt), np.sin(rt); X_ = (SS - Ts) / k_; Y_ = (TT - Tt) / k_   # extra rotation about the head point (BAL ink.rot, deg; - = lifts the tail)
+    s0 = ans + X_ * c_ + Y_ * n_; t0 = an_t - X_ * n_ + Y_ * c_
     return cv2.remap(art, (s0 * S - .5).astype(np.float32), (t0 * S - .5).astype(np.float32), cv2.INTER_LINEAR, borderMode=cv2.BORDER_CONSTANT, borderValue=0)
 def measure(k, P_list):
     r = KF[k]; sq = square(k); sk = skin(sq); fm = facemask(k); kv = keepvis(keep(r)); et = eyetruth(r); mir = mirrored(k); out = []
@@ -77,7 +80,8 @@ def measure(k, P_list):
         res = []
         for n in (1, 2, 3):
             art = placed(n, r, P, mir); vis = art * fm * kv; on = vis > .1
-            res.append(((on & ~sk).sum(), (on & et).sum(), vis.sum() / max(ART[n][(TT >= .33) & (TT <= .64) & (SS <= .37)].sum(), 1e-6)))   # area vs the main stroke's own alpha
+            low = (on & (V > r[7] / 1000 - 2 * r[9] / 1000)).sum()   # r11 LOOK: ink down at the lip line reads as a moustache next to the lips -> counted with 'eye' (a face-feature fail)
+            res.append(((on & ~sk).sum(), (on & et).sum() + low, vis.sum() / max(ART[n][(TT >= .33) & (TT <= .64) & (SS <= .37)].sum() * (P[2] ** 2 if P is not None else 1), 1e-6)))   # share of the PLACED stroke (scaled by k) that stays visible   # area vs the main stroke's own alpha
         out.append(res)
     return out
 keys = sorted(k for k in VF if k in KF and os.path.exists(D + '/pics/' + k))
