@@ -1,3 +1,14 @@
+# opt-card-short #6 (worker #4, ROOT-55 order: owner OD 18/11 ~21:20Z) sha **93db9adb**, quickcheck PASS incl. core gates
+PRIORITY #1 CHECK: OD 18/11 ~21:20Z (tail) | START_CORE law 10 | main 0 | review/opt-card-short reused | claims this row.
+Kit (KIT.md §6.2e), whole group, every tier, Fold 755x1000 + iPad 1180x820:
+1. Figure FILLS the left column: `kszFigFill` (jksize, after feet-fit) grows the body to the frame body height (tall Fold frames; wide iPad frames already fill). Column width unchanged so the option cards keep their width (widening the column to 50% squeezed the cards to 256 px and pushed 3-line titles = tier M lost; rejected). The figure box may spread to 1.45 x the column. Scan `FIG top/gap`: tag top 0 px everywhere; unfilled gap <= 1 px in 11 of 12 Fold cases; Fold dress 16 px (width cap), child exempt (age scale). iPad gap <= 6.
+2. Tag at the TOP (`align-self:flex-start`), figure right under it.
+3. Option cards: ONE title band per frame (`--kat-h` = tallest title+chip band), title centred in it, one text-block offset (`--kbtop`); done inside every tier fit (`band()` in kitOptTier). Scan `band-centre` = -2 in every card of every case (spread 0). Cost: tier L 128 -> 140 (equal bands make the longest card 138).
+4. Samples use REAL event text (a real approach event's description + title) in the scan: choice/many/short/night/two/man/child.
+5. Law 10 re-checked after the tier pick and 350 ms after the frame settles.
+Shots (looked): dev/handover/shots/opt-card-short/{fold,ipad}-{mat2,dress,many,night,choice,short,thtrieu,child,fest}.jpg (CDN write 403).
+Open: Fold figure cannot be taller than its box allows without a wider left column (geometry: 562 px frame); if the owner wants it bigger, a wider left column costs the card width.
+
 # opt-card-short #5 (worker #4 continued, MAIN ROOT-54 FAIL fix) sha **ad86bcc0**, quickcheck PASS incl. core gates
 PRIORITY #1 CHECK: START_CORE LAW 10 | main 0 | review/opt-card-short reused | claims this row.
 1. LAW 10 (big scene picture only when content fits without scrolling): kit rule `kszEvLaw10` (jksize, after kszPicStep3): options list scrolls -> picture shrinks to the short strip (evMin 56); still scrolls -> picture dropped (`data-evfit` s / x). Whole group = every live option frame, every tier, Fold + iPad. Scan line SCROLLBIG (opt-card-scan.js): `scroll with big picture` = 0 in all 12 cases x Fold/iPad (iPad mat/mat2/visit/fest now fit=s, ev 56, all 3 options visible; before: ipad-mat2 280 px picture + «Kéo xuống»).
