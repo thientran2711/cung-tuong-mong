@@ -666,3 +666,4 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - (16:06Z) ROOT-52: owner 16:10Z correction relayed to fullbody-frame-s3: big scene picture OK when content fits without scroll; shrink (KIT_SIZE picture class by rule) only when it would scroll.
 - (16:08Z) ROOT-52: owner 16:15Z button-size rule relayed to opt-card-short #2 (one size per S/M/L tier = largest needed across layouts; scan rendered size == tier size on Fold + iPad).
 - (16:12Z) ROOT-52: GAME LAWS (owner 16:20Z, top of START_CORE) → line in briefs/root52-common.md + ORDER in every foreman STATUS. CLAUDE.md first line on main rides C-AG's landing (asked C-AG #13).
+- (16:13Z) ROOT-52: 18 LAWS (owner 16:25Z) → brief line + foremen + C-AG CLAUDE.md line updated.
