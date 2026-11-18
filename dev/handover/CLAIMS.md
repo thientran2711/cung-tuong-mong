@@ -510,6 +510,6 @@ B7 consort a18 t1–t8 + Nữ đế, painter B (c03,c06,c08,…c31) | _review CD
 B7 consort c01 a18 t1–t8 + Nữ đế (owner waits) | _review CDN consort-tiers/c01/b7 + handover reports | C | session_011xDdVP3CQJqrW5i6JLZ14G | RUNNING | 2026-11-18T05:41Z
 | face-reveal-anim (owner 18/11 06:20Z: grey avatar/silhouette → real face appears in place; sonnet; brief briefs/face-reveal-anim.md) | review/face-reveal-anim | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:43Z |
 | buoi-banner (owner 18/11 06:20Z canon overwrite: buổi title only, light frame under the top bar, 70-85 % ladder; sonnet; brief briefs/buoi-banner.md) | review/buoi-banner | MAIN ROOT-45 | session_01UV1Szgw3GFqKAN87sYCdcE | READY FOR CHECK be73c79 | 18/11 05:43Z |
-| REVIEW face-zoom-stretch 717c0c0 (SMALL; sonnet; brief briefs/review-face-zoom-stretch.md) | review/face-zoom-stretch | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:43Z |
+| REVIEW face-zoom-stretch 717c0c0 (SMALL; sonnet; brief briefs/review-face-zoom-stretch.md) | review/face-zoom-stretch | MAIN ROOT-45 | session_01UV1SziAxSDPpYWySX2aPeP | RUNNING | 18/11 05:43Z |
 | toil-react-top (live test fail 'modal is on top' ×2; ORDER ROOT-46 05:55Z) | review/toil-react-top | D | (to open) | ORDERED | 18/11 05:55Z |
 | FOREMAN E ROOT #2 (opus; successor of E ROOT SzmtCW13) | handover FOREMAN_E_STATUS | E ROOT | session_01DgYSWqAEkHoFF4gFWC5Yxg | RUNNING | 18/11 05:57Z |
