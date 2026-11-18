@@ -543,3 +543,4 @@ Audit live consort figures c01–c32 (2K redo / m09 skin) | handover reports/con
 | FOREMAN E ROOT #2 (opus; successor of E ROOT SzmtCW13) | handover FOREMAN_E_STATUS | E ROOT | session_01DgYSWqAEkHoFF4gFWC5Yxg | RUNNING | 18/11 05:57Z |
 | REVIEW hud-mood-bar 04bb279 (SMALL; sonnet; brief briefs/review-hud-mood-bar.md) | review/hud-mood-bar | MAIN ROOT-46 | session_01UV1Szgt5ATvToTiS3v5M3Z | RUNNING | 18/11 05:54Z |
 | place-stage r5 (owner pick B 501 + vivid marker + 4-person iPad trial; sonnet; brief briefs/place-stage-r5.md; r4 SzjeRxj archived) | review/place-stage | MAIN ROOT-46 | session_01UV1SzkV3Bc1u4BHrVH1jFj | RUNNING | 18/11 05:54Z |
+| REVIEW face-reveal-anim 8f5ea90 (SMALL; sonnet; prompt inline) | review/face-reveal-anim | MAIN ROOT-46 | session_01UV1SzimcXuUf9Ahi1zHTBi | RUNNING | 18/11 06:13Z |
