@@ -555,5 +555,5 @@ RUNNING MAIN WORKERS / REVIEWERS (tell them the new id):
 - (18/11 07:35Z) LANDED place-stage r5b PASS e0b96620 (SMALL reviewer Szk3GeT, final merge b2a9d349) FF b2a9d349→e0b96620. LIVE main = e0b96620. img/_review/place-stage wiped; reviewer to archive (ROOT-49). Owner told A1 is live.
 
 ## ROOT-49 (session_01UV1SzicNuc6RxVvcxNUHKK)
-- (18/11 07:35Z) MAIN = ROOT-49 session_01UV1SzicNuc6RxVvcxNUHKK; START_CTX ~7 % (get_session reads 0; own estimate) → rollover at 32 %, ceiling 60 %; depth 5 (limit 8). LIVE main b2a9d349.
-- (18/11 07:35Z) LOAD: main running 6 (place-stage rv, map-tap-go rv, opt-card-short #2, cloth-tea, fullbody-frame s2, look-fx-wire #8; all owner UI/go-live) | B: coop-thin-f1 #2 running | C: B10 art running, c03 a18 HELD | D: balance-final running, 3 READY to land | E: 5/12 | moved: none (no non-UI item held by main).
+- (18/11 07:35Z) MAIN = ROOT-49 session_01UV1SzicNuc6RxVvcxNUHKK; START_CTX ~7 % (get_session reads 0; own estimate) → rollover at 32 %, ceiling 60 %; depth 5 (limit 8). LIVE main e0b96620 (place-stage landed by ROOT-48).
+- (18/11 07:35Z) LOAD: main running 5 (map-tap-go rv, opt-card-short #2, cloth-tea, fullbody-frame s2, look-fx-wire #8; all owner UI/go-live) | B: coop-thin-f1 #2 running | C: B10 art running, c03 a18 HELD | D: balance-final running, 3 READY to land | E: 5/12 | moved: none (no non-UI item held by main).
