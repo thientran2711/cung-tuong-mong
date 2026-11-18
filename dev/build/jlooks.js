@@ -308,13 +308,15 @@ function lkKeepCss(){try{const K=BAL.looks.keep,E=[...K.eye,K.mouth,K.nose],gr="
 window.lkKeepCss=lkKeepCss;
 /* FACE CLIP: every mark layer (img.kpox / img.klk / img.kscar, incl. the code-drawn smudge) gets clip-path = the BAL.looks.face polygon mapped from the face-square into THAT layer's own box (position, rotation, flip, origin from its --f vars).
    Done once, in the last kitFxLayers wrap below, so stage, portrait, mirror and every avatar frame clip alike. A = picture width / height (por 384x506; stage figures ~384x900): only the small row rotation depends on it. */
+/* per-picture face-fit rows (img/face-fit.json, outliers only, scan dev/test/look-fx-facefit.py): { "<por-/fig- file>": [dx,dy,sx,sy] } = the BAL.looks.face polygon scaled by sx,sy about (.5,.55) and moved by dx,dy (face-square units); no row = the polygon as it is */
+window.KIT_FACEFIT={url:"img/face-fit.json",fit:null,load:function(){if(this.fit||this._ld)return;this._ld=1;try{fetch(this.url).then(r=>r.ok?r.json():null).then(j=>{if(j)KIT_FACEFIT.fit=j}).catch(()=>{})}catch(e){}}};try{KIT_FACEFIT.load()}catch(e){}
 function lkClipFor(file,sty){try{const sq=lkSquareRect(file);if(!sq)return"";const g=k=>{const m=new RegExp("--f"+k+":\\s*(-?[\\d.]+)%").exec(sty);return m?+m[1]:null},L=g("left"),T=g("top"),W=g("width"),H=g("height");if(L==null||T==null||W==null||H==null)return"";
  const tf=/--ftf:\s*([^;]*)/.exec(sty),rot=tf&&/rotate\((-?[\d.]+)deg\)/.exec(tf[1]),fl=!!(tf&&/scaleX\(-1\)/.test(tf[1])),to=/--fto:\s*([\d.]+)%\s+([\d.]+)%/.exec(sty);
  const A=/^por-/.test(String(file).split("/").pop())?.759:.43,D=Math.PI/180;
  const e={l:L,t:T,w:W,h:H,r:(rot?+rot[1]:0)*D,ox:to?+to[1]/100:.5,oy:to?+to[2]/100:.5,f:fl},q={l:sq[0],t:sq[1],w:sq[2],h:sq[3],r:sq[4]*D,ox:.5,oy:KIT_RASH.RB,f:false};
  const toPic=(b,s,t)=>{if(b.f)s=2*b.ox-s;const dx=(s-b.ox)*b.w*A,dy=(t-b.oy)*b.h,c=Math.cos(b.r),n=Math.sin(b.r);return[(b.l+b.ox*b.w)*A+dx*c-dy*n,b.t+b.oy*b.h+dx*n+dy*c]};
  const toLoc=(b,X,Y)=>{X-=(b.l+b.ox*b.w)*A;Y-=b.t+b.oy*b.h;const c=Math.cos(b.r),n=Math.sin(b.r),dx=X*c+Y*n,dy=-X*n+Y*c;let s=dx/(b.w*A)+b.ox;if(b.f)s=2*b.ox-s;return[s,dy/b.h+b.oy]};
- const pts=BAL.looks.face.map(([s,t])=>{const P=toPic(q,s,t),Q=toLoc(e,P[0],P[1]);return(Q[0]*100).toFixed(1)+"% "+(Q[1]*100).toFixed(1)+"%"}).join(",");
+ const nm=String(file).split("/").pop(),ff=KIT_FACEFIT.fit&&KIT_FACEFIT.fit[nm]||[0,0,1,1],pts=BAL.looks.face.map(([s0,t0])=>{const s=(s0-.5)*ff[2]+.5+ff[0],t=(t0-.55)*ff[3]+.55+ff[1],P=toPic(q,s,t),Q=toLoc(e,P[0],P[1]);return(Q[0]*100).toFixed(1)+"% "+(Q[1]*100).toFixed(1)+"%"}).join(",");
  return `;clip-path:polygon(${pts});-webkit-clip-path:polygon(${pts})`}catch(err){return""}}
 function lkFaceClipAll(h,file){if(!h||!file)return h;return h.replace(/<img class="((?:kpox|klk|kscar)[ "][^>]*?)style="([^"]*)"/g,(m,a,sty)=>m.slice(0,m.length-sty.length-1)+sty+lkClipFor(file,sty)+'"')}
 window.lkFaceClipAll=lkFaceClipAll;window.lkClipFor=lkClipFor;
