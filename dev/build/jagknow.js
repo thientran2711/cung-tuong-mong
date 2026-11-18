@@ -297,7 +297,7 @@ function knEye(x,h,hid){const doer=knWho(h)[0],pl=h.k,nw=agKh();const at=s=>{con
 function knPal(o){try{return palaceOf(o)}catch(e){return null}}
 function knLoyK(p,s){if(!(p===S&&s&&s.kn))return null;const o=ownerOf(s);return o===S||s===S.maid?cl(s.loyal||0,0,100):tmOdds(S,s)}/* a Tai mắt's firmness for HER = her will (tmOdds), never lòng to her own master (review ag-all-2 r2 C2) */
 function taiMatList(p){p=p||S;if(!p)return[];const N=p===S&&S.tmN||{};return taiMatRaw(p).map(s=>{const o=ownerOf(s);return{id:"s"+s.sid,sid:s.sid,name:s.name,role:s.role,
- placedAt:o?knPal(o):null,placedWith:o?knId(o):null,placedName:o?o.name:"",loyaltyKnown:knLoyK(p,s),reports:N[s.sid]||0,
+ placedAt:o?knPal(o):null,placedWith:o?knId(o):null,placedName:o?(o.name!=null?o.name:NM(o)/* the Thái hậu's household has no .name */):"",loyaltyKnown:knLoyK(p,s),reports:N[s.sid]||0,
  /* the tinbao-ui adapter shape (main s34 / tinbao worker): p, place, loy, loyalWord, sold */
  p:s,place:o?knPal(o):null,loy:knLoyK(p,s),loyalWord:knLoyW(knLoyK(p,s)),sold:p===S&&knIsSold(s)&&knSoldK(s)}})}
 const KN_LOYW={warm:"một lòng",cool:"tạm tin được",cold:"khó tin",none:"chưa rõ"};
