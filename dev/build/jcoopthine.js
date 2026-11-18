@@ -66,7 +66,7 @@ COOP.on("thinview",V=>{try{gView(V)}catch(e){console.error("thin E view",e)}});
 let wasMg=false;
 if(typeof render==="function"){const f=render;render=function(){const r=f.apply(this,arguments);try{const mg=!!(S&&S.mg);const left=wasMg&&!mg;wasMg=mg;if(left&&on()&&!host()&&S&&!S.dead&&!Q.length){const V=TH.view;
   if(V&&V.o&&V.o.w===(COOP.state.week||0)&&typeof V.o.buoi==="number"&&V.o.buoi>(S.buoi||0)&&E.mine!==bk())gReady()}}catch(e){}return r}}
-COOP.on("week",()=>{E.mine="";seen="";E.rd={};E.hr="";E.forced=""});
+COOP.on("week",()=>{E.mine="";seen="";/* her ready for the NEW week may arrive before this event (race): keep it */const w=COOP.state.week||0;for(const k of Object.keys(E.rd))if((E.rd[k].w|0)<w)delete E.rd[k];E.hr="";E.forced=""});
 
 /* ---------- HOST ---------- */
 /* her ops onto her stored person (in her context: runDo); the part-D patch then starts after them (they are hers, never echoed back) */
