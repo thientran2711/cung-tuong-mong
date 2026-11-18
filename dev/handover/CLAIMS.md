@@ -1007,7 +1007,7 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | REVIEW greet-stranger 54431a1 (sonnet; brief briefs/review-greet-stranger.md) | review/greet-stranger | MAIN s42 | session_01UV1SzhBWuWNyXoAhfWtFxm | PASS f8276cdb (r6) | 18/11 02:10Z |
 | LOOK FX SAMPLES (face/hair/small cloth marks; full-body panels for owner; sonnet; brief briefs/look-fx-samples.md) | review/look-fx | MAIN s42 | session_01UV1SzhzDHZiWyYW2YZdA9A | REPORT READY (reports/look-fx-samples.md) | 18/11 02:14Z |
 | hoa-dien r3c LIVE f986ff6a (main 62a6846f → f986ff6a; ROLLBACK 62a6846f) | review/hoa-dien-r3c | MAIN s42 | session_01UV1Szk7eZQzR2d2t4rhiFj | LIVE | 18/11 02:12Z |
-| REVIEW cloth-xoc 7270a76 (wet FINAL + mud approved; sonnet SMALL; brief briefs/review-cloth-xoc.md) | review/cloth-xoc | MAIN s42 | (opening) | RUNNING | 18/11 02:17Z |
+| REVIEW cloth-xoc 7270a76 (wet FINAL + mud approved; sonnet SMALL; brief briefs/review-cloth-xoc.md) | review/cloth-xoc | MAIN s42 | session_01UV1SziKea8TZQipjPGajgv | PASS 64488e4f7 (review/cloth-xoc-r6, FF of main b32cdb39) | 18/11 02:17Z |
 | REVIEW smudge r16 50939b0 (sonnet SMALL; brief briefs/review-smudge-r16.md) | review/smudge-code-r16 | MAIN s42 | session_01UV1SzitaUhhFRRJBAbEgHM | DONE PASS db24027f (review/smudge-code-r16-rv) | 18/11 02:20Z |
 | OWNER UI BUG book-figsize (one body height on every book figure; sonnet; brief briefs/book-figsize.md) | review/book-figsize | MAIN s42 | session_01UV1Szgp1qDfnHSk36y8CPg | READY-FOR-REVIEW 7285ea2b | 18/11 02:03Z |
 | REVIEW life-preload 4ff10ae (opus, URGENT; brief briefs/review-life-preload.md) | review/life-preload | MAIN s42 | session_01UV1SzjKPEGVua6n1rUEV2S | RUNNING (merge r6 caa3ffe0 on main f986ff6a) | 18/11 02:22Z |
