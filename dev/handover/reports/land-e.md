@@ -33,3 +33,19 @@ Gates on final 809d5ab0: one-core-guard 0 fails; quickcheck PASS (old save ok, r
 Touched files vs main 12a1e4be: assets.json dev/build/assemble.py j82.js jbal2.js(+7 lines, steal-minigame) jnrask.js jnrask_b.js jnrask_m.js jnroad.js jnroadm.js jsmg.js dev/kit/KIT.md dev/story/ROAD_MAP.md + tests (npc-roads-men, nrask-*, steal-mg-*) + built index.html sw.js. None of jag*/j95*/jtoil*/jbal.js/jcoop*/save. NOTE jbal2.js IS touched (steal-minigame rung table +7 lines) — MAIN decide if that counts under "jbal*".
 
 LAND READY 809d5ab0d37fb35f4c8c7cf9cf6930c011f0fd4c (FF from 12a1e4be0dfc4e7fc769159c500f10a645afcc24)
+
+---
+# ROUND 3 (MAIN ROOT-51 GO 18/11 12:06Z): on live main 809d5ab0
+
+review/land-e force-pushed again (now = main 809d5ab0 + 2 merges).
+
+| step | branch | merge sha | result |
+|---|---|---|---|
+| 1 | review/hall-names d5d389e8 | a8036600 | jpm.js kitPalaceMap conflict resolved by keeping BOTH: branch `role` line + main's newer `here` (home slot); assemble.py union (+jhall.js); built files rebuilt |
+| 2 | review/questline-q3 dcc822b1 | 636193f8 | jbal2.js conflict: both sides inserted before the same comment — kept q3's whole BAL.road.hp block + main's newer seatcap comment line (old seatcap line from q3 side dropped); node --check OK; assemble.py union (+jrdhp.js); rebuilt |
+
+monthly-ration-r6 stays OUT (jtoil.js → waits for C-AG).
+Gates on 636193f8: one-core-guard 0 fails; quickcheck PASS (old save ok, render 251/256, tab 523/453, buoi 1211/1126, tasks>200ms 19/17); hall-names-scan OK; palace-map.js Fold 755x1000@2 + iPad 1180x820@2 no errors (people/plaque rows render, errs []); roadhp-unit PASS; roadhp-scan PASS; nrask-scan / nrask-m-scan PASS; npc-roads-men 23/23; mg-skip-audit 21/21. Not run: palace-oldsave.js (needs old+new build urls), coop-e2e (round 2 63/63 before; q3/hall-names touch no co-op files).
+Touched vs main 809d5ab0: assemble.py jbal2.js jhall.js jkc2.js jplx.js jpm.js jrdhp.js jres.js jroad.js KIT.md road-hp-bal.js + tests (act-split-scan hall-names-scan roadhp-*) + built index/sw.
+
+LAND READY 636193f8 (FF from 809d5ab0)
