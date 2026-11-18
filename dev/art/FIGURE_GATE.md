@@ -159,6 +159,8 @@ T6 vs T7 (OWNER 18/11 ~23:25Z, verbatim): "Lượt 21 Quý Phi. Quý Phi ok. Nh�
 
 T6 FINAL (OWNER 18/11 ~23:30Z, verbatim): "Không sao đâu. Cái quý phi này ok á, cứ giữ nguyên cái prompt quý phi này đi." → t6 APPROVED AS IS: keep YEL_T6 in dev/art/t8-prompt-B/build.py UNCHANGED (W79 5ea91cff/aad7a8df, swatch as image 3). The "tighten t6 yellow" proposal of ~23:25Z is CANCELLED. t1–t6 style B mass may start on the new account (after refs re-upload + golden check), a18 first.
 
+## SAMPLES = 3–4 OPTIONS (owner 18/11 ~22:25Z, verbatim: "mỗi lần mày đừng có rom một cái mẫu vậy nữa, mày rom 3-4 mẫu để cho tao chọn. Tao chọn ưng cái nào rồi thì lấy cái đó thôi, chứ mỗi lần mà lắc nhắc mày cứ rom từng chút tao mệt quá."): every new design sample shows 3–4 clearly different options side by side; she picks one; that one goes into section A0.
+
 ## OWNER RULES 18/11 ~22:05Z real (full verbatim text: dev/handover/briefs/owner-1118-2205.md — read it)
 - HAIR SAME AT EVERY RANK: a consort keeps her own hairstyle exactly at every rank (as in her live figures); only the hair ornaments/crown grow with rank. No rank text may describe a new hairstyle. (owner: "Cái tóc của nhân vật của tao ai mỗi lần lên bậc cái tóc nó y chang nhau.")
 - PRAISED IMAGES = BENCHMARKS, NOT REFERENCES: an image she praises is for comparing/checking only; the reference images stay as they are (own t1 identity + style). (owner: "những gì mà tao nói tao ưng á, không có nghĩa là mày đưa hết tất cả những cái đó lên làm ảnh mẫu đâu nha".)
