@@ -37,3 +37,11 @@ EYES: "…Image 1 is the figure to copy: copy EXACTLY everything of image 1 — 
 2. Borderline kept: c14 t1, c15 t6, c16 t8 (turned ~50–65°) — Foreman C decides; each = 3 gens x 135 cr if redone.
 3. Tools: scripts in /home/user/wt/w56-work (blink.py, sheet.py, cmp.py; ephemeral). mediapipe needs `apt-get install libegl1`.
 4. Not live: b10 only; nothing else touched.
+
+## § TAIL (W56b, 18/11) — the leftovers W56 listed
+Rules re-read in full (START_CORE/WORKER/ART, FIGURE_GATE, consort-B10, b10-tools README, fig-style-audit). Nothing live touched; no c03 v1 file failed (c03 v1 t6/t7/t8 = W54's LIVE redo, scan only).
+- SCAN: 32 t8 v2 (W55 final) + c03 a18 t6/t7/t8 v1 = 35 PNGs. EYES: MediaPipe blink on head crops, 35/35 faces found, all <= 0.10 (open). POSE: all 35 looked at on 8-per-row sheets. SIDE: only c13 t8 v2. All others 3/4 or frontal (c16 t8 v2 turned but face to viewer = BORDERLINE kept per Foreman C; c03 t6/t7/t8 v1 3/4 and open).
+- FIX: c13 t8 v2 — 1 gen (gpt-2-6, 2k, transparent, refs = old PNG + m09 eIyOFEidqL style; the POSE prompt above verbatim, phoenix kept), 135 cr, PASSED first gen: 3/4 facing viewer, eyes open (blink L0.08 R0.20), same robe colours/embroidery/phoenix crown/pins/pink round fan, closed-lip smile, one held item, no cup. Old kept as c13_a18_t8_v2_prev_pose.png.
+- Uploaded (curl -I 200 checked) under https://ctm-img.victoria-tntt.workers.dev/img/_review/ : consort-tiers/c13/b10/c13_a18_t8_v2.png, c13_a18_t8_v2_prev_pose.png, c13_b10_sheet.jpg (rebuilt, now all new), b10-pose-eyes/before_after_5.jpg (left = before, right = after).
+- Total B10 pose/eye gens now 21 x 135 = 2,835 cr. B10 pose+eye scan is complete (768 + 35 re-scanned files). Remaining decision only: borderline c14 t1, c15 t6, c16 t8 (kept).
+- No handover needed (context low).
