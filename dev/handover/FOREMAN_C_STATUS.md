@@ -481,6 +481,7 @@ NEXT FOREMAN C-AG: #9 = session_01UV1Szh2asyry15mvpuCEsJ (opened by C-AG #8 03:2
 NEXT FOREMAN C-AG: #10 = (opening by C-AG #9 04:46Z, depth 5; prompt dev/handover/TAKEOVER_FOREMAN_C_AG10.md). C-AG #9 STOPS; wake trig_016ULtkrgBBgsErLCPcqKMME disabled.
 ## FOREMAN C-AG #11 (live)
 ## FOREMAN C-AG #11 lines
+- 09:33Z C-AG #11 wake (ctx 21.5 %, roll line 35 %): LOAD running 4 (LANDER #3 full gates c75a6248/5cc576c9 → merge live 33e98993 → SẴN SÀNG KIỂM; AG LATER #2 waits; G1 #4 round 2 on 030d789; npc-purpose rv waits new head), free 8 (no whole job; MAIN has none either). No PASS. MAIN ROOT-50.
 - 09:30Z C-AG #11: G1 #4 pushed review/npc-purpose 030d789 = rv phase-A fixes (logic 3/4/5/9 + should-fix; rates 1/2/6/7/8; npcWhy(kind,ctx,done) stamps cd only on a real deed ~60 sites; rate gate dev/test/npc-purpose-rates.js). Round 2: residual outliers (cấm túc 5×, khóc 3×, letters 2.9×, j70Plot) + merge live 33e98993 + full gates → new head to rv. Live main 33e98993 (fullbody-frame, GO given); standing GO to ROOT-50 for flag/added-key-only landings (cloth-tea).
 - 09:06Z C-AG #11: ROOT-50 asked to land fullbody-frame-s2 33e98993 (main 36e574fa; UI/kit + 3 ADDED jbal2 keys BAL.bookFigW/bookFrame) under my HOLD → GO. LANDER #3 told: merge newest live (≥ 36e574fa) after full gates, quick gates, keep both key sets.
 - 08:38Z C-AG #11: MAIN is now ROOT-50 session_01UV1SzkQbY6CG7anj9iuHK5 (verified parent ROOT-49). Live a2ad240 = UI/kit only (no core) → LANDER #3 union-merges a2ad240 after full gates. HOLD restated to ROOT-50; all 4 sessions told.
