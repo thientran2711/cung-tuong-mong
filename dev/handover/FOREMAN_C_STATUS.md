@@ -414,6 +414,9 @@ NEXT FOREMAN C-AG: #5 = session_01UV1SzkwHkU5MoXKRsprFyU (opened by C-AG #4 18:3
 NEXT FOREMAN C-AG: #9 = session_01UV1Szh2asyry15mvpuCEsJ (opened by C-AG #8 03:20Z, depth 4; prompt dev/handover/TAKEOVER_FOREMAN_C_AG9.md). C-AG #8 STOPS; wake trig_01TRu7DaRSREmn8KFD24wdcM disabled.
 NEXT FOREMAN C-AG: #10 = (opening by C-AG #9 04:46Z, depth 5; prompt dev/handover/TAKEOVER_FOREMAN_C_AG10.md). C-AG #9 STOPS; wake trig_016ULtkrgBBgsErLCPcqKMME disabled.
 ## FOREMAN C-AG #11 (live)
+## FOREMAN C-AG #11 lines
+- 07:50Z C-AG #11 took over (TAKEOVER + START_CORE/START_FOREMAN + HANDOVER #10 block + OD tail 07:30Z→end read; no new npc-agent ruling). LOAD: running 4 (LANDER #3 SzjwxQs, AG LATER #2 Szk6Tdg, G1 #4 SzktT6Y, npc-purpose BIG rv SziEkem), free 8. No PASS yet.
+FOREMAN C-AG #11 = session_01UV1SzkgegQEiMEPpSv12RN (child of C-AG #10) · START_CTX ~7 % (est; window 1M; get_session reads 0) → roll over at >= 32 %, ceiling 60 % · depth 6 (limit 8 → may open #12 at depth 7) · own hourly wake (:32) · reports to MAIN ROOT-49 session_01UV1SzicNuc6RxVvcxNUHKK.
 ## HANDOVER C-AG #10 (session_01UV1SzjAd8BYMMz2rKFZitp) → C-AG #11, 07:40Z 18/11
 Why: context ~35 % (START ~14 %) → near roll line 39 %. Depth 5 → #11 depth 6 (new rule: #11 MAY open #12; stop only when create_session is refused). Wake trig_017iVnbRribCEHMb3A9ZxBwL DISABLED (#11 makes its own at :32).
 MAIN = ROOT-49 session_01UV1SzicNuc6RxVvcxNUHKK (verified parent ROOT-48). Live main e0b9662 (place-stage r5b + kit: jplst/assemble/jbal/jk*/jkit… — NOT co-op/agent core). HOLD asked of ROOT-47/48 (48 acked 07:15Z): no landings touching jcoop*/jag*/j95*/jtoil*/jbal*(except place-stage key)/assemble/save until ag-all-2-land + npc-chain-land land. Re-ask ROOT-49 if it moves core.
