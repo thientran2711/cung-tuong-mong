@@ -8,7 +8,7 @@ fs.mkdirSync(OUT,{recursive:true});
  for(const d of devices){const VP=process.env.VP;const ctx=await D.newDeviceContext(b,d,VP?{viewport:{width:+VP.split('x')[0],height:+VP.split('x')[1]}}:{});await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll(".krskip").forEach(x=>x.click())},300)});
   const p=await ctx.newPage();p.setDefaultTimeout(120000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
   const g=await D.openHost(p,srv.url);await g.waitForFunction(()=>typeof start==='function',null,{timeout:60000});await p.waitForTimeout(1500);
-  await g.evaluate(([mv,lay,old])=>{KLIFE.off=1;window.KIT_MOODBAR=lay;SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(!(typeof isSrv==='function'&&isSrv()))break}
+  await g.evaluate(([mv,lay,old])=>{KLIFE.off=1;SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(!(typeof isSrv==='function'&&isSrv()))break}
    Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;for(let i=0;i<3;i++){try{nextBuoi()}catch(e){}Q.length=0}
    if(old){delete S.mood}else if(S.mood)S.mood.v=mv;else S.mood={v:mv,log:[]};Q.length=0;m.hidden=true;const w=document.getElementById('dawn');if(w){w.hidden=true;w.innerHTML='';w.classList.remove('on')};render()},[MV,LAY,!!process.env.OLD]);
   await p.waitForTimeout(5000);await g.evaluate(async()=>{await document.fonts.ready;document.querySelectorAll('.kload,.krbox,.krskip,.klife').forEach(e=>e.remove());Q.length=0;const m=document.getElementById('modal');if(m){m.hidden=true;m.className='modal'}render()});await p.waitForTimeout(3000);
