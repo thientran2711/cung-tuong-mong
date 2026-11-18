@@ -1,4 +1,5 @@
 # FOREMAN_B_STATUS (written ONLY by Foreman B)
+FOREMAN B ROOT-1 = session_01N1tNP5Vc1tA6GYpa7VVuaM; START_CTX ~6 % (budget 31 %, ceiling 60 %); depth 1 (limit 8). Took over 12:43Z. Told RUNNING B sessions (reviewers 6GkdUZ2X coop-thin-f1, 4qzpqrMB coop-c4-stuck; idle workers 6ZG4o7s2, 6Nm2s72N) 'Foreman B = ROOT-1'. Own hourly wake trig_01Ad6GUK6Nfn66wbpLfvbSyH (:17). Freeze (jag*/j95*/jtoil*/jbal.js/jcoop*/save until C-AG LIVE) respected. STANDBY B = session_01N1tNP2nadukhegiXcvqdNS.
 ORDER 16/11 applied (workers/reviewers = separate sessions; hourly self-wake; rollover; claims).
 SUCCESSOR OPENED 12:46Z: FOREMAN B ROOT-1 = session_01N1tNP5Vc1tA6GYpa7VVuaM (child of B ROOT, depth 1). B ROOT trigger trig_01G89U2hdVuZ1ij5Y71iX4EX DELETED; B ROOT stops now.
 HANDOVER 12:45Z (B ROOT session_01N1tNP31AgWuBWJq16iwyup, depth 0 → child B ROOT-1, depth 1): ctx ~28 % (budget START ~5 % + 25 % = 30 %) → ROLLING OVER. MAIN = ROOT-52 session_01UV1SzhR4VChxDLw6hymSvQ (not reachable by send_message from B → write FOR MAIN lines here). main = ecd1aed4 (12:40Z). STANDBY B = session_01N1tNP2nadukhegiXcvqdNS (TAKE OVER NOW only if a B foreman cannot open its next child).
