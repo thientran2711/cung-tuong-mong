@@ -15,8 +15,10 @@ const ENTRY=[[/^(start|nlRun|nlBegin|nlReroll)$/,"B"],[/^(chooseM|onAct|onRes|fa
  [/^(flip|resolveTonight|nightScene|rivalsBuoi)$/,"E"],[/^(runAct|act|cardH|talk|directActs)$/,"F1"],[/^(goTo|placeGo|enterPlace)$/,"F2"],
  [/^(buy|useItem|wear|sell|gift)$/,"F3"],[/^(startContest|kitGameResult|mgEnd)$/,"F5"],
  [/^(attach|sendMe|onBuoi|pullFriend|pushFriend|reshowQ|tryEnd)$/,"C/H"]];
-function part(st,root){let hit=null;for(const l of st){const m=l.trim().match(/^at (?:Object\.|Proxy\.|Array\.|window\.)?([^ (]+)/);const n=m?m[1]:"";if(!n)continue;
-  if(n==="endTurn"||n==="monthTick")hit=/^S\./.test(root)?"G":"C";else if(n==="nextBuoi")hit=/^S\./.test(root)?"E":"C";else for(const [rx,pt] of ENTRY)if(rx.test(n)){hit=pt;break}}
+function part(st,root){let hit=null,wkEnd=false;for(const l of st){const m=l.trim().match(/^at (?:Object\.|Proxy\.|Array\.|window\.)?([^ (]+)/);const n=m?m[1]:"";if(!n)continue;
+  if(n==="endTurn"||n==="monthTick"){wkEnd=true;hit=/^S\./.test(root)?"G":"C"}else if(n==="nextBuoi")hit=/^S\./.test(root)?"E":"C";else for(const [rx,pt] of ENTRY)if(rx.test(n)){hit=pt;break}}
+ /* part E (review coop-thin-e): buổi tối's nextBuoi runs endTurn = her WEEK end (part G), not the buổi step */
+ if(hit==="E"&&wkEnd)hit="G";
  return hit||"?"}
 const RAW=new WeakMap(),PX=new WeakMap();const CNT=new Map();let total=0,raw=0,sRep=0,rRep=0,on=false,state=0;const byRoot={},byPart={},statePart={},PCNT=new Map();
 /* review r1: keys "__x" are private markers, not game state (jwdinv wdOf sets p.__wdmig=1 and deletes it in its finally = a re-entry guard,
