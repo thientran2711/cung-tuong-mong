@@ -63,7 +63,7 @@ owner-page-90 (90 nhân vật nữ states) | CDN _review + artifact WFjg87H9M2Ch
 ge-writers-w1 fix round 2 | review/ge-writers-w1 | E11a2 session_01DgYSWoSMJso8hGSAFMN9W6 (E11a archived) (reviewer E11r-w1 session_01DgYSWmTELUPTfw8Lqf2S4Y) | READY fd7c6775 (round 4: jrd_muoi ch8 c3 carried by MAIN ORDER + main 94d11623; reports/ge-writers-w1.md) | 2026-11-18T17:55Z (Foreman E ROOT #5 session_01DgYSWkmGWJMooE69PH8bHk)
 balance-final #2 (opus; balance chain + AG arms) | review/balance-final | session_01964izFstyuseJzaqthXyhP (#1 session_01964izCP81mLjwwymWk5t2Q rolled over 17:54Z) | RUNNING | 18/11 17:54Z | owner D #2
 | FOREMAN C-AG #14 (opus ROOT; successor of #13) | handover FOREMAN_C_STATUS | MAIN ROOT-53 | session_01Rc5AsKgBX7W8FiEwCJjgBR | DONE (→ #15 20:03Z) | 18/11 18:00Z |
-| FOREMAN C-AG #15 (opus; child of #14, depth 2) | handover FOREMAN_C_STATUS | MAIN ROOT-55 | session_01Rc5AsKLUrafEXHt5QpbRC2 | RUNNING | 18/11 20:05Z |
+| FOREMAN C-AG #15 (opus; child of #14, depth 2) | handover FOREMAN_C_STATUS | MAIN ROOT-55 | session_01Rc5AsKLUrafEXHt5QpbRC2 | DONE (→ #16 20:58Z) | 18/11 20:05Z |
 | opt-card-short #3 (sonnet SMALL UI; OD L1877 as corrected 16:05Z/16:15Z, 09:30Z «!») | review/opt-card-short | MAIN ROOT-53 | session_01Rc5AsHxLKCb415DxYbpiHP | CODE DONE ce8706b7 no CDN (archived) → #4 | 18/11 18:00Z |
 | fullbody-frame-s4 (sonnet SMALL UI; 16:10Z picture size + phone Luân hồi revert) | review/fullbody-frame-s4 | MAIN ROOT-53 | session_01Rc5AsJUiBBwT9LH4J89i4E | READY (no shots: CDN blocked in this env) | 18/11 18:50Z |
 | land-m (sonnet LANDER: shown-odds-r2-rv cf1fc746 + monthly-ration-r6 287a0b79) | review/land-m | MAIN ROOT-53 | session_01Rc5AsJwMJVJdiZUsCPNM9T | LAND READY 3fdfb437 | 18/11 18:00Z |
@@ -87,7 +87,8 @@ style-ref test A/B/C c06 t1–t3 | CDN _review only | W79 session_011xDdVSouZw85
 | MAIN ROOT-54 (opus; child of ROOT-53) | handover HANDOVER_SESSION9 | ROOT-53 | session_01Rc5AsMSQ6cKyjRvG4MA9kQ | RUNNING | 18/11 19:21Z |
 | review fullbody-frame-s5 (sonnet SMALL REVIEWER) | review/fullbody-frame-s4 | MAIN ROOT-54 | session_01Rc5AsKnrN1RoAAQZmo5oSJ | PASS LAND READY af700c81 | 18/11 19:23Z |
 | LIVE-SERVANTS (opus; OD L1901 pts 2+3: retinue + servant day plans + NPC move log + roster.js --who) | review/live-servants | C-AG #14 | session_01Rc5AsM1HkYcxpG9VcjpeVt | DONE (rolled → #2) | 18/11 19:40Z |
-| LIVE-SERVANTS #2 (opus; entourage picker + NPC picks + witnesses/gossip + rest/sleep; OD 19:30Z/19:45Z) | review/live-servants | C-AG #15 | session_01Rc5AsNDF76PpGFKUZeU6aW | RUNNING | 18/11 20:19Z |
+| LIVE-SERVANTS #2 (opus; entourage picker + NPC picks + witnesses/gossip + rest/sleep; OD 19:30Z/19:45Z) | review/live-servants | C-AG #15 | session_01Rc5AsNDF76PpGFKUZeU6aW | DONE (rolled → #3) | 18/11 20:19Z |
+| LIVE-SERVANTS #3 (opus; perf fix outcome-identical ≤ +10 %, final SẴN SÀNG) | review/live-servants | C-AG #15 | session_01Rc5AsKjmZakFtxrVGvMvW9 | RUNNING | 18/11 20:55Z |
 | AG-DEED-PERF #2 (opus; merge live + re-measure 514143ec; #1 silent) | review/ag-deed-perf | C-AG #14 | session_01Rc5AsMrVSjApNAcLbKd49p | DONE (LANDED fa411d6f) | 18/11 19:40Z |
 | review shop-panel-r3 (sonnet SMALL REVIEWER) | review/shop-panel-r3 | MAIN ROOT-54 | session_01Rc5AsK7Vjz8vR2ZXexdh7h | LIVE 13bb8c88 | 18/11 19:33Z |
 | stage-here (opus UI: stage = where she is, every tab + closing alert; OD 19:45Z (5)) | review/stage-here | MAIN ROOT-55 | session_01Rc5AsK9y5NbRATifWtFqG7 | SẴN SÀNG KIỂM e8e5afe | 18/11 20:15Z |
