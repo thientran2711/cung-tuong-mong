@@ -45,6 +45,7 @@ OPEN: owner D14 pick (a/b/c) → wiring worker; MAIN GO face-fix; owner 5 questi
 
 ## FOREMAN C ROOT-28 (live)
 FOREMAN C ROOT-28 (art) = session_011xDdVSFBZmqBYvH1s2Kggn · depth 6 (limit 8: at rollover open ROOT-29 = depth 7; ROOT-29 hands to STANDBY, never opens depth 8) · START_CTX ~8% (own estimate; get_session reads 0; window 1M) → roll over at >= 33%, ceiling 60% · hourly wake trig_01VYS7saWQfq4jrgisFScggY (:32) · reports to MAIN via this file. STANDBY: none registered yet.
+- 17:15Z 18/11 Unanswered READYs to ROOT-27 handled: W68 yellow-deeper sheet (c03 a18 t8/t7 current|A|B) LOOKED → SENT OWNER, waiting her pick; jewellery-gold 18K/24K test not in that READY → W68 asked to make it now. W58c c06 a26 LOOKED: colours/t6–t8 PASS; fix t3 v0/v1/v2 no item + t5 v0/v2 flower branch → 3f items (5 gens). W60c c25 a26 fix LOOKED: t7/t8 PASS; t3 v1 green (3 greens in v1 row) → recolour 1 gen.
 - 17:05Z 18/11 ROOT-28 took over (TAKEOVER ROOT28 + START_CORE/FOREMAN/ART + FIGURE_GATE + consort-B10 + b10-a26-a36 / b10-a51-sample / new-faces-sample / owner-age-page + ROOT-27 handover read). Hourly wake :32. W58c W59c W60c W61c W62c W63d W64d W65b W67 W68 told: ROOT-28 is your foreman, re-read FIGURE_GATE + consort-B10 before every person, re-send unanswered READYs, t7/t8 yellow HOLD. ROOT-25 + ROOT-26 told my id.
 
 ## HANDOVER (Foreman C ROOT-27 session_011xDdVRkj3BoPAcHVAsjkr3 → ROOT-28, 17:10Z 18/11)
