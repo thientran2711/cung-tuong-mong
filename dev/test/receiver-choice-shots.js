@@ -1,4 +1,4 @@
-/* RECEIVER CHOICE shots (law 12: Fold 755x1000@2 HOST + iPad 1180x820@2): her «Lời nhờ» card (jrcv PEND.rcvHelp) + the ONE ask card (PEND.rcvAsk: Kết giao, Ghé chơi) — an NPC asks HER, 4 answers.
+/* RECEIVER CHOICE shots (law 12: Fold 755x1000@2 HOST + iPad 1180x820@2): her «Lời nhờ» card (jrcv PEND.rcvHelp) + the ONE ask card (PEND.rcvAsk: Kết giao, Ghé chơi, Mời đến cung ta) + her judge card as the Hoàng hậu (PEND.rcvJudge) — an NPC asks HER, 4 answers.
    usage: bash dev/site/build_site.sh && node dev/test/receiver-choice-shots.js <outdir>   (shots stay OUTSIDE the repo; boot = ptime-shots.js) */
 const {chromium}=require('playwright');const D=require('./lib/device');const OUT=process.argv[2]||'/tmp/rcv-shots';require('fs').mkdirSync(OUT,{recursive:true});
 const sleep=t=>new Promise(r=>setTimeout(r,t));
@@ -12,5 +12,8 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   await p.screenshot({path:`${OUT}/${nm}-rcv-help.png`});
   /* every other ask: ONE card (jrcv PEND.rcvAsk) — Kết giao and Ghé chơi as samples */
   for(const k of ["ally","call"]){await g.evaluate(k=>{Q.length=0;document.getElementById('modal').hidden=true;const v=liveRivals(true).filter(x=>x!==S&&!x.out&&x.alive!==false)[1];rcvAsk(k,v,S);showModal()},k);await sleep(3000);await p.screenshot({path:`${OUT}/${nm}-rcv-${k}.png`})}
+  /* round 3: she as the Hoàng hậu judges «Trình Hoàng hậu» (jrcv PEND.rcvJudge) · an NPC host's «Mời đến cung ta» lands as her 4-answer card */
+  await g.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;const V=liveRivals(true).filter(x=>x!==S&&!x.out&&x.alive!==false);const rk=S.rank;S.rank=7;const a=V[1],t=V.find(x=>x!==a&&rkOf(x)>=1)||V[2];evA(a,t,6);ACT.trinhhh.f(a,t);S.rank=rk;showModal()});await sleep(3000);await p.screenshot({path:`${OUT}/${nm}-rcv-judge.png`});
+  await g.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;const v=liveRivals(true).filter(x=>x!==S&&!x.out&&x.alive!==false)[2];rcvAsk("invite",v,S);showModal()});await sleep(3000);await p.screenshot({path:`${OUT}/${nm}-rcv-invite.png`});
   await ctx.close()}
  console.log(JSON.stringify({errs}));await b.close();srv.close()})();
