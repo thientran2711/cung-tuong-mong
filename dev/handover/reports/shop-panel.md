@@ -31,3 +31,11 @@ https://ctm-img.victoria-tntt.workers.dev/img/_review/shop-panel/ : nvp-buy-755x
 
 ## Question for the owner (via MAIN)
 Rename the Tư trang button «Nhờ thái giám mua đồ» to «Để ta xem» too? I kept it: it names the errand, while «Để ta xem» is the seller's outside option.
+
+## REVIEW r1 (reviewer, sonnet) — PASS
+PRIORITY #1 CHECK: OD L1879 | main kitShop/kitShopNvp (reused) | review/shop-panel 0bf5fe60 | claims worker session_01N1tNP3Cr9vpq7qJTUrjtow.
+Branch review/shop-panel-r1 @ 5e6490b (descends origin/main e18697f; merged main, one jact.js conflict resolved: main's maidTalkDo line kept + «Để ta xem»; index.html/sw.js/assets.json rebuilt). Touched: assets.json, dev/build/jact.js, dev/build/jinv.js, dev/kit/KIT.md, dev/test/act-dedupe-w1.js, dev/test/shop-panel.js, index.html, sw.js. No jag*/j95*/jtoil*/jbal.js/jcoop*/save.
+Laws: kit first OK (kitShop only, no private CSS beyond the kit CSS block in jinv.js, KIT.md line added); whole group OK (place table verified by git grep: nvp, Tư trang button, pet shop; j29 chợ đen single-item, j8 PEND.shop dead, j2 peddler list dead); real objects OK (buy chest+1/bạc-price, sell chest-1/bạc+price); one core OK (prices from IT/BAL); wording OK.
+Gates: shop-panel.js 755x1000+1180x820 ALL PASS earlier (3 places x 2 sizes, 0 page errors); shop-fix.js ok; quickcheck PASS (core gates, old save ok). act-dedupe-w1.js: 4 FAIL (place-name faces, happenings on arrival, gold ! on map) = unrelated to shop, worker reports same class red on main (not re-run on main by me).
+Shots looked 3x (Fold+iPad together, scratch, not in git): panel left figure / right tabs / 3 columns OK on both.
+Non-blocking notes: (1) pet shop keeps its long seller paragraph so only ~1 tile row shows on Fold/iPad (nvp dropped it); needs owner/kit decision, not a law break. (2) Tư trang button name «Nhờ thái giám mua đồ» kept (worker question to owner stands). (3) eunuch shows «???» name (pre-existing). (4) Sell tab with 1 item shows 1 tile (3-col grid, correct).
