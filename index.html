@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"c67d248d+","t":"2026-11-18T19:53Z","c":"ag-deed-perf: site build (index.html, sw.js)","b":"f5e85d9719ed","h":[{"s":"6aab33ad","t":"2026-11-18T20:05Z","c":"KIT_REQUESTS: K-Q2-1 DONE 048f3c7"},{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"},{"s":"a5013222+","t":"2026-11-18T18:03Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)"},{"s":"08774c0e+","t":"2026-11-18T17:38Z","c":"ag-stf2 (test only): bribe histogram picks a servant whose lòng moves her bribe odds. Root of the 'disloyal one takes more' red (npc ~3/20,…"},{"s":"0351e140","t":"2026-11-18T16:48Z","c":"shop-panel: «Để ta xem» outside option, 3-column Mua/Bán grid, smallest picture strip, test"},{"s":"ebf25660+","t":"2026-11-18T15:29Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…"},{"s":"9f9c6c2b+","t":"2026-11-18T14:26Z","c":"shown-odds-one-path r1: plant on the spot is done in person (actCtx x.here, no sent-servant pen); Vì sao names spy knowledge (whyKnow); tes…"},{"s":"aa997f3c+","t":"2026-11-18T13:46Z","c":"look-fx r13: index.html / sw.js rebuilt from merged sources"},{"s":"4475ea24+","t":"2026-11-18T12:33Z","c":"grand-endings-engine: site rebuilt (index.html / sw.js / assets.json) after fix 4 + main merge"},{"s":"68cbbb28+","t":"2026-11-18T12:00Z","c":"review life-preload-fu r2v: no half-drawn / empty figure while the HD twin comes (whole group: every fig-* img)"}]};
+window.CTM_BI=null;
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -4128,7 +4128,7 @@ function servRanks(){let ev="";for(const p of consorts()){/* co-op guest: NPC st
   if((s.mp||0)>=srvMpNeed(srk(s))&&srk(s)<srkMax(o,s)&&(typeof exSrvNpc!=="function"||exSrvNpc(s))){s.rk++;s.mp=0;s.loyal=cl(s.loyal+BAL.eff.j14.loyalServRanks,0,100);if(p===S)ev+=`${s.name} được thăng ${srkName(s)}. `}
   if(srk(s)>=2)ap(p,{bac:-Math.floor(srk(s)/2)});
   /* the Emperor's eye: any maid rank, chance by rank / her seeking / the master's favour (jmline mlEye, BAL.mline; was srk>=2 at 1.2 %) */
-  if(s.role==="maid"&&(typeof mlEye==="function"?mlEye(p,s):srk(s)>=BAL.mline.offRank&&roll(BAL.mline.offEye))&&roomFor("consort")){if(typeof mlRose==="function")mlRose(p,s);p.staff.splice(p.staff.indexOf(s),1);const n=newRival(0);Object.assign(n,drawFace());relAdd(p,n,s.loyal>=BAL.mline.riseLoy?BAL.mline.riseRel:-BAL.mline.riseRel);rivals.push(n);ev+=`${s.name}, ${srkName(s).toLowerCase()} của ${NM(p)}, lọt mắt xanh Hoàng thượng, được phong ${RANKS[0].n} ${n.name}${s.loyal>=BAL.mline.riseLoy?", vẫn nhớ ơn chủ cũ":", quay lưng với chủ cũ"}. `;continue}
+  if(s.role==="maid"&&(typeof mlEye==="function"?mlEye(p,s):srk(s)>=BAL.mline.offRank&&roll(BAL.mline.offEye))&&roomFor("consort")){if(typeof mlRose==="function")mlRose(p,s);p.staff.splice(p.staff.indexOf(s),1);const n=newRival(0);Object.assign(n,drawFace());n.fromMaidOf=key(p);if(typeof riseCore==="function")riseCore(n,s,p);else relAdd(p,n,s.loyal>=BAL.mline.riseLoy?BAL.mline.riseRel:-BAL.mline.riseRel);rivals.push(n);ev+=`${s.name}, ${srkName(s).toLowerCase()} của ${NM(p)}, lọt mắt xanh Hoàng thượng, được phong ${RANKS[0].n} ${n.name}${s.loyal>=BAL.mline.riseLoy?", vẫn nhớ ơn chủ cũ":", quay lưng với chủ cũ"}. `;continue}
   /* AG-ALL B: the sale dice go while staff are agents (fillStaff = the buyer's "Nội vụ phủ: thêm cung nữ") */if(srk(s)>=2&&!(typeof asOn==="function"&&asOn())&&roll(1.5)){const ci=s.role==="maid"?0:1;const big=consorts().find(x=>x!==p&&rkOf(x)>rkOf(p)+1&&(x.bac||0)>=60&&hhHas(x)[ci]<capOf(x)[ci]);if(big){p.staff.splice(p.staff.indexOf(s),1);big.staff.push(s);s.loyal=50;ap(big,{bac:-40});if(p===S||big===S)ev+=`${s.name} bị ${NM(big)} mua về cung mình. `}}}}
  return ev}
 /* AG-ALL-2e2: m = the master (default her); an NPC master runs the same (cx3:staffUp) */
@@ -7077,9 +7077,9 @@ PEND.cnvFest=pp=>{if(!isSrv())return null;const m=srvM();
  return{t:`<p>${pp.m===1?"Yến tiệc đầu xuân ở Thái Hòa điện":"Tiệc Thất tịch bên hồ sen"}. Ngươi theo hầu ${m?m.name:"chủ"}.</p>`,who:pMe(),o:cnvPend(S,cnvFestOpts(S,m))}};
 
 /* ---------- rising: she joins the consort game ---------- */
-function srvRise(why){if(!S||(S.age||0)<18)return;const m=srvM();const tin=S.tin;S.srv.risen=1;S.srv.wasMis=m?m.id:null;S.srv.sent=null;S.rank=0;S.sung=15+Math.round(S.nt/5);S.lastPromo=S.turn;apply({danh:5,bac:20});
+function srvRise(why){if(!S||(S.age||0)<18)return;const m=srvM();const tin=S.tin;S.srv.risen=1;S.srv.wasMis=m?m.id:null;S.srv.sent=null;/* ROLE PARITY: ONE promotion rule for her and an NPC maid (jagmaid riseCore: Sủng, Danh, Bạc, old master) */S.lastPromo=S.turn;const loyR=typeof riseCore==="function"?riseCore(S,S,m,tin):null;if(loyR==null){S.rank=0;S.sung=15+Math.round(S.nt/5);apply({danh:5,bac:20})}
  S.maid=newMaid(pick(MAIDS),50);S.staff=[];try{fillStaff(S,true)}catch(e){}
- if(m&&m.alive){relAdd(S,m,tin>=60?BAL.eff.j42.srvRise[0]:BAL.eff.j42.srvRise[1]);ghenUp(m,tin>=60?5:25,"thấy cung nữ cũ của mình được nâng lên làm phi tần",S)}
+ if(loyR==null&&m&&m.alive){relAdd(S,m,tin>=60?BAL.eff.j42.srvRise[0]:BAL.eff.j42.srvRise[1]);ghenUp(m,tin>=60?5:25,"thấy cung nữ cũ của mình được nâng lên làm phi tần",S)}
  try{palFix()}catch(e){}S.place="home";S.visit={k:"home",people:homePeople(),talked:false,tk:{}};tab="act";
  log(`<b class="g">${why}: ngươi được phong ${RANKS[0].n}.</b>`);
  Q.push({t:"Thánh chỉ",cls:"end",who:pEmp(),h:`<p>${why}. Thánh chỉ: cung nữ ${S.name} được phong <b>${RANKS[0].n}</b>, ở ${palName("home")}.</p><p>${m?`${m.name} ${tin>=60?"vẫn coi ngươi như người nhà.":"nhìn ngươi bằng ánh mắt lạnh như băng."}`:""}</p><p class="past">Từ nay ngươi theo luật của phi tần: Sủng, thị tẩm, phẩm vị.</p>`,btn:"Tạ ơn"});
@@ -29483,7 +29483,7 @@ function wkDeckCard(){const k=pick(["mon","bhoa","tho","theu"]),K=WK[k],a=K.a,m=
  const an=ARTS.find(x=>x.k===a).n;
  return{n:`${prac?"Tự học":"Tự học"} ${an}: ${K.n.toLowerCase()}`,t,c:Object.assign({suc:prac?-10:-15},K.mat[m]?{bac:-K.mat[m]}:{}),o:100,k:2,w:{},dom:"Tài nghệ",lock:!prac&&S.suc<BAL.sucNeed.self,
   x:`${prac?"":`tiến bộ ${an} ${kStepW(1,2)} · `}tự tay chơi thì ra thành phẩm · ${wkOddsTxt(S,k,m)}`,go:()=>{S.mg={k:a,l,mode:prac?"prac":"self",wk:{kind:k,mat:m,subj:s}};save();resumeMG()}}}
-(function(){const d0=deal;deal=function(){d0.apply(this,arguments);try{if(!S||S.out||S.srv||(typeof isSrv==="function"&&isSrv())||!Array.isArray(deck))return;deck.push(wkDeckCard())}catch(e){}}})();
+(function(){const d0=deal;deal=function(){d0.apply(this,arguments);try{if(!S||S.out||(S.srv&&!S.srv.risen)||(typeof isSrv==="function"&&isSrv())||!Array.isArray(deck))return;/* ROLE PARITY: a risen maid gets the works card like a born consort */deck.push(wkDeckCard())}catch(e){}}})();
 /* ---- the chest: works listed with every use and its true gain and cost ---- */
 function wkTargets(a){const L=[["emp","Hoàng thượng"]];if(!S.thDead)L.push(["th","Thái hậu"]);liveRivals(true).forEach(v=>L.push([v.id,`${rkName(v)} ${v.name}`]));if(a.maid)L.push(["maid",`${a.maid.name} (cung nữ thân tín)`]);return L}
 function wkTgt(id){return id==="emp"||id==="th"||id==="maid"?id:RV(+id)}
@@ -31315,12 +31315,13 @@ Object.assign(BAL,{ag:{on:1,
     ch      her weight in his night pool (the terms of a consort's nightCh: regard / sung + Sắc / sac, cap; bot-tuned so maid nights ≈ the old
             eye-roll rises); only maids he MET (S.emp.met)
     night   a maid's night: his regard + b + q / 2 (q = Sắc / 20 + luck, rivalNight's own formula); rise = her Sủng as a consort = b + regard / d
-            (srvRise's own conversion: was 15 + nt / 5)
+            (srvRise's own conversion: was 15 + nt / 5); ONE promotion rule riseCore (jagmaid) for her and an NPC maid: + Danh danh, Bạc bac
+            (were typed 5 / 20 in srvRise, NPC maids got none), old master's jealousy ghen = [loyal, turned] (were typed 5 / 25 in srvRise, NPC masters got none)
     send    the consort's "Tiến cử <maid> hầu thay" on her night: × on her need (tired / ill; × (1 + ally need) with a trusted maid) against
             keeping it (BAL.ag.routine). .05 (review ag3-r1, bot 2 yr × 2 seeds per life): .15 gave consort life ~1.5 and maid life ~3.5 maid rises / yr (Tiến cử on ill nights; a seat is always free, so every send rises) vs ~0.6 / yr on main; .05 → consort life 0.5, maid life 1.5 (her NPC consorts are ill on 15–18 % of their nights there vs ~5 %: a one-world gap left to Foreman C)
     decline the player maid begs off his summons: his regard lost */
  maid:{st:{sac:[20,60],tai:[0,30]},tea:{b:25,sac:2.5,tai:10,nt:5,g:8,gs:20,fail:1},jeal:{b:30,d:3},decay:2,ch:{sung:2,sac:8,cap:70},
-  night:{b:2},rise:{b:15,d:5},send:.05,decline:10}}});
+  night:{b:2},rise:{b:15,d:5,danh:5,bac:20,ghen:[5,25]},send:.05,decline:10}}});
 /* BAL.ag.staff — AG-ALL part B (jagstaff.js): maids and eunuchs as agents on the player maid's act table (j42 SRVA)
    st       a staff's Đức / Tâm cơ / Danh / Sức / Bạc drawn once (lazy; Sắc / Tài: BAL.ag.maid.st) [lo, hi]
    goal     what she aims at: Chủ tin, Sức, Bạc, Sắc, Tài, Đức, friends (thiện cảm ≥ SRVA.ask.af)
@@ -46659,11 +46660,6 @@ if(typeof q72HTML==="function")q72HTML=function(){return ktQ72HTML()};
 /* the tab bar's trailing info slot: pinned to the RIGHT END of the bar (stays visible while the tabs scroll) */
 .pctabs>.pctinfo{flex:0 0 auto;margin-left:auto;align-self:center;position:sticky;right:0;padding:0 2px 0 10px;background:var(--panel);white-space:nowrap}
 .pctabs>.pctinfo .kgl{font-size:.82rem}
-/* KIT RULE (review/kit-subtabs-overflow, K-Q2-1, laws 10+11): a kitSubTabs bar NEVER scrolls sideways and the ⓘ never covers a tab: when the tabs do not fit
-   one line they WRAP to a 2nd row at the SAME fixed tab size (one size per tier; no shrinking, no clipping); ⓘ keeps the right end of the last row.
-   Every kitSubTabs bar (.ktsub: Tài nghệ, Mệnh truyện, Việc nhờ, Ân oán pickers, outside Người nhà/Ra phố, kit page) = this one rule. */
-html body :is(#panel,#kitpage) .kcattabs.ktsub{flex-wrap:wrap!important;overflow:visible!important;row-gap:4px}
-html body :is(#panel,#kitpage) .kcattabs.ktsub>.pctinfo{position:static}
 /* a section header row: title left, chips + ⓘ right, one line */
 .ksech{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 10px;margin:0 0 8px}.ksech .ksechr{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap}
 .ktinfo .kgl{font-size:.82rem;color:var(--gold,#8a5a12);font-weight:600;cursor:pointer;border-bottom:1px dotted currentColor}
@@ -47057,7 +47053,6 @@ KIT_SAMPLES.push(
   kitSkillCard({kind:"story",k:"x",kicker:"Chương 2",name:"Tên chương",level:1,max:4,word:"Hồi",bar:false,next:"",img:kitInfoArt("Mệnh truyện").src})+
   kitEmpty("Việc nhờ","Chưa ai nhờ ngươi việc gì.")+`</div>`},
  {id:"§33.40",title:"kitSubTabs: ⓘ ở cuối thanh tab · kitSecHead: tiêu đề mục + chip + ⓘ",html:()=>{const t=kitSubTabs("kitpg33",[{k:"a",label:"Cầm",doable:2,total:3},{k:"b",label:"Kỳ",doable:0,total:2}],typeof kitInfo==="function"?kitInfo("Việc nhờ"):"");return t.html+kitSecHead("Tứ đức",kitChip("Đức",20,"g"))}},
- {id:"§46.1",title:"kitSubTabs đầy hàng: 6 tab + ⓘ — xuống hàng 2, cùng cỡ, ⓘ không đè tab",html:()=>{const L=["Luật chương","Nhiệm vụ","Triều cục","Tâm nguyện","Phụ tuyến","Hậu duệ"].map((t,i)=>({k:"t"+i,label:t,n:""}));return kitSubTabs("kitpg46",L,typeof kitInfo==="function"?kitInfo("Luật chương"):"").html}},
  {id:"§46",title:"kitChecks · kitInfo",html:()=>kitChecks([[false,"Sủng 8 (cần 38)"],[true,"Danh 33 (cần 30)"]])+(typeof kitInfo==="function"?kitInfo("Việc nhờ"):"")},
  {id:"§43",title:"Việc gọn (cột hẹp, kpanec)",html:()=>`<div class="pcb ktacts"><div class="kpanec">${pbtn('data-kitsample="3"',"Hỏi han ở tẩm cung ta: ai cần giúp?","tốn: 1 khắc · thành: người ở đây có việc thì ngỏ lời nhờ","")}</div></div>`},
  {id:"§43.1",title:"Việc gọn: dấu ! mở chi tiết (kitActZoom)",html:()=>`<div class="pcb ktacts"><div class="kpanec">${pbtn('data-kitsample="3"',"Hỏi han ở tẩm cung ta: ai cần giúp?","tốn: 1 khắc · thành: người ở đây có việc thì ngỏ lời nhờ","")}</div></div>`});
@@ -62928,7 +62923,7 @@ function adDoorOfPop(kind,on){for(const n in AD_DOOR){const d=AD_DOOR[n];if(d[0]
 const AD_DOOR_WHY={th:"đã thỉnh an tuần này",hh:"đã thỉnh an tuần này",ksp:"đã lo việc thẻ bài tuần này",maid:"đã sai nàng việc này"};
 /* ---------- 2. what leaves Hành sự (and where it lives now) ---------- */
 const AD_OUT=/^(Tự học |Tự luyện |Phát chẩn cho cung nhân$|Tụng kinh, làm việc thiện$|Đánh đàn ở ngự hoa viên$|Chữa bệnh cho con$|Dạy (hoàng tử|công chúa)|Dạy dỗ|Đưa con đến thỉnh an Hoàng thượng$|Luyện cầm kỳ thi họa$|Thưởng cung nữ$)/;
-function adSrv(){try{return !!(S&&(S.out||S.srv||(typeof isSrv==="function"&&isSrv())))}catch(e){return false}}
+function adSrv(){try{return !!(S&&(S.out||(S.srv&&!S.srv.risen)||(typeof isSrv==="function"&&isSrv())))/* ROLE PARITY: a maid risen to consort has the consort doors (was: any S.srv) */}catch(e){return false}}
 /* maid acts dealt as Hành sự cards (the same option objects her pop-up shows: jwhy spy formula, j76 talk) */
 function adMaidCards(){if(!S||S.out||!S.maid)return[];const A=[];let O=[];try{O=talkOpts({kind:"maid"})||[]}catch(e){return A}
  const sp=O.find(a=>a&&a.n==="Sai đi dò la"),ng=O.find(a=>a&&a.n==="Nghe ngóng chung");
@@ -66150,12 +66145,22 @@ function amFind(k){if(k==="me")return isSrv()?{m:S,o:srvM()}:null;if(k&&k[0]==="
 /* ---------- 4 a maid's night ---------- */
 function amNightGain(m){const st=amSt(m);const q=Math.round(st.sac/20+R(4)-1);amAdd(m,amD().night.b+Math.max(0,Math.round(q/2)))}
 function amName(m){try{const used=namesInUse();const sur=freshName().split(" ")[0];const n=sur+" "+m.name;return used.includes(n)?freshName():n}catch(e){return m.name}}
+/* ROLE PARITY (OD 18/11 ~21:30Z, law 1 + law 4): ONE promotion rule for a maid raised to consort — the player (j42 srvRise) and an NPC maid
+   (amRise; j14 eye path) — so a promoted maid starts EXACTLY like a born Đáp ứng with the same gains: n = the new consort record (S for her),
+   m = the maid she was (S for her), o = her old master, loy0 = her loyalty measure if the caller read it before the change (hers = Chủ tin, an NPC's = lòng).
+   Numbers: BAL.ag.maid.rise (Sủng = b + his regard / d; Danh, Bạc gained; the old master's jealousy kept / turned), BAL.mline.riseLoy / riseRel.
+   Returns loy (true = she stays her old master's friend). */
+function riseLoyal(m){return (m===S?S.tin:m&&m.loyal)||0}
+function riseCore(n,m,o,loy0){const D=BAL.ag.maid.rise,B=BAL.mline;const loy=(loy0!=null?loy0:riseLoyal(m))>=B.riseLoy;const reg=amSung(m);
+ n.rank=0;n.queen=false;n.sung=D.b+Math.round(reg/D.d);if(n===S)apply({danh:D.danh,bac:D.bac});else ap(n,{danh:D.danh,bac:D.bac});
+ if(o&&o!==n&&o.alive!==false){relAdd(o,n,loy?B.riseRel:-B.riseRel);if(o!==S)ghenUp(o,loy?D.ghen[0]:D.ghen[1],"thấy cung nữ cũ của mình được nâng lên làm phi tần",n)}
+ return loy}
 function amRise(m,o,via){const B=BAL.mline,D=amD();const close=!!(o&&o.maid===m);
  if(close)o.maid=o===S?newMaid(pick(MAIDS.filter(x=>x!==m.name)),45):{name:pick(MAIDS.filter(x=>x!==m.name)),loyal:45};
  else if(o&&o.staff){const i=o.staff.indexOf(m);if(i>=0)o.staff.splice(i,1);try{if(typeof mlRose==="function")mlRose(o,m)}catch(e){}}
  const n=newRival(0);Object.assign(n,drawFace());try{f88Carry(n,m)}catch(e){}n.name=amName(m);/* her age: f88Carry */
- n.ag=Object.assign(n.ag||{},{o:"cn"});n.rel=0;n.sung=D.rise.b+Math.round((m.sung||0)/D.rise.d);n.fromMaidOf=o?key(o):null;
- const loy=(m.loyal||0)>=B.riseLoy;if(o)relAdd(o,n,loy?B.riseRel:-B.riseRel);rivals.push(n);
+ n.ag=Object.assign(n.ag||{},{o:"cn"});n.rel=0;n.fromMaidOf=o?key(o):null;
+ const loy=riseCore(n,m,o);rivals.push(n);
  try{n.nights=(n.nights||0)+1;(n.nightLog=n.nightLog||[]).push(wk());night(n)}catch(e){}
  AMN.rise++;if(via==="fav")AMN.favRise++;
  const how=via==="send"?"hầu thay":via==="fav"?"đã được sủng hạnh, nay hậu cung có chỗ":"được Hoàng thượng cho gọi đến hầu";
@@ -69119,7 +69124,7 @@ function agHeard(v,info){if(!agRdOn()||!v||v===S||typeof v!=="object"||!v.alive|
 function agWalk(a,b){try{const B=BAL.ag.kh2.rd;if(!agRdOn()||!((B.see||0)+(B.go||0)))return 0}catch(e){return 0}if(!a||!b||a===b)return 1;
  const W=window.__walkSpill;window.__walkSpill=null;/* her own half-walk (travel's special case) is not the bearer's road */let w=1;try{w=travel(a,b)}catch(e){}finally{window.__walkSpill=W}return Math.max(1,w||1)}
 /* a servant who stands at pl in khắc kh tells her master (not the player — her own servants are part 2c's TIN BÁO) by her own choice */
-function agTell(R,pl,kh,why0,who,interest){const B=BAL.ag.kh2.rd;let n=0;let why=null;const wy=()=>why!=null?why:(why=typeof why0==="function"?why0():why0);/* ag-deed-perf: the line (a place name: places() through every wrapper) is built only when a servant tells */
+function agTell(R,pl,kh,why,who,interest){const B=BAL.ag.kh2.rd;let n=0;
  for(const id in R.P){if(!/^s\d+$/.test(id))continue;const e=R.P[id][kh];if(!e||e[0]!==pl)continue;const s=servById(+id.slice(1));if(!s||s.out)continue;const m=ownerOf(s);
   if(!m||m===S||m===who||!m.alive||m.out)continue;const it=interest?interest(m):1;if(!(it>0))continue;
   const c=mindPick([["tell",B.tell*cl((s.loyal||0)/100,0,1)*it],["quiet",B.quiet]],s);if(c!=="tell")continue;
@@ -69128,9 +69133,9 @@ function agTell(R,pl,kh,why0,who,interest){const B=BAL.ag.kh2.rd;let n=0;let why
   let mp=null;try{mp=R.P["v"+m.id]&&R.P["v"+m.id][Math.min(ks,J95.KH-1)]?R.P["v"+m.id][Math.min(ks,J95.KH-1)][0]:palaceOf(m)}catch(e){}mp=mp||palaceOf(m);
   const due=ks+Math.max(1,agWalk(pl,mp));/* OD 17/11 ~17:55Z (3): she sets off from pl the khắc she saw it; her REAL walk to her master (near 1 / far 2); he hears at the start of khắc due */
   let kg=J95.KH;/* the khắc rows she spends on the road (a far walk: the khắc between); none for a near one */
-  for(let q=ks+1;q<due&&q<J95.KH;q++){const e=R.P[id][q];if(!e||busy(q)||e[1]==="tryst"||e[1]==="meet")break;if(kg===J95.KH)kg=q;R.P[id][q]=[mp,"ag_tell",ledgerId(m),wy()]}
-  agRdLog(R,id,kh,"ag:tell",ledgerId(m),wy(),pl);n++;AGD.stat.tell=(AGD.stat.tell||0)+1;
-  const z=agZ();z.rq=z.rq||[];z.rq.push({key:R.key,due,kg,sid:id,m:ledgerId(m),pl,who:who===S?"me":who&&typeof who==="object"?ledgerId(who):null,why:wy(),by:ledgerId(s),kh});if(z.rq.length>B.qMax)z.rq.shift()}
+  for(let q=ks+1;q<due&&q<J95.KH;q++){const e=R.P[id][q];if(!e||busy(q)||e[1]==="tryst"||e[1]==="meet")break;if(kg===J95.KH)kg=q;R.P[id][q]=[mp,"ag_tell",ledgerId(m),why]}
+  agRdLog(R,id,kh,"ag:tell",ledgerId(m),why,pl);n++;AGD.stat.tell=(AGD.stat.tell||0)+1;
+  const z=agZ();z.rq=z.rq||[];z.rq.push({key:R.key,due,kg,sid:id,m:ledgerId(m),pl,who:who===S?"me":who&&typeof who==="object"?ledgerId(who):null,why,by:ledgerId(s),kh});if(z.rq.length>B.qMax)z.rq.shift()}
  return n}
 /* deliver the news whose khắc has come (her clock passed the teller's khắc): the master hears at the START of that khắc (agHeard k0 = due).
    BAL cap on re-deciders per khắc (low-end phones, OD L1638): over the cap the news waits one khắc. A news due after the buổi's last khắc
@@ -69151,9 +69156,9 @@ function agRdTick(){try{agSpillAll()}catch(e){agdErr("spillAll",e)}if(!agRdOn()|
    /* the khắc she ENTERED: the finished khắc whose result put her there (her walk khắc: her row shows the place from the khắc after it); the
       servants there react the khắc after that (OD L1638: "k1 she enters → k2 maid present / scouts → k3 master knows + acts → k4 visible") */
    let a=kh;try{if(R.P.me)while(a>0&&R.P.me[a-1]&&R.P.me[a-1][0]===me)a--}catch(e){}/* = the first khắc she STANDS there (owner: k1 her walk, k2 seen + the maid walks, k3 the master knows) */
-   if(moved&&me&&me!=="home")agTell(R,me,a,()=>`nghe tin ngươi đến ${agPlaceTxt(me)}`,S,m=>{let x=0;try{x=agNeedsC(m)}catch(e){}return x?1:0})}
+   if(moved&&me&&me!=="home")agTell(R,me,a,`nghe tin ngươi đến ${agPlaceTxt(me)}`,S,m=>{let x=0;try{x=agNeedsC(m)}catch(e){}return x?1:0})}
   for(const p of agZ().pend){if(p.key!==R.key||p.st||p.kh>kh||p.drop||p.gone)continue;p.st=1;const d=agTgt(p.id),t=agTgt(p.t);
-   agTell(R,p.pl,kh,()=>`nghe tin ${d&&d.name?d.name:""} ${p.act} ở ${agPlaceTxt(p.pl)}`,t&&t!==S?t:d,m=>{const a=typeof d==="object"&&d&&d!==m?Math.abs(aff(m,d)):0,b=typeof t==="object"&&t&&t!==m?Math.abs(aff(m,t)):0;return (a+b)/100})}}
+   agTell(R,p.pl,kh,`nghe tin ${d&&d.name?d.name:""} ${p.act} ở ${agPlaceTxt(p.pl)}`,t&&t!==S?t:d,m=>{const a=typeof d==="object"&&d&&d!==m?Math.abs(aff(m,d)):0,b=typeof t==="object"&&t&&t!==m?Math.abs(aff(m,t)):0;return (a+b)/100})}}
  catch(e){agdErr("rd",e)}finally{AG.inRd=0}}
 /* 2d3 (ag-kh2 G9 red on base): a servant sent to rest / punished in the middle of a buổi (j95 jplx list → her row "offduty" / "laundry" from now)
    is not free any more: her deeds not over yet on those khắc drop (the agSlot rule: an off-duty khắc is not hers), so no deed claims a row it
@@ -74380,10 +74385,7 @@ function placeEnt(){try{const en=$("kpent"),st=$("stage");if(!en||en.hidden||!st
  if(mk&&mk.getClientRects().length){const R=st.getBoundingClientRect(),q=mk.getBoundingClientRect(),c=ch.getBoundingClientRect();
   if(q.right>c.left-4&&q.left<c.right+4&&q.top<c.bottom+2&&q.bottom>c.top-2)en.style.left=Math.round(q.right-R.left+8)+"px"}}catch(e){}}
 function lay2(){lay();placeEnt();clearTimeout(lay2.a);clearTimeout(lay2.b);lay2.a=setTimeout(placeEnt,400);lay2.b=setTimeout(placeEnt,1300)}
-/* ag-deed-perf (C-AG #12 18/11): a stage redraw INSIDE a sim step (j95 final wrapper, window.__rdefer > 0) queues lay2 (layout reads only:
-   getBoundingClientRect + the toast/name/chip DOM; nothing in S) with the other stage fits for the next frame (jlag2 renderAfter, coalesced;
-   a render() before then flushes it); every other redraw runs it at once, as before */
-const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);if(window.__rdefer>0&&typeof window.renderAfter==="function")renderAfter("plst-lay",lay2);else lay2();return r};
+const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);lay2();return r};
 try{addEventListener("resize",()=>{clearTimeout(lay.__t);lay.__t=setTimeout(lay2,90)})}catch(e){}
 /* (1) the count chip: the kit rail's first slot */
 try{if(window.kitStageRail)kitStageRail.add({id:"here",order:0,chip:()=>{const n=hereN();return n&&typeof j59ico==="function"?`<span class="kchip n j59hchip" role="img" aria-label="Ở đây còn ${n} người">${j59ico()}<span class="j59n">${n}</span></span>`:""},when:()=>hereN()>0&&onStage()})}catch(e){}
@@ -75679,7 +75681,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="f5e85d9719ed";window.CTM_BUILD=BUILD;
+const BUILD="55c75e90cbcd";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
