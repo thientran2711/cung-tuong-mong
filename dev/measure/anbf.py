@@ -38,6 +38,23 @@ for n,R in AR.items():
   B=[x.get('bf') or {} for x in R];hn=sum(b.get('hn',0) for b in B);hc=sum(b.get('hc',0) for b in B);hcs=sum(b.get('hcs',0) for b in B)
   nn=sum(b.get('nn',0) for b in B);nc=sum(b.get('nc',0) for b in B)
   print(f"| {n} | {Y:.0f} | {100*sum(D.values())/Y:.2f} ({100*D['poison']/Y:.2f} / {100*D['birth']/Y:.2f} / {100*D['illness']/Y:.2f} / {100*D['other']/Y:.2f}) | {len(e)} ({sum(1 for x in e if cause(x.get('fate'))=='poison')}) | {sum(x.get('kids') or 0 for x in R)/Y:.3f} | {hn/Y:.1f} | {hc/Y:.3f} | {hcs/max(1,hn):.2f} | {100*nc/max(1,nn):.2f} |")
+print('\n| arm | her births /y | her pregnancy losses /y | loss share |\n|---|---|---|---|')
+for n,R in AR.items():
+  Y=sum(x['years'] for x in R if (x.get('bf') or {}).get('pb') is not None) or 1;B=[x.get('bf') or {} for x in R if (x.get('bf') or {}).get('pb') is not None]
+  pb=sum(b['pb'] for b in B);pl=sum(b['pl'] for b in B);print(f"| {n} | {pb/Y:.3f} | {pl/Y:.3f} | {pl/max(1,pb+pl):.2f} |")
+print('\n| arm | NPC Sủng m12 / m24 / m36 / m60: mean (share ≥ 95, share ≤ 20) |\n|---|---|')
+for n,R in AR.items():
+  cells=[]
+  for m in ['12','24','36','60']:
+    V=[(x.get('bf') or {}).get('ns',{}).get(m) for x in R];V=[v for v in V if v]
+    cells.append(f"{round(st.mean(v[1] for v in V))} ({st.mean(v[2] for v in V):.2f}, {st.mean(v[3] for v in V):.2f})" if V else '-')
+  print(f"| {n} | "+' / '.join(cells)+' |')
+if '--loss' in O:
+  for n,R in AR.items():
+    L=C.Counter()
+    for x in R:
+      for k,v in ((x.get('bf') or {}).get('lw') or {}).items():L[k[:120]]+=v
+    print(n,L.most_common(15))
 if '--orig' in O:
   ks=['tt','dtq','muoi','cn','nc','bd','td','ch','thd','cnv']
   print('\n| arm (HH/lives) | '+' | '.join(ks)+' |\n|---|'+'---|'*len(ks))
