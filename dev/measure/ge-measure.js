@@ -25,7 +25,7 @@ const BOTJS=PLAY==='idle'?'':['inpage6.js','inty.js'].map(f=>fs.readFileSync(pat
    await p.evaluate(()=>{document.getElementById('title').hidden=true;const md0=msDone67;msDone67=function(m){return m.force14?true:md0.apply(this,arguments)};
     window.__ge=async(road,mode,j)=>{const k=road.split('_')[0];quiet=true;const others=Object.keys(ARC67).filter(id=>ARC67[id].o===k&&id!==road);
      localStorage.setItem('ctm-arcs',JSON.stringify({[k]:others}));localStorage.setItem('ctm-tm96','1');window.__forceOrigin=k;window.__origO=k;window.__geHit=0;start();quiet=false;
-     await new Promise(r=>{let n=0;const t=()=>{if((typeof S!=='undefined'&&S&&S.origin&&S.st&&S.st.f14)||++n>150)r();else setTimeout(t,100)};t()});Q.length=0;
+     await new Promise(r=>{let n=0;const t=()=>{if((typeof S!=='undefined'&&S&&S.origin&&S.st&&S.st.f14&&S.st.f14.rd===road)||++n>150)r();else setTimeout(t,100)};t()});Q.length=0;
      if(S.st.f14.rd!==road)return{err:'road '+S.st.f14.rd};const D=GE_DATA[road],C=GE_CAT[road];
      const sc=n=>{if(mode==='rand')return 0;let v=0;const e=D.e[j];if(e.pull.includes(n))v+=3;if((e.close||[]).includes(n)||(e.doom||[]).includes(n))v-=6;
       if(mode==='kind'){if(D.lean.p.includes(n))v+=2;if(D.lean.m.includes(n))v-=2}if(mode==='cruel'){if(D.lean.m.includes(n))v+=2;if(D.lean.p.includes(n))v-=2}return v};
