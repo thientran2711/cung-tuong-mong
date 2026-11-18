@@ -22,12 +22,11 @@
       right Bạc·Sức): no extra cell; Ân tình also shows in the stage "Ân sủng" panel (owner-approved 17:55Z). */
 /* BAL.pg = the ONE rule table of every poisoned dish (jpoison rivals + jpq Hoàng thượng / Thái hậu; OD:L1267, review/poison-road-fix):
    tamDiv / trustDiv = Tâm cơ / the target's trust are divided by these in the odds; seeDiv = the target's watchfulness (oSee) / this = her guard;
-   hi = top of a rival's odds (then the one ODDS CAP oddsCl, BAL.odds.lo / hi); weak = odds lost when her Sức < weakSuc; cpFac: a failed try is traced back with oSee − cpFac × (her faction size − 1) (oddsCl);
+   hi = top of a rival's odds (then the one ODDS CAP oddsCl, BAL.odds.lo / hi); the weak-Sức line prints BAL.odds.weak (the odA rule, j9); cpFac: a failed try is traced back with oSee − cpFac × (her faction size − 1) (oddsCl);
    khac = khắc a try costs (her card + spend); duc = Đức lost per poison; hacSuc = Sức hit of Hạc đỉnh hồng; sickMo / blockWk = months ill (Độc ngấm dần) /
    weeks without the night card (Mê dược); npc.w = weight of the act in an NPC's mind menu,
    npc.cook = monthly odds a poison-holding NPC keeps a dish, npc.mat / npc.raw = that dish's wkMake material / raw skill */
-Object.assign(BAL,{pg:{base:42,grade:6,doctor:15,needle:30,maid:12,hhEv:1,weakSuc:30/* review/one-core-jkc: Sức below this = she is weak (the odds line names the cut) */,
- weak:15,tamDiv:4,trustDiv:4,seeDiv:3,hi:92,cpFac:4,khac:2,duc:{hacdinh:10,docngam:6,phanhuy:5,xahuong:10,meduoc:3},
+Object.assign(BAL,{pg:{base:42,grade:6,doctor:15,needle:30,maid:12,hhEv:1,tamDiv:4,trustDiv:4,seeDiv:3,hi:92,cpFac:4,khac:2,duc:{hacdinh:10,docngam:6,phanhuy:5,xahuong:10,meduoc:3},
  hacSuc:-120,sickMo:3,blockWk:1,npc:{w:2,cook:30,mat:0,raw:4}},
  gift:{an:30,rel:40,th:40,askW:2,sinc:{emp:1,oth:2,tr:1}/* Chân tình bonus (gfSincere → wkEval): to the Emperor / to others, + a kind recipient */}});
 const PGE=BAL.eff.jpoison,PGB=BAL.pg;
@@ -58,7 +57,7 @@ function pgGuard(t){const L=[];const v=Math.round(oSee(t,true)/BAL.pg.seeDiv);L.
 function pgOdds(a,t,e){const P=BAL.pg;const G=pgGuard(t);const tr=Math.round((rel(t,a)||0)/P.trustDiv),tc=Math.round((a.tamco||0)/P.tamDiv),gr=pgGrade(e)*P.grade;
  const raw=P.base+tc+tr+gr+G.reduce((s,x)=>s+x[1],0);const o=oddsCl(Math.min(Math.round(odA(a,raw)),P.hi));
  const F=[[`Tâm cơ ${pgNm(a)} ${a.tamco|0}`,tc],[`${pgNm(t,1)} ${tr>=0?"tin":"ngờ"} ${pgNm(a)}`,tr],
-  [e&&e.wk?`Món ${WTIER[e.wk.ti|0]} che vị`:`${e&&IT[e.k]?itm(e.k).n:"Món"} che vị`,gr]].concat(G);if((a.suc||0)<BAL.pg.weakSuc)F.push([`Sức ${pgNm(a)} dưới ${P.weakSuc}`,-P.weak]);
+  [e&&e.wk?`Món ${WTIER[e.wk.ti|0]} che vị`:`${e&&IT[e.k]?itm(e.k).n:"Món"} che vị`,gr]].concat(G);{const W=BAL.odds.weak;if((a.suc||0)<W.suc)F.push([`Sức ${pgNm(a)} dưới ${W.suc}`,-W.pen])}
  const cp=oddsCl(oSee(t,true)-P.cpFac*(facN(a)-1));return{o,F,cp}}
 function pgEffect(a,t,pk){const nm=t===S?"Ngươi":`${rkName(t)} ${t.name}`;
  if(pk==="hacdinh"){if(t===S){die("Trúng độc, không qua khỏi");return `<span class="r">Ngươi trúng độc.</span> `}ap(t,{suc:BAL.pg.hacSuc});try{dieIf(t,"Trúng độc, không qua khỏi")}catch(e){}return `<span class="r">${nm} trúng độc nặng.</span> `}

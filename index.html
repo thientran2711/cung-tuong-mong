@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"fd0bab90+","t":"2026-11-18T10:15Z","c":"poison-road tests: force a hit / miss by setting the pqOdds result (the one ODDS CAP has no per-road floor any more); shots script likewise","b":"514bbd0acafe","h":[{"s":"2a9170b2+","t":"2026-11-18T09:23Z","c":"look-fx R9g2: shared eye keep-out PAD (BAL.looks.keep.fit.eye +.042/.048 = ~4 % face width gap), keepscan --gap (eye contour dilated by GAP…"},{"s":"e3f833ce+","t":"2026-11-18T09:05Z","c":"odds-cap r3 review: dev/test/odds-cap.js runs in the go-live suite (quickcheck.d/40-odds-cap.sh, OC_BUILD = the sha's build)"},{"s":"824cfccf+","t":"2026-11-18T08:43Z","c":"scroll-cue-scan: every dialog with a Kéo xuống cue (94 dialogs x Fold+iPad)"},{"s":"9c581406+","t":"2026-11-18T07:37Z","c":"review map-tap-go r9: merge origin/main e0b9662 (generated files rebuilt from merged sources)"},{"s":"c571aaea+","t":"2026-11-18T07:26Z","c":"map-tap-go: KIT 84c person-less VIỆC frame — main picture fills the left column (k3fill), kit-conform rule, kit page sample, KIT_REQUESTS c…"},{"s":"5ae28ddb+","t":"2026-11-18T07:13Z","c":"place-stage r5 redo: A1 (marker back on the head, KIT_FIG.h .79, band 70, vivid gold glow) + seal at ONE fixed offset from the standing anc…"},{"s":"5c5d1e8b+","t":"2026-11-18T07:04Z","c":"review person-dialog-restore r1: greet result card carries the greeting line (was the ambient weather line); rebuilt"},{"s":"2eea9a2b+","t":"2026-11-18T06:45Z","c":"review coop-thin-e r1: coop-thin-e E2 diagnostics; a setup press that landed in the new week is stepped first (swap flake 2/7)"},{"s":"8af2fc24+","t":"2026-11-18T06:31Z","c":"mg-skip-all r2: one quick-button look everywhere (kquick css, never an option card), playArt default fix, KIT 13.6 + MINIGAMES, page test m…"},{"s":"c9ada2a3+","t":"2026-11-18T06:14Z","c":"Fix S.lyF: recognise the fallen Ly person by lyF===1 (S carries the object), not truthiness; her own figure keeps her rank tier. + dev/test…"}]};
+window.CTM_BI={"s":"5f361fa4+","t":"2026-11-18T10:20Z","c":"review poison-road r2 (fix-the-group OD:L474 + ONE CORE OD:L1267): taint family in j8 reads BAL — Đức per taint (taintItem + taintpick card…","b":"48213d0f0bd4","h":[{"s":"2a9170b2+","t":"2026-11-18T09:23Z","c":"look-fx R9g2: shared eye keep-out PAD (BAL.looks.keep.fit.eye +.042/.048 = ~4 % face width gap), keepscan --gap (eye contour dilated by GAP…"},{"s":"e3f833ce+","t":"2026-11-18T09:05Z","c":"odds-cap r3 review: dev/test/odds-cap.js runs in the go-live suite (quickcheck.d/40-odds-cap.sh, OC_BUILD = the sha's build)"},{"s":"824cfccf+","t":"2026-11-18T08:43Z","c":"scroll-cue-scan: every dialog with a Kéo xuống cue (94 dialogs x Fold+iPad)"},{"s":"9c581406+","t":"2026-11-18T07:37Z","c":"review map-tap-go r9: merge origin/main e0b9662 (generated files rebuilt from merged sources)"},{"s":"c571aaea+","t":"2026-11-18T07:26Z","c":"map-tap-go: KIT 84c person-less VIỆC frame — main picture fills the left column (k3fill), kit-conform rule, kit page sample, KIT_REQUESTS c…"},{"s":"5ae28ddb+","t":"2026-11-18T07:13Z","c":"place-stage r5 redo: A1 (marker back on the head, KIT_FIG.h .79, band 70, vivid gold glow) + seal at ONE fixed offset from the standing anc…"},{"s":"5c5d1e8b+","t":"2026-11-18T07:04Z","c":"review person-dialog-restore r1: greet result card carries the greeting line (was the ambient weather line); rebuilt"},{"s":"2eea9a2b+","t":"2026-11-18T06:45Z","c":"review coop-thin-e r1: coop-thin-e E2 diagnostics; a setup press that landed in the new week is stepped first (swap flake 2/7)"},{"s":"8af2fc24+","t":"2026-11-18T06:31Z","c":"mg-skip-all r2: one quick-button look everywhere (kquick css, never an option card), playArt default fix, KIT 13.6 + MINIGAMES, page test m…"},{"s":"c9ada2a3+","t":"2026-11-18T06:14Z","c":"Fix S.lyF: recognise the fallen Ly person by lyF===1 (S carries the object), not truthiness; her own figure keeps her rank tier. + dev/test…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -3382,7 +3382,7 @@ function runAct(a,t,k,extra){const A2=ACT[k];if(!A2)return"";const sent=!togethe
  if(sent&&sv&&!/bị lộ|bị bắt|phát giác|chặn kịp|từ chối/.test(r))servMerit(sv,2);if(sent&&harm&&roll(confessRisk(sv))){const n=evA(t,a,BAL.eff.j9.evN);r+=`${sv?sv.name:"Kẻ"} được ${NM(a)} sai đi bị bắt, khai ra chủ${n?`: ${NM(t)} nắm thêm ${balAb(BAL.eff.j9.evN)} chứng cứ`:""}. `+servCaught(a,sv)}
  if(sent&&sv)r=r.replace(/\(sai người đi\)/,"");
  return r?(r.trim()+(sent?` (sai ${sv?sv.name:"người"} đi)`:where?` (tại ${where})`:"")+" "):""}
-function odA(a,b){return oddsCl(Math.round(b+(a.suc<30?-15:0)-(ACTX.a===a?ACTX.pen:0)+(ACTX.a===a?lotB(a,ACTX.dom):0)+(ACTX.a===a&&ACTX.t&&typeof spyKnowB==="function"?spyKnowB(a,ACTX.t):0)))}
+function odA(a,b){return oddsCl(Math.round(b+(a.suc<BAL.odds.weak.suc?-BAL.odds.weak.pen:0)-(ACTX.a===a?ACTX.pen:0)+(ACTX.a===a?lotB(a,ACTX.dom):0)+(ACTX.a===a&&ACTX.t&&typeof spyKnowB==="function"?spyKnowB(a,ACTX.t):0)))}
 
 /* the talk system: topics, by traits and bars; the same chat repeated in a month gives less */
 function chatF(v){S.chat=S.chat||{};const n=S.chat[v.id]||0;return 1/(1+n)}
@@ -5813,7 +5813,7 @@ Object.assign(BAL,{confess:{base:70,sungDiv:4,thDiv:5},
  /* BUTTON ACTS that roll at the odds cap (j63 capAt): k = khắc, suc = Sức each one costs. The handler, its hint and its soft-fail gate read
     the SAME key (one core); a soft fail spends of it only BAL.odds.softFail.spend (khắc + Sức), never the bạc. */
  btn:{courtHoi:{k:2},kidTeach:{k:2},kidCare:{k:2},kidGuard:{k:2},cnv:{k:1},h54Thu:{k:1},wkShow:{k:2},h54Day:{k:2,suc:5},kidHeal:{k:2,suc:10},htAsk:{k:1},loSneak:{k:1}},/* Thú tội tư thông (a chance, the Emperor's mercy): base + Sủng/sungDiv + Thái hậu/thDiv; hỏng: bị ban chết */
- odds:{cut:[31,46,56,66,81,91],lo:5,hi:95,simN:200,softFail:{spend:["suc"]}}});
+ odds:{cut:[31,46,56,66,81,91],lo:5,hi:95,weak:{suc:30,pen:15}/* odA (j9): the doer's Sức below suc → every act's odds −pen; the poison card "Vì sao" prints this same key */,simN:200,softFail:{spend:["suc"]}}});
 function oddsLv(o){let i=0;for(const c of BAL.odds.cut)if(o>=c)i++;return i}
 /* ONE CORE number formatters for player texts (review/one-core-dup r2, OD:L1267 "text prints the constant"): balSg(n) = the signed amount as the
    texts show it ("+4" / "-4"), balAb(n) = the amount without sign ("4"). A text that shows a BAL.eff / BAL.road / BAL.arc amount prints it with these
@@ -43698,12 +43698,11 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
       right Bạc·Sức): no extra cell; Ân tình also shows in the stage "Ân sủng" panel (owner-approved 17:55Z). */
 /* BAL.pg = the ONE rule table of every poisoned dish (jpoison rivals + jpq Hoàng thượng / Thái hậu; OD:L1267, review/poison-road-fix):
    tamDiv / trustDiv = Tâm cơ / the target's trust are divided by these in the odds; seeDiv = the target's watchfulness (oSee) / this = her guard;
-   hi = top of a rival's odds (then the one ODDS CAP oddsCl, BAL.odds.lo / hi); weak = odds lost when her Sức < weakSuc; cpFac: a failed try is traced back with oSee − cpFac × (her faction size − 1) (oddsCl);
+   hi = top of a rival's odds (then the one ODDS CAP oddsCl, BAL.odds.lo / hi); the weak-Sức line prints BAL.odds.weak (the odA rule, j9); cpFac: a failed try is traced back with oSee − cpFac × (her faction size − 1) (oddsCl);
    khac = khắc a try costs (her card + spend); duc = Đức lost per poison; hacSuc = Sức hit of Hạc đỉnh hồng; sickMo / blockWk = months ill (Độc ngấm dần) /
    weeks without the night card (Mê dược); npc.w = weight of the act in an NPC's mind menu,
    npc.cook = monthly odds a poison-holding NPC keeps a dish, npc.mat / npc.raw = that dish's wkMake material / raw skill */
-Object.assign(BAL,{pg:{base:42,grade:6,doctor:15,needle:30,maid:12,hhEv:1,weakSuc:30/* review/one-core-jkc: Sức below this = she is weak (the odds line names the cut) */,
- weak:15,tamDiv:4,trustDiv:4,seeDiv:3,hi:92,cpFac:4,khac:2,duc:{hacdinh:10,docngam:6,phanhuy:5,xahuong:10,meduoc:3},
+Object.assign(BAL,{pg:{base:42,grade:6,doctor:15,needle:30,maid:12,hhEv:1,tamDiv:4,trustDiv:4,seeDiv:3,hi:92,cpFac:4,khac:2,duc:{hacdinh:10,docngam:6,phanhuy:5,xahuong:10,meduoc:3},
  hacSuc:-120,sickMo:3,blockWk:1,npc:{w:2,cook:30,mat:0,raw:4}},
  gift:{an:30,rel:40,th:40,askW:2,sinc:{emp:1,oth:2,tr:1}/* Chân tình bonus (gfSincere → wkEval): to the Emperor / to others, + a kind recipient */}});
 const PGE=BAL.eff.jpoison,PGB=BAL.pg;
@@ -43734,7 +43733,7 @@ function pgGuard(t){const L=[];const v=Math.round(oSee(t,true)/BAL.pg.seeDiv);L.
 function pgOdds(a,t,e){const P=BAL.pg;const G=pgGuard(t);const tr=Math.round((rel(t,a)||0)/P.trustDiv),tc=Math.round((a.tamco||0)/P.tamDiv),gr=pgGrade(e)*P.grade;
  const raw=P.base+tc+tr+gr+G.reduce((s,x)=>s+x[1],0);const o=oddsCl(Math.min(Math.round(odA(a,raw)),P.hi));
  const F=[[`Tâm cơ ${pgNm(a)} ${a.tamco|0}`,tc],[`${pgNm(t,1)} ${tr>=0?"tin":"ngờ"} ${pgNm(a)}`,tr],
-  [e&&e.wk?`Món ${WTIER[e.wk.ti|0]} che vị`:`${e&&IT[e.k]?itm(e.k).n:"Món"} che vị`,gr]].concat(G);if((a.suc||0)<BAL.pg.weakSuc)F.push([`Sức ${pgNm(a)} dưới ${P.weakSuc}`,-P.weak]);
+  [e&&e.wk?`Món ${WTIER[e.wk.ti|0]} che vị`:`${e&&IT[e.k]?itm(e.k).n:"Món"} che vị`,gr]].concat(G);{const W=BAL.odds.weak;if((a.suc||0)<W.suc)F.push([`Sức ${pgNm(a)} dưới ${W.suc}`,-W.pen])}
  const cp=oddsCl(oSee(t,true)-P.cpFac*(facN(a)-1));return{o,F,cp}}
 function pgEffect(a,t,pk){const nm=t===S?"Ngươi":`${rkName(t)} ${t.name}`;
  if(pk==="hacdinh"){if(t===S){die("Trúng độc, không qua khỏi");return `<span class="r">Ngươi trúng độc.</span> `}ap(t,{suc:BAL.pg.hacSuc});try{dieIf(t,"Trúng độc, không qua khỏi")}catch(e){}return `<span class="r">${nm} trúng độc nặng.</span> `}
@@ -68849,7 +68848,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="514bbd0acafe";window.CTM_BUILD=BUILD;
+const BUILD="48213d0f0bd4";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
