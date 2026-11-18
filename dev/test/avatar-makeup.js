@@ -14,11 +14,14 @@ fs.mkdirSync(DIR,{recursive:true});const fails=[];const chk=(c,msg)=>{if(!c)fail
   await p.waitForTimeout(3500);for(let i=0;i<3;i++){try{await p.evaluate(()=>toilLodPass())}catch(e){}await p.waitForTimeout(400)}await p.waitForFunction(()=>!Object.keys(KIT_BAKE.pend).length,null,{timeout:40000}).catch(()=>{});await p.waitForTimeout(800)};
  const scan=()=>p.evaluate(()=>{const vis=e=>{const r=e.getBoundingClientRect();return r.width>4&&r.height>4&&r.bottom>0&&r.top<innerHeight&&r.right>0&&r.left<innerWidth};
   const her=[...document.querySelectorAll('img')].filter(i=>/(^|\/)por-|^blob:/.test(i.currentSrc||i.src)&&vis(i)&&!i.closest('#stage'));
-  const rows=her.map(i=>{const h=i.closest('.pcp,.md,.kmini,.kfc,[class*=kmini]');return{blob:/^blob:/.test(i.currentSrc),kbk:!!i.dataset.kbk,w:Math.round(i.getBoundingClientRect().width),cls:(h&&h.className||i.parentElement.className||'').toString().slice(0,40)}});
+  const rows=her.map(i=>{const h=i.closest('.pcp,.md,.kmini,.kfc,[class*=kmini]');return{file:i.dataset.kbk?i.dataset.kbk.split('|')[0]:(i.currentSrc||'').split('/').pop(),blob:/^blob:/.test(i.currentSrc),kbk:!!i.dataset.kbk,w:Math.round(i.getBoundingClientRect().width),cls:(h&&h.className||i.parentElement.className||'').toString().slice(0,40)}});
   const st=[...document.querySelectorAll('#stage img.kmkc,.kesfi img.kmkc')].map(i=>/\|L\d+$/.test(i.dataset.mkk||'')?'L':'0');return{rows,stage:st}});
  const out={vp:VP,score};
- await set(true,score);await p.screenshot({path:`${DIR}/full-${tag}-on.png`});out.on=await scan();
- await set(false,score);await p.screenshot({path:`${DIR}/full-${tag}-off.png`});out.off=await scan();
+ const grid=async(on)=>{await p.evaluate(()=>{const h=document.getElementById('avg');if(h)h.remove()});await p.evaluate(()=>{const host=document.createElement('div');host.id='avg';host.style.cssText='position:fixed;left:0;top:0;z-index:99999;background:#f4ead8;padding:8px;display:flex;gap:14px;align-items:flex-start';const q=pv(S);host.innerHTML=`<div class="avcell" style="width:90px">${mdH(q,'kmini')}</div><div class="avcell" style="width:150px">${pcPort(q)}</div><div class="avcell" style="width:48px">${mdH(q,'kmini sm')}</div>`;document.body.appendChild(host)});
+  await p.waitForTimeout(1500);await p.waitForFunction(()=>!Object.keys(KIT_BAKE.pend).length,null,{timeout:40000}).catch(()=>{});await p.waitForTimeout(800);out['grid'+on]=await p.evaluate(()=>[...document.querySelectorAll('#avg img')].filter(i=>/por-|^blob/.test(i.currentSrc)).map(i=>i.dataset.kbk?i.dataset.kbk.split('|')[0]:(i.currentSrc||'').split('/').pop()));const el=await p.$('#avg');await el.screenshot({path:`${DIR}/frames-${tag}-${on?'on':'off'}.png`});await p.evaluate(()=>document.getElementById('avg').remove())};
+
+ await set(true,score);await p.screenshot({path:`${DIR}/full-${tag}-on.png`});out.on=await scan();await grid(true);
+ await set(false,score);await p.screenshot({path:`${DIR}/full-${tag}-off.png`});out.off=await scan();await grid(false);
  out.errs=errs;const onBlob=out.on.rows.filter(r=>r.kbk);chk(onBlob.length>0,'no avatar frame with a bake on screen');chk(onBlob.every(r=>r.blob),'an avatar frame (makeup on) is not baked: '+JSON.stringify(onBlob.filter(r=>!r.blob)));
  chk(out.off.rows.every(r=>!r.blob),'makeup off but an avatar is still a blob');chk(out.on.stage.every(s=>s==='0'),'stage makeup layer not at step 0: '+out.on.stage.join());chk(errs.length===0,'page errors');
  out.fails=fails;console.log(JSON.stringify(out));await b.close();process.exit(fails.length?1:0)})();

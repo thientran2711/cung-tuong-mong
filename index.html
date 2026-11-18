@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"af71f94a+","t":"2026-11-18T02:17Z","c":"smudge r16: stage4 + avatar probe tests, options script score fix (look tier by score), FINAL mode","b":"cca6eb936848","h":[{"s":"e1f60927+","t":"2026-11-18T02:25Z","c":"result-reason: every result card line says a short why (kitWhy, KIT 7); values left-aligned next to labels"},{"s":"29385ec6+","t":"2026-11-18T02:07Z","c":"greet-stranger: site rebuilt"},{"s":"3b69182e","t":"2026-11-18T01:50Z","c":"hoa-dien r3 onto main 3da5720a (makeup-lux live): hoa-dien (jhd.js + hooks) replayed on the new main, replacing the old stacked branch. Sha…"},{"s":"631a703e","t":"2026-11-18T01:37Z","c":"review staff-cap-fix r6: hire pick refused at the cap gives the silver back (+ staff-cap.js case); site rebuilt"},{"s":"4cdcffa9+","t":"2026-11-18T00:44Z","c":"review looks-s40: site rebuilt from merged sources (glow v8)"},{"s":"eb3675a6+","t":"2026-11-17T22:59Z","c":"review coop-thin-c r1 #2: merge origin/main b048e495 (kit-display-room r2, jdisp/jshelf only; generated files from main + site rebuilt)"},{"s":"4eac30bc+","t":"2026-11-17T22:57Z","c":"review coop-thin-c r1 #2: her NPC pack resend (F1) listens on any guest seat, not only while the C switch is on: a level drop / build hold …"},{"s":"c7375c0c+","t":"2026-11-17T22:33Z","c":"batch s38a: dudo-blank-r1 2270c4c5 merged onto main 99f3978d; site rebuilt"},{"s":"99f3978d+","t":"2026-11-17T21:07Z","c":"batch s37a: display-shelf-r3rv 41418cd8 merged onto main 4c8568f5; site rebuilt"},{"s":"4c8568f5+","t":"2026-11-17T20:30Z","c":"batch s36a: main 60b0e3bf (display-shelf) merged; jdisp gated on BAL.shelf.ui (=0, room hidden); site rebuilt"}]};
+window.CTM_BI={"s":"7a7bcad8","t":"2026-11-18T02:53Z","c":"avatar-makeup: makeup colour layer baked into every avatar frame at LOD step 0 (KIT_LASTING makeup part); stage makeup/smudge forced to ste…","b":"a7072a036e34","h":[{"s":"af71f94a+","t":"2026-11-18T02:17Z","c":"smudge r16: stage4 + avatar probe tests, options script score fix (look tier by score), FINAL mode"},{"s":"e1f60927+","t":"2026-11-18T02:25Z","c":"result-reason: every result card line says a short why (kitWhy, KIT 7); values left-aligned next to labels"},{"s":"29385ec6+","t":"2026-11-18T02:07Z","c":"greet-stranger: site rebuilt"},{"s":"3b69182e","t":"2026-11-18T01:50Z","c":"hoa-dien r3 onto main 3da5720a (makeup-lux live): hoa-dien (jhd.js + hooks) replayed on the new main, replacing the old stacked branch. Sha…"},{"s":"631a703e","t":"2026-11-18T01:37Z","c":"review staff-cap-fix r6: hire pick refused at the cap gives the silver back (+ staff-cap.js case); site rebuilt"},{"s":"4cdcffa9+","t":"2026-11-18T00:44Z","c":"review looks-s40: site rebuilt from merged sources (glow v8)"},{"s":"eb3675a6+","t":"2026-11-17T22:59Z","c":"review coop-thin-c r1 #2: merge origin/main b048e495 (kit-display-room r2, jdisp/jshelf only; generated files from main + site rebuilt)"},{"s":"4eac30bc+","t":"2026-11-17T22:57Z","c":"review coop-thin-c r1 #2: her NPC pack resend (F1) listens on any guest seat, not only while the C switch is on: a level drop / build hold …"},{"s":"c7375c0c+","t":"2026-11-17T22:33Z","c":"batch s38a: dudo-blank-r1 2270c4c5 merged onto main 99f3978d; site rebuilt"},{"s":"99f3978d+","t":"2026-11-17T21:07Z","c":"batch s37a: display-shelf-r3rv 41418cd8 merged onto main 4c8568f5; site rebuilt"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -33393,7 +33393,7 @@ function kitFxLayers(p,file){if(!p||!file)return"";let h="";const sc=kitScarOf(p
 const kitFile=src=>String(src||"").split("?")[0].split("/").pop();
 /* ---------- AVATAR = ID CARD (owner 17/11 ~18:10Z, OD "Avatar … cái thẻ nhân viên"; review/kit-fx-register) ----------
    EVERY avatar-class frame (pcp tall, span.md / kmini / kfc, list rows, cards, pickers: everything made by pcPort / mdH) shows the BASE PORTRAIT +
-   LASTING marks only (hủy dung scar; plug-in point KIT_LASTING.add for pox scars etc.). NO makeup, NO temporary marks (slap, rash, pallor, poison, ink…).
+   LASTING marks + the MAKEUP colour layer at mirror strength (jtoil toilAvatarMk, owner 18/11 ~09:25Z; plug-in point KIT_LASTING.add). NO temporary marks (slap, rash, pallor, poison, ink…).
    The lasting marks are BAKED with the photo into ONE image (canvas -> blob URL, cached per picture + marks + size, scaled by the browser like any
    photo) — there is no overlay box any more, so no registration error is possible. A person without a lasting mark gets the plain photo (no cost).
    Stage figures + the mirror close-up keep the full look (kitFxLayers / kitFxPut, unchanged). ---------- */
@@ -33409,7 +33409,7 @@ const KIT_BAKE={cache:{},order:[],pend:{},W:{tall:384,sm:192},max:80,
  touch:function(k){const i=this.order.indexOf(k);if(i>=0)this.order.splice(i,1);this.order.push(k)},
  make:function(k,p,url,file,kind){if(this.pend[k])return;this.pend[k]=1;const L=KIT_LASTING.of(p,file);const abs=/^(https?:|blob:|data:)/.test(url)?url:(typeof IMG_U==="function"?IMG_U(url):url);
   const load=src=>new Promise((ok,no)=>{const im=new Image();im.crossOrigin="anonymous";im.decoding="async";im.onload=()=>ok(im);im.onerror=()=>no(0);im.src=src});
-  Promise.all([load(abs),...L.map(l=>load(/^(https?:|blob:|data:)/.test(l.src)?l.src:(typeof IMG_U==="function"?IMG_U(l.src):l.src)))]).then(([ph,...ls])=>{
+  Promise.all([load(abs),...L.map(l=>Promise.resolve(typeof l.src==="function"?l.src():l.src).then(sr=>load(/^(https?:|blob:|data:)/.test(sr)?sr:(typeof IMG_U==="function"?IMG_U(sr):sr))))]).then(([ph,...ls])=>{
    const nw=ph.naturalWidth,nh=ph.naturalHeight,K=Math.min(1,this.W[kind]/nw),W=Math.max(1,Math.round(nw*K)),H=Math.max(1,Math.round(nh*K));const cv=document.createElement("canvas");cv.width=W;cv.height=H;const g=cv.getContext("2d");g.imageSmoothingQuality="high";g.drawImage(ph,0,0,W,H);
    ls.forEach((im,i)=>{const l=L[i],r=l.rect,x=r[0]/100*W,y=r[1]/100*H,w=r[2]/100*W,h=r[3]/100*H;g.save();g.globalAlpha=l.alpha==null?1:l.alpha;g.translate(x+w*l.o[0],y+h*l.o[1]);g.rotate((r[4]||0)*Math.PI/180);g.drawImage(im,-w*l.o[0],-h*l.o[1],w,h);g.restore()});
    cv.toBlob(b=>{delete this.pend[k];if(!b)return;const u=URL.createObjectURL(b);this.cache[k]=u;this.touch(k);while(this.order.length>this.max){const o=this.order.shift(),ou=this.cache[o];delete this.cache[o];setTimeout(()=>{try{URL.revokeObjectURL(ou)}catch(e){}},60000)}
@@ -48188,6 +48188,14 @@ window.toilGlowOn=toilGlowOn;
 function toilFaceLayer(p,file){const lk=toilLookOfP(p);if(!lk)return"";const col=toilColOfP(p);const mk=toilMkLayer(file,lk,col);const src=mk?"":toilMakeupSvg(file,lk,col,false);if(!src&&!mk)return"";
  return (src?`<img class="kmkl kmkl-${lk}" src="${src}" alt="" aria-hidden="true" style="--fleft:0%;--ftop:0%;--fwidth:100%;--fheight:100%">`:"")+mk+(lk==="tuyet"?toilGlowLayer(file,col):"")}
 if(typeof kitFxLayers==="function"){const fx0=kitFxLayers;kitFxLayers=function(p,file){const h=fx0.apply(this,arguments);let m="";try{m=toilFaceLayer(p,file)}catch(e){}return m+h}}
+/* AVATAR MAKEUP (owner 18/11 ~09:25Z + ~02:35Z "Khung avatar là có trang điểm mà", review/avatar-makeup): every avatar-class frame (pcPort / mdH: top bar, side cards, tabs, lists, tall frame)
+   shows the SAME makeup colour layer as the stage at LOD step 0 (mirror strength, no boost), BAKED with the photo by KIT_BAKE (jk2b) like the scar: ONE image, no overlay box, so it cannot
+   drift. The layer is the exact toilMkLayer entry (same canvas, same colours, same fit points) = one source for stage, mirror and avatar. Under every other lasting mark (inserted first). */
+function toilAvatarMk(p,file){try{const lk=toilLookOfP(p);if(!lk||!file||!TOIL_MKS[lk])return null;const v=MK_FIT.get(file);if(!v)return null;const col=toilColOfP(p),base=toilMkBase(file,lk,col);if(!TOIL_MKC[base])toilMkLayer(file,lk,col);const e=TOIL_MKC[base];if(!e)return null;
+ const b=e.box,id="mk"+lk+":"+base.split("").reduce((a,c)=>(a*31+c.charCodeAt(0))>>>0,7);
+ return[{id,src:()=>new Promise(ok=>{if(e.src)return ok(e.src);(e.cbs=e.cbs||[]).push(ok)}),rect:[b[0],b[1],b[2],b[3],0],o:[0,0],alpha:1}]}catch(x){return null}}
+if(window.KIT_LASTING&&KIT_LASTING.add){KIT_LASTING.add({id:"makeup",layers:toilAvatarMk});const mk=KIT_LASTING.list.pop();KIT_LASTING.list.unshift(mk)}
+
 
 /* ================= §60 MAKEUP COLOURS · kitSwatches (owner 15/11 19:05Z, review/mk-colour) =================
    Like modern dress-up / makeup games: the colours she picks at the mirror (phấn mắt, phấn má, son môi, màu mày) show in EXACTLY those colours on
@@ -48277,16 +48285,21 @@ function toilMkPts(v){const P=[];for(let i=0;i<60;i++)P.push([v[2*i]/40,v[2*i+1]
 function toilMkBox(v){const P=toilMkPts(v);let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;P.forEach(([x,y])=>{x0=Math.min(x0,x);x1=Math.max(x1,x);y0=Math.min(y0,y);y1=Math.max(y1,y)});
  const mx=(x1-x0)*.3,my=(y1-y0)*.3;return[x0-mx,y0-my,x1-x0+2*mx,y1-y0+2*my].map(n=>+n.toFixed(3))}
 const TOIL_MKA={};/* key -> [file,look,col]: the size pass (toilLodPass) re-fetches the same layer at another strength step */
-function toilMkLayer(file,look,col,step){const v=MK_FIT.get(file);if(!v||!TOIL_MKS[look])return"";const base=[file,look,col.mat,col.ma,col.son,col.may,look==="vung"?(col.seed|0)+"/"+BAL.toil.vungSm+"/"+BAL.toil.vungSide+"/"+BAL.toil.vungRot+"/"+BAL.toil.vungSmSize:""].join("|"),key=step?base+"|L"+step:base;TOIL_MKA[base]=[file,look,col];
+function toilMkBase(file,look,col){return [file,look,col.mat,col.ma,col.son,col.may,look==="vung"?(col.seed|0)+"/"+BAL.toil.vungSm+"/"+BAL.toil.vungSide+"/"+BAL.toil.vungRot+"/"+BAL.toil.vungSmSize:""].join("|")}
+function toilMkLayer(file,look,col,step){const v=MK_FIT.get(file);if(!v||!TOIL_MKS[look])return"";const base=toilMkBase(file,look,col),key=step?base+"|L"+step:base;TOIL_MKA[base]=[file,look,col];
  let e=TOIL_MKC[key];if(!e){e=TOIL_MKC[key]={box:toilMkBox(v),src:""};TOIL_MKQ.push(key);if(TOIL_MKQ.length>200)delete TOIL_MKC[TOIL_MKQ.shift()];toilMkPaint(file,v,look,col,e,key,step||0)}
  const b=e.box;return `<img class="kmkl kmkc kmkl-${look}" data-mkk="${key}" src="${e.src||TOIL_BLANK}" alt="" aria-hidden="true" style="--fleft:${b[0]}%;--ftop:${b[1]}%;--fwidth:${b[2]}%;--fheight:${b[3]}%">`}
+function toilMkFlush(e){const a=e.cbs;e.cbs=null;if(a)a.forEach(f=>{try{f(e.src)}catch(x){}})}
 function toilMkPaint(file,v,look,col,e,key,step){const im=new Image();im.crossOrigin="anonymous";im.decoding="async";
- im.onload=()=>{try{e.src=toilMkDraw(im,v,look,col,e.box,(function(){try{return toilRow(file)}catch(x){return null}})(),(step||0)/BAL.toil.lod.steps)}catch(x){e.src=TOIL_BLANK}document.querySelectorAll("img.kmkc").forEach(x=>{if(x.dataset.mkk===key)x.src=e.src})};
- im.onerror=()=>{e.src=TOIL_BLANK};im.src=IMG_U("https://ctm-img.victoria-tntt.workers.dev/img/"+file)}
+ im.onload=()=>{try{e.src=toilMkDraw(im,v,look,col,e.box,(function(){try{return toilRow(file)}catch(x){return null}})(),(step||0)/BAL.toil.lod.steps)}catch(x){e.src=TOIL_BLANK}document.querySelectorAll("img.kmkc").forEach(x=>{if(x.dataset.mkk===key)x.src=e.src});toilMkFlush(e)};
+ im.onerror=()=>{e.src=TOIL_BLANK;toilMkFlush(e)};im.src=IMG_U("https://ctm-img.victoria-tntt.workers.dev/img/"+file)}
 /* size-aware makeup: one pass over every colour layer on screen; its face width in px (layer box = face + 30 % each side) picks the strength step, so every renderer (stage figure, avatar frame, close-up) gets the same curve */
 function toilLodStep(px){const L=BAL.toil.lod;if(!(px>0)||px>=L.fullAt)return 0;const t=Math.min(1,(L.fullAt-px)/(L.fullAt-L.maxAt));return Math.round(t*L.steps)}
+/* STAGE = MIRROR STRENGTH (owner 18/11 ~09:25Z, avatar-makeup): a face layer on the room stage / event-dialog figure is always LOD step 0 (the approved mirror look, no boost); every other place keeps the size curve */
+function toilStageEl(im){try{return!!(im&&im.closest&&im.closest("#stage,.kesfi")&&!im.closest(".kfzoom-i"))}catch(e){return false}}
+window.toilStageEl=toilStageEl;
 let toilLodRaf=0;
-function toilLodPass(){toilLodRaf=0;try{document.querySelectorAll("img.kmkc").forEach(im=>{const cur=im.dataset.mkk||"";const base=cur.replace(/\|L\d+$/,""),A=TOIL_MKA[base];if(!A)return;const w=im.getBoundingClientRect().width;if(!(w>0))return;const st=toilLodStep(w/1.6),have=+((/\|L(\d+)$/.exec(cur)||[])[1]||0);if(st===have)return;
+function toilLodPass(){toilLodRaf=0;try{document.querySelectorAll("img.kmkc").forEach(im=>{const cur=im.dataset.mkk||"";const base=cur.replace(/\|L\d+$/,""),A=TOIL_MKA[base];if(!A)return;const w=im.getBoundingClientRect().width;if(!(w>0))return;const st=toilStageEl(im)?0:toilLodStep(w/1.6),have=+((/\|L(\d+)$/.exec(cur)||[])[1]||0);if(st===have)return;
  const html=toilMkLayer(A[0],A[1],A[2],st);const key=st?base+"|L"+st:base,e=TOIL_MKC[key];if(!html||!e)return;im.dataset.mkk=key;if(e.src)im.src=e.src})}catch(x){}}
 function toilLodSched(){if(!toilLodRaf)toilLodRaf=requestAnimationFrame(toilLodPass)}
 if(typeof MutationObserver==="function"&&typeof document!=="undefined"){const go=()=>{try{new MutationObserver(toilLodSched).observe(document.body,{childList:true,subtree:true});window.addEventListener("resize",toilLodSched)}catch(e){}};if(document.body)go();else document.addEventListener("DOMContentLoaded",go)}
@@ -66209,7 +66222,7 @@ function lkLodMul(lod,cue){const L=window.BAL&&BAL.toil&&BAL.toil.lod;if(!L||!lo
 /* face px -> step: 0..steps = small (the makeup layer's own toilLodStep), 10+k = large face (k 1..big.steps, BAL.looks.smuFx.big), 0 = the approved strength in between */
 function lkSmuStep(px){const s=window.toilLodStep?toilLodStep(px):0;if(s>0)return s;const B=lkB().smuFx.big;if(!(px>B.at))return 0;return 10+Math.min(B.steps,Math.max(1,Math.round(Math.min(1,(px-B.at)/(B.max-B.at))*B.steps)))}
 function lkLodPass(){try{if(typeof toilLodStep!=="function")return;document.querySelectorAll("img.klk-smu").forEach(im=>{const cur=im.dataset.lsk||"",base=cur.replace(/\|L\d+$/,""),A=LK_SMA[base];if(!A)return;const w=im.getBoundingClientRect().width;if(!(w>0))return;
-  const st=lkSmuStep(w/1.6),have=+((/\|L(\d+)$/.exec(cur)||[])[1]||0);if(st===have)return;const r=lkSmuLayer(A[0],A[1],A[2],A[3],st);if(!r)return;im.dataset.lsk=r.key;if(r.e.src)im.src=r.e.src})}catch(x){}}
+  const st=window.toilStageEl&&toilStageEl(im)?0:lkSmuStep(w/1.6),have=+((/\|L(\d+)$/.exec(cur)||[])[1]||0);if(st===have)return;const r=lkSmuLayer(A[0],A[1],A[2],A[3],st);if(!r)return;im.dataset.lsk=r.key;if(r.e.src)im.src=r.e.src})}catch(x){}}
 if(typeof toilLodPass==="function"){const tp0=toilLodPass;toilLodPass=function(){tp0();lkLodPass()};window.toilLodPass=toilLodPass}
 function lkSmuSeed(file,cols){let h=cols?cols.seed|0:0;for(let i=0;i<file.length;i++)h=(Math.imul(h,31)+file.charCodeAt(i))|0;return h}
 function lkSmuDraw(im,v,lv,why,cols,box,seed,lod,big){lod=lod||0;big=big||0;const W=im.naturalWidth,H=im.naturalHeight,F=lkB().smuFx;
@@ -67448,7 +67461,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="cca6eb936848";window.CTM_BUILD=BUILD;
+const BUILD="a7072a036e34";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
