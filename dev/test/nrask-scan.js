@@ -4,6 +4,7 @@
      (jnroadm.js), with n inside BAL.nroad.helpN;
    - coverage: an origin (or the men templates) that has any entry has ALL its help chapters;
    - every ask: kind in BAL.nroad.kinds (no «bac»), h + two options, each with a label and a loss line; ≥ 2 asks per chapter;
+   - no time word against the card deadline «hạn N tuần» (fixed dates, future spans shorter than it; fix 3, all files);
    - every chapter keeps ≥ 1 ask that does not name {B} (no real rival → nrAskPick drops {B} asks);
    - variety: no sentence of an ask is shared with another ask; no option label or loss line is used twice;
    - slots only {me} {Me} {call} {Call} {he} {B}; no typed pronoun of address in the NPC's words (VANPHONG §2: tỷ / muội / bổn cung … come
@@ -36,6 +37,9 @@ for(const f of files){const src=fs.readFileSync(path.join(B,f),'utf8');const one
  per[f]=Object.keys(one.window.NRASK||{});for(const k of per[f]){if(owner[k])fail(`${f}: key ${k} already defined in ${owner[k]}`,k);else owner[k]=f}
  try{vm.runInContext(src,sb,{filename:f})}catch(e){}}
 const NR=sb.window.NRASK||sb.NRASK||{};
+/* time words (VANPHONG / card deadline): q1c's rule + đêm mai, «Mai …» at a sentence start, «N ngày/hôm nữa», mấy hôm nữa, cuối tháng,
+   trong một/hai/ba ngày/tháng. Kept fine: «trước khi …», «đêm hẹn», past spans, spans longer than the deadline («ba tháng nữa») */
+const TIME=/(ngày mai|đêm nay|đêm mai|sáng mai|tối nay|tối mai|(?<!mấy )hôm nay|mồng|rằm|tết|ngày giỗ|cuối tháng|(^|[.!?:]\s*)mai (?=\p{L})|[^\s]+ (ngày|hôm) nữa|(đợi|ở được|trong|còn|hạn) (một|hai|ba|bốn|năm|sáu|mười|vài|mấy) (ngày|hôm|tuần|tháng|năm)|(^|[^\p{L}])(hai|ba|bốn|năm|mười) ngày(?![\p{L}]))/iu;
 const SLOT=new Set(['me','Me','call','Call','he','B']);
 const BAN=[/%/,/\d/,/Chắc chắn/i,/[«»"…]/,/\b(OK|buff|stat|level|combo|random|bot|test|game|click|tab|slot)\b/i,
  /(điểm số|chỉ số|cơ hội|kiểm tra|xét nghiệm|tải lại|cài đặt|dữ liệu|phiên bản|hệ thống)/i];
@@ -58,6 +62,9 @@ for(const id of Object.keys(NR)){const m=id.match(/^(.+)_(\d+)$/);const road=m&&
   const all=[a.h,a.c||''].concat(...a.o);
   for(const s of all){for(const t of s.matchAll(/\{(\w+)\}/g))if(!SLOT.has(t[1]))fail(w+': unknown slot {'+t[1]+'}',s);
    for(const r of BAN)if(r.test(s))fail(w+': VANPHONG banned '+r,s)}
+  /* fix 3 (review E7r3, family of q1c round-2 fix 2, moved here from nrask-m-scan so it covers EVERY jnrask*.js): the j72 card prints the
+     deadline «hạn N tuần» (BAL.nroad.dl) — no fixed date and no future span shorter than it in h, step title, labels, loss lines */
+  for(const s of all)if(TIME.test(s))fail(w+': time word «'+s.match(TIME)[0].trim()+'» vs the card deadline',s);
   if(PRON.test(a.h))fail(w+': typed address pronoun in the ask (use {me}/{call})',a.h.match(PRON)[0]);
   if(a.k==='do'&&!/\{B\}/.test(a.h))fail(w+': a «do» ask must name its target {B} (the stock option hits {B})',a.h);
   if(a.h.length>260)fail(w+': ask too long for the card',a.h.length);
