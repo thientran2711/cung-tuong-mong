@@ -17,16 +17,16 @@
       Quý phi, or he fails and she dies; "hận" road / her son heir → the existing succession flow (j3 / jmort / j99succ) runs unchanged.
    5. NPCs: same gates, same odds, same consequences (pqNpc in npcMonthly, host only), weighted by persW(v,"pgift"), one try per BAL.pq.npc.cd months
       in the whole palace (no runaway regicide). */
-Object.assign(BAL,{pq:{khac:2,duc:12,min:3,max:60,
+Object.assign(BAL,{pq:{khac:2,duc:12,min:3,max:60,trustLo:-8,
  gate:{sung:15,an:10,th:-20,harsh:["nghiem","danghi","quyen"]},
- guard:{taster:22,twoPot:10,touch:14,alert:15,alertMo:6},
+ guard:{taster:12,twoPot:6,touch:8,alert:15,alertMo:6},
  help:{slow:12,vg:12,maid:6},
- caught:{base:60,tam:5,lo:20,hi:90},
+ caught:{base:50,tam:5,lo:20,hi:90},
  inq:{base:40,fast:20,slow:-20,tam:4,cover:25,mo:6,lo:5,hi:90},
  slowCut:6,
  vg:{base:45,tinh:2,pow:5,pw0:40,lo:15,hi:85},
  clan:{pow:30,danh:8},
- npc:{try:4,cd:24}}});
+ npc:{try:12,cd:24}}});
 const PQ_K=["hacdinh","docngam"];
 const PQ_N={emp:"Hoàng thượng",th:"Thái hậu"};
 function pqS(){if(!S.pq)S.pq={alert:0,cd:0,n:{}};S.pq.n=S.pq.n||{};return S.pq}
@@ -51,15 +51,16 @@ function pqMotive(a,who){const G=BAL.pq.gate;
 function pqGuard(a,who,k){const G=BAL.pq.guard,H=BAL.pq.help;const L=[["Thái giám nếm thử mọi món",-G.taster],["Ngự thiện phòng kiểm hai lượt",-G.twoPot],["Đũa bạc chạm thử từng món",-G.touch]];
  if(k==="docngam")L.push(["Độc ngấm chậm, người nếm chưa thấy gì",H.slow]);
  if(pqS().alert>0)L.push(["Ngự thiện phòng còn đang tra xét",-G.alert]);
- const vg=who==="emp"&&pqVg(a);if(vg)L.push([`Người của ${vg.name} trong Ngự thiện phòng`,H.vg]);
+ const vg=who==="emp"&&pqVg(a);if(vg)L.push([`Người của ${pqMN(vg)} trong Ngự thiện phòng`,H.vg]);
  if(a.maid&&(a.maid.loyal||0)>=BAL.loy.trust)L.push([`Cung nữ tâm phúc của ${pgNm(a)} lo đường đưa món`,H.maid]);return L}
 /* the one formula (her card, the roll, every NPC): o = success, cp = a failed try traced to the doer, inq = a success traced later */
-function pqOdds(a,who,e,k,cover){const P=BAL.pg,Q=BAL.pq;const tc=Math.round((a.tamco||0)/4);const tr=Math.round((who==="emp"?(a.sung||0):pqThReg(a))/4);const gr=pgGrade(e)*P.grade;
+function pqOdds(a,who,e,k,cover){const P=BAL.pg,Q=BAL.pq;const tc=Math.round((a.tamco||0)/4);const tr=Math.max(Q.trustLo,Math.round((who==="emp"?(a.sung||0):pqThReg(a))/4));const gr=pgGrade(e)*P.grade;
  const F=[[`Tâm cơ ${pgNm(a)} ${a.tamco|0}`,tc],[`${PQ_N[who]} ${tr>=0?"tin":"ngờ"} ${pgNm(a)}`,tr],[e&&e.wk?`Món ${WTIER[e.wk.ti|0]} che vị`:`${e&&IT[e.k]?itm(e.k).n:"Món"} che vị`,gr]].concat(pqGuard(a,who,k));
  const o=cl(Math.round(P.base+F.reduce((s,x)=>s+x[1],0)),Q.min,Q.max);
  const cp=cl(Q.caught.base+(pqS().alert>0?Q.guard.alert:0)-Math.round((a.tamco||0)/Q.caught.tam),Q.caught.lo,Q.caught.hi);
  return{o,F,cp,inq:pqInqO(a,k,cover)}}
 function pqInqO(a,k,cover){const I=BAL.pq.inq;return cl(I.base+(k==="hacdinh"?I.fast:I.slow)-Math.round((a.tamco||0)/I.tam)-(cover?I.cover:0),I.lo,I.hi)}
+function pqMN(m){try{return typeof succMN==="function"?succMN(m):m.name}catch(e){return m.name}}
 function pqWho(a){return a===S?"ngươi":`${rkName(a)} ${a.name}`}
 /* the doer's house falls (j55 houses): power down, the house's other consorts lose Danh */
 function pqClan(p){const Q=BAL.pq.clan;let c="";try{c=tdHouse(p)||""}catch(e){}
@@ -68,7 +69,7 @@ function pqClan(p){const Q=BAL.pq.clan;let c="";try{c=tdHouse(p)||""}catch(e){}
  return `Nhà ${c} bị liên lụy: cha ${p===S?"ngươi":"nàng"} bị cách chức, thế lực nhà ${c} -${Q.pow}, các phi tần nhà ${c} Danh -${Q.danh}. `}
 /* treason found: the doer dies */
 function pqDoom(a,who,txt){pqCount("doom_"+who);const cl0=pqClan(a);
- if(a===S){S.pqWhy=cl0;over("Ban chết",`${txt} Tội mưu hại ${PQ_N[who]}: ban lụa trắng. ${cl0}`,`Ban chết vì mưu hại ${PQ_N[who]}`,false);return ""}
+ if(a===S){over("Ban chết",`${txt} Tội mưu hại ${PQ_N[who]}: ban lụa trắng. ${cl0}`,`Ban chết vì mưu hại ${PQ_N[who]}`,false);return ""}
  let ev="";try{ev=typeof mortKill==="function"?mortKill(a,`bị ban chết vì mưu hại ${PQ_N[who]}`):(a.alive=false,"")}catch(e){a.alive=false}
  try{newsAdd(a,"poison",`${rkName(a)} ${a.name} bị ban chết vì mưu hại ${PQ_N[who]}.`,true)}catch(e){}
  return `${txt} ${ev||`<span class="r">${a.name} bị ban chết.</span> `}${cl0}`}
@@ -103,8 +104,8 @@ function pqEmpEnd(D,ev){const a=pqDoer(D);if(!a)return undefined;const Q=BAL.pq;
  if(a!==S||!vg||heir)return undefined;
  const pw=(()=>{try{const c=tdHouse(S);return c?tdPow(c):Q.vg.pw0}catch(e){return Q.vg.pw0}})();
  const o2=cl(Math.round(Q.vg.base+((vg.tinh||0)-BAL.tinhLv.ally)/Q.vg.tinh+(pw-Q.vg.pw0)/Q.vg.pow),Q.vg.lo,Q.vg.hi);pqCount("vg_try");if(ev)log(ev);
- if(roll(o2)){pqCount("vg_win");return over("Tân đế đăng cơ",`${pre}Triều đình rối ren mấy ngày, rồi ${vg.name} đem quân vào kinh, được tôn lên ngôi (khả năng ${chanceLo(o2)}). Tân đế đón ngươi vào hậu cung mới, phong Quý phi; chuyện cũ chôn theo tiên đế.`,"Vương gia đăng cơ, phong Quý phi",true)}
- pqCount("vg_lose");return pqDoom(S,"emp",`${pre}Triều thần lập thân vương khác; ${vg.name} mưu đoạt ngôi không thành (khả năng ${chanceLo(o2)}), bị giam vào Tông nhân phủ, khai ra ngươi.`)}
+ if(roll(o2)){pqCount("vg_win");return over("Tân đế đăng cơ",`${pre}Triều đình rối ren mấy ngày, rồi ${pqMN(vg)} đem quân vào kinh, được tôn lên ngôi (khả năng ${chanceLo(o2)}). Tân đế đón ngươi vào hậu cung mới, phong Quý phi; chuyện cũ chôn theo tiên đế.`,"Vương gia đăng cơ, phong Quý phi",true)}
+ pqCount("vg_lose");return pqDoom(S,"emp",`${pre}Triều thần lập thân vương khác; ${pqMN(vg)} mưu đoạt ngôi không thành (khả năng ${chanceLo(o2)}), bị giam vào Tông nhân phủ, khai ra ngươi.`)}
 /* monthly (host only): the kitchens calm down, the Thái hậu inquest runs its window, a slow poison that reached its end opens the inquest */
 function pqMonth(){const Z=pqS();let ev="";if(Z.alert>0)Z.alert--;if(Z.cd>0)Z.cd--;
  if(Z.slow&&Z.slow.who==="th"&&S.thDead&&!Z.inq){Z.inq=Object.assign(Z.slow,{mo:BAL.pq.inq.mo,o:pqInqO(pqDoer(Z.slow)||S,"docngam",false)});Z.slow=null}
@@ -133,7 +134,7 @@ function pqLine(who,k,X){const P=PGX[k],Q=BAL.pq;const won=k==="hacdinh"?`${PQ_N
   if(R.length){const i=d.o.findIndex(o=>o&&o.n==="Thôi");d.o.splice(i<0?d.o.length:i,0,...R)}}catch(x){console.error("pq pick",x)}return d}})();
 /* the gift-dialog row text follows (jpoison pgRow) */
 (function(){if(typeof pgRow!=="function")return;const r0=pgRow;pgRow=function(ix){const o=r0.apply(this,arguments);try{o.kgift="(chọn người nhận và thứ độc; Hoàng thượng, Thái hậu chỉ khi có nguyên cớ)"}catch(e){}return o}})();
-/* the death card names the house that fell with her */
-(function(){if(typeof deathChain!=="function")return;const d0=deathChain;deathChain=function(f){const L=d0.apply(this,arguments);try{if(/mưu hại (Hoàng thượng|Thái hậu)/.test(String(f||""))){L.splice(0,L.length>1?2:L.length,"Món có độc dâng lên bị Tông nhân phủ lần ra.","Phòng được: chỉ ra tay khi Tâm cơ cao, chọn độc ngấm chậm, có người trong Ngự thiện phòng, đợi Ngự thiện phòng thôi tra xét.");if(S.pqWhy)L.push(String(S.pqWhy).trim())}}catch(e){}return L}})();
+/* the death card: cause + how it could have been prevented (the house line stays in the story text: one fact, one place) */
+(function(){if(typeof deathChain!=="function")return;const d0=deathChain;deathChain=function(f){const L=d0.apply(this,arguments);try{if(/mưu hại (Hoàng thượng|Thái hậu)/.test(String(f||""))){L.splice(0,L.length>1?2:L.length,"Món có độc dâng lên bị Tông nhân phủ lần ra.","Phòng được: chỉ ra tay khi Tâm cơ cao, chọn độc ngấm chậm, có người trong Ngự thiện phòng, đợi Ngự thiện phòng thôi tra xét.")}}catch(e){}return L}})();
 try{KIT_GLOSS["Mưu hại Hoàng thượng"]=`Chỉ mở khi có nguyên cớ: ngươi hận ngài (Sủng từ ${BAL.pq.gate.sung} trở xuống, Ân tình từ ${BAL.pq.gate.an} trở xuống) hoặc tư tình sâu với Vương gia. Món dâng lên qua người nếm, hai lượt kiểm và đũa bạc. Bị lần ra là ban chết, nhà mẹ đẻ liên lụy.`}catch(e){}
 window.pqOdds=pqOdds;window.pqGive=pqGive;window.pqMotive=pqMotive;window.pqNpc=pqNpc;window.pqMonth=pqMonth;
