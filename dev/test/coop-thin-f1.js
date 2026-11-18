@@ -1,0 +1,118 @@
+/* Co-op thin guest, part F1 (review/coop-thin-f1): her Hành động acts are intents run on the host. Two Playwright clients in one room,
+   host Fold 686x880 + guest iPad 1180x820 (swap=1: iPad hosts, Fold joins). Level 6 (default).
+   usage: python3 dev/build/assemble.py && node dev/test/coop-thin-f1.js <workerURL> [level=6] [swap=0]   (TRIP=1, OUT=<dir>, KINDS=a,b, NOACT=1)
+   F0 level on · F1 every ACT kind from the guest (script over the ACT table; before/after table): runAct returns "" on her phone, her world
+   untouched, no NPC op / res sent, the host ran it ONCE in her context, the answer back in one view, the NPC + her person the same on both
+   phones · F2 acts on the friend both directions (pet care / steal, gift, steal an item, harm a kid) · F8 one switch · no page errors. */
+const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),path=require('path');
+const WURL=process.argv[2]||'https://ctm-coop.victoria-tntt.workers.dev';const LVL=+(process.argv[3]||6);const SWAP=+(process.argv[4]||0);
+const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,c?300:2500):''))};
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const TRIPSRC=process.env.TRIP?fs.readFileSync(path.join(__dirname,'coop-thin-trip.js'),'utf8'):null;
+async function mk(b,name,vp,want){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:process.env.SHOTS?2:1,reducedMotion:'reduce'});await serve(ctx);
+  await ctx.addInitScript(([u,w])=>{window.COOP_URL=u;if(w)try{localStorage.setItem('ctm-thin',String(w))}catch(e){}
+   window.__co=()=>{const c=window.COOP;if(!c)return{};return{code:c.code,seat:c.seat,world:typeof S!=='undefined'&&!!S&&!!(window.COOPW&&COOPW.on)}}},[WURL,want]);
+  if(TRIPSRC&&name==='guest')await ctx.addInitScript(TRIPSRC);
+  const p=await ctx.newPage();p.setDefaultTimeout(90000);const o={name,ctx,p,errs:[]};
+  p.on('pageerror',e=>o.errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon|fonts\.gstatic|CORS/.test(m.text()))o.errs.push('console: '+m.text().slice(0,300))});return o}
+const tapText=async(o,re,ms=8000)=>{const t0=Date.now();while(Date.now()-t0<ms){const r=await o.p.evaluate(src=>{const R=new RegExp(src);
+  const b=[...document.querySelectorAll('button')].find(b=>b.offsetParent!==null&&!b.disabled&&R.test(b.textContent.trim()));if(b){b.click();return true}return false},re.source);if(r)return true;await sleep(250)}return false};
+const clear=(()=>{const t=fs.readFileSync(path.join(__dirname,'coop-e2e.js'),'utf8');const i=t.indexOf('async function clear(');const j=t.indexOf("return'many'}",i)+13;return eval('('+t.slice(i,j)+')')})();
+const until=async(o,fn,arg,ms=40000)=>{try{await o.p.waitForFunction(fn,arg,{timeout:ms});return true}catch(e){return false}};
+const press1=o=>o.p.evaluate(()=>{const b=document.getElementById('next');if(!b||b.disabled)return false;b.click();return true});
+async function press(o,ms=20000){const t0=Date.now();while(Date.now()-t0<ms){if(await press1(o))return true;await clear(o);await sleep(300)}return false}
+async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}const w0=await A.p.evaluate(()=>COOP.state.week);
+ for(let g=0;g<12;g++){const a=await A.p.evaluate(()=>S.buoi||0),c=await B.p.evaluate(()=>S.buoi||0);await press(A);await press(B);
+  const t0=Date.now();while(Date.now()-t0<30000){await clear(A);await clear(B);if(await A.p.evaluate(w=>COOP.state.week>w,w0)&&await B.p.evaluate(w=>COOP.state.week>w,w0))break;if(await A.p.evaluate(x=>(S.buoi||0)!==x,a)&&await B.p.evaluate(x=>(S.buoi||0)!==x,c))break;await sleep(400)}
+  if(await A.p.evaluate(w=>COOP.state.week>w&&!COOPW.pend,w0)&&await B.p.evaluate(w=>COOP.state.week>w&&!COOPW.pend,w0))break}
+ const okw=await A.p.evaluate(w=>COOP.state.week===w+1,w0)&&await B.p.evaluate(w=>COOP.state.week===w+1,w0);ok(okw,tag+': week merged once',okw?undefined:[await A.p.evaluate(()=>({w:COOP.state.week,b:S.buoi,pend:COOPW.pend,sent:COOPW.sent,Q:Q.map(q=>q.t).slice(0,3),dis:document.getElementById('next').disabled,nt:document.getElementById('next').textContent})),await B.p.evaluate(()=>({w:COOP.state.week,b:S.buoi,pend:COOPW.pend,sent:COOPW.sent,Q:Q.map(q=>q.t).slice(0,3),dis:document.getElementById('next').disabled,nt:document.getElementById('next').textContent,log:COOPW.thin.C.log.slice(-5),modal:(document.getElementById('modal')||{}).hidden,q0:Q[0]&&Object.keys(Q[0]).join(','),q0p:Q[0]&&(Q[0].pid||Q[0].ev||''),mg:!!S.mg,km:document.querySelectorAll('.kmov').length,fr:COOP.frozen,cy:COOPW.cyHold,dead:S.dead}))]);await sleep(1500);return okw}
+(async()=>{const b=await chromium.launch(/127\.0\.0\.1|localhost/.test(WURL)?{args:['--disable-features=BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights,PrivateNetworkAccessRespectPreflightResults,LocalNetworkAccessChecks']}:{});
+ const FOLD=process.env.SHOTS?[755,1000]:[686,880],IPAD=[1180,820];/* SHOTS=<dir outside git>: the owner's devices Fold 755x1000@2 + iPad 1180x820@2 */
+ const H=await mk(b,'host',SWAP?IPAD:FOLD,LVL),G=await mk(b,'guest',SWAP?FOLD:IPAD,0);
+ await H.p.goto(BASE);await H.p.waitForTimeout(3000);await tapText(H,/^(Chơi cùng bạn|Cùng hảo hữu)/);await H.p.waitForTimeout(500);await tapText(H,/^(Mời bạn|Mời hảo hữu)/);
+ await until(H,()=>window.COOP&&COOP.code&&COOP.seat==='a');const code=await H.p.evaluate(()=>COOP.code);console.log('room',code,'level',LVL,'swap',SWAP);
+ await G.p.goto(BASE+'?room='+code);await G.p.waitForTimeout(3000);await tapText(G,/^(Vào phòng|Tiếp tục)/,4000);
+ ok(await until(G,()=>window.COOP&&COOP.seat==='b'&&!COOP.frozen,null,60000),'guest joined seat b');
+ const inW=async()=>{const t0=Date.now();while(Date.now()-t0<150000){await clear(H);await clear(G);const a=await H.p.evaluate(()=>__co().world&&rivals.some(v=>v.coop)),c=await G.p.evaluate(()=>__co().world&&rivals.some(v=>v.coop));if(a&&c)return true;await sleep(500)}return false};
+ await inW();
+ for(const o of [H,G])await o.p.evaluate(()=>{try{if(BAL.coopTm)BAL.coopTm.buoiMs=600000}catch(e){}if(S.srv)S.srv.risen=1;if(S.kc)S.kc.inPal=1;S.rank=3;S.sung=Math.max(S.sung||0,40);S.kpWarn=1;render()});
+ if(!(await until(H,()=>!!COOPW.friend(),null,20000)&&await until(G,()=>!!COOPW.friend(),null,20000)))await week(H,G,'setup');
+ const both=async f=>[await H.p.evaluate(f),await G.p.evaluate(f)];
+ ok(await until(G,lv=>COOPW.thin.lvl>=lv&&!!COOPW.thin.view&&COOPW.thin.C.isLens(rivals),LVL,40000),'F0 level on, the guest NPC list is the lens',await both(()=>[COOPW.thin.lvl,COOPW.thin.C.isLens(rivals)]));
+ for(let i=0;i<3;i++){await clear(H);await clear(G);await sleep(300)}
+ /* settle: the host's view of this moment has arrived */
+ const sync=async(ms=15000)=>{const t0=Date.now();while(Date.now()-t0<ms){await H.p.evaluate(()=>{try{COOPW.thin.flush()}catch(e){}});await sleep(500);
+   const [hv,gv]=[await H.p.evaluate(()=>COOPW.thin.hv),await G.p.evaluate(()=>COOPW.thin.view&&COOPW.thin.view.v)];if(hv===gv)return true}return false};
+ const STAGE={musk:{h:'t.preg=3;t.hidden=0'},catswap:{h:'t.preg=7;t.hidden=0;delete t.catplot'},
+  kpoison:{h:"t.kids=(t.kids||[]).concat([mkKid('f',4)])"},pond:{h:"t.kids=(t.kids||[]).concat([mkKid('f',4)])"},kframe:{h:"t.kids=(t.kids||[]).concat([mkKid('m',8)])"},
+  vp:{h:"const k=Object.keys(IT).find(k=>IT[k].sl&&itm(k).sl&&itm(k).rk>rkOf(t)&&!itm(k).nt);t.inv=(t.inv||[]).concat([{k}]);wear(t,t.inv.length-1)",g:"S.wdSeen=S.wdSeen||{};const st=wdStatus(t);S.wdSeen[wdKey(t)]={st:st&&st!=='ok'?st:'over',w:wk(),it:wdCur(t)}"},plant:{},
+  takeaway:{h:"t.rank=Math.min(t.rank||0,1);t.kids=(t.kids||[]).concat([mkKid('f',2)])"},phatquy:{h:'t.rank=0;delete t.pen'},
+  accuse:{h:'t.ev=9'},tocao:{h:'t.schemes=1;t.ev=3'},expose:{h:'t.scandal=1;t.ev=5'},trinhth:{h:'t.ev=3'},uyhiep:{h:'t.ev=3;t.bac=Math.max(t.bac||0,50)'},banphe:{h:'t.ev=3'},tieuhuy:{h:'t.ev=3'},
+  xinhh:{h:'const q=rivals[0];q.queen=true;q.alive=true;q.out=0;q.rel=80;t.rank=Math.max(t.rank||0,1)'},trinhhh:{h:'const q=rivals[0];q.queen=true;q.alive=true;q.out=0;t.ev=4'},
+  tat:{h:'t.rank=Math.min(t.rank||0,1);delete t.slap',g:"S.place='vuon';S.where=S.where||{};S.where[t.id]='vuon'"},trip:{g:"S.place='vuon';S.where=S.where||{};S.where[t.id]='vuon'"},pushp:{g:"S.place='vuon';S.where=S.where||{};S.where[t.id]='vuon'"},
+  steal:{g:'S.tonight=t;delete S.ntTry;delete S.ntk'},road:{g:'S.tonight=t;delete S.ntTry;delete S.ntk'},bribel:{g:'if(!S.maid&&S.staff&&S.staff[0])S.maid=S.staff[0];if(S.maid){S.maid.loyal=60;delete S.maid.spyFor}',h:"if(!t.maid){const o=rivals.find(x=>x&&x.maid&&x!==t&&!x.coop);if(o)t.maid=Object.assign(JSON.parse(JSON.stringify(o.maid)),{sid:800+t.id})}"},
+  laydo:{h:"const k=Object.keys(IT).find(k=>{const e={k};return loOk(e)});t.inv=(t.inv||[]).concat([{k}])"},laydol:{h:"const k=Object.keys(IT).find(k=>{const e={k};return loOk(e)});t.inv=(t.inv||[]).concat([{k}])",g:'if(S.maid){S.maid.loyal=60;delete S.maid.spyFor}'},
+  blockf:{h:'delete t.block;const v=rivals.find(x=>x&&x!==t&&!x.coop&&x.alive!==false&&!x.out&&x.id<900);if(v)v.rel=95'},phonghoa:{h:"t.out=0;t.inv=(t.inv||[]).concat([{k:'tranhco'}])"},
+  thaopet:{h:"t.pets=[{t:Object.keys(PET)[0],from:'',src:'',care:80,at:tsbWk()}]"},petcare:{h:"t.pets=[{t:Object.keys(PET)[0],from:'',src:'',care:80,at:tsbWk()}]"},petsteal:{h:"t.pets=[{t:Object.keys(PET)[0],from:'',src:'',care:80,at:tsbWk()}]"}};
+ /* F1: every ACT kind on an NPC, from the guest: never run on her phone, run once on the host in her context, back to her in one view */
+ await G.p.evaluate(()=>{S.inv=S.inv||[];for(const k of ['yensao','yensao','yensao','hacdinh','hacdinh'])S.inv.push({k});if(S.maid){S.maid.loyal=60;delete S.maid.spyFor}});
+ const kinds=process.env.NOACT?[]:(await G.p.evaluate(()=>Object.keys(ACT))).filter(k=>!process.env.KINDS||process.env.KINDS.split(',').includes(k));const table=[];let nAct=0,nOk=0;
+ const npcOf=(o,id)=>o.p.evaluate(id=>{const v=rivals.find(x=>x&&x.id===id&&!x.coop);return v?JSON.parse(JSON.stringify(v,(k,x)=>k==='hh'?undefined:x)):null},id);
+ const herS=o=>o.p.evaluate(()=>({bac:S.bac,danh:S.danh,sung:S.sung,duc:S.duc,suc:S.suc,tamco:S.tamco,inv:(S.inv||[]).length,log:String((S.logs||[])[0]||'').replace(/<[^>]+>/g,'').slice(0,120)}));
+ const hostHer=()=>H.p.evaluate(()=>{const B=COOPW.thin.seatOf('b');const s=B&&B.S||{};return {bac:s.bac,danh:s.danh,sung:s.sung,duc:s.duc,suc:s.suc,tamco:s.tamco,inv:(s.inv||[]).length,log:String((s.logs||[])[0]||'').replace(/<[^>]+>/g,'').slice(0,120)}});
+ const dd=(B,A2)=>{const o=[];const d=(x,y,p)=>{if(JSON.stringify(x)===JSON.stringify(y))return;if(x&&y&&typeof x==='object'&&typeof y==='object'&&!Array.isArray(x)&&!Array.isArray(y)){for(const f of new Set([...Object.keys(x),...Object.keys(y)]))d(x[f],y[f],p+'.'+f);return}o.push(p)};d(B,A2,'');return o};
+ for(const k of kinds){await G.p.evaluate(()=>{Q.length=0;S.mg=null;S.confined=0;S.rank=Math.max(S.rank||0,4);S.bac=Math.max(S.bac||0,5000);S.suc=Math.max(S.suc||0,90);S.dead=false;try{closeModal()}catch(e){}});await H.p.evaluate(()=>{Q.length=0;S.mg=null;try{closeModal()}catch(e){}});
+  await sync();
+  let st=null;const has=await G.p.evaluate(k=>{const A=ACT[k];return rivals.some(v=>v&&!v.coop&&v.alive!==false&&!v.out&&!(typeof sameHouse==='function'&&sameHouse(S,v))&&(()=>{try{return !A.ok||A.ok(S,v)}catch(e){return false}})())},k);
+  if(!has&&STAGE[k]){const pk=await G.p.evaluate(()=>{const q=rivals[0];return (rivals.filter(v=>v&&!v.coop&&v!==q&&v.alive!==false&&!v.out&&!(typeof sameHouse==='function'&&sameHouse(S,v))&&!v.queen).sort((a,b)=>(a.rank||0)-(b.rank||0))[0]||{}).id},null);
+   if(pk!=null){const sg=STAGE[k];if(sg.h)st=await H.p.evaluate(([id,src])=>{try{return COOPW.thin.withSeat('b',()=>{const t=rivals.find(v=>v&&v.id===id&&!v.coop);if(!t)return 'gone';(0,eval)('(function(t){'+src+'})')(t);return 'ok'})}catch(e){return 'EXC '+e.message}},[pk,sg.h]);
+    await H.p.evaluate(()=>{try{COOPW.thin.flush()}catch(e){}});await sync();
+    if(sg.g)await G.p.evaluate(([id,src])=>{const t=rivals.find(v=>v&&v.id===id);(0,eval)('(function(t){'+src+'})')(t)},[pk,sg.g]);st={id:pk,h:st}}}
+  /* pick the target on her phone */
+  const pick=await G.p.evaluate(([k,sid])=>{const A=ACT[k];const L=rivals.filter(v=>v&&!v.coop&&v.alive!==false&&!v.out&&!(typeof sameHouse==='function'&&sameHouse(S,v)));
+   const okT=v=>{try{return !A.ok||A.ok(S,v)}catch(e){return false}};const t=(sid!=null&&L.find(v=>v.id===sid&&okT(v)))||L.find(okT);return t?t.id:null},[k,st&&st.id]);
+  if(pick==null){table.push({k,skip:'no target'});continue}
+  const hB=await npcOf(H,pick),gB=await npcOf(G,pick),her0=await herS(G);const run0=await H.p.evaluate(()=>COOPW.thin.F.stat.run);
+  const r=await G.p.evaluate(([k,id])=>{const t=rivals.find(v=>v&&v.id===id);const C=COOPW.thin.C,F=COOPW.thin.F;const s0=C.stat.sent,n0=F.stat.sent;
+   const extra=(k==='gift'||k==='plant')?S.inv.findIndex(e=>e&&!e.h&&!e.w&&!e.wk&&e.k==='yensao'):undefined;const before=JSON.stringify(t);let out,err=null;
+   try{out=runAct(S,t,k,extra)}catch(e){err=String(e&&e.stack||e).slice(0,300)}
+   return {out:String(out),err,local:JSON.stringify(rivals.find(v=>v.id===id))!==before,npcOps:C.stat.sent-s0,sent:F.stat.sent-n0,pend:!!F.pend,id:F.pend&&F.pend.id}},[k,pick]);
+  const got=await until(G,id=>!COOPW.thin.F.pend&&COOPW.thin.F.lastAns&&COOPW.thin.F.lastAns.id===id,r.id,15000);
+  await sleep(400);await sync();
+  const hA=await npcOf(H,pick),gA=await npcOf(G,pick),her1=await herS(G),hh=await hostHer();const run1=await H.p.evaluate(()=>COOPW.thin.F.stat.run);
+  const ans=await G.p.evaluate(()=>COOPW.thin.F.lastAns);
+  const num=o=>o?[o.sung,o.bac,o.danh,o.suc,o.alive,!!o.out,o.rank,(o.inv||[]).length,(o.kids||[]).length]:null;/* rel/oan/ghen/ev are each phone's own viewer rows */
+  const sameW=JSON.stringify(num(hA))===JSON.stringify(num(gA));/* her log line: her phone's render adds the Sổ ghi sync suffix (jlogsync lsSync, as in solo); the host's copy holds the act line */
+  const herSame=Object.keys(hh).every(x=>x==='log'?String(her1.log).startsWith(String(hh.log).slice(0,60)):her1[x]===hh[x]);
+  const good=!r.err&&r.out===''&&!r.local&&r.npcOps===0&&r.sent===1&&got&&run1===run0+1&&sameW&&herSame;nAct++;if(good)nOk++;
+  const row={k,id:pick,staged:!!st,hostRan:run1-run0,ans:ans&&ans.r&&ans.r.st,ms:ans&&ans.ms,text:ans&&ans.r&&ans.r.r,npc:dd(hB,hA).slice(0,8),her:Object.keys(her1).filter(x=>x!=='log'&&her0[x]!==her1[x]).map(x=>x+':'+her0[x]+'→'+her1[x]),log:her1.log.slice(0,60)};table.push(row);
+  if(!good)ok(false,'F1 '+k,{r,got,run:[run0,run1],sameW,hA:num(hA),gA:num(gA),herSame,her1,hh,flog:await G.p.evaluate(()=>COOPW.thin.F.log.slice(-4)),hlog:await H.p.evaluate(()=>COOPW.thin.F.log.slice(-4))})}
+ if(!process.env.NOACT)ok(nAct>0&&nAct===nOk,`F1 every ACT kind from the guest: not run on her phone, run once on the host in her context, world + her person the same on both phones (${nOk}/${nAct}; ${kinds.length} kinds, ${table.filter(x=>x.skip).length} without a target)`);
+ console.log('ACT table:');for(const x of table)console.log(' ',JSON.stringify(x).slice(0,300));
+ if(process.env.OUT){fs.mkdirSync(process.env.OUT,{recursive:true});fs.writeFileSync(path.join(process.env.OUT,`f1-acts-L${LVL}-s${SWAP}.json`),JSON.stringify(table,null,1))}
+ /* F2: acts between the two, both directions (steal, gift, harm kid, pet) */
+ const fr=o=>o.p.evaluate(()=>{const f=COOPW.friend();return f?f.id:null});
+ const stageP=o=>o.p.evaluate(()=>{S.kids=(S.kids||[]).filter(k=>k.alive!==false);if(!S.kids.length)S.kids.push(mkKid('f',4));S.pets=[{t:Object.keys(PET)[0],from:'',src:'',care:80,at:tsbWk(),full:50,clean:50,joy:50,aff:50}];S.inv=S.inv||[];S.inv.push({k:'tranhco'});S.inv.push({k:'yensao'});render()});
+ const pers=o=>o.p.evaluate(()=>({inv:(S.inv||[]).length,kids:(S.kids||[]).filter(k=>k.alive!==false).map(k=>[k.name,k.hp,k.alive]),pets:(S.pets||[]).map(p=>[p.t,Math.round(p.full||0),Math.round(p.joy||0)]),rel:0,bac:S.bac,suc:S.suc}));
+ const pairs=[['petcare','pet'],['petsteal','pet'],['gift','gift'],['laydo','steal'],['kpoison','kid']];
+ for(const [dir,A,B] of [['guest→host',G,H],['host→guest',H,G]]){
+  await stageP(B);if(B===G){await G.p.evaluate(()=>{});}/* her person: sync to the host copy */
+  if(B===G){await G.p.evaluate(()=>{try{COOPW.thin.E&&0}catch(e){}})}
+  await H.p.evaluate(()=>{try{COOPW.thin.flush()}catch(e){}});await sleep(2500);
+  for(const [k,what] of pairs){await A.p.evaluate(()=>{S.bac=Math.max(S.bac||0,5000);S.confined=0;Q.length=0;try{closeModal()}catch(e){}});await B.p.evaluate(()=>{Q.length=0;try{closeModal()}catch(e){}});
+   /* a guest target: her live person must reach the host first (her ready-style diff rides on any intent): a probe act is not needed, the F intent of the guest carries it; for host→guest the host's stand-in of her is built from her stored copy + ctm-fam */
+   const p0=await pers(B);
+   const r=await A.p.evaluate(k=>{const f=COOPW.friend();if(!f)return {err:'no friend'};const A2=ACT[k];let okd=false;try{okd=!A2.ok||A2.ok(S,f)}catch(e){okd='EXC'}
+    if(!okd)return {skip:'not ok',k};const ex=k==='gift'?S.inv.findIndex(e=>e&&!e.h&&e.k==='yensao'):undefined;let seed=99;const nat=Math.random;Math.random=()=>{seed=(seed*1103515245+12345)%2147483648;return seed/2147483648};
+    let out='';try{out=runAct(S,f,k,ex)}catch(e){return {err:String(e)}}finally{Math.random=nat}return {out:String(out).replace(/<[^>]+>/g,'').slice(0,100)}},k);
+   if(A===G){await until(G,()=>!COOPW.thin.F.pend,null,15000);const la=await G.p.evaluate(()=>COOPW.thin.F.lastAns);r.ans=la&&la.r}
+   /* the receiver's Quà tặng / invite card: take it */
+   for(let i=0;i<6;i++){await clear(H);await clear(G);await sleep(500)}
+   await sleep(1500);const p1=await pers(B);
+   table.push({dir,k,r,p0,p1});ok(!r.err,`F2 ${dir} ${k} (${what}) ran`,{r,p0,p1})}}
+ {const [ho,go]=await both(()=>COOPW.oldRun||{});const n=o=>Object.values(o).reduce((a,b)=>a+b,0);
+  ok(LVL>=3?n(ho)+n(go)===0:true,'F8 no old guest state guard ran (COOPW.oldRun, both seats)',{host:ho,guest:go})}
+ ok(!H.errs.length&&!G.errs.length,'no page errors',{h:H.errs.slice(0,4),g:G.errs.slice(0,4)});
+ if(process.env.SHOTS){fs.mkdirSync(process.env.SHOTS,{recursive:true});for(const o of [H,G]){await clear(o);for(let i=0;i<8;i++){if(!await tapText(o,/^(Bỏ qua|Đóng|Lui|Đã hiểu)$/,800))break;await sleep(400)}await o.p.evaluate(()=>{try{closeModal()}catch(e){}try{render()}catch(e){}});await sleep(800);
+   const vp=o.p.viewportSize();await o.p.screenshot({path:path.join(process.env.SHOTS,`L${LVL}-${o.name}-${vp.width}x${vp.height}.jpg`),type:'jpeg',quality:70})}}
+ const n=res.filter(x=>x[0]).length;console.log(`coop-thin-f1 L${LVL}${SWAP?' swap':''}: ${n}/${res.length}`);await b.close();process.exit(n===res.length?0:1)})().catch(e=>{console.error(e);process.exit(2)});

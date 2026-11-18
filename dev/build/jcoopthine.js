@@ -43,12 +43,24 @@ function packs(ops){const out=[];let cur=[],n=2;for(const o of ops){const s=JSON
 function gReady(){if(!S||S.dead||Q.length||S.mg||CW.inLife)return;const b=S.buoi||0;const k=bk();if(E.mine===k)return;
  const V=TH.view,P=V&&V.o&&V.o.P&&V.o.P[CW.seat];
  if(V&&V.o){const mx=Math.max(0,...(V.o.pq||[]).map(x=>x.n|0));if((S.thpn||0)<mx){try{TH.gSync(V)}catch(e){}if((S.thpn||0)<mx){lg(["wait-pq",S.thpn||0,mx]);return}}}
- let ops=[];if(P)try{const base=J(P);for(const k of BAD)delete base[k];for(const k of X.W_KEYS)delete base[k];ops=TH.pDiff(base,curP())}catch(e){console.error("thin E diff",e)}
+ let ops=[],cur=null;if(P)try{cur=curP();ops=TH.pDiff(E.base(V),cur)}catch(e){console.error("thin E diff",e)}
  const L=packs(ops);const id="r"+Date.now().toString(36);
- L.forEach((ops,i)=>{TH.doSend("erd",{id,i,ops});E.stat.ops+=ops.length});
+ L.forEach((ops,i)=>{TH.doSend("erd",{id,i,ops});E.stat.ops+=ops.length});if(cur)E.sent(cur);
  if(b>=LAST()){try{CW.nightReady()}catch(e){console.error(e)}}
  TH.doSend("ready",{w:COOP.state.week||0,b,id,n:L.length});E.mine=k;E.stat.rd++;lg(["ready",k,ops.length,L.length]);
  try{CW.lockNext();render()}catch(e){}}
+/* thin F1 (review/coop-thin-f1): ONE guest baseline for her person diff (`do erd` here, the act intents of jcoopthinf): what the host holds of
+   her. Taken from the view (her copy P.<seat>) only when the host has answered every intent she sent (view dr = her last id) and she applied
+   every patch; else the copy she last sent, with the host's patches she applied since put on it too. Before: two diffs sent before the view
+   caught up both carried the same change (a number added twice on the host). */
+E.bs=null;E.pn=0;E.last="";E.curP=curP;E.packs=packs;
+E.base=function(V){const o=V&&V.o;const mx=o?Math.max(0,...(o.pq||[]).map(x=>x.n|0)):0;const done=!E.last||!!(o&&o.dr&&o.dr.id===E.last);
+ if(!E.bs||done&&(S.thpn||0)>=mx){const P=o&&o.P&&o.P[CW.seat];if(P){const b=J(P);for(const k of BAD)delete b[k];for(const k of X.W_KEYS)delete b[k];E.bs=b;E.pn=mx}}
+ return E.bs||{}};
+E.sent=function(cur){E.bs=J(cur);E.pn=(S&&S.thpn)||0};
+COOP.on("thinview",V=>{try{if(!on()||host()||!E.bs||!V||!V.o)return;const top=(S&&S.thpn)||0;for(const x of V.o.pq||[])if(x.n>E.pn&&x.n<=top){TH.pApply(E.bs,x.p);E.pn=x.n}}catch(e){console.error("thin E base",e)}});
+{const ds=TH.doSend;TH.doSend=function(){const id=ds.apply(this,arguments);if(id&&!host())E.last=id;return id}}
+COOP.on("room",()=>{E.bs=null;E.pn=0;E.last=""});COOP.on("week",()=>{E.bs=null});
 CW.eAsked=()=>on()&&(host()?(E.hr===bk()||E.forced===bk()):E.mine===bk());
 CW.eWait=()=>!!(on()&&!host()&&E.mine&&E.mine===bk()&&((S&&S.buoi)||0)<LAST());
 /* her buổi moved by the host's patch: what lives outside S on her phone (display / per-seat counters) */

@@ -265,6 +265,8 @@ const bkey=()=>wk()+":"+((S&&S.buoi)||0);
 /* thin guest part E (jcoopthine, level 5): ONE switch eW(); the buổi step is the host's for both seats: the old bend / buoi / badbuoi / pendBuoi /
    needWhere / where / ctm-nr paths below step aside (bypassed here, deleted when level >= 5 is the default, part H) */
 const eW=()=>!!(CW.thin&&CW.thin.on&&CW.thin.on(5));CW.eW=eW;
+/* thin F1 (jcoopthinf, level 6): her acts run on the host as intents; ONE switch fW() */
+const fW=()=>!!(CW.thin&&CW.thin.on&&CW.thin.on(6));CW.fW=fW;
 function needWhere(){if(eW())return false;return CW.on&&CW.p2&&!host()&&CW.whereKey!==bkey()}
 /* her place as I see it: her "home" is her own palace; my palace in her eyes ("r"+my pid) is my "home" */
 function mapPlace(pl){if(!pl)return null;if(pl==="home"){const f=friendEntry();return f?palaceOf(f):null}if(pl==="r"+me())return"home";return pl}
@@ -368,7 +370,7 @@ const PUB=["petcare","accuse","vp","xx","gift","ally","steal","road","takeaway",
 const DK=["sung","danh","bac","suc","sac","tai","tamco","duc","th","hh","mat"];
 const newId=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,6);
 function fsnap(v){const o={};for(const k of DK.concat(["confined","rel","oan"]))o[k]=v[k]||0;o.alive=v.alive;o.out=!!v.out;o.em=(v.evm&&v.evm.me)||0;return o}
-function sendRes(v,k,b0,txt,id,pet,items,fam){if(CW.ctx)return;/* part D: her act on the host run by the host in her context: TH.bridge carries it */const b1=fsnap(v);const fx={};for(const x of DK)if(b1[x]!==b0[x])fx[x]=b1[x]-b0[x];
+function sendRes(v,k,b0,txt,id,pet,items,fam){if(CW.ctx&&!fW())return;/* part D: her act on the host run by the host in her context: TH.bridge carries it */const b1=fsnap(v);const fx={};for(const x of DK)if(b1[x]!==b0[x])fx[x]=b1[x]-b0[x];
  const flags={rel:b1.rel-b0.rel,oan:b1.oan-b0.oan,em:b1.em-b0.em,conf:b1.confined-b0.confined,dead:b0.alive&&!b1.alive,cold:!b0.out&&b1.out};
  const t=String(txt||"").replace(/<[^>]+>/g,"");const caught=/bị lộ|bị bắt|phát giác|khai ra|tố giác/.test(t);
  /* review/looks-2 r1 FAIL 1: face marks / looks the act put on her entry ride THIS message (tuần-scoped looks would expire before the week write-back);
@@ -379,6 +381,13 @@ function sendRes(v,k,b0,txt,id,pet,items,fam){if(CW.ctx)return;/* part D: her ac
  const seen=PUB.includes(k)||caught?"named":any?"effect":"";
  if(v.__b){for(const x of STAT)v.__b[x]=v[x];v.__b.rel=v.rel;v.__b.oan=v.oan;v.__b.em=(v.evm&&v.evm.me)||0;v.__b.out=v.out;v.__b.rank=v.rank;v.__b.fx=fxSnap(v);v.__b.tlk=v.toilette&&v.toilette.lk?J(v.toilette.lk):null}
  if(flags.dead)v.alive=true;if(flags.cold)v.out=false;   /* her death / lãnh cung happen on her side; her entry follows from her `me` / week */
+ /* thin F1 (level 6): HER act on the host, run on the host in her context (jcoopthinf): ONE engine, no message. What it did to the host's
+    stand-in lands on the host's real person through the same local applier the target always used (resApply: items, children, pets,
+    pregnancy, marks, death / lãnh cung, his note), in the host's context once her context closes. The stand-in's baseline (and its bag:
+    TH.bridgeItems) moved above, so the withSeat bridge does not count it again. */
+ if(CW.ctx&&fW()){v.__inv0=(v.inv||[]).slice();const her=S.name,hn=v.name;const m={id:"f"+newId(),k,n:(ACT[k]||{}).n||k,who:her,fx,flags,seen,txt:herView(t.slice(0,400),hn,her)};
+  if(pet&&pet.length)m.pet=pet;if(items&&items.length)m.items=items;if(fam&&fam.length)m.fam=fam;if(Object.keys(fxl).length)m.fxl=fxl;
+  CW.thin.D.after(()=>{try{CW.fStat=(CW.fStat||0)+1;resApply(m)}catch(e){console.error("thin F1 res",e)}});return}
  const rid=id||newId();CW.rpend[rid]=Date.now();  /* her week's end waits for her ack, so a res that lands after she ended is re-sent in her end */
  const msg=Object.assign({t:"res",id:rid,k,n:(ACT[k]||{}).n||k,who:S.name,fx,flags,seen,txt:t.slice(0,400)},pet&&pet.length?{pet}:{},items&&items.length?{items}:{},fam&&fam.length?{fam}:{},Object.keys(fxl).length?{fxl}:{});
  if(dOn()&&host()){const m2=Object.assign({},msg,{txt:herView(msg.txt,v.name,S.name)});if(CW.thin.D.resTo(fs(),m2,rid))return}COOP.send(msg)}
