@@ -1311,3 +1311,15 @@ BAL.bookFigW=.343;Object.assign(BAL,{bookFrame:{cRef:.072,gap:8,footGap:10}});
 /* DOING AN ACT ON THE SPOT (review/shown-odds-one-path): "Cài đồ vào rương nàng" done in her own palace is easier than sending
    someone by actHere.plant (was a typed -15 pen in j8 plantpick + a typed +15 on the j2 chest card); both read it through actCtx (j9). */
 Object.assign(BAL,{actHere:{plant:15}});
+/* RECEIVER CHOICE (owner OD 18/11 ~21:15Z, law 1 + 2 + 3; jrcv.js): every receiver of a request / order (she or any NPC) answers one of the SAME
+   4 answers as a helper (OD L1876): 0 giúp hết lòng · 1 làm qua loa · 2 từ chối · 3 mách lẻo–phá ngầm. An NPC receiver draws by the L1876 weights
+   (BAL.road.hp: role row v / hh × nết × liking toward the asker × tâm cơ, jroad rdHpW) through jmind mindPick (never argmax); she picks on her card.
+   Each answer has a gain and a cost for the receiver (law 3), of equal value (law 2):
+   help (Nhờ giúp đỡ, helpAsk): full = lends BAL.ag.cx2.help.bac (or tells a secret / receives warmly) · the asker's liking +af[0];
+   half = lends bac × half · liking +af[1]; no = keeps the bạc · both likings − BAL.ag.cx2.help.fail; sab = keeps it, tells the Hoàng hậu
+   (her liking of the receiver +qAf) · Đức − road.hp.sab.duc, the asker's oán + road.hp.sab.oan, the asker's Danh − danh.
+   ord (an order from above, two-option cards: Vâng / Cáo bệnh …): the NPC receiver weighs «obey» = full + half, «decline» = no (+ sab) — the SAME
+   options and numbers as her card. */
+BAL.rcv={kw:["Giúp hết lòng","Làm qua loa","Từ chối","Mách lẻo"],help:{af:[8,3],half:.5,qAf:5,danh:2},
+ /* the Sức a summons costs (her «Vâng chỉ» card jts tsSummonMe and the summoned NPC, one number) */
+ sumSuc:5};
