@@ -446,7 +446,7 @@ function knSellPick(x){const own=knStaff(x);const kx=key(x);const C=[];for(const
  for(let i=0;i<knSB().try&&C.length;i++){let r=Math.random()*C.reduce((a,c)=>a+c[1],0),j=0;while(j<C.length-1&&r>C[j][1]){r-=C[j][1];j++}const [s]=C.splice(j,1)[0];const N=knSellNews(x,s);if(N.length)return {s,n:N[0]}}
  return null}
 /* x hears it (paid or not): the gain is the same for her and for an NPC */
-function knSellGive(x,s,n){KN.stat.bought=(KN.stat.bought||0)+1;const o=n.about;
+function knSellGive(x,s,n){if(window.J78MEMO)window.J78MEMO.clear();KN.stat.bought=(KN.stat.bought||0)+1;const o=n.about;
  if(n.kind==="hap"){KN.bk=KN.bk&&KN.bk.k===agKey()?KN.bk:{k:agKey(),m:{}};KN.bk.m[knId(x)+"|"+n.hid]={by:"buy",how:"buy",e:s};try{KN.m&&(KN.m.x={})}catch(e){}
   if(x===S)try{adHapNow()}catch(e){}return n.txt}
  if(x===S){let extra="";try{if(n.f.go)extra=n.f.go()||""}catch(e){}try{intelAdd(o,n.f,{by:s.name,how:"Mua tin"});noteAdd(o.id,`${s.name} bán tin: ${n.txt}`)}catch(e){}knSellItem(s,n.txt,palaceOf(o));return n.txt+extra}
@@ -471,7 +471,8 @@ function knSellNpcBuy(x,s,n){const P=knSB();const price=knSellPrice(n.val,s);if(
 /* refused: the seller tries another buyer with the same news (not the one who refused) */
 function knSellNpc(s,n,skip){for(const x of liveRivals(true)){if(x===skip||x===ownerOf(s)||!x.alive||x.out)continue;const N=knSellNews(x,s).filter(q=>q.id===n.id);if(N.length&&knSellNpcBuy(x,s,N[0]))return x}return null}
 /* once per buổi per buyer: BAL.ag.sell.o % that a seller comes (her: only when the day still has the khắc; not as a maid) */
-function knSellTick(){if(!knOn()||!S||S.dead||S.out)return;const T=knTb();const key=agKey();if(T.sl===key)return;T.sl=key;const P=knSB();
+function knSellTick(){if(!knOn()||!S||S.dead||S.out)return;const T=knTb();const key=agKey();if(T.sl===key)return;T.sl=key;const P=knSB();/* ag2-perf F1: one memo of the owners' facts for this pass (j95 J78MEMO); a sale drops it (knSellGive) */window.J78MEMO=new Map();try{knSellTick0(P)}finally{window.J78MEMO=null}}
+function knSellTick0(P){
  try{if(!(typeof isSrv==="function"&&isSrv())&&dayFit(P.kh)&&roll(agOdd(P.o))){const r=knSellPick(S);if(r){KN.stat.offer=(KN.stat.offer||0)+1;Q.push(knSellCard(r.s,r.n))}}}catch(e){agErr("knSell",e)}
  for(const x of liveRivals(true)){if(!x.alive||x.out||x.confined)continue;try{if(!roll(agOdd(P.o)))continue;const r=knSellPick(x);if(r)knSellNpcBuy(x,r.s,r.n)}catch(e){agErr("knSellNpc",e)}}}
 /* the j67 story beat "Một kẻ gạ bán tin" (GB67.spy) runs through the same engine: "Mua tin" / "Ép hắn khai" bring the best true news a real seller has */
