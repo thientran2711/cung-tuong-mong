@@ -673,9 +673,21 @@ NUDE_ITEM={"c06":("a gold dragon-framed round fan","two"),"c25":("a gold-and-jad
 NUDE_OPT={
 "A":dict(sec="deep wine-crimson",secrule="a deep, quiet wine-crimson like #7E2A33",sh="a STIFF, SHORT, structured shoulder piece (cầu vai cứng) of gold brocade edged with pearls over each shoulder, slightly pointed outward",tas="a row of bead tassels (lưu) hanging in front from the rim of the crown to the forehead, ending above the eyebrows",crown=None),
 "B":dict(sec="black",secrule="black silk richly embroidered with gold thread (the yellow clearly more than the black)",sh="a STIFF, SHORT, squared structured shoulder piece (cầu vai cứng) of gold brocade edged with pearls over each shoulder, set firmly across the shoulder line",tas="a row of bead tassels (lưu) hanging in front from the rim of the crown to the forehead, ending above the eyebrows",crown=None),
-"C":dict(sec=None,secrule=None,sh="a STIFF, SHORT, structured shoulder piece (cầu vai cứng) of gold brocade edged with pearls over each shoulder, slightly pointed outward",tas="a row of bead tassels (lưu) hanging in front from the rim of the crown to the forehead, ending above the eyebrows",crown="a tall fan-shaped imperial gold phoenix-and-dragon crown: a large gold dragon with a pearl in its claws rising from the centre of a broad fan of gold filigree rays, a gold phoenix with raised wings on each side of it, set with rubies, pearls and kingfisher-blue inlay, no flowers anywhere on it, and long gold dangles with a few pearl drops at the sides"),
+"C":dict(sec=None,secrule=None,sh="a STIFF, SHORT, structured shoulder piece (cầu vai cứng) of gold brocade edged with pearls over each shoulder, slightly pointed outward",tas="a row of bead tassels (lưu) hanging in front from the rim of the crown to the forehead, ending above the eyebrows",crown=None),
 "D":dict(sec="deep wine-crimson",secrule="a deep, quiet wine-crimson like #7E2A33",sh="a STIFF, SHORT, structured shoulder piece (cầu vai cứng) of gold brocade edged with pearls over each shoulder, rising a little at the tip, with a high upright standing collar of gold brocade at the throat",tas="only five bead tassels (lưu) hanging in front from the rim of the crown to the forehead, the outer ones short and the middle ones longer, ending above the eyebrows",crown=None)}
 NUDE_OPTSEL="A"
+# N3 r11b (owner 23:48Z): BD Quý phi colour = trầm, FULL fur sleeves (the whole sleeve covered in fur, not a small cuff). --bdopt 1 jade-teal, 2 sapphire-blue (only with --state bd6)
+BDOPT=None
+BD_OLDCOL="a RICH, deep, saturated teal-green silk with real colour depth, like deep jade or peacock teal (full-bodied and vivid but refined, not neon, not garish, never pale, never washed-out, never silvery or greyed)"
+BD_OPT={"1":("a deep, toned-down jade-teal silk with clear colour depth and a rich, fresh green-teal body, quiet and subdued (trầm) rather than loud, never glaring, never neon, yet clearly coloured: not greyish, not sage, not dusty, not muddy and not dark","tone-on-tone jade-teal thread","an embroidered soft jade-teal pearl-edged cape/stole","a deep, quiet, toned-down jade-teal with a calm soft finish","her signature colour"),
+"2":("a deep, toned-down sapphire-blue silk with clear colour depth and a rich, fresh blue body like deep twilight, quiet and subdued (trầm) rather than loud, never glaring, never neon, yet clearly coloured: not greyish, not denim, not dusty, not muddy and not dark","tone-on-tone deep blue thread","an embroidered soft deep-blue pearl-edged cape/stole","a deep, quiet, toned-down sapphire-blue with a calm soft finish","her main colour")}
+BD_FURSLEEVE="the sleeves are made ENTIRELY of fur: each whole sleeve from the shoulder to the wrist is one full sleeve of thick soft white fur (not a robe sleeve with a small fur cuff), and a fur collar"
+def bd_opt(t,o):
+    c,th,cape,rend,sig=BD_OPT[o]
+    for a,b in ((BD_OLDCOL,c),("tone-on-tone teal-green thread",th),("an embroidered soft teal-green pearl-edged cape/stole",cape),("a slim white fur edge on the collar and cuffs",BD_FURSLEEVE)): assert t.count(a)==1,a; t=t.replace(a,b)
+    i=t.index(" COLOUR RULE:"); j=t.index(" Hair:")
+    t=t[:i]+f" COLOUR RULE: all colours fresh but restrained, in deep, toned-down shades with a soft subdued trầm feel, as gentle as the soft golden yellow of an imperial robe, never rực, never glaring, never neon, never bright, never saturated; never dusty, grey, muddy or dark; {sig} is the main colour of the robe, sleeve linings and any cape, rendered as {rend}; the fur is ivory-white; gold as thin accents on the borders; soft coral and soft turquoise as tiny accents only."+t[j:]
+    return t
 # N3 r11 (owner ~23:33Z): ONE splendid imperial phoenix-and-dragon crown (dragon in the centre, a phoenix at each side), NO flowers on the crown or hairpins (the old crown came from the HEAD table, which has flowers); bead fringe (tas) stays per option
 NUDE_CROWN="one splendid imperial gold phoenix-and-dragon crown: a large gold dragon with a pearl in its claws rising from the centre of a tall gold crown band, a gold phoenix with raised wings on each side of the dragon, set with rubies, pearls and kingfisher-blue inlay, pure gold metalwork with no flowers and no flower ornaments anywhere on the crown or the hairpins, and a few gold hairpins with slim gold-and-pearl dangles at the sides"
 def build_nude_own(c,face,right):
@@ -706,6 +718,7 @@ def build_state(c,state,v="v0"):
         s+=(f" COLOUR RULE: all colours rich, deep and full-bodied with good saturation, a harmonious refined palette, never washed-out, never pale, never silvery, never greyed, never neon, never garish; her signature colour {pal} is the main colour of the robe, sleeves and any cape, rendered as a deep saturated emerald-teal, as in her first reference; gold as thin accents on the borders; coral and turquoise as small clear accents." if state=="bd6" else f" COLOUR RULE: all colours fresh, clear and luminous, never dusty or greyed; her signature colour {pal} is the main colour of the robe, sleeves and any cape, as in her first reference; gold only as thin accents on the borders.")
         hair=" Hair: her own hairstyle as described in the outfit, with hairpins, "+("silver, pearls and fresh flowers, little gold. " if t==1 else "gold hairpins with dangles, rich like her rank. ")
         s+=hair+EMB_NOPH+(FAB_LOW if t==1 else FAB)
+        if state=="bd6" and BDOPT: s=bd_opt(s,BDOPT)
         it={("nc",1):("a folded ivory-gold silk fan","two"),("nc",6):("a round fan with a gold-inlaid handle and gem tassel","two"),("bd",1):("a small bouquet of coral-red flowers","one"),("bd",6):("a white-jade ruyi","one")}[(k,t)]
         return s+_pose(it[0],it[1],right)+CLOSE+END
     pal,face=DATA[c]; m,m2=ORIG1[c]; main0,orig=LOWNAME[c]; mo,fl=MOTIF_LOW[c]
@@ -907,6 +920,7 @@ def nude2(o,c,opt):
 if __name__=="__main__":
     NUDE2=None
     if "--nudeopt" in sys.argv: i=sys.argv.index("--nudeopt"); NUDE_OPTSEL=sys.argv[i+1]; sys.argv[i:i+2]=[]
+    if "--bdopt" in sys.argv: i=sys.argv.index("--bdopt"); BDOPT=sys.argv[i+1]; sys.argv[i:i+2]=[]
     if "--nude2" in sys.argv: i=sys.argv.index("--nude2"); NUDE2=sys.argv[i+1]; sys.argv[i:i+2]=[]
     if "--age" in sys.argv: AGE=sys.argv[sys.argv.index("--age")+1]; sys.argv[sys.argv.index("--age"):sys.argv.index("--age")+2]=[]
     STATE=None
