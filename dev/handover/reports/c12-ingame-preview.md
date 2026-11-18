@@ -17,7 +17,7 @@ Owner (18/11 ~04:38Z): put 1 Hoàng hậu + 1 Tần in the game frame on the roo
 https://ctm-img.victoria-tntt.workers.dev/img/_review/maid-consort-sample/
 - Hoàng hậu t8: c12_a18_r10_t8_smile.png — head-top row 676 /4000
 - Tần t4: c12_a18_r10_t4_smile.png — head-top row 498 /4000
-- Nữ đế (c12 "nude" set, yellow dragon robe + seal): c12_a18_r10_nude_smile.png — head-top row 489 /4000
+- Nữ đế: UPDATED 04:55Z per ROOT-17 (owner pick #2, wide layered robe): c12_a18_r12_nude_smile.png — head-top row 492 /4000 (the first pass used r10_nude_smile, row 489; replaced in tuanluc_*.png)
 Rows computed with dev/art/headtop/headtop.py (face_rows, HAIR_K .30, mediapipe face_landmarker, libegl1 + libgles2 installed).
 (A first pass with c12_a18_r8_t8_fresh / r7_t4_fresh / r8_nude_v2_fresh, rows 672/498/486, looked the same.)
 
@@ -29,7 +29,7 @@ Rows computed with dev/art/headtop/headtop.py (face_rows, HAIR_K .30, mediapipe 
 
 ## What I looked at (all 6 + 2 per-file) — result
 - Room, Fold + iPad: the stage shows HER figure + ONE other figure at a time (rest is "+N"), so the two ranks are two shots. Hoàng hậu: crown top and feet fully inside the frame, same body height as her figure (skull-top to feet rule holds), name plate "Hoàng hậu <name>" under it. Tần: whole figure, hand + peony visible, nothing cut. No horizontal overflow, no page error.
-- Tuần lục, Fold + iPad: Nữ đế stands in the narrow figure column (KBK_FIG_COL), crown + seal + feet visible, text column clear, heading "Nữ đế". iPad figure 237x618 css px, Fold 285x743.
+- Tuần lục, Fold + iPad: Nữ đế stands in the narrow figure column (KBK_FIG_COL), crown + seal + feet visible, text column clear, heading "Nữ đế". With r12 (wide robe) the game's own wide-figure fit makes the figure smaller in the narrow column: iPad 190x495 css px, Fold 228x595; crown, seal-hand area and feet all visible, nothing cut.
 
 ## Issues seen (not caused by the new art)
 1. Her own figure in the room is the default new-game look (plain cold-palace dress), only the visitor is the c12 art. Test persons are random rivals, so the name plate shows the real person's name (Tần plate shows "???" = person not met in this save).
