@@ -44,6 +44,8 @@ Object.assign(BAL,{looks:{
     measured on 158 por pictures (Haar eyes + lip colour, dev/test/look-fx-keepout.py) and constant for every por-/fig- row because every row is cut from the face rect by the same ratios.
     Face-square marks are masked by it (lkKeepCss), the scratch rows (scar-fit) are generated so the box stays inside the cheek zone: cheek = [left,top,w,h,rot offset] of the veil row: the OLD diagonal across the cheek below the eye (owner 18/11: never vertical), ~1.4x the R3 length, as long as the keep-out allows. pad = ONE margin: every ellipse is grown by it (mask, scratch test). */
  keep:{eye:[[.31,.08,.15,.17],[.72,.08,.15,.17]],mouth:[.47,.655,.27,.11],nose:[.51,.36,.11,.2],pad:1.45,cheek:[.08,.30,.28,.20,5],
+ /* VẾT CÀO lv2 + lv3 (owner pick 18/11 ~04:50Z, OD:L1839): ladder STEP 3 = 1.6 x the R6 box [.28 x .26] of the veil row, left 0, top .20, old diagonal, flipped, below the eye; it crosses the eye / nose / mouth zones, so the strokes are CUT at the zones by the stroke-level mask (lkKeepScar). lv1 stays the scar-fit row. */
+ cheek3:[0,.20,.448,.416,0],
  /* FACE CLIP (owner 18/11 ~04:58Z: no mark past the face skin onto hair / ear / neck / background): ONE polygon in face-square units (0..1 of the square of lkSquareRect), measured on 180 por pictures (skin segmentation, dev/test/look-fx-faceclip.py); every mark layer (face-square marks, cào, smudge) is clipped to it by lkFaceClipAll */
  face:[[.23,.19],[.5,.14],[.77,.19],[.88,.34],[.90,.52],[.84,.70],[.72,.87],[.5,.96],[.28,.87],[.16,.70],[.10,.52],[.12,.34]]},
  pox:{thuydau:{sea:["Xuân"],cont:1,die:0},sac:{thuydau:[0,3,5,8],daumua:[0,6,10,14]},spread:35,spreadWk:3,scar:[0,1,1,2]},
@@ -316,9 +318,24 @@ function lkClipFor(file,sty){try{const sq=lkSquareRect(file);if(!sq)return"";con
  const e={l:L,t:T,w:W,h:H,r:(rot?+rot[1]:0)*D,ox:to?+to[1]/100:.5,oy:to?+to[2]/100:.5,f:fl},q={l:sq[0],t:sq[1],w:sq[2],h:sq[3],r:sq[4]*D,ox:.5,oy:KIT_RASH.RB,f:false};
  const toPic=(b,s,t)=>{if(b.f)s=2*b.ox-s;const dx=(s-b.ox)*b.w*A,dy=(t-b.oy)*b.h,c=Math.cos(b.r),n=Math.sin(b.r);return[(b.l+b.ox*b.w)*A+dx*c-dy*n,b.t+b.oy*b.h+dx*n+dy*c]};
  const toLoc=(b,X,Y)=>{X-=(b.l+b.ox*b.w)*A;Y-=b.t+b.oy*b.h;const c=Math.cos(b.r),n=Math.sin(b.r),dx=X*c+Y*n,dy=-X*n+Y*c;let s=dx/(b.w*A)+b.ox;if(b.f)s=2*b.ox-s;return[s,dy/b.h+b.oy]};
- const nm=String(file).split("/").pop(),ff=KIT_FACEFIT.fit&&KIT_FACEFIT.fit[nm]||[0,0,1,1],pts=BAL.looks.face.map(([s0,t0])=>{const s=(s0-.5)*ff[2]+.5+ff[0],t=(t0-.55)*ff[3]+.55+ff[1],P=toPic(q,s,t),Q=toLoc(e,P[0],P[1]);return(Q[0]*100).toFixed(1)+"% "+(Q[1]*100).toFixed(1)+"%"}).join(",");
+ const nm=String(file).split("/").pop(),ff=KIT_FACEFIT.fit&&KIT_FACEFIT.fit[nm],fx=ff?ff[0]:0,fy=ff?ff[1]:0,fsx=ff?ff[2]:1,fsy=ff?ff[3]:1,pts=BAL.looks.keep.face.map(([s0,t0])=>{const s=(s0-.5)*fsx+.5+fx,t=(t0-.55)*fsy+.55+fy,P=toPic(q,s,t),Q=toLoc(e,P[0],P[1]);return(Q[0]*100).toFixed(1)+"% "+(Q[1]*100).toFixed(1)+"%"}).join(",");
  return `;clip-path:polygon(${pts});-webkit-clip-path:polygon(${pts})`}catch(err){return""}}
-function lkFaceClipAll(h,file){if(!h||!file)return h;return h.replace(/<img class="((?:kpox|klk|kscar)[ "][^>]*?)style="([^"]*)"/g,(m,a,sty)=>m.slice(0,m.length-sty.length-1)+sty+lkClipFor(file,sty)+'"')}
+/* kscar layers: lv2 / lv3 use the ladder STEP 3 box (BAL.looks.keep.cheek3 of the veil row), then ALL levels get the stroke-level keep-out: the eye / nose / mouth ellipses (BAL.looks.keep, same pad + fade as lkKeepCss) mapped from the veil row into THIS layer's own box (position, rotation, flip), cut out with the same xor mask */
+function lkScarFix(file,sty,sev){try{const n=String(file).split("/").pop(),v=KIT_VEIL.fit&&KIT_VEIL.fit[n];if(!v)return sty;let o=sty;
+ if(sev>=2){const c=BAL.looks.keep.cheek3,r=(x,y)=>x+";"+y;const L=v[0]+c[0]*v[2],T=v[1]+c[1]*v[3],W=c[2]*v[2],H=c[3]*v[3],R=v[4]+c[4];
+  o=o.replace(/--fleft:[^;]*/,"--fleft:"+L.toFixed(2)+"%").replace(/--ftop:[^;]*/,"--ftop:"+T.toFixed(2)+"%").replace(/--fwidth:[^;]*/,"--fwidth:"+W.toFixed(2)+"%").replace(/--fheight:[^;]*/,"--fheight:"+H.toFixed(2)+"%").replace(/--ftf:\s*rotate\(-?[\d.]+deg\)/,"--ftf:rotate("+R.toFixed(1)+"deg)")}
+ const g=k=>{const m=new RegExp("--f"+k+":\\s*(-?[\\d.]+)%").exec(o);return m?+m[1]:null},L=g("left"),T=g("top"),W=g("width"),H=g("height");if(L==null||T==null||W==null||H==null)return o;
+ const tf=/--ftf:\s*([^;]*)/.exec(o),rot=tf&&/rotate\((-?[\d.]+)deg\)/.exec(tf[1]),fl=!!(tf&&/scaleX\(-1\)/.test(tf[1])),to=/--fto:\s*([\d.]+)%\s+([\d.]+)%/.exec(o),A=/^por-/.test(n)?.759:.43,D=Math.PI/180;
+ const e={l:L,t:T,w:W,h:H,r:(rot?+rot[1]:0)*D,ox:to?+to[1]/100:.5,oy:to?+to[2]/100:.5,f:fl},q={l:v[0],t:v[1],w:v[2],h:v[3],r:v[4]*D,ox:.5,oy:.5,f:false};
+ const toPic=(b,s,t)=>{if(b.f)s=2*b.ox-s;const dx=(s-b.ox)*b.w*A,dy=(t-b.oy)*b.h,c=Math.cos(b.r),n=Math.sin(b.r);return[(b.l+b.ox*b.w)*A+dx*c-dy*n,b.t+b.oy*b.h+dx*n+dy*c]};
+ const toLoc=(b,X,Y)=>{X-=(b.l+b.ox*b.w)*A;Y-=b.t+b.oy*b.h;const c=Math.cos(b.r),n=Math.sin(b.r),dx=X*c+Y*n,dy=-X*n+Y*c;let s=dx/(b.w*A)+b.ox;if(b.f)s=2*b.ox-s;return[s,dy/b.h+b.oy]};
+ const K=BAL.looks.keep,pad=K.pad||1,gr="radial-gradient(ellipse closest-side,#000 82%,transparent 100%)",im=["linear-gradient(#000,#000)"],sz=["100% 100%"],ps=["0 0"];
+ for(const [u,w,ru,rv] of [...K.eye,K.mouth,K.nose]){const P=toPic(q,u,w),C=toLoc(e,P[0],P[1]),hw=ru*pad*1.22*v[2]/W,hh=rv*pad*1.22*v[3]/H,wp=hw*200,hp=hh*200,l=(C[0]-hw)*100,tp=(C[1]-hh)*100;
+  im.push(gr);sz.push(wp.toFixed(2)+"% "+hp.toFixed(2)+"%");ps.push((l/(100-wp)*100).toFixed(2)+"% "+(tp/(100-hp)*100).toFixed(2)+"%")}
+ const a=im.join(","),b=sz.join(","),c=ps.join(","),xw=im.map((_,i)=>i?"source-over":"xor").join(",");
+ return o+`;-webkit-mask-image:${a}!important;mask-image:${a}!important;-webkit-mask-size:${b}!important;mask-size:${b}!important;-webkit-mask-position:${c}!important;mask-position:${c}!important;-webkit-mask-repeat:no-repeat!important;mask-repeat:no-repeat!important;-webkit-mask-composite:${xw}!important;mask-composite:${im.map((_,i)=>i?"add":"exclude").join(",")}!important`}catch(e){return sty}}
+window.lkScarFix=lkScarFix;
+function lkFaceClipAll(h,file){if(!h||!file)return h;return h.replace(/<img class="((?:kpox|klk|kscar)[ "][^>]*?)style="([^"]*)"/g,(m,a,sty)=>{const sc=/^kscar[ "]/.test(a)?/scar-(\d)\.png/.exec(a):null;const o=sc?lkScarFix(file,sty,+sc[1]):sty;return m.slice(0,m.length-sty.length-1)+o+lkClipFor(file,o)+'"'})}
 window.lkFaceClipAll=lkFaceClipAll;window.lkClipFor=lkClipFor;
 function lkFaceImg(cls,f,st,file){if(!st)return"";if(/^fx-muc-\d\.png$/.test(f)&&lkMirror(file))f=f.replace(".png","-m.png");const m=/^fx-(muc|muoi)-/.exec(f);
  return lkArt(f)?`<img class="${cls}" src="img/${f}" alt="" aria-hidden="true" style="${kitFxVars(st)}${m?kitToneCss(m[1],null):""}${lkKeepCss()}" onerror="this.remove()">`:""}

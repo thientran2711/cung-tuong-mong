@@ -35,7 +35,8 @@ def replace(f):
                     if best is None or dist<best[0]:best=(dist,dx,dy)
             if best:
                 _,dx,dy=best;sl=(slice(dy,dy+nh),slice(dx,dx+nw));out[sl][mk]=pt[mk];occ[sl]|=mk;placed=True;break
-        if not placed:print("   blob not placed (dropped):",f,"size",pm_.sum())
+        if not placed:   # too big for any free spot even shrunk: keep the part that lies on free skin (what the game mask would leave) instead of dropping the whole blob
+            ok=pm_&(keep[y0:y1,x0:x1]<.001)&pm[y0:y1,x0:x1]&~(occ[y0:y1,x0:x1]);out[y0:y1,x0:x1][ok]=patch[ok];occ[y0:y1,x0:x1]|=ok;print("   blob cut to free skin:",os.path.basename(f),"size",pm_.sum(),"kept",ok.sum())
     return Image.fromarray(out)
 res=[]
 for f in sorted(x for x in os.listdir(D) if re.fullmatch(r"fx-[a-z]+(-[a-z]+)?-\d(-m|-r\d+)?\.png",x) and "-r" not in x[-7:]):
