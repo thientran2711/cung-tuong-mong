@@ -12,6 +12,9 @@ Preview only: stain-tra (v3 owner-approved), stain-uot (hair sheen faint), PREVI
 Whole face-square set (fx-pox-thuydau/daumua/scar-1..3 with BOTH cheeks at every level, fx-smu-1..3, fx-muc-1..3 (+ -m; smear moved up off the lip), fx-bui-1..3 (terracotta-beige, measured hue 19-26deg on 4 skin tones), fx-muoi-1..3, fx-moho-1..3, fx-lanh-1..3) LOOKED + OK by Foreman C ROOT-13. Owner order (01:20Z): every effect = 3 singles lv1/2/3 on the same face/crop (v5/v6 files). Hair previews (PREVIEW-hair-1..3, locks rooted in the hair mass) OK as preview only. HOLD: nothing at live keys until the owner's verdict; ROOT-13 sends her set by set.
 Skin-hit check (30 consort portraits, after the cheek change): 93-94% of marks on skin, 26-28/30 faces >=85%.
 
+## Update (18/11 ~01:46Z, Foreman C ROOT-14)
+Owner rulings applied: pox (thuydau/daumua/scar) scaled down + sparse random scatter, no dense dot fields (she fears them); lv1 = 5 spots, lv2 = 8, lv3 = 13 (v9); muc 1-3 approved. ROOT-14 OK'd: scar v9, smu v5, lanh v5, muoi v6, bui v10 (lv2 rebuilt as soft patch, no stripes), moho v12 (clear specular drops, forehead/hairline only, 3/6/10, no trickle). Magnific whole-figure redraw tried once for moho as comparison only: dropped (breaks no-redraw rule). Hair previews OK as preview. HOLD: no generations, nothing at live keys until owner verdicts; ROOT-14 relays. Latest review files: v9 pox, v5 smu/lanh, v6 muoi, v10 bui, v12 moho, PREVIEW-hair-*; transparent finals in final-candidates/ (30 files).
+
 ## Findings
 1. Key mismatch: code draws fx-smu/muc/bui/muoi/moho/lanh-N + fx-pox-{thuydau|daumua|scar}-N; the order named fx-smudge/fx-ink. Files follow the CODE keys (ROOT-13: no aliases).
 2. veil-fit.json fig rows are off on the live fig + hd fig files (e.g. c01-t1-a18: needs ~-0.42W and a lower box); por rows are right. Face box for previews found by template-matching the por square onto the hd fig. ROOT-13 logged it for main.
