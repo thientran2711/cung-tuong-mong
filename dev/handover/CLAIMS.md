@@ -5,4 +5,4 @@
 | NPC-PURPOSE G1 #7 (opus; integrator) | review/npc-purpose | C-AG #12 | session_01UV1Szm5ZanhFs7Ye4GwSCZ | RUNNING | 18/11 13:28Z |
 | NPC LANDER #6 (opus; ag-all-2-land + npc-chain-land) | review/ag-all-2-land, review/npc-chain-land | C-AG #12 | session_01UV1SzgbHcTuGMRy7HBkdcc | RUNNING | 18/11 13:35Z |
 | REVIEW AG LATER #3 (opus BIG reviewer; ag-all-2-land + npc-chain-land + ag2-perf) | review/ag-all-2-land, review/npc-chain-land | C-AG #12 | session_01UV1SziGFScPvg84cnnNiFu | RUNNING | 18/11 13:39Z |
-shown-odds-one-path | review/shown-odds-one-path | (opening) | RUNNING | 18/11 13:52Z | owner D #1
+shown-odds-one-path | review/shown-odds-one-path | session_01964izErPfcSMFt3TCCHZbd | RUNNING | 18/11 13:52Z | owner D #1
