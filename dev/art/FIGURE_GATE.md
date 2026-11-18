@@ -20,10 +20,10 @@ EVERY gen = EXACTLY TWO references: (1) her own t1 figure of that age = face/ide
 | t7 Hoàng quý phi | `build.py cNN --t7 v0|v1|v2 [--age aNN]` | same | same |
 | a51 / a65 age texts (t7/t8) | `--age a51` / `--age a65` (AGE_TXT as in build.py) | own live t1 of that age + style | c04 elder sheet (Lượt 41) |
 | Per-person headdress t7/t8 | add `--head` (HEAD table, 108e27b3) | same | head_sample (Lượt 52) "Ok, mũ phượng của từng người ... là mũ phượng" |
-| Held items t1/t4/t5/t6 (3f lists) | `build.py cNN --low N v0|v1|v2` (items3f, ≥ c4291fcf) | own t1 + style B kspkwKx16B (+ swatch TdwDfOyVNR at t6) | items-sample (Lượt 42) "ok rồi vậy đi tiến hành mà làm" |
+| Held items t1/t4/t5/t6 (3f lists) | `build.py cNN --low N v0|v1|v2` (items3f, ≥ c4291fcf) | own t1 + m09 eIyOFEidqL (REFERENCES 22:35Z; t6 swatch TdwDfOyVNR = OPEN question to owner, Lượt 66) | items-sample (Lượt 42) "ok rồi vậy đi tiến hành mà làm" |
 | Poses (all builders) | add `--spec5pose` (a069d90e: spec5 POSES verbatim + facing skip + calm skip for t6+ and a51/a65), per FIGURE_GATE D.3a and rule 3 above | — | spec5pose-sample (Lượt 57) "tư thế đẹp hơn rồi" + facing rule |
-| Thái hậu a36/a51/a65 | `build.py cNN --state thaihau --age a36|a51|a65` (states-sample round 3) | own live t1 of that age + style B kspkwKx16B | sheet3 (Lượt 54): "Thái hậu, ok nè ... thái hậu nào trong game cũng sẽ dùng cái cổ áo như thế này" ; mass GO 22:14Z |
-| Nhà nghèo | old live prompt: `ngheo_old.py` / `build.py cNN --state ngheo` (states round 3b) | own identity + style B | sheet4 (Lượt 54): "hình con nhà nghèo, ok" — but existing liked images are re-made, not redrawn (FIGURE_GATE 22:05Z block) |
+| Thái hậu a36/a51/a65 | `build.py cNN --state thaihau --age a36|a51|a65` (states-sample round 3) | own live t1 of that age + m09 eIyOFEidqL (REFERENCES 22:35Z) | sheet3 (Lượt 54): "Thái hậu, ok nè ... thái hậu nào trong game cũng sẽ dùng cái cổ áo như thế này" ; mass GO 22:14Z |
+| Nhà nghèo | old live prompt: `ngheo_old.py` / `build.py cNN --state ngheo` (states round 3b) | own identity (re-make: her live kc/ngheo image) + m09 eIyOFEidqL (REFERENCES 22:35Z) | sheet4 (Lượt 54): "hình con nhà nghèo, ok" — but existing liked images are re-made, not redrawn (FIGURE_GATE 22:05Z block) |
 NOT APPROVED (samples only): t1/t2/t3 new designs, Phi redesign, triều phục, Nữ đế, khuê các new drawing, Bắc Địch Quý phi.
 
 
