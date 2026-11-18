@@ -58,3 +58,11 @@ Weak points: fresh gens ⇒ faces are close cousins of v1 but not identical (own
 Old emp3 v3 read as a photo-real face. Redo, same design (yellow-crimson robe, miện with bead strings to the brow, stiff short rounded cầu vai), STYLE_ANCHOR prefix + explicit "hand-painted illustrated face, soft brushwork, idealised features, NOT a photograph". Refs: emp1_a18_v3 raw as STYLE (gpt-2-6 allows only 1 style ref) + emp4_a18_v3 raw as image ref ("draw a different man"). count 2 = 2 gens, both painterly; face crops side by side with emp1/2/4: both match; kept gen 1 (cleaner crown, strings reach the brow). 1 cut. Credits 2×80 + 3 = 163 → men-emperor total ≈ 2300 cr. emp3 gens in this round: 2 of max 3.
 Files CDN img/_review/men/emperor/: emp3_a18_v3.png (replaced), emp_a18_v3_square.jpg (rebuilt with the new 3; emp1/2/4 v3 unchanged), md5 OK, nothing live.
 Weak: emp3's face is a cousin of emp4's (image ref pull) — told apart by crown, brows, hands/robe; wide sleeves.
+
+## M1 (W37) — ages a26 / a36 / a51 (18/11)
+PRIORITY #1 CHECK: brief men-M1 (OD 0 | claims 0 | main 0 | review/* 0); reused emp a18 v3 (owner-approved) as the only identity+style ref (1 image ref each).
+| figure | gens | credits | notes |
+|---|---|---|---|
+| emp1 a26 / a36 / a51 | 1 / 1 / 1 | 3×135 gen + 3×3 cut = 414 | same face + robe design; a26 mature young man, a36 light moustache/short beard, a51 grey temples + moustache, deep black + antique gold robe, both hands holding one jade ruyi in front |
+Files (CDN img/_review/men/emperor/, md5 OK, nothing live): emp1_a26.png, emp1_a36.png, emp1_a51.png (cut, 2048x3072), emp1_ages.jpg (a18|a26|a36|a51 labelled sheet, feet aligned).
+Weak points: a26 is very close to a18 (only slightly firmer); a36 beard is light; a51 greying subtle but clear in the sheet; wide sleeves as in a18.
