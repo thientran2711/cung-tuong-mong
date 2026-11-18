@@ -12,3 +12,5 @@ v1: t1 97.8, t2 95.6, t3 90.1, t4 99.1, t5 97.1, t6 97.5, t7 96.4, t8 97.3
 v2: t1 97.9, t2 97.2, t3 87.2, t4 98.6, t5 97.9, t6 97.2, t7 96.7, t8 93.2
 Known gaps (reported, not hidden): t3 v1/v2 and t8 v2 below 95% IoU (t3 live is narrow; model widens the fan sleeve ~3–10%); t5/t8 crown touches the canvas top edge (live is the same tight crop) — pad at wiring time.
 ~100% xong (c05) / ~70% chơi được (awaiting foreman review + game wiring)
+t7 embroidery scan (ROOT-20 order, 18/11): c05 t7 v0/v1/v2 phoenix had glossy raised shading → REDRAWN (1 gen each, 3 gens, prompt "matte thread, visible satin stitches, no highlight/shadow, flat"); IoU 95.7/93.2/95.3; same filenames re-uploaded, sheet rebuilt. c14 + c15 t7 (9 figures) scanned at native res: tone-on-tone flat thread look, not pasted → kept. New C3a/D3c rules (3 different colour families, held item ≠ robe colour) apply to later figures only; finished: c05 v0/v1/v2 teal/rose/lavender, c14 cream/blue/rose, c15 pink/sage/blue already three families; c15 t4 v0 lantern is peach like the robe (not redrawn per owner "don't redo").
+Total c05 gens now 28.
