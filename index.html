@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"8af2fc24+","t":"2026-11-18T06:31Z","c":"mg-skip-all r2: one quick-button look everywhere (kquick css, never an option card), playArt default fix, KIT 13.6 + MINIGAMES, page test m…","b":"45275ce81c45","h":[{"s":"c9ada2a3+","t":"2026-11-18T06:14Z","c":"Fix S.lyF: recognise the fallen Ly person by lyF===1 (S carries the object), not truthiness; her own figure keeps her rank tier. + dev/test…"},{"s":"d959a9e0+","t":"2026-11-18T06:28Z","c":"buoi-banner: owner pick BTR_OP = 0.85 on the 73a7d3f layout (title overlaps the band, flush at the stage top); ladder hook removed"},{"s":"8c210d6b+","t":"2026-11-18T06:21Z","c":"act-pic-match: EVENTS.json + FIGURES-kids.json rebuilt (same 17/11 02:41Z incident), cdn_sync refuses bulk overwrite of top-level manifests…"},{"s":"b7ea2748+","t":"2026-11-18T06:12Z","c":"kit-set-lines: display-room test pins rank so the real-data pair is never over rank"},{"s":"22891730+","t":"2026-11-18T06:08Z","c":"k61StageDesc: restore the existing k61Desc untouched (rename only my new helper)"},{"s":"8f5ea906+","t":"2026-11-18T06:11Z","c":"face-reveal-anim: kitReveal (KIT 79) — the real face appears in place out of the grey (frame, avatar, room-stage figure, event figure); Gọn…"},{"s":"04bb2793+","t":"2026-11-18T05:52Z","c":"hud-mood-bar: owner picked layout 1 (full row); switch and slim layout removed; KIT 49.4"},{"s":"c1104d92+","t":"2026-11-18T05:41Z","c":"face-zoom-aspect test: SEED / FORCE options for same-character before/after shots"},{"s":"16b4dad8+","t":"2026-11-18T05:32Z","c":"cloth-bake-static: cloth layer on every static figure path on a cold cache (wait layer + patch on bake done); test + report"},{"s":"231cd3b3+","t":"2026-11-18T03:27Z","c":"review display-set-bonus: VANPHONG rows (Đa Bảo Các + set wording); cap line drops 'điểm'; j8 'Điểm trang lộng lẫy' night quality reads wor…"}]};
+window.CTM_BI={"s":"5d4e3f23","t":"2026-11-18T07:20Z","c":"look-fx R9f: harness LFW_TIER (lanh cung figure)","b":"a2288d64c74a","h":[{"s":"8af2fc24+","t":"2026-11-18T06:31Z","c":"mg-skip-all r2: one quick-button look everywhere (kquick css, never an option card), playArt default fix, KIT 13.6 + MINIGAMES, page test m…"},{"s":"c9ada2a3+","t":"2026-11-18T06:14Z","c":"Fix S.lyF: recognise the fallen Ly person by lyF===1 (S carries the object), not truthiness; her own figure keeps her rank tier. + dev/test…"},{"s":"d959a9e0+","t":"2026-11-18T06:28Z","c":"buoi-banner: owner pick BTR_OP = 0.85 on the 73a7d3f layout (title overlaps the band, flush at the stage top); ladder hook removed"},{"s":"8c210d6b+","t":"2026-11-18T06:21Z","c":"act-pic-match: EVENTS.json + FIGURES-kids.json rebuilt (same 17/11 02:41Z incident), cdn_sync refuses bulk overwrite of top-level manifests…"},{"s":"b7ea2748+","t":"2026-11-18T06:12Z","c":"kit-set-lines: display-room test pins rank so the real-data pair is never over rank"},{"s":"22891730+","t":"2026-11-18T06:08Z","c":"k61StageDesc: restore the existing k61Desc untouched (rename only my new helper)"},{"s":"8f5ea906+","t":"2026-11-18T06:11Z","c":"face-reveal-anim: kitReveal (KIT 79) — the real face appears in place out of the grey (frame, avatar, room-stage figure, event figure); Gọn…"},{"s":"04bb2793+","t":"2026-11-18T05:52Z","c":"hud-mood-bar: owner picked layout 1 (full row); switch and slim layout removed; KIT 49.4"},{"s":"c1104d92+","t":"2026-11-18T05:41Z","c":"face-zoom-aspect test: SEED / FORCE options for same-character before/after shots"},{"s":"16b4dad8+","t":"2026-11-18T05:32Z","c":"cloth-bake-static: cloth layer on every static figure path on a cold cache (wait layer + patch on bake done); test + report"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -31393,7 +31393,7 @@ window.KIT_SCAR={src:function(sev){return `https://ctm-img.victoria-tntt.workers
  on:function(p){try{if(!p||!p.scar)return false;return (typeof S!=="undefined"&&p===S)||(typeof knows==="function"&&!!knows(p))}catch(e){return false}},
  of:function(p){if(!this.on(p))return null;const sev=p.scar.sev|0;return{sev,src:this.src(sev),label:`Hủy dung (${this.names[sev]||""})`}},
  rect:function(file){const n=String(file||"").split("/").pop();return this.fit&&this.fit[n]||null},
- style:function(file){const r=this.rect(file);if(!r)return "";return `left:${r[0]}%;top:${r[1]}%;width:${r[2]}%;height:${r[3]}%;transform:rotate(${r[4]}deg);transform-origin:${this.origin}`},
+ style:function(file){const r=this.rect(file);if(!r)return "";return `left:${r[0]}%;top:${r[1]}%;width:${r[2]}%;height:${r[3]}%;transform:rotate(${r[4]}deg) scaleX(-1);transform-origin:${this.origin}`},
  load:function(){if(this.fit||this._ld)return;this._ld=1;try{fetch(this.fitUrl).then(r=>r.ok?r.json():null).then(j=>{if(j)KIT_SCAR.fit=j}).catch(()=>{})}catch(e){}}};
 try{KIT_SCAR.load()}catch(e){}
 
@@ -33448,50 +33448,44 @@ window.KIT_SCAR={src:function(sev){return `https://ctm-img.victoria-tntt.workers
  on:function(p){try{if(!p||!p.scar)return false;return (typeof S!=="undefined"&&p===S)||(typeof knows==="function"&&!!knows(p))}catch(e){return false}},
  of:function(p){if(!this.on(p))return null;const sev=p.scar.sev|0;return{sev,src:this.src(sev),label:`Hủy dung (${this.names[sev]||""})`}},
  rect:function(file){const n=String(file||"").split("/").pop();return this.fit&&this.fit[n]||null},
- style:function(file){const r=this.rect(file);if(!r)return "";return `left:${r[0]}%;top:${r[1]}%;width:${r[2]}%;height:${r[3]}%;transform:rotate(${r[4]}deg);transform-origin:${this.origin}`},
+ style:function(file){const r=this.rect(file);if(!r)return "";return `left:${r[0]}%;top:${r[1]}%;width:${r[2]}%;height:${r[3]}%;transform:rotate(${r[4]}deg) scaleX(-1);transform-origin:${this.origin}`},
  load:function(){if(this.fit||this._ld)return;this._ld=1;try{fetch(this.fitUrl).then(r=>r.ok?r.json():null).then(j=>{if(j)KIT_SCAR.fit=j}).catch(()=>{})}catch(e){}}};
 try{KIT_SCAR.load()}catch(e){}
 }
 /* ---------- 7. VEIL + SCAR OVERLAYS (review/wardrobe j92: KIT_VEIL / KIT_SCAR, placed per picture from img/veil-fit.json / scar-fit.json) ----------
    Layer order everywhere: portrait < scar strokes < veil < frame. The scar shows ONLY when the player knows (KIT_SCAR.on: herself, or j70 knows(p),
    or p.scar.known); a veil is worn in public, so it shows to everyone who sees the face (never on the grey "Người lạ" silhouette).
-   Places: stage figures (.kfxf box laid exactly over the figure image) + the mirror close-up. AVATAR frames (tall, small, kfc, lists, cards) no longer get an
-   overlay at all: they show the photo with the LASTING marks baked in (KIT_LASTING / KIT_BAKE below, owner 17/11 ~18:10Z). A picture without fit data gets nothing (never a guessed position). ---------- */
+   Places: stage figures (.kfxf box laid exactly over the figure image) + the mirror close-up. AVATAR frames (tall, small, kfc, lists, cards) get the same stack through KIT_AV (18/11, owner ~03:20Z; supersedes the baked ID-card image of 17/11). A picture without fit data gets nothing (never a guessed position). ---------- */
 kitVeiled=function(){return false};
 function kitVeilOn(p){try{if(!p)return false;if(window.KIT_VEIL&&typeof KIT_VEIL.on==="function"&&KIT_VEIL.on(p))return true;if(typeof scarOf==="function"){const s=scarOf(p);return !!(s&&s.veil)}}catch(e){}return false}
 function kitScarOf(p){try{if(!p||!p.scar||!window.KIT_SCAR)return null;const on=KIT_SCAR.on(p)||!!p.scar.known;if(!on)return null;const sev=Math.max(1,Math.min(3,p.scar.sev|0||1));return{sev,src:KIT_SCAR.src(sev)}}catch(e){return null}}
+/* TONE (owner 18/11 pick, BAL.looks.tone[id] = strength 0..1): opacity x strength + a lighter, less saturated colour (CSS stand-in for "pulled toward skin"; the ladder sheets used the per-pixel pull) */
+function kitToneCss(id,base){try{const k=BAL.looks.tone[id];if(!(k>0)||k>=1)return base==null?"":`;opacity:${base}`;const d=1-k;return `;opacity:${((base==null?1:base)*k).toFixed(3)};filter:saturate(${(1-d*.6).toFixed(3)}) brightness(${(1+d*.5).toFixed(3)})`}catch(e){return base==null?"":`;opacity:${base}`}}
 const kitFxVars=st=>st.replace(/(^|;)\s*(left|top|width|height|transform|transform-origin):/g,(m,a,k)=>`${a}--f${k.replace('transform-origin','to').replace('transform','tf')}:`);
-function kitFxLayers(p,file){if(!p||!file)return"";let h="";const sc=kitScarOf(p);if(sc&&window.KIT_SCAR){const st=KIT_SCAR.style(file);if(st)h+=`<img class="kscar" src="${sc.src}" alt="" aria-hidden="true" style="${kitFxVars(st)}" onerror="this.remove()">`}
+function kitFxLayers(p,file){if(!p||!file)return"";let h="";const sc=kitScarOf(p);if(sc&&window.KIT_SCAR){const px=/fx-pox-scar/.test(sc.src);/* sẹo rỗ (đậu mùa) is a face-square final, never the cheek scratch box */const st=px?(typeof lkSquare==="function"?lkSquare(file):""):KIT_SCAR.style(file);if(st)h+=`<img class="${px?"kpox":"kscar"}" src="${sc.src}" alt="" aria-hidden="true" style="${kitFxVars(st)}${px?(typeof lkKeepCss==="function"?lkKeepCss(file):""):kitToneCss("cao",.85)}" onerror="this.remove()">`}
  if(kitVeilOn(p)&&window.KIT_VEIL&&KIT_VEIL.style){const t=KIT_VEIL.tierOf(p);const st=KIT_VEIL.style(file,t);if(st)h+=`<img class="kveil2" src="${KIT_VEIL.src(t)}" alt="" aria-hidden="true" style="${kitFxVars(st)}" onerror="this.remove()">`}return h}
 const kitFile=src=>String(src||"").split("?")[0].split("/").pop();
 /* ---------- AVATAR = ID CARD (owner 17/11 ~18:10Z, OD "Avatar … cái thẻ nhân viên"; review/kit-fx-register) ----------
    EVERY avatar-class frame (pcp tall, span.md / kmini / kfc, list rows, cards, pickers: everything made by pcPort / mdH) shows the BASE PORTRAIT +
-   LASTING marks only (hủy dung scar; plug-in point KIT_LASTING.add for pox scars etc.). NO makeup, NO temporary marks (slap, rash, pallor, poison, ink…).
-   The lasting marks are BAKED with the photo into ONE image (canvas -> blob URL, cached per picture + marks + size, scaled by the browser like any
-   photo) — there is no overlay box any more, so no registration error is possible. A person without a lasting mark gets the plain photo (no cost).
-   Stage figures + the mirror close-up keep the full look (kitFxLayers / kitFxPut, unchanged). ---------- */
-window.KIT_LASTING={list:[],add:function(d){if(!d||!d.id)return;this.list=this.list.filter(x=>x.id!==d.id);this.list.push(d)},
- /* layers of person p on picture file: [{id,src,rect:[l,t,w,h,deg],o:[ox,oy]}] (rect = % of the WHOLE picture, the scar-fit / veil-fit rows) */
- of:function(p,file){const out=[];if(!p||!file)return out;for(const d of this.list){let r=null;try{r=d.layers(p,file)}catch(e){r=null}if(r&&r.length)out.push(...r)}return out}};
-KIT_LASTING.add({id:"scar",layers:(p,file)=>{const sc=kitScarOf(p);if(!sc||!window.KIT_SCAR||!KIT_SCAR.rect)return null;const r=KIT_SCAR.rect(file);if(!r)return null;return[{id:"scar"+sc.sev,src:sc.src,rect:r.slice(0,5),o:[.5,.5],alpha:.85}]}});
-const KIT_BAKE={cache:{},order:[],pend:{},W:{tall:384,sm:192},max:80,
- key:function(p,file,kind){const L=KIT_LASTING.of(p,file);if(!L.length)return"";return file+"|"+kind+"|"+L.map(l=>l.id+":"+l.rect.join(",")).join(";")},
- /* the src to print into the avatar <img> + an attribute that lets the finished bake replace it */
- pick:function(p,url,kind){try{const file=kitFile(url);const k=this.key(p,file,kind||"sm");if(!k)return{src:url,attr:""};const c=this.cache[k];if(c){this.touch(k);return{src:c,attr:` data-kbk="${k.replace(/"/g,"")}"`}}
-   this.make(k,p,url,file,kind||"sm");return{src:url,attr:` data-kbk="${k.replace(/"/g,"")}"`}}catch(e){return{src:url,attr:""}}},
- touch:function(k){const i=this.order.indexOf(k);if(i>=0)this.order.splice(i,1);this.order.push(k)},
- make:function(k,p,url,file,kind){if(this.pend[k])return;this.pend[k]=1;const L=KIT_LASTING.of(p,file);const abs=/^(https?:|blob:|data:)/.test(url)?url:(typeof IMG_U==="function"?IMG_U(url):url);
-  const load=src=>new Promise((ok,no)=>{const im=new Image();im.crossOrigin="anonymous";im.decoding="async";im.onload=()=>ok(im);im.onerror=()=>no(0);im.src=src});
-  Promise.all([load(abs),...L.map(l=>load(/^(https?:|blob:|data:)/.test(l.src)?l.src:(typeof IMG_U==="function"?IMG_U(l.src):l.src)))]).then(([ph,...ls])=>{
-   const nw=ph.naturalWidth,nh=ph.naturalHeight,K=Math.min(1,this.W[kind]/nw),W=Math.max(1,Math.round(nw*K)),H=Math.max(1,Math.round(nh*K));const cv=document.createElement("canvas");cv.width=W;cv.height=H;const g=cv.getContext("2d");g.imageSmoothingQuality="high";g.drawImage(ph,0,0,W,H);
-   ls.forEach((im,i)=>{const l=L[i],r=l.rect,x=r[0]/100*W,y=r[1]/100*H,w=r[2]/100*W,h=r[3]/100*H;g.save();g.globalAlpha=l.alpha==null?1:l.alpha;g.translate(x+w*l.o[0],y+h*l.o[1]);g.rotate((r[4]||0)*Math.PI/180);g.drawImage(im,-w*l.o[0],-h*l.o[1],w,h);g.restore()});
-   cv.toBlob(b=>{delete this.pend[k];if(!b)return;const u=URL.createObjectURL(b);this.cache[k]=u;this.touch(k);while(this.order.length>this.max){const o=this.order.shift(),ou=this.cache[o];delete this.cache[o];setTimeout(()=>{try{URL.revokeObjectURL(ou)}catch(e){}},60000)}
-    document.querySelectorAll("img[data-kbk]").forEach(e=>{if(e.getAttribute("data-kbk")===k.replace(/"/g,"")&&e.src!==u)e.src=u})},"image/webp",.92)}).catch(()=>{delete this.pend[k]})}};
-window.KIT_BAKE=KIT_BAKE;
+   EVERY face layer at mirror strength (owner 18/11 ~03:20Z: marks, scratch, ink, soot, pox, dust, sweat, scar, veil, makeup incl. Khuynh thành sparkle, smudge) = the ONE kitFxLayers stack, laid
+   over the portrait by KIT_AV (below) through kitFxPut / kfxGeom, same CSS + eye/lip keep-out mask as the mirror and the stage. ---------- */
+/* KIT_AV: the avatar hook. pcPort / mdH stamp the portrait <img> with data-kav="<n>" (n -> the person); kitAvSweep then lays the SAME kitFxLayers stack over it through kitFxPut
+   (one .kfxf box, kfxGeom follows the picture: object-fit, clip, transform), so every avatar frame (top bar md, kmini / kfc side cards, tab + list rows, tall pcPort, mdH everywhere) shows the
+   marks + scratch + veil + makeup incl. Khuynh thành sparkle exactly like the mirror: same CSS, tone, keep-out mask (lkKeepCss), LOD step 0 (toilStageEl). A person / picture without fit data gets nothing. */
+const KIT_AV={n:0,P:new Map(),max:900,
+ stamp:function(p){const n=++this.n;this.P.set(n,p);if(this.P.size>this.max)this.P.delete(this.P.keys().next().value);return n},
+ sweep:function(root){try{(root||document).querySelectorAll("img[data-kav]").forEach(im=>{const p=KIT_AV.P.get(+im.dataset.kav);const file=kitFile(im.currentSrc||im.getAttribute("src")||im.src);const o=im.__kav;
+   if(!p||!file||/face-|unknown/.test(file)||!im.isConnected){if(o)KIT_AV.drop(im);return}
+   if(im.__kavf===file&&im.__kavp===p&&(!o||o.isConnected))return;if(o)KIT_AV.drop(im);im.__kavf=file;im.__kavp=p;
+   const host=im.parentElement;if(!host)return;kitFxPut(im,p,host);const s=host.lastElementChild;if(s&&s.__img===im){s.setAttribute("data-kav","1");s.__file=file;im.__kav=s}else im.__kav=null})}catch(e){}},
+ drop:function(im){const o=im.__kav;if(o){KFX_L.delete(o);o.remove()}im.__kav=null;im.classList.remove("kfxon")}};
+window.KIT_AV=KIT_AV;
 (function(){const p0=pcPort;pcPort=function(f){let h=p0.apply(this,arguments);try{const p=f&&f.__kp;if(!p||!/class="kpor"/.test(h))return h;const m=/<img class="kpor" src="([^"]+)"/.exec(h);if(!m||/face-|unknown/.test(m[1]))return h;
-  const b=KIT_BAKE.pick(p,m[1],"tall");if(b.attr)h=h.replace(m[0],`<img class="kpor"${b.attr} src="${b.src}"`)}catch(e){}return h}})();
+  h=h.replace(m[0],`<img class="kpor" data-kav="${KIT_AV.stamp(p)}" src="${m[1]}"`);kitAvKick()}catch(e){}return h}})();
 (function(){const m0=mdH;mdH=function(p){let h=m0.apply(this,arguments);try{const q=p&&p.__kp;if(!q)return h;const m=/<img([^>]*?)src="([^"]*por-[^"]+)"/.exec(h);if(!m)return h;
-  const b=KIT_BAKE.pick(q,m[2],"sm");if(b.attr)h=h.replace(m[0],`<img${m[1]}${b.attr.trim()} src="${b.src}"`)}catch(e){}return h}})();
+  h=h.replace(m[0],`<img${m[1]}data-kav="${KIT_AV.stamp(q)}" src="${m[2]}"`);kitAvKick()}catch(e){}return h}})();
+let kavRaf=0;function kitAvKick(){if(kavRaf)return;kavRaf=requestAnimationFrame(()=>{kavRaf=0;KIT_AV.sweep(document)})}
+(function(){if(!window.MutationObserver)return;const go=()=>{if(!document.body)return setTimeout(go,50);new MutationObserver(ms=>{if(ms.some(r=>r.type==="attributes"||[...r.addedNodes].some(n=>n.nodeType===1&&!(n.classList&&n.classList.contains("kfxf")))))kitAvKick()}).observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:["src"]})};go()})();
 /* kitFxPut(img,p,host): lay the face layers of person p over the DRAWN picture img inside host (room stage, podium, any figure) */
 function kitFxPut(img,p,host){{if(!img||!p||(typeof kitIsKnown==="function"&&!kitIsKnown(p)))return;const fx=kitFxLayers(p,kitFile(img.currentSrc||img.src));if(!fx)return;const s=document.createElement("span");s.className="kfxf";s.innerHTML=fx;
   s.__img=img;s.style.cssText="position:absolute;pointer-events:none;z-index:2";kfxGeom(s);img.classList.add("kfxon");host.appendChild(s);KFX_L.add(s)}}
@@ -33518,7 +33512,7 @@ function kitFigFx(){try{const st=$("stage");if(!st)return;st.querySelectorAll(".
 /* the fit tables load asynchronously: redraw once both are in */
 (function(){let n=0;const chk=()=>{if(window.KIT_VEIL&&KIT_VEIL.fit&&window.KIT_SCAR&&KIT_SCAR.fit){try{if(typeof S!=="undefined"&&S&&!S.dead&&typeof render==="function"&&!Q.length)render()}catch(e){}return}if(++n<40)setTimeout(chk,250)};setTimeout(chk,300)})();
 (function(){const st=document.createElement("style");st.id="k2b-fx";st.textContent=`
-.kfx>img,.kfxf>img,.pcp.kit .kin .kfx>img,span.md.kmini.kmini .kfx>img{position:absolute!important;inset:auto!important;display:block!important;left:var(--fleft)!important;top:var(--ftop)!important;width:var(--fwidth)!important;height:var(--fheight)!important;transform:var(--ftf,none)!important;transform-origin:var(--fto,50% 50%)!important;max-width:none!important;max-height:none!important;min-width:0!important;object-fit:fill!important;border-radius:0!important;pointer-events:none;mask-image:none!important;-webkit-mask-image:none!important}
+.kfx>img,.kfxf>img,.pcp .kfxf>img,.md .kfxf>img,.pcp.kit .kin .kfx>img,span.md.kmini.kmini .kfx>img{position:absolute!important;inset:auto!important;display:block!important;left:var(--fleft)!important;top:var(--ftop)!important;width:var(--fwidth)!important;height:var(--fheight)!important;transform:var(--ftf,none)!important;transform-origin:var(--fto,50% 50%)!important;max-width:none!important;max-height:none!important;min-width:0!important;object-fit:fill!important;border-radius:0!important;pointer-events:none;mask-image:none!important;-webkit-mask-image:none!important}
 .kfx>img.kscar,.kfxf>img.kscar{opacity:.85}
 img.figimg.kfxon,#mefig.kfxon{animation:none!important}
 `;document.head.appendChild(st)})();
@@ -48401,6 +48395,7 @@ function toilFaceLayer(p,file){const lk=toilLookOfP(p);if(!lk)return"";const col
  return (src?`<img class="kmkl kmkl-${lk}" src="${src}" alt="" aria-hidden="true" style="--fleft:0%;--ftop:0%;--fwidth:100%;--fheight:100%">`:"")+mk+(lk==="tuyet"?toilGlowLayer(file,col):"")}
 if(typeof kitFxLayers==="function"){const fx0=kitFxLayers;kitFxLayers=function(p,file){const h=fx0.apply(this,arguments);let m="";try{m=toilFaceLayer(p,file)}catch(e){}return m+h}}
 
+
 /* ================= §60 MAKEUP COLOURS · kitSwatches (owner 15/11 19:05Z, review/mk-colour) =================
    Like modern dress-up / makeup games: the colours she picks at the mirror (phấn mắt, phấn má, son môi, màu mày) show in EXACTLY those colours on
    HER OWN pictures (portrait + full-body figure, every place kitFxLayers draws her) all day. The picks live in p.toilette.col (old saves: none →
@@ -48489,16 +48484,21 @@ function toilMkPts(v){const P=[];for(let i=0;i<60;i++)P.push([v[2*i]/40,v[2*i+1]
 function toilMkBox(v){const P=toilMkPts(v);let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;P.forEach(([x,y])=>{x0=Math.min(x0,x);x1=Math.max(x1,x);y0=Math.min(y0,y);y1=Math.max(y1,y)});
  const mx=(x1-x0)*.3,my=(y1-y0)*.3;return[x0-mx,y0-my,x1-x0+2*mx,y1-y0+2*my].map(n=>+n.toFixed(3))}
 const TOIL_MKA={};/* key -> [file,look,col]: the size pass (toilLodPass) re-fetches the same layer at another strength step */
-function toilMkLayer(file,look,col,step){const v=MK_FIT.get(file);if(!v||!TOIL_MKS[look])return"";const base=[file,look,col.mat,col.ma,col.son,col.may,look==="vung"?(col.seed|0)+"/"+BAL.toil.vungSm+"/"+BAL.toil.vungSide+"/"+BAL.toil.vungRot+"/"+BAL.toil.vungSmSize:""].join("|"),key=step?base+"|L"+step:base;TOIL_MKA[base]=[file,look,col];
+function toilMkBase(file,look,col){return [file,look,col.mat,col.ma,col.son,col.may,look==="vung"?(col.seed|0)+"/"+BAL.toil.vungSm+"/"+BAL.toil.vungSide+"/"+BAL.toil.vungRot+"/"+BAL.toil.vungSmSize:""].join("|")}
+function toilMkLayer(file,look,col,step){const v=MK_FIT.get(file);if(!v||!TOIL_MKS[look])return"";const base=toilMkBase(file,look,col),key=step?base+"|L"+step:base;TOIL_MKA[base]=[file,look,col];
  let e=TOIL_MKC[key];if(!e){e=TOIL_MKC[key]={box:toilMkBox(v),src:""};TOIL_MKQ.push(key);if(TOIL_MKQ.length>200)delete TOIL_MKC[TOIL_MKQ.shift()];toilMkPaint(file,v,look,col,e,key,step||0)}
  const b=e.box;return `<img class="kmkl kmkc kmkl-${look}" data-mkk="${key}" src="${e.src||TOIL_BLANK}" alt="" aria-hidden="true" style="--fleft:${b[0]}%;--ftop:${b[1]}%;--fwidth:${b[2]}%;--fheight:${b[3]}%">`}
+function toilMkFlush(e){const a=e.cbs;e.cbs=null;if(a)a.forEach(f=>{try{f(e.src)}catch(x){}})}
 function toilMkPaint(file,v,look,col,e,key,step){const im=new Image();im.crossOrigin="anonymous";im.decoding="async";
- im.onload=()=>{try{e.src=toilMkDraw(im,v,look,col,e.box,(function(){try{return toilRow(file)}catch(x){return null}})(),(step||0)/BAL.toil.lod.steps)}catch(x){e.src=TOIL_BLANK}document.querySelectorAll("img.kmkc").forEach(x=>{if(x.dataset.mkk===key)x.src=e.src})};
- im.onerror=()=>{e.src=TOIL_BLANK};im.src=IMG_U("https://ctm-img.victoria-tntt.workers.dev/img/"+file)}
+ im.onload=()=>{try{e.src=toilMkDraw(im,v,look,col,e.box,(function(){try{return toilRow(file)}catch(x){return null}})(),(step||0)/BAL.toil.lod.steps)}catch(x){e.src=TOIL_BLANK}document.querySelectorAll("img.kmkc").forEach(x=>{if(x.dataset.mkk===key)x.src=e.src});toilMkFlush(e)};
+ im.onerror=()=>{e.src=TOIL_BLANK;toilMkFlush(e)};im.src=IMG_U("https://ctm-img.victoria-tntt.workers.dev/img/"+file)}
 /* size-aware makeup: one pass over every colour layer on screen; its face width in px (layer box = face + 30 % each side) picks the strength step, so every renderer (stage figure, avatar frame, close-up) gets the same curve */
 function toilLodStep(px){const L=BAL.toil.lod;if(!(px>0)||px>=L.fullAt)return 0;const t=Math.min(1,(L.fullAt-px)/(L.fullAt-L.maxAt));return Math.round(t*L.steps)}
+/* STAGE = MIRROR STRENGTH (owner 18/11 ~09:25Z, avatar-makeup): a face layer on the room stage / event-dialog figure is always LOD step 0 (the approved mirror look, no boost); every other place keeps the size curve */
+function toilStageEl(im){try{return!!(im&&im.closest&&im.closest("#stage,.kesfi,.kfxf[data-kav]")&&!im.closest(".kfzoom-i"))}catch(e){return false}}
+window.toilStageEl=toilStageEl;
 let toilLodRaf=0;
-function toilLodPass(){toilLodRaf=0;try{document.querySelectorAll("img.kmkc").forEach(im=>{const cur=im.dataset.mkk||"";const base=cur.replace(/\|L\d+$/,""),A=TOIL_MKA[base];if(!A)return;const w=im.getBoundingClientRect().width;if(!(w>0))return;const st=toilLodStep(w/1.6),have=+((/\|L(\d+)$/.exec(cur)||[])[1]||0);if(st===have)return;
+function toilLodPass(){toilLodRaf=0;try{document.querySelectorAll("img.kmkc").forEach(im=>{const cur=im.dataset.mkk||"";const base=cur.replace(/\|L\d+$/,""),A=TOIL_MKA[base];if(!A)return;const w=im.getBoundingClientRect().width;if(!(w>0))return;const st=toilStageEl(im)?0:toilLodStep(w/1.6),have=+((/\|L(\d+)$/.exec(cur)||[])[1]||0);if(st===have)return;
  const html=toilMkLayer(A[0],A[1],A[2],st);const key=st?base+"|L"+st:base,e=TOIL_MKC[key];if(!html||!e)return;im.dataset.mkk=key;if(e.src)im.src=e.src})}catch(x){}}
 function toilLodSched(){if(!toilLodRaf)toilLodRaf=requestAnimationFrame(toilLodPass)}
 if(typeof MutationObserver==="function"&&typeof document!=="undefined"){const go=()=>{try{new MutationObserver(toilLodSched).observe(document.body,{childList:true,subtree:true});window.addEventListener("resize",toilLodSched)}catch(e){}};if(document.body)go();else document.addEventListener("DOMContentLoaded",go)}
@@ -66418,6 +66418,18 @@ Object.assign(BAL,{looks:{
  cry:{o:70,lv:1,lvLong:2},
  /* harm acts as minigames (jslap engine): her level from the game, an NPC's from the slap rank table; dodge lowers one level (nhẹ = miss) */
  act:{nuoc:{duc:-2,ev:-3,w:1},tea:{duc:-3,ev:-4,w:1,hotSuc:5},ink:{duc:-4,ev:-6,w:.8},npcUp:50},
+ /* tone = strength of the painted mark (owner picks 18/11: mực 85 %, muội 85 %, vết cào 85 %); opacity x strength + lighter colour, see kitToneCss (jk2b) */
+ tone:{muc:.85,muoi:.85,cao:.85},
+ /* KEEP-OUT (owner 18/11 standing rule: a face mark NEVER covers the eyes or the lips): ellipses [cx,cy,rx,ry] in VEIL-ROW units (u = x/rowW, v = y/rowH from the row's left/top),
+    measured on 158 por pictures (Haar eyes + lip colour, dev/test/look-fx-keepout.py) and constant for every por-/fig- row because every row is cut from the face rect by the same ratios.
+    Face-square marks are masked by it (lkKeepCss), the scratch rows (scar-fit) are generated so the box stays inside the cheek zone: cheek = [left,top,w,h,rot offset] of the veil row: the OLD diagonal across the cheek below the eye (owner 18/11: never vertical), ~1.4x the R3 length, as long as the keep-out allows. pad = ONE margin: every ellipse is grown by it (mask, scratch test). */
+ keep:{feather:.012,eye:[[.31,.08,.14,.15],[.72,.08,.14,.15]],
+ /* PER-PICTURE KEEP-OUT (R9f, owner 18/11 standing rule: never the eyes, never the lips; c30 pits landed on the iris because ONE constant ellipse was wrong for pictures whose eyes sit off it): img/keep-fit.json = { "<por-/fig- file>": [eye1 u, eye1 v, eye2 u, eye2 v, eye half-width, eye half-height, mouth u, mouth v, mouth half-width, mouth half-height, nose u, nose v] } x1000, in VEIL-ROW units, measured from MediaPipe face landmarks (dev/tools/look-fx-eyefit.py: eye CONTOUR + lip outline); an ellipse = half-size x [kx, + ax, ky, + ay]; the nose keeps the constant size, only its centre moves. A picture with no row keeps the constants (eye / mouth / nose above). */
+ fit:{eye:[1.35,.01,2.4,.01],mouth:[1.25,.01,1.6,.01]},mouth:[.47,.655,.25,.10],nose:[.51,.36,.11,.2],pad:1.15,cheek:[.08,.30,.28,.20,5],
+ /* VẾT CÀO lv1 + lv2 + lv3 (owner 18/11 ~04:50Z + ~05:00Z "chốt bậc 3 cho mức nhẹ luôn"): ladder STEP 3 = 1.6 x the R6 box [.28 x .26] of the veil row, left 0, top .20, old diagonal, flipped, below the eye; it crosses the eye / nose / mouth zones, so the strokes are CUT at the zones by the stroke-level mask (lkKeepScar). lv1 stays the scar-fit row. */
+ cheek3:[0,.20,.448,.416,0],
+ /* FACE CLIP (owner 18/11 ~04:58Z: no mark past the face skin onto hair / ear / neck / background): ONE polygon in face-square units (0..1 of the square of lkSquareRect), measured on 180 por pictures (skin segmentation, dev/test/look-fx-faceclip.py); every mark layer (face-square marks, cào, smudge) is clipped to it by lkFaceClipAll */
+ face:[[.23,.19],[.5,.14],[.77,.19],[.88,.34],[.90,.52],[.84,.70],[.72,.87],[.5,.96],[.28,.87],[.16,.70],[.10,.52],[.12,.34]]},
  pox:{thuydau:{sea:["Xuân"],cont:1,die:0},sac:{thuydau:[0,3,5,8],daumua:[0,6,10,14]},spread:35,spreadWk:3,scar:[0,1,1,2]},
  /* SMUDGE = a CODE effect on her makeup colours (owner 17/11 ~23:30Z), per level 0..3 = không / nhẹ / vừa / nặng. Lengths in u = the distance between the two eyes
     (so portrait, figure, mirror all match); a = strength of that colour. blush/lid run DOWN the cheek (vertical, gravity), tear = grey lash-run lines, lip = colour
@@ -66427,7 +66439,9 @@ Object.assign(BAL,{looks:{
   tear:{len:[0,.5,1,1.7],a:[0,.25,.34,.42],dark:1.2/* x on the grey runs' opacity at every level: OWNER PICK 18/11 ~02:05Z "lem phấn 20 %" = 1.2 */,extra:{n:[0,0,0,1],len:.33,off:.075,w:1}/* nặng: ONE extra short grey run per face (about 1/3 of the main run) starting at the lash line beside the main run on a seeded eye; same colour and strength as the main run */,w:[0,.026,.03,.04],n:[0,1,1,1],pair:[0,0,[.55,1.5],0],fine:[0,0,0,1]}/* fine = nặng runs taper (thick at the lash line, thinning), wander and break; pair = vừa: one eye's run SHORT, the other LONG (which eye is seeded per face) *//* pair = vừa: one eye's run SHORT, the other LONG (not mirrored; which one is seeded per face) */,cry:{len:.8,a:.36,w:.03},
   lip:{sm:[0,0,.6,1],a:[0,0,.32,.44]},streak:[0,.35,.3,.3],
   big:{at:100,max:130,boost:1.25,steps:3}/* LARGE faces (face px from `at` up to `max`): the grey runs are up to x boost darker, in `steps` steps, so a big face is not washed (owner 18/11 01:23Z, inverse of the small-size boost) */,pct:{blush:[0,.2,.2,.2],lip:[0,.2,.2,.2]}/* OWNER KNOB (OD 18/11 ~00:58Z): opacity share of the blush smear and of the lip smear at vừa / nặng; she picks 5 / 10 / 15 / 20 % from option images; null = the older wash / lip.a numbers */}}});
-window.LOOKS_ART={};
+/* the 24 owner-approved face finals (384x384 face-square, uploaded to the CDN img/ 18/11, md5 table dev/handover/reports/looks-2-art.md); hair + cloth slots stay empty (not approved) */
+window.LOOKS_ART={};for(const f of["bui","moho","muc","muoi"])for(let n=1;n<=3;n++){LOOKS_ART[`fx-${f}-${n}.png`]=1;if(f==="muc")LOOKS_ART[`fx-muc-${n}-m.png`]=1}
+for(const k of["thuydau","daumua","scar"])for(let n=1;n<=3;n++)LOOKS_ART[`fx-pox-${k}-${n}.png`]=1;
 const LK_N={smu:["","Phấn son lem nhẹ","Phấn son lem nhem","Phấn son lem nhem nặng"],bui:["","Mặt lấm bụi","Bụi bám đầy mặt","Bụi bám đầy mặt"],
  muoi:["","Mặt lấm muội khói","Mặt lấm muội khói","Mặt đen muội khói"],moho:["","Mồ hôi làm phấn trôi","Mồ hôi làm phấn trôi","Mồ hôi đẫm, phấn trôi hết"],
  lanh:["","Má đỏ môi tái vì lạnh","Má đỏ môi tái vì lạnh","Lạnh tím môi"],muc:["","Mặt vấy mực","Mặt lem mực","Mặt lem nhem mực đen"],
@@ -66576,7 +66590,7 @@ function lkLodMul(lod,cue){const L=window.BAL&&BAL.toil&&BAL.toil.lod;if(!L||!lo
 /* face px -> step: 0..steps = small (the makeup layer's own toilLodStep), 10+k = large face (k 1..big.steps, BAL.looks.smuFx.big), 0 = the approved strength in between */
 function lkSmuStep(px){const s=window.toilLodStep?toilLodStep(px):0;if(s>0)return s;const B=lkB().smuFx.big;if(!(px>B.at))return 0;return 10+Math.min(B.steps,Math.max(1,Math.round(Math.min(1,(px-B.at)/(B.max-B.at))*B.steps)))}
 function lkLodPass(){try{if(typeof toilLodStep!=="function")return;document.querySelectorAll("img.klk-smu").forEach(im=>{const cur=im.dataset.lsk||"",base=cur.replace(/\|L\d+$/,""),A=LK_SMA[base];if(!A)return;const w=im.getBoundingClientRect().width;if(!(w>0))return;
-  const st=lkSmuStep(w/1.6),have=+((/\|L(\d+)$/.exec(cur)||[])[1]||0);if(st===have)return;const r=lkSmuLayer(A[0],A[1],A[2],A[3],st);if(!r)return;im.dataset.lsk=r.key;if(r.e.src)im.src=r.e.src})}catch(x){}}
+  const st=window.toilStageEl&&toilStageEl(im)?0:lkSmuStep(w/1.6),have=+((/\|L(\d+)$/.exec(cur)||[])[1]||0);if(st===have)return;const r=lkSmuLayer(A[0],A[1],A[2],A[3],st);if(!r)return;im.dataset.lsk=r.key;if(r.e.src)im.src=r.e.src})}catch(x){}}
 if(typeof toilLodPass==="function"){const tp0=toilLodPass;toilLodPass=function(){tp0();lkLodPass()};window.toilLodPass=toilLodPass}
 function lkSmuSeed(file,cols){let h=cols?cols.seed|0:0;for(let i=0;i<file.length;i++)h=(Math.imul(h,31)+file.charCodeAt(i))|0;return h}
 function lkSmuDraw(im,v,lv,why,cols,box,seed,lod,big){lod=lod||0;big=big||0;const W=im.naturalWidth,H=im.naturalHeight,F=lkB().smuFx;
@@ -66665,22 +66679,80 @@ function lkSmuDraw(im,v,lv,why,cols,box,seed,lod,big){lod=lod||0;big=big||0;cons
  const oc=mkc();oc.getContext("2d").putImageData(new ImageData(out,cw,ch),0,0);return oc.toDataURL("image/png")}
 window.lkSmuDraw=lkSmuDraw;
 /* ---------- face-fx entries: pictures wait for Foreman C; chips + Sắc work now ---------- */
-function lkFaceImg(cls,f,st){return st&&lkArt(f)?`<img class="${cls}" src="https://ctm-img.victoria-tntt.workers.dev/img/${f}" alt="" aria-hidden="true" style="${kitFxVars(st)}" onerror="this.remove()">`:""}
+/* ink faces the other way when the scar-fit cheek (the cheek facing the viewer) lies RIGHT of the face centre: pick the mirrored fx-muc-N-m (same side rule as the scar; today every por/fig row is the viewer-left cheek) */
+function lkMirror(file){try{const n=String(file||"").split("/").pop(),s=KIT_SCAR.fit&&KIT_SCAR.fit[n],v=KIT_VEIL.fit&&KIT_VEIL.fit[n];return !!(s&&v&&s[0]+s[2]/2>v[0]+v[2]/2+1)}catch(e){return false}}
+/* the first layer (full square) is composited with the ellipse layers BELOW it: xor/exclude = the square minus every ellipse (R7: add/exclude were the wrong way round and the mask did nothing in the browser).
+   The mask is opaque (removes the mark) up to the grown ellipse (pad) and only then fades out over the next 22 % (R7: the fade used to start inside the ellipse and left soot on the lash line / lip corner).
+   CSS mask (square coordinates) that cuts the eye / mouth / nose keep-out out of a face-square mark; the square = 1.08 x the veil row wide, 1.165 x as tall, its top .3826 rowH above the row top (KIT_RASH.style) */
+window.KIT_KEEPFIT={url:"https://ctm-img.victoria-tntt.workers.dev/img/keep-fit.json",fit:null,load:function(){if(this.fit||this._ld)return;this._ld=1;try{fetch(this.url).then(r=>r.ok?r.json():null).then(j=>{if(j)KIT_KEEPFIT.fit=j}).catch(()=>{})}catch(e){}}};try{KIT_KEEPFIT.load()}catch(e){}
+/* the four keep-out ellipses [u,v,ru,rv] (veil-row units) of ONE picture: its keep-fit row, else the constants */
+function lkKeepFor(file){const K=BAL.looks.keep,nm=String(file||"").split("/").pop(),r=KIT_KEEPFIT.fit&&KIT_KEEPFIT.fit[nm];if(!r)return[...K.eye,K.mouth,K.nose];
+ const F=K.fit,q=x=>x/1000,ex=q(r[4])*F.eye[0]+F.eye[1],ey=q(r[5])*F.eye[2]+F.eye[3];
+ return[[q(r[0]),q(r[1]),ex,ey],[q(r[2]),q(r[3]),ex,ey],[q(r[6]),q(r[7]),q(r[8])*F.mouth[0]+F.mouth[1],q(r[9])*F.mouth[2]+F.mouth[3]],[q(r[10]),q(r[11]),K.nose[2],K.nose[3]]]}
+window.lkKeepFor=lkKeepFor;
+function lkKeepCss(file){try{const K=BAL.looks.keep,E=lkKeepFor(file),gr="radial-gradient(ellipse closest-side,#000 82%,transparent 100%)";const im=[],sz=[],ps=[];
+ im.push("linear-gradient(#000,#000)");sz.push("100% 100%");ps.push("0 0");
+ for(const [u,v,ru,rv] of E){const s=(u+.04)/1.08,t=(v+.3826)/1.165,hw=ru*(K.pad||1)*1.22/1.08,hh=rv*(K.pad||1)*1.22/1.165,w=hw*200,h=hh*200,l=(s-hw)*100,tp=(t-hh)*100;im.push(gr);sz.push(w.toFixed(2)+"% "+h.toFixed(2)+"%");ps.push((l/(100-w)*100).toFixed(2)+"% "+(tp/(100-h)*100).toFixed(2)+"%")}
+ const a=im.join(","),b=sz.join(","),c=ps.join(","),x=im.map((_,i)=>i?"exclude":"add").join(",").replace("add","add"),xw=im.map((_,i)=>i?"source-over":"xor").join(",");
+ return `;-webkit-mask-image:${a}!important;mask-image:${a}!important;-webkit-mask-size:${b}!important;mask-size:${b}!important;-webkit-mask-position:${c}!important;mask-position:${c}!important;-webkit-mask-repeat:no-repeat!important;mask-repeat:no-repeat!important;-webkit-mask-composite:${xw}!important;mask-composite:${im.map((_,i)=>i?"add":"exclude").join(",")}!important`}catch(e){return""}}
+window.lkKeepCss=lkKeepCss;
+/* FACE CLIP: every mark layer (img.kpox / img.klk / img.kscar, incl. the code-drawn smudge) gets clip-path = the BAL.looks.face polygon mapped from the face-square into THAT layer's own box (position, rotation, flip, origin from its --f vars).
+   Done once, in the last kitFxLayers wrap below, so stage, portrait, mirror and every avatar frame clip alike. A = picture width / height (por 384x506; stage figures ~384x900): only the small row rotation depends on it. */
+/* per-picture face-fit rows (https://ctm-img.victoria-tntt.workers.dev/img/face-fit.json, outliers only, scan dev/test/look-fx-facefit.py): { "<por-/fig- file>": [dx,dy,sx,sy] } = the BAL.looks.face polygon scaled by sx,sy about (.5,.55) and moved by dx,dy (face-square units); no row = the polygon as it is */
+window.KIT_FACEFIT={url:"https://ctm-img.victoria-tntt.workers.dev/img/face-fit.json",fit:null,load:function(){if(this.fit||this._ld)return;this._ld=1;try{fetch(this.url).then(r=>r.ok?r.json():null).then(j=>{if(j)KIT_FACEFIT.fit=j}).catch(()=>{})}catch(e){}}};try{KIT_FACEFIT.load()}catch(e){}
+function lkFacePts(file,sty){try{const sq=lkSquareRect(file);if(!sq)return"";const g=k=>{const m=new RegExp("--f"+k+":\\s*(-?[\\d.]+)%").exec(sty);return m?+m[1]:null},L=g("left"),T=g("top"),W=g("width"),H=g("height");if(L==null||T==null||W==null||H==null)return"";
+ const tf=/--ftf:\s*([^;]*)/.exec(sty),rot=tf&&/rotate\((-?[\d.]+)deg\)/.exec(tf[1]),fl=!!(tf&&/scaleX\(-1\)/.test(tf[1])),to=/--fto:\s*([\d.]+)%\s+([\d.]+)%/.exec(sty);
+ const A=/^por-/.test(String(file).split("/").pop())?.759:.43,D=Math.PI/180;
+ const e={l:L,t:T,w:W,h:H,r:(rot?+rot[1]:0)*D,ox:to?+to[1]/100:.5,oy:to?+to[2]/100:.5,f:fl},q={l:sq[0],t:sq[1],w:sq[2],h:sq[3],r:sq[4]*D,ox:.5,oy:KIT_RASH.RB,f:false};
+ const toPic=(b,s,t)=>{if(b.f)s=2*b.ox-s;const dx=(s-b.ox)*b.w*A,dy=(t-b.oy)*b.h,c=Math.cos(b.r),n=Math.sin(b.r);return[(b.l+b.ox*b.w)*A+dx*c-dy*n,b.t+b.oy*b.h+dx*n+dy*c]};
+ const toLoc=(b,X,Y)=>{X-=(b.l+b.ox*b.w)*A;Y-=b.t+b.oy*b.h;const c=Math.cos(b.r),n=Math.sin(b.r),dx=X*c+Y*n,dy=-X*n+Y*c;let s=dx/(b.w*A)+b.ox;if(b.f)s=2*b.ox-s;return[s,dy/b.h+b.oy]};
+ const nm=String(file).split("/").pop(),ff=KIT_FACEFIT.fit&&KIT_FACEFIT.fit[nm],fx=ff?ff[0]:0,fy=ff?ff[1]:0,fsx=ff?ff[2]:1,fsy=ff?ff[3]:1,pts=BAL.looks.keep.face.map(([s0,t0])=>{const s=(s0-.5)*fsx+.5+fx,t=(t0-.55)*fsy+.55+fy,P=toPic(q,s,t),Q=toLoc(e,P[0],P[1]);return[Q[0]*100,Q[1]*100]});
+ return{pts:pts,sx:BAL.looks.keep.feather/((W/100)*A)*100,sy:BAL.looks.keep.feather/(H/100)*100}}catch(err){return null}}
+/* FEATHERED face clip (R9d: the hard clip-path cut the soft glow of the marks with a straight edge = a visible wedge / box): the face polygon as a BLURRED SVG mask (stdDeviation = BAL.looks.keep.feather of the picture height, equal in px on both layer axes) put on TOP of the mark's own keep-out mask list and intersected with it. The svg is padded (viewBox -50..150) so shapes past the layer box still feed the blur. Returns the whole new style string. */
+function lkClipFor(file,sty){try{const g=lkFacePts(file,sty);if(!g)return sty;const P=g.pts.map(q=>q[0].toFixed(1)+","+q[1].toFixed(1)).join(" ");
+ const svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="-50 -50 200 200" preserveAspectRatio="none"><defs><filter id="b" filterUnits="userSpaceOnUse" x="-50" y="-50" width="200" height="200"><feGaussianBlur stdDeviation="'+g.sx.toFixed(2)+' '+g.sy.toFixed(2)+'"/></filter></defs><polygon points="'+P+'" fill="#000" filter="url(#b)"/></svg>';
+ const u='url("data:image/svg+xml,'+encodeURIComponent(svg).replace(/'/g,"%27")+'")',G=(re)=>{const m=re.exec(sty);return m?m[1]:null};
+ const mi=G(/-webkit-mask-image:\s*([^;]*?)\s*!important/),ms=G(/-webkit-mask-size:\s*([^;]*?)\s*!important/),mp=G(/-webkit-mask-position:\s*([^;]*?)\s*!important/),mc=G(/(?:^|;)\s*mask-composite:\s*([^;]*?)\s*!important/),wc=G(/-webkit-mask-composite:\s*([^;]*?)\s*!important/);
+ const o=sty.replace(/(?:^|;)\s*(?:-webkit-)?mask-(?:image|size|position|repeat|composite)\s*:[^;]*/g,"");
+ const n=mi?mi.split(/,(?![^(]*\))/).length:0,rep=Array(n+1).fill("no-repeat").join(",");
+ const I=mi?u+","+mi:u,S=mi?"200% 200%,"+ms:"200% 200%",Pp=mi?"50% 50%,"+mp:"50% 50%";
+ return o+";-webkit-mask-image:"+I+"!important;mask-image:"+I+"!important;-webkit-mask-size:"+S+"!important;mask-size:"+S+"!important;-webkit-mask-position:"+Pp+"!important;mask-position:"+Pp+"!important;-webkit-mask-repeat:"+rep+"!important;mask-repeat:"+rep+"!important"+(mi?";-webkit-mask-composite:source-in,"+wc+"!important;mask-composite:intersect,"+mc+"!important":"")}catch(err){return sty}}
+/* kscar layers: lv2 / lv3 use the ladder STEP 3 box (BAL.looks.keep.cheek3 of the veil row), then ALL levels get the stroke-level keep-out: the eye / nose / mouth ellipses (BAL.looks.keep, same pad + fade as lkKeepCss) mapped from the veil row into THIS layer's own box (position, rotation, flip), cut out with the same xor mask */
+function lkScarFix(file,sty,sev){try{const n=String(file).split("/").pop(),v=KIT_VEIL.fit&&KIT_VEIL.fit[n];if(!v)return sty;let o=sty;
+ {const c=BAL.looks.keep.cheek3,r=(x,y)=>x+";"+y;const L=v[0]+c[0]*v[2],T=v[1]+c[1]*v[3],W=c[2]*v[2],H=c[3]*v[3],R=v[4]+c[4];
+  o=o.replace(/--fleft:[^;]*/,"--fleft:"+L.toFixed(2)+"%").replace(/--ftop:[^;]*/,"--ftop:"+T.toFixed(2)+"%").replace(/--fwidth:[^;]*/,"--fwidth:"+W.toFixed(2)+"%").replace(/--fheight:[^;]*/,"--fheight:"+H.toFixed(2)+"%").replace(/--ftf:\s*rotate\(-?[\d.]+deg\)/,"--ftf:rotate("+R.toFixed(1)+"deg)")}
+ const g=k=>{const m=new RegExp("--f"+k+":\\s*(-?[\\d.]+)%").exec(o);return m?+m[1]:null},L=g("left"),T=g("top"),W=g("width"),H=g("height");if(L==null||T==null||W==null||H==null)return o;
+ const tf=/--ftf:\s*([^;]*)/.exec(o),rot=tf&&/rotate\((-?[\d.]+)deg\)/.exec(tf[1]),fl=!!(tf&&/scaleX\(-1\)/.test(tf[1])),to=/--fto:\s*([\d.]+)%\s+([\d.]+)%/.exec(o),A=/^por-/.test(n)?.759:.43,D=Math.PI/180;
+ const e={l:L,t:T,w:W,h:H,r:(rot?+rot[1]:0)*D,ox:to?+to[1]/100:.5,oy:to?+to[2]/100:.5,f:fl},q={l:v[0],t:v[1],w:v[2],h:v[3],r:v[4]*D,ox:.5,oy:.5,f:false};
+ const toPic=(b,s,t)=>{if(b.f)s=2*b.ox-s;const dx=(s-b.ox)*b.w*A,dy=(t-b.oy)*b.h,c=Math.cos(b.r),n=Math.sin(b.r);return[(b.l+b.ox*b.w)*A+dx*c-dy*n,b.t+b.oy*b.h+dx*n+dy*c]};
+ const toLoc=(b,X,Y)=>{X-=(b.l+b.ox*b.w)*A;Y-=b.t+b.oy*b.h;const c=Math.cos(b.r),n=Math.sin(b.r),dx=X*c+Y*n,dy=-X*n+Y*c;let s=dx/(b.w*A)+b.ox;if(b.f)s=2*b.ox-s;return[s,dy/b.h+b.oy]};
+ const K=BAL.looks.keep,pad=K.pad||1,gr="radial-gradient(ellipse closest-side,#000 82%,transparent 100%)",im=["linear-gradient(#000,#000)"],sz=["100% 100%"],ps=["0 0"];
+ for(const [u,w,ru,rv] of lkKeepFor(file)){const P=toPic(q,u,w),C=toLoc(e,P[0],P[1]),hw=ru*pad*1.22*v[2]/W,hh=rv*pad*1.22*v[3]/H,wp=hw*200,hp=hh*200,l=(C[0]-hw)*100,tp=(C[1]-hh)*100;
+  im.push(gr);sz.push(wp.toFixed(2)+"% "+hp.toFixed(2)+"%");ps.push((l/(100-wp)*100).toFixed(2)+"% "+(tp/(100-hp)*100).toFixed(2)+"%")}
+ const a=im.join(","),b=sz.join(","),c=ps.join(","),xw=im.map((_,i)=>i?"source-over":"xor").join(",");
+ return o+`;-webkit-mask-image:${a}!important;mask-image:${a}!important;-webkit-mask-size:${b}!important;mask-size:${b}!important;-webkit-mask-position:${c}!important;mask-position:${c}!important;-webkit-mask-repeat:no-repeat!important;mask-repeat:no-repeat!important;-webkit-mask-composite:${xw}!important;mask-composite:${im.map((_,i)=>i?"add":"exclude").join(",")}!important`}catch(e){return sty}}
+window.lkScarFix=lkScarFix;
+function lkFaceClipAll(h,file){if(!h||!file)return h;return h.replace(/<img class="((?:kpox|klk|kscar|kveil2)[ "][^>]*?)style="([^"]*)"/g,(m,a,sty)=>{const sc=/^kscar[ "]/.test(a)?/scar-(\d)\.png/.exec(a):null;const o=sc?lkScarFix(file,sty,+sc[1]):sty;return m.slice(0,m.length-sty.length-1)+lkClipFor(file,o)+'"'})}
+window.lkFaceClipAll=lkFaceClipAll;window.lkClipFor=lkClipFor;
+function lkFaceImg(cls,f,st,file){if(!st)return"";if(/^fx-muc-\d\.png$/.test(f)&&lkMirror(file))f=f.replace(".png","-m.png");const m=/^fx-(muc|muoi)-/.exec(f);
+ return lkArt(f)?`<img class="${cls}" src="https://ctm-img.victoria-tntt.workers.dev/img/${f}" alt="" aria-hidden="true" style="${kitFxVars(st)}${m?kitToneCss(m[1],null):""}${lkKeepCss(file)}" onerror="this.remove()">`:""}
+/* the same face-square as KIT_RASH.style as a [l,t,w,h,deg] rect */
+function lkSquareRect(file){try{const n=String(file||"").split("/").pop(),r=KIT_VEIL.fit&&KIT_VEIL.fit[n];if(!r)return null;const W=r[2]*KIT_RASH.WX,H=W*(r[3]*480)/(r[2]*445),bandY=r[1]+KIT_VEIL.B0*r[3];return[r[0]+r[2]/2-W/2,bandY-KIT_RASH.RB*H,W,H,r[4]]}catch(e){return null}}
 function lkSquare(file){try{return KIT_RASH.style(file)}catch(e){return""}}
 const lkChips=L=>L.map(([id,x])=>lkWord(id,x.lv)).join(" · ");
 const lkSac=L=>L.reduce((s,[id,x])=>s+Math.round((lkB().cat[id].sac||0)*x.lv),0);
 KIT_FACEFX.add({id:"pox",z:22,ready:true,
  state:p=>{const i=fxIll(p);return i&&(i.k==="thuydau"||i.k==="daumua")?{k:i.k,st:cl(i.st|0,1,3)}:null},
  seen:(p,st)=>p===S||fxIllSeen(p)&&fxSeen(p),sac:(p,st)=>(lkB().pox.sac[st.k]||[])[st.st]||0,chip:()=>null,
- html:(p,file,st)=>lkFaceImg("kpox",`fx-pox-${st.k}-${st.st}.png`,lkSquare(file))});
+ html:(p,file,st)=>lkFaceImg("kpox",`fx-pox-${st.k}-${st.st}.png`,lkSquare(file),file)});
 KIT_FACEFX.add({id:"lkface",z:24,ready:true,state:p=>{const L=lkItems(p,LK_FACE);return L.length?{L}:null},seen:p=>fxSeen(p),sac:(p,z)=>lkSac(z.L),chip:(p,z)=>[lkChips(z.L),"hot"],
- html:(p,file,z)=>{const sq=lkSquare(file);return z.L.map(([id,x])=>id==="smu"?lkSmuImg(p,file,x):lkFaceImg("klk klk-"+id,`fx-${id}-${x.lv}.png`,sq)).join("")}});
+ html:(p,file,z)=>{const sq=lkSquare(file);return z.L.map(([id,x])=>id==="smu"?lkSmuImg(p,file,x):lkFaceImg("klk klk-"+id,`fx-${id}-${x.lv}.png`,sq,file)).join("")}});
 KIT_FACEFX.add({id:"lkhair",z:27,ready:true,state:p=>{const L=lkItems(p,LK_HAIR);return L.length?{L}:null},seen:p=>fxSeen(p),sac:(p,z)=>lkSac(z.L),chip:(p,z)=>[lkChips(z.L),"hot"],html:()=>""});
 KIT_FACEFX.add({id:"lkcloth",z:80,ready:true,state:p=>{const L=lkItems(p,LK_CLOTH);return L.length?{L}:null},seen:p=>fxSeen(p),sac:(p,z)=>lkSac(z.L),chip:(p,z)=>[lkChips(z.L),"hot"],html:()=>""});
 for(const k in LK_ACT)KIT_FACEFX.deny[k]={emp:1,thaihau:1};
 /* ---------- LAYER LAW: one last wrap — every makeup tag under every mark ---------- */
-(function(){if(typeof kitFxLayers!=="function")return;const f0=kitFxLayers;kitFxLayers=function(p,file){const h=f0.apply(this,arguments);
- if(!h||h.indexOf("kmkl")<0)return h;const M=[];const rest=h.replace(/<img class="kmkl[^>]*>/g,m=>{M.push(m);return""});return M.join("")+rest}})();
+(function(){if(typeof kitFxLayers!=="function")return;const f0=kitFxLayers;kitFxLayers=function(p,file){let h=f0.apply(this,arguments);
+ if(!h)return h;h=lkFaceClipAll(h,file);if(h.indexOf("kmkl")<0)return h;const M=[];const rest=h.replace(/<img class="kmkl[^>]*>/g,m=>{M.push(m);return""});return M.join("")+rest}})();
 /* co-op: marks the friend's seat put on HER entry arrive in the act's res message (jcoopworld resApply) → merged into her own bags (higher level wins) */
 function lkMergeIn(p,key,bag){if(!p||!bag||!bag.it)return;const part=key==="stain"?"cloth":"face";const T=lkBag(p,part);
  for(const id in bag.it){const n=bag.it[id],c=lkB().cat[id];if(!c||!n||!(n.lv>0))continue;const dst=c.part==="cloth"?lkBag(p,"cloth"):T;const o=dst.it[id];if(!o||o.lv<n.lv)dst.it[id]=Object.assign({},n,{at:lkNow()})}
@@ -68201,7 +68273,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="45275ce81c45";window.CTM_BUILD=BUILD;
+const BUILD="a2288d64c74a";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
