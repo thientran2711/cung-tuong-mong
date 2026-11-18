@@ -112,3 +112,20 @@ Open checks for the final head (all ag-all-2-land FIRST, then npc-chain-land):
 Known flake (pre-existing, not blocking): ag-know 'ONE RULE (NPC)' fixture ~1 in 4.
 Tools: dev/handover/tools/review-ag-later/ (eng.js, deeds.js, soft-line.js, harsh.js→dev/test/toil-harsh.js, kn-late.js, th-name.js, run.sh, long.sh). Tests already on the branches: toil-harsh, kn-late, th-name, eng-probe (dev/test/eng-probe.js = eng.js without THROTTLE).
 ~81% xong / ~60% chơi được
+
+### REVIEWER #3 — VERDICT ag-all-2-land (18/11 ~16:50Z; AG LATER #3 session_01UV1SziGFScPvg84cnnNiFu, depth 8, START_CTX 6 %)
+PRIORITY #1 CHECK: OD 18-laws block read (START_CORE) | main a2ce736a | review/ag-all-2-land-r4 e18697fe, ag2-perf ece17b1b, npc-chain-land 78b7196f | claims C-AG #13 (lander work), AG2-PERF #2.
+**PASS ag-all-2-land e18697fe** (review/ag-all-2-land-r4; code = 8b4ee331; live main a2ce736a is ancestor → FF).
+Chain: 45c6dbea (LANDER #6: + ag2-perf ece17b1b, scope far / cap 0) → r3 ebf25660 (mine: merge main 997e049d, only index.html/sw.js; LANDER #6's test-only shelf-check fix 9586f3ca; my test-only ag-walk setup retry) → r4 8b4ee331 (C-AG #13: merge main a2ce736a, j10/j19/j2 resolved as npc 78b7196f — checked: runOpt rolls oddsCl(oddsOf(a)+lotB) = optOdds(a) = the card's word) → e18697fe (CLAUDE.md line only).
+| check | result |
+|---|---|
+| deeds 160 buổi seeds 1-3 (tools deeds.js) | perf merge byte-identical to pre-perf 84bd47c4 (100 %); r4 byte-identical to r3; ece17b1b alone byte-identical to 02466132 |
+| perf 4× spend(1), ag2perf-probe 40 buổi, seeds 1-3 × 3, alternating vs live a2ce736a | khắc mean +24 % (mean of runs; median of runs +38 %) ≤ MAIN-accepted +41 %; INFO for the follow-up perf job: khắc median 2.5 vs 1.3 ms (+92 %), buổi mean +32 %, buổi median +76 %; errs 0, dead 0 |
+| soft-line / set-bonus / one-core-guard / shown-odds | 4/4 · PASS · PASS · 97/97 shown==rolled |
+| quickcheck --runs 5 --cpu 4 vs live | PASS (buổi med 1447 vs 1337 ms) |
+| coop-e2e ×9 + G4 7+3 ×5 (2 busy loops) | 63/63 ×9 · 10/10 |
+| long suite + toil-harsh kn-late th-name men-forbidden(288, bad 0) scan | green except pre-existing flakes below |
+| ag-walk ×5 / shelf ×5 | 5/5 · 5/5 |
+Laws touched (18 LAWS): 4 ONE CORE (guard PASS), 6 real people (all NPC deeds kept), 7 wording (soft-line, no %), 9 kit (no UI added) — none broken.
+Pre-existing, NOT blocking (same rate on pre-perf 84bd47c4 / main) → follow-ups for C-AG #13: (1) agmaid_check 'Tiến cử option text: no invented odds' red on main too; (2) ag-walk carry NEAR/FAR timing ~2/10 (same on 84bd47c4); (3) ag-par3 'Nhờ giúp đỡ helpAsk' 2/5 (same on 84bd47c4); (4) ag-know one-off 3 FAIL under load, 0/5 on rerun.
+Next: npc-chain-land 78b7196f (SẴN SÀNG KIỂM from C-AG #13).
