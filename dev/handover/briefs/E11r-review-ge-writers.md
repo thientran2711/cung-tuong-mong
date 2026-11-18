@@ -1,5 +1,6 @@
 # E11r — BIG REVIEW grand-endings writers wave (opus; one reviewer per wave)
 PRIORITY #1 CHECK ('ge-writers-w1'): OD 0 | ledger 0 | claims 4 (E11a/E11b this slice) | main 0 | review/* 1 (review/ge-writers-w1 = the branch under review) | archive 0
+★ THE 18 LAWS: read the block at the very top of dev/rules/START_CORE.md FIRST (all 18; laws 1–6 top priority); every reviewer checks each law the work touches and FAILs any break (top of START_REVIEWER).
 Read first in full: CLAUDE.md; dev/rules/START_CORE.md + START_WORKER.md + START_REVIEWER.md (handover branch claude/cung-tuong-mong-handover-hj0h8w); dev/handover/briefs/E11-ge-writers.md (the spec); dev/handover/briefs/E-common.md; dev/kit/VANPHONG.md; design `git show origin/review/grand-endings-design:dev/design/GRAND_ENDINGS.md` §2, §2.6, §2.11, §3, §4, §5.
 UNDER REVIEW = the wave named in your session prompt (branch, sha, worker report dev/handover/reports/ge-writers-wN.md).
 Review on a LOCAL copy of the branch with newest origin/main merged in (do not push the merge); rebuild with bash dev/site/build_site.sh. If another wave (W2/W3) is also on review/*, test a local merge with it too: assemble.py/jbalge.js conflict textually — check both sets of rows survive and no key collides.
