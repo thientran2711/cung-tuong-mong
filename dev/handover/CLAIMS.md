@@ -979,7 +979,7 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | odds-cap review ROUND 2 (opus BIG) of fcefca42 | review/odds-cap-r1 | D | session_01964izFgd4LMUTiKvpBrSVD | RUNNING | 17/11 23:38Z |
 | NPC-CHAIN LANDER #2 (opus): coop hold fix ('buổi advanced both seats') → new PASS | review/npc-chain-land | C-AG | session_01UV1SzhJFho1Xs76yNi63tL | RUNNING | 18/11 00:07Z |
 | REVIEW looks-s40 (toil-looks5 c52cb985 + tuyet-glow 7e80f3cd; sonnet SMALL; brief briefs/review-looks-s40.md) | review/looks-s40 | MAIN s40 | session_01UV1Szk7eZQzR2d2t4rhiFj | RUNNING | 18/11 00:25Z |
-| OWNER BUG staff-cap (servant cap by rank not enforced/told in all lives; opus; brief briefs/staff-cap-bug.md) | review/staff-cap-fix | MAIN s40 | session_01UV1SziJshKyRMZV2hXkoFD | RUNNING | 18/11 00:43Z |
+| OWNER BUG staff-cap (servant cap by rank not enforced/told in all lives; opus; brief briefs/staff-cap-bug.md) | review/staff-cap-fix | MAIN s40 | session_01UV1SziJshKyRMZV2hXkoFD | SẴN SÀNG KIỂM a2389cc | 18/11 01:15Z |
 | OWNER BUG life-preload (life picture set before entry + kit placeholder, never blank boxes; + @W 404; opus; brief briefs/life-preload.md) | review/life-preload | MAIN s40 | session_01UV1SzgmQZwF1XMsH7EzhLL | RUNNING | 18/11 00:44Z |
 | REVIEW AG LATER delta (opus BIG) on review/ag-all-2-land + review/npc-chain-land | review/ag-all-2-land, review/npc-chain-land | C-AG | session_01UV1SzkmyAXYnCFY6utjvkF | RUNNING | 18/11 00:47Z |
 | ART mud decals fx-stain-bun-3..8 for cloth-xoc lv2/3 (sonnet; brief briefs/art-mud-decals.md) | CDN only | MAIN s41 | session_01UV1SzixsCCEiLAstC886hS | DONE: 6 decals on CDN, reports/mud-decals.md | 18/11 01:01Z |
