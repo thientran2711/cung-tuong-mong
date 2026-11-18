@@ -3,7 +3,7 @@ PRIORITY #1 CHECK: OD L644/L1072/L1243/L1252 | main none (Q1 engine not on main 
 START_CTX ~5 % · lineage depth 2 · worker (no children).
 
 Branch **review/questline-q1c @ c6015bd** = ONE commit on review/questline-q1a 1b6005a (Foreman E 05:59Z: base q1c on q1a; old a95e8d4..b99f4bc replaced, force-with-lease). On c6015bd: nrask-scan ALL PASS, nrask-m-scan PASS, nrask-engine ALL PASS. When q1a lands on main, q1c applies on top as is.
-Files: `dev/build/jnrask_m.js` (data only), `dev/build/assemble.py` (+jnrask_m.js after jnroadm.js), `dev/test/nrask-m-scan.js`, `dev/test/nrask-m-shots.js` (new), rebuilt index.html/sw.js.
+Files: `dev/build/jnrask_m.js` (data only), `dev/build/assemble.py` (+jnrask_m.js after jnrask.js), `dev/test/nrask-m-scan.js`, `dev/test/nrask-m-shots.js` (new), rebuilt index.html/sw.js.
 
 ## What
 - **204 asks = 17 men templates × help chapters 5–10 × 2 asks.** `NRASK["<template>_<n>"] = [askA, askB]` (Q1a engine shape: one ask or a list; picked ask kept in p.av). The two asks of a chapter are always **different kinds** (scan-checked), same chapter conflict, expert B2 shapes (men row) + B4 voices via slots ({me}/{call} → nrVoiceM thần / nô tài / bản vương). Stock costs/odds/losses kept (builder ORD; ONE CORE). No «bac»; money only as a cost.
