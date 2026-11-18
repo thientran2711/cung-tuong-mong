@@ -1,5 +1,5 @@
 /* review/staff-cap-apply (owner pick OD 18/11 ~02:15Z: live table A with Quý nhân 2+0, eunuchs from Tần; OD ~02:05Z Nữ đế harem style;
-   OD ~02:10Z faces 52 maids / 30 eunuchs / 8 ma ma).
+   OD ~02:10Z faces m01–m52 / 30 eunuchs / 8 ma ma).
    1. BAL.promo.cap is the owner's table; every printed cap reads it (capLaw, staff tab).
    2. Old save: a Quý nhân household with a eunuch (allowed before) -> he leaves, and she is TOLD (grouped notice / farewell), never silent.
    3. roomFor counts the FIGURE identity pool (FIGIX), not the old face-*.webp files: with every image blocked (old faces "missing")
