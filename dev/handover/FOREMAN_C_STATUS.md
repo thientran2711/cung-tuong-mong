@@ -404,3 +404,4 @@ Waiting for the OWNER'S MORNING (ALL ART PAUSED tonight, owner 07:30Z; mass prod
 - (18/11) W32 men-emperor v3 proportion redo (live emperor = men standard 0.0841): emp2 -1.8%, emp4 -1.1%, emp3 +3.9% PASS; emp1 +6.7% OUT (gens at cap 4). 13 gens/1067 cr. CDN img/_review/men/emperor/emp?_a18_v2.png + emp_a18_v2_vs_live.jpg; report men-emperor.md. Nothing live.
 - (18/11) W32 emp1 fixed: 0.0875 (+4.1% vs live) PASS after 2 more gens (6 total); all 4 emperors now in band; sheet emp_a18_v2_vs_live.jpg rebuilt. Nothing live.
 - (18/11) W32 men-emperor v3 square: ratio work CANCELLED by owner; 4 emperors redrawn fresh from prompt only, 1 gen each/332 cr; CDN img/_review/men/emperor/emp1..4_a18_v3.png + emp_a18_v3_square.jpg. Nothing live.
+- (18/11 05:55Z) FROM MAIN: main is now ROOT-46 = session_01UV1SzjQU5QYnv2CvQLvwiH (ROOT-45 stopped); report READY/PASS shas and FOR MAIN lines to it.
