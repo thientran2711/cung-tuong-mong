@@ -1,4 +1,4 @@
-# buoi-banner — report (worker; sha 73a7d3f on review/buoi-banner; contains origin/main 4dcd50e)
+# buoi-banner — report (worker; sha 44f58e6 on review/buoi-banner; contains origin/main 4dcd50e)
 PRIORITY #1 CHECK: 'buổi transition' — OD canon 18/11 ~06:20Z BUỔI CHANGE (OD:L891) + owner's later words relayed by ROOT-46 (plaque REJECTED: keep the approved animation, remove only the opaque backdrop); main jbuoi.js (BTR_*), j18 curtain(), j93 btrKill reset; review/* none else.
 ## What (final direction)
 - `jbuoi.js` (KIT §74): the approved animation is unchanged (art, motion, timing, season/festival variants, mist, sky band, title plate, seal). REMOVED only the opaque full-screen backdrop: tint, ink wash, vignette (JS layers, animations, CSS). The whole `#buoitr` lies on the game UI at `BTR_OP` = 0.80 (hook `window.__btrOp`; ladder 70/80/85 shown). Gọn = the title only, 0.7 s. KIT.md §74 note added.
@@ -18,3 +18,7 @@ https://ctm-img.victoria-tntt.workers.dev/img/_review/buoi-banner/{fold,ipad}-tr
 ## UPDATE 73a7d3f (ROOT-46 NOT-ready of 3d675bd: title/icon/sub/seal still mid-stage)
 - ONE compact group anchored at the stage top: band at the very top, the title block (icon + "Buổi trưa" + sub line + seal) overlaps the lower ~60 % of the band (`.btr-title` negative margin-top = 0.6 x band height, stage gap 0). Nothing in the middle of the stage; centred on Fold and iPad. Sub line + feathered band unchanged.
 - Shots re-made (same URLs, overwritten): fold/ipad-trua-{70,80,85}.png, fold-strip.png, ipad-strip.png, fold-zoom.png. LOOKed: fold-80, ipad-80, fold-zoom. CSS-only change; buoi-transition not re-run on this commit (passed on 3d675bd).
+
+## UPDATE 44f58e6 (owner ~06:45Z: title block must NOT overlap the band)
+- Overlap of 73a7d3f reverted. Order = band ABOVE (flush with the stage top, feathered top/bottom), then icon + "Buổi trưa" + seal + bold sub line directly UNDER it with a small gap (`gap: clamp(4px,1vmin,10px)`), nothing on the band. Fold + iPad. Sub size/ink and feathered edges kept; no backdrop; opacity default 0.80.
+- Tests: buoi-transition (REAL=1, fold+ipad) FAIL 0 on this commit. Shots re-made, same URLs: fold/ipad-trua-{70,80,85}.png, fold-strip.png, ipad-strip.png, fold-zoom.png. LOOKed: fold-80, ipad-80; not individually: 70/85, strips, zoom.
