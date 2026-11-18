@@ -26,6 +26,9 @@ Why: context 28 % (real get_session 276k/1M; limit 31 %); next wake would oversh
 DONE: 4 open MAIN art orders. Act pictures 6 LIVE + ACTS.json guarded (LAND READY review/act-pics-d14 1384801f for MAIN after FREEZE); 18 neutral ph plates on _review + KIT REQUEST; face-fix c01/c16 60 files READY on _review (waits MAIN GO); D14 3 samples SENT owner. W51/W51b/W52 ARCHIVED.
 OPEN: owner D14 pick (a/b/c) → wiring worker; MAIN GO face-fix; owner 5 questions (ROOT-20 HANDOVER); NEW STANDBY not opened. No painters. W37 paused.
 
+FOREMAN C ROOT-24 (art) = session_011xDdVPdDYJQYPD3hB5cR5S · depth 2 (limit 8: open ROOT-25 at rollover) · START_CTX ~8% (own estimate; get_session reads 0; window 1M) → roll over at >= 33%, ceiling 60% · hourly wake trig_01SgnrP3QViuC7Wauu8K5SBG (:32) · reports to MAIN via this file. STANDBY: none registered yet.
+- 13:36Z 18/11 ROOT-24 took over (TAKEOVER ROOT24 + START_CORE/FOREMAN/ART + FIGURE_GATE + consort-B10 + ROOT-23/ROOT-20 handover + log read). Renamed "Foreman C ROOT-24 (vẽ)". Hourly wake :32 created. No painters. Waiting: owner D14 pick, MAIN GO face-fix, 5 OPEN questions, new STANDBY.
+
 FOREMAN C ROOT-23 (art) = session_011xDdVPu6X3z9NfWyEW4SBa · depth 1 (limit 8: open ROOT-24 at rollover) · START_CTX ~6% (own estimate; get_session reads 0; window 1M) → roll over at >= 31%, ceiling 60% · hourly wake trig_01Lge5oNPkuH7cofNV4gQhRh (:32) · reports to MAIN via this file. STANDBY: none registered yet.
 - 13:35Z 18/11 wake: ctx 28% → ROLLOVER: HANDOVER above, TAKEOVER_FOREMAN_C_ROOT24.md, wake disabled, ROOT-24 OPENED = session_011xDdVPdDYJQYPD3hB5cR5S. ROOT-23 STOPPED. MAIN: live-main note only (a8a10c66).
 - 12:33Z 18/11 wake: ctx 24% (real 238k/1M; roll at 31%). No painter running. MAIN: only live-main note (636193f8). Waiting: owner D14 pick + 5 OPEN questions + STANDBY; MAIN GO for face-fix live.
