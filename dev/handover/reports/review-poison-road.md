@@ -100,3 +100,5 @@ Verdict branch `review/poison-road-r2-rv` = 1c177a23 + merge main 2850c45b (fd0b
 Notes kept from r1 (not FAIL): NPC Sủng saturation (balance-final), Vương gia lookup by S.vgAlly, one S.pq.slow slot.
 
 **PASS 19a23498f55775e86f087d51ad837948c5374b8c** (LAND READY on b3d2ccc7; main now 55db864a → one generated-files re-merge before the FF push).
+
+LAND READY 12a1e4be0dfc4e7fc769159c500f10a645afcc24 = PASS 19a23498 + merge main 55db864a (generated files only; 35/35, guard 0, quickcheck --runs 6 PASS vs 55db864a; FF checked).
