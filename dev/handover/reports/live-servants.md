@@ -87,3 +87,56 @@ TO DO:
 4. Update live-servants.test.js: T1 (rank sizes) → picker tests (count/choice, only present+free, once a day, no adding), witnesses + gossip, NPC picks; keep T3–T5. Re-run all gates (table above) incl. perf 4x (scripts: dev/test/ag2perf-probe.js; my 5-seed loop = run live vs new × seeds 1–5, 24 buổi × 4 khắc).
 5. Report here + SẴN SÀNG KIỂM <sha> to C-AG #15.
 Scratch (may be wiped): /home/user/wt/ls-scratch (live.html = main 94d11623 dev build). Worktree /home/user/wt/ls (sparse) holds the branch.
+
+## LIVE-SERVANTS #2 (successor, opus; foreman C-AG #15) — 18/11
+PRIORITY #1 CHECK ('tùy tùng|entourage|picker'): OD 25 | ledger 3 | claims 8 | main 15 | review/* 2 | archive 58 → no entourage picker on main (kitPicker = portrait picker, single choice; review/rel-picker = relation picker); ('nhân chứng|witness'): OD 7 | main 15 (case witnesses j4/j67; AG1b agWatch/agSeeHer; jagknow knFor/knSrvKnows/knTell/knBao = the kn chain, REUSED) | review/* 0; ('rest/sleep|ngủ nghỉ'): main 1 | review/* 0 | claims = this job.
+START_CTX ≈ 3 % (get_session reads 0; estimate). Rollover at 28 %, ceiling 60 %.
+Branch review/live-servants: merged live main 13bb8c88 (9994c8d8), work 7528a6f9 (+ docs/gates commit below).
+
+### What changed (point by point)
+(2/4) ENTOURAGE PICKER — the rank retinue (BAL.slv.ret/retTh/retNd/occ, j95sRetMax/j95sOcc) is DELETED (canon overwrite). dev/build/j95s.js:
+- Player: the first departure of the day from her palace (goTo wrapper; Dư đồ tap or any act that walks her) opens ONE card "Chọn người theo hầu":
+  every one of her people (close maid + maids + eunuchs) as a kit option row; present+free ones pickable (tap toggles, kit selection outline .ksel +
+  aria-pressed — the identity card's pattern), absent / asleep / rest turn / night watch / busy ones greyed with the reason (kit GREYED OPTION kitOff);
+  "Lên đường" (greyed until someone is picked; its line = gain/loss: they see for her / they know what she does), "Đi một mình", "Thôi" (stays; the card
+  comes again next departure). Store S.ent={d,ids,at}; no card again that day (no adding once out); each outing: followers = pick ∩ free then. Nobody
+  free → no card, she goes alone, asked again next time. Gates kept: access card (accessOf) and walk run on the real goTo; off in co-op (j95on), servant
+  start (isSrv), home life (isKc), cấm túc / lãnh cung. Speaker = her close maid (pMaid). KIT: dialog card + option rows + .ksel + kitOff only — no new part
+  (no KIT_REQUEST filed). Shots (Fold 755x1000, iPad 1180x820) looked at; not in git.
+- NPC mistresses (two-way, law 1): j95sNpcPick once a day at her first outing (S.entN): how many = free × BAL.slv.ent.base × trait (Kiêu ngạo 1.8,
+  Ham vui 1.4, Tham vọng 1.3, Khiêm nhường .5, Kín đáo .3, Xảo quyệt .4, Lạnh lùng .6) × formal (dtd/thu/tn 1.5) × moodLow .6, at least one when anyone
+  is free; who = close maid first when free, then by lòng^loyalP; Kín đáo / Xảo quyệt take only the most trusted. If the player moved without the card
+  (summons/event) the same rule picks for her, said in the reason ("ngươi đi gấp, không kịp chọn: …").
+(4) WITNESSES + GOSSIP — on the kn chain (dev/build/jagknow.js, end), no new chain: S.knw {I things, K[id]={item:[from,hand]}}. A landing deed
+  (agLand: every NPC deed; twDo: the player's shared deeds) is seen by the servants whose record row stands there at that khắc (not asleep) → only
+  companions see a mistress's day; servants meeting in a talking act (BAL.slv.gos.acts) pass it on, p × (1+qv(gos.q)) (chatty more, timid less), ≤ gos.hop
+  hands, keep 24, forget after 3 days; each tells HER mistress by knTell (tell/keep/sell by lòng+nết); to the player = TIN BÁO "bao" line (knBao: "tận
+  mắt thấy ở … / nghe X kể: …"); an NPC mistress then knows it (K["v<id>"]). knSrvKnows: the close maid no longer "listens all day beside her mistress"
+  — she knows only where her row stands (with her mistress when picked), may overhear only when out on an errand/visit; her walk to tell = real walk.
+(5) REST RHYTHM — j95sRhythm per servant and day: rest turn "nghỉ theo lượt" (BAL.slv.rest.buoi = [10,55,35,0], len 1–2), bedtime khắc sleepFrom+0..sleepJit
+  in tối, night watch rotating through the household by day (BAL.slv.night), last night's watcher sleeps in afterWatch=2 khắc of sáng ("ngủ bù …").
+  Reasons in S.roster / S.rlog; roster.js --who prints "rest / sleep today".
+(3) dev/tools/roster.js --who adds "rest / sleep today", "entourage today" (S.ent / S.entN with why), "knows" (saw at / heard from whom, hand n);
+  --json carries rhythm / entourage / knows. ROSTER.md §1 + §3b + §4 rewritten (canon overwrite of the retinue text).
+
+### Tests / tools
+dev/test/live-servants.test.js rewritten: T1 NPC day picks · T2 close-maid-busy · T3 player's picker (present+free only, greyed reason, Lên đường greyed until a pick, stored pick, once a day, followers = pick ∩ free, alone) · T4 no filler · T5 roster.js self-check on real saves + --who (entourage / knows) · T6 witnesses (companion sees, home doesn't; NPC side too) + gossip hand+1 · T7 rest rhythm (watchers per household, sleep-in, rest turn, bedtime from BAL; "ngủ"/"nghỉ theo lượt" rows in the log).
+Probe (dev/test/live-servants-probe.js, seed 1, 12 buổi): filler 0 in every kind; servants away 26.6 %; followers e.g. Hoàng hậu (Kín đáo) 1 trusted, Nhan Ngọc Dao (rank 4) up to 3.
+
+### GATES (sha e3dce64 = 07d5751 + merge live main fa411d6f)
+| gate | result |
+|---|---|
+| live-servants.test.js (3 lives, run 3×) | PASS (one flake found and fixed in the test harness: `quiet` left true skipped the last save) |
+| roster.js self-check, 3 lives × 6 saves | PASS (in T5) |
+| quickcheck.sh (own build, core gates one-core-guard / rules-one-source / kit-conform / coop-one-world, time-spill guard, open, old live save loads+plays, perf smoke) | PASS · render 237/218 ms · tab 342/359 · buổi 1081/988 · tasks>200ms 17/17 |
+| build_site incl. CDN assets + manifest | OK here (CDN reachable in this container) |
+| deeds ag2perf-deeds 160 buổi × seeds 1–5, live fa411d6f vs new | live 615/569/594/609/514 = 2901 · new 608/505/596/613/564 = 2886 (−0.5 %; seed 2 new = the player died at month 12, trajectory) |
+| **perf ag2perf-probe 4x, 24 buổi × 4 khắc, seeds 1–5** | **FAIL**: khắc median live 1.9/2.3/1.6/1.8/2.1 → new 3.4/3.2/3.1/3.2/3.6 ms; mean 4.0/3.6/3.2/2.9/3.4 → 5.2/4.2/4.3/4.3/5.4 (≈ +38 % mean). Live got faster with ag-deed-perf (lazy agTell); the new cost = j95s pass + knwGossip/knwSee per sync. |
+| coop-e2e | **BLOCKED**: proxy 403 on ctm-coop.victoria-tntt.workers.dev (no room code); the record + picker + knw are off in co-op (j95on false) |
+
+### STATUS: NOT READY — perf gate open. HANDOVER (#2 → #3, rolled over at ~28 % context)
+Branch review/live-servants @ e3dce64 (pushed; tree clean). Scratch /home/user/wt/ls-shots (live.html = fa411d6f dev build, new.html, deeds.sh = deeds + perf loop, picker shots). Live worktree /home/user/wt/live (sparse, detached fa411d6f).
+TO DO for #3:
+1. PERF (only open gate): profile `spend(1)` on new vs live (dev/test/ag2perf-prof.js arrived with fa411d6f). Suspects: (a) knwGossip runs on every j95sync — it iterates all R.P twice per khắc; memo is per R.key:kh but j95sync may run before the khắc changes → make it run once per khắc AFTER the clock moves, and skip whole when S.knw has no items (`Object.keys(Z.K).length===0` early-out); (b) knwSee on every agLand iterates R.P (fine) but knwUp→knTell→mindPick per servant; (c) j95sPass signature build each sync (S.ent JSON / households) — the skip path; (d) j95sRhythm called per servant per pass (hash + rng) — cache per day in J95S. Target: khắc mean ≤ live +10 %.
+2. Re-run: live-servants.test (3 lives), quickcheck.sh, deeds+perf loop (bash /home/user/wt/ls-shots/deeds.sh after re-copying new.html), coop-e2e (BLOCKED here unless the Worker host is allowed).
+3. Write SẴN SÀNG KIỂM <sha> here + send_message to C-AG #15 with one line per point (2)(3)(4 picker)(5) and the gate table.
