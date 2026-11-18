@@ -11,3 +11,14 @@ Gens: 24 + 2 = 26 x 135 = 3510 cr.
 Files https://ctm-img.victoria-tntt.workers.dev/img/_review/consort-tiers/c28/b10/ — c28_a18_tN_v0|v1|v2.png (24) + c28_a18_b10_sheet.jpg. Nothing live.
 Magnific live uploads c28: t1 Symu1feUb8, t2 s78f5Cwl8e, t3 1letQaRr4r, t4 TdU4ARYVNR, t5 9ZF1UwfNYZ, t6 P3uKgJ342C, t7 TdU4GMBVNR, t8 TdU4GeIVNR.
 ~100% xong c28 B10 / ~0% chơi được.
+
+## t7 EMBROIDERY SCAN (ROOT-20 order, W47)
+Native-res zoom of every t7 v0/v1/v2 of c26, c27, c28.
+| person | t7 version | pasted? | redrawn (gens) |
+|---|---|---|---|
+| c26 | v0 / v1 / v2 | no — matte thread strokes, flat in the weave | 0 |
+| c27 | v0 / v1 / v2 | no — feather lines visible, matches cloth light | 0 |
+| c28 | v0 / v1 / v2 | YES — embossed cream phoenix with shading, flowers like raised lumps | 3 + 3 (first redraw "matte silk floss" wording still looked embossed; second redraw "hundreds of thin gold-ochre threads like feather barbs, same light as the cloth, no cream plastic, no relief" fixed it) |
+c28 t7 now: IoU vs live v0 95.0 / v1 94.0 / v2 95.4. Old pasted-look files kept as c28_a18_t7_v0|v1|v2_prev.png in the same CDN folder; sheet c28_a18_b10_sheet.jpg re-made. Extra credits 6 x 135 = 810. c28 total 32 gens.
+Later owner rules received after c26–c28 were already drawn (v0/v1/v2 completely different colour families; held item never the robe colour, esp. lanterns; v1/v2 new hairpins): owner said finished people are NOT redone; these were applied to nothing already shipped. Known overlap: c26/c27/c28 t4 lantern is gold-cream on pale robes (c28 v1 t4 butter-cream robe has a cream lantern) — flagged, not redone.
+~100% xong / ~0% chơi được
