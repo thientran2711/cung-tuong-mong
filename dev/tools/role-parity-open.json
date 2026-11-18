@@ -11,8 +11,8 @@
  },
  {
   "role": "up",
-  "key": "cx2:court",
-  "side": "N-ONLY"
+  "key": "cx2:maidTalk",
+  "side": "P-ONLY"
  },
  {
   "role": "up",
@@ -120,181 +120,11 @@
   "side": "N-ONLY"
  },
  {
-  "role": "t2",
-  "key": "cx3:staffChe",
-  "side": "P-ONLY"
- },
- {
-  "role": "t3",
-  "key": "cx3:staffChe",
-  "side": "P-ONLY"
- },
- {
-  "role": "t4",
-  "key": "cx3:staffChe",
-  "side": "P-ONLY"
- },
- {
-  "role": "t5",
-  "key": "cx3:staffChe",
-  "side": "P-ONLY"
- },
- {
-  "role": "t6",
-  "key": "cx3:staffChe",
-  "side": "P-ONLY"
- },
- {
-  "role": "t7",
-  "key": "cx3:staffChe",
-  "side": "P-ONLY"
- },
- {
-  "role": "hh",
-  "key": "cx3:staffChe",
-  "side": "P-ONLY"
- },
- {
-  "role": "t2",
-  "key": "cx3:staffDoi",
-  "side": "P-ONLY"
- },
- {
-  "role": "t3",
-  "key": "cx3:staffDoi",
-  "side": "P-ONLY"
- },
- {
-  "role": "t4",
-  "key": "cx3:staffDoi",
-  "side": "P-ONLY"
- },
- {
-  "role": "t5",
-  "key": "cx3:staffDoi",
-  "side": "P-ONLY"
- },
- {
-  "role": "t6",
-  "key": "cx3:staffDoi",
-  "side": "P-ONLY"
- },
- {
-  "role": "t7",
-  "key": "cx3:staffDoi",
-  "side": "P-ONLY"
- },
- {
-  "role": "hh",
-  "key": "cx3:staffDoi",
-  "side": "P-ONLY"
- },
- {
   "role": "up",
   "key": "cx3:staffHoi",
   "side": "P-ONLY"
  },
  {
-  "role": "t2",
-  "key": "cx3:staffPhat",
-  "side": "P-ONLY"
- },
- {
-  "role": "t3",
-  "key": "cx3:staffPhat",
-  "side": "P-ONLY"
- },
- {
-  "role": "t4",
-  "key": "cx3:staffPhat",
-  "side": "P-ONLY"
- },
- {
-  "role": "t5",
-  "key": "cx3:staffPhat",
-  "side": "P-ONLY"
- },
- {
-  "role": "t6",
-  "key": "cx3:staffPhat",
-  "side": "P-ONLY"
- },
- {
-  "role": "t7",
-  "key": "cx3:staffPhat",
-  "side": "P-ONLY"
- },
- {
-  "role": "hh",
-  "key": "cx3:staffPhat",
-  "side": "P-ONLY"
- },
- {
-  "role": "t2",
-  "key": "cx3:staffTam",
-  "side": "P-ONLY"
- },
- {
-  "role": "t3",
-  "key": "cx3:staffTam",
-  "side": "P-ONLY"
- },
- {
-  "role": "t4",
-  "key": "cx3:staffTam",
-  "side": "P-ONLY"
- },
- {
-  "role": "t5",
-  "key": "cx3:staffTam",
-  "side": "P-ONLY"
- },
- {
-  "role": "t6",
-  "key": "cx3:staffTam",
-  "side": "P-ONLY"
- },
- {
-  "role": "t7",
-  "key": "cx3:staffTam",
-  "side": "P-ONLY"
- },
- {
-  "role": "hh",
-  "key": "cx3:staffTam",
-  "side": "P-ONLY"
- },
- {
-  "role": "t2",
-  "key": "cx3:staffThuong",
-  "side": "P-ONLY"
- },
- {
-  "role": "t3",
-  "key": "cx3:staffThuong",
-  "side": "P-ONLY"
- },
- {
-  "role": "t4",
-  "key": "cx3:staffThuong",
-  "side": "P-ONLY"
- },
- {
-  "role": "t5",
-  "key": "cx3:staffThuong",
-  "side": "P-ONLY"
- },
- {
-  "role": "t6",
-  "key": "cx3:staffThuong",
-  "side": "P-ONLY"
- },
- {
-  "role": "t7",
-  "key": "cx3:staffThuong",
-  "side": "P-ONLY"
- },
- {
   "role": "hh",
   "key": "cx3:talkGossip",
   "side": "P-ONLY"
@@ -396,46 +226,6 @@
  },
  {
   "role": "t1",
-  "key": "cx3:tell",
-  "side": "P-ONLY"
- },
- {
-  "role": "t2",
-  "key": "cx3:tell",
-  "side": "P-ONLY"
- },
- {
-  "role": "t3",
-  "key": "cx3:tell",
-  "side": "P-ONLY"
- },
- {
-  "role": "t4",
-  "key": "cx3:tell",
-  "side": "P-ONLY"
- },
- {
-  "role": "t5",
-  "key": "cx3:tell",
-  "side": "P-ONLY"
- },
- {
-  "role": "t6",
-  "key": "cx3:tell",
-  "side": "P-ONLY"
- },
- {
-  "role": "t7",
-  "key": "cx3:tell",
-  "side": "P-ONLY"
- },
- {
-  "role": "hh",
-  "key": "cx3:tell",
-  "side": "P-ONLY"
- },
- {
-  "role": "t1",
   "key": "cx3:test",
   "side": "N-ONLY"
  },
@@ -518,6 +308,21 @@
   "role": "up",
   "key": "cx3:use",
   "side": "P-ONLY"
+ },
+ {
+  "role": "up",
+  "key": "cx4:rougeBorrow",
+  "side": "N-ONLY"
+ },
+ {
+  "role": "hh",
+  "key": "cx4:rougeSteal",
+  "side": "N-ONLY"
+ },
+ {
+  "role": "up",
+  "key": "cx4:rougeSteal",
+  "side": "N-ONLY"
  },
  {
   "role": "up",
@@ -525,46 +330,6 @@
   "side": "P-ONLY"
  },
  {
-  "role": "t1",
-  "key": "cx:maidR",
-  "side": "P-ONLY"
- },
- {
-  "role": "t2",
-  "key": "cx:maidR",
-  "side": "P-ONLY"
- },
- {
-  "role": "t3",
-  "key": "cx:maidR",
-  "side": "P-ONLY"
- },
- {
-  "role": "t4",
-  "key": "cx:maidR",
-  "side": "P-ONLY"
- },
- {
-  "role": "t5",
-  "key": "cx:maidR",
-  "side": "P-ONLY"
- },
- {
-  "role": "t6",
-  "key": "cx:maidR",
-  "side": "P-ONLY"
- },
- {
-  "role": "t7",
-  "key": "cx:maidR",
-  "side": "P-ONLY"
- },
- {
-  "role": "hh",
-  "key": "cx:maidR",
-  "side": "P-ONLY"
- },
- {
   "role": "up",
   "key": "cx:maidR",
   "side": "P-ONLY"
@@ -615,129 +380,64 @@
   "side": "N-ONLY"
  },
  {
-  "role": "t7",
-  "key": "follow",
-  "side": "N-RANK"
- },
- {
-  "role": "t1",
-  "key": "harm:ally",
-  "side": "P-ONLY"
- },
- {
-  "role": "t2",
-  "key": "harm:ally",
-  "side": "P-ONLY"
- },
- {
-  "role": "t3",
-  "key": "harm:ally",
-  "side": "P-ONLY"
- },
- {
-  "role": "t4",
-  "key": "harm:ally",
-  "side": "P-ONLY"
- },
- {
-  "role": "t5",
-  "key": "harm:ally",
-  "side": "P-ONLY"
- },
- {
-  "role": "t6",
-  "key": "harm:ally",
-  "side": "P-ONLY"
- },
- {
-  "role": "t7",
-  "key": "harm:ally",
-  "side": "P-ONLY"
- },
- {
-  "role": "hh",
-  "key": "harm:ally",
-  "side": "P-ONLY"
- },
- {
   "role": "up",
-  "key": "harm:ally",
-  "side": "P-ONLY"
- },
- {
-  "role": "t1",
-  "key": "harm:gift",
-  "side": "P-ONLY"
- },
- {
-  "role": "t2",
-  "key": "harm:gift",
-  "side": "P-ONLY"
- },
- {
-  "role": "t3",
-  "key": "harm:gift",
-  "side": "P-ONLY"
- },
- {
-  "role": "t4",
-  "key": "harm:gift",
-  "side": "P-ONLY"
- },
- {
-  "role": "t5",
-  "key": "harm:gift",
-  "side": "P-ONLY"
- },
- {
-  "role": "t6",
-  "key": "harm:gift",
-  "side": "P-ONLY"
- },
- {
-  "role": "t7",
-  "key": "harm:gift",
-  "side": "P-ONLY"
- },
- {
-  "role": "hh",
-  "key": "harm:gift",
-  "side": "P-ONLY"
- },
- {
-  "role": "up",
-  "key": "harm:gift",
-  "side": "P-ONLY"
- },
- {
-  "role": "up",
-  "key": "harm:kpoison",
-  "side": "P-ONLY"
- },
- {
-  "role": "up",
-  "key": "harm:ksab",
-  "side": "P-ONLY"
- },
- {
-  "role": "hh",
-  "key": "harm:laydo",
-  "side": "P-ONLY"
- },
- {
-  "role": "hh",
-  "key": "harm:laydol",
-  "side": "P-ONLY"
- },
- {
-  "role": "t1",
-  "key": "harm:pushp",
-  "side": "P-ONLY"
- },
- {
-  "role": "hh",
-  "key": "harm:pushp",
+  "key": "harm:accuse",
   "side": "N-ONLY"
+ },
+ {
+  "role": "up",
+  "key": "harm:banphe",
+  "side": "N-ONLY"
+ },
+ {
+  "role": "up",
+  "key": "harm:expose",
+  "side": "N-ONLY"
+ },
+ {
+  "role": "t1",
+  "key": "harm:gift",
+  "side": "P-ONLY"
+ },
+ {
+  "role": "t2",
+  "key": "harm:gift",
+  "side": "P-ONLY"
+ },
+ {
+  "role": "t3",
+  "key": "harm:gift",
+  "side": "P-ONLY"
+ },
+ {
+  "role": "t4",
+  "key": "harm:gift",
+  "side": "P-ONLY"
+ },
+ {
+  "role": "t5",
+  "key": "harm:gift",
+  "side": "P-ONLY"
+ },
+ {
+  "role": "t6",
+  "key": "harm:gift",
+  "side": "P-ONLY"
+ },
+ {
+  "role": "t7",
+  "key": "harm:gift",
+  "side": "P-ONLY"
+ },
+ {
+  "role": "hh",
+  "key": "harm:gift",
+  "side": "P-ONLY"
+ },
+ {
+  "role": "up",
+  "key": "harm:gift",
+  "side": "P-ONLY"
  },
  {
   "role": "maid",
@@ -745,128 +445,23 @@
   "side": "P-ONLY"
  },
  {
-  "role": "t3",
-  "key": "harm:tat",
-  "side": "N-RANK"
- },
- {
-  "role": "t7",
-  "key": "harm:tat",
-  "side": "N-RANK"
- },
- {
-  "role": "hh",
-  "key": "harm:tat",
+  "role": "up",
+  "key": "harm:tieuhuy",
   "side": "N-ONLY"
  },
  {
   "role": "up",
-  "key": "harm:trinhhh",
-  "side": "P-ONLY"
- },
- {
-  "role": "t2",
-  "key": "harm:trip",
-  "side": "N-RANK"
- },
- {
-  "role": "t3",
-  "key": "harm:trip",
-  "side": "N-RANK"
- },
- {
-  "role": "t1",
-  "key": "harm:vp",
-  "side": "P-ONLY"
- },
- {
-  "role": "t2",
-  "key": "harm:vp",
-  "side": "P-ONLY"
- },
- {
-  "role": "t3",
-  "key": "harm:vp",
-  "side": "P-ONLY"
- },
- {
-  "role": "t4",
-  "key": "harm:vp",
-  "side": "P-ONLY"
- },
- {
-  "role": "t5",
-  "key": "harm:vp",
-  "side": "P-ONLY"
- },
- {
-  "role": "t6",
-  "key": "harm:vp",
-  "side": "P-ONLY"
- },
- {
-  "role": "t7",
-  "key": "harm:vp",
-  "side": "P-ONLY"
- },
- {
-  "role": "hh",
-  "key": "harm:vp",
-  "side": "P-ONLY"
+  "key": "harm:trinhth",
+  "side": "N-ONLY"
  },
  {
   "role": "up",
-  "key": "harm:vp",
-  "side": "P-ONLY"
+  "key": "harm:uyhiep",
+  "side": "N-ONLY"
  },
  {
   "role": "up",
   "key": "harm:xinhh",
-  "side": "P-ONLY"
- },
- {
-  "role": "t1",
-  "key": "harm:xx",
-  "side": "P-ONLY"
- },
- {
-  "role": "t2",
-  "key": "harm:xx",
-  "side": "P-ONLY"
- },
- {
-  "role": "t3",
-  "key": "harm:xx",
-  "side": "P-ONLY"
- },
- {
-  "role": "t4",
-  "key": "harm:xx",
-  "side": "P-ONLY"
- },
- {
-  "role": "t5",
-  "key": "harm:xx",
-  "side": "P-ONLY"
- },
- {
-  "role": "t6",
-  "key": "harm:xx",
-  "side": "P-ONLY"
- },
- {
-  "role": "t7",
-  "key": "harm:xx",
-  "side": "P-ONLY"
- },
- {
-  "role": "hh",
-  "key": "harm:xx",
-  "side": "P-ONLY"
- },
- {
-  "role": "up",
-  "key": "harm:xx",
   "side": "P-ONLY"
  },
  {
@@ -880,308 +475,8 @@
   "side": "P-ONLY"
  },
  {
-  "role": "t1",
-  "key": "label:Canh giữ các con",
-  "side": "P-ONLY"
- },
- {
-  "role": "t2",
-  "key": "label:Canh giữ các con",
-  "side": "P-ONLY"
- },
- {
-  "role": "t3",
-  "key": "label:Canh giữ các con",
-  "side": "P-ONLY"
- },
- {
-  "role": "t4",
-  "key": "label:Canh giữ các con",
-  "side": "P-ONLY"
- },
- {
-  "role": "t5",
-  "key": "label:Canh giữ các con",
-  "side": "P-ONLY"
- },
- {
-  "role": "t6",
-  "key": "label:Canh giữ các con",
-  "side": "P-ONLY"
- },
- {
-  "role": "t7",
-  "key": "label:Canh giữ các con",
-  "side": "P-ONLY"
- },
- {
   "role": "hh",
-  "key": "label:Canh giữ các con",
-  "side": "P-ONLY"
- },
- {
-  "role": "up",
-  "key": "label:Canh giữ các con",
-  "side": "P-ONLY"
- },
- {
-  "role": "t1",
-  "key": "label:Chăm sóc",
-  "side": "P-ONLY"
- },
- {
-  "role": "t2",
-  "key": "label:Chăm sóc",
-  "side": "P-ONLY"
- },
- {
-  "role": "t3",
-  "key": "label:Chăm sóc",
-  "side": "P-ONLY"
- },
- {
-  "role": "t4",
-  "key": "label:Chăm sóc",
-  "side": "P-ONLY"
- },
- {
-  "role": "t5",
-  "key": "label:Chăm sóc",
-  "side": "P-ONLY"
- },
- {
-  "role": "t6",
-  "key": "label:Chăm sóc",
-  "side": "P-ONLY"
- },
- {
-  "role": "t7",
-  "key": "label:Chăm sóc",
-  "side": "P-ONLY"
- },
- {
-  "role": "hh",
-  "key": "label:Chăm sóc",
-  "side": "P-ONLY"
- },
- {
-  "role": "up",
-  "key": "label:Chăm sóc",
-  "side": "P-ONLY"
- },
- {
-  "role": "t1",
-  "key": "label:Dặn ma ma báo ngày giả",
-  "side": "P-ONLY"
- },
- {
-  "role": "t2",
-  "key": "label:Dặn ma ma báo ngày giả",
-  "side": "P-ONLY"
- },
- {
-  "role": "t3",
-  "key": "label:Dặn ma ma báo ngày giả",
-  "side": "P-ONLY"
- },
- {
-  "role": "t4",
-  "key": "label:Dặn ma ma báo ngày giả",
-  "side": "P-ONLY"
- },
- {
-  "role": "t5",
-  "key": "label:Dặn ma ma báo ngày giả",
-  "side": "P-ONLY"
- },
- {
-  "role": "t6",
-  "key": "label:Dặn ma ma báo ngày giả",
-  "side": "P-ONLY"
- },
- {
-  "role": "t7",
-  "key": "label:Dặn ma ma báo ngày giả",
-  "side": "P-ONLY"
- },
- {
-  "role": "hh",
-  "key": "label:Dặn ma ma báo ngày giả",
-  "side": "P-ONLY"
- },
- {
-  "role": "up",
-  "key": "label:Dặn ma ma báo ngày giả",
-  "side": "P-ONLY"
- },
- {
-  "role": "t1",
-  "key": "label:Lấy trộm son phấn",
-  "side": "P-ONLY"
- },
- {
-  "role": "t1",
-  "key": "label:Mượn son phấn",
-  "side": "P-ONLY"
- },
- {
-  "role": "t4",
-  "key": "label:Mượn son phấn",
-  "side": "P-ONLY"
- },
- {
-  "role": "t5",
-  "key": "label:Mượn son phấn",
-  "side": "P-ONLY"
- },
- {
-  "role": "t6",
-  "key": "label:Mượn son phấn",
-  "side": "P-ONLY"
- },
- {
-  "role": "t7",
-  "key": "label:Mượn son phấn",
-  "side": "P-ONLY"
- },
- {
-  "role": "hh",
-  "key": "label:Mượn son phấn",
-  "side": "P-ONLY"
- },
- {
-  "role": "t1",
-  "key": "label:Sai cung nữ thân tín mua lén ngoài cung",
-  "side": "P-ONLY"
- },
- {
-  "role": "t2",
-  "key": "label:Sai cung nữ thân tín mua lén ngoài cung",
-  "side": "P-ONLY"
- },
- {
-  "role": "t3",
-  "key": "label:Sai cung nữ thân tín mua lén ngoài cung",
-  "side": "P-ONLY"
- },
- {
-  "role": "t4",
-  "key": "label:Sai cung nữ thân tín mua lén ngoài cung",
-  "side": "P-ONLY"
- },
- {
-  "role": "t5",
-  "key": "label:Sai cung nữ thân tín mua lén ngoài cung",
-  "side": "P-ONLY"
- },
- {
-  "role": "t6",
-  "key": "label:Sai cung nữ thân tín mua lén ngoài cung",
-  "side": "P-ONLY"
- },
- {
-  "role": "t7",
-  "key": "label:Sai cung nữ thân tín mua lén ngoài cung",
-  "side": "P-ONLY"
- },
- {
-  "role": "hh",
-  "key": "label:Sai cung nữ thân tín mua lén ngoài cung",
-  "side": "P-ONLY"
- },
- {
-  "role": "up",
-  "key": "label:Sai cung nữ thân tín mua lén ngoài cung",
-  "side": "P-ONLY"
- },
- {
-  "role": "t1",
-  "key": "label:Sửa sổ nguyệt sự",
-  "side": "P-ONLY"
- },
- {
-  "role": "t2",
-  "key": "label:Sửa sổ nguyệt sự",
-  "side": "P-ONLY"
- },
- {
-  "role": "t3",
-  "key": "label:Sửa sổ nguyệt sự",
-  "side": "P-ONLY"
- },
- {
-  "role": "t4",
-  "key": "label:Sửa sổ nguyệt sự",
-  "side": "P-ONLY"
- },
- {
-  "role": "t5",
-  "key": "label:Sửa sổ nguyệt sự",
-  "side": "P-ONLY"
- },
- {
-  "role": "t6",
-  "key": "label:Sửa sổ nguyệt sự",
-  "side": "P-ONLY"
- },
- {
-  "role": "t7",
-  "key": "label:Sửa sổ nguyệt sự",
-  "side": "P-ONLY"
- },
- {
-  "role": "hh",
-  "key": "label:Sửa sổ nguyệt sự",
-  "side": "P-ONLY"
- },
- {
-  "role": "up",
-  "key": "label:Sửa sổ nguyệt sự",
-  "side": "P-ONLY"
- },
- {
-  "role": "t1",
-  "key": "label:Xin son phấn",
-  "side": "P-ONLY"
- },
- {
-  "role": "t2",
-  "key": "label:Xin son phấn",
-  "side": "P-ONLY"
- },
- {
-  "role": "t3",
-  "key": "label:Xin son phấn",
-  "side": "P-ONLY"
- },
- {
-  "role": "t4",
-  "key": "label:Xin son phấn",
-  "side": "P-ONLY"
- },
- {
-  "role": "t5",
-  "key": "label:Xin son phấn",
-  "side": "P-ONLY"
- },
- {
-  "role": "t6",
-  "key": "label:Xin son phấn",
-  "side": "P-ONLY"
- },
- {
-  "role": "t7",
-  "key": "label:Xin son phấn",
-  "side": "P-ONLY"
- },
- {
-  "role": "hh",
-  "key": "label:Xin son phấn",
-  "side": "P-ONLY"
- },
- {
-  "role": "up",
-  "key": "label:Xin son phấn",
+  "key": "hh:judge",
   "side": "P-ONLY"
  },
  {
@@ -1215,48 +510,8 @@
   "side": "N-ONLY"
  },
  {
-  "role": "t1",
-  "key": "maid:flirt",
-  "side": "P-ONLY"
- },
- {
-  "role": "t2",
-  "key": "maid:flirt",
-  "side": "P-ONLY"
- },
- {
-  "role": "t3",
-  "key": "maid:flirt",
-  "side": "P-ONLY"
- },
- {
-  "role": "t4",
-  "key": "maid:flirt",
-  "side": "P-ONLY"
- },
- {
-  "role": "t5",
-  "key": "maid:flirt",
-  "side": "P-ONLY"
- },
- {
-  "role": "t6",
-  "key": "maid:flirt",
-  "side": "P-ONLY"
- },
- {
-  "role": "t7",
-  "key": "maid:flirt",
-  "side": "P-ONLY"
- },
- {
-  "role": "hh",
-  "key": "maid:flirt",
-  "side": "P-ONLY"
- },
- {
-  "role": "up",
-  "key": "maid:flirt",
+  "role": "maid",
+  "key": "maid:errand",
   "side": "P-ONLY"
  },
  {
@@ -1280,51 +535,6 @@
   "side": "P-ONLY"
  },
  {
-  "role": "t1",
-  "key": "maid:hail",
-  "side": "P-ONLY"
- },
- {
-  "role": "t2",
-  "key": "maid:hail",
-  "side": "P-ONLY"
- },
- {
-  "role": "t3",
-  "key": "maid:hail",
-  "side": "P-ONLY"
- },
- {
-  "role": "t4",
-  "key": "maid:hail",
-  "side": "P-ONLY"
- },
- {
-  "role": "t5",
-  "key": "maid:hail",
-  "side": "P-ONLY"
- },
- {
-  "role": "t6",
-  "key": "maid:hail",
-  "side": "P-ONLY"
- },
- {
-  "role": "t7",
-  "key": "maid:hail",
-  "side": "P-ONLY"
- },
- {
-  "role": "hh",
-  "key": "maid:hail",
-  "side": "P-ONLY"
- },
- {
-  "role": "up",
-  "key": "maid:hail",
-  "side": "P-ONLY"
- },
- {
   "role": "maid",
   "key": "maid:med",
   "side": "P-ONLY"
@@ -1336,11 +546,6 @@
  },
  {
   "role": "maid",
-  "key": "maid:scout",
-  "side": "N-ONLY"
- },
- {
-  "role": "maid",
   "key": "maid:tellMis",
   "side": "P-ONLY"
  },
@@ -1348,69 +553,5 @@
   "role": "maid",
   "key": "maid:tonic",
   "side": "P-ONLY"
- },
- {
-  "role": "t1",
-  "key": "mediate",
-  "side": "P-ONLY"
- },
- {
-  "role": "t2",
-  "key": "mediate",
-  "side": "P-ONLY"
- },
- {
-  "role": "t3",
-  "key": "mediate",
-  "side": "P-ONLY"
- },
- {
-  "role": "t4",
-  "key": "mediate",
-  "side": "P-ONLY"
- },
- {
-  "role": "t5",
-  "key": "mediate",
-  "side": "P-ONLY"
- },
- {
-  "role": "t6",
-  "key": "mediate",
-  "side": "P-ONLY"
- },
- {
-  "role": "t7",
-  "key": "mediate",
-  "side": "P-ONLY"
- },
- {
-  "role": "up",
-  "key": "mediate",
-  "side": "N-ONLY"
- },
- {
-  "role": "receiver",
-  "key": "act:bribel",
-  "label": "Sai cung nữ thân tín lấy lòng",
-  "side": "FORCED",
-  "kind": "REQ",
-  "owner": "D parallel-time (send own maid)"
- },
- {
-  "role": "receiver",
-  "key": "ag:cx3:staffUp",
-  "label": "Tiến cử",
-  "side": "FORCED",
-  "kind": "REQ",
-  "owner": "written reason (D receiver-choice #2): Tiến cử = the master puts her OWN servant's name forward to Nội vụ phủ (an office, not a person: law 6b), paying bạc + Danh herself — the same function recommend() for her and every NPC master (law 1 SAME); the servant only gains merit (law 3: gain-only is fine), nobody is asked to do anything. Kept listed so the BIG reviewer sees it."
- },
- {
-  "role": "receiver",
-  "key": "ag:cx3:invite2",
-  "label": "Mời đến cung ta",
-  "side": "FORCED",
-  "kind": "PROP",
-  "owner": "D parallel-time (send button «Mời đến cung ta», jptime §4)"
  }
 ]

@@ -29,13 +29,14 @@ const KEYLAB={
  "ksp":["Hối lộ Kính sự phòng","Đút lót lật thẻ"],"cx2:maidSpy":["Sai cung nữ đi dò la","Sai đi dò la"],"cx3:qin":["Đánh đàn ở ngự hoa viên","Đánh đàn chờ ngự giá"],"cx3:def_canh":["Giao việc phòng bị","Phòng bị"],
  "cx3:def_thudoc":["Giao việc phòng bị","Phòng bị"],"cx3:def_theodoi":["Giao việc phòng bị","Phòng bị"],"cx3:def_giuchung":["Giao việc phòng bị","Phòng bị"],"check":["Kiểm tra đồ","Soát quà được tặng"],
  "cx3:work":["Tự học, làm tác phẩm","Tự học"],"cx3:anthai":["Tự bào chế thuốc an thai","An thai"],"cx2:kidGreet":["Dẫn đi thỉnh an Hoàng thượng","Đưa con đến thỉnh an Hoàng thượng"],
- "cx2:kidHeal":["Tự bốc thuốc cho con","Chữa bệnh cho con"],"cx3:charity":["Đưa cơm áo","Phát bạc cứu giúp cung nhân nghèo"],"cx3:facFound":["Lập phe cùng"],"cx3:tyGift":["Hối lộ người ở Thái y viện","Biếu"]};
+ "cx2:kidHeal":["Tự bốc thuốc cho con","Chữa bệnh cho con"],"cx3:charity":["Đưa cơm áo","Phát bạc cứu giúp cung nhân nghèo"],"cx3:facFound":["Lập phe cùng"],"cx3:tyGift":["Biếu"]};
 /* function class of a key (from the AG-ALL-2 parity table, after part 5): SAME = both sides call ONE function; NUM = same BAL row, two code paths */
 const SAMEPFX=["harm:","cx3:","hh:"];const SAMEK=new Set(["help","apol","visit","mediate","humil","test","drop","follow","gossip","flaunt","admon","warn","provoke","check","cx:buy","cx:gift","cx:ally",
  "cx2:bribeSrv","cx2:plantSrv","cx2:help","cx2:maidTalk","cx2:maidSpy","cx:study","maid:leave","maid:empTea","maid:poison","maid:follow","maid:cut","maid:listen","maid:scout","maid:watch","maid:pil"]);
 const fnClass=k=>SAMEK.has(k)||SAMEPFX.some(p=>k.startsWith(p))||/^[a-z]+$/.test(k)&&!/^effort$/.test(k)?"SAME":"NUM";
 /* documented exemptions (role, key or label, reason) — information-only buttons or a side with no state for it (ag-all-parity.md exemption lists) */
 const EXEMPT=require('./role-parity-exempt.json');
+const ALIAS={"harm:ally":"cx:ally","harm:gift":"cx:gift"};
 const CON=["t1","t2","t3","t4","t5","t6","t7"];const ROLES=["maid","t1","t2","t3","t4","t5","t6","t7","hh","up"];
 const ROLE_N={maid:"cung nữ",t1:"Đáp ứng",t2:"Thường tại",t3:"Quý nhân",t4:"Tần",t5:"Phi",t6:"Quý phi",t7:"Hoàng quý phi",hh:"Hoàng hậu",up:"cung nữ → phi tần"};
 
@@ -62,12 +63,31 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
   ["proof",a=>{for(const t of others(a)){try{if(typeof evA==="function")evA(a,t,3,"scan");else t.ev=3}catch(e){}}}],
   ["body",a=>{a.preg=2;a.hidden=true;a.fake=0;a.pregWk=wk();try{const k={name:"Tiểu Bảo",sex:"m",age:5,hp:30,tal:20,fond:20,alive:true};a.kids=(a.kids||[]).concat([k])}catch(e){}}],
   ["chest",a=>{a.inv=a.inv||[];try{for(const k of Object.keys(IT).slice(0,6))a.inv.push({k})}catch(e){}}],
-  ["rival-down",a=>{for(const t of others(a))if(t!==S){t.confined=2}}]];
+  ["rival-down",a=>{for(const t of others(a))if(t!==S){t.confined=2}}],
+  /* part 2: her rouge boxes ran out (jration): both doers miss every part, so the borrow / beg / steal roads open for her and for an NPC */
+  ["rouge",a=>{try{for(const part of BAL.ration.parts)for(const e of lxBoxes(a,part))a.inv.splice(a.inv.indexOf(e),1)}catch(e){}}],
+  /* part 2: a neglected consort (Sủng low) with the palace men out at the garden this buổi (j22 / jmen S.menW): her talk with them, an NPC's road to them */
+  ["men",a=>{try{menInit();S.menW=S.menW||{};for(const m of S.men||[])if(m.alive)S.menW[m.id]="vuon";a.sung=20}catch(e){}}],
+  /* part 2: a malicious consort (malice, the NPC's character gate of the Đồ cấm road) who hates someone */
+  ["malice",a=>{a.malice=80;for(const t of others(a)){try{oanAdd(a,t,60)}catch(e){}}}],
+  /* part 2: the doer has SEEN everyone's dress and phẩm (same buổi, same place: jdress dressLook + j92 wdSee), as the player's walk through
+     the places gives her — so «Tố xa xỉ» / «Hặc ăn mặc sai phẩm» are probed for an NPC doer too (were P-ONLY by probe only) */
+  ["seen",a=>{for(const t of others(a)){try{if(typeof luxOf==="function"){const x=luxOf(t);if(x&&x.sc<=x.bud&&t.inv){const L=t.inv.filter(e=>e&&IT[e.k]&&itm(e.k).pr>0);if(L[0])t.wear=Object.assign(t.wear||{},{tram:L[0]})}}
+    if(typeof dressLook==="function")dressLook(a,t,"cùng chỗ");if(typeof wdSee==="function"&&typeof wdStatus==="function"){const st=wdStatus(t);wdSee(a,t,st==="ok"?"over":st,"cùng chỗ",true)}}catch(e){}}}],
+  /* part-1 fix (b): the doer's OWN servants (the targets of Thưởng / Phạt / Đổi người / Che chở / Hỏi chuyện / Tâm sự / Tiến cử) span every state those
+     acts read (loyal low / very low / high, in trouble this tuần, fond of someone) — the same states for her household and an NPC's, so a staff row is
+     judged by the rule at that rank, never by how loyal the drawn servants happened to be */
+  ["staff",a=>{const L=(a.staff||[]).filter(s=>s&&!s.out&&s.loyal!=null);const o=liveRivals(true).find(x=>x&&x!==a&&!x.out);
+    const ST=[s=>{s.loyal=10},s=>{s.loyal=25},s=>{s.loyal=45},s=>{s.trouble=wk();s.loyal=60},s=>{if(o)s.af=Object.assign({},s.af||{},{[o.id]:40});s.loyal=80}];
+    L.forEach((s,i)=>{const b={loyal:s.loyal,trouble:s.trouble,af:s.af};UNDO.push(()=>Object.assign(s,b));ST[i%ST.length](s)})}]];
+ const UNDO=[];
  const N0={};try{for(const k of Object.keys(agNeedsC(liveRivals(true)[0]||S)))N0[k]=100}catch(e){};["company","desire","tea","order","love","self","tin","mp"].forEach(k=>N0[k]=100);
- const snapW=()=>JSON.stringify({S:{rank:S.rank,preg:S.preg,hidden:S.hidden,kids:S.kids,inv:S.inv,confined:S.confined},R:rivals.map(v=>({id:v.id,rank:v.rank,queen:v.queen,confined:v.confined,suc:v.suc,sung:v.sung,preg:v.preg,hidden:v.hidden,kids:v.kids,inv:v.inv,ev:v.ev}))});
- const restoreW=j=>{const o=JSON.parse(j);Object.assign(S,o.S);for(const x of o.R){const v=rivals.find(r=>r.id===x.id);if(v)Object.assign(v,x)}};
- const npcOpts=(role,v,grps)=>{for(const [vn,f] of VAR){const W=snapW();SEED(7);try{rich(v);f(v)}catch(e){E("var "+vn,e)}
+ const snapW=()=>JSON.stringify({menW:S.menW||null,S:{malice:S.malice,rank:S.rank,preg:S.preg,hidden:S.hidden,kids:S.kids,inv:S.inv,confined:S.confined},R:rivals.map(v=>({id:v.id,rank:v.rank,queen:v.queen,confined:v.confined,suc:v.suc,sung:v.sung,preg:v.preg,hidden:v.hidden,kids:v.kids,inv:v.inv,ev:v.ev,malice:v.malice}))});
+ const restoreW=j=>{while(UNDO.length)try{UNDO.pop()()}catch(e){}const o=JSON.parse(j);S.menW=o.menW||{};Object.assign(S,o.S);for(const x of o.R){const v=rivals.find(r=>r.id===x.id);if(v)Object.assign(v,x)}};
+ const npcOpts=(role,v,grps)=>{for(const [vn,f] of VAR){const W=snapW();SEED(7);try{AG.sc={}}catch(e){}try{rich(v);f(v)}catch(e){E("var "+vn,e)}
    for(let t=0;t<TRIES;t++){try{for(const o of agOptsG(v,Object.assign({},N0),null)||[])addN(role,o.k,"agOptsG")}catch(e){E("agOptsG",e)}
+    /* part 2: her own real needs too (agNeeds: a full Đức / Danh weighs its cost little), not only the flat all-needs world N0 */
+    let NR=null;try{NR=Object.assign({},N0,agNeeds(v))}catch(e){}if(NR)for(const g of grps)for(const k in AGREG[g]||{}){try{for(const o of AGREG[g][k](v,Object.assign({},NR),null)||[])if(o&&o.k)addN(role,o.k,g+"."+k+"#real")}catch(e){}}
     for(const need of [null].concat(Object.keys(N0)))for(const g of grps)for(const k in AGREG[g]||{}){try{for(const o of AGREG[g][k](v,Object.assign({},N0),need)||[])if(o&&o.k)addN(role,o.k,g+"."+k)}catch(e){}}
     try{if(typeof agOpts==="function"&&g0(v)!=="maid")for(const need of [null,"sung","ally","spite","danh","safe","kid","rest","th","hh","bac"])for(const o of agOpts(v,Object.assign({},N0),need)||[])addN(role,o.k,"agOpts")}catch(e){}}
    if(g0(v)!=="maid"&&g0(v)!=="srv")gates(role,v);restoreW(W)}};
@@ -76,8 +96,21 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
  const OFF=(()=>{const H=new Set(BANDS.flatMap(b=>b[2]).concat(Object.keys(HA_VAR),["taint","cook","tieuhuy"]));for(const k of HA_NO)H.delete(k);
   const T=new Set(["admon"]);for(const M of [typeof AGSELF!=="undefined"?AGSELF:{},typeof AGSOC!=="undefined"?AGSOC:{}])for(const x in M){const e=M[x];if(Array.isArray(e))T.add(e[0]);else if(e&&e.k)T.add(e.k);T.add(x)}return{H,T}})();
  /* the same targets for both doers: the other consorts (never S, never the probed NPC) */
- const gates=(role,a)=>{const T=liveRivals(true).filter(x=>x&&x!==a&&x!==S&&x!==window.__rpV&&!x.out&&x.alive!==false);for(const k in TW){const D=TW[k];if(!D.req){addGate(role,a,k);continue}for(const t of T.concat([null])){try{if(D.req(a,t)){addGate(role,a,k);break}}catch(e){}}}
-  for(const k in ACT){const A=ACT[k];if(!A||!A.ok)continue;for(const t of T){try{if(A.ok(a,t)){addGate(role,a,"harm:"+k);break}}catch(e){}}}};
+ /* part-1 fix (b), reviewer item b: a TARGET LADDER, the same for both doers — one fixed target L (the first non-Empress consort of the shared
+    target list) is put at every rank (Đáp ứng … Hoàng quý phi, then the Hoàng hậu seat), once as she is and once in the state a face-to-face or
+    theft deed needs (standing with the doer in the garden — jagharm HA.here, the same hook the NPC deed uses when it lands —, holding a stealable
+    piece (jlost loOk), at odds with a third person (Hòa giải), no slap mark yet). A shared-gate deed (Tát / Ngáng chân / Đẩy xuống hồ sen /
+    Sai người lấy trộm / Hòa giải / Nương theo …) is then judged by its RULE at the doer's rank, never by where the drawn targets stood that buổi */
+ let LOK=null;const lokK=()=>{if(LOK===null){LOK="";try{for(const k of Object.keys(IT))if(loOk({k})){LOK=k;break}}catch(e){}}return LOK};
+ const ladder=(a,T,test)=>{const L=T.find(x=>!x.queen);if(!L)return false;const X=T.find(x=>x!==L&&!x.queen);
+  const b={rank:L.rank,queen:L.queen,slap:L.slap,inv:L.inv,ro:L.ro,oan:L.oan},h0=HA.here;let hit=false;
+  try{for(const r of [0,1,2,3,4,5,6,"hh"])for(const st of [0,1]){L.rank=r==="hh"?6:r;L.queen=r==="hh";L.slap=b.slap;L.inv=b.inv;L.ro=b.ro;L.oan=b.oan;HA.here=h0;
+    if(st){HA.here={[a===S?"me":a.id]:"vuon",[L.id]:"vuon"};L.slap=null;const ik=lokK();if(ik)L.inv=(b.inv||[]).concat([{k:ik}]);L.ro=Object.assign({},b.ro||{});if(X)oanAdd(L,X,40)}
+    try{if(test(L)){hit=true;throw 0}}catch(e){if(hit)throw e}}}catch(e){if(!hit)E("ladder",e)}
+  finally{Object.assign(L,b);HA.here=h0}return hit};
+ const gates=(role,a)=>{const T=liveRivals(true).filter(x=>x&&x!==a&&x!==S&&x!==window.__rpV&&!x.out&&x.alive!==false);for(const k in TW){const D=TW[k];if(!D.req){addGate(role,a,k);continue}let f=false;for(const t of T.concat([null])){try{if(D.req(a,t)){f=true;break}}catch(e){}}
+   if(f||ladder(a,T,t=>D.req(a,t)))addGate(role,a,k)}
+  for(const k in ACT){const A=ACT[k];if(!A||!A.ok)continue;let f=false;for(const t of T){try{if(A.ok(a,t)){f=true;break}}catch(e){}}if(f||ladder(a,T,t=>A.ok(a,t)))addGate(role,a,"harm:"+k)}};
  const addGate=(role,a,k)=>{if(a===S){addP(role,"§"+k,"gate");return}const h=/^harm:(.+)$/.exec(k);if(h?!OFF.H.has(h[1]):!OFF.T.has(k))return;addN(role,"§"+k,"gate")};
  const PLS=()=>{try{return places().map(x=>x.k).concat(["home"])}catch(e){return["home"]}};
  const playerOnce=role=>{
@@ -116,14 +149,19 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
   try{S.age=Math.max(S.age||0,18);srvRise("role-parity scan");res.upMe={ok:!isSrv()&&S.rank===0,rank:S.rank};S.preg=0;S.hidden=false;playerLabels("up");
    const sv=S.srv;delete S.srv;playerLabels("t1me");S.srv=sv}catch(e){E("upMe",e)}}
  const LT={};for(const k in TW)LT[k]=[TW[k].n];for(const k in ACT)if(ACT[k]&&ACT[k].n)LT["harm:"+k]=[ACT[k].n];
- for(const k in (window.AGC2BTN||{}))LT["cx2:"+k]=[AGC2BTN[k]];for(const k in (window.AGC3BTN||{}))LT["cx3:"+k]=[AGC3BTN[k]];
+ for(const k in (window.AGC2BTN||{}))LT["cx2:"+k]=[AGC2BTN[k]];for(const k in (window.AGC3BTN||{}))LT["cx3:"+k]=[AGC3BTN[k]];for(const k in (window.AGC4BTN||{}))LT["cx4:"+k]=[AGC4BTN[k]];
  res.LT=LT;Math.random=R0;return res}
 
 async function scan(html,opt){opt=opt||{};const {chromium}=require('playwright');const URL=/^(https?|file):/.test(html)?html:'file://'+path.resolve(html);
  const b=await chromium.launch();const out={P:{},N:{},err:[],pageErr:[]};
  for(const phase of ["consort","maid"]){const p=await b.newPage({viewport:{width:755,height:1000}});p.on('pageerror',e=>out.pageErr.push(phase+": "+e.message));
-  await p.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)$/,r=>r.abort());await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
-  await p.evaluate(({phase})=>{localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();
+  /* part 2: one deterministic page (as ag2perf-diff): seeded Math.random + crypto, frozen clocks — a row never flips between runs */
+  await p.addInitScript(()=>{let x=424242;Math.random=()=>{x=(x*1103515245+12345)%2147483648;return x/2147483648};let y=777;crypto.getRandomValues=a=>{for(let i=0;i<a.length;i++){y=(y*1103515245+12345)%2147483648;a[i]=Math.floor(y/2147483648*4294967296)%(a instanceof Uint8Array?256:4294967296)}return a};performance.now=()=>1000;Date.now=()=>1763000000000});
+  /* part-1 fix: no network at all (as ag2perf-deeds): a CDN build (build_site.sh) otherwise loads the CDN asset index while the probe runs, so the
+     same game gave different rows on the CDN build and the plain build — media and every http(s) request are aborted, file:// stays */
+  await p.route(u=>/^https?:/.test(u.href)||/\.(webp|png|jpg|mp3|ogg|mp4|webm)$/.test(u.pathname),r=>r.abort());await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
+  /* part 2: the same world every run (the life start() draws was unseeded: rows that depend on a draw flipped between runs) */
+  await p.evaluate(({phase})=>{let sd=20261118;Math.random=()=>{sd=(sd*16807)%2147483647;return (sd-1)/2147483646};localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;window.__nlInner=1;start();
    for(let i=0;i<60&&(phase==="maid"?!isSrv():isSrv());i++)start();window.__nlInner=0;window.__bot=1;quiet=false;Q.length=0;try{render()}catch(e){}},{phase});
   const r=await p.evaluate(inPage,{phase,TRIES:opt.tries||4});
   Object.assign(out.P,r.P);Object.assign(out.N,r.N);out.err.push(...r.err.map(x=>phase+": "+x));if(r.upNpc)out.upNpc=r.upNpc;if(r.upMe)out.upMe=r.upMe;out.LT=Object.assign(out.LT||{},r.LT);await p.close()}
@@ -135,8 +173,14 @@ function build(o){const LT=Object.assign({},o.LT);for(const k in KEYLAB)LT[k]=(L
   hits.sort((a,b)=>b[1]-a[1]);return hits.length?hits.filter(h=>h[1]===hits[0][1]).map(h=>h[0]):[]};
  /* player keys per role: gate keys (§k) + labels mapped to keys; unmapped labels stay as label rows */
  const PK={},UNM={};for(const role in o.P){PK[role]={};for(const n in o.P[role]){if(n[0]==="§"){PK[role][n.slice(1)]=1;continue}
-   const ks=keyOfLabel(n);if(ks.length)ks.forEach(k=>PK[role][k]=1);else{(UNM[n]=UNM[n]||{})[role]=Object.keys(o.P[role][n]).join("|")}}}
- const NK={};for(const role in o.N){NK[role]={};for(const k in o.N[role])NK[role][k[0]==="§"?k.slice(1):k]=1}o.N=NK;
+   let ks=keyOfLabel(n);/* one label, two roads: a maid key counts in the maid column, a consort key (cx*) in the consort columns */
+   if(ks.length>1){const mk=ks.filter(k=>k.startsWith("maid:")),ck=ks.filter(k=>/^cx\d?:/.test(k));if(mk.length&&ck.length)ks=role==="maid"?ks.filter(k=>!/^cx\d?:/.test(k)):ks.filter(k=>!k.startsWith("maid:"))}
+   if(ks.length)ks.forEach(k=>PK[role][k]=1);else{(UNM[n]=UNM[n]||{})[role]=Object.keys(o.P[role][n]).join("|")}}}
+ const NK={},NKA={};for(const role in o.N){NK[role]={};NKA[role]={};for(const k in o.N[role]){const kk=k[0]==="§"?k.slice(1):k;NK[role][kk]=1;
+   /* the promotion check compares the ACT SET: an option seen only under her own real needs (#real pass) depends on her life, not her rank */
+   if(Object.keys(o.N[role][k]).some(x=>!/#real$/.test(x)))NKA[role][kk]=1}}
+ /* aliases: the same ACT function under two keys (her gate key harm:x = an NPC's cx:x option, jagacts cx:ally → ACT.ally.f, cx:gift → giveTo) */
+ for(const role in NK)for(const a in ALIAS)if(NK[role][ALIAS[a]])NK[role][a]=1;o.N=NK;
  const keys=new Set();for(const R of [PK,o.N])for(const role in R)for(const k in R[role])keys.add(k);
  const isEx=(role,k)=>EXEMPT.find(e=>(e.key===k||"label:"+e.label===k||e.re&&new RegExp(e.re).test(k))&&(!e.roles||e.roles.includes(role)));
  const GRP={maid:["maid"],t1:CON,t2:CON,t3:CON,t4:CON,t5:CON,t6:CON,t7:CON,hh:["hh"],up:["up"]};
@@ -151,7 +195,7 @@ function build(o){const LT=Object.assign({},o.LT);for(const k in KEYLAB)LT[k]=(L
   rows.push(row)}
  /* promotion: the risen maid's act set equals her clone born as Đáp ứng (NPC: amRise; player: srvRise) */
  const setEq=(A,B)=>{A=A||{};B=B||{};return{onlyRisen:Object.keys(A).filter(x=>!(x in B)),onlyBorn:Object.keys(B).filter(x=>!(x in A))}};
- const promo={npc:Object.assign({},o.upNpc,setEq(o.N.up,o.N.t1born)),me:Object.assign({},o.upMe,setEq(PKL.up,PKL.t1me))};
+ const promo={npc:Object.assign({},o.upNpc,setEq(NKA.up,NKA.t1born)),me:Object.assign({},o.upMe,setEq(PKL.up,PKL.t1me))};
  for(const w of ["npc","me"])for(const side of ["onlyRisen","onlyBorn"])for(const k of promo[w][side])gaps.push({role:"up",key:k,label:lbl(k),side:"PROMO-"+w+"-"+side});
  return{roles:ROLES,roleN:ROLE_N,rows,gaps,promo,err:o.err,pageErr:o.pageErr}}
 

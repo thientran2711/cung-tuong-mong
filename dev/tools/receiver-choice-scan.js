@@ -26,20 +26,22 @@ const RCVX={poison:"bỏ độc (lén)",plant:"giấu bùa (lén)",taint:"hạ t
 /* JUDGE a THIRD person is asked to decide about the target (xin Hoàng hậu giáng, trình Hoàng hậu / Thái hậu): the judge is the receiver (judge probe below)
    EVERY act key is classified HERE (review FAIL 6 #4: no hand list may send an unlisted act to DONE). The key list itself comes from the live act tables
    (TW / ACT / AGRUN, in the page); a reached inter-person act whose key is in no list is kind NEW → verdict NEW = a gap, the test fails until it is classified. */
-const KINDS={REQ:"help doctor facJoin blockf bribel bribe bribeSrv",PROP:"ally facFound invite2 call mediate",ORDER:"summon visit",
+const KINDS={REQ:"help doctor facJoin blockf bribel bribe bribeSrv rougeBorrow illAlly rougeBeg",PROP:"ally facFound invite2 call mediate manHail manFlirt manToken manTryst",ORDER_SRV:"illMaid",ORDER:"summon visit",
  JUDGE:"xinhh trinhhh trinhth takeaway",
  /* staffUp «Tiến cử»: a request to Nội vụ phủ (an office; recommend() is one rule for her and every NPC) and the servant only gains (law 3) → GIFT (reviewer 88de83c5f) */
  GIFT:"gift reward petcare charity staffUp teachV teachD thHelp hhShield pardon release tqGift tyGift staffChe treat petBuy",
  /* SELF: the doer's own deed (no other person is asked or given anything; when a probe still sees it touch someone it is OK, never a hidden ask) */
- SELF:"face arts book alms sutra maidR rest study buy portrait maidTalk fert dance anthai restLat sell work hire facLeave drug def_canh def_thudoc def_theodoi def_giuchung qin",COVERT:Object.keys(RCVX).join(" ")+" tieuhuy chest laydo laydol slowpoison petsteal pgift",
- DONE:"accuse expose kidGreet kidHeal kidMed test pushp banphe batnat block huydung ink kpoison ksab lygian musk nuoc phatquy phonghoa pond rash rumor spyk tea thathu tocao trip uyhiep vp xx "+
+ SELF:"face arts book alms sutra maidR rest study buy portrait maidTalk fert dance anthai restLat sell work hire facLeave drug def_canh def_thudoc def_theodoi def_giuchung qin kidCare kidGuard cycFix cycMama illCho illThaiy",COVERT:Object.keys(RCVX).join(" ")+" tieuhuy chest laydo laydol slowpoison petsteal pgift rougeSteal",
+ DONE:"accuse expose manCut kidGreet kidHeal kidMed test pushp banphe batnat block huydung ink kpoison ksab lygian musk nuoc phatquy phonghoa pond rash rumor spyk tea thathu tocao trip uyhiep vp xx "+
   "apol announce drop catswap kframe steal road giahoa tat thaopet hearMe joinMe hear join judge vent invoke staffPhat staffDoi staffTam threat facSell facDiv "+
   "flat true show favor court nurse likes old humble search staffHoi staffThuong talkGossip talkHealth talkPraise talkSecret tell use conf cutpay admon check fakeIll fakePreg flaunt follow humil ksp pray provoke thHH thTH warn"};
 /* STAFF: a servant's own deed (ag maid:* / srv:*, the maid road): those receiver rows live in C-AG's ONE role-parity table (jagstf2 G10 cards) */
 const KIND=k=>{const b=k.replace(/^[a-z0-9]+:/,"").replace(/^[a-z0-9]+:/,"");if(k==="tw:help"||k==="th:gift"||k==="ag:th:gift")return"GIFT";if(/^(ag:)?(maid|srv):/.test(k))return"STAFF";
  for(const K in KINDS)if(KINDS[K].split(" ").includes(b))return K;return"NEW"};
 /* a judge with no player seat (she is never the Thái hậu): the NPC judge's own roll stands; listed with its reason (reviewer 88de83c5f: OK as it stands) */
-const JUDGE_NPC_ONLY={trinhth:"Thái hậu xét: ngươi không bao giờ ngồi ghế Thái hậu",takeaway:"Hoàng thượng chuẩn: ngươi không bao giờ ngồi ghế Hoàng thượng"};
+const JUDGE_NPC_ONLY={trinhth:"Thái hậu xét: ngươi không bao giờ ngồi ghế Thái hậu",takeaway:"Hoàng thượng chuẩn: ngươi không bao giờ ngồi ghế Hoàng thượng",
+ /* the man of a tư tình road (cx4 man*, role-parity r2): she is never the man; his answer is his own NPC roll */
+ manHail:"người đàn ông: ngươi không ngồi ghế ấy",manFlirt:"người đàn ông: ngươi không ngồi ghế ấy",manToken:"người đàn ông: ngươi không ngồi ghế ấy",manTryst:"người đàn ông: ngươi không ngồi ghế ấy"};
 
 function inPage(arg){const {TRIES}=arg;const out={rows:{},err:[],pend:[]};
  /* the deed whose receiver answers later, at its landing (Mời đến cung ta: the guest answers when the next buổi's places are drawn) */
@@ -48,7 +50,7 @@ function inPage(arg){const {TRIES}=arg;const out={rows:{},err:[],pend:[]};
  const R0=Math.random;let seed=1;const SEED=n=>{seed=n||1;Math.random=()=>{seed=(seed*16807)%2147483647;return (seed-1)/2147483646}};
  const E=(w,e)=>{if(out.err.length<40)out.err.push(w+": "+(e&&e.message||e))};
  /* chooser detectors: every NPC decision goes through one of these (jmind mindPick = the ONE mind; stf2* = staff dilemmas; rdHpDraw = helper answer) */
- const CH=[];const who={rcvJudgePick:a=>a[0],mindPick:a=>a[1],stf2Pick:a=>a[0],stf2Ord:a=>a[1],stf2Bribe:a=>a[1],stf2Framed:a=>a[0],rdHpDraw:a=>null,eitPilPick:a=>a[0],cmAskPick:a=>a[0],asHitPick:a=>a[0]};
+ const CH=[];const who={rcvOddsPick:a=>a[0],mindPick:a=>a[1],stf2Pick:a=>a[0],stf2Ord:a=>a[1],stf2Bribe:a=>a[1],stf2Framed:a=>a[0],rdHpDraw:a=>null,eitPilPick:a=>a[0],cmAskPick:a=>a[0],asHitPick:a=>a[0]};
  for(const f in who){const f0=window[f];if(typeof f0!=="function")continue;window[f]=function(){try{CH.push({f,p:who[f](arguments),n:Array.isArray(arguments[0])?arguments[0].length:0})}catch(e){}return f0.apply(this,arguments)}}
  const rich=a=>{Object.assign(a,{bac:5000,suc:100,danh:90,duc:90,tamco:80,sung:60,th:70,hh:60,tai:80,sac:80});if(a===S){S.kh=0;try{used=0}catch(e){}}a.confined=0;a.fakeIll=0};
  const T=x=>{if(!x)return"";if(x===S)return JSON.stringify([S.suc,S.bac,S.danh,S.duc,S.sung,S.th,S.hh,S.preg,S.confined,S.inv&&S.inv.length,S.kids&&S.kids.length,S.oan,S.rl,S.aff,S.af]);
@@ -71,7 +73,7 @@ function inPage(arg){const {TRIES}=arg;const out={rows:{},err:[],pend:[]};
    for(const x of [S,v,t,u])rich(x);
    const snap=JSON.stringify({S:{rank:S.rank,place:S.place},v:[v.rank,v.queen]});
    for(const [dir,a,b] of [["P",v,S],["N",S,t],["NN",u,t]]){if(row[dir]&&row[dir].touched&&(dir==="P"?row[dir].pc.length:row[dir].nc.length))continue;
-    const x=run(fam,k,a,b);if(!row[dir]||x.touched&&!row[dir].touched||x.touched&&(dir==="P"?x.pc.length:x.nc.length))row[dir]=x}
+    if(dir==="P")window.__bot=0;/* her side: cards that a bot run suppresses (jration lxAskHer) must show */let x;try{x=run(fam,k,a,b)}finally{window.__bot=1}if(!row[dir]||x.touched&&!row[dir].touched||x.touched&&(dir==="P"?x.pc.length:x.nc.length))row[dir]=x}
    try{S.place=JSON.parse(snap).S.place}catch(e){}}
   /* THIRD-PARTY receiver: the one asked is not the target (Nhờ ơn người quen: the acquaintance who owes the asker) → N→P = she is that acquaintance */
   /* JUDGE receiver (review FAIL 6 #3/#4): N→P = SHE is the Hoàng hậu and an NPC asks her to judge another NPC (her card expected);
@@ -111,7 +113,7 @@ function build(o){const rows=[],gaps=[];
   /* verdict: ASYM = one receiver chooses, the other is forced (law 1) · FORCED = asked / proposed / ordered and no receiver can say no (21:15Z) ·
      SAME = every receiver chooses · OK = done-to / covert, no receiver answers at the moment on either side (counterplay after) */
   const nside=c.N!=="n/a"?c.N:c.NN;const sides=[c.P,c.N,c.NN].filter(x=>x!=="n/a");let v;
-  if(kind==="NEW")v="NEW";else if(sides.length&&sides.every(x=>x==="CHOICE"))v="SAME";else if(sides.includes("CHOICE"))v="ASYM";else if(kind==="JUDGE"&&JUDGE_NPC_ONLY[k])v="OK";else if(/REQ|PROP|ORDER|JUDGE/.test(kind))v="FORCED";else v="OK"
+  if(kind==="NEW")v="NEW";else if(sides.length&&sides.every(x=>x==="CHOICE"))v="SAME";else if(sides.includes("CHOICE"))v="ASYM";else if(JUDGE_NPC_ONLY[k.replace(/^[a-z0-9]+:/,"")])v="OK";else if(/REQ|PROP|ORDER|JUDGE/.test(kind))v="FORCED";else v="OK"
   const row={id,k,n:R.n||"",fam:R.fam,kind,P:c.P,N:c.N,NN:c.NN,v,pc:(R.P&&R.P.pc||[]).slice(0,2),nc:[...new Set((R.N&&R.N.nc||[]).concat(R.NN&&R.NN.nc||[]))].slice(0,3),r:R.P&&R.P.r||R.N&&R.N.r||""};
   rows.push(row);if(v==="ASYM"||v==="FORCED"||v==="NEW")gaps.push({id,k,n:row.n,kind,v})}
  rows.sort((a,b)=>a.kind.localeCompare(b.kind)||a.id.localeCompare(b.id));

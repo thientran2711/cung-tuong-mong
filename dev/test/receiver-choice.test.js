@@ -72,6 +72,10 @@ const HTML=process.argv[2]||'dev/index.html';const res=[];const ok=(c,m,x)=>{res
   /* bribel: the target maid picks (ONE rule stf2BribeW, cnvBribeOpts numbers) */const BL={};for(let i=0;i<300;i++){a.maid=a.maid||{name:"x",loyal:90};a.maid.loyal=90;a.maid.spyFor=null;t.maid.loyal=(i%5)*25;t.maid.spyFor=null;window.__rcvN={};try{ACT.bribel.f(a,t)}catch(e){}const id=Object.keys(window.__rcvN).find(z=>/^maid_/.test(z))||"?";BL[id]=(BL[id]||0)+1}out.bribel=BL;
   /* her own maid takes / tells with her card's numbers */const ml0=S.maid.loyal;const ev0=evG(S,a);let tk=null,tl=null;for(let i=0;i<200&&!(tk&&tl);i++){a.bac=500;S.maid.loyal=50;S.maid.spyFor=null;window.__rcvN={};evA(S,a,BAL.evWipe);const e0=evG(S,a);const b0=S.maid.bac||0;try{ACT.bribe.f(a,S)}catch(e){}
    if(window.__rcvN.maid_take&&!tk)tk={spy:S.maid.spyFor===key(a),pay:(S.maid.bac||0)-b0};if(window.__rcvN.maid_tell&&!tl)tl={ev:evG(S,a)-e0,tin:S.maid.loyal-50}}out.own={tk,tl,one:BAL.ag.ev.one,tin:BAL.coopBribe.tin,price:econSchemePrice("bribe",a,S)||BAL.actBac.bribe};S.maid.loyal=ml0;S.maid.spyFor=null;
+  /* Xin son phấn (cx4:rougeBeg): she as the Hoàng hậu gets the card; Mượn son phấn (cx4:rougeBorrow): the NPC lender answers through rcvOddsPick */
+  {const rk1=S.rank;S.rank=7;Q.length=0;const g=V.find(z=>!z.queen)||a;g.inv=[];g.lxBeg={};let r0="";try{r0=AGRUN["cx4:rougeBeg"](g,null,{k:"cx4:rougeBeg",vid:g.id,id:"v"+g.id,key:"rc"})}catch(e){r0="ERR "+e.message}
+   out.beg={q:Q.map(m=>(m.opts||[]).map(o=>o.n+" | "+o.x)),r:String(r0).slice(0,80),miss:lxMiss(g).length};Q.length=0;S.rank=rk1;
+   const BR={};for(let i=0;i<80;i++){a.inv=[];window.__rcvN={};try{AGRUN["cx4:rougeBorrow"](a,null,{k:"cx4:rougeBorrow",vid:a.id,id:"v"+a.id,key:"rc"})}catch(e){}const id=Object.keys(window.__rcvN).find(z=>/rougeBorrow/.test(z))||"?";BR[id]=(BR[id]||0)+1}out.borrow=BR}
   out.oneCore={kw:BAL.rcv.kw===undefined,w:/stf2BribeW/.test(rcvMaidBribe.toString())&&/stf2BribeW/.test(stf2Bribe.toString())&&/stf2Tr/.test(stf2BribeW.toString())};
   Q.length=0;return out});
  ok(r7.half.half>0&&r7.half.sucOk===r7.half.half&&r7.half.seen>0&&r7.half.seen<r7.half.half,'NPC «qua loa» (Kết giao): Sức − prop.suc × half every time, seen-through sometimes (BAL.road.hp.half)',r7.half);
@@ -81,6 +85,8 @@ const HTML=process.argv[2]||'dev/index.html';const res=[];const ok=(c,m,x)=>{res
  ok(r7.inv.length===1&&r7.inv[0].length===4&&r7.inv[0][2]==="Từ chối",'Mời đến cung ta: an NPC host\'s invitation lands as HER 4-answer card',r7.inv);
  ok(["maid_take","maid_tell","maid_quiet"].every(z=>r7.bribel[z]>0),'Sai cung nữ thân tín lấy lòng: the target maid picks take / tell / quiet (same pick as Mua chuộc)',r7.bribel);
  ok(r7.own.tk&&r7.own.tk.spy&&r7.own.tk.pay===r7.own.price&&r7.own.tl&&r7.own.tl.ev===r7.own.one&&r7.own.tl.tin===r7.own.tin,'her own maid bribed: take / tell apply the maid card\'s numbers (pay, tai mắt · ev.one, Chủ tin + coopBribe.tin)',r7.own);
+ ok(r7.beg.q.length===1&&r7.beg.q[0].length===2,'Xin son phấn (cx4 rougeBeg): she as the Hoàng hậu gets the card (2 answers)',r7.beg);
+ ok((r7.borrow.judge_rougeBorrow_yes||0)+(r7.borrow.judge_rougeBorrow_no||0)>0,'Mượn son phấn (cx4 rougeBorrow): the NPC lender answers with her card\'s two answers (rcvOddsPick)',r7.borrow);
  ok(r7.oneCore.kw&&r7.oneCore.w,'one core: no BAL.rcv.kw copy; rcvMaidBribe and stf2Bribe share stf2BribeW (with stf2Tr)',r7.oneCore);
  ok(!r.kwCopy,'no BAL.rcv.kw (the L1876 words live in BAL.road.hp.kw only)');
  ok(!errs.length,'no page errors',errs.slice(0,3));await b.close();

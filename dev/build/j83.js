@@ -253,7 +253,5 @@ function illHTML(){return `<div class="ph"><span>Đồ cấm: độc dược kh�
  return pbtn(`data-ill="${r}"`,R0.n,r==="ally"?`${capW()} · tốn: ${R0.k} khắc · thành: có đồ cấm · kèm: nàng nắm ${balAb(BAL.eff.j83.evIllBuy)} chứng cứ của ngươi`:`${word(R0.o(S))} · tốn: ${R0.k} khắc, Bạc -${lo} đến -${hi} · thành: có độc dược, ${R0.when} · hỏng: ${R0.fail(S)} · kèm: Đức -3`,whyTime(R0.k)||nd)}).join("")+`</div>`}
 (function(){const i0=invHTML;invHTML=function(){const h=i0.apply(this,arguments);const j=h.indexOf('</div>',h.indexOf('class="rbtn"'));return j<0?h+illHTML():h.slice(0,j+6)+illHTML()+h.slice(j+6)}})();
 document.addEventListener("click",ev=>{const b=ev.target.closest("[data-ill]");if(!b||b.disabled)return;ev.stopPropagation();illAsk(b.dataset.ill)},true);
-/* NPCs: the malicious look for poison by the same routes */
-(function(){const m0=npcMonthly;npcMonthly=function(v){const ev=m0.apply(this,arguments);try{if(v&&v.alive&&!v.out&&!v.confined&&v.malice>60&&roll(8)&&!(v.inv||[]).some(e=>WILL[e.k])){const k=roll(60)?"hacdinh":roll(50)?"xahuong":"botngua";
-  const rs=["maid","thaiy","cho","ally"].filter(r=>IROUTE[r].ks.includes(k)&&(r!=="ally"||illAllies(v).some(a=>a.inv.some(e=>e.k===k)))&&(r==="ally"||v.bac>=IROUTE[r].cost(k)+20)&&(r!=="maid"||(v.maid&&v.maid.loyal>=BAL.loy.low))&&(r!=="cho"||!v.confined));
-  if(rs.length){const t=illBuy(v,pick(rs),k);if(t&&/không thành/.test(t)&&(illWitness(v)===S))log(t)}}}catch(x){}return ev}})();
+/* NPCs: the malicious look for poison by the same routes — no longer a monthly dice (malice > 60, roll 8): an NPC consort CHOOSES a route in her
+   day plan (jagacts4 cx4:ill<route>, role-parity part 2, canon overwrite) with the same need / cost / odds / failure (IROUTE + illBuy). */

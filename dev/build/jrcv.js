@@ -164,10 +164,11 @@ function rcvMaidBribe(a,t,odds,pay){const m=t&&t.maid;if(!m||typeof cnvBribeOpts
 const RCVJ={};
 function rcvJudge(k,a,t,o0){const D=RCVJ[k],q=typeof queenP==="function"?queenP():null;if(!D||!q||q===a||q===t)return"";
  if(q===S){rcvCard("rcvJudge",{k,a:key(a),t:key(t)},D.t,a);return D.say(a,t)}
- const c=rcvJudgePick(q,D.opts(a,t,q),o0!=null?o0:ACT[k].o(a,t),a,k);/* jaudit X.f / T.f pass the odds they read (odA, the card's number) */return c.go()||""}
-/* the NPC judge's pick among the SAME options (yes at the asker's shown odds o; o0 = the odds read before the act spent anything — trinhhh hands over its chứng cứ first) */
-function rcvJudgePick(q,O,o,a,k){const c=roll(o)?O[0]:O[1];(window.__rcvN=window.__rcvN||{})["judge_"+k+"_"+c.id]=((window.__rcvN||{})["judge_"+k+"_"+c.id]||0)+1;return c}
-PEND.rcvJudge=pp=>{const D=RCVJ[pp.k],a=byKey(pp.a),t=byKey(pp.t);if(!D||!a||!t||a===S||t===S||!a.alive||a.out||t.out||t.alive===false||queenP()!==S)return null;
+ const c=rcvOddsPick(q,D.opts(a,t,q),o0!=null?o0:ACT[k].o(a,t),k);/* jaudit X.f / T.f pass the odds they read (odA, the card's number) */return c.go()||""}
+/* the NPC receiver's pick between the yes / no answers of a request whose asker's card shows ODDS (judge requests, Mượn son phấn): yes at those
+   shown odds o (the shown-odds one path; o0 = the odds read before the act spent anything — trinhhh hands over its chứng cứ first), the SAME option list as her card */
+function rcvOddsPick(q,O,o,k){const c=roll(o)?O[0]:O[1];(window.__rcvN=window.__rcvN||{})["judge_"+k+"_"+c.id]=((window.__rcvN||{})["judge_"+k+"_"+c.id]||0)+1;return c}
+PEND.rcvJudge=pp=>{const D=RCVJ[pp.k],a=byKey(pp.a),t=byKey(pp.t);if(!D||!a||!t||a===S||t===S||!a.alive||a.out||t.out||t.alive===false||queenP()!==S||(D.ok&&!D.ok(a,t)))return null;
  return{who:pv(a),t:D.line(a,t),o:D.opts(a,t,S).map(o=>({n:o.n,fx:o.fx,x:o.x,go:()=>{const r=o.go();if(r)log(r)}}))}};
 RCVJ.xinhh={t:"Lời xin giáng",say:(a,t)=>`${NMc(a)} sai người dâng lễ, xin ngươi tâu giáng ${NM(t)}. `,
  line:(a,t)=>`<p>${a.name} sai người dâng ${rcvXinPr(a,t)} lượng bạc làm lễ: “Xin nương nương tâu với Hoàng thượng giáng ${t.name} một phẩm.”</p>`,
@@ -176,6 +177,15 @@ RCVJ.xinhh={t:"Lời xin giáng",say:(a,t)=>`${NMc(a)} sai người dâng lễ, 
    go:()=>{if(!me)ap(q,{bac:pr,duc:-J.duc});econPayWin(a,"xinhh",t,BAL.actBac.xinhh);oanAdd(t,q,J.oan);return `${qn} nghe lời ${NM(a)}, tâu xin giáng ${NM(t)}. `+demote(t,"bị Hoàng hậu tâu giáng")}},
   {id:"no",n:"Gạt đi, trả lễ",fx:{danh:P.danh},x:`được: tiếng công minh, Danh ${balSg(P.danh)} · mất: ${me?"ngươi":"Hoàng hậu"} quý ${a.name} ${balSg(BAL.eff.jaudit.f)}`,
    go:()=>{if(!me)ap(q,{danh:P.danh});affAdd(q,a,BAL.eff.jaudit.f);return `${qn} gạt lời ${NM(a)} đi, lễ vật trả lại. `}}]}};
+/* Xin son phấn (jration lxBegCard, kind "hh"; NPC cx4:rougeBeg): the Hoàng hậu decides — she as the Hoàng hậu gets the card; t = the asker (no third person).
+   yes = a box from the palace stores (the same item an NPC queen gives) · the asker quý her af[0]; no = the asker's Hoàng hậu regard − BAL.ration.beg.fail (as today) · Danh + prop.danh */
+RCVJ.rougeBeg={t:"Xin son phấn",ok:a=>lxMiss(a).length>0,say:a=>`${NMc(a)} sai người sang xin ngươi ban son phấn. `,
+ line:a=>{const M=lxMiss(a);return `<p>Cung nữ của ${a.name} sang thưa: chủ tử nhà nàng hết ${M[0]?TOIL_COL[M[0]].label.toLowerCase():"son phấn"}, xin nương nương ban cho.</p>`},
+ opts:(a,t,q)=>{const me=q===S,B=BAL.ration.beg,P=BAL.rcv.prop,af=BAL.rcv.help.af[0],M=lxMiss(a),part=M[0],tr=BAL.ration.tier[Math.min(7,a.rank||0)],lbl=part?TOIL_COL[part].label.toLowerCase():"son phấn";return[
+  {id:"yes",n:"Ban một hộp",fx:{},x:`được: ${a.name} quý ${me?"ngươi":"Hoàng hậu"} ${balSg(af)} · mất: một hộp ${lbl} trong kho cung`,
+   go:()=>{if(!part)return"";affAdd(a,q,af);let n;if(a===S)n=goodsGive(S,lxKey(part,tr),{from:"hh"});else{const e={k:lxKey(part,tr),from:"hh",d:S.turn};(a.inv=a.inv||[]).push(e);n=lxName(e)}lxFix(a);return `${me?"Ngươi":"Hoàng hậu"} ban cho ${lxNm(a)} ${n}.`}},
+  {id:"no",n:"Không ban",fx:{danh:P.danh},x:`được: giữ phép, Danh ${balSg(P.danh)} · mất: ${a.name} được lòng ${me?"ngươi":"Hoàng hậu"} ${balSg(B.fail)}`,
+   go:()=>{if(!me)ap(q,{danh:P.danh});if(a===S)apply({hh:B.fail});else ap(a,{hh:B.fail});return `${me?"Ngươi":"Hoàng hậu"} cho là ${lxNm(a)} không biết giữ phận.`}}]}};
 function rcvXinPr(a,t){return (typeof econSchemePrice==="function"?econSchemePrice("xinhh",a,t):0)||BAL.actBac.xinhh}
 RCVJ.trinhhh={t:"Trình chứng cứ",say:(a,t)=>`${NMc(a)} trình chứng cứ về ${NM(t)} lên ngươi. `,
  line:(a,t)=>`<p>${a.name} dâng lên chứng cứ về ${t.name}: “Xin nương nương xét tội cho công bằng.”</p>`,
@@ -195,4 +205,4 @@ RCVK.invite={t:"Lời mời sang chơi",act:"mời sang cung chơi",kind:"help",
   rcvNoO(p,t,{g:`giữ buổi cho mình, Danh ${balSg(BAL.rcv.prop.danh)}`,fx:{danh:BAL.rcv.prop.danh},r:`${me?"Ngươi":t.name} cáo bận, không sang cung ${NM(p)}`}),
   rcvSabO(p,t,{g:"nghe được chuyện của chủ nhà",r:tq=>`${me?"Ngươi":t.name} nhận lời rồi đem chuyện cung ${NM(p)} đi kể${tq?" với "+rcvQn(tq):""}`,go:()=>{rcvInvAt(p,t);t.__invC=1}})]}};
 function rcvInviteGo(h,g){if(!g||g===S)return false;delete g.__invC;const r=rcvAsk("invite",h,g);if(r)try{log(r.trim())}catch(e){}const c=!!g.__invC;delete g.__invC;return c}
-Object.assign(window,{rcvP,rcvW,rcvWord,rcvPick,rcvHelpOpts,helpAsk,rcvGiftIn,RCVK,rcvCard,rcvAsk,rcvYesO,rcvNoO,rcvSabO,rcvVisit,rcvMaidBribe,rcvKw,rcvSeen,rcvSeenX,RCVJ,rcvJudge,rcvJudgePick,rcvInviteGo,rcvInvAt});
+Object.assign(window,{rcvP,rcvW,rcvWord,rcvPick,rcvHelpOpts,helpAsk,rcvGiftIn,RCVK,rcvCard,rcvAsk,rcvYesO,rcvNoO,rcvSabO,rcvVisit,rcvMaidBribe,rcvKw,rcvSeen,rcvSeenX,RCVJ,rcvJudge,rcvOddsPick,rcvInviteGo,rcvInvAt});
