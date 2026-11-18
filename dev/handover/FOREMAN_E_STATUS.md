@@ -77,3 +77,4 @@ FOR MAIN (makeup owner): jtoil shared layer path now honours col.no (parts not o
 - (18/11 06:38Z) E7b q1b b34eaedd (= 53c08086 data, rebased on q1a ed01a6b). Still HELD for E7a's full FIX 1.
 - (18/11 07:20Z) E7b: SẴN SÀNG KIỂM questline-q1b b34eaedd (fix 1 rebased on q1a ed01a6b; scan/engine incl. check 7/quickcheck PASS)
 - (18/11 07:45Z) E8: SẴN SÀNG KIỂM steal-minigame 1c4fe5ad (jsmg one oSteal rung hook her+NPC, Hát/Múa via playArt kit frame, BAL.steal.mg; unit 37 PASS; jnf adapter 7/7 on local merge with balance-chain; 4-device shots local; report reports/steal-minigame.md)
+- (18/11 06:44Z) E8 SẴN SÀNG KIỂM steal-minigame 1c4fe5ad (jsmg.js rung hook her+NPC, Hát/Múa playArt in KIT tài nghệ, BAL.steal.mg) → BIG reviewer E8r session_01DgYSWq3G429DJULUEKv1mc (opus; incl. local merge with review/balance-chain). E8 idle. Load 9/12.
