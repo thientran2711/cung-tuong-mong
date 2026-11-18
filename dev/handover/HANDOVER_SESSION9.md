@@ -372,3 +372,19 @@ Wake: s43 trigger trig_01DnGumsCEWwRGKJbfBNDc4D (:32) → DELETE it when the ROO
 - (18/11 03:29Z) look-fx-wire 1188bb09 (avatars draw full kitFxLayers via KIT_AV; quickcheck PASS) — SziKwgY rolled over → successor session_01UV1Szi3XiPz3MUDBq5ZkxC: muội lv3 smear, cào longer, keep-out margin, then fit rows for remaining 8119/8906 por pictures → then ONE review of look-fx-wire (incl. checking live CDN fit-row upload).
 - (18/11 03:46Z) book: Lượt 46 A/B/C withdrawn — rule exists (OD L934/L949: crop wide robe edges at the fixed column, true proportions; kids child size). Successor worker opened.
 - (18/11 03:36Z) OWNER: tai-mắt-báo badge/chip still not live → it is review/tinbao-ui (PASS r6r 220359da, r7r 58a8c39c), queued to land with C-AG ag-all-2. Asked C-AG #9 for status/ETA; place-stage SziagD5 told to build on tinbao-ui-r7r part.
+- (18/11 03:34Z) WAKE. Context 488k/1M = 49 % (ceiling 60 %) → s43 STOPS taking work; only relays until the owner opens the ROOT main (paste block s43 Lượt 7, unchanged).
+### S43 FINAL STATE (for the ROOT main; supersedes the RUNNING list above)
+LIVE main 0527f921 (cloth wet/mud/xốc ON, tea OFF). ROLLBACK chain … → e24d5838 → 0527f921. Landed by s43: greet-stranger, result-reason, smudge r16, cloth-xoc r6, staff-cap-apply, cloth switches.
+RUNNING:
+- REVIEW life-preload SzjKPEGVua6n1rUEV2S: PASS c743265c on e24d5838 → asked re-merge 0527f921 → PASS → LAND FIRST (URGENT); then archive it + worker SzgmQZwF1XMsH7EzhLL.
+- REVIEW men-forbidden Szh3jq9brqAHDsVQitM: re-gating 8f27d7be (merge of 95d5f767) → will need main re-merge → land; worker SziLuyrJEqfUqguNP1W idle.
+- look-fx-wire R4 Szi3XiPz3MUDBq5ZkxC: muội lv3 = fx-muoi-2 made heavier (owner: lv3 was wrong in nature), cào longer, keep-out margin → "MUOI CAO R4 READY" → LOOK → owner; then fit rows for 8119 por → ONE review (check the live CDN fit-row upload done early by Szm7mHX). Branch head 1188bb09 has avatars drawing full kitFxLayers.
+- place-stage SziagD584pr6UpyJayd: owner layout (no plaque; count top-left column; name top-right bigger; full-size figures; entry lines as the TINBAO toast/badge part from review/tinbao-ui-r7r) → "SHOTS READY" (full screen, same character) → LOOK → owner → SMALL review.
+- book-figsize r5 SzkhyYuitpjvm16Zn3P: one layout = her page, adults = her height, wide robes CROPPED at column edge (OD L934/L949), kids child size, emperor as live → LOOK column x/width identical → owner.
+- cloth-tea worker SzghNErbDFn6nXtyBwa: tea look 46317c9d on review/cloth-tea-look sent owner (s43 Lượt 38); on her OK flip BAL.looks.stain.on.tra = 1 → SMALL review → land.
+- opt-card-short Szk6j15PHjAL8gMSR9z: waits owner A/B/C (s42 sent 8 shots).
+- C-AG #9 session_01UV1Szh2asyry15mvpuCEsJ: ag-all-2-land + npc-chain-land lander; asked: is tinbao-ui (PASS r6r 220359da / r7r 58a8c39c) in its batch + ETA — if not, ROOT main lands tinbao-ui itself (owner wants the Tai mắt báo badge/chip live). Owner's CTM-CAL code → C-AG #9.
+- Foreman D: ORDERS in FOREMAN_D_STATUS 03:32Z (residence-seats → live: seats HH1 HQP1 QP1 Phi2 Tần3, harem 20) + 02:58Z/03:05Z (handover-archive cleanup, ≤100 KB rule).
+- builder s37a SzjA6P5mZskv3JKn3BV idle → archive.
+OWNER PENDING: muội/cào R4 look; tea look OK?; opt-card A/B/C; place-stage shots; book r5 shots; Thử tay CTM-CAL code; connectors decision (tài khoản dành riêng cho game → tắt kết nối thừa).
+S43 LESSONS: check OD rulings, not only live code, before giving her numbers (seats 12/16/20 mix-up); compare book pages against the kit layout; LOOK marks at 3× against eye/lip boxes; workers roll over fast (~25 %) — keep briefs short.
