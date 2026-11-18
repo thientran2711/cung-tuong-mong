@@ -54,3 +54,18 @@ Credits: step 1 20 gens + step 2 16 gens = 36 x 135 = 4860 (plus the earlier one
 ### B8s update (ROOT-18 correction: m09 style ref = DRAWING STYLE + SKIN + FABRIC)
 Step 2 redone for all 8 ranks with "Exactly matching the rendering, skin and fabric of the style reference (near-3D semi-realistic drawing style, luminous porcelain skin, soft silk fabric); the style reference is never for body, pose or face" (ref = step-1 copy + m09 style slot). Step-1 copies unchanged (their prompt already read "rendering, fabric and skin only"). The b8s recolours were replaced at the same CDN names.
 bbox w/h diff recolour vs live now: t1 +3.6% FAIL, t2 +1.1, t3 +0.8, t4 +0.3, t5 -0.3, t6 0.0, t7 +0.8, t8 +1.9% FAIL (t1, t8 best-effort after max gens, not stretched). Extra gens: 8 x 135 = 1080 credits.
+
+## B8s soft (owner "Vẽ tiếp"; method C4a: ONE gen per figure, refs = LIVE original + m09 in the STYLE slot, "copy EXACTLY ... ONLY change the robe colour")
+m09 (eIyOFEidqL) in the style slot for EVERY figure: drawing style + skin + fabric, never body/pose/face. No feet/legs wording in any prompt. No "soft/flowing" wording.
+CDN img/_review/consort-tiers/c01/b8s/: c01_a18_t1..t8.png (final), c01_a18_t1..t8_prev.png (previous set, kept), c01_a18_soft.jpg (t1..t8 one row on red skull-top/feet lines). md5-verified, nothing live.
+| rank | change | bbox w/h vs live | gens |
+|---|---|---|---|
+| t1 | pale celadon | +2.8% | 1 |
+| t2 | soft lilac, flower basket (no cup) | -0.2% | 1 |
+| t3 | pale apricot | +4.2% | 1 |
+| t4 | misty sky blue, fan only (scroll removed) | +5.6% | 1 |
+| t5 | dusty jade, phoenix -> flowers + butterflies | +3.7% | 1 |
+| t6 | dusty rose, phoenix -> flowers + butterflies | +2.6% | 1 |
+| t7 | slate blue + pale imperial yellow, large stitched phoenix + flowers | +6.9% | 2 (1st +4.4% phoenix small) |
+| t8 | warm soft golden yellow + coral/jade, large phoenix + flowers | +4.3% | 2 (1st +8.5% phoenix small) |
+Looked at all: pose/turn/cut/headdress/held item same as live by eye; costume fabrics unchanged from live (no redesign). bbox w/h is NOT within 1.5% for t1, t3, t4, t5, t6, t7, t8 (single-gen method widens figures a few %); not stretched. Credits 10 x 135 = 1350.
