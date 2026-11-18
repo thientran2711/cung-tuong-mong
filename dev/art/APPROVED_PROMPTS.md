@@ -8,6 +8,9 @@ OWNER (verbatim, 18/11 ~22:20Z real): "Tức là cái nào mà tao đã ưng r�
 4. Not listed here = NOT approved = sample only, never mass. A new owner approval is added here the same hour (Foreman C), with the builder command, the build.py commit and the approved sheet.
 5. Every brief to a painter points to this file; reviewers FAIL any gen whose prompt differs from the listed form in anything but item/pose.
 
+## REFERENCES (owner 18/11 ~22:30Z real, verbatim: "Ok, bây giờ chỉ cần giữ ở cái lượt 63 nè, chỉ giữ lại hai hình này thôi, tức là hai hình mẫu này nè, chỉ giữ hai hình mẫu này thôi, hình cái cô mà mặc áo màu màu hồng á, không có làm ảnh mẫu nữa.")
+Lượt 63 = the two identity images (her own a18 t1 v0 figure, c06 and c25 shown). From now on EVERY gen uses ONLY her own identity image (own t1 of that age) as reference. The pink-robe style image "style B" kspkwKx16B is NO LONGER a reference (nor any other style image). Builder: drop the style-reference sentence (flag --nostyle, W103). This overrides the "References" column below.
+
 ## APPROVED FORMS (newest last)
 | What | Builder command (dev/art/t8-prompt-B/build.py, handover branch) | References | Approved sheet / owner |
 |---|---|---|---|
