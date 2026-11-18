@@ -34,7 +34,7 @@ Object.assign(BAL,{hd:{
  a0:[12,24],           /* the hoa điền comes off the tray tilted this many degrees (hashed per day; she straightens it) */
  rot:3,                /* degrees per tilt tap */
  npc:{q0:.5,qSk:.3,spread:.4},npcCap:.95,
- drop:["hd_mai","hoadien_bac"],/* r3 (owner 00:56Z: a design that is ONE flat colour is dropped; the rule is how it LOOKS): hoa điền designs no longer given out (shop, gifts, finds, promotion, NPC holdings). The items stay in the table so old saves still show them; hdMap sends an owned / recorded one to the nearest KEPT design by phẩm (tie: the lower). Dropping another design later = one more key in this list. */
+ drop:["hd_mai","hoadien_bac"],/* TEMPORARY until Foreman C's repaint lands (owner 02:37Z: dropped designs are REPAINTED under the SAME keys: hd_mai = real white plum, hoadien_bac = silver + lưu ly with gradient); when the new sprites land, empty this list and the keys come back (no save mapping needed then). r3 (owner 00:56Z: a design that is ONE flat colour is dropped; the rule is how it LOOKS): hoa điền designs no longer given out (shop, gifts, finds, promotion, NPC holdings). The items stay in the table so old saves still show them; hdMap sends an owned / recorded one to the nearest KEPT design by phẩm (tie: the lower). Dropping another design later = one more key in this list. */
  shop:35,              /* % a restock brings a hoa điền */
  npcHave:60,           /* % a consort holds one (once) */
  find:4,               /* % per month her people find one */
