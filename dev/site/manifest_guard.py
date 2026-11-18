@@ -11,6 +11,22 @@ import json, os, sys, urllib.request, collections
 PUBLIC = os.environ.get("CTM_IMG_BASE") or "https://ctm-img.victoria-tntt.workers.dev/"
 HERE = os.path.dirname(os.path.abspath(__file__)); FLOOR = os.path.join(HERE, "manifest-floor.json")
 GUARDED = ("FIGURES.json", "FIGURES-servants.json", "FIGURES-others.json", "FIGURES-kids.json", "FIGURES-kc.json", "FIGURES-ty.json", "FIGURES-congtu.json", "FIGURES-huynh.json")
+# act-pic-match 18/11: img/ACTS.json and img/EVENTS.json were overwritten at 17/11 02:41Z by the same stale-checkout push that shrank FIGURES.json
+# (every act without its key showed the kit placeholder, ~130 acts shared pictures). They are DICT manifests: guarded by the size of each section.
+DICT_GUARDED = {"ACTS.json": ("acts", "prefix", "log"), "EVENTS.json": ("categories", "events", "stories")}
+def dsec(j, name):
+    j = j if isinstance(j, dict) else {}
+    return {k: len(j.get(k) or []) for k in DICT_GUARDED[name]}
+def dcheck(name, new, live=None, floor=None):
+    """problems of a DICT manifest push: a section shorter than live / the floor, or an entry of the live one missing (dict sections: key by key)"""
+    bad, cn = [], dsec(new, name)
+    for sec in DICT_GUARDED[name]:
+        if live is not None:
+            lv = (live or {}).get(sec) or []
+            if cn[sec] < len(lv): bad.append(f"{name}: section '{sec}' shrinks {len(lv)} -> {cn[sec]}")
+            if isinstance(lv, dict): gone = [k for k in lv if k not in (new.get(sec) or {})]; bad += [f"{name}: {len(gone)} '{sec}' entries of the live manifest are missing in the new one (e.g. {gone[:3]})"] if gone else []
+        if floor and name in floor and cn[sec] < floor[name]["by"].get(sec, 0): bad.append(f"{name}: section '{sec}' {cn[sec]} below the floor {floor[name]['by'].get(sec)}")
+    return bad
 def lst(j): return j if isinstance(j, list) else (j.get("figures") or j.get("files") or j.get("items") or []) if isinstance(j, dict) else []
 def counts(L):
     c = collections.Counter(); [c.update([f"{f.get('role')}|{f.get('tier')}"]) for f in L if isinstance(f, dict)]; return c
@@ -42,15 +58,21 @@ def main():
         for n in GUARDED:
             L = lst(fetch(n)); old = floor.get(n, {"n": 0, "by": {}}); by = dict(counts(L))
             floor[n] = {"n": max(old["n"], len(L)), "by": {k: max(old["by"].get(k, 0), by.get(k, 0)) for k in set(old["by"]) | set(by)}}
+        for n in DICT_GUARDED:
+            c = dsec(fetch(n), n); old = floor.get(n, {"n": 0, "by": {}}); floor[n] = {"n": 0, "by": {k: max(old["by"].get(k, 0), c[k]) for k in c}}
         json.dump(floor, open(FLOOR, "w"), indent=1, sort_keys=True); print("floor written", {n: floor[n]["n"] for n in floor}); return
     if "--live-check" in a:
         idx = {k for k, _, _ in fetch("_index.json")["files"]}; bad = []
         for n in GUARDED:
             bad += check(n, fetch(n), floor=floor, index=idx)
+        for n in DICT_GUARDED:
+            j = fetch(n); bad += dcheck(n, j, floor=floor)
+            if n == "ACTS.json" and not j.get("log"): bad.append("ACTS.json: no 'log' rules (the live act table fell back to the 15/11 base)")
+            if n == "ACTS.json" and not any(str(v).endswith("-h") for v in (j.get("acts") or {}).values()): bad.append("ACTS.json: no '-h' (hands-only) picture keys")
         print("\n".join(bad) if bad else "MANIFEST GUARD PASS (live manifests >= floor, every listed file on the CDN)"); sys.exit(1 if bad else 0)
     p = [x for x in a if not x.startswith("--")][0]; name = a[a.index("--name") + 1] if "--name" in a else os.path.basename(p)
     live = json.load(open(a[a.index("--live-file") + 1])) if "--live-file" in a else fetch(name)
-    bad = check(name, json.load(open(p)), live=live, floor=floor)
+    bad = dcheck(name, json.load(open(p)), live=live, floor=floor) if name in DICT_GUARDED else check(name, json.load(open(p)), live=live, floor=floor)
     print("\n".join(bad) if bad else f"MANIFEST GUARD PASS {name}")
     sys.exit(1 if bad and "--allow-shrink" not in a else 0)
 if __name__ == "__main__": main()
