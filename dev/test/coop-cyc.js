@@ -76,7 +76,7 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   /* main's other night routes stay out of the forced deck (r1 #2): Ngự giá lâm cung (jvisit: an NPC's held visit S.visNpc, the visit roll),
      the Emperor's mood skip (jemoact eaQ); NPC stealing needs nightCh>0 (jsteal stEligible), so the forced nightCh already keeps it out */
   if(typeof S!=='undefined'&&S)S.visNpc=null;window.visRoll=()=>'';window.__eaOff=1;const es0=window.empSummon;if(typeof es0==='function')window.empSummon=()=>true;/* r1 #3: AG emperor (jagemp empSummon: his own summon odds, busy → rest) would skip the night outside the forced roll */
-  nightCh=function(p){const c=n0.apply(this,arguments);return p&&p.coop?(c>0?100:0):0};try{return f.apply(this,arguments)}finally{roll=r0;nightCh=n0;window.visRoll=v0;window.__eaOff=e0;if(typeof es0==='function')window.empSummon=es0}}});
+  nightCh=function(p){const c=n0.apply(this,arguments);return p&&p.coop?(c>0?100:0):0};try{return f.apply(this,arguments)}finally{try{(window.__fd=window.__fd||[]).push([wk(),S.buoi,S.tonight==='me'?'me':S.tonight&&S.tonight.id,(()=>{try{const z=S.emp&&S.emp.why;return JSON.stringify(z||null).slice(0,80)}catch(e){return'?'}})(),typeof empOn==='function'&&empOn(),(()=>{try{return JSON.stringify(typeof ntTaken==='function'?ntTaken():null).slice(0,60)}catch(e){return'x'}})()]);if(window.__fd.length>12)window.__fd.shift()}catch(e){}roll=r0;nightCh=n0;window.visRoll=v0;window.__eaOff=e0;if(typeof es0==='function')window.empSummon=es0}}});
  const R=await A.p.evaluate(()=>BAL.cyc.rep);
  const CASES=[['dung',/^Báo đúng/,false,0],['lui',/^Báo lùi/,false,-R.luiDuc],['som',/^Báo sớm/,true,-R.somDuc],['giau',/^Giấu/,true,0]];
  const before=[];
@@ -119,7 +119,7 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   if(process.env.CYC_DBG)console.log('dbg after',JSON.stringify(await A.p.evaluate(()=>{const f=COOPW.friend();return{pulled:(COOPW.pulled||[]).length,inDeck:!!f,ch:f?nightCh(f):null,tuan:S.tuan,wk:wk(),f:f&&[f.name,cyBase(f).t],tr:COOPW.tr.filter(x=>/cy/.test(x)).slice(-6),E:COOPW.thin.E&&COOPW.thin.E.log.filter(x=>/cy/.test(JSON.stringify(x))).slice(-6)}})),JSON.stringify(await B.p.evaluate(()=>({tuan:S.tuan,wk:wk(),name:S.name,t:cyBase(S).t,fl:window.__fl}))));
   ok(a.on&&c.on,`${k}: the merged week is her cycle tuần on both`,[a.on,c.on]);
   ok(a.off===!on&&c.off===!on,`${k}: her card is ${on?'ON':'OFF'} the tray on BOTH screens (host deck = her answer)`,[a.off,c.off]);
-  ok(a.tn&&a.tn.w===a.w&&(on?a.tn.who===902:a.tn.who!==902),`${k}: host drew ${on?'her':'not her'} (forced deck)`,a.tn);
+  {const g=a.tn&&a.tn.w===a.w&&(on?a.tn.who===902:a.tn.who!==902);ok(g,`${k}: host drew ${on?'her':'not her'} (forced deck)`,a.tn);if(!g&&process.env.CYC_DBG)console.log('dbg fd',JSON.stringify(await A.p.evaluate(()=>window.__fd||[])))}
   ok(c.tn&&c.tn.w===c.w&&(c.tn.who===a.tn.who||(THIN&&a.tn.who===902&&c.tn.who==='me')/* thin view: her own pid reaches her phone as "me" (part A mapView) */)&&(on?c.t==='me':c.t!=='me'),`${k}: the guest has the same night (one fact)`,[c.tn,c.t]);
   ok(a.hold==null,`${k}: no hold left on the host`);
   ok(a.duc===c.duc,`${k}: her Đức on the host's entry == her own (cost once)`,[a.duc,c.duc]);

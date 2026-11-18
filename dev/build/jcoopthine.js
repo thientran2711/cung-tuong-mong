@@ -223,7 +223,7 @@ const BOOT=Date.now().toString(36)+Math.random().toString(36).slice(2,6);
    (the Worker took them, no "nohost"), he reconnects and the room stood (coop-cyc THIN=6: host 'room 2.0', her ready 2:1 never arrived,
    both on "Chờ hảo hữu…"). Each reconnect of his counts in the view (net); her phone, still waiting on that buổi, sends her ready again
    against his copy of her (the same re-net path as her own reconnect: nothing doubled, his ready is idempotent). */
-let HNET=0;COOP.on("room",()=>{if(host())HNET++});COOP.on("thin",()=>{if(host()&&HNET>1)setTimeout(()=>{try{TH.flush()}catch(e){console.error(e)}},0)/* the new count reaches her at once, not at his next step */});
+let HNET=0;COOP.on("room",()=>{if(host())HNET++});/* the new count reaches her in the snapshot jcoopthin sends when his level is back (snapNow) */
 {const hv=TH.hostView;TH.hostView=function(){const o=hv.apply(this,arguments);if(o&&on()){o.e={go:CW.ngo===(COOP.state.week||0)?CW.ngo:-1,w:COOP.state.week||0,tnb:CW.tnb|0,boot:BOOT,net:HNET}}return o}}
 /* her in-week change of the night (Tranh sủng, Chặn ngự giá, cáo bệnh …): the intent replaces the ctm-tn claim; runs in the host's context */
 TH.onDo("tn",(a,m)=>{const base=m&&m.base;E.stat.tn++;setTimeout(()=>{try{CW.tnDo(a,base)}catch(e){console.error("thin E tn",e)}},0);return {ok:1}});

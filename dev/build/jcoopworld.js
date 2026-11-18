@@ -252,7 +252,7 @@ function snapStats(){const o={};for(const k of ["sung","danh","bac","suc","sac",
 function waiting(){const s=COOP.state;return CW.on&&(CW.sent===wk()||!!(s.ended&&s.ended[CW.seat]))}
 function frozen(){const s=COOP.state;return CW.on&&(s.status!=="open"||!s.peerOnline||!!CW.hold)}  /* CW.hold: the two are on different builds (swreg.js, KIT §35.2) */
 /* touch #next only when its state really changes (j63 observes every "disabled" write) */
-function lockNext(){const n=$("next");if(!n)return;const eR=!!(CW.on&&eW()&&CW.eWait&&CW.eWait());const wb=CW.on&&(CW.bend||eR||nReady()||needWhere()||!!CW.pendBuoi);const lock=CW.on&&(waiting()||frozen()||CW.pend||!CW.base||wb);
+function lockNext(){const n=$("next");if(!n)return;const eR=!!(CW.on&&eW()&&CW.eWait&&CW.eWait());const wb=CW.on&&(CW.bend||eR||nReady()||needWhere()||!!CW.pendBuoi);const gap=!!(CW.on&&(CW.lvWas|0)>=5&&!eW());/* r1 #3: reconnected, the room level not back yet: no press may take the old road */const lock=CW.on&&(waiting()||frozen()||CW.pend||!CW.base||wb||gap);
  if(lock){if(!n.disabled)n.disabled=true;if(n.dataset.coopWait!=="1")n.dataset.coopWait="1";/* owner 16/11 (owner-coop-stuck.jpg: faded "Sang buổi", no word): every lock says why */
   const s=COOP.state;const t=(CW.bend||eR||nReady()||waiting()||CW.pend)?CTM_WAIT.coopWaitPeer:wb?CTM_WAIT.coopWaitPeer2:CW.hold?CTM_WAIT.coopWaitBuild:frozen()?(s.status==="moved"?CTM_WAIT.coopMoved:s.status!=="open"?CTM_WAIT.coopRelink:CTM_WAIT.coopAbsent):CTM_WAIT.coopLinking;if(t&&n.textContent!==t){/* keep the button's own width (the tabs beside it must not shrink): the longer words wrap inside */
   if(!n.style.maxWidth&&n.offsetWidth)n.style.maxWidth=n.offsetWidth+"px";n.classList.add("kcwait");n.textContent=t}}
@@ -351,6 +351,12 @@ function drainAg(){try{if(typeof agDrain==="function")agDrain()}catch(e){console
    kept (CW.wantB = this buổi) and done as soon as they clear (tryEnd); a step of the room or a new week drops it */
 function wantB(){if(!S||S.dead)return;CW.wantB=bkey();T("wantB "+CW.wantB);try{if(Q.length&&$("modal").hidden&&!qBlocked())showModal();else if(Q.length&&!qT)qT=setTimeout(reshowQ,400)}catch(e){}}
 function bend(){T("bend "+wk()+"."+(S&&S.buoi));if(CW.bend||eW())return;CW.bend=true;COOP.send({t:"bend",week:wk(),buoi:S.buoi||0});lockNext()}
+/* review coop-thin-f1 r1 #3: after a reconnect the room level is 0 until the server's "thin" answer; a Sẵn sàng pressed in that gap took the
+   old road (bend) and CW.bend stayed set once the level was back (onBuoi / rebend are off at thin level): his #next stood on "Chờ hảo
+   hữu…" for ever (coop-cyc THIN=6, host 'room 0.0' → 'bend 0.0'). Now #next is locked in that gap (lockNext: gap, the coopLinking word) and a
+   bend left from before is the part-E ready once the level is back: the same press, kept. */
+COOP.on("thin",()=>{try{CW.lvWas=(CW.thin&&CW.thin.lvl)|0}catch(e){}});COOP.on("room",()=>setTimeout(()=>{try{lockNext()}catch(e){}},0));COOP.on("stop",()=>{CW.lvWas=0});
+COOP.on("thin",()=>setTimeout(()=>{try{lockNext();if(!CW.on||!CW.bend||!eW())return;T("unbend "+wk()+"."+(S&&S.buoi));CW.bend=false;CW.wantB=null;if(CW.eNext)CW.eNext();lockNext()}catch(e){console.error(e)}},0));
 /* a night with the Emperor spends the rest of her day (jnight). In co-op the day only moves through the sync path above:
    sáng / chiều → `bend` (the server's `buoi` then runs the real step for both), tối → endTurn → `end` → the merged week.
    CW.nightEnd() ends THIS seat's current buổi once: nothing while her buổi is already ended (bend sent, week pending / sent), while
