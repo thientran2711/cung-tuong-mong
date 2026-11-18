@@ -156,3 +156,34 @@ MAIN chose (a) ACCEPT for 514143ec (via C-AG #13). ag-all-2 LIVE e18697fe. Pendi
 
 ## 18:08Z FROM FOREMAN C-AG #14 (session_01Rc5AsKgBX7W8FiEwCJjgBR)
 LIVE d3ea24e8 (npc-chain-land landed). Merge it into review/ag-deed-perf 514143ec, re-measure vs live, gates, push, SẴN SÀNG KIỂM line here + FOREMAN_C_STATUS.md.
+
+## AG-DEED-PERF #2 (worker session_01Rc5AsMrVSjApNAcLbKd49p, opus, child of C-AG #14, START_CTX ~6 %, 18/11)
+PRIORITY #1 CHECK: OD L1637 (ag2-perf) | main none (perf follow-up not live) | review/ag-deed-perf 514143ec reused (L1 jplst renderAfter, L2 lazy agTell line), tools ag2perf-diff/probe/deeds reused | claims: AG-DEED-PERF row taken over from #1 (session_01UV1SzjwvRPnDTMQuN3wnw9, silent).
+Head **9e0e1928** (review/ag-deed-perf) = merge of live main **94d11623** into 514143ec. Only index.html / sw.js conflicted → rebuilt. Game code diff vs live = L1 (jplst.js) + L2 (jagday.js agTell) only.
+Container note: this environment's network policy blocks ctm-img.victoria-tntt.workers.dev (CDN) and ctm-coop.victoria-tntt.workers.dev (co-op Worker). The site build therefore kept main's assets.json (no asset changed on this branch) and took the CDN manifest URL list from main's sw.js (one-off local copy of build_site.sh, not committed); quickcheck found no NOT BUILT on 9e0e1928.
+### Outcome-identical proof (ag2perf-diff K=3, head 9e0e1928 vs live 94d11623, 160 buổi)
+| seed | diff | final state | RNG draws head / live | deeds (AGD.stat) |
+|---|---|---|---|---|
+| 1 | 0 | same | 56153 / 56153 | 491 |
+| 2 | 0 | same | 60237 / 60237 | 543 |
+| 3 | 0 | same | 55021 / 55021 | 448 |
+Deeds tool (ag2perf-deeds 160 buổi): head = live on every field (total 615 / 569 / 594, land 567 / 520 / 545).
+### 4x CPU, ag2perf-probe 40 buổi × 3 khắc, seeds 1-3 cycled, 9 runs each, alternating live / head, one run at a time (ms; mean of the 9 runs)
+| build | khắc mean | vs live | khắc median | vs live | buổi mean | buổi median |
+|---|---|---|---|---|---|---|
+| live 94d11623 | 3.80 | – | 2.16 | – | 139.8 | 68.1 |
+| head 9e0e1928 | 3.63 | **−4.5 %** | 1.93 | **−10.6 %** | 144.6 (+3.4 %) | 70.3 (+3.2 %) |
+Target "4x per-khắc ≤ +10 % vs live": MET (mean and median). Live now carries ag-all-2 itself, so the old +78 % median gap (vs pre-ag f60b4024) is gone; buổi step within noise (+3 %). (Run 9 head reached 32 buổi then the bot died: the probe does not seed crypto/clock, so runs are not outcome-locked; 0 page errors on all 18.)
+### Gates (head 9e0e1928)
+| gate | result |
+|---|---|
+| seeded diff vs live, K=3, seeds 1/2/3 × 160 | 0 / 0 / 0 |
+| quickcheck (cpu 4, 3 runs) browser part | **PASS** · open 1208 ms · old save ok · render 182/180 · tab 343/358 · buổi 829/909 · tasks>200 16/13 · time-spill guard PASS · not-built check PASS |
+| quickcheck core gates | G3 kit-conform + G4 70-manifest-guard RED **on live 94d11623 too, the same output** (coregates.sh run on live2: the same 20 MIXED "event pictures: 0" lines; 70-manifest-guard = urlopen 403 on the CDN). Cause = CDN host blocked in this container, not this branch. One-core / rules-one-source / other hooks pass |
+| one-core-guard | PASS |
+| coop-one-world seeds 7+3 ×2 | 4/4 PASS |
+| coop-e2e | **BLOCKED**: needs the live co-op Worker (ctm-coop…workers.dev), denied by this container's network policy. Not run, not faked; reviewer with network should run it |
+| ag suites 12 (ag-all 21, betray 20, carry 9, know 25, later 9, paywin 9, sell 19, soft 20, taimat 25, taimat2 16, truth 11, walk 10) | 12/12 PASS (ag-walk: 1 red in the 2-parallel batch, check 3 eyeF3; afterwards 10/10 head runs PASS; live 94d11623 also red 2/12 under 4-parallel load → existing load flake, unseeded start, not this branch) |
+SẴN SÀNG KIỂM 9e0e1928
+Scratch (container only): /home/user/wt/adp2out (dif.sh, bench.sh, suites.sh, logs). Worktrees /home/user/wt/adp2 (branch), /home/user/wt/live2 (94d11623).
+~86% xong / ~62% chơi được
