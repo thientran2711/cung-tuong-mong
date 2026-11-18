@@ -63,7 +63,7 @@ function fixtureRows(){const R=[];const dir=path.join(ROOT,'dev/test');
  const num=h=>{const m=String(h).match(/^(.*?)\s*([+\-−])\s?(\d+)\s*$/);if(!m)return null;return[m[1].trim().toLowerCase(),(m[2]==='+'?1:-1)*+m[3]]};
  const ODD=['liều','khó','năm ăn năm thua','khá chắc','chắc','rất chắc','nắm chắc'];const oddsRank=o=>{const s=String(o||'').toLowerCase();if(!s)return 99;let r=-1;ODD.forEach((w,i)=>{if(s.includes(w))r=i});return r<0?99:r};
  const vec=c=>{const G={},C={},words=[];c.rows.duoc.forEach(x=>{const n=num(x.h);if(x.c==='r'){if(n)C[n[0]]=(C[n[0]]||0)+Math.abs(n[1]);else C['~'+x.h.toLowerCase()]=1}/* a red line in the outcome block (failure loss) */else if(n)G[n[0]]=(G[n[0]]||0)+Math.abs(n[1]);else words.push(x.h.toLowerCase())});
-  [...c.rows.ton,...c.rows.mat,...c.rows.kem.filter(x=>x.c==='r')].forEach(x=>{const n=num(x.h);const tm=String(x.h).match(/(\d+)\s*khắc/);if(tm)C['khắc']=(C['khắc']||0)+ +tm[1];else if(n)C[n[0]]=(C[n[0]]||0)+Math.abs(n[1]);else C['~'+x.h.toLowerCase()]=1});
+  [...c.rows.ton,...c.rows.mat,...c.rows.kem.filter(x=>x.c==='r')].filter(x=>!/^không (tốn|mất)( gì)?$/i.test(x.h)).forEach(x=>{/* «không tốn gì» is no cost */const n=num(x.h);const tm=String(x.h).match(/(\d+)\s*khắc/);if(tm)C['khắc']=(C['khắc']||0)+ +tm[1];else if(n)C[n[0]]=(C[n[0]]||0)+Math.abs(n[1]);else C['~'+x.h.toLowerCase()]=1});
   return{G,C,words,o:oddsRank(c.odds)}};
  const geq=(a,b)=>Object.keys(b).every(k=>(a[k]||0)>=b[k]);
  /* EXEMPT (documented in dev/handover/reports/choice-value-audit.md): the better option depends on what she has LEARNED (his / her taste),

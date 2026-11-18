@@ -44,7 +44,7 @@ EVD.day={nm:w=>w.x.sex==="m"?"Yến đầy tháng hoàng tử":"Yến đầy th�
   if(!m)return info(w);
   return Object.assign(info(w),{who:pv(m),opts:[{n:"Dâng quà quý",fx:{bac:-b.big},x:`thành: ${m.name} quý ngươi +${b.bigAff}`,go:()=>affAdd(m,S,b.bigAff)},
    {n:"Quà vừa phải",fx:{bac:-b.mid},x:`thành: ${m.name} quý ngươi +${b.midAff}`,go:()=>affAdd(m,S,b.midAff)},
-   {n:"Cáo bệnh không tới",fx:{},x:`kèm: ${m.name} để bụng`,go:()=>relAdd(m,S,-b.skipOan)}]})},
+   {n:"Cáo bệnh không tới",fx:{suc:BAL.cv.rest},x:`giữ sức · kèm: ${m.name} để bụng`,go:()=>relAdd(m,S,-b.skipOan)}]})},
  night(){return false}};
 /* ---------- 2 ĐẠI LỄ SẮC LẬP THÁI TỬ (row 2): S.heir set (j3 heirMonth / j51 kế vị / setHeir). The mother's house gains power (j55
    tdPowAdd); mothers of other sons scheme more (act); no night on the rite tuần; may bring a small amnesty. */

@@ -167,7 +167,7 @@ window.stipEvItem=stipEvItem;
   const m=stipEvItem(s.id,X);if(m){const [,,k,fr,no]=m;let who="";try{const A=e68X(s,p);who=fr==="A"&&A&&A.A?A.A.n||"":""}catch(e){}
    d.o.forEach((o,i)=>{if(no.includes(i)||!o.go)return;const g0=o.go;o.go=function(){const r=g0.apply(this,arguments);try{const n=goodsGive(S,k,{from:fr==="A"?"story":fr,who});if(n)log(`${n} vào rương.`)}catch(e){console.error(e)}return r};o.x=(o.x?o.x+" · ":"")+`thành: ${itm(k).n} vào rương`/* a gain sits under Được, never on the red Kèm line (choice value, law 3) */})}
   if(s.fam==="visit"&&(s.a||[])[0]==="rv"){const ti=stipTeaIx();let A=null;try{A=e68X(s,p)}catch(e){}if(ti>=0&&A&&A.A){const k=S.inv[ti].k,it=itm(k),n=it.host||0;
-   d.o.push({n:`Pha ${it.n.replace(/ \(hàng kém\)$/,"")} mời khách`,fx:{},x:n>=0?`thành: ${A.A.n||"nàng"} thiện cảm +${n} · kèm: dùng 1 ${STIP_UNIT[k]||"gói"} trà`:`hỏng: trà mốc, ${A.A.n||"nàng"} chê (thiện cảm ${n}) · kèm: dùng 1 gói trà`,
+   if(n>=0)/* choice value (law 3): spoiled tea is never offered to a guest (it could only lose) */d.o.push({n:`Pha ${it.n.replace(/ \(hàng kém\)$/,"")} mời khách`,fx:{},x:n>=0?`thành: ${A.A.n||"nàng"} thiện cảm +${n} · kèm: dùng 1 ${STIP_UNIT[k]||"gói"} trà`:`hỏng: trà mốc, ${A.A.n||"nàng"} chê (thiện cảm ${n}) · kèm: dùng 1 gói trà`,
     go:()=>{const j=stipTeaIx();if(j>=0)S.inv.splice(j,1);relDo(A.A,n);log(n>=0?`Ngươi pha ${it.n} mời ${A.A.n||"khách"}; nàng khen trà thơm.`:`<span class="r">Trà mốc, ${A.A.n||"khách"} nhấp một ngụm rồi đặt xuống.</span>`)}})}}
  }catch(e){console.error("stip e68",e)}return d}})();
 /* ---------- j67 stories: beat / option / end field gi:[key or [keys], from] ---------- */
