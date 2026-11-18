@@ -102,3 +102,42 @@ ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 
 - The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
 - Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
 - Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+
+---
+# WORKER #3 (opus, session_01964izGM3cyQq9y9byHFKnV)
+START_CTX ≈ 4% of 1M (get_session reads 0; own estimate) → rolls over at ≈29% (START_CTX + 25%). Finished below that; no handover needed.
+PRIORITY #1 CHECK ('receiver 4 answers' / 'Giúp qua loa' / 'ordQ'): OD L1876 + L1915 read verbatim | main: j42 cnvOrdOpts (obey/refuse/tell), jagstf2 stf2Ord, j29 runAct | review/receiver-choice: not pushed yet (audit worker session_01964izESP2ym3HQX17qtSae); my receiver path = the one core it reuses (below) | claims: none other.
+
+## Done this round (branch `review/parallel-time` → **0306b8ed6**; origin/main 790cda59c merged in 5d55dd594, origin/main e16e1d661 merged in 0306b8ed6 — assemble.py: main's list + jptime.js)
+RECEIVER 4 ANSWERS (OD:L1915, canon overwrite of the 20:35Z «Đi»-only), labels = OD L1876 verbatim:
+| receiver | before | after |
+|---|---|---|
+| her (maid road) — master's order dò la / bùa ngải / bỏ độc (j42 srvOrder → PEND.cnvOrd) | modal pop-up at once; dò la = ONE option «Đi»; plant/poison = Vâng lệnh / Từ chối / Mật báo | NOTICE: S.ordQ + kitLine "X cho gọi ngươi: có lệnh, trả lời trước khắc K" + 信 icon badge; she opens it from the panel («Nghe lệnh») when her act ends; card = **Giúp hết lòng** (n=2 khắc incl. walk, odds o) · **Giúp qua loa** (n−1=1 khắc, odds o − BAL.ptime.half 15) · **Từ chối** (Chủ tin −10/−15, maybe quỳ phạt Sức) · **Mách lẻo: báo cho …** (Bạc +20 Danh +2, evidence to the other side, risk); unanswered past ansK=2 khắc → Từ chối with its cost (log line) |
+| her — «Việc chủ sai» (j42 srvErrPick) | modal «Đi» (#2) / Phận sự card | NOTICE as above; Phận sự card opens the same answer card (k 0); 3 answers (harmless errand, nothing to tell on — said on the card): Giúp hết lòng (2 khắc, công lao +1) · Giúp qua loa (1 khắc, công lao +1, Chủ tin −1 = BAL.ptime.errHalfTin) · Từ chối (0 khắc, Chủ tin −3 = errRefuse) |
+| NPC servant ordered by its master (j29 runAct → jagstf2 stf2Ord) | obey / refuse / tell | the SAME 4 from cnvOrdOpts: obey · **half** (deed runs under ordHalf: odds − 15 via ACTX.pen / frozen fz) · refuse · tell; weight half = BAL.ag.stf2.ord.half 0.2 × (1 − lòng), nết lanh 1.4 / nhát 1.2. ag-stf2 sample: lòng 10 → half 242 obey 89 tell 39 refuse 30; lòng 90 → obey 338 half 22 |
+ONE core: j42 `cnvOrdOpts` now returns 4 options (obey "Giúp hết lòng", half "Giúp qua loa", refuse "Từ chối", tell "Mách lẻo: báo cho X"); `ordHalf(fn)` + `ORDHALF` (j9) is the one qua-loa flag read by `ordOdds` (j42), `actCtx` pen and runAct's frozen odds (j9); `ordRow(k,t)` (j42) is the one gain/loss row of an order (j42 card and jptime card both read it). The receiver-choice audit should reuse `cnvOrdOpts` + `ordHalf` (no second system).
+Bug fixed on the way: BAL.ptime.half sat inside `kinds` (BAL.ptime.half was undefined; code fell back to 15) — moved out with ansK / errRefuse / errHalfTin.
+Bug fixed on the way: at the deadline the j95b world gate could drop the rebuilt card → Từ chối had no cost; orders now rebuild as a save-load does (`ptOrdMk`, PEND direct).
+
+## EQUAL-VALUE (laws 2/3/4) of the 4 answers (numbers only in BAL)
+| answer | khắc (her) | gain | loss / risk | why equal |
+|---|---|---|---|---|
+| Giúp hết lòng | n = 2 | full odds o, the order's gain row | fail row (dò la: Chủ tin −5 hoảng sợ + oán; plant/poison: Chủ tin −2, half caught) | baseline |
+| Giúp qua loa | n − 1 = 1 | same row, odds o − 15 | same fail row, more often | 1 khắc back for her own acts vs. 15 points of odds |
+| Từ chối | 0 | no deed, no risk of being caught | Chủ tin −10 (−15 vs a cruel master), quỳ phạt Sức −20 at malice/2 | safe road paid in trust |
+| Mách lẻo | 0 | Bạc +20, Danh +2, the other side's favour | master learns → beaten / Tân Giả khố | big gain, big risk |
+| Việc chủ sai: hết lòng / qua loa / từ chối | 2 / 1 / 0 | công lao +1 / +1 / — | — / Chủ tin −1 / Chủ tin −3 | 1 khắc ↔ Chủ tin −1 |
+NPC receivers: the same options, same odds penalty (ordHalf), weights by lòng × nết × tâm cơ (mindPick).
+
+## ONE «tin» panel (FROM MAIN ROOT-57 ~21:58Z): d7e49ed is not on origin/main yet (not merged here). No new panel added; the orders are exposed for MAIN's one panel through the reader API:
+`PTIME.orders()` → [{id, pid ("cnvOrd" | "err"), byNm, title, due}] · `PTIME.ordWhen(o)` → "trả lời trước …" · `PTIME.answer(id)` → opens that order's answer card (4 answers; Việc chủ sai 3). The badge rule: show the «!» while `PTIME.orders().length`. Today's ptPanel/ptIcon (from #1/#2) list them too until errand-scene r2 lands; when it lands, MAIN's panel replaces ptIcon's registration and must call the three above (clash → FOR MAIN).
+
+## Shots (Fold 755x1000@2 + iPad 1180x820@2, taken on 2ad55a065 before the r3c text fix + main merge; outside git; `node dev/test/ptime-shots.js <out>`)
+#kload / #klife now waited for by their own buttons (iPad: «Chơi luôn ở đây» on the add-to-home screen; life gate «vào luôn»), settle before every shot, nothing hidden. 7 shots per device: 1 sender card · 2 status icon · 3 信 panel with «Đợi tin» · 4 receiver notice (信 badge) · 5 panel «Nghe lệnh» (deadline shown) · 6 the 4-answer order card · 7 Việc chủ sai 3 answers. Looked at all of them; known: shot 4 (fold) also shows a random news toast from the new life over the lower screen; the badge is visible.
+
+## Gates (on 0306b8ed6)
+- `node dev/test/ptime.test.js` ALL OK (test 10 rewritten: notice not pop-up, deadline ansK, «Nghe lệnh», Việc chủ sai 3 answers + walk n khắc, order 4 answers in L1876 words, qua loa odds = odds − half, unanswered = Từ chối with its cost, NPC stf2Ord → "half" over the same 4) · `node dev/test/ptime2.test.js` ALL OK
+- `bash dev/tools/quickcheck.sh` PASS (core gates incl. one-core guard, old save loads, perf new≈live) · `node dev/test/coop-e2e.js` 63/63 · `node dev/test/coop-one-world.js` PASS
+- `node dev/test/ag-stf2.js dev/index.html` (touches cnvOrdOpts / stf2Ord): ALL 23 PASS in 4 of 5 runs; 1 run printed «1 FAIL» (sampling test, the item was not captured in that run; 3 reruns hunting it all PASS) — the reviewer should rerun it.
+
+SẴN SÀNG KIỂM 0306b8ed6 — touched (this round): dev/build/{j9.js, j29.js, j42.js, jagstf2.js, jbal2.js, jptime.js, assemble.py (merge: + jptime.js)}, dev/test/{ptime.test.js, ptime-shots.js}, index.html, sw.js (+ merge 5d55dd594). Whole branch: + #1/#2 files listed above (jptime.js, jbal2.js, jstip.js, jmkt.js, jveil, j13, jthaiy, jroute, j8, jagacts3, ptime2.test.js). Reviewer = BIG (opus).
