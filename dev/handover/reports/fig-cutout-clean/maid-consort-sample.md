@@ -158,3 +158,21 @@ t4 prompt (verbatim):
 > Repaint this single standing figure as a Vietnamese/Chinese-style palace consort of rank Tần (4th rank), keeping the SAME person, the same face and expression, the same head size and position, the same shoulders, the same stance and the same feet position, pixel-aligned; do not resize or move the body. The plain grey under-robe must be COMPLETELY REPLACED: no grey anywhere. New outfit: a luxurious layered palace robe in soft APRICOT-PEACH silk (not golden, not pink), a low open cross-collar (đối khâm) showing a little bare skin at the throat, with a cream-gold embroidered collar border, wide flowing consort sleeves that hang loose and long past the hands (clearly NOT close-fitting maid sleeves), embroidered cuffs with peach and gold flowers, a layered outer robe over a lighter inner robe, a slim embroidered sash at the waist, a floor-length full skirt that covers the feet with no train, delicate gold-thread embroidery on the hem band. The hands are lightly clasped in front of the waist, no held object. Hair: same low bun at the back but now dressed with real polished GOLD hairpins (trâm) with small pearl dangles: ONE ornate centre piece at the front of the bun plus ONE gold hairpin with dangles on one side only. Clean bare forehead, no forehead mark. Luminous even skin. The top of the canvas is empty headroom; keep it plain white. Plain white background.
 
 Lesson: a text-invented costume (heavy brocade panels, flat crimson, cape with printed patches, wide square neckline) reads as stock-art, not the m09 painterly look. Next try only on ROOT-13/ROOT-12 word: use an owner-liked outfit image as outfit reference (m09 t6 ladder `m09_t6_ladder.png` or W11 c01 t6 v8) + base v2 as body/pose source.
+
+## Round 20 — consort c12 a18, all 8 ranks t1–t8, fresh gens (ROOT-12, owner 03:25Z "đẹp rồi, cứ tiếp tục làm đi")
+
+Method = W11's approved c01 set: images_generate gpt-2-6, 768x2000, 2k, refs = live hd c12 tN a18 (design; imported as creations) + m09 hd `eIyOFEidqL` (style/body), STYLE_ANCHOR prefix, face/body proportion clauses, bare forehead, matte translucent silk, no teacup, varied held item, hairpin ladder (t1–t4 one side, t4 + centre piece, t5 both sides, t6–t8 crowns). 8 gens (640 cr) + 8 Magnific bg removals (24 cr); no regens. Colours chosen from W11 palette Q rotation (my choice, p=2): t1 apricot-orange, t2 sky blue, t3 emerald-jade, t4 deep rose-pink, t5 indigo-blue, t6 coral-crimson, t7 teal-turquoise + imperial yellow accents, t8 imperial yellow mixed with crimson/jade/navy. Design keeps c12's pomegranate motif. Held items: t1 pearl string, t2 scroll, t3 round fan, t4 peony branch, t5 book, t6 plum branch, t7 lantern, t8 jade ruyi.
+
+| rank | gen -> cut | Haar face h | face/(hairline->feet) | top px (headroom) |
+|---|---|---|---|---|
+| t1 | LwoIyZ1swO -> SymviFNUb8 | 189 (hand near face, inflated) | 0.1003 | 10 |
+| t2 | DoJymHzpcl -> yiEQGksPW9 | 155 | 0.0944 | 195 |
+| t3 | 9ZFqzwzNYZ -> jUB8PCpLD0 | 153 | 0.0911 | 130 |
+| t4 | dtP9aTOXSL -> 5jMpUmZKxe | 160 | 0.0952 | 118 |
+| t5 | 79aCRIpJAL -> bxVDSmw5Y2 | 153 | 0.0949 | 225 |
+| t6 | CqzY1ZGEEy -> WDlSo60cXe | 165 | 0.0932 | 17 (crown close to edge) |
+| t7 | 4RQHnMe9Aa -> 9ZFqYgRNYZ | 157 | 0.0957 | 96 |
+| t8 | SymvinaUb8 -> Bh96u0foQR | 155 | 0.0938 | 60 |
+
+Gate (honest): m09 measured by the same Haar = 0.0993. Haar ratios for t2–t8 are 0.091–0.096, i.e. 4–8% BELOW m09, under the 0.098 floor (t1 passes). Haar is noisy under crowns/hair, and in the 50% overlay (scaled by hairline->feet, face centre aligned) face, eyes, shoulders and bodies coincide closely by eye, but the strict by-eye ruler check is not done. t3 is the smallest-face one (−8%). Known: t6 crown is only 17 px from the top edge (headroom tight), t1 hem reaches the bottom edge, feet hidden at t1.
+Files (transparent PNG 768x2000, uncropped): c12_a18_tK_fresh.png; overlays c12_a18_tK_overlay50.jpg; sheet c12_a18_overlay_sheet.jpg under https://ctm-img.victoria-tntt.workers.dev/img/_review/maid-consort-sample/ . md5-verified. Nothing live.
