@@ -76,6 +76,34 @@
    "why": "NPC outbursts themselves happen at the base rate (EA_N.npcExt c:buon 238/185, c:vui 265/291, npcOut 1197/1162, khoe 154/161, khoc 127/126, thu 66/61 base/head, 4 seeds × 200 tuần); the LOG lines differ by how many of those consorts she knows by name (eaSay → kitKnownName) and the seed path"
   },
   {
+   "n": "NPC sad / jealous outburst events (EA_N c:buon + c:ghen)",
+   "f": "e",
+   "re": "^c:(buon|ghen)$",
+   "band": [
+    0.6,
+    1.6
+   ],
+   "why": "the deed itself (eaExtNpc, a consort sad or jealous for X.wk tuần); the 'ưu uất' / 'khóc suốt' LOG lines below only show the ones she knows by name (eaSay → eaKnown), so they are reported, the event count is judged"
+  },
+  {
+   "n": "NPC glad outburst events (EA_N c:vui)",
+   "f": "e",
+   "re": "^c:vui$",
+   "band": [
+    0.6,
+    1.6
+   ]
+  },
+  {
+   "n": "NPC anger outburst events (EA_N c:gian)",
+   "f": "e",
+   "re": "^c:gian$",
+   "band": [
+    0.6,
+    1.6
+   ]
+  },
+  {
    "n": "NPC mood 'ưu uất' (jemoact)",
    "f": "l",
    "re": "ưu uất",
@@ -83,7 +111,8 @@
     0.4,
     4
    ],
-   "why": "NPC outbursts themselves happen at the base rate (EA_N.npcExt c:buon 238/185, c:vui 265/291, npcOut 1197/1162, khoe 154/161, khoc 127/126, thu 66/61 base/head, 4 seeds × 200 tuần); the LOG lines differ by how many of those consorts she knows by name (eaSay → kitKnownName) and the seed path"
+   "why": "reported only: the LOG line shows only the outbursts of consorts she knows by name (eaSay → eaKnown) and depends on the seed path; the outburst events themselves are judged in the EA_N rows above (5 seeds × 200 tuần vs ag-all-2-land 7301df7: c:buon 245/250, c:ghen 38/54, c:vui 302/308, c:gian 228/213 head/base)",
+   "report": true
   },
   {
    "n": "NPC mood 'khóc suốt' (jemoact)",
@@ -93,7 +122,8 @@
     0.4,
     4
    ],
-   "why": "NPC outbursts themselves happen at the base rate (EA_N.npcExt c:buon 238/185, c:vui 265/291, npcOut 1197/1162, khoe 154/161, khoc 127/126, thu 66/61 base/head, 4 seeds × 200 tuần); the LOG lines differ by how many of those consorts she knows by name (eaSay → kitKnownName) and the seed path"
+   "why": "reported only: the LOG line shows only the outbursts of consorts she knows by name (eaSay → eaKnown) and depends on the seed path; the outburst events themselves are judged in the EA_N rows above (5 seeds × 200 tuần vs ag-all-2-land 7301df7: c:buon 245/250, c:ghen 38/54, c:vui 302/308, c:gian 228/213 head/base)",
+   "report": true
   },
   {
    "n": "NPC mood 'vui vẻ' (jemoact)",
@@ -291,29 +321,32 @@
   "cyForge": "a foe forges her cycle record: needs a scheming foe with silver and the old npcForge roll (0-5 per run)"
  },
  "base": {
-  "_srvWeeks": 308,
-  "drop-in visit 'ghé chơi' (jshelf g3call)": 63,
-  "maid road: mistress mood 'Chủ thưởng' (j42 srvCard)": 19,
-  "maid road: 'quở mắng' (j42 srvCard)": 20,
-  "maid road: 'Bạc lạ' bribe (j42 srvCard)": 12,
-  "poisoning sign 'môi tím tái' (jface)": 19,
-  "NPC 'Lập công' (j71 f7Merit)": 6,
-  "NPC mood 'đắc ý' (jemoact)": 103,
-  "NPC mood 'ưu uất' (jemoact)": 37,
-  "NPC mood 'khóc suốt' (jemoact)": 23,
-  "NPC mood 'vui vẻ' (jemoact)": 23,
-  "NPC 'sang cung' (jemoact)": 66,
-  "NPC 'khoe khoang' (jemoact)": 36,
-  "letters 'gửi thư / viết thư'": 28,
-  "festival nights (Nguyên tiêu / Thất tịch / Trung thu)": 129,
-  "visitor card 'Có người đến' (j24)": 233,
-  "visitor card 'Một ánh mắt' (j24 manPoem)": 24,
-  "visitor card 'Thái hậu triệu' (j24 thCall)": 2,
-  "visitor card 'Lời cảnh báo' (j24 maidWarn)": 21,
-  "visitor card 'Kẻ hầu xin' (j24 svAsk)": 7,
-  "news seller 'Có người bán tin' (jagknow knSell)": 25,
-  "omen 'Điềm báo' (jty tyPlot)": 7,
-  "NPC affair 'tư thông' (j22)": 0
+  "_srvWeeks": 198,
+  "drop-in visit 'ghé chơi' (jshelf g3call)": 77,
+  "maid road: mistress mood 'Chủ thưởng' (j42 srvCard)": 9,
+  "maid road: 'quở mắng' (j42 srvCard)": 14,
+  "maid road: 'Bạc lạ' bribe (j42 srvCard)": 4,
+  "poisoning sign 'môi tím tái' (jface)": 28,
+  "NPC 'Lập công' (j71 f7Merit)": 30,
+  "NPC mood 'đắc ý' (jemoact)": 198,
+  "NPC sad / jealous outburst events (EA_N c:buon + c:ghen)": 551,
+  "NPC glad outburst events (EA_N c:vui)": 707,
+  "NPC anger outburst events (EA_N c:gian)": 551,
+  "NPC mood 'ưu uất' (jemoact)": 120,
+  "NPC mood 'khóc suốt' (jemoact)": 65,
+  "NPC mood 'vui vẻ' (jemoact)": 58,
+  "NPC 'sang cung' (jemoact)": 93,
+  "NPC 'khoe khoang' (jemoact)": 104,
+  "letters 'gửi thư / viết thư'": 68,
+  "festival nights (Nguyên tiêu / Thất tịch / Trung thu)": 376,
+  "visitor card 'Có người đến' (j24)": 644,
+  "visitor card 'Một ánh mắt' (j24 manPoem)": 88,
+  "visitor card 'Thái hậu triệu' (j24 thCall)": 15,
+  "visitor card 'Lời cảnh báo' (j24 maidWarn)": 78,
+  "visitor card 'Kẻ hầu xin' (j24 svAsk)": 25,
+  "news seller 'Có người bán tin' (jagknow knSell)": 104,
+  "omen 'Điềm báo' (jty tyPlot)": 26,
+  "NPC affair 'tư thông' (j22)": 3
  },
- "baseInfo": "5 seeds × 200 tuần, npbase/index.html"
+ "baseInfo": "12 seeds × 200 tuần, ag2/index.html"
 }

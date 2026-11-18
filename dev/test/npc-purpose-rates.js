@@ -7,14 +7,14 @@
      default "band"; per:"srv" rows scale base by the maid-road tuần of each run, the others by the tuần lived as a consort); rows with base + head < "minN" are reported, not judged (too few to tell)
    3 no page error
    Base counts are committed in the json ("base", from the build without npc-purpose) so the gate runs without the base build.
-   usage: node dev/test/npc-purpose-rates.js <index.html> [tuần=200] [seeds=5] [--base <base index.html>] [--write-base]
+   usage: node dev/test/npc-purpose-rates.js <index.html> [tuần=200] [seeds=12] [--base <base index.html>] [--write-base]
      --base <f>      also run the base build (same seeds) and judge against it instead of the committed counts
      --write-base    with --base: store the base counts in the json (then commit it)
    exit 0 = PASS */
 const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
 const A=process.argv.slice(2);const fl=k=>{const i=A.indexOf(k);if(i<0)return null;const v=A[i+1];A.splice(i,2);return v};
 const writeBase=A.includes('--write-base');if(writeBase)A.splice(A.indexOf('--write-base'),1);const BASE=fl('--base');
-const F=A[0]||'index.html';const WK=+A[1]||200;const NS=+A[2]||5;const JP=path.join(__dirname,'npc-purpose-rates.json');const J=JSON.parse(fs.readFileSync(JP,'utf8'));
+const F=A[0]||'index.html';const WK=+A[1]||200;const NS=+A[2]||12;const JP=path.join(__dirname,'npc-purpose-rates.json');const J=JSON.parse(fs.readFileSync(JP,'utf8'));
 const url=f=>/^(https?|file):/.test(f)?f:'file://'+path.resolve(f);
 /* one seeded life-run (copy of the reviewer's evbot.js counting) */
 async function run1(b,file,seed){const ctx=await b.newContext({viewport:{width:390,height:844},serviceWorkers:'block'});
@@ -34,12 +34,12 @@ async function run1(b,file,seed){const ctx=await b.newContext({viewport:{width:3
   while(weeks<W){if(S.dead){newLife();continue}drain();if(S.dead)continue;S.mg=null;const w0=(S.year*12+S.month)*3+S.tuan;let g=0;
    while(!S.dead&&(S.year*12+S.month)*3+S.tuan===w0&&g++<12){drain();if(S.dead)break;S.mg=null;try{nextBuoi()}catch(e){err++;Q.length=0}}weeks++;try{if(typeof isSrv==="function"&&isSrv())srvW++}catch(e){}drain();
    const sq=S.logSeq||0;const nn=Math.min(sq-lastSeq,(S.logs||[]).length);for(let i=0;i<nn;i++){const k=norm(String(S.logs[i]).replace(/<span class="ld">.*?<\/span>/,'')).split(/[.:;,]/)[0].split(' ').slice(0,5).join(' ');logs[k]=(logs[k]||0)+1}lastSeq=sq}
-  return {weeks,lives,err,srvW,cards,logs,npw:(typeof NPW!=='undefined'?NPW.stat:null),reg:(typeof NPW!=='undefined'?Object.keys(NPW.reg):[])}},WK);
+  return {ea:(typeof EA_N!=='undefined'&&EA_N.npcExt?{...EA_N.npcExt}:{}),weeks,lives,err,srvW,cards,logs,npw:(typeof NPW!=='undefined'?NPW.stat:null),reg:(typeof NPW!=='undefined'?Object.keys(NPW.reg):[])}},WK);
  r.pageErr=errs;await ctx.close();return r}
 async function runAll(b,file){const seeds=Array.from({length:NS},(_,i)=>i+1);const out=[];let i=0;
  await Promise.all(Array.from({length:Math.min(4,NS)},async()=>{while(i<seeds.length){const s=seeds[i++];out.push(await run1(b,file,s))}}));return out}
-/* tracked events: card titles (c) or log heads (l) matching re; log heads count the same with or without the names in them */
-function count(R){const t={_srvWeeks:R.reduce((a,r)=>a+(r.srvW||0),0)};for(const row of J.track){const re=new RegExp(row.re);let n=0;for(const r of R){const o=row.f==='c'?r.cards:r.logs;for(const k in o)if(re.test(k))n+=o[k]}t[row.n]=n}return t}
+/* tracked events: card titles (c), log heads (l) or NPC outburst events EA_N.npcExt kind:feeling (e) matching re; log heads count the same with or without the names in them */
+function count(R){const t={_srvWeeks:R.reduce((a,r)=>a+(r.srvW||0),0)};for(const row of J.track){const re=new RegExp(row.re);let n=0;for(const r of R){const o=row.f==='c'?r.cards:row.f==='e'?(r.ea||{}):r.logs;for(const k in o)if(re.test(k))n+=o[k]}t[row.n]=n}return t}
 (async()=>{const b=await chromium.launch();const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+(typeof x==='string'?x:JSON.stringify(x)):''))};
  const H=await runAll(b,F);let BC=J.base||{};
  if(BASE){const Bs=await runAll(b,BASE);BC=count(Bs);if(writeBase){J.base=BC;J.baseInfo=`${NS} seeds × ${WK} tuần, ${path.basename(path.dirname(path.resolve(BASE)))}/${path.basename(BASE)}`;fs.writeFileSync(JP,JSON.stringify(J,null,1)+'\n');console.log('base counts written to',JP)}}
