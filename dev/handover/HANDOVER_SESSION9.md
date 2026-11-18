@@ -1044,3 +1044,4 @@ LESSONS s41: verify any worker art/asset count on the CDN before telling her (52
 - (18/11 01:57Z) cloth-xoc r6c 5444f0d WET looked zoom 3× (c01 underskirt, c30 front): no white bands, no grey, levels deepen → 2 wet panels sent owner (Lượt 5). Mud 02:40Z order re-sent to SzjMK4R.
 - (18/11 01:59Z) OWNER UI BUG option cards too tall (OD ~08:55Z local). PRIORITY #1 CHECK ('option card|act-card|kopt|…'): OD 30 | ledger 2 | claims 8 | main 15 | review/* 1 (act-cards, old adopted) → KIT §6.2 exists; worker opt-card-short (brief briefs/opt-card-short.md).
 - (18/11 02:00Z) OWNER: wet APPROVED; wants full-body panels → cloth-xoc r6 ordered full-* wet + mud full body.
+- (18/11 02:01Z) IN men-forbidden SẴN SÀNG KIỂM 13286b4 (menLawful one rule; scan 316 bad → 0) → BIG reviewer (opus). Owner asked '30 mini game test link' — GATE ZERO 0 records in CTM → asked her (Đại Hy? / CTM missed? Lượt 8).
