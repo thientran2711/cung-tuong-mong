@@ -1,3 +1,14 @@
+# opt-card-short #4 (worker #4, env with CDN read OK; CDN WRITE refused 403 -> shots in dev/handover/shots/opt-card-short/ on this branch)
+PRIORITY #1 CHECK: OD 18/11 16:05Z/16:15Z/09:30Z(4) | main 0 | review/opt-card-short reused (ce8706b7 -> b800648e) | claims this row.
+Branch **review/opt-card-short @ b800648e** (origin/main merged, real build with CDN index, quickcheck PASS incl. core gates; first G1 FAIL = 4 inline numbers in my kit sample page -> now BAL.kitpage.demo; one G4 FAIL was a transient CDN IncompleteRead, re-run PASS).
+LOOKED (Fold 755x1000@2 + iPad 1180x820@2, real pictures): mat2, dress, night, many, choice, short, thtrieu (+ info/visit/mat in scan). Shots: dev/handover/shots/opt-card-short/{fold,ipad}-<case>.jpg
+## Fault found by looking, fixed (kit, jksize kitFrameApplyLive3)
+Tall phone frame (XL, Fold): the info column was capped to the FIGURE height measured before the frame grew (553 px) -> mat2 3rd card cut off with 300 px empty below. Now max-height = max(figure, grown k3body) -> all 3 cards visible (opts 396/396 px, no scroll). Same fix for dress.
+## Scan (node dev/test/opt-card-scan.js, 12 cases x Fold/iPad)
+TIERCHK bad 0/n everywhere; BANG: knbang x == kobang x in every dialog (Fold 639, iPad 1000/850/805). Tiers: Fold mostly 1M (104), 1L (128) for mat2/choice/dress-4/visit; iPad 1M, many+child = 2S (88, two columns). OVERFLOW 0.
+## For the owner to judge (same open points) (a) tier L picture bigger than M; (b) Fold tall frames leave empty space under options on short dialogs (short, mat2) = literal reading of 16:05Z; (c) M needs 109 on choice -> L.
+~90% xong / ~80% chơi được (awaiting owner look).
+
 # HANDOVER #3 (worker opt-card-short #3, session on env Default = image CDN BLOCKED 403; code done, NOT looked with real pictures)
 Branch **review/opt-card-short @ ce8706b7** (pushed; origin/main d3ea24e8 merged; index.html built by build_site.sh but assets.py could not read the CDN index -> assets.json untouched).
 PRIORITY #1 CHECK: OD 18/11 16:05Z / 16:15Z / 09:30Z(4) | main 0 | review/opt-card-short r3 reused | claims this row.
