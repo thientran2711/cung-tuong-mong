@@ -834,3 +834,4 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - (18/11 ~20:57Z) ROOT-56: LIVE main fa411d6f → 790cda59 = map-labels r2d (reviewer PASS session_01Rc5AsMauKQhsTB6uLuFcE6; owner bug, OD:L220). ROLLBACK fa411d6f. Foremen told; map-zones r2 + stage-rightcol + stage-here + fullbody + opt-card told to merge 790cda59.
 - (18/11 ~20:58Z) ROOT-56: C-AG #15 rolled → C-AG #16 session_01Rc5AsMn7GAZ9LZWzQ2SdFb (told main id + LIVE 790cda59). LIVE-SERVANTS #3 session_01Rc5AsKjmZakFtxrVGvMvW9 (perf gate +38 % → ≤ +10 %).
 - (18/11 ~22:27Z) ROOT-55 (owner in this chat): OD 90 nhân vật nữ logged (17:12Z rule was only in FOREMAN_C_STATUS, never in OD — fixed) + 22:25Z restatement; sweep ordered to ROOT-56 (canon/rules/art/kit docs + game data/code names; archives untouched).
+- (18/11 ~21:05Z) ROOT-56: ROOT-55 relay: owner 90 nhân vật nữ rule (OD L1924–1926) → DOC-90-WOMEN sweep ORDERED to Foreman B (non-UI, B free seats); C told.
