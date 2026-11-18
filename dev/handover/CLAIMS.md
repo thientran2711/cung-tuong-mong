@@ -17,3 +17,4 @@ B10 3 colour versions c04, c06, c07–c10 | _review CDN consort-tiers/<cNN>/b10 
 | E7a2 questline-q1a FIX 2 (opus; successor of E7a) | review/questline-q1a | E ROOT #3 | session_01DgYSWnDfnkgz7A4beCa3p4 | RUNNING | 18/11 07:20Z |
 | fullbody-frame step 2 (all full-body frames, OD 07:50Z) | review/fullbody-frame-s2 | MAIN ROOT-48 | session_01UV1SzhJ3JicrwJmcbMVHSA | RUNNING | 18/11 07:31Z |
 | BALANCE FINAL = balance-chain ce3f5611 + balance-2 r2 deltas + Next 1–2 (conception, y-care) + residence-seats-r2 merge (opus) | review/balance-final | D | session_01964izCP81mLjwwymWk5t2Q | RUNNING | 18/11 07:32Z |
+| look-fx-wire R9f (per-picture keep-out, tcold + t5-t8 fig rows) | review/look-fx-wire df129e4 | MAIN ROOT-47 | worker #8 | READY FOR CHECK | 18/11 |
