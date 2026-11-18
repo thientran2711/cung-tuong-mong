@@ -11,3 +11,7 @@ PRIORITY #1 CHECK: OD 18/11 20:05/20:10/20:15/20:20/21:15Z read verbatim | main 
 4. Report panel (LOOKED Fold + iPad, spy/invite): title «Tin chờ người sai đi», real runner «Cung nữ Xuân Đào», «Được · mất» kit chips (Bạc −15 / Tâm cơ +2) at the top, visible without scrolling on both devices; result lines real ("Y phục của … Xa xỉ 164"); wording cổ trang, no %. Unknown silhouette in rows = kitIsKnown, not a fail.
 6. Whole group (errand-scan.js, rerun): covered 46, in-person 12, not covered 1 (maid-road, other direction, out of scope). dò la, mang quà (pgift/tdgift), đưa thư (letter), mời người (invite), scout, dò hỏi gia thế all COVERED.
 Not checked: tests with parallel-time actually merged (does not exist yet; blocker above is by code reading); shots stayed session-local, not uploaded.
+
+## Re-check 1d99325f — PASS LAND READY
+Blocker fixed: jerr.js now owns the ONE «tin» icon and reads PTIME.orders / ordWhen / answer (signatures match jptime.js in review/parallel-time f4eb517a: orders:()=>S.ordQ rows, ordWhen:o, answer:id); show/busy/badge count orders; «Nghe lệnh / Xem lời nhờ» → PTIME.answer. New PTIME-stub check passes.
+Re-run on a merge of origin/main 1130a49e: Fold 755x1000 52/52, iPad 1180x820 52/52, stage-rightcol bad 0, oldsave 16/16. Merge conflicts only in generated index.html + sw.js (lander rebuilds with build_site.sh; sources merge clean). Not run: real jptime merged (not on main yet) — stub only.
