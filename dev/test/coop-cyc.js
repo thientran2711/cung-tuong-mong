@@ -110,7 +110,7 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   const a=await A.p.evaluate(()=>{const f=COOPW.friend();return{w:COOP.state.week,tn:S.tn,t:S.tonight==='me'?'me':S.tonight&&S.tonight.id,off:f?cyTray(f):null,on:f?cycOn(f):null,duc:f&&f.duc,hold:COOPW.cyHold}});
   const c=await B.p.evaluate(()=>({w:COOP.state.week,tn:S.tn,t:S.tonight==='me'?'me':S.tonight&&S.tonight.id,off:cyTray(S),on:cycOn(S),duc:S.duc}));
   console.log(k,'host',JSON.stringify(a),'guest',JSON.stringify(c));
-  if(process.env.CYC_DBG)console.log('dbg after',JSON.stringify(await A.p.evaluate(()=>{const f=COOPW.friend();return{tuan:S.tuan,wk:wk(),f:f&&[f.name,cyBase(f).t],tr:COOPW.tr.filter(x=>/cy/.test(x)).slice(-6),E:COOPW.thin.E&&COOPW.thin.E.log.filter(x=>/cy/.test(JSON.stringify(x))).slice(-6)}})),JSON.stringify(await B.p.evaluate(()=>({tuan:S.tuan,wk:wk(),name:S.name,t:cyBase(S).t,fl:window.__fl}))));
+  if(process.env.CYC_DBG)console.log('dbg after',JSON.stringify(await A.p.evaluate(()=>{const f=COOPW.friend();return{pulled:(COOPW.pulled||[]).length,inDeck:!!f,ch:f?nightCh(f):null,tuan:S.tuan,wk:wk(),f:f&&[f.name,cyBase(f).t],tr:COOPW.tr.filter(x=>/cy/.test(x)).slice(-6),E:COOPW.thin.E&&COOPW.thin.E.log.filter(x=>/cy/.test(JSON.stringify(x))).slice(-6)}})),JSON.stringify(await B.p.evaluate(()=>({tuan:S.tuan,wk:wk(),name:S.name,t:cyBase(S).t,fl:window.__fl}))));
   ok(a.on&&c.on,`${k}: the merged week is her cycle tuần on both`,[a.on,c.on]);
   ok(a.off===!on&&c.off===!on,`${k}: her card is ${on?'ON':'OFF'} the tray on BOTH screens (host deck = her answer)`,[a.off,c.off]);
   ok(a.tn&&a.tn.w===a.w&&(on?a.tn.who===902:a.tn.who!==902),`${k}: host drew ${on?'her':'not her'} (forced deck)`,a.tn);

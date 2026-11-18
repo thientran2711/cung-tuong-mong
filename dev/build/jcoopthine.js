@@ -34,7 +34,7 @@ const npcs=()=>(rivals||[]).filter(v=>v&&!v.coop);
 const other=()=>CW.seat==="a"?"b":"a";
 
 /* ---------- GUEST ---------- */
-const BAD=new Set(["thq","thpn","heir","hr","buoi"]);/* buoi: the room's step, the host's alone (a number travels as a delta: her copy must never move it) *//* cyb travels with her diff: the host reads her cycle flags from her person (row 10) */
+const BAD=new Set(["thq","thpn","heir","hr","buoi","origin"]);/* origin (her thân phận): the host's, set by her life intent (part B); her diff never carries it (a first ready sent ["-",["origin"]] → the host's ser of her threw "reading 'k'") *//* buoi: the room's step, the host's alone (a number travels as a delta: her copy must never move it) *//* cyb travels with her diff: the host reads her cycle flags from her person (row 10) */
 function curP(){const o=J(ser().S);for(const k of X.W_KEYS)delete o[k];for(const k of BAD)delete o[k];return o}
 const PACK=15000;
 /* her ops in packs the Worker takes (an intent over DOMAX 20 000 chars is refused); one op too big alone is counted, not sent */

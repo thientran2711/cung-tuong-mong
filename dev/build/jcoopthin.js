@@ -164,7 +164,7 @@ TH.withSeat=function(seat,fn){
   try{for(const r of REG)B.g[r[0]]=r[1]()}catch(e){}
   for(const k of X.W_KEYS){if(k in sN)A.S[k]=sN[k];else delete A.S[k]}
   try{B.ok=sN.origin&&sN.origin.k||B.ok;const ss=ser().S;for(const k of X.W_KEYS)delete ss[k];B.S=ss;B.fresh=true;
-   if(dOn){p0=D.cur&&D.cur.p0||p0;D.cur=null;if(dW&&p0){const pt=pDiff(p0,ss).concat(rvOps);if(pt.length)D.patchOut(seat,pt)}D.save()}}catch(e){console.error("thin ser",e);B.S=sN}
+   if(dOn){p0=D.cur&&D.cur.p0||p0;D.cur=null;if(dW&&p0){const pt=pDiff(p0,ss).concat(rvOps);if(pt.length)D.patchOut(seat,pt)}D.save()}}catch(e){console.error("thin ser",TH.curDo,e);B.S=sN}
   const Lb=X.pullFriend();TH.bridge=[];TH.bridgeItems=[];
   for(const [,e] of Lb){if(e!==v||!e.__b)continue;const b=e.__b;
    /* part D: things her turn put into the host's entry (a gift she gave, accepted by the host) go to the host as her gift (Quà tặng) */

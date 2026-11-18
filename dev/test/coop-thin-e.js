@@ -133,6 +133,6 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
     if((typeof rivals!=='undefined'&&rivals.includes(o))&&d>0)return;for(const k of Object.keys(o))walk(o[k],p+'.'+k,d+1)};
    for(const k of Object.keys(S))if(k!=='kids'&&!W.has(k))walk(S[k],'S.'+k,1);return {raw:out,pq:(COOPW.thin.E&&COOPW.thin.E.stat)||null}});
   ok(!raw.raw.length,'E13 no raw {$r}/{$k} ref left in her S after the host\'s patches',raw.raw)}
- ok(!H.errs.length&&!G.errs.length,'E8 no page errors',[H.errs.slice(0,3),G.errs.slice(0,3)]);
+  ok(!H.errs.length&&!G.errs.length,'E8 no page errors',[H.errs.slice(0,3),G.errs.slice(0,3)]);
  const nok=res.filter(r=>!r[0]).length;console.log('RESULT',res.length-nok+'/'+res.length);
  await b.close();process.exit(nok?1:0)})().catch(e=>{console.error(e);process.exit(2)});
