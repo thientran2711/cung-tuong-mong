@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"af71f94a+","t":"2026-11-18T02:17Z","c":"smudge r16: stage4 + avatar probe tests, options script score fix (look tier by score), FINAL mode","b":"cca6eb936848","h":[{"s":"e1f60927+","t":"2026-11-18T02:25Z","c":"result-reason: every result card line says a short why (kitWhy, KIT 7); values left-aligned next to labels"},{"s":"29385ec6+","t":"2026-11-18T02:07Z","c":"greet-stranger: site rebuilt"},{"s":"3b69182e","t":"2026-11-18T01:50Z","c":"hoa-dien r3 onto main 3da5720a (makeup-lux live): hoa-dien (jhd.js + hooks) replayed on the new main, replacing the old stacked branch. Sha…"},{"s":"631a703e","t":"2026-11-18T01:37Z","c":"review staff-cap-fix r6: hire pick refused at the cap gives the silver back (+ staff-cap.js case); site rebuilt"},{"s":"4cdcffa9+","t":"2026-11-18T00:44Z","c":"review looks-s40: site rebuilt from merged sources (glow v8)"},{"s":"eb3675a6+","t":"2026-11-17T22:59Z","c":"review coop-thin-c r1 #2: merge origin/main b048e495 (kit-display-room r2, jdisp/jshelf only; generated files from main + site rebuilt)"},{"s":"4eac30bc+","t":"2026-11-17T22:57Z","c":"review coop-thin-c r1 #2: her NPC pack resend (F1) listens on any guest seat, not only while the C switch is on: a level drop / build hold …"},{"s":"c7375c0c+","t":"2026-11-17T22:33Z","c":"batch s38a: dudo-blank-r1 2270c4c5 merged onto main 99f3978d; site rebuilt"},{"s":"99f3978d+","t":"2026-11-17T21:07Z","c":"batch s37a: display-shelf-r3rv 41418cd8 merged onto main 4c8568f5; site rebuilt"},{"s":"4c8568f5+","t":"2026-11-17T20:30Z","c":"batch s36a: main 60b0e3bf (display-shelf) merged; jdisp gated on BAL.shelf.ui (=0, room hidden); site rebuilt"}]};
+window.CTM_BI={"s":"907ba9cf","t":"2026-11-18T02:52Z","c":"staff-cap-apply: site rebuilt on f986ff6a","b":"d87c63eb7770","h":[{"s":"af71f94a+","t":"2026-11-18T02:17Z","c":"smudge r16: stage4 + avatar probe tests, options script score fix (look tier by score), FINAL mode"},{"s":"e1f60927+","t":"2026-11-18T02:25Z","c":"result-reason: every result card line says a short why (kitWhy, KIT 7); values left-aligned next to labels"},{"s":"29385ec6+","t":"2026-11-18T02:07Z","c":"greet-stranger: site rebuilt"},{"s":"3b69182e","t":"2026-11-18T01:50Z","c":"hoa-dien r3 onto main 3da5720a (makeup-lux live): hoa-dien (jhd.js + hooks) replayed on the new main, replacing the old stacked branch. Sha…"},{"s":"631a703e","t":"2026-11-18T01:37Z","c":"review staff-cap-fix r6: hire pick refused at the cap gives the silver back (+ staff-cap.js case); site rebuilt"},{"s":"4cdcffa9+","t":"2026-11-18T00:44Z","c":"review looks-s40: site rebuilt from merged sources (glow v8)"},{"s":"eb3675a6+","t":"2026-11-17T22:59Z","c":"review coop-thin-c r1 #2: merge origin/main b048e495 (kit-display-room r2, jdisp/jshelf only; generated files from main + site rebuilt)"},{"s":"4eac30bc+","t":"2026-11-17T22:57Z","c":"review coop-thin-c r1 #2: her NPC pack resend (F1) listens on any guest seat, not only while the C switch is on: a level drop / build hold …"},{"s":"c7375c0c+","t":"2026-11-17T22:33Z","c":"batch s38a: dudo-blank-r1 2270c4c5 merged onto main 99f3978d; site rebuilt"},{"s":"99f3978d+","t":"2026-11-17T21:07Z","c":"batch s37a: display-shelf-r3rv 41418cd8 merged onto main 4c8568f5; site rebuilt"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -3449,9 +3449,10 @@ A("trip","Ngáng chân",{c:{duc:-4},ok:(a,t)=>together(a,t),o:a=>odA(a,50+a.tamc
 const EUN=["Tiểu Lộ Tử","Tiểu Phúc Tử","Tiểu Thuận Tử","Tiểu An Tử","Tiểu Hỉ Tử","Tiểu Quế Tử","Tiểu Lâm Tử","Tiểu Đức Tử","Tiểu Thọ Tử","Tiểu Xuân Tử"];
 let sidN=0;
 /* ONE household table (owner 17/11 OD 02:50Z + 04:48Z, review/staff-root): BAL.promo.cap[rank] = [maids INCLUDING the personal (close) maid, eunuchs],
-   for her AND every NPC consort (two-way law); cold palace = the lowest row; Thái hậu = BAL.promo.capTh; a cung nữ (servant road) keeps no household.
+   for her AND every NPC consort (two-way law); cold palace = the lowest row; Thái hậu = BAL.promo.capTh; Nữ đế (succession path c) = BAL.promo.capNd; a cung nữ (servant road) keeps no household.
    hhHas(p) = the same count of what the household holds now: the personal maid (S.maid / an NPC's own maid) is the "+1", counted once, here only. */
 function capOf(p){const B=BAL.promo,C=B.cap;if(S&&p&&p===S.thO)return B.capTh.slice();if(p===S&&typeof isSrv==="function"&&isSrv())return C[0].map(()=>0);
+ if(p===S&&S.succ&&S.succ.p==="c"&&B.capNd)return B.capNd.slice();
  return C[p&&p.out?0:Math.max(0,Math.min(C.length-1,rkOf(p)||0))].slice()}
 function hhHas(p){const L=(p&&p.staff)||[];return[L.filter(s=>s.role==="maid").length+1,L.filter(s=>s.role==="eunuch").length]}
 function mkServ(role){const n=role==="maid"?(AV.maids||[]).length:0;const used=allServ().map(x=>x.name);const pool=(role==="maid"?MAIDS:EUN).filter(x=>!used.includes(x));
@@ -4181,9 +4182,24 @@ function drawF(kind,age){if(!S)return"";const keys=Array.isArray(kind)?kind:band
  return""}
 /* a person keeps a face while in one age band; on entering a new band they get a new face from that band's pool */
 function faceFor(o,kind,age){const k=bandKeys(kind,age)[0];if(o.fc==null||o.fk!==k){o.fc="";o.fc=drawF(kind,age);o.fk=k}}
-/* how many of a role may exist at once = the pool size (a consort pool counts the inline fallback portraits too) */
-function roomFor(role){if(!S)return true;const n=poolOf(role).filter(f=>FAV[f]!==0).length;const cap=role==="consort"?Math.max(n,(AV.women||[]).length):n;
- const cnt=role==="consort"?1+(rivals||[]).filter(v=>v.alive).length:role==="maid"?1+(typeof allServ==="function"?allServ().filter(s=>s.role==="maid").length:0):role==="eunuch"?(typeof allServ==="function"?allServ().filter(s=>s.role!=="maid").length:0)+3:0;
+/* how many of a role may exist at once (review/staff-cap-apply, owner OD 18/11 ~02:10Z: faces 52 / 30 / 8):
+   servants = the FIGURE identity pool (FIGIX, j39): women servants (cung nữ, ma ma) <= maid + mama identities, young cung nữ <= maid identities,
+   in both cases minus the maid / mama identities consorts wear (j88: a raised maid keeps hers); eunuchs (household + the court eunuchs) <= eunuch identities.
+   Before the manifests load, the face lists (FPOOL) stand in; never the old face-*.webp load probe (FAV), so missing old files never stop hiring.
+   Consorts: unchanged, the face pool as before (the consort ceiling is CAPC, j27). */
+function roomFor(role){if(!S)return true;
+ if(role==="maid"||role==="eunuch"){const IX=typeof FIGIX!=="undefined"&&FIGIX?FIGIX:{};const K=r=>Object.keys(IX[r]||{}).filter(k=>IX[r][k]&&IX[r][k].length);
+  const SV=typeof allServ==="function"?allServ():[];
+  if(role==="eunuch"){const pool=K("eunuch").length||poolOf("eunuch").length;const C=S.court||{};
+   const cnt=SV.filter(s=>s&&s.role!=="maid").length+["tq","ksp","ped"].filter(k=>C[k]).length;return cnt<pool}
+  const km=K("maid"),kk=K("mama");const own=new Set(km.concat(kk));
+  const worn=new Set();[S].concat((rivals||[]).filter(v=>v&&v.alive!==false)).forEach(v=>{if(!v)return;for(const f of [v.fid,v===S?S.pid:null])if(f&&own.has(f))worn.add(f)});
+  const wm=[...worn].filter(f=>/^maid:/.test(f)).length;
+  const W=SV.filter(s=>s&&s.role==="maid");const all=1+W.length,young=1+W.filter(s=>(s.age||18)<36&&!s.old).length;
+  if(!km.length)return all<(poolOf("maid").length+poolOf("mama").length);
+  return all<own.size-worn.size&&young<km.length-wm}
+ const n=poolOf(role).filter(f=>FAV[f]!==0).length;const cap=role==="consort"?Math.max(n,(AV.women||[]).length):n;
+ const cnt=role==="consort"?1+(rivals||[]).filter(v=>v.alive).length:0;
  return cnt<cap}
 function kidVar(k){const used=new Set(allKids().map(([x])=>x).filter(x=>x!==k&&x.alive&&x.sex===k.sex&&x.fv).map(x=>x.fv));const c=[1,2,3,4].filter(v=>!used.has(v));return c.length?pick(c):0}
 /* give every present person a face once; old saves get theirs here too */
@@ -5372,6 +5388,21 @@ function figPick(who){const roles=figRoles(who);if(!roles.length)return null;con
   const sc=k=>{const L=M[k];const b=figBest(L,tier,age);let s=-figDist(b,tier,age);if((S.men||[]).includes(who))s+=4*Math.max(...L.map(f=>figSubOk(who,f)));s+=3*Math.max(...L.map(f=>figLook(who,f)));return s};
   let best=-1e9;for(const k of free)best=Math.max(best,sc(k));const top=free.filter(k=>sc(k)>=best-.5);const k=pick(top);who.fid=k;figUsed().push(k);return k}
  return null}
+/* SERVANT FACES ARE FREED (review/staff-cap-apply, MAIN s42: faces ran out after ~52 maids over one life). A servant identity (maid / mama /
+   eunuch) belongs to a person while anyone in the game still holds her: when a servant needs a face and every identity of her group is taken,
+   figGC frees the servant identities no live person holds any more (sent away, dismissed, dead, married out — every removal path at once, no
+   per-path code). Held = any fid / pid / fromMaid value reachable from S and the consorts (households, the Thái hậu's women, the court, the
+   Nội vụ phủ candidates, records). Consort identities are never freed. The co-op guest never writes the face list (a host world key). */
+const FIG_SERV=["maid","mama","eunuch"];
+function figGC(){try{if(!S||(window.COOPW&&COOPW.on&&COOPW.seat==="b"))return 0;const U=figUsed();const sig=S.turn+"|"+U.length;if(figGC.sig===sig)return 0;
+ const held=new Set(),seen=new Set();const SKIP={fidUsed:1,fseen:1,usedFaces:1};
+ const walk=(o,d)=>{if(!o||typeof o!=="object"||seen.has(o)||d>40)return;seen.add(o);if(Array.isArray(o)){for(const x of o)walk(x,d+1);return}
+  for(const k in o){if(SKIP[k])continue;const v=o[k];if(typeof v==="string"){if(k==="fid"||k==="pid"||k==="fromMaid")held.add(v)}else if(v&&typeof v==="object")walk(v,d+1)}};
+ walk(S,0);walk(typeof rivals!=="undefined"?rivals:[],0);
+ const keep=U.filter(k=>!FIG_SERV.includes(String(k).split(":")[0])||held.has(k));const n=U.length-keep.length;
+ if(n){S.fidUsed=keep}figGC.sig=S.turn+"|"+S.fidUsed.length;return n}catch(e){console.error("figGC",e);return 0}}
+(function(){const p0=figPick;figPick=function(who){try{if(who&&!who.fid&&S&&who!==S){const roles=figRoles(who).map(norm).filter(r=>FIG_SERV.includes(r));
+  if(roles.length){const U=new Set(figUsed());if(!roles.some(r=>Object.keys(FIGIX[r]||{}).some(k=>!U.has(k))))figGC()}}}catch(e){}return p0.apply(this,arguments)}})();
 figFor=function(p,kind){try{if(!FIGS.length||!p||!S)return"";const who=figWho(p);if(!who)return"";const k=figPick(who);if(!k)return"";const r=k.split(":")[0];const L=(FIGIX[r]||{})[k];if(!L||!L.length)return"";
  const f=figBest(L,figTierOf(who),figAgeOf(who));if(!f)return"";if(kind==="por")return figPath(f.por);return figPath(f.file||f.src)}catch(e){return""}};
 /* round portraits: the identity's por-*.webp once it has loaded; the old face until then (or if it fails) */
@@ -47307,10 +47338,13 @@ window.PROMO_SET=1;
 Object.assign(BAL,{promo:{
  /* THE household table (one core, review/staff-root; owner 17/11 04:48Z "phẩm thấp nhất chỉ có 1 cung nữ hoặc 1 thái giám", OD:L1155 ceiling):
     [maids incl. the personal (close) maid, eunuchs] per consort rank 0..7, for her AND every NPC consort (j10 capOf / hhHas read it; cold palace = row 0).
-    Đáp ứng 1 · Thường tại 2 · Quý nhân 3 · Tần 3 · Phi 4 · Quý phi 5 · Hoàng quý phi 6 · Hoàng hậu 6. Low ranks keep no eunuch of their own. */
- cap:[[1,0],[2,0],[2,1],[2,1],[3,1],[3,2],[4,2],[4,2]],
+    Owner final OD 18/11 ~02:15Z + ~02:50Z (review/staff-cap-apply): Đáp ứng 1+0 · Thường tại 2+0 · Quý nhân 2+0 · Tần 2+1 ·
+    Phi 3+1 · Quý phi 3+2 · Hoàng quý phi 4+2 · Hoàng hậu 5+2. Eunuchs start at Tần. */
+ cap:[[1,0],[2,0],[2,0],[2,1],[3,1],[3,2],[4,2],[5,2]],
+ /* Nữ đế (j99succ path "c"): harem style, mostly cung nữ (owner OD 18/11 ~02:05Z + ~02:50Z: 5 + 3) */
+ capNd:[5,3],
  /* Thái hậu's household (jstaff: her named women Giáo tập ma ma, Chưởng sự cô cô, Quản sự ma ma while the queen seat is empty) */
- capTh:[4,2],
+ capTh:[5,2],
  /* a servant she trusts this much leaves her household (over the table) with a farewell scene, not a log line (j10 capTrim) */
  trimTrust:70,
  wrist:["vongngoc","vongngoc_r1","vongngoc_r2","vongngoc_r3","vongngoc_r4","vongvang","vongvang","vongvang"],
@@ -47327,7 +47361,7 @@ Object.assign(BAL,{promo:{
  /* servant road: index = SRK.maid rank 1..4, 5 = ma ma; "wd:" = a WD garment / pin */
  srv:[[],[["vaibong",1],["banhtrai",1]],[["wd:y_luamoc",1],["wd:tram_dong",1],["vaibong",1],["tragoi",1],["banhtrai",1]],
   [["wd:y_chuongsu",1],["luahang",1],["tragoi",1],["traicay",1],["tuithom",1]],[["wd:y_nuquan",1],["luahang",2],["trahop",1],["traicay",1],["ruoucuc",1]],[["wd:y_mama",1],["luahang",1],["trahop",1],["traicay",1],["ruoucuc",1]]]}});
-/* ---------- staff capacity: one more servant at every rank ---------- */
+/* ---------- staff capacity: the table above (rank-ups that raise it bring one more servant) ---------- */
 /* (the private capOf wrapper that lived here is gone: j10 capOf reads BAL.promo.cap for everyone — review/staff-root) */
 /* ---------- the set ---------- */
 function prRankName(r){return r>=7?"Hoàng hậu":RANKS[Math.max(0,Math.min(7,r))].n}
@@ -47343,7 +47377,7 @@ function prGive(p,L){const E=[];p.inv=p.inv||[];for(const [k,n,kind] of L)for(le
   if(kind==="wd"&&typeof wdGain==="function"){const g=wdGain(p,k,{from:"nvp",giver:"Nội vụ phủ",nvp:1});if(g&&g.e)E.push(g.e)}
   else{const e={k,from:"nvp",giver:"Nội vụ phủ",d:S.turn};p.inv.push(e);E.push(e)}}
  return E}
-/* one new servant, free, while under the rank's cap (maids first). Faces are unique in the whole palace (j17 roomFor = the face pool), so:
+/* one new servant, free, while under the rank's cap (maids first). Faces are unique in the whole palace (j17 roomFor = the figure identity pool, FIGIX 52 maid + 8 ma ma / 30 eunuch), so:
    1. this month's Nội vụ phủ candidate (j29 npool), 2. a new person while the face pool has room, 3. (her only) a servant Nội vụ phủ moves
    from the lowest-ranked household that has one to spare. null when nobody can come. */
 function prStaff(p){try{if(!p||typeof mkServ!=="function")return null;p.staff=p.staff||[];const [cm,ce]=capOf(p);
@@ -67448,7 +67482,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="cca6eb936848";window.CTM_BUILD=BUILD;
+const BUILD="d87c63eb7770";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
