@@ -6,3 +6,9 @@ Step A = a little deeper, step B = clearly deeper. 4 gens total (1 per image, no
 Sheet (cols current | A | B; rows t8, t7): https://ctm-img.victoria-tntt.workers.dev/img/_review/yellow-deeper/sheet_c03_a18.jpg
 Files: img/_review/yellow-deeper/c03_a18_t8_A.png, _B.png, c03_a18_t7_A.png, _B.png (cdn_sync --check OK).
 Notes: t8 B is strongly saturated (near the limit of "not dark/mustard"); t8 A/t7 A are the safer step. Pink peony and jade fan unchanged.
+
+## ADD 17:12Z (owner): jewellery/crown/pin/embroidery gold 10K -> 18K (A) / 24K (B), robe yellow deeper as before
+Round 2, 4 more gens (2 t8, 2 t7), no regen needed; total gens = 8. Face/crown/costume/pose/item unchanged on visual check.
+t8 sheet: https://ctm-img.victoria-tntt.workers.dev/img/_review/yellow-deeper/sheet_c03_a18_t8_gold.jpg
+t7 sheet: https://ctm-img.victoria-tntt.workers.dev/img/_review/yellow-deeper/sheet_c03_a18_t7_gold.jpg
+Files: c03_a18_t8_gold_A/B.png, c03_a18_t7_gold_A/B.png (same folder, on CDN).
