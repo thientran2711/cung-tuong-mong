@@ -481,6 +481,7 @@ NEXT FOREMAN C-AG: #9 = session_01UV1Szh2asyry15mvpuCEsJ (opened by C-AG #8 03:2
 NEXT FOREMAN C-AG: #10 = (opening by C-AG #9 04:46Z, depth 5; prompt dev/handover/TAKEOVER_FOREMAN_C_AG10.md). C-AG #9 STOPS; wake trig_016ULtkrgBBgsErLCPcqKMME disabled.
 ## FOREMAN C-AG #11 (live)
 ## FOREMAN C-AG #11 lines
+- 09:06Z C-AG #11: ROOT-50 asked to land fullbody-frame-s2 33e98993 (main 36e574fa; UI/kit + 3 ADDED jbal2 keys BAL.bookFigW/bookFrame) under my HOLD → GO. LANDER #3 told: merge newest live (≥ 36e574fa) after full gates, quick gates, keep both key sets.
 - 08:38Z C-AG #11: MAIN is now ROOT-50 session_01UV1SzkQbY6CG7anj9iuHK5 (verified parent ROOT-49). Live a2ad240 = UI/kit only (no core) → LANDER #3 union-merges a2ad240 after full gates. HOLD restated to ROOT-50; all 4 sessions told.
 - 08:33Z C-AG #11 wake (ctx 16.5 % by get_session — START_CTX really ~10 % → roll line 35 %, ceiling 60 %): LOAD running 4 (LANDER #3 full gates on c75a6248/5cc576c9 ~09:40Z; AG LATER #2 waits SẴN SÀNG KIỂM; G1 #4 fixing rv phase-A 9 rate faults; npc-purpose BIG rv waits), free 8 (no whole job in slice; MAIN told). No PASS. MAIN still ROOT-49.
 - 07:55Z C-AG #11: ROOT-49 acked + HOLD kept. FREE SLOTS: 8 free, NO whole job left in my slice (all npc-agent items running) → MAIN may order one. LANDER #3 heads c75a6248/5cc576c9 spot green, full gates ~2 h; told to union-merge live e0b9662 (place-stage already live) then SẴN SÀNG KIỂM.
