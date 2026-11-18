@@ -97,7 +97,7 @@ function kitLinePos(el){try{const nx=document.getElementById("next");let bot=inn
    toast (§42.2 kitLine #kupdline, §87 kitLineToast #ktbtoast) is moved off the things that must always read: the top bar, tab bars and
    sub-tab rows, the place name, figure name tags and plaques, a dialog title. dir "down" = slide below what it hits (top toast), "up" = slide
    above it (bottom pill). Returns false when no free spot is left on that side (the caller may try the other side). */
-const KIT_TOAST_KEEP='header.hud,#tabs,.pctabs,.kpbar,[role="tablist"],#kpname,#sc-t,.tok .tag,.j59n,.kpod-plq,.dlg h2,.dlg .dlgt';
+const KIT_TOAST_KEEP='header.hud,#tabs,.pctabs,.ktsub,.kpbar,[role="tablist"],#kpname,#sc-t,.tok .tag,.j59n,.kpod-plq,.dlg h2,.dlg .dlgt';
 function kitToastClear(el,dir){try{const rs=[...document.querySelectorAll(KIT_TOAST_KEEP)].filter(e=>!el.contains(e)&&e.getClientRects().length&&getComputedStyle(e).visibility!=="hidden").map(e=>e.getBoundingClientRect()).filter(r=>r.width>2&&r.height>2&&r.height<innerHeight*.5);
  for(let i=0;i<16;i++){const t=el.getBoundingClientRect();const hit=rs.filter(r=>r.left<t.right&&r.right>t.left&&r.top<t.bottom&&r.bottom>t.top);if(!hit.length)return true;
   if(dir==="down"){const y=Math.max(...hit.map(r=>r.bottom))+6;if(y+t.height>innerHeight-4)return false;el.style.bottom="auto";el.style.top=Math.round(y)+"px"}
