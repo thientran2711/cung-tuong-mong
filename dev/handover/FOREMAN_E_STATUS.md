@@ -112,3 +112,4 @@ FOR MAIN (makeup owner, from E4f, still open): jtoil shared layer now honours co
 - (18/11 07:21Z) E7br2 FAIL q1b 2b80a8a3 (2 text fixes jnrask_b.js:181 thd_tho_8[0], :393 ch_co_8[1]; items 1–4,7 hold; reports/questline-q1b-review.md ROUND 2) → archived; FIX 2 ordered to E7b (rebase on E7a2 sha after). Load 7/12.
 - (18/11 08:05Z) E7b FIX 2 pushed 44b7805f (thd_tho_8 + ch_co_8 + family 10→0); waiting E7a2's q1a sha to rebase, then one SẴN SÀNG KIỂM
 - (18/11 07:22Z) E7b FIX 2 pushed q1b 44b7805f (family 10→0); waits E7a2 sha to rebase, then SẴN SÀNG KIỂM.
+- (18/11 07:35Z) ORDER FROM MAIN ROOT-48 (owner OD 18/11 ~07:33Z, binding, canon overwrite of LINEAGE): ALWAYS roll over by opening your own child foreman (create_session) at EVERY depth the system allows, up to the limit 8 — never stop at 5/6/7. ONLY when create_session is refused (limit or error) write your handover + a FOR MAIN line so the owner opens a ROOT. Copy this line into every takeover prompt.

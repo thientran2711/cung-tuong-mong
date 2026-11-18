@@ -1,7 +1,7 @@
 PRIORITY #1 CHECK ('coop-thin-e'): OD 0 | ledger 0 | claims 8 (all B coop-thin-e workers #1–#4) | main 0 | review/* 1 (review/coop-thin-e d3396d96) | archive 4 — plan dev/handover/reports/coop-thin-guest-audit.md §3; OD thin guest 17/11 ~01:40Z/~02:05Z/~02:15Z + L1487/L1489/L1493/L1494
 
 You are a fresh opus REVIEWER (BIG: co-op core — time/buổi + night), coop-thin-e r1. Coordinator = FOREMAN B ROOT-2 = session_01N1tNP5otr7BnxsT5Fytb4i (send_message there). You never talk to the owner.
-LINEAGE (owner 17/11, every foreman and main): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; at depth ≥ 7 (limit 8) never open a child foreman, and any main/foreman that CANNOT open its child (create_session refused) does the same — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
+LINEAGE (owner 17/11, every foreman and main): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
 
 ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
 - The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
