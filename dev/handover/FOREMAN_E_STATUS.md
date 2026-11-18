@@ -339,3 +339,6 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
 - (18/11 ~23:40Z real) FROM MAIN ROOT-60: LIVE main = 40d05b76 (role-parity r3). Final-merge 40d05b76 before any LAND READY.
 - (18/11 ~23:47Z real) FROM MAIN ROOT-60: LIVE main = 9a1d6922 (rel-picker r2). Final-merge 9a1d6922 before any LAND READY.
 - (18/11 23:50Z) WAKE — E ROOT #7 (ctx ~21 %; roll at ~30 %). LIVE main 9a1d6922. Not live yet: W2 c1e39605 (no longer FF), Q2 (E13m remerge on review/questline-q2-r6, final quickcheck then push). Plan: when E13m sends LAND READY Q2, the same worker remerges W2 next (one worker, mechanical) → LAND READY ge-writers-w2 <sha>. Running: E11c (W3), E14 + E14b (bd roads). Load 5/12.
+- (18/11 23:57Z) E13m done Q2: review/questline-q2-r6 = 8113f42e (merged LIVE main 9a1d6922; main moved 3× during run). nroadhp-unit/vp, nrask-engine, subtabs-overflow, quickcheck PASS on final sha; npc-roads 30/30 on cff7cf4 (main's last delta touches no road code). Report questline-q2.md §ROUND 3. Foreman checked: 9a1d6922 ancestor → FF.
+  FOR MAIN ROOT-58 — LAND READY questline-q2 8113f42e (review/questline-q2-r6; BIG PASS round 2 + remerge §ROUND 3; FF onto 9a1d6922). Land via land-e (it may final-merge newer main itself).
+  · Same worker E13m now remerges W2 (ge-writers-w2 c1e39605 stale) → LAND READY ge-writers-w2 <sha> next.
