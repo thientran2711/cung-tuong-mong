@@ -15,7 +15,7 @@ const {chromium}=require('./lib/pw-roulette');const sleep=t=>new Promise(r=>setT
    if(!C.length&&Object.keys(d).some(k=>k==="hh"||k==="th"||k[0]==="a")&&!/oán|ghen|thù|thân|Thái hậu|Hoàng hậu/.test(plain(text)))out.unclaimed.push(`${name}: changed ${JSON.stringify(d)} · text: ${plain(text).slice(0,120)}`)};
   for(const org of ["thd","dtq","cn"])for(const bu of [0,1,2]){window.__forceOrigin=org;SLOT=3;window.__nlInner=1;start();window.__nlInner=0;quiet=true;Q.length=0;S.buoi=bu;S.bac=900;S.suc=100;deal();
    const names=deck.map(a=>a.n);for(let i=0;i<names.length;i++){const a=deck[i];if(!a||(a.b!=null&&a.b!==(S.buoi||0)))continue;const text=(a.x||"")+" · "+fmt(a.w||{});a.o=100;a.lock=false;a.done=0;used=0;S.suc=100;S.bac=900;Q.length=0;
-    const b0=snap();try{act(i)}catch(e){out.bad.push(a.n+": error "+e.message)}Q.length=0;check(`[${org} b${bu}] ${a.n}`,text,b0,snap())}}
+    const b0=snap();{const r0=window.roll;window.roll=()=>true;try{act(i)}catch(e){out.bad.push(a.n+": error "+e.message)}finally{window.roll=r0}}Q.length=0;check(`[${org} b${bu}] ${a.n}`,text,b0,snap())}}
   /* talk options on every consort (person-card Giao thiệp) */
   window.__forceOrigin="thd";window.__nlInner=1;start();window.__nlInner=0;quiet=true;Q.length=0;
   for(const v of liveRivals(true).slice(0,6)){for(const kind of ["rival",v===queenP()?"hh":null].filter(Boolean)){const L=talkOpts({kind,ref:v});

@@ -5,7 +5,7 @@ const {chromium}=require('playwright');const [,,URL,NB]=process.argv;
 (async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'})).newPage();p.setDefaultTimeout(0);
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:0});await p.waitForTimeout(1500);
- const r=await p.evaluate(async(NB)=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;for(let i=0;i<8;i++){start();if(!isSrv())break}
+ const r=await p.evaluate(async(NB)=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;for(let i=0;i<8;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}
   const hide=()=>{Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true};hide();
   const K=["sung","danh","suc","bac","duc","th","hh","sac","tai","tamco","mat","an","rank","confined","out"];
   const snap=()=>{const o={};K.forEach(k=>o[k]=S[k]||0);o.maid=S.maid?S.maid.loyal:0;for(const v of rivals){o["aff:"+v.name]=aff(v,S);o["oan:"+v.name]=oan(v,S)}o.inv=(S.inv||[]).length;return o};

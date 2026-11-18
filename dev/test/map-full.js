@@ -11,8 +11,8 @@ for(const sz of (SIZES||'755x1000,1180x820,1366x1024,412x1058,390x844').split(',
  const p=await ctx.newPage();p.setDefaultTimeout(120000);p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
  await p.goto(URL_,{waitUntil:'domcontentloaded'});await p.addStyleTag({content:'#kroul,#kroulw,.kroul,.kcf{display:none!important}'});
  await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function');await sl(2500);
- await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;window.__forceOrigin='tt';document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!isSrv())break}});
- for(let i=0;i<15;i++){await sl(400);const s=await p.evaluate(()=>{const s=isSrv();if(s)start();return s});if(!s)break}
+ await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;window.__forceOrigin='tt';document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}});
+ for(let i=0;i<15;i++){await sl(400);const s=await p.evaluate(()=>{const s=isSrv();if(s)try{nlNew()}catch(e){}start();return s});if(!s)break}
  await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;window.__mapZ=0;tab='go';render()});await sl(2500);
  const scan=()=>p.evaluate(()=>{const q=s=>document.querySelector(s),r=e=>e&&e.getBoundingClientRect();const v=q('.game.maptab .mapv'),m=q('.game.maptab .mapv>.mapsc'),t=q('.mapv>.maptools');if(!v||!m)return{nomap:1};
   const a=r(v),c=r(m),tl=r(t);const inside=e=>{const x=r(e);return !x||x.width===0||(x.left>=a.left-1&&x.right<=a.right+1&&x.top>=a.top-1&&x.bottom<=a.bottom+1)};

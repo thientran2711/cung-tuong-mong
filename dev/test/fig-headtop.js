@@ -10,7 +10,7 @@ const UNKV=process.env.UNK==='1';const sleep=t=>new Promise(r=>setTimeout(r,t));
   const p=await ctx.newPage();p.setDefaultTimeout(240000);p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function');await sleep(2500);
   await p.addStyleTag({content:'#kroul{display:none!important}'});
-  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<400;i++){start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;render()});await sleep(800);
+  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<400;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;render()});await sleep(800);
   const tab=await p.evaluate(()=>fetch('https://ctm-img.victoria-tntt.workers.dev/img/fig-ht.json').then(r=>r.json()));
   await p.evaluate(UNK=>{Q.length=0;document.getElementById('modal').hidden=true;const R0=liveRivals(true);const q=R0.find(v=>v.queen)||R0[0];const lows=R0.filter(v=>!v.queen).sort((a,c)=>(a.rk||0)-(c.rk||0));kn();window.kitKnown=()=>!UNK;[q,lows[0],lows[1]].forEach(v=>{S.met[v.id]=1});
     S.place="home";S.visit={k:"home",people:[q,lows[0],lows[1]].filter(Boolean),talked:false,tk:{}};render()},!!UNKV);await sleep(1500);

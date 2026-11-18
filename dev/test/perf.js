@@ -56,7 +56,7 @@ async function runDevice(b,srvUrl,dev){
  /* ---- first playable turn + N buổi ---- */
  await game.evaluate(()=>{window.__lt=[];try{new PerformanceObserver(l=>{for(const e of l.getEntries())window.__lt.push(Math.round(e.duration))}).observe({type:'longtask',buffered:false})}catch(e){}});
  const t1=Date.now();
- await game.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<20;i++){start();if(S.origin.k!=='cnv')break}});
+ await game.evaluate(()=>{SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<20;i++){try{nlNew()}catch(e){}start();if(S.origin.k!=='cnv')break}});
  await game.waitForFunction(()=>{try{for(let j=0;j<6&&Q.length&&!S.dead;j++){const m=Q[0];if(m.opts&&m.opts.length)chooseM(Math.max(0,m.opts.findIndex(c=>!c.off)));else closeModal()}}catch(e){}const n=document.getElementById('next');return !!n&&!n.disabled&&!Q.length&&!S.dead},null,{timeout:TMO,polling:100});
  R.timeToPlayableMs=Date.now()-t1;
  const play=await game.evaluate(async N=>{const sl=t=>new Promise(r=>setTimeout(r,t));let done=0;window.__lt.length=0;const perBuoi=[];

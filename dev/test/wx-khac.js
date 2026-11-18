@@ -17,7 +17,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof render==='function'&&typeof currentWeather==='function');await sleep(2500);
  await p.addStyleTag({content:'#kroul{display:none!important}'});
  const r=await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();SLOT=3;document.getElementById('title').hidden=true;
-  for(let i=0;i<400;i++){start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;try{NLP=null}catch(e){}render();
+  for(let i=0;i<400;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;try{NLP=null}catch(e){}render();
   const o={};const K=BAL.time.khac,N=wxkN();o.N=N;
   /* §1 */
   const off=[],stat={days:0,chg:0,burst:0,arcDays:0,arcHit:0},sea4={};const y0=S.year;

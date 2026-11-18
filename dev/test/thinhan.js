@@ -13,8 +13,8 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
  for(const name of ["Thỉnh an Hoàng hậu","Thỉnh an Thái hậu"]){
   R[name]=await p.evaluate(async(name)=>{const q=queenP();const i=deck.findIndex(a=>a.n===name);if(i<0)return{missing:true,deck:deck.map(a=>a.n)};
    const card=(document.querySelector(`.kcard[data-i="${i}"]`)||{}).innerText||cardH(deck[i],i).replace(/<[^>]+>/g,' ').replace(/\s+/g,' ');
-   const before={hh:S.hh,th:S.th,qrel:q&&q!==S?aff(q,S):null};deck[i].o=100;Q.length=0;used=0;act(i)
-   await new Promise(r=>setTimeout(r,1500));const after={hh:S.hh,th:S.th,qrel:q&&q!==S?aff(q,S):null};
+   const before={hh:S.hh,th:S.th,qrel:q&&q!==S?aff(q,S):null};deck[i].o=100;Q.length=0;used=0;const r0=window.roll;window.roll=()=>true;try{act(i)
+   await new Promise(r=>setTimeout(r,1500))}finally{window.roll=r0}const after={hh:S.hh,th:S.th,qrel:q&&q!==S?aff(q,S):null};
    const t=document.getElementById('rtoast');return{card:String(card).replace(/\s+/g,' ').slice(0,400),before,after,result:t?t.innerText.replace(/\s+/g,' '):''}},name);
   await p.screenshot({path:`${OUT}/after-${name.replace(/\s+/g,'-')}-ket-qua-755x1000.png`,animations:'disabled',timeout:120000})}
  /* the Hoàng hậu person card */

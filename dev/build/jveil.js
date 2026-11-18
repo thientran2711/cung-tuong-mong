@@ -122,7 +122,7 @@ function vlBuyOut(p,k){const ag=vlAgent(p);const pr=vlOutPrice(k);if(!ag||(p.bac
 /* ask a bestowal: Hoàng hậu (when she is not the asker) or Thái hậu; odds by their favour */
 function vlGivers(p){const L=[];try{const q=queenP();if(q&&q!==p&&q.alive!==false)L.push({k:"hh",n:"Hoàng hậu",o:oddsCl(Math.min(VL.askHH+(p.hh||0)/2,90))})}catch(e){}if(!S.thDead)L.push({k:"th",n:"Thái hậu",o:oddsCl(Math.min(VL.askTH+(p.th||0)/2,90))});return L}
 function vlAsk(p,gk){const G=vlGivers(p).find(x=>x.k===gk);if(!G)return"";const nm=p===S?"Ngươi":`${rkName(p)} ${p.name}`;
- if(roll(G.o)){const k=vlKey(Math.min(8,wdPOf(p)),1);vlGain(p,k,{from:gk,giver:G.n,known:`${G.n} ban theo phẩm`});return `${nm} xin ${G.n} ban mạng che mặt: <span class="g">thành</span>. ${G.n} ban ${itm(k).n} (Tinh phẩm). `}
+ if(aRoll(G.o,p)){const k=vlKey(Math.min(8,wdPOf(p)),1);vlGain(p,k,{from:gk,giver:G.n,known:`${G.n} ban theo phẩm`});return `${nm} xin ${G.n} ban mạng che mặt: <span class="g">thành</span>. ${G.n} ban ${itm(k).n} (Tinh phẩm). `}
  ap(p,{[gk]:-VL.askFail});return `${nm} xin ${G.n} ban mạng che mặt; ${G.n} không ban, còn chê phiền. ${G.n} với ${p===S?"ngươi":"nàng"} -${VL.askFail}. `}
 
 /* ---------- her side: dialogs in the kit modal ---------- */
@@ -133,7 +133,7 @@ PEND.vlget=pp=>{if(!S||S.dead)return null;const sc=S.scar?scarOf(S):null;const O
  O.push(vlOpt({n:"Tự tay kết mạng",fx:{},x:`tốn: 2 khắc, Sức -${VL.craftSuc} · thành: trò thêu, chơi càng khéo mạng càng quý`,go:()=>{if(!can(2)||S.suc<VL.craftSuc+5){log("Không đủ khắc hay Sức để tự tay kết mạng.");return}pushDil(mkP("vlcraft"),"Tự tay kết mạng")}}));
  O.push(vlOpt({n:"Đặt ở Nội vụ phủ",fx:{},x:`tốn: 1 khắc · thành: mạng đúng phẩm của ngươi, giá theo phẩm`,go:()=>{if(!can(1))return;pushDil(mkP("vlnvp"),"Nội vụ phủ")}}));
  O.push(vlOpt({n:"Sai người mua lén ngoài cung",fx:{},x:ag?`tốn: 1 khắc · thành: rẻ hơn, nhiều kiểu · kèm: chưa rõ phẩm, lộ ra thì Danh -${VL.outDanh}`:"chưa có ma ma, thái giám hay cung nữ tin cẩn để sai",go:()=>{if(!ag||!can(1))return;pushDil(mkP("vlout"),"Mua lén ngoài cung")}}));
- for(const G of vlGivers(S))O.push(vlOpt({n:`Xin ${G.n} ban mạng`,fx:{},x:`${word(G.o)} · tốn: 1 khắc · thành: ${G.n} ban mạng Tinh phẩm đúng phẩm · hỏng: ${G.n} với ngươi -${VL.askFail}`,go:()=>{if(!can(1))return;spend(1);log(vlAsk(S,G.k));render()}}));
+ for(const G of vlGivers(S))O.push(vlOpt({n:`Xin ${G.n} ban mạng`,fx:{},x:`${word(G.o)} · tốn: 1 khắc · thành: ${G.n} ban mạng Tinh phẩm đúng phẩm · hỏng: ${G.n} với ngươi -${VL.askFail}`,go:()=>{if(!can(1))return;const fz=G.o;/* the odds on this card (j9 fzRun) */spend(1);log(fzRun(fz,null,()=>vlAsk(S,G.k)));render()}}));
  O.push({n:"Thôi",fx:{},j67:"tốn: không tốn gì"});
  return{who:pMe(),t:`<p>${sc?`Mặt ngươi bị thương (${sc.name}): Sắc đang mất ${sc.sacLost}. `:""}${S.rash&&typeof rshOf==="function"?`Mặt ngươi nổi mẩn (${rshOf(S).name}): Sắc đang mất ${rshOf(S).lost}. `:""}Mạng che mặt phải tự làm, mua hoặc được ban.</p><p class="past">${vlGivers(S).map(G=>`Xin ${G.n} ban: ${word(G.o)}, hỏng thì ${G.n} quý ngươi -${VL.askFail}.`).join(" ")}${ag?` Mua lén qua ${ag.name}: lộ ra thì Danh -${VL.outDanh}.`:""} Mạng phẩm cao hơn phẩm của ngươi là vượt phẩm (chưa ai biết cho tới khi có người nhận xét).</p>`,o:O}};
 PEND.vlcraft=pp=>{const lv=vlLv(S),a=ARTS.find(x=>x.k===vlArt());const O=[0,1,2].map(m=>vlOpt({n:`Kết bằng ${VL_MATN[m]}`,fx:VL.mat[m]?{bac:-VL.mat[m]}:{},x:`tốn: 2 khắc, Sức -${VL.craftSuc} · thành: ${vlGradeOdds(S,m)}`,go:()=>vlCraftRun(m)}));

@@ -16,7 +16,7 @@ const [,,URL,SZ,OUT,TAG]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=W
   const ea=S.emp&&S.emp.age;return{solo:solo.map(x=>`${x.name}:${rkOf(x)}`),under,kn:residents("kn").map(x=>x.name),thAge:S.thAge,empAge:ea,thOk:S.thAge>=51&&S.thAge>=ea+18,thOage:S.thO&&S.thO.age,
    thFig:typeof kitFigOf==="function"?kitFigOf(pTH()):"",thFigK:(()=>{try{return figFor({kind:"th"})}catch(e){return"ERR "+e.message}})(),thPor:(()=>{try{return figFor({kind:"th"},"por")}catch(e){return"ERR "+e.message}})(),thFace:S.thF}});
  /* 1. new games: 6 starts */
- R.fresh=[];for(let i=0;i<6;i++){R.fresh.push(await p.evaluate(()=>{try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;render();return 1}).then(audit))}
+ R.fresh=[];for(let i=0;i<6;i++){R.fresh.push(await p.evaluate(()=>{try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;render();return 1}).then(audit))}
  /* 2. promotion: the strongest head becomes Hoàng quý phi with residents; tuyển tú; a year of turns */
 console.log("fresh",JSON.stringify(R.fresh));
  R.promo=await p.evaluate(()=>{const heads=rivals.filter(v=>v.alive&&!v.out&&!v.queen&&v.rank>=PAL_HEAD);const h=heads[0];if(!h)return{skip:"no head"};
