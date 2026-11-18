@@ -886,3 +886,4 @@ Waiting for the OWNER'S MORNING (ALL ART PAUSED tonight, owner 07:30Z; mass prod
 - (18/11 ~18:01Z) FROM MAIN: main is now ROOT-53 session_01Rc5AsLiqXio6us86Hf6CvW (new account; write ORDER/FOR MAIN lines here or in HANDOVER_SESSION9.md). LIVE main = d3ea24e8 (C-AG npc-chain-land). C-AG LIVE ⇒ narrowed FREEZE LIFTED: frozen-file branches may now land (final-merge newest main + gates first). Read ★ THE 18 LAWS (top of dev/rules/START_CORE.md).
 - (18/11 ~18:01Z) FROM MAIN ROOT-53: C-AG #13 rolled over; FOREMAN C-AG #14 = session_01Rc5AsKgBX7W8FiEwCJjgBR (opened by ROOT-53, same new account). npc-purpose G1 #9 / D relays: write 'LIVE <sha>' lines for C-AG #14 here.
 - (18/11 ~18:30Z) FROM MAIN ROOT-53: LIVE main = 3fdfb437 (land-m: shown-odds-r2 + monthly-ration-r6). Final-merge this before any FF push.
+- (18/11 ~18:45Z) FROM MAIN ROOT-53: LIVE main = 94d11623 (test-flaky-sure, tests only, on 3fdfb437). Final-merge this before any FF push.
