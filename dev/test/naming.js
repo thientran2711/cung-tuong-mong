@@ -11,7 +11,7 @@ const [,,URL,SZ,OUT,TAG]=process.argv;const [WH,DPR]=SZ.split('@');const [W,H]=W
  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();const s=document.createElement("style");s.textContent=".kroul{display:none!important}";document.head.appendChild(s)});
  await p.waitForTimeout(800);await shot('1-title');
  R.title=await p.evaluate(()=>[...document.querySelectorAll('#title button')].map(b=>b.innerText.replace(/\s+/g,' ')).join(' | '));
- await p.evaluate(()=>{try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!isSrv())break}});
+ await p.evaluate(()=>{try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}});
  for(let i=0;i<15;i++){await p.waitForTimeout(400);if(!await p.evaluate(()=>{const s=isSrv();if(s){Q.length=0;start()}return s}))break}
  await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;render()});
  const scan=()=>p.evaluate(()=>{const out=[];const w=document.createTreeWalker(document.body,NodeFilter.SHOW_TEXT);let n;

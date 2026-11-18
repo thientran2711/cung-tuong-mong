@@ -21,7 +21,7 @@ const VPS=(SIZES||'755x1000').split(',');
   const p=await ctx.newPage();p.setDefaultTimeout(60000);p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.addStyleTag({content:'#kroul,#kroulw,.kroul,.kcf{display:none!important}'});
   await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function'&&window.__ctmBuilt===1,null,{timeout:180000});/* real condition: the game script ran to its end (was a 2.5 s timer) */
-  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!isSrv())break}});
+  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}});
   /* start() hands S over asynchronously (measured 1.2-2 s; the 'S undefined' crash of emotion-acts): wait for S itself, then re-roll a servant life (was 15 x 400 ms timers) */
   for(let i=0;i<15;i++){await p.waitForFunction(()=>typeof S!=='undefined'&&!!S&&!!S.name,null,{timeout:30000});const srv=await p.evaluate(()=>{const s=isSrv();if(s)start();return s});if(!srv)break}
   await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;try{S.inv.push({k:"tramngoc",from:"me"})}catch(e){}tab='act';render()});await p.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));/* render is synchronous; 2 frames instead of 1.2 s */

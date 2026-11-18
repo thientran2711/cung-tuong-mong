@@ -10,7 +10,7 @@ const {chromium}=require('playwright');const [,,URL,NL,NW]=process.argv;const LI
  const out=[];
  for(let life=0;life<LIVES;life++){
   await p.evaluate(()=>{try{localStorage.clear()}catch(e){}const kl=document.getElementById('kload');if(kl)kl.remove();document.getElementById('title').hidden=true;SLOT=3;
-   for(let i=0;i<60;i++){start();if(!(typeof isSrv==='function'&&isSrv())&&!S.out)break}document.querySelectorAll('.kroul').forEach(e=>e.remove());
+   for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!(typeof isSrv==='function'&&isSrv())&&!S.out)break}document.querySelectorAll('.kroul').forEach(e=>e.remove());
    window.save=()=>{};/* fast like dev/measure/inpage4.js: no drawing, dialogs still go through Q; the map HTML is still built once per buổi */
    popNum=()=>{};curtain=()=>{};fx=()=>{};renderHUD=()=>{};renderStage=()=>{};renderPanel=()=>{};render=function(){if(!S)return;if(Q.length&&document.getElementById('modal').hidden)showModal()};window.__B={dead:[],dbl:[],hap:{},acts:0,walks:0,talks:0,shop:0,steps:0,buoi:0,cards:{}};
    const q=s=>document.querySelector(s);

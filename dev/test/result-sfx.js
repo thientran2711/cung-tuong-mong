@@ -7,7 +7,7 @@ const [,,URL,...SZ]=process.argv;
   const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:1,serviceWorkers:'block'});
   const p=await ctx.newPage();p.setDefaultTimeout(120000);const errs=[],bad=[];p.on('pageerror',e=>errs.push((e.stack||e.message).slice(0,300)));p.on('response',r=>{if(r.status()>=400)bad.push(r.status()+' '+r.url().slice(0,120))});
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof kitResultSfx==='function');await p.waitForTimeout(2500);
-  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!isSrv())break}});
+  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}});
   for(let i=0;i<15;i++){await p.waitForTimeout(400);const srv=await p.evaluate(()=>{const s=isSrv();if(s){Q.length=0;start()}return s});if(!srv)break}
   await p.evaluate(()=>{document.querySelectorAll(".kroul,#kroul").forEach(e=>e.remove());Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;tab="go";render()});
   const R=[];const ck=(name,ok,info)=>R.push({name,ok:!!ok,info});

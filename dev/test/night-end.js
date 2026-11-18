@@ -4,7 +4,7 @@ const {chromium}=require('playwright');const fs=require('fs');
 const [,,BASE,OUT,VPS]=process.argv;fs.mkdirSync(OUT,{recursive:true});
 const sleep=t=>new Promise(r=>setTimeout(r,t));
 const SHOT=async(p,o)=>{for(let i=0;i<3;i++){try{await p.screenshot(Object.assign({timeout:150000},o));return}catch(e){console.error('shot retry',o.path)}}};
-const NEWLIFE=()=>{try{localStorage.removeItem('hclh-opt')}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;
+const NEWLIFE=()=>{try{localStorage.removeItem('hclh-opt')}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;
  document.querySelectorAll('[id^=kroul],.kroul,#dawn,#kload').forEach(e=>e.remove());document.querySelectorAll('.kmov').forEach(e=>e.remove());render();return S.name};
 (async()=>{const b=await chromium.launch(Object.assign({args:['--use-gl=swiftshader','--enable-unsafe-swiftshader']},process.env.HTTPS_PROXY?{proxy:{server:process.env.HTTPS_PROXY,bypass:'localhost,127.0.0.1'}}:{}));
  const vps=(VPS||'755x1000').split(',');const R={};

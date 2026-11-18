@@ -7,7 +7,7 @@ const {chromium}=require('playwright');const path=require('path');
  await p.goto('file://'+path.resolve(process.argv[2]),{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function',null,{timeout:180000});await p.waitForTimeout(2500);
  const R=await p.evaluate(async()=>{const out=[];const ok=(n,c,x)=>out.push([c?"PASS":"FAIL",n,x==null?"":JSON.stringify(x)]);const wait=ms=>new Promise(r=>setTimeout(r,ms));
   window.__bot=1;document.getElementById('title').hidden=true;window.render=function(){};
-  for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;S.mg=0;S.rank=Math.max(S.rank,2);S.sung=40;S.duc=60;S.suc=70;
+  for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0;S.mg=0;S.rank=Math.max(S.rank,2);S.sung=40;S.duc=60;S.suc=70;
   const R0=liveRivals(true).filter(v=>!v.coop);
   const reset=()=>{S.ntk=null;S.ntTry=null;Q.length=0;used=0;S.dead=false;for(const v of R0){v.preg=0;v.confined=0;v.block=0;v.out=0;v.suc=70;v.duc=60;v.ill=null}S.cyb={};if(window.cyBase)S.tuan=(cyBase(S).t+1)%3;S.suc=70;S.duc=60};
   const roll0=roll;let cap=[];window.roll=o=>{cap.push(o);return false};   /* every try fails: no night scene, only the odds are read */
@@ -20,7 +20,7 @@ const {chromium}=require('playwright');const path=require('path');
   window.__ladder=T;
   ok("one core: BAL.steal.mg has win / rung / art / occ",B&&B.win>0&&B.rung===1&&B.art.feign&&B.art.road&&KG82_KIND[B.art.feign]&&KG82_KIND[B.art.road]&&B.occ in BAL.mgTier.occ,B);
   /* 1 · NPC tries (stealNight, the same act as hers), both acts, win / lose */
-  reset();const free=R0.filter(v=>!(typeof cyTray==="function"&&cyTray(v))&&v.alive&&!v.out);const A=free[0],H=free[1];
+  reset();const free=R0.filter(v=>!(typeof cyTray==="function"&&cyTray(v))&&v.alive&&!v.out);const H=free.find(v=>!sameHouse(S,v))||free[1],A=free.find(v=>v!==H);/* her person-menu act is refused (runAct: «Người cùng cung») when the target shares her house: that try plays the game and registers nothing, a life-dependent flake; test-flaky-sure picks a target outside her house */
   for(const mode of ["feign","road"]){
    for(const [nm,raw,want] of [["wins",10,1],["loses",0,0]]){reset();S.tonight=H;kg82NpcRaw=()=>raw;const base=oSteal(A,mode);cap=[];const n0=__smgSt.length;
     const s=stealNight(A,H,mode);const exp=want?stealRungUp(base,1):base;
