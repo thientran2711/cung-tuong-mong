@@ -931,3 +931,5 @@ Object.assign(BAL,{odb:{
  jts:{rbSmart:40},
  jtsb:{odOr:30,odTd:38,odTc:34,odTsbMockO:44}
 }});
+/* BOOK FIGURE SIZE (owner 18/11 "Cái hình tao vừa gửi là cái size mà tao muốn" = her p.5 shot): every adult on a book page has ONE body height = figure column width / bookFigW (her p.5 shot: Fold col 220 px -> body 642, iPad col 183 -> 534; 1/.343 = 2.915). Children x their age factor. Fixed number, independent of her outfit. */
+BAL.bookFigW=.343;
