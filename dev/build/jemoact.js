@@ -216,7 +216,7 @@ function eaScoldPick(L,c){if(L.length===1)return eaScoldOne(L[0],c);
   opts:L.map(m=>({n:`Mắng ${m.name}`,risk:"an toàn",hint:`hả giận; ${m.name} buồn lòng`,x:`thành: tâm trạng +${c.mood} · kèm: lòng ${m.name} −${c.loy} (nay ${m.loyal||0})`,fx:{},go:()=>eaScoldOne(m,c)}))})}
 /* the cards sit after the standing cards (j76), are rebuilt from the live mood on every deal / render, and never on the servant road */
 function eaSync(){try{if(!eaOn()||!Array.isArray(deck)||(typeof isSrv==="function"&&isSrv()))return;const want=eaCards();const keys=want.map(a=>a.ea).join(",");
- const have=deck.filter(a=>a&&a.ea);if(have.map(a=>a.ea).join(",")===keys&&have.every((a,i)=>a.done===want[i].done)){for(let i=0;i<have.length;i++){const o=have[i],n=want[i];o.x=n.x;o.t=n.t;o.c=n.c;o.w=n.w}return}
+ const have=deck.filter(a=>a&&a.ea);if(have.map(a=>a.ea).join(",")===keys&&have.every((a,i)=>a.done===want[i].done)){for(let i=0;i<have.length;i++){const o=have[i],n=want[i];o.x=n.x;o.t=n.t;o.c=n.c;o.w=n.w;o.go=n.go}return}
  for(let i=deck.length-1;i>=0;i--)if(deck[i]&&deck[i].ea)deck.splice(i,1);if(!want.length)return;let at=0;while(at<deck.length&&deck[at]&&deck[at].j76)at++;deck.splice(at,0,...want);for(const a of want)cnt(EA_N.cards,a.ea)}catch(e){console.error(e)}}
 window.eaSync=eaSync;
 (function(){if(typeof deal!=="function")return;const d0=deal;deal=function(){const r=d0.apply(this,arguments);eaSync();return r}})();

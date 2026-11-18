@@ -17,11 +17,11 @@ const {chromium}=require('playwright');const D=require('./lib/device');const out
   /* --- part 3: gift picker --- */
   r.gift=await g.evaluate(()=>{try{const v=rivals.find(x=>x.alive!==false&&!x.out)||rivals[0];S.inv.push({k:"nghien"});const keys=Object.keys(IT).filter(k=>IT[k].sl).slice(0,3);for(const k of keys)S.inv.push({k});
    S.inv.push({k:"tp",wk:{kind:"kimchi",a:"cong",ti:3,q:6,n:"Túi thơm thêu hoa sen",m:2,bn:"ngươi",d:"x",from:"me"}});S.inv.push({k:"tp",wk:{kind:"kimchi",a:"cong",ti:0,q:1,n:"Khăn thêu tạm",m:0,bn:"ngươi",d:"x"}});
-   const D1={top:[{v,q:.3,b:2}],n:30,unk:0};const o=tsOptGiftsItem(D1);const d=PEND.tsgiftpick({v:v.id});
+   const D1={top:[{v,q:.3,b:2}],n:30,unk:0};const o=tsOptGifts(D1);const d=PEND.tsgiftpick({v:v.id});
    return {opt:o&&o.n,optx:o&&o.x,rows:d.o.map(x=>({n:x.n,x:x.x,dis:!!x.tsDis,need:x.need&&x.need.map(n=>n.t)}))}}catch(e){return{err:String(e.stack||e)}}});
   r.giftgo=await g.evaluate(()=>{try{const v=rivals.find(x=>x.alive!==false&&!x.out)||rivals[0];v.ghen=40;const d=PEND.tsgiftpick({v:v.id});const i=d.o.findIndex(x=>x.n&&!x.tsDis&&x.ik!=null);if(i<0)return{none:true};const ghen0=v.ghen,n0=S.inv.length;d.o[i].go();return{item:d.o[i].n,ghen:[ghen0,v.ghen],inv:[n0,S.inv.length]}}catch(e){return{err:String(e.stack||e)}}});
   /* --- the panel itself, with the new option, as a real dialog --- */
-  await g.evaluate(()=>{try{Q.length=0;const v=rivals.find(x=>x.alive!==false&&!x.out)||rivals[0];const D1={top:[{v,q:.3,b:2}],n:30,unk:0};Q.unshift({t:"Nguy hiểm chung",h:"<p>x</p>",opts:[tsOptGifts(D1),tsOptGiftsItem(D1),{n:"Thôi",fx:{}}].filter(Boolean),showOut:true,tsk:"danger"});showModal()}catch(e){}});
+  await g.evaluate(()=>{try{Q.length=0;const v=rivals.find(x=>x.alive!==false&&!x.out)||rivals[0];const D1={top:[{v,q:.3,b:2}],n:30,unk:0};Q.unshift({t:"Nguy hiểm chung",h:"<p>x</p>",opts:[tsOptGifts(D1),{n:"Thôi",fx:{}}].filter(Boolean),showOut:true,tsk:"danger"});showModal()}catch(e){}});
   await p.waitForTimeout(600);await p.screenshot({path:`${out}/${dev}-giftopt.png`});
   r.pick=await g.evaluate(()=>{try{Q.length=0;const v=rivals.find(x=>x.alive!==false&&!x.out)||rivals[0];pushDil(mkP("tsgiftpick",{v:v.id}),"Biếu quà làm lành");showModal();return Q.length}catch(e){return String(e)}});
   await p.waitForTimeout(700);await p.screenshot({path:`${out}/${dev}-giftpick.png`});

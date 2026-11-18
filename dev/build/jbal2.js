@@ -392,7 +392,7 @@ Object.assign(BAL,{nroad:{
  men:{st:40,kidAge:15,men:{fx:{win:{loyal:3},mid:{loyal:-1},lose:{loyal:-4}},rv:{win:-2,lose:1}},court:{af:4,danh:1},
   off:{pow:{win:2,lose:-2},rv:{win:-1,lose:1},rel:3,ally:5},hz:{fx:{win:{fond:3,tal:2,hp:-2},mid:{tal:1,hp:-1},lose:{fond:-3,hp:-1}},rv:{win:-1,lose:1}},
   askTinh:30,askAf:10,askRel:25}}});
-/* seat counts per rank (review/seatcap): BAL.seatCap IS j30 SEATCAP (one object, one place): Hoàng hậu 1, Hoàng quý phi 1, Quý phi 2, Phi 4, Tần 6; lower ranks no cap.
+/* seat counts per rank (review/seatcap): BAL.seatCap IS j30 SEATCAP (one object, filled from BAL.seat in jbal.js — the only place the numbers are written); lower ranks no cap.
    Every road that sets a rank asks jseat.js seatHas / seatDown / seatUp; seatSettle is the net after every turn and on load. */
 BAL.seatCap=SEATCAP;
 /* PEOPLE LEDGER (owner core law 16/11 13:40Z: "at mandatory times (e.g. morning court) everyone required is inside"; j95 record).
@@ -1128,7 +1128,7 @@ Object.assign(BAL,{odb:{
  j75:{odOP:40,rbFit:35,rbTop:10,rbTop_2:20},
  j77:{odAccLeadO:35},
  j78:{odTop:40},/* odO: Kể tội reads odO_18 through P3C.tell (merge r2 M1) */
- j8:{rbInspect:40,rbSearch:35,odO1:30,odO3:40,odO1_2:45,odO2:30,rbSeenNPC:15},
+ j8:{rbInspect:40,rbSearch:35,odO1:30,odO3:40,odO1_2:45,odO2:30,rbSeenNPC:15,taintXa:35,taintFeelDiv:5,matInspect:6,matSearch:5}/* taint family (review/poison-road-r2-rv): xạ hương miscarriage roll on a held item, her "khó chịu" sense = Nhìn/taintFeelDiv, mưu kế × matInspect / matSearch on the inspect / search trace */,
  j92:{rbWdRemark:30},
  jact:{odO:35},
  jeitem:{rbEitReWk:100},
