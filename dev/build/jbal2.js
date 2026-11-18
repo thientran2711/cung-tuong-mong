@@ -646,12 +646,13 @@ Object.assign(BAL,{ag:{on:1,
     ch      her weight in his night pool (the terms of a consort's nightCh: regard / sung + Sắc / sac, cap; bot-tuned so maid nights ≈ the old
             eye-roll rises); only maids he MET (S.emp.met)
     night   a maid's night: his regard + b + q / 2 (q = Sắc / 20 + luck, rivalNight's own formula); rise = her Sủng as a consort = b + regard / d
-            (srvRise's own conversion: was 15 + nt / 5)
+            (srvRise's own conversion: was 15 + nt / 5); ONE promotion rule riseCore (jagmaid) for her and an NPC maid: + Danh danh, Bạc bac
+            (were typed 5 / 20 in srvRise, NPC maids got none), old master's jealousy ghen = [loyal, turned] (were typed 5 / 25 in srvRise, NPC masters got none)
     send    the consort's "Tiến cử <maid> hầu thay" on her night: × on her need (tired / ill; × (1 + ally need) with a trusted maid) against
             keeping it (BAL.ag.routine). .05 (review ag3-r1, bot 2 yr × 2 seeds per life): .15 gave consort life ~1.5 and maid life ~3.5 maid rises / yr (Tiến cử on ill nights; a seat is always free, so every send rises) vs ~0.6 / yr on main; .05 → consort life 0.5, maid life 1.5 (her NPC consorts are ill on 15–18 % of their nights there vs ~5 %: a one-world gap left to Foreman C)
     decline the player maid begs off his summons: his regard lost */
  maid:{st:{sac:[20,60],tai:[0,30]},tea:{b:25,sac:2.5,tai:10,nt:5,g:8,gs:20,fail:1},jeal:{b:30,d:3},decay:2,ch:{sung:2,sac:8,cap:70},
-  night:{b:2},rise:{b:15,d:5},send:.05,decline:10}}});
+  night:{b:2},rise:{b:15,d:5,danh:5,bac:20,ghen:[5,25]},send:.05,decline:10}}});
 /* BAL.ag.staff — AG-ALL part B (jagstaff.js): maids and eunuchs as agents on the player maid's act table (j42 SRVA)
    st       a staff's Đức / Tâm cơ / Danh / Sức / Bạc drawn once (lazy; Sắc / Tài: BAL.ag.maid.st) [lo, hi]
    goal     what she aims at: Chủ tin, Sức, Bạc, Sắc, Tài, Đức, friends (thiện cảm ≥ SRVA.ask.af)
@@ -1344,3 +1345,12 @@ Object.assign(BAL,{ptime:{on:1,kinds:{
  errRefuse:3,       /* «Việc chủ sai» (a harmless errand): Từ chối = Chủ tin −errRefuse (no one to tell on: 3 answers) */
  errHalfTin:1       /* «Việc chủ sai»: Giúp qua loa = the same công lao, done sloppily: Chủ tin −errHalfTin, n − 1 khắc */
 }});
+/* ROLE PARITY part 2 (owner OD 18/11 ~21:30Z; law 1 two-way + law 4 one core): the NPC side of her buttons that had none (jagacts4 cx4:*).
+   Costs / odds / gains are the player's own rows (BAL.btn.kidCare/kidGuard + BAL.bacFee, BAL.cyc, BAL.ration, IROUTE in j83, BAL.odb.j22);
+   here only the WORTH of each deed to an NPC (g = needs it serves, as BAL.ag.par3) and its gates.
+   kidGuard.host = hostility of some consort toward her before she pays for a guard; ill = Đồ cấm routes: malice = the character gate of the
+   old monthly road (now a choice), keep = bạc she keeps after paying, w = how much she wants each poison; rouge.g = worth of a missing box;
+   man = the forbidden road with a man: sungBelow = a neglected consort (the old affair start rule), cutRisk = lộRisk at which «Cắt đứt» serves her safety. */
+BAL.ag.par4={on:1,kidCare:{g:{"kid":3}},kidGuard:{host:40,g:{"safe":2,"kid":1}},cyc:{g:{"safe":3,"kid":2}},
+ rouge:{g:{"sung":1,"danh":1},steal:{g:{"sung":1,"spite":1}}},ill:{malice:60,keep:20,w:{hacdinh:6,xahuong:5,botngua:4},g:{"spite":4}},
+ man:{sungBelow:30,cutRisk:50,g:{hail:{"sung":.5},flirt:{"sung":1.5},token:{"sung":2},tryst:{"sung":3,"rest":1},cut:{"safe":3}}}};

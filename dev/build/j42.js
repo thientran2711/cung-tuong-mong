@@ -422,9 +422,9 @@ PEND.cnvFest=pp=>{if(!isSrv())return null;const m=srvM();
  return{t:`<p>${pp.m===1?"Yến tiệc đầu xuân ở Thái Hòa điện":"Tiệc Thất tịch bên hồ sen"}. Ngươi theo hầu ${m?m.name:"chủ"}.</p>`,who:pMe(),o:cnvPend(S,cnvFestOpts(S,m))}};
 
 /* ---------- rising: she joins the consort game ---------- */
-function srvRise(why){if(!S||(S.age||0)<18)return;const m=srvM();const tin=S.tin;S.srv.risen=1;S.srv.wasMis=m?m.id:null;S.srv.sent=null;S.rank=0;S.sung=15+Math.round(S.nt/5);S.lastPromo=S.turn;apply({danh:5,bac:20});
+function srvRise(why){if(!S||(S.age||0)<18)return;const m=srvM();const tin=S.tin;S.srv.risen=1;S.srv.wasMis=m?m.id:null;S.srv.sent=null;/* ROLE PARITY: ONE promotion rule for her and an NPC maid (jagmaid riseCore: Sủng, Danh, Bạc, old master) */S.lastPromo=S.turn;const loyR=typeof riseCore==="function"?riseCore(S,S,m,tin):null;if(loyR==null){S.rank=0;S.sung=15+Math.round(S.nt/5);apply({danh:5,bac:20})}
  S.maid=newMaid(pick(MAIDS),50);S.staff=[];try{fillStaff(S,true)}catch(e){}
- if(m&&m.alive){relAdd(S,m,tin>=60?BAL.eff.j42.srvRise[0]:BAL.eff.j42.srvRise[1]);ghenUp(m,tin>=60?5:25,"thấy cung nữ cũ của mình được nâng lên làm phi tần",S)}
+ if(loyR==null&&m&&m.alive){relAdd(S,m,tin>=60?BAL.eff.j42.srvRise[0]:BAL.eff.j42.srvRise[1]);ghenUp(m,tin>=60?5:25,"thấy cung nữ cũ của mình được nâng lên làm phi tần",S)}
  try{palFix()}catch(e){}S.place="home";S.visit={k:"home",people:homePeople(),talked:false,tk:{}};tab="act";
  log(`<b class="g">${why}: ngươi được phong ${RANKS[0].n}.</b>`);
  Q.push({t:"Thánh chỉ",cls:"end",who:pEmp(),h:`<p>${why}. Thánh chỉ: cung nữ ${S.name} được phong <b>${RANKS[0].n}</b>, ở ${palName("home")}.</p><p>${m?`${m.name} ${tin>=60?"vẫn coi ngươi như người nhà.":"nhìn ngươi bằng ánh mắt lạnh như băng."}`:""}</p><p class="past">Từ nay ngươi theo luật của phi tần: Sủng, thị tẩm, phẩm vị.</p>`,btn:"Tạ ơn"});

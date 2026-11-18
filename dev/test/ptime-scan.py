@@ -108,6 +108,7 @@ NPC = [  # (call site file, regex of the site, how it is wired, proof in jptime)
  ('jagacts2.js', r'"cx2:plantSrv"', 'NPC plants a servant (PT_NPC bribe)', r'PT_NPC\["cx2:plantSrv"\]'),
  ('jagacts2.js', r'"cx2:maidTalk"', 'NPC talks with her maid: locked while the maid is away (§18 maid lock)', r'function ptMaidOut'),
  ('j8.js', r'function sendMaid', 'NPC sends her maid to the Emperor: locked while away (§18)', r'sendMaid=function\(a\)\{if\(ptMaidOut'),
+ ('jagacts4.js', r'illBuy\(v,r,k\)', 'NPC sends her maid out by the Thần Vũ gate (cx4 ill route): away n, known at due (§20)', r'ptReg\("npcBuy"'),
  ('j8.js', r'PEND\.giftin|"giftin"', 'NPC gift carried by her servant (§16)', r'd\.pid==="giftin"'),
 ]
 print('\n## B. NPC senders (two-way)\n\n| site | how | class |\n|---|---|---|')

@@ -398,3 +398,9 @@ ptReg("bribe",a=>{const v=RV(a.a.v);const s=ptPerson(a.a);const nm=s?s.name:"Ng�
 /* two-way of §19: an NPC planting her servant in another palace (AG cx2:plantSrv) sends her the same way (kind bribe) */
 PT_NPC["cx2:plantSrv"]={kind:"bribe",who:v=>{let s=null;try{s=bestSent(v)}catch(e){}return s?{id:ptPid(s,v),nm:s.name}:null},lbl:t=>`sang cung ${t===S?"ngươi":t&&t.name?t.name:""} làm tai mắt`.trim()};
 try{ptNpcWire()}catch(e){ptErr("npcWire3",e)}
+/* ---- 20. TWO-WAY of §9 (role-parity cx4 ill route, jagacts4 p4IllCard → illBuy(v,"maid",k)): an NPC's trusted maid sent out by the Thần Vũ gate is
+   away n khắc like hers (ledger, locked); caught or not is known at the due khắc with illBuy's own odds and bạc. ---- */
+(function(){try{if(typeof illBuy!=="function")return;const ib1=illBuy;illBuy=function(p,r,k){if(!p||p===S||r!=="maid"||!ptOn()||PT.landing||!p.maid||p.id==null)return ib1.apply(this,arguments);
+  if(ptMaidOut(p))return"";ptSend({who:"mm:"+p.id,nm:p.maid.name,kind:"buy",by:"v"+p.id,byNm:p.name,place:typeof J95OUT_!=="undefined"?J95OUT_:null,a:{run:"npcBuy",v:p.id,k},lbl:`lén ra cửa Thần Vũ mua ${itm(k).n}`});PT.stat.npc++;return""}}catch(e){ptErr("npc illBuy wire",e)}})();
+ptReg("npcBuy",a=>{const v=RV(a.a.v);if(!v||!v.alive||v.out)return null;PT.landing=1;let r="";try{r=illBuy(v,"maid",a.a.k)||""}catch(e){ptErr("npcBuy",e)}finally{PT.landing=0}
+ try{if(r)newsAdd(v,"ill",r,false)}catch(e){}return null});
