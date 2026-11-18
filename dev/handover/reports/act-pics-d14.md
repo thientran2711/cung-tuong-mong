@@ -39,3 +39,9 @@ Contact sheet: https://ctm-img.victoria-tntt.workers.dev/img/_review/act-pics-d1
 Notes: b has a banner 'KIM BẢNG ĐỀ DANH' in hanzi (exam-list theme, fits Học/Ngôn levels only); c has a hanzi plaque + book title. Wiring NOT started; waiting owner pick via Foreman C.
 
 ## Totals: 15 gens, 1200 credits. Nothing pushed to main. img/*.json untouched on CDN. ~100% art delivered for this brief / ~0% wired (by design).
+
+## LIVE (Foreman C GO, 18/11)
+Part 1 is live: 6 files copied to img/act-<key>.webp on the CDN; img/ACTS.json = live ACTS.json downloaded just before + the 6 rows, pushed alone with the guarded cdn_sync; manifest_guard --live-check PASS.
+Diff vs live: +5 new rows (Hắt nước, Hắt trà, Quạt mực, Nhờ thái giám tìm thú nuôi, Hối lộ Kính sự phòng) and ONE value changed: 'Trò chuyện với cung nữ' was '-' (no-picture marker) → 'tro-chuyen-cung-nu'. Nothing removed. This differs from the ordered "+6 rows, nothing changed": the row already existed, so the new picture needs that one value replaced.
+LAND READY 1384801f (review/act-pics-d14: ACTS.json source copy + KIT_REQUESTS entry) for MAIN. No main push.
+Parts 2 and 3 untouched, waiting kit keeper / owner pick. _review files not wiped yet.
