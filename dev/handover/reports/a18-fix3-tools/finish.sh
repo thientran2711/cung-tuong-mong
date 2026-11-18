@@ -6,9 +6,9 @@ D=$R/img/_review/consort-tiers/$c/b10; mkdir -p $D
 for t in 1 2 3 4 5 6 7 8; do for v in 0 1 2; do
   f=${c}_t${t}_v$v.png
   if [ -f $W/$c/new/t${t}_v$v.png ]; then
-     curl -sS -o $D/${c}_a18_t${t}_v${v}_prev_a18scan2.png $B/${c}_a18_t${t}_v$v.png
+     curl -sS --retry 5 --retry-all-errors -o $D/${c}_a18_t${t}_v${v}_prev_a18scan2.png $B/${c}_a18_t${t}_v$v.png
      cp $W/$c/new/t${t}_v$v.png $A/$f; cp $W/$c/new/t${t}_v$v.png $D/${c}_a18_t${t}_v$v.png
-  else [ -f $A/$f ] || curl -sS -o $A/$f $B/${c}_a18_t${t}_v$v.png; fi
+  else [ -f $A/$f ] || curl -sS --retry 5 --retry-all-errors -o $A/$f $B/${c}_a18_t${t}_v$v.png; fi
 done; done
 python3 $W/tools/sheet.py $A $W/sheets $c
 cp $W/sheets/${c}_a18_b10_sheet.jpg $D/
