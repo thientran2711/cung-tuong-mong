@@ -132,3 +132,10 @@ STILL FAILING:
 18 LAWS: L4 one core PASS (core gates); L6b each actor has a reason (npcWhy, s ≥ min) OK; L6c lost-item endings go to the ledger OK; L11 group fixes OK (jmen) but item 1 needs the whole "flat roll → npcWhy" group audited; UI laws: kit-conform PASS, no UI in this branch.
 Base note: live main is now e18697fe (+ shop-panel 5e6490b4 on top); f647c881 does not contain it. G1 #8 waits for C-AG "LIVE <sha>". The FINAL head must contain live main, and the rates/quickcheck re-run goes against that base.
 NEXT: G1 #8 fixes 1-3 and sends a new SẴN SÀNG KIỂM; the reviewer re-runs rates ×2 (same verdict both times) + quickcheck ×5. PHASE B after C-AG "LIVE <sha>".
+
+## RE-CHECK 4 on 0a6e877a (G1 #9 SẴN SÀNG KIỂM; base 45c6dbea; reviewer session_01964izEUgw5hZTBxuEguL4K, 18/11 ~21:00Z) — PHASE A PASS (rates), perf to re-measure in PHASE B
+- npc-purpose-rates ×2 (12 × 200, --base 45c6dbea, RATES_BRUNS 3): PASS / PASS, same verdict; head counts identical (0 differing keys); 0 rows hidden by the "out against every base run" rule (noise count 0); 6 rows out and kept with a reason. Hỏa hoạn lớn and 'chưa dứt' now in band.
+- Code: fireHeed / birthPlot / raid / wdDress keep base's old odds as BAL done rolls (bul.fire.heed 60, j8.birthP 15, j8.raidGo 20, wd.dressGo 30); taimat watcher falls back to her maid / servant; BAL.ha.steal.no 1.6; loTake.care 25. All values in BAL (L4). Gate: out only against every base run; road-news family per road kind (rolled at NPC creation, accepted).
+- quickcheck --runs 5 vs 45c6dbea: PASS. render 236/224 ms (+5 %), tab 360/355, **buổi 1272/1119 ms (+14 %)**, tasks>200 15/15, old save ok, core gates PASS. Buổi swings a lot from run to run (RE-CHECK 3: 987/1483 = −33 % on almost the same code), so PHASE B re-measures perf ×2 against live before the verdict.
+- NOTE (clean-up, not blocking): the gate prints stale json `why` entries no row needs any more (l:cung ngươi thăm hỏi (muốn, l:sang tặng ngươi, l:ngươi, l:thư về nhà kể khổ, l:soát, …). Drop them so a reason can't later cover a new shift.
+NEXT: PHASE B on G1 #10's merged head (add7b105 = 0a6e877a + live fa411d6f) once it posts SẴN SÀNG KIỂM.
