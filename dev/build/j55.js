@@ -106,7 +106,7 @@ function tdSoMonth(force){const T=trS();if(!force&&(S.turn-T.soT<TD.soGap||!roll
  if(T.praise)opts.push(["praise",6]);
  if(typeof kvDebate==="function"&&S.heir&&S.heir.k&&S.heir.k.alive&&typeof kvOrder==="function"&&typeof kvQueenMom==="function"&&!kvQueenMom(S.heir.v)&&kvOrder().some(x=>x.dich&&!x.k.heir&&x.k.age>=6))opts.push(["dich",3]);
  const imp=tdImpPick();if(imp)opts.push(["imp",4]);
- const ty=CLANS.filter(c=>T.H[c].pow>=65);if(ty.length&&T.tyY!==S.year&&liveRivals(true).length+1<BAL.harem.cap-1&&roomFor("consort"))opts.push(["tuyen",2]);
+ const ty=CLANS.filter(c=>T.H[c].pow>=65);if(ty.length&&T.tyY!==S.year&&liveRivals(true).length+1<(typeof CAPC==="number"?CAPC:16)-1&&roomFor("consort"))opts.push(["tuyen",2]);
  const cc=consorts().filter(p=>(p.cc||0)>=2);if(cc.length)opts.push(["cc",2]);
  const f=force&&opts.find(x=>x[0]===force);let k;if(f)k=f[0];else{if(!opts.length)return"";let r=Math.random()*opts.reduce((s,x)=>s+x[1],0),i=0;while(r>opts[i][1]&&i<opts.length-1){r-=opts[i][1];i++}k=opts[i][0]}
  T.soT=S.turn;let ev="";
@@ -118,7 +118,7 @@ function tdSoMonth(force){const T=trS();if(!force&&(S.turn-T.soT<TD.soGap||!roll
   ev=`${TDOFF[sp]} ${h.name} đứng đầu bá quan. ${r}Nhà ${sp} thế lực ${won?"+4":"-3"}. `;tdNews(`${TDOFF[sp]} ${h.name} dâng sớ xin lập đích; ${won?"Hoàng thượng nghe theo":"Hoàng thượng chưa nghe"}.`)}
  else if(k==="imp"){const [cA,t]=imp;ev=tdImpeach(cA,t)}
  else if(k==="tuyen"){const c=pick(ty);const h=T.H[c];T.tyY=S.year;const o=cl(30+(h.pow-60)+(S.emp.mood<=1?10:-10),10,85);
-  if(roll(o)&&roomFor("consort")){const n=newRival(roll(70)?0:1);Object.assign(n,drawFace());n.age=18+R(4);n.clan=c;n.dad=h.pow;rivals.push(n);try{palFix()}catch(e){}tdPowAdd(c,BAL.eff.j55.tdSoMonth_3);
+  if(roll(o)){const n=newRival(roll(70)?0:1);Object.assign(n,drawFace());n.age=18+R(4);n.clan=c;n.dad=h.pow;rivals.push(n);try{palFix()}catch(e){}tdPowAdd(c,BAL.eff.j55.tdSoMonth_3);
    ev=`<b>Sớ xin tuyển tú:</b> ${TDOFF[c]} ${h.name} xin đưa con gái trong họ vào cung; Hoàng thượng chuẩn (khả năng: ${chanceLo(o)}). ${n.name} vào cung, phong ${RANKS[n.rank].n}, người nhà ${c}. `;tdNews(`Nhà ${c} đưa ${n.name} vào cung.`)}
   else{tdPowAdd(c,BAL.eff.j55.tdSoMonth_4);ev=`<b>Sớ xin tuyển tú:</b> ${TDOFF[c]} ${h.name} xin đưa con gái trong họ vào cung; Hoàng thượng gác lại (khả năng: ${chanceLo(o)}). Nhà ${c} thế lực ${balSg(BAL.eff.j55.tdSoMonth_4)}. `;tdNews(`Nhà ${c} xin đưa người vào cung, bị gác lại.`)}}
  else if(k==="cc"){const p=pick(cc);const o=cl(25+(p.cc||0)*10-(p.tamco||0)/5,10,80);

@@ -387,7 +387,7 @@ Object.assign(BAL,{nroad:{
  men:{st:40,kidAge:15,men:{fx:{win:{loyal:3},mid:{loyal:-1},lose:{loyal:-4}},rv:{win:-2,lose:1}},court:{af:4,danh:1},
   off:{pow:{win:2,lose:-2},rv:{win:-1,lose:1},rel:3,ally:5},hz:{fx:{win:{fond:3,tal:2,hp:-2},mid:{tal:1,hp:-1},lose:{fond:-3,hp:-1}},rv:{win:-1,lose:1}},
   askTinh:30,askAf:10,askRel:25}}});
-/* seat counts per rank (review/seatcap): BAL.seatCap IS j30 SEATCAP (one object, filled from BAL.seat in jbal.js — the only place the numbers are written); lower ranks no cap.
+/* seat counts per rank (review/seatcap): BAL.seatCap IS j30 SEATCAP (one object, one place): Hoàng hậu 1, Hoàng quý phi 1, Quý phi 2, Phi 4, Tần 6; lower ranks no cap.
    Every road that sets a rank asks jseat.js seatHas / seatDown / seatUp; seatSettle is the net after every turn and on load. */
 BAL.seatCap=SEATCAP;
 /* PEOPLE LEDGER (owner core law 16/11 13:40Z: "at mandatory times (e.g. morning court) everyone required is inside"; j95 record).
