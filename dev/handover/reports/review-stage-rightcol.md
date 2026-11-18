@@ -9,3 +9,6 @@ Merged origin/main fa411d6f onto 25747b2 (conflicts only in generated index.html
 5. quickcheck PASS (open 1611 ms, old save ok, core gates PASS, render 219/240, tasks>200ms 21/22).
 Notes (non-blocking): night map tags framed = map-labels part (separate review). Legacy "Lòng" string remains only in jk3.js k3crewChip code name/comment, not player-visible in shots. Open Cung nhân with 6 on iPad scrolls inside column (by design).
 VERDICT: PASS (rightcol part) f30288a
+
+## SUPERSEDED (MAIN ROOT-55 note 20:39Z)
+Owner changed the Fold Dư đồ group layout (OD 18/11 ~21:40Z): 25747b2 / f30288a is superseded. The PASS above is VOID for landing; it only describes the old layout. Review stopped; awaiting the new sha from MAIN.
