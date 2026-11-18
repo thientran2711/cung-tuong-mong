@@ -169,6 +169,13 @@ window.feelOdPts=feelOdPts;
 /* NPC (and her ACT-table) acts: runAct names the act for odA */
 (function(){if(typeof runAct!=="function")return;const r0=runAct;runAct=function(a,t,k){const o=FEEL.cur;try{FEEL.cur={a,n:(ACT[k]||{}).n||"",k,t}}catch(e){}try{const r=r0.apply(this,arguments);try{feelActed(a,t,k)}catch(e){}return r}finally{FEEL.cur=o}}})();
 (function(){if(typeof odA!=="function")return;const o0=odA;odA=function(a,b){const r=o0.apply(this,arguments);try{const C=FEEL.cur;if(C&&C.a===a&&a){const m=feelOdPts(a,C.n);if(m){FEEL.stat.od++;FEEL.stat.odSum+=m;return Math.max(BAL.odds.lo,Math.min(BAL.odds.hi,r+m))}}}catch(e){}return r}})();
+/* her person-menu / every ACT odds (j15 menu, NPC weighing): ACT[k].o read OUTSIDE runAct had no FEEL.cur, so the odds word she SAW lacked the
+   feeling points the roll inside runAct adds (shown != rolled). ONE source: each ACT[k].o runs in the same act context as its runAct (no double:
+   inside runAct FEEL.cur is already set and is left as is). feelWrapActs is idempotent (ACT entries added later are wrapped at start). */
+function feelWrapActs(){if(typeof ACT!=="object"||!ACT)return;for(const k in ACT){const A=ACT[k];if(!A||A.__feelO)continue;const d=Object.getOwnPropertyDescriptor(A,"o");if(!d||typeof d.value!=="function")continue;
+ const o0=d.value;A.o=function(a,t){if(FEEL.cur||!a)return o0.apply(this,arguments);const c0=FEEL.cur;try{FEEL.cur={a,n:A.n||"",k,t}}catch(e){}try{return o0.apply(this,arguments)}finally{FEEL.cur=c0}};A.__feelO=1}}
+window.feelWrapActs=feelWrapActs;feelWrapActs();
+(function(){if(typeof start!=="function")return;const s0=start;start=function(){const r=s0.apply(this,arguments);try{feelWrapActs()}catch(e){}return r}})();
 /* her deck cards: the static odds a.o carry the feeling points (shown = rolled; re-done when her feelings change) */
 function feelDeck(){if(!feelOn()||!Array.isArray(typeof deck!=="undefined"?deck:null))return;for(const a of deck){if(!a||a.o==null||a.o>=100||a.exam)continue;const m=feelOdPts(S,a.n);const f=a.__fo||0;if(m===f)continue;
  a.o=Math.max(BAL.odds.lo,Math.min(BAL.odds.hi,a.o-f+m));a.__fo=m}}
