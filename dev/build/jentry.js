@@ -42,7 +42,7 @@ function entSkipRaw(){try{return Math.round(kg82NpcMean(entArtLv(entKind(entBest
 function entFx(t){const f=BAL.entry.fx[t];if(f&&Object.keys(f).length)try{apply(f)}catch(e){console.error(e)}}
 /* who judges, what the top result is called, per road */
 function entCtx(o){const road=entRoad();const k=S.origin&&S.origin.k;const top=(S.origin&&S.origin.r)||0;const srv=k==="cnv";
- if(o&&o.phuc)return{road:"",head:"Phúc tuyển",judge:"Ma ma, nữ quan Trữ Tú cung",also:"cộng vào Điện tuyển cùng Sắc, Tài, Đức, Danh"};
+ if(o&&o.phuc)return{road:"",head:"Phúc tuyển",judge:"Ma ma, nữ quan Nội vụ phủ",also:"cộng vào Điện tuyển cùng Sắc, Tài, Đức, Danh"};
  if(srv)return{road,head:"Tuyển cung nữ",judge:"Ma ma Nội vụ phủ",also:`Sắc, Đức${road==="dan"?", khéo tay và lễ nghi học ở nhà, tiếng trong xóm, lời lý trưởng":""}`,topN:"phi tần bậc cao",srv:1};
  if(road==="nc")return{road,head:"Lễ ra mắt",judge:"Hoàng thượng, Thái hậu, bá quan",also:"Sắc, Tài, Đức, lễ nghi Đại Hy, lòng Thái hậu, lời sứ thần",topN:RANKS[top].n};
  return{road,head:"Tuyển chọn trước ngày phong",judge:"Hoàng thượng, Thái hậu",also:`Sắc, Tài, Đức, tài nghệ${(S.th||0)>=20?", lòng Thái hậu":""}`,topN:RANKS[top].n,flat:top<=0}}
