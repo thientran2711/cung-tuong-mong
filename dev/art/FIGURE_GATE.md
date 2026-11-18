@@ -109,3 +109,4 @@ REDRAW RULE (OWNER 18/11 ~22:02Z, verbatim): "Bây giờ tao nói rồi, bất k
 REPLY NUMBERING (owner ~22:00Z): every Foreman C reply to the owner starts with "Lượt N" (Lượt 1 = 18/11 ~22:00Z).
 
 OWNER 18/11 ~22:10Z (verbatim): "Ok, tiến hành vẽ cách B cho 8 bậc luôn đi. Ổn rồi đó. Khoan, chưa. Bậc 4, bậc 5 ok. Nhưng mà bậc 6 á, nó chưa có đủ cái độ xa hoa. ... thêm thêm một chút xíu xa hoa vô đó đi, một chút xíu thôi, tiết chế lại nha, chứ đừng có làm quá cho nó đeo một đống ngọc lên người đi." → style B for t1–t5 APPROVED (c06/c25 samples); t6 gets one restrained luxury sentence + re-sample (W79); then build.py --low extended to c01–c32 and mass t1–t6 × v0/v1/v2 × 4 ages.
+OWNER 18/11 ~22:12Z (verbatim): "Nên quý phi á, bây giờ nhầy lên quý phi á, cho nó một chút xíu vàng của hoàng gia vô, thiệt là ít ít hơn hoàng quý phi nhiều." → t6 Quý phi gets a small touch of C2 royal yellow, much less than t7 (W79 sample).
