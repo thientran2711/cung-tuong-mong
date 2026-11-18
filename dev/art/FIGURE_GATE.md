@@ -35,7 +35,8 @@ Ranks: t1 Đáp ứng, t2 Thường tại, t3 Quý nhân, t4 Tần, t5 Phi, t6 Q
 1. Embroidery = real silk embroidery: stitched INTO the cloth, follows folds and light, never pasted/printed/glossy/raised sticker look. "Thêu" means the stitching technique, not "sparse": high ranks are RICH and luxurious, each rank richer than the rank below.
 2. Fabric/rendering like m09 (one fabric reference only = m09). A little voile is fine if it looks beautiful.
 3. Each person: every rank a DIFFERENT colour AND design from her previous rank; nobody looks like anyone else (own colour line). t7 = own colour + clear imperial yellow; t8 = more yellow MIXED with other colours.
-4. Consort sleeves/hem must not read as a maid's. Đáp ứng/Thường tại may be shorter; from Tần up the outer robe reaches the floor; no trains; Hoàng hậu not bulky. Feet/slippers visible.
+4. SLIM ≠ PLAIN: a slim high-rank robe must stay RICH and luxurious (layers, borders, dense stitched embroidery); a bare column robe FAILS (owner rejected Nữ đế r9 18/11 ~04:27Z, verbatim: "Mày vẽ hình nữ đế b vậy mà mày đưa tao được hả"). Never send a weak alternative.
+5. Consort sleeves/hem must not read as a maid's. Đáp ứng/Thường tại may be shorter; from Tần up the outer robe reaches the floor; no trains; Hoàng hậu not bulky. Feet/slippers visible.
 5. Collars: crossed collar (giao lĩnh) unless the live original says otherwise.
 
 ## D. FACE / POSE / STYLE
