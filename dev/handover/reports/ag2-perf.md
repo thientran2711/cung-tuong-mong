@@ -91,6 +91,16 @@ quickcheck's "live" 94a93759 was this clone's stale origin/main (2026-11-18 03:3
 | (set B) base 02466132 vs its live | – | +84 % | | | |
 Conclusion: the per-khắc gap to live is the AG-ALL-2 feature itself (NPCs acting by the same rules as her: deeds land per khắc), which live does not have; A saved time only by dropping deeds. With every deed kept, review/ag2-perf is −29 % per khắc vs 02466132 (F1/F2/B) but +41 % vs live. Options for MAIN: (1) ship cap 0 (100 % deeds, +41 % khắc vs live); (2) cap 8 consorts (−17 % deeds, +26 %); (3) a new perf order on the cost of a landing deed inside spend(1) (profile cap 0 vs f60b4024).
 
+### MAIN ROOT-52 decision applied (C-AG #12 13:52Z): split fails the gate (it IS cap 0: +41 % in set C) → SHIP CAP 0 (all deeds); split tuning = follow-up job.
+Mode shipped on review/ag2-perf ece17b1b: BAL.ag.day.redecideScope "consort", redecideCap 0 (A off, every consort + servant picks every buổi).
+Set D, same base as the lander: live f60b4024 vs ag-all-2-land 84bd47c4 + review/ag2-perf ece17b1b merged locally (only index.html/sw.js conflicted, generated; not pushed — the lander lands it), 4x CPU spend(1), 40 buổi × seeds 1-3 × 3 rounds alternating:
+| build | khắc mean | khắc median | buổi mean | buổi median |
+|---|---|---|---|---|
+| live f60b4024 | 5.61 (runs 2.7…9.1) | 1.32 | 123.9 | 45.4 |
+| 84bd47c4 + ag2-perf | 5.14 (**−8 %**) | 2.44 (+85 %) | 165.6 (+34 %) | 77.1 (+70 %) |
+Merged head deeds seed 1: 661 (base-family 654) — merge keeps deeds.
+The "live got faster" puzzle = measurement noise on this shared box, not a live change: live f60b4024 per-khắc MEAN was 3.28 in set C and 5.61 in set D (same sha, same probe, 9 runs each); the mean is driven by rare 50 ms spikes. The MEDIAN per khắc is stable across all four sets: live 1.03-1.32 ms, ag2-perf 1.8-2.4 ms (≈ +0.9 ms ≈ +80 %), i.e. the AG-ALL-2 deeds cost about 1 ms per khắc at 4x CPU. 94a93759 (set B) was this clone's stale origin/main (03:37Z), not a live MAIN used; ignore it. Reviewer: judge on medians or many alternating runs; one set of 9 means can swing ±40 %.
+
 ### Handover
 Depth 8: no children. Scratch (container only): /home/user/wt/ag2out (bench*.sh/log, deeds json). Worktrees ag2p2 (branch), ag2base (02466132), ag2live (12a1e4be), ag2live2 (94a93759), ag2live3 (f60b4024).
 ~83% xong / ~62% chơi được
