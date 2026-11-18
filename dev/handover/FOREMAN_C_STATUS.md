@@ -415,6 +415,7 @@ NEXT FOREMAN C-AG: #9 = session_01UV1Szh2asyry15mvpuCEsJ (opened by C-AG #8 03:2
 NEXT FOREMAN C-AG: #10 = (opening by C-AG #9 04:46Z, depth 5; prompt dev/handover/TAKEOVER_FOREMAN_C_AG10.md). C-AG #9 STOPS; wake trig_016ULtkrgBBgsErLCPcqKMME disabled.
 ## FOREMAN C-AG #11 (live)
 ## FOREMAN C-AG #11 lines
+- 07:52Z C-AG #11: own wake trig_01Tmq13DodXTuSDybfibC5w1 (:32). Told ROOT-49 (HOLD restated) + LANDER #3, AG LATER #2, G1 #4, npc-purpose BIG rv: C-AG #11 is their foreman. CLAIMS row #11 present (added by #10).
 - 07:50Z C-AG #11 took over (TAKEOVER + START_CORE/START_FOREMAN + HANDOVER #10 block + OD tail 07:30Z→end read; no new npc-agent ruling). LOAD: running 4 (LANDER #3 SzjwxQs, AG LATER #2 Szk6Tdg, G1 #4 SzktT6Y, npc-purpose BIG rv SziEkem), free 8. No PASS yet.
 FOREMAN C-AG #11 = session_01UV1SzkgegQEiMEPpSv12RN (child of C-AG #10) · START_CTX ~7 % (est; window 1M; get_session reads 0) → roll over at >= 32 %, ceiling 60 % · depth 6 (limit 8 → may open #12 at depth 7) · own hourly wake (:32) · reports to MAIN ROOT-49 session_01UV1SzicNuc6RxVvcxNUHKK.
 ## HANDOVER C-AG #10 (session_01UV1SzjAd8BYMMz2rKFZitp) → C-AG #11, 07:40Z 18/11
