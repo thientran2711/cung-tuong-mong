@@ -109,6 +109,11 @@ async function weekBoth(A,B,w){const n=await A.p.evaluate(()=>typeof B4N==='numb
  const look=async(o,n)=>{await clear(o);await ev(o,()=>{const f=rivals.find(v=>v.coop);tab='rv';PG.rv=rivals.indexOf(f);render()});await sleep(1500);await shot(o,n)};
  await look(A,'07-friend-look');await look(B,'07-friend-look');
  await sit(A,{score:90,look:"dep"});await sit(B,{score:55,look:null});await same('A tuyệt · B vừa');
+ /* npc-chain-land #3 root: a pos relay lost on a socket that is down / reconnecting (COOP.send → false) is said again on the next render
+    (posKey kept only once sent), so the friend never keeps an old look */
+ const lost=await ev(B,()=>{const s0=COOP.send;let n=0;COOP.send=function(m){if(m&&m.t==="pos"&&!n){n++;return Promise.resolve(false)}return s0.apply(this,arguments)};
+  try{S.toilette=Object.assign({},S.toilette,{score:80,look:null});render()}finally{setTimeout(()=>{COOP.send=s0},50)}return n});
+ await sleep(400);await ev(B,()=>{render();return 1});await same('B\'s pos lost once, said again');ok(lost===1,'the lost pos send was hit (test hook)',lost);
  /* A puts on another dress (worn set wd): B's dress verdict for A follows */
  const wdA=await ev(A,()=>{const w=wdOf(S);const L=Object.keys(WD_ITEMS||{}).filter(k=>WD_ITEMS[k].sl==="y"&&(!w.y||w.y.k!==k));const k=L[L.length-1];if(k)w.y={k,from:"test"};render();return k||""});
  if(wdA){await same('A in another dress ('+wdA+')');let wa,wb;for(let i=0;i<30;i++){wa=await ev(A,()=>JSON.stringify(S.wd));wb=await ev(B,()=>JSON.stringify((rivals.find(v=>v.coop)||{}).wd));if(wa===wb)break;await sleep(300)}await same('A in another dress, relayed');ok(wa===wb,'B holds A\'s worn clothes (wd relay)',[wa,wb])}else ok(false,'no other dress to try');
