@@ -18,8 +18,19 @@ for i in range(1,33):
                 if "phoenix" in s.replace(NOPH,""): err.append(f"{c} t{t} {v} {a}: phoenix outside the 'No phoenix' clause")
                 if NOPH not in s: err.append(f"{c} t{t} {v} {a}: 'No phoenix' clause missing")
                 if t<=3 and "cloud collar" in s: err.append(f"{c} t{t} {v} {a}: cloud collar in t1-t3")
-                if t==6 and v!="v1" and "SMALL touch of royal yellow" not in s: err.append(f"{c} t6 {v} {a}: royal-yellow sentence missing")
+                if v!="v0":
+                    s0=s; s=s.replace(b.AGE_TXT[a],"")   # age phrase (a51/a65) mentions royal yellow generically; not the colour slot
+                    if t<=5 and re.search(r"royal|yellow",s): err.append(f"{c} t{t} {v} {a}: royal/yellow in t1-t5 v1/v2")
+                    if t==6:
+                        k=s.find("; plus a SMALL touch of royal yellow only"); e=s.find("COLOUR RULE:",k)
+                        if k<0 or e<0 or s.count("SMALL touch of royal yellow")!=1: err.append(f"{c} t6 {v} {a}: small-touch clause missing/duplicated")
+                        elif re.search(r"royal|yellow",s[:k]+s[e:]): err.append(f"{c} t6 {v} {a}: yellow beyond the single small-touch clause")
+                    if (b.LOWV1 if v=="v1" else b.LOWV2)[c][t][1] not in s: err.append(f"{c} t{t} {v} {a}: LOWV hex missing in prompt")
+                    s=s0
+                if t==6 and "SMALL touch of royal yellow" not in s: err.append(f"{c} t6 {v} {a}: royal-yellow sentence missing")
                 if t==6 and "a little more luxury" not in s: err.append(f"{c} t6 {v} {a}: luxury sentence missing")
+for T_ in (b.LOWV1,b.LOWV2):
+    if sorted(T_)!=[f"c{i:02d}" for i in range(1,33)] or any(sorted(T_[c])!=[1,2,3,4,5,6] for c in T_): err.append("LOWV table does not cover 32x6")
 b.AGE="a18"
 G=os.path.join(H,"golden_low")
 for i in range(1,33):
