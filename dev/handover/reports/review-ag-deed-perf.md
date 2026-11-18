@@ -1,7 +1,7 @@
 # REVIEW ag-deed-perf (opus reviewer, child of C-AG #14 → now C-AG #15 session_01Rc5AsKLUrafEXHt5QpbRC2), 18/11 ~20:30Z
 PRIORITY #1 CHECK: OD L1637 (ag2-perf) | main 13bb8c88 has no ag-deed-perf | review/ag-deed-perf 9e0e1928 (AG-DEED-PERF #2) reused, merged | reports/ag2-perf.md § AG-DEED-PERF + #2 read | claims: AG-DEED-PERF #2 row. START_CTX ~4 %.
 
-## VERDICT: PASS c67d248d (review/ag-deed-perf-r6; FF over live main 13bb8c88) — coop-e2e BLOCKED in env (accepted by MAIN ROOT-54 for this perf-only branch)
+## VERDICT: PASS fa411d6f (review/ag-deed-perf-r6; FF over live main 93660286; was c67d248d over 13bb8c88) — coop-e2e BLOCKED in env (accepted by MAIN ROOT-54 for this perf-only branch)
 
 Head c67d248d = 9e0e1928 + merge of live 13bb8c88 (shop-panel r3). Only index.html / sw.js conflicted → rebuilt with dev/site/build_site.sh; the CDN host IS reachable in this reviewer container, so the build is the normal full build (assets.json unchanged, sw.js precache list from the live CDN index).
 
@@ -33,3 +33,11 @@ Law 4 (one core): PASS (no number added). Laws 7/9–12 (wording/kit/UI): no pla
 ## Note for the lander
 fullbody-frame-s5 af700c81 (LAND READY from 94d11623) may land first; if main moves, re-merge (only index.html / sw.js expected) and re-run the seeded diff (run BOTH builds with the branch's dev/test/ag2perf-diff.js — main's copy ignores K=).
 Scratch (container only): /home/user/wt/rvout (diff json, bench logs, suite logs).
+
+## Re-merge 18/11 ~20:50Z (C-AG #15 order: live moved to 93660286 kit-subtabs-overflow, CSS-only)
+fa411d6f = c67d248d + merge 93660286; index.html / sw.js conflicted only → rebuilt (commit message says "only sw.js": index.html also, both rebuilt). Code diff vs live unchanged (jagday L2 + jplst L1 + 2 test tools).
+| gate | result |
+|---|---|
+| seeded diff K=3 seeds 1/2/3 × 160 vs 93660286 (branch script, both builds) | 0 / 0 / 0, RNG 56153/60237/55021 both, deeds 491/543/448 |
+| quickcheck --cpu 4 --runs 3 | PASS · core gates PASS (one-core, rules-one-source, G3 kit-conform, hooks 5 incl. G4 manifest-guard + coop-one-world) · time-spill PASS · old save ok · render 235/254 · tab 396/418 · buổi 1253/1300 |
+Timing + 12 ag suites not re-run (CSS-only main change does not touch the sim path).
