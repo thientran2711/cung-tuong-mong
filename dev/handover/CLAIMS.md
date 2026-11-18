@@ -10,3 +10,4 @@ poison-road-r2-rv | review/poison-road-r2-rv | session_01964izEFTD1Fs4DqpreEzX8 
 | E9r2 re-review questline-q3 18f638ed (opus BIG) | review/questline-q3 | E ROOT #3 | session_01DgYSWpR9QcYpQS62jgFNzt | RUNNING | 18/11 10:35Z |
 | look-fx-wire #10 r11 ink family fix (opus; successor of #9, handover 3d98ea23) | review/look-fx-wire-r11 | MAIN ROOT-51 | session_01UV1SziPxXf3Q5rnjZnnNVU | RUNNING | 18/11 10:29Z |
 | E1b GRAND ENDINGS ENGINE steps 2–5 (opus; successor of E1; report reports/grand-endings-engine.md) | review/grand-endings-engine | E ROOT #3 | session_01DgYSWm7nnt9krNfbr1w92u | READY TO CHECK 2ae4715 | 18/11 10:40Z |
+| E1r review grand-endings-engine 2ae4715 (opus BIG) | review/grand-endings-engine | E ROOT #3 | session_01DgYSWovXDKzaubrVVDf2g5 | RUNNING | 18/11 10:37Z |
