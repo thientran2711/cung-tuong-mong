@@ -4024,7 +4024,7 @@ legends), buttons `.kbtn` / `.kbtn.alt`. No private frame, no new art.
 
 
 ## 77. kitStageRail · THE stage icon rail (owner 16/11, shot 1b571e3a; review/goal-strip-fix) — `dev/build/jrail.js` (after jgoal, before j84)
-- `dock:true` (stage-here r3, ROOT-57): on a game screen whose stage is hidden (Fold panel tab) an item flagged dock stands in the fixed corner dock above the tab bar (the same dock the `onTitle` status icons use). Used by the alert items «!» (closing §77.2, tin báo §42.2).
+- `dock:true` (stage-here r3, ROOT-57/58): on a game screen whose stage is hidden (Fold panel tab) the dock items (alert «!»: closing §77.2, tin báo §42.2) and the `onTitle` status icons stand in a FREE SLOT OF THE FIXED TOP BAR (`header.hud`, class `.krail.khud`, compact 32 px buttons, column or row, found by `hudSlot` against every header element) — never over scrolling content (cards, portraits, people) at any scroll position. No free slot in the top bar → the old corner dock above the tab bar. Title / loading screen: corner dock as before. Test: `dev/test/stage-here.js` fault `rail-cover` (every scroller stepped top→bottom, boxes clipped to what is on screen).
 ONE vertical column of small SQUARE kit icon buttons (rounded corners 8 px, the same corner as the kit ✕ `.kit-x`) at the LEFT edge of every stage (her room, every place, co-op), under the scene title
 (`#sc-t`), never over a face (left gutter only: 44 px buttons = the minimum tap target, on every screen height, 6 px apart). Kit look: card paper,
 gold hairline, inner hair ring, soft shadow, painted icon; a kit seal-red dot (the only round part: it is a dot, not a button) = something new.

@@ -20,6 +20,15 @@ const val=(f,d)=>{try{return typeof f==="function"?f():(f==null?d:f)}catch(e){re
 function place(el,st){try{const t=st.querySelector("#sc-t");const R0=st.getBoundingClientRect();let top=8;
   if(t&&t.offsetParent){const q=t.getBoundingClientRect();if(q.bottom>R0.top&&q.top<R0.top+80)top=Math.max(top,Math.round(q.bottom-R0.top+6))}
   el.style.top=top+"px"}catch(e){}}
+function hudSlot(el,hud){try{if(getComputedStyle(hud).position==="static")hud.style.position="relative";el.style.bottom="";el.style.left="0px";el.style.top="0px";
+ for(const dir of ["column","row"]){el.style.flexDirection=dir;if(hudFit(el,hud))return true}return false}catch(e){return false}}
+function hudFit(el,hud){try{
+ const H=hud.getBoundingClientRect(),s=H.width/(hud.offsetWidth||H.width)||1,E=el.getBoundingClientRect(),w=E.width,h=E.height;if(!w||!h)return false;
+ const R=[];for(const e of hud.querySelectorAll("*")){if(el.contains(e))continue;if(e.children.length&&!e.matches("button,img,svg,canvas,[role=button]"))continue;if(!e.getClientRects().length)continue;
+  const r=e.getBoundingClientRect();if(r.width<2||r.height<2)continue;const cs=getComputedStyle(e);if(cs.visibility==="hidden"||+cs.opacity===0)continue;R.push(r)}
+ const free=(x,y)=>R.every(r=>x+w+3<=r.left||x-3>=r.right||y+h+3<=r.top||y-3>=r.bottom);
+ for(let y=H.top+3;y+h<=H.bottom-3;y+=2)for(let x=H.right-4-w;x>=H.left+4;x-=2)if(free(x,y)){el.style.left=((x-H.left)/s-hud.clientLeft).toFixed(1)+"px";el.style.top=((y-H.top)/s-hud.clientTop).toFixed(1)+"px";return true}
+ return false}catch(e){return false}}
 function paint(){try{const st=document.getElementById("stage");let el=document.getElementById("krail");
  const tt=document.getElementById("title");const onTitle=!!(tt&&!tt.hidden&&tt.getClientRects().length);
  /* on a portrait tab that hides the stage (its height is 0) the stage rail cannot be seen: only the status icons stay, in the fixed corner dock above the tab bar */
@@ -33,9 +42,12 @@ function paint(){try{const st=document.getElementById("stage");let el=document.g
  const L=R.filter(x=>(live||x.onTitle||(x.dock&&dockOn))&&val(x.when,true));if(!L.length){if(el)el.remove();return}
  if(!el){el=document.createElement("nav");el.id="krail";el.className="krail";el.setAttribute("aria-label","Lối tắt")}
  const h=L.map(x=>{if(x.chip)return `<div class="krailc" data-rail="${x.id}">${val(x.chip,"")}</div>`;const b=val(x.badge,false),bz=val(x.busy,false)&&!calm,dn=val(x.done,false);if(x.label){const on=val(x.active,false);return `<button type="button" class="krailb krailt${on?" kopen":""}" data-rail="${x.id}" aria-label="${x.title}" aria-pressed="${on}" title="${x.title}"><b>${val(x.count,"")}</b><span>${x.label}</span></button>`}return `<button type="button" data-g="${String(x.title||"").trim().charAt(0)}" class="krailb${x.glyph?"":" kld"}${b?" kbadge":""}${bz?" kbusy":""}${dn?" kdone":""}${x.glyph?" kglyph":""}" data-rail="${x.id}" aria-label="${x.title}${b?" (có mới)":""}" title="${x.title}">${x.glyph?`<span class="krailg" aria-hidden="true">${val(x.glyph,"")}</span>`:`<img src="${val(x.icon,"")}" alt="" decoding="async" onload="this.parentNode.classList.remove('kld')" onerror="this.parentNode.classList.remove('kld');this.parentNode.classList.add('kerr')">`}</button>`}).join("");
- const host=live?(onMap?mvh:st):document.body;el.classList.toggle("kstdock",!live);
+ /* HEADER SLOT (stage-here r3d, ROOT-58 BACK 22:41Z): on a game screen whose stage is hidden (Fold panel tabs) the dock stands in a free slot of the
+    fixed top bar (header.hud), as a row — never over scrolling content (cards, portraits, people). No free slot → the old corner dock. */
+ const hud=!live&&dockOn?document.querySelector("header.hud"):null;const inHud=!!(hud&&hud.getClientRects().length);
+ const host=live?(onMap?mvh:st):(inHud?hud:document.body);el.classList.toggle("kstdock",!live&&!inHud);el.classList.toggle("khud",inHud);
  if(el.__h!==h){el.innerHTML=h;el.__h=h;el.querySelectorAll(".krailb.kld").forEach(b=>{const i=b.querySelector("img");if(i&&i.complete&&i.naturalWidth)b.classList.remove("kld")})}if(el.parentNode!==host)host.appendChild(el);
- if(live){place(el,onMap?mvh:st);el.style.bottom=""}else{el.style.top="";const tb=document.getElementById("tabs");const q=!onTitle&&tb&&tb.getClientRects().length?tb.getBoundingClientRect():null;el.style.bottom=q?`${Math.round(innerHeight-q.top+6)}px`:""}
+ if(live){place(el,onMap?mvh:st);el.style.bottom=""}else if(inHud){if(!hudSlot(el,hud)){el.classList.remove("khud");el.classList.add("kstdock");document.body.appendChild(el);el.style.left=el.style.top="";const tb=document.getElementById("tabs");const q=tb&&tb.getClientRects().length?tb.getBoundingClientRect():null;el.style.bottom=q?`${Math.round(innerHeight-q.top+6)}px`:""}}else{el.style.top="";const tb=document.getElementById("tabs");const q=!onTitle&&tb&&tb.getClientRects().length?tb.getBoundingClientRect():null;el.style.bottom=q?`${Math.round(innerHeight-q.top+6)}px`:""}
  /* the stage may collapse / grow a moment after a tab change: look once more when the layout has settled */
  if(!paint.__t){paint.__t=setTimeout(()=>{paint.__t=0;const s2=document.getElementById("stage"),on=!!s2&&s2.getBoundingClientRect().height>40;if(on!==stOn)paint()},450)}}catch(e){console.error("kitStageRail",e)}}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#krail [data-rail]");if(!b)return;e.stopPropagation();e.preventDefault();
@@ -55,6 +67,8 @@ add({id:"goal",order:30,icon:"img/kit/ico-goal.webp",title:"Mục tiêu chương
  onTap:()=>{S.goalSeen=gSig();if(typeof kitGoalDetail==="function")kitGoalDetail()}});
 const css=document.createElement("style");css.id="kit-rail";css.textContent=`
 .krail{position:absolute;left:8px;top:44px;z-index:7;display:flex;flex-direction:column;gap:6px;pointer-events:none}
+.krail.khud{flex-direction:row;z-index:8700;gap:4px}
+.krail.khud .krailb{width:32px;height:32px;min-width:0;min-height:0}.krail.khud .krailg{font-size:17px}
 .krailb{pointer-events:auto;position:relative;width:44px;height:44px;min-width:44px;padding:4px;margin:0;border-radius:8px;box-sizing:border-box;cursor:pointer;
  background:var(--k-card,#fffaf0);border:1px solid var(--gold,#b8892b);box-shadow:inset 0 0 0 2px var(--k-card,#fffaf0),inset 0 0 0 3px var(--k-hair,#e6d3ac),0 2px 6px #0003;display:flex;align-items:center;justify-content:center}
 .krailb img{width:100%;height:100%;object-fit:contain;display:block;pointer-events:none}

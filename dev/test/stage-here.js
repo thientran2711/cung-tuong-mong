@@ -38,13 +38,23 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
         portrait frames, card art; CARD = any action card / tappable row (whole box) */
      const hit=sel=>{let n=0;for(const e of document.querySelectorAll(sel)){if(!e.getClientRects().length||e.closest('#krail,#ktbtoast'))continue;const cs=getComputedStyle(e);if(cs.visibility==='hidden'||+cs.opacity===0)continue;const r=e.getBoundingClientRect();if(r.width<2||r.height<2)continue;if(r.left<T.right-1&&r.right>T.left+1&&r.top<T.bottom-1&&r.bottom>T.top+1)n++}return n};
      const pp=hit('#mefig,.figimg,.tok,.tag,.j59metag,.pface,.kfr,.kpor,.ksart');if(pp)f.push(pp+' person');const cc=hit('.card,.kcard,button,[role=button]');if(cc)f.push(cc+' card');return f.join(',')})(),
-     rail:[...document.querySelectorAll('#krail [data-rail]')].map(b=>b.dataset.rail).join(' '),md:!document.getElementById("modal").hidden,ttl:!document.getElementById("title").hidden}},[k,t]);
+     rail:[...document.querySelectorAll('#krail [data-rail]')].map(b=>b.dataset.rail).join(' '),
+     /* r3d (ROOT-58): the rail / dock never sits on a card, person or portrait at ANY scroll position: step every scroller top→bottom */
+     railCover:(()=>{const rail=document.getElementById('krail');if(!rail||!rail.getClientRects().length||getComputedStyle(rail).visibility==='hidden')return '';
+      const sel='.card,.kcard,.act-card,#mefig,.figimg,.tok,.tag,.j59metag,.pface,.kfr,.kpor,.ksart';
+      const sc=[document.scrollingElement,...[...document.querySelectorAll('*')].filter(e=>{const cs=getComputedStyle(e);return /(auto|scroll)/.test(cs.overflowY)&&e.scrollHeight>e.clientHeight+10&&e.getClientRects().length})];
+      /* the part of a box really on screen: clipped by every overflow ancestor (a card scrolled out of its panel is not under the top bar) */
+      const vis=e=>{const q=e.getBoundingClientRect();let L=q.left,T=q.top,R=q.right,Bo=q.bottom;for(let a=e.parentElement;a&&a!==document.body;a=a.parentElement){const cs=getComputedStyle(a);if(cs.overflowX!=='visible'||cs.overflowY!=='visible'){const c=a.getBoundingClientRect();L=Math.max(L,c.left);T=Math.max(T,c.top);R=Math.min(R,c.right);Bo=Math.min(Bo,c.bottom)}}R=Math.min(R,innerWidth);Bo=Math.min(Bo,innerHeight);return R-L>=2&&Bo-T>=2?{left:L,top:T,right:R,bottom:Bo}:null};
+      let n=0,steps=0;const test=()=>{steps++;const B=[...rail.querySelectorAll('.krailb,.krailc')].map(b=>b.getBoundingClientRect());for(const e of document.querySelectorAll(sel)){if(rail.contains(e)||e.contains(rail)||!e.getClientRects().length)continue;const r=vis(e);if(!r)continue;if(B.some(q=>q.left<r.right-1&&q.right>r.left+1&&q.top<r.bottom-1&&q.bottom>r.top+1))n++}};
+      test();for(const e of sc){const t0=e.scrollTop,mx=e.scrollHeight-e.clientHeight,st=Math.max(40,e.clientHeight*.4);for(let y=0;y<=mx+st;y+=st){e.scrollTop=Math.min(y,mx);test()}e.scrollTop=t0}
+      return n?n+' rail-over@'+steps:''})(),md:!document.getElementById("modal").hidden,ttl:!document.getElementById("title").hidden}},[k,t]);
    r.case=lab;r.want=want;
    /* faults: stage picture is not her place; room picture while away; two-page screen: a panel tab without the stage beside it; alert wrong (only where the stage is visible) */
    r.fault=[];if(!r.imgOk)r.fault.push('img');if(r.roomImg)r.fault.push('room');
    if(r.spread&&!r.maptab&&r.panelVis&&!r.stageVis)r.fault.push('nostage');
    if(r.stageVis&&!r.maptab&&r.alert!==want)r.fault.push('alert');
    if(r.cover)r.fault.push('toast-cover');
+   if(r.railCover)r.fault.push('rail-cover');
    if(r.tst==='waits'&&!/closing|tnote/.test(r.rail))r.fault.push('collapse-no-rail');/* r3: no free spot → the rail «!» carries it (stage rail, or the corner dock on a tab without a stage) *//* r2: the toast never covers a tab row, the place name or a figure name (KIT §42.2 KEEP-CLEAR) */
    if(r.fault.length)bad++;rows.push(r);
    if(out&&(t==='act'||t==='rel'))await p.screenshot({path:`${out}/${dev}-${lab}-${t}.jpg`,type:'jpeg',quality:80});
