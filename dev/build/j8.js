@@ -59,7 +59,7 @@ function conceiveCh(p=S){return cl(Math.round(lotB(p,"Con cái")+10+p.sung/4+eff
 function nightCh(p=S){if(p.preg||p.block||p.confined||p.out)return 0;const m=has("mesac")?2:1;
   let c=4+p.sung/4+effSac(p)/12*m+p.arts.vu*2*m+p.arts.y*1.5+(p.tablet?20:0)+mm()/2+(rkOf(p)>=7?5:0)+(typeof tqAf==="function"?tqAf(p)/10:0);
   c+=lotB(p,"Sủng")/2+((p.staff||[]).some(s=>s.role==="eunuch"&&srk(s)>=3)?4:0);c*=illNightF(p);if(has("chamchinh"))c*=.6;if(has("datinh"))c*=1.2;if(illOf(S.emp))c*=.6;return cl(Math.round(c/1.4),c>0?1:0,70)}
-function oSee(t=S,p){return cl(Math.round(15+eyes(t)*9+t.tamco/4+(t.maid&&t.maid.loyal>=BAL.loy.trust?10:0)+(p?(t.doctor?25:0)+(t.arts.y>=2?20:0):0)),5,95)}
+function oSee(t=S,p){return oddsCl(Math.round(15+eyes(t)*9+t.tamco/4+(t.maid&&t.maid.loyal>=BAL.loy.trust?10:0)+(p?(t.doctor?25:0)+(t.arts.y>=2?20:0):0)))}
 function oSpy(a=S){return odA(a,45+eyes(a)*6+a.tai/10+a.tamco/5-(DG()?6:0))}
 function oAlly(a,t){return odA(a,60-malOf(t)/3+(rel(a,t)>0?15:0)+a.danh/10)}
 function oFrame(a=S){return odA(a,30+eyes(a)*5+(a.thu||0)*10+a.tamco/5+(DG()?4:0))}
@@ -98,7 +98,7 @@ function fall(p,why){if(p===S){if(ACTX.a&&ACTX.a!==S)S.framedBy=key(ACTX.a);if(S
 function framed(p,why){if(ACTX.a&&ACTX.a!==p)p.framedBy=key(ACTX.a);const d=Math.round(12*(DG()?1.3:1));ap(p,{danh:-d,sung:-10});punish(p,why,2);return d}
 /* the target's people notice first: same detection for everyone */
 /* the ONE caught chance (AG-ALL r1 F2): the target's eyes minus the doer's faction help (BAL.caught); caught(), jagharm, jpoison, j63, j83 read it */
-function caughtOdds(a,t,ps){const C=BAL.caught;return cl(oSee(t,ps)-C.fac*(facN(a)-1),C.min,C.max)}
+function caughtOdds(a,t,ps){const C=BAL.caught;return oddsCl(oSee(t,ps)-C.fac*(facN(a)-1))}
 function caught(a,t,ps,desc){/* roll-side: catch (the roll is the target seeing the act: a "kèm" of every scheme, not its win) */if(!roll(caughtOdds(a,t,ps)))return"";evA(t,a,BAL.eff.j8.evCaught);relAdd(a,t,BAL.eff.j8.caught);
  if(t===S)return `${ps&&(S.doctor||S.arts.y>=2)?"Ngươi nhận ra điều lạ":"Tai mắt báo"}: ${a.name} định ${desc}. Ngươi chặn kịp và nắm ${balAb(BAL.eff.j8.evCaught)} chứng cứ. `;
  return `Người của ${t.name} phát giác ${NM(a)} định ${desc}; ${t.name} nắm ${balAb(BAL.eff.j8.evCaught)} chứng cứ của ${NM(a)}. `}
@@ -325,7 +325,7 @@ function nightGain(s){const BN=BAL.night;return{sung:BN.sung+Math.max(0,Math.rou
 /* main's nightG / nightA kept as thin reads of nightGain (one rule) */
 function nightG(s){return nightGain(s).sung}
 function nightA(s){return nightGain(s).an}
-function nx(b,note,p){const m=BAL.night.mood[S.emp.mood];const v=b+m;const w=v>=3?"Rất chắc":v>=2?"Chắc":v>=1?"Khá chắc":v>=0?"Năm ăn năm thua":"Khó";const q=p&&p.q!=null?p.q:1;
+function nx(b,note,p){const m=BAL.night.mood[S.emp.mood];const v=b+m;const VO=BAL.night.vO;const w=word(VO[cl(Math.floor(v),-1,VO.length-2)+1]);const q=p&&p.q!=null?p.q:1;
  const hi=nightGain(q+v+2),lo=nightGain(q+v-(p&&p.vp?2:0));return `${w} · thành: đêm vui, Sủng +${hi.sung}, Ân tình +${hi.an} · hỏng: đêm nhạt, Sủng +${lo.sung}, Ân tình +${lo.an}${note?" · "+note:""}${vpItems(S).length?` · kèm: đồ vượt phẩm bị thu, Danh -4 (nếu đang đeo): ${chanceW(40)}`:""}`}
 function nightFx(s){const BN=BAL.night;S.tablet=0;S.nights++;S.nightLog.push(wk());const NG=nightGain(s),g=NG.sung;apply({sung:g});S.an=cl(S.an+NG.an,0,100);ghenAll(BN.ghen,"ngươi được thị tẩm");
  if(giuBlocked(S))pushFront(mkP("giu"),"Giữ hay không giữ");else night(S);
@@ -446,7 +446,7 @@ function rivalsTurn(){const live=liveRivals(true);let ev="";
   if(v.queen&&!(window.agDOn&&agDOn())){const g=mindPickBy(others(v).filter(p=>evG(v,p)>=BAL.ag.ev.judge&&rel(v,p)<0),p=>evG(v,p)*BAL.mind.pick.j8ev.ev-rel(v,p)/BAL.mind.pick.j8ev.rel,v);if(g&&roll(35*mindW(v,"punish")))/* npc-mind: was FIRST + flat 35 */{ev+=seenNPC(v,g,judge(v,g));if(S.dead)return ev;continue}}
   const t=pickTarget(v);if(!t)continue;
   let want=((v.malice/100)*(rel(v,t)<0?1:.25)+hostility(v,t)/200)*(rkOf(t)>=rkOf(v)-1||(t===S&&v.ghen>=60)?1:.4);if(t.shield)want*=.5;
-  if(Math.random()<want*.04){ev+=seenNPC(v,t,npcAct(v,t));if(S.dead)return ev}}
+  if(roll(want*4)){ev+=seenNPC(v,t,npcAct(v,t));if(S.dead)return ev}}
  if(S.block)S.block--;
  const q=rivals[0];if(qOn()&&R(480)===0){q.alive=false;q.queen=false;ev+=`Hoàng hậu ${q.name} băng hà vì bệnh. Ngôi trung cung bỏ trống. `}
 if(queenP())S.vacSince=null;
@@ -505,10 +505,10 @@ PEND.giftin=p=>{const f=byKey(p.f),e=p.e;if(!f)return null;const it=itm(e.k),hi=
  return{who:pv(f),t:`<p>${f.name} sai người mang <b>${it.n}</b> sang tặng ngươi.</p><p class="past">${it.d}</p>`,o:[
  {n:"Nhận",fx:{},x:"cất vào rương",go:()=>S.inv.push(Object.assign({},e))},
  {n:"Trả lại quà",fx:{},x:hi?"nàng phẩm cao hơn, sẽ phật ý":"nàng hơi phật ý",go:()=>{/* the gift goes back to her (item ledger jil); co-op friend: the live path has no way back (parked, item-ledger.md) → Nội vụ phủ keeps it, never lost */if(f.coop&&typeof ilGone==="function")ilGone(S,Object.assign({},e),"kho",{own:""});else{f.inv=f.inv||[];f.inv.push(Object.assign({},e))}relAdd(S,f,hi?BAL.eff.j8.go_2[0]:BAL.eff.j8.go_2[1]);if(f.queen)apply({hh:-8})}},
- {n:"Đem đến Thái y viện xét nghiệm",fx:{bac:-10},x:`${word(cl(oSee(S,true)+25,5,95))} · thành: nếu đồ bị tẩm sẽ biết, ai gửi · hỏng: không thấy gì`,go:()=>{if(e.t&&roll(cl(oSee(S,true)+25,5,95))){evA(S,f,BAL.eff.j8.evGo);if(typeof ilGone==="function")ilGone(S,Object.assign({},e),"evid",{own:key(f)});log(`Thái y phát hiện ${it.n} của ${f.name} ${TAINT[e.t].n}. Chứng cứ ${f.name} ${balSg(BAL.eff.j8.evGo)}.`)}else{S.inv.push(Object.assign({},e));relAdd(S,f,BAL.eff.j8.go_3);log(`Thái y không thấy gì lạ ở ${it.n}.`)}}}]}};
+ {n:"Đem đến Thái y viện xét nghiệm",fx:{bac:-10},x:`${word(oddsCl(oSee(S,true)+25))} · thành: nếu đồ bị tẩm sẽ biết, ai gửi · hỏng: không thấy gì`,go:()=>{if(e.t&&roll(oddsCl(oSee(S,true)+25))){evA(S,f,BAL.eff.j8.evGo);if(typeof ilGone==="function")ilGone(S,Object.assign({},e),"evid",{own:key(f)});log(`Thái y phát hiện ${it.n} của ${f.name} ${TAINT[e.t].n}. Chứng cứ ${f.name} ${balSg(BAL.eff.j8.evGo)}.`)}else{S.inv.push(Object.assign({},e));relAdd(S,f,BAL.eff.j8.go_3);log(`Thái y không thấy gì lạ ở ${it.n}.`)}}}]}};
 /* Nghiệm độc: ONE function for her button and an NPC (AG-ALL-2e2 cx3:test) */
 function itemTest(p,ix){const T=BAL.ag.par3.test;const e=(p.inv||[])[ix];if(!e||(p.bac||0)<BAL.bacFee.itTest)return"";const it=itm(e.k);if(p===S)apply({bac:-BAL.bacFee.itTest});else ap(p,{bac:-BAL.bacFee.itTest});e.tested=1;
- if(e.t&&e.by!==key(p)&&roll(cl(oSee(p,true)+T.o,5,95))){p.inv.splice(ix,1);const by=byKey(e.by);if(by&&by!==p)/*evok: tainted by (scheme)*/evA(p,by,BAL.eff.j8.evItemAct);
+ if(e.t&&e.by!==key(p)&&roll(oddsCl(oSee(p,true)+T.o))){p.inv.splice(ix,1);const by=byKey(e.by);if(by&&by!==p)/*evok: tainted by (scheme)*/evA(p,by,BAL.eff.j8.evItemAct);
   return p===S?`Thái y phát hiện ${it.n} ${TAINT[e.t].n}${by?`; dấu vết dẫn về ${NM(by)} (chứng cứ ${balSg(BAL.eff.j8.evItemAct)})`:""}.`:`${p.name} đem ${it.n} đi nghiệm, thái y phát hiện đồ bị ${TAINT[e.t].n}`}
  return p===S?`Thái y xét ${it.n}: không thấy gì lạ.`:`${p.name} đem ${it.n} đi nghiệm độc`}
 function itemAct(a,ix){const e=S.inv[ix];if(!e||S.dead||Q.length)return;const it=itm(e.k);

@@ -59,7 +59,7 @@ agReg("consort","more",(v,N,need)=>{const O=[];const X=BAL.ag.cx;
  if((!need||need==="safe")&&(v.danh||0)>=-X.humble.c.danh){const L=others(v).filter(t=>t&&t!==v&&(t===S||t.alive)&&oan(t,v)>=X.humble.oan);if(L.length){const t=mindPickBy(L,x=>BAL.mind.pick.ag.base+oan(x,v),v);
   const u=agcU(v,N,100,{safe:X.humble.g},X.humble.c,"help");if(t&&u>0)O.push({k:"cx:humble",t,u,tag:"help",act:"sang nhún nhường",at:(kh,vv,tt)=>tt===S?"home":agAt(tt,kh)})}}
  return O});
-agRunReg("cx:portrait",(v)=>{const X=BAL.ag.cx.portrait;if(!agcCan(v,X.c))return"";agcPay(v,X.c);let aw=0;try{aw=artW2(v,"hoa")}catch(e){}const o=odA(v,X.o+aw*X.k);if(agTry(o)){ap(v,X.w);return `${v.name} vẽ chân dung dâng Thái hậu, Thái hậu rất vui`}if(agSoft(o))return agSoftTxt(v);ap(v,X.l);return `${v.name} vẽ chân dung dâng Thái hậu, Thái hậu chê không giống`});
+agRunReg("cx:portrait",(v)=>{const X=BAL.ag.cx.portrait;if(!agcCan(v,X.c))return"";let aw=0;try{aw=artW2(v,"hoa")}catch(e){}const o=odA(v,X.o+aw*X.k);const ok=agTry(o);if(!ok&&agSoft(o))return agSoftTxt(v,"",X.c);/* soft: rolled before paying, only its Sức share (j63 oddsSoftCost) */agcPay(v,X.c);if(ok){ap(v,X.w);return `${v.name} vẽ chân dung dâng Thái hậu, Thái hậu rất vui`}ap(v,X.l);return `${v.name} vẽ chân dung dâng Thái hậu, Thái hậu chê không giống`});
 agRunReg("cx:humble",(v,t)=>{const X=BAL.ag.cx.humble;if(!t)return"";ap(v,X.c);oanAdd(t,v,-X.oanDown);affAdd(t,v,X.aff);return `${v.name} nhún nhường trước ${agcNm(t)}`});
 /* ---------------- 2. HOÀNG HẬU: the player-as-Empress buttons (empAct: Xử tội / Tịch thu / Ban thưởng / Ân xá / Khất bổng lộc) ---------------- */
 /* ONE function for her and the NPC Empress (empAct calls it for the player) */

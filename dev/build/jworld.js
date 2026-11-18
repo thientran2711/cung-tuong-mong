@@ -184,7 +184,7 @@ EVD.su={place:w=>"thu",
  card(w){return{t:"Sứ đoàn vào triều",who:pEmp(),h:`<p>${w.cause}.</p><p>${w.txt||""}</p>`}},
  scene(w){const b=B().su;const ok=meCons()&&rkOf(S)>=b.rank;const o=od(b.show[0]+(S.tai||0)/b.show[1]);
   return{t:"Yến tiếp sứ",who:pEmp(),h:`<p>Sứ thần dâng lễ vật lạ, bá quan ngồi kín hai bên.</p>${ok?"":`<p class="past">Phẩm của ngươi chưa được dự yến; chỉ đứng xa mà xem.</p>`}`,
-   opts:ok?[{n:"Dâng một khúc đàn trong yến",fx:{},x:`${word(o)} · thành: Sủng +${b.showSung}, Danh +${b.showDanh} · hỏng: Danh ${b.failDanh}`,go:()=>{if(agTry(o))apply({sung:b.showSung,danh:b.showDanh});else if(agSoft(o))log(agSoftTxt(S));else apply({danh:b.failDanh})}},
+   opts:ok?[{n:"Dâng một khúc đàn trong yến",fx:{},x:`${word(o)} · thành: Sủng +${b.showSung}, Danh +${b.showDanh} · hỏng: Danh ${b.failDanh}`,go:()=>{if(agTry(o))apply({sung:b.showSung,danh:b.showDanh});else if(agSoft(o))agSoftTxt(S,"Dâng một khúc đàn trong yến");else apply({danh:b.failDanh})}},
     {n:"Ngồi yên giữ lễ",fx:{},x:"không được mất gì"}]:[{n:"Đứng xem rồi về",fx:{},x:"không được mất gì"}]}},
  night(w,p){return false}};
 /* 8 ĐẠI THỌ (row 3): the Emperor's 40/50/60… or Thái hậu's 60/70/80 birthday (j71 Tiết Vạn thọ / Thánh thọ days). Reuses FEST days,
@@ -315,8 +315,8 @@ function worldTick(){if(!S||S.dead||!B().on)return;const z=wZ();if(host()){WW.in
 function startCard(w){const E=EVD[w.k];let m=null;try{m=E.card(w)}catch(e){wErr("card "+w.k,e)}
  if(m&&E.scene&&!(m.opts&&m.opts.length)&&!(typeof isSrv==="function"&&isSrv())){let sc=null;try{sc=E.scene(w)}catch(e){wErr("scene "+w.k,e)}
   if(sc&&sc.opts&&sc.opts.length){m.h=(m.h||"")+(sc.h||"");m.opts=sc.opts;if(!m.who&&sc.who)m.who=sc.who}}
- /* kit line format "word · tốn: … · thành: …" (j0 kitParse): a sure option leads with "Chắc chắn" (never shown) so its first label (thành / kèm) is read */
- if(m&&m.opts)for(const o of m.opts)if(o&&typeof o.x==="string"&&/^(thành|kèm|hỏng|không được)/.test(o.x))o.x="Chắc chắn · "+o.x;return m}
+ /* kit line format "word · tốn: … · thành: …" (j0 kitParse): a sure option has no odds word (ODDS CAP: the ladder has no "sure" word); kitParse reads its first label (thành / kèm) as is */
+ return m}
 function worldShow(){if(!S||S.dead)return;S.wwSeen=S.wwSeen||{};S.wwEnd=S.wwEnd||{};const A=worldWin(),z=wZ();
  for(const h of (z.H||[])){if(h.id==null||!h.end||S.wwEnd[h.id]||!S.wwSeen[h.id])continue;S.wwEnd[h.id]=1;Q.push({t:h.n||"Tin trong cung",who:pEmp(),h:`<p>${h.end}</p>`})}
  for(const w of A){if(S.wwSeen[w.id])continue;S.wwSeen[w.id]=1;const m=startCard(w);if(m){if(!m.who)m.who=pEmp();if(!m.opts)delete m.opts;Q.push(m)}}

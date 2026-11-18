@@ -34,11 +34,13 @@ function agOdd(o){return cl(Math.round(+o||0),BAL.odds.lo,BAL.odds.hi)}
 function agCap(o){return Math.min(+o||0,BAL.odds.hi)}
 /* SOFT FAIL — ONE path for every ag-all-2 roll (owner OD 17/11 ~17:35Z): agTry(o) = the capped roll; agSoft(o) = a failure at this RAW o is soft
    (o reached the cap = the act was sure before it): cost already spent, nothing gained, the failure branch (punishment, lòng / thiện cảm loss,
-   caught, refusal) is skipped; agSoftTxt(p) = the ONE BẠI line (BAL.odds.softFail). AGSOFT.n counts soft fails (tests / bot stats). */
+   caught, refusal) is skipped; agSoftTxt(p,n,c) = the ONE BẠI line = j63 oddsSoft (ODDS CAP): her → oddsSoft(n,c) itself (it logs the line and charges
+   oddsSoftCost(c) once: Sức only, never bạc); an NPC (or a servant, pay = asAp) → the same words and pay(oddsSoftCost(c)), never S. c = the cost NOT yet
+   paid (a caller that paid before the roll rolls first instead; nothing is charged twice). Her callers never log it again. AGSOFT.n counts soft fails. */
 const AGSOFT={n:0};
 function agSoft(o){return(+o||0)>=BAL.odds.hi}
 function agTry(o){const ok=roll(agOdd(o));if(!ok&&agSoft(o))AGSOFT.n++;return ok}
-function agSoftTxt(p){const F=BAL.odds.softFail;return p===S?F.me:F.npc.replace("{n}",p&&p.name||"")}
+function agSoftTxt(p,n,c,pay){if(p===S)return oddsSoft(n||"",c);const x=oddsSoftCost(c);if(p&&Object.keys(x).length)(pay||(d=>ap(p,d)))(x);return `${p&&p.name||""}: <span class="r">bại</span> — người tính không bằng trời tính: ${kitSoftW(c)}.`}
 function agZ(){const z=S.ag=S.ag||{};z.pend=z.pend||[];z.log=z.log||[];return z}
 function agKey(){return wk()+"-"+(S.buoi||0)}
 function agRec(){try{return j95on()&&S.roster&&S.roster.key===j95key()?S.roster:null}catch(e){return null}}
@@ -256,12 +258,12 @@ function agSpendKh(){const k=BAL.ag.kh;if(!can(k))return false;spend(k);return t
 function agReact(p,v,t){const O=[];const B=BAL.ag.wit;const harm=AGHOST.has(p.k)||p.k==="fakeIll"||p.k==="fakePreg";const o=agHearO();const kh=BAL.ag.kh;const lock=agKhLock();
  O.push({n:"Nghe lén",r:"hear",fx:{},x:`${word(o)} · tốn: ${kh} khắc · thành: biết rõ nàng ${p.act} vì đâu${harm?` · chứng cứ về nàng ${balSg(BAL.eff.jagent.evGo)}`:""} · hỏng: nàng bắt gặp, nàng quý ngươi -${B.caught}`,
   go:()=>{if(!agSpendKh()){agLand(p);return}if(agTry(o)){noteAdd(v.id,`nghe lén: nàng ${p.act} — ${p.why}`);if(harm)evA(S,v,BAL.eff.jagent.evGo);log(`Ngươi nghe lén: ${v.name} ${p.act}, vì ${p.why}.${harm?` Chứng cứ về nàng ${balSg(BAL.eff.jagent.evGo)}.`:""}`)}
-   else if(agSoft(o))log(agSoftTxt(S));else{affAdd(v,S,-B.caught);log(`${v.name} bắt gặp ngươi đứng nghe lén.`)}agLand(p)}});
+   else if(agSoft(o))agSoftTxt(S,"Nghe lén");else{affAdd(v,S,-B.caught);log(`${v.name} bắt gặp ngươi đứng nghe lén.`)}agLand(p)}});
  const D=TW[p.k],J=AGJOIN[p.k];if(D&&J&&!(typeof isSrv==="function"&&isSrv())&&(!D.req||D.req(S,p.k==="thHH"?queenP():t))&&twCanPay(S,p.k)&&!(p.k==="thHH"&&queenP()===S)){const oj=D.o?D.o(S,t):100;const c=twCost(p.k);
   const ct=Object.keys(c).map(f=>`${(typeof NAMES==="object"&&NAMES[f])||(typeof HXN==="object"&&HXN[f])||f} ${c[f]}`).join(", ");
   O.push({n:J.n,r:"join",fx:{},x:`${word(oj)} · tốn: ${ct?ct+", ":""}${kh} khắc · cùng nàng · ${J.x()}`,go:()=>{if(!agSpendKh()){agLand(p);return}const r=twDo(S,p.k==="thHH"?queenP():t,p.k);if(r)log(`${r}.`);agLand(p)}})}/* her deed: the twDo wrapper lets the others there see it */
- O.push({n:"Thôi, lui về cung",r:"leave",fx:{},x:"Nắm chắc · thành: ngươi lui về cung, nàng không thấy ngươi",go:()=>{agLand(p);try{if(S.place!=="home"&&!S.out)goTo("home")}catch(e){}}});
- O.push({n:"Mặc kệ",r:"ignore",fx:{},x:"Nắm chắc · thành: không dính vào chuyện",go:()=>{agLand(p);log(`Ngươi mặc kệ ${v.name}.`)}});
+ O.push({n:"Thôi, lui về cung",r:"leave",fx:{},x:"thành: ngươi lui về cung, nàng không thấy ngươi",go:()=>{agLand(p);try{if(S.place!=="home"&&!S.out)goTo("home")}catch(e){}}});
+ O.push({n:"Mặc kệ",r:"ignore",fx:{},x:"thành: không dính vào chuyện",go:()=>{agLand(p);log(`Ngươi mặc kệ ${v.name}.`)}});
  /* no khắc left in the day (j76 can, spill allowed): the kit GREYED OPTION (KIT §84 kitOff, jgrey) — one form with every other locked option */
  if(lock)O.forEach(c=>{if(c.r==="hear"||c.r==="join")kitOff(c,lock,"")});
  return O}

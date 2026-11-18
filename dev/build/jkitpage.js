@@ -20,7 +20,7 @@ KIT_SAMPLES.push(
  {id:"§28.19",title:"kitSceneArt: wide · tall · thumb",html:()=>`<div class="kitpg-row"><div style="width:220px">${kitSceneArt(kitInfoArt("sắc phong").src,"Rộng 16:9",{shape:"wide"})}</div><div style="width:120px">${kitSceneArt(kitSkillArt("vir","cong","Công"),"Cao 3:4",{shape:"tall"})}</div>${kitSceneArt(kitSkillArt("art","cam","Cầm"),"Nhỏ",{shape:"tall",size:"thumb",cap:false})}</div>`},
  {id:"§21",title:"kitSkillCard: môn (có việc), chương, trống",html:()=>`<div class="kskills">`+
   kitSkillCard({kind:"art",k:"cam",name:"Cầm",level:2,max:5,prog:[1,4],desc:"Tài: thơ, đàn, thi tài",next:"Tài +2",stepsAttr:'data-v85tab="cam"',
-   acts:[pbtn('data-kitsample="1"',"Tự học","Chắc chắn · tốn: 2 khắc, Sức -15 · thành: tiến bộ một hai phần",""),pbtn('data-kitsample="2"',"Học với thầy","Chắc chắn · tốn: 2 khắc, Bạc -15 · thành: tiến bộ một đến ba phần","thiếu bạc (cần 15)")]})+
+   acts:[pbtn('data-kitsample="1"',"Tự học",capW()+" · tốn: 2 khắc, Sức -15 · thành: tiến bộ một hai phần",""),pbtn('data-kitsample="2"',"Học với thầy",capW()+" · tốn: 2 khắc, Bạc -15 · thành: tiến bộ một đến ba phần","thiếu bạc (cần 15)")]})+
   kitSkillCard({kind:"story",k:"x",kicker:"Chương 2",name:"Tên chương",level:1,max:4,word:"Hồi",bar:false,next:"",img:kitInfoArt("Mệnh truyện").src})+
   kitEmpty("Việc nhờ","Chưa ai nhờ ngươi việc gì.")+`</div>`},
  {id:"§33.40",title:"kitSubTabs: ⓘ ở cuối thanh tab · kitSecHead: tiêu đề mục + chip + ⓘ",html:()=>{const t=kitSubTabs("kitpg33",[{k:"a",label:"Cầm",doable:2,total:3},{k:"b",label:"Kỳ",doable:0,total:2}],typeof kitInfo==="function"?kitInfo("Việc nhờ"):"");return t.html+kitSecHead("Tứ đức",kitChip("Đức",20,"g"))}},
@@ -144,7 +144,7 @@ function kitPopSample(k){try{if(typeof S==="undefined"||!S||typeof kitModal!=="f
    opts:[{n:"Cúi đầu nhận lỗi",fx:{duc:2},x:"Chắc · nàng thiện cảm +5 · Sủng -1",go:nop},{n:"Thưa rằng do Hoàng thượng định",fx:{danh:1},x:"Năm ăn năm thua · thành: Danh +2 · hỏng: nàng oán +8",go:nop},{n:"Dâng lễ vật xin bỏ qua",fx:{bac:-20},x:"Khá chắc · Bạc -20 · nàng thiện cảm +8",go:nop}]},
   result:q&&{kind:"result",title:"Kết quả: Thỉnh an Hoàng hậu",sub:"Thượng tuần · buổi sáng",subject:q,facts:[{who:q,text:"hài lòng vì ta giữ lễ.",chips:[["Thiện cảm",5]]},{who:S,kind:"me",text:"được tiếng hiền thục trong cung.",chips:[["Đức",2],["Sức",-10]]}],btn:"Đã hiểu"},
   long:{kind:"choice",title:"Việc dài lời kể",sub:"Thượng tuần · buổi sáng",facts:Array.from({length:9},(_,i)=>"Lời kể số "+(i+1)+": người trong cung kể rằng chuyện này kéo dài suốt cả buổi, hết người này đến người khác đến thưa, nên khung phải cuộn phần chữ mà giữ nguyên tiêu đề, tranh và các lựa chọn."),
-   opts:[{n:"Nghe hết rồi mới định",fx:{...BAL.kitpage.listen},x:`Chắc · Đức +${BAL.kitpage.listen.duc}`,go:nop},{n:"Cho lui, để mai bàn",fx:{},x:"Chắc",go:nop}]},
+   opts:[{n:"Nghe hết rồi mới định",fx:{...BAL.kitpage.listen},x:`thành: Đức +${BAL.kitpage.listen.duc}`,go:nop},{n:"Cho lui, để mai bàn",fx:{},x:"",go:nop}]},
   news:{kind:"news",title:"Tin trong cung",sub:"Tháng 3 · Năm 1",facts:[v2?{who:v2,text:"được lật thẻ bài đêm qua",chips:[["Sủng",3]]}:"Đêm qua Hoàng thượng lật thẻ bài.","Tháng này: Được mùa khắp nơi. Kho lúa +12."],btn:"Đã rõ"}};
  /* kit-size #8: the two real-path cards the §84 samples open (place card = ONE place picture left + kit rows; option naming a person = that person's portrait) */
  if(k==="place"||k==="personopt"){let m=null;

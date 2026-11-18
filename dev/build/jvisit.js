@@ -59,7 +59,7 @@ function coopSeen(){if(!cw()||host()||!S||S.dead||Q.length||S.mg)return;const v=
 /* the card: same event, same words; the night road now really is a visit */
 const p0=PEND.empnight;
 function thDispl(){const V=B();if(S.thDead||!S.thO)return{p:0,loss:0};let neg=0;try{neg=thArch().neg||0}catch(e){}
- let m=1;try{m=trongMul("th",DEED.empvisit)}catch(e){}return{p:Math.max(0,Math.min(95,V.thP+neg*V.thNeg)),loss:Math.max(1,Math.round(V.thLoss*(2-m)))}}
+ let m=1;try{m=trongMul("th",DEED.empvisit)}catch(e){}return{p:Math.max(0,V.thP+neg*V.thNeg),loss:Math.max(1,Math.round(V.thLoss*(2-m)))}}
 PEND.empnight=function(p){p=p||{};const V=B(),d=p0.call(this,Object.assign({o:od(V.show.o+bestArt().w*V.show.w+mm())},p));if(!d||!d.o)return d;
  const lost=p.v!=null?(rivals||[]).find(x=>x&&x.id===p.v&&x.alive):null,T=thDispl(),q=typeof queenP==="function"?queenP():null;
  if(lost)d.t+=`<br>Thẻ bài đêm nay lật tên ${lost.name}, vậy mà ngài lại đến đây.`;

@@ -82,7 +82,7 @@ function trGreet(who,host,opt){opt=opt||{};const B=BAL.trong,th=host==="th",A=th
  const n=opt.noRep?0:trGreetN(who,host),repF=Math.max(B.repMin,1-(th?A.rep:B.hhRep)*n);
  const reg=th?(who===S?S.th:(who.th||0)):(who===S?S.hh:aff(host,who)),cap=th?A.cap:B.hhCap,capF=reg>cap?Math.max(0,1-(reg-cap)/B.capSpan):1;
  const shift=eh==="gian"?-2:0;const raw=base*vm*rkF*mH*mW*repF*capF+shift;const gain=cl(Math.round(raw),-4,20);
- const o=cl((th?A.o:B.hhO)+Math.round((vm-1)*10)+(eh==="gian"?-10:eh==="vui"?5:0),20,95);const scold=(th?A.scold:B.hhScold)+(eh==="gian"?2:0)+(vm<1?1:0);
+ const o=cl((th?A.o:B.hhO)+Math.round((vm-1)*10)+(eh==="gian"?-10:eh==="vui"?5:0),20,BAL.odds.hi);const scold=(th?A.scold:B.hhScold)+(eh==="gian"?2:0)+(vm<1?1:0);
  const H=th?"Thái hậu":"Hoàng hậu",X=[];
  if(th&&S.thO.archK)X.push(`${H} ${A.n.toLowerCase()}`);
  if(trongKnown(th?"th":host)){const hit=trongHit(th?"th":host,tags);if(hit.length)X.push(`${H} trọng ${hit.join(", ")}: ${vm>=1?"quý lễ này hơn":"không ưa"}`)}
@@ -92,7 +92,7 @@ function trGreet(who,host,opt){opt=opt||{};const B=BAL.trong,th=host==="th",A=th
 /* wraps a "Thỉnh an" talk option so the card shows (and runs) the real numbers */
 function trGreetOpt(a,host){const th=host==="th",k=th?"th":"hh",G=trGreet(S,host);const w=Object.assign({},a.w||{}),l=Object.assign({},a.l||{});
  if(G.gain)w[k]=G.gain;else delete w[k];l[k]=-G.scold;const why0=a.why;
- const o=Object.assign({},a,{o:a.o==null?od(G.o):cl(a.o+G.o-(th?75:70),5,95),w,l,risk:[a.risk,G.x].filter(Boolean).join(" · "),why:()=>{const F=why0?why0().slice():[];G.why.forEach(f=>F.push(f));return F}});
+ const o=Object.assign({},a,{o:a.o==null?od(G.o):oddsCl(a.o+G.o-(th?75:70)),w,l,risk:[a.risk,G.x].filter(Boolean).join(" · "),why:()=>{const F=why0?why0().slice():[];G.why.forEach(f=>F.push(f));return F}});
  const mark=()=>{trGreetMark(S,host);if(th){S.thO.archK=1}trongLearn(th?"th":host,th?DEED.greet:DEED.greetHH,"Qua buổi thỉnh an")};
  if(a.run){const r0=a.run;o.run=function(){mark();return r0.apply(this,arguments)}}
  else{const g0=a.go,f0=a.fail;o.go=function(){mark();return g0?g0.apply(this,arguments):undefined};o.fail=function(){mark();return f0?f0.apply(this,arguments):undefined}}

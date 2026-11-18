@@ -31,7 +31,7 @@ const PETC_CACHE={};
 const PETC_RESCUE=/(khi đã thành Linh thú thì )?ĐỠ MỘT MẠNG[^;·]*;?\s*/;
 function petcStageT(T,s,k){const key=k+"|"+s;if(PETC_CACHE[key])return PETC_CACHE[key];const X=Object.assign({},T);const m=BAL.pet.mul[s];
  if(s===0){for(const f of PETC_MAIN)delete X[f];X.suc=Math.max(1,T.suc||0);X.use=`còn non: chỉ làm cung thêm vui (Sức +1 mỗi tuần) · lớn lên mới ${T.rescue?String(T.use).replace(PETC_RESCUE,"")+" · đỡ một mạng: chỉ khi thành Linh thú":T.use}`}
- else{for(const f of PETC_MAIN){if(X[f]==null||f==="rescue")continue;if(Array.isArray(X[f]))X[f]=[Math.round(X[f][0]*m),X[f][1]];else X[f]=f==="sniff"?Math.min(95,Math.round(X[f]*m)):Math.max(1,Math.round(X[f]*m))}
+ else{for(const f of PETC_MAIN){if(X[f]==null||f==="rescue")continue;if(Array.isArray(X[f]))X[f]=[Math.round(X[f][0]*m),X[f][1]];else X[f]=f==="sniff"?oddsCl(Math.round(X[f]*m)):Math.max(1,Math.round(X[f]*m))}
   if(T.rescue&&s<3){delete X.rescue;X.use=String(T.use).replace(PETC_RESCUE,"")+" · đỡ một mạng: chỉ khi thành Linh thú"}
   if(T.rescue&&s===3)X.use=String(T.use).replace("khi đã thành Linh thú thì ","")
   X.use=(s===1?"còn nhỏ, công dụng yếu: ":s===3?"Linh thú, công dụng mạnh: ":"")+(X.use||T.use)}
@@ -134,7 +134,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 (function(){const r0=petRowsL;petRowsL=function(P,i){const L=r0.apply(this,arguments);try{petcInit(P);const s=petStage(P);return [["Lớn",`<b>${BAL.pet.stages[s]}</b>`],["Đang có",petcEffects(P).length?petcEffects(P):["làm cung thêm vui"],"g"],["Lớn tiếp",[petcNextTxt(P)],"n"],["Chăm",[`No ${Math.round(P.full)} · Sạch ${Math.round(P.clean)} · Vui ${Math.round(P.joy)} · Tình cảm ${Math.round(P.aff)}`],"n"]].concat(L)}catch(e){}return L}})();
 /* ---------- other palaces: help / steal (harm = jpet thaopet) ---------- */
 function petcBestOf(t){return petTarget(t)}
-function petStealO(a,t){const j=petTarget(t);const P=tsbPets(t)[j];if(!P)return 5;const s=petStage(P),T=petT(P);return cl(Math.round(odA(a,BAL.pet.stealO[s]+(a.tamco||0)/6-T.tr*3)-(typeof tsbGuard==="function"?tsbGuard(t):0)),3,90)}
+function petStealO(a,t){const j=petTarget(t);const P=tsbPets(t)[j];if(!P)return BAL.odds.lo;const s=petStage(P),T=petT(P);return oddsCl(Math.min(Math.round(odA(a,BAL.pet.stealO[s]+(a.tamco||0)/6-T.tr*3)-(typeof tsbGuard==="function"?tsbGuard(t):0)),90))}
 function petStealWhy(a,t){const j=petTarget(t);const P=tsbPets(t)[j];if(!P)return"";return `${BAL.pet.stages[petStage(P)]} (càng lớn càng khó), ${PET_TIER[petT(P).tr]}, Tâm cơ ngươi, chó canh cung`}
 A("petcare","Giúp chăm thú nuôi của nàng",{c:{},ok:(a,t)=>tsbPets(t).length>0&&(a===S?true:rel(a,t)>=10),o:()=>null,x:`thiện cảm của nàng +${BAL.pet.helpRel} · thú của nàng khỏe hơn`,f:(a,t)=>{const j=petTarget(t);const P=tsbPets(t)[j];if(!P)return"";petcInit(P);
  P.full=cl(P.full+BAL.pet.helpGain,0,100);P.clean=cl(P.clean+BAL.pet.helpGain,0,100);P.joy=cl(P.joy+BAL.pet.helpGain,0,100);petcSync(P);relAdd(t,a,BAL.pet.helpRel);

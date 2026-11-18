@@ -65,7 +65,7 @@ function servCaught(p,s){if(!s)return"";if(roll(30)){p.staff.splice(p.staff.inde
 function threatServ(a,s){const o=ownerOf(s);if(!o||!s.lover)return"";/* 2f2: still the person's choice; fear weighs in (BAL.ag.know.tm.threat) */
  if(typeof tmOdds!=="function"){s.spyFor=key(a);return `${NMc(a)} dọa tố chuyện đối thực của ${s.name}; hắn/nàng sợ hãi, thành tai mắt. `}
  const od=tmOdds(a,s)+BAL.ag.know.tm.threat;if(agTry(od)){s.spyFor=key(a);return `${NMc(a)} dọa tố chuyện đối thực của ${s.name}; hắn/nàng sợ hãi, thành tai mắt. `}
- if(agSoft(od))return a===S?agSoftTxt(S)+" ":"";/* review ag-all-2 r2 C5: soft fail at the cap (OD ~17:35Z), as tmAsk */
+ if(agSoft(od)){if(a===S)agSoftTxt(S,"Dọa tố chuyện đối thực");return""}/* review ag-all-2 r2 C5: soft fail at the cap (OD ~17:35Z), as tmAsk */
  const t=tmRefuse(a,s);const f=typeof tmFear==="function"?tmFear(a,1):"";/* failure costs both ways (OD ~17:00Z): her master hears, her sent servant fears (BAL.ag.bt.fear) */
  return `${NMc(a)} dọa tố chuyện đối thực của ${s.name}; hắn/nàng không chịu làm tai mắt${t?", còn bẩm lại với chủ":""}.${f?" "+f+".":""} `}
 let PLANT_OK=0;/* the last plantServ landed (cx2:plantSrv reads it: a refusal returns a line too) */
@@ -83,23 +83,26 @@ function servMonth(){let ev="";capSweep();for(const p of consorts()){if(!p.staff
   if(p!==S&&!AGP&&roll(2)){const t=pickTarget(p);if(t)plantServ(p,t)}
   if(p!==S&&!G)fillStaff(p,false)}
  return ev}
-function servAct(a,id){const s=servById(id);if(!s||S.dead||Q.length)return;const o=ownerOf(s);let r="";
+/* ODDS CAP: Tra khảo a spy and Che chở before Thận Hình ti are chances (owner 17/11 17:00Z), rolled here once for every door (house card, staff tab) */
+function traO(s,m){m=m||S;const T=BAL.house.tra;return oddsCl(Math.round(T.base+(m.tamco||0)/T.tcDiv-(s&&netIs(s,"loyal")?T.loyal:0)))}
+function cheO(m){m=m||S;const C=BAL.house.che;return oddsCl(Math.round(C.base+(m.danh||0)/C.danhDiv+rkOf(m)*C.rank))}
+function servAct(a,id){const s=servById(id);if(!s||S.dead||Q.length)return;const o=ownerOf(s);let r="";window.__servOk=true;
  if(o===S){if(a==="thuong"&&S.bac<BAL.house.thuongBac)return;if(a==="hoi"){if(!can(2))return;spend(2)}r=servDo(S,a,s)}
  else if(o){if(!can(2))return;if(a==="mua"){spend(2);r=bribeServ(S,s)}else if(a==="doa"){spend(2);r=threatServ(S,s)}}
  if(r)log(r);render()}
 /* ONE function for her own-staff buttons (Thưởng / Phạt / Hỏi chuyện / Đổi người / Che chở) and an NPC master's choice (AG-ALL-2e cx3:staff, jagacts3); m = the master */
 function servDo(m,a,s){const me=m===S,P=BAL.ag.par3.staff;let r="";if(!m||!s||!(m.staff||[]).includes(s))return"";const pay=x=>me?apply(x):ap(m,x);
  if(a==="thuong"){if((m.bac||0)<BAL.house.thuongBac)return"";pay({bac:-BAL.house.thuongBac});s.loyal=cl(s.loyal+BAL.eff.j10.loyalServAct,0,100);r=`Thưởng ${s.name}: lòng ${balSg(BAL.eff.j10.loyalServAct)}.`}
- else if(a==="phat"){s.loyal=cl(s.loyal-BAL.eff.j10.loyalServAct_2,0,100);if(s.spyFor){const sp=byKey(s.spyFor);if(m===S)typeof knSoldFound==="function"&&knSoldFound(s);r=`Tra khảo ${s.name}: khai là tai mắt của ${sp?NM(sp):"kẻ khác"}. Đuổi khỏi cung.`;m.staff.splice(m.staff.indexOf(s),1);if(sp&&sp!==m)evA(m,sp,BAL.eff.j10.evServAct)}else r=`Phạt ${s.name}: lòng -${balAb(BAL.eff.j10.loyalServAct_2)}.`}
+ else if(a==="phat"){s.loyal=cl(s.loyal-BAL.eff.j10.loyalServAct_2,0,100);if(s.spyFor&&!roll(traO(s,m))){if(me)window.__servOk=false;r=`Tra khảo ${s.name}: <span class="r">hỏng</span>, ${s.role==="eunuch"?"hắn":"nàng"} cắn răng không khai: lòng -${balAb(BAL.eff.j10.loyalServAct_2)}.`}else if(s.spyFor){const sp=byKey(s.spyFor);if(m===S)typeof knSoldFound==="function"&&knSoldFound(s);r=`Tra khảo ${s.name}: khai là tai mắt của ${sp?NM(sp):"kẻ khác"}. Đuổi khỏi cung.`;m.staff.splice(m.staff.indexOf(s),1);if(sp&&sp!==m)evA(m,sp,BAL.eff.j10.evServAct)}else r=`Phạt ${s.name}: lòng -${balAb(BAL.eff.j10.loyalServAct_2)}.`}
  else if(a==="hoi"){const f=Object.keys(s.af||{}).map(x=>servById(+x)).find(x=>x&&s.af[x.sid]>=P.hoi.af);const o2=f&&ownerOf(f);
   if(o2&&o2!==m&&roll(nv(s,"askTalk"))){r=evA(m,o2,BAL.eff.j10.evServAct_2)?`${s.name} kể chuyện nghe từ ${f.name} bên cung ${o2.name}: chứng cứ ${balSg(BAL.eff.j10.evServAct_2)}.`:`${s.name} kể chuyện nghe từ ${f.name} bên cung ${o2.name}: không có gì sai trái, chỉ biết ${harmTxt(o2)}.`}else r=`${s.name} không biết gì mới.`;
   {const dt=allServ().find(x=>x.lover&&!(m.knowDT||[]).includes(x.sid)&&ownerOf(x)!==m);if(dt&&roll(P.hoi.dt)){m.knowDT=(m.knowDT||[]).concat([dt.sid,dt.lover]);if(me)r+=` Lại nghe đồn ${dt.name} và ${(servById(dt.lover)||{}).name} đối thực.`}}}
  else if(a==="doi"){m.staff.splice(m.staff.indexOf(s),1);r=`Trả ${s.name} về Nội vụ phủ.`}
- else if(a==="che"){s.loyal=cl(s.loyal+BAL.eff.j10.loyalServAct_3,0,100);pay({danh:BAL.eff.j10.danhServAct});r=`Che chở ${s.name} trước Thận Hình ti: lòng ${balSg(BAL.eff.j10.loyalServAct_3)}, Danh ${balSg(BAL.eff.j10.danhServAct)}.`}
+ else if(a==="che"){pay({danh:BAL.eff.j10.danhServAct});if(!roll(cheO(m))){if(me)window.__servOk=false;s.loyal=cl(s.loyal+BAL.house.che.failLoy,0,100);r=`Che chở ${s.name}: <span class="r">hỏng</span>, Thận Hình ti không nể mặt: Danh ${balSg(BAL.eff.j10.danhServAct)}, lòng +${BAL.house.che.failLoy} (biết ơn ngươi đã ra mặt).`}else{s.loyal=cl(s.loyal+BAL.eff.j10.loyalServAct_3,0,100);r=`Che chở ${s.name} trước Thận Hình ti: lòng ${balSg(BAL.eff.j10.loyalServAct_3)}, Danh ${balSg(BAL.eff.j10.danhServAct)}.`}}
  return me?r:r?`${m.name}: ${r}`:""}
 function courtAct(a,k){const c=S.court[k];if(!c||S.dead||Q.length)return;let r="";
  if(a==="thuong"){if(S.bac<BAL.bacFee.court)return;r=courtGive(S,k)}
- if(a==="hoi"){if(!can(2))return;spend(2);c.af.me=(c.af.me||0)+BAL.eff.j10.meCourtAct_2;if(k==="tq"&&roll(BAL.odb.j10.rbCourtAct+(c.af.me||0)/2)){discover();r=`${c.name} hé lộ một sở thích của Hoàng thượng.`}else if(k==="ksp")r="Sổ thị tẩm: "+kitNameList(liveRivals(true),x=>`${x.name} ${x.nights}`)+`; ngươi ${S.nights}.`;else r=`${c.name} chỉ cười, không nói gì.`}
+ if(a==="hoi"){if(!can(BAL.btn.courtHoi.k))return;spend(BAL.btn.courtHoi.k);c.af.me=(c.af.me||0)+BAL.eff.j10.meCourtAct_2;if(k==="tq"&&roll(BAL.odb.j10.rbCourtAct+(c.af.me||0)/2)){discover();r=`${c.name} hé lộ một sở thích của Hoàng thượng.`}else if(k==="ksp")r="Sổ thị tẩm: "+kitNameList(liveRivals(true),x=>`${x.name} ${x.nights}`)+`; ngươi ${S.nights}.`;else r=`${c.name} chỉ cười, không nói gì.`}
  if(r)log(r);render()}
 function tqAf(p){return S.court&&S.court.tq?(S.court.tq.af[key(p)]||0):0}
 /* Biếu quà người trong triều (Tổng quản / Kính sự phòng): ONE function for the player's button (courtAct thuong) and an NPC consort (AG-ALL-2 cx:tqGift) */
