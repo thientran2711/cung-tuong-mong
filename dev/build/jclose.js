@@ -92,20 +92,44 @@ function kitLinePos(el){try{const nx=document.getElementById("next");let bot=inn
  if(bar){const r=bar.getBoundingClientRect();if(r.height&&r.top>innerHeight*.5)bot=r.top}
  /* a dialog is open: the pill sits just above the dialog box (or under it), never on its title or buttons */
  const M=document.getElementById("modal"),d=M&&!M.hidden?M.querySelector(".dlg"):null;if(d){const r=d.getBoundingClientRect();if(r.top>=44){el.style.bottom="auto";el.style.top=Math.round(r.top-38)+"px";return}if(innerHeight-r.bottom>=44)bot=Math.min(bot,innerHeight-2)}
- el.style.top="auto";el.style.bottom=Math.round(innerHeight-bot+10)+"px";kitToastClear(el,"up")}catch(e){}}
-/* KEEP-CLEAR (owner via MAIN ROOT-55 18/11 ~20:08Z, review/stage-here r2: "the toast covers the sub-tab bar + the place name"): every one-line
-   toast (§42.2 kitLine #kupdline, §87 kitLineToast #ktbtoast) is moved off the things that must always read: the top bar, tab bars and
-   sub-tab rows, the place name, figure name tags and plaques, a dialog title. dir "down" = slide below what it hits (top toast), "up" = slide
-   above it (bottom pill). Returns false when no free spot is left on that side (the caller may try the other side). */
-const KIT_TOAST_KEEP='header.hud,#tabs,.pctabs,.ktsub,.kpbar,[role="tablist"],#kpname,#sc-t,.tok .tag,.j59n,.kpod-plq,.dlg h2,.dlg .dlgt';
-function kitToastClear(el,dir){try{const rs=[...document.querySelectorAll(KIT_TOAST_KEEP)].filter(e=>!el.contains(e)&&e.getClientRects().length&&getComputedStyle(e).visibility!=="hidden").map(e=>e.getBoundingClientRect()).filter(r=>r.width>2&&r.height>2&&r.height<innerHeight*.5);
- for(let i=0;i<16;i++){const t=el.getBoundingClientRect();const hit=rs.filter(r=>r.left<t.right&&r.right>t.left&&r.top<t.bottom&&r.bottom>t.top);if(!hit.length)return true;
-  if(dir==="down"){const y=Math.max(...hit.map(r=>r.bottom))+6;if(y+t.height>innerHeight-4)return false;el.style.bottom="auto";el.style.top=Math.round(y)+"px"}
-  else{const y=Math.min(...hit.map(r=>r.top))-6;if(y-t.height<4)return false;el.style.top="auto";el.style.bottom=Math.round(innerHeight-y)+"px"}}return false}catch(e){return false}}
-window.kitToastClear=kitToastClear;window.kitLinePos=kitLinePos;window.KIT_TOAST_KEEP=KIT_TOAST_KEEP;
-/* refit after a screen change (tab switch, shell swap): the toasts already up go back to their home spot and clear again */
-function kitToastRefit(){try{const a=document.getElementById("ktbtoast");if(a){const h=document.querySelector("header.hud"),r=h&&h.getClientRects().length?h.getBoundingClientRect():null;a.style.bottom="auto";a.style.top=(r?Math.round(r.bottom+6):6)+"px";if(!kitToastClear(a,"down"))kitLinePos(a)}
- const b=document.getElementById("kupdline");if(b)kitLinePos(b)}catch(e){}}
+ el.style.top="auto";el.style.bottom=Math.round(innerHeight-bot+10)+"px";kitToastPlace(el,"up")}catch(e){}}
+/* KEEP-CLEAR (MAIN ROOT-55 20:08Z + ROOT-56 20:49Z, review/stage-here r2): every one-line toast (§42.2 kitLine #kupdline, §87 kitLineToast
+   #ktbtoast) is placed where it covers NOTHING that must read or be tapped. Generic, not a hand list: every tappable thing (buttons, group
+   buttons, chips, tabs, links, inputs), every kit plaque/box (.k3p: right-column groups, Ân sủng box), the place name, figure name tags,
+   headings; a big tappable card counts by its HEAD BAND (title + first line, top 64 px). On a two-page screen the toast stays inside the
+   column it belongs to (the stage column) and never crosses the split; on one page the column = between the top bar and the bottom bar.
+   Search: widths (column − 16, ×.8, ×.65) × rows (6 px) × left/centre/right; top toast = the highest free spot, bottom pill = the lowest;
+   nothing free → the toast waits hidden (refit every 300 ms shows it again when there is room; never placed over a kept thing). */
+const KIT_TOAST_KEEP='header.hud,#tabs,.pctabs,.ktsub,.kpbar,[role="tablist"],#kpname,#sc-t,.tok .tag,.j59n,.kpod-plq,.dlg h2,.dlg .dlgt,button,a[href],[role="button"],[role="tab"],[data-tab],input,select,.kchip,.chip,.kmchip,.kwhy,.kodds,.k3p,.kat,.kan,.kr,.krl,.krv,.kr2b,.kname,.knr,.krt,[class*="name"],h1,h2,h3,h4';
+function kitToastKeepRects(el){const H=innerHeight,W=innerWidth,out=[];
+ for(const e of document.querySelectorAll(KIT_TOAST_KEEP)){if(el&&(el===e||el.contains(e)))continue;if(e.closest("#ktbtoast,#kupdline"))continue;if(!e.getClientRects().length)continue;
+  const r=e.getBoundingClientRect();if(r.width<2||r.height<2||r.bottom<0||r.top>H)continue;
+  if(r.height>H*.4||r.width*r.height>W*H*.15){if(e.matches('button,[role="button"],.card'))out.push({left:r.left,right:r.right,top:r.top,bottom:r.top+Math.min(r.height,64)});continue}
+  if(getComputedStyle(e).visibility==="hidden")continue;out.push({left:r.left,right:r.right,top:r.top,bottom:r.bottom})}
+ return out}
+function kitToastCol(){const H=innerHeight,W=innerWidth;try{const st=document.getElementById("stage");const two=typeof kitView==="function"&&kitView().pages===2;
+ if(two&&st&&st.getClientRects().length){const r=st.getBoundingClientRect();if(r.width>120&&r.height>120&&r.right>0&&r.left<W&&getComputedStyle(st).visibility!=="hidden")return{left:r.left,right:r.right,top:r.top,bottom:r.bottom}}}catch(e){}
+ let top=0,bot=H;try{const h=document.querySelector("header.hud");if(h&&h.getClientRects().length)top=h.getBoundingClientRect().bottom}catch(e){}
+ try{const t=document.getElementById("tabs");if(t&&t.getClientRects().length){const r=t.getBoundingClientRect();if(r.top>H*.5)bot=r.top}}catch(e){}
+ return{left:0,right:W,top,bottom:bot}}
+function kitToastPlace(el,dir){try{const C=kitToastCol(),R=kitToastKeepRects(el),cw=C.right-C.left;if(cw<60)return false;
+ const ov=(x,y,w,h)=>{let a=0;for(const r of R){const ix=Math.min(x+w,r.right)-Math.max(x,r.left),iy=Math.min(y+h,r.bottom)-Math.max(y,r.top);if(ix>0&&iy>0)a+=ix*iy}return a};
+ /* style px ≠ screen px on a scaled design canvas (KIT §0): calibrate screen = A + s·style */
+ el.style.bottom="auto";el.style.width="max-content";el.style.left="0px";el.style.top="0px";const c0=el.getBoundingClientRect();el.style.left="100px";el.style.top="100px";const c1=el.getBoundingClientRect();
+ const s=(c1.top-c0.top)/100||1;let best=null,least=null;
+ for(const f of [1,.8,.65,.5]){const mw=Math.max(120,Math.floor((cw-16)*f));el.style.maxWidth=Math.floor(mw/s)+"px";el.style.left="0px";el.style.top="0px";
+  const b=el.getBoundingClientRect(),w=b.width,h=b.height,A=b.left,B=b.top;if(h+12>C.bottom-C.top)continue;
+  const xs=[C.left+(cw-w)/2,C.left+8,C.right-8-w];const ys=[];for(let y=C.top+6;y+h<=C.bottom-6;y+=6)ys.push(y);if(dir!=="down")ys.reverse();
+  let hit=null;
+  scan:for(const y of ys)for(const x of xs){const a=ov(x,y,w,h);if(!a){hit={x,y,w,h,mw,A,B};break scan}if(!least||a<least.a)least={x,y,w,h,mw,A,B,a}}
+  if(hit&&(!best||(dir==="down"?hit.y<best.y:hit.y>best.y)))best=hit}
+ const c=best||least;if(!c){el.style.visibility="hidden";return false}el.style.maxWidth=Math.floor(c.mw/s)+"px";el.style.left=((c.x-c.A)/s).toFixed(1)+"px";el.style.top=((c.y-c.B)/s).toFixed(1)+"px";
+ /* no free spot on this screen (a map full of hotspots, a dense list): the toast waits hidden and comes back when a refit finds room (the "!" icon shows it again) */
+ el.style.visibility=best?"":"hidden";return !!best}catch(e){return false}}
+function kitToastClear(el,dir){return kitToastPlace(el,dir)}/* old name kept for callers */
+window.kitToastClear=kitToastClear;window.kitToastPlace=kitToastPlace;window.kitToastKeepRects=kitToastKeepRects;window.kitToastCol=kitToastCol;window.kitLinePos=kitLinePos;window.KIT_TOAST_KEEP=KIT_TOAST_KEEP;
+/* refit after a screen change (tab switch, shell swap) */
+function kitToastRefit(){try{const a=document.getElementById("ktbtoast");if(a)kitToastPlace(a,"down");const b=document.getElementById("kupdline");if(b)kitLinePos(b)}catch(e){}}
 window.kitToastRefit=kitToastRefit;
 /* while a toast is up it re-checks every 300 ms (tab switches that skip render, sticky bars that move with scroll); stops when it is gone */
 function kitToastWatch(){try{if(kitToastWatch.t)return;kitToastWatch.t=setInterval(()=>{if(!document.getElementById("ktbtoast")&&!document.getElementById("kupdline")){clearInterval(kitToastWatch.t);kitToastWatch.t=0;return}kitToastRefit()},300)}catch(e){}}
