@@ -9,26 +9,36 @@ import numpy as np
 from PIL import Image
 D = sys.argv[1]; WRITE = sys.argv[sys.argv.index('--write') + 1] if '--write' in sys.argv else None
 src = open(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'build', 'jlooks.js'), encoding='utf-8').read()
-m = re.search(r'keep:\{eye:(\[\[.*?\]\]),mouth:(\[.*?\]),nose:(\[.*?\]),cheek:(\[.*?\])\}', src); J = lambda x: json.loads(re.sub(r'(?<![\d])\.(\d)', r'0.\1', x)); eye = J(m.group(1)); mouth = J(m.group(2)); nose = J(m.group(3)); cheek = J(m.group(4))
-KEEP = eye + [mouth, nose]
+m = re.search(r'keep:\{eye:(\[\[.*?\]\]),mouth:(\[.*?\]),nose:(\[.*?\]),pad:([\d.]+),cheek:(\[.*?\])\}', src); J = lambda x: json.loads(re.sub(r'(?<![\d])\.(\d)', r'0.\1', x)); eye = J(m.group(1)); mouth = J(m.group(2)); nose = J(m.group(3)); PAD = float(m.group(4)); cheek = J(m.group(5))
+KEEP = [[a, b, c * PAD, d * PAD] for a, b, c, d in eye + [mouth, nose]]  # ellipses grown by BAL.looks.keep.pad
 vf = json.load(open(D + '/veil-fit.json')); old = json.load(open(D + '/scar-fit.OLD.json'))
 def size(k):
     if k.startswith('por-'): return 384, 506
-    return Image.open(os.path.join(D, 'figs', k)).size
+    b = open(os.path.join(D, 'figs', k), 'rb').read(64)   # header only is enough (files may be range-fetched)
+    if b[12:16] == b'VP8X': return 1 + int.from_bytes(b[24:27], 'little'), 1 + int.from_bytes(b[27:30], 'little')
+    if b[12:16] == b'VP8L': v = int.from_bytes(b[21:25], 'little'); return (v & 0x3FFF) + 1, ((v >> 14) & 0x3FFF) + 1
+    return int.from_bytes(b[26:28], 'little') & 0x3FFF, int.from_bytes(b[28:30], 'little') & 0x3FFF   # VP8
 def box_px(r, W, H): return r[0] / 100 * W, r[1] / 100 * H, r[2] / 100 * W, r[3] / 100 * H
-def overlaps(scar, v, W, H, margin=.03):
-    """scar/v = rows; veil-relative box of the scar vs each ellipse bounding rect (units of veil w,h)"""
-    sx, sy, sw, sh = box_px(scar, W, H); vx, vy, vw, vh = box_px(v, W, H)
-    a = ((sx - vx) / vw, (sy - vy) / vh, (sx + sw - vx) / vw, (sy + sh - vy) / vh); n = 0
-    for cx, cy, rx, ry in KEEP:
-        if a[0] < cx + rx + margin and a[2] > cx - rx - margin and a[1] < cy + ry + margin and a[3] > cy - ry - margin: n += 1
-    return n
-new = {}; rows = 0; ob = 0; oa = 0; byk = {'por': [0, 0, 0], 'fig': [0, 0, 0]}
+# stroke cores (alpha > 70 of scar-1..3 in D, flipped like KIT_SCAR.style) tested pixel by pixel against the grown ellipses; box rotated by the row angle
+CORE = []
+for n in (1, 2, 3):
+    a = np.asarray(Image.open(os.path.join(D, f'scar-{n}.png')).convert('RGBA'))[..., 3][:, ::-1]; ys, xs = np.nonzero(a > 70); sel = slice(None, None, 5); CORE.append((xs[sel] / a.shape[1] - .5, ys[sel] / a.shape[0] - .5))
+def overlaps(scar, v, W, H, margin=0):
+    sx, sy, sw, sh = box_px(scar, W, H); vx, vy, vw, vh = box_px(v, W, H); bad = 0; ang = math.radians(scar[4]); ca, sa = math.cos(ang), math.sin(ang)
+    for fx, fy in CORE:
+        X = fx * sw; Y = fy * sh; Xr = X * ca - Y * sa + sx + sw / 2; Yr = X * sa + Y * ca + sy + sh / 2; u = (Xr - vx) / vw; w = (Yr - vy) / vh
+        for cx, cy, rx, ry in KEEP:
+            if (((u - cx) / rx) ** 2 + ((w - cy) / ry) ** 2 <= 1).any(): bad += 1; break
+    return bad
+new_rows = {}; rows = 0; ob = 0; oa = 0; byk = {'por': [0, 0, 0], 'fig': [0, 0, 0]}
 for k, v in vf.items():
-    W, H = size(k); vx, vy, vw, vh = box_px(v, W, H); side = min(cheek[2] * vw, .215 * vh)  # square side; capped so the bottom stays above the mouth keep-out
-    l = vx + cheek[0] * vw; t = vy + cheek[1] * vh
-    new[k] = [round(l / W * 100, 2), round(t / H * 100, 2), round(side / W * 100, 2), round(side / H * 100, 2), v[4]]
-    b = overlaps(old[k], v, W, H) > 0; a = overlaps(new[k], v, W, H) > 0; g = byk[k[:3]]; g[0] += 1; g[1] += b; g[2] += a; rows += 1; ob += b; oa += a
+    W, H = size(k); vx, vy, vw, vh = box_px(v, W, H)
+    for nudge in (0, .01, .02, .03, .04, -.01, -.02):   # a rotated row that still touches a grown ellipse slides down the cheek (rare: 1 row at the pad 1.2 setting)
+        l = vx + cheek[0] * vw; t = vy + (cheek[1] + nudge) * vh   # box = cheek [left, top, w, h] of the veil row (BAL.looks.keep.cheek)
+        new_rows[k] = [round(l / W * 100, 2), round(t / H * 100, 2), round(cheek[2] * vw / W * 100, 2), round(cheek[3] * vh / H * 100, 2), v[4]]
+        if not overlaps(new_rows[k], v, W, H): break
+    b = overlaps(old[k], v, W, H) > 0; a = overlaps(new_rows[k], v, W, H) > 0; g = byk[k[:3]]; g[0] += 1; g[1] += b; g[2] += a; rows += 1; ob += b; oa += a
+new = new_rows
 print(f'SCRATCH rows checked {rows}: overlapping keep-out OLD {ob} -> NEW {oa}')
 for g, (n, b, a) in byk.items(): print(f'  {g}: {n} rows, old {b} -> new {a}')
 if WRITE: json.dump(new, open(WRITE, 'w'), separators=(',', ':')); print('wrote', WRITE)
