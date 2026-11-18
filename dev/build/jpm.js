@@ -1,5 +1,5 @@
 /* ---- jpm: kitPalaceMap — BẢN ĐỒ CHI TIẾT MỘT CUNG (owner 11/15, KIT.md §33) ----
-   Dư đồ → chạm một trong 8 cung phi tần (MAPH.rivalSlots) hoặc Càn Ninh → bản đồ chi tiết sân cung (tranh L2 của Phượng Lệnh,
+   Dư đồ → chạm một cung phi tần (MAPH.rivalSlots = PALN) hoặc Càn Ninh → bản đồ chi tiết sân cung (tranh L2 của Phượng Lệnh,
    img/pl2/<dir>-<mùa>-<buổi>.webp, lễ: <dir>-<lễ>-<buổi>.webp) với 3 điểm chạm: Chính điện · Đông phối điện · Tây phối điện.
    Mỗi điểm: chip "N bóng người" = số người THẬT có mặt buổi này, chia từ đúng nguồn của chip Dư đồ (countAt / S.where):
    tổng 3 điểm = countAt(cung). Chạm một điểm = đi đến cung đó (luật ra vào, khắc, bái kiến như cũ, j77Tap) rồi vào phòng ấy:
