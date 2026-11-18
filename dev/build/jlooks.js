@@ -42,8 +42,8 @@ Object.assign(BAL,{looks:{
  tone:{muc:.85,muoi:.85,cao:.85},
  /* KEEP-OUT (owner 18/11 standing rule: a face mark NEVER covers the eyes or the lips): ellipses [cx,cy,rx,ry] in VEIL-ROW units (u = x/rowW, v = y/rowH from the row's left/top),
     measured on 158 por pictures (Haar eyes + lip colour, dev/test/look-fx-keepout.py) and constant for every por-/fig- row because every row is cut from the face rect by the same ratios.
-    Face-square marks are masked by it (lkKeepCss), the scratch rows (scar-fit) are generated so the box stays inside the cheek zone: cheek = [left,top,w,h,rot] of the veil row: a tall narrow box turned +rot degrees, so the strokes run long (~1.9x the old length) down the cheek toward the jaw line, left of the mouth. pad = ONE margin: every ellipse is grown by it (mask, scratch test). */
- keep:{eye:[[.31,.08,.15,.17],[.72,.08,.15,.17]],mouth:[.45,.655,.23,.105],nose:[.51,.36,.11,.2],pad:1.2,cheek:[.10,.27,.12,.46,31]},
+    Face-square marks are masked by it (lkKeepCss), the scratch rows (scar-fit) are generated so the box stays inside the cheek zone: cheek = [left,top,w,h,rot offset] of the veil row: the OLD diagonal across the cheek below the eye (owner 18/11: never vertical), ~1.4x the R3 length, as long as the keep-out allows. pad = ONE margin: every ellipse is grown by it (mask, scratch test). */
+ keep:{eye:[[.31,.08,.15,.17],[.72,.08,.15,.17]],mouth:[.45,.655,.23,.105],nose:[.51,.36,.11,.2],pad:1.2,cheek:[.07,.28,.28,.26,0]},
  pox:{thuydau:{sea:["Xuân"],cont:1,die:0},sac:{thuydau:[0,3,5,8],daumua:[0,6,10,14]},spread:35,spreadWk:3,scar:[0,1,1,2]},
  /* SMUDGE = a CODE effect on her makeup colours (owner 17/11 ~23:30Z), per level 0..3 = không / nhẹ / vừa / nặng. Lengths in u = the distance between the two eyes
     (so portrait, figure, mirror all match); a = strength of that colour. blush/lid run DOWN the cheek (vertical, gravity), tear = grey lash-run lines, lip = colour
