@@ -8,7 +8,7 @@
    MERIT: ~4 a year, 14 families (95 variants). Gains: Sủng, Danh, Thái hậu, Đức, backing of a court house (j55), Quốc sự bars (j55), a small Phúc duyên (j52,
    at most 3 a life), and 'xét công': the wait for the next sắc phong shortens by 1 month (lastPromo, same rule for NPCs, once per 6 months).
    NPC consorts earn merit too (monthly, same costs and gains). Big modals are skipped/deferred in a tuần where evBusy() is true. Festival modals are tagged {must:1} (fixed day), merit ones {opt:1} so the j68 scheduler spreads them. ================= */
-const J71={merP:.15,npcP:.3,pdCap:3,promoCd:6,npcPrep:50,prep:8,luck:30,cost:6/* Sức to take part in a festival contest (her own run, co-op guest: jcoopworld f7Done) */};
+const J71={merP:.15,pdCap:3,promoCd:6,prep:8,luck:30,cost:6/* Sức to take part in a festival contest (her own run, co-op guest: jcoopworld f7Done) */};
 const G7=t=>`<span class="g">${t}</span>`,R7=t=>`<span class="r">${t}</span>`;
 function j7s(){if(!S)return null;const j=S.j71=S.j71||{};j.fy=j.fy||{};j.vu=j.vu||{};j.n=j.n||0;j.fn=j.fn||0;j.win=j.win||0;j.cong=j.cong||0;j.pd=j.pd||0;j.npc=j.npc||0;if(j.pt==null)j.pt=-99;return j}
 function j7On(){return !!(S&&!S.dead&&!S.out&&!(typeof isSrv==="function"&&isSrv()))}
@@ -144,11 +144,13 @@ PEND.j71f=pp=>{if(!S)return null;const k=pp.k,V=(FV7[k]||[])[pp.vi];if(!V)return
   o.push({n:"Lặng lẽ cầu cho gia đình",fx:{},x:`Sức ${balSg(BAL.eff.j71.sucGo_3)}`,go:()=>{apply({suc:BAL.eff.j71.sucGo_3});log(`${fn}: ngươi lặng lẽ khấn cho cha mẹ.`)}})}
  return o.length?{who,t:h,o}:null};
 /* make the params for a festival variant: real entrants and who prepared (decided now, shown truthfully) */
+/* festival marks of a W contest = the judges' draw of how each did (an outcome, like success odds; not an NPC choice) */
+function f7Marks(){return [0,0,0,0].map(()=>20+R(61))}
 function fPP7(k,vi){const V=FV7[k][vi];const pp={k,vi,sd:1+R(1e6)};const NP=liveRivals(true).filter(present7);
- if(V[0]==="C"||V[0]==="P"){const L=shuf(NP.slice()).slice(0,V[0]==="C"?5:4);pp.e=L.map(v=>v.id);if(V[0]==="C")pp.pr=L.filter(v=>(v.bac||0)>=60&&roll(J71.npcPrep)).map(v=>v.id)}
- if(V[0]==="W"){pp.s=[0,0,0,0].map(()=>20+R(61))}
- if(V[0]==="G"){const L=NP.filter(v=>(v.bac||0)>=25);if(!L.length)return null;pp.a=pick(L).id}
- if(V[0]==="B"){const H=NP.filter(v=>(v.bac||0)>=80);if(H.length&&roll(40)){const hv=pick(H);pp.host=hv.id;ap(hv,{bac:-(40+rkOf(hv)*8)})}else{pp.g=NP.slice().sort((a,b)=>(aff(S,b)||0)-(aff(S,a)||0)).slice(0,2).map(v=>v.id)}}
+ if(V[0]==="C"||V[0]==="P"){const E=npcWhyAll("f7Enter",{NP}).sort((a,b)=>b.s-a.s).slice(0,V[0]==="C"?5:4);pp.e=E.map(o=>o.who.id);if(V[0]==="C")pp.pr=E.filter(o=>(o.who.bac||0)>=60&&o.s>=BAL.ag.why.f7.prep).map(o=>o.who.id)}
+ if(V[0]==="W"){pp.s=f7Marks()}
+ if(V[0]==="G"){const L=NP.filter(v=>(v.bac||0)>=25);const g=L.length?npcWhy("f7Gamble",{L}):null;if(!g)return null;pp.a=g.who.id}
+ if(V[0]==="B"){const H=NP.filter(v=>(v.bac||0)>=80);const ho=H.length?npcWhy("f7Host",{H}):null;if(ho){const hv=ho.who;pp.host=hv.id;ap(hv,{bac:-(40+rkOf(hv)*8)})}else{pp.g=NP.slice().sort((a,b)=>(aff(S,b)||0)-(aff(S,a)||0)).slice(0,2).map(v=>v.id)}}
  return pp}
 function fMark7(k,vi){const j=j7s();(j.vu["f:"+k]=j.vu["f:"+k]||[]).push(vi);try{evHistMark(`j71:f:${k}:${vi}`)}catch(e){}}
 /* a festival modal on the day (non-contest kinds; contests go through the invitation the tuần before) */
@@ -314,8 +316,8 @@ function mMake7(k){const f=MF7[k];let pp=null;try{pp=f.pp?f.pp():{}}catch(e){pp=
 function mFire7(force){const L=[];for(const k in MF7){const f=MF7[k];if(!force&&evCooldownLeft("j71m:"+k,f.cd)>0)continue;let w=0;try{w=f.w()}catch(e){}if(w>0)L.push([k,w])}
  for(let t=0;t<4&&L.length;t++){const tot=L.reduce((a,x)=>a+x[1],0);let r=Math.random()*tot,i=0;while(i<L.length-1&&r>L[i][1]){r-=L[i][1];i++}const k=L[i][0];L.splice(i,1);const m=mMake7(k);if(m){evCooldown("j71m:"+k,MF7[k].cd);return m}}return null}
 /* NPC merit: monthly, same costs and gains as her own choices */
-function npcMerit7(){if(!roll(J71.npcP*100))return"";const L=liveRivals(true).filter(present7);if(!L.length)return"";const w=L.map(v=>5+(v.duc||0)/4+(v.danh||0)/6);let r=Math.random()*w.reduce((a,b)=>a+b),i=0;while(i<L.length-1&&r>w[i]){r-=w[i];i++}const v=L[i];
- const ks=Object.keys(MF7).filter(k=>MF7[k].npc);const k=pick(ks);let s="";try{s=MF7[k].npc(v)}catch(e){s=""}if(s){j7s().npc++;log(`Lập công: ${s}`)}return s}
+function npcMerit7(){const L=liveRivals(true).filter(present7);if(!L.length)return"";const mo=npcWhy("f7Merit",{L});if(!mo)return"";const v=mo.who;
+ const ks=Object.keys(MF7).filter(k=>MF7[k].npc);let s="";for(const k of ks){try{s=MF7[k].npc(v)}catch(e){s=""}if(s)break}/* npc-purpose: the first deed the palace needs now (each checks its own need) */if(s){j7s().npc++;log(`Lập công: ${s}`)}return s}
 /* the bribe she took can come out (true risk shown on the choice) */
 function brbTick7(){const j=j7s();if(j.brb==null)return;if(S.turn-j.brb>12){j.brb=null;return}if(roll(25)){j.brb=null;apply({danh:BAL.eff.j71.danhBrbTick7});log(R7(`Chuyện ngươi nhận bạc bịt miệng kẻ tham ô bị lộ: Danh ${balSg(BAL.eff.j71.danhBrbTick7)}.`))}}
 /* real realm events from j55 (floods, droughts, tribute envoys) ground the merit families */

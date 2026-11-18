@@ -135,23 +135,23 @@ const MOODW=["vui","bình thường","phiền muộn","giận dữ"];
 function talkOpts(p){const E=S.emp;return [has("trongtai")?3:(p.tai||0)>=60?1:0,has("chamchinh")?3:-1,has("datinh")||has("mesac")?3:has("lanhlung")?-1:0,E.mood>=2?2:1]}
 /* (a) an NPC's night: same formula as hers (PEND.prep q, PEND.night1 talk + mood + R(3), nightFx gains and reward) */
 rivalNight=function(v){v.nights++;v.nightLog.push(wk());
- let q=1;if(v.bac>=BAL.bacFee.npcMat&&roll(55)){ap(v,{bac:-BAL.bacFee.npcMat});q=3}else if((v.suc||0)>=30){ap(v,{suc:-5});const lv=Math.max(1,Math.max(...Object.values(v.arts)));q=1+(roll(odA(v,40+(v.tai||0)/2+lv*8))?1+lv:1)}
+ let q=1;if(v.bac>=BAL.bacFee.npcMat&&npcWhy("nightPrep",{v})){ap(v,{bac:-BAL.bacFee.npcMat});q=3}else if((v.suc||0)>=30){ap(v,{suc:-5});const lv=Math.max(1,Math.max(...Object.values(v.arts)));q=1+(roll(odA(v,40+(v.tai||0)/2+lv*8))?1+lv:1)}
  const O=talkOpts(v);const fit=roll(BAL.odb.j75.rbFit+(v.tamco||0)/2)?Math.max(...O):pick(O);const mood=BAL.night.mood[S.emp.mood];
  const sc=q+fit+mood+R(3);const NG=nightGain(sc),g=NG.sung,an=NG.an;ap(v,{sung:g,an});v.pg=cl(v.pg+6,0,100);v.tablet=0;v.lastNightS=sc;
  const grade=sc>=BAL.nightEnd.warm?"đêm vui":sc>=BAL.nightEnd.normal?"đêm êm":"đêm nhạt";
  let r=`Đêm qua thẻ bài của ${v.name} được lật${eyes(S)>=2?` (tai mắt nói: ${grade})`:""}. `;
  if(giuBlocked(v)){if(v.bac>=BAL.bacFee.giu&&roll(odA(v,45+v.tamco/3))){ap(v,{bac:-BAL.bacFee.giu});night(v)}}else night(v);
  {let x=null;if(typeof pillowNpc==="function"&&agOn())x=pillowNpc(v,sc);/* AG2: her own choice by her spite need (two-way row 24, one deed BAL.tw.g.pillow) */
-  else if(v.rel<-20&&roll(20)){const o=odA(v,30+v.an/2);if(roll(o)){const b=S.sung;apply({sung:-4});x={t:S,ok:1,b}}else if(DG()){ap(v,{sung:-6})}}
+  else if(v.rel<-20&&npcWhy("pillowTalk",{v})){const o=odA(v,30+v.an/2);if(roll(o)){const b=S.sung;apply({sung:-4});x={t:S,ok:1,b}}else if(DG()){ap(v,{sung:-6})}}
   if(x&&x.t===S&&x.ok&&eyes(S)>=2)r+=`Tai mắt nghe được: gối đầu, ${v.name} nói xấu ngươi.${x.b!==S.sung?` Sủng của ta ${x.b} → ${S.sung}.`:""} `}
- if(typeof amOn==="function"&&amOn()?amSendQ(v):roll(3)){r+=sendMaid(v)}/* AG3: her own choice (jagmaid) */
+ if(typeof amOn==="function"&&amOn()?amSendQ(v):npcWhy("sendMaid",{v})){r+=sendMaid(v)}/* AG3: her own choice (jagmaid) */
  if(empGive(v,BAL.odb.j75.rbTop+sc*4,"night"))bestow(v,"night");return r};
 /* (b) the quiet favour is a world act with a cost */
 const QF=["dâng canh sâm lên Dưỡng Hòa điện","chép bài thơ dâng lên ngự thư phòng","thêu túi thơm dâng Hoàng thượng","đứng đợi ngự giá ở ngự hoa viên, dâng một khúc đàn"];
 const nm0=npcMonthly;npcMonthly=function(v){const a0=ap,fi0=v.fakeIll;let seen="";let armed=false;
  const od0=odA;odA=function(p,b){if(p===v&&!armed)armed=Math.abs(b-(55+v.sung/5+mm()))<1e-9;return od0.apply(this,arguments)};
  ap=function(p,o){if(armed&&p===v&&o&&o.sung===3&&Object.keys(o).length===1&&!(v.fakeIll===2&&fi0!==2)){armed=false;if((v.bac||0)<10)return;const b=v.sung;a0(p,{sung:3,bac:-10});
-   if(roll(BAL.odb.j75.rbTop_2+eyes(S)*10))seen+=`Tai mắt kể: ${v.name} ${pick(QF)}; Hoàng thượng vui lòng.${b!==v.sung?` Sủng của ${v.name} ${b} → ${v.sung}.`:""} `;return}return a0.apply(this,arguments)};
+   if(npcTell(v,{from:liveRivals(true).filter(x=>x!==v)}))seen+=`Tai mắt kể: ${v.name} ${pick(QF)}; Hoàng thượng vui lòng.${b!==v.sung?` Sủng của ${v.name} ${b} → ${v.sung}.`:""} `;return}return a0.apply(this,arguments)};
  let r;try{r=nm0.apply(this,arguments)}finally{ap=a0;odA=od0}return (r||"")+seen};
 /* (c) the same weekly decay for everyone (her rule from endTurn: -1, none for Hoàng hậu after the first tuần, none in tuần 2 if he is lạnh lùng) */
 /* NPCs work for Sủng as she does: the same acts as her deck cards (art ≥3: dance, zither, chess; else a small gift), same costs and odds shape */
@@ -175,7 +175,7 @@ function npcEffort(v,force){const K=npcEffortKind(v);if(!K)return "";const pt=tv
  /* two-way (owner 16/11 s21): her Kinh hồng vũ card also stirs the others (ghen +10, liking −5); an NPC dance does the same */
  if(kd==="vu"){liveRivals(true).forEach(x=>{if(x!==v){x.ghen=cl((x.ghen||0)+BAL.tw.g.vu[0],0,100);affAdd(x,v,-BAL.tw.g.vu[1])}});affAdd(S,v,-BAL.tw.g.vu[1])}
  /* the change names whose Sủng it is; a line with no change says nothing about numbers (owner 11/15: "Sủng nàng 45 → 45") */
- return roll(BAL.odb.j75.rbTop_2+eyes(S)*10)?`Tai mắt kể: ${v.name} ${n}: ${ok?"Hoàng thượng vui lòng":"ngài không để ý"}.${b!==v.sung?` Sủng của ${v.name} ${b} → ${v.sung}.`:""} `:""}
+ return npcTell(v,{from:liveRivals(true).filter(x=>x!==v)})?`Tai mắt kể: ${v.name} ${n}: ${ok?"Hoàng thượng vui lòng":"ngài không để ý"}.${b!==v.sung?` Sủng của ${v.name} ${b} → ${v.sung}.`:""} `:""}
 window.npcEffort=npcEffort;window.npcEffortKind=npcEffortKind;
 const rt0=rivalsTurn;rivalsTurn=function(){let ev=rt0.apply(this,arguments)||"";try{if(S.dead)return ev;
  for(const v of liveRivals(true)){if(!v.alive||v.out)continue;ev+=window.npcEffort(v);/* the global one: jagent mutes this weekly dice while the agent loop owns the deed */const keep=(has("lanhlung")&&S.tuan===1)||(rkOf(v)>=7&&S.tuan!==0);if(!keep)v.sung=cl(v.sung-1,0,100)}
@@ -189,7 +189,7 @@ function monopoly(){const f=favNow();if(!f)return"";const p=f.p,me=p===S,nm=me?"
   if(who&&!(q===S&&!me)){const b=p.sung;ap(p,{sung:-BAL.tw.g.admon});p.admonWk=wk();
    const t=`${who} khuyên Hoàng thượng “mưa móc đều khắp”, đừng chỉ sủng ${me?"ngươi":p.name} (${f.n} trong sáu đêm gần đây). ${b!==p.sung?`Sủng của ${me?"ta":p.name} ${b} → ${p.sung}; h`:"H"}ai tuần tới ngài để ý đến người khác.`;/* owner 11/15: name whose Sủng; no "30 → 30" */
    if(me)Q.push({t:"Mưa móc đều khắp",who:q&&q!==S?pv(q):pTH(),h:`<p>${t}</p>`});ev+=t+" "}}
- if(roll(25)){const L=consorts().filter(x=>x!==p&&(x===S||(x.alive&&!x.out)));const x=pick(L);if(x){const b=x.sung;ap(x,{sung:3});ev+=x===S?`Nhà ngươi thấy ${nm} độc sủng, dâng lễ vật xin Hoàng thượng để mắt đến ngươi.${b!==S.sung?` Sủng của ngươi ${b} → ${S.sung}.`:""} `:`Nhà ${x.name} thấy ${nm} độc sủng, dâng lễ vật xin Hoàng thượng để mắt đến con gái.${b!==x.sung?` Sủng của ${x.name} ${b} → ${x.sung}.`:""} `}}
+ {const L=consorts().filter(x=>x!==p&&(x===S||(x.alive&&!x.out)));const fg=npcWhy("famGift",{L});const x=fg&&fg.tgt;if(x){const b=x.sung;ap(x,{sung:3});ev+=x===S?`Nhà ngươi thấy ${nm} độc sủng, dâng lễ vật xin Hoàng thượng để mắt đến ngươi.${b!==S.sung?` Sủng của ngươi ${b} → ${S.sung}.`:""} `:`Nhà ${x.name} thấy ${nm} độc sủng, dâng lễ vật xin Hoàng thượng để mắt đến con gái.${b!==x.sung?` Sủng của ${x.name} ${b} → ${x.sung}.`:""} `}}
  return ev}
 window.favNow=favNow;
 function satN(p){return Math.max(0,nightsIn(p,6)-1)}

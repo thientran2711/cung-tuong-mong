@@ -1125,7 +1125,7 @@ Object.assign(BAL,{odb:{
  j7:{odO:35,odX:50,odO_2:40,odO_3:40,odX_2:45,odO_4:50,odO_5:40,odO_6:40,odO_7:30,odO_8:40,odO_9:35,odO_10:35,odO_11:35,odO_12:35,odO_13:30,odO_14:30,odO_15:45,odO_16:40},
  j71:{odP:35,odP2:30,odP_2:30,odP_3:30,odP_4:40,odP_5:55,odP_6:40,odP_7:70,odP_8:25,odP_9:20,odP_10:20,odP_11:50,odP_12:30,odP_13:30,odP_14:40,odP_15:25,odP_16:30},
 
- j75:{odOP:40,rbFit:35,rbTop:10,rbTop_2:20},
+ j75:{odOP:40,rbFit:35,rbTop:10},
  j77:{odAccLeadO:35},
  j78:{odTop:40},/* odO: Kể tội reads odO_18 through P3C.tell (merge r2 M1) */
  j8:{rbInspect:40,rbSearch:35,odO1:30,odO3:40,odO1_2:45,odO2:30,rbSeenNPC:15},
@@ -1265,3 +1265,15 @@ Object.assign(BAL.ag.why.cd,{kspCheck:8,trystKnow:12});
 /* npc-purpose G1 part 8 (j4 story lines; jagwhy1). story.wait = tuần a story person prepares before the next step (≈ the old monthly 25-35 % rolls; _ = other) */
 Object.assign(BAL.ag.why,{story:{wait:{tt1:12,tt2:16,tt3:16,cn1:12,cn2:16,nc1:12,ch1:12,ch2:16,td1:12,dad:32,_:16}}});
 Object.assign(BAL.ag.why.cd,{mock:8});
+/* npc-purpose G1 part 9 (j21, j54, j71, j75; jagwhy1). call.gap = tuần between two calls at her palace (old 4 % per move); story.wait.suitor = tuần a house
+   prepares a match (old 3 %/tháng); f7: want / k / art / amb = push to enter a contest (Sủng under want, art level, ambitious ambT), prep = push to pay for
+   preparation, greed / poor = gambler's push (greedy nết, silver under poor), danh = Danh under which she seeks a name (host, merit), duc = Đức weight of a
+   merit deed, cd.f7Merit ≈ the old 30 %/tháng; j75: want / k / amb = night-prep push, maidSung = Sủng worth guarding with a maid, mono = Sủng under which a
+   family sends gifts against a monopoly */
+Object.assign(BAL.ag.why,{call:{gap:2},f7:{want:50,k:1,art:6,amb:15,ambT:["Tham vọng","Kiêu ngạo"],prep:35,greed:30,poor:60,danh:50,duc:.4},j75:{want:60,k:1,amb:15,maidSung:40,mono:40}});
+BAL.ag.why.story.wait.suitor=26;
+Object.assign(BAL.ag.why.cd,{callMe:4,f7Merit:12,sendMaid:24});
+/* npc-purpose G1 part 10 (j95b lies; jagwhy1). lie: expose / blame / frame = hostility toward her needed to expose (old 12 %), push blame (old 40 + 20 %),
+   frame (old 45 + 25 %); cd = tuần between two such deeds by the same person (lieMe ≈ the old weekly nết rumorP) */
+Object.assign(BAL.ag.why,{lie:{expose:30,blame:40,frame:45}});
+Object.assign(BAL.ag.why.cd,{exposeMe:6,lieMe:6,blameMe:4,frameMe:4});

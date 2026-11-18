@@ -177,3 +177,34 @@ function npw1Sc(st,key,o){const k="at_"+key;if(st[k]==null)st[k]=wk();return Obj
 npwReg("story",{grp:"story",who:()=>[NPW1_ST],cdOf:()=>0,why(a,c){const W=npw1B("story").wait;const n=wk()-(c.st[c.k]==null?wk():c.st[c.k]);
  if(c.q&&!motiveOK(c.q,S,"harm").ok)return null;return {s:npwB().min*n/(W[c.key]||W._),t:S,r:"đến lúc ra tay"}}});
 npwReg("mock",{grp:"consort",who:()=>liveRivals(true),why(v){return npw1Mot(v,S,"provoke")}});
+/* ---- G1 part 9: j21 (a consort calls at her palace), j54 (a suitor for a princess), j71 (festival cast, merit deeds), j75 (night prep, pillow talk,
+   sending a maid, a family's gifts against a monopoly, the quiet favour seen). BAL.ag.why.{call,suitor,f7,j75} ----
+   callMe     a consort calls at her palace only with a reason (the apFriend / apTaunt reasons), at most once every call.gap tuần
+   suitor     a great house seeks the princess for its son: the clock of its plan (story wait "suitor"); the son = the best house (tier 0 first) and gift
+   f7Enter    a consort enters a festival contest when she wants his eye: (want − Sủng) × k + her art × art + amb (ambitious nết); she spends on
+              preparation when that push ≥ f7.prep · f7Gamble the one who gambles: greedy or short of silver · f7Host the richest one hosts when she
+              wants a name (danh under f7.danh) · f7Merit a consort does a merit deed when she seeks name / rank (Đức / Danh / amb); the deed = the first
+              one the palace needs now (each deed checks its own need)
+   nightPrep  a consort spends on her night when she wants favour (or is ambitious) · pillowTalk the fallback (agent layer off): motiveOK rumor
+   sendMaid   the fallback (jagmaid off): she sends her maid to serve when she cannot (with child / ill) and fears losing him
+   famGift    the family of the most neglected consort sends gifts against the monopoly ((want − Sủng) × k) */
+npwReg("callMe",{grp:"consort",who:()=>liveRivals(true).filter(v=>!v.confined&&!sameHouse(S,v)),why(v){return NPW.reg.apFriend.why(v,{})||NPW.reg.apTaunt.why(v,{})}});
+npwReg("suitor",{grp:"house",who:c=>c.F,cdOf:()=>0,why(s){return {s:npwB().min+(3-(s.tier||0))*10+(s.tai||0)/10,r:"nhà hắn muốn kết thông gia"}}});
+function npw1F7(v){const F=npw1B("f7");const a=Math.max(0,...Object.values(v.arts||{0:0}));return (F.want-(v.sung||0))*F.k+a*F.art+(traitsOf(v).some(t=>F.ambT.includes(t))?F.amb:0)}
+npwReg("f7Enter",{grp:"consort",who:c=>c.NP,cdOf:()=>0,why(v){const s=npw1F7(v);return s>0?{s,r:"muốn được Hoàng thượng để mắt"}:null}});
+npwReg("f7Gamble",{grp:"consort",who:c=>c.L,cdOf:()=>0,why(v){const F=npw1B("f7");const g=traitsOf(v).some(t=>npw1B("dil").greedT.includes(t))?F.greed:0;const s=g+Math.max(0,F.poor-(v.bac||0));return s>0?{s,r:g?"vốn ham của":"túng bạc"}:null}});
+npwReg("f7Host",{grp:"consort",who:c=>c.H,cdOf:()=>0,why(v){const F=npw1B("f7");const s=(F.danh-(v.danh||0))*F.k+(traitsOf(v).some(t=>F.ambT.includes(t))?F.amb:0);return s>0?{s,r:"muốn nổi danh"}:null}});
+npwReg("f7Merit",{grp:"consort",who:c=>c.L,why(v){const F=npw1B("f7");const s=(v.duc||0)*F.duc+Math.max(0,F.danh-(v.danh||0))*F.k+(traitsOf(v).some(t=>F.ambT.includes(t))?F.amb:0);return s>0?{s,r:"muốn lập công"}:null}});
+npwReg("nightPrep",{grp:"consort",who:c=>[c.v],cdOf:()=>0,why(v){const J=npw1B("j75");const s=(J.want-(v.sung||0))*J.k+(traitsOf(v).some(t=>npw1B("f7").ambT.includes(t))?J.amb:0);return s>0?{s,r:"muốn giữ ân sủng"}:null}});
+npwReg("pillowTalk",{grp:"consort",who:c=>[c.v],cdOf:()=>0,why(v){return npw1Mot(v,S,"rumor")}});
+npwReg("sendMaid",{grp:"consort",who:c=>[c.v],why(v){return (v.preg||v.ill)&&(v.sung||0)>=npw1B("j75").maidSung?{s:npwB().min+(v.sung||0)/4,r:"không hầu được, sợ mất ân sủng"}:null}});
+npwReg("famGift",{grp:"house",who:c=>c.L,cdOf:()=>0,why(x){const J=npw1B("j75");const g=x===S?S.sung:(x.sung||0);const s=(J.mono-g)*J.k;return s>0?{s,t:x,r:"thấy con gái bị lạnh nhạt"}:null}});
+/* ---- G1 part 10: lies about her (j95b). BAL.ag.why.lie ----
+   exposeMe   one who holds proof of her real harm tells the victim when her grudge is strong enough (motiveOK expose + hostility ≥ lie.expose)
+   lieMe      a consort with a motive spreads a lie about her (motiveOK rumor; s + her nết rumorP + malice) · blameMe / frameMe a spreader / plotter
+              pushes the blame onto her only with a motive and hostility ≥ lie.blame / lie.frame. Listener = the one the spreader trusts who likes her
+              least (j95bListener npwPick); re-picked actors = the strongest motive among those who pass the gate */
+npwReg("exposeMe",{grp:"consort",who:c=>[c.x],why(x){return npw1Mot(x,S,"expose",npw1B("lie").expose)}});
+npwReg("lieMe",{grp:"consort",who:c=>[c.x],why(x){const o=npw1Mot(x,S,"rumor");if(!o)return null;o.s+=nv(x,"rumorP")+(x.malice||0)/40;return o}});
+npwReg("blameMe",{grp:"consort",who:c=>[c.a],why(a){return npw1Mot(a,S,"rumor",npw1B("lie").blame)}});
+npwReg("frameMe",{grp:"consort",who:c=>[c.a],why(a){return npw1Mot(a,S,"frame",npw1B("lie").frame)}});

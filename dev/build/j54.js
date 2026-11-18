@@ -91,7 +91,7 @@ function h54Month(){let ev="";if(!S||S.dead)return ev;h54PoolUp();if(S.month===1
   /* betrothed and now 18: the wedding */
   if(k.hB&&k.age>=BAL.age.wed&&h54Home(k)){const t=h54Wed(k,p);if(t){if(p===S)ev+=`<span class="g">${t}</span> `;else log(t)}}
   /* she meets someone (16–20, at home, no promise yet) */
-  if(h54Home(k)&&!k.hB&&!k.hMet&&k.age>=BAL.age.betroth&&k.age<=20&&roll(3)&&h54Cd(p)){const F=h54Pool().filter(s=>!s.taken);if(F.length){const s=pick(F);h54Mark(p);
+  if(h54Home(k)&&!k.hB&&!k.hMet&&k.age>=BAL.age.betroth&&k.age<=20&&h54Cd(p)&&npcWhy("story",npw1Sc(k,"suitor"))){const F=h54Pool().filter(s=>!s.taken);const so=F.length?npcWhy("suitor",{F}):null;if(so){const s=so.who;h54Mark(p);
     if(p===S)pushDil(mkP("h54met",{k:k.name,s:s.id}),"Con gái có người thương");else k.hMet=s.id}}
   /* NPC mothers open marriage talks by themselves (same options as hers) */
   if(p!==S&&h54Live(p)&&h54Home(k)&&!k.hB&&k.age>=BAL.age.betroth&&h54Cd(p)&&roll(20)){h54Mark(p);const t=h54NpcBan(k,p);if(t)log(t)}

@@ -114,10 +114,10 @@ function j95bCheck(id,pp){const L=j95bActors(id,pp);if(L==null)return null;if(L.
  for(const r of L){r.g=j95bJudge(r);
   if(!r.g.ok&&!r.role.nb&&!r.role.nr&&id.indexOf("e68")!==0&&P95B[id]&&!r.xtra&&r.raw!=null&&!r.role.key){/* re-pick a person who passes */
    const others=L.filter(x=>x!==r&&x.o).map(x=>x.o).concat([r.by,r.t].filter(Boolean));const C=liveRivals(false).filter(v=>!others.includes(v)&&!v.confined&&j95bJudge(Object.assign({},r,{o:v,t:r.role.to?(L.find(x=>x.slot===r.role.to)||{}).o:r.t})).ok);
-   if(C.length){const w=r.role.w;const v=w?j95pw(C.map(x=>[x,w(x)])):C[Math.floor(Math.random()*C.length)];pp[r.slot]=v.id;r.o=v;r.g=j95bJudge(r);J95B.stat.repick++;
+   if(C.length){const w=r.role.w;const v=w?j95pw(C.map(x=>[x,w(x)])):npwPick(C,x=>1+Math.max(0,hostility(x,r.t||S)));pp[r.slot]=v.id;r.o=v;r.g=j95bJudge(r);J95B.stat.repick++;
     for(const x of L)if(x.role.to===r.slot)x.t=v}}
   if(r.xtra&&!r.g.ok){/* pact needs a reason against the Hoàng hậu too: re-pick the ally */const C=liveRivals(false).filter(v=>j95bGate({f:"ally"},v,S,"ally").ok&&j95bGate({h:"plot"},v,rivals[0],"plot").ok);
-   if(C.length&&pp.v!=null){const v=C[Math.floor(Math.random()*C.length)];pp.v=v.id;const a=L.find(x=>x.slot==="v");a.o=v;a.g=j95bJudge(a);r.o=v;r.g=j95bJudge(r);J95B.stat.repick++}}}
+   if(C.length&&pp.v!=null){const v=npwPick(C,x=>1+Math.max(0,hostility(x,rivals[0]))+Math.max(0,aff(x,S)));pp.v=v.id;const a=L.find(x=>x.slot==="v");a.o=v;a.g=j95bJudge(a);r.o=v;r.g=j95bJudge(r);J95B.stat.repick++}}}
  const bad=L.filter(r=>!r.g.ok&&!r.role.nb);return{ok:!bad.length,list:L,bad}}
 
 /* ---------------- 2. PLACES IN WORDS ---------------- */
@@ -238,14 +238,14 @@ function j95bTrace(u){const z=j95bZ();const r=z.rum.find(x=>x.u===u);if(!r)retur
  else msg=x?"Lần theo mãi vẫn không ra kẻ tung tin.":"Lời đồn không rõ từ đâu ra, không lần được.";
  log(msg);Q.push({t:"Tra tin đồn",h:`<p>${msg}</p>`});return msg}
 /* who someone can whisper to: a consort the spreader is not on bad terms with and who does not already hate her */
-function j95bListener(x){const L=liveRivals(true).filter(y=>y!==x&&!sameHouse(y,S)&&aff(y,S)>-30&&(!x||aff(x,y)>=-5));return L.length?L[Math.floor(Math.random()*L.length)]:null}
+function j95bListener(x){const L=liveRivals(true).filter(y=>y!==x&&!sameHouse(y,S)&&aff(y,S)>-30&&(!x||aff(x,y)>=-5));return npwPick(L,y=>1+Math.max(0,x?aff(x,y):0)+Math.max(0,-aff(y,S)))}
 function j95bWeek(){if(!j95bOn()||S.dead||(typeof isSrv==="function"&&isSrv()))return;const z=j95bZ();if(z.wk===wk())return;z.wk=wk();
  /* the record of her harm fades */for(const id in z.harm)if(wk()-z.harm[id].w>12)delete z.harm[id];
  for(const x of liveRivals(true)){if(x.confined)continue;
   /* evidence in hand (j78): someone holding proof of her real harm tells the victim */
-  if(evG(x,S)>=1){for(const yid in z.harm){const y=RV(+yid);if(!y||y===x||!y.alive||y.out)continue;if(!motiveOK(x,S,"expose").ok)break;if(j95dice(12)){const g=motiveOK(x,S,"expose");j95bAct("v"+x.id,"expose","me",g,"rumor:j78");j95bSeed(x,y,"j78")}break}}
-  /* a lie from someone with a motive */const g=motiveOK(x,S,"rumor");if(!g.ok)continue;const p=(nv(x,"rumorP"))+(x.malice||0)/40;
-  if(j95dice(p)){const y=j95bListener(x);if(y){j95bAct("v"+x.id,"rumor","me",g,"rumor:tick");j95bSeed(x,y,"tick")}}}
+  if(evG(x,S)>=1){for(const yid in z.harm){const y=RV(+yid);if(!y||y===x||!y.alive||y.out)continue;if(!motiveOK(x,S,"expose").ok)break;if(npcWhy("exposeMe",{x})){const g=motiveOK(x,S,"expose");j95bAct("v"+x.id,"expose","me",g,"rumor:j78");j95bSeed(x,y,"j78")}break}}
+  /* a lie from someone with a motive */const g=motiveOK(x,S,"rumor");if(!g.ok)continue;
+  if(npcWhy("lieMe",{x})){const y=j95bListener(x);if(y){j95bAct("v"+x.id,"rumor","me",g,"rumor:tick");j95bSeed(x,y,"tick")}}}
  /* those who believe retaliate (the gate sees the rumour as their reason) */
  for(const r of z.rum){if(r.cleared||wk()-r.w>J95B.RUMW)continue;const y=RV(r.y);if(!y||!y.alive||y.out||y.confined)continue;if(!j95dice(30))continue;let t="";try{t=npcAct(y,S)}catch(e){}
   if(t){J95B.stat.revenge++;log(t);Q.push({t:"Có người ra tay",who:pv(y),opt:1,h:`<p>${t}</p>${r.known?`<p><i>Nghe đồn ${y.name} làm vậy vì tin lời đồn kia.</i></p>`:""}`})}}}
@@ -287,11 +287,11 @@ function j95bWeek(){if(!j95bOn()||S.dead||(typeof isSrv==="function"&&isSrv()))r
  const ra0=runAct;runAct=function(a,t,k){const r=ra0.apply(this,arguments);try{if(j95bOn()&&r&&a&&t&&a!==t){const okd=!/không ai tin|bị bắt|bị lộ|phát giác|chặn kịp|từ chối|không thành/.test(r);
    if(a===S&&t.rel!=null&&H95.has(k)&&okd)j95bZ().harm[t.id]={k,w:wk()};
    if(a!==S&&a.rel!=null&&k==="rumor"&&okd&&!(typeof isSrv==="function"&&isSrv())){const how=window.__j70exec?"j70":"act";
-    if(t===S){if(j95dice(45)){const y=j95bListener(a);if(y)j95bSeed(a,y,how)}}
-    else if(hostility(a,S)>=40&&j95dice(20)&&motiveOK(a,S,"rumor").ok)j95bSeed(a,t,how,{txt:"đứng sau lời đồn bẩn về nàng",truth:false})}}}catch(e){j95bErr("runAct",e)}return r};
+    if(t===S){const y=j95bListener(a);if(y)j95bSeed(a,y,how)}
+    else if(npcWhy("blameMe",{a}))j95bSeed(a,t,how,{txt:"đứng sau lời đồn bẩn về nàng",truth:false})}}}catch(e){j95bErr("runAct",e)}return r};
  /* a j70 plot carried out against another consort: the plotter may push the blame onto her */
  if(typeof exec70==="function"){const x0=exec70;exec70=function(p){const r=x0.apply(this,arguments);try{if(j95bOn()&&r&&p&&p.a!=="me"&&p.t!=="me"&&!(typeof isSrv==="function"&&isSrv())){const a=pa70(p),t=pt70(p);
-   if(a&&t&&a!==S&&t!==S&&t.alive&&!/bị cắt|bị bắt|quả tang|thời cơ đã qua/.test(r)&&hostility(a,S)>=45&&j95dice(25)&&motiveOK(a,S,"frame").ok){const M=pm70(p);j95bSeed(a,t,"j70",{txt:`đứng sau vụ ${M?M.n.toLowerCase():"mưu hại"} nhắm vào nàng`,truth:false})}}}catch(e){j95bErr("exec70",e)}return r}}
+   if(a&&t&&a!==S&&t!==S&&t.alive&&!/bị cắt|bị bắt|quả tang|thời cơ đã qua/.test(r)&&npcWhy("frameMe",{a})){const M=pm70(p);j95bSeed(a,t,"j70",{txt:`đứng sau vụ ${M?M.n.toLowerCase():"mưu hại"} nhắm vào nàng`,truth:false})}}}catch(e){j95bErr("exec70",e)}return r}}
  const et0=endTurn;endTurn=function(){const w0=S&&!S.dead?wk():null;const r=et0.apply(this,arguments);after();try{if(j95bOn()&&S&&!S.dead&&w0!=null&&wk()!==w0){j95bWeek();if(Q.length&&$("modal").hidden)showModal()}}catch(e){j95bErr("week",e)}return r};
  /* a new life: the in-memory audit lists start again (the save holds what matters) */
  if(typeof start==="function"){const st0=start;start=function(){J95B.bind=[];J95B.ev=[];J95B.notes=[];J95B.next=[];return st0.apply(this,arguments)}}
