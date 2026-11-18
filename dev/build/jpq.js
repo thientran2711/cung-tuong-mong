@@ -111,7 +111,7 @@ function pqMonth(){const Z=pqS();let ev="";if(Z.alert>0)Z.alert--;if(Z.cd>0)Z.cd
  if(Z.slow&&Z.slow.who==="th"&&S.thDead&&!Z.inq){Z.inq=Object.assign(Z.slow,{mo:BAL.pq.inq.mo,o:pqInqO(pqDoer(Z.slow)||S,"docngam",false)});Z.slow=null}
  const I=Z.inq;if(I){const a=pqDoer(I);if(!a){Z.inq=null;return ev}
   if(I.mo===BAL.pq.inq.mo)pqCount("inq_th");
-  if(roll(I.o/BAL.pq.inq.mo)){Z.inq=null;pqCount("exp_th");ev+=a===S?pqDoom(S,"th",`Hoàng thượng sai Tông nhân phủ tra xét cái chết của Thái hậu, lần ra món ăn từ cung ngươi (khả năng ${chanceLo(I.o)}).`):pqDoom(a,"th",`Tông nhân phủ tra ra cái chết của Thái hậu do món ăn từ cung ${a.name}.`);return ev}
+  if(roll(100*(1-Math.pow(1-I.o/100,1/BAL.pq.inq.mo)))){/* the window's rolls add up to exactly the shown chance I.o */Z.inq=null;pqCount("exp_th");ev+=a===S?pqDoom(S,"th",`Hoàng thượng sai Tông nhân phủ tra xét cái chết của Thái hậu, lần ra món ăn từ cung ngươi (khả năng ${chanceLo(I.o)}).`):pqDoom(a,"th",`Tông nhân phủ tra ra cái chết của Thái hậu do món ăn từ cung ${a.name}.`);return ev}
   if(--I.mo<=0){Z.inq=null;ev+="Vụ Thái hậu băng hà khép lại, Tông nhân phủ không tra ra điều gì. "}}
  return ev}
 (function(){if(typeof monthTick!=="function")return;const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments);try{if(S&&!S.dead&&pqHost())ev=(ev||"")+pqMonth()}catch(x){console.error("pq month",x)}return ev}})();
