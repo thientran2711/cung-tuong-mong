@@ -29,7 +29,25 @@ function tick(){try{const c=stClose();if(!c)return;const kk=key(c);if(S.closeSee
  if(chip(c))S.closeSeen=kk}catch(e){}}
 if(window.kitStageRail)kitStageRail.add({id:"closing",order:2,glyph:"!",title:"Sắp đóng cửa",when:()=>!!stClose(),busy:()=>true,badge:()=>true,
  onTap:()=>{const c=stClose();if(c)chip(c)}});
-if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);try{tick()}catch(e){}return r}}
+if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);try{actPendRun()}catch(e){}try{tick()}catch(e){}return r}}
+/* (3) ACT = A PLACE (owner OD 18/11 ~19:55Z + ~20:00Z): a Hành sự act that means going somewhere really moves her there on Dư đồ (the ONE
+   walk: goTo → S.place, S.visit, location ledger), she STAYS there, the stage shows it. ONE cost: the act's own khắc/sức already include
+   the trip, so the walk khắc is not charged again (the j9 load idiom `const u=used; goTo(k); used=u`). The act itself is the permission
+   to enter for this buổi (accGrant). Invites ("Mời thái y…") keep her where she is. Table: dev/test/act-place-audit.js. */
+const ACT_PLACE={"Thỉnh an Thái hậu":"tn","Nhờ Thái hậu nói giúp":"tn","Thỉnh an Hoàng hậu":"kn","Hối lộ Kính sự phòng":"ksp","Xem sổ nguyệt sự":"ksp",
+ "Xem lén sổ nguyệt sự":"ksp","Xin rút thẻ bài, đóng cửa tĩnh dưỡng":"ksp","Sang Thái y viện xin bắt mạch":"tyv"};
+window.ACT_PLACE=ACT_PLACE;
+function actPlace(a){try{if(!a)return null;const k=ACT_PLACE[a.n];if(!k)return null;if(k==="kn"&&!(typeof qOn==="function"&&qOn()))return null;return k}catch(e){return null}}
+window.actPlace=actPlace;
+function actMove(k){try{if(!k||!S||S.dead||S.out||S.confined||S.place===k)return false;if(typeof isSrv==="function"&&isSrv())return false;
+ if(typeof accGrant==="function")accGrant(S,k);const u=used,q=window.__accSilent;window.__accSilent=1;try{used=0;goTo(k)}finally{used=u;window.__accSilent=q}
+ return S.place===k}catch(e){return false}}
+window.actMove=actMove;
+if(typeof act==="function"){const a0=act;act=function(i){const a=typeof deck!=="undefined"&&deck?deck[i]:null;const was=!!(a&&a.done),k=actPlace(a);const r=a0.apply(this,arguments);
+ try{if(k&&a&&a.done&&!was){if(Q.length)window.__actPend={k,bk:typeof bkey==="function"?bkey():""};/* goTo waits while the result card is up */
+  else if(actMove(k)&&typeof render==="function")render()}}catch(e){}return r}}
+/* the pending trip runs when the act's cards are closed, in the same buổi (a day/buổi turn in between cancels it: she is elsewhere by then) */
+function actPendRun(){try{const P=window.__actPend;if(!P||Q.length)return;window.__actPend=null;if((typeof bkey==="function"?bkey():"")!==P.bk)return;if(actMove(P.k))setTimeout(()=>{try{render()}catch(e){}},0)}catch(e){}}
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§77.2",title:"Báo sắp đóng cửa · nút ! trên cột trái sân khấu + chip tin báo",
  html:()=>`<div class="kitpg-row" style="position:relative;height:60px"><nav class="krail" style="position:static"><button type="button" data-g="!" class="krailb kglyph kbusy kbadge" title="Sắp đóng cửa"><span class="krailg" aria-hidden="true">!</span></button></nav></div>`})}catch(e){}
 }catch(e){console.error("jstagehere",e)}})();
