@@ -30,7 +30,7 @@ function chapModel(){try{const st=S&&S.st;if(!st)return null;const c=st.ch,M=st.
    o.steps.push({ok:rk,t:`Bậc Tần (nay ${chapRank(S.rank)})`,d:rk?"":"Lên bậc ở mục Sắc phong: đủ Sủng, Danh, rồi khảo hạch"});
    o.steps.push({ok:av,t:"Dâng sớ lật án",d:av?"":ce>=3&&w&&rk?"Đủ cả: dâng sớ ở Hành sự":"Mở được khi đủ chứng cứ, nhân chứng và bậc Tần"});
    o.risks=[["Hồ sơ cháy","Kho hồ sơ Hình bộ có thể bốc cháy trong đêm: mất một chứng cứ","r"],["Dâng sớ hỏng","Hoàng thượng nổi giận: chứng cứ bị thu hủy, Danh và Sủng giảm","r"],["Kẻ thù",S.foe?`${S.foe} và ${S.foeDad}`:"người đứng sau vụ án"]]}
-  else{const nn=P.n||0;for(let i=1;i<=nn;i++)o.steps.push({ok:i<P.i||!!st.done,t:`Hồi ${i}/${nn}`,d:""});o.risks=[["Kết cục",st.done?(st.tag||""):"chưa định"]]}}
+  else{const nn=P.n||0;for(let i=1;i<=nn;i++)o.steps.push({ok:i<P.i||!!st.done,t:`Hồi ${i}/${nn}`,d:""});o.risks=[["Kết quả",st.done?(st.tag||""):"chưa định"]]}}
  else return null;
  o.past=o.past.length?o.past:[];return o}catch(e){console.error("chapModel",e);return null}}
 /* inline progress (under the card): the steps as check lines with where/how, the risks, the "Đi làm" link */

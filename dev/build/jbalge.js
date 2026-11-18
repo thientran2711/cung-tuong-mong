@@ -1,0 +1,55 @@
+/* ================= jbalge: ONE CORE (OD:L1267) rulebook of the GRAND ENDINGS (Đại kết cục, jge.js; design dev/design/GRAND_ENDINGS.md §2.14, r3) =================
+   Every number the grand-ending engine uses or a text prints lives here; jge.js / jgedata.js hold words, option names and logic only.
+   Loads after jbal2.js (BAL exists), before jgedata.js / jge.js. Set by measurement: dev/measure/ge-measure.js (bands BAL.ge.target).
+   OPEN owner decisions (design §8.2) are switches here, so her ruling is one key flip:
+     D3 BAL.ge.when       "ch14" (recommended: the Hồi kết nhánh comes right after chapter 14) · alt "r11" (right after the road finale .11)
+     D4 BAL.ge.after      "rec"  (recommended: stay-endings continue the life, leave/throne/foreign endings close it) · alt "close" (all close) · "stay" (all continue)
+     D5 BAL.ge.title.carry "prev" (recommended: only the previous life's grand title is wearable next life, cosmetic) · alt "any" (any title ever earned)
+     D7 BAL.ge.showOdds   false  (recommended: the two last choices show no odds) · alt true (the ladder word on the pair that points to an open ending)
+     D8 BAL.ge.quietLoss  false  (recommended: a pair that points at no ending lands on a fail outcome with NO loss) · alt true (with its loss)
+   KIT gates: BAL.ge.mapOn false until the kit keeper ships kitBranchMap (K-GE-1); the Sơ đồ nhánh data API geMap() works either way. */
+BAL.ge={
+ on:true,              /* the engine runs for branches with full data (GE_DATA) only; other branches keep today's game */
+ n:{grand:4,rare:2},   /* fixed counts per branch (owner L1623 (1)); no normal endings */
+ when:"ch14",          /* D3 */
+ after:"rec",          /* D4 */
+ showOdds:false,       /* D7 */
+ quietLoss:false,      /* D8 */
+ mapOn:false,          /* K-GE-1 kitBranchMap not in the kit yet */
+ pull:{step:1,push:1}, /* a Chuỗi option adds step to its ending's pull; a push option takes push away (never below 0) */
+ /* odds of the open ending her pair points to: base + pull × per, clamped [min, max]; its condition not met → capped at noCond */
+ odds:{base:22,per:9,min:5,max:88,noCond:12},
+ /* option C shading lean: lean = Σ option tags × tag + (Đức now − Đức at life start) × duc + Ngã rẽ 2 sign × last; ≥ cut → thiện, ≤ −cut → ác, else natural */
+ var:{tag:2,duc:.25,last:3,cut:8},
+ /* "người ấy" for «Theo người ấy đi»: the strongest real bond — a man's tình ≥ men, or a consort's thiện cảm ≥ sis */
+ bond:{men:30,sis:40},
+ seat:["NDE","THH","HH","TM"],  /* one per world: taken by anyone → every other ending needing it turns fail-only */
+ /* summits that close the life with an epilogue under D4 "rec" (the game cannot simulate the life after) */
+ exitSum:["FREE","NUN","FOLLOW","NDE","THH","NV","KING","ANNEX","TM","REUNION"],
+ title:{tier:8,carry:"prev"},   /* D5; tier 8 = the top kit plate until K-GE-2 (2-tone Thiên mệnh plate) ships */
+ pt:30,                /* leaderboard points of a grand ending (Bảng Thiên mệnh) */
+ kimsach:"kimsachtm",  /* the one treasure kind: Kim sách Thiên mệnh (cannot be sold, given or lost, OD:L1314) */
+ /* conditions: the gate of each ending (stat floors, relation floors); words in jgedata cw print these */
+ gate:{
+  tt_co_1:{mat:40},tt_co_2:{duc:45,sung:45},tt_co_3:{dad:20},tt_co_4:{sung:50,tamco:40},
+  cnv_mat_1:{sung:50},cnv_mat_2:{sung:55,tamco:40},cnv_mat_3:{duc:40,maid:55},cnv_mat_4:{mis:20},
+  nc_tuc_1:{tai:55,danh:40},nc_tuc_2:{th:40},nc_tuc_3:{tamco:45,mat:30},nc_tuc_4:{duc:35}},
+ /* fail-outcome losses (her pair pointed at the ending and missed; none in the quiet form unless quietLoss) */
+ fail:{
+  tt_co_1:{rank:-1,danh:-12},tt_co_2:{sung:-8,danh:-4},tt_co_3:{sung:-8,danh:-6},tt_co_4:{danh:-10,duc:-6},
+  cnv_mat_1:{sung:-8,danh:-6},cnv_mat_2:{rank:-1,danh:-10,mis:-15},cnv_mat_3:{sung:-8},cnv_mat_4:{mis:-15},
+  nc_tuc_1:{danh:-8,sung:-4},nc_tuc_2:{th:-12,danh:-6},nc_tuc_3:{danh:-10,duc:-6},nc_tuc_4:{sung:-8,danh:-4}},
+ /* rewards: the same SIZE for both shadings (fair: no "right" morality); only the sign of everyone's attitude differs (rel thiện → thiện cảm +, ác → oán +).
+    rw.mul × the road's RD97L rare fx ≈ the size (start 3×); rank = steps (never above the seat rules: Hoàng hậu only by seat "HH"); mis = the named NPC's attitude */
+ rw:{mul:3,
+  tt_co_1:{danh:36,sung:18,mat:15,rel:8},tt_co_2:{rank:1,danh:30,sung:18,duc:6,rel:8},tt_co_3:{danh:24,duc:12,rel:6},tt_co_4:{rank:1,danh:30,sung:20,rel:8},
+  cnv_mat_1:{rank:1,sung:30,danh:18,rel:6},cnv_mat_2:{seat:"HH",danh:30,sung:15,rel:8},cnv_mat_3:{danh:20,duc:12,bac:300,rel:6},cnv_mat_4:{rank:1,danh:24,sung:15,mis:20,rel:6},
+  nc_tuc_1:{rank:1,danh:30,sung:18,tai:10,rel:8},nc_tuc_2:{danh:36,th:20,rel:8},nc_tuc_3:{rank:1,danh:30,tamco:10,rel:10},nc_tuc_4:{danh:24,duc:12,rel:6}},
+ help:{rw:{danh:6,duc:3}},   /* her help to an NPC who then unlocks (NPC parity, build step 5 — not live in this pass) */
+ npc:{on:false},             /* NPC grand endings wait for NPC roads (OD:L1243, unit D) */
+ /* measured bands (dev/measure/ge-measure.js): an in-character bot that follows one ending's road reaches a grand ending in about one life of two or three;
+    a random bot rarely does; the funnel leaves 1–2 open by .11; a bot that plays kindly / cruelly for most of a life gets that shading */
+ target:{inChar:[.30,.60],random:[0,.20],open11:[1,2.6],shade:.70},
+ /* the funnel target: open endings by chapter for a consistent player (measured, reported) */
+ funnel:{4:4,8:[2,3],11:[1,2]}
+};
