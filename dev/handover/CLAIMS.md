@@ -33,3 +33,4 @@ B10 consorts c26, c27, c28 | claude/cung-tuong-mong-handover-hj0h8w | session_01
 B10 consorts c29, c30 | claude/cung-tuong-mong-handover-hj0h8w | session_011xDdVPsLMAQEcPR4UW3Hqf (W48, Foreman C) | RUNNING | 2026-11-18T07:44Z
 B10 consorts c31, c32 | claude/cung-tuong-mong-handover-hj0h8w | session_011xDdVSRdcknPuRrtYQaLcW (W49, Foreman C) | RUNNING | 2026-11-18T07:44Z
 | E8f2 STEAL MINI-GAME FIX 2 (merge main, kitQuick) | review/steal-minigame | E ROOT #3 | session_01DgYSWm5h3LgBS7jeBr3BtW | SẴN SÀNG KIỂM 814078e5 (report dev/handover/reports/steal-minigame.md) | 18/11 09:20Z |
+| E8r3 delta re-review steal-minigame 814078e5 (sonnet SMALL) | review/steal-minigame | E ROOT #3 | session_01DgYSWncv22qzaK5jVgtddX | RUNNING | 18/11 07:48Z |
