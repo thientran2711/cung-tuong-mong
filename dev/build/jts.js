@@ -101,7 +101,7 @@ function tsGame(o){const odds=cl(Math.round(o.odds||50),5,95);const skipRes=()=>
   if(o.risk)rows.push(["Hộ giá",r.guard?"kịp lúc":"không kịp, cấm quân lo liệu",r.guard?"g":"n"]);if(o.note)rows.push(["Ghi chú",o.note,"n"]);
   kg82ShowRes(tsRows(rows)+`<div class="kg82act"><button class="kbtn" id="kg82ok">Đã hiểu</button></div>`,r.skipped?!!r.ok:r.raw>=5);kg82Set("score",`${r.raw}/10`);kg82Set("time","đã hết");
   $("kg82ok").onclick=()=>{kg82Close();try{o.onDone(r)}catch(e){console.error(e)}}};
- KG82.phase="intro";box.innerHTML=(o.intro?tsRows(o.intro):"")+`<div class="kg82act"><button class="kbtn" id="kg82go">Bắt đầu</button><button class="kbtn alt" id="kg82skip">Bỏ qua<small>tính theo cơ may thường: ${word(odds)}</small></button></div>`;
+ KG82.phase="intro";box.innerHTML=(o.intro?tsRows(o.intro):"")+`<div class="kg82act"><button class="kbtn" id="kg82go">Bắt đầu</button>${kitQuick({id:"kg82skip",n:"Bỏ qua",sub:`tính theo cơ may thường: ${word(odds)}`})}</div>`;
  $("kg82go").onclick=()=>kg82Play(o.kind,raw=>fin({raw,skipped:false,guard:o.risk?(KG82.tsGuard?1:0):null}));$("kg82skip").onclick=()=>fin(skipRes())}
 window.tsGame=tsGame;
 
@@ -344,7 +344,7 @@ function tsDressGame(th,done){tsTagsFresh();const T=TS_THEME[th];const P={};cons
   box.innerHTML=`<div class="ts-slots">${TS_SLOT.map(([sl,lab])=>`<div class="ts-slot"><small>${lab}</small>${P[sl]?kitItem({name:itm(P[sl]).n,src:src(P[sl]),grade:grade(P[sl]),size:"sm"}):kitItem({empty:true,name:"trống",size:"sm"})}</div>`).join("")}</div>`+
    `<div class="ts-items">${inv.length?inv.map(({e,i})=>{const on=Object.values(P).includes(e.k);return `<button type="button" class="ts-it${on?" ts-on":""}" aria-pressed="${on}" data-tsi="${i}">${kitItem({name:itm(e.k).n,src:src(e.k),grade:grade(e.k),size:"sm",sel:selI===i})}</button>`}).join(""):`<p class="past">Rương chưa có trang sức, vải vóc hay hương phấn nào.</p>`}</div>`+
    `<div class="ts-det">${detHTML()}</div>`+
-   `<div class="kg82act"><button class="kbtn" id="tsdgo">Ra mắt</button><button class="kbtn alt" id="tsdskip">Bỏ qua<small>${S.maid?S.maid.name:"cung nữ"} chọn giúp (có hợp ý hay không tùy thiện cảm của ${S.maid?S.maid.name:"cung nữ"} với ngươi: ${word(S.maid?S.maid.loyal:50)})</small></button></div>`;
+   `<div class="kg82act"><button class="kbtn" id="tsdgo">Ra mắt</button>${kitQuick({id:"tsdskip",n:"Bỏ qua",sub:`${S.maid?S.maid.name:"cung nữ"} chọn giúp (có hợp ý hay không tùy thiện cảm của ${S.maid?S.maid.name:"cung nữ"} với ngươi: ${word(S.maid?S.maid.loyal:50)})`})}</div>`;
   /* KIT §70 (owner 15/11): a tap shows the piece (kitItemDetail) with "Đặt vào …" / "Bỏ ra"; nothing is placed on a blind tap */
   box.querySelectorAll("[data-tsi]").forEach(b=>b.onclick=()=>{const i=+b.dataset.tsi;selI=selI===i?null:i;try{sfx("tap")}catch(x){}paint()});
   box.querySelectorAll("[data-tsact]").forEach(b=>b.onclick=()=>{if(b.disabled)return;const e=S.inv[selI];if(!e)return;const s=TS_SLOT.find(([,,fit])=>fit(e.k));if(!s)return;P[s[0]]=b.dataset.tsact==="off"?null:e.k;paint()});
