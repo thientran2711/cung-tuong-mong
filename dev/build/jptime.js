@@ -74,10 +74,10 @@ function ptNews(){return ptZ().filter(a=>a.by==="me"&&a.back&&a.rep&&!a.read)}
 function ptMine(){return ptZ().filter(a=>a.by==="me"&&!a.back)}
 /* ---------- the kit status icon (§77.1): away = bobbing, news = seal-red dot, tap = info panel ---------- */
 function ptPanel(){const N=ptNews(),W=ptMine();const rows=[];const OQ=S&&Array.isArray(S.ordQ)?S.ordQ.slice():[];
- for(const o of OQ)rows.push(`<p><b>${o.byNm} có lệnh cho ngươi</b> · trả lời trước ${ptWhen(o.due)} (quá hạn: coi như từ chối).</p>`);
+ for(const o of OQ)rows.push(`<p><b>${o.byNm} ${ptOrdIs(o)?"có lệnh cho ngươi":"có lời nhờ"}</b> · trả lời trước ${ptWhen(o.due)} (quá hạn: coi như từ chối).</p>`);
  for(const a of N){const r=a.rep;rows.push(`<p><b>${r.t}</b>${r.ok===true?" · <span class=\"g\">thành</span>":r.ok===false?" · <span class=\"r\">hỏng</span>":""}</p>`+(typeof kitFacts==="function"?kitFacts(r.L):`<p>${r.L.join(" ")}</p>`)+(r.d.length&&typeof kitChips==="function"?kitChips(r.d):""))}
  for(const a of W)rows.push(`<p>${a.nm} đang ${a.lbl||"đi việc"} · về ${ptWhen(a.due)}.</p>`);
- const opts=OQ.map(o=>({n:"Nghe lệnh",x:`${o.title||("Lệnh của "+o.byNm)} · trả lời trước ${ptWhen(o.due)}, quá hạn coi như từ chối · giúp hết lòng, giúp qua loa, từ chối${o.pid==="err"?"":", hay mách lẻo"}`,fx:{},go:()=>{setTimeout(()=>ptOrdOpen(o),0)}}));if(ptWaitOk()){const K=ptNext();opts.push({n:"Đợi tin",x:`ngồi chờ đến ${ptWhen(K)}, khi người được sai trở về`,fx:{},go:()=>{setTimeout(()=>ptWait(),0)}})}
+ const opts=OQ.map(o=>({n:ptOrdIs(o)?"Nghe lệnh":"Xem lời nhờ",x:`${o.title||("Lệnh của "+o.byNm)} · trả lời trước ${ptWhen(o.due)}, quá hạn coi như từ chối · giúp hết lòng, giúp qua loa, từ chối${o.pid==="err"?"":", hay mách lẻo"}`,fx:{},go:()=>{setTimeout(()=>ptOrdOpen(o),0)}}));if(ptWaitOk()){const K=ptNext();opts.push({n:"Đợi tin",x:`ngồi chờ đến ${ptWhen(K)}, khi người được sai trở về`,fx:{},go:()=>{setTimeout(()=>ptWait(),0)}})}
  for(const a of N)a.read=1;
  return{title:OQ.length?"Lệnh và tin chờ":"Tin chờ người sai đi",h:rows.join("")||"<p>Không có ai đang đi việc.</p>",opts}}
 function ptOrdN(){return S&&Array.isArray(S.ordQ)?S.ordQ.length:0}
@@ -219,7 +219,9 @@ function ptHalfN(kind){return Math.max(1,ptRow(kind).n-1)}
 function ptOrdQ(){if(!S)return[];if(!Array.isArray(S.ordQ))S.ordQ=[];return S.ordQ}
 function ptOrdAdd(pid,pp,title,m){if(!S)return null;const Z=ptOrdQ();if(pid==="err"&&Z.some(o=>o.pid==="err"))return null;const now=ptNow();
  const o={id:++PT.seq+"-o"+now,pid,pp:pp||{},title:title||"",byNm:m&&m.name||"Chủ",t0:now,due:now+((BAL.ptime&&BAL.ptime.ansK)||2)};Z.push(o);PT.stat.ord=(PT.stat.ord||0)+1;
- try{if(typeof kitLine==="function")kitLine(`${o.byNm} cho gọi ngươi: có lệnh, trả lời trước ${ptWhen(o.due)}.`,3000)}catch(e){}ptIcon();return o}
+ try{if(typeof kitLine==="function")kitLine(`${ptOrdIs(o)?`${o.byNm} cho gọi ngươi: có lệnh`:`${o.byNm} sai người sang: ${o.title||"có lời nhờ"}`}, trả lời trước ${ptWhen(o.due)}.`,3000)}catch(e){}ptIcon();return o}
+/* a master's order (cnvOrd, Việc chủ sai) vs a request / invitation from another person (receiver-choice jrcv: rcvHelp, rcvAsk …): only the words differ */
+function ptOrdIs(o){return o&&(o.pid==="cnvOrd"||o.pid==="err")}
 function ptOrdDrop(o){if(S&&Array.isArray(S.ordQ))S.ordQ=S.ordQ.filter(x=>x!==o&&x.id!==o.id)}
 /* the answer card of one order: {t, who, o:[{n, fx, x, go}]}. The order passed the world gate (j95b mkP) when it was given, so it is rebuilt
    as it was (as a save load does: no re-pick, none dropped) and the deadline's «Từ chối» always has its cost. */
@@ -231,7 +233,7 @@ function ptOrdOpen(o){ptOrdDrop(o);PT.landing=1;try{if(o.pid==="err"){const d=pt
 /* past the deadline, unanswered = «Từ chối» with its cost (the same option, its fx then its go) */
 function ptOrdTick(){if(!S||S.dead||!Array.isArray(S.ordQ)||!S.ordQ.length)return;const now=ptNow();
  for(const o of S.ordQ.slice()){if(now<o.due)continue;ptOrdDrop(o);let d=null;try{d=ptOrdCard(o)}catch(e){}const op=d&&d.o&&d.o.find(x=>x.n==="Từ chối");
-  log(`<span class="r">Ngươi không đến nghe lệnh của ${o.byNm}: coi như từ chối.</span>`);PT.stat.ordLate=(PT.stat.ordLate||0)+1;
+  log(`<span class="r">${ptOrdIs(o)?`Ngươi không đến nghe lệnh của ${o.byNm}`:`Ngươi để lời của ${o.byNm} quá hạn không đáp`}: coi như từ chối.</span>`);PT.stat.ordLate=(PT.stat.ordLate||0)+1;
   if(op){PT.landing=1;try{if(op.fx&&Object.keys(op.fx).length)apply(op.fx);if(op.go)op.go()}catch(e){ptErr("ordLate",e)}finally{PT.landing=0}}}
  ptIcon()}
 /* her master's order (j42 srvOrder → pushDil(mkP("cnvOrd"))): a notice, not a pop-up */

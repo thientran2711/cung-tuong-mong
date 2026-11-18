@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"743dc1cf+","t":"2026-11-18T21:59Z","c":"parallel time r3c: Việc chủ sai Từ chối shows Chủ tin once (no empty MẤT row)","b":"bb6f606adb5e","h":[{"s":"668e0bf4+","t":"2026-11-18T21:26Z","c":"map-zones r6 (reviewer fix on r3 5a83694): a head in a dropped palace with a stale resHead to another dropped house got a second migration …"},{"s":"b02879db+","t":"2026-11-18T20:49Z","c":"ge-writers-w1: carry jrd_muoi ch8 c3 «Thư sinh Giang Nam» (forced from s1/s2 every life) + BAL muoi_no_8.c3, by MAIN ORDER 18:45Z; muoi_no_…"},{"s":"fcff501a+","t":"2026-11-18T20:41Z","c":"map-labels-missing r2c: tag touches its own building or keeps a short leader (\u003c=90px) ending on the real slip/info rect, dot >=40px from ot…"},{"s":"c67d248d+","t":"2026-11-18T19:53Z","c":"ag-deed-perf: site build (index.html, sw.js)"},{"s":"6aab33ad","t":"2026-11-18T20:05Z","c":"KIT_REQUESTS: K-Q2-1 DONE 048f3c7"},{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"},{"s":"a5013222+","t":"2026-11-18T18:03Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)"},{"s":"08774c0e+","t":"2026-11-18T17:38Z","c":"ag-stf2 (test only): bribe histogram picks a servant whose lòng moves her bribe odds. Root of the 'disloyal one takes more' red (npc ~3/20,…"},{"s":"0351e140","t":"2026-11-18T16:48Z","c":"shop-panel: «Để ta xem» outside option, 3-column Mua/Bán grid, smallest picture strip, test"},{"s":"ebf25660+","t":"2026-11-18T15:29Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…"}]};
+window.CTM_BI={"s":"0306b8ed+","t":"2026-11-18T22:07Z","c":"parallel time r3c: Việc chủ sai Từ chối shows Chủ tin once (no empty MẤT row)","b":"581d7c536867","h":[{"s":"668e0bf4+","t":"2026-11-18T21:26Z","c":"map-zones r6 (reviewer fix on r3 5a83694): a head in a dropped palace with a stale resHead to another dropped house got a second migration …"},{"s":"b02879db+","t":"2026-11-18T20:49Z","c":"ge-writers-w1: carry jrd_muoi ch8 c3 «Thư sinh Giang Nam» (forced from s1/s2 every life) + BAL muoi_no_8.c3, by MAIN ORDER 18:45Z; muoi_no_…"},{"s":"fcff501a+","t":"2026-11-18T20:41Z","c":"map-labels-missing r2c: tag touches its own building or keeps a short leader (\u003c=90px) ending on the real slip/info rect, dot >=40px from ot…"},{"s":"c67d248d+","t":"2026-11-18T19:53Z","c":"ag-deed-perf: site build (index.html, sw.js)"},{"s":"6aab33ad","t":"2026-11-18T20:05Z","c":"KIT_REQUESTS: K-Q2-1 DONE 048f3c7"},{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"},{"s":"a5013222+","t":"2026-11-18T18:03Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)"},{"s":"08774c0e+","t":"2026-11-18T17:38Z","c":"ag-stf2 (test only): bribe histogram picks a servant whose lòng moves her bribe odds. Root of the 'disloyal one takes more' red (npc ~3/20,…"},{"s":"0351e140","t":"2026-11-18T16:48Z","c":"shop-panel: «Để ta xem» outside option, 3-column Mua/Bán grid, smallest picture strip, test"},{"s":"ebf25660+","t":"2026-11-18T15:29Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -72105,10 +72105,10 @@ function ptNews(){return ptZ().filter(a=>a.by==="me"&&a.back&&a.rep&&!a.read)}
 function ptMine(){return ptZ().filter(a=>a.by==="me"&&!a.back)}
 /* ---------- the kit status icon (§77.1): away = bobbing, news = seal-red dot, tap = info panel ---------- */
 function ptPanel(){const N=ptNews(),W=ptMine();const rows=[];const OQ=S&&Array.isArray(S.ordQ)?S.ordQ.slice():[];
- for(const o of OQ)rows.push(`<p><b>${o.byNm} có lệnh cho ngươi</b> · trả lời trước ${ptWhen(o.due)} (quá hạn: coi như từ chối).</p>`);
+ for(const o of OQ)rows.push(`<p><b>${o.byNm} ${ptOrdIs(o)?"có lệnh cho ngươi":"có lời nhờ"}</b> · trả lời trước ${ptWhen(o.due)} (quá hạn: coi như từ chối).</p>`);
  for(const a of N){const r=a.rep;rows.push(`<p><b>${r.t}</b>${r.ok===true?" · <span class=\"g\">thành</span>":r.ok===false?" · <span class=\"r\">hỏng</span>":""}</p>`+(typeof kitFacts==="function"?kitFacts(r.L):`<p>${r.L.join(" ")}</p>`)+(r.d.length&&typeof kitChips==="function"?kitChips(r.d):""))}
  for(const a of W)rows.push(`<p>${a.nm} đang ${a.lbl||"đi việc"} · về ${ptWhen(a.due)}.</p>`);
- const opts=OQ.map(o=>({n:"Nghe lệnh",x:`${o.title||("Lệnh của "+o.byNm)} · trả lời trước ${ptWhen(o.due)}, quá hạn coi như từ chối · giúp hết lòng, giúp qua loa, từ chối${o.pid==="err"?"":", hay mách lẻo"}`,fx:{},go:()=>{setTimeout(()=>ptOrdOpen(o),0)}}));if(ptWaitOk()){const K=ptNext();opts.push({n:"Đợi tin",x:`ngồi chờ đến ${ptWhen(K)}, khi người được sai trở về`,fx:{},go:()=>{setTimeout(()=>ptWait(),0)}})}
+ const opts=OQ.map(o=>({n:ptOrdIs(o)?"Nghe lệnh":"Xem lời nhờ",x:`${o.title||("Lệnh của "+o.byNm)} · trả lời trước ${ptWhen(o.due)}, quá hạn coi như từ chối · giúp hết lòng, giúp qua loa, từ chối${o.pid==="err"?"":", hay mách lẻo"}`,fx:{},go:()=>{setTimeout(()=>ptOrdOpen(o),0)}}));if(ptWaitOk()){const K=ptNext();opts.push({n:"Đợi tin",x:`ngồi chờ đến ${ptWhen(K)}, khi người được sai trở về`,fx:{},go:()=>{setTimeout(()=>ptWait(),0)}})}
  for(const a of N)a.read=1;
  return{title:OQ.length?"Lệnh và tin chờ":"Tin chờ người sai đi",h:rows.join("")||"<p>Không có ai đang đi việc.</p>",opts}}
 function ptOrdN(){return S&&Array.isArray(S.ordQ)?S.ordQ.length:0}
@@ -72250,7 +72250,9 @@ function ptHalfN(kind){return Math.max(1,ptRow(kind).n-1)}
 function ptOrdQ(){if(!S)return[];if(!Array.isArray(S.ordQ))S.ordQ=[];return S.ordQ}
 function ptOrdAdd(pid,pp,title,m){if(!S)return null;const Z=ptOrdQ();if(pid==="err"&&Z.some(o=>o.pid==="err"))return null;const now=ptNow();
  const o={id:++PT.seq+"-o"+now,pid,pp:pp||{},title:title||"",byNm:m&&m.name||"Chủ",t0:now,due:now+((BAL.ptime&&BAL.ptime.ansK)||2)};Z.push(o);PT.stat.ord=(PT.stat.ord||0)+1;
- try{if(typeof kitLine==="function")kitLine(`${o.byNm} cho gọi ngươi: có lệnh, trả lời trước ${ptWhen(o.due)}.`,3000)}catch(e){}ptIcon();return o}
+ try{if(typeof kitLine==="function")kitLine(`${ptOrdIs(o)?`${o.byNm} cho gọi ngươi: có lệnh`:`${o.byNm} sai người sang: ${o.title||"có lời nhờ"}`}, trả lời trước ${ptWhen(o.due)}.`,3000)}catch(e){}ptIcon();return o}
+/* a master's order (cnvOrd, Việc chủ sai) vs a request / invitation from another person (receiver-choice jrcv: rcvHelp, rcvAsk …): only the words differ */
+function ptOrdIs(o){return o&&(o.pid==="cnvOrd"||o.pid==="err")}
 function ptOrdDrop(o){if(S&&Array.isArray(S.ordQ))S.ordQ=S.ordQ.filter(x=>x!==o&&x.id!==o.id)}
 /* the answer card of one order: {t, who, o:[{n, fx, x, go}]}. The order passed the world gate (j95b mkP) when it was given, so it is rebuilt
    as it was (as a save load does: no re-pick, none dropped) and the deadline's «Từ chối» always has its cost. */
@@ -72262,7 +72264,7 @@ function ptOrdOpen(o){ptOrdDrop(o);PT.landing=1;try{if(o.pid==="err"){const d=pt
 /* past the deadline, unanswered = «Từ chối» with its cost (the same option, its fx then its go) */
 function ptOrdTick(){if(!S||S.dead||!Array.isArray(S.ordQ)||!S.ordQ.length)return;const now=ptNow();
  for(const o of S.ordQ.slice()){if(now<o.due)continue;ptOrdDrop(o);let d=null;try{d=ptOrdCard(o)}catch(e){}const op=d&&d.o&&d.o.find(x=>x.n==="Từ chối");
-  log(`<span class="r">Ngươi không đến nghe lệnh của ${o.byNm}: coi như từ chối.</span>`);PT.stat.ordLate=(PT.stat.ordLate||0)+1;
+  log(`<span class="r">${ptOrdIs(o)?`Ngươi không đến nghe lệnh của ${o.byNm}`:`Ngươi để lời của ${o.byNm} quá hạn không đáp`}: coi như từ chối.</span>`);PT.stat.ordLate=(PT.stat.ordLate||0)+1;
   if(op){PT.landing=1;try{if(op.fx&&Object.keys(op.fx).length)apply(op.fx);if(op.go)op.go()}catch(e){ptErr("ordLate",e)}finally{PT.landing=0}}}
  ptIcon()}
 /* her master's order (j42 srvOrder → pushDil(mkP("cnvOrd"))): a notice, not a pop-up */
@@ -76675,7 +76677,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="bb6f606adb5e";window.CTM_BUILD=BUILD;
+const BUILD="581d7c536867";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
