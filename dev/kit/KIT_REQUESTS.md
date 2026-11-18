@@ -58,4 +58,4 @@ For main's kit keeper (jpres.js KPO_ART / kitFigFx / jfxkit §68.8). All files a
 `.kpb` in a kdscroll kpanel shrinks below its own content (jk4 `.kpb{flex:0 1 auto!important;min-height:0}`), so `.opts` starts on top of the intro / facts / item card.
 Seen on live a2ad2401 in "Bỏ độc vào quà" (pgpick: .kpb 48 px vs .kpmain 163 px, 2nd paragraph hidden) and worse with the D8 royal rows (.kpb 66 vs 274 px:
 dish card + warning text hidden), Fold 755x1000@2 and iPad 1180x820@2. Whole family: every kdscroll picker with many options (pgpick, giftpick, taintpick, …).
-Blocks review/poison-road PASS (reports/review-poison-road.md FAIL 1).
+Blocks review/poison-road PASS (reports/review-poison-road.md FAIL 1). **DONE 19953e93** (review/kit-kpb: jk4 `.kpb{flex:0 0 auto}`, KIT §8.1, scan dev/test/kpb-scan.js; report reports/kit-kpb.md).
