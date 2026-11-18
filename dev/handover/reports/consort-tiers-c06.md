@@ -61,3 +61,7 @@ By eye (sheet incl. live row): pose, headdress, face, cut, embroidery as live, c
 Credits 16 × 135 = 2160 cr. Gen ids v0 t1 IfiG9p5tvE t2 4RQKCyK9Aa t3 SymEI7JUb8 t4 tC3z6fdmZJ t5 p8O67t2ehw t6 VXw4SmmMMU t7 cpgOsma0eP t8 ksp8M9X16B; v2 t1 8a6A9cLIrU t2 4RQKESu9Aa t3 79aFhgBJAL t4 gOtC8l5SXO t5 aFAc2E0fSh t6 fHG0AHECDY t7 s78aoyAl8e t8 VXw4UvhMMU.
 Files CDN img/_review/consort-tiers/c06/b10/: c06_a18_tN_v0|v1|v2.png, c06_a18_sheet.jpg (rows v0/v1/v2 × t1–t8).
 ~100% xong c06 / ~0% chơi được.
+
+
+## B10 t7 EMBROIDERY SCAN (W39, 18/11, foreman ROOT-20 after owner)
+t7 EMBROIDERY SCAN (ROOT-20): t7 v0/v1/v2 checked at native res: gold-thread phoenix + borders read stitched and flat (chest phoenix slightly raised on v0) → NOT redrawn.

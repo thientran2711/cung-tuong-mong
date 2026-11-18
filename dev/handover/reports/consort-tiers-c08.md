@@ -23,3 +23,8 @@ Files CDN img/_review/consort-tiers/c08/b10/: c08_a18_tN_v0|v1|v2.png, c08_a18_s
 PRIORITY #1 CHECK: FIGURE_GATE C4c t7 rule (owner ~08:30Z), C4d phoenix, D3, D2; re-read before the fix. t7 v1 had yellow as the MAIN robe (fault). Now: v1 = her own pink as MAIN robe + yellow only on inner robe/borders/sleeve linings/sash in the SAME deeper warm golden yellow as her t8 v1 (t8 v1 as image 2 for the shade only; gen ovNAFxF829); v2 = misty celadon MAIN + the same deep yellow parts (gen lJIC6cCgv9). Phoenix kept, one held item, bare forehead. Old versions kept as c08_a18_t7_v1_allyellow.png and c08_a18_t7_v2_pale.png (not in the sheet).
 Sheet c08_a18_sheet.jpg rebuilt. Credits ~270 (2 gens).
 ~100% xong c08 / ~0% chơi được.
+
+
+## B10 t7 EMBROIDERY SCAN (W39, 18/11, foreman ROOT-20 after owner)
+Scan: t7 v0/v1/v2 opened at native res (chest, sleeves, hem). Verdict + redraw as in the table below. Redraw = fresh gen from the live t7 (t8 v1 as 2nd image for the yellow shade on v1/v2), prompt with C1 clause 'flat matte silk-thread embroidery stitched INTO the cloth, visible stitches, tone-on-tone, same plane as the fabric, no highlights/gloss/relief/appliqué/sticker/drop shadow/pearly sheen', held item contrast, new hair ornaments on v1/v2. Old versions kept as *_t7_v?_pasted.png (not in the sheet). Sheet rebuilt.
+c08 t7 v0/v1/v2: PASTED (cream sleeve bird + peonies raised, sticker-like) → redrawn 3 gens (N2HrgFM6D9, P3uKLk742C, N2Hrglv6D9); lantern now contrasts the robe (v1 teal-blue, v0 cream, v2 pink-cream).

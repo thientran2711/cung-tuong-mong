@@ -89,3 +89,8 @@ PRIORITY #1 CHECK: FIGURE_GATE C4c (t7 rule owner ~08:30Z), D3 one item; re-read
 - t2 v0/v1/v2: live t2 held branch + round fan → ONE item (branch) in all three (gens YMsJBf9WeC, DoJ6vKVpcl, mERYbOPhJQ); old ones kept as c04_a18_t2_v?_twoitems.png (b10; b9 t2 old as c04_a18_t2_twoitems.png). b9/c04_a18_t2.png and b9/c04_a18_t7.png = the new v1.
 - Sheet c04_a18_sheet.jpg rebuilt. 5 gens = 675 cr.
 ~100% xong c04 / ~0% chơi được.
+
+
+## B10 t7 EMBROIDERY SCAN (W39, 18/11, foreman ROOT-20 after owner)
+Scan: t7 v0/v1/v2 opened at native res (chest, sleeves, hem). Verdict + redraw as in the table below. Redraw = fresh gen from the live t7 (t8 v1 as 2nd image for the yellow shade on v1/v2), prompt with C1 clause 'flat matte silk-thread embroidery stitched INTO the cloth, visible stitches, tone-on-tone, same plane as the fabric, no highlights/gloss/relief/appliqué/sticker/drop shadow/pearly sheen', held item contrast, new hair ornaments on v1/v2. Old versions kept as *_t7_v?_pasted.png (not in the sheet). Sheet rebuilt.
+c04 t7 v0/v1/v2: PASTED (glossy pearly relief on chest + sleeve phoenix) → redrawn 3 gens (w4vFkAe7EI, YMsJNadWeC, vQ2cpUMa47). New ones flatter/matte, phoenix kept. b9/c04_a18_t7.png = new v1.

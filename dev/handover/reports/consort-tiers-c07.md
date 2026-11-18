@@ -23,3 +23,7 @@ Files CDN img/_review/consort-tiers/c07/b10/: c07_a18_tN_v0|v1|v2.png, c07_a18_s
 PRIORITY #1 CHECK: FIGURE_GATE C4c t7 rule (owner ~08:30Z), C4d phoenix, D3, D2; re-read before the fix. t7 v1 had yellow as the MAIN robe (fault). Now: v1 = her own lilac as MAIN robe + yellow only on inner robe/borders/sleeve linings/sash in the SAME deeper warm golden yellow as her t8 v1 (t8 v1 as image 2 for the shade only; gen N2Hrc0f6D9); v2 = misty celadon MAIN + the same deep yellow parts (gen Lwoa9R4swO). Phoenix kept, one held item, bare forehead. Old versions kept as c07_a18_t7_v1_allyellow.png and c07_a18_t7_v2_pale.png (not in the sheet).
 Sheet c07_a18_sheet.jpg rebuilt. Credits ~270 (2 gens).
 ~100% xong c07 / ~0% chơi được.
+
+
+## B10 t7 EMBROIDERY SCAN (W39, 18/11, foreman ROOT-20 after owner)
+t7 EMBROIDERY SCAN (ROOT-20): t7 v0/v1/v2 checked at native res: woven damask-like tone-on-tone motifs, shoulder-cape flowers slightly raised, phoenix faint in the torso crop → judged OK, NOT redrawn (flag: phoenix is faint).
