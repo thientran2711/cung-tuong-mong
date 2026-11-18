@@ -28,13 +28,13 @@ nc_gian_10:[{k:"emp",h:"Hoàng thượng đã cho bày hết thư từ lên án,
 /* nc_su «Sứ đoàn cố quốc» */
 nc_su_5:[{k:"th",h:"Bộ Lễ bắt sứ đoàn cố quốc quỳ ba lần, khấu chín lần, còn huynh trưởng {me} thì không chịu cúi. Chuyện lễ nghi, chỉ Thái hậu nói một lời là xong. {call} có thể thưa giúp {me} để hai bên đều giữ được mặt không?",
  o:[["Vào hầu Thái hậu, thưa chuyện lễ sứ đoàn","Thái hậu cho rằng ngươi bàn chuyện ngoài triều"],["Dâng Thái hậu một lễ, kèm lời xin","Thái hậu nhận lễ mà không nói gì, ngươi mang tiếng chạy chọt"]]}],
-nc_su_6:[{k:"che",h:"Bức gấm Bách thọ mẫu thân {me} dệt ba năm bị loang mực một góc, mười ngày nữa là Vạn thọ. Thợ của cung {me} không ai thêu được chỉ cố hương. {call} có người tay khéo, xin cho {me} mượn mấy hôm.",
+nc_su_6:[{k:"che",h:"Bức gấm Bách thọ mẫu thân {me} dệt ba năm bị loang mực một góc, mười ngày nữa là Vạn thọ. Thợ của cung {me} không ai thêu được chỉ cố hương. Nếu bên {call} có người tay khéo, xin cho {me} mượn mấy hôm.",
  o:[["Cho thợ thêu của cung mình sang giúp","thợ thêu thức mấy đêm liền, việc trong cung ngươi bỏ dở"],["Bỏ bạc mời thợ Chức tạo vào cung","thợ ngoài cung nói ra chuyện bức gấm bị hỏng"]]}],
 nc_su_7:[{k:"emp",h:"Huynh trưởng {me} say rượu, phi ngựa vào vườn Thượng Lâm, nay bị cấm quân giữ. Chuyện của một sứ thần là chuyện của hai nước. {call} được ngài nghe lời, xin nói giúp để huynh ấy chỉ bị phạt, đừng bị giải về nước trong nhục.",
  o:[["Nhân lúc hầu giá, xin ngài khoan dung cho sứ thần","Hoàng thượng cho rằng ngươi xen vào việc bang giao"],["Dâng lễ nhờ người bên cạnh ngài nói đỡ","người nhận lễ lại kể với cấm quân, chuyện thêm to"]]}],
 nc_su_8:[{k:"do",h:"Đại yến các nước, ghế của sứ cố quốc đặt ở hàng nào là một câu nói của hai triều. {Me} nghe phong thanh người của {B} đã đổi chỗ trong sổ xếp ghế. {call} giúp {me} hỏi xem ai đã cầm bút.",
  o:[["Sai người hỏi thái giám lo yến","thái giám lo yến báo lên rằng có người dò chuyện tiền triều"],["Tự hỏi chuyện mấy người hầu yến","ngươi bị đồn tò mò việc của tiền triều"]]}],
-nc_su_9:[{k:"thu",h:"Điều ước chợ biên phải ký trước tiết Sương giáng, mà bộ Hộ còn chần chừ vì giá muối. Nhà {call} có người ở triều. {Me} chỉ xin một lời nhắn đến đúng tay, để sứ đoàn khỏi phải về tay không.",
+nc_su_9:[{k:"thu",h:"Điều ước chợ biên phải ký trước tiết Sương giáng, mà bộ Hộ còn chần chừ vì giá muối. Nếu nhà {call} có người ở triều, {me} chỉ xin một lời nhắn đến đúng tay, để sứ đoàn khỏi phải về tay không.",
  o:[["Nhờ thái giám của mình chuyển lời ra bộ Hộ","lời nhắn bị chép lại, bộ Hộ cho là hậu cung xen vào"],["Gửi lời theo người nhà mình vào thăm","người nhà ngươi bị kéo vào chuyện giá muối"]]}],
 nc_su_10:[{k:"thu",h:"Ở cửa thành có người tâu xe sứ đoàn mang theo thứ không được phép mang. Huynh trưởng {me} chưa biết. {Me} cần một lá thư đến tay huynh ấy trước khi xe lăn bánh, để huynh ấy bỏ lại thứ ấy.",
  o:[["Bỏ bạc nhờ thái giám đưa thư ra quán sứ","thư đến muộn, xe đã bị khám ở cửa thành"],["Gửi thư theo người nhà mình ra tiễn","người nhà bị cấm quân hỏi vì sao lui tới quán sứ"]]}],
@@ -54,7 +54,7 @@ nc_tuc_10:[{k:"do",h:"Có một nhà thế gia muốn nhận {me} làm nghĩa n�
 /* nc_vuong «Ngai vàng cố quốc» */
 nc_vuong_5:[{k:"emp",h:"Ngôi ở cố quốc đã có người ngồi, chỉ còn thiếu ấn sách phong. Phe thua đang xin Đại Hy đừng phong. Một lời đến tai Hoàng thượng đúng lúc, cố quốc {me} yên được mười năm.",
  o:[["Nhân buổi hầu giá, nhắc đến ấn sách phong","Hoàng thượng phật ý, bảo ngươi bàn chuyện nước khác"],["Dâng lễ nhờ người hầu Ngự thư phòng nhắc giúp","người hầu nhắc sai lúc, ngài nổi giận"]]}],
-nc_vuong_6:[{k:"thu",h:"Binh bộ muốn nhân lúc cố quốc còn yếu mà đòi hai trấn biên, bộ Lễ muốn giữ hòa. Nhà {call} có người nói được trong triều. {Me} không xin gì nhiều, chỉ xin một lời nhắn đến tay vị quan đứng về phía hòa.",
+nc_vuong_6:[{k:"thu",h:"Binh bộ muốn nhân lúc cố quốc còn yếu mà đòi hai trấn biên, bộ Lễ muốn giữ hòa. Nếu nhà {call} có người nói được trong triều, xin giúp {me}. {Me} không xin gì nhiều, chỉ xin một lời nhắn đến tay vị quan đứng về phía hòa.",
  o:[["Nhờ thái giám của mình đưa lời ra ngoài","lời nhắn lọt vào tay Binh bộ"],["Gửi lời theo người nhà mình","nhà ngươi bị Binh bộ ghi là phe nhún"]]}],
 nc_vuong_7:[{k:"thu",h:"Mẫu thân {me} kẹt trong một tòa thành cũ, lương cạn, thuốc hết. Đường đèo chỉ còn đi được đến cuối tháng. {Me} có bạc, chỉ thiếu một người mang được thuốc và thư ra khỏi cung.",
  o:[["Bỏ bạc nhờ thái giám đưa thuốc ra ngoài","thái giám ôm thuốc trốn mất, tên ngươi bị nhắc"],["Gửi thuốc theo người nhà mình vào thăm","người nhà bị khám cửa, lộ ra thư gửi đi ngoại bang"]]}],
@@ -81,7 +81,7 @@ td_an_10:[{k:"thu",h:"Tam ty đã ngồi xét, mà phi tần không được ra 
 /* td_ke «Kẻ đứng sau màn» */
 td_ke_5:[{k:"do",h:"Năm ấy kẻ vu cha {me} không có đủ bạc để mua thợ giả ấn. Bạc ấy đi qua một hiệu cầm đồ ở cửa Tây. {Me} cần biết người đến lấy bạc có dính đến nhà {B} không, trước khi sổ của hiệu bị đốt.",
  o:[["Sai người đến hiệu cầm đồ dò sổ","chủ hiệu nhận bạc của ngươi, rồi báo cho kẻ kia"],["Tự hỏi chuyện người hầu từng làm ở hiệu ấy","ngươi bị đồn lần theo chuyện bạc của nhà quan"]]}],
-td_ke_6:[{k:"y",h:"Kẻ cầm dao năm xưa đang nằm trong ngục, và có người muốn hắn chết trước khi khai. {Me} hận hắn, nhưng {me} cần hắn sống. {call} quen thái y, xin cho người vào xem cơm thuốc của hắn.",
+td_ke_6:[{k:"y",h:"Kẻ cầm dao năm xưa đang nằm trong ngục, và có người muốn hắn chết trước khi khai. {Me} hận hắn, nhưng {me} cần hắn sống. {Call} có quen vị thái y nào chịu vào xem cơm thuốc của hắn không?",
  o:[["Mời thái y quen vào ngục xem mạch","Thái y viện ghi tên ngươi là người lo cho phạm nhân"],["Tự sắc thuốc giải gửi vào ngục","thuốc bị đổi giữa đường, ngươi bị nghi"]]}],
 td_ke_7:[{k:"che",h:"Trong cung {me} đã có người bị mua, {me} không biết còn tin được ai. Chỉ có Tiểu Hà là theo {me} từ nhà. {call} cho Tiểu Hà sang ở nhờ ít hôm, đến khi {me} biết ai là tai mắt.",
  o:[["Cho Tiểu Hà ở nhờ cung mình","người ta bàn ngươi chứa người của nhà tội thần"],["Bỏ bạc lo cho Tiểu Hà một chỗ ở khác","chỗ ấy không kín, kẻ kia tìm ra Tiểu Hà"]]}],
@@ -98,9 +98,9 @@ td_song_6:[{k:"thu",h:"{B} đang săn thư của cung {me} để đem bán. Mộ
  o:[["Nhờ thái giám của mình mang thư ra biên","thư bị chặn, tên ngươi dính vào"],["Gửi thư theo người nhà mình đi buôn ở biên","người nhà bị khám, thư bị lộ"]]}],
 td_song_7:[{k:"emp",h:"Có lời đồn đang đi về phía ngự án: con trai tội thần kết bè trong quân. Nếu Hoàng thượng hỏi {call} có biết gì không, xin đừng nói thêm một chữ. {Me} chỉ xin sự im lặng ấy.",
  o:[["Khi hầu giá, lựa lời lảng sang chuyện khác","Hoàng thượng thấy ngươi giấu, ngài nghi cả ngươi"],["Dâng lễ nhờ người thân cận chặn lời đồn","lời đồn không chặn được, ngươi mang tiếng che chở"]]}],
-td_song_8:[{k:"y",h:"Tiểu đệ của {me} trúng tên vào vai, quân y nói trong một tháng không có thuốc tốt thì mất cánh tay. Thuốc ấy chỉ Thái y viện có. {call} quen thái y, xin giúp {me} một hộp cao.",
+td_song_8:[{k:"y",h:"Tiểu đệ của {me} trúng tên vào vai, quân y nói trong một tháng không có thuốc tốt thì mất cánh tay. Thuốc ấy chỉ Thái y viện có. {Call} có quen thái y nào cắt giúp {me} một hộp cao không?",
  o:[["Mời thái y quen cắt thuốc, trả công hậu","Thái y viện ghi tên ngươi lấy thuốc trị thương"],["Tự sắc cao thuốc gửi ra biên","thuốc không hợp, nàng trách ngươi"]]}],
-td_song_9:[{k:"thu",h:"Cuối năm Hộ bộ tra sổ đinh. Tiểu đệ của {me} cần một tờ hộ tịch mới, dưới một cái họ không ai nhớ. {Me} biết nhà {call} có người ở huyện. Một lời nhắn thôi.",
+td_song_9:[{k:"thu",h:"Cuối năm Hộ bộ tra sổ đinh. Tiểu đệ của {me} cần một tờ hộ tịch mới, dưới một cái họ không ai nhớ. Nếu nhà {call} có người quen ở huyện, {me} chỉ cần một lời nhắn.",
  o:[["Bỏ bạc nhờ thái giám lo tờ hộ tịch","tờ hộ tịch bị nghi, Hộ bộ cho người tra"],["Nhờ người nhà mình hỏi ở huyện","nhà ngươi bị kéo vào chuyện làm giả sổ"]]}],
 td_song_10:[{k:"emp",h:"Các doanh biên đang đổi phiên, có thể xin cho tiểu đệ của {me} về cấm quân ở kinh. Gần {me}, cũng gần nhà kia. {Me} muốn {call} nói với Hoàng thượng một lời, để ngài tự quyết tiểu đệ của {me} đứng ở đâu.",
  o:[["Nhân lúc hầu giá, nhắc đến người lính trẻ ấy","Hoàng thượng hỏi sao ngươi biết rõ một lính biên"],["Dâng lễ nhờ người bên Binh bộ nói giúp","lễ lọt đến tai nhà kia"]]}],
@@ -120,7 +120,7 @@ td_tha_10:[{k:"emp",h:"Nhà kia tâu {me} là con gái tội thần đổi tên 
 /* ---------- ch · Cháu gái Thái hậu ---------- */
 /* ch_co «Quân cờ của cô mẫu» */
 ch_co_5:[{k:"th",h:"Cô mẫu muốn {me} làm tai mắt cho Đức Thọ cung, mà trong danh sách có cả cung {call}. {Me} không muốn. Xin {call} theo {me} đến thỉnh an cô mẫu một buổi, để {me} có chuyện vô hại mà thưa.",
- o:[["Cùng nàng đến hầu Thái hậu một buổi","Thái hậu nghi ngươi biết chuyện danh sách"],["Dâng Thái hậu một lễ, xin cho nàng ở lại cung ngươi","Thái hậu cho là ngươi giành người của bà"]]}],
+ o:[["Cùng nàng đến hầu Thái hậu một buổi","Thái hậu nghi ngươi biết chuyện danh sách"],["Dâng Thái hậu một lễ, xin cho nàng ở lại cung mình","Thái hậu cho là ngươi giành người của bà"]]}],
 ch_co_6:[{k:"do",h:"Một trang trong sổ của Đức Thọ cung biến mất, mấy tai mắt của cô mẫu bị lộ tên. {Me} sẽ bị hỏi trước tiên. {call} giúp {me} biết có phải người của {B} đã cầm trang sổ ấy không.",
  o:[["Sai người dò ai cầm trang sổ","người của ngươi bị chính tai mắt kia nhận ra"],["Tự hỏi chuyện các cung nữ Đức Thọ cung","ngươi bị nghi là người lấy trang sổ"]]}],
 ch_co_7:[{k:"emp",h:"Cùng một ngày, cô mẫu nhờ {me} một việc, Hoàng thượng nhờ {me} một việc, mà hai việc ngược nhau. {Me} không muốn ngài nghĩ {me} là người của Đức Thọ cung. {call} nói với ngài giúp: {me} vẫn ở bên ngài.",
@@ -128,13 +128,13 @@ ch_co_7:[{k:"emp",h:"Cùng một ngày, cô mẫu nhờ {me} một việc, Hoàn
 ch_co_8:[{k:"do",h:"Cô mẫu bảo {me} ra tay với {B}. {Me} không làm. Nhưng nếu {me} không làm, sẽ có người khác làm. {call} giúp {me} biết cô mẫu còn giao việc ấy cho ai.",
  o:[["Sai người dò những ai ra vào Đức Thọ cung","người của ngươi bị Thái hậu để ý"],["Tự hỏi chuyện những người thân với {B}","ngươi hỏi lộ ý, nàng ta nghi ngươi"]]}],
 ch_co_9:[{k:"th",h:"{Me} đã từ chối cô mẫu. Đức Thọ cung sẽ coi {me} như người dưng, hoặc tệ hơn. {call} vào hầu, xin nói đỡ một lời: {me} không phản bà, {me} chỉ không làm được việc ấy.",
- o:[["Hầu Thái hậu, nói đỡ cho nàng","Thái hậu cho rằng ngươi xui nàng cãi lời"],["Dâng Thái hậu một lễ thay lời nàng","Thái hậu trả lễ, ghi ngươi vào lòng"]]}],
+ o:[["Hầu Thái hậu, nói đỡ cho nàng","Thái hậu cho rằng ngươi xui nàng cãi lời"],["Dâng Thái hậu một lễ thay lời nàng","Thái hậu trả lễ, từ đó để bụng ngươi"]]}],
 ch_co_10:[{k:"hh",h:"Thọ yến Đức Thọ cung, chỗ của {me} xếp ngay cạnh cô mẫu. Ai nhìn vào cũng thấy {me} là quân cờ. {call} thưa với Hoàng hậu giúp, cho {me} ngồi chỗ khác.",
  o:[["Thỉnh an Hoàng hậu, xin đổi chỗ cho nàng","Hoàng hậu không muốn chạm đến Đức Thọ cung, trách ngươi"],["Dâng lễ nhờ ma ma Khôn Ninh cung xếp lại chỗ ngồi","lễ bị trả về, chuyện đến tai Thái hậu"]]}],
 /* ch_benh «Thái hậu lâm bệnh» */
 ch_benh_5:[{k:"y",h:"Thái y viện kê một phương, lương y ngoài cung kê một phương khác. Cô mẫu chỉ uống được một. {Me} cần một vị thái y kín miệng xem giúp phương nào đúng, mà không để viện biết {me} hỏi.",
  o:[["Mời thái y quen xem hai phương, trả công hậu","Thái y viện biết ngươi nghi thuốc của viện"],["Tự đọc sách thuốc, so hai phương","ngươi hiểu sai một vị, nàng trách ngươi"]]}],
-ch_benh_6:[{k:"do",h:"Cô mẫu vừa lâm bệnh, đã có người đổi chỗ dựa. {Me} muốn biết những ai đang lui tới cung {B} nhiều hơn trước. {call} có tai mắt, giúp {me} một lần.",
+ch_benh_6:[{k:"do",h:"Cô mẫu vừa lâm bệnh, đã có người đổi chỗ dựa. {Me} muốn biết những ai đang lui tới cung {B} nhiều hơn trước. Nếu {call} có tai mắt, xin giúp {me} một lần.",
  o:[["Sai người đếm xem ai đổi chỗ dựa","người của ngươi bị bắt gặp, cả cung đồn ngươi rình"],["Tự để ý xem ai vắng mặt ở Đức Thọ cung","ngươi bị nghi là người của Đức Thọ cung"]]}],
 ch_benh_7:[{k:"che",h:"Chén thuốc của cô mẫu có vị lạ. {Me} đã giữ lại chút bã. Để trong cung {me} thì người ta sẽ nói {me} bày chuyện. {call} cất giùm, đến khi có người nghiệm.",
  o:[["Cất bã thuốc trong cung mình","người ta bàn ngươi giữ vật chứng của chuyện lớn"],["Bỏ bạc gửi bã thuốc ra ngoài cho người nghiệm","người mang đi bị chặn, bã thuốc mất"]]}],
@@ -145,9 +145,9 @@ ch_benh_9:[{k:"thu",h:"Bệnh của cô mẫu trở nặng, Thái y viện nói 
 ch_benh_10:[{k:"emp",h:"Đêm nay Thái y viện nói là đêm quyết. Cô mẫu cứ hỏi đến Hoàng thượng, mà {me} không dám tự đi mời. {call} được ngài nghe lời, xin mời ngài đến Đức Thọ cung, dù chỉ một khắc.",
  o:[["Hầu Hoàng thượng, xin ngài đến thăm Thái hậu","Hoàng thượng mệt mỏi, phật ý vì bị giục"],["Dâng lễ nhờ thái giám hầu giá nhắc ngài","thái giám nhắc sai giờ, ngài đến muộn"]]}],
 /* ch_ho «Hai người cháu» */
-ch_ho_5:[{k:"hh",h:"Ở Đức Thọ cung, cháu nào được gọi vào thỉnh an trước là cả cung nhìn vào. Lệ ấy do Trung cung định. {call} hỏi giúp {me} Hoàng hậu xếp thứ tự theo ngôi hay theo tuổi.",
+ch_ho_5:[{k:"hh",h:"Ở Đức Thọ cung, cháu nào được gọi vào trước là cả cung nhìn vào, mà cô mẫu hay theo thứ tự thỉnh an ở Khôn Ninh cung. {call} xin Hoàng hậu cho {me} được đứng theo ngôi, đừng xếp sau người cháu kia.",
  o:[["Thỉnh an Hoàng hậu, hỏi chuyện thứ tự","Hoàng hậu cho rằng ngươi khơi chuyện tranh giành"],["Dâng lễ Khôn Ninh cung, nhờ ma ma hỏi giúp","ma ma đem chuyện kể với người kia"]]}],
-ch_ho_6:[{k:"che",h:"Lễ mừng thọ cô mẫu sắp đến, mà người cháu kia đã đặt một bức bình phong thêu. {Me} không muốn thua. {call} có một cung nữ thêu giỏi nhất cung, xin cho {me} mượn mười hôm.",
+ch_ho_6:[{k:"che",h:"Lễ mừng thọ cô mẫu sắp đến, mà người cháu kia đã đặt một bức bình phong thêu. {Me} không muốn thua. Nếu bên {call} có cung nữ thêu giỏi, xin cho {me} mượn mười hôm.",
  o:[["Cho cung nữ của mình sang thêu giúp","việc trong cung ngươi bỏ dở mười hôm"],["Bỏ bạc mua tấm thêu ở Chức tạo","người kia biết ngươi bỏ bạc giúp, ghi mối hận"]]}],
 ch_ho_7:[{k:"th",h:"Có người gièm với cô mẫu rằng {me} mong bà sớm khuất để được ngồi ghế trên. Lời ấy độc lắm. {call} đến Đức Thọ cung, xin nói đỡ cho {me} một câu.",
  o:[["Hầu Thái hậu một buổi, gỡ lời gièm cho nàng","Thái hậu chê ngươi lắm lời"],["Dâng Thái hậu một lễ thay lời","Thái hậu cho là ngươi mua lòng"]]}],
@@ -191,7 +191,7 @@ thd_sach_6:[{k:"do",h:"Ngoài triều có sớ chê sách của cha {me} là l�
  o:[["Sai người dò người hầu của {B}","người của ngươi bị bắt gặp, nàng ta ghi mối hận"],["Tự để ý trong những buổi trà","ngươi hỏi nhiều, nàng ta biết ngươi giúp nàng"]]}],
 thd_sach_7:[{k:"thu",h:"Trường làng của cha {me} bị đốt một góc, trước cổng có giấy dọa. Cha không chịu rời làng. {Me} cần người mang bạc và thư về, nhờ người trong làng canh cha mấy phiên chợ.",
  o:[["Bỏ bạc nhờ thái giám mang thư về làng","thư đến muộn, kẻ dọa đã quay lại"],["Gửi thư theo người nhà mình về quê","người nhà ngươi bị kẻ dọa để ý"]]}],
-thd_sach_8:[{k:"che",h:"Kinh diên mùa thu là dịp dâng trọn bộ sách lên ngự lãm. Bản dâng phải chép sạch, đóng bìa đúng phép, mà {me} chỉ có hai bàn tay. {call} có người biết chữ, xin cho {me} mượn mấy hôm.",
+thd_sach_8:[{k:"che",h:"Kinh diên mùa thu là dịp dâng trọn bộ sách lên ngự lãm. Bản dâng phải chép sạch, đóng bìa đúng phép, mà {me} chỉ có hai bàn tay. Nếu bên {call} có người biết chữ, xin cho {me} mượn mấy hôm.",
  o:[["Cho người hầu biết chữ của mình sang chép giúp","người hầu chép sai mấy chữ, phải chép lại"],["Bỏ bạc thuê thợ đóng sách ngoài cung","thợ ngoài cung đem bản thảo đi khoe"]]}],
 thd_sach_9:[{k:"emp",h:"Người ta cắt nửa câu trong sách của cha {me}, đọc thành lời chê vua. Câu đầy đủ là lời khen ngài. {call} được gần ngài, xin đọc cho ngài nghe trọn câu ấy, một lần thôi.",
  o:[["Nhân lúc hầu giá, đọc trọn câu cho ngài nghe","Hoàng thượng phật ý, bảo ngươi biện hộ cho kẻ phỉ báng"],["Dâng lễ nhờ học sĩ hầu kinh diên giảng giúp","học sĩ sợ liên lụy, giảng nửa chừng"]]}],
@@ -219,13 +219,13 @@ thd_hoc_7:[{k:"emp",h:"Cuối xuân Hoàng thượng đến khảo bài các ho�
  o:[["Hầu Hoàng thượng, xin ngài đổi thứ tự hỏi bài","Hoàng thượng cho rằng ngươi xếp đặt việc học của hoàng tự"],["Dâng lễ nhờ thái giám Thượng thư phòng đổi thứ tự","thái giám đổi lộ, mấy người mẹ khác biết"]]}],
 thd_hoc_8:[{k:"hh",h:"Một đứa trẻ bị phạt trong giờ {me} dạy, mẹ nó đã đến Khôn Ninh cung kêu. Phép phạt của thầy là phép, nhưng ra khỏi cửa lớp thì là chuyện khác. {call} thưa với Hoàng hậu giúp {me} một lời.",
  o:[["Thỉnh an Hoàng hậu, đỡ lời cho người thầy","Hoàng hậu cho rằng ngươi bênh người làm đau hoàng tự"],["Dâng lễ Khôn Ninh cung, xin xét cả lời người thầy","lễ bị trả về, mẹ đứa trẻ ghi mối hận"]]}],
-thd_hoc_9:[{k:"thu",h:"{Me} dạy bọn trẻ một câu của Mạnh Tử, nay câu ấy bị đọc lại trước mặt Hoàng thượng như một lời ngông. Nhà {call} có người đọc sách. Một bài giải của bậc thầy ngoài cung sẽ gỡ được chuyện này.",
+thd_hoc_9:[{k:"thu",h:"{Me} dạy bọn trẻ một câu của Mạnh Tử, nay câu ấy bị đọc lại trước mặt Hoàng thượng như một lời ngông. Nếu nhà {call} quen một bậc đại nho, một bài giải của bậc thầy ngoài cung sẽ gỡ được chuyện này.",
  o:[["Nhờ thái giám của mình xin bài giải ở ngoài","bài giải đến muộn, chuyện đã lan ra triều"],["Nhờ người nhà mình xin chữ một vị đại nho","người nhà ngươi bị kéo vào chuyện chữ nghĩa"]]}],
 thd_hoc_10:[{k:"th",h:"Năm học khép lại, Hoàng thượng muốn nghe {me} nói đứa trẻ nào gánh được việc lớn. Một câu của {me} có thể định chỗ đứng của từng đứa. Thái hậu thương các hoàng tôn. {call} xin bà hỏi trước, để lời {me} khỏi thành của riêng {me}.",
  o:[["Hầu Thái hậu, xin bà hỏi chuyện các hoàng tôn","Thái hậu cho rằng ngươi muốn bà chọn người kế"],["Dâng Thái hậu một lễ, kể chuyện lớp học","Thái hậu nhận lễ mà nghi ngươi có ý riêng"]]}],
 /* ---------- cnv · Cung nữ tuyển vào cung (the asker is a maid; her own mistress may be the player, so no line names her mistress) ---------- */
 /* cnv_chu «Bí mật của chủ nhân» */
-cnv_chu_5:[{k:"y",h:"Trong cung {me} hầu có một gói xạ hương. Ở Thái y viện, mỗi lạng xạ hương xuất kho đều ghi tên cung nhận. {Me} cần biết gói ấy từ đâu ra. {call} quen thái y, xin hỏi giúp một lần.",
+cnv_chu_5:[{k:"y",h:"Trong cung {me} hầu có một gói xạ hương. Ở Thái y viện, mỗi lạng xạ hương xuất kho đều ghi tên cung nhận. {Me} cần biết gói ấy từ đâu ra. {Call} có quen thái y nào hỏi giúp được không?",
  o:[["Nhờ thái y quen tra sổ xuất kho, trả công hậu","Thái y viện ghi tên ngươi là người hỏi chuyện xạ hương"],["Tự mang một chút thuốc đi hỏi người biết","người được hỏi ngửi ra xạ hương, đem chuyện kể lại"]]}],
 cnv_chu_6:[{k:"do",h:"Người của {B} đang dò khắp nơi: ai trực đêm ấy, ai dọn phòng. {Me} giữ kín được lời của {me}, nhưng không giữ được miệng người khác. {call} giúp {me} biết họ đã hỏi những ai.",
  o:[["Sai người theo dấu kẻ dò hỏi","người của ngươi bị chính kẻ dò hỏi nhận ra"],["Tự hỏi chuyện các cung nữ quanh đó","ngươi hỏi lộ ý, người ta đồn có chuyện giấu"]]}],
@@ -248,7 +248,7 @@ cnv_ban_8:[{k:"hh",h:"Xuân Đào muốn đứng ra làm chứng chuyện vòng 
  o:[["Thỉnh an Hoàng hậu, xin cho Xuân Đào được khai","Hoàng hậu cho rằng ngươi khơi chuyện của kẻ hầu"],["Dâng lễ nhờ ma ma Trung cung mở lời cho Xuân Đào","lễ bị trả về, cả cung bàn tán"]]}],
 cnv_ban_9:[{k:"che",h:"Bàn phân xử đã bày, Xuân Đào hay Thu Cúc, một người sẽ phải đi. Dù thế nào, Xuân Đào cũng không còn ở lại được. {call} cho nàng về hầu cung {call}, {me} xin chịu mọi tiếng.",
  o:[["Nhận Xuân Đào về hầu cung mình","chủ cũ của Xuân Đào ghi mối hận với ngươi"],["Bỏ bạc lo cho Xuân Đào việc ở cung khác","cung kia nhận bạc mà đối đãi tệ"]]}],
-cnv_ban_10:[{k:"do",h:"Sổ đồ ra cửa sau đã đến bàn quản sự Nội vụ phủ. Trong sổ có tên mấy thái giám của chính phủ ấy. Nếu sổ bị chôn, {B} sẽ thoát. {call} giúp {me} chép lại một trang trước.",
+cnv_ban_10:[{k:"do",h:"Sổ đồ ra cửa sau đã đến bàn quản sự Nội vụ phủ. Trong sổ có tên mấy thái giám của chính Nội vụ phủ. Nếu sổ bị chôn, {B} sẽ thoát. {call} giúp {me} chép lại một trang trước.",
  o:[["Sai người chép trộm trang sổ","người của ngươi bị bắt khi đang chép"],["Tự đến Nội vụ phủ xin xem sổ","ngươi bị Nội vụ phủ ghi là kẻ dòm sổ"]]}],
 /* cnv_mat «Ánh mắt nơi hành lang» */
 cnv_mat_5:[{k:"che",h:"Hoàng thượng nhìn {me} một lần ở hành lang, từ đó lòng người trong cung {me} hầu đổi khác. {Me} không dám mong gì. {call} tìm cho {me} một việc khuất mắt ít lâu.",
@@ -259,8 +259,8 @@ cnv_mat_7:[{k:"do",h:"Tên {me} đã vào sổ Kính sự phòng, mà {me} chưa
  o:[["Sai người hỏi ở Kính sự phòng","Kính sự phòng báo lên có người dò sổ"],["Tự hỏi chuyện các thái giám quen","ngươi bị đồn lo chuyện thị tẩm của kẻ hầu"]]}],
 cnv_mat_8:[{k:"che",h:"Kiệu sắp đến cửa, mà {me} không biết một phép nào của đêm hầu giá. Sai một bước là mang tội. {call} cho {me} một vị ma ma biết lễ, chỉ bảo {me} trước giờ ấy.",
  o:[["Tự dạy nàng phép hầu giá","việc trong cung ngươi bỏ dở cả buổi"],["Bỏ bạc mời ma ma Kính sự phòng chỉ bảo","ma ma kể chuyện ra ngoài"]]}],
-cnv_mat_9:[{k:"hh",h:"Từ tớ thành chủ, {me} không biết ngồi ghế nào cho phải. Ngồi cao thì người ta nói {me} quên gốc, ngồi thấp thì làm mất lệ. {call} hỏi giúp Hoàng hậu một lời.",
- o:[["Thỉnh an Hoàng hậu, hỏi chuyện chỗ ngồi cho nàng","Hoàng hậu cho rằng ngươi bênh một kẻ mới lên"],["Dâng lễ nhờ nữ quan Khôn Ninh cung chỉ chỗ","ma ma đem chuyện ra làm trò cười"]]}],
+cnv_mat_9:[{k:"hh",h:"Từ đêm được gọi hầu giá, các cung nữ cùng phòng không ai nói với {me} một câu, có người còn xé áo của {me}. {Me} vẫn là kẻ hầu, chỉ xin được ở yên. {call} thưa với Hoàng hậu giúp, cho {me} đổi sang phòng khác.",
+ o:[["Thỉnh an Hoàng hậu, xin đổi phòng cho nàng","Hoàng hậu cho rằng ngươi bênh một cung nữ mới được gọi"],["Dâng lễ nhờ nữ quan Khôn Ninh cung đổi phòng","nữ quan đem chuyện ra làm trò cười"]]}],
 cnv_mat_10:[{k:"th",h:"Người ta tìm thấy một gói bùa trong gối của {me}, đồn {me} quyến rũ Hoàng thượng bằng bùa ngải. Thái hậu ghét nhất chuyện ấy. {call} thưa trước với Thái hậu, trước khi lời đồn đến tai bà.",
  o:[["Hầu Thái hậu, thưa trước chuyện gói bùa","Thái hậu cho rằng ngươi dính vào chuyện bùa ngải"],["Dâng Thái hậu một chuỗi tràng hạt, kèm lời thưa","Thái hậu trả lễ, càng nghi"]]}],
 /* cnv_ma «Ma ma dạy việc» */
@@ -274,7 +274,7 @@ cnv_ma_8:[{k:"th",h:"Ba ngày nữa là chung thẩm. Muốn cứu Lưu ma ma ph
  o:[["Hầu Thái hậu một buổi, nhắc đến Lưu ma ma","Thái hậu không nhớ, chê ngươi lo chuyện kẻ hầu"],["Dâng Thái hậu một lễ, kèm lời xin cho ma ma","Thái hậu cho là ngươi lấy lễ mua án"]]}],
 cnv_ma_9:[{k:"do",h:"Kỳ sát hạch của Nội vụ phủ, Lưu ma ma ngồi ghế chấm. {Me} nghe nói có người muốn gài người chấm thay ma ma để đánh trượt {me}. {call} giúp {me} biết {B} có nhúng tay không.",
  o:[["Sai người dò những người ngồi ghế chấm","người của ngươi bị bắt gặp, cả phủ đồn có gian"],["Tự hỏi chuyện các cô cô Nội vụ phủ","ngươi hỏi lộ ý, kẻ kia đổi cách"]]}],
-cnv_ma_10:[{k:"y",h:"Lưu ma ma ngã bệnh, mà một cung nữ già không được Thái y viện ghé đến. {Me} không có bạc mời thầy. {call} quen thái y, xin mời một người đến xem cho ma ma.",
+cnv_ma_10:[{k:"y",h:"Lưu ma ma ngã bệnh, mà một cung nữ già không được Thái y viện ghé đến. {Me} không có bạc mời thầy. Nếu {call} quen một vị thái y, xin mời đến xem cho ma ma.",
  o:[["Mời thái y quen đến xem, trả công hậu","Thái y viện ghi tên ngươi mời thầy cho kẻ hầu"],["Tự sắc thuốc mang sang","thuốc không hợp, ma ma trở nặng một đêm"]]}]
 });
 /* ---------- second asks (≥ 2 per chapter: one is drawn per life, OD:L1252) — a different ask shape of the same chapter ---------- */
@@ -288,7 +288,7 @@ add("nc_gian_7",A("che","Thị vệ đứng ngoài cửa, mà trong cung {me} c�
  "Nhận cung nữ cố hương sang hầu cung mình","thị vệ theo nàng ấy sang tận cửa cung ngươi","Bỏ bạc gửi nàng ấy xuống Châm công cục","Châm công cục hỏi gốc gác, nàng ấy bị giữ lại"));
 add("nc_gian_8",A("emp","Hoàng thượng tin {me}, nên kể cả đường hành quân. {Me} không muốn biết thêm một chữ nào nữa. {Call} khéo khuyên ngài đừng bàn việc quân ở cung {me}, để {me} khỏi phải chọn.",
  "Khuyên Hoàng thượng đừng bàn việc quân trong hậu cung","Hoàng thượng cho rằng ngươi dạy ngài cách trị nước","Dâng lễ nhờ lão thái giám hầu ngự khéo can","lão thái giám can vụng, ngài lại càng hỏi nàng"));
-add("nc_gian_9",A("y","Lão Kha có bệnh suyễn, vào ngục mười ngày mà không có thuốc thì không qua khỏi. Chết trong ngục thì người ta sẽ nói {me} giết người diệt khẩu. {Call} quen thái y, xin cho lão một thang thuốc.",
+add("nc_gian_9",A("y","Lão Kha có bệnh suyễn, vào ngục mười ngày mà không có thuốc thì không qua khỏi. Chết trong ngục thì người ta sẽ nói {me} giết người diệt khẩu. Nếu {call} quen một vị thái y, xin cho lão một thang thuốc.",
  "Mời thái y quen vào ngục bắt mạch cho lão Kha","Đại Lý tự ghi tên ngươi là người lo thuốc cho phạm nhân","Tự sắc thuốc suyễn gửi vào ngục","thuốc bị cai ngục giữ lại khám, lời đồn lan ra"));
 add("nc_gian_10",A("hh","Hoàng thượng gọi {me} đến một mình, mà Trung cung đã sai người đứng chờ ngoài điện. Nếu Hoàng hậu cũng hỏi tội, {me} không còn chỗ đứng. {Call} thưa với Hoàng hậu, xin bà đợi ngài xét xong.",
  "Thỉnh an Hoàng hậu, xin bà khoan hỏi tội","Hoàng hậu cho rằng ngươi chen vào việc của Trung cung","Dâng Khôn Ninh cung một hộp trầm, xin hoãn một ngày","hộp trầm bị trả lại kèm một lời trách"));
@@ -356,7 +356,7 @@ add("td_ke_8",A("che","Phu nhân họ Trịnh muốn gửi vào cung một ngư�
 add("td_ke_9",A("do","Mồi đã thả, mà {B} lại hay qua lại với người {me} nghi đứng sau. Nếu nàng ta báo trước, bẫy sẽ hỏng. {Call} giúp {me} xem mấy hôm nay {B} gặp những ai.",
  "Sai người canh cửa cung {B} mấy đêm","người canh bị bắt gặp, bẫy lộ một nửa","Tự đến thăm {B}, dò lời trong lúc uống trà","ngươi hỏi lộ ý, nàng ta đề phòng ngươi"));
 add("td_ke_10",A("th","Triều hội đầu xuân, kẻ kia đứng hàng đầu, mà Thái hậu xưa nay vẫn khen hắn. Nếu bà bênh, chứng cứ nào cũng nhẹ. {Call} vào hầu, xin bà đừng nói gì trong buổi ấy.",
- "Hầu Thái hậu, xin bà đứng ngoài chuyện triều hội","Thái hậu cho rằng ngươi muốn bịt miệng bà","Dâng Thái hậu một bộ kinh, xin bà tĩnh tâm mấy hôm","Thái hậu đoán ý, ghi ngươi vào lòng"));
+ "Hầu Thái hậu, xin bà đứng ngoài chuyện triều hội","Thái hậu cho rằng ngươi muốn bịt miệng bà","Dâng Thái hậu một bộ kinh, xin bà tĩnh tâm mấy hôm","Thái hậu đoán ý, ghi hận ngươi"));
 /* td_song */
 add("td_song_5",A("emp","Tin tiểu đệ của {me} còn sống đã đến tai triều. Nếu Hoàng thượng nghe từ miệng nhà kia, ngài sẽ nghĩ nhà {me} giấu tội. {Call} kể trước với ngài, nói rằng tiểu đệ chỉ là một lính biên.",
  "Kể trước với Hoàng thượng chuyện người lính biên ấy","Hoàng thượng hỏi sao ngươi biết người nhà tội thần","Dâng lễ nhờ thái giám hầu giá nhắc nhẹ","thái giám nhắc sai, ngài nghi có người giấu tội"));
@@ -403,7 +403,7 @@ add("ch_benh_6",A("emp","Cô mẫu lâm bệnh, có người đã xin Hoàng th�
  "Xin Hoàng thượng chờ Thái hậu khỏi bệnh mới định việc","Hoàng thượng cho rằng ngươi giữ quyền cho Đức Thọ cung","Dâng lễ nhờ thái giám hầu giá nói giúp","thái giám nói lộ, kẻ xin quyền ghi mối hận"));
 add("ch_benh_7",A("do","Chén thuốc có vị lạ đi qua tay ba người, một trong số đó hay đến cung {B}. {Call} giúp {me} biết người ấy đã gặp ai trước khi bưng thuốc.",
  "Sai người dò ba người đã bưng chén thuốc","người dò bị Đức Thọ cung bắt, nghi là kẻ hạ độc","Tự hỏi chuyện các cung nữ sắc thuốc","ngươi hỏi lộ, kẻ kia kịp phi tang"));
-add("ch_benh_8",A("y","Cô mẫu đau lưng, mỗi đêm thức giấc mấy lần, ngự y chỉ kê thuốc uống. {Me} nghe nói có vị thái y giỏi châm cứu chưa từng được gọi. {Call} quen ông ấy, xin mời giúp.",
+add("ch_benh_8",A("y","Cô mẫu đau lưng, mỗi đêm thức giấc mấy lần, ngự y chỉ kê thuốc uống. {Me} nghe nói có vị thái y giỏi châm cứu chưa từng được gọi. Nếu {call} quen ông ấy, xin mời giúp.",
  "Mời thái y biết châm cứu đến Đức Thọ cung","Thái y viện trách ngươi vượt mặt ngự y","Tự xoa bóp cho Thái hậu theo sách thuốc","ngươi xoa vụng, Thái hậu đau thêm một đêm"));
 add("ch_benh_9",A("hh","Vị thuốc cứu mạng phải qua sổ Nội vụ phủ, mà Trung cung giữ con dấu. {Me} cần Hoàng hậu đóng dấu ngay trong đêm, xin {call} vào Khôn Ninh cung thưa giúp.",
  "Thỉnh an Hoàng hậu, xin bà đóng dấu ngay đêm nay","Hoàng hậu bị đánh thức, trách ngươi vô lễ","Dâng lễ nhờ nữ quan giữ dấu trình gấp","nữ quan trình chậm, thuốc lỡ nửa ngày"));
@@ -420,7 +420,7 @@ add("ch_ho_8",A("emp","Các trưởng bối họ ngoại sẽ chọn người ch
  "Khéo để Hoàng thượng nhắc tên nàng trước họ ngoại","Hoàng thượng thấy bị xếp đặt, không vui","Dâng lễ nhờ thái giám bên ngài nhắc tên nàng","thái giám nhắc lộ, người cháu kia biết chuyện"));
 add("ch_ho_9",A("emp","Tờ sớ hặc họ ngoại nêu tên cả nhà {me} lẫn nhà người cháu kia. {Me} không xin Hoàng thượng bỏ qua, chỉ xin ngài xét từng nhà, đừng phạt chung. {Call} nói giúp {me}.",
  "Xin Hoàng thượng xét riêng từng nhà họ ngoại","Hoàng thượng cho rằng ngươi bênh ngoại thích","Dâng lễ nhờ quan Ngự sử đài nói giúp","quan Ngự sử nhận lễ rồi dâng thêm một tờ sớ"));
-add("ch_ho_10",A("hh","Chiếc ghế bên Thái hậu là chuyện của Đức Thọ cung, nhưng thứ tự chỗ ngồi do Trung cung định. {Call} thưa với Hoàng hậu giúp, xin xếp {me} ngồi sau người cháu kia.",
+add("ch_ho_10",A("hh","Chiếc ghế bên Thái hậu là chuyện của Đức Thọ cung, nhưng ở yến tiệc lục cung, Trung cung xếp chỗ. {Call} thưa với Hoàng hậu giúp, xin xếp {me} ngồi sau người cháu kia.",
  "Thỉnh an Hoàng hậu, xin xếp nàng ngồi sau","Hoàng hậu ngại việc của Đức Thọ cung, bảo ngươi lui","Dâng lễ nhờ nữ quan xếp chỗ đổi thứ tự","nữ quan xếp lộn, cả hai người cháu đều giận"));
 /* ch_bi */
 add("ch_bi_5",A("emp","Bản sao lá thư đã đến tay Hoàng thượng một lần, ngài chưa nói gì. {Me} không biết ngài nghĩ sao về cô mẫu. {Call} hầu ngài, dò giúp {me} ngài còn giận hay không.",
@@ -522,7 +522,7 @@ add("cnv_mat_7",A("che","Tên {me} đã vào sổ Kính sự phòng, từ đó c
  "Cho nàng sang ngủ ở hậu viện cung mình","người ta bàn ngươi giấu người đã vào sổ thị tẩm","Bỏ bạc lo cho nàng chỗ ngủ ở Châm công cục","chỗ ấy không kín, kẻ đứng ngoài tìm đến"));
 add("cnv_mat_8",A("y","Kiệu sắp đến, mà {me} sốt nhẹ từ chiều. Hầu giá mà sốt là tội, khai bệnh thì mất dịp. {Call} xin giúp {me} một thang thuốc hạ sốt.",
  "Mời thái y quen cắt thuốc hạ sốt cho nàng","Thái y viện ghi lại, Kính sự phòng biết chuyện","Tự pha một bát nước gừng mang sang","nước gừng làm nàng đỏ mặt, người ta bàn tán"));
-add("cnv_mat_9",A("do","Từ tớ thành chủ, đồ dùng {me} được cấp lại bị cắt một nửa. {Me} nghi người của {B} đã nói với Nội vụ phủ, xin {call} dò xem ai đã ký phiếu cắt.",
+add("cnv_mat_9",A("do","Từ đêm được gọi hầu giá, phần áo mùa đông của {me} bị Nội vụ phủ cắt mất một nửa. {Me} nghi người của {B} đã nói với Nội vụ phủ, xin {call} dò xem ai đã ký phiếu cắt.",
  "Sai người tra sổ cấp đồ của Nội vụ phủ","người tra sổ cấp đồ bị quản sự mắng đuổi","Tự hỏi chuyện các thái giám phát đồ","ngươi hỏi lộ, Nội vụ phủ cắt thêm"));
 add("cnv_mat_10",A("y","Gói bùa tìm thấy trong gối của {me} có mùi thuốc lạ. Nếu biết trong đó có gì, sẽ biết nó từ đâu ra. {Call} nhờ một thái y nghiệm giúp.",
  "Mời thái y quen nghiệm gói bùa, trả công hậu","Thái y viện ghi tên ngươi trong chuyện bùa ngải","Tự mở gói bùa xem trong có gì","ngươi mở gói bùa, người ta đồn ngươi cũng dùng bùa"));

@@ -70,7 +70,7 @@ for(const id of Object.keys(NR)){const m=id.match(/^(.+)_(\d+)$/);const road=m&&
   if(a.k==='do'&&!/\{B\}/.test(a.h))fail(w+': a «do» ask must name its target {B} (the stock option hits {B})',a.h);
   if(a.h.length>260)fail(w+': ask too long for the card',a.h.length);
   for(const x of a.h.split(/(?<=[.!?:])\s+/).map(norm).filter(z=>z.length>8)){if(sent.has(x))fail(w+': sentence shared with '+sent.get(x),x);else sent.set(x,w)}
-  a.o.forEach(([l,x],j)=>{if(l.length>64)fail(w+': label too long',l);if(x.length>70)fail(w+': loss line too long',x);
+  a.o.forEach(([l,x],j)=>{if(l.length>64)fail(w+': label too long',l);if(/(^|[^\p{L}])ngươi(?![\p{L}])/u.test(l))fail(w+': a label is the player\'s own voice: «mình», never «ngươi» (q1b review fix 7)',l);if(x.length>70)fail(w+': loss line too long',x);
    const nl=norm(l),nx=norm(x);if(lab.has(nl))fail(w+': label used twice (also '+lab.get(nl)+')',l);else lab.set(nl,w);
    if(los.has(nx))fail(w+': loss line used twice (also '+los.get(nx)+')',x);else los.set(nx,w)})})}
 /* coverage: an origin (or men) with any entry must cover every help chapter of every road of it */
