@@ -28,10 +28,10 @@ Object.assign(BAL.looks,{stain:{on:0,
  anchor:{chest:[.5,.27],sleeve:[.2,.5],hem:[.5,.93],hemL:[.22,.94],hemR:[.78,.94],hemH1:[.5,.85],hemH2:[.28,.79],hemH3:[.72,.76],hemH4:[.45,.7],sleeveL:[.14,.6],sleeveR:[.86,.6]},
  kind:{tra:{pos:["chest","hem","sleeve"],blend:"stain",variants:3,wet:0,scm:1.4,dy:0,opm:1,tint:[135,82,38],tm:1,lv:[null,{n:1,sc:.24,op:1.3},{n:2,sc:.3,op:1.15},{n:3,sc:.42,op:1.15}]},uot:{pos:["hem","sleeveL","sleeveR","hemL","hemR"],blend:"wet",variants:2,wet:1,scm:1.15,dy:0,opm:1,rotm:.4,deep:{k:.95,dark:.2,pow:1,paleP:.5,satMin:.07,warm:[1,.97,.88],rad:5,cling:2.2,hem:.84,hemV:.34,hemF:11,nx:5,ny:1.1,front:[0,.5,.75,1],floor:[0,0,.6,.92],darkL:[0,.2,.22,.3]}},bun:{pos:["hem"],blend:"multiply",variants:8,base:2,wet:0,scm:1,tilt:.5,scatter:1,lv:[null,{n:7,sc:.3,op:.9},{n:8,sc:.32,op:.9},{n:9,sc:.34,op:.92}],
   /* r6 lv2/lv3 = lv1 (owner OK) + painted mud pieces placed by code: d = decal number (fx-stain-bun-d), n = how many, sc = width share of the robe, at "hem" = its bottom edge on the real hem of that column, else fy = height of its bottom edge (0 top .. 1 hem), x = horizontal range, op = opacity */
-  add:[null,[],[{d:3,n:2,sc:.11,fy:[.9,.95],x:[.15,.85],op:.5},{d:5,n:1,sc:.055,fy:[.92,.96],x:[.2,.8],op:.5}],
-   [{d:3,n:3,sc:.12,fy:[.84,.93],x:[.12,.88],op:.55},{d:5,n:2,sc:.06,fy:[.88,.95],x:[.15,.85],op:.55},{d:4,n:1,sc:.24,at:"hem",x:[.25,.75],op:.4}]],
-  /* soft tide-mark band climbing the pleats unevenly (code, not a decal): h = max height above the hem (share of figure height) per level, v = how uneven, f = column frequency, soft = blurred top edge, op = darkness, col = mud colour; shoe = how clean the shoes stay */
-  tide:[null,null,{h:.05,v:.6,f:9,soft:.025,op:.42},{h:.09,v:.55,f:9,soft:.035,op:.55}],col:[122,84,50],shoe:.85}},
+  add:[null,[],[{d:3,n:2,sc:.11,fy:[.8,.88],x:[.15,.85],op:.5},{d:5,n:2,sc:.055,fy:[.82,.9],x:[.2,.8],op:.5}],
+   [{d:3,n:4,sc:.12,fy:[.72,.88],x:[.12,.88],op:.55},{d:5,n:3,sc:.06,fy:[.72,.88],x:[.15,.85],op:.55},{d:4,n:1,sc:.24,at:"hem",x:[.25,.75],op:.4}]],
+  /* soft tide-mark band climbing the pleats unevenly (code, not a decal): h = max height above the hem (share of figure height) per level, v = how uneven, f = column frequency, soft = blurred top edge, op = darkness, col = mud colour; shoe = how clean the shoes stay. Owner 18/11 ~02:40Z: lv1 a little tide too (less than lv2), lv2 marks higher, lv3 marks AND tide higher */
+  tide:[null,{h:.03,v:.6,f:9,soft:.02,op:.3},{h:.08,v:.6,f:9,soft:.03,op:.42},{h:.15,v:.55,f:9,soft:.045,op:.55}],col:[122,84,50],shoe:.85}},
  rot:.5,jit:.05}});
 /* ---------- tiny deterministic noise ---------- */
 function clothHash(x,y,s){let h=(x*374761393+y*668265263+s*2147483647)|0;h=(h^(h>>>13))*1274126177|0;return((h^(h>>>16))>>>0)/4294967295}
