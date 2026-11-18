@@ -15,20 +15,37 @@ function pMan(m){faceFor(m,m.rw==="vương gia"?"royal":"man",m.age);const fb=(A
 (function(){const f0=pFaceOf;pFaceOf=function(p){if(p&&p.kind==="man"&&p.ref)return pMan(p.ref);return f0(p)}})();
 function tinhW(t){return t>=BAL.tinhLv.love?"si mê ngươi":t>=BAL.tinhLv.close?"thầm thương ngươi":t>=BAL.tinhLv.warm?"để ý ngươi":t>=BAL.tinhLv.known?"có thiện cảm":"chưa để ý"}
 /* risk of being seen: place, her watcher's loyalty, rivals' eyes */
-function lộRisk(k){const base={vuon:28,thu:34,tyv:20,tn:40,home:15}[k]||26;const w=watcher();const eN=liveRivals(true).reduce((s,v)=>s+eyes(v),0);return cl(Math.round(base+eN*2-(w?w.loyal/5:0)-eyes(S)*2),6,92)}
-function watcher(){const s=(S.staff||[]).filter(x=>x.loyal>=BAL.loy.close).sort((a,b)=>b.loyal-a.loyal)[0];if(s)return{name:s.name,loyal:s.loyal,s};if(S.maid&&S.maid.loyal>=BAL.loy.close)return{name:S.maid.name,loyal:S.maid.loyal};return null}
+/* role-parity-4: ONE risk / watcher rule for her and every consort (p = the doer; her numbers unchanged: others(S) = the rivals) */
+function lộRiskP(p,k){const base={vuon:28,thu:34,tyv:20,tn:40,home:15}[k]||26;const w=watcherOf(p);const eN=(p===S?liveRivals(true):others(p)).reduce((s,v)=>s+eyes(v),0);return cl(Math.round(base+eN*2-(w?w.loyal/5:0)-eyes(p)*2),6,92)}
+function lộRisk(k){return lộRiskP(S,k)}
+function watcherOf(p){if(!p)return null;const s=(p.staff||[]).filter(x=>x&&x.loyal>=BAL.loy.close).sort((a,b)=>b.loyal-a.loyal)[0];if(s)return{name:s.name,loyal:s.loyal,s};if(p.maid&&p.maid.loyal>=BAL.loy.close)return{name:p.maid.name,loyal:p.maid.loyal};return null}
+function watcher(){return watcherOf(S)}
+/* a man's feelings are kept per woman: hers in m.tinh / m.af / m.letters (old saves), an NPC consort's in m.tv / m.fv / m.lv keyed by her id */
+function manT(p,m){return p===S?m.tinh||0:((m.tv||{})[p.id]||0)}
+function manTSet(p,m,x){x=Math.max(0,x);if(p===S)m.tinh=x;else(m.tv=m.tv||{})[p.id]=x}
+function manTAdd(p,m,d){manTSet(p,m,manT(p,m)+d)}
+function manAfAdd(p,m,d){if(p===S)m.af+=d;else(m.fv=m.fv||{})[p.id]=((m.fv||{})[p.id]||0)+d}
+function manLet(p,m){if(p===S)m.letters++;else(m.lv=m.lv||{})[p.id]=((m.lv||{})[p.id]||0)+1}
 function whoMayKnow(){const w=watcher();return [w?w.name+" (canh cửa)":"",...liveRivals(true).filter(v=>eyes(v)>=3).map(v=>v.name)].filter(Boolean).slice(0,3).join(", ")||"không ai rõ"}
-function affairExposed(m,how){/* full weight: the man dies; she faces death (first-year mercy aside) or lãnh cung */m.alive=false;log(`<span class="r">${how} ${m.name} bị xử trảm.</span>`);if(roll(50))deathSentence(`Bị ban chết vì tư thông với ${m.name}`);else cold(`Tư thông với ${m.name} bị lộ`)}
-/* talk options with a man: every step carries its odds word and its risk */
-(function(){const t0=talkOpts;talkOpts=function(p){if(!p||p.kind!=="man")return t0.apply(this,arguments);const m=p.ref;if(!m||!m.alive)return[];const k=S.place,risk=lộRisk(k);const A=[];
- A.push({n:"Chào hỏi đúng lễ",o:100,w:{danh:1},x:"hắn quý ngươi +5",go:()=>{m.af+=5}});
- A.push({n:"Liếc mắt đưa tình",o:od(BAL.odb.j22.odO+S.sac/5),x:`tình ý của hắn +12 · có thể bị người thấy, một phi tần nắm ${balAb(BAL.eff.j22.evGo)} chứng cứ của ngươi: ${chanceW(Math.round(risk/3))}`,l:{},go:()=>{m.tinh+=12+(nv(m,"flirtTinh"));deedAdd(S,"flirt",null,1,`liếc mắt đưa tình với ${m.name}`);if(roll(risk/3)){const v=pick(liveRivals(true));if(v){/*evok: flirt deed written just before*/evA(v,S,BAL.eff.j22.evGo);log(`Có kẻ thấy ngươi liếc mắt với ${m.name}.`)}}}});
- if(m.tinh>=BAL.tinhLv.warm)A.push({n:"Trao khăn tay",o:od(BAL.odb.j22.odO_2+S.tamco/5),x:`hắn giữ khăn tay của ngươi (là tang vật nếu bị lục) · tình ý +15`,go:()=>{m.tinh+=15;m.letters++;S.aff=S.aff||{};S.aff[m.id]=(S.aff[m.id]||0)+1}});
- if(m.tinh>=BAL.tinhLv.close){const w=watcher();A.push({n:"Hẹn gặp riêng",o:w?oddsCl(100-risk):0,lock:!w,t:`cần một người hầu trung thành (lòng ${balAb(BAL.loy.close)}+, Chủ tin ${balAb(BAL.tinLv.watch)}+) canh cửa`,act:1,x:`đêm ấy kín đáo: Sức +12, hắn thành người che chở · có thai: ${chanceW(trystCh(S))} · hỏng: bị bắt gặp, tội chết`,run:()=>tryst(m,risk)})}
- if(m.tinh>=BAL.tinhLv.warm)A.push({n:"Cắt đứt",o:100,fix:1,x:"hắn thôi tơ tưởng; giảm hẳn rủi ro",go:()=>{m.tinh=0}});
- return A}})();
-function tryst(m,risk){if(roll(risk)){affairExposed(m,`Đêm ${S.name} hẹn ${m.name} bị bắt gặp.`);return "Bị bắt gặp."}
- m.trysts++;m.tinh+=10;S.lastTryst=wk();apply({suc:BAL.eff.j22.sucTryst});S.protector=m.id;S.an=S.an||0;let r=`Đêm ấy trôi qua kín đáo. Sức ${balSg(BAL.eff.j22.sucTryst)}. ${m.name} nguyện che chở ngươi. Người dễ biết chuyện: ${whoMayKnow()}.`;
+function affairExposed(m,how,p){/* full weight: the man dies; she faces death (first-year mercy aside) or lãnh cung — the same for an NPC consort (p) */p=p||S;const dP=BAL.ag.par4.man.dieP;m.alive=false;log(`<span class="r">${how} ${m.name} bị xử trảm.</span>`);
+ if(p===S){if(roll(dP))deathSentence(`Bị ban chết vì tư thông với ${m.name}`);else cold(`Tư thông với ${m.name} bị lộ`);return}
+ if(p.affair===m.id)p.affair=null;if(roll(dP))deathSentence(p,`tư thông với ${m.name}`);else{p.out=true;if(p.queen)p.queen=false;log(`<span class="r">${p.name} tư thông với ${m.name}, bị đày vào lãnh cung.</span>`)}}
+/* talk options with a man: every step carries its odds word and its risk.
+   role-parity-4 (owner OD 18/11 ~21:30Z, law 1 + law 4): the cards are built ONCE by manCards(p,m,risk) — her talk buttons call it with p = S, an NPC
+   consort's affair road (jagacts4 par4, keys maid:hail … maid:cut = the scan's names of these buttons) calls it with p = her. Numbers: BAL.ag.par4.man. */
+function manCards(p,m,risk){const X=BAL.ag.par4.man,me=p===S,A=[],t=manT(p,m);
+ A.push({mk:"hail",n:"Chào hỏi đúng lễ",o:100,w:{danh:X.hailDanh},x:`hắn quý ngươi +${X.hailAf}`,go:()=>{manAfAdd(p,m,X.hailAf)}});
+ A.push({mk:"flirt",n:"Liếc mắt đưa tình",o:odA(p,BAL.odb.j22.odO+(p.sac||0)/X.sacD),x:`tình ý của hắn +${X.flirtTinh} · có thể bị người thấy, một phi tần nắm ${balAb(BAL.eff.j22.evGo)} chứng cứ của ngươi: ${chanceW(Math.round(risk/X.seenDiv))}`,l:{},go:()=>{manTAdd(p,m,X.flirtTinh+(nv(m,"flirtTinh")));deedAdd(p,"flirt",null,1,`liếc mắt đưa tình với ${m.name}`);
+  if(roll(risk/X.seenDiv)){const v=pick(me?liveRivals(true):others(p).filter(x=>x!==p));if(v){/*evok: flirt deed written just before*/evA(v,p,BAL.eff.j22.evGo);if(me)log(`Có kẻ thấy ngươi liếc mắt với ${m.name}.`);else if(v===S)log(`Ngươi thấy ${p.name} liếc mắt đưa tình với ${m.name}.`)}}}});
+ if(t>=BAL.tinhLv.warm)A.push({mk:"token",n:"Trao khăn tay",o:odA(p,BAL.odb.j22.odO_2+(p.tamco||0)/X.tcD),x:`hắn giữ khăn tay của ngươi (là tang vật nếu bị lục) · tình ý +${X.tokTinh}`,go:()=>{manTAdd(p,m,X.tokTinh);manLet(p,m);if(me){S.aff=S.aff||{};S.aff[m.id]=(S.aff[m.id]||0)+1}}});
+ if(t>=BAL.tinhLv.close){const w=watcherOf(p);A.push({mk:"tryst",n:"Hẹn gặp riêng",o:w?oddsCl(100-risk):0,lock:!w,t:`cần một người hầu trung thành (lòng ${balAb(BAL.loy.close)}+, Chủ tin ${balAb(BAL.tinLv.watch)}+) canh cửa`,act:1,x:`đêm ấy kín đáo: Sức +${BAL.eff.j22.sucTryst}, hắn thành người che chở · có thai: ${chanceW(trystCh(p))} · hỏng: bị bắt gặp, tội chết`,run:()=>trystP(p,m,risk)})}
+ if(t>=BAL.tinhLv.warm)A.push({mk:"cut",n:"Cắt đứt",o:100,fix:1,x:"hắn thôi tơ tưởng; giảm hẳn rủi ro",go:()=>{manTSet(p,m,0);if(!me&&p.affair===m.id)p.affair=null}});
+ return A}
+(function(){const t0=talkOpts;talkOpts=function(p){if(!p||p.kind!=="man")return t0.apply(this,arguments);const m=p.ref;if(!m||!m.alive)return[];return manCards(S,m,lộRisk(S.place))}})();
+function tryst(m,risk){return trystP(S,m,risk)}
+function trystP(p,m,risk){const X=BAL.ag.par4.man;if(roll(risk)){affairExposed(m,`Đêm ${p.name} hẹn ${m.name} bị bắt gặp.`,p);return "Bị bắt gặp."}
+ m.trysts++;manTAdd(p,m,X.trystTinh);if(p!==S){/* an NPC lover: the monthly affair (conception, the book, exposure) and jmen's lover nights take it from here */p.affair=m.id;p.lastTryst=wk();ap(p,{suc:BAL.eff.j22.sucTryst});p.protector=m.id;return `${p.name} lén hẹn gặp ${m.name}`}
+ S.lastTryst=wk();apply({suc:BAL.eff.j22.sucTryst});S.protector=m.id;S.an=S.an||0;let r=`Đêm ấy trôi qua kín đáo. Sức ${balSg(BAL.eff.j22.sucTryst)}. ${m.name} nguyện che chở ngươi. Người dễ biết chuyện: ${whoMayKnow()}.`;
  if(!S.preg&&roll(trystCh(S))){S.preg=1;S.hidden=true;S.pregWk=wk();S.trueFather=m.id;const ok=(S.nightLog||[]).some(w=>Math.abs(w-wk())<=1);S.pregMismatch=!ok;r+=ok?" Mấy hôm sau ngươi biết mình có thai; ngày tháng trùng đêm thị tẩm.":` <b class="r">Ngươi có thai, mà sổ Kính sự phòng không có đêm thị tẩm nào khớp ngày.</b>`}
  return r}
 /* pregnancy that the book cannot cover: her roads, each with its odds and cost */
@@ -40,7 +57,7 @@ function tryst(m,risk){if(roll(risk)){affairExposed(m,`Đêm ${S.name} hẹn ${m
 function affairMonth(){if(!S||!S.men)return"";let ev="";
  if(S.preg&&S.pregMismatch){const q=queenP();const foes=liveRivals(true).filter(v=>rel(v,S)<-20);if((q&&q!==S&&rel(q,S)<0||foes.length)&&roll(BAL.odb.j22.rbAffairMonth+(S.ksKnows?15:0))){const who=q&&q!==S?q:pick(foes);evA(who,S,BAL.eff.j22.evAffairMonth);ev+=`<span class="r">${who.name} cho người tra sổ Kính sự phòng: ngày ngươi có thai không khớp đêm thị tẩm nào.</span> `}}
  if(S.lastTryst!=null&&wk()-S.lastTryst<=3&&roll(4)){const v=pick(liveRivals(true).filter(x=>rel(x,S)<0)||[]);if(v){evA(v,S,BAL.eff.j22.evAffairMonth_2);if(eyes(S)>=3)ev+=`Tai mắt báo: ${v.name} có vẻ biết chuyện riêng của ngươi. `}}
- for(const v of liveRivals(false)){if(!v.affair&&v.sung<30&&roll(2)){const m=pick(S.men.filter(x=>x.alive));if(m)v.affair=m.id}
+ for(const v of liveRivals(false)){if(!v.affair&&!(typeof p4On==="function"&&p4On())&&v.sung<30&&roll(2)){const m=pick(S.men.filter(x=>x.alive));if(m)v.affair=m.id}
   if(v.affair){const m=manById(v.affair);if(!m){v.affair=null;continue}if(roll(3)){m.alive=false;v.affair=null;ev+=`<span class="r">${v.name} tư thông với ${m.name} bị lộ.</span> `;deathSentence(v,`tư thông với ${m.name}`)}}}
  return ev}
 (function(){const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments);try{if(!S.dead)ev+=affairMonth()}catch(e){}return ev}})();

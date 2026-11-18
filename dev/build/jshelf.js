@@ -274,7 +274,9 @@ function shelfSpyTxt(a,t,by){const r=shelfSee(a,t,by);if(!r||a!==S)return"";retu
    Owner OD 17/11 ~18:25Z (d): nobody knows the exact scores; anyone may accuse on what she SAW (visit, Dò la), on a TIP (rumour, someone told her) or on a GUESS;
    the inquiry settles the truth (a false charge costs the accuser). The player may guess at anyone; an NPC guesses only in the monthly pass (shelfNpcAccuse). */
 function shelfCause(a,t,kind){if(!a||!t||a===t||t.alive===false||t.out)return null;const r=shelfSeen(a,t);
- if(r&&(kind==="vp"?r.vr>0:r.lv>=2))return{how:r.pf?"pf":"tip",r};return a===S?{how:"guess",r:null}:null}
+ if(r&&(kind==="vp"?r.vr>0:r.lv>=2))return{how:r.pf?"pf":"tip",r};return a===S||shelfNpcGuess()?{how:"guess",r:null}:null}
+/* role-parity-4 (law 1): while the agent loop runs, an NPC may accuse on a guess too, by her own choice (jagharm haOpts: band, motive, odds, mindPick); the monthly dice pass below is then off */
+function shelfNpcGuess(){try{return typeof haOn==="function"&&haOn()&&typeof p4On==="function"&&p4On()}catch(e){return false}}
 window.shelfCause=shelfCause;
 function shelfStrip(t){const z=shelfOf(t);const L=Object.keys(z.g).filter(s=>z.g[s]).sort((x,y)=>shelfPiece(z.g[y])-shelfPiece(z.g[x]));return L.length?shelfTake(t,L[0]):""}
 function shelfInq(a,t){for(const o of liveRivals(true))if(o!==a&&o!==t&&o.alive&&!o.out)shelfLook(o,t,"tra xét",true)}/* the inquiry makes the room known */
@@ -308,7 +310,7 @@ function shelfAccHook(){shelfHook1("xx","Tố xa xỉ","hoặc phòng nàng bày
 try{shelfAccHook()}catch(e){console.error("shelfAccHook",e)}
 setTimeout(()=>{try{shelfAccHook()}catch(e){console.error("shelfAccHook",e)}},0);
 /* an NPC with a belief (seen or heard) and a motive brings the charge herself, monthly; a hostile one with nothing may still guess (same acts, same odds oVP) */
-function shelfNpcAccuse(){const B=BAL.shelf.acc;for(const a of liveRivals(true)){if(!a.alive||a.out)continue;if(a.shA!=null&&wk()-a.shA<B.cdA)continue;
+function shelfNpcAccuse(){const B=BAL.shelf.acc;if(shelfNpcGuess())return;for(const a of liveRivals(true)){if(!a.alive||a.out)continue;if(a.shA!=null&&wk()-a.shA<B.cdA)continue;
   const T=[S].concat(liveRivals(true)).filter(t=>t&&t!==a&&t.alive!==false&&!t.out&&!(t.shT!=null&&wk()-t.shT<B.cdT));
   for(const t of shuf(T)){const mot=hostility(a,t)>=B.hostMin||(t===S&&(a.ghen||0)>=B.ghenMin);if(!mot)continue;
    const r=shelfSeen(a,t);let kind=r&&r.vr>0?"vp":r&&r.lv>=2?"xx":null;

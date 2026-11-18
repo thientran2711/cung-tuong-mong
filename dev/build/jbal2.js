@@ -1312,3 +1312,14 @@ BAL.bookFigW=.343;Object.assign(BAL,{bookFrame:{cRef:.072,gap:8,footGap:10}});
 /* DOING AN ACT ON THE SPOT (review/shown-odds-one-path): "Cài đồ vào rương nàng" done in her own palace is easier than sending
    someone by actHere.plant (was a typed -15 pen in j8 plantpick + a typed +15 on the j2 chest card); both read it through actCtx (j9). */
 Object.assign(BAL,{actHere:{plant:15}});
+/* ROLE PARITY part 4 (owner OD 18/11 ~21:30Z; jagacts4 par4): the NPC side of her buttons that had none.
+   man = the j22 affair road (manCards: her talk buttons with a man AND an NPC consort's options): hailDanh / hailAf = Chào hỏi đúng lễ (Danh, his liking),
+   flirtTinh / tokTinh / trystTinh = tình ý a step adds (were typed 12 / 15 / 10 in j22), seenDiv = a flirt is seen with chance risk / seenDiv (was typed /3); sacD / tcD = Sắc / Tâm cơ divisors of the flirt / khăn tay odds (were typed /5);
+   dieP = chance in 100 a caught lover is sentenced to death, else lãnh cung (was typed roll(50));
+   lonely / favW = at or above this Sủng (the flat monthly roll's v.sung<30, j22), or in love with another man, a new step weighs × favW; cutRisk = she ends it at this risk or more;
+   g / l = worth / fear of each step in need units (agcU). ill = Đồ cấm bought by the j83 routes (illBuy, the same function as hers): keep = bạc she keeps
+   back (was +20 in the j83 monthly roll), band = the danger band (BANDS index) toward someone that makes her look for poison (none: × bandW; an item already at hand: × haveW), g / l = worth / fear. */
+BAL.ag.par4={on:1,
+ man:{hailDanh:1,hailAf:5,flirtTinh:12,seenDiv:3,sacD:5,tcD:5,dieP:50,tokTinh:15,trystTinh:10,lonely:30,favW:.25,cutRisk:45,like:20,
+  g:{hail:{"danh":1},flirt:{"kid":1},token:{"kid":1},tryst:{"kid":3,"rest":1},cut:{"safe":3}},l:{flirt:{"safe":1},token:{"safe":1},tryst:{"safe":6}}},
+ ill:{keep:20,band:3,bandW:.2,haveW:.1,g:{"spite":3},l:{"safe":2,"danh":1}}};

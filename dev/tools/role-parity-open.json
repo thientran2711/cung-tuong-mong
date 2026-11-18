@@ -775,98 +775,8 @@
 "side": "N-RANK"
 },
 {
-"role": "t1",
-"key": "harm:vp",
-"side": "P-ONLY"
-},
-{
-"role": "t2",
-"key": "harm:vp",
-"side": "P-ONLY"
-},
-{
-"role": "t3",
-"key": "harm:vp",
-"side": "P-ONLY"
-},
-{
-"role": "t4",
-"key": "harm:vp",
-"side": "P-ONLY"
-},
-{
-"role": "t5",
-"key": "harm:vp",
-"side": "P-ONLY"
-},
-{
-"role": "t6",
-"key": "harm:vp",
-"side": "P-ONLY"
-},
-{
-"role": "t7",
-"key": "harm:vp",
-"side": "P-ONLY"
-},
-{
-"role": "hh",
-"key": "harm:vp",
-"side": "P-ONLY"
-},
-{
-"role": "up",
-"key": "harm:vp",
-"side": "P-ONLY"
-},
-{
 "role": "up",
 "key": "harm:xinhh",
-"side": "P-ONLY"
-},
-{
-"role": "t1",
-"key": "harm:xx",
-"side": "P-ONLY"
-},
-{
-"role": "t2",
-"key": "harm:xx",
-"side": "P-ONLY"
-},
-{
-"role": "t3",
-"key": "harm:xx",
-"side": "P-ONLY"
-},
-{
-"role": "t4",
-"key": "harm:xx",
-"side": "P-ONLY"
-},
-{
-"role": "t5",
-"key": "harm:xx",
-"side": "P-ONLY"
-},
-{
-"role": "t6",
-"key": "harm:xx",
-"side": "P-ONLY"
-},
-{
-"role": "t7",
-"key": "harm:xx",
-"side": "P-ONLY"
-},
-{
-"role": "hh",
-"key": "harm:xx",
-"side": "P-ONLY"
-},
-{
-"role": "up",
-"key": "harm:xx",
 "side": "P-ONLY"
 },
 {
@@ -1051,51 +961,6 @@
 },
 {
 "role": "t1",
-"key": "label:Sai cung nữ thân tín mua lén ngoài cung",
-"side": "P-ONLY"
-},
-{
-"role": "t2",
-"key": "label:Sai cung nữ thân tín mua lén ngoài cung",
-"side": "P-ONLY"
-},
-{
-"role": "t3",
-"key": "label:Sai cung nữ thân tín mua lén ngoài cung",
-"side": "P-ONLY"
-},
-{
-"role": "t4",
-"key": "label:Sai cung nữ thân tín mua lén ngoài cung",
-"side": "P-ONLY"
-},
-{
-"role": "t5",
-"key": "label:Sai cung nữ thân tín mua lén ngoài cung",
-"side": "P-ONLY"
-},
-{
-"role": "t6",
-"key": "label:Sai cung nữ thân tín mua lén ngoài cung",
-"side": "P-ONLY"
-},
-{
-"role": "t7",
-"key": "label:Sai cung nữ thân tín mua lén ngoài cung",
-"side": "P-ONLY"
-},
-{
-"role": "hh",
-"key": "label:Sai cung nữ thân tín mua lén ngoài cung",
-"side": "P-ONLY"
-},
-{
-"role": "up",
-"key": "label:Sai cung nữ thân tín mua lén ngoài cung",
-"side": "P-ONLY"
-},
-{
-"role": "t1",
 "key": "label:Sửa sổ nguyệt sự",
 "side": "P-ONLY"
 },
@@ -1215,51 +1080,6 @@
 "side": "N-ONLY"
 },
 {
-"role": "t1",
-"key": "maid:flirt",
-"side": "P-ONLY"
-},
-{
-"role": "t2",
-"key": "maid:flirt",
-"side": "P-ONLY"
-},
-{
-"role": "t3",
-"key": "maid:flirt",
-"side": "P-ONLY"
-},
-{
-"role": "t4",
-"key": "maid:flirt",
-"side": "P-ONLY"
-},
-{
-"role": "t5",
-"key": "maid:flirt",
-"side": "P-ONLY"
-},
-{
-"role": "t6",
-"key": "maid:flirt",
-"side": "P-ONLY"
-},
-{
-"role": "t7",
-"key": "maid:flirt",
-"side": "P-ONLY"
-},
-{
-"role": "hh",
-"key": "maid:flirt",
-"side": "P-ONLY"
-},
-{
-"role": "up",
-"key": "maid:flirt",
-"side": "P-ONLY"
-},
-{
 "role": "maid",
 "key": "maid:follow",
 "side": "N-ONLY"
@@ -1277,51 +1097,6 @@
 {
 "role": "maid",
 "key": "maid:groom",
-"side": "P-ONLY"
-},
-{
-"role": "t1",
-"key": "maid:hail",
-"side": "P-ONLY"
-},
-{
-"role": "t2",
-"key": "maid:hail",
-"side": "P-ONLY"
-},
-{
-"role": "t3",
-"key": "maid:hail",
-"side": "P-ONLY"
-},
-{
-"role": "t4",
-"key": "maid:hail",
-"side": "P-ONLY"
-},
-{
-"role": "t5",
-"key": "maid:hail",
-"side": "P-ONLY"
-},
-{
-"role": "t6",
-"key": "maid:hail",
-"side": "P-ONLY"
-},
-{
-"role": "t7",
-"key": "maid:hail",
-"side": "P-ONLY"
-},
-{
-"role": "hh",
-"key": "maid:hail",
-"side": "P-ONLY"
-},
-{
-"role": "up",
-"key": "maid:hail",
 "side": "P-ONLY"
 },
 {

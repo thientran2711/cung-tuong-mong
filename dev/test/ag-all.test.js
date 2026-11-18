@@ -36,6 +36,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   for(const k in AGHH)P.add("hh:"+k);const TH=new Set(["th:gift","th:admon","th:release"]);const EMP=new Set(["emp:summon","emp:visit","emp:tea"]);/* the Emperor is never the player: his summons mirrors her Xin hầu cờ / đánh đàn (jgift kmEmpAct) *//* Thái hậu is never the player: her acts mirror the Empress's Ban thưởng / Khuyên / Ân xá */
   /* F3: every prefixed key mapped to its player button: harm:* → the rival card (j15 RVGRP, + Tẩm đồ / workshop); maid:* / srv:* → the player maid's SRVA rows */
   const RVK=new Set(RVGRP.flatMap(g=>g[1]).concat(["taint","cook"]));const okK=(g,k)=>{const m=/^(harm|maid|srv):(.+)$/.exec(k);
+   /* role-parity-4: a consort's maid:hail … maid:cut = her own j22 talk buttons with a man (manCards, the scan's names of them) */
+   if(m&&m[1]==="maid"&&(g==="consort"||g==="hh")&&typeof manCards==="function"&&["hail","flirt","token","tryst","cut"].includes(m[2]))return true;
    if(m)return m[1]==="harm"?(g==="consort"||g==="hh")&&RVK.has(m[2]):(m[1]===g&&(!!SRVA[m[2]]||(g==="maid"&&m[2]==="empTea")));/* empTea = the player maid's "Quỳ dâng trà" (j42 card, jagmaid amDo: one rule) */return (g==="consort"||g==="hh")&&P.has(k)};
   const bad=[];for(const g in byG)for(const k in byG[g]){if(g==="emp"?!EMP.has(k):g==="th"?!TH.has(k):!okK(g,k))bad.push(g+":"+k)}return bad},r.byG);
  ok(r3.length===0,'no NPC-only hidden act: every chosen deed is a button of the player of that group',r3);
