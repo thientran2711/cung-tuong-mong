@@ -12,3 +12,7 @@ Round 2, 4 more gens (2 t8, 2 t7), no regen needed; total gens = 8. Face/crown/c
 t8 sheet: https://ctm-img.victoria-tntt.workers.dev/img/_review/yellow-deeper/sheet_c03_a18_t8_gold.jpg
 t7 sheet: https://ctm-img.victoria-tntt.workers.dev/img/_review/yellow-deeper/sheet_c03_a18_t7_gold.jpg
 Files: c03_a18_t8_gold_A/B.png, c03_a18_t7_gold_A/B.png (same folder, on CDN).
+
+## ROUND 3 (owner ~17:20Z): C1/C2 = fresher, lighter-depth yellow between current and A; ALL colours + crown/pins/gold shifted in the same step (18K feel), harmonious
+4 gens (t8 C1/C2, t7 C1/C2), no regen; total gens = 12. Sheet (current | C1 | C2; rows t8, t7): https://ctm-img.victoria-tntt.workers.dev/img/_review/yellow-deeper/sheet_c03_a18_C.jpg
+Files: c03_a18_t8_C1/C2.png, c03_a18_t7_C1/C2.png. Note: t8 C2 yellow leans slightly lemon; t7 C2 jade slightly more minty.
