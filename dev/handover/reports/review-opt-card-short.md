@@ -9,5 +9,3 @@ PASS LAND READY ad86bcc09ebfced487991a51ee3caef65f138b81 (FF from 94d11623)
 
 ## SUPERSEDED / STOPPED (owner FAIL, OD 18/11 ~21:20Z)
 The PASS above is withdrawn: owner failed ad86bcc0 (figure must fill the column, name tag at top, card titles centred, real event text). My checks did not cover those four points. Partial notes still valid for the re-review: quickcheck + scan columns (SCROLLBIG/TIERCHK/OVERFLOW/BANG) were clean on ad86bcc0; re-run on the new sha and add look-checks for the four owner points. origin/main 94d11623 was already merged.
-
-VOID: owner FAIL 21:20Z (+~21:35Z crowned Hoàng hậu standard). ad86bcc0 must not land; await re-review sha from ROOT-55.
