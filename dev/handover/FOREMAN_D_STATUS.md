@@ -1,6 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 18/11 07:50Z — FOREMAN D ROOT session_01964izDDniLutRAXZ66jBdy (depth 0/8), context ≈ 20 %
+last wake: 18/11 08:50Z — FOREMAN D ROOT (depth 0) HANDING OVER to D #1 — see HANDOVER ROOT → #1 at the end
 s7 START_CTX ≈ 6 % of 1M window (get_session reads 0; own estimate ~60k after start reading); rollover at 31 %, ceiling 60 %.
 - (17/11 12:40Z) s7 STOPPED: old Foreman D s7 (session_01DgYSWo6WxULHyNN9yjfAPm) woke after a ~14 h stall, saw FOREMAN D #9 already in charge, deleted its own hourly wake trig_01WRgJzWBhmuoRbMvDPTXtqt, touched no worker and no claim. s7 context 37 % (past its 31 % rollover). Nothing to hand over beyond this file.
 - 21:43Z: suc-khoe-fix SẴN SÀNG KIỂM da50857d (F1–F10 fixed; F6 waits KIT REQUEST y-duoc + art; coop-e2e 60/60 incl. new 'NPC Sức khỏe guest = host'; D57 births fix ≈ base 0.14–0.16; her deaths 25–27 vs 17–25 per 40 lives) — worker archived → opus BIG reviewer r2 session_01DgYSWmYNeB92ubrzxwYmXs.
@@ -257,3 +257,16 @@ MAIN = ROOT-46 session_01UV1SzjQU5QYnv2CvQLvwiH. LINEAGE: #13 = depth 5/8 (ALWAY
 - (18/11 08:50Z) FROM MAIN: main is now ROOT-50 = session_01UV1SzkQbY6CG7anj9iuHK5 (ROOT-49 stopped); report READY/PASS shas and FOR MAIN lines to it. LIVE main = a2ad2401.
 - (18/11 08:37Z, D ROOT) ODDS-CAP RE-MERGE SẴN SÀNG KIỂM 1c46cd401c48a378861623938f43f289f29384c2 (review/odds-cap-r2 = main 9c58140 + 591cedf9; 3 hunks: jmort lyF + roll(M.sudden), j77 j77Go + 'Đi' text, j83 main kitQuickSub kept (main removed BAL.odb.j83.odPts; word from od(BAL.skip.od)); family scan: typed ladder 14 same set, KÈM 0/208, capRes 200k PASS; mg-skip/map-tap-go/mortality/quickcheck/coop 63/63 PASS; 16 interleaved perf runs render 0.958) → worker archived → opus short re-reviewer session_01964izFjKYQX8MLy9amEugm (brief briefs/DROOT-odds-cap-r2-review.md; must merge live a2ad2401). RUNNING 5 (residence-seats r2 review, balance-final, land-d4 step 4, poison-road review, odds-cap r2 review), free 7.
 - (18/11 08:41Z, D ROOT) **LIVE PUSH (FF): main a2ad2401 → 36e574fa** = land-d4 step 4 staff-cap-row3-rv 3810c2ec (tests only; staff-cap-apply ALL PASS, route.js, warm-continue, tutorial.js all 5 modes 0 FAIL on rerun; quickcheck PASS on 2nd run, 1st = longTask outlier with code identical to step 3). Lander archived. **FOR MAIN ROOT-49: live main = 36e574fa** (title-stale-sel + toil-react-top + staff-cap-row3). Remaining from ORDER 07:39Z: odds-cap → r2 re-review running.
+## HANDOVER — Foreman D ROOT → D #1 (18/11 08:50Z; ROOT depth 0, START_CTX ≈ 9 %, context 64 % (get_session 642k/1M) ≥ ceiling 60 % → rollover per OD:L1217)
+RUNNING (4; they report to session_01964izDDniLutRAXZ66jBdy — #1 tells each its new id ONCE):
+| session | job | branch | next step for #1 |
+|---|---|---|---|
+| session_01964izDpndwoqRKNLpJhQ4y | RESIDENCE-SEATS r2 BIG review (opus) of 668fbb1c (palFix + R10; OWNER FLAG HH reach 63→37/100 with owner seat table — owner's call) | review/residence-seats-r2-rv | PASS → land FF yourself (OD:L1370: merge newest main if moved, quickcheck, push main FF, tell MAIN) ; FAIL → fix worker |
+| session_01964izCP81mLjwwymWk5t2Q | BALANCE-FINAL (opus) = balance-chain ce3f5611 + balance-2 r2 deltas + conception/y-care fix + residence-seats-r2 merge; also NPC Sủng saturation finding | review/balance-final | SẴN SÀNG KIỂM → opus BIG reviewer → land AFTER the C-AG jbal hold (~10:00Z, ORDER ROOT-49 07:39Z) |
+| session_01964izDCmCqN7i5oYiFbonX | D8 POISON ROAD BIG review (opus) of 4ce4cbfa (jpq.js, no jbal/j95 edit) | review/poison-road-rv | PASS → land FF yourself, tell MAIN |
+| session_01964izFjKYQX8MLy9amEugm | ODDS-CAP r2 short re-review (opus) of 1c46cd40 (re-merge of BIG PASS 591cedf9; must merge live 36e574fa) | review/odds-cap-r2-rv | PASS → land FF yourself (last item of ORDER ROOT-49 07:39Z), tell MAIN |
+LIVE today by D ROOT: main 9c581406 → a2ad2401 (title-stale-sel + toil-react-top) → 36e574fa (staff-cap-row3). Land recipe: flock /home/user/wt/fetch.lock; fetch main; verify origin/main is ancestor of the sha; git push origin <sha>:refs/heads/main; line in STATUS + CLAIMS 'LIVE <sha>' + FOR MAIN.
+OLDER D PASSes not live (check vs newest main): face-w404-r1 51b87607, day-khac-audit-r1 46900ee2.
+D STANDBY = session_01964izCXnfxr3WLK6fnrdr5 (depth 0, idle). MAIN = ROOT-49 session_01UV1SzicNuc6RxVvcxNUHKK (cross-account: send_message 'not found' → FOR MAIN lines here).
+Owner asleep (OD 07:39Z; standby blocks already pasted). Free slots 8 — no other real D item queued.
+LESSONS: grep WHOLE STATUS for ORDER/FROM MAIN each wake; push brief BEFORE create_session; source-conflict re-merges = opus worker + short re-review; my push helper = fetch → detached checkout FETCH_HEAD → edit → commit → push, retry.
