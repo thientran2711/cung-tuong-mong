@@ -931,3 +931,4 @@ LESSONS s39: look at neighbours side by side before asking her to pick (A/B/C gl
 - (18/11 00:33Z) cloth-xoc 1ddd0a7 stains FAIL-look (tea flat opaque on cream + invisible on red lv1; wet = grey tint not patches; mud horizontal bands to thigh) → fix list sent; not shown to owner.
 - (18/11 00:34Z) OWNER (via s39): smudge lv2/lv3 pink flush much paler (makeup layer already pink) → smudge worker: flush ≈ 1/3 of r10, runs unchanged; reports to s40.
 - (18/11 00:38Z) toil-looks5 SẴN SÀNG KIỂM c52cb985 (kk 60/80, cam ánh đỏ) → opened REVIEW looks-s40 session_01UV1Szk7eZQzR2d2t4rhiFj (toil-looks5 + tuyet-glow together; smudge joins later after owner OK). makeup-lux r2v 0e6489f6 (B PASS) NOT on main yet — B to land.
+- (18/11 00:41Z) OWNER: hoa điền tone = lighter+fresh not muted → hoa-dien r3 redo tone samples. Crease lv2+lv3 APPROVED (all 3 levels). OD lines written.
