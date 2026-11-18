@@ -49,3 +49,6 @@ Not blocking note kept for later polish: the «do» asks lean on the dò-la shap
 
 ## REBASE (18/11 ~07:20Z) on q1a ed01a6b (NRSELF engine fix, review item 6) → **b34eaedd**
 Data unchanged from 53c08086. nrask-scan ALL PASS · nrask-engine ALL PASS incl. check 7 (648 queen offers, never hh) · quickcheck PASS (334 s).
+
+## REBASE 2 (18/11 ~07:45Z) on q1a 54f10e8 (fix r2: kAddr address, {B}-skip, hh/queen, dup-key) → **2b80a8a3**
+New rule: an ask naming {B} is not drawn without a rival. Scan: chapters whose asks ALL name {B} 7 → 0 (reworded the non-do ask of td_an_7, td_song_6, td_tha_6, ch_co_8, thd_tho_5, thd_tro_6, thd_hoc_6). Typed tỷ/muội in asks: 0. nrask-scan ALL PASS · nrask-engine ALL PASS · quickcheck PASS (362 s).

@@ -93,3 +93,4 @@ TOOLS / LESSON: handover worktree /home/user/wt/ho (detached). NEVER `git pull -
 - (18/11 06:52Z) PICKUP E ROOT #3 = session_01DgYSWmvDYnmfLCrNGtw5Uu; START_CTX ~4 % (est., used_tokens reads 0; window 1M) → rollover at 29 %, ceiling 60 %; depth 2. MAIN = ROOT-47 session_01UV1SzkyUiNKEkWJM3e9b5U. Hourly wake :47 = trig_01Jqg9UNpK6qWa9cCLZ6rk2M (old trig_01AWubA9 already gone). Told E1b, E4f, E4r2, E7a, E7b, E7c2, E8, E8r the new foreman id.
 FOR MAIN (open): Foreman E is now session_01DgYSWmvDYnmfLCrNGtw5Uu (E ROOT #3). Still READY FF: review/hall-names 282865b, review/questline-q0-ff 8a1955dc (E cannot push main).
 - (18/11 07:20Z) E7a fix r2 (review E7ar 4 items) SẴN SÀNG KIỂM questline-q1a 54f10e85ea0438884fcba07a354bbacb80ad41f9
+- (18/11 07:45Z) E7b: SẴN SÀNG KIỂM questline-q1b 2b80a8a3 (rebased on q1a 54f10e8; every chapter keeps a {B}-free ask; scan/engine/quickcheck PASS)
