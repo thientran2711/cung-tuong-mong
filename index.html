@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"30bc29a4+","t":"2026-11-18T23:10Z","c":"parallel time r4: fix FAIL 7 — no own «tin» panel (reader API only; register only without MAIN's errIcon, never on render; kit facts spec),…","b":"05b9ac90fbb8","h":[{"s":"ca661db3+","t":"2026-11-18T13:38Z","c":"coop-c4-stuck S5a: hold showModal so the room's own armed reshow cannot race the negative check"},{"s":"0dc8f187+","t":"2026-11-18T22:28Z","c":"review coop-thin-f1 r1 #3: site build (index.html / sw.js rebuilt)"},{"s":"6e9277d8+","t":"2026-11-18T21:47Z","c":"entry-blank-r3 r2 (review item 6, whole group): a portrait on its way shows the kit portrait silhouette (§59.1 pf/pm, unknown-f|m); the lin…"},{"s":"3270145f+","t":"2026-11-18T21:25Z","c":"doc-90-women r1: rebuild generated index.html/sw.js (build hash, build line) after comment edits"},{"s":"668e0bf4+","t":"2026-11-18T21:26Z","c":"map-zones r6 (reviewer fix on r3 5a83694): a head in a dropped palace with a stale resHead to another dropped house got a second migration …"},{"s":"b02879db+","t":"2026-11-18T20:49Z","c":"ge-writers-w1: carry jrd_muoi ch8 c3 «Thư sinh Giang Nam» (forced from s1/s2 every life) + BAL muoi_no_8.c3, by MAIN ORDER 18:45Z; muoi_no_…"},{"s":"fcff501a+","t":"2026-11-18T20:41Z","c":"map-labels-missing r2c: tag touches its own building or keeps a short leader (\u003c=90px) ending on the real slip/info rect, dot >=40px from ot…"},{"s":"c67d248d+","t":"2026-11-18T19:53Z","c":"ag-deed-perf: site build (index.html, sw.js)"},{"s":"6aab33ad","t":"2026-11-18T20:05Z","c":"KIT_REQUESTS: K-Q2-1 DONE 048f3c7"},{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"}]};
+window.CTM_BI={"s":"8261fc3e+","t":"2026-11-18T23:17Z","c":"parallel time r4: ptime2 test 15/19 ignore unrelated random events / no free servant","b":"85dd875dc886","h":[{"s":"ca661db3+","t":"2026-11-18T13:38Z","c":"coop-c4-stuck S5a: hold showModal so the room's own armed reshow cannot race the negative check"},{"s":"0dc8f187+","t":"2026-11-18T22:28Z","c":"review coop-thin-f1 r1 #3: site build (index.html / sw.js rebuilt)"},{"s":"6e9277d8+","t":"2026-11-18T21:47Z","c":"entry-blank-r3 r2 (review item 6, whole group): a portrait on its way shows the kit portrait silhouette (§59.1 pf/pm, unknown-f|m); the lin…"},{"s":"3270145f+","t":"2026-11-18T21:25Z","c":"doc-90-women r1: rebuild generated index.html/sw.js (build hash, build line) after comment edits"},{"s":"668e0bf4+","t":"2026-11-18T21:26Z","c":"map-zones r6 (reviewer fix on r3 5a83694): a head in a dropped palace with a stale resHead to another dropped house got a second migration …"},{"s":"b02879db+","t":"2026-11-18T20:49Z","c":"ge-writers-w1: carry jrd_muoi ch8 c3 «Thư sinh Giang Nam» (forced from s1/s2 every life) + BAL muoi_no_8.c3, by MAIN ORDER 18:45Z; muoi_no_…"},{"s":"fcff501a+","t":"2026-11-18T20:41Z","c":"map-labels-missing r2c: tag touches its own building or keeps a short leader (\u003c=90px) ending on the real slip/info rect, dot >=40px from ot…"},{"s":"c67d248d+","t":"2026-11-18T19:53Z","c":"ag-deed-perf: site build (index.html, sw.js)"},{"s":"6aab33ad","t":"2026-11-18T20:05Z","c":"KIT_REQUESTS: K-Q2-1 DONE 048f3c7"},{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -6747,6 +6747,8 @@ function srvTitle(){if(!S||!S.srv)return"";if(S.srv.lau>0)return"Cung nữ Tân 
 function srvRkN(){return S.srv.lau>0?"Cung nữ Tân Giả khố":S.srv.mama?"Ma ma":SRK.maid[S.srv.rk]||"Cung nữ"}
 function srvW(f){if(!isSrv())return f();const o=S.out;S.out=1;try{return f()}catch(e){console.error(e);return""}finally{S.out=o}}
 function srvMerit(n){S.srv.mp=(S.srv.mp||0)+n}
+/* công lao of an order done for the master (srvDoOrder; shown on every order card: ordRow, jptime receiver row) — ONE reader of the BAL key */
+function srvOrdMerit(){return BAL.eff.j42.srvDoOrder_2}
 function srvOnce(k,sc){const v=S.srv.once[k];return !!v&&(sc==="b"?v.b===bid():v.w===wk())}
 function srvWhere(v){const w=whereOf(v);if(!w||w==="home"||w==="tgk")return palaceOf(v);try{return places().some(x=>x.k===w)?w:palaceOf(v)}catch(e){return palaceOf(v)}}
 function srvMisHome(){const m=srvM();return !!m&&srvWhere(m)===palaceOf(m)}
@@ -7031,7 +7033,7 @@ function srvDoOrder(k,t){const m=srvM();if(!m||!t)return;m.schemes=(m.schemes||0
  if(roll(o)){if(k==="spy"){const n=evA(m,t,BAL.eff.j42.evN);apply({tin:4,bac:3,tamco:1});log(n?`Ngươi dò la được chuyện của ${t.name}, về bẩm ${m.name}: chủ nắm thêm ${balAb(BAL.eff.j42.evN)} chứng cứ.`:`Ngươi dò la ${t.name}: không tìm ra điều gì sai trái; về bẩm ${m.name} ${harmTxt(t)}.`)}
   else if(k==="plant"){const a0=ACTX.a;ACTX.a=m;let d=1;try{d=framed(t,"bị vu dùng bùa ngải")}finally{ACTX.a=a0}apply({tin:8,bac:10,duc:-5});log(`Hình nhân bùa ngải được tìm thấy trong tẩm cung ${t.name}.${d===0?" "+FRAME_LAST:""}`)}
   else{const d=35+R(30);ap(t,{suc:-d});const dd=dieIf(t,"chết sau một bát canh");apply({tin:12,bac:20,duc:-10});log(dd||`<span class="r">${t.name} trúng độc, thập tử nhất sinh.</span>`)}
-  srvMerit(BAL.eff.j42.srvDoOrder_2);return}
+  srvMerit(srvOrdMerit());return}
  apply({tin:-2});if(!roll(50)){log("Việc không thành, may chưa ai thấy.");return}
  if(roll(30)){die(`Bị bắt quả tang khi ${k==="poison"?"bỏ độc":k==="plant"?"cài bùa ngải":"dò la"} ${t.name}, bị đánh chết ở Thận Hình ti`);return}
  if(roll(confessRisk({tr:S.tamco>=60?"lanh":"",loyal:S.tin}))){/*evok: ordered scheme (schemes++)*/evA(t,m,BAL.eff.j42.evSrvDoOrder);relAdd(m,t,BAL.eff.j42.srvDoOrder);srvLaundry(`Bị bắt, ngươi khai ra ${m.name}. ${t.name} nắm ${balAb(BAL.eff.j42.evSrvDoOrder)} chứng cứ; chủ hận ngươi.`,10);S.tin=5;return}
@@ -7046,7 +7048,7 @@ PEND.cnvScold=()=>{const m=srvM();if(!isSrv()||!m)return null;
  return{t:`<p>${m.name} ${hasT(m,"Kiêu ngạo")?"chê trà nguội, hắt cả chén vào người ngươi":hasT(m,"Kín đáo")?"nghi ngươi lén lút ra ngoài, gọi vào tra hỏi":"trách ngươi làm việc chậm chạp"}.</p>`,who:pv(m),o:cnvPend(S,cnvScoldOpts(S,m))}};
 /* the one row of a master's order (the card here and the receiver card in jptime read it): what, the gain, the loss */
 function ordRow(k,t){const desc={spy:`dò la cung ${t.name}, xem nàng gặp ai, nói gì`,plant:`lén giấu hình nhân bùa ngải vào tẩm cung ${t.name}`,poison:`bỏ thuốc độc vào bát canh dâng ${t.name}`}[k];
- const gain={spy:`Chủ tin +4 · Bạc +3 · chủ nắm ${balAb(BAL.eff.j42.evN)} chứng cứ của ${t.name}`,plant:`Chủ tin +8 · Bạc +10 · ${t.name} bị vu, mất Danh`,poison:`Chủ tin +12 · Bạc +20 · ${t.name} trúng độc · ${kpDeathWord(kpDeathP("poison",t),"nàng")}`}[k]+` · ngươi công lao +${BAL.eff.j42.srvDoOrder_2}`;/* her own gain (srvDoOrder srvMerit): shown = applied, law 3 */
+ const gain={spy:`Chủ tin +4 · Bạc +3 · chủ nắm ${balAb(BAL.eff.j42.evN)} chứng cứ của ${t.name}`,plant:`Chủ tin +8 · Bạc +10 · ${t.name} bị vu, mất Danh`,poison:`Chủ tin +12 · Bạc +20 · ${t.name} trúng độc · ${kpDeathWord(kpDeathP("poison",t),"nàng")}`}[k]+` · ngươi công lao +${srvOrdMerit()}`;/* her own gain (srvDoOrder srvMerit): shown = applied, law 3 */
  return{say:desc,gain,loss:"Chủ tin -2, nửa phần bị bắt"}}
 PEND.cnvOrd=pp=>{const m=srvM(),t=RV(pp.t);if(!isSrv()||!m||!t||!t.alive||t.out)return null;const k=pp.k,o=ordOdds(k);const R=ordRow(k,t),desc=R.say;
  const tail=` · thành: ${R.gain} · hỏng: ${R.loss}`;const O=cnvOrdOpts(S,m,t,()=>srvDoOrder(k,t));O[0].x=word(o)+tail;const hf=O.find(x=>x.id==="half");if(hf)hf.x=word(oddsCl(o-BAL.road.hp.half))+tail;
@@ -72373,8 +72375,8 @@ function ptOrdTick(){if(!S||S.dead||!Array.isArray(S.ordQ)||!S.ordQ.length)retur
 (function(){try{const c0=PEND.cnvOrd;if(!c0)return;PEND.cnvOrd=function(pp){if(!ptOn()||!pp)return c0.apply(this,arguments);const m=srvM(),t=RV(pp.t);if(!isSrv()||!m||!t||!t.alive||t.out)return null;
   const k=pp.k,kind=k==="spy"?"spy":k==="plant"?"plant":"harm",H=BAL.road.hp.half,pl=palaceOf(t);let o,deed,gain,loss,say;
   if(k==="spy"){o=spyRoll(m,t,knMeAg());const L=BAL.eff.jwhy.loyalSpyMaidRun,F=BAL.eff.j78.j78maidFail,E=BAL.eff.j78.evN;say=`dò la cung ${t.name}, xem nàng gặp ai, nói gì`;
-   gain=`${m.name} nắm ${balSg(E)} chứng cứ của ${t.name} nếu nàng từng làm điều sai · ngươi công lao +${BAL.eff.j42.srvDoOrder_2}`;loss=`Chủ tin -${balAb(L)} (hoảng sợ), ${t.name} đoán ra: oán ${m.name} ${balSg(F)}`;
-   deed=oo=>{if(roll(oo)){const n=evA(m,t,E);srvMerit(BAL.eff.j42.srvDoOrder_2);log(n?`Ngươi dò la được chuyện của ${t.name}, về bẩm ${m.name}: chủ nắm thêm ${balAb(E)} chứng cứ.`:`Ngươi dò la ${t.name}: không tìm ra điều gì sai trái.`)}
+   gain=`${m.name} nắm ${balSg(E)} chứng cứ của ${t.name} nếu nàng từng làm điều sai · ngươi công lao +${srvOrdMerit()}`;loss=`Chủ tin -${balAb(L)} (hoảng sợ), ${t.name} đoán ra: oán ${m.name} ${balSg(F)}`;
+   deed=oo=>{if(roll(oo)){const n=evA(m,t,E);srvMerit(srvOrdMerit());log(n?`Ngươi dò la được chuyện của ${t.name}, về bẩm ${m.name}: chủ nắm thêm ${balAb(E)} chứng cứ.`:`Ngươi dò la ${t.name}: không tìm ra điều gì sai trái.`)}
     else{apply({tin:-L});oanAdd(t,m,F);log(`<span class="r">Ngươi nấp nghe ngoài cửa sổ cung ${t.name} thì bị bắt gặp, hoảng sợ chạy về.</span> Chủ tin -${balAb(L)}.`)}}}
   else{o=ordOdds(k);deed=()=>srvDoOrder(k,t);const R=ordRow(k,t);say=R.say;gain=R.gain;loss=R.loss}
   const O=cnvOrdOpts(S,m,t,()=>ptRecvGo(pl,kind,()=>deed(o),0));O[0].x=ptRecvRow(kind,o,gain,loss,ptRecvN(pl,kind,0));
@@ -76977,7 +76979,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="05b9ac90fbb8";window.CTM_BUILD=BUILD;
+const BUILD="85dd875dc886";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

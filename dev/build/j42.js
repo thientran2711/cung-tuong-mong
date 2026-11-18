@@ -24,6 +24,8 @@ function srvTitle(){if(!S||!S.srv)return"";if(S.srv.lau>0)return"Cung nữ Tân 
 function srvRkN(){return S.srv.lau>0?"Cung nữ Tân Giả khố":S.srv.mama?"Ma ma":SRK.maid[S.srv.rk]||"Cung nữ"}
 function srvW(f){if(!isSrv())return f();const o=S.out;S.out=1;try{return f()}catch(e){console.error(e);return""}finally{S.out=o}}
 function srvMerit(n){S.srv.mp=(S.srv.mp||0)+n}
+/* công lao of an order done for the master (srvDoOrder; shown on every order card: ordRow, jptime receiver row) — ONE reader of the BAL key */
+function srvOrdMerit(){return BAL.eff.j42.srvDoOrder_2}
 function srvOnce(k,sc){const v=S.srv.once[k];return !!v&&(sc==="b"?v.b===bid():v.w===wk())}
 function srvWhere(v){const w=whereOf(v);if(!w||w==="home"||w==="tgk")return palaceOf(v);try{return places().some(x=>x.k===w)?w:palaceOf(v)}catch(e){return palaceOf(v)}}
 function srvMisHome(){const m=srvM();return !!m&&srvWhere(m)===palaceOf(m)}
@@ -308,7 +310,7 @@ function srvDoOrder(k,t){const m=srvM();if(!m||!t)return;m.schemes=(m.schemes||0
  if(roll(o)){if(k==="spy"){const n=evA(m,t,BAL.eff.j42.evN);apply({tin:4,bac:3,tamco:1});log(n?`Ngươi dò la được chuyện của ${t.name}, về bẩm ${m.name}: chủ nắm thêm ${balAb(BAL.eff.j42.evN)} chứng cứ.`:`Ngươi dò la ${t.name}: không tìm ra điều gì sai trái; về bẩm ${m.name} ${harmTxt(t)}.`)}
   else if(k==="plant"){const a0=ACTX.a;ACTX.a=m;let d=1;try{d=framed(t,"bị vu dùng bùa ngải")}finally{ACTX.a=a0}apply({tin:8,bac:10,duc:-5});log(`Hình nhân bùa ngải được tìm thấy trong tẩm cung ${t.name}.${d===0?" "+FRAME_LAST:""}`)}
   else{const d=35+R(30);ap(t,{suc:-d});const dd=dieIf(t,"chết sau một bát canh");apply({tin:12,bac:20,duc:-10});log(dd||`<span class="r">${t.name} trúng độc, thập tử nhất sinh.</span>`)}
-  srvMerit(BAL.eff.j42.srvDoOrder_2);return}
+  srvMerit(srvOrdMerit());return}
  apply({tin:-2});if(!roll(50)){log("Việc không thành, may chưa ai thấy.");return}
  if(roll(30)){die(`Bị bắt quả tang khi ${k==="poison"?"bỏ độc":k==="plant"?"cài bùa ngải":"dò la"} ${t.name}, bị đánh chết ở Thận Hình ti`);return}
  if(roll(confessRisk({tr:S.tamco>=60?"lanh":"",loyal:S.tin}))){/*evok: ordered scheme (schemes++)*/evA(t,m,BAL.eff.j42.evSrvDoOrder);relAdd(m,t,BAL.eff.j42.srvDoOrder);srvLaundry(`Bị bắt, ngươi khai ra ${m.name}. ${t.name} nắm ${balAb(BAL.eff.j42.evSrvDoOrder)} chứng cứ; chủ hận ngươi.`,10);S.tin=5;return}
@@ -323,7 +325,7 @@ PEND.cnvScold=()=>{const m=srvM();if(!isSrv()||!m)return null;
  return{t:`<p>${m.name} ${hasT(m,"Kiêu ngạo")?"chê trà nguội, hắt cả chén vào người ngươi":hasT(m,"Kín đáo")?"nghi ngươi lén lút ra ngoài, gọi vào tra hỏi":"trách ngươi làm việc chậm chạp"}.</p>`,who:pv(m),o:cnvPend(S,cnvScoldOpts(S,m))}};
 /* the one row of a master's order (the card here and the receiver card in jptime read it): what, the gain, the loss */
 function ordRow(k,t){const desc={spy:`dò la cung ${t.name}, xem nàng gặp ai, nói gì`,plant:`lén giấu hình nhân bùa ngải vào tẩm cung ${t.name}`,poison:`bỏ thuốc độc vào bát canh dâng ${t.name}`}[k];
- const gain={spy:`Chủ tin +4 · Bạc +3 · chủ nắm ${balAb(BAL.eff.j42.evN)} chứng cứ của ${t.name}`,plant:`Chủ tin +8 · Bạc +10 · ${t.name} bị vu, mất Danh`,poison:`Chủ tin +12 · Bạc +20 · ${t.name} trúng độc · ${kpDeathWord(kpDeathP("poison",t),"nàng")}`}[k]+` · ngươi công lao +${BAL.eff.j42.srvDoOrder_2}`;/* her own gain (srvDoOrder srvMerit): shown = applied, law 3 */
+ const gain={spy:`Chủ tin +4 · Bạc +3 · chủ nắm ${balAb(BAL.eff.j42.evN)} chứng cứ của ${t.name}`,plant:`Chủ tin +8 · Bạc +10 · ${t.name} bị vu, mất Danh`,poison:`Chủ tin +12 · Bạc +20 · ${t.name} trúng độc · ${kpDeathWord(kpDeathP("poison",t),"nàng")}`}[k]+` · ngươi công lao +${srvOrdMerit()}`;/* her own gain (srvDoOrder srvMerit): shown = applied, law 3 */
  return{say:desc,gain,loss:"Chủ tin -2, nửa phần bị bắt"}}
 PEND.cnvOrd=pp=>{const m=srvM(),t=RV(pp.t);if(!isSrv()||!m||!t||!t.alive||t.out)return null;const k=pp.k,o=ordOdds(k);const R=ordRow(k,t),desc=R.say;
  const tail=` · thành: ${R.gain} · hỏng: ${R.loss}`;const O=cnvOrdOpts(S,m,t,()=>srvDoOrder(k,t));O[0].x=word(o)+tail;const hf=O.find(x=>x.id==="half");if(hf)hf.x=word(oddsCl(o-BAL.road.hp.half))+tail;

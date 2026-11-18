@@ -76,7 +76,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   o.pan=ptPanel().opts.map(x=>x.n);/* shown = charged: the real walk + the task (FAIL 7 item 3) */o.nF=ptRecvN("vuon","errand",0);o.nH=ptRecvN("vuon","errand",1);o.walk=ptRecvWalk("vuon");o.nExp=o.walk+BAL.ptime.kinds.errand.n-BAL.walk.near;if(oq){ptOrdOpen(oq)}const d=Q[Q.length-1];o.on=d&&d.opts.map(x=>x.n);o.ox=d&&d.opts[0].x;o.qx=d&&d.opts[1]&&d.opts[1].x;
   const u0=used;if(d){Q.pop();d.opts[0].go()}Q.length=0;o.place=[p0,S.place];o.used=used-u0;o.done=!!(S.srv.sent&&S.srv.sent.done);
   const m=srvM();const t=liveRivals(true).find(v=>v!==m&&v.alive&&!v.out);
-  if(t){const c=PEND.cnvOrd({k:"spy",t:t.id});o.cn=c&&c.o.map(x=>x.n);o.cnN=[ptRecvN(palaceOf(t),"spy",0),ptRecvN(palaceOf(t),"spy",1)];/* her công lao on the hết lòng row (item 6) */o.cnMerit=BAL.eff.j42.srvDoOrder_2;o.cnx=c&&c.o[0].x;o.chx=c&&c.o[1].x;
+  if(t){const c=PEND.cnvOrd({k:"spy",t:t.id});o.cn=c&&c.o.map(x=>x.n);o.cnN=[ptRecvN(palaceOf(t),"spy",0),ptRecvN(palaceOf(t),"spy",1)];/* her công lao on the hết lòng row (item 6) */o.cnMerit=srvOrdMerit();o.cnx=c&&c.o[0].x;o.chx=c&&c.o[1].x;
    /* the master's order arrives as a NOTICE (no pop-up) */const q1=Q.length;S.ordQ=[];window.__j95boff=1;const dd=mkP("cnvOrd",{k:"spy",t:t.id});window.__j95boff=0;pushDil(dd,"Lệnh của "+m.name);o.ordNo=Q.length===q1&&S.ordQ.length===1;
    /* qua loa = the same odds formula − BAL.road.hp.half */o.hp=[ordOdds("plant"),ordHalf(()=>ordOdds("plant"))];
    /* unanswered past the deadline = Từ chối with its cost */const tin0=S.tin;if(S.ordQ[0])S.ordQ[0].due=ptNow();ptTick();o.late={left:S.ordQ.length,dt:S.tin-tin0}}
