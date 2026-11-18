@@ -8,7 +8,7 @@
    Continuity (ROAD_MAP §5): the people of a road (A.act: rival, enemy, mistress …) are cast ONCE and carried from chapter to chapter
    (S.st.f14.act); a person who died or left is recast and the chapter's cast() decides if that is allowed. The ending of each chapter is kept
    (S.st.f14.re) so the next chapter opens on the hồi that follows from it (beat if:()=>rdPrev(...)). Chapter .11 is the road's finale and
-   closes the origin story (replaces the j67 «Kết cục xuất thân» milestone for this life).
+   closes the origin story (replaces the j67 «Khép nẻo đời» milestone for this life).
    ONE CORE (OD:L1267): chapter-level numbers live in BAL.road (jbal2.js). Kit only: every screen is the j67 card / kit event frame. */
 const ROAD14={};
 /* shared helpers for every road data file (jrd_<origin>.js): hostile/friendly roles are REAL both ways (OD:L1247) */
@@ -136,7 +136,7 @@ window.rdR97=rdR97;
 setTimeout(()=>{try{if(typeof wrap67==="function")Object.keys(STORY).forEach(wrap67)}catch(e){console.error(e)}},0);
 /* the road's .11 could not run (its cast is gone and jst14 put a shared arc in its slot, or the road was cut short): once the main story has
    passed chapter BAL.road.last, the origin ending is still told — from the last road chapter that ran (its ending and sign → finTier), so every
-   full-road life gets its «Kết cục xuất thân» (B3 finding, every origin) */
+   full-road life gets its «Khép nẻo đời» (B3 finding, every origin) */
 (function(){const a0=chAdvance67;chAdvance67=function(E){const r=a0.apply(this,arguments);try{if(rdOn()){const c=S.st.ch,f=S.st.f14,rd=f.rd;
   if(c&&!c.fin&&c.n>BAL.road.last&&f.re){const n=f.re.n,id=n===BAL.road.first-1?rd:ROAD14[rd][n],p=c.past.slice().reverse().find(x=>x.a===id);
    if(p)rdFinale({a:id,tag:p.tag},{k:p.k},1)}}}catch(e){console.error(e)}return r}})();

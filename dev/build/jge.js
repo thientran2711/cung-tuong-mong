@@ -59,7 +59,7 @@ window.geNote=geNote;
  const r=r0.apply(this,arguments);try{if(o)geNote(o.n)}catch(e){console.error("ge",e)}return r}})();
 (function(){const e0=chEnd67;chEnd67=function(A,E,ign){try{const s=geS();if(s&&!s.done&&A){s.ce[A.a]=A.end;geNote("@"+A.a+"="+A.end);
   (function(){const ch=store.get("ctm-gech")||{};const L=ch[s.b]||(ch[s.b]=[]);if(!L.includes(A.a)){L.push(A.a);store.set("ctm-gech",ch)}})();
-  const a=ARC67[A.a];if(a&&a.road===s.b&&[4,8,11].includes(a.rn||4)){geLive(s);s.oc[a.rn||4]=geOpenN(s)}if(A.a===s.b){geLive(s);s.oc[4]=geOpenN(s)}}}catch(e){console.error("ge",e)}
+  const a=ARC67[A.a];if(a&&a.road===s.b&&Object.keys(GB().funnel).map(Number).includes(a.rn||4)){geLive(s);s.oc[a.rn||4]=geOpenN(s)}if(A.a===s.b){geLive(s);s.oc[4]=geOpenN(s)}}}catch(e){console.error("ge",e)}
  return e0.apply(this,arguments)}})();
 /* ---------- the shading lean (option C, hidden) ---------- */
 function geLean(s){const V=GB().var;const last=s.r2===0?1:s.r2===1?-1:0;return s.lt*V.tag+((S.duc|0)-(s.d0|0))*V.duc+last*V.last}
@@ -76,12 +76,12 @@ window.geAsk=geAsk;
 function geBond(){let best=null,bv=-1;try{for(const m of (S.men||[]))if(m&&m.alive!==false&&(m.tinh||0)>=GB().bond.men&&(m.tinh||0)>bv){best=m.name;bv=m.tinh}
  for(const v of (typeof liveRivals==="function"?liveRivals(true):[]))if(v&&aff(S,v)>=GB().bond.sis&&aff(S,v)>bv){best=v.name;bv=aff(S,v)}}catch(e){}return best}
 PEND.ge1=()=>{const s=geS();if(!s||s.done)return null;const who=geBond();
- const o=R1N.map((n,i)=>{const c={n,fx:{},x:i===3?(who?`người ấy: ${who}`:""):"",go:()=>{const s2=geS();if(!s2||s2.done)return;s2.r1=i;pushDil(mkP("ge2",{}),"Hồi kết nhánh")}};
+ const o=R1N.map((n,i)=>{const c={n,fx:{},x:i===3?(who?`người ấy: ${who}`:""):"",risk:"có rủi ro",hint:"nẻo này dẫn tới đâu, thành hay hỏng, đến câu cuối mới rõ",go:()=>{const s2=geS();if(!s2||s2.done)return;s2.r1=i;pushDil(mkP("ge2",{}),"Hồi kết nhánh")}};
   if(i===3&&!who&&typeof kitOff==="function")kitOff(c,"chưa có ai","khi có một người ngươi thật lòng gắn bó");return c});
  return {who:pMe(),mustChoose:1,t:`<b>Hồi kết nhánh · Ngã rẽ 1 · Đi hay ở</b><br>Cuối con đường «${esc(C(s).n)}». Ngoảnh lại một đời trong cung, ngươi đứng trước hai ngã rẽ cuối cùng. Ngã thứ nhất: ở lại hay ra đi?`,o}};
 PEND.ge2=()=>{const s=geS();if(!s||s.done||s.r1==null)return null;
  const o=R2N.map((n,i)=>{let x="";if(GB().showOdds){const j=C(s).e.findIndex(e=>e[3]===s.r1&&e[4]===i);if(j>=0&&s.st[j]==="o"&&typeof oddsLv==="function"&&typeof KIT_ODDS!=="undefined")x=KIT_ODDS[Math.max(0,oddsLv(geOdds(s,j)))]}
-  return {n,fx:{},x,go:()=>geResolve(i)}});
+  return {n,fx:{},x,risk:"có rủi ro",hint:"thành bại khó đoán; hỏng thì có thể mất danh tiếng, phẩm vị",go:()=>geResolve(i)}});
  return {who:pMe(),mustChoose:1,t:`<b>Hồi kết nhánh · Ngã rẽ 2 · Đối đãi thế nào</b><br>Ngươi đã chọn: «${R1N[s.r1]}». Còn lại một câu: với thiên hạ, với những người quanh mình, ngươi đối đãi thế nào?`,o}};
 /* ---------- resolve ---------- */
 function geResolve(r2,force){const s=geS();if(!s||s.done)return null;if(r2!=null)s.r2=r2;geLive(s);const E=C(s).e,Bd=D(s);

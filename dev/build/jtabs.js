@@ -11,7 +11,7 @@
 Object.assign(KIT_GLOSS,{
  "Cách học":"Mỗi buổi học tốn 2 khắc. Tự học không tốn bạc nhưng tiến chậm; theo thầy hay ma ma tốn bạc, tiến nhanh. Mỗi bậc cần thêm 2 phần tiến bộ so với bậc trước. Phi tần khác cũng học theo cùng luật.",
  "Tứ đức":"Bốn môn của nữ nhi trong cung (Công, Dung, Ngôn, Hạnh): mỗi bậc đổ vào Sắc, Đức, phần thắng và phẩm đồ tự làm.",
- "Luật chương":"Mỗi chương truyện có hạn. Mở từng hồi bằng thẻ «Mệnh truyện» ở mục Hành sự (Sức -5, 2 khắc). Theo đuổi thì giữ Lợi thế, có cơ thắng và phần thưởng (thắng: đồ quý, hiếm hay trân phẩm; vừa: đồ thường; thua: không). Bỏ mặc quá hạn thì chương tự khép ở kết cục xấu: mất Lợi thế, Danh -3, kết cục xuất thân xấu đi; không chết, đường lên ngôi Hoàng hậu vẫn mở.",
+ "Luật chương":"Mỗi chương truyện có hạn. Mở từng hồi bằng thẻ «Mệnh truyện» ở mục Hành sự (Sức -5, 2 khắc). Theo đuổi thì giữ Lợi thế, có cơ thắng và phần thưởng (thắng: đồ quý, hiếm hay trân phẩm; vừa: đồ thường; thua: không). Bỏ mặc quá hạn thì chương tự khép ở kết cục xấu: mất Lợi thế, Danh -3, «Khép nẻo đời» xấu đi; không chết, đường lên ngôi Hoàng hậu vẫn mở.",
  "Việc nhờ":"Người trong cung tìm đến nhờ khi cần (nhiều nhất vài lời nhờ mỗi tháng); ngươi cũng có thể đến các nơi và hỏi han. Giúp xong một việc thì người nhờ nợ ngươi một ân; ngươi có thể nhờ họ trả lại sau. Từ chối người mình đang nợ thì mếch lòng gấp đôi."});
 function ktEsc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
 /* ---- sub-tabs ---- */
@@ -70,7 +70,7 @@ function ktStoryHTML(){const c=S.st.ch,M=S.st.M,m=S.st.ms,Q0=(typeof QUEST67==="
  const list=[{k:"now",label:"Chương này",n:""},{k:"rank",label:"Sắc phong",n:""},{k:"past",label:"Đã qua",n:String(past.length+rare.length)}];
  const sub=kitSubTabs("story",list,kitInfo("Luật chương"));let h=sub.html;/* "ⓘ Luật chương" = the tab bar's trailing slot (owner 17/11 07:55Z) */
  const art=typeof kitOriginArt==="function"?kitOriginArt(S.origin.k):"";
- if(sub.cur==="now"){let card="";/* KIT §51.1: "Kết cục xuất thân" joins the chapter rows (one block = one label column), not a 2nd table under the checklist */
+ if(sub.cur==="now"){let card="";/* KIT §51.1: "Khép nẻo đời" joins the chapter rows (one block = one label column), not a 2nd table under the checklist */
   const fin=c&&c.done?["Khép nẻo đời",c.fin,S.st.tag&&c.fin?"g":""]:null;let finIn=false;
   if(m&&c){const d=MS67[m.id],st=d.steps(m);const done=st.filter(x=>x[1]).length;const nx=st.find(x=>!x[1]);
    card=kitSkillCard({kind:"story",k:"ms",kicker:`Chương ${c.n}`,name:d.t(),level:done,max:st.length,word:"Bước",bar:false,next:"",img:art})+(finIn=!!fin,rows67([["Mục tiêu",d.g()],["Bước này",nx?nx[0]:"đã xong mọi bước",nx?"":"g"],msHan67(m),fin]))+kitChecks(st.map(x=>[x[1],x[0]]))}

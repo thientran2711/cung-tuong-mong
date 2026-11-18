@@ -1763,7 +1763,7 @@ regEach(STORY,k=>{if(STORY[k]&&STORY[k].__old)story67Acts(k)},"STORY acts");
 function a67Month(){if(!v267()||S.dead)return"";const st=S.st;try{msCheck67()}catch(e){console.error(e)}
  const A=st.M;if(A&&!A.done&&A.dl!=null&&!A.cur){
   if(S.turn>=A.dl){const lo=Object.keys(ARC67[A.a].E).find(x=>ARC67[A.a].E[x].k<0);end67(A,lo,1);return""}
-  if(A.dl-S.turn===1&&!A.warn){A.warn=1;log(`<span class="r">Chương ${A.chap} «${ARC67[A.a].t}» còn một tháng tới hạn.</span> Bỏ mặc thì chương tự khép ở kết cục xấu.`);card67("info",`Chương ${A.chap} sắp hết hạn`,[["Chương",ARC67[A.a].t],["Còn","một tháng (ba tuần)","r"],["Việc cần làm",isSrv67()?"chờ hồi kế tiếp":"chơi thẻ «Mệnh truyện» ở mục Hành sự"],["Nếu bỏ mặc",`chương khép ở kết cục xấu, mất Lợi thế, Danh ${BAL.arc.ign.danh}, kết cục xuất thân xấu đi`,"r"]],who67(ARC67[A.a].w,A))}}
+  if(A.dl-S.turn===1&&!A.warn){A.warn=1;log(`<span class="r">Chương ${A.chap} «${ARC67[A.a].t}» còn một tháng tới hạn.</span> Bỏ mặc thì chương tự khép ở kết cục xấu.`);card67("info",`Chương ${A.chap} sắp hết hạn`,[["Chương",ARC67[A.a].t],["Còn","một tháng (ba tuần)","r"],["Việc cần làm",isSrv67()?"chờ hồi kế tiếp":"chơi thẻ «Mệnh truyện» ở mục Hành sự"],["Nếu bỏ mặc",`chương khép ở kết cục xấu, mất Lợi thế, Danh ${BAL.arc.ign.danh}, «Khép nẻo đời» xấu đi`,"r"]],who67(ARC67[A.a].w,A))}}
  try{if(typeof questBusy==="function"&&questBusy())return""}catch(e){}
  if(Q.some(m=>m.pid==="j67"))return"";
  if(A&&!A.done&&!A.cur&&A.nb&&S.turn>=A.due&&isSrv67())return fireBeat67(A)||"";
@@ -1780,8 +1780,8 @@ function obj67(){const c=S.st&&S.st.ch,A=S.st&&S.st.M,m=S.st&&S.st.ms;if(!c)retu
  return `${lab67(A)} «${ARC67[A.a].t}» · hạn còn ${Math.max(0,A.dl-S.turn)} tháng · ${hint67(A)}`}
 function panel67(){const c=S.st.ch,M=S.st.M,m=S.st.ms,Q0=QUEST67[S.origin.k]||QUEST67.tt;
  let h=`<div class="story"><h3>Mệnh truyện: ${Q0.t}</h3><p class="past" style="margin:0">Chính tuyến của kiếp này khoảng ${c?c.max:13} chương, từ ngày nhập cung đến ngày con ngươi lên ngôi Đông cung. Các phụ tuyến là việc nhờ, sự kiện, mưu sự ở các mục khác.</p></div>`
-  +rows67([["Luật chương",`Mỗi chương truyện có hạn. Mở từng hồi bằng thẻ «Mệnh truyện» ở mục Hành sự (Sức ${BAL.arc.card.c.suc}, ${cardCost({c:BAL.arc.card.c})} khắc). Theo đuổi thì giữ Lợi thế, có cơ thắng và phần thưởng.`],["Nếu bỏ mặc",`Quá hạn, chương tự khép ở kết cục xấu: mất Lợi thế, chịu thiệt của kết cục thua, Danh ${BAL.arc.ign.danh}, kết cục xuất thân xấu đi. Không chết, đường lên ngôi Hoàng hậu vẫn mở.`,"r"],["Phần thưởng","thắng: đồ quý, hiếm hay trân phẩm theo truyện; vừa: đồ thường; thua: không"]]);
- /* KIT §51.1: past chapters + Kết cục xuất thân = one block, one kit table (one label column) */
+  +rows67([["Luật chương",`Mỗi chương truyện có hạn. Mở từng hồi bằng thẻ «Mệnh truyện» ở mục Hành sự (Sức ${BAL.arc.card.c.suc}, ${cardCost({c:BAL.arc.card.c})} khắc). Theo đuổi thì giữ Lợi thế, có cơ thắng và phần thưởng.`],["Nếu bỏ mặc",`Quá hạn, chương tự khép ở kết cục xấu: mất Lợi thế, chịu thiệt của kết cục thua, Danh ${BAL.arc.ign.danh}, «Khép nẻo đời» xấu đi. Không chết, đường lên ngôi Hoàng hậu vẫn mở.`,"r"],["Phần thưởng","thắng: đồ quý, hiếm hay trân phẩm theo truyện; vừa: đồ thường; thua: không"]]);
+ /* KIT §51.1: past chapters + Khép nẻo đời = one block, one kit table (one label column) */
  {const fin=c&&c.done?["Khép nẻo đời",c.fin,S.st.tag&&c.fin?"g":""]:null;
   if(c&&c.past.length)h+=`<h3>Các chương đã qua</h3>`+rows67(c.past.map(x=>[`Chương ${x.n}`,`${msName67(x)} · <b class="${x.k>0?"g":x.k<0?"r":""}">${x.tag}</b>`]).concat([fin]));
   else if(fin)h+=rows67([fin])}

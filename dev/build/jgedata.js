@@ -51,7 +51,9 @@ const GE_DATA={
    fail:"Bất hiếu bất trung",ft:"Cả triều gọi việc ngươi làm là phản lại máu mủ. Họ nhà ngươi còn giữ mối oán, mà Hoàng thượng cũng không tin ngươi hơn."}]},
  cnv_mat:{lean:{
    p:["Quỳ nhận lỗi về mình","Xin ơn cho {mis}","Thưa thật với chủ: nô tỳ không dám quên ơn","Khuyên Hoàng thượng đến cung {mis}","Xin ngài nhớ đến {mis}","Đỡ nàng ta dậy, hỏi ai sai","Rủ họ cùng làm việc như xưa"],
-   m:["Lặng lẽ cho người thấy tay {mis} hất","Đưa bạc cho thái giám, trước kỳ lật thẻ","Bắt tay {v} chèn {mis}","Kể lại một chuyện cũ của {mis}","Đổi chỗ với {mis} mà không nói","Đem chuyện gói bùa ra nói lại","Trả bạc cao hơn {v}","Gọi họ lại, dạy phép"]},
+   m:["Lặng lẽ cho người thấy tay {mis} hất","Đưa bạc cho thái giám, trước kỳ lật thẻ","Bắt tay {v} chèn {mis}","Kể lại một chuyện cũ của {mis}","Đổi chỗ với {mis} mà không nói","Đem chuyện gói bùa ra nói lại","Trả bạc cao hơn {v}","Gọi họ lại, dạy phép",
+     /* review E1r fix 4: cruel cnv_mat lives met beats with no ác option (lean −2..−4) — harsh REAL options of beats 5 / 8 / 10 */
+     "Lặng lẽ tìm {v} xin chỗ dựa","Lên kiệu, không ngoái lại","Gọi thị vệ đến","Gọi thái giám cung mình giữ nàng ta lại","Xin khám luôn phòng người khác","Cho {mis} biết {v} cũng định kéo nàng vào"]},
   e:[
   {pull:["Hát khẽ bài dân ca bên giếng","Gửi lại cành mai, không đến","Thưa: muốn, nhưng không dám","Không đưa, chờ ngài tự lật","Tin vào lời ngài đã nói","Kể chuyện mùa gặt","Nói một câu thật lòng","Không xin gì, chỉ cúi đầu","Đứng chờ dưới mái hiên cũ","Xin ngài đừng quên chiều mưa ấy","Đứng yên, để ngài bước đến"],
    close:["Đưa bạc cho thái giám, trước kỳ lật thẻ","Trả bạc cao hơn {v}","Bắt tay {v} chèn {mis}"],

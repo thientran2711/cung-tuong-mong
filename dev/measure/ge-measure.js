@@ -64,5 +64,7 @@ const BOTJS=PLAY==='idle'?'':['inpage6.js','inty.js'].map(f=>fs.readFileSync(pat
  const band=(n,v,[lo,hi])=>{const okk=v>=lo&&v<=hi;console.log(`${okk?'IN ':'OUT'} ${n} ${v} band [${lo}, ${hi}]`);return okk};
  band('inChar',A.inChar,T.inChar);band('random',A.random,T.random);band('open11',A.open11,T.open11);
  const sh=[A.kindT,A.cruelA].filter(x=>x!=null);console.log(`${sh.every(x=>x>=T.shade)?'IN ':'OUT'} shade kind→thiện ${A.kindT} · cruel→ác ${A.cruelA} (≥ ${T.shade})`);
+ /* review E1r fix 4: the shade band holds PER ROAD too (a pooled .75 hid cnv_mat .50) */
+ for(const road of ROADS){const Rr=rep[road];if(!Rr)continue;const v=[Rr.kindT,Rr.cruelA].filter(x=>x!=null);if(v.length)console.log(`${v.every(x=>x>=T.shade)?"IN ":"OUT"} shade ${road} kind→thiện ${Rr.kindT} · cruel→ác ${Rr.cruelA} (≥ ${T.shade})`)}
  console.log('errors',good.length,'/',res.length,'lives ok · page errors',errs.length,errs.slice(0,3));
  if(OUT)fs.writeFileSync(OUT,JSON.stringify({rep,res,target:T},null,1));await b.close()})();

@@ -194,5 +194,5 @@ function f14Why(A,worse){const P=f14Parts(A).filter(x=>worse?x[0]<0:x[0]>0).sort
  const E=ARC67[A.a].E,k0=E[k]?k:Object.keys(E)[0],k1=f14Shift(A,k0);if(k1===k0)return e0.call(this,A,k0,ign);
  const worse=({win:"mid",mid:"lose"})[k0]===k1;const why=f14Why(A,worse);
  const row=["Xoay chiều",`Tưởng đã định «${fill67(E[k0].tag,A)}», nay thành «${fill67(E[k1].tag,A)}»: ${why}.`,worse?"r":"g"];A.turn14=[k0,k1];
- const c0=card67;card67=function(kind,t,rows,...more){if(kind==="result"&&Array.isArray(rows)){rows=rows.slice();const j=rows.findIndex(x=>x&&x[0]==="Kết cục");rows.splice(j+1,0,row);card67=c0}return c0.call(this,kind,t,rows,...more)};
+ const c0=card67;card67=function(kind,t,rows,...more){if(kind==="result"&&Array.isArray(rows)){rows=rows.slice();const j=rows.findIndex(x=>x&&(x[0]==="Kết quả"||x[0]==="Kết cục"));rows.splice(j+1,0,row);card67=c0}return c0.call(this,kind,t,rows,...more)};
  try{return e0.call(this,A,k1,ign)}finally{card67=c0;try{log(`<span class="${worse?"r":"g"}">Kết cục xoay chiều: ${why}.</span>`)}catch(e){}}}})();
