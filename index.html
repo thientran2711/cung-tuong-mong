@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"7c3a93df+","t":"2026-11-18T21:39Z","c":"role-parity-4: NPC side of the j22 affair road, Do cam buys, To xa xi / To vuot pham on a guess","b":"c3fd71a4c451","h":[{"s":"fcff501a+","t":"2026-11-18T20:41Z","c":"map-labels-missing r2c: tag touches its own building or keeps a short leader (\u003c=90px) ending on the real slip/info rect, dot >=40px from ot…"},{"s":"c67d248d+","t":"2026-11-18T19:53Z","c":"ag-deed-perf: site build (index.html, sw.js)"},{"s":"6aab33ad","t":"2026-11-18T20:05Z","c":"KIT_REQUESTS: K-Q2-1 DONE 048f3c7"},{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"},{"s":"a5013222+","t":"2026-11-18T18:03Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)"},{"s":"08774c0e+","t":"2026-11-18T17:38Z","c":"ag-stf2 (test only): bribe histogram picks a servant whose lòng moves her bribe odds. Root of the 'disloyal one takes more' red (npc ~3/20,…"},{"s":"0351e140","t":"2026-11-18T16:48Z","c":"shop-panel: «Để ta xem» outside option, 3-column Mua/Bán grid, smallest picture strip, test"},{"s":"ebf25660+","t":"2026-11-18T15:29Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…"},{"s":"9f9c6c2b+","t":"2026-11-18T14:26Z","c":"shown-odds-one-path r1: plant on the spot is done in person (actCtx x.here, no sent-servant pen); Vì sao names spy knowledge (whyKnow); tes…"},{"s":"aa997f3c+","t":"2026-11-18T13:46Z","c":"look-fx r13: index.html / sw.js rebuilt from merged sources"}]};
+window.CTM_BI={"s":"afae0775","t":"2026-11-18T21:50Z","c":"role-parity-4: an NPC accusing on a pure guess weighs the odds x her belief (BAL.ag.par4.guess.p)","b":"4bc63d4d6ff7","h":[{"s":"fcff501a+","t":"2026-11-18T20:41Z","c":"map-labels-missing r2c: tag touches its own building or keeps a short leader (\u003c=90px) ending on the real slip/info rect, dot >=40px from ot…"},{"s":"c67d248d+","t":"2026-11-18T19:53Z","c":"ag-deed-perf: site build (index.html, sw.js)"},{"s":"6aab33ad","t":"2026-11-18T20:05Z","c":"KIT_REQUESTS: K-Q2-1 DONE 048f3c7"},{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"},{"s":"a5013222+","t":"2026-11-18T18:03Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)"},{"s":"08774c0e+","t":"2026-11-18T17:38Z","c":"ag-stf2 (test only): bribe histogram picks a servant whose lòng moves her bribe odds. Root of the 'disloyal one takes more' red (npc ~3/20,…"},{"s":"0351e140","t":"2026-11-18T16:48Z","c":"shop-panel: «Để ta xem» outside option, 3-column Mua/Bán grid, smallest picture strip, test"},{"s":"ebf25660+","t":"2026-11-18T15:29Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…"},{"s":"9f9c6c2b+","t":"2026-11-18T14:26Z","c":"shown-odds-one-path r1: plant on the spot is done in person (actCtx x.here, no sent-servant pen); Vì sao names spy knowledge (whyKnow); tes…"},{"s":"aa997f3c+","t":"2026-11-18T13:46Z","c":"look-fx r13: index.html / sw.js rebuilt from merged sources"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -32062,6 +32062,7 @@ Object.assign(BAL,{actHere:{plant:15}});
 BAL.ag.par4={on:1,
  man:{hailDanh:1,hailAf:5,flirtTinh:12,seenDiv:3,sacD:5,tcD:5,dieP:50,tokTinh:15,trystTinh:10,lonely:30,favW:.25,cutRisk:45,like:20,
   g:{hail:{"danh":1},flirt:{"kid":1},token:{"kid":1},tryst:{"kid":3,"rest":1},cut:{"safe":3}},l:{flirt:{"safe":1},token:{"safe":1},tryst:{"safe":6}}},
+ guess:{p:.3},/* an NPC accusing on a pure guess (jshelf guess cause) weighs the act's odds × p (her belief it is true) */
  ill:{keep:20,band:3,bandW:.2,haveW:.1,g:{"spite":3},l:{"safe":2,"danh":1}}};
 /* ================= jbalge: ONE CORE (OD:L1267) rulebook of the GRAND ENDINGS (Đại kết cục, jge.js; design dev/design/GRAND_ENDINGS.md §2.14, r3) =================
    Every number the grand-ending engine uses or a text prints lives here; jge.js / jgedata.js hold words, option names and logic only.
@@ -74700,6 +74701,12 @@ function p4IllOpts(v,N,need){const O=[];const B=BAL.ag.par4.ill;if(need&&B.g[nee
  return O}
 function p4IllRun(v,r){if(!v||v===S||!v.alive||v.out||v.confined)return"";const t=p4IllTgt(v);const k=p4IllK(v,r,t);if(!k)return"";
  const from=r==="ally"?illAllies(v).find(a=>(a.inv||[]).some(e=>e.k===k&&!e.h&&!e.t)):null;const L=illBuy(v,r,k,from);if(L&&/không thành/.test(L)&&illWitness(v)===S)log(L);return p4Res("ill:"+r,L)}
+/* ---------------- 3. a guess is weighed as a guess ----------------
+   Her card shows the act's odds (oVP); whether the charge is TRUE is unknown to both. An NPC who has seen nothing (cause = guess) weighs the odds × her belief
+   that the guess is right (BAL.ag.par4.guess.p) — her mind, not a lock: the gate (ACT.xx / ACT.vp ok) is the same as hers. */
+(function(){if(typeof haOdds!=="function")return;const h0=haOdds;haOdds=function(v,t,k){const r=h0.apply(this,arguments);
+ try{if((k==="xx"||k==="vp")&&v!==S&&p4On()){let seen=false;try{const A=ACT[k];seen=k==="xx"?!!xxCause(v,t):!!wdCause(v,t)}catch(e){}const c=seen?null:shelfCause(v,t,k);
+  if(!seen&&c&&c.how==="guess")return{o:r.o*BAL.ag.par4.guess.p,pc:r.pc}}}catch(e){agdErr("par4:guess",e)}return r}})();
 /* ---------------- wiring ---------------- */
 try{Object.assign(AGC3BTN,{illMaid:IROUTE.maid.n,illTy:IROUTE.thaiy.n,illCho:IROUTE.cho.n,illAlly:IROUTE.ally.n});
  Object.assign(AGC3ACT,{illMaid:"sai cung nữ lén mua đồ cấm ngoài cung",illTy:"lén mua đồ cấm ở Thái y viện",illCho:"ra chợ đen ở cửa Thần Vũ",illAlly:"xin đồng minh đồ cấm"});
@@ -75852,7 +75859,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="c3fd71a4c451";window.CTM_BUILD=BUILD;
+const BUILD="4bc63d4d6ff7";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
