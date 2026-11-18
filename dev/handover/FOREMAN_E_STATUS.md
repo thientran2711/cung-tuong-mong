@@ -335,3 +335,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
 - (18/11 ~23:00Z real) FROM MAIN: main is now ROOT-59 session_01Rc5AsMK8HoGvFJPQquNYYg (child of ROOT-58). Send LAND READY / FOR MAIN to ROOT-59. LIVE main = 53544bd.
 - (18/11 ~23:02Z real) FROM MAIN ROOT-59: LIVE main = 1130a49e (coop-c4-stuck r1, B, on 53544bd). Final-merge 1130a49e before any LAND READY.
 - (18/11 ~23:30Z real) FROM MAIN ROOT-59: LIVE main = b60c1102 (stage-rightcol r8, MAIN; on 1130a49e). Final-merge b60c1102 before any LAND READY.
+- (18/11 ~23:37Z real) FROM MAIN: main is now ROOT-60 session_01Rc5AsMTMePisU9AmwCgz6i (child of ROOT-59). Send LAND READY / FOR MAIN / reports to ROOT-60. LIVE main = b60c1102.
