@@ -10,6 +10,7 @@ const {chromium}=require('playwright');const URL=process.argv[2],OUT=process.arg
  await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name&&S.known);await p.waitForTimeout(4000);
  await p.waitForFunction(()=>window.TOIL_FIT&&TOIL_FIT.fit&&window.KIT_VEIL&&KIT_VEIL.fit,null,{timeout:40000}).catch(()=>{});
  if(process.env.LOCALFIT){const fs=require('fs'),mk={};for(const f of fs.readdirSync('dev/art/mkfit'))if(f.endsWith('.json'))mk[f.slice(0,-5)]=JSON.parse(fs.readFileSync('dev/art/mkfit/'+f,'utf8'));await p.evaluate(mk=>{for(const g in mk){MK_FIT.g[g]=mk[g];MK_FIT.ld[g]=1}},mk)}/* LOCALFIT=1: use the repo's dev/art/mkfit tables instead of the CDN ones (diagnosis) */
+ if(process.env.PCT)await p.evaluate(P=>{const q=P/100;BAL.looks.smuFx.pct={blush:[0,0,q,q],lip:[0,0,q,q]}},+process.env.PCT);/* PCT=5|10|15|20: render both smears at that opacity (owner's option sheet) */
  const C=await p.evaluate(async()=>{Q.length=0;document.getElementById('modal').hidden=true;const C={};
   try{toilAuto()}catch(e){}const T=S.toilette;T.makeup=true;T.look='dep';T.col=Object.assign(toilColDef(),{seed:5});
   /* a FIXED face whose face points are good (a few pictures' img/mk-fit points sit off the painted face: the makeup colour layer is off there too, not this effect's business) */
@@ -37,12 +38,12 @@ const {chromium}=require('playwright');const URL=process.argv[2],OUT=process.arg
   C.balOnly=!!(BAL.looks.smuFx&&BAL.looks.smuFx.blush&&BAL.looks.smuFx.tear);
   clear();host.remove();return C});
  if(OUT){require('fs').mkdirSync(OUT,{recursive:true});
-  for(const lv of [0,1,2,3]){await p.evaluate(async([lv,CF])=>{const clear=()=>{S.lk=null;if(S.toilette)delete S.toilette.lk};clear();if(lv)lkSmudge(S,lv,'mua');
+  for(const lv of (process.env.PCT?[2,3]:[0,1,2,3])){await p.evaluate(async([lv,CF,PC])=>{const clear=()=>{S.lk=null;if(S.toilette)delete S.toilette.lk};clear();if(lv)lkSmudge(S,lv,'mua');
    let host=document.getElementById('smu-shot');if(!host){host=document.createElement('div');host.id='smu-shot';document.body.appendChild(host)}
    if(!document.getElementById('smu-hide')){const st=document.createElement('style');st.id='smu-hide';st.textContent='body>*:not(#smu-shot){visibility:hidden!important}';document.head.appendChild(st)}host.style.cssText='position:fixed;left:0;top:0;z-index:2147483647;background:#f3e8d4;padding:14px 16px;width:420px;font:700 30px/1.1 serif;color:#4a2a14';
    const f=kitFile(CF==="fig"?window.__fig:window.__por),ff=kitFile(window.__fig);const zm=()=>kitFaceZoom(S,f);
-   const L=['0 · không lem','1 · nhẹ','2 · vừa','3 · nặng'][lv];
+   const L=PC?['','','Lem vừa · '+PC+' %','Lem nặng · '+PC+' %'][lv]:['0 · không lem','1 · nhẹ','2 · vừa','3 · nặng'][lv];
    const html=()=>`<div style="margin-bottom:8px">${L}</div><div class="kfzoom" style="width:388px;margin:0 auto 8px">${zm().replace(/^<div class="kfzoom"[^>]*>/,'').replace(/<\/div>$/,'')}</div><div style="position:relative;width:150px;height:150px;margin:0 auto;overflow:hidden">${kitStageFig(S)||''}</div>`;
-   host.innerHTML=html();await new Promise(r=>setTimeout(r,300));for(let i=0;i<80;i++){const bad=[...host.querySelectorAll('img.klk-smu')].some(x=>x.src.indexOf('data:image/png')!==0);if(!bad)break;await new Promise(r=>setTimeout(r,150))}host.innerHTML=html();for(let i=0;i<120;i++){if([...host.querySelectorAll('img')].every(x=>x.complete&&x.naturalWidth>0))break;await new Promise(r=>setTimeout(r,150))}await new Promise(r=>setTimeout(r,500))},[lv,process.env.CLOSEUP||'por']);
-   await p.locator('#smu-shot').screenshot({path:`${OUT}/smudge-${lv}.png`})}}
+   host.innerHTML=html();await new Promise(r=>setTimeout(r,300));for(let i=0;i<80;i++){const bad=[...host.querySelectorAll('img.klk-smu')].some(x=>x.src.indexOf('data:image/png')!==0);if(!bad)break;await new Promise(r=>setTimeout(r,150))}host.innerHTML=html();for(let i=0;i<120;i++){if([...host.querySelectorAll('img')].every(x=>x.complete&&x.naturalWidth>0))break;await new Promise(r=>setTimeout(r,150))}await new Promise(r=>setTimeout(r,500))},[lv,process.env.CLOSEUP||'por',process.env.PCT||'']);
+   await p.locator('#smu-shot').screenshot({path:process.env.PCT?`${OUT}/opt-${lv}-${process.env.PCT}.png`:`${OUT}/smudge-${lv}.png`})}}
  console.log(JSON.stringify({checks:C,errs}));await b.close()})();
