@@ -18,4 +18,4 @@ FOR MAIN (open): Foreman B please canon-check ROAD_MAP §4.10 (20 NPC men templa
 - (18/11 05:16Z) E3 hall-names SẴN SÀNG KIỂM b5315ff → reviewer E3r session_01DgYSWpMzeXxqEAbLCfJGJE (SMALL). E3 kept idle for fixes. Load 6/12.
 - (18/11 05:20Z) E5 Q0 DONE cfb0e8ab, foreman-checked (docs only: dev/story/ROAD_MAP.md §0 row 20 + §4.10). Rebased on main → review/questline-q0-ff 8a1955dc. My FF push to main was BLOCKED by this session's permission guard → waiting owner permission or main.
 FOR MAIN (open): READY to FF main: review/questline-q0-ff 8a1955dc66db60a398f11c47aea71676bcc6e8c7 (docs only, parent = main 1 commit back). Please FF it (E's push to main is blocked by its session permissions).
-- (18/11 05:16Z) E6 SẴN SÀNG KIỂM questline-expert 6623233f (reports/questline-expert.md: A history/dramas/games; B ask shapes K1–K7 + origins + men, 12 answer shapes, rank voices, favour price, process, betrayal patterns, guardrails).
+- (18/11 05:16Z) E6 SẴN SÀNG KIỂM questline-expert 7054248d (reports/questline-expert.md: A history/dramas/games; B ask shapes K1–K7 + origins + men, 12 answer shapes, rank voices, favour price, process, betrayal patterns, guardrails).
