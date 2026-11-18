@@ -7,8 +7,8 @@
 const CM_W={th:"Thái hậu",hh:"Hoàng hậu"};
 function cmSt(){S.cm=S.cm||{th:{lv:1,why:""},hh:{lv:1,why:""},seen:{},last:{}};return S.cm}
 function cmSet(k,lv,why){const c=cmSt()[k];if(c.lv!==lv||why){c.lv=lv;c.why=why||""}}
-function cmThCauses(n){const B=BAL.ag.why.cm,L=[];if((S.th||0)>=B.thHi)L.push({lv:0,s:(S.th||0)-B.thHi+B.base,why:"hài lòng vì ngươi hiếu thuận"});if(n<B.kidsFew)L.push({lv:2,s:B.kidW,why:"lo vì hoàng tự còn hiếm"});return L}
-function cmHhCauses(q){const B=BAL.ag.why.cm,L=[];const d=(q.sung||0)-(S.sung||0);if(d>=B.hhFav)L.push({lv:0,s:d,why:"vui vì được Hoàng thượng ghé Khôn Ninh cung"});
+function cmThCauses(n){const B=BAL.ag.why.cmood,L=[];if((S.th||0)>=B.thHi)L.push({lv:0,s:(S.th||0)-B.thHi+B.base,why:"hài lòng vì ngươi hiếu thuận"});if(n<B.kidsFew)L.push({lv:2,s:B.kidW,why:"lo vì hoàng tự còn hiếm"});return L}
+function cmHhCauses(q){const B=BAL.ag.why.cmood,L=[];const d=(q.sung||0)-(S.sung||0);if(d>=B.hhFav)L.push({lv:0,s:d,why:"vui vì được Hoàng thượng ghé Khôn Ninh cung"});
  let n=0;try{const R0=liveRivals(true);for(const a of R0)for(const b of R0)if(a!==b&&oan(a,b)>=B.oan)n++}catch(e){}if(n>=B.busy)L.push({lv:2,s:n*B.busyW,why:"mệt vì hậu cung tranh chấp"});return L}
 function cmMonth(){if(!S||S.dead)return;const C=cmSt();const q=typeof queenP==="function"?queenP():null;
  const kidsNow=(()=>{let n=(S.kids||[]).length;for(const v of rivals||[])n+=(v.kids||[]).length;return n})();const born=kidsNow>(C.kids||kidsNow);C.kids=kidsNow;
@@ -27,7 +27,7 @@ function cmMonth(){if(!S||S.dead)return;const C=cmSt();const q=typeof queenP==="
  if(q&&q!==S&&q.alive&&!q.out){let lv=1,why="";const ill=(()=>{try{return illOf(q)}catch(e){return null}})();
   if(ill){lv=2;why="đang bệnh"}
   else if(hhLoss>=8){lv=3;why="phật ý vì ngươi trái lời"}
-  else if((S.sung||0)>=(q.sung||0)+20&&S.rank>=3){lv=npwPick([3,2],k=>k===3?Math.max(0,hostility(q,S)):BAL.ag.why.cm.hhSad+Math.max(0,aff(q,S)))||2;why=lv===3?"ghen vì Hoàng thượng sủng ngươi hơn":"buồn vì Hoàng thượng sủng ngươi hơn"/* npc-purpose G2c: her grudge makes it anger, her goodwill makes it sorrow */}
+  else if((S.sung||0)>=(q.sung||0)+20&&S.rank>=3){lv=npwPick([3,2],k=>k===3?Math.max(0,hostility(q,S)):BAL.ag.why.cmood.hhSad+Math.max(0,aff(q,S)))||2;why=lv===3?"ghen vì Hoàng thượng sủng ngươi hơn":"buồn vì Hoàng thượng sủng ngươi hơn"/* npc-purpose G2c: her grudge makes it anger, her goodwill makes it sorrow */}
   else if(born&&(q.kids||[]).length>(C.qk||0)){lv=0;why="mừng vì sinh hạ hoàng tự"}
   else if(fest){lv=0;why="vui vì lễ trong cung"}
   else{const x=npwPick(cmHhCauses(q),y=>y.s);if(x){lv=x.lv;why=x.why}}/* npc-purpose G2c: her own life (favour, a quarrelling harem) */

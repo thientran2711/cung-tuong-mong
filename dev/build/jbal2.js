@@ -1288,7 +1288,7 @@ Object.assign(BAL.ag.why.cd,{fxSrvHarm:6,fxRivSrv:4,fxRivSrv2:4,fxSlapBack:1,emo
 Object.assign(BAL.ag.why,{
  fxSrv:{p:8,rivP:6,hot:40,hostAdd:3,grudge:40,loyW:2,spite:30,penLow:30,timid:30,slapBase:20,timidSl:20},  /* jface: p/rivP = success of the chosen strike (old monthly odds); hot = grudge needed to strike; hostAdd = old +3 for a hostile target; servant s = grudge + (loy.out−loyal)×loyW + spite×netQ; punished consort lies low with penLow + timid×netQ vs her grudge; mistress slaps back: slapBase + spite − timidSl×timid + dislike */
  emo:{goBase:20,angW:1,timid:40,calm:20,ofEmp:30,ofAf:40,manMet:20,manDt:5,kidSib:25,kidPet:25},  /* jemo: sad consort alone (mood v) vs goBase+liking; servant fear = anger×angW + timid×netQ vs calm + loyalty above mid; officials: Emperor's temper ofEmp, patron with af ≥ ofAf; men: met/letters manMet+tình, tình moved ≥ manDt; child: siblings ×kidSib, pets ×kidPet */
- cm:{thHi:70,base:20,kidsFew:2,kidW:25,hhSad:20,hhFav:15,oan:40,busy:3,busyW:10}  /* jcmood: TH glad when her regard th ≥ thHi; worried while heirs < kidsFew; HH jealous anger = grudge vs hhSad+liking; glad when her favour leads by hhFav; tired when ≥ busy pairs of consorts bear oán ≥ oan */
+ cmood:{thHi:70,base:20,kidsFew:2,kidW:25,hhSad:20,hhFav:15,oan:40,busy:3,busyW:10}  /* jcmood: TH glad when her regard th ≥ thHi; worried while heirs < kidsFew; HH jealous anger = grudge vs hhSad+liking; glad when her favour leads by hhFav; tired when ≥ busy pairs of consorts bear oán ≥ oan */
 });
 Object.assign(BAL.ag.why.cd,{ilBack:2,ilBuy:4,ilConf:2,wkUse:6,illSeek:8,rcpAcc:1,rcpGos:4,rcpGift:6,rcpTh:8,petHh:12,petMan:8,thyLeak:2,thyTell:1,thyBribe:6});  /* jil/j83/jrcp/jpet/jthaiy cadence in tuần per person */
 Object.assign(BAL.ag.why,{
