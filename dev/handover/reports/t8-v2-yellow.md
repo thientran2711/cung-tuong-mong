@@ -50,7 +50,7 @@ Refs: that v2 PNG (image) + m09 eIyOFEidqL (style). Prompt: copy EXACTLY face/ha
 | c04 | 2 | gen 1 changed the crown/hair (FAIL, not kept), gen 2 PASS |
 | c05–c11, c13–c15, c18, c19, c26–c32 (19) | 1 each | PASS (yellow clear, main colour/pose/crown/pins/held item kept) |
 
-Total 21 gens (c04 twice) + 1 rejected = 22 × 135 = ~2,970 credits. Rejected c04 gen 1 stored nowhere.
+Total 21 gens (19 people x1 + c04 x2, incl. 1 rejected) x 135 = ~2,835 credits. Rejected c04 gen 1 stored nowhere.
 
 ## 3. Gate ticks (each person, looked at before/after)
 Same face/crown/pins/pose; main robe colour unchanged; yellow soft and in tone (not glaring); stitched embroidery; one contrasting held item, no cup; no forehead mark; no feet wording; phoenix kept. No fails left.
