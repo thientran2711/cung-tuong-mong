@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"94d11623+","t":"2026-11-18T18:33Z","c":"land test-flaky-sure 89513071 (E SMALL PASS round 2; test/tools only) on 3fdfb437","b":"a31c8d62c1de","h":[{"s":"a5013222+","t":"2026-11-18T18:03Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)"},{"s":"08774c0e+","t":"2026-11-18T17:38Z","c":"ag-stf2 (test only): bribe histogram picks a servant whose lòng moves her bribe odds. Root of the 'disloyal one takes more' red (npc ~3/20,…"},{"s":"0351e140","t":"2026-11-18T16:48Z","c":"shop-panel: «Để ta xem» outside option, 3-column Mua/Bán grid, smallest picture strip, test"},{"s":"ebf25660+","t":"2026-11-18T15:29Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…"},{"s":"9f9c6c2b+","t":"2026-11-18T14:26Z","c":"shown-odds-one-path r1: plant on the spot is done in person (actCtx x.here, no sent-servant pen); Vì sao names spy knowledge (whyKnow); tes…"},{"s":"aa997f3c+","t":"2026-11-18T13:46Z","c":"look-fx r13: index.html / sw.js rebuilt from merged sources"},{"s":"4475ea24+","t":"2026-11-18T12:33Z","c":"grand-endings-engine: site rebuilt (index.html / sw.js / assets.json) after fix 4 + main merge"},{"s":"68cbbb28+","t":"2026-11-18T12:00Z","c":"review life-preload-fu r2v: no half-drawn / empty figure while the HD twin comes (whole group: every fig-* img)"},{"s":"a8036600+","t":"2026-11-18T12:06Z","c":"Rebuild index.html/sw.js after merging origin/main"},{"s":"3f45eda9+","t":"2026-11-18T11:52Z","c":"steal-minigame FIX 1: PEND flag (chooseM renders before the game opens: the stale-'mg' reset no longer cancels a real async game); KIT.md §…"}]};
+window.CTM_BI={"s":"a8cd0551+","t":"2026-11-18T19:19Z","c":"Questline Q2: NPC side line as a process + two-way (jnroadhp.js)","b":"068486554972","h":[{"s":"c67d248d+","t":"2026-11-18T19:53Z","c":"ag-deed-perf: site build (index.html, sw.js)"},{"s":"6aab33ad","t":"2026-11-18T20:05Z","c":"KIT_REQUESTS: K-Q2-1 DONE 048f3c7"},{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"},{"s":"a5013222+","t":"2026-11-18T18:03Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)"},{"s":"08774c0e+","t":"2026-11-18T17:38Z","c":"ag-stf2 (test only): bribe histogram picks a servant whose lòng moves her bribe odds. Root of the 'disloyal one takes more' red (npc ~3/20,…"},{"s":"0351e140","t":"2026-11-18T16:48Z","c":"shop-panel: «Để ta xem» outside option, 3-column Mua/Bán grid, smallest picture strip, test"},{"s":"ebf25660+","t":"2026-11-18T15:29Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…"},{"s":"9f9c6c2b+","t":"2026-11-18T14:26Z","c":"shown-odds-one-path r1: plant on the spot is done in person (actCtx x.here, no sent-servant pen); Vì sao names spy knowledge (whyKnow); tes…"},{"s":"aa997f3c+","t":"2026-11-18T13:46Z","c":"look-fx r13: index.html / sw.js rebuilt from merged sources"},{"s":"4475ea24+","t":"2026-11-18T12:33Z","c":"grand-endings-engine: site rebuilt (index.html / sw.js / assets.json) after fix 4 + main merge"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -37992,7 +37992,17 @@ const KSHOP={reg:{}};
  const on=!!(m&&m.kit&&(m.kit.shop||m.kit.pick));dlg.classList.toggle("kshopd",on);if(!on)return r;
  const body=M.querySelector("#mb > .kpb");if(body){body.querySelectorAll(":scope > .kpsubj").forEach(e=>e.remove());body.classList.remove("kphas","kpinfo")}
  if(typeof kitXAdd==="function")kitXAdd(dlg)}catch(e){console.error("kitShop",e)}return r}})();
-function kitShopList(o){const L=o.mode==='sell'&&o.sell?(o.sell.items()||[]):(o.items||[]);const ok=L.filter(x=>kitShopMax(o,x)>0),no=L.filter(x=>kitShopMax(o,x)<1);return ok.concat(no)}
+function kitShopRaw(o){return o.mode==='sell'&&o.sell?(o.sell.items()||[]):(o.items||[])}
+/* review/shop-panel-r3 (owner 18/11 ~18:55Z): ONE row of kit sub-tabs under Mua | Bán, by item KIND, the SAME groups as the Tư trang chest (KINV_CATS; Trang sức split by wear slot = KEQ_TT: Cài tóc, Đeo tay, Đeo eo…). First tab «Tất cả» like the chest; only kinds present in the current list; none when the list has one kind. */
+function kitShopCat(k,crafted){if(crafted)return"tp";const it=IT[k];const W=typeof WD_ITEMS==="object"&&WD_ITEMS[k];if(!it&&!W)return"tap";
+ const kd=it?it.kd:(W.sl==="y"?"Y phục":"Trâm cài");let c=kinvCat(kd);if(c==="trang"){let sl=it?it.sl:"hair";if(sl==="tram")sl="hair";if(KEQ_TT.some(t=>t[0]===sl))c="trang:"+sl}return c}
+function kitShopKinds(L){const seen={};L.forEach(x=>{const c=x.cat||"tap";seen[c]=(seen[c]||0)+1});const out=[];
+ const lab=c=>{if(c.indexOf("trang:")===0){const t=KEQ_TT.find(t=>t[0]===c.slice(6));return t?t[1]:"Trang sức"}const g=KINV_CATS.find(g=>g[0]===c);return g?g[1]:"Tạp vật"};
+ const order=[];KINV_CATS.forEach(g=>{if(g[0]==="trang")KEQ_TT.forEach(t=>order.push("trang:"+t[0]));order.push(g[0])});order.push("tap");
+ order.forEach(c=>{if(seen[c])out.push({k:c,label:lab(c),n:seen[c]})});Object.keys(seen).forEach(c=>{if(!out.some(t=>t.k===c))out.push({k:c,label:lab(c),n:seen[c]})});
+ return out.length>1?[{k:"all",label:"Tất cả",n:L.length}].concat(out):[]}
+function kitShopList(o){const L0=kitShopRaw(o);o.kinds=kitShopKinds(L0);o.cat=o.cat||{};let cur=o.cat[o.mode];if(!o.kinds.some(t=>t.k===cur))cur="all";o.cat[o.mode]=cur;
+ const L=cur==="all"?L0:L0.filter(x=>(x.cat||"tap")===cur);const ok=L.filter(x=>kitShopMax(o,x)>0),no=L.filter(x=>kitShopMax(o,x)<1);return ok.concat(no)}
 function kitShopMax(o,x){if(x.sell)return x.why?0:Math.max(0,x.have?x.have():0);const money=o.money?o.money():0;const carry=(o.carry||9)-(x.have?x.have():0);return Math.max(0,Math.min(Math.floor(money/Math.max(1,x.price)),x.stock==null?99:x.stock,carry))}
 function kitShopWhyQ(o,x,q){if(x.sell)return x.why||(q>(x.have?x.have():0)?"Không đủ":"");const money=o.money?o.money():0;if(x.why)return x.why;if((x.have?x.have():0)>=(o.carry||9))return"Rương đã đầy món này";if(x.stock!=null&&q>x.stock)return"Hết hàng";if(q*x.price>money)return"Thiếu bạc";return""}
 /* the short word on a tile's button (the full reason is its tooltip) */
@@ -38004,7 +38014,7 @@ function kitShopTile(o,x,i){const key=o.key||"shop",u=x.unit||"bạc";const g=KI
  return `<div class="kshc${mx<1?" kshno":""}" ${A}>`+
   `<button type="button" class="kshpic" ${A} data-kshdet="1" aria-label="Xem ${x.name}">${kitItem({src:x.src,name:x.name,grade:x.grade,lux:x.lux,qty:q,size:"slot",mark:x.mark,tip:`${x.name} · chạm để xem`})}</button>`+
   `<span class="kshn" style="color:${g.c}" title="${x.name}">${x.name}</span><span class="kshe"${x.eff?` title="${x.eff}"`:""}>${x.eff||""}</span>`+
-  `<span class="kshp">${x.sell?"bán ":""}${x.price} ${u}${x.sell&&x.have?` · có ${x.have()}`:""}</span>`+
+  `<span class="kshp">${x.price} ${u}</span>`+
   `<span class="kshst"><button type="button" class="kbtn alt kshqb" ${A} data-kshq="-" aria-label="Bớt một"${q<=1?" disabled":""}>−</button><b class="kshqn" aria-live="polite">${q}</b>`+
   `<button type="button" class="kbtn alt kshqb" ${A} data-kshq="+" aria-label="Thêm một"${q>=mx?" disabled":""}>+</button></span>`+
   `<button type="button" class="kbtn kshgo" ${A} data-kshbuy="1"${why?` disabled title="${why}"`:""}>${lab}</button></div>`}
@@ -38020,8 +38030,9 @@ function kitShopDet(o){const x=(o.list||[]).find(y=>y.k===o.det);if(!x)return"";
   `<div class="kinvrows">${kitRowsJoin(kitRows(cost),x.rows||"")}</div></div></div>`}
 function kitShopBody(o){const key=o.key||"shop";const money=o.money?o.money():0;o.list=kitShopList(o);o.q=o.q||{};
  const tabs=o.sell?`<div class="pctabs kcattabs kshtabs" role="tablist">${kitTabRowHTML([{k:"buy",label:"Mua"},{k:"sell",label:"Bán"}],o.mode==="sell"?"sell":"buy",`data-kshop="${key}" data-kshtab`)}</div>`:"";
+ const kinds=o.kinds.length?`<div class="pctabs kcattabs kshkinds" role="tablist">${kitTabRowHTML(o.kinds.map(t=>({k:t.k,label:t.label,n:t.n,tip:`${t.n} món`})),o.cat[o.mode],`data-kshop="${key}" data-kshkind`)}</div>`:"";
  const empty=o.mode==="sell"&&!o.list.length?`<p class="past kshempty">${(o.sell&&o.sell.empty)||"Chưa có gì để bán."}</p>`:"";
- return `<div class="kshop" data-kshop="${key}"><div class="kshl">${o.info||""}<span class="kshm">Ta có <b>${money}</b> ${o.unit||"bạc"}</span></div>${tabs}`+
+ return `<div class="kshop" data-kshop="${key}"><div class="kshl">${o.info||""}</div>${tabs}${kinds}`+
   (empty||`<div class="kshg">${o.list.map((x,i)=>kitShopTile(o,x,i)).join("")}</div>`)+(o.det!=null?kitShopDet(o):"")+`</div>`}
 function kitShop(o){o=o||{};const key=o.key||"shop";o.q={};o.det=null;o.mode="buy";KSHOP.reg[key]=o;
  return kitModal({kind:"info",title:o.title||"Mua đồ",html:kitShopBody(o),btn:o.btn||"Đóng",shop:key,stage:o.stage,onClose:o.onClose})}
@@ -38029,9 +38040,10 @@ function kitShopRefresh(key){const o=KSHOP.reg[key];if(!o)return;const html=kitS
  const el=document.querySelector(`.kshop[data-kshop="${key}"]`);if(!el)return;const g=el.querySelector(".kshg"),st=g?g.scrollTop:0;el.outerHTML=html;
  const g2=document.querySelector(`.kshop[data-kshop="${key}"] .kshg`);if(g2)g2.scrollTop=st;
  const x=document.querySelector(`.kshop[data-kshop="${key}"] .kshdc .kit-x`);if(x)try{x.focus({preventScroll:true})}catch(e){}}
-document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("[data-kshdetx],[data-kshdet],[data-kshq],[data-kshbuy],[data-kshtab]");if(!t)return;
+document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("[data-kshdetx],[data-kshdet],[data-kshq],[data-kshbuy],[data-kshtab],[data-kshkind]");if(!t)return;
  const o=KSHOP.reg[t.dataset.kshop];if(!o)return;e.stopPropagation();const key=o.key||"shop";
  if(t.dataset.kshdetx!=null){if(t.classList.contains("kshdet")&&e.target!==t)return;o.det=null;kitShopRefresh(key);return}
+ if(t.dataset.kshkind!=null){o.cat=o.cat||{};o.cat[o.mode]=t.dataset.kshkind;o.det=null;kitShopRefresh(key);return}
  if(t.dataset.kshtab!=null){o.mode=t.dataset.kshtab;o.det=null;o.q={};kitShopRefresh(key);return}
  const x=(o.list||[])[+t.dataset.kshi];if(!x)return;
  if(t.dataset.kshdet!=null){o.det=x.k;kitShopRefresh(key);return}
@@ -38043,17 +38055,17 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){for(const k in KSHO
 .dlg.kshopd #mr{display:none!important}
 .dlg.kshopd.kdper>#mb>.kpb>.kpmain{grid-row:1/-1;min-height:0;display:flex;flex-direction:column;position:static}
 /* review/care-overlap: a shop / care dialog (kshopd) with the KIT 50 banner (kdpban, row 1 of the right column): the body starts UNDER the picture, never beside it in the same row (it spanned rows 1 to -1 and the picture covered the bars / first tiles); the banner is part of #mb's grid, so every kshopd dialog (pet shop, errand shop, pet care) gets the same rows */
-.dlg.kshopd.kdper.kdpbanner>#mb>.kpb>.kpmain{grid-row:2/-1;overflow-y:auto;overscroll-behavior:contain}
+.dlg.kshopd.kdper.kdpbanner>#mb>.kpb>.kpmain{grid-row:1/-1;overflow-y:auto;overscroll-behavior:contain}
 .kshop{display:flex;flex-direction:column;gap:8px;min-width:0;min-height:0;flex:1 1 auto}
 .kshl{display:flex;flex-direction:column;gap:4px;min-width:0;flex:none}
 .kshl p{margin:0;line-height:1.4}
 .kshm{font-size:.86rem;color:var(--ink2,#6a5040)}
-.kshtabs{margin:0;flex:none}
+.kshtabs,.kshkinds{margin:0;flex:none}
 .kshempty{margin:6px 0;padding:10px;border:1px dashed var(--k-hair,#e6d3ac);border-radius:10px}
 /* KIT 28.13e tile grid: equal columns, every tile the same fixed rows → everything on one line across a row */
 .kshg{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;display:grid;grid-template-columns:repeat(auto-fill,minmax(var(--kshsz,118px),1fr));
  grid-auto-rows:max-content;align-content:start;gap:10px 6px;padding:8px;border:1px solid var(--k-hair,#e6d3ac);border-radius:10px;background:#f4ead8;box-shadow:inset 0 1px 3px #5a3a2018}
-.kshc{--kshl:1.2;display:grid;grid-template-rows:auto calc(2rem * 1.2 * .8) calc(2rem * 1.2 * .72) calc(1rem * 1.3 * .8) 30px 34px;row-gap:4px;
+.kshc{--kshl:1.2;display:grid;grid-template-rows:auto calc(2rem * 1.2 * .8) calc(1rem * 1.2 * .72) calc(1rem * 1.3 * .8) 30px 34px;row-gap:4px;
  justify-items:center;align-items:start;min-width:0;text-align:center;border-radius:8px;padding:4px 3px 5px}
 .kshpic{all:unset;box-sizing:border-box;display:block;width:100%;max-width:84px;aspect-ratio:1;cursor:zoom-in;border-radius:6px}
 .kshpic:focus-visible{box-shadow:0 0 0 2px var(--gold,#c9a46a)}
@@ -38063,7 +38075,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){for(const k in KSHO
 .kshc.kshno .kshpic>.kitem-slot{filter:grayscale(.85) brightness(.92);opacity:.7}
 .kshn,.kshe{display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;line-height:var(--kshl);overflow-wrap:anywhere;width:100%;align-self:start}
 .kshn{font-weight:700;font-size:.8rem}
-.kshe{font-size:.72rem;color:var(--ink2,#6a5040);align-self:start}
+.kshe{-webkit-line-clamp:1;white-space:nowrap;text-overflow:ellipsis;display:block;font-size:.72rem;color:var(--ink2,#6a5040);align-self:start}
 .kshp{font-size:.8rem;line-height:1.3;font-weight:600;color:var(--ink,#3a2418);white-space:nowrap;align-self:end}
 .kshst{display:flex;align-items:center;justify-content:center;gap:6px;height:30px;width:100%}
 .kshst .kbtn.kshqb{min-height:0;height:30px;width:30px;padding:0;font-size:1rem;line-height:1;flex:none}
@@ -38071,7 +38083,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){for(const k in KSHO
 .kshc .kbtn.kshgo{min-height:0;height:34px;width:100%;padding:0 6px;font-size:.8rem;white-space:nowrap;align-self:end}
 .kshc .kbtn:disabled{filter:grayscale(1);opacity:.55;cursor:default}
 /* pick mode (28.13e, j83 recipes): no stepper row, the picture is not a zoom button */
-.kshc.kshpick{grid-template-rows:auto calc(2rem * 1.2 * .8) calc(2rem * 1.2 * .72) calc(1rem * 1.3 * .8) 34px}
+.kshc.kshpick{grid-template-rows:auto calc(2rem * 1.2 * .8) calc(1rem * 1.2 * .72) calc(1rem * 1.3 * .8) 34px}
 .kshc.kshpick>.kshpic{cursor:default}
 /* the floating kit item card */
 .dlg.kshopd{position:relative}
@@ -38088,15 +38100,17 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){for(const k in KSHO
 .kshop[data-kshop] .kshg{grid-template-columns:repeat(3,minmax(0,1fr))}
 .kshop[data-kshop] .kshc .kbtn.kshgo{padding:0 3px;font-size:.74rem}
 /* the grid always needs to scroll, so the scene picture takes the kit's smallest strip (KIT_SIZE.pic.NS, owner 18/11 16:10Z: a big picture only when the content under it fits without scrolling) */
-html body #modal .dlg.kshopd.kdper>#mb>.kdlgart.kdpban>.ksart{height:${window.KIT_SIZE?KIT_SIZE.pic.NS.h:56}px!important}
+/* review/shop-panel-r2 (owner 18/11 ~18:30Z): NO picture strip on a shop panel: the seller figure is on the left, the tabs start at the very top of the right column */
+html body #modal .dlg.kshopd.kdper>#mb>.kdlgart.kdpban{display:none!important}
 /* short landscape screens (phone landscape): the seller's line is dropped, "Ta có N bạc" sits left of the tab row, smaller pictures → a whole tile row shows */
 
 `;document.head.appendChild(st)})();
 /* Nội vụ phủ: "Nhờ thái giám mua đồ" (j8 PEND.shop items S.shop, price itm(k).pr) through kitShop */
-function kitShopEff(k){const it=IT[k];if(!it)return"";if(it.dr)return `may áo: Sắc +${it.dr}, 3 tháng`;
- if(it.sl&&it.w){const v={hair:"cài tóc",wrist:"đeo tay",waist:"đeo eo",scent:"đeo"}[it.sl]||"đeo";return `${v}: ${kinvPlain(it.w)}`}
- if(it.use){const u=kinvPlain(it.use);if(u)return `dùng: ${u}`}if(it.anti)return"giải độc một lần";if(it.ant)return"an thai";if(it.fert)return `${it.fert} tháng dễ thụ thai`;
- if(it.w){const u=kinvPlain(it.w);if(u)return u}if(it.gv)return"đem tặng: hợp ý";return String(it.d||"").split(/[.;]/)[0].slice(0,40)}
+function kitShopEff(k){const it=IT[k];if(!it)return"";if(it.dr)return `Sắc +${it.dr} · 3 tháng`;
+ /* review/shop-panel-r2 (owner 18/11 ~18:30Z): ONE gain row «Sắc +2 · Danh +1», never the slot / kind word (đeo tay, cài tóc, dùng) */
+ if(it.sl&&it.w)return kinvPlain(it.w).replace(/, /g," · ");
+ if(it.use){const u=kinvPlain(it.use);if(u)return u.replace(/, /g," · ")}if(it.anti)return"giải độc một lần";if(it.ant)return"an thai";if(it.fert)return `${it.fert} tháng dễ thụ thai`;
+ if(it.w){const u=kinvPlain(it.w);if(u)return u.replace(/, /g," · ")}if(it.gv)return"đem tặng: hợp ý";return String(it.d||"").split(/[.;]/)[0].slice(0,40)}
 /* sell data (coordinator 11/15): the economy worker exposes econSellable(S) / econPrice(item) over j83's handmade works (IT.tp entries {k:"tp",
    wk:{n,kind,ti…}}, wkName, wkSellVal, wkSell) on review/balance-unified. The shop calls THEM when they exist; until they land, kitShopSellable /
    kitShopPrice below do the same from the inventory: each handmade work is its own tile (wk.n, wkSellVal, sold by wkSell = j83's odds), plus
@@ -38115,7 +38129,7 @@ function kitShopSellList(){try{if(typeof econSellable==="function"){const g={};
  catch(e){console.error("econSellable",e)}return kitShopSellable(S)}
 function kitShopSellPrice(x){if(x&&x.price!=null)return x.price;try{if(typeof econPrice==="function"&&x&&x.ix&&x.ix.length){const v=econPrice(S,S.inv[x.ix[0]]);if(v!=null)return v}}catch(e){}return kitShopPrice(x)}
 function kitShopSellItems(){return (kitShopSellList()||[]).map(g=>{const k=g.k,it=IT[k]||{n:g.name||k};const a=typeof itemArt==="function"?itemArt(k):null;const nm=g.name||it.n;
- return{k:g.key,sell:true,src:g.src||kitItemSrc(k,""),src512:a&&a.src512||"",name:nm,sub:g.crafted?"Tác phẩm tự tay":`${it.kd||""}${it.kd?" · ":""}${KIT_GRADE[a?a.grade|0:0].n}`,grade:g.grade!=null?g.grade|0:(a?a.grade|0:0),lux:0,price:kitShopSellPrice(g),why:g.no||"",
+ return{k:g.key,sell:true,cat:kitShopCat(k,g.crafted),src:g.src||kitItemSrc(k,""),src512:a&&a.src512||"",name:nm,sub:g.crafted?"Tác phẩm tự tay":`${it.kd||""}${it.kd?" · ":""}${KIT_GRADE[a?a.grade|0:0].n}`,grade:g.grade!=null?g.grade|0:(a?a.grade|0:0),lux:0,price:kitShopSellPrice(g),why:g.no||"",
   eff:g.crafted?"tự tay làm":kitShopEff(k),rows:!g.crafted&&IT[k]?kitItemRows(k):"",have:()=>((kitShopSellList()||[]).find(y=>y.key===g.key)||{n:0}).n,
   onBuy:(x,q)=>{let got=0,n=0;for(let i=0;i<q;i++){const cur=(kitShopSellList()||[]).find(y=>y.key===g.key);if(!cur||!(cur.n>0))break;const b0=S.bac;
     if(typeof cur.sell==="function")cur.sell();else{const ix=cur.ix[cur.ix.length-1];if(cur.wk&&typeof wkSell==="function"){const r=wkSell(S,ix);if(r)log(r)}else sellItem(S,ix)}got+=S.bac-b0;n++}
@@ -38124,7 +38138,7 @@ function kitShopNvp(){const c=S.court&&S.court.ped;let nm=c&&c.name?c.name:"";
  /* j61 naming: a eunuch she has not learnt the name of shows "<role> ???" (not "Thái giám Nội vụ phủ / thái giám ???") */
  try{if(nm&&c&&typeof k61Named==="function"&&!k61Named(c))nm="???"}catch(e){}
  const items=(S.shop||[]).filter((k,i,a)=>IT[k]&&a.indexOf(k)===i).map(k=>{const it=itm(k);const a=typeof itemArt==="function"?itemArt(k):null;
-  return{k,src:kitItemSrc(k,""),src512:a&&a.src512||"",name:it.n,sub:`${it.kd} · ${KIT_GRADE[a?a.grade|0:0].n}`,grade:a?a.grade|0:0,lux:it.sl||it.dr?luxVal(k):0,price:it.pr||0,
+  return{k,cat:kitShopCat(k),src:kitItemSrc(k,""),src512:a&&a.src512||"",name:it.n,sub:`${it.kd} · ${KIT_GRADE[a?a.grade|0:0].n}`,grade:a?a.grade|0:0,lux:it.sl||it.dr?luxVal(k):0,price:it.pr||0,
    eff:kitShopEff(k),rows:kitItemRows(k),stock:5,have:()=>S.inv.filter(e=>e.k===k&&!e.h).length,
    onBuy:(x,q)=>{apply({bac:-x.price*q});for(let i=0;i<q;i++)S.inv.push({k});log(`Mua ${it.n}${q>1?` ×${q}`:""}. Bạc -${x.price*q}`)}}});
  return kitShop({key:"nvp",title:"Nhờ thái giám mua đồ",carry:9,
@@ -44369,7 +44383,7 @@ function petShopItems(){const sfx=typeof petcStageSrc==="function"?"-non":"";
   const rows=kitRows([["Phẩm",`<span class="ef n" style="color:${KIT_GRADE[T.tr].c};font-weight:700">${PET_TIER[T.tr]}</span>`],["Cơ may",`${word(o)} (tùy Tai mắt của ngươi${T.tr?"; con càng quý càng khó tìm":""}) · tốn 1 khắc`],
    ["Được",[`${PET_SN[T.st]} +${1+(T.sacX||0)} khi theo hầu`,T.use],"g"],["Mất",[T.bad].concat(T.up?[`Bạc -${T.up} mỗi tháng`]:[],["hỏng: mua phải con ốm, mất bạc"]),"r"],["Ghi chú",[`Xa xỉ ${petLux(k)}`,`về tay còn Non, nuôi mới lớn`],"n"]]);
   return{k,src:petSrc(k,0,sfx),src512:petSrc(k,1,sfx),name:T.n,sub:`${PET_TIER[T.tr]} · Xa xỉ ${petLux(k)}`,grade:T.tr,lux:petLux(k),price:T.pr,
-   eff:`${word(o)} · ${PET_SN[T.st]} +${1+(T.sacX||0)} · ${T.use}`,rows,stock:1,have:()=>0,why:t1?"Hết khắc":(tsbPets(S).some(P=>P.t===k)?"Đã có":""),
+   eff:`${PET_SN[T.st]} +${1+(T.sacX||0)}`/* shop-panel-r2: ONE short gain row; odds + use are on the item card */,rows,stock:1,have:()=>0,why:t1?"Hết khắc":(tsbPets(S).some(P=>P.t===k)?"Đã có":""),
    onBuy:(x,q)=>{for(let i=0;i<q;i++)if(!petBuyOne(k))break}}})}
 function petShop(){const c=S.court&&S.court.ped;let nm=c&&c.name?c.name:"";try{if(nm&&typeof k61Named==="function"&&!k61Named(c))nm="???"}catch(e){}/* same seller + naming as kitShopNvp */
  return kitShop({key:"pet",title:"Nhờ thái giám tìm thú nuôi",carry:Math.max(0,petMax(S)-tsbPets(S).length),
@@ -46655,6 +46669,11 @@ if(typeof q72HTML==="function")q72HTML=function(){return ktQ72HTML()};
 /* the tab bar's trailing info slot: pinned to the RIGHT END of the bar (stays visible while the tabs scroll) */
 .pctabs>.pctinfo{flex:0 0 auto;margin-left:auto;align-self:center;position:sticky;right:0;padding:0 2px 0 10px;background:var(--panel);white-space:nowrap}
 .pctabs>.pctinfo .kgl{font-size:.82rem}
+/* KIT RULE (review/kit-subtabs-overflow, K-Q2-1, laws 10+11): a kitSubTabs bar NEVER scrolls sideways and the ⓘ never covers a tab: when the tabs do not fit
+   one line they WRAP to a 2nd row at the SAME fixed tab size (one size per tier; no shrinking, no clipping); ⓘ keeps the right end of the last row.
+   Every kitSubTabs bar (.ktsub: Tài nghệ, Mệnh truyện, Việc nhờ, Ân oán pickers, outside Người nhà/Ra phố, kit page) = this one rule. */
+html body :is(#panel,#kitpage) .kcattabs.ktsub{flex-wrap:wrap!important;overflow:visible!important;row-gap:4px}
+html body :is(#panel,#kitpage) .kcattabs.ktsub>.pctinfo{position:static}
 /* a section header row: title left, chips + ⓘ right, one line */
 .ksech{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 10px;margin:0 0 8px}.ksech .ksechr{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap}
 .ktinfo .kgl{font-size:.82rem;color:var(--gold,#8a5a12);font-weight:600;cursor:pointer;border-bottom:1px dotted currentColor}
@@ -47048,6 +47067,7 @@ KIT_SAMPLES.push(
   kitSkillCard({kind:"story",k:"x",kicker:"Chương 2",name:"Tên chương",level:1,max:4,word:"Hồi",bar:false,next:"",img:kitInfoArt("Mệnh truyện").src})+
   kitEmpty("Việc nhờ","Chưa ai nhờ ngươi việc gì.")+`</div>`},
  {id:"§33.40",title:"kitSubTabs: ⓘ ở cuối thanh tab · kitSecHead: tiêu đề mục + chip + ⓘ",html:()=>{const t=kitSubTabs("kitpg33",[{k:"a",label:"Cầm",doable:2,total:3},{k:"b",label:"Kỳ",doable:0,total:2}],typeof kitInfo==="function"?kitInfo("Việc nhờ"):"");return t.html+kitSecHead("Tứ đức",kitChip("Đức",20,"g"))}},
+ {id:"§46.1",title:"kitSubTabs đầy hàng: 6 tab + ⓘ — xuống hàng 2, cùng cỡ, ⓘ không đè tab",html:()=>{const L=["Luật chương","Nhiệm vụ","Triều cục","Tâm nguyện","Phụ tuyến","Hậu duệ"].map((t,i)=>({k:"t"+i,label:t,n:""}));return kitSubTabs("kitpg46",L,typeof kitInfo==="function"?kitInfo("Luật chương"):"").html}},
  {id:"§46",title:"kitChecks · kitInfo",html:()=>kitChecks([[false,"Sủng 8 (cần 38)"],[true,"Danh 33 (cần 30)"]])+(typeof kitInfo==="function"?kitInfo("Việc nhờ"):"")},
  {id:"§43",title:"Việc gọn (cột hẹp, kpanec)",html:()=>`<div class="pcb ktacts"><div class="kpanec">${pbtn('data-kitsample="3"',"Hỏi han ở tẩm cung ta: ai cần giúp?","tốn: 1 khắc · thành: người ở đây có việc thì ngỏ lời nhờ","")}</div></div>`},
  {id:"§43.1",title:"Việc gọn: dấu ! mở chi tiết (kitActZoom)",html:()=>`<div class="pcb ktacts"><div class="kpanec">${pbtn('data-kitsample="3"',"Hỏi han ở tẩm cung ta: ai cần giúp?","tốn: 1 khắc · thành: người ở đây có việc thì ngỏ lời nhờ","")}</div></div>`});
@@ -65611,7 +65631,7 @@ PEND.ilconf=pp=>{const x=ilFind(pp.u);if(!x||x.at!=="nvp"||x.why!=="conf"||x.own
 function ilShopTiles(){const I=ilS();return I.box.filter(x=>x.at==="mkt"&&x.shop&&(x.own==="me"||!ilAlive(ilP(x.own)))).map(x=>{const e=x.e,nm=ilNm(e);
  const info=(()=>{try{return typeof kitItemInfo==="function"?kitItemInfo(e):null}catch(z){return null}})()||{};const a=typeof itemArt==="function"?itemArt(e.k):null;
  const pr=Math.max(1,Math.round(ilVal(e)));const crafted=!!e.wk;
- return{k:crafted?"il"+e.iu:e.k,crafted,src:info.src||(typeof kitItemSrc==="function"?kitItemSrc(e.k,""):""),src512:a&&a.src512||"",name:nm,sub:x.own==="me"?"Đồ cũ của ta":"Đồ cũ",
+ return{k:crafted?"il"+e.iu:e.k,crafted,cat:typeof kitShopCat==="function"?kitShopCat(e.k,crafted):"tap",src:info.src||(typeof kitItemSrc==="function"?kitItemSrc(e.k,""):""),src512:a&&a.src512||"",name:nm,sub:x.own==="me"?"Đồ cũ của ta":"Đồ cũ",
   grade:info.grade!=null?info.grade|0:(a?a.grade|0:0),lux:0,price:pr,eff:crafted?"tự tay làm":(typeof kitShopEff==="function"?kitShopEff(e.k):""),rows:crafted?"":(typeof kitItemRows==="function"&&IT[e.k]?kitItemRows(e.k):""),
   stock:1,have:()=>0,onBuy:()=>{if(S.bac<pr||ilS().box.indexOf(x)<0)return;apply({bac:-pr});ilTake(x,S,"mua lại");log(`Mua lại ${nm}. Bạc -${pr}`)}}})}
 (function(){if(typeof kitShop!=="function")return;const k0=kitShop;kitShop=function(o){try{if(o&&o.key==="nvp"&&Array.isArray(o.items))o.items=o.items.concat(ilShopTiles())}catch(e){console.error("ilShop",e)}return k0.apply(this,arguments)}})();
@@ -69109,7 +69129,7 @@ function agHeard(v,info){if(!agRdOn()||!v||v===S||typeof v!=="object"||!v.alive|
 function agWalk(a,b){try{const B=BAL.ag.kh2.rd;if(!agRdOn()||!((B.see||0)+(B.go||0)))return 0}catch(e){return 0}if(!a||!b||a===b)return 1;
  const W=window.__walkSpill;window.__walkSpill=null;/* her own half-walk (travel's special case) is not the bearer's road */let w=1;try{w=travel(a,b)}catch(e){}finally{window.__walkSpill=W}return Math.max(1,w||1)}
 /* a servant who stands at pl in khắc kh tells her master (not the player — her own servants are part 2c's TIN BÁO) by her own choice */
-function agTell(R,pl,kh,why,who,interest){const B=BAL.ag.kh2.rd;let n=0;
+function agTell(R,pl,kh,why0,who,interest){const B=BAL.ag.kh2.rd;let n=0;let why=null;const wy=()=>why!=null?why:(why=typeof why0==="function"?why0():why0);/* ag-deed-perf: the line (a place name: places() through every wrapper) is built only when a servant tells */
  for(const id in R.P){if(!/^s\d+$/.test(id))continue;const e=R.P[id][kh];if(!e||e[0]!==pl)continue;const s=servById(+id.slice(1));if(!s||s.out)continue;const m=ownerOf(s);
   if(!m||m===S||m===who||!m.alive||m.out)continue;const it=interest?interest(m):1;if(!(it>0))continue;
   const c=mindPick([["tell",B.tell*cl((s.loyal||0)/100,0,1)*it],["quiet",B.quiet]],s);if(c!=="tell")continue;
@@ -69118,9 +69138,9 @@ function agTell(R,pl,kh,why,who,interest){const B=BAL.ag.kh2.rd;let n=0;
   let mp=null;try{mp=R.P["v"+m.id]&&R.P["v"+m.id][Math.min(ks,J95.KH-1)]?R.P["v"+m.id][Math.min(ks,J95.KH-1)][0]:palaceOf(m)}catch(e){}mp=mp||palaceOf(m);
   const due=ks+Math.max(1,agWalk(pl,mp));/* OD 17/11 ~17:55Z (3): she sets off from pl the khắc she saw it; her REAL walk to her master (near 1 / far 2); he hears at the start of khắc due */
   let kg=J95.KH;/* the khắc rows she spends on the road (a far walk: the khắc between); none for a near one */
-  for(let q=ks+1;q<due&&q<J95.KH;q++){const e=R.P[id][q];if(!e||busy(q)||e[1]==="tryst"||e[1]==="meet")break;if(kg===J95.KH)kg=q;R.P[id][q]=[mp,"ag_tell",ledgerId(m),why]}
-  agRdLog(R,id,kh,"ag:tell",ledgerId(m),why,pl);n++;AGD.stat.tell=(AGD.stat.tell||0)+1;
-  const z=agZ();z.rq=z.rq||[];z.rq.push({key:R.key,due,kg,sid:id,m:ledgerId(m),pl,who:who===S?"me":who&&typeof who==="object"?ledgerId(who):null,why,by:ledgerId(s),kh});if(z.rq.length>B.qMax)z.rq.shift()}
+  for(let q=ks+1;q<due&&q<J95.KH;q++){const e=R.P[id][q];if(!e||busy(q)||e[1]==="tryst"||e[1]==="meet")break;if(kg===J95.KH)kg=q;R.P[id][q]=[mp,"ag_tell",ledgerId(m),wy()]}
+  agRdLog(R,id,kh,"ag:tell",ledgerId(m),wy(),pl);n++;AGD.stat.tell=(AGD.stat.tell||0)+1;
+  const z=agZ();z.rq=z.rq||[];z.rq.push({key:R.key,due,kg,sid:id,m:ledgerId(m),pl,who:who===S?"me":who&&typeof who==="object"?ledgerId(who):null,why:wy(),by:ledgerId(s),kh});if(z.rq.length>B.qMax)z.rq.shift()}
  return n}
 /* deliver the news whose khắc has come (her clock passed the teller's khắc): the master hears at the START of that khắc (agHeard k0 = due).
    BAL cap on re-deciders per khắc (low-end phones, OD L1638): over the cap the news waits one khắc. A news due after the buổi's last khắc
@@ -69141,9 +69161,9 @@ function agRdTick(){try{agSpillAll()}catch(e){agdErr("spillAll",e)}if(!agRdOn()|
    /* the khắc she ENTERED: the finished khắc whose result put her there (her walk khắc: her row shows the place from the khắc after it); the
       servants there react the khắc after that (OD L1638: "k1 she enters → k2 maid present / scouts → k3 master knows + acts → k4 visible") */
    let a=kh;try{if(R.P.me)while(a>0&&R.P.me[a-1]&&R.P.me[a-1][0]===me)a--}catch(e){}/* = the first khắc she STANDS there (owner: k1 her walk, k2 seen + the maid walks, k3 the master knows) */
-   if(moved&&me&&me!=="home")agTell(R,me,a,`nghe tin ngươi đến ${agPlaceTxt(me)}`,S,m=>{let x=0;try{x=agNeedsC(m)}catch(e){}return x?1:0})}
+   if(moved&&me&&me!=="home")agTell(R,me,a,()=>`nghe tin ngươi đến ${agPlaceTxt(me)}`,S,m=>{let x=0;try{x=agNeedsC(m)}catch(e){}return x?1:0})}
   for(const p of agZ().pend){if(p.key!==R.key||p.st||p.kh>kh||p.drop||p.gone)continue;p.st=1;const d=agTgt(p.id),t=agTgt(p.t);
-   agTell(R,p.pl,kh,`nghe tin ${d&&d.name?d.name:""} ${p.act} ở ${agPlaceTxt(p.pl)}`,t&&t!==S?t:d,m=>{const a=typeof d==="object"&&d&&d!==m?Math.abs(aff(m,d)):0,b=typeof t==="object"&&t&&t!==m?Math.abs(aff(m,t)):0;return (a+b)/100})}}
+   agTell(R,p.pl,kh,()=>`nghe tin ${d&&d.name?d.name:""} ${p.act} ở ${agPlaceTxt(p.pl)}`,t&&t!==S?t:d,m=>{const a=typeof d==="object"&&d&&d!==m?Math.abs(aff(m,d)):0,b=typeof t==="object"&&t&&t!==m?Math.abs(aff(m,t)):0;return (a+b)/100})}}
  catch(e){agdErr("rd",e)}finally{AG.inRd=0}}
 /* 2d3 (ag-kh2 G9 red on base): a servant sent to rest / punished in the middle of a buổi (j95 jplx list → her row "offduty" / "laundry" from now)
    is not free any more: her deeds not over yet on those khắc drop (the agSlot rule: an off-duty khắc is not hers), so no deed claims a row it
@@ -74465,7 +74485,10 @@ function placeEnt(){try{const en=$("kpent"),st=$("stage");if(!en||en.hidden||!st
  if(mk&&mk.getClientRects().length){const R=st.getBoundingClientRect(),q=mk.getBoundingClientRect(),c=ch.getBoundingClientRect();
   if(q.right>c.left-4&&q.left<c.right+4&&q.top<c.bottom+2&&q.bottom>c.top-2)en.style.left=Math.round(q.right-R.left+8)+"px"}}catch(e){}}
 function lay2(){lay();placeEnt();clearTimeout(lay2.a);clearTimeout(lay2.b);lay2.a=setTimeout(placeEnt,400);lay2.b=setTimeout(placeEnt,1300)}
-const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);lay2();return r};
+/* ag-deed-perf (C-AG #12 18/11): a stage redraw INSIDE a sim step (j95 final wrapper, window.__rdefer > 0) queues lay2 (layout reads only:
+   getBoundingClientRect + the toast/name/chip DOM; nothing in S) with the other stage fits for the next frame (jlag2 renderAfter, coalesced;
+   a render() before then flushes it); every other redraw runs it at once, as before */
+const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);if(window.__rdefer>0&&typeof window.renderAfter==="function")renderAfter("plst-lay",lay2);else lay2();return r};
 try{addEventListener("resize",()=>{clearTimeout(lay.__t);lay.__t=setTimeout(lay2,90)})}catch(e){}
 /* (1) the count chip: the kit rail's first slot */
 try{if(window.kitStageRail)kitStageRail.add({id:"here",order:0,chip:()=>{const n=hereN();return n&&typeof j59ico==="function"?`<span class="kchip n j59hchip" role="img" aria-label="Ở đây còn ${n} người">${j59ico()}<span class="j59n">${n}</span></span>`:""},when:()=>hereN()>0&&onStage()})}catch(e){}
@@ -75761,7 +75784,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="a31c8d62c1de";window.CTM_BUILD=BUILD;
+const BUILD="068486554972";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
