@@ -517,4 +517,4 @@ B8 SAMPLE c01 a18 t1–t8 colour-only | _review CDN consort-tiers/c01/b7 + hando
 | place-stage r5 (owner pick B 501 + vivid marker + 4-person iPad trial; sonnet; brief briefs/place-stage-r5.md; r4 SzjeRxj archived) | review/place-stage | MAIN ROOT-46 | session_01UV1SzkV3Bc1u4BHrVH1jFj | RUNNING | 18/11 05:54Z |
 | look-fx-wire #6 (R9c LOOK fails: hard wedge/box edge round marks, mouth speck, harness shots; sonnet; brief briefs/look-fx-wire-6.md; #5 archived) | review/look-fx-wire | MAIN ROOT-46 | session_01UV1Szj7AXEQ5AejCQrVCNJ | RUNNING | 18/11 06:02Z |
 | REVIEW emo-seal-vanish 631ad03 (SMALL; sonnet; prompt inline) | review/emo-seal-vanish | MAIN ROOT-46 | session_01UV1SziaV41D5V819KWSfQU | RUNNING | 18/11 06:00Z |
-| E8 STEAL MINI-GAME (PL #3b; opus; BIG; brief briefs/E8-steal-minigame.md) | review/steal-minigame | E ROOT #2 | (opening) | CLAIMED | 18/11 06:06Z |
+| E8 STEAL MINI-GAME (PL #3b; opus; BIG; brief briefs/E8-steal-minigame.md) | review/steal-minigame | E ROOT #2 | session_01DgYSWm5h3LgBS7jeBr3BtW | RUNNING | 18/11 06:06Z |
