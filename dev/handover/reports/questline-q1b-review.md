@@ -34,3 +34,46 @@ Maid voice (cnv, nô tỳ/tiểu chủ) not shot by nrask-shots (consort askers 
 
 ## Re-review
 Text-only fixes 1–5, 7 on jnrask_b.js (rerun nrask-scan + nrask-engine; no quickcheck needed for text) + fix 6 in the q1a engine (with an nrask-engine check) → a SMALL re-review of the diff only.
+
+## ROUND 2 — reviewer E7br2 (opus), 18/11 ~07:40Z — review/questline-q1b 2b80a8a3
+PRIORITY #1 CHECK ('questline-q1'): OD 0 new | ledger 0 | claims E7a/E7b/E7c2 + reviewers of this slice | main 0 (no NRASK on main) | review/* questline-q1a 54f10e8 · q1b 2b80a8a3 · q1c 99aa2c5 (the three under review) | archive 0. START_CTX ≈ 4 % (own estimate; get_session read 0).
+Setup: LOCAL merge origin/main 09b1bba + q1c 99aa2c5 (carries q1a 54f10e8) + q1b 2b80a8a3 (assemble.py: jnroadm → jnrask → jnrask_b → jnrask_m; index.html/sw.js rebuilt by build_site.sh). Not pushed.
+Scope: whole jnrask_b.js re-scanned (120 chapters, 240 asks, h + 4 label/loss lines each) per prior family, plus the new {B}-free rule and the 7 reworded asks (diff f990dce..2b80a8a), against engine nrAskPick/NRSELF/tx in jnroad.js (q1a).
+
+### VERDICT: FAIL 2b80a8a3 (2 small text fixes; everything else holds)
+Prior items, whole-family re-scan of the file:
+| item | family | now | result |
+|---|---|---|---|
+| 1 | cnv maid asker reads as risen/consort; label vs loss go-between | 0 (cnv_mat_9 both asks read as a maid; «cung {me} hầu», «sổ thị tẩm» fit cnv_mat) | OK |
+| 2 | modern word | 0 («chính phủ» gone; «lớp/năm học» = jrd_thd.js canon on main) | OK |
+| 3 | loss line reads as thanks | 0 | OK |
+| 4 | hh ask on a matter not the Trung cung's | 0 of 25 hh asks (each names a real Trung cung act: seal, seating, search order, thỉnh an order, tra/khám) | OK |
+| 5 | player's family/people/past stated as fact | 1 left → fix 1 | FAIL |
+| 7 | label in the asker's voice / «ngươi» | 0 (no slot, no ngươi in 480 labels) | OK |
+| new | every chapter keeps ≥1 {B}-free ask | 120/120; no do-ask without {B}; two asks of a chapter never share a kind (120/120); no typed tỷ/muội/bổn cung/nô tỳ; slots only | OK, but one reworded ask is unplayable → fix 2 |
+
+### Fixes (numbered)
+1. **jnrask_b.js:181 thd_tho_8[0] (hh)** «{call} từng nghe {me} ngâm bài ấy từ lâu.» states a shared past the game never had (HANDOVER L46 true information; same family as item 5 — the fix-1 scan looked for family/servants/doctor only, not shared past). Make it conditional or a request without the claim (e.g. «Nếu {call} từng nghe {me} ngâm bài ấy…», or ask the player to have the Trung cung check the paper/date instead).
+2. **jnrask_b.js:393 ch_co_8[1] (emp, reworded for the {B}-free rule)** «… ra tay với một người trong cung … {Call} khéo để Hoàng thượng đến thăm người ấy mấy hôm» + label «Khéo mời Hoàng thượng ghé thăm người bị nhắm đến»: the ask never says who, so the player cannot do it; and when hasB is false because the rival IS the player (nrRival meOk), «người ấy» is the player herself. Reword so the ask needs no target (e.g. the asker asks to be kept near the Hoàng thượng / given a duty away from Đức Thọ cung so cô mẫu cannot use her); label + loss line to match. The other 6 rewordings (td_song_6, thd_tro_6, td_an_7, td_tha_6, thd_tho_5, thd_hoc_6) read right with or without a rival.
+
+### Cross-file (not q1b's fault; for Foreman E)
+- **nrask-scan FAILS on the merged tree**: `ksp_so_10[0]` label «Nói với Hoàng thượng ngươi tin sổ ấy» (jnrask_m.js:286, q1c) trips the «ngươi in labels» check that q1b fix 7 added to nrask-scan. q1c owes «… rằng mình tin sổ ấy» (or the scan must exempt men askers — Foreman's call); q1b+q1c cannot land together until one of them changes.
+- Engine note for q1a (not blocking q1b): nrOffer lets an NPC whose rival is the player (nrRival meOk) ask the player for help; then hasB=false and the anonymous {B}-free asks («kẻ tố», «một người trong cung») point at the player. Consider no help offer when riv===S.
+- Info: 14 q1b chapters have only an hh ask + a {B} ask (nc_su_8, td_an_7, td_tha_5, ch_co_10, ch_bi_8, thd_tho_8, cnv_ban_5/8/10, cnv_mat_9, cnv_ma_6/7 …); a queen asker or a queen player with no real rival gets the stock card there (engine fallback by design, true text). Fine.
+
+### Tests (merged tree)
+| test | result |
+|---|---|
+| build_site.sh | built |
+| node dev/test/nrask-scan.js | 636 asks (96+120+102 chapters), 9 origins 24/24 — **1 FAIL = ksp_so_10 (q1c, above)**; 0 fails in jnrask_b |
+| node dev/test/nrask-engine.js | ALL PASS (checks 7 queen never hh / Thái y never y, 8 kAddr voices + men by trade, 9 no {B} without rival, fallback, old saves, no page errors) |
+| node dev/test/nrask-m-scan.js | PASS |
+| bash dev/tools/quickcheck.sh | QUICKCHECK PASS · core gates PASS · old save ok · perf new/live render 215/231, tab 440/419, buổi 1111/1268 ms |
+| own scans | 240 asks: kinds thu 34 · do 60 · emp 44 · che 37 · y 17 · hh 25 · th 23 (never bac); h ≤ 235 chars, label ≤ 56; 0 digits/% |
+ONE CORE: no number in jnrask_b.js (costs/odds stock BAL.nroad.*). Kit: data only, j72 card + kit option cards, no CSS.
+
+### Shots (node dev/test/nrask-shots.js, HOST; Fold 755x1000@2 + iPad 1180x820@2; scratch /home/user/wt/e7br2-shots, deleted after verdict; CDN not used)
+thd_tho_8:1 (do) and ch_co_8:1 (emp), offer + Việc nhờ tab, 8 shots, looked at: kit j72 offer card (VIỆC chip, title «Phụ tuyến · Quý phi … · Chương 8 … · Lời nhờ (1 bước)», 1-step box, Nhận lời / Khéo từ chối option cards), tab with kit option rows Tốn/Thành/Bại + ladder words Khá chắc / Khó; Quý phi speaks «bổn cung» to a lower player who is «Muội muội» (kAddr right); no overflow, no raw slot, no cut text, no page errors. The ch_co_8 offer shows fault 2 on screen («… đến thăm người ấy mấy hôm» with no one named). SHOTS OK.
+
+### Re-review
+Text-only: fixes 1–2 in jnrask_b.js → rerun nrask-scan (after q1c's ksp_so_10) + nrask-engine; a SMALL diff-only re-review is enough.
