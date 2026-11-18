@@ -1,10 +1,8 @@
-# art-faces-figures — verbatim owner rules
+# art-faces-figures
 
-Holds: faces, figures, portraits, ages, poses, proportions.
+Art rules live ONLY in dev/art/FIGURE_GATE.md (owner 18/11 ~22:45Z).
 
-Read only when your task touches this topic.
-
-Format: [source:Lnn] = line in the source file (OD = dev/OWNER_DECISIONS.md on the docs branch); the text after the tag is the owner's line, copied unchanged by script. Every rule line lives in exactly ONE file under dev/rules/ (find a tag: grep -rn '\[OD:L123\]' dev/rules). CANON OVERWRITE (owner OD:L1232): when a rule changes, delete the old line and write the new one IN ITS PLACE in the same file; never keep the old one with a 'changed to' note. Headings '### OD:Lnn' are the OD section headings the lines sit under. Generated 11/16/2026 from dev/PRIORITY_RULES.md + dev/art/OWNER_ART_RULES.md (owner rule OD:L1241, low context).
+## NOT ART RULES — game/UI wiring or status lines found in this file; left in place for MAIN to relocate or delete. Do NOT add new art rules here.
 
 ### OD:L7 2026-11-14
 [OD:L177] - (06:15Z) Owner approved figure ratio of dev/owner-shots/1115-fig-ok.jpg (iPad 1180 Ngọc Thanh các, ≈.76–.80 of stage) as the standard → KIT_FIG women at that ratio everywhere (supersedes .92).
@@ -13,7 +11,6 @@ Format: [source:Lnn] = line in the source file (OD = dev/OWNER_DECISIONS.md on t
 [OD:L510] - [ ] (17:40Z) The "Ân sủng" block on the right of the stage, when reopened, balloons, overflows the right edge, cuts text → open in place, column width, aligned. Her figure (Thường tại) has a black mark at the neck from cut-out → fix + audit black marks around neck/collar on every figure. Handed to session 6.
 ### OD:L552 15/11 ~19:05Z — Portrait scale per group + makeup colours (owner)
 [OD:L554] - Not every person in the game needs the same scale, but within EACH GROUP of people (boys, girls, consorts, maids, eunuchs, men...) portraits must share one face scale, so switching person to person never jumps big/small. Fix the whole class (scan all groups).
-### OD:L618 15/11 ~20:15Z — Calendar ideas, Trân nữ seal on event frames, rosy skin mismatch (owner)
 ### OD:L829 15/11 (session 8) — Event dialog figure column far too big; cropping the skirt is OK (owner screenshot)
 [OD:L831] - Screenshot dev/handover/refs/owner-stage-fig-huge.jpg (VIỆC "Thái hậu chê dung nhan", tablet portrait): the left figure column takes ~60 % of the dialog with a huge full-body Thái hậu; KIT §32.2 says figure column 36 % (Fold) / ~170 px of a 470 px dialog (iPad), figure ≤ 40 dvh → the kit cap is not enforced on this dialog.
 [OD:L833] - Decision: enforce §32.2 on EVERY event dialog: figure column capped (36 % / ~170 px), and when height is short CROP the figure (owner: cutting the skirt is fine — show head to knees/waist, face always fully in view) instead of growing the column or shrinking the face. Whole family scan of all dialogs with a stage figure at all viewports. → worker review/stage-fig-size.
@@ -23,28 +20,14 @@ Format: [source:Lnn] = line in the source file (OD = dev/OWNER_DECISIONS.md on t
 [OD:L1187] - (16/11) Owner: person-target pickers (spy target etc.) show a generic scene picture instead of the person's portrait, and the options sit in a tiny cut-off scroll box. Rule: an option for a person shows that person's kit portrait (silhouette for strangers). → review/pcard-actrow.
 ### OD:L937 15/11 (session 8) — Contest podium: rewards for 2nd/3rd, same figure scale, contestants become known (owner screenshot)
 [OD:L940] - Rules: (1) every podium place gets a reward, scaled by place (Nhất > Nhì > Tam; e.g. smaller Sủng/Danh + a token item), shown as chips under each place; consolation for taking part can be a small Danh/skill progress; (2) all podium figures use the SAME standard figure scale (kit figure tier), only the podium height differs; (3) YES — everyone who competed with her becomes KNOWN at the contest (face + name revealed, marked "đã gặp"), so real figures, never silhouettes, for contestants she has seen; the same "meeting reveals face" rule for every shared event (banquets, thỉnh an, festivals). Whole family: all contest/podium screens (exams, dress contest, festival games, co-op leaderboard podium). → worker review/podium-fix (QUEUED: subagent cap).
-### OD:L566 15/11 ~19:50Z — Art completeness rule + handmade recipes (owner)
-[OD:L567] - ART RULE (every character ever drawn, incl. the new faces for suitors / foreign princes): full set of 4 AGE BANDS (18–25/26–35/36–50/51+). If the person can rise in rank, EVERY rank they can hold × 4 age bands.
 ### OD:L948 15/11 (session 8) — Owner review of the 7 kit screenshots (owner markup)
 [OD:L949] - Owner (verbatim, summary of her voice note): the Thái hậu figure in the ĐIỀU info panel looks SQUASHED (shortened) to fit the whole wide robe; "tà áo của những người mặc áo to có thể bị mất một khúc cũng không sao, nhưng con người phải đúng tỷ lệ nhân vật, không có crop kiểu này." Screenshot dev/handover/refs/owner-fig-squashed.jpg. → RULE: figures always keep their true aspect ratio (never scaled differently in X and Y); wide robes are cropped instead. → review/stage-fig-size (scan for distorted figures everywhere).
 ### HANDOVER.md
 [HANDOVER.md:L49] - 13 consorts at start (her + 12), tuyển tú every 3 years, cap ~16; seat caps per rank (HH 1, HQP 1, QP 2, Phi 4, Tần 6); Tranh ghế contest for open seats; push-down schemes; demotion review.
-[HANDOVER.md:L53] - Art: style = the early consort portraits (semi-realistic, near-3D, soft light), refs consort-01/05/12/18; everyone beautiful/handsome at every age; fair skin; serene faces (no sly, glare, smirk, open laugh, pout, sad/teary, no slanted 'mắt xếch' eyes); faces never reveal personality (personality only via pose/props/colour; Hiểm độc drawn with a gentle persona); 8 dress tiers = 8 ranks; 4 age bands (18–25, 26–35, 36–50, 51+) for everyone; one face per person for life, no reuse within a game; identity pools 1.5–2× group max; nobody looks poor (maids in embroidered silk with hairpins); men never wear pink or purple; her own figure appears only in her own palace.
 [HANDOVER.md:L75] The owner plays on a Samsung Galaxy Z Fold, PORTRAIT. Her screenshots are 1510x2000 *device pixels*, i.e. a CSS viewport of about 755x1000 at deviceScaleFactor 2. Testing at a 1510x2000 CSS viewport shows a desktop layout she never sees.
 [HANDOVER.md:L77] - Fold inner, portrait: 755x1000 @2  (PRIMARY)
 [HANDOVER.md:L80] Owner previews: send single readable screenshots (one image per file), not tiny grids.
-[HANDOVER.md:L92] - Huadian (forehead ornament): consorts only (incl. maids promoted to consort), never maids/servants/cold palace; size like c03 t1 (small, visible); 8 DISTINCT tiers (t7 Hoàng quý phi, t8 Hoàng hậu clearly grander via material/detail, never larger). No facial moles on anyone.
-[HANDOVER.md:L93] - Poses: calm standing (no flying sleeves/sashes, no swirling hems) for ALL figure art incl. Part C.
 ### OD:L7 2026-11-14
-[OD:L8] - Faces: ONE pool «90 nhân vật nữ» = 84 painted women (one face each, the player included, each with the FULL rank ladder of pictures: thiếu nữ ngoài cung → cung nữ → every consort rank → mama / tổng quản / Thái hậu) + 6 princesses (3 Nam Chiêu, 3 Bắc Địch) painted separately. Any woman placed in the game (player or NPC) draws from this pool: drawn face + her age + her current rank = the picture shown (internal ids c01–c32 / m01–m52 stay; F88_NEED_C gates a face until its rank-ladder art exists).
-[OD:L10] - No facial moles on anyone. Removal combined with adding huadian in one edit pass.
-[OD:L11] - Poses: calm standing, may turn at an angle, NO flying sleeves/sashes/hems; HANDS varied with props, different per age.
-[OD:L13] - Disfigurement (hủy dung): claw marks ON the face, 1/2/3 strokes by severity (approved); visible when the player knows.
-[OD:L100] - (21:20Z) Owner: Part C a51 hair jet-black and colour off vs a18–a36. Rule for all ageing: keep her warm dark-brown hair with painted highlights (subtle silver OK, never jet-black), colour-match a51 to the same tier's other ages.
-[OD:L107] - (22:45Z) Owner: add allergy (dị ứng) — painted rash overlay on the face (like scars), veil can be used for it too. Two-way; causes incl. rival schemes; heals over weeks / Thái y. Pilot overlay art first.
-[OD:L121] - (01:15Z) Owner APPROVED all 8 appearance conditions: illness, poisoning, slap handprint (faint, aesthetic) + punishment status, glow from dưỡng nhan, early grey strands, smallpox marks (overlays, review/appearance); pregnancy figures (same face/outfit/age, belly; stages — coordinator: 6 & 9 months; ages ≤50; ship as drawn, review/pregnancy-art); nun figure for xuất gia ending (one face, 4 ages). Rash light level approved-pending.
-[OD:L126] - (02:05Z) Owner: slap handprint approved; illness/poison stronger (ốm nhẹ ≈ old ốm nặng). Temporary EXPRESSIONS (buồn/giận/khóc/đau) allowed as states, done in code (landmark mesh warp + tiny tear overlay), no redraws; base art stays serene.
-[OD:L130] - (03:00Z) Owner: illness (light/heavy) + poisoning looks approved; code expressions approach OK but emotions must be clearer (stronger).
 [OD:L167] - (04:15Z) Owner: in the kit figure scale, men are a bit taller than women (≈1.08×); children by age.
 [OD:L183] - (07:20Z) Owner: 4 named guards → paint 4 distinct guard looks (thive-3, thive-4 × 4 ages).
 [OD:L197] - (09:50Z) Owner: 4 people too crowded → max 3 on iPad, 2 on phone/Fold; less overlap.
@@ -56,8 +39,6 @@ Format: [source:Lnn] = line in the source file (OD = dev/OWNER_DECISIONS.md on t
 [OD:L283] - 08:35Z Thái hậu a51 aged to 55–62 + dark Kính sự phòng/Thái y viện backgrounds colour-graded (grade, layout kept) on CDN; review/m05-huadian bca3d5c0d.
 [OD:L294] - (09:25Z) Checked: công tử are only data rows in Hôn sự, no art yet ('???' silhouette); no noble daughters of powerful ministers yet. Plan: noble daughters reuse the 84-face khuê các art (faces unused in that life); draw ~10 new công tử × 2 ages (gpt-2-6). review/hoang-tu.
 [OD:L297] - (10:05Z) Owner circled face-thaihau-3 (sly face, slanted eyes, side glance, smirk, heavy lipstick) → redraw gentle, per face rules; audit the other face-thaihau. act-pics. (10:05Z cdn_sync 11 act-pics files: separate thỉnh an TH/HH, bái kiến, nhịn, làm thơ, ngủ đêm, eunuch carrying tray…)
-### OD:L299 15/11 ~05:00Z (owner)
-[OD:L305] - Everyone beautiful, serene faces; faces don't reveal personality (Thái hậu 2/3/5 redrawn, on CDN).
 ### OD:L335 15/11 ~05:45Z (owner, annoyed that workers don't follow the kit)
 [OD:L343] - (06:00Z) Character cheeks turn black on dark backgrounds (cut-out bug, alpha holes in the face) → scan every person image, patch alpha in code.
 [OD:L358] - (07:10Z) The figure in person dialogs nearly fills the column (≥95%), applied to every person dialog via the kit.
@@ -65,7 +46,6 @@ Format: [source:Lnn] = line in the source file (OD = dev/OWNER_DECISIONS.md on t
 [OD:L408] - [ ] (11:10Z) Unmet people still show their faces in news cards and Tuần lục pages → kit-fig2 audits every place that draws person images.
 [OD:L409] - [ ] (11:20Z) News card: Tịch Nhan/Ngọc Hành pictures show the wrong person, cell backgrounds same colour despite different tiers → kit-fig2 shares images with Hậu cung + frame colour by current tier.
 [OD:L412] - (11:30Z) Portrait in frame: NO zoom; keep the old ratio (chest up), only MOVE the image up to the frame's top edge → shows more down toward the waist.
-[OD:L1305] - (16/11 12:45Z, s15 chat) OWNER (verbatim): "Thôi tất cả các hình về bỏ cái lớp dòng đi, về cái B á." → choice B for ALL pictures: remove the rosy-skin layer from every figure/portrait (back to the un-rosied skin, test image B in reports/skin-light/owner-test-ngocthanh.jpg). Not kitFigLight v1 (C).
 [OD:L416] - (11:35Z) Portrait in frame: the BODY must be horizontally centred in the frame (many images lean left, gap at right edge); the head may be slightly off. Keep ratio, only shift.
 [OD:L439] - (12:45Z) Children's portraits (Hoàng tự) each zoomed differently → normalise by head size for EVERY portrait family (children, công tử, servants, Emperor…).
 [OD:L441] - (12:50Z) Hoàng tự trong cung (other consorts' children): must show what the whole palace knows (mother, age, birth order, title, who raises them). Unmet children: grey child silhouette everywhere.
@@ -100,9 +80,7 @@ Format: [source:Lnn] = line in the source file (OD = dev/OWNER_DECISIONS.md on t
 [OD:L1120] - Owner: all cung nữ in the game look young; there must be old ones too. The guide "Quế ma ma" must be a REAL maid in the game with a real name, not a made-up label. Her picture must be that NPC's in-game portrait, for realism. Such women hold real posts (cung nữ trưởng sự, ma ma, tổng quản ma ma…). Each works in a specific palace or office and does that office's work, or comes "phụng chỉ" of someone.
 [OD:L1121] - → worker review/elder-staff (opus): a named elderly staff roster (age 40–65, office, title, patron, fixed elderly portrait). They speak by name and office in events and reports. One of them, the Giáo tập ma ma of Trữ Tú cung, is the tutorial guide via staffGuide(). Tutorial-r2 told to use staffGuide() with a fallback.
 ### OD:L1146 16/11 (session 8) — Owner corrections (angry: "nói một đằng làm một nẻo", "phá mọi thứ")
-[OD:L1166] - (16/11) Hủy dung (scar) must follow the same one-rule face system → facefx-all-r1.
 [OD:L1179] - (16/11) LIVE: tutorial-r2 (intro 'Game này chơi gì', goal card, goal strip, guide = Tống ma ma) on main 9b4f1697a. Owner bug: Tuần lục book figures do not follow the standard proportions (the silhouette is bigger/wider than the real figure) → review/book-fig. DISK nearly full (git packs 21G); cleanup of old worktrees was denied by the auto-mode classifier; owner must allow it, or the session stays tight.
 ### HANDOVER.md
 [HANDOVER.md:L32] - Art 2: maids (52) + mamas (8) × 4 ages — owner APPROVED this look (quality bar for all).
 [HANDOVER.md:L104] - maid-art (scratchpad/wmA 89dd550, 7b3f527) và maid-art-b (scratchpad/wfixB 212db69): lệnh đẩy của thợ bị bộ kiểm quyền chặn; CHỜ SẾP cho phép. Sau đó sửa a51 còn lại (A: 164 tờ, todo ở scratchpad/cwM; B: ~47 lineup).
-[OD:L1256] - (16/11 07:15Z, s11) OWNER on foreign-princess samples v2 (verbatim summary): proportions now OK. Problems: (1) Nam Chiếu — the HAIR is identical across the ranks, only the hairpins change → each rank needs its own hairstyle; and she is not happy with this girl's face; (2) check the Quý phi costume — does it match the CURRENT Quý phi dress in the game?; (3) Bắc Địch uses THE SAME FACE as Nam Chiếu — wrong: faces must all be different, no face like another; (4) NO fur that feels like winter on the costumes; (5) check the COLOURS — are they right (rank colours / the game's existing rank dress)? → redo v3.
