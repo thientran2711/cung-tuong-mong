@@ -244,7 +244,7 @@ function lPaint(have,total,slow){if(!lel)return;const b=lel.querySelector(".klb"
  const want=slow?`<button class="kbtn alt" data-klife="go">${CTM_WAIT.lifeGo}</button>`:"";if(o.innerHTML!==want)o.innerHTML=want}
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-klife]");if(!b)return;e.stopPropagation();LIFE.go=true},true);
 const lSleep=t=>new Promise(ok=>setTimeout(ok,t));
-async function lifeGate(why){if(LIFE.off)return;/* test hook: KLIFE.off = no gate (mid-load shots of §59.1) */if(LIFE.on){LIFE.again=true;return}
+async function lifeGate(why){(LIFE.calls=LIFE.calls||[]).push(why);/* test counter: gate runs per reason (dev/test/coop-lifegate.js) */if(LIFE.off)return;/* test hook: KLIFE.off = no gate (mid-load shots of §59.1) */if(LIFE.on){LIFE.again=true;return}
  if(why!=="start"){const L=kitLifeSet();lBgs().forEach(u=>{if(!lCore(u))L.set(u,u)});let miss=0;/* a background not yet seen this session counts as missing: a short gate (local cache) rather than one empty frame */const mw=[];L.forEach((raw,u)=>{if(!lOk(u)&&!lCore(u)){miss++;mw.push(u.split("/").pop());lWant(u,raw)}});
   /* pictures already on the device (core set, or brought in by the title prefetch) paint within a frame: not a reason for the screen */
   const pd=lPending().filter(u=>{const a=lAbs(u);return !lOk(a)&&!lCore(a)});KLOAD.lifeMiss=mw.concat(pd.map(u=>u.split("/").pop())).slice(0,12);if(!miss&&!pd.length){(KLOAD.lifes=KLOAD.lifes||[]).push({why,n:L.size,bytes:0,ms:0,late:0,cached:true});return}}
@@ -283,7 +283,12 @@ function lDlgWait(){try{const M=document.getElementById("modal");if(!M||M.hidden
 .modal.klife{z-index:2147483500}.modal.klife .dlg.kpsc{opacity:0;animation:klifeIn .3s ease .45s forwards}@keyframes klifeIn{to{opacity:1}}`;document.head.appendChild(st)})();
 let lReq=0;
 function lArm(){try{if(window.__bot||(window.COOPW&&COOPW.ctx))return;if(typeof S==="undefined"||!S||typeof S!=="object")return;
- if(!LIFE.seen.has(S)){LIFE.seen.add(S);lifeGate("life");return}
+ if(!LIFE.seen.has(S)){LIFE.seen.add(S);
+  /* review/life-preload-fu (B): in co-op every week merge (fromCanon → deser) builds a NEW S for the SAME life; the cover is only for a REAL life change = this seat's life counter (COOPW.life) or her name changed since the last gate. Same life: no cover, no full DOM scan — the pictures are fetched quietly (set below) and §59.1 covers any that is late. Both seats run the same rule on their own S. */
+  const cw=window.COOPW;if(cw&&cw.on){const k=(cw.life||0)+"|"+(S.name||"");if(LIFE.ck===k){try{kitLifeSet().forEach((raw,u)=>lWant(u,raw))}catch(e){}
+   /* r2 (review r1 FAIL: 2/10 co-op runs left a queued dialog hidden, week never ended): the old per-merge gate ended with one render(), and the co-op render wrap (jcoopworld reshowQ) re-shows a queued dialog the merge rebuild dropped. Keep exactly that ONE post-merge redraw, without the cover, only when a dialog is queued. */
+   setTimeout(()=>{try{if(cw.on&&typeof Q!=="undefined"&&Q&&Q.length&&typeof render==="function")render()}catch(e){}},150);return}LIFE.ck=k}
+  lifeGate("life");return}
  const now=Date.now();if(now-lReq<2500)return;lReq=now;/* off the render path (perf): when the page is idle */
  (window.requestIdleCallback||(f=>setTimeout(f,200)))(()=>{try{kitLifeSet().forEach((raw,u)=>lWant(u,raw))}catch(e){}},{timeout:3000})}catch(e){}}
 setTimeout(function(){try{
