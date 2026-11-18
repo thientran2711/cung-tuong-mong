@@ -26,6 +26,10 @@ for(const id in NRM){const R=NRM[id];
  for(let c=h0;c<=h1;c++){const k0=id+"_"+c,L=NRASK[k0];if(!R.c[c])continue;if(!L){bad.push(`missing ${k0}`);continue}
   if(!Array.isArray(L)||L.length<2){bad.push(`${k0}: needs a list of ≥ 2 asks`);continue}
   if(new Set(L.map(a=>a.k)).size<L.length)bad.push(`${k0}: two asks of one kind (want a different kind / shape)`);
+  /* Q1a fix r2 engine rules: an ask naming {B} is never drawn without a real rival → ≥ 1 {B}-free ask per chapter; NRSELF: a Thái y
+     (ty roads) is never asked for kind «y» */
+  if(L.every(a=>/\{B\}/.test([a.h,a.c||""].concat(...a.o).join(" "))))bad.push(`${k0}: every ask names {B} (none left when there is no rival)`);
+  if(R.k==="ty"&&L.some(a=>a.k==="y"))bad.push(`${k0}: a Thái y asks kind «y» (NRSELF ty, never drawn)`);
   L.forEach((E,ai)=>{const k=k0+"["+ai+"]";n++;
   if(E.k==="do"&&!/\{B\}/.test(E.h))bad.push(`${k}: a «do» ask must name {B}`);
   /* review E7cr (FAIL b99f4bc) as rules, whole families:
