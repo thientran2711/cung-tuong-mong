@@ -18,3 +18,12 @@ NOT DONE / honest gaps: (a) quickcheck and old-save load not run; (b) Fold full 
 ## Known limitation / decision for main
 When the runner is not drawn on the stage (crowded stage "+N", or resting elsewhere) there is no figure to walk, so only the pill beat plays. Fix needs stage-here / j59 to always draw the runner (or main allows walking the on-stage maid instead — rejected by me: wrong name vs log, law 6b). Coordination: touched no stage background code; no merge with review/stage-here needed.
 Not committed: index.html/sw.js (lander rebuilds).
+
+## HANDOVER (worker rollover, context ceiling; coordinator opens the successor)
+START_CTX unknown; rolled over at ceiling. Branch review/errand-scene @ d1da71f = OLD blocking scene (void per OD 20:10Z). Successor TODO (ROOT-55 order 20:04Z):
+1. Non-blocking redesign: tap = time moves at once; runner walks off in background, slot «đi dò la»; at due khắc walks back + kit «!» chip, tap = report. Remove RB hold / resultShow defer / shield from jerr.js; keep errWord, errAway, gate list, clone walk layer, scan script.
+2. ONE state "person away until khắc K" + adapter fn (swap to Foreman D's review/parallel-time, worker session_01964izEDFWH8uK569yeSGJt, when ready).
+3. Whole group per OD 20:20Z: every ask/send-another-person button (nhờ vả, hand gifts, messages, invitations, spying, eunuch buying); scan table act × walk-off/on × chip.
+4. Runner always drawn when stage crowded "+N": one kit rule with stage-here worker session_01Rc5AsK9y5NbRATifWtFqG7.
+5. Cover jht htAct (expose it); fix Fold skip failure with a FIXED seed (test picks random life); quickcheck + old save; merge main 13bb8c88; Fold+iPad shots looked. Report to ROOT-55 session_01Rc5AsNFnALGujUFYDSjs4g.
+Tips: local server `python3 -m http.server` in worktree after `bash dev/site/build_site.sh`; test boot pattern in dev/test/errand-scene.js (remove #klife cover, OPT.fxon=true); never commit index.html/sw.js.
