@@ -953,7 +953,7 @@
 | REVIEW coop-thin-c reviewer #2 (successor of 4NkEVbfk at f65b5b6c; opus BIG; brief briefs/review-coop-thin-c-2.md) | review/coop-thin-c-r1 | B | session_01N1tNP6cMqcMNhStqaraUuW | PASS review/coop-thin-c-r1 eb3675a6 (READY FF; golive dry run checks OK; report reports/review-coop-thin-c.md ## REVIEWER #2) | 17/11 23:10Z |
 | dudo-blank review r1 (sonnet SMALL) of f59c965a | review/dudo-blank-r1 | D | session_01964izF1pwkGy4nxwo8Q4iK | DONE PASS 2270c4c5 → FOR MAIN (builder lands; archived) | 17/11 21:20Z |
 | batch s37a LIVE 99f3978d (main 4c8568f5 → 99f3978d; ROLLBACK 4c8568f5): display-shelf-r3rv 41418cd8 (5 per group, ui=0) | review/batch-s37a | MAIN s37 | session_01UV1SzjA6P5mZskv3JKn3BV | LIVE | 17/11 21:27Z |
-| NPC-CHAIN LANDER (opus; one head ag-all-2+MOODKNOW+mood-mem+feelings-18+kit-figure-mood r6 on main; s37 21:17Z) | review/npc-chain-land | C-AG | session_01UV1Szi7UbTAbk3W9QSD6h7 | RUNNING (unarchived 18/11 00:05Z: coop hold fix) | 17/11 21:26Z |
+| NPC-CHAIN LANDER (opus; one head ag-all-2+MOODKNOW+mood-mem+feelings-18+kit-figure-mood r6 on main; s37 21:17Z) | review/npc-chain-land | C-AG | session_01UV1Szi7UbTAbk3W9QSD6h7 | ROLLED OVER → SzhJFho (archived) | 17/11 21:26Z |
 | FOREMAN C-AG #7 (opus; successor of #6, opened by MAIN s38) | handover FOREMAN_C_STATUS | MAIN s38 | session_01UV1SzgaEMtM9LvcYPr6tdR | RUNNING | 17/11 21:36Z |
 | toil blush final (owner row 3, OD L1721): BAL.toil dep bl .2304 / tuyet bl .2428 on toil-looks5 v18 → SMALL review → batch (sonnet) | review/toil-looks5 | MAIN s38 | session_01UV1SzhA7otHzXMdiSEqbyd | SẴN SÀNG KIỂM 2712920c (BAL blush + QC PASS + Fold/iPad shots; also Doan trang sheet + hue sheet, reports/toil-looks5.md) | 17/11 22:20Z |
 | REVIEW display-set-bonus (opus BIG; successor of SzkUH3p) | review/display-set-bonus | C-AG | session_01UV1SzmDekHiFMVcVBmxdRT | RUNNING | 17/11 21:38Z |
@@ -977,3 +977,4 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | cloth-xoc r3 (crease look redo + stain-decal layer; opus: hard rendering root cause after 2 FAILs) | review/cloth-xoc | MAIN s39 | session_01UV1SzkYmApqhLJ8fozxZi3 | ROLLED OVER @57afd8a (crease look improved, lv1/2 weak; stain not started; handover in reports/cloth-xoc.md r3) | 17/11 23:12Z |
 | cloth-xoc r4 (crease lv1/lv2 + stain-decal layer; sonnet) | review/cloth-xoc | MAIN s39 | session_01UV1SzjnD2foC6FyKie4bD3 | RUNNING | 17/11 23:23Z |
 | odds-cap review ROUND 2 (opus BIG) of fcefca42 | review/odds-cap-r1 | D | session_01964izFgd4LMUTiKvpBrSVD | RUNNING | 17/11 23:38Z |
+| NPC-CHAIN LANDER #2 (opus): coop hold fix ('buổi advanced both seats') → new PASS | review/npc-chain-land | C-AG | session_01UV1SzhJFho1Xs76yNi63tL | RUNNING | 18/11 00:07Z |
