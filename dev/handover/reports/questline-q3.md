@@ -51,3 +51,27 @@ Change is small and inside life-to-life noise (≈ 1.5 «Nhờ» asks per life o
 - Phá ngầm is told at once in the answer line (true info); a delayed hidden-truth reveal (audit §4 Q3 wording) is not built — can come with Q2's npcTell once npc-chain-land lands.
 - Bot sample of real asks is small (31–36 per 20 lives); the census is the large sample for the helper-type table.
 - Numbers are first values, tunable in BAL.road.hp only.
+
+## FIX 1 (review E9r, reports/questline-q3-review.md) — review/questline-q3 18f638ed, rebased on origin/main 711d7bad
+| # | Finding | Fix | Check |
+|---|---|---|---|
+| 1 | raw {Xung}/{xung} for the whole `off` role (no speaker) | rdHpWho `case "off"` → {role:"x",rw:"quan"} (vi thần); rdHpLine falls back to a role voice (RDHP_SP) whenever a line holds {goi}/{xung} and the helper has no speaker | roadhp-scan (5) RENDER: every tag (216) × 5 lines × rank 1 / 6 × cast / no cast = 4 320 lines rendered through rdHpLine; FAIL on any {…}, empty label, double space; unit (h): every role in BAL.road.hp.w renders. PASS |
+| 2 | non-officials tagged `off` | new role/type `dan` (BAL w [35,35,20,10], label «Người ấy», 5 own lines, no shared sentence) | before/after below |
+| 3 | empty mis/foe → broken line | v/v2/mis/man with no person, foe/n1 with no name → the go set (lines, weights, label «Người được nhờ», word «Không rõ») | unit (g): empty mis, v, v2, foe, n1 → go, no {…}. PASS |
+| 4 | iPad answer shot not forced | roadhp-shots zeroes tr / aff / rdRiv / owe / tcSab / rdWon / rdLost as unit force(), BAL restored after | both devices re-shot and LOOKED: Fold + iPad shot 2 show «Từ chối: Thái hậu khép mắt: «Ai gia già rồi, chuyện ấy … tự liệu lấy.»», option gone, Sức 75→72 |
+| 5 | rebase | cherry-picked on origin/main 711d7bad (assemble.py: only + jrdhp.js), index.html / sw.js rebuilt | roadhp-scan PASS · roadhp-unit PASS · quickcheck PASS (168 s, old save ok, core gates PASS) |
+
+Re-tag table (before → after):
+| Tag | Option | off → |
+|---|---|---|
+| muoi_lau_5:s2:0 · muoi_lau_10:x1:1 | thầy kiện | dan |
+| cn_than:s2:0 | thợ cung | dan |
+| cn_tinh_5:s1:1 | đội trưởng canh phòng | dan |
+| td_an:s1:0 | «Bỏ bạc nhờ ông chép lại» (a clerk) | dan |
+| td_song_5:s2:0 · td_song_6:c3:1 · td_song_8:c2:2 | lái buôn · trạm dịch quân · đoàn quân lương | dan |
+| thd_sach_8:c1:2 · thd_sach_11:s2:2 | học trò của cha · sĩ lâm | dan |
+| nc_vuong_6:s2:2 · nc_vuong_9:c1:1 · bd_hoang_6:s2:2 · bd_hoang_9:c1:1 | phu nhân Thượng thư Lễ bộ | dan |
+| cn_chu_8:c1:2 | đồng liêu cũ (old fellow servants) | srv |
+| td_an_8:x1:1 | người đủ cao (unnamed) | go |
+| nc_su_6:c1:0 · bd_hoa_6:c1:0 | {pa} = Hoàng huynh / Đại huynh | bro |
+`off` now 38 (Ngự sử, Hàn lâm / học sĩ, Lại bộ, Lễ bộ, Hộ bộ, sứ thần / sứ quán / sứ đoàn, phó tướng, Thái bộc, lão quan bộ Lễ). Roles: off 38 · go 31 · dad 25 · bro 18 · eun 18 · fam 18 · dan 14 · th 12 · srv 11 · n1 9 · hh 5 · v 4 · emp 4 · doc 3 · mom 2 · maid / man / foe / mis 1. Answer lines 80 (16 types × 5).
