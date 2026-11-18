@@ -276,7 +276,6 @@ async function lifeGate(why){(LIFE.calls=LIFE.calls||[]).push(why);/* test count
  LIFE.on=false;/* review r6: the loop above already re-reads kitLifeSet() of the CURRENT S every round; a re-run after the 25 s cap or 'Vào cung ngay' covered the game again for the same pictures (25 s + 25 s, one flash between) */
  if(LIFE.again){LIFE.again=false;if(!st.late&&!LIFE.go)setTimeout(()=>lifeGate("again"),0)}}
 window.kitLifeGate=lifeGate;
-/* entry-blank-r3: the two kit silhouettes (KIT §59.1 stand-in of a figure on its way) measured once at boot, so the first stage never waits for them */
 /* entry-blank-r3: the two kit silhouettes (KIT §59.1 stand-in of a figure on its way): their body box is known (fixed kit art), so it is set at boot
    (KIT_SILBB = kitFigBody of img/kit/unknown-fig-f|m.webp; dev/test/entry-blank.js checks it against a live measure) — the room stage never waits
    seconds for a measure of the silhouette it shows while the real figure loads (was 2–3.5 s of empty room on Tiếp tục). */
