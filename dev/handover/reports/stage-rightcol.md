@@ -17,3 +17,7 @@ Open list shows "Thiện cảm" label (existing module rewrites "Lòng"). Entry-
 ## r1 (ROOT-55 notes 20:06Z)
 (1) based on live main 13bb8c88 (no merge needed). (2) oldsave-r1 16/16. (3) quickcheck PASS. (4) Dư đồ map column now uses kitGroupFold too (kv1 portrait: two folds side by side in the top row, open list drops over the map; iPad kv2: same column as the stage); k3maid removed (one version); map added to dev/test/stage-rightcol.js: 36/36 PASS (stage home/Ngự hoa viên + map, Fold + iPad, 1/6 servants, closed/Cung nhân/Chí tôn). (5) label = «Thiện cảm» (VANPHONG L55: servant toward her = thiện cảm; the old "Lòng" was only a code name rewritten at runtime) now written directly. Shots +6 (map, open lists), all looked.
 ~97% xong / ~97% chơi được
+
+## r2 (ROOT-55 note 20:26Z: Fold map broken)
+Cause = mine: j38 mapFit measured the bottom margin from the top of every  in #kshR; the new group folds are  in the TOP row, so the map thought the whole column was a bottom row and shrank to the top half (empty band below). Fix: . The frameless night tags were the separate owner bug (map-labels-missing): merged 718c249 + main 9366028. Same-save compare: LIVE-main-fold-h6-map-closed.jpg vs fold-h6-map-closed.jpg (map fills its area again, tags framed). map-labels-scan 755x1000 + 1180x820 day+night: all PASS (cut 0); stage-rightcol 36/36 PASS (one earlier ipad h1 home fail was a mid-reveal figure ghost in the shot, passed on re-run). Branch 25747b2.
+~98% xong / ~98% chơi được
