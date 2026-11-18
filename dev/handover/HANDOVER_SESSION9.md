@@ -900,3 +900,21 @@ LESSONS s38: never send one tall sheet (owner angry) — crop per option; look a
 - (17/11 23:49Z) Owner: creases = Magnific decals → look-decals adds fx-crease-*; cloth-xoc places them. kk whole-look samples sent (Lượt 35).
 - (18/11 00:01Z) stains fe95bc9: tea = pasted paint → fix; crease decals on CDN → cloth-xoc relief method. warm-set side-by-side asked again. Owner: hoa điền flat designs too vivid → tone/drop samples ordered.
 - (18/11 00:02Z) tuyet-glow 7e80f3cd SẴN SÀNG KIỂM (v7, quickcheck PASS) — waits owner OK on v7 + toil-looks5 landing first (it is built on toil-looks5 2712920c). Then one SMALL reviewer for toil-looks5 + tuyet-glow + smudge together → batch (upload toil-looks5 mkfit JSON to CDN in same batch).
+
+## S39 → S40 HANDOVER (18/11 00:05Z; s39 context ≈ 31 % (est.) ≥ START 7 % + 25 % → rollover; depth 2 → s40 = depth 3)
+LIVE: main eb3675a6 (coop-thin-c r1 #2, pushed by someone else on top of b048e495). Batch s39a (npc-chain-land 7f96f559) = builder s37a re-merging onto eb3675a6 + coop-e2e 5+5 runs (HOLD if 'buổi 2:1 / week 3 not advanced for both seats' fails only on the batch); then push main (ancestor check, flock, CLAIMS LIVE row + rollback).
+OWNER RULINGS s39 (OD tail from 23:17Z, read VERBATIM): glow approved → full face incl. chin, ~7 stars/burst, never lips (v7); warm makeup tones = CAM ÁNH ĐỎ (8 TOIL_COL entries, applied cf912c74), pink set unchanged; kk levels scale eyes+lips+cheeks (BAL.toil.level wired, 1.0) — HER kk PICK STILL PENDING; smudge lv1 OK, lv2 asymmetric + pink flush, lv3 several runs, all clipped to face oval, no pink vertical stripe (r10 873622c sent to her, waiting OK); creases = Magnific decals (lv1+lv2 APPROVED, lv3 drop knot); hoa điền size by rank 13.5 (Quý phi/HQP/HH) / 12 (Tần→Phi) / 11.5 (3 lowest), equal visible area; flat vivid designs → tone-down samples + drop list; position still pending.
+OWNER PENDING: kk level (Kiều / Khuynh, mức 1–5, 5 images re-sent Lượt 64); smudge r10 OK?; hoa điền position 1/2/3 + tone/drop picks; stain tea/mud sent (Lượt 65) waiting OK; wet + xoc-3 coming; dressing minigame (park/now/no) never answered.
+RUNNING (all report to MAIN; tell them s40):
+- builder s37a session_01UV1SzjA6P5mZskv3JKn3BV — batch s39a (see above).
+- toil-looks5 session_01UV1SzhA7otHzXMdiSEqbyd — cf912c74; on her kk pick: set BAL.toil.level + dep/tuyet blush from kk table, quickcheck, SẴN SÀNG KIỂM.
+- tuyet-glow session_01UV1SzjKnHbwdNpGhhNLbnS — 7e80f3cd SẴN SÀNG KIỂM (v7), built on toil-looks5 2712920c → land AFTER toil-looks5.
+- smudge-code session_01UV1SzmAt4rDX1DnaUjKTh1 — r10 873622c, waits owner OK.
+- hoa-dien r3 session_01UV1SziQZkLLitwkfqjx3Bq — d3539e00 + sizeByRank + tone samples (hd-tone-<key>.png, 3 tier images) coming; then her position pick → merge main + tests.
+- cloth-xoc r4 session_01UV1SzjnD2foC6FyKie4bD3 (sonnet) — 31bc502: crease decals + stain layer; fixing wet lvl (own hue deeper, no grey) + xoc-3 no knot.
+- C-AG #7 session_01UV1SzgaEMtM9LvcYPr6tdR — ag-all-2 r2 reviewer, set-bonus builder/reviewer → PASS shas to main.
+LANDING PLAN (one batch after her kk pick): toil-looks5 → tuyet-glow → smudge-code (+ cloth-xoc when approved), one SMALL reviewer over the set; UPLOAD toil-looks5's dev/art/mkfit JSON to CDN img/mk-fit/ in the same batch (live table is the old one → lips off the mouth on live; toil-looks5 table fits).
+FOREMEN: B ROOT-2 session_01N1tNP5otr7BnxsT5Fytb4i active (coop-thin-e #2). C ROOT-13 NOT OPENED — owner must open from claude.ai with dev/handover/TAKEOVER_FOREMAN_C_ROOT13.md (told 3×); C orders open: Đa Bảo Các cabinet (kit-display-room r3 handover in reports/kit-display-room.md), 6 display pieces, faces, 'mai trắng' sprite painted red; C ROOT-12 asked MAIN to canon its body-spec lines (open). D #11 active.
+ARCHIVED by s39: cloth-xoc r1/r2/r3, kit-figure-mood, kit-display-room, look-decals (32 decals on CDN incl. fx-crease-*).
+LESSONS s39: look at neighbours side by side before asking her to pick (A/B/C glow were identical); one option per image with big faces; workers ask 'choose 1/2/3' and stall — check get_session status_bucket BLOCKED on every wake.
+- (18/11 00:06Z) s39 FINAL: opening successor MAIN s40 (child of s39, depth 3); s39 wake trig_013fR94H9uyfmRJq3iTXNmF9 to be deleted.
