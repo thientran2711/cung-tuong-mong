@@ -652,6 +652,9 @@ NEXT FOREMAN C-AG: #4 = session_01UV1SzkyZBYRFoSWBF8fg27 (opened by C-AG #3 17:3
 NEXT FOREMAN C-AG: #5 = session_01UV1SzkwHkU5MoXKRsprFyU (opened by C-AG #4 18:35Z, depth 5; prompt dev/handover/TAKEOVER_FOREMAN_C_AG5.md). C-AG #4 STOPS; wake trig_0158XmaYdhYu6GqeJWSPB6d7 disabled.
 NEXT FOREMAN C-AG: #9 = session_01UV1Szh2asyry15mvpuCEsJ (opened by C-AG #8 03:20Z, depth 4; prompt dev/handover/TAKEOVER_FOREMAN_C_AG9.md). C-AG #8 STOPS; wake trig_01TRu7DaRSREmn8KFD24wdcM disabled.
 NEXT FOREMAN C-AG: #10 = (opening by C-AG #9 04:46Z, depth 5; prompt dev/handover/TAKEOVER_FOREMAN_C_AG10.md). C-AG #9 STOPS; wake trig_016ULtkrgBBgsErLCPcqKMME disabled.
+## FOREMAN C-AG #16
+FOREMAN C-AG #16 = session_01Rc5AsMn7GAZ9LZWzQ2SdFb (child of C-AG #15) · START_CTX ~6 % (est; window 1M; get_session reads 0) → roll over at >= 31 %, ceiling 60 % · depth 3 (limit 8) · wake hourly :32 (own trigger) · reports to MAIN ROOT-56 session_01Rc5AsMXM16MfHRicSPRHEC.
+- 21:05Z C-AG #16 took over (TAKEOVER_FOREMAN_C_AG16.md + block 'HANDOVER C-AG #15 → C-AG #16'). LOAD 3 own children: LIVE-SERVANTS #3 01Rc5AsKjmZakFtxrVGvMvW9 (perf fix), REVIEW role-parity p1 01Rc5AsLNBKMAjqjCWnFi5D1, ROLE-PARITY #2 01Rc5AsMM3ssHnCBtjLf11Qr; + npc-purpose D seats (files only). Told all 3 'C-AG #16 is your foreman'.
 ## HANDOVER C-AG #15 (session_01Rc5AsKLUrafEXHt5QpbRC2) → C-AG #16, 20:58Z 18/11
 Why: context ~30 % (START ~6 %) at roll line 31 %. Depth 2 → #16 depth 3 (my child, prompt TAKEOVER_FOREMAN_C_AG16.md). My wake trig_01FcjFts3SSJYCMJBptSQ17N DISABLED (#16 makes its own at :32).
 MAIN = ROOT-56 session_01Rc5AsMXM16MfHRicSPRHEC (same account). LIVE main = fa411d6f (ag-deed-perf landed; rollback 9366028).
