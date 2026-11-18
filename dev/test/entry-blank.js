@@ -83,7 +83,7 @@ const SAMPLE=()=>{const vis=e=>{const r=e.getBoundingClientRect();if(r.width<24|
    R[tag+'-kload']=await g.evaluate(()=>({phase:KLOAD.phase,err:KLOAD.err||'',coreLeft:KLOAD.core&&KLOAD.core.left})).catch(()=>null);R[tag+'-kload'].waitMs=Date.now()-tw;console.log(tag,'kload',JSON.stringify(R[tag+'-kload']));
    await lt();t0=Date.now();await g.evaluate(()=>{const x=document.querySelector('#modal .kpmenu [data-tgo="slots"]');if(x)x.click()});await g.waitForSelector('#modal [data-load="3"]',{timeout:15000});await g.evaluate(()=>document.querySelector('#modal [data-load="3"]').click())}
   const S=[];let shot=0;
-  for(let i=0;i<60;i++){await sleep(250);g=D.gameFrame(p);let s;try{s=await g.evaluate(SAMPLE)}catch(e){s={cover:'nav'}}s.t=Date.now()-t0;S.push(s);
+  for(let i=0;i<(pth==='cold'?160:60);i++){await sleep(250);g=D.gameFrame(p);let s;try{s=await g.evaluate(SAMPLE)}catch(e){s={cover:'nav'}}s.t=Date.now()-t0;S.push(s);
    const bad=!s.cover&&(s.blank||s.wait||s.holes||s.toks===0||s.hidStage);
    if(!s.cover&&(bad||i%8===0)&&shot<8){await p.screenshot({path:`${OUT}/${tag}-${String(shot).padStart(2,'0')}-${s.t}${bad?'-BAD':''}.png`});shot++}}
   if(process.env.DUMP){console.log('HTML',JSON.stringify(await g.evaluate(()=>{const c=document.querySelector('.k3c');return c?c.outerHTML.slice(0,1500):null}).catch(e=>String(e))));
