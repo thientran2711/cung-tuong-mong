@@ -10,7 +10,7 @@ const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];let C
   await p.waitForFunction(()=>typeof start==='function'&&typeof kitBook==='function',null,{timeout:120000});
   await p.evaluate((HERF)=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;{const k1=kitFigOf,HER=HERF;window.kitFigOf=kitFigOf=function(q){if(q===S&&HER)return IMG_BASE+'img/'+HER;return k1.apply(this,arguments)}}
    for(const e of [...document.body.querySelectorAll('*')]){const cs=getComputedStyle(e);if(cs.position==='fixed'&&/Luân hồi/.test(e.textContent||''))e.remove()}},process.env.HER||'fig-consort-c32-tcold-a18.webp');
-  await p.evaluate(()=>document.fonts&&document.fonts.ready);await p.waitForTimeout(5000);const rows=[];CASES=[['warmup',CASES[0][1]],...CASES.filter(c=>c[0]!=='warmup')];/* first book open is still settling (column height differs): measured once and dropped */
+  await p.evaluate(()=>document.fonts&&document.fonts.ready);await p.waitForTimeout(5000);const rows=[];CASES=[['warmup',CASES[0][1]],['warmup',CASES[0][1]],...CASES.filter(c=>c[0]!=='warmup')];/* first book open is still settling (column height differs): measured once and dropped */
   for(const [name,FIG] of CASES){
    const r=await p.evaluate(async([name,FIG])=>{
     const k0=window.__k0||(window.__k0=kitFigOf);const sil=FIG.startsWith('SIL:');
