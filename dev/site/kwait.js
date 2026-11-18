@@ -34,6 +34,12 @@ window.CTM_WAIT=window.CTM_WAIT||{
  dlLeft:"Còn lại",
  dlLeftN:"còn {n} món",
  dlNone:"không còn",
+ /* life gate (jload.js, review/life-preload): the pictures of THIS life come in before she enters */
+ lifeHead:"Sửa soạn nhập cung",
+ lifeLabel:"Tranh người trong kiếp này",
+ lifeNote:"Đang thỉnh dung nhan những người ngươi sắp gặp, cảnh phòng và tranh việc đầu tiên. Xong là vào cung ngay.",
+ lifeSlow:"Đường xa chậm. Có thể vào cung ngay; tranh nào chưa về sẽ tới sau.",
+ lifeGo:"Vào cung ngay",
  /* Sổ mây (jcloud.js) */
  cloudNet:"Chưa với tới mây; đường xa thông là tự gửi lại.",
  cloudBusy:"Đang gửi sổ đi, lấy sổ về…",

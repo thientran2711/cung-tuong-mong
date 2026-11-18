@@ -39,7 +39,8 @@ function bandKeys(kind,age){if(kind==="consort")return age<=35?["consort","womid
  return [kind]}
 const FAV={};
 /* jreg: pools added by later modules (man, ct1–5…) are probed too */
-regEach(FPOOL,(k,L)=>{for(const f of (L||[])){try{const im=new Image();im.onload=()=>{FAV[f]=1};im.onerror=()=>{FAV[f]=0};im.src="img/"+f+".webp"}catch(e){}}},"FPOOL probe");
+/* "@W<n>" (j25 CW) = AVATARS.women[n], an inline face, not a file: it is available at once (never probed as img/@W<n>.webp: 33× 404, review/life-preload) */
+regEach(FPOOL,(k,L)=>{for(const f of (L||[])){try{if(f[0]==="@"){FAV[f]=(f[1]==="W"&&(AV.women||[])[+f.slice(2)])?1:0;continue}const im=new Image();im.onload=()=>{FAV[f]=1};im.onerror=()=>{FAV[f]=0};im.src="img/"+f+".webp"}catch(e){}}},"FPOOL probe");
 function fsrc(fc,fb){if(!fc||FAV[fc]===0)return fb||"";return "img/"+fc+".webp"}
 function poolOf(role){const pre={eunuch:"eun",emperor:"emp",thaihau:"th",official:"off"}[role];return pre?Object.keys(FPOOL).filter(k=>k.startsWith(pre)&&/\d$/.test(k)).flatMap(k=>FPOOL[k]):FPOOL[role]||[]}
 function facesPresent(){const U=new Set();if(!S)return U;const add=o=>{if(o&&o.fc)U.add(o.fc)};add(S);add(S.maid);add(S.emp);if(S.thF)U.add(S.thF);(S.men||[]).forEach(m=>{if(m.alive)add(m)});
