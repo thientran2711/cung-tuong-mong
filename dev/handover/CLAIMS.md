@@ -984,3 +984,4 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | REVIEW AG LATER delta (opus BIG) on review/ag-all-2-land + review/npc-chain-land | review/ag-all-2-land, review/npc-chain-land | C-AG | session_01UV1SzkmyAXYnCFY6utjvkF | RUNNING | 18/11 00:47Z |
 | ART mud decals fx-stain-bun-3..8 for cloth-xoc lv2/3 (sonnet; brief briefs/art-mud-decals.md) | CDN only | MAIN s41 | session_01UV1SzixsCCEiLAstC886hS | DONE: 6 decals on CDN, reports/mud-decals.md | 18/11 01:01Z |
 | batch s40b LIVE 3da5720a (main eb3675a6 → 3da5720a; ROLLBACK eb3675a6): makeup-lux r2v 0e6489f6 | review/batch-s40b | MAIN s41 | session_01UV1SzjA6P5mZskv3JKn3BV | LIVE | 18/11 01:09Z |
+| cloth-xoc r6 (c30 grey→own-hue wet + mud lv2/3 from bun-1..8; opus; brief briefs/cloth-xoc-r6.md) | review/cloth-xoc | MAIN s41 | session_01UV1SzjMK4RUBPdS1ZMuLds | RUNNING | 18/11 01:09Z |
