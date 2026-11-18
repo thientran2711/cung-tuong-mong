@@ -867,7 +867,7 @@ BAL.talk={health:4,praise:{o:60,div:5},praiseFail:2,secret:10,secretBond:30,goss
 /* AG-ALL day plan (jagday.js; design dev/handover/reports/ag-all.md §10, owner OD 17/11 ~13:40Z): at the start of each day every NPC draws her
    plan (buổi by buổi: place + deed + goal); replan = % chance to re-draw the rest of her day at a new buổi when her top need changed (need)
    or something touched her (touch: the player's deed aimed at her, her own deed failed, an event); no change → she keeps her plan */
-BAL.ag.day={on:1,replan:{need:25,touch:40},redecideCap:8/* ag2-perf A (owner OD L1637): at most this many consorts pick their buổi deed again per buổi, only those with a cause (jagday agRdCause); 0 = everyone every buổi */};
+BAL.ag.day={on:1,replan:{need:25,touch:40},redecideCap:0/* ag2-perf A (owner OD L1637): >0 = at most this many consorts pick their buổi deed again per buổi, only those with a cause (jagday agRdcCause); 0 = OFF: every consort picks every buổi (MAIN ROOT-52 18/11: no cap kept NPC deeds >= 95 % of 02466132 — 12/16/24/inf all ~78-85 %, the cause filter itself drops them — so consorts are never capped; 4x per-khắc still below live) */};
 /* AG-ALL part A acts (jagacts.js): cx = the consort cards of j2 the loop lacked — c cost, o odds, w gain (the player's card reads the SAME
    entry), need = what the act serves in BAL.ag.unit points (the agent's utility); maidR.below = her maid's lòng under which a reward is worth it;
    study = Sức for a lesson, g = points; thHelp / hhShield = Xin Thái hậu đỡ lời / Xin Hoàng hậu che chở (odds o + regard / div, gate min);
