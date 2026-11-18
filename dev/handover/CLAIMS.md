@@ -59,3 +59,4 @@ a18-t7t8-scan | scan only, no gens | W71 session_011xDdVRiT8Bh4RBNGVwjVBv | DONE
 t8-v0-reprompt-sample (+A/B fabric) | CDN _review only | W72 session_011xDdVNW3uEET1o4R4muEUH | RUNNING | 2026-11-18T17:48Z (Foreman C ROOT-29)
 owner-page-90 (90 nhân vật nữ states) | CDN _review + artifact WFjg87H9M2Ch5kebxT8BmJ | W73 (see STATUS) | RUNNING | 2026-11-18T17:59Z (Foreman C ROOT-29)
 ge-writers-w1 fix round 2 | review/ge-writers-w1 | E11a2 session_01DgYSWoSMJso8hGSAFMN9W6 (E11a archived) (reviewer E11r-w1 session_01DgYSWmTELUPTfw8Lqf2S4Y) | RUNNING | 2026-11-18T17:55Z (Foreman E ROOT #5 session_01DgYSWkmGWJMooE69PH8bHk)
+balance-final #2 (opus; balance chain + AG arms) | review/balance-final | session_01964izFstyuseJzaqthXyhP (#1 session_01964izCP81mLjwwymWk5t2Q rolled over 17:54Z) | RUNNING | 18/11 17:54Z | owner D #2
