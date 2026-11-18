@@ -374,7 +374,7 @@ Wake: s43 trigger trig_01DnGumsCEWwRGKJbfBNDc4D (:32) → DELETE it when the ROO
 - (18/11 03:36Z) OWNER: tai-mắt-báo badge/chip still not live → it is review/tinbao-ui (PASS r6r 220359da, r7r 58a8c39c), queued to land with C-AG ag-all-2. Asked C-AG #9 for status/ETA; place-stage SziagD5 told to build on tinbao-ui-r7r part.
 - (18/11 03:34Z) WAKE. Context 488k/1M = 49 % (ceiling 60 %) → s43 STOPS taking work; only relays until the owner opens the ROOT main (paste block s43 Lượt 7, unchanged).
 ### S43 FINAL STATE (for the ROOT main; supersedes the RUNNING list above)
-LIVE main 9393889d (life-preload, 03:37Z). ROLLBACK chain … → e24d5838 → 0527f921 → 9393889d. Landed by s43: greet-stranger, result-reason, smudge r16, cloth-xoc r6, staff-cap-apply, cloth switches.
+LIVE main 94a93759 (men-forbidden, 03:48Z). ROLLBACK chain … → 0527f921 → 9393889d → 94a93759. Landed by s43: greet-stranger, result-reason, smudge r16, cloth-xoc r6, staff-cap-apply, cloth switches.
 RUNNING:
 - REVIEW life-preload SzjKPEGVua6n1rUEV2S: PASS c743265c on e24d5838 → asked re-merge 0527f921 → PASS → LAND FIRST (URGENT); then archive it + worker SzgmQZwF1XMsH7EzhLL.
 - REVIEW men-forbidden Szh3jq9brqAHDsVQitM: re-gating 8f27d7be (merge of 95d5f767) → will need main re-merge → land; worker SziLuyrJEqfUqguNP1W idle.
@@ -393,3 +393,4 @@ S43 LESSONS: check OD rulings, not only live code, before giving her numbers (se
 - (18/11 03:41Z) place-stage e40b8df3 SHOTS LOOKED (Fold sbs: count top-left, name top-right, no plaque, figures full size; entry line in .kmnote chip top-center wraps 2 lines on Fold) → sent owner. Chip will switch to the tinbao part once tinbao lands (after ag-all-2). men-forbidden PASS bd8547f2 is FF of 0527f921 only → reviewer Szh3jq9 told to merge 9393889d.
 - (18/11 03:44Z) look-fx R4 00d54551: muội lv3 wash + cào 1.4× OK by eye, but sheet had EMPTY c01 mirror faces (cào lv1/lv2) + blank c01 stage cells → sent back (check real bug vs harness), not sent to owner. keep pad BAL.looks.keep.pad=1.2. Owner art plan → ORDER Foreman C art-matrix (03:51Z).
 - (18/11 03:56Z) owner on place-stage: chip 5 s auto-hide; figures lower (name plate near bottom edge), head inside frame else scale → SziagD5. C-AG lander note: dev/test/staff-cap-apply.js row 3 (identity pool, FAV 25) FAILS on live 9393889d — pre-existing; ROOT main to give it to a small fix worker (staff-cap family).
+- (18/11 03:48Z) LIVE: main 9393889d → 94a93759 (men-forbidden: menLawful one rule + menLoadFix; BIG reviewer Szh3jq9 PASS). ROLLBACK 9393889d. Reviewer + worker SziLuyr archived.
