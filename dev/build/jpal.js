@@ -42,8 +42,8 @@ palFix=function(){if(!S||!rivals)return;rivals.forEach(ensureT2);const all=[S].c
  for(const p of heads.slice().sort((a,b)=>rkOf(b)-rkOf(a)))if(p.pal==null){let f=free();
   if(f<0){const lone=rivals.find(v=>v.palLone&&v.pal!=null);if(lone){f=lone.pal;lone.pal=null;lone.palLone=0;delete occ[f]}}
   if(f<0)continue;p.pal=f;occ[f]=key(p);if(p===S)S.palCer=1;else{if(p.palWait)moved.push(p);p.palWait=0;p.resHead=null}}
- /* SIDE HALLS (owner 17/11 04:08Z/04:20Z, BAL.res): each chủ vị (Tần/Phi/Quý phi, the player too) takes at most resCap() co-residents,
-    BAL.res.side in each hall of BAL.res.halls (one room each). The player below Tần is housed exactly like an NPC (no more 'she keeps
+ /* SIDE HALLS (owner 17/11 04:08Z/04:20Z, BAL.res; QP alone 18/11): each host chủ vị (Tần/Phi by BAL.res.side, the player too) takes at most
+    resCap(h) co-residents, resSide(h) in each hall of BAL.res.halls (a room fills before the next opens). The player below Tần is housed exactly like an NPC (no more 'she keeps
     Ngọc Thanh các'); lower ranks go to the chủ vị with the FEWEST co-residents so no palace stands empty while another is full;
     Ngọc Thanh các (her) / a lone empty palace (an NPC, palLone) only when every chủ vị is full. */
  const HL=BAL.res.halls;
