@@ -210,11 +210,11 @@ function wkNpcRaw(v,k){if(!(typeof mg2On==="function"&&mg2On()))return R(11);con
  return mgNpcRaw(g,v,v?{occ:"hoc"}:{occ:"hoc",d:0})}
 function wkNpcUse(v){const i=v.inv.findIndex(e=>e.wk&&!e.h);if(i<0)return;const w=v.inv[i].wk;if(!npcWhy("wkUse",{p:v,w}))return;/* npc-purpose G2c: she uses her work for her own aim (favour, a friend, need of bạc, a grudge) */
  const o=npwPick(wkUseOpts(v,w),x=>x.s);if(!o)return;
- if(o.k==="poison"){if(roll(BAL.ag.why.wk.poisonP)){const r=wkPoison(v,o.t,i);if(o.t===S&&r)log(r)}return}
+ if(o.k==="poison"){if(roll(BAL.ag.why.g2wk.poisonP)){const r=wkPoison(v,o.t,i);if(o.t===S&&r)log(r)}return}
  if(o.k==="sell"){wkSell(v,i);return}
  const r=o.t;if(r){const t=wkGive(v,r,i);if(r===S&&t)log(t)}}
 function wkGrudge(v,t){return t===S?Math.max(v.ghen||0,hostility(v,S)):hostility(v,t)}
-function wkUseOpts(v,w){const B=BAL.ag.why.wk,L=[];
+function wkUseOpts(v,w){const B=BAL.ag.why.g2wk,L=[];
  if(w.kind==="mon"&&v.malice>B.malice&&v.inv.some(e=>e.k==="hacdinh"&&!e.h)){const t=npwPick(others(v).filter(t=>t.alive&&!t.out),t=>wkGrudge(v,t)-B.host);if(t)L.push({k:"poison",t,s:wkGrudge(v,t)})}
  if(v.sung<B.sungHi&&wkEval(v,w,"emp").ok)L.push({k:"emp",t:"emp",s:B.emp+(B.sungHi-v.sung)});
  if(!S.thDead&&(v.th||0)<B.thWant&&wkEval(v,w,"th").ok)L.push({k:"th",t:"th",s:B.th+(B.thWant-(v.th||0))/2});
@@ -260,8 +260,8 @@ function illHTML(){return `<div class="ph"><span>Đồ cấm: độc dược kh�
 (function(){const i0=invHTML;invHTML=function(){const h=i0.apply(this,arguments);const j=h.indexOf('</div>',h.indexOf('class="rbtn"'));return j<0?h+illHTML():h.slice(0,j+6)+illHTML()+h.slice(j+6)}})();
 document.addEventListener("click",ev=>{const b=ev.target.closest("[data-ill]");if(!b||b.disabled)return;ev.stopPropagation();illAsk(b.dataset.ill)},true);
 /* NPCs: the malicious look for poison by the same routes */
-function illRouteW(v,r,k){const B=BAL.ag.why.ill;if(r==="ally"){let a=0;for(const x of illAllies(v))a=Math.max(a,aff(v,x));return B.ally+a}if(r==="maid")return v.maid?v.maid.loyal||0:0;return Math.max(1,((v.bac||0)-IROUTE[r].cost(k))/B.bacDiv)}
+function illRouteW(v,r,k){const B=BAL.ag.why.g2ill;if(r==="ally"){let a=0;for(const x of illAllies(v))a=Math.max(a,aff(v,x));return B.ally+a}if(r==="maid")return v.maid?v.maid.loyal||0:0;return Math.max(1,((v.bac||0)-IROUTE[r].cost(k))/B.bacDiv)}
 (function(){const m0=npcMonthly;npcMonthly=function(v){const ev=m0.apply(this,arguments);try{const iw=v&&v.alive&&!v.out&&!v.confined&&!(v.inv||[]).some(e=>WILL[e.k])?npcWhy("illSeek",{p:v}):null;/* npc-purpose G2c: she seeks poison only for a person she hates; the kind fits the harm she wants */
-  if(iw&&roll(BAL.ag.why.ill.p)){const g=wkGrudge(v,iw.tgt),B=BAL.ag.why.ill;const k=npwPick(["hacdinh","xahuong","botngua"],k=>k==="hacdinh"?g-B.kill:k==="xahuong"?(iw.tgt.preg?g:0):B.petty)||"botngua";
+  if(iw&&roll(BAL.ag.why.g2ill.p)){const g=wkGrudge(v,iw.tgt),B=BAL.ag.why.g2ill;const k=npwPick(["hacdinh","xahuong","botngua"],k=>k==="hacdinh"?g-B.kill:k==="xahuong"?(iw.tgt.preg?g:0):B.petty)||"botngua";
   const rs=["maid","thaiy","cho","ally"].filter(r=>IROUTE[r].ks.includes(k)&&(r!=="ally"||illAllies(v).some(a=>a.inv.some(e=>e.k===k)))&&(r==="ally"||v.bac>=IROUTE[r].cost(k)+20)&&(r!=="maid"||(v.maid&&v.maid.loyal>=BAL.loy.low))&&(r!=="cho"||!v.confined));
   if(rs.length){const t=illBuy(v,npwPick(rs,r=>illRouteW(v,r,k))||rs[0],k);if(t&&/không thành/.test(t)&&(illWitness(v)===S))log(t)}}}catch(x){}return ev}})();

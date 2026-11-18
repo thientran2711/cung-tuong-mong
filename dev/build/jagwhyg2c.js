@@ -16,23 +16,23 @@ npwReg("emoKid",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(k,c)=>{const B=BAL.ag.why.em
  const x=npwPick([{s:e.w===c.W&&e.k==="vui"?e.v:0,r:"mẫu thân vui vẻ, chơi đùa cùng con"},{s:sib*B.kidSib,r:"được chơi cùng anh chị em"},{s:pets*B.kidPet,r:"được chơi với thú nuôi trong cung"}],y=>y.s);
  return x?{s:x.s,r:x.r}:null}});
 /* ---- jil: the item market (buy back, buy, ask back) ---- */
-npwReg("ilBack",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(o,c)=>{const W=BAL.ag.why.il;return {s:W.back+ilVal(c.x.e)/W.valDiv,r:"muốn chuộc lại "+ilNm(c.x.e)}}});
+npwReg("ilBack",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(o,c)=>{const W=BAL.ag.why.g2il;return {s:W.back+ilVal(c.x.e)/W.valDiv,r:"muốn chuộc lại "+ilNm(c.x.e)}}});
 npwReg("ilBuy",{grp:"G2c",who:c=>liveRivals(true).filter(v=>v!==c.o),why:(v,c)=>{const s=ilWant(v,c.x,c.o);return s>0?{s,r:"muốn có "+ilNm(c.x.e)}:null}});
-npwReg("ilConf",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(o,c)=>{const W=BAL.ag.why.il;const s=W.conf+ilVal(c.x.e)/W.valDiv-Math.max(0,netQ(o,"timid"))*W.timid;return s>0?{s,r:"muốn xin lại "+ilNm(c.x.e)}:null}});
+npwReg("ilConf",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(o,c)=>{const W=BAL.ag.why.g2il;const s=W.conf+ilVal(c.x.e)/W.valDiv-Math.max(0,netQ(o,"timid"))*W.timid;return s>0?{s,r:"muốn xin lại "+ilNm(c.x.e)}:null}});
 /* ---- j83: her handmade work, poison seeking ---- */
 npwReg("wkUse",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(v,c)=>{let b=0;for(const o of wkUseOpts(v,c.w))b=Math.max(b,o.s);return b>0?{s:b,r:"dùng đồ tự làm cho việc riêng"}:null}});
-npwReg("illSeek",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(v,c)=>{const B=BAL.ag.why.ill;if((v.malice||0)<=B.malice)return null;
+npwReg("illSeek",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(v,c)=>{const B=BAL.ag.why.g2ill;if((v.malice||0)<=B.malice)return null;
  const t=npwPick(others(v).filter(t=>t.alive&&!t.out),t=>wkGrudge(v,t)-B.host);if(!t)return null;return {s:wkGrudge(v,t)*mindW(v,"scheme"),t,r:"căm "+npwNm(t)+", tìm độc dược"}}});
 /* ---- jrcp: allergy accusation, maid's gossip, a friend's pattern, Thái hậu's sutra ---- */
-npwReg("rcpAcc",{grp:"G2c",cd:"rcpAcc",who:c=>c.p?[c.p]:[],why:(q,c)=>{const B=BAL.ag.why.rcp;if(q===c.v)return {s:B.acc+Math.max(0,hostility(q,c.a)),t:c.a,r:"phát bệnh vì đồ "+npwNm(c.a)+" dâng"};
+npwReg("rcpAcc",{grp:"G2c",cd:"rcpAcc",who:c=>c.p?[c.p]:[],why:(q,c)=>{const B=BAL.ag.why.g2rcp;if(q===c.v)return {s:B.acc+Math.max(0,hostility(q,c.a)),t:c.a,r:"phát bệnh vì đồ "+npwNm(c.a)+" dâng"};
  if(q.queen)return {s:B.acc,t:c.a,r:"giữ phép lục cung"};const h=hostility(q,c.a);return h>=B.accHost?{s:h,t:c.a,r:"oán "+npwNm(c.a)+", nhân cớ tố cáo"}:null}});
-npwReg("rcpGos",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(m,c)=>{const B=BAL.ag.why.rcp,l=(m.loyal||0)-BAL.loy.mid;return l>0?{s:B.gos+l,r:"lo cho chủ, dò hỏi khẩu vị người trên"}:null}});
-npwReg("rcpGift",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(v,c)=>{const r=rel(v,S)||0;return r>=BAL.rcp.giftRel?{s:BAL.ag.why.rcp.gift+r,t:S,r:"thân với ngươi, chép mẫu gửi tặng"}:null}});
-npwReg("rcpTh",{grp:"G2c",who:c=>S.thDead?[]:[S.thO||(S.thO={})],why:(p,c)=>{const B=BAL.ag.why.rcp,v=(S.th||0)-B.thHi;return v>=0?{s:B.thBase+v,t:S,r:"thương ngươi hiếu thuận"}:null}});
+npwReg("rcpGos",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(m,c)=>{const B=BAL.ag.why.g2rcp,l=(m.loyal||0)-BAL.loy.mid;return l>0?{s:B.gos+l,r:"lo cho chủ, dò hỏi khẩu vị người trên"}:null}});
+npwReg("rcpGift",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(v,c)=>{const r=rel(v,S)||0;return r>=BAL.rcp.giftRel?{s:BAL.ag.why.g2rcp.gift+r,t:S,r:"thân với ngươi, chép mẫu gửi tặng"}:null}});
+npwReg("rcpTh",{grp:"G2c",who:c=>S.thDead?[]:[S.thO||(S.thO={})],why:(p,c)=>{const B=BAL.ag.why.g2rcp,v=(S.th||0)-B.thHi;return v>=0?{s:B.thBase+v,t:S,r:"thương ngươi hiếu thuận"}:null}});
 /* ---- jpet: Hoàng hậu's and a man's pet gifts ---- */
-npwReg("petHh",{grp:"G2c",who:c=>{const q=queenP();return q?[q]:[]},why:(q,c)=>{const B=BAL.ag.why.pet,v=(c.p.hh||0)-B.hhMin;return v>=0?{s:B.base+v,t:c.p,r:"ưng ý "+npwNm(c.p)+", ban thú nuôi"}:null}});
-npwReg("petMan",{grp:"G2c",who:c=>(S.men||[]).filter(m=>m.alive),why:(m,c)=>(m.tinh||0)>=BAL.ag.why.pet.manTinh?{s:m.tinh,t:S,r:"tình sâu với ngươi, gửi lén thú nhỏ"}:null});
+npwReg("petHh",{grp:"G2c",who:c=>{const q=queenP();return q?[q]:[]},why:(q,c)=>{const B=BAL.ag.why.g2pet,v=(c.p.hh||0)-B.hhMin;return v>=0?{s:B.base+v,t:c.p,r:"ưng ý "+npwNm(c.p)+", ban thú nuôi"}:null}});
+npwReg("petMan",{grp:"G2c",who:c=>(S.men||[]).filter(m=>m.alive),why:(m,c)=>(m.tinh||0)>=BAL.ag.why.g2pet.manTinh?{s:m.tinh,t:S,r:"tình sâu với ngươi, gửi lén thú nhỏ"}:null});
 /* ---- jthaiy: the physician leaks the mạch án; a rival buys the physician ---- */
-npwReg("thyLeak",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(d,c)=>{const B=BAL.ag.why.thy,a=d.af||{};const s=B.leak+(a[c.by.id]||0)-Math.max(0,a.me||0);return s>0?{s,t:c.by,r:"nhận bạc của "+npwNm(c.by)+", lén báo mạch án"}:null}});
-npwReg("thyTell",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(d,c)=>({s:BAL.ag.why.thy.tell+c.me,t:S,r:"quý ngươi, hạ giọng kể mạch án"})});
+npwReg("thyLeak",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(d,c)=>{const B=BAL.ag.why.g2thy,a=d.af||{};const s=B.leak+(a[c.by.id]||0)-Math.max(0,a.me||0);return s>0?{s,t:c.by,r:"nhận bạc của "+npwNm(c.by)+", lén báo mạch án"}:null}});
+npwReg("thyTell",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(d,c)=>({s:BAL.ag.why.g2thy.tell+c.me,t:S,r:"quý ngươi, hạ giọng kể mạch án"})});
 npwReg("thyBribe",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(v,c)=>{const t=npwPick(c.tg||[],x=>hostility(v,x));if(!t)return null;return {s:hostility(v,t)*mindW(v,"scheme"),t,r:"oán "+npwNm(t)+", mua chuộc thái y"}}});

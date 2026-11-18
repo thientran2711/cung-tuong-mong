@@ -2488,7 +2488,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "luxury / plain dress / veil gossip",
-"done": "npwPick(liveRivals(true).filter(v=>v!==p),v=>hostility(v,p)-BAL.ag.why.lux.gos)"
+"done": "npwPick(liveRivals(true).filter(v=>v!==p),v=>hostility(v,p)-BAL.ag.why.g2lux.gos)"
 },
 {
 "f": "jinv.js",
@@ -2496,7 +2496,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "luxury / plain dress / veil gossip",
-"done": "npwPick(liveRivals(true).filter(v=>v!==p),v=>aff(v,p)-BAL.ag.why.lux.praise)"
+"done": "npwPick(liveRivals(true).filter(v=>v!==p),v=>aff(v,p)-BAL.ag.why.g2lux.praise)"
 },
 {
 "f": "jaudit.js",

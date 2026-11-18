@@ -109,7 +109,7 @@ function ilCensus(){if(!S)return;const I=ilS();const now={};const seen=new Set()
 function ilOut(p,e){const i=(p.inv||[]).indexOf(e);if(i>=0){p.inv.splice(i,1);return}const w=p.wd;if(w)for(const sl of ["tram","y"])if(w[sl]===e){w[sl]=null;return}if(p.vl===e){p.vl=null;return}
  if(p.wdPawn){const j=p.wdPawn.findIndex(P=>P&&P.e===e);if(j>=0)p.wdPawn.splice(j,1)}}
 /* ---- weekly: the box moves on (returns, ransom, atonement, mending, resale) ---- */
-function ilWant(v,x,o,pr){const W=BAL.ag.why.il;if(!v||v===o||(v.bac||0)<(pr!=null?pr:x.pr)+W.spare)return 0;const has=(v.inv||[]).some(e=>e&&e.k===x.e.k);
+function ilWant(v,x,o,pr){const W=BAL.ag.why.g2il;if(!v||v===o||(v.bac||0)<(pr!=null?pr:x.pr)+W.spare)return 0;const has=(v.inv||[]).some(e=>e&&e.k===x.e.k);
  return (has?0:W.lack)+(o&&o!==v?Math.max(0,hostility(v,o))*W.hostW:0)}
 function ilWeek(){if(!S||S.dead)return;const I=ilS(),B=BAL.il;let ask=false;
  for(const x of I.box.slice()){const o=ilP(x.own);const live=o&&ilAlive(o)&&!(o!==S&&o.out);
