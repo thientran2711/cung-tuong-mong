@@ -4,20 +4,34 @@
    at .4 + RD97L rare at .11. Numbers: jbalbd.js (ONE CORE). Helpers RDW / rdRel / rdOan / RD_FL from jroad.js / jrd_tt.js (same script).
    LEGACY (law 6c): the old premises bd_hoa / bd_ngua / bd_tuc / bd_hoang (jorigins.js) and their alias chapters (the loop below, moved verbatim
    from jrd_nc.js) stay registered so a saved life on one of them plays on to its .11; they are no longer dealt to NEW lives (BD_OLD filter). */
+/* the .4 premise arcs go through j67 arcFx (BAL.arc.fx); a stand-alone scan of this file has none */
+const bdArc=(id,d)=>typeof arcFx==="function"?arcFx(id,d):d;
 const BD_OLD=["bd_hoa","bd_ngua","bd_tuc","bd_hoang"];
 /* a new life's premise pool (j67 arcIds67 → jst14 roll, j67 phase-1 frame): old bd premises out; saves keep the ids already written in their plan */
-(function(){const a0=arcIds67;arcIds67=function(o){const r=a0.apply(this,arguments);if(o!=="bd")return r;const n=r.filter(id=>!BD_OLD.includes(id));return n.length?n:r}/* until a new road exists the old ones stay dealt (no empty pool) */})();
+(function(){if(typeof arcIds67!=="function")return;const a0=arcIds67;arcIds67=function(o){const r=a0.apply(this,arguments);if(o!=="bd")return r;const n=r.filter(id=>!BD_OLD.includes(id));return n.length?n:r}/* until a new road exists the old ones stay dealt (no empty pool) */})();
 /* ---------- BDP: the steppe people of bd's roads (law 6b, ROAD_MAP §5.4) — one living state per life, kept in the road flag book ----------
    where: "tn" thảo nguyên · "ai" biên ải · "kinh" kinh thành · "nguc" ngục; alive 1/0; met 1 once she has dealt with them. Chapters move them. */
-const BDP={lie:{n:"Hô Diên Liệt",r:"thúc phụ",w:"tn"},olac:{n:"Ô Lặc",r:"em trai",w:"tn"},thatmoc:{n:"Thát Mộc",r:"vệ sĩ sứ đoàn",w:"tn"},
- bado:{n:"Ba Đồ",r:"phu ngựa Thượng tứ viện",w:"kinh"},tuyetcau:{n:"Tuyết Câu",r:"ngựa của ngươi",w:"kinh"},
- asnc:{n:"A Sử Na Cát",r:"trưởng lão bộ lạc biên",w:"ai"},phong:{n:"Thác Bạt Phong",r:"người đã đính ước",w:"tn"},kd:{n:"Khả đôn",r:"mẹ",w:"tn"}};
+const BDP={lie:{n:"Hô Diên Liệt",r:"thúc phụ",w:"tn",want:"ngồi vào kim trướng, được Đại Hy công nhận",man:1},
+ olac:{n:"Ô Lặc",r:"em trai",w:"tn",want:"giữ lều cha, sống sót qua tay thúc phụ",man:1},
+ thatmoc:{n:"Thát Mộc",r:"vệ sĩ sứ đoàn",w:"tn",want:"một bộ lạc của riêng mình",man:1},
+ bado:{n:"Ba Đồ",r:"phu ngựa Thượng tứ viện",w:"kinh",want:"được ghi tên chính ngạch, một ngày về lại thảo nguyên"},
+ tuyetcau:{n:"Tuyết Câu",r:"ngựa của ngươi",w:"kinh",want:"cỏ và gió"},
+ asnc:{n:"A Sử Na Cát",r:"trưởng lão bộ lạc biên",w:"ai",want:"cứu bộ lạc qua mùa đông",man:1},
+ phong:{n:"Thác Bạt Phong",r:"người đã đính ước",w:"tn",want:"giữ lời thề bên đống đá",man:1},
+ kd:{n:"Khả đôn",r:"mẹ",w:"tn",want:"giữ con trai mình sống, gặp lại con gái"}};
 const bdP=(id,k,v)=>{const key="bd.p."+id+"."+k;if(v!=null)RD_FL(key,v);const x=RD_FL(key);
  if(x)return x;if(k==="alive")return 1;if(k==="w")return BDP[id].w;return 0};
 const bdAlive=id=>bdP(id,"alive")!==-1;/* dead = -1 (0 is the book's "unset") */
-const bdKill=id=>{bdP(id,"alive",-1);return ""};
-const bdMove=(id,w)=>{bdP(id,"w",w);return ""};
+/* a steppe man who is IN the capital stands in the world like every man (S.men, jmen schedule: an embassy member keeps the envoy's
+   places and lawful reasons), and leaves it when he goes home or dies (law 6b). Women guests and the stable groom: see report FOR E. */
+const bdMan=id=>{try{if(typeof menInit==="function")menInit()}catch(e){}if(!S.men||!BDP[id]||!BDP[id].man)return"";const mid="mbd_"+id,M=BAL.road.bd.man;
+ const on=bdAlive(id)&&bdP(id,"w")==="kinh";const had=S.men.find(m=>m.id===mid);if(had){if(!on)had.alive=bdAlive(id),had.away=1;else had.away=0;return""}
+ if(on)S.men.push({id:mid,role:"Sứ thần",rw:"sứ thần",haunts:["thu"],age:M.age[id]||M.age.d,name:BDP[id].n,trait:M.trait[id]||"cẩn trọng",loyal:M.loyal,af:0,tinh:0,letters:0,trysts:0,alive:true,knowsMe:[],bdp:id,known:1});return""};
+const bdKill=id=>{bdP(id,"alive",-1);bdMan(id);return ""};
+const bdMove=(id,w)=>{bdP(id,"w",w);bdMan(id);return ""};
 const bdMeet=id=>{bdP(id,"met",1);return ""};
+/* the book, as the chapter text and the later grand-ending wave read it */
+const bdWhere=id=>({tn:"thảo nguyên",ai:"biên ải",kinh:"kinh thành",nguc:"ngục"})[bdP(id,"w")]||"";
 /* the .4 rare rows of the bd premises (j97 R97L shape; j97 appends them; numbers BAL.arc.rare.<road>) */
 const BD97=[];
 RDQ.bdOlac=()=>bdAlive("olac");RDQ.bdLie=()=>bdAlive("lie");
@@ -39,7 +53,7 @@ RDQ.bdOlac=()=>bdAlive("olac");RDQ.bdLie=()=>bdAlive("lie");
 const BDCF=k=>BAL.road.bd.conf[k];
 const bdConfine=k=>{S.confined=Math.max(S.confined||0,BDCF(k));return ""};
 RTHEME67.bd_san="emp";
-ARC67.bd_san=arcFx("bd_san",{o:"bd",t:"Mùa thu săn",w:"emp",sj:"cuộc săn thu ở Bắc Uyển",cast(A){return rdCast(A,["v"])},
+ARC67.bd_san=bdArc("bd_san",{o:"bd",t:"Mùa thu săn",w:"emp",sj:"cuộc săn thu ở Bắc Uyển",cast(A){return rdCast(A,["v"])},
  g:"Hoàng thượng mở cuộc săn thu ở Bắc Uyển. Cả triều chờ xem công chúa {land} cưỡi ngựa ra sao. Một mũi tên của ngươi sẽ định ai nhìn thấy ngươi, và nhìn bằng con mắt nào.",
  p:[["s1","s2"],["c1","c2","G.rumor"],["t1"],["x1"]],
  B:{s1:{h:"Phi tần ngồi xe",w:"emp",t:"Quan Thái bộc tâu: theo lệ, phi tần đi săn ngồi xe che rèm. Tuyết Câu, con ngựa trắng ngươi mang từ {land}, đứng trong chuồng Thượng tứ viện, cương còn treo trên vách.",o:[
@@ -312,7 +326,7 @@ RD97L.push(rdRare({a:"bd_san_11",tag:"Hoàng thượng trao cương ngựa ngự
    ===================================================================================================================================== */
 RTHEME67.bd_soi="emp";
 const BDSON=()=>{try{return !!son67()}catch(e){return false}};
-ARC67.bd_soi=arcFx("bd_soi",{o:"bd",t:"Sói đầu đàn",w:"emp",sj:"kim trướng của {land}",cast(A){return rdCast(A,["v"])},
+ARC67.bd_soi=bdArc("bd_soi",{o:"bd",t:"Sói đầu đàn",w:"emp",sj:"kim trướng của {land}",cast(A){return rdCast(A,["v"])},
  g:"{pv} ngã ngựa trong buổi săn mùa đông, nằm mê man trong kim trướng. Thúc phụ Hô Diên Liệt sai sứ vào kinh, xin Đại Hy công nhận mình giữ trướng. Em trai Ô Lặc của ngươi mới mười sáu tuổi, gửi thư cầu cứu. Hoàng thượng hỏi ngươi.",
  p:[["s1","s2"],["c1","c2","G.rumor"],["t1"],["x1"]],
  B:{s1:{h:"Tin dữ từ thảo nguyên",w:"emp",t:"Người đưa tin quỳ ngoài cung, áo lông còn đọng tuyết: {pv} ngã ngựa, chưa tỉnh. Thúc phụ Hô Diên Liệt đã dời lều mình vào sát kim trướng.",o:[
@@ -387,13 +401,13 @@ rdDef("bd_soi",6,{t:"Sứ giả mang dao",w:"emp",sj:"Thát Mộc của sứ đo
  g:"Sứ đoàn thúc phụ vào kinh dâng cống mùa hạ. Trong đoàn có Thát Mộc, vệ sĩ của thúc phụ, giắt một con dao cong trong ủng. Người của Ô Lặc cũng đang ở Hội Đồng quán.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Ba Đồ thấy con dao",w:"maid",if:RDW(1),t:"Phu ngựa {land} ở Thượng tứ viện nhắn: lúc dắt ngựa của sứ đoàn, y thấy Thát Mộc lau một con dao cong, lưỡi bôi thứ gì đen đen.",o:[
-  {n:"Cho người canh người của Ô Lặc",f:"guard",wx:"em trai có người giữ ở kinh",lx:"Thát Mộc biết bị canh",rt:"Hai thị vệ cung ngươi đứng ngoài phòng người của Ô Lặc.",go:()=>bdMeet("thatmoc")},
-  {n:"Báo Hồng Lô tự khám sứ đoàn",f:"law",wx:"việc theo phép",lx:"thúc phụ nói Đại Hy làm nhục sứ",rt:"Hồng Lô tự khám, thu được con dao.",rf:"Hồng Lô tự khám, không thấy dao đâu."},
-  {n:"Mời Thát Mộc vào cung uống rượu",f:"turn",wx:"biết mặt kẻ cầm dao",lx:"liều",rt:"Thát Mộc đến, uống, nhìn ngươi lâu.",go:()=>bdMeet("thatmoc")}]},
+  {n:"Cho người canh người của Ô Lặc",f:"guard",wx:"em trai có người giữ ở kinh",lx:"Thát Mộc biết bị canh",rt:"Hai thị vệ cung ngươi đứng ngoài phòng người của Ô Lặc.",go:()=>{bdMove("thatmoc","kinh");return bdMeet("thatmoc")}},
+  {n:"Báo Hồng Lô tự khám sứ đoàn",f:"law",go:()=>bdMove("thatmoc","kinh"),wx:"việc theo phép",lx:"thúc phụ nói Đại Hy làm nhục sứ",rt:"Hồng Lô tự khám, thu được con dao.",rf:"Hồng Lô tự khám, không thấy dao đâu."},
+  {n:"Mời Thát Mộc vào cung uống rượu",f:"turn",wx:"biết mặt kẻ cầm dao",lx:"liều",rt:"Thát Mộc đến, uống, nhìn ngươi lâu.",go:()=>{bdMove("thatmoc","kinh");return bdMeet("thatmoc")}}]},
  s2:{h:"Người của Ô Lặc bị thương",w:"maid",if:RDW(0),t:"Đêm đầu tiên, người đưa tin của Ô Lặc bị đâm ở hành lang Hội Đồng quán, may chưa chết. Ai cũng biết là Thát Mộc, không ai thấy.",o:[
-  {n:"Đưa người bị thương vào nhờ thái y",f:"guard",wx:"cứu được người",lx:"cả cung biết ngươi dính vào",rt:"Thái y khâu vết thương. Y sống.",rf:"Thái y đến muộn, y mê man."},
-  {n:"Xin Hình bộ điều tra",f:"law",wx:"việc theo phép",lx:"chậm",rt:"Hình bộ cho người đến Hội Đồng quán."},
-  {n:"Sai người theo dõi Thát Mộc",f:"turn",wx:"biết hắn đi đâu",lx:"người theo có thể bị giết",rt:"Thát Mộc ra chợ, gặp một người lạ ở hiệu thuốc."}]},
+  {n:"Đưa người bị thương vào nhờ thái y",f:"guard",go:()=>bdMove("thatmoc","kinh"),wx:"cứu được người",lx:"cả cung biết ngươi dính vào",rt:"Thái y khâu vết thương. Y sống.",rf:"Thái y đến muộn, y mê man."},
+  {n:"Xin Hình bộ điều tra",f:"law",go:()=>bdMove("thatmoc","kinh"),wx:"việc theo phép",lx:"chậm",rt:"Hình bộ cho người đến Hội Đồng quán."},
+  {n:"Sai người theo dõi Thát Mộc",f:"turn",go:()=>bdMove("thatmoc","kinh"),wx:"biết hắn đi đâu",lx:"người theo có thể bị giết",rt:"Thát Mộc ra chợ, gặp một người lạ ở hiệu thuốc."}]},
  c1:{h:"Thuốc độc ở hiệu thuốc",w:"maid",t:"Hiệu thuốc phía tây chợ bán cho Thát Mộc một gói rễ ô đầu. Chủ hiệu sợ, nói với cung nữ của ngươi.",o:[
   {n:"Bỏ bạc mua lời khai của chủ hiệu",wx:"có lời khai",lx:"bạc ra",rt:"Chủ hiệu ký lời khai, giấu tên."},
   {n:"Bảo chủ hiệu tráo gói thuốc lần sau",wx:"dao của Thát Mộc thành vô hại",lx:"chủ hiệu run",rt:"Lần sau, Thát Mộc mua phải bột rễ cam thảo.",rf:"Chủ hiệu tráo vụng, Thát Mộc nghi."},

@@ -5,6 +5,7 @@ BAL.road.bd=BAL.road.bd||{};
 /* ---- lead block (E14): bd_san, bd_soi ---- */
 /* the option shapes (law 2 / 3: every option of a beat has a cost and a level gain; odds harder with rank, law 5: −rk per rank step) */
 BAL.road.bd.rk=1;
+BAL.road.bd.man={age:{d:30,lie:48,olac:17,thatmoc:32,asnc:58,phong:24},trait:{thatmoc:"tham vọng",phong:"trung hậu",olac:"cẩn trọng"},loyal:60};/* steppe men in the capital (S.men) */
 BAL.road.bd.conf={san10:2,soi8:2};/* months of cấm túc a lost chapter puts her under (S.confined) */
 const bdR=(st,w,l,c,b)=>({c:c||{suc:-2},o:[b||45,["d",st,5],["-m","rank",BAL.road.bd.rk]],w,l,sc:1});/* risky: odds on one stat */
 const bdS=(c,w)=>({c,w});/* sure: a cost and a smaller gain */
