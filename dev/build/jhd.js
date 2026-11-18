@@ -19,7 +19,7 @@
    ============================================================================================================== */
 Object.assign(BAL,{hd:{
  ink:{hd_mai:.67,hd_dao:.64,hoadien_bac:.63,hd_diep:.56,hd_lan:.59,hd_sen:.54,hd_maudon:.55,hd_phuong:.43},/* r3 (owner ~23:40Z "cùng 13.5 mà có cái to cái nhỏ"): share of each sprite's box that is INK (alpha > 40, measured once offline on the 8 sprites; the sprites are already trimmed to their mark, so the box = the visible bbox) */
- tone:{on:1,sat:.9,lift:.2,op:.9,metal:{h0:28,h1:62,s:.35,v:.55}},/* r3 (owner 00:40Z "vẫn tươi nhưng nhạt màu lại … đừng trầm"): ON-SKIN pastel of every hoa điền, baked once into the layer canvas: colour lifted toward white by lift (no darkening, no multiply), saturation kept at sat, opacity op so the skin shows a little; gold / metal pixels (hue h0..h1 deg, s, v) stay untouched and crisp */
+ tone:{on:1,sat:.85,metal:{h0:28,h1:62,s:.35,v:.55}},/* r3 (owner 01:18Z "hạ cái saturate là được, pha màu vô còn chi"): tone = SATURATION ONLY, baked once into the layer canvas: each non-metal pixel keeps its luminance and its hue, its distance from that grey is scaled by sat (no darken, no lift to white, opacity untouched). Gold / metal pixels (hue h0..h1 deg, s, v) are left alone. on:0 = off */
  sizeByRank:[.115,.115,.115,.125,.125,.135,.135,.135],/* r3 (owner ~23:55Z): size = share of face width BY THE WEARER'S RANK, indexed like RANKS (Đáp ứng, Thường tại, Quý nhân = 11.5 % · Tần, Phi = 12.5 % · Quý phi, Hoàng quý phi, Hoàng hậu = 13.5 %); BAL.hd.size is the fallback. The equal-visible-area rule (inkK) then sizes every design inside that share */
  inkK:.6,inkDef:.6,    /* every design gets the same visible INK AREA = inkK × (size × face width)² (a design with less ink per box is drawn bigger) */
  boxW:1.5,boxH:1.5,    /* … still capped: width ≤ boxW × size × face width, height ≤ boxH × size × face width (forehead cap for tall designs). */
@@ -73,9 +73,8 @@ function hdNpc(v,h,sk){try{const L=hdOwned(v);if(!L.length)return null;let cap=M
   const r=i=>(wdHash(String(h)+":hd"+i)%1000)/1000;const q=Math.max(0,Math.min(B.npcCap,c+(r(1)+r(2)-1)*B.npc.spread));return{k:e.k,q:+q.toFixed(3)}}catch(x){return null}}
 
 /* ---------- forehead anchor (canvas coords) of a face drawn at img {x,y,w,h} ---------- */
-function hdTone(g,S){const T=BAL.hd.tone;if(!T||!T.on)return;try{const im=g.getImageData(0,0,S,S),d=im.data,M=T.metal;for(let i=0;i<d.length;i+=4){const a=d[i+3];if(!a)continue;let r=d[i],gg=d[i+1],b=d[i+2];const mx=Math.max(r,gg,b),mn=Math.min(r,gg,b),sat=mx?(mx-mn)/mx:0,v=mx/255;let h=0;if(mx!==mn){const dl=mx-mn;h=mx===r?((gg-b)/dl)%6:mx===gg?(b-r)/dl+2:(r-gg)/dl+4;h=(h*60+360)%360}
- const metal=h>=M.h0&&h<=M.h1&&sat>=M.s&&v>=M.v;if(!metal){const L=.299*r+.587*gg+.114*b;r=L+(r-L)*T.sat;gg=L+(gg-L)*T.sat;b=L+(b-L)*T.sat;r+=(255-r)*T.lift;gg+=(255-gg)*T.lift;b+=(255-b)*T.lift;d[i+3]=Math.round(a*T.op)}
- d[i]=r;d[i+1]=gg;d[i+2]=b}g.putImageData(im,0,0)}catch(x){}}
+function hdTone(g,S){const T=BAL.hd.tone;if(!T||!T.on||T.sat>=1)return;try{const im=g.getImageData(0,0,S,S),d=im.data,M=T.metal;for(let i=0;i<d.length;i+=4){if(!d[i+3])continue;let r=d[i],gg=d[i+1],b=d[i+2];const mx=Math.max(r,gg,b),mn=Math.min(r,gg,b),sat=mx?(mx-mn)/mx:0,v=mx/255;let h=0;if(mx!==mn){const dl=mx-mn;h=mx===r?((gg-b)/dl)%6:mx===gg?(b-r)/dl+2:(r-gg)/dl+4;h=(h*60+360)%360}
+ if(h>=M.h0&&h<=M.h1&&sat>=M.s&&v>=M.v)continue;const L=.299*r+.587*gg+.114*b;d[i]=Math.max(0,Math.min(255,L+(r-L)*T.sat));d[i+1]=Math.max(0,Math.min(255,L+(gg-L)*T.sat));d[i+2]=Math.max(0,Math.min(255,L+(b-L)*T.sat))}g.putImageData(im,0,0)}catch(x){}}
 function hdSizeOf(p){try{let r=(typeof wdPOf==="function"?wdPOf(p):1)-1;r=Math.max(0,Math.min(7,r|0));const z=BAL.hd.sizeByRank&&BAL.hd.sizeByRank[r];return z||BAL.hd.size}catch(e){return BAL.hd.size}}
 function hdFit(key,nw,nh,fw,size){const B=BAL.hd,wm=(size||B.size)*fw,ink=(B.ink&&B.ink[key])||B.inkDef;const ka=Math.sqrt(B.inkK*wm*wm/(ink*nw*nh)),k=Math.min(ka,wm*B.boxW/nw,wm*B.boxH/nh);return{w:nw*k,h:nh*k,k}}
 function hdAnchor(file,img,fws,G){const B=BAL.hd;let m=null;try{m=MK_FIT.get(file)}catch(e){}
