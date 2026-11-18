@@ -114,3 +114,26 @@ Left, in order:
 5. quickcheck (dev/tools/quickcheck.sh), perf re-measure (coop-thin-e-perf on the built E), shots host Fold + guest iPad at a buổi step + a night result (scratch; CDN img/_review/coop-thin-e/ only if the reviewer needs them).
 6. '## Done' with the deleted/bypassed table (rows 1–12 of 0b: all bypassed through eW() now incl. cyb relay, tn relay + versions, guest clock), CLAIMS 'SẴN SÀNG KIỂM <sha>', send_message Foreman B.
 Known limits to state in Done: phóng cung START counts only the host's aged maids (w.x.mine) — her card's number; punish() of HER entry as vu cổ culprit lands on her stand-in (B4 / world) — not E.
+
+## #3 progress (worker session_01N1tNP5w7CCPSfpWCxnK199) — review/coop-thin-e @ 9f596384 (pushed), NOT ready for review
+PRIORITY #1 CHECK ('rbuoi|CW.restore|snapLoad|toilkeep|nextBuoi=function|E.rd'): OD L1487/L1489/L1493/L1494 | main 3da5720a (merged in) | review/* no other E | claims row 977 (this worker).
+START_CTX ≈ 3 % of 1M → rollover at ≈ 28 % (now ≈ 26 %). Done this session:
+1. merged origin/main 3da5720a (makeup-lux-r2v).
+2. HOST reload at L5: CW.restore refused his snapshot (server buổi stays at the week start at eW) → snapshot carries the room level (c.thl); restore skips the server-buổi check at eW / thl ≥ 5. Her store (host's copy of her) kept per room in localStorage (D.save wrapper, tagged with the week the store was built in) and taken back on rebuild (same week / seat / life / name). Her ready re-sent when the host's boot id (view o.e.boot) changes.
+3. Her stored buổi is never ahead of the host's (the week's base carries the tối she ended in: clamp at store build); the guest adopts the host-copy buổi only up to the view's buổi. (A first try that set CW.rbuoi from the view broke week change: reverted.)
+4. #next re-enabled by lockNext when nothing locks it and nothing is open (a dialog closed by the host's patch without a render left her 'Sẵn sàng' off at tối: bot stuck).
+5. OUTERMOST nextBuoi at L5 (jcoopthine, last module): a press outside a real step (CW.allow / CW.allowN) = CW.eNext only — the 12 after-step wrappers loaded after jcoopworld (jexam exTick, jpromo prCheck, jclose, jstory, jlooks, jgift, jfe, jkc/jkc2, jspread, jweather, jaudit) no longer run on a press that steps nothing (they ran once per press on BOTH seats).
+6. Host week event keeps her ready of the NEW week (race: it can arrive before his week event; bot stuck at week 3).
+7. Tests: coop-b1 on main 43/43 and on this branch 43/43 (the 6 FAIL of #2 = flake). coop-bot: takes the toilette screen (Nhận / Giữ đồ hôm qua, makeup-lux from main). Tripwire meter: tối's nextBuoi→endTurn counted as G (week end), entry per part recorded (trip.json 'entries'). coop-thin-e E3 relative, E6 n/a when the setup week leaves no day buổi.
+Gates on 16981ebf..29682ebb: coop-night THIN=5 105/105 then 106/106 (cases 8–14 fixed) · coop-timer L5 43/43 · coop-thin-e L5 27/27 (29682ebb) + swap 27/27 (16981ebf) · one-core guard/text/text-rule/bind PASS · quickcheck PASS (16981ebf: buổi 1125 / live 908 ms median, within noise of the run; tasks>200ms 15/15).
+Tripwire STATE by part, 4 weeks each (random bot, numbers vary ±30 %): L4 trip4f E 96 · C/H 643 (onBuoi 605) | L5 trip5g (29682ebb) E 203 · C/H 43 (onBuoi 0) · D·patch 1057 (by design: her step arrives as the patch). Residual E|nextBuoi on the guest = writes of the tối go path (allowN: nextBuoi → S.buoi=0 → endTurn; the after-step wrappers then run outside endTurn) = her WEEK end (part G); check with trip.json parts['E'] before claiming.
+
+## ROLLOVER HANDOVER #3 → #4 (11/18/2026; context ≈ 26 % ≥ START 3 % + ~23 %) — Foreman B opens the successor
+Worktree /home/user/wt/cte (another container: recreate from review/coop-thin-e 9f596384, sparse, hooks), logs /home/user/wt/cte-out. Main worktree for comparisons /home/user/wt/cte-main.
+Left, in order:
+1. coop-bot L5 tripwire on 9f596384: `TRIP=1 THIN=5 node dev/test/coop-bot.js 4 <out>` must play 4/4 (last run stuck at week 3 = the ready race fixed in 9f596384; rerun). If the E residual is really the tối go path, either count it as G in coop-thin-trip.js (post-wrappers under nextBuoi with CW.allowN) or say so in Done.
+2. Rerun on the final sha (5 changed paths since the last full gate): coop-thin-e L5 + swap, coop-night THIN=5, coop-timer THIN=5, coop-thin-c L5 (never run), coop-thin-a/b/c/d L0–4 spot (a L1, b L4, c L4, d L4), coop-e2e (+COOP_SWAP=1), coop-p2, coop-one-world seeds 1–10 (sh: see #2 list), quickcheck.
+3. Perf re-measure: `CPU=4 node dev/test/coop-thin-e-perf.js <W> 5` (her step for real now).
+4. Shots host Fold + guest iPad at a buổi step + a night result (scratch only; CDN img/_review/coop-thin-e/ only if the reviewer asks).
+5. '## Done': deleted/bypassed table (rows 1–12 of 0b, all bypassed through eW() + the outer nextBuoi guard), tripwire before/after, tests, sha; CLAIMS 'SẴN SÀNG KIỂM <sha>'; send_message Foreman B.
+Known limits (state in Done): phóng cung START counts only the host's aged maids (w.x.mine); punish() of HER entry as vu cổ culprit lands on her stand-in (B4 / world) — not E. Her ready lives in host memory (re-sent on host boot change); her owed step (E.owe) is lost on a host reload (her next ready catches up through the normal step).
