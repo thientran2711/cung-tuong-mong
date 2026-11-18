@@ -1,11 +1,16 @@
 PRIORITY #1 CHECK ('choice value cost-only'): OD L582 + L1877 | ledger 0 | claims 0 (mine: CLAIMS row 72) | main 0 | review/* 0 | archive 0 — reused: dev/measure/bacroad.js (bạc-road value model, kept), dev/measure/option-modal-scan.js (driver pattern)
 
 # CHOICE-VALUE-AUDIT — worker report (opus, session_01964izBnYA5PzbmC6qJfmDG; coordinator Foreman D #2)
+START_CTX (#3 session_01964izCHK28tcRj4VBLZSQH) ≈ 5 % of 1M (get_session reads 0; estimate) → rollover 30 %, ceiling 60 %.
 START_CTX ≈ 3 % of 1M (get_session reads 0; estimate) → rollover at 28 %, ceiling 60 %. Rolled over at ≈ 27 % (see HANDOVER below).
 Branch **review/choice-value-audit** (from origin/main d3ea24e8; LIVE 790cda59 merged). STATUS (#2): DONE — see «#2 FINISH» at the bottom; SẴN SÀNG KIỂM there.
 
-## KEY FINDING — the owner's example is a TEST FIXTURE, not game content
-«Tiếp» thân +3 vs «Từ chối khéo rồi lui về cung» Bạc −10 / thân −3 (OD L1877, ref owner-1811-0920-night-unfair.jpg) is a hard-coded demo
+## KEY FINDING — the owner's example IS live game content (corrected by #3, review FAIL 5)
+The choice the owner names — decline Hoàng thượng's night, pay, gain nothing — exists in the game, in five places: j8 PEND.ksp «Cáo bệnh» (lật thẻ:
+Sủng −2, Ân tình −2, nothing gained), jagmaid PEND.amNight «Cáo bệnh» (cung nữ road), jts «Hoàng thượng triệu …» «Cáo bệnh», jworld trip
+«Cáo bệnh ở lại», jcmaid cmTt «Dặn … chỉ viết chuyện vặt». #1/#2 wrongly told MAIN it was only a test fixture; #3 fixed all five (see «#3 FINISH»).
+What follows is #1's original note on the literal words, kept for the record:
+«Tiếp» thân +3 vs «Từ chối khéo rồi lui về cung» Bạc −10 / thân −3 (OD L1877, ref owner-1811-0920-night-unfair.jpg) — the LITERAL words — are a hard-coded demo
 option pair in the shot script dev/test/kit-fit.js:40 (the opt-card-short shots), copied in 6 more shot scripts. 0 hits in dev/build or the live
 index.html. Fixed anyway (the owner must never see an unfair pair, even in a test shot): every demo pair is now symmetric —
 «Tiếp» Sức −3 → thân +3 · «Từ chối…» Sức +3 → thân −3 (kit-fit, tassel-scan, fig-fill, shop-fix, dialog-person, stage-fig-size, act-pics-cases).
