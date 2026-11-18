@@ -82,3 +82,6 @@ Merged origin/main 790cda59 (only index.html/sw.js conflicted → rebuilt). Re-r
 2. A resident of a dead/out host in a dropped slot logs the dropped palace's name (PAL_GONE via goneN), never «cung cũ»; no person gets two lines (the `was` line wins).
 3. Law 14, rewritten in place: jres.js (header "8 cung"/"0..7", line 48 "5 west (8–12)"), jpm.js header "8 cung phi tần", PROGRESS_balance.md "PALN 13". Grep of 13-palace / 5-west / slot 9-13 wording over dev (excl. measure data + old reports): none left.
 Tests: pal-trim-oldsave now 2 cases — heads (player + Quý phi + lone Quý nhân in dropped slots) PASS; residents (player below Tần under a dropped host + a resident of a DEAD dropped host) PASS; every moved person exactly one line, no «cung cũ». quickcheck PASS (render 231/230, tab 432/418, buổi 1031/962 ms, core gates PASS). No UI change since r2b (map shots still valid).
+
+### r3b — on LIVE main a7e6199c — **review/map-zones @ ebe46acb**
+Merged origin/main a7e6199c (ge-writers-w1). Conflict in dev/build/assemble.py module list: took main's list (adds jgedata_w1.js) + kept jmapz.js last; index.html/sw.js rebuilt (jmapz + PAL_WEST present in the build). Re-run: pal-trim-oldsave heads + residents PASS; map-labels-scan DSF=2 Fold + iPad day/night PASS + courtyards 10 PASS; quickcheck PASS (render 232/241, tab 423/428, buổi 1014/1195 ms, core gates PASS).
