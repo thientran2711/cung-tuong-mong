@@ -225,7 +225,7 @@ function useItem(p,ix,tgt){const e=p.inv[ix],it=e&&IT[e.k];if(!it||e.h)return"";
  return `${NMc(p)} dùng ${it.n}. ${fmt(it.use)}${it.ant&&p.preg?" · an thai":""}`}
 function sellItem(p,ix){const e=p.inv[ix],it=e&&IT[e.k];if(!it||e.h)return"";p.inv.splice(ix,1);const g=Math.floor(it.pr/2);ap(p,{bac:g});return `${NMc(p)} bán ${it.n}: Bạc +${g}. `}
 function taintItem(p,ix,tk){const e=p.inv[ix],T=TAINT[tk];if(!e||!T||!T.on.includes(e.k)||e.t)return"";if(T.need&&!takeItem(p,T.need))return"";
- const e2=p.inv.find(x=>x===e);if(!e2)return"";if(T.c)ap(p,{bac:-T.c,duc:-3});else ap(p,{duc:-3});e2.t=tk;e2.by=key(p);p.schemes=(p.schemes||0)+1;return `${NMc(p)} lén ${T.n} vào ${iname(e2)}. `}
+ const e2=p.inv.find(x=>x===e);if(!e2)return"";if(T.c)ap(p,{bac:-T.c,duc:BAL.eff.j8.taintDuc});else ap(p,{duc:BAL.eff.j8.taintDuc});e2.t=tk;e2.by=key(p);p.schemes=(p.schemes||0)+1;return `${NMc(p)} lén ${T.n} vào ${iname(e2)}. `}
 /* receiving: people's tastes */
 function giftVal(it,r){const base=it.gv||Math.round(it.pr/12)+2;/* items without a tg list (jeitem home pieces) like no one (title-sys2 fix: the gift bag threw) */if(!Array.isArray(it.tg))it=Object.assign({},it,{tg:[]});const like=r==="emp"?(it.tg.includes("emp")||((it.k==="nghien"||it.k==="dancoc")&&(has("trongtai")||has("chamchinh")))):r==="th"?it.tg.includes("th"):r&&r.queen?it.tg.includes("hh"):it.tg.includes("rv");return like?base:Math.round(base/3)}
 function giveTo(a,r,ix){const e=a.inv[ix];if(!e||e.h)return"";window.__giftTaint=e.t?1:0;const it=itm(e.k);a.inv.splice(ix,1);e.w=0;const g=giftVal(Object.assign({k:e.k},it),r);
@@ -242,22 +242,22 @@ function plantItem(a,t,ix){const e=a.inv[ix];if(!e||e.h)return"";if(typeof ilUid
  t.inv.push({k:e.k,t:e.t,by:key(a),h:1,iu:e.iu});/* the same piece (item ledger jil) */return `${NMc(a)} lén cài ${iname(e)}${e.t?" ("+TAINT[e.t].n+")":""} vào rương ${NM(t)}. `}
 /* a taint working on its holder */
 function taintHit(p,e,used){const t=e.t;if(!t)return"";let r="";
- if(t==="xa"&&p.preg&&!p.fake&&(used||roll(35))){p.preg=0;p.hidden=false;ap(p,{suc:-20});r=`<span class="r">${NMc(p)} động thai, sảy mất đứa bé.</span> `}
- if(t==="chi")ap(p,{sac:-1,suc:-3});if(t==="meo")ap(p,{suc:p.asthma?-8:-1});if(t==="bua")ap(p,{suc:-3});return r}
+ if(t==="xa"&&p.preg&&!p.fake&&(used||roll(BAL.odb.j8.taintXa))){p.preg=0;p.hidden=false;ap(p,{suc:BAL.eff.j8.taintXaSuc});r=`<span class="r">${NMc(p)} động thai, sảy mất đứa bé.</span> `}
+ {const E=BAL.eff.j8.taintHit;if(t==="chi")ap(p,Object.assign({},E.chi));if(t==="meo")ap(p,{suc:p.asthma?E.meoAsthma:E.meo});if(t==="bua")ap(p,{suc:E.bua})}return r}
 function itemMonth(p){let r="";for(const e of p.inv.slice())if(e.t)r+=taintHit(p,e,false);
  if(p.inv.some(e=>e.k==="ngocboi"&&!e.t&&!e.h)&&p.sung<BAL.ngocboiSung)p.sung=BAL.ngocboiSung;
- if(p===S&&p.inv.some(e=>e.t&&e.by!=="me")&&roll(oSee(S,true)/5))r+=`Ngươi thấy trong người khó chịu từ khi nhận quà; nên kiểm tra đồ. `;
+ if(p===S&&p.inv.some(e=>e.t&&e.by!=="me")&&roll(oSee(S,true)/BAL.odb.j8.taintFeelDiv))r+=`Ngươi thấy trong người khó chịu từ khi nhận quà; nên kiểm tra đồ. `;
  return p===S?r:(r?"":"")}
 /* inspection: same detection for everyone */
 function inspect(p){const found=[];const sees=oSee(p,true);
  for(const e of p.inv.slice()){if(!(e.t||e.h))continue;if(e.by===key(p)&&!e.h)continue;if(!roll(sees))continue;
   p.inv.splice(p.inv.indexOf(e),1);const by=byKey(e.by);let s=`${iname(e)}${e.t?" ("+TAINT[e.t].n+")":""}${e.h?" lạ, không rõ ai cài":""}`;
-  if(by&&by!==p&&roll(BAL.odb.j8.rbInspect+p.mat*6)){/*evok: tainted by (scheme)*/evA(p,by,BAL.eff.j8.evInspect);s+=`: dấu vết dẫn về ${NM(by)} (chứng cứ ${balSg(BAL.eff.j8.evInspect)})`}found.push(s)}
+  if(by&&by!==p&&roll(BAL.odb.j8.rbInspect+p.mat*BAL.odb.j8.matInspect)){/*evok: tainted by (scheme)*/evA(p,by,BAL.eff.j8.evInspect);s+=`: dấu vết dẫn về ${NM(by)} (chứng cứ ${balSg(BAL.eff.j8.evInspect)})`}found.push(s)}
  return found}
 /* palace search: illegal things found are crimes, unless the trail leads to whoever planted them */
 function search(p){const bad=p.inv.filter(e=>(IT[e.k]&&itm(e.k).il)||(e.t&&TAINT[e.t].il));if(!bad.length)return"";const e=bad[0];p.inv.splice(p.inv.indexOf(e),1);
  const by=byKey(e.by),what=`${iname(e)}${e.t?" ("+TAINT[e.t].n+")":""}`;
- if(by&&by!==p&&roll(BAL.odb.j8.rbSearch+p.mat*5)){punish(by,"cài tang vật vu oan",2);evA(p,by,BAL.eff.j8.evSearch);return `Cung Chính ti khám cung ${NM(p)}, tìm thấy ${what}; tra ra do ${NM(by)} cài vào. `}
+ if(by&&by!==p&&roll(BAL.odb.j8.rbSearch+p.mat*BAL.odb.j8.matSearch)){punish(by,"cài tang vật vu oan",2);evA(p,by,BAL.eff.j8.evSearch);return `Cung Chính ti khám cung ${NM(p)}, tìm thấy ${what}; tra ra do ${NM(by)} cài vào. `}
  if(e.t==="bua"){/* the planter is the framer (jtruth defence; reviewer r1: ACTX.a was empty in the month search) */const A0=ACTX.a;ACTX.a=by&&by!==p?by:A0;let d;try{d=framed(p,"tàng trữ bùa chú")}finally{ACTX.a=A0}if(d<0)return `<span class="r">Khám cung ngươi tìm thấy ${what}.</span> `;if(!d)return `Khám cung ${NM(p)} tìm thấy ${what}. ${FRAME_LAST}`;return `<span class="r">Khám cung ${NM(p)} tìm thấy ${what}.</span> Danh -${d}. `}
 if(e.by&&e.by!==key(p))p.framedBy=e.by;
  if(e.t==="trom"){fall(p,"bị khám ra giấu ngọc bội ngự dụng");return `Khám cung ${NM(p)} tìm thấy ${what}. `}
@@ -330,7 +330,7 @@ function rivalNight(v){v.nights++;v.nightLog.push(wk());const q=Math.round(effSa
 function sendMaid(a){const m=a.maid;const rise=roll(30);a.maid=a===S?newMaid(pick(MAIDS.filter(x=>x!==m.name)),45):{name:pick(MAIDS.filter(x=>x!==m.name)),loyal:45};if(a===S)S.tonight=null;
  if(rise&&roomFor("consort")){const n=newRival(0);Object.assign(n,drawFace());n.name=freshName();n.rel=0;relAdd(a,n,m.loyal>=BAL.loy.close?BAL.eff.j8.sendMaid[0]:BAL.eff.j8.sendMaid[1]);rivals.push(n);return `Cung nữ ${m.name} của ${NM(a)} hầu thay, được sủng hạnh, phong ${RANKS[0].n} ${n.name}${m.loyal>=BAL.loy.close?" và vẫn nhớ ơn chủ cũ":" và trở mặt với chủ cũ"}. `}
  return `Cung nữ ${m.name} của ${NM(a)} hầu thay một đêm rồi được thả ra cung với chút bạc. `}
-function anMonth(p){const recent=(p.nightLog||[]).filter(w=>wk()-w<=3).length;p.an=cl((p.an||0)-Math.max(1,4-recent*2),0,100)}
+function anMonth(p){const F=BAL.anFade;const recent=(p.nightLog||[]).filter(w=>wk()-w<=F.wk).length;p.an=cl((p.an||0)-Math.max(F.min,F.base-recent*F.night),0,100)}
 
 /* ================= THE MONTH FOR EVERY CONSORT ================= */
 function pregMonthP(p){if(!p.preg)return"";p.preg++;const me=p===S;
@@ -465,7 +465,7 @@ function empAct(i,k){const v=rivals[i];if(!v||S.rank<7||!can(2)||S.dead||Q.lengt
  if(k==="judge"){if(evG(S,v)<2)return;r=judge(S,v)}
  else if(k==="conf"){const j=v.inv.findIndex(e=>(IT[e.k]||{}).kd==="Trang sức"&&!e.h);if(j<0)return;if(evG(S,v)<1&&!vpItems(v).length){apply(BAL.tw.confNo);log(`Tịch thu vô cớ: Danh ${BAL.tw.confNo.danh}, Thái hậu ${BAL.tw.confNo.th}.`)}const n=iname(v.inv[j]);v.inv.splice(j,1);relAdd(S,v,-BAL.tw.g.conf[0]);v.hh-=BAL.tw.g.conf[1];r=`Ngươi tịch thu ${n} của ${v.name}.`}
  else if(k==="reward"){if(S.bac<-BAL.tw.reward.bac)return;apply(BAL.tw.reward);relAdd(S,v,BAL.tw.g.reward[0]);v.hh+=BAL.tw.g.reward[1];ap(v,{danh:BAL.tw.g.reward[2]});r=`Ngươi ban thưởng cho ${v.name}.`}
- else if(k==="pardon"){if(!v.confined&&!v.out)return;if(v.out){v.out=false;v.rank=0}v.confined=0;relAdd(S,v,BAL.eff.j8.empAct_2);apply({duc:2});r=`Ngươi ân xá cho ${v.name}.`}
+ else if(k==="pardon"){if(!v.confined&&!v.out)return;if(v.out&&!roomFor("consort"))return;if(v.out){v.out=false;v.rank=0}v.confined=0;relAdd(S,v,BAL.eff.j8.empAct_2);apply({duc:2});r=`Ngươi ân xá cho ${v.name}.`}
  else return;spend(2);log(r);render()}
 function giftTargets(){const L=[["emp","Hoàng thượng"]];if(!S.thDead)L.push(["th","Thái hậu"]);liveRivals(true).forEach(v=>L.push([v.id,(v.queen?"Hoàng hậu ":"")+v.name]));return L}
 PEND.giftpick=p=>{const e=S.inv[p.ix!=null?p.ix:-1];const L=p.v!=null?[[p.v,(RV(p.v)||{}).name]]:giftTargets();
@@ -474,7 +474,7 @@ PEND.giftpick=p=>{const e=S.inv[p.ix!=null?p.ix:-1];const L=p.v!=null?[[p.v,(RV(
 PEND.plantpick=p=>{const v=RV(p.v);if(!v)return null;const items=S.inv.map((e,i)=>[e,i]).filter(([e])=>!e.h);
  return{who:pv(v),t:`<p>Sai người lẻn vào cung ${v.name}, cài món gì vào rương nàng?</p><p class="past">${word(oPlant(S,v))} · hỏng: bị bắt, nàng nắm ${balAb(BAL.eff.j8.evPlantItem)} chứng cứ</p>`,o:items.map(([e,i])=>({n:iname(e)+(e.t?" ("+TAINT[e.t].n+")":""),ik:i,fx:{},x:(IT[e.k]||{}).il||(e.t&&TAINT[e.t].il)?"khám ra là có tội":(IT[e.k]||{}).rk>rkOf(v)?"vượt phẩm của nàng":"",go:()=>{spend(2);if(p.here){ACTX={a:S,pen:-15};try{log(plantItem(S,v,i)+" (tại cung nàng)")}finally{ACTX={a:null,pen:0}}}else log(runAct(S,v,"plant",i))}})).concat([{n:"Thôi",fx:{}}])}};
 PEND.taintpick=p=>{const e=S.inv[p.ix];if(!e)return null;const L=Object.entries(TAINT).filter(([k,T])=>T.on.includes(e.k)&&(!T.need||S.inv.some(x=>x.k===T.need&&!x.h)));
- return{t:`<p>Lén làm gì với <b>${iname(e)}</b>?</p>`,o:L.map(([k,T])=>({n:T.n[0].toUpperCase()+T.n.slice(1),fx:T.c?{bac:-T.c,duc:-3}:{duc:-3},x:T.hurt+(T.need?" · tốn "+itm(T.need).n:""),go:()=>log(taintItem(S,p.ix,k))})).concat([{n:"Thôi",fx:{}}])}};
+ return{t:`<p>Lén làm gì với <b>${iname(e)}</b>?</p>`,o:L.map(([k,T])=>({n:T.n[0].toUpperCase()+T.n.slice(1),fx:T.c?{bac:-T.c,duc:BAL.eff.j8.taintDuc}:{duc:BAL.eff.j8.taintDuc},x:T.hurt+(T.need?" · tốn "+itm(T.need).n:""),go:()=>log(taintItem(S,p.ix,k))})).concat([{n:"Thôi",fx:{}}])}};
 PEND.evpick=p=>({t:"<p>Tập chứng cứ này nói về ai?</p>",o:liveRivals(true).map(v=>({kgt:v,n:v.name,fx:{},go:()=>log(useItem(S,p.ix,v))})).concat([{n:"Thôi",fx:{}}])});
 PEND.itarget=p=>({t:`<p>Dùng ${itm(p.k).n} với ai?</p>`,o:liveRivals(true).map(v=>({kgt:v,n:v.name,fx:{},go:()=>{spend(2);log(useItem(S,p.ix,v))}})).concat([{n:"Thôi",fx:{}}])});
 PEND.shop=()=>({who:pEunCourt("ped"),t:"<p>Thái giám Nội vụ phủ bưng vào một khay đồ mua từ ngoài cung, dâng lên cho ngươi chọn: “Đồ mới mang vào, xin "+kSay({srv:"m"},S,"{goi}")+" xem qua.”</p>",o:S.shop.map(k=>({n:iic(k,20)+itm(k).n,fx:{bac:-itm(k).pr},x:`${itm(k).kd} · ${itm(k).d}`,go:()=>{S.inv.push({k});log(`Mua ${itm(k).n}.`)}})).concat([{n:"Thôi",fx:{}}])});

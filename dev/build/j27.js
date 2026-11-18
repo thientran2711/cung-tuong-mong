@@ -10,20 +10,9 @@ function ensureT2(v){if(v&&!v.trait2)v.trait2=pick(TRAIT2);return v}
 (function(){const n0=newRival;newRival=function(){return ensureT2(n0.apply(this,arguments))}})();
 /* a palace head: Tần and above (PAL_HEAD), not the queen (she holds Càn Ninh), not fallen */
 function palHeadOK(p){return !!p&&(p===S?!S.out&&!S.dead:p.alive&&!p.out)&&!p.queen&&rkOf(p)>=PAL_HEAD}
-function palFix(){if(!S||!rivals)return;rivals.forEach(ensureT2);const occ={};const heads=[S].concat(rivals).filter(palHeadOK);
- if(S.pal!=null&&!palHeadOK(S)){log(`Ngươi dời khỏi ${PALN[S.pal]}.`);S.pal=null}
- for(const v of rivals)if(v.pal!=null&&!palHeadOK(v))v.pal=null;
- for(const p of heads)if(p.pal!=null){if(occ[p.pal]!=null)p.pal=null;else occ[p.pal]=key(p)}
- for(const p of heads)if(p.pal==null){const f=PALN.findIndex((_,i)=>occ[i]==null);if(f<0)continue;p.pal=f;occ[f]=key(p);if(p===S){S.palCer=1}}
- /* lower ranks live in a head's side hall (thiên điện); never left without a palace when a head exists */
- /* owner 11/14 (OWNER_DECISIONS, Housing): Hoàng hậu lives ALONE in Càn Ninh cung and the Hoàng quý phi ALONE in hers — never a host,
-    for NPCs and for the player alike (palSolo). Anyone found under them (old saves, a host just promoted) moves out with a log line. */
- const hs=[S].concat(rivals).filter(p=>palHeadOK(p)&&!palSolo(p));
- for(const p of [S].concat(rivals)){if(p!==S&&(!p.alive||p.out))continue;if(rkOf(p)>=PAL_HEAD){p.resHead=null;continue}
-  const h=p.resHead!=null&&byKey(p.resHead);const ok=h&&h!==p&&hs.includes(h)&&(h!==S||palHeadOK(S));
-  if(p===S){if(!ok)S.resHead=null;continue} /* she keeps Ngọc Thanh các until she is a head herself */
-  if(!ok){const was=h&&h!==p&&palSolo(h)&&(h===S||h.alive&&!h.out)?h:null;const L=hs.filter(x=>x!==p&&x!==S);const c=L.filter(x=>[S].concat(rivals).filter(y=>y.resHead===key(x)).length<3);p.resHead=(c.length?pick(c):L.length?pick(L):null);p.resHead=p.resHead?key(p.resHead):null;
-   if(was)try{log(`${p.name} dời khỏi ${was===S?palName("home"):was.queen?"Càn Ninh cung":palName("r"+was.id)} (${was.queen||rkOf(was)>=7?"Hoàng hậu":"Hoàng quý phi"} ở riêng một cung), sang ${houseName(p)}.`)}catch(e){}}}}
+/* palFix: who heads which palace and who lives in whose side hall. ONE body, in jpal.js (it replaces this name at load);
+   the co-resident cap is BAL.res (resCap), the player is housed like every NPC (owner 17/11 04:08Z/04:20Z). */
+function palFix(){}
 /* Hoàng hậu (NPC queen or the player at rank 7) and Hoàng quý phi (rank 6, not the queen) keep a palace to themselves */
 function palSolo(p){return !!p&&(p.queen||rkOf(p)>=6)}
 (function(){const a0=assignHouses;assignHouses=function(){palFix()}})();
@@ -49,13 +38,12 @@ function palCeremony(){if(!S||!S.palCer||S.dead)return;S.palCer=0;const occ={};[
  Q.push({ev:1,t:"Ban cung",who:pEmp(),h:`<p>Thánh chỉ: ${RANKS[S.rank].n} ${S.name} được ban <b>${PALN[S.pal]}</b>, làm chủ vị một cung. Cung nhân dọn từ ${HOMEN} sang trong ngày.</p>`,
   opts:[{n:`Nhận ${PALN[S.pal]}`,fx:{},x:"tạ ơn, dọn sang",go:()=>log(`Dọn sang ${PALN[S.pal]}.`)}].concat(free.slice(0,3).map(i=>({n:`Xin ${PALN[i]}`,fx:{},x:"tâu xin cung khác còn trống",go:()=>{S.pal=i;log(`Tâu xin, được dời sang ${PALN[i]}.`)}})))});log(`Được ban ${PALN[S.pal]}.`)}
 (function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&!S.dead){palFix();palCeremony();tuyenTu();if(Q.length&&$("modal").hidden)showModal()}}catch(e){}return r}})();
-/* TUYỂN TÚ: every third spring, 3-5 young consorts enter at Đáp ứng / Thường tại; living consorts capped at 16 */
-const CAPC=16;
-function tuyenTu(){if(!S||S.month!==2||S.tuan!==0||S.ttDone===S.year)return;if(S.year%3!==0&&liveRivals(true).length>=8)return;S.ttDone=S.year;const live=liveRivals(true).length+1;let n=Math.min(3+R(3),CAPC-live);const L=[];
+/* TUYỂN TÚ: every third spring, 3-5 young consorts enter at Đáp ứng / Thường tại; living consorts (her too) capped at BAL.harem.cap */
+function tuyenTu(){if(!S||S.month!==2||S.tuan!==0||S.ttDone===S.year)return;if(S.year%3!==0&&liveRivals(true).length>=8)return;S.ttDone=S.year;const live=liveRivals(true).length+1;let n=Math.min(3+R(3),BAL.harem.cap-live);const L=[];
  while(n-->0&&roomFor("consort")){const v=newRival(roll(60)?0:1);Object.assign(v,drawFace());v.age=18+R(3);rivals.push(v);L.push(v)}palFix();
  if(L.length){log(`Tuyển tú: ${L.map(v=>`${v.name} (${RANKS[v.rank].n})`).join(", ")} vào cung.`);if(!quiet)Q.push({t:"Tuyển tú",h:`<p>Mùa xuân năm thứ ${S.year}, cung tuyển tú nữ. ${L.length} người vào cung:</p>${kitRows(L.map(v=>[`${mdH(pv(v),"xs")}${v.name}`,`${RANKS[v.rank].n} · ${houseName(v)}`,"t"]))}`})}}
 /* the cap applies to every way a consort enters */
-(function(){const r0=roomFor;roomFor=function(role){if(role==="consort"&&S&&rivals&&liveRivals(true).length+1>=CAPC)return false;return r0.apply(this,arguments)}})();
+(function(){const r0=roomFor;roomFor=function(role){if(role==="consort"&&S&&rivals&&liveRivals(true).length+1>=BAL.harem.cap)return false;return r0.apply(this,arguments)}})();
 /* MAP: every palace hotspot shows its plan name and its residents' faces (residence is public); silhouettes count who is there now */
 function mapSpots(){palFix();const L=[];
  for(const k in MAPH.places){if(k==="kn"&&!qOn())continue;if(k==="home"&&S.pal!=null)continue;L.push({k,box:MAPH.places[k].box,n:k==="home"?HOMEN:palName(k),fn:k==="home"?"tẩm cung của ngươi":palFn(k),res:k==="home"||k==="kn"?residents(k):[],small:k==="lc"||k==="home"})}
