@@ -86,3 +86,11 @@ PRIORITY #1 CHECK: OD 17/11 ~17:30/17:45/20:00Z | main none | review/hoa-dien-ar
 - Queue 3 (guided on fig 571 / hd 76 misses): NOT uploaded. 13 % of 45 sampled results had grey smudges on brow/forehead edge; no metric separated them. Tightened guided2.py (coloured outliers only, mask >=0.2 fw above eye line): 0 smudges, but cleans 16-28/45 and often leaves a centre dot. ROOT-13: option A = leave unchanged; owner holds the decision.
 - KNOWN MISSES: full key list with strength (clear >= 18 / faint / nomark) in dev/handover/reports/hoa-dien-art-known-misses.tsv (647 keys: 571 fig + 76 hd, 261 'clear' among the 515 guided-clean ones). 4 native singles: img/_review/hoa-dien-art/g3/miss-fig-consort-c02-t7-a36, -c05-t7-a26, -c04-t8-a36, -c02-t8-a26 (.png).
 - Queue 4 running: por2 on live 3,413 pass-1 por (data in /home/user/wt/data/p4, container-local).
+
+## UPDATE 18/11 ~02:10Z — hoa-dien #3 — queue 4/6 done, FINAL state (foreman ROOT-14 session_011xDdVScDqvym1tqCBqwYTD)
+PRIORITY #1 CHECK: OD 17/11 ~17:30/17:45/20:00Z + owner 18/11 "để đó" | main none | review/hoa-dien-art abcb2546 | claims hoa-dien-art.
+- LIVE (md5 --check same): W12 por/fig/hd 1,493; consort-ty fig 491 + hd 444 (935); por2 on pass-1 por 1,557 (0 smudges in 48 looked; ROOT-13 OK'd 4 singles each time).
+- KNOWN MISSES left unchanged by owner order: reports/hoa-dien-art-known-misses.tsv (571 fig + 76 hd) + 168 W12 por nomark + ~1,000 por nomark + 6 consort-ty por nomark + 12 W12 twins (33 fig / 14 hd). w2c54 hd (48) still HELD (W2d). For the later redraw.
+- READY, WAITING ROOT-14 OK: tn 840 (tn_make.py, cleaned live por/fig; files in /home/user/wt/hda/img/tn of the dead container — if gone, rerun: python3 dev/art/tn_make.py names.txt srcdir with names from live TN.json; urllib needs a curl User-Agent → pre-download srcs with curl); m44-t3 fig a26/a36 hand-cleaned (2 files).
+- HD_ANCHOR.json on the branch (3,924 faces, 1/4000 units, keys fig-<key>.webp). Code side (Foreman B/main) must set window.HD_ANCHOR.
+- Method notes: guided pass on twin misses smudges brows ~13 % (no metric separates) → never run blanket; por2 is safe (same mask at por scale where the mark location is known). opencv-python-headless must be <4.12 (5.x lacks CascadeClassifier). CDN needs a User-Agent for urllib (curl/8).
