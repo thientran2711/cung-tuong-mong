@@ -12,7 +12,7 @@ Chủ kit chuyển động, nhánh `review/kit-motion`. Thành phần dùng chun
 7. Ban thưởng và quà: mâm sơn son phủ khăn gấm (thưởng nhỏ), rương gỗ chạm vàng (thưởng lớn), rương rồng phượng vàng (ngự tứ), hộp gấm (quà người khác tặng). Chạm để mở, rương rung, nắp bật, ánh sáng ấm mềm tỏa từ trong lòng rương (không tia, không hào quang), từng món nhảy ra theo vòng cung với viền màu theo phẩm cấp (món hiếm ra sau cùng), đồng bạc nảy ra. Bên dưới là tên, công dụng, nút Nhận. Đồ tự mua thì bay vào tab Tư trang.
 8. Bảng, thẻ mở ra cùng một kiểu (trồi lên nhẹ); mọi nút, lựa chọn, thẻ việc lún xuống khi chạm.
 9. Thời tiết: chip có biểu tượng vẽ ở dải trạng thái; chạm xem tác động thật của thời tiết (lấy đúng từ mã). Hạt mưa, tuyết, lá, hoa trên sân khấu to và đậm hơn để thấy rõ; trong cung của nàng thì nhạt hơn (như nhìn qua cửa sổ).
-10. Sai người đi (dò la, đưa lời, gửi thư quà, mời…): cung nữ được sai bước ra khỏi sân khấu về bên trái, giữ một nhịp (nén khắc nhảy, dòng «đang đi dò la…»), rồi bước về; sau đó mới hiện thẻ báo. Mất khắc như cũ, chạm để bỏ qua, giảm chuyển động thì chỉ còn dòng báo. Mã: `dev/build/jerr.js`, KIT §90.
+10. Sai người đi (dò la, đưa lời, gửi thư quà, mời, hỏi gia thế…): bấm là thời gian chạy ngay, không chặn; người được sai bước ra khỏi sân khấu về bên trái, ô của nàng hiện «đang đi dò la…»; đến khắc về nàng bước vào lại, có chip «!» nhỏ, chạm để đọc tin. Sân khấu đông («+N») vẫn vẽ người đi. Giảm chuyển động: chỉ chip. Mã: `dev/build/jerr.js`, KIT §90.
 Thêm theo quy ước game: viền đỏ nhói khi có việc nguy hiểm tìm đến.
 
 Tất cả: 0.3–2 giây, chạm để bỏ qua, tôn trọng "giảm chuyển động" và công tắc "Cảnh động", không chặn thao tác lâu hơn khoảnh khắc.

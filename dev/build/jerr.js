@@ -1,91 +1,148 @@
-/* jerr.js — ERRAND SCENE (owner OD 18/11 ~20:05Z, review/errand-scene; MOTION.md "Sai người đi").
-   Owner: "khi tôi bấm cho cung nữ đi dò la … kết quả xuất hiện liền … phải thấy cái hình con nhỏ đi ra khỏi sân khấu … rồi khi nó về tôi thấy nó đi về,
-   nó mang tin báo tới". The TIME RULE STAYS (an errand costs its khắc, the report is for the next khắc). This file only ADDS the picture:
-     (1) the runner (the servant she sends, else her maid) walks OFF the stage (to the left);
-     (2) a short beat while the khắc clock ticks (HUD redraw) with ONE kit notice pill `kitLine` («đang đi dò la…», wording per errand: ERRV);
-     (3) she walks back ON;
-     (4) then the report card (the render / dialog the action already asked for, held until now with the jrbatch hold RB).
-   Nothing is computed twice: the action runs once, as before (no double charge); render()/showModal() are only DEFERRED (RB.d) until the scene ends.
-   ~2.3 s, tap anywhere = skip, reduced motion / Gọn / bots / co-op / servant road = no walking (a still pill beat only, or nothing).
-   Ledger (law 6b): S.roster.P[<runner id>][khắc spent] = ["ngoai","errand",…] so the book / audits show her away during that khắc.
-   KIT: motion layer `.kmfly.kmerr` (cleaned by kmReset like every kit fly layer), notice = kitLine (§42.2); no private frame or chip. */
+/* jerr.js — ERRAND SCENE r2, NON-BLOCKING (owner OD 18/11 ~20:05Z "tôi muốn thấy con nhỏ đi ra khỏi sân khấu … rồi nó về", ~20:10Z CANON OVERWRITE "KHÔNG BAO GIỜ chặn chơi",
+   ~20:15Z + ~20:20Z parallel time, EVERY button where she asks / sends another person; review/errand-scene; MOTION.md "Sai người đi").
+   The scene is a PICTURE OF ONE STATE: "person P is away until khắc K" (task {who, nm, k, lbl, t0, due, back, read, rep}).
+   - tap = time moves AT ONCE as always (no hold, no deferred result, no shield, no wait): the person walks off the stage in the background, her slot shows
+     the kit chip «đang đi dò la…» (errWord) while she is away;
+   - at khắc K (her clock moved: spend / nextBuoi) she walks back ON in the background and a small kit «!» chip stands on her; tap the chip = read the report
+     (the kit status icon panel «tin», §77.1 — never a forced modal);
+   - runner ALWAYS drawn: she walks with her own painted figure (kitFigOf) from / to the kit errand spot (kitErrandSpot) when her token is not on the page
+     in view (crowded stage, swipe pages "+N", resting elsewhere) — one kit rule, no private variant.
+   ONE ADAPTER (errTasks / errAwayOf / errNews / errNow / errWhen): when the parallel-time core is in the build (window.PTIME, jptime S.away, BAL.ptime) the adapter
+   READS ITS state (ptSend creates the task, ptTick lands it, its status icon owns the panel); without it the adapter keeps the same shape in S.erra (created here at the
+   gates, landed here at the due khắc, panel registered here). Nothing is computed twice; numbers from BAL (BAL.errand / BAL.ptime). Old saves: S.erra is created lazily.
+   Gates (fallback only; the scan table lists every act): runAct (every ACT sent to someone elsewhere, 46 acts) + scout, invite, h54Act thu, tdAct gift, htAct ask.
+   KIT: motion layer `.kmfly.kmerr` (cleaned by kmReset), notice = kitLine (§42.2), chips = the kit chip (kchip n / r), icon = kitStatusIcon; no private frame / chip. */
 (function(){
-const ER=window.ERR={live:null,n:0,skips:0,h:0,defer:[]};
+const ER=window.ERR={n:0,live:0,seen:{},base:null,walk:{},skips:0};
 /* wording per errand (VANPHONG: cổ trang, no %, no odds numbers). Key = ACT key or a named flow. Harm acts all read as a quiet errand. */
 const ERRV={spy:"dò la",ally:"đưa lời kết giao",bribe:"mua chuộc người",bribel:"đưa quà lót tay",block:"lo việc thẻ bài",blockf:"nhờ ơn người quen",rumor:"rỉ tai tin đồn",lygian:"gieo lời ly gián",
  tocao:"đưa chứng cứ tố tội",expose:"đưa tin tư tình",xinhh:"dâng lời lên Hoàng hậu",laydo:"lấy đồ",laydol:"lấy đồ",plant:"cài đồ",petcare:"chăm thú nuôi",
- scout:"dò nơi ở",invite:"đưa lời mời",letter:"gửi thư, quà",tdgift:"biếu quà, đưa thư",kin:"dò hỏi gia thế"};
-/* acts where she goes HERSELF (no servant leaves): jecon spyk "Tự đi dò la" */
-const ERR_SELF=["spyk"];ER.self=ERR_SELF;
+ scout:"dò nơi ở",invite:"đưa lời mời",letter:"gửi thư, quà",tdgift:"biếu quà, đưa thư",kin:"dò hỏi gia thế",listen:"nghe ngóng"};
 const ERRV_DEFAULT="làm việc kín";
+/* acts where she goes HERSELF (no servant leaves): jecon spyk "Tự đi dò la" */
+ER.self=["spyk"];
 function errWord(k){return "đang đi "+(ERRV[k]||ERRV_DEFAULT)+"…"}
 window.errWord=errWord;
-const MS0={off:650,beat:1000,on:650};/* ~2.3 s; ERR.slow multiplies it (tests take mid-scene frames) */
-function MSv(){const k=ER.slow||1;return{off:MS0.off*k,beat:MS0.beat*k,on:MS0.on*k}}
+/* ---------------------------------------------------------------- the ONE ADAPTER ---------------------------------------------------------------- */
+function errOn(){try{return !!(window.PTIME&&PTIME.on&&PTIME.on())}catch(e){return false}}
+function errKH(){try{return BAL.time.khac||4}catch(e){return 4}}
+function errNow(){try{if(errOn())return PTIME.now();return bid()*errKH()+Math.max(0,Math.min(errKH(),typeof used==="number"?used:0))}catch(e){return 0}}
+function errN(k){try{if(BAL.ptime&&BAL.ptime.kinds){const r=BAL.ptime.kinds[k]||BAL.ptime.kinds.def;if(r&&r.n!=null)return r.n}}catch(e){}return(BAL.errand&&BAL.errand.n)||2}
+function errWhen(K){if(errOn()&&PTIME.when)try{return PTIME.when(K)}catch(e){}
+ const kh=errKH(),b=Math.floor(K/kh),i=K-b*kh,nb=bid();let B4=4;try{B4=B4N}catch(e){}
+ if(b===nb)return`khắc ${i+1}`;if(Math.floor(b/B4)===Math.floor(nb/B4)){let n="";try{n=BUOI[b%B4].toLowerCase()}catch(e){}return`${n}, khắc ${i+1}`}return"ngày mai"}
+function errZ(){if(!S)return[];if(!Array.isArray(S.erra))S.erra=[];return S.erra}
+/* every send of HERS, normalised: the parallel-time core's S.away rows (by "me") or the fallback rows */
+function errTasks(){try{if(!S)return[];if(errOn())return(Array.isArray(S.away)?S.away:[]).filter(a=>a&&a.by==="me").map(a=>({id:a.id,who:a.who,nm:a.nm,lbl:a.lbl,k:a.kind,t0:a.t0,due:a.due,back:!!a.back,read:!!a.read,rep:a.rep}));return errZ()}catch(e){return[]}}
+function errAwayOf(id){for(const t of errTasks())if(t.who===id&&!t.back)return t;return null}
+function errNews(){return errTasks().filter(t=>t.back&&t.rep&&!t.read)}
+function errMine(){return errTasks().filter(t=>!t.back)}
+/* ledger id of one of her people ↔ the person */
+function errId(sv){if(!sv)return null;return sv.sid!=null?"s"+sv.sid:"mm:me"}
+function errPerson(id){if(!S||!id)return null;if(id==="mm:me")return S.maid||null;if(id[0]==="s"){const sid=+id.slice(1);for(const s of S.staff||[])if(s&&s.sid===sid)return s}return null}
+/* the runner = the servant the game sends (bestSent), else her maid; a person already away is never sent again (law 6b) */
+function errRunner(){let sv=null;try{sv=typeof bestSent==="function"?bestSent(S):null}catch(e){}if(sv&&!errAwayOf(errId(sv)))return sv;
+ for(const s of(S.staff||[]).slice().sort((a,b)=>(b.loyal||0)-(a.loyal||0)))if(s&&s!==sv&&!s.spyFor&&!errAwayOf(errId(s)))return s;
+ return S.maid&&S.maid.name&&!errAwayOf("mm:me")?S.maid:null}
 function errReduced(){try{return typeof kmReduced==="function"?kmReduced():false}catch(e){return false}}
-function errCan(){try{return !!(typeof S!=="undefined"&&S&&!S.dead&&!window.__bot&&!(typeof quiet!=="undefined"&&quiet)&&!(window.COOPW&&COOPW.on)&&!(typeof isSrv==="function"&&isSrv())&&typeof RB==="object"&&typeof kmOn==="function"&&kmOn())}catch(e){return false}}
-/* the runner = the servant the game sends (bestSent) else her maid; her stage token by name */
-function errRunner(){let sv=null;try{sv=typeof bestSent==="function"?bestSent(S):null}catch(e){}return sv||S.maid||null}
-function errTok(sv){const tk=document.getElementById("tokens");if(!tk||!sv)return null;const t=[...tk.querySelectorAll(".tok.fig")].find(x=>{const g=x.querySelector(".tag");return g&&g.textContent.includes(sv.name)&&x.offsetParent!==null});return t||null}
-/* law 6b ledger: she is away during the khắc(s) the errand took */
-function errAway(sv,n){try{if(!sv||typeof j95on!=="function"||!j95on()||!S.roster||!S.roster.P)return;const id=sv===S.maid?"mm:me":"s"+sv.sid;const e=S.roster.P[id];if(!e)return;const end=Math.min(3,Math.max(0,(typeof used==="number"?used:0)-1));const from=Math.max(0,end-Math.max(1,n||1)+1);
-  for(let i=from;i<=end;i++)if(e[i])e[i]=["ngoai","errand",null,"đi việc cho chủ"]}catch(e){}}
-function errCss(){if(document.getElementById("kerr-css"))return;const s=document.createElement("style");s.id="kerr-css";s.textContent=`
-.kmerr-shield{position:fixed;inset:0;z-index:2147483000;background:transparent;touch-action:manipulation}
-.kmerr-lay{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:40}
-.kmerr-fig{position:absolute;will-change:transform;pointer-events:none;transition:transform var(--kme-off,650ms) cubic-bezier(.5,0,.8,.6)}
-.kmerr-fig.on{transition:transform var(--kme-on,650ms) cubic-bezier(.2,.5,.4,1)}
-.pip.kmerr-tick{display:inline-block;animation:kmerrtick .7s ease-out 1}
-@keyframes kmerrtick{0%{transform:scale(1);color:inherit}35%{transform:scale(1.5);color:#b8860b}100%{transform:scale(1);color:inherit}}
-.kmerr-fig img{display:block;width:100%;height:100%;object-fit:contain;transform-origin:50% 100%;animation:kmerrbob .32s ease-in-out infinite}
-.kmerr-fig.still img{animation:none}
-@keyframes kmerrbob{0%,100%{transform:translateY(0) rotate(-.8deg)}50%{transform:translateY(-6px) rotate(.8deg)}}
-`;document.head.appendChild(s)}
-/* hold render()/showModal() with the jrbatch counter until the scene is over (the action already ran once; the report is only deferred) */
-function errHold(){RB.d++;ER.h++;let done=false;return function(){if(done)return;done=true;RB.d--;ER.h--;if(RB.d===0){const s=RB.s,p=RB.p;RB.s=RB.p=0;try{if(s)showModal()}catch(e){console.error(e)}try{if(p)render()}catch(e){console.error(e)}}
-  if(ER.h===0)while(ER.defer.length){const a=ER.defer.shift();try{resultShow.apply(null,a)}catch(e){console.error(e)}}}}
-/* the act result card (#rtoast, resultShow) is drawn by the action itself, not by render(): it is the REPORT, so it waits for the scene too */
-{const rs0=resultShow;resultShow=function(){if(ER.h>0){ER.defer.push(Array.prototype.slice.call(arguments));return}return rs0.apply(this,arguments)}}
-function errClean(L){try{if(L.shield)L.shield.remove();if(L.lay)L.lay.remove();if(L.tok)L.tok.style.visibility=""}catch(e){}}
-function errPlay(spec,rel){
-  const L=ER.live={rel,shield:null,lay:null,tok:null,timers:[],gen:typeof kmGen==="number"?kmGen:0};ER.n++;
-  const fin=()=>{if(ER.live!==L)return;ER.live=null;L.timers.forEach(clearTimeout);errClean(L);rel()};L.fin=fin;
-  const after=(ms,f)=>{L.timers.push(setTimeout(()=>{if(ER.live===L)try{f()}catch(e){console.error(e);fin()}},ms))};
-  L.timers.push(setTimeout(fin,6000*(ER.slow||1)));/* watchdog: never keep the screen held */
-  const sh=document.createElement("div");sh.className="kmfly kmerr kmerr-shield";sh.setAttribute("aria-hidden","true");sh.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();ER.skips++;fin()},true);document.body.appendChild(sh);L.shield=sh;
-  const MS=MSv();errCss();
-  const tick=()=>{try{if(typeof renderHUD==="function")renderHUD()}catch(e){}try{document.querySelectorAll(".pip").forEach(e=>{e.classList.remove("kmerr-tick");void e.offsetWidth;e.classList.add("kmerr-tick")})}catch(e){}try{if(typeof kitLine==="function")kitLine(spec.line,MS.beat+200)}catch(e){}};
-  const st=document.getElementById("stage"),tok=!errReduced()?errTok(spec.sv):null;
-  if(!st||!tok){/* reduced motion / Gọn, or the runner is not on this stage: no walking, a still beat with the same pill and the same clock */
-    tick();after(errReduced()?700:MS.beat,fin);return}
-  const img=tok.querySelector(".figimg")||tok.querySelector("img");if(!img){tick();after(MS.beat,fin);return}
-  const sr=st.getBoundingClientRect(),r=img.getBoundingClientRect(),sc=st.offsetWidth?sr.width/st.offsetWidth:1;
-  const lay=document.createElement("div");lay.className="kmfly kmerr kmerr-lay";const fig=document.createElement("div");fig.className="kmerr-fig";
-  fig.style.cssText=`--kme-off:${MS.off}ms;--kme-on:${MS.on}ms;left:${(r.left-sr.left)/sc}px;top:${(r.top-sr.top)/sc}px;width:${r.width/sc}px;height:${r.height/sc}px`;
-  const c=document.createElement("img");c.src=img.currentSrc||img.src;c.alt="";c.draggable=false;fig.appendChild(c);lay.appendChild(fig);st.appendChild(lay);L.lay=lay;L.tok=tok;
-  const out=-((r.right-sr.left)/sc+24);/* off the LEFT edge of the stage */
-  tok.style.visibility="hidden";
-  requestAnimationFrame(()=>requestAnimationFrame(()=>{if(ER.live!==L)return;fig.style.transform=`translateX(${out}px)`}));
-  after(MS.off,()=>{c.parentNode.classList.add("still");tick();/* (2) beat: she is away, the khắc clock ticks */});
-  after(MS.off+MS.beat,()=>{fig.classList.remove("still");fig.classList.add("on");fig.style.transform="translateX(0)";/* (3) walks back on */});
-  after(MS.off+MS.beat+MS.on+60,fin)/* (4) the held report card is released */}
-/* run an errand action once; if it really happened (the khắc moved or the Sổ ghi grew) play the scene before its report shows */
+function errCan(){try{return !!(typeof S!=="undefined"&&S&&!S.dead&&!window.__bot&&!(typeof quiet!=="undefined"&&quiet)&&!(window.COOPW&&COOPW.on)&&!(typeof isSrv==="function"&&isSrv()))}catch(e){return false}}
+/* fallback ledger (law 6b): a person away is away on the roster; same rows as jptime ptLedger */
+function errLedger(){if(errOn()||!S||typeof j95on!=="function"||!j95on())return;const R=S.roster;if(!R||!R.P)return;const kh=errKH(),b0=bid()*kh;let ch=false;
+ for(const a of errZ()){if(a.back||!R.P[a.who])continue;const e=R.P[a.who];for(let i=0;i<e.length;i++){const K=b0+i;if(K>=a.t0&&K<a.due&&(!e[i]||e[i][1]!=="errand")){e[i]=[(e[i]&&e[i][0])||"ngoai","errand",null,"đi việc cho chủ"];ch=true}}}
+ if(ch)try{const k=j95kh();S.where=j95view(R,k);R.m[k]=j95counts(R,k);if(typeof j95stage==="function")j95stage(R,k)}catch(e){}}
+/* fallback landing: her clock reached khắc K */
+function errTick(){if(errOn()||!S||S.dead)return;const now=errNow();let ch=false;
+ for(const t of errZ())if(!t.back&&t.due<=now){t.back=1;ch=true;try{if(typeof kitLine==="function"&&errCan())kitLine(`${t.nm} đã về: có tin báo.`,2600)}catch(e){}}
+ if(ch){try{const day=errKH()*3;S.erra=errZ().filter(t=>!t.back||(!t.read&&t.rep)||now-t.due<day)}catch(e){}errLedger();errIcon()}}
+/* the report panel (fallback; with jptime the same kit icon id "tin" is registered there) */
+function errPanel(){const rows=[];
+ for(const t of errNews()){const r=t.rep;rows.push(`<p><b>${r.t||t.lbl||"Tin báo"}</b></p>`+(typeof kitFacts==="function"?kitFacts(r.L):`<p>${r.L.join(" ")}</p>`));t.read=1}
+ for(const t of errMine())rows.push(`<p>${t.nm} đang ${t.lbl||"đi việc"} · về ${errWhen(t.due)}.</p>`);
+ setTimeout(()=>errSync(),0);return{title:"Tin chờ người sai đi",h:rows.join("")||"<p>Không có ai đang đi việc.</p>",opts:[]}}
+function errIcon(){if(errOn())return;try{if(typeof kitStatusIcon==="undefined")return;kitStatusIcon.set("tin",{title:"Người được sai đi",glyph:"信",order:30,
+ show:()=>!!(S&&!S.dead&&(errMine().length||errNews().length)),busy:()=>!!(S&&errMine().length&&!errNews().length),badge:()=>!!(S&&errNews().length),panel:errPanel});kitStatusIcon.refresh()}catch(e){console.error("jerr icon",e)}}
+function errOpen(){try{if(typeof kitStatusIcon!=="undefined")kitStatusIcon.open("tin")}catch(e){console.error(e)}}
+/* the gate: run an errand action; in the fallback the action runs ONCE as before (no double charge, no deferred report), then the task is recorded */
+function errAdd(sv,spec,L){const t0=errNow();/* fallback: away n khắc counted from the END of her order (the act's own khắc already paid); jptime counts from the tap with its own o/n rows */const w=ERRV[spec.k]||ERRV_DEFAULT;const t={id:"e"+(++ER.n)+"-"+t0,who:errId(sv),nm:sv.name,k:spec.k,lbl:"đi "+w,t0,due:t0+errN(spec.k),back:0,read:0,rep:{t:`${sv.name} ${w} trở về`,ok:null,L:L.length?L:[`${sv.name} đã về.`],d:[]}};
+ errZ().push(t);ER.seen[t.id]={fresh:1};try{if(typeof kitLine==="function")kitLine(`${t.nm} đã đi ${w}, về ${errWhen(t.due)}.`,2600)}catch(e){}errIcon();return t}
 function errRun(fn,ctx,args,spec){
-  if(ER.live||!errCan())return fn.apply(ctx,args);
-  const u0=used,l0=S.logSeq||0,rel=errHold();let r;
-  try{r=fn.apply(ctx,args)}catch(e){rel();throw e}
-  if(!spec.always&&used===u0&&(S.logSeq||0)===l0&&!Q.length){rel();return r}
-  const sv=errRunner();errAway(sv,spec.n);errPlay({line:errWord(spec.k),sv},rel);return r}
-ER.run=errRun;
-try{kmOnReset(()=>{ER.defer.length=0;if(ER.live)ER.live.fin()})}catch(e){}
+ if(!errCan()||errOn())return fn.apply(ctx,args);/* jptime builds its own task at the button (ptSend); this file only draws it */
+ const sv=errRunner();if(!sv)return fn.apply(ctx,args);
+ const u0=used,l0=S.logSeq||0;const r=fn.apply(ctx,args);
+ if(!spec.always&&used===u0&&(S.logSeq||0)===l0&&!(typeof Q!=="undefined"&&Q.length))return r;
+ const n=Math.max(0,Math.min((S.logs||[]).length,(S.logSeq||0)-l0));
+ const L=(S.logs||[]).slice(0,n).map(x=>typeof plain==="function"?plain(x):String(x).replace(/<[^>]*>/g,"")).map(x=>x.replace(/^T\d+\/\d+\s+\S+\s+tuần\s*/,"")).reverse();
+ errAdd(sv,{k:spec.k},L);errLedger();try{errSync()}catch(e){console.error(e)}return r}
+ER.run=errRun;ER.tasks=errTasks;ER.awayOf=errAwayOf;ER.news=errNews;ER.now=errNow;ER.when=errWhen;ER.tick=errTick;ER.open=errOpen;ER.adapter=()=>errOn()?"ptime":"fallback";
+/* ---------------------------------------------------------------- the PICTURE of that state ---------------------------------------------------------------- */
+function errCss(){if(document.getElementById("kerr-css"))return;const s=document.createElement("style");s.id="kerr-css";s.textContent=`
+.kmerr-lay{position:absolute;inset:0;width:100%;height:100%;overflow:hidden;pointer-events:none;z-index:40;filter:none}/* beats .kmfly (fixed, 56x56) */
+.kmerr-fig{position:absolute;will-change:transform;pointer-events:none;transition:transform var(--kme-t,650ms) cubic-bezier(.5,0,.8,.6)}
+.kmerr-fig.on{transition-timing-function:cubic-bezier(.2,.5,.4,1)}
+.kmerr-fig img{display:block;width:100%;height:100%;object-fit:contain;transform-origin:50% 100%;animation:kmerrbob .32s ease-in-out infinite}
+@keyframes kmerrbob{0%,100%{transform:translateY(0) rotate(-.8deg)}50%{transform:translateY(-6px) rotate(.8deg)}}
+.kmerr-lay .kmerr-slot,.kmerr-lay .kmerr-bang{position:absolute;transform:translateX(-50%);white-space:nowrap;max-width:92%}
+.kmerr-lay .kmerr-bang{pointer-events:auto;cursor:pointer;font-weight:700;min-width:22px;justify-content:center;box-shadow:0 0 0 2px #fff}
+`;document.head.appendChild(s)}
+function errTok(p){const tk=document.getElementById("tokens");if(!tk||!p)return null;return[...tk.querySelectorAll(".tok.fig")].find(x=>{const g=x.querySelector(".tag");return g&&g.textContent.includes(p.name)&&x.offsetParent!==null})||null}
+/* KIT RULE «runner always drawn» (kitErrandSpot): where a person with no token in view walks from / to: the left slot of the stage on the kit floor line, at the kit figure height.
+   Used by every walk (off / on) when her token is not on the page in view; stage-here / j59 keep their own slot logic untouched. */
+function kitErrandSpot(st){const H=st.clientHeight||st.getBoundingClientRect().height,W=st.clientWidth||st.getBoundingClientRect().width;let fl=0;try{fl=kitSlotFloor(H)}catch(e){fl=H*.03}
+ const h=Math.round(H*(window.KIT_FIG&&KIT_FIG.h||.79));return{h,top:Math.max(0,H-fl-h),left:Math.round(W*.14)}}
+window.kitErrandSpot=kitErrandSpot;
+function errLay(st){let l=st.querySelector(":scope>.kmerr-lay");if(!l){l=document.createElement("div");l.className="kmfly kmerr kmerr-lay";st.appendChild(l)}return l}
+function errMs(){let m=(BAL.errand&&BAL.errand.msWalk)||650;try{if(typeof kitPace==="function")m=kitPace(m)}catch(e){}return m*(ER.slow||1)}
+/* one walk of one person: dir "off" (toward the left edge) or "on" (back from it); the real token stays hidden meanwhile */
+function errWalk(t,dir){
+ const st=document.getElementById("stage");const p=errPerson(t.who);if(!st||!p||errReduced()||!errCan()||(typeof kmOn==="function"&&!kmOn()))return;
+ errCss();const lay=errLay(st),tok=errTok(p);let src="",l,tp,w,h;const sr=st.getBoundingClientRect(),sc=st.offsetWidth?sr.width/st.offsetWidth:1;
+ const img=tok&&(tok.querySelector(".figimg")||tok.querySelector("img"));
+ if(img){const r=img.getBoundingClientRect();src=img.currentSrc||img.src;l=(r.left-sr.left)/sc;tp=(r.top-sr.top)/sc;w=r.width/sc;h=r.height/sc}
+ else{try{src=kitFigOf(p)||""}catch(e){}if(!src)return;const k=kitErrandSpot(st);l=k.left;tp=k.top;h=k.h;w=0}
+ const fig=document.createElement("div");fig.className="kmerr-fig"+(dir==="on"?" on":"");const ms=errMs();
+ fig.style.cssText=`--kme-t:${ms}ms;left:${l}px;top:${tp}px;height:${h}px;width:${w?w+"px":"auto"};${dir==="on"?"transition:none;":""}`;
+ const c=document.createElement("img");c.src=src;c.alt="";c.draggable=false;if(!w){c.style.width="auto";c.style.maxWidth="none"}fig.appendChild(c);lay.appendChild(fig);ER.walk[t.id]=dir;
+ const out=-(l+(w||fig.offsetWidth||h*.45)+24);ER.live++;let d=0;
+ const fin=()=>{if(d)return;d=1;ER.live=Math.max(0,ER.live-1);try{fig.remove()}catch(e){}delete ER.walk[t.id];try{errSync()}catch(e){}};
+ if(dir==="off"){requestAnimationFrame(()=>requestAnimationFrame(()=>{fig.style.transform=`translateX(${out}px)`}))}
+ else{fig.style.transform=`translateX(${out}px)`;requestAnimationFrame(()=>requestAnimationFrame(()=>{fig.style.transition=`transform ${ms}ms cubic-bezier(.2,.5,.4,1)`;fig.style.transform="translateX(0)"}))}
+ setTimeout(fin,ms+120);try{kmOnReset(fin)}catch(e){}}
+/* the state → the screen, idempotent: called after every render / layout / clock move */
+function errSync(){if(!S||S.dead||ER.syncing)return;ER.syncing=1;try{
+ if(ER.base!==S){ER.base=S;ER.seen={};for(const t of errTasks())ER.seen[t.id]={off:1,on:t.back?1:0}}/* a loaded life never replays an old walk */
+ const st=document.getElementById("stage");const T=errTasks();
+ for(const t of T){const q=ER.seen[t.id]||(ER.seen[t.id]={fresh:1});
+  if(!t.back&&!q.off){q.off=1;q.fresh=0;errWalk(t,"off")}
+  if(t.back&&!q.on){q.on=1;q.off=1;errWalk(t,"on")}}
+ if(!st||!errCan())return;const lay=errLay(st);errCss();lay.querySelectorAll(".kmerr-slot,.kmerr-bang").forEach(e=>e.remove());
+ const sr=st.getBoundingClientRect(),sc=st.offsetWidth?sr.width/st.offsetWidth:1;
+ for(const t of T){const p=errPerson(t.who);const tok=errTok(p);if(!tok)continue;const open=!t.back,walking=!!ER.walk[t.id],news=t.back&&t.rep&&!t.read;
+  tok.style.visibility=(open||walking)?"hidden":"";if(walking||(!open&&!news))continue;
+  const img=tok.querySelector(".figimg")||tok.querySelector("img");const r=(img||tok).getBoundingClientRect();const cx=(r.left+r.width/2-sr.left)/sc;
+  if(open){const c=document.createElement("span");c.className="kchip n kmerr-slot";c.textContent=errWord(t.k);c.style.left=cx+"px";c.style.top=((r.top+r.height*.45-sr.top)/sc)+"px";lay.appendChild(c)}
+  else{const c=document.createElement("button");c.type="button";c.className="kchip r kmerr-bang";c.textContent="!";c.title=`${t.nm} đã về: có tin báo`;c.setAttribute("aria-label",c.title);c.style.left=((r.right-sr.left)/sc-14)+"px";c.style.top=(Math.max(2,(r.top-sr.top)/sc+6))+"px";
+   c.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();errOpen();setTimeout(errSync,60)});lay.appendChild(c)}}
+ /* a person whose task is over and read: nobody keeps her hidden */
+ for(const x of document.querySelectorAll("#tokens .tok.fig")){const g=x.querySelector(".tag");if(!g||x.style.visibility!=="hidden")continue;const nm=g.textContent;
+  const hold=T.some(t=>{const p=errPerson(t.who);return p&&nm.includes(p.name)&&(!t.back||ER.walk[t.id])});if(!hold)x.style.visibility=""}
+ }finally{ER.syncing=0}}
+ER.sync=errSync;
+/* ---- wiring: the clock and the stage ---- */
+try{kmOnReset(()=>{for(const l of document.querySelectorAll(".kmerr-lay .kmerr-fig"))l.remove();ER.walk={};ER.live=0})}catch(e){}
+{const sp=spend;spend=function(){const r=sp.apply(this,arguments);try{errTick();errLedger();errSync()}catch(e){console.error(e)}return r}}
+if(typeof nextBuoi==="function"){const nb=nextBuoi;nextBuoi=function(){const r=nb.apply(this,arguments);try{errTick();errLedger();errSync()}catch(e){console.error(e)}return r}}
+{const r0=render;render=function(){const r=r0.apply(this,arguments);try{errIcon();errSync()}catch(e){console.error(e)}return r}}
+if(typeof j59lay==="function"){const j0=j59lay;j59lay=function(){const r=j0.apply(this,arguments);try{errSync()}catch(e){}return r}}
 /* ---- entry points (the scan table in dev/handover/reports/errand-scene.md lists every one) ---- */
 {/* every ACT sent to someone elsewhere: runAct, the one gate for player acts (doAct, the card game, the picked plant / gift flows) */
- const r0=runAct;runAct=function(a,t,k,extra){if(a!==S||typeof together!=="function"||together(a,t)||ACT_NOSEND.includes(k)||ERR_SELF.includes(k)||(typeof sameHouse==="function"&&sameHouse(a,t)))return r0.apply(this,arguments);
+ const r0=runAct;runAct=function(a,t,k,extra){if(a!==S||typeof together!=="function"||together(a,t)||ACT_NOSEND.includes(k)||ER.self.includes(k)||(typeof sameHouse==="function"&&sameHouse(a,t)))return r0.apply(this,arguments);
   /* doAct already spent the khắc before runAct: this call IS the errand (always) */
   return errRun(r0,this,arguments,{k,n:(typeof BAL==="object"&&BAL.time&&BAL.time.cost&&BAL.time.cost.harm)||1,always:1})}}
-{const f0=scout;scout=function(){return errRun(f0,this,arguments,{k:"scout",n:1})}}
-{const f0=invite;invite=function(){return errRun(f0,this,arguments,{k:"invite",n:1})}}
-/* her child far away: letter + gift (j54 h54Act "thu") and the in-law house gift (j55 tdAct "gift"); jht htAct is IIFE-local: not wrapped (see report) */
-{const f0=h54Act;h54Act=function(a){return a==="thu"?errRun(f0,this,arguments,{k:"letter",n:1}):f0.apply(this,arguments)}}
-{const f0=tdAct;tdAct=function(a){return a==="gift"?errRun(f0,this,arguments,{k:"tdgift",n:2}):f0.apply(this,arguments)}}
+{const f0=scout;scout=function(){return errRun(f0,this,arguments,{k:"scout"})}}
+{const f0=invite;invite=function(){return errRun(f0,this,arguments,{k:"invite"})}}
+/* her child far away: letter + gift (j54 h54Act "thu") and the in-law house gift (j55 tdAct "gift") */
+{const f0=h54Act;h54Act=function(a){return a==="thu"?errRun(f0,this,arguments,{k:"letter"}):f0.apply(this,arguments)}}
+{const f0=tdAct;tdAct=function(a){return a==="gift"?errRun(f0,this,arguments,{k:"tdgift"}):f0.apply(this,arguments)}}
+/* jht "Dò hỏi gia thế" (htAct is exposed on window by jht.js) */
+if(typeof window.htAct==="function"){const f0=window.htAct;window.htAct=function(a,b){return a==="ask"?errRun(f0,this,arguments,{k:"kin"}):f0.apply(this,arguments)}}
 })();

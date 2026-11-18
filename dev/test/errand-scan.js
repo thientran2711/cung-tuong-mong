@@ -8,9 +8,8 @@ const {chromium}=require('./lib/pw-roulette');const [,,BASE]=process.argv;const 
  for(let i=0;i<400;i++){const s=await p.evaluate(()=>{const b=document.querySelector('#kload [data-kl="go"]');if(b){b.click();return ''}return window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)&&!document.getElementById('kload')?'ok':''});if(s==='ok')break;await sleep(1500)}
  const R=await p.evaluate(()=>{const rows=[];
   for(const k of Object.keys(ACT)){const self=ERR.self.includes(k),nosend=ACT_NOSEND.includes(k)||self;rows.push([k,ACT[k].n||"",self?"she goes herself (ERR.self): no servant sent":nosend?"in person only (ACT_NOSEND): no servant sent":"runAct (sent when she is elsewhere)",nosend?"n/a":"COVERED (runAct wrapper)",(typeof errWord==="function"?errWord(k):"")])}
-  const named=[["scout","Sai tai mắt dò nơi ở (j21 scout)"],["invite","Mời đến cung ta (j21 invite)"],["letter","Gửi thư, quà thăm con (j54 h54Act thu)"],["tdgift","Biếu quà, gửi thư cho nhà thông gia (j55 tdAct gift)"]];
+  const named=[["scout","Sai tai mắt dò nơi ở (j21 scout)"],["invite","Mời đến cung ta (j21 invite)"],["letter","Gửi thư, quà thăm con (j54 h54Act thu)"],["tdgift","Biếu quà, gửi thư cho nhà thông gia (j55 tdAct gift)"],["kin","Dò hỏi gia thế (jht htAct ask, exposed on window)"]];
   for(const [k,n] of named)rows.push(["flow:"+k,n,"named flow","COVERED (wrapped by name)",errWord(k)]);
-  rows.push(["flow:kin","Dò hỏi gia thế (jht htAct ask)","named flow (function is IIFE-local in jht.js)","NOT COVERED — needs jht to expose htAct (or a KIT hook); the khắc and the report work as before",""]);
   rows.push(["flow:maid-road","the player as a servant (j42 Lệnh của chủ / errands for her mistress)","other direction (she IS the servant)","NOT IN SCOPE (errCan(): isSrv)",""]);
   return rows});
  console.log("| key | name | route | scene | line (VANPHONG) |\n|---|---|---|---|---|");for(const r of R)console.log("| "+r.join(" | ")+" |");
