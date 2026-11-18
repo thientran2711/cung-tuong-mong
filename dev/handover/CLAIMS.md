@@ -38,3 +38,4 @@ B10 consorts c31, c32 | claude/cung-tuong-mong-handover-hj0h8w | session_011xDdV
 | LAND-D4: odds-cap-r1 + title-stale-sel-rv + toil-react-top-rv (+ staff-cap-row3 after PASS) stacked on newest main (sonnet lander; ORDER ROOT-49 07:39Z) | review/land-d4 | D | session_01964izDCcXRDoeKSAR5QUAA | RUNNING | 18/11 07:49Z |
 | D8 POISON THE EMPEROR / THÁI HẬU ROAD (opus; ORDER ROOT-49 #2 07:41Z; OD:L602/L430) | review/poison-road | D | session_01964izBos2heoQd7Cty2bAu | RUNNING | 18/11 07:49Z |
 | odds-cap RE-MERGE onto live main (source conflicts jmort/j77/j83; opus) | review/odds-cap-r2 | D | session_01964izDzNqo154uvpkUcvrq | RUNNING | 18/11 07:53Z |
+| E7r3 re-review questline q1a a615eb7+q1b 2f79ae26+q1c b013ddf (opus BIG) | review/questline-q1a/b/c | E ROOT #3 | session_01DgYSWnKLMTfPEZmLjhWFYM | RUNNING | 18/11 08:01Z |
