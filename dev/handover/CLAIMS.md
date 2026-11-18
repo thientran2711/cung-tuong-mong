@@ -173,3 +173,4 @@ Thái hậu missing c21–c24,c28–c32 | handover | session_01PEhRbvnAhxnHAp1NL
 | GE step 4: Bắc Địch own 4 roads (opus lead E14; bd_san, bd_soi + PLAN) | review/bd-roads | E ROOT #7 | session_01DgYSWpL9XTiCMTRqdrD58G | RUNNING | 18/11 22:49Z |
 | rel-picker r2 (sonnet; owner bug Giao tình picker space, OD L898 + 22:10Z) | review/rel-picker-r2 | MAIN ROOT-58 | session_01Rc5AsJZVez3V2TABepBaUE | RUNNING | 18/11 22:54Z |
 | MAIN ROOT-59 (opus; child of ROOT-58) | handover HANDOVER_SESSION9 | ROOT-58 | session_01Rc5AsMK8HoGvFJPQquNYYg | RUNNING | 18/11 22:56Z |
+| GE step 4: bd roads writer 2 (opus E14b; bd_tuyet, bd_hen) | review/bd-roads-w2 | E ROOT #7 | session_01DgYSWppboKRwbR35fzT2U4 | RUNNING | 18/11 22:58Z |
