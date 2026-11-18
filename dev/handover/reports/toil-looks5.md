@@ -67,3 +67,14 @@ Branch review/toil-looks5, head **2712920c** (on origin). Based on origin/main 9
 
 ## Handover
 None needed (context low use). Owner pending: Doan trang level pick, blush hue direction.
+
+---
+
+# v24 FINAL (owner picks, 17/11 ~22:25Z – 18/11 ~00:10Z) — head see CLAIMS
+Branch review/toil-looks5 (origin). Owner picks applied (all numbers in ONE place, jtoil.js BAL.toil / TOIL_COL):
+- BAL.toil.blush = {vua .1373 (Doan trang 60 %), dep .1637, tuyet .2092}; BAL.toil.level = {dep .6, tuyet .8} (Kieu diem 60 %, Khuynh thanh 80 % of the row-3 look: blush, eye shadow/liner, lip, gloss). TOIL_MKS dep/tuyet eye, eyeH, wing, low, shim, lip, gloss are x BAL.toil.level[k] right after the table.
+- Warm colour set "Cam anh do": 8 TOIL_COL entries moved 34 % toward 222,60,54 (old -> new): mat.rangchieu 226,128,96 -> 225,105,82 | mat.hophach 214,132,62 -> 217,108,59 | ma.rangchieu 240,140,108 -> 234,113,90 | ma.camquyt 246,150,96 -> 238,119,82 | son.chusa 204,54,38 -> 210,56,43 | son.sanho 232,104,86 -> 229,89,75 | son.camdao 230,132,104 -> 227,108,87 | son.hophach 208,108,72 -> 213,92,66. Pink / gold / brown entries unchanged. No other copy of the old rgb in dev/build (git grep).
+- Root cause of "too orange" (measured): her bare cheek is orange-yellow (hue 19); pale pink blush at low alpha renders hue ~8 = peach; the pipeline does not add orange. Fix = recolour the warm palette entries (owner: "bo trang diem mau cam can doi").
+- Tests: QUICKCHECK PASS (open 1362 ms, old save ok, core gates PASS, perf new/live render 159/179, tab 356/296, buoi 786/753); one-core-guard PASS.
+- Sample scripts (dev/measure): toil-blush-room.js, toil-doan-steps.js, toil-hue-probe.js, toil-hue-sheet.js, toil-final-sheets.js, toil-face-sheets.js (MODE kk|hue|doan|final; needs in-process http server wrapper), toil-room-shot.js.
+- CDN review folder img/_review/toil-looks5/ (many sheets): wipe after verdict (python3 dev/site/cdn_sync.py --wipe-review toil-looks5).
