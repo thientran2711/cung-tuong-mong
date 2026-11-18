@@ -23,7 +23,7 @@ function kitPersonDlgFit(root){try{const R=root||document;R.querySelectorAll(".k
  const box=col.querySelector(".kpdfig"),f=col.querySelector(".kesf"),im=f&&f.querySelector(".kesimg");if(!box||!im)return;
  const src=im.getAttribute("src");const again=()=>requestAnimationFrame(()=>kitPersonDlgFit(R));
  if(!im.complete&&!im.dataset.kpdl){im.dataset.kpdl=1;im.addEventListener("load",again,{once:true})}
- const b=src?kitFigBody(src,again):null;if(!b)return;
+ const b=(src?kitFigBody(src,again):null)||(typeof kitFigWaitBody==="function"&&kitFigWaitBody(im,again));if(!b)return;
  const kfr=parseFloat(im.style.getPropertyValue("--kfr"))||1;const rel=Math.min(1,kfr*(KIT_FIG.man||1));
  /* KIT 32.2b EQUAL GAPS (owner 16/11 s21): frame line above = the header rule (.kph bottom), frame line below = the bottom of the figure area (.kpdb,
     the button band starts there); gap above the name chip = gap under the feet = KIT_DP_GAP (≥ 5 % of that height, ≥ 14 px) */
