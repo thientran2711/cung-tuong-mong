@@ -1,3 +1,10 @@
+# opt-card-short #2 — ROUND 3 (owner OD L1877: tall phone dialog + iPad 2 columns) sha **6e5777ad** (main a2ce736a merged, quickcheck PASS)
+PRIORITY #1 CHECK: OD L1877 | main none | review/* this branch | claims this row. (refs images owner-1811-0920-*.jpg are not on the handover branch; worked from the verbatim text.)
+1. PHONE (kv1): ONE kit rule for the whole `#modal .dlg` group (jksize, KIT §6.2c): aspect-ratio = KIT_FRAME.page (590/852 = the screen shape) + tall cap `--kph = 100*kvh - 24px`; #mb / .k3body fill the grown height. Scan, Fold 755x1000: all 12 dialog cases + plain info/result modals = 562x796 (before 562x574 / 427 / 389). Risk for owner: a dialog with little content (info, night) is now a tall frame with empty space under the options/figure (literal reading of her drawing).
+2. iPAD (kv2): when the right column is >= 560 px (container query) and a dialog has 2+ option cards -> TWO columns (card 298 px, text column ~190 px). Worst case checked at 1180x820 + 1366x1024: 12 cases incl. `many` (5 long titles) and dress (longest Được text): OVERFLOW 0 (no element leaves its card), titles/Được chips wrap, nothing cut; heights equal per dialog (104-114 px). Narrow frames (fest at 4 em title case, person columns) keep ONE column automatically.
+3. NOT done here (other owner point of the same line): CHOICE VALUE RULE audit (night "Từ chối khéo": Tốn Bạc -10, Được không) = Foreman D balance task, not this branch.
+Shots (Fold 755x1000 + iPad 1180x820 together, LOOKED): CDN img/_review/opt-card-short/{fold,ipad}-{mat2,dress,night,visit,many}.jpg (old set wiped).
+
 # opt-card-short #2 — ROUND 2 (MAIN ROOT-49 fixes) sha **173f5888** (quickcheck PASS)
 1. Row labels: the Được slot is ALWAYS labelled "Được" (rolled Thành row included); Cần/Bại/Kèm/Ghi chú never show as rows (disabled card: its "!" is RED). Scan of visible row labels per card, BEFORE (origin/main) vs NOW, 12 cases x Fold/iPad:
 | case | BEFORE visible labels | NOW |
