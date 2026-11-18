@@ -24,3 +24,37 @@ Owner rulings applied: pox (thuydau/daumua/scar) scaled down + sparse random sca
 
 ## Remaining
 Upload finals to exact keys after the owner's verdict; tóc ẩm/bết, bùn gấu áo, áo xốc xếch, etc. need the body/hair-fit boxes first.
+
+## FINAL TABLE (18/11 ~02:40Z) — approved by the owner via Foreman C ROOT-14; NOT uploaded to live keys (waits for main's veil-fit fig-row fix)
+Approved: thủy đậu (lv1 = v9 layout reverted, lv2/lv3 v9), đậu mùa (same), sẹo rỗ v9, mực 1-3 (+ mirrored -m), bụi v10, muội (lv1 v11 cheek, lv2/lv3 v6), mồ hôi v14. DROPPED by the owner (main does them): lem phấn (fx-smu-N), lạnh (fx-lanh-N) — files kept in img/_review/looks-2/dropped-for-main/ in case main wants them. All files are 384x384 RGBA, face-square for the veil fit (code keys of main jlooks.js lkFaceImg: fx-pox-{thuydau|daumua|scar}-N, fx-muc-N, fx-bui-N, fx-muoi-N, fx-moho-N; mực also has -m mirrored variants).
+| live key | source file (CDN review) | md5 |
+|---|---|---|
+| img/fx-bui-1.png | img/_review/looks-2/final-candidates/fx-bui-1.png | b1a191dad47f2e42ce0fea5451ff4e4d |
+| img/fx-bui-2.png | img/_review/looks-2/final-candidates/fx-bui-2.png | eda1baa53b5888d94cc0e3eb1591ac77 |
+| img/fx-bui-3.png | img/_review/looks-2/final-candidates/fx-bui-3.png | 0d2b8f19a53c410a5d1484c6e9e4e958 |
+| img/fx-moho-1.png | img/_review/looks-2/final-candidates/fx-moho-1.png | b3c16bca84579b3516a4c1a93bbf5d2e |
+| img/fx-moho-2.png | img/_review/looks-2/final-candidates/fx-moho-2.png | d78eac12b8f9dec56efece729d62c290 |
+| img/fx-moho-3.png | img/_review/looks-2/final-candidates/fx-moho-3.png | d905d8dd529d2eb4f75bfa3720803320 |
+| img/fx-muc-1-m.png | img/_review/looks-2/final-candidates/fx-muc-1-m.png | 1877d63ccf678410aabcf8d741b6f92b |
+| img/fx-muc-1.png | img/_review/looks-2/final-candidates/fx-muc-1.png | 626ce205518b911244e79ff881df3c90 |
+| img/fx-muc-2-m.png | img/_review/looks-2/final-candidates/fx-muc-2-m.png | 022836f1cffe3b6dff3b0e8ca46a6f6e |
+| img/fx-muc-2.png | img/_review/looks-2/final-candidates/fx-muc-2.png | 8a9b859bf390e520b3186c2f333ce542 |
+| img/fx-muc-3-m.png | img/_review/looks-2/final-candidates/fx-muc-3-m.png | 750294d3d8b47591cdb6a17b65a989ec |
+| img/fx-muc-3.png | img/_review/looks-2/final-candidates/fx-muc-3.png | 36365374fa5745e037abff28432f3258 |
+| img/fx-muoi-1.png | img/_review/looks-2/final-candidates/fx-muoi-1.png | 8408314b9446ce9d733e5ead9907f2bd |
+| img/fx-muoi-2.png | img/_review/looks-2/final-candidates/fx-muoi-2.png | 47fde5b028c05a892647cf6e0bf5e8b6 |
+| img/fx-muoi-3.png | img/_review/looks-2/final-candidates/fx-muoi-3.png | 2ca38071ef9976639badf2db1aae1806 |
+| img/fx-pox-daumua-1.png | img/_review/looks-2/final-candidates/fx-pox-daumua-1.png | 1fe817866fd7034a1eca16da5ee55344 |
+| img/fx-pox-daumua-2.png | img/_review/looks-2/final-candidates/fx-pox-daumua-2.png | 7564baf6e1a12a24548042a75a1e870a |
+| img/fx-pox-daumua-3.png | img/_review/looks-2/final-candidates/fx-pox-daumua-3.png | 2fdbb5c10b5e6872454cf77e75bccb44 |
+| img/fx-pox-scar-1.png | img/_review/looks-2/final-candidates/fx-pox-scar-1.png | dbf4c7a7e019fa5e9dca4344e0da881f |
+| img/fx-pox-scar-2.png | img/_review/looks-2/final-candidates/fx-pox-scar-2.png | dba2e12df513ec7dd70cc6518b53943f |
+| img/fx-pox-scar-3.png | img/_review/looks-2/final-candidates/fx-pox-scar-3.png | 56c9299853be96ee1b57f0ad0b749ad2 |
+| img/fx-pox-thuydau-1.png | img/_review/looks-2/final-candidates/fx-pox-thuydau-1.png | 2c307cd2086c87090e182cacc6dcde86 |
+| img/fx-pox-thuydau-2.png | img/_review/looks-2/final-candidates/fx-pox-thuydau-2.png | 7aceb76824e4edc75e654574d133f0bc |
+| img/fx-pox-thuydau-3.png | img/_review/looks-2/final-candidates/fx-pox-thuydau-3.png | 94eb415af02fe75a66f9c52317d74cd8 |
+
+Ready upload command (run only after Foreman C says go, from a checkout with the files pulled: `python3 dev/site/cdn_sync.py --pull 'img/_review/looks-2/final-candidates/*'`, then copy each file to img/<name>):
+  for f in img/_review/looks-2/final-candidates/*.png; do cp "$f" "img/$(basename $f)"; done; CLOUDFLARE_API_TOKEN=proxy-injected python3 dev/site/cdn_sync.py $(ls img/_review/looks-2/final-candidates | sed 's#^#img/#')
+After upload: add each key to LOOKS_ART in jlooks.js (main) and verify the face box (veil-fit fig rows are off on live fig files; por rows OK).
+Placement caveat: overlays assume the average face layout; mồ hôi side drops follow the average face outline.
