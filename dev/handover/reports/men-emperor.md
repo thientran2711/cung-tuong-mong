@@ -53,3 +53,8 @@ Cancels the ratio redo above (v2 files + the ratio table are superseded; no meas
 Files CDN img/_review/men/emperor/ (md5 OK, nothing live): emp1..4_a18_v3.png (cut 768x2000), emp_a18_v3_square.jpg (2000x2000, 1|2|3|4 labelled, feet aligned).
 Credits: 4 gens × 80 + 4 cuts × 3 = 332 cr. Men-emperor running total ≈ 2140 cr.
 Weak points: fresh gens ⇒ faces are close cousins of v1 but not identical (owner approved v1 faces — if she wants the exact v1 faces back, use the v1 PNGs with this v3 body); robes are wide-sleeved; a26/a36/a51 not drawn.
+
+### v3c — emp3 redo, painterly face (owner 18/11: emp1/2/4 v3 OK; emp3 "như mặt người thật")
+Old emp3 v3 read as a photo-real face. Redo, same design (yellow-crimson robe, miện with bead strings to the brow, stiff short rounded cầu vai), STYLE_ANCHOR prefix + explicit "hand-painted illustrated face, soft brushwork, idealised features, NOT a photograph". Refs: emp1_a18_v3 raw as STYLE (gpt-2-6 allows only 1 style ref) + emp4_a18_v3 raw as image ref ("draw a different man"). count 2 = 2 gens, both painterly; face crops side by side with emp1/2/4: both match; kept gen 1 (cleaner crown, strings reach the brow). 1 cut. Credits 2×80 + 3 = 163 → men-emperor total ≈ 2300 cr. emp3 gens in this round: 2 of max 3.
+Files CDN img/_review/men/emperor/: emp3_a18_v3.png (replaced), emp_a18_v3_square.jpg (rebuilt with the new 3; emp1/2/4 v3 unchanged), md5 OK, nothing live.
+Weak: emp3's face is a cousin of emp4's (image ref pull) — told apart by crown, brows, hands/robe; wide sleeves.
