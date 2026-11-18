@@ -21,3 +21,8 @@ Rulings applied: plain gilded lantern/painted fan at t6 -> t6 item; phoenix fan 
 - PENDING REDO c02 t7 v1 + v2 (2 gens): t7 v2 main = rose/mauve = same family as v0 pink -> recolour v2 to a different family; v1+v2 yellow inner robe fills the whole front and reads as MAIN -> own colour MAIN, yellow only as parts (borders, sash, collar, narrow inner panel) like C2 t7 reference.
 - SELF-CHECK c06 t7 v1/v2: yellow skirt/inner robe is wide (fills the front) -> likely FAIL the same way; look and redo if so. Apply the check to every t7 from now (prompt: "main robe colour stays the MAIN colour; yellow ONLY on collar, borders, sash and a narrow inner panel").
 - Standing: t8 FREEZE; 8 different colours per row, max one pale neutral per row; one 3f item per rank; closed-lip smile; re-read FIGURE_GATE + consort-B10 before every person.
+
+## UPDATE 17:42Z (ROOT-29 looked c06)
+- c06 t1-t6 + items PASS. c06 t7 v1 (lavender) + v2 (green): WIDE bright yellow inner robe/skirt fills the front (v2 also yellow collar cape) = FAIL -> regen both with own colour MAIN, C2 yellow (pass yellow-deeper/c03_a18_t7_C2.png as colour ref) ONLY on borders/sash/collar edge/narrow inner panel.
+- Whole-group t7 check ordered by ROOT-29: re-look every finished t7 v1/v2 (c01 c02 c04 c05 c06) for yellow filling the front. Known: c02 redo (v2 also recolour out of pink), c06 redo, c04 keep the panel narrow, c01 + c05 passed.
+- Not done by W65c (rolled over); successor does these first, then c07..c32.
