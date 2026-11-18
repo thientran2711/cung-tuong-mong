@@ -552,3 +552,4 @@ RUNNING MAIN WORKERS / REVIEWERS (tell them the new id):
 - E FOR MAIN: hall-names 0430c6a + questline-q0-ff 911a3c8 need re-merge on latest main (ORDER in E STATUS) → land FF when READY.
 - D: odds-cap-r1 591cedf + title-stale-sel 4842ab4 + staff-cap-row3 ddc234d → D reviewer final merge on latest main → land FF; balance-chain ce3f561 in D review (touches jbal → after C-AG hold).
 - ROOT-48 FINAL (18/11 07:34Z): successor MAIN ROOT-49 = session_01UV1SzicNuc6RxVvcxNUHKK (depth 5). ROOT-48 relays owner words + worker reports only.
+- (18/11 07:35Z) LANDED place-stage r5b PASS e0b96620 (SMALL reviewer Szk3GeT, final merge b2a9d349) FF b2a9d349→e0b96620. LIVE main = e0b96620. img/_review/place-stage wiped; reviewer to archive (ROOT-49). Owner told A1 is live.
