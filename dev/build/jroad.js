@@ -166,6 +166,7 @@ function rdHpWho(A,hp){const B=BAL.road.hp,cap=B.affCap,cl=x=>Math.max(-cap,Math
   case "th":Object.assign(P,{sp:"th",aff:cl((S.th||0)-B.mid.th),tone:S.thTrait||null,name:"Thái hậu",dk:{k:"th"}});break;
   case "emp":Object.assign(P,{sp:"emp",aff:cl((S.sung||0)-B.mid.emp),tone:typeof kTone==="function"?kTone("emp"):null,name:"Hoàng thượng",dk:{k:"emp"}});break;
   case "eun":{const t=S.court&&S.court.tq;Object.assign(P,{sp:{srv:"m",name:t&&t.name},name:t?t.name:"Tổng quản",net:t&&t.mnet?[t.mnet]:[],aff:cl(af(t)),dk:{k:"eun"}});break}
+  case "off":Object.assign(P,{sp:{role:"x",rw:"quan"}});break;
   case "doc":{const t=S.court&&S.court.ty;Object.assign(P,{sp:{role:"x",rw:"quan"},name:"thái y",net:t&&t.mnet?[t.mnet]:[],aff:cl(af(t)),dk:{k:"doc"}});break}
   case "maid":{const m=S.maid;if(m)Object.assign(P,{p:m,sp:{srv:"f",name:m.name},name:m.name,net:Array.isArray(m.net)?m.net:[],aff:cl((m.loyal||0)-50)});P.dk={k:"maid"};break}
   case "man":{const m=man67(A);if(m)Object.assign(P,{p:m,sp:m,name:m.name,net:Array.isArray(m.net)?m.net:[],aff:cl((m.loyal==null?50:m.loyal)-50)});break}
@@ -174,7 +175,12 @@ function rdHpWho(A,hp){const B=BAL.road.hp,cap=B.affCap,cl=x=>Math.max(-cap,Math
   case "n1":P.name=A.n1||"";break;
   case "foe":P.name=S.foe||"";break}}catch(e){console.error(e)}
  if(P.p&&!P.net.length)try{P.net=(Array.isArray(P.p.net)?P.p.net:traitsOf(P.p))||[]}catch(e){}
+ /* a helper whose line needs a person or a name that is missing here (no {mis} / {man} / {v}, no {foe} / {n1} name) speaks as an unknown
+    go-between: the go lines, the go weights and the word «Không rõ» (review E9r item 3) */
+ if((["v","v2","mis","man"].includes(hp)&&!P.p)||(["foe","n1"].includes(hp)&&!P.name))Object.assign(P,{role:"go",type:"go",known:false,sp:null,name:"",dk:null,net:[],aff:0,tc:null});
  return P}
+/* the voice of a role when the helper has no speaker of its own (a line holding {goi} / {xung} is never shown raw) */
+const RDHP_SP={off:{role:"x",rw:"quan"},doc:{role:"x",rw:"quan"},eun:{srv:"m"},srv:{srv:"f"},maid:{srv:"f"},th:"th",emp:"emp",hh:"hh"};
 const rdHpTones=P=>P.net.concat(P.tone?[P.tone]:[]);
 /* the four weights [full, half, no, sab] (BAL.road.hp; each ≥ 0) */
 function rdHpW(A,P){const B=BAL.road.hp,w=(B.w[P.role]||B.w.go).slice();const m=B.trK&&B.trK[P.role]!=null?B.trK[P.role]:1,add=v=>{if(v)for(let i=0;i<4;i++)w[i]+=(v[i]||0)*m};
@@ -193,9 +199,10 @@ const rdHpLk=(P,k)=>k===3&&rdHpTones(P).includes("Nhiều chuyện");
 /* the helper's answer line (jrdhp RDHPL, VANPHONG; address through jvoice kSay) */
 function rdHpLine(A,P,k){const L=window.RDHPL&&RDHPL[P.type];if(!L)return"";let s=L[rdHpLk(P,k)?"lk":RDHP_K[k]]||"";let rv=null;try{rv=rv67(A,"v")}catch(e){}
  const ri=rv&&rv!==P.p?rv.name:"người khác";s=s.replace(/\{hn\}/g,P.name||"").replace(/\{ri\}/g,ri);
- try{if(P.sp&&typeof kSay==="function")s=kSay(P.sp,S,s,P.role==="maid"?{}:P.sp&&P.sp.srv?{own:false}:{})}catch(e){}return s.charAt(0).toUpperCase()+s.slice(1)}
+ const sp=P.sp||(/\{(goi|Goi|xung|Xung)\}/.test(s)?RDHP_SP[P.role]||{srv:"f"}:null);
+ try{if(sp&&typeof kSay==="function")s=kSay(sp,S,s,P.role==="maid"?{}:sp.srv?{own:false}:{})}catch(e){}return s.charAt(0).toUpperCase()+s.slice(1)}
 /* how the card names the helper in front of the word */
-function rdHpLab(P){const R={dad:"Cha",bro:"Huynh trưởng",mom:"Mẫu thân",fam:"Người nhà",srv:"Kẻ hầu ấy",doc:"Thái y",off:"Vị quan ấy",go:"Người được nhờ"};
+function rdHpLab(P){const R={dad:"Cha",bro:"Huynh trưởng",mom:"Mẫu thân",fam:"Người nhà",srv:"Kẻ hầu ấy",doc:"Thái y",off:"Vị quan ấy",dan:"Người ấy",go:"Người được nhờ"};
  return R[P.role]||P.name||"Người được nhờ"}
 function rdHpNote(P,k){try{if(window.__hpLog)(window.__hpS=window.__hpS||[]).push({role:P.role,type:P.type,k:rdHpLk(P,k)?4:k,net:rdHpTones(P).slice(),aff:P.aff,word:P.word})}catch(e){}}
 /* refused options of the open hồi leave its option list (A.hpNo = {b: beat id, i: [raw indexes]}) */
@@ -223,4 +230,4 @@ setTimeout(()=>{
   if(k===1)return done(r0.call(this,tk,bid,i,odds>=100?100-B.half:Math.max(B.min,odds-B.half)));
   const r=r0.call(this,tk,bid,i,0);try{const fx={duc:-B.sab.duc};ap67(fx);let ex=fmt(fx);const v=rv67(A,"v");if(v&&v!==P.p){oanAdd(v,S,B.sab.oan);ex+=` · ${v.name} oán ta +${B.sab.oan}`}log(`${head}${kw}: ${ex}`)}catch(e){console.error(e)}
   return done(r)}}catch(e){console.error(e)}},0);
-window.rdHpWho=rdHpWho;window.rdHpW=rdHpW;window.rdHpWord=rdHpWord;window.rdHpTag=rdHpTag;window.rdHpLine=rdHpLine;
+window.rdHpWho=rdHpWho;window.rdHpW=rdHpW;window.rdHpWord=rdHpWord;window.rdHpTag=rdHpTag;window.rdHpLine=rdHpLine;window.rdHpLab=rdHpLab;

@@ -408,7 +408,7 @@ Object.assign(BAL,{nroad:{
    (noRule → word.rule, noLow → word.low, others word.no). kw = the answer names in the Sổ ghi line. */
 BAL.road.hp={
  w:{dad:[60,20,15,5],bro:[55,25,15,5],mom:[65,20,10,5],fam:[45,30,20,5],th:[35,25,35,5],hh:[30,25,35,10],emp:[45,25,30,0],
-  eun:[30,35,20,15],srv:[30,35,20,15],maid:[50,35,5,10],doc:[30,25,40,5],off:[30,25,40,5],v:[30,25,30,15],v2:[30,25,30,15],mis:[45,30,10,15],
+  eun:[30,35,20,15],srv:[30,35,20,15],maid:[50,35,5,10],doc:[30,25,40,5],off:[30,25,40,5],dan:[35,35,20,10],v:[30,25,30,15],v2:[30,25,30,15],mis:[45,30,10,15],
   man:[40,30,20,10],n1:[50,30,15,5],go:[35,35,15,15],foe:[10,25,40,25]},
  tr:{"Ân cần":[20,0,-10,-10],"Lạnh lùng":[-10,15,5,5],"Nóng nảy":[5,0,10,5],"Điềm tĩnh":[0,5,5,-5],"Nhiều chuyện":[0,0,0,15],"Kín đáo":[0,10,5,0],
   "Kiêu ngạo":[-15,0,20,15],"Khiêm nhường":[10,5,-10,-5],"Cương trực":[5,-5,15,-10],"Xu nịnh":[0,10,-5,10],
@@ -421,7 +421,7 @@ BAL.road.hp={
  word:{full:"Sẵn lòng",half:"Miễn cưỡng",no:"Không ưa",rule:"Theo quy củ",low:"Còn đắn đo",lk:"Lắm lời",unk:"Không rõ"},
  kw:{full:"Giúp hết lòng",half:"Giúp qua loa",no:"Từ chối",sab:"Phá ngầm",lk:"Mách lẻo"},
  /* the answer-line set (jrdhp.js RDHPL) each role speaks with */
- type:{dad:"dad",bro:"fam",mom:"fam",fam:"fam",th:"th",hh:"hh",emp:"emp",eun:"eun",srv:"srv",maid:"maid",doc:"doc",off:"off",v:"rv",v2:"rv",mis:"rv",man:"man",n1:"n1",go:"go",foe:"foe"}};
+ type:{dad:"dad",bro:"fam",mom:"fam",fam:"fam",th:"th",hh:"hh",emp:"emp",eun:"eun",srv:"srv",maid:"maid",doc:"doc",off:"off",dan:"dan",v:"rv",v2:"rv",mis:"rv",man:"man",n1:"n1",go:"go",foe:"foe"}};
 /* seat counts per rank (review/seatcap): BAL.seatCap IS j30 SEATCAP (one object, one place): Hoàng hậu 1, Hoàng quý phi 1, Quý phi 2, Phi 4, Tần 6; lower ranks no cap.
    Every road that sets a rank asks jseat.js seatHas / seatDown / seatUp; seatSettle is the net after every turn and on load. */
 BAL.seatCap=SEATCAP;

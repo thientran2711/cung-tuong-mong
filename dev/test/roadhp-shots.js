@@ -1,6 +1,6 @@
 /* roadhp-shots (QUESTLINE Q3): the owner's two devices (Fold 755x1000@2, iPad 1180x820@2), HOST mode, the BUILT root index.html.
    Shot 1: a hồi card of her road with a «Nhờ» option — its Gợi ý row opens with the willingness word. Shot 2: she asks, the helper REFUSES
-   (forced through BAL.road.hp.w for the shot) — the same hồi comes back with the answer line on top, that option gone, the others kept.
+   (forced for the shot: that role's w = refuse only, nết / liking / Tâm cơ / road / nợ ân terms zeroed, BAL restored after) — the same hồi comes back with the answer line on top, that option gone, the others kept.
    usage: bash dev/site/build_site.sh && node dev/test/roadhp-shots.js <outdir OUTSIDE the repo> [--no-net]   (shots never go in git) */
 const {chromium}=require('playwright');const D=require('./lib/device');const fs=require('fs');
 const A=process.argv.slice(2);const OUT=A.find(a=>!a.startsWith('--'))||'/tmp/roadhp-shots';fs.mkdirSync(OUT,{recursive:true});const NET=!A.includes('--no-net');let bad=0;
@@ -27,8 +27,8 @@ const A=process.argv.slice(2);const OUT=A.find(a=>!a.startsWith('--'))||'/tmp/ro
   await shot('1-word');
   /* scroll the helper option into view as well (long cards) */
   await g.evaluate(()=>{const X=window.__shotA;const bb=beatDef67(X.A,X.bk);const i=opts67(X.A,bb).indexOf(bb.o[X.ri]);const bt=document.querySelectorAll('#modal .opts > button')[i];if(bt)bt.scrollIntoView({block:'center'})});await shot('1b-word-option');
-  await g.evaluate(()=>{const X=window.__shotA;const H=BAL.road.hp;window.__w0=H.w[X.role];H.w[X.role]=[0,0,100,0];const bb=beatDef67(X.A,X.bk);const i=opts67(X.A,bb).indexOf(bb.o[X.ri]);chooseM(i)});
-  await pg.waitForTimeout(400);await g.evaluate(()=>{try{if(!document.querySelector('#modal:not([hidden]) .opts'))showModal()}catch(e){}const X=window.__shotA;BAL.road.hp.w[X.role]=window.__w0;const m=document.querySelector('#modal .dlg, #modal');if(m)m.scrollTop=0});
+  await g.evaluate(()=>{const X=window.__shotA;const H=BAL.road.hp;window.__h0=JSON.parse(JSON.stringify(H));H.w[X.role]=[0,0,100,0];H.tr={};H.aff=[0,0,0,0];H.rdRiv=0;H.owe=0;H.tcSab=0;H.rdWon=0;H.rdLost=0;const bb=beatDef67(X.A,X.bk);const i=opts67(X.A,bb).indexOf(bb.o[X.ri]);chooseM(i)});
+  await pg.waitForTimeout(400);await g.evaluate(()=>{try{if(!document.querySelector('#modal:not([hidden]) .opts'))showModal()}catch(e){}const X=window.__shotA;Object.assign(BAL.road.hp,window.__h0);const m=document.querySelector('#modal .dlg, #modal');if(m)m.scrollTop=0});
   const top=await g.evaluate(()=>{const m=document.querySelector('#modal');return m?m.textContent.slice(0,400):''});console.log(tag,'after refusal:',top.replace(/\s+/g,' ').slice(0,300));
   await shot('2-answer');
   if(errs.length){bad++;console.log(`FAIL ${tag}: ${errs.length} page errors: ${errs[0]}`)}await ctx.close()}

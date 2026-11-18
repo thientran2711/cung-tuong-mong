@@ -4,7 +4,9 @@
    (the .4 premise arc id = the road id, e.g. "tt_co"; chapters .5–.11 = "<road>_<n>"). An option with no entry rolls as before (old saves, new options).
    hp = a cast key of the chapter (v, v2, mis, man, eun, maid, n1, foe, dad) or a role: bro (huynh trưởng), mom (mẫu thân), fam (người nhà, gia đinh,
    quản gia, nhà ngoại, người thế giao…), th, hh, emp, srv (another's servant: ma ma, tiểu thái giám, cung nữ ấy), doc (thái y, lương y), off (quan:
-   Ngự sử, Hàn lâm, Lễ bộ, sứ thần, phó tướng, thầy kiện…), go (an unnamed «người»: a go-between she does not know).
+   Ngự sử, Hàn lâm, Lễ bộ, Lại bộ, sứ thần / sứ quán, phó tướng, Thái bộc), dan (a commoner or outsider known by trade or house, not an official:
+   thầy kiện, thợ cung, lái buôn, quân trạm dịch, đoàn quân lương, đội trưởng canh phòng, a clerk, a father's student, sĩ lâm, a Thượng thư's wife),
+   go (an unnamed «người»: a go-between she does not know). {pa} (her brother at home, nc / bd) = bro.
    Not tagged on purpose (they ask nobody): «Cảm tạ, không dám nhờ» dtq_vu_6:c2:2 · «Gửi chứng cứ qua người nhà ông, không kèm lời nhờ» dtq_vu_9:c1:0 ·
    «Không nhờ ai» muoi_no_7:c2:2 · «Họ cha, nhờ công trận» td_song_9:x1:1 ("nhờ" = thanks to, no helper).
    Scan (every «Nhờ» tagged, every tag on a «Nhờ», every tagged hồi keeps an option that asks nobody): dev/test/roadhp-scan.js.
@@ -87,7 +89,7 @@ Object.assign(RDHP,{
 "muoi_tuoc_6:s1:2":{hp:"hh"},/* Nhờ Hoàng hậu hỏi về tờ sớ */
 "muoi_tuoc_8:x1:0":{hp:"dad"},/* Nhờ cha mời Ngự sử đến tận làng */
 "muoi_lau_5:s1:1":{hp:"bro"},/* Nhờ huynh trưởng thuê người chép sổ */
-"muoi_lau_5:s2:0":{hp:"off"},/* Nhờ thầy kiện xin sao sổ */
+"muoi_lau_5:s2:0":{hp:"dan"},/* Nhờ thầy kiện xin sao sổ */
 "muoi_lau_5:s2:1":{hp:"bro"},/* Nhờ huynh trưởng cải trang vào kho */
 "muoi_lau_5:t1:0":{hp:"fam"},/* Nhờ người nhà cứu trang sổ ấy */
 "muoi_lau_5:t1:1":{hp:"dad"},/* Nhờ cha báo Tuần diêm Ngự sử niêm phong */
@@ -96,7 +98,7 @@ Object.assign(RDHP,{
 "muoi_lau_7:t1:1":{hp:"hh"},/* Nhờ Hoàng hậu tâu xin kiểm kho */
 "muoi_lau_9:x1:1":{hp:"off"},/* Nhờ Ngự sử xin cho lão khai kín */
 "muoi_lau_10:s1:2":{hp:"bro"},/* Nhờ huynh trưởng gặp thay, ghi lại */
-"muoi_lau_10:x1:1":{hp:"off"},/* Nhờ thầy kiện xin xử riêng tội nợ thuế */
+"muoi_lau_10:x1:1":{hp:"dan"},/* Nhờ thầy kiện xin xử riêng tội nợ thuế */
 "muoi_lau_11:t1:1":{hp:"dad"},/* Nhờ cha giao cho Tuần diêm Ngự sử */
 "muoi_doi_6:s1:2":{hp:"bro"},/* Nhờ huynh trưởng hỏi quê từng người */
 "muoi_doi_6:c2:1":{hp:"bro"},/* Nhờ huynh trưởng trả gấp đôi để dân nói thật */
@@ -106,10 +108,10 @@ Object.assign(RDHP,{
 "muoi_no_7:c2:1":{hp:"eun"},/* Nhờ {eun} làm chứng kẻ mua bí mật */
 /* ---------- cn · Cung nữ được sủng hạnh (20) ---------- */
 "cn_tinh:s2:0":{hp:"go"},/* Nhờ người hỏi lấy lại thư */
-"cn_than:s2:0":{hp:"off"},/* Đem ngọc nhờ thợ cung xem */
+"cn_than:s2:0":{hp:"dan"},/* Đem ngọc nhờ thợ cung xem */
 "cn_than:c1:0":{hp:"go"},/* Nhờ người chép hồ sơ */
-"cn_chu_8:c1:2":{hp:"off"},/* Nhờ đồng liêu cũ kể chuyện thật */
-"cn_tinh_5:s1:1":{hp:"off"},/* Bỏ bạc nhờ đội trưởng canh phòng hắn */
+"cn_chu_8:c1:2":{hp:"srv"},/* Nhờ đồng liêu cũ kể chuyện thật */
+"cn_tinh_5:s1:1":{hp:"dan"},/* Bỏ bạc nhờ đội trưởng canh phòng hắn */
 "cn_tinh_5:c1:1":{hp:"eun"},/* Nhờ {eun} kiểm trại, mượn cớ khác */
 "cn_tinh_6:c2:0":{hp:"srv"},/* Nhờ cung nữ ấy lấy trộm */
 "cn_tinh_6:c2:1":{hp:"srv"},/* Chỉ nhờ xem thư thật hay giả */
@@ -129,24 +131,24 @@ Object.assign(RDHP,{
 "nc_gian_7:c2:2":{hp:"go"},/* Nhờ người nói xấu nhà {v} một câu */
 "nc_gian_9:s2:0":{hp:"go"},/* Nhờ người hỏi xem ai thẩm án */
 "nc_gian_9:t1:2":{hp:"off"},/* Nhờ sứ thần {land} lo */
-"nc_su_6:c1:0":{hp:"off"},/* Nhờ {pa} giữ y lại hỏi */
+"nc_su_6:c1:0":{hp:"bro"},/* Nhờ {pa} giữ y lại hỏi */
 "nc_tuc_8:s2:1":{hp:"off"},/* Nhờ sứ quán cố hương lên tiếng */
 "nc_vuong_5:c2:1":{hp:"emp"},/* Nhờ Hoàng thượng hỏi đến */
-"nc_vuong_6:s2:2":{hp:"off"},/* Nhờ phu nhân Thượng thư Lễ bộ chuyển lời */
-"nc_vuong_9:c1:1":{hp:"off"},/* Nhờ phu nhân Thượng thư Lễ bộ chuyển lời */
+"nc_vuong_6:s2:2":{hp:"dan"},/* Nhờ phu nhân Thượng thư Lễ bộ chuyển lời */
+"nc_vuong_9:c1:1":{hp:"dan"},/* Nhờ phu nhân Thượng thư Lễ bộ chuyển lời */
 /* ---------- bd · Hòa thân · Bắc Địch (10) ---------- */
-"bd_hoa_6:c1:0":{hp:"off"},/* Nhờ {pa} giữ y lại hỏi */
+"bd_hoa_6:c1:0":{hp:"bro"},/* Nhờ {pa} giữ y lại hỏi */
 "bd_ngua_7:c2:2":{hp:"go"},/* Nhờ người nói xấu nhà {v} một câu */
 "bd_ngua_9:s2:0":{hp:"go"},/* Nhờ người hỏi xem ai thẩm án */
 "bd_ngua_9:t1:2":{hp:"off"},/* Nhờ sứ thần {land} lo */
 "bd_tuc_8:s2:1":{hp:"off"},/* Nhờ sứ quán cố hương lên tiếng */
 "bd_hoang_5:c2:1":{hp:"emp"},/* Nhờ Hoàng thượng hỏi đến */
-"bd_hoang_6:s2:2":{hp:"off"},/* Nhờ phu nhân Thượng thư Lễ bộ chuyển lời */
-"bd_hoang_9:c1:1":{hp:"off"},/* Nhờ phu nhân Thượng thư Lễ bộ chuyển lời */
+"bd_hoang_6:s2:2":{hp:"dan"},/* Nhờ phu nhân Thượng thư Lễ bộ chuyển lời */
+"bd_hoang_9:c1:1":{hp:"dan"},/* Nhờ phu nhân Thượng thư Lễ bộ chuyển lời */
 "bd_hoa:s1:1":{hp:"off"},/* Nhờ sứ đoàn nhắn: ta vẫn bình an */
 "bd_ngua:s1:1":{hp:"off"},/* Giữ cả đàn, nhờ Thái bộc nuôi */
 /* ---------- td · Con gái tội thần (37) ---------- */
-"td_an:s1:0":{hp:"off"},/* Bỏ bạc nhờ ông chép lại */
+"td_an:s1:0":{hp:"dan"},/* Bỏ bạc nhờ ông chép lại */
 "td_an:c2:1":{hp:"go"},/* Nhờ người trong cung {foe} lục tìm */
 "td_song:c1:0":{hp:"go"},/* Nhờ người xin cho em làm hỏa đầu quân */
 "td_an_5:s3:2":{hp:"th"},/* Nhờ Thái hậu hỏi giúp một lời */
@@ -155,7 +157,7 @@ Object.assign(RDHP,{
 "td_an_8:s2:1":{hp:"fam"},/* Nhờ người quen xếp sổ ấy lên xe gần lối đi */
 "td_an_8:c1:1":{hp:"off"},/* Nhờ Ngự sử xin Binh bộ sao y có đóng dấu */
 "td_an_8:c2:2":{hp:"off"},/* Nhờ Ngự sử dâng thay */
-"td_an_8:x1:1":{hp:"off"},/* Nhờ người đủ cao xin giữ sổ */
+"td_an_8:x1:1":{hp:"go"},/* Nhờ người đủ cao xin giữ sổ */
 "td_an_10:s2:0":{hp:"off"},/* Nhận lời xét, nhờ Ngự sử nộp hết chứng cứ */
 "td_an_10:c1:0":{hp:"fam"},/* Nhờ lão quản gia nộp thêm lời khai của thư lại */
 "td_an_10:c1:1":{hp:"off"},/* Nhờ Ngự sử xin mời sư chùa Giang Nam làm chứng tờ cung khai */
@@ -171,11 +173,11 @@ Object.assign(RDHP,{
 "td_ke_8:c3:2":{hp:"off"},/* Nhờ ông dò trong Ngự sử đài */
 "td_ke_9:s2:0":{hp:"eun"},/* Nhờ {eun} giúp một tay */
 "td_ke_10:s2:1":{hp:"th"},/* Nhờ Thái hậu nói giúp */
-"td_song_5:s2:0":{hp:"off"},/* Nhờ lái buôn đưa em đổi doanh */
+"td_song_5:s2:0":{hp:"dan"},/* Nhờ lái buôn đưa em đổi doanh */
 "td_song_5:t1:1":{hp:"off"},/* Nhờ phó tướng giữ em bên mình */
-"td_song_6:c3:1":{hp:"off"},/* Nhờ trạm dịch quân đưa thư */
+"td_song_6:c3:1":{hp:"dan"},/* Nhờ trạm dịch quân đưa thư */
 "td_song_8:s1:2":{hp:"off"},/* Nhờ phó tướng đưa em về hậu doanh */
-"td_song_8:c2:2":{hp:"off"},/* Nhờ đoàn quân lương */
+"td_song_8:c2:2":{hp:"dan"},/* Nhờ đoàn quân lương */
 "td_song_8:t1:2":{hp:"off"},/* Nhờ phó tướng xin rút đội em */
 "td_song_9:c3:1":{hp:"off"},/* Nhờ lão quan bộ Lễ dâng sớ trước */
 "td_tha_6:t1:2":{hp:"foe"},/* Nhờ {foe} nói với họ hàng */
@@ -206,10 +208,10 @@ Object.assign(RDHP,{
 "thd_tho_9:c1:1":{hp:"n1"},/* Nhờ {n1} xin công văn gọi sổ */
 "thd_sach_6:c1:0":{hp:"off"},/* Nhờ Hàn lâm viện viết lời bình */
 "thd_sach_7:s1:1":{hp:"go"},/* Nhờ người dò kẻ đốt */
-"thd_sach_8:c1:2":{hp:"off"},/* Nhờ học trò của cha chép */
+"thd_sach_8:c1:2":{hp:"dan"},/* Nhờ học trò của cha chép */
 "thd_sach_9:c1:1":{hp:"off"},/* Nhờ học sĩ Hàn lâm giảng câu ấy */
 "thd_sach_9:c3:2":{hp:"off"},/* Nhờ một Ngự sử xin cho chủ sự ấy hồi tị */
-"thd_sach_11:s2:2":{hp:"off"},/* Nhờ sĩ lâm dâng sớ xin tha */
+"thd_sach_11:s2:2":{hp:"dan"},/* Nhờ sĩ lâm dâng sớ xin tha */
 "thd_tro_5:s2:0":{hp:"n1"},/* Gửi bạc nhờ {n1} dò giúp */
 "thd_tro_5:c1:1":{hp:"n1"},/* Nhờ {n1} báo Ngự sử đài */
 "thd_tro_5:t1:1":{hp:"n1"},/* Nhờ {n1} so dấu son ở Hàn lâm viện */
@@ -311,6 +313,11 @@ Object.assign(RDHPL,{
   no:"Người được nhờ lắc đầu, trả lại lễ, không dám nhận việc.",
   sab:"Người được nhờ nhận bạc của ngươi, lại bán tin cho {ri}.",
   lk:"Người được nhờ nói lại với kẻ khác; tin đến tai {ri}."},
+ dan:{full:"Người ấy nhận lời, làm việc chu đáo như đã hứa.",
+  half:"Người ấy nhận tiền công rồi làm qua quýt, được chăng hay chớ.",
+  no:"Người ấy rụt rè thưa rằng phận nhỏ, chuyện trong cung không dám dây vào.",
+  sab:"Người ấy nhận lời rồi đem chuyện bán cho {ri}, việc của ngươi đổ bể.",
+  lk:"Người ấy kể chuyện ngươi nhờ ở quán trà ngoài phố; tin theo đường ấy đến tai {ri}."},
  foe:{full:"Lần này {hn} nể mặt, chịu nói giúp với họ hàng.",
   half:"{hn} nói qua loa vài câu cho xong chuyện.",
   no:"{hn} cười nhạt, không nhận lời.",

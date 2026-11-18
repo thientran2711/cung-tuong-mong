@@ -28,6 +28,14 @@ const NOASK=/không dám nhờ|^Không nhờ ai|không kèm lời nhờ|nhờ c�
    if(seen.has(s))fail.push('shared line '+t+'.'+k+' = '+seen.get(s));seen.set(s,t+'.'+k);if(/\d|%/.test(s))fail.push('digit/% in '+t+'.'+k);if(ADDR.test(s))fail.push('typed address word in '+t+'.'+k);
    const tok=(s.match(/\{(\w+)\}/g)||[]).filter(x=>!/^\{(goi|Goi|xung|Xung|hn|ri)\}$/.test(x));if(tok.length)fail.push('unknown token '+tok+' in '+t+'.'+k)}
   for(const w of Object.values(H.word))if(/\d|%/.test(w))fail.push('digit in word '+w);
+  /* (5) RENDER (review E9r item 1/3): for EVERY tag, the real helper (rdHpWho on a thread of that arc, cast once, then with the cast gone)
+     renders its card label and all 5 answer lines through rdHpLine at a low and a high rank: no leftover {…}, no empty name, no double space */
+  let rendered=0;const R0=S.rank;
+  for(const [k,t] of Object.entries(RDHP)){const [id]=k.split(':');for(const cast of [1,0])for(const rk of [1,6]){S.rank=rk;let A;try{A=newThread67(id,'t');if(cast){for(const c of ['v','v2'])try{castRv67(A,c)}catch(e){}}else A.act={}}catch(e){A={a:id,act:{},f:{},n1:'',n2:''}}
+    let P;try{P=rdHpWho(A,t.hp)}catch(e){fail.push('rdHpWho throws '+k+': '+e.message);continue}const lab=rdHpLab(P);if(!lab||/^\s|\s$/.test(lab))fail.push(`empty label ${k} (${t.hp})`);
+    for(let kk=0;kk<5;kk++){const Q2=Object.assign({},P,{net:kk===4?['Nhiều chuyện']:P.net.filter(x=>x!=='Nhiều chuyện')});const L=rdHpLine(A,Q2,kk===4?3:kk);rendered++;
+     if(!L||/[{}]/.test(L)||/  |^[:«\s]|: «\s|^\s*$/.test(L)||/\s[,.;]/.test(L))fail.push(`render ${k} (${t.hp}, cast ${cast}, rank ${rk}, ${['full','half','no','sab','lk'][kk]}): «${L}»`)}}}
+  S.rank=R0;note.push('rendered lines: '+rendered);
   const byRole={};for(const x of Object.values(RDHP))byRole[x.hp]=(byRole[x.hp]||0)+1;
   return {nho,tagged,noask,beats:beats.size,dyn,lines,fail,note,byRole}},NOASK.source);
  console.log(`«Nhờ» options ${r.nho} · tagged ${r.tagged} · no-ask ${r.noask} · tagged hồi ${r.beats} (free option hidden by a filter in a neutral life: ${r.dyn}) · answer lines ${r.lines}`);

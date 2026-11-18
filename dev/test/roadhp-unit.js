@@ -46,6 +46,12 @@ const {chromium}=require('playwright');const URL=process.argv[2]||'http://127.0.
    ok(!ro.hint&&rec[0]===od&&S.duc===d0,`${nm}: no word, today's roll (${od})`);off()}
   /* (f) an open hồi from an old save (no hpNo, dialog already queued) */
   reset();{const [id,bk,ri]=CASES[0];const X=open(id,bk,ri);delete X.A.hpNo;const od=X.d.pp.o[X.i];res67(X.tk,bk,X.i,od);ok(X.A.cur!==bk||!!X.A.hpNo,`old open hồi (no hpNo) resolves`)}
+  /* (g) a missing person / name (review E9r item 3): mis / man / v / foe / n1 with nobody → the go set (lines, weights, word Không rõ) */
+  reset();for(const hp of ['mis','man','v','v2','foe','n1']){const A={a:'tt_co',act:{},f:{},n1:'',n2:''};const sv0=S.foe;if(hp==='foe')S.foe='';let P;try{P=rdHpWho(A,hp)}finally{S.foe=sv0}
+   if(hp==='man'&&P.p)continue;/* man67 always finds a man when S.men has one */const w=rdHpW(A,P),L=rdHpLine(A,P,0);
+   ok(P.type==='go'&&rdHpWord(P,w)===H.word.unk&&!/[{}]/.test(L)&&rdHpLab(P)==='Người được nhờ',`empty ${hp} → go: «${rdHpLab(P)}: ${rdHpWord(P,w)}» «${L}»`)}
+  /* (h) every role renders with a speaker (no raw {xung}) — off was the gap (review E9r item 1) */
+  reset();for(const hp of Object.keys(H.w)){const A={a:'tt_co',act:{},f:{},n1:'Lý Tường',n2:''};const P=rdHpWho(A,hp);const L=[0,1,2,3].map(k=>rdHpLine(A,P,k)).join(' | ');ok(!/[{}]/.test(L),`${hp} renders: ${L.slice(0,90)}`)}
   /* draws reachable with the shipped numbers: a cold Kiêu ngạo consort vs a warm Ân cần one */
   reset();const P0={role:'v',type:'rv',p:null,net:[],aff:0,tc:60,known:true,dk:null};
   const cold=rdHpW(null,Object.assign({},P0,{net:['Kiêu ngạo','Thù dai'],aff:-40})),warm=rdHpW(null,Object.assign({},P0,{net:['Ân cần','Trọng nghĩa'],aff:40}));
