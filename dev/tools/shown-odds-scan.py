@@ -174,6 +174,9 @@ def is_shown(e):
     keys = [e] + ([m.group(1)] if m and re.fullmatch(r'o[A-Z]\w*|\w+O|\w+Odds|\w+odds', m.group(1)) else [])  # an odds function by name (oSpy, askO, dbOdds)
     for k in keys:
         if re.search(r'(?:word|kitOdds|wordOf|oddsWord)\(\s*(?:oddsCl\()?\s*' + re.escape(k), ALLSRC): return True
+        # shown through a variable on the card: `o=od(EXPR)` / `fo=petBuyO(k)` … then word(o) close by (review r2-rv: j53 fav, j54 noi, j61 ask, jpet buy)
+        for a in re.finditer(r'(?<![\w.])(\w+)\s*=\s*(?:oddsCl\(|od\(|odA\(\w+,)?\s*' + re.escape(k), ALLSRC):
+            if re.search(r'(?:word|kitOdds|wordOf|oddsWord)\(\s*(?:oddsCl\()?\s*' + re.escape(a.group(1)) + r'\b', ALLSRC[a.end():a.end() + 1500]): return True
     return False
 srows = []
 for fname, t2 in src.items():

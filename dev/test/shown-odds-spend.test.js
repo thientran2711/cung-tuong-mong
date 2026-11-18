@@ -33,7 +33,7 @@ const URL='file://'+path.resolve(process.argv[2]||path.join(__dirname,'../index.
   /* roll capture (as dev/test/shown-odds.test.js): the act's own roll; aRoll (j9) is looked through */
   const roll0=roll;let cap=null;
   const SIDE=/^(runAct|caught|servCaught|mindBelief|punish|framed|confessRisk)$/;
-  const OWN=/(^|\.)f$|^(loSteal|tsbFire|wdFrame|plantItem|trip|pushPond|wdAccuse|xxAccuse|stealNight|bribeServ|spyMaidRun|overhear|scout|kmEmpAct)$/,LAST=/^tsbBulNpc$/;
+  const OWN=/(^|\.)f$|^(loSteal|tsbFire|wdFrame|plantItem|trip|pushPond|wdAccuse|xxAccuse|stealNight|bribeServ|spyMaidRun|overhear|scout|kmEmpAct|k61Ask|petBuyOne|ktAct|h54Act)$/,LAST=/^tsbBulNpc$/;
   const who=()=>{const L=(new Error().stack||'').split('\n');const nm=i=>{const m=(L[i]||'').match(/at (?:new )?([\w.$<>\[\] ]+?) \(/);return m?m[1]:'?'};const w=nm(3);return w==='aRoll'?nm(4):w};
   roll=function(o){if(!cap)return roll0(o);const w=who();cap.all.push(Math.round(o)+'@'+w);if(SIDE.test(w))return false;if(cap.o==null&&OWN.test(w))cap.o=o;if(LAST.test(w))cap.last=o;return roll0(o)};
   const R2=o=>o==null?null:oddsCl(Math.round(Math.min(o,BAL.odds.hi)));
@@ -75,6 +75,16 @@ const URL='file://'+path.resolve(process.argv[2]||path.join(__dirname,'../index.
   {restore();const v=liveRivals(true)[0];const row={k:'scout',c:'j21',v:v.name,shown:R2(od(BAL.odb.j21.odO+(S.mat||0)*8+S.tamco/10))};MV=move(v);run(row,()=>scout(v.id))}
   {restore();/* the Emperor is somewhere she may ask him (test stub of his place) */const kf0=window.kmEmpFree;window.kmEmpFree=()=>({ok:true,k:'vuon'});S.wx=S.wx||{};S.wx.f=0;const kinds=typeof KM_EMPACT!=='undefined'?Object.keys(KM_EMPACT):[];let kd=null;for(const x of ['walk'].concat(kinds)){try{if(!kmEmpWhy(S,x)){kd=x;break}}catch(e){}}
    if(!kd)out.push({k:'kmEmp',skip:'no kind open'});else{const row={k:'kmEmp/'+kd,c:'jgift',shown:R2(kmEmpO(S,kd))};MV=()=>{S.wx=S.wx||{};S.wx.f=3;S.sung=S.sung>=50?S.sung-30:S.sung+30};run(row,()=>kmEmpAct(S,kd))}window.kmEmpFree=kf0}
+  /* review r2-rv: four inline paths the scan missed (odds shown through a variable): j61 "Hỏi người hầu", jpet buy, j53 "Xin cử Đại học sĩ" (Sủng -4 before the roll), j54 "Nhờ con nói giúp" (Mẫu tử -4 before the roll) */
+  const mvStats=()=>()=>{S.mat=(S.mat||0)+3;if(S.maid)S.maid.loyal=Math.min(100,(S.maid.loyal||40)+30);for(const s of ['sung','danh','tamco'])S[s]=S[s]>=50?S[s]-30:S[s]+30};
+  {restore();const w=liveRivals(true).find(x=>typeof k61Named==='function'&&!k61Named(x));const k=w&&kOf61(w);
+   if(!k)out.push({k:'k61ask',skip:'everyone named'});else{const row={k:'k61ask',c:'j61',v:w.name,shown:R2(od(BAL.odb.j61.odO+(S.mat||0)*8+((S.maid&&S.maid.loyal)||40)/5))};MV=mvStats();run(row,()=>k61Ask(k))}}
+  {restore();const t=(typeof PETK!=='undefined'?PETK:[]).find(x=>PET[x].pr);
+   if(!t||!petHasFree(S))out.push({k:'petbuy',skip:'no pet / no room'});else{const row={k:'petbuy',c:'jpet',v:PET[t].n,shown:R2(petBuyO(t))};MV=mvStats();run(row,()=>petBuyOne(t))}}
+  {restore();const kd=mkKid('m',8);kd.name='Thử'+kd.name;kd.alive=true;S.kids.push(kd);try{ktSync(kd)}catch(e){}kd.tut=0;kd.fav=0;S.out=0;
+   const row={k:'kt53/fav',c:'j53',v:kd.name,shown:R2(od(KT.favO+S.sung/2))};MV=mvStats();run(row,()=>ktAct('fav',kd.name))}
+  {restore();const kd=mkKid('m',20);kd.name='Thử'+kd.name;kd.alive=true;S.kids.push(kd);try{h54Init(kd)}catch(e){}kd.hW={kind:'nha',joy:50};kd.hV=null;kd.hM=60;S.out=0;
+   const row={k:'h54/noi',c:'j54',v:kd.name,shown:R2(od(h54SpeakO(kd)))};MV=mvStats();run(row,()=>h54Act('noi',kd.name))}
   roll=roll0;return out},SEED);
  let bad=0,n=0;for(const r of R){if(r.skip){console.log('skip',r.k,r.c||'',r.skip);continue}
   if(r.shown==null){console.log('noodds',r.k,r.c);continue}if(r.shown>=100){console.log('sure',r.k,r.c,'(o>=100: no success roll; side rolls',r.all+')');continue}

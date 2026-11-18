@@ -257,8 +257,8 @@ function petPick(x){if(x.item){const i=x.i,P=tsbPets(S)[i];if(!P)return;const T=
     tap the picture = the kit item card (Tốn / Được / Mất / Ghi chú). Rare ones are never sold: the line above the grid says where they come from. */
  if(typeof kitShop==="function"){petShop();return}
  kitModal({kind:"info",title:"Ô thú nuôi",sub:`còn ${petMax(S)-tsbPets(S).length} ô`,html:kitFacts(["Chưa mở được Nội vụ phủ."]),btn:"Lui"})}
-function petBuyOne(t){const T=PET[t];if(!T||!T.pr||!can(1)||S.bac<T.pr||!petHasFree(S))return false;spend(1);apply({bac:-T.pr});
- if(roll(petBuyO(t))){petAdd(S,t,PET_SRCN.buy,"buy");log(`<span class="g">Thái giám Nội vụ phủ tìm về cho ngươi ${T.n.replace(/^./,c=>c.toLowerCase())}.</span>`)}
+function petBuyOne(t){const T=PET[t];if(!T||!T.pr||!can(1)||S.bac<T.pr||!petHasFree(S))return false;const o=petBuyO(t);/* the odds on the card, read before the spend (shown-odds r2-rv) */spend(1);apply({bac:-T.pr});
+ if(roll(o)){petAdd(S,t,PET_SRCN.buy,"buy");log(`<span class="g">Thái giám Nội vụ phủ tìm về cho ngươi ${T.n.replace(/^./,c=>c.toLowerCase())}.</span>`)}
  else log(`<span class="r">Thái giám mua phải con ốm, không nuôi được; mất ${T.pr} lượng.</span>`);return true}
 function petShopItems(){const sfx=typeof petcStageSrc==="function"?"-non":"";
  return PETK.filter(k=>PET[k].pr).map(k=>{const T=PET[k],o=petBuyO(k),t1=whyTime(1);

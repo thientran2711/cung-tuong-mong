@@ -204,8 +204,8 @@ function ktAct(a,name,t){const k=S&&S.kids.find(x=>x.name===name&&x.alive);if(!k
   log(`Tự tay ${a==="tv"?"dạy":"dạy lễ nghi cho"} ${k.name}${a==="tv"?" học chữ":""}: ${a==="tv"?"Văn":"Đức"} con +${ktG(g)}. ${roll(25)?ktReveal(k,"Dạy con, ngươi thấy"):""}`)}
  else if(a==="tut"){t=+t;if(k.age<6||!can(1)||(t&&S.bac<KT.fee[t]*2)||(k.tut===t&&(t<3||!k.fav)))return;if(t)spend(1);k.tut=t;k.fav=0;title=t?`Mời ${TUT[t]}`:"Cho con học chung";
   log(t?`Mời ${TUTD[t]} dạy ${k.name}: học phí Bạc ${KT.fee[t]} mỗi tháng, trả cùng bổng lộc.`:`${k.name} về học lớp chung của Thượng thư phòng, không tốn học phí.`)}
- else if(a==="fav"){if(k.age<6||!can(2)||S.out||(k.tut===3&&k.fav))return;spend(2);apply({sung:-4});title="Xin Hoàng thượng cử Đại học sĩ";
-  if(roll(od(KT.favO+S.sung/2))){k.tut=3;k.fav=1;log(`Hoàng thượng chuẩn tấu, cử một Đại học sĩ dạy ${k.name}; học phí chỉ Bạc ${KT.feeFav} mỗi tháng.`);ok=true}
+ else if(a==="fav"){if(k.age<6||!can(2)||S.out||(k.tut===3&&k.fav))return;const fo=od(KT.favO+S.sung/2);/* the odds on the card, read before the spend and the Sủng cost (shown-odds r2-rv) */spend(2);apply({sung:-4});title="Xin Hoàng thượng cử Đại học sĩ";
+  if(roll(fo)){k.tut=3;k.fav=1;log(`Hoàng thượng chuẩn tấu, cử một Đại học sĩ dạy ${k.name}; học phí chỉ Bạc ${KT.feeFav} mỗi tháng.`);ok=true}
   else{log(`Hoàng thượng không cho: “Thượng thư phòng đã có thầy.” Xin không thành.`);ok=false}}
  else if(a==="vo"){t=+t;if(k.age<6||!can(t?1:0)||(t&&S.bac<KT.feeVo*2))return;if(t)spend(1);k.vt=t;title=t?"Mời thầy cưỡi ngựa bắn cung":"Thôi học võ";
   log(t?`Mời thầy cưỡi ngựa bắn cung dạy ${k.name}: Bạc ${KT.feeVo} mỗi tháng.`:`${k.name} thôi học võ riêng.`)}
