@@ -77,7 +77,8 @@ function clothMask(d,W,H,face,B){const n=W*H,Lab=new Float32Array(n*3);let y0=H,
  const prot=clothBlur(clothBlur(pr,W,H,3),W,H,3);for(let i=0;i<n;i++)prot[i]=Math.min(1,prot[i]*4);
  const ps=new Float32Array(n);for(let i=0;i<n;i++)ps[i]=skin[i]||hair[i]?1:0;const protS=clothBlur(clothBlur(ps,W,H,3),W,H,3);for(let i=0;i<n;i++)protS[i]=Math.min(1,protS[i]*4);/* strokes avoid only skin + hair (embroidery is part of the robe); warp also avoids items */
  /* r5 protF: skin + hair map with a SOFT 2-3 px feather and no halo (stain layers: wet, tea, mud); protS stays as it was for the creases */
- const protF=clothBlur(clothBlur(ps,W,H,1),W,H,2);for(let i=0;i<n;i++)protF[i]=Math.min(1,protF[i]*1.25);
+ const pd=clothBlur(ps,W,H,2),ps2=new Float32Array(n);for(let i=0;i<n;i++)ps2[i]=pd[i]>.1?1:0;/* r5b: hands / wrists / fingers 100 % out: skin grown 2 px (finger shadows, antialiased edge), then a soft 2 px feather */
+ const protF=clothBlur(clothBlur(ps2,W,H,1),W,H,1);for(let i=0;i<n;i++)protF[i]=Math.min(1,protF[i]*1.5);
  return{m:clothBlur(m,W,H,1),y0,y1,x0,x1,cx,chin,skin,hair,prot,protS,protF}}
 /* ---------- (b) crease map: every crease = a STRAIGHT (or gently tapered) soft gaussian dark band + a thin lighter ridge on its lit side (r3) ----------
    Painted-fold shading, not a relief / noise texture: no gradient lighting, no swirl, no turbulence (r1/r2 read as glass / zebra). Strokes are placed by
@@ -189,10 +190,11 @@ function drawDecalOnCloth(out,W,H,mk,dec,ax,ay,scale,rot,op,blend,tint,tm){const
 function clothStainBake(d,W,H,kind,lv,decals,opt){opt=opt||{};const B=BAL.looks.stain,K=B.kind[kind],L=(K.lv||B.lv)[cl(lv|0,1,3)],seed=opt.seed==null?BAL.looks.xoc.seed:opt.seed,
  mk=opt.mask||clothMask(d,W,H,opt.face||null,BAL.looks.xoc),out=new Uint8ClampedArray(opt.base||d),R=clothRng(seed*131+kind.charCodeAt(0)),fw=mk.x1-mk.x0+1,fh=mk.y1-mk.y0+1;let count=0;
  /* wet cloth (r5): soaked silk = UNEVEN wet zones (shoulders, sleeves, hem) with soft irregular edges: the robe's own colour deeper there (self-multiply + a little darker), a thin sheen along the wet edge, a few drip runs under sleeve ends / hem; a faint cling tint everywhere; clear of skin / hair / items */
- if(K.wet&&L.wet){const lvl=cl(lv|0,1,3),ws=L.wet,t0=.6-.1*lvl,Wf=new Float32Array(W*H),Lm=new Float32Array(W*H);for(let i=0;i<W*H;i++)Lm[i]=out[i*4]*.3+out[i*4+1]*.59+out[i*4+2]*.11;const Lb=clothBlur(Lm,W,H,4);
+ if(K.wet&&L.wet){let ls=0,lc=0;for(let i=0;i<W*H;i+=5)if(mk.m[i]>.9){ls+=d[i*4]*.3+d[i*4+1]*.59+d[i*4+2]*.11;lc++}const pale=cl(((lc?ls/lc/255:.5)-.55)*3,0,1);/* r5b: pale robes keep most of the robe DRY: smaller, sparser patches, softer depth (no whole-robe grey) */
+  const lvl=cl(lv|0,1,3),ws=L.wet*(1-.2*pale),t0=.74-.07*lvl+.1*pale,Wf=new Float32Array(W*H),Lm=new Float32Array(W*H);for(let i=0;i<W*H;i++)Lm[i]=out[i*4]*.3+out[i*4+1]*.59+out[i*4+2]*.11;const Lb=clothBlur(Lm,W,H,4);
   for(let y=mk.y0;y<=mk.y1;y++){const fy=(y-mk.y0)/fh;for(let x=mk.x0;x<=mk.x1;x++){const i=y*W+x;if(mk.m[i]<.5)continue;const u=Math.abs((x-mk.cx)/fw),n=clothFbm(x/fw*3.4+seed*.37,y/fh*1.3,seed+21,3),
-    zone=Math.max(clothSmooth(.05,.16,fy)*(1-clothSmooth(.27,.4,fy))*.9,clothSmooth(.18,.32,u)*clothSmooth(.2,.3,fy)*(1-clothSmooth(.7,.85,fy))*.8,clothSmooth(.68,.86,fy));
-    Wf[i]=clothSmooth(t0,t0+.22,n*.62+zone*(.5+.9*clothFbm(x/fw*2.1+9,y/fh*2.1+3,seed+33,2))*.62)*clothSmooth(mk.chin,mk.chin+fh*.07,y)*(1-(1-clothSmooth(.05,.15,u))*(1-clothSmooth(mk.y0+fh*.2,mk.y0+fh*.3,y)))}}
+    zone=Math.max(clothSmooth(.05,.16,fy)*(1-clothSmooth(.27,.4,fy))*.9,clothSmooth(.18,.32,u)*clothSmooth(.2,.3,fy)*(1-clothSmooth(.7,.85,fy))*.8,clothSmooth(.68,.86,fy))*(1-.25*pale);
+    Wf[i]=clothSmooth(t0,t0+.16,n*.62+zone*(.5+.9*clothFbm(x/fw*2.1+9,y/fh*2.1+3,seed+33,2))*.62)*clothSmooth(mk.chin,mk.chin+fh*.07,y)*(1-(1-clothSmooth(.05,.15,u))*(1-clothSmooth(mk.y0+fh*.2,mk.y0+fh*.3,y)))}}
   const Wb=clothBlur(Wf,W,H,2);
   for(let i=0;i<W*H;i++){const w0=Wb[i];const k=mk.m[i]*(1-Math.min(1,Math.max(mk.protF[i]*1.5,mk.prot[i]*1.2)));if(k<.02)continue;const lm=Lm[i],edge=w0*(1-w0)*4,wv=Math.min(.75,w0*ws*.8*k*(1-.3*lm/255));
    for(let q=0;q<3;q++){const v=out[i*4+q];let o=(v*(1-wv)+(v*v/255)*wv)*(1-.13*w0*ws*k);o=lm+(o-lm)*(1+.35*w0*ws*k);/* deeper + more saturated, never grey */o+=(lm-Lb[i])*1.1*w0*ws*k;/* cloth clings: fold shading stronger inside the wet patch */o+=(255-o)*edge*.12*ws*k;out[i*4+q]=o}}
