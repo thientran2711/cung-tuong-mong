@@ -443,3 +443,4 @@ c12 a18 t1-t3 full hairpins (Round 35) | claude/cung-tuong-mong-handover-hj0h8w 
 | avatar-makeup (stage + every avatar frame at mirror strength; sonnet; brief briefs/avatar-makeup.md) | review/avatar-makeup | MAIN s43 | session_01UV1SzhLWPwoF94YDo85yN1 | RUNNING | 18/11 02:48Z |
 | HANDOVER-ARCHIVE (sonnet; MAIN s43 02:58Z + 03:05Z; owner OD L1817) | claude/cung-tuong-mong-handover-hj0h8w (dev/archive) | D | session_01964izCJRFLeyiak4tyF3BJ | RUNNING | 18/11 02:55Z |
 scale room artifact (Phòng co giãn) | claude/cung-tuong-mong-handover-hj0h8w dev/art/scale-room | session_011xDdVRWmQKBpjh3ayt7u8f | RUNNING | 2026-11-18T02:55Z (Foreman C ROOT-15)
+c12 a18 t1+t4 head fix (Round 37) | claude/cung-tuong-mong-handover-hj0h8w (art, _review CDN) | session_011xDdVQ868623tH3nMJMf2J | RUNNING | 2026-11-18T03:03Z (Foreman C ROOT-15)
