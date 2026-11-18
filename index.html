@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"1304d17d","t":"2026-11-18T06:33Z","c":"steal-minigame: Độ khó row reads mgTier of the occasion; sync test hook; jnf (balance-chain) scan steal-mg-nf.js; device shot script","b":"730385e27a06","h":[{"s":"c1104d92+","t":"2026-11-18T05:41Z","c":"face-zoom-aspect test: SEED / FORCE options for same-character before/after shots"},{"s":"16b4dad8+","t":"2026-11-18T05:32Z","c":"cloth-bake-static: cloth layer on every static figure path on a cold cache (wait layer + patch on bake done); test + report"},{"s":"231cd3b3+","t":"2026-11-18T03:27Z","c":"review display-set-bonus: VANPHONG rows (Đa Bảo Các + set wording); cap line drops 'điểm'; j8 'Điểm trang lộng lẫy' night quality reads wor…"},{"s":"bd8547f2+","t":"2026-11-18T03:28Z","c":"men-forbidden r6: old saves drop officials / festival princes standing in the hậu cung on load (menLoadFix, same ONE rule)"},{"s":"c743265c+","t":"2026-11-18T03:18Z","c":"review life-preload r6: title prefetch chained on undefined (lWant returns its promise); gate cap really 25 s (no re-run after cap / Vào cu…"},{"s":"2aca2aac+","t":"2026-11-18T03:17Z","c":"review cloth-tea-r6: kclo-on hides the picture by clip-path, not visibility (visibility:hidden made kfxGeom hide the cloth layer too: her f…"},{"s":"2b1b0701","t":"2026-11-18T03:00Z","c":"review staff-cap-apply r6: site rebuilt on db24027f"},{"s":"64488e4f+","t":"2026-11-18T02:38Z","c":"cloth-xoc r6e: rebuild site"},{"s":"af71f94a+","t":"2026-11-18T02:17Z","c":"smudge r16: stage4 + avatar probe tests, options script score fix (look tier by score), FINAL mode"},{"s":"e1f60927+","t":"2026-11-18T02:25Z","c":"result-reason: every result card line says a short why (kitWhy, KIT 7); values left-aligned next to labels"}]};
+window.CTM_BI={"s":"bff6f8fa+","t":"2026-11-18T07:07Z","c":"steal-minigame FIX 1 (E8r): co-op under jnf — host takes the friend's ch during its own game and holds her wait while her game runs (bounde…","b":"a002cd8ddff6","h":[{"s":"2eea9a2b+","t":"2026-11-18T06:45Z","c":"review coop-thin-e r1: coop-thin-e E2 diagnostics; a setup press that landed in the new week is stepped first (swap flake 2/7)"},{"s":"8af2fc24+","t":"2026-11-18T06:31Z","c":"mg-skip-all r2: one quick-button look everywhere (kquick css, never an option card), playArt default fix, KIT 13.6 + MINIGAMES, page test m…"},{"s":"c9ada2a3+","t":"2026-11-18T06:14Z","c":"Fix S.lyF: recognise the fallen Ly person by lyF===1 (S carries the object), not truthiness; her own figure keeps her rank tier. + dev/test…"},{"s":"d959a9e0+","t":"2026-11-18T06:28Z","c":"buoi-banner: owner pick BTR_OP = 0.85 on the 73a7d3f layout (title overlaps the band, flush at the stage top); ladder hook removed"},{"s":"8c210d6b+","t":"2026-11-18T06:21Z","c":"act-pic-match: EVENTS.json + FIGURES-kids.json rebuilt (same 17/11 02:41Z incident), cdn_sync refuses bulk overwrite of top-level manifests…"},{"s":"b7ea2748+","t":"2026-11-18T06:12Z","c":"kit-set-lines: display-room test pins rank so the real-data pair is never over rank"},{"s":"22891730+","t":"2026-11-18T06:08Z","c":"k61StageDesc: restore the existing k61Desc untouched (rename only my new helper)"},{"s":"8f5ea906+","t":"2026-11-18T06:11Z","c":"face-reveal-anim: kitReveal (KIT 79) — the real face appears in place out of the grey (frame, avatar, room-stage figure, event figure); Gọn…"},{"s":"04bb2793+","t":"2026-11-18T05:52Z","c":"hud-mood-bar: owner picked layout 1 (full row); switch and slim layout removed; KIT 49.4"},{"s":"c1104d92+","t":"2026-11-18T05:41Z","c":"face-zoom-aspect test: SEED / FORCE options for same-character before/after shots"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -30211,8 +30211,8 @@ BAL.steal={cost:{feign:{duc:4},road:{suc:5}},failSung:3,rel:15,ghen:25,
    the band; capped at Nắm chắc / BAL.odds.hi); lose or skip → unchanged (no extra loss). art = the game per act (feign: Hát, road: Múa — "múa một khúc
    dưới đèn lồng"); occ = the mgTier occasion that sets the board (hầu Hoàng thượng). NPCs (never the co-op friend, who plays her own) "play" by the
    same NPC game roll as every contest (kg82NpcRaw: BAL.mgTier.npc by her bậc in that art) against the same win; npcP = chance an NPC plays at all.
-   win 5 = the pass line every game result shows green (kg82ShowRes raw ≥ 5). One game per try (j75: one try a night each), so no cooldown key. */
-BAL.steal.mg={on:1,win:5,rung:1,art:{feign:"hat",road:"mua"},occ:"trieu",npcP:1};
+   win 5 = the pass line every game result shows green (kg82ShowRes raw ≥ 5). One game per try (j75: one try a night each), so no cooldown key. coopMs = co-op (jnf night): the longest the host keeps the flip choice open for the friend while her own game runs (ms). */
+BAL.steal.mg={on:1,win:5,rung:1,art:{feign:"hat",road:"mua"},occ:"trieu",npcP:1,coopMs:120000};
 /* TÁT, three tiers (owner 16/11; jface act "tat", jslap game). Index 1..3 = nhẹ / vừa / nặng. sac = Sắc the target loses while the mark lasts; wk = weeks the mark stays
    (+1 with chance wkX); duc = the slapper's Đức; rel / oan = grudge (relAdd / extra oán on the target); hoang/sung = Hoàng thượng hears (chance, Sủng) when the target's Sủng
    ≥ hoangMin; thau = Thái hậu rebukes a nặng slap (chance, Danh); evT = the target keeps evidence against the slapper, evW = a witness does (chance per slap);
@@ -67191,15 +67191,15 @@ stealNight=function(a,t,mode){const m=mo(mode);let mine=false;
 /* cb(up, raw, skipped) — up = rungs won (0 on lose / skip). Bots and pages without the kit frame skip at once. */
 function herGame(mode,o,cb){const B=M();const kind=B.art&&B.art[mode];const nm=mode==="road"?"Chặn ngự giá":"Tranh sủng";
  const fin=(raw,sk)=>{const up=!sk&&raw>=B.win?(B.rung||1):0;stat({w:day(),who:"me",mode,up,by:"mg",raw:sk?null:raw,path:"her"});BUSY=0;
-  if(up)try{log(`${nm}: ${KG82_KIND[kind].n.toLowerCase()} được ${raw}/10, cơ hội lần này lên ${word(stealRungUp(o,up))}.`)}catch(e){}
+  if(up)try{log(`${nm}: ${KG82_KIND[kind].n.toLowerCase()} được ${raw}/10, cơ duyên lần này lên ${word(stealRungUp(o,up))}.`)}catch(e){}
   try{cb(up,raw,sk)}catch(e){console.error(e)}};
  if(typeof window.__smgFake==="function"){BUSY=1;const r=window.__smgFake(mode)||{};if(r.sync)fin(+r.raw||0,!!r.skipped);else setTimeout(()=>fin(+r.raw||0,!!r.skipped),0);return}   /* tests */
  if(!B.on||!kind||topRung(o)||typeof window.__bot!=="undefined"||typeof playArt!=="function"||typeof KG82_KIND!=="object"||!KG82_KIND[kind]){try{cb(0,null,true)}catch(e){console.error(e)}return}
  BUSY=1;const n1=word(stealRungUp(o,B.rung||1)),n0=word(o),diff=()=>{try{return mgDiffTxt(mgTier(kind,{occ:B.occ}),kind)}catch(e){return ""}};
  const pa=()=>playArt({art:kind,artName:nm,occ:B.occ,rowsHead:"Trước khi ra tay",
-  rows:[["Thắng",`cơ hội lần này lên một bậc: ${n0} → ${n1}`,"g"],["Thua hay không chơi",`cơ hội giữ nguyên ${n0}, không mất thêm gì`,"n"]].concat(diff()?[["Độ khó",diff(),"n"]]:[]),
+  rows:[["Thắng",`cơ duyên lần này lên một bậc: ${n0} → ${n1}`,"g"],["Thua hay không chơi",`cơ duyên giữ nguyên ${n0}, không mất thêm gì`,"n"]].concat(diff()?[["Độ khó",diff(),"n"]]:[]),
   go:"Bắt đầu",skip:"Thôi, không chơi",skipSub:`giữ nguyên ${n0}`,
-  resRows:(raw,sk)=>[["Kết quả",sk?`không chơi: cơ hội giữ nguyên ${n0}`:raw>=B.win?`${raw}/10 · ${kg82Word(raw)}: cơ hội lên ${n1}`:`${raw}/10 · ${kg82Word(raw)}: cơ hội giữ nguyên ${n0}`,!sk&&raw>=B.win?"g":"n"]],
+  resRows:(raw,sk)=>[["Kết quả",sk?`không chơi: cơ duyên giữ nguyên ${n0}`:raw>=B.win?`${raw}/10 · ${kg82Word(raw)}: cơ duyên lên ${n1}`:`${raw}/10 · ${kg82Word(raw)}: cơ duyên giữ nguyên ${n0}`,!sk&&raw>=B.win?"g":"n"]],
   onDone:(raw,x)=>fin(raw,!!(x&&x.skipped))});
  /* jaudit's playArt hook marks a paid game (window.__aaL); this game is free: keep its mark as it was */
  const L=window.__aaL;try{pa()}catch(e){console.error(e);BUSY=0;try{cb(0,null,true)}catch(e2){}}finally{window.__aaL=L}}
@@ -67220,28 +67220,55 @@ if(typeof doAct==="function"){const d0=doAct;doAct=function(i,k){if((k!=="steal"
  herGame(mode,o0(S,mode),up=>{TOK.set(S,{mode,up,by:"mg"});try{d0.apply(self,args)}finally{TOK.delete(S)}try{render()}catch(e){}})}}
 
 /* ---------- review/balance-chain night (jnf): her choice → game → the one resolve; NPCs roll at the resolve ---------- */
-let NFUP=null;const NPCR=new Map();let PASS=0;
+/* CO-OP (host-authoritative, jnf relay "ctm-nf"): each player plays HER OWN game on her own seat; the rung she wins reaches the one resolve on the host.
+   GUEST: her pick tells the host at once that she is playing (SMG "mg"); jnf's "ch" message is held until her game ends, then sent right after a
+   SMG "up" message {mode, up} (same socket, so the host has her rung before it has her choice). HOST: a friend's "ch" that arrives while the host is
+   in her own game (S.nfX.st "mg", which jnf's own handler skips) is taken here; jnf's friend timeout (choice.waitMs from x.myAt) restarts when the
+   host's game ends and is held open while the friend's game runs (at most BAL.steal.mg.coopMs). The friend's try then reads her rung (FRUP) through
+   the same oSteal hook. jnf.js itself is unchanged. */
+let NFUP=null,FRUP=null,FRW=null,GHOLD=0,HELD=null,PEND=0;   /* PEND: her pick is being recorded (chooseM renders inside), the game opens next */const NPCR=new Map();let PASS=0;
+const SMG="ctm-smg",NFK="ctm-nf";
 function nfX(){const x=S&&S.nfX;return x&&x.d===day()?x:null}
 function inResolve(){const x=nfX();return !!(x&&x.st==="done"&&!x.def)}
+const CO=()=>{try{return window.COOPW&&COOPW.on&&typeof COOP==="object"?COOPW:null}catch(e){return null}};
+const isHost=()=>{if(typeof window.worldOn==="function")return !!window.worldOn();const c=CO();return !c||c.seat==="a"};
+const isGuest=()=>!!CO()&&!isHost();
+const VALIDM=v=>v==="feign"||v==="road"||v==="keep"?v:null;
 function nfCtxUp(a,mode){if(typeof window.nfStep!=="function"||!a)return null;
  const live=inResolve();if(!live&&!PASS)return null;
  if(a===S){if(live&&NFUP&&NFUP.d===day()&&NFUP.mode===mode)return{mode,up:NFUP.up,by:"mg"};return null}
- if(a.coop)return null;const key=`${day()}|${a.id}|${mode}`;
+ if(a.coop){if(live&&FRUP&&FRUP.d===day()&&FRUP.mode===mode)return{mode,up:FRUP.up,by:"friend"};return null}
+ const key=`${day()}|${a.id}|${mode}`;
  if(!NPCR.has(key)){if(NPCR.size>400)NPCR.clear();const up=npcUp(a,mode);NPCR.set(key,up);stat({w:day(),who:a.id,mode,up,by:"npc",path:live?"nfResolve":"nfPass"})}
  return{mode,up:NPCR.get(key),by:"npc"}}
+function smgSend(m){try{COOP.send(Object.assign({t:"act",k:SMG,mode:isHost()?"h":"g",d:day(),week:COOP.state&&COOP.state.week,id:SMG+Date.now().toString(36)+Math.random().toString(36).slice(2,6)},m))}catch(e){console.error(e)}}
+/* host: keep jnf's friend wait open while her game runs (bounded) */
+let FRT=null;function frHold(on){if(FRT){clearInterval(FRT);FRT=null}if(!on)return;
+ FRT=setInterval(()=>{try{const x=nfX();if(!FRW||FRW.d!==day()||Date.now()>FRW.until||!x||x.fr!==undefined||x.st==="done"){FRW=null;clearInterval(FRT);FRT=null;return}if(x.myAt)x.myAt=Date.now()}catch(e){}},250)}
 let NFON=0;function nfInstall(){if(NFON||typeof window.nfStep!=="function"||typeof chooseM!=="function")return;NFON=1;
  const cm0=chooseM;chooseM=function(j){const m=Q[0],op=m&&m.pid==="nfch"&&m.opts&&m.opts[j];const mode=op&&(op.n==="Tranh sủng"?"feign":op.n==="Chặn ngự giá"?"road":null);
   const x=nfX();if(!mode||!x||x.st!=="open"||BUSY||!M().on)return cm0.apply(this,arguments);
-  const o=typeof stealShown==="function"?stealShown(S,mode):o0(S,mode);
-  x.st="mg";let r;try{r=cm0.apply(this,arguments)}catch(e){x.st="open";throw e}
-  herGame(mode,o,up=>{NFUP=up?{d:day(),mode,up}:null;const y=nfX();if(y&&y.st==="mg")y.st="open";try{window.nfStep()}catch(e){console.error(e)}});
+  const o=typeof stealShown==="function"?stealShown(S,mode):o0(S,mode);const gst=isGuest();
+  if(gst){GHOLD=1;HELD=null;smgSend({ph:"mg",v:mode})}
+  x.st="mg";PEND=1;let r;try{r=cm0.apply(this,arguments)}catch(e){x.st="open";GHOLD=0;PEND=0;throw e}
+  PEND=0;herGame(mode,o,up=>{NFUP=up?{d:day(),mode,up}:null;const y=nfX();if(y&&y.st==="mg")y.st="open";
+   if(gst){GHOLD=0;smgSend({ph:"up",v:mode,up:up||0});const h=HELD;HELD=null;if(h)try{COOP.send(h)/* GHOLD is 0 now: goes out */}catch(e){console.error(e)}return}
+   if(y&&y.myAt)y.myAt=Date.now();   /* the friend's wait restarts after the host's own game */
+   try{window.nfStep()}catch(e){console.error(e)}});
   return r};
+ /* guest: jnf's "ch" waits for her game (sent after the SMG "up") */
+ try{if(typeof COOP==="object"&&typeof COOP.send==="function"){const s0=COOP.send;COOP.send=function(m){try{if(GHOLD&&m&&m.k===NFK&&m.ph==="ch"){HELD=m;return}}catch(e){}return (window.__coopSendTap||s0).apply(this,arguments)}}}catch(e){}
+ /* host: the friend's game notice / rung, and her "ch" while the host is in her own game */
+ try{if(typeof COOP==="object"&&typeof COOP.on==="function")COOP.on("act",m=>{try{const c=CO();if(!m||!c||m.from===c.seat||!isHost()||!S||m.d!==day()||m.mode!=="g")return;
+  if(m.k===SMG){if(m.ph==="mg"){FRW={d:day(),until:Date.now()+(M().coopMs||120000)};FRUP=null;frHold(true)}
+   else if(m.ph==="up"){FRUP={d:day(),mode:VALIDM(m.v),up:Math.max(0,Math.min(M().rung||1,m.up|0))};FRW=null;frHold(false);const x=nfX();if(x&&x.myAt)x.myAt=Date.now()}return}
+  if(m.k===NFK&&m.ph==="ch"){const x=nfX();if(x&&x.st==="mg"&&x.fr===undefined){x.fr=m.ch?VALIDM(m.ch.v):null;FRW=null;frHold(false)}}}catch(e){console.error(e)}})}catch(e){}
  /* a save made while the game was open: the choice stands, the step resumes (no rung) */
- if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);try{const x=nfX();if(x&&x.st==="mg"&&!BUSY){x.st="open";setTimeout(()=>{try{window.nfStep()}catch(e){}},0)}}catch(e){}return r}}
+ if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);try{const x=nfX();if(x&&x.st==="mg"&&!BUSY&&!PEND){x.st="open";setTimeout(()=>{try{window.nfStep()}catch(e){}},0)}}catch(e){}return r}}
  if(typeof window.stealPass==="function"){const sp0=window.stealPass;window.stealPass=function(){PASS++;try{return sp0.apply(this,arguments)}finally{PASS--}}}}
 /* jnf may load after this file (assemble order): install now, else once the page has loaded */
 nfInstall();if(!NFON)try{window.addEventListener("load",nfInstall)}catch(e){}
-window.stealMgDebug=()=>({tok:[...TOK.entries()].map(([a,t])=>[a===S?"me":a&&a.id,t]),nfup:NFUP,busy:BUSY,st:ST.slice(-20)});
+window.stealMgDebug=()=>({tok:[...TOK.entries()].map(([a,t])=>[a===S?"me":a&&a.id,t]),nfup:NFUP,frup:FRUP,frw:FRW,ghold:GHOLD,held:!!HELD,busy:BUSY,st:ST.slice(-20)});
 })();
 
 /* jcoopthin: CO-OP THIN GUEST, part A = foundations (review/coop-thin-a; audit dev/handover/reports/coop-thin-guest-audit.md §2-3;
@@ -68178,7 +68205,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="730385e27a06";window.CTM_BUILD=BUILD;
+const BUILD="a002cd8ddff6";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

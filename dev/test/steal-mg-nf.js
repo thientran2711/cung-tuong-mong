@@ -78,9 +78,9 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
    const fr=T.os.filter(o=>o.w===T.F.id).map(o=>Object.assign(o,{up:stealRungUp(o.pl,1)}));const out={held,st:x.st,fr:x.fr,frOdds:fr,dbg:stealMgDebug().frup};T.uncoop(T.F);return out},up);
   const o=r.frOdds[0]||{};ok(nm,r.held.fr===undefined&&r.held.afterStep===undefined&&r.st==="done"&&r.fr==="road"&&r.frOdds.length>=1&&(up?o.r===o.up&&o.r>o.pl:o.r===o.pl),r)}
  /* C4 · GUEST seat: her game first; jnf's "ch" is held and goes out right AFTER the SMG "up" carrying her rung */
- {await p.evaluate(()=>{const c=T.coop("b");T.F=c.F;T.dlg("feign");window.__smgFake=()=>({raw:8});chooseM(0);T.c4={mid:T.sent.map(m=>m.k+":"+m.ph)}});
+ {await p.evaluate(()=>{const c=T.coop("b");T.F=c.F;T.dlg("feign");window.__smgFake=()=>({raw:8});chooseM(0);T.c4={mid:T.sent.filter(m=>/^ctm-(smg|nf)$/.test(m.k)).map(m=>m.k+":"+m.ph)}});
   await wait(300);
-  const r=await p.evaluate(()=>{window.__smgFake=null;const out=Object.assign(T.c4,{after:T.sent.map(m=>m.k+":"+m.ph+(m.ph==="up"?":"+m.up:"")+(m.ch?":"+m.ch.v:""))});T.uncoop(T.F);return out});
+  const r=await p.evaluate(()=>{window.__smgFake=null;const out=Object.assign(T.c4,{after:T.sent.filter(m=>/^ctm-(smg|nf)$/.test(m.k)).map(m=>m.k+":"+m.ph+(m.ph==="up"?":"+m.up:"")+(m.ch?":"+m.ch.v:""))});T.uncoop(T.F);return out});
   ok("co-op C4: guest — 'mg' notice at once, 'ch' held during her game, then 'up' (rung 1) before 'ch'",JSON.stringify(r.mid)===JSON.stringify(["ctm-smg:mg"])&&JSON.stringify(r.after)===JSON.stringify(["ctm-smg:mg","ctm-smg:up:1","ctm-nf:ch:feign"]),r)}
  /* a save made while her game was open: the step resumes */
  const r9=await p.evaluate(()=>{const L=T.setup();S.nfX={d:wk(),st:"mg"};render();return S.nfX.st});ok("stale 'mg' after load → back to 'open'",r9==="open",r9);

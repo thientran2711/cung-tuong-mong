@@ -90,7 +90,7 @@ if(typeof doAct==="function"){const d0=doAct;doAct=function(i,k){if((k!=="steal"
    in her own game (S.nfX.st "mg", which jnf's own handler skips) is taken here; jnf's friend timeout (choice.waitMs from x.myAt) restarts when the
    host's game ends and is held open while the friend's game runs (at most BAL.steal.mg.coopMs). The friend's try then reads her rung (FRUP) through
    the same oSteal hook. jnf.js itself is unchanged. */
-let NFUP=null,FRUP=null,FRW=null,GHOLD=0,HELD=null;const NPCR=new Map();let PASS=0;
+let NFUP=null,FRUP=null,FRW=null,GHOLD=0,HELD=null,PEND=0;   /* PEND: her pick is being recorded (chooseM renders inside), the game opens next */const NPCR=new Map();let PASS=0;
 const SMG="ctm-smg",NFK="ctm-nf";
 function nfX(){const x=S&&S.nfX;return x&&x.d===day()?x:null}
 function inResolve(){const x=nfX();return !!(x&&x.st==="done"&&!x.def)}
@@ -114,8 +114,8 @@ let NFON=0;function nfInstall(){if(NFON||typeof window.nfStep!=="function"||type
   const x=nfX();if(!mode||!x||x.st!=="open"||BUSY||!M().on)return cm0.apply(this,arguments);
   const o=typeof stealShown==="function"?stealShown(S,mode):o0(S,mode);const gst=isGuest();
   if(gst){GHOLD=1;HELD=null;smgSend({ph:"mg",v:mode})}
-  x.st="mg";let r;try{r=cm0.apply(this,arguments)}catch(e){x.st="open";GHOLD=0;throw e}
-  herGame(mode,o,up=>{NFUP=up?{d:day(),mode,up}:null;const y=nfX();if(y&&y.st==="mg")y.st="open";
+  x.st="mg";PEND=1;let r;try{r=cm0.apply(this,arguments)}catch(e){x.st="open";GHOLD=0;PEND=0;throw e}
+  PEND=0;herGame(mode,o,up=>{NFUP=up?{d:day(),mode,up}:null;const y=nfX();if(y&&y.st==="mg")y.st="open";
    if(gst){GHOLD=0;smgSend({ph:"up",v:mode,up:up||0});const h=HELD;HELD=null;if(h)try{COOP.send(h)/* GHOLD is 0 now: goes out */}catch(e){console.error(e)}return}
    if(y&&y.myAt)y.myAt=Date.now();   /* the friend's wait restarts after the host's own game */
    try{window.nfStep()}catch(e){console.error(e)}});
@@ -128,7 +128,7 @@ let NFON=0;function nfInstall(){if(NFON||typeof window.nfStep!=="function"||type
    else if(m.ph==="up"){FRUP={d:day(),mode:VALIDM(m.v),up:Math.max(0,Math.min(M().rung||1,m.up|0))};FRW=null;frHold(false);const x=nfX();if(x&&x.myAt)x.myAt=Date.now()}return}
   if(m.k===NFK&&m.ph==="ch"){const x=nfX();if(x&&x.st==="mg"&&x.fr===undefined){x.fr=m.ch?VALIDM(m.ch.v):null;FRW=null;frHold(false)}}}catch(e){console.error(e)}})}catch(e){}
  /* a save made while the game was open: the choice stands, the step resumes (no rung) */
- if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);try{const x=nfX();if(x&&x.st==="mg"&&!BUSY){x.st="open";setTimeout(()=>{try{window.nfStep()}catch(e){}},0)}}catch(e){}return r}}
+ if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);try{const x=nfX();if(x&&x.st==="mg"&&!BUSY&&!PEND){x.st="open";setTimeout(()=>{try{window.nfStep()}catch(e){}},0)}}catch(e){}return r}}
  if(typeof window.stealPass==="function"){const sp0=window.stealPass;window.stealPass=function(){PASS++;try{return sp0.apply(this,arguments)}finally{PASS--}}}}
 /* jnf may load after this file (assemble order): install now, else once the page has loaded */
 nfInstall();if(!NFON)try{window.addEventListener("load",nfInstall)}catch(e){}
