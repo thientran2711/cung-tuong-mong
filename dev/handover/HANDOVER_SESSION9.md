@@ -937,3 +937,4 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - C-AG #17 session_01Rc5AsHvrGcAHBVm2GZfixz: live-servants rv FAIL 8 → fixer #4 session_01Rc5AsLdRc1YbZ1vrMvV1Ro. Reviewers still message ROOT-58 sometimes; ROOT-58 relays.
 - Images ate context fast (montages): keep LOOKs to one small montage per item.
 - (18/11 ~23:35Z) ROOT-59 opens ROOT-60 (child, depth 7) and STOPS coordinating.
+- (18/11 ~23:34Z real) ROOT-59 opened ROOT-60 = session_01Rc5AsMTMePisU9AmwCgz6i (opus, child, depth 7) and STOPS coordinating; ROOT-59 hourly wake trig_019aUUVTNoZg2p6RXfr1BrmQ DISABLED (ROOT-60 makes its own). Owner: talk to ROOT-60 (session title "Cung Tường Mộng 60 (MAIN)").
