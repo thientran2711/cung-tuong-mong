@@ -1,0 +1,13 @@
+# Review: review/errand-scene f6b89cb — FAIL (one blocker)
+PRIORITY #1 CHECK: OD 18/11 20:05/20:10/20:15/20:20/21:15Z read verbatim | main 884ce97 (doc-90, not e16e1d6) | review/parallel-time f4eb517 read-only | claims errand-scene r2.
+
+## Verdict: FAIL f6b89cb
+**Blocker (check 5):** jerr.js:70 registers `kitStatusIcon.set("tin", …)` and jptime.js:84 (review/parallel-time) registers the SAME id "tin". jerr is the last module, so once both land its icon overwrites jptime's. jerr's show/badge/panel (errMine/errNews) never read `S.ordQ` / ptOrdN (0 hits of ordQ in jerr.js), so the receiver-side orders (OD 21:15Z: «có lệnh / Nghe lệnh», «sai người sang / Xem lời nhờ») lose their badge and their rows in the ONE «tin» panel. jptime's own comment says "MAIN errand-scene r2 lists them; no second panel" — jerr does not. Fix: jerr must not re-register "tin" when jptime is present (`errOn()`), or its show/badge/panel must also include ordQ rows (use PTIME.news/PTIME.mine/ptOrdN via the adapter). Add a test that builds with parallel-time merged. Adapter names otherwise match (PTIME on/now/when/waitOk/next/wait/news/mine exist).
+
+## Passed
+1. Diff: 15 files, only errand files + kit/MOTION docs + stage-rightcol merge; index.html/sw.js not in diff (lander rebuilds). Main has moved (884ce97): not a descendant, but `git merge origin/main` is clean (auto-merge only). Rebuilt from merged tree with build_site.sh: builds, line f6b89cbc.
+2. dev/test/errand-scene.js: Fold 755x1000 51/51, iPad 1180x820 51/51. oldsave-r1.js (old e16e1d6 save → new build): 16/16, no page errors. stage-rightcol.js: bad 0. quickcheck.sh is not in the tree (as the worker said).
+3. Non-blocking: tested (time moves at once, no shield, RB.d=0, walk-off layer, slot chip, «!» on return, tap opens panel, no forced modal, crowded stage runner drawn, reduced motion). «Đợi tin» appears only via PTIME (not in main yet) — fine.
+4. Report panel (LOOKED Fold + iPad, spy/invite): title «Tin chờ người sai đi», real runner «Cung nữ Xuân Đào», «Được · mất» kit chips (Bạc −15 / Tâm cơ +2) at the top, visible without scrolling on both devices; result lines real ("Y phục của … Xa xỉ 164"); wording cổ trang, no %. Unknown silhouette in rows = kitIsKnown, not a fail.
+6. Whole group (errand-scan.js, rerun): covered 46, in-person 12, not covered 1 (maid-road, other direction, out of scope). dò la, mang quà (pgift/tdgift), đưa thư (letter), mời người (invite), scout, dò hỏi gia thế all COVERED.
+Not checked: tests with parallel-time actually merged (does not exist yet; blocker above is by code reading); shots stayed session-local, not uploaded.
