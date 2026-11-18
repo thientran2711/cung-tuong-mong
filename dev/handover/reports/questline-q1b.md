@@ -59,3 +59,13 @@ New rule: an ask naming {B} is not drawn without a rival. Scan: chapters whose a
 - Whole family «the player's past / standing stated as fact» (scan: every sentence with {call} + từng/được gần/được hầu/được ngài nghe lời/hiểu ý …): before 10 → after 0. Fixed: thd_tho_8[0], td_an_9[1] («Có khi {call} đoán ý …»), and 8 «{call} được gần ngài / được ngài nghe lời / được hầu bên ngài / được ngồi gần ngài» → «Lúc {call} hầu ngài …» / «Nếu có dịp hầu ngài …» (nc_gian_7[0], nc_su_7[0], td_an_8[0], td_ke_6[1], ch_benh_10[0], thd_tho_7[0], thd_sach_9[0], thd_tro_8[0]).
 - nrask-scan ALL PASS on q1a+q1b (the merged-tree fail ksp_so_10 is q1c's label, for Foreman E) · nrask-engine ALL PASS.
 - REBASE 3 (18/11 ~08:20Z): FIX 2 rebased on q1a a615eb7 (main b2a9d34) → **2f79ae26**. nrask-scan ALL PASS · nrask-engine ALL PASS (incl. 7c NRQX) · quickcheck PASS (436 s). SẴN SÀNG KIỂM sent.
+
+## FIX 3 (18/11 ~08:40Z) — review ROUND 3 FAIL 2f79ae26 → **147a268b** (pushed; waits for E7a2's q1a sha with the shared TIME rule, then one SẴN SÀNG KIỂM)
+Family «time words vs the card deadline (hạn 6 tuần, BAL.nroad.dl)» — scan of every h / label / loss line of all 240 asks (/home/user/wt/q1b-scr/time.js: fixed dates đêm nay/tối nay/sáng mai/ngày mai/Mai/rằm/mồng/Tết/cuối tháng/cuối năm/cuối xuân/canh …, spans N ngày|hôm|đêm nữa, trong N ngày|tháng, mấy hôm nữa, trước khi trời sáng, ngay trong đêm, festivals):
+| | before | after |
+|---|---|---|
+| fixed date or span shorter than the deadline (the review's 18 asks) | 18 asks | 0 |
+| same family beyond the review list: «cuối năm» ×5 (td_an_8 ×2, td_song_9 ×2, ch_ho_8), «cuối xuân» (thd_hoc_7), «Đêm trước Thanh minh» ×2 (ch_bi_10), «trước khi trời sáng» ×2 (cnv_chu_8, cnv_ban_7), «sáng nay» (ch_ho_6) | 11 asks | 0 |
+| kept (rule: event-relative / past / the ask's own scene): «trước tiết Sương giáng», «dịp/lễ Vạn thọ đã gần», «lễ Nguyên đán», «lễ Phật đản», «trước tiết Thanh minh», «đêm giỗ» (td_tha_9 = the chapter's own scene, like «đêm hẹn»), «ngày giỗ tiên đế» (a hypothetical choice of day), «mấy hôm nay» (past) | 15 hits | 15 (fine) |
+Wording: «sắp …», «chờ ngày tra», «không sớm có thuốc», «đóng dấu cho kịp», «ít hôm», «ngày xét án», «cho kịp kỳ phát áo mùa»; labels + loss lines match.
+nrask-scan ALL PASS · nrask-engine ALL PASS (on q1a a615eb7). Next: rebase on E7a2's new q1a (shared TIME rule in nrask-scan), make it PASS, quickcheck, then SẴN SÀNG KIỂM.
