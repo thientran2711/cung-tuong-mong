@@ -20,3 +20,6 @@ https://ctm-img.victoria-tntt.workers.dev/img/_review/hud-mood-bar/{fold-row-act
 - Checked: +60 ("Han hoan", green) and old save (no S.mood -> "Binh than" 0) on fold, header 151 px, no errors/overflow.
 - 412x1058 shows the rotate prompt in host mode (no top bar): accepted by main. Co-op shots, mood-bar.js and kit-conform not run here (no 2-player harness; both scripts launch Chromium without the proxy bypass, local goto times out).
 - NEXT (after the owner picks row|slim): remove window.KIT_MOODBAR switch + the losing CSS in jmood.js, rebuild, push, report; main opens the small review.
+
+## Final 04bb279 (owner picked layout 1, full row, ~06:05Z)
+Switch KIT_MOODBAR + slim layout removed (jmood.js), KIT.md section renumbered 49.4 (49.2 was taken). Merged origin/main 9bbd78b (generated files rebuilt). Shots LOOKED fold 755x1000 + iPad 1180x820 (tabs act/rv/inv): header 151 px, 0 errors/overflow, tap opens the mood box; Nghi ngoi card reads the same accessor. Delete CDN shots: python3 dev/site/cdn_sync.py --wipe-review hud-mood-bar
