@@ -1768,7 +1768,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "item goes missing (every consort monthly); holder random; investigatio",
-"fp": ")&&c.st!==\"done\"))continue;if(roll(LO.rate))loLose(p)}"
+"done": "const o=npcWhy(\"loTake\",{p});if(o&&roll(LO.rate))loLose(p,loCauseOf(p,o))"
 },
 {
 "f": "jlost.js",
@@ -1776,7 +1776,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "item goes missing (every consort monthly); holder random; investigatio",
-"fp": "nd: was ARGMAX+noise */return pick(L)}"
+"done": "return npwPick(L,x=>1+Math.max(0,x.bac||0))"
 },
 {
 "f": "jlost.js",
@@ -1784,7 +1784,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "item goes missing (every consort monthly); holder random; investigatio",
-"fp": ".due)loFind(c);else if(o!==S&&roll(20))loNpcTry(o,c)}"
+"done": "else if(o!==S&&npcWhy(\"loTry\",{p:o,c}))loNpcTry(o,c)"
 },
 {
 "f": "jlost.js",
@@ -1792,7 +1792,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "item goes missing (every consort monthly); holder random; investigatio",
-"fp": "&c.keep&&o!==S&&!c.kn[c.own]&&roll(20))loNpcTry(o,c);"
+"done": "!c.kn[c.own]&&npcWhy(\"loTry\",{p:o,c}))loNpcTry(o,c);"
 },
 {
 "f": "jlost.js",
@@ -1800,7 +1800,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "item goes missing (every consort monthly); holder random; investigatio",
-"fp": "onst h=loP(c.at);if(h&&h!==S&&roll(50))loNpcTry(h,c);"
+"done": "if(h&&h!==S&&npcWhy(\"loClear\",{p:h,c}))loNpcTry(h,c);"
 },
 {
 "f": "jlost.js",
@@ -1808,7 +1808,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "item goes missing (every consort monthly); holder random; investigatio",
-"fp": "rn;const kind=(p.bac||0)>=40&&roll(40)?\"cct\":(p.bac||0)>=20&&roll(40)?"
+"done": "const kind=npwPick([\"cct\",\"book\",\"ask\"],k=>loTryW(p,c,k))||\"ask\";"
 },
 {
 "f": "jlost.js",
@@ -1816,7 +1816,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "cause rival/servant; asks quietly; recognise / friend reports; wears; ",
-"fp": " if(R0.length&&roll(LO.rivP)){const v=mindPickBy(R0,x=>"
+"done": "function loCause(p){const o=npcWhy(\"loTake\",{p});"
 },
 {
 "f": "jlost.js",
@@ -1824,7 +1824,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "cause rival/servant; asks quietly; recognise / friend reports; wears; ",
-"fp": " if(roll(sv?LO.srvP[1]:LO.srvP[0])){const s="
+"done": "function loCause(p){const o=npcWhy(\"loTake\",{p});"
 },
 {
 "f": "jlost.js",
@@ -1832,7 +1832,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "cause rival/servant; asks quietly; recognise / friend reports; wears; ",
-"fp": "riv\"&&c.by&&(c.keep||(!force&&roll(LO.keepP)))){const v=loP(c.by);if(v"
+"done": "return npwPick([\"keep\",\"plant\"],k=>k===\"keep\"?B.keep:fr)"
 },
 {
 "f": "jlost.js",
@@ -1840,7 +1840,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "cause rival/servant; asks quietly; recognise / friend reports; wears; ",
-"fp": " if(aff(o,h)>=20||roll(40)){if(h===S){pushDil(mkP(\"loask\","
+"done": "if(npwPick([\"ask\",\"cct\"],k=>k===\"ask\"?BAL.ag.why.loTry.ask+Math.max(0,aff(o,h))"
 },
 {
 "f": "jlost.js",
@@ -1848,7 +1848,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "cause rival/servant; asks quietly; recognise / friend reports; wears; ",
-"fp": " if(o!==S&&roll(LO.recog.own)){loKnowAt(c,o,\"\");ret"
+"done": "sees=q=>npcWit(at,null,{pool:[q]}).length>0;"
 },
 {
 "f": "jlost.js",
@@ -1856,7 +1856,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "cause rival/servant; asks quietly; recognise / friend reports; wears; ",
-"fp": " if(o===S&&roll(LO.recog.own)){loKnowAt(c,S,`Ngươi "
+"done": "sees=q=>npcWit(at,null,{pool:[q]}).length>0;"
 },
 {
 "f": "jlost.js",
@@ -1864,7 +1864,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "cause rival/servant; asks quietly; recognise / friend reports; wears; ",
-"fp": " if(o!==S&&c.heard&&!c.kn.me&&roll(LO.recog.me)){c.kn.me=1;log(`Ngươi "
+"done": "sees=q=>npcWit(at,null,{pool:[q]}).length>0;"
 },
 {
 "f": "jlost.js",
@@ -1872,7 +1872,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "cause rival/servant; asks quietly; recognise / friend reports; wears; ",
-"fp": "f(f!==o&&f!==h&&aff(f,o)>=40&&roll(LO.recog.fr)){loKnowAt(c,o,o===S?`$"
+"done": "const tl=npcTell(h,{to:o,from:npcWit(at,null,{not:[o,h]}).map(x=>x.p)});"
 },
 {
 "f": "jlost.js",
@@ -1880,7 +1880,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "cause rival/servant; asks quietly; recognise / friend reports; wears; ",
-"fp": " if(!c.ret&&!x.worn&&!c.wo&&roll(LO.keepWear)){c.wo=1;c.lied=1;const"
+"done": "if(!c.ret&&!x.worn&&!c.wo&&npcWhy(\"loWear\",{p:h,c})){"
 },
 {
 "f": "jlost.js",
@@ -1888,7 +1888,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "cause rival/servant; asks quietly; recognise / friend reports; wears; ",
-"fp": " const keep=a===S||roll(LO.keepP);const c=loLose(t,{cause:\""
+"done": "return npwPick([\"keep\",\"plant\"],k=>k===\"keep\"?B.keep:fr)"
 },
 {
 "f": "jdh2.js",
