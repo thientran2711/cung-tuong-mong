@@ -29,3 +29,6 @@ Phone (portrait kv1) Dư đồ: the two bars are gone. kitStageRail got a label+
 ## r4 (owner OD ~21:52Z via ROOT-55/56) — a1d5ea3d
 iPad (kv2) Dư đồ + every stage: the right column now starts with the SAME two small buttons (kitGroupBtns; number over label, side by side) instead of the wide bars; tap = person list drops down in the column under them (kitGroupFold = open card only, ‹ folds, one at a time). Phone Dư đồ keeps the left-rail placement (r3). One kit part, two placements; KIT.md updated. dev/test/stage-rightcol.js now also checks the button row is first in the column: 54/54 PASS (Fold + 412 + iPad, stage home + Ngự hoa viên + map, 1/6 servants, closed / Cung nhân / Chí tôn). Shots r4-*.jpg (Fold + iPad, stage + map, closed / Cung nhân open / Chí tôn open) looked.
 ~99% xong / ~99% chơi được
+
+## r5 — f2fbe3bf
+Merged live main 790cda59 (map-labels). stage-rightcol.js 54/54 PASS (one 412x1058 stage-home figure/column overlap seen once on the first run, random roster at the unsupported 412 width; 3 later runs clean). quickcheck PASS (old save ok, perf render 177/207 ms).
