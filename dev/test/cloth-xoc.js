@@ -27,7 +27,7 @@ t(sum[3]>sum[2]&&sum[2]>sum[1]&&sum[1]>0,"levels increase "+sum.slice(1).map(v=>
  const dc={patch:[mkd(40,150),mkd(44,150)],knot:[mkd(90,90)],hem:[mkd(200,24)]},tot=[0,0,0,0];
  for(const lv of[1,2,3]){const o=clothXocBake(d,W,H,lv,{mask:mk,seed:3,decals:dc});let bad=0,hand=0;for(let i=0;i<W*H;i++){const df=Math.abs(o.data[i*4]-d[i*4])+Math.abs(o.data[i*4+1]-d[i*4+1])+Math.abs(o.data[i*4+2]-d[i*4+2]);tot[lv]+=df;const yy=(i/W)|0,fhh=mk.y1-mk.y0+1,wz=yy>mk.y1-fhh*.16||(yy>mk.y0+fhh*.06&&yy<mk.y0+fhh*.3);/* hem + lapel bands are warped on purpose */
   if(!wz&&o.data[i*4+3]!==d[i*4+3])bad++;
-  if(!wz&&df>3&&mk.m[i]<.02)bad++;if(df>3&&mk.protS[i]>.95)hand++}
+  if(!wz&&df>3&&mk.m[i]<.02)bad++;if(!wz&&df>3&&mk.protS[i]>.95)hand++}
   t(bad===0,"decal lv"+lv+" outside cloth / alpha: "+bad);t(hand===0,"decal lv"+lv+" on protect map: "+hand)}
  t(tot[1]>0&&tot[2]>tot[1]&&tot[3]>tot[2],"decal levels increase "+tot.slice(1));
  const o0=clothXocBake(d,W,H,3,{mask:mk,seed:3});let ch=0;for(let i=0;i<W*H*4;i++)if(o0.data[i]!==d[i])ch++;t(ch<W*H*4*.2,"decal mode without art changes little (warp only): "+ch)}
