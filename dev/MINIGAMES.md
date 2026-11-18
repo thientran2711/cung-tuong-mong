@@ -80,3 +80,8 @@ The four promotion-exam kinds that were question banks are now skill games of th
 | thq Thái hậu hỏi | Xếp chỗ ngồi yến (`seat`) | drag each guest to a seat: more jade pins = higher rank = nearer Thái hậu | same as lay | 4 guests, seats numbered |
 Tier 2 (free placement judged on «Xong», model hides after BAL.nwq.peek s) · every tier: Gợi ý button, first-time demo card, quiet auto-hint when she stalls (tier 0/1).
 Tier comes from `mgTier(kind, occasion)` (review/mg-balance) when it exists, else `kg82Tier(lv) + BAL.nwq.shift`. The old Tài nghệ lesson «Y thuật & điều hương» (j5 `MG.y` quiz) now plays the pha-hương game.
+
+## Quick option on every game (mg-skip-all, owner 18/11 ~05:45Z + ~05:55Z)
+Every mini-game offers ONE quick choice through the kit part `kitQuick` (KIT §13.6) with ONE odds key `BAL.skip.od` (40 → "Khó"). A quick result never beats a good own play:
+lessons won = tiến bộ một phần, lost = 0 · works / crafts = no product · makeup won = Đoan trang, lost = Vụng về (Để mặt mộc stays) · care games won = `BAL.skip.care` of the gain, lost = nothing.
+Contests / exams keep "Để tài nghệ quyết định" (the mark of a girl of her level); court acts keep their own odds. Audit: `dev/test/mg-skip-audit.js`.
