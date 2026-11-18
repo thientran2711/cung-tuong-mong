@@ -127,12 +127,15 @@ function agDayDraw(){const t0=performance.now();const D=agDz();D.d=wk();D.P={};D
    each drawn one gets her row repainted from the current khắc and her deed booked (agTickX), then one resync. AGD.ms holds every unit's time. */
 function agLzKind(kind){return kind==="maid"||kind==="srv"}
 function agLzNew(b){AGD.lz={key:wk()+"-"+b,b,L:[],ids:{},w:S}}/* w: the world (S) the queue was drawn for — a chunk never runs on another world (co-op seat swap, load, new life) */
-function agLzPush(p,id,kind,b,intent){const Q=AGD.lz;if(!Q)return;Q.L.push([p,id,kind,b,intent]);Q.ids[id]=1}
+function agLzPush(p,id,kind,b,intent,rp){const Q=AGD.lz;if(!Q)return;Q.L.push([p,id,kind,b,intent,rp]);Q.ids[id]=1}
 function agLzHas(id){const Q=AGD.lz;return !!(Q&&Q.ids[id]&&Q.key===wk()+"-"+agDayB())}
 function agLzGo(){const Q=AGD.lz;if(!Q||!Q.L.length)return;if(window.__agAll){while(AGD.lz&&AGD.lz.L.length)agLzRun();return}agLater("lz",agLzRun,{slice:1})}
 function agLzRun(){const Q=AGD.lz;if(!Q)return;if(Q.w!==S||!agDOn()){AGD.lz=null;return}const D=agDz();if(Q.key!==wk()+"-"+agDayB()||D.d!==wk()){AGD.lz=null;return}
  const t0=performance.now(),B=BAL.ag.perf.slice;const done=[];
- while(Q.L.length){if(done.length&&performance.now()-t0>=B)break;const [p,id,kind,b,intent]=Q.L.shift();delete Q.ids[id];try{if(intent||!D.I||!D.I[id])agIntent(p,id);agDrawPerson(p,id,b,kind,b);done.push(id)}catch(e){agdErr("lz",e)}}
+ while(Q.L.length){if(done.length&&performance.now()-t0>=B)break;const [p,id,kind,b,intent,rp]=Q.L.shift();delete Q.ids[id];try{
+  /* scope "far": a far staff member picks again only with a cause (touch / need / new / done / urge), at most redecideCap per buổi; else her duty row */
+  if(rp&&agRdcFar(p)){const prev=D.P[id]&&D.P[id][b-1];const c=agRdcCause(p,id,prev,"",rp===2?{[id]:1}:{});if(!c||agRdcN>=BAL.ag.day.redecideCap){agRdcKeep(p,id,b,c,kind);done.push(id);continue}agRdcN++;agRdcMark("far:"+c)}
+  if(intent||!D.I||!D.I[id])agIntent(p,id);agDrawPerson(p,id,b,kind,b);done.push(id)}catch(e){agdErr("lz",e)}}
  try{const R=agRec();if(R){const k0=agKh();for(const id of done){const s=agDaySlot(id);const row=R.P[id];if(!s||!row)continue;const nr=agRow(s);
    for(let kh=k0;kh<J95.KH;kh++){const e=row[kh];if(!e||e[1]==="go"&&!agBound(id,kh,R.key))row[kh]=nr[kh]}}}
   if(done.length)agTickX()}catch(e){agdErr("lzPaint",e)}
@@ -152,14 +155,18 @@ function agTouch(p){try{const id=ledgerId(p);if(!id)return;const z=agZ();z.rp=z.
    redecideCap 0 = off (every consort picks every buổi: the earlier HYBRID). The cause is kept on the slot (slot.rc) and counted (AGD.stat.rd). */
 let agRdcN=0;const AGRDC=["ill","rain","touch","need","new","done","urge"];
 function agRdcOn(){try{return BAL.ag.day.redecideCap>0}catch(e){return false}}
+/* scope (C-AG #12 / MAIN ROOT-52 split, 18/11): BAL.ag.day.redecideScope "consort" = the filter on consorts (above); "far" = consorts and their own
+   maids / eunuchs (and hers) pick every buổi as before, only FAR staff (no consort master and not hers: ownerOf null) re-pick with a cause, cap per buổi */
+function agRdcScope(){try{return BAL.ag.day.redecideScope||"consort"}catch(e){return"consort"}}
+function agRdcFar(p){if(!agRdcOn()||agRdcScope()!=="far")return false;try{return !ownerOf(p)}catch(e){return false}}
 function agRdcCause(v,id,prev,rr,T){const D=agDz();D.TB=D.TB||{};let N={},top="";try{N=agNeedsG(v);top=agTop(N)}catch(e){}const t0=id in D.TB?D.TB[id]:D.T[id];D.TB[id]=top;
  if(rr)return rr;if(T[id])return"touch";if(top!==t0)return"need";if(!prev)return"new";if(prev.k)return"done";
  /* urge: her strongest need now outweighs keeping her schedule (the same weights agDrawB draws with: N × BAL.ag.needW against BAL.ag.routine) */
  let w=0;const MF=agMoodF(v),IN=agIntentOf(id);for(const n in N)if(N[n]>0)w+=N[n]*BAL.ag.needW*(MF[n]||1)*(IN.includes(n)?BAL.ag.day.intentW:1);
  if(w>BAL.ag.routine*(MF._||1))return"urge";return""}
 function agRdcMark(c){const R=AGD.stat.rd=AGD.stat.rd||{};R[c]=(R[c]||0)+1}
-function agRdcKeep(v,id,b,c){const D=agDz();const L=D.P[id]=D.P[id]||[];const bo=S.buoi;AG.cB=b;S.buoi=b;
- try{const base=agBase(AGD0.rv,[v,j95c(b)],b)[0];L[b]={pl:base[0],a:base[1],t:base[2],why:base[3],k:null,need:null,rc:"keep"};AGD.stat.slots++;agRdcMark(c?"cap":"keep")}
+function agRdcKeep(v,id,b,c,kind){const D=agDz();const L=D.P[id]=D.P[id]||[];const bo=S.buoi;AG.cB=b;S.buoi=b;
+ try{const base=kind&&AGBASE[kind]?agBase(AGBASE[kind],[v,j95c(b)],b)[0]:agBase(AGD0.rv,[v,j95c(b)],b)[0];L[b]={pl:base[0],a:base[1],t:base[2],why:base[3],k:null,need:null,rc:"keep"};AGD.stat.slots++;agRdcMark(c?"cap":"keep")}
  catch(e){agdErr("rdKeep",e)}finally{AG.cB=null;S.buoi=bo}}
 function agReplanB(){const D=agDz();if(D.d!==wk())return;const b=agDayB();if(D.rb===wk()+"-"+b)return;D.rb=wk()+"-"+b;const t0=performance.now();const z=agZ();const T=z.rp||{};const R=BAL.ag.day.replan;agLzNew(b);agRdcN=0;
  let rain=false;try{rain=wet()}catch(e){}
@@ -169,8 +176,8 @@ function agReplanB(){const D=agDz();if(D.d!==wk())return;const b=agDayB();if(D.r
    let rr="";if((rain&&prev&&prev.pl==="vuon")||(ill&&!(D.ill||{})[id])){rr=rain&&prev&&prev.pl==="vuon"?"rain":"ill";(D.ill=D.ill||{})[id]=ill?1:0;agIntent(v,id);AGD.stat.replan++}
    else{let ch=0;try{ch=agTop(agNeedsG(v))!==D.T[id]?R.need:0}catch(e){}if(T[id])ch=Math.max(ch,R.touch);if(ch&&roll(agCap(ch))){agIntent(v,id);AGD.stat.replan++}else AGD.stat.keep++}
    /* ag2-perf A (owner OD L1637 17/11 15:45Z "chỉ người bị ảnh hưởng mới nghĩ lại"): she picks this buổi's deed again only with a cause */
-   if(agRdcOn()){const c=agRdcCause(v,id,prev,rr,T);if(!c||agRdcN>=BAL.ag.day.redecideCap){agRdcKeep(v,id,b,c);continue}agRdcN++;agRdcMark(c);AGD.rcNow=c}}
-  else if(agLzKind(kind)){agLzPush(p,id,kind,b,0);continue}/* staff: sliced (agLzRun) */
+   if(agRdcOn()&&agRdcScope()!=="far"){const c=agRdcCause(v,id,prev,rr,T);if(!c||agRdcN>=BAL.ag.day.redecideCap){agRdcKeep(v,id,b,c);continue}agRdcN++;agRdcMark(c);AGD.rcNow=c}}
+  else if(agLzKind(kind)){agLzPush(p,id,kind,b,0,T[id]?2:1);continue}/* staff: sliced (agLzRun); 1 = a buổi re-pick, 2 = touched (scope "far" filters it there) */
   else if(!D.I||!D.I[id])agIntent(p,id);
   agDrawPerson(p,id,b,kind,b);if(AGD.rcNow){const s0=D.P[id]&&D.P[id][b];if(s0)s0.rc=AGD.rcNow}/* A: the cause rides on her slot */}catch(e){agdErr("buoi",e)}finally{AGD.rcNow=null}}
  z.rp={};const ms=performance.now()-t0;AGD.ms.push(ms);if(AGD.ms.length>60)AGD.ms.shift();agLzGo()}

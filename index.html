@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"25c66b1c+","t":"2026-11-18T13:08Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…","b":"171e94f38d72","h":[{"s":"bd8547f2+","t":"2026-11-18T03:28Z","c":"men-forbidden r6: old saves drop officials / festival princes standing in the hậu cung on load (menLoadFix, same ONE rule)"},{"s":"c743265c+","t":"2026-11-18T03:18Z","c":"review life-preload r6: title prefetch chained on undefined (lWant returns its promise); gate cap really 25 s (no re-run after cap / Vào cu…"},{"s":"2aca2aac+","t":"2026-11-18T03:17Z","c":"review cloth-tea-r6: kclo-on hides the picture by clip-path, not visibility (visibility:hidden made kfxGeom hide the cloth layer too: her f…"},{"s":"2b1b0701","t":"2026-11-18T03:00Z","c":"review staff-cap-apply r6: site rebuilt on db24027f"},{"s":"64488e4f+","t":"2026-11-18T02:38Z","c":"cloth-xoc r6e: rebuild site"},{"s":"af71f94a+","t":"2026-11-18T02:17Z","c":"smudge r16: stage4 + avatar probe tests, options script score fix (look tier by score), FINAL mode"},{"s":"e1f60927+","t":"2026-11-18T02:25Z","c":"result-reason: every result card line says a short why (kitWhy, KIT 7); values left-aligned next to labels"},{"s":"29385ec6+","t":"2026-11-18T02:07Z","c":"greet-stranger: site rebuilt"},{"s":"3b69182e","t":"2026-11-18T01:50Z","c":"hoa-dien r3 onto main 3da5720a (makeup-lux live): hoa-dien (jhd.js + hooks) replayed on the new main, replacing the old stacked branch. Sha…"},{"s":"631a703e","t":"2026-11-18T01:37Z","c":"review staff-cap-fix r6: hire pick refused at the cap gives the silver back (+ staff-cap.js case); site rebuilt"}]};
+window.CTM_BI={"s":"0e255c17+","t":"2026-11-18T13:34Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…","b":"0c18944a5b23","h":[{"s":"4475ea24+","t":"2026-11-18T12:33Z","c":"grand-endings-engine: site rebuilt (index.html / sw.js / assets.json) after fix 4 + main merge"},{"s":"68cbbb28+","t":"2026-11-18T12:00Z","c":"review life-preload-fu r2v: no half-drawn / empty figure while the HD twin comes (whole group: every fig-* img)"},{"s":"a8036600+","t":"2026-11-18T12:06Z","c":"Rebuild index.html/sw.js after merging origin/main"},{"s":"3f45eda9+","t":"2026-11-18T11:52Z","c":"steal-minigame FIX 1: PEND flag (chooseM renders before the game opens: the stale-'mg' reset no longer cancels a real async game); KIT.md §…"},{"s":"19a23498+","t":"2026-11-18T11:03Z","c":"review poison-road r2 (ONE CORE OD:L1267): the weak-Sức odds rule had two sources — j9 odA typed suc\u003c30 → −15 while the poison card 'Vì sao…"},{"s":"421a2362+","t":"2026-11-18T11:04Z","c":"live-test-reds r1: emotion-acts scold/scoldlive pin the ODDS CAP roll (act failed softly ~5 %, no pick queued)"},{"s":"d795be81+","t":"2026-11-18T10:34Z","c":"residence-seats-r2: a consort out of the palace gives up her side-hall room (palFix); jworld đại xá re-houses at once"},{"s":"65aeddd7+","t":"2026-11-18T10:26Z","c":"review d19-gift-work r1: a refused piece (jdis: stays in her chest) eases nothing — no free peace; test covers it; site rebuilt"},{"s":"32cc2a68+","t":"2026-11-18T10:12Z","c":"kit-kpb: kpb-shots.js (after-only Fold|iPad shots of pgpick, giftpick, short picker)"},{"s":"40e74a62+","t":"2026-11-18T09:19Z","c":"cloth-hd: cloth layer bakes the edit onto the HD picture (out = HD + up(bake) - up(source)) and wears the picture's own filter (kfa edge, s…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -31041,7 +31041,7 @@ BAL.talk={health:4,praise:{o:60,div:5},praiseFail:2,secret:10,secretBond:30,goss
 /* AG-ALL day plan (jagday.js; design dev/handover/reports/ag-all.md §10, owner OD 17/11 ~13:40Z): at the start of each day every NPC draws her
    plan (buổi by buổi: place + deed + goal); replan = % chance to re-draw the rest of her day at a new buổi when her top need changed (need)
    or something touched her (touch: the player's deed aimed at her, her own deed failed, an event); no change → she keeps her plan */
-BAL.ag.day={on:1,replan:{need:25,touch:40},redecideCap:0/* ag2-perf A (owner OD L1637): >0 = at most this many consorts pick their buổi deed again per buổi, only those with a cause (jagday agRdcCause); 0 = OFF: every consort picks every buổi (MAIN ROOT-52 18/11: no cap kept NPC deeds >= 95 % of 02466132 — 12/16/24/inf all ~78-85 %, the cause filter itself drops them — so consorts are never capped; 4x per-khắc still below live) */};
+BAL.ag.day={on:1,replan:{need:25,touch:40},redecideScope:"consort"/* "consort" = cap on consorts; "far" = only far staff (no consort master, not hers) are filtered + capped, consorts and their servants pick every buổi */,redecideCap:0/* ag2-perf A (owner OD L1637): >0 = at most this many consorts pick their buổi deed again per buổi, only those with a cause (jagday agRdcCause); 0 = OFF: every consort picks every buổi (MAIN ROOT-52 18/11: no cap kept NPC deeds >= 95 % of 02466132 — 12/16/24/inf all ~78-85 %, the cause filter itself drops them — so consorts are never capped; 4x per-khắc still below live) */};
 /* AG-ALL part A acts (jagacts.js): cx = the consort cards of j2 the loop lacked — c cost, o odds, w gain (the player's card reads the SAME
    entry), need = what the act serves in BAL.ag.unit points (the agent's utility); maidR.below = her maid's lòng under which a reward is worth it;
    study = Sức for a lesson, g = points; thHelp / hhShield = Xin Thái hậu đỡ lời / Xin Hoàng hậu che chở (odds o + regard / div, gate min);
@@ -65650,12 +65650,15 @@ function agDayDraw(){const t0=performance.now();const D=agDz();D.d=wk();D.P={};D
    each drawn one gets her row repainted from the current khắc and her deed booked (agTickX), then one resync. AGD.ms holds every unit's time. */
 function agLzKind(kind){return kind==="maid"||kind==="srv"}
 function agLzNew(b){AGD.lz={key:wk()+"-"+b,b,L:[],ids:{},w:S}}/* w: the world (S) the queue was drawn for — a chunk never runs on another world (co-op seat swap, load, new life) */
-function agLzPush(p,id,kind,b,intent){const Q=AGD.lz;if(!Q)return;Q.L.push([p,id,kind,b,intent]);Q.ids[id]=1}
+function agLzPush(p,id,kind,b,intent,rp){const Q=AGD.lz;if(!Q)return;Q.L.push([p,id,kind,b,intent,rp]);Q.ids[id]=1}
 function agLzHas(id){const Q=AGD.lz;return !!(Q&&Q.ids[id]&&Q.key===wk()+"-"+agDayB())}
 function agLzGo(){const Q=AGD.lz;if(!Q||!Q.L.length)return;if(window.__agAll){while(AGD.lz&&AGD.lz.L.length)agLzRun();return}agLater("lz",agLzRun,{slice:1})}
 function agLzRun(){const Q=AGD.lz;if(!Q)return;if(Q.w!==S||!agDOn()){AGD.lz=null;return}const D=agDz();if(Q.key!==wk()+"-"+agDayB()||D.d!==wk()){AGD.lz=null;return}
  const t0=performance.now(),B=BAL.ag.perf.slice;const done=[];
- while(Q.L.length){if(done.length&&performance.now()-t0>=B)break;const [p,id,kind,b,intent]=Q.L.shift();delete Q.ids[id];try{if(intent||!D.I||!D.I[id])agIntent(p,id);agDrawPerson(p,id,b,kind,b);done.push(id)}catch(e){agdErr("lz",e)}}
+ while(Q.L.length){if(done.length&&performance.now()-t0>=B)break;const [p,id,kind,b,intent,rp]=Q.L.shift();delete Q.ids[id];try{
+  /* scope "far": a far staff member picks again only with a cause (touch / need / new / done / urge), at most redecideCap per buổi; else her duty row */
+  if(rp&&agRdcFar(p)){const prev=D.P[id]&&D.P[id][b-1];const c=agRdcCause(p,id,prev,"",rp===2?{[id]:1}:{});if(!c||agRdcN>=BAL.ag.day.redecideCap){agRdcKeep(p,id,b,c,kind);done.push(id);continue}agRdcN++;agRdcMark("far:"+c)}
+  if(intent||!D.I||!D.I[id])agIntent(p,id);agDrawPerson(p,id,b,kind,b);done.push(id)}catch(e){agdErr("lz",e)}}
  try{const R=agRec();if(R){const k0=agKh();for(const id of done){const s=agDaySlot(id);const row=R.P[id];if(!s||!row)continue;const nr=agRow(s);
    for(let kh=k0;kh<J95.KH;kh++){const e=row[kh];if(!e||e[1]==="go"&&!agBound(id,kh,R.key))row[kh]=nr[kh]}}}
   if(done.length)agTickX()}catch(e){agdErr("lzPaint",e)}
@@ -65675,14 +65678,18 @@ function agTouch(p){try{const id=ledgerId(p);if(!id)return;const z=agZ();z.rp=z.
    redecideCap 0 = off (every consort picks every buổi: the earlier HYBRID). The cause is kept on the slot (slot.rc) and counted (AGD.stat.rd). */
 let agRdcN=0;const AGRDC=["ill","rain","touch","need","new","done","urge"];
 function agRdcOn(){try{return BAL.ag.day.redecideCap>0}catch(e){return false}}
+/* scope (C-AG #12 / MAIN ROOT-52 split, 18/11): BAL.ag.day.redecideScope "consort" = the filter on consorts (above); "far" = consorts and their own
+   maids / eunuchs (and hers) pick every buổi as before, only FAR staff (no consort master and not hers: ownerOf null) re-pick with a cause, cap per buổi */
+function agRdcScope(){try{return BAL.ag.day.redecideScope||"consort"}catch(e){return"consort"}}
+function agRdcFar(p){if(!agRdcOn()||agRdcScope()!=="far")return false;try{return !ownerOf(p)}catch(e){return false}}
 function agRdcCause(v,id,prev,rr,T){const D=agDz();D.TB=D.TB||{};let N={},top="";try{N=agNeedsG(v);top=agTop(N)}catch(e){}const t0=id in D.TB?D.TB[id]:D.T[id];D.TB[id]=top;
  if(rr)return rr;if(T[id])return"touch";if(top!==t0)return"need";if(!prev)return"new";if(prev.k)return"done";
  /* urge: her strongest need now outweighs keeping her schedule (the same weights agDrawB draws with: N × BAL.ag.needW against BAL.ag.routine) */
  let w=0;const MF=agMoodF(v),IN=agIntentOf(id);for(const n in N)if(N[n]>0)w+=N[n]*BAL.ag.needW*(MF[n]||1)*(IN.includes(n)?BAL.ag.day.intentW:1);
  if(w>BAL.ag.routine*(MF._||1))return"urge";return""}
 function agRdcMark(c){const R=AGD.stat.rd=AGD.stat.rd||{};R[c]=(R[c]||0)+1}
-function agRdcKeep(v,id,b,c){const D=agDz();const L=D.P[id]=D.P[id]||[];const bo=S.buoi;AG.cB=b;S.buoi=b;
- try{const base=agBase(AGD0.rv,[v,j95c(b)],b)[0];L[b]={pl:base[0],a:base[1],t:base[2],why:base[3],k:null,need:null,rc:"keep"};AGD.stat.slots++;agRdcMark(c?"cap":"keep")}
+function agRdcKeep(v,id,b,c,kind){const D=agDz();const L=D.P[id]=D.P[id]||[];const bo=S.buoi;AG.cB=b;S.buoi=b;
+ try{const base=kind&&AGBASE[kind]?agBase(AGBASE[kind],[v,j95c(b)],b)[0]:agBase(AGD0.rv,[v,j95c(b)],b)[0];L[b]={pl:base[0],a:base[1],t:base[2],why:base[3],k:null,need:null,rc:"keep"};AGD.stat.slots++;agRdcMark(c?"cap":"keep")}
  catch(e){agdErr("rdKeep",e)}finally{AG.cB=null;S.buoi=bo}}
 function agReplanB(){const D=agDz();if(D.d!==wk())return;const b=agDayB();if(D.rb===wk()+"-"+b)return;D.rb=wk()+"-"+b;const t0=performance.now();const z=agZ();const T=z.rp||{};const R=BAL.ag.day.replan;agLzNew(b);agRdcN=0;
  let rain=false;try{rain=wet()}catch(e){}
@@ -65692,8 +65699,8 @@ function agReplanB(){const D=agDz();if(D.d!==wk())return;const b=agDayB();if(D.r
    let rr="";if((rain&&prev&&prev.pl==="vuon")||(ill&&!(D.ill||{})[id])){rr=rain&&prev&&prev.pl==="vuon"?"rain":"ill";(D.ill=D.ill||{})[id]=ill?1:0;agIntent(v,id);AGD.stat.replan++}
    else{let ch=0;try{ch=agTop(agNeedsG(v))!==D.T[id]?R.need:0}catch(e){}if(T[id])ch=Math.max(ch,R.touch);if(ch&&roll(agCap(ch))){agIntent(v,id);AGD.stat.replan++}else AGD.stat.keep++}
    /* ag2-perf A (owner OD L1637 17/11 15:45Z "chỉ người bị ảnh hưởng mới nghĩ lại"): she picks this buổi's deed again only with a cause */
-   if(agRdcOn()){const c=agRdcCause(v,id,prev,rr,T);if(!c||agRdcN>=BAL.ag.day.redecideCap){agRdcKeep(v,id,b,c);continue}agRdcN++;agRdcMark(c);AGD.rcNow=c}}
-  else if(agLzKind(kind)){agLzPush(p,id,kind,b,0);continue}/* staff: sliced (agLzRun) */
+   if(agRdcOn()&&agRdcScope()!=="far"){const c=agRdcCause(v,id,prev,rr,T);if(!c||agRdcN>=BAL.ag.day.redecideCap){agRdcKeep(v,id,b,c);continue}agRdcN++;agRdcMark(c);AGD.rcNow=c}}
+  else if(agLzKind(kind)){agLzPush(p,id,kind,b,0,T[id]?2:1);continue}/* staff: sliced (agLzRun); 1 = a buổi re-pick, 2 = touched (scope "far" filters it there) */
   else if(!D.I||!D.I[id])agIntent(p,id);
   agDrawPerson(p,id,b,kind,b);if(AGD.rcNow){const s0=D.P[id]&&D.P[id][b];if(s0)s0.rc=AGD.rcNow}/* A: the cause rides on her slot */}catch(e){agdErr("buoi",e)}finally{AGD.rcNow=null}}
  z.rp={};const ms=performance.now()-t0;AGD.ms.push(ms);if(AGD.ms.length>60)AGD.ms.shift();agLzGo()}
@@ -71701,7 +71708,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="171e94f38d72";window.CTM_BUILD=BUILD;
+const BUILD="0c18944a5b23";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
