@@ -11,7 +11,7 @@ const {chromium}=require('playwright');const fs=require('fs'),path=require('path
  const b=await chromium.launch();const c=await b.newContext({viewport:{width:1180,height:820},serviceWorkers:'block'});const p=await c.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(BASE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&window.kitItemInfo,null,{timeout:180000});
  await p.waitForFunction(()=>!document.getElementById('kload')||(window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)),null,{timeout:240000}).catch(()=>{});
- const R=await p.evaluate(async()=>{document.querySelectorAll('#kload').forEach(e=>e.remove());SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!isSrv())break}
+ const R=await p.evaluate(async()=>{document.querySelectorAll('#kload').forEach(e=>e.remove());SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}
   const base=(typeof IMG_BASE==="string"&&IMG_BASE)||"";const rel=s=>String(s||"").replace(base,"").replace(/^\.\//,"");const L=[];
   const bagOf=e=>{const keep=S.inv;S.inv=[e];try{const x=kinvItems().find(y=>y&&y.g&&(y.g.k===e.k||y.g.e===e));return x?{grade:x.grade|0,src:rel(x.src),name:x.name}:null}catch(err){return{err:err.message}}finally{S.inv=keep}};
   for(const k of Object.keys(IT)){if(IT[k].tp||k==="tp")continue;const e={k};const I=kitItemInfo(e);const pr=IT[k].pr||0;L.push({k,set:"IT",kd:IT[k].kd||"",oldTier:pr>=150?3:pr>=80?2:pr>=40?1:0,name:I.name,grade:I.grade,gname:I.gname,src:rel(I.src),src512:rel(I.src512),bag:bagOf(e)})}

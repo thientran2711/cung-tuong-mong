@@ -19,7 +19,7 @@ const LIVE='https://thientran2711.'+'github.io/cung-tuong-mong/';const html=fs.r
    if(OUT)await p.screenshot({path:`${OUT}/mcal-${SZ}.jpg`,type:'jpeg',quality:60});await ctx.close();continue}
   await p.waitForFunction(()=>typeof start==='function');await p.waitForTimeout(2500);
   await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;
-   for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;try{NLP=null}catch(e){}render()});
+   for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;try{NLP=null}catch(e){}render()});
   await p.waitForTimeout(2500);
   const m=await p.evaluate(async()=>{const f=[];const sleep=t=>new Promise(r=>setTimeout(r,t));['kroul','kroulw','kload'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});Q.length=0;document.getElementById('modal').hidden=true;
    const st=document.getElementById('stage'),bt=document.getElementById('kmcdesk');if(!bt){f.push('no desk calendar');return{f}}

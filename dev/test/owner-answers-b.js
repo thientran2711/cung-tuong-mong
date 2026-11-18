@@ -3,7 +3,7 @@ const {chromium}=require('playwright');
 const SIZES=[[755,1000,2],[1000,755,1],[1180,820,2],[1366,1024,2],[844,390,1],[390,844,1]];
 async function boot(b,W,H,dsf){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:dsf||1,hasTouch:true,isMobile:W<1100,reducedMotion:'reduce',serviceWorkers:'block'});const p=await ctx.newPage();p.setDefaultTimeout(120000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,150)));return{ctx,p,errs}}
 async function start(p,URL){await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function');await p.waitForTimeout(2000);
- await p.evaluate(()=>{try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;['kload','kroul','kroulw','dawn'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});render()});await p.waitForTimeout(1200);
+ await p.evaluate(()=>{try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;['kload','kroul','kroulw','dawn'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});render()});await p.waitForTimeout(1200);
  await p.evaluate(()=>document.querySelectorAll('#kroulw,.kroul,#kload').forEach(e=>e.remove()))}
 module.exports={SIZES,boot,start};
 if(require.main===module)(async()=>{const [,,URL,OUT]=process.argv;const b=await chromium.launch();const out={};

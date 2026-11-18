@@ -43,7 +43,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
  await pa.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await pa.waitForFunction(()=>typeof start==='function'&&typeof ser==='function',null,{timeout:0});await sleep(1500);
  await pa.addInitScript(()=>{});await pa.evaluate(DRIVE);
  const W0=await pa.evaluate(async([mw])=>{try{localStorage.clear()}catch(e){}const kl=document.getElementById('kload');if(kl)kl.remove();document.getElementById('title').hidden=true;
-  const fresh=()=>{for(let i=0;i<400;i++){start();if(!isSrv()&&!S.out)break}};fresh();let last=-1,lives=1;
+  const fresh=()=>{for(let i=0;i<400;i++){try{nlNew()}catch(e){}start();if(!isSrv()&&!S.out)break}};fresh();let last=-1,lives=1;
   for(let g=0;g<40000;g++){if(S.dead||isSrv()){fresh();lives++;continue}
    if(wk()!==last){last=wk();if(wk()>=mw&&!S.out){const rk=liveRivals(true).map(v=>v.rank);if(new Set(rk).size>=3)return{w:wk(),rank:S.rank,met:Object.keys(S.met||{}).length,lives,json:JSON.stringify(ser())}}
     /* meet people the real way: go to a rival's palace once a week (the ones not met first) */

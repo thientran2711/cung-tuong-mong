@@ -14,9 +14,9 @@ const VPS=(SIZES||'755x1000,1180x820,1366x1024,412x1058,390x844').split(',');
   const p=await ctx.newPage();p.setDefaultTimeout(120000);p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.addStyleTag({content:'#kroul,#kroulw,.kroul,#krottip{display:none!important}'});
   await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function',null,{timeout:180000});await sleep(2500);
-  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!isSrv())break}});
+  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}});
   if(process.env.PLATE)await p.evaluate(()=>{window.kitTitleWorn=kitTitleWorn=function(){return kitTitleDef('dh-nights')}});/* PLATE=1: every figure wears the 3-line tag (plate+rank+name), fig-tag-chip */
-  for(let i=0;i<15;i++){await sleep(400);const srv=await p.evaluate(()=>{const s=isSrv();if(s)start();return s});if(!srv)break}
+  for(let i=0;i<15;i++){await sleep(400);const srv=await p.evaluate(()=>{const s=isSrv();if(s)try{nlNew()}catch(e){}start();return s});if(!srv)break}
   await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;render()});await sleep(800);
   /* case list (built inside the page, so the people are the live ones) */
   const cases=await p.evaluate(()=>{const L=[];['sample','two','nochip'].forEach(v=>L.push('timed:'+v));['event','long','info','rule','result','news','place','personopt'].forEach(k=>L.push('pop:'+k));

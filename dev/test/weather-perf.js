@@ -6,7 +6,7 @@ const CFG={snowPXhid:{month:12,buoi:0,wx:{n:"tuyết rơi",k:"snow",f:1},fx:true
  const p=await c.newPage();p.setDefaultTimeout(180000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,150)));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof render==='function');await sleep(2500);
  await p.addStyleTag({content:'#kload{display:none!important}'});
- await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<400;i++){start();if(!isSrv())break}});
+ await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<400;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}});
  for(let i=0;i<40;i++){const k=await p.evaluate(()=>{const r=document.querySelector('#kroul,.kroul');if(r){const bs=[...r.querySelectorAll('button')];const x=bs.find(x=>/Bỏ qua/.test(x.textContent))||bs[0];if(x)x.click()}const o=document.querySelector('.kmov');if(o){o.click();const kb=o.querySelector('.kmend');if(kb)kb.click()}const d=document.getElementById('dawn');if(d){d.classList.remove('on');d.hidden=true}return !!r||!!o});if(!k)break;await sleep(600)}
  const cdp=await c.newCDPSession(p);await cdp.send('Emulation.setCPUThrottlingRate',{rate:+(TH||4)});
  const out={};

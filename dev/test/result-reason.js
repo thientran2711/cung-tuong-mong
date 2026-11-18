@@ -7,8 +7,8 @@ const [,,URL,...SZ]=process.argv;
   const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,deviceScaleFactor:1,serviceWorkers:'block'});
   const p=await ctx.newPage();p.setDefaultTimeout(120000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof kaWhyStat==='function');await p.waitForTimeout(2500);
-  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(S)break}});
-  for(let i=0;i<15;i++){await p.waitForTimeout(400);const srv=await p.evaluate(()=>{const s=isSrv();if(s){Q.length=0;start()}return s});if(!srv)break}
+  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(S)break}});
+  for(let i=0;i<15;i++){await p.waitForTimeout(400);const srv=await p.evaluate(()=>{const s=isSrv();if(s){Q.length=0;try{nlNew()}catch(e){}start()}return s});if(!srv)break}
   const R=await p.evaluate(async()=>{document.querySelectorAll(".kroul,#kroul").forEach(e=>e.remove());Q.length=0;window.__bot=false;const out=[];
    const run=(name,title,mut,logs)=>{const b=rsnap();mut();(logs||[]).forEach(l=>log(l));resultShow(title,b,null);const t=document.getElementById("rtoast");
     const items=[...t.querySelectorAll(".kitem")].filter(x=>!x.closest(".kr-vi"));const n=items.length,w=items.filter(x=>x.querySelector(".kwy")).length;
