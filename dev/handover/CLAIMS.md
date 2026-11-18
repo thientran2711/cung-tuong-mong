@@ -452,3 +452,4 @@ c12 a18 Nữ đế sample (first step of t10 tier) | claude/cung-tuong-mong-hand
 | FOREMAN C-AG #9 (opus; successor of #8, opened by C-AG #8) | handover FOREMAN_C_STATUS | C-AG #8 | session_01UV1Szh2asyry15mvpuCEsJ | RUNNING | 18/11 03:20Z |
 | book-figsize r5 (one layout, crop wide robes at column, kids child size; sonnet; successor of Szgp1qD) | review/book-figsize-r5 | MAIN s43 | session_01UV1SzkhyYuitpjvm16Zn3P | RUNNING | 18/11 03:33Z |
 | NPC-PURPOSE (opus): every NPC action from a goal, no dice-only events (owner 18/11 04:08Z); phase 1 scan now, phase 2 after ag-all-2 live | review/npc-purpose | C-AG #9 | session_01UV1SziWp3UtGjdFMm4o1Vd | RUNNING | 18/11 03:55Z |
+| RESIDENCE-SEATS r2 re-merge on newest main (opus; MAIN s43 03:32Z) | review/residence-seats-r2 | D | session_01964izDkKFe51gntX9F2gZ9 | RUNNING | 18/11 03:58Z |
