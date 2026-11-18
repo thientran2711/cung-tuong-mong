@@ -524,5 +524,5 @@ Audit live consort figures c01–c32 (2K redo / m09 skin) | handover reports/con
 | REVIEW lyf-tier 22dac5c (SMALL; sonnet; prompt inline) | review/lyf-tier | MAIN ROOT-46 | session_01UV1SzkwG1gCApRdP2jjZYj | RUNNING | 18/11 06:09Z |
 | REVIEW buoi-banner 8b50182 (SMALL; keep animation, drop backdrop; owner opacity pick in the morning) | review/buoi-banner | MAIN ROOT-46 | session_01UV1SzgYgbwU8fMtXp6MSMc | RUNNING | 18/11 06:10Z |
 | REVIEW face-reveal-anim 8f5ea90 (SMALL; sonnet; prompt inline) | review/face-reveal-anim | MAIN ROOT-46 | session_01UV1SzimcXuUf9Ahi1zHTBi | PASS 97de885 | 18/11 06:13Z |
-| look-fx-wire #7 (real-game shots, c30/daumua/poxscar 3x, veil halo, mồ hôi; sonnet; briefs/look-fx-wire-7.md; #6 Szj7AXE stopped) | review/look-fx-wire | MAIN ROOT-46 | (opening) | RUNNING | 18/11 06:15Z |
+| look-fx-wire #7 (real-game shots, c30/daumua/poxscar 3x, veil halo, mồ hôi; sonnet; briefs/look-fx-wire-7.md; #6 Szj7AXE stopped) | review/look-fx-wire | MAIN ROOT-46 | session_01UV1Szhm9U5aM2PN8e5HgtG | RUNNING | 18/11 06:15Z |
 | review-act-pic-match (small reviewer; brief briefs/review-act-pic-match.md) | review/act-pic-match-r6 | MAIN ROOT-46 | reviewer sonnet | PASS 48d7a30 (FF of main 550dd1b) | 18/11 06:30Z |
