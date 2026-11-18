@@ -44,3 +44,4 @@ TOOLS: /home/user/wt/ho = handover worktree (detached); append-only conflict hel
 - (18/11 05:51Z) E1 idle with HANDOVER (4164d2b3) → archived; E1b successor = session_01DgYSWm7nnt9krNfbr1w92u (opus) RUNNING (steps 1–5 of E1 HANDOVER). Load 7/12 (E1b, E3, E4f, E7a, E7b-idle, E7c-idle-ready). Q0 FF still waits main (review/questline-q0-ff 8a1955dc).
 FOR MAIN (open): Foreman E is now session_01DgYSWqAEkHoFF4gFWC5Yxg (E ROOT #2). READY FF review/questline-q0-ff 8a1955dc still waiting for main.
 - (18/11 05:53Z) E3 SẴN SÀNG KIỂM hall-names cfe819b (FIX 1) → re-reviewer E3r2 session_01DgYSWpY9qXZPmCjT6XgAan (sonnet SMALL). E3 kept idle for fixes. E7b re-confirmed READY 344e1e92 + HOLD. Load 8/12.
+- (18/11 05:53Z) E7c HANDOVER questline-q1c 6dc4222 (ctx rollover 26 %): 102 men asks (1/chapter) pushed; left = 2nd ask per chapter + 27 «do» {B} fixes + 8 pronoun fixes (list in reports/questline-q1c.md); asked E7a to exempt hz (princes never ask) in nrask-scan.
