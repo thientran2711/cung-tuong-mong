@@ -289,19 +289,18 @@ AGC3BTN.sumNo="Cáo bệnh";AGC3BTN.sumGo="Tắm gội chờ giá";
    cnvBlackOpts / cnvAffOpts), picked by jagstf2 stf2Pick (her needs × nết × odds, mindPick slip), run by stf2Do (fx, odds w / l, go). Numbers BAL.ag.par3.cnv.
    bị mắng: when her master punishes her (j10 servDo "phat", her button and cx3:staffPhat) · yến: months 1 and 7, every adult maid at her master's side (asMonth)
    bị nắm thóp: j10 threatServ (her Dọa tố đối thực and cx3:threat) — the servant answers instead of always turning Tai mắt
-   biết tư tình: each month an NPC maid may learn a consort's affair (BAL.ag.par3.cnv.aff.see), then Dọa tố / Bẩm chủ / Giữ kín ================= */
+   biết tư tình: an NPC maid who was at a consort's tryst (s.trSaw, j95secApply) may notice it (BAL.ag.why.p3.see), then Dọa tố / Bẩm chủ / Giữ kín ================= */
 function p3Cnv(s,O,kind){const c=stf2Pick(s,O,kind);if(!c)return"";AG3.stat.by["cnv_"+kind+"_"+c.id]=(AG3.stat.by["cnv_"+kind+"_"+c.id]||0)+1;const d=stf2Do(s,c);return d.r?String(d.r).replace(/<[^>]+>/g,""):""}
 function p3CnvOn(s){return p3On()&&stf2On()&&s&&s!==S&&s.sid!=null&&!s.out}
 (function(){if(typeof servDo!=="function")return;const d0=servDo;servDo=function(m,a,s){const r=d0.apply(this,arguments);
  try{if(a==="phat"&&p3CnvOn(s)&&s.role==="maid"&&(m.staff||[]).includes(s)){const x=p3Cnv(s,cnvScoldOpts(s,m),"scold");if(x)return `${r} ${x}.`}}catch(e){agdErr("par3:scold",e)}return r}})();
 (function(){if(typeof threatServ!=="function")return;const t0=threatServ;threatServ=function(a,s){const o=ownerOf(s);if(!p3CnvOn(s)||!o||!s.lover)return t0.apply(this,arguments);
  try{const x=p3Cnv(s,cnvBlackOpts(s,a,o),"black");return `${NMc(a)} dọa tố chuyện đối thực của ${s.name}: ${x||"không ai nói ra"}. `}catch(e){agdErr("par3:black",e);return t0.apply(this,arguments)}}})();
-function p3Tryst(v){try{const R=typeof agRec==="function"&&agRec();const e=R&&R.P["v"+v.id];if(!e)return null;for(let kh=0;kh<e.length;kh++)if(e[kh]&&e[kh][1]==="tryst")return{k:e[kh][0],kh}}catch(e){}return null}
 function p3MaidSaw(sw,x){try{if(!sw||typeof knAt!=="function")return null;for(let kh=0;kh<=agKh();kh++){const a=knAt(sw,kh);if(a&&a===knAt("v"+x.id,kh))return a}}catch(e){}return null}
 function p3MaidMonth(){if(!p3On()||!stf2On())return"";let ev="";const X=BAL.ag.par3.cnv;const fest=S.month===1||S.month===7;const lovers=liveRivals(true).filter(v=>v&&v.alive&&!v.out&&v.affair);
  for(const [s,p] of amMaids()){if(!p3CnvOn(s))continue;
   if(fest){const x=p3Cnv(s,cnvFestOpts(s,p),"fest");if(x&&asSee(p))ev+=x+". "}
-  for(const v of lovers){const tk=p3Tryst(v);if(v===p||(s.knowAff||[]).includes(v.id)||!tk||!npcWit(tk.k,tk.kh,{pool:[s]}).length||!roll(BAL.ag.why.p3.see))continue;/* npc-purpose G2a: she learns it only when she was really at the tryst's place at its khắc (day record) */s.knowAff=(s.knowAff||[]).concat([v.id]);const x=p3Cnv(s,cnvAffOpts(s,v,p),"aff");if(x&&asSee(p))ev+=x+". ";break}}
+  for(const v of lovers){if(v===p||(s.knowAff||[]).includes(v.id)||!(s.trSaw||[]).includes(v.id))continue;s.trSaw=s.trSaw.filter(x=>x!==v.id);if(!roll(BAL.ag.why.p3.see))continue;/* npc-purpose: she learns it only when she was really at the tryst's place at its khắc (recorded by j95secApply from the day record: s.trSaw); noticing = p3.see odds */s.knowAff=(s.knowAff||[]).concat([v.id]);const x=p3Cnv(s,cnvAffOpts(s,v,p),"aff");if(x&&asSee(p))ev+=x+". ";break}}
  return ev}
 (function(){if(typeof asMonth!=="function")return;const m0=asMonth;asMonth=function(){let ev=m0.apply(this,arguments)||"";try{ev+=p3MaidMonth()}catch(e){agdErr("par3:maidMonth",e)}return ev}})();
 Object.assign(AGC3BTN,{cnvScold:"Khóc lóc xin tha",cnvFest:"Rót rượu gần ngự tọa",cnvBlack:"Đút bạc bịt miệng",cnvAff:"Dọa tố chuyện tư tình"});

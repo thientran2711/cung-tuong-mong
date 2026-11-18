@@ -145,14 +145,17 @@ function j95week(){const z=j95z();if(z.itWk===wk())return;z.itWk=wk();if(z.mo!==
     if(z.sec.some(x=>x.a==="v"+v.id&&x.c===c))continue;z.sec.push({a:"v"+v.id,b:m.id,c,kh:[k0,k0+1],k:v.j95spot[0],spot:v.j95spot[1],kind:"tryst",why:`tư tình với ${m.name}`,wk:wk()})}}
   /* a plot in preparation: an errand to the place its route names, or a word with her own eunuch in a quiet corner */
   try{const z7=j70();const p=z7&&z7.pl.find(x=>!x.end&&x.st==="prep"&&x.a===v.id);if(p&&(window.agOn&&agOn()?ag2Ch((v.staff||[]).find(x=>x.role==="eunuch")||(v.staff||[])[0]||v,80*cl(((((v.staff||[]).find(x=>x.role==="eunuch")||(v.staff||[])[0]||{}).loyal)||50)/50,.5,1.25)):j95dice(80))){const r=pr70(p);const t=pt70(p);const s=(v.staff||[]).find(x=>x.role==="eunuch")||(v.staff||[])[0];
-   const c=cs[1+Math.floor(Math.random()*(cs.length-1))];const sp=r&&r.pl?[r.pl,placeName(r.pl)]:SPOT95[Math.floor(Math.random()*SPOT95.length)];
-   z.sec.push({a:"v"+v.id,b:s?"s"+s.sid:null,c,kh:[1+Math.floor(Math.random()*3)],k:sp[0],spot:sp[1],kind:"meet",plot:p.id,tgt:t?j95id(t):null,why:`chuẩn bị mưu: ${r?r.n.toLowerCase():"mưu hại"} nhắm vào ${t===S?"ngươi":t?t.name:"người khác"}`,wk:wk()})}}catch(e){}}
+   /* npc-purpose: the errand goes when her palace needs her least (j95fr), to the plot's own place else the quietest hidden spot, at the first khắc it can */
+   const c=npwPick(cs.slice(1),j95fr)||cs[1];const sp=r&&r.pl?[r.pl,placeName(r.pl)]:npwPick(SPOT95,j95quiet)||SPOT95[0];const k1=npwPick([1,2,3],x=>agSoon(x,1))||1;
+   z.sec.push({a:"v"+v.id,b:s?"s"+s.sid:null,c,kh:[k1],k:sp[0],spot:sp[1],kind:"meet",plot:p.id,tgt:t?j95id(t):null,why:`chuẩn bị mưu: ${r?r.n.toLowerCase():"mưu hại"} nhắm vào ${t===S?"ngươi":t?t.name:"người khác"}`,wk:wk()})}}catch(e){}}
  /* the Emperor's week: a heavy court week sometimes; one personal leaning */
  /* NPC-PURPOSE G3: a heavy week = a real cause (ill / Chăm chính / court crisis: jagemp empBusy); his leaning = the buổi the one he favours is out and about (her week intent), near-best */
   const L0=BAL.ag.why.g3.lean;z.emp=z.emp||{lean:{c:L0.c,k:L0.k}};let bz="";try{bz=typeof empBusy==="function"?empBusy():""}catch(e){}z.empWk={busy:!!bz,why:bz};
   try{const f=typeof favNow==="function"&&favNow();const it=f&&f.p&&z.it[f.p.id];if(it&&it.s&&it.s.length){const c=npwPick(it.s.filter(x=>x>=1&&x<=3),x=>x===L0.c?2:1);if(c)z.emp.lean={c,k:L0.k}}}catch(e){}}
 /* G3: weekly stay-home factor from her real feeling (jemo: glad → goes out, sad / angry → stays in), BAL.ag.why.g3.mood */
-function j95moodF(v){const M=BAL.ag.why.g3.mood;const e=v&&v.emo;const d=e&&e.v?(e.k==="vui"?1:-1)*e.v:0;return +cl(M.b+d/M.div,M.lo,M.hi).toFixed(2)}
+function j95fr(c){return Math.max(1,100-(J95.OWN[c]||0))}/* how free she is in buổi c (her palace's own call on her, J95.OWN) */
+function j95quiet(sp){return 100/(1+liveRivals(true).filter(x=>whereOf(x)===sp[0]).length)}/* a hidden spot: fewer eyes there, the better */
+function j95moodF(v){const M=BAL.ag.why.g3.mood;const e=v&&v.emo;const d=e&&e.v?(+(M.sg||{})[e.k]||0)*e.v:0;/* sign per feeling (BAL g3.mood.sg): glad / angry / jealous / scheming go out, sad / afraid / grieving stay in, calm = 0 */return +cl(M.b+d/M.div,M.lo,M.hi).toFixed(2)}
 function j95intent(v,cs){const O=[],z=j95z();const af=aff(v,S),ho=hostility(v,S);
  O.push(["emp",(nv(v,"empW"))*((v.sung||0)<50?1.4:.7)*(.5+(v.ghen||0)/60),null,`tranh sủng (Sủng ${Math.round(v.sung||0)}, ghen ${v.ghen||0})`]);
  const al=others(v).filter(x=>x!==S&&x.alive&&!x.out&&!sameHouse(v,x)).map(x=>[x,aff(v,x)]).sort((p,q)=>q[1]-p[1])[0];
@@ -166,8 +169,9 @@ function j95intent(v,cs){const O=[],z=j95z();const af=aff(v,S),ho=hostility(v,S)
  O.push(["none",1.6,null,""]);
  const it=j95pw(O.map(x=>[x,x[1]]));if(!it||it[0]==="none")return null;
  const mid=cs.filter(c=>c===1||c===2);let s;
- if(it[0]==="ambush")s=[mk.c];else if(it[0]==="avoid")s=cs.slice();else if(it[0]==="emp"){const E=cs.filter(c=>j95empW(c).vuon>=15);s=E.length?[E[Math.floor(Math.random()*E.length)]]:[]}
- else s=[(mid.length?mid:cs)[Math.floor(Math.random()*(mid.length?mid:cs).length)]];
+ /* npc-purpose: the buổi = where her aim is likeliest met — the Emperor's garden hours (his own vuon weight), else when her palace needs her least (j95fr) */
+ if(it[0]==="ambush")s=[mk.c];else if(it[0]==="avoid")s=cs.slice();else if(it[0]==="emp"){const E=cs.filter(c=>j95empW(c).vuon>=15);const e=npwPick(E,c=>j95empW(c).vuon);s=e!=null?[e]:[]}
+ else{const L=mid.length?mid:cs;const x=npwPick(L,j95fr);s=[x!=null?x:L[0]]}
  if(it[0]==="ally"&&j95dice(40)&&mid.length>1)s=mid.slice();
  return{k:it[0],t:it[2],s,why:it[3]}}
 
@@ -227,7 +231,7 @@ function j95planOther(p,c,P){const kh=[0,1,2,3];
  if(p.kind==="court"){const c2=p.id.slice(2);
   if(c2==="tq")return kh.map(i=>[P.emp?P.emp[i][0]:"dtd","attend","emp","tổng quản luôn hầu bên Hoàng thượng"]);
   if(c2==="ksp")return kh.map(()=>["ksp","book",null,"phận sự Kính sự phòng"]);
-  if(c2==="ty"){const sick=liveRivals(true).filter(v=>v.preg||(v.suc||80)<50);/* NPC-PURPOSE G3: he goes to the one most in need (an expectant mother, then the weakest), at the first khắc his rounds allow — not a random patient / khắc */const v=sick.length&&j95dice(25)?npwPick(sick,x=>(x.preg?BAL.ag.why.g3.ty.preg:0)+100-(x.suc||80)):null;const s=npwPick([1,2,3],x=>agSoon(x,1));
+  if(c2==="ty"){const sick=liveRivals(true).filter(v=>v.preg||(v.suc||80)<50);/* NPC-PURPOSE G3: the one most in need sends for him (kind tyCall: an expectant mother, then the weakest; each at most once per g3.ty cd), at the first khắc his rounds allow — not a random patient / khắc */const tc=sick.length?npcWhy("tyCall",{sick}):null;const v=tc?tc.who:null;const s=npwPick([1,2,3],x=>agSoon(x,1));
    return kh.map(i=>v&&i===s?[palaceOf(v),"heal","v"+v.id,v.preg?"bắt mạch an thai":"bắt mạch cho người yếu sức"]:["tyv","brew",null,"trực Thái y viện"])}
   /* main jact (Dư đồ Nội vụ phủ, 16/11): the Nội vụ phủ eunuch stands at Nội vụ phủ every khắc (jact draws him there) — one place (r1) */
   if(j95nvp())return kh.map(()=>["nvp","sell",null,"bày hàng mua từ ngoài cung ở Nội vụ phủ"]);
@@ -257,7 +261,10 @@ function j95secApply(R){const z=j95z();const c=R.c;
   /* NPC passers-by at the same place and khắc may see (same odds as hers) */
   for(const v of liveRivals(true)){const id="v"+v.id;if(id===s.a||!R.P[id])continue;const at=s.kh.some(i=>R.P[id][i][0]===s.k);if(!at)continue;
    const sub=RV(+s.a.slice(1));if(!sub)continue;const out=j95catchRoll(v,sub);if(out==="flee")continue;
-   evA(v,sub,out==="one"?BAL.eff.j95.evJ95secApply[0]:BAL.eff.j95.evJ95secApply[1]);if(s.kind==="tryst")sub.scandal=1;R.ev.push(`${v.name} bắt gặp ${sub.name} (${s.kind==="tryst"?"hẹn hò lén":"gặp tay chân"})`)}}}
+   evA(v,sub,out==="one"?BAL.eff.j95.evJ95secApply[0]:BAL.eff.j95.evJ95secApply[1]);if(s.kind==="tryst")sub.scandal=1;R.ev.push(`${v.name} bắt gặp ${sub.name} (${s.kind==="tryst"?"hẹn hò lén":"gặp tay chân"})`)}
+  /* npc-purpose (review item 5): servants whose day row puts them at the tryst's place at its khắc saw it — kept on the servant (s.trSaw, lazy) for jagacts3 p3MaidMonth */
+  if(s.kind==="tryst"){const vid=+s.a.slice(1);for(const id in R.P){if(id[0]!=="s"||!/^s\d+$/.test(id))continue;const e=R.P[id];if(!s.kh.some(i=>e[i]&&e[i][0]===s.k))continue;
+   const sv=typeof servById==="function"?servById(+id.slice(1)):null;if(sv&&!(sv.trSaw||[]).includes(vid))sv.trSaw=(sv.trSaw||[]).concat([vid])}}}}
 
 /* ---------------- 6. SYNC: the views every old reader uses ---------------- */
 function j95view(R,kh){const W={};W.emp=R.P.emp?R.P.emp[kh][0]:"dtd";W.th=R.P.th?R.P.th[kh][0]:null;

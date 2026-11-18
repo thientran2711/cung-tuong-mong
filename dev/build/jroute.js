@@ -82,7 +82,7 @@ function rtTtCards(){const T=rtS(),A=[],tt=T.tt,ducK=S.duc>=BAL.route.guiltDuc?"
   A.push(rtCard({id:"tt1",n:`Trao tín vật cho ${rtMnm(m)}`,t:"Một chiếc khăn thêu, một nhành trâm: lời không dám nói, gửi vào vật.",art:RT_ART.tt,c:{...BAL.route.token},o,k:BAL.route.k.tt1,
    need:[[`người đưa tin: cung nữ thân cận (lòng ${balAb(BAL.loy.mid)}+) hoặc y đang ở đây`,maid||here]],x:"tình ý +15 · y giữ tín vật",lx:"tín vật lọt vào tay người khác · Lời ra tiếng vào +12",kem:`Lời ra tiếng vào +6 · tín vật là tang vật nếu bị lục${ducK?" · "+ducK:""}`,
    go:()=>{m.tinh=(m.tinh||0)+15;m.letters=(m.letters||0)+1;tt.tok=1;rtHeat(6);if((m.tinh||0)>=40)tt.st=2;log(`${rtMnm(m)} nhận tín vật, giấu vào ngực áo.`)},
-   fail:()=>{rtHeat(12);/* NPC-PURPOSE G3: the finder is a watchful one really on her road (npcWit at her place), not a random consort */const v=rtFinder();if(v&&roll(BAL.route.tokenLost)){evA(v,S,BAL.eff.jroute.evFail);log(`Tín vật bị ${rtVn(v)} nhặt được. Nàng giữ làm chứng cứ.`)}else log("Tín vật rơi dọc đường; có người nhặt được, chưa rõ là ai.")}}))}
+   fail:()=>{rtHeat(12);/* NPC-PURPOSE G3: the finder is a watchful one really on her road (npcWit at her place), not a random consort */const v=rtFinder((S.menW||{})[m.id]||S.place||"home");if(v&&roll(BAL.route.tokenLost)){evA(v,S,BAL.eff.jroute.evFail);log(`Tín vật bị ${rtVn(v)} nhặt được. Nàng giữ làm chứng cứ.`)}else log("Tín vật rơi dọc đường; có người nhặt được, chưa rõ là ai.")}}))}
  if(tt.st>=2){const sp=rtSpot(m);const night=rtNight();
   if(tt.st===2||!night||!sp||sp.k==="tyv"||sp.k==="tn"){const o=sp?rtSeeO(sp.k):30;
    A.push(rtCard({id:"tt2",n:`Hẹn gặp lén ${rtMnm(m)}`,t:sp?`Buổi này ${sp.why}.`:`Buổi này không có chỗ nào gặp ${rtMnm(m)} được.`,art:RT_ART.hen,c:{...BAL.route.meet},o,k:BAL.route.k.tt2,
@@ -105,7 +105,8 @@ function rtNightOk(m,k){const T=rtS(),tt=T.tt;m.trysts=(m.trysts||0)+1;m.tinh=(m
  log(r);if((m.tinh||0)>=80&&!tt.prom&&["thị vệ","vương gia","thái y"].includes(m.rw)){tt.prom=1;tt.st=4;rtPush("rtPromise",{m:m.id})}}
 /* seen while meeting: the witness decides by her nature (same rule as an NPC seeing an NPC) */
 /* G3: who finds what she drops / intercepts her letter: a watchful one (eyes ≥ 2) really at her place, the most watchful and hostile first */
-function rtFinder(){const k=S.place||"home";const w=npcWit(k,null,{pool:liveRivals(true).filter(x=>eyes(x)>=2),vs:S})[0];return w?w.p:null}
+/* k = the spot on her road (where the token goes: the man's place); no k = a letter leaving her palace: only one who sees inside her house (npwIn) and resents her stops it */
+function rtFinder(k){if(!k){const L=npwIn(S).filter(x=>hostility(x,S)>=BAL.ag.why.tell.host);return npwPick(L,x=>hostility(x,S))}const w=npcWit(k,null,{pool:liveRivals(true).filter(x=>eyes(x)>=2),vs:S})[0];return w?w.p:null}
 function rtSeen(m,k,what){const W=rtWit(k);rtHeat(what==="dem"?30:20);
  const w0=npcWit(k,null,{pool:W,vs:S})[0];const v=w0?w0.p:null;/* G3: the best watcher there (eyes × hostility), not a random one */
  if(!v){log(`Có tiếng bước chân ngoài hiên; ngươi và ${rtMnm(m)} kịp tản đi. Người trong cung bắt đầu xì xào.`);return}

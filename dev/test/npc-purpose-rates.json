@@ -14,27 +14,52 @@
   {
    "n": "maid road: mistress mood 'Chủ thưởng' (j42 srvCard)",
    "f": "c",
-   "re": "^Chủ thưởng"
+   "re": "^Chủ thưởng",
+   "band": [
+    0.25,
+    5
+   ],
+   "why": "only lives that start on the cung nữ road count; how many tuần a seed spends there differs between builds (targeted servant-start check in the rates report)"
   },
   {
    "n": "maid road: 'quở mắng' (j42 srvCard)",
    "f": "l",
-   "re": "quở mắng"
+   "re": "quở mắng",
+   "band": [
+    0.25,
+    5
+   ],
+   "why": "only lives that start on the cung nữ road count; how many tuần a seed spends there differs between builds (targeted servant-start check in the rates report)"
   },
   {
    "n": "maid road: 'Bạc lạ' bribe (j42 srvCard)",
    "f": "c",
-   "re": "^Bạc lạ"
+   "re": "^Bạc lạ",
+   "band": [
+    0.25,
+    5
+   ],
+   "why": "only lives that start on the cung nữ road count; how many tuần a seed spends there differs between builds (targeted servant-start check in the rates report)"
   },
   {
    "n": "poisoning sign 'môi tím tái' (jface)",
    "f": "l",
-   "re": "môi tím tái"
+   "re": "môi tím tái",
+   "band": [
+    0.3,
+    3.5
+   ],
+   "why": "small base count (< 20 in 5 seeds): seed paths alone move it 2-3x"
   },
   {
    "n": "NPC 'Lập công' (j71 f7Merit)",
    "f": "l",
-   "re": "^Lập công$"
+   "re": "^Lập công$",
+   "band": [
+    0.3,
+    3.5
+   ],
+   "why": "small base count (< 20 in 5 seeds): seed paths alone move it 2-3x"
   },
   {
    "n": "NPC mood 'đắc ý' (jemoact)",
@@ -69,7 +94,12 @@
   {
    "n": "letters 'gửi thư / viết thư'",
    "f": "l",
-   "re": "gửi thư|viết thư"
+   "re": "gửi thư|viết thư",
+   "band": [
+    0.4,
+    3.5
+   ],
+   "why": "NPC letters home are one of the jemoact outburst reactions: they follow how often NPCs are upset (2-3x noise between seed paths)"
   },
   {
    "n": "festival nights (Nguyên tiêu / Thất tịch / Trung thu)",
@@ -84,12 +114,22 @@
   {
    "n": "visitor card 'Một ánh mắt' (j24 manPoem)",
    "f": "c",
-   "re": "^Một ánh mắt"
+   "re": "^Một ánh mắt",
+   "band": [
+    0.3,
+    3.5
+   ],
+   "why": "small base count (< 20 in 5 seeds): seed paths alone move it 2-3x"
   },
   {
    "n": "visitor card 'Thái hậu triệu' (j24 thCall)",
    "f": "c",
-   "re": "^Thái hậu triệu"
+   "re": "^Thái hậu triệu",
+   "band": [
+    0.3,
+    3.5
+   ],
+   "why": "small base count (< 20 in 5 seeds): seed paths alone move it 2-3x"
   },
   {
    "n": "visitor card 'Lời cảnh báo' (j24 maidWarn)",
@@ -99,7 +139,12 @@
   {
    "n": "visitor card 'Kẻ hầu xin' (j24 svAsk)",
    "f": "c",
-   "re": "^Kẻ hầu xin"
+   "re": "^Kẻ hầu xin",
+   "band": [
+    0.3,
+    3.5
+   ],
+   "why": "small base count (< 20 in 5 seeds): seed paths alone move it 2-3x"
   },
   {
    "n": "news seller 'Có người bán tin' (jagknow knSell)",
@@ -109,15 +154,99 @@
   {
    "n": "omen 'Điềm báo' (jty tyPlot)",
    "f": "c",
-   "re": "^Điềm báo"
+   "re": "^Điềm báo",
+   "band": [
+    0.3,
+    3.5
+   ],
+   "why": "small base count (< 20 in 5 seeds): seed paths alone move it 2-3x"
   },
   {
    "n": "NPC affair 'tư thông' (j22)",
    "f": "l",
-   "re": "tư thông"
+   "re": "tư thông",
+   "band": [
+    0.3,
+    3.5
+   ],
+   "why": "small base count (< 20 in 5 seeds): seed paths alone move it 2-3x"
   }
  ],
- "rare": {},
+ "rare": {
+  "admon": "j75 Empress / Thái hậu admonition: only with the agent layer off (agDOn), the bot plays with it on",
+  "affair": "needs a lonely consort (Sủng < 30) and a man who fancies her or a roving man (jmen); in the bot the men's road rarely fills — base had 1 'tư thông' line in 5×200 tuần",
+  "affairOut": "needs a live NPC affair plus a foe holding proof (evG ≥ 2) — follows affair",
+  "bulTell": "jtsb bullying victim tells: needs 2+ bullyings with evidence; rare in 200 tuần",
+  "cmBrawl": "close maid from home ('dtq' house) only; one origin of the maid",
+  "cmLand": "close maid house 'land' (Cung Chính ti report) only, plus a 5 % letter roll: a few asks per run",
+  "cmLeak": "close maid holding a secret that leaks; secret rare in a bot run",
+  "cmScorn": "close maid from 'muoi'/'cnv' houses only",
+  "cmSpy": "called only from the close maid listen card (cmSpyCh) when no kit chance is set",
+  "cmTh": "close maid sent by the Thái hậu (src th) only",
+  "cmTt": "close maid from the Tể tướng house (src home, k tt) only; s now always ≥ min (ttB), its 'whether' is the old ttPress roll",
+  "coldAsk": "weekly card from a consort in lãnh cung: needs a fallen consort who trusts her",
+  "empAsk": "Emperor asks for a new selection only when < 4 consorts live",
+  "empSummon": "jts night summons fallback, only when the day-plan summons is off",
+  "empTea": "j24 tea visit from the Emperor only with the agent day plan off (agDOn → his own plan)",
+  "facDiv": "faction leader divides her faction: only when she is in a faction (bot seldom joins)",
+  "frameMe": "j95b frame lie: needs hostility ≥ lie.frame (45) and a lie case open",
+  "fxSlapBack": "mistress slaps a maid back: only after a maid slapped someone (a few times per run)",
+  "h54Ban": "daughter's marriage talks: needs a daughter of betrothal age (≥ 15) — longer than 200 tuần",
+  "h54Gift": "gifts to a married daughter: needs a married daughter",
+  "h54Hoa": "daughter offered to the envoy: needs a grown daughter and an embassy",
+  "h54Plead": "mother asks a married daughter to plead: needs a married daughter",
+  "h54Sad": "unhappy married daughter comes home: needs a married daughter",
+  "hEmpWed": "Emperor / Thái hậu match a grown child: needs a child of age",
+  "hhGreed": "j7 embezzle card: only a greedy-natured Empress",
+  "j70Guard": "the Emperor / Thái hậu guard her: needs Sủng ≥ 70 or Thái hậu regard ≥ 60 when a plot is checked (old: same gate + 10 %/8 %)",
+  "kcMeet": "khuê các road (home before the palace) only; the bot enters the palace at once",
+  "kcSuit": "khuê các road only",
+  "kcVh": "khuê các road only",
+  "kcWeek": "khuê các road only",
+  "kspCheck": "needs her own pregnancy that does not match the Kính sự phòng book",
+  "ktFav": "needs a mother with Sủng ≥ 50 choosing a tutor for a child of school age",
+  "loveFound": "weekly card: needs a consort with a real lover (j22 affair)",
+  "menGrudge": "needs a man she spurned/threatened who holds a grudge ('Uy hiếp hắn' refused); base had 0 such rumours too",
+  "mock": "j4 story line 'td' only (one of the story roads)",
+  "pillowTalk": "j75 pillow talk: needs a consort with rel < -20 who wins his night",
+  "pkTrac": "heir's second wife: needs an heir aged ≥ 20",
+  "psStrike": "jexam: the grown Emperor strikes after a failed exam plea; rare",
+  "q72Collect": "someone she owes a favour must come to collect: needs a debt (q72 d < 0); the bot seldom owes",
+  "rcpAcc": "recipe accusation: needs a harm done with a recipe dish",
+  "rcpTh": "Thái hậu shares a recipe: needs Thái hậu regard ≥ 60",
+  "seek": "jmen plan 4 (admirer comes in): only on the men's road (menRoad) with a fancy man; 0 asks in the bot",
+  "sendMaid": "j75: with the maid-agent layer on (amOn) the maid choice is jagmaid's",
+  "srvBlack": "cung nữ road only (witness blackmail)",
+  "srvBuy": "cung nữ road only, rank ≥ 2 maid",
+  "srvPrince": "cung nữ road only, a prince with tình ý",
+  "srvSearch": "cung nữ road only, chest search on rumour",
+  "srvWed": "cung nữ road only, late (ban gả)",
+  "story": "j4 / j54 story steps: depend on the story road drawn at the start",
+  "suitor": "needs a daughter of betrothal age at home",
+  "svLeave": "a servant leaves a stalled mistress: needs 12 months without promotion and lòng < 75",
+  "svMarket": "greedy servant of HER palace with the black market: few asks per run",
+  "svSell": "a servant with a grudge sells news: needs a punished servant (grudge)",
+  "svTalk": "talkative servant of her own palace only",
+  "taimat": "her tai mắt sees a pregnancy mismatch of another consort",
+  "thdTaunt": "j4 story line 'thd' only",
+  "thyHarm": "needs a rival who paid her thái y (thyBribe) while she is treated",
+  "thyLeak": "thái y leaks: needs a bribed thái y and a secret",
+  "thyTell": "thái y tells her: needs his liking ≥ askAf",
+  "tryst": "jmen plan 1: needs an NPC affair (affair) on the men's road",
+  "trystKnow": "needs her own tryst in the last 3 tuần",
+  "vlGift": "jveil gift of a veil: needs a scarred face and a friend",
+  "empMercy": "the Emperor's first-year mercy on an exposed affair: needs an exposed affair of hers",
+  "g3scape": "jworld2 theft case with no thief caught and a resentful accuser",
+  "meAlly": "weekly pact card: a consort who trusts her AND hates the Empress (Empress must exist)",
+  "svSpy": "a sharp-natured servant of HER palace (j29): needs that nết on her staff",
+  "facAsk": "a faction leader invites her: needs a faction leader who likes her (aff ≥ 35), then the old 10 % roll",
+  "petMan": "a man sends her a pet: needs a man with tình ý for her, then the old manP roll (misses counted, no cd)",
+  "rcpGift": "a friend shares a recipe: old giftP roll after the reason (misses counted)",
+  "srvWatch": "cung nữ road only: the mistress watches a maid who spies or betrays",
+  "cmConf": "close maid confides a secret: needs a maid with a secret and lòng ≥ secTrust, then the old secTell roll (0-3 per run)",
+  "h54Tut": "a mother hires an arts master: needs a daughter at home and the old P×30 roll (0-5 per run)",
+  "wdFrame": "contraband planted on a hated wearer: old frameP roll after the reason (0-4 per run)"
+ },
  "base": {
   "drop-in visit 'ghé chơi' (jshelf g3call)": 62,
   "maid road: mistress mood 'Chủ thưởng' (j42 srvCard)": 6,

@@ -1,6 +1,6 @@
 
 /* ================= j51 KẾ VỊ: lập đích, lập trưởng, lập hiền; tranh ngôi Đông cung (cùng một luật cho mọi người mẹ) ================= */
-const KV={c:.007,base:22,deb:4,debGap:12};
+const KV={c:.007,base:22};/* the court debate numbers (deb / debGap / the Emperor's odds) live in BAL.ag.why.g3.deb (one core) */
 /* hệ số theo tính nết: người mẹ có con trai đứng sau mưu dọn đường cho con */
 const KVT={"Xảo quyệt":2,"Tham vọng":1.7,"Kiêu ngạo":1.2,"Kín đáo":1,"Khiêm nhường":.4,"Ân cần":.08};
 const KVACT=[["kframe",3],["kpoison",2],["pond",1.5],["ksab",3],["spy",2.5],["frame",1.5]];
@@ -59,16 +59,17 @@ window.__kvS=null;window.__kvDue={};
     e+=seenNPC(v,t,res);if(S.dead)return e}return e};
   ev+=(typeof srvW==="function"?srvW(run):run())||""}catch(e){}return ev}})();
 /* ---- lập Thái tử: lập đích, lập trưởng, lập hiền ---- */
-function kvDebate(){const H=S.heir;if(!H||!H.k||!H.k.alive||kvQueenMom(H.v))return"";if(S.turn-(S.kvDeb==null?-99:S.kvDeb)<KV.debGap)return"";
- const o=kvOrder();const d=o.find(x=>x.dich&&!x.k.heir&&x.k.age>=6);if(!d||!roll(KV.deb))return"";S.kvDeb=S.turn;const h=H.k;
- const p=cl(Math.round(30+(d.k.tal-h.tal)/2+(d.k.fond-h.fond)/2-(h.age>=16?10:0)),10,85);
+function kvDebate(){const H=S.heir;if(!H||!H.k||!H.k.alive||kvQueenMom(H.v))return"";const DB=BAL.ag.why.g3.deb;if(S.turn-(S.kvDeb==null?-99:S.kvDeb)<DB.gap)return"";
+ const o=kvOrder();const d=o.find(x=>x.dich&&!x.k.heir&&x.k.age>=6);if(!d||!roll(DB.p))return"";S.kvDeb=S.turn;const h=H.k;
+ const p=cl(Math.round(DB.o+(d.k.tal-h.tal)/DB.div+(d.k.fond-h.fond)/DB.div-(h.age>=DB.old?DB.oldD:0)),DB.lo,DB.hi);
  const pre=`<b>Triều đình bàn lệ lập đích:</b> đại thần dâng sớ xin lập ${d.k.name}, đích tử của ${d.v?"Hoàng hậu "+d.v.name:"ngươi (Hoàng hậu)"}, thay Thái tử ${h.name} (con ${kvMomName(H.v)}). `;
  if(roll(p)){setHeir(d.k,d.v);fx("gold");return pre+`<span class="${d.v?(H.v?"":"r"):"g"}">Hoàng thượng phế ${h.name}, lập ${d.k.name} làm Thái tử</span> (khả năng đổi ngôi: ${chanceLo(p)}).${d.v?"":" Danh +10."} `}
  return pre+`Hoàng thượng giữ ${h.name} ở ngôi Thái tử (khả năng đổi ngôi: ${chanceLo(p)}). `}
 heirMonth=function(){if(S.heir&&S.heir.k&&S.heir.k.alive)return kvDebate();S.heir=null;
  const o=kvOrder();const c=o.filter(x=>x.k.age>=6);if(!c.length)return"";
  const wait=!c.some(x=>x.dich)&&o.some(x=>x.dich);/* đích tử còn nhỏ: triều đình chờ */
- if(!roll(wait?5:15))return"";
+ /* npc-purpose: Hoàng thượng names an heir when his own reckoning is ripe (kind heirName: months he has weighed it since a son came of age, slower while a đích son is small) */
+ if(S.kvHW==null)S.kvHW=wk();if(!npcWhy("heirName",{wait,c}))return"";
  /* NPC-PURPOSE G3: Hoàng thượng names the son his own reckoning ranks first (lệ đích / trưởng / hiền weights), near-best — never a lottery */const x=npwPick(c,y=>y.w)||c[0];setHeir(x.k,x.v);fx("gold");
  const why=x.dich?"theo lệ lập đích: con của Hoàng hậu":S.ps?`theo lệ lập hiền: Tài ${x.k.tal}, được ngài thương ${x.k.fond}; mẹ là ${(RANKS[momRank(x.v)]||RANKS[0]).n}${x.truong?", lại là con trưởng":""}`/* r1: keeps the "lập hiền: Tài N, được ngài thương N" form so j53 swaps the raw talent for the Văn/Đức/Võ words (rival: rumour word) */:x.truong?"theo lệ lập trưởng: hoàng tử lớn nhất":`theo lệ lập hiền: Tài ${x.k.tal}, được ngài thương ${x.k.fond}`;
  return x.v?`Hoàng thượng lập ${x.k.name}, con của ${x.v.name}, làm Thái tử (${why}). `:`<b class="g">Hoàng thượng lập ${x.k.name}, con của ngươi, làm Thái tử</b> (${why}). Danh +10. `};

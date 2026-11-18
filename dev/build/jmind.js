@@ -172,7 +172,9 @@ window.MIND_SOC=MIND_SOC;
 const MENU_TAG={accuse:"frame",vp:"frame",kframe:"frame",frame:"frame",plant:"frame",musk:"harm",catswap:"harm",kpoison:"harm",poison:"harm",pond:"harm",ksab:"harm",takeaway:"harm",
  pushp:"harm",trip:"harm",rumor:"scheme",spy:"spy",bribe:"bribe",block:"scheme"};window.MIND_MENU=MENU_TAG;/* 2f3: read by mindSeen (outside this scope) */
 if(typeof mindMenu==="function"){const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{if(!O||!O.length)return O;
-  if(O.length>1&&roll(BAL.mind.slip)){/* G3: she misjudges between her near-best acts only */const x=npwPick(O,o=>o[1]*mindW(v,MENU_TAG[o[0]]||"scheme"));if(x)return [[x[0],1]]}return O.map(([k,w])=>[k,w*mindW(v,MENU_TAG[k]||"scheme")])}catch(e){return O}}}
+  const W=O.map(([k,w])=>[k,w*mindW(v,MENU_TAG[k]||"scheme")]);
+  if(W.length>1&&roll(BAL.mind.slip)){/* G3: she misjudges between her near-best acts only: those within BAL.ag.why.near of the best weigh the same; the whole list is kept so callers' filters (j70 band, j40 rash) still find an act */
+   const b=Math.max(...W.map(x=>x[1]));if(b>0)return W.map(([k,w])=>[k,w>=b*BAL.ag.why.near?b:w])}return W}catch(e){return O}}}
 /* a stray man seen in the hậu cung: was a fixed rule per trait (no dice); now each answer is weighted, the old answer stays the most likely */
 if(typeof menDecide==="function"){const d0=menDecide;menDecide=function(w,c){const d=d0.apply(this,arguments);try{const h=c?hostility(w,c):0;const T=traitsOf(w);
   const M=BAL.mind.men;
