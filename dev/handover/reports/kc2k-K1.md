@@ -12,5 +12,10 @@ CDN: https://ctm-img.victoria-tntt.workers.dev/img/_review/kc2k/ (cNN_a18_kc_2k.
 | c06 | teacup→painted folding fan | jade charm→wooden spindle with spun thread | forehead marks removed |
 | c07 | teacup+saucer→thread-bound book | jade pendant→plum-blossom branch | |
 | c08 | teacup→peony sprig | jade charm→bamboo-leaf fan | |
-Gens: c05–c08 8 transparent gens (looked at all 8, c06 ngheo zoomed: spindle, not jade). c01 2 (+2 cut-outs), c02–c04 6 transparent gens (+6 earlier one-ref gens dropped, wasted). ~135 credits each.
+| c09 | folding fan (kept) | jade pendant→small basket of mulberry leaves | |
+| c10 | small cup-like object→embroidery hoop with half-finished flower | jade pendant→wooden comb in plain cloth | forehead mark removed |
+| c11 | fan + handkerchief (kept) | jade pendant→clay pot of orchid sprout | |
+| c12 | teacup→plum-blossom sprig | jade pendant→herbs bunch tied with straw | |
+NOTE: figures c09–c12 (live art) wear necklaces/gold hairpins as part of their outfit — not held items, left unchanged per "same figure, item swap only"; foreman may want to rule on it for nhà nghèo.
+Gens: c09–c12 8 transparent gens, all looked at. c05–c08 8 transparent gens (looked at all 8, c06 ngheo zoomed: spindle, not jade). c01 2 (+2 cut-outs), c02–c04 6 transparent gens (+6 earlier one-ref gens dropped, wasted). ~135 credits each.
 All looked at (grey backdrop): same figures, correct items, bare foreheads, alpha 0..254 verified.
