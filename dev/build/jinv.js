@@ -402,7 +402,17 @@ const KSHOP={reg:{}};
  const on=!!(m&&m.kit&&(m.kit.shop||m.kit.pick));dlg.classList.toggle("kshopd",on);if(!on)return r;
  const body=M.querySelector("#mb > .kpb");if(body){body.querySelectorAll(":scope > .kpsubj").forEach(e=>e.remove());body.classList.remove("kphas","kpinfo")}
  if(typeof kitXAdd==="function")kitXAdd(dlg)}catch(e){console.error("kitShop",e)}return r}})();
-function kitShopList(o){const L=o.mode==='sell'&&o.sell?(o.sell.items()||[]):(o.items||[]);const ok=L.filter(x=>kitShopMax(o,x)>0),no=L.filter(x=>kitShopMax(o,x)<1);return ok.concat(no)}
+function kitShopRaw(o){return o.mode==='sell'&&o.sell?(o.sell.items()||[]):(o.items||[])}
+/* review/shop-panel-r3 (owner 18/11 ~18:55Z): ONE row of kit sub-tabs under Mua | Bán, by item KIND, the SAME groups as the Tư trang chest (KINV_CATS; Trang sức split by wear slot = KEQ_TT: Cài tóc, Đeo tay, Đeo eo…). First tab «Tất cả» like the chest; only kinds present in the current list; none when the list has one kind. */
+function kitShopCat(k,crafted){if(crafted)return"tp";const it=IT[k];const W=typeof WD_ITEMS==="object"&&WD_ITEMS[k];if(!it&&!W)return"tap";
+ const kd=it?it.kd:(W.sl==="y"?"Y phục":"Trâm cài");let c=kinvCat(kd);if(c==="trang"){let sl=it?it.sl:"hair";if(sl==="tram")sl="hair";if(KEQ_TT.some(t=>t[0]===sl))c="trang:"+sl}return c}
+function kitShopKinds(L){const seen={};L.forEach(x=>{const c=x.cat||"tap";seen[c]=(seen[c]||0)+1});const out=[];
+ const lab=c=>{if(c.indexOf("trang:")===0){const t=KEQ_TT.find(t=>t[0]===c.slice(6));return t?t[1]:"Trang sức"}const g=KINV_CATS.find(g=>g[0]===c);return g?g[1]:"Tạp vật"};
+ const order=[];KINV_CATS.forEach(g=>{if(g[0]==="trang")KEQ_TT.forEach(t=>order.push("trang:"+t[0]));order.push(g[0])});order.push("tap");
+ order.forEach(c=>{if(seen[c])out.push({k:c,label:lab(c),n:seen[c]})});Object.keys(seen).forEach(c=>{if(!out.some(t=>t.k===c))out.push({k:c,label:lab(c),n:seen[c]})});
+ return out.length>1?[{k:"all",label:"Tất cả",n:L.length}].concat(out):[]}
+function kitShopList(o){const L0=kitShopRaw(o);o.kinds=kitShopKinds(L0);o.cat=o.cat||{};let cur=o.cat[o.mode];if(!o.kinds.some(t=>t.k===cur))cur="all";o.cat[o.mode]=cur;
+ const L=cur==="all"?L0:L0.filter(x=>(x.cat||"tap")===cur);const ok=L.filter(x=>kitShopMax(o,x)>0),no=L.filter(x=>kitShopMax(o,x)<1);return ok.concat(no)}
 function kitShopMax(o,x){if(x.sell)return x.why?0:Math.max(0,x.have?x.have():0);const money=o.money?o.money():0;const carry=(o.carry||9)-(x.have?x.have():0);return Math.max(0,Math.min(Math.floor(money/Math.max(1,x.price)),x.stock==null?99:x.stock,carry))}
 function kitShopWhyQ(o,x,q){if(x.sell)return x.why||(q>(x.have?x.have():0)?"Không đủ":"");const money=o.money?o.money():0;if(x.why)return x.why;if((x.have?x.have():0)>=(o.carry||9))return"Rương đã đầy món này";if(x.stock!=null&&q>x.stock)return"Hết hàng";if(q*x.price>money)return"Thiếu bạc";return""}
 /* the short word on a tile's button (the full reason is its tooltip) */
@@ -430,8 +440,9 @@ function kitShopDet(o){const x=(o.list||[]).find(y=>y.k===o.det);if(!x)return"";
   `<div class="kinvrows">${kitRowsJoin(kitRows(cost),x.rows||"")}</div></div></div>`}
 function kitShopBody(o){const key=o.key||"shop";const money=o.money?o.money():0;o.list=kitShopList(o);o.q=o.q||{};
  const tabs=o.sell?`<div class="pctabs kcattabs kshtabs" role="tablist">${kitTabRowHTML([{k:"buy",label:"Mua"},{k:"sell",label:"Bán"}],o.mode==="sell"?"sell":"buy",`data-kshop="${key}" data-kshtab`)}</div>`:"";
+ const kinds=o.kinds.length?`<div class="pctabs kcattabs kshkinds" role="tablist">${kitTabRowHTML(o.kinds.map(t=>({k:t.k,label:t.label,n:t.n,tip:`${t.n} món`})),o.cat[o.mode],`data-kshop="${key}" data-kshkind`)}</div>`:"";
  const empty=o.mode==="sell"&&!o.list.length?`<p class="past kshempty">${(o.sell&&o.sell.empty)||"Chưa có gì để bán."}</p>`:"";
- return `<div class="kshop" data-kshop="${key}"><div class="kshl">${o.info||""}</div>${tabs}`+
+ return `<div class="kshop" data-kshop="${key}"><div class="kshl">${o.info||""}</div>${tabs}${kinds}`+
   (empty||`<div class="kshg">${o.list.map((x,i)=>kitShopTile(o,x,i)).join("")}</div>`)+(o.det!=null?kitShopDet(o):"")+`</div>`}
 function kitShop(o){o=o||{};const key=o.key||"shop";o.q={};o.det=null;o.mode="buy";KSHOP.reg[key]=o;
  return kitModal({kind:"info",title:o.title||"Mua đồ",html:kitShopBody(o),btn:o.btn||"Đóng",shop:key,stage:o.stage,onClose:o.onClose})}
@@ -439,9 +450,10 @@ function kitShopRefresh(key){const o=KSHOP.reg[key];if(!o)return;const html=kitS
  const el=document.querySelector(`.kshop[data-kshop="${key}"]`);if(!el)return;const g=el.querySelector(".kshg"),st=g?g.scrollTop:0;el.outerHTML=html;
  const g2=document.querySelector(`.kshop[data-kshop="${key}"] .kshg`);if(g2)g2.scrollTop=st;
  const x=document.querySelector(`.kshop[data-kshop="${key}"] .kshdc .kit-x`);if(x)try{x.focus({preventScroll:true})}catch(e){}}
-document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("[data-kshdetx],[data-kshdet],[data-kshq],[data-kshbuy],[data-kshtab]");if(!t)return;
+document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("[data-kshdetx],[data-kshdet],[data-kshq],[data-kshbuy],[data-kshtab],[data-kshkind]");if(!t)return;
  const o=KSHOP.reg[t.dataset.kshop];if(!o)return;e.stopPropagation();const key=o.key||"shop";
  if(t.dataset.kshdetx!=null){if(t.classList.contains("kshdet")&&e.target!==t)return;o.det=null;kitShopRefresh(key);return}
+ if(t.dataset.kshkind!=null){o.cat=o.cat||{};o.cat[o.mode]=t.dataset.kshkind;o.det=null;kitShopRefresh(key);return}
  if(t.dataset.kshtab!=null){o.mode=t.dataset.kshtab;o.det=null;o.q={};kitShopRefresh(key);return}
  const x=(o.list||[])[+t.dataset.kshi];if(!x)return;
  if(t.dataset.kshdet!=null){o.det=x.k;kitShopRefresh(key);return}
@@ -458,7 +470,7 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){for(const k in KSHO
 .kshl{display:flex;flex-direction:column;gap:4px;min-width:0;flex:none}
 .kshl p{margin:0;line-height:1.4}
 .kshm{font-size:.86rem;color:var(--ink2,#6a5040)}
-.kshtabs{margin:0;flex:none}
+.kshtabs,.kshkinds{margin:0;flex:none}
 .kshempty{margin:6px 0;padding:10px;border:1px dashed var(--k-hair,#e6d3ac);border-radius:10px}
 /* KIT 28.13e tile grid: equal columns, every tile the same fixed rows → everything on one line across a row */
 .kshg{flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;display:grid;grid-template-columns:repeat(auto-fill,minmax(var(--kshsz,118px),1fr));
@@ -527,7 +539,7 @@ function kitShopSellList(){try{if(typeof econSellable==="function"){const g={};
  catch(e){console.error("econSellable",e)}return kitShopSellable(S)}
 function kitShopSellPrice(x){if(x&&x.price!=null)return x.price;try{if(typeof econPrice==="function"&&x&&x.ix&&x.ix.length){const v=econPrice(S,S.inv[x.ix[0]]);if(v!=null)return v}}catch(e){}return kitShopPrice(x)}
 function kitShopSellItems(){return (kitShopSellList()||[]).map(g=>{const k=g.k,it=IT[k]||{n:g.name||k};const a=typeof itemArt==="function"?itemArt(k):null;const nm=g.name||it.n;
- return{k:g.key,sell:true,src:g.src||kitItemSrc(k,""),src512:a&&a.src512||"",name:nm,sub:g.crafted?"Tác phẩm tự tay":`${it.kd||""}${it.kd?" · ":""}${KIT_GRADE[a?a.grade|0:0].n}`,grade:g.grade!=null?g.grade|0:(a?a.grade|0:0),lux:0,price:kitShopSellPrice(g),why:g.no||"",
+ return{k:g.key,sell:true,cat:kitShopCat(k,g.crafted),src:g.src||kitItemSrc(k,""),src512:a&&a.src512||"",name:nm,sub:g.crafted?"Tác phẩm tự tay":`${it.kd||""}${it.kd?" · ":""}${KIT_GRADE[a?a.grade|0:0].n}`,grade:g.grade!=null?g.grade|0:(a?a.grade|0:0),lux:0,price:kitShopSellPrice(g),why:g.no||"",
   eff:g.crafted?"tự tay làm":kitShopEff(k),rows:!g.crafted&&IT[k]?kitItemRows(k):"",have:()=>((kitShopSellList()||[]).find(y=>y.key===g.key)||{n:0}).n,
   onBuy:(x,q)=>{let got=0,n=0;for(let i=0;i<q;i++){const cur=(kitShopSellList()||[]).find(y=>y.key===g.key);if(!cur||!(cur.n>0))break;const b0=S.bac;
     if(typeof cur.sell==="function")cur.sell();else{const ix=cur.ix[cur.ix.length-1];if(cur.wk&&typeof wkSell==="function"){const r=wkSell(S,ix);if(r)log(r)}else sellItem(S,ix)}got+=S.bac-b0;n++}
@@ -536,7 +548,7 @@ function kitShopNvp(){const c=S.court&&S.court.ped;let nm=c&&c.name?c.name:"";
  /* j61 naming: a eunuch she has not learnt the name of shows "<role> ???" (not "Thái giám Nội vụ phủ / thái giám ???") */
  try{if(nm&&c&&typeof k61Named==="function"&&!k61Named(c))nm="???"}catch(e){}
  const items=(S.shop||[]).filter((k,i,a)=>IT[k]&&a.indexOf(k)===i).map(k=>{const it=itm(k);const a=typeof itemArt==="function"?itemArt(k):null;
-  return{k,src:kitItemSrc(k,""),src512:a&&a.src512||"",name:it.n,sub:`${it.kd} · ${KIT_GRADE[a?a.grade|0:0].n}`,grade:a?a.grade|0:0,lux:it.sl||it.dr?luxVal(k):0,price:it.pr||0,
+  return{k,cat:kitShopCat(k),src:kitItemSrc(k,""),src512:a&&a.src512||"",name:it.n,sub:`${it.kd} · ${KIT_GRADE[a?a.grade|0:0].n}`,grade:a?a.grade|0:0,lux:it.sl||it.dr?luxVal(k):0,price:it.pr||0,
    eff:kitShopEff(k),rows:kitItemRows(k),stock:5,have:()=>S.inv.filter(e=>e.k===k&&!e.h).length,
    onBuy:(x,q)=>{apply({bac:-x.price*q});for(let i=0;i<q;i++)S.inv.push({k});log(`Mua ${it.n}${q>1?` ×${q}`:""}. Bạc -${x.price*q}`)}}});
  return kitShop({key:"nvp",title:"Nhờ thái giám mua đồ",carry:9,
