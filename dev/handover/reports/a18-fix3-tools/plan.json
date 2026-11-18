@@ -1,0 +1,755 @@
+{
+"c03": {
+"t3_v0": [
+"teeth"
+],
+"t3_v1": [
+"teeth"
+]
+},
+"c04": {
+"t1_v1": [
+"teeth"
+],
+"t6_v0": [
+"item"
+],
+"t6_v1": [
+"item"
+],
+"t6_v2": [
+"item"
+],
+"t7_v1": [
+"retone"
+],
+"t7_v2": [
+"retone"
+]
+},
+"c05": {
+"t2_v0": [
+"teeth"
+],
+"t2_v1": [
+"teeth"
+],
+"t2_v2": [
+"teeth"
+],
+"t6_v0": [
+"item"
+],
+"t6_v1": [
+"item"
+],
+"t6_v2": [
+"item"
+],
+"t7_v0": [
+"item"
+],
+"t7_v1": [
+"item",
+"retone"
+],
+"t7_v2": [
+"item",
+"retone"
+]
+},
+"c09": {
+"t3_v0": [
+"teeth"
+],
+"t3_v1": [
+"teeth"
+],
+"t3_v2": [
+"teeth"
+],
+"t6_v0": [
+"item"
+],
+"t6_v1": [
+"item"
+],
+"t6_v2": [
+"item"
+],
+"t7_v1": [
+"retone"
+],
+"t7_v2": [
+"retone"
+]
+},
+"c12": {
+"t3_v0": [
+"teeth"
+],
+"t3_v1": [
+"teeth"
+],
+"t3_v2": [
+"teeth"
+],
+"t6_v0": [
+"item"
+],
+"t6_v1": [
+"item"
+],
+"t6_v2": [
+"item"
+],
+"t7_v1": [
+"retone"
+],
+"t7_v2": [
+"retone"
+]
+},
+"c13": {
+"t4_v0": [
+"teeth"
+],
+"t4_v1": [
+"teeth"
+],
+"t4_v2": [
+"teeth"
+],
+"t6_v0": [
+"teeth"
+],
+"t6_v1": [
+"teeth"
+],
+"t6_v2": [
+"teeth"
+],
+"t7_v1": [
+"retone"
+],
+"t7_v2": [
+"retone"
+]
+},
+"c14": {
+"t3_v0": [
+"teeth"
+],
+"t3_v1": [
+"teeth"
+],
+"t3_v2": [
+"teeth"
+],
+"t4_v0": [
+"empty"
+],
+"t4_v1": [
+"empty"
+],
+"t4_v2": [
+"empty"
+],
+"t6_v0": [
+"item"
+],
+"t6_v1": [
+"item"
+],
+"t6_v2": [
+"item"
+],
+"t7_v0": [
+"item"
+],
+"t7_v1": [
+"item",
+"retone"
+],
+"t7_v2": [
+"item",
+"retone"
+]
+},
+"c15": {
+"t6_v0": [
+"item"
+],
+"t6_v1": [
+"item",
+"teeth"
+],
+"t6_v2": [
+"item",
+"teeth"
+],
+"t7_v1": [
+"retone"
+],
+"t7_v2": [
+"retone"
+]
+},
+"c16": {
+"t6_v0": [
+"item"
+],
+"t6_v1": [
+"item"
+],
+"t6_v2": [
+"item"
+],
+"t7_v0": [
+"item"
+],
+"t7_v1": [
+"item",
+"retone"
+],
+"t7_v2": [
+"item",
+"retone",
+"teeth"
+]
+},
+"c18": {
+"t2_v0": [
+"teeth"
+],
+"t2_v1": [
+"teeth"
+],
+"t2_v2": [
+"teeth"
+],
+"t3_v1": [
+"teeth"
+],
+"t3_v2": [
+"teeth"
+],
+"t4_v1": [
+"teeth"
+],
+"t4_v2": [
+"teeth"
+],
+"t5_v0": [
+"teeth"
+],
+"t5_v1": [
+"teeth"
+],
+"t5_v2": [
+"teeth"
+],
+"t6_v0": [
+"item"
+],
+"t6_v1": [
+"item"
+],
+"t6_v2": [
+"item"
+],
+"t7_v0": [
+"item"
+],
+"t7_v1": [
+"item",
+"retone"
+],
+"t7_v2": [
+"item",
+"retone"
+]
+},
+"c19": {
+"t2_v0": [
+"teeth"
+],
+"t2_v1": [
+"teeth"
+],
+"t2_v2": [
+"teeth"
+],
+"t3_v0": [
+"teeth"
+],
+"t3_v1": [
+"teeth"
+],
+"t3_v2": [
+"teeth"
+],
+"t6_v0": [
+"item"
+],
+"t6_v1": [
+"item"
+],
+"t6_v2": [
+"item"
+],
+"t7_v0": [
+"item"
+],
+"t7_v1": [
+"item",
+"retone"
+],
+"t7_v2": [
+"item",
+"retone"
+]
+},
+"c22": {
+"t6_v0": [
+"item"
+],
+"t6_v1": [
+"item"
+],
+"t6_v2": [
+"item"
+],
+"t7_v0": [
+"teeth"
+],
+"t7_v1": [
+"retone",
+"teeth"
+],
+"t7_v2": [
+"retone",
+"teeth"
+]
+},
+"c25": {
+"t1_v0": [
+"teeth"
+],
+"t1_v1": [
+"teeth"
+],
+"t1_v2": [
+"teeth"
+],
+"t4_v0": [
+"teeth"
+],
+"t4_v1": [
+"teeth"
+],
+"t4_v2": [
+"teeth"
+],
+"t7_v0": [
+"item",
+"teeth"
+],
+"t7_v1": [
+"item",
+"retone"
+],
+"t7_v2": [
+"item",
+"retone"
+]
+},
+"c26": {
+"t2_v0": [
+"teeth"
+],
+"t2_v1": [
+"teeth"
+],
+"t2_v2": [
+"teeth"
+],
+"t6_v0": [
+"item"
+],
+"t6_v1": [
+"item"
+],
+"t6_v2": [
+"item"
+],
+"t7_v0": [
+"item"
+],
+"t7_v1": [
+"item",
+"retone"
+],
+"t7_v2": [
+"item",
+"retone"
+]
+},
+"c27": {
+"t2_v0": [
+"teeth"
+],
+"t2_v1": [
+"teeth"
+],
+"t2_v2": [
+"teeth"
+],
+"t3_v0": [
+"empty"
+],
+"t3_v1": [
+"empty"
+],
+"t3_v2": [
+"empty"
+],
+"t7_v0": [
+"item"
+],
+"t7_v1": [
+"item",
+"retone"
+],
+"t7_v2": [
+"item",
+"retone"
+]
+},
+"c29": {
+"t1_v0": [
+"teeth"
+],
+"t1_v1": [
+"teeth"
+],
+"t1_v2": [
+"teeth"
+],
+"t3_v0": [
+"empty"
+],
+"t3_v1": [
+"empty"
+],
+"t3_v2": [
+"empty"
+],
+"t5_v0": [
+"teeth"
+],
+"t5_v1": [
+"teeth"
+],
+"t6_v0": [
+"item"
+],
+"t6_v1": [
+"item"
+],
+"t6_v2": [
+"item"
+],
+"t7_v1": [
+"retone"
+],
+"t7_v2": [
+"retone"
+]
+},
+"c30": {
+"t2_v0": [
+"teeth"
+],
+"t2_v1": [
+"teeth"
+],
+"t2_v2": [
+"teeth"
+],
+"t7_v0": [
+"item"
+],
+"t7_v1": [
+"item",
+"retone"
+],
+"t7_v2": [
+"item",
+"retone"
+]
+},
+"c32": {
+"t3_v0": [
+"teeth"
+],
+"t3_v1": [
+"teeth"
+],
+"t3_v2": [
+"teeth"
+],
+"t4_v0": [
+"teeth"
+],
+"t4_v1": [
+"teeth"
+],
+"t4_v2": [
+"teeth"
+],
+"t7_v1": [
+"retone"
+],
+"t7_v2": [
+"retone"
+]
+},
+"c01": {
+"t6_v0": [
+"item"
+],
+"t6_v1": [
+"item"
+],
+"t6_v2": [
+"item"
+],
+"t7_v0": [
+"item"
+],
+"t7_v1": [
+"item",
+"retone"
+],
+"t7_v2": [
+"item",
+"retone"
+]
+},
+"c06": {
+"t6_v0": [
+"item"
+],
+"t6_v1": [
+"item"
+],
+"t6_v2": [
+"item"
+],
+"t7_v0": [
+"item"
+],
+"t7_v1": [
+"item",
+"retone"
+],
+"t7_v2": [
+"item",
+"retone"
+]
+},
+"c10": {
+"t6_v0": [
+"item"
+],
+"t6_v1": [
+"item"
+],
+"t6_v2": [
+"item"
+],
+"t7_v0": [
+"item"
+],
+"t7_v1": [
+"item",
+"retone"
+],
+"t7_v2": [
+"item",
+"retone"
+]
+},
+"c24": {
+"t7_v0": [
+"item"
+],
+"t7_v1": [
+"item",
+"retone"
+],
+"t7_v2": [
+"item",
+"retone"
+]
+},
+"c28": {
+"t3_v0": [
+"empty"
+],
+"t3_v1": [
+"empty"
+],
+"t3_v2": [
+"empty"
+],
+"t7_v0": [
+"item"
+],
+"t7_v1": [
+"item",
+"retone"
+],
+"t7_v2": [
+"item",
+"retone"
+]
+},
+"c07": {
+"t6_v0": [
+"item"
+],
+"t6_v1": [
+"item"
+],
+"t6_v2": [
+"item"
+],
+"t7_v1": [
+"retone"
+],
+"t7_v2": [
+"retone"
+]
+},
+"c08": {
+"t6_v0": [
+"item"
+],
+"t6_v1": [
+"item"
+],
+"t6_v2": [
+"item"
+],
+"t7_v1": [
+"retone"
+],
+"t7_v2": [
+"retone"
+]
+},
+"c11": {
+"t6_v0": [
+"item"
+],
+"t6_v1": [
+"item"
+],
+"t6_v2": [
+"item"
+],
+"t7_v1": [
+"retone"
+],
+"t7_v2": [
+"retone"
+]
+},
+"c17": {
+"t6_v0": [
+"item"
+],
+"t6_v1": [
+"item"
+],
+"t6_v2": [
+"item"
+],
+"t7_v0": [
+"item"
+],
+"t7_v1": [
+"item",
+"retone"
+],
+"t7_v2": [
+"item",
+"retone"
+]
+},
+"c20": {
+"t6_v0": [
+"item"
+],
+"t6_v1": [
+"item"
+],
+"t6_v2": [
+"item"
+],
+"t7_v1": [
+"retone"
+],
+"t7_v2": [
+"retone"
+]
+},
+"c23": {
+"t6_v0": [
+"item"
+],
+"t6_v1": [
+"item"
+],
+"t6_v2": [
+"item"
+],
+"t7_v1": [
+"retone"
+],
+"t7_v2": [
+"retone"
+]
+},
+"c02": {
+"t7_v0": [
+"item"
+],
+"t7_v1": [
+"item",
+"retone"
+],
+"t7_v2": [
+"item",
+"retone"
+]
+},
+"c21": {
+"t7_v1": [
+"retone"
+],
+"t7_v2": [
+"retone"
+]
+},
+"c31": {
+"t7_v1": [
+"retone"
+],
+"t7_v2": [
+"retone"
+]
+}
+}

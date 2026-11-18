@@ -1,0 +1,7 @@
+   4s open 1434 ms 0 errors
+   8s old save {"load":{"ok":true,"name":"Liễu Như Ý"},"buoi":true,"errors":0}
+ 159s perf new  runs [{"renderMs":160,"tabMs":397,"buoiMs":981,"longTasks200":14,"longTaskMaxMs":1392,"openMs":1244,"playableMs":4424},{"renderMs":191,"tabMs":386,"buoiMs":801,"longTasks200":12,"longTaskMaxMs":1679,"openMs":1313,"playableMs":4797},{"renderMs":211,"tabMs":372,"buoiMs":1056,"longTasks200":15,"longTaskMaxMs":3189,"openMs":1286,"playableMs":7050}]
+ 159s perf live runs [{"renderMs":192,"tabMs":332,"buoiMs":861,"longTasks200":14,"longTaskMaxMs":2562,"openMs":1230,"playableMs":6171},{"renderMs":149,"tabMs":339,"buoiMs":837,"longTasks200":14,"longTaskMaxMs":1646,"openMs":1277,"playableMs":4504},{"renderMs":244,"tabMs":423,"buoiMs":1427,"longTasks200":18,"longTaskMaxMs":1571,"openMs":1308,"playableMs":5102}]
+ 159s perf new  median {"renderMs":191,"tabMs":386,"buoiMs":981,"longTasks200":14,"longTaskMaxMs":1679,"openMs":1286,"playableMs":4797}
+ 159s perf live median {"renderMs":192,"tabMs":339,"buoiMs":861,"longTasks200":14,"longTaskMaxMs":1646,"openMs":1277,"playableMs":5102}
+QUICKCHECK PASS · 159 s · open 1434 ms · old save ok · perf (median of 3, new/live): render 191/192 ms, tab 386/339 ms, buổi 981/861 ms, tasks>200ms 14/14

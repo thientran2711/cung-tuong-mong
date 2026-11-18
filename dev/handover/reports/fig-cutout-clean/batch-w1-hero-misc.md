@@ -1,0 +1,280 @@
+# batch w1-hero-misc (hero + misc, 1063 files, 4k) — worker log
+START_CTX ~5% of 1M (get_session reads 0; own estimate). Roll over at ~30%, never above 60%.
+## Pipeline notes (17/11)
+- 4k master from images_generate gpt-2-6 2048x4096 comes back OPAQUE (white bg) now (pilot had alpha). Fix: images_remove_background (3 cr, output 2000x4000 RGBA, good edges) -> curl -> finish_fig.py -> qa_fig -> sheet look. ~83 cr/file.
+- Identity ref for a26/a36/a51 = NEW a18 of the look (upload local webp via creations_request_upload + curl PUT + finalize) + old figure of that age + faces 01/05/12/18.
+- cdn_sync.py is NOT on the handover branch: take it from origin/main (git show origin/main:dev/site/cdn_sync.py) and run from a dir with dev/site/cdn_sync.py + img/.
+- finished files live only in the container scratch (not git-able: image allowlist) -> upload to CDN before rollover.
+## Reused pilot a18 (4k, looked at, no train, calm): player-look1..4-t1-a18, emperor-a18-1, emperor-a18-2, physician-p1-a18, official-o1-a18 (pilot-hero/finished/img; hd twin = hd2 folder 2700 -> need fit to 1800 if CDN has hd)
+## Done (4k, looked, QA ok) — master Magnific ids (bg-removed)
+player-look1-t1-a26 MB7vgfmDCm | look2-t1-a26 O6CGvkIynm | look3-t1-a26 1leOMaLr4r (4 pinholes, accepted like c28) | look4-t1-a26 kspJVvB16B
+## Refs (Magnific creations): new a18 look1 3z5VQDQREY look2 9ZFWCyoNYZ look3 bxVUWF05Y2 look4 DoJaSTPpcl; old a26 look1 p8OfSIqehw look2 lJI6XHZgv9 look3 79a2tkLJAL look4 P3unaLr42C
+player-look1-t1-a36 8a6HNjlIrU | look2-t1-a36 rgdyeY6xtc | look3-t1-a36 u5YLnOCQLD | look4-t1-a36 4RQYudE9Aa (halo FAIL 3.7-5.4k is the sheer-gauze rim, clean on dark; pinholes 4-5 accepted)
+## UPLOADED to CDN (cdn_sync + img/hd + img/hd2 for hero): 16 figures = pilot a18 x8 (player look1-4 a18, emperor a18-1/-2, physician-p1, official-o1) + player look1-4 a26 + a36. hd2 = 2700 tall (hero extra; CDN had none before).
+## Refs for a36 old: look1 JNfAvMVOq4 look2 JNfAvDMOq4 look3 dtPEOxuXSL look4 YMsojQzWeC
+## Credits so far: 8 x 83 = 664
+## TODO (order): player-look*-t1-a51 (4), player-look*-t3-a18 (4, +a26? check list), emperor a26/a36/a51 -1/-2 (6), physician, official, tutor, steward, fallen (remaining), then man, mama, eunuch, kid. Remaining list = shard minus the done above.
+## Gesture rotation used: a18 look1 branch, look2 handkerchief, look3 fan, look4 hairpin; a26 teacup/fan/scroll/jade; a36 branch/handkerchief/fan/lantern. Age lines: a26 'about 28', a36 'about 38 poised mature, subtle maturity', a51 'about 53, dignified, silver touches in hair' (not yet used).
+
+## SUCCESSOR S2 (17/11 ~01:40Z) — 2k, START_CTX ~3% (roll at ~28%). transparentBackground:true works (real alpha) -> no bg-removal step. Driver: scratch drv.py (download+alpha+finish_fig+qa+sheet).
+TSV key	creation	status (2k, uploaded to CDN fig+por, no hd: CDN has none)
+player-look1-t3-a18	N2Hcbb96D9	ok
+player-look2-t3-a18	VXwhJyBMMU	ok
+player-look3-t3-a18	rgdyBmTxtc	ok
+player-look4-t3-a18	6Aq05LTiJO	ok
+physician-p2-a18	CqzxYpmEEy	ok
+physician-p3-a18	VXwhJRaMMU	ok
+tutor-ttp1-a18	eIyC4zwdqL	ok
+steward-tgk1-a18	4RQYHl49Aa	ok
+fallen-ly1-a18	u5YLV10QLD	ok
+official-o2-a18	DoJa9m6pcl	ok
+official-o3-a18	MB7v4mTDCm	ok
+official-o4-a18	tC3bGbUmZJ	ok
+official-o5-a18	gOtifR9SXO	ok
+official-o6-a18	4RQY50d9Aa	ok
+man-bacdich-1-a18	8a6H2KqIrU	ok
+man-congtu-1-a18	ovNFZKC829	ok
+## NOTE: all hero a18 now done (pilot 8 + these). Credits S2: 16x65=1040. Next: man a18 (rest), mama k02-k08 a18, eunuch a18 (120), kid.
+man-congtu-10-a18	KLD7IAPkqp	ok
+man-congtu-2-a18	Lwo9f0ZswO	ok
+man-congtu-3-a18	cpgIPKR0eP	ok
+man-congtu-4-a18	Lwo9fM7swO	ok
+man-congtu-5-a18	jUB4aMRLD0	ok
+man-congtu-6-a18	DoJaigdpcl	ok
+man-congtu-8-a18	3z5VsHkREY	ok (uploaded)
+man-congtu-7-a18	5jMw8cUKxe	FAILED service 520 -> resubmit (ref old-congtu-7 id 79a2qiOJAL)
+## reused pilot 2k masters (looked, ok, uploaded): man-huynh-1 3z5T87dREY | man-quytu-3 DoJvbzipcl | man-suthan-1 WDloEZKcXe | man-thaiy-1 Lwo4GkOswO | mama-k01 bxVSNT35Y2 | mama-k05 TdUtFUPVNR | eunuch-u01 TdUtFCqVNR | eunuch-u05-r2 0eSIQC0TfW   (still to reuse: eunuch-u09-r3 s789zGil8e; kids are a14/a9 pilot ids in pilot-misc.md)
+man-congtu-7-a18	DoJa27dpcl	ok
+man-congtu-9-a18	Ifiq035tvE	ok
+man-hoasu-1-a18	kspJad916B	ok
+man-huynh-2-a18	lJI6HvJgv9	ok
+man-nhacsu-1-a18	MB7vZ4bDCm	ok
+man-quytu-1-a18	iGbTSxH3uK	ok
+man-quytu-2-a18	fHGreThCDY	ok
+man-quytu-4-a18	Lwo9QCeswO	ok (all uploaded; S2 total so far 39 files uploaded, 31 new gens x65 = 2015 cr)
+## man a18 still to do: quytu-5..9, suthan-2, thive-1..4, vuonggia-1..2 (12); then mama k02-k04,k06-k08; eunuch u09-r3 reuse s789zGil8e + rest
+man-quytu-5-a18	gOtiKYySXO	ok
+man-quytu-6-a18	tC3bDlUmZJ	ok
+man-quytu-7-a18	Lwo9qn5swO	ok
+man-quytu-8-a18	4RQYgod9Aa	ok
+man-quytu-9-a18	s78Nb0bl8e	ok
+man-suthan-2-a18	gOtiKD3SXO	ok
+man-thive-1-a18	vQ2kd4Sa47	ok
+man-thive-2-a18	MB7vGsIDCm	ok (uploaded). Men left: thive-3, thive-4, vuonggia-1, vuonggia-2
+man-thive-3-a18	Bh9QMx7oQR	ok
+man-thive-4-a18	eIyC01YdqL	ok
+man-vuonggia-1-a18	yiEzSdDPW9	ok
+man-vuonggia-2-a18	Sym3xVfUb8	ok
+mama-k02-a18	ovNFDSv829	ok
+mama-k03-a18	WDl825rcXe	ok
+mama-k04-a18	bxVUEG85Y2	ok (7 pinholes accepted)
+mama-k06-a18	ovNFDJE829	ok (4 pinholes accepted)
+## ALL man a18 (33) DONE + uploaded. mama a18 left: k07, k08. Then eunuch a18 (u01 done; u05-r2 done; u09-r3 reuse s789zGil8e; rest ~117), kid a18-equivalent (a14/a9 in list; pilot ids in pilot-misc.md: kid-f01-a14 yiEGDDLPW9, f05 aFAkU3mfSh, p03-a9 Cqzr72fEEy).
+mama-k07-a18	iGbT9CV3uK	ok
+mama-k08-a18	EbnjaRRuuO	ok
+eunuch-u02-a18	lJI6jd8gv9	ok
+eunuch-u02-r0-a18	yiEz7voPW9	ok
+eunuch-u02-r2-a18	P3unJCZ42C	ok
+eunuch-u02-r3-a18	s78NxoGl8e	ok
+eunuch-u03-a18	fHGrhnTCDY	ok
+eunuch-u03-r0-a18	P3unJqY42C	ok (all uploaded)
+## HANDOVER S2 -> S3 (17/11 ~02:25Z, S2 context ~30%): 8 generation batches done, 71 new files + pilot reuse, all uploaded (fig+por; CDN has no hd for these). Done keys (fig-<key>.webp) in lists/shards/w1-done-2k.txt (+ pilot reused masters listed above: huynh-1, quytu-3, suthan-1, thaiy-1, mama-k01, mama-k05, eunuch-u01, eunuch-u05-r2 are DONE+uploaded too).
+## DONE: all hero a18, all man a18 (33), all mama a18 (8), eunuch a18: u01, u01(base only), u02 x4, u03-a18, u03-r0, u05-r2.
+## TODO order: eunuch a18 remaining (u01-r0/r2/r3, u03-r2/r3, u04..u30 x4 = ~108; eunuch-u09-r3 = reuse pilot master s789zGil8e (creations_wait for url; no new gen)); then kid (a14/a9 files; pilot masters yiEGDDLPW9 f01-a14, aFAkU3mfSh f05-a14, Cqzr72fEEy p03-a9; kid prompt: 'a child of about N years, round soft cheeks'), then other ages (a26/a36/a51) of man/mama/eunuch/kid and hero (player t1 a51, t3 a26.., emperor/physician/official/tutor/steward/fallen other ages; ref identity = new a18 + old age file).
+## RECIPE per batch (works, ~35k tokens/batch of 8): (1) 8x creations_upload_image url=https://ctm-img.victoria-tntt.workers.dev/img/fig-<key>.webp -> id; (2) 8x images_generate mode gpt-2-6 width 1024 height 2048 resolution 2k extraSettings {"transparentBackground":true} references=[old id, N2HYqYa6D9, bxVgMSX5Y2, dtPf4EDXSL, eIyaPEVdqL] prompt (<110 words): 'Semi-realistic painterly guofeng style, near-3D soft light, fine detail, matching refs 2-5 (face beauty, porcelain skin, soft warm eyes, serene). Redraw image 1 as the same full-body handsome slim young palace eunuch about 18, same robe, hat, colours, embroidery. Gesture: <ONE: tray/fly-whisk/scroll/lantern>. No huadian, no beard. NOT pink or purple. Calm frontal. FULLY TRANSPARENT BACKGROUND (real alpha, cut-out PNG, no checkerboard, no shadow). Hem ends at the feet, both shoes visible, inside the canvas with margin.' (women add: tiny flower/leaf/butterfly huadian 1/12 face width, no teardrop, NO long trailing train); (3) one creations_wait on all 8 (re-wait the stragglers); (4) write tsv key<TAB>id<TAB>render url, run tools/w1_drv.py <tsv> <sheet.jpg> from a scratch dir that has m/ and out/ (needs pip scipy opencv-python-headless; edit T path to the repo tools dir) -> Read sheet once; (5) cp out/img -> repo img/, python3 dev/site/cdn_sync.py <files> (cdn_sync.py: git show origin/main:dev/site/cdn_sync.py > dev/site/cdn_sync.py, do not commit); (6) append TSV lines here, commit + push (recipe in task prompt). Failed gen (service 520) -> just resubmit.
+## NOTE: lead session_011xDdVRBW26agruDT2Bm65K was inactive when S2 tried to report (send_message refused); report went to Foreman C instead.
+## RULE UPDATES received after S2 handover (new lead = session_011xDdVS87fDNLJMJGzeiVWL; report to it, not #5):
+- HD for EVERY fig (also eunuch/kid/man/mama): make the hd twin (1800 tall), upload img/hd/fig-* with the fig. Do NOT touch img/FIGURES-hd.json; per upload batch push a fragment dev/handover/reports/fig-cutout-clean/hd-entries/w1-<batch>.json = {"fig-x.webp":[w_fig,w_hd],...} (lead merges). See BATCH_BRIEF.md 'HD FOR EVERY FIGURE'. finish_fig only writes hd where the CDN has one: use FORCE_HD=1 (see tools/maid_proc.py).
+- RETRO-FIT: all S2 files already live (keys in lists/shards/w1-done-2k.txt, except the 16 old 4k ones which already have hd/hd2) have fig+por only -> need hd twins made from the same masters (masters = creation ids in this file; re-download via creations_wait url) and uploaded + hd-entries fragment.
+eunuch-u01-r0-a18	SymRBpPUb8	https://pikaso.cdnpk.net/private/production/6060867325/render.png?token=exp=1795219200~hmac=0f623043352c8c4533b8fbf9377b3c50248701896379465dce293151a38b3b82	ok 2k+hd (W4c-E1)
+eunuch-u01-r2-a18	w4v28XX7EI	https://pikaso.cdnpk.net/private/production/6060867632/render.png?token=exp=1795219200~hmac=938983e50b9b8581ed7988d1a28c00043033890d4b806f52cb7df54cc34a2cee	ok 2k+hd (W4c-E1)
+eunuch-u01-r3-a18	WDlIrkzcXe	https://pikaso.cdnpk.net/private/production/6060867614/render.png?token=exp=1795219200~hmac=622b9cfb111a93ecd8e800bc134dfbd0c9b13651a8bc63cd80a2df75d3a5e6f3	ok 2k+hd (W4c-E1)
+eunuch-u03-r2-a18	Xm4Q77kBfo	https://pikaso.cdnpk.net/private/production/6060867864/render.png?token=exp=1795219200~hmac=373499b3f40498e1b95badd8ef424c614c8e1a5af2bf8b8a364fdf778d8a989f	ok 2k+hd (W4c-E1)
+eunuch-u03-r3-a18	yiEnhvgPW9	https://pikaso.cdnpk.net/private/production/6060868040/render.png?token=exp=1795219200~hmac=8dfd630b5aac8cd627f908c3cae043be87390f91a36c09a48a4f4ec3fa4af65b	ok 2k+hd (W4c-E1)
+eunuch-u04-a18	s786d2Sl8e	https://pikaso.cdnpk.net/private/production/6060873977/render.png?token=exp=1795219200~hmac=af14327777b7d723e58945ae179cc910fe2a3575b5a14cddb338c9646b8918ce	ok 2k+hd (W4c-E1)
+eunuch-u04-r0-a18	jUB9pZcLD0	https://pikaso.cdnpk.net/private/production/6060874174/render.png?token=exp=1795219200~hmac=2a8c352daf33f6d773bdaea52f96c9b0e743855aab1bbc29611988b45cfe44a8	ok 2k+hd (W4c-E1)
+eunuch-u04-r2-a18	0eSmLu2TfW	https://pikaso.cdnpk.net/private/production/6060874473/render.png?token=exp=1795219200~hmac=29908d01b0dd574e403c8b77f2b5123bbcb1f5fdc50ae9d6643fe121e88d35a4	ok 2k+hd (W4c-E1)
+eunuch-u04-r3-a18	jUB9pGGLD0	https://pikaso.cdnpk.net/private/production/6060874619/render.png?token=exp=1795219200~hmac=16ec16823c96e7ef36b2d39341514c8ffa124bc0bbfd1411168746015ad2b52e	ok 2k+hd (W4c-E1)
+eunuch-u05-a18	TdUhsbQVNR	https://pikaso.cdnpk.net/private/production/6060874749/render.png?token=exp=1795219200~hmac=c2d0991ddb92ace8a2f94330202b6c6ceb498301f30e87dac62bea93a3d9b7f5	ok 2k+hd (W4c-E1)
+## W4c HANDOVER (17/11 ~03:20Z) — rolled at START_CTX 5% + 25%, successor W4d opened by the lead
+- Done by W4c: eunuch a18 batch E1 (10 files: u01-r0/r2/r3, u03-r2/r3, u04, u04-r0/r2/r3, u05; fig+hd+por on CDN, fragment W4c-E1.json, TSV rows above with gen ids + render urls). HD RETRO-FIT of the 63 live S2 files (ids in lists + this file): sub-agent run, fragment hd-entries/W4c-hero-retro.json (see state below).
+- NEXT (order): (1) confirm retro-fit result (W4c-hero-retro.json exists? entries count; SKIPPED keys); (2) eunuch a18 remaining = list in lists/ (eunuch-*-a18 from lists/shards/misc.txt minus rows in this file), ~102 left; then kid a18, then other ages. Rank rule: eunuchs plain-but-fine silk, no consort headdress, no forehead mark, never pink/purple.
+- Pipeline that works: sub-agents with 10 keys each, 5 images_generate at a time (lead: max 5 in flight in total), brief = /tmp/claude-0/w/EUBRIEF.md (lost with the container; recipe: upload old fig as ref -> images_generate gpt-2-6 1024x2048 2k transparentBackground true refs [old, N2HYqYa6D9, bxVgMSX5Y2, dtPf4EDXSL, eIyaPEVdqL], prompt ~110 words with the plain eunuch wording + prop rotation + FULLY TRANSPARENT line -> creations_wait -> curl + alpha check + FORCE_HD=1 finish_fig + qa_fig + sheet -> upload fig/hd/por + fragment W4c-<batch>.json).
+- Needs each new container: pip install scipy opencv-python-headless; git fetch origin main --depth=1 && git show FETCH_HEAD:dev/site/cdn_sync.py > dev/site/cdn_sync.py (uncommitted; also .cdn-state.json uncommitted).
+- RETRO RESULT: 63/63 hd twins uploaded (0 skipped), fragment hd-entries/W4c-hero-retro.json (63 entries). Retro step (1) is DONE.
+eunuch-u05-r0-a18	WDlI7dqcXe	https://pikaso.cdnpk.net/private/production/6060947154/render.png	ok 2k+hd (W4d-E2)
+eunuch-u05-r3-a18	0eSmOoLTfW	https://pikaso.cdnpk.net/private/production/6060947497/render.png	ok 2k+hd (W4d-E2)
+eunuch-u06-a18	bxVwdge5Y2	https://pikaso.cdnpk.net/private/production/6060947047/render.png	ok 2k+hd (W4d-E2)
+eunuch-u06-r0-a18	TdUhyt0VNR	https://pikaso.cdnpk.net/private/production/6060947776/render.png	ok 2k+hd (W4d-E2)
+eunuch-u06-r2-a18	dtPuiEMXSL	https://pikaso.cdnpk.net/private/production/6060947877/render.png	ok 2k+hd (W4d-E2)
+eunuch-u06-r3-a18	aFArWp8fSh	https://pikaso.cdnpk.net/private/production/6060953168/render.png	ok 2k+hd (W4d-E2)
+eunuch-u07-a18	6AqT1UDiJO	https://pikaso.cdnpk.net/private/production/6060953144/render.png	ok 2k+hd (W4d-E2)
+eunuch-u07-r0-a18	IfibADitvE	https://pikaso.cdnpk.net/private/production/6060953594/render.png	ok 2k+hd (W4d-E2)
+eunuch-u07-r2-a18	1ley8HLr4r	https://pikaso.cdnpk.net/private/production/6060953681/render.png	ok 2k+hd (W4d-E2)
+eunuch-u07-r3-a18	p8OCN0Dehw	https://pikaso.cdnpk.net/private/production/6060954013/render.png	ok 2k+hd (W4d-E2)
+## W4d: E2 done (10 eunuch a18 u05-r0/r3,u06x4,u07x4; 650 cr). Remaining eunuch a18 = 92 (batches /tmp list eu_todo minus these); maid-ty a18 resumed first per lead.
+eunuch-u08-a18	gOt3bbLSXO	https://pikaso.cdnpk.net/private/production/6061019698/render.png	ok 2k+hd (W4d-E3)
+eunuch-u08-r0-a18	YMs8N3oWeC	https://pikaso.cdnpk.net/private/production/6061020125/render.png	ok 2k+hd (W4d-E3)
+eunuch-u08-r2-a18	xSX4uq1jfW	https://pikaso.cdnpk.net/private/production/6061020304/render.png	ok 2k+hd (W4d-E3)
+eunuch-u08-r3-a18	iGbVUPg3uK	https://pikaso.cdnpk.net/private/production/6061020772/render.png	ok 2k+hd (W4d-E3)
+eunuch-u09-a18	huZkDIlvqL	https://pikaso.cdnpk.net/private/production/6061020689/render.png	ok 2k+hd (W4d-E3)
+eunuch-u09-r0-a18	4RQWluE9Aa	https://pikaso.cdnpk.net/private/production/6061026287/render.png	ok 2k+hd (W4d-E3)
+eunuch-u09-r2-a18	gOt35tESXO	https://pikaso.cdnpk.net/private/production/6061026379/render.png	ok 2k+hd (W4d-E3)
+eunuch-u09-r3-a18	kspOCd416B	https://pikaso.cdnpk.net/private/production/6061026699/render.png	ok 2k+hd (W4d-E3)
+eunuch-u10-a18	4RQWlbq9Aa	https://pikaso.cdnpk.net/private/production/6061027131/render.png	ok 2k+hd (W4d-E3)
+eunuch-u10-r0-a18	xSX4QtajfW	https://pikaso.cdnpk.net/private/production/6061026968/render.png	ok 2k+hd (W4d-E3)
+## W4d: E3 done (u08 x4, u09 x4, u10, u10-r0; 650 cr). Eunuch a18 left 82 (/tmp/claude-0/w/eub2_01.. ).
+eunuch-u10-r2-a18	jUB95iKLD0	https://pikaso.cdnpk.net/private/production/6061055849/render.png	ok 2k+hd (W4d-E4)
+eunuch-u10-r3-a18	p8OCcHhehw	https://pikaso.cdnpk.net/private/production/6061056040/render.png	ok 2k+hd (W4d-E4)
+eunuch-u11-a18	xSX4bRvjfW	https://pikaso.cdnpk.net/private/production/6061056183/render.png	ok 2k+hd (W4d-E4)
+eunuch-u11-r0-a18	UPhZjcWwny	https://pikaso.cdnpk.net/private/production/6061056469/render.png	ok 2k+hd (W4d-E4)
+eunuch-u11-r2-a18	O6CzgDkynm	https://pikaso.cdnpk.net/private/production/6061056371/render.png	ok 2k+hd (W4d-E4)
+eunuch-u11-r3-a18	eIyE0TrdqL	https://pikaso.cdnpk.net/private/production/6061061025/render.png	ok 2k+hd (W4d-E4)
+eunuch-u12-a18	eIyE0MjdqL	https://pikaso.cdnpk.net/private/production/6061061648/render.png	ok 2k+hd (W4d-E4)
+eunuch-u12-r0-a18	bxVwEqO5Y2	https://pikaso.cdnpk.net/private/production/6061061168/render.png	ok 2k+hd (W4d-E4)
+eunuch-u12-r2-a18	gOt3xU7SXO	https://pikaso.cdnpk.net/private/production/6061062144/render.png	ok 2k+hd (W4d-E4)
+eunuch-u12-r3-a18	79aAly5JAL	https://pikaso.cdnpk.net/private/production/6061062366/render.png	ok 2k+hd (W4d-E4)
+## W4d: E4 done (u10-r2/r3,u11x4,u12x4; 650cr; 40/102 eunuch a18)
+eunuch-u13-a18	N2H04U76D9	https://pikaso.cdnpk.net/private/production/6061094058/render.png	ok 2k+hd (W4d-E5)
+eunuch-u13-r0-a18	lJIiLk4gv9	https://pikaso.cdnpk.net/private/production/6061094157/render.png	ok 2k+hd (W4d-E5)
+eunuch-u13-r2-a18	iGbVNPK3uK	https://pikaso.cdnpk.net/private/production/6061094608/render.png	ok 2k+hd (W4d-E5)
+eunuch-u13-r3-a18	p8OCMTiehw	https://pikaso.cdnpk.net/private/production/6061094786/render.png	ok 2k+hd (W4d-E5)
+eunuch-u14-a18	xSX41kqjfW	https://pikaso.cdnpk.net/private/production/6061094838/render.png	ok 2k+hd (W4d-E5)
+eunuch-u14-r0-a18	aFArviSfSh	https://pikaso.cdnpk.net/private/production/6061099455/render.png	ok 2k+hd (W4d-E5)
+eunuch-u14-r2-a18	EbnLC2ZuuO	https://pikaso.cdnpk.net/private/production/6061099571/render.png	ok 2k+hd (W4d-E5)
+eunuch-u14-r3-a18	bxVwqcI5Y2	https://pikaso.cdnpk.net/private/production/6061099574/render.png	ok 2k+hd (W4d-E5)
+eunuch-u15-a18	Ifib86htvE	https://pikaso.cdnpk.net/private/production/6061099832/render.png	ok 2k+hd (W4d-E5)
+eunuch-u15-r0-a18	UPhZShBwny	https://pikaso.cdnpk.net/private/production/6061100023/render.png	ok 2k+hd (W4d-E5)
+## W4d: E5 done (u13x4,u14x4,u15,u15-r0; 650cr; 50/102 eunuch a18)
+eunuch-u15-r2-a18	O6Cn9IKynm	https://pikaso.cdnpk.net/private/production/6061131055/render.png	ok 2k+hd (W4d-E6)
+eunuch-u15-r3-a18	w4vAyow7EI	https://pikaso.cdnpk.net/private/production/6061131353/render.png	ok 2k+hd (W4d-E6)
+eunuch-u16-a18	N2HTREa6D9	https://pikaso.cdnpk.net/private/production/6061131754/render.png	ok 2k+hd (W4d-E6)
+eunuch-u16-r0-a18	8a6bh9FIrU	https://pikaso.cdnpk.net/private/production/6061131810/render.png	ok 2k+hd (W4d-E6)
+eunuch-u16-r2-a18	vQ2rE2sa47	https://pikaso.cdnpk.net/private/production/6061131903/render.png	ok 2k+hd (W4d-E6)
+eunuch-u16-r3-a18	Lwo6UPaswO	https://pikaso.cdnpk.net/private/production/6061136569/render.png	ok 2k+hd (W4d-E6)
+eunuch-u17-a18	p8OEoaWehw	https://pikaso.cdnpk.net/private/production/6061136890/render.png	ok 2k+hd (W4d-E6)
+eunuch-u17-r0-a18	EbnsqLKuuO	https://pikaso.cdnpk.net/private/production/6061136981/render.png	ok 2k+hd (W4d-E6)
+eunuch-u17-r2-a18	5jMJxJTKxe	https://pikaso.cdnpk.net/private/production/6061137246/render.png	ok 2k+hd (W4d-E6)
+eunuch-u17-r3-a18	jUBNS6aLD0	https://pikaso.cdnpk.net/private/production/6061137651/render.png	ok 2k+hd (W4d-E6)
+## W4d: E6 done (u15-r2/r3,u16x4,u17x4; 650cr; 60/102 eunuch a18)
+eunuch-u18-a18	P3uW2pk42C	https://pikaso.cdnpk.net/private/production/6061170803/render.png	ok 2k+hd (W4d-E7)
+eunuch-u18-r0-a18	3z5DWtzREY	https://pikaso.cdnpk.net/private/production/6061171156/render.png	ok 2k+hd (W4d-E7)
+eunuch-u18-r2-a18	MB7fIK3DCm	https://pikaso.cdnpk.net/private/production/6061171082/render.png	ok 2k+hd (W4d-E7)
+eunuch-u18-r3-a18	9ZF0GIpNYZ	https://pikaso.cdnpk.net/private/production/6061171403/render.png	ok 2k+hd (W4d-E7)
+eunuch-u19-a18	w4vA6er7EI	https://pikaso.cdnpk.net/private/production/6061171793/render.png	ok 2k+hd (W4d-E7)
+eunuch-u19-r0-a18	Bh9HCmBoQR	https://pikaso.cdnpk.net/private/production/6061175820/render.png	ok 2k+hd (W4d-E7)
+eunuch-u19-r2-a18	VXwaIodMMU	https://pikaso.cdnpk.net/private/production/6061176899/render.png	ok 2k+hd (W4d-E7)
+eunuch-u19-r3-a18	cpgmBBB0eP	https://pikaso.cdnpk.net/private/production/6061177438/render.png	ok 2k+hd (W4d-E7)
+eunuch-u20-a18	P3uWAGa42C	https://pikaso.cdnpk.net/private/production/6061176944/render.png	ok 2k+hd (W4d-E7)
+eunuch-u20-r0-a18	WDltX8TcXe	https://pikaso.cdnpk.net/private/production/6061177583/render.png	ok 2k+hd (W4d-E7)
+## W4d: E7 done (u18x4,u19x4,u20,u20-r0; 650cr; 70/102 eunuch a18)
+## W4d: mama paused (lead order, owner via C s12): no new mama files; mama a18 k01-k08 already live; other-age mama stays queued/paused.
+eunuch-u20-r2-a18	tC3K5uMmZJ	https://pikaso.cdnpk.net/private/production/6061209288/render.png	ok 2k+hd (W4d-E8)
+eunuch-u20-r3-a18	jUBN9OVLD0	https://pikaso.cdnpk.net/private/production/6061209568/render.png	ok 2k+hd (W4d-E8)
+eunuch-u21-a18	Bh9HFuIoQR	https://pikaso.cdnpk.net/private/production/6061208855/render.png	ok 2k+hd (W4d-E8)
+eunuch-u21-r0-a18	Ifi5bqUtvE	https://pikaso.cdnpk.net/private/production/6061209851/render.png	ok 2k+hd (W4d-E8)
+eunuch-u21-r2-a18	UPh2ZZjwny	https://pikaso.cdnpk.net/private/production/6061210065/render.png	ok 2k+hd (W4d-E8)
+eunuch-u21-r3-a18	gOtR31GSXO	https://pikaso.cdnpk.net/private/production/6061214899/render.png	ok 2k+hd (W4d-E8)
+eunuch-u22-a18	rgd4PqWxtc	https://pikaso.cdnpk.net/private/production/6061215119/render.png	ok 2k+hd (W4d-E8)
+eunuch-u22-r0-a18	6AqVTyUiJO	https://pikaso.cdnpk.net/private/production/6061215267/render.png	ok 2k+hd (W4d-E8)
+eunuch-u22-r2-a18	aFAxrmifSh	https://pikaso.cdnpk.net/private/production/6061215603/render.png	ok 2k+hd (W4d-E8)
+eunuch-u22-r3-a18	eIyuuIQdqL	https://pikaso.cdnpk.net/private/production/6061216669/render.png	ok 2k+hd (W4d-E8)
+## W4d: E8 done (u20-r2/r3,u21x4,u22x4; 650cr; 80/102 eunuch a18)
+eunuch-u23-a18	YMsIvpYWeC	https://pikaso.cdnpk.net/private/production/6061248693/render.png	ok 2k+hd (W4d-E9)
+eunuch-u23-r0-a18	UPh2n6Hwny	https://pikaso.cdnpk.net/private/production/6061248808/render.png	ok 2k+hd (W4d-E9)
+eunuch-u23-r2-a18	Bh9HKEeoQR	https://pikaso.cdnpk.net/private/production/6061249146/render.png	ok 2k+hd (W4d-E9)
+eunuch-u23-r3-a18	Lwo6Z9pswO	https://pikaso.cdnpk.net/private/production/6061249363/render.png	ok 2k+hd (W4d-E9)
+eunuch-u24-a18	SymZzZ4Ub8	https://pikaso.cdnpk.net/private/production/6061249296/render.png	ok 2k+hd (W4d-E9)
+eunuch-u24-r0-a18	iGbMdUV3uK	https://pikaso.cdnpk.net/private/production/6061254552/render.png	ok 2k+hd (W4d-E9)
+eunuch-u24-r2-a18	jUBNRHwLD0	https://pikaso.cdnpk.net/private/production/6061254370/render.png	ok 2k+hd (W4d-E9)
+eunuch-u24-r3-a18	EbnsUI2uuO	https://pikaso.cdnpk.net/private/production/6061254788/render.png	ok 2k+hd (W4d-E9)
+eunuch-u25-a18	EbnsUtAuuO	https://pikaso.cdnpk.net/private/production/6061255204/render.png	ok 2k+hd (W4d-E9)
+eunuch-u25-r0-a18	rgd4ibGxtc	https://pikaso.cdnpk.net/private/production/6061255303/render.png	ok 2k+hd (W4d-E9)
+## W4d: E9 done (u23x4,u24x4,u25,u25-r0; 650cr; 90/102 eunuch a18)
+eunuch-u25-r2-a18	6AqVoxfiJO	https://pikaso.cdnpk.net/private/production/6061285815/render.png	ok 2k+hd (W4d-E10)
+eunuch-u25-r3-a18	s78inEJl8e	https://pikaso.cdnpk.net/private/production/6061285866/render.png	ok 2k+hd (W4d-E10)
+eunuch-u26-a18	dtPQ1AYXSL	https://pikaso.cdnpk.net/private/production/6061286145/render.png	ok 2k+hd (W4d-E10)
+eunuch-u26-r0-a18	kspyRaa16B	https://pikaso.cdnpk.net/private/production/6061286189/render.png	ok 2k+hd (W4d-E10)
+eunuch-u26-r2-a18	aFAxwdLfSh	https://pikaso.cdnpk.net/private/production/6061286501/render.png	ok 2k+hd (W4d-E10)
+eunuch-u26-r3-a18	lJI3WDPgv9	https://pikaso.cdnpk.net/private/production/6061291883/render.png	ok 2k+hd (W4d-E10)
+eunuch-u27-a18	4RQcXhO9Aa	https://pikaso.cdnpk.net/private/production/6061291832/render.png	ok 2k+hd (W4d-E10)
+eunuch-u27-r0-a18	3z5DtQ3REY	https://pikaso.cdnpk.net/private/production/6061292063/render.png	ok 2k+hd (W4d-E10)
+eunuch-u27-r2-a18	kspyZVT16B	https://pikaso.cdnpk.net/private/production/6061292203/render.png	ok 2k+hd (W4d-E10)
+eunuch-u27-r3-a18	Lwo6nBHswO	https://pikaso.cdnpk.net/private/production/6061293041/render.png	ok 2k+hd (W4d-E10)
+## W4d: E10 done (u25-r2/r3,u26x4,u27x4; 650cr; 100/102 eunuch a18)
+eunuch-u28-a18	mERkJNDhJQ	https://pikaso.cdnpk.net/private/production/6061324439/render.png	ok 2k+hd (W4d-E11)
+eunuch-u28-r0-a18	Ifi5wNNtvE	https://pikaso.cdnpk.net/private/production/6061325430/render.png	ok 2k+hd (W4d-E11)
+eunuch-u28-r2-a18	aFAxP2mfSh	https://pikaso.cdnpk.net/private/production/6061325515/render.png	ok 2k+hd (W4d-E11)
+eunuch-u28-r3-a18	5jMJADVKxe	https://pikaso.cdnpk.net/private/production/6061325883/render.png	ok 2k+hd (W4d-E11)
+eunuch-u29-a18	0eShK7CTfW	https://pikaso.cdnpk.net/private/production/6061325789/render.png	ok 2k+hd (W4d-E11)
+eunuch-u29-r0-a18	DoJCjFIpcl	https://pikaso.cdnpk.net/private/production/6061330506/render.png	ok 2k+hd (W4d-E11)
+eunuch-u29-r2-a18	gOtRDzeSXO	https://pikaso.cdnpk.net/private/production/6061331172/render.png	ok 2k+hd (W4d-E11)
+eunuch-u29-r3-a18	SymZpYSUb8	https://pikaso.cdnpk.net/private/production/6061331502/render.png	ok 2k+hd (W4d-E11)
+eunuch-u30-a18	yiEY8prPW9	https://pikaso.cdnpk.net/private/production/6061331410/render.png	ok 2k+hd (W4d-E11)
+eunuch-u30-r0-a18	mERkOUGhJQ	https://pikaso.cdnpk.net/private/production/6061331543/render.png	ok 2k+hd (W4d-E11)
+## W4d: E11 done (u28x4,u29x4,u30,u30-r0; 650cr; 110/112? eunuch a18 left: u30-r2/r3)
+eunuch-u30-r2-a18	Lwo6pYiswO	https://pikaso.cdnpk.net/private/production/6061364932/render.png	ok 2k+hd (W4d-K1)
+eunuch-u30-r3-a18	iGbMumq3uK	https://pikaso.cdnpk.net/private/production/6061365193/render.png	ok 2k+hd (W4d-K1)
+kid-f02-a14	TdUvL1KVNR	https://pikaso.cdnpk.net/private/production/6061365651/render.png	ok 2k+hd (W4d-K1)
+kid-f03-a14	6AqVEfGiJO	https://pikaso.cdnpk.net/private/production/6061365712/render.png	ok 2k+hd (W4d-K1)
+kid-f04-a14	6AqVEEniJO	https://pikaso.cdnpk.net/private/production/6061366451/render.png	ok 2k+hd (W4d-K1)
+kid-f06-a14	4RQcfca9Aa	https://pikaso.cdnpk.net/private/production/6061371855/render.png	ok 2k+hd (W4d-K1)
+kid-f07-a14	eIyuwFmdqL	https://pikaso.cdnpk.net/private/production/6061371659/render.png	ok 2k+hd (W4d-K1)
+kid-f08-a14	0eShLfRTfW	https://pikaso.cdnpk.net/private/production/6061372223/render.png	ok 2k+hd (W4d-K1)
+kid-f09-a14	fHGjRSXCDY	https://pikaso.cdnpk.net/private/production/6061372694/render.png	ok 2k+hd (W4d-K1)
+kid-f10-a14	bxV7W6K5Y2	https://pikaso.cdnpk.net/private/production/6061372770/render.png	ok 2k+hd (W4d-K1)
+## W4d: K1 done (eunuch u30-r2/r3 => eunuch a18 ALL DONE 102/102; kid f02-f04,f06-f10 a14; 650cr)
+kid-f11-a14	dtPQ4bmXSL	https://pikaso.cdnpk.net/private/production/6061416184/render.png	ok 2k+hd (W4d-K2)
+kid-f12-a14	lJI3tGEgv9	https://pikaso.cdnpk.net/private/production/6061416519/render.png	ok 2k+hd (W4d-K2)
+kid-f13-a14	xSX9BAgjfW	https://pikaso.cdnpk.net/private/production/6061416671/render.png	ok 2k+hd (W4d-K2)
+kid-f14-a14	0eShUHZTfW	https://pikaso.cdnpk.net/private/production/6061417293/render.png	ok 2k+hd (W4d-K2)
+kid-f15-a14	1lePdGmr4r	https://pikaso.cdnpk.net/private/production/6061417581/render.png	ok 2k+hd (W4d-K2)
+kid-f16-a14	rgd4Bwkxtc	https://pikaso.cdnpk.net/private/production/6061423272/render.png	ok 2k+hd (W4d-K2)
+kid-f17-a14	gOtRhNeSXO	https://pikaso.cdnpk.net/private/production/6061423763/render.png	ok 2k+hd (W4d-K2)
+kid-f18-a14	kspydJx16B	https://pikaso.cdnpk.net/private/production/6061424151/render.png	ok 2k+hd (W4d-K2)
+kid-f19-a14	SymZvREUb8	https://pikaso.cdnpk.net/private/production/6061424505/render.png	ok 2k+hd (W4d-K2)
+## W4d: K2 done (kid f11-f19 a14, 585cr; f20 NOT done: Magnific creations_upload_image daily limit 2500 hit, resets ~1h)
+kid-f20-a14	vQ2xJtsa47	https://pikaso.cdnpk.net/private/production/6061814597/render.png	ok 2k+hd (W4d-K3)
+kid-f21-a14	P3ucBPZ42C	https://pikaso.cdnpk.net/private/production/6061815257/render.png	ok 2k+hd (W4d-K3)
+kid-f22-a14	Xm4Hs8dBfo	https://pikaso.cdnpk.net/private/production/6061815941/render.png	ok 2k+hd (W4d-K3)
+kid-f23-a14	JNfndNYOq4	https://pikaso.cdnpk.net/private/production/6061815887/render.png	ok 2k+hd (W4d-K3)
+kid-f24-a14	4RQ082f9Aa	https://pikaso.cdnpk.net/private/production/6061816203/render.png	ok 2k+hd (W4d-K3)
+kid-p01-a14	TdUaKTeVNR	https://pikaso.cdnpk.net/private/production/6061824433/render.png	ok 2k+hd (W4d-K3)
+kid-p02-a14	5jMOA1kKxe	https://pikaso.cdnpk.net/private/production/6061823807/render.png	ok 2k+hd (W4d-K3)
+kid-p03-a14	KLDyGjykqp	https://pikaso.cdnpk.net/private/production/6061824251/render.png	ok 2k+hd (W4d-K3)
+kid-p04-a14	aFAjPH9fSh	https://pikaso.cdnpk.net/private/production/6061824976/render.png	ok 2k+hd (W4d-K3)
+kid-p05-a14	gOtZMNCSXO	https://pikaso.cdnpk.net/private/production/6061825336/render.png	ok 2k+hd (W4d-K3)
+## W4d: K3 done (kid f20-f24,p01-p05 a14; 650cr; kid a14 done 37/48 incl pilots)
+kid-p06-a14	nVLIrxhYQD	https://pikaso.cdnpk.net/private/production/6061889315/render.png	ok 2k+hd (W4d-K4)
+kid-p07-a14	3z5pH54REY	https://pikaso.cdnpk.net/private/production/6061889974/render.png	ok 2k+hd (W4d-K4)
+kid-p08-a14	DoJEUPkpcl	https://pikaso.cdnpk.net/private/production/6061890367/render.png	ok 2k+hd (W4d-K4)
+kid-p09-a14	0eSvsOhTfW	https://pikaso.cdnpk.net/private/production/6061889650/render.png	ok 2k+hd (W4d-K4)
+kid-p10-a14	WDlmjOBcXe	https://pikaso.cdnpk.net/private/production/6061890481/render.png	ok 2k+hd (W4d-K4)
+kid-p11-a14	CqzsAm1EEy	https://pikaso.cdnpk.net/private/production/6061900244/render.png	ok 2k+hd (W4d-K4)
+kid-p12-a14	gOtZ8sWSXO	https://pikaso.cdnpk.net/private/production/6061900198/render.png	ok 2k+hd (W4d-K4)
+kid-p13-a14	5jMOT5fKxe	https://pikaso.cdnpk.net/private/production/6061900627/render.png	ok 2k+hd (W4d-K4)
+kid-p14-a14	Sym2tJfUb8	https://pikaso.cdnpk.net/private/production/6061900576/render.png	ok 2k+hd (W4d-K4)
+kid-p15-a14	rgd9eSrxtc	https://pikaso.cdnpk.net/private/production/6061901975/render.png	ok 2k+hd (W4d-K4)
+## W4d: K4 done (kid p06-p15 a14; 650cr)
+kid-p16-a14	UPhAuBQwny	https://pikaso.cdnpk.net/private/production/6061964850/render.png	ok 2k+hd (W4d-K5)
+kid-p17-a14	lJIRfoPgv9	https://pikaso.cdnpk.net/private/production/6061965048/render.png	ok 2k+hd (W4d-K5)
+kid-p18-a14	Sym2EhJUb8	https://pikaso.cdnpk.net/private/production/6061965459/render.png	ok 2k+hd (W4d-K5)
+kid-p19-a14	s783amvl8e	https://pikaso.cdnpk.net/private/production/6061965808/render.png	ok 2k+hd (W4d-K5)
+kid-p20-a14	nVLIwwmYQD	https://pikaso.cdnpk.net/private/production/6061966738/render.png	ok 2k+hd (W4d-K5)
+kid-p21-a14	rgd9mtWxtc	https://pikaso.cdnpk.net/private/production/6061974859/render.png	ok 2k+hd (W4d-K5)
+kid-p22-a14	VXwf96IMMU	https://pikaso.cdnpk.net/private/production/6061975162/render.png	ok 2k+hd (W4d-K5)
+kid-p23-a14	YMstJ4tWeC	https://pikaso.cdnpk.net/private/production/6061975339/render.png	ok 2k+hd (W4d-K5)
+kid-p24-a14	rgd9mEqxtc	https://pikaso.cdnpk.net/private/production/6061975631/render.png	ok 2k+hd (W4d-K5)
+kid-f01-a14	VXwf9nuMMU	https://pikaso.cdnpk.net/private/production/6061976668/render.png	ok 2k+hd (W4d-K5)
+## W4d: K5 done (kid p16-p24 + f01(redo) a14; 650cr; kid a14 left: f05)
+kid-f05-a14	xSXNFzbjfW	https://pikaso.cdnpk.net/private/production/6062045236/render.png	ok 2k+hd (W4d-MK1)
+maid-m23-ty7-a18	xSXNFWkjfW	https://pikaso.cdnpk.net/private/production/6062038985/render.png	ok 2k+hd (W4d-MK1)
+maid-m23-ty8-a18	LwoiqMRswO	https://pikaso.cdnpk.net/private/production/6062039088/render.png	ok 2k+hd (W4d-MK1)
+maid-m24-ty1-a18	gOtZKXnSXO	https://pikaso.cdnpk.net/private/production/6062039867/render.png	ok 2k+hd (W4d-MK1)
+maid-m24-ty2-a18	bxVJa0F5Y2	https://pikaso.cdnpk.net/private/production/6062040020/render.png	ok 2k+hd (W4d-MK1)
+maid-m24-ty3-a18	w4vGj3r7EI	https://pikaso.cdnpk.net/private/production/6062053640/render.png	ok 2k+hd (W4d-MK1)
+maid-m24-ty4-a18	gOtZ13zSXO	https://pikaso.cdnpk.net/private/production/6062053848/render.png	ok 2k+hd (W4d-MK1)
+maid-m24-ty5-a18	P3ucScw42C	https://pikaso.cdnpk.net/private/production/6062053955/render.png	ok 2k+hd (W4d-MK1)
+maid-m24-ty6-a18	iGbDOdY3uK	https://pikaso.cdnpk.net/private/production/6062054054/render.png	ok 2k+hd (W4d-MK1)
+maid-m24-ty7-a18	aFAjoSLfSh	https://pikaso.cdnpk.net/private/production/6062054830/render.png	ok 2k+hd (W4d-MK1)
+## W4d: MK1 done (kid f05 -> kid a14 ALL 48 DONE; maid-ty a18 m23-ty7/8, m24-ty1..ty7 2k; DRIFT m24-ty4~ty6 alike; m24-ty1/ty2/ty3 = same cut recolour -> to be redone in consort-tier redraw; 650cr)

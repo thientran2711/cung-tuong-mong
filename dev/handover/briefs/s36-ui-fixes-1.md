@@ -1,0 +1,8 @@
+PRIORITY #1 CHECK ('tuanluc-sync|learn-scene-fix|rail icon|header seal 412'): OD 8 | ledger 0 | claims 8 | main 2 | review/* 5 — none of these 4 UI faults is claimed; found by MAIN s36 on batch-s32a shots, all SAME ON MAIN (reports/batch-s32a.md).
+# WORKER ui-fixes-1 (sonnet) — branch review/ui-fixes-1 from main d4a850ce
+Read dev/handover/briefs/s36-common.md, START_WORKER, dev/rules/topic/kit-ui.md. LUẬT KIT TRƯỚC + LUẬT SỬA CẢ NHÓM: each fix is made once in the kit part and covers the WHOLE family (scan script + before/after table in your report).
+1. Left-rail icons (nền tranh rail: Tuần lục, tin, …): on slow image load a slot shows an EMPTY white square (Fold 755x1000). Every rail slot must show a placeholder/its icon or be hidden until ready — whole rail family.
+2. Act-card / kitSceneArt pictures show a blank brown box with only a text label while art loads (iPad 1180x820 Hành sự). Use the kit loading look (shimmer/placeholder art) and make sure the real art swaps in; whole family of card pictures.
+3. Fold cover 412x1058: header right block (Buổi …, Chưa điểm trang, weather, Quẻ) runs under the TRẦN NỮ seal and off-screen. Fix the header kit layout for narrow widths (wrap / shrink / move), every screen with that header.
+4. Room label pill on the nền tranh ("Ngọc Thanh các") is partly covered by a decorative flower sprite (iPad Giao tình). Labels/pills must sit above decorative sprites — whole family of labels on scene backdrops.
+Tests: shots at 755x1000@2, 1180x820@2, 1366x1024@2, 412x1058@2 under slow-network throttling (look at them yourself); quickcheck; old save. Push, report reports/ui-fixes-1.md, SẴN SÀNG KIỂM <sha> to MAIN s36 session_01UV1Szkkf3DbSpQipr7PJTy. Rollover at START+25 % (ceiling 60 %): handover in report, tell MAIN.

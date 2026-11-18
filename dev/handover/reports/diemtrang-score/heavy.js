@@ -1,0 +1,10 @@
+// proposed BAL.toil.heavy: strength 0 light / 1 medium / 2 strong per colour, and warm(w)/cool(c)/neutral(n) tone
+const W={mat:{hoadao:[0,"w"],hongmai:[1,"c"],rangchieu:[1,"w"],kimsa:[1,"w"],nautram:[0,"n"],tuvi:[1,"c"],hophach:[1,"w"]},
+ ma:{hongphan:[0,"c"],hoadao:[0,"w"],haiduong:[1,"c"],yenchi:[2,"c"],rangchieu:[1,"w"],hongsen:[0,"c"],camquyt:[1,"w"]},
+ son:{haiduong:[1,"c"],dotham:[2,"c"],hongdao:[0,"n"],chusa:[1,"w"],manchin:[2,"c"],sanho:[0,"w"],camdao:[1,"w"],hophach:[1,"w"]},
+ may:{nau:[0,"n"],den:[1,"n"],thanhdai:[0,"n"],naunhat:[0,"n"],khoi:[0,"n"],nautram:[0,"n"]}};
+const PRE=[["suongmai","dep",{mat:"tuvi",ma:"hongsen",son:"hongdao",may:"khoi"}],["hoale","dep",{mat:"hongmai",ma:"hongphan",son:"haiduong",may:"thanhdai"}],["tudang","dep",{mat:"tuvi",ma:"hongsen",son:"manchin",may:"thanhdai"}],["lantuyet","dep",{mat:"tuvi",ma:"hongphan",son:"haiduong",may:"khoi"}],["daohoa","dep",{mat:"hoadao",ma:"hoadao",son:"hongdao",may:"nau"}],["rangchieu","dep",{mat:"rangchieu",ma:"rangchieu",son:"sanho",may:"naunhat"}],["hophach","dep",{mat:"hophach",ma:"camquyt",son:"camdao",may:"nau"}],["thucuc","dep",{mat:"kimsa",ma:"hoadao",son:"chusa",may:"nau"}],
+["maudon","diem",{mat:"tuvi",ma:"hongsen",son:"manchin",may:"den"}],["hongmai","diem",{mat:"hongmai",ma:"yenchi",son:"dotham",may:"den"}],["bangngoc","diem",{mat:"hongmai",ma:"hongsen",son:"haiduong",may:"thanhdai"}],["tula","diem",{mat:"tuvi",ma:"yenchi",son:"manchin",may:"thanhdai"}],["yenchi","diem",{mat:"hongmai",ma:"yenchi",son:"chusa",may:"den"}],["luuhong","diem",{mat:"rangchieu",ma:"yenchi",son:"dotham",may:"den"}],["camhoa","diem",{mat:"hophach",ma:"camquyt",son:"hophach",may:"nau"}],["kimtuoc","diem",{mat:"kimsa",ma:"rangchieu",son:"camdao",may:"nautram"}]];
+function H(c){let h=0;const t=new Set();for(const k of ["mat","ma","son","may"]){const [s,tn]=W[k][c[k]];h+=s;if(tn!=="n")t.add(tn)}return{h,mix:t.size>1?1:0}}
+module.exports={W,PRE,H};
+if(require.main===module)for(const [n,k,c] of PRE){const r=H(c);console.log(k,n,r.h,"mix",r.mix,"tot",r.h+r.mix+(k==="diem"?2:0))}

@@ -1,0 +1,548 @@
+{
+ "maid-m27-ty1-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Đáp ứng): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: one light layered robe, pale soft tint of teal, wide flowing sleeves, crossed collar, embroidered hem and cuffs with rose, two small hairpins. Consort hair up: half-up with a silk ribbon with pins. Pose: standing frontal, one arm extended gently to the side presenting the prop, other hand resting at the belt, lively graceful hands, five fingers each, holding a teacup. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "teacup",
+  "colour": "teal",
+  "motif": "rose",
+  "words": 157
+ },
+ "maid-m27-ty2-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Thường tại): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: two layers, mid tone of teal, embroidered outer robe with rose, wide flowing sleeves, contrasting inner skirt, sheer gauze shawl over one arm, richer hairpins. Consort hair up: half-up with a silk ribbon with pins. Pose: standing frontal, left hand holding the prop out in front at belly height, right hand gently raised, fingers relaxed, lively graceful hands, five fingers each, holding a teacup. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "teacup",
+  "colour": "teal",
+  "motif": "rose",
+  "words": 160
+ },
+ "maid-m27-ty3-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Quý nhân): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: three layers, deep jewel tone of teal, gauze outer robe over a rose-embroidered tunic over a layered skirt, phi-bạch-like shawl drape, beaded edges, full ornate hairpiece, jewelled girdle. Consort hair up: half-up with a silk ribbon with pins. Pose: standing calm, body turned slightly to her left, one hand raised holding the prop at shoulder height, other hand lightly lifting the sleeve, lively graceful hands, five fingers each, holding a teacup. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "teacup",
+  "colour": "teal",
+  "motif": "rose",
+  "words": 167
+ },
+ "maid-m28-ty1-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Đáp ứng): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: one light layered robe, pale soft tint of scarlet-orange, wide flowing sleeves, crossed collar, embroidered hem and cuffs with hydrangea, two small hairpins. Consort hair up: butterfly hairpin with pins. Pose: frontal, one hand holding the prop while the other lightly touches the opposite forearm, fingers visible, lively graceful hands, five fingers each, holding a scroll. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "scroll",
+  "colour": "scarlet-orange",
+  "motif": "hydrangea",
+  "words": 152
+ },
+ "maid-m28-ty2-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Thường tại): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: two layers, mid tone of scarlet-orange, embroidered outer robe with hydrangea, wide flowing sleeves, contrasting inner skirt, sheer gauze shawl over one arm, richer hairpins. Consort hair up: butterfly hairpin with pins. Pose: standing, slight bow of the head, prop held in both hands, sleeves gently falling, lively graceful hands, five fingers each, holding a scroll. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "scroll",
+  "colour": "scarlet-orange",
+  "motif": "hydrangea",
+  "words": 152
+ },
+ "maid-m28-ty3-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Quý nhân): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: three layers, deep jewel tone of scarlet-orange, gauze outer robe over a hydrangea-embroidered tunic over a layered skirt, phi-bạch-like shawl drape, beaded edges, full ornate hairpiece, jewelled girdle. Consort hair up: butterfly hairpin with pins. Pose: three-quarter pose, prop held in her right hand near the chest, left hand gracefully open beside her, lively graceful hands, five fingers each, holding a scroll. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "scroll",
+  "colour": "scarlet-orange",
+  "motif": "hydrangea",
+  "words": 158
+ },
+ "maid-m29-ty1-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Đáp ứng): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: one light layered robe, pale soft tint of rose pink, wide flowing sleeves, crossed collar, embroidered hem and cuffs with gardenia, two small hairpins. Consort hair up: double loop buns with ribbon with pins. Pose: three-quarter pose to the left, prop in her left hand resting at the hip, right hand lifting a sleeve edge, lively graceful hands, five fingers each, holding a flower branch. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "flower branch",
+  "colour": "rose pink",
+  "motif": "gardenia",
+  "words": 161
+ },
+ "maid-m29-ty2-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Thường tại): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: two layers, mid tone of rose pink, embroidered outer robe with gardenia, wide flowing sleeves, contrasting inner skirt, sheer gauze shawl over one arm, richer hairpins. Consort hair up: double loop buns with ribbon with pins. Pose: standing frontal, both hands holding the prop low at the waist, head slightly tilted, lively graceful hands, five fingers each, holding a flower branch. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "flower branch",
+  "colour": "rose pink",
+  "motif": "gardenia",
+  "words": 157
+ },
+ "maid-m29-ty3-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Quý nhân): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: three layers, deep jewel tone of rose pink, gauze outer robe over a gardenia-embroidered tunic over a layered skirt, phi-bạch-like shawl drape, beaded edges, full ornate hairpiece, jewelled girdle. Consort hair up: double loop buns with ribbon with pins. Pose: slight turn to the right, prop held in both hands at the chest, lively graceful hands, five fingers each, holding a flower branch. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "flower branch",
+  "colour": "rose pink",
+  "motif": "gardenia",
+  "words": 159
+ },
+ "maid-m30-ty1-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Đáp ứng): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: one light layered robe, pale soft tint of magnolia white, wide flowing sleeves, crossed collar, embroidered hem and cuffs with jasmine, two small hairpins. Consort hair up: coil with a jade pin with pins. Pose: frontal, one hand offering the prop forward in the palm, other hand at the sash, lively graceful hands, five fingers each, holding a silk handkerchief. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "silk handkerchief",
+  "colour": "magnolia white",
+  "motif": "jasmine",
+  "words": 156
+ },
+ "maid-m30-ty2-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Thường tại): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: two layers, mid tone of magnolia white, embroidered outer robe with jasmine, wide flowing sleeves, contrasting inner skirt, sheer gauze shawl over one arm, richer hairpins. Consort hair up: coil with a jade pin with pins. Pose: standing, weight on one foot, prop held up beside the cheek, other hand holding the gauze sleeve, lively graceful hands, five fingers each, holding a silk handkerchief. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "silk handkerchief",
+  "colour": "magnolia white",
+  "motif": "jasmine",
+  "words": 160
+ },
+ "maid-m30-ty3-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Quý nhân): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: three layers, deep jewel tone of magnolia white, gauze outer robe over a jasmine-embroidered tunic over a layered skirt, phi-bạch-like shawl drape, beaded edges, full ornate hairpiece, jewelled girdle. Consort hair up: coil with a jade pin with pins. Pose: frontal, prop held in one raised hand by her shoulder, other arm relaxed with fingertips visible, lively graceful hands, five fingers each, holding a silk handkerchief. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "silk handkerchief",
+  "colour": "magnolia white",
+  "motif": "jasmine",
+  "words": 162
+ },
+ "maid-m31-ty1-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Đáp ứng): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: one light layered robe, pale soft tint of turquoise, wide flowing sleeves, crossed collar, embroidered hem and cuffs with narcissus, two small hairpins. Consort hair up: step-shake (bu yao) pin with pins. Pose: standing frontal, one arm extended gently to the side presenting the prop, other hand resting at the belt, lively graceful hands, five fingers each, holding a jade pendant. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "jade pendant",
+  "colour": "turquoise",
+  "motif": "narcissus",
+  "words": 157
+ },
+ "maid-m31-ty2-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Thường tại): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: two layers, mid tone of turquoise, embroidered outer robe with narcissus, wide flowing sleeves, contrasting inner skirt, sheer gauze shawl over one arm, richer hairpins. Consort hair up: step-shake (bu yao) pin with pins. Pose: standing frontal, left hand holding the prop out in front at belly height, right hand gently raised, fingers relaxed, lively graceful hands, five fingers each, holding a jade pendant. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "jade pendant",
+  "colour": "turquoise",
+  "motif": "narcissus",
+  "words": 160
+ },
+ "maid-m31-ty3-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Quý nhân): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: three layers, deep jewel tone of turquoise, gauze outer robe over a narcissus-embroidered tunic over a layered skirt, phi-bạch-like shawl drape, beaded edges, full ornate hairpiece, jewelled girdle. Consort hair up: step-shake (bu yao) pin with pins. Pose: standing calm, body turned slightly to her left, one hand raised holding the prop at shoulder height, other hand lightly lifting the sleeve, lively graceful hands, five fingers each, holding a jade pendant. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "jade pendant",
+  "colour": "turquoise",
+  "motif": "narcissus",
+  "words": 167
+ },
+ "maid-m32-ty1-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Đáp ứng): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: one light layered robe, pale soft tint of ivory gold, wide flowing sleeves, crossed collar, embroidered hem and cuffs with morning glory, two small hairpins. Consort hair up: braided crown with tiny blossoms with pins. Pose: frontal, one hand holding the prop while the other lightly touches the opposite forearm, fingers visible, lively graceful hands, five fingers each, holding a book. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "book",
+  "colour": "ivory gold",
+  "motif": "morning glory",
+  "words": 157
+ },
+ "maid-m32-ty2-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Thường tại): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: two layers, mid tone of ivory gold, embroidered outer robe with morning glory, wide flowing sleeves, contrasting inner skirt, sheer gauze shawl over one arm, richer hairpins. Consort hair up: braided crown with tiny blossoms with pins. Pose: standing, slight bow of the head, prop held in both hands, sleeves gently falling, lively graceful hands, five fingers each, holding a book. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "book",
+  "colour": "ivory gold",
+  "motif": "morning glory",
+  "words": 157
+ },
+ "maid-m32-ty3-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Quý nhân): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: three layers, deep jewel tone of ivory gold, gauze outer robe over a morning glory-embroidered tunic over a layered skirt, phi-bạch-like shawl drape, beaded edges, full ornate hairpiece, jewelled girdle. Consort hair up: braided crown with tiny blossoms with pins. Pose: three-quarter pose, prop held in her right hand near the chest, left hand gracefully open beside her, lively graceful hands, five fingers each, holding a book. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "book",
+  "colour": "ivory gold",
+  "motif": "morning glory",
+  "words": 163
+ },
+ "maid-m33-ty1-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Đáp ứng): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: one light layered robe, pale soft tint of pomegranate, wide flowing sleeves, crossed collar, embroidered hem and cuffs with pomegranate flower, two small hairpins. Consort hair up: beaded hair ribbon with pins. Pose: three-quarter pose to the left, prop in her left hand resting at the hip, right hand lifting a sleeve edge, lively graceful hands, five fingers each, holding a folded fan. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "folded fan",
+  "colour": "pomegranate",
+  "motif": "pomegranate flower",
+  "words": 159
+ },
+ "maid-m33-ty2-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Thường tại): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: two layers, mid tone of pomegranate, embroidered outer robe with pomegranate flower, wide flowing sleeves, contrasting inner skirt, sheer gauze shawl over one arm, richer hairpins. Consort hair up: beaded hair ribbon with pins. Pose: standing frontal, both hands holding the prop low at the waist, head slightly tilted, lively graceful hands, five fingers each, holding a folded fan. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "folded fan",
+  "colour": "pomegranate",
+  "motif": "pomegranate flower",
+  "words": 155
+ },
+ "maid-m33-ty3-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Quý nhân): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: three layers, deep jewel tone of pomegranate, gauze outer robe over a pomegranate flower-embroidered tunic over a layered skirt, phi-bạch-like shawl drape, beaded edges, full ornate hairpiece, jewelled girdle. Consort hair up: beaded hair ribbon with pins. Pose: slight turn to the right, prop held in both hands at the chest, lively graceful hands, five fingers each, holding a folded fan. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "folded fan",
+  "colour": "pomegranate",
+  "motif": "pomegranate flower",
+  "words": 157
+ },
+ "maid-m34-ty1-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Đáp ứng): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: one light layered robe, pale soft tint of wisteria, wide flowing sleeves, crossed collar, embroidered hem and cuffs with ginkgo leaf, two small hairpins. Consort hair up: side coil with a fresh flower with pins. Pose: frontal, one hand offering the prop forward in the palm, other hand at the sash, lively graceful hands, five fingers each, holding a small lantern. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "small lantern",
+  "colour": "wisteria",
+  "motif": "ginkgo leaf",
+  "words": 157
+ },
+ "maid-m34-ty2-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Thường tại): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: two layers, mid tone of wisteria, embroidered outer robe with ginkgo leaf, wide flowing sleeves, contrasting inner skirt, sheer gauze shawl over one arm, richer hairpins. Consort hair up: side coil with a fresh flower with pins. Pose: standing, weight on one foot, prop held up beside the cheek, other hand holding the gauze sleeve, lively graceful hands, five fingers each, holding a small lantern. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "small lantern",
+  "colour": "wisteria",
+  "motif": "ginkgo leaf",
+  "words": 161
+ },
+ "maid-m34-ty3-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Quý nhân): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: three layers, deep jewel tone of wisteria, gauze outer robe over a ginkgo leaf-embroidered tunic over a layered skirt, phi-bạch-like shawl drape, beaded edges, full ornate hairpiece, jewelled girdle. Consort hair up: side coil with a fresh flower with pins. Pose: frontal, prop held in one raised hand by her shoulder, other arm relaxed with fingertips visible, lively graceful hands, five fingers each, holding a small lantern. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "small lantern",
+  "colour": "wisteria",
+  "motif": "ginkgo leaf",
+  "words": 163
+ },
+ "maid-m35-ty1-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Đáp ứng): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: one light layered robe, pale soft tint of mustard, wide flowing sleeves, crossed collar, embroidered hem and cuffs with maple leaf, two small hairpins. Consort hair up: bun with a long tassel hairpin with pins. Pose: standing frontal, one arm extended gently to the side presenting the prop, other hand resting at the belt, lively graceful hands, five fingers each, holding a teacup. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "teacup",
+  "colour": "mustard",
+  "motif": "maple leaf",
+  "words": 159
+ },
+ "maid-m35-ty2-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Thường tại): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: two layers, mid tone of mustard, embroidered outer robe with maple leaf, wide flowing sleeves, contrasting inner skirt, sheer gauze shawl over one arm, richer hairpins. Consort hair up: bun with a long tassel hairpin with pins. Pose: standing frontal, left hand holding the prop out in front at belly height, right hand gently raised, fingers relaxed, lively graceful hands, five fingers each, holding a teacup. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "teacup",
+  "colour": "mustard",
+  "motif": "maple leaf",
+  "words": 162
+ },
+ "maid-m35-ty3-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Quý nhân): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: three layers, deep jewel tone of mustard, gauze outer robe over a maple leaf-embroidered tunic over a layered skirt, phi-bạch-like shawl drape, beaded edges, full ornate hairpiece, jewelled girdle. Consort hair up: bun with a long tassel hairpin with pins. Pose: standing calm, body turned slightly to her left, one hand raised holding the prop at shoulder height, other hand lightly lifting the sleeve, lively graceful hands, five fingers each, holding a teacup. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "teacup",
+  "colour": "mustard",
+  "motif": "maple leaf",
+  "words": 169
+ },
+ "maid-m36-ty1-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Đáp ứng): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: one light layered robe, pale soft tint of aqua, wide flowing sleeves, crossed collar, embroidered hem and cuffs with cranes in clouds, two small hairpins. Consort hair up: feather pin with pins. Pose: frontal, one hand holding the prop while the other lightly touches the opposite forearm, fingers visible, lively graceful hands, five fingers each, holding a scroll. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "scroll",
+  "colour": "aqua",
+  "motif": "cranes in clouds",
+  "words": 154
+ },
+ "maid-m36-ty2-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Thường tại): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: two layers, mid tone of aqua, embroidered outer robe with cranes in clouds, wide flowing sleeves, contrasting inner skirt, sheer gauze shawl over one arm, richer hairpins. Consort hair up: feather pin with pins. Pose: standing, slight bow of the head, prop held in both hands, sleeves gently falling, lively graceful hands, five fingers each, holding a scroll. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "scroll",
+  "colour": "aqua",
+  "motif": "cranes in clouds",
+  "words": 154
+ },
+ "maid-m36-ty3-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Quý nhân): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: three layers, deep jewel tone of aqua, gauze outer robe over a cranes in clouds-embroidered tunic over a layered skirt, phi-bạch-like shawl drape, beaded edges, full ornate hairpiece, jewelled girdle. Consort hair up: feather pin with pins. Pose: three-quarter pose, prop held in her right hand near the chest, left hand gracefully open beside her, lively graceful hands, five fingers each, holding a scroll. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "scroll",
+  "colour": "aqua",
+  "motif": "cranes in clouds",
+  "words": 160
+ },
+ "maid-m37-ty1-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Đáp ứng): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: one light layered robe, pale soft tint of mauve, wide flowing sleeves, crossed collar, embroidered hem and cuffs with round medallions, two small hairpins. Consort hair up: low chignon with a carved comb with pins. Pose: three-quarter pose to the left, prop in her left hand resting at the hip, right hand lifting a sleeve edge, lively graceful hands, five fingers each, holding a flower branch. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "flower branch",
+  "colour": "mauve",
+  "motif": "round medallions",
+  "words": 162
+ },
+ "maid-m37-ty2-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Thường tại): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: two layers, mid tone of mauve, embroidered outer robe with round medallions, wide flowing sleeves, contrasting inner skirt, sheer gauze shawl over one arm, richer hairpins. Consort hair up: low chignon with a carved comb with pins. Pose: standing frontal, both hands holding the prop low at the waist, head slightly tilted, lively graceful hands, five fingers each, holding a flower branch. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "flower branch",
+  "colour": "mauve",
+  "motif": "round medallions",
+  "words": 158
+ },
+ "maid-m37-ty3-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Quý nhân): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: three layers, deep jewel tone of mauve, gauze outer robe over a round medallions-embroidered tunic over a layered skirt, phi-bạch-like shawl drape, beaded edges, full ornate hairpiece, jewelled girdle. Consort hair up: low chignon with a carved comb with pins. Pose: slight turn to the right, prop held in both hands at the chest, lively graceful hands, five fingers each, holding a flower branch. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "flower branch",
+  "colour": "mauve",
+  "motif": "round medallions",
+  "words": 160
+ },
+ "maid-m38-ty1-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Đáp ứng): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: one light layered robe, pale soft tint of champagne, wide flowing sleeves, crossed collar, embroidered hem and cuffs with key-fret border, two small hairpins. Consort hair up: flower cluster at the temple with pins. Pose: frontal, one hand offering the prop forward in the palm, other hand at the sash, lively graceful hands, five fingers each, holding a silk handkerchief. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "silk handkerchief",
+  "colour": "champagne",
+  "motif": "key-fret border",
+  "words": 156
+ },
+ "maid-m38-ty2-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Thường tại): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: two layers, mid tone of champagne, embroidered outer robe with key-fret border, wide flowing sleeves, contrasting inner skirt, sheer gauze shawl over one arm, richer hairpins. Consort hair up: flower cluster at the temple with pins. Pose: standing, weight on one foot, prop held up beside the cheek, other hand holding the gauze sleeve, lively graceful hands, five fingers each, holding a silk handkerchief. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "silk handkerchief",
+  "colour": "champagne",
+  "motif": "key-fret border",
+  "words": 160
+ },
+ "maid-m38-ty3-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Quý nhân): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: three layers, deep jewel tone of champagne, gauze outer robe over a key-fret border-embroidered tunic over a layered skirt, phi-bạch-like shawl drape, beaded edges, full ornate hairpiece, jewelled girdle. Consort hair up: flower cluster at the temple with pins. Pose: frontal, prop held in one raised hand by her shoulder, other arm relaxed with fingertips visible, lively graceful hands, five fingers each, holding a silk handkerchief. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "silk handkerchief",
+  "colour": "champagne",
+  "motif": "key-fret border",
+  "words": 162
+ },
+ "maid-m39-ty1-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Đáp ứng): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: one light layered robe, pale soft tint of sand beige, wide flowing sleeves, crossed collar, embroidered hem and cuffs with coin pattern, two small hairpins. Consort hair up: high bun with pearl pins with pins. Pose: standing frontal, one arm extended gently to the side presenting the prop, other hand resting at the belt, lively graceful hands, five fingers each, holding a jade pendant. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "jade pendant",
+  "colour": "sand beige",
+  "motif": "coin pattern",
+  "words": 160
+ },
+ "maid-m39-ty2-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Thường tại): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: two layers, mid tone of sand beige, embroidered outer robe with coin pattern, wide flowing sleeves, contrasting inner skirt, sheer gauze shawl over one arm, richer hairpins. Consort hair up: high bun with pearl pins with pins. Pose: standing frontal, left hand holding the prop out in front at belly height, right hand gently raised, fingers relaxed, lively graceful hands, five fingers each, holding a jade pendant. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "jade pendant",
+  "colour": "sand beige",
+  "motif": "coin pattern",
+  "words": 163
+ },
+ "maid-m39-ty3-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Quý nhân): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: three layers, deep jewel tone of sand beige, gauze outer robe over a coin pattern-embroidered tunic over a layered skirt, phi-bạch-like shawl drape, beaded edges, full ornate hairpiece, jewelled girdle. Consort hair up: high bun with pearl pins with pins. Pose: standing calm, body turned slightly to her left, one hand raised holding the prop at shoulder height, other hand lightly lifting the sleeve, lively graceful hands, five fingers each, holding a jade pendant. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "jade pendant",
+  "colour": "sand beige",
+  "motif": "coin pattern",
+  "words": 170
+ },
+ "maid-m40-ty1-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Đáp ứng): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: one light layered robe, pale soft tint of persimmon, wide flowing sleeves, crossed collar, embroidered hem and cuffs with water ripple, two small hairpins. Consort hair up: half-up with a silk ribbon with pins. Pose: frontal, one hand holding the prop while the other lightly touches the opposite forearm, fingers visible, lively graceful hands, five fingers each, holding a book. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "book",
+  "colour": "persimmon",
+  "motif": "water ripple",
+  "words": 156
+ },
+ "maid-m40-ty2-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Thường tại): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: two layers, mid tone of persimmon, embroidered outer robe with water ripple, wide flowing sleeves, contrasting inner skirt, sheer gauze shawl over one arm, richer hairpins. Consort hair up: half-up with a silk ribbon with pins. Pose: standing, slight bow of the head, prop held in both hands, sleeves gently falling, lively graceful hands, five fingers each, holding a book. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "book",
+  "colour": "persimmon",
+  "motif": "water ripple",
+  "words": 156
+ },
+ "maid-m40-ty3-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Quý nhân): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: three layers, deep jewel tone of persimmon, gauze outer robe over a water ripple-embroidered tunic over a layered skirt, phi-bạch-like shawl drape, beaded edges, full ornate hairpiece, jewelled girdle. Consort hair up: half-up with a silk ribbon with pins. Pose: three-quarter pose, prop held in her right hand near the chest, left hand gracefully open beside her, lively graceful hands, five fingers each, holding a book. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "book",
+  "colour": "persimmon",
+  "motif": "water ripple",
+  "words": 162
+ },
+ "maid-m41-ty1-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Đáp ứng): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: one light layered robe, pale soft tint of apricot gold, wide flowing sleeves, crossed collar, embroidered hem and cuffs with feather, two small hairpins. Consort hair up: butterfly hairpin with pins. Pose: three-quarter pose to the left, prop in her left hand resting at the hip, right hand lifting a sleeve edge, lively graceful hands, five fingers each, holding a folded fan. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "folded fan",
+  "colour": "apricot gold",
+  "motif": "feather",
+  "words": 158
+ },
+ "maid-m41-ty2-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Thường tại): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: two layers, mid tone of apricot gold, embroidered outer robe with feather, wide flowing sleeves, contrasting inner skirt, sheer gauze shawl over one arm, richer hairpins. Consort hair up: butterfly hairpin with pins. Pose: standing frontal, both hands holding the prop low at the waist, head slightly tilted, lively graceful hands, five fingers each, holding a folded fan. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "folded fan",
+  "colour": "apricot gold",
+  "motif": "feather",
+  "words": 154
+ },
+ "maid-m41-ty3-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Quý nhân): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: three layers, deep jewel tone of apricot gold, gauze outer robe over a feather-embroidered tunic over a layered skirt, phi-bạch-like shawl drape, beaded edges, full ornate hairpiece, jewelled girdle. Consort hair up: butterfly hairpin with pins. Pose: slight turn to the right, prop held in both hands at the chest, lively graceful hands, five fingers each, holding a folded fan. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "folded fan",
+  "colour": "apricot gold",
+  "motif": "feather",
+  "words": 156
+ },
+ "maid-m42-ty1-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Đáp ứng): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: one light layered robe, pale soft tint of cream, wide flowing sleeves, crossed collar, embroidered hem and cuffs with dragonfly, two small hairpins. Consort hair up: double loop buns with ribbon with pins. Pose: frontal, one hand offering the prop forward in the palm, other hand at the sash, lively graceful hands, five fingers each, holding a small lantern. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "small lantern",
+  "colour": "cream",
+  "motif": "dragonfly",
+  "words": 155
+ },
+ "maid-m42-ty2-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Thường tại): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: two layers, mid tone of cream, embroidered outer robe with dragonfly, wide flowing sleeves, contrasting inner skirt, sheer gauze shawl over one arm, richer hairpins. Consort hair up: double loop buns with ribbon with pins. Pose: standing, weight on one foot, prop held up beside the cheek, other hand holding the gauze sleeve, lively graceful hands, five fingers each, holding a small lantern. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "small lantern",
+  "colour": "cream",
+  "motif": "dragonfly",
+  "words": 159
+ },
+ "maid-m42-ty3-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Quý nhân): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: three layers, deep jewel tone of cream, gauze outer robe over a dragonfly-embroidered tunic over a layered skirt, phi-bạch-like shawl drape, beaded edges, full ornate hairpiece, jewelled girdle. Consort hair up: double loop buns with ribbon with pins. Pose: frontal, prop held in one raised hand by her shoulder, other arm relaxed with fingertips visible, lively graceful hands, five fingers each, holding a small lantern. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "small lantern",
+  "colour": "cream",
+  "motif": "dragonfly",
+  "words": 161
+ },
+ "maid-m43-ty1-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Đáp ứng): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: one light layered robe, pale soft tint of orchid, wide flowing sleeves, crossed collar, embroidered hem and cuffs with hibiscus, two small hairpins. Consort hair up: coil with a jade pin with pins. Pose: standing frontal, one arm extended gently to the side presenting the prop, other hand resting at the belt, lively graceful hands, five fingers each, holding a teacup. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "teacup",
+  "colour": "orchid",
+  "motif": "hibiscus",
+  "words": 157
+ },
+ "maid-m43-ty2-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Thường tại): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: two layers, mid tone of orchid, embroidered outer robe with hibiscus, wide flowing sleeves, contrasting inner skirt, sheer gauze shawl over one arm, richer hairpins. Consort hair up: coil with a jade pin with pins. Pose: standing frontal, left hand holding the prop out in front at belly height, right hand gently raised, fingers relaxed, lively graceful hands, five fingers each, holding a teacup. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "teacup",
+  "colour": "orchid",
+  "motif": "hibiscus",
+  "words": 160
+ },
+ "maid-m43-ty3-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Quý nhân): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: three layers, deep jewel tone of orchid, gauze outer robe over a hibiscus-embroidered tunic over a layered skirt, phi-bạch-like shawl drape, beaded edges, full ornate hairpiece, jewelled girdle. Consort hair up: coil with a jade pin with pins. Pose: standing calm, body turned slightly to her left, one hand raised holding the prop at shoulder height, other hand lightly lifting the sleeve, lively graceful hands, five fingers each, holding a teacup. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "teacup",
+  "colour": "orchid",
+  "motif": "hibiscus",
+  "words": 167
+ },
+ "maid-m44-ty1-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Đáp ứng): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: one light layered robe, pale soft tint of sea blue, wide flowing sleeves, crossed collar, embroidered hem and cuffs with apricot blossom, two small hairpins. Consort hair up: step-shake (bu yao) pin with pins. Pose: frontal, one hand holding the prop while the other lightly touches the opposite forearm, fingers visible, lively graceful hands, five fingers each, holding a scroll. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "scroll",
+  "colour": "sea blue",
+  "motif": "apricot blossom",
+  "words": 156
+ },
+ "maid-m44-ty2-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Thường tại): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: two layers, mid tone of sea blue, embroidered outer robe with apricot blossom, wide flowing sleeves, contrasting inner skirt, sheer gauze shawl over one arm, richer hairpins. Consort hair up: step-shake (bu yao) pin with pins. Pose: standing, slight bow of the head, prop held in both hands, sleeves gently falling, lively graceful hands, five fingers each, holding a scroll. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "scroll",
+  "colour": "sea blue",
+  "motif": "apricot blossom",
+  "words": 156
+ },
+ "maid-m44-ty3-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Quý nhân): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: three layers, deep jewel tone of sea blue, gauze outer robe over a apricot blossom-embroidered tunic over a layered skirt, phi-bạch-like shawl drape, beaded edges, full ornate hairpiece, jewelled girdle. Consort hair up: step-shake (bu yao) pin with pins. Pose: three-quarter pose, prop held in her right hand near the chest, left hand gracefully open beside her, lively graceful hands, five fingers each, holding a scroll. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "scroll",
+  "colour": "sea blue",
+  "motif": "apricot blossom",
+  "words": 162
+ },
+ "maid-m45-ty1-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Đáp ứng): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: one light layered robe, pale soft tint of icy blue, wide flowing sleeves, crossed collar, embroidered hem and cuffs with daylily, two small hairpins. Consort hair up: braided crown with tiny blossoms with pins. Pose: three-quarter pose to the left, prop in her left hand resting at the hip, right hand lifting a sleeve edge, lively graceful hands, five fingers each, holding a flower branch. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "flower branch",
+  "colour": "icy blue",
+  "motif": "daylily",
+  "words": 161
+ },
+ "maid-m45-ty2-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Thường tại): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: two layers, mid tone of icy blue, embroidered outer robe with daylily, wide flowing sleeves, contrasting inner skirt, sheer gauze shawl over one arm, richer hairpins. Consort hair up: braided crown with tiny blossoms with pins. Pose: standing frontal, both hands holding the prop low at the waist, head slightly tilted, lively graceful hands, five fingers each, holding a flower branch. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "flower branch",
+  "colour": "icy blue",
+  "motif": "daylily",
+  "words": 157
+ },
+ "maid-m45-ty3-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Quý nhân): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: three layers, deep jewel tone of icy blue, gauze outer robe over a daylily-embroidered tunic over a layered skirt, phi-bạch-like shawl drape, beaded edges, full ornate hairpiece, jewelled girdle. Consort hair up: braided crown with tiny blossoms with pins. Pose: slight turn to the right, prop held in both hands at the chest, lively graceful hands, five fingers each, holding a flower branch. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "flower branch",
+  "colour": "icy blue",
+  "motif": "daylily",
+  "words": 159
+ },
+ "maid-m46-ty1-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Đáp ứng): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: one light layered robe, pale soft tint of cherry red, wide flowing sleeves, crossed collar, embroidered hem and cuffs with iris, two small hairpins. Consort hair up: beaded hair ribbon with pins. Pose: frontal, one hand offering the prop forward in the palm, other hand at the sash, lively graceful hands, five fingers each, holding a silk handkerchief. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "silk handkerchief",
+  "colour": "cherry red",
+  "motif": "iris",
+  "words": 154
+ },
+ "maid-m46-ty2-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Thường tại): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: two layers, mid tone of cherry red, embroidered outer robe with iris, wide flowing sleeves, contrasting inner skirt, sheer gauze shawl over one arm, richer hairpins. Consort hair up: beaded hair ribbon with pins. Pose: standing, weight on one foot, prop held up beside the cheek, other hand holding the gauze sleeve, lively graceful hands, five fingers each, holding a silk handkerchief. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "silk handkerchief",
+  "colour": "cherry red",
+  "motif": "iris",
+  "words": 158
+ },
+ "maid-m46-ty3-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Quý nhân): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: three layers, deep jewel tone of cherry red, gauze outer robe over a iris-embroidered tunic over a layered skirt, phi-bạch-like shawl drape, beaded edges, full ornate hairpiece, jewelled girdle. Consort hair up: beaded hair ribbon with pins. Pose: frontal, prop held in one raised hand by her shoulder, other arm relaxed with fingertips visible, lively graceful hands, five fingers each, holding a silk handkerchief. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "silk handkerchief",
+  "colour": "cherry red",
+  "motif": "iris",
+  "words": 160
+ },
+ "maid-m47-ty1-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Đáp ứng): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: one light layered robe, pale soft tint of sage green, wide flowing sleeves, crossed collar, embroidered hem and cuffs with plum and bamboo, two small hairpins. Consort hair up: side coil with a fresh flower with pins. Pose: standing frontal, one arm extended gently to the side presenting the prop, other hand resting at the belt, lively graceful hands, five fingers each, holding a jade pendant. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "jade pendant",
+  "colour": "sage green",
+  "motif": "plum and bamboo",
+  "words": 162
+ },
+ "maid-m47-ty2-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Thường tại): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: two layers, mid tone of sage green, embroidered outer robe with plum and bamboo, wide flowing sleeves, contrasting inner skirt, sheer gauze shawl over one arm, richer hairpins. Consort hair up: side coil with a fresh flower with pins. Pose: standing frontal, left hand holding the prop out in front at belly height, right hand gently raised, fingers relaxed, lively graceful hands, five fingers each, holding a jade pendant. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "jade pendant",
+  "colour": "sage green",
+  "motif": "plum and bamboo",
+  "words": 165
+ },
+ "maid-m47-ty3-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Quý nhân): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: three layers, deep jewel tone of sage green, gauze outer robe over a plum and bamboo-embroidered tunic over a layered skirt, phi-bạch-like shawl drape, beaded edges, full ornate hairpiece, jewelled girdle. Consort hair up: side coil with a fresh flower with pins. Pose: standing calm, body turned slightly to her left, one hand raised holding the prop at shoulder height, other hand lightly lifting the sleeve, lively graceful hands, five fingers each, holding a jade pendant. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "jade pendant",
+  "colour": "sage green",
+  "motif": "plum and bamboo",
+  "words": 172
+ },
+ "maid-m48-ty1-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Đáp ứng): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: one light layered robe, pale soft tint of emerald, wide flowing sleeves, crossed collar, embroidered hem and cuffs with thorn rose, two small hairpins. Consort hair up: bun with a long tassel hairpin with pins. Pose: frontal, one hand holding the prop while the other lightly touches the opposite forearm, fingers visible, lively graceful hands, five fingers each, holding a book. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "book",
+  "colour": "emerald",
+  "motif": "thorn rose",
+  "words": 157
+ },
+ "maid-m48-ty2-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Thường tại): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: two layers, mid tone of emerald, embroidered outer robe with thorn rose, wide flowing sleeves, contrasting inner skirt, sheer gauze shawl over one arm, richer hairpins. Consort hair up: bun with a long tassel hairpin with pins. Pose: standing, slight bow of the head, prop held in both hands, sleeves gently falling, lively graceful hands, five fingers each, holding a book. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "book",
+  "colour": "emerald",
+  "motif": "thorn rose",
+  "words": 157
+ },
+ "maid-m48-ty3-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Quý nhân): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: three layers, deep jewel tone of emerald, gauze outer robe over a thorn rose-embroidered tunic over a layered skirt, phi-bạch-like shawl drape, beaded edges, full ornate hairpiece, jewelled girdle. Consort hair up: bun with a long tassel hairpin with pins. Pose: three-quarter pose, prop held in her right hand near the chest, left hand gracefully open beside her, lively graceful hands, five fingers each, holding a book. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "book",
+  "colour": "emerald",
+  "motif": "thorn rose",
+  "words": 163
+ },
+ "maid-m49-ty1-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Đáp ứng): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: one light layered robe, pale soft tint of celadon, wide flowing sleeves, crossed collar, embroidered hem and cuffs with sakura petals, two small hairpins. Consort hair up: feather pin with pins. Pose: three-quarter pose to the left, prop in her left hand resting at the hip, right hand lifting a sleeve edge, lively graceful hands, five fingers each, holding a folded fan. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "folded fan",
+  "colour": "celadon",
+  "motif": "sakura petals",
+  "words": 158
+ },
+ "maid-m49-ty2-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Thường tại): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: two layers, mid tone of celadon, embroidered outer robe with sakura petals, wide flowing sleeves, contrasting inner skirt, sheer gauze shawl over one arm, richer hairpins. Consort hair up: feather pin with pins. Pose: standing frontal, both hands holding the prop low at the waist, head slightly tilted, lively graceful hands, five fingers each, holding a folded fan. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "folded fan",
+  "colour": "celadon",
+  "motif": "sakura petals",
+  "words": 154
+ },
+ "maid-m49-ty3-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Quý nhân): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: three layers, deep jewel tone of celadon, gauze outer robe over a sakura petals-embroidered tunic over a layered skirt, phi-bạch-like shawl drape, beaded edges, full ornate hairpiece, jewelled girdle. Consort hair up: feather pin with pins. Pose: slight turn to the right, prop held in both hands at the chest, lively graceful hands, five fingers each, holding a folded fan. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "folded fan",
+  "colour": "celadon",
+  "motif": "sakura petals",
+  "words": 156
+ },
+ "maid-m50-ty1-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Đáp ứng): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: one light layered robe, pale soft tint of rouge, wide flowing sleeves, crossed collar, embroidered hem and cuffs with lotus seed, two small hairpins. Consort hair up: low chignon with a carved comb with pins. Pose: frontal, one hand offering the prop forward in the palm, other hand at the sash, lively graceful hands, five fingers each, holding a small lantern. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "small lantern",
+  "colour": "rouge",
+  "motif": "lotus seed",
+  "words": 157
+ },
+ "maid-m50-ty2-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Thường tại): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: two layers, mid tone of rouge, embroidered outer robe with lotus seed, wide flowing sleeves, contrasting inner skirt, sheer gauze shawl over one arm, richer hairpins. Consort hair up: low chignon with a carved comb with pins. Pose: standing, weight on one foot, prop held up beside the cheek, other hand holding the gauze sleeve, lively graceful hands, five fingers each, holding a small lantern. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "small lantern",
+  "colour": "rouge",
+  "motif": "lotus seed",
+  "words": 161
+ },
+ "maid-m50-ty3-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Quý nhân): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: three layers, deep jewel tone of rouge, gauze outer robe over a lotus seed-embroidered tunic over a layered skirt, phi-bạch-like shawl drape, beaded edges, full ornate hairpiece, jewelled girdle. Consort hair up: low chignon with a carved comb with pins. Pose: frontal, prop held in one raised hand by her shoulder, other arm relaxed with fingertips visible, lively graceful hands, five fingers each, holding a small lantern. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "small lantern",
+  "colour": "rouge",
+  "motif": "lotus seed",
+  "words": 163
+ },
+ "maid-m51-ty1-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Đáp ứng): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: one light layered robe, pale soft tint of lemon cream, wide flowing sleeves, crossed collar, embroidered hem and cuffs with phoenix tail, two small hairpins. Consort hair up: flower cluster at the temple with pins. Pose: standing frontal, one arm extended gently to the side presenting the prop, other hand resting at the belt, lively graceful hands, five fingers each, holding a teacup. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "teacup",
+  "colour": "lemon cream",
+  "motif": "phoenix tail",
+  "words": 159
+ },
+ "maid-m51-ty2-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Thường tại): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: two layers, mid tone of lemon cream, embroidered outer robe with phoenix tail, wide flowing sleeves, contrasting inner skirt, sheer gauze shawl over one arm, richer hairpins. Consort hair up: flower cluster at the temple with pins. Pose: standing frontal, left hand holding the prop out in front at belly height, right hand gently raised, fingers relaxed, lively graceful hands, five fingers each, holding a teacup. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "teacup",
+  "colour": "lemon cream",
+  "motif": "phoenix tail",
+  "words": 162
+ },
+ "maid-m51-ty3-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Quý nhân): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: three layers, deep jewel tone of lemon cream, gauze outer robe over a phoenix tail-embroidered tunic over a layered skirt, phi-bạch-like shawl drape, beaded edges, full ornate hairpiece, jewelled girdle. Consort hair up: flower cluster at the temple with pins. Pose: standing calm, body turned slightly to her left, one hand raised holding the prop at shoulder height, other hand lightly lifting the sleeve, lively graceful hands, five fingers each, holding a teacup. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "teacup",
+  "colour": "lemon cream",
+  "motif": "phoenix tail",
+  "words": 169
+ },
+ "maid-m52-ty1-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Đáp ứng): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: one light layered robe, pale soft tint of amber red, wide flowing sleeves, crossed collar, embroidered hem and cuffs with gourd vine, two small hairpins. Consort hair up: high bun with pearl pins with pins. Pose: frontal, one hand holding the prop while the other lightly touches the opposite forearm, fingers visible, lively graceful hands, five fingers each, holding a scroll. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "scroll",
+  "colour": "amber red",
+  "motif": "gourd vine",
+  "words": 157
+ },
+ "maid-m52-ty2-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Thường tại): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: two layers, mid tone of amber red, embroidered outer robe with gourd vine, wide flowing sleeves, contrasting inner skirt, sheer gauze shawl over one arm, richer hairpins. Consort hair up: high bun with pearl pins with pins. Pose: standing, slight bow of the head, prop held in both hands, sleeves gently falling, lively graceful hands, five fingers each, holding a scroll. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "scroll",
+  "colour": "amber red",
+  "motif": "gourd vine",
+  "words": 157
+ },
+ "maid-m52-ty3-a18": {
+  "prompt": "Semi-realistic painterly guofeng portrait, near-3D realistic rendering, soft natural light. Redraw image 1 as the same woman, promoted to consort (Quý nhân): keep her face, fair porcelain skin and age (18); beauty and painterly finish like images 4-5. Silhouette like the reference robes of images 2-3 (flowing, layered, graceful) but in her own palette: three layers, deep jewel tone of amber red, gauze outer robe over a gourd vine-embroidered tunic over a layered skirt, phi-bạch-like shawl drape, beaded edges, full ornate hairpiece, jewelled girdle. Consort hair up: high bun with pearl pins with pins. Pose: three-quarter pose, prop held in her right hand near the chest, left hand gracefully open beside her, lively graceful hands, five fingers each, holding a scroll. Tiny flower or leaf huadian on the forehead, 1/12 face width, never a teardrop or dot. Hem ends at the feet, both shoes visible, NO train. FULLY TRANSPARENT BACKGROUND (real alpha, no checkerboard, no shadow), full body inside the canvas with margin.",
+  "prop": "scroll",
+  "colour": "amber red",
+  "motif": "gourd vine",
+  "words": 163
+ }
+}

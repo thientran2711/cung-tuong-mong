@@ -1,0 +1,46 @@
+PRIORITY #1 CHECK: brief s35-review-kit-figure-mood.md (OD tail 17/11 ~17:40Z) | main KIT 28.8d absent, pcPort seals only | review/kit-figure-mood c7d4b72a (this review) | claims kit-figure-mood MAIN s35.
+
+# review-kit-figure-mood r1 — PASS dee2e13f
+Branch review/kit-figure-mood-r1 = c7d4b72a + merge origin/main 03a776e4 (earlier b5d109fe) (index.html/sw.js conflicts resolved by rebuild) + 1 small reviewer fix.
+
+## Checks
+1. Kit only: ONE part kitFigSeal (jfigseal.js), seal = jemo emoBadge element (img.kemo), no per-screen CSS variant. PASS.
+2. Consistency scan (Fold 755x1000@2 + iPad 1180x820@2, fig-seal.js, 0 page errors): room stage tokens + #mefig, event dialog (kitStageFig), Dư đồ place view (up to 4 figs on iPad), kszFigHtml person frame, book/pet-care via kitStageFig. All seals inside stage/column, 39-50 px, not on face (faceHit false), beside head. Silhouettes / mini-game / identity card correctly none. Wide phoenix crown (Hoàng hậu, event dialog + iPad place): seal sits at head height right past the crown edge, ~one seal width from it; reads as attached to the head, not detached. PASS (known limit stays: ~50-90 px from the face centre by design).
+3. Visible to anyone she sees (not intel-gated): emo-an for unknown mood, none for strangers. Tap: window-level jevb handler -> emoBox kit card ("Tâm trạng · name", cause rows / "chưa rõ: ngươi chưa gặp..."). FOUND + FIXED: emoKey fell back to p.name for people without id/sid (maid, ma ma, men "m2") and emoByKey could not resolve it, so the tap on their figure seal did NOTHING (silent dead tap; every life has a maid + ma ma in the room). Fix in jemo.js (emoRegKey registry + S.men lookup); scan before: maid dead 1/1, men dead 3/3, elder dead; after: 0 dead of me/emp/thO/maid/rivals/men/servants; tap on a seal opens the kit card (maid case verified).
+4. Perf: place view with 15 figs: kitFigSealAll 0.6 ms, renderStage 12.5 ms (no regression vs seals off), 0 of 150 frames over 50 ms in 2.5 s idle. tab-perf-ab (CPU 4x, Fold) was noisy: ref main returned 0 for 6 of 8 tabs, only act/go/story comparable (act slower 692 vs 462, go/story faster) -> not conclusive, worker's quickcheck median render 232/253 stands.
+5. Old save: oldsave-r1.js 16/16 (755/1180/1366, main build save loads, no errors, no overflow).
+Note: seals appear only after kitFigBody finishes measuring the picture (CDN image load): in the sandbox that can take >10 s on first load, fine once cached.
+
+## Shots
+CDN img/_review/kit-figure-mood-r1/ (fold-room, fold-event, fold-place, ipad-room, ipad-event, ipad-place). Wipe: python3 dev/site/cdn_sync.py --wipe-review kit-figure-mood-r1.
+
+# r2 — PASS 1d4e9796 (review/kit-figure-mood-r2 = worker e684d672 + r1 fix dee2e13f + main e503c53e + 1 reviewer fix)
+- Seals: Fold + iPad fig-seal.js (MOTION=1 FAKE=1): all inside stage, not on face, 0 page errors; FAKE gian loop swaps in and out as designed.
+- Motion (KIT 38.4): live only on screen (IntersectionObserver); reduced-motion = 0 live / 0 running animations; Gọn from boot = 0 live. FOUND + FIXED: Settings toggle Cảnh động/Gọn did not touch seals already on screen (saveOpt does not re-render); jemoseal now re-evaluates on saveOpt (before 8 live, Gọn 0, back 8).
+- No frozen seals: room + tabs court/rel/kid/inv/act, every visible img.kemo is kemo-live with a running animation (0 frozen).
+- Perf (CPU 4x, Fold, 4 s rAF): real Dư đồ seals avg 16.7 ms, 0 frames >50 ms; 60 extra animated seals stress: avg 18.6 ms, 4 frames >50 ms (max 117 ms at insert) — far above real counts; Gọn 16.7 ms.
+- Tap card: known cause shows mood: cause; unknown cause shows "Nguyên do chưa rõ"; stranger "Tâm trạng chưa rõ". khoc/hon fallback: emoSealSrc gives buon/gian pictures (all 3 sets); kitEmoSeal.pop khoc swaps to buon picture + droop then restores the old key and class.
+- Old save 16/16. Shots not needed (no CDN upload for r2).
+
+# r3 — FAIL b8d3832c (review/kit-figure-mood-r3b tip = r3c; brief named 5758b6e3, tip is newer and checked)
+PRIORITY #1 CHECK: OD 18:25Z (a) / 18:38Z / 19:25Z | main jemo.js/jevb | review/kit-figure-mood-r3b b8d3832c | claims kit-figure-mood MAIN s36.
+Base: branch is NOT on latest origin/main (74 commits behind d4a850ce); needs rebase/merge before any PASS can fast-forward.
+Method: scratch harness (outside repo) stubs window.faceKeyFor / sealKeyFor / emoCauses(with `left`) on a known rival, opens emoBox; 4+1 cases at 755x1000@2, 1180x820@2, 412x1058@2 (phone shows rotate prompt over the card, expected). Looked at card shots.
+PASS parts: order (seal kind first+bold, others by summed strength, soonest-fade inside, "còn N khắc", "Nguyên do chưa rõ"); "Đang: Khóc / Cảm xúc: Buồn (nặng)"; intent "Cảm xúc … / Vẻ mặt: Toan tính"; ghen label "Chạnh lòng"; missing art: khoc->buon pic, toantinh->muu, phanno->gian; seals at figures (fig-seal MOTION=1): 0 page errors, all inside stage, none on face, all live (Fold, iPad); kit-only (kmcsub is a tiny weight rule, no private frame); no pop left.
+FAIL items (numbered for worker):
+1. Same displayed kind split in two groups: causes keyed `chanh` and `ghen` both print label "Chạnh lòng" but group separately (heading appears twice, 2nd at list bottom). Group by display label / alias ghen->chanh in kitMoodCauseRows (old saves + new causes will mix).
+2. Colour inconsistency: jevb `cls` is a hard-coded kind list ["gian","buon","dau","so","lo","ghen"]: `ghen` row red, `chanh` row (same label) uncoloured; every new kind (hon, hothen, khochiu…) gets no colour. Check (4) violated: derive tone from data (e.g. KIT table good/bad per key), not an inline list.
+3. Header contradicts seal: sub line "Hiện nay: <m.name>" and badge alt/data-kemo still use kitEmotion m.k (stub: Giận) while seal/lines show Buồn/Khóc/Chạnh lòng. Use the same face/seal name (kitFaceName(emoSealKey)) for sub, alt, data-kemo.
+4. Bold driver falls back to m.k when `sealKeyFor` is absent but `faceKeyFor` present (case E: no bold at all). Take the driver from faceKeyFor().feel.key (or key for kind feel) first.
+5. Raw key leaks to player text: unknown act/feeling key prints as the English key ("Đang: phanno", "Cảm xúc: phanno (nặng)"). Fallback must not show a raw key (hide the row or use a generic VANPHONG word) until names are registered.
+Not blocking: fig-seal run showed 2 transient non-live "an" seals once on iPad (timing; next run all live, 0 frozen).
+Perf/old save: see below.
+Perf (Fold 4x CPU) and old-save 16/16 NOT completed for r3 (oldsave-r1 stalled on CDN loads in this sandbox; OLD build part ok). Re-run on the fixed tip. No CDN shots uploaded (scratch only).
+
+# r4 — PASS 01e6275c (review/kit-figure-mood-r4-r5 = worker 26ace669 + merge origin/main 03f97e15, site rebuilt, only index.html/sw.js conflicted)
+PRIORITY #1 CHECK: OD 18:25Z(a), 18:38Z, 19:25Z, 20:15Z/20:20Z (no intent face) | main jemo*.js | review/kit-figure-mood-r4 26ace669 | claims kit-figure-mood MAIN s36.
+- r3 items 1-5 verified with the stub card harness (5 cases, Fold 755x1000@2 + iPad 1180x820@2, 0 page errors, shots looked at): (1) ghen+chanh one group "Chạnh lòng"; (2) tones from KIT_EMOTONE (chanh red like ghen, no inline list); (3) header sub, badge alt and data-kemo = same seal name (Khóc / Chạnh lòng); (4) bold group driven by faceKeyFor().feel.key without sealKeyFor; (5) no raw key ever printed (unnamed act row hidden). Order/bold/khắc/"Nguyên do chưa rõ" unchanged.
+- No intent anywhere: no toantinh in the build, no Vẻ mặt line, intent face falls to its feeling. Legacy EMO.muu "Toan tính" stays only for old saves' legacy mood key (C-AG migrates muu->binh); non-blocking.
+- Old save 16/16 (755/1180/1366, main build save). Fold 4x tab-perf-ab (4 reps, run alone, A=r4 vs ref main): no tab flagged SLOWER (act 1021/1037, go 748/822, story 281/385 ms tap); first run with fig-seal running concurrently flagged story, a contention artefact.
+- Figure seals: event dialog seals present, none on face, all inside; 0 errors. Room/place figure seals read 0 in this sandbox on iPad AND Fold for r3 and r4 alike this session (seals appear after kitFigBody measures the CDN image; slow here), so not attributable to r4; worker's own fig-seal run + earlier r3 run showed them.
+- quickcheck.sh does not exist on this tree; skipped. Shots scratch only.

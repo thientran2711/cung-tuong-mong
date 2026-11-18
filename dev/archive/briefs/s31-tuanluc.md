@@ -1,0 +1,2 @@
+PRIORITY #1 CHECK ('tuanluc-sync'): OD 6 | claims 4 | review/tuanluc-sync 9b3d324d (items 1–5 done, 6–10 partly; HANDOVER at the end of reports/tuanluc-sync.md).
+ROLE: WORKER tuanluc-sync #3 (opus). Read s31-common.md + reports/tuanluc-sync.md fully + the OD lines it cites (verbatim). Continue review/tuanluc-sync: merge newest origin/main, finish items 6–10, snapshots, quickcheck, rebuild site, LOOK Fold/iPad. SẴN SÀNG KIỂM → main.

@@ -1,0 +1,3 @@
+PRIORITY #1 CHECK ('kitHapMark'): OD 1 | main 9 (KIT §78, jact.js:166) | review/* 0 | claims 0.
+ROLE: WORKER map-me-mark (sonnet). Read s31-common.md. Owner words verbatim: OD 'OWNER 07:00Z map' + 07:15Z (s30 chat). Branch review/map-me-mark.
+DO: (1) FIRST write reports/map-me-mark.md §1: what the place '!' marks (kitHapMark) show on the live map today (which events, when), with a shot, and message main that line (main tells the owner). (2) Her 'you are here' marker over her head: brighter glow, +5 % size (one kit value), a squash-and-bounce loop; prefers-reduced-motion respected; perf ≤ live. Kit part only (KIT §78 + kit page). LOOK at Fold/iPad Dư đồ. SẴN SÀNG KIỂM → main.

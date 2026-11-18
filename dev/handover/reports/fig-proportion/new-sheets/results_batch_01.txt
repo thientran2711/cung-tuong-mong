@@ -1,0 +1,12 @@
+fig-consort-c16-t3-a18 | huZH57gvqL | Xm4aHHHBfo | .331 | ok
+fig-consort-c16-t4-a18 | dtPvCsyXSL | nVLpImBYQD | .360 | ok (upper edge)
+fig-consort-c18-t2-a18 | kspS7Wo16B | 0eSBvEDTfW | .314 | ok
+fig-consort-c23-t4-a18 | lJIPNXAgv9 | CqzKswdEEy | .343 | ok
+fig-consort-c24-t1-a18 | s78y6Pyl8e | s78y3nAl8e | .338 | ok
+fig-consort-c24-t1-a26 | rgdwPy8xtc | iGbYpE73uK | .334 | ok
+fig-consort-c24-t1-a36 | jUBJ9AXLD0 | vQ2qxwMa47 | .349 | ok
+fig-consort-c24-t1-a51 | ovNCHs3829 | 8a6EKPVIrU | .346 | ok
+fig-consort-c24-t2-a18 | lJIPioegv9 | 79aizpHJAL | .394 | slightly wide (target .30-.36); retries gave .417 and .223, kept first
+fig-consort-c24-t2-a26 | WDldIgacXe | 8a6EK9DIrU | .343 | ok
+fig-consort-c24-t2-a36 | eIyhE2YdqL | LwoO3obswO | .336 | ok
+fig-consort-c24-t2-a51 | CqzKjXUEEy | kspS4dd16B | .342 | ok

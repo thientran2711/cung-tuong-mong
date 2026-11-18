@@ -1,0 +1,6 @@
+# Image files that MAY live in git (owner OD:L203 + 16/11 18:50Z: pictures live on Cloudflare, not git).
+# One glob per line (fnmatch on the repo path; '*' also crosses '/'). Anything else image-like is rejected by
+# dev/test/img-allowlist.py (build_site.sh, dev/tools/quickcheck.sh, pre-commit hook dev/site/hooks/pre-commit).
+# Add a line only for a file the built game/site itself needs from git and that cannot be on the CDN, with a comment why.
+icons/*.png          # PWA / apple-touch icons (manifest.webmanifest, index.html head)
+dev/build/icon.webp  # inlined by dev/build/assemble.py as the game's data-URI icon

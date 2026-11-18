@@ -1,0 +1,6 @@
+PRIORITY #1 CHECK: OD 0 ('rank name stack','phẩm trên tên dưới'); owner rule = OD tail "(17/11 ~16:20Z real" item (b) | main: rank/name labels across jkit/j19/j63 etc. (scan) | review/* none | claims none.
+# kit-rank-name (sonnet) — ONE kit rule for rank + name (whole family)
+Read dev/handover/briefs/s34-common.md first + dev/rules/topic/kit-ui.md + KIT.md sections you touch. Read OD item (b) VERBATIM.
+RULE: exactly TWO kit forms. STACKED = (title if any) / rank / name, top to bottom — on every avatar, portrait frame, figure-foot label, person card header. ONE LINE = "rank name" — only in result lines and Tuần lục. The rank must never appear twice (owner saw "Quý phi" above AND below on the person card, s33 Lượt 8).
+TASK: build ONE kit function per form (or one with a mode), register in KIT.md + kit page, switch EVERY call site to it; scan script (dev/measure/) listing every place that prints rank and/or name → form used → before/after table; flag duplicates. Fold 755x1000 + iPad 1180x820 first, then 1366x1024, 412x1058, 390x844. Shots of person card, Dư đồ figure feet, avatar row, a result line, Tuần lục → CDN img/_review/kit-rank-name/.
+Branch review/kit-rank-name from latest origin/main. Report reports/kit-rank-name.md; "SẴN SÀNG KIỂM kit-rank-name <sha>" to MAIN s34.

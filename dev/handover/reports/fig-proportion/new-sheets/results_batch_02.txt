@@ -1,0 +1,12 @@
+fig-consort-c24-t3-a18 | LwoOPTFswO | WDldIAscXe | 0.363 | slightly above .36; retries gave .284 (0eSBaUQTfW) and .468 (CqzKghJEEy), kept first
+fig-consort-c24-t3-a26 | dtPvfU6XSL | rgdwPKgxtc | 0.34 | ok
+fig-consort-c24-t3-a36 | LwoOPX1swO | Sym9RlHUb8 | 0.353 | ok
+fig-consort-c24-t4-a26 | fHG5knPCDY | 4RQAW4v9Aa | 0.344 | ok
+fig-consort-c24-t4-a36 | gOt4NfcSXO | lJIP3Sjgv9 | 0.352 | ok
+fig-consort-c27-t2-a26 | 8a6EK4MIrU | eIyhHJOdqL | 0.327 | ok (retry; first .37)
+fig-consort-c28-t2-a51 | bxVswZ45Y2 | WDldmYgcXe | 0.339 | ok
+fig-consort-c28-t3-a36 | jUBJ9THLD0 | 9ZFGV6KNYZ | 0.314 | ok
+fig-consort-c28-t3-a51 | kspSO0o16B | mERF1drhJQ | 0.307 | ok
+fig-consort-c29-t2-a51 | xSX74edjfW | rgdw9bjxtc | 0.326 | ok
+fig-consort-c29-t3-a36 | tC3Q5ArmZJ | Bh9fqpioQR | 0.343 | ok
+fig-consort-c29-t4-a51 | ovNCH2X829 | ovNCbXQ829 | 0.32 | ok

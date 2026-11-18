@@ -1,0 +1,147 @@
+e68:gossipTea	day	{A} ghé uống trà, kể nhỏ chuyện cung nọ cung kia, rồi hỏi ngươi nghĩ gì về Hoàng hậu.
+e68:giftArrive	day	Cung nữ của {A} mang sang một hộp gỗ đàn hương, trong có hai lọ hương liệu, nói là quà đáp lễ.
+e68:lostItem	day	Sáng ra {M} tái mặt: chiếc trâm bạc ngươi hay cài không thấy đâu, hộp trang sức vẫn khóa.
+e68:sickServant	serv	{A} sốt cao từ đêm, nằm mê man ở dãy nhà hầu phía sau.
+e68:maidQuarrel	serv	{A} và {B} cãi nhau to ở sân sau, chỉ vì một tấm khăn tay ai cũng nhận là của mình.
+e68:strayCat	day	Một con mèo mướp lạc vào cung, nằm cuộn tròn trên gối tựa của ngươi, không chịu đi.
+e68:brokenHeirloom	day	{A} lau dọn sơ ý làm vỡ chiếc bình men lam của mẹ ngươi để lại.
+e68:spoiledFood	day	Ngự thiện phòng gửi sang mâm cơm đã ôi; {A} ngửi thấy mùi chua, không dám dọn lên.
+e68:leakRoof	sea	Mưa {W} suốt đêm, mái ngói tẩm cung dột, nước nhỏ tong tong xuống án thư.
+e68:letterHome	day	Thư nhà gửi vào: mẹ ngươi ốm, cha xin ngươi đừng lo, nhưng chữ run run.
+e68:eunuchSqueeze	day	Thái giám phát bổng lộc tháng này đưa thiếu, cười nhạt: 'Lệ ở đây phải có chút trà nước.'
+e68:embroidery	day	Cục Thượng y nhờ các cung thêu góp một vạt cho bức bình phong mừng thọ; {A} đã thêu xong phần mình, đẹp lạ.
+e68:flowerBloom	sea	Khóm mẫu đơn trước sân nở cùng lúc chín bông, cung nhân bảo điềm lành.
+e68:servGamble	serv	{A} bị bắt quả tang đánh bạc với đám thái giám gác cổng, thua sạch tiền tháng.
+e68:proudVisit	visit	{A} ghé qua, đứng giữa sân chê cây cảnh cung ngươi quê mùa, cười bảo nên học cung nàng.
+e68:kindVisit	visit	{A} mang canh hạt sen sang, bảo dạo này thấy ngươi gầy đi.
+e68:slyVisit	visit	{A} sang chơi, mắt cứ đảo quanh án thư và hộp thuốc của ngươi.
+e68:thMama	visit	Ma ma thân tín của Thái hậu ghé cung ngươi, đi một vòng nhìn từ bếp đến buồng ngủ.
+e68:docCheck	visit	Thái y {A} đến bắt mạch định kỳ, nhíu mày khi chạm cổ tay ngươi.
+e68:painter	visit	{A} vâng chỉ vẽ tranh chân dung các phi tần, đến cung ngươi trước.
+e68:musician	visit	{A} của Giáo phường ty mang đàn đến, nói phụng mệnh dạy một khúc mới cho yến tiệc.
+e68:newGirlAdvice	visit	{A} mới vào cung chưa lâu, rụt rè xin ngươi chỉ bảo lễ nghi hầu Thái hậu.
+e68:eunRequest	visit	{A} quỳ xin ngươi nói giúp để cháu hắn được vào làm tiểu thái giám ở Ngự dược phòng.
+e68:empDish	emp	Hoàng thượng sai người mang sang một bát chè tổ yến ngài ăn dở, nhắn 'ngon, nàng thử'.
+e68:empPoem	emp	Hoàng thượng sai thái giám mang sang một bài thơ ngài vừa viết, hỏi ngươi nên sửa chữ nào.
+e68:empSulk	emp	Bãi triều, Hoàng thượng mặt lạnh như sương, ghé cung ngươi ngồi im không nói.
+e68:empChess	emp	Canh hai, thái giám gõ cửa: Hoàng thượng muốn một ván cờ, ngài đang đợi ở thư phòng.
+e68:empAsksAbout	emp	Hoàng thượng hỏi bâng quơ: 'Nàng thấy {B} là người thế nào?'
+e68:empGiftOdd	emp	Hoàng thượng ban cho ngươi một con vẹt biết nói 'vạn tuế', nhưng nó chỉ kêu suốt đêm.
+e68:empIncognito	emp	Hoàng thượng thì thầm: đêm nay muốn cải trang ra chợ đêm ngoài cửa Đông Hoa, chỉ dẫn theo ngươi.
+e68:empSleepRead	emp	Ngài đến lúc chiều, bảo ngươi đọc sách cho nghe; mới vài trang ngài đã ngủ gục trên gối ngươi.
+e68:heatStroke	sea	Nắng gắt như đổ lửa, trong cung oi nồng; ngươi chóng mặt từ sáng.
+e68:snowDay	sea	Tuyết phủ trắng mái ngói, lò sưởi trong cung không đủ ấm, cung nhân co ro.
+e68:autumnMoon	sea	Trăng thu sáng vằng vặc, {A} mời các cung ra đình Thủy Tạ ngâm thơ.
+e68:springAllergy	sea	Phấn hoa xuân bay khắp nơi, ngươi hắt hơi không dứt, mắt đỏ hoe.
+e68:stormNight	sea	Giông tố nổi lên, sét đánh gãy cây hòe cổ trước điện; cả cung xôn xao điềm gở.
+e68:famineDonate	court	Tin dữ từ các tỉnh: dân đói kéo về kinh. Hoàng hậu kêu gọi lục cung giảm chi, quyên góp.
+e68:borderNews	court	Chiến báo từ biên ải: quân ta thua một trận, Hoàng thượng thức trắng ở Dưỡng Tâm điện.
+e68:clanFather	court	Nghe đồn nhà {A} sắp bị hặc tội ăn hối lộ; nàng sang cung ngươi, mắt đỏ hoe.
+e68:kidSick	kid	{A} sốt nóng từ chiều, quấy khóc không chịu bú mớm.
+e68:kidFight	kid	{A} đánh nhau với con của {B} ở thư phòng, cả hai đều bầm mặt.
+e68:kidGift	kid	{A} chạy sang khoe bức tranh vẽ mẹ, nét non nớt mà giống lạ.
+e68:bribedServ	serv	{A} lén báo: người của {B} dúi cho hắn mười lượng, hỏi giờ ngươi đi ngủ.
+e68:servRomance	serv	{A} bị bắt gặp đứng nói chuyện với một thị vệ gác cửa lúc chập tối.
+e68:servLeave	serv	{A} quỳ khóc: mẹ ở quê ốm nặng, xin về thăm một chuyến, chỉ sợ không kịp.
+e68:newServSus	serv	{A} dạo này hay ra vào cửa sau lúc nửa đêm.
+e68:rumorPreg	rumor	Cung nhân xì xào: {A} có mang đã hai tháng, đang giấu.
+e68:rumorSpy	rumor	Có kẻ rỉ tai ngươi: {A} là tai mắt người khác cài vào.
+e68:rumorEvidence	rumor	Nghe đồn {A} đang giữ thứ gì đó có thể làm hại ngươi.
+e68:rumorEmpLove	rumor	Khắp cung đồn Hoàng thượng sắp phong {A} lên một bậc.
+e68:hairpinThief	myst	Sáng ra, {it} trong tráp của ngươi biến mất. Đêm qua chỉ {A}, {B} và {C} ra vào buồng trong.
+e68:poisonedFish	myst	Đàn cá chép trong chậu sứ trước sân chết nổi bụng hết một đêm.
+e68:nightSteps	myst	{M} thề đêm qua nghe tiếng bước chân trên mái ngói buồng ngươi.
+e68:silkAllot	day	Nội vụ phủ chia lụa may áo mùa mới; xấp đẹp nhất đến tay ngươi, còn {A} nhận toàn màu cũ.
+e68:templeRite	day	Rằm tháng này, Thái hậu lên Phật đường trong cung tụng kinh; các phi tần được mời theo hầu.
+e68:fortuneNun	day	Một ni cô xem tướng được Thái hậu cho vào cung, đi qua cửa cung ngươi thì dừng lại nhìn lâu.
+e68:hhSummons	visit	Hoàng hậu {A} cho gọi ngươi sang giúp đối chiếu sổ sách bổng lộc lục cung.
+e68:allyOffer	visit	{A} hẹn ngươi ở đình nghỉ vắng: '{B} ngày càng lấn lướt. Hai ta liên thủ, thế nào?'
+e68:borrowDress	visit	{A} ngập ngừng hỏi mượn bộ y phục thêu phượng của ngươi cho yến tiệc tối mai.
+e68:doubtVisit	visit	{A} sầm sập kéo đến, buộc tội ngươi cài người vào cung nàng.
+e68:empWager	emp	Hoàng thượng bày trò chọi dế ở ngự hoa viên, rủ ngươi đặt cược.
+e68:empDream	emp	Hoàng thượng kể đêm qua mơ thấy rồng vàng quấn cột, hỏi ngươi điềm gì.
+e68:empOldFlame	emp	Ngài ngồi trước bức họa một phi tần đã mất, hỏi ngươi có thấy nàng giống ai không.
+e68:kidTutor	kid	Thầy dạy ở Thượng thư phòng tâu {A} lười học, hay ngủ gật.
+e68:kidLie	kid	{A} làm vỡ bình hoa, rồi đổ cho {B}.
+e68:servHero	serv	Đêm qua bếp cung bén lửa; {A} xông vào dập, bỏng cả tay.
+e68:rumorTH	rumor	Cung nhân đồn Thái hậu dạo này không ưa ngươi, chê ngươi lười thỉnh an.
+e68:rumorFavor	rumor	Lời đồn khắp lục cung: Hoàng thượng đã chán ngươi.
+e68:lotusSeason	sea	Sen Thái Dịch trì nở trắng hồ; {A} rủ ngươi chèo thuyền hái sen.
+e68:droughtPrayer	sea	Hạn kéo dài, Hoàng thượng giảm thiện, cầu mưa ở Thiên Đàn; hậu cung được lệnh ăn chay.
+e68:officialWife	court	Phu nhân một vị thượng thư vào cung thỉnh an, xin ngươi giới thiệu với Thái hậu.
+e68:envoyGift	court	Sứ thần nước ngoài dâng ngọc quý; Hoàng thượng chia cho lục cung mỗi nơi một món.
+j7:doll	j7	Canh ba, ${S.maid.name} hớt hải quỳ xuống: dưới gốc quế sân ngươi có hình nhân vải ghi ngày sinh của Hoàng thượng.<br>Người của Cung Chính t
+j7:poisongift	j7	Hộp điểm tâm đề tên ngươi gửi sang cung ${v.name}; cung nữ nếm thử liền thổ huyết.<br>Cả hậu cung xôn xao: ngươi hạ độc.
+j7:guardrumour	j7	Lời đồn lan khắp các cung: đêm đêm có thị vệ lẻn vào tẩm cung của ngươi.<br>Hoàng thượng chưa nói gì, nhưng đã hai tuần không lật thẻ ngươi.
+j7:ghost	j7	Cung nhân thì thầm: đêm qua có bóng áo trắng khóc bên giếng sau cung ngươi.<br>Ba cung nữ xin đổi đi nơi khác.
+j7:pact	j7	${v.name} hẹn ngươi ở đình Thiên Thu: “Hoàng hậu ${q.name} đè đầu cả hậu cung đã lâu.<br>Hai ta chung một thuyền, được chăng?”
+j7:eunuch	j7	Tiểu thái giám Tiểu Đức Tử quỳ ngoài thềm: “Nô tài nguyện làm chó săn cho nương nương.”<br>Hắn từng hầu ở Kính sự phòng.
+j7:empnight	j7	Đêm khuya, không đèn lồng, không thái giám báo trước. Hoàng thượng đứng ngoài rèm cửa cung ngươi.<br>“Trẫm không ngủ được.”
+j7:minister	j7	Hoàng thượng đặt bản tấu xuống: “Thượng thư Hộ bộ xin tăng thuế muối. Ái phi nghĩ sao?”
+j7:jealousprince	j7	Triều thần vây quanh ${k.name} sau buổi giảng kinh. Hoàng thượng nhìn từ xa, sắc mặt sa sầm.
+j7:flood	j7	Hoàng Hà vỡ đê, ba châu chìm trong nước. Hoàng hậu truyền các cung quyên góp cứu tế.
+j7:newgirl	j7	Con gái Thượng thư Lễ bộ được tuyển vào cung, nghe nói dung mạo khuynh thành.<br>Hôm nay nàng đến các cung bái kiến.
+j7:princefever	j7	Đêm yến tiệc, ${k.name} sốt cao co giật. Tiếng nhạc bên Thái Hòa điện vẫn vọng sang.
+j7:foreignwed	j7	Sứ thần Bắc Địch dâng ngựa quý, cầu hôn ${k.name}. Triều thần đều nói: một nàng công chúa đổi mười năm yên biên ải.
+j7:maidhostage	j7	${S.maid.name} quỳ khóc: người của ${v.name} giữ cha mẹ nàng, bắt nàng lấy trộm thư từ của ngươi.
+j7:doctorblack	j7	Thái y tâm phúc của ngươi lén báo: có kẻ biết ông từng kê nhầm thuốc cho tiên phi, đòi 50 lượng mỗi tháng.
+j7:comet	j7	Sao chổi quét ngang trời tây. Khâm Thiên giám tâu: âm khí xung từ cung của ngươi.
+j7:phoenix	j7	Thầy tướng ở chùa Bảo Hoa phán: trong hậu cung có một người mệnh phượng hoàng, và chỉ vào cung ngươi.
+j7:doanngo	j7	Tết Đoan ngọ, thuyền rồng đua trên Thái Dịch trì. Các cung treo ngải cứu, gói bánh ú.
+j7:trungcuu	j7	Tiết Trùng cửu, Hoàng thượng lên Cảnh Sơn ngắm cúc, uống rượu thù du.
+j7:vulan	j7	Rằm tháng bảy, lễ Vu Lan. Đèn hoa đăng trôi trên kênh Kim Thủy, cung nhân khấn vái người đã khuất.
+j7:dongchi	j7	Đông chí, Hoàng thượng ra đàn Nam Giao tế trời. Tuyết phủ trắng mái ngói lưu ly.
+j7:thbirthday	j7	Thánh thọ Thái hậu. Các cung đua nhau dâng lễ; ai được Thái hậu khen sẽ nở mày nở mặt.
+j7:caning	j7	Trước Càn Ninh cung, ${v.name} bị lột trâm, đánh hai mươi trượng vì tội bất kính. Hoàng hậu bắt các phi tần đứng xem.
+j7:condemnedmaid	j7	Một cung nữ cung khác bị khép tội trộm, sắp bị đánh chết. Nàng gào tên ngươi khi bị lôi qua cửa.
+j7:coldvisit	j7	Gió lùa qua song cửa lãnh cung. ${f.name} gầy rộc, níu tay áo ngươi: “Ta biết những chuyện họ muốn chôn.”
+j7:taster	j7	Tiểu thái giám nếm canh ngự ban cho ngươi bỗng ôm bụng ngã gục, môi tím tái.
+j7:letterhome	j7	Thư nhà giấu trong giỏ trái cây: ${S.origin.k===
+j7:fire	j7	Nửa đêm, Đông lục cung bốc cháy. Lửa liếm mái cung ${v.name}; tiếng trẻ khóc lẫn tiếng chiêng.
+j7:rvframe	j7	Ngươi nghe lén sau hòn non bộ: ${a.name} bàn với thái giám giấu đồ ngự dụng vào cung ${b.name} để vu tội trộm.
+j7:rvquarrel	j7	Trong Ngự hoa viên, ${a.name} và ${b.name} tranh nhau một chậu mẫu đơn Hoàng thượng ban, lời qua tiếng lại.
+j7:rvmusk	j7	${S.maid.name} thì thầm: ${a.name} trộn xạ hương vào túi thơm tặng ${b.name}, mong nàng không bao giờ có con.
+j7:rvbribe	j7	${a.name} đút lót Kính sự phòng giấu thẻ bài của ${b.name}. Tổng quản thái giám đánh tiếng: ngươi muốn chen một chân không?
+arc:tt_co	tt	Quân cờ trong tay cha | Cha ngươi, Tể tướng, coi ngươi là quân cờ cài bên long sàng. Mỗi bức thư nhà là một mệnh lệnh. Đi theo ván cờ 
+arc:tt_oan	tt	Phủ Tể tướng mắc oan | Một bản sổ sách giả buộc tội cha ngươi tham ô ngân khố. Ông bị cấm túc chờ tra. Cứu cha, hay cứu lấy mình.
+arc:tt_tranh	tt	Phủ Tể tướng chia đôi | Huynh trưởng của ngươi muốn phủ Tể tướng đứng sau một phi tần khác và con của nàng; cha thì muốn đứng sau ngươ
+arc:tt_mat	tt	Mật ước với Hoàng hậu | Ngươi tình cờ biết: cha đã ngầm kết minh với Hoàng hậu. Cái giá của mật ước ấy có thể chính là ngươi. Tìm ra c
+arc:dtq_bien	dtq	Khói lửa Nhạn Môn | Giặc phương Bắc tràn qua Nhạn Môn quan. Cha ngươi cầm quân, mà lương thảo, viện binh, lòng vua đều ở trong cun
+arc:dtq_vu	dtq	Bức thư mưu phản | Một bức thư giả nét chữ cha ngươi, hẹn với giặc chia đôi giang sơn, được trình lên ngự án. Tìm ra kẻ làm giả t
+arc:dtq_binh	dtq	Binh phù và long ngai | Hoàng thượng muốn thu binh quyền của cha ngươi mà không mang tiếng bạc đãi công thần. Cha thì không muốn buông
+arc:dtq_huynh	dtq	Người anh nơi đất giặc | Huynh trưởng của ngươi, một tướng trẻ, bị giặc bắt trong một trận phục kích. Giặc đòi chuộc, triều đình đòi gi
+arc:muoi_tuoc	muoi	Mua tước cho cha | Nhà buôn muối giàu mà bị khinh. Cha muốn một tước vị để con cháu ngẩng đầu. Bạc thì có, thứ thiếu là người chị
+arc:muoi_lau	muoi	Thuyền muối đêm | Thuyền muối của nhà ngươi bị bắt ở bến Giang Khẩu, trong khoang có muối lậu. Cha nói bị hãm hại, quan nói bắt 
+arc:muoi_doi	muoi	Năm đói ở Giang Nam | Giang Nam mất mùa, giá gạo lên gấp ba. Kho nhà ngươi đầy thóc. Cha muốn bán giá cao; dân thì đang chết đói, và
+arc:muoi_no	muoi	Món nợ trong cung | Ngươi phát hiện {v} lén vay bạc của hiệu buôn nhà ngươi để lo lót, và không trả nổi. Món nợ là xích sắt hay là
+arc:cn_chu	cn	Chủ cũ | {v} là chủ cũ của ngươi thuở còn bưng trà. Nàng không chịu nổi việc kẻ hầu cũ nay ngồi ngang hàng. Nhẫn, trả, 
+arc:cn_tinh	cn	Mối tình thuở hầu trà | Thuở còn hầu trà, ngươi từng hẹn ước với một thị vệ. Nay hắn gác cửa cung ngươi, và vài bức thư cũ vẫn còn đâu
+arc:cn_ban	cn	Tri kỷ ở Tân Giả khố | Tố Nga, tri kỷ cùng phòng thuở ngươi còn là cung nữ, bị đày xuống Tân Giả khố vì một tội nàng không làm. Nàng 
+arc:cn_than	cn	Thân thế thật | Một lão ma ma sắp mất nói với ngươi: ngươi không phải con nhà thường dân. Ngươi là con của một quan bị giáng c
+arc:nc_gian	nc	Mật lệnh cố quốc | Phụ vương gửi mật lệnh: dò bố phòng biên ải Đại Hy. Trung với cố quốc, trung với phu quân, hay chơi cả hai ván
+arc:nc_su	nc	Sứ đoàn cố quốc | Hoàng huynh của ngươi dẫn sứ đoàn Nam Chiếu sang triều cống. Mỗi bữa yến là một ván cờ: nếu sứ đoàn thất lễ, n
+arc:nc_tuc	nc	Người ngoại tộc | Thái hậu không ưa người ngoại tộc. Áo váy, món ăn, điệu múa của ngươi đều bị soi. Giữ lấy mình mà vẫn được Đức
+arc:nc_vuong	nc	Ngai vàng cố quốc | Phụ vương băng hà. Hoàng huynh và hoàng thúc tranh ngôi, cả hai đều xin Đại Hy ủng hộ, và đều nhắm đến ngươi. 
+arc:td_an	td	Lật lại án cũ | Cả nhà ngươi bị vu mưu phản. Kẻ dâng sớ là {foed}; con gái hắn, {foe}, đang ở trong cung. Gom chứng cứ, giữ nh
+arc:td_ke	td	Kẻ đứng sau màn | Càng lần theo án cũ, ngươi càng thấy {foed} chỉ là con dao. Bàn tay cầm dao ở cao hơn. Tìm ra hắn, rồi chọn: t
+arc:td_song	td	Người em còn sống | Ngươi tưởng cả nhà đã chết. Một chiếc vòng bạc gửi vào cung cho ngươi biết: em trai út còn sống, đang làm lính
+arc:td_tha	td	Thù hay tha | {foe} là con gái kẻ hại nhà ngươi. Nhưng nàng chẳng làm gì ngươi, và nay chính nàng đang gặp nạn. Trả thù cha 
+arc:ch_co	ch	Quân cờ của cô tổ | Thái hậu đưa ngươi vào cung để đối trọng với Hoàng hậu. Mệnh lệnh của bà ngày một nặng. Làm con cờ ngoan, hay 
+arc:ch_benh	ch	Thái hậu lâm bệnh | Thái hậu ngã bệnh. Cả hậu cung rục rịch: ai cũng muốn biết Đức Thọ cung còn đứng được bao lâu. Ngươi là cháu b
+arc:ch_ho	ch	Hai người cháu | {v} cũng là người họ ngoại của Thái hậu, vào cung trước ngươi. Đức Thọ cung chỉ có một chiếc ghế bên cạnh Thái
+arc:ch_bi	ch	Bí mật năm xưa | Một lá thư cũ cho thấy năm xưa Thái hậu từng hại một phi tần để giữ ngôi. Người cầm thư đang tìm cách dùng nó.
+arc:thd_tho	thd	Danh hiệu Tài nữ | Thơ ngươi có thể làm rạng danh người cha nghèo. Hàn lâm viện sắp mở kỳ thi Tài nữ trong cung, và có kẻ đang ch
+arc:thd_sach	thd	Di cảo của cha | Cha để lại một bộ sách bàn chính sự, chỉ thẳng tệ tham nhũng của một nhà quyền thế. In ra thì danh cha vang dộ
+arc:thd_tro	thd	Học trò của cha | Một học trò nghèo của cha thi Hội đỗ đầu, rồi bị đánh trượt vì có kẻ mua đề. Hắn xin ngươi giúp. Chuyện khoa c
+arc:thd_hoc	thd	Thầy giáo trong cung | Hoàng thượng thấy ngươi giỏi chữ, giao ngươi dạy chữ cho các hoàng tự và công chúa nhỏ. Dạy tốt thì cả cung nể
+arc:cnv_chu	cnv	Bí mật của chủ nhân | Đêm trực, ngươi thấy {mis} lén đốt một bức thư và giấu một gói thuốc. Biết bí mật của chủ là cầm dao hai lưỡi:
+arc:cnv_ban	cnv	Chị em đồng hương | Xuân Đào, cô gái cùng quê vào cung một đợt với ngươi, bị vu ăn cắp vòng ngọc của chủ. Cứu tri kỷ là đắc tội ng
+arc:cnv_mat	cnv	Ánh mắt nơi hành lang | Một chiều mưa, Hoàng thượng dừng lại dưới mái hiên nơi ngươi đứng hầu. Từ hôm ấy, ánh mắt ngài cứ tìm ngươi. C
+arc:cnv_ma	cnv	Ma ma dạy việc | Lưu ma ma nghiêm khắc nhất Nội vụ phủ chọn ngươi để dạy việc. Bà nói: ‘Qua được ta, ngươi sẽ thành chưởng sự. 
+arc:s_than	*	Người thân thất lạc | Một tiểu thái giám mới vào cung lén tìm ngươi, nói hắn là em họ thất lạc từ nạn lụt năm xưa. Thật hay giả, ơn 
+arc:s_thu	*	Bức mật thư | Ngươi nhặt được một bức thư rơi trong Ngự hoa viên, không đề tên người gửi. Trong thư là một kế hoạch hãm hại 
+arc:s_hoa	*	Đêm cháy Tây cung | Tây cung bốc cháy giữa đêm. Lửa cháy gần cung ngươi. Người ta nói do đèn đổ, nhưng có kẻ thấy bóng người chạy 
+arc:s_su	*	Sứ thần phương Tây | Sứ đoàn từ một nước xa phía Tây đến triều, mang theo đồng hồ, kính và những câu hỏi lạ. Hoàng thượng cần một n
+arc:s_dich	*	Mùa dịch đậu mùa | Dịch đậu mùa lan vào cung. Thái y viện đóng cửa các cung có người bệnh. Người ta sợ hãi, và nỗi sợ là đất cho 
+arc:s_thay	*	Lão thái giám | Tổng quản {eun} đã hầu ba đời vua. Ông bỗng để mắt đến ngươi, như muốn truyền lại những gì ông biết. Nhưng lão
+arc:s_ban	*	Kẻ thù hóa tri kỷ | {v} vẫn là cái gai trong mắt ngươi. Nhưng khi cả hai cùng bị một kẻ mạnh hơn nhắm vào, có lẽ kẻ thù của kẻ thù

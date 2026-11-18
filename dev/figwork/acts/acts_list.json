@@ -1,0 +1,1159 @@
+{
+ "categories": {
+  "hau-ha": {
+   "label": "hầu hạ",
+   "scene": "a slender lady's hand in an embroidered silk sleeve setting a lidded porcelain tea cup on a red lacquer tray, steam rising, palace hall softly behind"
+  },
+  "hoc-tap": {
+   "label": "học tập",
+   "scene": "an open thread-bound book, ink stone, brush rest and brushes on a rosewood desk by a lattice window with plum blossom"
+  },
+  "giao-thiep": {
+   "label": "giao thiệp",
+   "scene": "two porcelain tea cups and a teapot on a low carved table in a garden pavilion, two silk fans laid side by side"
+  },
+  "muu-ke": {
+   "label": "mưu kế",
+   "scene": "a folded secret note and a silver ingot half hidden under a silk handkerchief on a dark lacquer table, single candle, lattice shadows"
+  },
+  "hai-nguoi": {
+   "label": "hại người",
+   "scene": "a small slender dark plum-purple porcelain poison vial with a gold stopper and a red tassel, its stopper removed, beside a jade tea cup on a lacquer table at night, one candle, deep indigo evening shadows, ominous but beautiful (no skull, no symbols)"
+  },
+  "nghi-ngoi": {
+   "label": "nghỉ ngơi",
+   "scene": "a canopy bed with gauze curtains half drawn, embroidered pillow, a bowl of tonic and a curl of incense smoke, warm lamplight"
+  },
+  "buon-ban": {
+   "label": "buôn bán",
+   "scene": "rolls of fine silk, a small abacus and a pouch of silver ingots on a wooden counter in a palace side court"
+  },
+  "le-nghi": {
+   "label": "lễ nghi",
+   "scene": "a gilded incense burner with rising smoke before an altar with offerings, red candles, palace shrine interior"
+  },
+  "di-lai": {
+   "label": "đi lại",
+   "scene": "a long red palace corridor with lanterns and open vermilion gates leading on, stone path, golden roofs"
+  },
+  "tai-nghe": {
+   "label": "tài nghệ",
+   "scene": "a guqin zither, a go board with stones and a painted silk scroll arranged on a stone table in a blossoming garden"
+  },
+  "cham-con": {
+   "label": "chăm con",
+   "scene": "a small carved wooden cradle with a red embroidered tiger-head pillow and a little tiger toy, soft window light"
+  },
+  "trieu-chinh": {
+   "label": "triều chính",
+   "scene": "stacked imperial memorials with yellow brocade covers, a jade seal and a brush on a gold-trimmed desk"
+  },
+  "y-duoc": {
+   "label": "y dược",
+   "scene": "a clay medicine pot on a little charcoal stove with herbs, ginseng and a wooden medicine chest with small drawers"
+  },
+  "sung-ai": {
+   "label": "sủng ái",
+   "scene": "a pair of red silk embroidered pillows and a red candle on a carved bedside table, rose petals, warm intimate glow, tasteful"
+  },
+  "ban-thuong": {
+   "label": "ban thưởng",
+   "scene": "a red lacquer tray with silver ingots, a jade bracelet and red silk pouches being offered by a graceful hand"
+  },
+  "trang-diem": {
+   "label": "trang điểm",
+   "scene": "a bronze mirror on a dressing table with rouge jars, pearl powder, a jade comb and gold hairpins"
+  },
+  "tu-tinh": {
+   "label": "tư tình",
+   "scene": "an embroidered silk handkerchief dropped on a moonlit stone path beside a rockery, a single lantern, romantic and secretive"
+  }
+ },
+ "acts": [
+  {
+   "key": "dan-dem-trang",
+   "cat": "tai-nghe",
+   "pri": 1,
+   "scene": "a lady's slender hands plucking a guqin on a stone table in a moonlit garden pavilion, plum blossoms",
+   "names": [
+    "Đánh đàn ở ngự hoa viên",
+    "Đàn khúc Phượng cầu hoàng",
+    "Hiến khúc đàn dưới trăng",
+    "Phô tài: *"
+   ],
+   "ids": []
+  },
+  {
+   "key": "dang-canh",
+   "cat": "hau-ha",
+   "pri": 1,
+   "scene": "a graceful hand presenting a lidded blue-and-white porcelain soup bowl on a red lacquer tray beside an imperial desk with memorials",
+   "names": [
+    "Dâng canh ở ngự thư phòng",
+    "Dâng cháo lên Hoàng thượng"
+   ],
+   "ids": []
+  },
+  {
+   "key": "mua-yen",
+   "cat": "tai-nghe",
+   "pri": 1,
+   "scene": "long flowing white silk water sleeves swirling in mid-dance across a lantern-lit banquet hall floor, seen from behind, no face",
+   "names": [
+    "Múa trong yến tiệc",
+    "Kinh hồng vũ"
+   ],
+   "ids": []
+  },
+  {
+   "key": "cam-hoa",
+   "cat": "tai-nghe",
+   "pri": 1,
+   "scene": "hands arranging pink peonies into a celadon vase on a carved table",
+   "names": [
+    "Cắm hoa dâng Hoàng thượng"
+   ],
+   "ids": []
+  },
+  {
+   "key": "cai-tai-mat",
+   "cat": "muu-ke",
+   "pri": 1,
+   "scene": "a hand slipping a small silver ingot into the sleeve of a palace maid behind a red pillar, faces out of frame",
+   "names": [
+    "Cài tai mắt",
+    "Mua chuộc cung nữ",
+    "Mua chuộc",
+    "Cài người vào cung khác",
+    "Nghe lời, làm tai mắt",
+    "Nhận bạc, làm tai mắt"
+   ],
+   "ids": [
+    "bribe"
+   ]
+  },
+  {
+   "key": "nghi-ngoi",
+   "cat": "nghi-ngoi",
+   "pri": 1,
+   "scene": "a canopy bed with gauze curtains half drawn, embroidered quilt, a bowl of tonic soup on a side table, incense curling",
+   "names": [
+    "Nghỉ ngơi dưỡng sức",
+    "Nghỉ lấy sức",
+    "Ngủ sớm",
+    "Ở yên trong cung nghỉ ngơi",
+    "Tĩnh dưỡng"
+   ],
+   "ids": []
+  },
+  {
+   "key": "theu-khan-ban",
+   "cat": "buon-ban",
+   "pri": 1,
+   "scene": "a neat bundle of finely embroidered silk handkerchiefs tied with ribbon, handed through a half-open palace gate",
+   "names": [
+    "Thêu khăn bán ra ngoài",
+    "Thêu khăn bán"
+   ],
+   "ids": []
+  },
+  {
+   "key": "lam-tho",
+   "cat": "tai-nghe",
+   "pri": 1,
+   "scene": "a brush writing elegant (illegible, abstract) calligraphy strokes on a scroll beside a branch of plum blossom",
+   "names": [
+    "Làm thơ dâng lên",
+    "Gửi bài thơ cũ"
+   ],
+   "ids": []
+  },
+  {
+   "key": "cau-tu",
+   "cat": "le-nghi",
+   "pri": 2,
+   "scene": "incense sticks before a golden altar with a split ripe pomegranate and a red child-blessing charm",
+   "names": [
+    "Cầu tự ở Phụng Tiên điện"
+   ],
+   "ids": []
+  },
+  {
+   "key": "phat-chan",
+   "cat": "ban-thuong",
+   "pri": 2,
+   "scene": "graceful hands handing out small cloth bags of rice and silver from a basket on palace steps",
+   "names": [
+    "Phát chẩn cho cung nhân",
+    "Đưa cơm áo",
+    "Lì xì cung nhân",
+    "Tự tay nấu cháo phát cho cung nhân"
+   ],
+   "ids": []
+  },
+  {
+   "key": "duong-nhan",
+   "cat": "trang-diem",
+   "pri": 2,
+   "scene": "a bronze mirror, a jar of crushed pearl powder, a jade face roller and rose petals in a basin of milk",
+   "names": [
+    "Dưỡng nhan",
+    "Chải chuốt, giữ nhan sắc"
+   ],
+   "ids": []
+  },
+  {
+   "key": "luyen-cam-ky",
+   "cat": "hoc-tap",
+   "pri": 1,
+   "scene": "a scholar's desk with a guqin, a go board, brushes and an unrolled painting, candle burning late",
+   "names": [
+    "Luyện cầm kỳ thi họa",
+    "Tự học",
+    "Luyện tập"
+   ],
+   "ids": []
+  },
+  {
+   "key": "doc-binh-thu",
+   "cat": "hoc-tap",
+   "pri": 2,
+   "scene": "bamboo slip scrolls and an open thread-bound history book by a candle, a chess piece of xiangqi beside",
+   "names": [
+    "Đọc binh thư, sử sách"
+   ],
+   "ids": []
+  },
+  {
+   "key": "tung-kinh",
+   "cat": "le-nghi",
+   "pri": 2,
+   "scene": "a hand holding sandalwood prayer beads beside a sutra being copied with a fine brush, small gilded Buddha statue and incense",
+   "names": [
+    "Tụng kinh, làm việc thiện",
+    "Thỉnh an, chép kinh",
+    "Chép kinh, giữ đức"
+   ],
+   "ids": []
+  },
+  {
+   "key": "thuong",
+   "cat": "ban-thuong",
+   "pri": 2,
+   "scene": "a hand placing a silver bangle onto red silk held in a maid's open palms",
+   "names": [
+    "Thưởng cung nữ",
+    "Ban thưởng",
+    "Giúp đỡ nàng",
+    "Giúp nàng"
+   ],
+   "ids": []
+  },
+  {
+   "key": "gia-mang-thai",
+   "cat": "muu-ke",
+   "pri": 4,
+   "scene": "a silk padding cushion hidden beneath an embroidered robe laid on a bed, a pouch of silver beside it, candlelight",
+   "names": [
+    "Giả mang thai"
+   ],
+   "ids": []
+  },
+  {
+   "key": "danh-co",
+   "cat": "tai-nghe",
+   "pri": 2,
+   "scene": "a go board mid-game, one hand in a golden yellow dragon-embroidered sleeve and one in a pink silk sleeve placing stones",
+   "names": [
+    "Đánh cờ với Hoàng thượng"
+   ],
+   "ids": []
+  },
+  {
+   "key": "ve-tranh",
+   "cat": "tai-nghe",
+   "pri": 3,
+   "scene": "a fine brush painting chrysanthemums and a regal robe on a silk scroll, paint dishes around, no face visible",
+   "names": [
+    "Vẽ chân dung tặng Thái hậu"
+   ],
+   "ids": []
+  },
+  {
+   "key": "lat-the",
+   "cat": "sung-ai",
+   "pri": 1,
+   "scene": "a silver tray holding a row of blank green-headed jade name tablets (no writing on them), one tablet being turned face down by a slender hand, warm lamplight",
+   "names": [
+    "Tranh sủng",
+    "Rút thẻ bài",
+    "Đút lót lật thẻ",
+    "Giữ thẻ bài"
+   ],
+   "ids": [
+    "steal",
+    "block"
+   ]
+  },
+  {
+   "key": "chan-ngu-gia",
+   "cat": "sung-ai",
+   "pri": 2,
+   "scene": "a lantern-lit covered palace corridor at night, a lady's flowing pink silk sleeve in the foreground, an imperial palanquin's glowing lanterns approaching far away",
+   "names": [
+    "Chặn ngự giá"
+   ],
+   "ids": [
+    "road"
+   ]
+  },
+  {
+   "key": "dan-con-thinh-an",
+   "cat": "cham-con",
+   "pri": 2,
+   "scene": "a small child's hand held in a lady's jeweled hand, climbing white marble palace steps toward a golden hall",
+   "names": [
+    "Đưa con đến thỉnh an Hoàng thượng",
+    "Dẫn đi thỉnh an Hoàng thượng"
+   ],
+   "ids": []
+  },
+  {
+   "key": "chua-benh-con",
+   "cat": "cham-con",
+   "pri": 3,
+   "scene": "a bowl of medicine and a spoon beside a sleeping child's small embroidered pillow, a cool cloth, soft lamplight",
+   "names": [
+    "Chữa bệnh cho con",
+    "Xin thuốc cho *",
+    "Chăm sóc"
+   ],
+   "ids": []
+  },
+  {
+   "key": "an-thai",
+   "cat": "y-duoc",
+   "pri": 2,
+   "scene": "a small clay herb pot simmering on a charcoal stove, dried herbs and red dates on a tray",
+   "names": [
+    "Tự bào chế thuốc an thai",
+    "An thai"
+   ],
+   "ids": []
+  },
+  {
+   "key": "bao-tin-co-thai",
+   "cat": "sung-ai",
+   "pri": 3,
+   "scene": "a lady's hand resting on her silk robe beside a split pomegranate and a pair of tiny embroidered baby shoes",
+   "names": [
+    "Báo tin có thai"
+   ],
+   "ids": []
+  },
+  {
+   "key": "tro-chuyen-hoang-thuong",
+   "cat": "giao-thiep",
+   "pri": 1,
+   "scene": "two tea cups on a low table, one hand in a golden yellow dragon sleeve and one in a delicate silk sleeve, intimate study",
+   "names": [
+    "Tâng bốc",
+    "Nói thật lòng",
+    "Khen tài nghệ nàng",
+    "Trò chuyện",
+    "Hỏi chuyện"
+   ],
+   "ids": []
+  },
+  {
+   "key": "xin-an-dien",
+   "cat": "giao-thiep",
+   "pri": 2,
+   "scene": "two silk sleeves raised in a deep curtsy before golden throne steps with a dragon carpet",
+   "names": [
+    "Xin ân điển",
+    "Khất bổng lộc",
+    "Cầu xin Hoàng thượng",
+    "Xin Hoàng thượng ân xá"
+   ],
+   "ids": []
+  },
+  {
+   "key": "ban-trieu-chinh",
+   "cat": "trieu-chinh",
+   "pri": 2,
+   "scene": "a hand pointing to a silk map of the empire spread over memorials on an imperial desk",
+   "names": [
+    "Bàn chuyện triều chính"
+   ],
+   "ids": []
+  },
+  {
+   "key": "xin-xam",
+   "cat": "le-nghi",
+   "pri": 2,
+   "scene": "a bamboo cylinder of fortune sticks with one stick sliding out, before a Buddhist altar with incense",
+   "names": [
+    "Xin xăm ở Phật đường"
+   ],
+   "ids": []
+  },
+  {
+   "key": "thinh-an",
+   "cat": "le-nghi",
+   "pri": 1,
+   "scene": "a pair of embroidered pearl shoes and the hem of a silk robe kneeling on a round cushion before a phoenix-carved dais",
+   "names": [
+    "Thỉnh an",
+    "Xin bái kiến",
+    "Xin yết kiến",
+    "Chào hỏi đúng lễ"
+   ],
+   "ids": []
+  },
+  {
+   "key": "xin-che-cho",
+   "cat": "giao-thiep",
+   "pri": 2,
+   "scene": "a young lady's hand clasped by an elder lady's hand wearing a large jade ring and gold nail guards",
+   "names": [
+    "Xin Thái hậu đỡ lời",
+    "Xin Hoàng hậu che chở",
+    "Nhờ giúp đỡ",
+    "Cầu xin",
+    "Nhờ người bên ngoài",
+    "Cầu xin quản sự",
+    "Che chở (đang bị bắt tội)",
+    "Nhờ * cầu xin",
+    "Nhờ con vào cung nói giúp"
+   ],
+   "ids": [
+    "xinhh"
+   ]
+  },
+  {
+   "key": "khieu-khich",
+   "cat": "hai-nguoi",
+   "pri": 3,
+   "scene": "a shattered porcelain tea cup and spilled tea on a polished palace floor, a silk fan dropped nearby",
+   "names": [
+    "Khiêu khích",
+    "Trút giận"
+   ],
+   "ids": []
+  },
+  {
+   "key": "tang-qua",
+   "cat": "giao-thiep",
+   "pri": 1,
+   "scene": "a carved gift box wrapped with red silk ribbon on a tray, a sprig of peony on top",
+   "names": [
+    "Tặng quà",
+    "Biếu quà",
+    "Biếu"
+   ],
+   "ids": [
+    "gift"
+   ]
+  },
+  {
+   "key": "nghe-len",
+   "cat": "muu-ke",
+   "pri": 1,
+   "scene": "an ear and jeweled hairpin pressed close to a paper lattice window with two glowing silhouettes talking inside",
+   "names": [
+    "Nghe lén câu chuyện",
+    "Dò la",
+    "Sai đi dò la",
+    "Nhờ dò tin",
+    "Sai tai mắt dò nơi ở",
+    "Mượn dịp dò tin"
+   ],
+   "ids": [
+    "spy"
+   ]
+  },
+  {
+   "key": "cai-do",
+   "cat": "muu-ke",
+   "pri": 2,
+   "scene": "a hand hiding a jade pendant inside an open lacquered clothes chest full of folded silks, candlelight",
+   "names": [
+    "Cài đồ vào rương nàng",
+    "Cài đồ vào rương",
+    "Vu oan"
+   ],
+   "ids": [
+    "plant",
+    "frame"
+   ]
+  },
+  {
+   "key": "luc-ruong",
+   "cat": "muu-ke",
+   "pri": 2,
+   "scene": "hands sifting through letters and papers in an open chest by candlelight",
+   "names": [
+    "Lục rương tìm chứng cứ",
+    "Tìm chứng cứ cha trung thành",
+    "Điều tra án cũ",
+    "Tìm chứng cứ minh oan",
+    "Hỏi chuyện cũ"
+   ],
+   "ids": []
+  },
+  {
+   "key": "thai-y",
+   "cat": "y-duoc",
+   "pri": 2,
+   "scene": "a physician's silk pulse pillow with a delicate wrist resting on it under a gauze cuff, a medicine box open beside",
+   "names": [
+    "Xin chữa bệnh",
+    "Truyền thái y",
+    "Mời làm thái y tâm phúc",
+    "Bài thuốc dễ thụ thai"
+   ],
+   "ids": []
+  },
+  {
+   "key": "boc-thuoc",
+   "cat": "y-duoc",
+   "pri": 3,
+   "scene": "a small brass scale weighing herbs beside an open medical book and a wall of herb drawers",
+   "names": [
+    "Học hỏi y lý",
+    "Tự bốc thuốc"
+   ],
+   "ids": []
+  },
+  {
+   "key": "so-thi-tam",
+   "cat": "muu-ke",
+   "pri": 3,
+   "scene": "an open bound register with columns of abstract marks and a silver ingot resting on it, red tassel bookmark",
+   "names": [
+    "Hỏi sở thích Hoàng thượng",
+    "Xem sổ thị tẩm",
+    "Hối lộ Kính sự phòng sửa sổ"
+   ],
+   "ids": []
+  },
+  {
+   "key": "mua-hang",
+   "cat": "buon-ban",
+   "pri": 1,
+   "scene": "a peddler's tray of palace wares: rolls of silk, jade bracelets, a ginseng root and little perfume bottles",
+   "names": [
+    "Mua *",
+    "Mua thuốc bổ",
+    "Mua"
+   ],
+   "ids": []
+  },
+  {
+   "key": "thi-tham",
+   "cat": "giao-thiep",
+   "pri": 2,
+   "scene": "two silk fans held close together hiding a whisper in a blossoming garden, only hands and fans visible",
+   "names": [
+    "Tâm sự",
+    "Chia sẻ bí mật",
+    "Bàn tán về *",
+    "Cảnh báo nàng"
+   ],
+   "ids": []
+  },
+  {
+   "key": "hoi-han",
+   "cat": "giao-thiep",
+   "pri": 2,
+   "scene": "a bowl of warm tonic soup and a folded embroidered quilt presented on a tray at a doorway",
+   "names": [
+    "Hỏi han sức khỏe",
+    "Mang chăn ấm, thuốc men"
+   ],
+   "ids": []
+  },
+  {
+   "key": "ta-loi",
+   "cat": "giao-thiep",
+   "pri": 3,
+   "scene": "two hands offering a tea cup with both palms in a humble bow, head ornaments lowered",
+   "names": [
+    "Tạ lỗi",
+    "Nhún nhường",
+    "Tha lỗi"
+   ],
+   "ids": []
+  },
+  {
+   "key": "day-ho",
+   "cat": "hai-nguoi",
+   "pri": 2,
+   "scene": "ripples spreading on a lotus pond by a marble railing, a gold hairpin and a silk ribbon floating",
+   "names": [
+    "Đẩy nàng xuống hồ sen",
+    "Đẩy xuống hồ sen",
+    "Đẩy con nàng xuống hồ"
+   ],
+   "ids": [
+    "pushp",
+    "pond"
+   ]
+  },
+  {
+   "key": "ngang-chan",
+   "cat": "hai-nguoi",
+   "pri": 3,
+   "scene": "an embroidered shoe slyly stretched out on palace stairs as a silk hem sweeps past",
+   "names": [
+    "Ngáng chân nàng",
+    "Ngáng chân"
+   ],
+   "ids": [
+    "trip"
+   ]
+  },
+  {
+   "key": "ha-doc",
+   "cat": "hai-nguoi",
+   "pri": 2,
+   "scene": "a hand tipping white powder from a tiny ornate vial into a jade tea cup, candlelight",
+   "names": [
+    "Hạ độc",
+    "Hạ độc dần",
+    "Hạ độc con nàng"
+   ],
+   "ids": [
+    "poison",
+    "slowpoison",
+    "kpoison"
+   ]
+  },
+  {
+   "key": "xa-huong",
+   "cat": "hai-nguoi",
+   "pri": 3,
+   "scene": "a hand tucking a dark musk pod into an embroidered scent sachet, incense burner beside",
+   "names": [
+    "Bỏ xạ hương"
+   ],
+   "ids": [
+    "musk"
+   ]
+  },
+  {
+   "key": "tung-tin",
+   "cat": "muu-ke",
+   "pri": 2,
+   "scene": "a folded note slipped under a palace door at night, lantern light through the crack",
+   "names": [
+    "Tung tin đồn",
+    "Ly gián",
+    "Lén báo tin cho *"
+   ],
+   "ids": [
+    "rumor",
+    "lygian"
+   ]
+  },
+  {
+   "key": "to-giac",
+   "cat": "muu-ke",
+   "pri": 2,
+   "scene": "a written accusation and a bundle of evidence on a lacquer tray raised in two hands before a throne",
+   "names": [
+    "Tố giác",
+    "Tố tội thật",
+    "Tố vượt phẩm",
+    "Bóc chuyện tư tình",
+    "Tố lỗi với chủ",
+    "Dọa tố đối thực"
+   ],
+   "ids": [
+    "accuse",
+    "tocao",
+    "vp",
+    "expose"
+   ]
+  },
+  {
+   "key": "ket-giao",
+   "cat": "giao-thiep",
+   "pri": 2,
+   "scene": "two hands raising small gold wine cups to toast under blossoming plum branches",
+   "names": [
+    "Kết giao",
+    "Kết minh"
+   ],
+   "ids": [
+    "ally"
+   ]
+  },
+  {
+   "key": "mua-chuoc-ba-do",
+   "cat": "muu-ke",
+   "pri": 4,
+   "scene": "silver ingots set beside an empty swaddling cloth in a carved cradle, dim lantern",
+   "names": [
+    "Mua chuộc bà đỡ"
+   ],
+   "ids": [
+    "catswap"
+   ]
+  },
+  {
+   "key": "bong-con",
+   "cat": "cham-con",
+   "pri": 4,
+   "scene": "a lady's jeweled arms gently holding a swaddled baby in red brocade",
+   "names": [
+    "Xin bế con nàng về nuôi"
+   ],
+   "ids": [
+    "takeaway"
+   ]
+  },
+  {
+   "key": "bua-chu",
+   "cat": "hai-nguoi",
+   "pri": 4,
+   "scene": "a small cloth doll pierced with needles hidden beneath a child's embroidered pillow",
+   "names": [
+    "Vu con nàng trù ẻo"
+   ],
+   "ids": [
+    "kframe"
+   ]
+  },
+  {
+   "key": "pha-viec-hoc",
+   "cat": "hai-nguoi",
+   "pri": 4,
+   "scene": "a child's copybook with spilled ink across it and a broken brush on a small desk",
+   "names": [
+    "Phá việc học"
+   ],
+   "ids": [
+    "ksab"
+   ]
+  },
+  {
+   "key": "huy-dung",
+   "cat": "hai-nguoi",
+   "pri": 3,
+   "scene": "a slender hand opening a small jeweled powder box beside an ointment jar on a dressing table, a bronze mirror turned away, night",
+   "names": [
+    "Hủy dung"
+   ],
+   "ids": [
+    "huydung"
+   ]
+  },
+  {
+   "key": "buon-ban-len",
+   "cat": "buon-ban",
+   "pri": 3,
+   "scene": "bolts of silk, an abacus and a pouch of coins on a cloth spread in a quiet palace alley",
+   "names": [
+    "Buôn bán lén trong cung"
+   ],
+   "ids": []
+  },
+  {
+   "key": "dang-bac",
+   "cat": "trieu-chinh",
+   "pri": 4,
+   "scene": "an open chest of silver ingots presented before the gate of the imperial treasury",
+   "names": [
+    "Dâng bạc vào quốc khố"
+   ],
+   "ids": []
+  },
+  {
+   "key": "phong-tuoc",
+   "cat": "trieu-chinh",
+   "pri": 4,
+   "scene": "an imperial edict of yellow silk rolled on a tray with a jade seal (no writing visible)",
+   "names": [
+    "Xin phong tước cho cha",
+    "Tâu xin cho người của cha"
+   ],
+   "ids": []
+  },
+  {
+   "key": "mat-thu",
+   "cat": "muu-ke",
+   "pri": 4,
+   "scene": "a tiny folded letter hidden inside an open enamel rouge compact",
+   "names": [
+    "Gửi mật thư về Nam Chiếu"
+   ],
+   "ids": []
+  },
+  {
+   "key": "phong-tuc",
+   "cat": "trieu-chinh",
+   "pri": 4,
+   "scene": "ornate southern-style silver jewelry and a woven brocade beside an unrolled map",
+   "names": [
+    "Giảng giải phong tục Nam Chiếu"
+   ],
+   "ids": []
+  },
+  {
+   "key": "dang-so",
+   "cat": "trieu-chinh",
+   "pri": 3,
+   "scene": "a folded memorial in a brocade cover on a tray carried in both hands, palace hall",
+   "names": [
+    "Dâng sớ lật án",
+    "Nhờ * đưa thư kêu oan",
+    "Dâng thư lên Hoàng thượng"
+   ],
+   "ids": []
+  },
+  {
+   "key": "thi-tai-nu",
+   "cat": "hoc-tap",
+   "pri": 4,
+   "scene": "rows of low desks with paper and brushes in a grand academy hall, scrolls hanging",
+   "names": [
+    "Dự thi Tài nữ ở Hàn lâm viện"
+   ],
+   "ids": []
+  },
+  {
+   "key": "khac-sach",
+   "cat": "hoc-tap",
+   "pri": 4,
+   "scene": "carved woodblocks for printing and a stack of freshly bound books",
+   "names": [
+    "Xin khắc in sách của cha"
+   ],
+   "ids": []
+  },
+  {
+   "key": "liec-mat",
+   "cat": "tu-tinh",
+   "pri": 4,
+   "scene": "a round silk fan lowered slightly in a garden, a man's dark blue sleeve passing in the background",
+   "names": [
+    "Liếc mắt đưa tình"
+   ],
+   "ids": []
+  },
+  {
+   "key": "trao-khan",
+   "cat": "tu-tinh",
+   "pri": 4,
+   "scene": "a hand offering an embroidered handkerchief to another hand beside a rockery at dusk",
+   "names": [
+    "Trao khăn tay"
+   ],
+   "ids": []
+  },
+  {
+   "key": "hen-gap",
+   "cat": "tu-tinh",
+   "pri": 4,
+   "scene": "a quiet moonlit rock garden corner with a single lantern on a stone bench",
+   "names": [
+    "Hẹn gặp riêng"
+   ],
+   "ids": []
+  },
+  {
+   "key": "dut-tinh",
+   "cat": "tu-tinh",
+   "pri": 4,
+   "scene": "golden scissors cutting a red silk thread tied between two jade pendants",
+   "names": [
+    "Cắt đứt"
+   ],
+   "ids": []
+  },
+  {
+   "key": "pha-thai",
+   "cat": "y-duoc",
+   "pri": 5,
+   "scene": "a dark bowl of bitter medicine on a table at night, single guttering candle",
+   "names": [
+    "Uống thuốc phá thai"
+   ],
+   "ids": []
+  },
+  {
+   "key": "thu-toi",
+   "cat": "le-nghi",
+   "pri": 4,
+   "scene": "gold hairpins and jewels removed and laid on the stone floor before a palace hall, a hem kneeling",
+   "names": [
+    "Thú tội với Hoàng thượng",
+    "Quỳ xin tha"
+   ],
+   "ids": []
+  },
+  {
+   "key": "hau-thuoc",
+   "cat": "hau-ha",
+   "pri": 3,
+   "scene": "a medicine bowl on a tray beside a bed with yellow dragon brocade curtains",
+   "names": [
+    "Hầu thuốc Hoàng thượng"
+   ],
+   "ids": []
+  },
+  {
+   "key": "gia-benh",
+   "cat": "muu-ke",
+   "pri": 3,
+   "scene": "closed bed curtains with an untouched medicine bowl on the table and a hidden cosmetic powder box",
+   "names": [
+    "Giả bệnh",
+    "Cáo bệnh"
+   ],
+   "ids": []
+  },
+  {
+   "key": "trong-rau",
+   "cat": "nghi-ngoi",
+   "pri": 4,
+   "scene": "neat rows of green vegetables in a small courtyard bed by an old palace wall, a small hoe",
+   "names": [
+    "Trồng rau"
+   ],
+   "ids": []
+  },
+  {
+   "key": "xuat-gia",
+   "cat": "le-nghi",
+   "pri": 5,
+   "scene": "a lock of long black hair, scissors and prayer beads laid on a grey nun's robe",
+   "names": [
+    "Xuất gia",
+    "Xuất gia, kết thúc kiếp này"
+   ],
+   "ids": []
+  },
+  {
+   "key": "giat-do",
+   "cat": "hau-ha",
+   "pri": 1,
+   "scene": "wooden basins of colourful silk garments by a palace well, sleeves rolled, soap beans",
+   "names": [
+    "Giặt đồ"
+   ],
+   "ids": []
+  },
+  {
+   "key": "nghi-tay",
+   "cat": "nghi-ngoi",
+   "pri": 2,
+   "scene": "a moment of rest: a cup of tea set on a stack of folded laundry baskets in a sunny courtyard",
+   "names": [
+    "Nghỉ tay một lát"
+   ],
+   "ids": []
+  },
+  {
+   "key": "dang-tra",
+   "cat": "hau-ha",
+   "pri": 1,
+   "scene": "a hand pouring tea from a porcelain teapot into a cup beside a plate of pastries",
+   "names": [
+    "Dâng trà, hầu điểm tâm",
+    "Hầu trà khi ngự giá",
+    "Rót rượu gần ngự tọa"
+   ],
+   "ids": []
+  },
+  {
+   "key": "theo-hau",
+   "cat": "hau-ha",
+   "pri": 2,
+   "scene": "a maid's hand carrying a round lantern following a lady's long embroidered train down a corridor",
+   "names": [
+    "Theo hầu chủ",
+    "Việc chủ sai",
+    "Đứng sau hầu chủ"
+   ],
+   "ids": []
+  },
+  {
+   "key": "linh-do",
+   "cat": "hau-ha",
+   "pri": 3,
+   "scene": "baskets of charcoal, bundles of red candles and bolts of fabric stacked at a storeroom counter",
+   "names": [
+    "Lĩnh đồ ở Nội vụ phủ"
+   ],
+   "ids": []
+  },
+  {
+   "key": "hoc-le",
+   "cat": "hoc-tap",
+   "pri": 2,
+   "scene": "a tea tray balanced on two hands over a row of kneeling cushions, a lesson hall",
+   "names": [
+    "Học lễ nghi với cô cô",
+    "Dạy lễ nghi"
+   ],
+   "ids": []
+  },
+  {
+   "key": "theu-thua",
+   "cat": "hoc-tap",
+   "pri": 2,
+   "scene": "an embroidery hoop with a half-stitched peony and a brush and copybook under an oil lamp",
+   "names": [
+    "Luyện thêu thùa, chữ nghĩa"
+   ],
+   "ids": []
+  },
+  {
+   "key": "so-sach",
+   "cat": "trieu-chinh",
+   "pri": 3,
+   "scene": "an open ledger, an abacus and keys on a ribbon on a desk in a storeroom",
+   "names": [
+    "Quản sổ sách trong cung"
+   ],
+   "ids": []
+  },
+  {
+   "key": "binh-phong",
+   "cat": "hau-ha",
+   "pri": 3,
+   "scene": "a painted folding screen with soft candle glow and two silhouettes behind it",
+   "names": [
+    "Lui sau bình phong"
+   ],
+   "ids": []
+  },
+  {
+   "key": "day-con-hoc",
+   "cat": "cham-con",
+   "pri": 2,
+   "scene": "a mother's hand guiding a small child's hand holding a brush on paper",
+   "names": [
+    "Dạy học",
+    "Dạy chữ",
+    "Dạy * học chữ",
+    "Tự dạy con tài nghệ",
+    "Tự dạy con *",
+    "Học với thầy",
+    "Mời thầy riêng",
+    "Mời thầy kèm con ôn luyện trước",
+    "Mời thầy dạy *",
+    "Thôi mời thầy *",
+    "Xin Hoàng thượng cử Đại học sĩ",
+    "Xin Thái hậu cho học cùng"
+   ],
+   "ids": []
+  },
+  {
+   "key": "vo-nghe",
+   "cat": "cham-con",
+   "pri": 4,
+   "scene": "a small child's bow and arrows and a little saddle on a rack in a training yard",
+   "names": [
+    "Mời thầy cưỡi ngựa bắn cung",
+    "Thôi học võ"
+   ],
+   "ids": []
+  },
+  {
+   "key": "canh-con",
+   "cat": "cham-con",
+   "pri": 3,
+   "scene": "sleeping children's cradle with a lantern beside and a maid's hand tucking the quilt",
+   "names": [
+    "Canh giữ các con"
+   ],
+   "ids": []
+  },
+  {
+   "key": "tham-con",
+   "cat": "cham-con",
+   "pri": 3,
+   "scene": "a tiger toy, a letter and a box of sweets on a tray at a child's door",
+   "names": [
+    "Về tẩm cung thăm con",
+    "Gửi thư, quà thăm con"
+   ],
+   "ids": []
+  },
+  {
+   "key": "hon-su",
+   "cat": "cham-con",
+   "pri": 4,
+   "scene": "a red phoenix wedding crown and red betrothal cards on a lacquer tray",
+   "names": [
+    "Bàn hôn sự",
+    "Gả * vào nhà quyền thần",
+    "Hứa gả cho *"
+   ],
+   "ids": []
+  },
+  {
+   "key": "chon-nguoi",
+   "cat": "trieu-chinh",
+   "pri": 3,
+   "scene": "a row of wooden name tablets on a desk with a register and a brush",
+   "names": [
+    "Thêm cung nữ",
+    "Thêm thái giám",
+    "Đổi người",
+    "Tiến cử",
+    "Xem người"
+   ],
+   "ids": []
+  },
+  {
+   "key": "tra-khao",
+   "cat": "trieu-chinh",
+   "pri": 4,
+   "scene": "a long wooden punishment paddle on a bench in a stern stone courtyard",
+   "names": [
+    "Tra khảo",
+    "Xử tội",
+    "Chưởng sự tra xét cung nữ"
+   ],
+   "ids": []
+  },
+  {
+   "key": "an-xa",
+   "cat": "le-nghi",
+   "pri": 4,
+   "scene": "an open hand releasing a caged songbird by a palace window",
+   "names": [
+    "Ân xá"
+   ],
+   "ids": []
+  },
+  {
+   "key": "den-tham",
+   "cat": "di-lai",
+   "pri": 2,
+   "scene": "vermilion palace doors opening onto a courtyard with lanterns, a silk sleeve at the threshold",
+   "names": [
+    "Mời đến cung ta",
+    "Đến cung nàng thăm",
+    "Đến gặp *",
+    "Đến chỗ hắn"
+   ],
+   "ids": []
+  },
+  {
+   "key": "len-vao",
+   "cat": "muu-ke",
+   "pri": 3,
+   "scene": "a dark palace corridor at night, a slipper stepping softly past a sleeping guard's lantern",
+   "names": [
+    "Lẻn vào"
+   ],
+   "ids": []
+  }
+ ]
+}

@@ -1,0 +1,16 @@
+# BRIEF event-art-style (Foreman C s12, 17/11 ~03:45Z) — sonnet art worker
+PRIORITY #1 CHECK: OD L541-545 (act pictures: NO visible face of any character; dark bg = scheming, light = normal) + START_ART STYLE_ANCHOR | main: event/act/opt pictures via EVENTS.json/ACTS.json + kitOptPic; intro panels img/intro/*.webp (49 live) | review/* none for this audit | claims none (new).
+
+READ FIRST in full: dev/rules/START_CORE.md, dev/rules/START_WORKER.md, dev/rules/START_ART.md, dev/art/OWNER_ART_RULES.md (sections on act/event pictures), dev/OWNER_DECISIONS.md lines 541-545.
+
+OWNER (verbatim, 17/11 ~03:42Z, with screenshot dev/handover/refs/owner-event-style-ref-1117.jpg = event "Kẻ hầu xin", picture of a maid seen from behind carrying laundry in a well courtyard):
+"Tao thấy có một số cái ảnh nền của ảnh tại nền bản minh họa của sự kiện á, mày vẽ không có giống với phong cách game của tao. Mày Mày nhìn cái hình tao gửi nha. Thứ nhất á, cái phong cách ở đây có nghĩa là không có thấy mặt của những cái nhân vật ở trong cái hình vẽ. Thứ hai á, là cái màu sắc. Thứ ba là cái nét vẽ."
+
+The picture in her screenshot IS the game's style (anchor): (1) no character face visible (back view, hands, silhouettes, objects); (2) colours: soft, warm, light pastel palette, gentle daylight, low contrast (not saturated cinematic red/gold, not dramatic sunset/teal-orange); (3) brushwork: soft painterly guofeng illustration, not hyper-detailed photo-real/3D cinematic rendering.
+
+TASK (whole family, LUẬT SỬA CẢ NHÓM):
+1. Find the anchor file (the Kẻ hầu xin picture: event key in all4x.js line ~2421 → EVENTS.json/picture map) + 3-4 more older event pictures the owner already accepted in the same look (light and dark tone) → anchor set.
+2. AUDIT every event picture, act picture, option picture (opt-*), origin intro panel (img/intro/*, 49 files incl. G1–G7), night/scene picture on the CDN against the anchor: flag (a) any visible face, (b) colour off (saturated / cinematic / dramatic), (c) rendering off (photo-real / heavy detail). Foreman C's first look at img/intro: many panels show faces (ch-1, ch-h3, cn-1, cnv-2, dtq-2, muoi-1, td-2, thd-2 …) and are saturated cinematic → expect most intro panels + opt-giu-chan-hoang-thuong to fail. Output: dev/handover/reports/event-art-style.md table key | faces y/n | colour | rendering | verdict, + contact sheets ≤1100 px of the failures.
+3. SAMPLES first: redo 4 failing pictures (2 light, 2 dark tone; at least 1 intro panel) with Magnific gpt-2-6, anchor pictures as style references, same scene content, no faces. Sheet OLD | NEW | ANCHOR (≤1100 px) → report to Foreman C (session_011xDdVRmXR4LujCFCn91BWX) and STOP. Never send to the owner. Upload nothing live before C says GO (put samples under img/_review/event-art-style/).
+4. After GO: redo all failures, upload in place (same keys), never write FIGURES.json/TN.json/any manifest; update the report; tell C.
+Rules: Magnific gpt-2-6 only; look at every image yourself; images on the CDN not in git; sparse worktree, fetch --depth=30 under flock /home/user/wt/fetch.lock; push only your own paths to the handover branch. Rollover at START_CTX % + 25 % of the window, ceiling 60 %: write handover in your report, tell C (C opens successor).

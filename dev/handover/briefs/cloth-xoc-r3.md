@@ -1,0 +1,13 @@
+PRIORITY #1 CHECK ('xốc xếch crease cloth'): OD 0 (owner words are under 'lôi thôi'/'nhăn'/'nhàu', OD ~23:20Z + ~23:45Z) | main none | review/* review/cloth-xoc b6a9824 (r2 WIP, REUSE it) | claims cloth-xoc r1/r2 session_01UV1SzgpiW9BQi7g48amRNv (rolled over)
+# cloth-xoc r3 (successor of session_01UV1SzgpiW9BQi7g48amRNv) — MAIN s39
+Read first: dev/handover/briefs/s39-common.md (all laws), dev/handover/reports/cloth-xoc.md IN FULL (r1 + r2 handover), dev/art/LOOK_DECALS.md, OD lines 17/11 ~23:20Z, ~23:45Z, ~00:00Z, ~00:05Z verbatim (dev/OWNER_DECISIONS.md).
+Continue on review/cloth-xoc from b6a9824. Effect stays OFF by default (BAL.looks.xoc.on=0).
+TASK 1 — crease LOOK (twice FAILED by main: r1 uniform ripple/zebra glass; r2 swirly smears, drag lines bend into arcs). Target = real crumpled silk/linen at game size:
+- Each crease = soft gaussian dark band (multiply, robe's own hue darkened, low contrast) with a thin lighter ridge on one side (screen/soft-light) — like painted fold shading. NO displacement noise / swirl / turbulence textures at all; straight or gently tapered strokes, never arcs or loops.
+- Placement by body: fan of short folds out of the waist tie, bunched horizontal wrinkles just above the belt and at the hem, crumples at the inner elbow/sleeve bend, 1–2 diagonal drag lines shoulder→waist; flat areas mostly clean.
+- Keep r2's protect map (skin/hair/hands/pendants/held items never touched) and hem/lapel-only warp.
+- Levels 1/2/3 (BAL.looks.xoc.lv) = count + depth; all three clearly different on Fold.
+- LOOK at your own renders on 3+ figures (cream, dark, patterned robe) before reporting; if it still reads as glass/zebra, keep iterating — do not report a FAIL look as ready.
+TASK 2 — stain-decal layer (plan in report §r2): reuse the cloth mask, anchors chest/sleeve/hem, clip to cloth, multiply/soft blend so folds show, levels + positions in BAL.looks.stain, hook lkStain (tra/uot/bun). Decal art comes from look-decals worker session_01UV1SzkPHQVHUikWN6sxffa (CDN img/fx-stain-*.webp); until it exists use a temporary test blob only in tests, never in samples to the owner.
+SAMPLES for owner (after you judge them good): one image per level, 1200 px wide, waist-up crop on top (big) + small full figure, Vietnamese label only ("Áo xốc xếch · 1 nhẹ"); CDN img/_review/cloth-xoc/xoc-0..3.png (overwrite). Then stain samples the same way when decals exist.
+Tests: dev/test quickcheck + one-core-guard + your crease/stain unit tests. Report: append r3 to dev/handover/reports/cloth-xoc.md; CLAIMS row; send_message MAIN s39 session_01UV1Szhxyd4MUci6x4DtVQ3 one line "SẴN SÀNG KIỂM MẪU cloth-xoc <sha>". Rollover rules as in s39-common.

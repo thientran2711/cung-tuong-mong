@@ -1,0 +1,95 @@
+# D3e flags (v0 view). cat: A=reserved item at lower rank, B=banned/plain item at t6-8, C=t6/t7 holds higher-rank item, S=soft below rank (t4/t5 plain), X=two items
+c01_t6 B handkerchief
+c01_t7 B loose blossom branch
+c01_t8 S plain folding fan (t4-level) at t8
+c02_t7 C+X phoenix round fan (t8 item) + scroll in other hand
+c02_t4 S cherry branch at t4
+c03_t7 B handkerchief (c03 LIST ONLY)
+c04_t6 B handkerchief
+c05_t6 B handkerchief
+c05_t7 C phoenix round fan (t8 item) at t7
+c06_t4 S handkerchief
+c06_t5 S plain book
+c06_t6 B plain painted folding fan at t6
+c06_t7 B loose blossom branch
+c07_t4 S handkerchief
+c07_t5 S plain book
+c07_t6 B loose blossom branch
+c08_t4 S handkerchief
+c08_t5 S plain book
+c08_t6 B loose blossom branch
+c09_t4 S handkerchief
+c09_t5 S plain book
+c09_t6 B loose peony branch
+c10_t5 S handkerchief
+c10_t6 B plain book
+c10_t7 B loose blossom branch
+c11_t4 S handkerchief
+c11_t5 S plain book
+c11_t6 B loose blossom branch
+c12_t5 S plain book
+c12_t6 B loose blossom branch
+c12_t8 S small plain folding fan at t8
+c13_t4 S plum branch (already moved low by W65)
+c14_t4 S no item (hands clasped) - one item required
+c14_t6 B flower basket
+c14_t7 B flower basket
+c14_t8 B flower basket (small, low)
+c15_t4 N lantern (neutral)
+c15_t5 S blossom branch at t5
+c15_t6 B loose blossom branch
+c15_t8 B loose blossom branch
+c16_t6 B loose lotus flower
+c16_t7 B loose lotus flower
+c16_t8 ? no visible item (check)
+c17_t6 B loose blossom branch
+c17_t7 B loose peony flower
+c17_t8 S plain folding fan at t8
+c18_t6 B loose blossom branch
+c18_t7 B loose peony flower
+c18_t8 S plain gold folding fan at t8
+c19_t6 B loose blossom branch
+c19_t7 B loose peony flower
+c19_t8 S plain folding fan at t8
+c20_t6 B loose blossom branch
+c20_t7 S painted folding fan at t7
+c20_t8 S painted folding fan at t8
+c21_t5 S loose peony flower at t5
+c21_t6 S painted scroll (t3-t5 kind) at t6
+c21_t7 S painted folding fan at t7
+c21_t8 S painted folding fan at t8
+c22_t4 S blossom branch at t4
+c22_t6 B handkerchief
+c22_t7 S plain scroll at t7
+c22_t8 S painted folding fan at t8
+c23_t4 S blossom branch at t4
+c23_t6 B handkerchief
+c23_t7 S gilded folding fan at t7
+c23_t8 S gilded folding fan at t8
+c24_t6 S plain folding fan at t6
+c24_t7 B loose blossom branch
+c24_t8 S folding fan at t8
+c25_t6 S jade coin pendant held (neutral)
+c25_t7 B loose blossom branch
+c25_t8 S gold folding fan at t8
+c26_t6 B loose blossom branch
+c26_t7 B loose peony flower
+c26_t8 S gold folding fan at t8
+c27_t3 ? no item
+c27_t6 S jade pendant held
+c27_t7 B loose peony flower
+c27_t8 S gold folding fan at t8
+c28_t3 ? no item visible
+c28_t6 S jade pendant held
+c28_t7 B loose peony flower
+c28_t8 S folding fan at t8
+c29_t3 ? no item
+c29_t6 B loose blossom branch
+c29_t8 S folding fan at t8
+c30_t6 S jade pendant held
+c30_t7 C phoenix round fan (t8 item) at t7 (probable)
+c30_t8 S folding fan at t8
+c31_t6 S jade pendant held
+c31_t8 S folding fan at t8
+c32_t6 S jade pendant held
+c32_t8 S folding fan at t8

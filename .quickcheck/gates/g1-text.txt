@@ -1,0 +1,2 @@
+{"sites":0,"early":0,"per":{}}
+PASS: no player text types an amount or a cut that lives in BAL (eff / road / arc amounts, loy / ducLv / quyLv … cuts)

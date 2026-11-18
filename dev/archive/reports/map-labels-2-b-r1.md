@@ -1,0 +1,11 @@
+# map-labels-2-b-r1 — review (SMALL tier, delta on review/dudo-lock @ 2cd2eb91)
+Reviewed review/map-labels-2-b @ 1deaf9cb. Verdict: PASS (sha = tip of review/map-labels-2-b-r1).
+GO-LIVE ORDER: must go live AFTER or together with dudo-lock-r1 (2cd2eb91 is an ancestor; map-labels-2-b is built on it).
+
+Checks (my own run, node dev/test/map-labels-2.js index.html OUT 755x1000,1180x820 <old main index.html>, KHAC=1 and KHAC=4):
+1. A ca so: hotspot now on the NE princes' court (jplx.js acs box .742,.098 anchor .79,.16). Seen in shots: label on the NE walled court, lock mark kept. All 29 spots listed, others untouched (jplx diff = acs line only); spot-check vs owner-acaso-map.jpg: Vinh Tho / Duc Khon / Tru Tu / Ham Phuc each on own court, no label floating between them.
+2. Grey state: at 1 khac, open-but-too-far places (Can Ninh, Ngu hoa vien, Duc Tho, Tan Gia kho, Day nha cung nhan, Thai y vien, Ham An, Khai Tuong, Canh Phuc) = one grey label on map AND grey tile in Danh sach (.awalk); still tappable (cursor/pointer-events kept, dudo-lock walk-spill untouched). Real locks (.agrey: Can Chinh, Duong Hoa, A ca so, Dong cung, Thuong thu phong, Ngoai trieu) keep normal label + lock + reason; reachable places normal. At 4 khac: nothing grey (list tiles only agrey for the 2 real locks). Fold + iPad.
+3. 755x1000 + 1180x820 at 1 and 4 khac: 29 spots, 0 page errors; old-save (main index.html save) loads ok at both; dev/test/dudo-lock.js: page errors 0, locks per rule.
+Fix made by reviewer (1 commit): dev/kit/KIT.md line ~1874 still said awalk is "not greyed" (contradicts this branch; OD:L1096 rule 4 + canon overwrite) -> rewritten in place to the one grey state. No code change.
+Notes (not blockers): (a) in Danh sach a grey walk tile and a rule-lock tile share the same grey; they differ by the reason text/lock rows, as before. (b) dudo-lock.js prints "r3:NOTIN(card:Khai Tuong cung)" in the visit line — comes from dudo-lock base, not this delta; whoever reviews dudo-lock should note it. (c) worker's seen-once transient label "Thai giam ???" on Vinh Tho at first render: not reproduced in my 4 runs. (d) Duc Tho building under label unidentified in the worker's table ("?") — pre-existing, not part of this fix.
+ROLLOVER: START_CTX ~5%; finished far below ceiling, no handover needed.

@@ -1,0 +1,8 @@
+img/fig-emperor-a18-1.webp
+img/fig-emperor-a18-2.webp
+img/fig-emperor-a26-1.webp
+img/fig-emperor-a26-2.webp
+img/fig-emperor-a36-1.webp
+img/fig-emperor-a36-2.webp
+img/fig-emperor-a51-1.webp
+img/fig-emperor-a51-2.webp

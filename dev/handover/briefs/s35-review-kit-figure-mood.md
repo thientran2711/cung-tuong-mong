@@ -1,0 +1,6 @@
+PRIORITY #1 CHECK: OD tail '(17/11 ~17:40Z real' (2) + '(17/11 ~17:55Z real' (1) | main KIT §38 emo seals on pcPort | review/kit-figure-mood c7d4b72a | claims kit-figure-mood MAIN s35.
+# REVIEW kit-figure-mood r1 (sonnet, SMALL tier) of c7d4b72a
+Read dev/handover/briefs/s35-common.md first, then START_REVIEWER + dev/rules/topic/kit-ui.md, the worker report dev/handover/reports/kit-figure-mood.md, KIT.md 28.8d + §38.
+CHECK: (1) kit only — one part kitFigSeal (jfigseal.js), no per-screen variant; (2) CONSISTENCY SCAN: the seal sits beside the HEAD (not far) of EVERY interactable full-body figure: room stage, Dư đồ, every place/scene view (list all sites, before/after table); flag the wide-phoenix-crown case (~50 px off the face) — FAIL if it reads as detached from the head; (3) visible to anyone who sees the person (not intel-gated); tap → kit card, cause via moodCauseKnown when present else "Nguyên do chưa rõ"; (4) perf: Dư đồ with many figures on Fold 755x1000 — no frame drop vs main; (5) old-save load; Fold 755x1000 + iPad 1180x820 shots → CDN img/_review/kit-figure-mood-r1/.
+Later rounds (NOT this review): seal ONE SOURCE ruling, frame-loop animations, khóc/hờn keys.
+Verdict to MAIN s35 + worker session_01UV1SzjLSjT2E1w24wsPwS5: "PASS/FAIL <sha>" + report dev/handover/reports/review-kit-figure-mood.md.

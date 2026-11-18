@@ -1,0 +1,13 @@
+key	gen id	status
+maid-m25-ty1-a51	JNfpdIxOq4	generated, looked OK, processed locally; NOT uploaded
+maid-m26-ty1-a51	rgdGVksxtc	generated, NOT looked/processed/uploaded (agent stopped by owner order)
+maid-m01-ty2-a51	LwoYeSSswO	generated, NOT looked/processed/uploaded (agent stopped by owner order)
+maid-m02-ty2-a51	O6CeaZ9ynm	generated, NOT looked/processed/uploaded (agent stopped by owner order)
+maid-m03-ty2-a51	bxV307K5Y2	generated, NOT looked/processed/uploaded (agent stopped by owner order)
+maid-m04-ty2-a51	xSXzXlMjfW	generated, NOT looked/processed/uploaded (agent stopped by owner order)
+maid-m05-ty2-a51	aFAJA56fSh	generated, NOT looked/processed/uploaded (agent stopped by owner order)
+maid-m06-ty2-a51	s78WI14l8e	generated, NOT looked/processed/uploaded (agent stopped by owner order)
+maid-m07-ty2-a51	DoJkOM2pcl	generated, NOT looked/processed/uploaded (agent stopped by owner order)
+maid-m08-ty2-a51	Xm4j6MGBfo	generated, NOT looked/processed/uploaded (agent stopped by owner order)
+maid-m09-ty2-a51	EbnPcC6uuO	generated, NOT looked/processed/uploaded (agent stopped by owner order)
+# STOPPED 17/11 ~12:45Z by owner order. Nothing uploaded to img/_keep. Remaining ungenerated: ty2 m10-m26, ty3 m01-m26, (m26 ty1/m25 ty1 included above). Prompts: keys.tsv logic = a18 tier master + a36 face + m27 a51 age ref, jUBnWieLD0 uploaded ref.

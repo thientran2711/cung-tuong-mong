@@ -1,0 +1,112 @@
+/* ================= RELATION WEB, PALACE MAP, PRESENCE, TALK ================= */
+/* two bars between every pair: Thiện cảm (aff, -100..100, directional) and Oán (0..100, directional) */
+function aff(x,y){if(x===y)return 0;if(x===S)return S.rl[y.id]||0;if(y===S)return x.rel;return x.rl[y.id]||0}
+function affAdd(x,y,n){if(x===S){S.rl[y.id]=cl((S.rl[y.id]||0)+n,-100,100);return}if(y===S){x.rel=cl(x.rel+n,-100,100);return}x.rl[y.id]=cl((x.rl[y.id]||0)+n,-100,100)}
+function oan(x,y){if(!x||!y||x===y)return 0;if(x===S)return S.ro[y.id]||0;if(y===S)return x.oan||0;return x.ro[y.id]||0}
+function oanAdd(x,y,n){if(!x||!y||x===y)return;const c=v=>cl(Math.round(v),0,100);if(x===S){S.ro[y.id]=c((S.ro[y.id]||0)+n);return}if(y===S){x.oan=c((x.oan||0)+n);return}x.ro[y.id]=c((x.ro[y.id]||0)+n)}
+function rel(x,y){return aff(x,y)}
+/* a deed between a and t: both affections move; a harm leaves the victim with Oán (and a little on the doer) */
+function relAdd(x,y,n){if(!x||!y||x===y)return;affAdd(x,y,n);affAdd(y,x,n);if(n<0){oanAdd(y,x,-n*.6);oanAdd(x,y,-n*.2)}else{oanAdd(y,x,-n*.3)}}
+function hostility(v,t){return oan(v,t)+Math.max(0,-aff(v,t))/2+(t===S?v.ghen/2:Math.max(0,(t.sung-v.sung)/3))+(rkOf(t)>=rkOf(v)?8:0)}
+function oanMonth(){for(const v of rivals){v.oan=Math.max(0,(v.oan||0)-2);for(const k in v.ro)v.ro[k]=Math.max(0,v.ro[k]-2)}for(const k in S.ro)S.ro[k]=Math.max(0,S.ro[k]-2)}
+
+/* houses: Phi and above head a palace; lower consorts live under a head. Same house: cannot harm or win over each other */
+function houseOf(p){return rkOf(p)>=4?key(p):(p.resHead!=null&&byKey(p.resHead)&&(byKey(p.resHead)===S?S.rank>=4:byKey(p.resHead).alive&&!byKey(p.resHead).out&&rkOf(byKey(p.resHead))>=4)?p.resHead:key(p))}
+function sameHouse(a,b){return a!==b&&houseOf(a)===houseOf(b)}
+function assignHouses(){const heads=consorts().filter(p=>rkOf(p)>=4);for(const p of consorts()){if(rkOf(p)>=4){p.resHead=null;continue}if(houseOf(p)!==key(p))continue;p.resHead=heads.length&&roll(70)?key(pick(heads.filter(h=>h!==p))||p):null}}
+function houseName(p){const h=byKey(houseOf(p));return h===S?"tẩm cung của ngươi":h===p?"cung riêng":"cung "+h.name}
+
+/* where everyone is this tuần: by role, trait, season and time of month */
+function palaceOf(p){if(p===S)return"home";if(p.queen)return"kn";const h=byKey(houseOf(p));return h===S?"home":"r"+h.id}
+function placeWhere(){const W={},sea=SEASON[S.month-1],spring=sea==="Xuân"||sea==="Thu";
+ const b=S.buoi||0;const e=b===2?pick(["dtd","dtd","dtd",has("datinh")?"vuon":"dtd"]):has("chamchinh")?pick(["thu","thu","thu",spring?"vuon":"thu"]):b===0?pick(["thu","thu","dtd"]):pick([spring?"vuon":"dtd","thu","vuon"]);W.emp=wet()&&e==="vuon"?"thu":e;W.th=S.thDead?null:"tn";
+ for(const v of rivals){if(!v.alive){continue}if(v.out){W[v.id]="lc";continue}if(v.confined){W[v.id]=palaceOf(v);continue}
+  const L=[[palaceOf(v),b===2?80:35],["vuon",(b===1?(spring?40:20):b===0?8:3)*(wet()?.25:1)],["tn",S.thDead?0:10],["tyv",v.preg||v.suc<50?15:3]];
+  if(qOn()&&!v.queen)L.push(["kn",b===0?55:5]);if(v.queen)L[0][1]+=30;
+  const w=L.map(x=>x[1]);let r=Math.random()*w.reduce((a,b)=>a+b),i=0;while(r>w[i]&&i<w.length-1){r-=w[i];i++}W[v.id]=L[i][0]}
+ S.where=W;npcEncounters()}
+function whereOf(p){if(p===S)return S.place||"home";return (S.where||{})[p.id]||palaceOf(p)}
+function together(a,b){return whereOf(a)===whereOf(b)}
+function placeName(k){return placeOf(k).n}
+function countAt(k){const W=S.where||{};let n=0;for(const v of rivals)if(v.alive&&!v.out&&W[v.id]===k)n++;if(W.emp===k&&["vuon","thu","dtd"].includes(k))n++;if(k==="tn"&&!S.thDead)n++;if(k==="home")n+=1+S.kids.filter(x=>x.alive).length;if(k==="tyv"||k==="ksp")n++;if(k==="lc")n+=Math.max(1,Math.min(3,rivals.filter(v=>v.alive&&v.out).length));return n}
+/* NPCs who share a place meet: small talk or friction, by the same bars */
+function npcEncounters(){const by={};for(const v of liveRivals(true)){const k=S.where[v.id];(by[k]=by[k]||[]).push(v)}
+ for(const k in by){const L=by[k];for(let i=0;i<L.length;i++)for(let j=i+1;j<L.length;j++){const a=L[i],b=L[j];if(!roll(30))continue;
+  if(oan(a,b)+oan(b,a)>40||a.ghen+b.ghen>110){oanAdd(a,b,3);oanAdd(b,a,3);affAdd(a,b,-2);affAdd(b,a,-2)}else{affAdd(a,b,2);affAdd(b,a,2)}}}}
+
+/* sending someone instead of going: same act, lower odds, the servant may be caught and confess */
+let ACTX={a:null,pen:0};
+function runAct(a,t,k,extra){const A2=ACT[k];if(!A2)return"";const sent=!together(a,t)&&!["accuse","vp","gift","steal","road","takeaway"].includes(k);const where=together(a,t)?placeName(whereOf(a)):"";
+ if(sameHouse(a,t)&&k!=="accuse")return a===S?"Người cùng cung, ngươi không thể ra tay hay lấy lòng. ":"";
+ const sv=sent?bestSent(a):null;ACTX={a,pen:sent?sentPen(sv)-(sv?srk(sv)*3:0):0,dom:ACTDOM[k]};let r="";try{r=A2.f(a,t,extra)}finally{ACTX={a:null,pen:0}}
+ const harm=!["ally","gift","spy"].includes(k);
+ if(sent&&sv&&!/bị lộ|bị bắt|phát giác|chặn kịp|từ chối/.test(r))servMerit(sv,2);if(sent&&harm&&roll(confessRisk(sv))){evA(t,a,1);r+=`${sv?sv.name:"Kẻ"} được ${NM(a)} sai đi bị bắt, khai ra chủ: ${NM(t)} nắm thêm 1 chứng cứ. `+servCaught(a,sv)}
+ if(sent&&sv)r=r.replace(/\(sai người đi\)/,"");
+ return r?(r.trim()+(sent?` (sai ${sv?sv.name:"người"} đi)`:where?` (tại ${where})`:"")+" "):""}
+function odA(a,b){return cl(Math.round(b+(a.suc<30?-15:0)-(ACTX.a===a?ACTX.pen:0)+(ACTX.a===a?lotB(a,ACTX.dom):0)),5,95)}
+
+/* the talk system: topics, by traits and bars; the same chat repeated in a month gives less */
+function chatF(v){S.chat=S.chat||{};const n=S.chat[v.id]||0;return 1/(1+n)}
+function chatMark(v){S.chat[v.id]=(S.chat[v.id]||0)+1}
+function topicOpts(v){const f=chatF(v),g=n=>Math.max(1,Math.round(n*f)),third=liveRivals(true).filter(x=>x!==v).sort((a,b)=>aff(v,a)-aff(v,b))[0];const A=[];
+ const same=sameHouse(S,v);
+ A.push({n:"Hỏi han sức khỏe",o:100,x:`thiện cảm +${g(4)}`,run:()=>{affAdd(v,S,g(4));chatMark(v);return `${v.name} cảm động. Thiện cảm +${g(4)}.`}});
+ const praise=v.trait==="Kiêu ngạo"||v.trait==="Tham vọng"?8:4;A.push({n:"Khen tài nghệ nàng",o:od(60+S.tai/5),x:`thiện cảm +${g(praise)}`,run:()=>{chatMark(v);if(roll(od(60+S.tai/5))){affAdd(v,S,g(praise));return `${v.name} tươi cười. Thiện cảm +${g(praise)}.`}affAdd(v,S,-2);return `${v.name} cho là ngươi giả lả. Thiện cảm -2.`}});
+ if(third)A.push({n:`Bàn tán về ${third.name}`,o:100,x:aff(v,third)<0?"nàng ghét người này, hợp chuyện":"nàng có thể mách lại",run:()=>{chatMark(v);if(aff(v,third)<0){affAdd(v,S,g(8));oanAdd(v,third,5);return `Hai người to nhỏ chuyện ${third.name}. Thiện cảm +${g(8)}.`}affAdd(v,S,-3);if(roll(50)){oanAdd(third,S,10);return `${v.name} đem lời ngươi kể lại với ${third.name}. ${third.name} oán ngươi +10.`}return `${v.name} lảng sang chuyện khác. Thiện cảm -3.`}});
+ A.push({n:"Chia sẻ bí mật",o:100,x:`thiện cảm +${g(10)}${v.malice>50?" · nàng có thể nắm thóp ngươi":""}`,run:()=>{chatMark(v);affAdd(v,S,g(10));if(v.malice>50&&roll(50)){evA(v,S,1);return `${v.name} lắng nghe chăm chú, ghi nhớ từng lời. Thiện cảm +${g(10)}.`}return `${v.name} cũng kể chuyện riêng. Thiện cảm +${g(10)}.`}});
+ A.push({n:"Nhờ giúp đỡ",o:100,x:aff(v,S)>=30?"nàng thân với ngươi":"cần thiện cảm 30",run:()=>{chatMark(v);if(aff(v,S)>=30){if(roll(50)&&v.bac>=30){ap(v,{bac:-30});apply({bac:30});return `${v.name} cho ngươi mượn 30 lượng.`}const x=liveRivals(true).filter(y=>y!==v)[0];if(x){evA(S,x,1);return `${v.name} kể cho ngươi một chuyện về ${x.name}: chứng cứ +1.`}}affAdd(v,S,-3);return `${v.name} khéo từ chối. Thiện cảm -3.`}});
+ const foe=liveRivals(true).filter(x=>x!==v&&oan(x,v)>=30)[0];
+ A.push({n:"Cảnh báo nàng",o:100,x:foe?`có kẻ đang oán nàng`:"không có căn cứ",run:()=>{chatMark(v);if(foe){affAdd(v,S,g(10));oanAdd(v,foe,10);return `Ngươi nhắc ${v.name} coi chừng ${foe.name}. Thiện cảm +${g(10)}.`}affAdd(v,S,-2);return `${v.name} nghi ngươi gây chia rẽ. Thiện cảm -2.`}});
+ if(oan(v,S)>0){A.push({n:"Tạ lỗi",o:100,c:{danh:-1},x:"oán -15",run:()=>{oanAdd(v,S,-15);chatMark(v);return `Ngươi hạ mình tạ lỗi. ${v.name} oán -15.`}});
+  A.push({n:"Nhún nhường",o:100,c:{danh:-2},x:"oán -8 · thiện cảm +2",run:()=>{oanAdd(v,S,-8);affAdd(v,S,2);chatMark(v);return `Ngươi nhún nhường trước ${v.name}. Oán -8.`}})}
+ A.push({n:"Giúp đỡ nàng",c:{bac:-20},o:100,x:"thiện cảm +10 · oán -5",run:()=>{relAdd(S,v,10);oanAdd(v,S,-5);chatMark(v);return `Ngươi giúp ${v.name} việc khó. Thiện cảm +10.`}});
+ if(same)return A.filter(a=>["Hỏi han sức khỏe","Bàn tán về "+(third?third.name:""),"Tạ lỗi","Nhún nhường"].includes(a.n)).concat([{n:"Cùng cung",o:100,lock:true,t:"không thể lấy lòng hay ra tay",x:""}]);
+ return A}
+/* harms that need the place: food served, the lotus pond, her palace while she is away, overhearing */
+const FOOD=["kn","tn","home","dtd"];
+function placeHarms(v,k){const H=[];if(sameHouse(S,v))return H;
+ const act=(key2,n,x)=>{const a=ACT[key2];if(a&&a.ok(S,v))H.push({n,o:a.o?a.o(S,v):100,act:1,x:[a.x||"",fmt(a.c)].filter(Boolean).join(" · "),run:()=>runAct(S,v,key2)})};
+ act("spy","Dò la");act("rumor","Tung tin đồn");
+ if(FOOD.includes(k)||k[0]==="r"){act("poison","Bỏ độc vào trà nàng");act("musk","Bỏ xạ hương vào thuốc nàng")}
+ if(k==="vuon"){H.push({n:"Đẩy nàng xuống hồ sen",o:odA(S,40+S.tamco/4),act:1,x:"Đức -12 · lộ: bị phạt",run:()=>pushPond(S,v)});act("pond","Đẩy con nàng xuống hồ")}
+ H.push({n:"Ngáng chân nàng",o:odA(S,50+S.tamco/5),act:1,x:v.preg&&!v.hidden?"nàng đang có thai":"nàng bẽ mặt",run:()=>trip(S,v)});
+ act("frame","Vu oan");act("vp","Tố vượt phẩm");
+ return H}
+function pushPond(a,t){ap(a,{duc:-12});a.schemes=(a.schemes||0)+1;const c=caught(a,t,false,"đẩy "+NM(t)+" xuống hồ sen");if(c)return c;
+ if(roll(odA(a,40+a.tamco/4))){ap(t,{suc:-25});if(t.preg&&!t.fake&&roll(60)){t.preg=0;t.hidden=false}relAdd(a,t,-10);return (t===S?"<span class=\"r\">Ngươi bị đẩy xuống hồ sen</span>":`${t.name} trượt chân rơi xuống hồ sen`)+`, ướt sũng, nhiễm lạnh. Sức -25${t.preg===0?"":""}. `+dieIf(t,"nhiễm lạnh mà mất")}
+ ap(a,{danh:-8});relAdd(a,t,-25);punish(a,"xô ngã phi tần",2);return `<span class="r">${NMc(a)} xô ${NM(t)} bị người thấy.</span> `}
+function trip(a,t){ap(a,{duc:-4});if(roll(odA(a,50+a.tamco/5))){ap(t,{danh:-3});let r=`${NMc(t)} vấp ngã giữa chốn đông người. Danh -3. `;if(t.preg&&!t.fake&&roll(25)){t.preg=0;t.hidden=false;ap(t,{suc:-15});r+=`<span class="r">${NMc(t)} động thai.</span> `}relAdd(a,t,-6);return r}
+ relAdd(a,t,-12);evA(t,a,1);return `${NMc(t)} thấy rõ ${NM(a)} ngáng chân. `}
+function overhear(k){const here=liveRivals(true).filter(v=>whereOf(v)===k);if(here.length<2)return"";const v=pick(here);if(roll(od(40+S.mat*6))){evA(S,v,1);return `Ngươi nghe lén ${v.name} nói chuyện: chứng cứ +1.`}return "Không nghe được gì."}
+
+/* the palace map */
+const MAPL=[["thu","dtd","tn"],["kn","vuon","ksp"],["tyv","lc","home"]];
+function mapHTMLgrid(){const W=S.where||{};const dis=k=>!can(travel(S.place,k)+1)||S.confined||S.dead||S.place===k;
+ const tile=(k,n,sc,sub)=>`<button class="mtile" data-go="${k}" ${k==="home"?(S.place==="home"?"disabled":""):(dis(k)?"disabled":"")} style="${(SCIMG[sc]||k==="home")?`background-image:url(img/${k==="home"?"tam-cung-dem":SCIMG[sc]}.webp)`:""}"><span class="mband">${k!=="home"&&S.place!==k&&!can(travel(S.place,k)+1)?`<span class="mchip">hết khắc</span>`:""}<b>${n}</b><span>${countAt(k)?silChip(countAt(k)):"vắng"} · ${k==="home"?"không tốn khắc":travel(S.place,k)+" khắc"}</span>${sub&&k!=="home"?`<small>${sub}</small>`:""}</span></button>`;
+ let h=`<div class="ph"><span>Đi gần 1 khắc, xa 2 khắc · còn <b>${4-used}</b> ${pips(4-used)}. Đến nơi phải còn ít nhất 1 khắc để gặp người.</span>${S.confined?`<span class="r">Cấm túc ${S.confined} tháng</span>`:""}</div><div class="pmap">`;
+ for(const row of MAPL)for(const k of row){if(k==="kn"&&!qOn()){h+=`<div class="mtile off"><b>Càn Ninh cung</b><span>bỏ trống</span></div>`;continue}const P=placeOf(k);h+=tile(k,k==="home"?"Tẩm cung":P.n,P.sc,k==="home"?"không tốn việc":"")}
+ h+=`</div><div class="pmap two">`+liveRivals(false).filter(v=>palaceOf(v)!=="home").map(v=>{const k="r"+v.id;return tile(k,typeof palName==="function"?palName(k):"Cung phi tần","rv","")}).filter((x,i,a)=>a.indexOf(x)===i).join("")+`</div>`;
+ return h}
+/* the 'Quan hệ' tab: the selected person's ties to everyone */
+let relSel="me";
+function relHTML(){const P=consorts();const sel=relSel==="emp"||relSel==="th"?relSel:(byKey(relSel)||S);
+ let h=`<div class="reltab">`+[["me","Ngươi"]].concat(liveRivals(true).map(v=>[v.id,v.name]),[["emp","Hoàng thượng"]],S.thDead?[]:[["th","Thái hậu"]]).map(([k,n])=>`<button data-rel="${k}" aria-pressed="${String(k)===String(relSel)}">${n}</button>`).join("")+`</div>`;
+ const row=(n,a,b)=>`<div class="rrow"><span>${n}</span><span>${a}</span><span>${b}</span></div>`;
+ if(sel==="emp"){h+=row("<b>Người</b>","<b>Ngài sủng</b>","<b>Ân tình</b>")+P.map(p=>row(p===S?"Ngươi":p.name,p.sung,p.an||0)).join("");return h}
+ if(sel==="th"){h+=row("<b>Người</b>","<b>Thái hậu thương</b>","")+P.map(p=>row(p===S?"Ngươi":p.name,p.th,"")).join("");return h}
+ h+=row("<b>Với</b>","<b>Thiện cảm (đi · về)</b>","<b>Oán (đi · về)</b>")+P.filter(p=>p!==sel).map(p=>row((p===S?"Ngươi":p.name)+(sameHouse(sel,p)?" · cùng cung":""),`${aff(sel,p)} · ${aff(p,sel)}`,`${oan(sel,p)} · ${oan(p,sel)}`)).join("");
+ h+=row("Hoàng thượng",`sủng ${sel.sung}`,`ân tình ${sel.an||0}`)+(S.thDead?"":row("Thái hậu",`thương ${sel.th}`,""));
+ return h}
+
+/* moving costs time: near 1 khắc, far 2 */
+function mapPos(k){for(let r=0;r<MAPL.length;r++){const c=MAPL[r].indexOf(k);if(c>=0)return[r,c]}if(k[0]==="r"){const i=liveRivals(false).findIndex(v=>"r"+v.id===k);return[3+Math.floor(Math.max(0,i)/3),Math.max(0,i)%3]}return[2,2]}
+function travel(a,b){if(a===b)return 0;const [r1,c1]=mapPos(a||"home"),[r2,c2]=mapPos(b);const far=Math.abs(r1-r2)+Math.abs(c1-c2)>1;return far?(wet()?3:2):1}
+function rivalsBuoi(){let ev="";for(const v of liveRivals(true)){if(!v.alive||v.out)continue;const t=pickTarget(v);if(!t)continue;
+  let want=((v.malice/100)*(rel(v,t)<0?1:.25)+hostility(v,t)/200)*(rkOf(t)>=rkOf(v)-1||(t===S&&v.ghen>=60)?1:.4);if(t.shield)want*=.5;
+  if(t===S&&S.lot&&S.lot.dom==="Hung")want*=1.5;if(Math.random()<want*.04){ev+=seenNPC(v,t,npcAct(v,t));if(S.dead)return ev}}return ev}
+function nextBuoi(){if(!S||S.dead||Q.length||S.mg)return;if((S.buoi||0)>=2){S.buoi=0;endTurn();return}
+ S.buoi=(S.buoi||0)+1;used=0;const ev=rivalsBuoi();if(S.dead){render();return}placeWhere();popIdx=null;popMsg="";
+ if(S.out)coldVisit();else if(S.place!=="home"){const k=S.place;S.place="home";const u=used;goTo(k);used=u}else S.visit={k:"home",people:homePeople(),talked:false,tk:{}};
+ if(ev)Q.push({t:"Tin trong cung",h:`<p class="past">${when()} · ${BUOI[S.buoi]}</p><p>${ev}</p>`});curtain();render()}
+A("pushp","Đẩy xuống hồ sen",{c:{duc:-12},ok:(a,t)=>whereOf(a)==="vuon"&&together(a,t),o:a=>odA(a,40+a.tamco/4),f:(a,t)=>pushPond(a,t)});
+A("trip","Ngáng chân",{c:{duc:-4},ok:(a,t)=>together(a,t),o:a=>odA(a,50+a.tamco/5),f:(a,t)=>trip(a,t)});

@@ -1,0 +1,5 @@
+# Maid pilot — sheets rebuilt by lead #5 (16/11) from the worker's Magnific masters (0 credits)
+Worker session_011xDdVP57zPp4r9Gi61fiKp could not push (git proxy 403). Lead re-downloaded the 12 renders by id, ran finish_fig.py + qa_fig.py, built sheets (old | new fig | face+bust native) light+dark in pilot-maid/. 12 files a18 at 2k, 780 cr (worker), no retries.
+Files: m03-ty3 folded fan, m08-ty3 flower branch, m13-ty3 collarbone + handkerchief, m01-ty3 fingertip at hairpin, m22-t1 lantern, m43-t1 teacup, m10-kc scroll, m05-ngheo bucket (rich red silk), m30-t8 jade pendant, m52-tm0 teapot, m18-t5 book, m10-cold folded fan. Back-turned old m03/m08/m13/m43 now face the viewer.
+QA: edge 0, height ±2 %. Only hair-strand pinholes (m03,m08,m10-kc,m18,m30) + halo 3314 on m52 (looked at on dark: clean rim). Looked at m03 (light) and m52 (dark): excellent. Huadian auto = WARN only.
+Magnific output ids: m03 DoJvb9wpcl, m08 4RQnekG9Aa, m13 mERblcEhJQ, m01 xSXy2fmjfW, m22 Lwo4GuEswO, m43 gOt6Yb7SXO, m10-kc ovNQxTI829, m05 aFAkU8lfSh, m30 jUBPA1NLD0, m52 Lwo4Gj9swO, m18 0eSIQ0OTfW, m10-cold CqzrJQ9EEy.

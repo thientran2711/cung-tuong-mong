@@ -1,0 +1,9 @@
+PRIORITY #1 CHECK ('trưng bày|display|tư trang|drawer'): OD 13 (none for a shelf UI) | main: Dư đồ full-screen view + tư trang grid (reuse both) | review/display-shelf (C-AG builder, data API) | claims kit-display-room MAIN s35.
+# kit-display-room (sonnet) — KIT part for the display room (Nơi trưng bày)
+Read dev/handover/briefs/s35-common.md first + dev/rules/topic/kit-ui.md + KIT.md (Dư đồ full-screen view, tư trang grid, drawers/sheets). Owner words VERBATIM: OD tail '(17/11 18:30Z real' (A), '(17/11 ~18:25Z' (c)(d), '(17/11 ~18:33Z' (3).
+BUILD (kit only, one part each, registered in KIT.md + kit page):
+1. Left-rail icon "Nơi trưng bày" (same rail as lịch / nhiệm vụ; icon art → Foreman C ART REQUEST, placeholder from existing kit icons until then).
+2. Full-screen DISPLAY ROOM like Dư đồ: top + bottom bars stay visible; painted shop-style shelf backdrop (art → Foreman C; until then the existing room/scroll backdrop); iPad 2 columns × 6 shelves, phone 1 column × 12 shelves scrolling; one shelf = one group label + the item as a CUT-OUT picture standing on the shelf (no item frame), empty shelf = soft placeholder.
+3. Tap a shelf → a TƯ TRANG DRAWER rises from the bottom (kit sheet) listing ONLY owned items of that group (reuse the tư trang item grid), item tile shows xa xỉ and a warning chip if above rank (imperial gifts may still be placed); tap item → "Trưng bày" → placed, drawer closes; tap a placed item → "Cất xuống" / info.
+4. Same view opened on an NPC's room in read-only mode (no drawer).
+Data: use C-AG review/display-shelf API (ask C-AG #4 session_01UV1SzkyZBYRFoSWBF8fg27 for the function names; stub with fixtures until it lands). Wording per VANPHONG. Fold 755x1000 + iPad 1180x820 first, then 1366x1024, 412x1058, 390x844. Shots → CDN img/_review/kit-display-room/. Branch review/kit-display-room from latest origin/main. Report reports/kit-display-room.md; "SẴN SÀNG KIỂM kit-display-room <sha>" to MAIN s35.

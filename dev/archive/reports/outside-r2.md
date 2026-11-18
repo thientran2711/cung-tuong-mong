@@ -1,0 +1,3 @@
+# outside-r2 (tuyến tiểu thư ngoài cung) — PASS c4e89f89b5 (review/outside-r2-r2, parent main 02a0d3f1; fast-forwardable if main has not moved).
+- 5 r1 fixes verified + reviewer fixes: the 6th chest item (Khăn tay lụa), co-op test bots, no card-flip scene at home, the goal icon shows "Chương 1 · Chờ kỳ tuyển tú" at home (kitGoalAlt, KIT 72.2). route/kc-end/oldsave/coop-home/coop-e2e/coop-timer pass.
+- BUGS ON MAIN (UI → main chat): (1) an empty palace room at 844x390 shows "Không có ai ở đây." over the room title; (2) the rank-title painter puts a title inside compound names ("Đoan Cung nữ thân tín Mộc Lan Chi") — match whole names only; (3) the week-0 card-flip scene plays during the identity card of every new life.
