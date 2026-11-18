@@ -1,0 +1,103 @@
+/* review/smudge-code: makeup SMUDGE as a CODE effect on the makeup colour layer (owner 17/11 ~23:30Z).
+   usage: [CLOSEUP=fig] node dev/test/smudge-code.js <page url> [outdir]   -> JSON {checks, errs}; with outdir also writes smudge-0..3.png (face close-up 400 css px @dpr 3 + figure strip).
+   checks: layer present at every level and place, below nothing but above makeup, levels differ (pixel mass grows 1<2<3), no makeup = none, NPC woman gets one,
+   men none, picture without points nothing, every colour from BAL (no typed numbers in the draw: BAL.looks.smuFx). */
+const {chromium}=require('playwright');const URL=process.argv[2],OUT=process.argv[3];
+(async()=>{const b=await chromium.launch({args:['--disable-dev-shm-usage']});const ctx=await b.newContext({viewport:{width:1180,height:820},deviceScaleFactor:3,serviceWorkers:'block',reducedMotion:'reduce'});
+ const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
+ await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function');await p.waitForTimeout(2500);
+ await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;window.__forceOrigin='tt';document.getElementById('title').hidden=true;start()});
+ await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name&&S.known);await p.waitForTimeout(4000);
+ await p.waitForFunction(()=>window.TOIL_FIT&&TOIL_FIT.fit&&window.KIT_VEIL&&KIT_VEIL.fit,null,{timeout:40000}).catch(()=>{});
+ if(process.env.LOCALFIT){const fs=require('fs'),mk={};for(const f of fs.readdirSync('dev/art/mkfit'))if(f.endsWith('.json'))mk[f.slice(0,-5)]=JSON.parse(fs.readFileSync('dev/art/mkfit/'+f,'utf8'));await p.evaluate(mk=>{for(const g in mk){MK_FIT.g[g]=mk[g];MK_FIT.ld[g]=1}},mk)}/* LOCALFIT=1: use the repo's dev/art/mkfit tables instead of the CDN ones (diagnosis) */
+ if(process.env.PCT)await p.evaluate(P=>{const q=P/100;BAL.looks.smuFx.pct={blush:[0,0,q,q],lip:[0,0,q,q]}},+process.env.PCT);/* PCT=5|10|15|20: render both smears at that opacity (owner's option sheet) */
+ const C=await p.evaluate(async()=>{Q.length=0;document.getElementById('modal').hidden=true;const C={};
+  try{toilAuto()}catch(e){}const T=S.toilette;T.makeup=true;T.look='dep';T.col=Object.assign(toilColDef(),{seed:5});
+  /* a FIXED face whose face points are good (a few pictures' img/mk-fit points sit off the painted face: the makeup colour layer is off there too, not this effect's business) */
+  const por='por-consort-c11-tcold-a18.webp',fig='fig-consort-c11-tcold-a18.webp';
+  const kf0=kitFace,kg0=kitFigOf;kitFace=function(q){const f=kf0.apply(this,arguments);if(q===S&&f&&f.src){const g=Object.assign({},f,{src:String(f.src).replace(/[^/]*$/,por)});if(f.__kp)g.__kp=f.__kp;return g}return f};kitFigOf=function(q){const s=kg0.apply(this,arguments);return q===S?String(s).replace(/[^/?]*(\?.*)?$/,fig):s};
+  for(let i=0;i<60&&!(MK_FIT.get(por)&&MK_FIT.get(fig));i++)await new Promise(r=>setTimeout(r,250));/* her REAL portrait + figure (no swap): the picture and its face points must belong together */
+  window.__por=por;window.__fig=fig;
+  const wait=async()=>{for(let i=0;i<80;i++){const bad=[...document.querySelectorAll('img.klk-smu')].some(x=>x.src.indexOf('data:image/png')!==0);if(!bad)return;await new Promise(r=>setTimeout(r,150))}};
+  const clear=()=>{S.lk=null;if(S.toilette)delete S.toilette.lk};
+  const mass=src=>new Promise(res=>{const im=new Image();im.onload=()=>{const c=document.createElement('canvas');c.width=im.width;c.height=im.height;const g=c.getContext('2d');g.drawImage(im,0,0);const d=g.getImageData(0,0,c.width,c.height).data;let s=0;for(let i=3;i<d.length;i+=4)s+=d[i]/255;res(Math.round(s/(c.width*c.height)*1e4)/1e4)};im.onerror=()=>res(-1);im.src=src});
+  const host=document.createElement('div');host.id='smu-host';host.style.cssText='position:fixed;left:0;top:0;z-index:99999;background:#f3e8d4;padding:0';document.body.appendChild(host);
+  const fileOf=()=>kitFile(por);const masses=[];C.present=[];C.below=[];
+  for(const lv of [0,1,2,3]){clear();if(lv)lkSmudge(S,lv,lv===3?'mua':'mua');
+   const zoom=()=>{try{return kitFaceZoom(S,fileOf())}catch(e){return''}};host.innerHTML=zoom();await new Promise(r=>setTimeout(r,200));await wait();host.innerHTML=zoom();await wait();
+   const h=zoom(),sm=(h.match(/class="klk klk-smu"/g)||[]).length,mk=h.indexOf('kmkl');C.present.push(lv?sm===1:sm===0);C.below.push(lv?h.indexOf('klk-smu')>h.lastIndexOf('kmkl'):true);
+   const im=document.querySelector('#smu-host img.klk-smu');masses.push(im?await mass(im.src):0)}
+  C.masses=masses;C.growing=masses[1]>0&&masses[2]>0&&masses[3]>masses[2];
+  clear();S.toilette=Object.assign({},T,{makeup:false});C.noMakeupNone=lkSmudge(S,2,'mua')===''&&!(kitFxLayers(S,fileOf())||'').includes('klk-smu');S.toilette=T;
+  clear();lkSmudge(S,2,'mua');C.stage=(kitStageFig(S)||'').includes('klk-smu');
+  /* NPC woman: a rival (any woman) whose own portrait has face points; colours are sampled from the picture */
+  C.npc='no woman with face points';for(const v of rivals){if(v.alive===false)continue;let f=null;try{if(personRoleRank(v).sex!=='f')continue;f=kitFile(kitFace(v).src)}catch(e){continue}
+   for(let i=0;i<24&&!MK_FIT.get(f);i++)await new Promise(r=>setTimeout(r,250));if(!MK_FIT.get(f))continue;
+   const sn0=KIT_FACEFX.seen;KIT_FACEFX.seen=()=>true;/* she has not scouted this woman yet: the seen rule (OD scouting) is lifted for this check only */v.lk=null;lkSmudge(v,2,'mua');const h=kitFxLayers(v,f)||'';await new Promise(r=>setTimeout(r,200));await wait();const im=h.includes('klk-smu');KIT_FACEFX.seen=sn0;v.lk=null;C.npc=im;C.npcFile=f;break}
+  /* EDGE MEASURE (owner 18/11): the pink smear must have no step. For the cheek band of the drawn layer (rows 38-58 % of its height, grey runs and lips switched off for the measure) the largest ABSOLUTE alpha change (0..1) between two neighbouring pixels along each row (a soft bloom stays under .02 (~5/255 per pixel); a stripe edge steps by several %) */
+  C.pinkEdge={};{const v=MK_FIT.get(fig),Bx=BAL.looks.smuFx;const im=await new Promise(r=>{const i=new Image();i.crossOrigin='anonymous';i.onload=()=>r(i);i.src=IMG_U('img/'+fig)});
+   const ta=Bx.tear.a.slice(),pc0=Bx.pct;Bx.tear.a=[0,0,0,0];/* grey runs off for this measure: only the pink layer */for(const lv of [2,3]){BAL.looks.smuFx.pct={blush:[0,0,.2,.2],lip:[0,0,0,0]};const url=lkSmuDraw(im,v,lv,'mua',lkSmuCols(S),lkSmuBox(v),123);
+    const g=await new Promise(r=>{const i=new Image();i.onload=()=>r(i);i.src=url});const c=document.createElement('canvas');c.width=g.width;c.height=g.height;const x=c.getContext('2d');x.drawImage(g,0,0);const d=x.getImageData(0,0,c.width,c.height).data;let worst=0;
+    for(let y=Math.round(c.height*.38);y<Math.round(c.height*.58);y++){let pk=0;const A=[];for(let xx=0;xx<c.width;xx++){const i=(y*c.width+xx)*4,pinkish=d[i]-d[i+1]>25;A.push(pinkish?d[i+3]/255:0);pk=Math.max(pk,A[xx])}
+     if(pk<.02)continue;for(let xx=1;xx<c.width;xx++)worst=Math.max(worst,Math.abs(A[xx]-A[xx-1]))}
+    C.pinkEdge[lv]=Math.round(worst*1000)/1000}Bx.tear.a=ta;Bx.pct=pc0;C.pinkSmooth=Object.values(C.pinkEdge).every(v=>v<.02);/* absolute alpha change per pixel step (0..1) */}
+  C.noPts=(()=>{try{return lkSmuImg(S,'zz-none-1.png',{lv:2})===''}catch(e){return false}})();
+  C.balOnly=!!(BAL.looks.smuFx&&BAL.looks.smuFx.blush&&BAL.looks.smuFx.tear);
+  clear();host.remove();return C});
+
+ /* MODE=lod (owner 18/11 02:20Z): the same smudge at THREE sizes through the real size pass (toilLodPass): big face close-up, stage full figure (380 css px tall), small round chip (96 css px). One image per level and size: <outdir>/lod-<lv>-<face|stage|chip>.png, dpr 3, NOT upscaled. */
+ if(process.env.MODE==='lod'&&OUT){require('fs').mkdirSync(OUT,{recursive:true});
+  for(const size of ['face','stage','chip'])for(const lv of [1,2,3]){await p.evaluate(async([lv,size])=>{const clear=()=>{S.lk=null;if(S.toilette)delete S.toilette.lk};clear();lkSmudge(S,lv,'mua');
+   let host=document.getElementById('smu-shot');if(!host){host=document.createElement('div');host.id='smu-shot';document.body.appendChild(host)}
+   if(!document.getElementById('smu-hide')){const st=document.createElement('style');st.id='smu-hide';st.textContent='body>*:not(#smu-shot){visibility:hidden!important}';document.head.appendChild(st)}
+   host.style.cssText='position:fixed;left:0;top:0;z-index:2147483647;background:#f3e8d4;padding:14px 16px;width:420px;font:700 30px/1.1 serif;color:#4a2a14';
+   const f=kitFile(window.__fig),L=['','nhẹ','vừa','nặng'][lv],SZ={face:'cận mặt',stage:'toàn thân',chip:'ô nhỏ'}[size];
+   const body=()=>size==='face'?`<div class="kfzoom" style="width:388px;margin:0 auto 8px">${kitFaceZoom(S,f).replace(/^<div class="kfzoom"[^>]*>/,'').replace(/<\/div>$/,'')}</div>`:
+    size==='stage'?`<div style="position:relative;width:200px;height:380px;margin:0 auto">${kitStageFig(S)||''}</div>`:`<div class="kfzoom" style="width:96px;margin:6px auto 6px">${kitFaceZoom(S,f).replace(/^<div class="kfzoom"[^>]*>/,'').replace(/<\/div>$/,'')}</div>`;
+   const html=()=>`<div style="margin-bottom:8px">Lem ${L} · ${SZ}</div>${body()}`;
+   host.innerHTML=html();await new Promise(r=>setTimeout(r,300));for(let i=0;i<80;i++){const bad=[...host.querySelectorAll('img.klk-smu')].some(x=>x.src.indexOf('data:image/png')!==0);if(!bad)break;await new Promise(r=>setTimeout(r,150))}
+   host.innerHTML=html();for(let k=0;k<4;k++){try{toilLodPass()}catch(e){}await new Promise(r=>setTimeout(r,400))}
+   for(let i=0;i<120;i++){if([...host.querySelectorAll('img')].every(x=>x.complete&&x.naturalWidth>0))break;await new Promise(r=>setTimeout(r,150))}await new Promise(r=>setTimeout(r,500))},[lv,size]);
+   await p.locator('#smu-shot').screenshot({path:`${OUT}/lod-${lv}-${size}.png`})}
+  console.log(JSON.stringify({lod:await p.evaluate(()=>[...document.querySelectorAll('img.klk-smu')].map(i=>i.dataset.lsk.split('|').slice(-1)[0])),errs}));await b.close();return}
+
+ /* MODE=opt (owner 18/11 01:23Z, r16): grey-run darkness options on the BIG face (kitFaceZoom, Kiều diễm makeup): <outdir>/lem-<nhe|vua|nang>-<0|10|20>.png, 0 = r15 reference. The big-size boost is switched off here so only the knob differs.
+    MODE=big: nặng on the big face with / without the big-size boost: <outdir>/big-<off|on>.png. */
+ if((process.env.MODE==='opt'||process.env.MODE==='big')&&OUT){require('fs').mkdirSync(OUT,{recursive:true});
+  const JOBS=process.env.MODE==='opt'?[].concat(...[[1,'nhe','nhẹ'],[2,'vua','vừa'],[3,'nang','nặng']].map(([lv,k,L])=>[0,10,20].map(d=>({lv,name:`lem-${k}-${d}`,label:d?`Lem ${L} · đậm thêm ${d} %`:`Lem ${L} · hiện tại (r15)`,dark:1+d/100,boost:1})))):
+   [{lv:0,name:'big-none',label:'Không lem',dark:1,boost:1},{lv:3,name:'big-off',label:'Lem nặng · mặt to, chưa tăng',dark:1,boost:1},{lv:3,name:'big-on',label:'Lem nặng · mặt to, tăng đậm',dark:1,boost:null}];
+  for(const J of JOBS){await p.evaluate(async J=>{const T=S.toilette;T.makeup=true;T.look='dep';T.col=Object.assign(toilColDef(),{seed:5});const F=BAL.looks.smuFx;F.tear.dark=J.dark;if(J.boost!==null){window.__bb=window.__bb||F.big.boost;F.big.boost=J.boost}else if(window.__bb)F.big.boost=window.__bb;
+   for(const q in TOIL_MKC)delete TOIL_MKC[q];for(const q in LK_SMC)delete LK_SMC[q];S.lk=null;delete T.lk;if(J.lv)lkSmudge(S,J.lv,'mua');
+   let host=document.getElementById('smu-shot');if(!host){host=document.createElement('div');host.id='smu-shot';document.body.appendChild(host)}
+   if(!document.getElementById('smu-hide')){const st=document.createElement('style');st.id='smu-hide';st.textContent='body>*:not(#smu-shot){visibility:hidden!important}';document.head.appendChild(st)}
+   host.style.cssText='position:fixed;left:0;top:0;z-index:2147483647;background:#f3e8d4;padding:14px 16px;width:420px;font:700 30px/1.1 serif;color:#4a2a14';
+   const f=kitFile(window.__fig);const html=()=>`<div style="margin-bottom:8px">${J.label}</div><div class="kfzoom" style="width:388px;margin:0 auto 8px">${kitFaceZoom(S,f).replace(/^<div class="kfzoom"[^>]*>/,'').replace(/<\/div>$/,'')}</div>`;
+   host.innerHTML=html();await new Promise(r=>setTimeout(r,300));for(let i=0;i<80;i++){const bad=[...host.querySelectorAll('img.klk-smu,img.kmkc')].some(x=>x.src.indexOf('data:image/png')!==0);if(!bad)break;await new Promise(r=>setTimeout(r,150))}
+   host.innerHTML=html();for(let k=0;k<4;k++){try{toilLodPass()}catch(e){}await new Promise(r=>setTimeout(r,400))}
+   for(let i=0;i<120;i++){if([...host.querySelectorAll('img')].every(x=>x.complete&&x.naturalWidth>0))break;await new Promise(r=>setTimeout(r,150))}await new Promise(r=>setTimeout(r,700))},J);
+   await p.locator('#smu-shot').screenshot({path:`${OUT}/${J.name}.png`});
+   {const d=await p.evaluate(()=>{const i=[...document.querySelectorAll('img.klk-smu')].pop();return i?i.src:''});if(d.indexOf('data:image/png;base64,')===0)require('fs').writeFileSync(`${OUT}/${J.name}-layer.png`,Buffer.from(d.slice(22),'base64'))}}
+  console.log(JSON.stringify({done:process.env.MODE,steps:await p.evaluate(()=>[...document.querySelectorAll('img.klk-smu')].map(i=>{const w=i.getBoundingClientRect().width;return [Math.round(w/1.6),lkSmuStep(w/1.6),(i.dataset.lsk.match(/\|L(\d+)$/)||[])[1]||0]})),errs}));await b.close();return}
+ /* MODE=looks: the final 20 % nặng smudge over each makeup the player can wear, to show it follows whatever is under it: <outdir>/look-<vua|dep|tuyet|warm>.png, label 'Lem nặng · trên <name>' */
+ if(process.env.MODE==='looks'&&OUT){require('fs').mkdirSync(OUT,{recursive:true});
+  const SETS={vua:['Đoan trang','vua',null],dep:['Kiều diễm','dep',null],tuyet:['Khuynh thành','tuyet',null],warm:['Cam ánh đỏ','dep',{mat:'rangchieu',ma:'camquyt',son:'chusa',may:'nau'}]};
+  for(const k of ['vua','dep','tuyet','warm']){await p.evaluate(async([k,SET])=>{const T=S.toilette;T.makeup=true;T.look=SET[1];T.col=Object.assign(toilColDef(),SET[2]||{},{seed:5});for(const q in TOIL_MKC)delete TOIL_MKC[q];for(const q in LK_SMC)delete LK_SMC[q];
+   S.lk=null;delete T.lk;lkSmudge(S,3,'mua');
+   let host=document.getElementById('smu-shot');if(!host){host=document.createElement('div');host.id='smu-shot';document.body.appendChild(host)}
+   if(!document.getElementById('smu-hide')){const st=document.createElement('style');st.id='smu-hide';st.textContent='body>*:not(#smu-shot){visibility:hidden!important}';document.head.appendChild(st)}
+   host.style.cssText='position:fixed;left:0;top:0;z-index:2147483647;background:#f3e8d4;padding:14px 16px;width:420px;font:700 30px/1.1 serif;color:#4a2a14';
+   const f=kitFile(window.__fig);const html=()=>`<div style="margin-bottom:8px">Lem nặng · trên ${SET[0]}</div><div class="kfzoom" style="width:388px;margin:0 auto 8px">${kitFaceZoom(S,f).replace(/^<div class="kfzoom"[^>]*>/,'').replace(/<\/div>$/,'')}</div>`;
+   host.innerHTML=html();await new Promise(r=>setTimeout(r,300));for(let i=0;i<80;i++){const bad=[...host.querySelectorAll('img.klk-smu,img.kmkc')].some(x=>x.src.indexOf('data:image/png')!==0);if(!bad)break;await new Promise(r=>setTimeout(r,150))}
+   host.innerHTML=html();for(let i=0;i<120;i++){if([...host.querySelectorAll('img')].every(x=>x.complete&&x.naturalWidth>0))break;await new Promise(r=>setTimeout(r,150))}await new Promise(r=>setTimeout(r,700))},[k,SETS[k]]);
+   await p.locator('#smu-shot').screenshot({path:`${OUT}/look-${k}.png`})}
+  console.log(JSON.stringify({looks:'done',errs}));await b.close();return}
+ if(OUT){require('fs').mkdirSync(OUT,{recursive:true});
+  for(const lv of (process.env.PCT?[2,3]:[0,1,2,3])){await p.evaluate(async([lv,CF,PC])=>{const clear=()=>{S.lk=null;if(S.toilette)delete S.toilette.lk};clear();if(lv)lkSmudge(S,lv,'mua');
+   let host=document.getElementById('smu-shot');if(!host){host=document.createElement('div');host.id='smu-shot';document.body.appendChild(host)}
+   if(!document.getElementById('smu-hide')){const st=document.createElement('style');st.id='smu-hide';st.textContent='body>*:not(#smu-shot){visibility:hidden!important}';document.head.appendChild(st)}host.style.cssText='position:fixed;left:0;top:0;z-index:2147483647;background:#f3e8d4;padding:14px 16px;width:420px;font:700 30px/1.1 serif;color:#4a2a14';
+   const f=kitFile(CF==="fig"?window.__fig:window.__por),ff=kitFile(window.__fig);const zm=()=>kitFaceZoom(S,f);
+   const L=PC?['','','Lem vừa · '+PC+' %','Lem nặng · '+PC+' %'][lv]:['0 · không lem','1 · nhẹ','2 · vừa','3 · nặng'][lv];
+   const html=()=>`<div style="margin-bottom:8px">${L}</div><div class="kfzoom" style="width:388px;margin:0 auto 8px">${zm().replace(/^<div class="kfzoom"[^>]*>/,'').replace(/<\/div>$/,'')}</div><div style="position:relative;width:150px;height:150px;margin:0 auto;overflow:hidden">${kitStageFig(S)||''}</div>`;
+   host.innerHTML=html();await new Promise(r=>setTimeout(r,300));for(let i=0;i<80;i++){const bad=[...host.querySelectorAll('img.klk-smu')].some(x=>x.src.indexOf('data:image/png')!==0);if(!bad)break;await new Promise(r=>setTimeout(r,150))}host.innerHTML=html();for(let i=0;i<120;i++){if([...host.querySelectorAll('img')].every(x=>x.complete&&x.naturalWidth>0))break;await new Promise(r=>setTimeout(r,150))}await new Promise(r=>setTimeout(r,500))},[lv,process.env.CLOSEUP||'por',process.env.PCT||'']);
+   await p.locator('#smu-shot').screenshot({path:process.env.PCT?`${OUT}/opt-${lv}-${process.env.PCT}.png`:`${OUT}/smudge-${lv}.png`})}}
+ console.log(JSON.stringify({checks:C,errs}));await b.close()})();

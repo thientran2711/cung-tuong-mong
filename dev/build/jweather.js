@@ -24,8 +24,8 @@ IT.giaycoi={n:"Giày đế cỏ",kd:"Tạp vật",d:`Đế cỏ bện, đi đá 
 try{for(const k of ["du","aotoi","giaycoi"])if(!SHOP_ALL.includes(k))SHOP_ALL.push(k)}catch(e){}
 /* paintings (gpt-2-6, item-art style): img/item-<k>.webp 256 + img/item512/item-<k>.webp 512; grade Thường */
 try{for(const k of ["du","aotoi","giaycoi"]){if(typeof ITEM_ART_G==="object")ITEM_ART_G[k]=0;if(typeof ITIMG==="object")ITIMG[k]=k}}catch(e){}
-function wxSev(){if(!S||!S.wx)return 0;const f=S.wx.f,n=S.wx.n;if(f===3)return 3;if(f===4)return 2;if(f===1)return 1;if(/sương giá/.test(n||""))return 1;return 0}
-function wxKind(){const n=(S&&S.wx&&S.wx.n)||"";return /tuyết|sương giá/.test(n)?"băng tuyết":/giông/.test(n)?"giông tố":"mưa"}
+function wxSev(){if(!S||!S.wx)return 0;const f=S.wx.f,n=S.wx.b||S.wx.n;  /* b = the state (jclose), n = the buổi words ("trời giá lạnh") */if(f===3)return 3;if(f===4)return 2;if(f===1)return 1;if(/sương giá/.test(n||""))return 1;return 0}
+function wxKind(){const n=(S&&S.wx&&(S.wx.b||S.wx.n))||"";return /tuyết|sương giá/.test(n)?"băng tuyết":/giông/.test(n)?"giông tố":"mưa"}
 function wxPal(p,k){if(!k)return"";if(k==="home")return palaceOf(p);if(k[0]==="r"){const v=rivals.find(x=>"r"+x.id===k);return v?palaceOf(v):k}return k}
 function wxOutdoor(p,a,b){if(!a||!b||a===b)return false;return wxPal(p,a)!==wxPal(p,b)}
 function wxHasGear(p,g){return (p.inv||[]).some(e=>e&&!e.h&&itm(e.k).wxg===g&&wxGearLeft(e)>0)}
@@ -60,7 +60,7 @@ function wxRiskWord(n){return typeof chanceW==="function"?chanceW(n):"khả năn
 /* what happens: same for her and NPCs; returns a line ("" = nothing) */
 function wxHit(p,R){let r="";const me=p===S,nm=me?"Ngươi":`${rkName(p)} ${p.name}`;
  if(roll(R.slip)){ap(p,{suc:-BAL.wx.slipSuc});r+=`${nm} trượt chân trên đá ${wxKind()==="băng tuyết"?"đóng băng":"ướt"}, ngã đau. Sức −${BAL.wx.slipSuc}. `;
-  if(p.preg&&!p.fake&&roll(BAL.wx.slipMisc)){p.preg=0;p.hidden=false;ap(p,{suc:-20});r+=`<span class="r">${me?"Ngươi":"Nàng"} sảy thai.</span> Sức −20. `}}
+  if(p.preg&&!p.fake&&roll(BAL.wx.slipMisc)){p.preg=0;p.hidden=false;ap(p,{suc:BAL.eff.jweather.sucSlip});r+=`<span class="r">${me?"Ngươi":"Nàng"} sảy thai.</span> Sức ${balSg(BAL.eff.jweather.sucSlip)}. `}}
  if(!illOf(p)&&roll(R.cold)){const t=catchIll(p,"phonghan");if(p.ill&&(p.suc|0)<BAL.wx.weakSuc)p.ill.st=2;r+=me?`Ngươi nhiễm lạnh, mắc phong hàn${p.ill&&p.ill.st>=2?" nặng":""}. `:`${nm} nhiễm lạnh, mắc phong hàn. `}
  return r}
 /* giông tố passes: known buổi it clears */
@@ -73,7 +73,9 @@ function wxClrName(){const c=S&&S.wx&&S.wx.clr;return c!=null&&typeof BUOI!=="un
 const WX_OUT=/dạo|ngắm|hái|vườn|hoa viên|hồ sen|săn|ngự giá|quỳ ngoài|quỳ trước|đứng ngoài|ngoài sân|ngoài điện|thả diều|đạp thanh|câu cá|tuyết|đón gió/i;
 /* acts that are indoor work even when she stands in the garden (the place fallback skips them) */
 const WX_IN=/điểm trang|nghỉ ngơi|ngủ|tắm|học|luyện|đọc|thêu|viết|chép|đàn|vẽ|nấu|sổ sách|thuốc|dưỡng|thiền|tụng|cầu phúc|trang điểm/i;
-function wxOutAct(o){if(!o||!wxSev())return false;const n=String(o.n||"");if(/Thôi|Đợi|ở lại|trong phòng|^Về |về phòng|về cung|hồi cung|quay về|chờ tạnh|lui về|đứng ngoài nhìn|đứng ngoài,? giữ mình|đứng ngoài$/i.test(n)&&!/quỳ/i.test(n))return false;
+/* wxOutActAny: is this act OUTDOORS, whatever the weather (jlooks reads it for every weather kind); wxOutAct = outdoors AND bad weather */
+function wxOutAct(o){return !!o&&!!wxSev()&&wxOutActAny(o)}
+function wxOutActAny(o){if(!o)return false;const n=String(o.n||"");if(/Thôi|Đợi|ở lại|trong phòng|^Về |về phòng|về cung|hồi cung|quay về|chờ tạnh|lui về|đứng ngoài nhìn|đứng ngoài,? giữ mình|đứng ngoài$/i.test(n)&&!/quỳ/i.test(n))return false;
  return WX_OUT.test(n)||(S&&S.place==="vuon"&&!o.indoor&&!WX_IN.test(n))}
 /* kit price-line format (kitParse): "kèm: a, b (note)" -> red Kèm row + the trailing note in Ghi chú; no commas / nested brackets inside the note */
 function wxMat(R){const pg=S&&S.preg&&!S.fake;return `kèm: cảm lạnh: ${wxRiskWord(R.cold)}, trơn ngã: ${wxRiskWord(R.slip)}${pg?", ngã có thể sảy thai":""} · (vì sao: ${R.why.join(" / ")})`}
@@ -90,4 +92,4 @@ function wxAfter(){try{if(!S||S.dead)return;const R=wxRisk(S);if(R.kieu)ap(S,{ba
   for(const v of liveRivals(true)){if(!v.alive||v.out||v.confined||W[v.id]!=="vuon")continue;
    const R=wxRisk(v);if(R.kieu)ap(v,{bac:-BAL.wx.kieuBac});const t=wxHit(v,R);if(t){news+=t;try{newsAdd(v,"wx",t.replace(/<[^>]+>/g,""),false)}catch(e){}}}
   if(news)try{log(news)}catch(e){}}catch(e){console.error("wx npc",e)}return r}})();
-window.wxRisk=wxRisk;window.wxSev=wxSev;window.wxGearLeft=wxGearLeft;window.wxGearAll=wxGearAll;window.wxOutAct=wxOutAct;
+window.wxRisk=wxRisk;window.wxSev=wxSev;window.wxGearLeft=wxGearLeft;window.wxGearAll=wxGearAll;window.wxOutAct=wxOutAct;window.wxOutActAny=wxOutActAny;

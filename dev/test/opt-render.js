@@ -78,7 +78,7 @@ async function boot(b,W,H,dpr){const ctx=await b.newContext({viewport:{width:W,h
  await one("palCeremony",`S.pal=S.pal==null?1:S.pal;S.palCer=1;palCeremony()`,"event");
  await one("xgConfirm",`xgConfirm(()=>{})`,"act");
  await one("hireCard",`hireCard("maid")`,"act");
- await one("Hàng chợ đen",`roll=()=>true;(S.staff||[]).forEach(s=>{s.tr="tham";s.spyFor=null});servTraitMonth()`,"mixed");
+ await one("Hàng chợ đen",`roll=()=>true;(S.staff||[]).forEach(s=>{s.net=null;s.tr="tham";s.spyFor=null;netOf(s)});servTraitMonth()`,"mixed");
  { const c=R.C["Hàng chợ đen"]||[];if(!c.some(x=>x.t==="Hàng chợ đen"))R.warn.push(["C:Hàng chợ đen","not produced"]);}
  /* ---- D: the real night, Bạc −5 of the prep ---- */
  R.D=await p.evaluate(async()=>{const W=t=>new Promise(r=>setTimeout(r,t));Q.length=0;document.getElementById('modal').hidden=true;S.tonight=null;S.bac=300;
@@ -102,7 +102,7 @@ async function boot(b,W,H,dpr){const ctx=await b.newContext({viewport:{width:W,h
  /* rolled seals still come from the roll */
  R.rolled=await p.evaluate(async()=>{const W=t=>new Promise(r=>setTimeout(r,t));const b=rsnap();S.danh-=3;resultShow("Tung tin đồn",b,false);await W(300);const t=document.getElementById('rtoast');const s1=(t.querySelector('.seal')||{}).textContent;
   const b2=rsnap();S.danh+=3;resultShow("Thỉnh an",b2,true);await W(300);return{fail:s1,ok:(t.querySelector('.seal')||{}).textContent}});
- if(R.rolled.fail!=="HỎNG"||R.rolled.ok!=="THÀNH")R.fails.push(["rolled seals",JSON.stringify(R.rolled)]);
+ if(R.rolled.fail!=="BẠI"||R.rolled.ok!=="THÀNH")R.fails.push(["rolled seals",JSON.stringify(R.rolled)]);
  /* ---- E: clarity by Tâm cơ, and the night talk options told apart ---- */
  R.E=await p.evaluate(async()=>{const W=t=>new Promise(r=>setTimeout(r,t));const out={};const t0=S.tamco,m0=S.mat;
   const read=()=>[...document.querySelectorAll('#mb .opt')].map(b=>`${(b.querySelector('.kan')||b).textContent.trim()} — ${(b.querySelector('.kr-hint .krv')||{}).textContent||""} [${(b.querySelector('.krisk')||{}).textContent||""}]`);

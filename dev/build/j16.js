@@ -31,7 +31,7 @@ function wireXio(){const T=$("title");if(!T||T.hidden)return;let w=T.querySelect
   else if(b.id==="x-chk"){XIO.to=0;XIO.ask=0;try{XIO.imp=await readCode($("x-in").value);XIO.msg="Mã hợp lệ."}catch(x){XIO.imp=null;XIO.msg=`<span class="r">${x.mine?x.message:"Mã hỏng hoặc thiếu."}</span>`}}
   else if(b.dataset.xt){XIO.to=+b.dataset.xt;XIO.ask=0}
   else if(b.id==="x-cancel"){XIO.to=0;XIO.ask=0}
-  else if(b.id==="x-write"&&XIO.imp&&XIO.to){if(loadSlot(XIO.to)&&!XIO.ask){XIO.ask=1}else{try{localStorage.setItem(SK(XIO.to),JSON.stringify(XIO.imp));XIO.msg=`Đã ghi vào Ô ${XIO.to}. Bấm “Tiếp tục kiếp này” để chơi.`;XIO.m="imp";XIO.imp=null;XIO.to=0;XIO.ask=0;showTitle();return}catch(x){XIO.msg='<span class="r">Không ghi được (bộ nhớ trình duyệt bị chặn hoặc đầy).</span>'}}}
+  else if(b.id==="x-write"&&XIO.imp&&XIO.to){if(loadSlot(XIO.to)&&!XIO.ask){XIO.ask=1}else{try{localStorage.setItem(SK(XIO.to),JSON.stringify(XIO.imp));XIO.msg=`Đã ghi vào Ô ${XIO.to}. Bấm “Tiếp tục kiếp này” để chơi.`;XIO.m="imp";XIO.imp=null;XIO.to=0;XIO.ask=0;showTitle();return}catch(x){XIO.msg='<span class="r">'+CTM_WAIT.saveBlocked+'</span>'}}}
   wireXio()}}
 (function(){const o=window.showTitle;if(typeof o==="function")window.showTitle=function(){const r=o.apply(this,arguments);try{wireXio()}catch(e){}return r}})();
 try{if(!$("title").hidden){wireXio();if(!$("title").querySelector(".optwrap")&&typeof wireOpt==="function")wireOpt()}}catch(e){}

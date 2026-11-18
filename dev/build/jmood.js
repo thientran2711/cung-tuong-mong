@@ -102,7 +102,7 @@ function mbWeek(){if(!mbOn())return;const M=mbS(),b=B(),W=mbW();if(M.wk===W)retu
   if(fo)mbAdd(-Math.min(b.foe.cap,fo*b.foe.d),`${fo} người oán ngươi`,"w:foe");
   if(S.maid&&(S.maid.loyal||0)>=b.maidHi)mbAdd(b.maidD,`${S.maid.name||"cung nữ"} hết lòng với ngươi`,"w:maid")}catch(e){}
  /* weather */
- try{const x=S.wx;if(x){if(b.wx.nice.includes(x.n))mbAdd(b.wx.niceD,`trời ${x.n}`,"w:wx");else if(x.f===2||x.f===3||x.f===4)mbAdd(b.wx.harshD,`trời ${x.n}`,"w:wx");else if(x.f===1)mbAdd(b.wx.wetD,`trời ${x.n}`,"w:wx")}}catch(e){}
+ try{const x=S.wx;if(x){if(b.wx.nice.includes(x.b||x.n))mbAdd(b.wx.niceD,`trời ${x.n}`,"w:wx");else if(x.f===2||x.f===3||x.f===4)mbAdd(b.wx.harshD,`trời ${x.n}`,"w:wx");else if(x.f===1)mbAdd(b.wx.wetD,`trời ${x.n}`,"w:wx")}}catch(e){}
  /* measuring */
  MOOD_N.wk++;const bk=Math.round(M.v/20)*20;MOOD_N.hist[bk]=(MOOD_N.hist[bk]||0)+1;if(Math.abs(M.v)>=b.band[3])MOOD_N.ext++;if(M.v>=b.band[3])MOOD_N.hi++;if(M.v<=b.band[0])MOOD_N.lo++;
  mbComfort()}

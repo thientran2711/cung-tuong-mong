@@ -68,7 +68,7 @@ function kitDecor(f){f=f||{};let r=f.__kr||(f.__kp?personRoleRank(f.__kp):null);
  const metal=(KIT_ROLES[role]||{}).metal||(rank>=4?"#d9b25f":rank>=2?"#c9ccd2":"#b08a5a");
  const sex=r.kid?"k":r.sex==="m"?"m":"f";
  return{role,realRole:r.role,rank,origin:r.origin,known,frame:KIT_DIR+frame+".webp",bg:KIT_DIR+bg+".webp",badge:badge&&KIT_DIR+badge+".webp",emb:emb&&KIT_DIR+emb+".webp",col,metal,
-  tint,embName:r.origin&&typeof ORIGINS!=="undefined"?((ORIGINS.find(o=>o.k===r.origin)||{}).n||""):"",unknownSrc:KIT_DIR+`unknown-${sex}.webp`,label:known?"":"Người lạ"}}
+  tint,embName:r.origin&&typeof ORIGINS!=="undefined"?((originByKey(r.origin)||{}).n||""):"",unknownSrc:KIT_DIR+`unknown-${sex}.webp`,label:known?"":"Người lạ"}}
 /* attach the person to every face object the constructors build */
 (function(){const W=(name,who,hint)=>{const f0=window[name];if(typeof f0!=="function")return;window[name]=function(){const r=f0.apply(this,arguments);try{if(r&&typeof r==="object"){const p=who.apply(this,arguments);if(p&&!r.__kp)r.__kp=p;if(!r.__kr)r.__kr=personRoleRank(p,hint)}}catch(e){}return r}};
  W("pv",v=>v);W("pMe",()=>S);W("pEmp",()=>S.emp,"emp");W("pTH",()=>S.thO||{kind:"th"},"thaihau");W("pMaid",()=>S.maid,"maid");W("pDoc",()=>(S.court&&S.court.ty)||null,"physician");
@@ -115,6 +115,7 @@ function kitPortrait(p,o){o=o||{};const f=kitFace(p);return o.size==="lg"||o.siz
 .pcp.kit .kin>img.kemb{position:absolute;inset:auto!important;left:62.218%!important;top:65.718%!important;right:auto!important;bottom:auto!important;width:13.964%!important;height:auto!important;aspect-ratio:1;border-radius:0!important;object-fit:contain!important;z-index:3;filter:drop-shadow(0 1px 2px #0007)}
 .pcp.kit>.pcs{z-index:4}
 .pfwrap>.pcp.kit{max-height:none!important}
+/* kit-rank-name: a person card's header (rank over name, pcHead) already carries the label of its own frame, so the frame pendant never repeats the rank */.pc>.pcl>.pcp.kit .kin>.klab{display:none!important}
 .pcp.kit .kin>.klab{position:absolute;left:50%;top:68.737%;transform:translate(-50%,-100%);z-index:3;font-style:normal;font-size:.72rem;color:#f4f4f4;background:#4a4e54cc;padding:1px 8px;border-radius:8px;white-space:nowrap}
 .pcp.kit.noimg .kin{color:#fff8e8;text-shadow:0 1px 3px #000a}
 .md.kit{background:var(--kbg) center/cover no-repeat!important;border-color:var(--kc)!important;box-shadow:0 0 0 1.5px var(--km),0 2px 6px #5a3a2044!important}

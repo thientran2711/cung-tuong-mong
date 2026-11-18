@@ -14,8 +14,11 @@
    Test hook: window.KLOAD {phase, core:{have,total,files,left}, fig:{…}, paused, err}. */
 (function(){
 const KLOAD=window.KLOAD={phase:"idle",core:{have:0,total:0,files:0,left:0},fig:{have:0,total:0,files:0,left:0},paused:false,err:""};
-if(!("caches" in window)||!window.fetch||!/^https?:$/.test(location.protocol)||window.__bot)return;
+/* no Cache Storage / file:// / bot: no download sets, but the LIFE GATE below still runs (it only waits for the pictures the screen asks for) */
+const OFF=!("caches" in window)||!window.fetch||!/^https?:$/.test(location.protocol)||!!window.__bot;
 const AC="ctm-assets",LS="ctm-bgpause";
+/* how much has arrived, in words (never MB / %): the number beside the kit bar and the panel row */
+const dlPortion=g=>{const r=g.total?g.have/g.total:0,P=CTM_WAIT.dlPart;return r>=1?P[4]:r>=.9?P[3]:r>=.5?P[2]:r>=.25?P[1]:P[0]};
 const mb=n=>(n/1e6<10?(Math.round(n/1e5)/10):Math.round(n/1e6)).toLocaleString("vi-VN");
 /* pictures (img/…) come from Cloudflare (jcdn.js IMG_BASE, dev/art/CDN.md): their key is IMG_BASE+'img/…?h=<md5/16>'; a CDN download is
    marked with &ctmload=1 instead of the x-ctm-load header (a custom header would cost a CORS preflight per file) */
@@ -45,9 +48,9 @@ try{KLOAD.paused=localStorage.getItem(LS)==="1"}catch(e){}
 /* kv3:.kv1 */:where(.kv1) .kload .klb{padding:8px 10px 2px}:where(.kv1) .kload .kpopts{padding:2px 10px 10px}
 `;document.head.appendChild(st)})();
 
-/* ---------- the bar (kit 35): label above, track + "a / b MB" beside, sub line under ---------- */
+/* ---------- the bar (kit 35): label above, track + how much has come (words, KWAIT dlPart) beside, sub line under ---------- */
 function kitProgress(o){const v=o.total?Math.min(100,o.have/o.total*100):0;
- return `<div class="kprog">${o.label?`<h4 class="kpst">${o.label}</h4>`:""}<div class="kprog-r"><span class="kprog-t" role="progressbar" aria-valuemin="0" aria-valuemax="${Math.round(o.total/1e6)}" aria-valuenow="${Math.round(o.have/1e6)}"><u style="--v:${v.toFixed(1)}%"></u></span><b class="kprog-n">${mb(o.have)} / ${mb(o.total)} MB</b></div><small class="kprog-s">${o.sub||""}</small></div>`}
+ return `<div class="kprog">${o.label?`<h4 class="kpst">${o.label}</h4>`:""}<div class="kprog-r"><span class="kprog-t" role="progressbar" aria-valuemin="0" aria-valuemax="${Math.round(o.total/1e6)}" aria-valuenow="${Math.round(o.have/1e6)}"><u style="--v:${v.toFixed(1)}%"></u></span><b class="kprog-n">${dlPortion(o)}</b></div><small class="kprog-s">${o.sub||""}</small></div>`}
 window.kitProgress=kitProgress;
 
 const IOS=/iP(ad|hone|od)/.test(navigator.userAgent)||(navigator.platform==="MacIntel"&&navigator.maxTouchPoints>1);
@@ -73,19 +76,19 @@ function paintAsk(){const b=el.querySelector(".klb"),o=el.querySelector(".kpopts
  if(askMode==="guide"){head("Thêm vào màn hình chính");
   b.innerHTML=`<div class="kpnote">1. Chạm nút Chia sẻ (ô vuông có mũi tên chỉ lên) trên thanh của Safari.</div><div class="kpnote">2. Kéo xuống, chọn “Thêm vào MH chính” (Thêm vào Màn hình chính), rồi chạm “Thêm”.</div><div class="kpnote">3. Đóng Safari, mở Cung Tường Mộng từ biểu tượng mới trên màn hình chính. Ở đó mới thỉnh tranh vẽ, tiếng nhạc, chỉ một lần.</div>`+
    (hasSave()?`<div class="kpnote">Sổ đang cất trong Safari không tự sang ứng dụng. Muốn mang theo, chọn “Mở sổ mây trước” bên dưới.</div>`:"");
-  o.innerHTML=`<button class="kbtn alt" data-kl="back">Quay lại</button><button class="kbtn alt" data-kl="web">Chơi luôn trên trình duyệt</button>`+(hasSave()?`<button class="kbtn alt" data-kl="peek">Mở sổ mây trước (chưa thỉnh tranh)</button>`:"");return}
+  o.innerHTML=`<button class="kbtn alt" data-kl="back">Quay lại</button><button class="kbtn alt" data-kl="web">${CTM_WAIT.dlHere}</button>`+(hasSave()?`<button class="kbtn alt" data-kl="peek">${CTM_WAIT.dlPeek}</button>`:"");return}
  head("Chọn nơi chơi trước khi thỉnh tranh");
- b.innerHTML=`<div class="kpnote">Trên iPad, iPhone, Safari và ứng dụng ở màn hình chính cất tranh riêng, không dùng chung. Thỉnh tranh ở Safari (${left} MB) rồi mở bằng màn hình chính là phải thỉnh lại một lần nữa.</div><div class="kpnote">Nên thêm Cung Tường Mộng vào màn hình chính trước, rồi mở từ đó: chỉ thỉnh một lần.</div>`+
+ b.innerHTML=`<div class="kpnote">${CTM_WAIT.dlAskNote}</div><div class="kpnote">Nên thêm Cung Tường Mộng vào màn hình chính trước, rồi mở từ đó: chỉ thỉnh một lần.</div>`+
   (hasSave()?`<div class="kpnote">Sổ đang cất trong Safari không tự sang ứng dụng. Trước khi chuyển, vào Chọn sổ › Một mình › Sổ mây › Giữ sổ trên mây; ở ứng dụng chọn Nối sổ.</div>`:"");
- o.innerHTML=`<button class="kbtn" data-kl="a2hs">Thêm vào màn hình chính (khuyên)</button><button class="kbtn alt" data-kl="web">Chơi luôn trên trình duyệt</button>`+(hasSave()?`<button class="kbtn alt" data-kl="peek">Mở sổ mây trước (chưa thỉnh tranh)</button>`:"")}
+ o.innerHTML=`<button class="kbtn" data-kl="a2hs">Thêm vào màn hình chính (khuyên)</button><button class="kbtn alt" data-kl="web">${CTM_WAIT.dlHere}</button>`+(hasSave()?`<button class="kbtn alt" data-kl="peek">${CTM_WAIT.dlPeek}</button>`:"")}
 function paint(msg){if(!el)return;if(KLOAD.phase==="ask"){paintAsk();return}
  const c=KLOAD.core,b=el.querySelector(".klb"),o=el.querySelector(".kpopts");
- if(IOSB&&KLOAD.phase==="check"&&!MAN){b.innerHTML=`<div class="kpnote">Đang soát tranh đã cất trong máy</div>`;o.innerHTML="";return}
+ if(IOSB&&KLOAD.phase==="check"&&!MAN){b.innerHTML=`<div class="kpnote">${CTM_WAIT.dlCheck}</div>`;o.innerHTML="";return}
  o.className="kpopts";
- const sub=msg||(KLOAD.phase==="check"?"Đang soát tranh đã cất trong máy":eta(c.total-c.have));
+ const sub=msg||(KLOAD.phase==="check"?CTM_WAIT.dlCheck:eta(c.total-c.have));
  b.innerHTML=kitProgress({label:"Tranh cảnh · đồ vật · tiếng nhạc",have:c.have,total:c.total,sub})+
-  `<div class="kpnote">Chỉ thỉnh một lần. Từ lần sau vào cung ngay, không cần mạng; bản mới chỉ thỉnh phần tranh đổi khác.</div>`+
-  (KLOAD.fig.total?`<div class="kpnote">Tranh nhân vật (${mb(KLOAD.fig.total-KLOAD.fig.have)} MB) thỉnh dần sau khi ngươi đã vào cung.</div>`:"")+
+  `<div class="kpnote">${CTM_WAIT.dlOnce}</div>`+
+  (KLOAD.fig.total?`<div class="kpnote">${CTM_WAIT.dlFig}</div>`:"")+
   (IOSB?`<div class="kpnote">Safari và ứng dụng ở màn hình chính cất tranh riêng: nếu sau này ngươi thêm vào màn hình chính, ứng dụng sẽ thỉnh lại một lần nữa.</div>`:"");
  const stuck=KLOAD.err&&KLOAD.phase!=="done";
  o.innerHTML=stuck?`<button class="kbtn alt" data-kl="go">Vào cung ngay</button>${navigator.onLine!==false?`<button class="kbtn" data-kl="retry">Thỉnh tiếp</button>`:""}`:"";}
@@ -109,7 +112,7 @@ async function getOne(c,f,grp){const g=KLOAD[grp];let got=0;
  KLOAD.err="net";throw new Error("net")}
 let tickT=0;function tick(grp){if(tickT)return;tickT=setTimeout(()=>{tickT=0;speed.push([Date.now(),KLOAD[grp].have]);if(grp==="core")paint();else paintChip()},250)}
 async function pool(list,n,grp,stop){const c=await caches.open(AC);let i=0,dead=false;
- const w=async()=>{while(i<list.length&&!dead){if(stop&&stop())return;const f=list[i++];
+ const w=async()=>{while(i<list.length&&!dead){if(stop&&stop())return;while(grp!=="core"&&(LIFE.busy>0||LIFE.on))await new Promise(ok=>setTimeout(ok,300));/* the life set goes first */const f=list[i++];
    if(grp!=="core"&&await c.match(keyOf(f))){const g=KLOAD[grp];g.have+=f[2];g.left--;g.files++;continue}  /* the game showed it meanwhile (sw.js cached it) */
    try{await getOne(c,f,grp)}catch(e){dead=true;throw e}}};
  await Promise.all(Array.from({length:Math.min(n,list.length)},w))}
@@ -146,7 +149,7 @@ async function runCore(){if(!coreList.length){KLOAD.phase="done";close();startBg
  try{await pool(coreList,6,"core");coreList=[];KLOAD.phase="done";paint("Đã thỉnh đủ · mời nhập cung");setTimeout(()=>{close();startBg()},700)}
  catch(e){await new Promise(ok=>setTimeout(ok,300));await refresh("core");
   paint(KLOAD.err==="quota"?"Máy không còn chỗ cất tranh. Có thể vào cung ngay; tranh sẽ thỉnh khi cần.":
-   KLOAD.err==="offline"?"Mạng đứt. Có mạng lại sẽ thỉnh tiếp phần còn thiếu.":"Mạng chập chờn. Thỉnh tiếp, hoặc vào cung ngay.")}}
+   KLOAD.err==="offline"?CTM_WAIT.dlOffline:CTM_WAIT.dlFlaky)}}
 /* after a cut: re-read the cache so the next run only asks for what is still missing */
 async function refresh(grp){const c=await caches.open(AC);HAVE=new Set((await c.keys()).map(q=>q.url));const G=KLOAD[grp];G.have=0;G.files=0;G.left=0;
  const l=[];for(const f of MAN.files){if(f[3]==="fx"||f[3]==="lazy"||(f[3]==="core")!==(grp==="core"))continue;if(HAVE.has(keyOf(f))){G.have+=f[2];G.files++}else{l.push(f);G.left++}}
@@ -157,15 +160,15 @@ addEventListener("online",()=>{if(KLOAD.err==="offline"){KLOAD.err="";if(KLOAD.p
    a calm bobbing arrow while it runs, tap → kit info panel with the details + "Tạm ngưng / Thỉnh tiếp") ---------- */
 let bgOn=false,bgRun=false,dlDoneAt=0;
 const dlState=()=>{const g=KLOAD.fig,done=!g.left;return{g,done,paused:!!KLOAD.paused&&!done,err:!done&&!KLOAD.paused&&!!KLOAD.err}};
-const dlWords=s=>s.done?"Đã thỉnh đủ tranh nhân vật":s.paused?"Tạm ngưng thỉnh tranh · chạm để thỉnh tiếp":KLOAD.err==="quota"?"Máy hết chỗ cất tranh":KLOAD.err?"Mạng đứt · tranh thỉnh tiếp khi có mạng":"Đang thỉnh tranh nhân vật";
+const dlWords=s=>s.done?CTM_WAIT.dlDone:s.paused?CTM_WAIT.dlPaused:KLOAD.err==="quota"?CTM_WAIT.dlQuota:KLOAD.err?CTM_WAIT.dlErrChip:CTM_WAIT.dlRun;
 function dlPanel(){const s=dlState(),g=s.g;
- const o=[];if(!s.done&&KLOAD.err!=="quota")o.push({n:s.paused?"Thỉnh tiếp":"Tạm ngưng",x:s.paused?"Cho tranh tiếp tục về máy lúc rảnh.":"Dừng việc tải ngầm; muốn thì thỉnh tiếp sau.",fx:{},go:()=>{KLOAD.paused=!KLOAD.paused;try{localStorage.setItem(LS,KLOAD.paused?"1":"0")}catch(x){}paintChip();if(!KLOAD.paused)runBg()}});
+ const o=[];if(!s.done&&KLOAD.err!=="quota")o.push({n:s.paused?"Thỉnh tiếp":"Tạm ngưng",x:s.paused?"Cho tranh tiếp tục về máy lúc rảnh.":CTM_WAIT.dlPauseX,fx:{},go:()=>{KLOAD.paused=!KLOAD.paused;try{localStorage.setItem(LS,KLOAD.paused?"1":"0")}catch(x){}paintChip();if(!KLOAD.paused)runBg()}});
  return{kind:"info",look:1,title:"Thỉnh tranh nhân vật",sub:dlWords(s),sections:[
   {h:"Tiến độ",html:kitProgress({have:g.have,total:g.total,sub:s.done?"Đã về đủ, không còn gì phải đợi.":"Tranh về ngầm lúc rảnh, chơi cứ như thường."})},
-  {h:"Chi tiết",rows:[["Đang thỉnh","tranh vẽ các nhân vật trong cung"],["Đã về",`${mb(g.have)} / ${mb(g.total)} MB`],["Còn lại",s.done?"không còn":`${g.left} tệp`]]}],opts:o}}
+  {h:"Chi tiết",rows:[["Đang thỉnh","tranh vẽ các nhân vật trong cung"],[CTM_WAIT.dlGot,dlPortion(g)],[CTM_WAIT.dlLeft,s.done?CTM_WAIT.dlNone:CTM_WAIT.dlLeftN.replace("{n}",g.left)]]}],opts:o}}
 function paintChip(){const g=KLOAD.fig;if(!bgOn||!g.total||typeof kitStatusIcon==="undefined")return;
  const s=dlState();if(s.done&&!dlDoneAt)dlDoneAt=Date.now();
- kitStatusIcon.set("dl",{title:"Thỉnh tranh nhân vật",order:40,glyph:()=>dlState().done?"✓":"↓",
+ kitStatusIcon.set("dl",{title:"Thỉnh tranh nhân vật",order:40,icon:"img/kit/ico-download.webp",
   busy:()=>{const q=dlState();return !q.done&&!q.paused&&!KLOAD.err},done:()=>dlState().done,badge:()=>{const q=dlState();return q.paused||q.err},
   show:()=>!dlState().done||Date.now()-dlDoneAt<5000,panel:dlPanel});
  kitStatusIcon.refresh();if(s.done)setTimeout(()=>{try{kitStatusIcon.refresh()}catch(e){}},5200)}
@@ -183,7 +186,113 @@ async function runBg(){if(bgRun||KLOAD.paused||!figList.length)return;bgRun=true
  bgRun=false;paintChip()}
 
 window.kitLoadReady=function(cb){if(!el)cb();else enterCb.push(cb)};
-(async function(){try{KLOAD.phase="check";
+
+/* ---------- LIFE GATE (owner OD 18/11 ~01:50Z "vô game mà thấy những cái ô nó trống ... cảm giác như nó bị lag"; review/life-preload; KIT §35.3) ----------
+   The 'core' set above is the same for every life; the faces, figures, room and event pictures of ONE life are 'fig' / 'lazy' (on use).
+   1. LIFE SET (kitLifeSet): the pictures this life needs now — her portrait + figure, the Emperor, the Thái hậu, her maid, the court physician and
+      eunuch, her servants, the people standing in the place she is in, consorts whose figure is already chosen, the room scene, the pictures of the
+      first queued dialogs (Q) — PLUS every picture the screen itself is showing and has not finished (Luân hồi wheel, identity card, top bar chips…).
+   2. Whenever a life starts or changes (new life, Tiếp tục, Luân hồi, co-op join, a load: a new S object reaches render(), or start() is called),
+      the kit loading screen of §35 covers the game at once (same frame, kitProgress, CTM_WAIT words; never % / MB) until every one of them is in
+      and decoded, then fades out. A slow line: after 6 s the kit button "Vào cung ngay"; after 25 s she enters anyway.
+   3. During play the life set is re-checked after renders (at most every 2.5 s) and anything new (people met, a new rank tier, a new palace) is
+      fetched at once; the background 'fig' pool waits while the life set is busy (front of the line).
+   4. A dialog whose picture is not in yet waits hidden for it (at most 3 s), never opens with an empty picture box.
+   Test hook: KLOAD.life {n, bytes, ms, late, why}; node dev/test/life-preload.js. */
+const LIFE={busy:0,on:false,keep:new Map(),done:new Set(),seen:new WeakSet(),again:false,go:false,dirty:0};
+KLOAD.life=null;window.KLIFE=LIFE;LIFE.pend=()=>lPending();
+const lAbs=u=>{u=String(u||"");if(!u||/^(data|blob):/.test(u))return"";try{return new URL(typeof IMG_U==="function"?IMG_U(u):u,location.href).href}catch(e){return""}};
+let SIZE=null;function sizeOf(u){try{if(!MAN)return 0;if(!SIZE){SIZE=new Map();for(const f of MAN.files)SIZE.set(f[0],f[2])}const m=/img\/[^?#]*/.exec(u);return m?SIZE.get(decodeURIComponent(m[0]))||0:0}catch(e){return 0}}
+const lOk=u=>LIFE.done.has(u)||((LIFE.keep.get(u)||{}).ok!=null);
+/* one picture: load + decode (kept alive meanwhile, so it paints at once); raw = the string the game itself uses (PORK key of j39 porOf) */
+function lWant(u,raw){if(LIFE.done.has(u))return Promise.resolve(true);let e=LIFE.keep.get(u);if(e)return e.p;const im=new Image();im.decoding="async";e={im,ok:null};LIFE.keep.set(u,e);LIFE.busy++;
+ let res;e.p=new Promise(r=>{res=r});
+ const fin=ok=>{if(e.ok!=null)return;e.ok=ok;LIFE.busy--;res(ok);
+  if(ok&&/\/por-/.test(u))try{if(typeof PORK!=="undefined"){[u,raw].forEach(k=>{if(k&&PORK[k]!==1){PORK[k]=1;LIFE.dirty=1}})}}catch(x){}
+  setTimeout(()=>{LIFE.keep.delete(u);LIFE.done.add(u)},90000)};
+ im.onload=()=>{(im.decode?im.decode().catch(()=>0):Promise.resolve()).then(()=>fin(true))};im.onerror=()=>fin(false);im.src=u;setTimeout(()=>fin(false),45000)/* review r6: a picture that never answers (stalled line) no longer holds LIFE.busy (fig pool, title prefetch) forever */;return e.p/* review r6: the title prefetch chains on it (was undefined: pPump threw after the first picture) */}
+/* the pictures of THIS life (raw strings → absolute); never assigns a figure to someone who has none yet (figFor would pick one) */
+function kitLifeSet(){const M=new Map();const add=r=>{if(r&&typeof r==="string"){const a=lAbs(r);if(a)M.set(a,r)}};
+ try{if(typeof S==="undefined"||!S||typeof figFor!=="function")return M;
+  const ppl=[S,{kind:"emp"},{kind:"th"},S.maid,S.court&&S.court.ty,S.court&&S.court.ksp].concat(S.staff||[]);
+  try{if(typeof curPeople==="function")curPeople().forEach(p=>ppl.push(p))}catch(e){}
+  try{(typeof rivals!=="undefined"&&rivals||[]).forEach(v=>{if(v&&!v.dead&&v.fid)ppl.push(v)})}catch(e){}
+  /* only people whose figure is already chosen (fid): never choose one here — a choice made on a save's copy (title prefetch) would differ
+     from the one the game makes later, and someone without one has not been on screen yet (the gate's DOM scan covers the first screen) */
+  for(const p of ppl){if(!p)continue;try{const w=typeof figWho==="function"?figWho(p):p;if(!w||!w.fid)continue;add(figFor(p,"por"));add(figFor(p))}catch(e){}}
+  try{if(typeof evArt==="function")add(evArt())}catch(e){}
+  try{if(typeof Q!=="undefined"&&typeof kitEvArt==="function")Q.slice(0,3).forEach(m=>{const a=kitEvArt(m);if(a&&a.src)add(a.src)})}catch(e){}}catch(e){}
+ return M}
+window.kitLifeSet=kitLifeSet;
+/* pictures on screen that have not arrived yet (inside the viewport, a real box, not hidden) */
+function lPending(root){const out=[],H=innerHeight,W=innerWidth;for(const im of (root||document).querySelectorAll("img")){if(im.complete)continue;const s=im.currentSrc||im.src;if(!s||/^data:/.test(s))continue;
+ if(im.closest("#klife,#kload"))continue;const r=im.getBoundingClientRect();if(r.width<16||r.height<16||r.bottom<0||r.top>H||r.right<0||r.left>W)continue;
+ if(!im.offsetParent&&getComputedStyle(im).position!=="fixed")continue;out.push(s)}return out}
+/* CSS backgrounds of the visible screen (room scene, cards, icons drawn as backgrounds): absolute URLs, not yet here */
+function lBgs(){const out=[],H=innerHeight,W=innerWidth;for(const e of document.body.getElementsByTagName("*")){const bg=getComputedStyle(e).backgroundImage;if(!bg||bg==="none"||bg.indexOf("url(")<0)continue;
+ if(e.closest("#klife,#kload"))continue;const r=e.getBoundingClientRect();if(!r.width||!r.height||r.bottom<0||r.top>H||r.right<0||r.left>W)continue;
+ for(const m of bg.matchAll(/url\("?([^")]+)"?\)/g)){const u=lAbs(m[1]);if(u&&!/^data:/.test(u))out.push(u)}}return out}
+/* a core picture is in the local cache since the first loading screen: never a reason to show the gate */
+let CORE=null;function lCore(u){try{if(!MAN)return true;if(!CORE)CORE=new Set(MAN.files.filter(f=>f[3]==="core").map(f=>f[0]));const m=/img\/[^?#]*/.exec(u);return !!m&&CORE.has(decodeURIComponent(m[0]))}catch(e){return true}}
+let lel=null;
+function lCover(){if(lel)return lel;lel=document.createElement("div");lel.id="klife";lel.className="modal kpscene kload klife";
+ try{kitBackdrop(lel,"title")}catch(e){}
+ lel.innerHTML=`<div class="dlg kpanel kpsc" data-kind="notice"><div class="klh">${typeof kpHeader==="function"?kpHeader("notice","Cung Tường Mộng",CTM_WAIT.lifeHead):""}</div><div class="klb"></div><div class="kpopts"></div></div>`;
+ document.body.appendChild(lel);return lel}
+function lPaint(have,total,slow){if(!lel)return;const b=lel.querySelector(".klb"),o=lel.querySelector(".kpopts");
+ b.innerHTML=kitProgress({label:CTM_WAIT.lifeLabel,have,total,sub:slow?CTM_WAIT.lifeSlow:""})+`<div class="kpnote">${CTM_WAIT.lifeNote}</div>`;
+ const want=slow?`<button class="kbtn alt" data-klife="go">${CTM_WAIT.lifeGo}</button>`:"";if(o.innerHTML!==want)o.innerHTML=want}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-klife]");if(!b)return;e.stopPropagation();LIFE.go=true},true);
+const lSleep=t=>new Promise(ok=>setTimeout(ok,t));
+async function lifeGate(why){if(LIFE.off)return;/* test hook: KLIFE.off = no gate (mid-load shots of §59.1) */if(LIFE.on){LIFE.again=true;return}
+ if(why!=="start"){const L=kitLifeSet();lBgs().forEach(u=>{if(!lCore(u))L.set(u,u)});let miss=0;/* a background not yet seen this session counts as missing: a short gate (local cache) rather than one empty frame */const mw=[];L.forEach((raw,u)=>{if(!lOk(u)&&!lCore(u)){miss++;mw.push(u.split("/").pop());lWant(u,raw)}});
+  /* pictures already on the device (core set, or brought in by the title prefetch) paint within a frame: not a reason for the screen */
+  const pd=lPending().filter(u=>{const a=lAbs(u);return !lOk(a)&&!lCore(a)});KLOAD.lifeMiss=mw.concat(pd.map(u=>u.split("/").pop())).slice(0,12);if(!miss&&!pd.length){(KLOAD.lifes=KLOAD.lifes||[]).push({why,n:L.size,bytes:0,ms:0,late:0,cached:true});return}}
+ LIFE.on=true;LIFE.go=false;const t0=Date.now();lCover();
+ const st=KLOAD.life={why,n:0,bytes:0,ms:0,late:0};(KLOAD.lifes=KLOAD.lifes||[]).push(st);const all=new Set();let quiet=0,it=0,fin=false;
+ try{for(;;){const L=kitLifeSet();if(it++%5===0)lBgs().forEach(u=>{if(!L.has(u))L.set(u,u)});L.forEach((raw,u)=>{lWant(u,raw);all.add(u)});const pend=lPending();pend.forEach(u=>all.add(u));
+   if(LIFE.dirty&&![...L.keys()].some(u=>!lOk(u))&&Date.now()-t0<25000){LIFE.dirty=0;try{if(typeof S!=="undefined"&&S&&typeof render==="function")render()}catch(e){}quiet=0;await lSleep(60);continue}
+   const lp=[...L.keys()].filter(u=>!lOk(u)),pset=new Set(pend);let have=0;all.forEach(u=>{if(!pset.has(u)&&(lOk(u)||!L.has(u)))have++});
+   const slow=Date.now()-t0>6000;lPaint(have,Math.max(1,all.size),slow);
+   if(!pend.length&&!lp.length){if(++quiet>=2){if(fin)break;/* last round: draw once more (icons that wait for a probe, e.g. letters → painted icon), then check again incl. backgrounds */
+     fin=true;quiet=0;it=0;try{if(typeof S!=="undefined"&&S&&typeof render==="function")render()}catch(e){}}}else quiet=0;
+   if(LIFE.go||Date.now()-t0>25000){st.late=pend.length+lp.length;break}
+   await lSleep(120)}}catch(e){console.error("life gate",e)}
+ st.n=all.size;st.bytes=[...all].reduce((s,u)=>s+sizeOf(u),0);st.ms=Date.now()-t0;
+ const c=lel;lel=null;if(c){c.classList.add("out");setTimeout(()=>c.remove(),500)}
+ LIFE.on=false;/* review r6: the loop above already re-reads kitLifeSet() of the CURRENT S every round; a re-run after the 25 s cap or 'Vào cung ngay' covered the game again for the same pictures (25 s + 25 s, one flash between) */
+ if(LIFE.again){LIFE.again=false;if(!st.late&&!LIFE.go)setTimeout(()=>lifeGate("again"),0)}}
+window.kitLifeGate=lifeGate;
+/* TITLE PREFETCH (owner 18/11 02:06Z "không lẽ bây giờ tôi cứ bấm từng kiếp"): as soon as the game opens, the life sets of EVERY saved life
+   (all slots, newest first) come in the background, 4 at a time, before the generic 'fig' set (it waits while LIFE.busy) — so tapping any life
+   is usually instant and the gate above shows nothing. The set of a save is read by lending its S / rivals to kitLifeSet for one synchronous call. */
+function kitSaveLifeSet(d){const M=new Map();if(!d||!d.S)return M;const S0=S,R0=rivals;
+ try{S=d.S;rivals=Array.isArray(d.R)?d.R:[];try{if(!S.origin&&typeof originByKey==="function")S.origin=originByKey(d.ok)}catch(e){}return kitLifeSet()}catch(e){KLOAD.prefetchErr=String(e);return M}finally{S=S0;rivals=R0}}
+window.kitSaveLifeSet=kitSaveLifeSet;
+const PQ=[];let pAct=0;function pPump(){while(pAct<4&&PQ.length){const [u,raw]=PQ.shift();if(lOk(u))continue;pAct++;lWant(u,raw).then(()=>{pAct--;pPump()})}}
+function titlePrefetch(){try{if(window.__bot||typeof SK!=="function"||typeof loadSlot!=="function")return;
+ const L=[];for(let n=1;n<=3;n++){const d=loadSlot(n);if(d&&d.S)L.push(d)}L.sort((a,b)=>(b.at||0)-(a.at||0));
+ const seen=new Set();let n=0,bytes=0;for(const d of L)kitSaveLifeSet(d).forEach((raw,u)=>{if(seen.has(u)||lOk(u))return;seen.add(u);PQ.push([u,raw]);n++;bytes+=sizeOf(u)});
+ KLOAD.prefetch={lives:L.length,n,bytes};pPump()}catch(e){console.error("title prefetch",e)}}
+(function wait(k){try{if(typeof FIGIX!=="undefined"&&Object.keys(FIGIX).length&&!(typeof S!=="undefined"&&S)){titlePrefetch();return}}catch(e){}if(k<90)setTimeout(()=>wait(k+1),1000)})(0);/* FIGIX (the figure index) is built a moment after FIGS */
+/* a dialog never opens with an empty picture box: hidden (layout kept) until its pictures are in, at most 3 s */
+function lDlgWait(){try{const M=document.getElementById("modal");if(!M||M.hidden||LIFE.on)return;const d=M.querySelector(".dlg");if(!d)return;
+ if(!lPending(d).length){M.classList.remove("klifewait");return}const t0=Date.now();M.classList.add("klifewait");clearInterval(lDlgWait.t);
+ lDlgWait.t=setInterval(()=>{if(!lPending(M).length||Date.now()-t0>3000||M.hidden){clearInterval(lDlgWait.t);M.classList.remove("klifewait")}},80)}catch(e){}}
+(function(){const st=document.createElement("style");st.id="kit-life";st.textContent=`#modal.klifewait>.dlg{opacity:0;pointer-events:none}
+.modal.klife{z-index:2147483500}.modal.klife .dlg.kpsc{opacity:0;animation:klifeIn .3s ease .45s forwards}@keyframes klifeIn{to{opacity:1}}`;document.head.appendChild(st)})();
+let lReq=0;
+function lArm(){try{if(window.__bot||(window.COOPW&&COOPW.ctx))return;if(typeof S==="undefined"||!S||typeof S!=="object")return;
+ if(!LIFE.seen.has(S)){LIFE.seen.add(S);lifeGate("life");return}
+ const now=Date.now();if(now-lReq<2500)return;lReq=now;/* off the render path (perf): when the page is idle */
+ (window.requestIdleCallback||(f=>setTimeout(f,200)))(()=>{try{kitLifeSet().forEach((raw,u)=>lWant(u,raw))}catch(e){}},{timeout:3000})}catch(e){}}
+setTimeout(function(){try{
+ if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);lArm();return r};window.render=render}
+ if(typeof start==="function"){const s0=start;start=function(){if(!window.__bot&&!(window.COOPW&&COOPW.ctx))lifeGate("start");return s0.apply(this,arguments)};window.start=start}
+ if(typeof showModal==="function"){const m0=showModal;showModal=function(){const r=m0.apply(this,arguments);if(!window.__bot)lDlgWait();return r};window.showModal=showModal}
+}catch(e){console.error("life gate wiring",e)}},0);
+
+if(!OFF)(async function(){try{KLOAD.phase="check";
  /* show the screen at once if this device has no cache yet; a returning player sees nothing unless something is missing */
  let first=false;try{first=!(await caches.has(AC))}catch(e){}
  if(first){screen();paint()}
