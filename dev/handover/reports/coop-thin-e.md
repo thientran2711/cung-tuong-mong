@@ -131,7 +131,7 @@ Tripwire STATE by part, 4 weeks each (random bot, numbers vary ±30 %): L4 trip4
 ## ROLLOVER HANDOVER #3 → #4 (11/18/2026; context ≈ 26 % ≥ START 3 % + ~23 %) — Foreman B opens the successor
 Worktree /home/user/wt/cte (another container: recreate from review/coop-thin-e 9f596384, sparse, hooks), logs /home/user/wt/cte-out. Main worktree for comparisons /home/user/wt/cte-main.
 Left, in order:
-1. coop-bot L5 tripwire on 9f596384: `TRIP=1 THIN=5 node dev/test/coop-bot.js 4 <out>` must play 4/4 (last run stuck at week 3 = the ready race fixed in 9f596384; rerun). If the E residual is really the tối go path, either count it as G in coop-thin-trip.js (post-wrappers under nextBuoi with CW.allowN) or say so in Done.
+1. DONE after the handover: coop-bot L5 on 9f596384 = 4/4 weeks, no divergence, exit 0; STATE 4752, E 96 · C/H 39 · D·patch 768 (vs L4 trip4f E 96 · C/H 643). Still to check: the E residual (was:) coop-bot L5 tripwire on 9f596384: `TRIP=1 THIN=5 node dev/test/coop-bot.js 4 <out>` must play 4/4 (last run stuck at week 3 = the ready race fixed in 9f596384; rerun). If the E residual is really the tối go path, either count it as G in coop-thin-trip.js (post-wrappers under nextBuoi with CW.allowN) or say so in Done.
 2. Rerun on the final sha (5 changed paths since the last full gate): coop-thin-e L5 + swap, coop-night THIN=5, coop-timer THIN=5, coop-thin-c L5 (never run), coop-thin-a/b/c/d L0–4 spot (a L1, b L4, c L4, d L4), coop-e2e (+COOP_SWAP=1), coop-p2, coop-one-world seeds 1–10 (sh: see #2 list), quickcheck.
 3. Perf re-measure: `CPU=4 node dev/test/coop-thin-e-perf.js <W> 5` (her step for real now).
 4. Shots host Fold + guest iPad at a buổi step + a night result (scratch only; CDN img/_review/coop-thin-e/ only if the reviewer asks).
