@@ -14,7 +14,7 @@ function buoiShift(){
    try{if(typeof kitSfx==="function")kitSfx((typeof B4L!=="undefined"&&(S.buoi||0)===B4L)?"nightWatch":"buoi")}catch(e){}
    const b=((S.buoi||0)%4+4)%4,op=window.__btrOp!=null?+window.__btrOp:BTR_OP;
    const d=document.createElement("div");d.id="buoitr";d.className="btr b"+b;d.setAttribute("aria-hidden","true");
-   const h=document.querySelector("header.hud"),r=h?h.getBoundingClientRect():null;d.style.top=Math.max(0,r&&r.height?Math.round(r.bottom+6):0)+"px";d.style.setProperty("--btr-op",op);
+   const h=document.querySelector("header.hud"),r=h?h.getBoundingClientRect():null;d.style.top=Math.max(0,r&&r.height?Math.round(r.bottom+1):0)+"px";d.style.setProperty("--btr-op",op);
    d.innerHTML=`<b class="btr-t">${BUOI[b]}</b>`;document.body.appendChild(d);btrEl=d;
    const still=btrStill(),dur=still?700:kitPace(860),fin=still?120:kitPace(150),fout=still?220:kitPace(240);
    let done=false;const end=ms=>{if(done)return;done=true;btrEnd=null;removeEventListener("pointerdown",skip,true);d.style.transition=`opacity ${ms}ms`;d.style.opacity="0";setTimeout(()=>{d.remove();if(btrEl===d)btrEl=null},ms+30)};
@@ -24,7 +24,7 @@ function buoiShift(){
   }catch(e){console.error("buoiShift",e)}}
 (function(){const st=document.createElement("style");st.id="btr-css";st.textContent=`
 .btr{position:fixed;left:0;right:0;z-index:36;display:flex;justify-content:center;pointer-events:none;opacity:0}
-.btr-t{pointer-events:none;display:block;box-sizing:border-box;min-width:min(60vw,220px);max-width:92vw;padding:6px 26px;text-align:center;white-space:nowrap;background:var(--k3pl,rgba(255,250,240,.88));border:1px solid var(--line);border-radius:8px;box-shadow:0 1px 4px #3a20101f;font-family:var(--display);font-weight:700;font-size:clamp(1.1rem,3.4vmin,1.6rem);letter-spacing:.14em;color:var(--ink)}
+.btr-t{pointer-events:none;display:block;box-sizing:border-box;min-width:min(44vw,150px);max-width:92vw;padding:1px 18px;text-align:center;white-space:nowrap;background:var(--k3pl,rgba(255,250,240,.88));border:1px solid var(--line);border-radius:8px;box-shadow:0 1px 4px #3a20101f;font-family:var(--display);font-weight:700;font-size:clamp(.9rem,2.2vmin,1.1rem);letter-spacing:.1em;color:var(--ink)}
 `;document.head.appendChild(st)})();
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§74",title:"buổi banner · buoiShift (qua buổi: chỉ tên buổi trong khung chữ nhật dưới thanh trên, mờ nhẹ)",
   html:()=>`<div class="kitpg-row">${[0,1,2,3].map(b=>`<button type="button" class="kbtn alt" onclick="(function(){const s=S.buoi;S.buoi=${b};buoiShift();S.buoi=s})()">${BUOI[b]}</button>`).join("")}</div>`})}catch(e){}
