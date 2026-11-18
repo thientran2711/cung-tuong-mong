@@ -1227,6 +1227,27 @@ Object.assign(BAL.ag.why,{
  loTry:{want:30,prDiv:20,clear:35,wear:25,cct:20,cctBac:40,book:30,bookBac:20,ask:30,keep:30,frMul:5}  /* jlost: owner looks for it (want + price/prDiv), suspect clears her name (clear), holder wears it (wear + malice/2); her way: cct/book (when bạc ≥ …Bac) or ask (+liking); keep vs plant (keep vs her worst grudge); friend who saw it tells: recog.fr × frMul */
 });
 // G2a (worker a adds its Object.assign lines below this line)
+// G2a cooldowns (tuần) per actor+kind: j29 servant nết acts, j42 cung nữ road cards, jcmaid close-maid cards, jagknow seller/teller, jagacts3 secret grab
+Object.assign(BAL.ag.why.cd,{svSteal:4,svMarket:8,svSpy:4,svLeave:12,svTalk:4,srvCard:4,srvBuy:12,srvWatch:4,srvWed:8,srvBlack:4,srvSearch:3,srvPrince:8,cmSpy:4,cmLeak:4,cmConf:4,cmTt:8,cmBrawl:8,cmScorn:8,cmLand:12,cmTh:4,knSell:1,tmTell:1,p3Grab:2});
+Object.assign(BAL.ag.why,{
+ sv:{greed:40,loy:.3,market:30,spy:30,spyLoy:.3,leaveLoy:75,leaveW:1,leaveStall:1,leaveSung:.1,talk:35,tellLoy:.5,blabLoy:.5}, /* j29: steal s = netQ(greed)×greed + (100−lòng)×loy; market = netQ(greed)×market; spy = netQ(sharp)×spy + lòng×spyLoy; leave = (leaveLoy−lòng)×leaveW + months stalled×leaveStall (target: rank gap + Sủng×leaveSung); talk = netQ(talk)×talk, then tell (lòng×tellLoy) vs blab ((100−lòng)×blabLoy) */
+ srvCard:{mid:50,moodW:1.5,malMin:40,malW:1,bribe:1,frame:2,tip:.8}, /* j42 weekly card: mistress mood = |Chủ tin − mid|×moodW, order = (malice − malMin)×malW; rival bribe = hostility to the mistress×bribe; colleague frame = −quý×frame; friend tip = quý×tip */
+ srv:{reMin:1,reNeed:6,reRk:1,tipIntel:30,tipGift:25,leakMin:20, /* j42: Nội vụ phủ new mistress = max(reMin, reNeed − her staff) + rank×reRk; friend tells palace news (tipIntel + mistress grudge) vs a gift (tipGift); a witness holds the affair when grudge(her)+grudge(mistress) > leakMin */
+  lau:{base:6,max:4,div:2}, /* Tân Giả khố weeks = base + min(max, (tinOut − Chủ tin)/div) */
+  angry:{out:100,beatTin:30,beatW:2,sly:30,malMin:40,malW:.5,scold:30}, /* her anger: out when Chủ tin < tinOut (out); beat when Chủ tin < beatTin: (beatTin − tin)×beatW + Xảo quyệt sly + (malice − malMin)×malW; else scold */
+  ord:{poison:70,pHost:50,plant:45,plW:.8,spy:20}, /* order deed: poison when malice ≥ poison and grudge ≥ pHost (s = grudge); plant when malice ≥ plant (grudge×plW); spy = spy */
+  pun:{malW:.5,lau:40}, /* caught spying/betraying: kill = malice×malW vs Tân Giả khố = lau */
+  buy:{rk:8,tai:.2,host:.5}, /* a higher consort buys the maid: her bậc×rk + Tài×tai + grudge vs the mistress×host */
+  watch:{tin:.4,close:20}, /* the mistress watches her maid: (100 − Chủ tin)×tin + Kín đáo close */
+  wed:.5,prince:.5, /* ban gả: Chủ tin×wed; a prince asks for her: tình ý×prince */
+  black:{mis:.6,me:.6,mal:.2}, /* the witness blackmails: grudge vs mistress×mis + grudge vs her×me + malice×mal */
+  search:{rum:5,tin:.3,nv:1}, /* chest search: rumour×rum + (100 − Chủ tin)×tin + nết affairRumor×nv */
+  grant:{th:10,mis:.5,wed:40}}, /* Ban hôn granter: Thái hậu errands×th vs Chủ tin×mis; her own man (tình ý) vs a match (wed) */
+ cm:{spy:.4,leak:.4,debt:15,home:10,spyBy:20,conf:.4,tt:.5,brawl:.6,brLoy:.2,scorn:.6,land:.6,th:.4}, /* jcmaid: listens = lòng×spy; leaks = (100−lòng)×leak + debt/home(nhớ nhà)/spyBy by her secret; confides = lòng×conf; Tể tướng letter = her Sủng×tt; brawl = foe grudge×brawl + lòng×brLoy; scorn / Cung Chính ti report = foe grudge×scorn / ×land; speaks to Thái hậu = lòng×th */
+ kn:{will:60,need:40,tell:.5}, /* jagknow: seller s = sell will (0..1)×will + bạc gap (0..1)×need; refusing servant tells = lòng×tell (only from lòng ≥ loy.mid) */
+ p3:{see:60,host:1,mal:.5}, /* jagacts3: maid at the tryst place notices (see, odds); secret grab = grudge vs teller×host + (malice − secretMal)×mal */
+ stip:{tip:30,askLoy:.5,meek:20,timid:20} /* jstip NPC answer: tip (tip + bạc/tip, when she can pay ×2) vs maid asks (lòng×askLoy) vs meek (meek + netQ(timid)×timid) */
+});
 //
 //
 // G2b (worker b adds its Object.assign lines below this line)

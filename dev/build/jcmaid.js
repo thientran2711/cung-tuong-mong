@@ -52,7 +52,7 @@ function cmAskPick(){if(cmOff()||!S.maid)return;const k=S.origin&&S.origin.k;if(
 (function(){if(typeof start!=="function")return;const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S)S.cmaid={v:1}/* a new life (old saves have no S.cmaid) */;if(S&&S.maid&&!cmOff()){const k=S.origin&&S.origin.k;if(CM_SRC[k]==="pick"){S.cmaid.picked=1;cmAskPick()}else cmInit(S.maid)}}catch(e){console.error("cmaid start",e)}return r}})();
 
 /* ---------- the dilemmas (kit dilemma card: pushDil / PEND, saved like every other) ---------- */
-function cmFoe(){const L=liveRivals(true).filter(v=>v!==S&&!v.coop);if(!L.length)return null;return L.slice().sort((a,b)=>hostility(b,S)-hostility(a,S))[R(Math.min(3,L.length))]}
+function cmFoe(){const L=liveRivals(true).filter(v=>v!==S&&!v.coop);if(!L.length)return null;return npwPick(L,v=>hostility(v,S))}/* npc-purpose G2a: the house that bears her a grudge (none → nobody picks a fight) */
 PEND.cmTt=()=>{const B=cmB(),m=S.maid;return{who:pMaid(),t:`Thư phủ Tể tướng gửi vào qua tay ${m.name}: cha muốn ngươi dò ý Hoàng thượng về việc triều chính, viết lại cho người.`,o:[
  {n:"Làm theo lời cha",fx:{danh:B.ttDanh,sung:-B.ttSung},x:"phe cha mạnh thêm; Hoàng thượng thấy ngươi dò ý"},
  {n:`Dặn ${m.name} chỉ viết chuyện vặt`,fx:{maid:-B.ttLoy,bac:-B.ttBac},x:"cha giận, tháng này không gửi bạc vào cung"}]}};
@@ -62,7 +62,7 @@ PEND.cmBrawl=pp=>{const B=cmB(),m=S.maid,v=RV(pp.v);if(!v)return null;return{who
 PEND.cmScorn=pp=>{const B=cmB(),m=S.maid,v=RV(pp.v);if(!v)return null;const why=pp.w==="cnv"?"không ai chống lưng":"con nhà buôn muối";return{who:pMaid(),t:`Người của ${v.name} chê ${m.name} là ${why}, bới lỗi nàng ta trước mặt mọi người.`,o:[
  {n:"Nhịn cho yên chuyện",fx:{maid:-B.scLoy,danh:-B.scDanh},x:"nàng ta tủi thân"},
  {n:`Đòi ${v.name} một lời phải trái`,fx:{danh:B.scDanh,duc:-B.scDuc},x:`${v.name} oán ngươi thêm`,go:()=>{oanAdd(v,S,B.scOan)}}]}};
-PEND.cmLand=()=>{const B=cmB(),m=S.maid;return{who:pMaid(),t:`Cung Chính ti nghi ${m.name} (người cố quốc, mặc áo quê nhà) là tai mắt nước ngoài, xin đưa đi tra hỏi.`,o:[
+PEND.cmLand=pp=>{const B=cmB(),m=S.maid,by=pp&&pp.by!=null?RV(pp.by):null;return{who:pMaid(),t:`Cung Chính ti nghi ${m.name} (người cố quốc, mặc áo quê nhà) là tai mắt nước ngoài, xin đưa đi tra hỏi.${by?` Nghe đâu người của ${by.name} mách lên, vì oán ngươi.`:""}`,o:[
  {n:"Để Cung Chính ti tra hỏi",fx:{maid:-B.laLoy,th:B.laTh},x:"Thái hậu thấy ngươi biết phép"},
  {n:"Đứng ra bảo lãnh cho nàng ta",fx:{danh:-B.laDanh,th:-B.laTh*2,maid:Math.round(B.laLoy/2)},x:"triều thần nghi cả ngươi"}]}};
 PEND.cmTd=()=>{const B=cmB();return{who:pMaid(),t:"Ở Tân Giả khố có một bà lão giặt đồ: gia nhân cũ của nhà ngươi, thoát chết năm cả nhà bị xử. Bà nhận ra ngươi.",o:[
@@ -104,8 +104,8 @@ function cmGuard(t,p){try{if(t!==S||cmOff()||!S.maid||S.maid.src!=="home"||!S.or
    other way (BAL.ag.stf2.cm: spy × lòng / talLoy, leak × (100 − lòng) / (100 − secTrust)). A secret affair FOUND by Cung Chính ti (lover)
    is not her choice: it stays the old witness roll. Loop off → the old rolls. */
 function cmCh(m,w){if(!(window.agOn&&agOn()&&typeof ag2Ch==="function"))return null;return !!ag2Ch(m,cl(w,0,100))}/* a weighted draw of her inclination (j8 ag2Ch), no jmind slip: a slip would bend a rare monthly rate (3 %) several times over */
-function cmSpyCh(m){const B=cmB(),K=BAL.ag.stf2.cm;const c=cmCh(m,B.talSpy*K.spy*(m.loyal||0)/B.talLoy);return c==null?roll(B.talSpy):c}
-function cmLeakCh(m,s){const B=cmB(),K=BAL.ag.stf2.cm;if(!s||s.k==="lover")return roll(B.secOut);const c=cmCh(m,B.secOut*K.leak*(100-(m.loyal||0))/Math.max(1,100-B.secTrust));return c==null?roll(B.secOut):c}
+function cmSpyCh(m){const B=cmB(),K=BAL.ag.stf2.cm;const c=cmCh(m,B.talSpy*K.spy*(m.loyal||0)/B.talLoy);return c==null?(!!npcWhy("cmSpy",{p:m})&&roll(B.talSpy)):c}/* npc-purpose G2a: she listens for her mistress out of loyalty */
+function cmLeakCh(m,s){const B=cmB(),K=BAL.ag.stf2.cm;if(!s||s.k==="lover")return !!npwPick(liveRivals(true).filter(v=>v!==S&&eyes(v)>0),v=>hostility(v,S)-BAL.ag.why.tell.host)&&roll(B.secOut);/* npc-purpose G2a: Cung Chính ti hears of it only from a rival with tai mắt and a grudge against her mistress */const c=cmCh(m,B.secOut*K.leak*(100-(m.loyal||0))/Math.max(1,100-B.secTrust));return c==null?(!!npcWhy("cmLeak",{p:m,s})&&roll(B.secOut)):c}
 /* ---------- the month ---------- */
 function cmFact(m,who){const x=evGuilty(S,liveRivals(true).filter(v=>v!==S));if(!x)return"";const d=evA(S,x,BAL.eff.jcmaid.evD);if(!d)return"";cmC("fact");return `${m.name} ${who}: chứng cứ về ${x.name} +${d}. `}
 function cmMonthMe(){const B=cmB(),m=S.maid;if(!m)return"";
@@ -118,18 +118,18 @@ function cmMonthMe(){const B=cmB(),m=S.maid;if(!m)return"";
  /* talent */
  if(cmTalOn(m)&&m.loyal>=B.talLoy){if(m.tal==="theu"){apply({bac:B.talBac});cmC("talBac",B.talBac)}else if(m.tal==="thuoc"){S.suc=cl(S.suc+B.talSuc,0,sucCap(S));cmC("talSuc",B.talSuc)}else if(m.tal==="nghe"&&cmSpyCh(m))ev+=cmFact(m,"nghe lỏm được chuyện")}
  /* secret: costs her until known; she confides when she trusts her */
- const s=m.sec;if(s&&!s.done){if(!m.secKn){if(m.loyal>=B.secTrust&&roll(B.secTell)){m.secKn=1;cmC("secTell");if(s.k==="lover"){m.loyal=cl(m.loyal+B.secLoy,0,100);s.done=1;ev+=`${m.name} thú thật với ngươi chuyện đối thực với một thái giám; ngươi giữ kín cho nàng ta (thiện cảm +${B.secLoy}). `}else if(cdOk){dil("cmSec");return ev}}
+ const s=m.sec;if(s&&!s.done){if(!m.secKn){if(m.loyal>=B.secTrust&&npcWhy("cmConf",{p:m})&&roll(B.secTell)){m.secKn=1;cmC("secTell");if(s.k==="lover"){m.loyal=cl(m.loyal+B.secLoy,0,100);s.done=1;ev+=`${m.name} thú thật với ngươi chuyện đối thực với một thái giám; ngươi giữ kín cho nàng ta (thiện cảm +${B.secLoy}). `}else if(cdOk){dil("cmSec");return ev}}
    else if(cmLeakCh(m,s)){cmC("secOut_"+s.k);if(s.k==="lover"){apply({danh:-B.secDanh});m.loyal=cl(m.loyal-B.secLoy,0,100);m.secKn=1;s.done=1;ev+=`Cung Chính ti bắt được ${m.name} đối thực với một thái giám; người ta cười chê cung ngươi. Danh −${B.secDanh}. `}
     else if(s.k==="debt"){const g=Math.min(B.secBac,S.bac||0);apply({bac:-g});ev+=`Hộp trang sức vơi đi ${g} lượng; không ai biết ai lấy. `}
     else if(s.k==="family"){m.loyal=cl(m.loyal-Math.round(B.secLoy/2),0,100)}
     else if(s.k==="spy"){const v=RV(s.by);if(v&&v.alive){const d=evA(v,S,BAL.eff.jcmaid.evD_2);if(d)cmC("spyLeak",d)}}}}
-  else if(cdOk&&s.k!=="lover"&&roll(B.secTell)){dil("cmSec");return ev}}
+  else if(cdOk&&s.k!=="lover"&&npcWhy("cmConf",{p:m})&&roll(B.secTell)){dil("cmSec");return ev}}
  /* origin */
- if(m.src==="home"&&k==="tt"&&cdOk&&roll(B.ttPress)){dil("cmTt");return ev}
- if(m.src==="home"&&k==="dtq"&&cdOk&&roll(B.dtqBrawl)){const v=cmFoe();if(v){dil("cmBrawl",{v:v.id});return ev}}
- if(((m.src==="home"&&k==="muoi")||(m.src==="pick"&&k==="cnv"))&&cdOk&&roll(B.scorn)){const v=cmFoe();if(v){dil("cmScorn",{v:v.id,w:k});return ev}}
- if(m.src==="land"){if(cdOk&&roll(B.landAsk)){dil("cmLand");return ev}if(roll(B.landGift)){apply({bac:B.landBac});cmC("landBac",B.landBac);ev+=`Thư và quà cố quốc đến qua tay ${m.name}: Bạc +${B.landBac}. `}}
- if(m.src==="th"&&!S.thDead&&m.loyal>=B.talLoy&&roll(B.chTh)){S.th=cl((S.th||0)+B.chThUp,-100,100);cmC("chTh",B.chThUp)}
+ if(m.src==="home"&&k==="tt"&&cdOk&&npcWhy("cmTt",{p:m})&&roll(B.ttPress)){dil("cmTt");return ev}
+ if(m.src==="home"&&k==="dtq"&&cdOk){const ob=npcWhy("cmBrawl",{p:m});const v=ob&&roll(B.dtqBrawl)?ob.tgt:null;if(v){dil("cmBrawl",{v:v.id});return ev}}
+ if(((m.src==="home"&&k==="muoi")||(m.src==="pick"&&k==="cnv"))&&cdOk){const os=npcWhy("cmScorn",{});const v=os&&roll(B.scorn)?os.who:null;if(v){dil("cmScorn",{v:v.id,w:k});return ev}}
+ if(m.src==="land"){const ol=cdOk&&npcWhy("cmLand",{});if(ol&&roll(B.landAsk)){dil("cmLand",{by:ol.who.id});return ev}if(roll(B.landGift)){apply({bac:B.landBac});cmC("landBac",B.landBac);ev+=`Thư và quà cố quốc đến qua tay ${m.name}: Bạc +${B.landBac}. `}}
+ if(m.src==="th"&&!S.thDead&&m.loyal>=B.talLoy&&npcWhy("cmTh",{p:m})&&roll(B.chTh)){S.th=cl((S.th||0)+B.chThUp,-100,100);cmC("chTh",B.chThUp)}
  if(m.src==="pick"&&k==="thd"&&cmTalOn(m))for(const x of (S.staff||[]))if(x.role==="maid"&&typeof servMerit==="function"){servMerit(x,B.thdMerit);cmC("thdMerit",B.thdMerit)}
  if((m.src==="room"&&roll(B.cnSpy))||(m.src==="pick"&&k==="cnv"&&cmTalOn(m)&&roll(B.cnvNet)))ev+=cmFact(m,m.src==="room"?"thuộc từng ngóc ngách, dò ra":"nghe đám cung nữ đồn");
  if(k==="td"&&!S.cmaid.tdOld&&!S.cmaid.tdNo&&cdOk&&roll(B.tdMeet)){S.cmaid.tdNo=1;dil("cmTd");return ev}
