@@ -1,4 +1,4 @@
-# REPORT face-fix-c16-c01 (W51, sonnet) — STATUS: DIAGNOSIS ONLY, NOT READY (needs exact file from Foreman C)
+# REPORT face-fix-c16-c01 (W51, sonnet) — STATUS: SCAN DONE (c01), ALPHA TOOL PARTLY WORKS, NOT READY — ROLLOVER HANDOVER below
 PRIORITY #1 CHECK: brief face-fix-c16-c01.md read in full; START_CORE/START_WORKER/START_ART/FIGURE_GATE skimmed (D1 own face, D2 clean forehead, D4b closed-lip smile); no existing fix on main/review (brief's own check: 0).
 
 ## Orders (verbatim from FOREMAN_C_STATUS)
@@ -23,3 +23,23 @@ Plan once confirmed: alpha edge repair first (morphological close of alpha holes
 0 Magnific gens, 0 credits used. Gens table: n/a yet.
 
 ~10% xong / ~0% chơi được
+
+
+## UPDATE 11:55Z — Foreman C ordered the WHOLE GROUP (all ages x t1-t8 x sizes, both figures)
+Scan (hd cheek crops of all 64 hd files, 4x4 sheets looked; script dev/art/face-fix/cheek_sheets.py, downloader dl_variants.py). Automatic metrics (alpha notch, bluish pixels) did NOT separate faulty from clean files (the "blue speck" is low-alpha cream/skin pixels over the dark page, RGB itself is not blue; crowns/hair wisps also score high), so the table is by LOOKING at every crop:
+| fig | age | tiers with the fault (right cheek/jaw by the mouth: semi-transparent smudge + ragged edge) | clean |
+|---|---|---|---|
+| c01 | a18 | none | t1-t8 |
+| c01 | a26 | t1 (ragged), t2 (blue speck by mouth), t3 (speck) | t4-t8 |
+| c01 | a36 | t1 (speck by mouth), t5 (smear by mouth) | t2-t4, t6-t8 |
+| c01 | a51 | t1 (dark speck by mouth); t3/t5 only mild edge | t2, t4, t6-t8 |
+| c16 | a18/a26/a36/a51 | NOT YET LOOKED (sheets sh_c16_*.png generated in /tmp only) — from the earlier look: a18 por t1-t3, a26 hd t1/t2/t4 | pending |
+(por and fig are the same cut-out at smaller size; apply the same tier list to por/fig/hd; tn not found in the CDN index for these names.)
+
+## Tool tried: dev/art/face-fix/alpha_fix.py (Haar face rect + skin blob; fades light low-alpha pixels outside the face outline in the lower-right cheek/jaw zone, fills notches inside it)
+Test c01 t2 a26 hd (before|after at 2.5x, looked): speck by the mouth REMOVED, jaw edge smoother. BUT it leaves a hard-edged stub of the hair lock beside the cheek and a slightly straight neck edge — not good enough to ship; a clean result needs a re-matte of the 2K source or a Magnific gpt-2-6 retouch on opaque background + remove_background (not done, 0 gens).
+## ROLLOVER HANDOVER (W51 near context ceiling)
+- Successor: (1) look sheets for c16 (run dl_variants.py, cheek_sheets.py; mediapipe wheels do not exist for py3.13 here: use cv2 Haar as in alpha_fix.py; pip scipy numpy opencv-python-headless==4.10.0.84); (2) finish the table; (3) for each faulty file: Magnific gpt-2-6 retouch of the face edge ON A PLAIN BACKGROUND (ref = the same live figure) then images_remove_background, or hand-tune alpha_fix.py (zone rows .5-1.3, hair-lock stub is the open defect); (4) outputs img/_review/face-fix/<cNN>/; (5) before|after 3x sheet; gens table.
+- Nothing uploaded, 0 gens, 0 credits.
+
+~20% xong / ~0% chơi được
