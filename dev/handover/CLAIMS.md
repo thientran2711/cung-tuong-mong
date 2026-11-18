@@ -10,6 +10,7 @@
 shown-odds-one-path | review/shown-odds-one-path | session_01964izErPfcSMFt3TCCHZbd | LIVE a2ce736a (worker archived) | 18/11 13:52Z | owner D #1
 | E11a | session_01DgYSWmGi5DMjQqQpadvKCr | review/ge-writers-w1 (jgedata_w1.js) | GE writers W1 tt/dtq/muoi — READY a58b55eb (reports/ge-writers-w1.md) | Foreman E | 18/11 13:52Z |
 | E11b | session_01DgYSWpWi1g7SyTG9ZiYekG | review/ge-writers-w2 (jgedata_w2.js) | GE writers W2 cn/nc/td | Foreman E | 18/11 13:52Z | ARCHIVED → E11b2 session_01DgYSWmfFdwEVWhdEJkhbTh 16:52Z |
+| E11b2 (successor of E11b) | session_01DgYSWmfFdwEVWhdEJkhbTh | review/ge-writers-w2 (jgedata_w2.js) | GE writers W2 cn/nc/td | Foreman E | 18/11 16:55Z | START_CTX 5 % |
 | AG-DEED-PERF (opus; follow-up perf, outcome-identical) | review/ag-deed-perf | C-AG #12 | session_01UV1SzjwvRPnDTMQuN3wnw9 | RUNNING | 18/11 14:10Z |
 shown-odds-one-path-rv | review/shown-odds-one-path-rv | session_01964izEojRf2ME8Lmxpkd5x | LIVE a2ce736a (archived) | 18/11 14:20Z | owner D #1
 | FOREMAN C-AG #13 (opus; successor of #12, opened by #12; also does lander work: no LANDER #7, depth 8) | handover FOREMAN_C_STATUS, review/npc-chain-land, review/ag-all-2-land | C-AG #13 | session_01UV1Szgvw457GueTtE27whc | RUNNING | 18/11 14:55Z |
