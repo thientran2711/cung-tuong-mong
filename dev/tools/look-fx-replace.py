@@ -13,7 +13,8 @@ S=384;yy,xx=np.mgrid[0:S,0:S];xs=(xx+.5)/S;ys=(yy+.5)/S;keep=np.zeros((S,S));ins
 for u,v,ru,rv in K:
     s=(u+.04)/1.08;t=(v+.3826)/1.165;hw=ru*PAD*1.22/1.08;hh=rv*PAD*1.22/1.165;d=np.sqrt(((xs-s)/hw)**2+((ys-t)/hh)**2);keep=np.maximum(keep,np.clip((1-d)/.18,0,1));inside|=d<=1
 pm=np.zeros((S,S),np.uint8);cv2.fillPoly(pm,[(P*S).astype(np.int32)],1);pm=pm>0
-FREE=(~inside)&pm;FREE=ndi.binary_erosion(FREE,iterations=4)   # free zone for re-placed blobs (margin 4 px from the polygon edge and the ellipses)
+pm2=np.zeros((S,S),np.uint8);cv2.fillPoly(pm2,[(((P-[.5,.55])*.9+[.5,.55])*S).astype(np.int32)],1)   # blobs go into the polygon shrunk to 90 %: a per-picture face-fit row can move the edge in, and a blob on the edge would be cut into a hard wedge
+FREE=(~inside)&(pm2>0);FREE=ndi.binary_erosion(FREE,iterations=4)   # free zone for re-placed blobs (margin 4 px from the polygon edge and the ellipses)
 def alpha(f):return np.asarray(Image.open(f).convert("RGBA"))[...,3].astype(float)/255
 def kept(al):t=al.sum();return float((al*(1-keep)*pm).sum()/t) if t else 1.
 def replace(f):
@@ -36,7 +37,9 @@ def replace(f):
             if best:
                 _,dx,dy=best;sl=(slice(dy,dy+nh),slice(dx,dx+nw));out[sl][mk]=pt[mk];occ[sl]|=mk;placed=True;break
         if not placed:   # too big for any free spot even shrunk: keep the part that lies on free skin (what the game mask would leave) instead of dropping the whole blob
-            ok=pm_&(keep[y0:y1,x0:x1]<.001)&pm[y0:y1,x0:x1]&~(occ[y0:y1,x0:x1]);out[y0:y1,x0:x1][ok]=patch[ok];occ[y0:y1,x0:x1]|=ok;print("   blob cut to free skin:",os.path.basename(f),"size",pm_.sum(),"kept",ok.sum())
+            ok=pm_&(keep[y0:y1,x0:x1]<.001)&pm2[y0:y1,x0:x1].astype(bool)&~(occ[y0:y1,x0:x1])
+            if ok.sum()<.6*pm_.sum():ok[:]=False   # a blob cut to a hard-edged wedge looks worse than no blob: dropped
+            out[y0:y1,x0:x1][ok]=patch[ok];occ[y0:y1,x0:x1]|=ok;print("   blob cut to free skin:",os.path.basename(f),"size",pm_.sum(),"kept",ok.sum())
     return Image.fromarray(out)
 res=[]
 for f in sorted(x for x in os.listdir(D) if re.fullmatch(r"fx-[a-z]+(-[a-z]+)?-\d(-m|-r\d+)?\.png",x) and "-r" not in x[-7:]):
