@@ -102,3 +102,4 @@ parallel-time (ORDER ROOT-54 ~20:22Z + ADD ~20:37Z) | review/parallel-time | ses
 | ge-writers-w1 remerge main 13bb8c88 (sonnet E11w1m) | review/ge-writers-w1 | E ROOT #7 | session_01DgYSWkZN9pWgeEfv5WDMRV | RUNNING | 18/11 20:04Z |
 | errand-scene r2 (sonnet UI/motion, non-blocking redo, whole group) | review/errand-scene | MAIN ROOT-55 | session_01Rc5AsLFZhaSRGU7o57KkKy | RUNNING | 18/11 20:05Z |
 | stage-here r2 (opus; successor; gaps a–d + LOOK fixes, on stage-rightcol) | review/stage-here | MAIN ROOT-55 | session_01Rc5AsHiLwk4MGH662uw5L3 | RUNNING | 18/11 20:10Z |
+| map-zones r2 (opus; trim 13→10: drop Trữ Tú, Hàm Phúc, Thái Cực điện; save migration) | review/map-zones | MAIN ROOT-55 | session_01Rc5AsLenCtDZkYpKqUFs18 | RUNNING | 18/11 20:11Z |
