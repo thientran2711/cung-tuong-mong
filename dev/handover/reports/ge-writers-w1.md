@@ -2,7 +2,13 @@
 PRIORITY #1 CHECK ('ge-writers|GE writer|jgedata'): OD 0 | ledger 0 | claims 8 | main 5 | review/* 2 | archive 0 — reused review/ge-writers-w1 (fixed in place) + review/ge-writers-w2 test text (base of fix 4); nothing new built.
 LINEAGE (fix round): E11a2 depth 5 · session_01DgYSWoSMJso8hGSAFMN9W6 · START_CTX ~3 % (window 1M; get_session reads 0, own estimate) · ended ~12 %.
 
-**READY (fix round): review/ge-writers-w1 tip 46aeac92** (parent a58b55eb). No push to main, no PR. Road files jrd_* NOT edited. Verdict fixed: dev/handover/reports/ge-writers-w1-review.md (E11r-w1 FAIL a58b55eb, 4 fixes).
+**READY (round 2): review/ge-writers-w1 tip df30265f** (round 2 = merge origin/main 5e6490b4 + test timing + FOR B final; fix round was 46aeac92) (parent a58b55eb). No push to main, no PR. Road files jrd_* NOT edited. Verdict fixed: dev/handover/reports/ge-writers-w1-review.md (E11r-w1 FAIL a58b55eb, 4 fixes).
+
+## ROUND 2 (E11a2, after E11r-w1 PASS 46aeac92 «land after B patch») — tip df30265f
+1. Re-merged origin/main 5e6490b4: assemble.py = main's module list (12 new modules) + `'jgedata_w1.js'` right after `'jgedata.js'` (W2 adds `'jgedata_w2.js'` after it, same line); index.html / sw.js taken from main and rebuilt.
+2. Test timing family: dev/test/ge-engine.js `__life` and dev/measure/ge-measure.js `__ge` now wait for `S.st.f14.rd===road` (they accepted the OLD life when only `S.st.f14` was checked). Shared block — W2 copies `git show df30265f:dev/test/ge-engine.js` (+ ge-guard.js unchanged since 46aeac92; ge-measure.js same line).
+3. FOR B item 1 rewritten as the final, tested patch (below).
+Tests (df30265f): ge-guard 6/6 · ge-engine `- all` cold ×2: **456/456, 456/456** · one-core-guard PASS · build_site OK · quickcheck ALONE **PASS** (core gates PASS, open 1671 ms, old save ok, perf new/live render 229/255, tab 466/482, buổi 1336/1273, tasks>200 19/19).
 
 ## FIX ROUND (E11a2, 18/11) — the 4 fixes, each as a family
 Files: dev/build/jgedata_w1.js (words only: no pull / close / lean / cond change → no new measure needed), dev/test/ge-guard.js, dev/test/ge-engine.js, site rebuilt (index.html, sw.js, assets.json).
@@ -55,14 +61,50 @@ Sha sent to Foreman E right after push.
 - Measure: not rerun (words only; no Chuỗi / Khóa / lean / cond change).
 
 ### FOR B (road patches; jrd_* are Foreman B's — not edited)
-1. **REQUIRED — muoi_no (jrd_muoi.js) ch8 «Nợ chồng nợ»: one more c-beat so the scholar of muoi_no_4 exists** — add `"c3"` to the c-pool (`p:[["s1","s2"],["c1","c2","c3"],["t1"],["x1"]]`) and:
+1. **REQUIRED — muoi_no ch8 «Nợ chồng nợ»: the scholar of muoi_no_4, played in EVERY life (FINAL, round 2).**
+   How it is always played: j67 `pickNext67` uses `A.force` before the pool (j67:105), and an option's `to` / `tf` sets it (j67:143). Ch8 always opens with s1 (after a won chapter) or s2 (otherwise); both need {v}, and the road cannot run without {v} (cast). So every option of s1 and s2 gets `to:"c3",tf:"c3"`, and the new beat c3 is **not** put in the c-pool (no 3rd c pick, the ~2-of-3 draw is untouched); it takes the first c slot (nc ≥ 1 always).
+   BAL (laws 2/3/4): row `BAL.road.muoi_no_8.c3` in jbalroad.js — each option one cost + one gain from BAL, equal value, same shapes as the c2 row of that chapter (bạc −40 → Đức +3 · Sức −3 → Danh +2 · Đức −2 → Tâm cơ +3, each +1 Lợi thế). Lean: thiện = the first two, ác = the third.
+   Tested locally on review/ge-writers-w1 df30265f (patch applied, then reverted — not landed): assemble OK, **one-core-guard PASS**, page probe `newThread67("muoi_no_8")` ×60 per opening: s2 path 180/180 options → c3, s1 path (rdK stubbed won) 180/180 → c3, 0 page errors.
+   Exact patch (`git apply` from the repo root):
+```diff
+diff --git a/dev/build/jbalroad.js b/dev/build/jbalroad.js
+index 81e137cd..e4c67e7c 100644
+--- a/dev/build/jbalroad.js
++++ b/dev/build/jbalroad.js
+@@ -190,3 +190,3 @@ Object.assign(BAL,{road:{get first(){return BAL.st14.parts[1][0]+1},get last(){r
+  muoi_no_7:{s1:[{c:{suc:-2},o:[40,["d","tamco",3]],w:{mat:1},l:{tamco:-2},sc:1},{c:{tamco:-1},w:{duc:2},sc:1,g:[6]},{c:{bac:-30},w:{tamco:2},g:[8,-4]}],s2:[{c:{},o:[40,["d","tai",4]],w:{danh:2},l:{danh:-2},sc:1,g:[5]},{c:{danh:-2},w:{duc:2},sc:1,g:[8]},{c:{sung:-2},w:{tamco:2},g:[4]}],c1:[{c:{sung:-4},w:{tamco:1}},{c:{},o:[40,["d","tamco",3],["d","danh",6]],w:{danh:2},l:{danh:-3},sc:1,g:[6,3]},{c:{bac:-20},o:[40,["m","mat",5]],w:{mat:1},l:{tamco:-1},sc:1}],c2:[{c:{bac:-40},w:{mat:1},sc:1},{c:{suc:-2},o:[35,["m","mat",5]],w:{tamco:2},l:{danh:-2},sc:1},{c:{mat:-1},w:{duc:1}}],t1:[{c:{tamco:-1},w:{duc:2},sc:1},{c:{suc:-3},o:[40,["f","call",15,0],["f","cut",10,0]],w:{tamco:2},l:{danh:-3},sc:1,g:[6,8,4]}],x1:[{c:{suc:-3},o:[35,["f","pair",10,0],["d","tai",5]],g:[6]},{c:{bac:-30},o:[40,["f","cut",15,0],["f","read",10,0],["m","mat",3]]},{c:{sung:-3},w:{tamco:2}}],E:{win:{fx:{danh:4,tamco:2},k:1,g:[8,8]},mid:{fx:{tamco:1},k:0},lose:{fx:{danh:-5,sung:-2},k:-1,g:[6]}}},
+- muoi_no_8:{s1:[{c:{},o:[40,["d","danh",5],["d","tamco",6]],w:{mat:1},l:{tamco:-2},sc:1,g:[3]},{c:{bac:-40},w:{duc:3},sc:1,g:[8]},{c:{duc:-1},w:{tamco:2}}],s2:[{c:{bac:-20},w:{mat:1},sc:1},{c:{},o:[35,["d","duc",4]],w:{duc:2},l:{danh:-2},sc:1,g:[8,-3]},{c:{duc:-2},w:{tamco:2}}],c1:[{c:{bac:-60},w:{tamco:2},sc:1},{c:{},o:[40,["m","mat",4],["d","danh",6]],w:{danh:3},l:{danh:-3},sc:1},{c:{suc:-3},o:[40,["d","tamco",3]],w:{tamco:2},l:{danh:-2}}],c2:[{c:{bac:-40},w:{duc:3},sc:1,g:[10]},{c:{duc:-2},w:{tamco:3},g:[5]},{c:{suc:-3},o:[40,["d","tai",4]],w:{duc:2},l:{bac:-20},sc:1}],t1:[{c:{bac:-40},w:{duc:2},sc:1},{c:{suc:-3},o:[40,["f","know",15,0],["f","stop",10,0]],w:{tamco:2},l:{danh:-3},sc:1}],x1:[{c:{bac:-60},o:[40,["f","buy",15,0],["f","help",5,0],["d","tamco",6]]},{c:{suc:-4},o:[40,["f","stop",15,0],["f","know",10,0],["m","mat",3]]},{c:{duc:-2},w:{tamco:2}}],E:{win:{fx:{tamco:3,duc:2},k:1,g:[10]},mid:{fx:{tamco:1},k:0},lose:{fx:{danh:-5,bac:-30},k:-1}}},
++ muoi_no_8:{c3:[{c:{bac:-40},w:{duc:3},sc:1},{c:{suc:-3},w:{danh:2},sc:1},{c:{duc:-2},w:{tamco:3},sc:1}],s1:[{c:{},o:[40,["d","danh",5],["d","tamco",6]],w:{mat:1},l:{tamco:-2},sc:1,g:[3]},{c:{bac:-40},w:{duc:3},sc:1,g:[8]},{c:{duc:-1},w:{tamco:2}}],s2:[{c:{bac:-20},w:{mat:1},sc:1},{c:{},o:[35,["d","duc",4]],w:{duc:2},l:{danh:-2},sc:1,g:[8,-3]},{c:{duc:-2},w:{tamco:2}}],c1:[{c:{bac:-60},w:{tamco:2},sc:1},{c:{},o:[40,["m","mat",4],["d","danh",6]],w:{danh:3},l:{danh:-3},sc:1},{c:{suc:-3},o:[40,["d","tamco",3]],w:{tamco:2},l:{danh:-2}}],c2:[{c:{bac:-40},w:{duc:3},sc:1,g:[10]},{c:{duc:-2},w:{tamco:3},g:[5]},{c:{suc:-3},o:[40,["d","tai",4]],w:{duc:2},l:{bac:-20},sc:1}],t1:[{c:{bac:-40},w:{duc:2},sc:1},{c:{suc:-3},o:[40,["f","know",15,0],["f","stop",10,0]],w:{tamco:2},l:{danh:-3},sc:1}],x1:[{c:{bac:-60},o:[40,["f","buy",15,0],["f","help",5,0],["d","tamco",6]]},{c:{suc:-4},o:[40,["f","stop",15,0],["f","know",10,0],["m","mat",3]]},{c:{duc:-2},w:{tamco:2}}],E:{win:{fx:{tamco:3,duc:2},k:1,g:[10]},mid:{fx:{tamco:1},k:0},lose:{fx:{danh:-5,bac:-30},k:-1}}},
+  muoi_no_9:{s1:[{c:{},o:[40,["d","hh",4],["d","danh",6]],w:{hh:3},l:{danh:-3},sc:1,g:[6]},{c:{suc:-2},w:{duc:2},sc:1,g:[5]},{c:{duc:-2},w:{tamco:2}}],s2:[{c:{suc:-3},o:[40,["d","hh",4]],w:{hh:2},l:{hh:-3},sc:1},{c:{},o:[45,["d","tamco",4]],w:{tamco:2},l:{danh:-3},sc:1},{c:{danh:-2},w:{duc:2}}],s3:[{c:{},o:[40,["d","danh",5],["m","mat",3]],w:{danh:2},l:{danh:-3},sc:1,g:[6]},{c:{suc:-2},w:{duc:2},sc:1,g:[5]},{c:{bac:-40,duc:-1},w:{tamco:2}}],c1:[{c:{suc:-2},o:[40,["d","danh",4]],w:{danh:3},l:{danh:-2},sc:1},{c:{bac:-30},o:[40,["m","mat",5]],w:{mat:1},l:{mat:-1},sc:1},{c:{danh:-3},w:{tamco:2}}],c2:[{c:{danh:-2},o:[40,["d","hh",4],["d","danh",6]],w:{duc:3},l:{hh:-3},sc:1,g:[10,6]},{c:{tamco:-1},w:{duc:2}},{c:{duc:-2},w:{tamco:2},g:[6]}],t1:[{c:{},o:[40,["d","sung",4]],w:{sung:2},l:{sung:-3},sc:1},{c:{},o:[45,["d","tai",5]],w:{sung:2},l:{sung:-4},sc:1}],x1:[{c:{suc:-3},o:[50,["f","open",10,0],["f","truth",5,0],["d","duc",6]],g:[10]},{c:{},o:[40,["f","trace",10,0],["f","pair",10,0],["d","hh",6]]},{c:{duc:-2},w:{tamco:2},g:[6]}],x2:[{c:{suc:-3},o:[50,["f","open",10,0],["f","truth",5,0],["d","duc",6]],g:[10]},{c:{},o:[40,["f","trace",10,0],["f","pair",10,0],["d","sung",6]]},{c:{duc:-2},w:{tamco:2},g:[6]}],E:{win:{fx:{danh:5,hh:3},k:1},mid:{fx:{bac:-20,duc:2},k:0},lose:{fx:{danh:-6,hh:-4},k:-1}}},
+diff --git a/dev/build/jrd_muoi.js b/dev/build/jrd_muoi.js
+index e07b6f7a..03d14660 100644
+--- a/dev/build/jrd_muoi.js
++++ b/dev/build/jrd_muoi.js
+@@ -792,9 +792,9 @@ rdDef("muoi_no",8,{t:"Nợ chồng nợ",w:"v",sj:"những món nợ mới của
+  B:{s1:{h:"Cây trâm ngự ban",w:"v",if:RDW(1),need:["v"],t:"Sau Trung thu {v} thở được ít ngày. Rồi ngươi thấy nàng lén cầm cố cả cây trâm ngự ban.",o:[
+-  {n:"Hỏi thẳng {v} nợ ai",f:"know",wx:"biết chủ nợ mới",lx:"{v} xấu hổ, đóng cửa không tiếp",go:(A,ok,G)=>{if(!ok)rdOan(A,"v",G[0])},rt:"{v} khai: một thái giám coi kho ở Nội vụ phủ.",rf:"{v} đóng cửa cung, không tiếp ai."},
+-  {n:"Chuộc lại cây trâm cho nàng",f:"help",wx:"{v} giữ được trâm ngự ban",lx:"bạc ngươi đi, nợ nàng vẫn còn",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"Cây trâm về lại hộp gấm của {v}."},
+-  {n:"Ghi lại, chờ xem",wx:"không tốn gì",lx:"nợ nàng lăn thêm một tháng, lòng ngươi áy náy",rt:"Ngươi ghi vào sổ riêng."}]},
++  {n:"Hỏi thẳng {v} nợ ai",to:"c3",tf:"c3",f:"know",wx:"biết chủ nợ mới",lx:"{v} xấu hổ, đóng cửa không tiếp",go:(A,ok,G)=>{if(!ok)rdOan(A,"v",G[0])},rt:"{v} khai: một thái giám coi kho ở Nội vụ phủ.",rf:"{v} đóng cửa cung, không tiếp ai."},
++  {n:"Chuộc lại cây trâm cho nàng",to:"c3",tf:"c3",f:"help",wx:"{v} giữ được trâm ngự ban",lx:"bạc ngươi đi, nợ nàng vẫn còn",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"Cây trâm về lại hộp gấm của {v}."},
++  {n:"Ghi lại, chờ xem",to:"c3",tf:"c3",wx:"không tốn gì",lx:"nợ nàng lăn thêm một tháng, lòng ngươi áy náy",rt:"Ngươi ghi vào sổ riêng."}]},
+  s2:{h:"{v} tránh mặt",w:"maid",if:RDW(0),need:["v"],t:"{v} tránh mặt ngươi đã lâu. Người của ngươi nghe được: nàng vay cả bạc của một thái giám cho vay nặng lãi.",o:[
+-  {n:"Sai người dò chủ nợ",f:"know",wx:"biết kẻ cho vay là ai",lx:"tốn bạc, {v} biết ngươi dò",rt:"Kẻ cho vay là một thái giám coi kho ở Nội vụ phủ."},
+-  {n:"Gửi lời: nếu cần, cứ đến tìm",f:"help",wx:"{v} có lối quay lại",lx:"{v} cho là ngươi thương hại, nói khắp nơi",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"Đêm ấy {v} gửi sang một mảnh lụa thêu, không lời.",rf:"{v} trả lời: “Không dám làm phiền chủ nợ cũ.”"},
+-  {n:"Mừng thầm",wx:"kẻ cũ tự sa lầy",lx:"lòng ngươi nhỏ đi",rt:"Ngươi không làm gì."}]},
++  {n:"Sai người dò chủ nợ",to:"c3",tf:"c3",f:"know",wx:"biết kẻ cho vay là ai",lx:"tốn bạc, {v} biết ngươi dò",rt:"Kẻ cho vay là một thái giám coi kho ở Nội vụ phủ."},
++  {n:"Gửi lời: nếu cần, cứ đến tìm",to:"c3",tf:"c3",f:"help",wx:"{v} có lối quay lại",lx:"{v} cho là ngươi thương hại, nói khắp nơi",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"Đêm ấy {v} gửi sang một mảnh lụa thêu, không lời.",rf:"{v} trả lời: “Không dám làm phiền chủ nợ cũ.”"},
++  {n:"Mừng thầm",to:"c3",tf:"c3",wx:"kẻ cũ tự sa lầy",lx:"lòng ngươi nhỏ đi",rt:"Ngươi không làm gì."}]},
+  c1:{h:"Chủ nợ ở Nội vụ phủ",w:"eun",t:"Kẻ cho vay là một thái giám coi kho ở Nội vụ phủ. Hắn cho vay cả chục phi tần, cung nữ, lãi mỗi tháng một phần mười.",o:[
+@@ -807,2 +807,6 @@ rdDef("muoi_no",8,{t:"Nợ chồng nợ",w:"v",sj:"những món nợ mới của
+   {n:"Dạy nàng cách kiếm bạc",wx:"{v} bán tranh thêu qua hiệu nhà ngươi",lx:"nàng không quen làm ăn, ngươi bù lỗ",rt:"Tranh thêu của {v} bán chạy ở Giang Nam.",rf:"Tranh thêu không ai mua, ngươi bỏ bạc bù."}]},
++ c3:{h:"Thư sinh Giang Nam",w:"maid",t:"Thư nhà kèm một tờ giấy nợ: một thư sinh nghèo ở Giang Nam vay bạc hiệu buôn nhà ngươi để lên kinh ứng thí, nay trọ ngoài cửa thành chờ khoa thi, chưa trả được đồng nào. Cha hỏi: đòi hay thôi?",o:[
++  {n:"Xóa nợ, chúc y thi đỗ",f:"warm",wx:"thư sinh nhớ ơn nhà ngươi",lx:"hiệu buôn mất một món bạc",rt:"Thư sinh gửi vào một bài thơ tạ ơn."},
++  {n:"Cho hoãn, đỗ rồi hãy trả",f:"help",wx:"giữ được nợ mà không ép người",lx:"ngươi lo nghĩ hao sức thay y",rt:"Thư sinh viết giấy hẹn, nét chữ rất đẹp."},
++  {n:"Giữ giấy nợ, đợi y làm quan",f:"hold",wx:"sau này có một vị quan nợ nhà ngươi",lx:"ép người lúc cùng đường",rt:"Tờ giấy nợ nằm sâu trong tráp của ngươi."}]},
+  t1:{h:"Lãi quá hạn",w:"eun",t:"Hạn trả lãi đến. Kẻ cho vay dọa sẽ đem giấy nợ của {v} lên Kính sự phòng.",o:[
 ```
- c3:{h:"Thư sinh Giang Nam",w:"maid",t:"Thư nhà kèm một tờ giấy nợ: một thư sinh nghèo ở Giang Nam vay bạc hiệu buôn nhà ngươi để lên kinh ứng thí, nay trọ ngoài cửa thành chờ khoa thi, chưa trả được đồng nào. Cha hỏi: đòi hay thôi?",o:[
-  {n:"Xóa nợ, chúc y thi đỗ",f:"warm",wx:"thư sinh nhớ ơn nhà ngươi",lx:"hiệu buôn mất một món bạc",rt:"Thư sinh gửi vào một bài thơ tạ ơn."},
-  {n:"Cho hoãn, đỗ rồi hãy trả",f:"help",wx:"giữ được nợ mà không ép người",lx:"bạc còn treo một khoa thi",rt:"Thư sinh viết giấy hẹn, nét chữ rất đẹp."},
-  {n:"Giữ giấy nợ, đợi y làm quan",f:"hold",wx:"sau này có một vị quan nợ nhà ngươi",lx:"ép người lúc cùng đường",rt:"Tờ giấy nợ nằm sâu trong tráp của ngươi."}]},
-```
-   (thiện: the first two, ác: the third; ONE CORE: no number; VANPHONG: «y» for a man, no digits.) When B lands, Foreman E (or a W1 successor) adds the three names to muoi_no_4 pull + lean (p: first two, m: third) and reruns `ge-guard` + the muoi_no measure.
+   After it lands: add «Xóa nợ, chúc y thi đỗ», «Cho hoãn, đỗ rồi hãy trả», «Giữ giấy nợ, đợi y làm quan» to muoi_no_4 pull, the first two to muoi_no lean.p, the third to lean.m; rerun ge-guard + `MODES=kind,cruel node dev/measure/ge-measure.js - 2 2 out.json muoi_no sens`.
 2. **RECOMMENDED — dtq_binh (jrd_dtq.js) ch7 «yến»: one beat where the world's Vương gia appears**, so dtq_binh_3's follow is seen in the road (he already exists in every life via MROLES, so this is not blocking):
 ```
  c4:{h:"Vương gia ở vườn ngự",w:"maid",t:"Sau yến, Vương gia dạo vườn ngự, dừng trước cung ngươi hỏi thăm sức khỏe lão tướng quân, rồi nói nhỏ: binh quyền về triều thì nhà tướng quân cần một chỗ dựa.",o:[
