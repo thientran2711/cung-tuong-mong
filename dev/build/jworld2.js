@@ -136,13 +136,13 @@ EVD.vuco={place:()=>"home",
    for(const s of st.slice())if(s&&s.spyFor&&roll(b.spyFind)){const i=(p.staff||[]).indexOf(s);if(i>=0){p.staff.splice(i,1);F.push(s.name)}}}
   w.x.F=F.length;return `Hình nhân bùa ngải trong tẩm cung ${w.x.tn||"một phi tần"} giữa lúc ${w.x.why||"người trong hoàng tộc lâm bệnh"}; Thận hình ti lục soát mọi cung, thị tẩm tạm dừng.${F.length?` Lôi ra tai mắt cài cắm: ${F.join(", ")}.`:""}`},
  /* her own household: her accusation (S.wwMe acc) against the culprit the end found (o.got = its id); split out for thin E */
- home(w,o){const b=B().vuco;if(meGet(w,"acc")!=null&&notSrv()){const a=byPid(meGet(w,"acc"));if(o&&o.got!=null&&a&&a.id===o.got)apply({danh:b.accuse.danh});else apply({danh:b.accuse.miss})}},
+ home(w,o){const b=B().vuco;if(meGet(w,"acc")!=null&&notSrv()){const a=byPid(meGet(w,"acc"));if(o&&a&&((o.got!=null&&a.id===o.got)||(o.gotFr&&a.coop)))apply({danh:b.accuse.danh});else apply({danh:b.accuse.miss})}},
  end(w){const b=B().vuco;const by=byPid(w.x.by);const me=meGet(w,"me")||"";let r="";let got=null;
   /* co-op (thin E): the culprit is the OTHER player (her entry): her own choice (S.wwMe in her person) counts as "me" (EVD.vuco.meOf, jcoopthine) */
   const byMe=by===S?me:by&&by.coop&&EVD.vuco.meOf?(EVD.vuco.meOf(w,"me")||""):"";
   if(by&&(by===S||by.alive)){let o=b.catch+(by.schemes||0)*b.schemeK;if((by===S||by.coop)&&byMe==="clean")o*=b.clean.mul;if(by!==S&&meGet(w,"acc")===by.id)o+=b.accuseK;if((by===S||by.coop)&&byMe==="open")o+=b.accuseK;
    if(roll(Math.round(o))){punish(by,"dùng bùa ngải hãm hại người",2);got=by;r=`Thận hình ti tra ra kẻ đặt bùa: ${nmOf(by)}.`}}
-  EVD.vuco.home(w,{got:got&&got!==S?got.id:null});
+  EVD.vuco.home(w,{got:got&&got!==S?got.id:null,me:!!got&&got===S});/* me: the culprit caught is this player (co-op: the other player's accusation of her entry hits, o.gotFr) */
   if(!got&&roll(b.innocent)){const L=liveR().filter(v=>!v.out&&v.id!==w.x.tgt&&!(by&&v===by)).sort((x,y)=>rkOf(x)-rkOf(y));const v=L[0];if(v){punish(v,"bị nghi dính vào vu cổ",1);got=v;r=`Không tra ra kẻ chủ mưu; ${v.name} bị bắt làm người chịu tội.`}}
   if(got&&roll(b.toCam))ws("cam","Án vu cổ khép lại, cung cấm giới nghiêm");return (r||"Án vu cổ không tra ra ai; Thận hình ti đóng hồ sơ.")+" Thị tẩm trở lại."},
  card(w){const b=B().vuco;if(!meCons())return info(w);const t=liveR().filter(v=>!v.out).sort((x,y)=>(typeof oan==="function"?oan(S,y)-oan(S,x):0))[0];

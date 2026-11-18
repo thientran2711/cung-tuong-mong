@@ -53,10 +53,15 @@ CW.eAsked=()=>on()&&(host()?(E.hr===bk()||E.forced===bk()):E.mine===bk());
 CW.eWait=()=>!!(on()&&!host()&&E.mine&&E.mine===bk()&&((S&&S.buoi)||0)<LAST());
 /* her buổi moved by the host's patch: what lives outside S on her phone (display / per-seat counters) */
 let seen="";
+/* review r1: her HAND of acts (deck) is dealt by the real step (j3 nextBuoi → deal), which at level 5 runs on the host in her context (the
+   seat-local deck there never reaches her phone): her phone deals its own hand when her buổi moves by the host's patch, and whenever it is
+   empty (a fresh page / a new week) — exactly as CW.restore deals after a reload. Without this her Hành sự had NO card at all (deck 0). */
+function hand(moved){try{if(!S||S.dead||Q.length||S.mg||typeof deal!=="function")return;if(!moved&&deck&&deck.length)return;deal();E.stat.deal=(E.stat.deal|0)+1;if(!moved)render()}catch(e){console.error("thin E deal",e)}}
 function gView(V){if(!on()||host()||!S||!V||!V.o)return;const k=bk();
- if(seen&&seen!==k){const [w0]=seen.split(":");if(+w0===(COOP.state.week||0)){used=0;popIdx=null;popMsg="";try{if(typeof curtain==="function"&&!S.dead){curtain();E.stat.curtain++}}catch(e){}}E.mine="";try{render()}catch(e){}}
+ if(seen&&seen!==k){const [w0]=seen.split(":");if(+w0===(COOP.state.week||0)){used=0;popIdx=null;popMsg="";try{if(typeof curtain==="function"&&!S.dead){curtain();E.stat.curtain++}}catch(e){}}E.mine="";hand(true);try{render()}catch(e){}}
  /* her phone behind / ahead of her own buổi on the host (a reload rebuilt her week): the host's copy wins (buoi is the host's), once no patch is pending */
- {const P=V.o.P&&V.o.P[CW.seat],mx=Math.max(0,...(V.o.pq||[]).map(x=>x.n|0));if(P&&V.o.w===(COOP.state.week||0)&&typeof P.buoi==="number"&&P.buoi!==(S.buoi||0)&&P.buoi<=(typeof V.o.buoi==="number"?V.o.buoi:0)&&(S.thpn||0)>=mx&&!S.mg&&!Q.length){lg(["adopt",S.buoi,P.buoi]);S.buoi=P.buoi;used=0;popIdx=null;popMsg="";E.stat.adopt++;try{render()}catch(x){}}}
+ {const P=V.o.P&&V.o.P[CW.seat],mx=Math.max(0,...(V.o.pq||[]).map(x=>x.n|0));if(P&&V.o.w===(COOP.state.week||0)&&typeof P.buoi==="number"&&P.buoi!==(S.buoi||0)&&P.buoi<=(typeof V.o.buoi==="number"?V.o.buoi:0)&&(S.thpn||0)>=mx&&!S.mg&&!Q.length){lg(["adopt",S.buoi,P.buoi]);S.buoi=P.buoi;used=0;popIdx=null;popMsg="";E.stat.adopt++;hand(true);try{render()}catch(x){}}}
+ hand(false);
  seen=k;const e=V.o.e;try{CW.tnView(e)}catch(x){console.error(x)}
  /* the host reloaded after her ready (his page holds her ready in memory only): send it again, against his reloaded copy of her */
  if(e&&e.boot){if(E.boot&&E.boot!==e.boot&&E.mine===bk()){lg(["re-ready",E.boot,e.boot]);E.stat.reRd++;E.mine="";E.boot=e.boot;setTimeout(()=>{try{gReady()}catch(x){console.error(x)}},0)}else E.boot=e.boot}
@@ -72,9 +77,10 @@ COOP.on("week",()=>{E.mine="";seen="";/* her ready for the NEW week may arrive b
 /* her ops onto her stored person (in her context: runDo); the part-D patch then starts after them (they are hers, never echoed back) */
 TH.onDo("erd",a=>{a=a||{};const n=TH.pApply(S,Array.isArray(a.ops)?a.ops:[]);try{D.rebase()}catch(e){}E.stat.erd++;return {n}});
 TH.onDo("ready",a=>{a=a||{};const seat=CW.ctx;
- /* behind the host (her step was owed while she played a mini game): catch her up now, from the top of the event loop */
- if(on()&&E.owe&&(a.w|0)===(COOP.state.week||0)&&TH.outerS&&(a.b|0)<((TH.outerS.buoi)||0)&&!busy){const Wh=E.owe;E.owe=null;busy=true;lg(["catch-up",a.b]);
-  setTimeout(()=>{try{herStep(Wh)}finally{busy=false;try{TH.flush()}catch(e){}try{CW.lockNext()}catch(e){}}},0);return {ok:1,up:1}}E.rd[seat]={w:a.w|0,b:a.b|0,at:Date.now()};lg(["her-ready",seat,a.w,a.b]);
+ /* behind the host (her step was owed while she played a mini game, or the owe was lost on a host reload, or her step was skipped):
+    catch her up now, from the top of the event loop (review r1: not only on E.owe, which lives in host memory — her progress is never lost) */
+ if(on()&&(a.w|0)===(COOP.state.week||0)&&TH.outerS&&(a.b|0)<((TH.outerS.buoi)||0)&&!busy){const Wo=E.owe;E.owe=null;busy=true;E.stat.up=(E.stat.up|0)+1;lg(["catch-up",a.b,!!Wo]);
+  setTimeout(()=>{try{herStep(Wo||whereOut())}finally{busy=false;try{TH.flush()}catch(e){}try{CW.lockNext()}catch(e){}}},0);return {ok:1,up:1}}E.rd[seat]={w:a.w|0,b:a.b|0,at:Date.now()};lg(["her-ready",seat,a.w,a.b]);
  if((a.b|0)>=LAST()&&(a.w|0)===(COOP.state.week||0))CW.nfr=a.w|0;
  setTimeout(()=>{try{check();if((a.b|0)>=LAST())CW.nCheck()}catch(e){console.error(e)}},0);return {ok:1}});
 function hReady(){if(!S||S.dead||Q.length||S.mg)return;const b=S.buoi||0;if(b>=LAST()){try{CW.nightReady()}catch(e){console.error(e)}return}
@@ -129,11 +135,12 @@ COOP.on("week",()=>{if(on()&&host())setTimeout(()=>{try{if(CW.tnHer())CW.herNigh
 {const X2=window.WORLD_X,EV=X2&&X2.EVD;
  if(EV){for(const k of ["vuco","trom","phong"]){const ev=EV[k];if(!ev||typeof ev.end!=="function"||typeof ev.home!=="function")continue;const f=ev.end;
    ev.end=function(w){if(!(on()&&host()&&!CW.ctx&&w))return f.apply(this,arguments);
-    let got=null;const p0=typeof punish==="function"?punish:null;
-    if(k==="vuco"&&p0)punish=function(p){if(got==null&&p&&typeof p==="object"&&p!==S&&p.id!=null)got=p.id;return p0.apply(this,arguments)};
-    let r;try{r=f.apply(this,arguments)}finally{if(p0)punish=p0}
-    const wc=J(w),seat=other();E.stat.wwEnd++;lg(["ww-end",k,w.id,got]);
-    D.later(seat,()=>{if(!S||S.dead)return;try{ev.home(wc,{got})}catch(e){console.error("thin E ww home",k,e)}});return r}}
+    /* the outcome her household needs = exactly what end() hands its own home(): vu cổ's culprit id, read when end() calls home (review r1:
+       a punish() hook also caught the innocent scapegoat punished AFTER home, so her accusation of the scapegoat counted as a hit for her only) */
+    let got=null,gotFr=false;const h0=ev.home;ev.home=function(w2,o){if(o){if(o.got!=null)got=o.got;if(o.me)gotFr=true}return h0.apply(this,arguments)};
+    let r;try{r=f.apply(this,arguments)}finally{ev.home=h0}
+    const wc=J(w),seat=other();E.stat.wwEnd++;lg(["ww-end",k,w.id,got,gotFr]);
+    D.later(seat,()=>{if(!S||S.dead)return;try{ev.home(wc,{got,gotFr})}catch(e){console.error("thin E ww home",k,e)}});return r}}
   /* vu cổ: she is the culprit (her entry on the host): her own choice ("clean" / "open") read from her person */
   if(EV.vuco)EV.vuco.meOf=(w,key)=>{try{if(!on()||!host())return undefined;const B=TH.seatOf(other());const M=B&&B.S&&B.S.wwMe;return M&&M[w.id]?M[w.id][key]:undefined}catch(e){return undefined}}}}
 /* a HOST reload: his copy of her person (her store) is rebuilt from the week's base, which knows none of her buổi steps this week (her

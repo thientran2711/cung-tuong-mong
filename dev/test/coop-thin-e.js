@@ -5,7 +5,7 @@
    (bac, a log line) reaches the host's copy before her step and is not undone · E5 the world is read-only in her step (unit: an NPC
    number + a world key put back, her viewer row kept) · E6 host clock: a forced step runs both with her not ready ·
    E7 buổi tối: both ready → the night runs → week merged once · E9 cycle flags by do cyb · E10 night by do tn + the view ·
-   E11 her summons = a part-D card built on the host · E12 a world window's end on her household runs on the host · E13 no raw ref left in her S · E8 no page errors. */
+   E11 her summons = a part-D card built on the host · E12 a world window's end on her household runs on the host · E13 no raw ref left in her S · E14 her ready from behind catches her up (host reload lost E.owe) · E15 vu cổ: her accusation of the caught host hits · E16 her hand of acts after the host's step · E8 no page errors. */
 const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),path=require('path');
 const WURL=process.argv[2]||'https://ctm-coop.victoria-tntt.workers.dev';const LVL=+(process.argv[3]||5);const SWAP=+(process.argv[4]||0);
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,c?300:2500):''))};
@@ -62,6 +62,9 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  ok(moved&&h2.b===h0.b+1,'E3 both moved one buổi',[h0.b,h2.b,g0.b,g2.b]);
  ok(h2.E.step===(h0.E.step||0)+1&&h2.E.her>(h0.E.her||0),'E3 host ran his step + her step once (counted from before the press)',[h0.E,h2.E]);
  await shot(H,'e3-host-buoi');await shot(G,'e3-guest-buoi');
+ /* E16 (review r1): she has a hand of acts after her buổi arrives from the host (level 5: her step runs on the host; her phone deals its hand) */
+ {const hd=await G.p.evaluate(()=>{const P=document.getElementById('panel');return {deck:Array.isArray(deck)?deck.length:-1,len:P?P.innerHTML.length:-1,b:S.buoi,cards:P?P.querySelectorAll('button').length:0}});
+  ok(hd.deck>0&&hd.cards>0,'E16 her Hành sự has acts after the host\'s step (deck dealt on her phone)',hd)}
  ok(g2.bac===gb,'E4 her change kept after the step (not undone)',[g2.bac,gb]);
  const hc2=await H.p.evaluate(()=>{const B=COOPW.thin.seatOf('b');return {b:B&&B.S.buoi,bac:B&&B.S.bac}});
  ok(hc2.b===g2.b&&hc2.bac===g2.bac,'E3 host copy == her phone (buổi, bac)',[hc2,g2.b,g2.bac]);
@@ -78,6 +81,13 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  const g3=await st(G),h3=await st(H);
  if(h3.b<2){await H.p.evaluate(()=>COOPW.forceBend());const m2=await until(G,b=>(S.buoi||0)===b+1,g3.b,20000);const h4=await st(H);ok(m2&&h4.b===h3.b+1,'E6 host clock steps both (she was not ready)',[h3.b,h4.b,g3.b,(await st(G)).b])}
  else console.log('n/a E6: the setup week left the host at buổi '+h3.b+' (no day buổi left this week); E6 is covered by the next run');
+ /* E14 (review r1): her ready from BEHIND the host (her owed step lost on a host reload: E.owe lives in host memory) catches her up at once */
+ {for(let i=0;i<2;i++){await clear(H);await clear(G);await sleep(300)}const hb=(await st(H)).b;
+  if(hb>=1){const w=await H.p.evaluate(()=>{const B=COOPW.thin.seatOf('b');B.S.buoi=(S.buoi||0)-1;COOPW.thin.E.owe=null;return COOP.state.week});
+   await G.p.evaluate(([w,b])=>COOPW.thin.doSend('ready',{w,b,id:'e14',n:0}),[w,hb-1]);
+   ok(await until(H,b=>COOPW.thin.seatOf('b').S.buoi===b,hb,15000),'E14 her ready from behind (no E.owe) catches her stored person up to the host\'s buổi',await H.p.evaluate(()=>[S.buoi,COOPW.thin.seatOf('b').S.buoi,COOPW.thin.E.stat.up,COOPW.thin.E.log.slice(-4)]));
+   ok(await until(G,b=>(S.buoi||0)===b,hb,15000),'E14 her phone on the host\'s buổi after the catch-up',await G.p.evaluate(()=>S.buoi))}
+  else console.log('n/a E14: host at buổi 0')}
  /* E7: buổi tối → the night → week merged once */
  await week(H,G,'E7');
  const sent2=await G.p.evaluate(()=>window.__sent.slice());ok(!sent2.some(x=>x==='bend'||x==='where'||/^act:ctm-nr/.test(x)),'E7 still no bend / where / ctm-nr from the guest',sent2.filter(x=>x==='bend'||x==='where'||/ctm-nr/.test(x)));
@@ -107,6 +117,11 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  await H.p.evaluate(nm=>{const B=COOPW.thin.seatOf('b');(B.S.staff=B.S.staff||[]).push({name:nm,role:'maid',age:BAL.srvAge.ask+2,loyal:10});},nm);
  await H.p.evaluate(()=>{const w={id:99001,k:'phong',t0:wk()-1,t1:wk(),x:{n:0,mine:0}};WORLD_X.EVD.phong.end(w)});
  ok(await until(G,nm=>!(S.staff||[]).some(s=>s&&s.name===nm),nm,20000),'E12 her aged maid left (her household, run on the host, patch)',await H.p.evaluate(nm=>[COOPW.thin.E.stat.wwEnd,(COOPW.thin.seatOf('b').S.staff||[]).some(s=>s&&s.name===nm)],nm));
+ /* E15 (review r1): vu cổ end on HER household: her accusation hits when the culprit caught is the host himself (o.gotFr), misses otherwise */
+ {const u=await H.p.evaluate(()=>{const TH=COOPW.thin;return TH.withSeat('b',()=>{const f=rivals.find(v=>v&&v.coop);if(!f||(typeof isSrv==='function'&&isSrv()))return {skip:f?'srv':'nofr'};
+   const w={id:99002,k:'vuco',x:{}};S.wwMe=S.wwMe||{};S.wwMe[99002]={acc:f.id};const d0=S.danh||0;const E=WORLD_X.EVD.vuco;
+   E.home(w,{got:null,gotFr:true});const d1=S.danh||0;S.danh=d0;E.home(w,{got:null,gotFr:false});const d2=S.danh||0;S.danh=d0;delete S.wwMe[99002];return {d0,d1,d2}})});
+  if(u.skip)console.log('n/a E15:',u.skip);else ok(u.d1>u.d2,'E15 her accusation of the host hits when he is the caught culprit (gotFr), misses otherwise',u)}
  /* E13 (#4): every part-D patch value is de-referenced on her phone — no raw {$r:id} / {$k:name} left in her S (a raw ref crashed pFaceOf → pv) */
  {const raw=await G.p.evaluate(()=>{const W=new Set((COOPW.X&&COOPW.X.W_KEYS)||[]);const out=[];const seen=new Set();
    const walk=(o,p,d)=>{if(!o||typeof o!=='object'||seen.has(o)||d>8||out.length>5)return;seen.add(o);if(!Array.isArray(o)&&Object.keys(o).length===1&&('$r' in o||'$k' in o)){out.push(p);return}
