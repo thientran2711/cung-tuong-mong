@@ -184,7 +184,7 @@ EVD.su={place:w=>"thu",
  card(w){return{t:"Sứ đoàn vào triều",who:pEmp(),h:`<p>${w.cause}.</p><p>${w.txt||""}</p>`}},
  scene(w){const b=B().su;const ok=meCons()&&rkOf(S)>=b.rank;const o=od(b.show[0]+(S.tai||0)/b.show[1]);
   return{t:"Yến tiếp sứ",who:pEmp(),h:`<p>Sứ thần dâng lễ vật lạ, bá quan ngồi kín hai bên.</p>${ok?"":`<p class="past">Phẩm của ngươi chưa được dự yến; chỉ đứng xa mà xem.</p>`}`,
-   opts:ok?[{n:"Dâng một khúc đàn trong yến",fx:{},x:`${word(o)} · thành: Sủng +${b.showSung}, Danh +${b.showDanh} · hỏng: Danh ${b.failDanh}`,go:()=>{if(agTry(o))apply({sung:b.showSung,danh:b.showDanh});else if(agSoft(o))log(agSoftTxt(S));else apply({danh:b.failDanh})}},
+   opts:ok?[{n:"Dâng một khúc đàn trong yến",fx:{},x:`${word(o)} · thành: Sủng +${b.showSung}, Danh +${b.showDanh} · hỏng: Danh ${b.failDanh}`,go:()=>{if(agTry(o))apply({sung:b.showSung,danh:b.showDanh});else if(agSoft(o))agSoftTxt(S,"Dâng một khúc đàn trong yến");else apply({danh:b.failDanh})}},
     {n:"Ngồi yên giữ lễ",fx:{},x:"không được mất gì"}]:[{n:"Đứng xem rồi về",fx:{},x:"không được mất gì"}]}},
  night(w,p){return false}};
 /* 8 ĐẠI THỌ (row 3): the Emperor's 40/50/60… or Thái hậu's 60/70/80 birthday (j71 Tiết Vạn thọ / Thánh thọ days). Reuses FEST days,

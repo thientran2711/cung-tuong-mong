@@ -21,11 +21,17 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   ev(m,t){try{return evG(m,t)}catch(e){return 0}}}});
  /* 1 loyal: failure reported as failure */
  const r1=await p.evaluate(()=>{const s=__T.srv(),t=__T.rv();s.loyal=100;s.spyFor=null;const n0=__T.bao().length;const c=[];
-  for(let i=0;i<6;i++)c.push(knErr(s,S,"scoutF",t));const L=__T.bao().slice(n0);const c2=knErr(s,S,"listenF",null);const L2=__T.bao().slice(n0+L.length);
-  return {c,c2,L,L2,who:spyWho(t)}});
+  /* deterministic (review ag-later #2: 6 random draws with tells>=5 flaked ~1 in 4): the WORDING is checked on forced "tell" picks,
+     the loyal servant's CHOICE share over 200 draws (knErrPick only, no report) */
+  const pk0=knErrPick;window.knErrPick=knErrPick=()=>"tell";
+  try{for(let i=0;i<6;i++)c.push(knErr(s,S,"scoutF",t))}finally{window.knErrPick=knErrPick=pk0}const L=__T.bao().slice(n0);
+  window.knErrPick=knErrPick=()=>"tell";let c2;try{c2=knErr(s,S,"listenF",null)}finally{window.knErrPick=knErrPick=pk0}const L2=__T.bao().slice(n0+L.length);
+  const C={};for(let i=0;i<200;i++){const k=knErrPick(s,S);C[k]=(C[k]||0)+1}
+  return {c,c2,L,L2,who:spyWho(t),C}});
  const tells=r1.c.filter(x=>x==="tell").length;
- ok(tells>=5&&r1.L.length===tells&&r1.L.every(l=>/có đi dò la .* nhưng không dò được gì/.test(l)&&l.includes(r1.who)),'loyal servant: a failed scouting is reported as failed, naming the real target',{c:r1.c,line:r1.L[0]});
- ok(r1.c2!=="tell"||/chưa nghe được chuyện gì/.test(r1.L2[0]||""),'loyal servant: a failed listen is reported as "nothing heard"',r1.L2[0]);
+ ok(tells===6&&r1.L.length===6&&r1.L.every(l=>/có đi dò la .* nhưng không dò được gì/.test(l)&&l.includes(r1.who)),'loyal servant: a failed scouting is reported as failed, naming the real target',{c:r1.c,line:r1.L[0]});
+ ok((r1.C.tell||0)>=120&&!(r1.C.sell),'loyal servant (lòng 100): tells most of the time over 200 picks, never sells',r1.C);
+ ok(/chưa nghe được chuyện gì/.test(r1.L2[0]||""),'loyal servant: a failed listen is reported as "nothing heard"',r1.L2[0]);
  /* 2 slack */
  const r2=await p.evaluate(()=>{const s=__T.srv(),t=__T.rv();s.loyal=0;s.spyFor=null;const n0=__T.bao().length;const q0=(S.knQ||[]).length;const e0=__T.ev(S,t);const C={};
   for(let i=0;i<40;i++){const c=knErr(s,S,"scout",t);C[c]=(C[c]||0)+1}
@@ -49,7 +55,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  /* 6 + 7 bot run: truth audit + rate */
  const r6=await p.evaluate(async(DAYS)=>{const A={sk:{},bad:[],items:0,ev:0,evBad:0};const names=()=>new Set(consorts().map(c=>c.name).concat(allServ().map(s=>s.name)));
   const r0=asRun;window.asRun=asRun=function(s,o){A.sk[o.sk]=(A.sk[o.sk]||0)+1;return r0.apply(this,arguments)};
-  const g0=knErrGive;window.knErrGive=knErrGive=function(s,m,k,t,late){if(k==="scout"||k==="listen"){if(!t||!t.alive||t===m)A.evBad++;A.ev++}return g0.apply(this,arguments)};
+  const g0=knErrGive;window.knErrGive=knErrGive=function(s,m,k,t,late){if(k==="scout"||k==="listen"){if(!t||(t!==S&&!t.alive)||t===m)A.evBad++;A.ev++}return g0.apply(this,arguments)};
   const seen=new Set();tinBaoOn(it=>{A.items++;if(/\{|\}|undefined|null|NaN/.test(it.line))A.bad.push(it.line);if(it.k!=="bao"){const raw=(KN.raw||[]).concat(adHapNow?[]:[]);if(!it.who||!it.who.length)0}});
   for(let d=0;d<DAYS;d++){for(let bb=0;bb<4;bb++){Q.length=0;S.mg=0;try{placeWhere();agFlush()}catch(e){}try{const L=tinBaoList();for(const it of L){if(seen.has(it.id))continue;seen.add(it.id);
      if(it.k!=="bao"){const h=(KN.raw||[]).find(h=>knHid(h)===it.id);const ok2=!!h||it.k==="fest"||it.k==="cold"||it.k1<agKh();if(!ok2)A.bad.push("no happening: "+it.id)}}}catch(e){A.bad.push("err "+e.message)}
@@ -60,6 +66,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    }},DAYS);
  console.log('bot: '+JSON.stringify(r6));
  ok(r6.items>0&&!r6.bad.length,'bot run: every TIN BÁO item is about a real happening / real people (no invented news, no broken line)',{items:r6.items,bad:r6.bad});
+  /* the player as target (an NPC master's errand on her, incl. late reports): S has no .alive (S.dead) — living */
  ok(r6.evBad===0,'bot run: every finding an errand gives a master is about a real, living other consort',{ev:r6.ev,bad:r6.evBad});
  ok(r6.share>=r6.band[0]&&r6.share<=r6.band[1],'rate: servants\' own errands are a believable share of servant deeds (BAL.ag.know.share)',{share:r6.share,band:r6.band,er:r6.er,all:r6.all,st:r6.st});
  const ae=await p.evaluate(()=>(typeof AG==="object"&&AG.errs)?AG.errs.slice(0,3):[]);

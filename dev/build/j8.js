@@ -2,8 +2,9 @@
    The player (S) and every rival are consorts under the same formulas. Every act is one function act(actor, target). */
 function key(p){return p===S?"me":p.id}
 function byKey(k){return k==="me"?S:k==="emp"||k==="th"||k==null?null:RV(k)}
-function NM(p){return p===S?"ngươi":p.name}
-function NMc(p){return p===S?"Ngươi":p.name}
+/* the Thái hậu's household (S.thO, jstaff: allServ / ownerOf include her servants) has no .name: she is "Thái hậu" (review ag-later #2: "người hầu cung undefined" in TIN BÁO) */
+function NM(p){return p===S?"ngươi":p&&p.name==null&&S&&p===S.thO?"Thái hậu":p.name}
+function NMc(p){return p===S?"Ngươi":p&&p.name==null&&S&&p===S.thO?"Thái hậu":p.name}
 function rkOf(p){return p===S?S.rank:(p.queen?7:p.rank)}
 function rkName(p){const r=rkOf(p);const n=r>=7?"Hoàng hậu":RANKS[r].n;return typeof kitHieuJoin==="function"?kitHieuJoin(n,p):n}
 function maidMk(p){const mn=pick(MAIDS);/* a new maid's NAME only (name generation, not an NPC act) */return p===S?newMaid(mn,45):{name:mn,loyal:50}}
@@ -98,7 +99,7 @@ function fall(p,why){if(p===S){if(ACTX.a&&ACTX.a!==S)S.framedBy=key(ACTX.a);if(S
 function framed(p,why){if(ACTX.a&&ACTX.a!==p)p.framedBy=key(ACTX.a);const d=Math.round(12*(DG()?1.3:1));ap(p,{danh:-d,sung:-10});punish(p,why,2);return d}
 /* the target's people notice first: same detection for everyone */
 /* the ONE caught chance (AG-ALL r1 F2): the target's eyes minus the doer's faction help (BAL.caught); caught(), jagharm, jpoison, j63, j83 read it */
-function caughtOdds(a,t,ps){const C=BAL.caught;return oddsCl(oSee(t,ps)-C.fac*(facN(a)-1))}/* odds cap (main): held to BAL.odds lo..hi */
+function caughtOdds(a,t,ps){const C=BAL.caught;return oddsCl(oSee(t,ps)-C.fac*(facN(a)-1))}
 function caught(a,t,ps,desc){/* roll-side: catch (the roll is the target seeing the act: a "kèm" of every scheme, not its win) */if(!roll(caughtOdds(a,t,ps)))return"";evA(t,a,BAL.eff.j8.evCaught);relAdd(a,t,BAL.eff.j8.caught);
  if(t===S)return `${ps&&(S.doctor||S.arts.y>=2)?"Ngươi nhận ra điều lạ":"Tai mắt báo"}: ${a.name} định ${desc}. Ngươi chặn kịp và nắm ${balAb(BAL.eff.j8.evCaught)} chứng cứ. `;
  return `Người của ${t.name} phát giác ${NM(a)} định ${desc}; ${t.name} nắm ${balAb(BAL.eff.j8.evCaught)} chứng cứ của ${NM(a)}. `}

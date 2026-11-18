@@ -297,7 +297,7 @@ function knEye(x,h,hid){const doer=knWho(h)[0],pl=h.k,nw=agKh();const at=s=>{con
 function knPal(o){try{return palaceOf(o)}catch(e){return null}}
 function knLoyK(p,s){if(!(p===S&&s&&s.kn))return null;const o=ownerOf(s);return o===S||s===S.maid?cl(s.loyal||0,0,100):tmOdds(S,s)}/* a Tai mắt's firmness for HER = her will (tmOdds), never lòng to her own master (review ag-all-2 r2 C2) */
 function taiMatList(p){p=p||S;if(!p)return[];const N=p===S&&S.tmN||{};return taiMatRaw(p).map(s=>{const o=ownerOf(s);return{id:"s"+s.sid,sid:s.sid,name:s.name,role:s.role,
- placedAt:o?knPal(o):null,placedWith:o?knId(o):null,placedName:o?o.name:"",loyaltyKnown:knLoyK(p,s),reports:N[s.sid]||0,
+ placedAt:o?knPal(o):null,placedWith:o?knId(o):null,placedName:o?(o.name!=null?o.name:NM(o)/* the Thái hậu's household has no .name */):"",loyaltyKnown:knLoyK(p,s),reports:N[s.sid]||0,
  /* the tinbao-ui adapter shape (main s34 / tinbao worker): p, place, loy, loyalWord, sold */
  p:s,place:o?knPal(o):null,loy:knLoyK(p,s),loyalWord:knLoyW(knLoyK(p,s)),sold:p===S&&knIsSold(s)&&knSoldK(s)}})}
 const KN_LOYW={warm:"một lòng",cool:"tạm tin được",cold:"khó tin",none:"chưa rõ"};
@@ -366,7 +366,7 @@ function tmRefuse(p,s){const o=ownerOf(s);if(!o||!npcWhy("tmTell",{s,o},()=>roll
 /* one try: the recruiter turns to the most promising person (by the same odds); that person decides */
 function tmTry(p,why){const C=tmCands(p);if(!C.length)return null;let best=null,bo=-1;for(const s of C){const o=tmOdds(p,s);if(o>bo){bo=o;best=s}}
  KN.stat.tmTry=(KN.stat.tmTry||0)+1;if(agTry(bo)){best.spyFor=key(p);KN.stat.tmOk=(KN.stat.tmOk||0)+1;if(p===S&&!quiet)try{log(`${best.name} (người hầu cung ${NM(ownerOf(best))}) nhận lời làm tai mắt cho ngươi.`)}catch(e){}return best}
- if(agSoft(bo)){if(p===S&&!quiet)try{log(agSoftTxt(S))}catch(e){}return null}
+ if(agSoft(bo)){if(p===S&&!quiet)try{agSoftTxt(S,"Cài tai mắt")}catch(e){}return null}
  const t=tmRefuse(p,best);if(p===S&&!quiet)try{log(`Ngỏ ý với ${best.name} (người hầu cung ${NM(ownerOf(best))}), nàng không nhận${t?" và còn bẩm lại với chủ":""}.`)}catch(e){}return null}
 function tmLose(p,n){const L=taiMatRaw(p).sort((a,b)=>tmOdds(p,a)-tmOdds(p,b));for(let i=0;i<n&&i<L.length;i++)L[i].spyFor=null}
 function tmSync(p){if(!p||!tmOn())return;const c=Math.min(tmB().cap,taiMatRaw(p).length);
@@ -402,7 +402,7 @@ function tmBest(p){let b=null,bo=-1;for(const s of tmCands(p)){const o=tmOdds(p,
 function tmTake(p,s){if(!p||!s)return"";s.spyFor=key(p);KN.stat.tmOk=(KN.stat.tmOk||0)+1;const r=`${tmWho(s)} nhận làm tai mắt cho ${p===S?"ngươi":p.name}.`;if(p===S&&!quiet)try{log(r)}catch(e){}return r}
 function tmNo(p,s,t){t=t==null?tmRefuse(p,s):t;const f=tmFear(p,1);const r=`${tmWho(s)} không nhận làm tai mắt cho ${p===S?"ngươi":p.name}${t?", còn bẩm lại với chủ":""}.${f?" "+f+".":""}`;if(p===S&&!quiet)try{log(r)}catch(e){}return r}
 /* one approach to a given person (her odds = tmOdds, + bonus for a threat) → the person decides */
-function tmAsk(p,s,bonus){KN.stat.tmTry=(KN.stat.tmTry||0)+1;const o=tmOdds(p,s)+(bonus||0);if(agTry(o))return tmTake(p,s);/* OD ~17:35Z: a capped near-sure miss is soft (no report, no fear) */if(agSoft(o)){if(p===S&&!quiet)try{log(agSoftTxt(S))}catch(e){}return""}tmNo(p,s);return""}
+function tmAsk(p,s,bonus){KN.stat.tmTry=(KN.stat.tmTry||0)+1;const o=tmOdds(p,s)+(bonus||0);if(agTry(o))return tmTake(p,s);/* OD ~17:35Z: a capped near-sure miss is soft (no report, no fear) */if(agSoft(o)){if(p===S&&!quiet)try{agSoftTxt(S,"Cài tai mắt")}catch(e){}return""}tmNo(p,s);return""}
 /* the j7 volunteer: a real servant of another palace whose own odds for her reach vol.min */
 function tmVol(){const s=tmBest(S);return s&&tmOdds(S,s)>=tmB().vol.min?s:null}
 /* ================= AG-ALL-2g — INFO SELLERS (owner OD 17/11 ~16:50Z (2), verbatim in dev/OWNER_DECISIONS.md: "Có những người bán tin ... nô tài có một

@@ -139,7 +139,7 @@ function newPlot70(a,t,m,rid,mo,opt){const z=j70();const M=M70[m];if(!M)return n
  /* the accomplice: a servant of the target is approached; the loyal refuse and tell their mistress, the rest betray */
  if(r.acc==="tsv"){const L=(t.staff||[]).filter(s=>s.spyFor!==p.a);const s=L.sort((x,y)=>(x.loyal+nq(x,"loyal",BAL.net.k.firmLoyal))-(y.loyal+nq(y,"loyal",BAL.net.k.firmLoyal)))[0];
   if(s){p.acc=s.sid;/* 2f2: the approached servant CHOOSES by tmOdds (traits, lòng, what she wants); a refusal is told as before */const ao=typeof tmOdds==="function"?tmOdds(a,s):(s.loyal+nq(s,"loyal",BAL.net.k.firmLoyal)+nq(s,"greed",BAL.net.k.firmGreed)>=60?25:100),aok=ao>=100||agTry(ao);
-   if(!aok&&agSoft(ao)){/* review ag-all-2 r2 C5: a capped miss is soft (OD ~17:35Z): nobody hears, nothing changes, the plot just ends */p.end="refused";p.sv=s.sid;if(a===S)log(agSoftTxt(S));else if(a.plan&&a.plan.j70===p.id)a.plan=null;return p}
+   if(!aok&&agSoft(ao)){/* review ag-all-2 r2 C5: a capped miss is soft (OD ~17:35Z): nobody hears, nothing changes, the plot just ends */p.end="refused";p.sv=s.sid;if(a===S)agSoftTxt(S,`Mua chuộc ${s.name}`);else if(a.plan&&a.plan.j70===p.id)a.plan=null;return p}
    if(!aok){p.end="refused";p.sv=s.sid;evA(t,a,BAL.eff.j70.evNewPlot70);s.loyal=cl(s.loyal+BAL.eff.j70.loyalNewPlot70,0,100);try{mindLog(a,"_abandon")}catch(e){}
     if(t===S){p.kn=1;p.kt.push(tellOf70(p,0));p.pend="serv"}else if(a===S){p.pend="ownfail"}
     if(a!==S&&a.plan&&a.plan.j70===p.id)a.plan=null;return p}

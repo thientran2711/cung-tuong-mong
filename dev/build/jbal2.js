@@ -630,7 +630,7 @@ BAL.srvGate={rew:60,rec:50,get frameLoy(){return -BAL.eff.j42.loyalSrvStaffAct},
    -tamco/tc, clamp min..max); srvGrant = the Ban gả trigger (Chủ tin >= tin, roll(base + bond if a sworn man), loyalty -stayLoy if she asks to stay);
    srvMp = công lao per bậc (need (bậc+1)*srvMp); srvLoyal = a new servant's loyalty base+R(r) */
 BAL.srvRisk={vuon:28,thu:34,tyv:20,tn:40,home:18,def:26,fr:4,tc:10,min:6,max:92};
-BAL.caught={fac:4};/* j8 caughtOdds (held by oddsCl to BAL.odds lo..hi) */
+BAL.caught={fac:4};/* j8 caughtOdds (clamped by the ONE odds cap, oddsCl) */
 BAL.srvGrant={tin:55,get base(){return BAL.odb.j42.rbTop_2},bond:3,stayLoy:5};BAL.srvMp=5;BAL.srvLoyal={base:45,r:36};/* promotion loyalty: BAL.eff.j14.loyalServRanks */
 BAL.ag.staff={st:{duc:[10,40],tamco:[10,40],danh:[0,10],suc:[60,90],bac:[0,20]},goal:{tin:70,suc:60,bac:40,sac:60,tai:40,duc:40,friend:2},
  nw:{tin:1.2,mp:1,suc:1.2,bac:.6,self:.4,ally:.5,sung:1,love:.3,spite:.4},greed:2,mpS:4,sc:{af:.3,tinh:.3,spite:.3,sung:.25},
@@ -915,10 +915,6 @@ BAL.ag.harm={spiteD:100,needs:["spite","sung","kid","safe","danh","ally"],
  hap:{wit:["provoke","humil","gossip","flaunt","effort","mediate","ksp","pray","harm:trip","harm:pushp","harm:rumor","harm:pond","harm:accuse","harm:vp","harm:xx","harm:takeaway"],pub:{effort:["vuon"],flaunt:["vuon"]}}};
 /* AG-ALL HYBRID day: intentW = × on the weight of a need that is part of her day intent when she picks her buổi */
 Object.assign(BAL.ag.day,{intentW:3});/* the 2nd goal of the day = BAL.ag.why.g3.two (jagday agIntent) */
-/* SOFT FAIL (owner OD 17/11 ~17:35Z "Trần 95%, việc chắc ăn mà hỏng thì chỉ hỏng nhẹ"): an act whose raw odds reached the cap (>= BAL.odds.hi:
-   sure before the cap) and fails only because of the cap fails SOFTLY: the cost / khắc already paid stays spent, nothing gained, no failure
-   consequence. me / npc = the ONE BẠI line ({n} = her name). Defined only if absent: Foreman D's game-wide BAL.odds.softFail wins on merge. */
-BAL.odds.softFail=BAL.odds.softFail||{me:"Việc tưởng nắm chắc, nào ngờ trời chẳng chiều người: công đã bỏ, chẳng được gì, cũng chẳng mất gì thêm.",npc:"{n} tưởng việc nắm chắc mà không thành; chẳng được gì, cũng chẳng mất gì thêm."};
 /* AG-ALL-2 (jagacts2.js; design dev/handover/reports/ag-all.md §16): the consort cards an NPC lacked + the Emperor's own visit / tea / bestowal.
    cx2     the player's cards read the SAME entries (j2 talkOpts / deck, j9 topicOpts, j20) through cx2O (j8): o base odds, sd / dd / td / thi / mat / y = the
            stat divisors / multipliers of the old literals, w gain, l loss, c cost; g = the need points an NPC's deed serves (BAL.ag.unit = one whole need).
@@ -1045,7 +1041,7 @@ BAL.ag.mg2.hand={on:1,lo:3,hi:9.5,w:4,skew:1.6};
 BAL.ag.mg2.cal={on:1,d:[-2,-1,0,1,2],up:1,dn:4,min:1,max:9.5,k:{}};
 /* j71 odds words under mg2: the same draw (mgNpcRaw, seeded by the plan) for every entrant, her included, on this contest's board (j71 mgX7) */
 (function(){if(typeof cOdds7!=="function"||typeof fxOdds7!=="function")return;const c0=cOdds7,f0=fxOdds7;
- const win=(E,base,kindAt,mi,r)=>{let w=0;const N=500;for(let t=0;t<N;t++){let b=-1,bi=-1;for(let i=0;i<E.length;i++){const x=base[i]+mgNpcRaw(kindAt(i),E[i],{rnd:r})/10*J71.luck;if(x>b){b=x;bi=i}}if(bi===mi)w++}return cl(Math.round(100*w/N),3,97)};
+ const win=(E,base,kindAt,mi,r)=>{let w=0;const N=500;for(let t=0;t<N;t++){let b=-1,bi=-1;for(let i=0;i<E.length;i++){const x=base[i]+mgNpcRaw(kindAt(i),E[i],{rnd:r})/10*J71.luck;if(x>b){b=x;bi=i}}if(bi===mi)w++}return oddsCl(Math.round(100*w/N))};
  cOdds7=function(kind,E,prep,meB,seed){if(!mg2On())return c0.apply(this,arguments);const mi=E.indexOf(S);if(mi<0)return 0;const f=SC7[kind].f;
   const base=E.map(p=>f(p)+(prep.includes(p.id)?J71.prep:0));base[mi]+=meB;return win(E,base,()=>kind,mi,rng7(seed))};
  fxOdds7=function(F,art,meB,seed){if(!mg2On())return f0.apply(this,arguments);const E=[S].concat(liveRivals(true).filter(present7));const K=E.map(p=>p===S?art:fxBest7(p,F.arts));
