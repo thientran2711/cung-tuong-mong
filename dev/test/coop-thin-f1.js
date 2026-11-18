@@ -13,6 +13,11 @@ async function mk(b,name,vp,want){const ctx=await b.newContext({viewport:{width:
   await ctx.addInitScript(([u,w])=>{window.COOP_URL=u;if(w)try{localStorage.setItem('ctm-thin',String(w))}catch(e){}
    window.__co=()=>{const c=window.COOP;if(!c)return{};return{code:c.code,seat:c.seat,world:typeof S!=='undefined'&&!!S&&!!(window.COOPW&&COOPW.on)}}},[WURL,want]);
   if(TRIPSRC&&name==='guest')await ctx.addInitScript(TRIPSRC);
+  /* LAG=<ms>: a 4G profile on this phone: every socket message out and in waits LAG ms (order kept) */
+  if(+process.env.LAG)await ctx.addInitScript(L=>{const W=window.WebSocket;const P=function(u,p){const s=p===undefined?new W(u):new W(u,p);const snd=s.send.bind(s);
+    s.send=d=>setTimeout(()=>{try{if(s.readyState===1)snd(d)}catch(e){}},L);let h=null;Object.defineProperty(s,'onmessage',{configurable:true,get(){return h},set(f){h=f}});
+    W.prototype.addEventListener.call(s,'message',e=>setTimeout(()=>{try{h&&h.call(s,e)}catch(x){console.error(x)}},L));return s};
+   P.prototype=W.prototype;for(const k of ['CONNECTING','OPEN','CLOSING','CLOSED'])P[k]=W[k];window.WebSocket=P},+process.env.LAG);
   const p=await ctx.newPage();p.setDefaultTimeout(90000);const o={name,ctx,p,errs:[]};
   p.on('pageerror',e=>o.errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon|fonts\.gstatic|CORS/.test(m.text()))o.errs.push('console: '+m.text().slice(0,300))});return o}
 const tapText=async(o,re,ms=8000)=>{const t0=Date.now();while(Date.now()-t0<ms){const r=await o.p.evaluate(src=>{const R=new RegExp(src);
@@ -31,6 +36,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  const H=await mk(b,'host',SWAP?IPAD:FOLD,LVL),G=await mk(b,'guest',SWAP?FOLD:IPAD,0);
  await H.p.goto(BASE);await H.p.waitForTimeout(3000);await tapText(H,/^(Chơi cùng bạn|Cùng hảo hữu)/);await H.p.waitForTimeout(500);await tapText(H,/^(Mời bạn|Mời hảo hữu)/);
  await until(H,()=>window.COOP&&COOP.code&&COOP.seat==='a');const code=await H.p.evaluate(()=>COOP.code);console.log('room',code,'level',LVL,'swap',SWAP);
+ if(+process.env.CPU){const c=await H.ctx.newCDPSession(H.p);await c.send('Emulation.setCPUThrottlingRate',{rate:+process.env.CPU})}/* CPU=4: the host phone ×4 slower */
  await G.p.goto(BASE+'?room='+code);await G.p.waitForTimeout(3000);await tapText(G,/^(Vào phòng|Tiếp tục)/,4000);
  ok(await until(G,()=>window.COOP&&COOP.seat==='b'&&!COOP.frozen,null,60000),'guest joined seat b');
  const inW=async()=>{const t0=Date.now();while(Date.now()-t0<150000){await clear(H);await clear(G);const a=await H.p.evaluate(()=>__co().world&&rivals.some(v=>v.coop)),c=await G.p.evaluate(()=>__co().world&&rivals.some(v=>v.coop));if(a&&c)return true;await sleep(500)}return false};
@@ -58,7 +64,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  await G.p.evaluate(()=>{S.inv=S.inv||[];for(const k of ['yensao','yensao','yensao','hacdinh','hacdinh'])S.inv.push({k});if(S.maid){S.maid.loyal=60;delete S.maid.spyFor}});
  const kinds=process.env.NOACT?[]:(await G.p.evaluate(()=>Object.keys(ACT))).filter(k=>!process.env.KINDS||process.env.KINDS.split(',').includes(k));const table=[];let nAct=0,nOk=0;
  const npcOf=(o,id)=>o.p.evaluate(id=>{const v=rivals.find(x=>x&&x.id===id&&!x.coop);return v?JSON.parse(JSON.stringify(v,(k,x)=>k==='hh'?undefined:x)):null},id);
- const herS=o=>o.p.evaluate(()=>({bac:S.bac,danh:S.danh,sung:S.sung,duc:S.duc,suc:S.suc,tamco:S.tamco,inv:(S.inv||[]).length,log:String((S.logs||[])[0]||'').replace(/<[^>]+>/g,'').slice(0,120),logs:(S.logs||[]).slice(0,5).map(x=>String(x).replace(/<[^>]+>/g,''))}));
+ const herS=o=>o.p.evaluate(()=>({bac:S.bac,danh:S.danh,sung:S.sung,duc:S.duc,suc:S.suc,tamco:S.tamco,inv:(S.inv||[]).length,log:String((S.logs||[])[0]||'').replace(/<[^>]+>/g,'').slice(0,120),logs:(S.logs||[]).slice(0,8).map(x=>String(x).replace(/<[^>]+>/g,''))}));
  const hostHer=()=>H.p.evaluate(()=>{const B=COOPW.thin.seatOf('b');const s=B&&B.S||{};return {bac:s.bac,danh:s.danh,sung:s.sung,duc:s.duc,suc:s.suc,tamco:s.tamco,inv:(s.inv||[]).length,log:String((s.logs||[])[0]||'').replace(/<[^>]+>/g,'').slice(0,120)}});
  const dd=(B,A2)=>{const o=[];const d=(x,y,p)=>{if(JSON.stringify(x)===JSON.stringify(y))return;if(x&&y&&typeof x==='object'&&typeof y==='object'&&!Array.isArray(x)&&!Array.isArray(y)){for(const f of new Set([...Object.keys(x),...Object.keys(y)]))d(x[f],y[f],p+'.'+f);return}o.push(p)};d(B,A2,'');return o};
  for(const k of kinds){await G.p.evaluate(()=>{Q.length=0;S.mg=null;S.confined=0;S.rank=Math.max(S.rank||0,4);S.bac=Math.max(S.bac||0,5000);S.suc=Math.max(S.suc||0,90);S.dead=false;try{closeModal()}catch(e){}});await H.p.evaluate(()=>{Q.length=0;S.mg=null;try{closeModal()}catch(e){}});
@@ -84,33 +90,54 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   const num=o=>o?[o.sung,o.bac,o.danh,o.suc,o.alive,!!o.out,o.rank,(o.inv||[]).length,(o.kids||[]).length]:null;/* rel/oan/ghen/ev are each phone's own viewer rows */
   const sameW=JSON.stringify(num(hA))===JSON.stringify(num(gA));/* her log line: her phone's render adds the Sổ ghi sync suffix (jlogsync lsSync, as in solo); the host's copy holds the act line */
   /* her phone may add its own lines after it (guest-side log writers from the world delta: evidence gained, staff cap — tripwire F6/G) */
-  const herSame=Object.keys(hh).every(x=>x==='log'?her1.logs.some(l=>l.startsWith(String(hh.log).slice(0,60))):x==='logs'||her1[x]===hh[x]);
+  const actL=String((ans&&ans.r&&ans.r.r)||'').trim().slice(0,40);/* the act's own line (the host's runAct result, logged in her context): on her phone among her newest lines */
+  const herSame=Object.keys(hh).every(x=>x==='log'?(actL?her1.logs.some(l=>l.includes(actL)):true):x==='logs'||her1[x]===hh[x]);
   const good=!r.err&&r.out===''&&!r.local&&r.npcOps===0&&r.sent===1&&got&&run1===run0+1&&sameW&&herSame;nAct++;if(good)nOk++;
   const row={k,id:pick,staged:!!st,hostRan:run1-run0,ans:ans&&ans.r&&ans.r.st,ms:ans&&ans.ms,text:ans&&ans.r&&ans.r.r,npc:dd(hB,hA).slice(0,8),her:Object.keys(her1).filter(x=>x!=='log'&&x!=='logs'&&her0[x]!==her1[x]).map(x=>x+':'+her0[x]+'→'+her1[x]),log:her1.log.slice(0,60)};table.push(row);
   if(!good)ok(false,'F1 '+k,{r,got,run:[run0,run1],sameW,hA:num(hA),gA:num(gA),herSame,her1,hh,flog:await G.p.evaluate(()=>COOPW.thin.F.log.slice(-4)),hlog:await H.p.evaluate(()=>COOPW.thin.F.log.slice(-4))})}
  if(!process.env.NOACT)ok(nAct>0&&nAct===nOk,`F1 every ACT kind from the guest: not run on her phone, run once on the host in her context, world + her person the same on both phones (${nOk}/${nAct}; ${kinds.length} kinds, ${table.filter(x=>x.skip).length} without a target)`);
+ {const ms=table.filter(x=>typeof x.ms==='number').map(x=>x.ms).sort((a,b)=>a-b);if(ms.length)console.log('LATENCY tap→answer ms (LAG '+(+process.env.LAG||0)+', host CPU ×'+(+process.env.CPU||1)+'): n='+ms.length+' median='+ms[ms.length>>1]+' min='+ms[0]+' max='+ms[ms.length-1])}
  console.log('ACT table:');for(const x of table)console.log(' ',JSON.stringify(x).slice(0,300));
  if(process.env.OUT){fs.mkdirSync(process.env.OUT,{recursive:true});fs.writeFileSync(path.join(process.env.OUT,`f1-acts-L${LVL}-s${SWAP}.json`),JSON.stringify(table,null,1))}
- /* F2: acts between the two, both directions (steal, gift, harm kid, pet) */
- const fr=o=>o.p.evaluate(()=>{const f=COOPW.friend();return f?f.id:null});
- const stageP=o=>o.p.evaluate(()=>{S.kids=(S.kids||[]).filter(k=>k.alive!==false);if(!S.kids.length)S.kids.push(mkKid('f',4));S.pets=[{t:Object.keys(PET)[0],from:'',src:'',care:80,at:tsbWk(),full:50,clean:50,joy:50,aff:50}];S.inv=S.inv||[];S.inv.push({k:'tranhco'});S.inv.push({k:'yensao'});render()});
- const pers=o=>o.p.evaluate(()=>({inv:(S.inv||[]).length,kids:(S.kids||[]).filter(k=>k.alive!==false).map(k=>[k.name,k.hp,k.alive]),pets:(S.pets||[]).map(p=>[p.t,Math.round(p.full||0),Math.round(p.joy||0)]),rel:0,bac:S.bac,suc:S.suc}));
- const pairs=[['petcare','pet'],['petsteal','pet'],['gift','gift'],['laydo','steal'],['kpoison','kid']];
+ /* F3: the old relay messages for acts are not sent at level 6 (counted on both pages during F2): res / actr / act invite / do inv */
+ for(const o of [H,G])await o.p.evaluate(()=>{window.__sent={};if(COOP.__ws)return;COOP.__ws=1;const s=COOP.send;COOP.send=function(m){try{const k=m&&m.t+(m.op?':'+m.op:'')+(m.k?':'+m.k:'')+(m.mode?':'+m.mode:'');__sent[k]=(__sent[k]||0)+1}catch(e){}return s.apply(this,arguments)}});
+ /* F2: acts between the two, both directions. Each act is checked on the TARGET's real person (guest→host: the host's S; host→guest: her
+    phone's S after the patch) and on the actor. Every act runs on the host (hers as an intent), so success is forced there for the act:
+    roll()→true (but j29's 30 = a loyal servant refusing a dirty job), caught()→"" (restored after). Her person is staged through the host's store (withSeat b → patch), never on her phone. */
+ const force=v=>H.p.evaluate(v=>{if(v){if(!window.__fr){window.__fr=[roll,caught];roll=o=>o!==30;caught=()=>''}}else if(window.__fr){[roll,caught]=window.__fr;delete window.__fr}},v);
+ const STP=()=>{S.kids=(S.kids||[]).filter(k=>k.alive!==false);if(!S.kids.length)S.kids.push(mkKid('f',4));for(const k of S.kids)k.hp=100;
+  S.pets=[{t:Object.keys(PET)[0],from:'',src:'',care:80,at:tsbWk(),full:40,clean:40,joy:40,aff:50}];S.inv=S.inv||[];
+  const lk=Object.keys(IT).find(k=>typeof loOk==='function'&&loOk({k}));for(const k of [lk||'tranhco','yensao','yensao'])S.inv.push({k});S.bac=Math.max(S.bac||0,5000);S.confined=0;S.suc=Math.max(S.suc||0,90)};
+ const stageP=async o=>{if(o===H)await H.p.evaluate(src=>{(0,eval)('('+src+')')();render()},STP.toString());
+  else{await H.p.evaluate(src=>COOPW.thin.withSeat('b',()=>(0,eval)('('+src+')')()),STP.toString());await H.p.evaluate(()=>{try{COOPW.thin.flush()}catch(e){}});
+   await until(G,()=>(S.pets||[]).length===1&&S.pets[0].full===40,null,15000)}};
+ const pers=o=>o.p.evaluate(()=>({inv:(S.inv||[]).filter(e=>e&&!e.h).length,kids:(S.kids||[]).filter(k=>k.alive!==false).map(k=>[k.name,k.hp]),
+  pets:(S.pets||[]).map(p=>[p.t,Math.round(p.full||0),Math.round(p.joy||0)]),bac:S.bac,suc:S.suc}));
+ const notes=o=>o.p.evaluate(()=>{const m=document.getElementById('modal');const t=[];if(m&&!m.hidden){const h=m.querySelector('h2,h3,.mt,.kt');if(h)t.push(h.textContent.trim())}for(const q of Q)if(q&&q.t)t.push(String(q.t));for(const x of (S.thq||[]))if(x&&x.t)t.push(String(x.t));return t.slice(0,6)});
+ const sum=x=>x.reduce((a,p)=>a+p[1]+p[2],0);
+ const PAIRS=[['petcare','pet',(t0,t1)=>t1.pets.length===t0.pets.length&&sum(t1.pets)>sum(t0.pets)],
+  ['petsteal','pet',(t0,t1,a0,a1)=>t1.pets.length===t0.pets.length-1&&a1.pets.length===a0.pets.length+1],
+  ['gift','gift',(t0,t1,a0,a1)=>t1.inv===t0.inv+1&&a1.inv===a0.inv-1],
+  ['laydo','steal',(t0,t1,a0,a1)=>t1.inv===t0.inv-1&&a1.inv===a0.inv+1],
+  ['kpoison','kid',(t0,t1)=>t1.kids.length<t0.kids.length||t1.kids.some((k,i)=>t0.kids[i]&&k[1]<t0.kids[i][1])]];
  for(const [dir,A,B] of [['guest→host',G,H],['host→guest',H,G]]){
-  await stageP(B);if(B===G){await G.p.evaluate(()=>{});}/* her person: sync to the host copy */
-  if(B===G){await G.p.evaluate(()=>{try{COOPW.thin.E&&0}catch(e){}})}
-  await H.p.evaluate(()=>{try{COOPW.thin.flush()}catch(e){}});await sleep(2500);
-  for(const [k,what] of pairs){await A.p.evaluate(()=>{S.bac=Math.max(S.bac||0,5000);S.confined=0;Q.length=0;try{closeModal()}catch(e){}});await B.p.evaluate(()=>{Q.length=0;try{closeModal()}catch(e){}});
-   /* a guest target: her live person must reach the host first (her ready-style diff rides on any intent): a probe act is not needed, the F intent of the guest carries it; for host→guest the host's stand-in of her is built from her stored copy + ctm-fam */
-   const p0=await pers(B);
-   const r=await A.p.evaluate(k=>{const f=COOPW.friend();if(!f)return {err:'no friend'};const A2=ACT[k];let okd=false;try{okd=!A2.ok||A2.ok(S,f)}catch(e){okd='EXC'}
-    if(!okd)return {skip:'not ok',k};const ex=k==='gift'?S.inv.findIndex(e=>e&&!e.h&&e.k==='yensao'):undefined;let seed=99;const nat=Math.random;Math.random=()=>{seed=(seed*1103515245+12345)%2147483648;return seed/2147483648};
-    let out='';try{out=runAct(S,f,k,ex)}catch(e){return {err:String(e)}}finally{Math.random=nat}return {out:String(out).replace(/<[^>]+>/g,'').slice(0,100)}},k);
+  for(const [k,what,chk] of PAIRS){for(let i=0;i<3;i++){await clear(H);await clear(G)}
+   await stageP(B);await stageP(A);await H.p.evaluate(()=>{try{COOPW.thin.flush()}catch(e){}});await sync();
+   if(A===G)await G.p.evaluate(()=>{S.pets=[];});/* her own pets: none, so petsteal has room (petHasFree) */
+   const a0=await pers(A),t0=await pers(B);await force(true);
+   const r=await A.p.evaluate(k=>{const f=COOPW.friend();if(!f)return {err:'no friend'};const A2=ACT[k];let okd=false;try{okd=!A2.ok||A2.ok(S,f)}catch(e){okd='EXC '+e.message}
+    if(okd!==true)return {err:'not ok '+okd};const ex=k==='gift'?S.inv.findIndex(e=>e&&!e.h&&e.k==='yensao'):undefined;let out='';
+    try{out=runAct(S,f,k,ex)}catch(e){return {err:String(e)}}return {out:String(out).replace(/<[^>]+>/g,'').slice(0,120)}},k);
    if(A===G){await until(G,()=>!COOPW.thin.F.pend,null,15000);const la=await G.p.evaluate(()=>COOPW.thin.F.lastAns);r.ans=la&&la.r}
-   /* the receiver's Quà tặng / invite card: take it */
-   for(let i=0;i<6;i++){await clear(H);await clear(G);await sleep(500)}
-   await sleep(1500);const p1=await pers(B);
-   table.push({dir,k,r,p0,p1});ok(!r.err,`F2 ${dir} ${k} (${what}) ran`,{r,p0,p1})}}
+   if(k==='gift'){const sm=()=>B.p.evaluate(()=>{try{const m=document.getElementById('modal');if(Q.length&&(!m||m.hidden))showModal()}catch(e){}});await sleep(1500);await sm();r.inv=await tapText(B,/^Nhận/,10000);await sleep(2500);await sm();r.keep=await tapText(B,/^Nhận/,10000)}
+   await force(false);await H.p.evaluate(()=>{try{COOPW.thin.flush()}catch(e){}});await sleep(2000);
+   const nt=await notes(B);for(let i=0;i<4;i++){await clear(H);await clear(G);await sleep(300)}await sync();
+   const a1=await pers(A),t1=await pers(B);const good=!r.err&&chk(t0,t1,a0,a1);
+   table.push({dir,k,r,t0,t1,a0,a1,notes:nt});ok(good,`F2 ${dir} ${k} (${what}): the effect on the target's own person + the actor`,{r,t0,t1,a0,a1,notes:nt});
+   if(dir==='guest→host'&&k!=='laydo')ok(nt.length>0||k==='gift','F2 '+dir+' '+k+': the host got his note (resApply in his context)',nt)}}
+ {const [hs,gs]=await both(()=>window.__sent||{});const bad=o=>Object.keys(o).filter(k=>/^res$|^actr$|^act:[^:]+:invite$|^do:inv$/.test(k));
+  ok(LVL<6||!bad(hs).length&&!bad(gs).length,'F3 no old act relay message at level 6 (res / actr / act invite / do inv), both seats',{host:hs,guest:gs})}
+ {const st=await H.p.evaluate(()=>({f:COOPW.fStat||0}));ok(st.f>0,'F2 her acts on the host went through the local applier (no res message)',st)}
  {const [ho,go]=await both(()=>COOPW.oldRun||{});const n=o=>Object.values(o).reduce((a,b)=>a+b,0);
   ok(LVL>=3?n(ho)+n(go)===0:true,'F8 no old guest state guard ran (COOPW.oldRun, both seats)',{host:ho,guest:go})}
  ok(!H.errs.length&&!G.errs.length,'no page errors',{h:H.errs.slice(0,4),g:G.errs.slice(0,4)});

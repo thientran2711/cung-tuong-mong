@@ -500,7 +500,10 @@ function onRes(m){if(!CW.on||m.from===CW.seat||!S||seenIds.has("r"+m.id))return;
  /* I had already ended the week (she acted on me while I waited): my end goes out again with this in it, before the ack she waits for */
  try{if(S&&!S.dead&&CW.sent===wk()){CW.sent=-1;sendEnd()}}catch(e){console.error(e)}
  COOP.send({t:"actr",id:m.id,ok:true,ack:1})}
-function resApply(m){if(S.dead)return;
+/* thin F1 (level 6, foreman ruling 18/11): the act appliers (resApply → famApply / petApply) run ONLY on the host (her acts on him: his
+   context once hers closes; his acts on her: D.resTo in her context b → patch). The guest never applies an act result locally: a call there
+   is an old path (oldRan: the tripwire / F8 assert 0) and does nothing. */
+function resApply(m){if(fW()&&!host()&&!CW.ctx){oldRan("actApply");return}if(S.dead)return;
  const fx={};for(const k in m.fx||{})if(DK.includes(k)&&typeof m.fx[k]==="number")fx[k]=m.fx[k];const g=m.flags||{},fpid=fp();
  try{if(m.fxl&&typeof m.fxl==="object")for(const x in m.fxl){const v=m.fxl[x];if(v==null)continue;if(x==="tlk"||x==="lk"||x==="stain"){if(typeof lkMergeIn==="function")lkMergeIn(S,x,v)}else if(FXL.includes(x))S[x]=J(v)}}catch(e){console.error("res fxl",e)}/* review/looks-2: marks an act put on me */
  if(Object.keys(fx).length)apply(fx);S.rl=S.rl||{};S.ro=S.ro||{};S.cev=S.cev||{};
@@ -1045,8 +1048,9 @@ PEND.thInv=pp=>{if(!pp||!pp.id)return null;const what=pp.k==="gift"?`muốn tặ
 /* her invite accepted / refused by the host: run in HER context (she is the actor, the host's entry the target) */
 function invHer(pp,ok){if(!S||S.dead)return;const v=friendEntry();
  if(!ok||!v||v.alive===false){pushModal({t:"Hảo hữu từ chối",h:`<p><b>${esc(friendName())}</b> không nhận.</p>`});return}
- let extra;if(pp.e){S.inv=S.inv||[];const t=JSON.stringify(pp.e);extra=S.inv.findIndex(x=>JSON.stringify(x)===t);
-  if(extra<0){/* bought after the week's base: put it in her stored chest first, so the patch takes it out of her live one */S.inv.push(J(pp.e));extra=S.inv.length-1;try{CW.thin.D.rebase()}catch(e){}}}
+ /* thin F1 (level 6): her offer was made on the host in her context (jcoopworld runAct → D.kind inv), so the item rides as pp.he, as the host's own offer */
+ let extra;const pe=pp.e||pp.he;if(pe){S.inv=S.inv||[];const t=JSON.stringify(pe);extra=S.inv.findIndex(x=>JSON.stringify(x)===t);
+  if(extra<0){/* bought after the week's base: put it in her stored chest first, so the patch takes it out of her live one */S.inv.push(J(pe));extra=S.inv.length-1;try{CW.thin.D.rebase()}catch(e){}}}
  CW.inv=pp.id;let r="";try{r=runAct(S,v,pp.k,extra)}finally{CW.inv=false}if(r)log(r);
  pushModal({t:"Hảo hữu nhận lời",h:`<p>${r||"Hảo hữu đã nhận."}</p>`})}
 /* Mua chuộc on a player who serves as a cung nữ: pp {rid, who, pay, o (her mistress)} — the j42 card with the other player as the buyer */

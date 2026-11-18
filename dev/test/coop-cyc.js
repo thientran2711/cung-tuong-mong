@@ -12,6 +12,7 @@ async function serve(ctx){ctx.__html=ctx.__html||path.join(ROOT,'dev/index.html'
  const f=path.join(ROOT,p);if(!f.startsWith(ROOT)||!fs.existsSync(f)||fs.statSync(f).isDirectory())return route.fulfill({status:404,body:'nf'});route.fulfill({status:200,contentType:MIME[path.extname(f)]||'application/octet-stream',body:fs.readFileSync(f)})})}
 const OUT=path.resolve(process.argv[2]||path.join(__dirname,'../../.tmp/coop-cyc'));fs.mkdirSync(OUT,{recursive:true});
 const WURL=process.argv[3]||'https://ctm-coop.victoria-tntt.workers.dev';
+const THIN=+process.env.THIN>=4;/* thin guest (part D cards, her person on the host): the rewrite for the thin model */
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const DCL={waitUntil:'domcontentloaded'};
@@ -72,9 +73,13 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
  const before=[];
  for(const [k,re,on,dDuc] of CASES.filter(c=>!process.env.CYC_ONLY||process.env.CYC_ONLY.split(',').includes(c[0]))){
   /* her cycle tuần = the tuần the next week opens: a name whose cyBase t matches (cycle = pure function of the name); a maid; not pregnant */
-  const nb=await B.p.evaluate(()=>{if(!S.maid)S.maid=(S.staff||[])[0]||{name:'Thử',loyal:60};S.preg=0;S.hidden=false;S.fake=0;S.cyb={};S.sung=Math.max(S.sung||0,40);S.age=Math.min(S.age||18,30);
-   const want=((S.tuan||0)+1)%3,base=window.__nm0||(window.__nm0=S.name);for(let i=0;i<400;i++){S.name=base+(i?' '+i:'');if(cyBase(S).t===want)break}render();return{name:S.name,want,t:cyBase(S).t,age:S.age}});
-  await A.p.evaluate(n=>{const f=COOPW.friend();if(f){f.name=n.name;f.age=n.age;f.preg=0;f.fake=0}},nb);
+  /* thin rewrite (THIN>=4: her person lives on the host): her state is set in the host's store (withSeat b, the patch brings it to her
+     phone), never on her phone; the host's entry of her follows from her person. Before THIN: her phone + the host's entry, as before. */
+  const STG=()=>{if(!S.maid)S.maid=(S.staff||[])[0]||{name:'Thử',loyal:60};S.preg=0;S.hidden=false;S.fake=0;S.cyb={};S.sung=Math.max(S.sung||0,40);S.age=Math.min(S.age||18,30);
+   const want=((S.tuan||0)+1)%3,base=window.__nm0||(window.__nm0=S.name);for(let i=0;i<400;i++){S.name=base+(i?' '+i:'');if(cyBase(S).t===want)break}if(!COOPW.ctx)render();return{name:S.name,want,t:cyBase(S).t,age:S.age}};
+  const nb=THIN?await A.p.evaluate(src=>{const r=COOPW.thin.withSeat('b',()=>(0,eval)('('+src+')')());try{COOPW.thin.flush()}catch(e){}return r},STG.toString()):await B.p.evaluate(STG);
+  if(THIN)ok(await until(B,n=>S.name===n&&!!S.maid&&!S.preg,nb.name,15000),`${k}: her staged person reached her phone (host patch)`,await B.p.evaluate(()=>[S.name,!!S.maid,S.preg]));
+  if(!THIN)await A.p.evaluate(n=>{const f=COOPW.friend();if(f){f.name=n.name;f.age=n.age;f.preg=0;f.fake=0}},nb);
   if(process.env.CYC_DBG)await B.p.evaluate(()=>{if(window.__flw)return;window.__flw=1;window.__fl=[];const f=flip;flip=function(){try{window.__fl.push([S.tuan,wk(),cycOn(S),!!S.maid,COOPW.inTurn,JSON.stringify(S.cyb||{}).slice(0,60),cyBase(S).t,S.name]);if(window.__fl.length>8)window.__fl.shift()}catch(e){}return f.apply(this,arguments)}});
   const w0=await wkA();let held=null,asked=false;
   for(let i=0;i<60&&!(asked&&held);i++){await clear(A);if((await clearB())==='cy')asked=true;await press1(A);if(!asked)await press1(B);await sleep(700);
@@ -84,13 +89,13 @@ async function join(B,code){await B.page();await B.p.goto(BASE+'?room='+code,DCL
   if(!before.length){await shot(B,'cyc-guest-card-1180x820');await shot(A,'cyc-host-wait-755x1000')}
   const d0=await B.p.evaluate(()=>({duc:S.duc,ghen:liveRivals(true).filter(v=>!v.coop).reduce((a,v)=>a+(v.ghen||0),0)}));
   if(!before.length)console.log('card buttons:',await B.p.evaluate(()=>[...document.querySelectorAll('#modal button')].filter(x=>x.offsetParent!==null).map(x=>(x.className||'-')+'|'+x.textContent.trim().replace(/\s+/g,' ').slice(0,50)).join(' || ')));
-  if(k==='lui')await B.p.evaluate(()=>{window.__r0=Math.random;Math.random=()=>0});/* c6 odds roll: success */
+  if(k==='lui')await (THIN?A:B).p.evaluate(()=>{window.__r0=Math.random;Math.random=()=>0});/* c6 odds roll: success (thin: her option runs on the host) */
   /* tap her option (kit option card), then whatever confirm the kit card asks */
   const tapped=await B.p.evaluate(src=>{const R=new RegExp(src);const x=[...document.querySelectorAll('#modal button')].find(b=>b.offsetParent!==null&&R.test(b.textContent.trim()));if(x){x.click();return true}return false},re.source);
   for(let i=0;i<8&&!(await B.p.evaluate(()=>S.cyb&&S.cyb.rk===wk()));i++){await sleep(400);
    const bs=await B.p.evaluate(()=>[...document.querySelectorAll('#modal button')].filter(x=>x.offsetParent!==null&&!x.disabled).map(x=>x.textContent.trim().replace(/\s+/g,' ').slice(0,40)));if(!before.length)console.log('after tap:',JSON.stringify(bs));
    await B.p.evaluate(src=>{const R=new RegExp(src);const x=[...document.querySelectorAll('#modal button')].find(b=>b.offsetParent!==null&&!b.disabled&&R.test(b.textContent.trim()));if(x)x.click()},'^(Chọn|Đồng ý|Quyết|Làm|Thử|Xác nhận)'+'|'+re.source)}
-  if(k==='lui')await B.p.evaluate(()=>{Math.random=window.__r0});
+  if(k==='lui')await (THIN?A:B).p.evaluate(()=>{Math.random=window.__r0});
   const d1=await B.p.evaluate(()=>({duc:S.duc,rk:S.cyb.rk===wk(),rv:S.cyb.rv,lie:S.cyb.lie===wk(),back:S.cyb.back,w:wk(),ghen:liveRivals(true).filter(v=>!v.coop).reduce((a,v)=>a+(v.ghen||0),0)}));
   ok(tapped&&d1.rk&&d1.rv===k,`${k}: B answered "${k}"`,d1);
   ok(d1.duc-d0.duc===dDuc,`${k}: her cost lands once on her side (Đức ${dDuc})`,[d0.duc,d1.duc]);
