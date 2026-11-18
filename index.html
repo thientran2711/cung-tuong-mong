@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"a5a1ad1a+","t":"2026-11-18T06:17Z","c":"map-tap-go: remove the arrival toast too (owner 18/11 ~06:30Z): tap = go at once, khắc deducted silently; KIT 32.8c dropped","b":"f54dc7418ede","h":[{"s":"8f5ea906+","t":"2026-11-18T06:11Z","c":"face-reveal-anim: kitReveal (KIT 79) — the real face appears in place out of the grey (frame, avatar, room-stage figure, event figure); Gọn…"},{"s":"04bb2793+","t":"2026-11-18T05:52Z","c":"hud-mood-bar: owner picked layout 1 (full row); switch and slim layout removed; KIT 49.4"},{"s":"c1104d92+","t":"2026-11-18T05:41Z","c":"face-zoom-aspect test: SEED / FORCE options for same-character before/after shots"},{"s":"16b4dad8+","t":"2026-11-18T05:32Z","c":"cloth-bake-static: cloth layer on every static figure path on a cold cache (wait layer + patch on bake done); test + report"},{"s":"231cd3b3+","t":"2026-11-18T03:27Z","c":"review display-set-bonus: VANPHONG rows (Đa Bảo Các + set wording); cap line drops 'điểm'; j8 'Điểm trang lộng lẫy' night quality reads wor…"},{"s":"bd8547f2+","t":"2026-11-18T03:28Z","c":"men-forbidden r6: old saves drop officials / festival princes standing in the hậu cung on load (menLoadFix, same ONE rule)"},{"s":"c743265c+","t":"2026-11-18T03:18Z","c":"review life-preload r6: title prefetch chained on undefined (lWant returns its promise); gate cap really 25 s (no re-run after cap / Vào cu…"},{"s":"2aca2aac+","t":"2026-11-18T03:17Z","c":"review cloth-tea-r6: kclo-on hides the picture by clip-path, not visibility (visibility:hidden made kfxGeom hide the cloth layer too: her f…"},{"s":"2b1b0701","t":"2026-11-18T03:00Z","c":"review staff-cap-apply r6: site rebuilt on db24027f"},{"s":"64488e4f+","t":"2026-11-18T02:38Z","c":"cloth-xoc r6e: rebuild site"}]};
+window.CTM_BI={"s":"46fad459+","t":"2026-11-18T06:17Z","c":"map-tap-go: remove the arrival toast too (owner 18/11 ~06:30Z): tap = go at once, khắc deducted silently; KIT 32.8c dropped","b":"c1628b819574","h":[{"s":"d959a9e0+","t":"2026-11-18T06:28Z","c":"buoi-banner: owner pick BTR_OP = 0.85 on the 73a7d3f layout (title overlaps the band, flush at the stage top); ladder hook removed"},{"s":"8c210d6b+","t":"2026-11-18T06:21Z","c":"act-pic-match: EVENTS.json + FIGURES-kids.json rebuilt (same 17/11 02:41Z incident), cdn_sync refuses bulk overwrite of top-level manifests…"},{"s":"b7ea2748+","t":"2026-11-18T06:12Z","c":"kit-set-lines: display-room test pins rank so the real-data pair is never over rank"},{"s":"22891730+","t":"2026-11-18T06:08Z","c":"k61StageDesc: restore the existing k61Desc untouched (rename only my new helper)"},{"s":"8f5ea906+","t":"2026-11-18T06:11Z","c":"face-reveal-anim: kitReveal (KIT 79) — the real face appears in place out of the grey (frame, avatar, room-stage figure, event figure); Gọn…"},{"s":"04bb2793+","t":"2026-11-18T05:52Z","c":"hud-mood-bar: owner picked layout 1 (full row); switch and slim layout removed; KIT 49.4"},{"s":"c1104d92+","t":"2026-11-18T05:41Z","c":"face-zoom-aspect test: SEED / FORCE options for same-character before/after shots"},{"s":"16b4dad8+","t":"2026-11-18T05:32Z","c":"cloth-bake-static: cloth layer on every static figure path on a cold cache (wait layer + patch on bake done); test + report"},{"s":"231cd3b3+","t":"2026-11-18T03:27Z","c":"review display-set-bonus: VANPHONG rows (Đa Bảo Các + set wording); cap line drops 'điểm'; j8 'Điểm trang lộng lẫy' night quality reads wor…"},{"s":"bd8547f2+","t":"2026-11-18T03:28Z","c":"men-forbidden r6: old saves drop officials / festival princes standing in the hậu cung on load (menLoadFix, same ONE rule)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -23450,7 +23450,11 @@ function kitPortrait(p,o){o=o||{};const f=kitFace(p);return o.size==="lg"||o.siz
    Old saves: everyone present on load is fully known (3). */
 let K61NEW=false,K61VER=0;const KREG={},K61SRC={};
 function k61S(){if(!S)return null;if(!S.known){if(K61NEW)return null;S.known={};S.nkn={};k61All().forEach(e=>{S.known[kOf61(e)]=3});S.kRids=rivals.map(v=>v.id);K61VER++}return S.known}
-function kOf61(e){if(!e||!S)return"";if(e===S)return"me";if(e===S.emp)return"emp";if(S.thO&&e===S.thO)return"th";let k;
+/* STAGE/LIST DESCRIPTORS ({kind,name,ini,col,info[,ref,sid]} from curPeople/homePeople, never real entities): resolve to the real person (ref, else her maid), never register the
+   descriptor itself (review/emo-seal-vanish: kOf61 gave the maid descriptor a fresh key at level 0, so after one tap on its mood seal it became a "stranger" and its seal vanished).
+   undefined = not a descriptor; null = descriptor with no known person (treated as known, as before); else the person. */
+function k61StageDesc(e){return e&&typeof e==="object"&&e.kind&&e.ini!=null&&e.info!=null&&e.id==null?(e.ref||(e.kind==="maid"&&S&&S.maid)||null):undefined}
+function kOf61(e){if(!e||!S)return"";{const d=k61StageDesc(e);if(d===null)return"";if(d)e=d}if(e===S)return"me";if(e===S.emp)return"emp";if(S.thO&&e===S.thO)return"th";let k;
  if((rivals||[]).includes(e))k="r"+e.id;else if(e.sid!=null)k="s"+e.sid;else{if(!e.kk)e.kk="x"+(S.kseq=(S.kseq||0)+1);k=e.kk}KREG[k]=e;return k}
 function k61Ent(k){if(!k||!S)return null;if(k==="me")return S;if(k==="emp")return S.emp;if(k==="th")return S.thO||null;return KREG[k]||null}
 function k61All(){const L=[];if(!S)return L;const add=e=>{if(e&&typeof e==="object"&&!L.includes(e))L.push(e)};
@@ -23462,7 +23466,7 @@ function k61All(){const L=[];if(!S)return L;const add=e=>{if(e&&typeof e==="obje
 /* kc-roads fix: her own family while she still lives at home (S.kc.fam, !S.kc.inPal) are her own people — known, mood and nature seen (all nine home roads) */
 function k61Kin(e){try{return !!(e&&S&&S.kc&&!S.kc.inPal&&(S.kc.fam||[]).includes(e))}catch(x){return false}}
 function k61Own(e){try{return e===S.maid||(S.staff||[]).includes(e)||(S.kids||[]).includes(e)||k61Kin(e)}catch(x){return false}}
-function k61St(e){if(!e||!S||e===S)return 3;const K=k61S();if(!K)return 3;if(k61Own(e))return 3;return +K[kOf61(e)]||0}
+function k61St(e){if(!e||!S||e===S)return 3;{const d=k61StageDesc(e);if(d===null)return 3;if(d)e=d;if(e===S)return 3}const K=k61S();if(!K)return 3;if(k61Own(e))return 3;return +K[kOf61(e)]||0}
 /* owner 11/15 (stranger rule, KIT §49.3): a consort Ta has NOT MET is a grey silhouette everywhere (portraits, strips, news rows, figures,
    the week book) — her name may be known, her face is not. Met = she talked / acted with her (S.met), or lives in the same palace
    (the "Đã quen" level alone is not enough: owner case "listed in Ân oán, Ta chưa gặp"). Everyone else keeps the face level (>= 1). */
@@ -23494,7 +23498,7 @@ function kitKnownName(p){try{const e=k61PortEnt(p);return e?k61Named(e):true}cat
    never "Quý phi ???, Tần ???" (owner 16/11 'Phi ???'; reign-road fix). Used by Triều cục, sổ thị tẩm, thiên điện, ứng viên, quà, tư tình... */
 function kitNameList(L,fmt,none){const f=fmt||(v=>v.name),K=[],U=[];for(const v of L||[])(kitKnownName(v)?K:U).push(v);const A=K.map(f);if(U.length)A.push(`${K.length?"thêm ":""}${U.length} vị chưa quen biết`);return A.join(", ")||none||""}
 const K61STN=["Người lạ","Thấy mặt","Biết tên","Quen biết"];
-function k61PortEnt(p){if(!p)return null;if(p.kk)return k61Ent(p.kk);if(p.src&&K61SRC[p.src])return k61Ent(K61SRC[p.src]);if(p.__kp&&typeof p.__kp==="object")return p.__kp===S?null:p.__kp;
+function k61PortEnt(p){if(!p)return null;{const d=k61StageDesc(p);if(d!==undefined)return d===S?null:d}if(p.kk)return k61Ent(p.kk);if(p.src&&K61SRC[p.src])return k61Ent(K61SRC[p.src]);if(p.__kp&&typeof p.__kp==="object")return p.__kp===S?null:p.__kp;
  if(S&&(p===S.emp||p===S.thO||(rivals||[]).includes(p)))return p;return null}
 /* what she can see: the dress tells rank and role, nothing more */
 function k61Kind(e){if(!S||!e)return"";if((rivals||[]).includes(e))return"consort";if(e===S.emp)return"emp";if(S.thO&&e===S.thO)return"th";
@@ -25083,7 +25087,7 @@ const kpReEsc=s=>s.replace(/[.+?^$|()[\]{}\\]/g,"\\$&");
 var KAK_SRC=null,KAK_C=new Map();
 function kitActKey(name){if(KAK_SRC!==KIT_ACTS){KAK_SRC=KIT_ACTS;KAK_C=new Map()}const k=typeof name==="string"?name:String(name==null?"":name);let v=KAK_C.get(k);
  if(v===undefined){v=kitActKey0(name);if(KAK_C.size>5000)KAK_C.clear();KAK_C.set(k,v)}return v}
-function kitActKey0(name){const A=KIT_ACTS.acts||{},P=KIT_ACTS.prefix||{};name=kpPlain(name);if(!name)return"";if(A[name])return A[name];const sl=kpSlug(name);if(A[sl])return A[sl];
+function kitActKey0(name){const A=KIT_ACTS.acts||{},P=KIT_ACTS.prefix||{};name=kpPlain(name);if(!name)return"";if(A[name])return A[name]==="-"?"":A[name];const sl=kpSlug(name);if(A[sl])return A[sl]==="-"?"":A[sl];/* review/act-pic-match: manifest value "-" = this act has NO picture of its own: stop here (no prefix / longer-name / log-rule borrow), the kit placeholder shows */
  let best="",key="";const take=(n,k)=>{if(n.length>best.length){best=n;key=k}};
  for(const p in P)if(name.startsWith(p))take(p,P[p]);
  for(const n in A){if(n.includes("*")){if(new RegExp("^"+n.split("*").map(kpReEsc).join(".+")+"$").test(name))take(n,A[n])}
@@ -56071,6 +56075,8 @@ const BTR_POS=[{s:{t:.12,v:1},m:{t:1.1,v:0}},{s:{t:.5,v:1},m:{t:1.1,v:0}},{s:{t:
 const BTR_MOONBAND={trungthu:1,nguyentieu:1,vulan:1,giaothua:1},BTR_PHASE=["crescent","full","halfL"];
 function btrMoon(b,V,tuan){if(b!==3)return{ph:"",none:0};if(V.fest&&BTR_MOONBAND[V.fest.k])return{ph:"",none:1};const t=Math.max(0,Math.min(2,tuan|0));return{ph:BTR_PHASE[t],none:0}}
 let btrPrev=null,btrEl=null,btrEnd=null;
+/* owner 18/11 ~06:20Z: the game UI stays visible under the animation; NO opaque full-screen backdrop (tint / ink wash / vignette removed); the whole animation lies on the screen at BTR_OP = 0.85 (owner pick 18/11 from the 70 / 80 / 85 ladder) */
+const BTR_OP=.85;
 /* the 4 painted pieces (~130 KB, SW-cached after the first fetch) are warmed once the game has been running a while, so the FIRST buổi change already shows them (on demand = not at boot) */
 const BTR_KEEP=[];function btrWarm(){try{if(typeof S==="undefined"||!S){setTimeout(btrWarm,7000);return}if(btrStill())return;["wash","mist","hills","orb"].forEach(n=>{const i=new Image();BTR_KEEP.push(i);i.src=BTR_BASE+"buoi-"+n+".webp"})}catch(e){}}
 setTimeout(btrWarm,9000);
@@ -56090,19 +56096,18 @@ function buoiShift(){
   const mix=VF?34:22;d.style.cssText=`--bt-tint:color-mix(in srgb,${VT} ${mix}%,${C.tint});--bt-wash:color-mix(in srgb,#2a1c10 ${b===3?0:16}%,color-mix(in srgb,${VT} ${Math.round(mix*.6)}%,${C.wash}));--bt-ink:${C.ink};--bt-s0:${C.sky[0]};--bt-s1:${C.sky[1]}`;
   const artKey=V.fest&&BTR_ART[V.fest.k]?V.fest.k:BTR_ART[V.sea]?V.sea:"";
   const MN=btrMoon(b,V,(window.__btrVar&&window.__btrVar.tuan!=null)?window.__btrVar.tuan:(S.tuan||0));
-  const still=btrStill(),dawn=b===0&&prev===3,haze=!dawn&&VS.haze&&!VF,dur=still?260:kitPace(dawn?2000:1700);
-  d.innerHTML=still?`<i class="btr-tint"></i>`:
-   `<i class="btr-tint"></i><i class="btr-wash"></i>${dawn||haze?`<i class="btr-mist${haze?" "+VS.haze:""}"></i>`:""}${dawn?`<i class="btr-light"></i>`:""}<i class="btr-vig"></i>`+
+  const still=btrStill(),dawn=b===0&&prev===3,haze=!dawn&&VS.haze&&!VF,dur=still?700:kitPace(dawn?2000:1700);
+  d.innerHTML=still?`<div class="btr-stage"><div class="btr-title"><i class="btr-plate"></i><b>${BUOI[b]}</b></div></div>`:
+   `${dawn||haze?`<i class="btr-mist${haze?" "+VS.haze:""}"></i>`:""}${dawn?`<i class="btr-light"></i>`:""}`+
    `<div class="btr-stage"><div class="btr-sky"><i class="btr-skybg"></i>${artKey?`<i class="btr-skin" style="background-image:url(${BTR_BASE}buoi-band-${artKey}.webp)"></i>`:""}<i class="btr-hills"></i><i class="btr-orb btr-sun"></i><i class="btr-orb btr-moon${MN.none?" btr-nomoon":MN.ph?" btr-mph":""}"${MN.ph?` style="background-image:url(${BTR_BASE}buoi-moon-${MN.ph}.webp)"`:""}></i></div>`+
    `<div class="btr-title"><i class="btr-plate"></i>${BTR_ICON[b]?`<i class="btr-ico" style="background-image:url(${BTR_BASE}buoi-ico-${b}.webp)"></i>`:""}<b>${BUOI[b]}</b>${typeof kitSeal==="function"?kitSeal({cls:"btr-seal"}):""}${V.fest&&V.fest.name?`<small class="btr-sub">${V.fest.name}</small>`:""}</div></div>`;
-  document.body.appendChild(d);btrEl=d;
+  try{const sg=document.querySelector(".stage");d.style.setProperty("--btr-top",(sg?Math.max(0,Math.round(sg.getBoundingClientRect().top)-2):0)+"px")}catch(e){}
+  d.style.opacity=BTR_OP;document.body.appendChild(d);btrEl=d;
   let done=false;const end=ms=>{if(done)return;done=true;btrEnd=null;removeEventListener("pointerdown",skip,true);d.style.transition=`opacity ${ms||250}ms`;d.style.opacity="0";setTimeout(()=>{d.remove();if(btrEl===d)btrEl=null},(ms||250)+30)};
   const skip=()=>end(140);btrEnd=()=>end(0);
   if(!still){
    const A=d.animate?1:0;if(A){
-    const dim=dur;d.querySelector(".btr-tint").animate([{opacity:0},{opacity:.96,offset:.1},{opacity:.9,offset:.5},{opacity:0}],{duration:dim,easing:"ease-in-out",fill:"forwards"});
-    d.querySelector(".btr-wash").animate([{opacity:0,transform:"translateX(-6%) scale(1.1)"},{opacity:.82,offset:.16},{opacity:.62,offset:.5},{opacity:0,transform:"translateX(7%) scale(1.2)"}],{duration:dim,easing:"ease-in-out",fill:"forwards"});
-    d.querySelector(".btr-vig").animate([{opacity:0},{opacity:.85,offset:.2},{opacity:.7,offset:.55},{opacity:0}],{duration:dim,fill:"forwards"});
+    const dim=dur;
     const mi=d.querySelector(".btr-mist");if(mi)mi.animate([{opacity:0,transform:"translateX(-4%)"},{opacity:.9,offset:.35},{opacity:0,transform:"translateX(5%)"}],{duration:dim,easing:"ease-in-out",fill:"forwards"});
     const li=d.querySelector(".btr-light");if(li)li.animate([{opacity:0,transform:"translateY(30%) scale(.7)"},{opacity:.95,offset:.5},{opacity:0,transform:"translateY(-6%) scale(1.15)"}],{duration:dim,easing:"ease-out",fill:"forwards"});
     const sk=d.querySelector(".btr-sky");sk.animate([{opacity:0,transform:"translateY(-16px)"},{opacity:1,offset:.16,transform:"none"},{opacity:1,offset:.82},{opacity:0}],{duration:dim,fill:"forwards"});
@@ -56115,32 +56120,29 @@ function buoiShift(){
     if(dawn&&typeof kitFxBurst==="function")setTimeout(()=>{try{kitFxBurst("glowburst",{x:innerWidth*.5,y:innerHeight*.62},1,{scale:1.8,a0:.8})}catch(e){}},dim*.3);
    }
    addEventListener("pointerdown",skip,true);
-  }else if(d.animate)d.querySelector(".btr-tint").animate([{opacity:.7},{opacity:0}],{duration:dur,fill:"forwards"});
+  }else if(d.animate)d.querySelector(".btr-stage").animate([{opacity:0},{opacity:1,offset:.25},{opacity:1,offset:.7},{opacity:0}],{duration:dur,fill:"forwards"});
   setTimeout(()=>{if(!window.__btrHold)end(still?30:kitPace(260))},dur);
  }catch(e){console.error("buoiShift",e)}}
 (function(){const st=document.createElement("style");st.id="btr-css";st.textContent=`
 .btr{position:fixed;inset:0;z-index:36;pointer-events:none;overflow:hidden}
 .btr>*,.btr-sky>*,.btr-plate{position:absolute;pointer-events:none}.btr-title,.btr-stage{position:absolute}
-.btr-tint{inset:0;background:radial-gradient(ellipse 120% 100% at 50% 52%,color-mix(in srgb,var(--bt-tint) 78%,#fff),var(--bt-tint) 55%,color-mix(in srgb,var(--bt-tint) 82%,var(--bt-wash)));opacity:0}
-.btr-wash{inset:-14%;background:var(--bt-wash);-webkit-mask:url("${BTR_BASE}buoi-wash.webp") center/cover no-repeat;mask:url("${BTR_BASE}buoi-wash.webp") center/cover no-repeat;opacity:0;will-change:transform,opacity}
-.btr-vig{inset:0;background:radial-gradient(ellipse 90% 85% at 50% 50%,#0000 38%,color-mix(in srgb,var(--bt-wash) 78%,#0000) 100%);opacity:0}
 .btr-mist{left:-15%;right:-15%;top:22%;bottom:-8%;background:url("${BTR_BASE}buoi-mist.webp") center/100% 100% no-repeat;opacity:0;will-change:transform,opacity}
 .btr-mist.warm{filter:sepia(1) saturate(2.2) brightness(1.1)}.btr-mist.cold{filter:hue-rotate(170deg) brightness(1.15)}
 .btr-light{left:50%;top:50%;width:min(110vw,760px);aspect-ratio:2/1;margin-left:calc(min(110vw,760px)/-2);margin-top:6%;border-radius:50%;background:radial-gradient(ellipse,#fff3c8dd,#ffd88a66 45%,#ffd88a00 72%);opacity:0;mix-blend-mode:screen}
-.btr-stage{inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(14px,3.4vmin,34px);padding:0 16px}
+.btr-stage{inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:0;padding:var(--btr-top,0px) 16px 0}
 .btr-stage>*{position:relative}
-.btr-sky{width:min(92vw,720px);height:clamp(128px,26vmin,220px);opacity:0;flex:none}
-.btr-skybg{inset:0;border-radius:64px 64px 18px 18px;background:linear-gradient(var(--bt-s0),var(--bt-s1));-webkit-mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000);mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000);box-shadow:0 0 0 1px #0001,0 8px 28px #0003}
+.btr-sky{width:min(92vw,720px);height:clamp(128px,26vmin,220px);opacity:0;flex:none;-webkit-mask:linear-gradient(180deg,#0000,#000 26%,#000 72%,#0000);mask:linear-gradient(180deg,#0000,#000 26%,#000 72%,#0000)}
+.btr-skybg{inset:0;border-radius:64px 64px 18px 18px;background:linear-gradient(var(--bt-s0),var(--bt-s1));-webkit-mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000);mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000)}
 .btr-skin{inset:0;background:center/cover no-repeat;-webkit-mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000);mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000)}
 .btr-hills{left:0;right:0;bottom:0;height:80%;background:url("${BTR_BASE}buoi-hills.webp") center bottom/100% 100% no-repeat;opacity:.9;-webkit-mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000);mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000)}
 .btr-orb{left:0;top:0;width:var(--orb,52px);height:var(--orb,52px);opacity:0;background:url("${BTR_BASE}buoi-orb.webp") no-repeat;background-size:200% 100%;will-change:transform,opacity}
 .btr-sun{background-position:0 0}.btr-moon{background-position:100% 0}.btr-moon.btr-mph{background-size:contain;background-position:center;filter:drop-shadow(0 0 2px rgba(90,52,20,.85)) drop-shadow(0 0 7px rgba(60,40,90,.5))}.btr-moon.btr-nomoon{display:none}
-.btr-title{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;column-gap:14px;row-gap:2px;width:min(92vw,640px);min-height:clamp(112px,21vmin,170px);padding:10px 24px;box-sizing:border-box;flex:none}
+.btr-title{position:relative;margin-top:calc(clamp(128px,26vmin,220px) * -.6);display:flex;flex-wrap:wrap;align-items:center;justify-content:center;column-gap:14px;row-gap:2px;width:min(92vw,640px);min-height:clamp(112px,21vmin,170px);padding:10px 24px;box-sizing:border-box;flex:none}
 .btr-plate{inset:0;background:var(--bt-tint);-webkit-mask:url("${BTR_BASE}buoi-wash.webp") center/100% 100% no-repeat;mask:url("${BTR_BASE}buoi-wash.webp") center/100% 100% no-repeat;opacity:.96}
 .btr-title b{position:relative;font-family:var(--display);font-weight:700;font-size:clamp(2.1rem,8.5vmin,3.7rem);letter-spacing:.14em;color:var(--bt-ink);text-shadow:0 1px 0 #fff7,0 0 16px color-mix(in srgb,var(--bt-tint) 92%,#fff0);white-space:nowrap}
 .btr-ico{position:relative;width:clamp(48px,10vmin,80px);aspect-ratio:1;background:center/contain no-repeat;filter:drop-shadow(0 2px 4px #0003)}
 .btr-seal{position:relative;width:clamp(34px,6vmin,50px);height:clamp(34px,6vmin,50px);opacity:0}
-.btr-sub{position:relative;flex:1 0 100%;text-align:center;font-family:var(--display);font-size:clamp(.95rem,3vmin,1.25rem);letter-spacing:.22em;color:var(--bt-ink);opacity:.82}
+.btr-sub{position:relative;flex:1 0 100%;text-align:center;font-family:var(--display);font-weight:700;font-size:clamp(1.3rem,4.4vmin,1.9rem);letter-spacing:.16em;color:var(--bt-ink);opacity:1;text-shadow:0 0 10px color-mix(in srgb,var(--bt-tint) 92%,#fff0),0 0 3px color-mix(in srgb,var(--bt-tint) 80%,#fff0)}
 `;document.head.appendChild(st)})();
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§74",title:"buổi transition · buoiShift (qua buổi: nước mực toàn màn, vầng trời, chữ thư pháp; mùa + lễ)",
  html:()=>`<div class="kitpg-row">${[0,1,2,3].map(b=>`<button type="button" class="kbtn alt" onclick="(function(){const s=S.buoi;S.buoi=${b};buoiShift();S.buoi=s})()">${BUOI[b]}</button>`).join("")}</div>`+
@@ -66258,7 +66260,7 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
 function shelfOpen(p){p=p||S;const V=shelfView(p),me=p===S;const rows=[],acts=[];
  for(const x of V.groups)for(const it of x.items){rows.push([x.n,[it.name+(it.plant&&it.plant.wither?` (${it.plant.bad})`:"")+(it.over?" · quá phẩm":"")],it.plant&&it.plant.wither?"r":"n"]);
   if(me)acts.push(pbtn(it.take,`Cất ${it.name.toLowerCase()}`,"thành: về rương · tặng, bán, dùng được lại","")+(it.plant?pbtn(`data-shc="plant" data-g="${it.slot}"`,`Chăm ${it.name.toLowerCase()}`,`tốn: ${BAL.shelf.plant.khacSelf} khắc · thành: ${it.plant.fresh}`,whyTime(BAL.shelf.plant.khacSelf)):""))}
- kitModal({kind:"info",title:me?"Đa Bảo Các":`Đa Bảo Các của ${p.name}`,html:(rows.length?kitRows(rows):kitFacts([V.known?"Chưa bày món nào.":"Chưa thấy phòng nàng bày gì."]))+(V.lux?kitFacts([`Phòng ốc: ${V.lux.name.toLowerCase()}`]):"")+(V.sets&&V.sets.length?kitFacts(V.sets.map(x=>x.t)):"")+(acts.length?`<div class="rbtn">${acts.join("")}</div>`:""),btn:"Lui"})}
+ kitModal({kind:"info",title:me?"Đa Bảo Các":`Đa Bảo Các của ${p.name}`,html:(rows.length?kitRows(rows):kitFacts([V.known?"Chưa bày món nào.":"Chưa thấy phòng nàng bày gì."]))+(V.lux?kitFacts([`Phòng ốc: ${V.lux.name.toLowerCase()}`]):"")+(V.sets&&V.sets.length?(typeof kitSetLines==="function"?kitSetLines(V.sets):kitFacts(V.sets.map(x=>x.t))):"")+(acts.length?`<div class="rbtn">${acts.join("")}</div>`:""),btn:"Lui"})}
 window.shelfOpen=shelfOpen;
 /* the data the kit shelf part draws (KIT REQUEST 17/11 display-shelf): per group UP TO BAL.shelf.per cut-out pieces side by side (owner OD 17/11 ~22:05Z), no frame.
    groups[i] = {g, n, per, items:[{slot, k, name, src, plant, over, from, take}] (best first), item: items[0] (kept for the old one-piece shape)} */
@@ -66266,7 +66268,7 @@ function shelfView(p){p=p||S;const z=shelfOf(p),me=p===S;let known=me?null:shelf
  const one=(s,e)=>({slot:s,k:e.k,name:shelfNm(e),src:typeof kitItemSrc==="function"?kitItemSrc(e.k==="tp"?e:e.k,""):"",plant:shelfIsPlant(e)?{care:Math.round(e.pc|0),wither:shelfBad(e),kind:shelfCareK(e),bad:shelfWord(e).bad,fresh:shelfWord(e).fresh}:null,over:shelfOver(p,e),from:e.from||"",take:me?`data-shelftake="${s}"`:"",set:shelfSetOfE(p,e,SST)});
  return{who:me?"me":wdKey(p),per:BAL.shelf.per,groups:BAL.shelf.groups.map(([g,n])=>{const items=me||known?shelfIn(p,g).sort((a,b)=>shelfPiece(b[1])-shelfPiece(a[1])).map(x=>one(x[0],x[1])):[];return{g,n,per:BAL.shelf.per,items,item:items[0]||null}}),
   lux:me||known?{lv:me?shelfLux(p).lv:known.lv,name:me?shelfLux(p).name:SHELF_LV[known.lv]}:null,known:me||!!known,
-  sets:me?shelfSetLines(p):[]/* set bonus lines (owner OD 17/11 ~20:47Z): only her own room; [{id,on,t}] */}}
+  sets:me?shelfSetLines(p):[]/* set bonus lines (owner OD 17/11 ~20:47Z): only her own room; [{id,on,k,t}] k = on / wait / bad / miss (kit part kitSetLines, jdisp) */}}
 window.shelfView=shelfView;
 
 /* ================= SET BONUS (bộ) of the display shelf — owner OD 17/11 ~20:42Z/~20:47Z (sets 2 / 3 / 5 inside a group), ~21:10Z (random pieces: room xa xỉ only),
@@ -66341,10 +66343,10 @@ window.shelfSetState=shelfSetState;window.shelfSetPts=shelfSetPts;window.shelfSe
 /* the player's set lines for the shelf screen (owner: she must know what to collect; random pieces show nothing) */
 function shelfSetLines(p){const live=shelfSetLive(p),per=shelfSetPts(live).per;const L=[];
  for(const r of shelfSetState(p)){if(!r.have.length)continue;const N=(SHELF_SET_N[r.id]||[r.id])[0];
-  if(live.includes(r.id))L.push({id:r.id,on:1,t:shelfSetTxt(r.id,per[r.id]?per[r.id].v:0)});
-  else if(r.whole)L.push({id:r.id,on:0,t:`Bộ ${N}: đã đủ món, tuần sau mới được tính.`});
-  else if(r.bad.length)L.push({id:r.id,on:0,t:`Bộ ${N} khuyết: ${r.bad.map(([m,w])=>shelfSetMemNm(m).toLowerCase()+" "+w).join(", ")}.`});
-  else L.push({id:r.id,on:0,t:`Bộ ${N}: còn thiếu ${r.miss.map(shelfSetMemNm).join(", ")}.`})}return L}
+  if(live.includes(r.id))L.push({id:r.id,on:1,k:"on",t:shelfSetTxt(r.id,per[r.id]?per[r.id].v:0)});
+  else if(r.whole)L.push({id:r.id,on:0,k:"wait",t:`Bộ ${N}: đã đủ món, tuần sau mới được tính.`});
+  else if(r.bad.length)L.push({id:r.id,on:0,k:"bad",t:`Bộ ${N} khuyết: ${r.bad.map(([m,w])=>shelfSetMemNm(m).toLowerCase()+" "+w).join(", ")}.`});
+  else L.push({id:r.id,on:0,k:"miss",t:`Bộ ${N}: còn thiếu ${r.miss.map(shelfSetMemNm).join(", ")}.`})}return L}
 window.shelfSetLines=shelfSetLines;
 /* the set of one displayed piece for the shelf view (owner OD 17/11 ~21:20Z: a whole set GLOWS so she sees it is one set): {id, name, full} or null.
    full = every member stands and none is broken (the same test the weekly check uses); random pieces: null */
@@ -67017,6 +67019,12 @@ function silKeys(g){if(FIXON())return(fixOf().kg||{})[g]||[];try{const I=BAL.she
 /* complete SET glow (data: C-AG set builder, shelfView items[i].set {id,name,full}); fixture: e.set */
 function setMap(){const m={};if(FIXON()){const F=fixOf();for(const s in F.placed)if(F.placed[s].set)m[s]=F.placed[s].set;return m}
  try{if(typeof shelfView==="function")for(const G of shelfView(KDR.p).groups)for(const it of G.items||[])if(it.set)m[it.slot]=it.set}catch(e){}return m}
+/* SET LINES (owner OD 17/11 ~20:47Z: she must see what to collect; random pieces show nothing): data = shelfView(S).sets [{id,on,k,t}] (her own room only); fixture: 4 sample lines */
+const SETFIX=[{id:"fx1",on:1,k:"on",t:"Bộ mẫu: đang được tính."},{id:"fx3",on:0,k:"wait",t:"Bộ đủ món: đã đủ món, tuần sau mới được tính."},{id:"fx2",on:0,k:"miss",t:"Bộ dở: còn thiếu chậu lan quý."},{id:"fx4",on:0,k:"bad",t:"Bộ khuyết: cây cảnh héo úa."}];
+function setLines(){if(FIXON())return KDR.p&&KDR.p!==S?[]:SETFIX;try{return typeof shelfView==="function"?(shelfView(KDR.p).sets||[]):[]}catch(e){return[]}}
+/* kitSetLines(lines): the ONE fact strip of the set lines (display room footer + interim shelfOpen dialog). One row per set: state dot + the line as written by jshelf. k: on = counting now (gold, glows like its pieces), wait = whole, counts next week, miss = pieces still missing, bad = broken. Empty list = "". */
+function kitSetLines(L){L=(L||[]).filter(x=>x&&x.t);if(!L.length)return"";const kk=x=>x.k||(x.on?"on":/khuyết/.test(x.t)?"bad":"miss");
+ return `<div class="kdr-sets" role="list" aria-label="Các bộ đồ bày">${L.map(x=>{const k=kk(x);return `<div class="kdr-set kdr-s-${k}" role="listitem" data-set="${esc(x.id||"")}"><i class="kdr-sd" aria-hidden="true"></i><span class="kdr-st">${esc(x.t)}</span></div>`}).join("")}</div>`}
 function ownedOf(g){/* [{e, ix}] owned pieces of this group, in chest order (her room only) */
  if(FIXON())return fixOf().inv.map((e,ix)=>({e,ix})).filter(x=>x.e.g===g);
  const out=[];(S.inv||[]).forEach((e,ix)=>{try{if(e&&!e.h&&grpOfE(e)===g)out.push({e,ix})}catch(x){}});return out}
@@ -67048,7 +67056,7 @@ function kitDisplayRoomHTML(m){m=m||{};const G=m.groups||groups(),ro=!!m.ro;cons
  const segs=P.segs.map(sg=>`<div class="kdr-seg" style="--ar:${sg.ar}"><img class="kdr-bgi" src="${esc(sg.src)}" alt="" draggable="false" onload="this.parentNode.classList.remove('kdr-nopic')" onerror="this.remove()">`+
   sg.slots.map(sl=>{const x=G[gi++];return x?shelfHTML(x[0],m.placed&&m.placed[x[0]],{ro,known:m.known!==false,slot:sl,per:m.per||5,sets:m.sets||{}}):""}).join("")+`</div>`).join("");
  return `<div class="kdr-hd"><span class="kdr-cart">${esc(title)}</span><span class="kdr-cnt">${ro&&!m.known?"":`Đã bày ${n} món`}</span>${typeof kitXHTML==="function"?kitXHTML('data-kdrx="1"',"Đóng"):'<button type="button" class="kit-x" data-kdrx="1" aria-label="Đóng">✕</button>'}</div>`+
-  `<div class="kdr-sc"><div class="kdr-cab">${segs}</div></div>`}
+  `<div class="kdr-sc"><div class="kdr-cab">${segs}</div></div>`+(ro?"":kitSetLines(m.setLines))}
 function tileHTML(x,g){const P=pc(x.e),why=whyNot(x.e);
  return kitItem({src:P.src,name:P.name,grade:P.grade,lux:P.lux,mark:P.over?["Vượt phẩm","r"]:(P.ngu?["Ngự tứ","n"]:null),size:"slot",tip:`${P.name}${P.over?" · vượt phẩm":""}${why?" · "+why:""}`,
   data:`data-kdrix="${x.ix}" data-kdrk="${esc(P.k)}" role="button" tabindex="0"${why?' aria-disabled="true"':""}`})}
@@ -67065,7 +67073,7 @@ function box(){/* the area between the top bar and the bottom bar, inside the ga
  const gm=document.getElementById("game"),h=gm&&gm.querySelector("header.hud"),b=gm&&gm.querySelector("nav.bar");if(!gm||!h||!b)return null;
  const g=gm.getBoundingClientRect(),a=h.getBoundingClientRect(),c=b.getBoundingClientRect();return{l:g.left,r:innerWidth-g.right,t:Math.round(a.bottom+4),b:Math.round(innerHeight-c.top+4)}}
 function place(){const el=$k();if(!el)return;const x=box();if(!x)return;el.style.left=x.l+"px";el.style.right=x.r+"px";el.style.top=x.t+"px";el.style.bottom=x.b+"px"}
-function model(){const m={ro:KDR.ro,known:KDR.known,groups:groups(),placed:{},title:KDR.ro&&KDR.p&&KDR.p!==S?`Đa Bảo Các của ${esc((KDR.p&&KDR.p.name)||"")}`:"Đa Bảo Các"};m.per=perN();m.sets=KDR.known?setMap():{};for(const x of m.groups)m.placed[x[0]]=KDR.known?placedOf(x[0]):[];return m}
+function model(){const m={ro:KDR.ro,known:KDR.known,groups:groups(),placed:{},title:KDR.ro&&KDR.p&&KDR.p!==S?`Đa Bảo Các của ${esc((KDR.p&&KDR.p.name)||"")}`:"Đa Bảo Các"};m.per=perN();m.sets=KDR.known?setMap():{};m.setLines=KDR.known&&!KDR.ro?setLines():[];for(const x of m.groups)m.placed[x[0]]=KDR.known?placedOf(x[0]):[];return m}
 function paint(){const el=$k();if(!el)return;try{el.classList.toggle("kdr-calm",typeof reducedMotion==="function"&&reducedMotion())}catch(e){}const keep=el.querySelector(".kdr-sc"),st=keep?keep.scrollTop:0;el.innerHTML=kitDisplayRoomHTML(model())+`<div class="kdr-drw" id="kdrdrw" hidden></div>`;
  const s2=el.querySelector(".kdr-sc");if(s2)s2.scrollTop=st;if(KDR.drawer)drawer(KDR.drawer,true);place()}
 function kitDisplayRoomOpen(p,o){o=o||{};kitDisplayRoomClose(true);KDR.p=p||S;KDR.ro=!!o.ro||(KDR.p!==S);KDR.fixture=!!o.fixture||!real();KDR.known=o.known!==false;try{if(KDR.ro&&real()&&o.known==null&&typeof shelfView==='function')KDR.known=!!shelfView(KDR.p).known}catch(e){}KDR.drawer=null;
@@ -67101,7 +67109,7 @@ const rp=()=>{cancelAnimationFrame(KDR.raf);KDR.raf=requestAnimationFrame(place)
 try{const r1=render;render=function(){const r=r1.apply(this,arguments);try{if($k()&&(typeof S==="undefined"||!S||S.dead))kitDisplayRoomClose();else if($k()){place()}}catch(e){}return r};window.render=render}catch(e){}
 /* ---------- rail icon (KIT §77): only when the real data API exists ---------- */
 try{if(typeof kitStageRail!=="undefined")kitStageRail.add({id:"disp",order:40,icon:"https://ctm-img.victoria-tntt.workers.dev/img/kit/ico-room.webp",title:"Đa Bảo Các",when:()=>real()&&!S.dead&&!S.out,onTap:()=>kitDisplayRoomOpen(S)})}catch(e){}
-window.kitDisplayRoomOpen=kitDisplayRoomOpen;window.kitDisplayRoomClose=kitDisplayRoomClose;window.kitDisplayRoomHTML=kitDisplayRoomHTML;
+window.kitSetLines=kitSetLines;window.kitDisplayRoomOpen=kitDisplayRoomOpen;window.kitDisplayRoomClose=kitDisplayRoomClose;window.kitDisplayRoomHTML=kitDisplayRoomHTML;
 /* ---------- css ---------- */
 const css=document.createElement("style");css.id="kit-disp";css.textContent=`
 .kdr{position:fixed;z-index:22;display:flex;flex-direction:column;min-height:0;border-radius:10px;overflow:hidden;background:#f1e4c8 var(--kdr-bg) center/cover;box-shadow:0 2px 10px #0004,inset 0 0 0 1px var(--gold,#b8892b)}
@@ -67130,6 +67138,16 @@ html.kv2 .kdr-seg{width:min(100cqw,calc(100cqh*var(--ar)));margin:0 auto}
 @keyframes kdrGlow{0%,100%{opacity:1}50%{opacity:.86}}
 @media (prefers-reduced-motion:reduce){.kdr-glow{animation:none}}
 .kdr-calm .kdr-glow{animation:none}
+.kdr-sets{flex:0 0 auto;max-height:min(26%,5.6rem);overflow-y:auto;margin:0 8px 8px;padding:5px 10px;border-radius:8px;background:var(--k-card,#fffaf0);border:1px solid var(--k-hair,#e6d3ac);display:flex;flex-direction:column;gap:3px;-webkit-overflow-scrolling:touch}
+.kdr-set{display:flex;align-items:flex-start;gap:8px;font-size:.78rem;line-height:1.3;color:var(--ink,#3a2418)}
+.kdr-sd{flex:0 0 9px;width:9px;height:9px;margin-top:.34em;border-radius:50%;background:#a99a7e}
+.kdr-s-on .kdr-sd{background:#e0a92a;box-shadow:var(--k-glow,0 0 5px #ffd66e);animation:kdrGlow calc(2.4s*var(--pace,1)) ease-in-out infinite}
+.kdr-s-on .kdr-st{font-weight:700}
+.kdr-s-wait .kdr-sd{background:#e0a92a;opacity:.55}
+.kdr-s-bad .kdr-sd{background:#b5402e}.kdr-s-bad .kdr-st{color:#8a2c1e}
+@media (prefers-reduced-motion:reduce){.kdr-s-on .kdr-sd{animation:none}}
+.kdr-calm .kdr-s-on .kdr-sd{animation:none}
+#modal .kdr-sets{margin:8px 0;max-height:none}
 .kdr-plank{display:none}
 /* STUB ONLY: while the painted cabinet is not on the CDN yet (img onerror removes it) the compartments show a plain plank so the room stays usable; gone as soon as the picture loads */
 .kdr-seg:not(:has(.kdr-bgi)) .kdr-plank{display:block;position:absolute;left:0;right:0;bottom:-6px;height:10px;border-radius:3px;background:linear-gradient(#b98a52,#8c5f33 70%,#6b4524);box-shadow:0 3px 5px #3a201655}
@@ -67151,7 +67169,7 @@ html.kv2 .kdr-seg{width:min(100cqw,calc(100cqh*var(--ar)));margin:0 auto}
 `;document.head.appendChild(css);
 /* ---------- kit page sample ---------- */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§89",title:"kitDisplayRoom · Đa Bảo Các (tủ trưng bày + ngăn kéo tư trang)",
- html:()=>{let F=null;try{F=mkFix()}catch(e){}const placed=F?F.placed:{};const m={groups:GFIX,placed};
+ html:()=>{let F=null;try{F=mkFix()}catch(e){}const placed=F?F.placed:{};const m={groups:GFIX,placed,setLines:SETFIX};
   return `<div class="kitpg-row" style="position:relative;height:420px;overflow:hidden"><div class="kdr" style="position:absolute;inset:0;--kdr-bg:url('${KDR_BG}')">${kitDisplayRoomHTML(m)}</div></div>`}})}catch(e){}
 }catch(e){console.error("jdisp",e)}})();
 /* ================= jreveal: kitReveal — FACE REVEAL motion (owner 18/11 ~06:20Z, KIT §79) =================
@@ -68158,7 +68176,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="f54dc7418ede";window.CTM_BUILD=BUILD;
+const BUILD="c1628b819574";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

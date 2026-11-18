@@ -405,7 +405,7 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
 function shelfOpen(p){p=p||S;const V=shelfView(p),me=p===S;const rows=[],acts=[];
  for(const x of V.groups)for(const it of x.items){rows.push([x.n,[it.name+(it.plant&&it.plant.wither?` (${it.plant.bad})`:"")+(it.over?" · quá phẩm":"")],it.plant&&it.plant.wither?"r":"n"]);
   if(me)acts.push(pbtn(it.take,`Cất ${it.name.toLowerCase()}`,"thành: về rương · tặng, bán, dùng được lại","")+(it.plant?pbtn(`data-shc="plant" data-g="${it.slot}"`,`Chăm ${it.name.toLowerCase()}`,`tốn: ${BAL.shelf.plant.khacSelf} khắc · thành: ${it.plant.fresh}`,whyTime(BAL.shelf.plant.khacSelf)):""))}
- kitModal({kind:"info",title:me?"Đa Bảo Các":`Đa Bảo Các của ${p.name}`,html:(rows.length?kitRows(rows):kitFacts([V.known?"Chưa bày món nào.":"Chưa thấy phòng nàng bày gì."]))+(V.lux?kitFacts([`Phòng ốc: ${V.lux.name.toLowerCase()}`]):"")+(V.sets&&V.sets.length?kitFacts(V.sets.map(x=>x.t)):"")+(acts.length?`<div class="rbtn">${acts.join("")}</div>`:""),btn:"Lui"})}
+ kitModal({kind:"info",title:me?"Đa Bảo Các":`Đa Bảo Các của ${p.name}`,html:(rows.length?kitRows(rows):kitFacts([V.known?"Chưa bày món nào.":"Chưa thấy phòng nàng bày gì."]))+(V.lux?kitFacts([`Phòng ốc: ${V.lux.name.toLowerCase()}`]):"")+(V.sets&&V.sets.length?(typeof kitSetLines==="function"?kitSetLines(V.sets):kitFacts(V.sets.map(x=>x.t))):"")+(acts.length?`<div class="rbtn">${acts.join("")}</div>`:""),btn:"Lui"})}
 window.shelfOpen=shelfOpen;
 /* the data the kit shelf part draws (KIT REQUEST 17/11 display-shelf): per group UP TO BAL.shelf.per cut-out pieces side by side (owner OD 17/11 ~22:05Z), no frame.
    groups[i] = {g, n, per, items:[{slot, k, name, src, plant, over, from, take}] (best first), item: items[0] (kept for the old one-piece shape)} */
@@ -413,7 +413,7 @@ function shelfView(p){p=p||S;const z=shelfOf(p),me=p===S;let known=me?null:shelf
  const one=(s,e)=>({slot:s,k:e.k,name:shelfNm(e),src:typeof kitItemSrc==="function"?kitItemSrc(e.k==="tp"?e:e.k,""):"",plant:shelfIsPlant(e)?{care:Math.round(e.pc|0),wither:shelfBad(e),kind:shelfCareK(e),bad:shelfWord(e).bad,fresh:shelfWord(e).fresh}:null,over:shelfOver(p,e),from:e.from||"",take:me?`data-shelftake="${s}"`:"",set:shelfSetOfE(p,e,SST)});
  return{who:me?"me":wdKey(p),per:BAL.shelf.per,groups:BAL.shelf.groups.map(([g,n])=>{const items=me||known?shelfIn(p,g).sort((a,b)=>shelfPiece(b[1])-shelfPiece(a[1])).map(x=>one(x[0],x[1])):[];return{g,n,per:BAL.shelf.per,items,item:items[0]||null}}),
   lux:me||known?{lv:me?shelfLux(p).lv:known.lv,name:me?shelfLux(p).name:SHELF_LV[known.lv]}:null,known:me||!!known,
-  sets:me?shelfSetLines(p):[]/* set bonus lines (owner OD 17/11 ~20:47Z): only her own room; [{id,on,t}] */}}
+  sets:me?shelfSetLines(p):[]/* set bonus lines (owner OD 17/11 ~20:47Z): only her own room; [{id,on,k,t}] k = on / wait / bad / miss (kit part kitSetLines, jdisp) */}}
 window.shelfView=shelfView;
 
 /* ================= SET BONUS (bộ) of the display shelf — owner OD 17/11 ~20:42Z/~20:47Z (sets 2 / 3 / 5 inside a group), ~21:10Z (random pieces: room xa xỉ only),
@@ -488,10 +488,10 @@ window.shelfSetState=shelfSetState;window.shelfSetPts=shelfSetPts;window.shelfSe
 /* the player's set lines for the shelf screen (owner: she must know what to collect; random pieces show nothing) */
 function shelfSetLines(p){const live=shelfSetLive(p),per=shelfSetPts(live).per;const L=[];
  for(const r of shelfSetState(p)){if(!r.have.length)continue;const N=(SHELF_SET_N[r.id]||[r.id])[0];
-  if(live.includes(r.id))L.push({id:r.id,on:1,t:shelfSetTxt(r.id,per[r.id]?per[r.id].v:0)});
-  else if(r.whole)L.push({id:r.id,on:0,t:`Bộ ${N}: đã đủ món, tuần sau mới được tính.`});
-  else if(r.bad.length)L.push({id:r.id,on:0,t:`Bộ ${N} khuyết: ${r.bad.map(([m,w])=>shelfSetMemNm(m).toLowerCase()+" "+w).join(", ")}.`});
-  else L.push({id:r.id,on:0,t:`Bộ ${N}: còn thiếu ${r.miss.map(shelfSetMemNm).join(", ")}.`})}return L}
+  if(live.includes(r.id))L.push({id:r.id,on:1,k:"on",t:shelfSetTxt(r.id,per[r.id]?per[r.id].v:0)});
+  else if(r.whole)L.push({id:r.id,on:0,k:"wait",t:`Bộ ${N}: đã đủ món, tuần sau mới được tính.`});
+  else if(r.bad.length)L.push({id:r.id,on:0,k:"bad",t:`Bộ ${N} khuyết: ${r.bad.map(([m,w])=>shelfSetMemNm(m).toLowerCase()+" "+w).join(", ")}.`});
+  else L.push({id:r.id,on:0,k:"miss",t:`Bộ ${N}: còn thiếu ${r.miss.map(shelfSetMemNm).join(", ")}.`})}return L}
 window.shelfSetLines=shelfSetLines;
 /* the set of one displayed piece for the shelf view (owner OD 17/11 ~21:20Z: a whole set GLOWS so she sees it is one set): {id, name, full} or null.
    full = every member stands and none is broken (the same test the weekly check uses); random pieces: null */
