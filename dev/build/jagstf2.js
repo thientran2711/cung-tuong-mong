@@ -25,9 +25,12 @@ function stf2Framed(x,acc,m){if(!stf2On()||!x||x===S||!m)return null;const O=cnv
  if(c.id==="pay")stfAp(acc,{bac:-(c.fx.bac||0)});/* the bạc goes to the accuser */
  return{id:c.id,ok:d.ok,stands:!(c.id==="pay"||(c.id==="clear"&&d.ok)),r:d.r||(c.id==="pay"?`${x.name} đút bạc, ${stfNm(acc)} rút lời.`:c.id==="confess"?`${x.name} nhận tội, xin tha.`:"")}}
 /* bribed (j29 bribeServ, after the briber paid): take weighs as the bribe's odds; the refusal splits by her lòng (tell) against keeping quiet */
-function stf2Bribe(a,s,o,odds,cost){if(!stf2On()||!s||s===S||s.sid==null||!o)return null;const K=BAL.ag.stf2.bribe;const t=K.tell*(s.loyal||0)/100,q=K.quiet,ref=100-odds;
- const O=cnvBribeOpts(s,a,o,cost);const W={take:odds,tell:ref*t/Math.max(.001,t+q),quiet:ref*q/Math.max(.001,t+q)};
- const c=mindPick(O.map(x=>[x,W[x.id]*stf2Tr(s,x.tag)]),s)||O[0];stf2C("bribe_"+c.id);stf2Do(s,c);
+/* ONE weight rule for a bribed servant's «Bạc lạ» options O (cnvBribeOpts take / tell / quiet): take = the bribe's odds, the refusal split by her lòng
+   (tell) against keeping quiet, × her nết on the option's tag (stf2Tr). Used by stf2Bribe (NPC staff) and jrcv rcvMaidBribe (a consort's cung nữ, hers too) */
+function stf2BribeW(s,O,odds){const K=BAL.ag.stf2.bribe;const t=K.tell*(s.loyal||0)/100,q=K.quiet,ref=100-odds;
+ const W={take:odds,tell:ref*t/Math.max(.001,t+q),quiet:ref*q/Math.max(.001,t+q)};return O.map(x=>[x,W[x.id]*stf2Tr(s,x.tag)])}
+function stf2Bribe(a,s,o,odds,cost){if(!stf2On()||!s||s===S||s.sid==null||!o)return null;
+ const O=cnvBribeOpts(s,a,o,cost);const c=mindPick(stf2BribeW(s,O,odds),s)||O[0];stf2C("bribe_"+c.id);stf2Do(s,c);
  return c.id==="take"?`${s.name} (người hầu của ${NM(o)}) nhận bạc của ${NM(a)}, thành tai mắt. `:c.id==="tell"?`${s.name} từ chối bạc của ${NM(a)} và mách chủ. `:`${s.name} từ chối bạc của ${NM(a)}. `}
 /* ordered to do a dishonourable deed (j29 runAct, sent servant sv of master a, target t) → "obey" | "refuse" | "tell" (the deed is not done) */
 function stf2Ord(a,sv,t,k){if(!stf2On()||!sv||sv===S||!a)return null;const K=BAL.ag.stf2.ord,lo=(sv.loyal||0)/100;

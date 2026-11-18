@@ -1321,12 +1321,22 @@ Object.assign(BAL,{actHere:{plant:15}});
    (her liking of the receiver +qAf) · Đức − road.hp.sab.duc, the asker's oán + road.hp.sab.oan, the asker's Danh − danh.
    ord (an order from above, two-option cards: Vâng / Cáo bệnh …): the NPC receiver weighs «obey» = full + half, «decline» = no (+ sab) — the SAME
    options and numbers as her card. */
-BAL.rcv={kw:["Giúp hết lòng","Giúp qua loa","Từ chối","Mách lẻo"]/* the L1876 words, the same as j42 cnvOrdOpts (parallel-time) */,help:{af:[8,3],half:.5,qAf:5,danh:2},
+/* the 4 answer names are the L1876 words BAL.road.hp.kw (full / half / no / lk), read by jrcv rcvKw — no copy here (one core).
+   «làm qua loa» (slot 1, every card, rcvYesO): the act at × help.half (the weaker result) and Sức − prop.suc × help.half (she still gives some time);
+   the risk = the L1876 «qua loa» minus BAL.road.hp.half read as the chance the asker sees through it → the asker's liking of the receiver − help.fail
+   (as an open refusal) and her oán + road.hp.sab.oan (worse than refusing openly). Shown on her card in words (chanceW), the same roll for an NPC. */
+BAL.rcv={help:{af:[8,3],half:.5,qAf:5,danh:2},
  /* the Sức a summons costs (her «Vâng chỉ» card jts tsSummonMe and the summoned NPC, one number) */
  sumSuc:5,
  /* the bạc to take a gift to Thái y viện (her giftin card j8 and an NPC receiver, one number) */
  chk:10,
+ /* the Thái y viện finds a tainted gift at the receiver's oSee + chkSee (her giftin card j8 and an NPC receiver, one number) */
+ chkSee:25,
  /* per-kind factor on the L1876 weights [full, half, no, sab] (tunable): refusing the throne is rare, sending a gift back less common than keeping it */
  k:{help:[1,1,1,1],gift:[1,1,.5,1],emp:[1,1,.2,.2]},
  /* every request / proposal (jrcv rcvYesO / rcvNoO): «giúp hết lòng» costs the receiver Sức suc (her time); «từ chối» a proposal keeps her out of cliques: Danh + danh */
- prop:{suc:4,danh:1}};
+ prop:{suc:4,danh:1,ghen:10},
+ /* a request to a JUDGE (the Hoàng hậu asked by «Xin Hoàng hậu giáng» xinhh / «Trình Hoàng hậu» trinhhh, OD 18/11 ~21:15Z law 1): she as the Hoàng hậu
+   gets the card, an NPC queen answers with the SAME options at the asker's shown odds (rcvJudge). yes = the act (xinhh: the lễ comes to the judge)
+   · cost: the punished one's oán + oan, and for taking a lễ to demote someone Đức − duc; no = the act's own refusal effect · gain: Danh + prop.danh */
+ judge:{oan:6,duc:3}};

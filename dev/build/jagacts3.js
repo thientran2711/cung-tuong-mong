@@ -216,9 +216,10 @@ agRunReg("cx3:drug",v=>p3DrugOk(v)?p3Run(v,P3C.drug(v),"drug"):"");
    guest = another consort: on yes she is at the host's palace that buổi (S.where), on no the host's liking of her drops BAL.eff.j21.top (her refusal rule);
    guest = HER: the host is at home and sends word (the old 4 % flat roll is off while par3 is on) — she chooses whether to go */
 function p3InvQ(){return(S.invQ=S.invQ||[])}
+/* RECEIVER CHOICE (OD 18/11 ~21:15Z, review FAIL 6 #2): the guest answers with the 4 answers (jrcv RCVK.invite): an NPC guest rcvPick, HER = her card (rcvAsk → rcvCard) */
 function p3InvLand(){const Q=p3InvQ();if(!Q.length)return;S.invQ=[];for(const q of Q){const h=RV(q.h);if(!h||!h.alive||h.out||h.confined)continue;const k=palaceOf(h);
- if(q.g==="me"){S.where[h.id]=k;seeLoc(h,k);log(`${h.name} sai người mời ngươi sang cung nàng chơi buổi này.`);continue}
- const g=RV(q.g);if(!g||!g.alive||g.out||g.confined)continue;const io=inviteO(h,g);if(agTry(io)){S.where[g.id]=k;S.where[h.id]=k}else if(!agSoft(io))affAdd(h,g,BAL.eff.j21.top)}}
+ if(q.g==="me"){S.where[h.id]=k;seeLoc(h,k);if(typeof rcvAsk==="function")rcvAsk("invite",h,S);else log(`${h.name} sai người mời ngươi sang cung nàng chơi buổi này.`);continue}
+ const g=RV(q.g);if(!g||!g.alive||g.out||g.confined)continue;if(typeof rcvInviteGo==="function"){rcvInviteGo(h,g);continue}const io=inviteO(h,g);if(agTry(io)){S.where[g.id]=k;S.where[h.id]=k}else if(!agSoft(io))affAdd(h,g,BAL.eff.j21.top)}}
 AGC3BTN.invite2="Mời đến cung ta";AGC3ACT.invite2="sai người đi mời khách";
 agReg("consort","par3inv",(v,N,need)=>{const O=[];if(!p3On()||v===S||v.out||v.confined||!v.alive||(need&&need!=="ally"))return O;const X=BAL.ag.par3.invite;
  try{if(p3InvQ().some(q=>q.h===v.id))return O;const L=others(v).filter(x=>x&&x.alive!==false&&!x.out&&!x.confined&&!sameHouse(v,x)&&aff(v,x)>=X.minAff&&aff(x,v)>=BAL.invite.hate);if(!L.length)return O;
