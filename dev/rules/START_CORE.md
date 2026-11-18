@@ -1,5 +1,18 @@
 # START_CORE — verbatim owner rules
 
+## ★ GAME LAWS — READ FIRST, ABOVE EVERYTHING (owner 18/11 ~16:20Z: "Bất kỳ một cái chat nào mở ra nó phải đọc những cái này trước tiên ... nó phải là cái nằm ở trên cùng, để không có ai bỏ lỡ. Để mà khi thợ hay là người duyệt mà có làm á thì phải theo cái luật này cho tao.")
+Every chat (main, foreman, worker, reviewer, art) reads this block FIRST. Every design, build and review must follow it; reviewers FAIL any work that breaks one of these laws. Laws 1–6 are her top priority.
+1. TWO-WAY LAW (luật hai chiều): whatever others can do to her, she can do back to them, and the reverse (OD:L33, L1534).
+2. EQUAL-VALUE CHOICES (luật lựa chọn ngang giá): all options of one choice have equivalent value; none clearly better; a bạc road always has another road of equal cost (OD:L582, OD 18/11 ~09:20Z).
+3. GAIN-AND-LOSS (luật được–mất): no option is cost-only with no gain; gain-only is fine (time/khắc is its cost) (OD 18/11 ~09:20Z).
+4. ONE CORE (một lõi số): every number comes from BAL; nothing computes or types its own number (OD:L1267).
+5. HARDER AS SHE CLIMBS (càng lên càng khó): mini-games and trials get harder with rank (OD:L1254).
+6. REAL-WORLD LAW (luật thế giới thực) = (a) REAL EVIDENCE: others can frame her and win, her defence can fail; proof must truly exist (OD:L1109); (b) REAL PEOPLE: every person is a living NPC with her own life, schedule and goals; a person named in any road really exists (OD:L1246, L1385, L1389); (c) REAL OBJECTS: every item that appears in the game really exists somewhere — it never vanishes, is never unfindable; it is owned, stored, given, sold, stolen or used up, always traceable (OD 18/11 ~16:20Z).
+7. CỔ TRANG WORDING: no %, odds in words (Liều / Khó / Năm ăn năm thua / Khá chắc / Chắc / Rất chắc / Nắm chắc) (VANPHONG.md).
+8. HISTORY / DRAMA IDEAS → EXPERT FIRST (OD:L1327).
+UI laws (KIT FIRST, frame → layout → S/M/L buttons, fix the whole group, Fold + iPad) and work laws (gate zero, canon overwrite, verbatim, never change a working rule, never re-ask, feature freeze) follow below.
+
+
 ## ⛔ GATE ZERO — PRIORITY RULE #1 FIRST, ALWAYS (owner OD:L5 + 17/11 ~02:55Z, angry: "mày cho chó gặm rồi")
 Owner (verbatim, 17/11): "bây giờ tất cả những luật priority của tao phải đưa lên trên hàng đầu của cái canon chứ, để mày follow theo. Đó là trước khi mở thợ làm bất cứ một cái vấn đề, một câu hỏi nào của tao hay một cái idea nào đó thì phải coi đã có thợ làm chưa, hoặc là đã coi thử trong luật đã có chưa chứ. Tao đã nhắc chuyện này nhiều lần rồi mà."
 BEFORE you open ANY worker, write ANY brief or order, answer ANY owner question, or propose ANYTHING: (1) grep dev/OWNER_DECISIONS.md + dev/handover/OWNER_LEDGER.md + HANDOVER + PROGRESS for the topic; (2) `git grep` origin/main AND origin/review/* for the feature / table / BAL key / function; (3) read CLAIMS.md + foreman STATUS for a worker already on it. Every brief and every order MUST start with a line "PRIORITY #1 CHECK: OD <hits> | main <file:line or none> | review/* <branch or none> | claims <session or none>". No line = the brief is void; reviewers FAIL work whose brief lacks it. If it exists: reuse / ship / point to it — never rebuild, never tell her "chưa có" or "làm lại" without the proof. TOOL: run `sh dev/tools/prio1.sh "<keywords>"` and paste its last line. The MAIN chat also shows that line to the owner every time it opens a worker or answers "đã có / chưa có", so she can see the check was done (owner 17/11 03:05Z: rules in text get skipped; she must be able to see it). (Lesson 17/11: s28 ordered a "new" servant-per-rank table while BAL.promo.cap already existed.)
