@@ -962,3 +962,4 @@ LESSONS s39: look at neighbours side by side before asking her to pick (A/B/C gl
 - (18/11 02:21Z) OWNER smudge pick 20 % all levels + makeup LOD at small sizes + mascara a bit darker → smudge worker r14.
 - (18/11 02:24Z) cloth-xoc c3dbe95 mud vertical but reads as grass tufts, hem edge clean → Magnific mud decals (hem band, drops, drip streaks). Not shown to owner.
 - (18/11 02:31Z) OWNER: wet front panel white/washed → cloth-xoc: wet never lighter than dry (measure L), thin specular only.
+- (18/11 02:35Z) OWNER: staff total should be ~25–27 → B2 apply held; staff-cap worker measures D1/D2/D3 (+1) → owner picks.
