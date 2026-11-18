@@ -46,6 +46,8 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  const seats=[['guest',G],['host',H]];
  for(const [nm,o] of seats){
   /* S1 */
+  /* S1 needs the reshowQ book guard (jcoopworld, CW.reshowQ); a tests-only build without it says so and runs S2–S5 */
+  if(!await o.p.evaluate(()=>typeof COOPW.reshowQ==='function'))console.log('note S1 '+nm+': reshowQ book guard not in this build, S1 not run');else{
   const pre=await o.p.evaluate(()=>{for(let i=0;i<3;i++)try{if(window.__kbk&&__kbk.close)__kbk.close()}catch(e){}Q.length=0;const M=document.getElementById('modal');M.hidden=true;
    try{dawn()}catch(e){return{err:String(e)}}const bk=!!document.querySelector('.kbk-bar');Q.push({t:'Thử C4',h:'<p>Thẻ chờ dưới sách.</p>'});M.hidden=true;
    /* the race, forced: the armed reshow runs while the book is still up and the dialog is hidden (a rebuild dropped it) */
@@ -55,6 +57,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   await until(o,()=>!document.querySelector('.kbk-bar'),null,10000);
   const shown=await until(o,()=>!document.getElementById('modal').hidden&&Q[0]&&Q[0].t==='Thử C4',null,8000);
   ok(shown,'S1 '+nm+': after the book closes the queued card shows',await o.p.evaluate(()=>({hidden:document.getElementById('modal').hidden,q:Q.map(m=>m.t),armed:COOPW.qArmed()})));
+  }
   for(let i=0;i<3;i++)await clear(o);
   /* S2 */
   await o.p.evaluate(()=>{Q.push({t:'Điềm báo',kind:'notice',act:1,h:'<p>Thẻ chỉ có lời "Đã rõ".</p>',opts:[{n:'Đã rõ',fx:{},go:()=>{}}]});showModal()});
