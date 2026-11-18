@@ -95,7 +95,7 @@ style-ref test A/B/C c06 t1–t3 | CDN _review only | W79 session_011xDdVSouZw85
 | stage-here (opus UI: stage = where she is, every tab + closing alert; OD 19:45Z (5)) | review/stage-here | MAIN ROOT-55 | session_01Rc5AsK9y5NbRATifWtFqG7 | SẴN SÀNG KIỂM e8e5afe | 18/11 20:15Z |
 | stage-rightcol (sonnet UI+kit; successor of maid6-sample; OD 20:55Z) | review/stage-rightcol | MAIN ROOT-54 | session_01Rc5AsMuwoEKePMdcju7qZi | DONE 5f00b0c (SẴN SÀNG XEM) | 18/11 19:33Z |
 | errand-scene (sonnet UI/motion: maid walks off/on stage for every errand; OD 20:05Z) | review/errand-scene | MAIN ROOT-54 | session_01Rc5AsLfkFKRGnjiTepddVL | READY d1da71f | 18/11 19:38Z |
-parallel-time (ORDER ROOT-54 ~20:22Z + ADD ~20:37Z) | review/parallel-time | session_01964izFaHZziojdgTAvWWfY (#2; #1 session_01964izEDFWH8uK569yeSGJt rolled over 20:42Z) | RUNNING | 18/11 19:52Z | owner D #3
+parallel-time (ORDER ROOT-54 ~20:22Z + ADD ~20:37Z) | review/parallel-time | session_01964izGM3cyQq9y9byHFKnV (#3; #2 session_01964izFaHZziojdgTAvWWfY rolled over 21:05Z; #1 session_01964izEDFWH8uK569yeSGJt) | RUNNING | 18/11 19:52Z | owner D #3
 | REVIEW ag-deed-perf (opus reviewer; env cung-tuong-mong = CDN allowed) | review/ag-deed-perf 9e0e1928 | C-AG #14 | session_01Rc5AsKgufafrSAB6Xyw8k7 | DONE (LANDED fa411d6f) | 18/11 19:58Z |
 | MAIN ROOT-55 (opus; child of ROOT-54) | handover HANDOVER_SESSION9 | ROOT-54 | session_01Rc5AsNFnALGujUFYDSjs4g | RUNNING | 18/11 19:56Z |
 | MAIN ROOT-55 (opus; child of ROOT-54) | handover HANDOVER_SESSION9 | ROOT-54 | session_01Rc5AsNFnALGujUFYDSjs4g | RUNNING | 18/11 19:58Z |
