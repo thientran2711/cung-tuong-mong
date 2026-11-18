@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"590f6748+","t":"2026-11-18T12:38Z","c":"review coop-thin-f1 r1 fix: her act's kit result card on her phone at level 6 (the caller's rsnap snapshot rides with the pending intent; r…","b":"b699a2ef3e42","h":[{"s":"4475ea24+","t":"2026-11-18T12:33Z","c":"grand-endings-engine: site rebuilt (index.html / sw.js / assets.json) after fix 4 + main merge"},{"s":"68cbbb28+","t":"2026-11-18T12:00Z","c":"review life-preload-fu r2v: no half-drawn / empty figure while the HD twin comes (whole group: every fig-* img)"},{"s":"a8036600+","t":"2026-11-18T12:06Z","c":"Rebuild index.html/sw.js after merging origin/main"},{"s":"3f45eda9+","t":"2026-11-18T11:52Z","c":"steal-minigame FIX 1: PEND flag (chooseM renders before the game opens: the stale-'mg' reset no longer cancels a real async game); KIT.md §…"},{"s":"19a23498+","t":"2026-11-18T11:03Z","c":"review poison-road r2 (ONE CORE OD:L1267): the weak-Sức odds rule had two sources — j9 odA typed suc\u003c30 → −15 while the poison card 'Vì sao…"},{"s":"421a2362+","t":"2026-11-18T11:04Z","c":"live-test-reds r1: emotion-acts scold/scoldlive pin the ODDS CAP roll (act failed softly ~5 %, no pick queued)"},{"s":"d795be81+","t":"2026-11-18T10:34Z","c":"residence-seats-r2: a consort out of the palace gives up her side-hall room (palFix); jworld đại xá re-houses at once"},{"s":"65aeddd7+","t":"2026-11-18T10:26Z","c":"review d19-gift-work r1: a refused piece (jdis: stays in her chest) eases nothing — no free peace; test covers it; site rebuilt"},{"s":"32cc2a68+","t":"2026-11-18T10:12Z","c":"kit-kpb: kpb-shots.js (after-only Fold|iPad shots of pgpick, giftpick, short picker)"},{"s":"40e74a62+","t":"2026-11-18T09:19Z","c":"cloth-hd: cloth layer bakes the edit onto the HD picture (out = HD + up(bake) - up(source)) and wears the picture's own filter (kfa edge, s…"}]};
+window.CTM_BI={"s":"ca29ec01+","t":"2026-11-18T15:14Z","c":"review coop-thin-f1 r1: coop-thin-f1 real-tap check picks a target doAct accepts (v.alive) and taps again when the game itself refused the …","b":"496b4396f8d3","h":[{"s":"9f9c6c2b+","t":"2026-11-18T14:26Z","c":"shown-odds-one-path r1: plant on the spot is done in person (actCtx x.here, no sent-servant pen); Vì sao names spy knowledge (whyKnow); tes…"},{"s":"aa997f3c+","t":"2026-11-18T13:46Z","c":"look-fx r13: index.html / sw.js rebuilt from merged sources"},{"s":"4475ea24+","t":"2026-11-18T12:33Z","c":"grand-endings-engine: site rebuilt (index.html / sw.js / assets.json) after fix 4 + main merge"},{"s":"68cbbb28+","t":"2026-11-18T12:00Z","c":"review life-preload-fu r2v: no half-drawn / empty figure while the HD twin comes (whole group: every fig-* img)"},{"s":"a8036600+","t":"2026-11-18T12:06Z","c":"Rebuild index.html/sw.js after merging origin/main"},{"s":"3f45eda9+","t":"2026-11-18T11:52Z","c":"steal-minigame FIX 1: PEND flag (chooseM renders before the game opens: the stale-'mg' reset no longer cancels a real async game); KIT.md §…"},{"s":"19a23498+","t":"2026-11-18T11:03Z","c":"review poison-road r2 (ONE CORE OD:L1267): the weak-Sức odds rule had two sources — j9 odA typed suc\u003c30 → −15 while the poison card 'Vì sao…"},{"s":"421a2362+","t":"2026-11-18T11:04Z","c":"live-test-reds r1: emotion-acts scold/scoldlive pin the ODDS CAP roll (act failed softly ~5 %, no pick queued)"},{"s":"d795be81+","t":"2026-11-18T10:34Z","c":"residence-seats-r2: a consort out of the palace gives up her side-hall room (palFix); jworld đại xá re-houses at once"},{"s":"65aeddd7+","t":"2026-11-18T10:26Z","c":"review d19-gift-work r1: a refused piece (jdis: stays in her chest) eases nothing — no free peace; test covers it; site rebuilt"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -1076,6 +1076,8 @@ function oddsCl(o){return cl(o,BAL.odds.lo,BAL.odds.hi)}
    gated again at the cap and shows no false Nắm chắc; a.oi (optional) = the inner odds shown as its word (review r1 2a). */
 function oddsSure(a){return !!(a&&(a.fix||a.open||a.adShop||a.exam||a.aaMG||a.inner))}
 function oddsCapped(a){return !!a&&(a.o==null||a.o>=100)&&!oddsSure(a)}
+/* ONE odds of a card option (review/shown-odds-one-path): the card word (j19 cardH) and the roll (j2 runOpt) both read this */
+function optOdds(a){const o=oddsOf(a);return o>=100?o:oddsCl(o+lotB(S,a.dom))}
 function oddsOf(a){if(a&&a.inner)return a.oi!=null?oddsCl(+a.oi):100;const o=a.o==null?100:a.o;return o>=100?(oddsSure(a)?100:BAL.odds.hi):o}
 /* capRes(ok, o) = a result that came from noise draws (a contest / exam score, not roll) keeps its odds inside the ONE cap: o = the raw odds
    of that result (0..100); above hi a win is undone with the right share, below lo a loss is turned with the right share, so P(ok) = oddsCl(o). */
@@ -1261,7 +1263,7 @@ function canPay(a){return !(a.c&&a.c.bac&&S.bac+a.c.bac<0)&&!a.lock}
 function logReal(b){try{const K=typeof RKEYS!=="undefined"?RKEYS:Object.keys(NAMES).map(k=>[k,NAMES[k]]);const out=[];for(const [k,n] of K){if(!(k in b))continue;/* a key the snapshot did not take never shows as "0→N" */const x=b[k]||0,y=S[k]||0;if(x!==y)out.push(`<span class="${(y>x)!==(k==="ghen")?"g":"r"}">${n} ${x}→${y}</span>`)}return out.join(", ")}catch(e){return""}}
 function snapReal(){const b={};/* RKEYS too: logReal lists Ân tình, which NAMES lacks ("Ân tình 0→N" on every act, log-sync) */for(const k of new Set(Object.keys(NAMES).concat(typeof RKEYS!=="undefined"?RKEYS.map(x=>x[0]):[])))b[k]=S[k]||0;return b}
 function runOpt(a){if(!canPay(a))return null;window.__oddsSoft="";const capd=oddsCapped(a);if(capd&&!roll(BAL.odds.hi)){oddsSoft(a.n,a.c);return false}/* ODDS CAP: a formerly-sure act fails softly (j63 oddsSoft) */
-  const b0=snapReal(),s0=S.logSeq||0;if(a.c)apply(a.c);const o0=a.o==null?100:a.o,o=o0>=100?(capd?BAL.odds.hi:100):oddsCl(o0+lotB(S,a.dom));const ok=o0>=100||roll(o);
+  const b0=snapReal(),s0=S.logSeq||0;if(a.c)apply(a.c);const o0=a.o==null?100:a.o,o=o0>=100?(capd?BAL.odds.hi:100):optOdds(a);const ok=o0>=100||roll(o);
   apply(ok?(a.w||{}):(a.l||{}));
   {const d=typeof lsRest==="function"?lsRest(b0,lsLines((S.logSeq||0)-s0)):logReal(b0);log(`${a.n}${o<100?(ok?': <span class="g">thành</span>.':': <span class="r">hỏng</span>.'):"."}${d?" "+d+".":""}`)}
   if(ok){if(a.go)a.go()}else if(a.fail)a.fail();
@@ -1331,7 +1333,7 @@ function talkOpts(p){const E=S.emp,K=E.known,L=E.likes,b=bestArt(),v=p.ref;
    if(v.pg>=50)A.push({n:"Trút giận",o:100,w:{duc:-3},x:"hả cơn ghen; nàng oán",go:()=>{v.pg=0;relAdd(S,v,BAL.eff.j2.go_3)}});
    A.push(...placeHarms(v,S.place));if(liveRivals(true).filter(x=>whereOf(x)===S.place).length>=2)A.push({n:"Nghe lén câu chuyện",o:od(BAL.ag.wit.hear+S.mat*BAL.ag.wit.mat),x:`chứng cứ ${balSg(BAL.eff.j78.evTop)}`,run:()=>overhear(S.place)})}
   return A}
- if(p.kind==="chest"){if(sameHouse(S,v))return[];return[{n:"Cài đồ vào rương nàng",o:oddsCl(oPlant(S,v)+15),x:"chọn món đồ · tại chỗ, dễ hơn sai người",open:()=>{if(S.inv.some(e=>!e.h)&&can(2))pushDil(mkP("plantpick",{v:v.id,here:1}),"Cài đồ vào rương")}},
+ if(p.kind==="chest"){if(sameHouse(S,v))return[];return[{n:"Cài đồ vào rương nàng",o:oddsCl(actOdds(S,v,"plant",{pen:-BAL.actHere.plant,here:1})),x:"chọn món đồ · tại chỗ, dễ hơn sai người",open:()=>{if(S.inv.some(e=>!e.h)&&can(2))pushDil(mkP("plantpick",{v:v.id,here:1}),"Cài đồ vào rương")}},
   {n:"Lục rương tìm chứng cứ",o:od(BAL.odb.j2.odO_21+S.mat*5),act:1,x:`chứng cứ ${balSg(BAL.eff.j2.evRun)} nếu nàng có làm điều sai · lộ: bị phạt`,run:()=>{if(roll(od(BAL.odb.j2.odO_21+S.mat*5))){return evA(S,v,BAL.eff.j2.evRun)?`Lục được thư từ của ${v.name}: chứng cứ ${balSg(BAL.eff.j2.evRun)}.`:`Lục rương ${v.name}: không thấy điều gì sai trái.`}relAdd(S,v,BAL.eff.j2.run);punish("lục lọi cung phi tần",1);return "Bị cung nhân bắt gặp."}}]}
  if(p.kind==="ty"){const A=[];if(illOf(S))A.push({n:"Xin chữa bệnh",c:{bac:-30},o:100,inner:1,oi:treatO(S,"ty"),x:illName(S),run:()=>treat(S,"ty")});A.push({n:"Bài thuốc dễ thụ thai",c:{bac:-40},o:100,x:"3 tháng dễ có thai hơn",go:()=>S.fert=3});
   if(!S.doctor)A.push({n:"Mời làm thái y tâm phúc",c:{bac:-50},o:100,x:"dễ phát hiện xạ hương và độc; bệnh của con nhẹ hơn",go:()=>S.doctor=1});
@@ -2375,7 +2377,7 @@ PEND.giftpick=p=>{const e=S.inv[p.ix!=null?p.ix:-1];const L=p.v!=null?[[p.v,(RV(
  if(p.v!=null){const items=S.inv.map((e,i)=>[e,i]).filter(([e])=>!e.h);return{t:"<p>Chọn món đồ để tặng.</p>",o:items.map(([e,i])=>({n:iname(e)+(e.t?" (đã tẩm)":""),ik:i,fx:{},x:(IT[e.k]||{}).d,go:()=>{spend(2);log(giveTo(S,RV(p.v),i))}})).concat([{n:"Thôi",fx:{}}])}}
  if(!e)return null;return{t:`<p>Tặng <b>${iname(e)}</b> cho ai?</p>`,o:L.map(([id,n])=>({n,fx:{},x:id==="emp"||id==="th"?(e.t?"không thể dâng đồ đã tẩm":giftVal(Object.assign({k:e.k},IT[e.k]),id)>=8?"rất hợp ý":""):"",go:()=>{if((id==="emp"||id==="th")&&e.t)return;spend(2);log(giveTo(S,id==="emp"||id==="th"?id:RV(id),p.ix))}})).concat([{n:"Thôi",fx:{}}])}};
 PEND.plantpick=p=>{const v=RV(p.v);if(!v)return null;const items=S.inv.map((e,i)=>[e,i]).filter(([e])=>!e.h);
- return{who:pv(v),t:`<p>Sai người lẻn vào cung ${v.name}, cài món gì vào rương nàng?</p><p class="past">${word(oPlant(S,v))} · hỏng: bị bắt, nàng nắm ${balAb(BAL.eff.j8.evPlantItem)} chứng cứ</p>`,o:items.map(([e,i])=>({n:iname(e)+(e.t?" ("+TAINT[e.t].n+")":""),ik:i,fx:{},x:(IT[e.k]||{}).il||(e.t&&TAINT[e.t].il)?"khám ra là có tội":(IT[e.k]||{}).rk>rkOf(v)?"vượt phẩm của nàng":"",go:()=>{spend(2);if(p.here){ACTX={a:S,pen:-15};try{log(plantItem(S,v,i)+" (tại cung nàng)")}finally{ACTX={a:null,pen:0}}}else log(runAct(S,v,"plant",i))}})).concat([{n:"Thôi",fx:{}}])}};
+ return{who:pv(v),t:`<p>Sai người lẻn vào cung ${v.name}, cài món gì vào rương nàng?</p><p class="past">${word(oddsCl(actOdds(S,v,"plant",p.here?{pen:-BAL.actHere.plant,here:1}:null)))} · hỏng: bị bắt, nàng nắm ${balAb(BAL.eff.j8.evPlantItem)} chứng cứ</p>`,o:items.map(([e,i])=>({n:iname(e)+(e.t?" ("+TAINT[e.t].n+")":""),ik:i,fx:{},x:(IT[e.k]||{}).il||(e.t&&TAINT[e.t].il)?"khám ra là có tội":(IT[e.k]||{}).rk>rkOf(v)?"vượt phẩm của nàng":"",go:()=>{spend(2);if(p.here){ACTX=actCtx(S,v,"plant",undefined,{pen:-BAL.actHere.plant,here:1});try{log(plantItem(S,v,i)+" (tại cung nàng)")}finally{ACTX={a:null,pen:0}}}else log(runAct(S,v,"plant",i))}})).concat([{n:"Thôi",fx:{}}])}};
 PEND.taintpick=p=>{const e=S.inv[p.ix];if(!e)return null;const L=Object.entries(TAINT).filter(([k,T])=>T.on.includes(e.k)&&(!T.need||S.inv.some(x=>x.k===T.need&&!x.h)));
  return{t:`<p>Lén làm gì với <b>${iname(e)}</b>?</p>`,o:L.map(([k,T])=>({n:T.n[0].toUpperCase()+T.n.slice(1),fx:T.c?{bac:-T.c,duc:BAL.eff.j8.taintDuc}:{duc:BAL.eff.j8.taintDuc},x:T.hurt+(T.need?" · tốn "+itm(T.need).n:""),go:()=>log(taintItem(S,p.ix,k))})).concat([{n:"Thôi",fx:{}}])}};
 PEND.evpick=p=>({t:"<p>Tập chứng cứ này nói về ai?</p>",o:liveRivals(true).map(v=>({kgt:v,n:v.name,fx:{},go:()=>log(useItem(S,p.ix,v))})).concat([{n:"Thôi",fx:{}}])});
@@ -3376,9 +3378,20 @@ function npcEncounters(){const by={};for(const v of liveRivals(true)){const k=S.
 
 /* sending someone instead of going: same act, lower odds, the servant may be caught and confess */
 let ACTX={a:null,pen:0};
-function runAct(a,t,k,extra){const A2=ACT[k];if(!A2)return"";const sent=!together(a,t)&&!["accuse","vp","xx","gift","steal","road","takeaway"].includes(k);const where=together(a,t)?placeName(whereOf(a)):"";
+/* ONE act context (review/shown-odds-one-path, ORDER ROOT-52 18/11): the roll (runAct) and EVERY screen that prints an act's odds
+   build the same ACTX here — sent-servant penalty (pen), her lá số on the act's domain (lotB via dom), fresh spy knowledge of the
+   target (spyKnowB via t) — so the word on the card is the odds the roll uses (shown == rolled; dev/test/shown-odds.test.js).
+   x = an extra part of one way of doing the act (e.g. plant "tại cung nàng": x.pen, x.here = done in person, no sent-servant pen), the same object on both sides. */
+const ACT_NOSEND=["accuse","vp","xx","gift","steal","road","takeaway"];
+function actCtx(a,t,k,sv,x){const sent=!(x&&x.here)&&!together(a,t)&&!ACT_NOSEND.includes(k);/* x.here: she does it herself on the spot (no servant sent) */if(sent&&sv===undefined)sv=bestSent(a);
+ const K0=ACTK;ACTK=k;let pen=0;try{pen=sent?sentPen(sv)-(sv?srk(sv)*3:0):0}finally{ACTK=K0}
+ return{a,t,pen:pen+((x&&x.pen)||0),dom:ACTDOM[k]}}
+/* the odds an act's own roll will use, for display: ACT[k].o evaluated inside actCtx (then the one odds cap oddsCl) */
+function actOdds(a,t,k,x){const A2=ACT[k];if(!A2||typeof A2.o!=="function")return null;const X0=ACTX,K0=ACTK;ACTK=k;ACTX=actCtx(a,t,k,undefined,x);
+ try{const o=A2.o(a,t);return o==null||o>=100?o:oddsCl(Math.round(o))}finally{ACTX=X0;ACTK=K0}}
+function runAct(a,t,k,extra){const A2=ACT[k];if(!A2)return"";const sent=!together(a,t)&&!ACT_NOSEND.includes(k);const where=together(a,t)?placeName(whereOf(a)):"";
  if(sameHouse(a,t)&&k!=="accuse")return a===S?"Người cùng cung, ngươi không thể ra tay hay lấy lòng. ":"";
- const sv=sent?bestSent(a):null;ACTX={a,t,pen:sent?sentPen(sv)-(sv?srk(sv)*3:0):0,dom:ACTDOM[k]};let r="";try{r=A2.f(a,t,extra)}finally{ACTX={a:null,pen:0}}
+ const sv=sent?bestSent(a):null;ACTX=actCtx(a,t,k,sv);let r="";try{r=A2.f(a,t,extra)}finally{ACTX={a:null,pen:0}}
  const harm=!["ally","gift","spy"].includes(k);
  if(sent&&sv&&!/bị lộ|bị bắt|phát giác|chặn kịp|từ chối/.test(r))servMerit(sv,2);if(sent&&harm&&roll(confessRisk(sv))){const n=evA(t,a,BAL.eff.j9.evN);r+=`${sv?sv.name:"Kẻ"} được ${NM(a)} sai đi bị bắt, khai ra chủ${n?`: ${NM(t)} nắm thêm ${balAb(BAL.eff.j9.evN)} chứng cứ`:""}. `+servCaught(a,sv)}
  if(sent&&sv)r=r.replace(/\(sai người đi\)/,"");
@@ -3407,7 +3420,7 @@ function topicOpts(v){const f=chatF(v),g=n=>Math.max(1,Math.round(n*f)),third=li
 /* harms that need the place: food served, the lotus pond, her palace while she is away, overhearing */
 const FOOD=["kn","tn","home","dtd"];
 function placeHarms(v,k){const H=[];if(sameHouse(S,v))return H;
- const act=(key2,n,x)=>{const a=ACT[key2];if(a&&a.ok(S,v))H.push({n,o:a.o?a.o(S,v):100,act:1,x:[a.x||"",fmt(a.c)].filter(Boolean).join(" · "),run:()=>runAct(S,v,key2)})};
+ const act=(key2,n,x)=>{const a=ACT[key2];if(a&&a.ok(S,v))H.push({n,o:a.o?actOdds(S,v,key2):100,act:1,x:[a.x||"",fmt(a.c)].filter(Boolean).join(" · "),run:()=>runAct(S,v,key2)})};
  act("spy","Dò la");act("rumor","Tung tin đồn");
  if(FOOD.includes(k)||k[0]==="r"){act("poison","Bỏ độc vào trà nàng");act("musk","Bỏ xạ hương vào thuốc nàng")}
  if(k==="vuon"){H.push({n:"Đẩy nàng xuống hồ sen",o:odA(S,40+S.tamco/4),act:1,x:"Đức -12 · lộ: bị phạt",run:()=>pushPond(S,v)});act("pond","Đẩy con nàng xuống hồ")}
@@ -3600,7 +3613,9 @@ function askJoin(a,f){const l=facLeader(f);if(!l||facOf(a))return"";if(roll(odA(
 function sellOut(a){const f=facOf(a);if(!f)return"";const M=facMembers(f).filter(x=>x!==a);const q=queenP()&&queenP()!==a?queenP():null;leaveFac(a);
  for(const m of M){oanAdd(m,a,40);if(q)evA(q,m,BAL.eff.j10.evSellOut);else if(roll(40))punish(m,"bị đồng đảng tố giác",1)}ap(a,{danh:5,sung:3});if(roll(40))bestow(a,"accuse");return `${NMc(a)} bán đứng ${f.name}, đem chuyện của ${M.map(NM).join(", ")} dâng lên ${q?(q===S?"ngươi":"Hoàng hậu"):"Hoàng thượng"}. `}
 function divide(a,f){const M=facMembers(f).filter(x=>x!==a);if(M.length<2)return"";const [x,y]=shuf(M.slice()).slice(0,2);if(roll(odA(a,40+a.tamco/3))){oanAdd(x,y,25);oanAdd(y,x,25);affAdd(x,y,-15);affAdd(y,x,-15);let r=`${NMc(a)} ly gián ${x===S?"ngươi":x.name} và ${y===S?"ngươi":y.name}. `;if(roll(50))r+=leaveFac(rkOf(x)<rkOf(y)?x:y);return r}evA(x,a,BAL.eff.j10.evDivide);return `Mưu ly gián của ${NM(a)} bị ${NM(x)} nhìn thấu. `}
-function jointScheme(f,t){const M=facMembers(f),l=facLeader(f);const o=odA(l,oFrame(l)+5*(M.length-1));
+/* ONE odds of a joint scheme (review/shown-odds-one-path): the faction card (her "Hợp mưu hạ") and the roll read the leader's, not hers */
+function jointO(f){const M=facMembers(f),l=facLeader(f);return odA(l,oFrame(l)+5*(M.length-1))}
+function jointScheme(f,t){const M=facMembers(f),l=facLeader(f);const o=jointO(f);
  if(roll(o)){fall(t,`bị ${f.name} hợp mưu tố tội`);M.forEach(m=>ap(m,{tamco:1}));return `${f.name} hợp mưu hạ ${NM(t)}: thành. `}
  M.forEach(m=>punish(m,`hợp mưu vu cáo ${NM(t)}`,2));return `<span class="r">${f.name} hợp mưu hạ ${NM(t)} bị lộ, cả phe bị phạt.</span> `}
 function facMonth(){let ev="";S.facs=(S.facs||[]).filter(f=>facMembers(f).length>=2);
@@ -3623,7 +3638,7 @@ function facHTML(){const mine=facOf(S),F=S.facs||[];let h=`<div class="ph"><span
  if(!mine){const cands=liveRivals(true).filter(v=>!facOf(v)&&aff(v,S)>=BAL.facJoinAff&&!sameHouse(S,v));h+=`<div class="rbtn" style="margin-bottom:6px">${cands.slice(0,4).map(v=>`<button data-fa="lap" data-fv="${v.id}" ${!can(2)?"disabled":""}>${mdH(pv(v),"xs")}Lập phe cùng ${v.name}<small>2 khắc</small></button>`).join("")||`<span class="past">Cần một phi tần quý ngươi từ ${BAL.facJoinAff} để lập phe.</span>`}</div>`}
  else{const out=liveRivals(true).filter(v=>!facOf(v)&&!sameHouse(S,v));h+=`<div class="rbtn" style="margin-bottom:6px">${out.slice(0,4).map(v=>`<button data-fa="moi" data-fv="${v.id}" ${!can(2)?"disabled":""}>${mdH(pv(v),"xs")}Mời ${v.name}<small>${word(inviteOdds(S,v))}</small></button>`).join("")}<button data-fa="roi">Rời phe<small>đồng đảng giận</small></button><button data-fa="ban" ${!can(2)?"disabled":""}>Bán đứng<small>Danh +5 · cả phe oán +40</small></button></div>`}
  h+=F.map(f=>{const M=facMembers(f),l=facLeader(f),st=Math.round(M.filter(m=>m!==S).reduce((s,m)=>s+aff(m,S),0)/Math.max(1,M.filter(m=>m!==S).length));const me=f===mine;
-  return `<div class="rival"><div class="top" style="align-items:center;justify-content:flex-start"><b>${f.name}</b><em>đứng đầu: ${mdH(l===S?pMe():pv(l),"xs")}${l===S?"ngươi":l.name} · thế lực ${facStr(f)}</em></div><div class="chips">${M.map(m=>chip(`${mdH(m===S?pMe():pv(m),"xs")}${m===S?"Ngươi":m.name}`)).join("")}${me?"":chip(`Với ngươi: ${st>=BAL.cut.facRel?"thân":st<=-BAL.cut.facRel?"thù":"bình thường"} (${st})`,st<=-BAL.cut.facRel?"hot":st>=BAL.cut.facRel?"ok":"")}</div>${me?(l===S?`<div class="rbtn">${consorts().filter(x=>x!==S&&!M.includes(x)&&!sameHouse(S,x)).slice(0,3).map(x=>`<button data-fa="hop" data-fv="${x.id}" ${!can(2)?"disabled":""}>${mdH(pv(x),"xs")}Hợp mưu hạ ${x.name}<small>${word(odA(S,oFrame(S)+5*(M.length-1)))} · lộ: cả phe bị phạt</small></button>`).join("")}</div>`:""):`<div class="rbtn">${mine?"":`<button data-fa="xin" data-ff="${f.id}" ${!can(2)?"disabled":""}>Xin vào phe<small>2 khắc</small></button>`}<button data-fa="ly" data-ff="${f.id}" ${!can(2)||M.length<2?"disabled":""}>Ly gián<small>${word(odA(S,40+S.tamco/3))} · 2 khắc</small></button></div>`}</div>`}).join("")||`<p class="past">Hậu cung chưa có phe phái nào.</p>`;
+  return `<div class="rival"><div class="top" style="align-items:center;justify-content:flex-start"><b>${f.name}</b><em>đứng đầu: ${mdH(l===S?pMe():pv(l),"xs")}${l===S?"ngươi":l.name} · thế lực ${facStr(f)}</em></div><div class="chips">${M.map(m=>chip(`${mdH(m===S?pMe():pv(m),"xs")}${m===S?"Ngươi":m.name}`)).join("")}${me?"":chip(`Với ngươi: ${st>=BAL.cut.facRel?"thân":st<=-BAL.cut.facRel?"thù":"bình thường"} (${st})`,st<=-BAL.cut.facRel?"hot":st>=BAL.cut.facRel?"ok":"")}</div>${me?(l===S?`<div class="rbtn">${consorts().filter(x=>x!==S&&!M.includes(x)&&!sameHouse(S,x)).slice(0,3).map(x=>`<button data-fa="hop" data-fv="${x.id}" ${!can(2)?"disabled":""}>${mdH(pv(x),"xs")}Hợp mưu hạ ${x.name}<small>${word(jointO(f))} · lộ: cả phe bị phạt</small></button>`).join("")}</div>`:""):`<div class="rbtn">${mine?"":`<button data-fa="xin" data-ff="${f.id}" ${!can(2)?"disabled":""}>Xin vào phe<small>2 khắc</small></button>`}<button data-fa="ly" data-ff="${f.id}" ${!can(2)||M.length<2?"disabled":""}>Ly gián<small>${word(odA(S,40+S.tamco/3))} · 2 khắc</small></button></div>`}</div>`}).join("")||`<p class="past">Hậu cung chưa có phe phái nào.</p>`;
  return h}
 function facAct(a,d){if(S.dead||Q.length)return;let r="";const v=d.fv?RV(+d.fv):null,f=d.ff?(S.facs||[]).find(x=>x.id===+d.ff):null;
  if(a==="roi"){r=leaveFac(S)}
@@ -3654,8 +3669,8 @@ function renderStage(){const P=placeOf(S.place);try{if(S.visit&&typeof stageCapF
    if(p.kind==="hh")f.ini="Phượng";return `<button class="tok" data-p="${i}">${mdH(f)}<span class="tag">${p.name}</span></button>`}).join(""):`<p class="empty">Không có ai ở đây.</p>`;
  let pw="";if(popIdx!=null&&ppl[popIdx])pw=`<div class="pop pcpop">${popCard(ppl[popIdx],popIdx)}</div>`;
  $("popw").innerHTML=pw;kitFix($("popw"))}
-function rvButtons(v,i){const dis=!can(2)||!v.alive||v.out||S.dead;const b=(k,extra)=>{const a=ACT[k];if(!a||(a.kid&&!a.ok(S,v)))return"";const ok=a.ok(S,v),o=a.o?a.o(S,v):null;
-  return `<button data-r="${i}" data-a="${k}" ${dis||!ok?"disabled":""}>${k==="poison"||k==="kpoison"?ic("doc",14):""}${a.n}<small>${[o!=null&&ok?word(oddsCl(o+lotB(S,ACTDOM[k])))+lotTag(ACTDOM[k]):"",fmt(a.c),!ok&&a.x?a.x:ok&&a.x?a.x:""].filter(Boolean).join(" · ")||"không tốn"}</small></button>`};
+function rvButtons(v,i){const dis=!can(2)||!v.alive||v.out||S.dead;const b=(k,extra)=>{const a=ACT[k];if(!a||(a.kid&&!a.ok(S,v)))return"";const ok=a.ok(S,v),o=a.o?actOdds(S,v,k):null;
+  return `<button data-r="${i}" data-a="${k}" ${dis||!ok?"disabled":""}>${k==="poison"||k==="kpoison"?ic("doc",14):""}${a.n}<small>${[o!=null&&ok?word(oddsCl(o))+lotTag(ACTDOM[k]):"",fmt(a.c),!ok&&a.x?a.x:ok&&a.x?a.x:""].filter(Boolean).join(" · ")||"không tốn"}</small></button>`};
  if(sameHouse(S,v))return `<p class="past">Cùng ${houseName(v)} với ngươi: không thể lấy lòng hay ra tay.</p>`;let h=`<p class="past" style="margin:2px 0">${together(S,v)?"Đang cùng chỗ với nàng":`Không cùng chỗ: phải sai người đi (khó hơn; việc hại: kẻ đi bị bắt, khai ra ngươi: ${chanceW(confessRisk(bestSent(S)))})`}</p><div class="rbtn">${["spy","ally","gift","rumor","bribe","block","frame","poison","accuse","vp","plant","musk","catswap","ksab","kpoison","pond","kframe","takeaway"].map(k=>b(k)).join("")}</div>`;
  if(S.rank>=7)h+=`<div class="rbtn"><button data-e="${i}" data-k="judge" ${dis||evG(S,v)<2?"disabled":""}>Xử tội<small>${evG(S,v)>=2?"theo chứng cứ":"cần 2 chứng cứ"}</small></button><button data-e="${i}" data-k="conf" ${dis?"disabled":""}>Tịch thu trang sức<small>nàng thù -20</small></button><button data-e="${i}" data-k="reward" ${dis||S.bac<-BAL.tw.reward.bac?"disabled":""}>Ban thưởng<small>Bạc ${BAL.tw.reward.bac} · thiện cảm +20</small></button>${v.confined?`<button data-e="${i}" data-k="pardon" ${dis?"disabled":""}>Ân xá<small>hết cấm túc</small></button>`:""}</div>`;
  return h}
@@ -4066,9 +4081,9 @@ function shortN(nm){const a=String(nm).split(" ");return a.length>2?a.slice(-2).
 /* the same four bands NPCs use toward her (BANDS, j24): she may pick any freely; her price is Đức, exposure and the target's Oán */
 const RVGRP=[["Giao thiệp",["ally","gift"]],["Hại nhỏ",["rumor","spy","trip"]],["Hại nặng",["frame","plant","block","bribe","accuse","vp","ksab","takeaway","steal","road"]],["Sát hại",["poison","kpoison","pond","pushp","musk","catswap","kframe"]]];
 function rvGroups(v,i){const G=[];
- const b=k=>{const a=ACT[k];if(!a||(a.kid&&!a.ok(S,v)))return"";const ok=a.ok(S,v),o=a.o?a.o(S,v):null;
+ const b=k=>{const a=ACT[k];if(!a||(a.kid&&!a.ok(S,v)))return"";const ok=a.ok(S,v),o=a.o?actOdds(S,v,k):null;
   const why=!v.alive?"đã mất":v.out?"ở lãnh cung":whyTime(2)||(S.confined&&CRIME.includes(k)?"đang cấm túc: cung bị canh giữ":"")||(!ok?(a.x||"chưa đủ điều kiện"):"");
-  const deadly=/ban chết/.test(a.x||"");const ow=o!=null?word(oddsCl(o+lotB(S,ACTDOM[k]))):"";const sm=actLineRaw(k,ow+(o!=null?lotTag(ACTDOM[k],o):""),fmt(a.c))+(deadly?" · bị lộ: ban chết":"")+(a.x&&!AOUT[k]?" · "+a.x:"")+(ducWarnTxt(a.c)?" · "+ducWarnTxt(a.c):"");
+  const deadly=/ban chết/.test(a.x||"");const ow=o!=null?word(oddsCl(o)):"";const sm=actLineRaw(k,ow+(o!=null?lotTag(ACTDOM[k],o-lotB(S,ACTDOM[k])):""),fmt(a.c))+(deadly?" · bị lộ: ban chết":"")+(a.x&&!AOUT[k]?" · "+a.x:"")+(ducWarnTxt(a.c)?" · "+ducWarnTxt(a.c):"");
   return pbtn(`data-r="${i}" data-a="${k}"`,(k==="poison"||k==="kpoison"?ic("doc",14):"")+a.n,sm,why)};
  if(!sameHouse(S,v))for(const [hd,ks] of RVGRP)G.push([hd,ks.map(b)]);
  if(S.rank>=7){const t=whyTime(2);G.push(["Quyền Hoàng hậu",[pbtn(`data-e="${i}" data-k="judge"`,"Xử tội","theo chứng cứ",t||(evG(S,v)<2?"cần 2 chứng cứ":"")),pbtn(`data-e="${i}" data-k="conf"`,evG(S,v)>=1||vpItems(v).length?"Tịch thu trang sức (có cớ)":"Tịch thu vô cớ",evG(S,v)>=1||vpItems(v).length?`thành: trang sức của nàng bị thu · kèm: ${typeof pvRel==="function"?pvRel(v,-BAL.tw.g.conf[0]):"thiện cảm -"+BAL.tw.g.conf[0]}`:`thành: trang sức của nàng bị thu · tốn: Danh ${BAL.tw.confNo.danh}, Thái hậu ${BAL.tw.confNo.th} (xử bất công) · kèm: ${typeof pvRel==="function"?pvRel(v,-BAL.tw.g.conf[0]):"thiện cảm -"+BAL.tw.g.conf[0]}`,t),pbtn(`data-e="${i}" data-k="reward"`,"Ban thưởng",`tốn: Bạc ${BAL.tw.reward.bac} · thành: ${typeof pvRel==="function"?pvRel(v,BAL.tw.g.reward[0]):"thiện cảm +"+BAL.tw.g.reward[0]}, Danh nàng +${BAL.tw.g.reward[2]}`,t||(S.bac<-BAL.tw.reward.bac?`cần ${-BAL.tw.reward.bac} bạc`:"")),v.confined?pbtn(`data-e="${i}" data-k="pardon"`,"Ân xá",`thành: nàng hết cấm túc, ${typeof pvRel==="function"?pvRel(v,30):"thiện cảm +30"}, Đức +2`,t):"",pbtn(`data-e="${i}" data-k="cutpay"`,"Khất bổng lộc",`thành: bổng tháng tới của nàng bớt 3 phần 10 · kèm: ${typeof pvRel==="function"?pvRel(v,-15):"thiện cảm -15"}`,t||(v.cutPay?"đã khất tháng này":""))]])}
@@ -4346,7 +4361,7 @@ function kitParse(str){str=String(str||"").trim();if(!str)return"";const segs=st
 function kemCol(h){return String(h).replace(/<span class="ef ([gn])">([\s\S]*?)<\/span>/g,(m,c,x)=>{const p=x.replace(/<[^>]+>/g,"");return /\+\s?\d/.test(p)&&kcls(p)==="g"?`<span class="ef g">${x}</span>`:`<span class="ef r">${x}</span>`})}
 /* the act card */
 function cardH(a,i){const poor=a.c&&a.c.bac&&S.bac+a.c.bac<0,o=oddsOf(a),capd=oddsCapped(a);const dis=!can(cardCost(a))||a.done||poor||a.lock||S.dead||(a.b!=null&&(S.buoi||0)!==a.b);const rolled=o<100&&!a.lock;
- const ow=rolled?(capd?capW():word(oddsCl(o+lotB(S,a.dom)))+lotTag(a.dom,o)):"";
+ const ow=rolled?(capd?capW():word(optOdds(a))+lotTag(a.dom,o)):"";
  return `<button class="card kcard" data-i="${i}" ${dis?"disabled":""}><h4>${a.n}</h4><span class="ktime">${pips(cardCost(a))} ${cardCost(a)} khắc${a.b!=null?` · Chỉ ${BUOI[a.b].toLowerCase()}`:""}</span><p>${a.t||""}</p><span class="krow">${oddsChip(ow)}</span>
  <span class="kgrid"><span class="kl">Tốn</span><span>${effList([fmt(a.c)||"không",ducWarnTxt(a.c)])}</span><span class="kl">Thành</span><span>${effList([fmt(a.w||{}),String(a.x||"").split(/ · kèm: /)[0]],"g")}</span>${/ · kèm: /.test(a.x||"")?`<span class="kl">Kèm</span><span>${kemCol(effList(String(a.x).split(/ · kèm: /)[1],"r"))}</span>`:""}${rolled?`<span class="kl">Bại</span><span>${effList(capd?kitSoftW(a.c):fmt(a.l||{})||"không mất gì","r")}</span>`:""}</span></button>`}
 /* route the older line builders through the kit */
@@ -24708,7 +24723,7 @@ function j78buyer(a,t){const L=others(t).filter(x=>x!==a&&(x===S||x.alive&&!x.ou
 function j78pay(t){return Math.min(60,Math.max(0,Math.floor(t===S?S.bac:(t.bac||0))))}
 function j78thFav(a){/* two-way: an NPC brings her own Thái hậu regard, as the player does */return a===S?S.th:(a&&a.th)||0}
 A("trinhth","Trình Thái hậu",{c:{duc:-2},ok:(a,t)=>evG(a,t)>=1&&!S.thDead&&rkOf(t)<7,o:(a,t)=>odA(a,40+evG(a,t)*10+j78thFav(a)/5),
- f:(a,t)=>{ap(a,{duc:-2});evA(a,t,BAL.eff.j78.evF);if(roll(odA(a,40+(evG(a,t)+1)*10+j78thFav(a)/5))){ap(t,{sung:BAL.eff.j78.sungF});affAdd(t,a,BAL.eff.j78.f);if(a===S)apply({th:BAL.eff.j78.trinhth});return `${j78Who(a)} trình chứng cứ lên Thái hậu: ${j78who(t)} bị quở trách (Sủng ${balSg(BAL.eff.j78.sungF)}). `}
+ f:(a,t)=>{ap(a,{duc:-2});const o=odA(a,40+evG(a,t)*10+j78thFav(a)/5);/* the card's odds, read before the evidence is spent */evA(a,t,BAL.eff.j78.evF);if(roll(o)){ap(t,{sung:BAL.eff.j78.sungF});affAdd(t,a,BAL.eff.j78.f);if(a===S)apply({th:BAL.eff.j78.trinhth});return `${j78Who(a)} trình chứng cứ lên Thái hậu: ${j78who(t)} bị quở trách (Sủng ${balSg(BAL.eff.j78.sungF)}). `}
   if(a===S)apply({th:BAL.eff.j78.trinhth_2});return `Thái hậu gạt chứng cứ ${j78who(a)} trình về ${j78who(t)}. `}});
 A("trinhhh","Trình Hoàng hậu",{c:{},ok:(a,t)=>{const q=queenP();return evG(a,t)>=2&&q&&q!==a&&q!==t},o:(a,t)=>{const q=queenP();return q?oddsCl(35+aff(q,a)/2+evG(a,t)*8):5},
  f:(a,t)=>{const q=queenP();const o=oddsCl(35+aff(q,a)/2+evG(a,t)*8);evA(a,t,BAL.eff.j78.evF_2);if(roll(o)){punish(t,"bị Hoàng hậu xét tội theo chứng cứ",1);affAdd(t,a,BAL.eff.j78.f_2);return `${j78Who(a)} trình chứng cứ lên Hoàng hậu: ${j78who(t)} bị xét tội. `}affAdd(q,a,BAL.eff.j78.f_3);return `Hoàng hậu bác chứng cứ ${j78who(a)} trình về ${j78who(t)}. `}});
@@ -24720,7 +24735,7 @@ A("banphe","Bán cho phe khác",{c:{},ok:(a,t)=>evG(a,t)>=1&&!!j78buyer(a,t),o:n
 A("tieuhuy","Trả chứng cứ lấy lòng",{c:{},ok:(a,t)=>evG(a,t)>=1,o:null,
  f:(a,t)=>{const n=evG(a,t);evA(a,t,BAL.evWipe);affAdd(t,a,Math.min(30,8*n));oanAdd(t,a,-Math.min(30,10*n));ap(a,{duc:2});return `${j78Who(a)} trả lại ${n} chứng cứ cho ${j78who(t)}; nàng mang ơn. `}});
 /* presenting or returning proof is done in person or by letter, never by a servant who can be caught (one rule for all) */
-const J78NOSEND=["trinhth","trinhhh","banphe","tieuhuy"];
+const J78NOSEND=["trinhth","trinhhh","banphe","tieuhuy"];for(const k of J78NOSEND)if(!ACT_NOSEND.includes(k))ACT_NOSEND.push(k);/* one no-send list: actCtx (j9) shows what runAct rolls */
 (function(){const r0=runAct;runAct=function(a,t,k){if(!J78NOSEND.includes(k))return r0.apply(this,arguments);const tg=together;together=(x,y)=>(x===a&&y===t)||(x===t&&y===a)?true:tg(x,y);let r;try{r=r0.apply(this,arguments)}finally{together=tg}return String(r||"").replace(/ \(tại [^)]*\)\s*$/," ")}})();
 Object.assign(ACTDOM,{trinhth:"Danh",trinhhh:"Danh",uyhiep:"Mưu kế",banphe:"Mưu kế",tieuhuy:"Giao thiệp"});
 /* the act card lines read the target being shown (true numbers per target) */
@@ -24749,17 +24764,17 @@ Object.assign(TELLS,{trinhhh:"sai người chép lại sổ sách, lời khai cu
 
 /* ---------- 5. API for the kit ---------- */
 function evidenceActs(p){if(!S||!p||p===S)return[];const n=evG(S,p);const i=rivals.indexOf(p);const t2=whyTime(2);const W=j78who(p);const m=has("nongnay")?3:has("nhantu")?1:2;const R0=[];
- const odds=(k,o)=>o==null?"":word(oddsCl(o+lotB(S,ACTDOM[k])));
+ const odds=k=>{let o=null;try{o=actOdds(S,p,k)}catch(e){}return o==null?"":word(oddsCl(o))};/* actOdds (j9): the odds evidenceDo's roll uses (one path) */
  const add=(k,o)=>{const a=ACT[k];if(!a)return;let ok=false;try{ok=a.ok(S,p)}catch(e){}R0.push(Object.assign({k,n:a.n,odds:"",why:"",cost:[],gain:[],fail:[],risk:[],go:()=>evidenceDo(p.id,k)},o(ok)))};
  const nf=(need)=>`cần ${need} chứng cứ, đang có ${n}`;
  const busy=()=>!p.alive?"nàng đã mất":p.out?"nàng ở lãnh cung":sameHouse(S,p)?`cùng ${houseName(p)} với ngươi`:t2||"";
  add("accuse",ok=>{const need=accNeed(p);const tr=rkOf(p);const fall=p.queen||tr>=5?`${W} bị phế vào lãnh cung`:`${W} bị đày lãnh cung hoặc giáng xuống ${RANKS[Math.max(0,tr-2)].n}`;
-  return{odds:odds("accuse",oAccuse(S,p)),why:busy()||(n<need?nf(need):rkOf(p)>=7&&S.rank<3?"tố Hoàng hậu cần phẩm Tần trở lên":""),cost:["2 khắc",`Chứng cứ -${n} (dùng hết)`],gain:[fall,"Danh +6"],fail:["Danh -8",`${W} quý ngươi ${balSg(BAL.eff.j8.f_6)}`,`${W} oán ngươi +${balOan(BAL.eff.j8.f_6,"hurt")}`].concat(tr>=7?["phạm thượng: bị giáng một bậc hoặc cấm túc"]:[]),risk:tr>=7?["thắng: 12 tháng không được tranh ghế Hoàng hậu"]:[]}});
- add("tocao",ok=>{const cr=realCrime(p);return{odds:odds("tocao",odT(S,50+n*10)),why:busy()||(n<1?nf(1):!cr?"nàng không có tội thật nào (vượt phẩm, đồ cấm, từng bày mưu)":""),cost:["2 khắc",`Chứng cứ ${balSg(BAL.eff.j30.evF)}`],gain:[`${W} bị giáng xuống ${RANKS[Math.max(0,rkOf(p)-1)].n} vì ${cr||"tội thật"}`,"Danh +3"],fail:["Danh -5"]}});
- add("expose",ok=>({odds:odds("expose",odT(S,45+n*8)),why:busy()||(!hasScandal(p)?"nàng không có chuyện tư tình bị lộ":n<2?nf(2):""),cost:["2 khắc",`Chứng cứ -${n} (dùng hết)`],gain:[`${W} bị ban chết hoặc vào lãnh cung`],fail:["ngươi bị tội vu khống: vào lãnh cung hoặc giáng 2 bậc"]}));
- add("trinhth",ok=>({odds:odds("trinhth",odA(S,40+n*10+S.th/5)),why:busy()||(n<1?nf(1):S.thDead?"Thái hậu đã băng hà":rkOf(p)>=7?"Thái hậu không xét tội Hoàng hậu":""),cost:["2 khắc","Đức -2",`Chứng cứ ${balSg(BAL.eff.j78.evF)}`],gain:[`${W} Sủng -10`,`Thái hậu quý ngươi ${balSg(BAL.eff.j78.trinhth)}`],fail:[`Thái hậu quý ngươi ${balSg(BAL.eff.j78.trinhth_2)}`],risk:[`${W} quý ngươi ${balSg(BAL.eff.j78.f)}`]}));
- add("trinhhh",ok=>{const q=queenP();return{odds:q&&q!==S&&q!==p?odds("trinhhh",oddsCl(35+aff(q,S)/2+n*8)):"",why:busy()||(!q?"chưa có Hoàng hậu":q===S?"ngươi là Hoàng hậu: dùng Xử tội":q===p?"không trình Hoàng hậu tội của chính nàng":n<2?nf(2):""),cost:["2 khắc",`Chứng cứ ${balSg(BAL.eff.j78.evF_2)}`],gain:[`${W} bị cấm túc ${m} tháng`],fail:[`Hoàng hậu thiện cảm ${balSg(BAL.eff.j78.f_3)}`],risk:[`${W} quý ngươi ${balSg(BAL.eff.j78.f_2)}`]}});
- add("uyhiep",ok=>{const g=j78pay(p);return{odds:odds("uyhiep",odA(S,45+n*8-witOf(p)/5)),why:busy()||(n<1?nf(1):g<10?"nàng không còn đủ 10 lượng":""),cost:["2 khắc",`Chứng cứ ${balSg(BAL.eff.j78.evF_3)} (trả lại khi nàng chịu chi)`],gain:[`Bạc +${g}`],fail:["Danh -3",`${W} oán ngươi ${balSg(BAL.eff.j78.f_5)}`],risk:[`${W} oán ngươi ${balSg(BAL.eff.j78.f_4)}`].concat(together(S,p)?[]:[/* previews: runAct (sent servant confesses) */`sai người đi: kẻ đi bị bắt, khai ra ngươi (${W} nắm ${balAb(BAL.eff.j9.evN)} chứng cứ): ${chanceW(confessRisk(bestSent(S)))}`])}});
+  return{odds:odds("accuse"),why:busy()||(n<need?nf(need):rkOf(p)>=7&&S.rank<3?"tố Hoàng hậu cần phẩm Tần trở lên":""),cost:["2 khắc",`Chứng cứ -${n} (dùng hết)`],gain:[fall,"Danh +6"],fail:["Danh -8",`${W} quý ngươi ${balSg(BAL.eff.j8.f_6)}`,`${W} oán ngươi +${balOan(BAL.eff.j8.f_6,"hurt")}`].concat(tr>=7?["phạm thượng: bị giáng một bậc hoặc cấm túc"]:[]),risk:tr>=7?["thắng: 12 tháng không được tranh ghế Hoàng hậu"]:[]}});
+ add("tocao",ok=>{const cr=realCrime(p);return{odds:odds("tocao"),why:busy()||(n<1?nf(1):!cr?"nàng không có tội thật nào (vượt phẩm, đồ cấm, từng bày mưu)":""),cost:["2 khắc",`Chứng cứ ${balSg(BAL.eff.j30.evF)}`],gain:[`${W} bị giáng xuống ${RANKS[Math.max(0,rkOf(p)-1)].n} vì ${cr||"tội thật"}`,"Danh +3"],fail:["Danh -5"]}});
+ add("expose",ok=>({odds:odds("expose"),why:busy()||(!hasScandal(p)?"nàng không có chuyện tư tình bị lộ":n<2?nf(2):""),cost:["2 khắc",`Chứng cứ -${n} (dùng hết)`],gain:[`${W} bị ban chết hoặc vào lãnh cung`],fail:["ngươi bị tội vu khống: vào lãnh cung hoặc giáng 2 bậc"]}));
+ add("trinhth",ok=>({odds:odds("trinhth"),why:busy()||(n<1?nf(1):S.thDead?"Thái hậu đã băng hà":rkOf(p)>=7?"Thái hậu không xét tội Hoàng hậu":""),cost:["2 khắc","Đức -2",`Chứng cứ ${balSg(BAL.eff.j78.evF)}`],gain:[`${W} Sủng -10`,`Thái hậu quý ngươi ${balSg(BAL.eff.j78.trinhth)}`],fail:[`Thái hậu quý ngươi ${balSg(BAL.eff.j78.trinhth_2)}`],risk:[`${W} quý ngươi ${balSg(BAL.eff.j78.f)}`]}));
+ add("trinhhh",ok=>{const q=queenP();return{odds:q&&q!==S&&q!==p?odds("trinhhh"):"",why:busy()||(!q?"chưa có Hoàng hậu":q===S?"ngươi là Hoàng hậu: dùng Xử tội":q===p?"không trình Hoàng hậu tội của chính nàng":n<2?nf(2):""),cost:["2 khắc",`Chứng cứ ${balSg(BAL.eff.j78.evF_2)}`],gain:[`${W} bị cấm túc ${m} tháng`],fail:[`Hoàng hậu thiện cảm ${balSg(BAL.eff.j78.f_3)}`],risk:[`${W} quý ngươi ${balSg(BAL.eff.j78.f_2)}`]}});
+ add("uyhiep",ok=>{const g=j78pay(p);return{odds:odds("uyhiep"),why:busy()||(n<1?nf(1):g<10?"nàng không còn đủ 10 lượng":""),cost:["2 khắc",`Chứng cứ ${balSg(BAL.eff.j78.evF_3)} (trả lại khi nàng chịu chi)`],gain:[`Bạc +${g}`],fail:["Danh -3",`${W} oán ngươi ${balSg(BAL.eff.j78.f_5)}`],risk:[`${W} oán ngươi ${balSg(BAL.eff.j78.f_4)}`].concat(together(S,p)?[]:[/* previews: runAct (sent servant confesses) */`sai người đi: kẻ đi bị bắt, khai ra ngươi (${W} nắm ${balAb(BAL.eff.j9.evN)} chứng cứ): ${chanceW(confessRisk(bestSent(S)))}`])}});
  add("banphe",ok=>{const b=j78buyer(S,p);return{why:busy()||(n<1?nf(1):!b?"không ai đủ ghét nàng để mua":""),cost:["2 khắc",`Chứng cứ -${n} (dùng hết)`],gain:[`Bạc +${15*n}`].concat(b?[`${j78who(b)} thiện cảm ${balSg(BAL.eff.j78.f_6)}`,`${j78who(b)} nắm ${n} chứng cứ về ${W}`]:[]),risk:[`${W} oán ngươi ${balSg(BAL.eff.j78.f_7)}`],buyer:b?j78Ref(b):null}});
  add("tieuhuy",ok=>({why:busy()||(n<1?nf(1):""),cost:["2 khắc",`Chứng cứ -${n} (dùng hết)`],gain:[`${W} quý ngươi +${Math.min(30,8*n)}`,`${W} oán ngươi -${Math.min(30,10*n)}`,"Đức +2"]}));
  if(S.rank>=7)R0.push({k:"judge",n:"Xử tội",odds:"",why:busy()||(n<2?nf(2):""),cost:["2 khắc",`Chứng cứ -${n} (dùng hết)`],gain:[n>=3?`${W} bị giáng một bậc hoặc cấm túc ${m} tháng`:`${W} bị cấm túc ${m} tháng`],fail:[],risk:[`${W} quý ngươi ${balSg(BAL.eff.j8.judge)}`,`${W} oán ngươi +${balOan(BAL.eff.j8.judge,"hurt")}`],go:()=>evidenceDo(p.id,"judge")});
@@ -27426,7 +27441,7 @@ function pr70(p){const M=M70[p.m];return M?M.R.find(r=>r.id===p.r)||M.R[0]:null}
 function alive70(x){return !!x&&(x===S?!S.dead:x.alive&&!x.out)}
 function tKid70(p){const t=pt70(p);try{return t?tKid(t)||kidsOf(t)[0]:null}catch(e){return null}}
 function okAct70(a,t,k){if(k==="joint")return !!(typeof facOf==="function"&&facOf(a));if(k==="pushp"||k==="trip")return true;const A=ACT[k];if(!A)return false;try{return !!A.ok(a,t)}catch(e){return false}}
-function oddsOf70(a,t,k,bonus){if(k==="joint"||!ACT[k]||!ACT[k].o)return null;let o=null;try{const e0=a.__err;a.__err=-(bonus||0);o=ACT[k].o(a,t);a.__err=e0}catch(e){return null}return o==null?null:oddsCl(Math.round(o))}
+function oddsOf70(a,t,k,bonus){if(k==="joint"||!ACT[k]||!ACT[k].o)return null;let o=null;try{const e0=a.__err;a.__err=-(bonus||0);try{o=actOdds(a,t,k)}finally{a.__err=e0}}catch(e){return null}return o==null?null:oddsCl(Math.round(o))}
 function tellOf70(p,i){const r=pr70(p);if(!r)return"có động tĩnh lạ";let s=r.tl[Math.min(i,r.tl.length-1)];const t=pt70(p);return s.replace(/nạn nhân/g,t?(t===S?"ngươi":t.name):"người khác")}
 function where70(p){const r=pr70(p);return r&&r.pl?placeName(r.pl):""}
 function cnt70(f){const z=j70();return z?z.pl.filter(p=>!p.end&&f(p)).length:0}
@@ -27538,7 +27553,7 @@ function optsSeen70(p){const a=pa70(p),M=pm70(p),r=pr70(p);const mat=S.mat||0,tc
  o.push(ch70(`Đề phòng: ${r.gd.toLowerCase()}`,{c:{bac:-10},wt:[G70("mưu của nàng khó thành hơn nhiều (giữ được mình)")],k:[R70("nàng vẫn còn ý hại")],ok:()=>{p.g+=25;p.pend=0;return `Ngươi ${r.gd.toLowerCase()}. Mưu của ${a.name} khó thành hơn.`}}));
  if(!p.dig)o.push(ch70("Cho người dò tiếp",{c:{bac:-15},p:40+mat*7+tc/6,wt:[G70(`chứng cứ về ${a.name} ${balSg(BAL.eff.j70.evOk)}`),G70("biết rõ cách và thời cơ nàng chờ")],lt:[R70("nàng biết bị dò, ra tay sớm hơn")],ok:()=>{/*evok: plot deed*/evA(S,a,BAL.eff.j70.evOk);p.dig=1;p.pend=0;return `Người của ngươi lần ra: ${a.name} ${r.n.toLowerCase()}, chờ ${OPP70[M.opp[0]].n}. Chứng cứ ${balSg(BAL.eff.j70.evOk)}.`},no:()=>{p.pg=Math.max(p.pg,p.need);p.pend=0;return `${a.name} biết mình bị dò, gấp rút ra tay.`}}));
  o.push(ch70(`Chặn từ gốc: ${r.st.toLowerCase()}`,{c:{bac:-30},p:42+mat*5+tc/5+(p.dig?12:0),/* previews: exec70 (p.foil) */wt:[G70("mưu bị cắt đứt"),G70(`chứng cứ về ${a.name} ${balSg(BAL.eff.j70.evExec70)}`)],lt:[R70(`${a.name} oán ngươi ${balSg(BAL.eff.j70.no)}`),R70("mưu vẫn tiếp tục")],ok:()=>{p.foil=1;p.pend=0;return `Ngươi ${r.st.toLowerCase()}. Đường dây của ${a.name} đã đứt.`},no:()=>{oanAdd(a,S,BAL.eff.j70.no);p.pend=0;return `Việc chặn không thành, ${a.name} sinh nghi.`}}));
- if(ACT.accuse&&(rkOf(a)<7||rkOf(S)>=3)){const c=ch70(`Tố giác ${a.name} ngay`,{need:[{t:kitWhyEv(a,accNeed(a)),ok:accOK(S,a),w:kitWhenEv()}],p:oAccuse(S,a),wt:[G70("nàng bị xử theo chứng cứ, mưu tan")],lt:[R70("tố hụt: mất chứng cứ, Danh giảm")]});c.go=()=>{p.pend=0;const x=runAct(S,a,"accuse");if(!alive70(a)||a.confined)abandon70(p,"exposed");log(x||"Ngươi tố giác.")};o.push(c)}
+ if(ACT.accuse&&(rkOf(a)<7||rkOf(S)>=3)){const c=ch70(`Tố giác ${a.name} ngay`,{need:[{t:kitWhyEv(a,accNeed(a)),ok:accOK(S,a),w:kitWhenEv()}],p:actOdds(S,a,"accuse"),wt:[G70("nàng bị xử theo chứng cứ, mưu tan")],lt:[R70("tố hụt: mất chứng cứ, Danh giảm")]});c.go=()=>{p.pend=0;const x=runAct(S,a,"accuse");if(!alive70(a)||a.confined)abandon70(p,"exposed");log(x||"Ngươi tố giác.")};o.push(c)}
  o.push(ch70("Lấy kế trả kế: để nàng ra tay rồi bắt quả tang",{c:{suc:-5},p:32+mat*6+tc/4+(p.dig?15:0),/* previews: exec70 (p.trap) */wt:[G70("nàng bị bắt quả tang, bị phạt"),G70(`chứng cứ về ${a.name} ${balSg(BAL.eff.j70.evExec70_2)}`)],lt:[R70("bẫy hở: nàng ra tay dễ hơn")],ok:()=>{p.trap=1;p.pend=0;return `Ngươi giăng sẵn người, chờ ${a.name} ra tay.`},no:()=>{p.g-=10;p.pend=0;return `Bẫy của ngươi bị lộ, lại khiến mình lơ là.`}}));
  const alt=others(a).filter(x=>x!==S&&alive70(x)&&oan(a,x)>=20&&!(typeof sameHouse==="function"&&sameHouse(a,x)));
  if(alt.length&&M.k!=="musk"&&M.k!=="catswap"&&!p.kid){const x=alt.sort((u,v)=>oan(a,v)-oan(a,u))[0];o.push(ch70(`Xui khiến nàng nhắm sang ${x.name}`,{c:{bac:-40},p:28+tc/4+mat*3,wt:[G70("mưu đổi hướng khỏi ngươi")],lt:[R70(`${a.name} oán ngươi ${balSg(BAL.eff.j70.no_2)}`)],k:[R70(`${x.name} có thể gặp nạn`)],ok:()=>{p.t=x.id;p.pend=0;p.kn=1;duc70(S,-3,"xui người hại kẻ khác");return `Lời xui của ngươi lọt tai: ${a.name} quay sang nhắm vào ${x.name}.`},no:()=>{oanAdd(a,S,BAL.eff.j70.no_2);p.pend=0;return `${a.name} biết ngươi giật dây.`}}))}
@@ -27550,7 +27565,7 @@ function optsNpc70(p){const a=pa70(p),t=pt70(p),M=pm70(p),mat=S.mat||0;return[
 function optsAft70(p){const a=pa70(p),M=pm70(p),mat=S.mat||0;const o=[];const ev=evG(S,a);
  o.push(ch70("Tra xét đến cùng",{c:{bac:-20},p:30+mat*8+(p.trail||0)*12+(p.dig?10:0),wt:[G70("lần ra kẻ chủ mưu thật"),G70(`chứng cứ ${balSg(BAL.eff.j70.evOk_3)}`)],lt:[R70("dấu vết đứt, không biết là ai")],ok:()=>{/*evok: plot deed*/evA(S,a,BAL.eff.j70.evOk_3);p.pend=0;const s=p.acc?servById(p.acc):null;noteAdd(a.id,`đứng sau vụ ${M.n.toLowerCase()} nhắm vào ngươi${s?` (đồng lõa: ${s.name})`:""}`);return `Tra ra rồi: chính ${a.name} đứng sau${s?`, ${s.name} trong cung ngươi là đồng lõa`:""}. Chứng cứ ${balSg(BAL.eff.j70.evOk_3)}.`},no:()=>{p.pend=0;return "Dấu vết đứt giữa chừng; ngươi chưa biết là ai."}}));
  const s=p.acc?servById(p.acc):null;if(s&&(S.staff||[]).includes(s)&&p.dig)o.push(ch70(`Giao ${s.name} cho Thận Hình ti`,{wt:[G70("bớt một kẻ phản trong cung")],k:[R70("kẻ hầu khác run sợ")],ok:()=>{S.staff.splice(S.staff.indexOf(s),1);(S.staff||[]).forEach(x=>x.loyal=cl(x.loyal-BAL.eff.j70.loyalOk,0,100));p.pend=0;return `${s.name} bị giải đi.`}}));
- if(rkOf(a)<7||rkOf(S)>=3){const c=ch70(`Tố giác ${a.name}`,{need:[{t:kitWhyEv(a,accNeed(a)),ok:accOK(S,a),w:kitWhenEv()}],p:oAccuse(S,a),wt:[G70("nàng bị xử theo chứng cứ")],lt:[R70("tố hụt: mất chứng cứ, Danh giảm")]});c.go=()=>{p.pend=0;log(runAct(S,a,"accuse")||"Ngươi tố giác.")};o.push(c)}
+ if(rkOf(a)<7||rkOf(S)>=3){const c=ch70(`Tố giác ${a.name}`,{need:[{t:kitWhyEv(a,accNeed(a)),ok:accOK(S,a),w:kitWhenEv()}],p:actOdds(S,a,"accuse"),wt:[G70("nàng bị xử theo chứng cứ")],lt:[R70("tố hụt: mất chứng cứ, Danh giảm")]});c.go=()=>{p.pend=0;log(runAct(S,a,"accuse")||"Ngươi tố giác.")};o.push(c)}
  o.push(ch70("Nuốt giận, đợi thời",{wt:[G70(`Đức ${balSg(BAL.eff.j70.ducOk)}`)],k:[R70(`${a.name} vẫn nhởn nhơ`)],ok:()=>{apply({duc:BAL.eff.j70.ducOk});p.pend=0;return "Ngươi nén giận, chờ thời cơ."}}));return o}
 /* her own plot: the start, the moment, the end */
 function optsWhen70(p){const t=pt70(p),M=pm70(p);const now=M.opp.find(k=>k!=="night"&&OPP70[k].ok(p,t))||"night";const bn=J70CFG.prep+OPP70[now].b+(p.bonus||0)-p.g;const o0=oddsOf70(S,t,M.k,bn);const o=[];
@@ -27593,7 +27608,7 @@ function tick70(){const z=j70();if(!z)return;z.sh.push(S.sung||0);if(z.sh.length
   try{if(j70On()&&k==="spy"&&v){const p=j70().pl.find(p=>!p.end&&p.a===v.id&&!p.kn);if(p&&roll(50)){p.kn=1;p.dig=1;p.kt.push(tellOf70(p,p.pg));p.pend=p.t==="me"?"seen":"npc";noteAdd(v.id,`dò la ra: nàng đang bày mưu ${pm70(p).n.toLowerCase()} nhắm vào ${nm70(pt70(p))}`);log(`Dò la ra: ${v.name} đang bày mưu ${pm70(p).n.toLowerCase()} nhắm vào ${nm70(pt70(p))}.`)}}}catch(e){console.error(e)}
   return r}})();
 function start70(v,k){const d=mkP("j70start",{v:v.id,k});return{t:"Bày mưu",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,kit:{kind:"choice",title:"Bày mưu",subject:v,facts:pfacts70(d.t)}}}
-PEND.j70start=pp=>{const v=RV(pp.v),A=ACT[pp.k];if(!v||!A||!S)return null;const k=pp.k;const o0=A.o?(()=>{try{return oddsCl(A.o(S,v))}catch(e){return null}})():null;const O=[];
+PEND.j70start=pp=>{const v=RV(pp.v),A=ACT[pp.k];if(!v||!A||!S)return null;const k=pp.k;const o0=A.o?(()=>{try{return oddsCl(actOdds(S,v,k))}catch(e){return null}})():null;const O=[];
  const now=ch70(`Ra tay ngay: ${A.n.toLowerCase()}`,{p:o0,wt:[G70(A.x&&!/^cần|^lộ/.test(A.x)?A.x:A.n)],lt:[R70("dễ bị lộ, nàng nắm chứng cứ")],k:A.c&&Object.keys(A.c).length?[R70(fmt(A.c))]:[]});now.go=()=>{window.__j70inst=1;try{doAct(rivals.indexOf(v),k)}finally{window.__j70inst=0}};if(o0==null)now.x=`thành: ${G70(A.x||A.n)} · kèm: ${R70("dễ bị lộ")}${A.c&&Object.keys(A.c).length?", "+R70(fmt(A.c)):""}`;O.push(now);
  const busyOwn=!canNew70("me",v.id);
  for(const m of OWN70[k]){const M=M70[m];for(const r of M.R){if(O.length>=5)break;if(r.acc==="tsv"&&!(v.staff||[]).length)continue;const o1=oddsOf70(S,v,M.k,J70CFG.prep+6+(r.acc?8:0));
@@ -27735,8 +27750,8 @@ PEND.j70def=pp=>{if(!S)return null;const L=ords70();const cur=L.length?`<p>Lện
 /* ---------- every warning carries concrete answers ---------- */
 function thrOpts70(v){const o=[];const mat=S.mat||0;
  o.push(Object.assign(ch70("Ra lệnh phòng bị",{wt:[G70("giữ được mình: chọn kẻ hầu canh cung, thử độc, theo dõi nàng")],k:[R70("kẻ hầu bận việc, có lệnh tốn bạc mỗi tháng")]}),{go:()=>{Q.unshift(def70m({s:1}))}}));
- o.push(Object.assign(ch70(`Dò la ${v.name}`,{c:{},p:oSpy(S),/* previews: spyFind (runAct spy) */wt:[G70(`chứng cứ về ${v.name} ${balSg(BAL.eff.jtruth.evN)}`)],lt:[R70(`${v.name} mất thiện cảm`)],k:[R70("Bạc -"+actBac("spy",S,v))]}),{go:()=>{if(S.bac<actBac("spy",S,v)){log("Không đủ bạc để dò la.");return}log(runAct(S,v,"spy")||"Ngươi cho người dò la.")}}));
- if(accOK(S,v)){const c=ch70(`Tố giác ${title70(v)}`,{p:oAccuse(S,v),wt:[G70("nàng bị xử theo chứng cứ")],lt:[R70("tố hụt: mất chứng cứ, Danh giảm")]});c.go=()=>log(runAct(S,v,"accuse")||"Ngươi tố giác.");o.push(c)}
+ o.push(Object.assign(ch70(`Dò la ${v.name}`,{c:{},p:actOdds(S,v,"spy"),/* previews: spyFind (runAct spy) */wt:[G70(`chứng cứ về ${v.name} ${balSg(BAL.eff.jtruth.evN)}`)],lt:[R70(`${v.name} mất thiện cảm`)],k:[R70("Bạc -"+actBac("spy",S,v))]}),{go:()=>{if(S.bac<actBac("spy",S,v)){log("Không đủ bạc để dò la.");return}log(runAct(S,v,"spy")||"Ngươi cho người dò la.")}}));
+ if(accOK(S,v)){const c=ch70(`Tố giác ${title70(v)}`,{p:actOdds(S,v,"accuse"),wt:[G70("nàng bị xử theo chứng cứ")],lt:[R70("tố hụt: mất chứng cứ, Danh giảm")]});c.go=()=>log(runAct(S,v,"accuse")||"Ngươi tố giác.");o.push(c)}
  if(!S.thDead)o.push(ch70("Xin Thái hậu che chở",{c:{bac:-20},p:oddsCl(30+(S.th||0)/2),wt:[G70("3 tuần tới kẻ hại ngươi khó ra tay gấp đôi")],lt:[R70(`Thái hậu với ngươi ${balSg(BAL.eff.j70.thShield)}`)],ok:()=>{S.guardWarn=Math.max(S.guardWarn||0,3);return "Thái hậu sai thị vệ để mắt đến cung ngươi."},no:()=>{apply({th:BAL.eff.j70.thShield});return "Thái hậu không muốn dính vào chuyện hậu cung."}}));
  const al=liveRivals(true).filter(x=>x!==v&&aff(x,S)>=40&&!x.confined).sort((a,b)=>aff(b,S)-aff(a,S))[0];
  if(al)o.push(ch70(`Nhờ ${title70(al)} để ý giúp`,{wt:[G70(`6 tuần: người của ${al.name} báo khi thấy mưu nhắm vào ngươi`)],k:[R70(`${al.name} thiện cảm ${balSg(BAL.eff.j70.ok_3)} (ngươi mắc nợ ân)`)],ok:()=>{j70().allyW={id:al.id,until:wk()+6};relAdd(S,al,BAL.eff.j70.ok_3);return `${al.name} hứa để mắt giúp ngươi.`}}));
@@ -27814,7 +27829,7 @@ try{ORD70.thudoc.acts.push("huydung");ORD70.canh.acts.push("huydung");ORD70.thud
 /* the route chooses the severity spread */
 (function(){const x0=exec70;exec70=function(p,opp){const pw=window.__j70hd;if(p&&p.m==="huydung")window.__j70hd=p.r;try{return x0.apply(this,arguments)}finally{window.__j70hd=pw}}})();
 /* her button on a rival card (same markup as the other scheme buttons) */
-(function(){const r0=rvButtons;rvButtons=function(v,i){let h=r0.apply(this,arguments);try{if(!S||!v||h.indexOf('data-a="huydung"')>=0||h.indexOf('data-a="poison"')<0)return h;const a=ACT.huydung,dis=!can(2)||!v.alive||v.out||S.dead,ok=a.ok(S,v),o=a.o(S,v);
+(function(){const r0=rvButtons;rvButtons=function(v,i){let h=r0.apply(this,arguments);try{if(!S||!v||h.indexOf('data-a="huydung"')>=0||h.indexOf('data-a="poison"')<0)return h;const a=ACT.huydung,dis=!can(2)||!v.alive||v.out||S.dead,ok=a.ok(S,v),o=actOdds(S,v,"huydung");
   const btn=`<button data-r="${i}" data-a="huydung" ${dis||!ok?"disabled":""}>${a.n}<small>${[ok?word(oddsCl(o)):"",fmt(a.c),v.scar?"nàng đang có sẹo":S.bac<actBac("huydung",S,v)?"cần "+actBac("huydung",S,v)+" bạc":a.x].filter(Boolean).join(" · ")}</small></button>`;
   h=h.replace(/(<button[^>]*data-a="poison")/,btn+"$1")}catch(e){}return h}})();
 /* recovery, the same weekly rule for everyone */
@@ -30391,7 +30406,7 @@ BAL.nwq={shift:0,free:2,hint:.5,auto:.25,miss:.8,xaMiss:.9,xaFloor:0,peek:8,idle
 /* the Emperor tires of accusations: every accusation an accuser brought in the last 36 tuần (a year) lowers the odds of her/his next one by accTire points
    (same rule for every accuser; the odds word shown is the real one) */
 Object.assign(BAL,{accTire:10});
-(function(){try{const A=ACT.accuse,f0=A.f;A.f=function(a,t){try{a.accL=(a.accL||[]).filter(w=>wk()-w<36);a.accL.push(wk())}catch(e){}return f0.apply(this,arguments)}}catch(e){}
+(function(){try{const A=ACT.accuse,f0=A.f;A.f=function(a,t){const r=f0.apply(this,arguments);/* recorded AFTER the roll: this charge tires the NEXT one, not itself (shown == rolled) */try{a.accL=(a.accL||[]).filter(w=>wk()-w<36);a.accL.push(wk())}catch(e){}return r}}catch(e){}
  const o0=oAccuse;oAccuse=function(a,t){const o=o0.apply(this,arguments);if(!BAL.accTire||!a)return o;const n=(a.accL||[]).filter(w=>wk()-w<36).length;return n?oddsCl(o-BAL.accTire*n):o}})();
 /* one charge at a time (balance 11/14, measured: without it an angry palace brought ~40-60 charges a life against her, ~30 stuck, each a fall of two ranks
    or the cold palace): a person just accused, whether the charge stuck or not, cannot be accused again by anyone for BAL.accCdT tuần.
@@ -31329,6 +31344,9 @@ Object.assign(BAL,{faceReveal:{ms:Math.round(1000*BAL.pace),lite:350,win:8000}})
 /* BOOK FIGURE (owner 18/11 ~07:10Z + ~07:20Z, KIT §56.3): ONE body size for everybody = SKULL TOP to FEET = figure column width / bookFigW (her p.5 shot: Fold col 220 -> 641, iPad col 183 -> 534). Layout = live; nothing cut, nobody shrunk, the text is drawn on top.
    cRef = the tallest Hoàng hậu crown above the skull top / body (catalog scan 18/11: thaihau-h3-a36 .072); gap = px the crown keeps under the running-head rule; footGap = px the feet keep above the page's bottom line when the feet line is moved down for her crown. */
 BAL.bookFigW=.343;Object.assign(BAL,{bookFrame:{cRef:.072,gap:8,footGap:10}});
+/* DOING AN ACT ON THE SPOT (review/shown-odds-one-path): "Cài đồ vào rương nàng" done in her own palace is easier than sending
+   someone by actHere.plant (was a typed -15 pen in j8 plantpick + a typed +15 on the j2 chest card); both read it through actCtx (j9). */
+Object.assign(BAL,{actHere:{plant:15}});
 /* ================= jbalge: ONE CORE (OD:L1267) rulebook of the GRAND ENDINGS (Đại kết cục, jge.js; design dev/design/GRAND_ENDINGS.md §2.14, r3) =================
    Every number the grand-ending engine uses or a text prints lives here; jge.js / jgedata.js hold words, option names and logic only.
    Loads after jbal2.js (BAL exists), before jgedata.js / jge.js. Set by measurement: dev/measure/ge-measure.js (bands BAL.ge.target).
@@ -44687,7 +44705,7 @@ function spyRaw(a,t,ag){return BAL.spyBase+spyFactors(a,t,ag).reduce((s,x)=>s+x[
 function spyO(a,t,ag){return oddsCl(Math.round(spyRaw(a,t,ag)))}
 function spyRoll(a,t,ag){return oddsCl(Math.round(spyRaw(a,t,ag)+lotB(a,"Mưu kế")))}
 /* consort act "Dò la" (everyone, two-way): the formula above; the servant penalty is inside it (no second sentPen) */
-(function(){const A0=ACT.spy;if(!A0)return;A0.o=(a,t)=>t?spyO(a,t):oSpy(a);A0.why=(a,t)=>spyFactors(a,t);
+(function(){const A0=ACT.spy;if(!A0)return;A0.o=(a,t)=>t?spyRoll(a,t):oSpy(a);/* the roll's own odds (lá số included; review/shown-odds-one-path) */A0.why=(a,t)=>spyFactors(a,t);
  A0.f=(a,t)=>{ap(a,{bac:-15});const o=spyRoll(a,t);if(roll(o)){ap(a,{tamco:2});return spyFind(a,t)}relAdd(a,t,BAL.eff.jwhy.f);return `${NMc(a)} dò la ${NM(t)}: <span class="r">bị phát hiện</span>. `};})();
 /* NPC small act "người của X dò hỏi" (j28): same formula instead of a flat 40 */
 (function(){try{if(typeof SOC==="object"&&SOC.spy){SOC.spy.run=(v,t)=>{evA(v,t,roll(spyRoll(v,t))?BAL.eff.jwhy.evRun[0]:BAL.eff.jwhy.evRun[1]);return `Người của ${v.name} dò hỏi giờ giấc của ${NM(t)}`}}}catch(e){}})();
@@ -44745,11 +44763,15 @@ function whyDiff(fn,subj){const L=[];let o0;try{o0=fn()}catch(e){return L}if(o0=
  if(S&&S.emp&&typeof S.emp.mood==="number"){const v=S.emp.mood;let o1;try{S.emp.mood=1;o1=fn()}catch(e){o1=o0}finally{S.emp.mood=v}if(o1!=null&&o1!==o0)L.push([`Hoàng thượng ${String(MOODS[v][0]).toLowerCase()}`,o0-o1])}
  return L}
 function whyOfBtn(b){if(!b||!S)return null;const d=b.dataset||{};
- try{if(d.r!=null&&d.a){const k=d.a,v=rivals[+d.r],A=ACT[k];if(!A||!v||!A.o)return null;const F=A.why?A.why(S,v):whyDiff(()=>A.o(S,v),[[S,S],[v,v]]);return{F,dom:ACTDOM[k],base:k==="spy"?BAL.spyBase:null,o:A.o(S,v)}}
+ try{if(d.r!=null&&d.a){const k=d.a,v=rivals[+d.r],A=ACT[k];if(!A||!v||!A.o)return null;const F=(A.why?A.why(S,v):whyDiff(()=>A.o(S,v),[[S,S],[v,v]])).concat(whyKnow(v,k));return{F,dom:ACTDOM[k],base:k==="spy"?BAL.spyBase:null,o:actOdds(S,v,k)}}
   if(d.o!=null&&b.classList.contains("opt")&&typeof popIdx!=="undefined"&&popIdx!=null){const p=curPeople()[popIdx];const opts=talkOpts(p);const a=opts[+d.o];if(!a||a.o==null||a.o>=100)return null;
    const F=a.why?a.why():whyDiff(()=>{const x=talkOpts(p).find(y=>y.n===a.n);return x?x.o:null},[[S,S],[p.ref||null,p.ref||null]]);return{F,dom:a.dom,base:a.why?BAL.spyBase:null,o:a.o}}
   if(d.m!=null&&Q[0]&&Q[0].opts){const a=Q[0].opts[+d.m];if(a&&a.why)return{F:a.why(),dom:a.dom,base:a.base!==undefined?a.base:BAL.spyBase,o:a.o}}
   if(d.i!=null&&typeof deck!=="undefined"){const a=deck[+d.i];if(!a||a.o==null||a.o>=100)return null;return{F:a.why?a.why():[],dom:a.dom,o:a.o,deck:1}}}catch(e){console.error(e)}return null}
+/* spy knowledge of the target (spyKnowB, jtruth; odA adds it inside actCtx): a factor line on "Vì sao" (review r1 of shown-odds-one-path);
+   the step = actOdds with the knowledge minus without it, so the line never claims more than the roll gets */
+function whyKnow(v,k){try{const K=S.know||{},kk=key(v);if(K[kk]==null||!spyKnowB(S,v))return[];const o0=actOdds(S,v,k);const w=K[kk];delete K[kk];let o1;try{o1=actOdds(S,v,k)}finally{K[kk]=w}
+ return o0!=null&&o1!=null&&o0!==o1?[["Đã dò la, biết giờ giấc của nàng",o0-o1]]:[]}catch(e){return[]}}
 function kitWhyHtml(b,lv){const W=whyOfBtn(b);if(!W)return"";const q=lotB(S,W.dom);const word=KIT_ODDS[lv]||"";
  const F=W.F.filter(x=>Math.abs(x[1])>=1||/Tự tay/.test(x[0])).sort((x,y)=>Math.abs(y[1])-Math.abs(x[1]));
  const row=(t,p)=>`<div class="kpopx"><span class="ef ${p>0?"g":p<0?"r":"n"}">${t}${p?": "+whyStep(p):""}</span></div>`;
@@ -44763,7 +44785,7 @@ document.addEventListener("click",e=>{const od=e.target.closest(".kodm");if(!od)
 /* act-audit fix: the odds word on a consort-act card left out the penalty of sending a servant (runAct: ACTX.pen = sentPen − rank×3),
    so the card read easier than the roll. Her cards now show the odds the roll will use (spy has it inside its own formula). */
 const WHY_NOSEND=["accuse","vp","gift","steal","road","takeaway","spy"];
-function sentPenNow(a,t,k){if(WHY_NOSEND.includes(k)||together(a,t))return 0;const sv=bestSent(a);const p0=ACTK;ACTK=k;try{return sentPen(sv)-(sv?srk(sv)*3:0)}finally{ACTK=p0}}
+function sentPenNow(a,t,k){return WHY_NOSEND.includes(k)?0:actCtx(a,t,k).pen}/* the pen runAct uses (actCtx, j9: one no-send list) */
 (function(){for(const k in ACT){const A=ACT[k];if(!A||typeof A.o!=="function"||k==="spy")continue;const o0=A.o;
  A.o=function(a,t){const o=o0.apply(this,arguments);if(o==null||a!==S||!t||ACTX.a||o>=100)return o;const p=sentPenNow(a,t,k);return p?oddsCl(o-p):o};
  if(!A.why)A.why=function(a,t){const F=whyDiff(()=>o0(a,t),[[a,a],[t,t]]);const p=sentPenNow(a,t,k);if(p){const sv=bestSent(a);F.push([sv?`Phải sai ${sv.name} đi, không tận mắt`:"Không có kẻ hầu đáng tin để sai đi",-p])}return F}}})();
@@ -56182,7 +56204,7 @@ SG_THOI.forEach(k=>{if(!ACT[k]||!ACT[k].o||SG.K[k])return;
    j:"over"  "Nghe lén câu chuyện" at a place (j78 overhear) → Nghe ngóng          {pi}
    j:"serv"  "Mua chuộc" a servant of another palace (bribeServ j29 / j10 / j15) → Mặc cả   {sid}
    job = {gk (SG.K key), t (game title), v (target, for the game), name, p0() (odds now), line(word) (card text), ask, cost (silver text), pay()→bool (take the time/silver), run(m) (act under the step), art} */
-function sgOdds(v,k){const a=ACT[k];const o=a&&a.o?a.o(S,v):50;return oddsCl(Math.round(o+(typeof lotB==="function"?lotB(S,ACTDOM[k]):0)))}
+function sgOdds(v,k){const a=ACT[k];const o=a&&a.o?actOdds(S,v,k):null;return oddsCl(Math.round(o==null?50:o))}/* actOdds (j9): the roll's own context, lá số included */
 function sgLine(v,k,w,c){const prev=typeof J78!=="undefined"?J78.cardV:null;try{if(typeof J78!=="undefined")J78.cardV=v;return actLineRaw(k,w,c)}finally{if(typeof J78!=="undefined")J78.cardV=prev}}
 function sgCan(i,k){const v=rivals[i],a=ACT[k];if(!v||!a||!SG.K[k]||typeof S==="undefined"||!S||S.dead||Q.length||!v.alive||v.out||!can(BAL.actK)||!a.ok(S,v))return false;
  if(typeof k61Named==="function"&&!k61Named(v))return false;if(S.confined&&typeof CRIME!=="undefined"&&CRIME.includes(k))return false;if(k==="bribe"&&!v.maid)return false;return true}
@@ -63232,7 +63254,7 @@ window.mbS=mbS;window.mbBand=mbBand;window.mbOdPts=mbOdPts;window.mbAdd=mbAdd;wi
 (function(){if(typeof runOpt!=="function")return;const r0=runOpt;runOpt=function(a){const rolled=!!(a&&a.o!=null&&a.o<100&&!a.exam);const r=r0.apply(this,arguments);
  try{if(rolled&&(r===true||r===false)&&mbOn()){MOOD_N.acts++;const nm=String(a.n||"").replace(/<[^>]+>/g,"").slice(0,30);r?mbAdd(B().ok,nm,"ok"):mbAdd(B().fail,nm,"fail")}}catch(e){}return r}})();
 /* consort acts (Hậu cung): read the act's own result words */
-(function(){if(typeof runAct!=="function")return;const r0=runAct;runAct=function(a,t,k){const r=r0.apply(this,arguments);try{if(a===S&&mbOn()&&r){const A=ACT[k];let o=100;try{o=A&&A.o?A.o(S,t):100}catch(e){}
+(function(){if(typeof runAct!=="function")return;const r0=runAct;runAct=function(a,t,k){const r=r0.apply(this,arguments);try{if(a===S&&mbOn()&&r){const A=ACT[k];let o=100;try{o=A&&A.o?actOdds(S,t,k):100}catch(e){}
   if(o<100){MOOD_N.acts++;const bad=(typeof FAILRE!=="undefined"?FAILRE:/hỏng|không thành|bị phát hiện|bị lộ/).test(String(r).replace(/<[^>]+>/g,""));const nm=String(A.n||k).replace(/<[^>]+>/g,"").slice(0,30);bad?mbAdd(B().fail,nm,"fail"):mbAdd(B().ok,nm,"ok")}}}catch(e){}return r}})();
 /* rest cards lift a low mood (up to restCap): the card says so in Được */
 function mbRestGain(a){const M=mbS();if(!M||!a)return 0;const g=a.rest==="ds"?B().restDs:B().rest;return Math.max(0,Math.min(g,B().restCap-M.v))}
@@ -69507,6 +69529,11 @@ Object.assign(BAL,{looks:{
  fit:{eye:[1.35,.042,2.4,.048],mouth:[1.25,.01,1.6,.01]},mouth:[.47,.655,.25,.10],nose:[.51,.36,.11,.2],pad:1.15,cheek:[.08,.30,.28,.20,5],
  /* VẾT CÀO lv1 + lv2 + lv3 (owner 18/11 ~04:50Z + ~05:00Z "chốt bậc 3 cho mức nhẹ luôn"): ladder STEP 3 = 1.6 x the R6 box [.28 x .26] of the veil row, left 0, top .20, old diagonal, flipped, below the eye; it crosses the eye / nose / mouth zones, so the strokes are CUT at the zones by the stroke-level mask (lkKeepScar). lv1 stays the scar-fit row. */
  cheek3:[0,.20,.448,.416,0],
+ /* INK PLACEMENT (r11, review look-fx-r10 FAIL: the painted ink head sits at the far left edge of the face square = the temple, so a correct face clip either left it on the hair lock or cut it to nothing):
+    the ink layer (fx-muc-N, + -m) is MOVED per picture so the stroke's head lands on the upper cheek just below + outside the viewer-side eye of THAT picture (its keep-fit row, lkKeepFor):
+    target = eye centre - at[0] x eye half-width (outward), + at[1] x eye half-height (down), in face-square units; the layer = the face square scaled by k about the art's head point an[lv-1] (art units, per level) and turned rot deg about it (the painted stroke runs eye-level-to-mouth: turned flatter it lies across the cheekbone instead of reaching the lips; LOOK r11);
+    box = the main stroke only (art units [x0,y0,x1,y1], clip-path inset; drops the lv3 splash at the chin). A picture whose cheek is narrow (3/4 face, hair lock) carries its own [at0, at1] x1000 as items 13-14 of its keep-fit row (written by the scan --fit, outliers only). Constants from the whole-group scan dev/test/look-fx-inkscan.py (17800 pictures). No keep-fit row = the old square. */
+ ink:{at:[.75,1.6],k:[.7,.8,.9],rot:-30,an:[[.086,.507],[.042,.443],[0,.407]],box:[0,.33,.37,.64]},
  /* FACE CLIP (owner 18/11 ~04:58Z: no mark past the face skin onto hair / ear / neck / background): ONE polygon in face-square units (0..1 of the square of lkSquareRect), measured on 180 por pictures (skin segmentation, dev/test/look-fx-faceclip.py); every mark layer (face-square marks, cào, smudge) is clipped to it by lkFaceClipAll */
  face:[[.23,.19],[.5,.14],[.77,.19],[.88,.34],[.90,.52],[.84,.70],[.72,.87],[.5,.96],[.28,.87],[.16,.70],[.10,.52],[.12,.34]]},
  pox:{thuydau:{sea:["Xuân"],cont:1,die:0},sac:{thuydau:[0,3,5,8],daumua:[0,6,10,14]},spread:35,spreadWk:3,scar:[0,1,1,2]},
@@ -69788,33 +69815,48 @@ function lkFacePts(file,sty){try{const sq=lkSquareRect(file);if(!sq)return"";con
  const nm=String(file).split("/").pop(),ff=KIT_FACEFIT.fit&&KIT_FACEFIT.fit[nm],fx=ff?ff[0]:0,fy=ff?ff[1]:0,fsx=ff?ff[2]:1,fsy=ff?ff[3]:1,pts=BAL.looks.keep.face.map(([s0,t0])=>{const s=(s0-.5)*fsx+.5+fx,t=(t0-.55)*fsy+.55+fy,P=toPic(q,s,t),Q=toLoc(e,P[0],P[1]);return[Q[0]*100,Q[1]*100]});
  return{pts:pts,sx:BAL.looks.keep.feather/((W/100)*A)*100,sy:BAL.looks.keep.feather/(H/100)*100}}catch(err){return null}}
 /* FEATHERED face clip (R9d: the hard clip-path cut the soft glow of the marks with a straight edge = a visible wedge / box): the face polygon as a BLURRED SVG mask (stdDeviation = BAL.looks.keep.feather of the picture height, equal in px on both layer axes) put on TOP of the mark's own keep-out mask list and intersected with it. The svg is padded (viewBox -50..150) so shapes past the layer box still feed the blur. Returns the whole new style string. */
-function lkClipFor(file,sty){try{const g=lkFacePts(file,sty);if(!g)return sty;const P=g.pts.map(q=>q[0].toFixed(1)+","+q[1].toFixed(1)).join(" ");
- const svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="-50 -50 200 200" preserveAspectRatio="none"><defs><filter id="b" filterUnits="userSpaceOnUse" x="-50" y="-50" width="200" height="200"><feGaussianBlur stdDeviation="'+g.sx.toFixed(2)+' '+g.sy.toFixed(2)+'"/></filter></defs><polygon points="'+P+'" fill="#000" filter="url(#b)"/></svg>';
+function lkClipFor(file,sty){try{const g=lkFacePts(file,sty);if(!g)return sty;const P=g.pts.map(q=>q[0].toFixed(1)+","+q[1].toFixed(1)).join(" "),Pd=Math.max(50,Math.ceil(3*Math.max(g.sx,g.sy))),Vb=100+2*Pd;/* r11: pad >= 3 blur sigmas, so a SMALL layer (the moved ink box) is not faded by the blur running into the svg edge */
+ const svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="'+(-Pd)+' '+(-Pd)+' '+Vb+' '+Vb+'" preserveAspectRatio="none"><defs><filter id="b" filterUnits="userSpaceOnUse" x="'+(-Pd)+'" y="'+(-Pd)+'" width="'+Vb+'" height="'+Vb+'"><feGaussianBlur stdDeviation="'+g.sx.toFixed(2)+' '+g.sy.toFixed(2)+'"/></filter></defs><polygon points="'+P+'" fill="#000" filter="url(#b)"/></svg>';
  const u="url('data:image/svg+xml,"+encodeURIComponent(svg).replace(/'/g,"%27")+"')",G=(re)=>{const m=re.exec(sty);return m?m[1]:null};
  const mi=G(/-webkit-mask-image:\s*([^;]*?)\s*!important/),ms=G(/-webkit-mask-size:\s*([^;]*?)\s*!important/),mp=G(/-webkit-mask-position:\s*([^;]*?)\s*!important/),mc=G(/(?:^|;)\s*mask-composite:\s*([^;]*?)\s*!important/),wc=G(/-webkit-mask-composite:\s*([^;]*?)\s*!important/);
  const o=sty.replace(/(?:^|;)\s*(?:-webkit-)?mask-(?:image|size|position|repeat|composite)\s*:[^;]*/g,"");
  const n=mi?mi.split(/,(?![^(]*\))/).length:0,rep=Array(n+1).fill("no-repeat").join(",");
- const I=mi?u+","+mi:u,S=mi?"200% 200%,"+ms:"200% 200%",Pp=mi?"50% 50%,"+mp:"50% 50%";
+ const I=mi?u+","+mi:u,S=mi?Vb+"% "+Vb+"%,"+ms:Vb+"% "+Vb+"%",Pp=mi?"50% 50%,"+mp:"50% 50%";
  return o+";-webkit-mask-image:"+I+"!important;mask-image:"+I+"!important;-webkit-mask-size:"+S+"!important;mask-size:"+S+"!important;-webkit-mask-position:"+Pp+"!important;mask-position:"+Pp+"!important;-webkit-mask-repeat:"+rep+"!important;mask-repeat:"+rep+"!important"+(mi?";-webkit-mask-composite:source-in,"+wc+"!important;mask-composite:intersect,"+mc+"!important":"")}catch(err){return sty}}
 /* kscar layers: lv2 / lv3 use the ladder STEP 3 box (BAL.looks.keep.cheek3 of the veil row), then ALL levels get the stroke-level keep-out: the eye / nose / mouth ellipses (BAL.looks.keep, same pad + fade as lkKeepCss) mapped from the veil row into THIS layer's own box (position, rotation, flip), cut out with the same xor mask */
-function lkScarFix(file,sty,sev){try{const n=String(file).split("/").pop(),v=KIT_VEIL.fit&&KIT_VEIL.fit[n];if(!v)return sty;let o=sty;
- {const c=BAL.looks.keep.cheek3,r=(x,y)=>x+";"+y;const L=v[0]+c[0]*v[2],T=v[1]+c[1]*v[3],W=c[2]*v[2],H=c[3]*v[3],R=v[4]+c[4];
-  o=o.replace(/--fleft:[^;]*/,"--fleft:"+L.toFixed(2)+"%").replace(/--ftop:[^;]*/,"--ftop:"+T.toFixed(2)+"%").replace(/--fwidth:[^;]*/,"--fwidth:"+W.toFixed(2)+"%").replace(/--fheight:[^;]*/,"--fheight:"+H.toFixed(2)+"%").replace(/--ftf:\s*rotate\(-?[\d.]+deg\)/,"--ftf:rotate("+R.toFixed(1)+"deg)")}
- const g=k=>{const m=new RegExp("--f"+k+":\\s*(-?[\\d.]+)%").exec(o);return m?+m[1]:null},L=g("left"),T=g("top"),W=g("width"),H=g("height");if(L==null||T==null||W==null||H==null)return o;
+/* the keep-out mask (eye / nose / mouth ellipses of lkKeepFor, pad + fade as lkKeepCss) for a layer of ANY box: the ellipses are mapped from the veil row into THIS layer's own box (position, rotation, flip, origin from its --f vars); used by the cào strokes (lkScarFix) and the moved ink layer (lkInkBox) */
+function lkKeepBox(file,o){try{const n=String(file).split("/").pop(),v=KIT_VEIL.fit&&KIT_VEIL.fit[n];if(!v)return"";
+ const g=k=>{const m=new RegExp("--f"+k+":\\s*(-?[\\d.]+)%").exec(o);return m?+m[1]:null},L=g("left"),T=g("top"),W=g("width"),H=g("height");if(L==null||T==null||W==null||H==null)return"";
  const tf=/--ftf:\s*([^;]*)/.exec(o),rot=tf&&/rotate\((-?[\d.]+)deg\)/.exec(tf[1]),fl=!!(tf&&/scaleX\(-1\)/.test(tf[1])),to=/--fto:\s*([\d.]+)%\s+([\d.]+)%/.exec(o),A=/^por-/.test(n)?.759:.43,D=Math.PI/180;
  const e={l:L,t:T,w:W,h:H,r:(rot?+rot[1]:0)*D,ox:to?+to[1]/100:.5,oy:to?+to[2]/100:.5,f:fl},q={l:v[0],t:v[1],w:v[2],h:v[3],r:v[4]*D,ox:.5,oy:.5,f:false};
  const toPic=(b,s,t)=>{if(b.f)s=2*b.ox-s;const dx=(s-b.ox)*b.w*A,dy=(t-b.oy)*b.h,c=Math.cos(b.r),n=Math.sin(b.r);return[(b.l+b.ox*b.w)*A+dx*c-dy*n,b.t+b.oy*b.h+dx*n+dy*c]};
  const toLoc=(b,X,Y)=>{X-=(b.l+b.ox*b.w)*A;Y-=b.t+b.oy*b.h;const c=Math.cos(b.r),n=Math.sin(b.r),dx=X*c+Y*n,dy=-X*n+Y*c;let s=dx/(b.w*A)+b.ox;if(b.f)s=2*b.ox-s;return[s,dy/b.h+b.oy]};
- const K=BAL.looks.keep,pad=K.pad||1,gr="radial-gradient(ellipse closest-side,#000 82%,transparent 100%)",im=["linear-gradient(#000,#000)"],sz=["100% 100%"],ps=["0 0"];
- for(const [u,w,ru,rv] of lkKeepFor(file)){const P=toPic(q,u,w),C=toLoc(e,P[0],P[1]),hw=ru*pad*1.22*v[2]/W,hh=rv*pad*1.22*v[3]/H,wp=hw*200,hp=hh*200,l=(C[0]-hw)*100,tp=(C[1]-hh)*100;
-  im.push(gr);sz.push(wp.toFixed(2)+"% "+hp.toFixed(2)+"%");ps.push((l/(100-wp)*100).toFixed(2)+"% "+(tp/(100-hp)*100).toFixed(2)+"%")}
- const a=im.join(","),b=sz.join(","),c=ps.join(","),xw=im.map((_,i)=>i?"source-over":"xor").join(",");
- return o+`;-webkit-mask-image:${a}!important;mask-image:${a}!important;-webkit-mask-size:${b}!important;mask-size:${b}!important;-webkit-mask-position:${c}!important;mask-position:${c}!important;-webkit-mask-repeat:no-repeat!important;mask-repeat:no-repeat!important;-webkit-mask-composite:${xw}!important;mask-composite:${im.map((_,i)=>i?"add":"exclude").join(",")}!important`}catch(e){return sty}}
+ const K=BAL.looks.keep,pad=K.pad||1,WA=W*A,f=x=>x.toFixed(2);let el="";
+ /* r13: the holes are drawn in ONE svg in the layer's own pixel-true units (x = W*A, y = H, both in % of the container height) and each ellipse is TURNED by (veil rotation - layer rotation), mirrored with the layer: a CSS radial-gradient is always axis-aligned in the layer box, so on a turned layer (the ink at rot -30/-35, the cào boxes) the eye hole lay tilted across the cheek and hid most of the stroke */
+ for(const [u,w,ru,rv] of lkKeepFor(file)){const P=toPic(q,u,w),C=toLoc(e,P[0],P[1]),rx=ru*pad*1.22*v[2]*A,ry=rv*pad*1.22*v[3],ang=(e.f?-1:1)*(q.r-e.r)/D;
+  el+='<ellipse cx="'+f(C[0]*WA)+'" cy="'+f(C[1]*H)+'" rx="'+f(rx)+'" ry="'+f(ry)+'" transform="rotate('+ang.toFixed(1)+' '+f(C[0]*WA)+' '+f(C[1]*H)+')" fill="url(#g)"/>'}
+ const B=4*Math.max(WA,H),svg='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 '+f(WA)+' '+f(H)+'" preserveAspectRatio="none"><defs><radialGradient id="g"><stop offset=".82" stop-color="#000"/><stop offset="1" stop-color="#fff"/></radialGradient><mask id="m" maskUnits="userSpaceOnUse" x="'+f(-B)+'" y="'+f(-B)+'" width="'+f(2*B+WA)+'" height="'+f(2*B+H)+'"><rect x="'+f(-B)+'" y="'+f(-B)+'" width="'+f(2*B+WA)+'" height="'+f(2*B+H)+'" fill="#fff"/>'+el+'</mask></defs><rect x="'+f(-B)+'" y="'+f(-B)+'" width="'+f(2*B+WA)+'" height="'+f(2*B+H)+'" fill="#000" mask="url(#m)"/></svg>';
+ const a="url('data:image/svg+xml,"+encodeURIComponent(svg).replace(/'/g,"%27")+"')";
+ return `;-webkit-mask-image:${a}!important;mask-image:${a}!important;-webkit-mask-size:100% 100%!important;mask-size:100% 100%!important;-webkit-mask-position:0 0!important;mask-position:0 0!important;-webkit-mask-repeat:no-repeat!important;mask-repeat:no-repeat!important;-webkit-mask-composite:source-over!important;mask-composite:add!important`}catch(e){return""}}
+window.lkKeepBox=lkKeepBox;
+function lkScarFix(file,sty,sev){try{const n=String(file).split("/").pop(),v=KIT_VEIL.fit&&KIT_VEIL.fit[n];if(!v)return sty;let o=sty;
+ {const c=BAL.looks.keep.cheek3,r=(x,y)=>x+";"+y;const L=v[0]+c[0]*v[2],T=v[1]+c[1]*v[3],W=c[2]*v[2],H=c[3]*v[3],R=v[4]+c[4];
+  o=o.replace(/--fleft:[^;]*/,"--fleft:"+L.toFixed(2)+"%").replace(/--ftop:[^;]*/,"--ftop:"+T.toFixed(2)+"%").replace(/--fwidth:[^;]*/,"--fwidth:"+W.toFixed(2)+"%").replace(/--fheight:[^;]*/,"--fheight:"+H.toFixed(2)+"%").replace(/--ftf:\s*rotate\(-?[\d.]+deg\)/,"--ftf:rotate("+R.toFixed(1)+"deg)")}
+ return o+lkKeepBox(file,o)}catch(e){return sty}}
 window.lkScarFix=lkScarFix;
 function lkFaceClipAll(h,file){if(!h||!file)return h;return h.replace(/<img class="((?:kpox|klk|kscar|kveil2)[ "][^>]*?)style="([^"]*)"/g,(m,a,sty)=>{const sc=/^kscar[ "]/.test(a)?/scar-(\d)\.png/.exec(a):null;const o=sc?lkScarFix(file,sty,+sc[1]):sty;return m.slice(0,m.length-sty.length-1)+lkClipFor(file,o)+'"'})}
 window.lkFaceClipAll=lkFaceClipAll;window.lkClipFor=lkClipFor;
-function lkFaceImg(cls,f,st,file){if(!st)return"";if(/^fx-muc-\d\.png$/.test(f)&&lkMirror(file))f=f.replace(".png","-m.png");const m=/^fx-(muc|muoi)-/.exec(f);
- return lkArt(f)?`<img class="${cls}" src="https://ctm-img.victoria-tntt.workers.dev/img/${f}" alt="" aria-hidden="true" style="${kitFxVars(st)}${m?kitToneCss(m[1],null):""}${lkKeepCss(file)}" onerror="this.remove()">`:""}
+/* INK placement (BAL.looks.keep.ink {at:[a,b] eye-size units below/outside the eye, k: one number or per level [k1,k2,k3] (lv3 = longest stroke, kept smaller so it fits the cheek), rot deg, an head points, box main stroke}; per-picture override = keep-fit row items 13-16: a, b x1000, k scale x1000, rot x10 deg): the face square moved / scaled so the art's head point an[lv-1] lands below + outside the viewer-side eye of this picture (mir = the -m art, the other eye); "" = no keep-fit row (keep the plain square) */
+function lkInkBox(file,lv,mir){try{const nm=String(file||"").split("/").pop();if(!(KIT_KEEPFIT.fit&&KIT_KEEPFIT.fit[nm]))return"";const sq=lkSquareRect(file);if(!sq)return"";
+ const I=BAL.looks.keep.ink,R=KIT_KEEPFIT.fit[nm],at0=R.length>=14?[R[12]/1000,R[13]/1000]:I.at,kk=(Array.isArray(I.k)?I.k[cl(lv|0,1,3)-1]:I.k)*(R.length>=15?R[14]/1000:1),ro=R.length>=16?R[15]/10:(I.rot||0),e=lkKeepFor(file)[mir?1:0],an=I.an[cl(lv|0,1,3)-1],as=mir?1-an[0]:an[0],at=an[1];
+ const se=(e[0]+.04)/1.08,te=(e[1]+.3826)/1.165,ex=e[2]/1.08,ey=e[3]/1.165,Ts=mir?se+at0[0]*ex:se-at0[0]*ex,Tt=te+at0[1]*ey;
+ const A=/^por-/.test(nm)?.759:.43,r=sq[4]*Math.PI/180,c=Math.cos(r),n=Math.sin(r),oy=KIT_RASH.RB,dx=(Ts-.5)*sq[2]*A,dy=(Tt-oy)*sq[3],X=(sq[0]+.5*sq[2])*A+dx*c-dy*n,Y=sq[1]+oy*sq[3]+dx*n+dy*c;
+ const W=sq[2]*kk,H=sq[3]*kk,L=X/A-as*W,T=Y-at*H,B=I.box,ins=mir?[B[1],B[0],1-B[3],1-B[2]]:[B[1],1-B[2],1-B[3],B[0]];
+ return{st:`left:${L.toFixed(2)}%;top:${T.toFixed(2)}%;width:${W.toFixed(2)}%;height:${H.toFixed(2)}%;transform:rotate(${(sq[4]+(mir?-1:1)*ro).toFixed(1)}deg);transform-origin:${(as*100).toFixed(1)}% ${(at*100).toFixed(1)}%`,clip:`;clip-path:inset(${ins.map(x=>(x*100).toFixed(1)+"%").join(" ")})`}}catch(e){return""}}
+window.lkInkBox=lkInkBox;
+function lkFaceImg(cls,f,st,file){if(!st)return"";const mi=/^fx-muc-(\d)\.png$/.exec(f),mir=!!(mi&&lkMirror(file));if(mir)f=f.replace(".png","-m.png");const m=/^fx-(muc|muoi)-/.exec(f);if(!lkArt(f))return"";
+ const ib=mi?lkInkBox(file,+mi[1],mir):"";if(ib){const v=kitFxVars(ib.st);return `<img class="${cls}" src="https://ctm-img.victoria-tntt.workers.dev/img/${f}" alt="" aria-hidden="true" style="${v}${kitToneCss("muc",null)}${lkKeepBox(file,v)}${ib.clip}" onerror="this.remove()">`}
+ return `<img class="${cls}" src="https://ctm-img.victoria-tntt.workers.dev/img/${f}" alt="" aria-hidden="true" style="${kitFxVars(st)}${m?kitToneCss(m[1],null):""}${lkKeepCss(file)}" onerror="this.remove()">`}
 /* the same face-square as KIT_RASH.style as a [l,t,w,h,deg] rect */
 function lkSquareRect(file){try{const n=String(file||"").split("/").pop(),r=KIT_VEIL.fit&&KIT_VEIL.fit[n];if(!r)return null;const W=r[2]*KIT_RASH.WX,H=W*(r[3]*480)/(r[2]*445),bandY=r[1]+KIT_VEIL.B0*r[3];return[r[0]+r[2]/2-W/2,bandY-KIT_RASH.RB*H,W,H,r[4]]}catch(e){return null}}
 function lkSquare(file){try{return KIT_RASH.style(file)}catch(e){return""}}
@@ -71901,7 +71943,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="b699a2ef3e42";window.CTM_BUILD=BUILD;
+const BUILD="496b4396f8d3";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
