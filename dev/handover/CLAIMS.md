@@ -982,4 +982,4 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | OWNER BUG staff-cap (servant cap by rank not enforced/told in all lives; opus; brief briefs/staff-cap-bug.md) | review/staff-cap-fix | MAIN s40 | session_01UV1SziJshKyRMZV2hXkoFD | RUNNING | 18/11 00:43Z |
 | OWNER BUG life-preload (life picture set before entry + kit placeholder, never blank boxes; + @W 404; opus; brief briefs/life-preload.md) | review/life-preload | MAIN s40 | session_01UV1SzgmQZwF1XMsH7EzhLL | RUNNING | 18/11 00:44Z |
 | REVIEW AG LATER delta (opus BIG) on review/ag-all-2-land + review/npc-chain-land | review/ag-all-2-land, review/npc-chain-land | C-AG | session_01UV1SzkmyAXYnCFY6utjvkF | RUNNING | 18/11 00:47Z |
-| ART mud decals fx-stain-bun-3..8 for cloth-xoc lv2/3 (sonnet; brief briefs/art-mud-decals.md) | CDN only | MAIN s41 | (opening) | RUNNING | 18/11 01:08Z |
+| ART mud decals fx-stain-bun-3..8 for cloth-xoc lv2/3 (sonnet; brief briefs/art-mud-decals.md) | CDN only | MAIN s41 | session_01UV1SzixsCCEiLAstC886hS | RUNNING | 18/11 01:01Z |
