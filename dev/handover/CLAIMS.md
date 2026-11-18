@@ -980,3 +980,4 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | NPC-CHAIN LANDER #2 (opus): coop hold fix ('buổi advanced both seats') → new PASS | review/npc-chain-land | C-AG | session_01UV1SzhJFho1Xs76yNi63tL | RUNNING | 18/11 00:07Z |
 | REVIEW looks-s40 (toil-looks5 c52cb985 + tuyet-glow 7e80f3cd; sonnet SMALL; brief briefs/review-looks-s40.md) | review/looks-s40 | MAIN s40 | session_01UV1Szk7eZQzR2d2t4rhiFj | RUNNING | 18/11 00:25Z |
 | OWNER BUG staff-cap (servant cap by rank not enforced/told in all lives; opus; brief briefs/staff-cap-bug.md) | review/staff-cap-fix | MAIN s40 | session_01UV1SziJshKyRMZV2hXkoFD | RUNNING | 18/11 00:43Z |
+| OWNER BUG life-preload (life picture set before entry + kit placeholder, never blank boxes; + @W 404; opus; brief briefs/life-preload.md) | review/life-preload | MAIN s40 | session_01UV1SzgmQZwF1XMsH7EzhLL | RUNNING | 18/11 00:44Z |
