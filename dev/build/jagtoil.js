@@ -26,12 +26,12 @@ function tl2Hosts(v){const B=BAL.ag.toil2,L=[];try{if(!S.thDead)L.push(["th",B.h
 function tl2Value(v,rec,o,H){const B=BAL.ag.toil2;let u=0;TL2.hypo={v,rec};
  try{for(const [h,w] of H){let t=null;try{t=toilFx(v,h,toilFOf(h),"ok")}catch(e){}if(t)u+=w*(t.aff||0)+(t.danh||0)}}finally{TL2.hypo=null}
  const mk=toilMk(rec),vain=tl2Tr(v,"v"),mod=tl2Tr(v,"m"),c=tl2Tr(v,"c");
- if(mk==="diem"||mk==="vung")u+=B.peer.tease*(1+c);if(rec.style==="showy"||mk==="tuyet")u+=B.peer.envy*vain;
+ if(mk==="vung")u+=B.peer.tease*(1+c);/* makeup-lux: no overdone face level any more (diêm dúa = the dress verdict, not her choice of sitting) */if(rec.style==="showy"||mk==="tuyet")u+=B.peer.envy*vain;
  u+=vain*((B.vainMk[mk]||0)+(B.vainOpt[o]||0))+mod*(B.modOpt[o]||0);return u}
 /* the face part of one sitting by way o (seed h): the player's toilNpcPlay */
 function tl2Sit(v,base,o,h,sk,occ){const O=BAL.ag.toil2.opt[o];if(O.moc)return{makeup:false,score:0,look:null};const want=O.want||"";
  const L=TOIL_PRE.filter(x=>(x[2]==="diem")===(want==="diem"));const hh=wdHash(wdKey(v)+":"+toilWk());const col=Object.assign({},L[(hh>>>12)%L.length][4]);
- const R=toilNpcPlay(sk,h,col,want,base.style,occ,v.rank,O.cake?BAL.toil.play.cakeOver:undefined);
+ const R=toilNpcPlay(sk,h,col,want,base.style,occ,v.rank);
  const rec={makeup:true,score:R.score,look:R.look,col:Object.assign(col,want?{want}:{})};if(R.slip)rec.slip=R.slip;return rec}
 /* HER CHOICE (host): weigh each way, pick by nết with a human slip, then sit (the same seed the old hash look used) */
 function tl2Choose(v,base){tl2MIn();try{return tl2Choose0(v,base)}finally{tl2MOut()}}
@@ -66,14 +66,14 @@ function tl2See(x,w,L){if(toilSeen(x,w))return"";const e=toilSeeRule(x,L);toilMa
  if(e.aff)affAdd(x,w,e.aff);if(e.g)affAdd(x,w,-e.g);
  if(e.k!=="tease")return"";TL2.stat.tease++;const ease=Math.min(e.n,Math.max(0,-aff(x,w)));if(ease)affAdd(x,w,ease);
  const c=tl2AnsPick(w,x);let a=typeof p3ToilAns==="function"?p3ToilAns(w,x,c):null;if(!a){const r=toilAns(w,{host:x,n:-BAL.toil.teaseN,v:x},c);a=c==="reply"?(r?"win":"lose"):c}TL2.stat.ans[a]=(TL2.stat.ans[a]||0)+1;
- return `${x.name} che miệng cười ${L.mk==="diem"?`lớp phấn son ${toilMkW("diem")}`:`gương mặt điểm trang ${toilMkW("vung")}`} của ${w.name}; ${TL2_ANS[a]}`}
+ return `${x.name} che miệng cười ${L.dv==="diem"?`lối ăn vận ${TOIL_DV.diem}`:`gương mặt điểm trang ${toilMkW("vung")}`} của ${w.name}; ${TL2_ANS[a]}`}
 function tl2Meet(){if(!tl2On()||!agOn()||typeof gmPlaces!=="function")return;const key=agKey();if(S.tl2m===key)return;S.tl2m=key;const t0=performance.now();tl2MIn();
  try{const q=typeof qOn==="function"&&qOn()?rivals[0]:null;
   for(const [kh,M] of gmPlaces())for(const pl in M){const ids=M[pl];if(ids.length<2)continue;const me=ids.includes("me");
    const P=ids.filter(id=>id[0]==="v").map(id=>RV(+id.slice(1))).filter(v=>v&&v.alive!==false&&!v.out&&!v.coop);if(!P.length)continue;TL2.stat.meet++;
    for(const w of P){if(!toilOn(w))continue;let L=null;
     for(const h of [ids.includes("th")?"th":null,ids.includes("emp")?"emp":null,q&&q!==w&&P.includes(q)?q:null])if(h){const t=toilJudgeNpc(w,h);if(t){TL2.stat.judge++;
-      if(me&&t.aff<0&&(t.mk==="diem"||t.mk==="vung"))log(`<span class="past">${toilWho(h)} quở trách dung nhan ${toilMkW(t.mk)} của ${w.name}.</span>`)}}
+      if(me&&t.aff<0&&t.mk==="vung")log(`<span class="past">${toilWho(h)} quở trách dung nhan ${toilMkW(t.mk)} của ${w.name}.</span>`)}}
     for(const x of P){if(x===w||toilSeen(x,w))continue;/* fix2 perf: a pair already met today says nothing (tl2See returns "" first thing) — no look built for it */L=L||toilLookP(w);const s=tl2See(x,w,L);if(!s)continue;
      if(me)log(`<span class="past">${s}.</span>`);else try{newsAdd(w,"toil",s,false)}catch(e){}}}}}catch(e){try{agErr("toil2meet",e)}catch(x){}}finally{tl2MOut()}
  const ms=performance.now()-t0;window.__tl2Ms=ms;TL2.ms.push(ms);if(TL2.ms.length>60)TL2.ms.shift()}
