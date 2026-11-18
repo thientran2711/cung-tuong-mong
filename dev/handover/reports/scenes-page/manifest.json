@@ -1,0 +1,261 @@
+[
+ {
+  "key": "ngu-hoa-vien",
+  "palace": "Sân khấu",
+  "kind": "stage",
+  "name": "Ngự hoa viên",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/ngu-hoa-vien.webp"
+ },
+ {
+  "key": "ngu-thu-phong",
+  "palace": "Sân khấu",
+  "kind": "stage",
+  "name": "Cần Chính điện (ngự thư phòng)",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/ngu-thu-phong.webp"
+ },
+ {
+  "key": "duong-tam-dien",
+  "palace": "Sân khấu",
+  "kind": "stage",
+  "name": "Dưỡng Hòa điện (tẩm điện Hoàng thượng)",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/duong-tam-dien.webp"
+ },
+ {
+  "key": "tu-ninh-cung",
+  "palace": "Sân khấu",
+  "kind": "stage",
+  "name": "Đức Thọ cung (Thái hậu)",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/tu-ninh-cung.webp"
+ },
+ {
+  "key": "khon-ninh-cung",
+  "palace": "Sân khấu",
+  "kind": "stage",
+  "name": "Càn Ninh cung (Hoàng hậu)",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/khon-ninh-cung.webp"
+ },
+ {
+  "key": "phi-tan-cung",
+  "palace": "Sân khấu",
+  "kind": "stage",
+  "name": "Cung phi tần (tranh chung)",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/phi-tan-cung.webp"
+ },
+ {
+  "key": "thai-y-vien",
+  "palace": "Sân khấu",
+  "kind": "stage",
+  "name": "Thái y viện",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/thai-y-vien.webp"
+ },
+ {
+  "key": "kinh-su-phong",
+  "palace": "Sân khấu",
+  "kind": "stage",
+  "name": "Kính sự phòng",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/kinh-su-phong.webp"
+ },
+ {
+  "key": "lanh-cung",
+  "palace": "Sân khấu",
+  "kind": "stage",
+  "name": "Lãnh cung",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/lanh-cung.webp"
+ },
+ {
+  "key": "tam-cung-dem",
+  "palace": "Sân khấu",
+  "kind": "stage",
+  "name": "Ngọc Thanh các (phòng ngủ của ngươi)",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/tam-cung-dem.webp"
+ },
+ {
+  "key": "tan-gia-kho",
+  "palace": "Sân khấu",
+  "kind": "stage",
+  "name": "Tân Giả khố",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/tan-gia-kho.webp"
+ },
+ {
+  "key": "phong-cung-nu",
+  "palace": "Sân khấu",
+  "kind": "stage",
+  "name": "Phòng cung nữ",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/phong-cung-nu.webp"
+ },
+ {
+  "key": "cung-nhan-xuan-trua",
+  "palace": "Sân khấu",
+  "kind": "stage",
+  "name": "Dãy nhà cung nhân",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/cung-nhan-xuan-trua.webp"
+ },
+ {
+  "key": "canh-phuc-cung-xuan-trua",
+  "palace": "Cảnh Phúc cung",
+  "kind": "Chính điện",
+  "name": "Thể Hòa điện",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/canh-phuc-cung-xuan-trua.webp"
+ },
+ {
+  "key": "canh-phuc-cung-dong-phoi-xuan-trua",
+  "palace": "Cảnh Phúc cung",
+  "kind": "Đông phối điện (nơi ở)",
+  "name": "Dưỡng Xuân hiên",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/canh-phuc-cung-dong-phoi-xuan-trua.webp"
+ },
+ {
+  "key": "canh-phuc-cung-tay-phoi-xuan-trua",
+  "palace": "Cảnh Phúc cung",
+  "kind": "Tây phối điện (nơi ở)",
+  "name": "Thanh Thu trai",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/canh-phuc-cung-tay-phoi-xuan-trua.webp"
+ },
+ {
+  "key": "khai-tuong-cung-xuan-trua",
+  "palace": "Khải Tường cung",
+  "kind": "Chính điện",
+  "name": "Sùng Đức điện",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/khai-tuong-cung-xuan-trua.webp"
+ },
+ {
+  "key": "khai-tuong-cung-dong-phoi-xuan-trua",
+  "palace": "Khải Tường cung",
+  "kind": "Đông phối điện (nơi ở)",
+  "name": "Nhã Vận hiên",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/khai-tuong-cung-dong-phoi-xuan-trua.webp"
+ },
+ {
+  "key": "khai-tuong-cung-tay-phoi-xuan-trua",
+  "palace": "Khải Tường cung",
+  "kind": "Tây phối điện (nơi ở)",
+  "name": "Tĩnh Nghi trai",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/khai-tuong-cung-tay-phoi-xuan-trua.webp"
+ },
+ {
+  "key": "chung-tu-cung-xuan-trua",
+  "palace": "Chung Tú cung",
+  "kind": "Chính điện",
+  "name": "Diên Khánh điện",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/chung-tu-cung-xuan-trua.webp"
+ },
+ {
+  "key": "chung-tu-cung-dong-phoi-xuan-trua",
+  "palace": "Chung Tú cung",
+  "kind": "Đông phối điện (nơi ở)",
+  "name": "Minh Hòa hiên",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/chung-tu-cung-dong-phoi-xuan-trua.webp"
+ },
+ {
+  "key": "chung-tu-cung-tay-phoi-xuan-trua",
+  "palace": "Chung Tú cung",
+  "kind": "Tây phối điện (nơi ở)",
+  "name": "Du Thanh trai",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/chung-tu-cung-tay-phoi-xuan-trua.webp"
+ },
+ {
+  "key": "ham-an-cung-xuan-trua",
+  "palace": "Hàm An cung",
+  "kind": "Chính điện",
+  "name": "Thụy Ngọc điện",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/ham-an-cung-xuan-trua.webp"
+ },
+ {
+  "key": "ham-an-cung-dong-phoi-xuan-trua",
+  "palace": "Hàm An cung",
+  "kind": "Đông phối điện (nơi ở)",
+  "name": "Tuy Phúc hiên",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/ham-an-cung-dong-phoi-xuan-trua.webp"
+ },
+ {
+  "key": "ham-an-cung-tay-phoi-xuan-trua",
+  "palace": "Hàm An cung",
+  "kind": "Tây phối điện (nơi ở)",
+  "name": "Tịch Nguyệt trai",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/ham-an-cung-tay-phoi-xuan-trua.webp"
+ },
+ {
+  "key": "thua-minh-cung-xuan-trua",
+  "palace": "Thừa Minh cung",
+  "kind": "Chính điện",
+  "name": "Chiêu Huy điện",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/thua-minh-cung-xuan-trua.webp"
+ },
+ {
+  "key": "thua-minh-cung-dong-phoi-xuan-trua",
+  "palace": "Thừa Minh cung",
+  "kind": "Đông phối điện (nơi ở)",
+  "name": "Duyệt Xuân hiên",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/thua-minh-cung-dong-phoi-xuan-trua.webp"
+ },
+ {
+  "key": "thua-minh-cung-tay-phoi-xuan-trua",
+  "palace": "Thừa Minh cung",
+  "kind": "Tây phối điện (nơi ở)",
+  "name": "Thanh Dật trai",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/thua-minh-cung-tay-phoi-xuan-trua.webp"
+ },
+ {
+  "key": "dien-huy-cung-xuan-trua",
+  "palace": "Diên Huy cung",
+  "kind": "Chính điện",
+  "name": "Kính Ninh điện",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/dien-huy-cung-xuan-trua.webp"
+ },
+ {
+  "key": "dien-huy-cung-dong-phoi-xuan-trua",
+  "palace": "Diên Huy cung",
+  "kind": "Đông phối điện (nơi ở)",
+  "name": "Chiêu Nhân hiên",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/dien-huy-cung-dong-phoi-xuan-trua.webp"
+ },
+ {
+  "key": "dien-huy-cung-tay-phoi-xuan-trua",
+  "palace": "Diên Huy cung",
+  "kind": "Tây phối điện (nơi ở)",
+  "name": "Sùng Nghĩa trai",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/dien-huy-cung-tay-phoi-xuan-trua.webp"
+ },
+ {
+  "key": "vinh-hoa-cung-xuan-trua",
+  "palace": "Vĩnh Hòa cung",
+  "kind": "Chính điện",
+  "name": "Hoài Nhu điện",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/vinh-hoa-cung-xuan-trua.webp"
+ },
+ {
+  "key": "vinh-hoa-cung-dong-phoi-xuan-trua",
+  "palace": "Vĩnh Hòa cung",
+  "kind": "Đông phối điện (nơi ở)",
+  "name": "Hòa Chương hiên",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/vinh-hoa-cung-dong-phoi-xuan-trua.webp"
+ },
+ {
+  "key": "vinh-hoa-cung-tay-phoi-xuan-trua",
+  "palace": "Vĩnh Hòa cung",
+  "kind": "Tây phối điện (nơi ở)",
+  "name": "Tư Tĩnh trai",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/vinh-hoa-cung-tay-phoi-xuan-trua.webp"
+ },
+ {
+  "key": "truong-xuan-cung-xuan-trua",
+  "palace": "Trường Xuân cung",
+  "kind": "Chính điện",
+  "name": "Lạc Thọ điện",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/truong-xuan-cung-xuan-trua.webp"
+ },
+ {
+  "key": "truong-xuan-cung-dong-phoi-xuan-trua",
+  "palace": "Trường Xuân cung",
+  "kind": "Đông phối điện (nơi ở)",
+  "name": "Vĩnh Xuân hiên",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/truong-xuan-cung-dong-phoi-xuan-trua.webp"
+ },
+ {
+  "key": "truong-xuan-cung-tay-phoi-xuan-trua",
+  "palace": "Trường Xuân cung",
+  "kind": "Tây phối điện (nơi ở)",
+  "name": "Hàm Thu trai",
+  "url": "https://ctm-img.victoria-tntt.workers.dev/img/truong-xuan-cung-tay-phoi-xuan-trua.webp"
+ }
+]
