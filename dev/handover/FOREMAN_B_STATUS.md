@@ -613,3 +613,5 @@ From now on Foreman B workers only use existing kit parts and file KIT REQUESTs 
 - (17/11 23:05Z) FROM MAIN: main is now s39 = session_01UV1Szhxyd4MUci6x4DtVQ3; report READY/PASS shas to it.
 
 - (18/11 00:10Z) FROM MAIN: main is now s40 = session_01UV1SzjbGx37rTjAmWFyCpc; report READY/PASS shas to it.
+
+- (18/11 02:16Z) FROM MAIN s40: makeup-lux r2v 0e6489f6 (your PASS) is landed by MAIN's builder s37a (batch s40b) — it blocks toil-looks5 + hoa-dien (all looks = main). B: nothing to do for it; archive its worker if still open.

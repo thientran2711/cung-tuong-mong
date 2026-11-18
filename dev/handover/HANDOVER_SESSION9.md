@@ -958,3 +958,4 @@ LESSONS s39: look at neighbours side by side before asking her to pick (A/B/C gl
 - (18/11 02:04Z) OWNER: wet on neck/hands still fake, wants hi-res → sent latest stain-uot-3 + neck/hand crops; found saucer hand still darkened → cloth-xoc: exclude hands fully, 2× renders + neck/hand crops per level.
 - (18/11 02:07Z) life-preload add-on sent (title prefetch of all saved lives, placeholder text).
 - (18/11 02:13Z) OWNER: her staff-cap table never applied (s33 measured, dropped) → staff-cap worker SziJshK now applies BAL.promo.cap B2 + all texts, BIG review. LESSON: an owner table that is 'measured, pending her OK' must be tracked to LIVE.
+- (18/11 02:16Z) makeup-lux r2v 0e6489f6 never landed (B PASS 22:52Z) → builder s37a batch s40b re-merge onto eb3675a6; then looks-s40 + hoa-dien rebase on it. hoa-dien b3dc5195 (drop mai+bac via BAL.hd.drop, old-save map) still on old 'nhạt tươi' tone → sat options pushed again.
