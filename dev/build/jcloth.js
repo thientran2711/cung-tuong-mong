@@ -24,9 +24,9 @@ Object.assign(BAL.looks,{xoc:{on:0,
    on:0 = live feature OFF. lv[1..3] (nhẹ / vừa / nặng): n = decals, sc = decal width as a share of the robe width, op = opacity, wet = overall cloth darkening (wet cloth), pos = anchors tried in order
    (fx, fy = share of the robe box: chest / sleeve / hem), blend = multiply | soft | normal (folds and the robe's own pattern show through), variants = how many decal files exist per kind. */
 Object.assign(BAL.looks,{stain:{on:0,
- lv:[null,{n:1,sc:.16,op:.6,wet:.05},{n:2,sc:.2,op:.72,wet:.14},{n:3,sc:.26,op:.85,wet:.26}],
- anchor:{chest:[.5,.27],sleeve:[.2,.5],hem:[.5,.93],hemL:[.22,.94],hemR:[.78,.94]},
- kind:{tra:{pos:["chest","sleeve","hem"],blend:"multiply",variants:3,wet:0,scm:1.4,dy:0,opm:.6,tint:[150,95,45],tm:.65},uot:{pos:["hem","sleeve","chest"],blend:"multiply",variants:2,wet:1,scm:1.5,dy:0},bun:{pos:["hem","hemL","hemR"],blend:"multiply",variants:2,wet:0,scm:2.8,dy:-.045,rotm:2.2,jy:.035}},
+ lv:[null,{n:1,sc:.16,op:.6,wet:.09},{n:2,sc:.2,op:.72,wet:.2},{n:3,sc:.26,op:.85,wet:.3}],
+ anchor:{chest:[.5,.27],sleeve:[.2,.5],hem:[.5,.93],hemL:[.22,.94],hemR:[.78,.94],sleeveL:[.14,.6],sleeveR:[.86,.6]},
+ kind:{tra:{pos:["chest","sleeve","hem"],blend:"multiply",variants:3,wet:0,scm:1.4,dy:0,opm:.6,tint:[150,95,45],tm:.65},uot:{pos:["hem","sleeveL","sleeveR","hemL","hemR"],blend:"multiply",variants:2,wet:1,scm:1.15,dy:0,opm:1,tint:[110,95,85],tm:.4},bun:{pos:["hem","hemL","hemR"],blend:"multiply",variants:2,wet:0,scm:2.8,dy:-.045,rotm:2.2,jy:.035}},
  rot:.5,jit:.05}});
 /* ---------- tiny deterministic noise ---------- */
 function clothHash(x,y,s){let h=(x*374761393+y*668265263+s*2147483647)|0;h=(h^(h>>>13))*1274126177|0;return((h^(h>>>16))>>>0)/4294967295}
@@ -180,8 +180,12 @@ function drawDecalOnCloth(out,W,H,mk,dec,ax,ay,scale,rot,op,blend,tint,tm){const
 /* kind = "tra" | "uot" | "bun", lv 1..3, decals = [{w,h,data}] (variants of that kind); opt.base = RGBA already shaded (e.g. the xoc bake) else the picture; returns {data,mask,count} */
 function clothStainBake(d,W,H,kind,lv,decals,opt){opt=opt||{};const B=BAL.looks.stain,L=B.lv[cl(lv|0,1,3)],K=B.kind[kind],seed=opt.seed==null?BAL.looks.xoc.seed:opt.seed,
  mk=opt.mask||clothMask(d,W,H,opt.face||null,BAL.looks.xoc),out=new Uint8ClampedArray(opt.base||d),R=clothRng(seed*131+kind.charCodeAt(0)),fw=mk.x1-mk.x0+1,fh=mk.y1-mk.y0+1;let count=0;
- /* wet cloth: the whole robe a little darker (own hue), more at the heavy level */
- if(K.wet&&L.wet)for(let i=0;i<W*H;i++){const k=mk.m[i]*(1-Math.min(1,mk.protS[i]*1.6));if(k<.02)continue;const f=1-L.wet*k;out[i*4]*=f;out[i*4+1]*=f;out[i*4+2]*=f}
+ /* wet cloth (r4): the robe's OWN colour deeper and a bit richer (colour multiplied by itself), a little darker toward the hem, a few soft glossy highlights; no grey tint; nothing near skin / hair / items */
+ if(K.wet&&L.wet){const sat=L.wet*2.2;for(let i=0;i<W*H;i++){const k=mk.m[i]*(1-Math.min(1,Math.max(mk.protS[i]*3,mk.prot[i]*2)));if(k<.02)continue;const y=(i/W)|0,gy=.7+.6*Math.min(1,Math.max(0,(y-mk.y0)/fh)),w=Math.min(.6,sat*gy*k);
+   for(let q=0;q<3;q++){const v=out[i*4+q];out[i*4+q]=(v*(1-w)+(v*v/255)*w)*(1-L.wet*.3*gy*k)}}
+  const hn=Math.max(0,lv-1)*2;for(let q=0;q<hn;q++){const hx=mk.x0+fw*(.3+.4*R()),hy=mk.y0+fh*(.5+.38*R()),rx=fw*.025,ry=fh*.06;/* soft vertical sheen along a fold */
+   for(let y=Math.max(0,hy-ry*3|0);y<Math.min(H,hy+ry*3);y++)for(let x=Math.max(0,hx-rx*3|0);x<Math.min(W,hx+rx*3);x++){const i=y*W+x,k=mk.m[i]*(1-Math.min(1,Math.max(mk.protS[i]*3,mk.prot[i]*2)));if(k<.5)continue;const g=Math.exp(-.5*(((x-hx)/rx)**2+((y-hy)/ry)**2))*.16*k;
+    for(let c=0;c<3;c++)out[i*4+c]+=(255-out[i*4+c])*g}}}
  if(decals&&decals.length)for(let q=0;q<L.n;q++){const nm=K.pos[q%K.pos.length],an=B.anchor[nm],dec=decals[Math.floor(R()*decals.length)%decals.length],
   ax=mk.x0+fw*(an[0]+(R()-.5)*B.jit*2),ay=mk.y0+fh*(an[1]+(K.dy||0)+(R()-.5)*(K.jy||B.jit)*2);
   count+=drawDecalOnCloth(out,W,H,mk,dec,ax,ay,L.sc*(K.scm||1)*(.85+.3*R()),(R()-.5)*2*B.rot*(K.rotm||1),L.op*(K.opm||1)*(.9+.2*R()),K.blend,K.tint,K.tm)}
