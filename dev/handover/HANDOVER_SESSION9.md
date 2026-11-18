@@ -963,3 +963,4 @@ LESSONS s39: look at neighbours side by side before asking her to pick (A/B/C gl
 - (18/11 02:24Z) cloth-xoc c3dbe95 mud vertical but reads as grass tufts, hem edge clean → Magnific mud decals (hem band, drops, drip streaks). Not shown to owner.
 - (18/11 02:31Z) OWNER: wet front panel white/washed → cloth-xoc: wet never lighter than dry (measure L), thin specular only.
 - (18/11 02:35Z) OWNER: staff total should be ~25–27 → B2 apply held; staff-cap worker measures D1/D2/D3 (+1) → owner picks.
+- (18/11 02:38Z) OWNER: dropped hoa điền must be REPAINTED as replacements → ORDER in FOREMAN_C_STATUS (hd_mai real white plum + hoadien_bac silver/lưu ly with gradient, same keys). C ROOT-13 still not opened (owner).
