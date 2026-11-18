@@ -468,7 +468,7 @@ c12 a18 Nữ đế #2 (r8 first) soft-smile (Round 42) | claude/cung-tuong-mong-
 c12 a18 t5–t8 headdress re-do from live originals (Round 43) | claude/cung-tuong-mong-handover-hj0h8w (art, _review CDN) | session_011xDdVPdhZPQct6rWX6fDaZ | CANCELLED (owner: c12 OK, no redraw; 05:22Z) | 2026-11-18T05:16Z
 | NPC-PURPOSE G1 #3 + integrator (opus; successor of Szk6vem, head 9bf916a) | review/npc-purpose | C-AG #10 | session_01UV1Szm7n34pm29edeDhQ3Q | RUNNING | 18/11 04:52Z |
 | odds-cap FIX round 3 (opus; FAIL 3 @9df9204d) | review/odds-cap | D | session_01964izECUsWiXJp3oXeZY7A | RUNNING | 18/11 04:57Z |
-| staff-cap-row3 + stale test selectors (sonnet; ROOT-44 04:25Z/04:36Z) | review/staff-cap-row3 | D | session_01964izBkYM6cmkq3vk8mUDm | RUNNING | 18/11 04:57Z |
+| staff-cap-row3 + stale test selectors (sonnet; ROOT-44 04:25Z/04:36Z) | review/staff-cap-row3 | D | session_01964izFcTHVtrAudt7Dyk4F (SMALL review of 456010f8; worker archived) | RUNNING | 18/11 04:57Z |
 | E1 GRAND ENDINGS ENGINE + 3 pilots (opus; BIG; brief briefs/E1-grand-endings-engine.md) | review/grand-endings-engine | E ROOT | session_01DgYSWkyBNQQuQ6GZfMzcqU | RUNNING | 18/11 04:59Z |
 | E2 QUESTLINE AUDIT (opus; design only; brief briefs/E2-questline-audit.md) | review/questline-audit | E ROOT | session_01DgYSWmeNZ5LoMYj22wm73X | SẴN SÀNG KIỂM b42a7c70 (report reports/questline-audit.md) | 18/11 04:59Z |
 | E3 HALL NAMES (PL #3; sonnet; expert first; brief briefs/E3-hall-names.md) | review/hall-names | E ROOT | session_01DgYSWpUv86PhL9wq2MeDFC | RUNNING | 18/11 05:10Z |
@@ -496,3 +496,4 @@ art-matrix planner (MAIN s43 order) | claude/cung-tuong-mong-handover-hj0h8w (re
 | map-tap-go (owner 18/11 06:00Z: two dialog looks for one place + tap = go at once with undo toast; sonnet; brief briefs/map-tap-go.md) | review/map-tap-go | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:17Z |
 | life-preload-fu (follow-ups A,B,D,E; sonnet; brief briefs/life-preload-fu.md; ORDER ROOT-44 04:35Z) | review/life-preload-fu | B | session_01N1tNP49F8cp5bBg81G3WX5 | RUNNING | 18/11 05:25Z |
 | cloth-bake-static (cloth layer on every figure path on a cold cache; sonnet; brief briefs/cloth-bake-static.md; ORDER ROOT-44 04:35Z) | review/cloth-bake-static | B | session_01N1tNP6bXEreygYxkwtX5Vx | RUNNING | 18/11 05:25Z |
+| title-stale-sel: tutorial replay button + stale title/slot hooks in dev/build (sonnet) | review/title-stale-sel | D | session_01964izCYFCaCF1YGfec7vAL | RUNNING | 18/11 05:20Z |
