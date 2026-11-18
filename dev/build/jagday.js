@@ -120,7 +120,7 @@ function agIntent(p,id){const D=agDz();D.I=D.I||{};let N;try{N=agNeedsG(p)}catch
  const g=[];if(L.length){const a=agPw(L);g.push(a);const L2=L.filter(x=>x[0]!==a);if(L2.length&&roll(agCap(BAL.ag.day.two)))g.push(agPw(L2))}
  D.I[id]={g,why:g.map(n=>AGWHY[n]||n).join(", ")};try{D.T[id]=agTop(N)}catch(e){}return D.I[id]}
 function agDayDraw(){const t0=performance.now();const D=agDz();D.d=wk();D.P={};D.T={};D.I={};D.rb=null;AGD.stat.draw++;const b0=agDayB();agLzNew(b0);
- const L=agDayList();for(const [p,id,kind] of L){if(agLzKind(kind)){agLzPush(p,id,kind,b0,1);continue}try{agIntent(p,id);agDrawPerson(p,id,b0,kind,b0)}catch(e){agdErr("draw0",e)}}D.rb=wk()+"-"+b0;
+ const L=agDayList();for(const [p,id,kind] of L){if(agLzKind(kind)){agLzPush(p,id,kind,b0,1);continue}try{agIntent(p,id);agDrawPerson(p,id,b0,kind,b0);if(kind==="consort"&&agRdcOn()){const s0=D.P[id]&&D.P[id][b0];if(s0)s0.rc="day"}}catch(e){agdErr("draw0",e)}}D.rb=wk()+"-"+b0;
  const ms=performance.now()-t0;window.__agDayMs=ms;AGD.ms.push(ms);if(AGD.ms.length>60)AGD.ms.shift();agLzGo()}
 /* perf (review ag-all-2 r2 B5, BAL.ag.perf): the household staff's buổi pick is SLICED like the consorts' deeds (agSlice): the record is built with
    their base row (their master's palace), then slices of at most BAL.ag.perf.slice ms draw them in later frames (all at once under window.__agAll);
@@ -169,10 +169,10 @@ function agReplanB(){const D=agDz();if(D.d!==wk())return;const b=agDayB();if(D.r
    let rr="";if((rain&&prev&&prev.pl==="vuon")||(ill&&!(D.ill||{})[id])){rr=rain&&prev&&prev.pl==="vuon"?"rain":"ill";(D.ill=D.ill||{})[id]=ill?1:0;agIntent(v,id);AGD.stat.replan++}
    else{let ch=0;try{ch=agTop(agNeedsG(v))!==D.T[id]?R.need:0}catch(e){}if(T[id])ch=Math.max(ch,R.touch);if(ch&&roll(agCap(ch))){agIntent(v,id);AGD.stat.replan++}else AGD.stat.keep++}
    /* ag2-perf A (owner OD L1637 17/11 15:45Z "chỉ người bị ảnh hưởng mới nghĩ lại"): she picks this buổi's deed again only with a cause */
-   if(agRdcOn()){const c=agRdcCause(v,id,prev,rr,T);if(!c||agRdcN>=BAL.ag.day.redecideCap){agRdcKeep(v,id,b,c);continue}agRdcN++;agRdcMark(c)}}
+   if(agRdcOn()){const c=agRdcCause(v,id,prev,rr,T);if(!c||agRdcN>=BAL.ag.day.redecideCap){agRdcKeep(v,id,b,c);continue}agRdcN++;agRdcMark(c);AGD.rcNow=c}}
   else if(agLzKind(kind)){agLzPush(p,id,kind,b,0);continue}/* staff: sliced (agLzRun) */
   else if(!D.I||!D.I[id])agIntent(p,id);
-  agDrawPerson(p,id,b,kind,b)}catch(e){agdErr("buoi",e)}}
+  agDrawPerson(p,id,b,kind,b);if(AGD.rcNow){const s0=D.P[id]&&D.P[id][b];if(s0)s0.rc=AGD.rcNow}/* A: the cause rides on her slot */}catch(e){agdErr("buoi",e)}finally{AGD.rcNow=null}}
  z.rp={};const ms=performance.now()-t0;AGD.ms.push(ms);if(AGD.ms.length>60)AGD.ms.shift();agLzGo()}
 function agDayEnsure(){if(!agDOn())return;const D=agDz();if(D.d!==wk())agDayDraw();else agReplanB()}
 /* the record's row for a person this buổi = her plan */
