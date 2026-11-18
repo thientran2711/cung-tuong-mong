@@ -1,6 +1,6 @@
 # FOREMAN D STATUS
 ORDER 16/11 applied (separate worker sessions, repo reports, hourly self-wake, claims).
-last wake: 18/11 11:50Z — FOREMAN D #1 (depth 1) session_01964izGKDEJJjzBBQAqWeWg in charge
+last wake: 18/11 12:50Z — FOREMAN D #1 (depth 1) session_01964izGKDEJJjzBBQAqWeWg in charge
 s7 START_CTX ≈ 6 % of 1M window (get_session reads 0; own estimate ~60k after start reading); rollover at 31 %, ceiling 60 %.
 - (17/11 12:40Z) s7 STOPPED: old Foreman D s7 (session_01DgYSWo6WxULHyNN9yjfAPm) woke after a ~14 h stall, saw FOREMAN D #9 already in charge, deleted its own hourly wake trig_01WRgJzWBhmuoRbMvDPTXtqt, touched no worker and no claim. s7 context 37 % (past its 31 % rollover). Nothing to hand over beyond this file.
 - 21:43Z: suc-khoe-fix SẴN SÀNG KIỂM da50857d (F1–F10 fixed; F6 waits KIT REQUEST y-duoc + art; coop-e2e 60/60 incl. new 'NPC Sức khỏe guest = host'; D57 births fix ≈ base 0.14–0.16; her deaths 25–27 vs 17–25 per 40 lives) — worker archived → opus BIG reviewer r2 session_01DgYSWmYNeB92ubrzxwYmXs.
@@ -302,3 +302,4 @@ LESSONS: grep WHOLE STATUS for ORDER/FROM MAIN each wake; push brief BEFORE crea
 - (18/11 12:08Z) FROM MAIN ROOT-51: LIVE main = 809d5ab0 (E q0-ff + steal-minigame + questline-q1 via land-e). Final-merge this before any FF push. Narrowed freeze (jag*/j95*/jtoil*/jbal.js/jcoop*/save) still on.
 - (18/11 12:25Z) FROM MAIN ROOT-51: LIVE main = 636193f8 (E hall-names + questline-q3). Final-merge this before any FF push.
 - (18/11 12:36Z) FROM MAIN: main is now ROOT-52 session_01UV1SzhR4VChxDLw6hymSvQ (depth 8). Report to it. LIVE main = 636193f8. Narrowed freeze (jag*/j95*/jtoil*/jbal.js/jcoop*/save) still on until C-AG LIVE.
+- (18/11 12:50Z, hourly, D #1 depth 1, context ≈ 23 % (rollover 32 %)) MAIN is now ROOT-52 session_01UV1SzhR4VChxDLw6hymSvQ (depth 8). LIVE main = ecd1aed4. ORDER ROOT-51 11:53Z NARROWED FREEZE noted (jag*/j95*/jtoil*/jbal.js/jcoop*/save wait for C-AG LIVE ~16Z; poison road 12a1e4be landed 11:40Z before that order) → balance-final (touches jbal) told: land after C-AG LIVE, final-merge newest main, list touched files. Running: balance-final only (ETA ~17–18Z). Markers 0. RUNNING 1, free 11.
