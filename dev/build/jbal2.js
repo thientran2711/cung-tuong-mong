@@ -1046,9 +1046,9 @@ Object.assign(BAL.ag,{toil2:{on:1,est:3,base:2,k:1,wMin:.2,
    ord     a servant sent on a dishonourable deed: obey × lòng/100, refuse (+ loyalTr for a trung thành one), tell × (1 − lòng/100) × spy when she
            already spies for someone (old rule: a trung thành servant refused at 30 %, others never)
    cm      the close maid: "nghe" = talSpy × spy × lòng / talLoy; a leaked secret (debt / spy / family) = secOut × leak × (100 − lòng) / (100 − secTrust) */
-Object.assign(BAL.ag,{stf2:{base:1,net:{confess:{trung:1.5,nhat:1.5},social:{lanh:1.5,chuyen:1.3},bribe:{tham:1.6},flee:{tham:1.4,lanh:1.3},help:{trung:1.8},work:{nhat:1.3}},
+Object.assign(BAL.ag,{stf2:{base:1,net:{confess:{trung:1.5,nhat:1.5},social:{lanh:1.5,chuyen:1.3},bribe:{tham:1.6},flee:{tham:1.4,lanh:1.3},help:{trung:1.8},work:{nhat:1.3},half:{lanh:1.4,nhat:1.2}},
  poison:{cost:10,k:1,u:1},accPen:15,hit:{k:2},pil:{k:1,sell:.5,lauWk:10},pilW:{pun:1,forgive:1,back:.4,ignore:.3,harsh:2.5},leave:{k:1,cd:6,u:.2},lvW:{keep:1,demote:1,let:1},
- bribe:{tell:1,quiet:.3},ord:{obey:1,refuse:.03,loyalTr:.35,tell:.03,spy:3},cm:{spy:1,leak:1}}});
+ bribe:{tell:1,quiet:.3},ord:{obey:1,refuse:.03,loyalTr:.35,tell:.03,spy:3,half:.2},cm:{spy:1,leak:1}}});
 /* AG-ALL-2 part 2b — per-khắc event-driven re-decide (jagday agHeard / agTell / agRdTick; owner OD 17/11 ~15:25Z (2)):
    keep  × BAL.ag.routine = the weight of keeping her plan when news reaches her (against the deeds aimed at the one she heard of: their utility)
    tell  weight that a servant standing there tells her master (× her loyalty / 100 × the master's interest), quiet = keeping it to herself */
@@ -1338,5 +1338,9 @@ Object.assign(BAL,{ptime:{on:1,kinds:{
  giftin:{o:0,n:2},  /* TWO-WAY: an NPC sends a servant with a gift to her (the NPC's deed already paid its khắc): the servant is away n, the gift arrives at due */
  npcinv:{o:0,n:2},  /* TWO-WAY: an NPC host sends word (AG cx3:invite2): her servant is away n, the guest / her invitation lands at due */
  shop:{o:0,n:2},    /* Nhờ thái giám mua đồ (PEND.shop): the eunuch goes for the tray (no khắc before, none now), the tray comes at due */
- half:15            /* the receiver's «làm qua loa» answer: the order's odds − half (same number on both sides, OD 18/11 ~21:15Z) */
-}}});
+ },
+ half:15,           /* the receiver's «Giúp qua loa» answer: the order's odds − half and n − 1 khắc (same number on both sides, OD 18/11 ~21:15Z) */
+ ansK:2,            /* an order to her (maid road) waits as a notice; unanswered after ansK khắc = «Từ chối» with its cost (OD 18/11 ~21:15Z) */
+ errRefuse:3,       /* «Việc chủ sai» (a harmless errand): Từ chối = Chủ tin −errRefuse (no one to tell on: 3 answers) */
+ errHalfTin:1       /* «Việc chủ sai»: Giúp qua loa = the same công lao, done sloppily: Chủ tin −errHalfTin, n − 1 khắc */
+}});
