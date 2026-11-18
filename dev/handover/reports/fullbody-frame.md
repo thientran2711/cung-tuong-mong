@@ -115,3 +115,46 @@ OWNER ORDERS (verbatim in OWNER_DECISIONS L1878, L1879 + tail ~16:10Z):
 2. 09:30Z picture size, CORRECTED 16:10Z: a BIG scene picture is fine when everything under it (a few lines, or 1-2 short buttons) fits the frame with NO scrolling; only when the content would scroll does the picture shrink; sizes are KIT_SIZE classes (KIT_SIZE.pic / .ban, jksize.js) chosen by one rule from the content, never per frame by hand. NOT DONE (not started). Next: measure table (every dialog with a scene picture, Fold + iPad: content height, chosen picture class, scroll yes/no) via a scan like dev/test/scroll-cue-scan.js (94 dialogs); rule candidate: in kszLivePick3/kitFrameApplyLive3 try the biggest picture class first, step down only while the info column scrolls. Foreman B's shop panel must use that rule.
 3. Phone Luân hồi / «Thân phận kiếp này»: REVERT to the old approved layout (figure left, one long vertical info box right). NOT DONE, NOT CHECKED against live; check first whether s2 (kpIdLay / identity card, j79) changed it on the phone (390x844 / 412x1058) and put the old layout back; identity card figure code is in j79.js kpIdLay (s2 removed the KPID_WR cap, added kitFullFigX).
 Also open: tall crowns overlap the name tag (tag z-index 2); quickcheck (bash dev/tools/quickcheck.sh) before READY.
+### S4 (worker fullbody-frame-s4, MAIN ROOT-53; branch review/fullbody-frame-s4 @ 8b62c6bd, = s3 c9d355bd + merge origin/main d3ea24e8 + this work; PUSHED)
+PRIORITY #1 CHECK was in the brief (OD 7 | main 2 | review/* 3); reused s3's scan/kit code; no duplicate feature.
+ENVIRONMENT LIMIT (blocking for shots): this session runs on the Default environment, whose network blocks the picture CDN (ctm-img.victoria-tntt.workers.dev -> proxy 403). So: NO figure/scene pictures load, NO shots can be uploaded to CDN img/_review/, and dev/site/assets.py / build_site.sh cannot reach the CDN index. I built index.html + sw.js with a stub (the 26 img/*.json manifest URLs taken from the live sw.js; assets.json untouched = images unchanged); the lander must re-run `bash dev/site/build_site.sh` where the CDN is reachable. The environment `cung-tuong-mong` (CDN host allowed) exists but this session cannot be moved onto it (child session) -> MAIN: open the shots session there, or run the shots (Fold 755x1000@2 + iPad 1180x820@2) from a session that reaches the CDN.
+(a) SCENE PICTURE SIZE (owner 16/11 ~16:10Z). KIT 56.6, ONE rule `kszPicStep3(dlg)` (jksize.js), called by both appliers (kitFrameApply3, kitFrameApplyLive3): the picture stays BIG (fills what the text leaves) while the frame needs no scroll; when `.k3right` / body / `#mb` scrolls it steps down `KIT_SIZE.v3.picLadder` = LL > NL > NM > NS (KIT_SIZE.pic classes, heights per kitSzMode), biggest class first, stops at the first class with no scroll; kept only if it reduces the scroll; re-decided from scratch after the layout settles (180 ms), so it is never smaller than the scroll needs. kitFrameFits(Live)3 restore the picture style they measure with. Test (committed): `node dev/test/scene-pic-step.js index.html` (fake natural size 1280x720 + full subject box = worst case offline; every PEND frame twice per device, step OFF = before, ON = after; FAIL if after is worse or a smaller class would still remove the scroll). Scan (committed): `node dev/test/scene-pic-scan.js index.html` (frame | picture class | scrolls, all dialogs).
+SCAN TABLE (device | frame | size | picture px before>after (class) | scroll px before>after; frames not listed did not scroll and kept their picture):
+device | frame | ksz | picture px before→after (class) | scroll px before→after
+755x1000 | tt3 | XL | 188→188 | 9→9
+755x1000 | td1 | XL | 85→56 (NS) | 203→174
+755x1000 | phoenix | XL | 85→56 (NS) | 89→60
+755x1000 | doanngo | XL | 85→85 | 9→9
+755x1000 | vulan | XL | 107→107 | 9→9
+755x1000 | dongchi | XL | 85→56 (NS) | 50→21
+755x1000 | thbirthday | XL | 85→56 (NS) | 33→0
+755x1000 | prep | XL | 85→56 (NS) | 261→232
+755x1000 | night1 | XL | 85→56 (NS) | 193→164
+755x1000 | night2 | XL | 85→56 (NS) | 207→178
+755x1000 | giu | XL | 85→56 (NS) | 72→43
+755x1000 | cnvGrant | XL | 273→273 | 9→9
+755x1000 | thBribe | XL | 85→56 (NS) | 186→157
+755x1000 | cmBrawl | XL | 85→56 (NS) | 118→89
+755x1000 | vnight | XL | 85→56 (NS) | 251→222
+1180x820 | tt3 | XL | 269→269 | 9→9
+1180x820 | td1 | XL | 168→84 (NM) | 55→9
+1180x820 | phoenix | XL | 168→84 (NM) | 91→0
+1180x820 | doanngo | XL | 187→187 | 9→9
+1180x820 | vulan | XL | 170→170 | 9→9
+1180x820 | dongchi | XL | 168→56 (NS) | 102→0
+1180x820 | thbirthday | XL | 168→140 (NL) | 27→0
+1180x820 | prep | XL | 168→56 (NS) | 208→96
+1180x820 | night1 | XL | 168→84 (NM) | 44→0
+1180x820 | night2 | XL | 168→84 (NM) | 34→0
+1180x820 | cnvGrant | XL | 291→291 | 9→9
+1180x820 | thBribe | XL | 168→56 (NS) | 125→13
+1180x820 | cmBrawl | XL | 168→140 (NL) | 18→0
+1180x820 | cmTd | XL | 168→140 (NL) | 29→0
+1180x820 | vnight | XL | 168→84 (NM) | 86→0
+frames with a picture strip: 60  scrolling before: 31  scrolling after: 21  stepped down: 22
+ALL OK
+Reading: 60 frames with a scene strip; 31 scrolled before, 21 after, 22 stepped down; every frame that CAN be fixed by a smaller class is fixed (test FAIL count 0). What stays scrolling: (i) XL frames whose text + buttons alone are taller than the XL frame (picture already NS, e.g. prep, td1, night): XL scrolls inside by design (KIT 56.6 does not change that); (ii) a constant 9 px on tt3 / doanngo / vulan / cnvGrant (XL / L): it is the figure column + button row, NOT the picture (same 9 px before), NOT fixed here (flag for the kit keeper: kszFeetFit room constant 26). Frames that scroll in the old pop-up path (kdscroll: itarget, evpick, plantsv; the shop kdper) still use the old `--kdpic` vh stepping in jk4 kitDlgFit; they show a person column, not a scene picture; not converted (ask MAIN if wanted).
+(b) PHONE LUAN HOI / «Than phan kiep nay» (owner 09:30Z): KIT 56.7. Finding: s2 / s3 did NOT change the layout (kpIdLay one-page = figure ABOVE the panel dates from 11-14/11-16 kv1; the old figure-left layout was the pre-design-scale wide-portrait rule, KIT 28.11 text 'wide portrait: figure left, panel right'). Restored: one page (html.kv1) takes figure LEFT + ONE long vertical panel RIGHT (`.modal.kpfig.kpside`, panel width min(560, screen-16-12-140), height screen-16) whenever the screen leaves the panel KIT_SIZE.v3.narrow.minRight (274) next to the smallest figure column (fig3.M.cw 140): Fold 755x1000 yes; 412x1058 / 390x844 portrait phones stay figure-above (the panel cannot fit beside a figure). In this layout the ONE body of the screen is capped by the widest painted figure (KPID_WR .5, the old cap, same body for every face) so her whole figure stands in the column. Geometry measured (no pictures offline): Fold 755x1000 panel x187 y16 560x968, figure column 0..179, figure x11..169; 520x900 panel 336x868; 412x1058 / 390x844 unchanged (stack). CAVEAT: I could not LOOK at it with the real figure (CDN). Open point for the owner (not decided): robe overflow at the left edge to reach 0 offset: in the side layout the cap keeps the whole figure in the column (no spill); in the centre pop-ups a wide robe still reaches the screen left edge (s3 numbers: choice tallest crown 14 px, coach 26 px).
+(c) QUICKCHECK: the full `quickcheck.sh` cannot run here (its build step needs the CDN). Run piecewise on the committed index.html: `node dev/tools/quickcheck.js` = PASS (open 1567 ms 0 errors, old save from live main loads and plays a buoi, perf median new/live render 251/247, tab 452/436, buoi 1202/1138, tasks>200ms 19/17); time-spill-guard PASS; coregates G1/G2/G4 pass, G3 kit-conform FAILS IDENTICALLY ON LIVE MAIN in this CDN-less environment (live 20 MIXED 'event pictures: 0'; mine 21: the extra is place:tn, a different random event 'Ta bat gap' without a picture, + cold-palace not opened: state noise, not a layout fault) -> re-run G3 where the CDN loads.
+FILES: dev/build/jksize.js (picLadder, kszOver3, kszPicH3, kszPicStep3, kszPicFit3 floor release), dev/build/j79.js (kpIdLay side layout + CSS), dev/kit/KIT.md 56.6/56.7, dev/test/scene-pic-scan.js, dev/test/scene-pic-step.js, index.html / sw.js (stub build, see above).
+NOT DONE: Fold + iPad shots on CDN (blocked, see top); the real build_site.sh run; LOOKING at the identity card with a real figure.
