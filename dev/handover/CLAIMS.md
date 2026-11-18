@@ -64,3 +64,6 @@ balance-final #2 (opus; balance chain + AG arms) | review/balance-final | sessio
 | opt-card-short #3 (sonnet SMALL UI; OD L1877 as corrected 16:05Z/16:15Z, 09:30Z «!») | review/opt-card-short | MAIN ROOT-53 | session_01Rc5AsHxLKCb415DxYbpiHP | RUNNING | 18/11 18:00Z |
 | fullbody-frame-s4 (sonnet SMALL UI; 16:10Z picture size + phone Luân hồi revert) | review/fullbody-frame-s3 | MAIN ROOT-53 | session_01Rc5AsJUiBBwT9LH4J89i4E | RUNNING | 18/11 18:00Z |
 | land-m (sonnet LANDER: shown-odds-r2-rv cf1fc746 + monthly-ration-r6 287a0b79) | review/land-m | MAIN ROOT-53 | session_01Rc5AsJwMJVJdiZUsCPNM9T | RUNNING | 18/11 18:00Z |
+t8-mass-B c12–c22 a18 | CDN _review only | W74 session_011xDdVPGrS8Vtu3vK8hiwa9 | RUNNING | 2026-11-18T18:03Z (Foreman C ROOT-29)
+t8-mass-B c23–c32 a18 | CDN _review only | W75 session_011xDdVQ3iBaXTG6FnsDeBS8 | RUNNING | 2026-11-18T18:03Z (Foreman C ROOT-29)
+t8-mass-B c01–c11 a18 + frozen builder dev/art/t8-prompt-B | CDN _review only | W72 session_011xDdVNW3uEET1o4R4muEUH | RUNNING | 2026-11-18T18:03Z (Foreman C ROOT-29)
