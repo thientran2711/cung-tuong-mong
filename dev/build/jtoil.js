@@ -768,13 +768,6 @@ window.toilGlowOn=toilGlowOn;
 function toilFaceLayer(p,file){const lk=toilLookOfP(p);if(!lk)return"";const col=toilColOfP(p);const mk=toilMkLayer(file,lk,col);const src=mk?"":toilMakeupSvg(file,lk,col,false);if(!src&&!mk)return"";
  return (src?`<img class="kmkl kmkl-${lk}" src="${src}" alt="" aria-hidden="true" style="--fleft:0%;--ftop:0%;--fwidth:100%;--fheight:100%">`:"")+mk+(lk==="tuyet"?toilGlowLayer(file,col):"")}
 if(typeof kitFxLayers==="function"){const fx0=kitFxLayers;kitFxLayers=function(p,file){const h=fx0.apply(this,arguments);let m="";try{m=toilFaceLayer(p,file)}catch(e){}return m+h}}
-/* AVATAR MAKEUP (owner 18/11 ~09:25Z + ~02:35Z "Khung avatar là có trang điểm mà", review/avatar-makeup): every avatar-class frame (pcPort / mdH: top bar, side cards, tabs, lists, tall frame)
-   shows the SAME makeup colour layer as the stage at LOD step 0 (mirror strength, no boost), BAKED with the photo by KIT_BAKE (jk2b) like the scar: ONE image, no overlay box, so it cannot
-   drift. The layer is the exact toilMkLayer entry (same canvas, same colours, same fit points) = one source for stage, mirror and avatar. Under every other lasting mark (inserted first). */
-function toilAvatarMk(p,file){try{const lk=toilLookOfP(p);if(!lk||!file||!TOIL_MKS[lk])return null;const v=MK_FIT.get(file);if(!v)return null;const col=toilColOfP(p),base=toilMkBase(file,lk,col);if(!TOIL_MKC[base])toilMkLayer(file,lk,col);const e=TOIL_MKC[base];if(!e)return null;
- const b=e.box,id="mk"+lk+":"+base.split("").reduce((a,c)=>(a*31+c.charCodeAt(0))>>>0,7);
- return[{id,src:()=>new Promise(ok=>{if(e.src)return ok(e.src);(e.cbs=e.cbs||[]).push(ok)}),rect:[b[0],b[1],b[2],b[3],0],o:[0,0],alpha:1}]}catch(x){return null}}
-if(window.KIT_LASTING&&KIT_LASTING.add){KIT_LASTING.add({id:"makeup",layers:toilAvatarMk});const mk=KIT_LASTING.list.pop();KIT_LASTING.list.unshift(mk)}
 
 
 /* ================= §60 MAKEUP COLOURS · kitSwatches (owner 15/11 19:05Z, review/mk-colour) =================
@@ -876,7 +869,7 @@ function toilMkPaint(file,v,look,col,e,key,step){const im=new Image();im.crossOr
 /* size-aware makeup: one pass over every colour layer on screen; its face width in px (layer box = face + 30 % each side) picks the strength step, so every renderer (stage figure, avatar frame, close-up) gets the same curve */
 function toilLodStep(px){const L=BAL.toil.lod;if(!(px>0)||px>=L.fullAt)return 0;const t=Math.min(1,(L.fullAt-px)/(L.fullAt-L.maxAt));return Math.round(t*L.steps)}
 /* STAGE = MIRROR STRENGTH (owner 18/11 ~09:25Z, avatar-makeup): a face layer on the room stage / event-dialog figure is always LOD step 0 (the approved mirror look, no boost); every other place keeps the size curve */
-function toilStageEl(im){try{return!!(im&&im.closest&&im.closest("#stage,.kesfi")&&!im.closest(".kfzoom-i"))}catch(e){return false}}
+function toilStageEl(im){try{return!!(im&&im.closest&&im.closest("#stage,.kesfi,.kfxf[data-kav]")&&!im.closest(".kfzoom-i"))}catch(e){return false}}
 window.toilStageEl=toilStageEl;
 let toilLodRaf=0;
 function toilLodPass(){toilLodRaf=0;try{document.querySelectorAll("img.kmkc").forEach(im=>{const cur=im.dataset.mkk||"";const base=cur.replace(/\|L\d+$/,""),A=TOIL_MKA[base];if(!A)return;const w=im.getBoundingClientRect().width;if(!(w>0))return;const st=toilStageEl(im)?0:toilLodStep(w/1.6),have=+((/\|L(\d+)$/.exec(cur)||[])[1]||0);if(st===have)return;
