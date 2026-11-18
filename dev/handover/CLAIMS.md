@@ -9,3 +9,4 @@ B10 3 colour versions c04, c06, c07–c10 | _review CDN consort-tiers/<cNN>/b10 
 | E7cr2 re-review questline-q1c 99aa2c5 (opus BIG) | review/questline-q1c | E ROOT #3 | session_01DgYSWp8VHkKuSLyQCZNubc | RUNNING | 18/11 07:05Z |
 | REVIEW npc-purpose (opus BIG): phase A code review b723a1e vs ag-all-2-land base; phase B re-gate after LIVE | review/npc-purpose | C-AG #10 | session_01UV1SziEkemejE3R3kypQJT | RUNNING | 18/11 07:10Z |
 | review person-dialog-restore (sonnet small reviewer) | review/person-dialog-restore-r1 | ROOT-48 reviewer | session_01UV1SzkyUiNKEkWJM3e9b5U | PASS b2a9d3496 | 18/11 07:20Z |
+| E8f STEAL MINI-GAME FIX 1 (after E8r FAIL 1c4fe5ad; brief briefs/E8f-steal-minigame-fix1.md) | review/steal-minigame | E ROOT #3 | session_01DgYSWm5h3LgBS7jeBr3BtW | SẴN SÀNG KIỂM ea93a33d (report dev/handover/reports/steal-minigame.md) | 18/11 08:42Z |
