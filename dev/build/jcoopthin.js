@@ -124,10 +124,12 @@ TH.seatOf=function(seat){if(ST[seat])return ST[seat];
  const g={};for(const r of REG)g[r[0]]=J(r[3]);g.used=0;g.deck=[];g.Q=[];g.popIdx=null;g.popMsg="";
  return ST[seat]={S:s,ok:P.ok||"tt",pers,g,fresh:true,pid:P.pid}};
 TH.seatDrop=seat=>{delete ST[seat]};
-function fixRefs(s){const kid=n=>{try{return allKids().map(x=>x[0]).find(k=>k.name===n)||null}catch(e){return null}};
+/* {$r:id} / {$k:name} refs (stored state AND every part-D patch value on her phone, review coop-thin-e: a patch left raw {$r} in her S → pFaceOf/pv crash) */
+function unref(o){const kid=n=>{try{return allKids().map(x=>x[0]).find(k=>k.name===n)||null}catch(e){return null}};
  const fix=o=>{if(!plain(o))return o;if(o.$r!=null&&Object.keys(o).length===1)return rivals.find(v=>v.id===o.$r)||null;if(o.$k!=null&&Object.keys(o).length===1)return kid(o.$k);
-  for(const k in o)o[k]=fix(o[k]);return o};
- for(const k in s)if(k!=="kids"&&!X.W_KEYS.includes(k))s[k]=fix(s[k])}
+  for(const k in o)o[k]=fix(o[k]);return o};return fix(o)}
+const refKey=k=>k!=="kids"&&!X.W_KEYS.includes(k);
+function fixRefs(s){for(const k in s)if(refKey(k))s[k]=unref(s[k])}
 function standIn(PA,mine){if(!PA)return null;try{
  if(X.friendSrv(PA)){const m=typeof RV==="function"?RV(PA.S.srv.mid):null;if(m){const v=X.buildFriendSrv(PA);m.staff=m.staff||[];m.staff.push(v);return v}return null}
  const v=X.buildFriend(PA,mine);if(!v)return null;
@@ -285,9 +287,11 @@ D.rebase=()=>{if(D.cur&&CW.ctx)D.cur.p0=pSnap()};
 function pApply(root,L){let n=0;for(const [op,path,val,fr] of L||[]){try{if(op==="nv"){if(nvApply(path,val))n++;continue}let o=root;
   for(let i=0;i<path.length-1;i++){const k=path[i];if(plain(k)&&Array.isArray(o)){o=o.find(e=>eid(e)===k.id)||(k.i<o.length&&eid(o[k.i])==null?o[k.i]:undefined)}else{if(typeof k!=="string"||BADK.test(k))o=undefined;else{if(!plain(o[k])&&(op==="+"||op==="="||op==="a")&&typeof path[i+1]==="string")o[k]={};o=o[k]}}if(!plain(o))break}
   const k=path[path.length-1];if(!plain(o)||typeof k!=="string"||BADK.test(k))continue;
-  if(op==="+"){o[k]=(typeof o[k]==="number"?o[k]:0)+val}else if(op==="="){o[k]=J(val)}else if(op==="-"){delete o[k]}
-  else if(op==="a"){if(!Array.isArray(o[k]))o[k]=[];if(fr)o[k].unshift(...J(val));else o[k].push(...J(val))}
-  else if(op==="r"&&Array.isArray(o[k])){for(const e of val){const t=JSON.stringify(e);let j=o[k].findIndex(z=>JSON.stringify(z)===t);if(j<0&&eid(e)!=null)j=o[k].findIndex(z=>eid(z)===eid(e));if(j>=0)o[k].splice(j,1)}}
+  const V=x=>{const c=J(x);return root===S&&typeof path[0]==="string"&&refKey(path[0])?unref(c):c};
+  if(op==="+"){o[k]=(typeof o[k]==="number"?o[k]:0)+val}else if(op==="="){o[k]=V(val)}else if(op==="-"){delete o[k]}
+  else if(op==="a"){if(!Array.isArray(o[k]))o[k]=[];if(fr)o[k].unshift(...V(val));else o[k].push(...V(val))}
+  else if(op==="r"&&Array.isArray(o[k])){for(const e of val){const t=JSON.stringify(e);let j=o[k].findIndex(z=>JSON.stringify(z)===t);if(j<0&&eid(e)!=null)j=o[k].findIndex(z=>eid(z)===eid(e));
+   if(j<0&&plain(e)&&Object.keys(e).length===1&&("$r" in e||"$k" in e)){const u=V(e);if(u)j=o[k].indexOf(u)}if(j>=0)o[k].splice(j,1)}}
   n++}catch(e){console.error("thin patch",e)}}return n}
 TH.pApply=pApply;
 /* D r1 (item 3, the whole family): HER viewer rows on the NPCs (rel / oan / ghen / ev = what that NPC feels / holds toward HER, and every

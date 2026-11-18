@@ -19,6 +19,8 @@ function part(st,root){let hit=null,wkEnd=false;part.n="";for(const l of st){con
   if(n==="endTurn"||n==="monthTick"){wkEnd=true;hit=/^S\./.test(root)?"G":"C";part.n=n}else if(n==="nextBuoi"){hit=/^S\./.test(root)?"E":"C";part.n=n}else for(const [rx,pt] of ENTRY)if(rx.test(n)){hit=pt;part.n=n;break}}
  /* part E (review coop-thin-e): buổi tối's nextBuoi runs endTurn = her WEEK end (part G), not the buổi step */
  if(hit==="E"&&wkEnd)hit="G";
+ /* review coop-thin-e #4: the night's go (COOPW.allowN: nextBuoi → S.buoi=0 → endTurn, then the after-step wrappers outside endTurn) = her WEEK end too (G) */
+ if(hit==="E"&&window.COOPW&&COOPW.allowN){hit="G";part.n="nextBuoi·go"}
  return hit||"?"}
 const RAW=new WeakMap(),PX=new WeakMap();const CNT=new Map();let total=0,raw=0,sRep=0,rRep=0,on=false,state=0;const byRoot={},byPart={},statePart={},PCNT=new Map(),ENTN={};
 /* review r1: keys "__x" are private markers, not game state (jwdinv wdOf sets p.__wdmig=1 and deletes it in its finally = a re-entry guard,

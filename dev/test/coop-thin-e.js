@@ -5,7 +5,7 @@
    (bac, a log line) reaches the host's copy before her step and is not undone · E5 the world is read-only in her step (unit: an NPC
    number + a world key put back, her viewer row kept) · E6 host clock: a forced step runs both with her not ready ·
    E7 buổi tối: both ready → the night runs → week merged once · E9 cycle flags by do cyb · E10 night by do tn + the view ·
-   E11 her summons = a part-D card built on the host · E12 a world window's end on her household runs on the host · E8 no page errors. */
+   E11 her summons = a part-D card built on the host · E12 a world window's end on her household runs on the host · E13 no raw ref left in her S · E8 no page errors. */
 const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),path=require('path');
 const WURL=process.argv[2]||'https://ctm-coop.victoria-tntt.workers.dev';const LVL=+(process.argv[3]||5);const SWAP=+(process.argv[4]||0);
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,c?300:2500):''))};
@@ -103,6 +103,12 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  await H.p.evaluate(nm=>{const B=COOPW.thin.seatOf('b');(B.S.staff=B.S.staff||[]).push({name:nm,role:'maid',age:BAL.srvAge.ask+2,loyal:10});},nm);
  await H.p.evaluate(()=>{const w={id:99001,k:'phong',t0:wk()-1,t1:wk(),x:{n:0,mine:0}};WORLD_X.EVD.phong.end(w)});
  ok(await until(G,nm=>!(S.staff||[]).some(s=>s&&s.name===nm),nm,20000),'E12 her aged maid left (her household, run on the host, patch)',await H.p.evaluate(nm=>[COOPW.thin.E.stat.wwEnd,(COOPW.thin.seatOf('b').S.staff||[]).some(s=>s&&s.name===nm)],nm));
+ /* E13 (#4): every part-D patch value is de-referenced on her phone — no raw {$r:id} / {$k:name} left in her S (a raw ref crashed pFaceOf → pv) */
+ {const raw=await G.p.evaluate(()=>{const W=new Set((COOPW.X&&COOPW.X.W_KEYS)||[]);const out=[];const seen=new Set();
+   const walk=(o,p,d)=>{if(!o||typeof o!=='object'||seen.has(o)||d>8||out.length>5)return;seen.add(o);if(!Array.isArray(o)&&Object.keys(o).length===1&&('$r' in o||'$k' in o)){out.push(p);return}
+    if((typeof rivals!=='undefined'&&rivals.includes(o))&&d>0)return;for(const k of Object.keys(o))walk(o[k],p+'.'+k,d+1)};
+   for(const k of Object.keys(S))if(k!=='kids'&&!W.has(k))walk(S[k],'S.'+k,1);return {raw:out,pq:(COOPW.thin.E&&COOPW.thin.E.stat)||null}});
+  ok(!raw.raw.length,'E13 no raw {$r}/{$k} ref left in her S after the host\'s patches',raw.raw)}
  ok(!H.errs.length&&!G.errs.length,'E8 no page errors',[H.errs.slice(0,3),G.errs.slice(0,3)]);
  const nok=res.filter(r=>!r[0]).length;console.log('RESULT',res.length-nok+'/'+res.length);
  await b.close();process.exit(nok?1:0)})().catch(e=>{console.error(e);process.exit(2)});
