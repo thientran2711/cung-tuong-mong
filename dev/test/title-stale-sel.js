@@ -18,7 +18,7 @@ let fails=0;const ck=(ok,msg)=>{console.log((ok?'PASS ':'FAIL ')+msg);if(!ok)fai
   const p=await ctx.newPage();p.setDefaultTimeout(120000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
   await p.goto('http://localhost/index.html',{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function'&&typeof showTitle==='function');await sleep(2500);
   await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;start()});
-  for(let i=0;i<40;i++){await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name,null,{timeout:90000});if(!(await p.evaluate(()=>typeof isSrv==='function'&&isSrv())))break;await p.evaluate(()=>{S=null;start()})}
+  for(let i=0;i<40;i++){await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.name,null,{timeout:90000});if(!(await p.evaluate(()=>typeof isSrv==='function'&&isSrv())))break;await p.evaluate(()=>{S=null;try{nlNew()}catch(e){}start()})}
   await p.evaluate(()=>{Q.length=0;const md=document.getElementById('modal');md.hidden=true;md.className='modal';try{quiet=false}catch(e){}try{localStorage.setItem(SK(SLOT),JSON.stringify(ser()))}catch(e){console.error(e)}});
   await sleep(1500);await p.evaluate(()=>{document.querySelectorAll('#klife,#kroul,#kroulw').forEach(e=>e.remove());try{OPT.tut=false;T.pend={};T.tip&&tipOff()}catch(e){}try{NLP=null}catch(e){}});/* the new-life cover would hide the menu in the shot */
   console.log('save dbg',await p.evaluate(()=>({quiet:typeof quiet!=='undefined'?quiet:'n/a',slot:SLOT,keys:Object.keys(localStorage).filter(k=>/save/.test(k)),ld:!!loadSlot(3)})));

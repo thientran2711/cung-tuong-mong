@@ -11,7 +11,10 @@
    Travel: a trip longer than the khắc left first finishes this buổi (clock turns), then she arrives in the new
    buổi with the rest of the trip already spent, meeting whoever is there in that buổi.
    NPCs never use can/spend, so they are untouched. */
-function j76left(){return !S?0:(BAL.time.khac-used)+BAL.time.khac*(B4L-(S.buoi||0))}
+/* THE ONE DAY-KHẮC FUNCTION (owner OD L852/L886/L1473 + 17/11 16:45Z "tổng số khắc còn lại của một ngày"): the khắc left in the DAY =
+   the rest of buổi b (u khắc used) + every later buổi of the day. Every "is there still time" check reads it (player: can/dayFit/j76need;
+   an NPC deed of n khắc at buổi b, khắc kh of her record row: n <= j76left(b, kh)). Buổi is only a label: an act longer than the buổi spills into the next. */
+function j76left(b,u){if(!S)return 0;if(b==null)b=S.buoi||0;if(u==null)u=used;return Math.max(0,BAL.time.khac-u)+BAL.time.khac*Math.max(0,B4L-b)}
 function j76nextName(){const b=Math.min(B4L,(S.buoi||0)+1);return BUOI[b].replace("Buổi ","buổi ")}
 /* would an act of c khắc started now spill into the next buổi? (only when it is allowed) */
 function j76spills(c){return !!S&&!S.dead&&c>0&&used<BAL.time.khac&&used+c>BAL.time.khac&&!S.j76carry&&!window.__j76win&&(S.buoi||0)<B4L&&c<=j76left()}

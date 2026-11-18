@@ -13,7 +13,7 @@ const CU={did:false,last:null};window.CU=CU;
 BAL.cp={months:{small:1,big:2},share:[1,.5,.25],item:[.6,.4,.6],minBac:5};
 const CU_POOL={dan:["dancoc","tuithom"],hat:["dancoc","vongngoc","tuithom"],co:["nghien","tranhco","demgam"],dauho:["nhansam","yensao","demgam"],ban:["nhansam","yensao","agiao"],
  tho:["nghien","tranhco"],doi:["nghien","tranhco"],doden:["nghien","tuithom","demgam"],ve:["tranhco","nghien"],hoa:["tramngoc","vongngoc","boodieu","tuithom"],
- theu:["luahang","gamto","demgam","tuithom"],kim:["luahang","gamto","tuithom","vongngoc"],mua:["tramngoc","vongngoc","vongvang","boodieu"],banh:["yensao","nhansam","agiao"],huong:["huongtram","tuithom","sonphan"]};
+ theu:["luahang","gamto","demgam","tuithom"],kim:["luahang","gamto","tuithom","vongngoc"],mua:["tramngoc","vongngoc","vongvang","boodieu"],banh:["yensao","nhansam","agiao"],huong:["huongtram","tuithom","lxma2"]};
 const CU_KHOI={dan:"Cầm khôi",hat:"Ca khôi",co:"Kỳ khôi",dauho:"Đầu hồ khôi",ban:"Xạ khôi",tho:"Thi khôi",doi:"Đối khôi",doden:"Đăng khôi",ve:"Họa khôi",hoa:"Hoa khôi",theu:"Thêu khôi",kim:"Xảo khôi",mua:"Vũ khôi",banh:"Bếp khôi",huong:"Hương khôi"};
 const CU_PLACE=["Quán quân","Á quân","Giải ba"];
 /* one prize table per contest: the pool follows HER rank (what bạc is worth to her), so Nhất > Nhì > Tam whoever stands where */
@@ -32,7 +32,7 @@ function cuAward(o,ord,place,of,kind){o=o||{};const big=!!o.big,res={mine:null,h
   if(z.bac){if(p===S)apply({bac:z.bac});else ap(p,{bac:z.bac});chips.push(["Bạc",z.bac])}
   const ent={prize:chips,k:z.k,bac:z.bac,place:i+1};
   if(i===0){/* the Emperor's own gift: guaranteed at the big festivals and the feasts he attends */
-   if(big&&typeof bestow==="function"){ent.emp=true;try{bestow(p,"contest")}catch(e){console.error(e)}}else if(p!==S&&roll(30))try{bestow(p,"contest")}catch(e){}else if(p===S&&roll(30)){ent.emp=true;try{bestow(S,"contest")}catch(e){}}}
+   if(big&&typeof bestow==="function"){ent.emp=true;try{bestow(p,"contest")}catch(e){console.error(e)}}else if(p!==S&&empGive(p,30,"contest"))try{bestow(p,"contest")}catch(e){}else if(p===S&&empGive(S,30,"contest")){ent.emp=true;try{bestow(S,"contest")}catch(e){}}}
   if(p===S){S.honors=S.honors||[];const hn=(i===0&&CU_KHOI[kind]?CU_KHOI[kind]+" · ":CU_PLACE[i]+" · ")+title;S.honors.unshift({d:`T${S.month}/${S.year}`,t:hn,p:i+1});if(S.honors.length>40)S.honors.length=40;ent.title=hn;res.mine=ent}
   res.places.push(ent)});
  const m=res.mine;if(m){const rows=[];const ch=[];if(m.k)ch.push(cuItemChip(m.k));if(m.bac)ch.push(kitChip("Bạc",m.bac,"g"));rows.push(["Phần thưởng",ch,"t"]);

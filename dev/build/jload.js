@@ -118,10 +118,16 @@ async function pool(list,n,grp,stop){const c=await caches.open(AC);let i=0,dead=
  await Promise.all(Array.from({length:Math.min(n,list.length)},w))}
 
 let MAN=null,HAVE=null,coreList=[],figList=[];
+/* entry-blank-r3 (owner 18/11 ~18:25Z, blank first screen): NEVER cache.keys() on the whole picture cache. A player's 'ctm-assets' grows with every
+   picture shown (lazy) and every build; past ~18 000 entries Chrome refuses it ("Operation too large") — plan() then died in 'check' (core never
+   verified, fig never fetched) — and below that it is one huge serialized cache read that every picture of the first screen waits behind.
+   Instead: ask the cache for exactly the keys of the listed files (small lookups, 16 at a time). */
+async function cacheHave(c,files){const H=new Set();let i=0;const w=async()=>{while(i<files.length){const k=keyOf(files[i++]);try{if((await c.keys(k)).length)H.add(k)}catch(e){}}};
+ await Promise.all(Array.from({length:Math.min(16,files.length)},w));return H}
 async function plan(){
  let r=null;try{r=await fetch("assets.json",{cache:"no-cache"})}catch(e){}
  if(!r||!r.ok)r=await caches.match("assets.json",{ignoreSearch:true});if(!r)return false;
- MAN=await r.json();const c=await caches.open(AC);HAVE=new Set((await c.keys()).map(q=>q.url));
+ MAN=await r.json();const c=await caches.open(AC);HAVE=await cacheHave(c,MAN.files.filter(f=>f[3]==="core"||f[3]==="fig"));
  await migrate(c);
  coreList=[];figList=[];for(const f of MAN.files){if(f[3]==="fx"||f[3]==="lazy")continue;/* KIT §68 painted effects + "lazy" (perf budget, assets.py): on demand, never ahead; sw.js caches them when first shown */const g=f[3]==="core"?"core":"fig",G=KLOAD[g];G.total+=f[2];
   if(HAVE.has(keyOf(f))){G.have+=f[2];G.files++}else{(g==="core"?coreList:figList).push(f);G.left++}}
@@ -138,7 +144,7 @@ async function migrate(c){await moveCdn(c);let olds=[];try{olds=(await caches.ke
 /* pictures moved to the CDN (review/cdn-images): 'ctm-assets' entries still under the site's own img/ path move to their CDN key when the
    size matches (the hash changed from sha256 to md5, so content cannot be compared here; a redraw of the same byte size is very rare
    and is fixed by the next redraw/rename), then the old entry goes — no second download of ~700 MB */
-async function moveCdn(c){if(!CDNB)return;try{const own=new URL("img/",location.href).href;const byPath=new Map(MAN.files.map(f=>[f[0],f]));let n=0;
+async function moveCdn(c){if(!CDNB)return;/* entry-blank-r3: a whole-cache walk — once per device (it moves the pre-CDN copies; nothing new lands under the site's own img/) */try{if(localStorage.getItem("ctm-movecdn"))return;localStorage.setItem("ctm-movecdn","1")}catch(e){return}try{const own=new URL("img/",location.href).href;const byPath=new Map(MAN.files.map(f=>[f[0],f]));let n=0;
  for(const q of await c.keys()){if(!q.url.startsWith(own))continue;const p=decodeURIComponent(q.url.split("?")[0].slice(own.length-4));const f=byPath.get(p);
   if(f&&!HAVE.has(keyOf(f))){const r=await c.match(q);const b=r&&await r.blob();if(b&&b.size===f[2]){await c.put(keyOf(f),new Response(b,{headers:{"Content-Type":r.headers.get("content-type")||"application/octet-stream"}}));HAVE.add(keyOf(f));n++}}
   await c.delete(q)}KLOAD.moved=n}catch(e){}}
@@ -151,7 +157,7 @@ async function runCore(){if(!coreList.length){KLOAD.phase="done";close();startBg
   paint(KLOAD.err==="quota"?"Máy không còn chỗ cất tranh. Có thể vào cung ngay; tranh sẽ thỉnh khi cần.":
    KLOAD.err==="offline"?CTM_WAIT.dlOffline:CTM_WAIT.dlFlaky)}}
 /* after a cut: re-read the cache so the next run only asks for what is still missing */
-async function refresh(grp){const c=await caches.open(AC);HAVE=new Set((await c.keys()).map(q=>q.url));const G=KLOAD[grp];G.have=0;G.files=0;G.left=0;
+async function refresh(grp){const c=await caches.open(AC);const H=await cacheHave(c,MAN.files.filter(f=>(f[3]==="core")===(grp==="core")&&(f[3]==="core"||f[3]==="fig")));HAVE=new Set([...(HAVE||[])].concat([...H]));const G=KLOAD[grp];G.have=0;G.files=0;G.left=0;
  const l=[];for(const f of MAN.files){if(f[3]==="fx"||f[3]==="lazy"||(f[3]==="core")!==(grp==="core"))continue;if(HAVE.has(keyOf(f))){G.have+=f[2];G.files++}else{l.push(f);G.left++}}
  if(grp==="core")coreList=l;else figList=l}
 addEventListener("online",()=>{if(KLOAD.err==="offline"){KLOAD.err="";if(KLOAD.phase==="core")runCore();else if(bgOn)runBg()}});
@@ -205,12 +211,26 @@ const lAbs=u=>{u=String(u||"");if(!u||/^(data|blob):/.test(u))return"";try{retur
 let SIZE=null;function sizeOf(u){try{if(!MAN)return 0;if(!SIZE){SIZE=new Map();for(const f of MAN.files)SIZE.set(f[0],f[2])}const m=/img\/[^?#]*/.exec(u);return m?SIZE.get(decodeURIComponent(m[0]))||0:0}catch(e){return 0}}
 const lOk=u=>LIFE.done.has(u)||((LIFE.keep.get(u)||{}).ok!=null);
 /* one picture: load + decode (kept alive meanwhile, so it paints at once); raw = the string the game itself uses (PORK key of j39 porOf) */
-function lWant(u,raw){if(LIFE.done.has(u))return Promise.resolve(true);let e=LIFE.keep.get(u);if(e)return e.p;const im=new Image();im.decoding="async";e={im,ok:null};LIFE.keep.set(u,e);LIFE.busy++;
+function lWant(u,raw){if(LIFE.done.has(u))return Promise.resolve(true);let e=LIFE.keep.get(u);if(e)return e.p;const im=new Image();im.decoding="async";e={im,ok:null,u};LIFE.keep.set(u,e);LIFE.busy++;
  let res;e.p=new Promise(r=>{res=r});
  const fin=ok=>{if(e.ok!=null)return;e.ok=ok;LIFE.busy--;res(ok);
+  /* entry-blank-r3: a full-body figure is measured (kit body box, kitFigBody) as soon as it is here — the room stage hides its people until every
+     figure on it is measured (j59 'j59wait'), which was the ~2 s empty room after the gate / on Tiếp tục */
+  if(ok&&/\/fig-/.test(u))try{if(typeof kitFigBody==="function")setTimeout(()=>{try{kitFigBody(raw||u,null)}catch(x){}},0)}catch(x){}
   if(ok&&/\/por-/.test(u))try{if(typeof PORK!=="undefined"){[u,raw].forEach(k=>{if(k&&PORK[k]!==1){PORK[k]=1;LIFE.dirty=1}})}}catch(x){}
   setTimeout(()=>{LIFE.keep.delete(u);LIFE.done.add(u)},90000)};
- im.onload=()=>{(im.decode?im.decode().catch(()=>0):Promise.resolve()).then(()=>fin(true))};im.onerror=()=>fin(false);im.src=u;setTimeout(()=>fin(false),45000)/* review r6: a picture that never answers (stalled line) no longer holds LIFE.busy (fig pool, title prefetch) forever */;return e.p/* review r6: the title prefetch chains on it (was undefined: pPump threw after the first picture) */}
+ e.go=()=>{LQN++;const f0=fin;const done=ok=>{if(e.ok==null){LQN--;setTimeout(lPump,0)}f0(ok)};
+  im.onload=()=>{(im.decode?im.decode().catch(()=>0):Promise.resolve()).then(()=>done(true))};im.onerror=()=>done(false);im.src=u;setTimeout(()=>done(false),45000)/* review r6: a picture that never answers (stalled line) no longer holds LIFE.busy (fig pool, title prefetch) forever */};
+ LQ.push(e);lPump();return e.p/* review r6: the title prefetch chains on it (was undefined: pPump threw after the first picture) */}
+/* entry-blank-r3 (review item 6): the life set no longer asks for ~45 pictures at once. A small queue (8 at a time under the gate cover) and, once the
+   game is open while a picture ON SCREEN is still on its way (after the 25 s cap / 'Vào cung ngay'), only 1 off-screen picture at a time, so the
+   line goes to what she sees (portrait chip, side cards, stage) first. lFront moves wanted on-screen pictures to the head of the queue. */
+const LQ=[];let LQN=0,LVIS=0;
+function lPump(){const cap=LIFE.on?8:LVIS?1:6;while(LQN<cap&&LQ.length){const e=LQ.shift();if(e.ok==null)e.go()}}
+function lFront(urls){if(!urls.length)return;const S2=new Set(urls.map(u=>lAbs(u)||u));const a=[],b=[];for(const e of LQ)((S2.has(e.im&&e.u)||S2.has(e.u))?a:b).push(e);if(!a.length)return;LQ.length=0;LQ.push(...a,...b);lPump()}
+/* after the gate opens with pictures still out: watch the visible ones for up to 90 s */
+function lAfter(){const t0=Date.now();clearInterval(lAfter.t);lAfter.n=0;lAfter.bg=null;lAfter.t=setInterval(()=>{try{const p=lPending();/* the room scene and other on-screen CSS pictures too (a full style scan: every 2 s) */if(!(lAfter.n++%5))lAfter.bg=lBgs().filter(u=>!lCore(u));(lAfter.bg||[]).forEach(u=>{if(!lOk(u)&&!p.includes(u))p.push(u)});LVIS=p.length;if(p.length){p.forEach(u=>{const a=lAbs(u);if(a&&!lOk(a)&&!LIFE.keep.has(a))lWant(a,u)});lFront(p)}else lPump();
+  if(!p.length&&!LQ.length||Date.now()-t0>90000){LVIS=0;clearInterval(lAfter.t);lPump()}}catch(e){}},400)}
 /* the pictures of THIS life (raw strings → absolute); never assigns a figure to someone who has none yet (figFor would pick one) */
 function kitLifeSet(){const M=new Map();const add=r=>{if(r&&typeof r==="string"){const a=lAbs(r);if(a)M.set(a,r)}};
  try{if(typeof S==="undefined"||!S||typeof figFor!=="function")return M;
@@ -233,7 +253,11 @@ function lBgs(){const out=[],H=innerHeight,W=innerWidth;for(const e of document.
  if(e.closest("#klife,#kload"))continue;const r=e.getBoundingClientRect();if(!r.width||!r.height||r.bottom<0||r.top>H||r.right<0||r.left>W)continue;
  for(const m of bg.matchAll(/url\("?([^")]+)"?\)/g)){const u=lAbs(m[1]);if(u&&!/^data:/.test(u))out.push(u)}}return out}
 /* a core picture is in the local cache since the first loading screen: never a reason to show the gate */
-let CORE=null;function lCore(u){try{if(!MAN)return true;if(!CORE)CORE=new Set(MAN.files.filter(f=>f[3]==="core").map(f=>f[0]));const m=/img\/[^?#]*/.exec(u);return !!m&&CORE.has(decodeURIComponent(m[0]))}catch(e){return true}}
+/* entry-blank-r3: ...but only when this device really holds it — the core check finished ('done' / 'all') or the file was seen in the cache (HAVE).
+   Before the check ends (a sổ tapped / reopened right after a new build), after 'Vào cung ngay' (skipped) or with no manifest, a core picture is
+   NOT assumed here: the gate loads it like any other (a frame when it is cached, so the cover never shows then). */
+let CORE=null;function lCore(u){try{if(!MAN)return false;if(!CORE)CORE=new Map(MAN.files.filter(f=>f[3]==="core").map(f=>[f[0],f]));const m=/img\/[^?#]*/.exec(u);const f=m&&CORE.get(decodeURIComponent(m[0]));if(!f)return false;
+ return KLOAD.phase==="done"||KLOAD.phase==="all"||!!(HAVE&&HAVE.has(keyOf(f)))}catch(e){return false}}
 let lel=null;
 function lCover(){if(lel)return lel;lel=document.createElement("div");lel.id="klife";lel.className="modal kpscene kload klife";
  try{kitBackdrop(lel,"title")}catch(e){}
@@ -250,7 +274,7 @@ async function lifeGate(why){(LIFE.calls=LIFE.calls||[]).push(why);/* test count
   const pd=lPending().filter(u=>{const a=lAbs(u);return !lOk(a)&&!lCore(a)});KLOAD.lifeMiss=mw.concat(pd.map(u=>u.split("/").pop())).slice(0,12);if(!miss&&!pd.length){(KLOAD.lifes=KLOAD.lifes||[]).push({why,n:L.size,bytes:0,ms:0,late:0,cached:true});return}}
  LIFE.on=true;LIFE.go=false;const t0=Date.now();lCover();
  const st=KLOAD.life={why,n:0,bytes:0,ms:0,late:0};(KLOAD.lifes=KLOAD.lifes||[]).push(st);const all=new Set();let quiet=0,it=0,fin=false;
- try{for(;;){const L=kitLifeSet();if(it++%5===0)lBgs().forEach(u=>{if(!L.has(u))L.set(u,u)});L.forEach((raw,u)=>{lWant(u,raw);all.add(u)});const pend=lPending();pend.forEach(u=>all.add(u));
+ try{for(;;){const L=kitLifeSet();if(it++%5===0)lBgs().forEach(u=>{if(!L.has(u))L.set(u,u)});L.forEach((raw,u)=>{lWant(u,raw);all.add(u)});const pend=lPending();pend.forEach(u=>all.add(u));lFront(pend);
    if(LIFE.dirty&&![...L.keys()].some(u=>!lOk(u))&&Date.now()-t0<25000){LIFE.dirty=0;try{if(typeof S!=="undefined"&&S&&typeof render==="function")render()}catch(e){}quiet=0;await lSleep(60);continue}
    const lp=[...L.keys()].filter(u=>!lOk(u)),pset=new Set(pend);let have=0;all.forEach(u=>{if(!pset.has(u)&&(lOk(u)||!L.has(u)))have++});
    const slow=Date.now()-t0>6000;lPaint(have,Math.max(1,all.size),slow);
@@ -260,9 +284,17 @@ async function lifeGate(why){(LIFE.calls=LIFE.calls||[]).push(why);/* test count
    await lSleep(120)}}catch(e){console.error("life gate",e)}
  st.n=all.size;st.bytes=[...all].reduce((s,u)=>s+sizeOf(u),0);st.ms=Date.now()-t0;
  const c=lel;lel=null;if(c){c.classList.add("out");setTimeout(()=>c.remove(),500)}
+ if(st.late||LQ.length)lAfter();
  LIFE.on=false;/* review r6: the loop above already re-reads kitLifeSet() of the CURRENT S every round; a re-run after the 25 s cap or 'Vào cung ngay' covered the game again for the same pictures (25 s + 25 s, one flash between) */
  if(LIFE.again){LIFE.again=false;if(!st.late&&!LIFE.go)setTimeout(()=>lifeGate("again"),0)}}
 window.kitLifeGate=lifeGate;
+/* entry-blank-r3: the two kit silhouettes (KIT §59.1 stand-in of a figure on its way): their body box is known (fixed kit art), so it is set at boot
+   (KIT_SILBB = kitFigBody of img/kit/unknown-fig-f|m.webp; dev/test/entry-blank.js checks it against a live measure) — the room stage never waits
+   seconds for a measure of the silhouette it shows while the real figure loads (was 2–3.5 s of empty room on Tiếp tục). */
+const KIT_SILBB={f:{t:0,b:.998,l:.1764,r:.8606,ht:.044,ar:.5407,cl:.2074,cr:.8296},m:{t:0,b:1,l:.088,r:.8989,ht:.044,ar:.4563,cl:.1487,cr:.8382}};window.KIT_SILBB=KIT_SILBB;
+try{const FB=window.__KITFB||(window.__KITFB={});["f","m"].forEach(g=>{const v=Object.assign({},KIT_SILBB[g]);v.wl=Array(21).fill(v.l);v.wr=Array(21).fill(v.r);
+ [(typeof IMG_BASE!=="undefined"?IMG_BASE:"")+"img/kit/unknown-fig-"+g+".webp","img/kit/unknown-fig-"+g+".webp"].forEach(k=>{if(!FB[k])FB[k]={v,w:[]}})})}catch(e){}
+setTimeout(()=>{try{["f","m"].forEach(g=>{if(typeof j59unkSrc==="function")j59unkSrc(g)})}catch(e){}},0);
 /* TITLE PREFETCH (owner 18/11 02:06Z "không lẽ bây giờ tôi cứ bấm từng kiếp"): as soon as the game opens, the life sets of EVERY saved life
    (all slots, newest first) come in the background, 4 at a time, before the generic 'fig' set (it waits while LIFE.busy) — so tapping any life
    is usually instant and the gate above shows nothing. The set of a save is read by lending its S / rivals to kitLifeSet for one synchronous call. */

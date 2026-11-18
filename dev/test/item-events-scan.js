@@ -10,7 +10,7 @@
 const {chromium}=require('playwright');const fs=require('fs');const [,,URL,OUT,FAIL]=process.argv;
 (async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:1180,height:820},serviceWorkers:'block'})).newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&window.ievOf,null,{timeout:0});await p.waitForTimeout(1500);
- const R=await p.evaluate(()=>{document.getElementById('title').hidden=true;try{for(let i=0;i<200;i++){start();if(!isSrv())break}}catch(e){}
+ const R=await p.evaluate(()=>{document.getElementById('title').hidden=true;try{for(let i=0;i<200;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}}catch(e){}
   const rows=[];const txt=x=>{try{return typeof x==='function'?String(x()):String(x==null?'':x)}catch(e){return typeof x==='function'?x.toString():''}};
   const add=(src,ev,text,opts,force)=>{let key=force&&force.key||ievNoun(text)||ievNoun(opts.join(' · '));const acts=opts.map((n,i)=>{if(force&&force.acts&&force.acts[i])return force.acts[i];const v=ievVerb(n);return v==='refuse'?(force?'back':''):v});
    const I=key&&IT[key]?kitItemInfo(key):null;rows.push({src,ev,key:key||'',name:I?I.name:'',pic:I?!!I.src:false,opts:opts.map((n,i)=>[ievTxt(n).slice(0,70),acts[i]||'']),forced:!!force})};

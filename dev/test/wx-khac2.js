@@ -20,7 +20,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
  await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof render==='function'&&typeof currentWeather==='function');await sleep(2500);
  await p.addStyleTag({content:'#kroul{display:none!important}'});
  const r=await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();SLOT=3;document.getElementById('title').hidden=true;
-  for(let i=0;i<400;i++){start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;try{NLP=null}catch(e){}render();
+  for(let i=0;i<400;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;try{NLP=null}catch(e){}render();
   const o={};const K=BAL.time.khac,N=wxkN(),D0=BAL.wx.day;o.N=N;
   /* §1 + §2 + §3 */
   const off=[],kinds={},lvk={},flow={},keep={};const y0=S.year;
@@ -69,7 +69,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
    placeWhere();const none=!Object.values(S.where).includes("vuon");
    S.where.emp="thu";S.buoi=1;S.kmEmpDay=-1;const wWhy=typeof kmEmpWhy==="function"?kmEmpWhy(S,"walk"):"";const wO1=typeof kmEmpO==="function"?kmEmpO(S,"walk"):0;
    const sv=S.wx;S.wx={n:"nắng gắt",b:"nắng gắt",k:"sun",f:2,kd:"heat",kl:2};const wO0=typeof kmEmpO==="function"?kmEmpO(S,"walk"):0;S.wx=sv;
-   let left=0,n=0;const rid=String(v.id);for(let i=0;i<400;i++){const W={[rid]:"vuon"};wxkSweepW(W);n++;if(W[rid]!=="vuon")left++}
+   let left=0,n=0;const rid=String(v.id);const don=BAL.ag.day.on;BAL.ag.day.on=0;/* the sweep's own odds (no agent day plan; with the plan the NPC chooses in agDrawB, ag-wx.js — review ag-all-2 r2 W1) */try{for(let i=0;i<400;i++){const W={[rid]:"vuon"};wxkSweepW(W);n++;if(W[rid]!=="vuon")left++}}finally{BAL.ag.day.on=don}
    o.storm={open0:!!a0.ok,wx:S.wx.b,open1:!!a1.ok,why:st.why||"",grey:!!st.grey,walkWhy:/giông|tuyết/.test(wWhy),walkO:[wO0,wO1],leave:left/n,
     line:S.logs.slice(0,S.logs.length-nl).map(x=>String(x).replace(/<[^>]+>/g,"")).filter(x=>/giông/i.test(x)).join(" / "),lines:S.logs.slice(0,S.logs.length-nl).filter(x=>/giông/i.test(String(x))).length}}
   /* §9 frost */

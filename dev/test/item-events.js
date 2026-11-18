@@ -17,7 +17,7 @@ for(const sz of SIZES){const [W,H]=sz.split('x').map(Number);const c=await b.new
  await p.goto(BASE,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&window.kitItemFx&&window.ievOf,null,{timeout:0});await p.waitForTimeout(2000);
  await p.addStyleTag({content:'#kroul,#kroulw{display:none!important}'});
  await p.evaluate(async save=>{const kl=document.getElementById('kload');if(kl)kl.remove();document.getElementById('title').hidden=true;
-  let oldOk=null;if(save){try{localStorage.setItem(SK(3),save);const d=loadSlot(3);SLOT=3;quiet=true;deser(d);quiet=false;deal();oldOk=!!S}catch(e){quiet=false;oldOk='ERR '+e.message}window.__old=oldOk}if(!save&&(typeof S==='undefined'||!S||S.dead||isSrv()))for(let i=0;i<200;i++){start();if(!isSrv())break}
+  let oldOk=null;if(save){try{localStorage.setItem(SK(3),save);const d=loadSlot(3);SLOT=3;quiet=true;deser(d);quiet=false;deal();oldOk=!!S}catch(e){quiet=false;oldOk='ERR '+e.message}window.__old=oldOk}if(!save&&(typeof S==='undefined'||!S||S.dead||isSrv()))for(let i=0;i<200;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}
   if(save){try{showModal();window.__oldTag=!!document.querySelector('#modal:not([hidden]) .kiev .kitem')}catch(e){window.__oldTag='ERR '+e.message}}
   Q.length=0;document.getElementById('modal').hidden=true;document.querySelectorAll('[id^=kroul],#dawn,.kmov').forEach(e=>e.remove());render()},SAVE?fs.readFileSync(SAVE,'utf8'):null);
  if(SAVE){const o=await p.evaluate(()=>({old:window.__old,tag:window.__oldTag}));rows.push([sz,'old save','','',JSON.stringify(o),o.old===true&&o.tag===true?'ok':'FAIL']);if(!(o.old===true&&o.tag===true))fails.push(`${sz} old save: ${JSON.stringify(o)}`)}

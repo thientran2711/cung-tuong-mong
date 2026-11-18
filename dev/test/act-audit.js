@@ -67,13 +67,13 @@ AA.run=async(sf,j,f,k)=>{AA.restore();AA.show(sf);let B=AA.btns(sf);let b=B[j];i
  return{card,pre,d:AA.diff(pre,post),res,errs:AA.errs.slice(e0)}};
 AA.errs=[];window.addEventListener("error",e=>AA.errs.push(String(e.message).slice(0,200)));
 /* ---- scenarios ---- */
-AA.fresh=()=>{try{localStorage.clear()}catch(e){}document.getElementById("title").hidden=true;AA.reseed(11);for(let i=0;i<8;i++){start();if(!isSrv())break}AA.hide();S.buoi=0;used=0;
+AA.fresh=()=>{try{localStorage.clear()}catch(e){}document.getElementById("title").hidden=true;AA.reseed(11);for(let i=0;i<8;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}AA.hide();S.buoi=0;used=0;
  if(S.suc<60)S.suc=80;if(S.bac<200)S.bac=200;render()};
 AA.scen=(n)=>{AA.fresh();
  /* every state but "dau": she already knows everyone (names, faces), so the person acts are open */
  if(n!=="dau"){try{k61Know(rivals.filter(v=>v.alive),"",true,3)}catch(e){}try{kn();for(const v of rivals)S.met[v.id]=wk()}catch(e){}}
  if(n==="toi"){S.buoi=BUOI.length-1;used=0}
- if(n==="cao"){S.rank=5;S.sung=65;S.danh=60;S.th=55;S.tamco=55;S.mat=3;S.duc=60;try{fillStaff(S,true)}catch(e){}}
+ if(n==="cao"){S.rank=5;S.sung=65;S.danh=60;S.th=55;S.tamco=55;tmPlace(S,3);S.duc=60;try{fillStaff(S,true)}catch(e){}}
  if(n==="con"){try{const k=mkKid("m",4);S.kids.push(k);const k2=mkKid("f",2);S.kids.push(k2)}catch(e){AA.errs.push("mkKid "+e.message)}S.preg=0}
  if(n==="hau"){try{S.rank=Math.max(S.rank,3);fillStaff(S,true)}catch(e){}}
  if(n==="hh"){S.rank=7;const q=rivals.find(v=>v.queen);if(q){q.queen=false;q.rank=6}S.sung=70;S.danh=70;try{fillStaff(S,true)}catch(e){}}

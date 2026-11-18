@@ -21,7 +21,7 @@ async function boot(b,W,H,dpr){const ctx=await b.newContext({viewport:{width:W,h
  const p=await ctx.newPage();p.setDefaultTimeout(120000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  await p.goto(PAGE,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function'&&typeof kitHint==='function');await sleep(2500);
  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;start()});
- for(let i=0;i<40;i++){await p.waitForFunction(()=>typeof S!=="undefined"&&S&&S.name,null,{timeout:90000});if(!(await p.evaluate(()=>isSrv())))break;await p.evaluate(()=>{S=null;start()})}
+ for(let i=0;i<40;i++){await p.waitForFunction(()=>typeof S!=="undefined"&&S&&S.name,null,{timeout:90000});if(!(await p.evaluate(()=>isSrv())))break;await p.evaluate(()=>{S=null;try{nlNew()}catch(e){}start()})}
  await sleep(1800);await p.addStyleTag({content:'#kroul,#kroulw{display:none!important}'});
  await p.evaluate(()=>{document.querySelectorAll('#kroul,#kroulw').forEach(e=>e.remove());Q.length=0;const md=document.getElementById('modal');md.hidden=true;md.className='modal';try{NLP=null}catch(e){}S.bac=300;S.suc=80;S.th=Math.max(S.th||0,40);render()});
  return {ctx,p,errs}}
@@ -106,9 +106,9 @@ async function boot(b,W,H,dpr){const ctx=await b.newContext({viewport:{width:W,h
  /* ---- E: clarity by Tâm cơ, and the night talk options told apart ---- */
  R.E=await p.evaluate(async()=>{const W=t=>new Promise(r=>setTimeout(r,t));const out={};const t0=S.tamco,m0=S.mat;
   const read=()=>[...document.querySelectorAll('#mb .opt')].map(b=>`${(b.querySelector('.kan')||b).textContent.trim()} — ${(b.querySelector('.kr-hint .krv')||{}).textContent||""} [${(b.querySelector('.krisk')||{}).textContent||""}]`);
-  for(const [k,tc,mt] of [["vague",5,0],["plain",30,0],["sharp",70,3]]){S.tamco=tc;S.mat=mt;Q.length=0;pushDil(mkP("giu",{}),"Giữ hay không giữ");showModal();await W(350);out["giu "+k]=read();
+  for(const [k,tc,mt] of [["vague",5,0],["plain",30,0],["sharp",70,3]]){S.tamco=tc;tmPlace(S,mt);Q.length=0;pushDil(mkP("giu",{}),"Giữ hay không giữ");showModal();await W(350);out["giu "+k]=read();
    Q.length=0;pushDil(mkP("night1",{q:3,vp:0}),"Đêm thị tẩm");showModal();await W(350);out["night1 "+k]=read()}
-  S.tamco=t0;S.mat=m0;__close();return out});
+  S.tamco=t0;tmPlace(S,m0);__close();return out});
  { const E=R.E;const h=k=>E[k].map(s=>s.split(" — ")[1].replace(/ \[[^\]]*\]$/,""));
   if(h("giu vague").join()===h("giu plain").join())R.fails.push(["E:giu","hint does not sharpen from Tâm cơ 5 to 30"]);
   if(!/long thai/.test(h("giu plain")[1]||""))R.fails.push(["E:giu","'Đút bạc xin giữ' does not name keeping the pregnancy",h("giu plain")[1]]);

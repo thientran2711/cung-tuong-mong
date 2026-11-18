@@ -12,7 +12,7 @@ const CASES=[["tanphong","lo","Khương Lạc Anh được tấn phong"],["matco
   const p=await ctx.newPage();p.setDefaultTimeout(240000);p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function');await sleep(2500);
   await p.addStyleTag({content:'#kroul{display:none!important}'});
-  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<400;i++){start();if(!isSrv())break}
+  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<400;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}
    });await p.waitForFunction(()=>typeof S!=='undefined'&&S&&typeof rivals!=='undefined'&&rivals&&rivals.length>0,null,{timeout:60000});
   await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();Q.length=0;document.getElementById('modal').hidden=true;render()});await sleep(1500);
   for(const [nm,k,why,rec] of CASES){
@@ -20,7 +20,7 @@ const CASES=[["tanphong","lo","Khương Lạc Anh được tấn phong"],["matco
     S.met=S.met||{};S.met[v.id]=1;try{kn()}catch(e){}S.emoSeen=S.emoSeen||{};
     if(nm==="intel"){kitIntelPanel(v);return{v:v.name}}
     if(nm==="men"){const e=S.emp;emoSet(e,k,70,why);emoBox("emp");return{v:"emp"}}
-    if(k==="an"){S.emoSeen[emoKey(v)]=-99;S.mat=0;v.emoH=[];emoBox(emoKey(v));return{v:v.name,known:window.kitEmotion(v).known}}
+    if(k==="an"){S.emoSeen[emoKey(v)]=-99;tmPlace(S,0);v.emoH=[];emoBox(emoKey(v));return{v:v.name,known:window.kitEmotion(v).known}}
     S.emoSeen[emoKey(v)]=emoW();v.emoH=[];v.emo={k:"binh",v:0,w:emoW()};
     if(k!=="binh"){if(rec){v.emoH=[{k,v:60,why,w:emoW(),a:rec}];v.emo={k,v:60,why,w:emoW()}}else emoSet(v,k,60,why)}
     emoBox(emoKey(v));return{v:v.name}},[nm,k,why,rec||""]);

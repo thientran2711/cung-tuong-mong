@@ -9,7 +9,7 @@ const KINDS=[["petal",2,0,"hoa đào bay"],["leaf",8,0,"lá rơi"],["wind",8,0,"
   const p=await c.newPage();p.setDefaultTimeout(180000);const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof render==='function');await sleep(2500);
   await p.addStyleTag({content:'#kload{display:none!important}'});
-  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<400;i++){start();if(!isSrv())break}});
+  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<400;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}});
   await sleep(6000);let miss=0;
   for(let i=0;i<80&&miss<4;i++){const k=await p.evaluate(()=>{const r=document.querySelector('#kroul,.kroul');if(r){const bs=[...r.querySelectorAll('button')];const b=bs.find(x=>/Bỏ qua/.test(x.textContent))||bs.find(x=>/Tiếp|Vào|Nhập/.test(x.textContent));if(b){b.click();return 1}}return 0});miss=k?0:miss+1;await sleep(500)}
   await p.evaluate(()=>{setInterval(()=>{KFX.q=1;KFX.slow=0},100)});
