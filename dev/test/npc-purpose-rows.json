@@ -34,7 +34,7 @@
 "group": "G1",
 "event": "flirt witness",
 "fp": "t đưa tình với ${m.name}`);if(roll(risk/3)){const v=pick(liveRivals(tr",
-"done": "const W=npcWit(whereOf(S),null,{vs:S,not:[S]});const v=W.length?W[0].p:null;"
+"done": "const W=npcWit(whereOf(S),null,{vs:S,not:[S],pool:liveRivals(true)});const v=W.length?W[0].p:null;"
 },
 {
 "f": "j22.js",
@@ -86,7 +86,7 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "secret letter via bribable guard",
-"done": " {const L=npcWhy(\"letter\",{t,C:C.filter(v=>!v.queen&&menHcPal("
+"done": "const L=bb!=null?npcWhy(\"letter\",{t,C:C.filter(v=>!v.queen&&menHcPal(v))}):null;"
 },
 {
 "f": "jmen.js",
@@ -102,7 +102,7 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "admirer seeks her",
-"done": "id)-menH(b.id)));m.likeV=npwPick(C.slice(0,2),x=>typeof effSac===\"function\"?ef"
+"done": "const lv=npwPick(C.slice(0,2),x=>typeof effSac===\"function\"?effSac(x):x.sac||0);if(lv)m.likeV=lv.id"
 },
 {
 "f": "jmen.js",
@@ -119,7 +119,7 @@
 "group": "G1",
 "event": "spurned man's rumour; \"uy hiếp\" reveals a secret",
 "fp": "    if(roll(o)){const T=liveRivals(true).filter",
-"done": "const v=npwPick(T,v=>v.affair===m.id?100:m.likeV===v.id?60:20)"
+"done": "const v=npwPick(T,v=>v.affair===m.id?TW.own:m.likeV===v.id?TW.like:TW._);"
 },
 {
 "f": "jmen.js",
@@ -1583,7 +1583,7 @@
 "status": "DICE-ONLY",
 "group": "G3",
 "event": "random consort gains evidence of the secret exchange",
-"done": "const w=npcWit(loc96(),null,{vs:S,not:[S]})[0];"
+"done": "const w=npcWit(loc96(),null,{vs:S,not:[S,S.emp]})[0];"
 },
 {
 "f": "j96.js",
@@ -2031,7 +2031,7 @@
 "status": "DICE-ONLY",
 "group": "G2-last",
 "event": "family whereabouts per buổi; old flame / stranger met",
-"done": "function kcHab(L){const x=npwPick(L,y=>y[1]);"
+"done": "function kcHab(L){const x=npwPick(L,y=>y[1],{all:1});"
 },
 {
 "f": "jkc.js",
@@ -2063,7 +2063,7 @@
 "status": "DICE-ONLY",
 "group": "G2-last",
 "event": "family whereabouts per buổi; old flame / stranger met",
-"done": "const p=(npwPick(L,y=>y[1])||[\"\"])[0];"
+"done": "const p=(npwPick(L,y=>y[1],{all:1})||[\"\"])[0];"
 },
 {
 "f": "jkc.js",
@@ -2303,7 +2303,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "agent-layer internal dice (re-plan, 2nd goal, slot, summon, seat, jeal",
-"done": "const b2=npwPick(L2.filter(x=>x[1]>=a1*BAL.ag.why.g3.two),x=>x[1]);"
+"done": "const b2=a1>=bar?npwPick(L2.filter(x=>x[1]>=bar),x=>x[1]):null;"
 },
 {
 "f": "jagday.js",
@@ -2399,7 +2399,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "agent-layer internal dice (re-plan, 2nd goal, slot, summon, seat, jeal",
-"done": "const x=npwPick(O,o=>o[1]*mindW(v,MENU_TAG[o[0]]||\"scheme\"));"
+"out": "a slip is a weighting, not a whether: her near-best acts (within BAL.ag.why.near of the best) weigh the same and the whole list is kept; the caller (j70 npwPick / j40) picks the act"
 },
 {
 "f": "jshelf.js",
@@ -2639,7 +2639,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "mistress promotes servant; foes read cycle book / forge; confiscation ",
-"done": "{const o=npcWhy(\"dhTake\",{p});if(o&&roll(I().lose))window.dhLose(p,e,o)"
+"done": "const o=npcWhy(\"dhTake\",{p});if(!o)continue;"
 },
 {
 "f": "jdh2.js",
@@ -3387,6 +3387,62 @@
 "group": "G2",
 "event": "which suitor house",
 "done": "s=npwPick(f.length?f:L.slice(-2),x=>x[2])"
+},
+{
+"f": "j95.js",
+"line0": 148,
+"status": "DICE-ONLY",
+"group": "G3",
+"event": "plot errand buổi / spot (random slot, random hidden spot)",
+"done": "const c=npwPick(cs.slice(1),j95fr)||cs[1];const sp=r&&r.pl?[r.pl,placeName(r.pl)]:npwPick(SPOT95,j95quiet)||SPOT95[0];"
+},
+{
+"f": "j95.js",
+"line0": 149,
+"status": "DICE-ONLY",
+"group": "G3",
+"event": "plot errand khắc (random khắc)",
+"done": "const k1=npwPick([1,2,3],x=>agSoon(x,1))||1;"
+},
+{
+"f": "j95.js",
+"line0": 170,
+"status": "DICE-ONLY",
+"group": "G3",
+"event": "intent buổi slot (random among garden hours / mid buổi)",
+"done": "const e=npwPick(E,c=>j95empW(c).vuon);s=e!=null?[e]:[]}"
+},
+{
+"f": "j95.js",
+"line0": 171,
+"status": "DICE-ONLY",
+"group": "G3",
+"event": "intent buổi slot (random among garden hours / mid buổi)",
+"done": "else{const L=mid.length?mid:cs;const x=npwPick(L,j95fr);s=[x!=null?x:L[0]]}"
+},
+{
+"f": "j95.js",
+"line0": 209,
+"status": "LIVE-OFF",
+"group": "G3",
+"event": "surprise move target (random among surprises; only under j95dice(J95.SUR), agent layer off)",
+"fp": " return L.length?L[Math.floor(Math.random()*L.length)]:null}"
+},
+{
+"f": "j75.js",
+"line0": 188,
+"status": "DICE-ONLY",
+"group": "G1",
+"event": "Empress / Thái hậu admonition over a monopoly (roll 30; agent layer off)",
+"done": "const ad=W.length?npcWhy(\"admon\",{p,n:f.n,W}):null;"
+},
+{
+"f": "j22.js",
+"line0": 21,
+"status": "DICE-ONLY",
+"group": "G1",
+"event": "affair exposed: death or lãnh cung (roll 50)",
+"done": "if(npcWhy(\"empMercy\",{p:S}))cold("
 }
 ]
 }

@@ -17,10 +17,10 @@ npwReg("affair",{grp:"consort",who:()=>liveRivals(false).filter(v=>v&&v.alive&&!
   const s=Math.max(0,A.sung-(v.sung||0))*A.sungK-(v.duc||0)*A.ducK+(hasT(v,"Kín đáo")?A.kin:0);
   return {s,t:m,r:`lâu không được Hoàng thượng đoái hoài, lại có ${m.name} đem lòng để ý`}}});
 npwReg("affairOut",{grp:"consort",who:c=>liveRivals(true).filter(w=>w&&w!==c.v&&w.alive&&!w.out),
- why(w,c){const A=npw1B("affairOut");if(evG(w,c.v)<A.ev)return null;const h=hostility(w,c.v);if(h<A.host)return null;return {s:h,t:c.v,r:"nắm chứng cứ trong tay, lại sẵn lòng oán nàng"}}});
+ why(w,c){const A=npw1B("affairOut");if(evG(w,c.v)<A.ev)return null;const h=hostility(w,c.v);if(h<A.host)return null;return {s:h,t:c.v,r:"nắm chứng cứ trong tay, vốn mang oán với nàng"}}});
 npwReg("tryst",{grp:"pair",cdOf:m=>{const C=npw1B("tryst").cd;return MEN_ROVE.some(t=>hasT(m,t))?C[0]:C[1]},who:c=>[c.m],
  why(m,c){const A=npw1B("tryst");const s=A.base+(MEN_ROVE.some(t=>hasT(m,t))?A.rove:0)-((hasT(c.v,"Kín đáo")||hasT(m,"Kín đáo"))?A.fear:0);return {s,t:c.v,r:`hẹn hò với ${npwNm(c.v)}`}}});
-npwReg("letter",{grp:"consort",who:c=>c.C,why(v){const W=npw1B("letter").w;const why=v.confined?"confined":v.plan?"plan":(v.preg&&v.hidden)?"preg":((v.sung||0)<25&&(v.ghen||0)>=50)?"jealous":"";
+npwReg("letter",{grp:"consort",who:c=>c.C,why(v){const W=npw1B("letter").w;const why=v.confined?"confined":v.plan?"plan":(v.preg&&v.hidden)?"preg":((v.sung||0)<npw1B("letter").jSung&&(v.ghen||0)>=npw1B("letter").jGhen)?"jealous":"";
   if(!why)return null;return {s:W[why],r:why}}});
 npwReg("seek",{grp:"man",cdOf:m=>nv(m,"menGap"),who:c=>[c.m],why(m,c){const A=npw1B("seek");const v=c.v;if(!v)return null;const sac=typeof effSac==="function"?effSac(v):(v.sac||0);
   return {s:A.base+Math.max(0,sac-A.sac),t:v,r:`mê ${npwNm(v)}`}}});
@@ -80,7 +80,7 @@ npwReg("manPoem",{grp:"man",who:()=>(S.men||[]).filter(m=>m.alive&&(m.tinh||0)>=
 npwReg("svDefect",{grp:"srv",who:()=>{const L=[];for(const v of liveRivals(true))for(const s of (v.staff||[]))if(s.role==="maid"&&s.loyal<BAL.loy.bad&&s.spyFor!=="me")L.push(s);return L},
  why(s){const v=liveRivals(true).find(x=>(x.staff||[]).includes(s));return v?{s:npwB().min+(BAL.loy.bad-s.loyal),t:v,r:"bất mãn với chủ"}:null}});
 npwReg("repay",{grp:"consort",who:c=>c.v?[c.v]:[],why(v){return (v.bac||0)>=npw1B("ap").repay&&aff(v,S)>=0?{s:npwB().min,t:S,r:"giữ chữ tín"}:null}});
-npwReg("svSell",{grp:"srv",who:c=>c.g?[c.g]:[],why(g){let b=null;for(const v of liveRivals(true)){const o=npw1Mot(v,S,"spy");if(o&&(!b||o.s>b.s))b={s:npwB().min+(BAL.loy.out-(g.loyal||0)),t:v,r:"ôm hận ngươi phạt oan"}}return b}});
+npwReg("svSell",{grp:"srv",who:c=>c.g?[c.g]:[],why(g){let t=null,m=-1;for(const v of liveRivals(true)){const o=npw1Mot(v,S,"spy");if(o&&o.s>m){m=o.s;t=v}}/* the buyer = the rival who most wants her secrets */return t?{s:npwB().min+(BAL.loy.out-(g.loyal||0)),t,r:"ôm hận ngươi phạt oan"}:null}});
 npwReg("svCause",{grp:"srv",who:()=>(S.staff||[]).filter(s=>!s.cause),why(s){return {s:npwB().min,t:S,r:"tính nết"}}});
 /* ---- G1 part 4: life events (j68 actors / tick / visit swap, j68e/f/h) and favours (j72 NPC↔NPC, Thái hậu / Hoàng hậu errands, debts). BAL.ag.why.{e68,fav,job,q72} ----
    npcFavor   a consort asks a friend (aff ≥ fav.aff) for help only with a NEED of her own (fav.w by need: short of silver, ill, an errand to do, cold
@@ -88,7 +88,7 @@ npwReg("svCause",{grp:"srv",who:()=>(S.staff||[]).filter(s=>!s.cause),why(s){ret
    ladyJob    the Thái hậu / Hoàng hậu give an errand to the consort they trust (Thái hậu: regard ≥ job.th; Hoàng hậu: liking ≥ job.aff); the task
               follows the palace (someone ill → visit her; a gifted one → the banquet; else copying sutras / embroidery)
    q72Collect one she owes comes to collect when there is a matching need now (a valid request of that kind), the bigger the debt the sooner */
-function npw1Fr(a,L,f){return npwPick(L.filter(b=>b!==a&&aff(a,b)>=npw1B("fav").aff&&(!f||f(b))),b=>10+aff(a,b))}
+function npw1Fr(a,L,f){return npwPick(L.filter(b=>b!==a&&aff(a,b)>=npw1B("fav").aff&&(!f||f(b))),b=>npw1B("fav").aff+aff(a,b))}
 function npw1Need(a){const F=npw1B("fav"),W=F.w,O=[];const rv=liveRivals(true).filter(x=>x!==a);
  if((a.bac||0)<npw1B("ap").poor)O.push([W.poor,3]);if(a.ill)O.push([W.ill,6]);if(a.q72job!=null&&wk()-a.q72job<=F.jobW)O.push([W.job,0]);
  if((a.th||0)<F.thLow)O.push([W.th,4,b=>(b.th||0)>=F.th]);
@@ -196,7 +196,7 @@ npwReg("mock",{grp:"consort",who:()=>liveRivals(true),why(v){return npw1Mot(v,S,
    sendMaid   the fallback (jagmaid off): she sends her maid to serve when she cannot (with child / ill) and fears losing him
    famGift    the family of the most neglected consort sends gifts against the monopoly ((want − Sủng) × k) */
 npwReg("callMe",{grp:"consort",who:()=>liveRivals(true).filter(v=>!v.confined&&!sameHouse(S,v)),why(v){return NPW.reg.apFriend.why(v,{})||NPW.reg.apTaunt.why(v,{})}});
-npwReg("suitor",{grp:"house",who:c=>c.F,cdOf:()=>0,why(s){return {s:npwB().min+(3-(s.tier||0))*10+(s.tai||0)/10,r:"nhà hắn muốn kết thông gia"}}});
+npwReg("suitor",{grp:"house",who:c=>c.F,cdOf:()=>0,why(s){const U=npwB().suitor;return {s:npwB().min+(U.tiers-(s.tier||0))*U.tierK+(s.tai||0)/U.taiDiv,r:"nhà hắn muốn kết thông gia"}}});
 function npw1F7(v){const F=npw1B("f7");const a=Math.max(0,...Object.values(v.arts||{0:0}));return (F.want-(v.sung||0))*F.k+a*F.art+(traitsOf(v).some(t=>F.ambT.includes(t))?F.amb:0)}
 npwReg("f7Enter",{grp:"consort",who:c=>c.NP,cdOf:()=>0,why(v){const s=npw1F7(v);return s>0?{s,r:"muốn được Hoàng thượng để mắt"}:null}});
 npwReg("f7Gamble",{grp:"consort",who:c=>c.L,cdOf:()=>0,why(v){const F=npw1B("f7");const g=traitsOf(v).some(t=>npw1B("dil").greedT.includes(t))?F.greed:0;const s=g+Math.max(0,F.poor-(v.bac||0));return s>0?{s,r:g?"vốn ham của":"túng bạc"}:null}});
@@ -205,6 +205,8 @@ npwReg("f7Merit",{grp:"consort",who:c=>c.L,why(v){const F=npw1B("f7");const s=(v
 npwReg("nightPrep",{grp:"consort",who:c=>[c.v],cdOf:()=>0,why(v){const J=npw1B("j75");const s=(J.want-(v.sung||0))*J.k+(traitsOf(v).some(t=>npw1B("f7").ambT.includes(t))?J.amb:0);return s>0?{s,r:"muốn giữ ân sủng"}:null}});
 npwReg("pillowTalk",{grp:"consort",who:c=>[c.v],cdOf:()=>0,why(v){return npw1Mot(v,S,"rumor")}});
 npwReg("sendMaid",{grp:"consort",who:c=>[c.v],why(v){return (v.preg||v.ill)&&(v.sung||0)>=npw1B("j75").maidSung?{s:npwB().min+(v.sung||0)/4,r:"không hầu được, sợ mất ân sủng"}:null}});
+/* admon      the Empress (else the Thái hậu) admonishes him over a monopoly (agent layer off): push = nights hogged in six × j75.admK (the gap = BAL.tw.g.admonCd) */
+npwReg("admon",{grp:"court",who:c=>c.W||[],cdOf:()=>0,why(w,c){return {s:(c.n||0)*npw1B("j75").admK,t:c.p,r:"mưa móc đều khắp"}}});
 npwReg("famGift",{grp:"house",who:c=>c.L,cdOf:()=>0,why(x){const J=npw1B("j75");const g=x===S?S.sung:(x.sung||0);const s=(J.mono-g)*J.k;return s>0?{s,t:x,r:"thấy con gái bị lạnh nhạt"}:null}});
 /* ---- G1 part 10: lies about her (j95b). BAL.ag.why.lie ----
    exposeMe   one who holds proof of her real harm tells the victim when her grudge is strong enough (motiveOK expose + hostility ≥ lie.expose)

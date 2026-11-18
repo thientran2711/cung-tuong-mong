@@ -28,7 +28,7 @@ function menGuards(){return (S.men||[]).filter(m=>m.rw==="thị vệ")}
 (function(){const m0=menInit;menInit=function(){const r=m0.apply(this,arguments);try{if(S&&S.men)for(const m of S.men){const v=m.likeV!=null?RV(m.likeV):null;if(v&&v.alive&&!v.out)continue;m.likeV=null;
   if(!MEN_FANCY.some(t=>hasT(m,t)))continue;const C=liveRivals(false).filter(x=>!x.queen&&(x.age||20)>=18&&!x.affair);if(!C.length)continue;
   /* the most beautiful one he can see (her looks), the id breaks ties: no dice */
-  C.sort((a,b)=>((typeof effSac==="function"?effSac(b):b.sac||0)-(typeof effSac==="function"?effSac(a):a.sac||0))||(menH(a.id)-menH(b.id)));m.likeV=npwPick(C.slice(0,2),x=>typeof effSac==="function"?effSac(x):x.sac||0).id}}catch(e){}return r}})();
+  C.sort((a,b)=>((typeof effSac==="function"?effSac(b):b.sac||0)-(typeof effSac==="function"?effSac(a):a.sac||0))||(menH(a.id)-menH(b.id)));const lv=npwPick(C.slice(0,2),x=>typeof effSac==="function"?effSac(x):x.sac||0);if(lv)m.likeV=lv.id}}catch(e){console.error("menLikeV",e)}return r}})();
 (function(){if(typeof figPick!=="function")return;const f0=figPick;figPick=function(who){try{if(S&&who&&who.rw==="thị vệ"&&(S.men||[]).includes(who)){const M=FIGIX.man||{};const ks=Object.keys(M).filter(k=>/thive/.test(k)).sort();
   if(ks.length){if(who.fid&&M[who.fid])return who.fid;const i=menGuards().indexOf(who);who.fid=ks[Math.max(0,i)%ks.length];return who.fid}}}catch(e){}return f0.apply(this,arguments)}})();
 
@@ -54,7 +54,7 @@ function menSchedRoad(){try{return menRoad()||(!!S&&!S.dead&&typeof isSrv==="fun
 function menSched(){menInit();const W={},Y={};const b=S.buoi||0,night=b===B4L,w=wk();const f=menFestOn();const L=liveRivals(true);
  for(const m of S.men){if(!m.alive||menBanned(m))continue;const rw=m.rw;let k=null,ww="";const i=+m.id.slice(1)||0;
   if(rw==="thị vệ"){k=menDuty(m,w,b);ww=k?"duty":""}
-  else if(rw==="thái y"){const sick=L.filter(v=>(v.preg||v.ill||(v.suc!=null&&v.suc<40))&&menHcPal(v));if(sick.length&&b===2){k=menHcPal(npwPick(sick,v=>(v.ill?60:0)+(v.preg?30:0)+Math.max(0,40-(v.suc==null?40:v.suc))+1));ww="summons"}else if(!night){k="tyv";ww="duty"}}
+  else if(rw==="thái y"){const TY=BAL.ag.why.men.ty;const sick=L.filter(v=>(v.preg||v.ill||(v.suc!=null&&v.suc<TY.suc))&&menHcPal(v));if(sick.length&&b===2){k=menHcPal(npwPick(sick,v=>(v.ill?TY.ill:0)+(v.preg?TY.preg:0)+Math.max(0,TY.suc-(v.suc==null?TY.suc:v.suc))+TY.b));ww="summons"}else if(!night){k="tyv";ww="duty"}}
   else if(rw==="vương gia"){if(!S.thDead&&b===0&&(w+i)%4===0){k="tn";ww="visit"}}
   else if(rw==="nhạc sư"||rw==="họa sư"){const o=menOrder(m,w);if(o&&o.b===b){k=o.k;ww="order"}}
   else if(rw==="sứ thần"){if(b===0&&(w+i)%3===0){k="thu";ww="duty"}}
@@ -95,10 +95,10 @@ function menMakePlans(t){const add=P=>{P.id=(S.menPS=(S.menPS||0)+1);P.w=t;S.men
   if(m.rw==="thị vệ"&&menDuty(m,t,B4L))continue;const careful=hasT(v,"Kín đáo")||hasT(m,"Kín đáo");const k=careful?"lc":(menHcPal(v)&&hasT(v,"Kiêu ngạo")?menHcPal(v):"vuon");
   add({m:m.id,v:v.id,r:"tryst",b:B4L,h:3,k,from:m.rw==="thị vệ"?"dtd":"vuon",hide:30+(v.tamco||0)/3})}
  /* 2. secret letters: a consort with a reason to reach the outside, once a season (12 tuần) while the reason lasts, through a guard who can be bought, on his shift;
-    one letter a tuần goes out at most (the guards can carry only one safely) */
- {const L=npcWhy("letter",{t,C:C.filter(v=>!v.queen&&menHcPal(v))});const v=L&&L.who;const why=L&&L.why;if(v){
-  const G=menGuards().filter(g=>g.alive&&!menBanned(g)&&(MEN_BRIBE.some(t=>hasT(g,t))||(g.loyal||50)<BAL.loy.mid)).sort((a,b)=>(a.loyal||50)-(b.loyal||50));
-  const g=G[0];const bb=G.length?[B4L,2,0].find(x=>menDuty(g,t,x)):null;if(bb!=null)add({m:g.id,v:v.id,r:"letter",why,b:bb,h:2,k:menHcPal(v),from:menDuty(g,t,bb),hide:20+(v.tamco||0)/4})}}
+    one letter a tuần goes out at most (the guards can carry only one safely). The bribable guard on shift is found FIRST: no carrier → nobody writes (no cd spent) */
+ {const G=menGuards().filter(g=>g.alive&&!menBanned(g)&&(MEN_BRIBE.some(t=>hasT(g,t))||(g.loyal||50)<BAL.loy.mid)).sort((a,b)=>(a.loyal||50)-(b.loyal||50));
+  const g=G[0];const bb=g?[B4L,2,0].find(x=>menDuty(g,t,x)):null;
+  const L=bb!=null?npcWhy("letter",{t,C:C.filter(v=>!v.queen&&menHcPal(v))}):null;const v=L&&L.who;const why=L&&L.why;if(v)add({m:g.id,v:v.id,r:"letter",why,b:bb,h:2,k:menHcPal(v),from:menDuty(g,t,bb),hide:20+(v.tamco||0)/4})}
  /* 3. overstay: a craftsman of a roving nature on a real order in a palace whose mistress is out of favour or the one he fancies */
  for(const m of S.men){const o=menOrder(m,t);if(!m.alive||!o||o.v==null||!MEN_ROVE.some(t=>hasT(m,t)))continue;const v=RV(o.v);if(!v||v.queen||!((v.sung||0)<40||m.likeV===v.id))continue;
   add({m:m.id,v:v.id,r:"overstay",job:m.rw,b:o.b,h:4,k:o.k,from:o.k,hide:10})}
@@ -260,7 +260,7 @@ function menNpcSee(m,y){if(!m||!y)return;const c=y.v!=null?RV(y.v):null;for(cons
 (function(){const t0=talkOpts;talkOpts=function(p){const A=t0.apply(this,arguments);try{if(p&&p.kind==="man"&&p.ref&&menRoad()){const m=p.ref;const s=(S.menSec||{})[m.id];
   if(s&&!s.used){const o=od(BAL.odb.jmen.odO_2+(S.tamco||0)/3+(s.hid?10:0)-(nv(m,"menHide")));
    A.push({n:"Uy hiếp hắn",o,x:`hắn nộp bạc hay khai tin để giữ kín chuyện ${MEN_RT[s.r]||"cũ"} · hỏng: hắn ôm hận`,run:()=>{s.used=1;menStat("threat");
-    if(roll(o)){/* her threat's success odds (BAL); what he reveals = what he really knows (npwPick below) */const T=liveRivals(true).filter(v=>v.affair||(v.preg&&v.hidden)||(v.plan));if(T.length){const v=npwPick(T,v=>v.affair===m.id?100:m.likeV===v.id?60:20);const F=j78facts(v).filter(f=>f.kind==="secret"||f.kind==="plan");const f=F[0];
+    if(roll(o)){/* her threat's success odds (BAL); what he reveals = what he really knows (npwPick below) */const T=liveRivals(true).filter(v=>v.affair||(v.preg&&v.hidden)||(v.plan));if(T.length){const TW=BAL.ag.why.men.tell;const v=npwPick(T,v=>v.affair===m.id?TW.own:m.likeV===v.id?TW.like:TW._);const F=j78facts(v).filter(f=>f.kind==="secret"||f.kind==="plan");const f=F[0];
       if(f){intelAdd(v,f,{by:m.name,how:"uy hiếp "+m.name});return `Hắn run sợ, khai: ${f.txt}`}}
      apply({bac:BAL.eff.jmen.bacRun});m.af=(m.af||0)-10;return `Hắn run sợ, nộp 40 lạng bạc xin ngươi giữ kín. Bạc ${balSg(BAL.eff.jmen.bacRun)}.`}
     m.grudge="me";m.grudgeN=2;m.af=(m.af||0)-20;return "Hắn cứng cổ không chịu, từ nay ôm hận ngươi."}})}}}catch(e){console.error("men opts",e)}return A}})();

@@ -145,14 +145,17 @@ function j95week(){const z=j95z();if(z.itWk===wk())return;z.itWk=wk();if(z.mo!==
     if(z.sec.some(x=>x.a==="v"+v.id&&x.c===c))continue;z.sec.push({a:"v"+v.id,b:m.id,c,kh:[k0,k0+1],k:v.j95spot[0],spot:v.j95spot[1],kind:"tryst",why:`tư tình với ${m.name}`,wk:wk()})}}
   /* a plot in preparation: an errand to the place its route names, or a word with her own eunuch in a quiet corner */
   try{const z7=j70();const p=z7&&z7.pl.find(x=>!x.end&&x.st==="prep"&&x.a===v.id);if(p&&(window.agOn&&agOn()?ag2Ch((v.staff||[]).find(x=>x.role==="eunuch")||(v.staff||[])[0]||v,80*cl(((((v.staff||[]).find(x=>x.role==="eunuch")||(v.staff||[])[0]||{}).loyal)||50)/50,.5,1.25)):j95dice(80))){const r=pr70(p);const t=pt70(p);const s=(v.staff||[]).find(x=>x.role==="eunuch")||(v.staff||[])[0];
-   const c=cs[1+Math.floor(Math.random()*(cs.length-1))];const sp=r&&r.pl?[r.pl,placeName(r.pl)]:SPOT95[Math.floor(Math.random()*SPOT95.length)];
-   z.sec.push({a:"v"+v.id,b:s?"s"+s.sid:null,c,kh:[1+Math.floor(Math.random()*3)],k:sp[0],spot:sp[1],kind:"meet",plot:p.id,tgt:t?j95id(t):null,why:`chuẩn bị mưu: ${r?r.n.toLowerCase():"mưu hại"} nhắm vào ${t===S?"ngươi":t?t.name:"người khác"}`,wk:wk()})}}catch(e){}}
+   /* npc-purpose: the errand goes when her palace needs her least (j95fr), to the plot's own place else the quietest hidden spot, at the first khắc it can */
+   const c=npwPick(cs.slice(1),j95fr)||cs[1];const sp=r&&r.pl?[r.pl,placeName(r.pl)]:npwPick(SPOT95,j95quiet)||SPOT95[0];const k1=npwPick([1,2,3],x=>agSoon(x,1))||1;
+   z.sec.push({a:"v"+v.id,b:s?"s"+s.sid:null,c,kh:[k1],k:sp[0],spot:sp[1],kind:"meet",plot:p.id,tgt:t?j95id(t):null,why:`chuẩn bị mưu: ${r?r.n.toLowerCase():"mưu hại"} nhắm vào ${t===S?"ngươi":t?t.name:"người khác"}`,wk:wk()})}}catch(e){}}
  /* the Emperor's week: a heavy court week sometimes; one personal leaning */
  /* NPC-PURPOSE G3: a heavy week = a real cause (ill / Chăm chính / court crisis: jagemp empBusy); his leaning = the buổi the one he favours is out and about (her week intent), near-best */
   const L0=BAL.ag.why.g3.lean;z.emp=z.emp||{lean:{c:L0.c,k:L0.k}};let bz="";try{bz=typeof empBusy==="function"?empBusy():""}catch(e){}z.empWk={busy:!!bz,why:bz};
   try{const f=typeof favNow==="function"&&favNow();const it=f&&f.p&&z.it[f.p.id];if(it&&it.s&&it.s.length){const c=npwPick(it.s.filter(x=>x>=1&&x<=3),x=>x===L0.c?2:1);if(c)z.emp.lean={c,k:L0.k}}}catch(e){}}
 /* G3: weekly stay-home factor from her real feeling (jemo: glad → goes out, sad / angry → stays in), BAL.ag.why.g3.mood */
-function j95moodF(v){const M=BAL.ag.why.g3.mood;const e=v&&v.emo;const d=e&&e.v?(e.k==="vui"?1:-1)*e.v:0;return +cl(M.b+d/M.div,M.lo,M.hi).toFixed(2)}
+function j95fr(c){return Math.max(1,100-(J95.OWN[c]||0))}/* how free she is in buổi c (her palace's own call on her, J95.OWN) */
+function j95quiet(sp){return 100/(1+liveRivals(true).filter(x=>whereOf(x)===sp[0]).length)}/* a hidden spot: fewer eyes there, the better */
+function j95moodF(v){const M=BAL.ag.why.g3.mood;const e=v&&v.emo;const d=e&&e.v?(+(M.sg||{})[e.k]||0)*e.v:0;/* sign per feeling (BAL g3.mood.sg): glad / angry / jealous / scheming go out, sad / afraid / grieving stay in, calm = 0 */return +cl(M.b+d/M.div,M.lo,M.hi).toFixed(2)}
 function j95intent(v,cs){const O=[],z=j95z();const af=aff(v,S),ho=hostility(v,S);
  O.push(["emp",(nv(v,"empW"))*((v.sung||0)<50?1.4:.7)*(.5+(v.ghen||0)/60),null,`tranh sủng (Sủng ${Math.round(v.sung||0)}, ghen ${v.ghen||0})`]);
  const al=others(v).filter(x=>x!==S&&x.alive&&!x.out&&!sameHouse(v,x)).map(x=>[x,aff(v,x)]).sort((p,q)=>q[1]-p[1])[0];
@@ -166,8 +169,9 @@ function j95intent(v,cs){const O=[],z=j95z();const af=aff(v,S),ho=hostility(v,S)
  O.push(["none",1.6,null,""]);
  const it=j95pw(O.map(x=>[x,x[1]]));if(!it||it[0]==="none")return null;
  const mid=cs.filter(c=>c===1||c===2);let s;
- if(it[0]==="ambush")s=[mk.c];else if(it[0]==="avoid")s=cs.slice();else if(it[0]==="emp"){const E=cs.filter(c=>j95empW(c).vuon>=15);s=E.length?[E[Math.floor(Math.random()*E.length)]]:[]}
- else s=[(mid.length?mid:cs)[Math.floor(Math.random()*(mid.length?mid:cs).length)]];
+ /* npc-purpose: the buổi = where her aim is likeliest met — the Emperor's garden hours (his own vuon weight), else when her palace needs her least (j95fr) */
+ if(it[0]==="ambush")s=[mk.c];else if(it[0]==="avoid")s=cs.slice();else if(it[0]==="emp"){const E=cs.filter(c=>j95empW(c).vuon>=15);const e=npwPick(E,c=>j95empW(c).vuon);s=e!=null?[e]:[]}
+ else{const L=mid.length?mid:cs;const x=npwPick(L,j95fr);s=[x!=null?x:L[0]]}
  if(it[0]==="ally"&&j95dice(40)&&mid.length>1)s=mid.slice();
  return{k:it[0],t:it[2],s,why:it[3]}}
 

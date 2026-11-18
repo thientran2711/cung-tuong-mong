@@ -36,7 +36,6 @@ Object.assign(BAL,{lux:{
     not again within edictCd months. While it stands: everyone above its range at month end Đức −2 (her: also Thái hậu −2); plain dress 1 in 3 Đức +1 */
  edictN:4,edictNF:3,edictP:25,edictM:3,edictCd:24,edictTh:-2,
  plainP:33,plainDuc:1,/* under the edict, plain dress within its range: chance a month of praise, and the Đức it gives */
- npcCalm:70,npcCalmProud:25,/* chance an NPC with tiếng xa hoa (or above an edict) dresses one phẩm lower that month */
  lanhDuc:-1,          /* lavish dress in lãnh cung (monthly) */
  /* Hội phối đồ: theme range is absolute (4 pieces), capped by her allowance; a floor never above capLo × allowance */
  capLo:.45,ctFit:3,ctShow:1,ctOver:-2,ctPlainK:4,ctPlainMin:-1,ctDuc:-1,

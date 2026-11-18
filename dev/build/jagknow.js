@@ -444,9 +444,9 @@ function knSellNews(x,s){const o=ownerOf(s);if(!o||o===x||o===S&&x===S)return[];
 /* a seller for buyer x: weighted by nết × little loyalty, among servants with news worth selling (BAL.ag.sell.try candidates looked at) */
 function knSellPick(x,o){if(o===undefined)o=npcWhy("knSell",{x});/* npc-purpose G2a: the seller = a servant who really holds news worth it to x and needs bạc (or is greedy) — kind knSell (jagwhyg2a); nobody → no offer */
  if(!o||!o.who)return null;const N=knSellNews(x,o.who);return N.length?{s:o.who,n:N[0]}:null}
-/* the servants who might sell to x (cheap filter, best few by will + need; their news is checked in the kind's why) */
-function knSellCands(x){const own=knStaff(x);const kx=key(x);const C=[];for(const s of knAllSrv()){if(own.includes(s)||s.spyFor===kx)continue;const o=ownerOf(s);if(!o||o===x||(o!==S&&(!o.alive||o.out)))continue;if(typeof npwCdOk==="function"&&!npwCdOk("knSell",s))continue;const w=knSellW(s);if(w>0)C.push([s,w+knSellNeed(s)])}
- return C.sort((a,b)=>b[1]-a[1]).slice(0,knSB().try).map(c=>c[0])}
+/* the servants who might sell to x (cheap filter, sorted by will + need; kind knSell asks the first knSB().try who are off cooldown — npwReg lim; their news is checked in the kind's why) */
+function knSellCands(x){const own=knStaff(x);const kx=key(x);const C=[];for(const s of knAllSrv()){if(own.includes(s)||s.spyFor===kx)continue;const o=ownerOf(s);if(!o||o===x||(o!==S&&(!o.alive||o.out)))continue;const w=knSellW(s);if(w>0)C.push([s,w+knSellNeed(s)])}
+ return C.sort((a,b)=>b[1]-a[1]).map(c=>c[0])}
 function knSellNeed(s){try{const G=asB().goal;return (s.bac||0)<G.bac?((G.bac-(s.bac||0))/Math.max(1,G.bac)):0}catch(e){return 0}}
 /* x hears it (paid or not): the gain is the same for her and for an NPC */
 function knSellGive(x,s,n){KN.stat.bought=(KN.stat.bought||0)+1;const o=n.about;

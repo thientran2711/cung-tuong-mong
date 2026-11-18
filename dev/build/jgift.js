@@ -229,6 +229,6 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
    st.askWhy=st.empAway?"Hoàng thượng không có ở đây":st.dayDone?KM_DAYWHY:!st.askOk?"hết khắc":""}}catch(e){}return st};
  const a0=accAsk;accAsk=function(k){let yk=false;try{const st=accState(k);if(st.ask==="yk"){if(st.dayDone)return;yk=true}}catch(e){}
   const c=used;const r=a0.apply(this,arguments);try{if(yk&&S&&used!==c)S.kmEmpDay=wk()}catch(e){}return r}})();
-/* NPC consorts: the same acts, a small chance each tuần (BAL.empDay.p), the one their arts suit */
+/* NPC consorts: the same acts — the one who wants his favour most seeks him (kind seekEmp, BAL.ag.why.seekEmp), with the art she is best at */
 (function(){if(typeof nextBuoi!=="function")return;const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{if(S&&!S.dead&&(S.buoi||0)===1&&worldOn()/* one world (coop-one-world-r1): NPCs' day with the Emperor rolls on the host only */){const o=npcWhy("seekEmp");/* npc-purpose: the consort who wants his favour most seeks him, with her best art */
    if(o){const v=o.who;const kind=npw1Art(v);kmEmpAct(v,kind)}}}catch(e){}return r}})();

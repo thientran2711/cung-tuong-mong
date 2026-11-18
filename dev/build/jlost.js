@@ -12,7 +12,7 @@
      Nội vụ phủ — each may add one piece of evidence (rival: the j8 evidence counter evA; otherwise the case counter cev).
    · Nhận ra: a missing item worn in public may be recognised by people who know it (owner, her friends, her if she heard of it).
    RE-PORT 16/11 (review/lost-items-port, D38 item rivalry, OD:L108 + L117) adds, on the same case record:
-   · STEAL AND KEEP: a rival's doing may end with the rival keeping the item herself (LO.keepP) instead of planting it; she may wear it
+   · STEAL AND KEEP: a rival's doing may end with the rival keeping the item herself instead of planting it (loKeepPick: her worst grudge); she may wear it (kind loWear)
      (then it can be recognised). The hearing for a kept item is loKeepHear (holder = the real culprit; true evidence only).
    · Act "Sai người lấy trộm đồ" (laydo, Bạc) + no-bạc road "Sai cung nữ thân tín lấy đồ" (laydol, BALANCE rule): the SAME rule for her and
      every NPC (two-way, motive-gated for NPCs through BANDS "nặng"). A stolen item can be planted with the existing "Cài đồ vào rương"
@@ -26,8 +26,7 @@
    Knobs: LO below. Old saves: no S.lost → nothing to migrate. ================= */
 const LO={rate:8,cd:6,minPr:30,findW:[2,7],
  home:{mis:55,srv:15,riv:0},away:{mis:20,srv:65,riv:75},   /* % back home / turns up in another palace; the rest: never found */
- rivP:40,srvP:[20,45],                                       /* cause: a rival (when one's motive allows), a servant (careless servant) */
- tipW:[1,3],hearW:[1,2],raiseK:1,thief:{danh:-10,sung:-5},recog:{own:15,fr:4,me:8},keepWear:25,expire:54,keepP:35,hearCd:6,
+ tipW:[1,3],hearW:[1,2],raiseK:1,thief:{danh:-10,sung:-5},recog:{own:15,fr:4,me:8},expire:54,hearCd:6,/* who takes it = kind loTake, keep vs plant = loKeepPick, wearing it = kind loWear (BAL.ag.why) */
  act:{bac:30,duc:-4},
  cost:{ask:{k:1},cct:{k:1,bac:20},book:{k:1,bac:10},soat:{k:2}}};
 function loL(){S.lost=S.lost||[];return S.lost}
@@ -55,7 +54,7 @@ function loLose(p,force){if(!loAlive(p))return null;const L=(p.inv||[]).filter(l
  L.sort((a,b)=>loPrice(b)-loPrice(a));const e=npwPick(L.slice(0,3),x=>1+loPrice(x))||L[0];if(typeof ilUid==="function")ilUid(e);p.inv.splice(p.inv.indexOf(e),1);
  S.loSeq=(S.loSeq||0)+1;const c=Object.assign({id:S.loSeq,k:e.k,e,own:key(p),w:wk(),due:wk()+LO.findW[0]+R(LO.findW[1]-LO.findW[0]+1),st:"lost",at:null,open:0,cev:0,kn:{},hear:0,acc:null,d:(typeof wdWhen==="function"?String(wdWhen()).replace(/^./,x=>x.toLowerCase()):"")},cz);
  loL().push(c);p.loCd=S.turn+LO.cd;const nm=loNm(e.k);
- /* a rival's doing: she may keep it herself (steal and keep) instead of planting it on someone (forced by the act, else LO.keepP) */
+ /* a rival's doing: she may keep it herself (steal and keep) instead of planting it on someone (forced by the act, else loKeepPick: keep vs her worst grudge, BAL.ag.why.loTry.keep) */
  if(c.cause==="riv"&&c.by&&(c.keep||(!force&&loKeepPick(loP(c.by),p)==="keep"))){const v=loP(c.by);if(v&&loAlive(v)){const x=Object.assign({},e,{lo:c.id,gh:c.own,by:c.by});delete x.from;delete x.giver;delete x.w;v.inv=v.inv||[];v.inv.push(x);c.keep=1;c.st="held";c.at=c.by}else c.keep=0}
  if(p===S){Q.push({t:"Đồ thất lạc",who:pMe(),h:`${loTag(e)}<p><b>${nm}</b> trong rương ngươi đã thất lạc.</p><p class="past">Chưa rõ vì sao. Vào Tư trang › Việc › Đồ thất lạc để tra xét.</p>`,btn:"Đã hiểu"});log(`${nm} trong rương thất lạc.`);
   try{if(typeof tsbLedger==="function")tsbLedger({what:nm,how:"thất lạc",lo:c.id})}catch(x){}}
@@ -161,7 +160,7 @@ function loWeek(){if(!S||S.dead)return;for(const c of loL()){if(c.st==="done")co
     if(wk()>=c.hear){c.hear=0;const a=loP(c.acc);if(a&&h){const r=c.keep&&c.by===c.at?loKeepHear(c,a,h):(!c.by&&!c.lied)?loQuietHear(c,a,h):wdFrameResolve(a,h);if(r&&h===S&&a!==S)Q.push({t:"Cung Chính ti xét xử",who:pv(a),h:`<p>${r}</p>`,btn:"Đã hiểu"});if(r&&(a===S||h===S||c.heard))log(r);if(r&&a===S)Q.push({t:"Cung Chính ti xét xử",who:pv(h),h:`<p>${r}</p>`,btn:"Đã hiểu"});if(c.st!=="done"&&!loEntry(c)){c.st="done";c.how="xet"}}}}}
   if(c.st!=="done"&&wk()-c.w>LO.expire){c.st="done";c.how="mat";const x=c.at?loEntry(c):null;if(x){for(const f of ["lo","by","h"])delete x.e[f];try{if(typeof ilLog==="function")ilLog(x.e,c.own,key(x.h),"giữ luôn")}catch(z){}}else loGoneOwner(c,null)}}catch(e){console.error(e)}}
  S.lost=loL().filter(c=>c.st!=="done"||wk()-(c.end||c.w)<=12).slice(-40)}
-function loMonth(){if(!S||S.dead)return;for(const p of consorts()){if(!loAlive(p)||(p.loCd||0)>S.turn)continue;if(loL().some(c=>c.own===key(p)&&c.st!=="done"))continue;const o=npcWhy("loTake",{p});if(o&&roll(LO.rate))loLose(p,loCauseOf(p,o))}
+function loMonth(){if(!S||S.dead)return;for(const p of consorts()){if(!loAlive(p)||(p.loCd||0)>S.turn)continue;if(loL().some(c=>c.own===key(p)&&c.st!=="done"))continue;if(!(p.inv||[]).some(loOk))continue;/* nothing to take → nobody plans a theft (no cd, no charge) */const o=npcWhy("loTake",{p});if(o&&roll(LO.rate))loLose(p,loCauseOf(p,o))}
  for(const c of loL())if(c.st==="held"||c.st==="found")loRecog(c)}
 (function(){const e0=endTurn;endTurn=function(){const m=S&&S.turn,w0=S&&wk();const r=e0.apply(this,arguments);try{if(S&&!S.dead&&wk()!==w0){const q=Q.length;if(S.turn!==m)loMonth();loWeek();if(Q.length>q){showModal();render()}}}catch(e){console.error(e)}return r}})();
 /* Soát rương (j8 inspect) finds a missing item hidden in the chest: it goes back to its owner; the trail may lead to whoever hid it (same odds) */

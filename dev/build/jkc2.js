@@ -141,7 +141,7 @@ const KC2HAB={dan:{cha:[["dn_ruong",4],["dn_nha",2],["dn_dinh",1]],me:[["dn_nha"
  for(const m of S.kc.fam){if(!m.alive||m.hide&&!S.kc.sx)continue;let L=(KC2HAB[d][m.r]||[["",1]]).map(([k,w])=>[k?(d==="dan"?k:kc2P(k)):"",w]);
   if(b===3&&!["ly","ba","sx"].includes(m.r))L=L.filter(x=>!x[0]||KCPL[x[0]][2]).concat([["",1]]);
   if(m.r==="cha"&&b===0&&d==="dan")L=[["dn_ruong",1]];
-  const p=(npwPick(L,y=>y[1])||[""])[0];/* npc-purpose G2: her own day duties (near-best habits) */if(p)S.kc.at[m.id]=p}}})();
+  const p=(npwPick(L,y=>y[1],{all:1})||[""])[0];/* npc-purpose G2: her own day duties (all habits, weighted: minor ones kept) */if(p)S.kc.at[m.id]=p}}})();
 (function(){const g0=kcGoWhy;kcGoWhy=function(k){if(!S||!S.kc||!S.kc.kd)return g0.apply(this,arguments);if(!kc2Mine(k))return"Không ở đây";if(k===S.place)return"Đang ở đây";
  if(kcCity(k)){if((S.buoi||0)===3)return S.kc.kd==="dan"?"Tối rồi, con gái không ra khỏi xóm":"Công chúa không ra ngoài buổi tối";if(S.kc.kd==="nc"&&!S.maid)return"Không có tỳ nữ đi cùng";if(!can(BAL.kc2.kcGoWhy_k))return"Hết khắc buổi này"}return""}})();
 /* night: the house is the safe place */

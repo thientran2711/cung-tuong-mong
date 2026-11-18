@@ -68,7 +68,6 @@ Object.assign(BAL,{route:{
  nightG:{suc:12} /* gain: a secret night that goes well */,
  order:{bac:-30} /* cost: summon the painter / musician for a week */,
  cutW:{duc:2} /* gain: break off the affair */,
- bmRoll:55 /* roll: a witness (not greedy) chooses blackmail over reporting */,
  accused:{sung:-10,danh:-6} /* she is reported for an affair without proof: the Emperor's rebuke */,
  watch:3 /* months Cung Chính ti watches her after a bribed guard reports */,
  maidBlab:25 /* roll: the frightened maid lets the escape plan slip */,

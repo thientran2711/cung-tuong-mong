@@ -75,7 +75,7 @@ function visitPal(id){const v=rivals.find(x=>x.id===id);if(!v||S.dead||Q.length)
  renderStage()}
 document.addEventListener("click",e=>{const s=e.target.closest("[data-visit]");if(s&&!s.disabled){e.stopPropagation();visitPal(+s.dataset.visit)}},true);
 /* two-way: rivals call at her palace; if she is out, her maid tells or keeps quiet by loyalty */
-(function(){const pw=placeWhere;placeWhere=function(){pw.apply(this,arguments);try{if(!S||S.out||wk()<(S.callW||0))return;const cm=npcWhy("callMe");if(!cm)return;S.callW=wk()+BAL.ag.why.call.gap;const v=cm.who;
-  if(S.place==="home"){S.where[v.id]="home";seeLoc(v,"home");log(`${v.name} sang cung ngươi thăm hỏi.`)}else if(S.maid){log(S.maid.loyal>=BAL.loy.mid?`${v.name} sang cung ngươi thăm, ngươi đi vắng; ${S.maid.name} không nói ngươi đi đâu.`:`${v.name} sang cung ngươi thăm, ngươi đi vắng; ${S.maid.name} lỡ miệng nói ngươi ở ${placeName(S.place)}.`)}}catch(e){}}})();
+(function(){const pw=placeWhere;placeWhere=function(){pw.apply(this,arguments);try{if(!S||S.out||wk()<(S.callW||0))return;const cm=npcWhy("callMe");if(!cm)return;S.callW=wk()+BAL.ag.why.call.gap;const v=cm.who;let fr=false;try{fr=!!NPW.reg.apFriend.why(v,{})}catch(e){}/* the call says why she came: a friend's errand or a taunt (cm.why) */const go=fr?`sang cung ngươi thăm hỏi (${cm.why})`:`sang cung ngươi, lời lẽ gai góc (${cm.why})`;
+  if(S.place==="home"){S.where[v.id]="home";seeLoc(v,"home");log(`${v.name} ${go}.`)}else if(S.maid){log(S.maid.loyal>=BAL.loy.mid?`${v.name} ${go}, ngươi đi vắng; ${S.maid.name} không nói ngươi đi đâu.`:`${v.name} ${go}, ngươi đi vắng; ${S.maid.name} lỡ miệng nói ngươi ở ${placeName(S.place)}.`)}}catch(e){}}})();
 /* her own palace has its art too (night bedchamber; brighter by day) */
 SCIMG.home="tam-cung-dem";
