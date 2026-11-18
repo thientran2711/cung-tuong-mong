@@ -96,6 +96,7 @@ def measure(k, P_list):
 keys = sorted(k for k in VF if k in KF and os.path.exists(D + '/pics/' + k))
 if N: random.seed(7); keys = random.sample(keys, min(N, len(keys)))
 if '--only' in a: keys = [k for k in keys if re.search(opt('--only', ''), k)]
+if '--shard' in a: _i, _n = map(int, opt('--shard', '0/1').split('/')); keys = keys[_i::_n]   # r13: run --fit in parallel shards, merge the override rows after
 if '--dbg' in a:
     out = opt('--dbg', '/tmp/x'); os.makedirs(out, exist_ok=True)
     for k in keys:
