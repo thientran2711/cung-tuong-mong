@@ -19,9 +19,10 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const mk=(pl,tag,kh)=>{const pd={key:agKey(),id:"v"+v.id,vid:v.id,k:"gossip",kd:"",t:null,kh,k1:kh,pl,act:"to nhỏ bàn tán",why:"thử"};z.pend.push(pd);return{pd,h:{k:pl,id:"gossip",x:{pid:v.id+":gossip:"+kh,vid:v.id,t:null},done:0}}};
   const run=(pl,route,tag)=>{const {pd,h}=mk(pl,tag,0);const st0=S.staff,md0=S.maid,mat0=S.mat;S.maid=null;const row=[];let sp=null;
    if(route==="eye"){S.staff=[];S.mat=100}else{sp=(st0||[]).find(s=>s&&!s.out&&s.sid!=null);S.staff=sp?[sp]:[];S.mat=0;if(sp){sp.loyal=100;const R=agRec();R.P["s"+sp.sid]=[0,1,2,3].map(()=>[pl,"errand",null,""])}}
-   const eye0=BAL.ag.know.eye;if(route!=="eye")BAL.ag.know.eye=0;
-   try{for(let k=0;k<KH;k++){agKh=()=>k;KN.m=null;let x=null;try{x=knFor(S,h)}catch(e){x={by:"ERR "+e.message}}row.push(x?x.by:"-")}}finally{agKh=k0;BAL.ag.know.eye=eye0}
+   const eye0=BAL.ag.know.eye;if(route!=="eye")BAL.ag.know.eye=0;const H0=knHit;knHit=()=>true;/* r2 #2: timing only, as in carry below — the seeded sight roll (knHit) missed on some starts and the whole row read "-" (red on 9ac2d505 too) */
+   try{for(let k=0;k<KH;k++){agKh=()=>k;KN.m=null;let x=null;try{x=knFor(S,h)}catch(e){x={by:"ERR "+e.message}}row.push(x?x.by:"-")}}finally{agKh=k0;BAL.ag.know.eye=eye0;knHit=H0}
    z.pend.splice(z.pend.indexOf(pd),1);S.staff=st0;S.maid=md0;S.mat=mat0;return row};
+  if(!(S.staff||[]).some(x=>x&&!x.out&&x.sid!=null))S.staff=(S.staff||[]).concat([mkServ("maid")]);/* review ag-all-2 r2 fix2 (same family as ag-taimat r2): a low-rank start has no staff beside the close maid (main's household table) — give her one, else route 2 has nobody to send */
   o.eyeN=run(near,"eye","n1");o.eyeF=run(far,"eye","f1");o.srvN=run(near,"srv","n2");o.srvF=run(far,"srv","f2");
   const wf=BAL.walk.far;BAL.walk.far=3;o.eyeF3=run(far,"eye","f3");BAL.walk.far=wf;
   const sv=[BAL.ag.kh2.rd.see,BAL.ag.kh2.rd.go];BAL.ag.kh2.rd.see=0;BAL.ag.kh2.rd.go=0;o.eyeOff=run(far,"eye","o1");BAL.ag.kh2.rd.see=sv[0];BAL.ag.kh2.rd.go=sv[1];

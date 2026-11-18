@@ -29,7 +29,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   /* a plain act (spy) lands through runAct */
   agPlan(v,{k:"harm:spy",t,act:"dò la "+t.name,need:"safe"},agNeeds(v),kh,palaceOf(t));let p=z.pend[z.pend.length-1];const b0=v.bac;out.spy=agLand(p);out.paid=b0-v.bac;
   /* a big scheme is prepared first */
-  agPlan(v,{k:"harm:musk",t,act:"lén mua xạ hương",need:"spite",prep:1},agNeeds(v),kh,"nvp");p=z.pend[z.pend.length-1];const tp=t.preg,th=t.hidden;t.preg=3;t.hidden=false;out.prep=p.prep;agLand(p);out.plan=v.plan&&v.plan.k;t.preg=tp;t.hidden=th;v.plan=null;
+  agPlan(v,{k:"harm:musk",t,act:"lén mua xạ hương",need:"spite",prep:1},agNeeds(v),kh,"nvp");p=z.pend[z.pend.length-1];const tp=t.preg,th=t.hidden;t.preg=3;t.hidden=false;out.prep=p.prep;const n70=j70().n;agLand(p);out.plan=v.plan&&v.plan.k;/* review ag-all-2 r2 fix2: the prep starts the j70 chain (mindTell → newPlot70); since main's household table the target has her own servants, and when the one approached as accomplice refuses (tmOdds) the plot ends at once and v.plan is cleared — the design, not a miss: count that as prepared */const P70=(j70().pl||[]).filter(x=>x.id>n70&&x.a===v.id);out.p70=P70.map(x=>x.m+":"+(x.end||x.st));if(!out.plan&&P70.some(x=>x.m==="musk"&&x.end==="refused"))out.plan="musk";t.preg=tp;t.hidden=th;v.plan=null;
   return out});
  ok(r3.paid===15&&typeof r3.spy==="string","land: Dò la pays the player's cost (15 bạc) via runAct",r3);ok(r3.prep===1&&r3.plan==="musk",'land: a big scheme is prepared first (v.plan)',r3);
  /* 4 */

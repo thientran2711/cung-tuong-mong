@@ -54,11 +54,11 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   /* the player AS the Empress (queenP() = S while S.rank ≥ 7): v.hh is then HER regard (j24 hhBind: "Hoàng hậu với X" = the Empress's own aff) */const rk0=S.rank;S.rank=7;S.bac=500;v.hh=0;const h1=v.hh||0,d1=v.danh;hhAct(S,v,"reward");const me=[(v.hh||0)-h1,v.danh-d1];S.rank=rk0;return{npc,me,want:[g[1],g[2]]}});
  ok(r5.me[0]>=r5.want[0]&&r5.me[1]===r5.want[1]&&r5.npc[1]===r5.want[1]&&r5.npc[0]>=r5.want[0],'Empress: one function for her button and the NPC Empress (same numbers, BAL.tw)',r5);
  /* 5b the Empress's and Thái hậu's acts are offered when their gates hold */
- const r5b=await p.evaluate(()=>{const q=queenP();const v=liveRivals(true).find(x=>x!==q&&!x.out);v.hh=60;q.bac=500;const O=AGREG.hh.acts(q,agNeedsC(q),null).map(o=>o.k);
+ const r5b=await p.evaluate(()=>{const q=queenP();const v=liveRivals(true).find(x=>x!==q&&!x.out);(q.rl=q.rl||{})[v.id]=60;/* review ag-all-2 r2 fix2: v.hh IS aff(Empress, v) and its setter goes through affAdd, which her 'slow to warm' trait shrinks (j28 persF trust: 60 → 49 < rewardHh 50, the C-run red); set her regard itself */q.bac=500;const O=AGREG.hh.acts(q,agNeedsC(q),null).map(o=>o.k);
   const f=liveRivals(true).find(x=>!x.out&&x!==q)||v;f.th=80;f.thGiftWk=null;const N=agNeedsG("th");const T=AGREG.th.acts("th",N,null).map(o=>o.k+">"+(o.t===S?"me":o.t&&o.t.name));return{O,T,N}});
  ok(r5b.O.includes('hh:reward'),'Empress: Ban thưởng is her option when the gate holds',r5b.O);ok(r5b.T.some(x=>/^th:gift/.test(x)),'Thái hậu: Ban thưởng is her option for a consort she favours',r5b);
  /* 5c F5 weight pass: the Empress has a duty need (order) her buttons serve; the Thái hậu's favour gate is reachable (BAL.ag.th.fondTh) */
- const r5c=await p.evaluate(()=>{const q=queenP();const v=liveRivals(true).find(x=>x!==q&&!x.out);v.hh=BAL.ag.hh.rewardHh;q.bac=500;const N=agNeedsG(q);
+ const r5c=await p.evaluate(()=>{const q=queenP();const v=liveRivals(true).find(x=>x!==q&&!x.out);(q.rl=q.rl||{})[v.id]=BAL.ag.hh.rewardHh;/* fix2: her regard itself (see 5b) */q.bac=500;const N=agNeedsG(q);
   const O=agOptsG(q,N,"order").map(o=>o.k);v.th=BAL.ag.th.fondTh;v.thGiftWk=null;const T=agNeedsG("th");return{order:N.order,O:[...new Set(O)],fond:T.fond,fondTh:BAL.ag.th.fondTh}});
  ok(r5c.order>0&&r5c.O.some(k=>/^hh:/.test(k)),'F5: the Empress\'s duty need (order) is served by her own buttons',r5c);ok(r5c.fond>0&&r5c.fondTh<60,'F5: the Thái hậu favours a consort at BAL.ag.th.fondTh',r5c);
  const hhN=Object.values(r.byG.hh||{}).reduce((a,b)=>a+b,0),thN=Object.values(r.byG.th||{}).reduce((a,b)=>a+b,0);console.log('Empress / Thái hậu planned deeds over '+r.days+' days: hh '+JSON.stringify(r.byG.hh)+' th '+JSON.stringify(r.byG.th));
@@ -69,10 +69,10 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(r6.planned&&!r6.errs&&!r6.err,'old save without a day plan loads and plans',r6);ok(r6.p95<=r6.budget,'perf: day draw p95 within BAL.ag.perf.p95 ms',r6);
  /* 7 AG-ALL-2: the Emperor's visit / tea are HIS plan (NPC consorts too), bestowal by regard, the player's cards read BAL.ag.cx2 */
  const r7=await p.evaluate(async()=>{const o={};const L=liveRivals(true).filter(v=>v.alive&&!v.out);for(const v of L){v.sung=75;v.an=40;v.preg=0;v.confined=0}S.sung=75;
-  const tea0=BAL.ag.emp3.tea;BAL.ag.emp3.tea=4;/* the mechanism, not the rate: a stronger wish for tea so 14 days surely hold one */const vs0=AG2.stat.visit,te0=AG2.stat.tea;const ks={};let npcNight=0,roll0=0;const vr=visRoll;
+  const tea0=BAL.ag.emp3.tea,des0=BAL.ag.emp3.desire;BAL.ag.emp3.tea=4;BAL.ag.emp3.desire=des0*4;/* the mechanism, not the rate: a stronger wish for tea AND for the evening visit so 14 days surely hold one (review ag-all-2 r2 fix2: his desire is × tsMoodW, which sits at .25 for whole fortnights in a bad mood; measured at sung 75, default BAL: 1–5 visits per 14 days, 6–15 per 42 days, i.e. a 0 in one 14-day window is the real rate, not a fault) */const vs0=AG2.stat.visit,te0=AG2.stat.tea;const ks={};let npcNight=0,roll0=0;const vr=visRoll;
   for(let d=0;d<14;d++){for(let bb=0;bb<4;bb++){placeWhere();agFlush();const D=agDz();const s=D.P.emp&&D.P.emp[S.buoi||0];if(s&&s.k)ks[s.k]=(ks[s.k]||0)+1;
     if(S.visNpc&&S.visNpc.w===wk()&&S.tonight&&S.tonight.id===S.visNpc.id)npcNight++;Q.length=0;S.mg=0;try{nextBuoi()}catch(e){o.nb=e.message}Q.length=0}}
-  BAL.ag.emp3.tea=tea0;o.ks=ks;o.visit=AG2.stat.visit-vs0;o.tea=AG2.stat.tea-te0;o.npcNight=npcNight;o.rollOff=visRoll()==="";
+  BAL.ag.emp3.tea=tea0;BAL.ag.emp3.desire=des0;o.ks=ks;o.visit=AG2.stat.visit-vs0;o.tea=AG2.stat.tea-te0;o.npcNight=npcNight;o.rollOff=visRoll()==="";
   /* bestowal: his regard decides at the site's own %; off → the plain roll */
   const lo=L[0],hi=L[1]||L[0];lo.sung=5;lo.an=0;hi.sung=95;hi.an=80;let a=0,c=0;for(let i=0;i<3000;i++){if(empGive(lo,30,"t"))a++;if(empGive(hi,30,"t"))c++}o.give={lo:a/30,hi:c/30};
   /* the player's card reads the same table */

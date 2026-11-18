@@ -48,12 +48,12 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const th0=w.th||0;const tW=toilFx(w,"th",toilFOf("th"),"ok");const her=tW&&tW.why.find(z=>/dung nhan/.test(z[0]));const t=toilJudgeNpc(w,"th");const d=(w.th||0)-th0;const again=toilJudgeNpc(w,"th");
   /* mocked by x, answers "Đáp lại" that goes well */
   const Lw=toilLookP(w);const ruleHer=toilSeeRule(x,Lw);const s0=w.suc,dn0=w.danh;const mp=mindPick,r0=roll;mindPick=O=>O.some(o=>o[0]==="reply")?"reply":mp(O);roll=()=>true;let line="";
-  try{line=tl2See(x,w,Lw)}finally{mindPick=mp;roll=r0}
+  try{line=tl2See(x,w,Lw)}finally{mindPick=mp;roll=r0}const dA={suc:w.suc-s0,danh:w.danh-dn0};/* review ag-all-2 r2 fix2: her answer's own gain, read before the meeting pass below (there a second mocker and the Thái hậu may move her Danh again by their own rules: suite run dDanh 2 = reply 1 + meet 1) */
   /* the meeting pass with the player there: Thái hậu + another consort see w */
   const y=R.find(v=>v!==w&&v!==x)||x;delete w.tlSeen;const gp=gmPlaces;gmPlaces=()=>[[0,{ngu:["v"+w.id,"v"+y.id,"me","th"]}]];S.tl2m=null;let L2=[];const q0=S.logSeq||0;
   const mp2=mindPick;mindPick=O=>O.some(o=>o[0]==="smile")?"smile":mp2(O);try{tl2Meet();L2=(S.logs||[]).slice(0,(S.logSeq||0)-q0).map(e=>String(e).replace(/<[^>]+>/g,""))}finally{gmPlaces=gp;mindPick=mp2}
   /* what the shared ap gives an NPC for that gain (jdh addGains applies to NPC gains, the same as anywhere else) */const e0=w.danh;ap(w,{danh:BAL.toil.replyDanh});const expD=w.danh-e0;w.danh=e0;
-  return{me,her,aff:tW&&tW.aff,d,expD,again:again===null,ruleMe:ruleMe&&ruleMe.k,ruleHer:ruleHer&&ruleHer.k,rv:rv&&rv.txt,line,dSuc:w.suc-s0,dDanh:w.danh-dn0,B:{s:BAL.toil.replySuc,d:BAL.toil.replyDanh},
+  return{me,her,aff:tW&&tW.aff,d,expD,again:again===null,ruleMe:ruleMe&&ruleMe.k,ruleHer:ruleHer&&ruleHer.k,rv:rv&&rv.txt,line,dSuc:dA.suc,dDanh:dA.danh,dDanhAll:w.danh-dn0,B:{s:BAL.toil.replySuc,d:BAL.toil.replyDanh},
    L2:L2.slice(0,4)/* names show as the player knows them (k61), so no name filter */}});
  ok(r3.me&&r3.her&&r3.me[0]===r3.her[0]&&r3.me[1]===r3.her[1],'Thái hậu judges her Diêm dúa face with the player\'s toilFx part',r3);
  ok(r3.d===r3.aff&&r3.aff<0&&r3.again,'reprimand: her Thái hậu regard moves by exactly that verdict, once a day',r3);

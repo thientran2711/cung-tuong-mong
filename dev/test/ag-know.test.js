@@ -18,8 +18,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   S.adHapD=null;S.adHap=null;const pl=S.place;S.place="tyv";Q.length=0;adHapArrive("tyv");S.place=pl;AD_HAP_FIX.length=0;f0.forEach(f=>AD_HAP_FIX.push(f));Q.length=0;return fired});
  ok(r1.length===3,'G1: every happening of a place fires on arrival (no cap of 2)',r1);
  /* 2 G2 over N days: raw happenings vs the '!' she sees, low vs high Tai mắt (her servants silenced for the low run) */
- const r2=await p.evaluate(async(DAYS)=>{BAL.ag.kh2.rd.see=0;BAL.ag.kh2.rd.go=0;/* AG-ALL-2d: routes only (relay khắc off); a happening not begun yet is known by nobody but its doer */const o={low:{raw:0,seen:0},high:{raw:0,seen:0},here:0,hereOk:0};const st0=S.staff,md0=S.maid;
-  for(let d=0;d<DAYS;d++){const hi=d%2===1;S.mat=hi?40:0;S.tamco=hi?100:0;S.staff=hi?st0:[];S.maid=hi?md0:null;
+ const r2=await p.evaluate(async(DAYS)=>{const LOWN=6;BAL.ag.kh2.rd.see=0;BAL.ag.kh2.rd.go=0;/* AG-ALL-2d: routes only (relay khắc off); a happening not begun yet is known by nobody but its doer */const o={low:{raw:0,seen:0},high:{raw:0,seen:0},here:0,hereOk:0};const st0=S.staff,md0=S.maid;
+  for(let d=0;d<DAYS||o.low.raw<LOWN&&d<DAYS+16;d++){const hi=d<DAYS&&d%2===1;/* review ag-all-2 r2 fix2: a passer-by still tells her at oSee ≈ 15 % with Tai mắt 0 (by design); with only 1–2 low happenings "seen < raw" failed by chance (suite: raw 2 seen 2, both by pass) → extra low days until the low run holds LOWN happenings */S.mat=hi?40:0;S.tamco=hi?100:0;S.staff=hi?st0:[];S.maid=hi?md0:null;
    for(let bb=0;bb<4;bb++){placeWhere();agFlush();S.adHapD=null;let L=[];try{L=adHapNow()}catch(e){}const raw=KN.raw||[];const g=hi?o.high:o.low;const pr=h=>!h.done&&!knFixed(h)&&knWin(h)[0]<=agKh();g.raw+=raw.filter(pr).length;g.seen+=L.filter(h=>pr(h)&&h.k!==S.place).length;for(const h of L){const it=(S.tb&&S.tb.K||{})[knHid(h)];if(it){g.by=g.by||{};const kb=it.by[0]==='v'?'friend':it.by[0]==='s'?'srv':it.by;g.by[kb]=(g.by[kb]||0)+1}}
 
     Q.length=0;S.mg=0;try{nextBuoi()}catch(e){}Q.length=0}}
