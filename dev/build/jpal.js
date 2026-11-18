@@ -26,7 +26,7 @@ palFix=function(){if(!S||!rivals)return;rivals.forEach(ensureT2);const all=[S].c
     palace; a chủ vị gets a free palace (no ban-cung ceremony, she did not rise), a lone lower consort a side hall or a free palace. One log line each. */
  const gone=[],goneN={};for(const p of all)if(p.pal!=null&&!(p.pal>=0&&p.pal<PALN.length)){const i=p.pal-PALN.length;const w=PAL_GONE[i]||"cung cũ";gone.push([p,w]);goneN[key(p)]=w;p.pal=null;p.palLone=0}
  /* their side-hall residents (the player below Tần too) move with the house: one log line each as well */
- const goneM=[];for(const y of all){if(!palLive(y)||y.queen||y.resHead==null||goneN[y.resHead]==null||(rkOf(y)>=3&&y.pal!=null))continue;goneM.push([y,goneN[y.resHead]])}
+ const goneM=[];for(const y of all){if(!palLive(y)||y.queen||y.resHead==null||goneN[y.resHead]==null||goneN[key(y)]!=null||(rkOf(y)>=3&&y.pal!=null))continue;/* a gone head already has her own line (a stale resHead must not give her a second) */goneM.push([y,goneN[y.resHead]])}
  const S0pc=S.palCer;
  const was=[];for(const p of rivals){if(!palLive(p)||p.queen)continue;const h=p.resHead!=null&&byKey(p.resHead);if(h&&(h.queen||rkOf(h)>=6||(h!==S&&!palLive(h))))was.push([p,h.queen?"Càn Ninh cung":goneN[key(h)]||PALN[h.pal]||"cung cũ"])}
  if(S.pal!=null&&!palHeadOK(S)){log(`Ngươi dời khỏi ${PALN[S.pal]}.`);S.pal=null}
