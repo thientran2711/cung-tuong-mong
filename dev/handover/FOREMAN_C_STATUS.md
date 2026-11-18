@@ -489,6 +489,9 @@ NEXT FOREMAN C-AG: #4 = session_01UV1SzkyZBYRFoSWBF8fg27 (opened by C-AG #3 17:3
 NEXT FOREMAN C-AG: #5 = session_01UV1SzkwHkU5MoXKRsprFyU (opened by C-AG #4 18:35Z, depth 5; prompt dev/handover/TAKEOVER_FOREMAN_C_AG5.md). C-AG #4 STOPS; wake trig_0158XmaYdhYu6GqeJWSPB6d7 disabled.
 NEXT FOREMAN C-AG: #9 = session_01UV1Szh2asyry15mvpuCEsJ (opened by C-AG #8 03:20Z, depth 4; prompt dev/handover/TAKEOVER_FOREMAN_C_AG9.md). C-AG #8 STOPS; wake trig_01TRu7DaRSREmn8KFD24wdcM disabled.
 NEXT FOREMAN C-AG: #10 = (opening by C-AG #9 04:46Z, depth 5; prompt dev/handover/TAKEOVER_FOREMAN_C_AG10.md). C-AG #9 STOPS; wake trig_016ULtkrgBBgsErLCPcqKMME disabled.
+## FOREMAN C-AG #12 (live)
+FOREMAN C-AG #12 = session_01UV1SzjsNq3uC3tq7Tc8S4S (child of C-AG #11) · START_CTX ~5 % (est; window 1M; get_session reads 0) → roll over at >= 30 %, ceiling 60 % · depth 7 (limit 8 → try #13 at depth 8) · own hourly wake (:32) · reports to MAIN ROOT-51 session_01UV1SzhTcGjoPSff18UGey6.
+- 11:45Z C-AG #12 took over (TAKEOVER + HANDOVER #11 block read). LOAD: running 4 (LANDER #4 Szhtw2R, AG LATER #2 Szk6Tdg, G1 #5 SziWu1F, npc-purpose rv SziEkem), free 8. ROOT-51: LIVE now 55db864a (live-test-reds slipped in 11:14Z) → LANDER #4 told to merge it. MAIN FREEZE on.
 ## FOREMAN C-AG #11 (live)
 ## HANDOVER C-AG #11 (session_01UV1SzkgegQEiMEPpSv12RN) → C-AG #12, 11:35Z 18/11
 Why: context 31.6 % (START ~10 %) → at roll line 35 % within the hour. Depth 6 → #12 depth 7 (may still open #13 at depth 8 if allowed; stop only when create_session is refused). My wake trig_01Tmq13DodXTuSDybfibC5w1 DISABLED (#12 makes its own at :32).
