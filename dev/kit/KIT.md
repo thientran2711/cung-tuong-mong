@@ -3020,6 +3020,9 @@ Chứng cứ về X, Tâm trạng · X) never reveal / meet — a new look-up pa
 <url> [steps] [seeds]` (every dialog the bot sees: site, people shown, stranger before, revealed after); static list `python3 dev/test/face-reveal-sites.py --md`.
 Shots: dev/shots/kit-fig2/.
 
+### 49.4 kitMoodHud — THE MOOD BAR IN THE FIXED TOP BAR (owner 11/18 ~05:40Z) — `dev/build/jmood.js` (mbHud) — KIT READY (owner picked this layout 11/18 ~06:05Z)
+One row under the eight stat cells inside `header.hud` (`#hud-mood.kstm`, grid-column 1/-1 so it follows every top-bar grid variant): her mood seal (emoBadge) · "Tâm trạng" · band word (mbBand, colour class) · `kitSignedBar` (§49.1: calm at the centre, red left / green right) · signed number. Tap or Enter = the existing mood box (`data-emo-open="me"`, jpcf). The number comes from ONE accessor `kitMoodVal()` (moodBar(S) if the npc-chain model is live, else S.mood.v).  Test/shots: `dev/test/hud-mood-shots.js`.
+
 ## 50. kitEventDp — THE event-with-a-person dialog (owner 11/15, replaces 32.6 for events with a person) — `dev/build/jk4.js`
 ONE component for every event where a person appears: NPC visits ("Có người đến"), invitations (Đoan ngọ …), confrontations, the
 Emperor's visits. It is the 32.7 person dialog:
@@ -3786,6 +3789,7 @@ UPDATE 16/11 (anim-pace): FULL SCREEN at every size (tint + ink wash + vignette 
 Test: `node dev/test/buoi-transition.js <url> <out>` (6 viewports). Kit page sample §74 (a button per buổi). Test hook `window.__btrHold` stops the auto end.
 
 OWNER 18/11 ~06:20Z (review/buoi-banner, canon overwrite of the veil): the game UI stays visible and in place under the animation. The opaque full-screen backdrop (tint, ink wash, vignette) is REMOVED; sky band, sun / moon, mist, first light, title plate, seal, season / festival sprites stay as approved. The whole `#buoitr` lies on the screen at `BTR_OP` = 0.80 (ladder 70 / 80 / 85 shown to the owner; hook `window.__btrOp`). Gọn = the title only, ~0.7 s.
+OWNER 18/11 ~06:35Z (approved the approach): the WHOLE group (sky / mountain band + title + icon + seal + sub line) sits flush against the TOP EDGE of the stage (`.stage` top − 2 px, `--btr-top`; iPad too), centred horizontally; the band's top and bottom edges feather out (vertical mask on `.btr-sky`, no box-shadow line); the sub line (festival / season name) is bold, ~1.3–1.9 rem, full-strength ink with a soft halo, for every variant.
 
 ## 75. kitBackBtnHtml · painted "back to a place" button (owner 15/11, review/room-btn) — `dev/build/jk3.js`
 - Replaces the wide text bar "‹ Phòng" in the header (owner: it read like an empty field) and the "‹ Dư đồ" chip on a place stage. ONE part: `kitBackBtnHtml(kind,label)`

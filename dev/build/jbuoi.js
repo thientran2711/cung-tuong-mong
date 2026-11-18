@@ -60,6 +60,7 @@ function buoiShift(){
    `${dawn||haze?`<i class="btr-mist${haze?" "+VS.haze:""}"></i>`:""}${dawn?`<i class="btr-light"></i>`:""}`+
    `<div class="btr-stage"><div class="btr-sky"><i class="btr-skybg"></i>${artKey?`<i class="btr-skin" style="background-image:url(${BTR_BASE}buoi-band-${artKey}.webp)"></i>`:""}<i class="btr-hills"></i><i class="btr-orb btr-sun"></i><i class="btr-orb btr-moon${MN.none?" btr-nomoon":MN.ph?" btr-mph":""}"${MN.ph?` style="background-image:url(${BTR_BASE}buoi-moon-${MN.ph}.webp)"`:""}></i></div>`+
    `<div class="btr-title"><i class="btr-plate"></i>${BTR_ICON[b]?`<i class="btr-ico" style="background-image:url(${BTR_BASE}buoi-ico-${b}.webp)"></i>`:""}<b>${BUOI[b]}</b>${typeof kitSeal==="function"?kitSeal({cls:"btr-seal"}):""}${V.fest&&V.fest.name?`<small class="btr-sub">${V.fest.name}</small>`:""}</div></div>`;
+  try{const sg=document.querySelector(".stage");d.style.setProperty("--btr-top",(sg?Math.max(0,Math.round(sg.getBoundingClientRect().top)-2):0)+"px")}catch(e){}
   d.style.opacity=window.__btrOp!=null?+window.__btrOp:BTR_OP;document.body.appendChild(d);btrEl=d;
   let done=false;const end=ms=>{if(done)return;done=true;btrEnd=null;removeEventListener("pointerdown",skip,true);d.style.transition=`opacity ${ms||250}ms`;d.style.opacity="0";setTimeout(()=>{d.remove();if(btrEl===d)btrEl=null},(ms||250)+30)};
   const skip=()=>end(140);btrEnd=()=>end(0);
@@ -87,10 +88,10 @@ function buoiShift(){
 .btr-mist{left:-15%;right:-15%;top:22%;bottom:-8%;background:url("${BTR_BASE}buoi-mist.webp") center/100% 100% no-repeat;opacity:0;will-change:transform,opacity}
 .btr-mist.warm{filter:sepia(1) saturate(2.2) brightness(1.1)}.btr-mist.cold{filter:hue-rotate(170deg) brightness(1.15)}
 .btr-light{left:50%;top:50%;width:min(110vw,760px);aspect-ratio:2/1;margin-left:calc(min(110vw,760px)/-2);margin-top:6%;border-radius:50%;background:radial-gradient(ellipse,#fff3c8dd,#ffd88a66 45%,#ffd88a00 72%);opacity:0;mix-blend-mode:screen}
-.btr-stage{inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(14px,3.4vmin,34px);padding:0 16px}
+.btr-stage{inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:clamp(10px,2.4vmin,24px);padding:var(--btr-top,0px) 16px 0}
 .btr-stage>*{position:relative}
-.btr-sky{width:min(92vw,720px);height:clamp(128px,26vmin,220px);opacity:0;flex:none}
-.btr-skybg{inset:0;border-radius:64px 64px 18px 18px;background:linear-gradient(var(--bt-s0),var(--bt-s1));-webkit-mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000);mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000);box-shadow:0 0 0 1px #0001,0 8px 28px #0003}
+.btr-sky{width:min(92vw,720px);height:clamp(128px,26vmin,220px);opacity:0;flex:none;-webkit-mask:linear-gradient(180deg,#0000,#000 26%,#000 72%,#0000);mask:linear-gradient(180deg,#0000,#000 26%,#000 72%,#0000)}
+.btr-skybg{inset:0;border-radius:64px 64px 18px 18px;background:linear-gradient(var(--bt-s0),var(--bt-s1));-webkit-mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000);mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000)}
 .btr-skin{inset:0;background:center/cover no-repeat;-webkit-mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000);mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000)}
 .btr-hills{left:0;right:0;bottom:0;height:80%;background:url("${BTR_BASE}buoi-hills.webp") center bottom/100% 100% no-repeat;opacity:.9;-webkit-mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000);mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000)}
 .btr-orb{left:0;top:0;width:var(--orb,52px);height:var(--orb,52px);opacity:0;background:url("${BTR_BASE}buoi-orb.webp") no-repeat;background-size:200% 100%;will-change:transform,opacity}
@@ -100,7 +101,7 @@ function buoiShift(){
 .btr-title b{position:relative;font-family:var(--display);font-weight:700;font-size:clamp(2.1rem,8.5vmin,3.7rem);letter-spacing:.14em;color:var(--bt-ink);text-shadow:0 1px 0 #fff7,0 0 16px color-mix(in srgb,var(--bt-tint) 92%,#fff0);white-space:nowrap}
 .btr-ico{position:relative;width:clamp(48px,10vmin,80px);aspect-ratio:1;background:center/contain no-repeat;filter:drop-shadow(0 2px 4px #0003)}
 .btr-seal{position:relative;width:clamp(34px,6vmin,50px);height:clamp(34px,6vmin,50px);opacity:0}
-.btr-sub{position:relative;flex:1 0 100%;text-align:center;font-family:var(--display);font-size:clamp(.95rem,3vmin,1.25rem);letter-spacing:.22em;color:var(--bt-ink);opacity:.82}
+.btr-sub{position:relative;flex:1 0 100%;text-align:center;font-family:var(--display);font-weight:700;font-size:clamp(1.3rem,4.4vmin,1.9rem);letter-spacing:.16em;color:var(--bt-ink);opacity:1;text-shadow:0 0 10px color-mix(in srgb,var(--bt-tint) 92%,#fff0),0 0 3px color-mix(in srgb,var(--bt-tint) 80%,#fff0)}
 `;document.head.appendChild(st)})();
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§74",title:"buổi transition · buoiShift (qua buổi: nước mực toàn màn, vầng trời, chữ thư pháp; mùa + lễ)",
  html:()=>`<div class="kitpg-row">${[0,1,2,3].map(b=>`<button type="button" class="kbtn alt" onclick="(function(){const s=S.buoi;S.buoi=${b};buoiShift();S.buoi=s})()">${BUOI[b]}</button>`).join("")}</div>`+

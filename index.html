@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"550dd1b3+","t":"2026-11-18T05:50Z","c":"Merge origin/main into review/face-zoom-stretch","b":"890ad49711c2","h":[{"s":"c1104d92+","t":"2026-11-18T05:41Z","c":"face-zoom-aspect test: SEED / FORCE options for same-character before/after shots"},{"s":"16b4dad8+","t":"2026-11-18T05:32Z","c":"cloth-bake-static: cloth layer on every static figure path on a cold cache (wait layer + patch on bake done); test + report"},{"s":"231cd3b3+","t":"2026-11-18T03:27Z","c":"review display-set-bonus: VANPHONG rows (Đa Bảo Các + set wording); cap line drops 'điểm'; j8 'Điểm trang lộng lẫy' night quality reads wor…"},{"s":"bd8547f2+","t":"2026-11-18T03:28Z","c":"men-forbidden r6: old saves drop officials / festival princes standing in the hậu cung on load (menLoadFix, same ONE rule)"},{"s":"c743265c+","t":"2026-11-18T03:18Z","c":"review life-preload r6: title prefetch chained on undefined (lWant returns its promise); gate cap really 25 s (no re-run after cap / Vào cu…"},{"s":"2aca2aac+","t":"2026-11-18T03:17Z","c":"review cloth-tea-r6: kclo-on hides the picture by clip-path, not visibility (visibility:hidden made kfxGeom hide the cloth layer too: her f…"},{"s":"2b1b0701","t":"2026-11-18T03:00Z","c":"review staff-cap-apply r6: site rebuilt on db24027f"},{"s":"64488e4f+","t":"2026-11-18T02:38Z","c":"cloth-xoc r6e: rebuild site"},{"s":"af71f94a+","t":"2026-11-18T02:17Z","c":"smudge r16: stage4 + avatar probe tests, options script score fix (look tier by score), FINAL mode"},{"s":"e1f60927+","t":"2026-11-18T02:25Z","c":"result-reason: every result card line says a short why (kitWhy, KIT 7); values left-aligned next to labels"}]};
+window.CTM_BI={"s":"8b501828+","t":"2026-11-18T06:09Z","c":"buoi-banner: revert the plaque; tree = live main 550dd1b + keep the approved buổi animation, remove only the opaque backdrop","b":"bad7a9b5b71d","h":[{"s":"04bb2793+","t":"2026-11-18T05:52Z","c":"hud-mood-bar: owner picked layout 1 (full row); switch and slim layout removed; KIT 49.4"},{"s":"c1104d92+","t":"2026-11-18T05:41Z","c":"face-zoom-aspect test: SEED / FORCE options for same-character before/after shots"},{"s":"16b4dad8+","t":"2026-11-18T05:32Z","c":"cloth-bake-static: cloth layer on every static figure path on a cold cache (wait layer + patch on bake done); test + report"},{"s":"231cd3b3+","t":"2026-11-18T03:27Z","c":"review display-set-bonus: VANPHONG rows (Đa Bảo Các + set wording); cap line drops 'điểm'; j8 'Điểm trang lộng lẫy' night quality reads wor…"},{"s":"bd8547f2+","t":"2026-11-18T03:28Z","c":"men-forbidden r6: old saves drop officials / festival princes standing in the hậu cung on load (menLoadFix, same ONE rule)"},{"s":"c743265c+","t":"2026-11-18T03:18Z","c":"review life-preload r6: title prefetch chained on undefined (lWant returns its promise); gate cap really 25 s (no re-run after cap / Vào cu…"},{"s":"2aca2aac+","t":"2026-11-18T03:17Z","c":"review cloth-tea-r6: kclo-on hides the picture by clip-path, not visibility (visibility:hidden made kfxGeom hide the cloth layer too: her f…"},{"s":"2b1b0701","t":"2026-11-18T03:00Z","c":"review staff-cap-apply r6: site rebuilt on db24027f"},{"s":"64488e4f+","t":"2026-11-18T02:38Z","c":"cloth-xoc r6e: rebuild site"},{"s":"af71f94a+","t":"2026-11-18T02:17Z","c":"smudge r16: stage4 + avatar probe tests, options script score fix (look tier by score), FINAL mode"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -43719,7 +43719,7 @@ function restDs(a){if(!a||a.rest!=="ds")return a;const T=restTonic(),k=restDsK()
  a.go=()=>{const t=restTonic();if(t&&!(a.c&&a.c.bac)){S.inv.splice(t.i,1);log(`Ngươi sắc ${t.it.n} uống rồi ngủ sớm.`)}else log("Ngươi sai người mua chén thuốc bổ, uống rồi ngủ sớm.")};return a}
 function restLat(a){if(!a||a.rest!=="lat")return a;const e=typeof emoGet==="function"?emoGet(S):{k:"binh",v:0};const bad=REST_BAD.includes(e.k)&&e.v>=15;
  a.k=BAL.restLatK;a.c={};a.o=100;a.w={suc:BAL.restLatSuc};a.l={};
- a.t=`Nằm nghỉ trong tẩm cung, uống chén trà sen.${bad?"":` Tâm trạng đang ${typeof EMO==="object"&&EMO[e.k]?EMO[e.k].toLowerCase():"bình thường"}: không đổi.`}`;
+ a.t=`Nằm nghỉ trong tẩm cung, uống chén trà sen.${bad?"":` Tâm trạng đang ${typeof mbBand==="function"&&typeof kitMoodVal==="function"?mbBand(kitMoodVal()).name.toLowerCase():"bình thường"}: không đổi.`}`;
  a.x=bad?`được: bớt ${EMO[e.k]} ${Math.min(BAL.restLatEmo,e.v)} (${e.v} → ${Math.max(0,e.v-BAL.restLatEmo)})`:"";
  a.go=()=>{try{const m=S.emo;if(m&&REST_BAD.includes(m.k)&&m.v>=15){const v0=m.v;m.v=Math.max(0,m.v-BAL.restLatEmo);emoSync(S);log(`Nghỉ một lát, lòng nhẹ đi: bớt ${EMO[m.k]} ${v0-m.v}.`)}}catch(x){}};return a}
 function restFix(a){return a&&a.rest==="ds"?restDs(a):a&&a.rest==="lat"?restLat(a):a}
@@ -56087,6 +56087,7 @@ function buoiShift(){
    `${dawn||haze?`<i class="btr-mist${haze?" "+VS.haze:""}"></i>`:""}${dawn?`<i class="btr-light"></i>`:""}`+
    `<div class="btr-stage"><div class="btr-sky"><i class="btr-skybg"></i>${artKey?`<i class="btr-skin" style="background-image:url(${BTR_BASE}buoi-band-${artKey}.webp)"></i>`:""}<i class="btr-hills"></i><i class="btr-orb btr-sun"></i><i class="btr-orb btr-moon${MN.none?" btr-nomoon":MN.ph?" btr-mph":""}"${MN.ph?` style="background-image:url(${BTR_BASE}buoi-moon-${MN.ph}.webp)"`:""}></i></div>`+
    `<div class="btr-title"><i class="btr-plate"></i>${BTR_ICON[b]?`<i class="btr-ico" style="background-image:url(${BTR_BASE}buoi-ico-${b}.webp)"></i>`:""}<b>${BUOI[b]}</b>${typeof kitSeal==="function"?kitSeal({cls:"btr-seal"}):""}${V.fest&&V.fest.name?`<small class="btr-sub">${V.fest.name}</small>`:""}</div></div>`;
+  try{const sg=document.querySelector(".stage");d.style.setProperty("--btr-top",(sg?Math.max(0,Math.round(sg.getBoundingClientRect().top)-2):0)+"px")}catch(e){}
   d.style.opacity=window.__btrOp!=null?+window.__btrOp:BTR_OP;document.body.appendChild(d);btrEl=d;
   let done=false;const end=ms=>{if(done)return;done=true;btrEnd=null;removeEventListener("pointerdown",skip,true);d.style.transition=`opacity ${ms||250}ms`;d.style.opacity="0";setTimeout(()=>{d.remove();if(btrEl===d)btrEl=null},(ms||250)+30)};
   const skip=()=>end(140);btrEnd=()=>end(0);
@@ -56114,10 +56115,10 @@ function buoiShift(){
 .btr-mist{left:-15%;right:-15%;top:22%;bottom:-8%;background:url("${BTR_BASE}buoi-mist.webp") center/100% 100% no-repeat;opacity:0;will-change:transform,opacity}
 .btr-mist.warm{filter:sepia(1) saturate(2.2) brightness(1.1)}.btr-mist.cold{filter:hue-rotate(170deg) brightness(1.15)}
 .btr-light{left:50%;top:50%;width:min(110vw,760px);aspect-ratio:2/1;margin-left:calc(min(110vw,760px)/-2);margin-top:6%;border-radius:50%;background:radial-gradient(ellipse,#fff3c8dd,#ffd88a66 45%,#ffd88a00 72%);opacity:0;mix-blend-mode:screen}
-.btr-stage{inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(14px,3.4vmin,34px);padding:0 16px}
+.btr-stage{inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:clamp(10px,2.4vmin,24px);padding:var(--btr-top,0px) 16px 0}
 .btr-stage>*{position:relative}
-.btr-sky{width:min(92vw,720px);height:clamp(128px,26vmin,220px);opacity:0;flex:none}
-.btr-skybg{inset:0;border-radius:64px 64px 18px 18px;background:linear-gradient(var(--bt-s0),var(--bt-s1));-webkit-mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000);mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000);box-shadow:0 0 0 1px #0001,0 8px 28px #0003}
+.btr-sky{width:min(92vw,720px);height:clamp(128px,26vmin,220px);opacity:0;flex:none;-webkit-mask:linear-gradient(180deg,#0000,#000 26%,#000 72%,#0000);mask:linear-gradient(180deg,#0000,#000 26%,#000 72%,#0000)}
+.btr-skybg{inset:0;border-radius:64px 64px 18px 18px;background:linear-gradient(var(--bt-s0),var(--bt-s1));-webkit-mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000);mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000)}
 .btr-skin{inset:0;background:center/cover no-repeat;-webkit-mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000);mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000)}
 .btr-hills{left:0;right:0;bottom:0;height:80%;background:url("${BTR_BASE}buoi-hills.webp") center bottom/100% 100% no-repeat;opacity:.9;-webkit-mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000);mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000)}
 .btr-orb{left:0;top:0;width:var(--orb,52px);height:var(--orb,52px);opacity:0;background:url("${BTR_BASE}buoi-orb.webp") no-repeat;background-size:200% 100%;will-change:transform,opacity}
@@ -56127,7 +56128,7 @@ function buoiShift(){
 .btr-title b{position:relative;font-family:var(--display);font-weight:700;font-size:clamp(2.1rem,8.5vmin,3.7rem);letter-spacing:.14em;color:var(--bt-ink);text-shadow:0 1px 0 #fff7,0 0 16px color-mix(in srgb,var(--bt-tint) 92%,#fff0);white-space:nowrap}
 .btr-ico{position:relative;width:clamp(48px,10vmin,80px);aspect-ratio:1;background:center/contain no-repeat;filter:drop-shadow(0 2px 4px #0003)}
 .btr-seal{position:relative;width:clamp(34px,6vmin,50px);height:clamp(34px,6vmin,50px);opacity:0}
-.btr-sub{position:relative;flex:1 0 100%;text-align:center;font-family:var(--display);font-size:clamp(.95rem,3vmin,1.25rem);letter-spacing:.22em;color:var(--bt-ink);opacity:.82}
+.btr-sub{position:relative;flex:1 0 100%;text-align:center;font-family:var(--display);font-weight:700;font-size:clamp(1.3rem,4.4vmin,1.9rem);letter-spacing:.16em;color:var(--bt-ink);opacity:1;text-shadow:0 0 10px color-mix(in srgb,var(--bt-tint) 92%,#fff0),0 0 3px color-mix(in srgb,var(--bt-tint) 80%,#fff0)}
 `;document.head.appendChild(st)})();
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§74",title:"buổi transition · buoiShift (qua buổi: nước mực toàn màn, vầng trời, chữ thư pháp; mùa + lễ)",
  html:()=>`<div class="kitpg-row">${[0,1,2,3].map(b=>`<button type="button" class="kbtn alt" onclick="(function(){const s=S.buoi;S.buoi=${b};buoiShift();S.buoi=s})()">${BUOI[b]}</button>`).join("")}</div>`+
@@ -60224,6 +60225,26 @@ function mbTile(){try{if(!mbOn()||typeof kitSkillCard!=="function")return"";cons
 window.mbTile=mbTile;
 (function(){if(typeof selfCardHTML!=="function")return;const s0=selfCardHTML;selfCardHTML=function(){const h=s0.apply(this,arguments);try{const t=mbTile();if(!t)return h;
   const i=h.indexOf('data-g="Tư chất"');if(i<0)return h;const j=h.indexOf('<div class="pcg',i);const at=j<0?h.lastIndexOf("</div></div>"):h.lastIndexOf("</div>",j);if(at<0)return h;return h.slice(0,at)+t+h.slice(at)}catch(e){return h}}})();
+/* ---------- TOP BAR (owner 18/11 ~05:40Z: "cho cái thanh tâm trạng nằm ở thanh trên cố định của game, sắp xếp sao cho đẹp") ----------
+   ONE part, every screen that has the fixed top bar (header.hud, last child, one full-width grid row): her mood seal + band word + kitSignedBar (KIT §49.1: calm at the
+   centre, red left = low, green right = high) + the signed number. Tap = the existing mood box (data-emo-open="me", jpcf). ONE accessor for the number:
+   kitMoodVal() reads moodBar(S) when the npc-chain model is live, else S.mood.v — no second number.
+   Owner picked this full-row layout (18/11 ~06:05Z, "kiểu 1"). */
+window.kitMoodVal=function(){try{if(typeof moodBar==="function"){const x=moodBar(S);const n=typeof x==="number"?x:x&&x.v;if(typeof n==="number"&&isFinite(n))return Math.round(n)}}catch(e){}return S&&S.mood&&typeof S.mood.v==="number"?Math.round(S.mood.v):0};
+function mbHud(){try{const hd=document.querySelector("header.hud");if(!hd)return;let el=document.getElementById("hud-mood"); if(!mbOn()){if(el)el.hidden=true;return}
+ if(!el){el=document.createElement("div");el.id="hud-mood";el.setAttribute("role","button");el.tabIndex=0;el.dataset.emoOpen="me";hd.appendChild(el);
+  el.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();el.click()}})}
+ el.className="kstm";el.hidden=false;const v=kitMoodVal(),bd=mbBand(v),sg=v>0?"+"+v:String(v);let seal="";try{seal=typeof emoBadge==="function"?emoBadge(S):""}catch(e){}
+ const h=`<span class="kmd-seal">${seal}</span><small class="kmd-l">Tâm trạng</small><b class="kmd-w ef ${bd.cls}">${bd.name}</b>${typeof kitSignedBar==="function"?kitSignedBar(v):""}<span class="kmd-n">${sg}</span>`;
+ if(el.dataset.h!==h){el.dataset.h=h;el.innerHTML=h;el.title=`Tâm trạng ${bd.name} ${sg} · chạm để xem vì sao`}}catch(e){}}
+(function(){const st=document.createElement("style");st.id="kit-moodhud";st.textContent=`
+header.hud>.kstm{grid-area:auto;grid-column:1/-1;box-sizing:border-box;display:flex;align-items:center;gap:7px;height:20px;margin-top:2px;padding:2px 4px 0;cursor:pointer;min-width:0;border-top:1px solid var(--k-hair,#e6d3ac)}
+.kstm .kmd-seal{display:inline-flex;width:18px;height:18px;flex:0 0 18px}.kstm .kmd-seal img.kemo{width:18px;height:18px;border-radius:50%;object-fit:cover;margin:0;position:static}
+.kstm .kmd-l{font-size:.7rem;color:var(--dim);white-space:nowrap}.kstm .kmd-w{font-family:var(--display);font-size:.85rem;white-space:nowrap;min-width:3.6em}
+.kstm .ksbar{flex:1 1 auto;width:auto;min-width:40px;height:8px}.kstm .kmd-n{font-family:var(--display);font-size:.85rem;font-variant-numeric:tabular-nums;min-width:2.4em;text-align:right;color:var(--ink)}
+`;document.head.appendChild(st)})();
+if(typeof renderHUD==="function"){const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);mbHud();return r}}
+window.mbHud=mbHud;
 /* measuring hook */
 window.moodStat=function(){return Object.assign({v:S&&S.mood?S.mood.v:null},MOOD_N)};
 })();
@@ -68056,7 +68077,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="890ad49711c2";window.CTM_BUILD=BUILD;
+const BUILD="bad7a9b5b71d";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
