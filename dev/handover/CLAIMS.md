@@ -96,7 +96,7 @@ parallel-time (ORDER ROOT-54 ~20:22Z + ADD ~20:37Z) | review/parallel-time | ses
 | REVIEW ag-deed-perf (opus reviewer; env cung-tuong-mong = CDN allowed) | review/ag-deed-perf 9e0e1928 | C-AG #14 | session_01Rc5AsKgufafrSAB6Xyw8k7 | RUNNING | 18/11 19:58Z |
 | MAIN ROOT-55 (opus; child of ROOT-54) | handover HANDOVER_SESSION9 | ROOT-54 | session_01Rc5AsNFnALGujUFYDSjs4g | RUNNING | 18/11 19:56Z |
 | MAIN ROOT-55 (opus; child of ROOT-54) | handover HANDOVER_SESSION9 | ROOT-54 | session_01Rc5AsNFnALGujUFYDSjs4g | RUNNING | 18/11 19:58Z |
-| kit-subtabs-overflow (sonnet KIT KEEPER: K-Q2-1 over-full kitSubTabs bar, whole group) | review/kit-subtabs-overflow | MAIN ROOT-55 | session_01Rc5AsKznwkUWfae1dJP98t | SẴN SÀNG KIỂM 6aab33a | 18/11 20:05Z |
+| kit-subtabs-overflow (sonnet KIT KEEPER: K-Q2-1 over-full kitSubTabs bar, whole group) | review/kit-subtabs-overflow | MAIN ROOT-55 | session_01Rc5AsKznwkUWfae1dJP98t | SẴN SÀNG KIỂM 9366028 | 18/11 20:05Z |
 | ROLE-PARITY (opus; OD 21:30Z role × act × {player,NPC}, promotion) | review/role-parity | C-AG #14 | session_01Rc5AsNHRsgq6S4C9tpNLxA | RUNNING | 18/11 21:35Z |
 | FOREMAN E ROOT #7 (opus; child of E ROOT #6, depth 6) | handover FOREMAN_E_STATUS | E ROOT #6 | session_01DgYSWmtdZ1kLd9QYXs3qmb | RUNNING | 18/11 20:04Z |
 | ge-writers-w1 remerge main 13bb8c88 (sonnet E11w1m) | review/ge-writers-w1 | E ROOT #7 | session_01DgYSWkZN9pWgeEfv5WDMRV | RUNNING | 18/11 20:04Z |
