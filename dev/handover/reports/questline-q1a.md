@@ -58,3 +58,57 @@ FIX 2 to do:
 3. BRANCH: the reviewer says commit a95e8d4 (display-set-bonus merge) is foreign. My branch was cut from origin/main a95e8d4 at 05:20Z; if main has moved/rewound since, rebuild the branch on NEWEST origin/main: new branch from origin/main, cherry-pick my q1a commits only (git log origin/main..review/questline-q1a --oneline; skip a95e8d4 and any "site rebuilt" commits, rebuild the site instead), then force-with-lease push review/questline-q1a (my own branch). Fetch with depth/deepen under flock.
 Then: bash dev/site/build_site.sh; node dev/test/nrask-scan.js; node dev/test/nrask-engine.js; npc-roads.js <url> 1 120, -saves <url> <main url>, -tokscan, -men 1 120, -maids 1 120 (serve the root with python3 -m http.server); node dev/test/nrask-shots.js <dir> (look at shots; CDN 401 → don't store); bash dev/tools/quickcheck.sh; commit the rebuilt site; append "Fix r3" before/after table here; send E7b (session_01DgYSWqDaerQBfKu5bPRkef) + E7c2 (session_01DgYSWkXhh7hPLBJjzFYMWJ, q1c 99aa2c5 rebased on 54f10e8) the new sha (shape unchanged unless the filter changes it); ONE «SẴN SÀNG KIỂM questline-q1a <sha>» to Foreman E #3 session_01DgYSWmvDYnmfLCrNGtw5Uu + FOREMAN_E_STATUS line.
 Worktree /home/user/wt/q1a may still exist in this container only (successor makes its own).
+
+## Fix 2 (E7a2, 18/11) — review/questline-q1a @ a615eb7e5f5c55d75511dd0cfa432a289d73f1d3
+PRIORITY #1 CHECK ('questline-q1|NRASK|nrAskPick|NRQX'): OD 0 new | main none (jnroad stock nr_* only) | review/* questline-q1a (this), q1b 44b7805, q1c 99aa2c5 | claims E7a2 (this), E7b, E7c2
+START_CTX ~3 % of the window.
+
+### Branch
+Rebuilt on origin/main b2a9d34 with ONLY the q1a commits (987a6d9 024a1a5 1b6005a ed01a6b 6e600d2 54f10e8 cherry-picked; generated index.html/sw.js taken from main, rebuilt at the end; assemble.py = main's list + jnrask.js after jnroadm.js). The foreign a95e8d4 (display-set-bonus) is already on main, so nothing foreign rides along: `git log origin/main..review/questline-q1a` = 7 q1a commits. Force-with-lease over 54f10e8 (own branch).
+
+### FIX 1 — queen alias text filter (engine, whole family)
+jnroad.js: one table `NRQX=/Hoàng hậu|Trung cung|Khôn Ninh|cô mẫu|ngôi hậu|hậu vị|phượng ấn|mẫu nghi/iu` next to NRSELF + `nrAskTxt(a)` (h + c + labels + loss lines). In nrAskPick, when nrSelfOf gives "hh" (asker is the queen OR the player is Hoàng hậu), any ask whose text matches NRQX is skipped, whatever its kind; none left → stock card of an allowed kind (the old hh / do rules stay). «cô mẫu» = the queen on the ch roads (jrd_ch; q1b data, 35 hits). «chính cung» / «lục cung» are not aliases (own main palace / the six palaces) — left out on purpose. Exported window.NRQX / nrAskTxt.
+Not done (reviewer's optional note, needs Foreman E): the queen NPC is still dealt the road tt_mat «Mật ước với Hoàng hậu» in nrPickRoad (pre-existing on main); with the filter her tt_mat help hồi falls to stock, so no wrong text shows.
+
+| family scan (raw ask text matches NRQX) | before | after |
+|---|---|---|
+| jnrask.js asks naming the queen | 25 (21 hh + 4 other: tt_mat_6/8/9/10) | same data; never drawn for queen asker / queen player |
+| q1a+q1b+q1c on disk: chapters with such asks | 92 | 92 chapters, 2208 draws (queen asker + queen player): 0 drawn; live queen offers: 0 |
+| other askers still draw them | — | 92/92 chapters |
+
+Test: nrask-engine 7c — loads EVERY dev/build/jnrask*.js on disk into the page (addScriptTag), then for queen asker and player Hoàng hậu, 12 draws per chapter → no ask matching NRQX; live nrOffer of a queen consort → none; non-queen askers still get them.
+
+### FIX 2 — {B}-free ask per chapter (data + scan)
+nrask-scan: new rule for ALL jnrask*.js — a chapter whose every ask names {B} (h, c, labels, loss lines) FAILS. Before: 19 FAIL (exactly the review list). Reworded one non-«do» ask per chapter (kinds kept, facts kept; the rival becomes «có người / chủ cũ / một nhà khác / kẻ lo trà rượu», never «kẻ kia»):
+
+| chapter | ask reworded | kind |
+|---|---|---|
+| tt_oan_7 | [1] «Có nhà được lợi…» | hh |
+| tt_tranh_7 | [0] dish rumoured poisoned, thái y; label «Tự sắc thuốc thử với phần điểm tâm còn lại» | y |
+| tt_mat_8 | [1] «Hoàng hậu đang nghe lời một nhà khác»; loss «chuyện lọt ra ngoài» | hh |
+| dtq_bien_7 | [0] «một công tử nhà quyền quý chưa từng ra ải» | emp |
+| muoi_tuoc_7 | [1] «Có người bày sẵn một màn…» | emp |
+| muoi_tuoc_9 | [0] drops «nhà {B} đứng sau tờ sớ» | emp |
+| muoi_lau_6 | [1] «Có người đã phạm lệ ấy để hãm nhà {me}»; loss «cả cung biết ai dâng» | hh |
+| muoi_no_6 | [1] «khoản lãi còn thiếu» | hh |
+| muoi_no_7 | [1] «qua lại cho {me}» | che |
+| muoi_no_8 | [1] «những món nợ ấy tự tan» | hh |
+| muoi_no_10 | [0] new ask: the emperor may squeeze every salt house; options «nhà {he} chỉ đòi đúng phần» / lão thái giám | emp |
+| cn_chu_5 | [0] «Có người … chủ cũ» | hh |
+| cn_chu_6 | [0] «hầu chủ cũ» | che |
+| cn_chu_7 | [0] «kẻ lo trà rượu» | y |
+| cn_chu_8 | [0] «ngang chủ cũ» | emp |
+| cn_chu_9 | [0] the old maid who taught {me}; loss «nuôi người cũ để khoe ơn» | che |
+| cn_chu_10 | [1] «gian trà nhỏ năm xưa»; loss «kể khắp nơi» | che |
+| cn_tinh_6 | [1] «bị người ta gọi đến hỏi» | che |
+| cn_tinh_8 | [0] «lời đồn không có gốc, kẻ tung tin đã nhận bạc» | hh |
+
+### Tests (a615eb7, built)
+| test | result |
+|---|---|
+| nrask-scan (jnrask.js) | ALL PASS · 96 chapters, 192 asks, kinds thu/emp/th/hh/do/y/che |
+| nrask-scan with q1b 44b7805 + q1c 99aa2c5 files copied in (local only) | ALL PASS · 636 asks (note A of the review is already green on q1c tip) |
+| nrask-engine | ALL PASS (1–9, 7b, 7c new); also ALL PASS with the q1b/q1c files on disk (7c: 92 chapters) |
+| npc-roads 1 120 / -saves (vs main b2a9d34) / -tokscan / -men 1 120 / -maids 1 120 | 14/14 · 6/6 · tagBad 0, errs 0 · 16/16 · 15/15 |
+| quickcheck | QUICKCHECK PASS · core gates PASS · old save ok · perf new/live render 233/200, tab 454/439, buổi 1214/1171 ms (first run had a G3 tutorial float flake under parallel load; kit-conform alone on this build and on main: both exit 0, floats none) |
+| nrask-shots Fold + iPad (tt_mat_7 peer, muoi_lau_9 queen) | SHOTS OK; looked at the Fold queen offer: kit j72 card, no overflow, no raw slot, no queen alias. Local only, deleted |
