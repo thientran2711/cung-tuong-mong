@@ -110,3 +110,4 @@ parallel-time (ORDER ROOT-54 ~20:22Z + ADD ~20:37Z) | review/parallel-time | ses
 | review entry-blank-r3 (opus BIG REVIEWER, OWNER BUG, CDN env) | review/entry-blank-r3 faf2b893 | MAIN ROOT-55 | session_01Rc5AsMhWSwNH8bFZFtfMQB | RUNNING | 18/11 20:20Z |
 | review map-labels (sonnet SMALL REVIEWER) | review/map-labels-missing 718c249b | MAIN ROOT-55 | session_01Rc5AsMauKQhsTB6uLuFcE6 | RUNNING | 18/11 20:25Z |
 | review stage-rightcol (sonnet SMALL REVIEWER) | review/stage-rightcol 25747b2 | MAIN ROOT-55 | session_01Rc5AsLif7zx2DCwH8vK7Sp | RUNNING | 18/11 20:36Z |
+receiver-choice audit (ORDER MAIN ~21:16Z, OD 21:15Z/21:30Z; shares C-AG role-parity table) | review/receiver-choice | (opening) | RUNNING | 18/11 20:55Z | owner D #3
