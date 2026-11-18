@@ -137,7 +137,9 @@ function mapzStaffNow(k){try{const R=S&&S.roster;if(!R||!R.P||(typeof j95key==="
 function mapzPlaceName(k){try{if(k==="home")return S.pal!=null?PALN[S.pal]:HOMEN;if(typeof J95OUT_!=="undefined"&&k===J95OUT_)return"ngoài cung";return palName(k)}catch(e){return k||""}}
 /* jpm hooks: Càn Ninh and Đức Thọ get the three painted halls (Đức Thọ: the Càn Ninh courtyard as a 'tạm' stand-in until its own painting exists — ART REQUEST) */
 if(typeof kpmParts==="function"){
- const pp0=kpmParts;kpmParts=function(slot,k,nm){if(slot==="kn"||slot==="p:tn"){const n=slot==="kn"?"Càn Ninh cung":"Đức Thọ cung";return KPM_PARTS.map(x=>[x[0],hallName(n,x[0])])}return pp0.apply(this,arguments)};
+ /* only while she may walk in now: a locked / out-of-khắc Càn Ninh or Đức Thọ keeps the one-hall tap = the place card with «Lẻn vào» / walk-spill (OD 18/11 ~19:15Z, L1417) */
+ const mapzOpenNow=k=>{try{const st=accState(k);return !(st&&st.why&&!st.here)}catch(e){return true}};
+ const pp0=kpmParts;kpmParts=function(slot,k,nm){if((slot==="kn"||slot==="p:tn")&&mapzOpenNow(slot==="kn"?"kn":"tn")){const n=slot==="kn"?"Càn Ninh cung":"Đức Thọ cung";return KPM_PARTS.map(x=>[x[0],hallName(n,x[0])])}return pp0.apply(this,arguments)};
  const pd0=kpmDir;kpmDir=function(slot){if(slot==="p:tn")return S&&!S.thDead?"nhat-can-ninh":null;return pd0.apply(this,arguments)};
  const pa0=kpmArt;kpmArt=function(slot){const A=pa0.apply(this,arguments);if(A&&slot==="p:tn")A.tam=true;return A};
  const ps0=kpmSplit;kpmSplit=function(k){const O=ps0.apply(this,arguments);try{if(k==="kn"||k==="tn"){/* guests stay in the chính điện (as before); the household by what the record says they do */
