@@ -22,3 +22,16 @@ Findings: gpt-2-6, width 1024 height 2304, resolution 2k, count 1 works via imag
 ## Remaining
 c01..c08 x a36/a51/a65 (c05 a51 copy) = 23 gens + cut-outs, sheets cNN_thaihau_sheet.jpg, CDN img/_review/thaihau/ (CLOUDFLARE_API_TOKEN=proxy-injected python3 dev/site/cdn_sync.py ...), report lines per person, READY to ROOT-31 per 2-3 people. Look at every image (<=600 px): face, stiff shoulder piece + collar, age, one item, closed lips, no forehead mark, not back-turned. Regen max 3. Worktree: /home/user/wt/t1 (sparse), builder outputs saved in scratchpad p/ may be gone: rebuild.
 ~15% xong / ~0% chơi được
+
+## T1b (18/11 ~22:45Z) — START_CTX ~15 %, ctx ~40 % at handover
+PRIORITY #1 CHECK ('thai hau mass'): OD 0 | ledger 0 | claims 0 | main 0 | review/* 0 | archive 0. Re-read FIGURE_GATE D + APPROVED_PROMPTS + brief before the first person.
+Method: `build.py cNN --state thaihau --age aNN --nostyle` (build.py 4e1fca5d+), ONE ref = her own t1 identity (a65 -> her a51 id), no style, gpt-2-6 1024x2304 2k count 1, then images_remove_background. Prompts differ per person only in: face line, robe colour (2 places), item (+ hands sentence for c04–c07), age text a36/a51/a65 — diff against build.py output each time.
+| person | gens | looked | result | sheet |
+|---|---|---|---|---|
+| c01 (fan) | 3 (1 each, 0 regen) | face ok, stiff shoulder piece + collar ok, age ok, 1 item, lips closed, not back-turned | PASS | img/_review/thaihau/c01_thaihau_sheet.jpg |
+| c02 (gold-thread book, sapphire) | 3 (0 regen) | same checks | PASS | c02_thaihau_sheet.jpg |
+| c03 (phoenix round fan, emerald) | 3 (0 regen) | same checks | PASS | c03_thaihau_sheet.jpg |
+CDN: https://ctm-img.victoria-tntt.workers.dev/img/_review/thaihau/cNN_<age>_thaihau_v0.png + cNN_thaihau_sheet.jpg (c01-c03 uploaded, 200 OK). 9 gens x 135 + 9 cut-outs x 3 cr.
+Old style-B gens (c01/c02) overwritten by these (same names).
+HANDOVER for T1c: remaining c04–c08 x a36/a51/a65 = 15 gens (c05 a51: redo too, one ref; do NOT copy the style-B sample). Identity uploads in the T1 table above (c04 5jDrmFiKxe/O6E9170ynm, c05 UPvObSjwny/If3hxHCtvE, c06 JNC41yCOq4/ksejajT16B, c07 3zKAUG9REY/WDgVNppcXe, c08 dt48zhJXSL/4RFiLAP9Aa; ids verified for c01 a36 only — look at a ref if a result's face is wrong). a65 uses the a51 id. Items: c04 gold phoenix incense ball, c05 gold lidded jewel casket, c06 gold-mounted scroll, c07 phoenix-headed hand mirror, c08 kingfisher-and-pearl phoenix fan. Cut-out + sheet (PIL, 0.5x, a36|a51|a65 on parchment) + cdn_sync.py img/_review/thaihau (needs dev/site/manifest_guard.py too) as for c01–c03.
+~38% xong (9/24 gens) / ~0% chơi được
