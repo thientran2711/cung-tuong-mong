@@ -1312,3 +1312,12 @@ BAL.bookFigW=.343;Object.assign(BAL,{bookFrame:{cRef:.072,gap:8,footGap:10}});
 /* DOING AN ACT ON THE SPOT (review/shown-odds-one-path): "Cài đồ vào rương nàng" done in her own palace is easier than sending
    someone by actHere.plant (was a typed -15 pen in j8 plantpick + a typed +15 on the j2 chest card); both read it through actCtx (j9). */
 Object.assign(BAL,{actHere:{plant:15}});
+/* ROLE PARITY part 2 (owner OD 18/11 ~21:30Z; law 1 two-way + law 4 one core): the NPC side of her buttons that had none (jagacts4 cx4:*).
+   Costs / odds / gains are the player's own rows (BAL.btn.kidCare/kidGuard + BAL.bacFee, BAL.cyc, BAL.ration, IROUTE in j83, BAL.odb.j22);
+   here only the WORTH of each deed to an NPC (g = needs it serves, as BAL.ag.par3) and its gates.
+   kidGuard.host = hostility of some consort toward her before she pays for a guard; ill = Đồ cấm routes: malice = the character gate of the
+   old monthly road (now a choice), keep = bạc she keeps after paying, w = how much she wants each poison; rouge.g = worth of a missing box;
+   man = the forbidden road with a man: sungBelow = a neglected consort (the old affair start rule), cutRisk = lộRisk at which «Cắt đứt» serves her safety. */
+BAL.ag.par4={on:1,kidCare:{g:{"kid":3}},kidGuard:{host:40,g:{"safe":2,"kid":1}},cyc:{g:{"safe":3,"kid":2}},
+ rouge:{g:{"sung":1,"danh":1},steal:{g:{"sung":1,"spite":1}}},ill:{malice:60,keep:20,w:{hacdinh:6,xahuong:5,botngua:4},g:{"spite":4}},
+ man:{sungBelow:30,cutRisk:50,g:{hail:{"sung":.5},flirt:{"sung":1.5},token:{"sung":2},tryst:{"sung":3,"rest":1},cut:{"safe":3}}}};
