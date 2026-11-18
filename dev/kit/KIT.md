@@ -1384,6 +1384,7 @@ Test: dev/test/inv-grade.js checks on every panel tab that each act card's botto
   Until they exist jinv's fallback (`kitShopSellable` / `kitShopPrice`) does the same from the bag: each handmade work its own tile
   (wk.n, wkSellVal, sold by wkSell with j83's odds) + items with a price (half price, j8 sellItem).
 Used by: Nội vụ phủ "Nhờ thái giám mua đồ" (`kitShopNvp`, seller `img/fig-eunuch-ndp-tray.webp` = Nội vụ phủ eunuch holding a tray, stock 5, carry 9).
+**Shop panel layout (review/shop-panel, owner 18/11):** outside option on the seller = «Để ta xem» (never a 2-item list); the panel keeps the seller figure LEFT; RIGHT = tabs «Mua» | «Bán» + a fixed 3-COLUMN `.kshg` (`.kshop[data-kshop] .kshg`, the grid scrolls down); the scene picture takes the smallest strip `KIT_SIZE.pic.NS` because the grid always scrolls (picture rule 18/11 16:10Z). Test: `dev/test/shop-panel.js`.
 Next buying screens (Tư trang buy, gifts, peddler) must call kitShop, not dialog option cards.
 Test: `node dev/test/shop-fix.js <build url> <outdir> [WxH@dpr,…]` (box = plain person dialog, row alignment, buy ×2 → bag ×2, sell, item card,
 ✕). Shots before / after: dev/shots/shop-fix/ (755x1000, 1000x755, 1180x820, 844x390).

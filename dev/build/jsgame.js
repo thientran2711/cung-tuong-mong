@@ -226,7 +226,7 @@ SG_THOI.forEach(k=>{if(!ACT[k]||!ACT[k].o||SG.K[k])return;
    j:"over"  "Nghe lén câu chuyện" at a place (j78 overhear) → Nghe ngóng          {pi}
    j:"serv"  "Mua chuộc" a servant of another palace (bribeServ j29 / j10 / j15) → Mặc cả   {sid}
    job = {gk (SG.K key), t (game title), v (target, for the game), name, p0() (odds now), line(word) (card text), ask, cost (silver text), pay()→bool (take the time/silver), run(m) (act under the step), art} */
-function sgOdds(v,k){const a=ACT[k];const o=a&&a.o?a.o(S,v):50;return oddsCl(Math.round(o+(typeof lotB==="function"?lotB(S,ACTDOM[k]):0)))}
+function sgOdds(v,k){const a=ACT[k];const o=a&&a.o?actOdds(S,v,k):null;return oddsCl(Math.round(o==null?50:o))}/* actOdds (j9): the roll's own context, lá số included */
 function sgLine(v,k,w,c){const prev=typeof J78!=="undefined"?J78.cardV:null;try{if(typeof J78!=="undefined")J78.cardV=v;return actLineRaw(k,w,c)}finally{if(typeof J78!=="undefined")J78.cardV=prev}}
 function sgCan(i,k){const v=rivals[i],a=ACT[k];if(!v||!a||!SG.K[k]||typeof S==="undefined"||!S||S.dead||Q.length||!v.alive||v.out||!can(BAL.actK)||!a.ok(S,v))return false;
  if(typeof k61Named==="function"&&!k61Named(v))return false;if(S.confined&&typeof CRIME!=="undefined"&&CRIME.includes(k))return false;if(k==="bribe"&&!v.maid)return false;return true}
@@ -235,7 +235,7 @@ SG.K.over={g:"nghe",t:"Nghe ngóng",eng:sgNghe,dur:"30 giây",how:SG.K.spy.how,h
 SG.K.serv={g:"mac",t:"Mặc cả",eng:sgMac,dur:"3 hồi, mỗi hồi 10 giây",how:SG.K.bribe.how,hud:SG_HUD("10 giây"),steps:SG.K.bribe.steps,ask:()=>"Mua chuộc người hầu cung khác: tự mặc cả, hay giao cho người làm?"};
 const SG_ACTS=[["Dò la","spy"],["Tung tin đồn","rumor"],["Bỏ độc vào trà nàng","poison"],["Bỏ xạ hương vào thuốc nàng","musk"],["Đẩy con nàng xuống hồ","pond"],["Vu oan","frame"]];
 function sgServCost(s){return nv(s,"bribeCost")}
-function sgServOdds(s){return odA(S,35+nq(s,"greed",BAL.net.k.bribeGreed)-nq(s,"timid",BAL.net.k.bribeTimid)-nq(s,"loyal",BAL.net.k.bribeLoyal)-s.loyal/3+S.tamco/5)}
+function sgServOdds(s){return bribeOdds(S,s)}/* 2f2 one core: Mặc cả = the Mua chuộc odds (j29 bribeOdds = jagknow tmOdds) */
 function sgPopPay(pi,tc){return()=>{if(!can(tc))return false;spend(tc);try{S.payOnPick=0}catch(e){}try{if(pi!=null&&S.visit){S.visit.tk=S.visit.tk||{};S.visit.tk[pi]=1}}catch(e){}return true}}
 function sgJob(p){if(!p||typeof S==="undefined"||!S)return null;if(!p.j)p.j="act";
  if(p.j==="act"||p.j==="place"){const v=RV(p.v),k=p.k,a=ACT[k],G=SG.K[k];if(!v||!a||!G)return null;
@@ -243,12 +243,12 @@ function sgJob(p){if(!p||typeof S==="undefined"||!S)return null;if(!p.j)p.j="act
   if(p.j==="act"){J.pay=()=>true;J.run=m=>sgRun(v.id,k,m)}
   else{J.pay=sgPopPay(p.pi,BAL.actK);J.run=m=>{SG.mod=m&&m.step?m:null;let r="";try{r=runAct(S,v,k)||""}finally{SG.mod=null}if(r)log(`${a.n}: ${r}`);render()}}
   return J}
- if(p.j==="over"){const G=SG.K.over,b=40+S.mat*6;
+ if(p.j==="over"){const G=SG.K.over,b=40+eyes(S)*6;
   return{gk:"over",G,t:G.t,v:{},name:"",art:"Nghe lén",ask:G.ask(),cost:"không tốn bạc",p0:()=>od(b),line:w=>`Nghe lén câu chuyện · ${w} · biết 1 điều thật về nàng · chứng cứ ${balSg(BAL.eff.j78.evTop)} · tốn: không tốn bạc`,pay:sgPopPay(p.pi,1),
    run:m=>{SG.mod=m&&m.step?m:null;let r="";try{r=overhear(S.place)||""}finally{SG.mod=null}if(r)log(`Nghe lén câu chuyện: ${r}`);render()}}}
  if(p.j==="serv"){const s=servById(p.sid),G=SG.K.serv;if(!s)return null;const o=ownerOf(s),c=sgServCost(s);if(!o||o===S)return null;
   return{gk:"serv",G,t:G.t,v:{maid:s},name:s.name,art:"Mua chuộc",ask:`Mua chuộc ${s.name}, người hầu của ${NM(o)}: tự mặc cả, hay giao cho người làm?`,cost:`${c} bạc`,p0:()=>sgServOdds(s),
-   line:w=>`Mua chuộc ${s.name} · ${w} · thành: thành tai mắt của ngươi · tốn: ${c} bạc · thất bại: nàng mách chủ`,
+   line:w=>`Mua chuộc ${s.name} · ${w} · thành: thành tai mắt của ngươi, tốn ${c} bạc · bại: không mất bạc; nàng có thể mách chủ, kẻ đi đưa lời sợ liên lụy`,/* 2f3: bạc only on success (bribeServ) */
    pay:()=>{if(S.bac<c||!can(BAL.servK))return false;spend(BAL.servK);return true},run:m=>{SG.mod=m&&m.step?m:null;let r="";try{r=bribeServ(S,s)||""}finally{SG.mod=null}if(r)log(r);render()}}}
  return null}
 

@@ -53,7 +53,7 @@ const [,,URL,SZ]=process.argv;const [WH,DPR]=(SZ||'755x1000@1').split('@');const
  ck('Thái y viện: no "Học hỏi y lý"',!r.tyv.includes('Học hỏi y lý'),r.tyv);
  ck('Lãnh cung: no "Đưa cơm áo"',!r.fallen.includes('Đưa cơm áo'),r.fallen);
  ck('Nội vụ phủ is a place',r.places.includes('nvp')&&r.atNvp==='nvp',{pl:r.places,at:r.atNvp});
- ck('Nội vụ phủ eunuch + shop',r.nvpOpts.includes('Xem hàng Nội vụ phủ')&&r.shopOpen,{p:r.nvpPeople,o:r.nvpOpts,shop:r.shopOpen});
+ ck('Nội vụ phủ eunuch + shop',r.nvpOpts.includes('Để ta xem')&&r.shopOpen,{p:r.nvpPeople,o:r.nvpOpts,shop:r.shopOpen});
  ck('weekly rare item in the shop',!!r.rare&&r.rareTile,{rare:r.rare,tile:r.rareTile});
  ck('place icons on map',r.mapIcons>=6&&r.mapNvp,{n:r.mapIcons,nvp:r.mapNvp});
  ck('place icons in list',r.listIcons>=6,{n:r.listIcons});

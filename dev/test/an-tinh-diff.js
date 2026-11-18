@@ -6,7 +6,7 @@ const {chromium}=require('playwright');
  await p.goto(process.argv[2],{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:0});await p.waitForTimeout(1200);
  await p.evaluate(()=>{window.__bot={pre:1};try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;start()});
  await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S.origin,null,{timeout:0});
- const r=await p.evaluate(()=>{const bad=[];let n=0;Q.length=0;S.an=1;S.mat=2;S.th=10;S.hh=5;S.suc=80;S.bac=300;if(typeof lsSync==="function")lsSync("test");/* (log-sync branch: the test's own direct setting is synced first) */
+ const r=await p.evaluate(()=>{const bad=[];let n=0;Q.length=0;S.an=1;tmPlace(S,2);S.th=10;S.hh=5;S.suc=80;S.bac=300;if(typeof lsSync==="function")lsSync("test");/* (log-sync branch: the test's own direct setting is synced first) */
   const K=typeof RKEYS!=="undefined"?RKEYS:[];const chk=(what,b)=>{const L=S.logs.slice(0,Math.max(0,(S.logSeq||0)-b.seq)).map(x=>String(x).replace(/<[^>]+>/g,""));
    for(const [k,nm] of K){if((S[k]||0)!==b.v[k])continue;const re=new RegExp(nm.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"\\s*-?\\d+\\s*→");for(const t of L)if(re.test(t))bad.push(`${what}: ${nm} unchanged but logged: ${t.slice(0,140)}`)}n++};
   const snap=()=>{const v={};for(const [k] of K)v[k]=S[k]||0;return{v,seq:S.logSeq||0}};

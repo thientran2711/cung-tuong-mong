@@ -22,7 +22,7 @@ function accessOf(p,k){p=p||S;if(!k)return{ok:false,why:"cung trống",kind:"rul
  if(ACC_DAY[k]){if(b<B4L)return{ok:true};return{ok:false,why:"đóng cửa tối",kind:"hour"}}
  return{ok:true}}
 /* the odds and prices (her side; an NPC module may call the same) */
-function accSneakO(k,a){a=a||S;const base=k==="dtd"?25:k==="thu"?30:k==="tn"||k==="kn"?35:k[0]==="r"?45:55;return odA(a,base+(a.tamco||0)/5+(a.mat||0)*3)}
+function accSneakO(k,a){a=a||S;const base=k==="dtd"?25:k==="thu"?30:k==="tn"||k==="kn"?35:k[0]==="r"?45:55;return odA(a,base+(a.tamco||0)/5+eyes(a)*3)}
 function accAskO(k,a){a=a||S;if(k==="dtd"||k==="thu"){let o=45+(rkOf(a)-4)*8+mm()+(a.sung||0)/5;if(has("chamchinh")&&k==="thu")o-=10;if(has("datinh")&&k==="dtd")o+=8;return odA(a,o)}
  const h=accHost(k);return odA(a,40+(h?aff(h,a)/2+(rkOf(a)-rkOf(h))*8:0))}
 function accName(k){try{return k==="home"?palName("home"):(typeof palName==="function"&&(PLNAME[k]||k[0]==="r")?palName(k):placeOf(k).n)}catch(e){return placeOf(k).n}}
