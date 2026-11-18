@@ -68,6 +68,14 @@ function menMinW(b,w,f){S.minW={};S.minF=null;try{if(typeof trS==="function"&&ty
 /* who may stand in the hậu cung (menZone "hc") on the schedule: a thái y summoned to a sick consort, a craftsman with a Nội vụ phủ work order,
    a prince paying his respects to Thái hậu at her palace. Everyone else inside the hậu cung is a stray (menPlans → the 'Nam nhân nơi cấm địa' card). */
 function menLawful(m,k,why){if(!k||menZone(k)!=="hc")return true;if(why==="summons"||why==="order"||why==="stray")return true;return why==="visit"&&k==="tn"}
+/* old saves (review/men-forbidden-r6): a save made before this rule can hold, for the rest of that buổi, an official (S.minW / j95 record "q:")
+   or a prince / envoy at a festival (why "fest") standing in the hậu cung. On load the same rule clears them; the banquet official goes to S.minF. */
+function menLoadFix(){if(!S||!S.men)return;const b=S.buoi||0,f=typeof festToday==="function"&&festToday(),Y=S.menWhy||{},OUT=typeof J95OUT_!=="undefined"?J95OUT_:"ngoai";
+ const R=S.roster;if(R&&R.P)for(const id in R.P){const e=R.P[id],q=id.indexOf("q:")===0;if(!Array.isArray(e)||!(q||(manById(id)&&(Y[id]||{}).w==="fest")))continue;
+  for(let i=0;i<e.length;i++)if(Array.isArray(e[i])&&e[i][0]&&e[i][0]!==OUT&&menZone(e[i][0])==="hc")e[i]=[OUT,"away",null,q?"dự yến lễ tết ở ngoại triều":"phận sự ở ngoài hậu cung"]}
+ for(const c in (S.minW||{}))if(menZone(S.minW[c])==="hc"){delete S.minW[c];if(f&&b>0&&b<B4L)S.minF=c}
+ for(const id in (S.menW||{})){const y=Y[id]||{};if(y.w==="fest"&&menZone(S.menW[id])==="hc"){delete S.menW[id];delete Y[id]}}}
+if(typeof deser==="function")(function(){const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{menLoadFix()}catch(e){console.error("men load",e)}return r}})();
 function menPlace(){menSched();const W=S.menW,Y=S.menWhy;const b=S.buoi||0,w=wk();menPlanWeek();
  /* today's plans come true where they were planned */
  for(const P of (S.menPlans||[])){if(P.w!==w||P.done)continue;const m=manById(P.m);if(!m||menBanned(m)){P.done=1;continue}const v=P.v!=null?RV(P.v):null;
