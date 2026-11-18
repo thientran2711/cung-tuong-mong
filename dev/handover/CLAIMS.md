@@ -38,7 +38,7 @@ NPC-PURPOSE G1 #8 (opus integrator; seat opened by D #2 for C-AG #13, OPEN NOW #
 | FOREMAN E ROOT #4 (opus; successor of #3; depth 3, START_CTX ~5 %) | handover FOREMAN_E_STATUS | E | session_01DgYSWokbRMfu3opDuSCw15 | HANDED OVER → E ROOT #5 session_01DgYSWkmGWJMooE69PH8bHk | 18/11 15:55Z |
 | fullbody-frame-s3 (sonnet SMALL UI; owner 09:25Z OD L1878: no fade on figure + head centred, kit, whole group) | review/fullbody-frame-s3 | MAIN ROOT-52 | session_01UV1SzhJ3JicrwJmcbMVHSA | RUNNING | 18/11 15:57Z |
 | E11r-w1 REVIEW ge-writers-w1 (opus BIG) | review/ge-writers-w1 | E | session_01DgYSWmTELUPTfw8Lqf2S4Y → R4 E11r-w1b | DONE R4 PASS fd7c6775 (ready to land, ff on main 94d11623) (reports/ge-writers-w1-review.md) | 18/11 16:02Z | START_CTX ~3 % |
-| E11r-w2 REVIEW ge-writers-w2 (opus BIG) | review/ge-writers-w2 | E | child of Foreman E ROOT #6 | DONE FAIL 6e0426df — 5 fixes (reports/ge-writers-w2-review.md) | 18/11 | START_CTX ~3 % |
+| E11r-w2 REVIEW ge-writers-w2 (opus BIG) | review/ge-writers-w2 | E | child of Foreman E ROOT #6 | DONE R2 PASS 2e37bdc9 (R1 FAIL 6e0426df; reports/ge-writers-w2-review.md) | 18/11 | START_CTX ~3 % |
 shown-odds-r2-rv (BIG review of b39e6678) | review/shown-odds-r2-rv | session_01964izFyUaSfxgcEB3KDJP9 | PASS cf1fc746 LAND READY | 18/11 16:32Z | owner D #2
 a18-yellow-crown-face | CDN _review only | W65 session_011xDdVPrcwYuVJ3sqp3A6kR | RUNNING | 2026-11-18T16:31Z (Foreman C ROOT-26)
 b10-a51-sample (redo v1/v2) | CDN _review only | W64d session_011xDdVSSRETnCf8t9wP8DxX | RUNNING | 2026-11-18T16:22Z (Foreman C ROOT-26)

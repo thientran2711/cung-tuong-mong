@@ -49,3 +49,26 @@ in-char .65 above [.30,.60] = the shared odds-cap note (W1 note 1, same engine n
 1. Landing: W2 and W1 both edit the assemble.py line and the three BAL.ge literals — the second to land must re-merge (my resolution above works: guard 6/6, engine 808/808, one-core PASS). W2 lands after W1.
 2. Still open FOR E (from W1): engine term «the followed / needed person alive»; one HH seat rule; inChar vs odds cap (W2 .65). Add: kid origin for cn_chu_4 (fix 1).
 3. rw cn_chu_4 `seat:"TM"` — geApply reads W.seat only for "HH"; TM is set from the catalogue summit (jge.js:114). Harmless, but the key is dead data; leave or drop, one rule for all waves.
+
+---
+# ROUND 2 — review of 2e37bdc9 (fix round E11b2), order from Foreman E ROOT #7 session_01DgYSWmtdZ1kLd9QYXs3qmb
+PRIORITY #1 CHECK ('ge-writers|GE writer|jgedata'): OD 0 | ledger 0 | claims 8 | main 5 | review/* 2 (ge-writers-w2 under review, ge-writers-w1 dca5550f merge test) | archive 0. 18 LAWS re-read.
+Copies: (A) 2e37bdc9 as is (holds live main fa411d6f); (B) A + origin/review/ge-writers-w1 @ dca5550f — conflicts only assemble.py line, jbalge.js rows, index.html / sw.js; resolved = main's list + `jgedata.js, jgedata_w1.js, jgedata_w2.js` (348 = main 346 + 2, nothing else changed), W1 rows then W2 rows in each literal (gate 100 / fail 100 / rw 100 + mul), rebuilt.
+
+## VERDICT: **PASS 2e37bdc9** — all 5 round-1 fixes done as families. Land W2 after W1; whoever lands second re-merges assemble.py + jbalge.js exactly as copy B.
+
+| fix | result |
+|---|---|
+| 1 law 6b/c | OK — cn_chu_4 now true for every son that passes cond ["son"] (no other mother named; Đông cung / Tông nhân phủ = game institutions); route (b) chosen by Foreman E, so the text no longer carries the catalogue's «chủ»'s child — kid-origin engine term stays FOR E if the catalogue lever is wanted later. cn_than_2 = the cleared Thẩm case + the dike ledger (road facts), no «tiên triều». td_an_4 = the road's grave («Xin dời mộ cha về quê»), fail «Mộ cha chưa dời», invented «cây hồng» dropped. nc_su_3 = «tờ sớ của người cha» (road c2). My own rescan of all 44 (kin / offices / places / objects vs that road's .4–.11 + ch12–14 text): no road fact missing; only world places / institutions remain. |
+| 2 terms | OK — td_ke_2 t/a «con dao năm xưa» / «bàn tay sau màn» (jrd_td has «bàn tay sau màn» ×2; the worker is right that my «bàn tay cầm dao» was the road's description, not its term). |
+| 3 dups | OK — both duplicates gone; ge-guard +1 line «no name twice in one list» (lean.p/m + every pull/push/close/doom). On copy B (pilots + W1 dca5550f + W2 = 25 branches) it passes: **6/6** → W1 can take the line verbatim to keep one shared block. |
+| 4 places / scene / stock frames | OK — chùa Hộ Quốc (the game's temple), new scene (khăn left at the gate, sweeping leaves) differs from td_tha_3; none of «Lời xin ra cung bị…», «Chứng cứ của ngươi bị…», «…vững hơn ngươi tưởng» left in W2 (scan 0). Remaining 5-word overlaps are stock phrases (e.g. «ra khỏi cổng Thần Vũ»), no shared sentence. |
+| 5 re-measure | OK — 3 new cn_chu sibling Khóa are real options on sibling Chuỗi, none in their own pull. My run (`MODES=kind,cruel … - 3 2 … cn_chu,nc_vuong sens`, alone): **cn_chu 6 lives open .11 2.40 IN, nc_vuong 6 lives 2.50 IN**, kind→thiện 1.00 / cruel→ác 1.00 both, in-char .50, 12/12 lives ok, page errors 0 (worker m11: cn_chu 2.00, m10: nc_vuong 2.17). |
+
+## Tests
+A: build_site OK (only CTM_BI differs) · ge-guard 6/6 · ge-engine `- all` **456/456 ×2 cold** (fresh build before each) · one-core PASS · **quickcheck ALONE PASS** (core gates PASS, open 1488 ms, old save ok, render 208/234, tab 423/445, buổi 1007/1224, tasks>200 17/16). B (W1 dca5550f + W2 + main fa411d6f): ge-guard **6/6** (25 live branches, dup line included) · ge-engine all **808/808** · one-core PASS.
+
+## 18 LAWS (round 2)
+2 / 3 / 4 OK (no BAL row changed; Khóa only) · 6 (b)(c) OK now · 7 OK (no %, no digits, cổ trang) · 11 every fix done as a family (rescan + guard line) · others n/a or unchanged.
+
+## Still FOR E (non-blocking): kid-origin term if cn_chu_4 should again mean the old mistress's child; «followed / needed person alive» term; one HH seat rule; inChar vs odds cap; rw cn_chu_4 `seat:"TM"` dead key (one rule for all waves).
