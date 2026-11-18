@@ -190,7 +190,7 @@ function knReact(){const key=agKey();if(KN.rk===key)return;KN.rk=key;if(!knDeedH
  for(const v of liveRivals(true)){if(!v.alive||v.out||v.confined)continue;try{if(agUsed(v))continue;let any=false;for(const h of knDeedHaps())if(knFor(v,h)){any=true;break}if(!any)continue;
   const N=agNeedsC(v);const O=knOpts(v,N);if(!O.length)continue;const c=mindPick([[null,BAL.ag.routine]].concat(O.map(o=>[o,o.u])),v);if(!c)continue;
   const sl=agSlot(v,c.at,c.t,c);if(!sl)continue;agPlan(v,c,N,sl[0],sl[1]);KN.stat.react=(KN.stat.react||0)+1}catch(e){agErr("knReact1",e)}}
- if(AG.now){AG.now=0;setTimeout(()=>{try{agSyncNow()}catch(e){}},0)}KN.ms=(KN.ms||0)+performance.now()-t0}
+ if(AG.now){AG.now=0;agLater("sync",agSyncNow)}KN.ms=(KN.ms||0)+performance.now()-t0}
 /* ---------- §4 servants' own errands ---------- */
 function knDanger(m){const M=knMemo();M.dg=M.dg||{};const k=knId(m);if(M.dg[k]!=null)return M.dg[k];let d=0;try{for(const v of liveRivals(true))if(v!==m&&v.alive)d=Math.max(d,danger(v,m))}catch(e){}return M.dg[k]=d}
 function knScoutT(m){const M=knMemo();M.st=M.st||{};const k=knId(m);if(M.st[k]!==undefined)return M.st[k];return M.st[k]=knScoutT0(m)}
@@ -269,7 +269,7 @@ function knSrvCards(m){if(!m||!knOn())return[];const X=[];const once=k=>typeof i
  /* a scheme lands: watchers at that palace */
  const l0=agLand0;agLand0=function(p,seen){const r=l0.apply(this,arguments);try{knWatchLand(p)}catch(e){agErr("knWatch",e)}return r};
  /* news arrives as time passes (a khắc spent, new deeds planned): scan once in its own frame */
- const sc=()=>{if(KN.q)return;KN.q=1;setTimeout(()=>{KN.q=0;try{if(knOn()&&S&&!S.dead)adHapNow()}catch(e){}},0)};
+ const sc=()=>agLater("kn",()=>{if(knOn()&&S&&!S.dead)adHapNow()});/* AG LATER (jagent): dropped on another world / buổi, drained at the boundary */
  if(typeof j95sync==="function"){const s0=j95sync;j95sync=function(){const r=s0.apply(this,arguments);try{if(knOn())sc()}catch(e){}return r}}
  if(typeof agSlice==="function"){const a0=agSlice;agSlice=function(){const r=a0.apply(this,arguments);try{if(knOn()){if(!AG.q)knReact();sc()}}catch(e){agErr("knReact",e)}return r}}
 })();

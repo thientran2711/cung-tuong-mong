@@ -127,16 +127,16 @@ function agLzKind(kind){return kind==="maid"||kind==="srv"}
 function agLzNew(b){AGD.lz={key:wk()+"-"+b,b,L:[],ids:{},w:S}}/* w: the world (S) the queue was drawn for — a chunk never runs on another world (co-op seat swap, load, new life) */
 function agLzPush(p,id,kind,b,intent){const Q=AGD.lz;if(!Q)return;Q.L.push([p,id,kind,b,intent]);Q.ids[id]=1}
 function agLzHas(id){const Q=AGD.lz;return !!(Q&&Q.ids[id]&&Q.key===wk()+"-"+agDayB())}
-function agLzGo(){const Q=AGD.lz;if(!Q||!Q.L.length)return;if(window.__agAll){while(AGD.lz&&AGD.lz.L.length)agLzRun();return}if(AGD.lzT)return;AGD.lzT=1;setTimeout(agLzRun,0)}
-function agLzRun(){AGD.lzT=0;const Q=AGD.lz;if(!Q)return;if(Q.w!==S||!agDOn()){AGD.lz=null;return}const D=agDz();if(Q.key!==wk()+"-"+agDayB()||D.d!==wk()){AGD.lz=null;return}
+function agLzGo(){const Q=AGD.lz;if(!Q||!Q.L.length)return;if(window.__agAll){while(AGD.lz&&AGD.lz.L.length)agLzRun();return}agLater("lz",agLzRun)}
+function agLzRun(){const Q=AGD.lz;if(!Q)return;if(Q.w!==S||!agDOn()){AGD.lz=null;return}const D=agDz();if(Q.key!==wk()+"-"+agDayB()||D.d!==wk()){AGD.lz=null;return}
  const t0=performance.now(),B=BAL.ag.perf.slice;const done=[];
  while(Q.L.length){if(done.length&&performance.now()-t0>=B)break;const [p,id,kind,b,intent]=Q.L.shift();delete Q.ids[id];try{if(intent||!D.I||!D.I[id])agIntent(p,id);agDrawPerson(p,id,b,kind,b);done.push(id)}catch(e){agdErr("lz",e)}}
  try{const R=agRec();if(R){const k0=agKh();for(const id of done){const s=agDaySlot(id);const row=R.P[id];if(!s||!row)continue;const nr=agRow(s);
    for(let kh=k0;kh<J95.KH;kh++){const e=row[kh];if(!e||e[1]==="go"&&!agBound(id,kh,R.key))row[kh]=nr[kh]}}}
   if(done.length)agTickX()}catch(e){agdErr("lzPaint",e)}
  const ms=performance.now()-t0;AGD.ms.push(ms);if(AGD.ms.length>60)AGD.ms.shift();
- if(done.length&&!AG.syQ){AG.syQ=1;setTimeout(agSyncNow,0)}
- if(Q.L.length){if(window.__agAll)agLzRun();else{AGD.lzT=1;setTimeout(agLzRun,0)}}else AGD.lz=null}
+ if(done.length)agLater("sync",agSyncNow)
+ if(Q.L.length){if(window.__agAll)agLzRun();else agLater("lz",agLzRun)}else AGD.lz=null}
 function agDaySlice(){/* kept for callers: the hybrid day has no pre-drawn later buổi */}
 /* re-plan of the INTENT at a new buổi: her top need changed, or she was touched; chance BAL.ag.day.replan */
 function agTouch(p){try{const id=ledgerId(p);if(!id)return;const z=agZ();z.rp=z.rp||{};z.rp[id]=1;AGD.stat.touch++}catch(e){}}
@@ -328,7 +328,7 @@ function agHeard(v,info){if(!agRdOn()||!v||v===S||typeof v!=="object"||!v.alive|
  for(let q=s0;q<kh;q++)R.P[id][q]=[at,"go",null,info.why||""];/* on her way (this khắc is spent walking) */
  c.need=c.need||"rd";agPlan(v,c,N,kh,at);{const pp=agZ().pend[agZ().pend.length-1];if(pp&&pp.id===id&&pp.kh===kh)pp.go=[s0,kh]}AGD.stat.rd=(AGD.stat.rd||0)+1;
  agRdLog(R,id,k0,"ag:rd:"+c.k,c.t?ledgerId(c.t):null,info.why||"",at);
- if(!AG.syQ){AG.syQ=1;setTimeout(agSyncNow,0)}/* the shadows of the khắc to come follow at once */
+ agLater("sync",agSyncNow);/* the shadows of the khắc to come follow at once */
  return 1}
 /* AG-ALL-2d4 TIN BÁO TIMING (owner OD 17/11 ~17:55Z (3), verbatim: "theo đường đi thật, gần thì khắc 2, xa thì khắc 3 trở đi"): news carried by a
    person reaches the master after the bearer's REAL Dư đồ walk from where she saw it to where the master is — the same travel() the player walks
@@ -400,7 +400,7 @@ function agShOpts(p,v){const n=agShKh(p);const lock=agWhyDay(n);/* the DAY gate 
  if(lock)kitOff(O[0],lock,"");return O}
 /* review ag-all-2 r2 B7: the khắc a cut / dropped deed no longer holds show the NPC's row of the khắc before (she goes back to what she was doing) */
 function agShClear(p,from,to){try{const R=agRec();if(!R||p.key!==R.key)return;const row=R.P[p.id];if(!row)return;const b4=p.kh>0&&row[p.kh-1]?row[p.kh-1]:null;const prev=[b4&&!/^ag_/.test(b4[1]||"")?b4[0]:p.pl,b4&&!/^ag_/.test(b4[1]||"")?b4[1]:"go",null,""];
- for(let q=Math.max(0,from);q<=Math.min(J95.KH-1,to);q++)if(row[q]&&row[q][1]==="ag_"+p.k)row[q]=prev.slice();if(!AG.syQ){AG.syQ=1;setTimeout(agSyncNow,0)}}catch(e){agdErr("shClear",e)}}
+ for(let q=Math.max(0,from);q<=Math.min(J95.KH-1,to);q++)if(row[q]&&row[q][1]==="ag_"+p.k)row[q]=prev.slice();agLater("sync",agSyncNow)}catch(e){agdErr("shClear",e)}}
 function agShDecl(p,v){const z=agZ();const i=z.pend.indexOf(p);if(i>=0)z.pend.splice(i,1);p.drop=1;try{agShClear(p,agKh()+1,agK1(p))}catch(e){}/* she spent khắc k coming; the later rows of the dropped deed are cleared */AG.stat.drop++;AGD.stat.shNo=(AGD.stat.shNo||0)+1;/* her row in the record keeps the khắc she spent coming */log(`Ngươi không tiếp ${v.name}.`)}
 /* NPC ↔ NPC: before the deed lands */
 function agShNpc(p,d){if(!agShOn()||!p||p.vid==null||!p.t||p.t[0]!=="v")return 1;const R=agRec();if(!R||p.key!==R.key)return 1;const t=agTgt(p.t);if(!t||t===S||typeof t!=="object"||t===d)return 1;
@@ -440,6 +440,6 @@ function agSpill(p){try{if(!p||!(p.sp>0)||p.drop||p.gone)return false;const R=ag
 /* the spill runs FIRST, at the first sight of the new record (j95sync → agRdTick, agTickX, agTick): it must hold its khắc 0 … before the re-deciders
    (agHeard), the staff plan (agTickX) or the deciders book them — the sliced landing (BAL.ag.perf.slice) may come frames later on a slow phone */
 function agSpillAll(){const R=agRec();if(!R||!agKhOn())return 0;let n=0;for(const p of agZ().pend.slice())if(p.sp>0&&p.key!==R.key&&!p.drop&&!p.gone&&agSpill(p))n++;
- if(n&&!AG.syQ){AG.syQ=1;setTimeout(agSyncNow,0)}/* the view of the khắc now shows her there */return n}
+ if(n)agLater("sync",agSyncNow);/* the view of the khắc now shows her there */return n}
 (function(){const k0=agTick;agTick=function(){try{agSpillAll()}catch(e){agdErr("spillAll",e)}return k0.apply(this,arguments)}})();
 Object.assign(window,{agFitDay,agCanDay,agWhyDay,agSpill,agSpillAll});
