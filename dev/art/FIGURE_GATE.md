@@ -28,7 +28,8 @@ EVERY gen: (1) STYLE image = style3_girls Xm9tPkMBfo (the three approved girls; 
 | Poses (all builders) | add `--spec5pose` (a069d90e: spec5 POSES verbatim + facing skip + calm skip for t6+ and a51/a65), per FIGURE_GATE D.3a and rule 3 above | — | spec5pose-sample (Lượt 57) "tư thế đẹp hơn rồi" + facing rule |
 | Thái hậu a36/a51/a65 | `build.py cNN --state thaihau --age a36|a51|a65` (states-sample round 3) | own live t1 of that age + m09 eIyOFEidqL (REFERENCES 22:35Z) | sheet3 (Lượt 54): "Thái hậu, ok nè ... thái hậu nào trong game cũng sẽ dùng cái cổ áo như thế này" ; mass GO 22:14Z |
 | Nhà nghèo | old live prompt: `ngheo_old.py` / `build.py cNN --state ngheo` (states round 3b) | own identity (re-make: her live kc/ngheo image) + m09 eIyOFEidqL (REFERENCES 22:35Z) | sheet4 (Lượt 54): "hình con nhà nghèo, ok" — but existing liked images are re-made, not redrawn (FIGURE_GATE 22:05Z block) |
-NOT APPROVED (samples only): t1/t2/t3 new designs, Phi redesign, triều phục, Nữ đế, khuê các new drawing, Bắc Địch Quý phi.
+| Khuê các + nhà nghèo NEW drawing (people without a liked image; K4 c13/c16) | `build.py cNN --state kc|ngheo --spec5pose` (item from H list of that status) | style3_girls Xm9tPkMBfo + own t1 face (A0 REFERENCES) | K4 sheets c13/c16 kc+ngheo (Lượt 95), owner 18/11 ~23:30Z real: "4 hình vẽ mới ở luật 95 duyệt đẹp." |
+NOT APPROVED (samples only): t1/t2/t3 new designs, Phi redesign, triều phục (B picked, round 9 pending), Nữ đế, Bắc Địch Quý phi.
 
 
 Every art worker and every foreman runs ALL of this on EVERY new figure BEFORE reporting it. A worker reports only figures that pass every line; a fail is regenerated first. Foremen paste this file (by path) into every art brief and order; no piecemeal orders.
