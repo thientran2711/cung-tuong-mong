@@ -18,12 +18,12 @@ const W=+W0||755,H=+H0||1000,tag=`${W}x${H}`;const SLOW=+process.env.SLOW||6;con
   document.querySelectorAll('#kroul,#kroulw,#kload,#kboot,#klife,.kroul,.kmov').forEach(e=>e.remove());const md=document.getElementById('modal');if(md)md.hidden=true;
   try{OPT.fxon=true}catch(e){}S.buoi=0;used=0;deal();render();await Wt(1800);return{staff:(S.staff||[]).map(s=>s.name),maid:S.maid.name,adapter:ERR.adapter()}});
  const R={tag,info,flows:{},checks:[]};const ck=(n,ok,d)=>{R.checks.push([n,!!ok,d===undefined?'':d]);if(!ok)console.error('FAIL',n,d===undefined?'':JSON.stringify(d))};
- const flows=[["spy",i=>doAct(i,'spy')],["ally",i=>doAct(i,'ally')],["rumor",i=>doAct(i,'rumor')],["scout",i=>scout(rivals[i].id)],["invite",i=>invite(rivals[i].id)]];
+ const flows=[["spy",i=>doAct(i,'spy')],["ally",i=>doAct(i,'ally')],["rumor",i=>{spend(BAL.time.cost.harm);runAct(S,rivals[i],'rumor')}],["scout",i=>scout(rivals[i].id)],["invite",i=>invite(rivals[i].id)]];
  for(const [name,fn] of flows){
   await clean();
   const res=await p.evaluate(async([name,fnS,SLOWK])=>{const Wt=t=>new Promise(r=>setTimeout(r,t));
    Q.length=0;S.buoi=0;used=0;S.bac=Math.max(S.bac,500);S.erra=[];ERR.slow=SLOWK;OPT.fxon=true;render();await Wt(1500);
-   const i=rivals.findIndex(v=>v.alive&&!v.out&&!sameHouse(S,v)&&!together(S,v));if(i<0)return{skip:'no rival'};
+   const i=rivals.findIndex(v=>v.alive&&!v.out&&!sameHouse(S,v)&&!together(S,v)&&(!ACT[name]||ACT[name].ok(S,v)));if(i<0)return{skip:'no rival'};
    if(name==='scout'){const v=rivals[i];try{delete S.seen[v.id]}catch(e){}}
    const runner=(bestSent(S)||S.maid||{}).name;const u0=used;
    new Function('i','return ('+fnS+')(i)')(i);
@@ -52,6 +52,22 @@ const W=+W0||755,H=+H0||1000,tag=`${W}x${H}`;const SLOW=+process.env.SLOW||6;con
   await p.screenshot({path:`${OUT}/${name}-5report-${tag}.jpg`,type:'jpeg',quality:70});
   await p.evaluate(()=>{const md=document.getElementById('modal');if(md)md.hidden=true;try{kmReset()}catch(e){}});
  }
+ /* runner ON the stage (her maid, token in view): walk-off from her own slot, slot chip, walk-back, «!» chip on her, tap = panel */
+ await clean();await p.evaluate(()=>{try{kmReset()}catch(e){}});
+ const ons=await p.evaluate(async(SLOWK)=>{const Wt=t=>new Promise(r=>setTimeout(r,t));Q.length=0;S.buoi=0;used=0;S.erra=[];S.bac=Math.max(S.bac,500);ERR.slow=SLOWK;OPT.fxon=true;render();await Wt(1500);
+  window.bestSent=()=>S.maid;const tokIn=()=>[...document.querySelectorAll('#tokens .tok.fig')].some(t=>t.querySelector('.tag').textContent.includes(S.maid.name));const before=tokIn();
+  const i=rivals.findIndex(v=>v.alive&&!v.out&&!sameHouse(S,v)&&!together(S,v));doAct(i,'spy');return{maid:S.maid.name,tokBefore:before,tasks:ERR.tasks().length}},SLOW);
+ R.onstage=ons;ck('on-stage runner: her token was in view',ons.tokBefore,ons);
+ await sleep(500*SLOW);await p.evaluate(()=>{const md=document.getElementById('modal');if(md)md.hidden=true;const rt=document.getElementById('rtoast');if(rt)rt.classList.remove('on')});await p.screenshot({path:`${OUT}/onstage-1off-${tag}.jpg`,type:'jpeg',quality:70});
+ await sleep(800*SLOW);const oa=await p.evaluate(()=>({chip:[...document.querySelectorAll('.kmerr-slot')].map(e=>e.textContent),hid:[...document.querySelectorAll('#tokens .tok.fig')].filter(t=>t.style.visibility==='hidden').length}));
+ ck('on-stage runner: slot chip «đang đi …», token hidden',oa.chip.length===1&&oa.hid===1,oa);await p.screenshot({path:`${OUT}/onstage-2away-${tag}.jpg`,type:'jpeg',quality:70});
+ await p.evaluate(async(SLOWK)=>{const T=ERR.tasks();Q.length=0;spend(Math.max(1,T[0].due-ERR.now()))},SLOW);
+ await sleep(450*SLOW);await p.screenshot({path:`${OUT}/onstage-3on-${tag}.jpg`,type:'jpeg',quality:70});await sleep(900*SLOW);
+ const ob=await p.evaluate(()=>({bang:document.querySelectorAll('.kmerr-bang').length,hid:[...document.querySelectorAll('#tokens .tok.fig')].filter(t=>t.style.visibility==='hidden').length}));
+ ck('on-stage runner: «!» chip on her, token visible',ob.bang===1&&ob.hid===0,ob);await p.screenshot({path:`${OUT}/onstage-4bang-${tag}.jpg`,type:'jpeg',quality:70});
+ const ot=await p.evaluate(async()=>{document.querySelector('.kmerr-bang').click();await new Promise(r=>setTimeout(r,1500));const md=document.getElementById('modal');return{modal:!!(md&&!md.hidden),txt:md?md.innerText.slice(0,80):'',bang:document.querySelectorAll('.kmerr-bang').length}});
+ ck('on-stage runner: tap «!» opens the report, chip gone',ot.modal&&ot.bang===0,ot);await p.screenshot({path:`${OUT}/onstage-5report-${tag}.jpg`,type:'jpeg',quality:70});
+ await p.evaluate(()=>{const md=document.getElementById('modal');if(md)md.hidden=true;try{kmReset()}catch(e){}});
  /* runner NOT on the stage in view (crowded "+N" / other swipe page): still drawn by kitErrandSpot */
  await clean();
  const crowd=await p.evaluate(async(SLOWK)=>{const Wt=t=>new Promise(r=>setTimeout(r,t));Q.length=0;S.buoi=0;used=0;S.erra=[];ERR.slow=SLOWK;render();await Wt(1200);
