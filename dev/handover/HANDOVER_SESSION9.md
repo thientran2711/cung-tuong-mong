@@ -734,3 +734,4 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - (18/11 ~19:57Z) ROOT-54: OD 19:55Z (acts with a place/person really move her on Dư đồ, stay there; invite = exception; audit table) ADDED to stage-here brief (one job with 19:45Z (5)).
 - LOAD (18/11 ~19:58Z, hourly): main running 12 (UI: shop-panel-r3 rv, fullbody-s5 rv, opt-card-short #4, map-labels-r2, map-zones (re-scoped trim), stage-here, maid6-sample; owner bug: entry-blank-r3; ROOT-53 children inherited: fullbody-s5, shop-panel-r3 worker idle; C-AG #14 foreman) | B free 10 | C art busy | D free 8 | E 5/12 | moved: entourage + live-servants → C-AG (whole job).
 - (18/11 ~20:01Z) ROOT-54: OD 20:00Z (no double charge: act cost includes the trip) added to stage-here brief.
+- (18/11 ~20:07Z) ROOT-54: OD 20:05Z errand stage scene → worker errand-scene (brief errand-scene.md).
