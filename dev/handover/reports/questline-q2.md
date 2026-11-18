@@ -88,3 +88,8 @@ How the reward affects death: the finale reward comes ~2–3 times per life (Dan
 Merged origin/main fa411d6f (conflicts only index.html/sw.js — rebuilt — and KIT_REQUESTS.md: main's K-Q2-1 DONE line kept). Shots (scratch, outside git; looked 3×): iPad 1180x820@2 — 6 tabs Chương này · Sắc phong · Đã qua · Phụ tuyến 4 · Triều cục · Tâm nguyện in one row, ⓘ «Phụ tuyến» on its own line by the kit wrap rule, no overlap, no sideways scroll (sw 1180 = cw); Fold 755x1000@2 — 6 tabs + ⓘ in one row, 4 cards, no overflow. No private CSS (jnroadhp only adds a list item to kitSubTabs). Note: in the last shot run the card origin pictures were still loading (CDN timing), first run showed them.
 
 Ready: SẴN SÀNG KIỂM questline-q2 451b4d1e. Context at end ~12 %.
+
+## §ROUND 3 REMERGE (worker E13m)
+- origin/main moved 3 times during the run (53544bd → 1130a49 → 9a1d692); merged each time into review/questline-q2-r6. Only conflicts: index.html, sw.js (regenerated via assemble.py + build_site.sh, never hand-edited) and dev/build/assemble.py (took main's list incl. jagacts4.js, jnroadhp.js kept after jagknow.js; jgedata_w2.js has not landed).
+- Pushed 8113f42 (contains main 9a1d692, FF-able).
+- Tests: nroadhp-unit PASS (40), nroadhp-vp PASS (52), nrask-engine ALL PASS, subtabs-overflow PASS, quickcheck PASS (re-run on final sha: render 159/183 ms, buổi 1059/890 ms). npc-roads 30/30 on cff7cf4 (main 1130a49); not re-run on 8113f42 (20-min bot; main's last delta touches no jnroad*/road code: jkc, jplst, jrail, jration, jstory, jagacts4).
