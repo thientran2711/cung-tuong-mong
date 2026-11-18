@@ -26,8 +26,10 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   /* 5 tell: c hates the subject (L[2] at the place too) */const s3=L[2];POS.set(s3,k);const h0=hostility;let tl,tl2;
   try{hostility=(x,y)=>x===c&&y===s3?90:0;tl=npcTell(s3,{from:npcWit(k,null,{pool:L}).map(x=>x.p)});hostility=()=>0;const af0=aff;aff=()=>0;tl2=npcTell(s3,{from:npcWit(k,null,{pool:L}).map(x=>x.p)});aff=af0}finally{hostility=h0}
   out.tell=!!tl&&tl.who===c&&tl.to===S&&/oán/.test(tl.why);out.tell2=tl2===null;whereOf=wo0;
+  /* 7 each (G1 #7): every one with a reason makes her own try, the first success is the deed; only she is stamped */npwReg("t_each",{each:true,who:()=>L,why:p=>p===a||p===c?{s:60,r:"e"}:null});delete S.npw;const tried=[];const oe=npcWhy("t_each",{},x=>{tried.push(x.who);return x.who===c});
+  out.each=!!oe&&oe.who===c&&tried.includes(c)&&tried.length<=2&&npwCdOk("t_each",c)===false&&npwCdOk("t_each",a)===true;const tried2=[];delete S.npw;out.eachMiss=npcWhy("t_each",{},x=>{tried2.push(x.who);return false})===null&&tried2.length===2;
   /* 6 off */BAL.ag.why.on=0;out.off=npcWhy("t_pick")===null;BAL.ag.why.on=1;out.stat=NPW.stat.t_pick;return out});
  ok(r.n>=3,'game has rivals',r.n);ok(r.q1&&r.q2,'1 no reason → nobody acts');ok(r.onlyA,'2 actor = the one with the strong goal (40/40)',r.picks);ok(r.o0&&r.o0.why&&r.o0.tgt&&r.o0.place==='vuon','2 result carries target, reason, place',r.o0);
  ok(r.pickOk,'2 npwPick weights only between near-best options, never the far one',r.P);ok(r.cd&&r.cd2,'3 cooldown blocks a repeat, lifts after cd tuần; no S.npw OK');
- ok(r.wit&&r.witNot,'4 npcWit = only people at the place');ok(r.tell&&r.tell2,'5 npcTell = a witness with a grudge; none → null');ok(r.off,'6 BAL.ag.why.on=0 → null');ok(!errs.length,'no page errors',errs.slice(0,3));
+ ok(r.wit&&r.witNot,'4 npcWit = only people at the place');ok(r.tell&&r.tell2,'5 npcTell = a witness with a grudge; none → null');ok(r.off,'6 BAL.ag.why.on=0 → null');ok(r.each&&r.eachMiss,'7 reg each: each one with a reason tries (first success wins, only she is stamped; all fail → null)');ok(!errs.length,'no page errors',errs.slice(0,3));
  await b.close();const f=res.filter(x=>!x).length;console.log(f?'FAIL npc-why: '+f:'PASS npc-why ('+res.length+' checks)');process.exit(f?1:0)})();

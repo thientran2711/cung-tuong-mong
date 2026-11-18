@@ -173,7 +173,7 @@ npwReg("raid",{grp:"court",who:c=>[c.p],why(p){const bad=(p.inv||[]).filter(e=>(
    taimat     her own tai mắt (a loyal servant) bring her a rival's secret when they are sharp enough (her tai mắt × eye ≥ min) */
 npwReg("kspCheck",{grp:"consort",who:c=>c.C,why(x){const J=npw1B("j22");const h=hostility(x,S)+(S.ksKnows?J.ksp:0);return h>=J.host?{s:h,t:S,r:"nghi cái thai của ngươi"}:null}});
 npwReg("trystKnow",{grp:"consort",who:c=>c.C,why(x,c){const J=npw1B("j22");const t=c.v||S;const s=eyes(x)*J.eye+Math.max(0,hostility(x,t))/2;return {s,t,r:"tai mắt nàng ta dò ra"}}});
-npwReg("taimat",{grp:"srv",who:c=>c.w?[c.w]:[],cdOf:()=>0,why(w,c){return {s:eyes(S)*npw1B("j22").eye,t:c.v,r:"tai mắt dò được"}}});
+npwReg("taimat",{grp:"srv",who:c=>c.w?[c.w]:[],cdOf:()=>0,why(w,c){/* her loyal watcher (watcher(): lòng ≥ BAL.loy.close) looks out for her: that loyalty is the reason; tai mắt make it stronger; the finding itself = done roll (j22.see + eyes × seeEye, the old odds) */return {s:npwB().min+eyes(S)*npw1B("j22").eye,t:c.v,r:"tai mắt dò được"}}});
 /* ---- G1 part 8: the origin story lines (j4 STORY month timers). BAL.ag.why.story ----
    story      an off-screen person of her story (father, the old mistress, the envoy, the Empress's clan, the foe's father) acts on HIS plan: his push
               grows with the tuần since the last step (min × elapsed / story.wait[key]); the Empress's clan (ch) also needs her motive against her.

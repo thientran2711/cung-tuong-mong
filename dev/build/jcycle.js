@@ -249,7 +249,7 @@ const mp0=monthPay;monthPay=function(){let ev=mp0.apply(this,arguments)||"";try{
     const t=`Sổ Kính sự phòng ghi tháng trước ngươi không báo nguyệt sự; cả cung tưởng có tin vui, rồi mừng hụt. Sủng của ngươi ${b} → ${S.sung}, Danh ${d} → ${S.danh}.`;log(t);ev+=t+" "}}
   const F=foes();
   /* a foe reads the book: her hidden pregnancy guessed */
-  if(cyPreg(S)&&S.hidden&&(cyLateSeen(S)>=1||c.giauM===mi-1)&&!cyHideOf(S)){const o=npcWhy("cyRead",{F:F.filter(x=>x.cyKnowMe!==S.pregWk),t:S});/* npc-purpose G2: the foe who reads = the one whose grudge + informants push her most; nobody → nothing */const v=o&&o.who;if(v&&roll(B().npcRead)){v.cyKnowMe=S.pregWk;
+  if(cyPreg(S)&&S.hidden&&(cyLateSeen(S)>=1||c.giauM===mi-1)&&!cyHideOf(S)){const o=npcWhy("cyRead",{F:F.filter(x=>x.cyKnowMe!==S.pregWk),t:S},()=>roll(B().npcRead));/* npc-purpose G2: every foe whose grudge + informants push her tries to read (reg each; the old per-foe roll), strongest first; nobody → nothing */const v=o&&o.who;if(v){v.cyKnowMe=S.pregWk;
    if(eyes(S)>=1){const t=`Tai mắt báo: ${v.name} ${o.why}, cho người tra sổ nguyệt sự ở Kính sự phòng, đã đoán ra ngươi có tin vui.`;log(t);ev+=t+" "}}}
   /* her own false line last month (báo sớm / giấu) is forgery evidence for a foe who reads the book */
   if(c.lieM===mi-1&&!c.lieEv){c.lieEv=1;cyDeed(S,"cyl:"+c.lieM,"cylie","khai man ngày nguyệt sự với Kính sự phòng");for(const o of npcWhyAll("cyLie",{F,t:S})){const v=o.who;/* npc-purpose G2: every foe with a grudge and a way in reads it (each on her own cooldown) */if(!roll(B().npcRead))continue;if(!evA(v,S,BAL.eff.jcycle.evTop))continue;
@@ -260,6 +260,6 @@ const mp0=monthPay;monthPay=function(){let ev=mp0.apply(this,arguments)||"";try{
  }catch(e){console.error(e)}return ev};
 /* rival vs rival (world; host only in co-op because rivalsMonth is muted on the guest) */
 const rm0=rivalsMonth;rivalsMonth=function(){let ev=rm0.apply(this,arguments)||"";try{const L=liveRivals(true).filter(v=>v.alive&&!v.out);
-  for(const t of L){if(!cyPreg(t)||!t.hidden||cyLateSeen(t)<1||cyHideOf(t))continue;const o=npcWhy("cyRead",{F:L.filter(x=>x!==t&&!x.coop),t});const a=o&&o.who;/* npc-purpose G2: a rival with a grudge against t reads t's book */if(a&&roll(B().rvRead)){a.cyKnow=a.cyKnow||{};a.cyKnow[t.id]=t.pregWk}}
+  for(const t of L){if(!cyPreg(t)||!t.hidden||cyLateSeen(t)<1||cyHideOf(t))continue;const o=npcWhy("cyRead",{F:L.filter(x=>x!==t&&!x.coop),t},()=>roll(B().rvRead));const a=o&&o.who;/* npc-purpose G2: each rival with a grudge against t tries to read t's book (reg each, the old per-rival roll) */if(a){a.cyKnow=a.cyKnow||{};a.cyKnow[t.id]=t.pregWk}}
  }catch(e){console.error(e)}return ev};
 })();

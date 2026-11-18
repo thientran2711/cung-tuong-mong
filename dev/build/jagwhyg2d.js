@@ -4,7 +4,7 @@
 /* ---- jcycle: foes read / forge the cycle book (grudge = hostility ≥ BAL.cyc.foeHost; access = her informants) ---- */
 function g2dCyWho(c){return (c.F||[]).filter(v=>v&&v!==c.t&&hostility(v,c.t)>=BAL.cyc.foeHost)}
 function g2dCyWhy(v,c){const W=npwB().cyRead;return{s:hostility(v,c.t)*W.host+eyes(v)*W.eye,t:c.t,r:"oán "+npwNm(c.t)}}
-npwReg("cyRead",{grp:"G2",who:g2dCyWho,why:g2dCyWhy});
+npwReg("cyRead",{grp:"G2",each:true,who:g2dCyWho,why:g2dCyWhy});
 npwReg("cyLie",{grp:"G2",who:g2dCyWho,why:g2dCyWhy});
 npwReg("cyForge",{grp:"G2",who:c=>g2dCyWho(c).filter(v=>(v.bac||0)>=BAL.cyc.forgeBac),
  why:(v,c)=>({s:hostility(v,c.t)*mindW(v,"scheme")*npwB().cyRead.forge,t:c.t,r:"oán "+npwNm(c.t)+", đút lót Kính sự phòng"})});
@@ -18,7 +18,7 @@ npwReg("dhHieu",{grp:"G2",who:()=>S.emp?[S.emp]:[],why:(e,c)=>{const W=npwB().dh
 npwReg("dbPromo",{grp:"G2",who:c=>c.p?[c.p]:[],why:(p,c)=>{const W=npwB().dbPromo,T=BAL.loy.trust;const s=npwPick(c.L||[],x=>1+(x.loyal||0)-T);if(!s)return null;
  return{s:W.base+((s.loyal||0)-T)*W.loy,t:s,r:"tin dùng "+(s.name||"người hầu")+", muốn cất nhắc"}}});
 /* ---- jeitem: a servant pilfers from greed, a spy's errand or a grudge against her mistress (ch = her inclination from eitPilWho) ---- */
-npwReg("eitPil",{grp:"G2",who:c=>(c.C||[]).map(x=>x.s),why:(s,c)=>{const W=npwB().eitPil;const x=(c.C||[]).find(y=>y.s===s);if(!x)return null;const g=netQ(s,"greed");
+npwReg("eitPil",{grp:"G2",each:true,who:c=>(c.C||[]).map(x=>x.s),why:(s,c)=>{const W=npwB().eitPil;const x=(c.C||[]).find(y=>y.s===s);if(!x)return null;const g=netQ(s,"greed");
  if(s.spyFor!=null)return{s:x.ch+W.spy,t:c.p,r:"làm tai mắt cho người ngoài, lấy đồ của chủ"};
  if(g>0)return{s:x.ch+g*W.greed,t:c.p,r:"tham của, lấy bớt đồ chủ được ban"};
  if((s.loyal|0)<W.sour)return{s:x.ch+W.sourS,t:c.p,r:"bất mãn với chủ, lấy bớt đồ"};return null}});

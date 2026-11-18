@@ -15,6 +15,8 @@
        cooldown; picks among the goal-valid top options (npwPick); stamps the cooldown (S.npw, lazy: old saves load). done(o) (optional) = the
        chance / success roll of the deed (its BAL odds): false → no deed, NO stamp (counted "miss"), she may try again next time (rates review 18/11:
        the cooldown follows a real deed, never a failed chance).
+       reg each:true (with done) = every candidate with a reason makes her own try, strongest first (weighted order); the first success is the
+       deed, only she is stamped (kinds where each servant / consort acts on her own goal, e.g. eitPil: picking ONE and rolling once cut the rate by N).
    - npcWhyAll(kind, ctx) → every actor with a reason this time (for events where several people may act), each once, cooldowns stamped.
    - npwPick(L, score, o) → one of L: only options within BAL.ag.why.near × the best score, at most BAL.ag.why.top of them, weighted by score^pow.
        o.all = every option is already one of her own goal-valid acts (a routine of real duties, the reactions her temper allows): all of
@@ -50,7 +52,7 @@ function npwAsk(kind,ctx){const d=NPW.reg[kind];if(!d)throw new Error("npcWhy: u
   if(!r||!(r.s>=B.min))continue;if(!npwCdOk(kind,p)){cd++;continue}O.push({kind,who:p,tgt:r.t||null,why:r.r||"",place:r.k||null,s:r.s})}
  if(cd)npwSt(kind,"cd");return O}
 function npwOnFire(kind,o,ctx){const d=NPW.reg[kind];if(d&&typeof d.on==="function")try{d.on(o,ctx||{})}catch(e){console.error("npcWhy on "+kind,e)}}
-function npcWhy(kind,ctx,done){if(!npwOn())return null;const O=npwAsk(kind,ctx);const d=NPW.reg[kind];const o=npwPick(O,x=>x.s,d&&d.pickAll?{all:true}:null);/* pickAll: every one with a real reason may be the one, weighted by how strong it is (kinds where several people compete for one deed) */if(!o){npwSt(kind,"quiet");return null}
+function npcWhy(kind,ctx,done){if(!npwOn())return null;const O=npwAsk(kind,ctx);const d=NPW.reg[kind];if(d&&d.each&&typeof done==="function"){/* each: every one with a reason makes her OWN try (strongest reason first, weighted); the first whose try succeeds is the one (the old "each servant rolls, first hit" rate) */if(!O.length){npwSt(kind,"quiet");return null}const L=O.slice();while(L.length){const o=npwPick(L,x=>x.s,{all:true});if(!o)break;L.splice(L.indexOf(o),1);if(done(o)){npwStamp(kind,o.who);npwSt(kind,"fire");npwOnFire(kind,o,ctx);return o}}npwSt(kind,"miss");return null}const o=npwPick(O,x=>x.s,d&&d.pickAll?{all:true}:null);/* pickAll: every one with a real reason may be the one, weighted by how strong it is (kinds where several people compete for one deed) */if(!o){npwSt(kind,"quiet");return null}
  if(typeof done==="function"&&!done(o)){npwSt(kind,"miss");return null}npwStamp(kind,o.who);npwSt(kind,"fire");npwOnFire(kind,o,ctx);return o}
 function npcWhyAll(kind,ctx){if(!npwOn())return[];const O=npwAsk(kind,ctx);if(!O.length){npwSt(kind,"quiet");return[]}
  for(const o of O){npwStamp(kind,o.who);npwSt(kind,"fire");npwOnFire(kind,o,ctx)}return O}

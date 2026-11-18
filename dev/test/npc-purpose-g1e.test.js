@@ -13,15 +13,15 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const calm=()=>{for(const v of rivals){v.sung=E.want+10;v.oan=0;v.ghen=0;v.rel=0;v.ro={};v.rl={};v.confined=0;v.bac=500;v.th=0;v.traits=(v.traits||[]).filter(t=>!E.ambT.includes(t));if(E.ambT.includes(v.trait))v.trait="Ôn hòa"}S.th=0;delete S.npw};
   calm();o.amb=L.filter(v=>traitsOf(v).some(t=>E.ambT.includes(t))).length;let n1=0;for(let i=0;i<10;i++){delete S.npw;if(npcWhy("seekEmp"))n1++}o.w1=n1===0;o.n1=n1;
   calm();const a=L[0];a.sung=0;let h2=0,b2=0;for(let i=0;i<10;i++){delete S.npw;const x=npcWhy("seekEmp");if(x&&x.who===a)h2++;else b2++}o.w2=h2===10;
-  const thd=S.thDead;S.thDead=1;calm();const p=L[1];p.wd={tram:null,y:null};p.wdRmW=0;const r3=wdRemarker(p,"under");o.r3=r3&&r3.name;o.w3=r3===null||r3.v===queenP();
+  const M0=BAL.ag.why.wd.meet;BAL.ag.why.wd.meet={ok:100,over:100,under:100,tang:100};/* G1 #7: the occasion odds (wd.meet) pass here; check 8 tests them */const thd=S.thDead;S.thDead=1;calm();const p=L[1];p.wd={tram:null,y:null};p.wdRmW=0;const r3=wdRemarker(p,"under");o.r3=r3&&r3.name;o.w3=r3===null||r3.v===queenP();
   calm();p.wdRmW=0;const h=L[2];h.ro={};h.ro[p.id]=0;try{relAdd(h,p,-70)}catch(e){}h.oan=0;const q=queenP();const rm=wdRemarker(p,"under");o.r4=rm&&{n:rm.name,w:rm.why};o.w4=!!rm&&(rm.v===h||(q&&rm.v===q))&&!!rm.why;
-  delete S.npw;o.w5=wdRemarker(p,"under")===null;S.thDead=thd;
+  delete S.npw;o.w5=wdRemarker(p,"under")===null;BAL.ag.why.wd.meet={ok:0,over:0,under:0,tang:0};delete S.npw;p.wdRmW=0;o.w8=wdRemarker(p,"under")===null;BAL.ag.why.wd.meet=M0;S.thDead=thd;
   calm();const d=L[3]||L[0];let called=0;const a0=wdAutoFor;wdAutoFor=function(){called++;return a0.apply(this,arguments)};const bs=wdBelStatus;wdBelStatus=(x,y)=>"ok";const tg=wdTang;wdTang=()=>false;const fs=wdFest;wdFest=()=>false;
    d.wd=d.wd||{tram:null,y:null};wdNpcDress(d);wdAutoFor=a0;wdBelStatus=bs;wdTang=tg;wdFest=fs;o.w6=called===0;
   calm();o.w7=npcWhyAll("wdPawn").length===0;
   return o});
  ok(r.n>=4,'setup',r.n);ok(r.w1,'1 nobody wants favour → no empDay',{amb:r.amb,n:r.n1});ok(r.w2,'2 the unfavoured one seeks the Emperor');ok(r.w3,'3 nobody with a reason → no remark (only the Empress keeps the rules)',r.r3);
- ok(r.w4,'4 the one with a grudge remarks, with the reason',r.r4);ok(r.w5,'5 wd.gap holds for the same wearer');ok(r.w6,'6 no reason → no re-dress');ok(r.w7,'7 nobody poor → no pawn');
+ ok(r.w4,'4 the one with a grudge remarks, with the reason',r.r4);ok(r.w5,'5 wd.gap holds for the same wearer');ok(r.w6,'6 no reason → no re-dress');ok(r.w7,'7 nobody poor → no pawn');ok(r.w8,'8 a reason but no occasion this month (BAL.ag.why.wd.meet 0) → no remark');
  const bot=await p.evaluate(()=>{const o={e:[]};try{for(let i=0;i<32&&!S.dead;i++){try{nextBuoi()}catch(e){o.e.push(e.message)}Q.length=0}}catch(e){o.e.push(e.message)}o.stat={};for(const k of ["seekEmp","wdRemark","wdSpy","wdDress","wdNotice","wdSearch","wdPawn"])o.stat[k]=NPW.stat[k];return o});
  ok(!bot.e.length,'8 bot run: no errors',bot.e.slice(0,3));ok(!errs.length,'8 no page / npcWhy errors',errs.slice(0,3));console.log('npw stat '+JSON.stringify(bot.stat));
  await b.close();const f=res.filter(x=>!x).length;console.log(f?'FAIL npc-purpose-g1e: '+f:'PASS npc-purpose-g1e ('+res.length+' checks)');process.exit(f?1:0)})();

@@ -70,7 +70,7 @@
 "group": "G1",
 "event": "KSP book checked; affair conception; foe learns date mismatch",
 "fp": "   if(roll(BAL.odb.j22.rbTop+eyes(S)*5)){/*evo",
-"done": "if(tw&&npcWhy(\"taimat\",{w:tw.s||S.maid,v}))"
+"done": "if(tw&&npcWhy(\"taimat\",{w:tw.s||S.maid,v},()=>roll("
 },
 {
 "f": "jmen.js",
@@ -1284,7 +1284,7 @@
 "group": "G1",
 "event": "monthly outfit remark (speaker random); who overhears; NPC re-dress",
 "fp": "  if(!p.confined&&roll(st===\"ok\"?WD.remarkOk:st===\"tang\"?7",
-"done": "function wdRemarker(p,st){const o=wdNpwGap(p)&&npcWhy(\"wdRemark\",{p,st})"
+"done": "function wdRemarker(p,st){const o=wdNpwGap(p)&&npcWhy(\"wdRemark\",{p,st},()=>roll(BAL.ag.why.wd.meet[st]"
 },
 {
 "f": "j92.js",
@@ -1293,7 +1293,7 @@
 "group": "G1",
 "event": "monthly outfit remark (speaker random); who overhears; NPC re-dress",
 "fp": " if(!S.thDead&&roll(12))return{name:\"Thái hậu\",face:pTH",
-"done": "function wdRemarker(p,st){const o=wdNpwGap(p)&&npcWhy(\"wdRemark\",{p,st})"
+"done": "function wdRemarker(p,st){const o=wdNpwGap(p)&&npcWhy(\"wdRemark\",{p,st},()=>roll(BAL.ag.why.wd.meet[st]"
 },
 {
 "f": "j92.js",
@@ -1302,7 +1302,7 @@
 "group": "G1",
 "event": "monthly outfit remark (speaker random); who overhears; NPC re-dress",
 "fp": "!L.length)return null;const v=pick(L);return{v,name:wdNm(v),face:pv(v)",
-"done": "function wdRemarker(p,st){const o=wdNpwGap(p)&&npcWhy(\"wdRemark\",{p,st})"
+"done": "function wdRemarker(p,st){const o=wdNpwGap(p)&&npcWhy(\"wdRemark\",{p,st},()=>roll(BAL.ag.why.wd.meet[st]"
 },
 {
 "f": "j92.js",
@@ -1311,7 +1311,7 @@
 "group": "G1",
 "event": "monthly outfit remark (speaker random); who overhears; NPC re-dress",
 "fp": " if(view===\"ok\"&&!(roll(35)))return\"\";/* praise is rarer th",
-"done": "function wdRemarker(p,st){const o=wdNpwGap(p)&&npcWhy(\"wdRemark\",{p,st})"
+"done": "function wdRemarker(p,st){const o=wdNpwGap(p)&&npcWhy(\"wdRemark\",{p,st},()=>roll(BAL.ag.why.wd.meet[st]"
 },
 {
 "f": "j92.js",
@@ -1356,7 +1356,7 @@
 "group": "G1",
 "event": "tai mắt outfit report; framed NPC searches; servant breaks ngự tứ; Emp",
 "fp": " if(t!==S&&roll(25)){if(lo){wdFrameTake(t,i);return",
-"done": "if(t!==S&&npcWhy(\"wdSearch\",{t,a}))"
+"done": "if(t!==S&&npcWhy(\"wdSearch\",{t,a},()=>roll(BAL.ag.why.wd.search)))"
 },
 {
 "f": "j92.js",
@@ -1887,7 +1887,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "item goes missing (every consort monthly); holder random; investigatio",
-"done": "const kind=npwPick([\"cct\",\"book\",\"ask\"],k=>loTryW(p,c,k))||\"ask\";"
+"done": "const kind=npwPick([\"cct\",\"book\",\"ask\"],k=>loTryW(p,c,k),{all:true})||\"ask\";"
 },
 {
 "f": "jlost.js",
@@ -2591,7 +2591,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "mistress promotes servant; foes read cycle book / forge; confiscation ",
-"done": "npcWhy(\"cyRead\",{F:F.filter(x=>x.cyKnowMe!==S.pregWk),t:S})"
+"done": "npcWhy(\"cyRead\",{F:F.filter(x=>x.cyKnowMe!==S.pregWk),t:S},()=>roll(B().npcRead))"
 },
 {
 "f": "jcycle.js",
@@ -2615,7 +2615,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "mistress promotes servant; foes read cycle book / forge; confiscation ",
-"done": "npcWhy(\"cyRead\",{F:L.filter(x=>x!==t&&!x.coop),t})"
+"done": "npcWhy(\"cyRead\",{F:L.filter(x=>x!==t&&!x.coop),t},()=>roll(B().rvRead))"
 },
 {
 "f": "jdh2.js",
@@ -2671,7 +2671,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "mistress promotes servant; foes read cycle book / forge; confiscation ",
-"done": "npcWhy(\"eitPil\",{p,C})"
+"done": "npcWhy(\"eitPil\",{p,C},x=>"
 },
 {
 "f": "jexam.js",

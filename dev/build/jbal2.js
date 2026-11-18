@@ -1238,18 +1238,18 @@ Object.assign(BAL.ag.why,{ap:{max:2,fr:10,ally:40,gift:25,poor:40,sorry:20,th:10
 Object.assign(BAL.ag.why.cd,{apFriend:4,apTaunt:4,apSorry:8,empTea:3,thCall:4,svAsk:6,maidWarn:6,manPoem:20,svDefect:8,repay:2,svSell:12,svCause:8});
 Object.assign(BAL.ag.why.cd,{meHarm:6,thdTaunt:30,meAlly:24,hhCane:8,hhMe:12,hhGreed:24,empAsk:24,coldAsk:12,loveFound:12,arson:24,rvHarm:6,rvFeud:6,omen:36});
 /* npc-purpose G1 part 4 (j68 life events, j72 favours; jagwhy1). e68: gap = tuần between two j68 events (≈ the old 25 %/tuần), visitGap = tuần between two
-   j68 visits that fill in when no stock visitor has a reason (old 15 % swap), greed = weight of a greedy servant as the thief. fav: aff = liking to ask / be asked,
+   j68 situations that take the stock visit slot (old 15 % swap ≈ one per 3 tuần; G1 #7), greed = weight of a greedy servant as the thief. fav: aff = liking to ask / be asked,
    max = favours a month (old 2 × 55 %), w = weight of each need, jobW = tuần an errand stays to do, thLow / th = cold vs warm Thái hậu regard, host = grudge
    to want news, tai / taiB = weak art vs a teacher, home = Sủng under which she is homesick. job: th / aff = trust of the Thái hậu / Hoàng hậu, tai = gift for
    the banquet. q72: gap = tuần between two requests to her (≈ the old 30 %/tuần), debt = weight per favour owed */
-Object.assign(BAL.ag.why,{e68:{gap:4,visitGap:6,greed:40},fav:{aff:10,max:2,jobW:4,thLow:20,th:40,host:40,tai:40,taiB:60,home:15,
+Object.assign(BAL.ag.why,{e68:{gap:4,visitGap:3,greed:40},fav:{aff:10,max:2,jobW:4,thLow:20,th:40,host:40,tai:40,taiB:60,home:15,
  w:{poor:60,ill:55,job:50,th:35,spy:40,preg:30,love:45,maid:25,art:20,home:25}},job:{th:20,aff:10,tai:60},q72:{gap:3,debt:10}});
 Object.assign(BAL.ag.why.cd,{npcFavor:6,ladyJob:12,q72Collect:4});
 /* npc-purpose G1 part 5 (jgift NPC day with the Emperor, j92 wardrobe; jagwhy1). seekEmp: (want − Sủng) × k + amb (ambT nết), cd 16 ≈ the old 6 %/tuần each;
    wd: th = Thái hậu's push on a wrong outfit, thOk = her regard to praise, queen = Empress's push, host / fr = grudge to sneer / liking to praise, gap = tuần
    between two remarks on one wearer (old 35 / 10 % a month), spyHost = hostility toward her above which tai mắt dig, dress = push to change clothes,
    notice = Sủng for the Emperor to notice a bright outfit, eye / eyeBar = tai mắt weight / bar for a framed consort to search first, poor = bac to pawn */
-Object.assign(BAL.ag.why,{seekEmp:{want:45,k:1.5,amb:20,ambT:["Tham vọng","Kiêu ngạo"],cd:16},wd:{th:20,thOk:40,queen:15,host:35,fr:30,gap:8,spyHost:20,dress:20,notice:50,eye:5,eyeBar:25,poor:15}});
+Object.assign(BAL.ag.why,{seekEmp:{want:45,k:1.5,amb:20,ambT:["Tham vọng","Kiêu ngạo"],cd:16},wd:{th:20,thOk:40,queen:15,host:35,fr:30,gap:8,spyHost:20,dress:20,notice:50,eye:5,eyeBar:25,poor:15,search:25,meet:{ok:10,over:35,under:35,tang:70}}});
 Object.assign(BAL.ag.why.cd,{wdRemark:4,wdSpy:4,wdPawn:4});
 /* npc-purpose G1 part 6 (jts, jtsb, j8; jagwhy1). ts: guardK = push per danger point above BAL.tsDanger.act (+ tsCare / 2), moodK = the Emperor's summons push
    × his mood weight (fallback only), want / denB / k = Sủng under which she floats a lantern for favour (s = denB + (want − Sủng) × k: wanting favour is her reason; the Emperor sees it only at Sủng ≥ 20), duc / pray = Đức and push of a devout one. bul: pay = silver
@@ -1261,7 +1261,7 @@ Object.assign(BAL.ag.why,{ts:{guardK:4,moodK:1.2,want:60,denB:20,k:1,duc:60,pray
 Object.assign(BAL.ag.why.cd,{empSummon:6,tsDen:4,maidSell:3,giftCheck:6,fakeIll:96,fakePreg:150,raid:12});
 /* npc-purpose G1 part 7 (j22 affairs; jagwhy1). j22: host = grudge to check the Kính sự phòng book (old 10 %/tháng), ksp = push when the eunuchs talk (old +15),
    eye = push per tai mắt point (a foe learning of a tryst, her own tai mắt reporting; old 4 % / 10 %) */
-Object.assign(BAL.ag.why,{j22:{host:40,ksp:15,eye:6}});
+Object.assign(BAL.ag.why,{j22:{host:40,ksp:15,eye:6,see:8,seeEye:5}});
 Object.assign(BAL.ag.why.cd,{kspCheck:8,trystKnow:12});
 /* npc-purpose G1 part 8 (j4 story lines; jagwhy1). story.wait = tuần a story person prepares before the next step (≈ the old monthly 25-35 % rolls; _ = other);
    the clock restarts on each fire; cn3 = the old mistress carries the guard letters (old 5 %/tháng ≈ 20 tháng) */
@@ -1301,7 +1301,7 @@ Object.assign(BAL.ag.why.cd,{loTake:3,loTry:4,loClear:2,loWear:6,kcWeek:6,kcMeet
  /* jkc: kcDebt.fail = % the gambling brother, refused, fails to raise the debt himself (his own try) → the creditor comes; kcWeek s = motive weight × mul (a weight ≥ .35 is a real motive); kcTm: he seeks her places with weight h×seek vs home; meets her when longing h ≥ meet; Emperor notices beauty when sắc − vhSac ≥ min; kcSuit: a house her standing reaches (q ≤ kgt + reach) seeks her with s = danh tiếng × kapW */
 Object.assign(BAL.ag.why,{kcDebt:{fail:40},kcWeek:{mul:60},kcTm:{seek:1,home:40,meet:50,vhSac:50},kcSuit:{reach:45,kapW:1}});
 Object.assign(BAL.ag.why,{
- loTake:{rivW:.35,greed:40,timid:25,band:2,care:60},   /* care = weight of the owner's chest maid misplacing a piece (cause "mis"); pickAll: rival / greedy servant / careless maid weighted by s */   /* jlost: who takes an item — a rival whose danger band ≥ band; rival s = danger × scheme weight × rivW; servant s = netQ(greed)×greed, netQ(timid)×timid (careless) */
+ loTake:{rivW:.2,greed:40,timid:25,band:2,care:60},   /* care = weight of the owner's chest maid misplacing a piece (cause "mis"); pickAll: rival / greedy servant / careless maid weighted by s */   /* jlost: who takes an item — a rival whose danger band ≥ band; rival s = danger × scheme weight × rivW; servant s = netQ(greed)×greed, netQ(timid)×timid (careless) */
  loTry:{want:30,prDiv:20,clear:35,wear:25,cct:20,cctBac:40,book:30,bookBac:20,ask:30,keep:35,plant:65,frMul:5}  /* jlost: owner looks for it (want + price/prDiv), suspect clears her name (clear), holder wears it (wear + malice/2); her way: cct/book (when bạc ≥ …Bac) or ask (+liking); keep vs plant (keep : plant weights, plant only when she has a grudge of band ≥ loTake.band against a third consort); friend who saw it tells: recog.fr × frMul */
 });
 // G2a (worker a adds its Object.assign lines below this line)

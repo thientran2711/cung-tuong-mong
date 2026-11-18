@@ -248,7 +248,7 @@ const WD_GMIN={night:0,contest:1,son:2,promo:2,birthday:1,accuse:0,story:1,sinht
 (function(){if(typeof restock!=="function")return;const r0=restock;restock=function(){const r=r0.apply(this,arguments);try{const n=1+R(2);for(let i=0;i<n;i++){const k=wdPickAt(R(7),roll(50)?"tram":"y",0);if(k&&!S.shop.includes(k))S.shop.push(k)}}catch(e){}return r}})();
 
 /* ---------- remarks: the only way anyone learns whether an outfit is right (true for her and for NPCs) ---------- */
-function wdRemarker(p,st){const o=wdNpwGap(p)&&npcWhy("wdRemark",{p,st});return o?wdNpwR(p,o):null} /* npc-purpose (jagwhy1 wdRemark = npcWhy): only one with a reason remarks: Thái hậu / Hoàng hậu keep the rules, a foe sneers, a friend praises */
+function wdRemarker(p,st){const o=wdNpwGap(p)&&npcWhy("wdRemark",{p,st},()=>roll(BAL.ag.why.wd.meet[st]||BAL.ag.why.wd.meet.over));/* G1 #7: the one with a reason says it when she meets her this month = the old remark odds (BAL.ag.why.wd.meet, was WD.remarkBad / remarkOk / 70 at quốc tang); with no occasion roll the Thái hậu spoke on every rule break: "nhìn … của" lines 4–8x */return o?wdNpwR(p,o):null} /* npc-purpose (jagwhy1 wdRemark = npcWhy): only one with a reason remarks: Thái hậu / Hoàng hậu keep the rules, a foe sneers, a friend praises */
 const WD_SAY={ok:["khen {p} ăn vận vừa vặn, đúng phẩm vị.","gật đầu khi thấy {p}: ăn vận vừa vặn, đúng lễ.","khen {p} biết chừng mực, y phục đúng phẩm.","nhìn {p} một lượt, khẽ khen là biết giữ lễ.","thấy {p} ăn vận đúng phẩm, khẽ gật đầu."],
  over:["“Đồ này e vượt phẩm vị.”","“{I} này… phẩm của {P} cài được sao?”","“Đẹp thì đẹp, chỉ e lễ chế không cho.”","“{Xung} nhớ thứ này là của bậc trên mới được dùng.”"],
  under:["“{P} ăn vận giản dị quá, chẳng ra dáng {R}.”","“Áo xống thế kia, người ngoài lại tưởng Nội vụ phủ bạc đãi {P}.”","“Giản dị là đức, nhưng sơ sài quá thì thất lễ.”","“{P} tiết kiệm quá, đến phẩm phục cũng chẳng buồn may mới.”"]};
@@ -329,7 +329,7 @@ function wdFrameResolve(a,t){if(typeof lostUnwear==="function")lostUnwear(t,a);c
  if(t===S)S.wdFrame=null;
  if(i<0){ap(a,{danh:BAL.eff.j92.danhWdFrameResolve_3});relAdd(a,t,BAL.eff.j92.wdFrameResolve);return `${wdNmC(a)} tố ${wdNm(t)} lấy trộm ${nm}; Cung Chính ti khám phòng ${wdNm(t)} không thấy gì. ${wdNmC(a)} bị quở vì tố bừa, Danh ${balSg(BAL.eff.j92.danhWdFrameResolve_3)}. `}
  const lo=!!e.lo,cu=wdFrameCulprit(a,e);
- if(t!==S&&npcWhy("wdSearch",{t,a})){if(lo){wdFrameTake(t,i);return `${wdNmC(t)} cho người soát phòng trước, thấy ${nm} của ${wdNm(a)} lẫn trong rương, sai người đem trả. `}const f=inspect(t);if(f.length)return `${wdNmC(t)} cho người soát phòng trước, tìm ra ${f.join("; ")}. Mưu giá họa của ${wdNm(a)} không thành. `}
+ if(t!==S&&npcWhy("wdSearch",{t,a},()=>roll(BAL.ag.why.wd.search))){/* G1 #7: the watchful one searches in time = the old odds (always-on made it 5→34) */if(lo){wdFrameTake(t,i);return `${wdNmC(t)} cho người soát phòng trước, thấy ${nm} của ${wdNm(a)} lẫn trong rương, sai người đem trả. `}const f=inspect(t);if(f.length)return `${wdNmC(t)} cho người soát phòng trước, tìm ra ${f.join("; ")}. Mưu giá họa của ${wdNm(a)} không thành. `}
  if(t===S){pushDil(mkP("wdframe",{a:key(a),k:e.k,lo:e.lo||0}),lo?"Đồ thất lạc":"Bị tố ăn cắp");return ""}
  const o=oddsCl(WD.clearBase+eyes(t)*WD.clearMat+wdFrameEv(t,a,e)*10);
  if(roll(o)){wdFrameTake(t,i);

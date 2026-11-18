@@ -86,8 +86,8 @@ function e68Push(d,s,front){const m={t:s.t||FAM6[s.fam]||"Chuyện trong cung",h
 /* follow-ups: a template flagged fu fires on its due tuần (params carried) */
 function fu6(id,dt,p){const e=e68();e.fu.push({id,at:wk()+dt,p:p||{}})}
 function e68FuTick(){const e=e68(),now=wk();for(const f of e.fu.slice()){if(f.at>now)continue;e.fu.splice(e.fu.indexOf(f),1);const s=E68I[f.id];if(!s)continue;const p=Object.assign({},f.p);if(p.vi==null)p.vi=R((s.v||[""]).length);const d=mkP("e68"+s.id,p);if(d){e68Push(d,s);return true}}return false}
-/* the stock visit is sometimes swapped for a j68 event (same number of modals) */
-(function(){const a0=approachOne;approachOne=function(){const r0=a0.apply(this,arguments);if(r0)return r0;try{const e=e68();if(e68On()&&!window.__e68off&&e&&wk()>=(e.vx||0)){const r=e68Fire(["visit","day","serv","rumor","kid","emp"],e68Pick);if(r){e.vx=wk()+BAL.ag.why.e68.visitGap;const[d,s]=r;return{t:s.t||FAM6[s.fam],h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp}}}}catch(x){console.error(x)}return r0}})();
+/* the stock visit slot: a due j68 situation first (same number of modals) */
+(function(){const a0=approachOne;approachOne=function(){try{const e=e68();if(e68On()&&!window.__e68off&&e&&wk()>=(e.vx||0)){const r=e68Fire(["visit","day","serv","rumor","kid","emp"],e68Pick);if(r){e.vx=wk()+BAL.ag.why.e68.visitGap;const[d,s]=r;return{t:s.t||FAM6[s.fam],h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp}}}}catch(x){console.error(x)}return a0.apply(this,arguments)}})();/* G1 #7: a due j68 situation (its own people: a visitor with an errand, a rumour with a teller) takes the slot before the stock visit, as the old swap did; visitGap paces it (fill-in-only made Tin đồn 30→5, j68 visits 79→11) */
 /* the tuần tick */
 function e68Tick(){const e=e68();if(!e)return;e.tick=(e.tick||0)+1;let added=0;
  if(Q.length>2)return;

@@ -51,7 +51,7 @@ function loCauseOf(p,o){const v=o.who;if(loStaff(p).includes(v))return{cause:o.w
 function loStaff(p){return [p.maid].concat(p.staff||[]).filter(Boolean)}
 /* the same function for everyone: an item leaves its owner's chest */
 function loLose(p,force){if(!loAlive(p))return null;const L=(p.inv||[]).filter(loOk);if(!L.length)return null;const cz=force||loCause(p);if(!cz)return null;
- L.sort((a,b)=>loPrice(b)-loPrice(a));const e=npwPick(L.slice(0,3),x=>1+loPrice(x))||L[0];if(typeof ilUid==="function")ilUid(e);p.inv.splice(p.inv.indexOf(e),1);
+ L.sort((a,b)=>loPrice(b)-loPrice(a));const e=npwPick(L.slice(0,3),x=>1+loPrice(x),{all:true})||L[0];/* G1 #7: any of her three dearest, the dearer the likelier (top-only took the single dearest — Ngọc ấn / Sắc phong — 3x as often) */if(typeof ilUid==="function")ilUid(e);p.inv.splice(p.inv.indexOf(e),1);
  S.loSeq=(S.loSeq||0)+1;const c=Object.assign({id:S.loSeq,k:e.k,e,own:key(p),w:wk(),due:wk()+LO.findW[0]+R(LO.findW[1]-LO.findW[0]+1),st:"lost",at:null,open:0,cev:0,kn:{},hear:0,acc:null,d:(typeof wdWhen==="function"?String(wdWhen()).replace(/^./,x=>x.toLowerCase()):"")},cz);
  loL().push(c);p.loCd=S.turn+LO.cd;const nm=loNm(e.k);
  /* a rival's doing: she may keep it herself (steal and keep) instead of planting it on someone (forced by the act, else loKeepPick: keep vs her worst grudge, BAL.ag.why.loTry.keep) */
@@ -96,7 +96,7 @@ function loKnowAt(c,p,how){if(!p||c.st==="done"||!c.at)return;c.kn[key(p)]=1;if(
   log(`${how}: ${loNm(c.k)} ${c.own==="me"?"của ngươi":"của "+wdNm(loP(c.own))} ở ${loPal(h)}.`)}}
 /* the owner decides: ask for it quietly, or raise it at Cung Chính ti (NPC owners; her own choice is an act card) */
 function loOwnerMove(c){const o=loP(c.own),h=loP(c.at);if(!o||o===S||!h||c.hear||c.asked||(c.reT||0)>wk())return;c.asked=1;
- if(npwPick(["ask","cct"],k=>k==="ask"?BAL.ag.why.loTry.ask+Math.max(0,aff(o,h)):BAL.ag.why.loTry.cct+Math.max(0,hostility(o,h)))==="ask"){if(h===S){pushDil(mkP("loask",{id:c.id}),"Đồ thất lạc");return}if(roll(loAskOdds(h,o,c))){const x=loEntry(c);if(x){lostUnwear(h,o);const i=h.inv.indexOf(x.e);if(i>=0)h.inv.splice(i,1);lostReturn(x.e,"tra")}return}}
+ if(npwPick(["ask","cct"],k=>k==="ask"?BAL.ag.why.loTry.ask+Math.max(0,aff(o,h)):BAL.ag.why.loTry.cct+Math.max(0,hostility(o,h)),{all:true})==="ask"/* G1 #7: weighted between her two real ways (top-only made Cung Chính ti searches 7→37) */){if(h===S){pushDil(mkP("loask",{id:c.id}),"Đồ thất lạc");return}if(roll(loAskOdds(h,o,c))){const x=loEntry(c);if(x){lostUnwear(h,o);const i=h.inv.indexOf(x.e);if(i>=0)h.inv.splice(i,1);lostReturn(x.e,"tra")}return}}
  if(loHigh(h,o)&&loEmpEv(c,o,h)<BAL.il.empEv){c.asked=0;c.reT=wk()+LO.hearCd;return}loRaise(c,o)}
 /* a higher-rank holder (owner 16/11 13:30Z (3)): no search without the Emperor's decree; asking him needs REAL evidence = this case's evidence + evidence on the holder */
 function loHigh(h,a){return !!h&&!!a&&h!==a&&rkOf(h)>rkOf(a)}
@@ -133,7 +133,7 @@ function loDo(kind,p,c){const C=LO.cost[kind]||{};if(C.bac)ap(p,{bac:-C.bac});co
  else{r=loEvAdd(c,p,`Đối chiếu sổ Nội vụ phủ: ${nm} ghi tên ${wdNm(loP(c.own))}`);c.kn["o"+key(p)]=1}
  return r+"."}
 /* NPCs: the owner investigates while it is missing, the suspect before her hearing (the same acts, no khắc) */
-function loNpcTry(p,c){if(!p||p===S||!loAlive(p))return;const kind=npwPick(["cct","book","ask"],k=>loTryW(p,c,k))||"ask";loDo(kind,p,c)}/* npc-purpose G2: the way she can afford and wants */
+function loNpcTry(p,c){if(!p||p===S||!loAlive(p))return;const kind=npwPick(["cct","book","ask"],k=>loTryW(p,c,k),{all:true})||"ask";loDo(kind,p,c)}/* npc-purpose G2: the way she can afford and wants */
 function loTryW(p,c,k){const B=BAL.ag.why.loTry,b=p.bac||0,h=c&&loP(c.at);if(k==="cct")return b>=B.cctBac?B.cct+(h?Math.max(0,hostility(p,h)):0):0;if(k==="book")return b>=B.bookBac?B.book:0;return B.ask+(h?Math.max(0,aff(p,h)):0)}
 /* ---------- Nhận ra: a missing item worn in public ---------- */
 function loRecog(c){const x=loEntry(c);if(!x||!x.worn)return;const o=loP(c.own),h=x.h;if(!o||h===o)return;
