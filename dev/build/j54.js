@@ -76,8 +76,8 @@ function h54Grow(k,p){if(!h54Home(k)||k.age<5)return;const h=k.hp>=60?1:k.hp>=35
  if(k.hP&&h54Live(p))A[k.hP]=Math.min(100,A[k.hP]+H54.tut*h);
  if(k.tv!=null){A.thi=Math.min(100,A.thi+k.tv/250);A.ky=Math.min(100,A.ky+k.tv/250)}}
 function h54NpcArts(k,v){if(!h54Live(v)||!h54Home(k)||k.age<5)return;const P=nv(v,"h54P");
- if(!k.hP&&k.age>=6&&(v.bac||0)>=H54.fee*6&&roll(P*30)){const best=H54A.map(([a])=>a).sort((a,b)=>k.hA[b]-k.hA[a])[0];k.hP=R(3)?best:pick(H54A)[0]}
- const T=H54A.map(([a])=>a).filter(a=>h54CanTeach(v,k,a));if(T.length&&roll(P*60)){const a=pick(T);k.hA[a]=Math.min(100,k.hA[a]+h54TeachG(v,k,a));k.hM=cl(k.hM+2,0,100)}}
+ if(!k.hP&&k.age>=6&&(v.bac||0)>=H54.fee*6&&npcWhy("h54Tut",{p:v,k})&&roll(P*30)){k.hP=npwPick(H54A.map(([a])=>a),a=>1+k.hA[a])||H54A[0][0]}/* npc-purpose G2: she wants her daughter to shine; the master for the child's best gift */
+ const T=H54A.map(([a])=>a).filter(a=>h54CanTeach(v,k,a));if(T.length&&npcWhy("h54Teach",{p:v,k})&&roll(P*60)){const a=npwPick(T,a=>h54TeachG(v,k,a)-h54Lv(k,a))||T[0];/* npc-purpose G2: she teaches where she can give most */k.hA[a]=Math.min(100,k.hA[a]+h54TeachG(v,k,a));k.hM=cl(k.hM+2,0,100)}}
 (function(){const s0=stipend;stipend=function(p){let line=s0.apply(this,arguments);try{const ks=(p.kids||[]).filter(k=>h54Home(k)&&k.hP);let fee=ks.length*H54.fee;const quit=[];
   while(fee>0&&(p.bac||0)<fee){const k=ks.pop();k.hP=null;quit.push(`thầy ${"nghệ"} của ${k.name}`);fee=ks.length*H54.fee}
   if(fee>0)ap(p,{bac:-fee});if(p===S&&line){if(fee)line=line.replace(/ = ([+-]?\d+) bạc/,(m,n)=>` · thầy nghệ các công chúa -${fee} = ${(+n-fee)>=0?"+":""}${+n-fee} bạc`);if(quit.length)line+=` Không đủ bạc: ${quit.join(", ")} thôi dạy.`}}catch(e){}return line}})();
@@ -94,15 +94,15 @@ function h54Month(){let ev="";if(!S||S.dead)return ev;h54PoolUp();if(S.month===1
   if(h54Home(k)&&!k.hB&&!k.hMet&&k.age>=BAL.age.betroth&&k.age<=20&&h54Cd(p)&&npcWhy("story",npw1Sc(k,"suitor"))){const F=h54Pool().filter(s=>!s.taken);const so=F.length?npcWhy("suitor",{F}):null;if(so){const s=so.who;h54Mark(p);
     if(p===S)pushDil(mkP("h54met",{k:k.name,s:s.id}),"Con gái có người thương");else k.hMet=s.id}}
   /* NPC mothers open marriage talks by themselves (same options as hers) */
-  if(p!==S&&h54Live(p)&&h54Home(k)&&!k.hB&&k.age>=BAL.age.betroth&&h54Cd(p)&&roll(20)){h54Mark(p);const t=h54NpcBan(k,p);if(t)log(t)}
+  if(p!==S&&h54Live(p)&&h54Home(k)&&!k.hB&&k.age>=BAL.age.betroth&&h54Cd(p)&&npcWhy("h54Ban",{p,k})&&roll(20)){/* npc-purpose G2: her own wish for the match */h54Mark(p);const t=h54NpcBan(k,p);if(t)log(t)}
   /* nobody arranged it: the Emperor does (19+, or 18+ when the mother is gone) */
-  if(h54Home(k)&&!k.hB&&(k.age>=19||k.age>=BAL.age.wed&&!h54Live(p))&&roll(8)){const C=h54Cands(p,k);if(C.length){const s=C[0];const b=Math.round(h54Back(k,s)/2);p.hon=(p.hon||0)+b;s.taken=k.name;k.hB={kind:"nha",s:s.id,b,joy:s.id===k.hMet?90:30+R(35)};
+  if(h54Home(k)&&!k.hB&&(k.age>=19||k.age>=BAL.age.wed&&!h54Live(p))&&npcWhy("hEmpWed",{p,k})&&roll(8)){const C=h54Cands(p,k);/* npc-purpose G2: the Emperor's duty as father */if(C.length){const s=C[0];const b=Math.round(h54Back(k,s)/2);p.hon=(p.hon||0)+b;s.taken=k.name;k.hB={kind:"nha",s:s.id,b,joy:s.id===k.hMet?90:30+R(35)};
     const t=`Hoàng thượng tự chỉ hôn: ${h54Name(k)} gả cho ${s.name}, con trai ${s.off}${b?` (nhà ấy chống lưng ${h54MomN(p)} +${b})`:""}. `+h54Wed(k,p);if(p===S)ev+=t+" ";else log(t)}}
   /* married: letters, speaking for her mother, an unhappy match may bring trouble */
   if(k.hW&&k.alive){const W=k.hW;
-   if(p!==S&&h54Live(p)){if(roll(10)&&(p.bac||0)>=15){ap(p,{bac:-15});k.hM=cl(k.hM+8,0,100)}
-    if(W.kind!=="hoa"&&S.turn-(k.hV==null?-99:k.hV)>=4&&roll(25)&&(p.bac||0)>=10){k.hV=S.turn;ap(p,{bac:-10});k.hM=cl(k.hM-4,0,100);if(roll(odA(p,h54SpeakO(k)))){if(p.confined>0){p.confined--;log(`${h54Name(k)} vào cung quỳ xin cho mẹ; Hoàng thượng giảm cấm túc của ${p.name} một tháng.`)}else ap(p,{sung:3+(W.kind==="tinh"?2:0)})}}}
-   if(W.kind==="nha"&&W.joy<40&&roll(1.5)&&h54Cd(p)&&h54Live(p)){h54Mark(p);if(p===S)pushDil(mkP("h54sad",{k:k.name}),"Con gái về khóc");else{
+   if(p!==S&&h54Live(p)){if((p.bac||0)>=15&&npcWhy("h54Gift",{p,k})&&roll(10)){ap(p,{bac:-15});k.hM=cl(k.hM+8,0,100)}
+    if(W.kind!=="hoa"&&S.turn-(k.hV==null?-99:k.hV)>=4&&(p.bac||0)>=10&&npcWhy("h54Plead",{p,k})&&roll(25)){k.hV=S.turn;ap(p,{bac:-10});k.hM=cl(k.hM-4,0,100);if(roll(odA(p,h54SpeakO(k)))){if(p.confined>0){p.confined--;log(`${h54Name(k)} vào cung quỳ xin cho mẹ; Hoàng thượng giảm cấm túc của ${p.name} một tháng.`)}else ap(p,{sung:3+(W.kind==="tinh"?2:0)})}}}
+   if(W.kind==="nha"&&W.joy<40&&h54Cd(p)&&h54Live(p)&&npcWhy("h54Sad",{k,W})&&roll(1.5)){h54Mark(p);if(p===S)pushDil(mkP("h54sad",{k:k.name}),"Con gái về khóc");else{
      if(netRx(p,/Ân cần|Khiêm nhường/)){ap(p,{sung:-4});if(roll(odA(p,40+k.fond/2))){W.joy=cl(W.joy+30,0,100);k.hM=cl(k.hM+8,0,100)}}else{k.hM=cl(k.hM-8,0,100);ap(p,{danh:1})}}}}}
  /* bonds lost before a wedding */
  allKids().forEach(([k,v])=>{if(!k.alive&&k.hB&&!k.hBx){k.hBx=1;const p=v||S;p.hon=Math.max(0,(p.hon||0)-(k.hB.b||0));const s=h54Son(k.hB.s);if(s)s.taken=null}});
@@ -113,18 +113,18 @@ function h54Month(){let ev="";if(!S||S.dead)return ev;h54PoolUp();if(S.month===1
 (function(){const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments)||"";try{if(S&&!S.dead)ev+=h54Month()}catch(e){console.error(e)}return ev}})();
 /* ---- NPC marriage talks: same candidates, same costs, choice by temper ---- */
 function h54NpcBan(k,p){const love=k.hMet&&h54Son(k.hMet)&&!h54Son(k.hMet).taken?h54Son(k.hMet):null;
- if(S.hEnv&&k.age>=BAL.age.wed&&netRx(p,/Tham vọng|Kiêu ngạo/)&&k.fond<50&&roll(40))return h54Hoa(k,p);
- if(love&&(netRx(p,/Ân cần|Khiêm nhường/)||roll(25))&&!h54Cands(p,k).includes(love)){ap(p,{sung:-5});if(roll(odA(p,h54LoveO(p,k))))return h54Betroth(k,p,love,"tinh");return""}
+ if(S.hEnv&&k.age>=BAL.age.wed&&k.fond<50&&npcWhy("h54Hoa",{p,k})&&roll(40))return h54Hoa(k,p);
+ if(love&&(netRx(p,/Ân cần|Khiêm nhường/)||npwPick(["love","rank"],x=>{const B=BAL.ag.why.g2b.love;return x==="love"?B.base+(k.fond||0)*B.fond:g2bAmb(p)?B.amb:B.rank})==="love")&&!h54Cands(p,k).includes(love)){ap(p,{sung:-5});if(roll(odA(p,h54LoveO(p,k))))return h54Betroth(k,p,love,"tinh");return""}
  const C=h54Cands(p,k).filter(s=>(p.bac||0)>=h54Dow(k,s));if(!C.length)return"";const s=love&&C.includes(love)?love:C[0];return h54Betroth(k,p,s,"nha")}
 function h54LoveO(p,k){return 30+k.fond/2+(p.sung||0)/4}
 function h54SpeakO(k){const W=k.hW||{};return 40+k.hM/2+((W.joy||50)-50)/5}
 /* ---- envoy from Bắc Địch asks for a princess (18+); three months for a mother to offer her daughter, then the Emperor chooses ---- */
 function h54Elig(){return h54Daus().filter(([k])=>h54Home(k)&&!k.hB&&k.age>=BAL.age.wed)}
 function h54Envoy(){let ev="";const E=h54Elig();
- if(!S.hEnv){if(E.length&&(S.hEnvY==null||S.turn-S.hEnvY>=24)&&roll(4)){S.hEnv={until:S.turn+3};ev+=`Sứ thần Bắc Địch vào kinh dâng ngựa quý, xin cưới một vị công chúa đã đến tuổi. Hoàng thượng muốn thuận mối này: trong ba tháng, phi tần nào dâng con thì được ban thưởng; quá hạn ngài tự chọn. `}return ev}
+ if(!S.hEnv){if(E.length&&(S.hEnvY==null||S.turn-S.hEnvY>=24)&&roll(BAL.ag.why.g2b.envoy.p)){S.hEnv={until:S.turn+3};/* world event (a foreign embassy), not a palace NPC's choice */ev+=`Sứ thần Bắc Địch vào kinh dâng ngựa quý, xin cưới một vị công chúa đã đến tuổi. Hoàng thượng muốn thuận mối này: trong ba tháng, phi tần nào dâng con thì được ban thưởng; quá hạn ngài tự chọn. `}return ev}
  if(!E.length){S.hEnv=null;S.hEnvY=S.turn;return ev+"Sứ thần Bắc Địch về nước tay không: trong cung không còn công chúa nào đến tuổi. "}
- for(const [k,p] of E)if(p!==S&&h54Live(p)&&netRx(p,/Tham vọng|Kiêu ngạo/)&&k.fond<50&&roll(15)){log(h54Hoa(k,p));return ev}
- if(S.turn>=S.hEnv.until){const w=E.map(([k,p])=>Math.max(5,100-k.fond+(7-rkOf(p))*8));let r=Math.random()*w.reduce((a,b)=>a+b),i=0;while(r>w[i]&&i<w.length-1){r-=w[i];i++}const [k,p]=E[i];
+ for(const [k,p] of E)if(p!==S&&h54Live(p)&&k.fond<50&&npcWhy("h54Hoa",{p,k})&&roll(15)){log(h54Hoa(k,p));return ev}
+ if(S.turn>=S.hEnv.until){const EB=BAL.ag.why.g2b.envoy;const [k,p]=npwPick(E,([k,p])=>Math.max(EB.min,EB.base-k.fond+(EB.rank-rkOf(p))*EB.rankW))||E[0];/* npc-purpose G2: the Emperor sends the least-tied, lowest-born first */
   if(p===S){S.hEnv.until=S.turn+99;pushDil(mkP("h54hoa",{k:k.name}),"Sứ thần cầu hôn")}
   else if(h54Live(p)&&(netRx(p,/Ân cần|Khiêm nhường/)||k.hM>=75)){if(roll(odA(p,30+(p.sung||0)/3+k.fond/4))){S.hEnv=null;S.hEnvY=S.turn;log(`${p.name} quỳ xin giữ ${h54Name(k)} lại; Hoàng thượng động lòng, gả một tông nữ sang Bắc Địch thay.`)}else{ap(p,{sung:-10,danh:-3});log(`${p.name} quỳ xin giữ con nhưng Hoàng thượng không nghe. `+h54Hoa(k,p))}}
   else log(h54Hoa(k,p))}

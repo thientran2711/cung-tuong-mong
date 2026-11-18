@@ -397,7 +397,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "NPCs sharing a place quarrel/chat",
-"fp": ";j++){const a=L[i],b=L[j];if(!roll(30))continue;"
+"done": "const k=npwPick([\"q\",\"c\",\"n\"]"
 },
 {
 "f": "j10.js",
@@ -405,7 +405,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "faction joint scheme; leader invites her",
-"fp": "  if(l!==S&&roll(6)){const E0=consorts().filter(x=>!"
+"done": "npcWhy(\"facJoint\",{p:l,f})"
 },
 {
 "f": "j10.js",
@@ -413,7 +413,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "faction joint scheme; leader invites her",
-"fp": "==S&&!facOf(S)&&aff(l,S)>=35&&roll(10))Q.push({t:\"Lời mời vào phe\",who"
+"done": "npcWhy(\"facAsk\",{p:l,minAff:35})"
 },
 {
 "f": "j25.js",
@@ -421,7 +421,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "faction joint scheme; leader invites her",
-"fp": "acOf(S)&&(S.facs||[]).length&&roll(20)){const f=pick(S.facs);const l=f"
+"done": "npcWhy(\"facAsk\",{minAff:0})"
 },
 {
 "f": "j10.js",
@@ -429,7 +429,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "other faction splits hers",
-"fp": " if(mine&&roll(5)){const o=S.facs.find(f=>f!==mine"
+"done": "npcWhy(\"facDiv\",{mine})"
 },
 {
 "f": "j13.js",
@@ -437,7 +437,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "bribed thái y worsens illness",
-"fp": " if(way===\"ty\"&&bribed&&roll(25)){i.st=Math.min(3,i.st+1);return"
+"done": "npcWhy(\"thyHarm\",{p,b:bribed})"
 },
 {
 "f": "j21.js",
@@ -542,7 +542,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "NPC weekly social deed (spy/ally/feign/steal still here); news reaches",
-"fp": "e)){if(v.confined)continue;if(roll(60)){const t=npcSocial(v);if(t)ev+="
+"done": "if(npcWhy(\"socDeed\",{v})){const t=npcSocial(v)"
 },
 {
 "f": "j28.js",
@@ -550,7 +550,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "NPC weekly social deed (spy/ally/feign/steal still here); news reaches",
-"fp": "s=S.news||[];const seen=toMe||roll(BAL.odb.j28.rbSeen+eyes(S)*8)||(S.s"
+"done": "return !!npcTell(v,{place:whereOf(v)})"
 },
 {
 "f": "j29.js",
@@ -558,7 +558,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "servant trait events (steal, black market, spy, transfer, gossip/leak)",
-"fp": "  if(netIs(s,\"greed\")){if(roll(10)){const n=5+R(10);ap(p,{bac:-n})"
+"done": "if(npcWhy(\"svSteal\",{s})&&roll(10))"
 },
 {
 "f": "j29.js",
@@ -566,7 +566,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "servant trait events (steal, black market, spy, transfer, gossip/leak)",
-"fp": "   if(me&&roll(10)){const L=Object.keys(IT).filter"
+"done": "if(me&&npcWhy(\"svMarket\",{s})&&roll(10))"
 },
 {
 "f": "j29.js",
@@ -574,7 +574,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "servant trait events (steal, black market, spy, transfer, gossip/leak)",
-"fp": "  if(netIs(s,\"sharp\")){if(me&&roll(12)){const v=pick(liveRivals(true))"
+"done": "if(me&&npcWhy(\"svSpy\",{s})&&roll(12))"
 },
 {
 "f": "j29.js",
@@ -582,7 +582,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "servant trait events (steal, black market, spy, transfer, gossip/leak)",
-"fp": "astPromo||0)>=12&&s.loyal<75&&roll(5)){const v=pick(liveRivals(true).f"
+"done": "s.loyal<75&&npcWhy(\"svLeave\",{s})&&roll(5)"
 },
 {
 "f": "j29.js",
@@ -590,7 +590,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "servant trait events (steal, black market, spy, transfer, gossip/leak)",
-"fp": "  if(netIs(s,\"talk\")&&me&&roll(30)){const v=pick(liveRivals(true))"
+"done": "me&&npcWhy(\"svTalk\",{s})"
 },
 {
 "f": "j29.js",
@@ -598,7 +598,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "mistress fires servant; fired one sells to foe",
-"fp": " if(!me&&roll(25))S.news&&newsAdd(p,\"fire\",`${p.n"
+"done": "const tl=npcTell(p,{from:liveRivals(true).filter(x=>x!==p&&eyes(x)>0)})"
 },
 {
 "f": "j32.js",
@@ -606,7 +606,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "rival bribes midwife",
-"fp": "bacFee.midwife));if(f.length&&roll(25)){const x=pick(f);ap(x,{bac:-BAL"
+"done": "npcWhy(\"midBribe\",{p,f})"
 },
 {
 "f": "j34.js",
@@ -614,7 +614,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "seat contest acts; outside Empress decree",
-"fp": "onst tot=w.pr+w.lo+w.sc;let r=Math.random()*tot;"
+"done": "npwPick([\"pr\",\"lo\",\"sc\"]"
 },
 {
 "f": "j34.js",
@@ -622,7 +622,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "seat contest acts; outside Empress decree",
-"fp": "{if(p.bac>=BAL.bacFee.backer&&roll(55)){ap(p,{bac:-BAL.bacFee.backer})"
+"done": "npwPick(CLANS.filter(c=>c!==mh"
 },
 {
 "f": "j34.js",
@@ -630,7 +630,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "seat contest acts; outside Empress decree",
-"fp": "ince>=18&&roomFor(\"consort\")&&roll(10)){const n=newRival(7,true);Objec"
+"done": "npcWhy(\"empQueen\",{})"
 },
 {
 "f": "j42.js",
@@ -638,7 +638,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "mistress's weekly card: mood/order/bribe offer/framing/friend tip",
-"fp": " if(roll(32))srvMoodEvent();else if(roll(Mat"
+"done": "const o=npcWhy(\"srvCard\",{m});if(!o)return;"
 },
 {
 "f": "j42.js",
@@ -646,7 +646,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "mistress's weekly card: mood/order/bribe offer/framing/friend tip",
-"fp": ");if(!f.length)return;const s=pick(f);const m=srvM();const L=liveRival"
+"done": "const s=w&&f.includes(w)?w:npwPick(f,x=>S.srv.af[x.sid]||0)"
 },
 {
 "f": "j42.js",
@@ -654,7 +654,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "mistress's weekly card: mood/order/bribe offer/framing/friend tip",
-"fp": " if(roll(55)&&L.length){const v=pick(L);S.sr"
+"done": "const tk=npwPick([\"intel\",\"gift\"]"
 },
 {
 "f": "j42.js",
@@ -662,7 +662,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "higher consort buys her; random new mistress; seen with a man → random",
-"fp": "  else if(S.srv.rk>=2&&roll(1.5)){const big=liveRivals(true).fi"
+"done": "const ob=npcWhy(\"srvBuy\",{m})"
 },
 {
 "f": "j42.js",
@@ -670,7 +670,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "higher consort buys her; random new mistress; seen with a man → random",
-"fp": "!==old);const n=to||(L.length?pick(L):null);if(!n)return;"
+"done": "const n=to||npwPick(L,v=>"
 },
 {
 "f": "j42.js",
@@ -678,7 +678,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "higher consort buys her; random new mistress; seen with a man → random",
-"fp": "r(v=>v!==srvM());if(L.length&&roll(50)){S.srv.leak=pick(L).id}log(`Có "
+"done": "W=npcWit(S.place,null,{not:[mi,S],vs:S})"
 },
 {
 "f": "j42.js",
@@ -686,7 +686,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "reward/beat/order kind; spying/betrayal found; blackmail; chest search",
-"fp": " if(Math.random()<good){const g=3+rkOf(m);ap"
+"done": "const k=npwPick([\"rew\",\"angry\"]"
 },
 {
 "f": "j42.js",
@@ -694,7 +694,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "reward/beat/order kind; spying/betrayal found; blackmail; chest search",
-"fp": "ười giải xuống Nội vụ phủ.`,6+R(5));return}"
+"done": "const how=npwPick([\"out\",\"beat\",\"scold\"],x=>srvAngryW(m,x))"
 },
 {
 "f": "j42.js",
@@ -702,7 +702,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "reward/beat/order kind; spying/betrayal found; blackmail; chest search",
-"fp": "asT(m,\"Xảo quyệt\")&&S.tin<30&&roll(45))||(S.tin<20&&roll(40))){const d"
+"done": "const how=npwPick([\"out\",\"beat\",\"scold\"]"
 },
 {
 "f": "j42.js",
@@ -710,7 +710,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "reward/beat/order kind; spying/betrayal found; blackmail; chest search",
-"fp": " const k=mal>=70&&roll(35)?\"poison\":mal>=45&&roll(50)?\"pla"
+"done": "const k=npwPick([\"poison\",\"plant\",\"spy\"],x=>srvOrdW(m,t,x))"
 },
 {
 "f": "j42.js",
@@ -718,7 +718,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "reward/beat/order kind; spying/betrayal found; blackmail; chest search",
-"fp": "   if(roll(nv(mm2,\"spyFind\"))){S.srv.spyFor=nu"
+"done": "npcWhy(\"srvWatch\",{m:mm2})"
 },
 {
 "f": "j42.js",
@@ -726,7 +726,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "reward/beat/order kind; spying/betrayal found; blackmail; chest search",
-"fp": "  if(isSrv()&&S.srv.betray&&roll(nv(mm2,\"betrayFind\"))){S.srv.betray"
+"done": "S.srv.betray&&wt&&roll(nv(mm2,\"betrayFind\"))){S.srv.betray=null;if(npwPick("
 },
 {
 "f": "j42.js",
@@ -734,7 +734,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "reward/beat/order kind; spying/betrayal found; blackmail; chest search",
-"fp": "18&&S.danh>=BAL.danhG.srvWed&&roll(BAL.odb.j42.rbSrvMonth_2+S.danh/15)"
+"done": "npcWhy(\"srvWed\",{m:mm2})"
 },
 {
 "f": "j42.js",
@@ -742,7 +742,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "reward/beat/order kind; spying/betrayal found; blackmail; chest search",
-"fp": " if(S.srv.leak&&roll(12)){const v=RV(S.srv.leak);if(v&&v"
+"done": "npcWhy(\"srvBlack\",{v,mis})"
 },
 {
 "f": "j42.js",
@@ -750,7 +750,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "reward/beat/order kind; spying/betrayal found; blackmail; chest search",
-"fp": " const m=lover||hot[0];if(m&&roll(BAL.odb.j42.rbTop+(S.srv.rumor||0)*"
+"done": "npcWhy(\"srvSearch\",{mis})"
 },
 {
 "f": "j42.js",
@@ -758,7 +758,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "reward/beat/order kind; spying/betrayal found; blackmail; chest search",
-"fp": "nh>=BAL.tinhLv.prince);if(pr&&roll(6)){pushDil(mkP(\"cnvPrince\",{m:pr.i"
+"done": "npcWhy(\"srvPrince\",{pr})"
 },
 {
 "f": "j42.js",
@@ -766,7 +766,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "reward/beat/order kind; spying/betrayal found; blackmail; chest search",
-"fp": "=G.tin||thF>=3)&&S.srv.rk>=1&&roll(G.base+(srvBond()?G.bond:0)+thF)){c"
+"done": "const by=S.srv.rk>=1?npwPick([\"th\",\"mis\"]"
 },
 {
 "f": "j42.js",
@@ -774,7 +774,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "reward/beat/order kind; spying/betrayal found; blackmail; chest search",
-"fp": "if(v&&srvFriendList().length&&roll(30)){S.srv.knowAff=(S.srv.knowAff||"
+"done": "const fr=v&&npwPick(F.filter(s=>ownerOf(s)===v)"
 },
 {
 "f": "j42.js",
@@ -823,7 +823,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "tutor/teach; marriage talks; Emperor match; daughter gifts/visits/crie",
-"fp": "ge>=6&&(v.bac||0)>=H54.fee*6&&roll(P*30)){const best=H54A.map(([a])=>a"
+"done": "npcWhy(\"h54Tut\",{p:v,k})"
 },
 {
 "f": "j54.js",
@@ -831,7 +831,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "tutor/teach; marriage talks; Emperor match; daughter gifts/visits/crie",
-"fp": "CanTeach(v,k,a));if(T.length&&roll(P*60)){const a=pick(T);k.hA[a]=Math"
+"done": "npcWhy(\"h54Teach\",{p:v,k})"
 },
 {
 "f": "j54.js",
@@ -839,7 +839,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "tutor/teach; marriage talks; Emperor match; daughter gifts/visits/crie",
-"fp": "e>=BAL.age.betroth&&h54Cd(p)&&roll(20)){h54Mark(p);const t=h54NpcBan(k"
+"done": "npcWhy(\"h54Ban\",{p,k})&&roll(20)){/* npc-purpose G2: her own wish for the match"
 },
 {
 "f": "j54.js",
@@ -847,7 +847,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "tutor/teach; marriage talks; Emperor match; daughter gifts/visits/crie",
-"fp": "e>=BAL.age.wed&&!h54Live(p))&&roll(8)){const C=h54Cands(p,k);if(C.leng"
+"done": "npcWhy(\"hEmpWed\",{p,k})&&roll(8)"
 },
 {
 "f": "j54.js",
@@ -855,7 +855,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "tutor/teach; marriage talks; Emperor match; daughter gifts/visits/crie",
-"fp": "   if(p!==S&&h54Live(p)){if(roll(10)&&(p.bac||0)>=15){ap(p,{bac:-15}"
+"done": "npcWhy(\"h54Gift\",{p,k})"
 },
 {
 "f": "j54.js",
@@ -863,7 +863,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "tutor/teach; marriage talks; Emperor match; daughter gifts/visits/crie",
-"fp": "urn-(k.hV==null?-99:k.hV)>=4&&roll(25)&&(p.bac||0)>=10){k.hV=S.turn;ap"
+"done": "npcWhy(\"h54Plead\",{p,k})"
 },
 {
 "f": "j54.js",
@@ -871,7 +871,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "tutor/teach; marriage talks; Emperor match; daughter gifts/visits/crie",
-"fp": " if(W.kind===\"nha\"&&W.joy<40&&roll(1.5)&&h54Cd(p)&&h54Live(p)){h54Mark"
+"done": "npcWhy(\"h54Sad\",{k,W})"
 },
 {
 "f": "j54.js",
@@ -879,7 +879,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "tutor/teach; marriage talks; Emperor match; daughter gifts/visits/crie",
-"fp": " vọng|Kiêu ngạo/)&&k.fond<50&&roll(40))return h54Hoa(k,p);"
+"done": "npcWhy(\"h54Hoa\",{p,k})&&roll(40)"
 },
 {
 "f": "j54.js",
@@ -887,7 +887,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "tutor/teach; marriage talks; Emperor match; daughter gifts/visits/crie",
-"fp": "tRx(p,/Ân cần|Khiêm nhường/)||roll(25))&&!h54Cands(p,k).includes(love)"
+"done": "npwPick([\"love\",\"rank\"]"
 },
 {
 "f": "j54.js",
@@ -895,7 +895,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "tutor/teach; marriage talks; Emperor match; daughter gifts/visits/crie",
-"fp": "Y==null||S.turn-S.hEnvY>=24)&&roll(4)){S.hEnv={until:S.turn+3};ev+=`Sứ"
+"out": "world event, not a palace NPC's choice: a foreign embassy (Bắc Địch) arrives asking for a princess; gated on real state (a daughter of age, 24-month gap); every palace choice after it (which mother offers, which daughter the Emperor sends) is converted (rows 126/127)"
 },
 {
 "f": "j54.js",
@@ -903,7 +903,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "tutor/teach; marriage talks; Emperor match; daughter gifts/visits/crie",
-"fp": " vọng|Kiêu ngạo/)&&k.fond<50&&roll(15)){log(h54Hoa(k,p));return ev}"
+"done": "npcWhy(\"h54Hoa\",{p,k})&&roll(15)"
 },
 {
 "f": "j54.js",
@@ -911,7 +911,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "tutor/teach; marriage talks; Emperor match; daughter gifts/visits/crie",
-"fp": "-k.fond+(7-rkOf(p))*8));let r=Math.random()*w.reduce((a,b)=>a+b),i=0;w"
+"done": "npwPick(E,([k,p])=>"
 },
 {
 "f": "j55.js",
@@ -919,7 +919,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "NPC court acts (leak graft, gift minister…); monthly memorials",
-"fp": "kT&&v.bac>=BAL.bacFee.tdLeak&&roll(22*w))r=tdLeak(v,leakT);"
+"done": "const ak=npwPick([\"leak\",\"gift\",\"probe\",\"ask\"]"
 },
 {
 "f": "j55.js",
@@ -927,7 +927,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "NPC court acts (leak graft, gift minister…); monthly memorials",
-"fp": "  else if(v.bac>=60&&roll(3*w)){const H=CLANS.map(c=>T.H[c])."
+"done": "const h=npwPick(H,h=>h.pow)"
 },
 {
 "f": "j55.js",
@@ -935,7 +935,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "NPC court acts (leak graft, gift minister…); monthly memorials",
-"fp": "else if(tg.length&&v.bac>=50&&roll(2*w)){const t=pickTarget(v);if(t&&t"
+"done": "const ak=npwPick([\"leak\",\"gift\",\"probe\",\"ask\"]"
 },
 {
 "f": "j55.js",
@@ -943,7 +943,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "NPC court acts (leak graft, gift minister…); monthly memorials",
-"fp": "(v.askT==null?-99:v.askT)>=3&&roll(2.5*w))r=tdAsk(v);"
+"done": "const ak=npwPick([\"leak\",\"gift\",\"probe\",\"ask\"]"
 },
 {
 "f": "j55.js",
@@ -951,7 +951,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "NPC court acts (leak graft, gift minister…); monthly memorials",
-"fp": "rce&&(S.turn-T.soT<TD.soGap||!roll(TD.so)))return\"\";const opts=[];"
+"done": "const pk=npwPick(opts,x=>x[1]);if(!pk||!force&&!roll(TD.so))"
 },
 {
 "f": "j55.js",
@@ -959,7 +959,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "NPC court acts (leak graft, gift minister…); monthly memorials",
-"fp": "f(!opts.length)return\"\";let r=Math.random()*opts.reduce((s,x)=>s+x[1],"
+"done": "const pk=npwPick(opts,x=>x[1])"
 },
 {
 "f": "j70.js",
@@ -967,7 +967,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "weekly new plot (NPC→her, NPC→NPC)",
-"fp": "  const [t,mo]=pick(M);if(!alive70(t)||(typeof sameHous"
+"done": "const pm=npwPick(M,([x])=>alive70(x)?danger(v,x):0)"
 },
 {
 "f": "j70.js",
@@ -975,7 +975,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "weekly new plot (NPC→her, NPC→NPC)",
-"fp": "  if(!roll(c)||!canNew70(v.id,key(t)))continue"
+"done": "npcWhy(\"j70Plot\",{p:v,t,mo})"
 },
 {
 "f": "j70.js",
@@ -983,7 +983,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "weekly new plot (NPC→her, NPC→NPC)",
-"fp": "f(!O.length)continue;const k=wpick(O);const m=methFor70(k);if(!m||!okA"
+"done": "const k=(npwPick(O,x=>x[1])||[])[0]"
 },
 {
 "f": "j70.js",
@@ -991,7 +991,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "ally warns; Emperor/TH guard her; NPC heals scar",
-"fp": " if((S.sung||0)>=70&&roll(10))out.push({n:\"Hoàng thượng\",b:10"
+"done": "npcWhy(\"j70Guard\",{p:S.emp})"
 },
 {
 "f": "j70.js",
@@ -999,7 +999,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "ally warns; Emperor/TH guard her; NPC heals scar",
-"fp": " if(!S.thDead&&(S.th||0)>=60&&roll(8))out.push({n:\"Thái hậu\",b:8,t:`Th"
+"done": "npcWhy(\"j70Guard\",{p:S.thO})"
 },
 {
 "f": "j70.js",
@@ -1007,7 +1007,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "ally warns; Emperor/TH guard her; NPC heals scar",
-"fp": "=p===S;if(me?S.doctor:(p.doc||roll(20)))st++;if(me&&(S.arts&&S.arts.y>"
+"done": "npcWhy(\"j70Face\",{p})&&roll(20)"
 },
 {
 "f": "j70.js",
@@ -1015,7 +1015,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "ally warns; Emperor/TH guard her; NPC heals scar",
-"fp": "e&&s.sev>=2&&(p.bac||0)>=120&&roll(8)){p.bac-=120;s.cure=1}"
+"done": "npcWhy(\"j70Face\",{p,cure:1})"
 },
 {
 "f": "j71.js",
@@ -1077,7 +1077,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "festival cast (entrants/gambler/host); merit deed; quarrel to mediate",
-"fp": "ength)return null;const [a,b]=pick(P);return{a0:a.id,a1:b.id}},"
+"done": "const [a,b]=npwPick(P,([a,b])=>-(aff(a,b)+aff(b,a))+oan(a,b)+oan(b,a))"
 },
 {
 "f": "j71.js",
@@ -1085,7 +1085,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "festival cast (entrants/gambler/host); merit deed; quarrel to mediate",
-"fp": "P.length)return\"\";const [a,b]=pick(P);if(!roll(cl(30+(v.danh||0)/3+(v."
+"done": "const [a,b]=npwPick(P,([a,b])=>-(aff(a,b)+aff(b,a))+Math.max(0,aff(v,a))"
 },
 {
 "f": "j72.js",
@@ -1235,7 +1235,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "NPC uses her handmade work (gift/poison/sell); seeks poison",
-"fp": "function wkNpcUse(v){if(!roll(40))return;const i=v.inv.findIndex("
+"done": "if(!npcWhy(\"wkUse\",{p:v,w}))return;"
 },
 {
 "f": "j83.js",
@@ -1243,7 +1243,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "NPC uses her handmade work (gift/poison/sell); seeks poison",
-"fp": "(w.kind===\"mon\"&&v.malice>70&&roll(15)&&v.inv.some(e=>e.k===\"hacdinh\"&"
+"done": "const t=npwPick(others(v).filter(t=>t.alive&&!t.out),t=>wkGrudge(v,t)-B.host);if(t)L.push({k:\"poison\",t,s:wkGrudge(v,t)})"
 },
 {
 "f": "j83.js",
@@ -1251,7 +1251,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "NPC uses her handmade work (gift/poison/sell); seeks poison",
-"fp": "ung<70&&wkEval(v,w,\"emp\").ok&&roll(60))r=\"emp\";else if(!S.thDead&&roll"
+"done": "const o=npwPick(wkUseOpts(v,w),x=>x.s);if(!o)return;"
 },
 {
 "f": "j83.js",
@@ -1259,7 +1259,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "NPC uses her handmade work (gift/poison/sell); seeks poison",
-"fp": "val(v,w,t).ok);if(fr.length)r=pick(fr)}"
+"done": "const f=npwPick(others(v).filter(t=>t!==v&&(t===S?v.rel>B.relMe:rel(v,t)>0)&&wkEval(v,w,t).ok)"
 },
 {
 "f": "j83.js",
@@ -1267,7 +1267,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "NPC uses her handmade work (gift/poison/sell); seeks poison",
-"fp": "!r&&w.ti<=1&&!WK[w.kind].per&&roll(30)){wkSell(v,i);return}"
+"done": "const o=npwPick(wkUseOpts(v,w),x=>x.s);"
 },
 {
 "f": "j83.js",
@@ -1275,7 +1275,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "NPC uses her handmade work (gift/poison/sell); seeks poison",
-"fp": "ut&&!v.confined&&v.malice>60&&roll(8)&&!(v.inv||[]).some(e=>WILL[e.k])"
+"done": "npcWhy(\"illSeek\",{p:v})"
 },
 {
 "f": "j92.js",
@@ -1631,7 +1631,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "sweetheart note; guest greets; learns who; tai mắt reports plot; tutor",
-"fp": "rn;let want=nv(v,\"tutorWant\")+R(2);"
+"done": "let want=npwPick([0,1,2,3]"
 },
 {
 "f": "j53.js",
@@ -1639,7 +1639,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "sweetheart note; guest greets; learns who; tai mắt reports plot; tutor",
-"fp": " if(R(4)===0)want=cl(want+(R(2)?1:-1),0,3);"
+"done": "let want=npwPick([0,1,2,3]"
 },
 {
 "f": "j53.js",
@@ -1647,7 +1647,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "sweetheart note; guest greets; learns who; tai mắt reports plot; tutor",
-"fp": " if(want===3&&v.sung>=50&&roll(50)){ap(v,{sung:-4});if(roll(cl(KT."
+"done": "npcWhy(\"ktFav\",{p:v,k})"
 },
 {
 "f": "j53.js",
@@ -1655,7 +1655,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "sweetheart note; guest greets; learns who; tai mắt reports plot; tutor",
-"fp": " if((k.sex===\"m\"&&roll(ktPT(v)[2]*100)||k.sex===\"f\"&&roll("
+"done": "npwPick([\"vo\",\"no\"]"
 },
 {
 "f": "j53.js",
@@ -1663,7 +1663,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "sweetheart note; guest greets; learns who; tai mắt reports plot; tutor",
-"fp": "p?1:0};if(!x.v&&x.r!==\"skip\"&&roll(50))rev+=ktReveal(x.k,\"Thầy dạy tâu"
+"done": "npwPick([\"tell\",\"quiet\"]"
 },
 {
 "f": "j51.js",
@@ -1703,7 +1703,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "scheme target = her best child",
-"fp": "&ktHien(k)>=80);if(ks.length&&roll(50))return ks.sort((a,b)=>ktHien(b)"
+"done": "const x=npwPick(ks,y=>ktHien(y))"
 },
 {
 "f": "j68.js",
@@ -1847,7 +1847,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "item goes missing (every consort monthly); holder random; investigatio",
-"fp": ")&&c.st!==\"done\"))continue;if(roll(LO.rate))loLose(p)}"
+"done": "const o=npcWhy(\"loTake\",{p});if(o&&roll(LO.rate))loLose(p,loCauseOf(p,o))"
 },
 {
 "f": "jlost.js",
@@ -1855,7 +1855,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "item goes missing (every consort monthly); holder random; investigatio",
-"fp": "nd: was ARGMAX+noise */return pick(L)}"
+"done": "return npwPick(L,x=>1+Math.max(0,x.bac||0))"
 },
 {
 "f": "jlost.js",
@@ -1863,7 +1863,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "item goes missing (every consort monthly); holder random; investigatio",
-"fp": ".due)loFind(c);else if(o!==S&&roll(20))loNpcTry(o,c)}"
+"done": "else if(o!==S&&npcWhy(\"loTry\",{p:o,c}))loNpcTry(o,c)"
 },
 {
 "f": "jlost.js",
@@ -1871,7 +1871,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "item goes missing (every consort monthly); holder random; investigatio",
-"fp": "&c.keep&&o!==S&&!c.kn[c.own]&&roll(20))loNpcTry(o,c);"
+"done": "!c.kn[c.own]&&npcWhy(\"loTry\",{p:o,c}))loNpcTry(o,c);"
 },
 {
 "f": "jlost.js",
@@ -1879,7 +1879,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "item goes missing (every consort monthly); holder random; investigatio",
-"fp": "onst h=loP(c.at);if(h&&h!==S&&roll(50))loNpcTry(h,c);"
+"done": "if(h&&h!==S&&npcWhy(\"loClear\",{p:h,c}))loNpcTry(h,c);"
 },
 {
 "f": "jlost.js",
@@ -1887,7 +1887,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "item goes missing (every consort monthly); holder random; investigatio",
-"fp": "rn;const kind=(p.bac||0)>=40&&roll(40)?\"cct\":(p.bac||0)>=20&&roll(40)?"
+"done": "const kind=npwPick([\"cct\",\"book\",\"ask\"],k=>loTryW(p,c,k))||\"ask\";"
 },
 {
 "f": "jlost.js",
@@ -1895,7 +1895,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "cause rival/servant; asks quietly; recognise / friend reports; wears; ",
-"fp": " if(R0.length&&roll(LO.rivP)){const v=mindPickBy(R0,x=>"
+"done": "function loCause(p){const o=npcWhy(\"loTake\",{p});"
 },
 {
 "f": "jlost.js",
@@ -1903,7 +1903,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "cause rival/servant; asks quietly; recognise / friend reports; wears; ",
-"fp": " if(roll(sv?LO.srvP[1]:LO.srvP[0])){const s="
+"done": "function loCause(p){const o=npcWhy(\"loTake\",{p});"
 },
 {
 "f": "jlost.js",
@@ -1911,7 +1911,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "cause rival/servant; asks quietly; recognise / friend reports; wears; ",
-"fp": "riv\"&&c.by&&(c.keep||(!force&&roll(LO.keepP)))){const v=loP(c.by);if(v"
+"done": "return npwPick([\"keep\",\"plant\"],k=>k===\"keep\"?B.keep:fr)"
 },
 {
 "f": "jlost.js",
@@ -1919,7 +1919,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "cause rival/servant; asks quietly; recognise / friend reports; wears; ",
-"fp": " if(aff(o,h)>=20||roll(40)){if(h===S){pushDil(mkP(\"loask\","
+"done": "if(npwPick([\"ask\",\"cct\"],k=>k===\"ask\"?BAL.ag.why.loTry.ask+Math.max(0,aff(o,h))"
 },
 {
 "f": "jlost.js",
@@ -1927,7 +1927,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "cause rival/servant; asks quietly; recognise / friend reports; wears; ",
-"fp": " if(o!==S&&roll(LO.recog.own)){loKnowAt(c,o,\"\");ret"
+"done": "sees=q=>npcWit(at,null,{pool:[q]}).length>0;"
 },
 {
 "f": "jlost.js",
@@ -1935,7 +1935,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "cause rival/servant; asks quietly; recognise / friend reports; wears; ",
-"fp": " if(o===S&&roll(LO.recog.own)){loKnowAt(c,S,`Ngươi "
+"done": "sees=q=>npcWit(at,null,{pool:[q]}).length>0;"
 },
 {
 "f": "jlost.js",
@@ -1943,7 +1943,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "cause rival/servant; asks quietly; recognise / friend reports; wears; ",
-"fp": " if(o!==S&&c.heard&&!c.kn.me&&roll(LO.recog.me)){c.kn.me=1;log(`Ngươi "
+"done": "sees=q=>npcWit(at,null,{pool:[q]}).length>0;"
 },
 {
 "f": "jlost.js",
@@ -1951,7 +1951,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "cause rival/servant; asks quietly; recognise / friend reports; wears; ",
-"fp": "f(f!==o&&f!==h&&aff(f,o)>=40&&roll(LO.recog.fr)){loKnowAt(c,o,o===S?`$"
+"done": "const tl=npcTell(h,{to:o,from:npcWit(at,null,{not:[o,h]}).map(x=>x.p)});"
 },
 {
 "f": "jlost.js",
@@ -1959,7 +1959,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "cause rival/servant; asks quietly; recognise / friend reports; wears; ",
-"fp": " if(!c.ret&&!x.worn&&!c.wo&&roll(LO.keepWear)){c.wo=1;c.lied=1;const"
+"done": "if(!c.ret&&!x.worn&&!c.wo&&npcWhy(\"loWear\",{p:h,c})){"
 },
 {
 "f": "jlost.js",
@@ -1967,7 +1967,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "cause rival/servant; asks quietly; recognise / friend reports; wears; ",
-"fp": " const keep=a===S||roll(LO.keepP);const c=loLose(t,{cause:\""
+"done": "return npwPick([\"keep\",\"plant\"],k=>k===\"keep\"?B.keep:fr)"
 },
 {
 "f": "jdh2.js",
@@ -1975,7 +1975,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "cause rival/servant; asks quietly; recognise / friend reports; wears; ",
-"fp": "is\"});if(cause.cause===\"riv\"&&roll(LO.keepP))cause.keep=1;c=loLose(p,c"
+"done": "const w=o||npcWhy(\"dhTake\",{p})"
 },
 {
 "f": "jface.js",
@@ -1983,7 +1983,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "rival harms another consort's servant; slap reported by random consort",
-"fp": "  const v2=pick(liveRivals(true).filter(x=>x!==v&&("
+"done": "const m2=npcWhy(\"fxRivSrv2\",{p:v});const v2=m2&&m2.tgt;"
 },
 {
 "f": "jface.js",
@@ -1991,7 +1991,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "rival harms another consort's servant; slap reported by random consort",
-"fp": ";z.rep=1;const w=W[Math.floor(Math.random()*W.length)];evA(w,who,BAL.e"
+"done": "const W=npcWit(whereOf(KIT_FACEFX.owner(p)||p),null,{pool:liveRivals(true)||[],not:[who,p],vs:who})"
 },
 {
 "f": "jface.js",
@@ -1999,7 +1999,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "grudging servant harms a mate; hostile rival harms her servant; master",
-"fp": ".loyal<BAL.loy.out);if(!bad||!roll(8))continue;"
+"done": "const w=npcWhy(\"fxSrvHarm\",{p:s,mates});"
 },
 {
 "f": "jface.js",
@@ -2007,7 +2007,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "grudging servant harms a mate; hostile rival harms her servant; master",
-"fp": "  if(hot>=40&&roll(6)){const t=pick((S.staff||[]).conc"
+"done": "const mw=npcWhy(\"fxRivSrv\",{p:v});"
 },
 {
 "f": "jface.js",
@@ -2015,7 +2015,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "grudging servant harms a mate; hostile rival harms her servant; master",
-"fp": ",\"quy\",\"cãi lại chủ\");else if(roll(BAL.slap.scold))slapGive(S,m,\"cãi l"
+"done": "else if(m&&npcWhy(\"fxSlapBack\",{p:m})&&roll(BAL.slap.scold))slapGive(S,m,\"cãi lại\")"
 },
 {
 "f": "jface.js",
@@ -2023,7 +2023,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "grudging servant harms a mate; hostile rival harms her servant; master",
-"fp": "f(v&&v.pen&&v.pen.until>wk()&&roll(50))return[]}catch(e){}return O}})("
+"done": "npwPick([\"go\",\"low\"],k=>fxPenW(v,t,k))===\"low\""
 },
 {
 "f": "jkc.js",
@@ -2031,7 +2031,7 @@
 "status": "DICE-ONLY",
 "group": "G2-last",
 "event": "family whereabouts per buổi; old flame / stranger met",
-"fp": "reduce((a,x)=>a+x[1],0);let r=Math.random()*tot,p=\"\";for(const [k,w] o"
+"done": "function kcHab(L){const x=npwPick(L,y=>y[1]);"
 },
 {
 "f": "jkc.js",
@@ -2039,7 +2039,7 @@
 "status": "DICE-ONLY",
 "group": "G2-last",
 "event": "family whereabouts per buổi; old flame / stranger met",
-"fp": "an.alive)S.kc.at.ftm=b===3?\"\":pick([\"kc_chua\",\"kc_sach\",\"kc_tra\",\"\",\"\""
+"done": "return npwPick([\"kc_chua\",\"kc_sach\",\"kc_tra\",\"\"],k=>k?h*B.seek:B.home)"
 },
 {
 "f": "jkc.js",
@@ -2047,7 +2047,7 @@
 "status": "DICE-ONLY",
 "group": "G2-last",
 "event": "family whereabouts per buổi; old flame / stranger met",
-"fp": "alive&&S.tm96&&!S.kc.ev.meet&&roll(35)){S.kc.ev.meet=1;pushDil(mkP(\"kc"
+"done": "npcWhy(\"kcMeet\",{tm})&&roll(35)"
 },
 {
 "f": "jkc.js",
@@ -2055,7 +2055,7 @@
 "status": "DICE-ONLY",
 "group": "G2-last",
 "event": "family whereabouts per buổi; old flame / stranger met",
-"fp": ".ev.vh&&S.year>=2&&S.sac>=70&&roll(4)){S.kc.ev.vh=1;pushDil(mkP(\"kcE\","
+"done": "npcWhy(\"kcVh\",{})&&roll(4)"
 },
 {
 "f": "jkc2.js",
@@ -2063,7 +2063,7 @@
 "status": "DICE-ONLY",
 "group": "G2-last",
 "event": "family whereabouts per buổi; old flame / stranger met",
-"fp": "reduce((a,x)=>a+x[1],0);let r=Math.random()*tot,p=\"\";for(const [k,w] o"
+"done": "const p=(npwPick(L,y=>y[1])||[\"\"])[0];"
 },
 {
 "f": "jkc.js",
@@ -2071,7 +2071,7 @@
 "status": "PARTIAL",
 "group": "G2-last",
 "event": "weekly family event; matchmaker; creditor; lantern lover; stare",
-"fp": " if(!S.kc.ev.dich&&S.year>=2&&roll(KC.ill))add(\"dich\",6);"
+"out": "illness, not an NPC choice (report §Out of scope)"
 },
 {
 "f": "jkc.js",
@@ -2079,7 +2079,7 @@
 "status": "PARTIAL",
 "group": "G2-last",
 "event": "weekly family event; matchmaker; creditor; lantern lover; stare",
-"fp": ">{kcAf(h,BAL.eff.jkc.o_15);if(roll(40)){S.kgt-=BAL.eff.jkc.kgtO_5;retu"
+"out": "consequence of the player's own choice (she refused the brother's gambling debt): the creditor is owed by definition; roll = whether he comes to the door"
 },
 {
 "f": "jkc.js",
@@ -2087,7 +2087,7 @@
 "status": "PARTIAL",
 "group": "G2-last",
 "event": "weekly family event; matchmaker; creditor; lantern lover; stare",
-"fp": "t tm=kcTmMan();if(tm&&S.tm96&&roll(60)){S.tm96.h=Math.min(100,S.tm96.h"
+"done": "npcWhy(\"kcMeet\",{tm})&&roll(60)"
 },
 {
 "f": "jkc.js",
@@ -2095,7 +2095,7 @@
 "status": "PARTIAL",
 "group": "G2-last",
 "event": "weekly family event; matchmaker; creditor; lantern lover; stare",
-"fp": " if(kcCity(k)&&roll(4)){S.kld+=3;log(\"Có kẻ nhìn ngươi "
+"out": "unnamed crowd: no NPC exists or acts; the line only raises her own exposure S.kld at a crowded place she chose"
 },
 {
 "f": "jkc2.js",
@@ -2103,7 +2103,7 @@
 "status": "PARTIAL",
 "group": "G2-last",
 "event": "weekly family event; matchmaker; creditor; lantern lover; stare",
-"fp": "ce((a,x)=>a+x[1],0);if(!tot||!roll(KC.ev))return;let r=Math.random()*t"
+"done": "const o=npcWhy(\"kcWeek\",{E});if(!o||!roll(KC.ev))return;/* npc-purpose G2: the strongest motive acts */"
 },
 {
 "f": "jcmaid.js",
@@ -2111,7 +2111,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "her maid's monthly cards (confides, brawl, scorn, homeland ask, old-fr",
-"fp": "ecKn){if(m.loyal>=B.secTrust&&roll(B.secTell)){m.secKn=1;cmC(\"secTell\""
+"done": "m.loyal>=B.secTrust&&npcWhy(\"cmConf\",{p:m})"
 },
 {
 "f": "jcmaid.js",
@@ -2119,7 +2119,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "her maid's monthly cards (confides, brawl, scorn, homeland ask, old-fr",
-"fp": " else if(cdOk&&s.k!==\"lover\"&&roll(B.secTell)){dil(\"cmSec\");return ev}"
+"done": "s.k!==\"lover\"&&npcWhy(\"cmConf\",{p:m})"
 },
 {
 "f": "jcmaid.js",
@@ -2127,7 +2127,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "her maid's monthly cards (confides, brawl, scorn, homeland ask, old-fr",
-"fp": "src===\"home\"&&k===\"tt\"&&cdOk&&roll(B.ttPress)){dil(\"cmTt\");return ev}"
+"done": "npcWhy(\"cmTt\",{p:m})"
 },
 {
 "f": "jcmaid.js",
@@ -2135,7 +2135,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "her maid's monthly cards (confides, brawl, scorn, homeland ask, old-fr",
-"fp": "rc===\"home\"&&k===\"dtq\"&&cdOk&&roll(B.dtqBrawl)){const v=cmFoe();if(v){"
+"done": "npcWhy(\"cmBrawl\",{p:m})"
 },
 {
 "f": "jcmaid.js",
@@ -2143,7 +2143,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "her maid's monthly cards (confides, brawl, scorn, homeland ask, old-fr",
-"fp": "===\"pick\"&&k===\"cnv\"))&&cdOk&&roll(B.scorn)){const v=cmFoe();if(v){dil"
+"done": "npcWhy(\"cmScorn\",{})"
 },
 {
 "f": "jcmaid.js",
@@ -2151,7 +2151,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "her maid's monthly cards (confides, brawl, scorn, homeland ask, old-fr",
-"fp": " if(m.src===\"land\"){if(cdOk&&roll(B.landAsk)){dil(\"cmLand\");return ev"
+"done": "npcWhy(\"cmLand\",{})"
 },
 {
 "f": "jcmaid.js",
@@ -2159,7 +2159,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "her maid's monthly cards (confides, brawl, scorn, homeland ask, old-fr",
-"fp": "!S.thDead&&m.loyal>=B.talLoy&&roll(B.chTh)){S.th=cl((S.th||0)+B.chThUp"
+"done": "npcWhy(\"cmTh\",{p:m})"
 },
 {
 "f": "jcmaid.js",
@@ -2167,7 +2167,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "maid overhears / leaks",
-"fp": "||0)/B.talLoy);return c==null?roll(B.talSpy):c}"
+"done": "npcWhy(\"cmSpy\",{p:m})"
 },
 {
 "f": "jcmaid.js",
@@ -2175,7 +2175,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "maid overhears / leaks",
-"fp": "m;if(!s||s.k===\"lover\")return roll(B.secOut);const c=cmCh(m,B.secOut*K"
+"done": "npcWhy(\"cmLeak\",{p:m,s})"
 },
 {
 "f": "jagknow.js",
@@ -2183,7 +2183,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "a news seller comes (her + each NPC, every buổi)",
-"fp": "ion\"&&isSrv())&&dayFit(P.kh)&&roll(agOdd(P.o))){const r=knSellPick(S);"
+"done": "knSellPick(S,npcWhy(\"knSell\",{x:S}))"
 },
 {
 "f": "jagknow.js",
@@ -2191,7 +2191,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "a news seller comes (her + each NPC, every buổi)",
-"fp": "||x.confined)continue;try{if(!roll(agOdd(P.o)))continue;const r=knSell"
+"done": "knSellPick(x,npcWhy(\"knSell\",{x}))"
 },
 {
 "f": "jagknow.js",
@@ -2199,7 +2199,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "which seller; refusing servant tells master",
-"fp": "SB().try&&C.length;i++){let r=Math.random()*C.reduce((a,c)=>a+c[1],0),"
+"done": "if(o===undefined)o=npcWhy(\"knSell\",{x})"
 },
 {
 "f": "jagknow.js",
@@ -2207,7 +2207,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "which seller; refusing servant tells master",
-"fp": "o||(s.loyal||0)<BAL.loy.mid||!roll(agCap(tmB().tell)))return\"\";affAdd("
+"done": "!npcWhy(\"tmTell\",{s,o})"
 },
 {
 "f": "jagacts3.js",
@@ -2215,7 +2215,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "maid learns affair (monthly 3 %); maid reports a rival's whereabouts; ",
-"fp": "knowAff||[]).includes(v.id)||!roll(X.aff.see))continue;s.knowAff=(s.kn"
+"done": "!npcWit(tk.k,tk.kh,{pool:[s]}).length"
 },
 {
 "f": "jagacts3.js",
@@ -2223,7 +2223,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "maid learns affair (monthly 3 %); maid reports a rival's whereabouts; ",
-"fp": " if(p===S&&roll(cnvOd(X.hear))){const t=liveRivals("
+"done": "const v=npwPick(liveRivals(true).filter(x=>p3MaidSaw(sw,x))"
 },
 {
 "f": "jagacts3.js",
@@ -2231,7 +2231,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "maid learns affair (monthly 3 %); maid reports a rival's whereabouts; ",
-"fp": "   affAdd(v,p,-G.miss);if(roll(agCap(G.tell))){oanAdd(third,p,G.te"
+"done": "const tl=npcTell(p,{to:third,from:[v]})"
 },
 {
 "f": "jagacts3.js",
@@ -2239,7 +2239,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "keeps secret; TH frees random cold-palace consort; random shop/gift it",
-"fp": "(v.malice>BAL.talk.secretMal&&roll(agCap(BAL.talk.secretGrab))){evA(v,"
+"done": "npcWhy(\"p3Grab\",{v,p})"
 },
 {
 "f": "jagacts.js",
@@ -2415,7 +2415,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "mood set with no cause (servant, kid, officials, men, HH, TH)",
-"fp": "    else if(e.k===\"gian\"&&roll(30))emoSet(s,\"so\",30,\"chủ nhân đang"
+"done": "npwPick([\"so\",\"calm\"],q=>emoFearW(s,e,q))===\"so\""
 },
 {
 "f": "jemo.js",
@@ -2423,7 +2423,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "mood set with no cause (servant, kid, officials, men, HH, TH)",
-"fp": "o lãnh cung\");else if(!k.emo&&roll(8))emoSet(k,\"vui\",30,\"được chơi đùa"
+"done": "const o=npcWhy(\"emoKid\",{p:k,m,W});"
 },
 {
 "f": "jemo.js",
@@ -2431,7 +2431,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "mood set with no cause (servant, kid, officials, men, HH, TH)",
-"fp": "!of.name)continue;if(!of.emo&&roll(6))emoSet(of,pick([\"vui\",\"lo\"]),30,"
+"done": "const x=npwPick(emoOffCauses(of,W),y=>y.s);"
 },
 {
 "f": "jemo.js",
@@ -2439,7 +2439,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "mood set with no cause (servant, kid, officials, men, HH, TH)",
-"fp": ".men||[]){if(m.alive&&!m.emo&&roll(5))emoSet(m,pick([\"vui\",\"lo\",\"buon\""
+"done": "const x=npwPick(emoManCauses(m,o,n),y=>y.s);"
 },
 {
 "f": "jcmood.js",
@@ -2447,7 +2447,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "mood set with no cause (servant, kid, officials, men, HH, TH)",
-"fp": "  else if(roll(15)){lv=roll(50)?0:2;why=lv?\"trở tr"
+"done": "const x=npwPick(cmThCauses(kidsNow),y=>y.s);"
 },
 {
 "f": "jcmood.js",
@@ -2455,7 +2455,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "mood set with no cause (servant, kid, officials, men, HH, TH)",
-"fp": "(q.sung||0)+20&&S.rank>=3){lv=roll(50)?3:2;why=\"ghen vì Hoàng thượng s"
+"done": "lv=npwPick([3,2],k=>k===3?Math.max(0,hostility(q,S)):BAL.ag.why.cmood.hhSad+Math.max(0,aff(q,S)))"
 },
 {
 "f": "jcmood.js",
@@ -2463,7 +2463,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "mood set with no cause (servant, kid, officials, men, HH, TH)",
-"fp": "  else if(roll(15)){lv=roll(50)?0:2;why=lv?\"mệt vì"
+"done": "const x=npwPick(cmHhCauses(q),y=>y.s);"
 },
 {
 "f": "jemo.js",
@@ -2471,7 +2471,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "sad consort refuses; outburst + victim; acts on feeling; Emperor drink",
-"fp": "kind)%100<50}catch(x){}return roll(50)}"
+"done": "M.m[q]=npwPick([\"alone\",\"go\"],k=>emoAloneW(a,t,k))"
 },
 {
 "f": "jemoact.js",
@@ -2495,7 +2495,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "NPC mother/TH/Emperor arranges son's match; 2nd wife",
-"fp": "ge>=BAL.age.betroth&&pkCd(p)&&roll(20)){pkMark(p);const C=pkCands(p,k)"
+"done": "npcWhy(\"h54Ban\",{p,k})&&roll(20)){/* npc-purpose G2: her own wish for her son"
 },
 {
 "f": "jht.js",
@@ -2503,7 +2503,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "NPC mother/TH/Emperor arranges son's match; 2nd wife",
-"fp": "p(p,{bac:-HT.dow[q.tier]});if(roll(odA(p,pkO(p,k,q))))log(pkBetroth(k,"
+"done": "const q=npwPick(C,q=>g2bAmb(p)"
 },
 {
 "f": "jht.js",
@@ -2511,7 +2511,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "NPC mother/TH/Emperor arranges son's match; 2nd wife",
-"fp": "e>=BAL.age.wed&&!h54Live(p))&&roll(8)){const C=pkCands(p,k);if(C.lengt"
+"done": "npcWhy(\"hEmpWed\",{p,k,son:1})"
 },
 {
 "f": "jht.js",
@@ -2519,7 +2519,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "NPC mother/TH/Emperor arranges son's match; 2nd wife",
-"fp": ".pW.trac.length<1&&k.age>=20&&roll(HT.trac)){const t=pkTrac(k,p);if(t)"
+"done": "npcWhy(\"pkTrac\",{k,p})"
 },
 {
 "f": "jil.js",
@@ -2527,7 +2527,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "item market: owner buys back, random NPC buys, asks back, item handed ",
-"fp": "ive&&o!==S&&(o.bac||0)>=x.pr&&roll(B.npcBackP)){ap(o,{bac:-x.pr});ilTa"
+"done": "npcWhy(\"ilBack\",{p:o,x})"
 },
 {
 "f": "jil.js",
@@ -2535,7 +2535,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "item market: owner buys back, random NPC buys, asks back, item handed ",
-"fp": "   if(roll(B.npcBuyP)){const L=liveRivals(true"
+"done": "const bw=npcWhy(\"ilBuy\",{x,o});"
 },
 {
 "f": "jil.js",
@@ -2543,7 +2543,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "item market: owner buys back, random NPC buys, asks back, item handed ",
-"fp": "   if(!live&&!x.shop&&roll(B.shopP))x.shop=1;continue}"
+"done": "npwPick(liveRivals(true),v=>ilWant(v,x,null))&&roll(B.shopP)"
 },
 {
 "f": "jil.js",
@@ -2551,7 +2551,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "item market: owner buys back, random NPC buys, asks back, item handed ",
-"fp": "   else if(live&&roll(B.npcConfP))ilTake(x,o,\"xin lại\");e"
+"done": "npcWhy(\"ilConf\",{p:o,x})"
 },
 {
 "f": "jil.js",
@@ -2559,7 +2559,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "item market: owner buys back, random NPC buys, asks back, item handed ",
-"fp": "\"kho\"||x.why===\"net\")&&!live&&roll(B.resaleP)){x.at=\"mkt\";x.why=\"sell\""
+"done": "npwPick(liveRivals(true),v=>ilWant(v,x,null,Math.round(ilVal(x.e)*B.ransomPct/100)))"
 },
 {
 "f": "jinv.js",
@@ -2567,7 +2567,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "luxury / plain dress / veil gossip",
-"fp": " if(x.lv===3&&roll(25)){if(me){apply({danh:BAL.eff.jin"
+"done": "npwPick(liveRivals(true).filter(v=>v!==p),v=>hostility(v,p)-BAL.ag.why.g2lux.gos)"
 },
 {
 "f": "jinv.js",
@@ -2575,7 +2575,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "luxury / plain dress / veil gossip",
-"fp": " if(x.lv===0&&rkOf(p)>=3&&roll(25)){if(me){apply({duc:BAL.eff.jinv"
+"done": "npwPick(liveRivals(true).filter(v=>v!==p),v=>aff(v,p)-BAL.ag.why.g2lux.praise)"
 },
 {
 "f": "jaudit.js",
@@ -2583,7 +2583,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "mistress promotes servant; foes read cycle book / forge; confiscation ",
-"fp": ".ok)||s.loyal<BAL.loy.trust||!roll(15))continue;if((p.bac||0)>=dbCost("
+"done": "npcWhy(\"dbPromo\",{p,L})"
 },
 {
 "f": "jcycle.js",
@@ -2591,7 +2591,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "mistress promotes servant; foes read cycle book / forge; confiscation ",
-"fp": "F){if(v.cyKnowMe===S.pregWk||!roll(B().npcRead))continue;v.cyKnowMe=S."
+"done": "npcWhy(\"cyRead\",{F:F.filter(x=>x.cyKnowMe!==S.pregWk),t:S})"
 },
 {
 "f": "jcycle.js",
@@ -2599,7 +2599,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "mistress promotes servant; foes read cycle book / forge; confiscation ",
-"fp": "phòng\");for(const v of F){if(!roll(B().npcRead))continue;if(!evA(v,S,B"
+"done": "npcWhyAll(\"cyLie\",{F,t:S})"
 },
 {
 "f": "jcycle.js",
@@ -2607,7 +2607,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "mistress promotes servant; foes read cycle book / forge; confiscation ",
-"fp": ".bac||0)>=B().forgeBac);if(v&&roll(B().npcForge)){ap(v,{bac:-B().forge"
+"done": "npcWhy(\"cyForge\",{F,t:S})"
 },
 {
 "f": "jcycle.js",
@@ -2615,7 +2615,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "mistress promotes servant; foes read cycle book / forge; confiscation ",
-"fp": "&hostility(x,t)>=B().foeHost&&roll(B().rvRead));if(a){a.cyKnow=a.cyKno"
+"done": "npcWhy(\"cyRead\",{F:L.filter(x=>x!==t&&!x.coop),t})"
 },
 {
 "f": "jdh2.js",
@@ -2623,7 +2623,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "mistress promotes servant; foes read cycle book / forge; confiscation ",
-"fp": " if(p.hieu&&roll(P[0])){out.hieu=p.hieu;p.hieu=\"\";fo"
+"done": "npcWhy(\"dhConf\",{p,kind,i:0})&&roll(P[0])"
 },
 {
 "f": "jdh2.js",
@@ -2631,7 +2631,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "mistress promotes servant; foes read cycle book / forge; confiscation ",
-"fp": "K(p);if(wk0&&p.dh&&p.dh[wk0]&&roll(P[1])){p.dh[wk0].conf=1;if(typeof d"
+"done": "npcWhy(\"dhConf\",{p,kind,i:1})&&roll(P[1])"
 },
 {
 "f": "jdh2.js",
@@ -2639,7 +2639,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "mistress promotes servant; foes read cycle book / forge; confiscation ",
-"fp": "sDh(e)&&e.own===pk(p)&&!e.lo&&roll(I().lose)){window.dhLose(p,e);break"
+"done": "{const o=npcWhy(\"dhTake\",{p});if(o&&roll(I().lose))window.dhLose(p,e,o)"
 },
 {
 "f": "jdh2.js",
@@ -2647,7 +2647,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "mistress promotes servant; foes read cycle book / forge; confiscation ",
-"fp": " if(dhHieuOK(p).ok&&roll(H().p))window.dhHieuGrant(p,\"month\""
+"done": "npcWhy(\"dhHieu\",{p})&&roll(H().p)"
 },
 {
 "f": "jlux.js",
@@ -2655,7 +2655,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "mistress promotes servant; foes read cycle book / forge; confiscation ",
-"fp": "f(n<(fr?B.edictNF:B.edictN)||!roll(B.edictP))return\"\";"
+"done": "const by=npwPick(C0,"
 },
 {
 "f": "jlux.js",
@@ -2663,7 +2663,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "mistress promotes servant; foes read cycle book / forge; confiscation ",
-"fp": "  if(over&&roll(t.some(x=>x===\"Kiêu ngạo\"||x===\"Tha"
+"done": "npwPick([\"calm\",\"keep\"]"
 },
 {
 "f": "jeitem.js",
@@ -2671,7 +2671,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "mistress promotes servant; foes read cycle book / forge; confiscation ",
-"fp": " hit=null;for(const c of C)if(ag2Ch(c.s,c.ch)){hit=c.s;break}if(!hit)r"
+"done": "npcWhy(\"eitPil\",{p,C})"
 },
 {
 "f": "jexam.js",
@@ -2679,7 +2679,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "mistress promotes servant; foes read cycle book / forge; confiscation ",
-"fp": "  for(const T of L.sort(()=>Math.random()-.5)){try{x=A&&q72Make(T,A)"
+"done": "const T=npwPick(Lp,need)"
 },
 {
 "f": "jexam.js",
@@ -2687,7 +2687,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "mistress promotes servant; foes read cycle book / forge; confiscation ",
-"fp": ".max){S.psStrike=null}else if(roll(k.p)){k.n++;S.psStrike=null;"
+"done": "npcWhy(\"psStrike\",{p:S})&&roll(k.p)"
 },
 {
 "f": "jkh.js",
@@ -2695,7 +2695,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "mistress promotes servant; foes read cycle book / forge; confiscation ",
-"fp": "  if(!acc||!roll(P.accP))continue;"
+"done": "npcWhy(\"khAcc\",{m,L:Lc})"
 },
 {
 "f": "jact.js",
@@ -2946,7 +2946,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "maid gossip teaches a taste; ma ma copy offer",
-"fp": "  if(S.maid&&roll(BAL.rcp.gossipP)){const P=rcpPeople"
+"done": "npcWhy(\"rcpGos\",{p:S.maid})"
 },
 {
 "f": "jrcp.js",
@@ -2954,7 +2954,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "allergy accuse; friend sends pattern; TH sutra",
-"fp": "  if(roll(cl(p,5,95))){const acc=r&&typeof r="
+"done": "npcWhy(\"rcpAcc\",{p:acc,a:S,v:r})"
 },
 {
 "f": "jrcp.js",
@@ -2962,7 +2962,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "allergy accuse; friend sends pattern; TH sutra",
-"fp": "if(r&&typeof r===\"object\"){if(roll(cl(BAL.rcp.alEv+Math.round(hostilit"
+"done": "npcWhy(\"rcpAcc\",{p:r,a,v:r})"
 },
 {
 "f": "jrcp.js",
@@ -2970,7 +2970,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "allergy accuse; friend sends pattern; TH sutra",
-"fp": "const q=rcpAccuser(r,a);if(q&&roll(BAL.rcp.accP))evA(q,a,BAL.eff.jrcp."
+"done": "npcWhy(\"rcpAcc\",{p:q,a,v:r})"
 },
 {
 "f": "jrcp.js",
@@ -2978,7 +2978,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "allergy accuse; friend sends pattern; TH sutra",
-"fp": "el(v,S)||0)<BAL.rcp.giftRel||!roll(BAL.rcp.giftP))continue;const L=[];"
+"done": "npcWhy(\"rcpGift\",{p:v})"
 },
 {
 "f": "jrcp.js",
@@ -2986,7 +2986,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "allergy accuse; friend sends pattern; TH sutra",
-"fp": "if(WK[kind].a===wkBestArt(v)||roll(30))RCP_ST[kind].forEach((s,i)=>{if"
+"done": "const g=npwPick(L,x=>x.s);"
 },
 {
 "f": "jrcp.js",
@@ -2994,7 +2994,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "allergy accuse; friend sends pattern; TH sutra",
-"fp": "l(mkP(\"giftin\",{f:key(v),e:{k:pick(L),from:key(v)}}),\"Quà tặng\");break"
+"done": "const g=npwPick(L,x=>x.s);pushDil(mkP(\"giftin\",{f:key(v),e:{k:g.k,from:key(v)}})"
 },
 {
 "f": "jrcp.js",
@@ -3002,7 +3002,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "allergy accuse; friend sends pattern; TH sutra",
-"fp": " if(!S.thDead&&(S.th||0)>=60&&roll(BAL.rcp.thGiftP)){const L=[];for(co"
+"done": "npcWhy(\"rcpTh\",{})"
 },
 {
 "f": "jpet.js",
@@ -3010,7 +3010,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "Emperor/TH/HH/a man gives a pet",
-"fp": " t=(p.th||0)>=85&&rkOf(p)>=4&&roll(15)?\"kylan\":\"hac\";if(tsbPets(p).som"
+"done": "npwPick([\"kylan\",\"hac\"],k=>petThW(p,k))"
 },
 {
 "f": "jpet.js",
@@ -3018,7 +3018,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "Emperor/TH/HH/a man gives a pet",
-"fp": ">=60&&queenP()&&queenP()!==p&&roll(2.5)){const t=pick([\"sutu\",\"linhmie"
+"done": "npcWhy(\"petHh\",{p})"
 },
 {
 "f": "jpet.js",
@@ -3026,7 +3026,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "Emperor/TH/HH/a man gives a pet",
-"fp": "m=>m.alive&&(m.tinh||0)>=50)&&roll(5)){const m=(S.men||[]).filter(m=>m"
+"done": "npcWhy(\"petMan\",{})"
 },
 {
 "f": "jstip.js",
@@ -3034,7 +3034,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "Nội vụ phủ skims stipend; NPC answer",
-"fp": " if(!cut&&!roll(Math.min(B.cap,ch))){keep();return "
+"done": "const lead=cut?null:npwPick(C,c=>B.w[c.k]||0)"
 },
 {
 "f": "jstip.js",
@@ -3042,7 +3042,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "Nội vụ phủ skims stipend; NPC answer",
-"fp": "f(!SK.sup&&(p.bac||0)>=tip*2&&roll(50)){ap(p,{bac:-tip});st.tip=S.turn"
+"done": "ans=npwPick([\"tip\",\"ask\",\"meek\"]"
 },
 {
 "f": "jstip.js",
@@ -3050,7 +3050,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "Nội vụ phủ skims stipend; NPC answer",
-"fp": "se if(p.maid&&!p.maid.spyFor&&roll(30)&&roll(cl(B.askBase+Math.round(("
+"done": "ans=npwPick([\"tip\",\"ask\",\"meek\"],k=>"
 },
 {
 "f": "jshelf.js",
@@ -3082,7 +3082,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "rival \"sees\" her at Thái y viện",
-"fp": " if(self&&roll(T().seen)){const L=liveRivals(true)"
+"done": "npcWit(\"tyv\",null,{pool:liveRivals(true).filter(rv),vs:S})"
 },
 {
 "f": "jthaiy.js",
@@ -3090,7 +3090,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "tip; physician leak; NPC bribes physician; physician tells about rival",
-"fp": " if(roll(cl(20+eyes(S)*8,5,90)))log(`<span c"
+"done": "npcTell(by,{to:S,place:whereOf(by)})"
 },
 {
 "f": "jthaiy.js",
@@ -3098,7 +3098,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "tip; physician leak; NPC bribes physician; physician tells about rival",
-"fp": " if(by&&roll(T().leak))leak(by,F);"
+"done": "npcWhy(\"thyLeak\",{p:doc(),by})"
 },
 {
 "f": "jthaiy.js",
@@ -3106,7 +3106,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "tip; physician leak; NPC bribes physician; physician tells about rival",
-"fp": " if(by&&roll(T().leak))leak(by,F);"
+"done": "npcWhy(\"thyLeak\",{p:doc(),by})"
 },
 {
 "f": "jthaiy.js",
@@ -3114,7 +3114,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "tip; physician leak; NPC bribes physician; physician tells about rival",
-"fp": "   if(me>=T().askAf&&roll(cl(T().askBase+me/2,5,95))){const L"
+"done": "npcWhy(\"thyTell\",{p:c,me})"
 },
 {
 "f": "jthaiy.js",
@@ -3122,7 +3122,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "tip; physician leak; NPC bribes physician; physician tells about rival",
-"fp": "2=nv(v,\"thyEv\");if(tg.length&&roll(T().npcBribe+ev2)){ap(v,{bac:-T().n"
+"done": "npcWhy(\"thyBribe\",{p:v,tg})"
 },
 {
 "f": "jty.js",
@@ -3130,7 +3130,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "NPC robbed of clothes (robber random) / enemy plots robbery",
-"fp": "  else if(roll(T.npcRob)&&roll(35)){const e=w.y;if"
+"done": "const o=npcWhy(\"tyRob\",{t:v})"
 },
 {
 "f": "jty.js",
@@ -3138,7 +3138,7 @@
 "status": "DICE-ONLY",
 "group": "G2",
 "event": "NPC robbed of clothes (robber random) / enemy plots robbery",
-"fp": "t E=tyEnemies(S);if(E.length&&roll(T.plotCh)){const v=pick(E);S.tyOmen"
+"done": "const o=npcWhy(\"tyPlot\",{t:S})"
 },
 {
 "f": "jtwoway.js",
@@ -3194,7 +3194,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "NPC frames; plants contraband; veil buy/craft/ask/gift; workshop piece",
-"fp": " try{if(run&&S&&!S.dead&&roll(BAL.truth.npcFrameP)){const x=npcFr"
+"done": "const o=npcWhy(\"tFrame\",{A,L})"
 },
 {
 "f": "jwd92b.js",
@@ -3202,7 +3202,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "NPC frames; plants contraband; veil buy/craft/ask/gift; workshop piece",
-"fp": "iahoa.ok(v,t));if(!L.length||!roll(WD.frameP))continue;"
+"done": "const o=npcWhy(\"wdFrame\",{v,L})"
 },
 {
 "f": "jveil.js",
@@ -3210,7 +3210,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "NPC frames; plants contraband; veil buy/craft/ask/gift; workshop piece",
-"fp": "if((v.bac||0)>=itm(k0).pr+10&&roll(VL.npcBuy)){const k=(v.bac||0)>=itm"
+"done": "const how=npwPick([\"buy\",\"craft\",\"ask\"]"
 },
 {
 "f": "jveil.js",
@@ -3218,7 +3218,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "NPC frames; plants contraband; veil buy/craft/ask/gift; workshop piece",
-"fp": "  else if(vlLv(v)>=1&&roll(VL.npcCraft)){const m=(v.bac||0)>=V"
+"done": "npwPick([1,0],i=>i?(bac-VL.mat[1])/W.bacDiv:W.plain)"
 },
 {
 "f": "jveil.js",
@@ -3226,7 +3226,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "NPC frames; plants contraband; veil buy/craft/ask/gift; workshop piece",
-"fp": "  else if(roll(VL.npcAsk)){const G=vlGivers(v);if("
+"done": "const g=npwPick(G,g=>g.o)"
 },
 {
 "f": "jveil.js",
@@ -3234,7 +3234,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "NPC frames; plants contraband; veil buy/craft/ask/gift; workshop piece",
-"fp": "=itm(k).pr+20);if(!F.length||!roll(VL.giftP))return;const v=pick(F);"
+"done": "const o=npcWhy(\"vlGift\",{t,F})"
 },
 {
 "f": "jtds.js",
@@ -3242,7 +3242,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "NPC frames; plants contraband; veil buy/craft/ask/gift; workshop piece",
-"fp": ".wk).length<BAL.tds.npcWkCap&&roll(BAL.tds.npcWk))wkNpcMake(p,k)}"
+"done": "npcWhy(\"tdsMake\",{p,k})&&roll(BAL.tds.npcWk)"
 },
 {
 "f": "jreign.js",
@@ -3250,7 +3250,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "NPC frames; plants contraband; veil buy/craft/ask/gift; workshop piece",
-"fp": "rCd&&S.turn-(r.last||-99)>=2&&roll(BAL.rg.erP)){"
+"done": "npwPick(L,e=>Wr.base+(e.if?Wr.need:0)"
 },
 {
 "f": "jvisit.js",
@@ -3355,6 +3355,38 @@
 "group": "G2",
 "event": "maid seek/feud/hit; Emperor noon place; poisoner; surprise visit; NPC ",
 "fp": "s(v).length&&(v.bac||0)>=150&&roll(3)){const t=pick(petPool(0,1).filte"
+},
+{
+"f": "jkc.js",
+"line0": 311,
+"status": "PARTIAL",
+"group": "G2",
+"event": "weekly family event (pre-palace)",
+"done": "const o=npcWhy(\"kcWeek\",{E});if(!o||!roll(KC.ev))return;/* npc-purpose G2: the strongest motive in the house acts"
+},
+{
+"f": "jkc.js",
+"line0": 278,
+"status": "DICE-ONLY",
+"group": "G2",
+"event": "palace rumour heard at home: about a random rival",
+"done": "const v=npwPick(liveRivals(true),x=>1+Math.max(0,x.sung||0));"
+},
+{
+"f": "jkc.js",
+"line0": 320,
+"status": "PARTIAL",
+"group": "G2",
+"event": "matchmaker comes (suitor house)",
+"done": "(kcSO=npcWhy(\"kcSuit\",{}))&&roll(BAL.kc2.kcCard.kcMonth_rb+S.kap/3)"
+},
+{
+"f": "jkc.js",
+"line0": 331,
+"status": "DICE-ONLY",
+"group": "G2",
+"event": "which suitor house",
+"done": "s=npwPick(f.length?f:L.slice(-2),x=>x[2])"
 }
 ]
 }

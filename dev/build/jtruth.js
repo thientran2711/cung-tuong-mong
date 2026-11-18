@@ -143,13 +143,15 @@ function evStory(t,n,x){if(!t||!S)return 0;deedAdd(t,"story",null,n,x||DEEDX.sto
 (function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{const T=BAL.truth;
  if(O.length&&t&&ACT.frame&&!accOK(v,t)){let has=false;for(const x of O)if(x[0]==="frame"||x[0]==="plant"){x[1]*=T.frameW;if(x[0]==="frame")has=true}
   if(!has&&bandOf(danger(v,t))===1&&T.frameW1>0){let ok=false;try{ok=ACT.frame.ok(v,t)}catch(e){}const w=T.frameW1*(typeof persW==="function"?persW(v,"frame"):1);if(ok&&w>0)O.push(["frame",w])}}}catch(e){}return O}})();
+function tFrameV(a,L){return L.filter(t=>t!==a&&!(typeof sameHouse==="function"&&sameHouse(a,t))&&((t.sung||0)>(a.sung||0)||rkOf(t)>rkOf(a))&&!accOK(a,t))}
 function npcFrame(){const T=BAL.truth;const L=liveRivals(false).filter(v=>v&&v.alive&&!v.out&&!v.coop&&!v.confined);if(L.length<2)return"";
- const A=L.filter(v=>(v.malice||0)>=T.npcFrameMal&&!v.plan);if(!A.length)return"";const a=wpick(A.map(v=>[v,v.malice||1]));
- const V=L.filter(t=>t!==a&&!(typeof sameHouse==="function"&&sameHouse(a,t))&&((t.sung||0)>(a.sung||0)||rkOf(t)>rkOf(a))&&!accOK(a,t));if(!V.length)return"";
- const t=wpick(V.map(x=>[x,Math.max(1,x.sung||0)]));let r="";try{r=runAct(a,t,"frame")||""}catch(e){console.error("npcFrame",e)}
+ const A=L.filter(v=>(v.malice||0)>=T.npcFrameMal&&!v.plan);if(!A.length)return"";
+ /* npc-purpose G2: the framer = a spiteful woman with a real target (someone above her in favour or rank she envies or hates); the target = her worst
+    grudge/envy (tFrameV); npcFrameP = the success; nobody with a reason → nothing */
+ const o=npcWhy("tFrame",{A,L});if(!o||!o.tgt||!roll(T.npcFrameP))return"";const a=o.who,t=o.tgt;let r="";try{r=runAct(a,t,"frame")||""}catch(e){console.error("npcFrame",e)}
  try{window.__npcFrameTry=(window.__npcFrameTry||0)+1}catch(e){}return typeof seenNPC==="function"?seenNPC(a,t,r):""}
 (function(){const e0=endTurn;endTurn=function(){const run=S&&!S.dead&&!Q.length&&!S.mg;const r=e0.apply(this,arguments);
- try{if(run&&S&&!S.dead&&roll(BAL.truth.npcFrameP)){const x=npcFrame();if(x)log(x)}}catch(e){}return r}})();
+ try{if(run&&S&&!S.dead){const x=npcFrame();if(x)log(x)}}catch(e){}return r}})();
 /* a frame is quiet work (a doll slipped into a chest, a whisper to Cung Chính ti): the victim's people see it less than a poisoning or a push.
    oSee during Vu oan / Cài đồ − BAL.truth.frameHide (reviewer r1: the player's maid guard caught ~90% of frames, so a frame almost never landed). */
 (function(){const o0=oSee;oSee=function(t,p){const r=o0.apply(this,arguments);try{if(typeof ACTK!=="undefined"&&(ACTK==="frame"||ACTK==="plant")&&BAL.truth.frameHide)return cl(Math.round(r-BAL.truth.frameHide),5,95)}catch(e){}return r}})();

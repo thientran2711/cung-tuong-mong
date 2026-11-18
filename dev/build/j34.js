@@ -21,8 +21,9 @@ function backers(p){const L=[];const q=queenP();if(q&&q!==p&&aff(q,p)>=30)L.push
 function fScore(p){const L=backers(p);let n=0;for(const b of L)n+=/^phe/.test(b)?Math.min(4,1+(+(b.match(/\d+/)||[1])[0])/2):2;return cl(Math.round(n),0,10)}
 /* between rounds: each candidate acts (practise, lobby, scheme); her choice is a card, theirs by traits */
 function npcContestAct(p){const c=ct();const R2=c.c.map(byKey).filter(x=>x&&x!==p&&!c.dq.includes(key(x)));const k=key(p);
- const w={pr:2,lo:2,sc:R2.length?.6*persW(p,"poison")*persW(p,"frame"):0};const tot=w.pr+w.lo+w.sc;let r=Math.random()*tot;
- if((r-=w.pr)<0){c.pr[k]=(c.pr[k]||0)+1;return}if((r-=w.lo)<0){if(p.bac>=BAL.bacFee.backer&&roll(55)){ap(p,{bac:-BAL.bacFee.backer});(c.bk[k]=c.bk[k]||[]).push(pick(["một vị thượng thư","Tổng quản thái giám","một vị vương phi"]))}return}
+ const CB=BAL.ag.why.g2b.c;/* npc-purpose G2: practise / lobby / scheme from her state (thin backing → lobby; a hated rival → scheme) */
+ const act=npwPick(["pr","lo","sc"],x=>x==="pr"?CB.pr:x==="lo"?(p.bac>=BAL.bacFee.backer?CB.lo+(CB.lo0-fScore(p))*CB.loW:0):(R2.length?Math.max(0,...R2.map(y=>hostility(p,y)))*persW(p,"poison")*persW(p,"frame")*CB.sc:0))||"pr";
+ if(act==="pr"){c.pr[k]=(c.pr[k]||0)+1;return}if(act==="lo"){const bk=ctBacker(p);if(bk&&roll(55)){ap(p,{bac:-BAL.bacFee.backer});(c.bk[k]=c.bk[k]||[]).push(bk)}return}
  const t=mindPickBy(R2,x=>BAL.mind.pick.j34.base+Math.max(0,hostility(p,x)),p);sabotage(p,t)/* npc-mind: was FIRST (always her) */}
 function sabotage(a,t){const c=ct();const o=cl(40+(a.tamco||0)/4-(t===S&&S.maid&&S.maid.loyal>=BAL.loy.trust?10:0),5,90);persCount(a,"contest:scheme");
  if(roll(o)){c.sab[key(t)]=(c.sab[key(t)]||0)+1;const m=t===S?`Đàn của ngươi bị cắt dây trước buổi diễn (vòng sau -2).`:`${a===S?"Ngươi":a.name} phá ${t.name}: vòng sau nàng -2.`;if(t===S||a===S)log(m);return m}
@@ -49,8 +50,11 @@ function contestEnd(){const c=ct();const C=c.c.map(byKey).filter(p=>p&&(p===S||p
 function contestWeek(){const c=ct();if(!c)return;if(!c.c.map(byKey).some(p=>p&&(p===S||p.alive)))return void(S.contest=null);const gap=c.len;if((wk()-c.t0)%gap!==0||wk()===c.t0)return;
  if(c.round<3){for(const k of c.c){const p=byKey(k);if(p&&p!==S&&p.alive&&!c.dq.includes(k))npcContestAct(p)}runRound();if(c.round<3&&c.c.includes("me")&&!c.dq.includes("me"))myBetween();if(c.round>=3)contestEnd()}else contestEnd()}
 /* seats open → contest instead of a weighted pick; the old Hoàng hậu pick is replaced too */
+/* npc-purpose G2: she courts a NAMED clan head (j55 court data): the strongest house friendly to hers that does not back her yet */
+function ctBacker(p){try{if(typeof trS!=="function"||typeof CLANS==="undefined")return null;const T=trS();if(!T||!T.H)return null;const B=BAL.ag.why.g2b.bk,mh=tdHouse(p);
+ const c=npwPick(CLANS.filter(c=>c!==mh&&T.H[c]&&!tdBacks(T.H[c],p)),c=>B.base+T.H[c].pow*B.pow+(mh?tdRel(c,mh):0)*B.rel);return c?`${TDOFF[c]} ${T.H[c].name}`:null}catch(e){return null}}
 function fillSeats(){let ev="";if(ct())return"";for(const r of [6,5,4,3]){if(!seatFree(r))continue;const C=consorts().filter(p=>candOK(p,r));if(C.length>=2||(C.length===1&&C[0]===S&&false)){ev+=contestOpen(r);break}}return ev}
-(function(){const r0=rivalsTurn;rivalsTurn=function(){window.__noOldSeat=1;let ev="";try{ev=r0.apply(this,arguments)}finally{window.__noOldSeat=0}try{if(!S.dead){if(!queenP()&&!ct()){if(S.vacSince==null)S.vacSince=S.turn;if(S.turn-S.vacSince>=3)ev+=contestOpen(7);if(!ct()&&S.turn-S.vacSince>=18&&roomFor("consort")&&roll(10)){const n=newRival(7,true);Object.assign(n,drawFace());n.rank=6;n.queen=true;n.dad=80;rivals.unshift(n);ev+=`<b>Thánh chỉ: rước ${n.name}, con gái danh môn, vào cung lập làm Hoàng hậu.</b> `}}contestWeek()}}catch(e){}return ev}})();
+(function(){const r0=rivalsTurn;rivalsTurn=function(){window.__noOldSeat=1;let ev="";try{ev=r0.apply(this,arguments)}finally{window.__noOldSeat=0}try{if(!S.dead){if(!queenP()&&!ct()){if(S.vacSince==null)S.vacSince=S.turn;if(S.turn-S.vacSince>=3)ev+=contestOpen(7);if(!ct()&&S.turn-S.vacSince>=18&&roomFor("consort")){const oq=npcWhy("empQueen",{});if(oq&&roll(10)){const n=newRival(7,true);Object.assign(n,drawFace());n.rank=6;n.queen=true;n.dad=80;rivals.unshift(n);ev+=`<b>Thánh chỉ: ${oq.why}, Hoàng thượng rước ${n.name}, con gái danh môn, vào cung lập làm Hoàng hậu.</b> `}}}contestWeek()}}catch(e){}return ev}})();
 /* while a seat is contested, nobody walks into it by plain decree */
 (function(){const q0=promoReqP;promoReqP=function(p){const L=q0.apply(this,arguments);const c=ct();const r=rkOf(p)+1;if(c&&c.r===r&&!window.__seatPick)L.push([false,`Đang tranh ghế ${r>=7?"Hoàng hậu":RANKS[r].n} (vòng ${Math.min(3,c.round+1)}/3)`]);return L}})();
 /* the contest card stays reachable from the rank board */

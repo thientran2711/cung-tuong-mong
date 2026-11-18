@@ -102,13 +102,13 @@ function tdBackW(p){const T=S&&S.trieu;if(!T||!T.H)return 0;let w=0;for(const c 
 (function(){if(typeof backers!=="function")return;const b0=backers;backers=function(p){const L=b0.apply(this,arguments);try{const T=S&&S.trieu;if(T&&T.H)for(const c in T.H){const h=T.H[c];if(c!==tdHouse(p)&&tdBacks(h,p))L.push(`${TDOFF[c]} ${h.name}`)}}catch(e){}return L}})();
 
 /* ---------- memorials on harem matters (at most one a month) ---------- */
-function tdSoMonth(force){const T=trS();if(!force&&(S.turn-T.soT<TD.soGap||!roll(TD.so)))return"";const opts=[];
- if(T.praise)opts.push(["praise",6]);
- if(typeof kvDebate==="function"&&S.heir&&S.heir.k&&S.heir.k.alive&&typeof kvOrder==="function"&&typeof kvQueenMom==="function"&&!kvQueenMom(S.heir.v)&&kvOrder().some(x=>x.dich&&!x.k.heir&&x.k.age>=6))opts.push(["dich",3]);
- const imp=tdImpPick();if(imp)opts.push(["imp",4]);
- const ty=CLANS.filter(c=>T.H[c].pow>=65);if(ty.length&&T.tyY!==S.year&&liveRivals(true).length+1<(typeof CAPC==="number"?CAPC:16)-1&&roomFor("consort"))opts.push(["tuyen",2]);
- const cc=consorts().filter(p=>(p.cc||0)>=2);if(cc.length)opts.push(["cc",2]);
- const f=force&&opts.find(x=>x[0]===force);let k;if(f)k=f[0];else{if(!opts.length)return"";let r=Math.random()*opts.reduce((s,x)=>s+x[1],0),i=0;while(r>opts[i][1]&&i<opts.length-1){r-=opts[i][1];i++}k=opts[i][0]}
+function tdSoMonth(force){const T=trS();if(!force&&S.turn-T.soT<TD.soGap)return"";const opts=[],SB=BAL.ag.why.g2b.so;/* npc-purpose G2: each memorial has a named clan head with a stake; weights = that stake */
+ if(T.praise&&T.H[T.praise])opts.push(["praise",SB.praise+T.H[T.praise].pow*SB.praisePow]);
+ if(typeof kvDebate==="function"&&S.heir&&S.heir.k&&S.heir.k.alive&&typeof kvOrder==="function"&&typeof kvQueenMom==="function"&&!kvQueenMom(S.heir.v)&&kvOrder().some(x=>x.dich&&!x.k.heir&&x.k.age>=6)){const q=queenP();const c=q&&q!==S?tdHouse(q):S.rank>=7?tdHouse(S):null;const h=T.H[c||"Lễ bộ"];opts.push(["dich",(h?h.pow:0)*SB.dich])}
+ const imp=tdImpPick();if(imp)opts.push(["imp",(imp[2]||1)*SB.imp]);
+ const ty=CLANS.filter(c=>T.H[c].pow>=65);if(ty.length&&T.tyY!==S.year&&liveRivals(true).length+1<(typeof CAPC==="number"?CAPC:16)-1&&roomFor("consort"))opts.push(["tuyen",(Math.max(...ty.map(c=>T.H[c].pow))-SB.tuyen0)*SB.tuyen]);
+ const cc=consorts().filter(p=>(p.cc||0)>=2);if(cc.length)opts.push(["cc",Math.max(...cc.map(p=>p.cc||0))*SB.cc]);
+ const f=force&&opts.find(x=>x[0]===force);let k;if(f)k=f[0];else{const pk=npwPick(opts,x=>x[1]);if(!pk||!force&&!roll(TD.so))return"";k=pk[0]}/* npc-purpose G2: the strongest stake speaks; TD.so = whether it reaches the throne this month */
  T.soT=S.turn;let ev="";
  if(k==="praise"){const c=T.praise;T.praise=null;const h=T.H[c];tdPowAdd(c,BAL.eff.j55.tdSoMonth);const M=tdMembers(c);M.forEach(p=>ap(p,{danh:2}));
   ev=`<b>Sớ khen:</b> triều thần dâng sớ ca ngợi ${TDOFF[c]} ${h.name}. Nhà ${c} thế lực ${balSg(BAL.eff.j55.tdSoMonth)}; ${M.length?`phi tần nhà ấy được thơm lây (Danh +2): ${M.map(tdName).join(", ")}`:"trong cung chưa có phi tần nhà ấy"}. `;
@@ -117,18 +117,18 @@ function tdSoMonth(force){const T=trS();if(!force&&(S.turn-T.soT<TD.soGap||!roll
   if(!r){T.soT=-9;return""}const won=S.heir&&S.heir.k&&kvQueenMom(S.heir.v);tdPowAdd(sp,won?BAL.eff.j55.tdSoMonth_2[0]:BAL.eff.j55.tdSoMonth_2[1]);
   ev=`${TDOFF[sp]} ${h.name} đứng đầu bá quan. ${r}Nhà ${sp} thế lực ${won?"+4":"-3"}. `;tdNews(`${TDOFF[sp]} ${h.name} dâng sớ xin lập đích; ${won?"Hoàng thượng nghe theo":"Hoàng thượng chưa nghe"}.`)}
  else if(k==="imp"){const [cA,t]=imp;ev=tdImpeach(cA,t)}
- else if(k==="tuyen"){const c=pick(ty);const h=T.H[c];T.tyY=S.year;const o=cl(30+(h.pow-60)+(S.emp.mood<=1?10:-10),10,85);
+ else if(k==="tuyen"){const c=npwPick(ty,c=>T.H[c].pow)||ty[0];const h=T.H[c];T.tyY=S.year;const o=cl(30+(h.pow-60)+(S.emp.mood<=1?10:-10),10,85);
   if(roll(o)){const n=newRival(roll(70)?0:1);Object.assign(n,drawFace());n.age=18+R(4);n.clan=c;n.dad=h.pow;rivals.push(n);try{palFix()}catch(e){}tdPowAdd(c,BAL.eff.j55.tdSoMonth_3);
    ev=`<b>Sớ xin tuyển tú:</b> ${TDOFF[c]} ${h.name} xin đưa con gái trong họ vào cung; Hoàng thượng chuẩn (khả năng: ${chanceLo(o)}). ${n.name} vào cung, phong ${RANKS[n.rank].n}, người nhà ${c}. `;tdNews(`Nhà ${c} đưa ${n.name} vào cung.`)}
   else{tdPowAdd(c,BAL.eff.j55.tdSoMonth_4);ev=`<b>Sớ xin tuyển tú:</b> ${TDOFF[c]} ${h.name} xin đưa con gái trong họ vào cung; Hoàng thượng gác lại (khả năng: ${chanceLo(o)}). Nhà ${c} thế lực ${balSg(BAL.eff.j55.tdSoMonth_4)}. `;tdNews(`Nhà ${c} xin đưa người vào cung, bị gác lại.`)}}
- else if(k==="cc"){const p=pick(cc);const o=cl(25+(p.cc||0)*10-(p.tamco||0)/5,10,80);
+ else if(k==="cc"){const p=npwPick(cc,p=>p.cc||0)||cc[0];const o=cl(25+(p.cc||0)*10-(p.tamco||0)/5,10,80);
   if(roll(o)){p.cc=0;const q=queenP();if(p===S){apply({th:-8});if(q&&q!==S)apply({hh:BAL.eff.j55.tdSoMonth_5})}else{p.th=(p.th||0)-8;if(q&&q!==p&&q!==S)affAdd(q,p,BAL.eff.j55.tdSoMonth_5);if(q===S)affAdd(S,p,BAL.eff.j55.tdSoMonth_6)}punish(p,"hậu cung can chính",1);
    ev=`<span class="r"><b>Sớ hặc can chính:</b> ngự sử tâu ${tdName(p)} nhiều lần nhờ cậy ngoại triều. ${p===S?"Ngươi":p.name} bị cấm túc; Thái hậu -8, Hoàng hậu ${balSg(BAL.eff.j55.tdSoMonth_5)} với ${p===S?"ngươi":"nàng"}.</span> `;tdNews(`Ngự sử hặc ${tdName(p)} can chính.`)}
   else{p.cc=Math.max(0,(p.cc||0)-1);ev=`<b>Sớ hặc can chính:</b> ngự sử tâu ${tdName(p)} nhờ cậy ngoại triều; Hoàng thượng cho là chưa đủ chứng, bỏ qua. `;tdNews(`Ngự sử hặc ${tdName(p)} can chính; ngài bỏ qua.`)}}
  return ev}
 /* a censor from a house that opposes hers; the most hostile pair first */
 function tdImpPick(){const T=trS();const L=[];for(const t of consorts()){const cT=tdHouse(t);if(!cT)continue;for(const cA of CLANS){if(cA===cT)continue;const h=T.H[cA];const w=(tdRel(cA,cT)<=-25?3:tdRel(cA,cT)<0?1:0)*(nv(h,"feudW"));if(w>0)L.push([cA,t,w])}}
- if(!L.length)return null;let r=Math.random()*L.reduce((s,x)=>s+x[2],0),i=0;while(r>L[i][2]&&i<L.length-1){r-=L[i][2];i++}return [L[i][0],L[i][1]]}
+ const x=npwPick(L,y=>y[2]);return x?[x[0],x[1],x[2]]:null}/* npc-purpose G2: the clan with the deepest feud impeaches */
 function tdImpeach(cA,t){const T=trS();const hA=T.H[cA],cT=tdHouse(t),hT=T.H[cT];const evd=Math.max(0,...tdMembers(cA).map(m=>deG(m,t)));
  const o=cl(Math.round(40+evd*15+(hA.pow-hT.pow)/3+(S.emp.mood>=2?10:0)),10,90);const pre=`<b>Sớ hặc tội:</b> ${TDOFF[cA]} ${hA.name} hặc cha của ${tdName(t)} (nhà ${cT}) tham ô. `;let ev;
  if(tdDadT(t)&&roll(o)){tdPowAdd(cT,BAL.eff.j55.tdImpeach);t.dad=cl((t.dad||40)-15,0,100);ap(t,{danh:-4});tdDadClear(t);tdMembers(cA).forEach(m=>deA(m,t,-9));tdRelAdd(cA,cT,-15);tdPowAdd(cA,BAL.eff.j55.tdImpeach_2);
@@ -146,10 +146,13 @@ function tdMonth(){if(!tdOn())return"";const T=trS();let ev="";
  if(TD.npc)for(const v of liveRivals(true)){if(v.confined||S.dead)continue;const w=TD.npc*traitsOf(v).reduce((m,t)=>m*(TDAMB[t]||1),1);let r="";
   const tg=consorts().filter(t=>t!==v&&tdHouse(t)&&!sameHouse(v,t));
   const leakT=mindPickBy(tg.filter(t=>deG(v,t)>=1),t=>deG(v,t)+Math.max(0,hostility(v,t))/BAL.mind.pick.j55.host,v);/* npc-mind: was FIRST */
-  if(leakT&&v.bac>=BAL.bacFee.tdLeak&&roll(22*w))r=tdLeak(v,leakT);
-  else if(v.bac>=60&&roll(3*w)){const H=CLANS.map(c=>T.H[c]).filter(h=>!tdBacks(h,v)&&h.c!==tdHouse(v));const h=H.sort((a,b)=>b.pow-a.pow)[R(Math.min(3,H.length))];if(h)r=tdGift(v,h)}
-  else if(tg.length&&v.bac>=50&&roll(2*w)){const t=pickTarget(v);if(t&&tg.includes(t))r=tdProbe(v,t)}
-  else if(tdHouse(v)&&S.turn-(v.askT==null?-99:v.askT)>=3&&roll(2.5*w))r=tdAsk(v);
+  /* npc-purpose G2: she picks the court act her own state calls for (grudge → leak / probe, too little backing → gift, low favour → ask her clan); the old odds roll only whether it is done this month */
+  const TB=BAL.ag.why.g2b.td,H=v.bac>=60?CLANS.map(c=>T.H[c]).filter(h=>!tdBacks(h,v)&&h.c!==tdHouse(v)):[],pt=tg.length&&v.bac>=50?pickTarget(v):null;
+  const ak=npwPick(["leak","gift","probe","ask"],k=>k==="leak"?(leakT&&v.bac>=BAL.bacFee.tdLeak?deG(v,leakT)*TB.deg+Math.max(0,hostility(v,leakT))*TB.host:0):k==="gift"?(H.length?TB.need-tdBackW(v)*TB.backW:0):k==="probe"?(pt&&tg.includes(pt)?Math.max(0,hostility(v,pt))*TB.host:0):(tdHouse(v)&&S.turn-(v.askT==null?-99:v.askT)>=3?TB.ask+Math.max(0,TB.sung0-(v.sung||0))*TB.askW:0));
+  if(ak==="leak"&&roll(22*w))r=tdLeak(v,leakT);
+  else if(ak==="gift"&&roll(3*w)){const h=npwPick(H,h=>h.pow);if(h)r=tdGift(v,h)}
+  else if(ak==="probe"&&roll(2*w))r=tdProbe(v,pt);
+  else if(ak==="ask"&&roll(2.5*w))r=tdAsk(v);
   if(r){const pub=/Ngự sử|bị cách chức|bị bác|Ngươi biết chuyện/.test(r);ev+=pub?r:seenNPC(v,v,r)||""}}
  ev+=tdKin();ev+=tdSoMonth();return ev}
 (function(){const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments);try{if(!S.dead)ev=(ev||"")+(tdMonth()||"")}catch(e){console.error(e)}return ev}})();
