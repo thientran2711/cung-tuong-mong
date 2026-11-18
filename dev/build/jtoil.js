@@ -678,7 +678,8 @@ const TOIL_SVGC={};
 function toilRnd(seed){let a=(seed*2654435761)>>>0||1;return()=>{a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296}}
 /* col = her picks (toilColOf): the blush disc and the fallback lip oval take HER colours; noLip = the lips come from the colour layer (§60) */
 function toilMakeupSvg(file,look,col,noLip){const L=TOIL_LOOKS[look];const v=toilRow(file);if(!L||!v)return"";col=col||toilColDef();if(MK_FIT.face(file))noLip=true;/* a face with a mesh gets its lips ONLY from the colour layer (mesh points); the oval is for mesh-less faces */
- const key=file+"|"+(v===TOIL_FIT.fit[file]?0:1)+"|"+look+"|"+col.ma+"|"+col.son+"|"+(noLip?1:0)+"|"+(L.vung?col.seed|0:"");if(TOIL_SVGC[key])return TOIL_SVGC[key];
+ const NO=col.no||[];if(NO.includes("son"))noLip=true;const noBl=NO.includes("ma");/* a part she does not own is not painted (col.no) */
+ const key=file+"|"+(v===TOIL_FIT.fit[file]?0:1)+"|"+look+"|"+col.ma+"|"+col.son+"|"+(noLip?1:0)+"|"+(noBl?1:0)+"|"+(L.vung?col.seed|0:"");if(TOIL_SVGC[key])return TOIL_SVGC[key];
  const A=v[8]||1.3,Y=y=>y*A,[mx,my,lx,ly,rx,ry,fw]=v;const H=100*A;const c=(a)=>`rgb(${a[0]},${a[1]},${a[2]})`;
  const cx=(lx+rx)/2,cy=Y((ly+ry)/2);const d=Math.hypot(rx-lx,Y(ry)-Y(ly))||fw*.5;const ang=Math.atan2(Y(ry)-Y(ly),rx-lx)*180/Math.PI;
  const sk=L.skin,bl=toilColRGB("ma",col.ma).concat(L.blush.slice(3)),lp=toilColRGB("son",col.son).concat(L.lip.slice(3));const br=fw*bl[4]*1.0;
@@ -691,9 +692,9 @@ function toilMakeupSvg(file,look,col,noLip){const L=TOIL_LOOKS[look];const v=toi
  `<radialGradient id="b"><stop offset="0" stop-color="${c(bl)}" stop-opacity="${bl[3]}"/><stop offset="${bl[5]||.35}" stop-color="${c(bl)}" stop-opacity="${(bl[3]*(bl[5]?.92:.55)).toFixed(3)}"/><stop offset="1" stop-color="${c(bl)}" stop-opacity="0"/></radialGradient>`+
  `<filter id="f" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="${(fw*.012).toFixed(3)}"/></filter><filter id="g" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="${(fw*.05).toFixed(3)}"/></filter></defs>`+
  `<g transform="rotate(${ang.toFixed(2)} ${cx.toFixed(2)} ${cy.toFixed(2)})"><ellipse cx="${cx.toFixed(2)}" cy="${(cy-d*(L.powder?.02:.18)).toFixed(2)}" rx="${(d*sk[4]*1.25).toFixed(2)}" ry="${(d*sk[4]*1.55).toFixed(2)}" fill="url(#s)"/></g>`+
- `<ellipse cx="${(lx+jl[1]).toFixed(2)}" cy="${(Y(ly)+jl[2]).toFixed(2)}" rx="${(br*jl[0]).toFixed(2)}" ry="${(br*jl[0]*(L.vung?ja[0]:1)).toFixed(2)}" transform="rotate(${ja[2].toFixed(1)} ${(lx+jl[1]).toFixed(2)} ${(Y(ly)+jl[2]).toFixed(2)})" fill="url(#b)" fill-opacity="${Math.min(1,jl[3])}"/><ellipse cx="${(rx+jr[1]).toFixed(2)}" cy="${(Y(ry)+jr[2]).toFixed(2)}" rx="${(br*jr[0]).toFixed(2)}" ry="${(br*jr[0]*(L.vung?ja[1]:1)).toFixed(2)}" transform="rotate(${ja[3].toFixed(1)} ${(rx+jr[1]).toFixed(2)} ${(Y(ry)+jr[2]).toFixed(2)})" fill="url(#b)" fill-opacity="${jr[3]}"/>`+(pw?`<ellipse cx="${pw[0].toFixed(2)}" cy="${pw[1].toFixed(2)}" rx="${pw[2].toFixed(2)}" ry="${(pw[2]*.7).toFixed(2)}" fill="rgb(255,250,246)" fill-opacity=".2" filter="url(#f)"/>`:"")+
+ (noBl?"":`<ellipse cx="${(lx+jl[1]).toFixed(2)}" cy="${(Y(ly)+jl[2]).toFixed(2)}" rx="${(br*jl[0]).toFixed(2)}" ry="${(br*jl[0]*(L.vung?ja[0]:1)).toFixed(2)}" transform="rotate(${ja[2].toFixed(1)} ${(lx+jl[1]).toFixed(2)} ${(Y(ly)+jl[2]).toFixed(2)})" fill="url(#b)" fill-opacity="${Math.min(1,jl[3])}"/><ellipse cx="${(rx+jr[1]).toFixed(2)}" cy="${(Y(ry)+jr[2]).toFixed(2)}" rx="${(br*jr[0]).toFixed(2)}" ry="${(br*jr[0]*(L.vung?ja[1]:1)).toFixed(2)}" transform="rotate(${ja[3].toFixed(1)} ${(rx+jr[1]).toFixed(2)} ${(Y(ry)+jr[2]).toFixed(2)})" fill="url(#b)" fill-opacity="${jr[3]}"/>`)+(pw?`<ellipse cx="${pw[0].toFixed(2)}" cy="${pw[1].toFixed(2)}" rx="${pw[2].toFixed(2)}" ry="${(pw[2]*.7).toFixed(2)}" fill="rgb(255,250,246)" fill-opacity=".2" filter="url(#f)"/>`:"")+
  (L.glow?`<ellipse cx="${lx.toFixed(2)}" cy="${(Y(ly)-fw*.07).toFixed(2)}" rx="${(fw*.13).toFixed(2)}" ry="${(fw*.06).toFixed(2)}" transform="rotate(${ang.toFixed(2)} ${lx} ${Y(ly).toFixed(2)})" fill="rgb(255,240,208)" fill-opacity="${look==="tuyet"?.34:.18}" filter="url(#g)"/><ellipse cx="${rx.toFixed(2)}" cy="${(Y(ry)-fw*.07).toFixed(2)}" rx="${(fw*.13).toFixed(2)}" ry="${(fw*.06).toFixed(2)}" transform="rotate(${ang.toFixed(2)} ${rx} ${Y(ry).toFixed(2)})" fill="rgb(255,240,208)" fill-opacity="${look==="tuyet"?.34:.18}" filter="url(#g)"/>`:"")+
- (L.vung?`<ellipse cx="${(mx+(R()<.5?-1:1)*fw*.05).toFixed(2)}" cy="${(Y(my)+fw*.045*A/1.3).toFixed(2)}" rx="${(fw*.085).toFixed(2)}" ry="${(fw*.032).toFixed(2)}" transform="rotate(${ang.toFixed(2)} ${mx} ${Y(my).toFixed(2)})" fill="${c(lp)}" fill-opacity=".5" filter="url(#f)"/>`:"")+
+ (L.vung&&!NO.includes("son")?`<ellipse cx="${(mx+(R()<.5?-1:1)*fw*.05).toFixed(2)}" cy="${(Y(my)+fw*.045*A/1.3).toFixed(2)}" rx="${(fw*.085).toFixed(2)}" ry="${(fw*.032).toFixed(2)}" transform="rotate(${ang.toFixed(2)} ${mx} ${Y(my).toFixed(2)})" fill="${c(lp)}" fill-opacity=".5" filter="url(#f)"/>`:"")+
  (noLip?"":`<ellipse cx="${mx}" cy="${Y(my).toFixed(2)}" rx="${(fw*lp[4]).toFixed(2)}" ry="${(fw*lp[5]).toFixed(2)}" transform="rotate(${ang.toFixed(2)} ${mx} ${Y(my).toFixed(2)})" fill="${c(lp)}" fill-opacity="${lp[3]}" filter="url(#f)"/>`)+`</svg>`;
  return TOIL_SVGC[key]="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(svg)}
 window.toilMakeupSvg=toilMakeupSvg;window.TOIL_FIT=TOIL_FIT;
@@ -816,7 +817,7 @@ function toilPreRows(c){const cur=toilPreOf(c);return [["dep",TOIL_STY.dep],["di
 function toilColDef(){const o={};for(const k in TOIL_COL)o[k]=TOIL_COL[k].def;return o}
 function toilColE(part,k){const P=TOIL_COL[part];return P.L.find(x=>x[0]===k)||P.L.find(x=>x[0]===P.def)}
 function toilColRGB(part,k){return toilColE(part,k)[3].slice()}
-function toilColFix(c){const o=toilColDef();if(c&&typeof c==="object"){for(const k in o)if(TOIL_COL[k].L.some(x=>x[0]===c[k]))o[k]=c[k];if(c.want==="diem")o.want="diem";if(c.seed!=null&&isFinite(c.seed))o.seed=c.seed|0}return o}
+function toilColFix(c){const o=toilColDef();if(c&&typeof c==="object"){for(const k in o)if(TOIL_COL[k].L.some(x=>x[0]===c[k]))o[k]=c[k];if(c.want==="diem")o.want="diem";if(c.seed!=null&&isFinite(c.seed))o.seed=c.seed|0;if(Array.isArray(c.no)){const N=c.no.filter(k=>TOIL_COL[k]).sort();if(N.length)o.no=N}}return o}/* col.no = the parts she does not own (jration): never painted */
 function toilColOfP(p){if(p&&p!==S&&p.coop){const r=toilFriendRec(p);return toilColFix(r&&r.col)}if(TOIL.prev)return TOIL.prev.col;const r=p===S?toilToday(S):null;return toilColFix(r&&r.col)}
 function toilColText(c){c=toilColFix(c);return ["mat","ma","son","may"].map(k=>toilColE(k,c[k])[1]).join(", ")}
 /* strength by look: lip / eyelid colour share, eyelid height (share of the lid→brow gap), brow tint, outer wing, lower lash line */
@@ -859,7 +860,7 @@ function toilMkPts(v){const P=[];for(let i=0;i<60;i++)P.push([v[2*i]/40,v[2*i+1]
 function toilMkBox(v){const P=toilMkPts(v);let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;P.forEach(([x,y])=>{x0=Math.min(x0,x);x1=Math.max(x1,x);y0=Math.min(y0,y);y1=Math.max(y1,y)});
  const mx=(x1-x0)*.3,my=(y1-y0)*.3;return[x0-mx,y0-my,x1-x0+2*mx,y1-y0+2*my].map(n=>+n.toFixed(3))}
 const TOIL_MKA={};/* key -> [file,look,col]: the size pass (toilLodPass) re-fetches the same layer at another strength step */
-function toilMkLayer(file,look,col,step){const v=MK_FIT.get(file);if(!v||!TOIL_MKS[look])return"";const base=[file,look,col.mat,col.ma,col.son,col.may,look==="vung"?(col.seed|0)+"/"+BAL.toil.vungSm+"/"+BAL.toil.vungSide+"/"+BAL.toil.vungRot+"/"+BAL.toil.vungSmSize:""].join("|"),key=step?base+"|L"+step:base;TOIL_MKA[base]=[file,look,col];
+function toilMkLayer(file,look,col,step){const v=MK_FIT.get(file);if(!v||!TOIL_MKS[look])return"";const base=[file,look,col.mat,col.ma,col.son,col.may,(col.no||[]).join(","),look==="vung"?(col.seed|0)+"/"+BAL.toil.vungSm+"/"+BAL.toil.vungSide+"/"+BAL.toil.vungRot+"/"+BAL.toil.vungSmSize:""].join("|"),key=step?base+"|L"+step:base;TOIL_MKA[base]=[file,look,col];
  let e=TOIL_MKC[key];if(!e){e=TOIL_MKC[key]={box:toilMkBox(v),src:""};TOIL_MKQ.push(key);if(TOIL_MKQ.length>200)delete TOIL_MKC[TOIL_MKQ.shift()];toilMkPaint(file,v,look,col,e,key,step||0)}
  const b=e.box;return `<img class="kmkl kmkc kmkl-${look}" data-mkk="${key}" src="${e.src||TOIL_BLANK}" alt="" aria-hidden="true" style="--fleft:${b[0]}%;--ftop:${b[1]}%;--fwidth:${b[2]}%;--fheight:${b[3]}%">`}
 function toilMkPaint(file,v,look,col,e,key,step){const im=new Image();im.crossOrigin="anonymous";im.decoding="async";
@@ -889,7 +890,7 @@ function toilMkGeom(P,T){const av=a=>a.reduce((q,p)=>[q[0]+p[0]/a.length,q[1]+p[
  return{u,mid,ang,eyeY,mY,cheeks,ol,inOl,eyeBot,ca,cb,lc}}
 window.toilMkGeom=toilMkGeom;
 function toilLodT(T,lod,look){if(!lod)return T;const L=BAL.toil.lod,o=Object.assign({},T),lw=(L.look&&L.look[look])||1;for(const k in L.cue)if(o[k])o[k]=o[k]*(1+(L.boost-1)*lod*L.cue[k]*(k==='bl'?1:lw));return o}
-function toilMkDraw(im,v,look,col,box,row,lod){const W=im.naturalWidth,H=im.naturalHeight,T=toilLodT((look==='vung'&&toilVungB(col))?TOIL_MKS.vungB:TOIL_MKS[look],lod,look);
+function toilMkDraw(im,v,look,col,box,row,lod){const NO=col.no||[],noB=NO.includes('may'),noE=NO.includes('mat'),noL=NO.includes('son'),noM=NO.includes('ma');/* col.no: parts she does not own are not painted (jration) */const W=im.naturalWidth,H=im.naturalHeight,T=toilLodT((look==='vung'&&toilVungB(col))?TOIL_MKS.vungB:TOIL_MKS[look],lod,look);
  const bx=box[0]/100*W,by=box[1]/100*H,bw=box[2]/100*W,bh=box[3]/100*H;const K=Math.max(1,Math.min(3,160/bw));/* small figure faces are worked at ≥160 px */
  const cw=Math.max(2,Math.round(bw*K)),chh=Math.max(2,Math.round(bh*K));const mk=()=>{const c=document.createElement("canvas");c.width=cw;c.height=chh;const g=c.getContext("2d");g.setTransform(cw/bw,0,0,chh/bh,-bx*cw/bw,-by*chh/bh);return[c,g]};
  const P=toilMkPts(v).map(([x,y])=>[x/100*W,y/100*H]);const [c0,g0]=mk();g0.drawImage(im,0,0,W,H);
@@ -931,7 +932,7 @@ const eh=VU?[.6+.55*R(),.3+.35*R()]:[1,1];let en=0;
 
  if(T.sk)blob(gs,cmx,cmy,u*1.22,u*1.6,ang,[255,249,240],T.sk);
  if(T.hl)cheeks.forEach(c=>blob(gs,c.x,c.y-u*.16,u*.2,u*.15,0,[255,244,226],.2));/* tuyệt: soft round lights on the cheekbones (wide fall-off), never a streak */
- cheeks.forEach((c,i)=>{const j=VU?[.7+.7*R(),.7+.7*R(),(R()-.5)*u*.12,(R()-.5)*u*.09,.55+.8*R()]:[1,1,0,0,1];
+ if(!noM)cheeks.forEach((c,i)=>{const j=VU?[.7+.7*R(),.7+.7*R(),(R()-.5)*u*.12,(R()-.5)*u*.09,.55+.8*R()]:[1,1,0,0,1];
   blob(gs,c.x+j[2],c.y+j[3],c.rx*j[0],c.ry*j[1],c.rot+(VU?(R()-.5)*.5:0),mc,Math.min(.9,T.bl*j[4]),0,look==='vua'?BLP.v2:T.bp?BLP[T.bp]:T.diff?BLP.diff:BLP.wide);
   if(VU){/* small uneven blotches beside the cheek */for(let k=0;k<2;k++)blob(gs,c.x+(R()-.5)*c.rx*1.1,c.y+(R()-.5)*c.ry*1.2,u*(.09+.06*R()),u*(.06+.05*R()),R()*3,mc,.18+.12*R(),0,BLP.wide)}});
  /* vụng: powder PATCHES and streaks (irregular, a little cakey), not dots: long thin or lumpy, random turn, flat top */
@@ -959,7 +960,7 @@ const eh=VU?[.6+.55*R(),.3+.35*R()]:[1,1];let en=0;
  const NS=u*.14,hv=(x,y)=>{let h=(x*374761393+y*668265263+(col.seed|0)*982451653)|0;h=Math.imul(h^h>>>13,1274126177);return((h^h>>>16)>>>0)/4294967296};
  const nz=(x,y)=>{const fx=(x-lc[0])/NS,fy=(y-lc[1])/NS,ix=Math.floor(fx),iy=Math.floor(fy),tx=fx-ix,ty=fy-iy,sx=tx*tx*(3-2*tx),sy=ty*ty*(3-2*ty);
   const a=hv(ix,iy),b=hv(ix+1,iy),c=hv(ix,iy+1),d=hv(ix+1,iy+1);return a+(b-a)*sx+(c-a)*sy+(a-b-c+d)*sx*sy};
- for(let i=0;i<o.length;i+=4){const ab=mB[i+3]/255,ae=mE[i+3]/255,al=mL[i+3]/255,ai=VU?mI[i+3]/255:0,as=mSh[i+3]/255,ag=mGl[i+3]/255,ak=mS[i+3]/255;if(!(ab||ae||al||ai||as||ag||ak)){o[i+3]=0;continue}
+ for(let i=0;i<o.length;i+=4){const ab=noB?0:mB[i+3]/255,ae=noE?0:mE[i+3]/255,al=noL?0:mL[i+3]/255,ai=VU&&!noB?mI[i+3]/255:0,as=noE?0:mSh[i+3]/255,ag=noL?0:mGl[i+3]/255,ak=mS[i+3]/255;if(!(ab||ae||al||ai||as||ag||ak)){o[i+3]=0;continue}
   const pn=VU?.6+.55*nz(bx+((i>>2)%cw)*bw/cw,by+Math.floor((i>>2)/cw)*bh/chh):1;
   const r0=o[i],g1=o[i+1],b0=o[i+2],l=Lum(i);let r=r0,g=g1,b=b0,keep=1;
   if(ak){const a=ak*skinM(i,26,56)*(1-mX[i+3]/255)*(mO[i+3]/255);if(a>.002){r+=(mS[i]-r)*a;g+=(mS[i+1]-g)*a;b+=(mS[i+2]-b)*a;keep*=1-a}}

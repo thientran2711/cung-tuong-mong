@@ -198,11 +198,11 @@ function itClean(){let n=0;try{const P=[S].concat(typeof rivals!=="undefined"&&A
 /* hidden taints on innocent items (two-way scheme tools) */
 const TAINT={xa:{n:"trộn xạ hương",on:["tuithom","huongtram"],need:"xahuong",c:0,hurt:"hại thai"},
  bua:{n:"giấu bùa chú",on:["tuithom","demgam"],c:30,il:1,hurt:"người giữ hao sức; khám ra là tội bùa ngải"},
- chi:{n:"pha chì",on:["sonphan"],c:20,hurt:"Sắc, Sức người dùng giảm dần"},
+ chi:{n:"pha chì",on:[],c:20,/* on: the son phấn boxes (jration lx*, which folds the old sonphan in) */hurt:"Sắc, Sức người dùng giảm dần"},
  meo:{n:"nhồi lông mèo",on:["demgam"],c:5,hurt:"người suyễn hao sức"},
  gia:{n:"khắc dấu 'ngự ban' giả",on:["vongngoc","tramngoc"],c:50,il:1,hurt:"khám ra là tội khi quân"},
  trom:{n:"thành ngọc bội ngự dụng bị trộm",on:["ngocboi","vongngoc"],c:80,il:1,hurt:"khám ra là tội trộm"}};
-const SHOP_ALL=["tramngoc","vongngoc","sonphan","luahang","gamto","nhansam","yensao","agiao","giaidoc","thuocanthai","huongtram","tuithom","tranhco","nghien","dancoc","demgam","boodieu","vongvang"];
+const SHOP_ALL=["tramngoc","vongngoc","luahang","gamto","nhansam","yensao","agiao","giaidoc","thuocanthai","huongtram","tuithom","tranhco","nghien","dancoc","demgam","boodieu","vongvang"];
 function restock(){const L=shuf(SHOP_ALL.slice()).slice(0,6);if(roll(45))L.push(pick(["xahuong","hacdinh","botngua"]));S.shop=L}
 const ITIMG={tramphuong:"tram-phuong",vongngoc:"vong-ngoc",boodieu:"bo-dieu",gamto:"gam-to-chau",luahang:"lua-hang-chau",nhansam:"nhan-sam",yensao:"yen-sao",agiao:"a-giao",giaidoc:"thuoc-giai",thuocanthai:"thuoc-an-thai",huongtram:"huong-tram",xahuong:"xa-huong",hacdinh:"hac-dinh-hong",botngua:"bot-ngua",tranhco:"tranh-co",nghien:"nghien-muc",dancoc:"dan-co",ngocboi:"ngoc-boi-ban",thunha:"thu-nha",tuithom:"tui-thom",sonphan:"phan-son",chungcu:"hinh-nhan"};
 function iic(k,s){return ITIMG[k]?ic("item-"+ITIMG[k],s||22):""}
@@ -264,7 +264,7 @@ if(e.by&&e.by!==key(p))p.framedBy=e.by;
  ap(p,{danh:BAL.eff.j8.danhSearch});punish(p,e.t==="gia"?"tội khi quân":"tàng trữ độc vật",2);return `<span class="r">Khám cung ${NM(p)} tìm thấy ${what}.</span> Danh ${balSg(BAL.eff.j8.danhSearch)}. `}
 /* bestowals */
 const TITLES=["Thục","Hiền","Đức","Thuần","Uyển","Trinh","Gia","Ý","Tĩnh","Huệ"];
-const BEST={night:["tramngoc","vongngoc","luahang","yensao","sonphan","huongtram"],contest:["dancoc","gamto","vongngoc","tranhco"],son:["ngocboi","nhansam","vongvang","gamto"],promo:["boodieu","gamto","vongvang","tranhco"],accuse:["vongngoc","nghien","luahang"],story:["tranhco","vongngoc","nhansam","chungcu"],birthday:["dancoc","tramngoc","gamto"]};
+const BEST={night:["tramngoc","vongngoc","luahang","yensao","lxson1","huongtram"],contest:["dancoc","gamto","vongngoc","tranhco"],son:["ngocboi","nhansam","vongvang","gamto"],promo:["boodieu","gamto","vongvang","tranhco"],accuse:["vongngoc","nghien","luahang"],story:["tranhco","vongngoc","nhansam","chungcu"],birthday:["dancoc","tramngoc","gamto"]};
 const BWHY={night:"sau đêm thị tẩm",contest:"vì tài nghệ hơn người",son:"mừng hoàng tử ra đời",promo:"nhân dịp tấn phong",accuse:"vì tố giác kẻ gian",story:"",birthday:"nhân tiết Vạn thọ"};
 function bestow(p,why){if(!p||p.dead||(p!==S&&!p.alive))return;let L=BEST[why]||BEST.night;L=L.filter(k=>!itm(k).rk||itm(k).rk<=rkOf(p)||why==="son");const k=pick(L.length?L:["tramngoc"]);p.inv.push({k,from:"emp"});
  /* hiệu (title-sys2): granted by the ONE threshold rule dhHieuOK / dhHieuGrant (jdh2, BAL.dh.hieu), no roll; book + seal come with it */

@@ -24,34 +24,43 @@ Object.assign(BAL,{ration:{on:true,
  parts:["may","son","ma","mat"],       /* the four palette rows of the mirror (TOIL_COL), in the order the months rotate them */
  n:[2,2,2,2,2,2,2,2],                  /* boxes issued a month by rank (Đáp ứng … Hoàng hậu): the same count — balance law OD 17/11 08:25Z (C) */
  tier:[0,0,0,1,1,2,2,2],               /* their tier by rank: finer grade, not more boxes */
- uses:[3,4,5,6],                       /* lượt in a full box by tier */
- price:[8,20,45,90],                   /* Nội vụ phủ price by tier (hàng rong the same; sell back = half, issued = jstip resell) */
+ uses:[6,6,6,6],                       /* lượt in a full box: the SAME at every tier (balance law C: the tier is a finer look and a dearer box, never more lần) */
+ price:[8,16,30,60],                   /* the floor price of a box by tier (Nội vụ phủ, hàng rong; sell back = half, issued = jstip resell) */
+ buyK:.2,                              /* law C: she pays at least buyK × her monthly bổng (BAL.pay[rank]) for a box: "giá theo thể diện người mua" (lxPrice) — the same weight at every rank, like BAL.thy.cost */
  use:{moc:0,vung:1,vua:1,dep:2,tuyet:2},bold:1,  /* lượt per part per sitting by level; +bold for Kiểu cầu kỳ (owner table 08:25Z D) */
  cap:["moc","vua","vua","dep","tuyet"],/* the best face by how many parts she has (0..4) */
- rush:1.5,                             /* mua gấp at the mirror: Nội vụ phủ price × rush, tier 0 */
+ rush:1.5,                             /* mua gấp at the mirror: a box of her rank's tier, lxPrice × rush */
  shop:[0,1],                           /* tiers the hàng rong carries */
  coldTier:0,coldN:1,                   /* lãnh cung: one Thường box a month */
  borrow:{base:25,aff:2,ghen:10,whim:20,fail:-2,spare:2,trait:{"Ân cần":15,"Khiêm nhường":10,"Kín đáo":0,"Xảo quyệt":-5,"Tham vọng":-10,"Kiêu ngạo":-15}},
  beg:{hh:15,th:10,stat:2,fail:-3,cd:2},/* xin Hoàng hậu / Thái hậu: base + stat/2 (jveil xin road); fail costs favour; once per cd months */
  steal:{danh:-4,duc:-2,oan:10,cut:1,add:10},/* caught stealing: Danh, Đức, the victim's oán, bổng khất 1 month; odds = plant odds + add */
  npc:{use:3,buy:50,borrow:40,steal:12,stealGhen:50,ask:25,askAff:10},/* NPC month: lượt spent per part; chance to buy / borrow / steal when out; ask her */
- allergy:{sac:-4,rel:2,chiSac:-1,chiSuc:-3},  /* pha chì: the same numbers as the j8 use-effect of a lead-tainted item */               /* a tainted box (bột ngứa) at the sitting: Sắc; Thái y road unchanged */
- tribute:{ch:{promo:60,son:60,contest:35,birthday:50,night:5},ghen:3}}});
+ allergy:{rel:2,chiW:[.3,.45,.25],nguaW:[.2,.45,.35]},/* a tainted box at the sitting → the ONE rash system (jrash rashGive: timed, picture, Thái y): severity weights for pha chì / bột ngứa; the first use of a clean box rolls RASH.cos like any son phấn; rel = her oán toward the one who tainted it */
+ tribute:{ch:{promo:60,son:60,contest:35,birthday:50,sinhthan:50,night:5},ghen:3}}});
 const LX_KD="Son phấn";
 const LX_N={may:["Than liễu","Thanh đại","Họa mi đại","Loa tử đại"],son:["Son sáp","Son hoa hồng","Son điểm giáng","Son thiên chu cống"],
  ma:["Yên chi giấy","Yên chi bánh","Yên chi hoa hồng","Yên chi tiến cống"],mat:["Phấn gạo","Phấn hoa lài","Phấn ngọc trâm","Phấn trân châu ngự"]};
 const LX_PART={may:"kẻ mày",son:"tô son",ma:"đánh má",mat:"phấn mắt"};
+/* law C (OD 17/11 08:25Z C): a box costs at least BAL.ration.buyK of the buyer's bổng — high ranks pay as much of their purse as low ranks */
+function lxPrice(p,t){const B=BAL.ration;const f=B.price[Math.max(0,Math.min(3,t|0))];if(!p||p.out)return f;const r=Math.max(0,Math.min(7,(typeof rkOf==="function"?rkOf(p):p.rank)|0));return Math.max(f,Math.ceil(BAL.pay[r]*B.buyK))}
+function lxTierOf(p){return BAL.ration.tier[Math.max(0,Math.min(7,(typeof rkOf==="function"?rkOf(p):p.rank)|0))]}
+function lxKeys(){const K=[];for(const part of BAL.ration.parts)for(let t=0;t<4;t++)K.push(lxKey(part,t));return K}
 function lxKey(part,t){return "lx"+part+t}
 function lxOf(k){const m=/^lx(may|son|ma|mat)([0-3])$/.exec(String(k||""));return m?{part:m[1],t:+m[2]}:null}
 function lxOn(){return !!(BAL.ration&&BAL.ration.on)}
 /* ---------- the items (into IT: the ONE item table) ---------- */
 (function(){const B=BAL.ration;for(const part of B.parts)for(let t=0;t<4;t++){const k=lxKey(part,t);if(IT[k])continue;
-  IT[k]={n:LX_N[part][t],kd:LX_KD,d:`Hộp ${TOIL_COL[part].label.toLowerCase()} dùng khi điểm trang (${LX_PART[part]}): dùng được ${B.uses[t]} lần · tặng, bán được`,pr:B.price[t],tg:["rv"],lx:1}}
+  const lb=TOIL_COL[part].label.toLowerCase();IT[k]={n:LX_N[part][t],kd:LX_KD,d:`Hộp ${lb} dùng khi điểm trang${LX_PART[part]===lb?"":` (${LX_PART[part]})`}: dùng được ${B.uses[t]} lần · tặng, bán được`,tg:["rv"],lx:1};
+  /* the price reads lxPrice at every use (shop, buy, sell, gift value): ONE number for each place */Object.defineProperty(IT[k],"pr",{get(){return lxPrice(typeof S!=="undefined"?S:null,t)},enumerable:true,configurable:true})}
  try{if(BAL.priceTier)for(const part of B.parts)for(let t=0;t<4;t++){const k=lxKey(part,t);if(BAL.priceTier[k]==null)BAL.priceTier[k]=B.price[t]}}catch(e){}
+ /* LUẬT SỬA CẢ NHÓM: the old single "Son phấn Dương Châu" (sonphan) is folded into this family: every old piece becomes a Thường son box
+    (IT_ALIAS: itClean renames it on load, taint kept); every giver (shop, bestow, gifts, contests, themes) now names lx boxes (dev/test/sonphan-scan.py) */
+ try{if(typeof IT_ALIAS==="object")IT_ALIAS.sonphan=lxKey("son",0)}catch(e){}
  try{if(typeof STIP_UNIT==="object")for(const part of B.parts)for(let t=0;t<4;t++)STIP_UNIT[lxKey(part,t)]="hộp"}catch(e){}
  try{if(typeof SHOP_ALL==="object")for(const part of B.parts)for(const t of B.shop)SHOP_ALL.push(lxKey(part,t))}catch(e){}
  try{if(typeof TAINT==="object"){const K=[];for(const part of B.parts)for(let t=0;t<4;t++)K.push(lxKey(part,t));
-   TAINT.chi.on=TAINT.chi.on.concat(K);if(!TAINT.ngua)TAINT.ngua={n:"trộn bột ngứa",on:K,need:"botngua",c:0,hurt:"người dùng nổi mẩn, Sắc giảm"}}}catch(e){}
+   TAINT.chi.on=TAINT.chi.on.filter(k=>k!=="sonphan").concat(K);if(!TAINT.ngua)TAINT.ngua={n:"trộn bột ngứa",on:K,need:"botngua",c:0,hurt:"người dùng nổi mẩn, Sắc giảm"}}}catch(e){}
  try{if(typeof BAL.stip==="object"&&BAL.stip.down)for(const part of B.parts)for(let t=0;t<4;t++)BAL.stip.down[lxKey(part,t)]=t>0?lxKey(part,t-1):null}catch(e){}})();
 /* art: until Foreman C paints img/item-lx<part><t>.webp, the existing Son phấn picture at the right grade (LX_ART lists the painted keys) */
 const LX_ART={};
@@ -61,7 +70,7 @@ const LX_ART={};
   const s=a0("sonphan");return s?{key:k,src:s.src,src512:s.src512,grade:r.t,gradeName:ITEM_GRADE[r.t],ph:1}:null};window.itemArt=itemArt})();
 /* ---------- a piece: colour + lượt (old saves, gifts, shop, stolen goods: filled on first sight) ---------- */
 function lxHash(s){let h=2166136261;s=String(s);for(let i=0;i<s.length;i++){h^=s.charCodeAt(i);h=Math.imul(h,16777619)}return h>>>0}
-function lxFix(p){if(!p||!p.inv)return;let i=0;for(const e of p.inv){const r=e&&lxOf(e.k);if(!r){i++;continue}const L=TOIL_COL[r.part].L;
+function lxFix(p){if(!p||!p.inv)return;let i=0;for(const e of p.inv){if(e&&e.k==="sonphan")e.k=lxKey("son",0);const r=e&&lxOf(e.k);if(!r){i++;continue}const L=TOIL_COL[r.part].L;
   if(!e.c||!L.some(x=>x[0]===e.c))e.c=L[lxHash(`${p.id!=null?p.id:"me"}:${S.turn}:${r.part}:${i}`)%L.length][0];
   if(typeof e.u!=="number"||!(e.u>=0))e.u=BAL.ration.uses[r.t];i++}}
 function lxBoxes(p,part){lxFix(p);return (p&&p.inv||[]).filter(e=>{const r=e&&lxOf(e.k);return r&&r.part===part&&e.u>0&&!e.h})}
@@ -74,7 +83,8 @@ function lxName(e){const r=lxOf(e&&e.k);return r?`${IT[e.k].n} (${lxColName(r.pa
 function lxMonthParts(n){const P=BAL.ration.parts,m=Math.max(0,((S&&S.month)||1)-1),L=[];for(let i=0;i<Math.min(n,P.length);i++)L.push(P[(m*n+i)%P.length]);return L}
 function lxLines(r,out){const B=BAL.ration;r=Math.max(0,Math.min(7,r|0));const t=out?B.coldTier:B.tier[r],n=out?B.coldN:B.n[r];return lxMonthParts(n).map(part=>[lxKey(part,t),1])}
 (function(){if(typeof stipList!=="function")return;const l0=stipList;stipList=function(r,out){const L=l0.apply(this,arguments);try{if(lxOn())L.push(...lxLines(r,out))}catch(e){console.error("rt list",e)}return L}})();
-(function(){if(typeof stipGoods!=="function")return;const g0=stipGoods;stipGoods=function(p){const G=g0.apply(this,arguments);try{lxFix(p);if(p!==S&&lxOn())lxNpcMonth(p)}catch(e){console.error("rt goods",e)}return G};window.stipGoods=stipGoods})();
+/* NPC month order (review fix 5): the past month's sittings are spent BEFORE the new issue, so a box is not used up the moment it arrives; the roads (buy / borrow / ask / steal) after it */
+(function(){if(typeof stipGoods!=="function")return;const g0=stipGoods;stipGoods=function(p){try{if(p&&p!==S&&lxOn())lxNpcSpend(p)}catch(e){console.error("rt spend",e)}const G=g0.apply(this,arguments);try{lxFix(p);if(p!==S&&lxOn())lxNpcMonth(p)}catch(e){console.error("rt goods",e)}return G};window.stipGoods=stipGoods})();
 /* the first sight (new life, old save): Nội vụ phủ's issue of her rank once, so the mirror is not empty on day one */
 function lxInit(p){if(!p||!lxOn()||p.lxInit)return;p.lxInit=1;p.inv=p.inv||[];for(const [k] of lxLines(rkOf(p),!!p.out))p.inv.push({k,from:"noivu",d:S.turn});
  for(const part of BAL.ration.parts)if(!lxHas(p,part)&&!p.out){const k=lxKey(part,BAL.ration.tier[Math.min(7,rkOf(p))]);p.inv.push({k,from:"noivu",d:S.turn})}lxFix(p)}
@@ -82,16 +92,21 @@ function lxInitAll(){try{if(!S||S.dead||!lxOn())return;if(typeof isSrv==="functi
 /* ---------- 3. the sitting: cap by the parts she has, spend lượt (her: the colours she picked; NPC / bot: any box of the part) ---------- */
 function lxLvIx(k){return TOIL_LVS.indexOf(TOIL_OLDLV[k]||k)}
 function lxCapRec(p,rec){if(!lxOn()||!rec||!rec.makeup)return rec;const n=lxCount(p),cap=BAL.ration.cap[n];rec.lxCap=cap;
+ /* review fix 1: the parts she does not own are not painted (col.no, honoured by jtoil toilMkLayer / toilMkDraw / toilMakeupSvg) */const M=lxMiss(p);rec.col=rec.col||{};if(M.length)rec.col.no=M.slice().sort();else delete rec.col.no;
  if(cap==="moc"){rec.makeup=false;rec.look=null;return rec}const mk=toilMk(rec);if(mk==="vung"||lxLvIx(mk)<=lxLvIx(cap))return rec;
  const T=BAL.toil.tier,top={vung:T[0]-1,vua:T[1]-1,dep:T[2]-1}[cap];if(top!=null){rec.score=Math.min(rec.score|0,top);rec.look=toilTier(rec.score)}return rec}
 function lxSpend(p,rec,col){const B=BAL.ration,out={used:[],gone:[],taint:null};if(!lxOn()||!rec||!rec.makeup)return out;const mk=toilMk(rec);
  const u0=B.use[mk]||0;if(!u0)return out;const per=u0+(col&&col.want==="diem"?B.bold:0);
  for(const part of B.parts){const L=lxBoxes(p,part);if(!L.length)continue;const c=col&&col[part];const e=L.find(x=>x.c===c)||L.slice().sort((a,b)=>a.u-b.u)[0];
-  const n=Math.min(per,e.u);e.u-=n;out.used.push({part,e,n});if(e.t==="ngua"||e.t==="chi")out.taint=e;if(e.u<=0){p.inv.splice(p.inv.indexOf(e),1);out.gone.push(e)}}
- if(out.taint)lxAllergy(p,out.taint);return out}
-function lxAllergy(p,e){const A=BAL.ration.allergy;if(e.t==="ngua"){ap(p,{sac:A.sac});p.lxRash=S.turn}else ap(p,{sac:BAL.ration.allergy.chiSac,suc:BAL.ration.allergy.chiSuc});
- const by=typeof byKey==="function"?byKey(e.by):null;if(p===S){log(`<span class="r">Mặt ngươi nổi mẩn sau khi thoa ${lxName(e)}: ${TAINT[e.t].n}.</span> Sắc ${A.sac}.`);
-  if(by&&by!==S)try{oanAdd(S,by,A.rel)}catch(x){}}else if(by===S)try{newsAdd(p,"lx",`${rkName(p)} ${p.name} nổi mẩn đỏ khắp mặt sau khi điểm trang`,true)}catch(x){}}
+  const fresh=e.u>=B.uses[lxOf(e.k).t];const n=Math.min(per,e.u);e.u-=n;out.used.push({part,e,n});if(e.t==="ngua"||e.t==="chi")out.taint=e;else if(fresh&&!out.cos&&typeof RASH==="object"&&roll(RASH.cos))out.cos=e;if(e.u<=0){p.inv.splice(p.inv.indexOf(e),1);out.gone.push(e)}}
+ if(out.taint||out.cos)out.rash=lxAllergy(p,out.taint||out.cos,!out.taint);return out}
+/* review fix 3: ONE allergy system — the rash of jrash (rashGive: timed, its picture, Thái y / thảo mộc card, Sắc by severity). A pha chì box also hurts its user
+   through taintHit (j8, the same as every lead-tainted item); bột ngứa only through the rash; an ordinary new box: RASH.cos, severity 1 ("son phấn không hợp") */
+function lxAllergy(p,e,plain){const A=BAL.ration.allergy;if(typeof rashGive!=="function")return"";const by=!plain&&e.by&&typeof byKey==="function"?byKey(e.by):null;
+ if(!plain&&e.t==="chi"&&typeof taintHit==="function")taintHit(p,e,true);
+ const sev=plain?1:rashPick(e.t==="ngua"?A.nguaW:A.chiW);const t=rashGive(p,sev,plain?"son phấn không hợp":`thoa ${IT[e.k].n} bị ${TAINT[e.t].n}`,by);
+ if(!plain&&by&&by!==p)try{if(p===S)oanAdd(S,by,A.rel)}catch(x){}
+ if(!plain&&p!==S&&by===S)try{newsAdd(p,"lx",`${rkName(p)} ${p.name} nổi mẩn đỏ khắp mặt sau khi điểm trang`,true)}catch(x){}return t}
 /* her sitting (toilFinish / toilAuto call this right after the record is made) */
 function lxSit(p,rec){try{if(!lxOn()||!rec)return null;lxCapRec(p,rec);const R=lxSpend(p,rec,rec.col||(TOIL.st&&TOIL.st.col));rec.lx={cap:rec.lxCap,n:R.used.reduce((a,x)=>a+x.n,0),gone:R.gone.map(e=>e.k)};
   if(p===S&&!window.__bot&&R.gone.length)log(`Dùng hết ${R.gone.map(lxName).join(", ")}.`);return R}catch(e){console.error("lxSit",e);return null}}
@@ -102,16 +117,16 @@ function lxColRows(rows){if(!lxOn())return rows;const own={};for(const part of B
  return rows.map(r=>{if(/^pre-/.test(r.k)){const it=r.items.filter(i=>{const x=TOIL_PRE.find(y=>y[0]===i.k);return x&&BAL.ration.parts.every(part=>own[part].some(e=>e.c===x[4][part]))});return it.length?Object.assign({},r,{items:it}):null}
   const L=own[r.k];if(!L)return r;const it=r.items.filter(i=>L.some(e=>e.c===i.k)).map(i=>{const E=L.filter(e=>e.c===i.k);const u=E.reduce((a,e)=>a+e.u,0);return Object.assign({},i,{name:`${i.name} · ${E.map(e=>IT[e.k].n).join(", ")}, còn ${u} lần dùng`})});
   return it.length?Object.assign({},r,{items:it}):null}).filter(Boolean)}
-function lxColPick(col){if(!lxOn())return col;for(const part of BAL.ration.parts){const L=lxBoxes(S,part);if(L.length&&!L.some(e=>e.c===col[part]))col[part]=L.slice().sort((a,b)=>b.u-a.u)[0].c}
+function lxColPick(col){if(!lxOn()){delete col.no;return col}const M=lxMiss(S);if(M.length)col.no=M.slice().sort();else delete col.no;for(const part of BAL.ration.parts){const L=lxBoxes(S,part);if(L.length&&!L.some(e=>e.c===col[part]))col[part]=L.slice().sort((a,b)=>b.u-a.u)[0].c}
  if(col.want==="diem"&&!lxColRows([{k:"pre-diem",items:TOIL_PRE.filter(x=>x[2]==="diem").map(x=>({k:x[0]}))}]).length)delete col.want;return col}
-function lxRushCost(){const B=BAL.ration;return lxMiss(S).length*Math.ceil(B.price[0]*B.rush)}
+function lxRushCost(){const B=BAL.ration;return lxMiss(S).length*Math.ceil(lxPrice(S,lxTierOf(S))*B.rush)}
 function lxMirrorNote(){if(!lxOn())return"";const M=lxMiss(S),n=lxCount(S),cap=BAL.ration.cap[n];
  const R=[["Son phấn",n?`${n} trong ${BAL.ration.parts.length} thứ còn dùng được`:"không còn hộp nào"]];
  if(M.length)R.push(["Thiếu",M.map(x=>TOIL_COL[x].label).join(", "),"r"],["Dung nhan",cap==="moc"?`chỉ để ${toilMkW("moc")}`:`đẹp nhất ${TOIL_MK[cap]}`,"r"],["Đường kiếm",`mua gấp ở Nội vụ phủ, hàng rong, mượn phi tần khi đến chơi, xin Hoàng hậu hay Thái hậu`,"n"]);
  return `<div class="kgr">${kitRows(R)}</div>`}
 function lxRushBtn(){if(!lxOn()||!lxMiss(S).length)return"";const c=lxRushCost(),ok=(S.bac||0)>=c;
  return `<button class="${kg82Btn(true)}" id="lxrush"${ok?"":" disabled"}>Mua gấp son phấn còn thiếu<small>Bạc -${c}${ok?"":" · không đủ bạc"}</small></button>`}
-function lxRush(){const c=lxRushCost();if(!lxOn()||(S.bac||0)<c)return;const M=lxMiss(S);apply({bac:-c});const E=M.map(part=>{const e={k:lxKey(part,0),from:"buy",d:S.turn};S.inv.push(e);return e});lxFix(S);
+function lxRush(){const c=lxRushCost();if(!lxOn()||(S.bac||0)<c)return;const M=lxMiss(S);apply({bac:-c});const t=lxTierOf(S);const E=M.map(part=>{const e={k:lxKey(part,t),from:"buy",d:S.turn};S.inv.push(e);return e});lxFix(S);
  log(`Ngươi sai người mua gấp ở Nội vụ phủ: ${E.map(lxName).join(", ")}. Bạc -${c}.`);try{save()}catch(e){}}
 /* ---------- 4. roads: borrow (rival visit), beg (Hoàng hậu / Thái hậu), steal (a rival's chest) ---------- */
 function lxLend(v,part){const L=lxBoxes(v,part);if(!L.length)return null;const tot=L.reduce((a,e)=>a+e.u,0);return tot>=BAL.ration.borrow.spare?L.slice().sort((a,b)=>b.u-a.u)[0]:null}
@@ -134,10 +149,14 @@ function lxGive(from,to,e,how){const r=lxOf(e.k);const n=how==="half"?Math.max(1
  }catch(e){console.error("rt talk",e)}return A}})();
 function lxCaught(a,v){const ST=BAL.ration.steal;ap(a,{danh:ST.danh});if(typeof ducAdd==="function")ducAdd(a,ST.duc,"trộm son phấn");else ap(a,{duc:ST.duc});try{oanAdd(v,a,ST.oan)}catch(e){}a.cutPay=Math.max(a.cutPay||0,ST.cut);a.cutBy="Nội vụ phủ"}
 /* ---------- NPCs: the same rule at the month tick (spend, run out → buy / borrow / steal, ask her) ---------- */
-function lxNpcMonth(v){if(!v||v===S||v.coop||v.alive===false||v.out)return;if(typeof mlGuest==="function"&&mlGuest())return;const N=BAL.ration.npc;
- for(const part of BAL.ration.parts){let left=N.use;for(const e of lxBoxes(v,part).sort((a,b)=>a.u-b.u)){const n=Math.min(left,e.u);e.u-=n;left-=n;if(e.u<=0)v.inv.splice(v.inv.indexOf(e),1);if(!left)break}}
- const asked=[];for(const part of lxMiss(v)){const pr=BAL.ration.price[0];
-  if((v.bac||0)>=pr*2&&roll(N.buy)){ap(v,{bac:-pr});v.inv.push({k:lxKey(part,0),from:"buy",d:S.turn});continue}
+function lxNpcOk(v){return !!v&&v!==S&&!v.coop&&v.alive!==false&&!v.out&&!(typeof mlGuest==="function"&&mlGuest())}
+/* the past month's sittings (BAL.ration.npc.use lượt per part), spent before the new issue */
+function lxNpcSpend(v){if(!lxNpcOk(v))return;const N=BAL.ration.npc;
+ for(const part of BAL.ration.parts){let left=N.use;for(const e of lxBoxes(v,part).sort((a,b)=>a.u-b.u)){const n=Math.min(left,e.u);e.u-=n;left-=n;if(e.u<=0)v.inv.splice(v.inv.indexOf(e),1);if(!left)break}}}
+/* after the issue: a part still missing → buy (her own rank's price, law C) / borrow / ask her / steal */
+function lxNpcMonth(v){if(!lxNpcOk(v))return;const N=BAL.ration.npc;
+ const asked=[];for(const part of lxMiss(v)){const tt=lxTierOf(v),pr=lxPrice(v,tt);
+  if((v.bac||0)>=pr*2&&roll(N.buy)){ap(v,{bac:-pr});v.inv.push({k:lxKey(part,tt),from:"buy",d:S.turn});continue}
   const fr=consorts().filter(x=>x!==v&&x!==S&&!x.out&&x.alive!==false&&aff(x,v)>=N.askAff&&lxLend(x,part)).sort((a,b)=>aff(b,v)-aff(a,v))[0];if(fr&&roll(N.borrow)){lxGive(fr,v,lxLend(fr,part),"half");continue}
   if(lxLend(S,part)&&aff(v,S)>=N.askAff&&roll(N.ask)){asked.push(part);continue}
   if(((v.ghen||0)>=N.stealGhen||traitsOf(v).includes("Xảo quyệt"))&&roll(N.steal)){const vic=[S].concat(consorts().filter(x=>x!==v&&!x.out&&x.alive!==false)).filter(x=>lxLend(x,part)).sort((a,b)=>(b.lxBest||0)-(a.lxBest||0)||(b===S)-(a===S))[0];
@@ -160,4 +179,4 @@ function lxAskHer(v,part){try{if(window.__bot||(typeof isSrv==="function"&&isSrv
   if(r){lxFix(S);const E=(S.inv||[]).filter(e=>e&&e.k===k);if(E.length){o=Object.assign({},o||{});o.note=[].concat(o.note||[],E.map(e=>`màu ${lxColName(r.part,e.c)}: còn ${e.u} lần dùng`))}}}catch(e){}return d0.call(this,ref,o)};window.kitItemDetailRows=kitItemDetailRows})();
 /* ---------- first sight on load / new life ---------- */
 (function(){for(const f of ["render"]){const g=window[f];if(typeof g!=="function")continue;window[f]=function(){try{if(S&&!S.lxInit)lxInitAll()}catch(e){}return g.apply(this,arguments)}}})();
-window.lxSit=lxSit;window.lxNpcCap=lxNpcCap;window.lxColRows=lxColRows;window.lxColPick=lxColPick;window.lxMirrorNote=lxMirrorNote;window.lxRushBtn=lxRushBtn;window.lxRush=lxRush;window.lxInitAll=lxInitAll;window.lxOf=lxOf;window.lxCount=lxCount;window.lxMiss=lxMiss;window.lxFix=lxFix;
+window.lxPrice=lxPrice;window.lxKeys=lxKeys;window.lxNpcSpend=lxNpcSpend;window.lxSit=lxSit;window.lxNpcCap=lxNpcCap;window.lxColRows=lxColRows;window.lxColPick=lxColPick;window.lxMirrorNote=lxMirrorNote;window.lxRushBtn=lxRushBtn;window.lxRush=lxRush;window.lxInitAll=lxInitAll;window.lxOf=lxOf;window.lxCount=lxCount;window.lxMiss=lxMiss;window.lxFix=lxFix;

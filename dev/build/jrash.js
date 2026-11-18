@@ -1,7 +1,7 @@
 /* ================= jrash: NỔI MẨN (dị ứng) — a timed face condition for everyone (owner 11/14, review/items-earned) =================
    p.rash = {sev 1..3, until (tuần), how, by, at, tr}. Same rules for her and for every consort (two-way).
    Causes: spring pollen (the j68f springAllergy event and a small monthly spring roll), son phấn không hợp / tainted
-   (Son phấn Dương Châu), bad luck (ăn phải món lạ), and the hostile act "Bỏ phấn lạ" (band Hại nhỏ, motive-gated like
+   (the son phấn boxes of jration: its sitting calls rashGive — a tainted box always, a new box RASH.cos), bad luck (ăn phải món lạ), and the hostile act "Bỏ phấn lạ" (band Hại nhỏ, motive-gated like
    the other schemes, same odds and evidence trail for everyone).
    Effects: Sắc − RASH.d[sev] while it lasts (effSac, so nights, contests, jealousy follow as with hủy dung); heals in 1–4 tuần,
    one tuần sooner each tuần under Thái y medicine (bạc) or with Y thuật bậc 2+.
@@ -45,9 +45,7 @@ PEND.rashcard=pp=>{const r=S&&S.rash;if(!r)return null;const x=rshOf(S);const o=
 /* monthly: a spring breeze for everyone, and bad luck any time (two-way) */
 (function(){const m0=monthTick;monthTick=function(){const r=m0.apply(this,arguments);try{if(S&&!S.dead){const spring=(S.month||0)>=1&&(S.month||0)<=3;
   for(const p of KIT_FACEFX.everyone().filter(x=>KIT_FACEFX.live(x))){if(p.rash)continue;if(spring&&roll(RASH.spring))rashGive(p,rashPick([.75,.22,.03]),"phấn hoa xuân");else if(roll(RASH.luck))rashGive(p,rashPick([.7,.25,.05]),"ăn phải món lạ")}}}catch(e){console.error(e)}return r}})();
-/* son phấn: a tainted box (pha chì) always, an ordinary one sometimes, brings out a rash */
-(function(){const u0=useItem;useItem=function(p,ix,tgt){const e=p&&p.inv&&p.inv[ix];const k=e&&e.k,t=e&&e.t;const r=u0.apply(this,arguments);
-  try{if(k==="sonphan"&&r&&(t==="chi"||roll(RASH.cos))){const x=rashGive(p,t==="chi"?rashPick([.3,.45,.25]):1,"son phấn không hợp",t==="chi"&&e.by?byKey(e.by):null);return r+(x?" "+x:"")}}catch(x){}return r}})();
+/* son phấn: the rash at the sitting lives in jration (lxAllergy → rashGive): the old "Son phấn Dương Châu" useItem hook is retired with the item (folded into the lx boxes) */
 /* the hostile act: slip an irritating powder / strange incense into her cosmetics (band Hại nhỏ, motive-gated) */
 function oRash(a){return odA(a,45+(a.tamco||0)/5+(a.mat||0)*3)}
 A("rash","Bỏ phấn lạ",{c:{bac:-RASH.actBac,duc:RASH.actDuc},ok:(a,t)=>(a.bac||0)>=RASH.actBac&&!t.rash,o:a=>oRash(a),x:"nàng nổi mẩn mặt, Sắc giảm vài tuần",f:(a,t)=>{
