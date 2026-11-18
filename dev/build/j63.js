@@ -9,7 +9,7 @@
    Empty rows are left out; rows are always in this order; a value is placed by meaning: a gain is green and in Được, a loss is red.
    kitParse() now returns these rows; kaNorm() rebuilds every button of the game into the frame (cards, .pcb, .opt, .btn, .rbtn). Spec: dev/kit/KIT.md "Act card". */
 const KA_ROWS=[["why","Cần"],["ton","Tốn"],["duoc","Được"],["mat","Mất"],["kem","Kèm"],["note","Ghi chú"]];
-const KA_ODDS=/^(Chắc chắn|Nắm chắc|Rất chắc|Khá chắc|Năm ăn năm thua|Chắc|Khó lường|Khó|Liều)$/;
+const KA_ODDS=/^(Nắm chắc|Rất chắc|Khá chắc|Năm ăn năm thua|Chắc|Khó lường|Khó|Liều)$/;
 const KA_TIME=/^(?:[●○]+\s*)?\d+(?:\s*[-–]\s*\d+)?\s*(khắc|việc)$/i;
 const KA_STAT=/^(Bạc|Sức|Sủng|Danh|Đức|Sắc|Tài|Tâm cơ|Tai mắt|Ân tình|Thai)\s*-\s?\d/;
 const kaPlain=h=>String(h||"").replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim();
@@ -49,6 +49,8 @@ function kaModelStr(str){str=String(str||"").replace(/(nàng |hắn )?thù -(\d+
    const open=(ml[0].match(/<(span|b)[^>]*>/g)||[]).length;if(open&&/^\s*</.test(ml[0])){const tg=ml[0].match(/<(span|b)( class="(g|r)")?[^>]*>/);s=(tg?tg[0]:"")+s}}
   else{const m2=plain.match(/^tốn (\d+ khắc)$/);if(m2){M.items.push({h:m2[1],old:"n",l:"tốn",cont:false,b:""});continue}}
   for(let v of [].concat(...kSplitTop(s,/; /y).map(q=>/(^|\s)nàng(\s|$)/.test(kaPlain(q))?[q]:kSplitTop(q,/, /y)))){const vp=kaPlain(v);if(!vp)continue;const om=v.match(/^\s*<(?:span|b) class="(g|r)"/);M.items.push({h:/^\s*<(span|b) class="[gr]">[^<]*<\/\1>\s*$/.test(v)?vp:v.trim(),old:om?om[1]:"n",l:lab,cont,b:lab==="kèm"?bl:lab==="thành"||lab==="hỏng"?lab:""})}}
+ /* ODDS CAP: a Nắm chắc act that names no failure (a formerly-sure act, kitCapLine / capW hints) fails softly — say so (one form, kitSoftW) */
+ if(M.odds&&M.odds===capW()&&!M.items.some(i=>i.l==="hỏng"))M.items.push({h:kitSoftWb(M.items.some(i=>i.l==="tốn"&&/Bạc\s*[-−]/.test(kaPlain(i.h)))),old:"r",l:"hỏng",cont:false,b:"hỏng"});
  return M}
 /* ONE rule (kit-option-rows s34): a line that says nothing is never shown — "không được mất gì", "không được không mất", "không mất không được", "không được gì", "không mất gì" */
 const KA_NOTHING=/^(chắc chắn · )?(không (được )?(không )?mất( không được)? gì|không được không mất|không mất không được|không được gì|không mất gì)( thêm)?\.?$/i;
@@ -59,7 +61,7 @@ function kaRows(M){const R={why:[],ton:[],duoc:[],mat:[],kem:[],note:[],one:true
     A sure act (no roll, nothing under "hỏng") has ONE block: every b collapses to "t". */
  const real=h=>{const p=kaPlain(h);return p&&!KA_NOTHING.test(p)};
  /* a no-roll card with a hỏng part is ONE block when it has no thành part (only a certain loss: "Cáo bệnh, không dự" Danh -1 — nothing to win, nothing to fail); with both parts it still shows both */
- const sure0=!M.odds||/^Chắc chắn/.test(M.odds),hasBad=M.items.some(it=>(it.l==="hỏng"||it.b==="hỏng")&&real(it.h)),hasWin=M.items.some(it=>it.l==="thành"&&real(it.h));
+ const sure0=!M.odds,hasBad=M.items.some(it=>(it.l==="hỏng"||it.b==="hỏng")&&real(it.h)),hasWin=M.items.some(it=>it.l==="thành"&&real(it.h));
  const sure=sure0&&(!hasBad||!hasWin);R.one=sure;
  const add=(r,h,c,b)=>{b=(r==="why"||r==="ton"||r==="note")?"":sure||!b?"t":b;if(!R[r].some(x=>kaPlain(x.h)===kaPlain(h)&&x.b===b))R[r].push({h,c,b})};
  for(const it of M.items){let [h,nt]=kaSplitNote(kRangeW(it.h));if(nt)add("note",nt,"n");const p=kaPlain(h);if(!p)continue;if(KA_NOTHING.test(p))continue; /* owner 11/15: a line that says nothing is not shown */const c=kaSent(h,it.old);const neu=KNEU.test(p);const l=it.l||"";const cont=!!it.cont;
@@ -86,7 +88,7 @@ function kaRows(M){const R={why:[],ton:[],duoc:[],mat:[],kem:[],note:[],one:true
  R.why=R.why.map(x=>({h:kaWhyCut(x.h),c:"r"}));const wt=R.why.map(x=>kaPlain(x.h).toLowerCase());R.note=R.note.filter(x=>!wt.some(w=>w.includes(kaPlain(x.h).toLowerCase())));
  return R}
 function kaWhyCut(h){return String(h).split(/\s·\s(?=(?:thành|hỏng|kèm|tốn|được)\s*:)/i)[0].replace(/[\s·—-]+$/,"")}
-function kaOdds(M){if(!M.odds||/^Chắc chắn/.test(M.odds))return"";if(M.odds==="Khó lường")return `<span class="oc oc2">Khó lường</span>`;return oddsChip(M.odds)+M.oddsX}
+function kaOdds(M){if(!M.odds)return"";if(M.odds==="Khó lường")return `<span class="oc oc2">Khó lường</span>`;return oddsChip(M.odds)+M.oddsX}
 /* owner 11/15 05:50Z: a GHI CHÚ that only repeats CẦN ("(chỉ buổi tối)" when CẦN shows "Buổi tối") is dropped — a note must add real information */
 function kaNoteDedup(R){try{if(!R.note||!R.note.length)return;const why=R.why.map(x=>kaPlain(x.h).toLowerCase()).join(" ");
  R.note=R.note.filter(x=>{const p=kaPlain(x.h).toLowerCase().replace(/^[(\s]+|[)\s.]+$/g,"");const m=p.match(/^(?:chỉ )?(buổi (?:sáng|trưa|chiều|tối))$/);return !(m&&why.includes(m[1]))})}catch(e){}}
@@ -265,6 +267,24 @@ function kitKemRow(K){if(!K||!K.length)return"";const grp={};for(const x of K){c
   const wy=kaWhyHtml(kaWhyKem(K,k,up));return `<span class="kkem" role="button" tabindex="0" aria-expanded="false"><span class="kkems">${L.length} ${L.length>1?"phi tần":"người"} ${verb}</span>${wy}<span class="kkeml">${names.join(" · ")}</span></span>`});
  return `<span class="kr kr-kem"><span class="krl">Kèm</span><span class="krv">${parts.join('<span class="ksep">·</span>')}</span></span>`}
 const kaKemHTML=kitKemRow;
+/* KIT PART oddsSoft(n,c) — the ONE soft failure of a formerly-sure act (ODDS CAP, owner 17/11 ~17:35Z "việc chắc ăn mà hỏng thì chỉ hỏng nhẹ"):
+   the act rolled at the cap (BAL.odds.hi) and failed: of its cost only the effort (BAL.odds.softFail.spend: Sức) is spent, never the bạc
+   (owner 17:10Z (1)) nor Danh / Đức…; nothing is gained, no other loss. Writes the one BẠI line to the log and returns it (window.__oddsSoft holds it for the caller's card). The khắc of the act
+   are spent by its caller as before. kitSoftW(c) = the same words for the act's own hint ('hỏng: …' of a Nắm chắc act, optLine / kitCapLine). */
+function oddsSoftCost(c){const o={};for(const k of BAL.odds.softFail.spend)if(c&&c[k]<0)o[k]=c[k];return o}
+function kitSoftW(c){return kitSoftWb(!!(c&&c.bac<0))}
+function kitSoftWb(hasBac){return `chỉ uổng công${hasBac&&!BAL.odds.softFail.spend.includes("bac")?", không mất bạc":""}, không mất gì khác`}
+function oddsSoft(n,c){apply(oddsSoftCost(c));const t=`<span class="r">bại</span> — người tính không bằng trời tính: ${kitSoftW(c)}.`;window.__oddsSoft=t;log(`${n?n+": ":""}${t}`);return t}
+/* a formerly-sure option of a dialog / button (no o): its hint starts with the cap word and ends with the soft 'hỏng' (ONE line form) */
+function kitCapLine(rest,c){return [capW(),rest,"hỏng: "+kitSoftW(c)].filter(Boolean).join(" · ")}
+/* a formerly-sure BUTTON act (pbtn / kitActMini…): its attrs carry capAt(BAL key {k,suc}, bạc) = data-cap / data-capsuc / data-capbac, and its hint kitCapLine(…).
+   ONE capture listener rolls it at the cap BEFORE its own handler; a failure stops the click and is the one soft failure (oddsSoft):
+   the khắc and the Sức it names are spent, nothing else. Bots never click (they call the act functions, which roll themselves). */
+function capAt(K,bac){K=K||{};return ` data-cap="${K.k||0}"${K.suc>0?` data-capsuc="${K.suc}"`:""}${bac>0?` data-capbac="${bac}"`:""}`}/* K = the act's BAL key {k, suc}; bac = its bạc cost (BAL), so the one BẠI line says no bạc is lost */
+document.addEventListener("click",e=>{const b=e.target&&e.target.closest&&e.target.closest("button[data-cap]");if(!b||b.disabled||typeof S==="undefined"||!S||S.dead)return;
+ if(roll(BAL.odds.hi))return;e.stopImmediatePropagation();e.preventDefault();const k=+b.dataset.cap||0;if(k&&can(k))spend(k);
+ const kn=b.querySelector(".kan");const n=String(kn?kn.textContent:(b.childNodes[0]&&b.childNodes[0].nodeType===3?b.childNodes[0].textContent:"")).trim();
+ let bf=null;try{bf=rsnap()}catch(x){}oddsSoft(n,{suc:-(+b.dataset.capsuc||0),bac:-(+b.dataset.capbac||0)});try{if(bf)resultShow(n,bf,false)}catch(x){}render()},true);
 /* KIT PART kitResultSeal(ok) (KIT 7): the result seal — true → THÀNH (.ok), false → BẠI (.bad), no roll → "KẾT QUẢ" (.sure, the kit's grey seal, no stamp) */
 function kitResultSeal(ok){return ok===true?{cls:"ok",t:"THÀNH"}:ok===false?{cls:"bad",t:"BẠI"}:{cls:"sure",t:"KẾT QUẢ"}}
 resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;
@@ -277,6 +297,8 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;
  /* owner 11/15: THÀNH / BẠI come ONLY from the act's own roll (okHint true / false); no roll ("sure", null) → no seal, the neutral header
     "KẾT QUẢ" — never inferred from the log words or from how many lines are Được / Mất (failTxt / netBad stay for the old callers' log) */
  const ok=okHint===true?true:okHint===false?false:null;const SL=kitResultSeal(ok),seal=SL.t;void failTxt;void netBad;
+ /* ODDS CAP: a soft failure changes nothing but still shows its one BẠI line (j63 oddsSoft) */
+ if(okHint===false&&window.__oddsSoft&&!sen)sen=window.__oddsSoft;window.__oddsSoft="";
  if(!G.length&&!B.length&&!sen&&!(K&&K.length))return;if(window.__bot)return;
  let t=$("rtoast");if(!t){t=document.createElement("div");t.id="rtoast";document.body.appendChild(t)}
  t.onclick=e=>{const kk=e.target.closest(".kkem");if(kk){e.stopPropagation();const on=!kk.classList.contains("on");kk.classList.toggle("on",on);kk.setAttribute("aria-expanded",String(on));clearTimeout(window.__rtT);return}
@@ -308,7 +330,7 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;
 `;document.head.appendChild(st)})();
 /* "có thể bị người của nàng phát giác" -> the real chance word for this target (same formula as caught(), j8), never % */
 const KA_PS=["poison","musk","kpoison"];
-function kaCaughtTxt(v,k){/* previews: caught */try{const n=cl(oSee(v,KA_PS.includes(k))-4*(facN(S)-1),5,95);return `bị người của nàng phát giác: ${chanceW(n)} — nàng nắm ${balAb(BAL.eff.j8.evCaught)} chứng cứ`}catch(e){return null}}
+function kaCaughtTxt(v,k){/* previews: caught */try{const n=oddsCl(oSee(v,KA_PS.includes(k))-4*(facN(S)-1));return `bị người của nàng phát giác: ${chanceW(n)} — nàng nắm ${balAb(BAL.eff.j8.evCaught)} chứng cứ`}catch(e){return null}}
 (function(){if(typeof rvGroups!=="function")return;const g0=rvGroups;rvGroups=function(v){const G=g0.apply(this,arguments);try{for(const g of G)g[1]=g[1].map(h=>{const m=String(h).match(/data-a="(\w+)"/);const CW=caughtW();if(!m||!String(h).includes(CW))return h;const t=kaCaughtTxt(v,m[1]);return t?String(h).split(CW).join(t):h})}catch(e){}return G}})();
 /* ---------- "Cần" row: every condition an act needs, with its current status, from the real checks (can/whyTime/cardWhy/ok/LACK/evG) ---------- */
 function kaNeedAttr(L){return L&&L.length?` data-kneed="${encodeURIComponent(JSON.stringify(L))}"`:""}

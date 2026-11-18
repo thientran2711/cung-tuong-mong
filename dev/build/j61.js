@@ -160,8 +160,8 @@ let K61RAW=false;(function(){const d0=directActs;directActs=function(){K61RAW=tr
    talkOpts wrapper that answers a kind by itself without calling down (jmen "min" officials) skipped this gate, so a stranger official got the
    plain "Chào hỏi đúng lễ" (no face, no name). jgreet re-applies the gate as the last wrapper; already-gated lists pass through unchanged. */
 function k61Gate(p,A){if(K61RAW||!Array.isArray(A)||(A[0]&&A[0].k61))return A;try{const e=k61VisEnt(p);const st=e?k61St(e):3;if(e&&st<2){const k=k61Kind(e);const big=k==="emp"||k==="th";const riv=(rivals||[]).includes(e);
-  const g=st===0?{n:big?"Hành lễ":"Chào hỏi",o:100,k61:"greet",kke:kOf61(e),x:`thấy mặt, rõ thân phận${riv?" · nàng cũng biết mặt ngươi":""} · chưa biết tên`}
-   :{n:big?"Kính cẩn hỏi danh tính":"Hỏi danh tính",o:100,k61:"name",kke:kOf61(e),x:`biết tên người này${riv?" · nàng cũng biết ngươi":""}`};
+  const g=st===0?{n:big?"Hành lễ":"Chào hỏi",o:100,fix:1,k61:"greet",kke:kOf61(e),x:`thấy mặt, rõ thân phận${riv?" · nàng cũng biết mặt ngươi":""} · chưa biết tên`}
+   :{n:big?"Kính cẩn hỏi danh tính":"Hỏi danh tính",o:100,fix:1,k61:"name",kke:kOf61(e),x:`biết tên người này${riv?" · nàng cũng biết ngươi":""}`};
   return [g].concat(A.map(a=>Object.assign({},a,{lock:true,t:K61WHY})))}}catch(x){}return A}
 window.k61Gate=k61Gate;
 (function(){const t0=talkOpts;talkOpts=function(p){return k61Gate(p,t0.apply(this,arguments))}})();
