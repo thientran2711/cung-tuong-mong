@@ -790,13 +790,13 @@ rdDef("muoi_no",8,{t:"Nợ chồng nợ",w:"v",sj:"những món nợ mới của
  g:"Để trả nợ cũ và bịt miệng kẻ khác, {v} lén vay một thái giám cho vay nặng lãi ở Nội vụ phủ. Lãi tháng nào chồng tháng ấy. Ngươi biết, và chỉ ngươi biết.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Cây trâm ngự ban",w:"v",if:RDW(1),need:["v"],t:"Sau Trung thu {v} thở được ít ngày. Rồi ngươi thấy nàng lén cầm cố cả cây trâm ngự ban.",o:[
-  {n:"Hỏi thẳng {v} nợ ai",f:"know",wx:"biết chủ nợ mới",lx:"{v} xấu hổ, đóng cửa không tiếp",go:(A,ok,G)=>{if(!ok)rdOan(A,"v",G[0])},rt:"{v} khai: một thái giám coi kho ở Nội vụ phủ.",rf:"{v} đóng cửa cung, không tiếp ai."},
-  {n:"Chuộc lại cây trâm cho nàng",f:"help",wx:"{v} giữ được trâm ngự ban",lx:"bạc ngươi đi, nợ nàng vẫn còn",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"Cây trâm về lại hộp gấm của {v}."},
-  {n:"Ghi lại, chờ xem",wx:"không tốn gì",lx:"nợ nàng lăn thêm một tháng, lòng ngươi áy náy",rt:"Ngươi ghi vào sổ riêng."}]},
+  {n:"Hỏi thẳng {v} nợ ai",to:"c3",tf:"c3",f:"know",wx:"biết chủ nợ mới",lx:"{v} xấu hổ, đóng cửa không tiếp",go:(A,ok,G)=>{if(!ok)rdOan(A,"v",G[0])},rt:"{v} khai: một thái giám coi kho ở Nội vụ phủ.",rf:"{v} đóng cửa cung, không tiếp ai."},
+  {n:"Chuộc lại cây trâm cho nàng",to:"c3",tf:"c3",f:"help",wx:"{v} giữ được trâm ngự ban",lx:"bạc ngươi đi, nợ nàng vẫn còn",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"Cây trâm về lại hộp gấm của {v}."},
+  {n:"Ghi lại, chờ xem",to:"c3",tf:"c3",wx:"không tốn gì",lx:"nợ nàng lăn thêm một tháng, lòng ngươi áy náy",rt:"Ngươi ghi vào sổ riêng."}]},
  s2:{h:"{v} tránh mặt",w:"maid",if:RDW(0),need:["v"],t:"{v} tránh mặt ngươi đã lâu. Người của ngươi nghe được: nàng vay cả bạc của một thái giám cho vay nặng lãi.",o:[
-  {n:"Sai người dò chủ nợ",f:"know",wx:"biết kẻ cho vay là ai",lx:"tốn bạc, {v} biết ngươi dò",rt:"Kẻ cho vay là một thái giám coi kho ở Nội vụ phủ."},
-  {n:"Gửi lời: nếu cần, cứ đến tìm",f:"help",wx:"{v} có lối quay lại",lx:"{v} cho là ngươi thương hại, nói khắp nơi",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"Đêm ấy {v} gửi sang một mảnh lụa thêu, không lời.",rf:"{v} trả lời: “Không dám làm phiền chủ nợ cũ.”"},
-  {n:"Mừng thầm",wx:"kẻ cũ tự sa lầy",lx:"lòng ngươi nhỏ đi",rt:"Ngươi không làm gì."}]},
+  {n:"Sai người dò chủ nợ",to:"c3",tf:"c3",f:"know",wx:"biết kẻ cho vay là ai",lx:"tốn bạc, {v} biết ngươi dò",rt:"Kẻ cho vay là một thái giám coi kho ở Nội vụ phủ."},
+  {n:"Gửi lời: nếu cần, cứ đến tìm",to:"c3",tf:"c3",f:"help",wx:"{v} có lối quay lại",lx:"{v} cho là ngươi thương hại, nói khắp nơi",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1])},rt:"Đêm ấy {v} gửi sang một mảnh lụa thêu, không lời.",rf:"{v} trả lời: “Không dám làm phiền chủ nợ cũ.”"},
+  {n:"Mừng thầm",to:"c3",tf:"c3",wx:"kẻ cũ tự sa lầy",lx:"lòng ngươi nhỏ đi",rt:"Ngươi không làm gì."}]},
  c1:{h:"Chủ nợ ở Nội vụ phủ",w:"eun",t:"Kẻ cho vay là một thái giám coi kho ở Nội vụ phủ. Hắn cho vay cả chục phi tần, cung nữ, lãi mỗi tháng một phần mười.",o:[
   {n:"Mua lại nợ của {v} từ hắn",f:"buy",wx:"nợ nàng về một mối",lx:"bạc lớn ra đi; ngươi lại thành chủ nợ của {v}",rt:"Hắn đếm bạc, trao giấy nợ."},
   {n:"Báo {eun} trị hắn",f:"stop",wx:"ổ cho vay bị dẹp",lx:"hắn khai tên các con nợ, có cả {v}",rt:"{eun} cho người bắt hắn, sổ cho vay bị đốt.",rf:"Hắn khai ngược: phi tần nhà buôn tranh mối cho vay."},
@@ -805,6 +805,10 @@ rdDef("muoi_no",8,{t:"Nợ chồng nợ",w:"v",sj:"những món nợ mới của
   {n:"Đỡ nàng dậy, cho vay không lãi",f:"help",wx:"{v} sống lại",lx:"bạc ra, nợ chồng nợ, lần này với ngươi",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"{v} khóc ướt vạt áo ngươi."},
   {n:"Bắt nàng viết giấy cam kết",f:"bind",wx:"giấy có điểm chỉ",lx:"ép người lúc cùng đường",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"{v} cúi đầu điểm chỉ."},
   {n:"Dạy nàng cách kiếm bạc",wx:"{v} bán tranh thêu qua hiệu nhà ngươi",lx:"nàng không quen làm ăn, ngươi bù lỗ",rt:"Tranh thêu của {v} bán chạy ở Giang Nam.",rf:"Tranh thêu không ai mua, ngươi bỏ bạc bù."}]},
+ c3:{h:"Thư sinh Giang Nam",w:"maid",t:"Thư nhà kèm một tờ giấy nợ: một thư sinh nghèo ở Giang Nam vay bạc hiệu buôn nhà ngươi để lên kinh ứng thí, nay trọ ngoài cửa thành chờ khoa thi, chưa trả được đồng nào. Cha hỏi: đòi hay thôi?",o:[
+  {n:"Xóa nợ, chúc y thi đỗ",f:"warm",wx:"thư sinh nhớ ơn nhà ngươi",lx:"hiệu buôn mất một món bạc",rt:"Thư sinh gửi vào một bài thơ tạ ơn."},
+  {n:"Cho hoãn, đỗ rồi hãy trả",f:"help",wx:"giữ được nợ mà không ép người",lx:"ngươi lo nghĩ hao sức thay y",rt:"Thư sinh viết giấy hẹn, nét chữ rất đẹp."},
+  {n:"Giữ giấy nợ, đợi y làm quan",f:"hold",wx:"sau này có một vị quan nợ nhà ngươi",lx:"ép người lúc cùng đường",rt:"Tờ giấy nợ nằm sâu trong tráp của ngươi."}]},
  t1:{h:"Lãi quá hạn",w:"eun",t:"Hạn trả lãi đến. Kẻ cho vay dọa sẽ đem giấy nợ của {v} lên Kính sự phòng.",o:[
   {n:"Bỏ bạc trả lãi thay",wx:"hắn tạm im",lx:"bạc đi, lãi tháng sau vẫn đến",rt:"Hắn nhận bạc, hẹn tháng sau."},
   {n:"Cùng {v} đến đối mặt hắn",wx:"hắn chùn tay",lx:"bị thấy đi với kẻ cho vay",rt:"Hắn thấy hai phi tần cùng đến thì rụt lại.",rf:"Có người thấy ngươi đứng ở kho Nội vụ phủ, đồn ầm lên."}]},
