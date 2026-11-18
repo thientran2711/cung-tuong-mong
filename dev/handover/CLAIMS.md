@@ -89,7 +89,7 @@ style-ref test A/B/C c06 t1–t3 | CDN _review only | W79 session_011xDdVSouZw85
 | AG-DEED-PERF #2 (opus; merge live + re-measure 514143ec; #1 silent) | review/ag-deed-perf | C-AG #14 | session_01Rc5AsMrVSjApNAcLbKd49p | RUNNING | 18/11 19:40Z |
 | review shop-panel-r3 (sonnet SMALL REVIEWER) | review/shop-panel-r3 | MAIN ROOT-54 | session_01Rc5AsK7Vjz8vR2ZXexdh7h | LIVE 13bb8c88 | 18/11 19:33Z |
 | stage-here (opus UI: stage = where she is, every tab + closing alert; OD 19:45Z (5)) | review/stage-here | MAIN ROOT-54 | session_01Rc5AsK9y5NbRATifWtFqG7 | RUNNING | 18/11 19:33Z |
-| stage-rightcol (sonnet UI+kit; successor of maid6-sample; OD 20:55Z) | review/stage-rightcol | MAIN ROOT-54 | session_01Rc5AsMuwoEKePMdcju7qZi | RUNNING | 18/11 19:33Z |
+| stage-rightcol (sonnet UI+kit; successor of maid6-sample; OD 20:55Z) | review/stage-rightcol | MAIN ROOT-54 | session_01Rc5AsMuwoEKePMdcju7qZi | DONE 5f00b0c (SẴN SÀNG XEM) | 18/11 19:33Z |
 | errand-scene (sonnet UI/motion: maid walks off/on stage for every errand; OD 20:05Z) | review/errand-scene | MAIN ROOT-54 | session_01Rc5AsLfkFKRGnjiTepddVL | READY d1da71f | 18/11 19:38Z |
 parallel-time (ORDER ROOT-54 ~20:22Z + ADD ~20:37Z) | review/parallel-time | session_01964izEDFWH8uK569yeSGJt | RUNNING | 18/11 19:52Z | owner D #3
 | REVIEW ag-deed-perf (opus reviewer; env cung-tuong-mong = CDN allowed) | review/ag-deed-perf 9e0e1928 | C-AG #14 | session_01Rc5AsKgufafrSAB6Xyw8k7 | RUNNING | 18/11 19:58Z |
