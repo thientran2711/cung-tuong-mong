@@ -18,7 +18,7 @@ B10 3 colour versions c04, c06, c07–c10 | _review CDN consort-tiers/<cNN>/b10 
 | E7a2 questline-q1a FIX 2 (opus; successor of E7a) | review/questline-q1a | E ROOT #3 | session_01DgYSWnDfnkgz7A4beCa3p4 | RUNNING | 18/11 07:20Z |
 | fullbody-frame step 2 (all full-body frames, OD 07:50Z) | review/fullbody-frame-s2 | MAIN ROOT-48 | session_01UV1SzhJ3JicrwJmcbMVHSA | READY FOR REVIEW 3849dddf | 18/11 |
 | BALANCE FINAL = balance-chain ce3f5611 + balance-2 r2 deltas + Next 1–2 (conception, y-care) + residence-seats-r2 merge (opus) | review/balance-final | D | session_01964izCP81mLjwwymWk5t2Q | RUNNING | 18/11 07:32Z |
-| look-fx-wire R9f (per-picture keep-out, tcold + t5-t8 fig rows) | review/look-fx-wire df129e4 | MAIN ROOT-47 | worker #8 | READY FOR CHECK | 18/11 |
+| look-fx-wire R9g (face-clip url() quote bug fix, fig rows for every figure group, Điểm trang driven) | review/look-fx-wire a40d199d | MAIN ROOT-50 | worker #9 | READY FOR CHECK | 18/11 |
 B10 consorts c02/c03/c05/c22–c32 | claude/cung-tuong-mong-handover-hj0h8w | session_011xDdVRdfNz9bDn1Croq298 (W40, Foreman C) | RUNNING | 2026-11-18T07:37Z
 | FOREMAN C-AG #10 (opus; successor of #9) | handover FOREMAN_C_STATUS | C-AG #9 | session_01UV1SzjAd8BYMMz2rKFZitp | ROLLED OVER → #11 SzkgegQ | 18/11 05:00Z |
 | FOREMAN C-AG #11 (opus; successor of #10, opened by C-AG #10) | handover FOREMAN_C_STATUS | C-AG #10 | session_01UV1SzkgegQEiMEPpSv12RN | RUNNING | 18/11 07:37Z |
