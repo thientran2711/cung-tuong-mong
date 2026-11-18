@@ -36,3 +36,21 @@ START_CTX ~5%, finished far below ceiling; no handover needed.
 - Added: every tag nudged >=24 px gets a thin gold leader line + dot to its own building (kit CSS `.mspot>.mlead` in jmapc.js; drawn in j38 place()); nudge now prefers the nearest free spot (distance weight x5).
 - Max tag centre -> own building centre (scan col `dist`, includes tags that sit off-centre by design): iPad day 119 px, iPad night 168 px, Fold day 163 px, Fold night 203 px (Chung Tú; Trường Môn viện 194). All of those carry a leader line; every other tag <= 58 px.
 - QUICKCHECK PASS on 98c0e0a3 (195 s; render 269/268, tab 457/454, buổi 1187/1359). First run FAILed perf buổi 3291/1039 ms = machine noise (same sha PASS on rerun).
+
+## r2 (worker map-labels-r2, MAIN ROOT-53→54) — READY 01256d36 on review/map-labels-missing (merged live main 94d11623)
+PRIORITY #1 CHECK: OD L1032, L1416, L1417 + 18/11 ~19:05Z/19:10Z/19:15Z | main j38 mapFit, j41 accSpot, j27 empty | review/* review/map-labels-missing | claims map-labels-r2.
+### Reviewer FAIL list → fixed (whole group, one solver)
+`kmSolve` (j38.js, pure geometry, deterministic, 25–130 ms) replaces the nudge: every tag = ONE union box (.mlab+.mmeta). Hard rules: no tag boxes touch; no building dot in/beside another tag; leader (dot → nearest point of its tag) never runs through another tag and never crosses another leader. Soft: tag not on another place's building, nearer is better. Order: highest rank first (her place, "!" places, more people) keep home when free → repair → seeded local search over all tags. Smaller before longer: Fold floor now = kit floor .85 (was 1), and a tag may take its name on ONE line (`.kmnw`, variant chosen only where needed) → max tag→building distance 57–90 px (r1: up to 203). Leaders only when the dot is >6 px clear of its tag.
+### Grey state (OD 19:05Z/19:10Z/19:15Z)
+ONE kit class `.mgrey` (jmapc.js) = WHOLE tag (slip + info row) grey; set for every unreachable place (j41 accSpot: .awalk out of khắc, .agrey rank/forbidden; lock + reason kept), empty palaces (j27, + line «cung trống»; Ngoại triều keeps its reason line), and courtyard hall tags of an unreachable/empty palace (jpm kpmGrey). LOOK ONLY: no tap handler touched; scan clicks every grey place with st.kind and asserts the dialog has «Lẻn vào». Old per-state .awalk label colours deleted (canon overwrite). KIT.md §85.7 updated in place.
+### Scan (dev/test/map-labels-scan.js, extended): union-box overlap, dot-inside/beside tag, leader vs tag, leader×leader, inside map, grey==unreachable, «cung trống» line, dialog «Lẻn vào», courtyards grey==unreachable; ranks + saves (random save per run), DSF 2
+| device | time | ranks | result (this build) |
+|---|---|---|---|
+| Fold 755x1000@1 | day/night | 2,3,4,5,6,7 | PASS all, ≤0 violations |
+| iPad 1180x820@1 | day/night | 2,3,4,5,6 | PASS all |
+| Fold + iPad @2 | day/night | 2,3,4 | PASS (shots below) |
+| courtyards (13 slots, 8 grey) | both | – | PASS |
+BEFORE (r1 build, same scan rules, reviewer): union overlap + dot under tags + crossing leaders on Fold/iPad NE corner. Before/after of the old tolerance: r1 max dist 203 px, r2 ≤90 px.
+Tests: QUICKCHECK PASS 183 s (render 242/224, tab 448/413, buổi 1191/1291; core gates PASS; build matches). Run: `DSF=2 NODE_PATH=$(npm root -g) node dev/test/map-labels-scan.js <url> <dir|-> 755x1000,1180x820 [-,3,6]`.
+Shots (LOOKED 3x, DSF 2, JPG, CDN upload not used): dev/handover/shots/map-labels-missing/{755x1000,1180x820}-{day,night,courtyard}.jpg (rank 4 save). Delete after verdict.
+Not done: no old-save variants beyond quickcheck; solver can in theory leave a rule broken in an extremely crowded layout (never seen in ~40 runs; then tags stay, none hidden).
