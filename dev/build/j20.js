@@ -18,10 +18,10 @@ function queenRewards(){const q=queenP();if(!q||q===S||S.month%3||(window.agDOn&
 function blCard(){return `<p>Bổng lộc phát ngày đầu mỗi tháng, theo phẩm vị (mọi phi tần như nhau). Mỗi kẻ hầu ăn công ${BAL.wage} bạc/tháng.</p>${kitRows(BL.map((b,i)=>[i>=7?"Hoàng hậu":RANKS[i].n,[`<span class="ef t">${b} bạc</span>`,BLG[i]].filter(Boolean),"n"]))}<p class="past">Lãnh cung: chỉ 5 bạc. Cấm túc: nửa bổng. Hoàng hậu ghét ngươi (Hoàng hậu quý ngươi dưới -30): mỗi tháng sai Nội vụ phủ khất bổng (bớt 3 phần 10): ${chanceW(20)}. Sinh con, được ân thưởng: cộng thêm một lần.</p>`}
 /* ân thưởng: every reward has silver + item + jealousy; recorded */
 const BBAC={night:0,contest:20,son:30,dau:15,promo:20,accuse:10,story:10,birthday:15,sinhthan:20,nurse:15};
-BEST.dau=["tuithom","sonphan","luahang"];BEST.sinhthan=["tramngoc","vongngoc","gamto"];BEST.nurse=["nhansam","yensao","agiao"];
+BEST.dau=["tuithom","lxma1","luahang"];BEST.sinhthan=["tramngoc","vongngoc","gamto"];BEST.nurse=["nhansam","yensao","agiao"];
 BWHY.dau="mừng công chúa ra đời";BWHY.sinhthan="nhân sinh thần của ngươi";BWHY.nurse="vì hầu thuốc chu đáo";
 (function(){const b0=bestow;bestow=function(p,why){const n0=(p&&p.inv||[]).length,q0=Q.length;b0(p,why);if(!p||!p.inv||p.inv.length===n0)return;const k=p.inv[p.inv.length-1].k,bac=BBAC[why]||0;if(bac)ap(p,{bac});
- if(p===S){ghenAll(BAL.ghen.bestow);S.awards=(S.awards||[]);S.awards.unshift({d:`T${S.month}/${S.year}`,why:BWHY[why]||why,it:itm(k).n,bac});if(S.awards.length>60)S.awards.length=60;
+ if(p===S){ghenAll(BAL.ghen.bestow,"ngươi được ban thưởng");S.awards=(S.awards||[]);S.awards.unshift({d:`T${S.month}/${S.year}`,why:BWHY[why]||why,it:itm(k).n,bac});if(S.awards.length>60)S.awards.length=60;
   const m=Q[Q.length-1];if(Q.length>q0&&m&&m.t==="Thánh thượng ban thưởng")m.h+=`<p>${kitParse(`thành: ${itm(k).n}${bac?`, Bạc +${bac}`:""} · phi tần ghen +${ghenN(BAL.ghen.bestow)}`)}</p>`;log(`Ân thưởng ${BWHY[why]||""}: ${itm(k).n}${bac?`, Bạc +${bac}`:""}; phi tần ghen +${ghenN(BAL.ghen.bestow)}.`)}
  else{S.pg=0;p.pg=cl((p.pg||0)+3,0,100)}}})();
 const AREASON=[["Đêm thị tẩm vui","night"],["Thắng ở yến tiệc, thi tài","contest"],["Sinh hoàng tử","son"],["Sinh công chúa","dau"],["Được tấn phong","promo"],["Tố giác kẻ gian thành","accuse"],["Tuyến truyện thành","story"],["Tiết Vạn thọ (tháng 8, người được sủng nhất)","birthday"],[()=>`Sinh thần của ngươi (Sủng từ ${BAL.sinhThanSung})`,"sinhthan"],["Hầu thuốc Hoàng thượng khi ngài bệnh","nurse"]];

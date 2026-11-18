@@ -11,7 +11,7 @@ async function viaCurl(ctx){await ctx.route(/ctm-img\.victoria-tntt\.workers\.de
   if(process.env.CTM_CURL_CDN)await viaCurl(ctx);const p=await ctx.newPage();p.setDefaultTimeout(120000);const errs=[];p.on('console',m=>{if(m.type()==='error')console.log('CONSOLE',m.text().slice(0,200))});p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof render==='function');await sleep(2500);
   await p.addStyleTag({content:'#kroul,.kroul{display:none!important}'});
-  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<400;i++){start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;tab='court';PG.court=0;render()});
+  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<400;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;tab='court';PG.court=0;render()});
   await sleep(5000);
   const m=await p.evaluate(()=>{const R=e=>e.getBoundingClientRect();const cs=[...document.querySelectorAll('#panel button.ka.kart')].filter(c=>c.offsetParent&&!c.classList.contains('kopt'));
    return{n:cs.length,sizes:cs.map(c=>{const a=c.querySelector(':scope>.kaart');const r=R(a);return +(r.width/r.height).toFixed(3)}),marks:cs.filter(c=>!c.querySelector('.kodm')).map(c=>!!c.querySelector('.kainfo')),hovf:document.documentElement.scrollWidth>innerWidth+1}});

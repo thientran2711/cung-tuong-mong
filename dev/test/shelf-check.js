@@ -32,7 +32,7 @@ const sl=t=>new Promise(r=>setTimeout(r,t));
     spread:P.map(x=>+x[1].toFixed(2)).join(" ")};F(lo[1]<hi[1]&&shelfLvFor(lo[0],S)>=shelfLvFor(hi[0],S),"taste does not change how a room is seen");
    F(shelfTaste(lo[0])===lo[1],"taste not stable for one person");
    /* a fake frugal Thái hậu: ngự ban room → rebuke when the talk has reached her */
-   const ot=BAL.shelf.taste.spread,oo=BAL.shelf.th.o;BAL.shelf.th.o=100;const th0=S.th|0,q0=Q.length;const st0=shelfTaste;shelfTaste=p=>p==="th"?-1:st0(p);/* a frugal Thái hậu */lo[0].shn={};shelfLook(lo[0],S,"test",true);out.T.thLv=SHELF_LV[shelfLvFor("th",S)];shelfThRebuke();shelfTaste=st0;BAL.shelf.th.o=oo;
+   const ot=BAL.shelf.taste.spread,oo=BAL.shelf.th.o;BAL.shelf.th.o=100;const th0=S.th|0,q0=Q.length;const st0=shelfTaste;shelfTaste=p=>p==="th"?-1:st0(p);/* a frugal Thái hậu */lo[0].shn={};shelfLook(lo[0],S,"test",true);out.T.thLv=SHELF_LV[shelfLvFor("th",S)];/* odds-cap (j1 roll caps every roll at BAL.odds.hi 95): th.o=100 is no longer "always" -> 1 in 20 the Thái hậu stayed silent; the sure roll passes for this call only (test only) */{const rl0=roll;roll=o=>o>=100||rl0(o);try{shelfThRebuke()}finally{roll=rl0}}shelfTaste=st0;BAL.shelf.th.o=oo;
    const card=Q.slice(q0).find(q=>q.t==="Thái hậu quở");out.T.thRebuke=card?card.h.replace(/<[^>]+>/g,""):"none (thDead "+!!S.thDead+")";out.T.thRb=[th0,S.th];F(S.thDead||(card&&(S.th|0)<=th0),"Thái hậu did not rebuke a room too lavish to her");Q.length=q0;
    shelfOf(S).g=JSON.parse(kp);S.rank=rk}
   S.inv.push({k:"vongngoc",w:1});F(shelfWhyNot(S,S.inv[S.inv.length-1])!=="","worn / non-décor piece accepted");S.inv.pop();
@@ -45,7 +45,7 @@ const sl=t=>new Promise(r=>setTimeout(r,t));
   /* 3 EFFECTS: a superior and a peer see a lavish room; then a fitting one */
   const sup=liveRivals(true).find(x=>x.alive&&rkOf(x)>S.rank)||null,peer=liveRivals(true).find(x=>x.alive&&rkOf(x)<=S.rank)||v;
   for(const k of ["remchau","sanho","chuongngoc","binhsu"]){S.inv.push({k,from:"emp"});shelfPut(S,S.inv.length-1)}
-  const a0=sup?sup.rel:0,g0=peer.ghen||0;if(sup){sup.shR={};shelfSee(sup,S,"test")}peer.shR={};shelfSee(peer,S,"test");
+  const a0=sup?sup.rel:0,g0=peer.ghen||0;{const st1=shelfTaste;shelfTaste=x=>x===sup||x===peer?0:st1(x);/* neutral eye for both (their random once-per-life taste made the frown / envy flaky) */try{if(sup){sup.shR={};shelfSee(sup,S,"test")}peer.shR={};shelfSee(peer,S,"test")}finally{shelfTaste=st1}}
   out.T.fx={lv:shelfLux(S).name,supRel:sup?[a0,sup.rel]:"no superior",peerGhen:[g0,peer.ghen],peerProof:!!(peer.shn&&peer.shn.me&&peer.shn.me.pf)};
   F(!sup||sup.rel<a0,"superior did not frown on a lavish room");F(peer.ghen>g0,"peer did not envy");
   /* mood */
@@ -54,7 +54,7 @@ const sl=t=>new Promise(r=>setTimeout(r,t));
   {const st1=shelfTaste;shelfTaste=x=>x===peer?0:st1(x);shelfLook(peer,S,"tận mắt",true);shelfTaste=st1}/* r2 reviewer: a neutral eye (the peer's random once-per-life taste made this flaky) */
   F(!!(ACT.xx&&ACT.xx.ok(peer,S)),"Tố xa xỉ not open to a visitor who saw it");
   /* owner (d): a TIP (rumour) is enough to accuse; with nothing seen or heard an NPC does not (her monthly guess pass aside); the player may always guess */
-  const rm=w&&w!==peer?w:liveRivals(true).find(x=>x!==peer&&x.alive);if(rm){rm.shn={};F(!ACT.xx.ok(rm,S)||(typeof dressNow==="function"&&dressNow(rm,S)),"NPC accuses with nothing seen or heard");shelfLook(rm,S,"tin đồn",false);
+  const rm=w&&w!==peer?w:liveRivals(true).find(x=>x!==peer&&x.alive);if(rm){rm.shn={};F(!ACT.xx.ok(rm,S)||(typeof dressNow==="function"&&dressNow(rm,S)),"NPC accuses with nothing seen or heard");{const st1=shelfTaste;shelfTaste=x=>x===rm?0:st1(x);shelfLook(rm,S,"tin đồn",false);shelfTaste=st1}/* neutral eye, as for the peer above: her random once-per-life taste made the tip flaky 1/20 */
    out.T.tip={how:(shelfCause(rm,S,"xx")||{}).how||"none",ok:!!ACT.xx.ok(rm,S)};F(out.T.tip.ok&&out.T.tip.how==="tip","a rumour (tip) is not enough to accuse")}
   out.T.guess={xx:(shelfCause(S,v,"xx")||{}).how||"none",vp:(shelfCause(S,v,"vp")||{}).how||"none",act:!!(ACT.vp.ok(S,v)&&ACT.xx.ok(S,v))};
   F(out.T.guess.act,"the player cannot accuse on a guess");

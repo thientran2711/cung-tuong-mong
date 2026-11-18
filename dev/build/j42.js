@@ -353,7 +353,7 @@ function cnvBribeOpts(a,v,m,pay){return [
 PEND.cnvFrame=pp=>{const s=servById(pp.sid),m=srvM();if(!isSrv()||!s||!m)return null;const fr=srvFriendList().length;const item=pick(["cây trâm vàng","chiếc vòng ngọc","hộp phấn ngự ban","túi hương thêu chỉ vàng"]);
  return{t:`<p>${s.name} (${srkName(s)}) tố với ${m.name} rằng ngươi lấy trộm ${item}.</p>${fr?`<p class="past">${fr} người bạn sẽ làm chứng cho ngươi.</p>`:""}`,who:pServ(s),o:cnvPend(S,cnvFrameOpts(S,s,m))}};
 /* a = the framed one, s = the accuser (S when the maid player framed an NPC colleague), m = their master */
-function cnvFrameOpts(a,s,m){const fr=a===S?srvFriendList().length:(typeof asFriends==="function"?asFriends(a):0);const o=odA(a,BAL.odb.j42.odO_9+(a.tamco||0)/2+(a.duc||0)/5+fr*8);
+function cnvFrameOpts(a,s,m){const fr=a===S?srvFriendList().length:(typeof asFriends==="function"?asFriends(a):0);const o=odA(a,BAL.odb.j42.odO_9+(a.tamco||0)/BAL.odb.j42.frTcDiv+(a.duc||0)/BAL.odb.j42.frDucDiv+fr*8);
  return [
   {id:"clear",n:"Thanh minh",tag:"social",o,fx:{},w:{tin:BAL.eff.j42.tinGo_3},l:{tin:BAL.eff.j42.tinGo_4,suc:BAL.eff.j42.sucGo_3},x:`${word(o)} · thành: ${s.name} bị phạt, Chủ tin ${balSg(BAL.eff.j42.tinGo_3)} · hỏng: Chủ tin ${balSg(BAL.eff.j42.tinGo_4)}, bị đánh đòn Sức ${balSg(BAL.eff.j42.sucGo_3)}`,
    go:ok=>{if(ok){const P=BAL.ag.stf2.accPen;if(s===S)apply({tin:-P});else{s.loyal=cl(s.loyal-P,0,100);s.trouble=wk()}stfLike(s,a,-20);return a===S?`Ngươi thanh minh được; ${s.name} bị phạt vì vu cáo.`:`${a.name} thanh minh được; ${stfNm(s)} bị phạt vì vu cáo.`}
@@ -418,7 +418,7 @@ PEND.cnvFest=pp=>{if(!isSrv())return null;const m=srvM();
 /* ---------- rising: she joins the consort game ---------- */
 function srvRise(why){if(!S||(S.age||0)<18)return;const m=srvM();const tin=S.tin;S.srv.risen=1;S.srv.wasMis=m?m.id:null;S.srv.sent=null;S.rank=0;S.sung=15+Math.round(S.nt/5);S.lastPromo=S.turn;apply({danh:5,bac:20});
  S.maid=newMaid(pick(MAIDS),50);S.staff=[];try{fillStaff(S,true)}catch(e){}
- if(m&&m.alive){relAdd(S,m,tin>=60?BAL.eff.j42.srvRise[0]:BAL.eff.j42.srvRise[1]);m.ghen=cl((m.ghen||0)+(tin>=60?5:25),0,100)}
+ if(m&&m.alive){relAdd(S,m,tin>=60?BAL.eff.j42.srvRise[0]:BAL.eff.j42.srvRise[1]);ghenUp(m,tin>=60?5:25,"thấy cung nữ cũ của mình được nâng lên làm phi tần",S)}
  try{palFix()}catch(e){}S.place="home";S.visit={k:"home",people:homePeople(),talked:false,tk:{}};tab="act";
  log(`<b class="g">${why}: ngươi được phong ${RANKS[0].n}.</b>`);
  Q.push({t:"Thánh chỉ",cls:"end",who:pEmp(),h:`<p>${why}. Thánh chỉ: cung nữ ${S.name} được phong <b>${RANKS[0].n}</b>, ở ${palName("home")}.</p><p>${m?`${m.name} ${tin>=60?"vẫn coi ngươi như người nhà.":"nhìn ngươi bằng ánh mắt lạnh như băng."}`:""}</p><p class="past">Từ nay ngươi theo luật của phi tần: Sủng, thị tẩm, phẩm vị.</p>`,btn:"Tạ ơn"});
@@ -473,15 +473,15 @@ function srvStaffHTML(){const L=srvColleagues();const m=srvM();const oc=od(SRVA.
    +pbtn(`class="opt" data-cnv="frame" data-sid="${s.sid}"`,"Tố lỗi với chủ",`${word(of)} · tốn: 1 khắc · thành: ${s.name} bị phạt, Chủ tin ${balSg(SRVA.frame.w.tin)} · hỏng: người ấy quý ngươi ${balSg(SRVA.frame.afL)}, Chủ tin ${balSg(SRVA.frame.l.tin)}`,o!==m?"Chỉ tố người cùng cung":S.srv.lau>0?"Đang ở Tân Giả khố":t1)
    +(o&&o!==m&&s.role==="maid"?pbtn(`class="opt" data-cnv="poison" data-sid="${s.sid}"`,"Bỏ độc vào bát cơm",`${word(od(SRVA.poison.o(S,m)))} · tốn: Bạc ${srvCa("poison",S,m).bac}, ${SRVA.poison.k} khắc · thành: không ai tra ra · hỏng: Thái y tra ra, ngươi bị giải sang Thận hình ti · kèm: ${s.name} trúng độc; không qua khỏi: ${chanceW(BAL.mline.poisonDie)}`,!stfPoisonOk(S,m,s)?(S.bac<-srvCa("poison",S,m).bac?"Thiếu bạc":"Cung ấy không thù cung chủ"):!can(SRVA.poison.k)?"Hết khắc buổi này":""):"")+`</div></div>`}).join("")||`<p class="past">Chưa quen ai.</p>`)}
 function srvStaffAct(k,s){if(!can(1))return null;const m=srvM();
- if(k==="chat"){spend(1);const ok=roll(od(SRVA.chat.o(S)));srvAf(s,ok?SRVA.chat.af:SRVA.chat.afL);if(roll(SRVA.chat.know))S.srv.know[s.sid]=1;log(`Trò chuyện với ${s.name}: ${ok?"thân hơn":"bị lạnh nhạt"}.`);return ok}
+ if(k==="chat"){const o=od(SRVA.chat.o(S));/* odds read before the spend (shown-odds r2) */spend(1);const ok=roll(o);srvAf(s,ok?SRVA.chat.af:SRVA.chat.afL);if(roll(SRVA.chat.know))S.srv.know[s.sid]=1;log(`Trò chuyện với ${s.name}: ${ok?"thân hơn":"bị lạnh nhạt"}.`);return ok}
  if(k==="gift"){if(S.bac<-SRVA.gift.c.bac)return null;spend(BAL.btn.cnv.k);apply(SRVA.gift.c);srvAf(s,SRVA.gift.af);log(`Biếu ${s.name} chút quà.`);return true}
  if(k==="ask"){if((S.srv.af[s.sid]||0)<SRVA.ask.af)return null;spend(BAL.btn.cnv.k);const L=liveRivals(true).filter(x=>x!==m);if(L.length){const v=pick(L);S.srv.intel.push(v.id);log(`${s.name} kể cho ngươi chuyện trong cung ${v.name}: có tin để bẩm chủ.`)}else log(`${s.name} không biết gì mới.`);return true}
- if(k==="frame"){if(ownerOf(s)!==m||S.srv.lau>0)return null;spend(1);const ok=roll(od(SRVA.frame.o(S)));
+ if(k==="frame"){if(ownerOf(s)!==m||S.srv.lau>0)return null;const o=od(SRVA.frame.o(S));/* odds read before the spend (shown-odds r2) */spend(1);const ok=roll(o);
   /* AG-ALL-2 G10: the framed colleague answers with the maid's own "Bị vu oan" options (cnvFrameOpts), chosen by her needs (jagstf2 stf2Framed) */
   const R=ok&&typeof stf2Framed==="function"?stf2Framed(s,S,m):null;if(R&&!R.stands){srvAf(s,SRVA.frame.af);log(`Ngươi tố ${s.name} lười nhác. ${R.r}`);return R.id==="pay"}
   if(ok){if(!R)s.loyal=cl(s.loyal+SRVA.frame.loy,0,100);s.trouble=wk();srvAf(s,SRVA.frame.af);apply(SRVA.frame.w);let r=`Ngươi tố ${s.name} lười nhác; ${m.name} phạt hắn.${R&&R.r?" "+R.r:""}`;if(roll(SRVA.frame.out)&&m.staff.includes(s)){m.staff.splice(m.staff.indexOf(s),1);r+=` ${s.name} bị đuổi về Nội vụ phủ.`}log(r);return true}
   srvAf(s,SRVA.frame.afL);apply(SRVA.frame.l);log(`Ngươi tố ${s.name} nhưng ${m.name} không tin, còn trách ngươi gây chuyện.`);return false}
- if(k==="poison"){const t=ownerOf(s);if(!stfPoisonOk(S,m,s))return null;spend(SRVA.poison.k);apply(srvCa("poison",S,m));const ok=roll(od(SRVA.poison.o(S,m)));const r=typeof mlPoisonDo==="function"?mlPoisonDo(m,S,t,s,!ok,1):"";if(r)log(r);return ok}
+ if(k==="poison"){const t=ownerOf(s);if(!stfPoisonOk(S,m,s))return null;const oP=od(SRVA.poison.o(S,m));/* odds read before the spend (shown-odds r2-rv) */spend(SRVA.poison.k);apply(srvCa("poison",S,m));const ok=roll(oP);const r=typeof mlPoisonDo==="function"?mlPoisonDo(m,S,t,s,!ok,1):"";if(r)log(r);return ok}
  return null}
 /* AG-ALL-2 G5: Bỏ độc — a maid of a palace hostile to her master (BAL.mline.feudHost), the poison bought (SRVA.poison.c); the same gate for an NPC staff */
 function stfPoisonOk(a,m,x){try{const t=ownerOf(x);const bac=a===S?S.bac:(a.bac||0);return !!(m&&t&&t!==m&&x.role==="maid"&&x!==a&&hostility(m,t)>=BAL.mline.feudHost&&bac>=-srvCa("poison",a,m).bac&&!(a===S&&S.srv.lau>0))}catch(e){return false}}

@@ -24,7 +24,7 @@ const R=path.resolve(__dirname,'../..');const MONTHS=+process.argv[2]||240,LIVES
    const q=(Q[0]||{});window.kitInk=ki;res.fates.push({n,dead:S.dead,fate:S.fate,ink:ink.join("|"),t:String(q.h||"").replace(/<[^>]+>/g,'').slice(0,260)});quiet();BAL.mort.fate.tuanP=25}
   /* birth: force hard births → the Emperor's choice; stillbirth; plain hard birth survived */
   const B=BAL.mort.birth,b0=JSON.stringify(B);res.birth=[];const tries=[["choice, low favour",()=>{B.stillP=0;B.hardX=99;B.choiceP=100;S.sung=5;S.th=-50}],["choice, high favour",()=>{B.stillP=0;B.hardX=99;B.choiceP=100;S.sung=100;S.th=80}],["hard survived",()=>{B.stillP=0;B.hardX=99;B.choiceP=0;B.hardDie=0}],["stillbirth",()=>{B.stillP=100}]];
-  for(const [n,f] of tries){for(let i=0;i<3;i++){start();quiet();S.suc=30;f();const k0=S.kids.length;let r="";try{r=birthP(S,false)}catch(e){res.errs.push(n+": "+e)}
+  for(const [n,f] of tries){for(let i=0;i<3;i++){try{nlNew()}catch(e){}start();quiet();S.suc=30;f();const k0=S.kids.length;let r="";try{r=birthP(S,false)}catch(e){res.errs.push(n+": "+e)}
    res.birth.push({n,fate:S.fate||"",dead:!!S.dead,kids:S.kids.length-k0,suc:S.suc,q:(Q.find(x=>x.t==="Giữ mẹ hay giữ con")||{}).h?"event":"",t:String(r).replace(/<[^>]+>/g,'').slice(0,120)});Object.assign(B,JSON.parse(b0));quiet()}}
   /* care ceiling (owner OD:L1143/L1168): every care source kept up for 40 years + 40 cures → never more than careMax years gained */
   {start();quiet();const C=BAL.mort.life,t0=S.tho;S.tho=200;const base=S.tho;S.suc=100;S.doctor=1;S.arts=S.arts||{};S.arts.y=5;const r0=roll;roll=()=>true;

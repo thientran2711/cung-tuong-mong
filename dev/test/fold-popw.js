@@ -6,7 +6,7 @@ const [,,DEV,OUT,TAG]=process.argv;
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
  const f=await D.openHost(p,srv.url);
  await f.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function');await p.waitForTimeout(2500);
- await f.evaluate(async()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(typeof S!=='undefined'&&S&&!isSrv())break}document.querySelectorAll('[id^=kroul]').forEach(e=>e.remove());Q.length=0;const md=document.getElementById('modal');md.hidden=true;quiet=false;S.out=0;S.confined=0;S.place="home";try{goTo("home")}catch(e){}});
+ await f.evaluate(async()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(typeof S!=='undefined'&&S&&!isSrv())break}document.querySelectorAll('[id^=kroul]').forEach(e=>e.remove());Q.length=0;const md=document.getElementById('modal');md.hidden=true;quiet=false;S.out=0;S.confined=0;S.place="home";try{goTo("home")}catch(e){}});
  await p.waitForTimeout(2500);await f.evaluate(()=>{document.querySelectorAll('[id^=kroul]').forEach(e=>e.remove());Q.length=0;document.getElementById('modal').hidden=true;render()});await p.waitForTimeout(1000);
  const R=r=>{if(!r)return null;const q=r.getBoundingClientRect();return[Math.round(q.left),Math.round(q.top),Math.round(q.width),Math.round(q.height)]};
  const out={dev:DEV,tag:TAG};

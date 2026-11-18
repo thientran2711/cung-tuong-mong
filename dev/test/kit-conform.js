@@ -20,12 +20,13 @@ const VPS=(SIZES||'755x1000').split(',');
   const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce'});
   const p=await ctx.newPage();p.setDefaultTimeout(60000);p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.addStyleTag({content:'#kroul,#kroulw,.kroul,.kcf{display:none!important}'});
-  await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function',null,{timeout:180000});await sleep(2500);
-  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!isSrv())break}});
-  for(let i=0;i<15;i++){await sleep(400);const srv=await p.evaluate(()=>{const s=isSrv();if(s)start();return s});if(!srv)break}
-  await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;try{S.inv.push({k:"tramngoc",from:"me"})}catch(e){}tab='act';render()});await sleep(1200);
+  await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function'&&window.__ctmBuilt===1,null,{timeout:180000});/* real condition: the game script ran to its end (was a 2.5 s timer) */
+  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}});
+  /* start() hands S over asynchronously (measured 1.2-2 s; the 'S undefined' crash of emotion-acts): wait for S itself, then re-roll a servant life (was 15 x 400 ms timers) */
+  for(let i=0;i<15;i++){await p.waitForFunction(()=>typeof S!=='undefined'&&!!S&&!!S.name,null,{timeout:30000});const srv=await p.evaluate(()=>{const s=isSrv();if(s)try{nlNew()}catch(e){}start();return s});if(!srv)break}
+  await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;try{S.inv.push({k:"tramngoc",from:"me"})}catch(e){}tab='act';render()});await p.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));/* render is synchronous; 2 frames instead of 1.2 s */
   const res={};
-  const check=async(name)=>{if(process.env.KC_V)console.log('..',name,await p.evaluate(()=>{const w=window.__kcwhy;window.__kcwhy='';return w||''}));await sleep(450);const r=await p.evaluate(KB=>{const KIT_BLOCK=new RegExp(KB);const kf=document.getElementById('kidfl');const M=kf||document.getElementById('modal');if(!M||(!kf&&M.hidden))return null;const d=M.querySelector('.dlg');if(!d)return{v:'CUSTOM',why:['no .dlg']};
+  const check=async(name)=>{if(process.env.KC_V)console.log('..',name,await p.evaluate(()=>{const w=window.__kcwhy;window.__kcwhy='';return w||''}));await p.evaluate(()=>new Promise(r=>requestAnimationFrame(()=>requestAnimationFrame(r))));/* dialogs are written synchronously (reducedMotion); 2 frames instead of 450 ms */const r=await p.evaluate(KB=>{const KIT_BLOCK=new RegExp(KB);const kf=document.getElementById('kidfl');const M=kf||document.getElementById('modal');if(!M||(!kf&&M.hidden))return null;const d=M.querySelector('.dlg');if(!d)return{v:'CUSTOM',why:['no .dlg']};
     const why=[];if(!d.classList.contains('kpanel'))return{v:/pcm/.test(M.className+d.className)?'EXEMPT':'CUSTOM',why:['not .kpanel'],cls:d.className};
     if(!d.querySelector(':scope > .kph'))why.push('no kit header .kph');
     const mb=d.querySelector('#mb')||d.querySelector(':scope > .body');if(!mb)return{v:'CUSTOM',why:['no #mb']};
@@ -103,12 +104,18 @@ const VPS=(SIZES||'755x1000').split(',');
   /* MULTI-PAGE EVENTS (owner 16/11 07:37Z, OD:L963): ONE event = ONE frame size for all its pages / steps; a person pop-up outside #modal (tutorial coach, tip) is the
      kitPersonDlg template (full-body figure left, picture right top, buttons bottom). Fails when the 4 intro pages (or the spotlight steps) differ in size. */
   const tourFails=[];
-  try{await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;window.kitTour()});await sleep(1500);const pg=[],st=[];
+  try{await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;window.kitTour()});const pg=[],st=[];
+   /* wait for the real condition (the coach card is on screen; kitTour parks itself while busy() and resumes on its own), never a fixed timer */
+   const TUT_SIG=()=>{const d=document.querySelector('#ktut .kpdlg');return d?(((d.querySelector('.kpsub')||{}).textContent||'')+'|'+((d.querySelector('.kph')||{}).textContent||'')+'|'+((d.querySelector('.kpdt,.kpmain')||{}).textContent||'').slice(0,80)):null};
+   /* the tour parks itself (KTUT.paused) while any game dialog is up (jtut busy()); the gate clears such blockers, then waits for the card */
+   const TUT_READY=()=>{if(document.querySelector('#ktut .kpdlg')||!(window.KTUT&&window.KTUT.on))return true;if(window.KTUT.paused){try{Q.length=0}catch(e){}for(const id of ['modal','dawn']){const e=document.getElementById(id);if(e)e.hidden=true}for(const id of ['kload','kupd','kpodov','coopfz']){const e=document.getElementById(id);if(e)e.remove()}}return false};
+   await p.waitForFunction(TUT_READY,null,{timeout:30000,polling:100}).catch(()=>{});
    for(let i=0;i<30;i++){const o=await p.evaluate(()=>{const d=document.querySelector('#ktut .kpdlg');if(!d)return null;const r=d.getBoundingClientRect();const s=(d.querySelector('.kpsub')||{}).textContent||'';
      return{w:Math.round(r.width),h:Math.round(r.height),pg:/trang \d+\/4/.test(s),fig:!!d.querySelector('.kpsubj.kes .kesimg'),small:!!d.querySelector('.pframe,.pfwrap,.pcp'),next:!!d.querySelector('[data-ktut=next]')}});
     if(!o)break;(o.pg?pg:st).push([o.w,o.h]);if(!o.fig||o.small)tourFails.push('tutorial card without a full-body figure / with a small portrait: '+JSON.stringify(o));if(!o.next)break;
-    await p.evaluate(()=>document.querySelector('#ktut [data-ktut=next]').click());await sleep(1100)}
-   const same=L=>L.every(x=>x[0]===L[0][0]&&x[1]===L[0][1]);if(pg.length<4)tourFails.push('tutorial: '+pg.length+' intro pages (want 4)');
+    const sig0=await p.evaluate(TUT_SIG);await p.evaluate(()=>document.querySelector('#ktut [data-ktut=next]').click());
+    await p.waitForFunction(([f,s0])=>{const g=(new Function('return ('+f+')()'))();if((g!==null&&g!==s0)||!(window.KTUT&&window.KTUT.on))return true;if(window.KTUT.paused){try{Q.length=0}catch(e){}for(const id of ['modal','dawn']){const e=document.getElementById(id);if(e)e.hidden=true}}return false},[TUT_SIG.toString(),sig0],{timeout:20000,polling:100}).catch(()=>{})}
+   const same=L=>L.every(x=>x[0]===L[0][0]&&x[1]===L[0][1]);if(pg.length<4)tourFails.push('tutorial: '+pg.length+' intro pages (want 4)'+(pg.length?'':' '+JSON.stringify(await p.evaluate(()=>({on:!!(window.KTUT&&window.KTUT.on),paused:!!(window.KTUT&&window.KTUT.paused),step:window.KTUT&&window.KTUT.step,card:!!document.querySelector('#ktut .kpdlg'),queue:(typeof Q!=='undefined'&&Q||[]).length,vis:['modal','ov','dawn','kload','coopfz','kpodov','kupd'].filter(id=>{const e=document.getElementById(id);return e&&!e.hidden&&e.getClientRects().length})})))));
    if(!same(pg))tourFails.push('tutorial intro pages differ in frame size '+JSON.stringify(pg));if(st.length&&pg.length&&(st[0][0]!==pg[0][0]||st[0][1]!==pg[0][1]))tourFails.push('tutorial steps '+JSON.stringify(st[0])+' differ from the intro pages '+JSON.stringify(pg[0]));if(st.length&&!same(st))tourFails.push('tutorial steps differ in frame size '+JSON.stringify(st));
    await p.evaluate(()=>{try{kitCoachOff()}catch(e){}})}catch(e){errs.push('tour: '+String(e.message).slice(0,100))}
   /* loose floats over the tab bar (owner shot faa95830: co-op wait chips) */

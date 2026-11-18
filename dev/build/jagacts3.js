@@ -12,11 +12,11 @@ function p3On(){try{return !!(agOn()&&BAL.ag.par3&&BAL.ag.par3.on)}catch(e){retu
 function p3Nm(p){return p===S?"ngươi":p&&p.name||""}
 function p3Ap(p,x){if(!x||!Object.keys(x).length)return;if(p===S)apply(x);else ap(p,x)}
 /* every other consort's jealousy rises when someone dances before the whole harem (her card: ghenAll; an NPC dancer: the others, her included in ghen of NPCs only) */
-function p3GhenAll(p,n){if(p===S)return ghenAll(n);const d=ghenN(n);liveRivals(true).forEach(v=>{if(v!==p)v.ghen=cl((v.ghen||0)+d,0,100)})}
+function p3GhenAll(p,n,why){if(p===S)return ghenAll(n,why);const d=ghenN(n);liveRivals(true).forEach(v=>{if(v!==p)ghenUp(v,d,why||`thấy ${p.name} nổi bật hơn người`,p)})}
 /* ---------------- the player cards, built once ---------------- */
 const P3C={
  dance:p=>{const X=BAL.ag.par3.dance;return{n:"Múa trong yến tiệc",t:"Cả hậu cung nhìn vào.",c:{...X.c},o:odA(p,X.o+(p.sac||0)/X.sacD*(p===S&&has("mesac")?X.mesac:1)+((p.arts&&p.arts.vu)||0)*X.vu),
-  w:{...X.w},l:{...X.l},x:`phi tần ghen +${ghenN(BAL.ghen.dance)}`,go:()=>p3GhenAll(p,BAL.ghen.dance)}},
+  w:{...X.w},l:{...X.l},x:`phi tần ghen +${ghenN(BAL.ghen.dance)}`,go:()=>p3GhenAll(p,BAL.ghen.dance,`${p===S?"ngươi":p.name} múa được Hoàng thượng khen`)}},
  /* 2f2: a REAL person (the most willing servant of another palace, tmBest); the roll IS her choice (tmOdds: traits, lòng, what she wants);
     a refusal may be told to her master (r2 tmRefuse); cost = that person's bribe price (nv bribeCost, as Mua chuộc) */
  eyes:p=>{const X=BAL.ag.par3.eyes;const s=typeof tmBest==="function"?tmBest(p):null;
@@ -195,7 +195,7 @@ agReg("consort","par3fac",(v,N,need)=>{const O=[];if(!p3FacOn()||v===S||v.out||!
     P(p3O(v,"facJoin",{n:"Xin vào phe",c:{},o:odA(v,30+aff(l,v)/2+(clanOf(v)===clanOf(l)?15:0)+rkOf(v)*3),k:F.k},N,F.gJoin,"social",(kh)=>agAt(l,kh),l))}}}
   else{const l=facLeader(f);if(l&&l!==v&&aff(v,l)<0){if(nd(F.gLeave))P(p3O(v,"facLeave",{n:"Rời phe",c:{},o:100,k:0},N,F.gLeave,"self"));
     if(nd(F.gSell)&&queenP()&&queenP()!==v)P(p3O(v,"facSell",k,N,F.gSell,"scheme",(kh)=>agAt(queenP(),kh),queenP()))}}
-  if(nd(F.gDiv)){const L=p3FacFoe(v);if(L.length){const g=mindPickBy(L,f2=>facMembers(f2).reduce((s,m)=>s+agSpite(v,m),0),v);P(p3O(v,"facDiv",{n:"Ly gián",c:{},o:odA(v,40+(v.tamco||0)/3),k:F.k},N,F.gDiv,"scheme",null,facLeader(g)))}}
+  if(nd(F.gDiv)){const L=p3FacFoe(v);if(L.length){const g=mindPickBy(L,f2=>facMembers(f2).reduce((s,m)=>s+agSpite(v,m),0),v);P(p3O(v,"facDiv",{n:"Ly gián",c:{},o:odA(v,40+(v.tamco||0)/F.gDivTc),k:F.k},N,F.gDiv,"scheme",null,facLeader(g)))}}
  }catch(e){agdErr("par3fac",e)}return O});
 function p3FacRes(v,k,r){v.p3FacM=S.turn;r=String(r||"").trim();if(r&&typeof seenNPC==="function"){const s=seenNPC(v,v,r);if(s)try{log(s)}catch(e){}}return p3Res(k,r)}
 agRunReg("cx3:facFound",(v,t)=>t&&!facOf(v)&&!facOf(t)?p3FacRes(v,"facFound",found(v,t)):"");

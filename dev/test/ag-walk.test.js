@@ -10,8 +10,9 @@
 const {chromium}=require('playwright');const URL0=process.argv[2]||'dev/index.html';const URL=/^(https?|file):/.test(URL0)?URL0:'file://'+require('path').resolve(URL0);
 const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 (async()=>{const b=await chromium.launch();const p=await b.newPage({viewport:{width:755,height:1000}});const errs=[];p.on('pageerror',e=>errs.push(e.message));
- await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
- const r=await p.evaluate(()=>{const o={};localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;for(let i=0;i<20;i++){window.__nlInner=1;start();window.__nlInner=0;if(!isSrv())break}
+ /* her start place is random: retry the new game until it has a near (travel 1) and a far (travel 2) place (reviewer r3: setup red ~1 in 2) */
+ let r;for(let tr=0;tr<10;tr++){await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForTimeout(2500);
+ r=await p.evaluate(()=>{const o={};localStorage.clear();SLOT=4;document.getElementById('title').hidden=true;for(let i=0;i<20;i++){window.__nlInner=1;start();window.__nlInner=0;if(!isSrv())break}
   window.__bot=1;window.__agAll=1;Q.length=0;for(let i=0;i<8&&(S.buoi||0)!==1;i++){Q.length=0;S.mg=0;try{nextBuoi()}catch(e){}Q.length=0}placeWhere();agFlush();
   window.__tmOff=1;S.tamco=100;BAL.mind.slip=0;const KH=J95.KH;o.KH=KH;const me=knAt("me",0)||S.place||"home";o.me=me;
   const PL=["thu","dtd","tn","kn","vuon","ksp","tyv","lc","home"];const near=PL.find(k=>k!==me&&travel(k,me)===1),far=PL.find(k=>k!==me&&travel(k,me)===2);o.near=near;o.far=far;
@@ -33,7 +34,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
     for(let k=0;k<KH;k++){used=k;KN.m=null;const L=tinBaoList();const it=L.find(x=>x.id===id);out.at.push(it?(it.ended?"ended":"live"):"-")}}catch(e){out.err=e.message}finally{adHapNow=A0;knHit=H0;S.staff=st0;S.mat=mat0;S.maid=md0;used=0}return out};
   /* the carry: her place in the LAST khắc (her row may differ from khắc 1) */
   const meL=knAt("me",KH-1)||"home";o.meL=meL;o.cN=carry(PL.find(k=>k!==meL&&travel(k,meL)===1),"cn");o.cF=carry(PL.find(k=>k!==meL&&travel(k,meL)===2),"cf");
-  o.errs=AG.errs.slice(0,5);return o});
+  o.errs=AG.errs.slice(0,5);return o});if(r.near&&r.far)break}
  console.log(`her place ${r.me}; near ${r.near}, far ${r.far}; KH ${r.KH}`);
  console.log('| route | where | k1 | k2 | k3 | k4 |\n|---|---|---|---|---|---|');
  for(const [n,w,a] of [["Tai mắt","near",r.eyeN],["Tai mắt","far",r.eyeF],["her servant","near",r.srvN],["her servant","far",r.srvF],["Tai mắt (BAL.walk.far 3)","far",r.eyeF3],["relay off","far",r.eyeOff]])console.log(`| ${n} | ${w} | ${(a||[]).join(' | ')} |`);

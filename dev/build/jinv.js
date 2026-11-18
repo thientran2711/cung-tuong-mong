@@ -286,7 +286,7 @@ function luxOf(p){const L=luxWorn(p);const sc=L.reduce((s,k)=>s+luxVal(k),0);con
 /* owner 11/15: only the worn TOTAL, neutral — never the allowance, never a level word or colour; she learns the limit from what happens */
 function kitLuxChip(x){return `<span class="kchip n kluxc">Xa xỉ <b>${x.sc}</b></span>`}
 function luxMonth(p){try{if(!p||p.out||p.alive===false)return"";const x=luxOf(p,{noMk:1});/* month tick = clothes only (makeup-lux: xa xỉ of the face counts at events) */let r="";const me=p===S;
- if(x.lv>=2){const n=x.lv===3?3:1;liveRivals(true).forEach(v=>{if(v===p)return;const m=tv(LUX_TR,v)||1;v.ghen=cl((v.ghen||0)+Math.max(1,Math.round(n*m*(me?1:.5))),0,100)});
+ if(x.lv>=2){const n=x.lv===3?3:1;liveRivals(true).forEach(v=>{if(v===p)return;const m=tv(LUX_TR,v)||1;ghenUp(v,Math.max(1,Math.round(n*m*(me?1:.5))),`thấy ${me?"ngươi":p.name} dùng đồ xa xỉ`,p)});
   if(me&&x.lv===3)r+="Hậu cung xì xào ngươi ăn mặc quá xa xỉ, nhiều người ghen. "}
  if(x.lv===3&&roll(cl(50-(p.duc|0)/2,10,50))){if(me){apply({th:BAL.eff.jinv.thLuxMonth});r+=`Thái hậu chê ngươi phô trương. Thái hậu ${balSg(BAL.eff.jinv.thLuxMonth)}. `}else ap(p,{danh:-2})}
  if(x.lv===3&&roll(25)){if(me){apply({danh:BAL.eff.jinv.danhLuxMonth});r+=`Lời đồn ngươi phung phí lan khắp cung. Danh ${balSg(BAL.eff.jinv.danhLuxMonth)}. `}else ap(p,{danh:-1})}
@@ -494,6 +494,11 @@ document.addEventListener("keydown",e=>{if(e.key==="Escape"){for(const k in KSHO
 .kshdn{font-family:var(--display);font-size:1.05rem}
 .kshds{font-size:.8rem;color:var(--ink2,#6a5040)}
 /* kv:(min-width:1000px) */.kshg{--kshsz:124px}
+/* review/shop-panel (owner 18/11): the buy / sell panel is ALWAYS 3 columns (seller figure stays left, tabs Mua | Bán on top, the grid scrolls down); other 28.13e grids (pick, works) keep auto-fill */
+.kshop[data-kshop] .kshg{grid-template-columns:repeat(3,minmax(0,1fr))}
+.kshop[data-kshop] .kshc .kbtn.kshgo{padding:0 3px;font-size:.74rem}
+/* the grid always needs to scroll, so the scene picture takes the kit's smallest strip (KIT_SIZE.pic.NS, owner 18/11 16:10Z: a big picture only when the content under it fits without scrolling) */
+html body #modal .dlg.kshopd.kdper>#mb>.kdlgart.kdpban>.ksart{height:${window.KIT_SIZE?KIT_SIZE.pic.NS.h:56}px!important}
 /* short landscape screens (phone landscape): the seller's line is dropped, "Ta có N bạc" sits left of the tab row, smaller pictures → a whole tile row shows */
 
 `;document.head.appendChild(st)})();
@@ -533,7 +538,7 @@ function kitShopNvp(){const c=S.court&&S.court.ped;let nm=c&&c.name?c.name:"";
    eff:kitShopEff(k),rows:kitItemRows(k),stock:5,have:()=>S.inv.filter(e=>e.k===k&&!e.h).length,
    onBuy:(x,q)=>{apply({bac:-x.price*q});for(let i=0;i<q;i++)S.inv.push({k});log(`Mua ${it.n}${q>1?` ×${q}`:""}. Bạc -${x.price*q}`)}}});
  return kitShop({key:"nvp",title:"Nhờ thái giám mua đồ",carry:9,
-  info:(()=>{const xc=kSay({srv:"m"},S,"{goi}")/* one address core (jvoice) */;return `<p>Thái giám Nội vụ phủ bưng vào một khay đồ mua từ ngoài cung, dâng lên cho ta chọn: “Đồ mới mang vào, xin ${xc} xem qua.”</p>`})(),
+  info:"",
   stage:[{__fig:"img/fig-eunuch-ndp-tray.webp",__cap:nm,__role:"Thái giám Nội vụ phủ",age:28,sex:"m"}],items,money:()=>S.bac,
   sell:{items:kitShopSellItems,empty:"Chưa có gì để bán. Đồ thêu, tranh, chữ… làm ra khi luyện tài nghệ (mục Tài nghệ); đồ trong rương Tư trang cũng bán được."}})}
 if(typeof invAct==="function"){const ia0=invAct;invAct=function(a){if(a==="shop"&&S&&!S.dead&&!Q.length&&typeof kitShop==="function"){try{kitShopNvp();render();return}catch(e){console.error("kitShop",e)}}return ia0.apply(this,arguments)}}

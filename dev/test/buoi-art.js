@@ -9,7 +9,7 @@ const SEA=['xuan','ha','thu','dong'],FST=['newyear','nguyentieu','thanhminh','do
   await p.route(/img\/fx\/buoi-.*\.webp/,r=>{const f=path.join(FX,r.request().url().split('/').pop().split('?')[0]);fs.existsSync(f)?r.fulfill({body:fs.readFileSync(f),contentType:'image/webp'}):r.fulfill({status:404,body:''})});
   p.on('pageerror',e=>errs.push(e.message));
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof buoiShift==='function'&&typeof start==='function',null,{timeout:180000});await sleep(2500);
-  await p.evaluate(()=>{document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;OPT.fxon=true;OPT.fxpick=1});await sleep(3000);
+  await p.evaluate(()=>{document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;OPT.fxon=true;OPT.fxpick=1});await sleep(3000);
   const list=[...SEA.map(s=>({sea:s})),...FST.map(f=>({sea:'xuan',fest:f}))];
   for(const [i,v] of list.entries()){for(const bb of (i<4||i%3==0?[0,1,2,3]:[2])){
    const o=await p.evaluate(async([v,bb])=>{['kroul','dawn','kload','kpodov'].forEach(i=>{const e=document.getElementById(i);if(e)e.remove()});document.querySelectorAll('.kmov').forEach(e=>e.remove());document.querySelectorAll('body > *').forEach(e=>{const s=getComputedStyle(e);if(s.position==='fixed'&&+s.zIndex>100&&e.id!=='buoitr')e.remove()});document.querySelectorAll('#buoitr').forEach(e=>e.remove());window.__btrVar=v;window.__btrHold=1;S.buoi=bb;curtain();await new Promise(r=>setTimeout(r,500));const e=document.getElementById('buoitr');if(!e)return null;

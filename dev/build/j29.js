@@ -17,11 +17,11 @@ function confessRisk(s){if(!s)return 25;return cl(20+nq(s,"timid",BAL.net.k.conf
 function bribeOdds(a,s){return odA(a,35+nq(s,"greed",BAL.net.k.bribeGreed)-nq(s,"timid",BAL.net.k.bribeTimid)-nq(s,"loyal",BAL.net.k.bribeLoyal)-s.loyal/3+a.tamco/5)}
 /* AG-ALL-2f3 (owner OD 17/11 ~17:10Z "thành công á thì tốn 30 bạc, còn nếu mà không thành công á thì sao tốn 30 bạc được"): the bạc is paid ONLY when the
    servant takes it (bribeServ wrapper below); a refusal costs no bạc but keeps its consequences (she may tell her master; the sent servant's fear, tmFear) */
-function bribeServ(a,s){const o=ownerOf(s);const cost=nv(s,"bribeCost");if(!o||o===a||a.bac<cost)return"";const odds=bribeOdds(a,s);
+function bribeServ(a,s){const o=ownerOf(s);const cost=nv(s,"bribeCost");if(!o||o===a||a.bac<cost)return"";const odds=aOdd(bribeOdds(a,s),a);/* her Mua chuộc: the odds she saw (j9 fzRun), also as the take weight below */
  /* AG-ALL-2 G10: with the loop on the servant CHOOSES among the player maid's own "Bạc lạ" options (j42 cnvBribeOpts: Nhận bạc / Từ chối, bẩm chủ /
     Từ chối, im lặng) — take weighs as these odds, the refusal splits by her lòng (jagstf2 stf2Bribe); off → the old roll */
  if(typeof stf2Bribe==="function"){const r=stf2Bribe(a,s,o,odds,cost);if(r!=null)return r}
- if(roll(odds)){s.spyFor=key(a);return `${s.name} (người hầu của ${NM(o)}) nhận bạc của ${NM(a)}, thành tai mắt. `}s.loyal=cl(s.loyal+BAL.eff.j29.loyalBribeServ,0,100);evA(o,a,BAL.eff.j29.evBribeServ);relAdd(a,o,-5);return `${s.name} từ chối bạc của ${NM(a)} và mách chủ. `}
+ if(aRoll(odds,a)){s.spyFor=key(a);return `${s.name} (người hầu của ${NM(o)}) nhận bạc của ${NM(a)}, thành tai mắt. `}s.loyal=cl(s.loyal+BAL.eff.j29.loyalBribeServ,0,100);evA(o,a,BAL.eff.j29.evBribeServ);relAdd(a,o,-5);return `${s.name} từ chối bạc của ${NM(a)} và mách chủ. `}
 /* what one sees of a servant: hidden trait until learned; at hire only age, origin and a vague impression */
 const ORIGINS_S=["con nhà nông ở Giang Nam","gia đình bao y kỳ tịch","con nhà buôn ở kinh thành","mồ côi, được Nội vụ phủ nuôi","con nhà thợ thêu Tô Châu","quê miền núi phía Bắc"];
 const IMPR={trung:["ít nói, cúi đầu","chăm chỉ, ít cười"],tham:["mắt hay liếc đồ quý","khéo nói, nhanh tay"],nhat:["rụt rè, nói lí nhí","ít nói, cúi đầu"],lanh:["mắt sáng, nhanh nhẹn","khéo nói, nhanh tay"],chuyen:["hay cười, nói nhiều","mắt sáng, nhanh nhẹn"]};

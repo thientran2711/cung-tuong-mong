@@ -226,7 +226,7 @@ SG_THOI.forEach(k=>{if(!ACT[k]||!ACT[k].o||SG.K[k])return;
    j:"over"  "Nghe lén câu chuyện" at a place (j78 overhear) → Nghe ngóng          {pi}
    j:"serv"  "Mua chuộc" a servant of another palace (bribeServ j29 / j10 / j15) → Mặc cả   {sid}
    job = {gk (SG.K key), t (game title), v (target, for the game), name, p0() (odds now), line(word) (card text), ask, cost (silver text), pay()→bool (take the time/silver), run(m) (act under the step), art} */
-function sgOdds(v,k){const a=ACT[k];const o=a&&a.o?a.o(S,v):50;return oddsCl(Math.round(o+(typeof lotB==="function"?lotB(S,ACTDOM[k]):0)))}
+function sgOdds(v,k){const a=ACT[k];const o=a&&a.o?actOdds(S,v,k):null;return oddsCl(Math.round(o==null?50:o))}/* actOdds (j9): the roll's own context, lá số included */
 function sgLine(v,k,w,c){const prev=typeof J78!=="undefined"?J78.cardV:null;try{if(typeof J78!=="undefined")J78.cardV=v;return actLineRaw(k,w,c)}finally{if(typeof J78!=="undefined")J78.cardV=prev}}
 function sgCan(i,k){const v=rivals[i],a=ACT[k];if(!v||!a||!SG.K[k]||typeof S==="undefined"||!S||S.dead||Q.length||!v.alive||v.out||!can(BAL.actK)||!a.ok(S,v))return false;
  if(typeof k61Named==="function"&&!k61Named(v))return false;if(S.confined&&typeof CRIME!=="undefined"&&CRIME.includes(k))return false;if(k==="bribe"&&!v.maid)return false;return true}
@@ -256,7 +256,8 @@ function sgJob(p){if(!p||typeof S==="undefined"||!S)return null;if(!p.j)p.j="act
 PEND.sgpick=p=>{const J=sgJob(p);if(!J)return null;const G=J.G,p0=J.p0();
  const up=word(sgShift(p0,1)),dn=word(sgShift(p0,-1));const base=J.line(word(p0));
  const gl=base+` · (tự chơi ${G.dur}: khéo thì lên ${up}, vụng thì xuống ${dn})`;
- const go=f=>()=>{const J2=sgJob(p);if(!J2||!J2.pay()){try{render()}catch(e){}return}f(J2)};
+ const go=f=>()=>{const J2=sgJob(p);if(!J2)return;/* the odds she saw, read BEFORE the pay (spend); the run rolls them (+ the game's step), j9 fzRun */const fz=J2.p0();if(!J2.pay()){try{render()}catch(e){}return}
+  J2.fz=fz;const r0=J2.run;J2.run=m=>fzRun(sgShift(fz,(m&&m.step)||0),J2.gk,()=>r0(m));f(J2)};
  return{t:`<p>${J.ask}</p>`,who:p.j==="act"||p.j==="place"?(typeof pv==="function"?pv(J.v):null):null,o:[{n:`Tự ra tay: ${G.t}`,fx:{},x:gl,showOut:true,go:go(J2=>sgPlay(J2))},{n:"Giao cho người làm",fx:{},x:base,showOut:true,go:go(J2=>J2.run(null))},{n:"Thôi",fx:{},showOut:true}]}};
 function sgAsk(p,title){const d=mkP("sgpick",p);if(!d)return;pushDil(d,title);showModal()}
 /* the act-card click (person card / Hậu cung): capture before j6's panel handler; bots that call doAct() directly are untouched */
@@ -274,7 +275,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
 
 /* ---------- play → result page → act ---------- */
 function sgPlay(J){const G=J.G;if(typeof S==="undefined"||!S||S.dead){try{render()}catch(e){}return}
- KG82.ctx="muu";kg82Preload(G.g).then(()=>{});const d=kg82Open({art:J.art,title:G.t,how:G.how});if(!d)return;const box=kg82Box();const p0=J.p0();const v=J.v,k=J.gk;
+ KG82.ctx="muu";kg82Preload(G.g).then(()=>{});const d=kg82Open({art:J.art,title:G.t,how:G.how});if(!d)return;const box=kg82Box();const p0=J.fz!=null?J.fz:J.p0();const v=J.v,k=J.gk;
  const seenK="sg:"+G.t;
  const rows=[["Cơ may",kitOdds(p0)+`<small class="kpnote"> hiện nay; khéo thì lên ${word(sgShift(p0,1))}, vụng thì xuống ${word(sgShift(p0,-1))}</small>`]];
  if(G.g==="mac"){const m=v.maid||{};rows.push(["Cung nữ",`tính ${sgTemper(m)[0]}, lòng trung với chủ ${sgLoyW(m.loyal==null?50:m.loyal)}`]);

@@ -27,12 +27,15 @@ function mbS(){if(!S)return null;if(!S.mood||typeof S.mood!=="object"||typeof S.
 function mbW(){try{return wk()}catch(e){return 0}}
 const cl2=(x,a,b)=>Math.max(a,Math.min(b,x));
 /* push the bar; merge pushes of the same cause kind in the same tuần ("Việc thành ×3: Đánh đàn, Làm thơ") */
-function mbAdd(d,why,kind){if(!mbOn()||!d)return 0;const M=mbS();/* the deeper she already is, the less a push the same way moves her (saturation, BAL.mood.sat) */const same=Math.max(0,Math.sign(d)*M.v);d=Math.round(d*Math.max(B().satMin,1-same/B().sat));if(!d)return 0;const v0=M.v;M.v=cl2(M.v+d,-100,100);const real=M.v-v0;if(!real)return 0;
+function mbAdd(d,why,kind){if(!mbOn()||!d)return 0;const M=mbS();/* the deeper she already is, the less a push the same way moves her (saturation, BAL.mood.sat) */const same=Math.max(0,Math.sign(d)*M.v);d=Math.round(d*Math.max(B().satMin,1-same/B().sat));if(!d)return 0;
+ /* THE SIMS MODEL (owner OD 17/11 ~18:10Z): the push is a cause with its own khắc timer (jmoodknow mkBar); the bar = the sum of live causes */
+ if(typeof mkBar==="function"&&typeof mkOn==="function"&&mkOn()){const real=mkBar(d,why,kind||why);MOOD_N.pushes[kind||why]=(MOOD_N.pushes[kind||why]||0)+real;return real}
+ const v0=M.v;M.v=cl2(M.v+d,-100,100);const real=M.v-v0;if(!real)return 0;
  const W=mbW();kind=kind||why;MOOD_N.pushes[kind]=(MOOD_N.pushes[kind]||0)+real;
  const x=M.log.find(e=>e.w===W&&e.k===kind);if(x){x.d+=real;x.n=(x.n||1)+1;if(why&&x.why.indexOf(why)<0&&x.why.length<70)x.why+=", "+why}else M.log.unshift({w:W,k:kind,d:real,why:String(why||"").slice(0,80),n:1});
  M.log=M.log.filter(e=>W-e.w<=B().keep).slice(0,B().logMax);return real}
 /* ---------- bands ---------- */
-function mbFlav(){try{const e=typeof emoGet==="function"?emoGet(S):null;if(!e||e.k==="binh")return"";if(e.k==="gian")return"gian";if(e.k==="ghen")return"ghen";if(e.k==="so"||e.k==="lo")return"so";return""}catch(e){return""}}
+function mbFlav(){try{const e=typeof emoGet==="function"?emoGet(S):null;if(!e||e.k==="binh")return"";const k=typeof feelGrp==="function"?feelGrp(e.k):e.k;/* FEELINGS-18: a new kind reads its group */if(k==="gian")return"gian";if(k==="ghen")return"ghen";if(k==="so"||k==="lo")return"so";return""}catch(e){return""}}
 const MB_LOW={"":["Phiền muộn","U uất"],gian:["Bực dọc","Phẫn uất"],ghen:["Hờn tủi","Hờn ghen"],so:["Bất an","Hoảng hốt"]};
 function mbBand(v){if(v==null){const M=mbS();v=M?M.v:0}const b=B().band;const f=mbFlav();
  if(v>=b[3])return{i:2,name:"Hân hoan",cls:"g",f:""};if(v>=b[2])return{i:1,name:"Vui vẻ",cls:"g",f:""};
@@ -60,13 +63,13 @@ window.mbS=mbS;window.mbBand=mbBand;window.mbOdPts=mbOdPts;window.mbAdd=mbAdd;wi
  ghenN=function(n){return n0(mk(n))};ghenAll=function(n){try{const n2=mk(n);if(n2!==n)MOOD_N.ghen+=n2-n}catch(e){}return g0.apply(this,arguments)}})();
 /* ---------- inputs ---------- */
 /* every feeling that lands on her moves the bar (even when a stronger feeling keeps the seal) */
-(function(){if(typeof emoSet!=="function")return;const s0=emoSet;emoSet=function(p,k,v,why){try{if(mbOn()&&p&&(p===S||(typeof emoRes==="function"&&emoRes(p)===S))&&v>0&&typeof emoOn==="function"&&emoOn()){const c=B().emo[k]||0;
+(function(){if(typeof emoSet!=="function")return;const s0=emoSet;emoSet=function(p,k,v,why){try{if(mbOn()&&!(typeof mkOn==="function"&&mkOn())&&p&&(p===S||(typeof emoRes==="function"&&emoRes(p)===S))&&v>0&&typeof emoOn==="function"&&emoOn()){const c=B().emo[k]||0;
   if(c)mbAdd(c*v,why||(typeof EMO==="object"&&EMO[k])||"","e:"+(why||k))}}catch(e){}return s0.apply(this,arguments)}})();
 /* her own acts with a real roll: deck cards and talk options */
 (function(){if(typeof runOpt!=="function")return;const r0=runOpt;runOpt=function(a){const rolled=!!(a&&a.o!=null&&a.o<100&&!a.exam);const r=r0.apply(this,arguments);
  try{if(rolled&&(r===true||r===false)&&mbOn()){MOOD_N.acts++;const nm=String(a.n||"").replace(/<[^>]+>/g,"").slice(0,30);r?mbAdd(B().ok,nm,"ok"):mbAdd(B().fail,nm,"fail")}}catch(e){}return r}})();
 /* consort acts (Hậu cung): read the act's own result words */
-(function(){if(typeof runAct!=="function")return;const r0=runAct;runAct=function(a,t,k){const r=r0.apply(this,arguments);try{if(a===S&&mbOn()&&r){const A=ACT[k];let o=100;try{o=A&&A.o?A.o(S,t):100}catch(e){}
+(function(){if(typeof runAct!=="function")return;const r0=runAct;runAct=function(a,t,k){const r=r0.apply(this,arguments);try{if(a===S&&mbOn()&&r){const A=ACT[k];let o=100;try{o=A&&A.o?actOdds(S,t,k):100}catch(e){}
   if(o<100){MOOD_N.acts++;const bad=(typeof FAILRE!=="undefined"?FAILRE:/hỏng|không thành|bị phát hiện|bị lộ/).test(String(r).replace(/<[^>]+>/g,""));const nm=String(A.n||k).replace(/<[^>]+>/g,"").slice(0,30);bad?mbAdd(B().fail,nm,"fail"):mbAdd(B().ok,nm,"ok")}}}catch(e){}return r}})();
 /* rest cards lift a low mood (up to restCap): the card says so in Được */
 function mbRestGain(a){const M=mbS();if(!M||!a)return 0;const g=a.rest==="ds"?B().restDs:B().rest;return Math.max(0,Math.min(g,B().restCap-M.v))}
@@ -89,7 +92,7 @@ const mbNeedT=()=>`tâm trạng không ${mbBand().name.toLowerCase()} (lòng ch�
 /* the tuần: needs, people, weather, then the drift back to calm */
 function mbWeek(){if(!mbOn())return;const M=mbS(),b=B(),W=mbW();if(M.wk===W)return;M.wk=W;
  /* decay toward 0 (at least 1 point) */
- if(M.v){const d=Math.max(1,Math.round(Math.abs(M.v)*b.decay));M.v=M.v>0?Math.max(0,M.v-d):Math.min(0,M.v+d)}
+ if(M.v&&!(typeof mkOn==="function"&&mkOn())){const d=Math.max(1,Math.round(Math.abs(M.v)*b.decay));M.v=M.v>0?Math.max(0,M.v-d):Math.min(0,M.v+d)}/* old path only: with causes on khắc timers there is no drift (OD 17/11 ~18:10Z) */
  const N=b.need;
  if((S.suc||0)<N.sucLo)mbAdd(N.sucLoD,`Sức chỉ còn ${S.suc}`,"w:suc");else if((S.suc||0)>=N.sucHi)mbAdd(N.sucHiD,"thân thể khỏe khoắn","w:suc");
  try{if(typeof illOf==="function"&&illOf(S))mbAdd(N.ill,`đang ${typeof illName==="function"?illName(S).toLowerCase():"ốm"}`,"w:ill")}catch(e){}
@@ -125,9 +128,9 @@ function mbBarHTML(v){const s=v>0?"+"+v:String(v);return `${typeof kitSignedBar=
 /* the rows of the mood box: bar · why it moved · what it does now */
 function mbSecs(){const M=mbS();if(!M)return[];const v=M.v,bd=mbBand(v),b=B();
  const bar=[[bd.name,`<span class="ef ${bd.cls}">${mbBarHTML(v)}</span>`]];
- const L=M.log.filter(e=>mbW()-e.w<=b.keep).slice(0,6).map(e=>[`${e.d>0?"+":"−"}${Math.abs(e.d)}`,`${mbWhy(e)} · ${mbAgo(e.w)}`,e.d>0?"g":"r"]);
+ const L=M.log.filter(e=>e.left!=null?e.left>0:mbW()-e.w<=b.keep).slice(0,6).map(e=>[`${e.d>0?"+":"−"}${Math.abs(e.d)}`,`${mbWhy(e)} · ${e.left!=null?`còn ${e.left} khắc`:mbAgo(e.w)}`,e.d>0?"g":"r"]);
  if(!L.length)L.push(["Vì sao","không có chuyện gì đáng kể gần đây","n"]);
- L.push(["Mỗi tuần",`nguôi dần về bình thản (${Math.round(b.decay*10)} phần mười mỗi tuần)`,"n"]);
+ L.push(typeof mkOn==="function"&&mkOn()?["Mỗi chuyện","phai dần theo khắc, hết khắc thì thôi","n"]:["Mỗi tuần",`nguôi dần về bình thản (${Math.round(b.decay*10)} phần mười mỗi tuần)`,"n"]);
  const od=mbOdPts(v),ak=mbAffK(v),E=[];
  E.push(["Cơ may",od?`mọi việc ngươi làm ${typeof whyStep==="function"?whyStep(od):(od>0?"dễ hơn":"khó hơn")}`:"không đổi",od>0?"g":od<0?"r":"n"]);
  E.push(["Người khác",ak>0?`thấy ngươi tươi tắn, thiện cảm với ngươi dễ lên hơn${bd.i>=2?"; kẻ ganh thì ghen hơn":""}`:ak<0?(bd.f==="gian"?"thấy ngươi cau có, thiện cảm với ngươi khó lên":"thấy ngươi ủ ê, thiện cảm với ngươi khó lên hơn"):"không đổi",ak>0?"g":ak<0?"r":"n"]);
