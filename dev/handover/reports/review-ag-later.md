@@ -129,3 +129,19 @@ Chain: 45c6dbea (LANDER #6: + ag2-perf ece17b1b, scope far / cap 0) → r3 ebf25
 Laws touched (18 LAWS): 4 ONE CORE (guard PASS), 6 real people (all NPC deeds kept), 7 wording (soft-line, no %), 9 kit (no UI added) — none broken.
 Pre-existing, NOT blocking (same rate on pre-perf 84bd47c4 / main) → follow-ups for C-AG #13: (1) agmaid_check 'Tiến cử option text: no invented odds' red on main too; (2) ag-walk carry NEAR/FAR timing ~2/10 (same on 84bd47c4); (3) ag-par3 'Nhờ giúp đỡ helpAsk' 2/5 (same on 84bd47c4); (4) ag-know one-off 3 FAIL under load, 0/5 on rerun.
 Next: npc-chain-land 78b7196f (SẴN SÀNG KIỂM from C-AG #13).
+
+### REVIEWER #3 — VERDICT npc-chain-land (18/11 ~18:20Z)
+PRIORITY #1 CHECK: OD 18 LAWS read | main 5e6490b4 (ag e18697fe landed + shop-panel r1) | review/npc-chain-land-r2 08774c0e, -r3 d3ea24e8 | claims C-AG #13 (relay only), C-AG #14.
+**PASS npc-chain-land d3ea24e8** (review/npc-chain-land-r3) = C-AG #13's 08774c0e (78b7196f + e18697fe as merged 'ours' + test-only ag-stf2 fix) + my merge of live main 5e6490b4 (only index.html / sw.js conflicted, rebuilt). Live main 5e6490b4 is ancestor → FF.
+'ours' merge audit: of 200 files ag changed vs a2ce736a, every ag-added line missing on npc is an npc rewrite of that line (ghenUp with cause, FEELINGS-18 agMoodF, emoKnown → kitIsKnown, ghenN), no lost ag content.
+| check | result |
+|---|---|
+| npc tests | feelings18 34/34, mood-mem 16/16, moodknow-step0 19/19, ag-moodknow 33/33, feel-shown 0/5 reds, shown-odds 97/97 |
+| one-core / soft-line / set-bonus / shelf | PASS / 4/4 / PASS / PASS |
+| deeds 160 buổi seeds 1-3 | 369/111/333 = 813 vs ag 779 (≥ 100 %; s2 dies at buổi ~5 on both) |
+| perf 4× spend(1) vs live (2 × 3 seeds, alternating) | khắc mean +22 % (≤ accepted +41 %); INFO: khắc median +104 %, buổi mean +26 % → perf follow-up |
+| quickcheck --runs 5 --cpu 4 | PASS (buổi 1432 vs 1256 ms) |
+| coop-e2e ×9 + G4 ×5 (08774c0e) | 7/9 clean, 2 reds = network only (coop worker 502 / CDN CORS); G4 10/10 |
+| after main 5e6490b4 merge | coop ×3 63/63, G4 4/4, shown-odds 97/97, one-core PASS, feelings18, ag-moodknow green; shop-panel / act-dedupe-w1 reds identical on main under file:// (need an http page) |
+| ag-stf2 bribe histogram | was 4/16 red (incorruptible base servant → both floors); C-AG #13 test fix → 0/8 |
+Flakes same rate as ag (not blocking, follow-ups listed in the ag verdict): ag-par3, ag-walk carry, ag-know, ag-carry, agmaid.
