@@ -29,3 +29,12 @@ Verdict: PASS b12fccb (review/buoi-banner-r7 = 3d675bd + merge of live origin/ma
 - Backdrop removal, Gọn = title only (~0.7 s), tap-skip, kitPace timing: as in round 1. Art/motion/season/festival unchanged.
 - Tests on b12fccb: buoi-transition REAL=1 fold+ipad+ipad-pro FAIL 0; buoi-art 0; buoi-moon 0; one-core PASS. Co-op e2e / old-save not re-run (no state/network code in the diff).
 - Note: in the Luân hồi (rebirth) picker the buổi overlay is not visible in the test shot (the picker sits above z 36 like live); unchanged from live.
+
+---
+# ROUND 3 (FINAL): review/buoi-banner d959a9e -> r8 68d240d — PASS
+
+PRIORITY #1 CHECK: owner picks 85 % + the 73a7d3f layout (MAIN ROOT-46 messages 06:23-06:28Z); 44f58e6 (title under band) superseded, not reviewed.
+Verdict: PASS 68d240d (review/buoi-banner-r8 = d959a9e + merge of live origin/main 4cb3a9e, generated files rebuilt; fast-forward of main). Tree vs main = jbuoi.js + KIT.md §74 notes + index.html + sw.js only.
+- d959a9e vs 73a7d3f in jbuoi.js: BTR_OP .8 -> .85, the __btrOp hook removed (opacity = BTR_OP). Nothing else.
+- Look (ipad-b2): one stack flush at the stage top, title block overlapping the lower band, feathered band, bold sub line, no backdrop; header, tabs, bottom bar visible and unmoved.
+- Tests on 68d240d: buoi-transition REAL=1 fold+ipad+ipad-pro FAIL 0; buoi-art 0; buoi-moon 0; one-core PASS. Co-op e2e / old-save not re-run (no state/network code in the diff).
