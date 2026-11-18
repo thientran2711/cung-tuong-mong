@@ -1009,6 +1009,9 @@ button.ka.kcard.kart{border-left:4px solid var(--kcc0,var(--line))!important}
 /* KIT 56.7: one page wide enough for a column + a panel (Fold 755x1000): figure LEFT, one long vertical panel RIGHT (the old approved phone layout, owner 18/11) */
 .modal.kpscene.kpfig.kpside{--kpw:min(560px,calc(100% - 16px - 12px - 140px));--kph:calc(100% - 16px);justify-content:flex-end!important;align-items:center!important;padding:8px!important}
 .modal.kpscene.kpfig.kpside .dlg.kpsc{max-width:var(--kpw)!important}
+/* KIT 56.10 (owner 18/11 ~20:55Z via MAIN, LAW 10): the card's panel takes the free height — spread: the whole screen height (not 70 %), so the stats fit without «Kéo xuống»; narrow side panel: the stat tiles are LONG ROWS (label left, value right, one per row), never wrapped in a 4-column grid */
+:where(.kv2) .modal.kpscene.kpfig{--kph:calc(100% - 24px)}
+.modal.kpscene.kpfig.kpside .dlg.kpsc .kpid.kpidf .kstgrid{grid-template-columns:minmax(0,1fr)}.modal.kpscene.kpfig.kpside .dlg.kpsc .kpid.kpidf .kst-tile{flex-direction:row;align-items:baseline;justify-content:space-between;gap:8px}.modal.kpscene.kpfig.kpside .dlg.kpsc .kpid.kpidf .kst-tile>.kstv{text-align:right}
  :where(.kv1) .dlg.kpsc .kpid.kpidf .kstgrid{grid-template-columns:repeat(4,minmax(0,1fr))}:where(.kv1) .dlg.kpsc .kpid.kpidf .kst-tile{flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:0}:where(.kv1) .dlg.kpsc .kpid.kpidf .kst-tile>.kstv{text-align:left}
 /* 4 · status grouped by purpose */
 #hud2.kgrp{flex-wrap:wrap}
