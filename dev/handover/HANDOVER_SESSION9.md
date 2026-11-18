@@ -819,3 +819,7 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - K-ICO-ALERT icon → Foreman C (STATUS 20:45Z). Đức Thọ courtyard art → Foreman C.
 - Triggers: ROOT-55 trig_01WCP9sCiLkSjXXeNSR3pAqJ (:32) → ROOT-56 disables (or asks owner) and makes its own. C-AG #15 trig_01FcjFts3SSJYCMJBptSQ17N.
 - (18/11 ~22:17Z) ROOT-55 opened ROOT-56 = session_01Rc5AsMXM16MfHRicSPRHEC (opus, child, depth 3) and STOPS coordinating. Owner: talk to ROOT-56 (session title "Cung Tường Mộng 56 (MAIN)").
+
+## MAIN = ROOT-56 session_01Rc5AsMXM16MfHRicSPRHEC; START_CTX ~6 % (get_session reads 0; own estimate, 1M window) → roll at ~31 %, ceiling 60 %; depth 3
+- LOAD (18/11 ~20:48Z real): main running 12 inherited children (UI: fullbody s5 worker+rv, map-labels worker+rv, map-zones r2, stage-rightcol worker+rv, stage-here r2, errand-scene r2, opt-card #6 held; owner bug: entry-blank-r3 worker+BIG rv) + C-AG #15 | B free ~10 | C art busy | D free ~7 | E ~4/12 | moved: none (no main-held non-UI item).
+- (18/11 ~20:48Z) ROOT-56: own hourly wake trig_01644299X8E4zjM3x3FAy9ND (:32). Disable of ROOT-55 trig_01WCP9sCiLkSjXXeNSR3pAqJ REFUSED by classifier → asked ROOT-55 (send_message) to disable its own trigger. FROM MAIN lines written in FOREMAN_B/C/D/E_STATUS; send_message to C-AG #15 + every inherited child.
