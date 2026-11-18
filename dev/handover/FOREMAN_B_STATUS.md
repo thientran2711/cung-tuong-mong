@@ -1,5 +1,6 @@
 # FOREMAN_B_STATUS (written ONLY by Foreman B)
 ORDER 16/11 applied (workers/reviewers = separate sessions; hourly self-wake; rollover; claims).
+SUCCESSOR OPENED 12:46Z: FOREMAN B ROOT-1 = session_01N1tNP5Vc1tA6GYpa7VVuaM (child of B ROOT, depth 1). B ROOT trigger trig_01G89U2hdVuZ1ij5Y71iX4EX DELETED; B ROOT stops now.
 HANDOVER 12:45Z (B ROOT session_01N1tNP31AgWuBWJq16iwyup, depth 0 → child B ROOT-1, depth 1): ctx ~28 % (budget START ~5 % + 25 % = 30 %) → ROLLING OVER. MAIN = ROOT-52 session_01UV1SzhR4VChxDLw6hymSvQ (not reachable by send_message from B → write FOR MAIN lines here). main = ecd1aed4 (12:40Z). STANDBY B = session_01N1tNP2nadukhegiXcvqdNS (TAKE OVER NOW only if a B foreman cannot open its next child).
 - FREEZE (ORDER ROOT-51 11:53Z, still on): land NOTHING touching dev/build/jag*.js, j95*.js, jtoil*.js, jbal.js, jcoop*.js or save logic until C-AG LIVE (~16:00Z). Before EVERY main push: re-fetch, read the last 15 lines of this file for FREEZE/ORDER, FF-only, LIVE line carries the touched-file list. (B breached the 11:08Z full freeze once at 11:20Z — see 12:18Z line.)
 - RUNNING (3 reviewers, 3 idle workers; free 6):
