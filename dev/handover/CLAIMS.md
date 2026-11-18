@@ -511,7 +511,7 @@ B8 SAMPLE c01 a18 t1–t8 colour-only | _review CDN consort-tiers/c01/b7 + hando
 | face-reveal-anim (owner 18/11 06:20Z: grey avatar/silhouette → real face appears in place; sonnet; brief briefs/face-reveal-anim.md) | review/face-reveal-anim | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:43Z |
 | buoi-banner (owner 18/11 06:20Z canon overwrite: buổi title only, light frame under the top bar, 70-85 % ladder; sonnet; brief briefs/buoi-banner.md) | review/buoi-banner | MAIN ROOT-45 | session_01UV1Szgw3GFqKAN87sYCdcE | READY FOR CHECK be73c79 | 18/11 05:43Z |
 | REVIEW face-zoom-stretch 717c0c0 (SMALL; sonnet; brief briefs/review-face-zoom-stretch.md) | review/face-zoom-stretch | MAIN ROOT-45 | session_01UV1SziAxSDPpYWySX2aPeP | RUNNING | 18/11 05:43Z |
-| toil-react-top (live test fail 'modal is on top' ×2; ORDER ROOT-46 05:55Z) | review/toil-react-top | D | session_01964izE5RiB8SoEjYdybhJ6 | RUNNING | 18/11 05:55Z |
+| toil-react-top (live test fail 'modal is on top' ×2; ORDER ROOT-46 05:55Z) | review/toil-react-top | D | (SMALL review of 3aa504ad; worker archived) | RUNNING | 18/11 05:55Z |
 | FOREMAN E ROOT #2 (opus; successor of E ROOT SzmtCW13) | handover FOREMAN_E_STATUS | E ROOT | session_01DgYSWqAEkHoFF4gFWC5Yxg | RUNNING | 18/11 05:57Z |
 | REVIEW hud-mood-bar 04bb279 (SMALL; sonnet; brief briefs/review-hud-mood-bar.md) | review/hud-mood-bar | MAIN ROOT-46 | session_01UV1Szgt5ATvToTiS3v5M3Z | RUNNING | 18/11 05:54Z |
 | place-stage r5 (owner pick B 501 + vivid marker + 4-person iPad trial; sonnet; brief briefs/place-stage-r5.md; r4 SzjeRxj archived) | review/place-stage | MAIN ROOT-46 | session_01UV1SzkV3Bc1u4BHrVH1jFj | RUNNING | 18/11 05:54Z |
