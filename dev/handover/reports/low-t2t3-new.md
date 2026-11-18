@@ -25,3 +25,19 @@ PRIORITY #1 CHECK: OD 0 new | FIGURE_GATE C7 + 2a + B/F table + owner t1-t3 line
 - Honest check: t2 differs clearly from t1 and t3 (two-piece, half sleeves, bow). t3 is clearly different from t1 and t2 (beizi + stole). But t3 and t4 are closer than t1/t2 (both layered, both wide sleeves); t4 is told apart mainly by its cloud collar, gold borders and larger gold headdress. If the owner wants t3 further from t4, next step is to give t3 a different sleeve/skirt shape (e.g. narrower sleeves, no stole) -- not done, waiting.
 
 ~100% xong prompt / sample chờ sếp duyệt (WAIT, no mass).
+
+---
+# ROUND 2 (owner verdict ~21:24Z: t1 stays; t2 AND t3 redo; NEVER short/half sleeves; differ by collar/layering/sash/shoulder/embroidery placement)
+PRIORITY #1 CHECK: OD verdict relayed by Foreman C (21:23Z) | build.py TIER_LOW | claims 0. Round-1 t2/t3 text replaced (round-1 half-sleeve t2 dropped). Re-fetched first (c4291fcf 3f ITEMS kept; I touched only TIER_LOW[2],[3]; test_low_all.py OK 2304 builds, t1 and t4-t8 untouched, golden_low t2/t3 regenerated).
+
+| | t1 Đáp ứng (unchanged) | t2 Thường tại (NEW) | t3 Quý nhân (NEW) |
+|---|---|---|---|
+| collar | crossed collar | HIGH STANDING collar, jade button at throat, straight front opening | BROAD embroidered crossed collar in a deep V |
+| sleeves | long wide | long wide with deep embroidered cuffs (never short) | long wide, lined in a contrasting soft tone |
+| layering/shoulder | one robe, soft layered look | one plain-skirted robe, no outer layer | robe + short sheer capelet over shoulders and upper arms |
+| sash | soft silk sash | NO wide sash: slim twisted cord at the side with long knotted tassel | wide brocade belt, jade pendant, long tassels |
+| embroidery placement | collar, sleeves, hem | small sprays scattered on chest/shoulders/sleeves + cuffs + narrow hem | wide vertical front band collar-to-hem + large medallions on sleeves and skirt |
+| hair | neat bun | side-swept low chignon at the nape, flower at the side | tall high chignon, flower crest, pearl pins, small silver comb |
+
+Sample: 4 new gens (c06 t2,t3; c25 t2,t3), 0 rejected, looked at all 4 (long wide sleeves, closed smile, pins up, no cloud collar/phoenix/yellow). Sheet https://ctm-img.victoria-tntt.workers.dev/img/_review/low-B/t2t3-new/sheet2.jpg (rows c06,c25; t1|t2|t3|t4; singles in .../t2t3-new/v2/). t1/t4 reused from t8-reprompt/t1t6 (their items are the older ones).
+Honest check: t2 vs t1 vs t3 clearly different. t3 vs t4 still both wide-sleeved with an over-layer (t3 capelet vs t4 cloud collar + gold headdress); t4 reads richer by its cloud collar, heavier gold and bigger headdress.
