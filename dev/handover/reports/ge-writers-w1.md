@@ -2,7 +2,13 @@
 PRIORITY #1 CHECK ('ge-writers|GE writer|jgedata'): OD 0 | ledger 0 | claims 8 | main 5 | review/* 2 | archive 0 — reused review/ge-writers-w1 (fixed in place) + review/ge-writers-w2 test text (base of fix 4); nothing new built.
 LINEAGE (fix round): E11a2 depth 5 · session_01DgYSWoSMJso8hGSAFMN9W6 · START_CTX ~3 % (window 1M; get_session reads 0, own estimate) · ended ~12 %.
 
-**READY (round 2): review/ge-writers-w1 tip df30265f** (round 2 = merge origin/main 5e6490b4 + test timing + FOR B final; fix round was 46aeac92) (parent a58b55eb). No push to main, no PR. Road files jrd_* NOT edited. Verdict fixed: dev/handover/reports/ge-writers-w1-review.md (E11r-w1 FAIL a58b55eb, 4 fixes).
+**READY (round 4): review/ge-writers-w1 tip fd7c6775** (round 4 = jrd_muoi ch8 c3 patch carried in W1 by MAIN ORDER 18:45Z + merge origin/main 94d11623; round 2 was df30265f) (round 2 = merge origin/main 5e6490b4 + test timing + FOR B final; fix round was 46aeac92) (parent a58b55eb). No push to main, no PR. Road files jrd_* NOT edited. Verdict fixed: dev/handover/reports/ge-writers-w1-review.md (E11r-w1 FAIL a58b55eb, 4 fixes).
+
+## ROUND 4 (E11a2, MAIN ORDER 18:45Z via Foreman E: carry the ONE jrd_muoi ch8 patch inside W1) — tip fd7c6775
+- 18c75df5-ish commit «carry jrd_muoi ch8 c3»: the exact §FOR B item 1 diff applied (jrd_muoi.js muoi_no ch8: s1 + s2 options `to:"c3",tf:"c3"`, new beat c3 «Thư sinh Giang Nam», not in the c-pool; jbalroad.js `muoi_no_8.c3`). muoi_no_4 pull += «Xóa nợ, chúc y thi đỗ», «Cho hoãn, đỗ rồi hãy trả», «Giữ giấy nợ, đợi y làm quan»; muoi_no lean.p += the first two, lean.m += the third. Law 6(b) for muoi_no_4 now holds: the scholar the ending names is met in ch8 of every muoi_no life.
+- Merged origin/main 94d11623 (assemble.py = main's list + 'jgedata_w1.js' after 'jgedata.js'; index/sw rebuilt). FOREMAN_B_STATUS.md got the FYI line.
+- Tests (fd7c6775): ge-guard 6/6 · ge-engine `- all` cold ×2 456/456, 456/456 · one-core-guard PASS · build_site OK · quickcheck ALONE **PASS** (core gates PASS, open 1460 ms, old save ok, perf new/live render 237/264, tab 483/452, buổi 1278/1329, tasks>200 18/19).
+- Measure muoi_no (`MODES=kind,cruel node dev/measure/ge-measure.js - 2 2 out.json muoi_no sens`, run on the patch before the main merge): 4/4 lives ok, page errors 0 · open .8 3.00 · open .11 **2.25 IN** · kind→thiện **1.00 IN** · cruel→ác **1.00 IN** · per ending 0/1 1/1 1/1 1/1 (round 1: 2.25 / 1.00 / 1.00 — unchanged) · inChar .75 OUT of [.30,.60] = the known engine-level note (BAL.ge.odds / Chuỗi length, for E).
 
 ## ROUND 2 (E11a2, after E11r-w1 PASS 46aeac92 «land after B patch») — tip df30265f
 1. Re-merged origin/main 5e6490b4: assemble.py = main's module list (12 new modules) + `'jgedata_w1.js'` right after `'jgedata.js'` (W2 adds `'jgedata_w2.js'` after it, same line); index.html / sw.js taken from main and rebuilt.

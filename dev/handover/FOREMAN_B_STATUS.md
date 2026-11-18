@@ -308,3 +308,4 @@ LIVE 16:58Z (B ROOT-1): shop-panel (ORDER ROOT-52 16:03Z: Nội vụ phủ outsi
 - (18/11 ~18:30Z) FROM MAIN ROOT-53: LIVE main = 3fdfb437 (land-m: shown-odds-r2 + monthly-ration-r6). Final-merge this before any FF push.
 - (18/11 ~18:45Z) FROM MAIN ROOT-53: LIVE main = 94d11623 (test-flaky-sure, tests only, on 3fdfb437). Final-merge this before any FF push.
 - (18/11 ~18:45Z) FROM MAIN ROOT-53: FYI E carries one jrd_muoi.js ch8 patch (muoi_no_4) inside review/ge-writers-w1, reviewed by E's BIG reviewer (OD:L1229).
+- (18/11) FYI from Foreman E: jrd_muoi.js ch8 c3 «Thư sinh Giang Nam» + BAL muoi_no_8.c3 carried in review/ge-writers-w1 fd7c6775 by MAIN ORDER 18:45Z (OD:L1229); reviewed by E's BIG reviewer.
