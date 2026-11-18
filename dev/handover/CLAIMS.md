@@ -512,7 +512,7 @@ B8 SAMPLE c01 a18 t1–t8 colour-only | _review CDN consort-tiers/c01/b7 + hando
 | buoi-banner (owner 18/11 06:20Z canon overwrite: buổi title only, light frame under the top bar, 70-85 % ladder; sonnet; brief briefs/buoi-banner.md) | review/buoi-banner | MAIN ROOT-45 | session_01UV1Szgw3GFqKAN87sYCdcE | READY FOR CHECK d959a9e | 18/11 05:43Z |
 | REVIEW face-zoom-stretch 717c0c0 (SMALL; sonnet; brief briefs/review-face-zoom-stretch.md) | review/face-zoom-stretch | MAIN ROOT-45 | session_01UV1SziAxSDPpYWySX2aPeP | RUNNING | 18/11 05:43Z |
 | toil-react-top (live test fail 'modal is on top' ×2; ORDER ROOT-46 05:55Z) | review/toil-react-top | D | session_01964izBr5E6cMkNDj5LwxL5 | PASS 84de2423db0265f4caeaf5a0971ed2853f0308a4 (review/toil-react-top-rv) FOR MAIN | 18/11 05:55Z |
-| FOREMAN E ROOT #2 (opus; successor of E ROOT SzmtCW13) | handover FOREMAN_E_STATUS | E ROOT | session_01DgYSWqAEkHoFF4gFWC5Yxg | RUNNING | 18/11 05:57Z |
+| FOREMAN E ROOT #2 (opus; successor of E ROOT SzmtCW13) | handover FOREMAN_E_STATUS | E ROOT | session_01DgYSWqAEkHoFF4gFWC5Yxg | DONE (→ #3) | 18/11 05:57Z |
 | REVIEW hud-mood-bar 04bb279 (SMALL; sonnet; brief briefs/review-hud-mood-bar.md) | review/hud-mood-bar | MAIN ROOT-46 | session_01UV1Szgt5ATvToTiS3v5M3Z | RUNNING | 18/11 05:54Z |
 | place-stage r5 (owner pick B 501 + vivid marker + 4-person iPad trial; sonnet; brief briefs/place-stage-r5.md; r4 SzjeRxj archived) | review/place-stage | MAIN ROOT-46 | session_01UV1SzkV3Bc1u4BHrVH1jFj | READY FOR REVIEW a341aea | 18/11 05:54Z |
 | look-fx-wire #6 (R9c LOOK fails: hard wedge/box edge round marks, mouth speck, harness shots; sonnet; brief briefs/look-fx-wire-6.md; #5 archived) | review/look-fx-wire | MAIN ROOT-46 | session_01UV1Szj7AXEQ5AejCQrVCNJ | RUNNING | 18/11 06:02Z |
@@ -531,10 +531,11 @@ Audit live consort figures c01–c32 (2K redo / m09 skin) | handover reports/con
 | buoi-banner (owner 18/11 06:20Z canon overwrite: buổi title only, light frame under the top bar, 70-85 % ladder; sonnet; brief briefs/buoi-banner.md) | review/buoi-banner | MAIN ROOT-45 | session_01UV1Szgw3GFqKAN87sYCdcE | READY FOR CHECK be73c79 | 18/11 05:43Z |
 | REVIEW face-zoom-stretch 717c0c0 (SMALL; sonnet; brief briefs/review-face-zoom-stretch.md) | review/face-zoom-stretch | MAIN ROOT-45 | session_01UV1SziAxSDPpYWySX2aPeP | RUNNING | 18/11 05:43Z |
 | toil-react-top (live test fail 'modal is on top' ×2; ORDER ROOT-46 05:55Z) | review/toil-react-top | D | (to open) | ORDERED | 18/11 05:55Z |
-| FOREMAN E ROOT #2 (opus; successor of E ROOT SzmtCW13) | handover FOREMAN_E_STATUS | E ROOT | session_01DgYSWqAEkHoFF4gFWC5Yxg | RUNNING | 18/11 05:57Z |
+| FOREMAN E ROOT #2 (opus; successor of E ROOT SzmtCW13) | handover FOREMAN_E_STATUS | E ROOT | session_01DgYSWqAEkHoFF4gFWC5Yxg | DONE (→ #3) | 18/11 05:57Z |
 | REVIEW hud-mood-bar 04bb279 (SMALL; sonnet; brief briefs/review-hud-mood-bar.md) | review/hud-mood-bar | MAIN ROOT-46 | session_01UV1Szgt5ATvToTiS3v5M3Z | RUNNING | 18/11 05:54Z |
 | place-stage r5 (owner pick B 501 + vivid marker + 4-person iPad trial; sonnet; brief briefs/place-stage-r5.md; r4 SzjeRxj archived) | review/place-stage | MAIN ROOT-46 | session_01UV1SzkV3Bc1u4BHrVH1jFj | READY FOR REVIEW a341aea | 18/11 05:54Z |
 | REVIEW questline-q1b 255f5b2a (BIG; E7br) | review/questline-q1b | E ROOT | session_01DgYSWkpB8TxDvheFX6vvwn | FAIL 255f5b2a (reports/questline-q1b-review.md) | 18/11 06:22Z |
 | REVIEW BIG mg-skip-all 0f542e1 (opus; prompt inline) | review/mg-skip-all-r2 | MAIN ROOT-46 | session_01UV1Szhzc66138A1td1yMfM | DONE: PASS d219fce (report reports/review-mg-skip-all.md) | 18/11 06:27Z |
 | fullbody-frame step 1 Tuần lục sample (owner 18/11 06:45Z: c03 canvas fits exactly, no cut; sonnet; brief briefs/fullbody-frame-s1.md) | review/fullbody-frame | MAIN ROOT-47 | session_01UV1SzjVbe2rs236yVuGUDn (SzkhyYu rolled over, archived) | READY-FOR-OWNER-LOOK (no review) 5e1b8e66 | 18/11 07:35Z |
 | REVIEW person-dialog-restore e6bda27 (SMALL; sonnet; prompt inline) | review/person-dialog-restore | MAIN ROOT-47 | session_01UV1SzmHVSD9r5fHMn8YFJK | RUNNING | 18/11 06:39Z |
+| FOREMAN E ROOT #3 (opus; successor of E ROOT #2 SWqAEkHo) | handover FOREMAN_E_STATUS | E ROOT | session_01DgYSWmvDYnmfLCrNGtw5Uu | RUNNING | 18/11 06:52Z |
