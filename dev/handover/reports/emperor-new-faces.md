@@ -53,3 +53,13 @@ Slots: live-1/2 = round collar + front dragon medallion + sea-wave hem + small g
 Yellow median (C2 #F1BB64; consort target #EFBD69): live-1 #EAAF57, live-2 #E9AC57, e1 #F2B05A, e2 #EFA63B, e3 #F0A541, e4 #ECA236 → one consistent family now (live and new emperors in the same rendering/colour), a touch more orange than #EFBD69 on e2–e4 (fold shading on dense gold embroidery).
 Weak: robe volume is wide-sleeved again on e2–e4 (e1's own prompt does this); live-1 now holds a scroll it did not have before; yellow slightly deeper than C2.
 Files CDN img/_review/men/emperor-new/: emperor_new_sheet_v6.jpg (live-1 | live-2 | e1 | e2 | e3 | e4), live1_a26_v6.png, live2_a26_v6.png, e1..e4_a26_v6.png. md5 OK, nothing live.
+
+## v7 — builder updated per owner ~22:35Z (via Foreman C); fresh gens of all 6, 1 gen each, no regen
+New shared sentences (identical for all six, check.py OK; prompts in dev/art/emperor-B/golden/pB_*.txt = exactly what ran):
+- SILHOUETTE: "a man's robe that falls straight to the ankles, no train, nothing trailing behind; if shoulder pieces are worn they are STIFF, structured, firm armour-like shoulder caps that hold their shape, never soft, never drooping or draped over the shoulders; a slim but imperial silhouette, the robe fitted at the waist with sleeves of moderate width that hang in clear folds, neither bulky and puffed nor thin and starved."
+- YEL_NEW (emperor builder only): "soft light honey-gold, luminous and gentle, close to hex #F6BC5E (light-medium depth, 18K gold tone), not saturated, not orange, not pale cream, not beige/tan/ochre, not heavy mustard, not lemon".
+Settings unchanged (gpt-2-6, 1024x2304 2K, 2 refs: own face + STYLE m09). 6 gens + 6 cuts = 828 cr (task total ≈ 5780 cr).
+Yellow median (e1 v3 approved #F6BC5E): live-1 #EEB464, live-2 #ECB15F, e1 #F3B261, e2 #F0A84A, e3 #F0A546, e4 #EBA343. Lighter than v6 (#EAAF57–#EFA63B), still a little deeper than the target on e2–e4 (dense gold embroidery shades).
+Looked at all six: no trailing hem on any, shoulder caps on e1–e4 are firm and structured (live-1/2 round-collar robes have none), robes slim at the waist with moderate sleeves, faces/crowns/props kept, hands on the items, heads up, lips closed.
+Weak: e2–e4 shoulder caps are broad and stiff (as asked) so shoulders still read wide; yellow of e2–e4 a touch more orange than e1.
+Files CDN img/_review/men/emperor-new/: emperor_new_sheet_v7.jpg (live-1 | live-2 | e1 | e2 | e3 | e4), live1/live2_a26_v7.png, e1..e4_a26_v7.png; md5 OK, nothing live.

@@ -8,7 +8,8 @@ import sys
 PRE=("Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference portraits; full-body standing figure head to feet, centered, plain light parchment background, soft even light; fair porcelain skin; gentle expression with soft eyes and a bright closed-lip smile, lips closed, no teeth, mouth never open; elegant, slim, clearly adult; beautiful/handsome romantic-lead looks for everyone; face clearly visible, 3/4 or frontal view.")
 END=" Eyes soft, warm and round-almond, never slanted or upturned, never teary. Everyone beautiful at every age. No text, no labels."
 FAB="The silk has real weight: the wide sleeves and robe hang and fold naturally under their own weight, with natural creases, never stiff, flat or board-like."
-YEL_NEW="rich warm royal golden yellow, a honey-gold close to hex #EFBD69 (medium depth, 18K gold tone), not pale cream, not beige/tan/ochre, not heavy mustard, not lemon"
+# OWNER 18/11 ~22:35Z (via Foreman C): v5 read too rực (saturated) in game -> LIGHTER, softer: target the approved e1 yellow (median ~#F6BC5E). Consort builder keeps its own #EFBD69 words; the emperor builder is the only one with this lighter wording.
+YEL_NEW="soft light honey-gold, luminous and gentle, close to hex #F6BC5E (light-medium depth, 18K gold tone), not saturated, not orange, not pale cream, not beige/tan/ochre, not heavy mustard, not lemon"
 # men's ages: wording follows the consort AGE_TXT pattern (a36 young for his age, a51 ages beautifully) and the old emperor lineup (clean-shaven young; thin moustache / short beard later; silver strands at 51)
 AGE_TXT={"a18":"about 22, youthful adult.",
 "a26":"about 30, mature and poised.",
@@ -37,11 +38,14 @@ ITEM={
 "e2":("a gold-mounted imperial scroll","the rolled scroll in one hand lowered at his side, the other hand resting lightly at his belt, body turned slightly three-quarters"),
 "e3":("an imperial closed folding fan","the closed fan held in both hands lowered before him at waist height, a slight turn of the body, head up toward the viewer"),
 "e4":("a jade ceremonial tablet","the tablet held in both hands at waist height before him, body turned slightly three-quarters")}
+# OWNER 18/11 ~22:35Z (via Foreman C): no train; shoulder pieces STIFF; slim-but-imperial silhouette like the approved e1
+SHAPE="SILHOUETTE: a man's robe that falls straight to the ankles, no train, nothing trailing behind; if shoulder pieces are worn they are STIFF, structured, firm armour-like shoulder caps that hold their shape, never soft, never drooping or draped over the shoulders; a slim but imperial silhouette, the robe fitted at the waist with sleeves of moderate width that hang in clear folds, neither bulky and puffed nor thin and starved."
 def colour():
     return (f"all colours fresh, clear and luminous, never dusty or greyed; the royal golden yellow is the DOMINANT colour of the whole robe, sleeves and skirt (far more than half of everything visible), any other colour only as narrow trim; the yellow is {YEL_NEW}; the crown, pin and jewellery gold in the same 18K tone; gold only as thin accents on the borders.")
 def build(k,age="a26"):
     s=PRE+f" An imperial emperor (Hoàng thượng). His face: {FACE[k]}. From the identity reference keep ONLY his face, facial features and hairstyle colour; do NOT copy the outfit, crown or accessories of the reference, dress him in the NEW outfit below. The style reference image is only for skin, drawing style, fabric and embroidery: never copy its face, body or pose. {AGE_TXT[age]}"
     s+=f" Outfit (the Emperor, clearly the most splendid man in the palace): {OUTFIT[k]}."
+    s+=" "+SHAPE
     s+=" COLOUR RULE: "+colour()
     s+=" All dragons, clouds and waves are fine silk-thread embroidery stitched directly into the fabric, flat and integrated with the cloth, following its folds, not appliqué, not pasted patches, not raised. "+FAB
     item,hand=ITEM[k]
