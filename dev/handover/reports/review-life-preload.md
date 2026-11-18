@@ -1,7 +1,7 @@
-# REVIEW life-preload — PASS c743265c (reviewer session_01UV1SzjKPEGVua6n1rUEV2S, for MAIN s42)
+# REVIEW life-preload — PASS 9393889d (reviewer session_01UV1SzjKPEGVua6n1rUEV2S, for MAIN s42)
 PRIORITY #1 CHECK: OD 18/11 ~01:35Z (L1787, URGENT) + ~01:48Z (L1790 warm-cache root cause) + ~01:50Z (L1776) + ~02:06Z (L1777) | main jload.js §35 loader, jph.js §59, j39 PORK, sw ASSETS | review/life-preload 4ff10aee (worker s40/s41, report reports/life-preload.md) | claims MAIN life-preload SzgmQZw; no other branch on it. Worker report carries its PRIORITY #1 line.
 
-Branch `review/life-preload-r6` @ **c743265c** = review/life-preload 4ff10aee merged onto origin/main f986ff6a, then onto **e24d5838** (current main; FF-able), generated files (index.html, sw.js, assets.json) rebuilt each time + 1 reviewer fix commit.
+Branch `review/life-preload-r6` @ **c743265c** = review/life-preload 4ff10aee merged onto origin/main f986ff6a, then e24d5838 (c743265c), then onto **0527f921** (= 9393889d, quickcheck PASS again), generated files (index.html, sw.js, assets.json) rebuilt each time + 1 reviewer fix commit.
 
 ## Reviewer fixes (commit 93beb3b7, dev/build/jload.js only)
 1. **Title prefetch never ran** (owner 02:06Z requirement): `lWant()` returned `undefined` for a new picture, `pPump()` did `.then` on it → TypeError after the FIRST picture (coop-e2e "solo: no page errors" FAIL ×3: `title prefetch TypeError … reading 'then'`). Fix: `return e.p`. After: warm Tiếp tục = no gate at all (`cached:true`), first screen complete 0.57 s, 0 blank (prefetch 39 pictures / 4.7 MB of the saved life during the title).
