@@ -602,4 +602,4 @@ MAIN WORKERS (all report to MAIN):
 - opt-card-short #2 session_01UV1Szke4R4h6YSy7KRfqhR idle — waits owner verdict on r2 173f5888 (pictures already in her chat) → on OK: SMALL reviewer → FF → wipe img/_review/opt-card-short.
 OWNER WHEN SHE WAKES: first reply says new main (ROOT-51) + opt-card-short pictures wait for her OK; then show look-fx-wire r9g pairs (Fold+iPad) and fullbody-frame live notes (name tag touches Hoàng hậu crown tassels; iPad ID card kit fade over stat rows).
 FOR E: questline-q1-land READY FF (E7a2) will come as FOR MAIN — land it (check C-AG hold: if it touches assemble.py → WAIT).
-- ROOT-50 FINAL (09:35Z): successor MAIN ROOT-51 = (opening). ROOT-50 relays owner words + worker reports only.
+- ROOT-50 FINAL (09:35Z): successor MAIN ROOT-51 = session_01UV1SzhTcGjoPSff18UGey6 (depth 7). ROOT-50 relays owner words + worker reports only.
