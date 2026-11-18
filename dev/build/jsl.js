@@ -94,7 +94,7 @@ window.KIT_LIGHT=KIT_LIGHT;
    The figure column of a book page is NARROW (--porf = KBK_FIG_COL of the page's inner width, set by j87 layout) and sits against the page's LEFT
    edge; the figure keeps its true proportions and is fitted INTO the column (bottom on the column floor, feet visible, nothing cut, never
    under the text); the freed width goes to the RIGHT text frame (text size unchanged). Wide figures (Thái hậu, trains, wide sleeves) are
-   scaled to the column width like everyone else. */
+   are CROPPED at the column edge (KIT 34.6 r5), never shrunk; the emperor is fitted as before. */
 /* KIT 32.2b: the painted page border (book-right/left.webp 768x1024): inner edge of the bottom double line at y 999 → 2.44 % above the page bottom */
 var KBK_ART_LINE=window.KBK_ART_LINE={b:.0244};
 (function(){let q=0;
@@ -108,7 +108,12 @@ var KBK_ART_LINE=window.KBK_ART_LINE={b:.0244};
       body = min(KIT_FIG.h × column, maxPx) × fac, feet on the column floor, true aspect. Not measured yet → hidden (never shown at its raw box size). */
    let dyF=0,dxF=0;{const i1=f.querySelector("img"),s1=i1&&i1.getAttribute("src"),b1=s1?kitFigBody(s1,soon):null,Hc=por.clientHeight;
     if(!b1||!Hc){f.style.visibility="hidden"}else{const kf=parseFloat(getComputedStyle(box).getPropertyValue("--kfr"))||1;let kk=1;
-     const ar1=i1.naturalWidth&&i1.naturalHeight?i1.naturalWidth/i1.naturalHeight:b1.ar,g=kitBookFig(Object.assign({},b1,{ar:ar1}),kf*KIT_FIG.man,Hc);const pwc=por.clientWidth,pw1=Math.max(.2,(b1.r||1)-(b1.l||0))*g.iw;if(pwc&&pw1>pwc)kk=pwc/pw1;dyF=g.dy*kk;dxF=-(b1.l||0)*g.iw*kk;   /* fitted INTO the narrow column by its PAINTED width (sleeves / train included): feet visible, nothing cut, painted left edge on the column's left edge */
+     const ar1=i1.naturalWidth&&i1.naturalHeight?i1.naturalWidth/i1.naturalHeight:b1.ar,g=kitBookFig(Object.assign({},b1,{ar:ar1}),kf*KIT_FIG.man,Hc);const pwc=por.clientWidth,sil=/unknown-fig-/.test(s1),emp=/fig-emperor-/.test(s1),L=sil?0:(b1.l||0),R=sil?1:(b1.r==null?1:b1.r),pw1=Math.max(.2,R-L)*g.iw;
+     /* KIT 34.6 r5 (owner 18/11 ~03:45Z): ONE layout, ONE body (her p.5 figure's rule: Hc x fac / man) for every figure — nobody is shrunk to fit. The emperor stays exactly as live (fitted into the column by his painted width).
+        A figure narrower than the column keeps the live place (painted left edge on the column's left edge); a WIDER one (wide robe, train, sleeves, child art, silhouette) is CROPPED at the column edge (overflow:hidden of .kbk-por, KIT 32.2a):
+        centred on its body core (torso / skirt column cl..cr) so the face and body stay whole, never wider than the column, never under the text. */
+     if(emp&&pwc&&pw1>pwc)kk=pwc/pw1;dyF=g.dy*kk;const iwk=g.iw*kk;dxF=-L*iwk;
+     if(pwc&&pw1*kk>pwc+.5){const cc=(b1.cl!=null&&b1.cr!=null&&b1.cr>b1.cl?(b1.cl+b1.cr)/2:(L+R)/2)*iwk;dxF=Math.min(-L*iwk,Math.max(pwc-R*iwk,pwc/2-cc));f.dataset.kcrop=Math.round(pw1*kk-pwc)}else delete f.dataset.kcrop;
      f.style.height=(g.ih*kk).toFixed(1)+"px";f.style.width=(g.iw*kk).toFixed(1)+"px";f.style.visibility="";f.dataset.kbody=(g.body*kk).toFixed(1);
      /* KIT 32.2b EQUAL GAPS (owner 16/11 s21/s22, whole group): the two frame lines round the figure are the running-head rule (.kbk-rh)
         and the page frame's bottom line: the painted border's inner edge on art pages (KBK_ART_LINE.b of the page height, measured on
@@ -117,7 +122,7 @@ var KBK_ART_LINE=window.KBK_ART_LINE={b:.0244};
      try{const inEl=box.closest(".kbk-in"),rh=inEl&&inEl.querySelector(":scope > .kbk-rh");const rel=e=>{let y=0,x=e;while(x&&x!==inEl){y+=x.offsetTop;x=x.offsetParent}return x===inEl?y:null};const pt=inEl?rel(por):null;
       const pgE=box.closest(".kbk-pg"),art=!!(pgE&&(pgE.classList.contains("r")&&box.closest(".kbk.art-right")||pgE.classList.contains("l")&&box.closest(".kbk.art-left")));
       if(pt!=null){const lt=rh&&rh.offsetParent?rh.offsetTop+rh.offsetHeight:0,lb=art?pgE.offsetHeight*(1-KBK_ART_LINE.b)-inEl.offsetTop:inEl.clientHeight,figH=g.ih*kk*Math.max(.2,b1.b-b1.t),feet=pt+Hc;
-       const s=Math.max(-(Hc-figH),Math.min(0,((lb-feet)-(feet-figH-lt))/2));dyF+=s;f.dataset.kgap=Math.round(feet+s-figH-lt)+"/"+Math.round(lb-feet-s)}}catch(e){}}}
+       const s=Math.min(0,Math.max(-(Hc-figH),Math.min(0,((lb-feet)-(feet-figH-lt))/2)));/* r5: only ever RAISES (a tall figure used to be pushed DOWN past the column floor = feet cut) */dyF+=s;f.dataset.kgap=Math.round(feet+s-figH-lt)+"/"+Math.round(lb-feet-s)}}catch(e){}}}
    const w0=f.offsetWidth;if(!w0||!box.offsetWidth)return;
    f.style.transformOrigin="50% 100%";const t=Math.abs(dyF)>0.5||Math.abs(dxF)>0.5?`translate(${dxF.toFixed(1)}px,${dyF.toFixed(1)}px)`:"";if(f.style.transform!==t)f.style.transform=t})}catch(e){}}
  function soon(){if(!q){q=requestAnimationFrame(clamp);setTimeout(clamp,450);setTimeout(clamp,1300)}}

@@ -2066,12 +2066,14 @@ Rule (measured like the stage `kitEsOvFit` §33.6 and the dialog `kitDpFit` §32
   Picture plate (`o.stage`, = stage rule §33): body = `min(KIT_FIG.h × H, KIT_FIG.maxPx) × fac`. `ih` = picture box height, `iw = ih × true aspect` (never stretched),
   `dy` = how far the box hangs below the foot line (painted feet < 1 stand ON the line, the same line for every figure of the page).
 - Silhouettes use the SAME path, box and scale as real figures (a silhouette is a figure whose file is `unknown-fig-f|m|k`; `fac` from the same table).
-- Person pages (Tuần lục, Mệnh truyện, Sổ luân hồi — j87 `personBody` → `kitStageFig`): column `--porf` = 36 % of the inner page width (j87 layout); `kitBookFigClamp` (live, jsl) fits the figure into it, left edge against the page edge.
-  both call `kitBookFig`. A figure is NEVER scaled to fit (the old "not below 85 %" shrink made a wide Thái hậu smaller than the silhouette beside her): the column widens as before
-  (≤ 74 % of the page) and what is still wider is cut at the column edge (32.2a, soft 24 px fade). An unmeasured figure is hidden, never shown at its raw box.
+- Person pages (Tuần lục, Mệnh truyện, Sổ luân hồi — j87 `personBody` → `kitStageFig`) — ONE LAYOUT (owner 18/11 ~03:35Z + ~03:45Z, r5, overwrites the old text): figure column `--porf` = 36 % of the inner page width and the text column beside it are at the SAME x and width on EVERY page (her own page = the standard; no per-page column, never widened for a wide robe, never under the "?"/portrait chip).
+  `kitBookFigClamp` (live, jsl) sizes every figure with `kitBookFig` (body = column height × fac / KIT_FIG.man = her p.5 figure) and NEVER shrinks or squashes it: true proportions, same body height for every adult (men ×1.07 by the existing rule), CHILDREN keep the child factor (`KIT_FIG.kid(age)`, smaller than adults, never stretched).
+  A figure narrower than the column keeps the live place (painted left edge on the column's left edge). A WIDER one (wide robe, train, sleeves, child art, silhouette) is CROPPED at the column edge (`.kbk-por` overflow:hidden, KIT 32.2a), centred on its body core (`cl..cr` of `kitFigBody`) so face and body stay whole; `data-kcrop` = px cropped. EXCEPTION: the emperor stays exactly as live (fitted into the column by his painted width, no crop).
+  An unmeasured figure is hidden, never shown at its raw box.
 - `kitBookPic` figures: `h` is ignored (kept so old callers do not break); `age` = child factor; sized by `kitBookPicFit` (on load / resize / DOM insert), feet on `--feet`.
   `filter:url(#kfa) … drop-shadow` on every `.kbp-fig` (like `.kesimg`), so the ground shadow shows no faint rectangle.
-- Test: `SHOTS=1 node dev/test/book-fig-scale.js <page.html|url> <outdir>` — per viewport (755×1000, 1000×755, 1180×820, 1366×1024, 844×390): body px, body/column, foot gap, aspect error for
+- Test r5: `node dev/test/book-figsize-scan.js dev/index.html dev/test/book-figsize-cases.json [outdir]` (env SZ, SHOTS=1, HER=<fig file>) — 37 kinds × devices: column x/width identical, adult body = hers ±1 %, kids smaller, face crop 0, text overlap 0, aspect ±1 %.
+- Old test: `SHOTS=1 node dev/test/book-fig-scale.js <page.html|url> <outdir>` — per viewport (755×1000, 1000×755, 1180×820, 1366×1024, 844×390): body px, body/column, foot gap, aspect error for
   Thái hậu, a normal consort, the silhouette f / m and a kitBookPic with 1 real + 2 silhouettes; FAIL if women's bodies differ > 3 % or an aspect is off > 1 %.
 
 ### 34.4 Page mapping (owner-approved; iPad left page · right page)
