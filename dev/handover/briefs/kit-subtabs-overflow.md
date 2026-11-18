@@ -1,0 +1,7 @@
+PRIORITY #1 CHECK ('kitSubTabs overflow'): OD 0 | ledger 0 | claims 0 | main 0 | review/* 0 | archive 0
+Read dev/handover/briefs/root55-common.md FIRST (18 laws, common rules, report to MAIN ROOT-55).
+ROLE: KIT KEEPER worker (sonnet), SMALL UI/kit. Branch review/kit-subtabs-overflow from origin/main 13bb8c88.
+REQUEST K-Q2-1 (from Foreman E worker E13, see FOREMAN_E_STATUS.md line "KIT REQUEST K-Q2-1", 18/11 19:41Z): Mệnh truyện kitSubTabs bar is exactly full at iPad 1180 in palace-start lives (564/564 px); questline-q2 (review/questline-q2 a8cd0551) adds a 6th sub-tab «Phụ tuyến» → 602 > 564, the bar scrolls sideways and the ⓘ overlaps «Tâm nguyện».
+TASK: ONE kit rule in the shared kitSubTabs part for over-full sub-tab bars — WHOLE GROUP (law 11): every kitSubTabs bar in the game, every device (Fold 755x1000, iPad 1180x820, then 1366x1024, 412x1058, 390x844). Pick the rule per law 10 (frame → layout → button size: one fixed size per tier; prefer wrap to a 2nd row or even-shrink within the tier over sideways scroll; ⓘ never overlaps a tab). Write it in dev/kit/KIT.md + kit sample page; file the request row in dev/kit/KIT_REQUESTS.md as DONE with sha.
+TEST: scan script listing every kitSubTabs bar × device: tabs count, bar width, overflow y/n, overlap y/n — before/after table. Shoot the Mệnh truyện bar with 6 tabs (merge or simulate the Q2 6th tab) on Fold + iPad, LOOK. quickcheck PASS.
+REPORT: dev/handover/reports/kit-subtabs-overflow.md; CLAIMS row; send_message MAIN ROOT-55 "SẴN SÀNG KIỂM kit-subtabs-overflow <sha>". Do not message the owner.
