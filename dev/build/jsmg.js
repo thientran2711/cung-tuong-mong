@@ -55,15 +55,15 @@ stealNight=function(a,t,mode){const m=mo(mode);let mine=false;
 /* cb(up, raw, skipped) — up = rungs won (0 on lose / skip). Bots and pages without the kit frame skip at once. */
 function herGame(mode,o,cb){const B=M();const kind=B.art&&B.art[mode];const nm=mode==="road"?"Chặn ngự giá":"Tranh sủng";
  const fin=(raw,sk)=>{const up=!sk&&raw>=B.win?(B.rung||1):0;stat({w:day(),who:"me",mode,up,by:"mg",raw:sk?null:raw,path:"her"});BUSY=0;
-  if(up)try{log(`${nm}: ${KG82_KIND[kind].n.toLowerCase()} được ${raw}/10, cơ hội lần này lên ${word(stealRungUp(o,up))}.`)}catch(e){}
+  if(up)try{log(`${nm}: ${KG82_KIND[kind].n.toLowerCase()} được ${raw}/10, cơ duyên lần này lên ${word(stealRungUp(o,up))}.`)}catch(e){}
   try{cb(up,raw,sk)}catch(e){console.error(e)}};
  if(typeof window.__smgFake==="function"){BUSY=1;const r=window.__smgFake(mode)||{};if(r.sync)fin(+r.raw||0,!!r.skipped);else setTimeout(()=>fin(+r.raw||0,!!r.skipped),0);return}   /* tests */
  if(!B.on||!kind||topRung(o)||typeof window.__bot!=="undefined"||typeof playArt!=="function"||typeof KG82_KIND!=="object"||!KG82_KIND[kind]){try{cb(0,null,true)}catch(e){console.error(e)}return}
  BUSY=1;const n1=word(stealRungUp(o,B.rung||1)),n0=word(o),diff=()=>{try{return mgDiffTxt(mgTier(kind,{occ:B.occ}),kind)}catch(e){return ""}};
  const pa=()=>playArt({art:kind,artName:nm,occ:B.occ,rowsHead:"Trước khi ra tay",
-  rows:[["Thắng",`cơ hội lần này lên một bậc: ${n0} → ${n1}`,"g"],["Thua hay không chơi",`cơ hội giữ nguyên ${n0}, không mất thêm gì`,"n"]].concat(diff()?[["Độ khó",diff(),"n"]]:[]),
+  rows:[["Thắng",`cơ duyên lần này lên một bậc: ${n0} → ${n1}`,"g"],["Thua hay không chơi",`cơ duyên giữ nguyên ${n0}, không mất thêm gì`,"n"]].concat(diff()?[["Độ khó",diff(),"n"]]:[]),
   go:"Bắt đầu",skip:"Thôi, không chơi",skipSub:`giữ nguyên ${n0}`,
-  resRows:(raw,sk)=>[["Kết quả",sk?`không chơi: cơ hội giữ nguyên ${n0}`:raw>=B.win?`${raw}/10 · ${kg82Word(raw)}: cơ hội lên ${n1}`:`${raw}/10 · ${kg82Word(raw)}: cơ hội giữ nguyên ${n0}`,!sk&&raw>=B.win?"g":"n"]],
+  resRows:(raw,sk)=>[["Kết quả",sk?`không chơi: cơ duyên giữ nguyên ${n0}`:raw>=B.win?`${raw}/10 · ${kg82Word(raw)}: cơ duyên lên ${n1}`:`${raw}/10 · ${kg82Word(raw)}: cơ duyên giữ nguyên ${n0}`,!sk&&raw>=B.win?"g":"n"]],
   onDone:(raw,x)=>fin(raw,!!(x&&x.skipped))});
  /* jaudit's playArt hook marks a paid game (window.__aaL); this game is free: keep its mark as it was */
  const L=window.__aaL;try{pa()}catch(e){console.error(e);BUSY=0;try{cb(0,null,true)}catch(e2){}}finally{window.__aaL=L}}
@@ -84,26 +84,53 @@ if(typeof doAct==="function"){const d0=doAct;doAct=function(i,k){if((k!=="steal"
  herGame(mode,o0(S,mode),up=>{TOK.set(S,{mode,up,by:"mg"});try{d0.apply(self,args)}finally{TOK.delete(S)}try{render()}catch(e){}})}}
 
 /* ---------- review/balance-chain night (jnf): her choice → game → the one resolve; NPCs roll at the resolve ---------- */
-let NFUP=null;const NPCR=new Map();let PASS=0;
+/* CO-OP (host-authoritative, jnf relay "ctm-nf"): each player plays HER OWN game on her own seat; the rung she wins reaches the one resolve on the host.
+   GUEST: her pick tells the host at once that she is playing (SMG "mg"); jnf's "ch" message is held until her game ends, then sent right after a
+   SMG "up" message {mode, up} (same socket, so the host has her rung before it has her choice). HOST: a friend's "ch" that arrives while the host is
+   in her own game (S.nfX.st "mg", which jnf's own handler skips) is taken here; jnf's friend timeout (choice.waitMs from x.myAt) restarts when the
+   host's game ends and is held open while the friend's game runs (at most BAL.steal.mg.coopMs). The friend's try then reads her rung (FRUP) through
+   the same oSteal hook. jnf.js itself is unchanged. */
+let NFUP=null,FRUP=null,FRW=null,GHOLD=0,HELD=null;const NPCR=new Map();let PASS=0;
+const SMG="ctm-smg",NFK="ctm-nf";
 function nfX(){const x=S&&S.nfX;return x&&x.d===day()?x:null}
 function inResolve(){const x=nfX();return !!(x&&x.st==="done"&&!x.def)}
+const CO=()=>{try{return window.COOPW&&COOPW.on&&typeof COOP==="object"?COOPW:null}catch(e){return null}};
+const isHost=()=>{if(typeof window.worldOn==="function")return !!window.worldOn();const c=CO();return !c||c.seat==="a"};
+const isGuest=()=>!!CO()&&!isHost();
+const VALIDM=v=>v==="feign"||v==="road"||v==="keep"?v:null;
 function nfCtxUp(a,mode){if(typeof window.nfStep!=="function"||!a)return null;
  const live=inResolve();if(!live&&!PASS)return null;
  if(a===S){if(live&&NFUP&&NFUP.d===day()&&NFUP.mode===mode)return{mode,up:NFUP.up,by:"mg"};return null}
- if(a.coop)return null;const key=`${day()}|${a.id}|${mode}`;
+ if(a.coop){if(live&&FRUP&&FRUP.d===day()&&FRUP.mode===mode)return{mode,up:FRUP.up,by:"friend"};return null}
+ const key=`${day()}|${a.id}|${mode}`;
  if(!NPCR.has(key)){if(NPCR.size>400)NPCR.clear();const up=npcUp(a,mode);NPCR.set(key,up);stat({w:day(),who:a.id,mode,up,by:"npc",path:live?"nfResolve":"nfPass"})}
  return{mode,up:NPCR.get(key),by:"npc"}}
+function smgSend(m){try{COOP.send(Object.assign({t:"act",k:SMG,mode:isHost()?"h":"g",d:day(),week:COOP.state&&COOP.state.week,id:SMG+Date.now().toString(36)+Math.random().toString(36).slice(2,6)},m))}catch(e){console.error(e)}}
+/* host: keep jnf's friend wait open while her game runs (bounded) */
+let FRT=null;function frHold(on){if(FRT){clearInterval(FRT);FRT=null}if(!on)return;
+ FRT=setInterval(()=>{try{const x=nfX();if(!FRW||FRW.d!==day()||Date.now()>FRW.until||!x||x.fr!==undefined||x.st==="done"){FRW=null;clearInterval(FRT);FRT=null;return}if(x.myAt)x.myAt=Date.now()}catch(e){}},250)}
 let NFON=0;function nfInstall(){if(NFON||typeof window.nfStep!=="function"||typeof chooseM!=="function")return;NFON=1;
  const cm0=chooseM;chooseM=function(j){const m=Q[0],op=m&&m.pid==="nfch"&&m.opts&&m.opts[j];const mode=op&&(op.n==="Tranh sủng"?"feign":op.n==="Chặn ngự giá"?"road":null);
   const x=nfX();if(!mode||!x||x.st!=="open"||BUSY||!M().on)return cm0.apply(this,arguments);
-  const o=typeof stealShown==="function"?stealShown(S,mode):o0(S,mode);
-  x.st="mg";let r;try{r=cm0.apply(this,arguments)}catch(e){x.st="open";throw e}
-  herGame(mode,o,up=>{NFUP=up?{d:day(),mode,up}:null;const y=nfX();if(y&&y.st==="mg")y.st="open";try{window.nfStep()}catch(e){console.error(e)}});
+  const o=typeof stealShown==="function"?stealShown(S,mode):o0(S,mode);const gst=isGuest();
+  if(gst){GHOLD=1;HELD=null;smgSend({ph:"mg",v:mode})}
+  x.st="mg";let r;try{r=cm0.apply(this,arguments)}catch(e){x.st="open";GHOLD=0;throw e}
+  herGame(mode,o,up=>{NFUP=up?{d:day(),mode,up}:null;const y=nfX();if(y&&y.st==="mg")y.st="open";
+   if(gst){GHOLD=0;smgSend({ph:"up",v:mode,up:up||0});const h=HELD;HELD=null;if(h)try{COOP.send(h)/* GHOLD is 0 now: goes out */}catch(e){console.error(e)}return}
+   if(y&&y.myAt)y.myAt=Date.now();   /* the friend's wait restarts after the host's own game */
+   try{window.nfStep()}catch(e){console.error(e)}});
   return r};
+ /* guest: jnf's "ch" waits for her game (sent after the SMG "up") */
+ try{if(typeof COOP==="object"&&typeof COOP.send==="function"){const s0=COOP.send;COOP.send=function(m){try{if(GHOLD&&m&&m.k===NFK&&m.ph==="ch"){HELD=m;return}}catch(e){}return (window.__coopSendTap||s0).apply(this,arguments)}}}catch(e){}
+ /* host: the friend's game notice / rung, and her "ch" while the host is in her own game */
+ try{if(typeof COOP==="object"&&typeof COOP.on==="function")COOP.on("act",m=>{try{const c=CO();if(!m||!c||m.from===c.seat||!isHost()||!S||m.d!==day()||m.mode!=="g")return;
+  if(m.k===SMG){if(m.ph==="mg"){FRW={d:day(),until:Date.now()+(M().coopMs||120000)};FRUP=null;frHold(true)}
+   else if(m.ph==="up"){FRUP={d:day(),mode:VALIDM(m.v),up:Math.max(0,Math.min(M().rung||1,m.up|0))};FRW=null;frHold(false);const x=nfX();if(x&&x.myAt)x.myAt=Date.now()}return}
+  if(m.k===NFK&&m.ph==="ch"){const x=nfX();if(x&&x.st==="mg"&&x.fr===undefined){x.fr=m.ch?VALIDM(m.ch.v):null;FRW=null;frHold(false)}}}catch(e){console.error(e)}})}catch(e){}
  /* a save made while the game was open: the choice stands, the step resumes (no rung) */
  if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);try{const x=nfX();if(x&&x.st==="mg"&&!BUSY){x.st="open";setTimeout(()=>{try{window.nfStep()}catch(e){}},0)}}catch(e){}return r}}
  if(typeof window.stealPass==="function"){const sp0=window.stealPass;window.stealPass=function(){PASS++;try{return sp0.apply(this,arguments)}finally{PASS--}}}}
 /* jnf may load after this file (assemble order): install now, else once the page has loaded */
 nfInstall();if(!NFON)try{window.addEventListener("load",nfInstall)}catch(e){}
-window.stealMgDebug=()=>({tok:[...TOK.entries()].map(([a,t])=>[a===S?"me":a&&a.id,t]),nfup:NFUP,busy:BUSY,st:ST.slice(-20)});
+window.stealMgDebug=()=>({tok:[...TOK.entries()].map(([a,t])=>[a===S?"me":a&&a.id,t]),nfup:NFUP,frup:FRUP,frw:FRW,ghold:GHOLD,held:!!HELD,busy:BUSY,st:ST.slice(-20)});
 })();

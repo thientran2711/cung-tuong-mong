@@ -51,7 +51,9 @@ const {chromium}=require('playwright');const path=require('path');
   /* 6 · same code path: her rung and the NPC rung come from the one hook (oSteal wrapper → stealRungUp), equal start → equal result */
   ok("same rung function for her and NPCs",String(oSteal).includes("stealRungUp")&&typeof stealMgNpc==="function");
   /* 7 · already Nắm chắc: no game offered (nothing to win) */
-  {reset();S.tonight=H;window.__smgFake=null;let got=null;stealMgPlay("feign",95,(up,raw,sk)=>{got={up,sk}});ok("at Nắm chắc the game is not offered (skip at once)",got&&got.up===0&&got.sk===true,got)}
+  {reset();S.tonight=H;window.__smgFake=null;const bot=window.__bot;delete window.__bot;const pa=playArt;let calls=0;playArt=function(o){calls++;try{o.onDone(9,{skipped:false})}catch(e){}};let got=null,got2=null;
+   try{stealMgPlay("feign",93,(up,raw,sk)=>{got={up,sk}});stealMgPlay("feign",50,(up,raw,sk)=>{got2={up,raw,sk}})}finally{playArt=pa;window.__bot=bot}
+   ok("at Nắm chắc the game is not offered (no __bot: playArt not called), below it is",got&&got.up===0&&got.sk===true&&calls===1&&got2&&got2.up===1,{got,got2,calls})}
   /* 8 · nothing new in the save */
   ok("save: no steal-game state written",!/smg|__smg|stealMg/.test(JSON.stringify(ser())));
   window.roll=roll0;return out});
