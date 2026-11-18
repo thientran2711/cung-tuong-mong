@@ -173,6 +173,8 @@ function wrapF(n,kind,cond){const f=window[n];if(typeof f!=="function")return;wi
     that shows cards only when the date moved on her phone — jworld endTurn — skips them): the week end waits for an empty Q, so show them */
  if(kind==="world"&&n!=="render")try{if(gOn()&&S&&!S.dead&&!S.mg&&Q.length&&$("modal").hidden)setTimeout(()=>{try{if(Q.length&&$("modal").hidden&&!S.mg)showModal()}catch(e){}},0)}catch(e){}
  return r}}
+/* thin F1: a world step (her week end / buổi step still on her phone) is open: an act inside it is not a tap of hers (never an intent) */
+C.inWorld=()=>FR.some(F=>F.kind==="world");
 C.flushAct=()=>{while(FR.length&&FR[FR.length-1].kind==="act")close(FR[FR.length-1])};
 C.flushImp=()=>{while(FR.length&&FR[FR.length-1].kind==="act"&&FR[FR.length-1].implicit)close(FR[FR.length-1])};
 for(const n of ["endTurn","nextBuoi","monthTick","render"])wrapF(n,"world");

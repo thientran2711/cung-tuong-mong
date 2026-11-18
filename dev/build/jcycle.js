@@ -95,7 +95,7 @@ function cybOf(p){if(p===S)return S.cyb||{};if(p&&p.coop&&window.COOPW&&typeof C
 const CYK=["lie","lieM","back","rk","rv","df","hide","rum","giauM"];
 /* what jcoopworld relays: this week's flags + whether her maid's card is still waiting for her answer (the host's flip waits for it) */
 function cyRec(){const c=S&&S.cyb||{},o={};for(const k of CYK)if(c[k]!==undefined)o[k]=c[k];const w=wk();return{w,c:o,pend:c.df===w&&c.rk!==w}}
-window.cyRec=cyRec;window.cyWk=()=>wk();
+window.cyRec=cyRec;window.cyWk=()=>wk();window.cyAsk=()=>cyAsk();
 /* lateness as the BOOK shows it: a pregnancy begun within luiCover tuần after a "báo lùi" reads one cycle later (foes, thái y) */
 function cyLateSeen(p){p=p||S;const n=cycleLate(p);return n&&cyCover(p)?Math.max(0,n-1):n}
 window.cyNoFriend=(f)=>cyNoFriend(f);window.cycleDaysOf=cycleDaysOf;window.cycleLate=cyLateSeen;window.cycleLateTrue=cycleLate;window.cyTray=cyTray;window.cycOn=cycOn;window.cyNow=cyNow;window.cyBase=cyBase;window.cyLen=cyLen;window.cyDaysM=cyDaysM;window.cyAge=cyAge;
@@ -146,7 +146,9 @@ const dl0=deal;deal=function(){const r=dl0.apply(this,arguments);try{if(!S||!Arr
 
 /* ---------- 2b. THE MONTHLY REPORT (owner 16/11): when her cycle tuần starts, her maid asks how to report it to Kính sự phòng.
    The week's flip waits for the answer (flip() is called again from the option), so a false report really puts her card back on the tray. ---------- */
-function cyAsk(){if(!S||S.dead||S.out||(typeof isSrv==="function"&&isSrv())||!S.maid)return false;if(!cycOn(S))return false;const c=cyb();if(c.rk===wk()||c.df===wk())return false;
+/* co-op thin (E-fix, level 5+): the host asks her card in her context and holds her flags; her phone neither asks nor auto-answers (window.cyHostOwns, jcoopthine) */
+const cyHostOwns=()=>{try{return typeof window.cyHostOwns==="function"&&!!window.cyHostOwns()}catch(e){return false}};
+function cyAsk(){if(cyHostOwns())return false;if(!S||S.dead||S.out||(typeof isSrv==="function"&&isSrv())||!S.maid)return false;if(!cycOn(S))return false;const c=cyb();if(c.rk===wk()||c.df===wk())return false;
  if(typeof PEND!=="object"||typeof pushDil!=="function")return false;
  /* review r3: never on the first screen of a new life (start() runs flip right after "Nhập cung"): that week the maid reports truly */
  if(Array.isArray(Q)&&Q.some(m=>m&&m.t==="Nhập cung")){c.rk=wk();c.rv="dung";return false}
@@ -187,7 +189,7 @@ function cyNoFriend(f){if(!(window.COOPW&&COOPW.on)||COOPW.tnShared/* reviewer r
 try{if(typeof KIT_ACT_CATS!=="undefined"&&Array.isArray(KIT_ACT_CATS))KIT_ACT_CATS.unshift(["muu-ke",/nguyệt sự|báo ngày giả|xem sổ/i])}catch(e){}
 const fl1=flip;flip=function(){try{if(cyAsk()){S.tonight=null;return}}catch(e){console.error(e)}return fl1.apply(this,arguments)};
 /* never answered (closed, reloaded): the week ends with the true report */
-const et0=endTurn;endTurn=function(){try{const c=S&&S.cyb;if(c&&!(typeof Q!=="undefined"&&Q.length)&&c.df===wk()&&c.rk!==wk()){c.rk=wk();c.rv="dung"}}catch(e){}return et0.apply(this,arguments)};
+const et0=endTurn;endTurn=function(){try{const c=S&&S.cyb;if(c&&!cyHostOwns()&&!(typeof window.cyCardOpen==="function"&&window.cyCardOpen())&&!(typeof Q!=="undefined"&&Q.length)&&c.df===wk()&&c.rk!==wk()){c.rk=wk();c.rv="dung"}}catch(e){}return et0.apply(this,arguments)};
 
 /* ---------- 3. the book ---------- */
 function cyHideOf(p){const k=p===S?cyb():cybOf(p);if(k){const h=k.hide;return !!(h&&p.preg&&h===p.pregWk)}

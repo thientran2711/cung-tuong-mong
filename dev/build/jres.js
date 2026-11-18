@@ -1,12 +1,12 @@
 /* ================= jres: NƠI Ở (residence rooms) — tranh phòng theo nơi người đó ĐANG ở =================
    Tranh: img/<phòng>-<mùa>-<buổi>.webp (Magnific gpt-2-6, 3:2). Phòng:
-     8 cung (MAPH.rivalSlots, theo thứ tự PALN): <slug>-cung (chính điện, chủ vị), <slug>-cung-dong-phoi / -tay-phoi (phối điện, người ở chung);
+     các cung phi tần (PALN = MAPH.rivalSlots, 8 đông có tranh + PAL_WEST của jpal): <slug>-cung (chính điện, chủ vị), <slug>-cung-dong-phoi / -tay-phoi (phối điện, người ở chung);
      cung-nhan (dãy nhà cung nhân, dùng chung). Ngọc Thanh các = tam-cung-dem (j21), Càn Ninh = khon-ninh-cung, lãnh cung = lanh-cung (j6).
    API (dùng chung — thợ bản đồ cung review/palace-map gọi):
-     residenceArt(palaceKey, part, season, time) → "img/<tên>.webp"  palaceKey = chỉ số 0..7 | slug | tên cung | khóa "r<id>"/"home";
+     residenceArt(palaceKey, part, season, time) → "img/<tên>.webp"  palaceKey = chỉ số PALN (0..PALN.length-1) | slug | tên cung | khóa "r<id>"/"home";
         part = 'chinh'|'dong'|'tay'|'cungnhan'; season = xuan|ha|thu|dong (mặc định mùa hiện tại); time = sang|trua|chieu|toi (mặc định buổi hiện tại).
         Thiếu bản → cùng mùa buổi gần nhất → xuân cùng buổi → xuân-sáng.
-     residenceOf(p) → {pal (0..7|null), part:'chinh'|'dong'|'tay'|'cungnhan'|'ngocthanh'|'kn'|'lc', head, name}  — tính TƯƠI mỗi lần (không lưu).
+     residenceOf(p) → {pal (PALN index|null), part:'chinh'|'dong'|'tay'|'cungnhan'|'ngocthanh'|'kn'|'lc', head, name}  — tính TƯƠI mỗi lần (không lưu).
      roomResidents(pal, part) → mọi người SỐNG trong phòng đó;  roomPeople(pal, part) → những người đang Ở NHÀ buổi này (S.where).
      resRoomName(r) → "Đông phối điện · Cảnh Phúc cung" …
    Sân khấu: "home" và "r<id>" (thăm cung) dùng phòng thật thay cho phi-tan-cung chung; tính lại ở mỗi renderStage. */
@@ -45,7 +45,7 @@ function resPalIdx(k){if(k==null)return null;if(typeof k==="number")return k>=0&
  if(k==="home")return S&&S.pal!=null?S.pal:null;
  if(typeof k==="string"&&k[0]==="r"&&/^r\d+$/.test(k)){const h=RV(+k.slice(1));return h&&h.pal!=null?h.pal:null}
  let i=RES_SLUG.indexOf(String(k).replace(/-cung$/,""));if(i>=0)return i;i=(typeof PALN!=="undefined"?PALN:[]).indexOf(k);return i>=0?i:null}
-/* the 5 west palaces jpal added (index 8–12) have no room paintings yet (ART REQUEST, Foreman C): a stand-in from the 8 painted ones, marked 'tạm' */
+/* the west palaces jpal adds (PAL_WEST, the PALN indices past RES_SLUG) have no room paintings yet (ART REQUEST, Foreman C): a stand-in from the 8 painted ones, marked 'tạm' */
 function resTamPal(pal){const i=resPalIdx(pal);return i!=null&&i>=RES_SLUG.length}
 function resBase(pal,part){if(part==="cungnhan")return"cung-nhan";const i=resPalIdx(pal);if(i==null)return null;
  return RES_SLUG[i%RES_SLUG.length]+"-cung"+(part==="dong"?"-dong-phoi":part==="tay"?"-tay-phoi":"")}
