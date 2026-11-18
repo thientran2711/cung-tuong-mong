@@ -9,6 +9,7 @@ Earlier today (verbatim): "Tôi không hiểu là bạn kiểm cái kiểu gì. 
 ## A. PROPORTION (m09 overlay) — tool: dev/art/figure-gate/overlay_m09.py
 1. Reference = img/hd/fig-maid-m09-a18.webp (Magnific eIyOFEidqL). It is the ONE standard for body, rendering, fabric and skin (never for the face).
 2. ROW FIRST: put ALL figures of the set (a person's ranks t1..t8) side by side in ONE row, each scaled so its SKULL TOP (đỉnh đầu: top of the skull, NOT the bun, NOT hairpins, NOT the crown) sits on the upper RED line and its FEET on the lower RED line. Crowns/buns/pins stick out above the line: that is correct.
+   Owner 18/11 ~03:40Z (verbatim): "Người nào mà cao hơn á, thì kéo giãn xuống cho nó bằng với cái đường line màu đỏ, hiểu không? Người nào mà thấp hơn thì kéo cao lên chẳng hạn. Sau khi kéo giãn xong hết rồi, bắt đầu mình mới so, mình mới đặt cái người M09 vào để mà mình so cái tỷ lệ người, tức là thân hình, body và cái đầu có đúng tỷ lệ chưa."
 3. THEN OVERLAY: lay m09 (scaled the same way, skull top → feet) over every figure: tinted silhouette + red outline.
 4. PASS: face height within ±3% of m09's; shoulders and waist inside m09's outline; body ≈ 7.5 heads (skull top → feet); shoulder points ≈ 2.0 × face height; waist ≈ 1.15 × face height. Fail on any = regenerate.
 5. Crowns/buns are EXTRA height above the head; never shrink the head or the body to make room (use a taller canvas, generous headroom).
