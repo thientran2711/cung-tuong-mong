@@ -158,7 +158,7 @@ Object.assign(BAL,{dis:{n:[1,2],aff:4,sung:1,refuse:35,refAff:2,refSung:1,talk:2
    fate (Emperor dies, her son not the heir): phiRank+ or a daughter → Thái phi; a son → theo con ra phủ; childless: rank ≤ homeRank, age < homeAge → về quê (homeP %),
         else xuất gia; childless favourite (Sủng ≥ tuanSung) faces tuẫn táng (tuanP %), averted by Đức ≥ tuanDuc or Thái hậu ≥ tuanTh */
 BAL.mort={on:1,playerFloorYears:0,
- life:{show:0,care:1,careAdd:1,careMax:3,cureTy:40,careYt:2,cureOther:20,cureSuc:5,careSuc:70,careP:12,careLapse:40,careIll:15,floorMe:0,floorEmp:0,minMo:3,
+ life:{show:0,care:1,careAdd:1,careMax:3,cureTy:40,careYt:1 /* Y thuật bậc that counts as care (yCareT, review/balance-final): birth risk, poison spotting (j8 oSee), wound / rash / face healing, careN — one key for the family, her and NPCs; 2→1 with the slower ladder */,cureOther:20,cureSuc:5,careSuc:70,careP:12,careLapse:40,careIll:15,floorMe:0,floorEmp:0,minMo:3,
   dice:{adult:{mean:45,sd:15,lo:15,hi:85},me:"adult",emp:"adult",
         kid:{risk:12,early:[[1,3,5],[3,6,3],[6,10,2]],adult:"adult"}}},
  oldFloor:0,thIllKeep:30,sudden:15,omen:[2,6],omenSt:[1,3],oldAge:55,thDanh:5,maidLoy:40,repl:{young:[22,8],adult:[40,10]},pre:{mo:12,ill:6,suc:2,omenSuc:3},acc:{me:.05,npc:.08,emp:.15},oddP:30,
@@ -530,7 +530,8 @@ BAL.art={tier:[0,10,25,45,70,100],nm:["Chưa thạo","Nhập môn","Thuần th�
  flipX:2 /* Mê sắc: × of Sắc and Vũ in the card-flip chance (j8 nightCh) */,
  score:2.5 /* contest score per odds point (khuê các festival kcFest: score ≥ 60 first, ≥ 40 praised) */,
  fee:[5,5] /* teacher fee = fee[0] + bậc × fee[1] Bạc (artFee) */,
- gate:{yCure:3,thiFame:3} /* course gates moved with the slower ladder (report §F6 table): self-made medicine for a child / an thai at Tinh thông (was bậc 4, ~10 lessons; Xuất chúng now ≥ 1 year); "Thơ ngươi truyền ra ngoài cung" at Tinh thông (Thuần thục = a thầy đồ's daughter at entry) */,
+ care:6 /* Y thuật CARE family (review/balance-final): careY(p) = artO(p,"y") + care once Y thuật ≥ BAL.mort.life.careYt (the slower ladder reaches bậc 2–3 in mid-life only at ~year 5; this keeps mid-life care ≈ the old y×5): careOdds, treat "self", Uống thuốc phá thai */,
+ gate:{yCure:2,thiFame:3} /* course gates moved with the slower ladder (report §F6 table): self-made medicine for a child / an thai / «Tự bốc thuốc» at Thuần thục (was bậc 4 live, 3 in balance-core; review/balance-final: mid-life Y thuật in the bot is bậc ≈ 1–2, live ≈ 3); "Thơ ngươi truyền ra ngoài cung" at Tinh thông (Thuần thục = a thầy đồ's daughter at entry) */,
  fx:{q:.7,cong:.2,hanh:3,gift:{hoa:.5,theu:.4}} /* per POINT of a course: handmade quality q × points (+ Công × cong), gift bonus × points; hanh = Đức per bậc of Hạnh (monthly) */};
 /* growth of the trained abilities (Sắc, Tài, Tâm cơ): every gain is × mul[band] where band = how many of band[] the value has passed
    (0–39 ×1 · 40–59 ×.5 · 60–79 ×.25 · 80+ ×.1); the same for her and every NPC; fractions roll (expected value).

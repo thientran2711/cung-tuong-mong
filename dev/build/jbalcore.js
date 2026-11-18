@@ -32,6 +32,9 @@ function nightArt(p){let b={k:null,l:0,w:0};for(const a of ARTS){if(a.k==="theu"
 /* a multiplier in plain words for rule text (one core: the text prints the BAL constant) */
 function xWord(m){return m===2?"gấp đôi":m===1.5?"gấp rưỡi":m===3?"gấp ba":`gấp ${String(m).replace(".",",")} lần`}
 function artSide(p,k){return Math.round(artO(p,k)*BAL.art.side*10)/10}
+/* Y thuật CARE family (review/balance-final): the Y bậc that counts as care (BAL.mort.life.careYt) and the care odds bonus (artO + BAL.art.care once at it) */
+function yCareT(){return (BAL.mort&&BAL.mort.life&&BAL.mort.life.careYt)||1}
+function careY(p){const l=((p&&p.arts)||{}).y||0;return artO(p,"y")+(l>=yCareT()?(BAL.art.care||0):0)}
 function virO(p,k){const l=((p&&p.vir)||{})[k]||0;return BAL.art.odds[Math.min(l,BAL.art.odds.length-1)]||0}
 /* ---- start values: one table for her and every NPC ---- */
 function origRow(k){return (BAL.start&&BAL.start[k])||BAL.start.quan}
@@ -116,6 +119,10 @@ function rungDown(o,n){const F=[0].concat(BAL.odds.cut),top=100;let i=0;for(let 
  /* course gates (BAL.art.gate) and per-point quality (BAL.art.fx) in the same texts */
  {const Y=ARTFX.y,cure="tự bào chế thuốc an thai; chữa bệnh cho con: Sức khỏe con +30",gi=BAL.art.gate.yCure-1;const at=Y.findIndex(t=>t.includes(cure));
   if(at>=0&&at!==gi&&Y[gi]){Y[at]=Y[at].replace(" · "+cure,"");Y[gi]+=" · "+cure}}
+ /* Y thuật care family (review/balance-final): «nhận ra độc» sits at BAL.mort.life.careYt, «Tự bốc thuốc» at BAL.art.gate.yCure; the course's short line says both */
+ {const Y=ARTFX.y,mv=(re,gi)=>{const at=Y.findIndex(t=>re.test(t));if(at<0||at===gi||!Y[gi])return;const m=Y[at].match(new RegExp(" · ("+re.source+".*?)(?= · |$)"));if(!m)return;Y[at]=Y[at].replace(" · "+m[1],"");Y[gi]+=" · "+m[1]};
+  mv(/nhận ra độc/,yCareT()-1);mv(/mở «Tự bốc thuốc»/,BAL.art.gate.yCure-1);
+  const a=ARTS.find(x=>x.k==="y");if(a&&a.u)a.u=a.u.replace(/^Bậc \d+: nhận ra độc/,`Bậc ${yCareT()}: nhận ra độc`).replace(/Bậc \d+: tự bào chế thuốc/,`Bậc ${BAL.art.gate.yCure}: tự bào chế thuốc`)}
  /* the deck art cards open at BAL.deck[k].lv (review/balance-2 r2): the «mở …» line sits at that bậc, the course's short line says that bậc */
  for(const k of ["cam","vu","ky"]){const X=ARTFX[k],gi=BAL.deck[k].lv-1;const at=X?X.findIndex(t=>/ · mở «/.test(t)):-1;
   if(at>=0&&at!==gi&&X[gi]){const m=X[at].match(/ · (mở «.*)$/);X[at]=X[at].replace(" · "+m[1],"");X[gi]+=" · "+m[1]}
