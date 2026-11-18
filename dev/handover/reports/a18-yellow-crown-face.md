@@ -104,3 +104,30 @@ Done: yellow/crown/face scan + 23 fixes above (READY went to ROOT-26, forwarded 
 2. D3e item value ladder t1-t8 (same kind OK, luxury rises with rank; t6/t7/t8 items reserved to their rank; lower ranks must not hold ruyi/jewelled box/censer/gem fan/phoenix fan/imperial scroll-seal box; c03 a18 live set = list only, ask ROOT-27). Re-read FIGURE_GATE (handover branch, newest) first.
 3. Waiting on ROOT-27: decision on the 10 borderline crowns (t7 v1+v2 of c04 c08 c09 c10 c13) and per-person row-sheet rebuild.
 Reuse: scan scripts in /home/user/wt/w65-work (ephemeral): face.json (landmarks of all 768), sm/ (1200px copies), sheets.py (face + t7/t8 contact sheets), ylab.py (yellow dE), ba.py (before|after), upload root /home/user/wt/w65-up. Magnific upload ids: colour ref fHGh02nCDY, m09 style eIyOFEidqL.
+
+# a18-scan-2 (W65b, 18/11 ~17:15Z) — D4b mouth + D3e held-item scan, row sheets
+
+PRIORITY #1 CHECK: OD FIGURE_GATE D4b/D3e (16:37-16:50Z) | main none | review/* none | claims W65 (done). Rules read in full (START_CORE incl. 18 laws, START_WORKER, START_ART, FIGURE_GATE all, B10 brief, tools README, W65 section). Nothing live touched. c03 = LIST ONLY.
+
+## Done
+1. Row sheets REBUILT + on CDN (md5 check 17/17 same): img/_review/consort-tiers/<cNN>/b10/<cNN>_a18_b10_sheet.jpg for c01 c02 c06 c07 c09 c10 c13 c15 c16 c17 c19 c20 c21 c22 c23 c25 c27 (rows v0/v1/v2 x t1..t8). They show the state BEFORE the regens below; rebuild with tools/sheet.py after regens.
+2. Scan of all 768 files: every mouth looked at on 15 zoomed contact sheets (3x), every v0 held item looked at on 10 sheets (v1/v2 of a tier share the v0 item; spot-checked). Files: dev/handover/reports/a18-scan-2-tools/ (flags.txt, d3e.txt, d4b_fail_files.txt, scripts).
+3. GENS USED: 0. Regens NOT started: 300+ files exceed one worker's context (rollover rule); successor to run them.
+
+## D4b teeth / open mouth: 73 files (71 excl. c03)
+(list in d4b_fail_files.txt) c03 t3 v0 v1 (LIST ONLY); c04 t1 v1; c05 t2 v0-2; c09 t3 v0-2; c12 t3 v0-2, t8 v0-2; c13 t4 v0-2, t6 v0-2; c14 t3 v0-2; c15 t6 v1 v2; c16 t7 v2; c18 t2 v0-2, t3 v1 v2, t4 v1 v2, t5 v0-2; c19 t2 v0-2, t3 v0-2; c22 t7 v0-2; c25 t1 v0-2, t4 v0-2, t7 v0; c26 t2 v0-2; c27 t2 v0-2; c29 t1 v0-2, t5 v0 v1; c30 t2 v0-2; c32 t3 v0-2, t4 v0-2.
+Borderline kept (tiny gloss highlight on closed lips, NOT regen): c01 t6 v1 v2, c02 t8 v2, c05 t6 v0, c06 t5 v1, c07 t2 v2, c08 t8 v2, c10 t4 v2, c10 t8 v2, c11 t4 v0 v1, c16 t6 v1, c20 t3 v0-2, c28 t1 v2, c29 t6 v0-2, c31 t4 v0 v1.
+
+## D3e held item (per tier; v0/v1/v2 all follow)
+STRICT (t6-t8 holding banned / plain / higher-rank item) 39 tiers = 117 files:
+- loose branch/flower/lotus: c01 t7, c06 t7, c07 t6, c08 t6, c09 t6, c10 t7, c11 t6, c12 t6, c15 t6 t8, c16 t6 t7, c17 t6 t7, c18 t6 t7, c19 t6 t7, c20 t6, c24 t7, c25 t7, c26 t6 t7, c27 t7, c28 t7, c29 t6
+- handkerchief: c01 t6, c04 t6, c05 t6, c06 t6 (painted folding fan), c22 t6, c23 t6; c03 t7 (list only)
+- basket: c14 t6 t7 t8
+- plain book: c10 t6
+- t8 item at t7 (phoenix round fan): c02 t7 (+2 items), c05 t7, c30 t7
+SOFT (below rank but not banned; decide): 49 tiers — folding fan at t8 for ~20 people (c01 c12 c17-c32 ...), plain scroll/folding fan/pendant at t6/t7 (c20 t7, c21 t6 t7, c22 t7, c23 t7, c24 t6, c25-c32 t6 pendant), handkerchief/book/branch at t4/t5 (c02 t4, c06-c12 t4 t5, c13 t4, c15 t5, c21 t5, c22 t4, c23 t4). Full list in d3e.txt.
+No item at all (one required): c14 t4, c27 t3, c28 t3, c29 t3, c16 t8 (check). No cup found. No reserved item found at t1-t5.
+QUESTIONS for ROOT-27: (a) is a gilded lantern OK at t5-t7? (not in ladder, not banned; treated neutral); (b) is a gilded folding fan at t8 a fail? (treated SOFT); (c) jade pendant held at t6 (c25-c32).
+
+## HANDOVER (W65b -> W65c)
+Order: 1) D4b 71 files (one gen each: "Change ONLY the mouth: closed lips, no teeth; keep everything else"; refs = file + m09 eIyOFEidqL; also fix item in the same gen where the tier is also in D3e). 2) D3e STRICT 117 files (replace item with the rank item: t6 jade ruyi / carved fan / jewelled box, t7 gold-jade ruyi / gilded censer, t8 phoenix round fan / gold ruyi; contrasting colour, below chin, v0/v1/v2 same item). 3) SOFT after ROOT-27 ruling. Then rebuild sheets (sheet.py all-dir out-dir cNN...) + cdn_sync, before/after sheets. Local copies of 768 files are ephemeral (/home/user/wt/w65b-work/all); re-download with the URL pattern https://ctm-img.victoria-tntt.workers.dev/img/_review/consort-tiers/cNN/b10/cNN_a18_tN_vK.png. Mediapipe needs libegl1; scripts lm2.py/mouth2.py/items.py.
