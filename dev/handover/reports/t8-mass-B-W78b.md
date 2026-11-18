@@ -1,7 +1,7 @@
 # t7/t8 mass B — W78b (c13 a26-a51, c14–c22 all ages), report
 PRIORITY #1 CHECK: OD 0 new | claims W78 predecessor (t8-mass-B-W78.md), W77b build.py --age | main jobs.json | review/* 0 -> reused FROZEN dev/art/t8-prompt-B (golden c06 v0 OK at d1b375f4). depth 8 (worker; no successor opened by me).
 Method: prompts = build.py output unchanged (AGE_TXT a36/a51 strengthened by Foreman C commit 252c25f5/d1b375f4 after my finding that a36/a51 faces read young); refs = her t1 upload + m09; 1024x2304 2k gpt-2-6; each person-age set (t8 v0 v1 v2 + t7 v0 v1 v2) painted by a sonnet sub-painter from prompt files, cut with images_remove_background, md5-verified on the CDN. Files img/_review/t8-reprompt/<cNN>_<age>_t{7,8}_v{0,1,2}.png + <cNN>_<age>_t7t8_sheet.jpg. Gens: 1 per figure unless noted (a36/a51 regens for young faces: c13 a36 t8x3, c13 a51 t7v0 x3 t7v2 x2, c14 a36 t8v0, c15 a36 t7v2, c17 a36 t8v1 t8v2 t7v2, c17 a51 t8v1 t7v0 t7v1).
-Done+READY sent to Foreman C: c13 a26 a36 a51 | c14 a18 a26 a36 a51 | c15 a18 a26 a36 a51 | c16 a18 a26 a36 a51 | c17 a18 a26 a51 (a36 sheet ready, READY not yet sent) | c18 a18 a26 a51 | c19 a18 a26 a51 | c20 a18 a26 | c21 a18 | c22 a18.
-Foreman ruling: a51 faces accepted (fine lines, few silver strands); one regen max when a face reads under ~40.
-Tools: /home/user/wt/w78b-work (BRIEF.md sub-brief, mk.sh prompt files, fin2.py, push2.sh, faces.py, ids.txt). Magnific t1 ids in ids.txt (c13 SymSupCUb8 c14 LwoL8vTswO c15 eIye3gVdqL c16 tC3tn9PmZJ c17 Xm4XZyeBfo c18 P3uPKQz42C c19 CqzCVW3EEy c20 WDlWO7OcXe c21 SymSuurUb8 c22 SymSukOUb8).
-Remaining at time of writing (sub-painters running): c18 a36, c19 a36, c20 a36/a51, c21 a26/a36/a51, c22 a26/a36/a51.
+STATUS: ALL DONE. c13 a26/a36/a51 and c14-c22 a18/a26/a36/a51 (t8+t7 x v0 v1 v2) painted, cut, on the CDN (md5-verified), READY sent to Foreman C for every set.
+Extra regens (young face) c17 a36 x3, c17 a51 x3, c18 a36 x4, c19 a36 x3, c21 a36 t7 x3, c22 a51 t8v1 + t7v0.
+Soft spots (reported): a36 faces mild (~30-40) in c18, c19, c22; c22 a51 t7v0 ~40-45; c13 a51 borderline (Foreman accepted).
+No successor needed. Tools in /home/user/wt/w78b-work (may be gone).
