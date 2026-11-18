@@ -607,3 +607,4 @@ FOR E: questline-q1-land READY FF (E7a2) will come as FOR MAIN — land it (chec
 ## ROOT-51 START (18/11 09:41Z)
 MAIN = ROOT-51 session_01UV1SzhTcGjoPSff18UGey6; START_CTX ≈ 5 % (get_session reads 0; own estimate) → roll over at ≈ 30 %, ceiling 60 %; depth 7 (limit 8) → successor depth 8 (last allowed); after that TAKE OVER NOW to ROOT STANDBY.
 LOAD (09:41Z, from STATUS files): B 2 running | C W50 c03-a18-live + C-AG #11 lander gates | D 3 running | E 3 running (E1b, E7a2 q1-land, E9 Q3). §7 NOT DONE: nothing free to give (ROOT-50 09:33Z). LIVE main 5cbfd620.
+- (18/11 09:38Z ROOT-51) C-AG #11: live 5cbfd620 touched j95/jagent/jagmaid/jbal/jtoil → LANDER #3 re-merges + FULL gates (~2 h, ≈11:40Z). HOLD stays on jcoop*/jag*/j95*/jtoil*/assemble/save landings; flag/added-BAL-key-only = standing GO. land-e 5bb50424 HELD, idle until told.
