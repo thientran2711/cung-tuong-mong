@@ -18,13 +18,13 @@ window.PROMO_SET=1;
 Object.assign(BAL,{promo:{
  /* THE household table (one core, review/staff-root; owner 17/11 04:48Z "phẩm thấp nhất chỉ có 1 cung nữ hoặc 1 thái giám", OD:L1155 ceiling):
     [maids incl. the personal (close) maid, eunuchs] per consort rank 0..7, for her AND every NPC consort (j10 capOf / hhHas read it; cold palace = row 0).
-    Owner pick OD 18/11 ~02:15Z (live table A with Quý nhân 2+0; review/staff-cap-apply): Đáp ứng 1+0 · Thường tại 2+0 · Quý nhân 2+0 · Tần 2+1 ·
-    Phi 3+1 · Quý phi 3+2 · Hoàng quý phi 4+2 · Hoàng hậu 4+2. Eunuchs start at Tần. */
- cap:[[1,0],[2,0],[2,0],[2,1],[3,1],[3,2],[4,2],[4,2]],
- /* Nữ đế (j99succ path "c"): harem style, mostly cung nữ, a row >= the Hoàng hậu row (owner OD 18/11 ~02:05Z; number pending her word = the HH row for now) */
- capNd:[4,2],
+    Owner final OD 18/11 ~02:15Z + ~02:50Z (review/staff-cap-apply): Đáp ứng 1+0 · Thường tại 2+0 · Quý nhân 2+0 · Tần 2+1 ·
+    Phi 3+1 · Quý phi 3+2 · Hoàng quý phi 4+2 · Hoàng hậu 5+2. Eunuchs start at Tần. */
+ cap:[[1,0],[2,0],[2,0],[2,1],[3,1],[3,2],[4,2],[5,2]],
+ /* Nữ đế (j99succ path "c"): harem style, mostly cung nữ (owner OD 18/11 ~02:05Z + ~02:50Z: 5 + 3) */
+ capNd:[5,3],
  /* Thái hậu's household (jstaff: her named women Giáo tập ma ma, Chưởng sự cô cô, Quản sự ma ma while the queen seat is empty) */
- capTh:[4,2],
+ capTh:[5,2],
  /* a servant she trusts this much leaves her household (over the table) with a farewell scene, not a log line (j10 capTrim) */
  trimTrust:70,
  wrist:["vongngoc","vongngoc_r1","vongngoc_r2","vongngoc_r3","vongngoc_r4","vongvang","vongvang","vongvang"],
