@@ -22,7 +22,7 @@
 (function(){try{
 const CW=window.COOPW;if(!CW||!CW.X||typeof COOP!=="object")return;
 const X=CW.X,J=X.J,LS={get(k){try{return localStorage.getItem(k)}catch(e){return null}}};
-const TH=CW.thin={CAP:5/* E buổi + night gate on the host (jcoopthine.js), B life + rebirth on the host (jcoopthinb.js), C world read-only on the guest (jcoopthinc.js), D remote dialogs (section 6) */,lvl:0,REG:[],bridge:[],rlog:[],view:null,hv:0,dn:0,dr:null,ctxN:0};
+const TH=CW.thin={CAP:6/* F1 her acts as intents (jcoopthinf.js),  E buổi + night gate on the host (jcoopthine.js), B life + rebirth on the host (jcoopthinb.js), C world read-only on the guest (jcoopthinc.js), D remote dialogs (section 6) */,lvl:0,REG:[],bridge:[],rlog:[],view:null,hv:0,dn:0,dr:null,ctxN:0};
 const host=()=>CW.seat==="a";
 const D={};   /* part D (remote dialogs), filled in section 6 */
 TH.on=n=>!!(CW.on&&!CW.hold&&TH.lvl>=(n||1));
@@ -164,7 +164,7 @@ TH.withSeat=function(seat,fn){
   try{for(const r of REG)B.g[r[0]]=r[1]()}catch(e){}
   for(const k of X.W_KEYS){if(k in sN)A.S[k]=sN[k];else delete A.S[k]}
   try{B.ok=sN.origin&&sN.origin.k||B.ok;const ss=ser().S;for(const k of X.W_KEYS)delete ss[k];B.S=ss;B.fresh=true;
-   if(dOn){p0=D.cur&&D.cur.p0||p0;D.cur=null;if(dW&&p0){const pt=pDiff(p0,ss).concat(rvOps);if(pt.length)D.patchOut(seat,pt)}D.save()}}catch(e){console.error("thin ser",e);B.S=sN}
+   if(dOn){p0=D.cur&&D.cur.p0||p0;D.cur=null;if(dW&&p0){const pt=pDiff(p0,ss).concat(rvOps);if(pt.length)D.patchOut(seat,pt)}D.save()}}catch(e){console.error("thin ser",TH.curDo,e);B.S=sN}
   const Lb=X.pullFriend();TH.bridge=[];TH.bridgeItems=[];
   for(const [,e] of Lb){if(e!==v||!e.__b)continue;const b=e.__b;
    /* part D: things her turn put into the host's entry (a gift she gave, accepted by the host) go to the host as her gift (Quà tặng) */
@@ -212,14 +212,18 @@ function diff(a,b,pre,set,del){for(const k of Object.keys(b)){if(BADK.test(k)||k
 TH.diff=(a,b)=>{const set={},del=[];diff(a||{},b||{},"",set,del);return {set,del}};
 let lastSent=null;
 TH.snapSend=function(o){if(!host()||!TH.on(1))return false;lastSent=J(o);TH.hv++;return COOP.send({t:"snap",v:TH.hv,o:lastSent})};
-TH.deltaSend=function(o){if(!host()||!TH.on(1))return false;if(!lastSent)return TH.snapSend(o);const d=TH.diff(lastSent,o);
- if(!Object.keys(d.set).length&&!d.del.length)return false;lastSent=J(o);const base=TH.hv;TH.hv++;return COOP.send({t:"delta",v:TH.hv,base,set:d.set,del:d.del})};
+TH.deltaSend=function(o){if(!host()||!TH.on(1))return false;if(!lastSent)return TH.snapSend(o);const t=performance.now();const d=TH.diff(lastSent,o);
+ if(!Object.keys(d.set).length&&!d.del.length)return false;lastSent=J(o);const base=TH.hv;TH.hv++;const r=COOP.send({t:"delta",v:TH.hv,base,set:d.set,del:d.del});
+ /* F1 latency: every intent answered since the last send leaves now (q = its wait on the host, v = view build + diff + send) */
+ try{if(latP.length){const now=performance.now(),v=Math.round(now-t+(TH.hvMs||0));for(const x of latP.splice(0))latN({id:x.id,op:x.op,run:Math.round(x.run),q:Math.round(t-(TH.hvMs||0)-x.t1),v})}}catch(e){}return r};
 /* part A pipe: what the host sends (grows per part) */
-TH.hostView=function(){if(!S)return null;const d=ser();let b=null;try{const B=TH.seatOf(CW.seat==="a"?"b":"a");b=B&&J(B.S)}catch(e){}
- return {w:COOP.state.week||0,buoi:S.buoi||0,P:{a:d.S,b},R:d.R,rid,dn:TH.dn,dr:TH.dr}};
+TH.hostView=function(){if(!S)return null;const t0=performance.now();try{return hostView0()}finally{TH.hvMs=performance.now()-t0}};
+function hostView0(){const d=ser();let b=null;try{const B=TH.seatOf(CW.seat==="a"?"b":"a");b=B&&J(B.S)}catch(e){}
+ return {w:COOP.state.week||0,buoi:S.buoi||0,P:{a:d.S,b},R:d.R,rid,dn:TH.dn,dr:TH.dr}}
 function snapNow(){try{const o=TH.hostView();if(o)TH.snapSend(o)}catch(e){console.error("thin snap",e)}}
-let dT=0;function deltaSoon(ms){clearTimeout(dT);dT=setTimeout(()=>{try{const o=TH.hostView();if(o)TH.deltaSend(o)}catch(e){console.error("thin delta",e)}},ms==null?1200:ms)}
-TH.flush=()=>{clearTimeout(dT);try{const o=TH.hostView();if(o)TH.deltaSend(o)}catch(e){console.error(e)}};
+/* F1 latency: a later render's deltaSoon() (1200 ms) must never push back a sooner send already due (an intent's answer: deltaSoon(0)) */
+let dT=0,dDue=0;function deltaSoon(ms){ms=ms==null?1200:ms;const due=Date.now()+ms;if(dT&&dDue<=due)return;clearTimeout(dT);dDue=due;dT=setTimeout(()=>{dT=0;dDue=0;try{const o=TH.hostView();if(o)TH.deltaSend(o)}catch(e){console.error("thin delta",e)}},ms)}
+TH.flush=()=>{clearTimeout(dT);dT=0;dDue=0;try{const o=TH.hostView();if(o)TH.deltaSend(o)}catch(e){console.error(e)}};
 COOP.on("error",m=>{if(!m)return;if(m.code==="snapresync"&&host()&&TH.on(1)){TH.hv=Math.max(TH.hv,m.v|0);snapNow()}});
 COOP.on("week",()=>{if(host()&&TH.on(1))setTimeout(snapNow,0)});
 if(typeof render==="function"){const f=render;render=function(){const r=f.apply(this,arguments);try{if(!CW.ctx&&host()&&TH.on(1))deltaSoon()}catch(e){}return r}}
@@ -227,7 +231,7 @@ if(typeof render==="function"){const f=render;render=function(){const r=f.apply(
 COOP.on("snap",m=>{if(host()||!m||!m.o)return;TH.view={v:m.v|0,o:m.o};COOP.emit("thinview",TH.view)});
 COOP.on("delta",m=>{if(host()||!m)return;const V=TH.view;if(!V||V.v!==(m.base|0)){COOP.send({t:"snapreq"});return}
  for(const p in m.set||{}){if(p.split(".").some(k=>BADK.test(k)))continue;put(V.o,p,m.set[p],false)}for(const p of m.del||[])put(V.o,String(p),null,true);
- V.v=m.v|0;COOP.emit("thinview",V)});
+ V.v=m.v|0;const t=performance.now();COOP.emit("thinview",V);TH.gAp=Math.round(performance.now()-t);const A=TH.F&&TH.F.lastAns;if(A&&A.ap==null&&V.o&&V.o.dr&&V.o.dr.id===A.id)A.ap=TH.gAp});
 /* intents */
 const DO={};let doN=0;
 TH.onDo=(op,fn)=>{DO[op]=fn};TH.doFn=op=>DO[op];/* part C wraps part B's "life" */
@@ -235,11 +239,14 @@ TH.doSend=function(op,args){if(host()||!TH.on(1))return false;const id="d"+Date.
 function runDo(m){const fn=DO[m.op];let r=null;TH.curDo=m.op;
  try{if(fn)r=TH.withSeat(m.from||"b",()=>fn(m.args,m))}catch(e){console.error("thin do",m.op,e);r={err:String(e&&e.message||e)}}
  TH.curDo=null;/* D r1: call-scoped (a later D.later must not see a stale op) */return r}
-COOP.on("do",m=>{if(!host()||!m||!TH.on(1))return;let r;
+/* F1 latency split (report only): TH.lat = host times per intent id: run = her intent's run (withSeat + the act), q = wait from the run's end
+   to the delta timer, v = view build + diff + send (the guest's network time = her tap→answer minus these and her own apply) */
+TH.lat=[];const latN=x=>{TH.lat.push(x);if(TH.lat.length>60)TH.lat.shift()};let latP=[];
+COOP.on("do",m=>{if(!host()||!m||!TH.on(1))return;let r;const t0=performance.now();
  /* B r2 (seam): her intents other than the life itself wait while her rolled life is held (they run on her accepted person) */
  if(m.op!=="life"&&m.op!=="probe"&&TH.held(m.from||"b")){D.defer(m.from||"b",{op:m.op,args:m.args===undefined?null:J(m.args),m:{from:m.from||"b",id:m.id}});r={held:1}}
  else r=runDo(m);
- TH.dn=m.n|0;TH.dr={id:m.id,op:m.op,r:r===undefined?null:J(r)};deltaSoon(0)});
+ TH.dn=m.n|0;TH.dr={id:m.id,op:m.op,r:r===undefined?null:J(r)};latP.push({id:m.id,op:m.op,run:performance.now()-t0,t1:performance.now()});if(latP.length>20)latP.shift();deltaSoon(0)});
 /* part A test intent: read her person in context b (no change) */
 TH.onDo("probe",()=>({name:S.name,used,ctx:CW.ctx,host:(rivals.find(v=>v.coop)||{}).id||null}));
 
@@ -268,7 +275,7 @@ const jq=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
 /* thin E: the room's step is the host's alone: it travels as its value, never as a delta (a delta on a seat that is already there drifted to buổi 4) */
 const ABS=new Set(["buoi"]);
 function pDiff(a,b,pre,out){out=out||[];pre=pre||[];
- for(const k of new Set([...Object.keys(a||{}),...Object.keys(b||{})])){if(!pre.length&&SKIP.has(k))continue;if(BADK.test(k))continue;
+ for(const k of new Set([...Object.keys(a||{}),...Object.keys(b||{})])){if(!pre.length&&SKIP.has(k)&&!(k==="cyb"&&TH.on(5)/* E-fix: her cycle flags are the host's at level 5+: they travel in the patch */))continue;if(BADK.test(k))continue;
   const x=a[k],y=b[k],p=pre.concat([k]);if(jq(x,y))continue;
   if(!(k in b)){out.push(["-",p]);continue}
   if(typeof x==="number"&&typeof y==="number"){out.push(p.length===1&&ABS.has(k)?["=",p,y]:["+",p,y-x]);continue}
