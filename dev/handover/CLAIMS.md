@@ -178,3 +178,4 @@ Thái hậu missing c21–c24,c28–c32 | handover | session_01PEhRbvnAhxnHAp1NL
 | GE step 4: bd roads writer 2 (opus E14b; bd_tuyet, bd_hen) | review/bd-roads-w2 | E ROOT #7 | session_01DgYSWppboKRwbR35fzT2U4 | RUNNING | 18/11 22:58Z |
 triều phục round 8 (c06) | handover | session_01PEhRbusUfDXYLRsmUuYoaw (W104f, Foreman C ROOT-33) | RUNNING | 2026-11-18T23:00Z
 Nữ đế r10b + BD Quý phi (3 images) | handover | session_01PEhRbutG3NMnejgY9CKjDv (N2, Foreman C ROOT-33) | RUNNING | 2026-11-18T23:00Z
+| rel-picker r2 (sonnet worker) | review/rel-picker-r2 | ROOT-58 worker | SẴN SÀNG KIỂM 38079d9f | 18/11 |
