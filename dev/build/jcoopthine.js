@@ -147,7 +147,9 @@ COOP.on("week",()=>{if(on()&&host())setTimeout(()=>{try{if(CW.tnHer())CW.herNigh
 CW.herCy=g=>{if(!on()||!host()||CW.ctx||E.cyA===g)return;E.cyA=g;E.stat.cyA=(E.stat.cyA|0)+1;lg(["her-cy",g]);
  D.later(other(),()=>{let asked=false;try{asked=!!(S&&!S.dead&&typeof window.cyAsk==="function"&&window.cyAsk())}catch(e){console.error("thin E cy",e)}
   if(!asked){D.after(()=>{CW.cyNo=g;try{CW.cyFree()}catch(e){console.error(e)}})}})};
-if(typeof window.cyAsk==="function"){const ca=window.cyAsk;window.cyAsk=function(){if(on()&&!host()&&!CW.ctx)return false;return ca.apply(this,arguments)}}
+window.cyHostOwns=()=>on()&&!host()&&!CW.ctx;
+/* in her context on the host her card waits as a part-D card (S.thq), not in Q: it is still open, so her week end must not answer it for her */
+window.cyCardOpen=()=>{try{return on()&&!!CW.ctx&&Array.isArray(S.thq)&&S.thq.some(c=>c&&c.pid==="cyrep")}catch(e){return false}};/* jcycle: her phone neither asks the card nor auto-answers it at her week end (her flags come in the host patch) */
 /* world windows' end() on HER household (ORDER s34 16:22Z, reports/coop-thin-c.md 'For part E'): the host's worldTick ends a window for the
    world and his own household (jworld2 EVD.<k>.end → EVD.<k>.home for S); her household (her choice S.wwMe in her person) runs the same
    EVD.<k>.home in her context (D.later: from the top of the event loop), with the world's outcome the end found (vu cổ: the culprit), so the

@@ -699,7 +699,7 @@ COOP.on("act",m=>{if(!m||m.k!==TK||!CW.on||eW()||m.from===CW.seat||!S||S.dead||m
  /* host: the friend's entry is in the deck (endTurn took her out) */const L=CW.pulled;
  /* review/coop-b1b5-fix: her Kỳ nguyệt sự tuần and her maid's card (jcycle cyrep) not answered yet: the draw waits for her answer
     (ctm-p2 "cyb", cyFree below runs this flip again), so her "báo sớm / giấu" really keeps her card on the tray */
- {const fe=(L&&(L.find(x=>x[0]>=0)||[])[1])||friendEntry();if(cyWait(fe)){CW.cyHold=window.cyWk();S.tonight=null;T("cyHold "+CW.cyHold);return}}
+ {const fe=cyFe();if(cyWait(fe)){CW.cyHold=window.cyWk();S.tonight=null;T("cyHold "+CW.cyHold);return}}
  if(L&&L.length)pushFriend(L.slice());let r;
  try{r=f.apply(this,arguments)}finally{if(L&&L.length)pullFriend()}
  /* reviewer r2: the week's flip can run AFTER endTurn (main's jcycle defers it behind her maid's Kỳ nguyệt sự card, cyrep → flip again):
@@ -930,7 +930,10 @@ function cyWait(fe){if(!fe||fe.out||fe.alive===false||typeof window.cycOn!=="fun
     answered there; the draw waits until her stored person holds this week's answer (or her maid had nothing to ask: CW.cyNo) */
  if(eW()&&host()){const g=window.cyWk(),c=CW.fcyb();if(c.rk===g||CW.cyNo===g)return false;if(c.df!==g&&CW.herCy)CW.herCy(g);return true}
  const r=CW.fcy,g=window.cyWk();if(r&&r.w===g&&!r.pend)return false;const e=COOP.state.ended||{};return !e[fs()]}
-function cyFree(){if(CW.cyHold==null||!CW.on||!S)return;if(!S.dead&&cyWait(friendEntry()))return;T("cyFree "+CW.cyHold);CW.cyHold=null;if(S.dead)return;
+/* E-fix: her entry as the draw sees it: while the week end holds her out of the deck (CW.pulled) friendEntry() is null, and a
+   presence / patch event then freed the hold before she answered (cyWait(null) = false) */
+function cyFe(){const L=CW.pulled;return (L&&(L.find(x=>x[0]>=0)||[])[1])||friendEntry()}
+function cyFree(){if(CW.cyHold==null||!CW.on||!S)return;if(!S.dead&&cyWait(cyFe()))return;T("cyFree "+CW.cyHold);CW.cyHold=null;if(S.dead)return;
  const c=S.cyb||{},g=window.cyWk();/* her own maid card still open: its answer runs the flip */if(!(c.df===g&&c.rk!==g))try{flip()}catch(e){console.error(e)}
  try{render()}catch(e){}soonEnd()}
 CW.cyFree=()=>cyFree();/* thin E: jcoopthine's `do cyb` (her answer, written into her stored person) frees the draw */
