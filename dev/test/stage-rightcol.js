@@ -3,8 +3,8 @@
    usage: node dev/test/stage-rightcol.js <outdir>   (reads ./index.html built by dev/site/build_site.sh; prints PASS/FAIL per device x household x fold state; shots .jpg to <outdir>) */
 const {chromium}=require('playwright');const fs=require('fs');const OUT=process.argv[2]||'/tmp/rc-shots';fs.mkdirSync(OUT,{recursive:true});
 const LIVE='https://thientran2711.'+'github.io/cung-tuong-mong/';const html=fs.readFileSync(process.env.INDEX||'index.html','utf8');
-const DEV=[['fold',755,1000],['ipad',1180,820]];const HH=[['h1',0,0],['h6',5,6]];const FOLD=[['closed',null],['cn','cn'],['ct','ct']];
-const PLACES=(process.env.PLACES||'home,vuon').split(',');
+const DEV=[['fold',755,1000],['ipad',1180,820]];const HH=[['h1',0,0,['home','vuon']],['h6',5,6,['home','vuon']],['h1',0,0,['map']],['h6',5,6,['map']]];const FOLD=[['closed',null],['cn','cn'],['ct','ct']];
+const PLACES=(process.env.PLACES||'home,vuon,map').split(',');
 (async()=>{const b=await chromium.launch();let bad=0;
 for(const [dn,W,H] of DEV){
  const ctx=await b.newContext({viewport:{width:W,height:H},hasTouch:true,deviceScaleFactor:+(process.env.DSF||2),reducedMotion:'reduce',serviceWorkers:'block'});
@@ -19,10 +19,10 @@ for(const [dn,W,H] of DEV){
  await p.evaluate(()=>{try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(!(typeof isSrv==='function'&&isSrv()))break}
   Q.length=0;for(let i=0;i<2;i++){try{nextBuoi()}catch(e){}Q.length=0}render()});
  await p.waitForTimeout(5000);await clean();await clean();
- for(const [hn,extra,rk] of HH){
-  await p.evaluate(async([extra,rk])=>{if(rk)S.rank=rk;S.staff=(S.staff||[]).filter(s=>s&&s.role!=='maid'&&s.role!=='eunuch').slice(0);for(let i=0;i<extra;i++){const r=i%2?'eunuch':'maid';try{S.staff.push(mkServ(r))}catch(e){}}window.__kgfOpen=null;S.th=10;S.hh=-5;render()},[extra,rk]);
-  for(const pl of PLACES){
-   await p.evaluate(async(pl)=>{Q.length=0;S.dead=false;S.confined=0;tab='act';if(pl==='home'){S.place='home'}else{try{goTo(pl)}catch(e){}}await new Promise(r=>setTimeout(r,2500));try{j59lay()}catch(e){}const R=document.getElementById('kshR');if(R)R.dataset.full='';k3Stage();await new Promise(r=>setTimeout(r,800))},pl);await clean();
+ for(const [hn,extra,rk,PL] of HH){
+  await p.evaluate(async([extra,rk])=>{{tab='act';const g=document.querySelector('.game');if(g)g.classList.remove('maptab','cardtab');render()}if(rk)S.rank=rk;S.staff=(S.staff||[]).filter(s=>s&&s.role!=='maid'&&s.role!=='eunuch').slice(0);for(let i=0;i<extra;i++){const r=i%2?'eunuch':'maid';try{S.staff.push(mkServ(r))}catch(e){}}window.__kgfOpen=null;S.th=10;S.hh=-5;render();await new Promise(r=>setTimeout(r,1500))},[extra,rk]);await clean();
+  for(const pl of PL){
+   await p.evaluate(async(pl)=>{Q.length=0;S.dead=false;S.confined=0;{tab='act';const g=document.querySelector('.game');if(g)g.classList.remove('maptab','cardtab');render()}if(pl==='home'){S.place='home'}else if(pl==='map'){const b=document.querySelector('[data-tab="go"]');if(b)b.click()}else{try{goTo(pl)}catch(e){}}await new Promise(r=>setTimeout(r,2500));try{j59lay()}catch(e){}const R=document.getElementById('kshR');if(R)R.dataset.full='';k3Stage();await new Promise(r=>setTimeout(r,800))},pl);await clean();
    for(const [fn,key] of FOLD){
     await p.evaluate(async(key)=>{window.__kgfOpen=key;const R=document.getElementById('kshR');if(R)R.dataset.full='';k3Stage();try{j59lay()}catch(e){}await new Promise(r=>setTimeout(r,900))},key);
     const r=await p.evaluate(()=>{const st=document.getElementById('stage'),S0=st.getBoundingClientRect(),R=document.getElementById('kshR');const vis=e=>e&&e.offsetParent!==null&&getComputedStyle(e).display!=='none'&&e.getBoundingClientRect().width>2;
@@ -36,7 +36,7 @@ for(const [dn,W,H] of DEV){
      o.scroll=R.scrollHeight>R.clientHeight+1;o.inStage=q.bottom<=S0.bottom+1&&q.top>=S0.top-1;o.groups=[...R.querySelectorAll('.kgf-h .k3l')].map(e=>e.textContent);
      o.order=[...R.children].map(e=>e.className.split(' ')[1]||e.className.split(' ')[0]).join('>');o.open=R.querySelectorAll('.kgfopen').length;o.cards=R.querySelectorAll('.kgf-l .k3c').length;
      o.cut=[...R.querySelectorAll('.k3l,.k3ct>b')].filter(e=>vis(e)&&(e.scrollWidth>e.clientWidth+1)).map(e=>e.textContent);return o});
-    const ok=!r.noCol&&(r.chip==='none'||r.chip===0)&&!r.nameCol&&!r.nameFig&&!r.colFig&&r.nameBg&&(r.nameLines===0||r.nameLines<=2)&&r.inStage&&!r.cut.length&&r.open===(key?1:0)&&(key||!r.scroll);if(!ok)bad++;
+    const isMap=pl==='map';const ok=isMap?(!r.noCol&&r.groups.length===2&&!r.cut.length&&r.open===(key?1:0)):!r.noCol&&(r.chip==='none'||r.chip===0)&&!r.nameCol&&!r.nameFig&&!r.colFig&&r.nameBg&&(r.nameLines===0||r.nameLines<=2)&&r.inStage&&!r.cut.length&&r.open===(key?1:0)&&(key||!r.scroll);if(!ok)bad++;
     console.log(ok?'PASS':'FAIL',dn,hn,pl,fn,JSON.stringify(r));
     await p.screenshot({path:`${OUT}/${dn}-${hn}-${pl}-${fn}.jpg`,type:'jpeg',quality:70,animations:'disabled'})}}}
  console.log('errs',dn,JSON.stringify(errs.slice(0,4)));await ctx.close()}

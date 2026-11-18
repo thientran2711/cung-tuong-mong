@@ -56,8 +56,6 @@ function k3court(){let R=[];try{R=typeof kitCourtRows==="function"?kitCourtRows(
   let att="";if(r.k==="th"||r.k==="hh"){const n=r.k==="th"?(S.th|0):(S.hh|0);const known=typeof window.kitCourtKnown!=="function"||window.kitCourtKnown(r.k)!==false;
    if(known)att=`<span class="k3v"><small>quý ngươi</small> <span class="ef ${n>0?"g":n<0?"r":"n"}">${n>0?"+":""}${n}</span></span>`}
   return `<button type="button" class="k3c kcrow" data-kc="${r.k}" title="${r.who} · chạm để xem thẻ">${mdH(r.f,"xs")}<span class="k3ct"><b>${r.who}</b>${moodTxt}${att}</span></button>`}).join("")}
-function k3maid(){const b=k3hc("maid");if(!b||!S.maid||(typeof isSrv==="function"&&isSrv()))return"";let f="";try{f=mdH(pMaid(),"xs")}catch(e){}
- const v=k3val(b),n=+v;return `<button type="button" class="k3c" data-k3go="staff" title="Cung nữ thân tín · chạm để xem">${f}<span class="k3ct"><b>${esc(S.maid.name)}</b><span class="k3v"><small>Lòng</small> <span class="ef ${n>=BAL.loy.close?"g":n<BAL.loy.warn?"r":"n"}">${esc(v)}</span></span></span></button>`}
 /* KIT PART kitGroupFold (owner 18/11 ~20:55Z, review/stage-rightcol; KIT_REQUESTS kitCrewPlaque renamed): ONE generic group accordion for the stage right column.
    Closed = one kit row "Label · N ›" (no faces, same look as "Ân sủng ›"); tap = the group's person cards DROP DOWN in place ("Label · N ‹" folds), never another frame.
    ONE group open at a time; the open key lives in window.__kgfOpen (kept for the whole session, not per place). kitGroupFold(key,label,n,itemsHTML) -> html. */
@@ -119,7 +117,7 @@ function k3Stage(){try{const st=$$("stage");if(!st)return;{const pk=S?(S.place||
  if(L.dataset.h!==hL){L.innerHTML=hL;L.dataset.h=hL}
  /* right: court chips · servant · servant-road facts */
  let y="";K3_RIGHT.forEach(k=>{const b=k3hc(k);if(!b)return;y+=k3row(k,esc(k3lab(b)),esc(k3val(b)),b.classList.contains("hot")?"hot":b.classList.contains("ok")?"ok":"")});
- const hR0=mv?`<div class="k3cs">${k3court()}${k3maid()}</div>`:k3crew()+k3chitonG(),hY=y?`<div class="k3p k3py">${y}</div>`:"";
+ const hR0=mv?`<div class="k3cs kgfs">${k3crew()}${k3chitonG()}</div>`:k3crew()+k3chitonG(),hY=y?`<div class="k3p k3py">${y}</div>`:"";
  const full=hR0+k3AnSung(false)+hY;
  /* Ân sủng under the court chips; when the column would run past the stage floor or onto a figure / name tag -> ONE "Ân sủng ›" chip */
  if(R.dataset.full!==full||R.dataset.w!==String(st.clientWidth)+"x"+st.clientHeight){R.classList.remove("kasx");R.innerHTML=full;R.dataset.full=full;R.dataset.w=st.clientWidth+"x"+st.clientHeight;R.dataset.h=full;
@@ -264,7 +262,13 @@ html body .kshR{position:absolute;top:8px;right:8px;width:var(--kgrw,150px);min-
 .ksh .kgf.kgfopen{padding:3px 4px 4px}.ksh .kgf.kgfopen .kgf-h{border-bottom:1px solid var(--k-hair,#e6d3ac);margin-bottom:3px;padding:1px 2px}
 .ksh .kgf-l{display:flex;flex-direction:column;gap:3px}.ksh .kgf-l .k3c{flex:none;box-shadow:none;border-color:var(--k-hair,#e6d3ac)}
 .kshR>.kgf,.kshR>.kas,.kshR>.k3py{flex:none}
+.ksh .k3cs.kgfs{grid-auto-rows:auto;align-content:start}
 
+/* Dư đồ map (portrait kv1): the two group folds sit side by side in the top row; an open list drops down OVER the map under its header (kitGroupFold, one part everywhere) */
+html.kv1 body .game .mapv.kside.kleather:not(.kpmv)>#kshR>.k3cs.kgfs{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:auto;align-items:start}
+html.kv1 body .game .mapv.kside.kleather:not(.kpmv)>#kshR>.k3cs.kgfs>.kgf{position:relative}
+html.kv1 body .game .mapv.kside.kleather:not(.kpmv)>#kshR>.k3cs.kgfs>.kgf.kgfopen .kgf-l{position:absolute;left:0;right:0;top:100%;z-index:8;max-height:calc(55*var(--kvh,1vh));overflow:auto;padding:3px;background:rgb(255,250,240);border:1px solid var(--line);border-radius:0 0 8px 8px;box-shadow:0 4px 10px #3a201033}
+html.kv1 body .game .mapv.kside.kleather:not(.kpmv)>#kshR>.k3cs.kgfs>.kgf.kgfopen{border-bottom-left-radius:0;border-bottom-right-radius:0}
 .kshR.kasx{max-height:calc(100% - 16px - var(--kgrb,0px));overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:thin}
 .ksh .kas1{padding:2px 6px}.ksh .kas-one .k3l{font-weight:700;color:var(--gold)}.ksh .kas-one>b{color:var(--gold)}
 `;document.head.appendChild(css);
