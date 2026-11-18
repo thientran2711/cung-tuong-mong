@@ -18,3 +18,6 @@ By eye (sheet incl. live row): pose/face/cut/embroidery layout as live; v1/v2 ha
 Credits 24 × 135 = 3240 cr. Gen ids v0 t1 0eSPqC1TfW t2 EbnMPO9uuO t3 1letAzYr4r t4 Lwoaci1swO t5 4RQkBaI9Aa t6 DoJ6rHPpcl t7 EbnMPWVuuO t8 1letAIBr4r; v1 t1 P3uK8Nu42C t2 6AqxhGpiJO t3 iGbjv043uK t4 lJICVRzgv9 t5 eIy3LqRdqL t6 rgdmY2Oxtc t7 gOtEDroSXO t8 u5YD6NMQLD; v2 t1 P3uKI3F42C t2 DoJ6jhLpcl t3 lJICM3Agv9 t4 LwoaTR1swO t5 CqzVNJxEEy t6 3z5LfvXREY t7 CqzVNveEEy t8 CqzVN6UEEy.
 Files CDN img/_review/consort-tiers/c11/b10/: c11_a18_tN_v0|v1|v2.png, c11_a18_sheet.jpg.
 ~100% xong c11 / ~0% chơi được.
+
+## B10 c11 FIX (C3a + D3c, brief update ca6395f)
+Re-read C3a (three completely different colour families) + D3c (held item contrasts the robe). Scan: t7 v1 was lilac MAIN = same family as v0 → redone as soft powder blue MAIN + deep t8 yellow parts (gen Ifiz9wTtvE; old c11_a18_t7_v1_lilacmain.png); t4 v1 dusty rose / v2 peach-coral were neighbours → v2 redone as mint-turquoise (gen WDlOj1qcXe; old _coral); t3 v1 apricot / v2 cream were neighbours → v2 redone as powder blue-grey (gen YMsJxxSWeC; old _cream). Held items (lantern, fan, handkerchief, scroll, book) checked: contrast with the robe on all versions; prompts of the three redos say so. Sheet rebuilt. 3 gens = 405 cr.
