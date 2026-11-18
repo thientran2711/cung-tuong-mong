@@ -185,3 +185,55 @@ STATE
 G1 OPEN ROWS (D=dice-only, P=partial):
 j22:42D 25D 41P 61P 62P 63P · jmen:249P 57P · j4:11D 12D 13D 48D 82D 83D 29D 39D 40D 41D 90D 21P 65P 66P · j8:437D 472D 460D 88P 89P 372P 404P · j21:78D · j54:94D · j71:148D 149D 150D 151D 317D 318D · j72:216D 217D 219D 223D 225D 226D 229P 241P 242P · j75:192D 138P (145/147/154 LIVE-OFF → --out) · j92:420D 254D 255D 260D 271D 407D 284P 286P 337P 393P 419P 423P · j95b:241P 246P 248P 290P 291P 294P 117P 120P · j68:95P 90P 23P · j68e:75P · j68f:105P · j68h:18P · jgift:233D 234D · jts:278D 148P 230P · jtsb:230D 98P 100P 101P 102P 108P 109P 186P
 Suggested order: j68/j72 → jgift → j92 → jts/jtsb → j8 → j4 story timers → j95b → j71/j54/j75/j21 → j22/jmen leftovers.
+
+## G3 — witness/target picks + agent-layer dice (worker G3, branch review/npc-purpose-g3)
+PRIORITY #1 CHECK: OD L1833 (18/11 04:08Z "mục đích") + C-AG 18/11 (a) | main: none (jagwhy only on review/npc-purpose 77b50cd) | review/*: npc-purpose 77b50cd (STEP 0 helper reused, no 2nd helper) | claims: G1 / G2 sessions (other rows)
+Handover line: START_CTX ≈ 5 % of the 1M window (own estimate; context_usage read 0).
+Head: review/npc-purpose-g3 @ 63007f9 (off review/npc-purpose 77b50cd). Scan: `node dev/test/npc-purpose-scan.js --strict --group G3` → G3: open 0 · live-off 14 · done 43 · out 29 · PASS.
+Rules kept: only npwPick / npcWit / npcTell / npcWhy from jagwhy; kinds registered in my own files (g3call, g3acc in jshelf; g3scape in jworld2); every new number in the `// G3 kinds` block of jbal2 (BAL.ag.why.g3 + cd.g3call/g3scape/g3acc); success odds stay BAL-rolled; only G3 rows edited in npc-purpose-rows.json. Old saves: no new required field (S.npw lazy, rtKid pend `by/w` optional, staff `bullyBy` optional).
+
+### Before / after (done = now chosen by a goal)
+| file:line | before (dice) | after (goal) | player sees |
+|---|---|---|---|
+| jmind:162 / 175 | slip = uniform pick of ANY option / all weights flattened | slip = npwPick among HER near-best options only (a misjudgement, never a random act) | fewer absurd NPC acts |
+| jagent:117, jagday:182 | random free khắc for a planned deed | agSoon: near-best khắc from now (BAL.ag.why.g3.soon) | deeds happen soon after she decides |
+| jagday:118 | 2nd goal of the day by a flat roll | 2nd goal only if its need ≥ g3.two × the 1st, near-best | days follow real needs |
+| jagday:149 | re-plan by roll(need/touch chance) | re-plan when the new top need outweighs her current goal (+ touch), npwPick of new/keep | |
+| jagacts:41/47 | random shop item | the finest gift she can afford (price), near-best | |
+| jagacts:110 / 112 | Thái hậu frees a random cold-palace consort; random gift item | the one she regards most (th); an item the favoured one lacks | |
+| jagstaff:110 (+ ask) | bullied at Nội vụ phủ by dice; random friend; random intel target | bully = a servant with a grudge against her (af < 0), none → none; friend = the one she likes; intel on her master's foe | |
+| jshelf:259 | drop-in visit by 12 %/buổi dice | npcWhy g3call: ally need ≥ g3.call.min, cd 1 tuần, target = near-best liked | visits come from friendship need |
+| jshelf:308 | accuse a shuffled target | npcWhy g3acc: the one she resents most (seen first) | |
+| jshelf:313 / 340 | Thái hậu hears / rumour spreads by a flat roll per pair | npcTell: someone who SAW the room and resents the owner (or likes the listener) carries it; card names the teller | "Thái hậu nghe <X> nói phòng …" |
+| j96:114 | random consort gains evidence | npcWit at loc96(): the watcher really there | |
+| jroute:85/140 | random eyes≥2 consort finds the token / letter | rtFinder = npcWit at her place (eyes ≥ 2, hostility) | none there → nobody finds it |
+| jroute:108 | random witness among those present | best watcher (npcWit) | |
+| jroute:116 | non-greedy blackmails by a roll | blackmails only for silver she needs (g3.bmBac − bạc) vs her grudge (report) | |
+| jroute:256 | random foe pieces the affair together | sharpest + most hostile foe | |
+| jroute:259 | child-face rumour by a roll | npcTell: one who resents her carries it to Hoàng thượng; card names her | "<X> vốn oán ngươi, đã đem lời xì xào …" |
+| jtwoway:72 | gossip lowers Danh of a random third | the teller's foe (hostility − min); none → harmless; line names her | "… rỉ tai … về <X>" |
+| j76:113, j78:106 | maid reports / spies on a random rival | the one with the worst will to her mistress | |
+| j61:99 | learns who someone is: 35 %/tuần dice | she stood where they are (npcWit) or a knower tells her (npcTell) | |
+| j43:54/57 | random reporter; 50 % withholding | the house's eyes (agentW × loyalty); a double spy withholds unless loyalty wins | |
+| j51:72 | heir lottery by weights | npwPick near-best of his lệ weights | |
+| jworld:129 | random newcomer targeted | the newcomer who counts most (Sủng + rank) | |
+| jworld2:101 / 165 | "Có kẻ đồn" by dice; random scapegoat | npcTell teller named; npcWhy g3scape: accuser with grudge ≥ g3.scape.min names her target | named gossip / accuser |
+| jnroadm:101/103/104 | random rival man / clan / prince | man with tình ý for her; top clans by tdRel; strongest brother | |
+| jsteal:40 | shuffled queue of night-stealers | who wants his night most first (stealWant u) | |
+| jemoact:276/284 (+279/309/361/481/482 family) | weighted draw; random maid / friends / quarrel / coping card | npwPick by temper; maid she is least pleased with; friends she likes; worst-relation colleague; the affordable card that eases most | |
+| j95:137 | weekly mood × random; random neighbours | mood from her real feeling (jemo: g3.mood); 2 she likes best | |
+| j95:151 | Emperor busy 20 % / random leaning | busy = empBusy (ill / Chăm chính / court crisis); leaning = his favourite's intent buổi | |
+| j95:226 / 230 | thái y: random patient + khắc; hawker random place | the one most in need (preg, weakest) at the soonest khắc; where most people are | |
+| j95:434 / 442 | 25 % / 40 % dice | grudge vs regard (refuse / owe); grudge vs keeping the card (tell / hold) | |
+| jvisit:90 | Thái hậu hears by roll | npcTell (the one who lost the night first); card names her | "Thái hậu nghe <X> kể …" |
+
+### Out (29 rows): kept rolls = success odds or a goal-valid binary choice by the actor's real state
+Each reason is in the row's "out" field of dev/test/npc-purpose-rows.json: j3:56 (dead: j51 reassigns heirMonth), jagday:108 (owner OD ~18:05Z storm = her choice by odds), jagemp:28/50, jagacts2:122/124, jagstaff:135/163/164/166, j95:147/182/438, j96:242, j61:235, j43:56, j51:63 (minister agent PARKED, PARKING_LOT #7)/66/71, jroute:240/241/268-272/275, jmline:39, jsteal:41.
+Not converted (family, noted): j95:148 random buổi/spot of a plot errand when the route names no place (row 147 out); jroute exile/death odds.
+
+### G3 gates (head 63007f9)
+- npc-purpose-scan --strict --group G3: PASS (open 0 · live-off 14 · done 43 · out 29) · npc-why: PASS 10/10
+- quickcheck ×2 on 63007f9: PASS / PASS (core gates PASS, old save ok, perf ≈ live) (+2 earlier PASS on 20a2940)
+- ag suites: ag-all 21/21 · ag-all-b PASS (caught + fixed a scope bug: g3scape used jworld's private liveR → liveRivals) · ag-all-c PASS · ag-walk 10/10 · ag-know 25/25 · ag-truth 10/10 · ag-betray 20/20
+- Not run by G3 (integrator gate): coop-e2e ×3, G4, long suite.
+- Merge note for G1: jbal2 `// G3 kinds` block is two new lines right after `BAL.ag.why={…}`; G1/G2 blocks at the same spot may need a trivial both-sides keep.
