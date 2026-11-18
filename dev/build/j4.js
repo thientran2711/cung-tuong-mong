@@ -8,9 +8,9 @@ tt:{t:"Quân cờ của Tể tướng",n:3,goal:"Cha ngươi dùng ngươi làm 
  init(){S.st.loy=0},
  hint:()=>["Đợi thư nhà","Phe ngoại thích của Hoàng hậu sắp ra tay","Cha đang ngầm điều binh (từ năm thứ 4, hoặc khi ngươi có hoàng tử)"][S.st.step]||"",
  month(){const st=S.st;
-  if(st.step===0&&S.turn>=2&&roll(30))return setDil(mkP("tt1"));
-  if(st.step===1&&roll(25))return setDil(mkP("tt2"));
-  if(st.step===2&&(S.year>=4||mySons().length)&&roll(25)){const son=mySons()[0],o=od(BAL.odb.j4.odO+st.loy*15+S.tamco/4);
+  if(st.step===0&&S.turn>=2&&npcWhy("story",npw1Sc(st,"tt1")))return setDil(mkP("tt1"));
+  if(st.step===1&&npcWhy("story",npw1Sc(st,"tt2")))return setDil(mkP("tt2"));
+  if(st.step===2&&(S.year>=4||mySons().length)&&npcWhy("story",npw1Sc(st,"tt3"))){const son=mySons()[0],o=od(BAL.odb.j4.odO+st.loy*15+S.tamco/4);
    return setDil(mkP("tt3",{son:son?son.name:null,o}))}
   return""}},
 dtq:{t:"Trung thần nơi biên ải",n:3,goal:"Cha ngươi trấn giữ biên cương; thắng bại ngoài ải là vinh nhục của ngươi. Khi có kẻ vu cha mưu phản, phải tìm đủ chứng cứ trong hạn.",
@@ -18,7 +18,7 @@ dtq:{t:"Trung thần nơi biên ải",n:3,goal:"Cha ngươi trấn giữ biên c
  hint:()=>S.st.acc?`Còn ${Math.max(0,S.st.acc-S.turn)} tháng, chứng cứ ${S.st.proof}/2`:`Tháng 4 hằng năm có tin biên ải (thắng: ${chanceW(55)}); từ năm thứ 3, mỗi tháng có kẻ vu cha: ${chanceW(15)}`,
  month(){const st=S.st;let ev="";
   if(S.month===4&&S.turn>1){if(roll(55)){apply({danh:BAL.eff.j4.danhMonth,sung:BAL.eff.j4.sungMonth_4});S.emp.mood=0;ev+=`<span class="g">Tin thắng trận từ biên ải: cha ngươi phá tan quân giặc.</span> Danh ${balSg(BAL.eff.j4.danhMonth)} · Sủng ${balSg(BAL.eff.j4.sungMonth_4)}. `}else{apply({danh:BAL.eff.j4.danhMonth_2,sung:BAL.eff.j4.sungMonth_5});S.emp.mood=2;ev+=`<span class="r">Cha ngươi thua một trận ở Nhạn Môn quan.</span> Danh ${balSg(BAL.eff.j4.danhMonth_2)} · Sủng ${balSg(BAL.eff.j4.sungMonth_5)}. `}}
-  if(!st.acc&&S.year>=3&&roll(15)){const p=liveRivals(false);if(p.length){const v=mindPickBy(p,x=>Math.max(BAL.mind.pick.j4.floor,BAL.mind.pick.j4.top-(x.rel||0))*mindW(x,"frame"),null);/* npc-mind: was ARGMIN rel */st.acc=S.turn+8;st.accuser=v;st.step=1;v.rel-=10;ev+=`<span class="r">${v.name} xúi cha nàng dâng sớ: Đại tướng quân giữ binh không về, có lòng phản.</span> Hoàng thượng cho 8 tháng tra xét. `}}
+  if(!st.acc&&S.year>=3){const fr=npcWhy("meHarm",{h:"frame"});if(fr){const v=fr.who;/* npc-purpose: the consort with a motive to frame her (motiveOK frame), never a dice */st.acc=S.turn+8;st.accuser=v;st.step=1;v.rel-=10;ev+=`<span class="r">${v.name} xúi cha nàng dâng sớ: Đại tướng quân giữ binh không về, có lòng phản.</span> Hoàng thượng cho 8 tháng tra xét. `}}
   else if(st.acc&&S.turn>=st.acc&&st.proof<2){apply({danh:BAL.eff.j4.danhMonth_3,sung:BAL.eff.j4.sungMonth_6});S.rank=seatDown(S,S.rank-2);stEnd(-1,"Cha bị xử trảm");ev+=`<span class="r">Hết hạn tra xét. Cha ngươi bị xử trảm, ngươi bị giáng xuống ${RANKS[S.rank].n}.</span> Danh ${balSg(BAL.eff.j4.danhMonth_3)} · Sủng ${balSg(BAL.eff.j4.sungMonth_6)}. `}
   return ev},
  acts(){const st=S.st;if(!st.acc)return[];return[{n:"Tìm chứng cứ cha trung thành",t:`Tra quân báo, tìm người làm chứng. Còn ${Math.max(0,st.acc-S.turn)} tháng · chứng cứ ${st.proof}/2.`,c:{bac:-20,suc:-10},o:od(BAL.odb.j4.odO_2+eyes(S)*6+S.tamco/5),w:{},l:{danh:-2},x:evSg(BAL.ag.ev.one),
@@ -26,7 +26,7 @@ dtq:{t:"Trung thần nơi biên ải",n:3,goal:"Cha ngươi trấn giữ biên c
 muoi:{t:"Từ muối lên tước",n:3,goal:"Nhà buôn muối bị coi khinh. Dâng bạc vào quốc khố, được Thái hậu đỡ lời, xin cho cha được phong tước. Buôn lậu bị bắt ba lần là ô danh.",
  init(){S.st.don=0;S.st.caught=0},
  hint:()=>S.st.don<2?`Dâng bạc quốc khố ${S.st.don}/2`:"Xin phong tước cho cha (cần Thái hậu 30)",
- month(){if(roll(12)){apply({danh:BAL.eff.j4.danhMonth_7});return `Các phi tần che miệng cười: “Người có mùi muối.” Danh ${balSg(BAL.eff.j4.danhMonth_7)}. `}return""},
+ month(){const mk=npcWhy("mock");if(mk){apply({danh:BAL.eff.j4.danhMonth_7});return `${npwNm(mk.who)} ${mk.why}, che miệng cười: “Người có mùi muối.” Danh ${balSg(BAL.eff.j4.danhMonth_7)}. `}return""},
  acts(){const st=S.st,A=[{n:"Buôn bán lén trong cung",t:"Mua rẻ lụa ngoài cung, bán đắt cho cung nhân.",c:{suc:-5},o:od(BAL.odb.j4.odO_3+S.tamco/5),w:{bac:50},l:{danh:-8},x:`bị bắt ${S.st.caught||0}/3 lần thì ô danh, hỏng tuyến truyện`,
   fail:()=>{st.caught++;punish("buôn lậu trong cung",2);if(st.caught>=3){apply({sung:-10});stEnd(-1,"Buôn lậu bị bắt, ô danh");log(`<span class="r">Bị bắt buôn lậu lần thứ hai. Cả cung khinh rẻ ngươi.</span>`)}}}];
   if(st.don<2)A.push({n:"Dâng bạc vào quốc khố",t:"Lấy danh nghĩa cha, giúp triều đình cứu đói.",c:{bac:-100},o:100,w:{danh:3,th:3},x:`lần dâng ${st.don+1}/2`,go:()=>{st.don++;st.step=st.don}});
@@ -36,16 +36,16 @@ cn:{t:"Từ nô tỳ thành chủ tử",n:3,goal:"Chủ cũ khinh ngươi, một
  init(){const v=rivals[1+R(4)];v.oldmis=true;v.rel=-25;S.st.mis=v;S.st.guard="thị vệ "+pick(SURN)+" "+pick(MALEN);S.st.secret=0},
  hint:()=>["Chủ cũ sắp làm khó ngươi","Chuyện cũ sắp bị khơi lại",`Lên bậc Phi (nay ${RANKS[S.rank].n})`][S.st.step]||"",
  month(){const st=S.st,m=st.mis;
-  if(st.secret===1&&roll(5)){apply({danh:BAL.eff.j4.danhMonth_4,sung:BAL.eff.j4.sungMonth_7});punish("tư tình với thị vệ",2);stEnd(-1,"Lộ chuyện cũ với thị vệ");return `<span class="r">Thư cũ giữa ngươi và ${st.guard} lọt đến tay Hoàng thượng.</span> Danh ${balSg(BAL.eff.j4.danhMonth_4)} · Sủng ${balSg(BAL.eff.j4.sungMonth_7)}. `}
-  if(st.step===0&&S.turn>=2&&roll(30))return setDil(mkP("cn1"));
-  if(st.step===1&&roll(25)){const o=od(BAL.odb.j4.odO_5+S.tamco/3);return setDil(mkP("cn2",{o}))}
+  if(st.secret===1&&npcTell(S,{from:liveRivals(true),to:S.emp||S})){apply({danh:BAL.eff.j4.danhMonth_4,sung:BAL.eff.j4.sungMonth_7});punish("tư tình với thị vệ",2);stEnd(-1,"Lộ chuyện cũ với thị vệ");return `<span class="r">Thư cũ giữa ngươi và ${st.guard} lọt đến tay Hoàng thượng.</span> Danh ${balSg(BAL.eff.j4.danhMonth_4)} · Sủng ${balSg(BAL.eff.j4.sungMonth_7)}. `}
+  if(st.step===0&&S.turn>=2&&npcWhy("story",npw1Sc(st,"cn1")))return setDil(mkP("cn1"));
+  if(st.step===1&&npcWhy("story",npw1Sc(st,"cn2"))){const o=od(BAL.odb.j4.odO_5+S.tamco/3);return setDil(mkP("cn2",{o}))}
   if(st.step===2&&S.rank>=4){apply({danh:BAL.eff.j4.danhMonth_8});st.step=3;stEnd(1,"Rửa sạch thân phận cung nữ");return `<b class="g">Ngươi đã là ${RANKS[S.rank].n}. Không ai còn dám gọi ngươi là nô tỳ.</b> Danh ${balSg(BAL.eff.j4.danhMonth_8)}. `}
   return""}},
 nc:{t:"Hòa thân",n:3,goal:"Phụ vương Nam Chiếu muốn ngươi làm tai mắt. Chọn cố quốc hay triều đình; chiến tranh sẽ phân xử.",
  init(){S.st.m=0},
  hint:()=>S.st.step===0?"Mật sứ cố quốc sắp đến":S.year<4?"Chiến tranh nổ ra tháng 9 năm thứ 4":"Chiến tranh nổ ra tháng 9",
  month(){const st=S.st;
-  if(st.step===0&&S.turn>=2&&roll(35))return setDil(mkP("nc1"));
+  if(st.step===0&&S.turn>=2&&npcWhy("story",npw1Sc(st,"nc1")))return setDil(mkP("nc1"));
   if(st.step>=1&&S.year>=4&&S.month===9){st.step=3;S.emp.mood=3;
    if(st.path==="home"){const o=od(BAL.odb.j4.odO_6+st.m*15);if(roll(o)){apply({bac:BAL.eff.j4.bacMonth});stEnd(1,"Công thần của cố quốc");return `<b class="g">Nam Chiếu thắng trận nhờ tin ngươi gửi về. Đại Hy cầu hòa, cố quốc gửi vàng bạc tạ ơn.</b> Bạc ${balSg(BAL.eff.j4.bacMonth)}. `}
     if(roll(od(BAL.odb.j4.odMonth+S.tamco/2))){apply({sung:BAL.eff.j4.sungMonth,danh:BAL.eff.j4.danhMonth_9});stEnd(-1,"Bị nghi làm gián điệp");return `<span class="r">Nam Chiếu thua trận. Cả triều nghi ngươi, nhưng không bắt được chứng cứ.</span> Sủng ${balSg(BAL.eff.j4.sungMonth)} · Danh ${balSg(BAL.eff.j4.danhMonth_9)}. `}
@@ -62,8 +62,8 @@ td:{t:"Báo thù cho nhà",n:5,goal:"Cả nhà ngươi bị vu mưu phản. Gom 
  calc:()=>Math.min(S.caseEv,3)+(S.st.wit?1:0)+(S.avenged?1:0),
  hint:()=>S.caseEv<3?`Chứng cứ ${S.caseEv}/3`:!S.st.wit?"Cần giữ được nhân chứng":S.rank<3?"Lên bậc Tần để dâng sớ":"Có thể dâng sớ lật án",
  month(){const st=S.st;
-  if(S.caseEv>=1&&roll(12)){const e=rivals.find(x=>x.enemy);if(roll(oSee(S,false))){if(e)evStory(e,BAL.eff.j4.evMonth,"có nhà mẹ đẻ sai người đốt kho hồ sơ Hình bộ");return `Tai mắt báo: ${S.foeDad} sai người đốt kho hồ sơ Hình bộ. Ngươi chặn kịp và nắm ${balAb(BAL.eff.j4.evMonth)} chứng cứ với ${S.foe}. `}S.caseEv--;return `<span class="r">Kho hồ sơ Hình bộ bốc cháy trong đêm. Một chứng cứ án cũ mất.</span> `}
-  if(S.caseEv>=2&&!st.wit&&roll(35))return setDil(mkP("td1"));
+  if(S.caseEv>=1&&npcWhy("story",npw1Sc(st,"dad"))){const e=rivals.find(x=>x.enemy);if(roll(oSee(S,false))){if(e)evStory(e,BAL.eff.j4.evMonth,"có nhà mẹ đẻ sai người đốt kho hồ sơ Hình bộ");return `Tai mắt báo: ${S.foeDad} sai người đốt kho hồ sơ Hình bộ. Ngươi chặn kịp và nắm ${balAb(BAL.eff.j4.evMonth)} chứng cứ với ${S.foe}. `}S.caseEv--;return `<span class="r">Kho hồ sơ Hình bộ bốc cháy trong đêm. Một chứng cứ án cũ mất.</span> `}
+  if(S.caseEv>=2&&!st.wit&&npcWhy("story",npw1Sc(st,"td1")))return setDil(mkP("td1"));
   return""},
  acts(){const A=[{n:"Điều tra án cũ",t:`Lục hồ sơ Hình bộ, tìm người làm chứng. Chứng cứ: ${S.caseEv}/3.`,c:{bac:-20,suc:-10},o:od(BAL.odb.j4.odO_9+eyes(S)*6+S.tai/10+S.tamco/5),w:{},l:{danh:-3},x:`chứng cứ án cũ ${balSg(BAL.ag.ev.one)}`,go:()=>{S.caseEv+=BAL.ag.ev.one}}];
   if(S.caseEv>=3){const ok=S.rank>=3&&S.st.wit;A.unshift({n:"Dâng sớ lật án",t:ok?`Đem chứng cứ và nhân chứng trình Hoàng thượng, trị tội ${S.foeDad}.`:!S.st.wit?"Cần giữ được nhân chứng.":"Cần đạt bậc Tần mới được dâng sớ.",c:{suc:-10},o:ok?od(BAL.odb.j4.odO_10+S.danh/4+S.sung/5+(has("nhantu")?5:0)):0,w:{danh:20},l:{danh:-15,sung:-10},lock:!ok,x:"lật án, trị tội kẻ thù",
@@ -79,15 +79,15 @@ ch:{t:"Quân cờ của Thái hậu",n:3,goal:"Thái hậu đưa ngươi vào cu
   if(S.year>=8||(st.step>=1&&S.year>=5&&roll(4))){st.step=3;S.th=0;S.thDead=true;apply({hh:-20});
    if(S.rank>=5){stEnd(1,st.tool>=2?"Quân cờ đắc lực của Thái hậu":"Tự đứng vững khi Thái hậu mất");return `<b>Thái hậu băng hà.</b> Ngươi đã là ${RANKS[S.rank].n}, đứng vững được. Hoàng hậu hận ngươi hơn. Hoàng hậu -20. `}
    apply({sung:BAL.eff.j4.sungMonth_3,danh:BAL.eff.j4.danhMonth_6});stEnd(-1,"Mất chỗ dựa khi Thái hậu băng hà");return `<span class="r">Thái hậu băng hà. Không còn ai che chở, Hoàng hậu bắt đầu trả thù.</span> Sủng ${balSg(BAL.eff.j4.sungMonth_3)} · Danh ${balSg(BAL.eff.j4.danhMonth_6)} · Hoàng hậu -20. `}
-  if(st.step===0&&S.turn>=2&&qOn()&&roll(30))return setDil(mkP("ch1"));
-  if(st.step===1&&qOn()&&roll(25)){const o=od(BAL.odb.j4.odO_11+eyes(S)*5+S.tamco/4+S.th/5-(DG()?6:0));return setDil(mkP("ch2",{o}))}
+  if(st.step===0&&S.turn>=2&&qOn()&&npcWhy("story",npw1Sc(st,"ch1",{q})))return setDil(mkP("ch1"));
+  if(st.step===1&&qOn()&&npcWhy("story",npw1Sc(st,"ch2",{q}))){const o=od(BAL.odb.j4.odO_11+eyes(S)*5+S.tamco/4+S.th/5-(DG()?6:0));return setDil(mkP("ch2",{o}))}
   return""}},
 thd:{t:"Tài nữ nhà nho",n:3,goal:"Thơ ngươi sẽ làm rạng danh cha. Được phong Tài nữ, rồi xin khắc in sách của cha. Coi chừng kẻ vu ngươi đạo thơ.",
  init(){S.st.stu="Hàn lâm "+pick(SURN)+" "+pick(MALEN);S.st.frames=0;S.st.title=0},
  hint:()=>["Luyện Thi tới bậc 2 hoặc Tài 60","Dự thi Tài nữ (Thi bậc 3 hoặc Tài 70)","Xin khắc in sách của cha (Danh 40)"][S.st.step]||"",
  month(){const st=S.st;
   if(st.step===0&&(S.arts.thi>=2||S.tai>=60)){st.step=1;apply({danh:BAL.eff.j4.danhMonth_11});return `Thơ ngươi truyền ra ngoài cung. ${st.stu}, học trò cũ của cha ngươi, đem bình khắp kinh thành. Danh ${balSg(BAL.eff.j4.danhMonth_11)}. `}
-  if(st.step>=1&&roll(10)){const p=liveRivals(false);if(p.length){const v=pick(p),o1=od(BAL.odb.j4.odO1+S.tai/2+artW("thi",S.arts.thi)*8),o2=od(BAL.odb.j4.odO2);
+  if(st.step>=1){const th=npcWhy("meHarm",{h:"provoke"});if(th){const v=th.who,o1=od(BAL.odb.j4.odO1+S.tai/2+artW("thi",S.arts.thi)*8),o2=od(BAL.odb.j4.odO2);
    return setDil(mkP("thd1",{v:v.id,o1,o2}))}}
   return""},
  acts(){const st=S.st;

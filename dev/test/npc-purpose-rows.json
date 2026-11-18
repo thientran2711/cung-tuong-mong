@@ -24,7 +24,8 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "hostile rival \"knows\" her affair",
-"fp": "t!=null&&wk()-S.lastTryst<=3&&roll(4)){const v=pick(liveRivals(true).f"
+"fp": "t!=null&&wk()-S.lastTryst<=3&&roll(4)){const v=pick(liveRivals(true).f",
+"done": "const tk=npcWhy(\"trystKnow\",{C:liveRivals(true).filter(x=>rel(x,S)<0)})"
 },
 {
 "f": "j22.js",
@@ -32,7 +33,8 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "flirt witness",
-"fp": "t đưa tình với ${m.name}`);if(roll(risk/3)){const v=pick(liveRivals(tr"
+"fp": "t đưa tình với ${m.name}`);if(roll(risk/3)){const v=pick(liveRivals(tr",
+"done": "const W=npcWit(whereOf(S),null,{vs:S,not:[S]});const v=W.length?W[0].p:null;"
 },
 {
 "f": "j22.js",
@@ -40,7 +42,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "KSP book checked; affair conception; foe learns date mismatch",
-"fp": "=S&&rel(q,S)<0||foes.length)&&roll(BAL.odb.j22.rbAffairMonth+(S.ksKnow"
+"fp": "=S&&rel(q,S)<0||foes.length)&&roll(BAL.odb.j22.rbAffairMonth+(S.ksKnow",
+"done": "npcWhy(\"kspCheck\",{C:"
 },
 {
 "f": "j22.js",
@@ -48,7 +51,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "KSP book checked; affair conception; foe learns date mismatch",
-"fp": "  if(m&&!v.preg&&!khOcu(v)&&roll(trystCh(v))){v.preg=1;v.hidden=true"
+"fp": "  if(m&&!v.preg&&!khOcu(v)&&roll(trystCh(v))){v.preg=1;v.hidden=true",
+"out": "conception = nature (trystCh odds, BAL), not an NPC choice; the meeting itself is the tryst kind (npcWhy)"
 },
 {
 "f": "j22.js",
@@ -56,7 +60,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "KSP book checked; affair conception; foe learns date mismatch",
-"fp": "rel(x,v)<-20);if(foes.length&&roll(10)){const x=pick(foes);evA(x,v,BAL"
+"fp": "rel(x,v)<-20);if(foes.length&&roll(10)){const x=pick(foes);evA(x,v,BAL",
+"done": "const mf=foes.length?npcWhy(\"trystKnow\",{C:foes,v}):null"
 },
 {
 "f": "j22.js",
@@ -64,7 +69,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "KSP book checked; affair conception; foe learns date mismatch",
-"fp": "   if(roll(BAL.odb.j22.rbTop+eyes(S)*5)){/*evo"
+"fp": "   if(roll(BAL.odb.j22.rbTop+eyes(S)*5)){/*evo",
+"done": "if(tw&&npcWhy(\"taimat\",{w:tw.s||S.maid,v}))"
 },
 {
 "f": "jmen.js",
@@ -112,7 +118,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "spurned man's rumour; \"uy hiếp\" reveals a secret",
-"fp": "    if(roll(o)){const T=liveRivals(true).filter"
+"fp": "    if(roll(o)){const T=liveRivals(true).filter",
+"done": "const v=npwPick(T,v=>v.affair===m.id?100:m.likeV===v.id?60:20)"
 },
 {
 "f": "jmen.js",
@@ -120,7 +127,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "thái y / vương gia visits",
-"fp": "0))&&menHcPal(v)).sort((a,b)=>menH(a.id)-menH(b.id));if(sick.length&&b"
+"fp": "0))&&menHcPal(v)).sort((a,b)=>menH(a.id)-menH(b.id));if(sick.length&&b",
+"done": "k=menHcPal(npwPick(sick,"
 },
 {
 "f": "j3.js",
@@ -200,7 +208,8 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "story timers (Tể tướng letters, Nam Chiếu envoy, TH orders)",
-"fp": "  if(st.step===0&&S.turn>=2&&roll(30))return setDil(mkP(\"tt1\"));"
+"fp": "  if(st.step===0&&S.turn>=2&&roll(30))return setDil(mkP(\"tt1\"));",
+"done": "npcWhy(\"story\",npw1Sc(st,\"tt1\"))"
 },
 {
 "f": "j4.js",
@@ -208,7 +217,8 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "story timers (Tể tướng letters, Nam Chiếu envoy, TH orders)",
-"fp": "  if(st.step===1&&roll(25))return setDil(mkP(\"tt2\"));"
+"fp": "  if(st.step===1&&roll(25))return setDil(mkP(\"tt2\"));",
+"done": "npcWhy(\"story\",npw1Sc(st,\"tt2\"))"
 },
 {
 "f": "j4.js",
@@ -216,7 +226,8 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "story timers (Tể tướng letters, Nam Chiếu envoy, TH orders)",
-"fp": "(S.year>=4||mySons().length)&&roll(25)){const son=mySons()[0],o=od(BAL"
+"fp": "(S.year>=4||mySons().length)&&roll(25)){const son=mySons()[0],o=od(BAL",
+"done": "npcWhy(\"story\",npw1Sc(st,\"tt3\"))"
 },
 {
 "f": "j4.js",
@@ -224,7 +235,8 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "story timers (Tể tướng letters, Nam Chiếu envoy, TH orders)",
-"fp": "  if(st.step===0&&S.turn>=2&&roll(35))return setDil(mkP(\"nc1\"));"
+"fp": "  if(st.step===0&&S.turn>=2&&roll(35))return setDil(mkP(\"nc1\"));",
+"done": "npcWhy(\"story\",npw1Sc(st,\"nc1\"))"
 },
 {
 "f": "j4.js",
@@ -232,7 +244,8 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "story timers (Tể tướng letters, Nam Chiếu envoy, TH orders)",
-"fp": "t.step===0&&S.turn>=2&&qOn()&&roll(30))return setDil(mkP(\"ch1\"));"
+"fp": "t.step===0&&S.turn>=2&&qOn()&&roll(30))return setDil(mkP(\"ch1\"));",
+"done": "npcWhy(\"story\",npw1Sc(st,\"ch1\",{q}))"
 },
 {
 "f": "j4.js",
@@ -240,7 +253,8 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "story timers (Tể tướng letters, Nam Chiếu envoy, TH orders)",
-"fp": "  if(st.step===1&&qOn()&&roll(25)){const o=od(BAL.odb.j4.odO_11+e"
+"fp": "  if(st.step===1&&qOn()&&roll(25)){const o=od(BAL.odb.j4.odO_11+e",
+"done": "npcWhy(\"story\",npw1Sc(st,\"ch2\",{q}))"
 },
 {
 "f": "j4.js",
@@ -248,7 +262,8 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "\"mùi muối\" mockery; old mistress humiliates / letter leaks; plagiarism",
-"fp": " month(){if(roll(12)){apply({danh:BAL.eff.j4.danhMon"
+"fp": " month(){if(roll(12)){apply({danh:BAL.eff.j4.danhMon",
+"done": "const mk=npcWhy(\"mock\")"
 },
 {
 "f": "j4.js",
@@ -256,7 +271,8 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "\"mùi muối\" mockery; old mistress humiliates / letter leaks; plagiarism",
-"fp": "  if(st.secret===1&&roll(5)){apply({danh:BAL.eff.j4.danhMont"
+"fp": "  if(st.secret===1&&roll(5)){apply({danh:BAL.eff.j4.danhMont",
+"done": "npcTell(S,{from:liveRivals(true),to:S.emp||S})"
 },
 {
 "f": "j4.js",
@@ -264,7 +280,8 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "\"mùi muối\" mockery; old mistress humiliates / letter leaks; plagiarism",
-"fp": "  if(st.step===0&&S.turn>=2&&roll(30))return setDil(mkP(\"cn1\"));"
+"fp": "  if(st.step===0&&S.turn>=2&&roll(30))return setDil(mkP(\"cn1\"));",
+"done": "npcWhy(\"story\",npw1Sc(st,\"cn1\"))"
 },
 {
 "f": "j4.js",
@@ -272,7 +289,8 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "\"mùi muối\" mockery; old mistress humiliates / letter leaks; plagiarism",
-"fp": "  if(st.step===1&&roll(25)){const o=od(BAL.odb.j4.odO_5+S."
+"fp": "  if(st.step===1&&roll(25)){const o=od(BAL.odb.j4.odO_5+S.",
+"done": "npcWhy(\"story\",npw1Sc(st,\"cn2\"))"
 },
 {
 "f": "j4.js",
@@ -280,7 +298,8 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "\"mùi muối\" mockery; old mistress humiliates / letter leaks; plagiarism",
-"fp": "  if(st.step>=1&&roll(10)){const p=liveRivals(false);if(p"
+"fp": "  if(st.step>=1&&roll(10)){const p=liveRivals(false);if(p",
+"done": "const th=npcWhy(\"meHarm\",{h:\"provoke\"})"
 },
 {
 "f": "j4.js",
@@ -288,7 +307,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "treason frame; foe's father burns archive / witness appears",
-"fp": "  if(!st.acc&&S.year>=3&&roll(15)){const p=liveRivals(false);if(p"
+"fp": "  if(!st.acc&&S.year>=3&&roll(15)){const p=liveRivals(false);if(p",
+"done": "const fr=npcWhy(\"meHarm\",{h:\"frame\"})"
 },
 {
 "f": "j4.js",
@@ -296,7 +316,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "treason frame; foe's father burns archive / witness appears",
-"fp": "  if(S.caseEv>=1&&roll(12)){const e=rivals.find(x=>x.enemy"
+"fp": "  if(S.caseEv>=1&&roll(12)){const e=rivals.find(x=>x.enemy",
+"done": "npcWhy(\"story\",npw1Sc(st,\"dad\"))"
 },
 {
 "f": "j4.js",
@@ -304,7 +325,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "treason frame; foe's father burns archive / witness appears",
-"fp": "  if(S.caseEv>=2&&!st.wit&&roll(35))return setDil(mkP(\"td1\"));"
+"fp": "  if(S.caseEv>=2&&!st.wit&&roll(35))return setDil(mkP(\"td1\"));",
+"done": "npcWhy(\"story\",npw1Sc(st,\"td1\"))"
 },
 {
 "f": "j8.js",
@@ -312,7 +334,8 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "NPC inspects gifts; Cung Chính ti raids a palace",
-"fp": " if(roll(20))inspect(v);if(!v.fakeIll&&!illO"
+"fp": " if(roll(20))inspect(v);if(!v.fakeIll&&!illO",
+"done": "if(npcWhy(\"giftCheck\",{v}))inspect(v);if(!v.fakeIll&&!illOf(v)&&npcWhy(\"fakeIll\",{v}))"
 },
 {
 "f": "j8.js",
@@ -320,7 +343,8 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "NPC inspects gifts; Cung Chính ti raids a palace",
-"fp": "  if(roll(4)){const s=search(p);if(s)ev+=p==="
+"fp": "  if(roll(4)){const s=search(p);if(s)ev+=p===",
+"done": "if(npcWhy(\"raid\",{p})){const s=search(p);"
 },
 {
 "f": "j8.js",
@@ -328,7 +352,8 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "new recruit enters",
-"fp": "if(liveRivals(true).length<4&&R(12)===0&&roomFor(\"consort\")){const n=n"
+"fp": "if(liveRivals(true).length<4&&R(12)===0&&roomFor(\"consort\")){const n=n",
+"done": "roomFor(\"consort\")&&npcWhy(\"empAsk\")"
 },
 {
 "f": "j8.js",
@@ -336,7 +361,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "death→lãnh cung; midwife plant; maid bought by rival",
-"fp": "  if(p===S){if(has(\"nhantu\")&&roll(30))return cold(`${why}. Hoàng thượ"
+"fp": "  if(p===S){if(has(\"nhantu\")&&roll(30))return cold(`${why}. Hoàng thượ",
+"done": "if(p===S){if(has(\"nhantu\")&&npcWhy(\"empMercy\",{p}))"
 },
 {
 "f": "j8.js",
@@ -344,7 +370,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "death→lãnh cung; midwife plant; maid bought by rival",
-"fp": "  if(has(\"nhantu\")&&roll(30)){p.out=true;if(p.queen)p.queen="
+"fp": "  if(has(\"nhantu\")&&roll(30)){p.out=true;if(p.queen)p.queen=",
+"done": "if(has(\"nhantu\")&&npcWhy(\"empMercy\",{p})){p.out=true;"
 },
 {
 "f": "j8.js",
@@ -352,7 +379,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "death→lãnh cung; midwife plant; maid bought by rival",
-"fp": "&x.ghen>=60)));if(bad.length&&roll(15))plot=pick(bad)}"
+"fp": "&x.ghen>=60)));if(bad.length&&roll(15))plot=pick(bad)}",
+"done": "const bp=bad.length?npcWhy(\"birthPlot\",{p,bad}):null"
 },
 {
 "f": "j8.js",
@@ -360,7 +388,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "death→lãnh cung; midwife plant; maid bought by rival",
-"fp": "(!p.maid)p.maid=p===S?newMaid(pick(MAIDS),45):{name:pick(MAIDS),loyal:"
+"fp": "(!p.maid)p.maid=p===S?newMaid(pick(MAIDS),45):{name:pick(MAIDS),loyal:",
+"done": "!npcWhy(\"maidSell\",{m,p})"
 },
 {
 "f": "j9.js",
@@ -1780,7 +1809,7 @@
 "group": "G1",
 "event": "NPC consort's day with the Emperor (weekly)",
 "fp": "||v.coop||v.out||v.confined||!roll(BAL.empDay.p*100))continue;",
-"done": "const o=npcWhy(\"empDay\")"
+"done": "const o=npcWhy(\"seekEmp\")"
 },
 {
 "f": "jgift.js",
@@ -1789,7 +1818,7 @@
 "group": "G1",
 "event": "NPC consort's day with the Emperor (weekly)",
 "fp": "t kind=(v.arts&&v.arts.ky>=1&&roll(40))?\"ky\":(v.arts&&v.arts.cam>=1&&r",
-"done": "const o=npcWhy(\"empDay\")"
+"done": "const o=npcWhy(\"seekEmp\")"
 },
 {
 "f": "jlost.js",
@@ -2797,7 +2826,8 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "NPCs float lanterns; Emperor stops at one",
-"fp": "st v of liveRivals(true)){if(!roll(45))continue;const ok=(E.mood||0)<="
+"fp": "st v of liveRivals(true)){if(!roll(45))continue;const ok=(E.mood||0)<=",
+"done": "for(const o of npcWhyAll(\"tsDen\"))"
 },
 {
 "f": "jts.js",
@@ -2805,7 +2835,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "consort closes doors; Emperor weekly summons",
-"fp": "const care=nv(v,\"tsCare\");if(!roll(care))continue;v.tsGuard=wk()+2;v.s"
+"fp": "const care=nv(v,\"tsCare\");if(!roll(care))continue;v.tsGuard=wk()+2;v.s",
+"done": "if(!npcWhy(\"tsGuard\",{v}))continue;"
 },
 {
 "f": "jts.js",
@@ -2813,7 +2844,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "consort closes doors; Emperor weekly summons",
-"fp": "es (jagacts emp:summon) */if(!roll(14*tsMoodW()))return;"
+"fp": "es (jagacts emp:summon) */if(!roll(14*tsMoodW()))return;",
+"done": "const o=npcWhy(\"empSummon\",{C})"
 },
 {
 "f": "jtsb.js",
@@ -2821,7 +2853,8 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "mocker swapped for an \"easy\" rival",
-"fp": ";if(easy.length&&!tsbEasy(v)&&roll(60)){v=pick(easy);m.who=pv(v);m.h=`"
+"fp": ";if(easy.length&&!tsbEasy(v)&&roll(60)){v=pick(easy);m.who=pv(v);m.h=`",
+"done": "const e2=npwPick(liveRivals(true).filter(x=>tsbEasy(x)"
 },
 {
 "f": "jtsb.js",
@@ -2829,7 +2862,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "bully item/silver; complaint to HH; harm news; heed fire warning",
-"fp": "iep\"?null:(tsbBulPay(a,t)<15||roll(45)?tsbWant(a,t):null);const want2="
+"fp": "iep\"?null:(tsbBulPay(a,t)<15||roll(45)?tsbWant(a,t):null);const want2=",
+"done": "const want=kind===\"uyhiep\"?null:((npcWhy(\"bulWant\",{a,t})"
 },
 {
 "f": "jtsb.js",
@@ -2837,7 +2871,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "bully item/silver; complaint to HH; harm news; heed fire warning",
-"fp": " if(r.n>=2&&evG(t,a)>=1&&roll(45)){const q=queenP();if(q&&q!==a&&"
+"fp": " if(r.n>=2&&evG(t,a)>=1&&roll(45)){const q=queenP();if(q&&q!==a&&",
+"done": "npcWhy(\"bulTell\",{a,t})"
 },
 {
 "f": "jtsb.js",
@@ -2845,7 +2880,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "bully item/silver; complaint to HH; harm news; heed fire warning",
-"fp": " if(roll(o)){const n=tsbTake(a,t,want2,kind)"
+"fp": " if(roll(o)){const n=tsbTake(a,t,want2,kind)",
+"out": "success odds of the bullying deed already chosen (roll(o) = tsbBulO, BAL odds) — allowed by the brief"
 },
 {
 "f": "jtsb.js",
@@ -2853,7 +2889,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "bully item/silver; complaint to HH; harm news; heed fire warning",
-"fp": " if(roll(o)){ap(t,{danh:BAL.eff.jtsb.danhTsb"
+"fp": " if(roll(o)){ap(t,{danh:BAL.eff.jtsb.danhTsb",
+"out": "success odds of the bullying deed already chosen (roll(o) = tsbBulO, BAL odds) — allowed by the brief"
 },
 {
 "f": "jtsb.js",
@@ -2861,7 +2898,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "bully item/silver; complaint to HH; harm news; heed fire warning",
-"fp": "key(a),t:key(t),due:tsbWk()+1+R(2),seen:0});try{deedAdd(a,\"plot\",t,1,`"
+"fp": "key(a),t:key(t),due:tsbWk()+1+R(2),seen:0});try{deedAdd(a,\"plot\",t,1,`",
+"out": "the day a planned harm (chosen by her own act in runAct) falls: now from her nết (BAL.ag.why.bul.wait), not a dice; no choice to act here"
 },
 {
 "f": "jtsb.js",
@@ -2869,7 +2907,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "bully item/silver; complaint to HH; harm news; heed fire warning",
-"fp": "iep\"?null:(tsbBulPay(a,S)<15||roll(50)?tsbWant(a,S):null);"
+"fp": "iep\"?null:(tsbBulPay(a,S)<15||roll(50)?tsbWant(a,S):null);",
+"done": "const want=k===\"uyhiep\"?null:((npcWhy(\"bulWant\",{a,t:S})"
 },
 {
 "f": "jtsb.js",
@@ -2877,7 +2916,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "bully item/silver; complaint to HH; harm news; heed fire warning",
-"fp": "n trong cung\");else if(p!==S&&roll(60))p.tsbFW.heed=1}}"
+"fp": "n trong cung\");else if(p!==S&&roll(60))p.tsbFW.heed=1}}",
+"done": "npcWhy(\"fireHeed\",{p})"
 },
 {
 "f": "jrcp.js",

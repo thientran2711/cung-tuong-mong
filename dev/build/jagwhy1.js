@@ -102,8 +102,8 @@ npwReg("ladyJob",{grp:"lady",who:()=>{const L=[];if(!S.thDead)L.push(NPW1_TH);co
   const v=lady===NPW1_TH?npwPick(L.filter(v=>(v.th||0)>=J.th),v=>v.th):npwPick(L.filter(v=>aff(lady,v)>=J.aff),v=>aff(lady,v));
   return v?{s:npwB().min+(lady===NPW1_TH?v.th:aff(lady,v))/2,t:v,r:npw1Job(lady,v)}:null}});
 npwReg("q72Collect",{grp:"debt",who:c=>c.C,why(c){return {s:npwB().min+c.n*npw1B("q72").debt,r:"cần đến ân tình ngươi còn nợ"}}});
-/* ---- G1 part 5: an NPC's day with the Emperor (jgift) and the wardrobe (j92). BAL.ag.why.{empDay,wd} ----
-   empDay     a consort seeks the Emperor's company when she wants favour: (want − Sủng) × k + amb for an ambitious nết; the act is her best art
+/* ---- G1 part 5: an NPC's day with the Emperor (jgift) and the wardrobe (j92). BAL.ag.why.{seekEmp,wd} ----
+   seekEmp    a consort seeks the Emperor's company when she wants favour: (want − Sủng) × k + amb for an ambitious nết; the act is her best art
    wdRemark   who remarks on an outfit: the Thái hậu when it breaks the rules (or praises one she regards ≥ wd.thOk); a consort who BELIEVES it
               wrong and bears the wearer a grudge (hostility ≥ wd.host), or believes it right and likes her (liking ≥ wd.fr); the Empress keeps the
               rules (any wrong outfit). Same wearer at most every wd.gap tuần
@@ -111,7 +111,7 @@ npwReg("q72Collect",{grp:"debt",who:c=>c.C,why(c){return {s:npwB().min+c.n*npw1B
    wdDress    a consort changes her clothes when she believes they are wrong, or for a festival · wdNotice the Emperor notices a bright outfit
               on the one he favours (Sủng ≥ wd.notice) · wdSearch a framed consort searches her room first when she is watchful (tai mắt) or
               distrusts her accuser · wdPawn a consort short of silver (bac < wd.poor) pawns a piece */
-npwReg("empDay",{grp:"consort",who:()=>liveRivals(false).filter(v=>v&&!v.coop&&!v.out&&!v.confined),why(v){const E=npw1B("empDay");
+npwReg("seekEmp",{grp:"consort",who:()=>liveRivals(false).filter(v=>v&&!v.coop&&!v.out&&!v.confined),why(v){const E=npw1B("seekEmp");
  const s=(E.want-(v.sung||0))*E.k+(traitsOf(v).some(t=>E.ambT.includes(t))?E.amb:0);return s>0?{s,t:S.emp||null,r:"mong được Hoàng thượng đoái hoài"}:null}});
 function npw1Art(v){const a=v.arts||{};return (a.ky||0)>=1&&(a.ky||0)>=(a.cam||0)?"ky":(a.cam||0)>=1?"cam":"walk"}
 npwReg("wdRemark",{grp:"wd",who:c=>{const L=others(c.p).filter(v=>v!==S&&v.alive&&!v.out&&!v.confined);if(!S.thDead)L.unshift(NPW1_TH);return L},
@@ -122,10 +122,58 @@ npwReg("wdRemark",{grp:"wd",who:c=>{const L=others(c.p).filter(v=>v!==S&&v.alive
   if(view!=="ok"){const h=hostility(x,p);return h>=W.host?{s:npwB().min+h,t:p,r:npw1Gr(x,p),k:view}:null}
   const f=aff(x,p);return f>=W.fr?{s:npwB().min+f/2,t:p,r:"quý nàng",k:view}:null}});
 function wdNpwGap(p){return wk()>=(p.wdRmW||0)}
-function wdNpwR(p,o){p.wdRmW=wk()+npw1B("wd").gap;const x=o.who;if(x===NPW1_TH)return{name:"Thái hậu",face:pTH(),sure:true,th:1,why:o.why};const q=queenP();
+function wdNpwR(p,o){p.wdRmW=wk()+npw1B("wd").gap;const x=o.who;if(x===NPW1_TH)return{name:"Thái hậu",face:pTH(),sure:true,th:true,why:o.why};const q=queenP();
  return{v:x,name:wdNm(x),face:pv(x),why:o.why,sure:x===q||["tram","y"].every(sl=>{const e=wdOf(p)[sl];return !e||((x.wdk||{})[e.k])})}}
 npwReg("wdSpy",{grp:"srv",who:c=>c.w?[c.w]:[],why(w,c){const b=npwPick(c.cand,z=>Math.max(0,hostility(z[0],S)-npw1B("wd").spyHost));return b?{s:npwB().min+hostility(b[0],S),t:b[0],r:"dò kẻ có ý hại ngươi",k:b}:null}});
 npwReg("wdDress",{grp:"consort",who:c=>[c.v],cdOf:()=>0,why(v){const b=wdBelStatus(v,v);if(b!=="ok")return {s:npwB().min+npw1B("wd").dress,r:"thấy y phục mình chưa hợp"};return (typeof wdFest==="function"&&wdFest())?{s:npwB().min,r:"sửa soạn cho ngày lễ"}:null}});
 npwReg("wdNotice",{grp:"emp",who:()=>S.emp&&!S.empDead?[S.emp]:[],cdOf:()=>0,why(e,c){const g=c.p===S?S.sung:(c.p.sung||0);return g>=npw1B("wd").notice?{s:npwB().min+g/2,t:c.p,r:"để mắt tới người mình sủng"}:null}});
 npwReg("wdSearch",{grp:"consort",who:c=>[c.t],cdOf:()=>0,why(t,c){const W=npw1B("wd");const e=eyes(t)*W.eye,h=hostility(t,c.a);return (e>=W.eyeBar||h>=W.host)?{s:npwB().min+e+h/2,t:c.a,r:e>=W.eyeBar?"vốn tinh ý":"không tin kẻ tố mình"}:null}});
 npwReg("wdPawn",{grp:"consort",who:()=>liveRivals(true).filter(v=>(v.bac||0)<npw1B("wd").poor),why(v){return {s:npwB().min+(npw1B("wd").poor-(v.bac||0)),r:"túng bạc"}}});
+/* ---- G1 part 6: jts (closing doors, summons fallback, lanterns), jtsb (bullying, complaints, fire warnings, the mocker), j8 (mercy, midwife plot,
+   maid sold out, gift checks, feigned illness / pregnancy, new recruit, Cung Chính ti raid). BAL.ag.why.{ts,bul,j8} ----
+   tsGuard    a consort many want to harm closes her doors when her own care (nết tsCare) + the danger above the bar push her enough
+   empSummon  (only when the AG-ALL day plan is off) the Emperor in a good mood calls the one he favours most (tsSummonW)
+   tsDen      a consort floats a lantern when she wants his favour ((want − Sủng) × k) or is devout (Đức ≥ ts.duc)
+   bulWant    a bully takes a THING instead of silver when the target cannot pay or she covets it (a greedy / vain nết)
+   bulTell    a bullied consort takes proof to the Empress when she trusts her (liking ≥ 0) and resents the bully (hostility ≥ bul.host)
+   fireHeed   a warned consort heeds the fire warning when she is watchful (tai mắt) or careful (Đức)
+   empMercy   a merciful Emperor (nhân từ) spares the one he still favours (Sủng × k + children × kid ≥ min)
+   birthPlot  a midwife is planted by the one with the strongest motive (motiveOK harm + hostility ≥ j8.birthBar) · maidSell an unhappy maid sells
+   giftCheck  a consort checks her gifts when she has some unchecked and fears someone (tai mắt + the worst hostility toward her)
+   fakeIll / fakePreg  a cunning consort (Tâm cơ) feigns illness to draw a visit when unfavoured, or a pregnancy when she has no son and fears for her place
+   raid       Cung Chính ti searches a palace only when it holds forbidden goods AND someone who resents her reports it (npcTell) */
+npwReg("tsGuard",{grp:"consort",who:c=>[c.v],cdOf:()=>0,why(v){const D=tsDangerOf(v,false);if(D.n<BAL.tsDanger.act)return null;
+ return {s:nv(v,"tsCare")/2+(D.n-BAL.tsDanger.act)*npw1B("ts").guardK,r:"sợ bị hại"}}});
+npwReg("empSummon",{grp:"emp",who:()=>S.emp&&!S.empDead?[S.emp]:[],why(e,c){const t=npwPick(c.C,tsSummonW);return t?{s:npwB().min*tsMoodW()*npw1B("ts").moodK,t,r:"nhớ người mình sủng"}:null}});
+npwReg("tsDen",{grp:"consort",who:()=>liveRivals(true),why(v){const T=npw1B("ts");const w=(T.want-(v.sung||0))*T.k,d=(v.duc||0)>=T.duc?T.pray:0;const s=Math.max(w,d);return s>0?{s,r:w>=d?"cầu thánh ân":"cầu phúc"}:null}});
+npwReg("bulWant",{grp:"consort",who:c=>[c.a],cdOf:()=>0,why(a,c){const w=tsbWant(a,c.t);if(!w)return null;const tr=traitsOf(a);const B=npw1B("bul");
+ return (tsbBulPay(a,c.t)<B.pay||tr.some(x=>B.wantT.includes(x)))?{s:npwB().min,t:c.t,r:"thèm của",k:w}:null}});
+npwReg("bulTell",{grp:"consort",who:c=>[c.t],cdOf:()=>0,why(t,c){const q=queenP();if(!q||q===c.a||q===t||aff(t,q)<0)return null;const h=hostility(t,c.a);return h>=npw1B("bul").host?{s:npwB().min+h/2,t:q,r:"bị ép quá nhiều lần"}:null}});
+npwReg("fireHeed",{grp:"consort",who:c=>[c.p],cdOf:()=>0,why(p){const F=npw1B("bul").fire;const s=eyes(p)*F.eye+(p.duc||0)*F.duc;return s>0?{s,r:"cẩn trọng"}:null}});
+npwReg("empMercy",{grp:"emp",who:()=>S.emp?[S.emp]:[],cdOf:()=>0,why(e,c){const J=npw1B("j8");const p=c.p;const g=p===S?S.sung:(p.sung||0);const k=(p===S?(S.kids||[]):(p.kids||[])).filter(x=>x&&x.alive!==false).length;
+ return {s:g*J.mercyK+k*J.kid,t:p,r:"còn nhớ tình xưa"}}});
+npwReg("birthPlot",{grp:"consort",who:c=>c.bad,cdOf:()=>0,why(x,c){return npw1Mot(x,c.p,"harm",npw1B("j8").birthBar)}});
+npwReg("maidSell",{grp:"srv",who:c=>[c.m],why(m){return {s:npwB().min+(BAL.loy.warn-(m.loyal||0)),r:"bất mãn với chủ"}}});
+npwReg("giftCheck",{grp:"consort",who:c=>[c.v],why(v){if(!(v.inv||[]).some(e=>!e.h))return null;const J=npw1B("j8");let f=0;for(const x of liveRivals(true))if(x!==v)f=Math.max(f,hostility(x,v));
+ const s=eyes(v)*J.eye+f/2;return s>0?{s,r:"đề phòng kẻ hại mình"}:null}});
+npwReg("fakeIll",{grp:"consort",who:c=>[c.v],why(v){const J=npw1B("j8");return (v.tamco||0)>=J.illTam?{s:(J.want-(v.sung||0))*J.k,r:"giả bệnh để Hoàng thượng đến thăm"}:null}});
+npwReg("fakePreg",{grp:"consort",who:c=>[c.v],why(v){const J=npw1B("j8");return (v.tamco||0)>=J.pregTam?{s:(J.want-(v.sung||0))*J.k+(rkOf(v)>=J.pregRk?J.pregUp:0),r:"giả có thai để giữ chỗ đứng"}:null}});
+npwReg("raid",{grp:"court",who:c=>[c.p],why(p){const bad=(p.inv||[]).filter(e=>(IT[e.k]&&itm(e.k).il)||(e.t&&TAINT[e.t]&&TAINT[e.t].il));if(!bad.length)return null;
+ const tl=npcTell(p,{from:liveRivals(true).filter(x=>x!==p),to:queenP()||S.emp||S});return tl?{s:npwB().min+bad.length*npw1B("j8").raidK,t:tl.who,r:`bị ${npwNm(tl.who)} tố giác`}:null}});
+/* ---- G1 part 7: the stray man's leftovers (j22 / jmen). BAL.ag.why.j22 ----
+   kspCheck   the one who checks the Kính sự phòng book against her pregnancy: the Empress or a foe, by grudge (hostility ≥ j22.host; + ksp when the
+              eunuchs already talk) · trystKnow a foe learns of a secret meeting through her own tai mắt (tai mắt × eye + grudge / 2)
+   taimat     her own tai mắt (a loyal servant) bring her a rival's secret when they are sharp enough (her tai mắt × eye ≥ min) */
+npwReg("kspCheck",{grp:"consort",who:c=>c.C,why(x){const J=npw1B("j22");const h=hostility(x,S)+(S.ksKnows?J.ksp:0);return h>=J.host?{s:h,t:S,r:"nghi cái thai của ngươi"}:null}});
+npwReg("trystKnow",{grp:"consort",who:c=>c.C,why(x,c){const J=npw1B("j22");const t=c.v||S;const s=eyes(x)*J.eye+Math.max(0,hostility(x,t))/2;return {s,t,r:"tai mắt nàng ta dò ra"}}});
+npwReg("taimat",{grp:"srv",who:c=>c.w?[c.w]:[],cdOf:()=>0,why(w,c){return {s:eyes(S)*npw1B("j22").eye,t:c.v,r:"tai mắt dò được"}}});
+/* ---- G1 part 8: the origin story lines (j4 STORY month timers). BAL.ag.why.story ----
+   story      an off-screen person of her story (father, the old mistress, the envoy, the Empress's clan, the foe's father) acts on HIS plan: his push
+              grows with the tuần since the last step (min × elapsed / story.wait[key]); the Empress's clan (ch) also needs her motive against her.
+              npw1Sc(st, key, o) starts the clock (old saves: first month only starts it) and returns the ctx for npcWhy("story", …)
+   mock       a consort mocks her low birth only with a motive (motiveOK provoke) */
+const NPW1_ST={id:"story",name:"người trong truyện"};
+function npw1Sc(st,key,o){const k="at_"+key;if(st[k]==null)st[k]=wk();return Object.assign({st,key,k},o||{})}
+npwReg("story",{grp:"story",who:()=>[NPW1_ST],cdOf:()=>0,why(a,c){const W=npw1B("story").wait;const n=wk()-(c.st[c.k]==null?wk():c.st[c.k]);
+ if(c.q&&!motiveOK(c.q,S,"harm").ok)return null;return {s:npwB().min*n/(W[c.key]||W._),t:S,r:"đến lúc ra tay"}}});
+npwReg("mock",{grp:"consort",who:()=>liveRivals(true),why(v){return npw1Mot(v,S,"provoke")}});

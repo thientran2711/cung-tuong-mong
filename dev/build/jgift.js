@@ -184,7 +184,7 @@ document.addEventListener("click",ev=>{const g=ev.target.closest&&ev.target.clos
    mời ngài dạo ngự hoa viên: not in a storm; odds Sủng + Sắc + mood; thành: Sủng +2, a better chance of the tablet tonight (shown as a
    ladder word); hỏng: ngài từ chối khéo; consorts already in the garden see it (ghen +3).
    All need ngài rảnh (daytime, not at Cần Chính điện, not in another palace) and one such act per day per consort (S.kmEmpDay = wk()). */
-window.BAL=window.BAL||{};BAL.empDay=Object.assign({suc:5,walkNight:15},BAL.empDay||{}); /* npc-purpose: p .06 gone → BAL.ag.why.empDay */
+window.BAL=window.BAL||{};BAL.empDay=Object.assign({suc:5,walkNight:15},BAL.empDay||{}); /* npc-purpose: p .06 gone → BAL.ag.why.seekEmp */
 function kmEmpFree(){const k=(S.where||{}).emp;if((S.buoi||0)>=B4L)return{ok:false,why:"đã tối"};if(!k)return{ok:false,why:"không rõ ngài ở đâu"};
  if(k==="thu")return{ok:false,why:"ngài đang phê tấu ở Cần Chính điện"};if(/^r\d/.test(k)||k==="kn")return{ok:false,why:"ngài đang ở cung phi tần khác"};return{ok:true,k}}
 function kmStorm(){const f=S.wx&&S.wx.f;return f===3||f===4}  /* j12 weather flags: 3 giông tố, 4 tuyết dày */
@@ -230,5 +230,5 @@ document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.clos
  const a0=accAsk;accAsk=function(k){let yk=false;try{const st=accState(k);if(st.ask==="yk"){if(st.dayDone)return;yk=true}}catch(e){}
   const c=used;const r=a0.apply(this,arguments);try{if(yk&&S&&used!==c)S.kmEmpDay=wk()}catch(e){}return r}})();
 /* NPC consorts: the same acts, a small chance each tuần (BAL.empDay.p), the one their arts suit */
-(function(){if(typeof nextBuoi!=="function")return;const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{if(S&&!S.dead&&(S.buoi||0)===1&&worldOn()/* one world (coop-one-world-r1): NPCs' day with the Emperor rolls on the host only */){const o=npcWhy("empDay");/* npc-purpose: the consort who wants his favour most seeks him, with her best art */
+(function(){if(typeof nextBuoi!=="function")return;const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{if(S&&!S.dead&&(S.buoi||0)===1&&worldOn()/* one world (coop-one-world-r1): NPCs' day with the Emperor rolls on the host only */){const o=npcWhy("seekEmp");/* npc-purpose: the consort who wants his favour most seeks him, with her best art */
    if(o){const v=o.who;const kind=npw1Art(v);kmEmpAct(v,kind)}}}catch(e){}return r}})();

@@ -1103,7 +1103,7 @@ Object.assign(BAL,{odb:{
  j2:{odO:35,odO_2:55,odO_3:30,odO_4:50,odO_5:80,odO_6:75,odO_7:30,odO_8:85,odO_9:92,odO_10:50,odO_11:70,odGoTo:40,odO_12:55,odO_13:45,odO_14:30,odO_15:35,odO_16:40,odO_17:45,odO_18:40,odO_19:70,odO_20:45,odO_21:45,odO_22:50,odO_23:40},
  j20:{odO:65},
  j21:{odO:50,odO_2:40},
- j22:{odO:55,odO_2:60,odO_3:55,odO_4:70,rbAffairMonth:10,rbTop:8},
+ j22:{odO:55,odO_2:60,odO_3:55,odO_4:70},
  j24:{odO:35,rbKnown:15},
  j25:{odKidActs:70},
  j28:{rbSeen:25},
@@ -1244,9 +1244,24 @@ Object.assign(BAL.ag.why.cd,{meHarm:6,meAlly:24,hhCane:8,hhMe:12,hhGreed:24,empA
 Object.assign(BAL.ag.why,{e68:{gap:4,visitGap:6,greed:40},fav:{aff:10,max:2,jobW:4,thLow:20,th:40,host:40,tai:40,taiB:60,home:15,
  w:{poor:60,ill:55,job:50,th:35,spy:40,preg:30,love:45,maid:25,art:20,home:25}},job:{th:20,aff:10,tai:60},q72:{gap:3,debt:10}});
 Object.assign(BAL.ag.why.cd,{npcFavor:6,ladyJob:12,q72Collect:4});
-/* npc-purpose G1 part 5 (jgift NPC day with the Emperor, j92 wardrobe; jagwhy1). empDay: (want − Sủng) × k + amb (ambT nết), cd 16 ≈ the old 6 %/tuần each;
+/* npc-purpose G1 part 5 (jgift NPC day with the Emperor, j92 wardrobe; jagwhy1). seekEmp: (want − Sủng) × k + amb (ambT nết), cd 16 ≈ the old 6 %/tuần each;
    wd: th = Thái hậu's push on a wrong outfit, thOk = her regard to praise, queen = Empress's push, host / fr = grudge to sneer / liking to praise, gap = tuần
    between two remarks on one wearer (old 35 / 10 % a month), spyHost = hostility toward her above which tai mắt dig, dress = push to change clothes,
    notice = Sủng for the Emperor to notice a bright outfit, eye / eyeBar = tai mắt weight / bar for a framed consort to search first, poor = bac to pawn */
-Object.assign(BAL.ag.why,{empDay:{want:45,k:1.5,amb:20,ambT:["Tham vọng","Kiêu ngạo"]},wd:{th:20,thOk:40,queen:15,host:35,fr:30,gap:8,spyHost:20,dress:20,notice:50,eye:5,eyeBar:25,poor:15}});
-Object.assign(BAL.ag.why.cd,{empDay:16,wdRemark:4,wdSpy:4,wdPawn:4});
+Object.assign(BAL.ag.why,{seekEmp:{want:45,k:1.5,amb:20,ambT:["Tham vọng","Kiêu ngạo"],cd:16},wd:{th:20,thOk:40,queen:15,host:35,fr:30,gap:8,spyHost:20,dress:20,notice:50,eye:5,eyeBar:25,poor:15}});
+Object.assign(BAL.ag.why.cd,{wdRemark:4,wdSpy:4,wdPawn:4});
+/* npc-purpose G1 part 6 (jts, jtsb, j8; jagwhy1). ts: guardK = push per danger point above BAL.tsDanger.act (+ tsCare / 2), moodK = the Emperor's summons push
+   × his mood weight (fallback only), want / k = Sủng under which she floats a lantern for favour, duc / pray = Đức and push of a devout one. bul: pay = silver
+   under which a bully takes a thing, wantT = coveting nết, host = resentment to complain, wait = tuần a planned harm waits [plain, Kín đáo], fire = tai mắt × eye +
+   Đức × duc to heed. j8: mercyK / kid = the Emperor's mercy per Sủng / per child, birthBar = hostility to plant a midwife, eye = tai mắt weight to check gifts,
+   illTam / pregTam = Tâm cơ to feign, want / k = Sủng under which she feigns, pregRk / pregUp = rank from which a false pregnancy guards her place, raidK = push per forbidden piece */
+Object.assign(BAL.ag.why,{ts:{guardK:4,moodK:1.2,want:35,k:1,duc:60,pray:22},bul:{pay:15,wantT:["Kiêu ngạo","Tham lam","Xa hoa"],host:30,wait:[1,2],fire:{eye:6,duc:.3}},
+ j8:{mercyK:.6,kid:12,birthBar:50,eye:6,illTam:45,pregTam:50,want:30,k:1.5,pregRk:2,pregUp:10,raidK:15}});
+Object.assign(BAL.ag.why.cd,{empSummon:6,tsDen:4,maidSell:24,giftCheck:6,fakeIll:24,fakePreg:52,raid:12});
+/* npc-purpose G1 part 7 (j22 affairs; jagwhy1). j22: host = grudge to check the Kính sự phòng book (old 10 %/tháng), ksp = push when the eunuchs talk (old +15),
+   eye = push per tai mắt point (a foe learning of a tryst, her own tai mắt reporting; old 4 % / 10 %) */
+Object.assign(BAL.ag.why,{j22:{host:40,ksp:15,eye:6}});
+Object.assign(BAL.ag.why.cd,{kspCheck:8,trystKnow:12});
+/* npc-purpose G1 part 8 (j4 story lines; jagwhy1). story.wait = tuần a story person prepares before the next step (≈ the old monthly 25-35 % rolls; _ = other) */
+Object.assign(BAL.ag.why,{story:{wait:{tt1:12,tt2:16,tt3:16,cn1:12,cn2:16,nc1:12,ch1:12,ch2:16,td1:12,dad:32,_:16}}});
+Object.assign(BAL.ag.why.cd,{mock:8});
