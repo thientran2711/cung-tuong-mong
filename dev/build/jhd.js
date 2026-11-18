@@ -19,6 +19,7 @@
    ============================================================================================================== */
 Object.assign(BAL,{hd:{
  ink:{hd_mai:.67,hd_dao:.64,hoadien_bac:.63,hd_diep:.56,hd_lan:.59,hd_sen:.54,hd_maudon:.55,hd_phuong:.43},/* r3 (owner ~23:40Z "cùng 13.5 mà có cái to cái nhỏ"): share of each sprite's box that is INK (alpha > 40, measured once offline on the 8 sprites; the sprites are already trimmed to their mark, so the box = the visible bbox) */
+ tone:{on:1,sat:.7,mul:.25,skin:[236,206,186],op:.9,metal:{h0:28,h1:62,s:.35,v:.55}},/* r3 (owner ~23:50Z, flat vivid colours look stuck on): ON-SKIN treatment of every hoa dien baked once into the layer canvas: saturation x sat, a little multiply toward the skin colour (mul) so the forehead light shows through, opacity op; gold / metal pixels (hue h0..h1 deg, s, v) stay crisp */
  inkK:.6,inkDef:.6,    /* every design gets the same visible INK AREA = inkK × (size × face width)² (a design with less ink per box is drawn bigger) */
  boxW:1.5,boxH:1.5,    /* … still capped: width ≤ boxW × size × face width, height ≤ boxH × size × face width (forehead cap for tall designs). */
            /* r3 (owner 17/11 ~23:00Z): a hoa điền is sized to FIT a box, width ≤ size × face width AND height ≤ boxH × that width (scaled by the LIMITING side), so wide (mẫu đơn), round and tall (kim phượng) designs read the same visual size */
@@ -67,6 +68,9 @@ function hdNpc(v,h,sk){try{const L=hdOwned(v);if(!L.length)return null;let cap=M
   const r=i=>(wdHash(String(h)+":hd"+i)%1000)/1000;const q=Math.max(0,Math.min(B.npcCap,c+(r(1)+r(2)-1)*B.npc.spread));return{k:e.k,q:+q.toFixed(3)}}catch(x){return null}}
 
 /* ---------- forehead anchor (canvas coords) of a face drawn at img {x,y,w,h} ---------- */
+function hdTone(g,S){const T=BAL.hd.tone;if(!T||!T.on)return;try{const im=g.getImageData(0,0,S,S),d=im.data,M=T.metal,sk=T.skin;for(let i=0;i<d.length;i+=4){const a=d[i+3];if(!a)continue;let r=d[i],gg=d[i+1],b=d[i+2];const mx=Math.max(r,gg,b),mn=Math.min(r,gg,b),sat=mx?(mx-mn)/mx:0,v=mx/255;let h=0;if(mx!==mn){const dl=mx-mn;h=mx===r?((gg-b)/dl)%6:mx===gg?(b-r)/dl+2:(r-gg)/dl+4;h=(h*60+360)%360}
+ const metal=h>=M.h0&&h<=M.h1&&sat>=M.s&&v>=M.v;if(!metal){const L=.299*r+.587*gg+.114*b;r=L+(r-L)*T.sat;gg=L+(gg-L)*T.sat;b=L+(b-L)*T.sat;r+=(r*sk[0]/255-r)*T.mul;gg+=(gg*sk[1]/255-gg)*T.mul;b+=(b*sk[2]/255-b)*T.mul;d[i+3]=Math.round(a*T.op)}
+ d[i]=r;d[i+1]=gg;d[i+2]=b}g.putImageData(im,0,0)}catch(x){}}
 function hdFit(key,nw,nh,fw){const B=BAL.hd,wm=B.size*fw,ink=(B.ink&&B.ink[key])||B.inkDef;const ka=Math.sqrt(B.inkK*wm*wm/(ink*nw*nh)),k=Math.min(ka,wm*B.boxW/nw,wm*B.boxH/nh);return{w:nw*k,h:nh*k,k}}
 function hdAnchor(file,img,fws,G){const B=BAL.hd;let m=null;try{m=MK_FIT.get(file)}catch(e){}
  const P=i=>[img.x+m[2*i]/4000*img.w,img.y+m[2*i+1]/4000*img.h];
@@ -145,7 +149,7 @@ function hdFlPaint(file,sh,e,key){const U=s=>typeof IMG_U==="function"?IMG_U(s):
    const A=hdAnchor(file,{x:0,y:0,w:W,h:H},fw||W*.3,null);if(!A){e.src=TOIL_BLANK;return}if(!fw)fw=A.ed/B.edFw;
    const nw=spr.naturalWidth,nh=spr.naturalHeight,S=Math.ceil(Math.hypot(nw,nh))+2,sc=hdFit(sh.k,nw,nh,fw).k,bs=S*sc;/* bs = side of the tight box in picture canvas px */
    const c=document.createElement("canvas");c.width=S;c.height=S;const g=c.getContext("2d");g.imageSmoothingEnabled=true;g.imageSmoothingQuality="high";
-   const ang=A.ang+(sh.vung?B.vungA:0);g.translate(S/2,S/2);g.rotate(ang*Math.PI/180);g.drawImage(spr,-nw/2,-nh/2,nw,nh);
+   const ang=A.ang+(sh.vung?B.vungA:0);g.translate(S/2,S/2);g.rotate(ang*Math.PI/180);g.drawImage(spr,-nw/2,-nh/2,nw,nh);hdTone(g,S);
    e.box=[(A.x-bs/2)/W*100,(A.y-bs/2)/H*100,bs/W*100,bs/H*100];e.src=c.toDataURL("image/png");e.at=[A.x/W,A.y/H,ang]}catch(x){e.src=TOIL_BLANK}
   document.querySelectorAll("img[data-hdl]").forEach(x=>{if(x.dataset.hdl===key){x.src=e.src;x.style.cssText=hdBoxCss(e.box)}})};
  face.onload=go;face.onerror=go;spr.onload=go;spr.onerror=()=>{const w=WD_ITEMS[sh.k];if(!spr.__fb&&w&&w.icon){spr.__fb=1;spr.src=U(w.icon)}else go()};
