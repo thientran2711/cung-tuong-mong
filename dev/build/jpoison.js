@@ -58,7 +58,7 @@ function pgOdds(a,t,e){const P=BAL.pg;const G=pgGuard(t);const tr=Math.round((re
  const raw=P.base+tc+tr+gr+G.reduce((s,x)=>s+x[1],0);const o=oddsCl(Math.min(Math.round(odA(a,raw)),P.hi));
  const F=[[`Tâm cơ ${pgNm(a)} ${a.tamco|0}`,tc],[`${pgNm(t,1)} ${tr>=0?"tin":"ngờ"} ${pgNm(a)}`,tr],
   [e&&e.wk?`Món ${WTIER[e.wk.ti|0]} che vị`:`${e&&IT[e.k]?itm(e.k).n:"Món"} che vị`,gr]].concat(G);{const W=BAL.odds.weak;if((a.suc||0)<W.suc)F.push([`Sức ${pgNm(a)} dưới ${W.suc}`,-W.pen])}
- const cp=oddsCl(oSee(t,true)-P.cpFac*(facN(a)-1));return{o,F,cp}}
+ const cp=caughtOdds(a,t,true);return{o,F,cp}}
 function pgEffect(a,t,pk){const nm=t===S?"Ngươi":`${rkName(t)} ${t.name}`;
  if(pk==="hacdinh"){if(t===S){die("Trúng độc, không qua khỏi");return `<span class="r">Ngươi trúng độc.</span> `}ap(t,{suc:BAL.pg.hacSuc});try{dieIf(t,"Trúng độc, không qua khỏi")}catch(e){}return `<span class="r">${nm} trúng độc nặng.</span> `}
  if(pk==="docngam"){ap(t,{suc:BAL.eff.jpoison.sucPgEffect});t.sick=Math.max(t.sick||0,BAL.pg.sickMo);return `${nm} ăn xong thì người mệt dần, thái y bảo trúng hàn khí (Sức ${balSg(BAL.eff.jpoison.sucPgEffect)}, ốm ${kitNumVi(BAL.pg.sickMo)} tháng). `}
@@ -112,7 +112,7 @@ try{ACTDOM.pgift="Mưu kế";J78VERB.pgift="tặng {t} quà ăn có độc";cons
  LACK.pgift=()=>!pgHeld(S).length?"cần một thứ độc (đồ cấm)":!(S.inv||[]).some(pgFood)?"cần một món ăn, túi hương hay đồ bổ để tặng":""}catch(e){}
 (function(){if(typeof mindMenu!=="function")return;const m0=mindMenu;mindMenu=function(v,t){const O=m0.apply(this,arguments);try{if(Array.isArray(O)&&v!==S&&bandOf(danger(v,t))>=3&&ACT.pgift.ok(v,t)){const w=BAL.pg.npc.w*persW(v,"pgift");if(w>0)O.push(["pgift",w])}}catch(e){}return O}})();
 /* NPCs cook too: a malicious NPC holding poison keeps a dish at hand (same rule as her: works come from practice) */
-(function(){if(typeof npcMonthly!=="function")return;const m0=npcMonthly;npcMonthly=function(v){const r=m0.apply(this,arguments);try{if(v&&v.alive&&pgHeld(v).length&&!(v.inv||[]).some(pgFood)&&roll(BAL.pg.npc.cook)){v.inv.push(wkMake(v,"mon",BAL.pg.npc.mat,BAL.pg.npc.raw))}}catch(e){}return r}})();
+(function(){if(typeof npcMonthly!=="function")return;const m0=npcMonthly;npcMonthly=function(v){const r=m0.apply(this,arguments);try{if(v&&v.alive&&pgHeld(v).length&&!(v.inv||[]).some(pgFood)&&!(typeof haOn==="function"&&haOn())&&roll(BAL.pg.npc.cook))/* AG-ALL C: her deed (jagharm §2) while the loop is on */{v.inv.push(wkMake(v,"mon",BAL.pg.npc.mat,BAL.pg.npc.raw))}}catch(e){}return r}})();
 /* ---------- CHÂN TÌNH: a visible cause ---------- */
 function gfFor(a,w,r){try{if(r==="emp")return wkEmpMatch(w).length>0;if(r==="th")return ["kinh","tranh","theu"].includes(w.kind);if(r&&typeof r==="object")return wkBestArt(r)===w.a}catch(e){}return false}
 function gfBond(a,r){if(r==="emp")return[(a.an||0)|0,BAL.gift.an,"Ân tình"];if(r==="th")return[(a.th||0)|0,BAL.gift.th,"Thái hậu quý ngươi"];return[(rel(r,a)||0)|0,BAL.gift.rel,`${r.name} quý ngươi`]}

@@ -10,12 +10,12 @@ function relAdd(x,y,n){if(!x||!y||x===y)return;affAdd(x,y,n);affAdd(y,x,n);const
 function hostility(v,t){return oan(v,t)+Math.max(0,-aff(v,t))/2+(t===S?v.ghen/2:Math.max(0,(t.sung-v.sung)/3))+(rkOf(t)>=rkOf(v)?8:0)}
 
 /* houses: Phi and above head a palace; lower consorts live under a head. Same house: cannot harm or win over each other */
-function houseOf(p){return rkOf(p)>=PAL_HEAD?key(p):(p.resHead!=null&&byKey(p.resHead)&&(byKey(p.resHead)===S?S.rank>=PAL_HEAD:byKey(p.resHead).alive&&!byKey(p.resHead).out&&rkOf(byKey(p.resHead))>=PAL_HEAD)?p.resHead:key(p))}
+function houseOf(p){if(rkOf(p)>=PAL_HEAD)return key(p);const h=p.resHead!=null?byKey(p.resHead):null;/* one lookup (perf, review ag-all-2 r2 B5) */return h&&(h===S?S.rank>=PAL_HEAD:h.alive&&!h.out&&rkOf(h)>=PAL_HEAD)?p.resHead:key(p)}
 function sameHouse(a,b){return a!==b&&houseOf(a)===houseOf(b)}
 function assignHouses(){const heads=consorts().filter(p=>rkOf(p)>=PAL_HEAD);for(const p of consorts()){if(rkOf(p)>=PAL_HEAD){p.resHead=null;continue}if(houseOf(p)!==key(p))continue;p.resHead=heads.length&&roll(70)?key(pick(heads.filter(h=>h!==p))||p):null}}
 
 /* where everyone is this tuần: by role, trait, season and time of month */
-function palaceOf(p){if(p===S)return"home";if(p.queen)return"kn";const h=byKey(houseOf(p));return h===S?"home":"r"+h.id}
+function palaceOf(p){if(p===S)return"home";if(p.queen)return"kn";const h=byKey(houseOf(p));return h===S?"home":"r"+(h?h.id:p.id)}/* 2d3: the house head gone (died / out) → her own palace, never a crash (knStaff flake in agent_check / ag-rd) */
 function placeWhere(){const W={},sea=SEASON[S.month-1],spring=sea==="Xuân"||sea==="Thu";
  const b=S.buoi||0;const e=b===1?b4EmpNoon():b===B4L?pick(["dtd","dtd","dtd",has("datinh")?"vuon":"dtd"]):has("chamchinh")?pick(["thu","thu","thu",spring?"vuon":"thu"]):b===0?pick(["thu","thu","dtd"]):pick([spring?"vuon":"dtd","thu","vuon"]);W.emp=wet()&&e==="vuon"?"thu":e;W.th=S.thDead?null:"tn";
  for(const v of rivals){if(!v.alive){continue}if(v.out){W[v.id]="lc";continue}if(v.confined){W[v.id]=palaceOf(v);continue}
@@ -61,15 +61,13 @@ function chatMark(v){S.chat[v.id]=(S.chat[v.id]||0)+1}
 function talkPraiseO(p){const T=BAL.talk.praise;return od(T.o+((p&&p.tai)||0)/T.div)}
 function topicOpts(v){const f=chatF(v),g=n=>Math.max(1,Math.round(n*f)),third=liveRivals(true).filter(x=>x!==v).sort((a,b)=>aff(v,a)-aff(v,b))[0];const A=[];
  const same=sameHouse(S,v);
- const TK=BAL.talk;A.push({n:"Hỏi han sức khỏe",o:100,x:`nàng quý ngươi +${g(TK.health)}`,run:()=>{affAdd(v,S,g(TK.health));chatMark(v);return `${v.name} cảm động. Nàng quý ngươi +${g(TK.health)}.`}});
- const praise=nv(v,"praise");A.push({n:"Khen tài nghệ nàng",o:talkPraiseO(S),x:`nàng quý ngươi +${g(praise)}`,run:()=>{chatMark(v);if(roll(talkPraiseO(S))){affAdd(v,S,g(praise));return `${v.name} tươi cười. Nàng quý ngươi +${g(praise)}.`}affAdd(v,S,-TK.praiseFail);return `${v.name} cho là ngươi giả lả. Nàng quý ngươi -${TK.praiseFail}.`}});
- if(third)A.push({n:`Bàn tán về ${third.name}`,o:100,inner:1,x:aff(v,third)<0?`nàng ghét người này, hợp chuyện: nàng quý ngươi +${g(TK.gossip.hit)}`:`kèm: nàng quý ngươi -${TK.gossip.miss} · nàng có thể mách lại`,run:()=>{chatMark(v);if(aff(v,third)<0){affAdd(v,S,g(TK.gossip.hit));oanAdd(v,third,TK.gossip.oan);return `Hai người to nhỏ chuyện ${third.name}. Nàng quý ngươi +${g(TK.gossip.hit)}.`}affAdd(v,S,-TK.gossip.miss);if(roll(TK.gossip.tell)){oanAdd(third,S,TK.gossip.tellOan);return `${v.name} đem lời ngươi kể lại với ${third.name}. ${third.name} oán ngươi +${TK.gossip.tellOan}.`}return `${v.name} lảng sang chuyện khác. Nàng quý ngươi -${TK.gossip.miss}.`}});
- A.push({n:"Chia sẻ bí mật",o:100,inner:1,x:`nàng quý ngươi +${g(TK.secret)}${v.malice>50?" · nàng có thể nắm thóp ngươi":""}`,run:()=>{chatMark(v);affAdd(v,S,g(TK.secret));if(v.malice>50&&roll(50)){evA(v,S,BAL.eff.j9.evRun);return `${v.name} lắng nghe chăm chú, ghi nhớ từng lời. Nàng quý ngươi +${g(TK.secret)}.`}return `${v.name} cũng kể chuyện riêng. Nàng quý ngươi +${g(TK.secret)}.`}});
- A.push({n:"Nhờ giúp đỡ",o:100,inner:1,x:aff(v,S)>=30?"nàng thân với ngươi":`nàng chưa đủ quý ngươi (cần ${BAL.bacFee.lendAff}): nàng quý ngươi ${balSg(BAL.eff.j9.run_5)}`,run:()=>{chatMark(v);if(aff(v,S)>=BAL.bacFee.lendAff){if(roll(50)&&v.bac>=BAL.bacFee.lend){ap(v,{bac:-BAL.bacFee.lend});apply({bac:BAL.bacFee.lend});return `${v.name} cho ngươi mượn ${BAL.bacFee.lend} lượng.`}const x=evGuilty(S,liveRivals(true).filter(y=>y!==v));if(x&&evA(S,x,BAL.eff.j9.evRun_2))return `${v.name} kể cho ngươi một chuyện về ${x.name}: chứng cứ ${balSg(BAL.eff.j9.evRun_2)}.`;}affAdd(v,S,BAL.eff.j9.run_5);return `${v.name} khéo từ chối. Nàng quý ngươi ${balSg(BAL.eff.j9.run_5)}.`}});
+ /* AG-ALL-2e: the four talk topics are built ONCE by P3T.<k>(speaker, listener) (jagacts3) — her talk and an NPC↔NPC talk run the same card */
+ const TK=BAL.talk;A.push(P3T.health(S,v));A.push(P3T.praise(S,v));if(third)A.push(P3T.gossip(S,v,third));A.push(P3T.secret(S,v));
+ A.push({n:"Nhờ giúp đỡ",o:100,inner:1,x:aff(v,S)>=BAL.ag.cx2.help.aff?"nàng thân với ngươi":`nàng chưa đủ quý ngươi (cần ${BAL.ag.cx2.help.aff}): nàng quý ngươi -${BAL.ag.cx2.help.fail}`,run:()=>{chatMark(v);return helpAsk(S,v).r}});
  const foe=liveRivals(true).filter(x=>x!==v&&oan(x,v)>=TK.warn.foe)[0];
  A.push({n:"Cảnh báo nàng",o:100,x:foe?`có kẻ đang oán nàng: nàng quý ngươi +${g(TK.warn.hit)}`:`không có căn cứ: nàng quý ngươi -${TK.warn.miss}`,run:()=>{chatMark(v);if(foe){affAdd(v,S,g(TK.warn.hit));oanAdd(v,foe,TK.warn.oan);return `Ngươi nhắc ${v.name} coi chừng ${foe.name}. Nàng quý ngươi +${g(TK.warn.hit)}.`}affAdd(v,S,-TK.warn.miss);return `${v.name} nghi ngươi gây chia rẽ. Nàng quý ngươi -${TK.warn.miss}.`}});
  if(oan(v,S)>0){A.push({n:"Tạ lỗi",o:100,c:{danh:-1},x:`oán ${balSg(BAL.eff.j9.run_8)}`,run:()=>{oanAdd(v,S,BAL.eff.j9.run_8);chatMark(v);return `Ngươi hạ mình tạ lỗi. ${v.name} oán ${balSg(BAL.eff.j9.run_8)}.`}});
-  A.push({n:"Nhún nhường",o:100,c:{danh:-2},x:`oán ${balSg(BAL.eff.j9.run_9)} · nàng quý ngươi ${balSg(BAL.eff.j9.run_10)}`,run:()=>{oanAdd(v,S,BAL.eff.j9.run_9);affAdd(v,S,BAL.eff.j9.run_10);chatMark(v);return `Ngươi nhún nhường trước ${v.name}. Oán ${balSg(BAL.eff.j9.run_9)}, nàng quý ngươi ${balSg(BAL.eff.j9.run_10)}.`}})}
+  A.push({n:"Nhún nhường",o:100,c:{...BAL.ag.cx.humble.c},x:`oán -${BAL.ag.cx.humble.oanDown} · nàng quý ngươi +${BAL.ag.cx.humble.aff}`,run:()=>{oanAdd(v,S,-BAL.ag.cx.humble.oanDown);affAdd(v,S,BAL.ag.cx.humble.aff);chatMark(v);return `Ngươi nhún nhường trước ${v.name}. Oán -${BAL.ag.cx.humble.oanDown}, nàng quý ngươi +${BAL.ag.cx.humble.aff}.`}})}
  A.push({n:"Giúp đỡ nàng",c:{bac:-20},o:100,x:`nàng quý ngươi ${balSg(BAL.eff.j9.run_11)} · oán ${balSg(BAL.eff.j9.run_12)}`,run:()=>{relAdd(S,v,BAL.eff.j9.run_11);oanAdd(v,S,BAL.eff.j9.run_12);chatMark(v);return `Ngươi giúp ${v.name} việc khó. Nàng quý ngươi ${balSg(BAL.eff.j9.run_11)}.`}});
  if(same)return A.filter(a=>["Hỏi han sức khỏe","Bàn tán về "+(third?third.name:""),"Tạ lỗi","Nhún nhường"].includes(a.n)).concat([{n:"Cùng cung",o:100,fix:1,lock:true,t:"không thể lấy lòng hay ra tay",x:""}]);
  return A}
@@ -88,7 +86,7 @@ function pushPond(a,t){ap(a,{duc:-12});a.schemes=(a.schemes||0)+1;const c=caught
  ap(a,{danh:-8});relAdd(a,t,BAL.eff.j9.pushPond_2);punish(a,"xô ngã phi tần",2);return `<span class="r">${NMc(a)} xô ${NM(t)} bị người thấy.</span> `}
 function trip(a,t){ap(a,{duc:-4});if(roll(odA(a,50+a.tamco/5))){ap(t,{danh:BAL.eff.j9.danhTrip});let r=`${NMc(t)} vấp ngã giữa chốn đông người. Danh ${balSg(BAL.eff.j9.danhTrip)}. `;if(t.preg&&!t.fake&&roll(25)){t.preg=0;t.hidden=false;ap(t,{suc:-15});r+=`<span class="r">${NMc(t)} động thai.</span> `}relAdd(a,t,BAL.eff.j9.trip);return r}
  relAdd(a,t,BAL.eff.j9.trip_2);evA(t,a,BAL.eff.j9.evTrip);return `${NMc(t)} thấy rõ ${NM(a)} ngáng chân. `}
-function overhear(k){const here=liveRivals(true).filter(v=>whereOf(v)===k);if(here.length<2)return"";const v=pick(here);if(roll(od(BAL.ag.wit.hear+S.mat*BAL.ag.wit.mat))){return evA(S,v,BAL.eff.j9.evOverhear)?`Ngươi nghe lén ${v.name} nói chuyện: chứng cứ ${balSg(BAL.eff.j9.evOverhear)}.`:`Ngươi nghe lén ${v.name} nói chuyện: không có gì sai trái, chỉ biết ${harmTxt(v)}.`}return "Không nghe được gì."}
+function overhear(k){const here=liveRivals(true).filter(v=>whereOf(v)===k);if(here.length<2)return"";const v=pick(here);if(roll(od(BAL.ag.wit.hear+eyes(S)*BAL.ag.wit.mat))){return evA(S,v,BAL.eff.j9.evOverhear)?`Ngươi nghe lén ${v.name} nói chuyện: chứng cứ ${balSg(BAL.eff.j9.evOverhear)}.`:`Ngươi nghe lén ${v.name} nói chuyện: không có gì sai trái, chỉ biết ${harmTxt(v)}.`}return "Không nghe được gì."}
 
 /* the palace map */
 const MAPL=[["thu","dtd","tn"],["kn","vuon","ksp"],["tyv","lc","home"]];
