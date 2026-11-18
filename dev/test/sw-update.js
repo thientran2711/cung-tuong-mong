@@ -130,7 +130,8 @@ const tapIn=(p,sel,re)=>until(p,([s,r])=>{const b=[...document.querySelectorAll(
   R.vNew=await swV(p);R.caches=await ev(p,()=>caches.keys());R.core=await ev(p,()=>KLOAD.core);
   R.savesNew=await saves(p);ok(JSON.stringify(R.savesOld)===JSON.stringify(R.savesNew),'old sổ unchanged');
   for(const k of ['savesOld','savesNew'])R[k]=Object.fromEntries(Object.entries(R[k]||{}).map(([a,v])=>[a,v.length]));
-  ok(await ev(p,()=>{const b=document.querySelector('#modal.kpthome [data-tgo="cont"]');if(b)b.click();return !!S&&document.getElementById('title').hidden}),'old sổ loads (Tiếp tục)');
+  await ev(p,()=>{const b=document.querySelector('#modal.kpthome .kpmenu [data-tgo="slots"]');if(b)b.click()});await p.waitForSelector('#modal [data-load]',{timeout:15000}).catch(()=>0);
+  ok(await ev(p,()=>{const b=document.querySelector('#modal [data-load]');if(b)b.click();return !!S&&document.getElementById('title').hidden}),'old sổ loads (Tiếp tục -> sổ list -> data-load)');
   await sleep(1500);await p.screenshot({path:`${OUT}/main-2-after-${tag}.png`})}
  if(SC==='coop')await coop(b);
  R.errs=errs;ok(!errs.length,'0 page errors',errs.slice(0,6));
