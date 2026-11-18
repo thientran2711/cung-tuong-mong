@@ -41,7 +41,10 @@ function placeEnt(){try{const en=$("kpent"),st=$("stage");if(!en||en.hidden||!st
  if(mk&&mk.getClientRects().length){const R=st.getBoundingClientRect(),q=mk.getBoundingClientRect(),c=ch.getBoundingClientRect();
   if(q.right>c.left-4&&q.left<c.right+4&&q.top<c.bottom+2&&q.bottom>c.top-2)en.style.left=Math.round(q.right-R.left+8)+"px"}}catch(e){}}
 function lay2(){lay();placeEnt();clearTimeout(lay2.a);clearTimeout(lay2.b);lay2.a=setTimeout(placeEnt,400);lay2.b=setTimeout(placeEnt,1300)}
-const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);lay2();return r};
+/* ag-deed-perf (C-AG #12 18/11): a stage redraw INSIDE a sim step (j95 final wrapper, window.__rdefer > 0) queues lay2 (layout reads only:
+   getBoundingClientRect + the toast/name/chip DOM; nothing in S) with the other stage fits for the next frame (jlag2 renderAfter, coalesced;
+   a render() before then flushes it); every other redraw runs it at once, as before */
+const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);if(window.__rdefer>0&&typeof window.renderAfter==="function")renderAfter("plst-lay",lay2);else lay2();return r};
 try{addEventListener("resize",()=>{clearTimeout(lay.__t);lay.__t=setTimeout(lay2,90)})}catch(e){}
 /* (1) the count chip: the kit rail's first slot */
 try{if(window.kitStageRail)kitStageRail.add({id:"here",order:0,chip:()=>{const n=hereN();return n&&typeof j59ico==="function"?`<span class="kchip n j59hchip" role="img" aria-label="Ở đây còn ${n} người">${j59ico()}<span class="j59n">${n}</span></span>`:""},when:()=>hereN()>0&&onStage()})}catch(e){}
