@@ -37,3 +37,9 @@ PRIORITY #1 CHECK: brief from ROOT-56 (OD 18/11 ~21:35Z + edge flag); same scans
 - LOOKED: Fold idcard crown-tallest (whole figure, 12 px from the screen edge), Fold pdlg hh-c09, iPad choice hh-c09.
 FAIL (1, minor): Fold person dialog (coach / tips, kitPersonDlgFit) with the blue-robe Hoang hau fig-consort-c09 that holds a rose: the rose tip reaches ~3 px into the first text column (touches the n of "nhiều" on the last line; visible in 755x1000 pdlg hh-c09). Same at 579fac03 (I missed it then). The scan has no figure-over-text column; add one (painted figure right edge <= text column left - gap) and fix kitPersonDlgFit so a prop never enters the text; check all 10 figures.
 FAIL 1 item: Fold pdlg figure prop over text — fix + scan column, then I re-run. Everything else PASS.
+
+## FINAL VERDICT on review/fullbody-frame-s4 @ 44513236 (for MAIN ROOT-56)
+Facts: origin/main 790cda59 is an ancestor (FF ok). Diff vs ef509c22 = main's files only (j27 j38 j41 jagday jkitpage jmapc jmark jplst jpm jtabs, KIT.md, KIT_REQUESTS.md, ag2perf/map-labels/subtabs tests) + index.html/sw.js; jkitpage.js identical to origin/main; no fullbody file (jksize jkit jk4 jpdlg jsl j79, scans) changed. Rebuild differs from committed index.html only in the build line window.CTM_BI.
+quickcheck PASS (open 1461 ms, old save ok, perf render 219/252, tab 427/367, buổi 1160/1175), core gates incl. G4 PASS. Standard checks from the ef509c22 run still hold (same content): edge >= 12 px, name over crown 0, cut 0, same class = same body, real-event scroll Fold 26 / iPad 12 (main 27/26).
+Still FAIL (1, minor): Fold person dialog with fig-consort-c09 (rose): rose tip ~3 px into the first text column (re-checked on 44513236, shot 755x1000 pdlg hh-c09). Needs a figure-over-text scan column + kitPersonDlgFit fix.
+FAIL 1 item (Fold pdlg prop over text).
