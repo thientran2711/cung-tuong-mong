@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"8fcfe94f+","t":"2026-11-18T05:15Z","c":"grand endings engine phase 1: S.ge funnel, Hồi kết nhánh, resolve, shading, rewards, Thiên mệnh titles + 3 pilot branches","b":"721c30de4717","h":[{"s":"bd8547f2+","t":"2026-11-18T03:28Z","c":"men-forbidden r6: old saves drop officials / festival princes standing in the hậu cung on load (menLoadFix, same ONE rule)"},{"s":"c743265c+","t":"2026-11-18T03:18Z","c":"review life-preload r6: title prefetch chained on undefined (lWant returns its promise); gate cap really 25 s (no re-run after cap / Vào cu…"},{"s":"2aca2aac+","t":"2026-11-18T03:17Z","c":"review cloth-tea-r6: kclo-on hides the picture by clip-path, not visibility (visibility:hidden made kfxGeom hide the cloth layer too: her f…"},{"s":"2b1b0701","t":"2026-11-18T03:00Z","c":"review staff-cap-apply r6: site rebuilt on db24027f"},{"s":"64488e4f+","t":"2026-11-18T02:38Z","c":"cloth-xoc r6e: rebuild site"},{"s":"af71f94a+","t":"2026-11-18T02:17Z","c":"smudge r16: stage4 + avatar probe tests, options script score fix (look tier by score), FINAL mode"},{"s":"e1f60927+","t":"2026-11-18T02:25Z","c":"result-reason: every result card line says a short why (kitWhy, KIT 7); values left-aligned next to labels"},{"s":"29385ec6+","t":"2026-11-18T02:07Z","c":"greet-stranger: site rebuilt"},{"s":"3b69182e","t":"2026-11-18T01:50Z","c":"hoa-dien r3 onto main 3da5720a (makeup-lux live): hoa-dien (jhd.js + hooks) replayed on the new main, replacing the old stacked branch. Sha…"},{"s":"631a703e","t":"2026-11-18T01:37Z","c":"review staff-cap-fix r6: hire pick refused at the cap gives the silver back (+ staff-cap.js case); site rebuilt"}]};
+window.CTM_BI={"s":"7284526c","t":"2026-11-18T10:00Z","c":"BAL.ge var: tag 4 / duc .05 (run 3: Đức climbs in every mode and drowned the arc choices); measure: MODES filter + null S.ge guard","b":"d31fecdf6150","h":[{"s":"bd8547f2+","t":"2026-11-18T03:28Z","c":"men-forbidden r6: old saves drop officials / festival princes standing in the hậu cung on load (menLoadFix, same ONE rule)"},{"s":"c743265c+","t":"2026-11-18T03:18Z","c":"review life-preload r6: title prefetch chained on undefined (lWant returns its promise); gate cap really 25 s (no re-run after cap / Vào cu…"},{"s":"2aca2aac+","t":"2026-11-18T03:17Z","c":"review cloth-tea-r6: kclo-on hides the picture by clip-path, not visibility (visibility:hidden made kfxGeom hide the cloth layer too: her f…"},{"s":"2b1b0701","t":"2026-11-18T03:00Z","c":"review staff-cap-apply r6: site rebuilt on db24027f"},{"s":"64488e4f+","t":"2026-11-18T02:38Z","c":"cloth-xoc r6e: rebuild site"},{"s":"af71f94a+","t":"2026-11-18T02:17Z","c":"smudge r16: stage4 + avatar probe tests, options script score fix (look tier by score), FINAL mode"},{"s":"e1f60927+","t":"2026-11-18T02:25Z","c":"result-reason: every result card line says a short why (kitWhy, KIT 7); values left-aligned next to labels"},{"s":"29385ec6+","t":"2026-11-18T02:07Z","c":"greet-stranger: site rebuilt"},{"s":"3b69182e","t":"2026-11-18T01:50Z","c":"hoa-dien r3 onto main 3da5720a (makeup-lux live): hoa-dien (jhd.js + hooks) replayed on the new main, replacing the old stacked branch. Sha…"},{"s":"631a703e","t":"2026-11-18T01:37Z","c":"review staff-cap-fix r6: hire pick refused at the cap gives the silver back (+ staff-cap.js case); site rebuilt"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -30740,7 +30740,7 @@ BAL.ge={
  /* odds of the open ending her pair points to: base + pull × per, clamped [min, max]; its condition not met → capped at noCond */
  odds:{base:22,per:9,min:5,max:88,noCond:12},
  /* option C shading lean: lean = Σ option tags × tag + (Đức now − Đức at life start) × duc + Ngã rẽ 2 sign × last; ≥ cut → thiện, ≤ −cut → ác, else natural */
- var:{tag:2,duc:.25,last:3,cut:8},
+ var:{tag:4,duc:.05,last:3,cut:8},/* run 3 (sensible bot): Đức climbs +19..+70 in every mode, so .25 drowned the arc choices; tag 4 + duc .05 lets the choices lead */
  /* "người ấy" for «Theo người ấy đi»: the strongest real bond — a man's tình ≥ men, or a consort's thiện cảm ≥ sis */
  bond:{men:30,sis:40},
  seat:["NDE","THH","HH","TM"],  /* one per world: taken by anyone → every other ending needing it turns fail-only */
@@ -30749,11 +30749,11 @@ BAL.ge={
  title:{tier:8,carry:"prev"},   /* D5; tier 8 = the top kit plate until K-GE-2 (2-tone Thiên mệnh plate) ships */
  pt:30,                /* leaderboard points of a grand ending (Bảng Thiên mệnh) */
  kimsach:"kimsachtm",  /* the one treasure kind: Kim sách Thiên mệnh (cannot be sold, given or lost, OD:L1314) */
- /* conditions: the gate of each ending (stat floors, relation floors); words in jgedata cw print these */
+ /* conditions: the gate of each ending (stat floors, relation floors; Tai mắt «mat» is on its own 0–10 scale, every other stat 0–100 — ge-guard checks it); words in jgedata cw print these */
  gate:{
-  tt_co_1:{mat:40},tt_co_2:{duc:45,sung:45},tt_co_3:{dad:20},tt_co_4:{sung:50,tamco:40},
+  tt_co_1:{mat:4},tt_co_2:{duc:45,sung:45},tt_co_3:{dad:20},tt_co_4:{sung:50,tamco:40},
   cnv_mat_1:{sung:50},cnv_mat_2:{sung:55,tamco:40},cnv_mat_3:{duc:40,maid:55},cnv_mat_4:{mis:20},
-  nc_tuc_1:{tai:55,danh:40},nc_tuc_2:{th:40},nc_tuc_3:{tamco:45,mat:30},nc_tuc_4:{duc:35}},
+  nc_tuc_1:{tai:55,danh:40},nc_tuc_2:{th:40},nc_tuc_3:{tamco:45,mat:3},nc_tuc_4:{duc:35}},
  /* fail-outcome losses (her pair pointed at the ending and missed; none in the quiet form unless quietLoss) */
  fail:{
   tt_co_1:{rank:-1,danh:-12},tt_co_2:{sung:-8,danh:-4},tt_co_3:{sung:-8,danh:-6},tt_co_4:{danh:-10,duc:-6},
@@ -30762,7 +30762,7 @@ BAL.ge={
  /* rewards: the same SIZE for both shadings (fair: no "right" morality); only the sign of everyone's attitude differs (rel thiện → thiện cảm +, ác → oán +).
     rw.mul × the road's RD97L rare fx ≈ the size (start 3×); rank = steps (never above the seat rules: Hoàng hậu only by seat "HH"); mis = the named NPC's attitude */
  rw:{mul:3,
-  tt_co_1:{danh:36,sung:18,mat:15,rel:8},tt_co_2:{rank:1,danh:30,sung:18,duc:6,rel:8},tt_co_3:{danh:24,duc:12,rel:6},tt_co_4:{rank:1,danh:30,sung:20,rel:8},
+  tt_co_1:{danh:36,sung:18,mat:2,rel:8},tt_co_2:{rank:1,danh:30,sung:18,duc:6,rel:8},tt_co_3:{danh:24,duc:12,rel:6},tt_co_4:{rank:1,danh:30,sung:20,rel:8},
   cnv_mat_1:{rank:1,sung:30,danh:18,rel:6},cnv_mat_2:{seat:"HH",danh:30,sung:15,rel:8},cnv_mat_3:{danh:20,duc:12,bac:300,rel:6},cnv_mat_4:{rank:1,danh:24,sung:15,mis:20,rel:6},
   nc_tuc_1:{rank:1,danh:30,sung:18,tai:10,rel:8},nc_tuc_2:{danh:36,th:20,rel:8},nc_tuc_3:{rank:1,danh:30,tamco:10,rel:10},nc_tuc_4:{danh:24,duc:12,rel:6}},
  help:{rw:{danh:6,duc:3}},   /* her help to an NPC who then unlocks (NPC parity, build step 5 — not live in this pass) */
@@ -55616,7 +55616,7 @@ function geApply(s,res){const id=s.b+"_"+(res.i+1);const out=[];
    if(n)out.push(res.sh==="t"?`Cả lục cung thêm thiện cảm với ngươi`:`Cả lục cung thêm kính sợ ngươi`)}
   if(W.mis){const v=geMis();if(v&&v.alive){relAdd(S,v,W.mis);out.push(`${v.name} thêm gắn bó với ngươi`)}}
   /* the one treasure: Kim sách Thiên mệnh, the shading title engraved (cannot be sold, given or lost) */
-  const k=GB().kimsach;if(IT[k]){S.inv=S.inv||[];S.inv.push({k,from:"ge",own:"me",giver:"Hoàng thượng",d:S.turn,nt:1,ti:res.ti});out.push(`Phần thưởng: ${IT[k].n} khắc «${res.ti}» (đã vào Rương)`)}
+  const k=GB().kimsach;if(IT[k]){/* the one Ngự tứ path (j97 r97give), engraved */if(typeof r97give==="function"&&r97give(k,"Hoàng thượng")){const it=S.inv[S.inv.length-1];it.from="ge";it.ti=res.ti}out.push(`Phần thưởng: ${IT[k].n} khắc «${res.ti}» (đã vào Rương)`)}
   S.gePt=(S.gePt||0)+GB().pt;
   geBoardAdd(S,res.ti,res.sh,s.b);geBook(s,res);
   log(`<b class="g">Đại kết cục · ${res.ti}.</b> Thiên hạ truyền tai: ${S.name} đã thành “${res.ti}”.`)}
@@ -55701,6 +55701,8 @@ function geMap(b){const Cb=GE_CAT[b];if(!Cb)return null;const g=geStore(),rb=sto
 window.geMap=geMap;
 /* state words of a node this life (Sơ đồ nhánh, VANPHONG §5) */
 window.geStateWord=(st,ch)=>st==="o"?"Còn mở":st==="f"?"Chỉ còn đường thua":`Đã khép${ch?" · chương "+ch:""}`;
+/* read-only hooks for dev/test + dev/measure (the condition terms, stats and shading the engine uses) */
+window.geDbg={term:geTerm,cond:geCond,stat:geStat,shade:geShade,lean:geLean,mis:()=>geMis()};
 }catch(e){console.error("jge",e)}})();
 /* ================= jdemo: GIÁNG PHẨM / LÃNH CUNG — Nội vụ phủ thu đồ vượt phẩm (review/scenes-3, sweep S3-82, owner OD:L374 08:35Z) =================
    "Demoted / sent to cold palace: above-rank items are CONFISCATED in a scene — Nội vụ phủ eunuch (person dialog) takes each item cell onto a tray,
@@ -68350,7 +68352,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="721c30de4717";window.CTM_BUILD=BUILD;
+const BUILD="d31fecdf6150";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
