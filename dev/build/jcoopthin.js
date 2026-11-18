@@ -22,7 +22,7 @@
 (function(){try{
 const CW=window.COOPW;if(!CW||!CW.X||typeof COOP!=="object")return;
 const X=CW.X,J=X.J,LS={get(k){try{return localStorage.getItem(k)}catch(e){return null}}};
-const TH=CW.thin={CAP:6/* F1 her acts as intents (jcoopthinf.js),  E buổi + night gate on the host (jcoopthine.js), B life + rebirth on the host (jcoopthinb.js), C world read-only on the guest (jcoopthinc.js), D remote dialogs (section 6) */,lvl:0,REG:[],bridge:[],rlog:[],view:null,hv:0,dn:0,dr:null,ctxN:0};
+const TH=CW.thin={CAP:7/* F2 her places / goTo / visits as intents (jcoopthinf.js), F1 her acts as intents (jcoopthinf.js),  E buổi + night gate on the host (jcoopthine.js), B life + rebirth on the host (jcoopthinb.js), C world read-only on the guest (jcoopthinc.js), D remote dialogs (section 6) */,lvl:0,REG:[],bridge:[],rlog:[],view:null,hv:0,dn:0,dr:null,ctxN:0};
 const host=()=>CW.seat==="a";
 const D={};   /* part D (remote dialogs), filled in section 6 */
 TH.on=n=>!!(CW.on&&!CW.hold&&TH.lvl>=(n||1));
@@ -178,8 +178,14 @@ TH.withSeat=function(seat,fn){
 /* parts B + D (contract C3 "UI side effects"): her events must not play on the host's phone: scene queue (kmPush / kmReset), toasts (kitLine),
    sounds (sfx / kitSfx / kitResultSfx), stat floaters (kitStatFx / kitStatGlow / kitStatDelta), overlays (kitEdict / kitGloom / kitReward /
    kitResultFx). ONE list (TH.NOOP); coop-thin-b.js checks each name is wrapped. */
-TH.NOOP=["render","showModal","save","kmPush","kmReset","kitLine","sfx","kitSfx","kitResultSfx","kitStatFx","kitStatGlow","kitStatDelta","kitEdict","kitGloom","kitReward","kitResultFx"];TH.NOOPED=[];
-for(const n of TH.NOOP)if(typeof window[n]==="function"){const f=window[n];window[n]=function(){if(CW.ctx)return;return f.apply(this,arguments)};TH.NOOPED.push(n)}
+TH.NOOP=["render","showModal","save","kmPush","kmReset","kitLine","sfx","kitSfx","kitResultSfx","kitStatFx","kitStatGlow","kitStatDelta","kitEdict","kitGloom","kitReward","kitResultFx",
+ /* F2 (her walks / visits on the host): her arrival must not repaint the host's stage, open his place page (phone shell) or toast on his
+    phone; a toast her run raises (srvToast / kitLine) is captured (TH.uiCap, set by part F's run) and plays on HER phone with the answer */
+ "renderStage","resultShow","srvToast","k3ShowPlace","k3Shell"];TH.NOOPED=[];TH.uiCap=null;
+const UICAP=new Set(["srvToast","kitLine"]);
+for(const n of TH.NOOP)if(typeof window[n]==="function"){const f=window[n];window[n]=function(){if(CW.ctx){if(TH.uiCap&&UICAP.has(n)&&TH.uiCap.length<8)try{TH.uiCap.push([n,String(arguments[0]==null?"":arguments[0]).slice(0,300)])}catch(e){}return}
+  /* a result card whose snapshot was taken in another seat's context (her greeting's card at +30 ms, accEtqGo) is hers, never the host's */
+  if(n==="resultShow"&&arguments[1]&&arguments[1].__ctx&&CW.seat!==arguments[1].__ctx)return;return f.apply(this,arguments)};TH.NOOPED.push(n)}
 
 /* stable text of the host's whole state (the round-trip check) */
 function stable(o){const seen=new WeakSet();return JSON.stringify(o,function(k,v){if(typeof v==="function")return undefined;
