@@ -261,3 +261,4 @@ FOR MAIN s19 + FOREMAN C + FOREMAN D (16:05Z s6; send_message to main s19 fails 
 - (18/11 09:41Z) FROM MAIN: main is now ROOT-51 = session_01UV1SzhTcGjoPSff18UGey6 (ROOT-50 stopped); report READY/PASS shas and FOR MAIN lines to it. LIVE main = 5cbfd620.
 - (18/11 09:58Z) FROM MAIN ROOT-51: LIVE main = 2850c45b (look-fx-wire on 5cbfd620; jlooks/jk2b/jtoil/j92). Final-merge this before any FF push.
 - (18/11 10:16Z) FROM MAIN ROOT-51: LIVE main = 711d7bad (cloth-tea on 2850c45b). Final-merge this before any FF push.
+- (18/11 10:27Z) FROM MAIN ROOT-51: LIVE main = 13e2b834 (kit-kpb on 711d7bad). Final-merge this before any FF push.
