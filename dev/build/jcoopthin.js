@@ -218,7 +218,8 @@ TH.deltaSend=function(o){if(!host()||!TH.on(1))return false;if(!lastSent)return 
 TH.hostView=function(){if(!S)return null;const d=ser();let b=null;try{const B=TH.seatOf(CW.seat==="a"?"b":"a");b=B&&J(B.S)}catch(e){}
  return {w:COOP.state.week||0,buoi:S.buoi||0,P:{a:d.S,b},R:d.R,rid,dn:TH.dn,dr:TH.dr}};
 function snapNow(){try{const o=TH.hostView();if(o)TH.snapSend(o)}catch(e){console.error("thin snap",e)}}
-let dT=0;function deltaSoon(ms){clearTimeout(dT);dT=setTimeout(()=>{try{const o=TH.hostView();if(o)TH.deltaSend(o)}catch(e){console.error("thin delta",e)}},ms==null?1200:ms)}
+let dT=0;function deltaSoon(ms){clearTimeout(dT);dT=setTimeout(()=>{const t=performance.now(),L=latP;latP=null;try{const o=TH.hostView();if(o)TH.deltaSend(o)}catch(e){console.error("thin delta",e)}
+ if(L&&TH.lat)latN({id:L.id,op:L.op,run:Math.round(L.run),q:Math.round(t-L.t1),v:Math.round(performance.now()-t)})},ms==null?1200:ms)}
 TH.flush=()=>{clearTimeout(dT);try{const o=TH.hostView();if(o)TH.deltaSend(o)}catch(e){console.error(e)}};
 COOP.on("error",m=>{if(!m)return;if(m.code==="snapresync"&&host()&&TH.on(1)){TH.hv=Math.max(TH.hv,m.v|0);snapNow()}});
 COOP.on("week",()=>{if(host()&&TH.on(1))setTimeout(snapNow,0)});
@@ -227,7 +228,7 @@ if(typeof render==="function"){const f=render;render=function(){const r=f.apply(
 COOP.on("snap",m=>{if(host()||!m||!m.o)return;TH.view={v:m.v|0,o:m.o};COOP.emit("thinview",TH.view)});
 COOP.on("delta",m=>{if(host()||!m)return;const V=TH.view;if(!V||V.v!==(m.base|0)){COOP.send({t:"snapreq"});return}
  for(const p in m.set||{}){if(p.split(".").some(k=>BADK.test(k)))continue;put(V.o,p,m.set[p],false)}for(const p of m.del||[])put(V.o,String(p),null,true);
- V.v=m.v|0;COOP.emit("thinview",V)});
+ V.v=m.v|0;const t=performance.now();COOP.emit("thinview",V);TH.gAp=Math.round(performance.now()-t);const A=TH.F&&TH.F.lastAns;if(A&&A.ap==null&&V.o&&V.o.dr&&V.o.dr.id===A.id)A.ap=TH.gAp});
 /* intents */
 const DO={};let doN=0;
 TH.onDo=(op,fn)=>{DO[op]=fn};TH.doFn=op=>DO[op];/* part C wraps part B's "life" */
@@ -235,11 +236,14 @@ TH.doSend=function(op,args){if(host()||!TH.on(1))return false;const id="d"+Date.
 function runDo(m){const fn=DO[m.op];let r=null;TH.curDo=m.op;
  try{if(fn)r=TH.withSeat(m.from||"b",()=>fn(m.args,m))}catch(e){console.error("thin do",m.op,e);r={err:String(e&&e.message||e)}}
  TH.curDo=null;/* D r1: call-scoped (a later D.later must not see a stale op) */return r}
-COOP.on("do",m=>{if(!host()||!m||!TH.on(1))return;let r;
+/* F1 latency split (report only): TH.lat = host times per intent id: run = her intent's run (withSeat + the act), q = wait from the run's end
+   to the delta timer, v = view build + diff + send (the guest's network time = her tap→answer minus these and her own apply) */
+TH.lat=[];const latN=x=>{TH.lat.push(x);if(TH.lat.length>40)TH.lat.shift()};let latP=null;
+COOP.on("do",m=>{if(!host()||!m||!TH.on(1))return;let r;const t0=performance.now();
  /* B r2 (seam): her intents other than the life itself wait while her rolled life is held (they run on her accepted person) */
  if(m.op!=="life"&&m.op!=="probe"&&TH.held(m.from||"b")){D.defer(m.from||"b",{op:m.op,args:m.args===undefined?null:J(m.args),m:{from:m.from||"b",id:m.id}});r={held:1}}
  else r=runDo(m);
- TH.dn=m.n|0;TH.dr={id:m.id,op:m.op,r:r===undefined?null:J(r)};deltaSoon(0)});
+ TH.dn=m.n|0;TH.dr={id:m.id,op:m.op,r:r===undefined?null:J(r)};latP={id:m.id,op:m.op,run:performance.now()-t0,t1:performance.now()};deltaSoon(0)});
 /* part A test intent: read her person in context b (no change) */
 TH.onDo("probe",()=>({name:S.name,used,ctx:CW.ctx,host:(rivals.find(v=>v.coop)||{}).id||null}));
 

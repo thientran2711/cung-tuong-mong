@@ -82,21 +82,26 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   const r=await G.p.evaluate(([k,id])=>{const t=rivals.find(v=>v&&v.id===id);const C=COOPW.thin.C,F=COOPW.thin.F;const s0=C.stat.sent,n0=F.stat.sent;
    const extra=(k==='gift'||k==='plant')?S.inv.findIndex(e=>e&&!e.h&&!e.w&&!e.wk&&e.k==='yensao'):undefined;const before=JSON.stringify(t);let out,err=null;
    try{out=runAct(S,t,k,extra)}catch(e){err=String(e&&e.stack||e).slice(0,300)}
-   return {out:String(out),err,local:JSON.stringify(rivals.find(v=>v.id===id))!==before,npcOps:C.stat.sent-s0,sent:F.stat.sent-n0,pend:!!F.pend,id:F.pend&&F.pend.id}},[k,pick]);
+   /* the pending state is there in the same tick (#next locked); a 2nd tap (double tap) is ignored, never queued */
+   const nx=document.getElementById('next'),pendNow={pend:!!F.pend,next:!!(nx&&nx.disabled)};const b0=F.stat.busy;try{runAct(S,t,k,extra)}catch(e){}pendNow.dbl=F.stat.busy-b0;
+   return {pendNow,out:String(out),err,local:JSON.stringify(rivals.find(v=>v.id===id))!==before,npcOps:C.stat.sent-s0,sent:F.stat.sent-n0,pend:!!F.pend,id:F.pend&&F.pend.id}},[k,pick]);
   const got=await until(G,id=>!COOPW.thin.F.pend&&COOPW.thin.F.lastAns&&COOPW.thin.F.lastAns.id===id,r.id,15000);
   await sleep(400);await sync();
   const hA=await npcOf(H,pick),gA=await npcOf(G,pick),her1=await herS(G),hh=await hostHer();const run1=await H.p.evaluate(()=>COOPW.thin.F.stat.run);
-  const ans=await G.p.evaluate(()=>COOPW.thin.F.lastAns);
+  const ans=await G.p.evaluate(()=>COOPW.thin.F.lastAns);const hl=await H.p.evaluate(id=>(COOPW.thin.lat||[]).find(x=>x.id===id)||null,r.id);
   const num=o=>o?[o.sung,o.bac,o.danh,o.suc,o.alive,!!o.out,o.rank,(o.inv||[]).length,(o.kids||[]).length]:null;/* rel/oan/ghen/ev are each phone's own viewer rows */
   const sameW=JSON.stringify(num(hA))===JSON.stringify(num(gA));/* her log line: her phone's render adds the Sổ ghi sync suffix (jlogsync lsSync, as in solo); the host's copy holds the act line */
   /* her phone may add its own lines after it (guest-side log writers from the world delta: evidence gained, staff cap — tripwire F6/G) */
   const actL=String((ans&&ans.r&&ans.r.r)||'').trim().slice(0,40);/* the act's own line (the host's runAct result, logged in her context): on her phone among her newest lines */
   const herSame=Object.keys(hh).every(x=>x==='log'?(actL?her1.logs.some(l=>l.includes(actL)):true):x==='logs'||her1[x]===hh[x]);
-  const good=!r.err&&r.out===''&&!r.local&&r.npcOps===0&&r.sent===1&&got&&run1===run0+1&&sameW&&herSame;nAct++;if(good)nOk++;
-  const row={k,id:pick,staged:!!st,hostRan:run1-run0,ans:ans&&ans.r&&ans.r.st,ms:ans&&ans.ms,text:ans&&ans.r&&ans.r.r,npc:dd(hB,hA).slice(0,8),her:Object.keys(her1).filter(x=>x!=='log'&&x!=='logs'&&her0[x]!==her1[x]).map(x=>x+':'+her0[x]+'→'+her1[x]),log:her1.log.slice(0,60)};table.push(row);
+  const good=!r.err&&r.out===''&&!r.local&&r.npcOps===0&&r.sent===1&&r.pendNow.pend&&r.pendNow.next&&r.pendNow.dbl===1&&got&&run1===run0+1&&sameW&&herSame;nAct++;if(good)nOk++;
+  const sp=ans&&hl?{pre:ans.pre,pr:ans.pr,run:hl.run,q:hl.q,v:hl.v,ap:ans.ap,tries:ans.tries}:null;if(sp)sp.net=ans.ms-sp.run-sp.q-sp.v-(sp.ap||0);
+  const row={k,id:pick,staged:!!st,hostRan:run1-run0,ans:ans&&ans.r&&ans.r.st,ms:ans&&ans.ms,sp,text:ans&&ans.r&&ans.r.r,npc:dd(hB,hA).slice(0,8),her:Object.keys(her1).filter(x=>x!=='log'&&x!=='logs'&&her0[x]!==her1[x]).map(x=>x+':'+her0[x]+'→'+her1[x]),log:her1.log.slice(0,60)};table.push(row);
   if(!good)ok(false,'F1 '+k,{r,got,run:[run0,run1],sameW,hA:num(hA),gA:num(gA),herSame,her1,hh,flog:await G.p.evaluate(()=>COOPW.thin.F.log.slice(-4)),hlog:await H.p.evaluate(()=>COOPW.thin.F.log.slice(-4))})}
  if(!process.env.NOACT)ok(nAct>0&&nAct===nOk,`F1 every ACT kind from the guest: not run on her phone, run once on the host in her context, world + her person the same on both phones (${nOk}/${nAct}; ${kinds.length} kinds, ${table.filter(x=>x.skip).length} without a target)`);
  {const ms=table.filter(x=>typeof x.ms==='number').map(x=>x.ms).sort((a,b)=>a-b);if(ms.length)console.log('LATENCY tap→answer ms (LAG '+(+process.env.LAG||0)+', host CPU ×'+(+process.env.CPU||1)+'): n='+ms.length+' median='+ms[ms.length>>1]+' min='+ms[0]+' max='+ms[ms.length-1])}
+ {const L=table.filter(x=>x.sp&&!x.sp.tries);const med=f=>{const a=L.map(f).filter(v=>typeof v==='number').sort((a,b)=>a-b);return a.length?a[a.length>>1]:null};
+  if(L.length)console.log('LATENCY split (median ms, no resend, n='+L.length+'): total='+med(x=>x.ms)+' network(2 legs)='+med(x=>x.sp.net)+' host run='+med(x=>x.sp.run)+' host wait='+med(x=>x.sp.q)+' host view+diff+send='+med(x=>x.sp.v)+' guest apply+render='+med(x=>x.sp.ap)+' | guest pre-send='+med(x=>x.sp.pre)+' guest pending render='+med(x=>x.sp.pr))}
  console.log('ACT table:');for(const x of table)console.log(' ',JSON.stringify(x).slice(0,300));
  if(process.env.OUT){fs.mkdirSync(process.env.OUT,{recursive:true});fs.writeFileSync(path.join(process.env.OUT,`f1-acts-L${LVL}-s${SWAP}.json`),JSON.stringify(table,null,1))}
  /* F3: the old relay messages for acts are not sent at level 6 (counted on both pages during F2): res / actr / act invite / do inv */
