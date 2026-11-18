@@ -137,3 +137,8 @@ receiver-choice audit (ORDER MAIN ~21:16Z, OD 21:15Z/21:30Z; shares C-AG role-pa
 | t1-t6 B a18 c05 redo + c06-c08 (W96b; W96 archived) | handover reports/root30-* | Foreman C ROOT-30 | session_01PEhRbvpwtaXBrXr7MSPqEt | RUNNING | 18/11 21:07Z |
 | t1-t6 B a18 c13-c16 (W98c; W98b archived) | handover reports/root30-* | Foreman C ROOT-30 | session_01PEhRbvmhvjbnyXNtWvi5XK | RUNNING | 18/11 21:07Z |
 | t1-t6 B a18 c21 redo + c22-c24 (W100b; W100 archived) | handover reports/root30-* | Foreman C ROOT-30 | session_01PEhRbx2zDU43WAo2ZXCqpm | RUNNING | 18/11 21:07Z |
+| low t2/t3 NEW designs + sample (W103; owner 21:13Z) | handover reports/low-t2t3-new | Foreman C ROOT-30 | session_01PEhRbxsSGpAxbho7MFTDzu | RUNNING | 18/11 21:11Z |
+| triều phục 8-rank sample c06 (W104; owner 21:10Z) | handover reports/trieu-phuc-sample | Foreman C ROOT-30 | session_01PEhRbxVD3NfrxCcPZyYS9Q | RUNNING | 18/11 21:11Z |
+| low t1+t4-t6 c01-c04 (W105; W95 archived) | handover reports/root30-* | Foreman C ROOT-30 | session_01PEhRbx9yQMNChSMdCPkAEQ | RUNNING | 18/11 21:12Z |
+| low t1+t4-t6 c13 + c09-c12 (W106; W97/W98c archived) | handover reports/root30-* | Foreman C ROOT-30 | session_01PEhRbtzt8grnMaPJuBdsGx | RUNNING | 18/11 21:12Z |
+| low t1+t4-t6 c25-c28 (W107; W101 archived) | handover reports/root30-* | Foreman C ROOT-30 | session_01PEhRbxaGPoBTcdK9mJAmsY | RUNNING | 18/11 21:12Z |
