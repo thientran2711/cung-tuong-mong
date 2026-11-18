@@ -53,3 +53,14 @@ review/look-fx = origin/main 62a6846f (unchanged, no code). Tests: none (no code
 
 ## R2 (MAIN verdict: ink = moustache, fix 3 problems) 11/18
 Re-shot all 10 (same CDN names). ink: now ink-wash grey-black with dry-brush gaps, ONE cheek, swipe from cheekbone toward jaw, never lips/nose, 0.42/0.55/0.68 face width, opacity .6-.85, lv3 adds a small second stroke on the same cheek. Tóc xổ: strands thickened (alpha dilate) and darkened, at both temples + forehead. Móc chỉ: decal darkened + dilated, 1.2-1.7x bigger. Đậu mùa: the W15 approved face-square files are NO LONGER on the CDN (img/_review/looks-2/final-candidates/* 404; _index.json is stale), so I could not use them. Fallback: small soft rose bumps cut from the decal (desaturated, 8/16/28 bumps, mouth kept clear). MAIN: point me to the approved file if it still exists (Magnific library) and I redo it.
+
+## R3 (MAIN s43 order: STOP decal face samples; list what is NOT approved + code missing)
+Face marks use C's approved 384x384 face-square finals (looks-2-art.md FINAL TABLE; the earlier 404 was a CDN worker flake, final-candidates now 200). My decal face panels (ink, daumua, scar, muoi, bui) are SUPERSEDED, delete them with the verdict (wipe-review look-fx).
+APPROVED by owner (via C): thuy dau, dau mua, seo ro v9, muc 1-3 (+ mirrored -m), bui v10, muoi, mo hoi v14. DROPPED by owner, main does in code: lem phan (fx-smu), lanh (fx-lanh).
+NOT approved yet (my decal panels are the only thing shown, MAIN/owner verdict pending): toc xo (fx-hair-xo, R2 thickened), vuong hoa dao/la/tuyet, moc chi (fx-stain-moc, R2 bigger). No sample at all: tram lech, toc am/bet, mat do khi khoc, khoi ao grey tint (needs code first).
+CODE MISSING to draw the approved face set in game:
+1. Upload the 24 finals to img/fx-*.png (command in looks-2-art.md) after C says go.
+2. Add every key to window.LOOKS_ART in jlooks.js (empty today, lkArt() gates all). Names must match lkFaceImg: fx-<id>-<lv>.png with ids muc/bui/muoi/moho (+ fx-muc-N-m mirrored: no code picks the -m variant yet) and fx-pox-<k>-<n>.png; scar via kitScarOf wrapper jlooks.js:165.
+3. Re-measure veil-fit.json fig rows (offset about -0.30W, +0.18H on live fig files; por rows OK; FOREMAN_C_STATUS line 8). I also saw the face has to be hand-placed on figs for the same reason.
+4. Hair slots (lkhair html:"") and cloth slots (lkcloth html:"") draw nothing: hair needs a hair-fit box (body-fit KIT REQUEST); cloth waits for review/cloth-xoc drawDecalOnCloth.
+5. No code at all: tram lech, toc am/bet, mat do khi khoc, ma do/moi tai (lanh dropped, so main codes it on the makeup layer), lem phan.
