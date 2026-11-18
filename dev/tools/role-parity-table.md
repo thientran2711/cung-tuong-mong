@@ -329,64 +329,54 @@
 
 Scan: `node dev/tools/receiver-choice-scan.js` (live executors twDo / ACT[k].f / AGRUN[k], three directions). Cells: CHOICE = the receiver picks among options (her: a dialog with ≥ 2 real options; an NPC: mindPick / stf2Pick … with the receiver as chooser) · AUTO = the receiver is forced · n/a = not reached in the probe. Verdict: SAME · ASYM (law 1 gap) · FORCED (asked / proposed / ordered and nobody can say no: 21:15Z gap) · OK (done-to / covert: no answer at the moment on either side). Open gaps: role-parity-open.json role «receiver».
 
+Round 3 (D #4 fixer, review FAIL 6): AFTER = this branch (review/receiver-choice). New rows: srv:<act> = the OWN SERVANT the doer orders (j29 runAct DIRTY + DIRTY_SENT → jagstf2 stf2Ord; her seat as the ordered servant is the maid road, parallel-time) · JUDGE = a third person asked to decide (xinhh / trinhhh: she as the Hoàng hậu gets the card; trinhth / takeaway / cx4 man*: NPC-only seats). «—» = the row was not probed before (unclassified acts used to fall to DONE). Every one of the 267 live act keys is now classified (unclassified: 0). AFTER totals: {"OK": 63, "SAME": 34} · gaps 0.
+
 | act | kind | she receives BEFORE → AFTER | NPC receives BEFORE → AFTER | NPC↔NPC | verdict BEFORE → AFTER |
 |---|---|---|---|---|---|
-| act:tieuhuy «Trả chứng cứ lấy lòng» | COVERT | AUTO → AUTO | AUTO → AUTO | n/a → n/a | OK → OK |
+| act:laydo «Sai người lấy trộm đồ» | COVERT | AUTO → n/a | AUTO → AUTO | AUTO → n/a | OK → OK |
+| act:tieuhuy «Trả chứng cứ lấy lòng» | COVERT | AUTO → n/a | AUTO → AUTO | n/a → n/a | OK → OK |
 | ag:cx2:chest «Lục rương tìm chứng cứ» | COVERT | AUTO → AUTO | AUTO → AUTO | AUTO → AUTO | OK → OK |
-| ag:cx2:plantSrv «Cài người vào cung khác» | COVERT | AUTO → AUTO | n/a → n/a | AUTO → AUTO | OK → OK |
+| ag:cx2:plantSrv «Cài người vào cung khác» | COVERT | AUTO → AUTO | n/a → AUTO | AUTO → AUTO | OK → OK |
+| ag:cx4:rougeSteal  | COVERT | — → AUTO | — → AUTO | — → AUTO | — → OK |
 | tw:gossip «Rỉ tai chuyện trong cung» | COVERT | n/a → n/a | AUTO → AUTO | n/a → n/a | OK → OK |
-| act:accuse «Tố giác» | DONE | AUTO → AUTO | AUTO → AUTO | n/a → n/a | OK → OK |
-| act:banphe «Bán cho phe khác» | DONE | AUTO → AUTO | AUTO → AUTO | AUTO → AUTO | OK → OK |
+| act:accuse «Tố giác» | DONE | AUTO → n/a | AUTO → AUTO | n/a → n/a | OK → OK |
+| act:banphe «Bán cho phe khác» | DONE | AUTO → n/a | AUTO → AUTO | AUTO → AUTO | OK → OK |
 | act:batnat «Ép nộp của» | DONE | AUTO → AUTO | n/a → n/a | n/a → n/a | OK → OK |
-| act:block «Rút thẻ bài» | DONE | AUTO → AUTO | AUTO → AUTO | AUTO → AUTO | OK → OK |
+| act:block «Rút thẻ bài» | DONE | AUTO → AUTO | AUTO → AUTO | AUTO → n/a | OK → OK |
 | act:expose «Bóc chuyện tư tình» | DONE | — → n/a | — → AUTO | — → n/a | — → OK |
-| act:huydung «Hủy dung» | DONE | AUTO → AUTO | AUTO → AUTO | AUTO → AUTO | OK → OK |
-| act:ink «Quạt mực» | DONE | AUTO → AUTO | AUTO → AUTO | AUTO → AUTO | OK → OK |
+| act:huydung «Hủy dung» | DONE | AUTO → AUTO | AUTO → AUTO | AUTO → n/a | OK → OK |
+| act:ink «Quạt mực» | DONE | AUTO → n/a | AUTO → AUTO | AUTO → AUTO | OK → OK |
 | act:kpoison «Hạ độc con nàng» | DONE | n/a → n/a | AUTO → AUTO | AUTO → AUTO | OK → OK |
 | act:ksab «Phá việc học» | DONE | n/a → n/a | AUTO → AUTO | AUTO → AUTO | OK → OK |
-| act:laydo «Sai người lấy trộm đồ» | DONE | AUTO → AUTO | AUTO → AUTO | AUTO → AUTO | OK → OK |
-| act:laydol «Sai cung nữ thân tín lấy đồ» | DONE | AUTO → AUTO | AUTO → AUTO | AUTO → AUTO | OK → OK |
 | act:lygian «Ly gián» | DONE | AUTO → AUTO | AUTO → AUTO | AUTO → AUTO | OK → OK |
 | act:musk «Bỏ xạ hương» | DONE | AUTO → AUTO | n/a → n/a | n/a → n/a | OK → OK |
-| act:nuoc «Hắt nước» | DONE | AUTO → AUTO | AUTO → AUTO | AUTO → AUTO | OK → OK |
+| act:nuoc «Hắt nước» | DONE | AUTO → n/a | AUTO → AUTO | AUTO → AUTO | OK → OK |
 | act:phatquy «Phạt quỳ» | DONE | AUTO → AUTO | n/a → n/a | n/a → n/a | OK → OK |
 | act:phonghoa «Phóng hỏa kho đồ» | DONE | AUTO → AUTO | n/a → n/a | n/a → n/a | OK → OK |
-| act:pond «Đẩy con nàng xuống hồ» | DONE | n/a → n/a | AUTO → AUTO | n/a → n/a | OK → OK |
-| act:rash «Bỏ phấn lạ» | DONE | AUTO → AUTO | AUTO → AUTO | AUTO → AUTO | OK → OK |
+| act:pond «Đẩy con nàng xuống hồ» | DONE | n/a → n/a | AUTO → AUTO | n/a → AUTO | OK → OK |
+| act:rash «Bỏ phấn lạ» | DONE | AUTO → AUTO | AUTO → AUTO | AUTO → n/a | OK → OK |
 | act:rumor «Tung tin đồn» | DONE | AUTO → AUTO | AUTO → AUTO | AUTO → AUTO | OK → OK |
 | act:spyk «Tự đi dò la» | DONE | AUTO → AUTO | AUTO → AUTO | AUTO → AUTO | OK → OK |
-| act:takeaway «Xin bế con nàng về nuôi» | DONE | n/a → — | AUTO → — | n/a → — | OK → — |
-| act:tea «Hắt trà» | DONE | AUTO → AUTO | AUTO → AUTO | AUTO → AUTO | OK → OK |
-| act:thathu «Thả thú dữ làm hại dung nhan» | DONE | AUTO → AUTO | AUTO → AUTO | AUTO → AUTO | OK → OK |
+| act:tea «Hắt trà» | DONE | AUTO → n/a | AUTO → AUTO | AUTO → AUTO | OK → OK |
+| act:thathu «Thả thú dữ làm hại dung nhan» | DONE | AUTO → AUTO | AUTO → n/a | AUTO → n/a | OK → OK |
 | act:tocao «Tố tội thật» | DONE | AUTO → AUTO | AUTO → AUTO | AUTO → AUTO | OK → OK |
-| act:trinhhh «Trình Hoàng hậu» | DONE | AUTO → AUTO | AUTO → AUTO | n/a → n/a | OK → OK |
-| act:trinhth «Trình Thái hậu» | DONE | AUTO → AUTO | AUTO → AUTO | AUTO → n/a | OK → OK |
-| act:trip «Ngáng chân» | DONE | — → n/a | — → n/a | — → AUTO | — → OK |
 | act:uyhiep «Uy hiếp đòi bạc» | DONE | AUTO → AUTO | AUTO → AUTO | n/a → n/a | OK → OK |
 | act:vp «Hặc ăn mặc sai phẩm» | DONE | AUTO → AUTO | AUTO → AUTO | AUTO → AUTO | OK → OK |
-| act:xinhh «Xin Hoàng hậu giáng» | DONE | n/a → n/a | AUTO → AUTO | AUTO → AUTO | OK → OK |
-| act:xx «Tố xa xỉ» | DONE | n/a → n/a | AUTO → AUTO | AUTO → AUTO | OK → OK |
-| ag:cx2:kidGreet «Đưa con đến thỉnh an Hoàng thượng» | DONE | n/a → AUTO | AUTO → n/a | n/a → n/a | OK → OK |
-| ag:cx3:facLeave «Rời phe» | DONE | AUTO → — | n/a → — | AUTO → — | OK → — |
+| act:xx «Tố xa xỉ» | DONE | n/a → AUTO | AUTO → AUTO | AUTO → AUTO | OK → OK |
+| ag:cx:humble  | DONE | AUTO → AUTO | AUTO → AUTO | AUTO → AUTO | OK → OK |
 | ag:cx3:search «Chưởng sự tra xét cung nữ» | DONE | AUTO → AUTO | n/a → n/a | n/a → n/a | OK → OK |
 | ag:cx3:staffHoi «Hỏi chuyện» | DONE | AUTO → AUTO | n/a → n/a | AUTO → AUTO | OK → OK |
-| ag:cx3:staffTam «Tâm sự» | DONE | — → AUTO | — → n/a | — → n/a | — → OK |
-| ag:cx3:staffThuong «Thưởng» | DONE | — → AUTO | — → n/a | — → AUTO | — → OK |
+| ag:cx3:staffThuong «Thưởng» | DONE | — → AUTO | — → n/a | — → n/a | — → OK |
 | ag:cx3:talkGossip «Bàn tán về» | DONE | AUTO → AUTO | AUTO → AUTO | AUTO → AUTO | OK → OK |
 | ag:cx3:talkHealth «Hỏi han sức khỏe» | DONE | AUTO → AUTO | AUTO → AUTO | AUTO → AUTO | OK → OK |
 | ag:cx3:talkPraise «Khen tài nghệ nàng» | DONE | AUTO → AUTO | AUTO → AUTO | AUTO → AUTO | OK → OK |
 | ag:cx3:talkSecret «Chia sẻ bí mật» | DONE | AUTO → AUTO | AUTO → AUTO | AUTO → AUTO | OK → OK |
-| ag:cx3:teachD «Dạy lễ nghi» | DONE | — → — | — → — | — → — | — → — |
-| ag:cx3:teachV «học chữ» | DONE | — → — | — → — | — → — | — → — |
 | ag:cx3:tell «Kể tội» | DONE | AUTO → AUTO | AUTO → AUTO | AUTO → AUTO | OK → OK |
 | ag:cx3:use «Dùng» | DONE | n/a → n/a | AUTO → AUTO | n/a → n/a | OK → OK |
-| ag:cx:humble | DONE | AUTO → AUTO | AUTO → AUTO | AUTO → AUTO | OK → OK |
-| ag:emp:tea | DONE | AUTO → AUTO | AUTO → AUTO | AUTO → AUTO | OK → OK |
-| ag:hh:conf | DONE | AUTO → AUTO | n/a → n/a | n/a → n/a | OK → OK |
-| ag:hh:cutpay | DONE | AUTO → AUTO | n/a → n/a | n/a → n/a | OK → OK |
-| ag:hh:judge | DONE | — → AUTO | — → n/a | — → n/a | — → OK |
-| ag:th:admon | DONE | AUTO → AUTO | AUTO → AUTO | AUTO → AUTO | OK → OK |
-| tw:apol «Tạ lỗi» | DONE | n/a → — | AUTO → — | n/a → — | OK → — |
+| ag:cx4:manCut  | DONE | — → n/a | — → AUTO | — → n/a | — → OK |
+| ag:hh:conf  | DONE | AUTO → AUTO | n/a → n/a | n/a → n/a | OK → OK |
+| ag:hh:cutpay  | DONE | AUTO → AUTO | n/a → n/a | n/a → n/a | OK → OK |
+| ag:th:admon  | DONE | AUTO → AUTO | AUTO → AUTO | AUTO → AUTO | OK → OK |
 | tw:check «Soát quà được tặng» | DONE | n/a → n/a | AUTO → AUTO | n/a → n/a | OK → OK |
 | tw:fakeIll «Giả bệnh» | DONE | n/a → n/a | AUTO → AUTO | n/a → n/a | OK → OK |
 | tw:fakePreg «Giả mang thai» | DONE | n/a → n/a | AUTO → AUTO | n/a → n/a | OK → OK |
@@ -396,27 +386,47 @@ Scan: `node dev/tools/receiver-choice-scan.js` (live executors twDo / ACT[k].f /
 | tw:ksp «Đút lót lật thẻ» | DONE | n/a → n/a | AUTO → AUTO | n/a → n/a | OK → OK |
 | tw:pray «Cầu tự ở Phụng Tiên điện» | DONE | n/a → n/a | AUTO → AUTO | n/a → n/a | OK → OK |
 | tw:provoke «Khiêu khích» | DONE | n/a → n/a | AUTO → AUTO | n/a → n/a | OK → OK |
-| tw:test «Thử lòng» | DONE | n/a → — | AUTO → — | n/a → — | OK → — |
 | tw:thHH «Thỉnh an» | DONE | n/a → n/a | AUTO → AUTO | n/a → n/a | OK → OK |
 | tw:thTH «Thỉnh an, chép kinh» | DONE | n/a → n/a | AUTO → AUTO | n/a → n/a | OK → OK |
 | tw:warn «Cảnh báo nàng» | DONE | n/a → n/a | AUTO → AUTO | n/a → n/a | OK → OK |
+| ag:cx:gift  | GIFT | CHOICE → CHOICE | AUTO → CHOICE | AUTO → CHOICE | ASYM → SAME |
 | ag:cx3:petcare «Giúp chăm thú nuôi của nàng» | GIFT | AUTO → n/a | AUTO → AUTO | AUTO → n/a | FORCED → OK |
-| ag:cx:gift | GIFT | CHOICE → CHOICE | AUTO → CHOICE | AUTO → CHOICE | ASYM → SAME |
-| ag:hh:reward | GIFT | AUTO → AUTO | n/a → n/a | n/a → n/a | FORCED → OK |
-| ag:th:gift | GIFT | AUTO → AUTO | AUTO → AUTO | AUTO → AUTO | FORCED → OK |
+| ag:cx3:staffUp «Tiến cử» | GIFT | AUTO → AUTO | n/a → n/a | n/a → AUTO | FORCED → OK |
+| ag:hh:reward  | GIFT | AUTO → AUTO | n/a → n/a | n/a → n/a | FORCED → OK |
+| ag:th:gift  | GIFT | AUTO → AUTO | AUTO → AUTO | AUTO → AUTO | FORCED → OK |
 | tw:help «Giúp đỡ nàng» | GIFT | n/a → n/a | AUTO → AUTO | n/a → n/a | FORCED → OK |
-| ag:emp:summon | ORDER | CHOICE → CHOICE | AUTO → CHOICE | AUTO → CHOICE | ASYM → SAME |
-| ag:emp:visit | ORDER | n/a → n/a | AUTO → CHOICE | n/a → CHOICE | FORCED → SAME |
+| act:trinhhh «Trình Hoàng hậu» | JUDGE | AUTO → CHOICE | AUTO → CHOICE | n/a → CHOICE | OK → SAME |
+| act:trinhth «Trình Thái hậu» | JUDGE | AUTO → AUTO | AUTO → AUTO | AUTO → n/a | OK → OK |
+| act:xinhh «Xin Hoàng hậu giáng» | JUDGE | n/a → n/a | AUTO → CHOICE | AUTO → CHOICE | OK → SAME |
+| srv:bribe «Mua chuộc cung nữ» | ORDER | — → n/a | — → CHOICE | — → CHOICE | — → SAME |
+| srv:bribel «Sai cung nữ thân tín lấy lòng» | ORDER | — → n/a | — → CHOICE | — → CHOICE | — → SAME |
+| srv:catswap «Mua chuộc bà đỡ» | ORDER | — → n/a | — → CHOICE | — → CHOICE | — → SAME |
+| srv:frame «Vu oan» | ORDER | — → n/a | — → CHOICE | — → CHOICE | — → SAME |
+| srv:giahoa «Giá họa trộm đồ» | ORDER | — → n/a | — → CHOICE | — → CHOICE | — → SAME |
+| srv:kframe «Vu con nàng trù ẻo» | ORDER | — → n/a | — → CHOICE | — → CHOICE | — → SAME |
+| srv:kpoison «Hạ độc con nàng» | ORDER | — → n/a | — → CHOICE | — → CHOICE | — → SAME |
+| srv:ksab «Phá việc học» | ORDER | — → n/a | — → CHOICE | — → CHOICE | — → SAME |
+| srv:laydo «Sai người lấy trộm đồ» | ORDER | — → n/a | — → CHOICE | — → CHOICE | — → SAME |
+| srv:laydol «Sai cung nữ thân tín lấy đồ» | ORDER | — → n/a | — → CHOICE | — → CHOICE | — → SAME |
+| srv:musk «Bỏ xạ hương» | ORDER | — → n/a | — → CHOICE | — → CHOICE | — → SAME |
+| srv:plant «Cài đồ vào rương» | ORDER | — → n/a | — → CHOICE | — → CHOICE | — → SAME |
+| srv:poison «Hạ độc» | ORDER | — → n/a | — → CHOICE | — → CHOICE | — → SAME |
+| srv:pond «Đẩy con nàng xuống hồ» | ORDER | — → n/a | — → CHOICE | — → CHOICE | — → SAME |
+| srv:pushp «Đẩy xuống hồ sen» | ORDER | — → n/a | — → CHOICE | — → CHOICE | — → SAME |
+| srv:steal «Tranh sủng» | ORDER | — → n/a | — → CHOICE | — → CHOICE | — → SAME |
+| srv:takeaway «Xin bế con nàng về nuôi» | ORDER | — → n/a | — → CHOICE | — → CHOICE | — → SAME |
+| srv:vp «Hặc ăn mặc sai phẩm» | ORDER | — → n/a | — → CHOICE | — → CHOICE | — → SAME |
+| srv:xx «Tố xa xỉ» | ORDER | — → n/a | — → CHOICE | — → CHOICE | — → SAME |
 | act:ally «Kết giao» | PROP | — → CHOICE | — → CHOICE | — → CHOICE | — → SAME |
+| ag:cx:ally  | PROP | AUTO → CHOICE | AUTO → CHOICE | AUTO → CHOICE | FORCED → SAME |
 | ag:cx3:facFound «Lập phe cùng» | PROP | AUTO → CHOICE | n/a → CHOICE | AUTO → CHOICE | FORCED → SAME |
-| ag:cx3:invite2 «Mời đến cung ta» | PROP | AUTO → AUTO | AUTO → AUTO | AUTO → AUTO | FORCED → FORCED |
-| ag:cx:ally | PROP | AUTO → CHOICE | AUTO → CHOICE | AUTO → CHOICE | FORCED → SAME |
-| ag:see:mediate | PROP | n/a → n/a | AUTO → CHOICE | n/a → n/a | FORCED → SAME |
+| ag:cx3:invite2 «Mời đến cung ta» | PROP | AUTO → CHOICE | AUTO → CHOICE | AUTO → CHOICE | FORCED → SAME |
+| ag:cx4:manToken  | PROP | — → n/a | — → AUTO | — → n/a | — → OK |
+| ag:see:mediate  | PROP | n/a → CHOICE | AUTO → CHOICE | n/a → CHOICE | FORCED → SAME |
 | tw:call «Ghé chơi» | PROP | AUTO → CHOICE | AUTO → CHOICE | AUTO → CHOICE | FORCED → SAME |
 | act:blockf «Nhờ ơn người quen rút thẻ bài» | REQ | AUTO → CHOICE | AUTO → CHOICE | n/a → CHOICE | FORCED → SAME |
 | act:bribe «Mua chuộc cung nữ» | REQ | AUTO → CHOICE | AUTO → CHOICE | AUTO → CHOICE | FORCED → SAME |
-| act:bribel «Sai cung nữ thân tín lấy lòng» | REQ | n/a → AUTO | n/a → AUTO | AUTO → AUTO | FORCED → FORCED |
+| act:bribel «Sai cung nữ thân tín lấy lòng» | REQ | n/a → CHOICE | n/a → CHOICE | AUTO → CHOICE | FORCED → SAME |
 | ag:cx2:bribeSrv «Mua chuộc» | REQ | AUTO → CHOICE | AUTO → CHOICE | AUTO → CHOICE | FORCED → SAME |
 | ag:cx2:help «Nhờ giúp đỡ» | REQ | n/a → CHOICE | AUTO → CHOICE | AUTO → CHOICE | FORCED → SAME |
-| ag:cx3:facJoin «Xin vào phe» | REQ | n/a → — | n/a → — | AUTO → — | FORCED → — |
-| ag:cx3:staffUp «Tiến cử» | REQ | AUTO → AUTO | n/a → n/a | n/a → AUTO | FORCED → FORCED |
+| ag:cx4:rougeBorrow  | REQ | — → CHOICE | — → CHOICE | — → CHOICE | — → SAME |
