@@ -6,7 +6,7 @@
 | NPC LANDER #6 (opus; ag-all-2-land + npc-chain-land) | review/ag-all-2-land, review/npc-chain-land | C-AG #12 | session_01UV1SzgbHcTuGMRy7HBkdcc | RUNNING | 18/11 13:35Z |
 | REVIEW AG LATER #3 (opus BIG reviewer; ag-all-2-land + npc-chain-land + ag2-perf) | review/ag-all-2-land, review/npc-chain-land | C-AG #12 | session_01UV1SziGFScPvg84cnnNiFu | RUNNING | 18/11 13:39Z |
 shown-odds-one-path | review/shown-odds-one-path | session_01964izErPfcSMFt3TCCHZbd | LIVE a2ce736a (worker archived) | 18/11 13:52Z | owner D #1
-| E11a | session_01DgYSWmGi5DMjQqQpadvKCr | review/ge-writers-w1 (jgedata_w1.js) | GE writers W1 tt/dtq/muoi | Foreman E | 18/11 13:52Z |
+| E11a | session_01DgYSWmGi5DMjQqQpadvKCr | review/ge-writers-w1 (jgedata_w1.js) | GE writers W1 tt/dtq/muoi — READY a58b55eb (reports/ge-writers-w1.md) | Foreman E | 18/11 13:52Z |
 | E11b | session_01DgYSWpWi1g7SyTG9ZiYekG | review/ge-writers-w2 (jgedata_w2.js) | GE writers W2 cn/nc/td | Foreman E | 18/11 13:52Z |
 | AG-DEED-PERF (opus; follow-up perf, outcome-identical) | review/ag-deed-perf | C-AG #12 | session_01UV1SzjwvRPnDTMQuN3wnw9 | RUNNING | 18/11 14:10Z |
 shown-odds-one-path-rv | review/shown-odds-one-path-rv | session_01964izEojRf2ME8Lmxpkd5x | LIVE a2ce736a (archived) | 18/11 14:20Z | owner D #1
