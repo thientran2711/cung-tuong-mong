@@ -1002,7 +1002,7 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | OWNER UI BUG place-banner (count icon missing, chip on chip, banner covers head/ornament; options A/B/C; sonnet; brief briefs/place-banner.md) | review/place-banner | MAIN s42 | session_01UV1SzmHEoDtWWruq6yMGnZ | RUNNING | 18/11 01:49Z |
 | OWNER UI BUG opt-card-short (option cards too tall: stretched picture, long notes; options A/B/C; sonnet; brief briefs/opt-card-short.md) | review/opt-card-short | MAIN s42 | session_01UV1Szk6j15PHjAL8gMSR9z | RUNNING | 18/11 01:58Z |
 | REVIEW men-forbidden 13286b4 (opus BIG; brief briefs/review-men-forbidden.md) | review/men-forbidden | MAIN s42 | session_01UV1Szh3jq9brqAHDsVQitM | RUNNING | 18/11 02:01Z |
-| OWNER UI BUG result-reason (result card lines need short WHY; whole group; sonnet; brief briefs/result-reason.md) | review/result-reason | MAIN s42 | session_01UV1SzirzUecQTMVipMrcQ1 | RUNNING | 18/11 02:07Z |
+| OWNER UI BUG result-reason (result card lines need short WHY; whole group; sonnet; brief briefs/result-reason.md) | review/result-reason | MAIN s42 | session_01UV1SzirzUecQTMVipMrcQ1 | SẴN SÀNG KIỂM 0db60e0e | 18/11 02:07Z |
 | CAL PREVIEW (sonnet; s42 order 02:04Z): ag-all-2-land on Cloudflare Pages, ?hieuchuan=1 | (deploy only) | C-AG | session_01UV1SzgwDRVVjeacdPPtR47 | RUNNING | 18/11 02:05Z |
 | REVIEW greet-stranger 54431a1 (sonnet; brief briefs/review-greet-stranger.md) | review/greet-stranger | MAIN s42 | (opening) | RUNNING | 18/11 02:10Z |
 | LOOK FX SAMPLES (face/hair/small cloth marks; full-body panels for owner; sonnet; brief briefs/look-fx-samples.md) | review/look-fx | MAIN s42 | session_01UV1SzhzDHZiWyYW2YZdA9A | REPORT READY (reports/look-fx-samples.md) | 18/11 02:14Z |
