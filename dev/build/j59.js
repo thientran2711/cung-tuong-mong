@@ -186,7 +186,9 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  const KA=st.__kfa;/* KIT_FLOOR anchor (jk2b kitFloorFit): feet on the painted floor line while the figure keeps its kit height */
  let capOn=(()=>{try{return kitView().pages===2}catch(e){return true}})();/* KIT §33 (canon): the maxPx cap applies to iPad-wide layouts only; Fold / phones keep the full .79 of their taller stage *//* KIT §0: the left page in the spread and the one-page room are the same page */
  let FOX=0;/* fig-tag-chip: floor band the wrapped name tags need (phones: a long rank/plate/name wraps to 4-5 lines) */
- const size=()=>{const fo=Math.max(kitSlotFloor(sH),FOX);/* KIT 33.12 fixed slot table: ONE floor line per stage height (no name-chip or painted-floor shift), so a person snaps to the same x AND y on every stage / place / room */CAP=sH-fo-topR;return{fo,H:Math.max(sH*.2,Math.min(KF.h*sH,CAP,(KF.maxPx&&capOn)?KF.maxPx:1e9))}};
+ /* owner 18/11 ~03:5xZ: her marker's whole bounce range stays INSIDE the stage frame: her picture top (the marker stands on it) keeps kitMeMarkRoom px under the frame top; every figure shares the ONE H, so a tall stage shrinks all just enough */
+ const meCap=fo=>{try{if(!me||!mb||!window.kitMeMarkRoom)return 1e9;return (sH-fo-kitMeMarkRoom(KF.h*sH*1.07))*(mb.b-j59bt(mb))}catch(e){return 1e9}};
+ const size=()=>{const fo=Math.max(kitSlotFloor(sH),FOX);/* KIT 33.12 fixed slot table: ONE floor line per stage height (no name-chip or painted-floor shift), so a person snaps to the same x AND y on every stage / place / room */CAP=sH-fo-topR;return{fo,H:Math.max(sH*.2,Math.min(KF.h*sH,CAP,meCap(fo),(KF.maxPx&&capOn)?KF.maxPx:1e9))}};
  const maxF=Math.max(1,...F.map(x=>x.f));
  const widthFor=(z)=>{let rr=rightR;try{const kR=document.getElementById("kshR");const head=sH-z.fo-Math.min(z.H*maxF,sH-z.fo-topR);/* the right plaque column (court chips, maid, Ân sủng) is reserved when it reaches down to the heads: no face or name is ever under it
     (coordinator 11/15, supersedes "may stand under it"); a column that ends above the heads leaves the full width. Compact stages

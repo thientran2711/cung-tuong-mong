@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"6bfd975e+","t":"2026-11-18T03:40Z","c":"place-stage: entry lines as the tin-bao toast (#ktbtoast.ktbt twin); j59hdrCount off; scan toasts","b":"247daecbc316","h":[{"s":"2b1b0701","t":"2026-11-18T03:00Z","c":"review staff-cap-apply r6: site rebuilt on db24027f"},{"s":"64488e4f+","t":"2026-11-18T02:38Z","c":"cloth-xoc r6e: rebuild site"},{"s":"af71f94a+","t":"2026-11-18T02:17Z","c":"smudge r16: stage4 + avatar probe tests, options script score fix (look tier by score), FINAL mode"},{"s":"e1f60927+","t":"2026-11-18T02:25Z","c":"result-reason: every result card line says a short why (kitWhy, KIT 7); values left-aligned next to labels"},{"s":"29385ec6+","t":"2026-11-18T02:07Z","c":"greet-stranger: site rebuilt"},{"s":"3b69182e","t":"2026-11-18T01:50Z","c":"hoa-dien r3 onto main 3da5720a (makeup-lux live): hoa-dien (jhd.js + hooks) replayed on the new main, replacing the old stacked branch. Sha…"},{"s":"631a703e","t":"2026-11-18T01:37Z","c":"review staff-cap-fix r6: hire pick refused at the cap gives the silver back (+ staff-cap.js case); site rebuilt"},{"s":"4cdcffa9+","t":"2026-11-18T00:44Z","c":"review looks-s40: site rebuilt from merged sources (glow v8)"},{"s":"eb3675a6+","t":"2026-11-17T22:59Z","c":"review coop-thin-c r1 #2: merge origin/main b048e495 (kit-display-room r2, jdisp/jshelf only; generated files from main + site rebuilt)"},{"s":"4eac30bc+","t":"2026-11-17T22:57Z","c":"review coop-thin-c r1 #2: her NPC pack resend (F1) listens on any guest seat, not only while the C switch is on: a level drop / build hold …"}]};
+window.CTM_BI={"s":"9e35fc49+","t":"2026-11-18T03:49Z","c":"place-stage r2: entry toast 5 s (BAL.entryToastMs), figures down (KIT_SLOTS.band 46, top 34), scan tagBottomGap/headTopMin","b":"9c3464658d66","h":[{"s":"2b1b0701","t":"2026-11-18T03:00Z","c":"review staff-cap-apply r6: site rebuilt on db24027f"},{"s":"64488e4f+","t":"2026-11-18T02:38Z","c":"cloth-xoc r6e: rebuild site"},{"s":"af71f94a+","t":"2026-11-18T02:17Z","c":"smudge r16: stage4 + avatar probe tests, options script score fix (look tier by score), FINAL mode"},{"s":"e1f60927+","t":"2026-11-18T02:25Z","c":"result-reason: every result card line says a short why (kitWhy, KIT 7); values left-aligned next to labels"},{"s":"29385ec6+","t":"2026-11-18T02:07Z","c":"greet-stranger: site rebuilt"},{"s":"3b69182e","t":"2026-11-18T01:50Z","c":"hoa-dien r3 onto main 3da5720a (makeup-lux live): hoa-dien (jhd.js + hooks) replayed on the new main, replacing the old stacked branch. Sha…"},{"s":"631a703e","t":"2026-11-18T01:37Z","c":"review staff-cap-fix r6: hire pick refused at the cap gives the silver back (+ staff-cap.js case); site rebuilt"},{"s":"4cdcffa9+","t":"2026-11-18T00:44Z","c":"review looks-s40: site rebuilt from merged sources (glow v8)"},{"s":"eb3675a6+","t":"2026-11-17T22:59Z","c":"review coop-thin-c r1 #2: merge origin/main b048e495 (kit-display-room r2, jdisp/jshelf only; generated files from main + site rebuilt)"},{"s":"4eac30bc+","t":"2026-11-17T22:57Z","c":"review coop-thin-c r1 #2: her NPC pack resend (F1) listens on any guest seat, not only while the C switch is on: a level drop / build hold …"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -8155,7 +8155,9 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  const KA=st.__kfa;/* KIT_FLOOR anchor (jk2b kitFloorFit): feet on the painted floor line while the figure keeps its kit height */
  let capOn=(()=>{try{return kitView().pages===2}catch(e){return true}})();/* KIT §33 (canon): the maxPx cap applies to iPad-wide layouts only; Fold / phones keep the full .79 of their taller stage *//* KIT §0: the left page in the spread and the one-page room are the same page */
  let FOX=0;/* fig-tag-chip: floor band the wrapped name tags need (phones: a long rank/plate/name wraps to 4-5 lines) */
- const size=()=>{const fo=Math.max(kitSlotFloor(sH),FOX);/* KIT 33.12 fixed slot table: ONE floor line per stage height (no name-chip or painted-floor shift), so a person snaps to the same x AND y on every stage / place / room */CAP=sH-fo-topR;return{fo,H:Math.max(sH*.2,Math.min(KF.h*sH,CAP,(KF.maxPx&&capOn)?KF.maxPx:1e9))}};
+ /* owner 18/11 ~03:5xZ: her marker's whole bounce range stays INSIDE the stage frame: her picture top (the marker stands on it) keeps kitMeMarkRoom px under the frame top; every figure shares the ONE H, so a tall stage shrinks all just enough */
+ const meCap=fo=>{try{if(!me||!mb||!window.kitMeMarkRoom)return 1e9;return (sH-fo-kitMeMarkRoom(KF.h*sH*1.07))*(mb.b-j59bt(mb))}catch(e){return 1e9}};
+ const size=()=>{const fo=Math.max(kitSlotFloor(sH),FOX);/* KIT 33.12 fixed slot table: ONE floor line per stage height (no name-chip or painted-floor shift), so a person snaps to the same x AND y on every stage / place / room */CAP=sH-fo-topR;return{fo,H:Math.max(sH*.2,Math.min(KF.h*sH,CAP,meCap(fo),(KF.maxPx&&capOn)?KF.maxPx:1e9))}};
  const maxF=Math.max(1,...F.map(x=>x.f));
  const widthFor=(z)=>{let rr=rightR;try{const kR=document.getElementById("kshR");const head=sH-z.fo-Math.min(z.H*maxF,sH-z.fo-topR);/* the right plaque column (court chips, maid, Ân sủng) is reserved when it reaches down to the heads: no face or name is ever under it
     (coordinator 11/15, supersedes "may stand under it"); a column that ends above the heads leaves the full width. Compact stages
@@ -44579,7 +44581,7 @@ if(typeof j76sucWhy==="function"){j76sucWhy=function(c){if(!S||S.dead||c<=1||win
    ITEMS: markers are owned items (S.meMarks = ranks owned; S.meMark = the one she shows, null = highest owned). Every promotion gives that rank's
    marker (shown in the rank chest of review/gift-chest — jrankset rsChest/kitReward kind "chest" — via the hook below); old saves get every rank
    up to the current one on load. Tư trang has a "Dấu ấn" tab; tapping a marker → "Dùng" switches to it (any owned one, older ones too). ===== */
-window.KIT_MEMARK=window.KIT_MEMARK||{h:.085,gap:.012,min:26,max:72,tiny:12,big:1.05,sc:[.78,.84,.9,.95,1,1.06,1.14,1.22]};
+window.KIT_MEMARK=window.KIT_MEMARK||{h:.085,gap:.012,min:26,max:72,tiny:12,big:1.05,bob:11,edge:4,/* bob = the bounce height of kmmBob (px up from rest, +3 % squash); edge = air kept under the frame's top edge (owner 18/11 ~03:5xZ: the marker's whole bounce range stays INSIDE the stage frame) */sc:[.78,.84,.9,.95,1,1.06,1.14,1.22]};
 const KMM_NAMES=["Mai ngà","Lan bạc ngọc bích","Hoa bạc ngọc lam","Búp sen ngọc","Cúc tím chim loan","Mẫu đơn hồng ngọc","Phượng vàng mây ngọc","Cánh phượng hổ phách"];
 /* ---------- owned markers (save data) ---------- */
 function kmmRankNow(){try{if(!S||S.out)return null;if(typeof isSrv==="function"&&isSrv())return null;return Math.max(0,Math.min(7,S.rank|0))}catch(e){return null}}
@@ -44587,6 +44589,8 @@ function kmmOwned(){try{if(!S)return[];const r=kmmRankNow();if(!Array.isArray(S.
  else if(r!=null&&!S.meMarks.includes(r)){for(let i=0;i<=r;i++)if(!S.meMarks.includes(i))S.meMarks.push(i)}S.meMarks.sort((a,b)=>a-b);return S.meMarks}catch(e){return[]}}
 function kmmCur(){const L=kmmOwned();if(!L.length)return null;const c=S.meMark;return c!=null&&L.includes(c)?c:L[L.length-1]}
 function kmmSrc(r){return `https://ctm-img.victoria-tntt.workers.dev/img/kit/me-mark-${r}.webp`}
+/* room the stage must keep above her head for the marker's whole bounce (j59 floors topR with it; a taller figure shrinks just enough) */
+window.kitMeMarkRoom=function(bh){try{const r=kmmCur();if(r==null)return 0;const K=KIT_MEMARK,sc=K.sc[r]||1;const H=Math.round(Math.max(K.min*sc,Math.min(K.max*sc,bh*K.h*sc))*(K.big||1));return Math.ceil(H*1.03+bh*K.gap+K.bob+(K.edge||0))}catch(e){return 0}};
 window.kitMeMarkUse=function(r){const L=kmmOwned();if(!L.includes(r))return false;S.meMark=r;kmmSched();return true};
 /* ---------- head measurement (once per picture) ---------- */
 const KMM_HEAD={};
@@ -44619,7 +44623,7 @@ function kitMeMark(fig){try{
  const cx=B.bx+B.bw*hd.x,headTop=B.by+B.bh*hd.t,gap=Math.max(1,B.bh*K.gap),bottom=headTop-gap;
  /* room above the head: the host's top edge, and anything the marker must not cover (scene title, plaques, chips) */
  /* dialogs: the room above the figure is the figure column (the free space over the head inside the dialog), not just the figure box */
- let roomTop=hr.top+1;const col=fig.id==="mefig"?null:fig.closest(".kesf");if(col){const cb=(col.parentElement||col).getBoundingClientRect();roomTop=Math.min(roomTop,cb.top+2)}for(const q of kmmAvoid()){const W=H*ar;if(cx+W/2>q.left&&cx-W/2<q.right&&q.bottom<=bottom&&q.bottom>roomTop-1)roomTop=Math.max(roomTop,q.bottom+1)}
+ let roomTop=hr.top+1+K.bob+(K.edge||0);const col=fig.id==="mefig"?null:fig.closest(".kesf");if(col){const cb=(col.parentElement||col).getBoundingClientRect();roomTop=Math.min(roomTop,cb.top+2)}for(const q of kmmAvoid()){const W=H*ar;if(cx+W/2>q.left&&cx-W/2<q.right&&q.bottom<=bottom&&q.bottom>roomTop-1)roomTop=Math.max(roomTop,q.bottom+1)}
  if(bottom-roomTop<H)H=Math.max(K.tiny,Math.floor(bottom-roomTop));
  const W=Math.round(H*ar),top=bottom-H;
  mk.style.cssText=`left:${(cx-hr.left-W/2+host.scrollLeft).toFixed(1)}px;top:${(top-hr.top+host.scrollTop).toFixed(1)}px;width:${W}px;height:${H}px`;
@@ -67824,7 +67828,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="247daecbc316";window.CTM_BUILD=BUILD;
+const BUILD="9c3464658d66";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
