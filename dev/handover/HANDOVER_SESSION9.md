@@ -937,3 +937,4 @@ LESSONS s39: look at neighbours side by side before asking her to pick (A/B/C gl
 - (18/11 00:50Z) OWNER: Tần→Phi stays 12 % ('để 12 đi') → 12.5 cancelled, OD line overwritten in place.
 - (18/11 00:51Z) OWNER FINAL: Tần→Phi 12.5 % ('Thôi sửa lại đi, 12.5') → hoa-dien r3 told; OD line overwritten in place.
 - (18/11 00:53Z) OWNER: hoa điền position = vị trí 2 → hoa-dien r3 told. Pending her: drop list (after light-fresh tone samples).
+- (18/11 00:56Z) OWNER drop rule (gradient keep / flat drop) → hoa-dien r3: measure all designs, table first, old-save mapping.
