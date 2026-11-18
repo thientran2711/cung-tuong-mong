@@ -931,3 +931,6 @@ Object.assign(BAL,{odb:{
  jts:{rbSmart:40},
  jtsb:{odOr:30,odTd:38,odTc:34,odTsbMockO:44}
 }});
+/* FACE REVEAL motion (owner 18/11 ~06:20Z, KIT §79 jreveal.js): ms = the grey veil clears from the face outward; lite = Gọn / reduced motion short fade;
+   win = how long after a face is learned every place that first draws it (frame, avatar, stage figure) still plays its one reveal */
+Object.assign(BAL,{faceReveal:{ms:Math.round(1000*BAL.pace),lite:350,win:8000}});

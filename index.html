@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"c1104d92+","t":"2026-11-18T05:41Z","c":"face-zoom-aspect test: SEED / FORCE options for same-character before/after shots","b":"5040ba3ccfb6","h":[{"s":"16b4dad8+","t":"2026-11-18T05:32Z","c":"cloth-bake-static: cloth layer on every static figure path on a cold cache (wait layer + patch on bake done); test + report"},{"s":"231cd3b3+","t":"2026-11-18T03:27Z","c":"review display-set-bonus: VANPHONG rows (Đa Bảo Các + set wording); cap line drops 'điểm'; j8 'Điểm trang lộng lẫy' night quality reads wor…"},{"s":"bd8547f2+","t":"2026-11-18T03:28Z","c":"men-forbidden r6: old saves drop officials / festival princes standing in the hậu cung on load (menLoadFix, same ONE rule)"},{"s":"c743265c+","t":"2026-11-18T03:18Z","c":"review life-preload r6: title prefetch chained on undefined (lWant returns its promise); gate cap really 25 s (no re-run after cap / Vào cu…"},{"s":"2aca2aac+","t":"2026-11-18T03:17Z","c":"review cloth-tea-r6: kclo-on hides the picture by clip-path, not visibility (visibility:hidden made kfxGeom hide the cloth layer too: her f…"},{"s":"2b1b0701","t":"2026-11-18T03:00Z","c":"review staff-cap-apply r6: site rebuilt on db24027f"},{"s":"64488e4f+","t":"2026-11-18T02:38Z","c":"cloth-xoc r6e: rebuild site"},{"s":"af71f94a+","t":"2026-11-18T02:17Z","c":"smudge r16: stage4 + avatar probe tests, options script score fix (look tier by score), FINAL mode"},{"s":"e1f60927+","t":"2026-11-18T02:25Z","c":"result-reason: every result card line says a short why (kitWhy, KIT 7); values left-aligned next to labels"},{"s":"29385ec6+","t":"2026-11-18T02:07Z","c":"greet-stranger: site rebuilt"}]};
+window.CTM_BI={"s":"22891730+","t":"2026-11-18T06:08Z","c":"k61StageDesc: restore the existing k61Desc untouched (rename only my new helper)","b":"a5d97f153e95","h":[{"s":"8f5ea906+","t":"2026-11-18T06:11Z","c":"face-reveal-anim: kitReveal (KIT 79) — the real face appears in place out of the grey (frame, avatar, room-stage figure, event figure); Gọn…"},{"s":"04bb2793+","t":"2026-11-18T05:52Z","c":"hud-mood-bar: owner picked layout 1 (full row); switch and slim layout removed; KIT 49.4"},{"s":"c1104d92+","t":"2026-11-18T05:41Z","c":"face-zoom-aspect test: SEED / FORCE options for same-character before/after shots"},{"s":"16b4dad8+","t":"2026-11-18T05:32Z","c":"cloth-bake-static: cloth layer on every static figure path on a cold cache (wait layer + patch on bake done); test + report"},{"s":"231cd3b3+","t":"2026-11-18T03:27Z","c":"review display-set-bonus: VANPHONG rows (Đa Bảo Các + set wording); cap line drops 'điểm'; j8 'Điểm trang lộng lẫy' night quality reads wor…"},{"s":"bd8547f2+","t":"2026-11-18T03:28Z","c":"men-forbidden r6: old saves drop officials / festival princes standing in the hậu cung on load (menLoadFix, same ONE rule)"},{"s":"c743265c+","t":"2026-11-18T03:18Z","c":"review life-preload r6: title prefetch chained on undefined (lWant returns its promise); gate cap really 25 s (no re-run after cap / Vào cu…"},{"s":"2aca2aac+","t":"2026-11-18T03:17Z","c":"review cloth-tea-r6: kclo-on hides the picture by clip-path, not visibility (visibility:hidden made kfxGeom hide the cloth layer too: her f…"},{"s":"2b1b0701","t":"2026-11-18T03:00Z","c":"review staff-cap-apply r6: site rebuilt on db24027f"},{"s":"64488e4f+","t":"2026-11-18T02:38Z","c":"cloth-xoc r6e: rebuild site"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -23443,7 +23443,11 @@ function kitPortrait(p,o){o=o||{};const f=kitFace(p);return o.size==="lg"||o.siz
    Old saves: everyone present on load is fully known (3). */
 let K61NEW=false,K61VER=0;const KREG={},K61SRC={};
 function k61S(){if(!S)return null;if(!S.known){if(K61NEW)return null;S.known={};S.nkn={};k61All().forEach(e=>{S.known[kOf61(e)]=3});S.kRids=rivals.map(v=>v.id);K61VER++}return S.known}
-function kOf61(e){if(!e||!S)return"";if(e===S)return"me";if(e===S.emp)return"emp";if(S.thO&&e===S.thO)return"th";let k;
+/* STAGE/LIST DESCRIPTORS ({kind,name,ini,col,info[,ref,sid]} from curPeople/homePeople, never real entities): resolve to the real person (ref, else her maid), never register the
+   descriptor itself (review/emo-seal-vanish: kOf61 gave the maid descriptor a fresh key at level 0, so after one tap on its mood seal it became a "stranger" and its seal vanished).
+   undefined = not a descriptor; null = descriptor with no known person (treated as known, as before); else the person. */
+function k61StageDesc(e){return e&&typeof e==="object"&&e.kind&&e.ini!=null&&e.info!=null&&e.id==null?(e.ref||(e.kind==="maid"&&S&&S.maid)||null):undefined}
+function kOf61(e){if(!e||!S)return"";{const d=k61StageDesc(e);if(d===null)return"";if(d)e=d}if(e===S)return"me";if(e===S.emp)return"emp";if(S.thO&&e===S.thO)return"th";let k;
  if((rivals||[]).includes(e))k="r"+e.id;else if(e.sid!=null)k="s"+e.sid;else{if(!e.kk)e.kk="x"+(S.kseq=(S.kseq||0)+1);k=e.kk}KREG[k]=e;return k}
 function k61Ent(k){if(!k||!S)return null;if(k==="me")return S;if(k==="emp")return S.emp;if(k==="th")return S.thO||null;return KREG[k]||null}
 function k61All(){const L=[];if(!S)return L;const add=e=>{if(e&&typeof e==="object"&&!L.includes(e))L.push(e)};
@@ -23455,7 +23459,7 @@ function k61All(){const L=[];if(!S)return L;const add=e=>{if(e&&typeof e==="obje
 /* kc-roads fix: her own family while she still lives at home (S.kc.fam, !S.kc.inPal) are her own people — known, mood and nature seen (all nine home roads) */
 function k61Kin(e){try{return !!(e&&S&&S.kc&&!S.kc.inPal&&(S.kc.fam||[]).includes(e))}catch(x){return false}}
 function k61Own(e){try{return e===S.maid||(S.staff||[]).includes(e)||(S.kids||[]).includes(e)||k61Kin(e)}catch(x){return false}}
-function k61St(e){if(!e||!S||e===S)return 3;const K=k61S();if(!K)return 3;if(k61Own(e))return 3;return +K[kOf61(e)]||0}
+function k61St(e){if(!e||!S||e===S)return 3;{const d=k61StageDesc(e);if(d===null)return 3;if(d)e=d;if(e===S)return 3}const K=k61S();if(!K)return 3;if(k61Own(e))return 3;return +K[kOf61(e)]||0}
 /* owner 11/15 (stranger rule, KIT §49.3): a consort Ta has NOT MET is a grey silhouette everywhere (portraits, strips, news rows, figures,
    the week book) — her name may be known, her face is not. Met = she talked / acted with her (S.met), or lives in the same palace
    (the "Đã quen" level alone is not enough: owner case "listed in Ân oán, Ta chưa gặp"). Everyone else keeps the face level (>= 1). */
@@ -23487,7 +23491,7 @@ function kitKnownName(p){try{const e=k61PortEnt(p);return e?k61Named(e):true}cat
    never "Quý phi ???, Tần ???" (owner 16/11 'Phi ???'; reign-road fix). Used by Triều cục, sổ thị tẩm, thiên điện, ứng viên, quà, tư tình... */
 function kitNameList(L,fmt,none){const f=fmt||(v=>v.name),K=[],U=[];for(const v of L||[])(kitKnownName(v)?K:U).push(v);const A=K.map(f);if(U.length)A.push(`${K.length?"thêm ":""}${U.length} vị chưa quen biết`);return A.join(", ")||none||""}
 const K61STN=["Người lạ","Thấy mặt","Biết tên","Quen biết"];
-function k61PortEnt(p){if(!p)return null;if(p.kk)return k61Ent(p.kk);if(p.src&&K61SRC[p.src])return k61Ent(K61SRC[p.src]);if(p.__kp&&typeof p.__kp==="object")return p.__kp===S?null:p.__kp;
+function k61PortEnt(p){if(!p)return null;{const d=k61StageDesc(p);if(d!==undefined)return d===S?null:d}if(p.kk)return k61Ent(p.kk);if(p.src&&K61SRC[p.src])return k61Ent(K61SRC[p.src]);if(p.__kp&&typeof p.__kp==="object")return p.__kp===S?null:p.__kp;
  if(S&&(p===S.emp||p===S.thO||(rivals||[]).includes(p)))return p;return null}
 /* what she can see: the dress tells rank and role, nothing more */
 function k61Kind(e){if(!S||!e)return"";if((rivals||[]).includes(e))return"consort";if(e===S.emp)return"emp";if(S.thO&&e===S.thO)return"th";
@@ -30718,6 +30722,9 @@ Object.assign(BAL,{odb:{
  jts:{rbSmart:40},
  jtsb:{odOr:30,odTd:38,odTc:34,odTsbMockO:44}
 }});
+/* FACE REVEAL motion (owner 18/11 ~06:20Z, KIT §79 jreveal.js): ms = the grey veil clears from the face outward; lite = Gọn / reduced motion short fade;
+   win = how long after a face is learned every place that first draws it (frame, avatar, stage figure) still plays its one reveal */
+Object.assign(BAL,{faceReveal:{ms:Math.round(1000*BAL.pace),lite:350,win:8000}});
 /* ================= jnwq: NO WORD GAMES, family C (owner 16/11 07:20Z + 07:25Z, s11, review/nw-quiz) =================
    The four vấn đáp / quiz kinds of the promotion exam (jexam EXK: le, tc, xa, thq) are now SKILL games of the same subject, winnable by what is SHOWN
    (same easy rules as mg-easy: Gợi ý button, first-time demo card, tier by level, wrong tries bounce back, quiet auto-hint when she stalls):
@@ -43719,7 +43726,7 @@ function restDs(a){if(!a||a.rest!=="ds")return a;const T=restTonic(),k=restDsK()
  a.go=()=>{const t=restTonic();if(t&&!(a.c&&a.c.bac)){S.inv.splice(t.i,1);log(`Ngươi sắc ${t.it.n} uống rồi ngủ sớm.`)}else log("Ngươi sai người mua chén thuốc bổ, uống rồi ngủ sớm.")};return a}
 function restLat(a){if(!a||a.rest!=="lat")return a;const e=typeof emoGet==="function"?emoGet(S):{k:"binh",v:0};const bad=REST_BAD.includes(e.k)&&e.v>=15;
  a.k=BAL.restLatK;a.c={};a.o=100;a.w={suc:BAL.restLatSuc};a.l={};
- a.t=`Nằm nghỉ trong tẩm cung, uống chén trà sen.${bad?"":` Tâm trạng đang ${typeof EMO==="object"&&EMO[e.k]?EMO[e.k].toLowerCase():"bình thường"}: không đổi.`}`;
+ a.t=`Nằm nghỉ trong tẩm cung, uống chén trà sen.${bad?"":` Tâm trạng đang ${typeof mbBand==="function"&&typeof kitMoodVal==="function"?mbBand(kitMoodVal()).name.toLowerCase():"bình thường"}: không đổi.`}`;
  a.x=bad?`được: bớt ${EMO[e.k]} ${Math.min(BAL.restLatEmo,e.v)} (${e.v} → ${Math.max(0,e.v-BAL.restLatEmo)})`:"";
  a.go=()=>{try{const m=S.emo;if(m&&REST_BAD.includes(m.k)&&m.v>=15){const v0=m.v;m.v=Math.max(0,m.v-BAL.restLatEmo);emoSync(S);log(`Nghỉ một lát, lòng nhẹ đi: bớt ${EMO[m.k]} ${v0-m.v}.`)}}catch(x){}};return a}
 function restFix(a){return a&&a.rest==="ds"?restDs(a):a&&a.rest==="lat"?restLat(a):a}
@@ -60227,6 +60234,26 @@ function mbTile(){try{if(!mbOn()||typeof kitSkillCard!=="function")return"";cons
 window.mbTile=mbTile;
 (function(){if(typeof selfCardHTML!=="function")return;const s0=selfCardHTML;selfCardHTML=function(){const h=s0.apply(this,arguments);try{const t=mbTile();if(!t)return h;
   const i=h.indexOf('data-g="Tư chất"');if(i<0)return h;const j=h.indexOf('<div class="pcg',i);const at=j<0?h.lastIndexOf("</div></div>"):h.lastIndexOf("</div>",j);if(at<0)return h;return h.slice(0,at)+t+h.slice(at)}catch(e){return h}}})();
+/* ---------- TOP BAR (owner 18/11 ~05:40Z: "cho cái thanh tâm trạng nằm ở thanh trên cố định của game, sắp xếp sao cho đẹp") ----------
+   ONE part, every screen that has the fixed top bar (header.hud, last child, one full-width grid row): her mood seal + band word + kitSignedBar (KIT §49.1: calm at the
+   centre, red left = low, green right = high) + the signed number. Tap = the existing mood box (data-emo-open="me", jpcf). ONE accessor for the number:
+   kitMoodVal() reads moodBar(S) when the npc-chain model is live, else S.mood.v — no second number.
+   Owner picked this full-row layout (18/11 ~06:05Z, "kiểu 1"). */
+window.kitMoodVal=function(){try{if(typeof moodBar==="function"){const x=moodBar(S);const n=typeof x==="number"?x:x&&x.v;if(typeof n==="number"&&isFinite(n))return Math.round(n)}}catch(e){}return S&&S.mood&&typeof S.mood.v==="number"?Math.round(S.mood.v):0};
+function mbHud(){try{const hd=document.querySelector("header.hud");if(!hd)return;let el=document.getElementById("hud-mood"); if(!mbOn()){if(el)el.hidden=true;return}
+ if(!el){el=document.createElement("div");el.id="hud-mood";el.setAttribute("role","button");el.tabIndex=0;el.dataset.emoOpen="me";hd.appendChild(el);
+  el.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();el.click()}})}
+ el.className="kstm";el.hidden=false;const v=kitMoodVal(),bd=mbBand(v),sg=v>0?"+"+v:String(v);let seal="";try{seal=typeof emoBadge==="function"?emoBadge(S):""}catch(e){}
+ const h=`<span class="kmd-seal">${seal}</span><small class="kmd-l">Tâm trạng</small><b class="kmd-w ef ${bd.cls}">${bd.name}</b>${typeof kitSignedBar==="function"?kitSignedBar(v):""}<span class="kmd-n">${sg}</span>`;
+ if(el.dataset.h!==h){el.dataset.h=h;el.innerHTML=h;el.title=`Tâm trạng ${bd.name} ${sg} · chạm để xem vì sao`}}catch(e){}}
+(function(){const st=document.createElement("style");st.id="kit-moodhud";st.textContent=`
+header.hud>.kstm{grid-area:auto;grid-column:1/-1;box-sizing:border-box;display:flex;align-items:center;gap:7px;height:20px;margin-top:2px;padding:2px 4px 0;cursor:pointer;min-width:0;border-top:1px solid var(--k-hair,#e6d3ac)}
+.kstm .kmd-seal{display:inline-flex;width:18px;height:18px;flex:0 0 18px}.kstm .kmd-seal img.kemo{width:18px;height:18px;border-radius:50%;object-fit:cover;margin:0;position:static}
+.kstm .kmd-l{font-size:.7rem;color:var(--dim);white-space:nowrap}.kstm .kmd-w{font-family:var(--display);font-size:.85rem;white-space:nowrap;min-width:3.6em}
+.kstm .ksbar{flex:1 1 auto;width:auto;min-width:40px;height:8px}.kstm .kmd-n{font-family:var(--display);font-size:.85rem;font-variant-numeric:tabular-nums;min-width:2.4em;text-align:right;color:var(--ink)}
+`;document.head.appendChild(st)})();
+if(typeof renderHUD==="function"){const r0=renderHUD;renderHUD=function(){const r=r0.apply(this,arguments);mbHud();return r}}
+window.mbHud=mbHud;
 /* measuring hook */
 window.moodStat=function(){return Object.assign({v:S&&S.mood?S.mood.v:null},MOOD_N)};
 })();
@@ -67124,6 +67151,75 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§89",title:"kitDi
  html:()=>{let F=null;try{F=mkFix()}catch(e){}const placed=F?F.placed:{};const m={groups:GFIX,placed};
   return `<div class="kitpg-row" style="position:relative;height:420px;overflow:hidden"><div class="kdr" style="position:absolute;inset:0;--kdr-bg:url('${KDR_BG}')">${kitDisplayRoomHTML(m)}</div></div>`}})}catch(e){}
 }catch(e){console.error("jdisp",e)}})();
+/* ================= jreveal: kitReveal — FACE REVEAL motion (owner 18/11 ~06:20Z, KIT §79) =================
+   When she first SEES a person's face (the grey stranger frame / grey stage silhouette becomes the real picture) the real picture appears IN PLACE out of
+   the grey: the grey silhouette stays on top of the real picture and a soft hole opens from the face outward (ink-wash clears), BAL.faceReveal.ms (~1 s,
+   ease-out). Never an instant swap, never a scene change, never blocks a tap. Gọn / reduced motion / "Cảnh động" off: a short fade of the grey (BAL.faceReveal.lite).
+   ONE kit part for every place a person's picture is drawn: tall frame (pcPort / pframe), small avatar (mdH), room-stage figure (#tokens .tok), event-stage figure
+   (kitStageFig). Those four outer wrappers only MARK the element: data-krv = the person's key (kOf61), data-krvs = 1 face shown / 0 grey, data-krvk = kind, data-krvsil =
+   the grey picture. The player is the observer: it fires once per kind per reveal, in whichever place draws the new face first (a place that opens within
+   BAL.faceReveal.win of the learning still plays; one that opens later shows the face as is).
+   WHEN a reveal starts: (1) k61Know / k61Meet (every way of learning a face: greet, arrival, scouting, reports, event dialogs) flip a stranger's face-known state;
+   (2) a place that was drawn grey is drawn with the face. Co-op: local only (a render of local state; nothing is sent). Fires only on a flip, so loading a save shows
+   everyone as is. Test: node dev/test/face-reveal.js. ================= */
+const KRV={last:{},ev:{},rect:{}};
+function krvKey(p){try{if(!p||typeof k61PortEnt!=="function")return"";const e=k61PortEnt(p)||(p.__kp&&typeof p.__kp==="object"?p.__kp:null);if(!e||e===S)return"";return kOf61(e)}catch(x){return""}}
+function krvKnown(p){try{return kitIsKnown(p.__kp&&typeof p.__kp==="object"?p.__kp:k61PortEnt(p)||p)}catch(x){return true}}
+function krvSex(p){try{const r=personRoleRank(p.__kp&&typeof p.__kp==="object"?p.__kp:k61PortEnt(p)||p);return r.kid?"k":r.sex==="m"?"m":"f"}catch(x){return"f"}}
+function krvMark(h,rootRe,p,kind,sil){try{if(typeof h!=="string"||!p)return h;const k=krvKey(p);if(!k)return h;const m=/^\s*<[a-z]+[^>]*>/.exec(h);if(!m||!rootRe.test(m[0]))return h;
+ return h.replace(/^(\s*<[a-z]+)/,`$1 data-krv="${k}" data-krvs="${krvKnown(p)?1:0}" data-krvk="${kind}" data-krvsil="${sil}"`)}catch(x){return h}}
+/* the three outer wrappers (this module loads last: they sit outside every other wrapper of the same function) */
+(function(){const P=pcPort;pcPort=function(f){const h=P.apply(this,arguments);return krvMark(h,/class="pcp/,f,"pc",KIT_DIR+"unknown-"+krvSex(f||{})+".webp")}})();
+(function(){const M=mdH;mdH=function(p){const h=M.apply(this,arguments);return krvMark(h,/class="md /,p,"md",KIT_DIR+"unknown-"+krvSex(p||{})+".webp")}})();
+(function(){const F=kitStageFig;kitStageFig=function(p){const h=F.apply(this,arguments);try{const q=p&&(p.__kp||p);return krvMark(h,/class="kesf"/,q,"kes",KIT_DIR+"unknown-fig-"+krvSex(q)+".webp")}catch(x){return h}}})();
+(function(){if(typeof renderStage!=="function")return;const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{krvStage()}catch(x){}return r}})();
+function krvStage(){const ppl=typeof curPeople==="function"?curPeople():[];document.querySelectorAll("#tokens .tok.fig").forEach(b=>{const p=ppl[+b.dataset.p];if(!p)return;const w=(typeof figWho==="function"?figWho(p):null)||p.ref||(p.kind==="emp"?S.emp:p.kind==="th"?S.thO:p.kind==="maid"?S.maid:p);
+ const k=krvKey(w);if(!k)return;b.dataset.krv=k;b.dataset.krvk="fig";b.dataset.krvs=krvKnown(w)?"1":"0";b.dataset.krvsil=KIT_DIR+"unknown-fig-"+krvSex(w)+".webp"})}
+/* ---- flips: every way of learning a face goes through k61Know / k61Meet ---- */
+function krvUnknownKeys(){const o={};try{for(const e of k61All())if(e&&e!==S&&!isKnown61(e))o[kOf61(e)]=1}catch(x){}return o}
+function krvFlip(k){const n=Date.now(),v=KRV.ev[k];if(v&&n-v.t<BAL.faceReveal.win)return;KRV.ev[k]={t:n,p:{}};KRV.last[k]=1;krvSoon()}
+(function(){const K=k61Know,M=k61Meet;const W=f0=>function(){let b=null;try{if(S&&S.known)b=krvUnknownKeys()}catch(x){}const r=f0.apply(this,arguments);try{if(b){const a=krvUnknownKeys();for(const k in b)if(!a[k])krvFlip(k)}}catch(x){}return r};
+ k61Know=W(K);k61Meet=W(M)})();
+/* ---- the player ---- */
+function krvTarget(el,kind){if(kind==="pc")return el.querySelector(".kin>img.kpor");if(kind==="fig")return el.querySelector(".figimg");if(kind==="kes")return el.querySelector(".kesimg");return el.querySelector(".kin>img.kpor")||el.querySelector("img:not(.kfr):not(.kgem):not(.kemb)")}
+function krvPlay(el,kind,elapsed){const t=krvTarget(el,kind);if(!t||!t.parentNode)return false;const sil=el.dataset.krvsil;if(!sil)return false;
+ const lite=typeof kmReduced==="function"&&kmReduced();const ms=BAL.faceReveal[lite?"lite":"ms"];if(elapsed>=ms)return true;
+ const g=document.createElement("img");g.src=sil;g.alt="";g.setAttribute("aria-hidden","true");g.draggable=false;g.className="krvg"+(lite?" krvlite":"")+(kind==="fig"||kind==="kes"?" krvfig":"");
+ g.style.setProperty("--krvms",ms+"ms");g.style.setProperty("--krvd",(-elapsed)+"ms");const P=t.parentNode;let sync=null;
+ if(t.classList.contains("kpor")&&P.classList.contains("kin")){g.classList.add("kpor","krvk");if(/face-/.test(t.getAttribute("src")||""))g.classList.add("krvf");P.insertBefore(g,t.nextSibling)}
+ else{const cs=getComputedStyle(t);g.style.objectFit=cs.objectFit;g.style.objectPosition=cs.objectPosition;g.style.borderRadius=cs.borderRadius;P.insertBefore(g,t.nextSibling);
+  /* the grey ghost keeps the box of the real picture every frame (a figure is sized when its picture finishes loading) */
+  sync=()=>{if(!g.isConnected||!t.isConnected)return;const o=g.offsetParent;if(o){const a=o.getBoundingClientRect();let b=t.getBoundingClientRect();if(b.width<2||b.height<2){const m=KRV.rect[el.dataset.krv+kind];if(m)b={left:m[0],top:m[1],width:m[2],height:m[3]}}const sx=a.width/(o.offsetWidth||1)||1,sy=a.height/(o.offsetHeight||1)||1;
+   g.style.left=(b.left-a.left)/sx-(o.clientLeft||0)+"px";g.style.top=(b.top-a.top)/sy-(o.clientTop||0)+"px";g.style.width=b.width/sx+"px";g.style.height=b.height/sy+"px"}requestAnimationFrame(sync)};sync()}
+ /* the ghost waits for the real picture to be there (a still-loading picture would otherwise end under the veil's clearing) */
+ if(!t.complete){g.style.animationPlayState="paused";const go=()=>{g.style.animationPlayState=""};t.addEventListener("load",go,{once:true});t.addEventListener("error",go,{once:true});setTimeout(go,2500)}
+ const done=()=>{try{g.remove()}catch(x){}};g.addEventListener("animationend",done);setTimeout(done,ms+(t.complete?900:3500)+Math.max(0,-elapsed));return true}
+/* run in the mutation microtask, before the next paint: the real picture is never seen unveiled for a frame */
+function krvSoon(){krvTick()}
+function krvTick(){try{if(!S||KRV.off||window.__bot||(typeof quiet!=="undefined"&&quiet))return;const L=document.querySelectorAll("[data-krv]");if(!L.length)return;const n=Date.now(),grey={},shown={};let retry=false;
+ L.forEach(el=>{const k=el.dataset.krv;if(el.dataset.krvs==="1")shown[k]=1;else{grey[k]=1;try{const t=krvTarget(el,el.dataset.krvk),r=t&&t.getBoundingClientRect();if(r&&r.width>4&&r.height>4)KRV.rect[k+el.dataset.krvk]=[r.left,r.top,r.width,r.height]}catch(x){}}});
+ for(const k in grey)if(!shown[k])KRV.last[k]=0;
+ for(const k in shown)if(!grey[k]&&KRV.last[k]===0)krvFlip(k);else if(!grey[k]&&KRV.last[k]==null)KRV.last[k]=1;
+ L.forEach(el=>{if(el.dataset.krvs!=="1"||el.__krvd)return;const k=el.dataset.krv,v=KRV.ev[k];if(!v||n-v.t>BAL.faceReveal.win)return;const kind=el.dataset.krvk,pl=v.p[kind];
+  if(pl&&n-pl.t0>=BAL.faceReveal[typeof kmReduced==="function"&&kmReduced()?"lite":"ms"])return;if(krvPlay(el,kind,pl?n-pl.t0:0)){el.__krvd=1;if(!pl)v.p[kind]={t0:n}}else retry=true});
+ /* a picture still loading has no size yet: look again soon, within the reveal window */
+ if(retry&&!krvTick.r){krvTick.r=setTimeout(()=>{krvTick.r=0;krvTick()},160)}}catch(x){console.error("krv",x)}}
+(function(){const mo=new MutationObserver(krvSoon);const go=()=>{try{mo.observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:["data-krvs"]})}catch(x){}};if(document.body)go();else document.addEventListener("DOMContentLoaded",go)})();
+window.kitReveal={KRV,play:krvTick,flip:krvFlip};
+/* kit CSS: the grey veil only */
+(function(){const st=document.createElement("style");st.id="kreveal";st.textContent=`
+@property --krvr{syntax:"<percentage>";inherits:false;initial-value:0%}
+.krvg{position:absolute;pointer-events:none;z-index:5;margin:0;max-width:none!important;max-height:none!important;object-fit:cover;--krvx:50%;--krvy:42%;
+ -webkit-mask-image:radial-gradient(circle at var(--krvx) var(--krvy),transparent calc(var(--krvr) - 24%),#000 var(--krvr));mask-image:radial-gradient(circle at var(--krvx) var(--krvy),transparent calc(var(--krvr) - 24%),#000 var(--krvr));
+}
+img.krvg.krvg.krvg.krvg.krvg{animation:krvwipe var(--krvms,1000ms) cubic-bezier(.3,.15,.35,1) var(--krvd,0ms) both!important}
+.krvg.krvfig{--krvy:16%;object-fit:contain;object-position:50% 100%}
+.krvg.krvk.krvf{top:20.289%!important;height:49.373%!important}
+.krvg.krvlite{-webkit-mask-image:none;mask-image:none}
+img.krvg.krvg.krvg.krvg.krvg.krvlite{animation:krvfade var(--krvms,350ms) ease-out var(--krvd,0ms) both!important}
+@keyframes krvwipe{0%{--krvr:0%;opacity:1}70%{opacity:1}100%{--krvr:165%;opacity:0}}
+@keyframes krvfade{from{opacity:1}to{opacity:0}}
+`;document.head.appendChild(st)})();
 
 /* jcoopthin: CO-OP THIN GUEST, part A = foundations (review/coop-thin-a; audit dev/handover/reports/coop-thin-guest-audit.md §2-3;
    owner GO 17/11: host-authoritative thin guest, part by part, end state = the guest only displays the host's state).
@@ -68059,7 +68155,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="5040ba3ccfb6";window.CTM_BUILD=BUILD;
+const BUILD="a5d97f153e95";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
