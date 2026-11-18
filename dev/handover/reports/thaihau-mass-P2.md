@@ -18,3 +18,5 @@ PRIORITY #1 CHECK ('thai hau mass'): OD 0 | ledger 0 | claims 0 | main 0 | revie
 Done before the owner's 22:35Z correction: c27 a36/a51/a65 v0 + sheet (1 ref own t1 + --nostyle; a36 needed 1 regen for a forehead dot; a65 used her a51 ref). On CDN img/_review/thaihau/c27_*_thaihau_v0.png + c27_thaihau_sheet.jpg. INVALID under the new 2-ref rule (own t1 + m09 eIyOFEidqL, no --nostyle): redo after ROOT-32 GO. Do not use as results.
 c28: face refs uploaded to Magnific (a36 BhNmIHhoQR, a51 nVsTcIhYQD); no gen made. c27 refs: a36 CqnFBrfEEy, a51 VX7e2vuMMU. Prompt tip: c28 colour = celadon, item = imperial book in gold-thread silk.
 Order from ROOT-32: HOLD, no gens until the owner sees the 2-ref sample (c04 + c21).
+
+P2b FINAL (owner 18/11 ~22:40Z via ROOT-31: "Thái hậu ok rồi, thôi đừng có vẽ vời gì nữa hết"): STOPPED for good. No redo, no more gens. c27 a36/a51/a65 v0 + sheet stay as is on the CDN (img/_review/thaihau/c27_*). c28+ not drawn.
