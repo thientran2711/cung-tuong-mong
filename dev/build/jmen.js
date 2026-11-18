@@ -28,7 +28,7 @@ function menGuards(){return (S.men||[]).filter(m=>m.rw==="thị vệ")}
 (function(){const m0=menInit;menInit=function(){const r=m0.apply(this,arguments);try{if(S&&S.men)for(const m of S.men){const v=m.likeV!=null?RV(m.likeV):null;if(v&&v.alive&&!v.out)continue;m.likeV=null;
   if(!MEN_FANCY.some(t=>hasT(m,t)))continue;const C=liveRivals(false).filter(x=>!x.queen&&(x.age||20)>=18&&!x.affair);if(!C.length)continue;
   /* the most beautiful one he can see (her looks), the id breaks ties: no dice */
-  C.sort((a,b)=>((typeof effSac==="function"?effSac(b):b.sac||0)-(typeof effSac==="function"?effSac(a):a.sac||0))||(menH(a.id)-menH(b.id)));m.likeV=C[(menH(m.id)%Math.min(2,C.length))].id}}catch(e){}return r}})();
+  C.sort((a,b)=>((typeof effSac==="function"?effSac(b):b.sac||0)-(typeof effSac==="function"?effSac(a):a.sac||0))||(menH(a.id)-menH(b.id)));m.likeV=npwPick(C.slice(0,2),x=>typeof effSac==="function"?effSac(x):x.sac||0).id}}catch(e){}return r}})();
 (function(){if(typeof figPick!=="function")return;const f0=figPick;figPick=function(who){try{if(S&&who&&who.rw==="thị vệ"&&(S.men||[]).includes(who)){const M=FIGIX.man||{};const ks=Object.keys(M).filter(k=>/thive/.test(k)).sort();
   if(ks.length){if(who.fid&&M[who.fid])return who.fid;const i=menGuards().indexOf(who);who.fid=ks[Math.max(0,i)%ks.length];return who.fid}}}catch(e){}return f0.apply(this,arguments)}})();
 
@@ -77,19 +77,19 @@ function menPlanWeek(){S.menPlans=S.menPlans||[];const w=wk();if(S.menPW===w)ret
  S.menPlans=S.menPlans.filter(P=>P.w>=w-1);for(const t of first?[w,w+1]:[w+1])menMakePlans(t)}
 function menMakePlans(t){const add=P=>{P.id=(S.menPS=(S.menPS||0)+1);P.w=t;S.menPlans.push(P);menTip(P)};const C=liveRivals(false);
  /* 1. lovers (j22 v.affair): every 2–3 tuần by his nature, the night his guard roster leaves free, at a place her nature chooses */
- for(const v of C){const m=v.affair&&manById(v.affair);if(!m||menBanned(m))continue;const cad=MEN_ROVE.some(t=>hasT(m,t))?2:3;if((t+menH(v.id))%cad)continue;
+ for(const v of C){const m=v.affair&&manById(v.affair);if(!m||menBanned(m))continue;if(!npcWhy("tryst",{m,v,t}))continue;
   if(m.rw==="thị vệ"&&menDuty(m,t,B4L))continue;const careful=hasT(v,"Kín đáo")||hasT(m,"Kín đáo");const k=careful?"lc":(menHcPal(v)&&hasT(v,"Kiêu ngạo")?menHcPal(v):"vuon");
   add({m:m.id,v:v.id,r:"tryst",b:B4L,h:3,k,from:m.rw==="thị vệ"?"dtd":"vuon",hide:30+(v.tamco||0)/3})}
  /* 2. secret letters: a consort with a reason to reach the outside, once a season (12 tuần) while the reason lasts, through a guard who can be bought, on his shift;
     one letter a tuần goes out at most (the guards can carry only one safely) */
- let lt=0;for(const v of C.slice().sort((a,b)=>menH(a.id+":"+t)-menH(b.id+":"+t))){if(lt||v.queen||!menHcPal(v))continue;const why=v.confined?"confined":v.plan?"plan":(v.preg&&v.hidden)?"preg":((v.sung||0)<25&&(v.ghen||0)>=50)?"jealous":"";if(!why||(t+menH(v.id))%12)continue;
-  const G=menGuards().filter(g=>g.alive&&!menBanned(g)&&(MEN_BRIBE.some(t=>hasT(g,t))||(g.loyal||50)<BAL.loy.mid)).sort((a,b)=>(a.loyal||50)-(b.loyal||50));if(!G.length)continue;
-  const g=G[0];const bb=[B4L,2,0].find(x=>menDuty(g,t,x));if(bb==null)continue;add({m:g.id,v:v.id,r:"letter",why,b:bb,h:2,k:menHcPal(v),from:menDuty(g,t,bb),hide:20+(v.tamco||0)/4});lt=1}
+ {const L=npcWhy("letter",{t,C:C.filter(v=>!v.queen&&menHcPal(v))});const v=L&&L.who;const why=L&&L.why;if(v){
+  const G=menGuards().filter(g=>g.alive&&!menBanned(g)&&(MEN_BRIBE.some(t=>hasT(g,t))||(g.loyal||50)<BAL.loy.mid)).sort((a,b)=>(a.loyal||50)-(b.loyal||50));
+  const g=G[0];const bb=G.length?[B4L,2,0].find(x=>menDuty(g,t,x)):null;if(bb!=null)add({m:g.id,v:v.id,r:"letter",why,b:bb,h:2,k:menHcPal(v),from:menDuty(g,t,bb),hide:20+(v.tamco||0)/4})}}
  /* 3. overstay: a craftsman of a roving nature on a real order in a palace whose mistress is out of favour or the one he fancies */
  for(const m of S.men){const o=menOrder(m,t);if(!m.alive||!o||o.v==null||!MEN_ROVE.some(t=>hasT(m,t)))continue;const v=RV(o.v);if(!v||v.queen||!((v.sung||0)<40||m.likeV===v.id))continue;
   add({m:m.id,v:v.id,r:"overstay",job:m.rw,b:o.b,h:4,k:o.k,from:o.k,hide:10})}
  /* 4. an admirer: every 12 tuần by his nature (đa tình 9), the first buổi he is inside while she stands in the hậu cung */
- for(const m of S.men){if(!m.alive||m.likeV==null||!MEN_FANCY.some(t=>hasT(m,t))||(t+menH(m.id))%(nv(m,"menGap")))continue;add({m:m.id,v:m.likeV,r:"seek",opp:1,h:2,hide:15})}}
+ for(const m of S.men){if(!m.alive||m.likeV==null||!MEN_FANCY.some(t=>hasT(m,t))||!npcWhy("seek",{m,v:RV(m.likeV),t}))continue;add({m:m.id,v:m.likeV,r:"seek",opp:1,h:2,hide:15})}}
 /* tai mắt: she hears of a plan a tuần ahead when her eyes reach deep enough (Tai mắt, Tâm cơ) — true, partial */
 function menEye(p){return p===S?eyes(S)*8+(S.tamco||0)/3:eyes(p)*8+(p.tamco||0)/3}
 function menTip(P){try{if(!menRoad()||P.opp)return;if(menEye(S)<P.hide+40)return;P.tip=1;const t=P.w-wk();const when=`${t<=0?"tuần này":"tuần tới"}, ${BUOI[P.b].toLowerCase()}`;
@@ -250,7 +250,7 @@ function menNpcSee(m,y){if(!m||!y)return;const c=y.v!=null?RV(y.v):null;for(cons
       if(f){intelAdd(v,f,{by:m.name,how:"uy hiếp "+m.name});return `Hắn run sợ, khai: ${f.txt}`}}
      apply({bac:BAL.eff.jmen.bacRun});m.af=(m.af||0)-10;return `Hắn run sợ, nộp 40 lạng bạc xin ngươi giữ kín. Bạc ${balSg(BAL.eff.jmen.bacRun)}.`}
     m.grudge="me";m.grudgeN=2;m.af=(m.af||0)-20;return "Hắn cứng cổ không chịu, từ nay ôm hận ngươi."}})}}}catch(e){console.error("men opts",e)}return A}})();
-(function(){const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments);try{if(menRoad()){for(const m of (S.men||[])){if(!m.alive||m.grudge!=="me"||menBanned(m)||!(m.grudgeN>0)||(S.turn+menH(m.id))%3)continue;
+(function(){const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments);try{if(menRoad()){for(const o of npcWhyAll("menGrudge")){const m=o.who;
   m.grudgeN--;menStat("revenge");apply({danh:BAL.eff.jmen.danhTop_2});ev+=`<span class="r">Trong cung rộ lời đồn ác ý về ngươi; nghe nói phát ra từ đám ${m.rw==="thị vệ"?"thị vệ":"người ngoài cung"} từng bị ngươi làm khó. Danh ${balSg(BAL.eff.jmen.danhTop_2)}.</span> `}}}catch(e){}return ev}})();
 
 /* stage names: unknown men show "???" like unknown consorts (j61 masks the cards); the role is the tag title */

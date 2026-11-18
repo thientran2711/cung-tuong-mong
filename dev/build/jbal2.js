@@ -1220,3 +1220,9 @@ BAL.ag.bt={off:15,offMax:3,hon:5,honMax:3,mood:{gian:5,thuong:-5},fear:4,fearTim
    wit   witness rank: eye × eyes(p) + host × hostility toward the one watched
    tell  a witness carries a fact when her grudge against its subject ≥ host, or her liking for the one told ≥ friend */
 BAL.ag.why={on:1,min:20,near:.6,top:3,pow:1.5,cd:{_:4},wit:{eye:10,host:1},tell:{host:40,friend:30}};
+/* npc-purpose G1 kinds (jagwhy1; the stray man). affair: (sung − Sủng) × sungK − Đức × ducK + kin (Kín đáo); affairOut: proof ≥ ev and grudge ≥ host;
+   tryst: base + rove (roving man) − fear (Kín đáo), cd [roving, other] = the old 2 / 3 tuần cadence; letter: w per reason (old order of reasons), cd 12 = once a season;
+   seek: base + her looks above sac, his gap = BAL.net menGap; menGrudge: s while his grudge lasts, cd 3 = the old cadence */
+Object.assign(BAL.ag.why,{affair:{sung:30,sungK:1.5,ducK:.2,kin:8},affairOut:{ev:2,host:45},tryst:{base:30,rove:10,fear:12,cd:[2,3]},
+ letter:{w:{preg:70,confined:60,plan:45,jealous:30}},seek:{base:15,sac:60},menGrudge:{s:30}});
+Object.assign(BAL.ag.why.cd,{affair:12,affairOut:4,letter:12,menGrudge:3});

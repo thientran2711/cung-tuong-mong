@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"47568e9b+","t":"2026-11-18T03:41Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…","b":"82160f249abd","h":[{"s":"bd8547f2+","t":"2026-11-18T03:28Z","c":"men-forbidden r6: old saves drop officials / festival princes standing in the hậu cung on load (menLoadFix, same ONE rule)"},{"s":"c743265c+","t":"2026-11-18T03:18Z","c":"review life-preload r6: title prefetch chained on undefined (lWant returns its promise); gate cap really 25 s (no re-run after cap / Vào cu…"},{"s":"2aca2aac+","t":"2026-11-18T03:17Z","c":"review cloth-tea-r6: kclo-on hides the picture by clip-path, not visibility (visibility:hidden made kfxGeom hide the cloth layer too: her f…"},{"s":"2b1b0701","t":"2026-11-18T03:00Z","c":"review staff-cap-apply r6: site rebuilt on db24027f"},{"s":"64488e4f+","t":"2026-11-18T02:38Z","c":"cloth-xoc r6e: rebuild site"},{"s":"af71f94a+","t":"2026-11-18T02:17Z","c":"smudge r16: stage4 + avatar probe tests, options script score fix (look tier by score), FINAL mode"},{"s":"e1f60927+","t":"2026-11-18T02:25Z","c":"result-reason: every result card line says a short why (kitWhy, KIT 7); values left-aligned next to labels"},{"s":"29385ec6+","t":"2026-11-18T02:07Z","c":"greet-stranger: site rebuilt"},{"s":"3b69182e","t":"2026-11-18T01:50Z","c":"hoa-dien r3 onto main 3da5720a (makeup-lux live): hoa-dien (jhd.js + hooks) replayed on the new main, replacing the old stacked branch. Sha…"},{"s":"631a703e","t":"2026-11-18T01:37Z","c":"review staff-cap-fix r6: hire pick refused at the cap gives the silver back (+ staff-cap.js case); site rebuilt"}]};
+window.CTM_BI={"s":"77b50cd4+","t":"2026-11-18T04:14Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…","b":"0ab97dd63a52","h":[{"s":"bd8547f2+","t":"2026-11-18T03:28Z","c":"men-forbidden r6: old saves drop officials / festival princes standing in the hậu cung on load (menLoadFix, same ONE rule)"},{"s":"c743265c+","t":"2026-11-18T03:18Z","c":"review life-preload r6: title prefetch chained on undefined (lWant returns its promise); gate cap really 25 s (no re-run after cap / Vào cu…"},{"s":"2aca2aac+","t":"2026-11-18T03:17Z","c":"review cloth-tea-r6: kclo-on hides the picture by clip-path, not visibility (visibility:hidden made kfxGeom hide the cloth layer too: her f…"},{"s":"2b1b0701","t":"2026-11-18T03:00Z","c":"review staff-cap-apply r6: site rebuilt on db24027f"},{"s":"64488e4f+","t":"2026-11-18T02:38Z","c":"cloth-xoc r6e: rebuild site"},{"s":"af71f94a+","t":"2026-11-18T02:17Z","c":"smudge r16: stage4 + avatar probe tests, options script score fix (look tier by score), FINAL mode"},{"s":"e1f60927+","t":"2026-11-18T02:25Z","c":"result-reason: every result card line says a short why (kitWhy, KIT 7); values left-aligned next to labels"},{"s":"29385ec6+","t":"2026-11-18T02:07Z","c":"greet-stranger: site rebuilt"},{"s":"3b69182e","t":"2026-11-18T01:50Z","c":"hoa-dien r3 onto main 3da5720a (makeup-lux live): hoa-dien (jhd.js + hooks) replayed on the new main, replacing the old stacked branch. Sha…"},{"s":"631a703e","t":"2026-11-18T01:37Z","c":"review staff-cap-fix r6: hire pick refused at the cap gives the silver back (+ staff-cap.js case); site rebuilt"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -4597,8 +4597,9 @@ function tryst(m,risk){if(roll(risk)){affairExposed(m,`Đêm ${S.name} hẹn ${m
 function affairMonth(){if(!S||!S.men)return"";let ev="";
  if(S.preg&&S.pregMismatch){const q=queenP();const foes=liveRivals(true).filter(v=>rel(v,S)<-20);if((q&&q!==S&&rel(q,S)<0||foes.length)&&roll(BAL.odb.j22.rbAffairMonth+(S.ksKnows?15:0))){const who=q&&q!==S?q:pick(foes);evA(who,S,BAL.eff.j22.evAffairMonth);ev+=`<span class="r">${who.name} cho người tra sổ Kính sự phòng: ngày ngươi có thai không khớp đêm thị tẩm nào.</span> `}}
  if(S.lastTryst!=null&&wk()-S.lastTryst<=3&&roll(4)){const v=pick(liveRivals(true).filter(x=>rel(x,S)<0)||[]);if(v){evA(v,S,BAL.eff.j22.evAffairMonth_2);if(eyes(S)>=3)ev+=`Tai mắt báo: ${v.name} có vẻ biết chuyện riêng của ngươi. `}}
- for(const v of liveRivals(false)){if(!v.affair&&v.sung<30&&roll(2)){const m=pick(S.men.filter(x=>x.alive));if(m)v.affair=m.id}
-  if(v.affair){const m=manById(v.affair);if(!m){v.affair=null;continue}if(roll(3)){m.alive=false;v.affair=null;ev+=`<span class="r">${v.name} tư thông với ${m.name} bị lộ.</span> `;deathSentence(v,`tư thông với ${m.name}`)}}}
+ {const A=npcWhy("affair");if(A&&A.tgt)A.who.affair=A.tgt.id}/* npc-purpose G1: an admirer (jmen likeV) + her loneliness, never dice */
+ for(const v of liveRivals(false)){
+  if(v.affair){const m=manById(v.affair);if(!m){v.affair=null;continue}const X=npcWhy("affairOut",{v,m});if(X){m.alive=false;v.affair=null;ev+=`<span class="r">${npwNm(X.who)} ${X.why}, đứng ra tố giác ${rkName(v)} ${v.name} tư thông với ${m.name}.</span> `;deathSentence(v,`tư thông với ${m.name}`)}}}
  return ev}
 (function(){const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments);try{if(!S.dead)ev+=affairMonth()}catch(e){}return ev}})();
 /* spying on a rival may reveal her affair: true, kept as a note and as proof */
@@ -31292,6 +31293,12 @@ BAL.ag.bt={off:15,offMax:3,hon:5,honMax:3,mood:{gian:5,thuong:-5},fear:4,fearTim
    wit   witness rank: eye × eyes(p) + host × hostility toward the one watched
    tell  a witness carries a fact when her grudge against its subject ≥ host, or her liking for the one told ≥ friend */
 BAL.ag.why={on:1,min:20,near:.6,top:3,pow:1.5,cd:{_:4},wit:{eye:10,host:1},tell:{host:40,friend:30}};
+/* npc-purpose G1 kinds (jagwhy1; the stray man). affair: (sung − Sủng) × sungK − Đức × ducK + kin (Kín đáo); affairOut: proof ≥ ev and grudge ≥ host;
+   tryst: base + rove (roving man) − fear (Kín đáo), cd [roving, other] = the old 2 / 3 tuần cadence; letter: w per reason (old order of reasons), cd 12 = once a season;
+   seek: base + her looks above sac, his gap = BAL.net menGap; menGrudge: s while his grudge lasts, cd 3 = the old cadence */
+Object.assign(BAL.ag.why,{affair:{sung:30,sungK:1.5,ducK:.2,kin:8},affairOut:{ev:2,host:45},tryst:{base:30,rove:10,fear:12,cd:[2,3]},
+ letter:{w:{preg:70,confined:60,plan:45,jealous:30}},seek:{base:15,sac:60},menGrudge:{s:30}});
+Object.assign(BAL.ag.why.cd,{affair:12,affairOut:4,letter:12,menGrudge:3});
 /* ================= jnwq: NO WORD GAMES, family C (owner 16/11 07:20Z + 07:25Z, s11, review/nw-quiz) =================
    The four vấn đáp / quiz kinds of the promotion exam (jexam EXK: le, tc, xa, thq) are now SKILL games of the same subject, winnable by what is SHOWN
    (same easy rules as mg-easy: Gợi ý button, first-time demo card, tier by level, wrong tries bounce back, quiet auto-hint when she stalls):
@@ -39550,7 +39557,7 @@ function menGuards(){return (S.men||[]).filter(m=>m.rw==="thị vệ")}
 (function(){const m0=menInit;menInit=function(){const r=m0.apply(this,arguments);try{if(S&&S.men)for(const m of S.men){const v=m.likeV!=null?RV(m.likeV):null;if(v&&v.alive&&!v.out)continue;m.likeV=null;
   if(!MEN_FANCY.some(t=>hasT(m,t)))continue;const C=liveRivals(false).filter(x=>!x.queen&&(x.age||20)>=18&&!x.affair);if(!C.length)continue;
   /* the most beautiful one he can see (her looks), the id breaks ties: no dice */
-  C.sort((a,b)=>((typeof effSac==="function"?effSac(b):b.sac||0)-(typeof effSac==="function"?effSac(a):a.sac||0))||(menH(a.id)-menH(b.id)));m.likeV=C[(menH(m.id)%Math.min(2,C.length))].id}}catch(e){}return r}})();
+  C.sort((a,b)=>((typeof effSac==="function"?effSac(b):b.sac||0)-(typeof effSac==="function"?effSac(a):a.sac||0))||(menH(a.id)-menH(b.id)));m.likeV=npwPick(C.slice(0,2),x=>typeof effSac==="function"?effSac(x):x.sac||0).id}}catch(e){}return r}})();
 (function(){if(typeof figPick!=="function")return;const f0=figPick;figPick=function(who){try{if(S&&who&&who.rw==="thị vệ"&&(S.men||[]).includes(who)){const M=FIGIX.man||{};const ks=Object.keys(M).filter(k=>/thive/.test(k)).sort();
   if(ks.length){if(who.fid&&M[who.fid])return who.fid;const i=menGuards().indexOf(who);who.fid=ks[Math.max(0,i)%ks.length];return who.fid}}}catch(e){}return f0.apply(this,arguments)}})();
 
@@ -39599,19 +39606,19 @@ function menPlanWeek(){S.menPlans=S.menPlans||[];const w=wk();if(S.menPW===w)ret
  S.menPlans=S.menPlans.filter(P=>P.w>=w-1);for(const t of first?[w,w+1]:[w+1])menMakePlans(t)}
 function menMakePlans(t){const add=P=>{P.id=(S.menPS=(S.menPS||0)+1);P.w=t;S.menPlans.push(P);menTip(P)};const C=liveRivals(false);
  /* 1. lovers (j22 v.affair): every 2–3 tuần by his nature, the night his guard roster leaves free, at a place her nature chooses */
- for(const v of C){const m=v.affair&&manById(v.affair);if(!m||menBanned(m))continue;const cad=MEN_ROVE.some(t=>hasT(m,t))?2:3;if((t+menH(v.id))%cad)continue;
+ for(const v of C){const m=v.affair&&manById(v.affair);if(!m||menBanned(m))continue;if(!npcWhy("tryst",{m,v,t}))continue;
   if(m.rw==="thị vệ"&&menDuty(m,t,B4L))continue;const careful=hasT(v,"Kín đáo")||hasT(m,"Kín đáo");const k=careful?"lc":(menHcPal(v)&&hasT(v,"Kiêu ngạo")?menHcPal(v):"vuon");
   add({m:m.id,v:v.id,r:"tryst",b:B4L,h:3,k,from:m.rw==="thị vệ"?"dtd":"vuon",hide:30+(v.tamco||0)/3})}
  /* 2. secret letters: a consort with a reason to reach the outside, once a season (12 tuần) while the reason lasts, through a guard who can be bought, on his shift;
     one letter a tuần goes out at most (the guards can carry only one safely) */
- let lt=0;for(const v of C.slice().sort((a,b)=>menH(a.id+":"+t)-menH(b.id+":"+t))){if(lt||v.queen||!menHcPal(v))continue;const why=v.confined?"confined":v.plan?"plan":(v.preg&&v.hidden)?"preg":((v.sung||0)<25&&(v.ghen||0)>=50)?"jealous":"";if(!why||(t+menH(v.id))%12)continue;
-  const G=menGuards().filter(g=>g.alive&&!menBanned(g)&&(MEN_BRIBE.some(t=>hasT(g,t))||(g.loyal||50)<BAL.loy.mid)).sort((a,b)=>(a.loyal||50)-(b.loyal||50));if(!G.length)continue;
-  const g=G[0];const bb=[B4L,2,0].find(x=>menDuty(g,t,x));if(bb==null)continue;add({m:g.id,v:v.id,r:"letter",why,b:bb,h:2,k:menHcPal(v),from:menDuty(g,t,bb),hide:20+(v.tamco||0)/4});lt=1}
+ {const L=npcWhy("letter",{t,C:C.filter(v=>!v.queen&&menHcPal(v))});const v=L&&L.who;const why=L&&L.why;if(v){
+  const G=menGuards().filter(g=>g.alive&&!menBanned(g)&&(MEN_BRIBE.some(t=>hasT(g,t))||(g.loyal||50)<BAL.loy.mid)).sort((a,b)=>(a.loyal||50)-(b.loyal||50));
+  const g=G[0];const bb=G.length?[B4L,2,0].find(x=>menDuty(g,t,x)):null;if(bb!=null)add({m:g.id,v:v.id,r:"letter",why,b:bb,h:2,k:menHcPal(v),from:menDuty(g,t,bb),hide:20+(v.tamco||0)/4})}}
  /* 3. overstay: a craftsman of a roving nature on a real order in a palace whose mistress is out of favour or the one he fancies */
  for(const m of S.men){const o=menOrder(m,t);if(!m.alive||!o||o.v==null||!MEN_ROVE.some(t=>hasT(m,t)))continue;const v=RV(o.v);if(!v||v.queen||!((v.sung||0)<40||m.likeV===v.id))continue;
   add({m:m.id,v:v.id,r:"overstay",job:m.rw,b:o.b,h:4,k:o.k,from:o.k,hide:10})}
  /* 4. an admirer: every 12 tuần by his nature (đa tình 9), the first buổi he is inside while she stands in the hậu cung */
- for(const m of S.men){if(!m.alive||m.likeV==null||!MEN_FANCY.some(t=>hasT(m,t))||(t+menH(m.id))%(nv(m,"menGap")))continue;add({m:m.id,v:m.likeV,r:"seek",opp:1,h:2,hide:15})}}
+ for(const m of S.men){if(!m.alive||m.likeV==null||!MEN_FANCY.some(t=>hasT(m,t))||!npcWhy("seek",{m,v:RV(m.likeV),t}))continue;add({m:m.id,v:m.likeV,r:"seek",opp:1,h:2,hide:15})}}
 /* tai mắt: she hears of a plan a tuần ahead when her eyes reach deep enough (Tai mắt, Tâm cơ) — true, partial */
 function menEye(p){return p===S?eyes(S)*8+(S.tamco||0)/3:eyes(p)*8+(p.tamco||0)/3}
 function menTip(P){try{if(!menRoad()||P.opp)return;if(menEye(S)<P.hide+40)return;P.tip=1;const t=P.w-wk();const when=`${t<=0?"tuần này":"tuần tới"}, ${BUOI[P.b].toLowerCase()}`;
@@ -39772,7 +39779,7 @@ function menNpcSee(m,y){if(!m||!y)return;const c=y.v!=null?RV(y.v):null;for(cons
       if(f){intelAdd(v,f,{by:m.name,how:"uy hiếp "+m.name});return `Hắn run sợ, khai: ${f.txt}`}}
      apply({bac:BAL.eff.jmen.bacRun});m.af=(m.af||0)-10;return `Hắn run sợ, nộp 40 lạng bạc xin ngươi giữ kín. Bạc ${balSg(BAL.eff.jmen.bacRun)}.`}
     m.grudge="me";m.grudgeN=2;m.af=(m.af||0)-20;return "Hắn cứng cổ không chịu, từ nay ôm hận ngươi."}})}}}catch(e){console.error("men opts",e)}return A}})();
-(function(){const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments);try{if(menRoad()){for(const m of (S.men||[])){if(!m.alive||m.grudge!=="me"||menBanned(m)||!(m.grudgeN>0)||(S.turn+menH(m.id))%3)continue;
+(function(){const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments);try{if(menRoad()){for(const o of npcWhyAll("menGrudge")){const m=o.who;
   m.grudgeN--;menStat("revenge");apply({danh:BAL.eff.jmen.danhTop_2});ev+=`<span class="r">Trong cung rộ lời đồn ác ý về ngươi; nghe nói phát ra từ đám ${m.rw==="thị vệ"?"thị vệ":"người ngoài cung"} từng bị ngươi làm khó. Danh ${balSg(BAL.eff.jmen.danhTop_2)}.</span> `}}}catch(e){}return ev}})();
 
 /* stage names: unknown men show "???" like unknown consorts (j61 masks the cards); the role is the tag title */
@@ -67364,7 +67371,7 @@ Object.assign(window,{helpAsk,maidTalkDo,maidSpyT,qinCard});
    the deed with its BAL odds (unchanged, in the caller). No reason → nothing happens (a quiet day is fine, OD 17/11 ~13:15Z).
    API (every caller uses these; no per-event helper, no per-event number):
    - npwReg(kind, def): register an event kind. def = { who(ctx) → [people who could act], why(p, ctx) → {s, t?, r, k?} | null,
-       cd?: key of BAL.ag.why.cd (default: kind), grp?: label }. s = how strongly her goal pushes her (0..100, from her real state),
+       cd?: key of BAL.ag.why.cd (default: kind), cdOf?(p) → tuần for that person (a BAL value), grp?: label }. s = how strongly her goal pushes her (0..100, from her real state),
        t = her target (a person), r = the reason (player-visible, Vietnamese per VANPHONG), k = place key.
    - npcWhy(kind, ctx) → {kind, who, tgt, why, place, s} | null. Asks every candidate why(); keeps reasons with s ≥ BAL.ag.why.min that are off
        cooldown; picks among the goal-valid top options (npwPick); stamps the cooldown (S.npw, lazy: old saves load).
@@ -67384,9 +67391,9 @@ function npwOn(){try{const B=npwB();return !!(B&&B.on&&typeof S!=="undefined"&&S
 function npwSt(kind,k){const s=NPW.stat[kind]||(NPW.stat[kind]={fire:0,quiet:0,cd:0});s[k]=(s[k]||0)+1}
 function npwReg(kind,def){if(!kind||!def||typeof def.who!=="function"||typeof def.why!=="function")throw new Error("npwReg "+kind);NPW.reg[kind]=def;return def}
 function npwId(p){try{return p===S?"me":(typeof ledgerId==="function"&&ledgerId(p))||p.id||p.sid||p.name}catch(e){return p&&(p.id||p.name)}}
-function npwCdN(kind){const B=npwB(),d=NPW.reg[kind];const c=B.cd||{};const k=(d&&d.cd)||kind;return c[k]!=null?c[k]:(c._||0)}
+function npwCdN(kind,p){const B=npwB(),d=NPW.reg[kind];if(d&&typeof d.cdOf==="function"&&p){const n=+d.cdOf(p);if(n>=0)return n}const c=B.cd||{};const k=(d&&d.cd)||kind;return c[k]!=null?c[k]:(c._||0)}
 function npwCdOk(kind,p){if(!S.npw)return true;const w=S.npw[npwId(p)+"|"+kind];return w==null||wk()>=w}
-function npwStamp(kind,p){S.npw=S.npw||{};S.npw[npwId(p)+"|"+kind]=wk()+npwCdN(kind)}
+function npwStamp(kind,p){S.npw=S.npw||{};S.npw[npwId(p)+"|"+kind]=wk()+npwCdN(kind,p)}
 function npwPick(L,score){const B=npwB();const R=(L||[]).map(x=>[x,+score(x)||0]).filter(r=>r[1]>0).sort((a,b)=>b[1]-a[1]);if(!R.length)return null;
  const top=R.filter(r=>r[1]>=R[0][1]*B.near).slice(0,Math.max(1,B.top));if(top.length===1)return top[0][0];
  const w=top.map(r=>Math.pow(r[1],B.pow));let x=Math.random()*w.reduce((a,b)=>a+b,0);for(let i=0;i<top.length;i++){x-=w[i];if(x<=0)return top[i][0]}return top[top.length-1][0]}
@@ -67407,6 +67414,34 @@ function npcTell(about,o){o=o||{};const B=npwB().tell;const to=o.to||S;const fro
   if(g>=B.host)O.push({who:w,to,s:g,why:"oán "+npwNm(about)});else if(f>=B.friend)O.push({who:w,to,s:f,why:"thân với "+npwNm(to)})}
  const x=npwPick(O,y=>y.s);return x?{who:x.who,to:x.to,why:x.why}:null}
 function npwNm(p){if(!p)return"";if(p===S)return"ngươi";try{if(S.emp&&p===S.emp)return"Hoàng thượng"}catch(e){}try{return rkName(p)+" "+p.name}catch(e){return p.name||""}}
+/* ================= jagwhy1: NPC-PURPOSE G1 kinds — the stray man in the hậu cung (j22 affairs + jmen plans) =================
+   Owner OD 18/11 ~04:08Z (no luck: the stray man must come from a real goal: a lover meeting, a secret letter, an admirer…) + OD:L188 (men's
+   intrusions are plan-driven). Uses ONLY the jagwhy helper (npwReg / npcWhy / npwPick); numbers BAL.ag.why.{affair,affairOut,tryst,letter,seek,menGrudge}.
+   affair     j22 affairMonth: a consort takes a lover only when a man already fancies her (jmen likeV = the one he has seen and admires) and she is
+              lonely enough: (affair.sung − Sủng) × sungK − Đức × ducK (+ kin for Kín đáo: she believes she can hide it). No admirer → no affair.
+   affairOut  j22: an affair is exposed only by a person who holds proof against her (evG ≥ affairOut.ev) and bears her a grudge
+              (hostility ≥ affairOut.host); she is named. Witnesses of a stray in the act are jmen menNpcSee (unchanged).
+   tryst      jmen plan 1: the pair meet when their longing is strong enough: tryst.base + rove for a roving man − fear (Kín đáo); the gap between
+              meetings is the old cadence, now BAL (tryst.cd = [roving, other] tuần).
+   letter     jmen plan 2: the consort with the most urgent reason writes (letter.w per reason); once a season per consort (cd.letter).
+   seek       jmen plan 4: an admirer goes in when his fancy is strong (seek.base + her looks above seek.sac); his gap = nv(m,"menGap") (BAL.net).
+   menGrudge  jmen month: a spurned man spreads his rumour while his grudge lasts; gap = cd.menGrudge.
+   ======================================================================================================================================= */
+function npw1B(k){return BAL.ag.why[k]}
+npwReg("affair",{grp:"consort",who:()=>liveRivals(false).filter(v=>v&&v.alive&&!v.out&&!v.queen&&!v.affair&&(v.age||20)>=18),
+ why(v){const A=npw1B("affair");const m=(S.men||[]).find(x=>x.alive&&x.likeV===v.id&&!(typeof menBanned==="function"&&menBanned(x)));if(!m)return null;
+  const s=Math.max(0,A.sung-(v.sung||0))*A.sungK-(v.duc||0)*A.ducK+(hasT(v,"Kín đáo")?A.kin:0);
+  return {s,t:m,r:`lâu không được Hoàng thượng đoái hoài, lại có ${m.name} đem lòng để ý`}}});
+npwReg("affairOut",{grp:"consort",who:c=>liveRivals(true).filter(w=>w&&w!==c.v&&w.alive&&!w.out),
+ why(w,c){const A=npw1B("affairOut");if(evG(w,c.v)<A.ev)return null;const h=hostility(w,c.v);if(h<A.host)return null;return {s:h,t:c.v,r:"nắm chứng cứ trong tay, lại sẵn lòng oán nàng"}}});
+npwReg("tryst",{grp:"pair",cdOf:m=>{const C=npw1B("tryst").cd;return MEN_ROVE.some(t=>hasT(m,t))?C[0]:C[1]},who:c=>[c.m],
+ why(m,c){const A=npw1B("tryst");const s=A.base+(MEN_ROVE.some(t=>hasT(m,t))?A.rove:0)-((hasT(c.v,"Kín đáo")||hasT(m,"Kín đáo"))?A.fear:0);return {s,t:c.v,r:`hẹn hò với ${npwNm(c.v)}`}}});
+npwReg("letter",{grp:"consort",who:c=>c.C,why(v){const W=npw1B("letter").w;const why=v.confined?"confined":v.plan?"plan":(v.preg&&v.hidden)?"preg":((v.sung||0)<25&&(v.ghen||0)>=50)?"jealous":"";
+  if(!why)return null;return {s:W[why],r:why}}});
+npwReg("seek",{grp:"man",cdOf:m=>nv(m,"menGap"),who:c=>[c.m],why(m,c){const A=npw1B("seek");const v=c.v;if(!v)return null;const sac=typeof effSac==="function"?effSac(v):(v.sac||0);
+  return {s:A.base+Math.max(0,sac-A.sac),t:v,r:`mê ${npwNm(v)}`}}});
+npwReg("menGrudge",{grp:"man",who:()=>(S.men||[]).filter(m=>m.alive&&m.grudge==="me"&&m.grudgeN>0&&!(typeof menBanned==="function"&&menBanned(m))),
+ why(m){return {s:npw1B("menGrudge").s,t:S,r:"ôm hận ngươi"}}});
 /* jmgcal — OWNER-ONLY MINIGAME CALIBRATION (AG-ALL-2d2; owner OD 17/11 ~16:20Z (f) + ~16:40Z option 1, verbatim key words:
    "cần cho tôi một cái bài test để tôi chơi thử ... mỗi một cái mini game ... 3 vòng hoặc là 5 vòng ... mỗi một vòng là mỗi cái khó hơn ... chỉ có cái tài
    khoản của tôi là mới test kiểu này thôi ... bất kỳ người nào chơi thì người đó cũng sẽ đi chơi theo cái con số của tôi" / "chỉ có tôi test và cái số
@@ -70966,7 +71001,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="82160f249abd";window.CTM_BUILD=BUILD;
+const BUILD="0ab97dd63a52";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

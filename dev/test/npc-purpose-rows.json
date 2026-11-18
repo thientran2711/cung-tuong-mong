@@ -8,7 +8,7 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "NPC consort starts an affair",
-"fp": "se)){if(!v.affair&&v.sung<30&&roll(2)){const m=pick(S.men.filter(x=>x."
+"done": " {const A=npcWhy(\"affair\");if(A&&A.tgt)A.who.affair=A.tgt.id}/"
 },
 {
 "f": "j22.js",
@@ -16,7 +16,7 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "affair exposed",
-"fp": "!m){v.affair=null;continue}if(roll(3)){m.alive=false;v.affair=null;ev+"
+"done": " {const A=npcWhy(\"affair\");if(A&&A.tgt)A.who.affair=A.tgt.id}/"
 },
 {
 "f": "j22.js",
@@ -72,7 +72,7 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "lover's tryst (plan \"tryst\")",
-"fp": ".some(t=>hasT(m,t))?2:3;if((t+menH(v.id))%cad)continue;"
+"done": "enBanned(m))continue;if(!npcWhy(\"tryst\",{m,v,t}))continue;"
 },
 {
 "f": "jmen.js",
@@ -80,7 +80,7 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "secret letter via bribable guard",
-"fp": "st v of C.slice().sort((a,b)=>menH(a.id+\":\"+t)-menH(b.id+\":\"+t))){if(l"
+"done": " {const L=npcWhy(\"letter\",{t,C:C.filter(v=>!v.queen&&menHcPal("
 },
 {
 "f": "jmen.js",
@@ -88,7 +88,7 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "admirer seeks her",
-"fp": "_FANCY.some(t=>hasT(m,t))||(t+menH(m.id))%(nv(m,\"menGap\")))continue;ad"
+"done": "NCY.some(t=>hasT(m,t))||!npcWhy(\"seek\",{m,v:RV(m.likeV),t}))continue;add({m:m"
 },
 {
 "f": "jmen.js",
@@ -96,7 +96,7 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "admirer seeks her",
-"fp": "ction\"?effSac(a):a.sac||0))||(menH(a.id)-menH(b.id)));m.likeV=C[(menH("
+"done": "id)-menH(b.id)));m.likeV=npwPick(C.slice(0,2),x=>typeof effSac===\"function\"?ef"
 },
 {
 "f": "jmen.js",
@@ -104,7 +104,7 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "spurned man's rumour; \"uy hiếp\" reveals a secret",
-"fp": "d(m)||!(m.grudgeN>0)||(S.turn+menH(m.id))%3)continue;"
+"done": "enRoad()){for(const o of npcWhyAll(\"menGrudge\")){const m=o.who;"
 },
 {
 "f": "jmen.js",

@@ -7,7 +7,7 @@
    the deed with its BAL odds (unchanged, in the caller). No reason → nothing happens (a quiet day is fine, OD 17/11 ~13:15Z).
    API (every caller uses these; no per-event helper, no per-event number):
    - npwReg(kind, def): register an event kind. def = { who(ctx) → [people who could act], why(p, ctx) → {s, t?, r, k?} | null,
-       cd?: key of BAL.ag.why.cd (default: kind), grp?: label }. s = how strongly her goal pushes her (0..100, from her real state),
+       cd?: key of BAL.ag.why.cd (default: kind), cdOf?(p) → tuần for that person (a BAL value), grp?: label }. s = how strongly her goal pushes her (0..100, from her real state),
        t = her target (a person), r = the reason (player-visible, Vietnamese per VANPHONG), k = place key.
    - npcWhy(kind, ctx) → {kind, who, tgt, why, place, s} | null. Asks every candidate why(); keeps reasons with s ≥ BAL.ag.why.min that are off
        cooldown; picks among the goal-valid top options (npwPick); stamps the cooldown (S.npw, lazy: old saves load).
@@ -27,9 +27,9 @@ function npwOn(){try{const B=npwB();return !!(B&&B.on&&typeof S!=="undefined"&&S
 function npwSt(kind,k){const s=NPW.stat[kind]||(NPW.stat[kind]={fire:0,quiet:0,cd:0});s[k]=(s[k]||0)+1}
 function npwReg(kind,def){if(!kind||!def||typeof def.who!=="function"||typeof def.why!=="function")throw new Error("npwReg "+kind);NPW.reg[kind]=def;return def}
 function npwId(p){try{return p===S?"me":(typeof ledgerId==="function"&&ledgerId(p))||p.id||p.sid||p.name}catch(e){return p&&(p.id||p.name)}}
-function npwCdN(kind){const B=npwB(),d=NPW.reg[kind];const c=B.cd||{};const k=(d&&d.cd)||kind;return c[k]!=null?c[k]:(c._||0)}
+function npwCdN(kind,p){const B=npwB(),d=NPW.reg[kind];if(d&&typeof d.cdOf==="function"&&p){const n=+d.cdOf(p);if(n>=0)return n}const c=B.cd||{};const k=(d&&d.cd)||kind;return c[k]!=null?c[k]:(c._||0)}
 function npwCdOk(kind,p){if(!S.npw)return true;const w=S.npw[npwId(p)+"|"+kind];return w==null||wk()>=w}
-function npwStamp(kind,p){S.npw=S.npw||{};S.npw[npwId(p)+"|"+kind]=wk()+npwCdN(kind)}
+function npwStamp(kind,p){S.npw=S.npw||{};S.npw[npwId(p)+"|"+kind]=wk()+npwCdN(kind,p)}
 function npwPick(L,score){const B=npwB();const R=(L||[]).map(x=>[x,+score(x)||0]).filter(r=>r[1]>0).sort((a,b)=>b[1]-a[1]);if(!R.length)return null;
  const top=R.filter(r=>r[1]>=R[0][1]*B.near).slice(0,Math.max(1,B.top));if(top.length===1)return top[0][0];
  const w=top.map(r=>Math.pow(r[1],B.pow));let x=Math.random()*w.reduce((a,b)=>a+b,0);for(let i=0;i<top.length;i++){x-=w[i];if(x<=0)return top[i][0]}return top[top.length-1][0]}

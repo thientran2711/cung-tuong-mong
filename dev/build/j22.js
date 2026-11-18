@@ -40,8 +40,9 @@ function tryst(m,risk){if(roll(risk)){affairExposed(m,`Đêm ${S.name} hẹn ${m
 function affairMonth(){if(!S||!S.men)return"";let ev="";
  if(S.preg&&S.pregMismatch){const q=queenP();const foes=liveRivals(true).filter(v=>rel(v,S)<-20);if((q&&q!==S&&rel(q,S)<0||foes.length)&&roll(BAL.odb.j22.rbAffairMonth+(S.ksKnows?15:0))){const who=q&&q!==S?q:pick(foes);evA(who,S,BAL.eff.j22.evAffairMonth);ev+=`<span class="r">${who.name} cho người tra sổ Kính sự phòng: ngày ngươi có thai không khớp đêm thị tẩm nào.</span> `}}
  if(S.lastTryst!=null&&wk()-S.lastTryst<=3&&roll(4)){const v=pick(liveRivals(true).filter(x=>rel(x,S)<0)||[]);if(v){evA(v,S,BAL.eff.j22.evAffairMonth_2);if(eyes(S)>=3)ev+=`Tai mắt báo: ${v.name} có vẻ biết chuyện riêng của ngươi. `}}
- for(const v of liveRivals(false)){if(!v.affair&&v.sung<30&&roll(2)){const m=pick(S.men.filter(x=>x.alive));if(m)v.affair=m.id}
-  if(v.affair){const m=manById(v.affair);if(!m){v.affair=null;continue}if(roll(3)){m.alive=false;v.affair=null;ev+=`<span class="r">${v.name} tư thông với ${m.name} bị lộ.</span> `;deathSentence(v,`tư thông với ${m.name}`)}}}
+ {const A=npcWhy("affair");if(A&&A.tgt)A.who.affair=A.tgt.id}/* npc-purpose G1: an admirer (jmen likeV) + her loneliness, never dice */
+ for(const v of liveRivals(false)){
+  if(v.affair){const m=manById(v.affair);if(!m){v.affair=null;continue}const X=npcWhy("affairOut",{v,m});if(X){m.alive=false;v.affair=null;ev+=`<span class="r">${npwNm(X.who)} ${X.why}, đứng ra tố giác ${rkName(v)} ${v.name} tư thông với ${m.name}.</span> `;deathSentence(v,`tư thông với ${m.name}`)}}}
  return ev}
 (function(){const m0=monthTick;monthTick=function(){let ev=m0.apply(this,arguments);try{if(!S.dead)ev+=affairMonth()}catch(e){}return ev}})();
 /* spying on a rival may reveal her affair: true, kept as a note and as proof */
