@@ -5,7 +5,7 @@ START_CTX ≈ 5 % of the window (get_session read 0 at start; estimate). Rollove
 
 Branch **review/live-servants** from main 94d11623. Commits: 22de1d1d (code, tests, tool, docs) + 560014be (build).
 
-## SẴN SÀNG KIỂM 560014be
+## STATUS: SẴN SÀNG KIỂM 560014be WITHDRAWN (scope changed 19:55Z + 20:07Z, see HANDOVER at the end) — the work below stays on the branch as the base
 
 ## What changed (REUSE: S.roster/S.rlog + j95 plans + jagday/jagstaff deed slots + roster.js; nothing parallel)
 - **NEW dev/build/j95s.js** (after jagstaff.js in assemble.py), numbers in `BAL.slv` (one core; one-core-guard PASS):
@@ -75,5 +75,15 @@ Build note: index.html built by build_site.sh up to the assets step + buildinfo;
 - The player's own close maid now really leaves (errands / visits, retinue only when free): when she is away the home stage no longer draws her (people ledger), so her talk options are not on the stage until she is back — the owner's point (5) "khi cần mà không thấy thì phải đi tìm". If MAIN wants a "call her back" button, that is a new UI (kit) item → parking lot / kit request.
 - Expect a merge with review/npc-purpose (its j95.js / jagday.js hunks are in other lines).
 
-## Handover (if I roll over)
-State: done, pushed, waiting for the reviewer. Scratch: /home/user/wt/ls-scratch (live.html baseline, perf/deeds outputs).
+
+## HANDOVER (worker rolled over at ~30 % context, 18/11 ~20:20Z) — for the successor, opened by foreman C-AG #15
+Read first: brief dev/handover/briefs/live-servants.md (sections (2) rewritten 19:55Z = ENTOURAGE PICKER, (5) added 20:07Z = rest/sleep rhythm) + OD 18/11 ~19:45Z point (4) verbatim + OD L1901.
+Branch review/live-servants @ 560014be (from main 94d11623). LIVE main is now 13bb8c88 → merge newest main first (git fetch --depth=30 under flock; if the merge needs history: --deepen). Rebuild: python3 dev/build/assemble.py; root index.html/sw.js as in the Build note above (CDN host blocked in these containers).
+What is reusable as is: j95s.js servant day (BAL.slv.day: serve/clean/eat/brk/err/vis/sleep, sleep from khắc BAL.slv.sleepFrom in tối, one night watch per household), reason guard, j95party for followers, skip logic (perf), roster.js --who, tests/probe, agTell same-place skip, j95.js guards.
+TO DO:
+1. (2) REPLACE the rank retinue (j95sPick / BAL.slv.ret/retTh/retNd/occ) by the ENTOURAGE PICKER: player's first Dư đồ departure of the day → one picker (how many + who, among her maids present AND free; busy/absent greyed per the grey rule; once a day, no adding once out). Store the day's pick on S (e.g. S.ent={d:wk(),ids:[…]}) and make j95sPass use it for her outings that day (the followers = picked ∩ still free). UI only from kit parts (dev/kit/KIT.md: option rows / checklist?) — a missing part → STOP, dev/kit/KIT_REQUESTS.md + tell the foreman. NPC mistresses pick the same way (two-way): one pick per day by her needs/traits (replace the rank-size draw with her own choice; free up to all). Hook point for "first departure": goTo wrapper (j41/j95 final wrappers list goTo).
+2. WITNESSES: only that day's companions see what she sees/does (where the game rolls maid witnesses, restrict to S.ent ids at her place), later gossip via the existing per-maid knowledge chain (jagknow kn* / agTell) — grep kn chain first (GATE ZERO).
+3. (5) REST/SLEEP RHYTHM: MAIN's note came from main (no j95s there). On the branch servants already sleep in tối from BAL.slv.sleepFrom with reason "hết phiên, về phòng cung nhân ngủ" + break/meal rows; check MAIN's exact ask (rest hours from BAL by slot, maybe shift sleep / rest turns per servant) and extend BAL.slv (e.g. per-servant rest turn) + show in roster.js --who; T-test it.
+4. Update live-servants.test.js: T1 (rank sizes) → picker tests (count/choice, only present+free, once a day, no adding), witnesses + gossip, NPC picks; keep T3–T5. Re-run all gates (table above) incl. perf 4x (scripts: dev/test/ag2perf-probe.js; my 5-seed loop = run live vs new × seeds 1–5, 24 buổi × 4 khắc).
+5. Report here + SẴN SÀNG KIỂM <sha> to C-AG #15.
+Scratch (may be wiped): /home/user/wt/ls-scratch (live.html = main 94d11623 dev build). Worktree /home/user/wt/ls (sparse) holds the branch.
