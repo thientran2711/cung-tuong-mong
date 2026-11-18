@@ -54,3 +54,17 @@ Base 711d7ba (ancestor OK). origin/main moved to 13e2b83: merge-tree conflicts o
 - n1 fallback name «Hàn lâm học trò của cha» comes from the road files (jrd_thd cast), not this branch.
 
 Shots: local scratch only (/home/user/wt/q3r2-scr), deleted with this verdict; CDN not used; no images in git.
+
+---
+# ROUND 3 — REVIEW questline-q3 dcc822b1 — PASS (reviewer E9r3, Foreman E)
+PRIORITY #1 CHECK ('Q3 helper answers'): OD L1876 | review/questline-q3 under review | claims E9 only. Delta only vs 8d1ea64 (round-2 base).
+
+| # | Check | Result |
+|---|---|---|
+| 1 | new type `si` («Vị ấy», 5 own lines) | 6 tags moved dan → si: phu nhân Thượng thư Lễ bộ ×4 (nc_vuong_6:s2:2, nc_vuong_9:c1:1, bd_hoang_6:s2:2, bd_hoang_9:c1:1), thd_sach_8:c1:2 (học trò của cha chép), thd_sach_11:s2:2 (sĩ lâm). Lines read: «nể tình nhận lời», «nhận lời cho phải phép, rồi chỉ làm lấy lệ», «khéo léo từ chối… không tiện ra mặt», «nhắc chuyện ngươi nhờ giữa buổi tiệc». No wage / phận nhỏ / street words; cổ trang; {ri} only; no %, no digit, no deadline. jroad.js label `si:"Vị ấy"`, jbal2 weights `si:[40,30,25,5]` + type map `si:"si"`. OK |
+| 2 | 8 remaining dan | thầy kiện ×2, thợ cung, đội trưởng canh phòng, ông chép lại, lái buôn, trạm dịch quân, đoàn quân lương. Lines now neutral: «nhận lời, làm việc chu đáo», «nhận lời rồi làm qua quýt», «phận mình nhỏ mọn, việc lớn như thế không dám dây vào», «đem chuyện bán cho {ri}», «kể chuyện ngươi nhờ với kẻ quen». «tiền công» / «trong cung» / «quán trà» gone; fit all 8. OK |
+| 3 | accidental tag changes | diff 8d1ea64..dcc822b: only the 6 si tags; no other RDHP key touched. OK |
+| 4 | tests | roadhp-scan PASS (216 tags, 4 320 rendered lines, no shared sentence, si 6 / dan 8) · roadhp-unit PASS · quickcheck PASS 150 s, old save ok, core gates PASS |
+| 5 | shot (LOOKED) | Fold 755x1000@2, answer shot: «Từ chối: Vị ấy khéo léo từ chối, nói việc ấy không tiện ra mặt.», option gone, Gợi ý row «Vị ấy: Sẵn lòng», no overflow, no cut text. (Hồi was a Thái hậu card retagged to si in-page, scratch only; images blank because --no-net.) OK |
+
+Notes (not blocking): td_an_8:s2:1 «người quen» + cnv_mat_10:c1:1 «người đồng hương» still `fam` (round-2 note). Scratch shots in the session scratchpad, not in git.
