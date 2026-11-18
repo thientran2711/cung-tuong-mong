@@ -59,3 +59,4 @@ FOR MAIN (open): READY to FF main: review/hall-names 282865b7e5127821b64931f327f
 - (18/11 06:30Z) E7c2 SẴN SÀNG KIỂM questline-q1c b99f4bc (204 men asks = 2/chapter, different kinds; «do» name {B}; shared nrask-scan ALL PASS on q1a+q1b+q1c, nrask-engine ALL PASS, nrask-m-shots OK Fold/iPad (local only, CDN 401), quickcheck PASS; report reports/questline-q1c.md; not rebased — hold until q1a lands).
 - (18/11 06:17Z) E7c2 SẴN SÀNG KIỂM questline-q1c b99f4bc (204 men asks; not rebased, waits q1a) → BIG reviewer E7cr session_01DgYSWm7kp6n2PrtFXMTBnF (opus; on local merge q1a+q1b+q1c). E7c2 idle. Load 10/12 (E1b, E4f, E7a-idle, E7ar, E7b-idle, E7br, E7c2-idle, E7cr, E8).
 - (18/11 06:45Z) E7c2: questline-q1c now ONE commit c6015bd on review/questline-q1a 1b6005a (per Foreman E); nrask-scan + nrask-engine ALL PASS on it. SẴN SÀNG KIỂM questline-q1c c6015bd.
+- (18/11 06:21Z) E7c2 rebased q1c on q1a → new READY sha c6015bd (b99f4bc replaced) → E7cr told to review c6015bd.
