@@ -79,3 +79,10 @@ Foreman now ROOT-12 session_011xDdVP8NwhY7F8EwPHbZsi (ROOT-13 when open). Code +
 5. tn: foreman OK'd: at the END regenerate all 840 img/tn/* with dev/art/tn_make.py from the cleaned live por/fig (same names; do NOT push TN.json); 4 singles first. (Live tn are older paintings, MAD 20–33 vs today's sources; detector can't work at 2–3 px marks.)
 6. HD_ANCHOR table (STEP 3) from the 'anchor' fields of all logs; leftovers by hand (m44-t3 a26/a36).
 Bytes: fig q98 +18 % vs originals (233→275 MB).
+
+## UPDATE 18/11 ~01:15Z — hoa-dien #3 (session_011xDdVPTaMc3Y6tvQmV5BJ6) — W12 + consort-ty twins LIVE, queue 3 = KNOWN MISSES
+PRIORITY #1 CHECK: OD 17/11 ~17:30/17:45/20:00Z | main none | review/hoa-dien-art f48ca00f | claims hoa-dien-art | foreman ROOT-13 session_011xDdVQX2FJXNa7LcEirjEp.
+- LIVE (md5 --check same): W12 maid-ty por 512 + fig 481 + hd 500 (1,493 files; 168 por nomark + 1 error left; fig 33 / hd 14 misses). Consort-ty fig 491 + hd 444 (935 files; 6 por_nomark; w2c54 hd HELD, untouched). Foreman looked 4 singles each, GO.
+- Queue 3 (guided on fig 571 / hd 76 misses): NOT uploaded. 13 % of 45 sampled results had grey smudges on brow/forehead edge; no metric separated them. Tightened guided2.py (coloured outliers only, mask >=0.2 fw above eye line): 0 smudges, but cleans 16-28/45 and often leaves a centre dot. ROOT-13: option A = leave unchanged; owner holds the decision.
+- KNOWN MISSES: full key list with strength (clear >= 18 / faint / nomark) in dev/handover/reports/hoa-dien-art-known-misses.tsv (647 keys: 571 fig + 76 hd, 261 'clear' among the 515 guided-clean ones). 4 native singles: img/_review/hoa-dien-art/g3/miss-fig-consort-c02-t7-a36, -c05-t7-a26, -c04-t8-a36, -c02-t8-a26 (.png).
+- Queue 4 running: por2 on live 3,413 pass-1 por (data in /home/user/wt/data/p4, container-local).
