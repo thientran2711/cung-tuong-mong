@@ -481,10 +481,10 @@ c12 a18 t5–t8 headdress re-do from live originals (Round 43) | claude/cung-tuo
 | kit-set-lines (KIT REQUEST (6) set lines + set glow; sonnet; brief briefs/kit-set-lines.md) | review/kit-set-lines | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:12Z |
 Tuần lục figure clip preview (test-page only, code note for main) | claude/cung-tuong-mong-handover-hj0h8w (report) + _review CDN | session_011xDdVR5MwB2XTmgGcLEKkx | RUNNING | 2026-11-18T05:50Z
 | E3r REVIEW hall-names b5315ff (sonnet SMALL; briefs/E3r-review-hall-names.md) | review/hall-names | E ROOT | session_01DgYSWpMzeXxqEAbLCfJGJE | RUNNING | 18/11 05:15Z |
-c02 a18 consort rank set t1–t8 + Nữ đế (B6) | claude/cung-tuong-mong-handover-hj0h8w (art, _review CDN) | session_011xDdVQ6wQsN4MEMRE9p7uH | RUNNING | 2026-11-18T05:58Z
+c02 a18 consort rank set t1–t8 + Nữ đế (B6) | claude/cung-tuong-mong-handover-hj0h8w (art, _review CDN) | session_011xDdVQ6wQsN4MEMRE9p7uH | DONE (archived ROOT-17 06:45Z) | 2026-11-18T05:58Z
 c03 a18 consort rank set t1–t8 + Nữ đế (B6) | claude/cung-tuong-mong-handover-hj0h8w (art, _review CDN) | session_011xDdVPb927er8REUxdUaCc | RUNNING | 2026-11-18T05:58Z
 men: Hoàng thượng 4 faces a18 (prompt-only) | claude/cung-tuong-mong-handover-hj0h8w (art, _review CDN) | session_011xDdVSAtqavbvzVpkVAnqt | RUNNING (emp3 redo, 06:10Z) | 2026-11-18T05:58Z
-art-matrix planner (MAIN s43 order) | claude/cung-tuong-mong-handover-hj0h8w (reports/art-matrix.md) | session_011xDdVS6wU7hJj7qWmYtDa8 | RUNNING | 2026-11-18T05:58Z
+art-matrix planner (MAIN s43 order) | claude/cung-tuong-mong-handover-hj0h8w (reports/art-matrix.md) | session_011xDdVS6wU7hJj7qWmYtDa8 | DONE (archived ROOT-17 06:45Z) | 2026-11-18T05:58Z
 | emo-seal-vanish (owner bug 18/11 05:50Z: maid's emotion seal vanishes after closing its box; sonnet; brief briefs/emo-seal-vanish.md) | review/emo-seal-vanish | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:14Z |
 | mg-skip-all (owner 18/11 05:55Z: quick option on EVERY mini-game incl. makeup, one kit button + BAL key 40; opus; brief briefs/mg-skip-all.md; absorbs D skip-odds-40) | review/mg-skip-all | MAIN ROOT-45 | session_01UV1Szjuwc7PJM75kQAAyPf | RUNNING (code fdd2862 pushed; tests + shots next) | 18/11 05:16Z |
 | E7a QUESTLINE Q1a help-hồi text (opus; briefs/E7-questline-q1.md) | review/questline-q1a | E ROOT | session_01DgYSWpyUqEzbbzMAtLMkNM | RUNNING | 18/11 05:22Z |
