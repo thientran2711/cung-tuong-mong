@@ -20,3 +20,28 @@ PRIORITY #1 CHECK: OD L1475 + L1327 | main none | review/* review/hall-names b53
 2. jkc2.js P.dien: court name or documented exception.
 3. Extend hall-names-scan.js to the generic roles named above; rerun; rebuild index.html/sw.js.
 4. Upload Fold + iPad shots (hall list, Dư đồ, room title, Sổ line, cnh place banner) to CDN img/_review/hall-names/ and check the edge-clipped hotspot labels on iPad with real pictures.
+
+---
+# Re-review cfe819b — PASS cfe819b
+PRIORITY #1 CHECK: OD L1475 + L1327 | main none | review/hall-names cfe819b (FIX 1 of b5315ff) | claims E3 session_01DgYSWpUv86PhL9wq2MeDFC
+
+Independent (own scan + own run, report not trusted). origin/main (9bbd78b) is an ancestor of cfe819b (merge 4ae2758), so the coordinator can fast-forward.
+
+## Earlier fixes, each checked in code
+1. cnh: dev/build/jplx.js:17 `n:HALL_SRV` ("Tích Cần viện"); role only in the place function word `fn`; plxPlaceMsg (jplx.js:72) = HALL_SRV + " vắng, …". DONE. Dư đồ pin reads "Tích Cần viện" (iPad shot, looked at).
+2. Nam Chiếu: jkc2.js:19 `P.dien:HALL_NC` = "Quân Ân điện" (jhall.js:25); jhall loads before jkc2 in assemble.py (no TDZ). Bắc Địch "Kim trướng của phụ hãn" is not a bare role. DONE.
+3. hall-names-scan.js now also flags bare "Chính điện"/"Dãy nhà cung nhân" and checks HALL_NC/HALL_SRV: own run = 13 palaces, 42 plaques unique, OK. My own grep of dev/build for 'Dãy nhà|phối điện|Chính điện': remaining hits are comments, proper names (Cần Chính điện, Dưỡng Hòa điện) and generic nouns in sentences ("giữa chính điện" in jworld.js:94) — no place label left. DONE.
+4. Shots: see below (partly done, non-blocking).
+
+## Tests
+- bash dev/tools/quickcheck.sh: PASS · 172 s · open 1475 ms · old save ok · perf render 180/233 ms, tab 414/489, buổi 1132/932, tasks>200ms 15/17 · core gates PASS.
+- Rebuild (assemble.py) leaves the tree clean; index.html holds "Quân Ân điện" and "Tích Cần viện".
+- palace-map.js iPad 1180x820@2 (file:// URL, CDN 401 → grey/no pictures): 0 page errors, no overflow; hall list spots "Thể Hòa điện / Dưỡng Xuân hiên / Thanh Thu trai" (+ bóng người chips); room title "Dưỡng Xuân hiên · Cảnh Phúc cung" (+ role "Đông phối điện." as the small line after it); LOOKED at the room shot and the Dư đồ shot (pin "Tích Cần viện · 2 bóng · 2 khắc" readable). No kit/CSS diff in jpm.js (only strings/hallName calls).
+- VANPHONG: no % / odds words added.
+
+## Not done / limits (honest)
+- The iPad shots of the hall list and detail came out covered by the title art / a Thánh chỉ modal from the test's promotion; hall-list names verified from DOM text instead. Fold 755x1000@2 not re-shot this round (parallel run timed out under CPU load; earlier round already shot Fold). Sổ line: code path only.
+- Edge-clipped iPad hotspot labels: cannot be judged without the real pictures (CDN 401). The diff does not touch any hotspot box (b.x/y/w/h, KPM_DATA unchanged); label text length is comparable ("Thanh Thu trai" vs "Tây phối điện"), so any clipping is pre-existing placement. Non-blocking; Foreman C / next reviewer with CDN access should look at real pictures.
+- Shots stayed local scratch, none in git, nothing uploaded.
+
+## Verdict: PASS cfe819b
