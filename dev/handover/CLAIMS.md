@@ -53,5 +53,5 @@ princess-rank-sample | CDN _review only | W69 session_011xDdVR1dCYEdUEDNx5i8Dh |
 b10-a26-c12-c22 (cont.) | CDN _review only | W59d session_011xDdVRxCrF47w5aXpZu8M5 (W59c archived) | RUNNING | 2026-11-18T17:16Z (Foreman C ROOT-28)
 b10-a26-c23-c32 (cont.) | CDN _review only | W60d session_011xDdVQACckBi7ydyWzJjVm (W60c archived) | RUNNING | 2026-11-18T17:16Z (Foreman C ROOT-28)
 b10-a36-c23-c32 (cont.) | CDN _review only | W63f session_011xDdVNP9vpwSWD4MCe2jrh (W63e archived) | RUNNING | 2026-11-18T17:39Z (Foreman C ROOT-29)
-a18-scan-2 regens | CDN _review only | W65c session_011xDdVSGYARH7UaE8An5xZ1 (W65b archived) | RUNNING | 2026-11-18T17:16Z (Foreman C ROOT-28)
+a18-scan-2 regens | CDN _review only | W65d session_011xDdVQVsntxHXp735x2for (W65c archived) | RUNNING | 2026-11-18T17:40Z (Foreman C ROOT-29)
 quoc-tang-sample | CDN _review only | W70 session_011xDdVSaNiUfxn72JcAYZo8 | DONE (archived) | 2026-11-18T17:17Z (Foreman C ROOT-28)
