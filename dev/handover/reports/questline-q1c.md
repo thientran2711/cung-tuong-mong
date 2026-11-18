@@ -1,8 +1,8 @@
-# Q1c — men help asks (jnrask_m.js) — SẴN SÀNG KIỂM b99f4bc
+# Q1c — men help asks (jnrask_m.js) — SẴN SÀNG KIỂM c6015bd
 PRIORITY #1 CHECK: OD L644/L1072/L1243/L1252 | main none (Q1 engine not on main yet) | review/questline-q1a 1b6005a (engine + shared nrask-scan, hz exempt), review/questline-q1b 344e1e9 (no clash), review/questline-q1c (this) | claims E7c2 session_01DgYSWkXhh7hPLBJjzFYMWJ (successor of E7c session_01DgYSWmbeLw227mrkMikC5W)
 START_CTX ~5 % · lineage depth 2 · worker (no children).
 
-Branch **review/questline-q1c @ b99f4bc** (from main a95e8d4; NOT rebased yet — Foreman E: hold review until q1a lands, then rebase on main and put `'jnrask_m.js'` right after `'jnrask.js'`/`'jnrask_b.js'` in assemble.py).
+Branch **review/questline-q1c @ c6015bd** = ONE commit on review/questline-q1a 1b6005a (Foreman E 05:59Z: base q1c on q1a; old a95e8d4..b99f4bc replaced, force-with-lease). On c6015bd: nrask-scan ALL PASS, nrask-m-scan PASS, nrask-engine ALL PASS. When q1a lands on main, q1c applies on top as is.
 Files: `dev/build/jnrask_m.js` (data only), `dev/build/assemble.py` (+jnrask_m.js after jnroadm.js), `dev/test/nrask-m-scan.js`, `dev/test/nrask-m-shots.js` (new), rebuilt index.html/sw.js.
 
 ## What
