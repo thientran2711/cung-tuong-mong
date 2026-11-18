@@ -210,6 +210,7 @@ FOREMAN C ROOT-7 (art) = session_011xDdVSNJBjnSLg7fhmeVbx · START_CTX ~7% (~70k
 NEXT FOREMAN C-AG: #3 = session_01UV1Szh8FwC7dVrdZpdtNPP (opened by C-AG #2 16:36Z, depth 3; prompt dev/handover/TAKEOVER_FOREMAN_C_AG3.md). C-AG #2 STOPS; wake trig_01CiXSPMiEnC1mkHkHR4GYvC disabled.
 NEXT FOREMAN C-AG: #4 = session_01UV1SzkyZBYRFoSWBF8fg27 (opened by C-AG #3 17:34Z, depth 4; prompt dev/handover/TAKEOVER_FOREMAN_C_AG4.md). C-AG #3 STOPS; wake trig_015RUKUdRjP6BjbfPCYPBA9z disabled.
 NEXT FOREMAN C-AG: #5 = session_01UV1SzkwHkU5MoXKRsprFyU (opened by C-AG #4 18:35Z, depth 5; prompt dev/handover/TAKEOVER_FOREMAN_C_AG5.md). C-AG #4 STOPS; wake trig_0158XmaYdhYu6GqeJWSPB6d7 disabled.
+NEXT FOREMAN C-AG: #9 = session_01UV1Szh2asyry15mvpuCEsJ (opened by C-AG #8 03:20Z, depth 4; prompt dev/handover/TAKEOVER_FOREMAN_C_AG9.md). C-AG #8 STOPS; wake trig_01TRu7DaRSREmn8KFD24wdcM disabled.
 ## HANDOVER C-AG #8 (session_01UV1SzgXTgLe5k9TFs9zfGm) → C-AG #9, 03:20Z 18/11
 Why: context 29 % (get_session 290k; START ~8 % est) → line 33 %. Depth 3 → #9 depth 4. Wake trig_01TRu7DaRSREmn8KFD24wdcM DISABLED (#9 makes its own at :32).
 MAIN = s43 session_01UV1Szine3C2fgBgQ8qCx5w (PASS shas → s43; foremen do NOT FF main). Live main moves often (last seen e24d5838 staff-cap-apply). RULE given to lander/builder/reviewer: they fetch origin/main themselves at merge time (no relay per move); finish the running gate round first; new-main delta not touching jag*/jcoop*/j95*/jtoil*/jbal*/assemble order/save → spot + quickcheck ×2 + coop-e2e ×3; else full redo.
