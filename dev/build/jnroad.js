@@ -90,12 +90,32 @@ function nrAsk(v){try{if(isSrv()||S.out||nrLearn())return false;const N=v.nr;if(
  const a=typeof rgSideOf==="function"?rgSideOf(v):null;return !!(a&&a===rgSideOf(S))}catch(e){return false}}
 /* the help kind of a chapter from its main cast key (w) */
 const NRHK={emp:"emp",th:"th",hh:"hh",dad:"thu",bro:"thu",off:"thu",man:"thu",envoy:"thu",mom:"thu",v:"do",foe:"do",foed:"do",v2:"do",eun:"do",gd:"do",doc:"y",maid:"che",mis:"che",kid:"che",mama:"che"};
-function nrKind(A){const w=A&&A.w;let k=NRHK[w]||"bac";try{const B=A.B||{};const ws=Object.keys(B).map(b=>B[b].w).filter(Boolean);if(!NRHK[w]&&ws.length)k=NRHK[pick(ws)]||k}catch(e){}return k}
-function nrOffer(v){const N=v.nr,A=nrCh(N.r,N.n);if(!A||typeof q72!=="function"||!T72I["nr_"+nrKind(A)])return false;const q=q72();if(!q)return false;
- const hk=nrKind(A);if(q.ch.concat(q.a).some(c=>nrIsV(c,v)&&/^nr_/.test(c.tid)))return false;
+/* Q1 (OD:L1601 (2) "xin tiền xin bạc … không phải là phụ tuyến", audit D-Q2): only the kinds in BAL.nroad.kinds are dealt; «bac» is off
+   (its j72 template stays registered so a help hồi of an old save still ends). A chapter whose cast maps to no allowed kind takes the first
+   allowed kind of its hồi cast, else BAL.nroad.kinds[0]. */
+const nrKOk=k=>!!k&&nrB().kinds.includes(k)&&!!(typeof T72I==="object"&&T72I["nr_"+k]);
+function nrKind(A){const w=A&&A.w;let k=NRHK[w]||"bac";let ws=[];try{const B=A.B||{};ws=Object.keys(B).map(b=>B[b].w).filter(Boolean);if(!NRHK[w]&&ws.length)k=NRHK[pick(ws)]||k}catch(e){}
+ if(nrKOk(k))return k;const L=ws.map(x=>NRHK[x]).filter(nrKOk);return L.length?L[0]:nrB().kinds[0]}
+/* Q1 — the help hồi tells the real story (OD:L644, L1252, L1601 (2); audit §4 Q1; reports/questline-expert.md B2/B4):
+   NRASK[<chapter id>] (dev/build/jnrask*.js) = one ask or a list of asks {k help kind, h the ask in the asker's voice about THAT chapter,
+   c optional step title, o:[[label, loss line], [label, loss line]]} for the two stock options of kind k (their costs, odds and losses stay
+   the stock ones, ONE CORE BAL.nroad.op/.bac/.suc). Chapter id = the jroad id (ROAD14[road][n], e.g. "tt_co_7"); a men template chapter =
+   "<template id>_<n>". Slots: {me} {Me} the asker's word for herself, {call} {Call} her word for the player (VANPHONG §2, me()/call()),
+   {he} nàng/hắn, {B} her rival (fallback «kẻ kia»). The ask picked is kept in the quest (p.av, index in the entry); no entry, a kind not
+   allowed, or a template that no longer matches → today's stock card (old saves unchanged). */
+function nrAskId(r,n){try{if(!NRM[r]&&n===BAL.road.first-1)return r;const R0=!NRM[r]&&typeof ROAD14==="object"&&ROAD14[r];return R0&&R0[n]||r+"_"+n}catch(e){return r+"_"+n}}
+function nrAskL(r,n){const E=window.NRASK&&NRASK[nrAskId(r,n)];return E?[].concat(E):[]}
+const nrAskOk=a=>!!(a&&nrKOk(a.k)&&a.h&&a.o&&a.o.length>=2&&a.o[0]&&a.o[1]);
+/* the kind and the ask of a help hồi (consorts, maids, eunuchs, men: every offer site) */
+function nrAskPick(N,A){const L=nrAskL(N.r,N.n);const ix=L.map((a,i)=>nrAskOk(a)?i:-1).filter(i=>i>=0);
+ if(ix.length){const i=ix[R(ix.length)];return{hk:L[i].k,av:i}}return{hk:nrKind(A),av:-1}}
+function nrAskOf(X){const p=X&&X.p;if(!p||!p.nr||p.av==null||p.av<0)return null;const a=nrAskL(p.nr,p.nn)[p.av];return nrAskOk(a)&&X.T&&X.T.id==="nr_"+a.k?a:null}
+window.nrAskId=nrAskId;window.nrAskL=nrAskL;window.nrAskPick=nrAskPick;window.nrAskOf=nrAskOf;
+function nrOffer(v){const N=v.nr,A=nrCh(N.r,N.n);if(!A||typeof q72!=="function")return false;const K=nrAskPick(N,A),hk=K.hk;if(!T72I["nr_"+hk])return false;const q=q72();if(!q)return false;
+ if(q.ch.concat(q.a).some(c=>nrIsV(c,v)&&/^nr_/.test(c.tid)))return false;
  if(typeof rgL==="function"){try{const L=rgL();if(v.queen&&L.hh&&!L.hh.done&&L.hh.st>0)return false}catch(e){}}
  const riv=nrRival(v);const bk=riv&&riv!==S?(riv.queen?"hh":"rv"):null;
- q.ch.push({tid:"nr_"+hk,at:wk(),rk:v.queen?"hh":"rv",ri:v.id,bk,bi:bk?riv.id:null,p:{nr:N.r,nn:N.n}});N.hk=hk;N.hs=1;N.t=Math.max(N.t,S.turn+Math.ceil((nrB().dl+2)/3));return true}
+ q.ch.push({tid:"nr_"+hk,at:wk(),rk:v.queen?"hh":"rv",ri:v.id,bk,bi:bk?riv.id:null,p:{nr:N.r,nn:N.n,av:K.av}});N.hk=hk;N.hs=1;N.t=Math.max(N.t,S.turn+Math.ceil((nrB().dl+2)/3));return true}
 /* result of the help hồi → her chapter (called by the j72 outcome fn) */
 function nrHelped(X,how){try{const v=X.A&&X.A.o;if(!v||!v.nr)return"";const N=v.nr,B=nrB(),he=nrHe(v);N.hs=2;
  if(how>0){N.hb=B.help;return ` ${v.name} ghi nhớ ơn này; chương «${nrChT(v)}» của ${he} thêm phần chắc.`}
@@ -175,6 +195,16 @@ window.nrRoads=nrRoads;window.nrCh=nrCh;window.nrInit=nrInit;window.nrMonth=nrMo
  def("bac",X=>`“${Me(X)} đang cần bạc gấp, việc nhà không thể nói ra. ${call(X)} giúp ${me(X)} lần này, ${me(X)} không quên.”`,C(X=>`Giúp ${nrHe(X.A&&X.A.o)} việc bạc`,
   O("Cho mượn bạc",{c:{get bac(){return bac()}},k:1,to:"ok",l:{},lx:"bạc ra khỏi tay ngươi"}),
   O("Góp công thay bạc: đi lo liệu giúp",{c:{suc:-B().suc},p:B().op.pS,sk:"tamco",l:{danh:-B().op.l2},lx:X=>`việc không xong, ${nrHe(X.A&&X.A.o)} mất lòng tin`,to:"ok"}),betray));
+ /* Q1: a help hồi with its own ask (NRASK, see nrAskOf) speaks of the asker's chapter — the ask, the step title and the two option labels and
+    loss lines; costs / odds / losses stay the stock ones of its kind. Every other card (no entry, old saves) reads the stock text unchanged. */
+ const tx=(t,X)=>{const he=nrHe(X.A&&X.A.o),c=call(X);return String(t||"").replace(/\{(me|Me|call|Call|he|B)\}/g,(m,k,i,src)=>{
+   const w=k==="me"?me(X):k==="Me"?Me(X):k==="Call"?c:k==="call"?c.charAt(0).toLowerCase()+c.slice(1):k==="he"?he:X.B?X.B.n:"kẻ kia";
+   return i===0||/[.!?:“]\s*$/.test(src.slice(0,i))?cap(w):w})};
+ const val=(f,X)=>typeof f==="function"?f(X):f;
+ for(const id of Object.keys(T72I)){if(!/^nr_/.test(id))continue;const T=T72I[id],st=T.s&&T.s[0];if(!st||!st.ch||st.ch.length<2)continue;
+  const h0=T.h,n0=st.n;T.h=X=>{const a=nrAskOf(X);return a?`“${tx(a.h,X)}”`:val(h0,X)};st.n=X=>{const a=nrAskOf(X);return a&&a.c?tx(a.c,X):val(n0,X)};
+  st.ch.slice(0,2).forEach((o,i)=>{const on=o.n,ol=o.lx;o.n=X=>{const a=nrAskOf(X);return a?tx(a.o[i][0],X):val(on,X)};
+   o.lx=X=>{const a=nrAskOf(X);return a&&a.o[i][1]?tx(a.o[i][1],X):val(ol,X)}})}
 })();
 
 /* r1: an NPC-road request reaches j72 through its follow-up queue (q.ch), so j72 would print «Lại là {A}: chuyện lần trước còn tiếp.» —
@@ -226,10 +256,10 @@ function nrMPlay(s){const N=s.nr,A=nrCh(N.r,N.n);if(!A){N.n=nrNext(N.r,N.n+1);if
    mistress (bond or a shared side) — never for a maid whose mistress is cold to the player */
 function nrMAsk(s){try{if(isSrv()||S.out||nrLearn())return false;const ms=nrMis(s);if(!ms)return false;if(ms===S)return (s.loyal||0)>=nrB().m.askLoy;
  if(aff(ms,S)>=nrB().askRel)return true;const f=facOf(ms);return !!(f&&f===facOf(S))}catch(e){return false}}
-function nrMOffer(s){const N=s.nr,A=nrCh(N.r,N.n);if(!A||typeof q72!=="function")return false;const hk=nrKind(A);if(!T72I["nr_"+hk])return false;const q=q72();if(!q)return false;
+function nrMOffer(s){const N=s.nr,A=nrCh(N.r,N.n);if(!A||typeof q72!=="function")return false;const K=nrAskPick(N,A),hk=K.hk;if(!T72I["nr_"+hk])return false;const q=q72();if(!q)return false;
  const [rk,ri]=nrMK(s);if(q.ch.concat(q.a).some(c=>nrSameA(c,rk,ri)&&/^nr_/.test(c.tid)))return false;
  const riv=nrMRival(s);const bb=riv?nrMK(riv):[null,null];
- q.ch.push({tid:"nr_"+hk,at:wk(),rk,ri,bk:bb[0],bi:bb[1],p:{nr:N.r,nn:N.n}});N.hk=hk;N.hs=1;N.t=Math.max(N.t,S.turn+Math.ceil((nrB().dl+2)/3));return true}
+ q.ch.push({tid:"nr_"+hk,at:wk(),rk,ri,bk:bb[0],bi:bb[1],p:{nr:N.r,nn:N.n,av:K.av}});N.hk=hk;N.hs=1;N.t=Math.max(N.t,S.turn+Math.ceil((nrB().dl+2)/3));return true}
 function nrMMonth(news){const B=nrB();let n=news||0;
  for(const s of nrMaidL().concat(nrServL("eunuch"))){try{const N=s.nr||nrMInit(s);if(!N||N.x||!N.n||S.turn<N.t)continue;
   if(N.h&&N.n===N.h&&!N.hs&&nrMAsk(s)&&nrMOffer(s))continue;
