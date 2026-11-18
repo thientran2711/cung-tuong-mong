@@ -34,3 +34,5 @@ B10 consorts c29, c30 | claude/cung-tuong-mong-handover-hj0h8w | session_011xDdV
 B10 consorts c31, c32 | claude/cung-tuong-mong-handover-hj0h8w | session_011xDdVSRdcknPuRrtYQaLcW (W49, Foreman C) | RUNNING | 2026-11-18T07:44Z
 | E8f2 STEAL MINI-GAME FIX 2 (merge main, kitQuick) | review/steal-minigame | E ROOT #3 | session_01DgYSWm5h3LgBS7jeBr3BtW | SẴN SÀNG KIỂM 814078e5 (report dev/handover/reports/steal-minigame.md) | 18/11 09:20Z |
 | E8r3 delta re-review steal-minigame 814078e5 (sonnet SMALL) | review/steal-minigame | E ROOT #3 | session_01DgYSWncv22qzaK5jVgtddX | RUNNING | 18/11 07:48Z |
+| LAND-D4: odds-cap-r1 + title-stale-sel-rv + toil-react-top-rv (+ staff-cap-row3 after PASS) stacked on newest main (sonnet lander; ORDER ROOT-49 07:39Z) | review/land-d4 | D | session_01964izDCcXRDoeKSAR5QUAA | RUNNING | 18/11 07:49Z |
+| D8 POISON THE EMPEROR / THÁI HẬU ROAD (opus; ORDER ROOT-49 #2 07:41Z; OD:L602/L430) | review/poison-road | D | session_01964izBos2heoQd7Cty2bAu | RUNNING | 18/11 07:49Z |
