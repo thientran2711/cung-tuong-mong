@@ -26,3 +26,6 @@ Caps table UNCHANGED (BAL.promo.cap still [[1,0],[2,0],[2,1],[2,1],[3,1],[3,2],[
 2. Her spy (spyFor "me") removed from an NPC household by that NPC's trim is not told (pre-existing; NPC data-only rule).
 3. S.thO (Thái hậu household) is never trimmed (pre-existing; capTh not enforced by capTrim).
 4. Owner 18/11 01:50Z empty-picture rule: the notice's picture box is empty for ~1–2 s in host mode until info-noi-vu.webp loads → belongs to the life-preload worker (add info-noi-vu to the preload set).
+
+## Re-merge onto main f6ee11b1 (MAIN s41 request) — PASS 62a6846f
+f984fa5f + origin/main f6ee11b1 (only generated index.html/sw.js conflicted → main's, then rebuilt) = 62a6846f (FF of f6ee11b1). quickcheck PASS (open 1125 ms, old save ok, render 140/135, buổi 614/591, core gates PASS) · staff-cap 28/28 · staff-root 16/16 · one-core PASS · coop-e2e 63/63 (run in parallel with quickcheck).
