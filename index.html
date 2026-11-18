@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"9f9c6c2b+","t":"2026-11-18T14:26Z","c":"shown-odds-one-path r1: plant on the spot is done in person (actCtx x.here, no sent-servant pen); Vì sao names spy knowledge (whyKnow); tes…","b":"be262aafeae1","h":[{"s":"aa997f3c+","t":"2026-11-18T13:46Z","c":"look-fx r13: index.html / sw.js rebuilt from merged sources"},{"s":"4475ea24+","t":"2026-11-18T12:33Z","c":"grand-endings-engine: site rebuilt (index.html / sw.js / assets.json) after fix 4 + main merge"},{"s":"68cbbb28+","t":"2026-11-18T12:00Z","c":"review life-preload-fu r2v: no half-drawn / empty figure while the HD twin comes (whole group: every fig-* img)"},{"s":"a8036600+","t":"2026-11-18T12:06Z","c":"Rebuild index.html/sw.js after merging origin/main"},{"s":"3f45eda9+","t":"2026-11-18T11:52Z","c":"steal-minigame FIX 1: PEND flag (chooseM renders before the game opens: the stale-'mg' reset no longer cancels a real async game); KIT.md §…"},{"s":"19a23498+","t":"2026-11-18T11:03Z","c":"review poison-road r2 (ONE CORE OD:L1267): the weak-Sức odds rule had two sources — j9 odA typed suc\u003c30 → −15 while the poison card 'Vì sao…"},{"s":"421a2362+","t":"2026-11-18T11:04Z","c":"live-test-reds r1: emotion-acts scold/scoldlive pin the ODDS CAP roll (act failed softly ~5 %, no pick queued)"},{"s":"d795be81+","t":"2026-11-18T10:34Z","c":"residence-seats-r2: a consort out of the palace gives up her side-hall room (palFix); jworld đại xá re-houses at once"},{"s":"65aeddd7+","t":"2026-11-18T10:26Z","c":"review d19-gift-work r1: a refused piece (jdis: stays in her chest) eases nothing — no free peace; test covers it; site rebuilt"},{"s":"32cc2a68+","t":"2026-11-18T10:12Z","c":"kit-kpb: kpb-shots.js (after-only Fold|iPad shots of pgpick, giftpick, short picker)"}]};
+window.CTM_BI={"s":"8bd3372e","t":"2026-11-18T16:05Z","c":"opt-card-short r2: Được slot always labelled Được, disabled card = red !, dress Xa xỉ/Lưu ý/Son phấn behind !, content centred, scan lists …","b":"4a2f7bb526e8","h":[{"s":"9f9c6c2b+","t":"2026-11-18T14:26Z","c":"shown-odds-one-path r1: plant on the spot is done in person (actCtx x.here, no sent-servant pen); Vì sao names spy knowledge (whyKnow); tes…"},{"s":"aa997f3c+","t":"2026-11-18T13:46Z","c":"look-fx r13: index.html / sw.js rebuilt from merged sources"},{"s":"4475ea24+","t":"2026-11-18T12:33Z","c":"grand-endings-engine: site rebuilt (index.html / sw.js / assets.json) after fix 4 + main merge"},{"s":"68cbbb28+","t":"2026-11-18T12:00Z","c":"review life-preload-fu r2v: no half-drawn / empty figure while the HD twin comes (whole group: every fig-* img)"},{"s":"a8036600+","t":"2026-11-18T12:06Z","c":"Rebuild index.html/sw.js after merging origin/main"},{"s":"3f45eda9+","t":"2026-11-18T11:52Z","c":"steal-minigame FIX 1: PEND flag (chooseM renders before the game opens: the stale-'mg' reset no longer cancels a real async game); KIT.md §…"},{"s":"19a23498+","t":"2026-11-18T11:03Z","c":"review poison-road r2 (ONE CORE OD:L1267): the weak-Sức odds rule had two sources — j9 odA typed suc\u003c30 → −15 while the poison card 'Vì sao…"},{"s":"421a2362+","t":"2026-11-18T11:04Z","c":"live-test-reds r1: emotion-acts scold/scoldlive pin the ODDS CAP roll (act failed softly ~5 %, no pick queued)"},{"s":"d795be81+","t":"2026-11-18T10:34Z","c":"residence-seats-r2: a consort out of the palace gives up her side-hall room (palFix); jworld đại xá re-houses at once"},{"s":"65aeddd7+","t":"2026-11-18T10:26Z","c":"review d19-gift-work r1: a refused piece (jdis: stays in her chest) eases nothing — no free peace; test covers it; site rebuilt"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -29166,7 +29166,7 @@ function wkLessonOK(k,mode){const l=S.arts[k],cost=tchFee(k);if(!S||S.dead||Q.le
 function wkAsk(k,mode,run){const a=ARTS.find(x=>x.k===k),l=S.arts[k],fee=mode==="teacher"?tchFee(k):0;const O=[];
  for(const kind of wkKindsOf(k)){const K=WK[kind];for(let m=0;m<3;m++)O.push({n:`${K.w} · ${K.mn[m]}`,fx:K.mat[m]?{bac:-K.mat[m]}:{},x:`${wkOddsTxt(S,kind,m)}${K.per?" · phải dâng trong tuần":""}${K.fin?" · "+wkFinTxt(K):""}`,go:()=>{wkPend={kind,mat:m};run();if(!S.mg){wkPend=null;if(K.mat[m])apply({bac:K.mat[m]})}}})}
  O.push({n:"Thôi",fx:{}});
- Q.push({act:1,t:`${mode==="prac"?"Tự học":"Học"} ${a.n}: làm ra tác phẩm gì?`,who:pMe(),h:`<p>Tự tay làm (chơi trò tài nghệ): ra thành phẩm. Học nhanh: ${mode==="prac"?"":"vẫn tiến bộ, "}không ra thành phẩm. Phẩm = phần chơi trò tài nghệ (từ 0 đến 10) + ${a.n} bậc ${l}: +${wkLvQ(S,k)} + vật liệu (thường +${WMAT[0]}, tốt +${WMAT[1]}, quý +${WMAT[2]}).</p><p class="past">${wkThTxt()}</p><p>Chỉ vật liệu quý mới thành Tuyệt phẩm. Vật liệu tốt, quý còn làm quà giá trị hơn và bán được giá hơn.${fee?` Phí thầy ${fee} bạc trả riêng.`:""}</p>`,opts:O});showModal();render()}
+ Q.push({act:1,t:`${mode==="prac"?"Tự học":"Học"} ${a.n}: làm ra tác phẩm gì?`,who:pMe(),h:`<p>Tự tay làm (chơi trò tài nghệ): ra thành phẩm. Học nhanh: ${mode==="prac"?"":"vẫn tiến bộ, "}không ra thành phẩm.</p>${kitNumBox(`<p>Phẩm = phần chơi trò tài nghệ (từ 0 đến 10) + ${a.n} bậc ${l}: +${wkLvQ(S,k)} + vật liệu (thường +${WMAT[0]}, tốt +${WMAT[1]}, quý +${WMAT[2]}).</p><p class="past">${wkThTxt()}</p>`)}<p>Chỉ vật liệu quý mới thành Tuyệt phẩm. Vật liệu tốt, quý còn làm quà giá trị hơn và bán được giá hơn.${fee?` Phí thầy ${fee} bạc trả riêng.`:""}</p>`,opts:O});showModal();render()}
 (function(){const l0=lessonMode;lessonMode=function(k,mode){if(wkPend||!wkLessonOK(k,mode))return l0.apply(this,arguments);wkAsk(k,mode,()=>l0.call(this,k,mode))}})();
 /* practice once mastered: j82's playArt gives the raw score directly when present; otherwise the art's lesson game */
 function wkPractice(k){if(!wkLessonOK(k,"prac"))return;wkAsk(k,"prac",()=>{if(!wkLessonOK(k,"prac"))return;apply({suc:-10});spend(2);
@@ -39151,7 +39151,12 @@ function kitOptFill(E,done){const pad=x=>{const cs=getComputedStyle(x);return (p
  done("fill")}
 /* ONE PICTURE SIZE PER GROUP (owner 17/11 "nút to nút nhỏ", §6.2b): every option card of one dialog (or one sibling list) gets the SAME picture size.
    The size is the one the SHORTEST card text allows (no empty space under any text-shortest card); all tall when every text fills the tall picture. */
-function kitOptFit0(b){try{if(!b||!b.isConnected)return;const G=kitOptGroup(b);if(!G.includes(b))G.push(b);G.forEach(x=>{kitOptSet(x,0);x.style.removeProperty("min-height")});
+/* KIT §6.2 FINAL (owner 18/11 07:25Z): every DIALOG option card (button.ka.kopt outside a person card) has the ONE picture box 66x88 (3:4, css in jopic) and the cards of one dialog are ONE height
+   = the tallest card of that dialog (Tốn + Được rows only, so the tallest is rarely above the 106 px floor). No per-card picture size, no text-driven strip any more. */
+function kitOptEqual(b){const r=b.closest("#modal .dlg")||b.parentElement||document;const G=[...r.querySelectorAll("button.ka.kopt")].filter(x=>x.isConnected&&!x.closest(".pc")&&x.offsetParent);if(!G.length)return;
+ G.forEach(x=>x.style.removeProperty("min-height"));const H=Math.ceil(Math.max(...G.map(x=>x.getBoundingClientRect().height)));
+ G.forEach(x=>{x.style.setProperty("min-height",H+"px","important");const bd=x.querySelector(":scope > .kabody");x.__kof=x.clientWidth+"x"+Math.round(bd?bd.getBoundingClientRect().height:0);x.dataset.kapic="eq"})}
+function kitOptFit0(b){try{if(!b||!b.isConnected)return;if(b.matches("button.ka.kopt")&&!b.closest(".pc")){kitOptEqual(b);return}const G=kitOptGroup(b);if(!G.includes(b))G.push(b);G.forEach(x=>{kitOptSet(x,0);x.style.removeProperty("min-height")});
  const E=[];let w=0,h=0;G.forEach(x=>{const art=x.querySelector(":scope > .kaart");x.dataset.kapic="";if(!x.isConnected||getComputedStyle(art).display==="none"||getComputedStyle(x).flexDirection!=="row")return;
   const a=art.getBoundingClientRect();if(a.width<24||a.width>112||a.height<a.width*1.15)return;E.push(x);w=Math.max(w,a.width);h=Math.max(h,a.height)});
  if(!E.length)return;E.forEach(x=>x.style.removeProperty("min-height"));const lo=Math.round(w*KIT_OPT_SQ.min),bhs=()=>E.map(x=>x.querySelector(":scope > .kabody").getBoundingClientRect().height);
@@ -53619,7 +53624,7 @@ function tsNpcDress(p,th){const P={};const inv=(p.inv||[]).map(e=>e.k);const sma
 function tsDressAnnounce(){tsTagsFresh();const s=tsS();const th=pick(Object.keys(TS_THEME));s.dress={th,m:S.month%12+1,y:S.month===12?S.year+1:S.year};const T=TS_THEME[th];const H=tsDressHost();
  /* the Hoàng hậu announces it at the morning greeting: she sees her face (no named grey figure) */try{if(H&&typeof k61Meet==="function")k61Meet(H,"Buổi thỉnh an, ngươi được thấy người.")}catch(e){}
  const have=TS_SLOT.filter(([sl,,fit])=>S.inv.some(e=>fit(e.k)&&T.tags.includes(e.k))).length;
- tsPanel({t:"Hội phối đồ: báo đề",who:H?pv(H):pTH(),art:"https://ctm-img.victoria-tntt.workers.dev/img/ev-yen-tiec.webp",h:`<p>${H?`Hoàng hậu ${H.name}`:"Thái hậu"} truyền: trung tuần tháng sau mở hội phối đồ trong ngự hoa viên. Đề năm nay: <b>${T.n}</b> (${T.d}).</p>${tsRows([["Bốn chỗ","Cài tóc · Đeo tay · Áo · Hương, phấn","n"],["Ngươi có",`${have}/4 chỗ có đồ hợp đề`,have>=2?"g":"r"],["Xa xỉ",`đề ${T.n} chuộng cả bộ khoảng ${T.r?T.r[0]:40} đến ${T.r?T.r[1]:120}: thấp quá là quá giản dị, cao quá là phô trương`,"n"],["Lưu ý","quá phẩm vị của mình thì bị trừ nặng, dù hợp đề","n"],tsMkRow(th,s.dress.m)])}`,
+ tsPanel({t:"Hội phối đồ: báo đề",who:H?pv(H):pTH(),art:"https://ctm-img.victoria-tntt.workers.dev/img/ev-yen-tiec.webp",h:`<p>${H?`Hoàng hậu ${H.name}`:"Thái hậu"} truyền: trung tuần tháng sau mở hội phối đồ trong ngự hoa viên. Đề năm nay: <b>${T.n}</b> (${T.d}).</p>${tsRows([["Bốn chỗ","Cài tóc · Đeo tay · Áo · Hương, phấn","n"],["Ngươi có",`${have}/4 chỗ có đồ hợp đề`,have>=2?"g":"r"]])}${kitNumBox(tsRows([["Xa xỉ",`đề ${T.n} chuộng cả bộ khoảng ${T.r?T.r[0]:40} đến ${T.r?T.r[1]:120}: thấp quá là quá giản dị, cao quá là phô trương`,"n"],["Lưu ý","quá phẩm vị của mình thì bị trừ nặng, dù hợp đề","n"],tsMkRow(th,s.dress.m)]))}`,
   opts:tsBorrowOpts(th).concat(tsMkScoutOpts(th,s.dress.m),[tsOpt({n:"Đã hiểu, sẽ chuẩn bị",duoc:["mua thêm đồ ở Nội vụ phủ hay mượn của người thân trước hội"]})])})}
 function tsBorrowOpts(th){const T=TS_THEME[th];const s=tsS();if(s.borrow)return[];const F=liveRivals(true).filter(v=>aff(v,S)>=25&&v.inv&&v.inv.some(e=>T.tags.includes(e.k)&&!S.inv.some(x=>x.k===e.k)));
  return F.slice(0,2).map(v=>{const e=v.inv.find(e=>T.tags.includes(e.k)&&!S.inv.some(x=>x.k===e.k));return tsOpt({n:`Mượn ${itm(e.k).n} của ${v.name}`,need:[{t:`nàng thân với ngươi (${aff(v,S)}/25)`,ok:aff(v,S)>=25}],duoc:[`${itm(e.k).n} dùng cho hội, xong thì trả`],mat:[],kem:["thiện cảm -2 (nợ ân tình)","làm mất hay hỏng thì phải đền"],
@@ -56709,7 +56714,7 @@ function wkrMat(kind,rid){const k=KWR.k,mode=KWR.mode,run=KWR.run,K=WK[kind],r=w
  for(let m=0;m<3;m++)O.push({n:`${r.n} · ${K.mn[m]}`,fx:K.mat[m]?{bac:-K.mat[m]}:{},x:`${wkOddsTxt(S,kind,m)}${K.per?" · phải dâng trong tuần":""}${K.fin?" · "+wkFinTxt(K):""}`,
   go:()=>{wkPend={kind,mat:m,r:rid,subj:wkrSubj(kind,r)};run();if(!S.mg){wkPend=null;if(K.mat[m])apply({bac:K.mat[m]})}}});
  O.push({n:"Thôi",fx:{}});
- Q.push({act:1,t:`${r.n}: dùng vật liệu gì?`,who:pMe(),h:`<p>Phẩm = phần chơi (từ 0 đến 10) + ${a.n} bậc ${l}: +${wkLvQ(S,a.k)} + vật liệu (thường +${WMAT[0]}, tốt +${WMAT[1]}, quý +${WMAT[2]}).</p><p class="past">${wkThTxt()}</p><p>Chỉ vật liệu quý mới thành Tuyệt phẩm. Vật liệu tốt, quý còn làm quà giá trị hơn và bán được giá hơn.${fee?` Phí thầy ${fee} bạc trả riêng.`:""}</p>`,opts:O})}
+ Q.push({act:1,t:`${r.n}: dùng vật liệu gì?`,who:pMe(),h:`${kitNumBox(`<p>Phẩm = phần chơi (từ 0 đến 10) + ${a.n} bậc ${l}: +${wkLvQ(S,a.k)} + vật liệu (thường +${WMAT[0]}, tốt +${WMAT[1]}, quý +${WMAT[2]}).</p><p class="past">${wkThTxt()}</p>`)}<p>Chỉ vật liệu quý mới thành Tuyệt phẩm. Vật liệu tốt, quý còn làm quà giá trị hơn và bán được giá hơn.${fee?` Phí thầy ${fee} bạc trả riêng.`:""}</p>`,opts:O})}
 wkAsk=function(k,mode,run){const a=ARTS.find(x=>x.k===k);if(!wkKindsOf(k).some(x=>WKR[x]))return;Object.assign(KWR,{k,mode,run,kind:KWR.k===k?KWR.kind:null});
  Q.push({t:`${mode==="prac"?"Tự học":"Học"} ${a.n}: làm gì?`,kit:{kind:"info",pick:1,html:wkrBody()},btn:"Đã hiểu",cls:"kwrd"});showModal();render()};
 document.addEventListener("click",e=>{const t=e.target.closest&&e.target.closest("[data-kwrtab],[data-kwrgo]");if(!t||!document.querySelector("#modal .kshop.kwr"))return;e.stopPropagation();
@@ -57111,7 +57116,7 @@ window.kitOptStackTitle=kitOptStackTitle;
 function kpOptArt(b){if(!b||b.classList.contains("kcard"))return;if(b.dataset.kopt==="1"&&b.querySelector(":scope > .kaart"))return;
  const kan=b.querySelector(":scope > .kat > .kan, :scope > .kabody > .kat > .kan");if(!kan)return;
  const name=typeof kpActName==="function"?kpActName(kan):kitOptPlain(kan.textContent);
- const p=kitOptPic(name,b);
+ let p=kitOptPic(name,b);if(!p.src&&b.__koph&&typeof KIT_PH!=="undefined"&&KIT_PH.act){let tn="light";try{if(typeof kitPhTone==="function")tn=kitPhTone(name)}catch(e){}p={src:KIT_PH.act[tn]||KIT_PH.act.light,key:"",how:"ph",tone:tn}}
  /* the tiny portrait / icon beside the title goes: the picture on the left replaces it (owner) */
  kan.querySelectorAll(":scope > .md, :scope > img").forEach(e=>e.remove());b.querySelectorAll(":scope > .md").forEach(e=>e.remove());
  if(!p.src){b.classList.add("kopt");b.dataset.kopt="1";return}
@@ -57149,28 +57154,104 @@ ${typeof kitCompactCSS==="function"?kitCompactCSS("button.ka.kart.kopt",84,112):
    the repeated class only lift the specificity above theirs (2 ids, 5 classes). */
 html body #modal :is(#mb,*)>.opts.opts.opts>button.ka.kopt.kart{grid-column:1/-1!important;order:0!important}
 html body #modal :is(#mb,*)>.opts.opts.opts:has(> button.ka.kopt.kart),html body #modal :is(#mb,*)>.kpscopts.kpscopts.kpscopts:has(> button.ka.kopt.kart),.kitpg-opts:has(> button.ka.kopt.kart){display:grid!important;flex-direction:unset!important;grid-template-columns:minmax(0,1fr)!important;grid-auto-rows:max-content!important;align-items:stretch!important;align-content:start!important}
-/* equal sizes: a row is never lower than the picture + padding (the options area scrolls, KIT 32.5: a "1fr" row would be squeezed into
-   its height), so cards with the usual rows are all the same height; a card with more text grows, never clips */
-html body button.ka.kart.kopt{min-height:calc(var(--kah,112px) + 18px)!important;box-sizing:border-box}
-/* review/opt-pics r1: the person dialog (jk4 32.7 .kdper) sets min-height:max-content on every option (2 ids, 3 classes); in its short
-   scrolling grid at 844x390 that let the rows shrink to 41 px and the 130 px cards OVERLAPPED. The picture floor must win there too. */
 /* review/pcard-actrow: a person dialog (kdper, picture/figure column left) lists its option rows as a FLEX COLUMN: in the grid form above the auto rows stayed at the 130 px floor
    while a long row (Cần / Được / Mất) overflowed its box and was cut (spy-target picker, 755 px) */
 html body #modal .dlg.kdper>#mb>.opts.opts.opts.opts.opts:has(> button.ka.kopt.kart){display:flex!important;flex-direction:column!important;grid-template-columns:none!important;gap:8px!important}
 html body #modal .dlg.kdper>#mb>.opts.opts.opts.opts.opts>button.ka.kopt.kart{flex:0 0 auto!important;height:auto!important}
-html body #modal :is(#mb,*)>:is(.opts,.kpscopts):is(.opts,.kpscopts):is(.opts,.kpscopts)>button.ka.kart.kopt{min-height:calc(var(--kah,112px) + 18px)!important}
 `;document.head.appendChild(st)})();
+/* ===== KIT §6.2 FINAL (owner 18/11 ~07:25Z, review/opt-card-short): ONE card form for EVERY dialog option =====
+   picture 66x88 (3:4 rectangle, B form) + title (odds chip under it) + EXACTLY two rows: Tốn and Được. An option without a cost / gain still shows the row, greyed ("Tốn: không" / "Được: không"),
+   so every card is the same size. Mất folds into the Tốn row, the extra Được rows into the Được row (copies, marked .kdup). Everything else (Cần, Bại, Kèm, Ghi chú, lead text) is folded (.kofold) and
+   opens from the "!" in the card's corner (kitOptInfo); the tap never chooses the option. EXCEPTION: a DISABLED card keeps its red Cần row (the player must see why it is dead). */
+function kitOptCompactRows(b){try{if(!b||b.dataset.kocr==="1")return;const kb=b.querySelector(".kb");if(!kb)return;b.dataset.kocr="1";
+ const note=kb.querySelector(".kr-note"),ton=kb.querySelector(".kr-ton .krv");
+ if(note){[...note.querySelectorAll(".krv > .ef")].forEach(e=>{const t=(e.textContent||"").trim().replace(/^\(|\)$/g,"");
+  if(/^trả khi làm xong$/i.test(t)&&ton){const x=document.createElement("span");x.className="ef n";x.textContent="trả khi làm xong";const sp=document.createElement("span");sp.className="ksep";sp.textContent="·";ton.append(sp,x);e.remove()}});
+  note.querySelectorAll(".krv > .ksep").forEach(s=>{if(!s.previousElementSibling||!s.nextElementSibling)s.remove()});if(!note.querySelector(".krv > .ef"))note.remove()}}catch(e){}}
+window.kitOptCompactRows=kitOptCompactRows;
+/* a picture-less option gets the §59 placeholder in the same slot when a sibling has a picture (one form per dialog) */
+let KIT_OPT_UNI=0;function kitOptUnify(b){if(KIT_OPT_UNI)return;try{KIT_OPT_UNI=1;const c=b.parentElement;if(!c)return;const sib=[...c.children].filter(x=>x.matches&&x.matches("button.ka")&&x.matches(KIT_OPT_SEL));if(!sib.some(x=>x.querySelector(":scope > .kaart")))return;
+ sib.forEach(x=>{if(x.querySelector(":scope > .kaart")||x.classList.contains("kcard"))return;x.__koph=1;delete x.dataset.kopt;kpOptArt(x);kitOptCompactRows(x);kitOptFinal(x)})}catch(e){}finally{KIT_OPT_UNI=0}}
+function kitOptFinal(b){try{if(!b||!b.matches||!b.matches("button.ka.kopt")||b.classList.contains("kcard")||b.closest(".pc"))return;
+ {const k1=b.querySelector("small.kb");if(b.__kofSig&&k1&&b.__kofSig===k1.innerHTML+"|"+b.className)return}/* idempotent: our own DOM edits must not re-trigger the observers that call us */
+ b.querySelectorAll(".kfill,.kobang,.kdup").forEach(e=>e.remove());b.querySelectorAll(".kofold").forEach(e=>e.classList.remove("kofold"));
+ const body=b.querySelector(":scope > .kabody")||b;let kb=body.querySelector(":scope > small.kb, :scope > .kb");if(!kb){kb=document.createElement("small");kb.className="kb";body.appendChild(kb)}
+ const row=(cls,lab,chips)=>{const r=document.createElement("span");r.className="kr "+cls;r.innerHTML=`<span class="krl">${lab}</span><span class="krv"></span>`;const v=r.querySelector(".krv");chips.forEach((c,i)=>{if(i){const sp=document.createElement("span");sp.className="ksep kdup";sp.textContent="·";v.appendChild(sp)}v.appendChild(c)});return r};
+ const chipsOf=r=>r?[...r.querySelectorAll(":scope > .krv > .ef, :scope > .krv > .kwhy")]:[];
+ const dupOf=c=>{const x=c.cloneNode(true);x.classList.add("kdup");return x};
+ const R=k=>[...kb.querySelectorAll(":scope > .kr-"+k)];
+ let ton=R("ton")[0],mats=R("mat"),gains=[...R("thanh"),...R("duoc")],gain=gains[0];
+ if(!ton){if(mats.length){ton=row("kr-ton kdup0","Tốn",[]);ton.querySelector(".krv").append(...chipsOf(mats[0]).map(dupOf));mats=[];/* the Mất row folds below; its chips already stand in Tốn */ kb.dataset.komat="1"}
+  else{ton=row("kr-ton kfill","Tốn",[]);const e=document.createElement("span");e.className="ef n";e.textContent="không";ton.querySelector(".krv").appendChild(e)}}
+ else if(mats.length){const v=ton.querySelector(".krv");mats.forEach(m=>chipsOf(m).forEach(c=>{const sp=document.createElement("span");sp.className="ksep kdup";sp.textContent="·";v.append(sp,dupOf(c))}))}
+ if(gain){const v=gain.querySelector(".krv");gains.slice(1).forEach(g=>chipsOf(g).forEach(c=>{const sp=document.createElement("span");sp.className="ksep kdup";sp.textContent="·";v.append(sp,dupOf(c))}))}
+ else{gain=row("kr-duoc kfill","Được",[]);const e=document.createElement("span");e.className="ef n";e.textContent="không";gain.querySelector(".krv").appendChild(e)}
+ const keep=new Set([ton,gain]);const dis=b.classList.contains("kdis");
+ let extra=false;[...kb.children].forEach(r=>{if(keep.has(r)||r.classList.contains("kdup0"))return;r.classList.add("kofold");if(!(r.classList.contains("kr-mat")||gains.includes(r)))extra=true});
+ /* order: Tốn · Được · the folded rest; the Được slot is ALWAYS labelled Được (a rolled card's Thành row, Được ngay …) */
+ {const l=gain.querySelector(":scope > .krl");if(l)l.textContent="Được"}kb.insertBefore(ton,kb.firstChild);ton.after(gain);
+ const lead=b.querySelector(".klead");if(lead){lead.classList.add("kofold");extra=true}
+ if(extra){const m=document.createElement("span");m.className="kobang";m.setAttribute("role","button");m.setAttribute("aria-label","Xem thêm");m.title="Xem thêm";m.textContent="!";if(dis)m.classList.add("kobred");b.appendChild(m)}
+ b.dataset.kofin="1";b.__kofSig=kb.innerHTML+"|"+b.className}catch(e){console.error("kitOptFinal",e)}}
+window.kitOptFinal=kitOptFinal;
+(function(){const k0=kpOptArt;kpOptArt=function(b){const r=k0.apply(this,arguments);try{kitOptCompactRows(b);kitOptFinal(b);kitOptUnify(b)}catch(e){}return r};window.kpOptArt=kpOptArt})();
+/* "!" on a card: the full card (every row, lead text) in an overlay; tap anywhere closes; the option is NOT chosen */
+function kitOptInfo(b){try{let z=document.getElementById("kpinfo");if(!z){z=document.createElement("div");z.id="kpinfo";z.setAttribute("role","dialog");z.addEventListener("click",e=>{e.stopPropagation();z.hidden=true});document.body.appendChild(z)}
+ const c=b.cloneNode(true);c.removeAttribute("id");c.querySelectorAll("[id]").forEach(e=>e.removeAttribute("id"));c.querySelectorAll(".kaart,.kobang,.kfill,.kdup,.kdup0").forEach(e=>e.remove());c.querySelectorAll(".kofold").forEach(e=>e.classList.remove("kofold"));
+ c.querySelectorAll(".kr-ton,.kr-duoc").forEach(r=>{if(!r.querySelector(".krv > *"))r.remove()});
+ c.classList.remove("kopt","kart");c.classList.add("kopinfo");c.disabled=true;c.style.removeProperty("min-height");c.type="button";z.innerHTML="";z.appendChild(c);z.hidden=false}catch(e){console.error(e)}}
+window.kitOptInfo=kitOptInfo;
+document.addEventListener("click",e=>{try{const m=e.target&&e.target.closest&&e.target.closest("button.ka.kopt > .kobang");if(!m)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();kitOptInfo(m.parentElement)}catch(x){}},true);
+
+/* ===== KIT §6.2c DIALOG NUMBER LINES BEHIND "!" (owner 18/11 07:25Z): the formula / threshold lines of a dialog's info (Phẩm = …, Thường dưới 6 · Khá 6 · …) are NOT shown in the dialog;
+   kitNumBox(html) puts a "!" in the info's corner (float right) and keeps the lines hidden (.knum); the key sentences stay as normal text. Tap "!" = the lines in the overlay (#kpinfo). */
+function kitNumBox(h){return `<span class="knbang" role="button" tabindex="0" aria-label="Xem thêm" title="Xem thêm">!</span><div class="knum">${h}</div>`}
+window.kitNumBox=kitNumBox;
+document.addEventListener("click",e=>{try{const m=e.target&&e.target.closest&&e.target.closest(".knbang");if(!m)return;const n=(m.parentElement||document).querySelector(":scope > .knum");if(!n)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
+ let z=document.getElementById("kpinfo");if(!z){z=document.createElement("div");z.id="kpinfo";z.setAttribute("role","dialog");z.addEventListener("click",ev=>{ev.stopPropagation();z.hidden=true});document.body.appendChild(z)}
+ z.innerHTML=`<div class="kopinfo knumpop">${n.innerHTML}</div>`;z.hidden=false}catch(x){}},true);
+(function(){const st=document.createElement("style");st.id="kit-num-bang";st.textContent=`
+#modal .knum{display:none!important}
+#modal .knbang{float:right;margin:0 0 4px 8px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:700 .85rem/1 var(--body,sans-serif);color:var(--gold,#8f5f0c);background:#fffaf0;border:1px solid var(--gold,#8f5f0c);cursor:help;position:relative}
+#modal .knbang::after{content:"";position:absolute;inset:-9px}
+#kpinfo>.knumpop{width:min(560px,92vw);box-sizing:border-box;padding:12px 14px;background:#fffaf0;border:1px solid var(--gold,#8f5f0c);border-radius:10px;color:var(--ink,#2a1a12);cursor:zoom-out;font-size:.9rem}
+#kpinfo>.knumpop p{margin:0 0 6px}`;document.head.appendChild(st)})();
+(function(){const st=document.createElement("style");st.id="kit-opt-final";const mk=O=>`${O}{--kaw:66px!important;--kah:88px!important;min-height:104px!important;height:auto!important;align-items:center!important;box-sizing:border-box;position:relative;padding-top:6px!important;padding-bottom:6px!important}
+${O}>.kaart{flex:0 0 66px!important;width:66px!important;height:88px!important;align-self:center!important}
+${O} .kat{flex-wrap:wrap!important;padding-right:24px}
+${O} .kat>.kan{line-height:1.15}
+${O} .kat>.kan{flex:1 1 100%!important;min-width:0!important}
+${O} small.kb{row-gap:1px!important}
+${O} small.kb>.kr>.krv{display:block!important}
+${O} small.kb>.kr>.krv>*{display:inline!important}
+${O} small.kb>.kr>.krv>.ksep{display:inline!important;margin:0 4px!important;opacity:.55}
+${O} .kofold{display:none!important}
+${O} .kfill .ef{color:var(--dim,#9a8a78)!important;font-weight:400!important}
+${O} .kfill .krl{opacity:.6}
+${O}>.kobang{position:absolute;top:5px;right:6px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:700 .85rem/1 var(--body,sans-serif);color:var(--gold,#8f5f0c);background:#fffaf0;border:1px solid var(--gold,#8f5f0c);cursor:help;z-index:2}
+${O}>.kobang.kobred{color:#b3301f;border-color:#b3301f}
+${O}>.kobang::after{content:"";position:absolute;inset:-9px}`;
+ st.textContent=mk("html body #modal#modal button.ka.kart.kopt.kopt")+"\n"+mk("html body .kitpg-opts>button.ka.kart.kopt.kopt")+`
+/* KIT §6.2c IPAD TWO COLUMNS (owner 18/11 ~09:20Z, try): on the spread (html.kv2) the option cards of a frame sit in TWO columns when there are 2 or more; only when the right column is >= 560 px (container query; narrower frames keep ONE column); card = the same 66x88 form, text column ~190 px, titles and Được chips wrap (never cut) */
+html.kv2 body #modal#modal .dlg.kszlive .k3right{container-type:inline-size}
+@container (min-width:560px){html.kv2 body #modal#modal .dlg.kszlive #mb .opts.opts.opts.k3btns.k3btns:has(>button.kopt~button.kopt){grid-template-columns:repeat(2,minmax(0,1fr))!important}
+html.kv2 body #modal#modal .dlg.kszlive #mb .opts.opts.opts.k3btns.k3btns:has(>button.kopt~button.kopt)>button.kopt{grid-column:auto!important}}
+#kpinfo{position:fixed;inset:0;z-index:100001;background:#1a0f08cc;display:grid;place-items:center;cursor:zoom-out;padding:16px}
+#kpinfo[hidden]{display:none!important}
+#kpinfo>button.kopinfo{width:min(560px,92vw);max-height:calc(86*var(--kvh,1vh));overflow:auto;text-align:left;cursor:zoom-out;opacity:1!important;pointer-events:none;background:#fffaf0!important;color:var(--ink,#2a1a12)!important;filter:none!important}`;document.head.appendChild(st)})();
 /* kit sample page (§6.2): three options of "Hoàng hậu triệu kiến" through the real modal markup → kaNorm → kpOptArt */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Thẻ lựa chọn: tranh bên trái, thông tin bên phải (thẻ gọn)",html:()=>
  `<div class="opts kitpg-opts">`+
  [["Cúi đầu nhận lỗi","tốn: 1 khắc"],["Thưa rằng do Hoàng thượng định","tốn: 1 khắc"],["Dâng lễ vật xin bỏ qua","tốn: Bạc -20, 1 khắc"]]
   .map(([n,x],i)=>`<button class="opt" data-ksample="${i}">${n}<small>${typeof kitParse==="function"?kitParse(x):x}</small></button>`).join("")+`</div>`})}catch(e){}
-/* kit sample page (§6.2b, review/kit-fit, owner 16/11 s21): the card picks its picture form from its text — short text → SQUARE (no empty space under the
-   text), long text → the tall 3:4 picture (kitOptFit, jk4) */
-try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2b",title:"Thẻ lựa chọn: chữ ngắn thì tranh vuông, chữ dài thì tranh đứng (không chừa khoảng trống)",html:()=>
+/* kit sample page (§6.2b FINAL): no cost / no gain → grey "không" rows, long note behind "!", every card one size */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2b",title:"Thẻ lựa chọn: một cỡ, chỉ Tốn và Được (còn lại sau dấu !)",html:()=>
  `<div class="opts kitpg-opts">`+
- [["Tiếp","thân +3"],["Xin về tảo mộ tổ tiên",`tốn: Sức -${BAL.kitpage.demo.tomb.suc} · được: Đức +${BAL.kitpage.demo.tomb.duc}, cha mẹ vui lòng`],["Dâng lễ vật xin Hoàng hậu bỏ qua cho lần này",`tốn: Bạc -${BAL.kitpage.demo.gift.bac}, ${BAL.kitpage.demo.k} khắc · được: Hoàng hậu thiện cảm +${BAL.kitpage.demo.gift.hh}, Danh +${BAL.kitpage.demo.gift.danh} · mất: Thái hậu thiện cảm -${BAL.kitpage.demo.gift.th} · cần: Bạc ≥ ${BAL.kitpage.demo.gift.bac}`]]
+ [["Tiếp","thân +3"],["Xin về tảo mộ tổ tiên",`tốn: Sức -${BAL.kitpage.demo.tomb.suc} · được: Đức +${BAL.kitpage.demo.tomb.duc}, cha mẹ vui lòng · ghi chú: chơi 6 phần ra Khá`],["Thôi, không làm gì","ghi chú: để lần sau"]]
   .map(([n,x],i)=>`<button class="opt" data-ksample="${i}">${n}<small>${typeof kitParse==="function"?kitParse(x):x}</small></button>`).join("")+`</div>`})}catch(e){}
+/* kit sample page (§6.2c): the dialog group rule, described (the real frames are the modals themselves) */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2c",title:"Khung hội thoại: điện thoại = khung cao đúng tỷ lệ màn hình; iPad = hai cột thẻ",html:()=>
+ `<div class="kpnote">Điện thoại dọc: mọi khung hội thoại giữa màn hình kéo cao cả trên lẫn dưới, tỷ lệ bằng màn hình. iPad: khi đủ chỗ, thẻ lựa chọn chia hai cột.</div>`})}catch(e){}
 /* kit sample page (§6.3, review/pcard-actrow): the acts of a person card = the same long row, one per line (pop-up / tab / any width) */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.3",title:"Việc trên thẻ người: hàng dài, mỗi việc một dòng",html:()=>
  `<div class="pc"><div class="pcr"><div class="pcb">`+
@@ -61862,7 +61943,7 @@ function tdsTchAsk(k,then){const V=VIR.find(x=>x.k===k),fee=virCost(virLv(S,k),S
  for(let m=0;m<3;m++){const need=fee+(K.mat[m]||0);O.push({n:`${r.n} · ${K.mn[m]}`,fx:{},x:`${K.mat[m]?`tốn: Bạc -${K.mat[m]} (trả khi làm xong) · `:""}${wkOddsTxt(S,kind,m)}${K.fin?" · "+wkFinTxt(K):""}${newSt?` · kèm: học ${rcpStN(kind,st[0])}`:""}`,
   dis:S.bac<need?`thiếu bạc (cần ${need})`:"",go:()=>{if(S.bac<need){log(`Không đủ bạc: cần ${need}.`);tdsReset();return}tdsRun(k,lm,{kind,mat:m,r:rid,subj:wkrSubj(kind,r)})}})}
  O.push({n:"Thôi",fx:{},go:()=>tdsReset()});
- Q.push({act:1,t:`${r.n}: dùng vật liệu gì?`,who:pMe(),h:`<p>Phẩm = phần chơi (0..10) + ${V.n} bậc ${l}: +${wkLvQ(S,k)} + vật liệu (thường +${WMAT[0]}, tốt +${WMAT[1]}, quý +${WMAT[2]}).</p><p class="past">${wkThTxt()}</p><p>Chỉ vật liệu quý mới thành Tuyệt phẩm.${fee?` Phí thầy ${fee} bạc trả riêng.`:""}</p>`,opts:O})}})();
+ Q.push({act:1,t:`${r.n}: dùng vật liệu gì?`,who:pMe(),h:`${kitNumBox(`<p>Phẩm = phần chơi (0..10) + ${V.n} bậc ${l}: +${wkLvQ(S,k)} + vật liệu (thường +${WMAT[0]}, tốt +${WMAT[1]}, quý +${WMAT[2]}).</p><p class="past">${wkThTxt()}</p>`)}<p>Chỉ vật liệu quý mới thành Tuyệt phẩm.${fee?` Phí thầy ${fee} bạc trả riêng.`:""}</p>`,opts:O})}})();
 /* run the lesson itself (j85 lessonVir, or review/tuduc-mg tdPlay); the work is made once the lesson really happened */
 function tdsRun(k,mode,pick){TDV.pend=Object.assign({k,mode},pick);TDV.hit=null;
  if(mode==="prac"){if(!tdsOK(k,"prac")){tdsReset();return}apply({suc:-BAL.tds.pracSuc});spend(BAL.tds.pracK);TDV.hit={k};tdsFinish("tự học");save();render();return}
@@ -65954,6 +66035,19 @@ html body #modal .dlg.kszlive.kszlive{width:var(--kszw)!important;max-width:calc
 #modal .dlg.kszlive[data-narrow="1"]{overflow-x:hidden;overflow-y:auto}
 #modal .dlg.kszlive[data-pres="one"] .k3right{justify-content:center}
 #modal .dlg.kszlive .k3right>.kpmain{flex:none;min-width:0;display:block;padding:0;margin:0}
+/* KIT §6.2 FINAL / frame rule (owner 18/11 07:25Z, EVERY layout): the portrait + the info (event picture, text, chips) STAND STILL; only the option list scrolls. The right column never scrolls as a whole. */
+/* KIT §8.4 TALL DIALOG ON THE PHONE (owner 18/11 ~09:20Z, Fold portrait): every centre dialog frame grows at the top and the bottom into a tall rectangle with the SAME aspect ratio as the page
+   (KIT_FRAME.page, = the full screen's shape); never taller than the screen (max-height of the frame rules). One rule for the whole #modal .dlg group, html.kv1 only (iPad / spread unchanged). */
+html.kv1 body #modal .dlg.dlg{aspect-ratio:${KIT_FRAME.page.w}/${KIT_FRAME.page.h};--kph:calc(100*var(--kvh,1vh) - 24px)}
+html.kv1 body #modal .dlg.kszlive.kszlive>#mb{display:flex!important;flex-direction:column;flex:1 1 auto!important;min-height:0;overflow:clip}
+html.kv1 body #modal .dlg.kszlive>#mb>.k3body{flex:1 1 auto;min-height:0}
+html body #modal .dlg.kszlive .k3right{overflow:hidden!important;overflow:clip!important}
+html body #modal .dlg.kszlive .k3right>:not(.opts){flex:none!important}
+/* narrow / stacked frame (the options are a sibling of .k3body inside #mb): same rule — #mb never scrolls, .k3body (portrait + info) stands still, only .opts scrolls */
+html body #modal .dlg.kszlive>#mb:has(>.opts.k3btns){display:flex!important;flex-direction:column!important;overflow:clip!important;min-height:0!important;flex:1 1 auto!important}
+html body #modal .dlg.kszlive>#mb:has(>.opts.k3btns)>.k3body{flex:none!important}
+html body #modal .dlg.kszlive>#mb>.opts.opts.opts.k3btns{flex:1 1 auto!important;min-height:112px!important;overflow-y:auto!important;overscroll-behavior:contain}
+html body #modal .dlg.kszlive .k3right>.opts.opts.opts{flex:0 1 auto!important;min-height:112px!important;overflow-y:auto!important;overscroll-behavior:contain;max-height:none!important}
 html body #modal .dlg.kszlive #mb .opts.opts.opts.k3btns.k3btns{display:grid!important;flex-direction:row!important;grid-template-columns:repeat(var(--k3c,1),minmax(0,1fr))!important;align-content:start!important;gap:${KIT_SIZE.v3.btn.gap}px;margin:0;flex:none;max-height:none;overflow:visible;position:static}
 #modal .dlg.kszlive>#mb>.opts.k3btns{padding:0 12px 12px;box-sizing:border-box}
 html body #modal .dlg.kszlive #mb .opts.opts.opts.k3btns.k3btns>button{grid-column:span var(--k3s,1)!important;order:0!important;width:auto;min-width:0;max-width:none;margin:0}
@@ -71788,7 +71882,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="be262aafeae1";window.CTM_BUILD=BUILD;
+const BUILD="4a2f7bb526e8";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
