@@ -54,9 +54,12 @@ PRIORITY #1 CHECK: OD 17/11 ~23:30Z (smudge = CODE on the makeup layer, not Magn
 ## r10 (owner: pink must not read as vertical streaks; paler)
 - vừa / nặng: the pink vertical run (smear) is removed entirely; the pink is only the diffuse flush from the blush (BAL.looks.smuFx.blush.wash .16 / .22, blur .2u + .1u ≈ 13 % of face width, no direction, no blot). nhẹ keeps its small downward blush drag. Grey lash runs untouched. Checked at 420 px width (phone size): no pink stripe visible.
 
+## r11 (owner: the smudge's own pink much paler — the makeup blush is already pink below)
+- BAL.looks.smuFx.blush.wash [0,0,.055,.075] (about 1/3 of r10): only a hint of a smeared spread, no new colour. Grey runs, lip drag, nhẹ untouched. Checked at 420 px.
+
 ## Open items / follow-ups
 - Small figure faces (~40 px): nhẹ barely visible, vừa/nặng read as a tear stain.
 - Shots outside git; built root files not committed.
 
 ## State
-branch review/smudge-code 873622c (pushed). Waiting for verdict.
+branch review/smudge-code 46f6903 (pushed). Waiting for verdict.
