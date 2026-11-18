@@ -15,6 +15,7 @@ const BOTJS=PLAY==='idle'?'':['inpage6.js','inty.js'].map(f=>fs.readFileSync(pat
 (async()=>{const b=await chromium.launch();const errs=[];
  const jobs=[];for(const road of ROADS)for(let L=0;L<NL;L++){for(let j=0;j<4;j++)jobs.push({road,mode:'in',j});jobs.push({road,mode:'rand',j:-1},{road,mode:'rand',j:-1},{road,mode:'kind',j:L%4},{road,mode:'cruel',j:(L+2)%4})}
  if(process.env.MAXJ)jobs.length=Math.min(jobs.length,+process.env.MAXJ);/* smoke runs */
+ if(process.env.MODES){const M=process.env.MODES.split(",");for(let i=jobs.length-1;i>=0;i--)if(!M.includes(jobs[i].mode))jobs.splice(i,1)}/* verify runs on some bots only, e.g. MODES=kind,cruel */
  const res=[];let next=0;
  const worker=async w=>{let p=null;
   const boot=async()=>{if(p)await p.context().close();const ctx=await b.newContext({viewport:{width:755,height:1000},serviceWorkers:'block'});p=await ctx.newPage();p.setDefaultTimeout(0);
@@ -29,7 +30,7 @@ const BOTJS=PLAY==='idle'?'':['inpage6.js','inty.js'].map(f=>fs.readFileSync(pat
      const sc=n=>{if(mode==='rand')return 0;let v=0;const e=D.e[j];if(e.pull.includes(n))v+=3;if((e.close||[]).includes(n)||(e.doom||[]).includes(n))v-=6;
       if(mode==='kind'){if(D.lean.p.includes(n))v+=2;if(D.lean.m.includes(n))v-=2}if(mode==='cruel'){if(D.lean.m.includes(n))v+=2;if(D.lean.p.includes(n))v-=2}return v};
      let mon=0,stuck=0,err=null;
-     for(;mon<500&&!S.ge.done;mon++){if(S.dead||S.out){S.dead=false;S.out=0;S.suc=60}
+     for(;mon<500&&S.ge&&!S.ge.done;mon++){if(S.dead||S.out){S.dead=false;S.out=0;S.suc=60}
       const A=S.st.M;try{if(A&&!A.done&&!A.cur&&A.nb){A.due=0;fireBeat67(A)}if(A&&A.cur){const bd=beatDef67(A,A.cur);const O=opts67(A,bd);
         const s=O.map(o=>sc(o.n)+Math.random()*.5);const i=mode==='rand'?Math.floor(Math.random()*O.length):s.indexOf(Math.max(...s));const o=O[i];
         res67(thKey67(A),A.cur,i,o&&o.o!=null?oOf67(A,o,bd):100)}}catch(e){err=err||('beat '+e.message)}
@@ -39,7 +40,7 @@ const BOTJS=PLAY==='idle'?'':['inpage6.js','inty.js'].map(f=>fs.readFileSync(pat
       for(let g=0;g<40&&S.turn===t&&!window.__geHit;g++){Q.length=0;used=0;try{nextBuoi()}catch(e){err=err||('buoi '+e.message);break}}
       if(window.__geHit)break;
       if(Q.some(m=>m.pid==='ge1'))break;Q.length=0}
-     const s=S.ge;if(!window.__geHit&&!Q.some(m=>m.pid==='ge1'))return{err:err||'no hồi',mon,n:S.st.ch.n,all:!!S.st.ch.all};Q.length=0;
+     const s=S.ge;if(!s)return{err:"no S.ge",mon};if(!window.__geHit&&!Q.some(m=>m.pid==='ge1'))return{err:err||'no hồi',mon,n:S.st.ch.n,all:!!S.st.ch.all};Q.length=0;
      const pr=mode==='rand'?[Math.floor(Math.random()*4),Math.floor(Math.random()*3)]:[C.e[j][3],C.e[j][4]];
      const st=s.st.slice(),pull=s.pull.slice(),oc=Object.assign({},s.oc);geLive(s);const odds=s.st[j]==='o'&&j>=0?geOdds(s,j):null;
      const cf=j>=0?(D.e[j].cond||[]).filter(t=>!geDbg.term(s,j,t)).map(t=>t[0]==='s'?t[1]+':'+Math.round(geDbg.stat(t[1]))+'/'+((BAL.ge.gate[road+'_'+(j+1)]||{})[t[1]]||0):t.join('.')).join(','):'';

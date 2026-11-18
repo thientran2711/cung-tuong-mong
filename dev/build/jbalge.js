@@ -20,7 +20,7 @@ BAL.ge={
  /* odds of the open ending her pair points to: base + pull × per, clamped [min, max]; its condition not met → capped at noCond */
  odds:{base:22,per:9,min:5,max:88,noCond:12},
  /* option C shading lean: lean = Σ option tags × tag + (Đức now − Đức at life start) × duc + Ngã rẽ 2 sign × last; ≥ cut → thiện, ≤ −cut → ác, else natural */
- var:{tag:2,duc:.25,last:3,cut:8},
+ var:{tag:4,duc:.05,last:3,cut:8},/* run 3 (sensible bot): Đức climbs +19..+70 in every mode, so .25 drowned the arc choices; tag 4 + duc .05 lets the choices lead */
  /* "người ấy" for «Theo người ấy đi»: the strongest real bond — a man's tình ≥ men, or a consort's thiện cảm ≥ sis */
  bond:{men:30,sis:40},
  seat:["NDE","THH","HH","TM"],  /* one per world: taken by anyone → every other ending needing it turns fail-only */
