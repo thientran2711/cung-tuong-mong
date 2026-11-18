@@ -19,4 +19,4 @@ poison-road-r2-rv | review/poison-road-r2-rv | session_01964izEFTD1Fs4DqpreEzX8 
 | REVIEW npc-purpose BIG (opus): re-gate phase-A fixes; phase B after LIVE | review/npc-purpose | C-AG | session_01UV1SziEkemejE3R3kypQJT | RUNNING (waits head) | 18/11 10:40Z |
 | REVIEW coop-thin-f1 r1 (opus BIG) of 433da4de | review/coop-thin-f1-r1 | B | session_01N1tNP6GkdUZ2X1wV9UKnVH | RUNNING | 18/11 10:43Z |
 | d19-gift-work LIVE 5103d561 (main 13e2b834 → 5103d561, B) | review/d19-gift-work-r1 | B | session_01N1tNP33iyLFhRjyAqZVTqZ | LIVE 5103d561 | 18/11 10:45Z |
-| E9r3 delta review questline-q3 dcc822b1 (sonnet) | review/questline-q3 | E ROOT #3 | session_01DgYSWkvsxGUxGcrdbTazE9 | RUNNING | 18/11 10:44Z |
+| E9r3 delta review questline-q3 dcc822b1 (sonnet) | review/questline-q3 | E ROOT #3 | session_01DgYSWkvsxGUxGcrdbTazE9 | DONE PASS | 18/11 10:44Z |
