@@ -78,11 +78,33 @@ function j77Card(k,empty){if(!S||S.dead||Q.length)return;
 function j77LastWalk(k,tc){let n=0;try{n=countAt(k)}catch(e){}
  Q.push({act:1,t:accName(k),h:`<p>Đường đi ${tc} khắc · đến nơi là hết khắc, sang buổi sau.</p>${n?`<p class="past">Có ${n} bóng người ở đó.</p>`:""}<p class="past">Ngươi ở lại đó: buổi sau bắt đầu ngay tại chỗ, thấy ai ở đó.</p>`,
   opts:[{n:"Đi",fx:{},x:`Chắc chắn · tốn: ${tc} khắc · thành: đến nơi, thấy ai ở đó; người ở đó có thể đến gần`,go:()=>setTimeout(()=>{if(S&&!S.dead&&!Q.length)goTo(k)},0)},{n:"Thôi",fx:{},x:""}]});showModal()}
-/* one tap rule for the map and the list */
+/* one tap rule for the map and the list (owner 18/11 ~06:00Z, map-tap-go): TAP A PLACE = GO THERE AT ONCE, no confirm card.
+   After arriving a short kit toast (kitUndoToast, KIT §32.8c) states the cost + notes with "Quay lại" for a few seconds that undoes the trip
+   (state snapshot taken before the walk; co-op: no undo, the trip stands, because the friend already reads the new position).
+   A place she cannot reach now says why in a kit toast; a place with real choices (xin bái kiến / yết kiến, lẻn vào) still opens the ONE place card. */
+function j77Go(k,how){if(!S||S.dead||Q.length)return;let snap=null,u0=used,b0=S.buoi||0,p0=S.place;
+ try{if(!(typeof CW==="object"&&CW.on))snap=JSON.parse(JSON.stringify(ser()))}catch(e){snap=null}
+ goTo(k);
+ if(!S||S.dead||S.place!==k||Q.length||p0===k)return;
+ const left=Math.max(0,BAL.time.khac-used),spent=(S.buoi||0)!==b0?null:used-u0,rows=[];
+ const tcw=(()=>{try{return travel(p0,k)}catch(e){return spent||0}})();
+ rows.push(["Đường đi",`${tcw} khắc`]);
+ if((S.buoi||0)!==b0||left<=0)rows.push(["Hết khắc",(S.buoi||0)>=B4L&&left<=0?"sang ngày mới, ta ở lại đó":"sang buổi sau, ta ở lại đó"]);else rows.push(["Còn",`${left} khắc`]);
+ kitUndoToast(accName(k),rows,snap?()=>{try{window.__accSilent=1;deser(snap);save();render()}finally{window.__accSilent=0}}:null)}
 function j77Tap(k,empty){if(!S||S.dead||Q.length)return;if(empty||!k)return j77Card(k,empty||"Cung trống");
  if(S.place===k){window.__fromMap=1;tab="act";render();return}
- const st=accState(k);if(!st.why){if(k!=="home"&&st.tc&&used+st.tc>=BAL.time.khac&&!accEtq(S,k))return j77LastWalk(k,st.tc);goTo(k);if(S.place!==k&&!Q.length)j77Card(k);return}
+ const st=accState(k);
+ if(!st.why){j77Go(k);if(S.place!==k&&!Q.length)j77Card(k);return}
+ const sp=st.walk&&typeof walkSpill==="function"?walkSpill(k):null;
+ if(sp&&sp.ok&&!st.ask&&!st.kind)return walkSpillGo(k);/* crosses a buổi turn (night card, roulette…): no undo window, the buổi card says it */
+ if(!st.ask&&!st.kind&&!S.out&&!S.confined&&typeof srvToast==="function"){const why=String(st.why||"").replace(/\.$/,"");srvToast(`${accName(k)}: ${why}`);return}
  j77Card(k)}
+/* KIT §32.8c kitUndoToast: the kit result toast (#rtoast, seal "ĐẾN") + kit rows + one "Quay lại" button for ~6 s; undo = the given function (null = no button) */
+function kitUndoToast(title,rows,undo){if(window.__bot)return;const esc=x=>String(x==null?"":x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));let t=$("rtoast");if(!t){t=document.createElement("div");t.id="rtoast";document.body.appendChild(t)}
+ t.onclick=null;t.className="rtoast ok kundo";t.innerHTML=`<b class="seal">ĐẾN</b><div class="rt"><b>${esc(title)}</b><div class="rd">${rows.map(r=>`<span>${esc(r[0])} <b>${esc(r[1])}</b></span>`).join("")}</div></div>${undo?'<button type="button" class="kbtn alt kundob">Quay lại</button>':""}`;
+ const b=t.querySelector(".kundob");const off=()=>t.classList.remove("on");if(b)b.onclick=e=>{e.stopPropagation();off();clearTimeout(window.__rtT);try{undo()}catch(err){console.error("kitUndoToast",err)}};
+ void t.offsetWidth;t.classList.add("on");clearTimeout(window.__rtT);window.__rtT=setTimeout(off,kitPace(6000))}
+window.kitUndoToast=kitUndoToast;
 window.addEventListener("click",e=>{try{if(typeof tab==="undefined"||tab!=="go"||!S)return;
  const sp=e.target.closest("#panel .mspot, #panel .mtile");if(!sp)return;
  if(sp.classList.contains("mtile")&&e.target.closest(".acb"))return; /* the list keeps its own kit buttons */
@@ -100,6 +122,7 @@ window.addEventListener("click",e=>{try{if(typeof tab==="undefined"||tab!=="go"|
 .mspot>*,.mspot .acb,.mspot .macts{pointer-events:none!important}
 .mtile .tacts .acb{min-height:36px}
 .mspot.empty{z-index:1}
+.rtoast.kundo{bottom:118px}.rtoast.kundo .rd{display:flex;flex-direction:column;gap:1px}.rtoast.kundo .rd b{font-weight:700}.rtoast.kundo .kundob{margin-left:6px;min-height:36px;padding:4px 12px;flex:none;white-space:nowrap}
 `;document.head.appendChild(st)})();
 /* ================= LỄ NGHI THAY KHÓA PHẨM (j77, owner 11/14; values set from the historian's findings) =================
    One rule for everyone (her and every NPC):
