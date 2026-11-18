@@ -1,3 +1,4 @@
+★ GAME LAWS FIRST: read the "★ GAME LAWS — READ FIRST" block at the top of dev/rules/START_CORE.md (handover branch) before anything; reviewers FAIL work that breaks any law it touches.
 # ROOT-52 COMMON (every worker/reviewer opened by MAIN ROOT-52)
 Repo thientran2711/cung-tuong-mong. Rules/handover live on branch claude/cung-tuong-mong-handover-hj0h8w (worktree under /home/user/wt, `flock /home/user/wt/fetch.lock git fetch --depth=30 …`; never full-clone; never `git add -A` during a rebase).
 READ FIRST in full: dev/rules/START_CORE.md + START_WORKER.md (reviewers + START_REVIEWER.md), then only the dev/rules/topic/*.md your task touches (kit-ui.md for any UI), dev/kit/KIT.md sections you touch, dev/kit/VANPHONG.md for any player-visible word. Owner words: the OD lines named in your brief (dev/OWNER_DECISIONS.md, read them verbatim; screenshots in dev/handover/refs/).
