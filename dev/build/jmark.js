@@ -13,7 +13,7 @@
    ITEMS: markers are owned items (S.meMarks = ranks owned; S.meMark = the one she shows, null = highest owned). Every promotion gives that rank's
    marker (shown in the rank chest of review/gift-chest — jrankset rsChest/kitReward kind "chest" — via the hook below); old saves get every rank
    up to the current one on load. Tư trang has a "Dấu ấn" tab; tapping a marker → "Dùng" switches to it (any owned one, older ones too). ===== */
-window.KIT_MEMARK=window.KIT_MEMARK||{h:.085,gap:.012,min:26,max:72,tiny:12,big:1.05,bob:11,edge:4,stage:40,tagGap:5,/* bob = the bounce height of kmmBob (px up from rest, +3 % squash); edge = air kept under the frame's top edge (owner 18/11 ~03:5xZ: the marker's whole bounce range stays INSIDE the stage frame) */sc:[.78,.84,.9,.95,1,1.06,1.14,1.22]};
+window.KIT_MEMARK=window.KIT_MEMARK||{h:.085,gap:.012,min:26,max:72,tiny:12,big:1.05,bob:11,edge:4,/* bob = the bounce height of kmmBob (px up from rest, +3 % squash); edge = air kept under the frame's top edge (owner 18/11 ~03:5xZ: the marker's whole bounce range stays INSIDE the stage frame) */sc:[.78,.84,.9,.95,1,1.06,1.14,1.22]};
 /* glow gold = the Hoàng hậu title pill's token (jtitle kdh tier 8 = RCOL[7]); owner 18/11 ~06:05Z "rực giống Phượng minh thiên hạ" */
 const KMM_GOLD=(typeof RCOL!=="undefined"&&RCOL[7])||"#ffc400";
 const KMM_NAMES=["Mai ngà","Lan bạc ngọc bích","Hoa bạc ngọc lam","Búp sen ngọc","Cúc tím chim loan","Mẫu đơn hồng ngọc","Phượng vàng mây ngọc","Cánh phượng hổ phách"];
@@ -24,8 +24,7 @@ function kmmOwned(){try{if(!S)return[];const r=kmmRankNow();if(!Array.isArray(S.
 function kmmCur(){const L=kmmOwned();if(!L.length)return null;const c=S.meMark;return c!=null&&L.includes(c)?c:L[L.length-1]}
 function kmmSrc(r){return `img/kit/me-mark-${r}.webp`}
 /* room the stage must keep above her head for the marker's whole bounce (j59 floors topR with it; a taller figure shrinks just enough) */
-/* owner 18/11 ~06:05Z ("B cỡ 501"): on a stage her marker stands BESIDE her name tag (kmmTagSpot), not over the head, so a tall phoenix crown costs no height: the stage keeps only the edge air */
-window.kitMeMarkRoom=function(bh){try{const r=kmmCur();if(r==null)return 0;return KIT_MEMARK.edge||0}catch(e){return 0}};
+window.kitMeMarkRoom=function(bh){try{const r=kmmCur();if(r==null)return 0;const K=KIT_MEMARK,sc=K.sc[r]||1;const H=Math.round(Math.max(K.min*sc,Math.min(K.max*sc,bh*K.h*sc))*(K.big||1));return Math.ceil(H*1.03+bh*K.gap+K.bob+(K.edge||0))}catch(e){return 0}};
 window.kitMeMarkUse=function(r){const L=kmmOwned();if(!L.includes(r))return false;S.meMark=r;kmmSched();return true};
 /* ---------- head measurement (once per picture) ---------- */
 const KMM_HEAD={};
@@ -45,10 +44,6 @@ function kmmAvoid(){const L=[];document.querySelectorAll("#sc-t h2,#kshL,#kshR,.
 /* the drawn picture box inside an <img> (object-fit: contain) */
 function kmmBox(fig){const fr=fig.getBoundingClientRect();let bx=fr.left,by=fr.top,bw=fr.width,bh=fr.height;const nw=fig.naturalWidth,nh=fig.naturalHeight;
  if(nw&&nh){const ar=nw/nh;if(bw/bh>ar){const w=bh*ar;bx+=(bw-w)/2;bw=w}else{const h=bw/ar;by+=(bh-h)/2;bh=h}}return{bx,by,bw,bh}}
-/* KIT_MEMARK stage spot: left of HER name tag, its bottom on the tag's last (name) row; right of the tag when the left side would leave the frame; null = no tag yet (head rule below) */
-function kmmTagSpot(host,hr){try{const tg=document.querySelector("#j59metag .tag");if(!tg)return null;const q=tg.getBoundingClientRect();if(q.width<2||q.height<2)return null;const K=KIT_MEMARK,w=K.stage,g=K.tagGap,e=K.edge||4;
- let x=q.left-w-g;if(x<hr.left+e)x=q.right+g;if(x+w>hr.right-e)x=Math.max(hr.left+e,hr.right-e-w);
- return{l:x-hr.left+host.scrollLeft,t:q.bottom-w-hr.top+host.scrollTop,w}}catch(e){return null}}
 function kitMeMark(fig){try{
  if(!fig||!kmmIsMe(fig)||!fig.isConnected)return null;const host=fig.offsetParent||fig.parentElement;if(!host)return null;
  let mk=host.querySelector(":scope>.kmemark");const r=kmmCur();if(r==null){if(mk)mk.remove();return null}
@@ -57,7 +52,6 @@ function kitMeMark(fig){try{
  const im=mk.firstChild;if(im.getAttribute("src")!==src){im.onerror=()=>{mk.style.display="none"};im.onload=()=>{mk.style.display="";kmmSched()};im.setAttribute("src",src)}
  const fsrc=fig.currentSrc||fig.getAttribute("src")||"";const hd=fsrc?kmmHead(fsrc,()=>kitMeMark(fig)):{t:0,x:.5};if(!hd){mk.style.visibility="hidden";return mk}
  const B=kmmBox(fig),hr=host.getBoundingClientRect();if(B.bh<20){mk.style.visibility="hidden";return mk}
- if(fig.id==="mefig"){const sp=kmmTagSpot(host,hr);if(sp){mk.style.cssText=`left:${sp.l.toFixed(1)}px;top:${sp.t.toFixed(1)}px;width:${sp.w}px;height:${sp.w}px;visibility:visible`;mk.dataset.r=r;mk.dataset.at="tag";mk.classList.toggle("kmmove",kmmMotion());return mk}}
  const K=KIT_MEMARK,sc=K.sc[r]||1;let H=Math.round(Math.max(K.min*sc,Math.min(K.max*sc,B.bh*K.h*sc))*(K.big||1)); /* owner 17/11 07:15Z: +5 % (K.big, one kit value; 2–8 % allowed) */
  const ar=im.naturalWidth&&im.naturalHeight?im.naturalWidth/im.naturalHeight:1;
  const cx=B.bx+B.bw*hd.x,headTop=B.by+B.bh*hd.t,gap=Math.max(1,B.bh*K.gap),bottom=headTop-gap;
