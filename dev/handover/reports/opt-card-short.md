@@ -1,3 +1,26 @@
+# opt-card-short #2 — FINAL BUILD of the owner's 18/11 ~07:25Z verdict (worker session_01UV1Szke4R4h6YSy7KRfqhR, depth n/a)
+PRIORITY #1 CHECK: OD 3 (07:25Z verdict) | main none (old tall/square rule jk4 kitOptFit0 replaced) | review/* opt-card-short only | claims this row.
+Branch review/opt-card-short sha **5a21d8ef** on origin (main merged: 9c581406). quickcheck PASS on a4cf19e7 (core gates, time-spill, open, old save, perf); the last commit only touches jts.js + rebuilt site.
+## What changed (KIT §6.2b rewritten in KIT.md, canon overwrite)
+1. Dialog option card = ONE form everywhere: picture 66x88 (3:4 rectangle), min 106 px, all cards of a dialog the SAME height (`kitOptEqual`, jk4); no picture-less card (§59 placeholder via `kitOptUnify`); odds chip under the title.
+2. Rows = Tốn + Được only. No cost / gain -> grey "Tốn: không" / "Được: không". Mất folds into Tốn, extra Được rows into Được (copies .kdup); Thành row = Được slot on rolled cards. Cần/Bại/Kèm/Ghi chú/lead -> "!" on the card (`kitOptInfo`, overlay #kpinfo, tap never chooses). Disabled card keeps its red Cần row (decision, say if you disagree).
+3. Dialog number lines behind a "!" in the info corner: `kitNumBox` (jopic) used by the 3 material dialogs (jwkr, jtds, j83) + the dress dialog "Xa xỉ" range (jts). Key sentences stay.
+4. Frame rule (jksize): `.k3right` clip, `.opts` is the only scroller; narrow stack: #mb clip, `.k3body` fixed, `.opts` scrolls. Wide + narrow tested.
+5. Removed: KIT_OPT_VAR / kitOptVarSet / kitOptShortTier / kitOptFit0 early-exit; rules `min-height:calc(--kah+18)`; dev/test/kit-fit.js (asserted the old square/tall rule). Person-card act rows `.pc>.pcr` untouched (still kitOptFill) — decision for MAIN: follow later if the owner wants.
+6. Tests: `dev/test/opt-card-scan.js` (heights/pic/title em/visible rows/fixed-top scroll test), `dev/test/opt-card-bang.js` ("!" card + dialog open the overlay, nothing chosen). Sample page KIT_SAMPLES §6.2 / §6.2b updated.
+## Scan table (12 dialog cases, Fold 755x1000 / iPad 1180x820; before = BASE in the previous report)
+| | BASE | NOW |
+|---|---|---|
+| cards of one dialog same height | no (mat2 Fold 205 strip, dress 162/72, night 55/90) | YES all 12 cases both sizes (106 px; 107-128 when a card has 3 title lines, equal inside the dialog) |
+| picture | 54x72 .. 66x187 / NONE | 66x88 on every card |
+| title width | down to 8.1 em | >= 12.8 em |
+| top fixed while options scroll | no (whole right column scrolled) | yes, 24/24 cases (412x1058, 390x844 narrow also fixed on many/visit/fest). Note: fest/child at 755 report a ~px kpmain shift that is the frame's own late re-fit after image load (no scroll involved) |
+## Shots (LOOKED at each): CDN https://ctm-img.victoria-tntt.workers.dev/img/_review/opt-card-short/ fold-<mat2|dress|night|visit>.jpg (755x1000@2) and ipad-<...>.jpg (1180x820@2). Old v0/vA/vB/vC wiped.
+Known/limits: card height differs between dialogs only when a title wraps to 3 lines (equal inside each dialog); dress dialog on Fold leaves ~1.5 cards visible because its info block is tall (options scroll).
+~85% xong / ~70% chơi được (awaiting owner look).
+
+---
+(previous options report kept below)
 # opt-card-short — OPTIONS report (worker session_01UV1Szk6j15PHjAL8gMSR9z, for MAIN s42)
 PRIORITY #1 CHECK: OD 30 (18/11 ~08:55Z + ~09:02Z) | main jopic.js kpOptArt / jk4 kitOptFill+kitCompactCSS | review/* none | claims none besides this row.
 Branch review/opt-card-short sha 68d460fd (review switch only; NO final rule yet — waiting for the owner's pick). START_CTX ≈ 12 % (estimate).
