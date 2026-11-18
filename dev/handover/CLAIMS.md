@@ -23,6 +23,7 @@ B10 3 colour versions c04, c06, c07–c10 | _review CDN consort-tiers/<cNN>/b10 
 B10 consorts c02/c03/c05/c22–c32 | claude/cung-tuong-mong-handover-hj0h8w | session_011xDdVRdfNz9bDn1Croq298 (W40, Foreman C) | RUNNING | 2026-11-18T07:37Z
 | FOREMAN C-AG #10 (opus; successor of #9) | handover FOREMAN_C_STATUS | C-AG #9 | session_01UV1SzjAd8BYMMz2rKFZitp | ROLLED OVER → #11 SzkgegQ | 18/11 05:00Z |
 | FOREMAN C-AG #11 (opus; successor of #10, opened by C-AG #10) | handover FOREMAN_C_STATUS | C-AG #10 | session_01UV1SzkgegQEiMEPpSv12RN | RUNNING | 18/11 07:37Z |
+| NPC LANDER #4 (opus; successor of LANDER #3 SzjwxQs): merge live 5cbfd620 + agSoftTxt→oddsSoft + FULL gates | review/ag-all-2-land + review/npc-chain-land | C-AG #11 | session_01UV1Szhtw2R3XtEtZphy6p5 | RUNNING | 18/11 09:46Z |
 | look-fx-wire #9 (R9g: remaining fit rows whole group, Điểm trang, LOOK Fold+iPad) | review/look-fx-wire | MAIN ROOT-49 | session_01UV1Szk4s8h69ckG1XyZmaC | RUNNING | 18/11 07:39Z |
 | cloth-tea #2 (in-game tea shots, kclo 0px fix, stain.on.tra 1) | review/cloth-tea-look | MAIN ROOT-49 | session_01UV1SzgzwRA3dbdx1hNjUkf | READY dfbf1df4 (r6h6) | 18/11 07:39Z |
 B10 consorts c05, c14, c15 | claude/cung-tuong-mong-handover-hj0h8w | session_011xDdVS4Xbmpzp16X7meadr (W41, Foreman C) | RUNNING | 2026-11-18T07:44Z
