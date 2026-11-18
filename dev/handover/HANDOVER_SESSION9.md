@@ -693,3 +693,4 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - Hourly wake: ROOT-53 trigger at minute 32 (see below).
 - (18/11 ~18:02Z) ROOT-53 hourly wake = trig_013Pv6wCN3hDXuuNwL18weZb (minute 32). send_message to ROOT-52 / ROOT-49 failed (cross-account) → only the STATUS lines.
 - (18/11 ~18:05Z) ROOT-53: C-AG #14 up (session_01Rc5AsKgBX7W8FiEwCJjgBR, depth 1, wake :32). THỬ TAY live link https://thientran2711.github.io/cung-tuong-mong/?hieuchuan=1 (d3ea24e8) sent to owner; her «CTM-CAL …» code → C-AG #14 (mgcal_apply.py → BAL.ag.mg2.cal).
+- (18/11 ~18:15Z) ROOT-53: owner asked for pictures of everything waiting on her → sent shop-panel (LIVE) Fold+iPad buy/sell + fullbody-frame-s3 choice sheet (no fade + head centred). Not sent: opt-card-short r3 (built before 16:05Z/16:15Z corrections; #3 redoing) and phone Thân phận (still old wrong layout; s4 reverting). Session switched to env cung-tuong-mong (CDN host allowed).
