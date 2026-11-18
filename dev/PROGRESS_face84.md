@@ -1,10 +1,10 @@
-# PROGRESS · review/face-84 (j88: kho 84 mặt nữ)
+# PROGRESS · review/face-84 (j88: kho 84 nhân vật nữ vẽ sẵn)
 
 Nhánh dựng từ origin/main (KHÔNG dựa trên review/face-pick). j88.js là module cuối trong assemble.py. Chỉ có logic và dữ liệu:
 không CSS, không HTML. Giao diện "chọn chân dung" là thành phần kit của chủ kit #2 (review/kit-2), gọi API dưới đây.
 
 ## Kho mặt
-- 84 = 32 phi tần `consort:c01..c32` (FIGIX.consort) + 52 cung nữ `maid:m01..m52` (FIGIX.maid). Mã = `figKey` của j39 (`role:identity`).
+- 84 nhân vật nữ vẽ sẵn = ids `consort:c01..c32` (FIGIX.consort) + `maid:m01..m52` (FIGIX.maid), một kho chung «90 nhân vật nữ» (+ 6 công chúa vẽ riêng). Mã = `figKey` của j39 (`role:identity`).
 - Đọc từ mọi FIGURES*.json qua j39 (đọc lại mỗi 5 phút). Tranh Part C (role `"maid"`, tier `"t1".."t8"` / `"cold"`, cùng identity `mNN`)
   tự nhập vào đúng mặt khi xuất hiện trong img/FIGURES-servants.json, không cần sửa mã.
 - Bậc áo phi tần của bản ghi: tier số (tranh phi tần) hoặc `t1..t8`/`cold`. Bậc áo cung nữ `m0..m4` (Part A/B) và tier rỗng là áo cung nữ.
