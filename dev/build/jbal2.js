@@ -928,7 +928,7 @@ Object.assign(BAL.ag,{cx:{face:{c:{"bac":-30},get o(){return BAL.odb.j2.odO_9},w
 BAL.ag.spiteD=35;BAL.ag.favAsk=40;
 BAL.ag.day.worldPull=2;/* weight of a world window place against her own "no goal" place, per × above 1 (worldPlanW place) */
 /* LIFE: the day's feeling (jemo, strength ≥ min) leans her needs when she plans: × per need, _ = × on keeping her schedule (sad / afraid: stays in) */
-BAL.ag.day.mood={min:30,k:{vui:{ally:1.4,"sung":1.2,_:.8},buon:{rest:1.6,ally:1.2,_:1.4},gian:{spite:1.6,_:.9},so:{safe:1.8,_:1.5},ghen:{spite:1.5,"sung":1.3},lo:{safe:1.4,kid:1.2},dau:{rest:1.8,_:1.6},muu:{spite:1.2,"danh":1.2,"sung":1.2,_:.8}}};
+BAL.ag.day.mood={min:30,k:{vui:{ally:1.4,"sung":1.2,_:.8},buon:{rest:1.6,ally:1.2,_:1.4},gian:{spite:1.6,_:.9},so:{safe:1.8,_:1.5},ghen:{spite:1.5,"sung":1.3},lo:{safe:1.4,kid:1.2},dau:{rest:1.8,_:1.6}}};/* dau = Buồn at the heavy level (FEELINGS-18); a new kind reads its group row (jagday agMoodF) */
 /* AG-ALL the Emperor's day (jagacts §4): company = his wish for company per buổi (× his mood tsMoodW; the old weekly roll 14 × mood ≈ this over the
    4 buổi of a day against BAL.ag.routine), busyF = × when busy (ill / Chăm chính / court crisis), rest = his rest need then, buoi = the buổi (j95c) he summons in */
 BAL.ag.emp2={company:.38,busyF:.4,rest:.5,buoi:[1,2]};
@@ -1238,6 +1238,49 @@ BAL.talk.secretMal=50;BAL.talk.secretGrab=50;
 BAL.ag.know.tm={cap:10,want:{bac:15,protect:15,post:10,revenge:20},post:3,loyalMul:.35,tell:50,oan:6,
  /* 2f2: threat = fear bonus on tmOdds for Dọa tố (threatServ); vol = the j7 volunteer comes only when her odds for him reach min, she pays bac */
  threat:20,vol:{min:55,bac:30}};
+/* AG-MOODKNOW (owner OD 17/11 ~17:55Z (1)): who knows the CAUSE of a mood (jmoodknow). pub = morning "Tin trong cung" leak odds per cause event
+   (def for others; clamped BAL.odds.lo/hi; max lines a morning); pubEv = PUBLIC cause events (jemo EMO_EV keys), the rest SECRET; pubRe = PUBLIC cause
+   words for causes set without an event key (old saves too); spy = a Tai mắt inside that person's household learns it; eye = % of oSee for the
+   morning general eyes; pri = j78 "mood" fact priority (scouting / servants' reports); keep = causes remembered per person; npcErr = an NPC master
+   learns the target's cause from a told errand (scout / listen). */
+BAL.mck={pub:{def:35,max:3,o:{selfUp:60,selfDown:60,cold:75,kidBorn:75,kidDie:70,otherKid:30,punished:50,night:30,neglect:25,ill:30,rivalUp:25,friendUp:25,
+ foeDown:25,friendDie:50,foeDie:40,mistressUp:15,mistressDown:15,motherDie:60,motherCold:50,clanUp:35,clanDown:35}},
+ pubEv:["selfUp","selfDown","rivalUp","friendUp","foeDown","kidBorn","kidDie","otherKid","punished","cold","night","neglect","ill","friendDie","foeDie",
+  "mistressUp","mistressDown","motherDie","motherCold","clanUp","clanDown"],
+ pubRe:"thế ở triều|việc triều|hoàng tự|tấn phong|lãnh cung|giáng|qua đời|cấm túc|phật ý|lọt ra ngoài|sinh hạ|lật thẻ|thị tẩm",
+ spy:85,eye:40,pri:45,keep:6,npcErr:{scout:100,listen:50}};
+BAL.ag.sell.val.mood=70;
+/* AG-MOODKNOW KHÓC + HỜN (owner OD 17/11 ~18:00Z): two more jemo moods. khoc: from events ev when buồn/đau khổ/sợ ≥ v, odds o + trait points tr; a slap:
+   odds slap[sev], strength slapV[sev]. hon: from events ev aimed by someone close (thiện cảm ≥ aff, own master, Hoàng thượng), odds o + tr. (timers: BAL.mood2.dur.k);
+   w = act weights (jemo EMO_W shape), od = odds points at v 100, loy = servants' Lòng a month, lv = old mood ladder level (0 vui … 3 giận). Odds clamped BAL.odds. */
+BAL.emo2={khoc:{ev:["slight","punished","selfDown","cold","kidDie","friendDie","motherDie","motherCold","loyalDown","neglect"],v:45,o:40,
+  tr:{"Khiêm nhường":15,"Ân cần":10,"Mê tín":5,"Kiêu ngạo":-30,"Kín đáo":-20,"Xảo quyệt":-20,"Tham vọng":-15,"Thù dai":-10,nhat:20,trung:5,lanh:-10},
+  slap:[0,35,55,75],slapV:[0,40,60,80]},
+ hon:{ev:["slight","loyalDown","punished","neglect"],aff:30,o:35,
+  tr:{"Kiêu ngạo":15,"Nóng nảy":15,"Thật thà":10,"Ân cần":-15,"Khiêm nhường":-15,"Xảo quyệt":-20,"Kín đáo":-10,lanh:10,nhat:-10}},
+ w:{khoc:{harm:.6,kind:.7,idle:1.5,visit:.6},hon:{harm:.9,kind:.6,visit:.5,idle:1.2}},od:{khoc:-1,hon:0},loy:{khoc:-1,hon:-2},lv:{khoc:2,hon:2}};
+BAL.mck.pubEv.push("slap");BAL.mck.pub.o.slap=55;BAL.mck.pubRe+="|tát";
+/* AG-MOODKNOW THE SIMS MODEL (owner OD 17/11 ~18:10Z): every mood cause has a timer in KHẮC (a day ≈ 16 khắc). dur.e = by cause event (jemo EMO_EV keys
+   + slap), dur.k = by feeling when no event, dur.bar = her bar pushes by kind (ok / fail acts, rest, comfort, w: = the day's needs / people / weather,
+   e: = a feeling's push, ea: = venting acts), def = any other; max = causes kept per person; carry = khắc the old-save leftover lasts; kd = khắc a day fallback. */
+BAL.mood2={def:8,max:16,carry:24,kd:16,carryWhy:"chuyện cũ còn vương",
+ dur:{e:{slight:8,gift:6,loyalUp:12,loyalDown:12,punished:24,selfUp:48,selfDown:64,cold:160,kidBorn:64,kidDie:320,otherKid:24,rivalUp:16,friendUp:12,foeDown:12,
+   friendDie:160,foeDie:16,night:16,neglect:24,ill:32,mistressUp:8,mistressDown:16,motherDie:320,motherCold:96,clanUp:32,clanDown:32,slap:6},
+  k:{vui:8,binh:4,buon:12,gian:8,so:6,ghen:12,lo:10,dau:48,muu:16,khoc:4,hon:8},
+  bar:{ok:6,fail:6,rest:8,comfort:12,w:16,ea:6}}};
+/* MOOD BAR = SIGNED SUM (owner OD 17/11 ~18:33Z (1)): the bar of anyone = Σ bar pushes d + Σ BAL.mood.emo[feeling] × strength of every ACTIVE cause
+   (good +, bad −), clamped ±100; khóc / hờn weigh like đau khổ / giận. Emotion acts and outbursts need BOTH that bar past its line (her and NPCs:
+   BAL.mood.band, BAL.ea.out.v) AND the matching dominant feeling (the seal). GHEN: every raise of the SCORE v.ghen (ghenUp, j1) also adds a short
+   Chạnh lòng FEELING cause: strength = raise × ghen.k clamped [ghen.min, ghen.max], timer dur.e.ghenUp khắc, aimed at the one who caused it. */
+Object.assign(BAL.mood.emo,{khoc:-.4,hon:-.2});BAL.mood2.dur.e.ghenUp=10;BAL.mood2.ghen={k:2,min:16,max:50,pgNight:6};/* pgNight = her own jealousy score v.pg rise when that consort gets a night (j8 rivalNight, j75), via j1 pgUp */
+/* MOOD-MEM (owner OD 17/11 ~18:25Z (b) "làm theo 2 tầng"): layer 2 = jmem memories (months / years / lifelong) WAKE a short layer-1 mood cause (BAL.mood2)
+   when the holder MEETS that person (they come to one place), comes to the PLACE where it happened (m.pl; not the holder's own dwelling), or on the
+   ANNIVERSARY (same tuần of a later year). One rule for her and every NPC (consorts, Hoàng thượng, Thái hậu, servants).
+   min = weight a memory needs to wake (ann = for an anniversary) · cap = wakes a month per person · cd = tuần before the same memory wakes again ·
+   s = strength: weight × k, clamped [min, max] · dur = khắc: base + weight × k, × life for a lifelong memory, ≤ max ·
+   kind = the feeling: good memory → good, bad → bad, unless the deed is in d. */
+BAL.memWake={min:20,ann:30,cap:4,cd:6,s:{k:.6,min:18,max:60},dur:{base:4,k:.12,life:2,max:48},
+ kind:{good:"vui",bad:"gian",d:{poison:"so",musk:"buon",kidharm:"buon",takeaway:"buon",frame:"gian",gifttaint:"so",demote:"buon",rescue:"vui",pardon:"vui"}}};/* FEELINGS-18: the old "dau" (grief) is Buồn now (owner 19:10Z dau→buon heavy); a missing key would fall back to gian */
 /* AG-ALL-2f3 — ONE betray / sell / recruit odds core (owner OD 17/11 ~17:20Z: "tính cách tham lam ... 60% ... lòng ... dưới 25 ... cộng thêm 10% ... trọng
    cái chữ nghĩa ... trừ đi 10% ... cộng thêm 5% nếu mà giận chủ, hoặc là trừ đi 5% nếu mà đang vui mới được chủ thưởng"; ~17:00Z nothing 100 %).
    jagknow btTerms(servant, master, kind): base by nết (qv codes) + trait words + lòng band to the master + each held virtue (static lean) + each virtue

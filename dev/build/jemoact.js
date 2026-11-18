@@ -12,10 +12,10 @@
       thẳng, else buồn), at most 2: giận Đập đồ / Mắng cung nữ · buồn Khóc thầm / Viết thư nhà · vui Đàn hát tự thưởng · căng thẳng Thắp
       hương cầu an. Each has a gain AND a loss. Mắng cung nữ lets her choose the maid (kit event choice, one option per maid).
       NPCs (consorts, servants, the Emperor, Thái hậu, men, officials, children) do the same acts in the life sim when their feeling sits
-      in the act band (BAL.ea.npc.actV ≤ v < outV), by their personality; gains / losses land on them; seen ones go to the news.
+      when their signed mood bar (moodBar) is past BAL.ea.npc.bar.act on the side of their dominant feeling, by their personality; gains / losses land on them; seen ones go to the news.
    2. EXTREME MOOD held ≥ BAL.ea.ext.wk tuần: buồn → Tâm bệnh · giận → lỡ lời (Danh −) · vui → tự mãn (kẻ ganh ghen hơn) · căng thẳng →
-      Chứng mất ngủ. Hers: mood bar at band ±2 (|v| ≥ BAL.mood.band[3]); NPCs: p.emo.v ≥ BAL.ea.npc.extV, same group, every tuần.
-   3. FORCED OUTBURSTS: past the outburst line (hers |v| ≥ out.v; NPC emo.v ≥ npc.outV) a weekly chance (by temper) that the feeling bursts
+      Chứng mất ngủ. Hers: mood bar at band ±2 (|v| ≥ BAL.mood.band[3]); NPCs: moodBar past BAL.ea.npc.bar.ext on the dominant feeling's side, same group, every tuần.
+   3. FORCED OUTBURSTS: past the outburst line (hers and NPCs alike: the signed bar past out.v AND the matching dominant feeling, owner OD 17/11 ~18:33Z (1)) a weekly chance (by temper) that the feeling bursts
       out; the reaction is drawn from the reactions her / his PERSONALITY allows (timid: never phạm thượng, never beats anyone; hot-
       tempered: may smash, scold, beat, phạm thượng) weighted by temper; positive ones too (a generous person in high joy hands out
       silver). Hers shows as a kit event frame with only "Tiếp tục" (what happened + its real numbers). A maid of a palace whose mistress
@@ -37,10 +37,11 @@ Object.assign(BAL,{ea:{
     chance ch % a tuần × temper (hot / even / timid), at most one a tuần, then cd tuần of quiet. phamW = weight of Phạm thượng among a
     hot temper's angry reactions (never while cấm túc: no thỉnh an; r2 at .6: 5 in one hot life, each a cấm túc). */
  out:{v:45,ch:30,cd:2,t:{hot:1.6,even:1,timid:.6},phamW:.35},
- /* NPCs: act band actV ≤ emo.v < outV (chance actCh % a tuần), outburst emo.v ≥ outV (chance outCh % × temper), extreme emo.v ≥ extV
-    (r1 at 70: 25 extremes a 100 tuần across the harem, too common for "extreme");
+ /* NPCs (MOODKNOW step 0, owner OD 17/11 ~18:33Z (1)): the signed bar (moodBar = Σ BAL.mood.emo × strength of their causes; an NPC has no act / need
+    pushes, so its bar runs smaller than hers) past bar.act / bar.out / bar.ext on the side of the matching dominant feeling (kept at the old
+    act / outburst / extreme rates, measure dev/measure/ea-npc-rate.js): chance actCh % a tuần, outburst outCh % × temper;
     meWk = most events a tuần that other people's outbursts bring to her (the rest: log lines). */
- npc:{actV:40,actCh:25,outV:70,outCh:20,extV:80,meWk:1},
+ npc:{actCh:25,outCh:20,meWk:1,bar:{act:11,out:25,ext:28}},
  /* what each reaction does (doer = her or the NPC). vent = mood points toward calm (hers) / feeling points off (NPC); bac, suc, danh, duc,
     loy (Lòng of the maid / every servant of the palace), oan (Oán of the wronged), rel (thiện cảm), ghen (ghenAll), aff (two friends' thiện cảm). */
  fx:{dapdo:{vent:20,bac:12,danh:1},mang:{vent:15,loy:8},danh:{vent:20,loy:20,duc:3,danh:2},khac:{vent:15,oan:10,hiOan:20,punRk:2},pham:{vent:20,rel:15,danh:2},
@@ -99,9 +100,25 @@ function eaTemper(p){const T=eaTraits(p);const hot=T.some(t=>T_HOT.includes(t)),
  return {k:hot&&!tim?"hot":tim&&!hot?"timid":hot&&tim?"even":"even",gen:T.some(t=>T_GEN.includes(t))&&!T.some(t=>T_STINGY.includes(t)),stingy:T.some(t=>T_STINGY.includes(t)),sus:T.includes("Kín đáo")||T.includes("danghi"),pious:T.includes("Mê tín")||T.includes("Vì gia tộc"),tr:T}}
 window.eaTemper=eaTemper;
 /* the group of a feeling: vui · gian · buon · so (căng thẳng) · ghen (cards: buồn) */
-function eaGrpK(k){return k==="vui"?"vui":k==="gian"?"gian":k==="buon"||k==="dau"?"buon":k==="so"||k==="lo"?"so":k==="ghen"?"ghen":null}
+/* the dominant feeling (the seal) of p as an act group, or null */
+function eaSealG(p){try{const e=emoGet(p);return e&&e.k!=="binh"?eaGrpK(e.k):null}catch(e){return null}}
+/* FEELINGS-18 (owner OD 17/11 ~19:25Z: acts at the HEAVY level + the bar line; reviewer mood-mem step0 note): the level of p's dominant feeling
+   (jfeel feelLv: summed strength of its live causes) must reach BAL.feel.gate[w] — "card" for the acts she / an NPC CHOOSES to vent with,
+   "force" (heavy) for what the feeling forces (outbursts, the "Nhịn" lock, extreme consequences). No jfeel → true (old rule). */
+function eaLvOk(p,w){try{if(typeof feelLv!=="function"||!BAL.feel||!BAL.feel.gate)return true;const e=emoGet(p);if(!e||e.k==="binh")return false;
+ /* a feeling written straight into p.emo (legacy writers, old saves) has no causes yet: its own strength counts the same way (feelings18 lv bands) */
+ const sum=Math.max((typeof feelSums==="function"?feelSums(p)[e.k]:0)||0,e.v||0);const L=BAL.feel.lv;const lv=sum>=L[2]?3:sum>=L[1]?2:sum>=L[0]?1:0;return lv>=BAL.feel.gate[w]}catch(e){return true}}
+window.eaLvOk=eaLvOk;
+/* NPC gate (owner OD 17/11 ~18:33Z (1), same lines as hers): the group g of the dominant feeling counts only when the signed mood bar (moodBar) is past
+   line L on its side (vui: bar ≥ L; every other group: bar ≤ −L) */
+function eaBarOk(p,g,L){try{const b=typeof moodBar==="function"?moodBar(p):0;return g==="vui"?b>=L:b<=-L}catch(e){return false}}
+window.eaSealG=eaSealG;window.eaBarOk=eaBarOk;
+function eaBarAbs(p){try{return Math.abs(typeof moodBar==="function"?moodBar(p):0)}catch(e){return 0}}
+/* FEELINGS-18: a new kind acts in the group of its nearest old kind (jfeel feelGrp: Tự tin/Hăng hái/Tình tứ/Hứng khởi/Tinh nghịch → vui, Hổ thẹn/Chán chường → buồn,
+   Khó chịu/Hờn dỗi → giận, Choáng váng → sợ; Chuyên tâm/Bình thản → none); old keys khóc / đau khổ act as buồn, hờn as giận (reviewer mood-mem r1) */
+function eaGrpK(k){if(typeof feelGrp==="function")k=feelGrp(k);return k==="vui"?"vui":k==="gian"||k==="hon"?"gian":k==="buon"||k==="dau"||k==="khoc"?"buon":k==="so"||k==="lo"?"so":k==="ghen"?"ghen":null}
 /* hers, from the mood bar: band and flavour (jmood mbBand) */
-function eaMine(){try{if(typeof mbBand!=="function"||!S.mood)return{i:0,g:null};const b=mbBand();const g=b.i>=1?"vui":b.i<=-1?(b.f==="gian"?"gian":b.f==="so"?"so":b.f==="ghen"?"ghen":"buon"):null;return{i:b.i,g,b}}catch(e){return{i:0,g:null}}}
+function eaMine(){try{if(typeof mbBand!=="function"||!S.mood)return{i:0,g:null};const b=mbBand();const sg=eaSealG(S);/* owner OD 17/11 ~18:33Z (1): the bar past its line AND the matching dominant feeling */let g=b.i>=1?(sg==="vui"?"vui":null):b.i<=-1?(sg&&sg!=="vui"?sg:null):null;if(g&&!eaLvOk(S,"card"))g=null;return{i:b.i,g,b,hv:!!g&&eaLvOk(S,"force")}}catch(e){return{i:0,g:null}}}
 window.eaMine=eaMine;
 /* ---------- small helpers ---------- */
 function myMaids(){const L=[];try{if(S.maid&&S.maid.name)L.push(S.maid);for(const s of S.staff||[])if(s&&s.role==="maid"&&s!==S.maid&&s.alive!==false)L.push(s)}catch(e){}return L.slice(0,4)}
@@ -185,7 +202,7 @@ function eaCards(){const M=eaMine();if(!M.g)return[];const g=M.g==="ghen"?"buon"
   A.push(mk("khoc",{n:"Khóc thầm",dom:"Sức khỏe",t:"Đóng cửa tẩm cung, một mình khóc cho vơi nỗi lòng.",c:{suc:-c.suc},x:`${mood(c.mood)}${emoNm()?`, bớt ${emoNm()} ${c.emo}`:""}`,go:()=>{const d=ventMe(c.mood,"khóc cho vơi lòng",c.emo);log(`Ngươi khóc một hồi, lòng nhẹ đi (tâm trạng ${sgn(d||c.mood)}).`)}}));
   A.push(mk("thu",{n:"Viết thư nhà",dom:"Giao thiệp",t:"Viết thư gửi về nhà, nhờ thái giám mang ra ngoài cung.",c:{bac:-c2.bac},x:`${mood(c2.mood)}${emoNm()?`, bớt ${emoNm()} ${c2.emo}`:""}`,go:()=>{const d=ventMe(c2.mood,"viết thư nhà",c2.emo);log(`Ngươi viết thư gửi về nhà, kể nỗi nhớ mong; lòng ấm lại (tâm trạng ${sgn(d||c2.mood)}).`)}}))}
  else if(g==="vui"){const c=C.dan;A.push(mk("dan",{n:"Đàn hát tự thưởng",dom:"Tài nghệ",t:"Lòng đang vui, ôm đàn hát một khúc tự thưởng cho mình.",w:{tai:c.tai},x:`kèm: ${mood(c.mood)} (lòng lắng lại) · kẻ ganh ghen +${c.ghen}`,
-   go:()=>{try{ghenAll(c.ghen)}catch(e){}const d=ventMe(c.mood,"đàn hát tự thưởng");log(`Tiếng đàn vọng ra ngoài cung; lòng ngươi lắng lại (tâm trạng ${sgn(d||c.mood)}), kẻ ganh thì ghen thêm.`)}}))}
+   go:()=>{try{ghenAll(c.ghen,"nghe tiếng đàn hát tự thưởng của ngươi")}catch(e){}const d=ventMe(c.mood,"đàn hát tự thưởng");log(`Tiếng đàn vọng ra ngoài cung; lòng ngươi lắng lại (tâm trạng ${sgn(d||c.mood)}), kẻ ganh thì ghen thêm.`)}}))}
  else if(g==="so"){const c=C.huong;A.push(mk("huong",{n:"Thắp hương cầu an",dom:"Đức",t:"Thắp hương ở Phật đường, khấn cầu bình an cho lòng yên.",c:{bac:-c.bac},w:{duc:c.duc},x:`${mood(c.mood)}${emoNm()?`, bớt ${emoNm()} ${c.emo}`:""}`,
    go:()=>{const d=ventMe(c.mood,"thắp hương cầu an",c.emo);log(`Khói hương lượn lờ; lòng ngươi yên lại (tâm trạng ${sgn(d||c.mood)}).`)}}))}
  const st=eaStamp(),U=eaS().used;for(const a of A){a.done=U[a.ea]===st?1:0;const g0=a.go;a.go=function(){U[a.ea]=st;cnt(EA_N.play,a.ea);return g0.apply(this,arguments)}}
@@ -259,6 +276,8 @@ const R_=[
  {k:"kbo",g:"so",who:"k",n:"Gặp ác mộng, sốt nhẹ",ok:()=>true,w:()=>1},{k:"khon",g:"ghen",who:"k",n:"Hờn dỗi huynh đệ",ok:()=>true,w:()=>1},
  {k:"kvui",g:"vui",who:"k",n:"Nô đùa làm Hoàng thượng cười",ok:()=>true,w:()=>1}];
 window.EA_REACT=R_;
+/* FEELINGS-18 (jfeel acts) reuses these helpers of the ONE reaction code (they live inside this closure) */
+window.EA_H={staffOf:p=>staffOf(p),maidOf:p=>maidOf(p),rival:p=>eaRival(p),ventMe:(n,w,e)=>ventMe(n,w,e),ventNpc:(p,n)=>ventNpc(p,n),loyAdd:(m,n)=>loyAdd(m,n)};
 function eaKhoOk(){try{const T=S.trieu,N=BAL.ea.nk.e;return !(T&&T.kho!=null)||T.kho-N.kho>=N.khoMin}catch(e){return true}}
 /* who the person is: c consort (her too), e Emperor, t Thái hậu, s servant, m man of the palace, o court eunuch / Thái y viện, q minister, k child */
 function eaKind(p){if(p===S)return"c";if(S.emp&&p===S.emp)return"e";if(p===S.thO)return"t";if((rivals||[]).includes(p))return"c";if(p&&(p.role==="maid"||p.role==="eunuch"||p.sid!=null||p===S.maid))return"s";
@@ -305,7 +324,7 @@ function eaDo(p,r){const F=BAL.ea.fx[r.k]||{vent:10},me=p===S,res=[];let h="",ta
   h=me?`Gặp ${nm(t)} ở ngự hoa viên, cơn ghen trào lên, ngươi buông mấy câu châm chọc. Người xung quanh nghe rõ cả.`:`${Nm(p)} châm chọc ${t===S?"ngươi":t.name} trước mặt mọi người.`;
   if(t===S&&!me)eaHitMe(p,"cham");break}
  case"thuong":{const st=staffOf(p);const b=Math.min(F.bac,me?S.bac:(p.bac||0));pay({bac:-b});for(const s of st)loyAdd(s,F.loy);add(`lòng cung nhân +${F.loy}`);h=me?"Lòng vui như mở hội, ngươi mở rương, thưởng bạc cho cả cung. Cung nhân mừng rỡ tạ ơn.":`${Nm(p)} vui vẻ thưởng bạc cho cung nhân.`;break}
- case"khoe":pay({danh:F.danh});try{if(me)ghenAll(F.ghen);else for(const x of liveC())if(x!==p)oanAdd(x,p,Math.round(F.ghen/2))}catch(e){}if(me)add(`kẻ ganh ghen +${F.ghen}`);h=me?"Vui quá hóa đắc ý, ngươi kể chuyện ân sủng của mình với các phi tần. Có người cười theo, có người tái mặt.":`${Nm(p)} khoe khoang ân sủng với các phi tần.`;break;
+ case"khoe":pay({danh:F.danh});try{if(me)ghenAll(F.ghen,"ngươi kể khoe ân sủng");else for(const x of liveC())if(x!==p)oanAdd(x,p,Math.round(F.ghen/2))}catch(e){}if(me)add(`kẻ ganh ghen +${F.ghen}`);h=me?"Vui quá hóa đắc ý, ngươi kể chuyện ân sủng của mình với các phi tần. Có người cười theo, có người tái mặt.":`${Nm(p)} khoe khoang ân sủng với các phi tần.`;break;
  case"tiec":{pay({bac:-Math.min(F.bac,me?S.bac:(p.bac||0))});const fr=liveC().filter(x=>x!==p).sort(()=>Math.random()-.5).slice(0,2);for(const x of fr)affAdd(x,p,F.aff);if(me&&fr.length)add(`${fr.map(x=>nm(x)).join(", ")} thiện cảm +${F.aff}`);
   h=me?"Lòng vui, ngươi bày tiệc trà, mời mấy vị tỷ muội sang ngắm hoa, chuyện trò đến chiều.":`${Nm(p)} bày tiệc trà mời các phi tần.`;break}
  case"hat":pay({suc:-F.suc,tai:F.tai});h=me?"Vui quá, ngươi ôm đàn ca hát đến tận khuya, sáng ra mệt rã rời.":`${Nm(p)} ca hát thâu đêm.`;break;
@@ -387,7 +406,7 @@ function eaHitMe(p,k,o){try{o=o||{};cnt(EA_N.hitMe,k);const F=BAL.ea.fx[k]||{};c
   Q.push({t:T[0],who:p===S.emp||p===S.thO?undefined:eaWho(p),art:T[3],hideOut:true,h:T[1]+(T[2]?`<p class="past">${T[2]}</p>`:""),opts:[{n:"Tiếp tục",fx:{},hideOut:true,hint:"không đổi gì thêm",risk:"an toàn",go:()=>{}}]})}catch(e){}}
 /* her outburst: the kit event frame, no choice (owner: not a punishment, no damage control after the fact) */
 function eaMeOut(g){const P=eaPick(S,g);if(!P)return false;const r=P.r;const o=eaDo(S,r);if(!o)return false;cnt(EA_N.out,r.k);cnt(EA_N.outT,P.T.k+":"+g);
- const why={gian:"giận",buon:"buồn",so:"lo âu",ghen:"ghen",vui:"vui"}[g];
+ const why={gian:"giận",buon:"buồn",so:"lo âu",ghen:EMO_GHEN.toLowerCase(),vui:"vui"}[g];
  log(`${r.n}: ${o.h}${o.res.length?` (${o.res.join(", ")})`:""}`);
  if(window.__bot||typeof Q==="undefined")return true;
  Q.push({t:r.n,who:o.target&&o.target!==S?eaWho(o.target):undefined,art:`img/act-${r.art||"trut-gian-h"}.webp`,hideOut:true,
@@ -402,19 +421,19 @@ function eaHoi(){const A=eaS();if(!A.hoi.length)return;const x=A.hoi.shift();con
  Q.push({ev:1,t:`${ttl} đến hỏi tội`,who:eaWho(v),art:"img/act-xu-toi-h.webp",h:`<p>${{hot:`${ttl} dẫn theo cung nữ hôm trước xông vào cung ngươi, đập tay xuống án: “Đánh chó còn phải nhìn mặt chủ. Người của bản cung, muội muội cũng dám mắng?”`,even:`${ttl} dẫn theo cung nữ hôm trước đến cung ngươi, nghiêm giọng: “Đánh chó còn phải nhìn mặt chủ. Người của bản cung làm gì sai mà muội muội phải mắng?”`,timid:`${ttl} dẫn theo cung nữ hôm trước đến cung ngươi, khẽ nói: “Muội muội, người của ta có chỗ nào thất lễ, muội cứ bảo ta dạy lại. Mắng giữa hành lang thế, người ngoài cười cả hai cung.”`}[vk]}</p><p>Cung nữ kia đứng sau, mắt còn đỏ.</p>`,opts})}
 window.eaHoi=eaHoi;
 /* ======================= (2) EXTREME MOOD ======================= */
-function eaExtMe(){const M=eaMine(),A=eaS(),X=E().ext,w=W();const ext=Math.abs(M.i)>=2?M.g:null;
+function eaExtMe(){const M=eaMine(),A=eaS(),X=E().ext,w=W();const ext=Math.abs(M.i)>=2&&M.hv?M.g:null;
  if(ext&&A.xk===ext)A.xn=(A.xn||0)+1;else{A.xk=ext;A.xn=ext?1:0}
  if(!ext||A.xn<X.wk||(A.xcd||0)>w)return false;A.xcd=w+X.cd;A.xn=0;cnt(EA_N.ext,ext);const ui=!window.__bot&&typeof Q!=="undefined";
  let t,h,past,art;
  if(ext==="buon"||ext==="ghen"){catchIll(S,"tambenh");t="Ưu uất thành bệnh";art="img/ev-benh-tat.webp";h=`<p>Nỗi buồn đè nặng mấy tuần liền, ngươi biếng ăn mất ngủ. Thái y bắt mạch, lắc đầu: “Tâm bệnh còn phải tâm dược chữa.”</p>`;past="Mắc Tâm bệnh"}
  else if(ext==="gian"){apply({danh:-X.danh});t="Lỡ lời";art="img/act-dap-tra-mia-h.webp";h=`<p>Cơn giận ủ mấy tuần liền, lúc thỉnh an ngươi buột miệng một câu nặng lời. Lời nói ra như bát nước hắt đi, cả hậu cung truyền tai nhau.</p>`;past=`Danh −${X.danh}`}
- else if(ext==="vui"){try{ghenAll(X.ghen)}catch(e){}A.smug=w+X.smugWk;t="Đắc ý quên mình";art="img/ev-tin-don.webp";h=`<p>Mấy tuần liền mọi chuyện thuận lợi, ngươi vui ra mặt, nói cười chẳng giữ ý. Kẻ ganh ghét bắt đầu thì thầm sau lưng.</p>`;past=`Kẻ ganh ghen +${X.ghen}; ${X.smugWk} tuần tới kẻ ganh ghen thêm`}
+ else if(ext==="vui"){try{ghenAll(X.ghen,"ngươi đắc ý ra mặt")}catch(e){}A.smug=w+X.smugWk;t="Đắc ý quên mình";art="img/ev-tin-don.webp";h=`<p>Mấy tuần liền mọi chuyện thuận lợi, ngươi vui ra mặt, nói cười chẳng giữ ý. Kẻ ganh ghét bắt đầu thì thầm sau lưng.</p>`;past=`Kẻ ganh ghen +${X.ghen}; ${X.smugWk} tuần tới kẻ ganh ghen thêm`}
  else if(ext==="so"){catchIll(S,"matngu");t="Lo âu mất ngủ";art="img/act-xa-huong.webp";h=`<p>Lo âu mấy tuần liền, đêm nào ngươi cũng trằn trọc đến canh năm. Thái y nói ngươi mắc chứng mất ngủ.</p>`;past="Mắc Chứng mất ngủ"}
  log(`<span class="r">${t}.</span> ${past}.`);
  if(ui)Q.push({t,art,hideOut:true,h:`${h}<p>Cảm xúc cực độ kéo dài ${X.wk} tuần trở lên thì sinh chuyện.</p><p class="past">${past}</p>`,opts:[{n:"Tiếp tục",fx:{},hideOut:true,hint:"không đổi gì thêm",risk:"an toàn",go:()=>{}}]});return true}
 /* smug: rivals grow more jealous of her for smugWk tuần */
 (function(){if(typeof ghenAll!=="function")return;const g0=ghenAll;ghenAll=function(n){try{if(n>0&&eaOn()&&S.ea&&S.ea.smug>W()){n=Math.round(n*E().ext.smugK);arguments[0]=n}}catch(e){}return g0.apply(this,arguments)}})();
-function eaExtNpc(p,g){const X=E().ext,w=W(),e=p.emo;const ext=e&&e.v>=E().npc.extV?g:null;
+function eaExtNpc(p,g){const X=E().ext,w=W(),e=p.emo;const ext=e&&g&&eaBarOk(p,g,E().npc.bar.ext)?g:null;
  const z=p.eaX||(p.eaX={});if(ext&&z.k===ext)z.n=(z.n||0)+1;else{z.k=ext;z.n=ext?1:0}
  if(!ext||z.n<X.wk||(z.cd||0)>w)return;z.cd=w+X.cd;z.n=0;const kd=eaKind(p);cnt(EA_N.npcExt,kd+":"+ext);const N=NK();let line="";const sad=ext==="buon"||ext==="ghen";
  if(kd==="c"){
@@ -444,12 +463,12 @@ function eaExtNpc(p,g){const X=E().ext,w=W(),e=p.emo;const ext=e&&e.v>=E().npc.e
  else if(kd==="e"){
   if(sad||ext==="so"){if(typeof catchIll==="function")catchIll(p,sad?"tambenh":"matngu");line=`Hoàng thượng ${sad?"ưu uất":"lo âu"} mấy tuần, long thể bất an.`}
   else if(ext==="gian"){const n=2*N.e.sung;for(const x of liveC())ap(x,{sung:-n});if(!S.out){apply({sung:-n});eaHitMe(p,"egian",{past:`Sủng −${n}`})}line=S.out?`Hoàng thượng giận lây cả hậu cung, các phi tần đều bị lạnh nhạt (Sủng của mỗi người −${n}).`:eaL("Hoàng thượng giận lây cả hậu cung, ngươi và các phi tần đều bị lạnh nhạt",[`Sủng −${n}`])}
-  else{const f=eaTopSung(),n=2*N.e.sung;if(f){ap(f,{sung:n});if(f===S){try{ghenAll(X.ghen)}catch(x){}eaHitMe(p,"evui",{past:`Sủng +${n}; kẻ ganh ghen +${X.ghen}`})}else for(const x of liveC())if(x!==f)oanAdd(x,f,Math.round(X.oan/2))}
+  else{const f=eaTopSung(),n=2*N.e.sung;if(f){ap(f,{sung:n});if(f===S){try{ghenAll(X.ghen,"ngươi được Hoàng thượng ban thêm sủng ái")}catch(x){}eaHitMe(p,"evui",{past:`Sủng +${n}; kẻ ganh ghen +${X.ghen}`})}else for(const x of liveC())if(x!==f)oanAdd(x,f,Math.round(X.oan/2))}
    line=eaL(`Hoàng thượng vui, sủng ái ${f?(f===S?"ngươi":f.name):"người bên cạnh"} ra mặt; các cung ganh ghét`,[f?eaN(f,"Sủng",n):""])}}
  else if(kd==="t"){
   if(sad||ext==="so"){eaIll(p,sad?"tambenh":"matngu");line=`Thái hậu ${sad?"ưu uất":"lo âu"} mấy tuần, phượng thể bất an.`}
   else if(ext==="gian"){const n=2*N.t.th,tk=eaTemper(p).k;for(const x of liveC())ap(x,{th:-n});if(!S.out){apply({th:-n});eaHitMe(p,"tgian",{past:`Thái hậu thiện cảm −${n}`,tk})}line=S.out?`Thái hậu ${QUO_W[tk]} cả hậu cung (các phi tần đều mất lòng Thái hậu, −${n}).`:eaL(`Thái hậu ${QUO_W[tk]} cả hậu cung, ngươi cũng bị trách`,[`Thái hậu thiện cảm −${n}`])}
-  else{const L=[S].concat(liveC()).filter(x=>!(x===S&&S.out));const f=L.sort((a,b)=>(b.th||0)-(a.th||0))[0],n=2*N.t.th;if(f){ap(f,{th:n});if(f===S){try{ghenAll(X.ghen)}catch(x){}eaHitMe(p,"tvui",{past:`Thái hậu thiện cảm +${n}; kẻ ganh ghen +${X.ghen}`})}else for(const x of liveC())if(x!==f)oanAdd(x,f,Math.round(X.oan/2))}
+  else{const L=[S].concat(liveC()).filter(x=>!(x===S&&S.out));const f=L.sort((a,b)=>(b.th||0)-(a.th||0))[0],n=2*N.t.th;if(f){ap(f,{th:n});if(f===S){try{ghenAll(X.ghen,"ngươi được Thái hậu ưu ái")}catch(x){}eaHitMe(p,"tvui",{past:`Thái hậu thiện cảm +${n}; kẻ ganh ghen +${X.ghen}`})}else for(const x of liveC())if(x!==f)oanAdd(x,f,Math.round(X.oan/2))}
    line=eaL(`Thái hậu vui, thiên vị ${f?(f===S?"ngươi":f.name):"người bên cạnh"} ra mặt; các cung để bụng`,[f===S?`Thái hậu thiện cảm +${n}`:f?`Thái hậu quý nàng thêm +${n}`:""])}}
  eaSay(p,line)}
 /* ======================= THE TUẦN ======================= */
@@ -474,9 +493,9 @@ const EA_NACT={m:{gian:"Ra thao trường luyện võ",buon:"Viết thư về qu
  e:{gian:"Ra vườn bắn cung",buon:"Một mình đọc sách",so:"Thắp hương ở Phụng Tiên điện",ghen:"Một mình đánh cờ",vui:"Mở tiệc ngắm hoa"},
  t:{gian:"Tụng kinh cho nguôi giận",buon:"Ngồi lần tràng hạt",so:"Thắp hương cầu an",ghen:"Ngồi lần tràng hạt",vui:"Ngắm hoa trong vườn"}};
 function eaNpcWeek(){if(!eaHost())return;const N=E().npc;try{eaMinFeel()}catch(e){}
- for(const p of eaPeople()){const e=p.emo;const g=e&&e.v>=15?eaGrpK(e.k):null;eaExtNpc(p,g);if(!g)continue;const T=eaTemper(p),kd=eaKind(p);
-  if(e.v>=N.outV){const ch=N.outCh*(E().out.t[T.k]||1);if(roll(ch)){const P=eaPick(p,g);if(P){const o=eaDo(p,P.r);if(o){cnt(EA_N.npcOut,kd+":"+P.r.k);cnt(EA_N.npcOutT,T.k);eaSay(p,o.h,o.target===S)}}}}
-  else if(e.v>=N.actV&&ag2Ch(p,N.actCh*(window.agOn&&agOn()?Math.min(BAL.ag.emo2.max,e.v/N.actV):1))){/* AG-ALL-2: the stronger her feeling, the likelier she acts on it (her own inclination, BAL.ag.emo2) *//* the same emotion acts as hers, chosen to calm down: vent + the act's own price */
+ for(const p of eaPeople()){const e=p.emo;const g=e&&e.v>=15&&eaLvOk(p,"card")?eaGrpK(e.k):null;eaExtNpc(p,g&&eaLvOk(p,"force")?g:null);if(!g)continue;const T=eaTemper(p),kd=eaKind(p);
+  if(!eaActsJfeel()&&eaBarOk(p,g,E().npc.bar.out)){const ch=N.outCh*(E().out.t[T.k]||1);if(roll(ch)){const P=eaPick(p,g);if(P){const o=eaDo(p,P.r);if(o){cnt(EA_N.npcOut,kd+":"+P.r.k);cnt(EA_N.npcOutT,T.k);eaSay(p,o.h,o.target===S)}}}}
+  else if(!eaBarOk(p,g,E().npc.bar.out)&&eaBarOk(p,g,N.bar.act)&&ag2Ch(p,N.actCh*(window.agOn&&agOn()?Math.min(BAL.ag.emo2.max,eaBarAbs(p)/N.bar.act):1))){/* AG-ALL-2: the stronger her feeling, the likelier she acts on it (her own inclination, BAL.ag.emo2) *//* the same emotion acts as hers, chosen to calm down: vent + the act's own price */
    const C=E().card,cg=g==="ghen"?"buon":g;
    if(kd==="c"){const L=Object.keys(C).filter(k=>C[k].g===cg);if(!L.length)continue;const k=pick(L),c=C[k];if(c.bac&&(p.bac||0)<c.bac)continue;const o={};if(c.bac)o.bac=-c.bac;if(c.suc)o.suc=-c.suc;if(c.danh)o.danh=-c.danh;if(c.tai)o.tai=c.tai;if(c.duc)o.duc=c.duc;ap(p,o);
     let m=null;if(c.loy){const ml=maidOf(p);if(ml.length){m=pick(ml);loyAdd(m,-c.loy)}}if(c.oan)for(const x of liveC())if(x!==p)oanAdd(x,p,c.oan);
@@ -506,11 +525,12 @@ const QUO_E={hot:"Hoàng thượng đập bàn quát lớn",even:"Hoàng thượ
    if(!adj)continue;const b=(o.od||0)+adj,g0=o.go;const w=String(nx(b,"")).split(" · ")[0];
    o.x=String(o.x||"").replace(/^[^·]+·/,w+" ·")+` · lòng ngươi đang ${band} (${adj>0?"dễ":"khó"} hơn)`;o.od=b;
    o.go=function(){pp.q=(pp.q||0)+adj;try{return g0.apply(this,arguments)}finally{pp.q-=adj}};cnt(EA_N,"pillow")}}catch(e){}return d}})();
+function eaActsJfeel(){try{return typeof feelOn==="function"&&feelOn()&&!!(BAL.feel&&BAL.feel.act)}catch(e){return false}}
 function eaWeek(){if(!eaOn())return;EA_N.wk++;const A=eaS(),w=W();if(A.wk===w)return;A.wk=w;
  try{eaHoi()}catch(e){console.error(e)}
  try{eaExtMe()}catch(e){console.error(e)}
- /* her outburst */
- try{const M=eaMine(),O=E().out;const v=S.mood?Math.abs(S.mood.v):0;if(M.g&&v>=O.v&&(A.ocd||0)<=w&&!(typeof isSrv==="function"&&isSrv())){const T=eaTemper(S);if(roll(O.ch*(O.t[T.k]||1))){if(eaMeOut(M.g)){A.ocd=w+O.cd;EA_N.outWk++}}}}catch(e){console.error(e)}
+ /* her outburst (FEELINGS-18: per buổi in jfeel feelActTick — heavy level + this bar line — while jfeel is on; this weekly path is the off-switch fallback) */
+ try{if(!eaActsJfeel()){const M=eaMine(),O=E().out;const v=S.mood?Math.abs(S.mood.v):0;if(M.g&&v>=O.v&&(A.ocd||0)<=w&&!(typeof isSrv==="function"&&isSrv())){const T=eaTemper(S);if(roll(O.ch*(O.t[T.k]||1))){if(eaMeOut(M.g)){A.ocd=w+O.cd;EA_N.outWk++}}}}}catch(e){console.error(e)}
  try{eaNpcWeek()}catch(e){console.error(e)}}
 window.eaWeek=eaWeek;
 (function(){if(typeof endTurn!=="function")return;const e0=endTurn;endTurn=function(){const w0=W();const r=e0.apply(this,arguments);try{if(S&&!S.dead&&W()!==w0)eaWeek()}catch(e){console.error(e)}return r}})();
@@ -526,8 +546,8 @@ function eaLockWhy(c,m){try{if(!eaOn()||!c||!m||!m.opts)return"";if(c.eaLock)ret
   /* another answer she can really take (bạc enough) of the wanted kind must stay open: never a dead end (bot r3: "Làm ngơ" greyed while
      the only other answer cost bạc she lacked → stuck) */
   const usable=o=>o&&o!==c&&!(o.fx&&o.fx.bac&&S.bac+o.fx.bac<0);const nmO=o=>String(o.n||"").replace(/<[^>]+>/g,"").trim();
-  if(T.k==="hot"&&M.g==="gian"&&S.mood.v<=-E().out.v&&EA_HOLD.test(n)&&m.opts.some(o=>usable(o)&&EA_HIT.test(nmO(o))))return`ngươi đang ${M.b.name.toLowerCase()}, tính nóng, không nhịn nổi`;
-  if(T.k==="timid"&&M.i<=-2&&EA_HIT.test(n)&&m.opts.some(o=>usable(o)&&!EA_HIT.test(nmO(o))))return`ngươi đang ${M.b.name.toLowerCase()}, tính nhút nhát, không dám`;}catch(e){}return""}
+  if(T.k==="hot"&&M.g==="gian"&&M.hv&&S.mood.v<=-E().out.v&&EA_HOLD.test(n)&&m.opts.some(o=>usable(o)&&EA_HIT.test(nmO(o))))return`ngươi đang ${M.b.name.toLowerCase()}, tính nóng, không nhịn nổi`;
+  if(T.k==="timid"&&M.i<=-2&&M.g&&M.hv&&EA_HIT.test(n)&&m.opts.some(o=>usable(o)&&!EA_HIT.test(nmO(o))))return`ngươi đang ${M.b.name.toLowerCase()}, tính nhút nhát, không dám`;}catch(e){}return""}
 window.eaLockWhy=eaLockWhy;
 (function(){if(typeof showModal!=="function")return;const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{const m=Q[0];if(m&&m.opts)document.querySelectorAll("#modal .opts > button.opt[data-m]").forEach(b=>{const c=m.opts[+b.dataset.m];const why=eaLockWhy(c,m);if(!why)return;
   b.disabled=true;const sm=b.querySelector("small");if(sm)sm.textContent="Cần: "+why;if(!c.__eaN){c.__eaN=1;cnt(EA_N,"lock")}})}catch(e){}return r}})();

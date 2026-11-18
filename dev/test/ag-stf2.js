@@ -64,7 +64,10 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const clone=(o,x)=>Object.assign(JSON.parse(JSON.stringify(o)),{sid:90000+Math.floor(Math.random()*1e6)},x);const H={};const add=(g,k)=>{H[g]=H[g]||{};H[g][k]=(H[g][k]||0)+1};
   const lg=log;log=()=>{};const d0=die;die=()=>{};
   try{for(const tc of [5,90])for(let i=0;i<N;i++){const x=clone(base,{loyal:50,tamco:tc,duc:20,bac:30,suc:70});asSt(x);const a=clone(acc,{loyal:50});const R=stf2Framed(x,a,v);add("frame_tamco"+tc,R.id+(R.id==="clear"?(R.ok?"+":"-"):""))}
-   for(const lo of [10,90])for(let i=0;i<N;i++){const s=clone(base,{loyal:lo,bac:0});const a=liveRivals(true).find(z=>z!==v);const c0=a.bac;a.bac=999;bribeServ(a,s);a.bac=c0;
+   /* the bribed servant must be one whose lòng moves her bribe odds: an incorruptible one (Thanh liêm + trọng Liêm / Trung, AG-ALL-2f3 bt core)
+      sits at BAL.odds.lo for lòng 10 AND 90 (real rule: she never sells), which says nothing about lòng — pick the first servant where it matters */
+   const a0=liveRivals(true).find(z=>z!==v);const bb=(()=>{for(const z of liveRivals(true))for(const x of z.staff||[]){if(bribeOdds(a0,clone(x,{loyal:10,bac:0}))-bribeOdds(a0,clone(x,{loyal:90,bac:0}))>=15)return x}return base})();
+   for(const lo of [10,90])for(let i=0;i<N;i++){const s=clone(bb,{loyal:lo,bac:0});const a=liveRivals(true).find(z=>z!==v);const c0=a.bac;a.bac=999;bribeServ(a,s);a.bac=c0;
      /* bribeServ on a clone not in staff: ownerOf null → stf2Bribe directly */const r=stf2Bribe(a,s,v,bribeOdds(a,s),1);add("bribe_lo"+lo,/thành tai mắt/.test(r)?"take":/mách chủ/.test(r)?"tell":"quiet")}
    for(const lo of [10,90])for(let i=0;i<N;i++){const s=clone(base,{loyal:lo,suc:80});add("ord_lo"+lo,stf2Ord(v,s,liveRivals(true).find(z=>z!==v),"poison"))}
    const P0=JSON.parse(JSON.stringify(window.__stf2N||{}));for(let i=0;i<N;i++){const s=clone(base,{loyal:30});const X={p:v,s,k:Object.keys(IT)[0],g:null};const st=v.staff.slice(),inv=(v.inv||[]).slice();eitPilJudge(X);v.staff=st;v.inv=inv}
