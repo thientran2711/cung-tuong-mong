@@ -46,3 +46,12 @@ Gens (until PASS): 24 first + 4 retries (v0 t7 89.7%->94.1; v0 t8 94.9->93.3 wor
 Files (md5-verified, nothing live) https://ctm-img.victoria-tntt.workers.dev/img/_review/consort-tiers/c20/b10/ — c20_a18_tN_v0|v1|v2.png (24) + c20_a18_b10_sheet.jpg (rows v0/v1/v2, cols t1–t8).
 Magnific live uploads (c20 hd t1..t8): 5jMoyrXKxe, aFA0LqbfSh, nVL7tdgYQD, huZWxkGvqL, EbnMgg6uuO, tC3n1LOmZJ, yiE5ceIPW9, 1let9z0r4r.
 ~100% xong c20 B10 / ~0% chơi được.
+
+## T7 EMBROIDERY SCAN + REDRAW (ROOT-20 order, W44, 18/11)
+Scan at native res: v0 t7 = tone-on-tone flat thread, OK (kept). v1 and v2 t7 = peonies shaded/raised and cream phoenix with relief/gloss, decal-like -> REDRAWN (same colours/everything, same live ref + m09 STYLE; new embroidery clause: matte silk floss, tone-on-tone, satin / long-and-short stitch with thread direction, flat in the weave, no highlight / drop shadow / outline / relief / sheen, flowers small and flat, phoenix muted gold-cream thread). Redraws are visibly flatter; same filenames re-uploaded (md5-verified).
+| person | t7 version | pasted? | redrawn (gens) | IoU vs live after |
+|---|---|---|---|---|
+| c20 | v0 | no (tone-on-tone) | no | 94.1 |
+| c20 | v1 | yes (peonies + phoenix) | 1 | 95.1 |
+| c20 | v2 | yes | 1 | 91.6 (wider by ~4.7 % w/h; embroidery fix kept, flagged) |
+Credits +2 x 135 = 270.

@@ -49,4 +49,15 @@ Magnific live uploads (c21 hd t1..t8): p8OigLfehw, kspIcWC16B, huZW96cvqL, DoJ6l
 Lesson for later painters: put the silhouette clause ("same narrow sleeve width and skirt width as image 1, not wider") in EVERY prompt from the first gen — c20 needed 4 retries without it, c21 none with it.
 ~100% xong c21 B10 / ~0% chơi được.
 
+## T7 EMBROIDERY SCAN + REDRAW (ROOT-20 order, W44, 18/11)
+Scan at native res: v0 t7 = tone-on-tone flat, OK (kept). v1 and v2 t7 = shaded peonies + glossy cream phoenix, decal-like -> REDRAWN (same colours/everything, new matte tone-on-tone satin-stitch clause, see c20 report). Same filenames re-uploaded (md5-verified).
+| person | t7 version | pasted? | redrawn (gens) | IoU vs live after |
+|---|---|---|---|---|
+| c21 | v0 | no | no | 96.3 |
+| c21 | v1 | yes | 1 | 96.4 |
+| c21 | v2 | yes | 1 | 94.7 |
+Credits +2 x 135 = 270. (Gens c21 now 26 = 3510 cr; c20 30 = 4050 cr.)
+Not applied to c20/c21 (already finished, owner: do not redo for similarity): the new rules "v0/v1/v2 three completely different colour families", "held item never the robe colour", "new hairpins for v1/v2". Colour note: c21 v1/v2 are all pale pastels vs deep-red original (already a different family); c20 v1/v2 pastel vs pastel pink original.
+
 ## W44 DONE (c20, c21)
+~100% xong c20+c21 B10 / ~0% chơi được.
