@@ -11,6 +11,8 @@ const WURL=process.argv[3]||'https://ctm-coop.victoria-tntt.workers.dev';
 const ROOT=path.resolve(__dirname,'../..');
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x):''))};
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+/* real boot condition (the game script ran to its end: window.__ctmBuilt, assemble.py), not a 3-3.5 s timer; a page that never boots still reaches the next step, whose own check then fails */
+const booted=o=>o.p.waitForFunction(()=>window.__ctmBuilt===1,null,{timeout:60000}).catch(()=>{});
 async function mk(b,name,vp){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:vp[2],hasTouch:true,isMobile:vp[0]<1100,reducedMotion:'reduce'});
   await serve(ctx);/* socket log for failure dumps: every WebSocket the page opens (url tail, open / close code, ms since load) */
   await ctx.addInitScript(()=>{const W0=window.WebSocket,t0=Date.now();window.__wsLog=[];window.WebSocket=function(u,p){const w=p===undefined?new W0(u):new W0(u,p);/* COOP_RECONNECT: a sleeping phone's socket looks open but hears nothing (frames dropped while __wsDeaf) */Object.defineProperty(w,'onmessage',{configurable:true,set(f){w.addEventListener('message',e=>{if(!window.__wsDeaf)f.call(w,e)})}});const L=window.__wsLog,i=L.length,tag=String(u).replace(/^.*\/room\//,'').replace(/&name=.*$/,'');
@@ -86,7 +88,7 @@ async function buoiBoth(A,B,shotWait){const k0=await A.p.evaluate(()=>__co().wee
   const key=o=>o.p.evaluate(()=>COOPW.pend||__co().waiting?'end':__co().week+':'+(S.buoi||0));
   for(let t=0;t<80;t++){const a=await key(A),b=await key(B);if(a!==k0&&b!==k0&&(a===b||a==='end'||b==='end')){
     if(sp&&sp.walk){const st=await (async()=>{for(let i=0;i<30;i++){const r=await A.p.evaluate(()=>({k:__co().week+':'+(S.buoi||0),place:S.place,used,pending:!!window.__walkSpill}));if(r.place!=='home'||!r.pending)return r;await clear(A);await sleep(300)}return A.p.evaluate(()=>({k:__co().week+':'+(S.buoi||0),place:S.place,used,pending:!!window.__walkSpill}))})();ok(st.place===sp.k&&st.used>=sp.rest,'walk spill '+k0+' → '+st.k+': arrives in the new buổi, rest of the walk paid',Object.assign({want:sp.k,rest:sp.rest},st))}
-    if(sp&&sp.carry===1){await sleep(600);const st=await A.p.evaluate(()=>Object.assign({k:__co().week+':'+(S.buoi||0),now:used},window.__tu||{used:-1}));ok(st.used===1&&!st.carry,'spill '+k0+' → '+st.k+': the next buổi pays the carry once',st)}
+    if(sp&&sp.carry===1){await A.p.waitForFunction(()=>{const t=window.__tu;return !!(t&&t.used===1&&!t.carry)},null,{timeout:8000}).catch(()=>{});const st=await A.p.evaluate(()=>Object.assign({k:__co().week+':'+(S.buoi||0),now:used},window.__tu||{used:-1}));ok(st.used===1&&!st.carry,'spill '+k0+' → '+st.k+': the next buổi pays the carry once',st)}
     return true}await clear(A);await clear(B);await sleep(250)}
   const dbg=o=>o.p.evaluate(()=>({k:__co().week+':'+(S.buoi||0),used,Q:Q.length,mg:!!S.mg,next:document.getElementById('next').textContent,dis:document.getElementById('next').disabled,bend:COOPW.bend,pend:COOPW.pend,sent:COOPW.sent,tm:S.toMorning,tr:COOPW.tr.slice(-14)})).catch(e=>e.message);
   ok(false,'buổi '+k0+' advanced for both',{A:await dbg(A),B:await dbg(B)});return false}
@@ -106,14 +108,14 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
  /* COOP_A_ORIGIN / COOP_B_ORIGIN=<ORIGINS k> (e.g. cn = cung nữ): pin a seat's thân phận (the random draw makes some paths rare) */
  for(const [o,k] of [[A,process.env.COOP_A_ORIGIN],[B,process.env.COOP_B_ORIGIN]])if(k)await o.ctx.addInitScript(k=>{window.__forceOrigin=k},k);
  /* 1 host makes a room */
- await A.page();await A.p.goto(BASE,DCL);await A.p.waitForTimeout(3000);await shot(A,'01-title');
+ await A.page();await A.p.goto(BASE,DCL);await booted(A);await shot(A,'01-title');
  ok(await tapText(A,/^(Chơi cùng bạn|Cùng hảo hữu)/),'A taps Chơi cùng bạn');await A.p.waitForTimeout(600);await shot(A,'02-coop-menu');
  ok(await tapText(A,/^(Mời bạn|Mời hảo hữu)/),'A taps Mời bạn');
  {const r=await until(A,()=>__co().code&&__co().seat==='a');ok(r,'A has a room code, seat a',r?undefined:await A.p.evaluate(()=>({st:COOP.state.status,you:COOP.state.you,room:COOP.state.room,pid:COOP.pid,ws:window.__wsLog})))}
  const code=(await C(A)).code;console.log('room',code);await clear(A);await shot(A,'03-invite-waiting');
  const w0=await A.p.evaluate(()=>!!(__co().frozen));ok(w0,'A waits for the friend (frozen before join)');
  /* 2 guest joins by link */
- await B.page();await B.p.goto(BASE+'?room='+code,DCL);await B.p.waitForTimeout(3000);await shot(B,'04-join');
+ await B.page();await B.p.goto(BASE+'?room='+code,DCL);await booted(B);await shot(B,'04-join');
  await tapText(B,/^Vào phòng/,4000);
  ok(await until(B,()=>__co().seat==='b'&&__co().online&&__co().online.a&&__co().online.b&&!__co().frozen,null,40000),'B joined seat b, both online');
  ok(await until(A,()=>!__co().frozen,null,20000),'A unfrozen when B is in');
@@ -164,7 +166,7 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
  {const fz=await until(A,()=>__co().frozen,null,90000);ok(fz,'A frozen when B left',fz?undefined:await A.p.evaluate(()=>({co:__co(),st:{status:COOP.state.status,peer:COOP.state.peerOnline,seats:COOP.state.seats},pr:window.__prLog||null})))}await shot(A,'08-frozen');
  ok(await A.p.evaluate(()=>document.getElementById('next').disabled||!!__co().frozen),'A cannot advance while frozen');
  const wkF=(await C(A)).week;
- await B.page();await B.p.goto(BASE+'?room='+code,DCL);await B.p.waitForTimeout(3000);await tapText(B,/^Vào phòng|^Tiếp tục/,3000);
+ await B.page();await B.p.goto(BASE+'?room='+code,DCL);await booted(B);await tapText(B,/^Vào phòng|^Tiếp tục/,3000);
  ok(await until(B,x=>__co().seat==='b'&&__co().week===x&&!__co().frozen,wkF,40000),'B back in same seat and week');
  ok(await until(A,()=>!__co().frozen,null,20000),'A resumes');await clear(A);await clear(B);await same('after rejoin');
  /* review/suc-khoe-fix (owner CO-OP FIRST OD:L1447): NPC health is host-computed; the guest shows the host's value (Sức khỏe, Sức tối đa, scars) */
@@ -197,11 +199,11 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
  /* COOP_OLD_REF: the build whose save must still load (default origin/main; in a shared checkout whose origin/main ref was moved, pass the base main commit) */
  const oldHtml=execSync('git -C '+JSON.stringify(ROOT)+' show '+(process.env.COOP_OLD_REF||'origin/main')+':index.html',{maxBuffer:64e6}).toString();
  const D=await mk(b,'solo',[686,880,2.2]);await D.ctx.route(BASE+'old.html',r=>r.fulfill({status:200,contentType:'text/html; charset=utf-8',body:oldHtml.replace(/navigator\.serviceWorker\.register/g,'(()=>Promise.reject())')}));
- await D.page();await D.p.goto(BASE+'old.html',DCL);await D.p.waitForTimeout(3500);
+ await D.page();await D.p.goto(BASE+'old.html',DCL);await booted(D);
  /* a loaded machine: wait for the old game's code; __nlInner = start() builds the life at once (no Luân hồi screen, which left S unset) */
  await D.p.waitForFunction(()=>typeof start==='function'&&typeof ser==='function'&&typeof SK==='function',null,{timeout:120000});
  await D.p.evaluate(()=>{SLOT=2;window.__nlInner=1;document.getElementById('title').hidden=true;for(let i=0;i<20&&!(typeof S!=='undefined'&&S&&S.name);i++)start();Q.length=0;localStorage.setItem(SK(2),JSON.stringify(ser()));localStorage.setItem('hclh-slot','2')});const oldName=await D.p.evaluate(()=>S.name);
- await D.p.goto(BASE,DCL);await D.p.waitForTimeout(3500);await shot(D,'13-title-solo');
+ await D.p.goto(BASE,DCL);await booted(D);await shot(D,'13-title-solo');
  ok(await tapText(D,/^Chơi một mình/),'solo: Chơi một mình');await D.p.waitForTimeout(800);
  /* Chơi một mình = Tiếp tục the last sổ (old save) when there is one */
  if(!await D.p.evaluate(()=>typeof S!=='undefined'&&!!S&&!!S.name))await tapText(D,/^Tiếp tục kiếp này/,4000);await D.p.waitForTimeout(1500);
