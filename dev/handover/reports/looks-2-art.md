@@ -8,6 +8,10 @@ Method: each effect painted ALONE (gpt-2-6, plain white/black bg, never her figu
 Face-square finals (transparent 384x384, 3 levels): fx-pox-thuydau-N, fx-pox-daumua-N, fx-pox-scar-N, fx-smu-N, fx-muc-N (+ -m mirror), fx-bui-N, fx-muoi-N, fx-moho-N, fx-lanh-N  → final-candidates/. Looked and OK'd by ROOT-13: pox x3, smu, muc, muoi; redone after feedback: lanh, moho, bui (v4).
 Preview only: stain-tra (v3 owner-approved), stain-uot (hair sheen faint), PREVIEW-hair-1..3 (tóc bù xù / flyaways, wind look).
 
+## Final state (18/11 ~01:12Z)
+Whole face-square set (fx-pox-thuydau/daumua/scar-1..3 with BOTH cheeks at every level, fx-smu-1..3, fx-muc-1..3 (+ -m; smear moved up off the lip), fx-bui-1..3 (terracotta-beige, measured hue 19-26deg on 4 skin tones), fx-muoi-1..3, fx-moho-1..3, fx-lanh-1..3) LOOKED + OK by Foreman C ROOT-13. Owner order (01:20Z): every effect = 3 singles lv1/2/3 on the same face/crop (v5/v6 files). Hair previews (PREVIEW-hair-1..3, locks rooted in the hair mass) OK as preview only. HOLD: nothing at live keys until the owner's verdict; ROOT-13 sends her set by set.
+Skin-hit check (30 consort portraits, after the cheek change): 93-94% of marks on skin, 26-28/30 faces >=85%.
+
 ## Findings
 1. Key mismatch: code draws fx-smu/muc/bui/muoi/moho/lanh-N + fx-pox-{thuydau|daumua|scar}-N; the order named fx-smudge/fx-ink. Files follow the CODE keys (ROOT-13: no aliases).
 2. veil-fit.json fig rows are off on the live fig + hd fig files (e.g. c01-t1-a18: needs ~-0.42W and a lower box); por rows are right. Face box for previews found by template-matching the por square onto the hd fig. ROOT-13 logged it for main.
