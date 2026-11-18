@@ -43,7 +43,7 @@ Object.assign(BAL,{looks:{
  /* KEEP-OUT (owner 18/11 standing rule: a face mark NEVER covers the eyes or the lips): ellipses [cx,cy,rx,ry] in VEIL-ROW units (u = x/rowW, v = y/rowH from the row's left/top),
     measured on 158 por pictures (Haar eyes + lip colour, dev/test/look-fx-keepout.py) and constant for every por-/fig- row because every row is cut from the face rect by the same ratios.
     Face-square marks are masked by it (lkKeepCss), the scratch rows (scar-fit) are generated so the box stays inside the cheek zone: cheek = [left,top,w,h,rot offset] of the veil row: the OLD diagonal across the cheek below the eye (owner 18/11: never vertical), ~1.4x the R3 length, as long as the keep-out allows. pad = ONE margin: every ellipse is grown by it (mask, scratch test). */
- keep:{eye:[[.31,.08,.15,.17],[.72,.08,.15,.17]],mouth:[.45,.655,.23,.105],nose:[.51,.36,.11,.2],pad:1.2,cheek:[.07,.28,.28,.26,0]},
+ keep:{eye:[[.31,.08,.15,.17],[.72,.08,.15,.17]],mouth:[.45,.655,.23,.105],nose:[.51,.36,.11,.2],pad:1.45,cheek:[.08,.30,.28,.20,5]},
  pox:{thuydau:{sea:["Xuân"],cont:1,die:0},sac:{thuydau:[0,3,5,8],daumua:[0,6,10,14]},spread:35,spreadWk:3,scar:[0,1,1,2]},
  /* SMUDGE = a CODE effect on her makeup colours (owner 17/11 ~23:30Z), per level 0..3 = không / nhẹ / vừa / nặng. Lengths in u = the distance between the two eyes
     (so portrait, figure, mirror all match); a = strength of that colour. blush/lid run DOWN the cheek (vertical, gravity), tear = grey lash-run lines, lip = colour
@@ -295,12 +295,14 @@ window.lkSmuDraw=lkSmuDraw;
 /* ---------- face-fx entries: pictures wait for Foreman C; chips + Sắc work now ---------- */
 /* ink faces the other way when the scar-fit cheek (the cheek facing the viewer) lies RIGHT of the face centre: pick the mirrored fx-muc-N-m (same side rule as the scar; today every por/fig row is the viewer-left cheek) */
 function lkMirror(file){try{const n=String(file||"").split("/").pop(),s=KIT_SCAR.fit&&KIT_SCAR.fit[n],v=KIT_VEIL.fit&&KIT_VEIL.fit[n];return !!(s&&v&&s[0]+s[2]/2>v[0]+v[2]/2+1)}catch(e){return false}}
-/* CSS mask (square coordinates) that cuts the eye / mouth / nose keep-out out of a face-square mark; the square = 1.08 x the veil row wide, 1.165 x as tall, its top .3826 rowH above the row top (KIT_RASH.style) */
+/* the first layer (full square) is composited with the ellipse layers BELOW it: xor/exclude = the square minus every ellipse (R7: add/exclude were the wrong way round and the mask did nothing in the browser).
+   The mask is opaque (removes the mark) up to the grown ellipse (pad) and only then fades out over the next 22 % (R7: the fade used to start inside the ellipse and left soot on the lash line / lip corner).
+   CSS mask (square coordinates) that cuts the eye / mouth / nose keep-out out of a face-square mark; the square = 1.08 x the veil row wide, 1.165 x as tall, its top .3826 rowH above the row top (KIT_RASH.style) */
 function lkKeepCss(){try{const K=BAL.looks.keep,E=[...K.eye,K.mouth,K.nose],gr="radial-gradient(ellipse closest-side,#000 82%,transparent 100%)";const im=[],sz=[],ps=[];
  im.push("linear-gradient(#000,#000)");sz.push("100% 100%");ps.push("0 0");
- for(const [u,v,ru,rv] of E){const s=(u+.04)/1.08,t=(v+.3826)/1.165,hw=ru*(K.pad||1)/1.08,hh=rv*(K.pad||1)/1.165,w=hw*200,h=hh*200,l=(s-hw)*100,tp=(t-hh)*100;im.push(gr);sz.push(w.toFixed(2)+"% "+h.toFixed(2)+"%");ps.push((l/(100-w)*100).toFixed(2)+"% "+(tp/(100-h)*100).toFixed(2)+"%")}
- const a=im.join(","),b=sz.join(","),c=ps.join(","),x=im.map((_,i)=>i?"exclude":"add").join(",").replace("add","add"),xw=im.map((_,i)=>i?"xor":"source-over").join(",");
- return `;-webkit-mask-image:${a}!important;mask-image:${a}!important;-webkit-mask-size:${b}!important;mask-size:${b}!important;-webkit-mask-position:${c}!important;mask-position:${c}!important;-webkit-mask-repeat:no-repeat!important;mask-repeat:no-repeat!important;-webkit-mask-composite:${xw}!important;mask-composite:${im.map((_,i)=>i?"exclude":"add").join(",")}!important`}catch(e){return""}}
+ for(const [u,v,ru,rv] of E){const s=(u+.04)/1.08,t=(v+.3826)/1.165,hw=ru*(K.pad||1)*1.22/1.08,hh=rv*(K.pad||1)*1.22/1.165,w=hw*200,h=hh*200,l=(s-hw)*100,tp=(t-hh)*100;im.push(gr);sz.push(w.toFixed(2)+"% "+h.toFixed(2)+"%");ps.push((l/(100-w)*100).toFixed(2)+"% "+(tp/(100-h)*100).toFixed(2)+"%")}
+ const a=im.join(","),b=sz.join(","),c=ps.join(","),x=im.map((_,i)=>i?"exclude":"add").join(",").replace("add","add"),xw=im.map((_,i)=>i?"source-over":"xor").join(",");
+ return `;-webkit-mask-image:${a}!important;mask-image:${a}!important;-webkit-mask-size:${b}!important;mask-size:${b}!important;-webkit-mask-position:${c}!important;mask-position:${c}!important;-webkit-mask-repeat:no-repeat!important;mask-repeat:no-repeat!important;-webkit-mask-composite:${xw}!important;mask-composite:${im.map((_,i)=>i?"add":"exclude").join(",")}!important`}catch(e){return""}}
 window.lkKeepCss=lkKeepCss;
 function lkFaceImg(cls,f,st,file){if(!st)return"";if(/^fx-muc-\d\.png$/.test(f)&&lkMirror(file))f=f.replace(".png","-m.png");const m=/^fx-(muc|muoi)-/.exec(f);
  return lkArt(f)?`<img class="${cls}" src="img/${f}" alt="" aria-hidden="true" style="${kitFxVars(st)}${m?kitToneCss(m[1],null):""}${lkKeepCss()}" onerror="this.remove()">`:""}

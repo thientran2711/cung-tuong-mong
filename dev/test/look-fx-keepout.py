@@ -48,7 +48,7 @@ S = 384; yy, xx = np.mgrid[0:S, 0:S]; xs = (xx + .5) / S; ys = (yy + .5) / S
 keep = np.zeros((S, S)); inside = np.zeros((S, S), bool)
 for u, v, ru, rv in KEEP:
     s = (u + .04) / 1.08; t = (v + .3826) / 1.165; hw = ru / 1.08; hh = rv / 1.165
-    d = np.sqrt(((xs - s) / hw) ** 2 + ((ys - t) / hh) ** 2)   # 1 = ellipse edge; mask: opaque (removes) until .82, fades to 1.0
+    d = np.sqrt(((xs - s) / (hw * 1.22)) ** 2 + ((ys - t) / (hh * 1.22)) ** 2)   # 1 = ellipse edge; mask: opaque (removes) until .82, fades to 1.0
     keep = np.maximum(keep, np.clip((1.0 - d) / .18, 0, 1)); inside |= d <= 1.0
 for f in sorted(x for x in os.listdir(D) if re.fullmatch(r'fx-[a-z-]+-\d(-m)?\.png', x)):
     a = np.asarray(Image.open(os.path.join(D, f)).convert('RGBA'))[..., 3].astype(float)
