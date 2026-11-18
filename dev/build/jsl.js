@@ -104,21 +104,20 @@ var KBK_ART_LINE=window.KBK_ART_LINE={b:.0244};
  function clamp(){q=0;try{document.querySelectorAll(".kbk-person.kbk-full .kesfi").forEach(f=>{const box=f.closest(".kbk-person");if(!box)return;
    const por=box.querySelector(":scope>.kbk-por"),pg=box.closest(".kbk-pg");if(!por)return;
    f.style.transform="";{const i0=f.querySelector("img");if(i0&&i0.style.maskImage){i0.style.maskImage="";i0.style.webkitMaskImage=""}}
-   /* KIT 56.3 FULL-BODY FRAME (owner 18/11 ~06:45Z + ~06:55Z, overwrites the 17/11 narrow-column and the 18/11 "wide robes cropped" rules): the frame is the TIGHT box of the widest
-      approved person (BAL.bookFrame): ONE SCALE below; frame aspect ar, as wide as the column height needs (capped at BAL.bookFrame.maxCol of the inner page width; the text column takes the rest). The figure is fitted
-      INTO it by its PAINTED box (l..r x t..b, kitFigBody), aspect kept: whole figure visible (crown, hands, sleeves, hem, feet), nothing cut, never squeezed; centred in the frame, feet on its floor. */
+   /* KIT 56.3 FULL-BODY FIGURE (owner 18/11 ~07:10Z + ~07:20Z, overwrites the 17/11 narrow-column fit, the 18/11 "wide robes cropped" and the frame-shape rules): LAYOUT = the live Tuần lục layout (--porf column, text column as live).
+      SIZE = ONE body for everybody: SKULL TOP (kitFigBody ht = head-top table / face mesh, never crown, bun or hat) to FEET = column width / BAL.bookFigW (her p.5 shot: Fold 641 / iPad 534); kids by KIT_FIG.fac.
+      Nothing is cut, nobody is shrunk: a wide robe / sleeve / lantern spreads out of the column over the text area (the text is drawn ON TOP, the figure is transparent); the painted left edge is on the column's left edge as live.
+      Crowns rise into the free paper; ONE feet line for everybody: the column floor, moved DOWN (toward the page's bottom line) only as far as the tallest Hoàng hậu crown (BAL.bookFrame.cRef) needs to clear the running-head rule by BAL.bookFrame.gap px; only if that is not enough the ONE body is lowered for all. */
    let dyF=0,dxF=0;{const i1=f.querySelector("img"),s1=i1&&i1.getAttribute("src"),b1=s1?kitFigBody(s1,soon):null,Hc=por.clientHeight,BF=BAL.bookFrame;
-    if(!b1||!Hc){f.style.visibility="hidden"}else{const inEl0=box.closest(".kbk-in"),inW=(inEl0&&inEl0.clientWidth)||box.clientWidth;
-     const wantW=Math.max(60,Math.min(Math.round(Hc*BF.ar),Math.floor(inW*BF.maxCol)));if(Math.abs((parseFloat(box.dataset.kfw)||0)-wantW)>.5){box.dataset.kfw=wantW;box.style.setProperty("--porf",wantW+"px");soon();return}
-     /* ONE BODY SIZE (fixed): skull top (kitFigTop = head-top table) -> feet is the same px for every person (kids by KIT_FIG.fac), feet on the frame floor, body core on the frame centre. Crowns rise into the free paper above the frame
-        (never cut); a wide robe spreads into the page margin LEFT of the column, never under the text on the right; only a picture that still does not fit is clipped minimally at the column edge (stopgap, data-kcut, listed for redraw). */
-     const pwc=por.clientWidth,ar1=i1.naturalWidth&&i1.naturalHeight?i1.naturalWidth/i1.naturalHeight:b1.ar,FH=Math.min(Hc,pwc/BF.ar),kid=/fig-kid-/.test(s1)&&typeof KIT_FIG==="object"?KIT_FIG.fac(s1):1;
-     const bd=Math.max(.2,b1.b-kitFigTop(b1)),ih=BF.body*FH*kid/bd,iw=ih*ar1,pgR=pg?pg.getBoundingClientRect():null,porR=por.getBoundingClientRect(),ml=pgR?Math.max(0,porR.left-pgR.left-pgR.width*BF.margin):0;
-     const cx=((b1.cl!=null?b1.cl:b1.l)+(b1.cr!=null?b1.cr:b1.r))/2,pl=b1.l*iw,pr=b1.r*iw;let dx=pwc/2-cx*iw;dx=Math.min(dx,pwc-pr);dx=Math.max(dx,-ml-pl);   /* painted box inside [-ml, pwc] */
-     const cutR=Math.max(0,dx+pr-pwc),cutL=Math.max(0,-ml-(dx+pl)),cutT=Math.max(0,ih*(b1.b-b1.t)-Hc);
-     f.dataset.kcut=(cutR+cutL+cutT).toFixed(1);if(cutR+cutL+cutT>.5){const im=f.querySelector("img");if(im)im.style.clipPath=`inset(${((ih*b1.t+cutT)/ih*100).toFixed(2)}% ${(cutR>0?(iw-(pwc-dx))/iw*100:0).toFixed(2)}% 0 ${(cutL>0?(-ml-dx)/iw*100:0).toFixed(2)}%)`}else{const im=f.querySelector("img");if(im)im.style.clipPath=""}
-     dyF=ih*(1-b1.b);dxF=dx;
-     f.style.height=ih.toFixed(1)+"px";f.style.width=iw.toFixed(1)+"px";f.style.visibility="";f.dataset.kbody=(ih*(b1.b-kitFigTop(b1))).toFixed(1);}}
+    if(!b1||!Hc||!por.clientWidth){f.style.visibility="hidden"}else{
+     const ar1=i1.naturalWidth&&i1.naturalHeight?i1.naturalWidth/i1.naturalHeight:b1.ar,kid=/fig-kid-/.test(s1)&&typeof KIT_FIG==="object"?KIT_FIG.fac(s1):1;
+     let body=por.clientWidth/BAL.bookFigW,shift=0;
+     try{const inEl=box.closest(".kbk-in"),rh=inEl&&inEl.querySelector(":scope > .kbk-rh");const rel=e=>{let y=0,x=e;while(x&&x!==inEl){y+=x.offsetTop;x=x.offsetParent}return x===inEl?y:null};const pt=inEl?rel(por):null;
+      const pgE=box.closest(".kbk-pg"),art=!!(pgE&&(pgE.classList.contains("r")&&box.closest(".kbk.art-right")||pgE.classList.contains("l")&&box.closest(".kbk.art-left")));
+      if(pt!=null){const lt=rh&&rh.offsetParent?rh.offsetTop+rh.offsetHeight:0,lb=(art?pgE.offsetHeight*(1-KBK_ART_LINE.b)-inEl.offsetTop:inEl.clientHeight)-BF.footGap,feet0=pt+Hc,need=lt+BF.gap+body*(1+BF.cRef);
+       shift=Math.max(0,Math.min(need-feet0,lb-feet0));if(feet0+shift<need-.5)body=Math.max(60,(feet0+shift-lt-BF.gap)/(1+BF.cRef));f.dataset.kshift=Math.round(shift)}}catch(e){}
+     const bd=Math.max(.2,b1.b-kitFigTop(b1)),ih=body*kid/bd,iw=ih*ar1;dyF=ih*(1-b1.b)+shift;dxF=-b1.l*iw;
+     f.style.height=ih.toFixed(1)+"px";f.style.width=iw.toFixed(1)+"px";f.style.visibility="";f.dataset.kbody=(ih*(b1.b-kitFigTop(b1))).toFixed(1);{const im=f.querySelector("img");if(im)im.style.clipPath=""}}}
    const w0=f.offsetWidth;if(!w0||!box.offsetWidth)return;
    f.style.transformOrigin="50% 100%";const t=Math.abs(dyF)>0.5||Math.abs(dxF)>0.5?`translate(${dxF.toFixed(1)}px,${dyF.toFixed(1)}px)`:"";if(f.style.transform!==t)f.style.transform=t})}catch(e){}}
  function soon(){if(!q){q=requestAnimationFrame(clamp);setTimeout(clamp,450);setTimeout(clamp,1300)}}

@@ -934,8 +934,6 @@ Object.assign(BAL,{odb:{
 /* FACE REVEAL motion (owner 18/11 ~06:20Z, KIT §79 jreveal.js): ms = the grey veil clears from the face outward; lite = Gọn / reduced motion short fade;
    win = how long after a face is learned every place that first draws it (frame, avatar, stage figure) still plays its one reveal */
 Object.assign(BAL,{faceReveal:{ms:Math.round(1000*BAL.pace),lite:350,win:8000}});
-/* FULL-BODY FRAME (owner 18/11 ~06:45Z, ~06:55Z, ~07:00Z + angry at the small r3, ~07:05Z, KIT §56.3): the SIZE IS FIXED = the c03 figures of the approved r2 look: ONE body size for everybody, SKULL TOP (kitFigBody ht, the head-top table /
-   face mesh; never crown, bun or hat) to FEET = body x frame height, where the frame is the tight box of the widest c03 person (aspect ar .4824, width = the column, capped at maxCol of the inner page width) and body .9167 = c03 t6 skull-top-to-feet / 2678 crop box
-   (Fold 627 px, iPad 519 px). Nobody is shrunk for catalog extremes: crowns rise into the free paper above the frame, a wide robe spreads into the page margin beside the column (never under the text); only a picture that still does not fit is
-   cut minimally at the column edge (stopgap, flagged data-kcut, listed for redraw). */
-Object.assign(BAL,{bookFrame:{ar:.4824,maxCol:.56,body:.9167,margin:.06}});
+/* BOOK FIGURE (owner 18/11 ~07:10Z + ~07:20Z, KIT §56.3): ONE body size for everybody = SKULL TOP to FEET = figure column width / bookFigW (her p.5 shot: Fold col 220 -> 641, iPad col 183 -> 534). Layout = live; nothing cut, nobody shrunk, the text is drawn on top.
+   cRef = the tallest Hoàng hậu crown above the skull top / body (catalog scan 18/11: thaihau-h3-a36 .072); gap = px the crown keeps under the running-head rule; footGap = px the feet keep above the page's bottom line when the feet line is moved down for her crown. */
+BAL.bookFigW=.343;Object.assign(BAL,{bookFrame:{cRef:.072,gap:8,footGap:10}});

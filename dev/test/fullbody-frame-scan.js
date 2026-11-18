@@ -5,7 +5,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=
 const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
 const C3=n=>['c03-t'+n,'img/_review/consort-tiers/c03/b8/c03_a18_t'+n+'.png'];
 const C3HT=process.env.C3HT?JSON.parse(require('fs').readFileSync(process.env.C3HT)):{};/* skull tops of the c03 review canvases (not in img/fig-ht.json yet): MediaPipe, headtop.py method */
-let CASES=[C3(1),C3(6),C3(8),['hoang-hau','img/fig-thaihau-1.webp'],['crown-tallest','img/fig-maid-m50-t8-a18.webp'],['widest-robe','img/fig-maid-m48-t8-a51.webp'],['old-maid-wide','img/fig-maid-m50-t6-a51.webp'],['man','img/fig-man-bacdich-1-a36.webp'],['old-emperor','img/fig-emperor-a18-1.webp']];
+let CASES=[C3(1),C3(6),C3(8),['hoang-hau','img/fig-thaihau-1.webp'],['crown-tallest','img/fig-maid-m50-t8-a18.webp'],['widest-robe','img/fig-maid-m48-t8-a51.webp'],['old-maid-wide','img/fig-maid-m50-t6-a51.webp'],['man','img/fig-man-bacdich-1-a36.webp'],['old-emperor','img/fig-emperor-a18-1.webp'],['SELF','SELF']];
 if(process.env.CASES)CASES=CASES.filter(c=>process.env.CASES.split(',').includes(c[0]));
 (async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});let bad=0;const html=fs.readFileSync(SRC);
  for(const [W,H] of SZ){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:process.env.SHOTS?+(process.env.DSF||2):1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',ignoreHTTPSErrors:true});await ctx.addInitScript(()=>{window.__bot=1;let s=12345;Math.random=()=>{s=(s*1664525+1013904223)%4294967296;return s/4294967296}});
@@ -18,25 +18,25 @@ if(process.env.CASES)CASES=CASES.filter(c=>process.env.CASES.split(',').includes
   for(const [name,FIG] of CASES){
    const r=await p.evaluate(async([name,FIG])=>{
     const k0=window.__k0||(window.__k0=kitFigOf);
-    window.kitFigOf=kitFigOf=function(q){if(q&&q.__t)return IMG_BASE+FIG;return k0.apply(this,arguments)};
-    const who=Object.assign({},S.thO||{kind:'th',name:'Thái hậu',age:60},{age:36,__t:1,name:'Nhân vật'});
+    window.kitFigOf=kitFigOf=function(q){if(q&&q.__t&&FIG!=='SELF')return IMG_BASE+FIG;return k0.apply(this,arguments)};
+    const self=FIG==='SELF';const who=self?S:Object.assign({},S.thO||{kind:'th',name:'Thái hậu',age:60},{age:36,__t:1,name:'Nhân vật'});
     let w=document.getElementById('dawn');if(!w){w=document.createElement('div');w.id='dawn';document.body.appendChild(w)}w.innerHTML='';w.hidden=false;w.className='dawn kbkdawn on';w.style.zIndex=2147483000;
-    const facts=[];for(let i=0;i<4;i++)facts.push({text:`Mục${i}: khen ngươi hiếu thuận, dặn giữ lễ nghi trong cung.`,kind:'world',auto:false});
+    const facts=[];for(let i=0;i<7;i++)facts.push({text:`Mục${i}: khen ngươi hiếu thuận, dặn giữ lễ nghi trong cung, nhớ mang theo khăn lụa và quạt nhỏ khi vào yến tiệc.`,kind:'world',auto:false});
     kitBook({pages:[{kind:'person',who,title:'Thử',blocks:[{facts}],n:4}],head:'Tuần lục · thử',host:w,label:'Tuần lục',onClose:()=>{}});
     const t0=Date.now();while(Date.now()-t0<25000){const f=[...document.querySelectorAll('#dawn .kbk-person.kbk-full .kesfi')].find(e=>e.offsetParent);const i=f&&f.querySelector('img');if(i&&i.complete&&i.naturalWidth&&f.style.visibility!=='hidden')break;await new Promise(r=>setTimeout(r,200))}
     await new Promise(r=>setTimeout(r,2200));
     const f=[...document.querySelectorAll('#dawn .kbk-person.kbk-full .kesfi')].find(e=>e.offsetParent&&e.closest('.kbk-sheet')&&e.closest('.kbk-sheet').style.transform==='')||document.querySelector('#dawn .kbk-person.kbk-full .kesfi');
     if(!f)return{err:'no figure'};const im=f.querySelector('img'),src=im.getAttribute('src'),b=await new Promise(res=>{const v=kitFigBody(src,()=>res(kitFigBody(src)));if(v)res(v)});
-    const r=im.getBoundingClientRect(),por=f.closest('.kbk-por').getBoundingClientRect(),ph=f.closest('.kbk-person').querySelector(':scope>.kbk-phead').getBoundingClientRect(),fl=f.closest('.kbk-person').querySelector(':scope>.kbk-flow');
-    const FW=por.width,FHh=Math.min(por.height,FW/BAL.bookFrame.ar),frT=por.top;const pgR=f.closest('.kbk-pg').getBoundingClientRect(),minL=Math.max(pgR.left,por.left-Math.max(0,por.left-pgR.left-pgR.width*BAL.bookFrame.margin));const L0=r.left+b.l*r.width,R0=r.left+b.r*r.width,L=Math.max(L0,minL),R=Math.min(R0,por.right),T=r.top+b.t*r.height,B=r.top+b.b*r.height;
+    const r=im.getBoundingClientRect(),por=f.closest('.kbk-por').getBoundingClientRect(),ph=f.closest('.kbk-person').querySelector(':scope>.kbk-phead').getBoundingClientRect(),pg=f.closest('.kbk-pg').getBoundingClientRect(),inEl=f.closest('.kbk-in'),rhE=inEl&&inEl.querySelector(':scope>.kbk-rh'),rhB=rhE?rhE.getBoundingClientRect().bottom:por.top;
+    const L=r.left+b.l*r.width,R=r.left+b.r*r.width,T=r.top+b.t*r.height,B=r.top+b.b*r.height,sk=r.top+kitFigTop(b)*r.height;
     let ovl=0;f.closest('.kbk-person').querySelectorAll('.kbk-phead *,.kbk-flow *').forEach(e=>{if(e.children.length||!(e.textContent||'').trim())return;const q=e.getBoundingClientRect();if(q.width&&q.right>L+.5&&q.left<R-.5&&q.bottom>T&&q.top<B)ovl++});
-    const kb=+f.dataset.kbody;return{FHh,kb,src:src.split('/').pop(),frameW:por.width,frameH:por.height,frameX:por.left,frameY:por.top,figW:R0-L0,figH:B-T,imgW:r.width,imgH:r.height,cutL:Math.max(0,minL-L0),kcut:+f.dataset.kcut||0,cutR:Math.max(0,R0-por.right),cutT:Math.max(0,frT-T),cutB:Math.max(0,B-por.bottom),textW:ph.width,textX:ph.left,ovl,asp:(r.width/r.height)/(im.naturalWidth/im.naturalHeight),fit:+(Math.min(por.width/(R-L),por.height/(B-T))).toFixed(3),ar:(R-L)/(B-T)}},[name,FIG]);
+    return{src:src.split('/').pop(),kb:+f.dataset.kbody,colW:por.width,colH:por.height,figW:R-L,figH:B-T,text:ph.width,crownGap:T-rhB,skullGap:sk-rhB,feetGap:por.bottom-B,shift:+f.dataset.kshift||0,spreadR:Math.max(0,R-por.right),cutPg:Math.max(0,pg.left-L)+Math.max(0,R-pg.right)+Math.max(0,B-pg.bottom),ovl,asp:(r.width/r.height)/(im.naturalWidth/im.naturalHeight)}},[name,FIG]);
    r.name=name;rows.push(r);
    if(process.env.SHOTS&&OUT){await p.evaluate(()=>{for(const c of document.body.children)c.style.visibility=c.id==='dawn'?'visible':'hidden'});await p.screenshot({path:`${OUT}/${W}x${H}-${name}.jpg`,type:'jpeg',quality:70});await p.evaluate(()=>{for(const c of document.body.children)c.style.visibility=''})}}
   for(let i=rows.length-1;i>=0;i--)if(rows[i].name==='warmup')rows.splice(i,1);
   const f1=x=>(+x).toFixed(1);
-  for(const r of rows){console.log(`${W}x${H} ${r.name.padEnd(14)} ${r.err||`frame ${f1(r.frameW)}x${f1(r.FHh)} (asp ${(r.frameW/r.FHh).toFixed(4)}) fig ${f1(r.figW)}x${f1(r.figH)} (asp ${r.ar.toFixed(4)}) text ${f1(r.textW)} cut L${f1(r.cutL)} R${f1(r.cutR)} T${f1(r.cutT)} B${f1(r.cutB)} skull>feet ${f1(r.kb)} kcut ${f1(r.kcut)} textOvl ${r.ovl} squeeze ${r.asp.toFixed(3)} ${r.src}`}`);
-   if(!r.err){const cut=r.cutL+r.cutR+r.cutT+r.cutB;if(cut>1.5)console.log('STOPGAP cut (list for redraw)',r.name,f1(cut));if(r.ovl){bad++;console.log('FAIL text overlap',r.name)}if(Math.abs(r.asp-1)>.01){bad++;console.log('FAIL squeeze',r.name,r.asp)}}}
+  for(const r of rows){console.log(`${W}x${H} ${r.name.padEnd(14)} ${r.err||`skull>feet ${f1(r.kb)} | fig ${f1(r.figW)}x${f1(r.figH)} col ${f1(r.colW)}x${f1(r.colH)} text ${f1(r.text)} | crown gap ${f1(r.crownGap)} (skull gap ${f1(r.skullGap)}) feet ${f1(r.feetGap)} above col floor (moved down ${r.shift}) | spreads over text ${f1(r.spreadR)} px, text lines under figure ${r.ovl} | cut ${f1(r.cutPg)} squeeze ${r.asp.toFixed(3)} ${r.src}`}`);
+   if(!r.err){if(r.crownGap<1){bad++;console.log('FAIL crown touches/under the running-head rule',r.name)}if(r.cutPg>1){bad++;console.log('FAIL cut at page edge',r.name,f1(r.cutPg))}if(Math.abs(r.asp-1)>.01){bad++;console.log('FAIL squeeze',r.name,r.asp)}}}
   {const a=rows.filter(r=>!r.err);const mx=Math.max(...a.map(r=>r.kb)),mn=Math.min(...a.map(r=>r.kb));console.log(`${W}x${H} skull-top>feet spread ${((mx-mn)/mx*100).toFixed(2)} % (min ${f1(mn)} max ${f1(mx)})`);if((mx-mn)/mx>.01){bad++;console.log('FAIL spread >1 %')}}
   if(errs.filter(e=>!/Unexpected token '<'/.test(e)).length){bad++;console.log('PAGE ERRORS',errs.slice(0,3))}
   await ctx.close()}
