@@ -1,4 +1,4 @@
-# review place-stage r5b — PASS 5ae28ddb (depth 5, SMALL UI reviewer)
+# review place-stage r5b — PASS e0b96620 (depth 5, SMALL UI reviewer)
 PRIORITY #1 CHECK ('place-stage'): OD 5 | ledger 0 | claims 0 | main 0 | review/* 1 (review/place-stage 48e61b6) | reuse: nothing rebuilt.
 Reviewed 48e61b6 (A1: marker on head, KIT_FIG.h .79, band 70, gold glow, seal at ONE fixed offset). FINAL MERGE done: origin/main 09b1bba merged (only index.html/sw.js conflicted -> rebuilt with assemble.py + build_site.sh, img-allowlist OK, no markers left). Worker pushed an identical-tree merge meanwhile: review/place-stage = 5ae28ddb (git diff vs my local merge 952a81e5 is empty; origin/main 09b1bba is its ancestor); I did not force-push.
 TESTS
@@ -8,5 +8,7 @@ TESTS
 SHOTS (scratch, LOOKED; fold 755x1000@2, ipadAir 1180x820@2): Ngu hoa vien 4 people iPad = 4 fixed columns, count chip 4, marker on head, seal beside head at same relative spot, pet at feet, title pill; Fold 2 people clean; iPad Canh Phuc cung (11 people) clean. Note: first place in a scan run shows the title-collection popup (scan artifact, not a defect); re-run with that place second was clean.
 NOT RUN: stage-tag-contrast.py (harness page timeout, same as worker; tag colours untouched).
 Open owner call (not a defect): at the 601 px stage figH 453 (worker's SIZE NOTE: .74 would give 501 px literally).
-VERDICT: PASS 5ae28ddb. No images were uploaded to the CDN by me (nothing to wipe; worker's img/_review/place-stage/ still needs wiping after main stamps).
+VERDICT: PASS e0b96620. No images were uploaded to the CDN by me (nothing to wipe; worker's img/_review/place-stage/ still needs wiping after main stamps).
 ~97% xong / chờ main FF
+
+FINAL (after main moved to b2a9d349): merged b2a9d349 into review/place-stage = e0b96620, index.html/sw.js rebuilt, scan 18 places x fold+ipadAir clean (0 flags, figH 453), quickcheck CORE GATES PASS, open 1766 ms, old save OK. Pushed.
