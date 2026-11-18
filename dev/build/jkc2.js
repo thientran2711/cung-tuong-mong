@@ -16,7 +16,7 @@ function kc2D(){try{if(S&&S.kc)return S.kc.kd||"";return S&&S.origin?KC2K[S.orig
 function kc2On(){return isKc()&&!!(S.kc&&S.kc.kd)}
 const KC2LAND={nc:{land:"Nam Chiếu",dad:"Phụ vương",mom:"Mẫu hậu",title:"Công chúa Nam Chiếu",court:"vương cung Nam Chiếu",sub:["Trong vương cung","Kinh đô"],
   fest:["Lễ hội đuốc","Đêm tháng sáu, cả kinh đô đốt đuốc thông quanh hồ, trai gái múa vòng đến sáng."],
-  P:{tam:"Tẩm điện của ngươi",dien:"Chính điện",vien:"Vương uyển",mieu:"Chùa Sùng Thánh",dich:"Dịch quán sứ Đại Hy",cho:"Chợ kinh đô",ho:"Bờ hồ Nhĩ Hải"}},
+  P:{tam:"Tẩm điện của ngươi",dien:HALL_NC,vien:"Vương uyển",mieu:"Chùa Sùng Thánh",dich:"Dịch quán sứ Đại Hy",cho:"Chợ kinh đô",ho:"Bờ hồ Nhĩ Hải"}},
  bd:{land:"Bắc Địch",dad:"Phụ hãn",mom:"Khả đôn",title:"Công chúa Bắc Địch",court:"kim trướng Bắc Địch",sub:["Trong trại","Thảo nguyên"],
   fest:["Hội đua ngựa mùa hạ","Các bộ lạc kéo về quanh kim trướng: đua ngựa, bắn cung, vật, và kén rể."],
   P:{tam:"Trướng của ngươi",dien:"Kim trướng của phụ hãn",vien:"Bãi ngựa",mieu:"Miếu thần núi",dich:"Doanh trại sứ Đại Hy",cho:"Chợ phiên",ho:"Thảo nguyên"}}};

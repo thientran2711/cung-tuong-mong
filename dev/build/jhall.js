@@ -22,6 +22,7 @@ const HALL_PN={
 const HALL_ROLE={chinh:"Chính điện",dong:"Đông phối điện",tay:"Tây phối điện",cungnhan:"Dãy nhà cung nhân"};
 const HALL_IDX={chinh:0,dong:1,tay:2};
 const HALL_SRV="Tích Cần viện"; /* the servants' row is one shared building */
+const HALL_NC="Quân Ân điện"; /* Nam Chiếu court hall (jkc2 P.dien); role "chính điện" = subtitle only */
 /* hallName(palaceName, part) → the plaque name; unknown palace / part → the old generic role (nothing ever blank) */
 function hallName(pn,part){if(part==="cungnhan")return HALL_SRV;const L=HALL_PN[pn];const i=HALL_IDX[part];return(L&&i!=null&&L[i])||HALL_ROLE[part]||""}
 function hallRole(part){return HALL_ROLE[part]||""}
