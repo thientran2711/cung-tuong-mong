@@ -34,7 +34,9 @@ const KIT_SIZE={
       Q56:{w:56,h:56},Q64:{w:64,h:64},Q72:{w:72,h:72}},
  /* buttons: S = square 56; LS = square 72; LR = 3:4 rectangle 84x112. In a frame every button is full width; the class only sets the picture. */
  btn:{S:{pic:"Q56",maxRows:2,maxChars:70},LS:{pic:"Q72",maxRows:3,maxChars:160},LR:{pic:"PS"}},
- head:56};
+ head:56,
+ /* KIT 56.13 (reviewer, ROOT-55): the painted figure (robe, hem, sleeve) keeps at least this many px from the left edge of its frame / the screen: whole but never touching */
+ edge:12};
 window.KIT_SIZE=KIT_SIZE;KIT_SIZE.opt=window.KIT_OPT;
 function kitSzMode(){try{return kitView().pages===2?"kv2":"kv1"}catch(e){return document.documentElement.classList.contains("kv2")?"kv2":"kv1"}}
 /* kitBtnSize(info) — THE button rule. info = {rows:<Cần/Tốn/Được/Mất/Kèm rows; GỢI Ý not counted: it has its own box>, chars:<title + rows>} or a button element.
@@ -135,7 +137,7 @@ function kszFigFit(root){(root||document).querySelectorAll(".kszf .kszfig>.kszfs
  /* nothing is cut: .kszfs is overflow visible; the painted art is centred on the column, a wide robe spreads right under the text (drawn on top, z-index) */
  im.style.height=H+"px";im.style.width=W+"px";im.style.left=kitFullFigX(v,W,cw,kszLimL(im)).toFixed(1)+"px";im.style.translate="none";im.style.bottom=(-(1-v.b)*H)+"px";im.parentElement.style.height=Math.ceil(body*(1+kszCrown()))+"px"/* the same column height for everybody: skull top -> feet + the room of the tallest Hoàng hậu crown; a taller crown rises into the tag's free space (never cut) */})}
 /* px the figure column has to its left inside the frame (the figure may spread that far left, never past the frame edge) */
-function kszLimL(im){try{const d=im.closest(".kszf"),c=im.parentElement;return Math.max(0,c.getBoundingClientRect().left-d.getBoundingClientRect().left-4)}catch(e){return 0}}
+function kszLimL(im){try{const d=im.closest(".kszf"),c=im.parentElement;return Math.max(0,c.getBoundingClientRect().left-d.getBoundingClientRect().left-(KIT_SIZE.edge||12))}catch(e){return 0}}
 function kszCrown(){return(typeof BAL==="object"&&BAL.bookFrame&&BAL.bookFrame.cRef)||.131}
 window.kszFigFit=kszFigFit;
 /* spec: {kind,title,sub,who,pic,ban,facts,rows,opts,btn,long} → frame html (size picked after mount by kitFrameApply) */

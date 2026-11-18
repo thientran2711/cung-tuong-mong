@@ -475,7 +475,7 @@ function kitDpFit(){try{const o=kitDpOn();if(!o||!o.d.classList.contains("kdper"
   const W=narrow?col.clientWidth:need;const kN=sz.length;
   /* the tallest person sets the chip line: right above the painted top when the people are shorter than the column */
   const gap=Math.max(0,Hu-Math.max(...sz.map(s=>s.ih*s.span)));col.dataset.kdpcrop=sz.some(s=>s.fv<.995)?"1":"0";
-  L.forEach((it,i)=>{const s=sz[i];const ih=s.ih,iw=s.iw;const cxs=kitSlotCx(i,kN,6,W-12);const left=kN===1?kitFullFigX(it.b,iw,W,Math.max(0,col.getBoundingClientRect().left-d.getBoundingClientRect().left-4)):cxs-iw*(s.l+s.r)/2;
+  L.forEach((it,i)=>{const s=sz[i];const ih=s.ih,iw=s.iw;const cxs=kitSlotCx(i,kN,6,W-12);const left=kN===1?kitFullFigX(it.b,iw,W,col.getBoundingClientRect().left-d.getBoundingClientRect().left-((typeof KIT_SIZE==="object"&&KIT_SIZE.edge)||12)):cxs-iw*(s.l+s.r)/2;
    const ftop=s.fv<.995?top-ih*s.t:floor-gap/2-ih*s.b;/* cropped: painted top under the chips, the rest runs past the floor (cut); 32.2b: full figure centred, equal gaps */
    Object.assign(it.f.style,{left:left.toFixed(1)+"px",top:ftop.toFixed(1)+"px",width:iw.toFixed(1)+"px",zIndex:String(2+i),visibility:""});
    const wr=it.f.querySelector(".kesfi");if(wr)Object.assign(wr.style,{width:iw.toFixed(1)+"px",height:ih.toFixed(1)+"px",margin:"0",maxWidth:"none"});

@@ -122,7 +122,7 @@ window.kitBookFig=kitBookFig;
    (56.5) the person's HEAD sits at the horizontal CENTRE of the column (b.hx = head centre measured by kitFigBody; fallback the core centre); nothing is cut: a wide robe spreads both sides,
    under the text, which is drawn ON TOP of the transparent figure; only when the painted art would pass the frame's own left edge (lim = px the column has to its left, inside the frame) the figure is moved
    right by just that much (the head then is off-centre by that amount: reported by the scan). Returns the left of the picture box from the column's left edge (px). iw = picture box width, cw = column width. */
-function kitFullFigX(b,iw,cw,lim){const cc=b.hx!=null?b.hx:((b.cl!=null?b.cl:b.l)+(b.cr!=null?b.cr:b.r))/2;let x=cw/2-iw*cc;const L=Math.max(0,+lim||0);if(x+b.l*iw<-L)x=-L-b.l*iw;return x}
+function kitFullFigX(b,iw,cw,lim){const cc=b.hx!=null?b.hx:((b.cl!=null?b.cl:b.l)+(b.cr!=null?b.cr:b.r))/2;let x=cw/2-iw*cc;const L=+lim||0;/* KIT 56.13: lim may be negative = the painted left edge is pushed right to keep the kit edge margin */if(x+b.l*iw<-L)x=-L-b.l*iw;return x}
 window.kitFullFigX=kitFullFigX;
 /* KIT 33.4 · kitImgErr — the ONE null-safe fallback for inline <img onerror>: a picture that fails after a re-render detached it
    does nothing (no "reading 'classList' of null" page errors). o.sel: ancestor to mark (default the parent); o.cls: class to add;
