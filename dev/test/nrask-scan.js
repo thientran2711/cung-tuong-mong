@@ -37,9 +37,10 @@ for(const f of files){const src=fs.readFileSync(path.join(B,f),'utf8');const one
  per[f]=Object.keys(one.window.NRASK||{});for(const k of per[f]){if(owner[k])fail(`${f}: key ${k} already defined in ${owner[k]}`,k);else owner[k]=f}
  try{vm.runInContext(src,sb,{filename:f})}catch(e){}}
 const NR=sb.window.NRASK||sb.NRASK||{};
-/* time words (VANPHONG / card deadline): q1c's rule + đêm mai, «Mai …» at a sentence start, «N ngày/hôm nữa», mấy hôm nữa, cuối tháng,
+/* time words (VANPHONG / card deadline; fix 4 widens to every same-day / next-day hour word: (sáng|trưa|chiều|tối|đêm|ngày|hôm) (mai|mốt|kia|nay),
+   mai mốt, tuần/tháng/năm sau|tới, sang năm, từ chiều, trước giờ, cửa cung đóng, kiệu sắp đến, canh N, trước/đến/kịp giờ Tý…Hợi; kept: «trước giờ ấy» = an event, «hay đi qua … vào giờ Thân» = a habit): q1c's rule + đêm mai, «Mai …» at a sentence start, «N ngày/hôm nữa», mấy hôm nữa, cuối tháng,
    trong một/hai/ba ngày/tháng. Kept fine: «trước khi …», «đêm hẹn», past spans, spans longer than the deadline («ba tháng nữa») */
-const TIME=/(ngày mai|đêm nay|đêm mai|sáng mai|tối nay|tối mai|(?<!mấy )hôm nay|mồng|rằm|tết|ngày giỗ|cuối tháng|(^|[.!?:]\s*)mai (?=\p{L})|[^\s]+ (ngày|hôm) nữa|(đợi|ở được|trong|còn|hạn) (một|hai|ba|bốn|năm|sáu|mười|vài|mấy) (ngày|hôm|tuần|tháng|năm)|(^|[^\p{L}])(hai|ba|bốn|năm|mười) ngày(?![\p{L}]))/iu;
+const TIME=/((sáng|trưa|chiều|tối|đêm|ngày|hôm) (mai|mốt|kia)|(sáng|trưa|chiều|tối|đêm) nay|mai mốt|(tuần|tháng|năm) (sau|tới)(?![\p{L}])|sang năm|từ chiều|từ trưa|giờ đóng cửa|cửa cung đóng|kiệu sắp đến|canh (một|hai|ba|tư|năm)|(trước|đến|tới|kịp|ngay) giờ (Tý|Sửu|Dần|Mão|Thìn|Tỵ|Ngọ|Mùi|Thân|Dậu|Tuất|Hợi)|(?<!mấy )hôm nay|mồng|rằm|tết|ngày giỗ|cuối tháng|(^|[.!?:]\s*)mai (?=\p{L})|[^\s]+ (ngày|hôm) nữa|(đợi|ở được|trong|còn|hạn) (một|hai|ba|bốn|năm|sáu|mười|vài|mấy) (ngày|hôm|tuần|tháng|năm)|(^|[^\p{L}])(hai|ba|bốn|năm|mười) ngày(?![\p{L}]))/iu;
 const SLOT=new Set(['me','Me','call','Call','he','B']);
 const BAN=[/%/,/\d/,/Chắc chắn/i,/[«»"…]/,/\b(OK|buff|stat|level|combo|random|bot|test|game|click|tab|slot)\b/i,
  /(điểm số|chỉ số|cơ hội|kiểm tra|xét nghiệm|tải lại|cài đặt|dữ liệu|phiên bản|hệ thống)/i];

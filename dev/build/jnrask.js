@@ -34,8 +34,8 @@ tt_co_9:[A("thu","{Me} muốn có một người ở ngoài triều không qua t
   "Nhắc tên thái giám ấy lúc hầu Hoàng thượng","Hoàng thượng hỏi vì sao ngươi biết rõ một thái giám như vậy","Dâng lễ cho Tổng quản để hắn được chọn","Tổng quản nhận lễ mà không làm, còn kể với người khác")],
 tt_co_10:[A("emp","Triều hội sắp quyết chuyện chia quyền Tể tướng. Phụ thân {me} sẽ không lui, Hoàng thượng sẽ không nhường. Nếu {call} được hầu trước buổi triều ấy, xin khuyên ngài cho cha {me} một đường lui có thể diện.",
   "Khuyên Hoàng thượng cho phủ Tể tướng một đường lui","Hoàng thượng cho là ngươi bị phủ Tể tướng sai khiến","Dâng lễ nhờ lão thái giám bên ngài nói đỡ","lễ đến tay ngài kèm cả tên ngươi"),
- A("thu","Phụ thân phải biết trước buổi triều hội rằng Hoàng thượng đã quyết. Lá thư này phải ra khỏi cung trước khi cửa cung đóng.",
-  "Sai thái giám của mình mang thư ra trước giờ đóng cửa cung","thư bị cấm quân chặn, ngươi bị gọi lên hỏi","Nhờ người nhà mình ra cửa cung mang theo","người nhà ngươi bị khám, thư bị đọc")],
+ A("thu","Phụ thân phải biết trước buổi triều hội rằng Hoàng thượng đã quyết. Lá thư này phải ra khỏi cung trước buổi triều ấy.",
+  "Sai thái giám của mình mang thư ra khỏi cung","thư bị cấm quân chặn, ngươi bị gọi lên hỏi","Nhờ người nhà mình ra cửa cung mang theo","người nhà ngươi bị khám, thư bị đọc")],
 /* tt_oan · Cha mắc oan */
 tt_oan_5:[A("do","Kẻ viết sổ giả hại phụ thân {me} vẫn chưa bị bắt, mà người nhà {B} lại hay qua lại với hắn. {Call} giúp {me} xem nàng ta có nhúng tay không.",
   "Sai người theo dõi kẻ ra vào cung {B}","người theo dõi bị bắt, bị gọi là kẻ rình mò","Tự dò lời {B} trong một bữa trà","{B} biết ngươi đang dò nàng"),
