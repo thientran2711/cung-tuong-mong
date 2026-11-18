@@ -33,3 +33,7 @@ Overlay IoU vs live (alpha mask, uniform scale on bbox height, centred): all >= 
     v2 t8 IoU 97.0%
 Files (md5-verified): https://ctm-img.victoria-tntt.workers.dev/img/_review/consort-tiers/c17/b10/ — c17_a18_tN_v0|v1|v2.png (24) + c17_a18_b10_sheet.jpg. Nothing live.
 ~100% xong c17 B10 / ~0% chơi được.
+
+## t7 embroidery scan (ROOT-20 order, 18/11)
+Opened t7 v0/v1/v2 at native res. v0 flat/in the weave (kept). v1 and v2 looked shaded/raised (decal-like) -> REDRAWN with "directional silk-thread satin/split stitches, flat, matte, tone-on-tone, no shadow/highlight/relief" (same colours, same files). | person | t7 | pasted? | redrawn gens |: c17 | v0 | no | 0 ; c17 | v1 | yes | 1 ; c17 | v2 | yes | 1. Result flatter, thread-like (c17 peonies still a little shaded, accepted). Extra credits 2 x 135 = 270.
+~100% xong / ~0% chơi được.
