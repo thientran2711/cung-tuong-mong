@@ -9,3 +9,7 @@ Keep in mind old live figures (≈64 % not redrawn, other canvases): show what o
 BRANCH: review/fullbody-frame (from latest origin/main 1c3abe3; you may reuse code from review/book-figsize-r5 where it still fits, e.g. the seal slot in the name row).
 SHOTS for the owner (LOOK 3x each first, full screen, real kitBook renderer): Fold 755x1000@2 + iPad 1180x820@2 × c03 t1 (lowest rank) + c03 t8 (widest/highest) + one old live wide figure; before|after. Upload to img/_review/fullbody-frame/ and send ROOT-47 the URLs + measured numbers (frame w×h, figure w×h, text column width, anything cut = must be 0).
 No go-live, no review yet: owner looks first. Report dev/handover/reports/fullbody-frame.md (handover branch). Rollover per root47-common.
+
+## UPDATE (owner OD 18/11 ~06:55Z) — TIGHT FRAME, widest person = standard
+Measured alpha>16 bbox on c03 a18 t1..t8: widest = t6. Union box x 117..1409, y 0..2678 of the 1520x2688 canvas = 1292x2678 → STANDARD FRAME aspect 0.4824 (w/h). All tiers at the SAME scale through that crop box (x offset −117, y 0); nothing cut on any tier (t6 touches both sides, t7/t8 crown touches top). Text column takes the saved width. Shots: add t6.
+Predecessor handover (code, reusable harness dev/test/book-figsize-scan.js): end of dev/handover/reports/book-figsize.md; review/book-figsize-r5 @ ce8a6d48 (its seal-in-name-row slot may be reused).
