@@ -31,7 +31,7 @@ b10-a36-c12-c22 | CDN _review only | W62 session_011xDdVS7v1P9E9VBhhoCzUA | ROLL
 b10-a36-c23-c32 | CDN _review only | W63 session_011xDdVR2azVrSAvuz8jSdAR | ROLLED OVER→W63b session_011xDdVPRsuRZG7dw2QAufA3 RUNNING | 2026-11-18T15:58Z (Foreman C ROOT-25)
 b10-a51-sample c03/c04/c12 | CDN _review only | W64 session_011xDdVQJWBGEQCg7HMWeLs1 (c03 done 93e8cd8, archived) → W64b session_011xDdVQ5R8zmXosTMAV85mu | RUNNING | 2026-11-18T15:58Z (Foreman C ROOT-25)
 shown-odds-r2 (spend-before-roll, ORDER ROOT-52 15:30Z) | review/shown-odds-r2 | session_01964izERxj8PUG495V4QTjS | LIVE (land-m 3fdfb437; worker archived) | 18/11 15:52Z | owner D #2
-NPC-PURPOSE G1 #8 (opus integrator; seat opened by D #2 for C-AG #13, OPEN NOW #2 15:31Z) | review/npc-purpose | C-AG #13 | session_01964izG7FPwnw4eEwFEt7t7 | ROLLED OVER → G1 #9 session_01964izGMMUHo5FeP7TACDxE (RUNNING, 17:45Z) | 18/11 15:49Z |
+NPC-PURPOSE G1 #8 (opus integrator; seat opened by D #2 for C-AG #13, OPEN NOW #2 15:31Z) | review/npc-purpose | C-AG #13 | session_01964izG7FPwnw4eEwFEt7t7 | ROLLED OVER → G1 #9 session_01964izGMMUHo5FeP7TACDxE → G1 #10 session_01964izBoxV3oCmv1WoNphMr (RUNNING, 20:24Z) | 18/11 15:49Z |
 | FOREMAN E ROOT #4 (opus; successor of #3; depth 3, START_CTX ~5 %) | handover FOREMAN_E_STATUS | E | session_01DgYSWokbRMfu3opDuSCw15 | HANDED OVER → E ROOT #5 session_01DgYSWkmGWJMooE69PH8bHk | 18/11 15:55Z |
 | fullbody-frame-s3 (sonnet SMALL UI; owner 09:25Z OD L1878: no fade on figure + head centred, kit, whole group) | review/fullbody-frame-s3 | MAIN ROOT-52 | session_01UV1SzhJ3JicrwJmcbMVHSA | RUNNING | 18/11 15:57Z |
 | E11r-w1 REVIEW ge-writers-w1 (opus BIG) | review/ge-writers-w1 | E | session_01DgYSWmTELUPTfw8Lqf2S4Y → R4 E11r-w1b | DONE R4 PASS fd7c6775 (ready to land, ff on main 94d11623) (reports/ge-writers-w1-review.md) | 18/11 16:02Z | START_CTX ~3 % |
@@ -93,7 +93,7 @@ style-ref test A/B/C c06 t1–t3 | CDN _review only | W79 session_011xDdVSouZw85
 | stage-here (opus UI: stage = where she is, every tab + closing alert; OD 19:45Z (5)) | review/stage-here | MAIN ROOT-55 | session_01Rc5AsK9y5NbRATifWtFqG7 | SẴN SÀNG KIỂM e8e5afe | 18/11 20:15Z |
 | stage-rightcol (sonnet UI+kit; successor of maid6-sample; OD 20:55Z) | review/stage-rightcol | MAIN ROOT-54 | session_01Rc5AsMuwoEKePMdcju7qZi | DONE 5f00b0c (SẴN SÀNG XEM) | 18/11 19:33Z |
 | errand-scene (sonnet UI/motion: maid walks off/on stage for every errand; OD 20:05Z) | review/errand-scene | MAIN ROOT-54 | session_01Rc5AsLfkFKRGnjiTepddVL | READY d1da71f | 18/11 19:38Z |
-parallel-time (ORDER ROOT-54 ~20:22Z + ADD ~20:37Z) | review/parallel-time | session_01964izEDFWH8uK569yeSGJt | RUNNING | 18/11 19:52Z | owner D #3
+parallel-time (ORDER ROOT-54 ~20:22Z + ADD ~20:37Z) | review/parallel-time | session_01964izFaHZziojdgTAvWWfY (#2; #1 session_01964izEDFWH8uK569yeSGJt rolled over 20:42Z) | RUNNING | 18/11 19:52Z | owner D #3
 | REVIEW ag-deed-perf (opus reviewer; env cung-tuong-mong = CDN allowed) | review/ag-deed-perf 9e0e1928 | C-AG #14 | session_01Rc5AsKgufafrSAB6Xyw8k7 | DONE (LANDED fa411d6f) | 18/11 19:58Z |
 | MAIN ROOT-55 (opus; child of ROOT-54) | handover HANDOVER_SESSION9 | ROOT-54 | session_01Rc5AsNFnALGujUFYDSjs4g | RUNNING | 18/11 19:56Z |
 | MAIN ROOT-55 (opus; child of ROOT-54) | handover HANDOVER_SESSION9 | ROOT-54 | session_01Rc5AsNFnALGujUFYDSjs4g | RUNNING | 18/11 19:58Z |
