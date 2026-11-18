@@ -44,3 +44,7 @@ Result c04 (gold phoenix incense ball), all 3 looked: face ok, stiff shoulder pi
 CDN: https://ctm-img.victoria-tntt.workers.dev/img/_review/thaihau-2ref/c04_a36.png | c04_a51.png | c04_a65.png | c04_sheet.jpg (row1 old 1-ref, row2 new 2-ref; no cut-out made yet).
 Note: cdn_sync.py/manifest_guard.py live only on origin/main (not on handover branch).
 Remaining c04–c08 at 2 refs = 15 gens, waiting for ROOT-32 GO. ~5% xong / ~0% chơi được
+
+### T1c HANDOVER to next painter (ROOT-32 order: no more gens by T1c)
+New 2-ref c04 gens (Magnific, looked OK): a36 CqnHqn1EEy, a51 bxMrxpT5Y2, a65 cpSDpJs0eP. Refs used: a36 own t1 5jDrmFiKxe; a51 + a65 own a51 O6E9170ynm; style eIyOFEidqL (type style). Old 1-ref c04 gens (obsolete): a36 UPvOUWJwny, a51 vQAufbWa47, a65 rgXlj3qxtc (cut-outs rgXljRextc / EbYqQfDuuO / 9ZHR64sNYZ). c05 1-ref gens, obsolete and never looked at: a36 jUoSlsVLD0, a51 SyhO7zAUb8, a65 hu2EfggvqL.
+Prompt recipe: build.py output (b8c0074, no --nostyle) pasted unchanged; for c05–c08 only face line, robe colour (2 places), item and hands sentence differ (c05 peacock teal + jewel casket, c06 vermilion + scroll, c07 lavender + phoenix hand mirror, c08 cherry-blossom pink + kingfisher-pearl fan). a51/a65 add the age text + deeper-colour sentence from build.py. Identity ids: see T1 table above. cdn_sync.py + manifest_guard.py exist only on origin/main (dev/site), copy them into the worktree's dev/site (do not commit).
