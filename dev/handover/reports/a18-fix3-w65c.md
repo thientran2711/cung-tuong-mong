@@ -7,5 +7,11 @@ Gen recipe: refs [file image, m09 eIyOFEidqL style, (t7 retone: C2 t7 colour ima
 | c02 | 4 | t7 jewel casket + C2 (v2 2 gens: 2nd item removed) | c02 |
 | c04 | 6 | t1v1 mouth, t6 jade-gold fan, t7 C2 | c04 |
 | c05 | 9 | t2 mouth, t6 hand mirror, t7 kingfisher fan + C2 | c05 |
+| c06 | 6 | t6 jade incense box, t7 lotus incense box + C2 | c06 |
 QUEUED (t8 freeze): c01 t8 soft fan, c12 t8 v0-2 teeth, c14 t8 basket, c15 t8 branch, c16 t8 check, all t8 soft/old yellow.
-NEXT: c06 (then c07..c32 in order; c03 skipped).
+
+## HANDOVER (W65c -> successor)
+Done + READY sent: c01 c02 c04 c05 c06 (31 gens). NEXT: c07, then c08..c32 in order (c03 skipped; c13 t4 already done by W65, plan.json lists only its t6 teeth... check). Per person: `python3 -c "import json;print(json.load(open('plan.json'))['c07'])"` gives the files to regen (t8 excluded). Setup that is ephemeral: /home/user/wt/w65c-work (all/, tools/), /home/user/wt/w65c-root (cdn_sync.py + manifest_guard.py from origin/main) — recreate from tools/. Flow per person: creations_upload_image each CDN file (folder ba4aecfe...), images_generate gpt-2-6 1024x2304 2k transparent (refs: file image + m09 eIyOFEidqL style [+ C2 t7 colour image gOtse5USXO for t7 v1/v2 re-tone]), creations_wait, get.py cNN name=url..., look at new.jpg (+faces.py mouth crops for teeth fixes), ./finish.sh cNN, READY to Foreman C.
+Item picks used so far (spread neighbours): t6 white-jade ruyi (c01), jade-gold round fan (c04), gold-and-pearl hand mirror (c05), carved jade incense box (c06); t7 gilded hand censer (c01), gold-filigree jewel casket (c02), kingfisher-feather folding fan (c05), gold lotus incense box (c06). Next unused t6: jewelled box, white-jade vase, pearl silk folding fan, coral branch on gold stand, pearl lantern, jade pendant; t7: imperial round fan gold filigree, gold hand mirror, gold-mounted jade vase with peonies, gold flower basket, gold-and-coral bead string, gold-filigree lantern. Empty hands (c14 t4, c27 t3, c28 t3, c29 t3): one item from 3f of that rank (t3/t4 list). Lessons: prompt "remove X" explicitly when the old fig has a 2nd item hanging (c02 t7 v2 phoenix disc at hip); t7 v1/v2 prompt adds "crown same design and size, not wider".
+Rulings applied: plain gilded lantern/painted fan at t6 -> t6 item; phoenix fan at t7 -> t7 item. Soft list untouched.
+
