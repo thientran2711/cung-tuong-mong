@@ -957,3 +957,4 @@ LESSONS s39: look at neighbours side by side before asking her to pick (A/B/C gl
 - (18/11 02:00Z) smudge r13 6e56871: ROOT of pink vertical stripe = eyeshadow run slabs (removed at vừa/nặng); pink = soft radial bloom; grey runs more transparent. Zoom-checked cheeks → 8 options sent owner (Lượt 37).
 - (18/11 02:04Z) OWNER: wet on neck/hands still fake, wants hi-res → sent latest stain-uot-3 + neck/hand crops; found saucer hand still darkened → cloth-xoc: exclude hands fully, 2× renders + neck/hand crops per level.
 - (18/11 02:07Z) life-preload add-on sent (title prefetch of all saved lives, placeholder text).
+- (18/11 02:13Z) OWNER: her staff-cap table never applied (s33 measured, dropped) → staff-cap worker SziJshK now applies BAL.promo.cap B2 + all texts, BIG review. LESSON: an owner table that is 'measured, pending her OK' must be tracked to LIVE.
