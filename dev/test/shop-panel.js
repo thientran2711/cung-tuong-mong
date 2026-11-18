@@ -12,7 +12,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));let bad=0;const ck=(n,ok,d)=>{con
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function');await sleep(2500);
   await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;
    for(let i=0;i<400;i++){start();if(!isSrv())break}Q.length=0;const md=document.getElementById("modal");if(md)md.hidden=true;try{NLP=null}catch(e){}render()});
-  await sleep(1200);await p.addStyleTag({content:'#kroul{display:none!important}'});
+  await sleep(1200);await p.addStyleTag({content:'#kroul,#kboot,#kbootw,#kload{display:none!important}'});
   const imgs=()=>p.evaluate(()=>Promise.all([...document.querySelectorAll('#modal img')].map(i=>i.complete?0:new Promise(r=>{i.onload=i.onerror=r;setTimeout(r,8000)}))));
   const shot=async n=>{await imgs();await sleep(700);for(let t=0;t<3;t++){try{await p.screenshot({path:`${OUT}/${n}-${wh}.jpg`,type:'jpeg',quality:80,timeout:120000});break}catch(e){await sleep(2000)}}};
   const geo=()=>p.evaluate(()=>{const M=document.getElementById('modal'),d=M&&M.querySelector('.dlg'),g=M&&M.querySelector('.kshg');if(!d||!g)return null;const R=e=>e.getBoundingClientRect();
@@ -30,13 +30,13 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));let bad=0;const ck=(n,ok,d)=>{con
   await p.evaluate(()=>{const o=talkOpts({kind:"peddler",name:"x",info:"Thái giám Nội vụ phủ"});const a=o.find(x=>x.adShop);a&&kitShopNvp();render()});await sleep(1500);await imgs();
   let g=await geo();ck(`${wh} nvp: panel open, 3 columns, tabs Mua|Bán, figure left, no overflow`,!!g&&g.cols===3&&g.tabs.join('|')==='Mua|Bán'&&g.figLeft!==false&&!g.hOver&&g.dlgIn&&!g.cut.length,g);await shot('nvp-buy');
   const n0=await p.evaluate(()=>({inv:S.inv.filter(e=>!e.h&&!e.w).length,bac:S.bac,k:KSHOP.reg.nvp.list[0].k,pr:KSHOP.reg.nvp.list[0].price}));
-  await p.click('.kshop[data-kshop="nvp"] .kshc[data-kshi="0"] .kshgo',{force:true});await sleep(400);
+  await p.click('.kshop[data-kshop="nvp"] .kshc[data-kshi="0"] .kshgo',{force:true});await sleep(2500);
   const n1=await p.evaluate(()=>({inv:S.inv.filter(e=>!e.h&&!e.w).length,bac:S.bac}));
   ck(`${wh} nvp buy: chest +1, bạc -price`,n1.inv===n0.inv+1&&n1.bac===n0.bac-n0.pr,{n0,n1});
-  await p.click('.kshop[data-kshop="nvp"] [data-kshtab="sell"]',{force:true});await sleep(500);g=await geo();await shot('nvp-sell');
+  await p.click('.kshop[data-kshop="nvp"] [data-kshtab="sell"]',{force:true});await sleep(2500);g=await geo();await shot('nvp-sell');
   ck(`${wh} nvp sell tab: 3 columns, ≥1 sellable (bought item)`,!!g&&g.cols===Math.min(3,g.n)&&g.n>=1&&!g.hOver,g);
   const s0=await p.evaluate(()=>({inv:S.inv.filter(e=>!e.h&&!e.w).length,bac:S.bac,t:KSHOP.reg.nvp.list[0].price}));
-  await p.click('.kshop[data-kshop="nvp"] .kshc[data-kshi="0"] .kshgo',{force:true});await sleep(500);
+  await p.click('.kshop[data-kshop="nvp"] .kshc[data-kshi="0"] .kshgo',{force:true});await sleep(2500);
   const s1=await p.evaluate(()=>({inv:S.inv.filter(e=>!e.h&&!e.w).length,bac:S.bac}));
   ck(`${wh} nvp sell: chest -1, bạc +price`,s1.inv===s0.inv-1&&s1.bac===s0.bac+s0.t,{s0,s1});
   await closeAll();
