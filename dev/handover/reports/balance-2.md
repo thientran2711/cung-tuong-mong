@@ -61,7 +61,7 @@ SẴN SÀNG KIỂM de993ca846040a6666e201ce898d46da041338de
 ## ROUND 2 (worker opus, brief D11-balance-2-fix2; HANDOVER — C3 misses on deaths, next tuning round for a successor)
 PRIORITY #1 CHECK ('balance-2|artO|BAL.art.odds|Múa trong yến tiệc|Danh wall'): OD 1 | ledger 0 | claims 8 (balance-2 rows, D) | main 15 | review/* 4 (review/balance-2, review/balance-2-r1, review/balance-core-r2*, review/mg-balance-2*)
 
-START_CTX ≈ 4 %; rolled over at ≈ 34 % (Foreman D #11 03:04Z: hand over if C3 misses). WIP head **review/balance-2 @0cefa0f8f** = balance-core + balance-2 deltas (r1 371e3a22 + origin/main 99f3978d merged in af5b9bdd, site rebuilt 5d956715; dev/index.html in the tree is still the C2 build: rebuild before review).
+START_CTX ≈ 4 %; rolled over at ≈ 34 % (Foreman D #11 03:04Z: hand over if C3 misses). WIP head **review/balance-2 @0cefa0f8d6717506eeac81429bd922b342a70261** = balance-core + balance-2 deltas (r1 371e3a22 + origin/main 99f3978d merged in af5b9bdd, site rebuilt 5d956715; dev/index.html in the tree is still the C2 build: rebuild before review).
 
 ### Changes on top of r1 (all BAL / two-way: her cards and the NPC's same act read the same keys)
 - C1 9c5963b3: BAL.odb.j2.odO_3 30→42 (Múa trong yến tiệc), odO_7 30→40 (Làm thơ dâng lên), BAL.odb.j68f.odP_2 30→40 (Làm thơ vịnh mai), BAL.odb.j68e.odP_5 40→46; BAL.deck vu/cam/ky o[0] 40/40/45 → 48/48/53; j2 Múa failure danh -6 → -BAL.tw.g.vu[2] (=4, the same as an NPC dance).
