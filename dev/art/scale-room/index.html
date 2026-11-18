@@ -1,0 +1,133 @@
+<title>Phòng co giãn</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* Layout: one wide floor-and-sky strip (swipe sideways) with two fixed red lines; a control tray under it for the picked figure. */
+:root{--bg:#f3efe9;--panel:#fbf9f5;--ink:#2a2420;--mute:#7b7068;--line:#d9d0c5;--red:#d6252e;--gold:#b8861b;--ok:#2f7d4f;--stage:#e9e3da;--btn:#3b2f2a;--btnfg:#fbf6ee;
+--display:"Noto Serif",Georgia,serif;--body:"Be Vietnam Pro",system-ui,sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1d1916;--panel:#27211d;--ink:#efe7dc;--mute:#a79a8d;--line:#41372f;--red:#ff5a60;--gold:#e0b04a;--ok:#6fcf97;--stage:#2d2622;--btn:#e8dccb;--btnfg:#231d19;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1d1916;--panel:#27211d;--ink:#efe7dc;--mute:#a79a8d;--line:#41372f;--red:#ff5a60;--gold:#e0b04a;--ok:#6fcf97;--stage:#2d2622;--btn:#e8dccb;--btnfg:#231d19;color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.45 var(--body);padding-block:12px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+h1{font:600 22px/1.2 var(--display);margin:0}
+header{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;margin-bottom:10px}
+.sub{color:var(--mute);font-size:13px;margin:2px 0 0}
+select{font:inherit;padding:10px 12px;min-height:44px;border:1px solid var(--line);border-radius:8px;background:var(--panel);color:var(--ink);max-width:100%}
+#stage{position:relative;overflow-x:auto;overflow-y:hidden;background:var(--stage);border:1px solid var(--line);border-radius:10px;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+#row{position:relative;display:flex;height:100%}
+.col{position:relative;flex:0 0 auto;height:100%}
+.fig{position:absolute;left:50%;transform:translateX(-50%);max-width:none;touch-action:pan-x;user-select:none;-webkit-user-drag:none;cursor:ns-resize;z-index:2}
+.col.sel{background:rgba(184,134,27,.14)}
+.hline{position:absolute;left:0;height:0;border-top:2px solid var(--red);z-index:5;pointer-events:none}
+.hlab{position:sticky;left:6px;display:inline-block;transform:translateY(-100%);background:var(--red);color:#fff;font-size:12px;font-weight:600;padding:1px 8px;border-radius:4px 4px 0 0;letter-spacing:.04em}
+.hline.feet .hlab{transform:none;border-radius:0 0 4px 4px}
+.mk{position:absolute;left:0;right:0;height:0;border-top:2px dashed var(--gold);z-index:4;touch-action:none;pointer-events:none}
+.mk i{position:absolute;right:2px;top:-18px;width:36px;height:36px;border-radius:50%;background:var(--gold);border:3px solid var(--bg);touch-action:none;pointer-events:auto;cursor:ns-resize;box-shadow:0 1px 4px #0006}
+.mk i::after{content:"";position:absolute;inset:11px;border-radius:50%;background:var(--bg)}
+.tag{position:absolute;left:0;right:0;bottom:6px;text-align:center;font-size:12px;color:var(--mute);z-index:6;pointer-events:none}
+.tag b{display:inline-block;margin-left:4px;padding:0 6px;border-radius:9px;background:var(--ok);color:#fff;font-weight:600;font-size:11px}
+.tag u{text-decoration:none;color:var(--gold);margin-left:4px}
+#tray{margin-top:10px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:12px;display:grid;gap:12px}
+#tray h2{font:600 16px var(--display);margin:0}
+.ctl{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ctl label{min-width:5.5em;color:var(--mute);font-size:13px}
+button{font:600 15px var(--body);min-height:48px;min-width:48px;padding:0 14px;border-radius:10px;border:1px solid var(--line);background:var(--panel);color:var(--ink);cursor:pointer;touch-action:manipulation}
+button.big{font-size:22px;min-width:64px;background:var(--btn);color:var(--btnfg);border-color:transparent}
+button.save{background:var(--ok);color:#fff;border-color:transparent;padding:0 22px}
+button:focus-visible,select:focus-visible,input:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+input[type=range]{flex:1 1 160px;min-width:120px;height:36px;accent-color:var(--gold)}
+#msg{font-size:13px;color:var(--mute);min-height:1.4em}
+.note{font-size:13px;color:var(--mute);margin:8px 0 0}
+</style>
+<header>
+  <div><h1>Phòng co giãn</h1><p class="sub">Đỉnh đầu mọi người thẳng một hàng, gót chân chung một sàn. Chạm một người để chỉnh.</p></div>
+  <select id="set" aria-label="Chọn bộ tranh"></select>
+</header>
+<div id="stage"><div id="row"></div></div>
+<p class="note">Mũ phượng, trâm cài được phép nhô lên trên vạch đỏ. Chấm vàng là đỉnh đầu thật của người đó: kéo cho đúng đỉnh tóc, thả tay thì cả hình tự co giãn theo.</p>
+<div id="tray"><div id="none" class="sub">Chạm vào một người ở trên để chỉnh.</div></div>
+<div id="msg" role="status"></div>
+<script>
+const U=4000;
+let sets=[],cur=null,sel=null,db=null,uid=null,saved={},st={},unsub=null,dbTried=false;
+const $=s=>document.querySelector(s),stage=$("#stage"),row=$("#row");
+let SH=480,BODY=330,FLOOR=450,COL=210;
+const key=f=>f.replace(/[^A-Za-z0-9_-]/g,"_");
+function metrics(){const vh=innerHeight,vw=document.documentElement.clientWidth;SH=Math.round(Math.max(360,Math.min(640,vh*(vw>vh?.50:.52))));BODY=Math.round(SH*.66);FLOOR=Math.round(SH*.93);COL=Math.round(BODY*.66);stage.style.height=SH+"px"}
+function def(it){return{ht:it.ht,scale:1,dy:0}}
+function S(it){return st[it.file]||(st[it.file]=Object.assign(def(it),saved[it.file]?{ht:saved[it.file].headTop,scale:saved[it.file].scale,dy:saved[it.file].dy}:{}))}
+function geom(it,s,ht){const span=Math.max(.2,it.feet-ht/U),ih=BODY*s.scale/span;return{ih,iw:ih*it.ar,top:FLOOR-it.feet*ih+s.dy*BODY}}
+function dirty(it){const s=S(it),sv=saved[it.file];const cmp=sv?{ht:sv.headTop,scale:sv.scale,dy:sv.dy}:def(it);return s.ht!==cmp.ht||Math.abs(s.scale-cmp.scale)>1e-4||Math.abs(s.dy-cmp.dy)>1e-4}
+function render(){
+  if(!cur)return;metrics();row.innerHTML="";
+  const W=COL*cur.items.length;row.style.width=W+"px";
+  cur.items.forEach((it,i)=>{
+    const s=S(it),g=geom(it,s,s.ht),c=document.createElement("div");c.className="col"+(sel===it.file?" sel":"");c.style.width=COL+"px";c.dataset.f=it.file;
+    const im=new Image();im.className="fig";im.draggable=false;im.src=it.img;im.alt=it.label;im.style.cssText=`height:${g.ih}px;width:${g.iw}px;top:${g.top}px`;c.appendChild(im);
+    const mk=document.createElement("div");mk.className="mk";mk.style.top=(g.top+g.ih*s.ht/U)+"px";mk.innerHTML="<i aria-label='Chấm đỉnh đầu'></i>";c.appendChild(mk);
+    const t=document.createElement("div");t.className="tag";t.innerHTML=`${esc(it.label)}${saved[it.file]?(dirty(it)?"<u>sửa chưa lưu</u>":"<b>Đã kiểm</b>"):(dirty(it)?"<u>chưa lưu</u>":"")}`;c.appendChild(t);
+    im.addEventListener("pointerdown",e=>dragFig(e,it,im,mk));
+    mk.querySelector("i").addEventListener("pointerdown",e=>dragMk(e,it,mk));
+    c.addEventListener("click",()=>pick(it.file));
+    row.appendChild(c)});
+  const top=FLOOR-BODY;
+  row.insertAdjacentHTML("beforeend",`<div class="hline" style="top:${top}px;width:${W}px"><span class="hlab">ĐỈNH ĐẦU</span></div><div class="hline feet" style="top:${FLOOR}px;width:${W}px"><span class="hlab">GÓT</span></div>`);
+  tray();
+}
+function esc(x){return String(x).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
+function pick(f){if(sel===f)return;sel=f;row.querySelectorAll(".col").forEach(c=>c.classList.toggle("sel",c.dataset.f===f));tray()}
+function dragFig(e,it,im,mk){
+  pick(it.file);if(e.pointerType==="touch"&&false)return;
+  const s=S(it);let y0=e.clientY,d0=s.dy,moved=false;const id=e.pointerId;
+  const mv=ev=>{const dy=ev.clientY-y0;if(Math.abs(dy)>4)moved=true;if(!moved)return;s.dy=d0+dy/BODY;const g=geom(it,s,s.ht);
+    const el=row.querySelector(`[data-f="${CSS.escape(it.file)}"]`);if(el){const i2=el.querySelector(".fig"),m2=el.querySelector(".mk");i2.style.top=g.top+"px";m2.style.top=(g.top+g.ih*s.ht/U)+"px"}};
+  const up=()=>{removeEventListener("pointermove",mv);removeEventListener("pointerup",up);removeEventListener("pointercancel",up);if(moved)render()};
+  addEventListener("pointermove",mv);addEventListener("pointerup",up);addEventListener("pointercancel",up)}
+function dragMk(e,it,mk){
+  e.stopPropagation();e.preventDefault();sel=it.file;const s=S(it),g0=geom(it,s,s.ht);let y0=e.clientY,h0=s.ht;
+  const mv=ev=>{const dh=(ev.clientY-y0)/g0.ih*U;s.ht=Math.round(Math.max(0,Math.min(it.feet*U-800,h0+dh)));mk.style.top=(g0.top+g0.ih*s.ht/U)+"px"};
+  const up=()=>{removeEventListener("pointermove",mv);removeEventListener("pointerup",up);removeEventListener("pointercancel",up);render()};
+  addEventListener("pointermove",mv);addEventListener("pointerup",up);addEventListener("pointercancel",up)}
+function item(){return cur&&cur.items.find(i=>i.file===sel)}
+function tray(){
+  const it=item(),T=$("#tray");
+  if(!it){T.innerHTML='<div class="sub">Chạm vào một người ở trên để chỉnh.</div>';return}
+  const s=S(it);
+  T.innerHTML=`<h2>${esc(it.label)} <span class="sub" style="font-weight:400">· ${esc(it.file)}</span></h2>
+  <div class="ctl"><label>Cao thấp</label><button class="big" data-a="sm" aria-label="Thấp bớt">−</button><input id="sc" type="range" min="0.80" max="1.25" step="0.002" value="${s.scale}" aria-label="Co giãn"><button class="big" data-a="lg" aria-label="Cao thêm">+</button></div>
+  <div class="ctl"><label>Lên xuống</label><button class="big" data-a="up" aria-label="Nâng lên">↑</button><button class="big" data-a="dn" aria-label="Hạ xuống">↓</button><span class="sub">hoặc kéo thẳng hình trên sàn</span></div>
+  <div class="ctl"><label>Đỉnh đầu</label><button data-a="hu">Chấm lên</button><button data-a="hd">Chấm xuống</button></div>
+  <div class="ctl"><button data-a="rs">Về mặc định</button><button class="save" data-a="sv">Lưu</button><button data-a="svall">Lưu cả hàng</button></div>`;
+  const sc=$("#sc");sc.oninput=()=>{s.scale=+sc.value;render2()};
+  T.querySelectorAll("button").forEach(b=>{const a=b.dataset.a;
+    if("sm lg up dn hu hd".includes(a)){let tm,iv;const go=()=>act(a);b.addEventListener("pointerdown",e=>{e.preventDefault();go();tm=setTimeout(()=>iv=setInterval(go,70),380)});
+      const stop=()=>{clearTimeout(tm);clearInterval(iv)};["pointerup","pointerleave","pointercancel"].forEach(ev=>b.addEventListener(ev,stop))}
+    else b.addEventListener("click",()=>act(a))})}
+function render2(){const sy=stage.scrollLeft,ft=document.activeElement&&document.activeElement.id==="sc";const v=$("#sc")&&$("#sc").value;render();stage.scrollLeft=sy;if(ft){$("#sc").focus()}}
+function act(a){const it=item();if(!it)return;const s=S(it),sy=stage.scrollLeft;
+  if(a==="sm")s.scale=Math.max(.8,+(s.scale-.01).toFixed(3));
+  if(a==="lg")s.scale=Math.min(1.25,+(s.scale+.01).toFixed(3));
+  if(a==="up")s.dy-=.004;if(a==="dn")s.dy+=.004;
+  if(a==="hu")s.ht=Math.max(0,s.ht-6);if(a==="hd")s.ht=Math.min(it.feet*U-800,s.ht+6);
+  if(a==="rs"){Object.assign(s,def(it));flash("Đã về mặc định, chưa lưu.")}
+  if(a==="sv")return save([it]);if(a==="svall")return save(cur.items);
+  render();stage.scrollLeft=sy}
+function flash(t){$("#msg").textContent=t}
+async function save(items){
+  if(!db){flash("Chưa nối được sổ lưu. Hãy mở trang khi đã đăng nhập.");return}
+  try{const at=new Date().toISOString();
+    for(const it of items){if(items.length>1&&!dirty(it)&&saved[it.file])continue;const s=S(it);
+      await db.collection("figs").doc(key(it.file)).set({file:it.file,headTop:s.ht,scale:+s.scale.toFixed(4),dy:+s.dy.toFixed(4),by:uid||"",at});
+      saved[it.file]={file:it.file,headTop:s.ht,scale:+s.scale.toFixed(4),dy:+s.dy.toFixed(4)}}
+    flash("Đã lưu.");const sy=stage.scrollLeft;render();stage.scrollLeft=sy}catch(e){flash("Lưu không được: "+(e&&e.message||e))}}
+function loadSet(id){cur=sets.find(s=>s.id===id)||sets[0];sel=null;st={};render()}
+async function boot(){
+  try{sets=await (await fetch("sets.json")).json()}catch(e){flash("Không đọc được danh sách bộ tranh.");return}
+  const sel0=$("#set");sel0.innerHTML=sets.map(s=>`<option value="${esc(s.id)}">${esc(s.name)}</option>`).join("");
+  sel0.onchange=()=>loadSet(sel0.value);loadSet(sets[0].id);
+  try{const c=window.claude;if(c){db=await c.use("db");const u=await c.use("user");uid=u?await u.id():null}}catch(e){}
+  if(db){try{db.collection("figs").onSnapshot(sn=>{const keep=new Set(cur?cur.items.filter(it=>st[it.file]&&dirty(it)).map(i=>i.file):[]);Object.keys(st).forEach(f=>{if(!keep.has(f))delete st[f]});saved={};sn.docs.forEach(d=>{const x=d.data();if(x&&x.file)saved[x.file]={file:x.file,headTop:x.headTop,scale:x.scale,dy:x.dy}});
+      const sy=stage.scrollLeft;render();stage.scrollLeft=sy},e=>flash("Không đọc được sổ lưu."))}catch(e){}}
+  else flash("Chưa nối sổ lưu: vẫn chỉnh được nhưng chưa lưu được.")}
+addEventListener("resize",()=>{const sy=stage.scrollLeft;render();stage.scrollLeft=sy});
+boot();
+</script>
