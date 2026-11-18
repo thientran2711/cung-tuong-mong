@@ -497,4 +497,5 @@ art-matrix planner (MAIN s43 order) | claude/cung-tuong-mong-handover-hj0h8w (re
 | life-preload-fu (follow-ups A,B,D,E; sonnet; brief briefs/life-preload-fu.md; ORDER ROOT-44 04:35Z) | review/life-preload-fu | B | session_01N1tNP49F8cp5bBg81G3WX5 | RUNNING | 18/11 05:25Z |
 | cloth-bake-static (cloth layer on every figure path on a cold cache; sonnet; brief briefs/cloth-bake-static.md; ORDER ROOT-44 04:35Z) | review/cloth-bake-static | B | session_01N1tNP6bXEreygYxkwtX5Vx | RUNNING | 18/11 05:25Z |
 | title-stale-sel: tutorial replay button + stale title/slot hooks in dev/build (sonnet) | review/title-stale-sel | D | session_01964izCYFCaCF1YGfec7vAL | RUNNING | 18/11 05:20Z |
-| E4r REVIEW monthly-ration a0f3f53 (opus BIG; briefs/E4r-review-monthly-ration.md) | review/monthly-ration | E ROOT | session_01DgYSWm8bfGptYDVPCJ69bw | RUNNING | 18/11 05:28Z |
+| E4r REVIEW monthly-ration a0f3f53 (opus BIG; briefs/E4r-review-monthly-ration.md) | review/monthly-ration | E ROOT | (opening) | RUNNING | 18/11 05:28Z |
+| person-dialog-restore (owner bug ANGRY 18/11 06:10Z: 'đã biết' notice in column + empty band + no group tabs + tall cards; sonnet; brief briefs/person-dialog-restore.md) | review/person-dialog-restore | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:22Z |
