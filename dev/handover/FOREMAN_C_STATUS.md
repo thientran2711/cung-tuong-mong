@@ -22,6 +22,7 @@ DONE: c03 a18 B8 LIVE on CDN (W50 archived; FOR MAIN line at top; review/c03-a18
 OPEN: owner 5 questions (ROOT-20 HANDOVER) unanswered; NEW STANDBY not opened yet (paste block given to owner 08:37Z). No painters. W37 paused.
 
 FOREMAN C ROOT-23 (art) = session_011xDdVPu6X3z9NfWyEW4SBa · depth 1 (limit 8: open ROOT-24 at rollover) · START_CTX ~6% (own estimate; get_session reads 0; window 1M) → roll over at >= 31%, ceiling 60% · hourly wake trig_01Lge5oNPkuH7cofNV4gQhRh (:32) · reports to MAIN via this file. STANDBY: none registered yet.
+- 12:33Z 18/11 wake: ctx 24% (real 238k/1M; roll at 31%). No painter running. MAIN: only live-main note (636193f8). Waiting: owner D14 pick + 5 OPEN questions + STANDBY; MAIN GO for face-fix live.
 - 12:20Z 18/11 W51b READY face-fix (60 files, 2 gpt-2-6 pilot rejected + 65 remove_bg, ~355 cr): C LOOKED 3x sheets — OK → FOR MAIN line at top (waits MAIN GO for live). W51b ARCHIVED.
 - 11:58Z 18/11 W52 LIVE part 1 (act pics + ACTS.json guarded; "-" marker of Trò chuyện với cung nữ replaced, accepted) → FOR MAIN line at top; W52 ARCHIVED (part 3 wiring = new worker after owner pick).
 - 11:55Z 18/11 W52 READY parts 1–3 (0843749d, 15 gens/1200 cr): C LOOKED sheets — 6 act pictures OK (hối lộ has hanzi consort tablets; noted to owner), 18 neutral ph plates OK (KIT REQUEST filed, kit keeper wires), D14 3 samples OK → SENT owner (pick a/b/c). GO W52: 6 act-*.webp live + ACTS.json = live CDN copy +6 rows only (guarded), LAND READY on review/act-pics-d14 for MAIN after FREEZE.
