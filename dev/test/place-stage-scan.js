@@ -12,7 +12,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   document.querySelectorAll('#kload,.krbox,#kroul').forEach(e=>e.remove());
   const s=document.createElement('style');s.textContent='#kroul,#kload,.kmov,.kmfls,#kpodov,#dawn{display:none!important}img.figimg,#mefig,#tokens .tok,.kspet{animation:none!important}';document.head.appendChild(s)});
  await sleep(1500);
- if(process.env.TITLE){await g.evaluate(id=>{window.kitTitleWorn=()=>kitTitleDef(id)},process.env.TITLE)}
+ if(process.env.TITLE){await g.evaluate(id=>{const o=window.kitTitleWorn;window.kitTitleWorn=p=>p===S?kitTitleDef(id):o(p)},process.env.TITLE)}
  if(process.env.BAND||process.env.FIGH){await g.evaluate(o=>{if(o.b)KIT_SLOTS.band=+o.b;if(o.h)KIT_FIG.h=+o.h},{b:process.env.BAND,h:process.env.FIGH})}
  if(process.env.FIXFIG){await g.evaluate(u=>{setInterval(()=>{const m=document.getElementById('mefig');if(m&&m.getAttribute('src')!==u){m.src=u}},50)},process.env.FIXFIG)}
  const keys=process.env.PLACES&&process.env.PLACES!=='all'?process.env.PLACES.split(','):await g.evaluate(()=>places().map(p=>p.k));
