@@ -42,3 +42,6 @@ OWNER (verbatim, ~21:13Z): "Vẽ lại giùm tao làm một cái prompt mới. 3
 - v1/v2 made before 5df887f7 (old colour table) at t1/t4/t5/t6 → redo. v0 stays.
 - Per person: check img/_review/low-B/<cNN>/ + the predecessor report; make only the missing/redo cells. Sheet = rows v0/v1/v2 × cols t1 | t4 | t5 | t6 (+ live row on top).
 - Known state: c01 all made (redo v1/v2 t1,t4,t5,t6); c02 t1 made (redo v1/v2); c05 all made (redo v1/v2); c09 t1 v0-2 made NEW (keep); c13 t1 v1/v2 NEW done (W98c cutouts w4aOgIl7EI, fHzuv4UCDY, not on CDN → bg-removed files: upload), t4 v0 keep + v1/v2 redo, t5/t6 todo; c17 all made (redo); c21 all made (redo); c25 all made (redo); c26 t1 made (redo v1/v2). Others: nothing yet.
+
+## UPDATE 21:20Z (Foreman C) — NO a65 redo
+OWNER (verbatim, ~21:19Z): "Cái bộ nào tuổi 65 vẽ rồi không cần vẽ lại đâu, phí credit lắm." → a65 sets already made (any build) are KEPT; never redo them. Done a65: c01 c02 c03 c09 c10 c11 c12 c17 c18 c19 c25 c26 c27 c28 (+ c29 if W94 finished it). Only missing a65 people + all a51 are painted.
