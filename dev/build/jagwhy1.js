@@ -143,12 +143,12 @@ npwReg("wdPawn",{grp:"consort",who:()=>liveRivals(true).filter(v=>(v.bac||0)<npw
    tsDen      a consort floats a lantern when she wants his favour ((want − Sủng) × k) or is devout (Đức ≥ ts.duc)
    bulWant    a bully takes a THING instead of silver when the target cannot pay or she covets it (a greedy / vain nết)
    bulTell    a bullied consort takes proof to the Empress when she trusts her (liking ≥ 0) and resents the bully (hostility ≥ bul.host)
-   fireHeed   a warned consort heeds the fire warning when she is watchful (tai mắt) or careful (Đức)
+   fireHeed   a warned consort has the warning as her reason (tai mắt / Đức make it stronger); she keeps the candles safe by the done roll bul.fire.heed
    empMercy   a merciful Emperor (nhân từ) spares the one he still favours (Sủng × k + children × kid ≥ min)
-   birthPlot  a midwife is planted by the one with the strongest motive (motiveOK harm + hostility ≥ j8.birthBar) · maidSell an unhappy maid sells
+   birthPlot  a midwife is planted by the one with the strongest motive (motiveOK harm + hostility ≥ j8.birthBar); she gets her in by the done roll j8.birthP · maidSell an unhappy maid sells
    giftCheck  a consort checks her gifts when she has some unchecked and fears someone (tai mắt + the worst hostility toward her)
    fakeIll / fakePreg  a cunning consort (Tâm cơ) feigns illness to draw a visit when unfavoured, or a pregnancy when she has no son and fears for her place
-   raid       Cung Chính ti searches a palace only when it holds forbidden goods AND someone who resents her reports it (npcTell) */
+   raid       Cung Chính ti searches a palace only when it holds forbidden goods AND someone who resents her reports it (npcTell); it acts on the report by the done roll j8.raidGo */
 npwReg("tsGuard",{grp:"consort",who:c=>[c.v],cdOf:()=>0,why(v){const D=tsDangerOf(v,false);if(D.n<BAL.tsDanger.act)return null;
  return {s:nv(v,"tsCare")/2+(D.n-BAL.tsDanger.act)*npw1B("ts").guardK,r:"sợ bị hại"}}});
 npwReg("empSummon",{grp:"emp",who:()=>S.emp&&!S.empDead?[S.emp]:[],why(e,c){const t=npwPick(c.C,tsSummonW);return t?{s:npwB().min*tsMoodW()*npw1B("ts").moodK,t,r:"nhớ người mình sủng"}:null}});
@@ -156,7 +156,7 @@ npwReg("tsDen",{grp:"consort",who:()=>liveRivals(true),why(v){const T=npw1B("ts"
 npwReg("bulWant",{grp:"consort",who:c=>[c.a],cdOf:()=>0,why(a,c){const w=tsbWant(a,c.t);if(!w)return null;const tr=traitsOf(a);const B=npw1B("bul");
  return (tsbBulPay(a,c.t)<B.pay||tr.some(x=>B.wantT.includes(x)))?{s:npwB().min,t:c.t,r:"thèm của",k:w}:null}});
 npwReg("bulTell",{grp:"consort",who:c=>[c.t],cdOf:()=>0,why(t,c){const q=queenP();if(!q||q===c.a||q===t||aff(t,q)<0)return null;const h=hostility(t,c.a);return h>=npw1B("bul").host?{s:npwB().min+h/2,t:q,r:"bị ép quá nhiều lần"}:null}});
-npwReg("fireHeed",{grp:"consort",who:c=>[c.p],cdOf:()=>0,why(p){const F=npw1B("bul").fire;const s=eyes(p)*F.eye+(p.duc||0)*F.duc;return s>0?{s,r:"cẩn trọng"}:null}});
+npwReg("fireHeed",{grp:"consort",who:c=>[c.p],cdOf:()=>0,why(p){/* G1 #9 (RE-CHECK 3 item 1): the warning she really got is the reason (every warned consort has it); tai mắt / Đức make it stronger; whether she keeps the candles safe = done roll bul.fire.heed (the old roll 60) */const F=npw1B("bul").fire;return {s:npwB().min+eyes(p)*F.eye+(p.duc||0)*F.duc,r:"được báo đèn nến"}}});
 npwReg("empMercy",{grp:"emp",who:()=>S.emp?[S.emp]:[],cdOf:()=>0,why(e,c){const J=npw1B("j8");const p=c.p;const g=p===S?S.sung:(p.sung||0);const k=(p===S?(S.kids||[]):(p.kids||[])).filter(x=>x&&x.alive!==false).length;
  return {s:g*J.mercyK+k*J.kid,t:p,r:"còn nhớ tình xưa"}}});
 npwReg("birthPlot",{grp:"consort",who:c=>c.bad,cdOf:()=>0,why(x,c){return npw1Mot(x,c.p,"harm",npw1B("j8").birthBar)}});
@@ -173,7 +173,7 @@ npwReg("raid",{grp:"court",who:c=>[c.p],why(p){const bad=(p.inv||[]).filter(e=>(
    taimat     her own tai mắt (a loyal servant) bring her a rival's secret when they are sharp enough (her tai mắt × eye ≥ min) */
 npwReg("kspCheck",{grp:"consort",who:c=>c.C,why(x){const J=npw1B("j22");const h=hostility(x,S)+(S.ksKnows?J.ksp:0);return h>=J.host?{s:h,t:S,r:"nghi cái thai của ngươi"}:null}});
 npwReg("trystKnow",{grp:"consort",who:c=>c.C,why(x,c){const J=npw1B("j22");const t=c.v||S;const s=eyes(x)*J.eye+Math.max(0,hostility(x,t))/2;return {s,t,r:"tai mắt nàng ta dò ra"}}});
-npwReg("taimat",{grp:"srv",who:c=>c.w?[c.w]:[],cdOf:()=>0,why(w,c){/* her loyal watcher (watcher(): lòng ≥ BAL.loy.close) looks out for her: that loyalty is the reason; tai mắt make it stronger; the finding itself = done roll (j22.see + eyes × seeEye, the old odds) */return {s:npwB().min+eyes(S)*npw1B("j22").eye,t:c.v,r:"tai mắt dò được"}}});
+npwReg("taimat",{grp:"srv",who:c=>c.w?[c.w]:[],cdOf:()=>0,why(w,c){/* her own people look out for her (j22: the loyal watcher, watcher() lòng ≥ BAL.loy.close, first; else her maid / a servant of her house — G1 #9: with the watcher only, 2 asks in 12 lives): serving her is the reason; tai mắt make it stronger; the finding itself = done roll (j22.see + eyes × seeEye, the old odds) */return {s:npwB().min+eyes(S)*npw1B("j22").eye,t:c.v,r:"tai mắt dò được"}}});
 /* ---- G1 part 8: the origin story lines (j4 STORY month timers). BAL.ag.why.story ----
    story      an off-screen person of her story (father, the old mistress, the envoy, the Empress's clan, the foe's father) acts on HIS plan: his push
               grows with the tuần since the last step (min × elapsed / story.wait[key]); the Empress's clan (ch) also needs her motive against her.

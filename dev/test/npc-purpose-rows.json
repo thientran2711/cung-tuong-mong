@@ -70,7 +70,7 @@
 "group": "G1",
 "event": "KSP book checked; affair conception; foe learns date mismatch",
 "fp": "   if(roll(BAL.odb.j22.rbTop+eyes(S)*5)){/*evo",
-"done": "if(tw&&npcWhy(\"taimat\",{w:tw.s||S.maid,v},()=>roll("
+"done": "if(tw0&&npcWhy(\"taimat\",{w:tw0,v},()=>roll("
 },
 {
 "f": "jmen.js",
@@ -344,7 +344,7 @@
 "group": "G1",
 "event": "NPC inspects gifts; Cung Chính ti raids a palace",
 "fp": "  if(roll(4)){const s=search(p);if(s)ev+=p===",
-"done": "if(npcWhy(\"raid\",{p})){const s=search(p);"
+"done": "if(npcWhy(\"raid\",{p},()=>roll(npw1B(\"j8\").raidGo))){const s=search(p);"
 },
 {
 "f": "j8.js",
@@ -380,7 +380,7 @@
 "group": "G1",
 "event": "death→lãnh cung; midwife plant; maid bought by rival",
 "fp": "&x.ghen>=60)));if(bad.length&&roll(15))plot=pick(bad)}",
-"done": "const bp=bad.length?npcWhy(\"birthPlot\",{p,bad}):null"
+"done": "const bp=bad.length?npcWhy(\"birthPlot\",{p,bad},()=>roll(npw1B(\"j8\").birthP)):null"
 },
 {
 "f": "j8.js",
@@ -2938,7 +2938,7 @@
 "group": "G1",
 "event": "bully item/silver; complaint to HH; harm news; heed fire warning",
 "fp": "n trong cung\");else if(p!==S&&roll(60))p.tsbFW.heed=1}}",
-"done": "npcWhy(\"fireHeed\",{p})"
+"done": "npcWhy(\"fireHeed\",{p},()=>roll(npw1B(\"bul\").fire.heed))"
 },
 {
 "f": "jrcp.js",

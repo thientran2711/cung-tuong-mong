@@ -183,7 +183,7 @@ function tsbFireMonth(){const w=tsbWk();
     else if(lost.length&&typeof newsAdd==="function")newsAdd(p,"fire",`Cung của ${p.name} bén lửa, cháy mất ${lost.join(", ")}.`)}continue}
   const cs=tsbCareless(p);const ch=tsbFireBase(p)+(cs?1.5:0);if(!roll(ch))continue;
   p.tsbFW={cause:cs?"hau":"den",due:w+2+R(3),heed:0,who:cs&&cs.name?cs.name:""};
-  if(p===S&&tsbOn()&&!Q.some(m=>m.pid==="tsbFireW"))tsbCard("tsbFireW",{},"Đèn nến trong cung");else if(p!==S&&npcWhy("fireHeed",{p}))p.tsbFW.heed=1}}
+  if(p===S&&tsbOn()&&!Q.some(m=>m.pid==="tsbFireW"))tsbCard("tsbFireW",{},"Đèn nến trong cung");else if(p!==S&&npcWhy("fireHeed",{p},()=>roll(npw1B("bul").fire.heed)))p.tsbFW.heed=1}}
 PEND.tsbFireW=()=>{const W=S&&S.tsbFW;if(!W)return null;const hau=W.cause==="hau";
  const t=hau?`${W.who||"Một kẻ hầu"} mấy đêm liền quên tắt đèn trong gian chứa đồ; sáng ra bấc đèn cháy sát chân rèm.`:`Trời hanh khô, đèn nến thắp suốt đêm; đã hai lần tàn đèn rơi xuống thảm, may có người thấy.`;const O=[];
  O.push({cap:1,n:"Dặn giữ đèn nến cẩn thận",fx:{},x:`${capW()} · tốn: 1 khắc · thành: hiểm họa cháy giảm hẳn`,need:[tsbNeedKhac(1)],go:()=>{tsbKh(1);if(S.tsbFW)S.tsbFW.heed=1;log("Ngươi dặn kẻ hầu giữ đèn nến cẩn thận, đêm nào cũng soát.")}});
