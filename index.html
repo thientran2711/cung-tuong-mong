@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"a04d3f24+","t":"2026-11-18T20:12Z","c":"map-zones re-scope (owner OD 18/11 ~19:45Z): zone layer + fog removed (consort palaces keep their own tags); keep Càn Ninh/Đức Thọ second l…","b":"f98f4928dea4","h":[{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"},{"s":"a5013222+","t":"2026-11-18T18:03Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)"},{"s":"08774c0e+","t":"2026-11-18T17:38Z","c":"ag-stf2 (test only): bribe histogram picks a servant whose lòng moves her bribe odds. Root of the 'disloyal one takes more' red (npc ~3/20,…"},{"s":"0351e140","t":"2026-11-18T16:48Z","c":"shop-panel: «Để ta xem» outside option, 3-column Mua/Bán grid, smallest picture strip, test"},{"s":"ebf25660+","t":"2026-11-18T15:29Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…"},{"s":"9f9c6c2b+","t":"2026-11-18T14:26Z","c":"shown-odds-one-path r1: plant on the spot is done in person (actCtx x.here, no sent-servant pen); Vì sao names spy knowledge (whyKnow); tes…"},{"s":"aa997f3c+","t":"2026-11-18T13:46Z","c":"look-fx r13: index.html / sw.js rebuilt from merged sources"},{"s":"4475ea24+","t":"2026-11-18T12:33Z","c":"grand-endings-engine: site rebuilt (index.html / sw.js / assets.json) after fix 4 + main merge"},{"s":"68cbbb28+","t":"2026-11-18T12:00Z","c":"review life-preload-fu r2v: no half-drawn / empty figure while the HD twin comes (whole group: every fig-* img)"},{"s":"a8036600+","t":"2026-11-18T12:06Z","c":"Rebuild index.html/sw.js after merging origin/main"}]};
+window.CTM_BI={"s":"fcff501a+","t":"2026-11-18T20:41Z","c":"map-labels-missing r2c: tag touches its own building or keeps a short leader (\u003c=90px) ending on the real slip/info rect, dot >=40px from ot…","b":"5ae22026e6b8","h":[{"s":"c67d248d+","t":"2026-11-18T19:53Z","c":"ag-deed-perf: site build (index.html, sw.js)"},{"s":"6aab33ad","t":"2026-11-18T20:05Z","c":"KIT_REQUESTS: K-Q2-1 DONE 048f3c7"},{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"},{"s":"a5013222+","t":"2026-11-18T18:03Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)"},{"s":"08774c0e+","t":"2026-11-18T17:38Z","c":"ag-stf2 (test only): bribe histogram picks a servant whose lòng moves her bribe odds. Root of the 'disloyal one takes more' red (npc ~3/20,…"},{"s":"0351e140","t":"2026-11-18T16:48Z","c":"shop-panel: «Để ta xem» outside option, 3-column Mua/Bán grid, smallest picture strip, test"},{"s":"ebf25660+","t":"2026-11-18T15:29Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…"},{"s":"9f9c6c2b+","t":"2026-11-18T14:26Z","c":"shown-odds-one-path r1: plant on the spot is done in person (actCtx x.here, no sent-servant pen); Vì sao names spy knowledge (whyKnow); tes…"},{"s":"aa997f3c+","t":"2026-11-18T13:46Z","c":"look-fx r13: index.html / sw.js rebuilt from merged sources"},{"s":"4475ea24+","t":"2026-11-18T12:33Z","c":"grand-endings-engine: site rebuilt (index.html / sw.js / assets.json) after fix 4 + main merge"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -4997,7 +4997,7 @@ function mapHTML(){const W=S.where||{};const disR=k=>S.out?"đang ở lãnh cung
  return `<div class="mapv"><div class="maptools"><span class="past">${SEASON[S.month-1]} · ${BUOI[S.buoi||0]} · còn ${BAL.time.khac-used} khắc<span class="mleg"> · đi gần ${BAL.walk.near} khắc, xa ${walkFarK()} · mặt nhỏ: người ở cung · bóng: người đang có mặt</span></span><span><button class="btn mz" data-mapz="-1" aria-label="Thu nhỏ">−</button><button class="btn mz" data-mapz="1" aria-label="Phóng to">+</button><button class="btn mz" data-maplist="1">Danh sách</button></span></div>
  <div class="mapsc"><div class="mapw" style="width:${z*100}%"><img class="mapimg" src="${mapImg()}" alt="Toàn cảnh hoàng cung Đại Hy" onerror="this.src='https://ctm-img.victoria-tntt.workers.dev/img/map-${BUK[S.buoi||0]}.webp'">
  ${mapSpots().map(s=>{const b=s.box;const pos=`left:${b.x*100}%;top:${b.y*100}%;width:${b.w*100}%;height:${b.h*100}%`;
-  if(s.empty)return `<div class="mspot sm off empty mgrey" title="${s.n}: ${s.fn}" style="${pos}"><span class="mlab">${s.n.replace(/ cung$/,"")}</span><span class="mmeta">${s.fn}</span></div>`;
+  if(s.empty)return `<div class="mspot sm off empty mgrey" title="${s.n}: ${s.fn}" style="${pos}"><span class="mlab">${s.n.replace(/ cung$/,"")}</span>${s.fn==="cung trống"?"":`<span class="mmeta">${s.fn}</span>`}</div>`; /* owner 18/11 ~21:50Z: an empty palace shows ONLY its name (grey look kept), no second line; Ngoại triều keeps its reason line */
   const why=disR(s.k);const n=countAt(s.k);const fs=s.res.slice(0,s.small?3:4).map(p=>`<span class="mres">${mdH(p===S?pMe():pv(p),"xs")}</span>`).join("")+(s.res.length>(s.small?3:4)?`<span class="mres more">+${s.res.length-(s.small?3:4)}</span>`:"");
   return `<button class="mspot${s.small?" sm":""}${why?" off":""}${S.place===s.k?" here":""}" data-go="${s.k}" ${why?"disabled":""} title="${s.n}: ${s.fn}${n?` · ${n} bóng`:""}${why?` · ${why}`:s.k!=="home"&&S.place!==s.k?` · đi ${travel(S.place,s.k)} khắc`:""}${s.res.length?" · ở: "+s.res.map(p=>p===S?"ngươi":p.name).join(", "):""}" style="${pos}"><span class="mlab">${S.place===s.k&&!S.out&&!S.dead&&typeof kitMeMapMark==="function"?kitMeMapMark():""}${s.small?s.n.replace(/ cung$/,""):s.n}</span>${(()=>{const mine=S.place===s.k&&!S.out&&!S.dead; /* KIT §41.2 (owner 17/11 ~12:30Z, picked "1"): her place counts HER: "Ta + N bóng · K khắc" (N = the others there), alone "Chỉ có ta · K khắc"; K = khắc she has left this buổi */
  const bits=mine?[n?`Ta + ${n} bóng`:"Chỉ có ta",`<em class="ok">còn ${Math.max(0,BAL.time.khac-used)} khắc</em>`]:[n?`${n} bóng`:"",why&&why!=="đang ở đây"?`<em>${why}</em>`:s.k!=="home"&&S.place!==s.k?`<em class="ok">${travel(S.place,s.k)} khắc</em>`:""].filter(Boolean);return bits.length?`<span class="mmeta">${bits.join(" · ")}</span>`:""})()}${fs?`<span class="mfaces">${fs}</span>`:""}</button>`}).join("")}
@@ -5458,22 +5458,31 @@ function silChip(n){return"";if(!n)return"";const k=Math.min(n,3);return `<span 
  return h}})();
 /* the layout switch */
 (function(){const r0=renderPanel0;renderPanel0=function(){const r=r0.apply(this,arguments);try{const gm=document.querySelector(".game");if(gm)gm.classList.toggle("maptab",tab==="go"&&!window.__mapList)}catch(e){}return r}})();
-/* KIT §85.7 TAG SOLVER (map-labels-missing r2; owner 18/11 "Tên của những cung khác đâu", OD L1032 + L1416): every place keeps ONE readable tag box (.mlab + .mmeta), never hidden. Pure geometry (screen px rects, no DOM): items [{b:[l,t,r,b] tag box at home, A:[x,y] building dot, sr:[l,t,r,b] building rect, rk rank, prot}] -> offsets.
-   HARD rules (counted per pair): tag boxes keep a 3 px gap; no building dot in or within 8 px of another tag; a leader (line from the dot to the nearest point of its tag, drawn when the dot is >6 px clear of it) does not run through another tag nor cross another leader. SOFT: a tag does not sit on another place's building; nearer is better. Tags stay inside the map rect wr.
-   1 constructive (highest rank first: her place, "!" places, then more people; each keeps home when free, else the nearest clear spot) -> 2 repair of any tag still breaking a rule -> 3 seeded local search over ALL tags (a neighbour may step aside), time-boxed. Deterministic. */
-function kmSolve(it,K,wr,budget){const n=it.length,T=it.map(()=>[0,0]),V=it.map(()=>0),B=it.map(x=>x.bv[0].slice()),E=it.map(x=>x.A.slice()),LD=it.map(()=>false),LEAD=6*K,A=it.map(x=>x.A);
+/* KIT §85.7 TAG SOLVER (map-labels-missing r2c; owner 18/11 "Tên của những cung khác đâu", OD L1032 + L1416): every place keeps ONE readable tag, never hidden. Pure geometry (screen px rects, no DOM). items [{bv:[[l,t,r,b] union box of the tag (.mlab + .mmeta) at home, same with the name on ONE line (variant 1)], pv:[[parts of v0],[parts of v1]] (the real slip + info-row rects), sr:[l,t,r,b] building rect, rk rank, prot}] -> offsets.
+   A tag that still covers its own building (its box meets the middle 60% of the building) needs no leader. Otherwise it keeps a LEADER: the dot sits on the building at the point nearest the tag, the line ends on the REAL slip / info-row rect nearest the dot (never on an empty corner of the union box). HARD rules (counted per pair, one cost function): tag boxes keep a 2 px gap; a leader is at most LMAX long (90 px: move the tag, never a long line); a leader dot keeps DC (40 px, relaxed only if no layout exists) from every other tag and no other tag's dot is that close to this tag; a leader never runs through another tag or crosses another leader. SOFT: a tag does not sit on another place's building; nearer is better; wrapped name preferred over one-line.
+   vp (visible map box, after the default scroll): a tag whose building centre is in view lies WHOLE inside it; a building mostly cut by the edge (< etol px) may have its tag WHOLE outside - then NO dot/leader is drawn (the tag shows when she pans); never a tag cut by the edge. 1 constructive (highest rank first) -> 2 repair -> 3 seeded local search over ALL tags, time-boxed. Deterministic. */
+function kmSolve(it,K,wr,budget,vp,etol,DCp){etol=etol||60;const DC=(DCp||40)*K,LMAX=90*K,n=it.length,T=it.map(()=>[0,0]),V=it.map(()=>0),VIS=it.map(x=>!!vp&&(x.sr[0]+x.sr[2])/2>vp[0]&&(x.sr[0]+x.sr[2])/2<vp[2]);
+ const B=it.map(x=>x.bv[0].slice()),P=it.map(x=>x.pv[0]),A=it.map(x=>[(x.sr[0]+x.sr[2])/2,(x.sr[1]+x.sr[3])/2]),E=A.map(a=>a.slice()),LD=it.map(()=>false);
+ const RI=it.map(x=>{const w=x.sr[2]-x.sr[0],h=x.sr[3]-x.sr[1];return[x.sr[0]+w*.2,x.sr[1]+h*.2,x.sr[2]-w*.2,x.sr[3]-h*.2]});
  const ovP=(a,b,p)=>Math.min(a[2]+p,b[2])-Math.max(a[0]-p,b[0])>0&&Math.min(a[3]+p,b[3])-Math.max(a[1]-p,b[1])>0,inP=(r,q,p)=>q[0]>=r[0]-p&&q[0]<=r[2]+p&&q[1]>=r[1]-p&&q[1]<=r[3]+p;
- const segR=(p,q,r,pd)=>{const x0=r[0]-pd,y0=r[1]-pd,x1=r[2]+pd,y1=r[3]+pd;let t0=0,t1=1;const dx=q[0]-p[0],dy=q[1]-p[1];const P=[-dx,dx,-dy,dy],Q=[p[0]-x0,x1-p[0],p[1]-y0,y1-p[1]];for(let k=0;k<4;k++){if(P[k]===0){if(Q[k]<0)return false}else{const u=Q[k]/P[k];if(P[k]<0){if(u>t1)return false;if(u>t0)t0=u}else{if(u<t0)return false;if(u<t1)t1=u}}}return t0<=t1};
+ const segR=(p,q,r,pd)=>{const x0=r[0]-pd,y0=r[1]-pd,x1=r[2]+pd,y1=r[3]+pd;let t0=0,t1=1;const dx=q[0]-p[0],dy=q[1]-p[1];const Pp=[-dx,dx,-dy,dy],Q=[p[0]-x0,x1-p[0],p[1]-y0,y1-p[1]];for(let k=0;k<4;k++){if(Pp[k]===0){if(Q[k]<0)return false}else{const u=Q[k]/Pp[k];if(Pp[k]<0){if(u>t1)return false;if(u>t0)t0=u}else{if(u<t0)return false;if(u<t1)t1=u}}}return t0<=t1};
  const cr=(a,b,c)=>(b[0]-a[0])*(c[1]-a[1])-(b[1]-a[1])*(c[0]-a[0]),segX=(p,q,r,s)=>cr(p,q,r)*cr(p,q,s)<0&&cr(r,s,p)*cr(r,s,q)<0;
- const upd=i=>{const t=T[i],b=it[i].bv[V[i]],a=A[i];B[i]=[b[0]+t[0],b[1]+t[1],b[2]+t[0],b[3]+t[1]];E[i]=[Math.min(Math.max(a[0],B[i][0]),B[i][2]),Math.min(Math.max(a[1],B[i][1]),B[i][3])];LD[i]=Math.hypot(E[i][0]-a[0],E[i][1]-a[1])>LEAD};
+ const cl=(v,a,b)=>Math.min(Math.max(v,a),b);
+ /* geometry of tag i at offset t, variant v: box, dot, leader end, leader on/off */
+ const geo=(i,t,v)=>{const u=it[i].bv[v],bi=[u[0]+t[0],u[1]+t[1],u[2]+t[0],u[3]+t[1]],R=RI[i];const touch=bi[2]>R[0]&&bi[0]<R[2]&&bi[3]>R[1]&&bi[1]<R[3];
+  const out=!!vp&&(bi[2]<=vp[0]-1||bi[0]>=vp[2]+1);let a=null,e=null,ld=false,len=0;
+  if(!touch&&!out){const cx=(bi[0]+bi[2])/2,cy=(bi[1]+bi[3])/2;a=[cl(cx,R[0],R[2]),cl(cy,R[1],R[3])];let bd=1e9;for(const p of it[i].pv[v]){const q=[cl(a[0],p[0]+t[0],p[2]+t[0]),cl(a[1],p[1]+t[1],p[3]+t[1])],d=Math.hypot(q[0]-a[0],q[1]-a[1]);if(d<bd){bd=d;e=q}}len=bd;ld=bd>2*K}
+  return{bi,a,e,ld,len,out}};
+ const upd=i=>{const g=geo(i,T[i],V[i]);B[i]=g.bi;P[i]=it[i].pv[V[i]].map(p=>[p[0]+T[i][0],p[1]+T[i][1],p[2]+T[i][0],p[3]+T[i][1]]);LD[i]=g.ld;A[i]=g.a||A[i];E[i]=g.e||A[i]};
  for(let i=0;i<n;i++)upd(i);
- const hardAt=(i,bi,ei,li,M)=>{let v=0;const a=A[i];for(let j=0;j<n;j++){if(j===i||(M&&!M[j]))continue;const bj=B[j];if(ovP(bi,bj,2))v++;if(inP(bi,A[j],6))v++;if(li){if(inP(bj,a,6))v++;if(segR(a,ei,bj,3))v++}if(LD[j]){if(segR(A[j],E[j],bi,3))v++;if(li&&segX(a,ei,A[j],E[j]))v++}}return v};
+ const hardAt=(i,g,M)=>{let v=0;const bi=g.bi,a=g.a,ei=g.e,li=g.ld;if(li&&g.len>LMAX)v++;for(let j=0;j<n;j++){if(j===i||(M&&!M[j]))continue;const bj=B[j];if(ovP(bi,bj,2))v++;if(LD[j]&&inP(bi,A[j],DC))v++;if(li){if(inP(bj,a,DC))v++;if(segR(a,ei,bj,3))v++}if(LD[j]){if(segR(A[j],E[j],bi,3))v++;if(li&&segX(a,ei,A[j],E[j]))v++}}return v};
  const SR=it.map(x=>{const w=x.sr[2]-x.sr[0],h=x.sr[3]-x.sr[1];return[x.sr[0]+w*.2,x.sr[1]+h*.2,x.sr[2]-w*.2,x.sr[3]-h*.2]});
- const costAt=(i,t,M,v)=>{const b=it[i].bv[v===undefined?V[i]:v],bi=[b[0]+t[0],b[1]+t[1],b[2]+t[0],b[3]+t[1]],a=A[i],ei=[Math.min(Math.max(a[0],bi[0]),bi[2]),Math.min(Math.max(a[1],bi[1]),bi[3])],li=Math.hypot(ei[0]-a[0],ei[1]-a[1])>LEAD;
-  const out=bi[0]<wr[0]+1||bi[2]>wr[2]-1||bi[1]<wr[1]+1||bi[3]>wr[3]-1;let sf=0;const cx=(bi[0]+bi[2])/2,cy=(bi[1]+bi[3])/2,o=it[i].sr;if(!(cx>=o[0]&&cx<=o[2]&&cy>=o[1]&&cy<=o[3]))for(let j=0;j<n;j++){if(j!==i&&cx>=SR[j][0]&&cx<=SR[j][2]&&cy>=SR[j][1]&&cy<=SR[j][3])sf++}
-  return 1000*hardAt(i,bi,ei,li,M)+40*sf+Math.hypot(t[0],t[1])/K+(out?1e6:0)+((v===undefined?V[i]:v)?15:0)};
- const hardI=i=>hardAt(i,B[i],E[i],LD[i],null);
- const NV=it.map(x=>x.bv[1]!==x.bv[0]?2:1);const search=(i,M)=>{let bt=[0,0],bv=0,bc=costAt(i,bt,M,0);for(let v=0;v<NV[i];v++){const c0=costAt(i,[0,0],M,v);if(c0<bc){bc=c0;bv=v;bt=[0,0]}}for(let r=4*K;r<=300*K&&r/K<bc;r+=4*K){const m=Math.max(12,Math.round(r/K/3));for(let k=0;k<m;k++){const a=k*2*Math.PI/m,t=[Math.round(r*Math.cos(a)),Math.round(r*Math.sin(a))];for(let v=0;v<NV[i];v++){const c=costAt(i,t,M,v);if(c<bc){bc=c;bt=t;bv=v}}}}return[bt,bv]};
+ const costAt=(i,t,M,v)=>{v=v===undefined?V[i]:v;const g=geo(i,t,v),bi=g.bi;const out=bi[0]<wr[0]+1||bi[2]>wr[2]-1||bi[1]<wr[1]+1||bi[3]>wr[3]-1;let sf=0;const cx=(bi[0]+bi[2])/2,cy=(bi[1]+bi[3])/2,o=it[i].sr;if(!(cx>=o[0]&&cx<=o[2]&&cy>=o[1]&&cy<=o[3]))for(let j=0;j<n;j++){if(j!==i&&cx>=SR[j][0]&&cx<=SR[j][2]&&cy>=SR[j][1]&&cy<=SR[j][3])sf++}
+  let vpP=0;if(vp){if(VIS[i]){if(!(bi[0]>=vp[0]+3&&bi[2]<=vp[2]-3))vpP=g.out&&((it[i].sr[0]+it[i].sr[2])/2<vp[0]+etol*K||(it[i].sr[0]+it[i].sr[2])/2>vp[2]-etol*K)?60:1e5}else if(bi[2]>vp[0]-1&&bi[0]<vp[2]+1)vpP=1e5}
+  return 1000*hardAt(i,g,M)+40*sf+Math.hypot(t[0],t[1])/K+(out?1e6:0)+(v?15:0)+vpP};
+ const hardI=i=>{const g={bi:B[i],a:LD[i]?A[i]:null,e:E[i],ld:LD[i],len:LD[i]?Math.hypot(E[i][0]-A[i][0],E[i][1]-A[i][1]):0};return hardAt(i,g,null)};
+ const NV=it.map(x=>x.bv[1]!==x.bv[0]?2:1);
+ const search=(i,M)=>{let bt=[0,0],bv=0,bc=costAt(i,bt,M,0);for(let v=0;v<NV[i];v++){const c0=costAt(i,[0,0],M,v);if(c0<bc){bc=c0;bv=v;bt=[0,0]}}for(let r=4*K;r<=300*K&&r/K<bc;r+=4*K){const m=Math.max(12,Math.round(r/K/3));for(let k=0;k<m;k++){const a=k*2*Math.PI/m,t=[Math.round(r*Math.cos(a)),Math.round(r*Math.sin(a))];for(let v=0;v<NV[i];v++){const c=costAt(i,t,M,v);if(c<bc){bc=c;bt=t;bv=v}}}}return[bt,bv]};
  const ord=it.map((x,i)=>i).sort((a,b)=>it[b].rk-it[a].rk);
  const M=new Uint8Array(n);for(const i of ord){const s=search(i,M);T[i]=s[0];V[i]=s[1];upd(i);M[i]=1}
  const asc=ord.slice().reverse();
@@ -5481,15 +5490,15 @@ function kmSolve(it,K,wr,budget){const n=it.length,T=it.map(()=>[0,0]),V=it.map(
  let hv=it.map((x,i)=>hardI(i));const tot=()=>hv.reduce((a,b)=>a+b,0);
  if(tot()){const t0=performance.now();let best=T.map(t=>t.slice()),bestV=V.slice(),bh=tot(),sd=(n*2654435761)>>>0;const rnd=()=>{sd=(sd+0x6D2B79F5)>>>0;let z=sd;z=Math.imul(z^z>>>15,z|1);z^=z+Math.imul(z^z>>>7,z|61);return((z^z>>>14)>>>0)/4294967296};
   const mvOK=it.map((x,i)=>!x.prot||hv[i]>0&&it.some((p,j)=>j!==i&&p.prot&&ovP(B[i],B[j],2)));
-  for(let rs=0;rs<10&&bh>0&&performance.now()-t0<(budget||350);rs++){let Tm=60;for(let k=0;k<6000&&tot();k++){const VL=[];for(let m=0;m<n;m++)if(hv[m])VL.push(m);const vn=VL[Math.floor(rnd()*VL.length)];let i=vn;
-    if(rnd()<.45){const nb=[];for(let m=0;m<n;m++)if(m!==vn&&mvOK[m]&&Math.hypot(A[m][0]-A[vn][0],A[m][1]-A[vn][1])<260*K)nb.push(m);if(nb.length)i=nb[Math.floor(rnd()*nb.length)]}
+  for(let rs=0;rs<400&&bh>0&&performance.now()-t0<(budget||350);rs++){let Tm=60;for(let k=0;k<6000&&tot();k++){const VL=[];for(let m=0;m<n;m++)if(hv[m])VL.push(m);const vn=VL[Math.floor(rnd()*VL.length)];let i=vn;
+    if(rnd()<.45){const nb=[];for(let m=0;m<n;m++){const ca=(it[m].sr[0]+it[m].sr[2])/2,cb=(it[m].sr[1]+it[m].sr[3])/2,va=(it[vn].sr[0]+it[vn].sr[2])/2,vb=(it[vn].sr[1]+it[vn].sr[3])/2;if(m!==vn&&mvOK[m]&&Math.hypot(ca-va,cb-vb)<260*K)nb.push(m)}if(nb.length)i=nb[Math.floor(rnd()*nb.length)]}
     if(!mvOK[i]){i=vn;if(!mvOK[i])continue}
     const r=rnd()<.2?0:Math.pow(rnd(),1.3)*300*K,a=rnd()*2*Math.PI,t=r?[Math.round(r*Math.cos(a)),Math.round(r*Math.sin(a))]:[0,0],nv=NV[i]>1&&rnd()<.3?1-V[i]:V[i],d=costAt(i,t,null,nv)-costAt(i,T[i],null);
     if(d<=0||rnd()<Math.exp(-d/Tm)){T[i]=t;V[i]=nv;upd(i);for(let m=0;m<n;m++)hv[m]=hardI(m)}Tm=Math.max(4,Tm*.9993);if(performance.now()-t0>(budget||350))break}
    if(tot()<bh){bh=tot();best=T.map(t=>t.slice());bestV=V.slice()}}
   for(let i=0;i<n;i++){T[i]=best[i];V[i]=bestV[i];upd(i)}hv=it.map((x,i)=>hardI(i));
   for(let pass=0;pass<3;pass++){let ch=0;for(const i of asc){if(T[i][0]===0&&T[i][1]===0||hardI(i))continue;const s=search(i,null);if(costAt(i,s[0],null,s[1])<costAt(i,T[i],null)-.5){T[i]=s[0];V[i]=s[1];upd(i);ch++}}if(!ch)break}}
- return{t:T,v:V,E,lead:LD,hard:it.reduce((a,x,i)=>a+hardI(i),0)/2,bad:it.map((x,i)=>hardI(i)?i:-1).filter(i=>i>=0)}}
+ return{t:T,v:V,A,E,lead:LD,hard:it.reduce((a,x,i)=>a+hardI(i),0)/2,bad:it.map((x,i)=>hardI(i)?i:-1).filter(i=>i>=0)}}
 /* the plan always covers the screen: the smallest zoom fills the height as well as the width */
 function mapFit(){try{const sc=document.querySelector(".game.maptab .mapsc");if(!sc)return;const w=sc.querySelector(".mapw"),img=sc.querySelector(".mapimg");if(!w)return;
  const asp=img&&img.naturalWidth?img.naturalWidth/img.naturalHeight:sc.closest(".kpmv")?1.76:1.792;/* dudo-blank: the same box the CSS gives the frame before the picture has loaded */
@@ -5508,14 +5517,20 @@ function mapFit(){try{const sc=document.querySelector(".game.maptab .mapsc");if(
  const box=s=>{const p=[...s.querySelectorAll(".mlab,.mmeta")].map(e=>e.getBoundingClientRect()).filter(r=>r.width>0);return p.length?{s,left:Math.min(...p.map(r=>r.left)),top:Math.min(...p.map(r=>r.top)),right:Math.max(...p.map(r=>r.right)),bottom:Math.max(...p.map(r=>r.bottom))}:null};
  const pairs=()=>{const R=labs().map(box).filter(Boolean),o=[];for(let i=0;i<R.length;i++)for(let j=i+1;j<R.length;j++){const a=R[i],b=R[j];if(Math.min(a.right,b.right)-Math.max(a.left,b.left)>0&&Math.min(a.bottom,b.bottom)-Math.max(a.top,b.top)>0)o.push([a.s,b.s])}return o};
  const prot=s=>s.classList.contains("here")||!!s.querySelector(".khap");const rank=s=>{if(prot(s))return 9;const n=+((s.querySelector(".mmeta")||{}).textContent||"").replace(/\D.*$/,"")||0;return s.classList.contains("empty")?-1:s.classList.contains("sm")?Math.min(n,50)/100:1+Math.min(5,n)/10};
- const place=zz=>{const __t0=performance.now();w.style.width=(zz*100)+"%";if(kp)return;labs().forEach(e=>{e.classList.remove("kmhide","kmnw");e.style.translate="";const o=e.querySelector(":scope>.mlead");if(o)o.remove()});const flo=one?KMAP_MLS_ONE[0]:KMAP_MLS;let m=one?KMAP_MLS_ONE[1]:1;w.style.setProperty("--mls",m);while(pairs().length&&m>flo+.001){m=Math.max(flo,+(m-.04).toFixed(2));w.style.setProperty("--mls",m)}
+ const solveTags=vp=>{
   /* still touching at the floor size: NEVER hide a tag - kmSolve (above) moves the lower-priority tags to clear spots with a leader line + dot to their own building; her place and "!" places keep home unless two of them collide */
-  const wr=w.getBoundingClientRect();const its=labs().map(s=>{const b=box(s);if(!b)return null;const r=s.getBoundingClientRect();return{s,bv:[[b.left,b.top,b.right,b.bottom]],sr:[r.left,r.top,r.right,r.bottom],A:[(r.left+r.right)/2,(r.top+r.bottom)/2],rk:rank(s),prot:prot(s)}}).filter(Boolean);
+  labs().forEach(e=>{e.classList.remove("kmnw");e.style.translate="";const o=e.querySelector(":scope>.mlead");if(o)o.remove()});
+  const wr=w.getBoundingClientRect();const parts=sp=>[...sp.querySelectorAll(".mlab,.mmeta")].map(e=>e.getBoundingClientRect()).filter(r=>r.width>0).map(r=>[r.left,r.top,r.right,r.bottom]);
+  const its=labs().map(s=>{const b=box(s);if(!b)return null;const r=s.getBoundingClientRect();return{s,bv:[[b.left,b.top,b.right,b.bottom]],pv:[parts(s)],sr:[r.left,r.top,r.right,r.bottom],A:[(r.left+r.right)/2,(r.top+r.bottom)/2],rk:rank(s),prot:prot(s)}}).filter(Boolean);
   /* variant 1 = the same tag with its name on ONE line (kit class kmnw): measured for every tag in one pass, chosen by the solver only where the wrapped shape does not fit */
-  its.forEach(i=>i.s.classList.add("kmnw"));its.forEach(i=>{const b=box(i.s);i.bv.push(b?[b.left,b.top,b.right,b.bottom]:i.bv[0])});its.forEach(i=>i.s.classList.remove("kmnw"));
-  const K=its.length&&its[0].s.offsetWidth?((its[0].sr[2]-its[0].sr[0])/its[0].s.offsetWidth)||1:1;const ck=K.toFixed(3)+"|"+[wr.left,wr.top,wr.right,wr.bottom].map(Math.round)+"|"+its.map(i=>i.bv[0].map(Math.round)+","+i.bv[1].map(Math.round)+","+i.A.map(Math.round)+","+i.rk+i.prot).join(";");let sol;try{sol=(window.__mapSolC&&window.__mapSolC[0]===ck)?window.__mapSolC[1]:kmSolve(its,K,[wr.left,wr.top,wr.right,wr.bottom]);window.__mapErr=""}catch(e){window.__mapErr=String(e&&e.stack||e).slice(0,300);window.__mapIts=its.map(i=>({bv:i.bv,sr:i.sr,A:i.A,rk:i.rk,prot:i.prot,n:i.s.dataset.go||i.s.dataset.ak||i.s.textContent.slice(0,8)}));window.__mapK=[K,[wr.left,wr.top,wr.right,wr.bottom]];console.error(e);sol={t:its.map(()=>[0,0]),v:its.map(()=>0),E:its.map(i=>i.A),lead:its.map(()=>false),hard:-1,bad:[]}}window.__mapSolC=[ck,sol];/* same layout again (resize/zoom repeats): same answer */
-  its.forEach((i,n)=>{const t=sol.t[n];i.s.classList.toggle("kmnw",!!sol.v[n]);i.s.style.translate=t[0]||t[1]?(t[0]/K)+"px "+(t[1]/K)+"px":"";if(!sol.lead[n])return;const e=sol.E[n],ax=(i.A[0]-i.sr[0]-t[0])/K,ay=(i.A[1]-i.sr[1]-t[1])/K,lx=(e[0]-i.sr[0]-t[0])/K,ly=(e[1]-i.sr[1]-t[1])/K,d=Math.hypot(lx-ax,ly-ay);const el=document.createElement("i");el.className="mlead";el.setAttribute("aria-hidden","true");el.style.cssText="left:"+ax+"px;top:"+ay+"px;width:"+d+"px;transform:rotate("+Math.atan2(ly-ay,lx-ax)+"rad)";i.s.insertBefore(el,i.s.firstChild)});
-  window.__mapIts=its.map(i=>({bv:i.bv,sr:i.sr,A:i.A,rk:i.rk,prot:i.prot,n:i.s.dataset.go||i.s.dataset.ak||i.s.textContent.slice(0,8)}));window.__mapK=[K,[wr.left,wr.top,wr.right,wr.bottom]];window.__mapSolve={hard:sol.hard,bad:sol.bad.map(n=>its[n].s.dataset.go||its[n].s.dataset.ak||its[n].s.textContent.slice(0,10)),moved:sol.t.filter(t=>t[0]||t[1]).length,oneLine:sol.v.filter(v=>v).length};
+  its.forEach(i=>i.s.classList.add("kmnw"));its.forEach(i=>{const b=box(i.s);i.bv.push(b?[b.left,b.top,b.right,b.bottom]:i.bv[0]);i.pv.push(b?parts(i.s):i.pv[0])});its.forEach(i=>i.s.classList.remove("kmnw"));
+  const K=its.length&&its[0].s.offsetWidth?((its[0].sr[2]-its[0].sr[0])/its[0].s.offsetWidth)||1:1;const ck=(vp?vp.map(Math.round):"")+"|"+K.toFixed(3)+"|"+[wr.left,wr.top,wr.right,wr.bottom].map(Math.round)+"|"+its.map(i=>i.bv[0].map(Math.round)+","+i.bv[1].map(Math.round)+","+i.sr.map(Math.round)+","+i.rk+i.prot).join(";");
+  let sol;try{sol=(window.__mapSolC&&window.__mapSolC[0]===ck)?window.__mapSolC[1]:(()=>{const W=[wr.left,wr.top,wr.right,wr.bottom];let q=kmSolve(its,K,W,undefined,vp);for(const [et,dc] of [[60,28],[60,16],[120,16],[200,16]])if(q.hard>0){const q2=kmSolve(its,K,W,150,vp,et,dc);if(q2.hard<q.hard)q=q2}return q})();window.__mapSolC=[ck,sol];window.__mapErr=""}catch(e){window.__mapErr=String(e&&e.stack||e).slice(0,300);console.error(e);sol={t:its.map(()=>[0,0]),v:its.map(()=>0),A:its.map(i=>i.A),E:its.map(i=>i.A),lead:its.map(()=>false),hard:-1,bad:[]}}
+  its.forEach((i,n)=>{const t=sol.t[n];i.s.classList.toggle("kmnw",!!sol.v[n]);i.s.style.translate=t[0]||t[1]?(t[0]/K)+"px "+(t[1]/K)+"px":"";if(!sol.lead[n])return;const A=sol.A[n],e=sol.E[n],ax=(A[0]-i.sr[0]-t[0])/K,ay=(A[1]-i.sr[1]-t[1])/K,lx=(e[0]-i.sr[0]-t[0])/K,ly=(e[1]-i.sr[1]-t[1])/K,d=Math.hypot(lx-ax,ly-ay);const el=document.createElement("i");el.className="mlead";el.setAttribute("aria-hidden","true");el.style.cssText="left:"+ax+"px;top:"+ay+"px;width:"+d+"px;transform:rotate("+Math.atan2(ly-ay,lx-ax)+"rad)";i.s.insertBefore(el,i.s.firstChild)});
+  window.__mapIts=its.map(i=>({bv:i.bv,pv:i.pv,sr:i.sr,A:i.A,rk:i.rk,prot:i.prot,n:i.s.dataset.go||i.s.dataset.ak||i.s.textContent.slice(0,8)}));window.__mapK=[K,[wr.left,wr.top,wr.right,wr.bottom],vp];window.__mapSolve={hard:sol.hard,bad:sol.bad.map(n=>its[n].s.dataset.go||its[n].s.dataset.ak||its[n].s.textContent.slice(0,10)),moved:sol.t.filter(t=>t[0]||t[1]).length,oneLine:sol.v.filter(v=>v).length};
+ };
+ const place=zz=>{const __t0=performance.now();w.style.width=(zz*100)+"%";if(kp)return;labs().forEach(e=>{e.classList.remove("kmhide","kmnw");e.style.translate="";const o=e.querySelector(":scope>.mlead");if(o)o.remove()});const flo=one?KMAP_MLS_ONE[0]:KMAP_MLS;let m=one?KMAP_MLS_ONE[1]:1;w.style.setProperty("--mls",m);while(pairs().length&&m>flo+.001){m=Math.max(flo,+(m-.04).toFixed(2));w.style.setProperty("--mls",m)}
+  solveTags(null);
   window.__mapMs=performance.now()-__t0;window.__mapMls=m};
  const z=Math.max(fit,window.__mapZ||fit);place(z);window.__mapFit=fit;
  const key=S.place+"|"+z.toFixed(2)+"|"+sc.clientWidth+"|"+sc.clientHeight;if(window.__mapKey2===key&&window.__mapPos2){sc.scrollLeft=window.__mapPos2[0];sc.scrollTop=window.__mapPos2[1]}
@@ -5523,6 +5538,7 @@ function mapFit(){try{const sc=document.querySelector(".game.maptab .mapsc");if(
   /* §85.8: centre on her place; when her place and every visible "!" place fit in the screen width together, centre on that span instead (so both are in view at open) */
   if(one){const hs=[...w.querySelectorAll(".mspot")].filter(s=>s.classList.contains("here")||(s.querySelector(".khap")&&!s.classList.contains("kmhide"))),rs=hs.map(s=>s.getBoundingClientRect()),sr=sc.getBoundingClientRect();if(rs.length>1){const l=Math.min(...rs.map(r=>r.left)),r=Math.max(...rs.map(r=>r.right));if(r-l<=sr.width-24)sc.scrollLeft+=(l+r)/2-(sr.left+sr.width/2)}}
   window.__mapKey2=key}
+ if(!kp){const sr=sc.getBoundingClientRect();solveTags([sr.left+mL,sr.top,sr.right-(port?0:mR),sr.bottom])}/* default view: no tag cut by the visible edge (map-labels r2b) */
  if(!sc.dataset.sv){sc.dataset.sv=1;try{if(window.ResizeObserver){let t=0,sz=sc.clientWidth+"x"+sc.clientHeight;new ResizeObserver(()=>{const n=sc.clientWidth+"x"+sc.clientHeight;if(n===sz)return;sz=n;clearTimeout(t);t=setTimeout(()=>{try{if(sc.isConnected&&!window.__mapList)mapFit()}catch(e){}},60)}).observe(sc)}}catch(e){}sc.addEventListener("scroll",()=>{window.__mapPos2=[sc.scrollLeft,sc.scrollTop]},{passive:true})}}catch(e){}}
 (function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{if(tab==="go"&&!window.__mapList){mapFit();requestAnimationFrame(()=>{try{if(tab==="go"&&!window.__mapList)mapFit()}catch(e){}});const img=document.querySelector(".mapsc .mapimg");if(img&&!img.complete)img.addEventListener("load",mapFit,{once:true})}}catch(e){}return r}})();
 addEventListener("resize",()=>{try{if(S&&tab==="go")mapFit()}catch(e){}});
@@ -5917,7 +5933,7 @@ BAL.staff={retire:[63,68],gift:20,giftAf:10,talk:2,succAge:[46,54],
  /* the Giáo tập ma ma stands in her room while S.turn <= gtDays (new tú nữ only; jstaff gtAtHome) */
  gtDays:4,
  posts:[
-  {id:"gt",title:"Giáo tập ma ma",palace:"Nội vụ phủ",master:"th",tr:"trung",rk:4,age:[50,55],
+  {id:"gt",title:"Giáo tập ma ma",palace:"Trữ Tú cung",master:"th",tr:"trung",rk:4,age:[50,55],
    names:[["Tống Quế Chi","Tống ma ma"],["Lạc Ngọc Dung","Lạc ma ma"],["Ôn Tú Hà","Ôn ma ma"]],
    duties:["dạy tú nữ mới vào cung","giữ lễ nghi, cung quy","coi việc tuyển tú","dặn dò người mới"]},
   {id:"tn",title:"Chưởng sự cô cô",palace:"Đức Thọ cung",master:"th",tr:"lanh",rk:3,age:[44,49],
@@ -30626,16 +30642,9 @@ if(typeof pdGet==="function")(function(){const o0=over;over=function(h,t,fate){c
    - Hoàng quý phi (6) có cung riêng, ở một mình. Hoàng hậu (7) ở một mình tại Càn Ninh (residents("kn") chỉ còn nàng).
    - Quý nhân, Thường tại, Đáp ứng ở thiên điện dưới một chủ vị; hết chỗ thì ở một mình một cung/điện phụ còn trống (PALN), nhường lại khi có chủ vị cần cung.
    - Tần mới phong mà chưa có cung trống: tạm ở thiên điện một chủ vị, có cung trống thì được dời sang, ghi một dòng. Người chơi: lên Tần là được ban cung (S.palCer, lễ dời cung của j27).
-   - Bản đồ có 8 cung phía đông; thêm các cung phía tây của PAL_WEST (khu viện mái xanh cạnh Ngọc Thanh các). PALN = 8 + PAL_WEST = 10 cung
-     (owner 18/11 ~19:45Z: bớt 13 → 10; MAIN ROOT-55 bỏ Trữ Tú, Hàm Phúc, Thái Cực điện). 10 ≥ ghế chủ vị của BAL.seat (Tần + Phi + Quý phi) + 1 HQP;
-     các cung dư là chỗ ở tạm (palLone). Đổi số cung = sửa MỘT bảng PAL_WEST; không nơi nào gõ số cung.
-   - Save có người ở cung đã bỏ (S.pal / v.pal >= PALN.length): palFix dời họ sang cung trống (hay thiên điện), mỗi người một dòng log.
+   - Bản đồ có 8 cung phía đông; thêm 5 cung phía tây (các khu viện mái xanh trên bản đồ, cạnh Ngọc Thanh các) cho đủ mọi ghế chủ vị của BAL.seat (Tần + Phi + Quý phi) + 1 HQP.
    - Save cũ: palFix chạy khi nạp; ai đang ở dưới HH/HQP (hay sai chỗ) được dời, ghi "… dời sang …". */
-/* THE west palace table (name, map x, y). Dropped 18/11: ["Trữ Tú cung",.303,.338],["Hàm Phúc cung",.368,.338],["Thái Cực điện",.368,.455]
-   (their old slot indices were 10-12, i.e. the tail, so the 10 kept palaces keep their indices in every save). */
-const PAL_WEST=[["Vĩnh Thọ cung",.303,.222],["Dực Khôn cung",.368,.222]];
-const PAL_GONE=["Trữ Tú cung","Hàm Phúc cung","Thái Cực điện"]; /* names of the old tail slots, only for the save-migration log line */
-PAL_WEST.forEach(([n,x,y],i)=>{
+[["Vĩnh Thọ cung",.303,.222],["Dực Khôn cung",.368,.222],["Trữ Tú cung",.303,.338],["Hàm Phúc cung",.368,.338],["Thái Cực điện",.368,.455]].forEach(([n,x,y],i)=>{
  if(MAPH.rivalSlots.some(s=>s.name===n))return;const s={slot:9+i,name:n,box:{x,y,w:.058,h:.105},anchor:{x:+(x+.029).toFixed(3),y:+(y+.04).toFixed(3)}};MAPH.rivalSlots.push(s);PALN.push(n)});
 palHeadOK=function(p){return !!p&&(p===S?!S.out&&!S.dead:p.alive&&!p.out)&&!p.queen&&rkOf(p)>=3};
 function palHostOK(p){return palHeadOK(p)&&rkOf(p)<=5&&p.pal!=null}
@@ -30644,10 +30653,6 @@ houseOf=function(p){if(!p)return null;const r=rkOf(p);if(p===S)return r>=3?key(S
  if(r>=3&&(p.pal!=null||p.queen))return key(p);
  const h=p.resHead!=null&&byKey(p.resHead);if(h&&h!==p&&(h===S?palHostOK(S):palHostOK(h)))return p.resHead;return key(p)};
 palFix=function(){if(!S||!rivals)return;rivals.forEach(ensureT2);const all=[S].concat(rivals);
- /* SAVE MIGRATION (13 → 10 palaces): anyone (player or NPC) whose pal points past the palace list is re-housed below like anyone without a
-    palace; a chủ vị gets a free palace (no ban-cung ceremony, she did not rise), a lone lower consort a side hall or a free palace. One log line each. */
- const gone=[];for(const p of all)if(p.pal!=null&&!(p.pal>=0&&p.pal<PALN.length)){const i=p.pal-PALN.length;gone.push([p,PAL_GONE[i]||"cung cũ"]);p.pal=null;p.palLone=0}
- const S0pc=S.palCer;
  const was=[];for(const p of rivals){if(!palLive(p)||p.queen)continue;const h=p.resHead!=null&&byKey(p.resHead);if(h&&(h.queen||rkOf(h)>=6||(h!==S&&!palLive(h))))was.push([p,h.queen?"Càn Ninh cung":PALN[h.pal]||"cung cũ"])}
  if(S.pal!=null&&!palHeadOK(S)){log(`Ngươi dời khỏi ${PALN[S.pal]}.`);S.pal=null}
  for(const v of rivals)if(v.pal!=null&&!(palHeadOK(v)||(v.palLone&&palLive(v)&&rkOf(v)<3))){v.pal=null;v.palLone=0}
@@ -30693,9 +30698,7 @@ palFix=function(){if(!S||!rivals)return;rivals.forEach(ensureT2);const all=[S].c
  for(const h of hs)hallFix(h);
  if(!sv&&palLive(S)&&rkOf(S)<3&&S.resHead!==S0){try{if(S.resHead)log(`Ngươi được xếp ở ${palName("home")}.`);else if(S0)log(`Ngươi dời về ${HOMEN}.`)}catch(x){}}
  for(const p of moved)try{log(`${RANKS[p.rank].n} ${p.name} có cung trống, được dời sang ${PALN[p.pal]}.`)}catch(e){}
- for(const [p,w] of was){if(!palLive(p))continue;try{log(`${p.name} dời khỏi ${w}, dời sang ${houseName(p)}.`)}catch(e){}}
- if(gone.some(g=>g[0]===S))S.palCer=S0pc;
- for(const [p,w] of gone){if(!palLive(p))continue;try{log(p===S?`${w} đóng cửa; ngươi dời sang ${houseName(S)}.`:`${w} đóng cửa; ${RANKS[p.rank].n} ${p.name} dời sang ${houseName(p)}.`)}catch(e){}}};
+ for(const [p,w] of was){if(!palLive(p))continue;try{log(`${p.name} dời khỏi ${w}, dời sang ${houseName(p)}.`)}catch(e){}}};
 /* palaceOf: j27's "lower consort under the queen = Càn Ninh" exception can no longer fire (palFix never puts anyone under the queen),
    so the j9/j27 palaceOf is kept as it is. (An earlier override here answered "home" for anyone without a house, e.g. servants,
    and so seated them in HER palace: measured, it halved her climb; see BALANCE_REPORT.) */
@@ -39991,6 +39994,9 @@ const HALL_PN={
  "Trường Xuân cung":["Lạc Thọ điện","Vĩnh Xuân hiên","Hàm Thu trai"],
  "Vĩnh Thọ cung":["Ngưng Tường điện","Tuyên Hòa hiên","Hoài Cẩn trai"],
  "Dực Khôn cung":["Hậu Đức điện","Hòa Sướng hiên","Mặc Hương trai"],
+ "Trữ Tú cung":["Tụ Anh điện","Triêu Hà hiên","Vãn Quế trai"],
+ "Hàm Phúc cung":["Diễn Khánh điện","Lan Xuân hiên","Cúc Thu trai"],
+ "Thái Cực điện":["Chấp Trung điện","Vĩnh Nhân hiên","Thận Nghĩa trai"],
  "Càn Ninh cung":["Mẫu Nghi điện"]};
 const HALL_ROLE={chinh:"Chính điện",dong:"Đông phối điện",tay:"Tây phối điện",cungnhan:"Dãy nhà cung nhân"};
 const HALL_IDX={chinh:0,dong:1,tay:2};
@@ -46360,6 +46366,8 @@ window.KIT_MEMARK=window.KIT_MEMARK||{h:.085,gap:.012,min:26,max:72,tiny:12,big:
 const KMM_GOLD=(typeof RCOL!=="undefined"&&RCOL[7])||"#ffc400";
 const KMM_NAMES=["Mai ngà","Lan bạc ngọc bích","Hoa bạc ngọc lam","Búp sen ngọc","Cúc tím chim loan","Mẫu đơn hồng ngọc","Phượng vàng mây ngọc","Cánh phượng hổ phách"];
 /* ---------- owned markers (save data) ---------- */
+/* owner 18/11 ~21:50Z: the marker's light = HER CURRENT RANK colour (RCOL, vivid), as a RIM glow on an UNDER-layer (.kmglw: the picture's own silhouette, blurred, behind the picture) - light never paints over the picture */
+function kmmGlowCol(){try{return(typeof RCOL!=="undefined"&&RCOL[Math.max(0,Math.min(7,(S&&S.rank)|0))])||KMM_GOLD}catch(e){return KMM_GOLD}}
 function kmmRankNow(){try{if(!S||S.out)return null;if(typeof isSrv==="function"&&isSrv())return null;return Math.max(0,Math.min(7,S.rank|0))}catch(e){return null}}
 function kmmOwned(){try{if(!S)return[];const r=kmmRankNow();if(!Array.isArray(S.meMarks)){S.meMarks=[];if(r!=null)for(let i=0;i<=r;i++)S.meMarks.push(i)}
  else if(r!=null&&!S.meMarks.includes(r)){for(let i=0;i<=r;i++)if(!S.meMarks.includes(i))S.meMarks.push(i)}S.meMarks.sort((a,b)=>a-b);return S.meMarks}catch(e){return[]}}
@@ -46379,7 +46387,7 @@ function kmmHead(src,cb){const o=KMM_HEAD[src];if(o&&o.v)return o.v;if(o){o.w.pu
    for(let y=0;y<h;y++){const q=y*w*4;let n=0;for(let i=0;i<w;i++)if(d[q+i*4+3]>60)n++;if(n>=2){if(t<0)t=y;b=y}}
    if(t>=0){const lim=t+Math.max(2,Math.round((b-t)*.1));let sx=0,n=0;for(let y=t;y<=lim;y++){const q=y*w*4;for(let i=0;i<w;i++)if(d[q+i*4+3]>60){sx+=i;n++}}v={t:t/h,x:n?sx/n/w:.5}}}catch(x){}done(v)};
  im.onerror=()=>done({t:0,x:.5});im.src=src;return null}
-function kitMeMapMark(){try{const r=kmmCur();if(r==null)return"";return `<span class="kmmapmk${kmmMotion()?" kmmove":""}" aria-hidden="true" style="--kmm-mapsc:${((KIT_MEMARK.sc[r]||1)*(KIT_MEMARK.big||1)).toFixed(3)}"><img alt="" draggable="false" src="${kmmSrc(r)}" onerror="this.parentNode.style.display='none'"></span>`}catch(e){return""}}
+function kitMeMapMark(){try{const r=kmmCur();if(r==null)return"";return `<span class="kmmapmk${kmmMotion()?" kmmove":""}" aria-hidden="true" style="--kmm-mapsc:${((KIT_MEMARK.sc[r]||1)*(KIT_MEMARK.big||1)).toFixed(3)};--dh:${kmmGlowCol()}"><img class="kmglw" alt="" draggable="false" src="${kmmSrc(r)}"><img alt="" draggable="false" src="${kmmSrc(r)}" onerror="this.parentNode.style.display='none'"></span>`}catch(e){return""}}
 function kmmMotion(){try{if(matchMedia("(prefers-reduced-motion: reduce)").matches)return false;return!(typeof OPT!=="undefined"&&OPT&&OPT.fxon===false)}catch(e){return false}}
 function kmmIsMe(fig){return!!fig&&(fig.id==="mefig"||!!fig.closest(".kesme"))}
 function kmmAvoid(){const L=[];document.querySelectorAll("#sc-t h2,#kshL,#kshR,.k3chips,.kchip,.kmnote,#j59metag .tag").forEach(e=>{const r=e.getBoundingClientRect();if(r.width>0&&r.height>0)L.push(r)});return L}
@@ -46390,8 +46398,8 @@ function kitMeMark(fig){try{
  if(!fig||!kmmIsMe(fig)||!fig.isConnected)return null;const host=fig.offsetParent||fig.parentElement;if(!host)return null;
  let mk=host.querySelector(":scope>.kmemark");const r=kmmCur();if(r==null){if(mk)mk.remove();return null}
  const src=kmmSrc(r);
- if(!mk){mk=document.createElement("span");mk.className="kmemark";mk.setAttribute("aria-hidden","true");mk.innerHTML=`<img alt="" draggable="false">`;host.appendChild(mk)}
- const im=mk.firstChild;if(im.getAttribute("src")!==src){im.onerror=()=>{mk.style.display="none"};im.onload=()=>{mk.style.display="";kmmSched()};im.setAttribute("src",src)}
+ if(!mk){mk=document.createElement("span");mk.className="kmemark";mk.setAttribute("aria-hidden","true");mk.innerHTML=`<img alt="" draggable="false"><img class="kmglw" alt="" draggable="false">`;host.appendChild(mk)}if(!mk.querySelector(".kmglw"))mk.insertAdjacentHTML("beforeend",`<img class="kmglw" alt="" draggable="false">`);mk.style.setProperty("--dh",kmmGlowCol());
+ const im=mk.firstChild;if(im.getAttribute("src")!==src){im.onerror=()=>{mk.style.display="none"};im.onload=()=>{mk.style.display="";kmmSched()};im.setAttribute("src",src)}const gl=mk.querySelector(".kmglw");if(gl&&gl.getAttribute("src")!==src)gl.setAttribute("src",src);
  const fsrc=fig.currentSrc||fig.getAttribute("src")||"";const hd=fsrc?kmmHead(fsrc,()=>kitMeMark(fig)):{t:0,x:.5};if(!hd){mk.style.visibility="hidden";return mk}
  const B=kmmBox(fig),hr=host.getBoundingClientRect();if(B.bh<20){mk.style.visibility="hidden";return mk}
  const K=KIT_MEMARK,sc=K.sc[r]||1;let H=Math.round(Math.max(K.min*sc,Math.min(K.max*sc,B.bh*K.h*sc))*(K.big||1)); /* owner 17/11 07:15Z: +5 % (K.big, one kit value; 2–8 % allowed) */
@@ -46419,11 +46427,14 @@ try{new MutationObserver(ms=>{if(ms.every(m=>m.target.closest&&m.target.closest(
  .observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:["src","hidden"]})}catch(e){}
 (function(){const st=document.createElement("style");st.id="kmm-css";st.textContent=`
 /* KIT §41.2 kitMeMapMark(): the SAME marker (her owned rank marker, same glow + squash-bounce loop) over HER place on the Dư đồ (owner 17/11 ~12:20Z "dấu ấn ta ở đây ở trên dư đồ"); the map label shows it above the place name, in the label's own scale. */
-.kmmapmk{position:absolute;left:50%;bottom:calc(100% - 1px);height:calc(36px * var(--kmm-mapsc,1));aspect-ratio:1;transform:translateX(-50%);z-index:6;pointer-events:none;display:block;--dh:${KMM_GOLD};filter:drop-shadow(0 1px 1.5px #2a1a1240) drop-shadow(0 0 2px #fff4c8) drop-shadow(0 0 6px var(--dh,#ffc400)) drop-shadow(0 0 12px var(--dh,#ffc400)) drop-shadow(0 0 22px var(--dh,#ffc400))}
+.kmmapmk{position:absolute;left:50%;bottom:calc(100% - 1px);height:calc(36px * var(--kmm-mapsc,1));aspect-ratio:1;transform:translateX(-50%);z-index:6;pointer-events:none;display:block;--dh:${KMM_GOLD}}
 .mspot .mlab:has(>.kmmapmk){position:relative;overflow:visible!important}
 .kmmapmk>img{display:block;width:100%;height:100%;object-fit:contain;object-position:50% 100%;transform-origin:50% 100%}
 @media (prefers-reduced-motion:no-preference){.kmmapmk.kmmove>img{animation:kmmBob 2.6s linear infinite;will-change:transform}}
-.kmemark{--dh:${KMM_GOLD};position:absolute;z-index:6;pointer-events:none;display:block;filter:drop-shadow(0 1px 1.5px #2a1a1240) drop-shadow(0 0 2px #fff4c8) drop-shadow(0 0 6px var(--dh,#ffc400)) drop-shadow(0 0 12px var(--dh,#ffc400)) drop-shadow(0 0 22px var(--dh,#ffc400))}
+.kmemark{--dh:${KMM_GOLD};position:absolute;z-index:6;pointer-events:none;display:block}
+/* KIT GLOW TOKEN (rim glow, one place for every marker): .kmglw = the same picture, painted black, blurred in the rank colour, BEHIND the real picture (same box, exactly under it; the hairline dark rim of the picture hides any antialias fringe); the real picture only gets a hairline dark rim for contrast */
+.kmmapmk>img:not(.kmglw),.kmemark>img:not(.kmglw){position:relative;z-index:1;filter:drop-shadow(0 0 1px #2a1a12b8)}
+.kmmapmk>img.kmglw,.kmemark>img.kmglw{position:absolute;left:0;top:0;width:100%;height:100%;object-fit:contain;object-position:50% 100%;z-index:0;filter:brightness(0) drop-shadow(0 0 1.5px var(--dh)) drop-shadow(0 0 4px var(--dh)) drop-shadow(0 0 9px var(--dh)) drop-shadow(0 0 16px var(--dh))}
 .kmemark>img{display:block;width:100%;height:100%;object-fit:contain;object-position:50% 100%;transform-origin:50% 100%}
 .kesme .kesfi{position:relative}
 /* owner 16/11 (face-sharp): only this small mark moves (own layer), never the figure (KIT motion rule STILL PEOPLE).
@@ -46707,6 +46718,11 @@ if(typeof q72HTML==="function")q72HTML=function(){return ktQ72HTML()};
 /* the tab bar's trailing info slot: pinned to the RIGHT END of the bar (stays visible while the tabs scroll) */
 .pctabs>.pctinfo{flex:0 0 auto;margin-left:auto;align-self:center;position:sticky;right:0;padding:0 2px 0 10px;background:var(--panel);white-space:nowrap}
 .pctabs>.pctinfo .kgl{font-size:.82rem}
+/* KIT RULE (review/kit-subtabs-overflow, K-Q2-1, laws 10+11): a kitSubTabs bar NEVER scrolls sideways and the ⓘ never covers a tab: when the tabs do not fit
+   one line they WRAP to a 2nd row at the SAME fixed tab size (one size per tier; no shrinking, no clipping); ⓘ keeps the right end of the last row.
+   Every kitSubTabs bar (.ktsub: Tài nghệ, Mệnh truyện, Việc nhờ, Ân oán pickers, outside Người nhà/Ra phố, kit page) = this one rule. */
+html body :is(#panel,#kitpage) .kcattabs.ktsub{flex-wrap:wrap!important;overflow:visible!important;row-gap:4px}
+html body :is(#panel,#kitpage) .kcattabs.ktsub>.pctinfo{position:static}
 /* a section header row: title left, chips + ⓘ right, one line */
 .ksech{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 10px;margin:0 0 8px}.ksech .ksechr{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap}
 .ktinfo .kgl{font-size:.82rem;color:var(--gold,#8a5a12);font-weight:600;cursor:pointer;border-bottom:1px dotted currentColor}
@@ -47100,6 +47116,7 @@ KIT_SAMPLES.push(
   kitSkillCard({kind:"story",k:"x",kicker:"Chương 2",name:"Tên chương",level:1,max:4,word:"Hồi",bar:false,next:"",img:kitInfoArt("Mệnh truyện").src})+
   kitEmpty("Việc nhờ","Chưa ai nhờ ngươi việc gì.")+`</div>`},
  {id:"§33.40",title:"kitSubTabs: ⓘ ở cuối thanh tab · kitSecHead: tiêu đề mục + chip + ⓘ",html:()=>{const t=kitSubTabs("kitpg33",[{k:"a",label:"Cầm",doable:2,total:3},{k:"b",label:"Kỳ",doable:0,total:2}],typeof kitInfo==="function"?kitInfo("Việc nhờ"):"");return t.html+kitSecHead("Tứ đức",kitChip("Đức",20,"g"))}},
+ {id:"§46.1",title:"kitSubTabs đầy hàng: 6 tab + ⓘ — xuống hàng 2, cùng cỡ, ⓘ không đè tab",html:()=>{const L=["Luật chương","Nhiệm vụ","Triều cục","Tâm nguyện","Phụ tuyến","Hậu duệ"].map((t,i)=>({k:"t"+i,label:t,n:""}));return kitSubTabs("kitpg46",L,typeof kitInfo==="function"?kitInfo("Luật chương"):"").html}},
  {id:"§46",title:"kitChecks · kitInfo",html:()=>kitChecks([[false,"Sủng 8 (cần 38)"],[true,"Danh 33 (cần 30)"]])+(typeof kitInfo==="function"?kitInfo("Việc nhờ"):"")},
  {id:"§43",title:"Việc gọn (cột hẹp, kpanec)",html:()=>`<div class="pcb ktacts"><div class="kpanec">${pbtn('data-kitsample="3"',"Hỏi han ở tẩm cung ta: ai cần giúp?","tốn: 1 khắc · thành: người ở đây có việc thì ngỏ lời nhờ","")}</div></div>`},
  {id:"§43.1",title:"Việc gọn: dấu ! mở chi tiết (kitActZoom)",html:()=>`<div class="pcb ktacts"><div class="kpanec">${pbtn('data-kitsample="3"',"Hỏi han ở tẩm cung ta: ai cần giúp?","tốn: 1 khắc · thành: người ở đây có việc thì ngỏ lời nhờ","")}</div></div>`});
@@ -60785,7 +60802,7 @@ if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§28.13i",title:"Item 
   return `<div class="kshc kshpick kipc${i===1?" on":""}"><span class="kshpic">${kitItem({src:I.src,name:I.name,grade:I.grade,size:"slot"})}</span><span class="kshn" style="color:${I.col}">${kipE(I.name)}</span><span class="kshe">${kipE(I.use)}</span></div>`}).join("")}</div></div>`}catch(e){return""}}});
 /* ================= jstaff: NAMED PALACE STAFF (owner 16/11, review/elder-staff) =================
    Five named servants hold the palace's offices, each with 3–4 duties (numbers and names in BAL.staff, jbal.js):
-     gt  Giáo tập ma ma, Nội vụ phủ: sent by Thái hậu, in Thái hậu's household; teaches tú nữ, lễ nghi, tuyển tú; the tutorial guide.
+     gt  Giáo tập ma ma, Trữ Tú cung: sent by Thái hậu, in Thái hậu's household; teaches tú nữ, lễ nghi, tuyển tú; the tutorial guide.
      tn  Chưởng sự cô cô, Đức Thọ cung: Thái hậu's woman; her edicts, cung quy, punishments, Tân Giả khố.
      kn  Quản sự ma ma, Càn Ninh cung: Hoàng hậu's woman (kept in Thái hậu's household while the seat is empty); maid assignments,
          lệ bạc, Thượng cung cục, the monthly palace report.
@@ -60878,7 +60895,7 @@ window.elderTabRows=function(){try{const T=S&&S.thO&&S.thO.staff||[];return T.ma
 function giaoBtns(st){const p=postOf(st.eid);const t2=typeof whyTime==="function"?whyTime(B().talk||2):"";const g=B().gift||20;
  return [pbtn(`data-elder="bieu" data-eid="${st.eid}"`,"Biếu",`Bạc -${g} · người ấy quý ngươi +${B().giftAf||10}`,S.bac<g?`cần ${g} bạc`:""),
   pbtn(`data-elder="hoi" data-eid="${st.eid}"${capAt({k:B().talk})}`,"Hỏi chuyện",`${capW()} · ${B().talk} khắc · thành: nghe chuyện ${p.palace}`,t2)]}
-function dutyRows(st){const p=postOf(st.eid);const m=ownerOf(st);return[["Chức",`${p.title} ${p.palace}`,"t"],["Chủ",masterName(m)+(p.master==="hh"&&m===S.thO?" (giữ thay Hoàng hậu)":p.id==="gt"?" sai đến Nội vụ phủ":""),"t"],["Việc",p.duties.join(", "),"t"]]}
+function dutyRows(st){const p=postOf(st.eid);const m=ownerOf(st);return[["Chức",`${p.title} ${p.palace}`,"t"],["Chủ",masterName(m)+(p.master==="hh"&&m===S.thO?" (giữ thay Hoàng hậu)":p.id==="gt"?" sai đến Trữ Tú cung":""),"t"],["Việc",p.duties.join(", "),"t"]]}
 window.elderGroups=st=>{try{return st&&st.eid&&postOf(st.eid)?[["Chức việc",dutyRows(st)],["Giao thiệp",giaoBtns(st)]]:[]}catch(e){return[]}};
 /* ---------- the stage: where each one works; her card = the kit pcard ---------- */
 /* ONE rule (stage, record j95, map): the Giáo tập ma ma visits her room in her first days to teach a new tú nữ; a former palace maid
@@ -60932,11 +60949,11 @@ document.addEventListener("click",e=>{const b=e.target&&e.target.closest&&e.targ
 function tx(s){if(!s||typeof s!=="string"||!S)return s;const tn=elderBy("tn"),gt=elderBy("gt");let o=s;
  if(tn&&!S.thDead){o=o.replace(/Ma ma thân tín của Thái hậu/g,`${tn.call}, người thân tín của Thái hậu,`).replace(/Ma ma bên Đức Thọ cung/g,`${tn.call} bên Đức Thọ cung`)
   .replace(/Ma ma Đức Thọ cung/g,`${tn.call} ở Đức Thọ cung`).replace(/Ma ma của Thái hậu/g,`${tn.call} của Thái hậu`)}
- if(gt)o=o.replace(/[Tt]heo ma ma giáo tập học/g,`Theo ${gt.call}, giáo tập ma ma Nội vụ phủ, học`);
+ if(gt)o=o.replace(/[Tt]heo ma ma giáo tập học/g,`Theo ${gt.call}, giáo tập ma ma Trữ Tú cung, học`);
  return o}
 window.elderTx=tx;
 function eventLines(m){try{if(!m||m.__el||typeof m.h!=="string")return;m.__el=1;m.h=tx(m.h);const gt=elderBy("gt"),tn=elderBy("tn"),kn=elderBy("kn");
- if(m.t==="Tuyển tú"&&gt)m.h+=`<p>${gt.call}, giáo tập ma ma Nội vụ phủ, phụng chỉ Thái hậu dạy quy củ cho tú nữ mới: đi, đứng, quỳ, thưa, từng bước một.</p>`;
+ if(m.t==="Tuyển tú"&&gt)m.h+=`<p>${gt.call}, giáo tập ma ma Trữ Tú cung, phụng chỉ Thái hậu dạy quy củ cho tú nữ mới: đi, đứng, quỳ, thưa, từng bước một.</p>`;
  if(m.t==="Tân Giả khố"&&tn)m.h+=`<p>${tn.call}, chưởng sự cô cô Đức Thọ cung, đọc lệnh phạt: “Cung quy không tha ai. Giặt cho sạch, đủ hạn thì ra.”</p>`;
  if(m.t==="Đổi chủ"&&kn)m.h+=`<p>${kn.call}, quản sự ma ma Càn Ninh cung, ghi tên ngươi vào sổ cung nữ của cung mới.</p>`}catch(e){}}
 if(typeof showModal==="function"){const s0=showModal;showModal=function(){try{if(Q&&Q[0])eventLines(Q[0])}catch(e){}return s0.apply(this,arguments)}}
@@ -63861,7 +63878,7 @@ function kcSoGo(bribe){const b=rsnap();if(kcSoOk(bribe)){S.kpTron=1;S.kc.soOk=1;
 function kcTuyen(early){if(S.kc.tt||S.dead)return;if(!early&&!S.kc.soOk)return;S.kc.tt={early:!!early,raw:5};if(early){S.kpTron=1}
  if(early){pushDil(mkP("kcE",{e:"dien"}),"Điện tuyển");return}pushDil(mkP("kcE",{e:"phuc"}),"Phúc tuyển")}
 function kcBestArt(){let b="cam",v=-1;for(const a of ARTS){if(a.k==="y")continue;const l=(S.arts||{})[a.k]||0;if(l>v){v=l;b=a.k}}return b}
-function kcPhucD(){const k=kcBestArt();const A=ARTS.find(a=>a.k===k);return{who:pMe(),t:`<p>Nội vụ phủ. Các tú nữ lần lượt dâng tài nghệ trước các ma ma và nữ quan. Ngươi chọn môn ${A.n} (bậc ${(S.arts||{})[k]||0}).</p>`,o:[
+function kcPhucD(){const k=kcBestArt();const A=ARTS.find(a=>a.k===k);return{who:pMe(),t:`<p>Trữ Tú cung. Các tú nữ lần lượt dâng tài nghệ trước các ma ma và nữ quan. Ngươi chọn môn ${A.n} (bậc ${(S.arts||{})[k]||0}).</p>`,o:[
  kcO(`Dâng ${A.n}`,{suc:-10},()=>kcPhucPlay(k,false)),kcO("Để tài nghệ quyết định",{suc:-10},()=>kcPhucPlay(k,true))]}}
 function kcPhucPlay(k,skip){if(!isKc()||!S.kc.tt||S.kc.tt.done)return;/* r2-r1: a stale Phúc tuyển card answered after the round never opens the mini-game */S.kc.tt.play=1;const fin=raw=>{if(S.kc.tt.done)return;S.kc.tt.done=1;S.kc.tt.raw=raw;S.kc.tt.art=k;pushDil(mkP("kcE",{e:"dien"}),"Điện tuyển");try{showModal()}catch(e){}};
  if(skip||window.__bot||typeof playArt!=="function"){fin(skip?5:cl(3+R(6),0,10));return}/* fix: the ONE exam seam (jkc2 kc2Play contract) — kind = origin key, info.art = the art she offered, info.phuc = this is the tiểu thư Phúc tuyển */
@@ -66550,7 +66567,8 @@ html body .game .mapv.kpmv.kside.kleather>.kpm-list .btn{background:#fff8e4ee;mi
 `;document.head.appendChild(st)})();
 
 /* §85.6: centre the covering courtyard painting once per slot */
-(function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{const v=document.querySelector(".game.maptab .mapv.kpmv"),sc=v&&v.querySelector(".mapsc");if(sc&&v.dataset.cen!==(v.dataset.kpm||"")){v.dataset.cen=v.dataset.kpm||"";const c=()=>{sc.scrollLeft=(sc.scrollWidth-sc.clientWidth)/2};c();/* dudo-blank: also once the frame is laid out, not only when the picture arrives */requestAnimationFrame(()=>{try{c();requestAnimationFrame(c)}catch(e){}});const im=sc.querySelector(".mapimg");if(im&&!im.complete)im.addEventListener("load",c,{once:true})}}catch(e){}return r}})();
+(function(){const r0=render;render=function(){const r=r0.apply(this,arguments);try{const v=document.querySelector(".game.maptab .mapv.kpmv"),sc=v&&v.querySelector(".mapsc");if(sc&&v.dataset.cen!==(v.dataset.kpm||"")){v.dataset.cen=v.dataset.kpm||"";const c=()=>{sc.scrollLeft=(sc.scrollWidth-sc.clientWidth)/2};c();/* dudo-blank: also once the frame is laid out, not only when the picture arrives */requestAnimationFrame(()=>{try{c();requestAnimationFrame(c)}catch(e){}});const im=sc.querySelector(".mapimg");if(im&&!im.complete)im.addEventListener("load",c,{once:true});/* map-labels r2b: at the default view no hall tag is cut by the visible edge (a hall at the edge: its tag steps inward) */const e=()=>kmEdge(sc);requestAnimationFrame(()=>{e();requestAnimationFrame(e)});setTimeout(e,300);setTimeout(e,900)}}catch(e){}return r}})();
+function kmEdge(sc){try{if(!sc||!sc.isConnected)return;const R=sc.getBoundingClientRect();[...sc.querySelectorAll(".kpm-spot")].forEach(sp=>{sp.style.translate="";const l=sp.querySelector(".mlab");if(!l)return;const r=l.getBoundingClientRect(),k=sp.offsetWidth?sp.getBoundingClientRect().width/sp.offsetWidth:1;if(r.right<=R.left+1||r.left>=R.right-1)return;let dx=0;if(r.left<R.left+4)dx=R.left+6-r.left;else if(r.right>R.right-4)dx=R.right-6-r.right;if(dx)sp.style.translate=dx/k+"px 0"})}catch(e){}}
 /* §85.8: the day's sky (KIT_SKY = weather kind -> sky key in the CSS above; night = buổi tối veil); one attribute, set after every render */
 const KIT_SKY={sun:"sun",dust:"dust",petal:"petal",leaf:"leaf",wind:"wind",mist:"mist",rain:"rain",storm:"storm",snow:"snow",snowh:"snowh",frost:"frost",snowp:"snowp"};
 function kmSkyKey(){try{const k=(S&&S.wx&&S.wx.k)||"dust",night=typeof B4L==="number"&&(S.buoi||0)===B4L;return (KIT_SKY[k]||"dust")+(night?" night":"")}catch(e){return "dust"}}
@@ -68304,7 +68322,7 @@ function entSkipRaw(){try{return Math.round(kg82NpcMean(entArtLv(entKind(entBest
 function entFx(t){const f=BAL.entry.fx[t];if(f&&Object.keys(f).length)try{apply(f)}catch(e){console.error(e)}}
 /* who judges, what the top result is called, per road */
 function entCtx(o){const road=entRoad();const k=S.origin&&S.origin.k;const top=(S.origin&&S.origin.r)||0;const srv=k==="cnv";
- if(o&&o.phuc)return{road:"",head:"Phúc tuyển",judge:"Ma ma, nữ quan Nội vụ phủ",also:"cộng vào Điện tuyển cùng Sắc, Tài, Đức, Danh"};
+ if(o&&o.phuc)return{road:"",head:"Phúc tuyển",judge:"Ma ma, nữ quan Trữ Tú cung",also:"cộng vào Điện tuyển cùng Sắc, Tài, Đức, Danh"};
  if(srv)return{road,head:"Tuyển cung nữ",judge:"Ma ma Nội vụ phủ",also:`Sắc, Đức${road==="dan"?", khéo tay và lễ nghi học ở nhà, tiếng trong xóm, lời lý trưởng":""}`,topN:"phi tần bậc cao",srv:1};
  if(road==="nc")return{road,head:"Lễ ra mắt",judge:"Hoàng thượng, Thái hậu, bá quan",also:"Sắc, Tài, Đức, lễ nghi Đại Hy, lòng Thái hậu, lời sứ thần",topN:RANKS[top].n};
  return{road,head:"Tuyển chọn trước ngày phong",judge:"Hoàng thượng, Thái hậu",also:`Sắc, Tài, Đức, tài nghệ${(S.th||0)>=20?", lòng Thái hậu":""}`,topN:RANKS[top].n,flat:top<=0}}
@@ -69167,7 +69185,7 @@ function agHeard(v,info){if(!agRdOn()||!v||v===S||typeof v!=="object"||!v.alive|
 function agWalk(a,b){try{const B=BAL.ag.kh2.rd;if(!agRdOn()||!((B.see||0)+(B.go||0)))return 0}catch(e){return 0}if(!a||!b||a===b)return 1;
  const W=window.__walkSpill;window.__walkSpill=null;/* her own half-walk (travel's special case) is not the bearer's road */let w=1;try{w=travel(a,b)}catch(e){}finally{window.__walkSpill=W}return Math.max(1,w||1)}
 /* a servant who stands at pl in khắc kh tells her master (not the player — her own servants are part 2c's TIN BÁO) by her own choice */
-function agTell(R,pl,kh,why,who,interest){const B=BAL.ag.kh2.rd;let n=0;
+function agTell(R,pl,kh,why0,who,interest){const B=BAL.ag.kh2.rd;let n=0;let why=null;const wy=()=>why!=null?why:(why=typeof why0==="function"?why0():why0);/* ag-deed-perf: the line (a place name: places() through every wrapper) is built only when a servant tells */
  for(const id in R.P){if(!/^s\d+$/.test(id))continue;const e=R.P[id][kh];if(!e||e[0]!==pl)continue;const s=servById(+id.slice(1));if(!s||s.out)continue;const m=ownerOf(s);
   if(!m||m===S||m===who||!m.alive||m.out)continue;const it=interest?interest(m):1;if(!(it>0))continue;
   const c=mindPick([["tell",B.tell*cl((s.loyal||0)/100,0,1)*it],["quiet",B.quiet]],s);if(c!=="tell")continue;
@@ -69176,9 +69194,9 @@ function agTell(R,pl,kh,why,who,interest){const B=BAL.ag.kh2.rd;let n=0;
   let mp=null;try{mp=R.P["v"+m.id]&&R.P["v"+m.id][Math.min(ks,J95.KH-1)]?R.P["v"+m.id][Math.min(ks,J95.KH-1)][0]:palaceOf(m)}catch(e){}mp=mp||palaceOf(m);
   const due=ks+Math.max(1,agWalk(pl,mp));/* OD 17/11 ~17:55Z (3): she sets off from pl the khắc she saw it; her REAL walk to her master (near 1 / far 2); he hears at the start of khắc due */
   let kg=J95.KH;/* the khắc rows she spends on the road (a far walk: the khắc between); none for a near one */
-  for(let q=ks+1;q<due&&q<J95.KH;q++){const e=R.P[id][q];if(!e||busy(q)||e[1]==="tryst"||e[1]==="meet")break;if(kg===J95.KH)kg=q;R.P[id][q]=[mp,"ag_tell",ledgerId(m),why]}
-  agRdLog(R,id,kh,"ag:tell",ledgerId(m),why,pl);n++;AGD.stat.tell=(AGD.stat.tell||0)+1;
-  const z=agZ();z.rq=z.rq||[];z.rq.push({key:R.key,due,kg,sid:id,m:ledgerId(m),pl,who:who===S?"me":who&&typeof who==="object"?ledgerId(who):null,why,by:ledgerId(s),kh});if(z.rq.length>B.qMax)z.rq.shift()}
+  for(let q=ks+1;q<due&&q<J95.KH;q++){const e=R.P[id][q];if(!e||busy(q)||e[1]==="tryst"||e[1]==="meet")break;if(kg===J95.KH)kg=q;R.P[id][q]=[mp,"ag_tell",ledgerId(m),wy()]}
+  agRdLog(R,id,kh,"ag:tell",ledgerId(m),wy(),pl);n++;AGD.stat.tell=(AGD.stat.tell||0)+1;
+  const z=agZ();z.rq=z.rq||[];z.rq.push({key:R.key,due,kg,sid:id,m:ledgerId(m),pl,who:who===S?"me":who&&typeof who==="object"?ledgerId(who):null,why:wy(),by:ledgerId(s),kh});if(z.rq.length>B.qMax)z.rq.shift()}
  return n}
 /* deliver the news whose khắc has come (her clock passed the teller's khắc): the master hears at the START of that khắc (agHeard k0 = due).
    BAL cap on re-deciders per khắc (low-end phones, OD L1638): over the cap the news waits one khắc. A news due after the buổi's last khắc
@@ -69199,9 +69217,9 @@ function agRdTick(){try{agSpillAll()}catch(e){agdErr("spillAll",e)}if(!agRdOn()|
    /* the khắc she ENTERED: the finished khắc whose result put her there (her walk khắc: her row shows the place from the khắc after it); the
       servants there react the khắc after that (OD L1638: "k1 she enters → k2 maid present / scouts → k3 master knows + acts → k4 visible") */
    let a=kh;try{if(R.P.me)while(a>0&&R.P.me[a-1]&&R.P.me[a-1][0]===me)a--}catch(e){}/* = the first khắc she STANDS there (owner: k1 her walk, k2 seen + the maid walks, k3 the master knows) */
-   if(moved&&me&&me!=="home")agTell(R,me,a,`nghe tin ngươi đến ${agPlaceTxt(me)}`,S,m=>{let x=0;try{x=agNeedsC(m)}catch(e){}return x?1:0})}
+   if(moved&&me&&me!=="home")agTell(R,me,a,()=>`nghe tin ngươi đến ${agPlaceTxt(me)}`,S,m=>{let x=0;try{x=agNeedsC(m)}catch(e){}return x?1:0})}
   for(const p of agZ().pend){if(p.key!==R.key||p.st||p.kh>kh||p.drop||p.gone)continue;p.st=1;const d=agTgt(p.id),t=agTgt(p.t);
-   agTell(R,p.pl,kh,`nghe tin ${d&&d.name?d.name:""} ${p.act} ở ${agPlaceTxt(p.pl)}`,t&&t!==S?t:d,m=>{const a=typeof d==="object"&&d&&d!==m?Math.abs(aff(m,d)):0,b=typeof t==="object"&&t&&t!==m?Math.abs(aff(m,t)):0;return (a+b)/100})}}
+   agTell(R,p.pl,kh,()=>`nghe tin ${d&&d.name?d.name:""} ${p.act} ở ${agPlaceTxt(p.pl)}`,t&&t!==S?t:d,m=>{const a=typeof d==="object"&&d&&d!==m?Math.abs(aff(m,d)):0,b=typeof t==="object"&&t&&t!==m?Math.abs(aff(m,t)):0;return (a+b)/100})}}
  catch(e){agdErr("rd",e)}finally{AG.inRd=0}}
 /* 2d3 (ag-kh2 G9 red on base): a servant sent to rest / punished in the middle of a buổi (j95 jplx list → her row "offduty" / "laundry" from now)
    is not free any more: her deeds not over yet on those khắc drop (the agSlot rule: an off-duty khắc is not hers), so no deed claims a row it
@@ -74428,7 +74446,10 @@ function placeEnt(){try{const en=$("kpent"),st=$("stage");if(!en||en.hidden||!st
  if(mk&&mk.getClientRects().length){const R=st.getBoundingClientRect(),q=mk.getBoundingClientRect(),c=ch.getBoundingClientRect();
   if(q.right>c.left-4&&q.left<c.right+4&&q.top<c.bottom+2&&q.bottom>c.top-2)en.style.left=Math.round(q.right-R.left+8)+"px"}}catch(e){}}
 function lay2(){lay();placeEnt();clearTimeout(lay2.a);clearTimeout(lay2.b);lay2.a=setTimeout(placeEnt,400);lay2.b=setTimeout(placeEnt,1300)}
-const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);lay2();return r};
+/* ag-deed-perf (C-AG #12 18/11): a stage redraw INSIDE a sim step (j95 final wrapper, window.__rdefer > 0) queues lay2 (layout reads only:
+   getBoundingClientRect + the toast/name/chip DOM; nothing in S) with the other stage fits for the next frame (jlag2 renderAfter, coalesced;
+   a render() before then flushes it); every other redraw runs it at once, as before */
+const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);if(window.__rdefer>0&&typeof window.renderAfter==="function")renderAfter("plst-lay",lay2);else lay2();return r};
 try{addEventListener("resize",()=>{clearTimeout(lay.__t);lay.__t=setTimeout(lay2,90)})}catch(e){}
 /* (1) the count chip: the kit rail's first slot */
 try{if(window.kitStageRail)kitStageRail.add({id:"here",order:0,chip:()=>{const n=hereN();return n&&typeof j59ico==="function"?`<span class="kchip n j59hchip" role="img" aria-label="Ở đây còn ${n} người">${j59ico()}<span class="j59n">${n}</span></span>`:""},when:()=>hereN()>0&&onStage()})}catch(e){}
@@ -74583,57 +74604,6 @@ let NFON=0;function nfInstall(){if(NFON||typeof window.nfStep!=="function"||type
 nfInstall();if(!NFON)try{window.addEventListener("load",nfInstall)}catch(e){}
 window.stealMgDebug=()=>({tok:[...TOK.entries()].map(([a,t])=>[a===S?"me":a&&a.id,t]),nfup:NFUP,frup:FRUP,frw:FRW,ghold:GHOLD,held:!!HELD,busy:BUSY,st:ST.slice(-20)});
 })();
-/* ================= jmapz: SECOND LEVEL OF CÀN NINH / ĐỨC THỌ + HER PEOPLE WHERE THEY REALLY ARE (KIT §85.10) =================
-   Owner OD 18/11 ~19:25Z (4)(5) + ~19:45Z (verbatim in dev/OWNER_DECISIONS.md). The Dư đồ ZONES of 19:25Z (1)(2) were CANCELLED by the owner
-   at ~19:45Z ("Thêm một tầng nữa mất công một lần bấm nó rối"): consort palaces keep their own tags; the zone/zoom/fog code is in git history
-   (review/map-zones 5692c687, jmapz.js sections 1-2) if a zoom is ever wanted again.
-   (a) Càn Ninh (Hoàng hậu) and Đức Thọ (Thái hậu) open the courtyard (jpm kitPalaceMap) with Chính điện / Đông phối điện / Tây phối điện while
-       she may walk in; each hall: "N bóng người" (people she meets = map count) + "K cung nhân" = that household's servants the ONE ledger
-       (S.roster, j95) puts there NOW, by what the record says they do. Counts only.
-   (b) HER palace: the servants' row names HER people where the ledger puts them now (in the palace / away "(ở <place>)").
-   Wraps only (kpmParts, kpmDir, kpmArt, kpmSplit, kitPalaceMap, renderStage). */
-/* ================= (3) SECOND LEVEL: Càn Ninh (Hoàng hậu) + Đức Thọ (Thái hậu) ================= */
-/* plaque names of the new halls (jhall pattern: chính = 2 chars + điện; Đông = + hiên; Tây = + trai; unique in the table) */
-try{if(typeof HALL_PN==="object"){HALL_PN["Càn Ninh cung"]=["Mẫu Nghi điện","Khôn Hòa hiên","Thục Thận trai"];HALL_PN["Đức Thọ cung"]=["Từ Khang điện","Di Xuân hiên","An Thọ trai"]}}catch(e){}
-/* the record's activity → the hall it happens in (ACT95 codes, j95) */
-const MAPZ_ACTHALL={serve:"chinh",attend:"chinh",receive:"chinh",greet:"chinh",visit:"chinh",watch:"chinh",audience:"chinh",follow:"chinh",here:"chinh",provoke:"chinh",
- clean:"dong",brew:"dong",work:"dong",book:"dong",laundry:"dong",oversee:"dong",
- rest:"tay",sleep:"tay",nap:"tay",eat:"tay",offduty:"tay",read:"tay",pray:"tay"};
-function mapzHallOfAct(a){if(/^ag_/.test(a||""))return"tay";/* her own deed (jagday/jagstaff: embroidery, errands of her own) = in the servants' rooms */return MAPZ_ACTHALL[a]||"chinh"}
-/* the household of a palace key: [ledger ids of its servants] (Hoàng hậu: her staff + trusted maid; Thái hậu: her household; her own: S.staff + S.maid) */
-function mapzHousehold(k){const L=[];try{
- if(k==="kn"){const q=rivals.find(v=>v.queen&&v.alive&&!v.out);if(q){if(q.maid&&q.maid.name)L.push(["mm:"+q.id,q.maid.name]);for(const s of q.staff||[])if(s&&s.sid!=null)L.push(["s"+s.sid,s.name])}}
- else if(k==="tn"){if(!S.thDead)for(const s of (S.thO&&S.thO.staff)||[])if(s&&s.sid!=null)L.push(["s"+s.sid,s.name])}
- else if(k==="home"){if(S.maid&&S.maid.name&&!(typeof isSrv==="function"&&isSrv()))L.push(["mm:me",S.maid.name]);for(const s of S.staff||[])if(s&&s.sid!=null)L.push(["s"+s.sid,s.name])}}catch(e){}return L}
-/* where each of them is NOW in the ONE ledger (S.roster): {in:{chinh:[],dong:[],tay:[]},away:[[name,placeKey,why]]}; null when the record is off */
-function mapzStaffNow(k){try{const R=S&&S.roster;if(!R||!R.P||(typeof j95key==="function"&&R.key!==j95key()))return null;const kh=typeof j95kh==="function"?j95kh():0;const O={in:{chinh:[],dong:[],tay:[]},away:[],n:0};
- for(const [id,name] of mapzHousehold(k)){const e=R.P[id]&&R.P[id][kh];if(!e)continue;O.n++;if(e[0]===k)O.in[mapzHallOfAct(e[1])].push([name,e[1]]);else O.away.push([name,e[0],e[3]||""])}return O}catch(e){return null}}
-function mapzPlaceName(k){try{if(k==="home")return S.pal!=null?PALN[S.pal]:HOMEN;if(typeof J95OUT_!=="undefined"&&k===J95OUT_)return"ngoài cung";return palName(k)}catch(e){return k||""}}
-/* jpm hooks: Càn Ninh and Đức Thọ get the three painted halls (Đức Thọ: the Càn Ninh courtyard as a 'tạm' stand-in until its own painting exists — ART REQUEST) */
-if(typeof kpmParts==="function"){
- /* only while she may walk in now: a locked / out-of-khắc Càn Ninh or Đức Thọ keeps the one-hall tap = the place card with «Lẻn vào» / walk-spill (OD 18/11 ~19:15Z, L1417) */
- const mapzOpenNow=k=>{try{const st=accState(k);return !(st&&st.why&&!st.here)}catch(e){return true}};
- const pp0=kpmParts;kpmParts=function(slot,k,nm){if((slot==="kn"||slot==="p:tn")&&mapzOpenNow(slot==="kn"?"kn":"tn")){const n=slot==="kn"?"Càn Ninh cung":"Đức Thọ cung";return KPM_PARTS.map(x=>[x[0],hallName(n,x[0])])}return pp0.apply(this,arguments)};
- const pd0=kpmDir;kpmDir=function(slot){if(slot==="p:tn")return S&&!S.thDead?"nhat-can-ninh":null;return pd0.apply(this,arguments)};
- const pa0=kpmArt;kpmArt=function(slot){const A=pa0.apply(this,arguments);if(A&&slot==="p:tn")A.tam=true;return A};
- const ps0=kpmSplit;kpmSplit=function(k){const O=ps0.apply(this,arguments);try{if(k==="kn"||k==="tn"){/* guests stay in the chính điện (as before); the household by what the record says they do */
-   const N=mapzStaffNow(k);if(N){for(const h of ["chinh","dong","tay"]){O[h].srv=N.in[h].length}O.away=N.away.length;O.hh=N.n}
-}}catch(e){}return O};
- const pm0=kitPalaceMap;kitPalaceMap=function(o){let h=pm0.apply(this,arguments);try{const k=o.k;const mh=typeof kpmMine==="function"?kpmMine(o.slot):null;if(k!=="kn"&&k!=="tn"&&k!=="home"&&!mh)return h;
-   if(k==="home"||mh){/* her people, by name, where the record puts them now */const N=mapzStaffNow("home");if(!N)return h;
-    const inL=[].concat(N.in.chinh,N.in.dong,N.in.tay).map(x=>x[0]);const away=N.away.map(([n,pk])=>`${n} (ở ${mapzPlaceName(pk)})`);
-    const line=`<span class="kpm-rs kpm-who">${inL.length?"Trong cung: "+inL.join(", "):"Không ai ở trong cung"}${away.length?` · Đi vắng: ${away.join(", ")}`:""}</span>`;
-    const rp=k==="home"&&!mh?"cungnhan":mh;h=h.replace(new RegExp('(<button class="btn kpm-row[^"]*" data-kpmpart="'+rp+'">[\\s\\S]*?)(</button>)'),(a,x,y)=>x+line+y);
-    return h}
-   const SP=kpmSplit(k);const add=(t,n)=>/^vắng/.test(t)?`${n} cung nhân`:`${t} · ${n} cung nhân`;
-   for(const part of ["chinh","dong","tay"]){const n=(SP[part]&&SP[part].srv)||0;if(!n)continue;
-    h=h.replace(new RegExp(`(data-go="kpm:${part}"[^>]*><span class="mlab">[^<]*<i>)([^<]*)(</i>)`),(a,x,t,y)=>x+add(t,n)+y);
-    h=h.replace(new RegExp(`(data-kpmpart="${part}"><b class="kpm-rn">[^<]*</b><span class="kpm-rs">)([^<]*)(</span>)`),(a,x,t,y)=>{const m=/^(.*?· )?(.*)$/.exec(t);return x+(m[1]||"")+add(m[2],n)+y})}
-   if(SP.hh)h=h.replace(/(<button class="btn kpm-row[^"]*" data-kpmpart="chinh">[\s\S]*?)(<\/button>)/,(a,x,y)=>x+`<span class="kpm-rs kpm-who">Cung nhân: ${SP.hh-(SP.away||0)} trong cung${SP.away?` · ${SP.away} đi vắng`:""}</span>`+y)}catch(e){console.error("jmapz kpm",e)}return h};
-}
-/* the room line in a side hall of Càn Ninh / Đức Thọ: what the record says the household does there (the stage draws no household servants of other palaces, j95vis) */
-(function(){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{const h=typeof kpmHall==="function"&&kpmHall();if(!h||h.place||(h.k!=="kn"&&h.k!=="tn"))return r;
-  const m=document.querySelector("#sc-t .rmsg");if(!m)return r;const N=mapzStaffNow(h.k);const n=N?N.in[h.part].length:0;const t=` · ${hallRole(h.part)}. ${n?`${n} cung nhân đang ${h.part==="dong"?"quét dọn, sắp đồ":h.part==="tay"?"nghỉ ngơi":"đứng hầu"} ở đây.`:"Không có ai ở đây."}`;if(m.textContent!==t){m.textContent=t;m.title=t}}catch(e){}return r}})();
 
 /* jcoopthin: CO-OP THIN GUEST, part A = foundations (review/coop-thin-a; audit dev/handover/reports/coop-thin-guest-audit.md §2-3;
    owner GO 17/11: host-authoritative thin guest, part by part, end state = the guest only displays the host's state).
@@ -75775,7 +75745,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="f98f4928dea4";window.CTM_BUILD=BUILD;
+const BUILD="5ae22026e6b8";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

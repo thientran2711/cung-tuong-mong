@@ -129,6 +129,11 @@ if(typeof q72HTML==="function")q72HTML=function(){return ktQ72HTML()};
 /* the tab bar's trailing info slot: pinned to the RIGHT END of the bar (stays visible while the tabs scroll) */
 .pctabs>.pctinfo{flex:0 0 auto;margin-left:auto;align-self:center;position:sticky;right:0;padding:0 2px 0 10px;background:var(--panel);white-space:nowrap}
 .pctabs>.pctinfo .kgl{font-size:.82rem}
+/* KIT RULE (review/kit-subtabs-overflow, K-Q2-1, laws 10+11): a kitSubTabs bar NEVER scrolls sideways and the ⓘ never covers a tab: when the tabs do not fit
+   one line they WRAP to a 2nd row at the SAME fixed tab size (one size per tier; no shrinking, no clipping); ⓘ keeps the right end of the last row.
+   Every kitSubTabs bar (.ktsub: Tài nghệ, Mệnh truyện, Việc nhờ, Ân oán pickers, outside Người nhà/Ra phố, kit page) = this one rule. */
+html body :is(#panel,#kitpage) .kcattabs.ktsub{flex-wrap:wrap!important;overflow:visible!important;row-gap:4px}
+html body :is(#panel,#kitpage) .kcattabs.ktsub>.pctinfo{position:static}
 /* a section header row: title left, chips + ⓘ right, one line */
 .ksech{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:4px 10px;margin:0 0 8px}.ksech .ksechr{display:inline-flex;align-items:center;gap:6px;flex-wrap:wrap}
 .ktinfo .kgl{font-size:.82rem;color:var(--gold,#8a5a12);font-weight:600;cursor:pointer;border-bottom:1px dotted currentColor}
