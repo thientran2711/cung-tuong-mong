@@ -516,7 +516,7 @@ B8 SAMPLE c01 a18 t1–t8 colour-only | _review CDN consort-tiers/c01/b7 + hando
 | REVIEW hud-mood-bar 04bb279 (SMALL; sonnet; brief briefs/review-hud-mood-bar.md) | review/hud-mood-bar | MAIN ROOT-46 | session_01UV1Szgt5ATvToTiS3v5M3Z | RUNNING | 18/11 05:54Z |
 | place-stage r5 (owner pick B 501 + vivid marker + 4-person iPad trial; sonnet; brief briefs/place-stage-r5.md; r4 SzjeRxj archived) | review/place-stage | MAIN ROOT-46 | session_01UV1SzkV3Bc1u4BHrVH1jFj | RUNNING | 18/11 05:54Z |
 | look-fx-wire #6 (R9c LOOK fails: hard wedge/box edge round marks, mouth speck, harness shots; sonnet; brief briefs/look-fx-wire-6.md; #5 archived) | review/look-fx-wire | MAIN ROOT-46 | session_01UV1Szj7AXEQ5AejCQrVCNJ | RUNNING | 18/11 06:02Z |
-| REVIEW emo-seal-vanish 631ad03 (SMALL; sonnet; prompt inline) | review/emo-seal-vanish | MAIN ROOT-46 | session_01UV1SziaV41D5V819KWSfQU | RUNNING | 18/11 06:00Z |
+| REVIEW emo-seal-vanish 631ad03 (SMALL; sonnet; prompt inline) | review/emo-seal-vanish | MAIN ROOT-46 | session_01UV1SziaV41D5V819KWSfQU | PASS 22891730 (r6) | 18/11 06:00Z |
 | E8 STEAL MINI-GAME (PL #3b; opus; BIG; brief briefs/E8-steal-minigame.md) | review/steal-minigame | E ROOT #2 | session_01DgYSWm5h3LgBS7jeBr3BtW | RUNNING | 18/11 06:06Z |
 
 M1 emperors emp1..4 a26/a36/a51 | _review CDN men/emperor | C | session_011xDdVQBz2KHs59V8xnTA4S | RUNNING | 2026-11-18T06:05Z
