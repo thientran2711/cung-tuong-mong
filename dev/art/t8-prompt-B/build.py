@@ -930,4 +930,9 @@ if __name__=="__main__":
             _n=_o.count(_old8)+_o.count(_old7); assert _n==1,("head slot not found",_n)
             _o=_o.replace(_old8,"a FULL tall imperial crown, clearly taller and wider than a noble consort's crown, "+HEAD[_k]+";").replace(_old7,HEAD[_k]+".")
     if NUDE2: _o=nude2(_o,a[0],NUDE2)
+    # owner 18/11 ~22:55Z (FIGURE_GATE A0 REFERENCES): ROYAL cases (--trieu N>=6, --state nude, --state bd6) = 3 images, image 3 = royal-yellow swatch. One flag-independent sentence; every other output byte-identical.
+    if (TRIEUN is not None and TRIEUN>=6) or STATE in ("nude","bd6"):
+        _r=" Image 3 is only a colour reference for the royal yellow, never copy anything but its colour; the royal yellow in the robe is exactly that colour."
+        assert _o.count(END)==1 and _o.endswith(END),"END not at end"
+        _o=_o[:-len(END)]+_r+END
     print(_o,end="")
