@@ -55,3 +55,4 @@ b10-a26-c23-c32 (cont.) | CDN _review only | W60d session_011xDdVQACckBi7ydyWzJj
 b10-a36-c23-c32 (cont.) | CDN _review only | W63f session_011xDdVNP9vpwSWD4MCe2jrh (W63e archived) | RUNNING | 2026-11-18T17:39Z (Foreman C ROOT-29)
 a18-scan-2 regens | CDN _review only | W65d session_011xDdVQVsntxHXp735x2for (W65c archived) | RUNNING | 2026-11-18T17:40Z (Foreman C ROOT-29)
 quoc-tang-sample | CDN _review only | W70 session_011xDdVSaNiUfxn72JcAYZo8 | DONE (archived) | 2026-11-18T17:17Z (Foreman C ROOT-28)
+a18-t7t8-scan | scan only, no gens | W71 session_011xDdVRiT8Bh4RBNGVwjVBv | RUNNING | 2026-11-18T17:45Z (Foreman C ROOT-29)
