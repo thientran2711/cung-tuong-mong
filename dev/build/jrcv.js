@@ -47,7 +47,7 @@ PEND.rcvHelp=pp=>{const p=RV(pp.a);if(!p||!p.alive||p.out)return null;
 function rcvGiftIn(f,t,e){if(!t||t===S||t.coop||!e)return null;const it=itm(e.k),hi=rkOf(f)>rkOf(t);const tg=!!e.t;
  const O=[{i:[0,1],id:"take",go:()=>"take"},
   {i:2,id:"back",go:()=>{if(f===S)S.inv.push(Object.assign({},e));else{f.inv=f.inv||[];f.inv.push(Object.assign({},e))}relAdd(t,f,hi?BAL.eff.j8.go_2[0]:BAL.eff.j8.go_2[1]);return"back"}},
-  {i:3,id:"check",lk:()=>(t.bac||0)<BAL.rcv.chk,go:()=>{ap(t,{bac:-BAL.rcv.chk});if(tg&&roll(oddsCl(oSee(t,true)+25))){evA(t,f,BAL.eff.j8.evGo);if(typeof ilGone==="function")ilGone(t,Object.assign({},e),"evid",{own:key(f)});return"found"}
+  {i:3,id:"check",lk:()=>(t.bac||0)<BAL.rcv.chk,go:()=>{ap(t,{bac:-BAL.rcv.chk});if(tg&&roll(oddsCl(oSee(t,true)+25))){evA(t,f,BAL.eff.j8.evGo);if(typeof ilGone==="function")ilGone(t,Object.assign({},e),"evid",{own:key(f)});return `${t.name} đem ${it.n} của ${NM(f)} đến Thái y viện xét: đồ có vấn đề, nàng nắm ${balAb(BAL.eff.j8.evGo)} chứng cứ. `}
    relAdd(t,f,BAL.eff.j8.go_3);return"check"}}];
  const c=rcvPick(t,f,O,"gift");return c?c.go():null}
 Object.assign(window,{rcvP,rcvW,rcvWord,rcvPick,rcvHelpOpts,helpAsk,rcvGiftIn});

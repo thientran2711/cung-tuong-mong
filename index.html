@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"9119c2f8+","t":"2026-11-18T21:02Z","c":"receiver-choice: per-kind factor BAL.rcv.k (throne orders rarely refused), summons Sức one number BAL.rcv.sumSuc; receiver rows in the ONE …","b":"a0d6219aa9e7","h":[{"s":"c67d248d+","t":"2026-11-18T19:53Z","c":"ag-deed-perf: site build (index.html, sw.js)"},{"s":"6aab33ad","t":"2026-11-18T20:05Z","c":"KIT_REQUESTS: K-Q2-1 DONE 048f3c7"},{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"},{"s":"a5013222+","t":"2026-11-18T18:03Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)"},{"s":"08774c0e+","t":"2026-11-18T17:38Z","c":"ag-stf2 (test only): bribe histogram picks a servant whose lòng moves her bribe odds. Root of the 'disloyal one takes more' red (npc ~3/20,…"},{"s":"0351e140","t":"2026-11-18T16:48Z","c":"shop-panel: «Để ta xem» outside option, 3-column Mua/Bán grid, smallest picture strip, test"},{"s":"ebf25660+","t":"2026-11-18T15:29Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…"},{"s":"9f9c6c2b+","t":"2026-11-18T14:26Z","c":"shown-odds-one-path r1: plant on the spot is done in person (actCtx x.here, no sent-servant pen); Vì sao names spy knowledge (whyKnow); tes…"},{"s":"aa997f3c+","t":"2026-11-18T13:46Z","c":"look-fx r13: index.html / sw.js rebuilt from merged sources"},{"s":"4475ea24+","t":"2026-11-18T12:33Z","c":"grand-endings-engine: site rebuilt (index.html / sw.js / assets.json) after fix 4 + main merge"}]};
+window.CTM_BI={"s":"3212c76e+","t":"2026-11-18T21:26Z","c":"receiver-choice: Thái y viện check bạc one number BAL.rcv.chk (her giftin card + NPC receiver); shots script (Fold/iPad); site build","b":"ef202cb3ad85","h":[{"s":"c67d248d+","t":"2026-11-18T19:53Z","c":"ag-deed-perf: site build (index.html, sw.js)"},{"s":"6aab33ad","t":"2026-11-18T20:05Z","c":"KIT_REQUESTS: K-Q2-1 DONE 048f3c7"},{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"},{"s":"a5013222+","t":"2026-11-18T18:03Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)"},{"s":"08774c0e+","t":"2026-11-18T17:38Z","c":"ag-stf2 (test only): bribe histogram picks a servant whose lòng moves her bribe odds. Root of the 'disloyal one takes more' red (npc ~3/20,…"},{"s":"0351e140","t":"2026-11-18T16:48Z","c":"shop-panel: «Để ta xem» outside option, 3-column Mua/Bán grid, smallest picture strip, test"},{"s":"ebf25660+","t":"2026-11-18T15:29Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…"},{"s":"9f9c6c2b+","t":"2026-11-18T14:26Z","c":"shown-odds-one-path r1: plant on the spot is done in person (actCtx x.here, no sent-servant pen); Vì sao names spy knowledge (whyKnow); tes…"},{"s":"aa997f3c+","t":"2026-11-18T13:46Z","c":"look-fx r13: index.html / sw.js rebuilt from merged sources"},{"s":"4475ea24+","t":"2026-11-18T12:33Z","c":"grand-endings-engine: site rebuilt (index.html / sw.js / assets.json) after fix 4 + main merge"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -2188,7 +2188,7 @@ function giveTo(a,r,ix){const e=a.inv[ix];if(!e||e.h)return"";window.__giftTaint
  /* RECEIVER CHOICE (jrcv rcvGiftIn, OD 18/11 ~21:15Z law 1): the NPC answers with HER giftin answers, the same numbers */
  const ans=typeof rcvGiftIn==="function"?rcvGiftIn(a,r,ent):null;
  if(ans==="back")return `${r.name} trả lại ${it.n} cho ${NM(a)}. `;
- if(ans==="found")return `${r.name} đem ${it.n} của ${NM(a)} đến Thái y viện xét: đồ có vấn đề, nàng nắm ${balAb(BAL.eff.j8.evGo)} chứng cứ. `;
+ if(ans&&!["take","check"].includes(ans))return ans;/* «found»: the line comes from jrcv (where the rule reads evGo) */
  r.inv.push(ent);if(ans!=="check"&&e.t&&roll(oSee(r,true))){r.inv.pop();/*evok: tainted gift (taint = scheme)*/evA(r,a,BAL.eff.j8.evGiveTo);relAdd(a,r,BAL.eff.j8.giveTo);return `${r.name} nhận ${it.n} của ${NM(a)} nhưng người của nàng phát hiện đồ có vấn đề: nàng nắm ${balAb(BAL.eff.j8.evGiveTo)} chứng cứ. `}
  if(itm(e.k).sl&&(IT[e.k]||{}).rk>rkOf(r)&&(hasT(r,"Kiêu ngạo")||hasT(r,"Tham vọng")||roll(25)))wear(r,r.inv.length-1);
  return `${NMc(a)} tặng ${it.n} cho ${r.name}: thiện cảm +${g+3}. `}
@@ -71493,7 +71493,7 @@ PEND.rcvHelp=pp=>{const p=RV(pp.a);if(!p||!p.alive||p.out)return null;
 function rcvGiftIn(f,t,e){if(!t||t===S||t.coop||!e)return null;const it=itm(e.k),hi=rkOf(f)>rkOf(t);const tg=!!e.t;
  const O=[{i:[0,1],id:"take",go:()=>"take"},
   {i:2,id:"back",go:()=>{if(f===S)S.inv.push(Object.assign({},e));else{f.inv=f.inv||[];f.inv.push(Object.assign({},e))}relAdd(t,f,hi?BAL.eff.j8.go_2[0]:BAL.eff.j8.go_2[1]);return"back"}},
-  {i:3,id:"check",lk:()=>(t.bac||0)<BAL.rcv.chk,go:()=>{ap(t,{bac:-BAL.rcv.chk});if(tg&&roll(oddsCl(oSee(t,true)+25))){evA(t,f,BAL.eff.j8.evGo);if(typeof ilGone==="function")ilGone(t,Object.assign({},e),"evid",{own:key(f)});return"found"}
+  {i:3,id:"check",lk:()=>(t.bac||0)<BAL.rcv.chk,go:()=>{ap(t,{bac:-BAL.rcv.chk});if(tg&&roll(oddsCl(oSee(t,true)+25))){evA(t,f,BAL.eff.j8.evGo);if(typeof ilGone==="function")ilGone(t,Object.assign({},e),"evid",{own:key(f)});return `${t.name} đem ${it.n} của ${NM(f)} đến Thái y viện xét: đồ có vấn đề, nàng nắm ${balAb(BAL.eff.j8.evGo)} chứng cứ. `}
    relAdd(t,f,BAL.eff.j8.go_3);return"check"}}];
  const c=rcvPick(t,f,O,"gift");return c?c.go():null}
 Object.assign(window,{rcvP,rcvW,rcvWord,rcvPick,rcvHelpOpts,helpAsk,rcvGiftIn});
@@ -75763,7 +75763,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="a0d6219aa9e7";window.CTM_BUILD=BUILD;
+const BUILD="ef202cb3ad85";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

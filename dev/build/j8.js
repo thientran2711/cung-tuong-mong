@@ -260,7 +260,7 @@ function giveTo(a,r,ix){const e=a.inv[ix];if(!e||e.h)return"";window.__giftTaint
  /* RECEIVER CHOICE (jrcv rcvGiftIn, OD 18/11 ~21:15Z law 1): the NPC answers with HER giftin answers, the same numbers */
  const ans=typeof rcvGiftIn==="function"?rcvGiftIn(a,r,ent):null;
  if(ans==="back")return `${r.name} trả lại ${it.n} cho ${NM(a)}. `;
- if(ans==="found")return `${r.name} đem ${it.n} của ${NM(a)} đến Thái y viện xét: đồ có vấn đề, nàng nắm ${balAb(BAL.eff.j8.evGo)} chứng cứ. `;
+ if(ans&&!["take","check"].includes(ans))return ans;/* «found»: the line comes from jrcv (where the rule reads evGo) */
  r.inv.push(ent);if(ans!=="check"&&e.t&&roll(oSee(r,true))){r.inv.pop();/*evok: tainted gift (taint = scheme)*/evA(r,a,BAL.eff.j8.evGiveTo);relAdd(a,r,BAL.eff.j8.giveTo);return `${r.name} nhận ${it.n} của ${NM(a)} nhưng người của nàng phát hiện đồ có vấn đề: nàng nắm ${balAb(BAL.eff.j8.evGiveTo)} chứng cứ. `}
  if(itm(e.k).sl&&(IT[e.k]||{}).rk>rkOf(r)&&(hasT(r,"Kiêu ngạo")||hasT(r,"Tham vọng")||roll(25)))wear(r,r.inv.length-1);
  return `${NMc(a)} tặng ${it.n} cho ${r.name}: thiện cảm +${g+3}. `}
