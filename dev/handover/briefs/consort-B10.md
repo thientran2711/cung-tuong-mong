@@ -1,0 +1,10 @@
+# BRIEF B10 — 3 colour versions per figure (Foreman C ROOT-18, 18/11 ~08:18Z real)
+OWNER (verbatim): "Bây giờ á là mày tao cần á là làm hai thứ. Thứ nhất đêm nay á là hình góc như thế nào thì vẫn vẽ trên nền trong và 2K, giữ y nguyên màu sắc, y nguyên tư thế, chỉ có bỏ thêm M09 để làm cái mẫu da thôi. Tức là tao vẫn muốn giữ cái bộ đồ của hình góc, đồng thời vẽ thêm một cái bộ đồ, một cái màu mới. Mày hiểu ý tao không? Để làm gì? Sau này vào game á, tao có thể thay đồ cho các cái nhân vật của tao. Tức là mỗi một bức hình góc, mỗi một phẩm vẽ làm 3 màu khác nhau, tức là màu gốc và thêm 2 màu mới. Mày hiểu ý tao không? Nhưng mà vẫn giữ cái phong cách vẽ giống như là cái hình C04 vừa rồi mày vẽ vậy đó. Của hoàng hậu á, là bởi vì hoàng hậu là có màu vàng, thì bây giờ mình sẽ có một hình góc là hình màu gốc, một cái hình màu vàng và một cái hình màu khác. Của hoàng quý phi cũng tương tự, tức là hình màu gốc, một cái hình và 2 cái hình còn lại màu khác, nhưng mà phải có màu vàng giống với cái màu vàng của hoàng hậu. Ok."
+PER PERSON, PER RANK t1–t8 (a18), THREE files, all with the C4a one-gen method (refs = m09 in the STYLE slot for skin/drawing style/fabric + the LIVE original img/hd/fig-consort-<cNN>-tN-a18.webp; prompt "copy EXACTLY hair, headdress, face, costume, pose, fabric material and stitching; ..."), 2K, transparent, style like the approved c04 v4:
+- v0 ORIGINAL: original colours kept exactly (only m09 skin/style) — "y nguyên màu sắc, y nguyên tư thế".
+- v1 + v2: two NEW colours (ONLY the robe colour changes).
+- t8 Hoàng hậu: v0 original + v1 warm golden YELLOW + v2 another colour.
+- t7 Hoàng quý phi: v0 original + v1/v2 other colours that carry the SAME yellow as her t8 yellow.
+Also (FIGURE_GATE): remove hoa điền/forehead marks; one held item, no cup; t1–t6 no phoenix (replace); t7/t8 phoenix main stitched; no soft/feet wording.
+Already-made recolours (b9 / b8s / v4) count as v1 where they follow C4a; then make v0 + v2.
+OUTPUT img/_review/consort-tiers/<cNN>/b10/<cNN>_a18_tN_v0|v1|v2.png + one sheet per person (rows = v0/v1/v2, columns t1–t8). Report §B10. READY per person.
