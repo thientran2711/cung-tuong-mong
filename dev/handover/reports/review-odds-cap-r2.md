@@ -43,3 +43,13 @@ Reviewer opus, 18/11. START_CTX ≈ 4 % (estimate). Brief: dev/handover/briefs/D
 - The round-3 notes still stand: typed chanceW(40/30/25/20) next to the family, and "băng huyết — có thể băng huyết mà chết".
 
 PASS e3f833ce5bbd5556ca5516e5f5dc3ac787cc2109
+
+## Final merge for landing (Foreman D #1 asked, 09:08Z)
+Main moved to 33e98993 (fullbody-frame-s2, scroll-cue-scan; on top of 36e574fa). I merged it into review/odds-cap-r2-rv → **5cbfd620**.
+- Only index.html and sw.js conflicted; I rebuilt both with assemble.py and build_site.sh. No odds source file overlaps.
+- typed-ladder-scan 14 (the same list) · «Chắc chắn» 0 · typed cl(…,5,95) 0 · odds-cap.js PASS.
+- quickcheck --runs 6: **PASS** (core gates PASS, old save ok). Medians new/live: render 198/200, tab 443/447, buổi 1014/1203.
+- coop-e2e 63/63, the same as live.
+- origin/main was re-checked right before sending: still 33e98993. 5cbfd620 fast-forwards from it.
+
+LAND READY 5cbfd620ff7a16f6f974cad3ab5e8c20e38bed1c
