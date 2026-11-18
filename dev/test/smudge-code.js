@@ -60,6 +60,20 @@ const {chromium}=require('playwright');const URL=process.argv[2],OUT=process.arg
    for(let i=0;i<120;i++){if([...host.querySelectorAll('img')].every(x=>x.complete&&x.naturalWidth>0))break;await new Promise(r=>setTimeout(r,150))}await new Promise(r=>setTimeout(r,500))},[lv,size]);
    await p.locator('#smu-shot').screenshot({path:`${OUT}/lod-${lv}-${size}.png`})}
   console.log(JSON.stringify({lod:await p.evaluate(()=>[...document.querySelectorAll('img.klk-smu')].map(i=>i.dataset.lsk.split('|').slice(-1)[0])),errs}));await b.close();return}
+
+ /* MODE=looks: the final 20 % nặng smudge over each makeup the player can wear, to show it follows whatever is under it: <outdir>/look-<vua|dep|tuyet|warm>.png, label 'Lem nặng · trên <name>' */
+ if(process.env.MODE==='looks'&&OUT){require('fs').mkdirSync(OUT,{recursive:true});
+  const SETS={vua:['Đoan trang','vua',null],dep:['Kiều diễm','dep',null],tuyet:['Khuynh thành','tuyet',null],warm:['Cam ánh đỏ','dep',{mat:'rangchieu',ma:'camquyt',son:'chusa',may:'nau'}]};
+  for(const k of ['vua','dep','tuyet','warm']){await p.evaluate(async([k,SET])=>{const T=S.toilette;T.makeup=true;T.look=SET[1];T.col=Object.assign(toilColDef(),SET[2]||{},{seed:5});for(const q in TOIL_MKC)delete TOIL_MKC[q];for(const q in LK_SMC)delete LK_SMC[q];
+   S.lk=null;delete T.lk;lkSmudge(S,3,'mua');
+   let host=document.getElementById('smu-shot');if(!host){host=document.createElement('div');host.id='smu-shot';document.body.appendChild(host)}
+   if(!document.getElementById('smu-hide')){const st=document.createElement('style');st.id='smu-hide';st.textContent='body>*:not(#smu-shot){visibility:hidden!important}';document.head.appendChild(st)}
+   host.style.cssText='position:fixed;left:0;top:0;z-index:2147483647;background:#f3e8d4;padding:14px 16px;width:420px;font:700 30px/1.1 serif;color:#4a2a14';
+   const f=kitFile(window.__fig);const html=()=>`<div style="margin-bottom:8px">Lem nặng · trên ${SET[0]}</div><div class="kfzoom" style="width:388px;margin:0 auto 8px">${kitFaceZoom(S,f).replace(/^<div class="kfzoom"[^>]*>/,'').replace(/<\/div>$/,'')}</div>`;
+   host.innerHTML=html();await new Promise(r=>setTimeout(r,300));for(let i=0;i<80;i++){const bad=[...host.querySelectorAll('img.klk-smu,img.kmkc')].some(x=>x.src.indexOf('data:image/png')!==0);if(!bad)break;await new Promise(r=>setTimeout(r,150))}
+   host.innerHTML=html();for(let i=0;i<120;i++){if([...host.querySelectorAll('img')].every(x=>x.complete&&x.naturalWidth>0))break;await new Promise(r=>setTimeout(r,150))}await new Promise(r=>setTimeout(r,700))},[k,SETS[k]]);
+   await p.locator('#smu-shot').screenshot({path:`${OUT}/look-${k}.png`})}
+  console.log(JSON.stringify({looks:'done',errs}));await b.close();return}
  if(OUT){require('fs').mkdirSync(OUT,{recursive:true});
   for(const lv of (process.env.PCT?[2,3]:[0,1,2,3])){await p.evaluate(async([lv,CF,PC])=>{const clear=()=>{S.lk=null;if(S.toilette)delete S.toilette.lk};clear();if(lv)lkSmudge(S,lv,'mua');
    let host=document.getElementById('smu-shot');if(!host){host=document.createElement('div');host.id='smu-shot';document.body.appendChild(host)}
