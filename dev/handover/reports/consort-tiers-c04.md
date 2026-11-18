@@ -56,3 +56,8 @@ Supersedes v3 (two-step; kept as c04_a18_t6_v3/t7_v3/t8_v3.png). One gen per fig
 | t8 | warm golden yellow, original design/phoenix kept, fan | 0.317 → 0.361 (+13.9 %) | 1 (over ±3 %; cup→fan changes the arm) |
 By eye (c04_t678_live_vs_new.jpg): design, embroidery, crown, cape, fabric identical to the original, colour only; closer to the original look than v3. Credits 3 gens = 405 cr. Gen ids t6 JNfHG0ROq4, t7 O6CqzMSynm, t8 MB79akmDCm. Files CDN img/_review/consort-tiers/c04/b9/: c04_a18_t6/t7/t8.png (v4), *_v3.png, *_v2.png, *_prev.png, row8, live_vs_new (live|copy|final, t6–8 copy = v3 copy), c04_t678_live_vs_new.jpg, c04_t5678_full/zoom.jpg. t1–t5 unchanged.
 ~100% xong c04 / ~0% chơi được.
+
+
+## B9 v5 — c04 t7 redone (owner: Hoàng quý phi's yellow must match Hoàng hậu's)
+One gen, one-gen method: image 1 = LIVE c04 t7, image 2 = approved new c04 t8 (colour reference), m09 STYLE slot. "Copy EXACTLY … ONLY change the robe colour: main colour = the SAME warm golden yellow as image 2; keep a small soft misty blue-grey only as a minor accent." Result: same warm golden yellow as t8, blue-grey only on sleeve linings/small panels; original design, phoenix (sleeve, chest, hem), pearl cape, crown, round fan kept. bbox w/h live 0.368 → 0.405 (+10.0 %, wider sleeves; not regenerated). 135 cr, gen id SymEYo1Ub8. Previous t7 (blue-grey + yellow) kept as c04_a18_t7_v4.png. Files: c04_a18_t7.png, c04_a18_t7_t8.jpg (pair), row8, live_vs_new.
+~100% xong c04 / ~0% chơi được.
