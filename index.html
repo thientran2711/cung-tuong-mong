@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"07d57517+","t":"2026-11-18T20:43Z","c":"live-servants #2: ROSTER.md — entourage picker / NPC picks, rest rhythm, witnesses + gossip, --who extras, tests T1-T7 (canon overwrite of …","b":"74b66ba3a44b","h":[{"s":"c67d248d+","t":"2026-11-18T19:53Z","c":"ag-deed-perf: site build (index.html, sw.js)"},{"s":"6aab33ad","t":"2026-11-18T20:05Z","c":"KIT_REQUESTS: K-Q2-1 DONE 048f3c7"},{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"},{"s":"a5013222+","t":"2026-11-18T18:03Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)"},{"s":"08774c0e+","t":"2026-11-18T17:38Z","c":"ag-stf2 (test only): bribe histogram picks a servant whose lòng moves her bribe odds. Root of the 'disloyal one takes more' red (npc ~3/20,…"},{"s":"0351e140","t":"2026-11-18T16:48Z","c":"shop-panel: «Để ta xem» outside option, 3-column Mua/Bán grid, smallest picture strip, test"},{"s":"ebf25660+","t":"2026-11-18T15:29Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…"},{"s":"9f9c6c2b+","t":"2026-11-18T14:26Z","c":"shown-odds-one-path r1: plant on the spot is done in person (actCtx x.here, no sent-servant pen); Vì sao names spy knowledge (whyKnow); tes…"},{"s":"aa997f3c+","t":"2026-11-18T13:46Z","c":"look-fx r13: index.html / sw.js rebuilt from merged sources"},{"s":"4475ea24+","t":"2026-11-18T12:33Z","c":"grand-endings-engine: site rebuilt (index.html / sw.js / assets.json) after fix 4 + main merge"}]};
+window.CTM_BI={"s":"e3dce64d+","t":"2026-11-18T20:44Z","c":"live-servants #2: ROSTER.md — entourage picker / NPC picks, rest rhythm, witnesses + gossip, --who extras, tests T1-T7 (canon overwrite of …","b":"7e8265b4cdb3","h":[{"s":"c67d248d+","t":"2026-11-18T19:53Z","c":"ag-deed-perf: site build (index.html, sw.js)"},{"s":"6aab33ad","t":"2026-11-18T20:05Z","c":"KIT_REQUESTS: K-Q2-1 DONE 048f3c7"},{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"},{"s":"a5013222+","t":"2026-11-18T18:03Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)"},{"s":"08774c0e+","t":"2026-11-18T17:38Z","c":"ag-stf2 (test only): bribe histogram picks a servant whose lòng moves her bribe odds. Root of the 'disloyal one takes more' red (npc ~3/20,…"},{"s":"0351e140","t":"2026-11-18T16:48Z","c":"shop-panel: «Để ta xem» outside option, 3-column Mua/Bán grid, smallest picture strip, test"},{"s":"ebf25660+","t":"2026-11-18T15:29Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…"},{"s":"9f9c6c2b+","t":"2026-11-18T14:26Z","c":"shown-odds-one-path r1: plant on the spot is done in person (actCtx x.here, no sent-servant pen); Vì sao names spy knowledge (whyKnow); tes…"},{"s":"aa997f3c+","t":"2026-11-18T13:46Z","c":"look-fx r13: index.html / sw.js rebuilt from merged sources"},{"s":"4475ea24+","t":"2026-11-18T12:33Z","c":"grand-endings-engine: site rebuilt (index.html / sw.js / assets.json) after fix 4 + main merge"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -69617,8 +69617,10 @@ function j95sPw(r,L){const T=L.reduce((s,x)=>s+Math.max(0,x[1]),0);if(!(T>0))ret
 function j95sOw(o){if(o===S)return"ngươi";if(o==="th")return"Thái hậu";try{if(o.queen)return"Hoàng hậu"}catch(e){}return o&&o.name||"chủ"}
 function j95sOid(o){return o===S?"me":o==="th"?"th":"v"+o.id}
 /* her household: [{id, kind (mm | st | el), close, sv (the servant object or null), name}] — the record's people of that mistress */
-function j95sHouses(ppl){const H=new Map();const add=(o,q)=>{let h=H.get(o);if(!h){h=[];H.set(o,h)}h.push(q)};
- for(const p of ppl){if(p.kind==="mm"||p.kind==="st"){const o=p.ref;if(!o)continue;if(o!==S&&(!o.alive))continue;add(o,{id:p.id,kind:p.kind,close:p.kind==="mm",sv:p.kind==="st"?j95sv(p.id):null,name:p.name,home:p.home})}
+/* perf (outcome-identical): j95sv(id) scans every household's staff per call; one sid → servant table per call, built in j95sv's own order (first match wins) */
+function j95sSvTab(){const M=new Map();try{for(const p of [S].concat(rivals,(S.thO?[S.thO]:[])))for(const s of (p&&p.staff)||[])if(s&&!M.has(s.sid))M.set(s.sid,s)}catch(e){}return M}
+function j95sHouses(ppl){const H=new Map();const add=(o,q)=>{let h=H.get(o);if(!h){h=[];H.set(o,h)}h.push(q)};let SV=null;const sv=id=>{if(!SV)SV=j95sSvTab();const s=SV.get(+String(id).slice(1));return s===undefined?null:s};
+ for(const p of ppl){if(p.kind==="mm"||p.kind==="st"){const o=p.ref;if(!o)continue;if(o!==S&&(!o.alive))continue;add(o,{id:p.id,kind:p.kind,close:p.kind==="mm",sv:p.kind==="st"?sv(p.id):null,name:p.name,home:p.home})}
   else if(p.kind==="el"&&p.ref&&!p.ref.eid&&p.home==="tn"&&!S.thDead)add("th",{id:p.id,kind:"el",close:false,sv:p.ref,name:p.name,home:"tn"})}
  return H}
 /* ---------- her own day (per khắc, deterministic per buổi) ---------- */
@@ -69631,7 +69633,11 @@ function j95sFriend(q,o){const s=q.sv;if(!s||!s.af)return null;let best=null,ba=
  if(!best)return null;const pk=palaceOf(best[1]);return[pk,"visit","s"+best[0].sid,`hết phiên, sang ${j95sPn(pk)} thăm bạn thân ${best[0].name}`]}
 function j95sServeWhy(c,ow){return ["hầu "+ow+" chải đầu, dâng trà sáng","dọn bữa trưa, hầu "+ow,"hầu "+ow+" buổi chiều","hầu "+ow+" dùng bữa tối, sửa soạn nghỉ"][c]||"hầu "+ow}
 /* ---------- the rest rhythm (MAIN 18/11 20:07Z): per servant and DAY — her rest turn, her bedtime, the household's night watch by turns ---------- */
-function j95sRhythm(q,ix,n){const B=BAL.slv;const d=j95sDay();const r=j95rng(j95hash(j95seed()+"|rest|"+d+"|"+q.id));
+/* perf (outcome-identical): the rhythm is a pure function of (day, life seed, person, place in her household, household size, BAL.slv): memo per day */
+function j95sRhythm(q,ix,n){const d=j95sDay(),sd=j95seed(),B=BAL.slv;const bs=B.rest.buoi.join()+"/"+B.rest.len.join()+"/"+B.sleepFrom+"/"+B.sleepJit+"/"+B.night;
+ const M=J95S.rh&&J95S.rh.d===d&&J95S.rh.sd===sd&&J95S.rh.bs===bs?J95S.rh.M:(J95S.rh={d,sd,bs,M:new Map()}).M;
+ const k=q.id+"|"+ix+"|"+n;let v=M.get(k);if(!v){v=j95sRhythm0(q,ix,n);M.set(k,v)}return Object.assign({},v)}
+function j95sRhythm0(q,ix,n){const B=BAL.slv;const d=j95sDay();const r=j95rng(j95hash(j95seed()+"|rest|"+d+"|"+q.id));
  const c=j95sPw(r,B.rest.buoi.map((w,i)=>[i,w]));const len=B.rest.len[0]+Math.floor(r()*(B.rest.len[1]-B.rest.len[0]+1));const k0=Math.floor(r()*(4-len+1));
  const sl=Math.min(3,B.sleepFrom+Math.floor(r()*(B.sleepJit+1)));const wn=Math.min(B.night,n);const rot=x=>((x%n)+n)%n;
  let watch=false,slept=false;for(let i=0;i<wn;i++){if(rot(d+i)===ix)watch=true;if(rot(d-1+i)===ix)slept=true}
@@ -69744,8 +69750,8 @@ function j95sGuard(R,kh,ppl){let n=0;let K=null;const OK=J95S.ok||(J95S.ok=new W
  J95S.stat.guard+=n;return n}
 /* her party at a place = herself and every one of her people walking with her (not shadows, not drawn as others: the map counts the people
    she would MEET there) — was: only her close maid (j95party) */
-(function(){const p0=j95party;j95party=function(id,k){if(p0.apply(this,arguments))return true;/* cheap rejects first: countAt asks this for every person at every place */
- if(k!==S.place||k==="home"||!id||(id[0]!=="s"&&id[0]!=="m")||!BAL.slv.on)return false;try{const R=S.roster;const e=R&&R.P[id];if(!e)return false;const x=e[j95kh()];return !!(x&&x[1]==="follow"&&x[2]==="me"&&x[0]===k&&R.key===j95key())}catch(e){return false}}})();
+(function(){const p0=j95party;j95party=function(id,k){if(id==="me")return true;/* cheap rejects first: countAt asks this for every person at every place */
+ if(k!==S.place||k==="home"||!id||(id[0]!=="s"&&id[0]!=="m"))return false;/* (perf, same answer: p0 = "me", or "mm:me" here at a place ≠ home — both met above) */if(p0(id,k))return true;if(!BAL.slv.on)return false;try{const R=S.roster;const e=R&&R.P[id];if(!e)return false;const x=e[j95kh()];return !!(x&&x[1]==="follow"&&x[2]==="me"&&x[0]===k&&R.key===j95key())}catch(e){return false}}})();
 /* a record never synced yet (R.kh unset: just planned, nothing shown) is written from khắc 0 — else the khắc before the first sync would keep the raw plan */
 (function(){const f0=j95fixHouse;j95fixHouse=function(R,kh,ppl){let n=f0.apply(this,arguments)||0;const k0=R&&R.kh==null?0:kh;try{n+=j95sPass(R,k0,ppl)}catch(e){j95sErr("pass",e)}try{n+=j95sGuard(R,k0,ppl)}catch(e){j95sErr("guard",e)}return n}})();
 window.__j95s=()=>({stat:J95S.stat,guardBy:J95S.guardBy,errs:J95S.errs,ms:+(J95S.ms||0).toFixed(1),calls:J95S.calls||0,skip:J95S.skip||0});
@@ -70626,8 +70632,21 @@ function knwOn(){try{return knOn()&&typeof j95sOn==="function"&&j95sOn()&&j95on(
 function knwMid(s,m){try{if(!m||!(typeof j95sOn==="function"&&j95sOn()))return"";if(m===S&&S.maid===s)return"mm:me";if(m!==S&&m.maid===s)return"mm:"+m.id;return""}catch(e){return""}}
 function knwSt(){const d=wk();const Z=S.knw||(S.knw={I:{},K:{},n:0,d});if(Z.d!==d){Z.d=d;const G=BAL.slv.gos;for(const i in Z.I)if(Z.I[i].wk<d-G.days)delete Z.I[i];for(const k in Z.K){for(const i in Z.K[k])if(!Z.I[i])delete Z.K[k][i];if(!Object.keys(Z.K[k]).length)delete Z.K[k]}Z.seen={}}return Z}
 function knwSrv(id){return /^s\d+$/.test(id)||id.indexOf("mm:")===0}
-function knwObj(id){try{if(id==="mm:me")return{s:S.maid,m:S};if(id.indexOf("mm:")===0){const v=RV(+id.slice(3));return v&&v.maid?{s:v.maid,m:v}:null}const s=j95sv(id);return s?{s,m:ownerOf(s)}:null}catch(e){return null}}
+/* perf (outcome-identical, live-servants #3): knwObj memo for ONE gossip pass (a pure lookup: j95sv + ownerOf), and qv of a servant whose nết is
+   already drawn read from a table by her nết (traitsOf(s) = s.net then, so qv is a pure function of it; a servant whose nết is not drawn yet goes
+   through qv itself, so its lazy draw happens exactly when it did) */
+let KNWO=null;const KNWQ=new WeakMap();
+function knwQv(tbl,s){try{if(s&&typeof s==="object"&&trRes(s)===s&&s!==S&&s.kind!=="emp"&&s.kind!=="th"&&s!==S.emp&&netOk(s.net,netSex(s))){let M=KNWQ.get(tbl);if(!M){M=new Map();KNWQ.set(tbl,M)}
+  const k=s.net[0]+"|"+s.net[1]+"|"+s.net[2];let v=M.get(k);if(v===undefined){v=qv(tbl,s,0);M.set(k,v)}return v}}catch(e){}return qv(tbl,s,0)}
+function knwObj(id){if(KNWO){if(KNWO.has(id))return KNWO.get(id);const o=knwObj0(id);KNWO.set(id,o);return o}return knwObj0(id)}
+function knwObj0(id){try{if(id==="mm:me")return{s:S.maid,m:S};if(id.indexOf("mm:")===0){const v=RV(+id.slice(3));return v&&v.maid?{s:v.maid,m:v}:null}const s=KNWO&&typeof j95sSvTab==="function"?knwSvT(id):j95sv(id);return s?{s,m:ownerOf(s)}:null}catch(e){return null}}
+/* the gossip pass's sid → servant table (j95sSvTab: j95sv's own order, first match) */
+function knwSvT(id){if(!KNWO.sv)KNWO.sv=j95sSvTab();const s=KNWO.sv.get(+String(id).slice(1));return s===undefined?null:s}
 function knwAdd(Z,id,iid,from,hop){const K=Z.K[id]||(Z.K[id]={});if(K[iid])return false;K[iid]=[from,hop];const ks=Object.keys(K);if(ks.length>BAL.slv.gos.keep)delete K[ks[0]];return true}
+/* knwAdd + the gossip group's count C kept exact (same add, same drop of the oldest) */
+function knwAddC(Z,id,iid,from,hop,T){const K=Z.K[id]||(Z.K[id]={});if(K[iid])return false;K[iid]=[from,hop];const C=T.C;
+ const c0=C.get(iid)||0;C.set(iid,c0+1);if(c0<T.n&&c0+1>=T.n)T.u--;else if(c0===0&&T.n>1)T.u++;
+ const ks=Object.keys(K);if(ks.length>BAL.slv.gos.keep){const e=ks[0];delete K[e];if(C.has(e)){const c=C.get(e);C.set(e,c-1);if(c>=T.n&&c-1<T.n)T.u++}}return true}
 function knwName(id){try{const R=agRec();return (R&&R.who&&R.who[id]&&R.who[id][0])||id}catch(e){return id}}
 /* she tells her mistress (or keeps it): the chain's own choice */
 function knwUp(Z,id,iid){const I=Z.I[iid];const o=knwObj(id);if(!I||!o||!o.s||!o.m)return;const m=o.m;const mk=m===S?"me":"v"+m.id;if(I.ab===mk)return;
@@ -70646,10 +70665,24 @@ function knwGossip(){if(!knwOn())return 0;const R=agRec();if(!R||!R.P||R.key!==j
  const G=BAL.slv.gos;const A=new Set(G.acts);const by={};let n=0;
  for(const id in Z.K){if(!knwSrv(id))continue;const x=R.P[id]&&R.P[id][kh];if(!x||!A.has(x[1]))continue;(by[x[0]]=by[x[0]]||[]).push(id)}
  for(const id in R.P){if(!knwSrv(id)||Z.K[id])continue;const x=R.P[id][kh];if(!x||!A.has(x[1])||!by[x[0]])continue;by[x[0]].push(id)}
+ /* perf: knHit("g"+gk+"|"+a+">"+b+"|"+iid, p) = the same FNV hash (knH), run from a cached state of its fixed head (seed|g<gk>|a>b|) */
+ const fnv=(h,t)=>{for(let i=0;i<t.length;i++){h^=t.charCodeAt(i);h=Math.imul(h,16777619)}return h};
+ KNWO=new Map();try{
  for(const pl in by){const L=by[pl];if(L.length<2)continue;
-  for(const a of L){const K=Z.K[a];if(!K)continue;const o=knwObj(a);const q=o&&o.s?qv(G.q,o.s,0):0;
-   for(const iid in K){const [,hop]=K[iid];if(hop>=G.hop||!Z.I[iid])continue;
-    for(const b of L){if(b===a||(Z.K[b]&&Z.K[b][iid]))continue;if(!knHit("g"+gk+"|"+a+">"+b+"|"+iid,G.p*(1+q)))continue;if(knwAdd(Z,b,iid,a,hop+1)){n++;knwUp(Z,b,iid)}}}}}
+  /* perf: C = how many of this group know each thing (kept exact below: +1 on each add, −1 on the oldest dropped past gos.keep); a thing all of
+     them know already has no one to pass to — the b loop would skip every one of them, so it is skipped whole (no draw, no change) */
+  /* SN = each one's keys read once here, in for-in order; reused as her own loop below unless someone told her something since (D: then read again) —
+     her own record does not change while she tells (she is never her own listener; her mistress's record is another one) */
+  const C=new Map(),SN=new Map(),D=new Set();for(const b of L){const Kb=Z.K[b];if(Kb){const ar=[];for(const i in Kb){ar.push(i);C.set(i,(C.get(i)||0)+1)}SN.set(b,ar)}}const nL=L.length;
+  /* T.u = how many things this group does not all know yet; while it is 0 nobody has anything to pass on (every b loop would skip) */
+  const T={C,n:nL,u:0};for(const v of C.values())if(v<nL)T.u++;
+  for(const a of L){const K=Z.K[a];if(!K)continue;const o=knwObj(a);const q=o&&o.s?knwQv(G.q,o.s):0;let ha=null,HB=null;const p=G.p*(1+q);
+   if(!T.u)continue;let ks=D.has(a)?null:SN.get(a);if(!ks){ks=[];for(const i in K)ks.push(i)}
+   for(const iid of ks){if(!T.u)break;const [,hop]=K[iid];if(hop>=G.hop||!Z.I[iid])continue;if((C.get(iid)||0)>=nL)continue;
+    for(const b of L){if(b===a||(Z.K[b]&&Z.K[b][iid]))continue;
+     if(ha===null){ha=fnv(2166136261,String(knSeed()+"|"+"g"+gk+"|"+a+">"));HB=new Map()}let hb=HB.get(b);if(hb===undefined){hb=fnv(ha,b+"|");HB.set(b,hb)}
+     if(!((((fnv(hb,iid)>>>0)%10000)/100)<p))continue;if(knwAddC(Z,b,iid,a,hop+1,T)){D.add(b);n++;knwUp(Z,b,iid)}}}}}
+ }finally{KNWO=null}
  KN.stat.knwGos=(KN.stat.knwGos||0)+n;return n}
 /* who knows a thing / what one person knows (dev + tests; roster.js --who reads S.knw from the save) */
 function knwOf(id){const Z=S.knw;if(!Z||!Z.K[id])return[];return Object.keys(Z.K[id]).map(i=>Object.assign({id:i,from:Z.K[id][i][0],hop:Z.K[id][i][1]},Z.I[i]||{})).filter(x=>x.w)}
@@ -75971,7 +76004,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="74b66ba3a44b";window.CTM_BUILD=BUILD;
+const BUILD="7e8265b4cdb3";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

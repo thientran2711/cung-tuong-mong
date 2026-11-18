@@ -55,8 +55,10 @@ function j95sPw(r,L){const T=L.reduce((s,x)=>s+Math.max(0,x[1]),0);if(!(T>0))ret
 function j95sOw(o){if(o===S)return"ngươi";if(o==="th")return"Thái hậu";try{if(o.queen)return"Hoàng hậu"}catch(e){}return o&&o.name||"chủ"}
 function j95sOid(o){return o===S?"me":o==="th"?"th":"v"+o.id}
 /* her household: [{id, kind (mm | st | el), close, sv (the servant object or null), name}] — the record's people of that mistress */
-function j95sHouses(ppl){const H=new Map();const add=(o,q)=>{let h=H.get(o);if(!h){h=[];H.set(o,h)}h.push(q)};
- for(const p of ppl){if(p.kind==="mm"||p.kind==="st"){const o=p.ref;if(!o)continue;if(o!==S&&(!o.alive))continue;add(o,{id:p.id,kind:p.kind,close:p.kind==="mm",sv:p.kind==="st"?j95sv(p.id):null,name:p.name,home:p.home})}
+/* perf (outcome-identical): j95sv(id) scans every household's staff per call; one sid → servant table per call, built in j95sv's own order (first match wins) */
+function j95sSvTab(){const M=new Map();try{for(const p of [S].concat(rivals,(S.thO?[S.thO]:[])))for(const s of (p&&p.staff)||[])if(s&&!M.has(s.sid))M.set(s.sid,s)}catch(e){}return M}
+function j95sHouses(ppl){const H=new Map();const add=(o,q)=>{let h=H.get(o);if(!h){h=[];H.set(o,h)}h.push(q)};let SV=null;const sv=id=>{if(!SV)SV=j95sSvTab();const s=SV.get(+String(id).slice(1));return s===undefined?null:s};
+ for(const p of ppl){if(p.kind==="mm"||p.kind==="st"){const o=p.ref;if(!o)continue;if(o!==S&&(!o.alive))continue;add(o,{id:p.id,kind:p.kind,close:p.kind==="mm",sv:p.kind==="st"?sv(p.id):null,name:p.name,home:p.home})}
   else if(p.kind==="el"&&p.ref&&!p.ref.eid&&p.home==="tn"&&!S.thDead)add("th",{id:p.id,kind:"el",close:false,sv:p.ref,name:p.name,home:"tn"})}
  return H}
 /* ---------- her own day (per khắc, deterministic per buổi) ---------- */
@@ -69,7 +71,11 @@ function j95sFriend(q,o){const s=q.sv;if(!s||!s.af)return null;let best=null,ba=
  if(!best)return null;const pk=palaceOf(best[1]);return[pk,"visit","s"+best[0].sid,`hết phiên, sang ${j95sPn(pk)} thăm bạn thân ${best[0].name}`]}
 function j95sServeWhy(c,ow){return ["hầu "+ow+" chải đầu, dâng trà sáng","dọn bữa trưa, hầu "+ow,"hầu "+ow+" buổi chiều","hầu "+ow+" dùng bữa tối, sửa soạn nghỉ"][c]||"hầu "+ow}
 /* ---------- the rest rhythm (MAIN 18/11 20:07Z): per servant and DAY — her rest turn, her bedtime, the household's night watch by turns ---------- */
-function j95sRhythm(q,ix,n){const B=BAL.slv;const d=j95sDay();const r=j95rng(j95hash(j95seed()+"|rest|"+d+"|"+q.id));
+/* perf (outcome-identical): the rhythm is a pure function of (day, life seed, person, place in her household, household size, BAL.slv): memo per day */
+function j95sRhythm(q,ix,n){const d=j95sDay(),sd=j95seed(),B=BAL.slv;const bs=B.rest.buoi.join()+"/"+B.rest.len.join()+"/"+B.sleepFrom+"/"+B.sleepJit+"/"+B.night;
+ const M=J95S.rh&&J95S.rh.d===d&&J95S.rh.sd===sd&&J95S.rh.bs===bs?J95S.rh.M:(J95S.rh={d,sd,bs,M:new Map()}).M;
+ const k=q.id+"|"+ix+"|"+n;let v=M.get(k);if(!v){v=j95sRhythm0(q,ix,n);M.set(k,v)}return Object.assign({},v)}
+function j95sRhythm0(q,ix,n){const B=BAL.slv;const d=j95sDay();const r=j95rng(j95hash(j95seed()+"|rest|"+d+"|"+q.id));
  const c=j95sPw(r,B.rest.buoi.map((w,i)=>[i,w]));const len=B.rest.len[0]+Math.floor(r()*(B.rest.len[1]-B.rest.len[0]+1));const k0=Math.floor(r()*(4-len+1));
  const sl=Math.min(3,B.sleepFrom+Math.floor(r()*(B.sleepJit+1)));const wn=Math.min(B.night,n);const rot=x=>((x%n)+n)%n;
  let watch=false,slept=false;for(let i=0;i<wn;i++){if(rot(d+i)===ix)watch=true;if(rot(d-1+i)===ix)slept=true}
@@ -182,8 +188,8 @@ function j95sGuard(R,kh,ppl){let n=0;let K=null;const OK=J95S.ok||(J95S.ok=new W
  J95S.stat.guard+=n;return n}
 /* her party at a place = herself and every one of her people walking with her (not shadows, not drawn as others: the map counts the people
    she would MEET there) — was: only her close maid (j95party) */
-(function(){const p0=j95party;j95party=function(id,k){if(p0.apply(this,arguments))return true;/* cheap rejects first: countAt asks this for every person at every place */
- if(k!==S.place||k==="home"||!id||(id[0]!=="s"&&id[0]!=="m")||!BAL.slv.on)return false;try{const R=S.roster;const e=R&&R.P[id];if(!e)return false;const x=e[j95kh()];return !!(x&&x[1]==="follow"&&x[2]==="me"&&x[0]===k&&R.key===j95key())}catch(e){return false}}})();
+(function(){const p0=j95party;j95party=function(id,k){if(id==="me")return true;/* cheap rejects first: countAt asks this for every person at every place */
+ if(k!==S.place||k==="home"||!id||(id[0]!=="s"&&id[0]!=="m"))return false;/* (perf, same answer: p0 = "me", or "mm:me" here at a place ≠ home — both met above) */if(p0(id,k))return true;if(!BAL.slv.on)return false;try{const R=S.roster;const e=R&&R.P[id];if(!e)return false;const x=e[j95kh()];return !!(x&&x[1]==="follow"&&x[2]==="me"&&x[0]===k&&R.key===j95key())}catch(e){return false}}})();
 /* a record never synced yet (R.kh unset: just planned, nothing shown) is written from khắc 0 — else the khắc before the first sync would keep the raw plan */
 (function(){const f0=j95fixHouse;j95fixHouse=function(R,kh,ppl){let n=f0.apply(this,arguments)||0;const k0=R&&R.kh==null?0:kh;try{n+=j95sPass(R,k0,ppl)}catch(e){j95sErr("pass",e)}try{n+=j95sGuard(R,k0,ppl)}catch(e){j95sErr("guard",e)}return n}})();
 window.__j95s=()=>({stat:J95S.stat,guardBy:J95S.guardBy,errs:J95S.errs,ms:+(J95S.ms||0).toFixed(1),calls:J95S.calls||0,skip:J95S.skip||0});

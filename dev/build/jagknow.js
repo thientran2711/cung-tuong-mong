@@ -506,8 +506,21 @@ function knwOn(){try{return knOn()&&typeof j95sOn==="function"&&j95sOn()&&j95on(
 function knwMid(s,m){try{if(!m||!(typeof j95sOn==="function"&&j95sOn()))return"";if(m===S&&S.maid===s)return"mm:me";if(m!==S&&m.maid===s)return"mm:"+m.id;return""}catch(e){return""}}
 function knwSt(){const d=wk();const Z=S.knw||(S.knw={I:{},K:{},n:0,d});if(Z.d!==d){Z.d=d;const G=BAL.slv.gos;for(const i in Z.I)if(Z.I[i].wk<d-G.days)delete Z.I[i];for(const k in Z.K){for(const i in Z.K[k])if(!Z.I[i])delete Z.K[k][i];if(!Object.keys(Z.K[k]).length)delete Z.K[k]}Z.seen={}}return Z}
 function knwSrv(id){return /^s\d+$/.test(id)||id.indexOf("mm:")===0}
-function knwObj(id){try{if(id==="mm:me")return{s:S.maid,m:S};if(id.indexOf("mm:")===0){const v=RV(+id.slice(3));return v&&v.maid?{s:v.maid,m:v}:null}const s=j95sv(id);return s?{s,m:ownerOf(s)}:null}catch(e){return null}}
+/* perf (outcome-identical, live-servants #3): knwObj memo for ONE gossip pass (a pure lookup: j95sv + ownerOf), and qv of a servant whose nết is
+   already drawn read from a table by her nết (traitsOf(s) = s.net then, so qv is a pure function of it; a servant whose nết is not drawn yet goes
+   through qv itself, so its lazy draw happens exactly when it did) */
+let KNWO=null;const KNWQ=new WeakMap();
+function knwQv(tbl,s){try{if(s&&typeof s==="object"&&trRes(s)===s&&s!==S&&s.kind!=="emp"&&s.kind!=="th"&&s!==S.emp&&netOk(s.net,netSex(s))){let M=KNWQ.get(tbl);if(!M){M=new Map();KNWQ.set(tbl,M)}
+  const k=s.net[0]+"|"+s.net[1]+"|"+s.net[2];let v=M.get(k);if(v===undefined){v=qv(tbl,s,0);M.set(k,v)}return v}}catch(e){}return qv(tbl,s,0)}
+function knwObj(id){if(KNWO){if(KNWO.has(id))return KNWO.get(id);const o=knwObj0(id);KNWO.set(id,o);return o}return knwObj0(id)}
+function knwObj0(id){try{if(id==="mm:me")return{s:S.maid,m:S};if(id.indexOf("mm:")===0){const v=RV(+id.slice(3));return v&&v.maid?{s:v.maid,m:v}:null}const s=KNWO&&typeof j95sSvTab==="function"?knwSvT(id):j95sv(id);return s?{s,m:ownerOf(s)}:null}catch(e){return null}}
+/* the gossip pass's sid → servant table (j95sSvTab: j95sv's own order, first match) */
+function knwSvT(id){if(!KNWO.sv)KNWO.sv=j95sSvTab();const s=KNWO.sv.get(+String(id).slice(1));return s===undefined?null:s}
 function knwAdd(Z,id,iid,from,hop){const K=Z.K[id]||(Z.K[id]={});if(K[iid])return false;K[iid]=[from,hop];const ks=Object.keys(K);if(ks.length>BAL.slv.gos.keep)delete K[ks[0]];return true}
+/* knwAdd + the gossip group's count C kept exact (same add, same drop of the oldest) */
+function knwAddC(Z,id,iid,from,hop,T){const K=Z.K[id]||(Z.K[id]={});if(K[iid])return false;K[iid]=[from,hop];const C=T.C;
+ const c0=C.get(iid)||0;C.set(iid,c0+1);if(c0<T.n&&c0+1>=T.n)T.u--;else if(c0===0&&T.n>1)T.u++;
+ const ks=Object.keys(K);if(ks.length>BAL.slv.gos.keep){const e=ks[0];delete K[e];if(C.has(e)){const c=C.get(e);C.set(e,c-1);if(c>=T.n&&c-1<T.n)T.u++}}return true}
 function knwName(id){try{const R=agRec();return (R&&R.who&&R.who[id]&&R.who[id][0])||id}catch(e){return id}}
 /* she tells her mistress (or keeps it): the chain's own choice */
 function knwUp(Z,id,iid){const I=Z.I[iid];const o=knwObj(id);if(!I||!o||!o.s||!o.m)return;const m=o.m;const mk=m===S?"me":"v"+m.id;if(I.ab===mk)return;
@@ -526,10 +539,24 @@ function knwGossip(){if(!knwOn())return 0;const R=agRec();if(!R||!R.P||R.key!==j
  const G=BAL.slv.gos;const A=new Set(G.acts);const by={};let n=0;
  for(const id in Z.K){if(!knwSrv(id))continue;const x=R.P[id]&&R.P[id][kh];if(!x||!A.has(x[1]))continue;(by[x[0]]=by[x[0]]||[]).push(id)}
  for(const id in R.P){if(!knwSrv(id)||Z.K[id])continue;const x=R.P[id][kh];if(!x||!A.has(x[1])||!by[x[0]])continue;by[x[0]].push(id)}
+ /* perf: knHit("g"+gk+"|"+a+">"+b+"|"+iid, p) = the same FNV hash (knH), run from a cached state of its fixed head (seed|g<gk>|a>b|) */
+ const fnv=(h,t)=>{for(let i=0;i<t.length;i++){h^=t.charCodeAt(i);h=Math.imul(h,16777619)}return h};
+ KNWO=new Map();try{
  for(const pl in by){const L=by[pl];if(L.length<2)continue;
-  for(const a of L){const K=Z.K[a];if(!K)continue;const o=knwObj(a);const q=o&&o.s?qv(G.q,o.s,0):0;
-   for(const iid in K){const [,hop]=K[iid];if(hop>=G.hop||!Z.I[iid])continue;
-    for(const b of L){if(b===a||(Z.K[b]&&Z.K[b][iid]))continue;if(!knHit("g"+gk+"|"+a+">"+b+"|"+iid,G.p*(1+q)))continue;if(knwAdd(Z,b,iid,a,hop+1)){n++;knwUp(Z,b,iid)}}}}}
+  /* perf: C = how many of this group know each thing (kept exact below: +1 on each add, −1 on the oldest dropped past gos.keep); a thing all of
+     them know already has no one to pass to — the b loop would skip every one of them, so it is skipped whole (no draw, no change) */
+  /* SN = each one's keys read once here, in for-in order; reused as her own loop below unless someone told her something since (D: then read again) —
+     her own record does not change while she tells (she is never her own listener; her mistress's record is another one) */
+  const C=new Map(),SN=new Map(),D=new Set();for(const b of L){const Kb=Z.K[b];if(Kb){const ar=[];for(const i in Kb){ar.push(i);C.set(i,(C.get(i)||0)+1)}SN.set(b,ar)}}const nL=L.length;
+  /* T.u = how many things this group does not all know yet; while it is 0 nobody has anything to pass on (every b loop would skip) */
+  const T={C,n:nL,u:0};for(const v of C.values())if(v<nL)T.u++;
+  for(const a of L){const K=Z.K[a];if(!K)continue;const o=knwObj(a);const q=o&&o.s?knwQv(G.q,o.s):0;let ha=null,HB=null;const p=G.p*(1+q);
+   if(!T.u)continue;let ks=D.has(a)?null:SN.get(a);if(!ks){ks=[];for(const i in K)ks.push(i)}
+   for(const iid of ks){if(!T.u)break;const [,hop]=K[iid];if(hop>=G.hop||!Z.I[iid])continue;if((C.get(iid)||0)>=nL)continue;
+    for(const b of L){if(b===a||(Z.K[b]&&Z.K[b][iid]))continue;
+     if(ha===null){ha=fnv(2166136261,String(knSeed()+"|"+"g"+gk+"|"+a+">"));HB=new Map()}let hb=HB.get(b);if(hb===undefined){hb=fnv(ha,b+"|");HB.set(b,hb)}
+     if(!((((fnv(hb,iid)>>>0)%10000)/100)<p))continue;if(knwAddC(Z,b,iid,a,hop+1,T)){D.add(b);n++;knwUp(Z,b,iid)}}}}}
+ }finally{KNWO=null}
  KN.stat.knwGos=(KN.stat.knwGos||0)+n;return n}
 /* who knows a thing / what one person knows (dev + tests; roster.js --who reads S.knw from the save) */
 function knwOf(id){const Z=S.knw;if(!Z||!Z.K[id])return[];return Object.keys(Z.K[id]).map(i=>Object.assign({id:i,from:Z.K[id][i][0],hop:Z.K[id][i][1]},Z.I[i]||{})).filter(x=>x.w)}
