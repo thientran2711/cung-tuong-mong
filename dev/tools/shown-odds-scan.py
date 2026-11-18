@@ -101,4 +101,114 @@ else:
 print(f'\nshown-odds places: {len(rows)} — ' + ', '.join(f'{k} {v}' for k, v in sorted(C.items())) + f'; act odds helpers {len(ofn)}')
 bad = C.get('ACT-RAW', 0) + C.get('OPT-RAW', 0)
 print('PASS: every act / option odds shown through the one function of its roll' if not bad else f'FAIL: {bad} place(s) show odds the roll does not use')
-sys.exit(1 if bad else 0)
+
+# ---------------- ROUND 2 (review/shown-odds-r2, ORDER ROOT-52 18/11 15:30Z): SPEND THEN ROLL ----------------
+# Every do-path that pays time (spend( … ) and THEN rolls. What runs inside the spend (khắc, roster / weather resync, world
+# events) can move the odds between the card and the roll, so the roll must use odds read BEFORE the spend:
+#   FROZEN   the roll after the spend reads odds taken before it: fzRun(shown,…) (j9; the act's own roll is aRoll), or the odds
+#            variable is set before spend( in the same body, or runOpt (an option's o is a number read when the card was dealt)
+#   SIDE     the rolls after the spend are side chances whose odds are never printed as a ladder word (punish, news, roll(60),
+#            roll(BAL.odds.hi) = the odds-cap soft fail …): nothing she saw can differ
+#   AFTER    odds read after the spend -> FAIL (shown != rolled when the spend moves the world)
+# The roll path after the spend: roll( / runAct( / doAct( / runOpt( / or a call of a function that itself rolls (found by
+# reading every function body, two levels deep).
+fn_body = {}
+for fname, t2 in src.items():
+    for m in re.finditer(r'function\s+(\w+)\s*\(', t2):
+        i = t2.find('{', m.end())
+        if i < 0: continue
+        d = 0; j = i
+        while j < len(t2):
+            c = t2[j]
+            if c == '{': d += 1
+            elif c == '}':
+                d -= 1
+                if d == 0: break
+            j += 1
+        fn_body.setdefault(m.group(1), t2[i:j + 1])
+ROLLS = re.compile(r'(?<![\w.])(?:a?[Rr]oll)\(')
+rollers = {n for n, b in fn_body.items() if re.search(r'(?<![\w.])(roll|aRoll)\(', b)}
+for _ in range(2):
+    rollers |= {n for n, b in fn_body.items() if any(re.search(r'(?<![\w.])' + r + r'\(', b) for r in list(rollers)[:0]) }
+calls_rx = re.compile(r'(?<![\w.])(\w+)\(')
+SKIPFN = {'spend', 'can', 'log', 'render', 'apply', 'ap', 'roll', 'aRoll', 'fzRun', 'Q', 'if', 'for', 'while', 'return', 'function', 'catch', 'try', 'switch'}
+def body_after(t2, i):
+    """text from i to the end of the innermost block that holds i"""
+    d = 0; j = i
+    while j > 0:
+        c = t2[j]
+        if c == '}': d += 1
+        elif c == '{':
+            if d == 0: break
+            d -= 1
+        j -= 1
+    start = j; d = 0; k = start
+    while k < len(t2):
+        c = t2[k]
+        if c == '{': d += 1
+        elif c == '}':
+            d -= 1
+            if d == 0: break
+        k += 1
+    return t2[start:i], t2[i:k + 1]
+def roll_args(s):
+    """the odds expression of every roll( / aRoll( call in s (balanced)"""
+    out = []
+    for m in re.finditer(r'(?<![\w.])a?[Rr]oll\(', s):
+        i = m.end(); d = 1; j = i
+        while j < len(s) and d:
+            if s[j] == '(': d += 1
+            elif s[j] == ')': d -= 1
+            j += 1
+        out.append(re.sub(r',a$', '', s[i:j - 1].strip()))
+    return out
+ALLSRC = '\n'.join(src.values())
+# rolls on a spend path that are side chances by construction (their word, where printed, belongs to another line / act)
+SIDE_EXPR = {'has("nongnay")?100:has("nhantu")?25:50': 'punish(): the punishment chance; depends only on items she holds, a spend never moves it',
+             'oSee(r,true)': 'giveTo(): whether the receiver notices a tainted gift; the gift card prints no odds (oSee\'s word is the Soát rương act)'}
+def is_shown(e):
+    """a roll's odds are SHOWN when the same odds function (or the same expression) is printed as a ladder word somewhere"""
+    e = e.strip()
+    if re.fullmatch(r'(\d+|BAL\.[\w.\[\]]+|LO\.keepP|B\.\w+(\[\w+\])?|o|odds|r|p|ch|c)', e): return False
+    m = re.match(r'(?:oddsCl\(|od\(|odA\(\w+,)?\s*(\w+)\(', e)
+    keys = [e] + ([m.group(1)] if m and re.fullmatch(r'o[A-Z]\w*|\w+O|\w+Odds|\w+odds', m.group(1)) else [])  # an odds function by name (oSpy, askO, dbOdds)
+    for k in keys:
+        if re.search(r'(?:word|kitOdds|wordOf|oddsWord)\(\s*(?:oddsCl\()?\s*' + re.escape(k), ALLSRC): return True
+        # shown through a variable on the card: `o=od(EXPR)` / `fo=petBuyO(k)` … then word(o) close by (review r2-rv: j53 fav, j54 noi, j61 ask, jpet buy)
+        for a in re.finditer(r'(?<![\w.])(\w+)\s*=\s*(?:oddsCl\(|od\(|odA\(\w+,)?\s*' + re.escape(k), ALLSRC):
+            if re.search(r'(?:word|kitOdds|wordOf|oddsWord)\(\s*(?:oddsCl\()?\s*' + re.escape(a.group(1)) + r'\b', ALLSRC[a.end():a.end() + 1500]): return True
+    return False
+srows = []
+for fname, t2 in src.items():
+    for m in re.finditer(r'(?<![\w.])spend\(', t2):
+        pre = t2[max(0, m.start() - 12):m.start()]
+        if re.search(r'(function\s*|=\s*|\.)$', pre): continue
+        before, after = body_after(t2, m.start())
+        after = after[after.find(')') + 1:]
+        hits = []
+        for c in calls_rx.finditer(after):
+            n = c.group(1)
+            if n in ('roll', 'aRoll', 'runAct', 'runOpt', 'doAct') or (n in rollers and n not in SKIPFN): hits.append(n)
+        if not hits: continue
+        ln = t2[:m.start()].count('\n') + 1
+        L = t2.split('\n')[ln - 1]
+        pre_vars = set(re.findall(r'(?:const|let)\s+(\w+)\s*=', before[-700:]))
+        # the odds of every roll on the path: rolls in the body after the spend + rolls inside each rolling function it calls
+        va = dict(re.findall(r'(?:const|let)\s+(\w+)\s*=\s*([^;]+);', after))  # a roll of a variable set AFTER the spend = its expression
+        exprs = [va.get(e.strip(), e) for e in roll_args(after)] + [e for h in set(hits) if h in fn_body and h not in ('runAct', 'runOpt', 'doAct') for e in roll_args(fn_body[h])]
+        shown = sorted({e for e in exprs if e.strip() not in SIDE_EXPR and is_shown(e) and e.strip() not in pre_vars})
+        if 'fzRun(' in after: cls = 'FROZEN'
+        elif set(hits) <= {'runOpt'}: cls = 'FROZEN'
+        elif any(h in ('runAct', 'doAct') for h in hits): cls = 'AFTER'
+        elif shown: cls = 'AFTER'
+        elif any(e.strip() in pre_vars for e in roll_args(after)): cls = 'FROZEN'
+        else: cls = 'SIDE'
+        if cls == 'AFTER' and not shown: shown = ['runAct/doAct']
+        srows.append((fname, ln, cls, sorted(set(hits)), ' ; '.join(shown)[:120] if cls == 'AFTER' else ''))
+SR = Counter(r[2] for r in srows)
+print(f'\nSPEND-THEN-ROLL paths: {len(srows)} — ' + ', '.join(f'{k} {v}' for k, v in sorted(SR.items())))
+for f2, ln, cls, hits, L in srows:
+    if cls in ('AFTER', 'FROZEN') or ALL: print(f'{cls:6} {f2}:{ln} rolls via {",".join(hits)}' + (f'  [shown: {L}]' if L else ''))
+sbad = SR.get('AFTER', 0)
+print('PASS: every spend-then-roll path rolls odds read before the spend' if not sbad else f'FAIL: {sbad} path(s) read the odds AFTER the spend')
+sys.exit(1 if bad or sbad else 0)
