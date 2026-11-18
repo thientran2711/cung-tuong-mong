@@ -77,6 +77,20 @@ Verdict: deeds floor MET (100 %). Per-khắc ≤ live: met vs 12a1e4be (−11 %)
 | ag suites 12 (ag-all 21, betray 20, carry 9, know 25, later 9, paywin 9, sell 19, soft 20, taimat 25, taimat2 16, truth 11, walk 10) | 12/12 PASS (ag-all once FAILED its own day-draw p95 12.3 > 8 ms while 4 suites ran in parallel; alone ×2: p95 6.4 / 6.5, 21/21 PASS) |
 | ag2perf-a.test CAP=8 seeds 1, 2 | PASS |
 
+### Split mode (C-AG #12 13:51Z) — head ece17b1b
+`BAL.ag.day.redecideScope` "consort" (default; the filter on consorts when cap > 0) | "far" = consorts + their maids/eunuchs + hers pick every buổi as before; only FAR staff (ownerOf(s) null) re-pick with a cause (touch/need/new/done/urge), cap per buổi, else her duty row (jagday agRdcFar in agLzRun; agRdcKeep takes the kind's AGBASE row).
+Measured: the day draw (agDayList) holds emp 1, th 1, consorts 10, maids 13, servants 7 — all 20 staff belong to a consort or to her; **far staff = 0**. So "far" + cap 8 = cap 0 exactly: deeds 654 / 665 / 637 = 100 % (agLand0 consort 368/380/354, other doers 32/22/28, deedAdd consort 59/58/61, servant deedAdd 0, staff landings __asN 17/19/18), no rd marks. Emperor / Thái hậu are not "far" (kept). Seeded diff ece17b1b (default) vs 02466132: 0/0/0. ag-all 21/21, G4 seed 7 PASS, ag2perf-a CAP=8 PASS.
+
+### Live baseline shift explained
+quickcheck's "live" 94a93759 was this clone's stale origin/main (2026-11-18 03:37Z), OLDER than 12a1e4be (11:28Z, in main); it lacks later main code (jcoopthine, jpq, jreveal, jplst … −1834 lines in dev/build). Current live main = f60b4024 (13:38Z, contains 12a1e4be). Set A's 4.27 ms for 12a1e4be was noise (two of six runs had 50 ms p95 spikes); f60b4024 measures 3.28.
+| set C (9 runs alternating, 4x CPU, spend(1)) | khắc mean | vs live | khắc median | buổi mean | vs live |
+|---|---|---|---|---|---|
+| live f60b4024 | 3.28 | – | 1.11 | 111.5 | – |
+| cap 0 = split "far" (ece17b1b default) | 4.61 | **+41 %** | 2.09 | 150.1 | +35 % |
+| cap 8 (consorts filtered) | 4.13 | +26 % | 1.99 | 146.8 | +32 % |
+| (set B) base 02466132 vs its live | – | +84 % | | | |
+Conclusion: the per-khắc gap to live is the AG-ALL-2 feature itself (NPCs acting by the same rules as her: deeds land per khắc), which live does not have; A saved time only by dropping deeds. With every deed kept, review/ag2-perf is −29 % per khắc vs 02466132 (F1/F2/B) but +41 % vs live. Options for MAIN: (1) ship cap 0 (100 % deeds, +41 % khắc vs live); (2) cap 8 consorts (−17 % deeds, +26 %); (3) a new perf order on the cost of a landing deed inside spend(1) (profile cap 0 vs f60b4024).
+
 ### Handover
-Depth 8: no children. Scratch (container only): /home/user/wt/ag2out (bench*.sh/log, deeds json). Worktrees ag2p2 (branch), ag2base (02466132), ag2live (12a1e4be), ag2live2 (94a93759).
+Depth 8: no children. Scratch (container only): /home/user/wt/ag2out (bench*.sh/log, deeds json). Worktrees ag2p2 (branch), ag2base (02466132), ag2live (12a1e4be), ag2live2 (94a93759), ag2live3 (f60b4024).
 ~83% xong / ~62% chơi được
