@@ -8,7 +8,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof render==='function');await sleep(2500);
   await p.addStyleTag({content:'#kroul{display:none!important}'});
   const r=await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();SLOT=3;document.getElementById('title').hidden=true;
-   for(let i=0;i<400;i++){start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;
+   for(let i=0;i<400;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;
    const o={};
    S.wx={n:"mưa phùn",k:"rain",f:1};o.sev1=wxSev();
    const fine=S.wx;S.wx={n:"nắng ráo",k:"sun",f:0};o.sev0=wxSev();o.risk0=JSON.stringify(wxRisk(S));

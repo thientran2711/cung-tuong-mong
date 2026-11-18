@@ -12,7 +12,7 @@ const sleep=t=>new Promise(r=>setTimeout(r,t));
    const p=await ctx.newPage();p.setDefaultTimeout(240000);p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
    await p.goto(URL,{waitUntil:'domcontentloaded'});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function');await sleep(2500);
    await p.addStyleTag({content:'#kroul{display:none!important}'});
-   await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<400;i++){start();if(!isSrv())break}
+   await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<400;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}
     Q.length=0;document.getElementById('modal').hidden=true;render()});await sleep(800);
    for(let tr=0;tr<4;tr++){await p.evaluate(k=>{Q.length=0;document.getElementById('modal').hidden=true;const R0=liveRivals(true).filter(v=>!v.queen);const v=R0.find(x=>k61St(x)>=1)||R0[0];kn();S.met[v.id]=1;
      const o2=[{n:"Nhịn",fx:{duc:2},x:"giữ lễ; nàng ghen +3",go:()=>{}},{n:"Đáp trả sắc sảo",fx:{danh:1},x:"nàng oán +10",go:()=>{}}];

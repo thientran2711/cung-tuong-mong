@@ -70,7 +70,7 @@ function pgGive(a,t,ix,pk){const e=a.inv[ix];if(!e||!pgFood(e)||!PGX[pk])return"
  const by=a===S?"Ngươi":`${rkName(a)} ${a.name}`,dn=e.wk?e.wk.n:itm(e.k).n;const O=pgOdds(a,t,e);
  a.inv.splice(Math.max(ix,pi),1);a.inv.splice(Math.min(ix,pi),1);a.schemes=(a.schemes||0)+1;if(typeof ducAdd==="function")ducAdd(a,-PGX[pk].duc,"bỏ độc vào quà");else ap(a,{duc:-PGX[pk].duc});
  if(t===S){pushDil(mkP("pgin",{f:key(a),dn,pk,o:O.o,e:Object.assign({},e)}),"Quà tặng");return ""}
- if(roll(O.o)){const r=pgEffect(a,t,pk);if(a!==S)try{newsAdd(t,"poison",`${rkName(t)} ${t.name} lâm bệnh lạ sau khi dùng quà.`)}catch(x){}return `${by} sai người mang ${dn} sang tặng ${rkName(t)} ${t.name}. ${r}`}
+ if(aRoll(O.o,a)){const r=pgEffect(a,t,pk);if(a!==S)try{newsAdd(t,"poison",`${rkName(t)} ${t.name} lâm bệnh lạ sau khi dùng quà.`)}catch(x){}return `${by} sai người mang ${dn} sang tặng ${rkName(t)} ${t.name}. ${r}`}
  const c=caught(a,t,true,`bỏ ${PGX[pk].n.toLowerCase()} vào ${dn} tặng ${NM(t)}`);
  if(c){const q=queenP();const hq=q&&q!==a&&q!==t;if(hq)evA(q,a,BAL.pg.hhEv);return `${by} tặng ${NM(t)} ${dn} có độc. ${c}${hq?`Hoàng hậu nắm thêm ${BAL.pg.hhEv} chứng cứ. `:""}`}
  relAdd(t,a,BAL.eff.jpoison.pgGive);return `${NMc(t)} thấy ${dn} có vị lạ, sai đổ đi; từ đó dè chừng ${a===S?"ngươi":NM(a)} (quý ${a===S?"ngươi":NM(a)} ${balSg(BAL.eff.jpoison.pgGive)}). `}
@@ -80,7 +80,7 @@ function pgLine(t,pk,X){/* previews: pgGive */const P=PGX[pk];const q=queenP();c
 PEND.pgpick=p=>{const e=S.inv[p.ix];if(!e||!pgFood(e))return null;const dn=e.wk?e.wk.n:itm(e.k).n;const O=[];
  for(const t of liveRivals(true)){if(t.out)continue;for(const pk of pgHeld(S)){const P=PGX[pk];if(P.preg&&!(t.preg&&!t.hidden))continue;const X=pgOdds(S,t,e);
   O.push({n:`${P.n} vào ${dn} tặng ${rkName(t)} ${t.name}`,fx:{},x:pgLine(t,pk,X),o:X.o,base:BAL.pg.base,why:()=>pgOdds(S,t,e).F,
-   go:()=>{spend(BAL.pg.khac);const i=S.inv.indexOf(e);const r=pgGive(S,t,i,pk);if(r)log(r)}})}}
+   go:()=>{spend(BAL.pg.khac);const i=S.inv.indexOf(e);const r=fzRun(X.o,null,()=>pgGive(S,t,i,pk));/* X.o = the odds on this option, read before the spend (j9 fzRun) */if(r)log(r)}})}}
  O.sort((x,y)=>y.o-x.o);O.push({n:"Thôi",fx:{}});
  return{t:`<p>Lén bỏ độc vào <b>${dn}</b> rồi tặng ai? Hoàng thượng và Thái hậu luôn có người nếm thử, không thể.</p><p class="past">Thành hay bại tùy: Tâm cơ của ngươi, người nhận tin ngươi đến đâu, món đồ khéo đến đâu; người nhận càng cảnh giác, có thái y tâm phúc, kim bạc thử độc hay cung nữ nếm trước thì càng khó.</p>`,o:O}};
 try{KIT_ACT_PIDS.add("pgpick")}catch(e){}

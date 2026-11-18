@@ -16,11 +16,11 @@
    3. goodsGive(p, keys, {from, title, sub, kind}) — THE way any text that gives goods gives a real item (LUẬT SỬA CẢ NHÓM, dev/test/goods-scan.py):
       used by EV6 events (STIP_EV table), j67 (beat/option/end field gi), j71 festival prizes (STIP_FPRIZE), j72 favours. ================= */
 Object.assign(BAL,{stip:{
- goods:[[["vaibong",1],["tragoi",1]],[["vaibong",1],["tragoi",1]],[["luahang",1],["tragoi",1]],[["luahang",1],["trahop",1],["sonphan",1]],
-  [["luahang",2],["trahop",1],["sonphan",1]],[["gamto",1],["luahang",1],["trahop",1],["sonphan",1]],[["gamto",1],["luahang",1],["trahop",2],["sonphan",1],["yensao",1]],
-  [["gamto",2],["trahop",2],["sonphan",1],["yensao",1],["nhansam",1]]],
+ goods:[[["vaibong",1],["tragoi",1]],[["vaibong",1],["tragoi",1]],[["luahang",1],["tragoi",1]],[["luahang",1],["trahop",1]],
+  [["luahang",2],["trahop",1]],[["gamto",1],["luahang",1],["trahop",1]],[["gamto",1],["luahang",1],["trahop",2],["yensao",1]],
+  [["gamto",2],["trahop",2],["yensao",1],["nhansam",1]]],
  coal:[1,1,1,1,2,2,2,3],coldGoods:[["vaitho",1]],coldCoal:1,npcKeep:4,resell:40,
- down:{bangda:"bangvun",gamto:"luahang",luahang:"vaitho",vaibong:"vaitho",trahop:"tramoc",tragoi:"tramoc",thanbac:"thanden",sonphan:null,yensao:null,nhansam:null},
+ down:{bangda:"bangvun",gamto:"luahang",luahang:"vaitho",vaibong:"vaitho",trahop:"tramoc",tragoi:"tramoc",thanbac:"thanden",yensao:null,nhansam:null},
  w:{sung:30,fault:35,sup:40,eun:25,maid:20},cap:80,meekAdd:10,spiteAdd:15,
  lowSung:15,dropSung:10,faultM:2,supRank:4,oan:30,safeSung:55,tipM:3,allyLoyal:75,allyTips:3,maidLoyal:35,
  cutSmall:.15,cutBig:.25,tip:[8,10,12,15,18,22,26,30],greedy:50,punishM:6,
@@ -49,7 +49,7 @@ Object.assign(BAL,{stip:{
  const G={vaibong:0,vaitho:0,tragoi:0,trahop:1,tramoc:0,thanbac:0,thanden:0,banhtrai:0,ruoucuc:0,aolong:2,cocngoc:2,guong:1,thamba:2,cungbac:1,traicay:0,lanquy:1};
  try{Object.assign(ITEM_ART_G,G);for(const k in G)ITIMG[k]=k}catch(e){}
  try{if(BAL.priceTier)for(const k in N)if(BAL.priceTier[k]==null)BAL.priceTier[k]=N[k].pr}catch(e){}})();
-const STIP_UNIT={vaibong:"súc",vaitho:"súc",luahang:"súc",gamto:"súc",tragoi:"gói",tramoc:"gói",trahop:"hộp",thanbac:"giỏ",thanden:"giỏ",bangda:"khối",bangvun:"chậu",sonphan:"hộp",yensao:"hộp",nhansam:"củ"};
+const STIP_UNIT={vaibong:"súc",vaitho:"súc",luahang:"súc",gamto:"súc",tragoi:"gói",tramoc:"gói",trahop:"hộp",thanbac:"giỏ",thanden:"giỏ",bangda:"khối",bangvun:"chậu",yensao:"hộp",nhansam:"củ"};
 function stipNm(k,n){const it=IT[k];return `${n} ${STIP_UNIT[k]||"món"} ${it?it.n.replace(/ \(hàng kém\)$/,""):k}${it&&/hàng kém/.test(it.n)?" (hàng kém)":""}`}
 function stipWinter(){try{return SEASON[S.month-1]==="Đông"}catch(e){return false}}
 function stipSummer(){try{return SEASON[S.month-1]==="Hạ"}catch(e){return false}}
@@ -99,7 +99,7 @@ function stipGoods(p,SK){const G=[];try{if(!p||p.dead||(p===S&&typeof isSrv==="f
  for(const [k0,n0] of L){let k=k0,n=n0,kem=false,lost=false;
   if(hit.has(L.findIndex(x=>x[0]===k0))){kem=true;k=D[k0];if(k0==="thanbac"||k0==="bangda")n=Math.max(1,n0-1);if(!k){lost=true}}
   const g={k0,n0,k,n,kem,lost,E:[]};if(!lost&&IT[k])for(let i=0;i<n;i++){const e={k,from:"noivu",d:S.turn};p.inv.push(e);g.E.push(e)}G.push(g)}
- if(p!==S){const nv=p.inv.filter(e=>e&&e.from==="noivu"&&!e.w);const over=nv.length-BAL.stip.npcKeep*3;if(over>0)nv.slice(0,over).forEach(e=>{const i=p.inv.indexOf(e);if(i>=0)p.inv.splice(i,1)})}
+ if(p!==S){const nv=p.inv.filter(e=>e&&e.from==="noivu"&&!e.w&&!(typeof lxOf==="function"&&lxOf(e.k)));/* son phấn boxes are spent, never trimmed (jration) */const over=nv.length-BAL.stip.npcKeep*3;if(over>0)nv.slice(0,over).forEach(e=>{const i=p.inv.indexOf(e);if(i>=0)p.inv.splice(i,1)})}
  }catch(e){console.error("stipGoods",e)}return G}
 function stipGoodsTxt(G){return (G||[]).map(g=>g.lost?`thiếu ${stipNm(g.k0,g.n0).replace(/^\d+ \S+ /,"")}`:stipNm(g.k,g.n)).join(" · ")}
 /* Nội vụ phủ buys its own issue back cheaply */

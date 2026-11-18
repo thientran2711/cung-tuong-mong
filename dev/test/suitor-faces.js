@@ -3,7 +3,7 @@
    usage: NODE_PATH=$(npm root -g) node dev/test/suitor-faces.js <url> */
 const {chromium}=require('playwright');(async()=>{const b=await chromium.launch();const p=await (await b.newContext()).newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
  await p.goto(process.argv[2]);await p.waitForFunction(()=>typeof start==='function');await p.waitForTimeout(2000);
- await p.evaluate(()=>{localStorage.clear();SLOT=3;for(let i=0;i<60;i++){start();if(!isSrv())break}});
+ await p.evaluate(()=>{localStorage.clear();SLOT=3;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}});
  await p.waitForTimeout(6000);
  const r=await p.evaluate(()=>{const P=h54Pool();while(P.length<18)h54NewSon();P.forEach(s=>{s.kn=1});
   const rows=P.map(s=>{const f=h54Face(s);return{n:s.name,cf:s.cf||'',src:(f.src||'').split('/').pop(),known:!!s.kn}});

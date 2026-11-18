@@ -182,7 +182,7 @@ function talkOpts(p){const E=S.emp,K=E.known,L=E.likes,b=bestArt(),v=p.ref;
  return []}
 function talk(oi){if(popIdx==null||!S.visit||S.visit.talked===true||S.dead||Q.length)return;S.visit.tk=S.visit.tk||{};if(S.visit.tk[popIdx])return;const p=curPeople()[popIdx];if(!p)return;const a=talkOpts(p)[oi];if(!a||!canPay(a))return;
  const tcost=a.act?BAL.time.cost.talkAct:BAL.time.cost.talk;if(!can(tcost))return;spend(tcost);
- if(a.run){S.visit.tk[popIdx]=1;if(oddsCapped(a)&&!roll(BAL.odds.hi)){popMsg=`${a.n}: ${oddsSoft(a.n,a.c)}`;render();return}/* ODDS CAP soft fail */if(a.c)apply(a.c);popMsg=a.run()||"";if(popMsg)log(`${a.n}: ${popMsg}`);render();return}
+ if(a.run){S.visit.tk[popIdx]=1;if(oddsCapped(a)&&!roll(BAL.odds.hi)){popMsg=`${a.n}: ${oddsSoft(a.n,a.c)}`;render();return}/* ODDS CAP soft fail */if(a.c)apply(a.c);popMsg=fzRun(a.o,typeof a.k==="string"?a.k:null,()=>a.run())||"";/* a.o was read before the spend: the act rolls the odds on the card (j9 fzRun) */if(popMsg)log(`${a.n}: ${popMsg}`);render();return}
  if(a.open){a.open();render();return}
  S.visit.tk[popIdx]=1;const s0=S.logSeq||0;const ok=runOpt(a);
  /* two forms from one line (jvoice kGL / kLitLog): the Sổ ghi line and this card note carry the literary sentence, the result card only the facts */
