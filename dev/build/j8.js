@@ -325,11 +325,13 @@ PEND.giu=()=>{const o1=od(BAL.odb.j8.odO1_2+S.tamco/3),o2=od(BAL.odb.j8.odO2+S.a
  {n:"Đút bạc xin giữ",fx:{bac:-40},x:`${word(o1)} · thành: được giữ long thai (nếu có) · hỏng: Thái hậu ${balSg(BAL.eff.j8.thGo)}`,go:()=>{if(roll(o1))night(S);else apply({th:BAL.eff.j8.thGo})}},
  {n:"Cầu xin Hoàng thượng",fx:{},x:`${word(o2)} · thành: được giữ long thai (nếu có) · hỏng: Sủng ${balSg(BAL.eff.j8.sungGo_2)}`,go:()=>{if(roll(o2))night(S);else apply({sung:BAL.eff.j8.sungGo_2})}}]}};
 /* a rival's night: same formula, no modal */
-function rivalNight(v){v.nights++;v.nightLog.push(wk());const q=Math.round(effSac(v)/20+Math.max(...Object.values(v.arts))+R(4)-1);ap(v,{sung:2+Math.round(q/2),an:2+Math.max(0,q)});v.pg=cl(v.pg+6,0,100);v.tablet=0;
+function rivalNight(v){/* AG3 «Tiến cử … hầu thay» is decided BEFORE the night, as hers (PEND.ksp): the maid takes the night, the consort gives it up
+   (no record, no gains, no conception) — review/balance-final: night-final case 6 "one night a day" (the consort kept hers too) */
+ if(typeof amOn==="function"&&amOn()?amSendQ(v):roll(3))return `Đêm qua thẻ bài của ${v.name} được lật. `+sendMaid(v);
+ v.nights++;v.nightLog.push(wk());const q=Math.round(effSac(v)/20+Math.max(...Object.values(v.arts))+R(4)-1);ap(v,{sung:2+Math.round(q/2),an:2+Math.max(0,q)});v.pg=cl(v.pg+6,0,100);v.tablet=0;
  let r=`Đêm qua thẻ bài của ${v.name} được lật. `;
  if(giuBlocked(v)){if(v.bac>=BAL.bacFee.giu&&roll(odA(v,45+v.tamco/3))){ap(v,{bac:-BAL.bacFee.giu});night(v)}}else night(v);
  if(v.rel<-20&&roll(20)){const o=odA(v,30+v.an/2);if(roll(o)){apply({sung:BAL.eff.j8.sungRivalNight});if(S.mat>=2)r+=`Tai mắt nghe được: gối đầu, ${v.name} nói xấu ngươi. Sủng ${balSg(BAL.eff.j8.sungRivalNight)}. `}else if(DG()){ap(v,{sung:-6});}}
- if(typeof amOn==="function"&&amOn()?amSendQ(v):roll(3)){r+=sendMaid(v)}/* AG3: her own choice (jagmaid) */
  if(roll(8))bestow(v,"night");return r}
 function sendMaid(a){const m=a.maid;const rise=roll(BAL.rk.maidRise);a.maid=a===S?newMaid(pick(MAIDS.filter(x=>x!==m.name)),45):{name:pick(MAIDS.filter(x=>x!==m.name)),loyal:45};if(a===S)S.tonight=null;
  if(rise&&roomFor("consort")){const n=newRival(0);Object.assign(n,drawFace());n.name=freshName();n.rel=0;relAdd(a,n,m.loyal>=BAL.loy.close?BAL.eff.j8.sendMaid[0]:BAL.eff.j8.sendMaid[1]);rivals.push(n);return `Cung nữ ${m.name} của ${NM(a)} hầu thay, được sủng hạnh, phong ${RANKS[0].n} ${n.name}${m.loyal>=BAL.loy.close?" và vẫn nhớ ơn chủ cũ":" và trở mặt với chủ cũ"}. `}

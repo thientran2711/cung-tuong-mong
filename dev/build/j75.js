@@ -134,7 +134,10 @@ const FAIRN=window.FAIRN={eff:1,fav:4,sat:.2,satMin:.35,satO:8};
 const MOODW=["vui","bình thường","phiền muộn","giận dữ"];
 function talkOpts(p){const E=S.emp;return [has("trongtai")?3:(p.tai||0)>=60?1:0,has("chamchinh")?3:-1,has("datinh")||has("mesac")?3:has("lanhlung")?-1:0,E.mood>=2?2:1]}
 /* (a) an NPC's night: same formula as hers (PEND.prep q, PEND.night1 talk + mood + R(3), nightFx gains and reward) */
-rivalNight=function(v){v.nights++;v.nightLog.push(wk());
+rivalNight=function(v){/* AG3 «Tiến cử … hầu thay» is decided BEFORE the night, as hers (PEND.ksp): the maid takes the night, the consort gives it up
+   (no record, no gains, no conception) — review/balance-final: night-final case 6 "one night a day" (the consort kept hers too) */
+ if(typeof amOn==="function"&&amOn()?amSendQ(v):roll(3))return `Đêm qua thẻ bài của ${v.name} được lật. `+sendMaid(v);
+ v.nights++;v.nightLog.push(wk());
  let q=1;if(v.bac>=BAL.bacFee.npcMat&&roll(55)){ap(v,{bac:-BAL.bacFee.npcMat});q=3}else if((v.suc||0)>=30){ap(v,{suc:-5});const b=nightArt(v),lv=Math.max(1,b.l||0);q=1+(roll(odA(v,40+(v.tai||0)/2+artOE(v,b.k)))?1+lv:1)}/* her PEND.prep: the same best art (no Thêu/Nấu), the same odds */
  const O=talkOpts(v);const fit=roll(BAL.odb.j75.rbFit+(v.tamco||0)/2)?Math.max(...O):pick(O);const mood=BAL.night.mood[S.emp.mood];
  const sc=q+fit+mood+R(3);const NG=nightGain(sc),g=NG.sung,an=NG.an;ap(v,{sung:g,an});v.pg=cl(v.pg+6,0,100);v.tablet=0;v.lastNightS=sc;
@@ -144,7 +147,6 @@ rivalNight=function(v){v.nights++;v.nightLog.push(wk());
  {let x=null;if(typeof pillowNpc==="function"&&agOn())x=pillowNpc(v,sc);/* AG2: her own choice by her spite need (two-way row 24, one deed BAL.tw.g.pillow) */
   else if(v.rel<-20&&roll(20)){const o=odA(v,30+v.an/2);if(roll(o)){const b=S.sung;apply({sung:-4});x={t:S,ok:1,b}}else if(DG()){ap(v,{sung:-6})}}
   if(x&&x.t===S&&x.ok&&S.mat>=2)r+=`Tai mắt nghe được: gối đầu, ${v.name} nói xấu ngươi.${x.b!==S.sung?` Sủng của ta ${x.b} → ${S.sung}.`:""} `}
- if(typeof amOn==="function"&&amOn()?amSendQ(v):roll(3)){r+=sendMaid(v)}/* AG3: her own choice (jagmaid) */
  if(roll(BAL.odb.j75.rbTop+sc*4))bestow(v,"night");return r};
 /* (b) the quiet favour is a world act with a cost */
 const QF=["dâng canh sâm lên Dưỡng Hòa điện","chép bài thơ dâng lên ngự thư phòng","thêu túi thơm dâng Hoàng thượng","đứng đợi ngự giá ở ngự hoa viên, dâng một khúc đàn"];
