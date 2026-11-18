@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"2eea9a2b+","t":"2026-11-18T06:45Z","c":"review coop-thin-e r1: coop-thin-e E2 diagnostics; a setup press that landed in the new week is stepped first (swap flake 2/7)","b":"0b3db210ffa3","h":[{"s":"8af2fc24+","t":"2026-11-18T06:31Z","c":"mg-skip-all r2: one quick-button look everywhere (kquick css, never an option card), playArt default fix, KIT 13.6 + MINIGAMES, page test m…"},{"s":"c9ada2a3+","t":"2026-11-18T06:14Z","c":"Fix S.lyF: recognise the fallen Ly person by lyF===1 (S carries the object), not truthiness; her own figure keeps her rank tier. + dev/test…"},{"s":"d959a9e0+","t":"2026-11-18T06:28Z","c":"buoi-banner: owner pick BTR_OP = 0.85 on the 73a7d3f layout (title overlaps the band, flush at the stage top); ladder hook removed"},{"s":"8c210d6b+","t":"2026-11-18T06:21Z","c":"act-pic-match: EVENTS.json + FIGURES-kids.json rebuilt (same 17/11 02:41Z incident), cdn_sync refuses bulk overwrite of top-level manifests…"},{"s":"b7ea2748+","t":"2026-11-18T06:12Z","c":"kit-set-lines: display-room test pins rank so the real-data pair is never over rank"},{"s":"22891730+","t":"2026-11-18T06:08Z","c":"k61StageDesc: restore the existing k61Desc untouched (rename only my new helper)"},{"s":"8f5ea906+","t":"2026-11-18T06:11Z","c":"face-reveal-anim: kitReveal (KIT 79) — the real face appears in place out of the grey (frame, avatar, room-stage figure, event figure); Gọn…"},{"s":"04bb2793+","t":"2026-11-18T05:52Z","c":"hud-mood-bar: owner picked layout 1 (full row); switch and slim layout removed; KIT 49.4"},{"s":"c1104d92+","t":"2026-11-18T05:41Z","c":"face-zoom-aspect test: SEED / FORCE options for same-character before/after shots"},{"s":"16b4dad8+","t":"2026-11-18T05:32Z","c":"cloth-bake-static: cloth layer on every static figure path on a cold cache (wait layer + patch on bake done); test + report"}]};
+window.CTM_BI={"s":"824cfccf+","t":"2026-11-18T08:43Z","c":"scroll-cue-scan: every dialog with a Kéo xuống cue (94 dialogs x Fold+iPad)","b":"9eb1ce081258","h":[{"s":"9c581406+","t":"2026-11-18T07:37Z","c":"review map-tap-go r9: merge origin/main e0b9662 (generated files rebuilt from merged sources)"},{"s":"c571aaea+","t":"2026-11-18T07:26Z","c":"map-tap-go: KIT 84c person-less VIỆC frame — main picture fills the left column (k3fill), kit-conform rule, kit page sample, KIT_REQUESTS c…"},{"s":"5ae28ddb+","t":"2026-11-18T07:13Z","c":"place-stage r5 redo: A1 (marker back on the head, KIT_FIG.h .79, band 70, vivid gold glow) + seal at ONE fixed offset from the standing anc…"},{"s":"5c5d1e8b+","t":"2026-11-18T07:04Z","c":"review person-dialog-restore r1: greet result card carries the greeting line (was the ambient weather line); rebuilt"},{"s":"2eea9a2b+","t":"2026-11-18T06:45Z","c":"review coop-thin-e r1: coop-thin-e E2 diagnostics; a setup press that landed in the new week is stepped first (swap flake 2/7)"},{"s":"8af2fc24+","t":"2026-11-18T06:31Z","c":"mg-skip-all r2: one quick-button look everywhere (kquick css, never an option card), playArt default fix, KIT 13.6 + MINIGAMES, page test m…"},{"s":"c9ada2a3+","t":"2026-11-18T06:14Z","c":"Fix S.lyF: recognise the fallen Ly person by lyF===1 (S carries the object), not truthiness; her own figure keeps her rank tier. + dev/test…"},{"s":"d959a9e0+","t":"2026-11-18T06:28Z","c":"buoi-banner: owner pick BTR_OP = 0.85 on the 73a7d3f layout (title overlaps the band, flush at the stage top); ladder hook removed"},{"s":"8c210d6b+","t":"2026-11-18T06:21Z","c":"act-pic-match: EVENTS.json + FIGURES-kids.json rebuilt (same 17/11 02:41Z incident), cdn_sync refuses bulk overwrite of top-level manifests…"},{"s":"b7ea2748+","t":"2026-11-18T06:12Z","c":"kit-set-lines: display-room test pins rank so the real-data pair is never over rank"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -4100,7 +4100,13 @@ function popCard(p,i){const opts=talkOpts(p),done=S.visit&&(S.visit.talked===tru
  const B=opts.map((a,j)=>{const o=a.o==null?100:a.o;const tc=a.act?2:1;const poor=a.c&&a.c.bac&&S.bac+a.c.bac<0;
   const why=a.lock?a.t:poor?"không đủ bạc":whyTime(tc);const sm=optLine(a);
   return pbtn(`class="opt" data-o="${j}"`,a.n,sm,why)});
- return pcard({f,col,name:p.name,rank,ghen,lines,chips,close,note:popMsg||"",groups:done?[]:[["",B]],empty:done?"Lần ghé này đã nói chuyện với người này rồi.":"Không có việc gì để làm với người này."})}
+ /* person-dialog-restore (owner 18/11 06:10Z, OD:L1852): the acts are split into GROUP TABS (the Hành sự categories, KIT_CAT via kitActCat; the same
+    .pctabs/.pct row + "làm được/tổng" count as every other person card); one group = no tab row. The result of an act is NOT a note in the column:
+    it goes to the standard bottom result card (#rtoast, j65 talk) — so the card carries no note here (popMsg stays the state the log sync reads). */
+ const gk=[],gb={};opts.forEach((a,j)=>{let c="khac";try{c=(typeof kitActCat==="function"&&kitActCat(a.n))||"khac"}catch(e){}if(!gb[c]){gb[c]=[];gk.push(c)}gb[c].push(B[j])});
+ const gn=c=>typeof KIT_CAT!=="undefined"&&KIT_CAT[c]?KIT_CAT[c][0]:c==="khac"?"Khác":c;
+ const groups=done?[]:gk.length>1?gk.map(c=>[gn(c),gb[c]]):[["",B]];
+ return pcard({f,col,name:p.name,rank,ghen,lines,chips,close,note:"",groups,empty:done?"Lần ghé này đã nói chuyện với người này rồi.":"Không có việc gì để làm với người này."})}
 
 /* ---- the Emperor / herself, opened as a card in the dialog ---- */
 function empCardHTML(){const E=S.emp;return pcard({f:pEmp(),col:"#f0d070",name:empName(),rank:"Hoàng thượng",lines:[tuoi(E.age),`Tâm trạng: <b>${MOODS[E.mood][0]}</b>`,`Ngài sủng ngươi <b>${S.sung}</b> · Ân tình <b>${S.an||0}</b>`],
@@ -5497,7 +5503,7 @@ function mindTell(v,t,k){mindLog(v,"_tell");const tc=witOf(v);let c=12+(S.mat||0
 /* someone with a plan in hand waits for it instead of starting another */
 (function(){const n0=npcAct;npcAct=function(v,t){if(v&&v.plan)return"";return n0.apply(this,arguments)}})();
 /* ================= BALANCE KNOBS (measured with the sensible / random bots; see the report) ================= */
-const BAL={allyRel:35,/* the "người quen cũ" ally of a new life: her Thiện cảm toward the player at the start (j2 allyBond; co-op part B rebase) */ghenNew:15,/* a new face: an NPC's Ghen toward her starts at R(ghenNew) (j1 newRival, j1 ghenNew0; co-op part B rebase) */wkFinCap:1,/* Đức from handmade works (kinh, vật cầu phúc): at most this many per month (j83 wkFinLeft) */ oanLv:[5,20,45,75],/* oán word ladder (VANPHONG): <5 Không oán · <20 Chút oán · <45 Oán · <75 Oán sâu · else Oán hận */
+const BAL={entryToastMs:5000,/* owner 18/11 ~03:4xZ: ms the place-entry line (kitLineToast) stays on screen */allyRel:35,/* the "người quen cũ" ally of a new life: her Thiện cảm toward the player at the start (j2 allyBond; co-op part B rebase) */ghenNew:15,/* a new face: an NPC's Ghen toward her starts at R(ghenNew) (j1 newRival, j1 ghenNew0; co-op part B rebase) */wkFinCap:1,/* Đức from handmade works (kinh, vật cầu phúc): at most this many per month (j83 wkFinLeft) */ oanLv:[5,20,45,75],/* oán word ladder (VANPHONG): <5 Không oán · <20 Chút oán · <45 Oán · <75 Oán sâu · else Oán hận */
  /* outQ = % an empty Hoàng hậu seat goes to an outsider girl (one-core: was 85 here and 60 in jbal2; 60 is the measured v12 value) */outQ:60,hz:3.2,conc:.5,/* conception per night × (D57 owner 16/11: doubled from .25 for everyone; the cycle peak/low is BAL.cyc.fert in jcycle.js) */trystC:[5,60],/* a tryst / affair conception = trystCh(p) = conceiveCh(p) kept within [lo,hi] (her Hẹn gặp riêng j22, Tư thông jroute, an NPC consort's affair month j22) */later:6,hhTh:60,/* diff-remeasure 16/11: 55 → 60 (Vừa HH 45 % → ~32 % with the fixed bot; 65 measured 26 %) */birthAdd:2,
  /* ONE SOURCE for every promotion threshold the player sees (checks in promoReqP/candOK and every text read these) */
  hhThNoSon:80,hhThNoSonHieu:70,hhDuc:50,hhDucHeir:40,qBlockHh:-40,qBlockTh:50,hiOppHh:-30,hiOppTh:30,hiOppFac:180,
@@ -6242,7 +6248,7 @@ function kitSlotCxE(i,k,x0,avail){return x0+avail*(i+.5)/Math.max(1,k)}
    LEFT of every stage view for the left rail (#krail: 44 px buttons at 17 px + 5 px air), always, so the slots never move when the rail appears a moment later
    and no head stands under a rail button; edge = px the visible art (kitFigBody l..r, sleeves included) keeps from the stage edge / side column — a slot
    whose figure would be cut there is pulled in by just that much (kitSlotIn), its pet follows it. */
-const KIT_SLOTS={page:2,spread:4,band:64,rail:66,edge:4,pet:{sx:.3}};
+const KIT_SLOTS={page:2,spread:4,band:70,top:34,rail:66,edge:4,pet:{sx:.3}};/* owner 18/11 ~03:4xZ: band = floor strip under the feet (the name plate sits close to the frame's bottom edge: was 64); top = room above the tallest head for her marker/ornament (heads + marker stay INSIDE the frame) */
 function kitSlotIn(cx,l,r,lo,hi){/* l,r = visible art left/right edge relative to the body centre (l<0<r); returns the centre that keeps [cx+l,cx+r] inside [lo,hi] */
  if(r-l>=hi-lo)return (lo+hi)/2-(l+r)/2;if(cx+l<lo)return lo-l;if(cx+r>hi)return hi-r;return cx}
 function kitSlotsN(st){try{return st&&st.classList.contains("kplfs")&&kitView().pages===2?KIT_SLOTS.spread:KIT_SLOTS.page}catch(e){return KIT_SLOTS.page}}
@@ -6252,6 +6258,13 @@ window.KIT_SLOTS=KIT_SLOTS;window.kitSlotIn=kitSlotIn;window.kitSlotsN=kitSlotsN
 window.kitSlotSwE=kitSlotSwE;window.kitSlotCxE=kitSlotCxE;window.kitSlotSw=kitSlotSw;window.kitSlotCx=kitSlotCx;window.kitSlotScale=kitSlotScale;window.kitSlotNeed=kitSlotNeed;
 function kitBookFig(b,fac,H,o){const bt=kitFigTop(b),span=Math.max(.2,b.b-bt),rel=o&&o.stage?Math.min(KIT_FIG.h*H,KIT_FIG.maxPx):H/KIT_FIG.man,body=Math.min(rel*(fac||1),H*.98),ih=body/span;return{ih,iw:ih*(b.ar||.45),dy:ih*(1-b.b),body,span}}
 window.kitBookFig=kitBookFig;
+/* KIT 56.4 · kitFullFigX(b, iw, cw) — the ONE horizontal place of a FULL-BODY figure in the figure column of a frame (owner 18/11 ~07:50Z, step 2 of the Tuần lục rule 56.3:
+   centre pop-ups, news / notices / event dialogs, info panels, the coach / tips, the identity card). The layout of each frame stays; the figure is the ONE body
+   SKULL TOP -> feet (kitFigTop), nothing is cut: its core is centred on the column, but the painted art never starts left of the column's left edge
+   (b.l .. b.r = the whole painted width, sleeves / train included), so a wide robe spreads to the RIGHT, under the text, which is drawn ON TOP of the
+   transparent figure (z-index). Returns the left of the picture box from the column's left edge (px). iw = picture box width, cw = column width. */
+function kitFullFigX(b,iw,cw){const cl=b.cl!=null?b.cl:b.l,cr=b.cr!=null?b.cr:b.r;let x=cw/2-iw*(cl+cr)/2;if(x+b.l*iw<0)x=-b.l*iw;return x}
+window.kitFullFigX=kitFullFigX;
 /* KIT 33.4 · kitImgErr — the ONE null-safe fallback for inline <img onerror>: a picture that fails after a re-render detached it
    does nothing (no "reading 'classList' of null" page errors). o.sel: ancestor to mark (default the parent); o.cls: class to add;
    o.text: put img.dataset.i as the parent's text; o.swap: replace the img by img.dataset.i. */
@@ -6863,8 +6876,7 @@ document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest
  const s=servById(+b.dataset.sid);if(!s)return;const bf=rsnap();const r=srvStaffAct(b.dataset.cnv,s);if(r!=null)resultShow(b.firstChild.textContent,bf,r);render()},true);
 (function(){const s0=selfCardHTML;selfCardHTML=function(){if(!isSrv())return s0.apply(this,arguments);const m=srvM();
  return pcard({f:pMe(),col:"#b9a48a",name:S.name,rank:srvTitle(),lines:[`${S.age} tuổi · ${S.origin.n}`,`Sắc ${S.sac} · Tài ${S.tai} · Tâm cơ ${S.tamco} · Đức ${S.duc}`,`Sức ${S.suc} · Bạc ${S.bac} · Danh ${S.danh}`,`Chủ tin ${S.tin} · Hoàng thượng để ý ${S.nt}`],note:m?`Chủ: <b>${rkName(m)} ${m.name}</b>, tính ${netTxt(m)}.`:"",groups:[["Đường đi",srvRows()]].concat(typeof kcuHonorRows==="function"&&kcuHonorRows(1).length?[["Danh hiệu thi tài",kcuHonorRows(5)]]:[]),empty:""})}})();
-(function(){const t0=showTitle;showTitle=function(){const r=t0.apply(this,arguments);try{document.querySelectorAll("#slots .slot").forEach(el=>{const b=el.querySelector("[data-load]");if(!b)return;const d=loadSlot(+b.dataset.load);
- if(d&&d.S&&d.S.srv&&!d.S.srv.risen){const sp=el.querySelector(".past");if(sp)sp.textContent=sp.textContent.replace(/^[^·]*/,(d.S.srv.lau>0?"Cung nữ Tân Giả khố":SRK.maid[d.S.srv.rk]||"Cung nữ")+" ")}})}catch(e){}return r}})();
+/* the Chọn sổ rows say who the sổ is through j74 slotWho (one place, srv lives included); the old #slots .slot text patch is gone with the old rows */
 (function(){const st=document.createElement("style");st.textContent=`.srvhead{display:flex;gap:8px;align-items:center;padding:6px 8px;margin:0 0 8px;border:1px solid var(--line);border-radius:8px;background:var(--panel2);font-size:.82rem;line-height:1.4}
 .srvrow{display:flex;gap:8px;align-items:flex-start;padding:8px 2px;border-bottom:1px solid var(--line);flex-wrap:wrap}.srvrow .srvi{display:flex;flex-direction:column;gap:1px;min-width:0;flex:1 1 160px;font-size:.85rem}
 .srvrow .srvb{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:6px;flex:1 1 100%}.srvrow .srvb .opt{min-width:0}
@@ -8065,10 +8077,10 @@ function j59sel(st,tk,me){let pi=null;try{pi=typeof popIdx==="number"?popIdx:nul
 function j59person(p){return !!p&&p.kind!=="chest"&&p.kind!=="task"&&!(p.kind==="srv"&&p.sk==="task")}
 /* KIT 33.9 head-count icon (owner 17/11 ~14:15Z): the grey GROUP of three (man, woman, child) img/kit/unknown-ico-n.webp (192 px tall, ~145 px wide, ONE file, no srcset so the jcdn CDN fallback works).
    j59ico(h) is the only place that draws it: the swipe-stage "+N" chips (j59chipIco) AND the place header "Ngọc Thanh các [icon] 5" (j59hdrCount) use it. Decorative alt="". */
-function j59ico(){return `<img class="j59ico" src="https://ctm-img.victoria-tntt.workers.dev/img/kit/unknown-ico-n.webp" alt="" draggable="false">`}
+function j59ico(){return `<img class="j59ico" src="https://ctm-img.victoria-tntt.workers.dev/img/kit/unknown-ico-n.webp" alt="" draggable="false">`}window.j59ico=j59ico;
 function j59chipIco(n){return j59ico()+`<span class="j59n">+${n}</span>`}
 /* place header (every place with people): "Ở đây còn N người." -> [icon] N (the rest of a longer stage line is kept); "Không gặp ai." stays text */
-function j59hdrCount(){try{const m=document.querySelector("#sc-t .rmsg");if(!m||m.dataset.j59h===m.innerHTML)return;const t=m.innerHTML;const r=/^\s*·?\s*Ở đây (?:có|còn) (\d+) người\.?\s*/.exec(t);if(!r)return;
+function j59hdrCount(){return;/* place-stage: the plaque is gone; the count chip is a kitStageRail item (jplst.js) */try{const m=document.querySelector("#sc-t .rmsg");if(!m||m.dataset.j59h===m.innerHTML)return;const t=m.innerHTML;const r=/^\s*·?\s*Ở đây (?:có|còn) (\d+) người\.?\s*/.exec(t);if(!r)return;
   m.innerHTML=` <span class="kchip n j59hchip">${j59ico()}<span class="j59n">${r[1]}</span></span>`+(t.length>r[0].length?" · "+t.slice(r[0].length):"");m.classList.add("j59hc");m.setAttribute("aria-label",`Ở đây còn ${r[1]} người`);m.dataset.j59h=m.innerHTML}catch(e){}}
 function j59chips(st,R,P,again){/* morechip-fix: placed once now and once more on the next frame, after the side column (k3Stage) has its full height */if(!again)requestAnimationFrame(()=>{try{if(st.isConnected)j59chips(st,R,P,1)}catch(e){}});/* KIT 33.9 swipe stage: P: {pg, pages, before, after, xl, xr}. NO arrow buttons — two "+N" chips in the top corners of the backdrop: LEFT = people already passed (left of the view), RIGHT = people still to come; hidden at 0. Pure kit chip, not tappable (the row is swiped) */
  for(const side of ["l","r"]){let c=st.querySelector(".j59more.j59m"+side);const n=P&&P.pages>1?(side==="r"?P.after:P.before):0;
@@ -8152,7 +8164,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  const cmp=sH<420||sW<520;st.classList.toggle("j59c",cmp);
  const KF=KIT_FIG;
  let topR=8;try{const t=document.getElementById("sc-t");if(t&&t.offsetHeight){const q=t.getBoundingClientRect();if(q.bottom>R.top)topR=Math.max(topR,q.bottom-R.top+4)}}catch(e){}
- topR=Math.min(topR,sH*.12);
+ topR=Math.min(topR,sH*.12);topR=Math.max(topR,KIT_SLOTS.top||0);
  /* phones (< 600 px, coordinator 11/15): the right chip column (court chips, maid, "Ân sủng ›") folds into ONE compact row along the
     top edge under the place title, and the heads stand under that row — so two slots keep their width and no chip sits on a head */
  const ph=false;st.classList.toggle("j59ph",ph);/* KIT §0: the one-page room = the spread's left page (no phone stage variant) */
@@ -8170,7 +8182,9 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  const KA=st.__kfa;/* KIT_FLOOR anchor (jk2b kitFloorFit): feet on the painted floor line while the figure keeps its kit height */
  let capOn=(()=>{try{return kitView().pages===2}catch(e){return true}})();/* KIT §33 (canon): the maxPx cap applies to iPad-wide layouts only; Fold / phones keep the full .79 of their taller stage *//* KIT §0: the left page in the spread and the one-page room are the same page */
  let FOX=0;/* fig-tag-chip: floor band the wrapped name tags need (phones: a long rank/plate/name wraps to 4-5 lines) */
- const size=()=>{const fo=Math.max(kitSlotFloor(sH),FOX);/* KIT 33.12 fixed slot table: ONE floor line per stage height (no name-chip or painted-floor shift), so a person snaps to the same x AND y on every stage / place / room */CAP=sH-fo-topR;return{fo,H:Math.max(sH*.2,Math.min(KF.h*sH,CAP,(KF.maxPx&&capOn)?KF.maxPx:1e9))}};
+ /* owner 18/11 ~03:5xZ: her marker's whole bounce range stays INSIDE the stage frame: her picture top (the marker stands on it) keeps kitMeMarkRoom px under the frame top; every figure shares the ONE H, so a tall stage shrinks all just enough */
+ const meCap=fo=>{try{if(!me||!mb||!window.kitMeMarkRoom)return 1e9;return (sH-fo-kitMeMarkRoom(KF.h*sH*1.07))*(mb.b-j59bt(mb))}catch(e){return 1e9}};
+ const size=()=>{const fo=Math.max(kitSlotFloor(sH),FOX);/* KIT 33.12 fixed slot table: ONE floor line per stage height (no name-chip or painted-floor shift), so a person snaps to the same x AND y on every stage / place / room */CAP=sH-fo-topR;return{fo,H:Math.max(sH*.2,Math.min(KF.h*sH,CAP,meCap(fo),(KF.maxPx&&capOn)?KF.maxPx:1e9))}};
  const maxF=Math.max(1,...F.map(x=>x.f));
  const widthFor=(z)=>{let rr=rightR;try{const kR=document.getElementById("kshR");const head=sH-z.fo-Math.min(z.H*maxF,sH-z.fo-topR);/* the right plaque column (court chips, maid, Ân sủng) is reserved when it reaches down to the heads: no face or name is ever under it
     (coordinator 11/15, supersedes "may stand under it"); a column that ends above the heads leaves the full width. Compact stages
@@ -8664,7 +8678,7 @@ T.style.removeProperty("background");
 const HEAD={slots:"Chọn sổ",opt:"Thiết lập",past:"Sổ luân hồi",notes:CTM_WAIT.notesName};
 const SUBH={slots:"Sổ mây ở trên, rồi ba sổ chơi một mình. Phúc duyên ở dưới.",slotsco:"Ba phòng cùng hảo hữu, không ghi đè sổ một mình. Phúc duyên ở dưới.",opt:"Tiếng, nhạc, giọng, rung; sổ mây; chép sổ và nạp sổ.",past:"Những kiếp đã qua.",notes:"Những điều mới của các lần đổi mới gần đây."};
 const SONO=["một","hai","ba"];
-function slotWho(s){try{if(s.srv&&!s.srv.risen)return s.srv.lau>0?"Cung nữ Tân Giả khố":(typeof SRK!=="undefined"&&SRK.maid&&SRK.maid[s.srv.rk])||"Cung nữ";return (RANKS[Math.min(s.rank,RANKS.length-1)]||{}).n||""}catch(e){return ""}}
+function slotWho(s){try{if(s.srv&&!s.srv.risen)return s.srv.lau>0?"Cung nữ Tân Giả khố":(typeof SRK!=="undefined"&&SRK.maid&&SRK.maid[s.srv.rk])||"Cung nữ";if(s.kc&&!s.kc.inPal)return s.kc.kd?(s.kc.kd==="dan"?"Thôn nữ chờ tuyển":"Công chúa chờ hòa thân"):"Tiểu thư ngoài cung";return (RANKS[Math.min(s.rank,RANKS.length-1)]||{}).n||""}catch(e){return ""}}
 function slotDate(s){try{return kitDate(s.month,s.year,s.tuan)}catch(e){return `Tháng ${s.month}, năm ${s.year}`}}
 function slotsHTML(){return [1,2,3].map(n=>{const d=loadSlot(n);const h=`<h4 class="kpst">Sổ ${SONO[n-1]}</h4>`;
   if(!d)return `<div class="kslot">${h}${kitRows([["Kiếp","Chưa ghi","n"]])}<div class="kslot-a"><button class="kbtn" data-new="${n}">Bắt đầu kiếp mới</button></div></div>`;
@@ -8742,7 +8756,6 @@ function resumeGame(){const n=lastSlot();const lb=n&&$("slots").querySelector(`[
 window.kitMenuResume=resumeGame;
 $("modal").addEventListener("click",e=>{const M=$("modal");if(!M.classList.contains("kptitle"))return;const b=e.target.closest("button[data-tgo]");if(!b)return;e.stopPropagation();const g=b.dataset.tgo;try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}
  if(b.dataset.cstab){csSet(b.dataset.cstab);if(g==="slots")try{drawSlots()}catch(x){}}
- if(g==="cont"){resumeGame();return}
  go(g)},true);
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&!T.hidden&&PG!=="home"){e.preventDefault();go("home")}});
 /* re-renderers of the borrowed parts: give the parts back first, re-mount after */
@@ -23024,10 +23037,17 @@ function j77Card(k,empty){if(!S||S.dead||Q.length)return;
 function j77LastWalk(k,tc){let n=0;try{n=countAt(k)}catch(e){}
  Q.push({act:1,t:accName(k),h:`<p>Đường đi ${tc} khắc · đến nơi là hết khắc, sang buổi sau.</p>${n?`<p class="past">Có ${n} bóng người ở đó.</p>`:""}<p class="past">Ngươi ở lại đó: buổi sau bắt đầu ngay tại chỗ, thấy ai ở đó.</p>`,
   opts:[{n:"Đi",fx:{},x:`Chắc chắn · tốn: ${tc} khắc · thành: đến nơi, thấy ai ở đó; người ở đó có thể đến gần`,go:()=>setTimeout(()=>{if(S&&!S.dead&&!Q.length)goTo(k)},0)},{n:"Thôi",fx:{},x:""}]});showModal()}
-/* one tap rule for the map and the list */
+/* one tap rule for the map and the list (owner 18/11 ~06:00Z–06:30Z, map-tap-go): TAP A PLACE = GO THERE AT ONCE. No confirm card, no undo, no arrival note:
+   the walk khắc is deducted silently like any Hành sự action (the top bar updates); a walk into the next buổi plays the normal buổi change.
+   A place she cannot reach says why in the kit CẤM toast (srvToast); a place with real choices (xin bái kiến / yết kiến, lẻn vào) still opens the ONE place card. */
+function j77Go(k){if(!S||S.dead||Q.length)return;goTo(k)}
 function j77Tap(k,empty){if(!S||S.dead||Q.length)return;if(empty||!k)return j77Card(k,empty||"Cung trống");
  if(S.place===k){window.__fromMap=1;tab="act";render();return}
- const st=accState(k);if(!st.why){if(k!=="home"&&st.tc&&used+st.tc>=BAL.time.khac&&!accEtq(S,k))return j77LastWalk(k,st.tc);goTo(k);if(S.place!==k&&!Q.length)j77Card(k);return}
+ const st=accState(k);
+ if(!st.why){j77Go(k);if(S.place!==k&&!Q.length)j77Card(k);return}
+ const sp=st.walk&&typeof walkSpill==="function"?walkSpill(k):null;
+ if(sp&&sp.ok&&!st.ask&&!st.kind)return walkSpillGo(k);/* crosses a buổi turn (night card, roulette…): no undo window, the buổi card says it */
+ if(!st.ask&&!st.kind&&!S.out&&!S.confined&&typeof srvToast==="function"){const why=String(st.why||"").replace(/\.$/,"");srvToast(`${accName(k)}: ${why}`);return}
  j77Card(k)}
 window.addEventListener("click",e=>{try{if(typeof tab==="undefined"||tab!=="go"||!S)return;
  const sp=e.target.closest("#panel .mspot, #panel .mtile");if(!sp)return;
@@ -23942,7 +23962,7 @@ const KA_RANKRE=new RegExp("("+RANKS.map(r=>r.n).join("|")+")\\s*$","i");
 function kaWho(v){const r=v&&RANKS[v.rank];return (r&&v!==S?r.n+" ":"")+(v&&v.name||"")}
 function kaTitled(s){for(const v of (typeof rivals!=="undefined"?rivals:[])){if(!v||!v.name||!s.includes(v.name)||!RANKS[v.rank])continue;const rn=RANKS[v.rank].n;s=s.split(v.name).map((x,i,a)=>i<a.length-1&&!KA_RANKRE.test(x)?x+rn+" ":x).join(v.name)}return s}
 const kaN=n=>(n>0?"+":"−")+Math.abs(n);
-function kaSentence(before){const n=Math.max(0,Math.min(S.logs.length,(S.logSeq||0)-before.seq));const L=S.logs.slice(0,n).reverse().map(h=>plain((typeof kShort==="function"?kShort(h):String(h)).replace(/<span class="ld">[^<]*<\/span>/,"")));/* the result card = the SHORT form (jvoice kShort, owner 16/11 ~21:05Z) */
+function kaSentence(before){if(window.__kaSenOvr){const o=window.__kaSenOvr;window.__kaSenOvr=null;return kaTitled(o)}/* review person-dialog-restore: an act that only logs (greet) passes its own line (the oldest span line is the ambient weather line) */const n=Math.max(0,Math.min(S.logs.length,(S.logSeq||0)-before.seq));const L=S.logs.slice(0,n).reverse().map(h=>plain((typeof kShort==="function"?kShort(h):String(h)).replace(/<span class="ld">[^<]*<\/span>/,"")));/* the result card = the SHORT form (jvoice kShort, owner 16/11 ~21:05Z) */
  const ok=L.filter(t=>t&&!/→/.test(t)&&!/(thành|hỏng|bại|kèm|tốn|được ngay)\s*:/i.test(t)&&!/\+\d+\.\.\d/.test(t)&&!/^\[/.test(t)&&!/\b(Thành|Hỏng|Bại)\.\s*·/.test(t)&&!/(^|\s)có thể\s/.test(t));
  if(!ok.length)return"";const P=ok[0].split(kRx("(?<=[.!?…])\\s+(?=[A-ZÀ-Ỹ\"“])",""));let s=P[0];if(s.length<40&&P[1])s+=" "+P[1];return kaTitled(s)}
 /* owner 11/15: other people's feelings (ghen / oán of the consorts) are not HER gains or losses — they go to a separate KÈM line,
@@ -25142,15 +25162,15 @@ function kpIdFig(M,tries){let src="";try{src=typeof figFor==="function"?figFor(S
  /* review/newgame-ui (owner 15/11 "mỗi người 1 chiều cao … che cả nhân vật … 1 lúc sau mới thấy hình"):
     1) ONE standard figure tier: every face is drawn with the same BODY height (head top → feet, kitFigBody, as KIT 33.6) on the same floor
        line, whatever the picture's margins or width (was object-fit:contain in a fixed box: wide robes came out shorter);
-    2) a FIXED column left of the panel, the panel a fixed width per viewport (kpIdLay); robe / sleeve wider than the column is cut with a
-       soft fade at the column edge, so the panel never covers her;
+    2) a FIXED column left of the panel, the panel a fixed width per viewport (kpIdLay); KIT 56.4 (owner 18/11 ~07:50Z): a robe / sleeve wider than the column
+       spreads under the panel (drawn on top, transparent figure), nothing is cut or faded;
     3) the low-res copy (kitTn, ~4 KB, prefetched with the page of faces) shows at once, the crisp figure swaps in once decoded. */
  const lo=kitTn(src);const crisp=src;M.__kidWant=crisp;
  const show=s1=>{if(M.__kidWant!==crisp)return;if(im.getAttribute("src")!==s1){im.src=s1}im.classList.toggle("kidlo",s1!==crisp);kpIdLay(M)};
  if(KPID_OK[crisp]||!lo)show(crisp);
  else{show(lo);const pre=new Image();pre.decoding="async";pre.src=crisp;const fin=()=>{KPID_OK[crisp]=1;show(crisp)};(pre.decode?pre.decode().then(fin,()=>{pre.complete&&pre.naturalWidth?fin():0}):(pre.onload=fin))}
  if(!M.__kidRes){M.__kidRes=1;addEventListener("resize",()=>{clearTimeout(M.__kidT);M.__kidT=setTimeout(()=>{if(M.classList.contains("kpfig"))kpIdLay(M)},60)})}}
-const KPID_OK={};const KPID_WR=.5;/* widest painted width / body height over all faces (see kpIdLay) */
+const KPID_OK={};
 /* the geometry (screen px, from the modal box — the design canvas): phone portrait keeps the figure-on-top layout (CSS, --kidh) */
 function kpIdLay(M){try{const im=M.querySelector(":scope > img.kidfig2"),d=M.querySelector(".dlg");if(!im||!d)return;const W=M.clientWidth||innerWidth,H=M.clientHeight||innerHeight;
  /* KIT 32.2b EQUAL GAPS (owner 16/11 s21 + s22 "whole group"): her full figure stands between the two frame lines of the card scene —
@@ -25170,13 +25190,12 @@ function kpIdLay(M){try{const im=M.querySelector(":scope > img.kidfig2"),d=M.que
  const fb=fb0||{t:0,b:1,ht:0,l:0,r:1,ar:(im.naturalWidth&&im.naturalHeight)?im.naturalWidth/im.naturalHeight:.33};if(!fb0&&!im.naturalWidth)im.addEventListener("load",()=>kpIdLay(M),{once:true});
  const A=lb-lt,G=typeof KIT_DP_GAP!=="undefined"?Math.max(KIT_DP_GAP.min,KIT_DP_GAP.pct*A):Math.max(14,A*.05);
  const ar=fb.ar||.35,bf=Math.max(.3,fb.b-kitFigTop(fb)),pf=Math.max(bf,fb.b-fb.t);/* body = head top → feet (28.11a); painted = top of the crown / hairpin → feet (the gap is measured on it) */
- let Hs=Math.min((A-2*G)*bf/pf,H*(port?.80:.84));/* the standard body height: same for every face on this screen */
- /* ONE common tier per screen (coordinator 16/11, KIT 28.11a): the body height is capped so the WIDEST painted figure of the 420 faces a new
-    game can show (KPID_WR = widest painted width / body height, measured .496 on consort-c05-t4-a18, dev/test/newgame-ui.js) still fits the
-    column whole; every face, consort and maid, gets that same body height — no robe cut, no spill, no per-face shrink */
- Hs=Math.max(40,Math.min(Hs,colW*.98/KPID_WR));let ih=Hs/bf,iw=ih*ar;
- const floor=lb-(A-ih*pf)/2;/* 32.2b: the painted figure centred between the two lines → gap above the crown = gap under the feet */
- let left=Math.round((colL+colW/2)-((fb.l+fb.r)/2)*iw);const top=Math.round(floor-fb.b*ih);
+ const cRef=(typeof BAL==="object"&&BAL.bookFrame&&BAL.bookFrame.cRef)||.072;let Hs=Math.min((A-2*G)/(1+cRef),H*(port?.80:.84));/* KIT 56.4: body = the room of the tallest Hoàng hậu crown, never this face's own crown *//* the standard body height: same for every face on this screen */
+ /* ONE body for every face on this screen (KIT 28.11a, 56.4): head top → feet; no per-face shrink and no cap for the widest robe */
+ /* KIT 56.4 (owner 18/11 ~07:50Z, step 2 of 56.3): the old per-screen cap that shrank EVERY face for the widest robe (KPID_WR) is gone — never shrink the whole set for outliers; a wide robe / sleeve spreads under the panel, which is drawn on top (z-index 1), and nothing is cut */
+ Hs=Math.max(40,Hs);let ih=Hs/bf,iw=ih*ar;
+ const floor=lb-(A-Hs*(1+cRef))/2;/* 32.2b: the painted figure centred between the two lines → gap above the crown = gap under the feet */
+ let left=Math.round(colL+kitFullFigX(fb,iw,colW));const top=Math.round(floor-fb.b*ih);
  Object.assign(im.style,{left:left+"px",top:top+"px",bottom:"auto",width:Math.round(iw)+"px",height:Math.round(ih)+"px",objectFit:"fill"});
  im.style.removeProperty("-webkit-mask-image");im.style.removeProperty("mask-image");
  /* review/fig-cutout-code: the HD twin is picked from `sizes` (jfighd kitFigHD); refresh it to the width just set, or a stale smaller
@@ -26716,7 +26735,9 @@ function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.
 /* full-page figure (owner 04:30Z): the figure column spans the whole page body; the figure's height = the body height (men ×1, women
    ×1/KIT_FIG.man through --kfr); the text column beside it scrolls into a "(tiếp theo)" page, the figure never shrinks */
 .kbk-person.kbk-full,.kbk.narrow .kbk-person.kbk-full{grid-template-columns:var(--porf) minmax(0,1fr);grid-template-areas:"por head" "por flow";grid-template-rows:auto minmax(0,1fr);height:100%}
-.kbk-person.kbk-full>.kbk-por{align-self:stretch;height:100%;min-height:0;position:relative;display:flex;justify-content:flex-start;align-items:flex-end;overflow:hidden}
+.kbk-person.kbk-full>.kbk-phead{box-sizing:border-box;padding-right:52px}/* KIT 34.6 r5: room for the mood seal slot (jfigseal), the same on every page */
+.kbk-person.kbk-full>.kbk-por{align-self:stretch;height:100%;min-height:0;position:relative;display:flex;justify-content:flex-start;align-items:flex-end;overflow:visible}
+.kbk-person.kbk-full>.kbk-por{z-index:0}.kbk-person.kbk-full>.kbk-phead,.kbk-person.kbk-full>.kbk-flow{position:relative;z-index:1}/* KIT 56.3: the figure (transparent) may spread under the text; the text is drawn ON TOP */
 .kbk-person.kbk-full>.kbk-por>.kesf{height:100%;margin:0;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;min-height:0;max-width:100%}
 .kbk-person.kbk-full>.kbk-por .kesfi{display:block;position:relative;height:calc(100% * var(--kfr,1));width:auto;max-width:none;flex:0 0 auto}
 .kbk-person.kbk-full>.kbk-por .kesfi>.kesimg{display:block;height:100%!important;width:auto!important;max-width:none!important;max-height:none!important}
@@ -29357,8 +29378,10 @@ try{const rs1=resultShow;resultShow=function(title,before){try{fixTrue(before)}c
  const tk0=talk;talk=function(oi){let ttl="";try{ttl=talkOpts(curPeople()[popIdx])[oi].n}catch(e){}const b=rsnap();nrTalk={};let r;
   try{r=tk0.apply(this,arguments)}finally{const pend=nrTalk.args;nrTalk=null;
    try{fixTrue(b);popMsg=onePop(popMsg,ttl,b)}catch(e){console.error(e)}
-   const shown=popIdx!=null&&popMsg&&!(document.getElementById("modal")&&!document.getElementById("modal").hidden);
-   if(pend&&!shown)resultShow.apply(null,pend);try{renderStage()}catch(e){}}
+   /* person-dialog-restore (owner 18/11 06:10Z, OD:L1852): the result of an act in a person dialog ("Ta đã biết: đó là …", "Hỏi han: thành …") is the
+      standard bottom result card, never a box in the dialog column (it pushed the act cards down and left an empty band). An act that logs
+      but has no result call of its own (greet) gets the card from its log lines + the snapshot taken before. */
+   try{if(pend)resultShow.apply(null,pend);else if(popIdx!=null&&popMsg&&b&&(S.logSeq||0)>b.seq){window.__kaSenOvr=plain(popMsg).replace(/\s+/g," ").trim();try{resultShow(ttl,b,null)}finally{window.__kaSenOvr=null}}}catch(e){console.error(e)}try{renderStage()}catch(e){}}
   return r}}catch(e){console.error(e)}
 /* pop card result: one statement; later lines that only repeat it are dropped */
 function onePop(h,ttl,b){if(!h)return h;const seg=h.split("<br>");if(seg.length<2)return h;const first=T(seg[0]);
@@ -30745,6 +30768,9 @@ Object.assign(BAL,{skip:{od:40,raw:5,care:.5}});
 /* FACE REVEAL motion (owner 18/11 ~06:20Z, KIT §79 jreveal.js): ms = the grey veil clears from the face outward; lite = Gọn / reduced motion short fade;
    win = how long after a face is learned every place that first draws it (frame, avatar, stage figure) still plays its one reveal */
 Object.assign(BAL,{faceReveal:{ms:Math.round(1000*BAL.pace),lite:350,win:8000}});
+/* BOOK FIGURE (owner 18/11 ~07:10Z + ~07:20Z, KIT §56.3): ONE body size for everybody = SKULL TOP to FEET = figure column width / bookFigW (her p.5 shot: Fold col 220 -> 641, iPad col 183 -> 534). Layout = live; nothing cut, nobody shrunk, the text is drawn on top.
+   cRef = the tallest Hoàng hậu crown above the skull top / body (catalog scan 18/11: thaihau-h3-a36 .072); gap = px the crown keeps under the running-head rule; footGap = px the feet keep above the page's bottom line when the feet line is moved down for her crown. */
+BAL.bookFigW=.343;Object.assign(BAL,{bookFrame:{cRef:.072,gap:8,footGap:10}});
 /* ================= jnwq: NO WORD GAMES, family C (owner 16/11 07:20Z + 07:25Z, s11, review/nw-quiz) =================
    The four vấn đáp / quiz kinds of the promotion exam (jexam EXK: le, tc, xa, thq) are now SKILL games of the same subject, winnable by what is SHOWN
    (same easy rules as mg-easy: Gợi ý button, first-time demo card, tier by level, wrong tries bounce back, quiet auto-hint when she stalls):
@@ -32632,7 +32658,7 @@ function kitFlipTablet(p,o){o=o||{};if(!p)return;const me=p===S||o.me;const nm=p
 
 /* someone else's tablet: one short line under the top bar (kit chip), no backdrop, never takes a tap, fades by itself */
 function kitFlipNote(p){if(!p||p===S)return;const nm=p.name||"";const rk=kmRankName(typeof rkOf==="function"?rkOf(p):0);
- kmPush(done=>{document.querySelectorAll(".kmnote").forEach(e=>e.remove());const n=document.createElement("div");n.className="kmnote";n.setAttribute("role","status");
+ kmPush(done=>{document.querySelectorAll(".kmnote:not(.kmslot)").forEach(e=>e.remove());const n=document.createElement("div");n.className="kmnote";n.setAttribute("role","status");
   let face="";try{face=mdH(pv(p),"xs")}catch(e){}
   n.innerHTML=`<span class="kchip n">${face}<span>Tối nay Hoàng thượng lật thẻ <b>${kmEsc(rk)} ${kmEsc(nm)}</b></span></span>`;
   const hb=document.getElementById("hud2")||document.querySelector(".hud,header");const hr=hb&&hb.getBoundingClientRect();if(hr&&hr.bottom>0&&hr.bottom<innerHeight*.4)n.style.top=Math.round(hr.bottom+6)+"px";
@@ -35853,7 +35879,7 @@ html body .kshR{position:absolute;top:8px;right:8px;width:var(--kgrw,150px);min-
 .kshR .k3r>b{white-space:normal;text-align:right}
 /* owner 11/15: people may stand under the right column — its plaques float on top on a SOLID card */
 .kshR .k3p,.kshR .k3c{background:rgb(255,250,240)!important;backdrop-filter:none}
-.ksh .k3p,.ksh .k3c{pointer-events:auto;background:var(--k3pl);border:1px solid var(--line);border-radius:8px;box-shadow:0 1px 4px #3a20101f;backdrop-filter:blur(2px)}
+.ksh .k3p,.ksh .k3c,.kpname{pointer-events:auto;background:var(--k3pl);border:1px solid var(--line);border-radius:8px;box-shadow:0 1px 4px #3a20101f;backdrop-filter:blur(2px)}
 .ksh .k3p{display:flex;flex-direction:column;padding:3px 6px;gap:0}
 .ksh .k3h{font-family:var(--display);font-size:.7rem;color:var(--gold);letter-spacing:.03em;border-bottom:1px solid var(--k-hair,#e6d3ac);margin-bottom:1px}
 .ksh .k3r{display:flex!important;align-items:center;gap:4px;border:0;background:none;padding:1px 0;margin:0;font:inherit;font-size:.75rem;line-height:1.25;color:var(--ink);text-align:left;cursor:pointer;min-height:0;width:100%}
@@ -36092,8 +36118,10 @@ html body .pc:has(>.pcr>.pcx){position:relative}
 html body #popw{z-index:41!important}
 html body .pc>.pcr>.pcx{position:absolute!important;top:6px;right:6px;margin:0!important;z-index:8;translate:0 var(--kpcxy,0px)}
 html body .pc:has(>.pcr>.pcx)>.pcl>.kpnm{padding-right:46px}
-/* KIT 32.10: the ✕ owns the card's top-right corner — the first act card starts under it, never under the ✕ */
-html body .pc>.pcr>.pcx+*{margin-top:42px!important}
+/* KIT 32.10: the ✕ owns the card's top-right corner — the first act card starts under it, never under the ✕.
+   person-dialog-restore (owner 18/11 06:10Z): ONLY when the ✕ is the first child. kitPcFix (jk2b) prepends the sticky info block (.kpstick) BEFORE the ✕, so
+   the old ".pcx+*" rule hit the act list under the sticky block and left a 42 px empty band between them (every person card, every result/tab state). */
+html body .pc>.pcr>.pcx:first-child+*{margin-top:42px!important}
 /* kit panels (report / story / info dialogs): the close row "Đã hiểu" is pinned at the dialog's bottom, the body scrolls under it */
 html body .dlg.kpanel>.mr{position:sticky;bottom:0;z-index:9;background:linear-gradient(rgba(255,250,240,0),var(--k-card,#fffaf0) 10px);padding-top:8px}
 `;document.head.appendChild(st)})();
@@ -37926,20 +37954,20 @@ function kitDpFit(){try{const o=kitDpOn();if(!o||!o.d.classList.contains("kdper"
  const prof=(b,f)=>{if(!b.wl)return[b.l,b.r];const k=Math.max(0,Math.min(20,Math.ceil(f*20-1e-6)));return[b.wl[k],b.wr[k]]};
  const lay=(top,rows)=>{const Hu=floor-top;if(Hu<40)return false;
   /* review/fig-headtop (owner 17/11): people side by side stand level by the HEAD TOP; crowns / pins / hats stick out above. Body = head top .. feet; kT = the one body scale of this column, set by the figure whose painted top (crown) needs the most headroom, so no head gear leaves the column and every body keeps its kit ratio */
-  const kT=Hu/Math.max(.2,...L.map(x=>Math.min(1,x.fac)*Math.max(.2,x.b.b-x.b.t)/Math.max(.2,x.b.b-kitFigTop(x.b))));
+  const kT=Hu/(1+((typeof BAL==="object"&&BAL.bookFrame&&BAL.bookFrame.cRef)||.072));/* KIT 56.4: the room is the tallest Hoàng hậu crown's (BAL.bookFrame.cRef above the skull top), the same for every person: nobody is shrunk for an outlier crown, a taller one rises into the chip line, never cut */
   const at=m=>{const sz=L.map(x=>{const rel=Math.min(1,x.fac);const span=Math.max(.2,x.b.b-x.b.t);const ih=kT*rel*m/Math.max(.2,x.b.b-kitFigTop(x.b));const iw=ih*(x.b.ar||1);
     const fv=Math.min(1,Hu/(ih*span));const [vl,vr]=prof(x.b,Math.min(fv,L.length>1?1:KIT_DP_CROP.knee));/* two people: the whole visible part counts (review/stage-slots-fix-r1: no overlap); one person: the column edge may cut a hem */
     const cl=x.b.cl!=null?x.b.cl:x.b.l,cr=x.b.cr!=null?x.b.cr:x.b.r;return{ih,iw,span,fv,core:iw*(cr-cl),cl,cr,l:Math.min(vl,cl),r:Math.max(vr,cr),t:x.b.t,b:x.b.b}});
    /* review/stage-slots-fix-r1 (owner OD:L1049): fixed slots (kitSlot*, jkit), no overlap: the column must be as wide as the widest visible art × (k+1) for k ≥ 2 people */
    const tot=kitSlotNeed(sz.map(s=>s.iw*(s.r-s.l)));return{sz,tot}};
   /* target scale: 1 = the tallest person fills the column; a short column zooms (crop at the floor) up to minVis of the body in view */
-  const minFull=KIT_DP_CROP.minH*innerHeight;const mT=Hu<minFull?Math.min(minFull/Hu,1/KIT_DP_CROP.minVis):1;
-  let m=mT,A=at(m);if(A.tot+12>Wmax){let lo=.1,hi=mT;for(let i=0;i<22;i++){const md=(lo+hi)/2;if(at(md).tot+12<=Wmax)lo=md;else hi=md}m=lo;A=at(m)}
+  /* KIT 56.4 (owner 18/11 ~07:50Z, step 2 of 56.3): no zoom-and-cut at the floor any more; the ONE body skull top -> feet is sized by the column HEIGHT only (the tallest crown's room, `kT` above) */const mT=1;
+  let m=mT,A=at(m);if(L.length>1&&A.tot+12>Wmax){/* only SEVERAL people side by side are scaled to the column width (so they never overlap); ONE person is never shrunk for a wide robe: it spreads under the text (KIT 56.4) */let lo=.1,hi=mT;for(let i=0;i<22;i++){const md=(lo+hi)/2;if(at(md).tot+12<=Wmax)lo=md;else hi=md}m=lo;A=at(m)}
   const {sz,tot}=A;const need=Math.min(Wmax,Math.max(tot,capW)+12);if(!narrow)d.style.setProperty("--kdpw",Math.round(need)+"px");
   const W=narrow?col.clientWidth:need;const kN=sz.length;
   /* the tallest person sets the chip line: right above the painted top when the people are shorter than the column */
   const gap=Math.max(0,Hu-Math.max(...sz.map(s=>s.ih*s.span)));col.dataset.kdpcrop=sz.some(s=>s.fv<.995)?"1":"0";
-  L.forEach((it,i)=>{const s=sz[i];const ih=s.ih,iw=s.iw;const cxs=kitSlotCx(i,kN,6,W-12);const left=cxs-iw*(s.l+s.r)/2;
+  L.forEach((it,i)=>{const s=sz[i];const ih=s.ih,iw=s.iw;const cxs=kitSlotCx(i,kN,6,W-12);const left=kN===1?kitFullFigX(it.b,iw,W):cxs-iw*(s.l+s.r)/2;
    const ftop=s.fv<.995?top-ih*s.t:floor-gap/2-ih*s.b;/* cropped: painted top under the chips, the rest runs past the floor (cut); 32.2b: full figure centred, equal gaps */
    Object.assign(it.f.style,{left:left.toFixed(1)+"px",top:ftop.toFixed(1)+"px",width:iw.toFixed(1)+"px",zIndex:String(2+i),visibility:""});
    const wr=it.f.querySelector(".kesfi");if(wr)Object.assign(wr.style,{width:iw.toFixed(1)+"px",height:ih.toFixed(1)+"px",margin:"0",maxWidth:"none"});
@@ -38063,7 +38091,8 @@ html body #modal .dlg.kdper.kdpall.kdpbanner>#mb>.opts{grid-row:3!important}
 #modal .dlg.kdper>#mb,.modal .dlg.kdscroll.kdper>#mb{flex:1 1 auto!important;min-height:0;display:grid!important;overflow:hidden!important;
  grid-template-columns:var(--kdpw,240px) minmax(0,1fr);grid-template-rows:max-content minmax(0,1fr);column-gap:14px;align-content:stretch}
 #modal .dlg.kdper>#mb>.kpb.kdpb{display:contents!important}
-#modal .dlg.kdper>#mb>.kpb>.kpsubj.kes{grid-column:1;grid-row:1/-1;position:relative!important;display:block!important;top:auto;max-height:none!important;height:auto;min-height:0;overflow:clip!important;margin:0}
+#modal .dlg.kdper>#mb>.kpb>.kpsubj.kes{grid-column:1;grid-row:1/-1;position:relative!important;display:block!important;top:auto;max-height:none!important;height:auto;min-height:0;overflow:visible!important;z-index:0;margin:0}/* KIT 56.4: the figure column does not clip; the text and the options are drawn on top of the transparent figure */
+#modal .dlg.kdper>#mb>.kpb>.kpmain,#modal .dlg.kdper>#mb>.opts{position:relative;z-index:1}
 /* KIT 32.2 crop (review/stage-fig-size): the column clips — a hem / sleeve wider than the capped column and the legs of a cropped figure are cut at its edge */
 #modal .dlg.kdper>#mb>.kpb>.kpmain,#modal .dlg.kdper>#mb>.kdpr{grid-column:2;min-width:0}
 #modal .dlg.kdper>#mb>.opts{grid-column:2;grid-row:-2/-1;min-height:0!important;max-height:none;overflow-y:auto!important;align-self:stretch;margin-top:8px;
@@ -38203,9 +38232,9 @@ ${T}{font-family:var(--display,"Noto Serif",Georgia,serif)!important;font-weight
  color:var(--rt,color-mix(in srgb,var(--rc,var(--tc,#7a5a30)) 80%,#000))!important;text-shadow:none!important;
  background:none!important;box-shadow:none!important;line-height:1.2!important;padding:0 2px!important}
 ${N}{color:var(--krt-ink)!important;font-weight:700;text-shadow:none!important}
-${PT}{color:var(--rt,color-mix(in srgb,var(--rc,var(--tc,#7a5a30)) 80%,#000))!important;/* 48.1d/e: rank line on a painting = its rank tone; right around the letters the glow is a LIGHT tint of its own rank colour (stacked so letter vs halo >= 3:1, scan stage-tag-contrast.py), then the saturated rank colour further out (the neon); 1 px paper rim (no dark hairline: it darkens the halo behind the letters) */
- text-shadow:0 0 1px #fff8ee,0 0 3px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 14%,#fff),0 0 3px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 14%,#fff),0 0 5px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 20%,#fff),0 0 5px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 20%,#fff),0 0 8px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 30%,#fff),0 0 11px var(--tc,var(--rc,var(--rt)))!important}
-${HT}{text-shadow:0 0 1px #fff8ee,0 0 3px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 14%,#fff),0 0 3px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 14%,#fff),0 0 5px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 20%,#fff),0 0 5px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 20%,#fff),0 0 8px color-mix(in srgb,var(--tc,var(--rc,var(--rt))) 30%,#fff),0 0 11px var(--tc,var(--rc,var(--rt))),0 0 16px var(--tc,var(--rc,var(--rt)))!important}
+${PT}{color:color-mix(in srgb,var(--rt,var(--rc,var(--tc,#7a5a30))) 72%,#000)!important;/* place-stage r4 (owner OD:L532/L702/L866): the stage tag's RANK line keeps its RANK hue (a deeper, saturated shade of the rank tone for contrast) and gets the SAME light-paper halo as the NAME line (no coloured glow: it was faded on a light floor) */
+ text-shadow:0 0 1px #fff8ee,0 0 3px #ffe9a8,0 0 7px #f3cf6a,0 0 11px #e8bd4a99!important}
+${HT}{text-shadow:0 0 1px #fff8ee,0 0 3px #ffe9a8,0 0 7px #f3cf6a,0 0 11px #e8bd4a99!important}
 ${PN}{text-shadow:0 0 1px #fff8ee,0 0 3px #ffe9a8,0 0 7px #f3cf6a,0 0 11px #e8bd4a99!important}
 html body .kpsn .kname .kti{display:block;font-size:.84rem!important}
 /* stage side cards (.ksh .k3c, review/pick-hint-r1): a person's title + name (kitRankNamePaint / kitName) stack as rank line over name,
@@ -38581,10 +38610,10 @@ function kitPersonDlgFit(root){try{const R=root||document;R.querySelectorAll(".k
  const H=box.clientHeight,W=box.clientWidth;if(H<60||W<40)return;
  const ar=im.naturalWidth&&im.naturalHeight?im.naturalWidth/im.naturalHeight:(b.ar||.45);
  const Hf=fl?Math.max(40,Math.min(H,fl.lb-fl.G-box.getBoundingClientRect().top)):H;/* feet one gap above the lower line */
- const span=Math.max(.2,b.b-b.t);let ih=Math.min((Hf-4)*rel/Math.max(.2,b.b-kitFigTop(b)),(Hf-4)/span),iw=ih*ar;/* review/fig-headtop: body = head top .. feet at the kit ratio; the crown never leaves the column *//* the painted body (head-top .. feet) fills the column between the gaps; a wide hem / sleeve is cut by the column edge */
- const cx=((b.cl!=null?b.cl:b.l)+(b.cr!=null?b.cr:b.r))/2;
+ const span=Math.max(.2,b.b-b.t);let ih=(Hf-4)*rel/(1+((typeof BAL==="object"&&BAL.bookFrame&&BAL.bookFrame.cRef)||.072))/Math.max(.2,b.b-kitFigTop(b)),iw=ih*ar;/* KIT 56.4: the ONE body = the column height / (1 + the tallest Hoàng hậu crown); never sized by this person's own crown *//* review/fig-headtop: body = head top .. feet at the kit ratio; the crown never leaves the column *//* the painted body (head-top .. feet) fills the column between the gaps; KIT 56.4 (owner 18/11 ~07:50Z): a wide hem / sleeve is NOT cut, it spreads right under the text (drawn on top) */
+ const fx=kitFullFigX(b,iw,W);
  f.style.cssText="position:absolute;left:0;top:0;width:100%;height:100%;margin:0";
- const wr=f.querySelector(".kesfi");if(wr)wr.style.cssText=`position:absolute;left:${(W/2-iw*cx).toFixed(1)}px;top:${(Hf-ih*b.b).toFixed(1)}px;width:${iw.toFixed(1)}px;height:${ih.toFixed(1)}px;margin:0;max-width:none`;
+ const wr=f.querySelector(".kesfi");if(wr)wr.style.cssText=`position:absolute;left:${fx.toFixed(1)}px;top:${(Hf-ih*b.b).toFixed(1)}px;width:${iw.toFixed(1)}px;height:${ih.toFixed(1)}px;margin:0;max-width:none`;
  im.style.cssText=`width:${iw.toFixed(1)}px;height:${ih.toFixed(1)}px;max-width:none;max-height:none`;col.dataset.kpdfit="1"})}catch(e){console.error("kitPersonDlgFit",e)}}
 window.kitPersonDlg=kitPersonDlg;window.kitPersonDlgFit=kitPersonDlgFit;
 (function(){let t=0;addEventListener("resize",()=>{clearTimeout(t);t=setTimeout(()=>kitPersonDlgFit(),140)})})();
@@ -38592,14 +38621,14 @@ window.kitPersonDlg=kitPersonDlg;window.kitPersonDlgFit=kitPersonDlgFit;
 html body .dlg.kpanel.kpdlg{box-sizing:border-box;width:var(--kpw);min-width:0;max-width:var(--kpw);height:var(--kph);min-height:var(--kph);max-height:var(--kph);display:flex;flex-direction:column;overflow:hidden;margin:0}
 .kpdlg>.kph{flex:none}
 .kpdlg>.kpdb{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:clamp(110px,38%,248px) minmax(0,1fr);gap:12px;padding:8px 14px 4px}
-.kpdlg .kpsubj.kes{position:relative;display:flex;flex-direction:column;align-items:center;min-height:0;min-width:0;overflow:hidden}
+.kpdlg .kpsubj.kes{position:relative;z-index:0;display:flex;flex-direction:column;align-items:center;min-height:0;min-width:0;overflow:visible}
 .kpdlg .kpdcap{flex:none;margin:0 0 2px;text-align:center;max-width:100%}
-.kpdlg .kpdfig{position:relative;flex:1 1 auto;min-height:0;width:100%;overflow:hidden}
+.kpdlg .kpdfig{position:relative;flex:1 1 auto;min-height:0;width:100%;overflow:visible}
 .kpdlg .kpdfig .kesf{margin:0}
 .kpdlg .kpdfig .kesfi{display:block}
 .kpdlg .kpdfig .kesimg{display:block;filter:url(#kfa) var(--klf,brightness(1)) drop-shadow(0 6px 8px #3a201033)}
 .kpdlg .kpdfig .kesf>.kpsn{display:none}
-.kpdlg .kpdr{min-width:0;min-height:0;display:flex;flex-direction:column;gap:8px}
+.kpdlg .kpdr{position:relative;z-index:1;min-width:0;min-height:0;display:flex;flex-direction:column;gap:8px}/* KIT 56.4: text drawn ON TOP of the figure */
 .kpdlg .kdpban{flex:none;margin:0;padding:0}
 .kpdlg .kdpban>.ksart{width:100%;height:clamp(84px,calc(17*var(--kvh,1dvh)),150px);aspect-ratio:auto}
 .kpdlg .kdpban>.ksart img{width:100%;height:100%;object-fit:cover}
@@ -38949,20 +38978,20 @@ var KBK_ART_LINE=window.KBK_ART_LINE={b:.0244};
  function clamp(){q=0;try{document.querySelectorAll(".kbk-person.kbk-full .kesfi").forEach(f=>{const box=f.closest(".kbk-person");if(!box)return;
    const por=box.querySelector(":scope>.kbk-por"),pg=box.closest(".kbk-pg");if(!por)return;
    f.style.transform="";{const i0=f.querySelector("img");if(i0&&i0.style.maskImage){i0.style.maskImage="";i0.style.webkitMaskImage=""}}
-   /* KIT 34.6 (owner 16/11 "Nhân vật sao chưa theo tỉ lệ chuẩn"): the figure (real or silhouette) is sized by its BODY — kitBookFig, the stage / dialog rule:
-      body = min(KIT_FIG.h × column, maxPx) × fac, feet on the column floor, true aspect. Not measured yet → hidden (never shown at its raw box size). */
-   let dyF=0,dxF=0;{const i1=f.querySelector("img"),s1=i1&&i1.getAttribute("src"),b1=s1?kitFigBody(s1,soon):null,Hc=por.clientHeight;
-    if(!b1||!Hc){f.style.visibility="hidden"}else{const kf=parseFloat(getComputedStyle(box).getPropertyValue("--kfr"))||1;let kk=1;
-     const ar1=i1.naturalWidth&&i1.naturalHeight?i1.naturalWidth/i1.naturalHeight:b1.ar,g=kitBookFig(Object.assign({},b1,{ar:ar1}),kf*KIT_FIG.man,Hc);const pwc=por.clientWidth,pw1=Math.max(.2,(b1.r||1)-(b1.l||0))*g.iw;if(pwc&&pw1>pwc)kk=pwc/pw1;dyF=g.dy*kk;dxF=-(b1.l||0)*g.iw*kk;   /* fitted INTO the narrow column by its PAINTED width (sleeves / train included): feet visible, nothing cut, painted left edge on the column's left edge */
-     f.style.height=(g.ih*kk).toFixed(1)+"px";f.style.width=(g.iw*kk).toFixed(1)+"px";f.style.visibility="";f.dataset.kbody=(g.body*kk).toFixed(1);
-     /* KIT 32.2b EQUAL GAPS (owner 16/11 s21/s22, whole group): the two frame lines round the figure are the running-head rule (.kbk-rh)
-        and the page frame's bottom line: the painted border's inner edge on art pages (KBK_ART_LINE.b of the page height, measured on
-        book-right/left.webp), the drawn .kbk-in frame on plain pages. Gap above the painted head = gap under the feet: the figure is raised
-        by half the difference (never lowered past its column floor — the page number row — never above the column top). */
+   /* KIT 56.3 FULL-BODY FIGURE (owner 18/11 ~07:10Z + ~07:20Z, overwrites the 17/11 narrow-column fit, the 18/11 "wide robes cropped" and the frame-shape rules): LAYOUT = the live Tuần lục layout (--porf column, text column as live).
+      SIZE = ONE body for everybody: SKULL TOP (kitFigBody ht = head-top table / face mesh, never crown, bun or hat) to FEET = column width / BAL.bookFigW (her p.5 shot: Fold 641 / iPad 534); kids by KIT_FIG.fac.
+      Nothing is cut, nobody is shrunk: a wide robe / sleeve / lantern spreads out of the column over the text area (the text is drawn ON TOP, the figure is transparent); the painted left edge is on the column's left edge as live.
+      Crowns rise into the free paper; ONE feet line for everybody: the column floor, moved DOWN (toward the page's bottom line) only as far as the tallest Hoàng hậu crown (BAL.bookFrame.cRef) needs to clear the running-head rule by BAL.bookFrame.gap px; only if that is not enough the ONE body is lowered for all. */
+   let dyF=0,dxF=0;{const i1=f.querySelector("img"),s1=i1&&i1.getAttribute("src"),b1=s1?kitFigBody(s1,soon):null,Hc=por.clientHeight,BF=BAL.bookFrame;
+    if(!b1||!Hc||!por.clientWidth){f.style.visibility="hidden"}else{
+     const ar1=i1.naturalWidth&&i1.naturalHeight?i1.naturalWidth/i1.naturalHeight:b1.ar,kid=/fig-kid-/.test(s1)&&typeof KIT_FIG==="object"?KIT_FIG.fac(s1):1;
+     let body=por.clientWidth/BAL.bookFigW,shift=0;
      try{const inEl=box.closest(".kbk-in"),rh=inEl&&inEl.querySelector(":scope > .kbk-rh");const rel=e=>{let y=0,x=e;while(x&&x!==inEl){y+=x.offsetTop;x=x.offsetParent}return x===inEl?y:null};const pt=inEl?rel(por):null;
       const pgE=box.closest(".kbk-pg"),art=!!(pgE&&(pgE.classList.contains("r")&&box.closest(".kbk.art-right")||pgE.classList.contains("l")&&box.closest(".kbk.art-left")));
-      if(pt!=null){const lt=rh&&rh.offsetParent?rh.offsetTop+rh.offsetHeight:0,lb=art?pgE.offsetHeight*(1-KBK_ART_LINE.b)-inEl.offsetTop:inEl.clientHeight,figH=g.ih*kk*Math.max(.2,b1.b-b1.t),feet=pt+Hc;
-       const s=Math.max(-(Hc-figH),Math.min(0,((lb-feet)-(feet-figH-lt))/2));dyF+=s;f.dataset.kgap=Math.round(feet+s-figH-lt)+"/"+Math.round(lb-feet-s)}}catch(e){}}}
+      if(pt!=null){const lt=rh&&rh.offsetParent?rh.offsetTop+rh.offsetHeight:0,lb=(art?pgE.offsetHeight*(1-KBK_ART_LINE.b)-inEl.offsetTop:inEl.clientHeight)-BF.footGap,feet0=pt+Hc,need=lt+BF.gap+body*(1+BF.cRef);
+       shift=Math.max(0,Math.min(need-feet0,lb-feet0));if(feet0+shift<need-.5)body=Math.max(60,(feet0+shift-lt-BF.gap)/(1+BF.cRef));f.dataset.kshift=Math.round(shift)}}catch(e){}
+     const bd=Math.max(.2,b1.b-kitFigTop(b1)),ih=body*kid/bd,iw=ih*ar1;dyF=ih*(1-b1.b)+shift;dxF=-b1.l*iw;
+     f.style.height=ih.toFixed(1)+"px";f.style.width=iw.toFixed(1)+"px";f.style.visibility="";f.dataset.kbody=(ih*(b1.b-kitFigTop(b1))).toFixed(1);{const im=f.querySelector("img");if(im)im.style.clipPath=""}}}
    const w0=f.offsetWidth;if(!w0||!box.offsetWidth)return;
    f.style.transformOrigin="50% 100%";const t=Math.abs(dyF)>0.5||Math.abs(dxF)>0.5?`translate(${dxF.toFixed(1)}px,${dyF.toFixed(1)}px)`:"";if(f.style.transform!==t)f.style.transform=t})}catch(e){}}
  function soon(){if(!q){q=requestAnimationFrame(clamp);setTimeout(clamp,450);setTimeout(clamp,1300)}}
@@ -43310,7 +43339,7 @@ function kitPlaceHost(k){try{if(!S||!k||k==="home"||typeof relPerson!=="function
  if(k!=="kn"&&k[0]!=="r")return null;const h=typeof accHost==="function"?accHost(k):null;
  if(!h||h===S||!h.alive||h.out||(typeof whereOf==="function"&&whereOf(h)!==k))return null;return relPerson(h.id)}catch(e){return null}}
 window.kitPlaceHost=kitPlaceHost;
-function kitPlaceDress(m,k){if(!m||!k||m.placeK)return;m.placeK=k;const a=kitPlaceArt(k);if(a)m.headArt=a;m.h=kitPlaceInfo(k,m.h);if(m.opts)m.optLayout=undefined}
+function kitPlaceDress(m,k){if(!m||!k||m.placeK)return;m.placeK=k;m.stage=[];/* ONE look: a place card never carries a person column (OD 18/11 map-tap-go; she is in the people list / her card) */const a=kitPlaceArt(k);if(a)m.headArt=a;m.h=kitPlaceInfo(k,m.h);if(m.opts)m.optLayout=undefined}
 /* KIT §8.2: the place card carries .kplace only as a tag for tests; it has no layout of its own */
 function kitPlaceSil(){try{const m=Q[0];const d=document.querySelector("#modal .dlg");if(d)d.classList.toggle("kplace",!!(m&&m.placeK))}catch(e){}}
 /* tag the cards: each builder's own card (after all its wrappers) is dressed once, then shown again */
@@ -44773,7 +44802,9 @@ if(typeof j76sucWhy==="function"){j76sucWhy=function(c){if(!S||S.dead||c<=1||win
    ITEMS: markers are owned items (S.meMarks = ranks owned; S.meMark = the one she shows, null = highest owned). Every promotion gives that rank's
    marker (shown in the rank chest of review/gift-chest — jrankset rsChest/kitReward kind "chest" — via the hook below); old saves get every rank
    up to the current one on load. Tư trang has a "Dấu ấn" tab; tapping a marker → "Dùng" switches to it (any owned one, older ones too). ===== */
-window.KIT_MEMARK=window.KIT_MEMARK||{h:.085,gap:.012,min:26,max:72,tiny:12,big:1.05,sc:[.78,.84,.9,.95,1,1.06,1.14,1.22]};
+window.KIT_MEMARK=window.KIT_MEMARK||{h:.085,gap:.012,min:26,max:72,tiny:12,big:1.05,bob:11,edge:4,/* bob = the bounce height of kmmBob (px up from rest, +3 % squash); edge = air kept under the frame's top edge (owner 18/11 ~03:5xZ: the marker's whole bounce range stays INSIDE the stage frame) */sc:[.78,.84,.9,.95,1,1.06,1.14,1.22]};
+/* glow gold = the Hoàng hậu title pill's token (jtitle kdh tier 8 = RCOL[7]); owner 18/11 ~06:05Z "rực giống Phượng minh thiên hạ" */
+const KMM_GOLD=(typeof RCOL!=="undefined"&&RCOL[7])||"#ffc400";
 const KMM_NAMES=["Mai ngà","Lan bạc ngọc bích","Hoa bạc ngọc lam","Búp sen ngọc","Cúc tím chim loan","Mẫu đơn hồng ngọc","Phượng vàng mây ngọc","Cánh phượng hổ phách"];
 /* ---------- owned markers (save data) ---------- */
 function kmmRankNow(){try{if(!S||S.out)return null;if(typeof isSrv==="function"&&isSrv())return null;return Math.max(0,Math.min(7,S.rank|0))}catch(e){return null}}
@@ -44781,6 +44812,8 @@ function kmmOwned(){try{if(!S)return[];const r=kmmRankNow();if(!Array.isArray(S.
  else if(r!=null&&!S.meMarks.includes(r)){for(let i=0;i<=r;i++)if(!S.meMarks.includes(i))S.meMarks.push(i)}S.meMarks.sort((a,b)=>a-b);return S.meMarks}catch(e){return[]}}
 function kmmCur(){const L=kmmOwned();if(!L.length)return null;const c=S.meMark;return c!=null&&L.includes(c)?c:L[L.length-1]}
 function kmmSrc(r){return `https://ctm-img.victoria-tntt.workers.dev/img/kit/me-mark-${r}.webp`}
+/* room the stage must keep above her head for the marker's whole bounce (j59 floors topR with it; a taller figure shrinks just enough) */
+window.kitMeMarkRoom=function(bh){try{const r=kmmCur();if(r==null)return 0;const K=KIT_MEMARK,sc=K.sc[r]||1;const H=Math.round(Math.max(K.min*sc,Math.min(K.max*sc,bh*K.h*sc))*(K.big||1));return Math.ceil(H*1.03+bh*K.gap+K.bob+(K.edge||0))}catch(e){return 0}};
 window.kitMeMarkUse=function(r){const L=kmmOwned();if(!L.includes(r))return false;S.meMark=r;kmmSched();return true};
 /* ---------- head measurement (once per picture) ---------- */
 const KMM_HEAD={};
@@ -44813,7 +44846,7 @@ function kitMeMark(fig){try{
  const cx=B.bx+B.bw*hd.x,headTop=B.by+B.bh*hd.t,gap=Math.max(1,B.bh*K.gap),bottom=headTop-gap;
  /* room above the head: the host's top edge, and anything the marker must not cover (scene title, plaques, chips) */
  /* dialogs: the room above the figure is the figure column (the free space over the head inside the dialog), not just the figure box */
- let roomTop=hr.top+1;const col=fig.id==="mefig"?null:fig.closest(".kesf");if(col){const cb=(col.parentElement||col).getBoundingClientRect();roomTop=Math.min(roomTop,cb.top+2)}for(const q of kmmAvoid()){const W=H*ar;if(cx+W/2>q.left&&cx-W/2<q.right&&q.bottom<=bottom&&q.bottom>roomTop-1)roomTop=Math.max(roomTop,q.bottom+1)}
+ let roomTop=hr.top+1+K.bob+(K.edge||0);const col=fig.id==="mefig"?null:fig.closest(".kesf");if(col){const cb=(col.parentElement||col).getBoundingClientRect();roomTop=Math.min(roomTop,cb.top+2)}for(const q of kmmAvoid()){const W=H*ar;if(cx+W/2>q.left&&cx-W/2<q.right&&q.bottom<=bottom&&q.bottom>roomTop-1)roomTop=Math.max(roomTop,q.bottom+1)}
  if(bottom-roomTop<H)H=Math.max(K.tiny,Math.floor(bottom-roomTop));
  const W=Math.round(H*ar),top=bottom-H;
  mk.style.cssText=`left:${(cx-hr.left-W/2+host.scrollLeft).toFixed(1)}px;top:${(top-hr.top+host.scrollTop).toFixed(1)}px;width:${W}px;height:${H}px`;
@@ -44833,11 +44866,11 @@ try{new MutationObserver(ms=>{if(ms.every(m=>m.target.closest&&m.target.closest(
  .observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:["src","hidden"]})}catch(e){}
 (function(){const st=document.createElement("style");st.id="kmm-css";st.textContent=`
 /* KIT §41.2 kitMeMapMark(): the SAME marker (her owned rank marker, same glow + squash-bounce loop) over HER place on the Dư đồ (owner 17/11 ~12:20Z "dấu ấn ta ở đây ở trên dư đồ"); the map label shows it above the place name, in the label's own scale. */
-.kmmapmk{position:absolute;left:50%;bottom:calc(100% - 1px);height:calc(36px * var(--kmm-mapsc,1));aspect-ratio:1;transform:translateX(-50%);z-index:6;pointer-events:none;display:block;filter:drop-shadow(0 1px 1.5px #2a1a1240) drop-shadow(0 0 2px #fff4c8) drop-shadow(0 0 5px #ffd77aff) drop-shadow(0 0 11px #f7c548d9)}
+.kmmapmk{position:absolute;left:50%;bottom:calc(100% - 1px);height:calc(36px * var(--kmm-mapsc,1));aspect-ratio:1;transform:translateX(-50%);z-index:6;pointer-events:none;display:block;--dh:${KMM_GOLD};filter:drop-shadow(0 1px 1.5px #2a1a1240) drop-shadow(0 0 2px #fff4c8) drop-shadow(0 0 6px var(--dh,#ffc400)) drop-shadow(0 0 12px var(--dh,#ffc400)) drop-shadow(0 0 22px var(--dh,#ffc400))}
 .mspot .mlab:has(>.kmmapmk){position:relative;overflow:visible!important}
 .kmmapmk>img{display:block;width:100%;height:100%;object-fit:contain;object-position:50% 100%;transform-origin:50% 100%}
 @media (prefers-reduced-motion:no-preference){.kmmapmk.kmmove>img{animation:kmmBob 2.6s linear infinite;will-change:transform}}
-.kmemark{position:absolute;z-index:6;pointer-events:none;display:block;filter:drop-shadow(0 1px 1.5px #2a1a1240) drop-shadow(0 0 2px #fff4c8) drop-shadow(0 0 5px #ffd77aff) drop-shadow(0 0 11px #f7c548d9) drop-shadow(0 0 20px #f2b93b80)}
+.kmemark{--dh:${KMM_GOLD};position:absolute;z-index:6;pointer-events:none;display:block;filter:drop-shadow(0 1px 1.5px #2a1a1240) drop-shadow(0 0 2px #fff4c8) drop-shadow(0 0 6px var(--dh,#ffc400)) drop-shadow(0 0 12px var(--dh,#ffc400)) drop-shadow(0 0 22px var(--dh,#ffc400))}
 .kmemark>img{display:block;width:100%;height:100%;object-fit:contain;object-position:50% 100%;transform-origin:50% 100%}
 .kesme .kesfi{position:relative}
 /* owner 16/11 (face-sharp): only this small mark moves (own layer), never the figure (KIT motion rule STILL PEOPLE).
@@ -45663,6 +45696,8 @@ KIT_SAMPLES.push({id:"§84.5",title:"Ô đồ Xa xỉ · MỘT khuôn chủ (đ�
  return `<div class="kitpg-row" style="align-items:flex-end;gap:14px;flex-wrap:wrap">${["sm","md","lg","xl","slot"].map(z=>kitItem({src:s,name:"Nhân sâm",grade:4,size:z,qty:z==="slot"?2:0})).join("")}</div>`}});
 KIT_SAMPLES.push({id:"§8.2b",title:"Thẻ nơi chốn (VIỆC) · MỘT tranh nơi bên trái + hàng thông tin kit · chọn bằng nút «Thôi»/«Sang buổi» (chạm để mở thẻ thật)",where:"<b>kitPlaceDress</b> (jplace) → kitOnePic. A place card never gets a second event picture (<code>m.placeK</code> guard in jk2b). Guard: <code>dev/test/kit-conform.js</code> place:* = CONFORMS.",html:()=>{const ok=typeof S!=="undefined"&&S;
  return `<div class="kitpg-row"><button type="button" class="kbtn alt" data-kpop="place"${ok?"":" disabled"}>Thẻ nơi chốn · không vào được</button></div>`+(ok?"":kitFacts(["Vào một kiếp rồi mở lại trang mẫu để xem pop-up."],{group:false}))}});
+KIT_SAMPLES.push({id:"§84c",title:"Khung VIỆC không có người (thẻ nơi chốn…) · tranh chính lấp đầy cột trái (cắt cover, đúng tỉ lệ, không băng trống)",where:"<b>kszFrame3({noWho:true})</b> / kitFrameLive3 (m.placeK) · KIT 84c: person-less frame = main picture is the left column: standard 120x160 in S / narrow (\"one\"), <code>.k3fill</code> in M / L / XL fills the column height. Guard: <code>dev/test/kit-conform.js</code>.",html:()=>{try{const sp={kind:"choice",title:"Ngự hoa viên",noWho:true,pic:"https://ctm-img.victoria-tntt.workers.dev/img/ev-trieu-chinh.webp",facts:["Hoa nở rộ, chưa thấy ai ở vườn."],rows:[["Đường đi",`${BAL.kitpage.demo.k} khắc`],["Còn",`${BAL.kitpage.demo.k} khắc`]],opts:[{t:"Lẻn vào",rows:[["Tốn",`${BAL.kitpage.demo.k} khắc`],["Thành","vào được buổi này"]]}]};
+ requestAnimationFrame(()=>{try{document.querySelectorAll("[data-k84c] .ksz3").forEach(d=>kitFrameApply3(d))}catch(e){}});return `<div class="kitpg-row" data-k84c>${kszFrame3(sp,"M")}</div>`}catch(e){return kitFacts(["Mẫu khung không có người cần kit size (jksize)."],{group:false})}}});
 KIT_SAMPLES.push({id:"§6.2c",title:"Lựa chọn nhắc đến một người · tranh bên trái = chân dung người đó (không dùng tranh việc chung)",where:"<b>kitOptPic</b> (jopic): an option whose title names a live person shows THAT person's kit portrait; not inside a person-event frame (the figure column is already that person).",html:()=>{const ok=typeof S!=="undefined"&&S;
  return `<div class="kitpg-row"><button type="button" class="kbtn alt" data-kpop="personopt"${ok?"":" disabled"}>Đêm thị tẩm · «Thì thầm nói xấu …»</button></div>`+(ok?"":kitFacts(["Vào một kiếp rồi mở lại trang mẫu để xem pop-up."],{group:false}))}});
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#kitpage [data-kpop]");if(!b)return;e.stopPropagation();e.preventDefault();kitPopSample(b.dataset.kpop)},true);
@@ -53185,8 +53220,10 @@ try{const oh=optHTML;optHTML=function(){const h=oh.apply(this,arguments);
 
 /* ---------- ☰ menu: "Xem lại lời dặn" (only with a kiếp in play) ---------- */
 function addReplay(){const m=document.querySelector("#modal.kpthome .kpmenu");if(!m||m.querySelector(".ktutb"))return;
- const cont=m.querySelector('[data-tgo="cont"]');if(!cont||typeof S==="undefined"||!S||S.dead||botOff())return;
+ const cont=m.querySelector('[data-tgo="slots"]');/* the home menu (j74 homeMenu): Tiếp tục / Bắt đầu is data-tgo="slots" */if(!cont||typeof S==="undefined"||!S||S.dead||botOff())return;
  const b=document.createElement("button");b.type="button";b.className="kbtn alt ktutb";b.dataset.ktutReplay="1";b.innerHTML=`Xem lại lời dặn<small>${MMN()} chỉ lối</small>`;m.appendChild(b)}
+/* a full-width row under the other home buttons (same rule as the co-op button, jcooplobby .kco) */
+try{const st=document.createElement("style");st.textContent=".kpmenu .kbtn.ktutb{grid-column:1/-1}";document.head.appendChild(st)}catch(e){}
 new MutationObserver(addReplay).observe(document.getElementById("modal"),{childList:true,subtree:true});
 document.getElementById("modal").addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-ktut-replay]");if(!b)return;e.stopPropagation();e.preventDefault();
  try{if(typeof sfx==="function")sfx("sfx-tap")}catch(x){}
@@ -53640,7 +53677,7 @@ function paint(){try{const st=document.getElementById("stage");let el=document.g
  let calm=false;try{calm=typeof reducedMotion==="function"&&reducedMotion()}catch(e){}
  const L=R.filter(x=>(live||x.onTitle)&&val(x.when,true));if(!L.length){if(el)el.remove();return}
  if(!el){el=document.createElement("nav");el.id="krail";el.className="krail";el.setAttribute("aria-label","Lối tắt")}
- const h=L.map(x=>{const b=val(x.badge,false),bz=val(x.busy,false)&&!calm,dn=val(x.done,false);return `<button type="button" data-g="${String(x.title||"").trim().charAt(0)}" class="krailb${x.glyph?"":" kld"}${b?" kbadge":""}${bz?" kbusy":""}${dn?" kdone":""}${x.glyph?" kglyph":""}" data-rail="${x.id}" aria-label="${x.title}${b?" (có mới)":""}" title="${x.title}">${x.glyph?`<span class="krailg" aria-hidden="true">${val(x.glyph,"")}</span>`:`<img src="${val(x.icon,"")}" alt="" decoding="async" onload="this.parentNode.classList.remove('kld')" onerror="this.parentNode.classList.remove('kld');this.parentNode.classList.add('kerr')">`}</button>`}).join("");
+ const h=L.map(x=>{if(x.chip)return `<div class="krailc" data-rail="${x.id}">${val(x.chip,"")}</div>`;const b=val(x.badge,false),bz=val(x.busy,false)&&!calm,dn=val(x.done,false);return `<button type="button" data-g="${String(x.title||"").trim().charAt(0)}" class="krailb${x.glyph?"":" kld"}${b?" kbadge":""}${bz?" kbusy":""}${dn?" kdone":""}${x.glyph?" kglyph":""}" data-rail="${x.id}" aria-label="${x.title}${b?" (có mới)":""}" title="${x.title}">${x.glyph?`<span class="krailg" aria-hidden="true">${val(x.glyph,"")}</span>`:`<img src="${val(x.icon,"")}" alt="" decoding="async" onload="this.parentNode.classList.remove('kld')" onerror="this.parentNode.classList.remove('kld');this.parentNode.classList.add('kerr')">`}</button>`}).join("");
  const host=live?(onMap?mvh:st):document.body;el.classList.toggle("kstdock",!live);
  if(el.__h!==h){el.innerHTML=h;el.__h=h;el.querySelectorAll(".krailb.kld").forEach(b=>{const i=b.querySelector("img");if(i&&i.complete&&i.naturalWidth)b.classList.remove("kld")})}if(el.parentNode!==host)host.appendChild(el);
  if(live){place(el,onMap?mvh:st);el.style.bottom=""}else{el.style.top="";const tb=document.getElementById("tabs");const q=!onTitle&&tb&&tb.getClientRects().length?tb.getBoundingClientRect():null;el.style.bottom=q?`${Math.round(innerHeight-q.top+6)}px`:""}
@@ -56252,7 +56289,7 @@ function pcfIntel(e){try{if(e.id==null||typeof kitRows!=="function")return"";con
  const chips=[n?`<button class="chip kchipb" data-kintel="${e.id}">Đã biết: ${n} tin ›</button>`:"",ev?`<button class="chip hot kchipb" data-kev="${e.id}" title="Xem chứng cứ">Chứng cứ ${ev} ›</button>`:""].filter(Boolean);
  return `<div class="kpsec pcf-i"><h4 class="kpst">Đã biết</h4>${rows.length?kitFactRows(rows):`<div class="kpnote">Chưa biết gì thêm. Dò la, hỏi kẻ hầu để biết.</div>`}${chips.length?`<div class="kchips">${chips.join(" ")}</div>`:""}</div>`}catch(x){return""}}
 /* greet-stranger (owner 18/11 01:38Z: the result read twice): the line the open result note (popMsg) already shows is not repeated as "Dạo này" */
-function pcfShown(t){try{const P=typeof popMsg==="string"&&popMsg?plain(popMsg).replace(/\s+/g," "):"";if(!P)return false;const s=String(t).replace(/\s+/g," ").trim().split(/(?<=[.!?])\s/)[0].replace(/[.!?]+$/,"").replace(/^[^:]{1,40}:\s*/,"").trim();return s.length>=8&&P.includes(s)}catch(x){return false}}
+function pcfShown(t){try{/* person-dialog-restore (OD:L1852): popMsg is the result shown in the BOTTOM result card now (not a note in this column); the line it already says is still not repeated here as "Dạo này" (the result read twice, owner 18/11 01:38Z) */const P=typeof popMsg==="string"&&popMsg?plain(popMsg).replace(/\s+/g," "):"";if(!P)return false;const s=String(t).replace(/\s+/g," ").trim().split(/(?<=[.!?])\s/)[0].replace(/[.!?]+$/,"").replace(/^[^:]{1,40}:\s*/,"").trim();return s.length>=8&&P.includes(s)}catch(x){return false}}
 function pcfLog(e){try{const nm=pcfName(e);if(!nm||!S.logs)return"";const parts=nm.split(" ");const key=isEmp(e)||isTh(e)?nm:parts.slice(-2).join(" ");const mark=`T${S.month}/${S.year} `;const rows=[];let sk=0;
  for(const h of S.logs){const m=/^<span class="ld">(T\d+\/\d+) ([^<]*)<\/span>([\s\S]*)$/.exec(h);if(!m||(m[1]+" ")!==mark)continue;const t=plain(m[3]);if(!t.includes(key)&&!(isEmp(e)&&/Hoàng thượng|ngài /i.test(t)))continue;if(pcfShown(t)){sk=1;continue}
   rows.push({l:"Chuyện",f:m[3],d:{when:`${m[1]} ${m[2]}`}});if(rows.length>=1)break}
@@ -56898,14 +56935,14 @@ function talkLine(st){const warm=((st.af&&st.af.me)||0)>=30;
 function cardHTML(st){const p=postOf(st.eid);const f=staffFace(st);
  const lines=[typeof tuoi==="function"?tuoi(st.age):"",`Thiện cảm <b>${(st.af&&st.af.me)||0}</b>`].filter(Boolean);
  const close=`<button type="button" class="kit-x pcx" id="popx" aria-label="Đóng" title="Đóng">✕</button>`;
- return pcard({f,col:f.col,name:`${st.call} · ${st.name}`,rank:p.title,lines,chips:[],close,note:popMsg||"",groups:window.elderGroups(st),empty:""})}
+ return pcard({f,col:f.col,name:`${st.call} · ${st.name}`,rank:p.title,lines,chips:[],close,note:"",groups:window.elderGroups(st),empty:""})}
 window.staffTalkLine=st=>talkLine(typeof st==="string"?elderBy(st):st);/* palace-voice audit (dev/test/voice-pool-sim.js) */
 window.elderCardHTML=st=>{try{return cardHTML(typeof st==="string"?elderBy(st):st)}catch(e){return""}};
 if(typeof popCard==="function"){const c0=popCard;popCard=function(p){if(p&&p.kind==="elder"&&p.ref)return cardHTML(p.ref);return c0.apply(this,arguments)}}
-function act(a,id){const st=elderBy(id);if(!st||!S||S.dead||Q.length)return;let r="";
+function act(a,id){const st=elderBy(id);if(!st||!S||S.dead||Q.length)return;let r="";const bf=typeof rsnap==="function"?rsnap():null;
  if(a==="bieu"){const g=B().gift||20;if(S.bac<g)return;apply({bac:-g});st.af.me=(st.af.me||0)+(B().giftAf||10);r=`Biếu ${st.call} ${g} lượng: người ấy quý ngươi +${B().giftAf||10}.`}
  if(a==="hoi"){const n=B().talk||2;if(!can(n))return;spend(n);st.af.me=(st.af.me||0)+BAL.eff.jstaff.meAct;try{if(typeof k61Meet==="function"&&k61St(st)<3)k61Meet(st,"trò chuyện",3)}catch(e){}r=`${st.call}: ${talkLine(st)}`}
- if(r){log(r);popMsg=r;render()}}
+ if(r){log(r);popMsg=r;render();try{if(bf&&typeof resultShow==="function")resultShow(st.call,bf,null)}catch(e){}/* person-dialog-restore: the result is the bottom result card */}}
 document.addEventListener("click",e=>{const b=e.target&&e.target.closest&&e.target.closest("[data-elder]");if(!b||b.disabled)return;e.stopPropagation();e.preventDefault();act(b.dataset.elder,b.dataset.eid)},true);
 /* ---------- they speak by name in events and the log (LUẬT SỬA CẢ NHÓM: one table for every generic "ma ma" of these offices) ---------- */
 function tx(s){if(!s||typeof s!=="string"||!S)return s;const tn=elderBy("tn"),gt=elderBy("gt");let o=s;
@@ -59971,8 +60008,7 @@ function kcStoryHTML(){const k=S.origin.k;const n=[4,10,16].filter(x=>S.turn>=x)
   groups:[["Tư chất",[["Sắc",S.sac,"t"],["Tài",S.tai,"t"],["Tâm cơ",S.tamco,"t"],["Đức",S.duc,"t"],["Sức",S.suc,"t"],["Bạc",kitChip("Bạc",S.bac,"n"),"t"],["Danh",S.danh,"t"]]],
    ["Nhà",[["Gia thanh",S.kgt,"t"],["Áp lực hôn sự",S.kap,S.kap>=BAL.kc2.st.kc.hot?"r":"t"],["Hồi môn",kitChip("Bạc",S.khm,"n"),"t"]]]].concat(typeof kcuHonorRows==="function"&&kcuHonorRows(1).length?[["Danh hiệu thi tài",kcuHonorRows(5)]]:[])})}})();
 /* the title screen slot line */
-(function(){const t0=showTitle;showTitle=function(){const r=t0.apply(this,arguments);try{document.querySelectorAll("#slots .slot").forEach(el=>{const b=el.querySelector("[data-load]");if(!b)return;const d=loadSlot(+b.dataset.load);
- if(d&&d.S&&d.S.kc&&!d.S.kc.inPal){const sp=el.querySelector(".past");if(sp)sp.textContent=sp.textContent.replace(/^[^·]*/,"Tiểu thư ngoài cung ")}})}catch(e){}return r}})();
+/* the Chọn sổ rows say who the sổ is through j74 slotWho (one place, kc lives included); the old #slots .slot text patch is gone with the old rows */
 
 /* ---------- co-op hook points (OUTSIDE_PLAN §13; no networking: single-player routes them to the log) ---------- */
 const KCHOOK=[];function kcHook(kind,payload){KCHOOK.push({kind,payload,t:S?S.turn:0});if(KCHOOK.length>50)KCHOOK.shift();try{if(typeof window.coopSend==="function")window.coopSend("kc:"+kind,payload)}catch(e){}}
@@ -62394,7 +62430,7 @@ const KIT_SIZE={
   M :{w:{kv1:470,kv2:470},cap:{kv1:400,kv2:400},pic:"PM",ban:"NS"},
   L :{w:{kv1:560,kv2:560},cap:{kv1:518,kv2:518},pic:"PL",ban:"NM"},
   XL:{w:{kv1:562,kv2:860},cap:{kv1:732,kv2:732},pic:"PL",ban:"NL"}},
- /* the 4 figure sizes = BODY height h (measured: head top → feet, crowns not counted) of an adult woman, × KIT_FIG.fac per person; cw = column width (wide robes cut) */
+ /* the 4 figure sizes = BODY height h (measured: head top → feet, crowns not counted) of an adult woman, × KIT_FIG.fac per person; cw = column width (a wide robe spreads under the text, KIT 56.4) */
  fig:{S:{h:150,cw:104},M:{h:230,cw:140},L:{h:310,cw:176},XL:{h:420,cw:220}},
  /* ONE layout per frame kind (owner (7)): figure size + column. "big" = VIỆC / ĐIỀU / LUẬT / BÁO / ĐÊM; "small" = KẾT QUẢ / TIN (two or three lines). */
  lay:{big:{fig:"L"},small:{fig:"M"}},
@@ -62445,8 +62481,10 @@ window.kitBtnSize=kitBtnSize;window.kitFrameSize=kitFrameSize;window.kitFrameApp
 /* (1)(6)(7) figure: tag ABOVE the head (kitTitleTag3: rank line 1, name line 2), ONE column width per layout, body height = layout size × KIT_FIG.fac (kszFigFit) */
 .kszfig{flex:none;width:var(--kszcw);display:flex;flex-direction:column;align-items:center;gap:2px}
 .kszfig>.kt3{text-align:center;width:max-content;max-width:calc(var(--kszcw) + 24px)}
-.kszfig>.kszfs{display:block;width:var(--kszcw);height:var(--kszfh);overflow:hidden;position:relative}
-.kszfig>.kszfs>img{position:absolute;left:50%;bottom:0;height:100%;width:auto;max-width:none;translate:-50% 0}
+.kszfig>.kszfs{display:block;width:var(--kszcw);height:var(--kszfh);overflow:visible;position:relative}
+.kszfig>.kszfs>img{position:absolute;left:0;bottom:0;height:100%;width:auto;max-width:none}
+/* KIT 56.4: the figure is transparent and may spread out of its column; the info column is drawn ON TOP of it */
+.kszfig{position:relative;z-index:0}.kszfig>.kt3{position:relative;z-index:2}.kszf .kszright,.ksz3 .k3right{position:relative;z-index:1}
 /* frame pictures: portrait slot (no person), narrow banner (with person), long-story picture on TOP (XL) */
 .kszpic{flex:none;width:var(--kszpw);height:var(--kszph)}
 .kszban{width:min(100%,var(--kszbw));height:var(--kszbh);align-self:center;flex:none}
@@ -62501,8 +62539,12 @@ function kszFigHtml(p){let src=kitFigOf(p);if(p&&p.kind==="th"&&(!src||/unknown|
 /* (6) ONE figure scale: the measured BODY (kitFigBody ht → b) of every figure = the layout's body height × KIT_FIG.fac (never the picture box) */
 function kszFigFit(root){(root||document).querySelectorAll(".kszf .kszfig>.kszfs>img").forEach(im=>{const f=im.closest(".kszf");const lay=KIT_SIZE.lay[f.dataset.lay||"big"]||KIT_SIZE.lay.big;
  const v=typeof kitFigBody==="function"?kitFigBody(im.src,()=>kszFigFit(f)):null;if(!v)return;const age=im.dataset.age===""?null:+im.dataset.age;
- const body=KIT_SIZE.fig[lay.fig].h*(typeof KIT_FIG==="object"?KIT_FIG.fac(im.src,age):1)*(f.__kszShrink||1);/* KIT 32.8 feet-fit: ×shrink only when the frame cap would cut the feet (kszFeetFit) */const H=body/Math.max(.2,v.b-kitFigTop(v));
- im.style.height=H+"px";im.style.bottom=(-(1-v.b)*H)+"px";im.parentElement.style.height=Math.ceil(H*(v.b-v.t))+"px"})}
+ /* KIT 56.4 (owner 18/11 ~07:50Z, step 2 of 56.3): ONE body SKULL TOP -> feet for everybody of this layout (men are NOT taller: no x1.07; a child by age); crowns / robes / sleeves are not measured. */
+ const kidf=typeof KIT_FIG==="object"&&age!=null?KIT_FIG.kid(age):1;f.__kszKid=kidf;const body=KIT_SIZE.fig[lay.fig].h*kidf*(f.__kszShrink||1);/* KIT 32.8 feet-fit: ×shrink only when the frame cap would cut the feet (kszFeetFit) */const H=body/Math.max(.2,v.b-kitFigTop(v));
+ const ar=im.naturalWidth&&im.naturalHeight?im.naturalWidth/im.naturalHeight:v.ar,W=H*ar,cw=im.parentElement.clientWidth||KIT_SIZE.fig[lay.fig].cw;
+ /* nothing is cut: .kszfs is overflow visible; the painted art is centred on the column, a wide robe spreads right under the text (drawn on top, z-index) */
+ im.style.height=H+"px";im.style.width=W+"px";im.style.left=kitFullFigX(v,W,cw).toFixed(1)+"px";im.style.translate="none";im.style.bottom=(-(1-v.b)*H)+"px";im.parentElement.style.height=Math.ceil(body*(1+kszCrown()))+"px"/* the same column height for everybody: skull top -> feet + the room of the tallest Hoàng hậu crown; a taller crown rises into the tag's free space (never cut) */})}
+function kszCrown(){return(typeof BAL==="object"&&BAL.bookFrame&&BAL.bookFrame.cRef)||.072}
 window.kszFigFit=kszFigFit;
 /* spec: {kind,title,sub,who,pic,ban,facts,rows,opts,btn,long} → frame html (size picked after mount by kitFrameApply) */
 function kszFrame(sp){const right=[];if(sp.long==null)sp.long=!sp.who&&(sp.facts||[]).join(" ").length>600;
@@ -62538,7 +62580,7 @@ function kszSheet(area){const old=document.getElementById("kszsheet");if(old)old
    ["XL","VIỆC · Thái hậu · SAME layout (column, figure scale); only the info area is bigger · GỢI Ý = full-width box",{kind:"choice",title:"Thái hậu chê dung nhan",sub:"Trung tuần · buổi chiều",who:P.th,ban:"https://ctm-img.victoria-tntt.workers.dev/img/ev-thinh-an.webp",facts:[{who:P.th,text:"cho gọi ta đến trước mặt các phi tần, chê ta trang điểm lòe loẹt, không ra dáng người hầu hạ thánh giá."},"Các phi tần đứng quanh, có người che miệng cười."],
      opts:[op("Quỳ xuống nhận lỗi, xin Thái hậu dạy bảo",[["Tốn",`${BAL.kitpage.demo.k} khắc`],["Được",ch("Thiện cảm",6)+ch("Đức",1)],["Mất",ch("Danh",-1)],["Gợi ý","Thái hậu ưa người biết phận, nhận lỗi trước mặt mọi người thì bà nguôi giận nhanh"]]),op("Thưa rằng phấn son do Nội vụ phủ phát theo phẩm",[["Được",ch("Danh",1)],["Mất",ch("Thiện cảm",-4)],["Gợi ý","nói đúng lý nhưng làm bà mất mặt trước các phi tần"]]),op("Dâng chén trà, đổi sang chuyện kinh Phật",[["Cần","Tài nghệ Trà ≥ 2"],["Được",ch("Thiện cảm",4)],["Gợi ý","nếu trà không ngon bà càng giận"]]),op("Im lặng",[["Mất",ch("Thiện cảm",-2)]])]}]];
   for(const [k,lab,sp] of L)h+=`<div style="margin:10px 0 18px"><div class="kszlab">${lab}</div><div class="kszn" data-ksztbl></div><div data-want="${k}">${kszFrame(sp)}</div></div>`;
-  h+=`<h3>(6)(7) ONE figure scale + ONE column per layout: every person's measured BODY = the same height (× 1.07 men); Thái hậu is never bigger than a consort</h3><p class="kszn">Layout "big" (VIỆC · ĐIỀU · LUẬT · BÁO · ĐÊM): figure L body ${Z.fig.L.h} px, column ${Z.fig.L.cw} · layout "small" (KẾT QUẢ · TIN): figure M body ${Z.fig.M.h} px, column ${Z.fig.M.cw}. The frame size S..XL changes only the info area.</p><div class="kszrow" style="align-items:flex-end">${[["Thái hậu",P.th],["Hoàng hậu",P.q],["phi tần",P.v2],["Hoàng thượng",P.emp]].filter(x=>x[1]).map(([l,p])=>`<div><div class="kszlab">${l}</div><div class="kszf" data-lay="big" style="width:auto;box-shadow:none;border:0;background:none">${kszFigHtml(p)}</div></div>`).join("")}</div>`}
+  h+=`<h3>(6)(7) ONE figure scale + ONE column per layout: every person's measured BODY = the same height (men are not taller, KIT 56.4); Thái hậu is never bigger than a consort</h3><p class="kszn">Layout "big" (VIỆC · ĐIỀU · LUẬT · BÁO · ĐÊM): figure L body ${Z.fig.L.h} px, column ${Z.fig.L.cw} · layout "small" (KẾT QUẢ · TIN): figure M body ${Z.fig.M.h} px, column ${Z.fig.M.cw}. The frame size S..XL changes only the info area.</p><div class="kszrow" style="align-items:flex-end">${[["Thái hậu",P.th],["Hoàng hậu",P.q],["phi tần",P.v2],["Hoàng thượng",P.emp]].filter(x=>x[1]).map(([l,p])=>`<div><div class="kszlab">${l}</div><div class="kszf" data-lay="big" style="width:auto;box-shadow:none;border:0;background:none">${kszFigHtml(p)}</div></div>`).join("")}</div>`}
  if(area==="buttons"){
   h+=`<h2>KIT SIZE 2 · THE action button + pictures</h2><p class="kszn">ONE button (kszBtn) everywhere: row 1 = picture LEFT + name, TỐN / ĐƯỢC / MẤT RIGHT; row 2 = GỢI Ý in one full-width box. Inside one frame every button is the SAME width and the same class (the largest one needed). The class (kitBtnSize) only sets the picture: S square 56 (≤ 2 rows, ≤ 70 characters) · LS square 72 (≤ 3 rows, ≤ 160) · LR 3:4 84x112 (more). The red tag on each sample = the kit class used.</p>`;
   h+=`<h3>S · in one frame (3.3 / 3.5): same width, square 56</h3><div class="kszopts" style="max-width:380px">${[op("Cúi đầu nhận lỗi",[["Tốn",`${BAL.kitpage.demo.k} khắc`]]),op("Thưa rằng do Hoàng thượng định",[["Tốn",`${BAL.kitpage.demo.k} khắc`]]),op("Dâng lễ vật xin bỏ qua",[["Tốn",ch("Bạc",-20)+` ${BAL.kitpage.demo.k} khắc`]]),op("Im lặng",[])].map(kszBtn).join("")}</div>`;
@@ -62662,6 +62704,7 @@ window.kitPicSubj=kitPicSubj;
 .ksz3 .k3mpic,.ksz3 .k3ev{position:relative;overflow:hidden;border-radius:6px;border:1px solid var(--gold,#8f5f0c);box-shadow:inset 0 0 0 1px #fffaf0;box-sizing:border-box}
 /* S event picture = ONE standard kit size (owner 16/11 19:54Z: no stretched ratio): KIT_SIZE.pic[V.picS] (PM 120x160, 3:4), centred in the body */
 .ksz3 .k3main.k3mpic{flex:none;width:${Z.pic[V.picS].w}px;height:${Z.pic[V.picS].h}px;min-height:0;align-self:center}
+.ksz3[data-pres="fig"] .k3body>.k3main.k3mpic.k3fill{align-self:stretch;height:auto;min-height:${Z.pic[V.picS].h}px}/* KIT 84c: person-less main picture fills its column */
 .ksz3 .k3ev{flex:1 1 auto;min-height:${V.evMin.fig}px}.ksz3[data-pres="one"] .k3ev{min-height:${V.evMin.one}px}
 .ksz3 .k3mpic>.ksart,.ksz3 .k3ev>.ksart{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;margin:0;border:0;box-shadow:none;border-radius:0}
 .ksz3 .k3mpic>.ksart img,.ksz3 .k3ev>.ksart img{width:100%;height:100%;object-fit:cover;display:block}
@@ -62684,9 +62727,11 @@ function kszPor3(p){const [r,n]=kszRankName(p);let col="";try{col=kitPersonCol(p
  const tag=typeof kitTitleTag3==="function"?kitTitleTag3(p,r,n,col):kitNameRank(r,n,col);let f;try{f=p&&p.kind==="th"?pTH():kitFace(p)}catch(e){f={src:"",ini:"?"}}
  return `<div class="k3main k3mpor">${tag}${pcPort(f)}</div>`}
 /* spec {kind,title,sub,who?,pic?,facts,rows,opts} + size K → frame html (kitFrameApply3 after mount) */
-function kszFrame3(sp,K){const V=KIT_SIZE.v3,pres=V.pres[K]||"fig",foc=V.focus[sp.kind]||"person",who=kszWho3(sp),ev=kszEvSrc3(sp);
+function kszFrame3(sp,K){const V=KIT_SIZE.v3,pres=V.pres[K]||"fig",foc=V.focus[sp.kind]||"person",who=sp.noWho?null:kszWho3(sp),ev=kszEvSrc3(sp);
  const R=[];let left="";
- if(pres==="one"){if(foc==="event")left=kszPic3(ev,"k3main k3mpic");else{left=who?kszPor3(who):"";R.push(kszPic3(ev,"k3ev"))}}
+ /* KIT 84c PERSON-LESS frame (sp.noWho / a place card): the main picture is the left column — standard size in "one" (S / narrow), FILLING the column (cover-crop, true ratio, k3fill) in "fig" (M/L/XL); no narrator, no second picture */
+ if(!who)left=kszPic3(ev,pres==="one"?"k3main k3mpic":"k3main k3mpic k3fill");
+ else if(pres==="one"){if(foc==="event")left=kszPic3(ev,"k3main k3mpic");else{left=who?kszPor3(who):"";R.push(kszPic3(ev,"k3ev"))}}
  else{left=who?kszFigHtml(who):"";R.push(kszPic3(ev,"k3ev"))}
  let facts=(sp.facts||[]).slice();
  /* event-centred S: a person is a small avatar INSIDE the info → when no fact row carries anyone, the narrator's line is added */
@@ -62727,7 +62772,7 @@ function kitFrameApply3(dlg){try{kszFigFit(dlg)}catch(e){}kszBtnGrid3(dlg);const
 function kitFrameFits3(dlg,strict){const K=dlg.dataset.ksz,m=kitSzMode();if(K==="XL"&&!strict)return true;const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor"),ev=R&&R.querySelector(":scope>.k3ev");
  const mh=R.style.minHeight,mx=R.style.maxHeight;R.style.minHeight="";R.style.maxHeight="";if(ev){ev.style.flex="none";ev.style.height=kszEvMin3(ev)+"px"}
  const need=R.offsetHeight;if(ev){ev.style.flex="";ev.style.height=""}R.style.minHeight=mh;R.style.maxHeight=mx;const lh=L?L.offsetHeight:0;
- if(dlg.dataset.pres==="fig")return need<=lh+2;const btn=dlg.querySelector(":scope>.k3btns");
+ if(dlg.dataset.pres==="fig")return L||!dlg.querySelector(".k3fill")?need<=lh+2:true;const btn=dlg.querySelector(":scope>.k3btns");
  const body=Math.max(need,lh,KIT_SIZE.v3.picMinS);return (L?need<=lh+2:body<=KIT_SIZE.v3.bodyS)&&body+(btn?btn.offsetHeight:0)<=KIT_SIZE.v3.capS[m]}
 /* THE picker: the smallest size whose presentation holds the content */
 function kitFramePick3(sp,host){for(const K of ["S","M","L","XL"]){host.innerHTML=kszFrame3(sp,K);const d=host.firstElementChild;kitFrameApply3(d);if(kitFrameFits3(d))return K}return"XL"}
@@ -62869,9 +62914,14 @@ function kszLiveRoom3(dlg){const M=document.getElementById("modal");if(!M)return
    (dlg.__kszShrink, read by kszFigFit) just enough; the bottom is never cropped. Not touched when it already fits. */
 function kszFeetFit(dlg){try{const B=dlg.querySelector(".k3body"),L=B&&B.querySelector(":scope>.kszfig");dlg.__kszShrink=1;if(!L)return;kszFigFit(dlg);
  const cap=parseFloat(getComputedStyle(dlg).maxHeight);if(!(cap>0))return;
- for(let i=0;i<4;i++){const mbx=document.getElementById("mb"),fixed=dlg.clientHeight-(mbx?mbx.clientHeight:B.offsetHeight),room=cap-fixed-22,over=L.offsetHeight-room;if(over<=0.5)break;
-  const fs=L.querySelector(".kszfs"),h=fs?fs.offsetHeight:0;if(h<=60)break;dlg.__kszShrink=Math.max(.3,dlg.__kszShrink*Math.max(.3,(h-over-1)/h));kszFigFit(dlg)}}catch(e){console.error("kszFeetFit",e)}}
+ /* KIT 56.4 (owner 18/11 ~07:50Z): the room is measured for the TALLEST crown (Hoàng hậu, BAL.bookFrame.cRef above the skull top), never for this person: every person of the frame gets the same body, nobody is shrunk for being an outlier */
+ const lay=KIT_SIZE.lay[dlg.dataset.lay||"big"]||KIT_SIZE.lay.big,cRef=(typeof BAL==="object"&&BAL.bookFrame&&BAL.bookFrame.cRef)||0;
+ for(let i=0;i<4;i++){const mbx=document.getElementById("mb");let fixed=2;[...dlg.children].forEach(c=>{if(c!==mbx&&c.getClientRects().length&&getComputedStyle(c).position!=="absolute")fixed+=c.offsetHeight});if(mbx)[...mbx.children].forEach(c=>{if(c!==B&&c.getClientRects().length)fixed+=c.offsetHeight});const room=cap-fixed-26;/* the room = the cap minus the frame's own parts (header, buttons, body padding): the same for every person, never read from the current figure */
+  const fs=L.querySelector(".kszfs"),h=fs?fs.offsetHeight:0;if(h<=60)break;const body0=KIT_SIZE.fig[lay.fig].h*(dlg.__kszKid||1),tg=L.querySelector(":scope>.kt3"),part=L.offsetHeight-h+(tg&&!tg.querySelector(".kdh,.kdh-cap")?kszPlateH():0),allow=(room-part)/(1+cRef),cur=body0*dlg.__kszShrink;
+  if(allow>=cur-.5)break;dlg.__kszShrink=Math.max(.3,allow/body0);kszFigFit(dlg)}}catch(e){console.error("kszFeetFit",e)}}
 window.kszFeetFit=kszFeetFit;
+/* KIT 56.4: the height a worn-title plate adds to the name tag (measured once); the room of every frame is reckoned WITH the plate, so a person with a title and one without get the same body */
+let KSZ_PLATEH=null;function kszPlateH(){if(KSZ_PLATEH!=null)return KSZ_PLATEH;let h=0;try{const T=typeof KIT_TITLES!=="undefined"&&KIT_TITLES[0],pl=T&&typeof kitTitlePlate==="function"?kitTitlePlate(T,{cls:"kdh-cap"}):"";if(pl){const x=document.createElement("div");x.className="kszf";x.style.cssText="position:absolute;visibility:hidden;left:-9999px;top:0";x.innerHTML=`<div class="kszfig"><div class="kt3">${pl}</div></div>`;document.body.appendChild(x);h=x.querySelector(".kt3").offsetHeight+2;x.remove()}}catch(e){}return KSZ_PLATEH=h}
 function kitFrameApplyLive3(dlg){try{kszFeetFit(dlg)}catch(e){}const g=dlg.querySelector(".opts.k3btns");if(g)kszBtnGridLive3(g);
  const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor");
  if(R){R.style.maxHeight="";R.style.overflow="";R.style.minHeight=L?L.offsetHeight+"px":(dlg.dataset.pres==="one"?KIT_SIZE.v3.picMinS+"px":"");if(dlg.dataset.ksz==="XL"&&L){/* XL (approved #3): the body stays the figure's height; more content scrolls inside the info column */
@@ -62882,13 +62932,13 @@ function kitFrameFitsLive3(dlg,strict){const K=dlg.dataset.ksz;if(K==="XL"&&!str
  const need=R.offsetHeight;if(ev){ev.style.flex="";ev.style.height=""}R.style.minHeight=mh;R.style.maxHeight=mx;const lh=L?L.offsetHeight:0;
  /* the frame must also stay inside the screen (modal box): Fold / iPad */
  const M=document.getElementById("modal"),room=M?M.clientHeight-24:9999;
- if(dlg.dataset.pres==="fig")return need<=lh+2&&dlg.offsetHeight<=room;const btn=dlg.querySelector("#mb>.k3btns");
+ if(dlg.dataset.pres==="fig")return (L||!dlg.querySelector(".k3fill")?need<=lh+2:true)&&dlg.offsetHeight<=room;const btn=dlg.querySelector("#mb>.k3btns");
  const body=Math.max(need,lh,KIT_SIZE.v3.picMinS);return (L?need<=lh+2:body<=KIT_SIZE.v3.bodyS)&&body+(btn?btn.offsetHeight:0)<=KIT_SIZE.v3.capS[kitSzMode()]}
 function kszLiveLay3(dlg,K){const X=dlg.__ksz3;if(!X)return;const V=KIT_SIZE.v3,pres=V.pres[K]||"fig",foc=V.focus[X.kind]||"person",nar=/^N/.test(K);
  Object.assign(dlg.dataset,{ksz:K,pres,focus:foc,lay:K});if(nar)dlg.dataset.narrow="1";else delete dlg.dataset.narrow;
  if(nar&&KIT_SIZE.fig[K+"3"]){const Z=V.narrow[K],F=KIT_SIZE.fig[K+"3"],Mm=document.getElementById("modal"),mh=Mm?Mm.clientHeight:900;F.h=Math.round(Math.min(Z.max,Z.f*mh));F.cw=Z.cw;dlg.style.setProperty("--kszfh",F.h+"px");dlg.style.setProperty("--kszcw",F.cw+"px")}else{dlg.style.removeProperty("--kszfh");dlg.style.removeProperty("--kszcw")}
  const body=X.body,right=X.right;[...body.children].forEach(c=>{if(c!==right)c.remove()});right.querySelectorAll(":scope>.k3ev").forEach(c=>c.remove());
- let left="",ev=true;if(pres==="one"){if(foc==="event"){left=kszPic3(X.src,"k3main k3mpic");ev=false}else left=X.who?kszPor3(X.who):""}else left=X.who?kszFigHtml(X.who):"";
+ let left="",ev=true;if(!X.who){left=kszPic3(X.src,pres==="one"?"k3main k3mpic":"k3main k3mpic k3fill");ev=false}/* KIT 84c person-less frame (place card): its picture is the left main picture; fills the column in fig sizes */else if(pres==="one"){if(foc==="event"){left=kszPic3(X.src,"k3main k3mpic");ev=false}else left=X.who?kszPor3(X.who):""}else left=X.who?kszFigHtml(X.who):"";
  if(left)body.insertAdjacentHTML("afterbegin",left);if(ev&&X.src)right.insertAdjacentHTML("afterbegin",kszPic3(X.src,"k3ev"));
  if(X.opts){if(pres==="one"||nar)X.mb.appendChild(X.opts);else right.appendChild(X.opts);/* narrow: option cards BELOW the figure row, full width; else kit-option-rows r2: stack label over value when the column is too narrow */const bs=[...X.opts.querySelectorAll(":scope>button")],w=X.opts.clientWidth;X.opts.classList.remove("kszstk")}
  body.querySelectorAll("img").forEach(im=>{if(!im.complete)im.addEventListener("load",()=>kszLiveRepick3(dlg),{once:true})});
@@ -62908,7 +62958,7 @@ function kitFrameLive3(m){try{const M=document.getElementById("modal"),mb=docume
  const main=body.querySelector(":scope > .kpmain");if(!main||main.querySelector(KSZ_LIVE_SKIP)||body.querySelector(":scope > .kpsubj.kes2"))return false;
  /* menus and pages are not event frames: a pick-list (≥ KIT_SIZE.v3.live.maxOpts options) or a sectioned page (≥ maxSecs headed sections) keeps its page layout */
  const LV=KIT_SIZE.v3.live,o0=mb.querySelector(":scope > .opts");if(o0&&o0.querySelectorAll(":scope > button").length>=LV.maxOpts)return false;if(main.querySelectorAll(":scope > .kpsec > .kpst").length>=LV.maxSecs)return false;
- let P=[];try{P=kitStagePeople(m)}catch(e){}const who=P[0]||kszWho3({kind});const src=kszLiveSrc3(m,mb,kind);const opts=mb.querySelector(":scope > .opts");
+ let P=[];try{P=kitStagePeople(m)}catch(e){}const who=m&&m.placeK?null:(P[0]||kszWho3({kind}));/* a place card (jplace) has no person column: the narrator never stands on it (owner 18/11 map-tap-go) */const src=kszLiveSrc3(m,mb,kind);const opts=mb.querySelector(":scope > .opts");
  /* the old layout classes go (their fit passes then find nothing to do); the game's nodes are moved, never rebuilt */
  dlg.classList.remove("kesdlg","kdper","kdpbanner","kdscroll");dlg.classList.add("kszf","ksz3","kszlive");dlg.style.removeProperty("--dart");dlg.style.removeProperty("height");dlg.style.removeProperty("--kdpic");
  const B=document.createElement("div");B.className="k3body";const R=document.createElement("div");R.className="k3right";B.appendChild(R);R.appendChild(main);
@@ -62954,17 +63004,18 @@ function kitAgendaFact(o,text){const p=kitAgendaPic(o);return p?{text:text||o.n,
 Object.assign(window,{kitAgendaPic,kitAgendaFact});
 /* ===== kit-thanh-bai r2 (s34/s36): SCROLL CUE for every frame scroll column (reviewer r1 FAIL 1). A column of a modal frame (.k3right, #mb, .body, …) that scrolls and is NOT at its end gets a bottom fade + a small "Kéo xuống" chip (.kscue, sticky at the column's bottom, goes when she reaches the end). One place: kitScrollCues(); called after every showModal / frame pass / resize / scroll. ===== */
 function kitScrollCues(root){try{const M=root||document.getElementById("modal");if(!M||M.hidden)return;
- const cand=[...M.querySelectorAll(".dlg, .dlg *")].filter(e=>{if(e.closest(".kscue"))return false;const cs=getComputedStyle(e);return(cs.overflowY==="auto"||cs.overflowY==="scroll")&&e.clientHeight>=100&&e.scrollHeight>e.clientHeight+6||(e.__kscue&&e.isConnected)});
- for(const e of cand){let c=e.querySelector(":scope > .kscue");const more=e.scrollHeight>e.clientHeight+6&&e.scrollTop+e.clientHeight<e.scrollHeight-6;
+ const cand=[...M.querySelectorAll(".dlg, .dlg *")].filter(e=>{if(e.closest(".kscue"))return false;/* KIT 56.4 / owner OD 18/11 07:25Z: a person frame's figure column and info stay fixed, only the option / button list scrolls: no scroll hint on a container that holds the figure column */if(e.querySelector(":scope > .kszfig, :scope > .kpsubj.kes, :scope > .kpb > .kpsubj.kes, :scope > .k3body > .kszfig, :scope > .kpdb > .kpsubj.kes")){const k0=e.querySelector(":scope > .kscue");if(k0)k0.remove();return false}const cs=getComputedStyle(e);return(cs.overflowY==="auto"||cs.overflowY==="scroll")&&e.clientHeight>=100&&e.scrollHeight>e.clientHeight+6||(e.__kscue&&e.isConnected)});
+ for(const e of cand){if(e.clientHeight<260&&e.clientHeight>0){/* a SHORT scroller (item grid, option list): the hint is its own 16 px strip BELOW it, never over its text */const k0=e.querySelector(":scope > .kscue");if(k0)k0.remove();let sb=e.__kscueSib;if(!sb||!sb.isConnected){sb=document.createElement("div");sb.className="kscue sib";sb.setAttribute("aria-hidden","true");sb.innerHTML='<b class="kscc">Kéo xuống ▾</b>';e.after(sb);e.__kscueSib=sb;e.__kscue=1;if(!e.__kscl){e.__kscl=1;e.addEventListener("scroll",()=>kitScrollCues(),{passive:true})}}sb.classList.toggle("on",e.scrollHeight>e.clientHeight+6&&e.scrollTop+e.clientHeight<e.scrollHeight-6);continue}let c=e.querySelector(":scope > .kscue");const more=e.scrollHeight>e.clientHeight+6&&e.scrollTop+e.clientHeight<e.scrollHeight-6;
   if(!c&&e.scrollHeight>e.clientHeight+6){c=document.createElement("div");c.className="kscue";c.setAttribute("aria-hidden","true");c.innerHTML='<i class="kscg"></i><b class="kscc">Kéo xuống</b>';e.appendChild(c);e.__kscue=1;
    if(!e.__kscl){e.__kscl=1;e.addEventListener("scroll",()=>kitScrollCues(),{passive:true});new MutationObserver(()=>{const k=e.querySelector(":scope > .kscue");if(k&&e.lastElementChild!==k)e.appendChild(k);else kitScrollCues()}).observe(e,{childList:true})}}
-  if(c){if(e.lastElementChild!==c)e.appendChild(c);/* always the LAST child: sticky bottom only works from the end of the content */c.classList.toggle("on",!!more)}}}catch(err){console.error("kitScrollCues",err)}}
+  if(c){c.classList.toggle("sm",e.clientHeight<260);/* a short scroller (item grid): a slim footer strip, never the tall fade over its text */if(e.lastElementChild!==c)e.appendChild(c);/* always the LAST child: sticky bottom only works from the end of the content */c.classList.toggle("on",!!more)}}}catch(err){console.error("kitScrollCues",err)}}
 window.kitScrollCues=kitScrollCues;
 (function(){const sm=window.showModal;if(typeof sm==="function"){window.showModal=showModal=function(){const r=sm.apply(this,arguments);try{setTimeout(kitScrollCues,120);setTimeout(kitScrollCues,700)}catch(e){}return r}}
  window.addEventListener("resize",()=>kitScrollCues());
  const st=document.createElement("style");st.id="k-scroll-cue";st.textContent=`
 .kscue{position:sticky;bottom:0;flex:none;height:0;width:100%;margin:0;padding:0;pointer-events:none;display:none;z-index:5}
 .kscue.on{display:block}
+.kscue.sib{position:static;height:auto;width:auto;text-align:center;padding:1px 0 0;pointer-events:none}.kscue.sib.on{display:block}.kscue.sib .kscc{position:static;transform:none;display:inline-block;font-size:.64rem}
 .kscue .kscg{position:absolute;left:0;right:0;bottom:0;height:36px;background:linear-gradient(to bottom,rgba(253,249,238,0),rgba(253,249,238,1) 42%)}/* r4: the chip sits in the SOLID lower part of the fade (never over readable text) */
 .kscue .kscc{position:absolute;left:50%;bottom:2px;transform:translateX(-50%);font-size:.66rem;line-height:1.25;font-weight:700;color:#7a5a1e;background:#fbf1d6;border:1px solid #c9a24a;border-radius:999px;padding:0 9px;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.18)}`;document.head.appendChild(st)})();
 /* ================= jemoact: HÀNH ĐỘNG THEO CẢM XÚC — emotion acts, extreme mood, forced outbursts (review/emotion-acts) =================
@@ -63915,8 +63966,7 @@ try{Object.assign(PD_END,{"Ở lại quê nhà":12,"Làm thiếp nhà phú hộ"
 function kc2End(h,t){if(S.dead)return;S.kc.end=h;Q=Q.filter(m=>m.cls==="end"||m.nl);over(h,t+` <span class="past">(${S.kc.kd==="dan"?"Thôn nữ chờ tuyển":"Công chúa chờ hòa thân"} · ${kcTitle()})</span>`,h);try{showModal()}catch(e){}}
 (function(){if(typeof kpWhy!=="function")return;const w0=kpWhy;kpWhy=function(){if(S&&S.kc&&S.kc.kd&&!S.kc.inPal)return `mới ${S.turn||0}/${KIEP.mo} tháng ở nhà, chưa vào cung`;return w0.apply(this,arguments)}})();
 (function(){if(typeof lifeSave!=="function")return;const l0=lifeSave;lifeSave=function(f){const r=l0.apply(this,arguments);try{if(S&&S.kc&&S.kc.kd&&!S.kc.inPal){const p=lifeLog();if(p[0]&&p[0].n===S.name&&p[0].kc===1&&!p[0].kc2){p[0].kc2=1;p[0].f=String(p[0].f||"").replace("Tiểu thư ngoài cung",S.kc.kd==="dan"?"Thôn nữ chờ tuyển":"Công chúa chờ hòa thân");store.set("cung-luanhoi",p)}}}catch(e){}return r}})();
-(function(){const t0=showTitle;showTitle=function(){const r=t0.apply(this,arguments);try{document.querySelectorAll("#slots .slot").forEach(el=>{const b=el.querySelector("[data-load]");if(!b)return;const d=loadSlot(+b.dataset.load);
- if(d&&d.S&&d.S.kc&&d.S.kc.kd&&!d.S.kc.inPal){const sp=el.querySelector(".past");if(sp)sp.textContent=sp.textContent.replace("Tiểu thư ngoài cung",d.S.kc.kd==="dan"?"Thôn nữ chờ tuyển":"Công chúa chờ hòa thân")}})}catch(e){}return r}})();
+/* the Chọn sổ rows say who the sổ is through j74 slotWho (one place, kd lives included); the old #slots .slot text patch is gone with the old rows */
 
 /* ---------- UI: the jkc panels with this road's people and words ---------- */
 (function(){const f0=kcFamList;kcFamList=function(w){if(!S||!S.kc||!S.kc.kd)return f0.apply(this,arguments);return S.kc.fam.filter(m=>m.alive&&!(m.hide&&!S.kc.sx)&&(w==="ban"?!!m.out:!m.out))}})();
@@ -65742,7 +65792,7 @@ document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.clos
    SIZE: KIT_FIGSEAL.k × the figure's body height (kitFigBody head top → feet), between min and max px — it grows and shrinks with the figure.
    NEVER covers the face (it stands beside the head, the face is inside the head edge), never clipped (clamped inside the stage / dialog), never above the head (that place is the
    "this is you" marker kitMeMark of jmark).  Off switch for measuring: window.__emoOff=1 (the same as the portrait seals). ===== */
-window.KIT_FIGSEAL=window.KIT_FIGSEAL||{k:.105,min:22,max:50,gap:.012,rows:3,face:.5};
+window.KIT_FIGSEAL=window.KIT_FIGSEAL||{k:.105,min:22,max:50,dx:.194,dy:.916};/* dx/dy = seal centre from the standing anchor, in body heights (owner 18/11 ~06:20Z: one fixed offset for everybody) */
 const KFS_REG=new Map();let KFS_ID=0;
 /* kitStageFig is the one maker of img.kesimg: remember WHOSE figure it is (never read from the picture) */
 (function(){if(typeof kitStageFig!=="function")return;const f0=kitStageFig;kitStageFig=function(p,o){let h=f0.apply(this,arguments);try{const q=p&&(p.__kp||p);
@@ -65758,7 +65808,7 @@ function kfsBox(fig){const r=fig.getBoundingClientRect();let bx=r.left,by=r.top,
  if(nw&&nh&&bw>0&&bh>0){const ar=nw/nh;if(bw/bh>ar){const w=bh*ar;bx+=(bw-w)/2;bw=w}else{const h=bw/ar;by+=(bh-h)/2;bh=h}}return{bx,by,bw,bh}}
 const KFS_SEAL=new WeakMap();
 /* the element the seal is a child of: the nearest ancestor of the figure that does not clip its children (a figure picture box such as .kszfs is overflow:hidden), made a positioning parent (.kfshost) when it is static */
-function kfsHost(fig){let e=fig.parentElement;while(e&&e!==document.body){const c=getComputedStyle(e);if(c.overflowX==="visible"&&c.overflowY==="visible"){if(c.position==="static")e.classList.add("kfshost");return e}e=e.parentElement}return fig.offsetParent||fig.parentElement}
+function kfsHost(fig){{const bk=fig.closest&&fig.closest(".kbk-person.kbk-full");if(bk){if(getComputedStyle(bk).position==="static")bk.classList.add("kfshost");return bk}}/* KIT 34.6 r5: on a book person page the seal belongs to the page, not to the clipped figure column */let e=fig.parentElement;while(e&&e!==document.body){const c=getComputedStyle(e);if(c.overflowX==="visible"&&c.overflowY==="visible"){if(c.position==="static")e.classList.add("kfshost");return e}e=e.parentElement}return fig.offsetParent||fig.parentElement}
 function kfsDrop(fig){const s=KFS_SEAL.get(fig);if(s){s.remove();KFS_SEAL.delete(fig)}}
 function kitFigSeal(fig){try{
  if(!fig||!fig.isConnected||typeof emoOn!=="function"||!emoOn())return kfsDrop(fig);
@@ -65774,17 +65824,18 @@ function kitFigSeal(fig){try{
  const B=kfsBox(fig);if(B.bh<60){el.style.display="none";return}
  const K=KIT_FIGSEAL,ht=b.ht!=null?b.ht:b.t,body=Math.max(20,(b.b-ht)*B.bh);
  const s=Math.round(Math.max(K.min,Math.min(K.max,body*K.k)));
+ /* KIT 34.6 r5 (owner 18/11 ~03:35Z "figure runs under the ? chip"): on a BOOK person page the seal sits in ONE fixed slot, the right end of the name row of the text column (padding reserved by .kbk-phead), never on any figure, the same slot on every page */
+ if(host.matches&&host.matches(".kbk-person.kbk-full")){const ph=host.querySelector(":scope>.kbk-phead");if(ph){const q=Math.min(s,46),css=`left:${ph.offsetLeft+ph.offsetWidth-q}px;top:${ph.offsetTop+2}px;width:${q}px;height:${q}px`;if(el.style.cssText!==css)el.style.cssText=css;el.dataset.kfsb="book";return}}
  const k=Math.min(20,Math.max(1,K.rows|0)),rr=b.wr&&b.wr[k]!=null?b.wr[k]:null,ll=b.wl&&b.wl[k]!=null?b.wl[k]:null;
- const cx=B.bx+B.bw*((b.cl!=null&&b.cr>b.cl)?(b.cl+b.cr)/2:.5),gap=Math.max(2,body*K.gap);
- const edgeR=rr!=null?B.bx+B.bw*rr:cx+body*.09,edgeL=ll!=null?B.bx+B.bw*ll:cx-body*.09;
- const headTop=B.by+B.bh*ht;const cy=headTop+Math.min(body*.085,s*1.1);/* the seal's centre: the middle of the head, never lower than its first ~8.5 % */
+ /* owner 18/11 ~06:20Z: ONE fixed offset from the figure's standing anchor (ax = slot centre, feet = floor line), in body heights, so it scales with the figure and sits at the same spot for everyone: centre = ax ± dx x body, feet − dy x body (right first; left when the right would leave the frame) */
+ const ax=B.bx+B.bw/2,feet=B.by+B.bh*b.b;/* standing anchor: picture centre = slot centre, painted feet = floor line */
  const bd=fig.closest("#stage")||fig.closest(".kszfig,.kesf")||fig.closest(".dlg")||host;const bb=bd.getBoundingClientRect(),hr=host.getBoundingClientRect();
- let L=edgeR+gap;if(L+s>bb.right-2){const L2=edgeL-gap-s;if(L2>=bb.left+2||L2>bb.right-2-s-0)L=L2;if(L2<bb.left+2)L=Math.max(bb.left+2,Math.min(L,bb.right-2-s))}
+ let L=ax+K.dx*body-s/2;if(L+s>bb.right-2)L=ax-K.dx*body-s/2;
  L=Math.max(bb.left+2,Math.min(L,bb.right-2-s));
- let T=cy-s/2;T=Math.max(bb.top+2,Math.min(T,bb.bottom-2-s));
+ let T=feet-K.dy*body-s/2;T=Math.max(bb.top+2,Math.min(T,bb.bottom-2-s));
  const css=`left:${(L-hr.left+host.scrollLeft).toFixed(1)}px;top:${(T-hr.top+host.scrollTop).toFixed(1)}px;width:${s}px;height:${s}px`;
  if(el.style.cssText!==css){el.style.cssText=css}
- el.dataset.kfsb=body.toFixed(0)}catch(e){console.error("kitFigSeal",e)}}
+ el.dataset.kfsb=body.toFixed(0);el.dataset.kfsa=ax.toFixed(1);el.dataset.kfsf=feet.toFixed(1)}catch(e){console.error("kitFigSeal",e)}}
 function kfsSweep(){document.querySelectorAll("img.kfseal").forEach(s=>{const f=s.__fig;if(!f||!f.isConnected)s.remove()})}
 function kfsAll(){kfsSweep();kfsFigs().forEach(kitFigSeal)}
 let kfsT=0,kfsT2=0,kfsQ=0;function kfsSched(){clearTimeout(kfsT);clearTimeout(kfsT2);if(!kfsQ)kfsQ=requestAnimationFrame(()=>{kfsQ=0;kfsAll()});kfsT=setTimeout(()=>{kfsAll();kfsT2=setTimeout(kfsAll,700)},250)}
@@ -67306,6 +67357,68 @@ img.krvg.krvg.krvg.krvg.krvg.krvlite{animation:krvfade var(--krvms,350ms) ease-o
 @keyframes krvwipe{0%{--krvr:0%;opacity:1}70%{opacity:1}100%{--krvr:165%;opacity:0}}
 @keyframes krvfade{from{opacity:1}to{opacity:0}}
 `;document.head.appendChild(st)})();
+/* ================= jplst: PLACE STAGE LAYOUT (owner 18/11 ~02:50Z + ~03:02Z, s43 chat; OD:L1814, OD:L1818) =================
+   NO plaque over the stage (#sc-t stays in the DOM as the carrier of the place name + visit line, but is hidden).
+   (1) people-count chip = TOP of the left button column (kitStageRail item "here", kit chip j59ico + number),
+   (2) place name = TOP of the right column (#kpname, kit paper .k3p, bigger font); the court cards (#kshR) stand under it,
+   (3) the place-entry line (S.visit.msg: "Thái giám chặn cửa", "Hoàng thượng không ra vườn hôm nay"…) = the TIN BÁO TOAST of review/tinbao-ui (owner 18/11
+       ~03:3xZ: "chip giống tai mắt báo"): `#ktbtoast.ktbt`, ONE gold pill line under the top bar, BAL.entryToastMs then fades, once per visit line. kitLineToast(text) here is a
+       thin twin of jtinbao's toastShow (same ids/classes/CSS, copied verbatim); when jtinbao lands, kitLineToast becomes a call into it.
+       A line that carries a BUTTON ("… vừa rời đi [Theo]") must stay tappable, so only that kind stays as the persistent top-of-stage chip (.kmnote.kmslot),
+   (4) figures keep their full size; nothing is drawn over a head (the chip is one line high, the columns are at the edges). */
+(function(){try{
+const $=id=>document.getElementById(id);
+const esc=s=>String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/"/g,"&quot;");
+function hereN(){try{return typeof kitHereCount==="function"?kitHereCount():0}catch(e){return 0}}
+const onStage=()=>{try{return typeof kitSideHost!=="function"||kitSideHost()===$("stage")}catch(e){return true}};
+function kitLineToast(text){try{if(!text)return null;try{const md=document.getElementById("modal");if(md&&!md.hidden)return null}catch(e){}
+ const hud=document.querySelector("header.hud");let el=document.getElementById("ktbtoast");if(el)el.remove();
+ el=document.createElement("div");el.id="ktbtoast";el.className="ktbt";el.setAttribute("role","status");el.innerHTML=`<span>${esc(text)}</span>`;
+ const r=hud&&hud.getClientRects().length?hud.getBoundingClientRect():null;el.style.top=(r?Math.round(r.bottom+6):6)+"px";document.body.appendChild(el);
+ el.addEventListener("click",()=>el.remove());clearTimeout(kitLineToast.t);kitLineToast.t=setTimeout(()=>{el.classList.add("out");setTimeout(()=>{if(el.classList.contains("out"))el.remove()},500)},window.__toastKeep?60000:BAL.entryToastMs);return el}catch(e){return null}}
+window.kitLineToast=window.kitLineToast||kitLineToast;
+function lay(){try{const st=$("stage");if(!st)return;let nm=$("kpname"),en=$("kpent");
+ const t=$("sc-t"),live=!!t&&!!S&&!S.dead&&onStage()&&st.getBoundingClientRect().height>40;
+ const name=live?((t.querySelector(".rt1")||{}).textContent||"").trim():"";
+ let line="";if(live){const m=t.querySelector(".rmsg");let raw=m?m.innerHTML:"";
+  raw=raw.replace(/^\s*·\s*/,"").replace(/^\s*Ở đây (?:có|còn) \d+ người\.?\s*/,"").trim();/* the count is the icon now; a longer line keeps its own text */
+  if(raw&&!/^Không gặp ai\.?$/.test(raw.replace(/<[^>]+>/g,"").trim()))line=raw}
+ let toast="";if(line&&!/<button/i.test(line)){toast=line.replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim();line=""}
+ /* once per visit + line (renders repeat; a new visit, even to the same place with the same text, toasts again) */
+ const tk=S&&S.visit?S.visit:null;if(toast&&live){if(lay.v!==tk||lay.t!==toast){lay.v=tk;lay.t=toast;(window.kitLineToast||kitLineToast)(toast)}}else if(!toast){lay.v=tk;lay.t=""}
+ /* (2) place name, top of the right column */
+ if(name){if(!nm){nm=document.createElement("div");nm.id="kpname";nm.className="k3p kpname";st.appendChild(nm)}if(nm.textContent!==name)nm.textContent=name;nm.hidden=false;
+  const h=Math.ceil(nm.getBoundingClientRect().height)+6;st.style.setProperty("--kpnh",h+"px");st.classList.add("kpn")}
+ else{if(nm)nm.hidden=true;st.style.setProperty("--kpnh","0px");st.classList.remove("kpn")}
+ /* (3) entry line chip, top of the stage */
+ if(line){if(!en){en=document.createElement("div");en.id="kpent";en.className="kmnote kmslot";en.setAttribute("role","status")}
+  const h='<span class="kchip n">'+line+'</span>';if(en.__h!==h){en.innerHTML=h;en.__h=h}if(en.parentNode!==st)st.appendChild(en);en.hidden=false}
+ else if(en)en.hidden=true;
+ }catch(e){console.error("jplst",e)}}
+/* the chip never covers her marker (the flower above her head): if they meet, the chip starts to the right of the marker */
+function placeEnt(){try{const en=$("kpent"),st=$("stage");if(!en||en.hidden||!st)return;en.style.left="";const ch=en.querySelector(".kchip");if(!ch)return;const mk=document.querySelector(".kmemark");
+ if(mk&&mk.getClientRects().length){const R=st.getBoundingClientRect(),q=mk.getBoundingClientRect(),c=ch.getBoundingClientRect();
+  if(q.right>c.left-4&&q.left<c.right+4&&q.top<c.bottom+2&&q.bottom>c.top-2)en.style.left=Math.round(q.right-R.left+8)+"px"}}catch(e){}}
+function lay2(){lay();placeEnt();clearTimeout(lay2.a);clearTimeout(lay2.b);lay2.a=setTimeout(placeEnt,400);lay2.b=setTimeout(placeEnt,1300)}
+const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);lay2();return r};
+try{addEventListener("resize",()=>{clearTimeout(lay.__t);lay.__t=setTimeout(lay2,90)})}catch(e){}
+/* (1) the count chip: the kit rail's first slot */
+try{if(window.kitStageRail)kitStageRail.add({id:"here",order:0,chip:()=>{const n=hereN();return n&&typeof j59ico==="function"?`<span class="kchip n j59hchip" role="img" aria-label="Ở đây còn ${n} người">${j59ico()}<span class="j59n">${n}</span></span>`:""},when:()=>hereN()>0&&onStage()})}catch(e){}
+const css=document.createElement("style");css.id="kit-plst";css.textContent=`
+html body .stage #sc-t{display:none!important}
+.kpname{position:absolute;top:8px;right:8px;width:var(--kgrw,150px);z-index:3;box-sizing:border-box;padding:4px 8px;text-align:center;font-weight:800;font-size:1.1rem;line-height:1.2;color:#3a1d10;overflow-wrap:anywhere;background:rgb(255,250,240)}
+html body .stage.kpn .kshR{top:calc(8px + var(--kpnh,0px))}
+html body .stage.kpn .kshR.kasx{max-height:calc(100% - 16px - var(--kpnh,0px))}
+html body .stage .kmnote.kmslot{position:absolute!important;top:6px!important;bottom:auto!important;left:62px;right:calc(var(--kgrw,150px) + 16px);translate:none!important;max-width:none;animation:none;display:flex;justify-content:center;z-index:6;pointer-events:none}
+html body .stage .kmnote.kmslot[hidden]{display:none!important}
+.kmnote.kmslot .kchip{font-size:.74rem;line-height:1.25;padding:3px 10px;white-space:normal;text-align:center;max-width:100%;pointer-events:auto}
+.kmnote.kmslot .kchip .btn,.kmnote.kmslot .kchip button{pointer-events:auto;margin-left:6px}
+.krailc{pointer-events:none;display:flex}
+.ktbt{position:fixed;left:50%;transform:translateX(-50%);z-index:9760;max-width:calc(100vw - 24px);box-sizing:border-box;display:flex;align-items:center;gap:8px;padding:6px 14px 6px 8px;border-radius:14px;border:2px solid var(--trim,#e6c25a);
+ background:#fffaf0f4;color:var(--ink,#3a2418);font:600 .84rem/1.3 var(--body,inherit);box-shadow:0 4px 14px #0004,0 0 0 1px var(--gold,#b8892b);cursor:pointer;transition:opacity .5s}
+.ktbt.out{opacity:0}
+`;document.head.appendChild(css);
+}catch(e){console.error("jplst init",e)}})();
 
 /* jcoopthin: CO-OP THIN GUEST, part A = foundations (review/coop-thin-a; audit dev/handover/reports/coop-thin-guest-audit.md §2-3;
    owner GO 17/11: host-authoritative thin guest, part by part, end state = the guest only displays the host's state).
@@ -68447,7 +68560,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="0b3db210ffa3";window.CTM_BUILD=BUILD;
+const BUILD="9eb1ce081258";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
