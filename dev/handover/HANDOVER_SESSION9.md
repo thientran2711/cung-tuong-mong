@@ -939,3 +939,4 @@ LESSONS s39: look at neighbours side by side before asking her to pick (A/B/C gl
 - (18/11 00:53Z) OWNER: hoa điền position = vị trí 2 → hoa-dien r3 told. Pending her: drop list (after light-fresh tone samples).
 - (18/11 00:56Z) OWNER drop rule (gradient keep / flat drop) → hoa-dien r3: measure all designs, table first, old-save mapping.
 - (18/11 00:59Z) OWNER annoyed: smudge lv2/3 blush + lip smear still too strong → options 5/10/15/20 % (8 images) ordered from smudge worker. LESSON: when she says 'nhạt', cut hard and offer % options at once.
+- (18/11 01:03Z) cloth-xoc 4da0750: tea OK (lv1 warm a bit stronger), mud still horizontal rows → fix; order: skin mask → wet → mud → tea lv1. Not shown to owner.
