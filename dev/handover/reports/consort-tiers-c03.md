@@ -51,3 +51,20 @@ Note: the model systematically widens the alpha bbox by ~1–4 % (sleeve/skirt s
 Credits: 8 + 6 + 4 = 18 gens × 135 = 2430 cr. Gen ids: t1 v1 SymCD9AUb8 v2 gOtfpJfSXO v3 79aQo0SJAL(kept); t2 v1 eIy6LaJdqL v2 9ZFKhAANYZ(kept) v3 N2HkaoX6D9; t3 rgdIYy8xtc; t4 v1 TdUykv9VNR v2 Cqz06KhEEy(kept); t5 jUBmciFLD0; t6 v1 WDl7bffcXe(kept) v2 LwohVPEswO v3 s78vDchl8e; t7 v1 yiEqoDYPW9 v2 rgdIcyBxtc(kept); t8 v1 6Aq1h8EiJO v2 kspoYyM16B v3 bxVdz2V5Y2(kept).
 Files (https://ctm-img.victoria-tntt.workers.dev/img/_review/consort-tiers/c03/b8/): c03_a18_t1..t8.png, c03_a18_row8.jpg, c03_a18_live_vs_new.jpg. Nothing live.
 ~100% xong c03 B8 / ~0% chơi được.
+
+## B8 v2 — two-step (supersedes the B8 section above; B8 addendum from ROOT-18)
+STEP 1 = exact copy of the live figure on transparent 2K (gpt-2-6, ref = live fig only, "Reproduce image 1 exactly …"), STEP 2 = recolour edit of the step-1 copy (ref = that copy only), colour only. Files in CDN img/_review/consort-tiers/c03/b8/ (same names, overwritten): c03_a18_t1..t8.png (recoloured), c03_a18_row8.jpg (uniform scale, skull top on upper red line), c03_a18_live_vs_new.jpg = live | copy | recolour per rank.
+| rank | colour | bbox w/h: live | copy (Δ) | recolour (Δ) | gens (copy+recolour) |
+|---|---|---|---|---|---|
+| t1 | pale apricot | 0.377 | 0.380 (+0.6 %) | 0.379 (+0.6 %) | 2+1 PASS |
+| t2 | powder blue | 0.314 | 0.321 (+2.0 %) | 0.324 (+2.9 %) | 2+1, FAIL ±1.5 % |
+| t3 | soft sage | 0.381 | 0.384 (+0.9 %) | 0.384 (+0.8 %) | 1+1 PASS |
+| t4 | dusty pink | 0.371 | 0.372 (+0.2 %) | 0.372 (+0.3 %) | 1+1 PASS |
+| t5 | soft lavender-grey | 0.393 | 0.396 (+0.8 %) | 0.397 (+1.1 %) | 1+1 PASS |
+| t6 | muted coral | 0.379 | 0.388 (+2.2 %) | 0.388 (+2.1 %) | 2+1, FAIL ±1.5 % |
+| t7 | muted teal + pale imperial yellow | 0.419 | 0.424 (+1.1 %) | 0.425 (+1.3 %) | 1+1 PASS |
+| t8 | soft golden yellow + dusty rose + jade | 0.380 | 0.387 (+1.9 %) | 0.388 (+2.0 %) | 2+1, FAIL ±1.5 % |
+By eye (live | copy | recolour sheet): pose/turn, cut, headdress, face, held item identical in all; only the robe colour differs. t2/t6/t8 stay 2–3 % wider than live (model widens sleeves/skirt slightly; 2 copy gens each, best kept; a 3rd was not run to hand over fast).
+Credits this v2: 12 copies... counted: copies 8+4=12, recolours 8 = 20 gens × 135 = 2700 cr (plus the 18 gens of the first B8 = 2430 cr, superseded).
+Gen ids: copies t1 SymCBL7Ub8→0eSOsA2TfW(kept) t2 3z5xQ6sREY(kept)→aFAWRIAfSh t3 huZn6aqvqL t4 bxVdW1g5Y2 t5 fHGcRqFCDY t6 WDl7xXVcXe(kept)→0eSOsYnTfW t7 ovNZyQR829 t8 huZn6rUvqL→u5YVGukQLD(kept); recolours t1 w4vuh2a7EI t2 rgdIe9qxtc t3 w4vumOd7EI t4 JNfFv9mOq4 t5 tC3G6EXmZJ t6 0eSOgCvTfW t7 O6CHaZMynm t8 lJIa8zVgv9. Nothing live.
+~100% xong c03 B8 v2 / ~0% chơi được.
