@@ -39,4 +39,44 @@ Head 25c66b1c (code = ef06b487 + site build). Seeded diff with redecideCap 0 (F1
 
 ## Handover (if a successor is needed)
 Tools in git: dev/test/ag2perf-diff.js (PRE='BAL.ag.day.redecideCap=0' for the identical check), dev/test/ag2perf-probe.js (4x CPU), dev/test/ag2perf-a.test.js. Scratch (container only): /home/user/wt/ag2p (bench2.sh, tree.js, selfin.js, anc.js profile helpers). Next levers if MAIN wants more: lower redecideCap (speed vs NPC liveliness), kitBook weekly-book layout (kit keeper), renderStage stage-list side effects moved out of renderStage so the whole stage DOM can wait for a frame.
-~82% xong / ~60% chơi được
+
+## AG2-PERF #2 — deeds floor (worker session_01UV1SzimZ43DghURhgEAv8W, depth 8, START_CTX 5 %, 18/11)
+PRIORITY #1 CHECK: MAIN ROOT-52 ruling (via C-AG #12 takeover prompt) | review/ag2-perf 25c66b1c (A cap 8, F1/F2/B) | pre-perf head review/ag-all-2-land 02466132 | deed counters reused: AG/AG2/AG3.stat.land, jagstaff window.__asN.n, jtruth deedAdd | no other claim.
+Head **0e255c17** (review/ag2-perf). Change: `BAL.ag.day.redecideCap` default **0** (A off: every consort picks every buổi = the pre-perf path; A stays in code, >0 switches it on). New tool `dev/test/ag2perf-deeds.js` (deterministic harness of ag2perf-diff; count = AG.stat.land + AG2.stat.land + AG3.stat.land + __asN.n + every deedAdd split me / consort / servant of a consort / other servant / other). `ag2perf-probe.js` takes PRE; `ag2perf-a.test.js` switches A on with CAP (default 8).
+**Khắc step timed = `spend(1)`** (one khắc through every wrapper: views, j95 final, agWatch…), 3 per buổi, 4x CPU (CDP Emulation.setCPUThrottlingRate 4), 40 buổi × seeds 1-3; buổi step = placeWhere + agFlush + nextBuoi. Reviewer: `node dev/test/ag2perf-probe.js <index.html> 40 <seed> 4 3` on both builds, alternating.
+
+### Cap table (NPC deeds per 160 buổi, seeds 1 / 2 / 3; % of base 02466132)
+| cap | deeds s1 | s2 | s3 | % of base | consort deedAdd s1/s2/s3 | servant deedAdd | re-pick blocked by cap (s1/s2/s3) |
+|---|---|---|---|---|---|---|---|
+| base 02466132 | 654 | 665 | 637 | 100 | 59 / 58 / 61 | 0 / 0 / 0 (servant deeds land via __asN: 17/19/18) | – |
+| 8 | 546 | 516 | 555 | 83 / 78 / 87 | 55 / 51 / 46 | 0 | 20 / 15 / 17 |
+| 12 = 16 = 24 = ∞ (999) | 539 | 562 | 494 | 82 / 85 / 78 | 55 / 50 / 38 | 0 | 0 (cap never binds at ≥ 12) |
+| **0 (shipped)** | 654 | 665 | 637 | **100 / 100 / 100** | 59 / 58 / 61 | 0 | – (seeded diff 0 vs base, seeds 1-3 × 160) |
+Finding: the deeds are lost by the CAUSE FILTER itself (kept consorts with no cause: 383-523 slots per run), not by the cap; a higher cap cannot reach 95 %. In the old draw a routine pick is already cheap (agPw over needs, no agOptsG); the cost A saved was the deeds themselves. → MAIN fallback applied: consorts (and so their servants) never capped. No far-NPC cap added: staff are already time-sliced (agLz), Emperor / Thái hậu are not far.
+
+### 4x CPU timings (ms; mean of per-run means; box shared/noisy)
+| build | khắc mean | khắc median | buổi mean | buổi median | runs |
+|---|---|---|---|---|---|
+| set A, live 12a1e4be | 4.27 | 1.05 | 106.7 | 40.3 | 6 |
+| set A, cap 0 | 3.82 (−11 %) | 1.82 | 139.3 (+31 %) | 67.8 | 6 |
+| set A, cap 8 | 3.50 (−18 %) | 1.73 | 129.7 (+22 %) | 63.6 | 6 |
+| set A, cap ∞ | 3.63 (−15 %) | 1.77 | 139.4 (+31 %) | 67.0 | 6 |
+| set B, live 94a93759 (quickcheck's live) | 3.52 | 1.13 | 105.9 | 38.1 | 9 |
+| set B, cap 0 (head 0e255c17) | 4.49 (**+28 %**) | 2.10 | 150.3 (+42 %) | 72.3 | 9 |
+| set B, cap 8 | 3.92 (+11 %) | 1.90 | 143.6 (+36 %) | 68.3 | 9 |
+| set B, base 02466132 | 6.48 (+84 %) | 2.17 | 150.8 (+42 %) | 72.2 | 9 |
+Plain quickcheck 0e255c17 vs live 94a93759 (cpu 4, 3 runs): **PASS** · render 228/179 · tab 378/356 · buổi 1181/851 · tasks>200 17/13 · old save ok · core gates PASS.
+Verdict: deeds floor MET (100 %). Per-khắc ≤ live: met vs 12a1e4be (−11 %), NOT met vs the current live 94a93759 (+28 %; cap 8 is +11 % and loses 13-22 % of deeds). Live per-khắc itself moved 4.27 → 3.52 between the two lives / sets (noise ±30 % run to run). No setting of A meets both on the current live → MAIN decides: (1) ship cap 0 (all deeds, khắc ≈ +28 % vs current live, −31 % vs base), or (2) a new perf order on the khắc step of the deeds themselves (profile spend(1) cap 0 vs live 94a93759).
+
+### Gates (head 0e255c17)
+| gate | result |
+|---|---|
+| seeded diff head (cap 0) vs base 02466132, seeds 1/2/3 × 160 | 0 / 0 / 0 |
+| quickcheck (cpu 4, 3 runs) | PASS |
+| G4 coop-one-world seeds 7+3 ×2 | 4/4 PASS |
+| ag suites 12 (ag-all 21, betray 20, carry 9, know 25, later 9, paywin 9, sell 19, soft 20, taimat 25, taimat2 16, truth 11, walk 10) | 12/12 PASS (ag-all once FAILED its own day-draw p95 12.3 > 8 ms while 4 suites ran in parallel; alone ×2: p95 6.4 / 6.5, 21/21 PASS) |
+| ag2perf-a.test CAP=8 seeds 1, 2 | PASS |
+
+### Handover
+Depth 8: no children. Scratch (container only): /home/user/wt/ag2out (bench*.sh/log, deeds json). Worktrees ag2p2 (branch), ag2base (02466132), ag2live (12a1e4be), ag2live2 (94a93759).
+~83% xong / ~62% chơi được
