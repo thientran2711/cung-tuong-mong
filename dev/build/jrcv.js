@@ -128,8 +128,7 @@ RCVK.mediate={t:"Lời hòa giải",act:"đứng ra hòa giải với",kind:"hel
 /* Nhờ ơn người quen rút thẻ bài (jecon ACT.blockf): the receiver is the acquaintance who owes the asker; x = key of the target.
    yes: the favour is spent (the acquaintance's thiện cảm with the asker − BAL.favorCost, as before) and the plot runs (caught / oBlock);
    «làm qua loa»: the same plot at the odds − BAL.selfMinus (a half-hearted word to Kính sự phòng) */
-function rcvBlockGo(p,v,t,pen){relAdd(v,p,-BAL.favorCost);const c=caught(p,t,false,"nhờ người rút thẻ bài của "+NM(t));if(c)return c;
- if(aRoll(oddsCl(oBlock(p)-pen),p)){t.block=2;return `${v===S?"Ngươi":v.name} nhờ người ở Kính sự phòng rút thẻ bài của ${NM(t)} giúp ${NM(p)}: 2 tuần nàng không được lật thẻ`}return `Kính sự phòng không dám rút thẻ bài của ${NM(t)}`}
+/* rcvBlockGo (the plot itself) stays in jecon.js beside ACT.blockf (its rule numbers live there) */
 RCVK.blockf={t:"Lời nhờ trả ơn",act:"nhờ trả ơn",kind:"help",ok:(p,v,x)=>{const t=byKey(x);return !!t&&!t.block&&t!==v},
  line:(p,x)=>{const t=byKey(x);return `<p>${p.name} sai người sang: “Ngày trước nương nương nhà ta từng giúp người. Nay xin người nói giúp một lời với Kính sự phòng, rút thẻ bài của ${t?NM(t):"một người"} vài hôm.”</p>`},
  opts:(p,v,x)=>{const t=byKey(x),me=v===S,tn=t?NM(t):"";return[

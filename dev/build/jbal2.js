@@ -1321,7 +1321,7 @@ Object.assign(BAL,{actHere:{plant:15}});
    (her liking of the receiver +qAf) · Đức − road.hp.sab.duc, the asker's oán + road.hp.sab.oan, the asker's Danh − danh.
    ord (an order from above, two-option cards: Vâng / Cáo bệnh …): the NPC receiver weighs «obey» = full + half, «decline» = no (+ sab) — the SAME
    options and numbers as her card. */
-BAL.rcv={kw:["Giúp hết lòng","Làm qua loa","Từ chối","Mách lẻo"],help:{af:[8,3],half:.5,qAf:5,danh:2},
+BAL.rcv={kw:["Giúp hết lòng","Giúp qua loa","Từ chối","Mách lẻo"]/* the L1876 words, the same as j42 cnvOrdOpts (parallel-time) */,help:{af:[8,3],half:.5,qAf:5,danh:2},
  /* the Sức a summons costs (her «Vâng chỉ» card jts tsSummonMe and the summoned NPC, one number) */
  sumSuc:5,
  /* the bạc to take a gift to Thái y viện (her giftin card j8 and an NPC receiver, one number) */
