@@ -53,6 +53,12 @@ function p4IllOpts(v,N,need){const O=[];const B=BAL.ag.par4.ill;if(need&&B.g[nee
  return O}
 function p4IllRun(v,r){if(!v||v===S||!v.alive||v.out||v.confined)return"";const t=p4IllTgt(v);const k=p4IllK(v,r,t);if(!k)return"";
  const from=r==="ally"?illAllies(v).find(a=>(a.inv||[]).some(e=>e.k===k&&!e.h&&!e.t)):null;const L=illBuy(v,r,k,from);if(L&&/không thành/.test(L)&&illWitness(v)===S)log(L);return p4Res("ill:"+r,L)}
+/* ---------------- 3. a guess is weighed as a guess ----------------
+   Her card shows the act's odds (oVP); whether the charge is TRUE is unknown to both. An NPC who has seen nothing (cause = guess) weighs the odds × her belief
+   that the guess is right (BAL.ag.par4.guess.p) — her mind, not a lock: the gate (ACT.xx / ACT.vp ok) is the same as hers. */
+(function(){if(typeof haOdds!=="function")return;const h0=haOdds;haOdds=function(v,t,k){const r=h0.apply(this,arguments);
+ try{if((k==="xx"||k==="vp")&&v!==S&&p4On()){let seen=false;try{const A=ACT[k];seen=k==="xx"?!!xxCause(v,t):!!wdCause(v,t)}catch(e){}const c=seen?null:shelfCause(v,t,k);
+  if(!seen&&c&&c.how==="guess")return{o:r.o*BAL.ag.par4.guess.p,pc:r.pc}}}catch(e){agdErr("par4:guess",e)}return r}})();
 /* ---------------- wiring ---------------- */
 try{Object.assign(AGC3BTN,{illMaid:IROUTE.maid.n,illTy:IROUTE.thaiy.n,illCho:IROUTE.cho.n,illAlly:IROUTE.ally.n});
  Object.assign(AGC3ACT,{illMaid:"sai cung nữ lén mua đồ cấm ngoài cung",illTy:"lén mua đồ cấm ở Thái y viện",illCho:"ra chợ đen ở cửa Thần Vũ",illAlly:"xin đồng minh đồ cấm"});

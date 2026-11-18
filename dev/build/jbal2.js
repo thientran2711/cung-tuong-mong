@@ -1322,4 +1322,5 @@ Object.assign(BAL,{actHere:{plant:15}});
 BAL.ag.par4={on:1,
  man:{hailDanh:1,hailAf:5,flirtTinh:12,seenDiv:3,sacD:5,tcD:5,dieP:50,tokTinh:15,trystTinh:10,lonely:30,favW:.25,cutRisk:45,like:20,
   g:{hail:{"danh":1},flirt:{"kid":1},token:{"kid":1},tryst:{"kid":3,"rest":1},cut:{"safe":3}},l:{flirt:{"safe":1},token:{"safe":1},tryst:{"safe":6}}},
+ guess:{p:.3},/* an NPC accusing on a pure guess (jshelf guess cause) weighs the act's odds × p (her belief it is true) */
  ill:{keep:20,band:3,bandW:.2,haveW:.1,g:{"spite":3},l:{"safe":2,"danh":1}}};
