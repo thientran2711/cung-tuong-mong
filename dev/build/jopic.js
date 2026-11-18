@@ -243,22 +243,31 @@ window.kitOptFinal=kitOptFinal;
    Order of work: frame class (KIT_SIZE S/M/L/XL) -> layout -> button tier. Tier S / M / L = ONE card size each (picture box + card height; the width is the cell). Never a variant inside a tier.
    Each tier size = the LARGEST card that tier needs over every layout phone -> iPad (table in KIT.md §6.2d, scan dev/test/opt-card-scan.js). kitOptTier(g) picks, per dialog, the first of
    [2 columns S] [1 column M] [1 column L] whose cards ALL fit their tier (no card taller than the tier, nothing cut sideways). */
-const KIT_OPT={tiers:{S:{pw:54,ph:72,h:88},M:{pw:66,ph:88,h:104},L:{pw:84,ph:112,h:128}},gap:8};window.KIT_OPT=KIT_OPT;
+const KIT_OPT={tiers:{S:{pw:54,ph:72,h:88},M:{pw:66,ph:88,h:104},L:{pw:84,ph:112,h:140}},gap:8};window.KIT_OPT=KIT_OPT;
 const KIT_OPT_CSS=(()=>{const T=KIT_OPT.tiers;let c="html body #modal,html body .kitpg-opts{--ko-pw:"+T.M.pw+"px;--ko-ph:"+T.M.ph+"px;--ko-h:"+T.M.h+"px}\n";
  for(const k in T)c+=`html body #modal .opts[data-kot="${k}"],html body .kitpg-opts[data-kot="${k}"]{--ko-pw:${T[k].pw}px;--ko-ph:${T[k].ph}px;--ko-h:${T[k].h}px}\n`;
  c+=`html body #modal#modal button.ka.kopt.kopt:not(.kart) :is(.kofold,small.kb>.kr-hint,small.kb>.kr-why){display:none!important}
 html body #modal#modal button.ka.kopt.kopt:not(.kart){min-height:var(--ko-h,104px)!important;position:relative;box-sizing:border-box;align-items:center}
 html body #modal#modal button.ka.kopt:not(.kart) .kobang{position:absolute;top:5px;right:6px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:700 .85rem/1 var(--body,sans-serif);color:var(--gold,#8f5f0c)!important;background:#fffaf0!important;border:1px solid var(--gold,#8f5f0c)!important;cursor:help;z-index:2}
 html body #modal#modal .opts[data-kol],html body .kitpg-opts[data-kol]{display:grid!important;grid-template-columns:repeat(var(--k3c,1),minmax(0,1fr))!important;gap:${KIT_OPT.gap}px;align-content:start}
+html body #modal#modal .opts[data-kol]>button.kopt:not(.kart){align-items:flex-start}
+html body #modal#modal .opts[data-kol]>button.kopt>.kaart{align-self:center}
+html body #modal#modal .opts[data-kol]>button.kopt>.kabody{align-self:flex-start;margin-top:var(--kbtop,0px)}
+html body #modal#modal .opts[data-kol]>button.kopt .kat{min-height:var(--kat-h,0px);align-content:center;box-sizing:border-box}
 html body #modal#modal .opts[data-kol]>button.kopt{grid-column:auto!important;width:auto;min-width:0;max-width:none;margin:0}`;return c})();
 function kitOptCards(g){return[...g.children].filter(b=>b.matches&&b.matches("button.ka.kopt")&&!b.classList.contains("kcard")&&!b.closest(".pc")&&b.getClientRects().length)}
 function kitOptCut(b){const R=b.getBoundingClientRect();const bd=b.querySelector(":scope > .kabody")||b;for(const e of bd.querySelectorAll("*")){if(!e.getClientRects().length)continue;const r=e.getBoundingClientRect();if(r.width&&r.right>R.right+1)return true}return false}
 function kitOptTier(g){try{const bs=kitOptCards(g);if(!bs.length||g.__kotBusy)return;g.__kotBusy=1;const T=KIT_OPT.tiers;
  bs.forEach(b=>{const m=b.querySelector(".kobang");if(m&&m.parentElement!==b)b.appendChild(m)});/* the "!" is always the card's own corner child (a picture-less hide-out card had it inside the title) */
- const set=(lay,t)=>{g.dataset.kol=lay;g.dataset.kot=t;g.style.setProperty("--k3c",lay);bs.forEach(b=>b.style.setProperty("--k3s",1));bs.forEach(b=>b.style.removeProperty("min-height"));void g.offsetHeight};
- const fit=(lay,t)=>{set(lay,t);const hs=bs.map(b=>Math.round(b.getBoundingClientRect().height)),cut=bs.map(kitOptCut);const ok=bs.every((b,i)=>hs[i]<=T[t].h&&!cut[i]);(window.__kotLog=window.__kotLog||[]).push(lay+t+":"+hs.join("/")+(cut.some(x=>x)?"cut":"")+(ok?"ok":""));return ok};
+ const set=(lay,t)=>{g.style.setProperty("--kat-h","0px");g.style.setProperty("--kbtop","0px");g.dataset.kol=lay;g.dataset.kot=t;g.style.setProperty("--k3c",lay);bs.forEach(b=>b.style.setProperty("--k3s",1));bs.forEach(b=>b.style.removeProperty("min-height"));void g.offsetHeight};
+ const band=t=>{g.style.setProperty("--kat-h","0px");g.style.setProperty("--kbtop","0px");void g.offsetHeight;const kh=Math.max(0,...bs.map(b=>{const k=b.querySelector(".kat");return k?Math.ceil(k.getBoundingClientRect().height):0}));g.style.setProperty("--kat-h",kh+"px");void g.offsetHeight;
+  const mb=Math.max(0,...bs.map(b=>{const k=b.querySelector(":scope > .kabody");return k?Math.ceil(k.getBoundingClientRect().height):0}));g.style.setProperty("--kbtop",Math.max(0,Math.floor((KIT_OPT.tiers[t].h-mb-14)/2))+"px");void g.offsetHeight};
+ const fit=(lay,t)=>{set(lay,t);band(t);const hs=bs.map(b=>Math.round(b.getBoundingClientRect().height)),cut=bs.map(kitOptCut);const ok=bs.every((b,i)=>hs[i]<=T[t].h&&!cut[i]);(window.__kotLog=window.__kotLog||[]).push(lay+t+":"+hs.join("/")+(cut.some(x=>x)?"cut":"")+(ok?"ok":""));return ok};
  const seq=bs.length>=2?[["2","S"],["1","M"],["1","L"]]:[["1","M"],["1","L"]];let pick=seq[seq.length-1];for(const q of seq)if(fit(q[0],q[1])){pick=q;break}
- set(pick[0],pick[1]);bs.forEach(b=>{b.dataset.kapic="eq"});g.__kotBusy=0;
+ set(pick[0],pick[1]);bs.forEach(b=>{b.dataset.kapic="eq"});
+ /* OWNER 18/11 ~21:20Z: the title sits in the card's TOP BAND, vertically centred there, the SAME in every card of the frame: one band height (the tallest title band), the card's text block starts at ONE top offset (the tallest block centred in the tier height) */
+ band(pick[1]);
+ g.__kotBusy=0;try{const dl=g.closest(".dlg");if(dl&&typeof kszEvLaw10==="function")kszEvLaw10(dl)}catch(e){}
  /* late changes (fonts, pictures, a frame re-pick, a resize) re-run the choice: the grid or a card changed size under the picked tier */
  if(!g.__kotRO&&typeof ResizeObserver==="function"){g.__kotRO=new ResizeObserver(()=>{if(g.__kotBusy||!g.isConnected)return;const T0=KIT_OPT.tiers[g.dataset.kot],c=kitOptCards(g);const bad=c.some(b=>b.getBoundingClientRect().height>T0.h+1||kitOptCut(b));const w=Math.round(g.clientWidth);if(bad||w!==g.__kotW){g.__kotW=w;clearTimeout(g.__kotT);g.__kotT=setTimeout(()=>kitOptTier(g),50)}});g.__kotRO.observe(g);bs.forEach(b=>g.__kotRO.observe(b))}
  g.__kotW=Math.round(g.clientWidth);return pick.join("")}catch(e){g.__kotBusy=0;console.error("kitOptTier",e)}}

@@ -748,11 +748,19 @@ Order of work (owner): frame class S/M/L/XL (§6.2c, KIT_SIZE) -> option LAYOUT 
   |---|---|---|---|
   | S | 54x72 | 88 | layout 2 (two-column cell) |
   | M | 66x88 | 104 | layout 1, normal text |
-  | L | 84x112 | 128 | layout 1, longest text (largest card any layout needs: Fold dress / mat2, 119 px at M) |
+  | L | 84x112 | 140 | layout 1, longest text (largest card any layout needs: Fold dress / mat2, 119 px at M) |
   A tier size is the LARGEST card that tier needs over every layout phone -> iPad; to change a tier edit `KIT_OPT.tiers` only (CSS is generated from it).
 - Picture-less cards (hide-out cards, `button.kopt` without `.kaart`) take the same tier height; the "!" is always the card's own top-right child (`kitOptTier` moves it back if a builder put it inside the title).
 - "!" (owner 18/11 09:30Z): ONE colour for every "!" (no red); card "!" `top:5 right:6`, dialog "!" (`.knbang`) absolute in the info's top-right corner at the same x; never its own row. In layout 2 the cards' "!" sit one per column (two columns by construction).
 - Tests: `node dev/test/opt-card-scan.js <url> <out> <tag> 755x1000,1180x820 none <cases>` prints per case `TIERCHK <layout><tier> bad <cards whose rendered picture / height != tier>/<n>`, `BANG` (right edge x of every "!"; a `COL` mark = a "!" not in the one colour), `tier` (the attempts: layout+tier:heights, ok) and the older columns.
+
+### 6.2e OPTION FRAME: figure fill, tag on top, title band (owner 18/11 ~21:20Z, OD tail; review/opt-card-short #6; kit, whole group, every tier, Fold + iPad)
+1. The figure FILLS the left column: the frame body is the tallest of figure / info / grown tall frame; `kszFigFill` (jksize, after the feet-fit) grows the figure body to that height (the column keeps its width so the option cards keep theirs; the box may spread to KSZ_FILLW x the column, the painted body is narrower). Reference = ipad-mat2 (Quý nhân Tống Ngọc Hành). Where the width cap stops it, the rest is below the figure, never above it.
+2. Rank + name tag at the TOP of the left column (`align-self:flex-start`), figure right under it; never centred / sunk.
+3. Every option card: ONE title band per frame (`--kat-h` = the tallest title band of the frame, incl. the odds chip), title (+chip) vertically centred in it; the card's text block starts at ONE offset (`--kbtop`: the tallest block centred in the tier height). Set by `band()` in `kitOptTier`, inside every tier fit. Tier L height 128 -> 140 (equal bands make the longest card need 138).
+4. LAW 10 is re-checked after the tier is picked and 350 ms after the frame settles (`kszEvLaw10`).
+5. Samples (scan, kit page) use REAL event text (a real event's description lines), never placeholders («Hỏi khó.»).
+Scan (`dev/test/opt-card-scan.js`): `FIG top/gap` (tag top <= 3 px; unfilled gap under the figure <= 12 px), `TITLE ... band-centre` (title-group centre minus band centre, equal across the cards of a frame, spread <= 2), `SCROLLBIG`.
 
 ## 6.3 PERSON-CARD ACT ROWS — every act a person card offers is the LONG HORIZONTAL ROW (owner 16/11, iPad 755x1000 shot of Tiểu Hoa's card; review/pcard-actrow) — `dev/build/jk4.js` (after the §43 compact block)
 Owner: "this button does not follow the shared kit; if the text is long we HAVE a kit part for that, the long horizontal option row — why not use it?"

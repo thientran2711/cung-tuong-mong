@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"1534f407+","t":"2026-11-18T19:31Z","c":"opt-card-short #5: LAW 10 big scene picture shrinks to strip / drops when options scroll","b":"50e920fe329a","h":[{"s":"a5013222+","t":"2026-11-18T18:03Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)"},{"s":"08774c0e+","t":"2026-11-18T17:38Z","c":"ag-stf2 (test only): bribe histogram picks a servant whose lòng moves her bribe odds. Root of the 'disloyal one takes more' red (npc ~3/20,…"},{"s":"0351e140","t":"2026-11-18T16:48Z","c":"shop-panel: «Để ta xem» outside option, 3-column Mua/Bán grid, smallest picture strip, test"},{"s":"ebf25660+","t":"2026-11-18T15:29Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…"},{"s":"9f9c6c2b+","t":"2026-11-18T14:26Z","c":"shown-odds-one-path r1: plant on the spot is done in person (actCtx x.here, no sent-servant pen); Vì sao names spy knowledge (whyKnow); tes…"},{"s":"aa997f3c+","t":"2026-11-18T13:46Z","c":"look-fx r13: index.html / sw.js rebuilt from merged sources"},{"s":"4475ea24+","t":"2026-11-18T12:33Z","c":"grand-endings-engine: site rebuilt (index.html / sw.js / assets.json) after fix 4 + main merge"},{"s":"68cbbb28+","t":"2026-11-18T12:00Z","c":"review life-preload-fu r2v: no half-drawn / empty figure while the HD twin comes (whole group: every fig-* img)"},{"s":"a8036600+","t":"2026-11-18T12:06Z","c":"Rebuild index.html/sw.js after merging origin/main"},{"s":"3f45eda9+","t":"2026-11-18T11:52Z","c":"steal-minigame FIX 1: PEND flag (chooseM renders before the game opens: the stale-'mg' reset no longer cancels a real async game); KIT.md §…"}]};
+window.CTM_BI={"s":"ad86bcc0+","t":"2026-11-18T19:41Z","c":"opt-card-short #5: LAW 10 picture shrinks/drops when options scroll (scan SCROLLBIG=0), strict tier height, merge fullbody-frame-s4","b":"2b02d9c9c6ac","h":[{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"},{"s":"a5013222+","t":"2026-11-18T18:03Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)"},{"s":"08774c0e+","t":"2026-11-18T17:38Z","c":"ag-stf2 (test only): bribe histogram picks a servant whose lòng moves her bribe odds. Root of the 'disloyal one takes more' red (npc ~3/20,…"},{"s":"0351e140","t":"2026-11-18T16:48Z","c":"shop-panel: «Để ta xem» outside option, 3-column Mua/Bán grid, smallest picture strip, test"},{"s":"ebf25660+","t":"2026-11-18T15:29Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…"},{"s":"9f9c6c2b+","t":"2026-11-18T14:26Z","c":"shown-odds-one-path r1: plant on the spot is done in person (actCtx x.here, no sent-servant pen); Vì sao names spy knowledge (whyKnow); tes…"},{"s":"aa997f3c+","t":"2026-11-18T13:46Z","c":"look-fx r13: index.html / sw.js rebuilt from merged sources"},{"s":"4475ea24+","t":"2026-11-18T12:33Z","c":"grand-endings-engine: site rebuilt (index.html / sw.js / assets.json) after fix 4 + main merge"},{"s":"68cbbb28+","t":"2026-11-18T12:00Z","c":"review life-preload-fu r2v: no half-drawn / empty figure while the HD twin comes (whole group: every fig-* img)"},{"s":"a8036600+","t":"2026-11-18T12:06Z","c":"Rebuild index.html/sw.js after merging origin/main"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -58120,22 +58120,31 @@ window.kitOptFinal=kitOptFinal;
    Order of work: frame class (KIT_SIZE S/M/L/XL) -> layout -> button tier. Tier S / M / L = ONE card size each (picture box + card height; the width is the cell). Never a variant inside a tier.
    Each tier size = the LARGEST card that tier needs over every layout phone -> iPad (table in KIT.md §6.2d, scan dev/test/opt-card-scan.js). kitOptTier(g) picks, per dialog, the first of
    [2 columns S] [1 column M] [1 column L] whose cards ALL fit their tier (no card taller than the tier, nothing cut sideways). */
-const KIT_OPT={tiers:{S:{pw:54,ph:72,h:88},M:{pw:66,ph:88,h:104},L:{pw:84,ph:112,h:128}},gap:8};window.KIT_OPT=KIT_OPT;
+const KIT_OPT={tiers:{S:{pw:54,ph:72,h:88},M:{pw:66,ph:88,h:104},L:{pw:84,ph:112,h:140}},gap:8};window.KIT_OPT=KIT_OPT;
 const KIT_OPT_CSS=(()=>{const T=KIT_OPT.tiers;let c="html body #modal,html body .kitpg-opts{--ko-pw:"+T.M.pw+"px;--ko-ph:"+T.M.ph+"px;--ko-h:"+T.M.h+"px}\n";
  for(const k in T)c+=`html body #modal .opts[data-kot="${k}"],html body .kitpg-opts[data-kot="${k}"]{--ko-pw:${T[k].pw}px;--ko-ph:${T[k].ph}px;--ko-h:${T[k].h}px}\n`;
  c+=`html body #modal#modal button.ka.kopt.kopt:not(.kart) :is(.kofold,small.kb>.kr-hint,small.kb>.kr-why){display:none!important}
 html body #modal#modal button.ka.kopt.kopt:not(.kart){min-height:var(--ko-h,104px)!important;position:relative;box-sizing:border-box;align-items:center}
 html body #modal#modal button.ka.kopt:not(.kart) .kobang{position:absolute;top:5px;right:6px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:700 .85rem/1 var(--body,sans-serif);color:var(--gold,#8f5f0c)!important;background:#fffaf0!important;border:1px solid var(--gold,#8f5f0c)!important;cursor:help;z-index:2}
 html body #modal#modal .opts[data-kol],html body .kitpg-opts[data-kol]{display:grid!important;grid-template-columns:repeat(var(--k3c,1),minmax(0,1fr))!important;gap:${KIT_OPT.gap}px;align-content:start}
+html body #modal#modal .opts[data-kol]>button.kopt:not(.kart){align-items:flex-start}
+html body #modal#modal .opts[data-kol]>button.kopt>.kaart{align-self:center}
+html body #modal#modal .opts[data-kol]>button.kopt>.kabody{align-self:flex-start;margin-top:var(--kbtop,0px)}
+html body #modal#modal .opts[data-kol]>button.kopt .kat{min-height:var(--kat-h,0px);align-content:center;box-sizing:border-box}
 html body #modal#modal .opts[data-kol]>button.kopt{grid-column:auto!important;width:auto;min-width:0;max-width:none;margin:0}`;return c})();
 function kitOptCards(g){return[...g.children].filter(b=>b.matches&&b.matches("button.ka.kopt")&&!b.classList.contains("kcard")&&!b.closest(".pc")&&b.getClientRects().length)}
 function kitOptCut(b){const R=b.getBoundingClientRect();const bd=b.querySelector(":scope > .kabody")||b;for(const e of bd.querySelectorAll("*")){if(!e.getClientRects().length)continue;const r=e.getBoundingClientRect();if(r.width&&r.right>R.right+1)return true}return false}
 function kitOptTier(g){try{const bs=kitOptCards(g);if(!bs.length||g.__kotBusy)return;g.__kotBusy=1;const T=KIT_OPT.tiers;
  bs.forEach(b=>{const m=b.querySelector(".kobang");if(m&&m.parentElement!==b)b.appendChild(m)});/* the "!" is always the card's own corner child (a picture-less hide-out card had it inside the title) */
- const set=(lay,t)=>{g.dataset.kol=lay;g.dataset.kot=t;g.style.setProperty("--k3c",lay);bs.forEach(b=>b.style.setProperty("--k3s",1));bs.forEach(b=>b.style.removeProperty("min-height"));void g.offsetHeight};
- const fit=(lay,t)=>{set(lay,t);const hs=bs.map(b=>Math.round(b.getBoundingClientRect().height)),cut=bs.map(kitOptCut);const ok=bs.every((b,i)=>hs[i]<=T[t].h&&!cut[i]);(window.__kotLog=window.__kotLog||[]).push(lay+t+":"+hs.join("/")+(cut.some(x=>x)?"cut":"")+(ok?"ok":""));return ok};
+ const set=(lay,t)=>{g.style.setProperty("--kat-h","0px");g.style.setProperty("--kbtop","0px");g.dataset.kol=lay;g.dataset.kot=t;g.style.setProperty("--k3c",lay);bs.forEach(b=>b.style.setProperty("--k3s",1));bs.forEach(b=>b.style.removeProperty("min-height"));void g.offsetHeight};
+ const band=t=>{g.style.setProperty("--kat-h","0px");g.style.setProperty("--kbtop","0px");void g.offsetHeight;const kh=Math.max(0,...bs.map(b=>{const k=b.querySelector(".kat");return k?Math.ceil(k.getBoundingClientRect().height):0}));g.style.setProperty("--kat-h",kh+"px");void g.offsetHeight;
+  const mb=Math.max(0,...bs.map(b=>{const k=b.querySelector(":scope > .kabody");return k?Math.ceil(k.getBoundingClientRect().height):0}));g.style.setProperty("--kbtop",Math.max(0,Math.floor((KIT_OPT.tiers[t].h-mb-14)/2))+"px");void g.offsetHeight};
+ const fit=(lay,t)=>{set(lay,t);band(t);const hs=bs.map(b=>Math.round(b.getBoundingClientRect().height)),cut=bs.map(kitOptCut);const ok=bs.every((b,i)=>hs[i]<=T[t].h&&!cut[i]);(window.__kotLog=window.__kotLog||[]).push(lay+t+":"+hs.join("/")+(cut.some(x=>x)?"cut":"")+(ok?"ok":""));return ok};
  const seq=bs.length>=2?[["2","S"],["1","M"],["1","L"]]:[["1","M"],["1","L"]];let pick=seq[seq.length-1];for(const q of seq)if(fit(q[0],q[1])){pick=q;break}
- set(pick[0],pick[1]);bs.forEach(b=>{b.dataset.kapic="eq"});g.__kotBusy=0;
+ set(pick[0],pick[1]);bs.forEach(b=>{b.dataset.kapic="eq"});
+ /* OWNER 18/11 ~21:20Z: the title sits in the card's TOP BAND, vertically centred there, the SAME in every card of the frame: one band height (the tallest title band), the card's text block starts at ONE top offset (the tallest block centred in the tier height) */
+ band(pick[1]);
+ g.__kotBusy=0;try{const dl=g.closest(".dlg");if(dl&&typeof kszEvLaw10==="function")kszEvLaw10(dl)}catch(e){}
  /* late changes (fonts, pictures, a frame re-pick, a resize) re-run the choice: the grid or a card changed size under the picked tier */
  if(!g.__kotRO&&typeof ResizeObserver==="function"){g.__kotRO=new ResizeObserver(()=>{if(g.__kotBusy||!g.isConnected)return;const T0=KIT_OPT.tiers[g.dataset.kot],c=kitOptCards(g);const bad=c.some(b=>b.getBoundingClientRect().height>T0.h+1||kitOptCut(b));const w=Math.round(g.clientWidth);if(bad||w!==g.__kotW){g.__kotW=w;clearTimeout(g.__kotT);g.__kotT=setTimeout(()=>kitOptTier(g),50)}});g.__kotRO.observe(g);bs.forEach(b=>g.__kotRO.observe(b))}
  g.__kotW=Math.round(g.clientWidth);return pick.join("")}catch(e){g.__kotBusy=0;console.error("kitOptTier",e)}}
@@ -66902,7 +66911,7 @@ window.kitPicSubj=kitPicSubj;
 .ksz3 .k3body{display:flex;gap:12px;padding:10px 12px 12px;align-items:stretch;box-sizing:border-box}
 .ksz3 .k3right{flex:1;min-width:0;display:flex;flex-direction:column;gap:8px}
 .ksz3 .k3right>.kfacts,.ksz3 .k3right>.kb{flex:none}
-.ksz3[data-pres="fig"] .k3body>.kszfig{align-self:center}
+.ksz3[data-pres="fig"] .k3body>.kszfig{align-self:flex-start}
 .ksz3 .k3main{flex:none;width:${V.colS}px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
 .ksz3 .k3main>.kt3{text-align:center;width:max-content;max-width:${V.colS+24}px}
 .ksz3 .k3mpor{align-self:center}.ksz3 .k3mpor>.pcp{width:${V.porS}px;flex:none}
@@ -67125,13 +67134,22 @@ function kszLiveRoom3(dlg){const M=document.getElementById("modal");if(!M)return
    at a size whose figure column (tag + the layout's figure height) is taller than the cap leaves room for, the bottom of the figure (hem, shoes) was clipped.
    The ONE rule: the figure column NEVER exceeds the room the frame has (cap − header − button row − body padding); when it would, the figure is scaled down
    (dlg.__kszShrink, read by kszFigFit) just enough; the bottom is never cropped. Not touched when it already fits. */
-function kszFeetFit(dlg){try{const B=dlg.querySelector(".k3body"),L=B&&B.querySelector(":scope>.kszfig");dlg.__kszShrink=1;if(!L)return;kszFigFit(dlg);
+function kszFeetFit(dlg){try{const B=dlg.querySelector(".k3body"),L=B&&B.querySelector(":scope>.kszfig");dlg.__kszShrink=1;if(!L)return;{const l0=KIT_SIZE.lay[dlg.dataset.lay||"big"]||KIT_SIZE.lay.big;dlg.style.setProperty("--kszcw",KIT_SIZE.fig[l0.fig].cw+"px")}kszFigFit(dlg);
  const cap=parseFloat(getComputedStyle(dlg).maxHeight);if(!(cap>0))return;
  /* KIT 56.4 (owner 18/11 ~07:50Z): the room is measured for the TALLEST crown (Hoàng hậu, BAL.bookFrame.cRef above the skull top), never for this person: every person of the frame gets the same body, nobody is shrunk for being an outlier */
  const lay=KIT_SIZE.lay[dlg.dataset.lay||"big"]||KIT_SIZE.lay.big,cRef=(typeof BAL==="object"&&BAL.bookFrame&&BAL.bookFrame.cRef)||0;
  for(let i=0;i<4;i++){const mbx=document.getElementById("mb");let fixed=2;[...dlg.children].forEach(c=>{if(c!==mbx&&c.getClientRects().length&&getComputedStyle(c).position!=="absolute")fixed+=c.offsetHeight});if(mbx)[...mbx.children].forEach(c=>{if(c!==B&&c.getClientRects().length)fixed+=c.offsetHeight});const room=cap-fixed-26;/* the room = the cap minus the frame's own parts (header, buttons, body padding): the same for every person, never read from the current figure */
   const fs=L.querySelector(".kszfs"),h=fs?fs.offsetHeight:0;if(h<=60)break;const body0=KIT_SIZE.fig[lay.fig].h*(dlg.__kszKid||1),tg=L.querySelector(":scope>.kt3"),part=L.offsetHeight-h+(tg&&!tg.querySelector(".kdh,.kdh-cap")?kszPlateH():0),allow=(room-part)/(1+cRef),cur=body0*dlg.__kszShrink;
-  if(allow>=cur-.5)break;dlg.__kszShrink=Math.max(.3,allow/body0);kszFigFit(dlg)}}catch(e){console.error("kszFeetFit",e)}}
+  if(allow>=cur-.5)break;dlg.__kszShrink=Math.max(.3,allow/body0);kszFigFit(dlg)}
+ kszFigFill(dlg,L,B,lay,cRef)}catch(e){console.error("kszFeetFit",e)}}
+/* OWNER 18/11 ~21:20Z (OD tail): the figure FILLS the left column's height (the frame body = the tallest of figure / info / grown tall frame), rank+name tag at the TOP, figure right under it. Grow the body only when the column is taller than the figure; the column width grows with it up to KSZ_FILLW of the frame body width (the right column keeps the rest). Whole group, every tier, Fold + iPad. */
+const KSZ_FILLW=1.45,KSZ_FILLS=1.6;
+function kszFigFill(dlg,L,B,lay,cRef){const cur0=dlg.__kszShrink||1;const R=dlg.querySelector(".k3right");if(R){R.style.minHeight="";R.style.maxHeight="";R.style.overflow=""}
+ const cs=getComputedStyle(B),avail=B.clientHeight-parseFloat(cs.paddingTop)-parseFloat(cs.paddingBottom),fs=L.querySelector(".kszfs");if(!fs)return;
+ const part=L.offsetHeight-fs.offsetHeight,body0=KIT_SIZE.fig[lay.fig].h*(dlg.__kszKid||1),allow=(avail-part)/(1+cRef);let s=Math.min(KSZ_FILLS,allow/body0);
+ const im=L.querySelector(".kszfs>img"),cw=L.querySelector(".kszfs").clientWidth,W0=im?parseFloat(im.style.width)||0:0;/* the column keeps its width (the option cards keep theirs); the figure box may spread to KSZ_FILLW x the column, the painted body is narrower than its box */
+ if(W0>0)s=Math.min(s,cur0*KSZ_FILLW*cw/W0);if(s<=cur0+.01)return;dlg.__kszShrink=s;kszFigFit(dlg)}
+window.kszFigFill=kszFigFill;
 window.kszFeetFit=kszFeetFit;
 /* KIT 56.4: the height a worn-title plate adds to the name tag (measured once); the room of every frame is reckoned WITH the plate, so a person with a title and one without get the same body */
 let KSZ_PLATEH=null;function kszPlateH(){if(KSZ_PLATEH!=null)return KSZ_PLATEH;let h=0;try{const T=typeof KIT_TITLES!=="undefined"&&KIT_TITLES[0],pl=T&&typeof kitTitlePlate==="function"?kitTitlePlate(T,{cls:"kdh-cap"}):"";if(pl){const x=document.createElement("div");x.className="kszf";x.style.cssText="position:absolute;visibility:hidden;left:-9999px;top:0";x.innerHTML=`<div class="kszfig"><div class="kt3">${pl}</div></div>`;document.body.appendChild(x);h=x.querySelector(".kt3").offsetHeight+2;x.remove()}}catch(e){}return KSZ_PLATEH=h}
@@ -67139,7 +67157,7 @@ function kitFrameApplyLive3(dlg){try{kszFeetFit(dlg)}catch(e){}const g=dlg.query
  const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor");
  if(R){R.style.maxHeight="";R.style.overflow="";R.style.minHeight=L?L.offsetHeight+"px":(dlg.dataset.pres==="one"?KIT_SIZE.v3.picMinS+"px":"");if(dlg.dataset.ksz==="XL"&&L){/* XL (approved #3): the body stays the figure's height; more content scrolls inside the info column */
   {const kb=dlg.querySelector(".k3body");R.style.maxHeight=Math.max(L.offsetHeight,kb?kb.clientHeight:0)+"px"}/* tall phone frame (kit §6.2c): the info column may use the whole grown body, not only the figure height */R.style.overflow="auto"}}
- kszPicFit3(dlg);kszPicFit3(dlg);kszPicStep3(dlg);kszEvLaw10(dlg);return dlg.dataset.ksz}
+ kszPicFit3(dlg);kszPicFit3(dlg);kszPicStep3(dlg);kszEvLaw10(dlg);clearTimeout(dlg.__evT);dlg.__evT=setTimeout(()=>{if(dlg.isConnected){try{kszEvLaw10(dlg)}catch(e){}}},350);return dlg.dataset.ksz}
 /* LAW 10 (START_CORE, owner 18/11 ~16:05Z): a big scene picture only when the content fits without scrolling. When the option list scrolls: 1) the picture shrinks to the short strip (evMin), 2) still scrolling: the picture is dropped. Whole group (every live option frame, every tier, Fold + iPad). */
 function kszEvLaw10(dlg){const R=dlg.querySelector(".k3right"),ev=R&&R.querySelector(":scope>.k3ev");if(!ev)return;const o=R.querySelector(":scope>.opts"),sc=()=>o&&o.scrollHeight>o.clientHeight+1;
  delete dlg.dataset.evfit;if(!sc())return;dlg.dataset.evfit="s";kszPicFit3(dlg);if(!sc())return;dlg.dataset.evfit="x";kszPicFit3(dlg)}
@@ -75804,7 +75822,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="50e920fe329a";window.CTM_BUILD=BUILD;
+const BUILD="2b02d9c9c6ac";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
