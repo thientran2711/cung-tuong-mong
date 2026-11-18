@@ -9,5 +9,8 @@ Tools (scratch, not in repo): slots.py prints the per-version slots (face/colour
 | c27 | 6 | all pass |
 | c28 | 6 | all pass (v0 colour = builder ORIG1 ivory; her live a51 t8 is sage-green; prompt kept frozen) |
 | c29 | 6 | all pass |
+| c30 | 6 | all pass (old text) |
+| c31 | 6 | all pass (NEW build.py 73299cc2 elder colours, visibly deeper) |
+| c32 | 6 | all pass (NEW build.py 73299cc2) |
 Checks per figure: reads ~65 (wrinkles, silver not white), deeper dignified colours, phoenix clear, closed lips, face visible, item below chin (c26 ruyi / c27 vase flowers beside face, not covering). Note: a few t7 robes in bright pink/coral still read bright for 65 — prompt frozen.
-HANDOVER: remaining c30, c31, c32 (then update this table). Slots per person: python3 slots.py cNN in dev/art/t8-prompt-B.
+STATUS: JOB A DONE for c25–c32 (48 figs; 47 new gens + 1 reused raw; 0 regens; ~6.4k credits). c25–c30 were built from build.py BEFORE commit 73299cc2 (old 'fresh, luminous' colour rule); c31–c32 with the new elder-colour clause. Owner/Foreman C ruled: NO redo of existing a65 (credit). HOLD, no gens, until Foreman C GO (a51 not started).
