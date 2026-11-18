@@ -143,9 +143,7 @@ function kitToastPlace(el,dir,relax){try{const C=kitToastCol(),R=kitToastKeepRec
    On a screen without a stage (Fold panel tabs) the rail's alert items stand in the rail's fixed corner dock above the tab bar (`dock:true`, §77). */
 function kitToastPend(){return kitToastPend.t||""}
 function kitToastPendSet(t){if(kitToastPend.t===t)return;kitToastPend.t=t;try{if(window.kitStageRail)kitStageRail.paint()}catch(e){}}
-function kitToastCollapse(el){try{if(el.id!=="ktbtoast")return;const t=el.textContent||"";if(!t)return;kitToastPendSet(t);
- if(window.kitStageRail&&!kitToastCollapse.reg){kitToastCollapse.reg=1;kitStageRail.add({id:"tnote",order:3,glyph:"!",title:"Tin báo",dock:true,
-  when:()=>!!kitToastPend.t&&!(typeof stClose==="function"&&stClose()),busy:()=>true,badge:()=>true,onTap:()=>kitToastTap(kitToastPend.t)})}}catch(e){}}
+function kitToastCollapse(el){}/* stage-here r4: no rail «!» item — every notice is a kitNotice (jnotice, KIT §42.2): no free top spot → the top-bar box alone */
 function kitToastTap(t){try{if(!t)return;kitToastPendSet("");const el=typeof kitLineToast==="function"?kitLineToast(t):null;
  if(el&&getComputedStyle(el).visibility!=="hidden")return;/* a free spot now: the line shows as the toast */
  if(el)el.remove();if(typeof Q!=="undefined"&&typeof showModal==="function"){Q.push({t:"Tin báo",h:`<p>${typeof esc==="function"?esc(t):t}</p>`});showModal()}}catch(e){}}

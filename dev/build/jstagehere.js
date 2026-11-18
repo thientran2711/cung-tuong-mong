@@ -3,10 +3,9 @@
        to the one-page Hành sự cards while away (jk3 k3Full: the full-screen painting is only the place page itself). Her room comes back
        only at a new day (j3 day turn S.place="home") or when she walks home on Dư đồ (goTo("home")).
    (2) CLOSING ALERT: when the place she stands in closes at the NEXT khắc (the last khắc of this buổi and accessOf() says no for the next
-       buổi), or it is already closed and she stayed on, the stage rail (KIT §77 kitStageRail) carries ONE alert item: glyph "!" + the rail's
-       busy motion (kbusy) + the seal-red dot (kbadge). The first time it appears in a buổi / khắc the place-entry chip (KIT §87 tin báo toast,
-       kitLineToast, the "tai mắt" chip) says it for BAL.entryToastMs; tapping the icon shows the chip again. It stays until she leaves or the
-       place opens again. Hours come from the ONE access rule (j41 accessOf + ACC_DAY + B4L) and BAL.time.khac: no number of its own.
+       buổi), or it is already closed and she stayed on, it is ONE kitNotice (r4, KIT §42.2 ONE NOTICE SYSTEM): the top-bar «!» box lights and
+       the top chip «<Nơi> sắp đóng cửa sau khắc này» shows once per buổi for BAL.entryToastMs; tap → «Tin báo» panel (the place picture + the
+       full line with the stay odds). Sticky until she leaves or the place opens again (then dropped from the box). Hours come from the ONE access rule (j41 accessOf + ACC_DAY + B4L) and BAL.time.khac: no number of its own.
        Painted icon: KIT_REQUESTS K-ICO-ALERT (img/kit/ico-alert.webp); until it exists the rail's text glyph is used (§77.1 glyph mode).
    Staying past closing = Lẻn vào (r2, stayRoll below): one caught roll per buổi turn with the existing sneak odds/loss; the chip says the odds.
    Old saves: S.closeSeen / S.stayRoll are optional. */
@@ -25,12 +24,17 @@ window.stClose=stClose;
 function stayWord(k){try{return typeof accSneakO==="function"&&typeof word==="function"?word(accSneakO(k)):""}catch(e){return ""}}
 function line(c){const p=nm(c.k),w=c.why?` (${c.why})`:"",o=stayWord(c.k),t=o?` Ở lại = như lẻn vào: ${o}.`:"";return (c.now?`${p} đã đóng cửa${w}, ngươi vẫn ở lại.`:`${p} sắp đóng cửa sau khắc này${w}.`)+t}
 function key(c){try{return [typeof bkey==="function"?bkey():"",c.k,c.now?1:0].join("|")}catch(e){return ""}}
-function chip(c){try{return typeof kitLineToast==="function"?kitLineToast(line(c)):null}catch(e){return null}}
-function tick(){try{const c=stClose();if(!c)return;const kk=key(c);if(S.closeSeen===kk)return;
- const md=document.getElementById("modal");if(md&&!md.hidden)return;/* the chip waits for the modal to close (next render) */
+function short(c){const p=nm(c.k);return c.now?`${p} đã đóng cửa, ngươi vẫn ở lại`:`${p} sắp đóng cửa sau khắc này`}
+/* r4 (ONE NOTICE SYSTEM, owner OD 18/11 ~22:10Z): the closing alert is a kitNotice (top-bar «!» box + top chip + «Tin báo» panel with the place's
+   own picture), sticky while it holds; it is dropped when she leaves or the place opens. Was: a stage-rail «!» item + the kitLineToast chip. */
+function chip(c){try{if(typeof kitNotice!=="function")return null;const k=key(c);let pic="";try{const n=SCIMG[placeOf(c.k).sc];pic=n?`img/${n}.webp`:""}catch(e){}
+ return kitNotice({id:"close:"+k,kind:"close",line:short(c),text:line(c),pic,sticky:true})}catch(e){return null}}
+function tick(){try{const c=stClose();const kk=c?key(c):"";
+ /* a closing notice that no longer holds (she left, the place opened, a new buổi) leaves the box */
+ try{if(typeof kitNoticeList==="function")for(const x of kitNoticeList())if(x.id.indexOf("close:")===0&&x.id!=="close:"+kk)kitNoticeDrop(x.id)}catch(e){}
+ if(!c)return;if(S.closeSeen===kk){try{if(typeof kitNoticeList==="function"&&!kitNoticeList().some(x=>x.id==="close:"+kk)){const it=chip(c);if(it)it.seen=true;kitNoticeBox()}}catch(e){}return}/* reload: in the box again, no second chip */
  if(chip(c))S.closeSeen=kk}catch(e){}}
-if(window.kitStageRail)kitStageRail.add({id:"closing",order:2,glyph:"!",title:"Sắp đóng cửa",dock:true,when:()=>!!stClose(),busy:()=>true,badge:()=>true,
- onTap:()=>{const c=stClose();if(!c)return;if(typeof kitToastTap==="function")kitToastTap(line(c));else chip(c)}});/* no free spot → kit card (§42.2) */
+/* r4: no stage-rail «!» item any more — the ONE «!» lives in the top bar (kitNotice box) */
 if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);try{actPendRun()}catch(e){}try{tick()}catch(e){}return r}}
 /* (3) ACT = A PLACE (owner OD 18/11 ~19:55Z + ~20:00Z): a Hành sự act that means going somewhere really moves her there on Dư đồ (the ONE
    walk: goTo → S.place, S.visit, location ledger), she STAYS there, the stage shows it. ONE cost: the act's own khắc/sức already include
@@ -78,6 +82,4 @@ window.stayRoll=stayRoll;
 if(typeof nextBuoi==="function"){const nb0=nextBuoi;nextBuoi=function(){const k=S&&S.place,bk0=typeof bkey==="function"?bkey():"";const r=nb0.apply(this,arguments);try{stayRoll(k,bk0)}catch(e){}return r}}
 /* the pending trip runs when the act's cards are closed, in the same buổi (a day/buổi turn in between cancels it: she is elsewhere by then) */
 function actPendRun(){try{const P=window.__actPend;if(!P||Q.length)return;window.__actPend=null;if((typeof bkey==="function"?bkey():"")!==P.bk)return;if(actMove(P.k))setTimeout(()=>{try{render()}catch(e){}},0)}catch(e){}}
-try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§77.2",title:"Báo sắp đóng cửa · nút ! trên cột trái sân khấu + chip tin báo",
- html:()=>`<div class="kitpg-row" style="position:relative;height:60px"><nav class="krail" style="position:static"><button type="button" data-g="!" class="krailb kglyph kbusy kbadge" title="Sắp đóng cửa"><span class="krailg" aria-hidden="true">!</span></button></nav></div>`})}catch(e){}
 }catch(e){console.error("jstagehere",e)}})();
