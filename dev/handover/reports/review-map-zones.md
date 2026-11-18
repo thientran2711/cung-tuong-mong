@@ -27,3 +27,11 @@ PRIORITY #1 CHECK: OD 18/11 ~19:30Z–19:45Z read verbatim (L1897–L1903: 19:35
 - A player rank-7 set without the crowning path gets a palace — identical on main 790cda59 (artificial test), not this branch.
 - jmapz.js (Càn Ninh / Đức Thọ 2nd level) unchanged since 8f8dadb, not re-reviewed in depth here beyond quickcheck/scan; TODO 2 (switch to j95here/j95whereId) still open.
 Shots: scratch only (not committed, not on CDN). Re-review after fixes = rerun pal-trim-oldsave (with the new case) + quickcheck.
+
+---
+## RE-REVIEW r3 (review/map-zones @ 5a83694) → reviewer fix → **PASS 668e0bf** (branch review/map-zones-r6)
+- r3 fixed all 3 items (goneM lines for side-hall residents incl. the player; `was` uses the dropped palace name; jres/jpm/PROGRESS_balance rewritten in place).
+- BUT the worker's own dev/test/pal-trim-oldsave.js FAILED on 5a83694 ('heads' case): the player got TWO lines ("Trữ Tú cung đóng cửa; ngươi dời sang …" + "Hàm Phúc cung đóng cửa; ngươi dời sang …"). Cause: a head in a dropped slot with a stale resHead pointing at another dropped house entered goneM too (gone had already nulled her pal). Depends on the random world, so it passes on some runs.
+- Reviewer fix (one condition, jpal.js goneM: skip anyone already in gone) + rebuilt index.html/sw.js = **668e0bf** on review/map-zones-r6, parent 5a83694, FF onto LIVE main 790cda59.
+- On 668e0bf: pal-trim-oldsave PASS (heads + residents); my 25-case matrix PASS, every moved person exactly one line, no «cung cũ», no Ban-cung, palCer kept, 0 page errors; quickcheck PASS (old save ok, core gates PASS, perf new/live render 214/209, tab 350/375, buổi 1008/1000). r3 does not touch the map, so the 635c406 map-labels-scan PASS (Fold + iPad, day/night, courtyards 10) still holds.
+- Fast-forward main to **668e0bf** (not 5a83694).
