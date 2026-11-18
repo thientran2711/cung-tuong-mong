@@ -135,10 +135,14 @@ EVD.vuco={place:()=>"home",
  start(w){const b=B().vuco;const F=[];for(const p of [S].concat(liveR())){const st=typeof staffOf==="function"?staffOf(p):(p.staff||[]);
    for(const s of st.slice())if(s&&s.spyFor&&roll(b.spyFind)){const i=(p.staff||[]).indexOf(s);if(i>=0){p.staff.splice(i,1);F.push(s.name)}}}
   w.x.F=F.length;return `Hình nhân bùa ngải trong tẩm cung ${w.x.tn||"một phi tần"} giữa lúc ${w.x.why||"người trong hoàng tộc lâm bệnh"}; Thận hình ti lục soát mọi cung, thị tẩm tạm dừng.${F.length?` Lôi ra tai mắt cài cắm: ${F.join(", ")}.`:""}`},
+ /* her own household: her accusation (S.wwMe acc) against the culprit the end found (o.got = its id); split out for thin E */
+ home(w,o){const b=B().vuco;if(meGet(w,"acc")!=null&&notSrv()){const a=byPid(meGet(w,"acc"));if(o&&o.got!=null&&a&&a.id===o.got)apply({danh:b.accuse.danh});else apply({danh:b.accuse.miss})}},
  end(w){const b=B().vuco;const by=byPid(w.x.by);const me=meGet(w,"me")||"";let r="";let got=null;
-  if(by&&(by===S||by.alive)){let o=b.catch+(by.schemes||0)*b.schemeK;if(by===S&&me==="clean")o*=b.clean.mul;if(by!==S&&meGet(w,"acc")===by.id)o+=b.accuseK;if(by===S&&me==="open")o+=b.accuseK;
+  /* co-op (thin E): the culprit is the OTHER player (her entry): her own choice (S.wwMe in her person) counts as "me" (EVD.vuco.meOf, jcoopthine) */
+  const byMe=by===S?me:by&&by.coop&&EVD.vuco.meOf?(EVD.vuco.meOf(w,"me")||""):"";
+  if(by&&(by===S||by.alive)){let o=b.catch+(by.schemes||0)*b.schemeK;if((by===S||by.coop)&&byMe==="clean")o*=b.clean.mul;if(by!==S&&meGet(w,"acc")===by.id)o+=b.accuseK;if((by===S||by.coop)&&byMe==="open")o+=b.accuseK;
    if(roll(Math.round(o))){punish(by,"dùng bùa ngải hãm hại người",2);got=by;r=`Thận hình ti tra ra kẻ đặt bùa: ${nmOf(by)}.`}}
-  if(meGet(w,"acc")!=null&&notSrv()){const a=byPid(meGet(w,"acc"));if(got&&got===a)apply({danh:b.accuse.danh});else apply({danh:b.accuse.miss})}
+  EVD.vuco.home(w,{got:got&&got!==S?got.id:null});
   if(!got&&roll(b.innocent)){const L=liveR().filter(v=>!v.out&&v.id!==w.x.tgt&&!(by&&v===by)).sort((x,y)=>rkOf(x)-rkOf(y));const v=L[0];if(v){punish(v,"bị nghi dính vào vu cổ",1);got=v;r=`Không tra ra kẻ chủ mưu; ${v.name} bị bắt làm người chịu tội.`}}
   if(got&&roll(b.toCam))ws("cam","Án vu cổ khép lại, cung cấm giới nghiêm");return (r||"Án vu cổ không tra ra ai; Thận hình ti đóng hồ sơ.")+" Thị tẩm trở lại."},
  card(w){const b=B().vuco;if(!meCons())return info(w);const t=liveR().filter(v=>!v.out).sort((x,y)=>(typeof oan==="function"?oan(S,y)-oan(S,x):0))[0];
@@ -160,8 +164,10 @@ const greedy=s=>{try{return typeof netIs==="function"&&netIs(s,"greed")}catch(e)
 EVD.trom={place:()=>"home",
  start(w){const b=B().trom;const C=[];for(const v of liveR())for(const s of (v.staff||[]).slice())if(greedy(s)&&roll(b.catch)){v.staff.splice(v.staff.indexOf(s),1);C.push(s.name)}w.x.C=C.length;
   return `Nội vụ phủ kiểm kê cuối năm, ngự khố thiếu cả rương lụa và vàng; kiểm từng cung, bổng lộc tạm giữ lại.${C.length?` Bắt được kẻ ăn cắp: ${C.join(", ")}.`:""}`},
- end(w){const b=B().trom;let n=w.x.C||0;const me=meGet(w,"me")||"open";const mine=(S.staff||[]).filter(greedy);
-  if(me==="self"||(me==="open"))for(const s of mine)if(me==="self"||roll(b.catch)){S.staff.splice(S.staff.indexOf(s),1);n++;log(`${s.name} trong cung ngươi bị bắt vì trộm của ngự khố.`)}
+ /* her own household (her choice S.wwMe): split out so the host can run it for the other player in her context (thin E) */
+ home(w){const b=B().trom;let n=0;const me=meGet(w,"me")||"open";const mine=(S.staff||[]).filter(greedy);
+  if(me==="self"||(me==="open"))for(const s of mine)if(me==="self"||roll(b.catch)){S.staff.splice(S.staff.indexOf(s),1);n++;log(`${s.name} trong cung ngươi bị bắt vì trộm của ngự khố.`)}return n},
+ end(w){const b=B().trom;let n=(w.x.C||0)+EVD.trom.home(w);
   let r="";if(!n&&roll(b.scape)){const v=pick(liveR().filter(v=>!v.out));if(v){ap(v,{danh:b.scapeDanh});r=` Không bắt được ai; cung ${v.name} bị đổ tiếng.`}}
   phongAfter(b.phongP,"Sau án trộm, Hoàng thượng cho giảm bớt người trong cung");return `Án trộm ngự khố đã xong.${r}`},
  card(w){const b=B().trom;if(!meCons())return info(w);return Object.assign(info(w),{opts:[{n:"Mở kho cung mình cho kiểm",fx:{},x:"thành: kẻ gian trong cung ngươi có thể bị bắt",go:()=>{meSet(w,"me","open")}},
@@ -187,9 +193,11 @@ EVD.phong={place:()=>"home",
    if(L.length>=2&&(v.bac||0)>=b.keep.bac&&roll(b.npcKeep)){/* keep one only when another still leaves: a release is never empty */keep=L.sort((x,y)=>(y.loyal||0)-(x.loyal||0))[0];ap(v,{bac:-b.keep.bac})}
    for(const s of L)if(s!==keep){v.staff.splice(v.staff.indexOf(s),1);n++}}
   w.x.n=n;w.x.mine=(S.staff||[]).filter(aged).length;return `Chiếu cho cung nữ mãn hạn xuất cung về quê${n?`; ${n} người ở các cung đã ra đi`:""}.${w.x.mine?` Trong cung ngươi có ${w.x.mine} người đến tuổi.`:""}`},
- end(w){const b=B().phong;const me=meGet(w,"me")||"let";const L=(S.staff||[]).filter(aged);let keep=null;if(me==="keep"&&L.length)keep=L.sort((x,y)=>(y.loyal||0)-(x.loyal||0))[0];
-  for(const s of L)if(s!==keep)S.staff.splice(S.staff.indexOf(s),1);
-  for(const v of [S].concat(liveR()))try{if(v.staff&&typeof fillStaff==="function")fillStaff(v,true)}catch(e){}
+ /* her own household (split out for thin E, as trộm) */
+ home(w){const b=B().phong;const me=meGet(w,"me")||"let";const L=(S.staff||[]).filter(aged);let keep=null;if(me==="keep"&&L.length)keep=L.sort((x,y)=>(y.loyal||0)-(x.loyal||0))[0];
+  for(const s of L)if(s!==keep)S.staff.splice(S.staff.indexOf(s),1);try{if(S.staff&&typeof fillStaff==="function")fillStaff(S,true)}catch(e){}return keep},
+ end(w){const keep=EVD.phong.home(w);
+  for(const v of liveR())try{if(v.staff&&typeof fillStaff==="function")fillStaff(v,true)}catch(e){}
   return `Nội vụ phủ đã đưa cung nữ mới về các cung.${keep?` ${keep.name} được giữ lại bên ngươi.`:""}`},
  card(w){const b=B().phong;const n=w.x.mine||0;if(!meCons()||!n)return info(w);return Object.assign(info(w),{opts:[{n:"Tặng bạc hồi hương",fx:{bac:-b.gift.bac*n},x:`thành: Đức +${b.gift.duc}, người đi nhớ ơn`,go:()=>{meSet(w,"me","let");apply({duc:b.gift.duc})}},
   {n:"Lo lót Nội vụ phủ giữ lại một người thân tín",fx:{bac:-b.keep.bac},x:"thành: người trung thành nhất ở lại",go:()=>{meSet(w,"me","keep")}},{n:"Để các nàng ra đi",fx:{},x:"không được mất gì",go:()=>{meSet(w,"me","let")}}]})},

@@ -128,7 +128,10 @@ function timeUp(k){if(due===k)return;due=k;try{if(live()&&!S.dead&&myKey()===k){
  dueTick()}
 function overdue(){return live()&&!S.dead&&(due===myKey()||!!CW.pendBuoi)}
 function dueTick(){if(!live()||S.dead||CW.inLife||!due||HOLD)return;
- if(due===myKey()&&myKey()===roomKey()){const b=S.buoi||0;
+ /* thin E (level 5, COOPW.eW): HOST CLOCK ONLY. The host's time out steps both seats (forceBend → eForce, forceNight); the guest's clock is the
+    display of the host's and never steps or readies anything (her one-road dialogs are still read for her below) */
+ const gE=!host()&&CW.eW&&CW.eW();
+ if(!gE&&due===myKey()&&myKey()===roomKey()){const b=S.buoi||0;
   if(b<LAST()){if(!CW.bend)CW.forceBend()}
   else if(!CW.pend&&CW.sent!==wkN()){/* tối: the host commits the night for both (jcoopworld night gate); each seat runs it once her dialog is closed */
    if(CW.forceNight)try{CW.forceNight()}catch(e){console.error(e)}

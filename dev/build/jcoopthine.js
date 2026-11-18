@@ -25,7 +25,7 @@ const CW=window.COOPW;if(!CW||!CW.thin||!CW.X||typeof COOP!=="object")return;
 const TH=CW.thin,X=CW.X,J=X.J,D=TH.D,LV=5;
 const host=()=>CW.seat==="a",on=()=>TH.on(LV);
 const LAST=()=>typeof B4L==="number"?B4L:2;
-const E=TH.E={on,stat:{rd:0,erd:0,ops:0,big:0,step:0,her:0,herSkip:0,forced:0,wrW:0,wrR:0,addDrop:0,rmBack:0,ridBack:0,curtain:0,go:0},rd:{},hr:"",forced:"",mine:"",log:[]};
+const E=TH.E={on,stat:{rd:0,erd:0,ops:0,big:0,step:0,her:0,herSkip:0,forced:0,wrW:0,wrR:0,addDrop:0,rmBack:0,ridBack:0,curtain:0,go:0,cyb:0,tn:0,wwEnd:0,night:0},rd:{},hr:"",forced:"",mine:"",log:[]};
 const lg=x=>{E.log.push(x);if(E.log.length>80)E.log.shift()};
 const bk=()=>(COOP.state.week||0)+":"+((S&&S.buoi)||0);
 const wkx=()=>typeof wk==="function"?wk():0;
@@ -34,7 +34,7 @@ const npcs=()=>(rivals||[]).filter(v=>v&&!v.coop);
 const other=()=>CW.seat==="a"?"b":"a";
 
 /* ---------- GUEST ---------- */
-const BAD=new Set(["thq","thpn","heir","hr","cyb"]);
+const BAD=new Set(["thq","thpn","heir","hr","buoi"]);/* buoi: the room's step, the host's alone (a number travels as a delta: her copy must never move it) *//* cyb travels with her diff: the host reads her cycle flags from her person (row 10) */
 function curP(){const o=J(ser().S);for(const k of X.W_KEYS)delete o[k];for(const k of BAD)delete o[k];return o}
 const PACK=15000;
 /* her ops in packs the Worker takes (an intent over DOMAX 20 000 chars is refused); one op too big alone is counted, not sent */
@@ -49,12 +49,13 @@ function gReady(){if(!S||S.dead||Q.length||S.mg||CW.inLife)return;const b=S.buoi
  if(b>=LAST()){try{CW.nightReady()}catch(e){console.error(e)}}
  TH.doSend("ready",{w:COOP.state.week||0,b,id,n:L.length});E.mine=k;E.stat.rd++;lg(["ready",k,ops.length,L.length]);
  try{CW.lockNext();render()}catch(e){}}
+CW.eAsked=()=>on()&&(host()?(E.hr===bk()||E.forced===bk()):E.mine===bk());
 CW.eWait=()=>!!(on()&&!host()&&E.mine&&E.mine===bk()&&((S&&S.buoi)||0)<LAST());
 /* her buổi moved by the host's patch: what lives outside S on her phone (display / per-seat counters) */
 let seen="";
 function gView(V){if(!on()||host()||!S||!V||!V.o)return;const k=bk();
  if(seen&&seen!==k){const [w0]=seen.split(":");if(+w0===(COOP.state.week||0)){used=0;popIdx=null;popMsg="";try{if(typeof curtain==="function"&&!S.dead){curtain();E.stat.curtain++}}catch(e){}}E.mine="";try{render()}catch(e){}}
- seen=k;const e=V.o.e;
+ seen=k;const e=V.o.e;try{CW.tnView(e)}catch(x){console.error(x)}
  if(e&&e.go===wkx()&&CW.ngoW!==e.go&&(S.buoi||0)>=LAST()){CW.ngoW=e.go;E.stat.go++;lg(["go",e.go]);try{CW.nCheck()}catch(x){console.error(x)}}
  try{CW.lockNext()}catch(x){}}
 COOP.on("thinview",V=>{try{gView(V)}catch(e){console.error("thin E view",e)}});
@@ -96,6 +97,32 @@ function herStep(Wh){const seat=other();let st=null;try{st=TH.seatOf(seat)}catch
 if(typeof rivalsBuoi==="function"){const f=rivalsBuoi;rivalsBuoi=function(){if(her&&CW.ctx)return "";return f.apply(this,arguments)}}
 if(typeof placeWhere==="function"){const f=placeWhere;placeWhere=function(){if(her&&CW.ctx){whereIn(her.W);try{CW.refreshHere()}catch(e){}return}return f.apply(this,arguments)}}
 if(typeof curtain==="function"){const f=curtain;curtain=function(){if(CW.ctx)return;return f.apply(this,arguments)}}
+/* her Kỳ nguyệt sự answer (jcoopworld cySend at eW(): the intent replaces the ctm-p2 "cyb" relay): into her stored person (runDo: S = hers),
+   CW.fcy for the draw's wait; then the host's held draw runs (cyFree) */
+TH.onDo("cyb",m=>{m=m||{};if(typeof m.w!=="number"||!S)return {n:0};const c=plain(m.c)?m.c:{};S.cyb=S.cyb||{};for(const k of Object.keys(c))S.cyb[k]=c[k];
+ CW.fcy={w:m.w,c,pend:!!m.pend,life:m.life||0};E.stat.cyb++;lg(["cyb",m.w,!!m.pend]);setTimeout(()=>{try{CW.cyFree()}catch(e){console.error(e)}},0);return {n:1}});
+/* HER night (rows 8/9): the host's night is hers (his week draw, or his own in-week change; never her own claim, which runs on her phone as
+   her act): the summons card (Kính sự phòng) is built in HER context on the host, a part-D card; her picks (prep → night1 → night2 →
+   nightFx) run there too, so her night's Sủng / Ân tình / pregnancy and S.toMorning are written on the host and reach her as the patch;
+   on her phone jnight then ends her day through her ready (COOPW.nightEnd → CW.eNext). Once per week. */
+CW.herNight=()=>{if(!on()||!host()||CW.ctx)return;const w=COOP.state.week||0;if(E.nk===w)return;E.nk=w;E.stat.night++;lg(["her-night",w]);
+ D.later(other(),()=>{if(!S||S.dead||S.out)return;const had=S.tonight==="me";S.tonight="me";try{if(typeof ntTake==="function")ntTake(S)}catch(e){}
+  if(!had)try{pushDil(mkP("ksp"),"Kính sự phòng báo tin")}catch(e){console.error("thin E ksp",e)}})};
+COOP.on("week",()=>{if(on()&&host())setTimeout(()=>{try{if(CW.tnHer())CW.herNight()}catch(e){console.error(e)}},0)});
+/* world windows' end() on HER household (ORDER s34 16:22Z, reports/coop-thin-c.md 'For part E'): the host's worldTick ends a window for the
+   world and his own household (jworld2 EVD.<k>.end → EVD.<k>.home for S); her household (her choice S.wwMe in her person) runs the same
+   EVD.<k>.home in her context (D.later: from the top of the event loop), with the world's outcome the end found (vu cổ: the culprit), so the
+   result is the one fact and reaches her phone as a part-D patch. Today: vuco (her accusation), trom (her greedy servants), phong (her aged maids). */
+{const X2=window.WORLD_X,EV=X2&&X2.EVD;
+ if(EV){for(const k of ["vuco","trom","phong"]){const ev=EV[k];if(!ev||typeof ev.end!=="function"||typeof ev.home!=="function")continue;const f=ev.end;
+   ev.end=function(w){if(!(on()&&host()&&!CW.ctx&&w))return f.apply(this,arguments);
+    let got=null;const p0=typeof punish==="function"?punish:null;
+    if(k==="vuco"&&p0)punish=function(p){if(got==null&&p&&typeof p==="object"&&p!==S&&p.id!=null)got=p.id;return p0.apply(this,arguments)};
+    let r;try{r=f.apply(this,arguments)}finally{if(p0)punish=p0}
+    const wc=J(w),seat=other();E.stat.wwEnd++;lg(["ww-end",k,w.id,got]);
+    D.later(seat,()=>{if(!S||S.dead)return;try{ev.home(wc,{got})}catch(e){console.error("thin E ww home",k,e)}});return r}}
+  /* vu cổ: she is the culprit (her entry on the host): her own choice ("clean" / "open") read from her person */
+  if(EV.vuco)EV.vuco.meOf=(w,key)=>{try{if(!on()||!host())return undefined;const B=TH.seatOf(other());const M=B&&B.S&&B.S.wwMe;return M&&M[w.id]?M[w.id][key]:undefined}catch(e){return undefined}}}}
 /* ---------- the world is read-only in her step (put back at its end) ---------- */
 const ROWF=new Set(["rel","oan","ghen","ev"]);
 /* one field as text; other NPCs / S inside it are written as refs so the copy never drags the world along */
@@ -123,7 +150,9 @@ function wRestore(o){const L=npcs(),R=new Set(L.concat(o.L));
  if(rid!==o.rid){rid=o.rid;E.stat.ridBack++}}
 E.wSnap=wSnap;E.wRestore=wRestore;
 /* the night: his go rides the view (the guest reads o.e.go), never the ctm-nr relay */
-{const hv=TH.hostView;TH.hostView=function(){const o=hv.apply(this,arguments);if(o&&on())o.e={go:CW.ngo===(COOP.state.week||0)?CW.ngo:-1,w:COOP.state.week||0};return o}}
+{const hv=TH.hostView;TH.hostView=function(){const o=hv.apply(this,arguments);if(o&&on())o.e={go:CW.ngo===(COOP.state.week||0)?CW.ngo:-1,w:COOP.state.week||0,tnb:CW.tnb|0};return o}}
+/* her in-week change of the night (Tranh sủng, Chặn ngự giá, cáo bệnh …): the intent replaces the ctm-tn claim; runs in the host's context */
+TH.onDo("tn",(a,m)=>{const base=m&&m.base;E.stat.tn++;setTimeout(()=>{try{CW.tnDo(a,base)}catch(e){console.error("thin E tn",e)}},0);return {ok:1}});
 /* his ready / clock / a closed dialog: try the step again */
 if(typeof render==="function"){const f=render;render=function(){const r=f.apply(this,arguments);try{if(on()&&host()&&!CW.ctx&&(E.hr||E.forced))check()}catch(e){}return r}}
 }catch(e){console.error("jcoopthine",e)}})();
