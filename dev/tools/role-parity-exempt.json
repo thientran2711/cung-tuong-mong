@@ -44,6 +44,10 @@
 "label": "Cùng cung"
 },
 {
+"reason": "UI only: the person card's kit tab «Chuyện cũ» (jpcf SKIP_TAB, data-pct) switches the card to the info panel of past events (Sở trọng / Đã biết / Dạo này + jmem blocks); it is a tab, not an act — reviewer item (d)",
+"label": "Chuyện cũ"
+},
+{
 "reason": "movement (Dư đồ / day-plan place): NPCs move by their day plan (agDrawB + travel(), same khắc) — not an act key",
 "re": "^label:(Đến gặp|Đến cung nàng thăm)"
 },
