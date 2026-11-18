@@ -33,3 +33,5 @@ NPC-PURPOSE G1 #8 (opus integrator; seat opened by D #2 for C-AG #13, OPEN NOW #
 | fullbody-frame-s3 (sonnet SMALL UI; owner 09:25Z OD L1878: no fade on figure + head centred, kit, whole group) | review/fullbody-frame-s3 | MAIN ROOT-52 | session_01UV1SzhJ3JicrwJmcbMVHSA | RUNNING | 18/11 15:57Z |
 | E11r-w1 REVIEW ge-writers-w1 (opus BIG) | review/ge-writers-w1 | E | session_01DgYSWmTELUPTfw8Lqf2S4Y | RUNNING | 18/11 16:02Z | START_CTX ~3 % |
 shown-odds-r2-rv (BIG review of b39e6678) | review/shown-odds-r2-rv | session_01964izFyUaSfxgcEB3KDJP9 | RUNNING | 18/11 16:32Z | owner D #2
+a18-yellow-crown-face | CDN _review only | W65 session_011xDdVPrcwYuVJ3sqp3A6kR | RUNNING | 2026-11-18T16:31Z (Foreman C ROOT-26)
+b10-a51-sample (redo v1/v2) | CDN _review only | W64c session_011xDdVSr7GTAGeSvcq7r3hm | RUNNING | 2026-11-18T16:22Z (Foreman C ROOT-26)
