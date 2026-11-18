@@ -44,7 +44,15 @@ Object.assign(BAL,{looks:{
     measured on 158 por pictures (Haar eyes + lip colour, dev/test/look-fx-keepout.py) and constant for every por-/fig- row because every row is cut from the face rect by the same ratios.
     Face-square marks are masked by it (lkKeepCss), the scratch rows (scar-fit) are generated so the box stays inside the cheek zone: cheek = [left,top,side] of the veil row, below the eye, above the mouth. */
  keep:{eye:[[.31,.08,.15,.17],[.72,.08,.15,.17]],mouth:[.45,.655,.23,.105],nose:[.51,.36,.11,.2],cheek:[.06,.30,.18]},
- pox:{thuydau:{sea:["Xuân"],cont:1,die:0},sac:{thuydau:[0,3,5,8],daumua:[0,6,10,14]},spread:35,spreadWk:3,scar:[0,1,1,2]}}});
+ pox:{thuydau:{sea:["Xuân"],cont:1,die:0},sac:{thuydau:[0,3,5,8],daumua:[0,6,10,14]},spread:35,spreadWk:3,scar:[0,1,1,2]},
+ /* SMUDGE = a CODE effect on her makeup colours (owner 17/11 ~23:30Z), per level 0..3 = không / nhẹ / vừa / nặng. Lengths in u = the distance between the two eyes
+    (so portrait, figure, mirror all match); a = strength of that colour. blush/lid run DOWN the cheek (vertical, gravity), tear = grey lash-run lines, lip = colour
+    dragged past the line from a mouth corner + a drip under the lower lip, blot = blotchy blush, streak = how much the runs break into separate streaks, cry = least
+    tear-run when the cause is crying. */
+ smuFx:{blush:{len:[0,.8,1.15,1.65],a:[0,.34,.4,.48],blot:[0,0,0,0],wash:[0,0,.055,.075],sgain:[0,1,.5,.5]}/* wash = soft diffuse bleed of the blush into the skin (alpha of a wide feathered halo, spreading down / outward) */,lid:{len:[0,.5,.8,1.05],a:[0,.24,0,0]}/* vừa / nặng: no eyeshadow run (it was the pink vertical stripe, owner 01:21Z) */,
+  tear:{len:[0,.5,1,1.7],a:[0,.25,.34,.42],dark:1.2/* x on the grey runs' opacity at every level: OWNER PICK 18/11 ~02:05Z "lem phấn 20 %" = 1.2 */,extra:{n:[0,0,0,1],len:.33,off:.075,w:1}/* nặng: ONE extra short grey run per face (about 1/3 of the main run) starting at the lash line beside the main run on a seeded eye; same colour and strength as the main run */,w:[0,.026,.03,.04],n:[0,1,1,1],pair:[0,0,[.55,1.5],0],fine:[0,0,0,1]}/* fine = nặng runs taper (thick at the lash line, thinning), wander and break; pair = vừa: one eye's run SHORT, the other LONG (which eye is seeded per face) *//* pair = vừa: one eye's run SHORT, the other LONG (not mirrored; which one is seeded per face) */,cry:{len:.8,a:.36,w:.03},
+  lip:{sm:[0,0,.6,1],a:[0,0,.32,.44]},streak:[0,.35,.3,.3],
+  big:{at:100,max:130,boost:1.25,steps:3}/* LARGE faces (face px from `at` up to `max`): the grey runs are up to x boost darker, in `steps` steps, so a big face is not washed (owner 18/11 01:23Z, inverse of the small-size boost) */,pct:{blush:[0,.2,.2,.2],lip:[0,.2,.2,.2]}/* OWNER KNOB (OD 18/11 ~00:58Z): opacity share of the blush smear and of the lip smear at vừa / nặng; she picks 5 / 10 / 15 / 20 % from option images; null = the older wash / lip.a numbers */}}});
 /* the 24 owner-approved face finals (384x384 face-square, uploaded to the CDN img/ 18/11, md5 table dev/handover/reports/looks-2-art.md); hair + cloth slots stay empty (not approved) */
 window.LOOKS_ART={};for(const f of["bui","moho","muc","muoi"])for(let n=1;n<=3;n++){LOOKS_ART[`fx-${f}-${n}.png`]=1;if(f==="muc")LOOKS_ART[`fx-muc-${n}-m.png`]=1}
 for(const k of["thuydau","daumua","scar"])for(let n=1;n<=3;n++)LOOKS_ART[`fx-pox-${k}-${n}.png`]=1;
@@ -171,6 +179,119 @@ function lkPoxScar(p,st){try{if(!p||p.scar||typeof SCAR70==="undefined")return""
 (function(){if(typeof illMonthP!=="function")return;const i0=illMonthP;illMonthP=function(p){const i=p&&p.ill;const was=i&&i.k==="daumua"?(i.st|0)||1:0;const r=i0.apply(this,arguments);
  try{if(was&&p&&!p.ill&&p.alive!==false&&!p.dead){const t=lkPoxScar(p,was);if(t&&p===S)return (r||"")+t}}catch(e){}return r}})();
 (function(){if(typeof kitScarOf!=="function")return;const k0=kitScarOf;kitScarOf=function(p){const r=k0.apply(this,arguments);try{if(r&&p&&p.scar&&p.scar.how==="daumua"){const f=`fx-pox-scar-${r.sev}.png`;return lkArt(f)?{sev:r.sev,src:"img/"+f}:null}}catch(e){}return r}})();
+/* ---------- SMUDGE = CODE on her makeup colours (owner 17/11 ~23:30Z: "phấn son lem nhem ... vẽ được từ code giống như bên trang điểm", NOT Magnific) ----------
+   Same recipe as the §60 colour layer (jtoil toilMkDraw): one canvas painted from the picture's own face points (img/mk-fit, read-only), cached per picture + level +
+   colours, drawn as ONE <img class="klk klk-smu"> in the face-effects slot (kitFxLayers: stage, portrait, mirror, NPC women), above the makeup (layer law, z24).
+   Her colours = her toilette picks (son / má / mắt / mày); every other woman's = sampled from her picture (her makeup is painted in the base art). The runs are DIRECTIONAL
+   SMEARS of the makeup's own shapes (blush disc, lid band, lip outline) along gravity (down the cheek), broken into streaks, plus grey lash-run tear lines; levels in BAL.looks.smuFx.
+   Needs makeup (lkMadeUp) — no makeup, nothing to smudge. A picture without face points gets nothing (never guessed). */
+const LK_SMC={},LK_SMQ=[];
+function lkSmuBox(v){const P=toilMkPts(v);let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;P.forEach(([x,y])=>{x0=Math.min(x0,x);x1=Math.max(x1,x);y0=Math.min(y0,y);y1=Math.max(y1,y)});
+ const w=x1-x0,h=y1-y0;return[x0-.32*w,y0-.06*h,w*1.64,h*1.72].map(n=>+n.toFixed(3))}
+function lkSmuCols(p){try{if(p===S||p&&p.coop){const c=toilColOfP(p);return{son:toilColRGB("son",c.son),ma:toilColRGB("ma",c.ma),mat:toilColRGB("mat",c.mat),may:toilColRGB("may",c.may),seed:c.seed|0}}}catch(e){}return null}
+const LK_SMA={};/* base key -> [file,lv,why,cols]: the size pass re-fetches the same layer at another strength step */
+function lkSmuLayer(file,lv,why,cols,step){const v=MK_FIT.get(file);if(!v)return null;
+ const base=[file,lv,why,cols?[cols.son,cols.ma,cols.mat,cols.may,cols.seed].join(","):"npc"].join("|"),key=step?base+"|L"+step:base;LK_SMA[base]=[file,lv,why,cols];
+ let e=LK_SMC[key];if(!e){e=LK_SMC[key]={box:lkSmuBox(v),src:""};LK_SMQ.push(key);if(LK_SMQ.length>120)delete LK_SMC[LK_SMQ.shift()];lkSmuPaint(file,v,lv,why,cols,e,key,step||0)}return{e,key}}
+function lkSmuImg(p,file,x){try{const cols=lkSmuCols(p),lv=cl(x.lv|0,1,3),why=x.why==="khoc"?"khoc":"";const r=lkSmuLayer(file,lv,why,cols,0);if(!r)return"";
+ const b=r.e.box;return `<img class="klk klk-smu" data-lsk="${r.key}" src="${r.e.src||TOIL_BLANK}" alt="" aria-hidden="true" style="--fleft:${b[0]}%;--ftop:${b[1]}%;--fwidth:${b[2]}%;--fheight:${b[3]}%">`}catch(err){return""}}
+function lkSmuPaint(file,v,lv,why,cols,e,key,step){const im=new Image();im.crossOrigin="anonymous";im.decoding="async";
+ im.onload=()=>{try{const L=window.BAL&&BAL.toil&&BAL.toil.lod;e.src=lkSmuDraw(im,v,lv,why,cols,e.box,lkSmuSeed(file,cols),L&&step<10?(step||0)/L.steps:0,step>=10?(step-10)/lkB().smuFx.big.steps:0)}catch(x){e.src=TOIL_BLANK}document.querySelectorAll("img.klk-smu").forEach(q=>{if(q.dataset.lsk===key)q.src=e.src})};
+ im.onerror=()=>{e.src=TOIL_BLANK};im.src=IMG_U("img/"+file)}
+/* SIZE-AWARE strength (owner 17/11 ~17:30Z + 17:53Z, 18/11 02:20Z): the SAME curve as the makeup colour layer (jtoil toilLodStep / BAL.toil.lod: face width in px -> step 0..steps; boost, cue per part), never a second table.
+   One pass over every smudge layer on screen, run inside toilLodPass (same scheduler). Pink bloom ← cue.bl, lip smear ← cue.lip, grey runs ← cue.eye. No BAL.toil.lod (makeup LOD not in this build) = factor 1. */
+function lkLodMul(lod,cue){const L=window.BAL&&BAL.toil&&BAL.toil.lod;if(!L||!lod)return 1;return 1+(L.boost-1)*lod*((L.cue&&L.cue[cue])||1)}
+/* face px -> step: 0..steps = small (the makeup layer's own toilLodStep), 10+k = large face (k 1..big.steps, BAL.looks.smuFx.big), 0 = the approved strength in between */
+function lkSmuStep(px){const s=window.toilLodStep?toilLodStep(px):0;if(s>0)return s;const B=lkB().smuFx.big;if(!(px>B.at))return 0;return 10+Math.min(B.steps,Math.max(1,Math.round(Math.min(1,(px-B.at)/(B.max-B.at))*B.steps)))}
+function lkLodPass(){try{if(typeof toilLodStep!=="function")return;document.querySelectorAll("img.klk-smu").forEach(im=>{const cur=im.dataset.lsk||"",base=cur.replace(/\|L\d+$/,""),A=LK_SMA[base];if(!A)return;const w=im.getBoundingClientRect().width;if(!(w>0))return;
+  const st=lkSmuStep(w/1.6),have=+((/\|L(\d+)$/.exec(cur)||[])[1]||0);if(st===have)return;const r=lkSmuLayer(A[0],A[1],A[2],A[3],st);if(!r)return;im.dataset.lsk=r.key;if(r.e.src)im.src=r.e.src})}catch(x){}}
+if(typeof toilLodPass==="function"){const tp0=toilLodPass;toilLodPass=function(){tp0();lkLodPass()};window.toilLodPass=toilLodPass}
+function lkSmuSeed(file,cols){let h=cols?cols.seed|0:0;for(let i=0;i<file.length;i++)h=(Math.imul(h,31)+file.charCodeAt(i))|0;return h}
+function lkSmuDraw(im,v,lv,why,cols,box,seed,lod,big){lod=lod||0;big=big||0;const W=im.naturalWidth,H=im.naturalHeight,F=lkB().smuFx;
+ const bx=box[0]/100*W,by=box[1]/100*H,bw=box[2]/100*W,bh=box[3]/100*H,K=Math.max(1,Math.min(4,420/bw)),cw=Math.max(8,Math.round(bw*K)),ch=Math.max(8,Math.round(bh*K));
+ const P=toilMkPts(v).map(([x,y])=>[(x/100*W-bx)*K,(y/100*H-by)*K]);const mkc=()=>{const c=document.createElement("canvas");c.width=cw;c.height=ch;return c};
+ const c0=mkc(),g0=c0.getContext("2d",{willReadFrequently:true});g0.setTransform(cw/bw,0,0,ch/bh,-bx*cw/bw,-by*ch/bh);g0.drawImage(im,0,0,W,H);g0.setTransform(1,0,0,1,0,0);
+ const D=g0.getImageData(0,0,cw,ch).data,N=cw*ch,cl3=(x,a,b)=>x<a?a:x>b?b:x;
+ const cen=a=>a.reduce((s,p)=>[s[0]+p[0]/a.length,s[1]+p[1]/a.length],[0,0]);
+ let eA=cen(P.slice(20,30)),eB=cen(P.slice(30,40));let iA=20,iB=30;if(eA[0]>eB[0]){[eA,eB]=[eB,eA];[iA,iB]=[iB,iA]}/* A = the eye on the left of the picture */
+ const u=Math.hypot(eA[0]-eB[0],eA[1]-eB[1])||40,lc=cen(P.slice(0,12));const eyes=[[eA,iA,-1],[eB,iB,1]];
+ const h1=i=>{let h=(i*374761393+seed*668265263)|0;h=Math.imul(h^h>>>13,1274126177);return((h^h>>>16)>>>0)/4294967296};
+ const vn=(x,y,s)=>{const fx=x/s,fy=y/s,ix=Math.floor(fx),iy=Math.floor(fy),tx=fx-ix,ty=fy-iy,sx=tx*tx*(3-2*tx),sy=ty*ty*(3-2*ty),q=(a,b)=>h1(a*7919+b*104729+13);
+  const a=q(ix,iy),b=q(ix+1,iy),c=q(ix,iy+1),d=q(ix+1,iy+1);return a+(b-a)*sx+(c-a)*sy+(a-b-c+d)*sx*sy};
+ const paint=fn=>{const c=mkc(),g=c.getContext("2d");fn(g);const d=g.getImageData(0,0,cw,ch).data,m=new Float32Array(N);for(let i=0;i<N;i++)m[i]=d[i*4+3]/255;return m};
+ const blur=(m,r)=>{r=Math.max(1,Math.round(r));const t=new Float32Array(N),o=new Float32Array(N),n=2*r+1;
+  for(let y=0;y<ch;y++){let s=0;for(let x=-r;x<=r;x++)s+=m[y*cw+cl3(x,0,cw-1)];for(let x=0;x<cw;x++){t[y*cw+x]=s/n;s+=m[y*cw+cl3(x+r+1,0,cw-1)]-m[y*cw+cl3(x-r,0,cw-1)]}}
+  for(let x=0;x<cw;x++){let s=0;for(let y=-r;y<=r;y++)s+=t[cl3(y,0,ch-1)*cw+x];for(let y=0;y<ch;y++){o[y*cw+x]=s/n;s+=t[cl3(y+r+1,0,ch-1)*cw+x]-t[cl3(y-r,0,ch-1)*cw+x]}}return o};
+ /* directional smear DOWN (gravity): out[y] = max(m[y], the run carried from above, fading linearly over len), run broken into streaks by a smooth column noise */
+ const smear=(m,len,streak,keep)=>{const L=Math.max(2,len),o=new Float32Array(N),sw=Math.max(2,u*.05);
+  for(let x=0;x<cw;x++){const sf=1-streak+streak*Math.min(1,vn(x,7,sw)*1.55);let c=0;for(let y=0;y<ch;y++){const a=m[y*cw+x];c=Math.max(a,c-1/L);o[y*cw+x]=Math.max(keep*a,(c-a*.55)*sf)}}return o};
+ const add=(a,b)=>{for(let i=0;i<N;i++)a[i]=Math.max(a[i],b[i]);return a};
+ /* colours: hers from the toilette, everyone else's sampled from the picture */
+ const avg=(m,thr)=>{let r=0,g=0,b=0,n=0;for(let i=0;i<N;i++)if(m[i]>thr){r+=D[i*4];g+=D[i*4+1];b+=D[i*4+2];n++}return n?[r/n,g/n,b/n]:null};
+ const mixc=(a,b,t)=>a.map((x,i)=>x+(b[i]-x)*t);
+ const rad=u*.5,cheeks=eyes.map(([e,ix,sd])=>[e[0]+sd*u*.12,e[1]+u*.95]);
+ let cSon,cMa,cMat,cMay;
+ if(cols){cSon=cols.son;cMa=cols.ma;cMat=cols.mat;cMay=cols.may}else{
+  const lipM=paint(g=>{g.fillStyle="#000";g.beginPath();toilSmooth(g,P.slice(0,12));toilSmooth(g,P.slice(12,20));g.fill("evenodd")});
+  cSon=avg(lipM,.7)||[196,70,84];if(cSon[0]<cSon[1]+25)cSon=mixc(cSon,[196,70,84],.6);
+  const chM=paint(g=>{g.fillStyle="#000";cheeks.forEach(c=>{g.beginPath();g.arc(c[0],c[1],rad*.35,0,7);g.fill()})});cMa=mixc(avg(chM,.5)||[232,150,150],[238,128,144],.45);
+  cMat=mixc(cMa,[214,124,110],.4);cMay=[84,60,52]}
+ const lash=mixc(cMay,[92,88,96],.55).map(x=>Math.round(x*.8));/* grey-brown mascara run, never pure black */
+ const fx=(a,k)=>a[lv]*(k||1);
+ /* skin shade: every colour takes the picture's own light so it sits IN the face */
+ const Lum=i=>.299*D[i*4]+.587*D[i*4+1]+.114*D[i*4+2];let sl=0,sn=0;cheeks.forEach(c=>{const i=Math.round(c[1])*cw+Math.round(c[0]);if(i>=0&&i<N){sl+=Lum(i);sn++}});const Lref=Math.max(90,sn?sl/sn:190);
+ const layers=[];
+ const sk=new Float32Array(N);for(let i=0;i<N;i++){const r=D[i*4],g=D[i*4+1],b=D[i*4+2];sk[i]=r>140&&r-g>=20&&g>=b&&r-b>=26&&.299*r+.587*g+.114*b>135?1:0}/* skin-coloured pixels */
+ /* soft line: dense points [x,y,sigma,alpha] splatted as gaussians, max-combined (no overlap ladders) */
+ const soft=(m,pts)=>{for(const[x,y,sg,al]of pts){const R=Math.ceil(sg*2.6),x0=Math.max(0,Math.floor(x-R)),x1=Math.min(cw-1,Math.ceil(x+R)),y0=Math.max(0,Math.floor(y-R)),y1=Math.min(ch-1,Math.ceil(y+R));
+   for(let yy=y0;yy<=y1;yy++)for(let xx=x0;xx<=x1;xx++){const d2=(xx-x)*(xx-x)+(yy-y)*(yy-y),v=al*Math.exp(-d2/(2*sg*sg)),i=yy*cw+xx;if(v>m[i])m[i]=v}}return m};
+ const along=(P0,P1,st,fn)=>{const n=Math.max(2,Math.round(Math.hypot(P1[0]-P0[0],P1[1]-P0[1])/st)),o=[];for(let i=0;i<=n;i++){const t=i/n;o.push(fn(P0[0]+(P1[0]-P0[0])*t,P0[1]+(P1[1]-P0[1])*t,t))}return o};
+ /* 1 blush: the cheek disc dragged down by water, softened; blotchy patches at nặng */
+ {let m=new Float32Array(N);cheeks.forEach(([cx,cy])=>{const d=paint(g=>{const gr=g.createRadialGradient(cx,cy,0,cx,cy,rad);gr.addColorStop(0,"rgba(0,0,0,1)");gr.addColorStop(.5,"rgba(0,0,0,.7)");gr.addColorStop(1,"rgba(0,0,0,0)");g.fillStyle=gr;g.fillRect(cx-rad,cy-rad,2*rad,2*rad)});add(m,d)});
+  let sm=lv>=2?new Float32Array(N):smear(m,u*fx(F.blush.len),F.streak[lv],.0);/* vừa / nặng: NO pink run at all, only the diffuse flush below */{const g=F.blush.sgain[lv];for(let i=0;i<N;i++)sm[i]*=g;if(lv>=2)sm=blur(blur(sm,u*.05),u*.03)}/* the pink run: lighter and diffused (wide feather, no band edges) */const bl=fx(F.blush.blot);
+  if(bl>0)for(let y=0;y<ch;y++)for(let x=0;x<cw;x++){const i=y*cw+x,n=vn(x,y,u*.2),t=cl3((n-.38)/.3,0,1);sm[i]=Math.max(sm[i],m[i]*bl*t*(.6+.4*vn(x+999,y,u*.5)))}
+  const PC=F.pct,wa=(PC?PC.blush[lv]/1.55:fx(F.blush.wash))*lkLodMul(lod,'bl');/* pct = the owner's knob: the smudge's own pink-smear opacity (share) at vừa / nặng; the layer peaks at wash × 1.55 */
+  if(wa>0){/* "spread blush" = the SAME soft radial bloom the makeup blush uses (toilMakeupSvg gradient: full at the centre, .55 at .35, 0 at the rim), only a little larger / lower / outward — no stripe, no edge */
+   const wm=new Float32Array(N);cheeks.forEach(([cx,cy],ci)=>{const sd=ci?1:-1,wx=cx+sd*rad*.25,wy=cy+rad*.4,R=rad*1.55;add(wm,paint(g=>{const gr=g.createRadialGradient(wx,wy,0,wx,wy,R);gr.addColorStop(0,"rgba(0,0,0,1)");gr.addColorStop(.35,"rgba(0,0,0,.55)");gr.addColorStop(.7,"rgba(0,0,0,.14)");gr.addColorStop(1,"rgba(0,0,0,0)");g.fillStyle=gr;g.fillRect(wx-R,wy-R,2*R,2*R)}))});
+   const wb=blur(blur(wm,u*.05),u*.03);for(let i=0;i<N;i++)sm[i]=Math.max(sm[i],wb[i]*wa/Math.max(.01,fx(F.blush.a)))}
+  layers.push([blur(blur(sm,u*.03),u*.012),cMa,fx(F.blush.a)*1.55])}
+ /* 2 eyeshadow run from the lower lid */
+ {const m=new Float32Array(N);eyes.forEach(([e,ix])=>{const L=[P[ix+6],P[ix+7],P[ix+8],P[ix+9],P[ix]];for(let k=0;k<4;k++)soft(m,along(L[k],L[k+1],u*.03,(x,y)=>[x,y+u*.05,u*.05,1]))});
+  layers.push([blur(smear(m,u*fx(F.lid.len),F.streak[lv],.35),u*.014),cMat,fx(F.lid.a)*1.3])}
+ /* 3 lipstick smeared past the line: a soft halo along the lower lip, pushed a little toward one corner, + a feathered drag from that corner that fades out; no hard shapes */
+ const sm=fx(F.lip.sm);if(sm>0){const side=h1(3)<.5?-1:1,O=P.slice(0,12);let xl=1e9,xr=-1e9,cL,cR;O.forEach(p=>{if(p[0]<xl){xl=p[0];cL=p}if(p[0]>xr){xr=p[0];cR=p}});const cr=side<0?cL:cR;
+  const low=O.filter(p=>p[1]>=lc[1]-u*.01).sort((a,b)=>a[0]-b[0]),m=new Float32Array(N);
+  for(let i=0;i<low.length-1;i++)soft(m,along(low[i],low[i+1],u*.02,(x,y)=>[x+side*u*.035*sm,y+u*.055*sm,u*.065,.6]));
+  soft(m,along(cr,[cr[0]+side*u*.27*sm,cr[1]+u*.16*sm],u*.015,(x,y,t)=>[x,y,u*(.07-.035*t),.65*(1-.85*t)]));
+  layers.push([blur(m,u*.03),cSon,Math.min(.9,(F.pct?F.pct.lip[lv]:fx(F.lip.a))*1.7*lkLodMul(lod,'lip'))])}/* lip smear opacity: same knob family (pct.lip) */
+ /* 4 lash-run: mascara / liner washed down the cheek from under each eye — thin, wavering, fading, grey-brown (vừa / nặng, or crying) */
+ {let len=fx(F.tear.len),a=fx(F.tear.a)*lkLodMul(lod,'eye')*(F.tear.dark||1)*(1+(F.big.boost-1)*big),w=fx(F.tear.w),nn=fx(F.tear.n);if(why==="khoc"){len=Math.max(len,F.cry.len);a=Math.max(a,F.cry.a);w=Math.max(w,F.cry.w);nn=Math.max(nn,1)}
+  if(len>0){const m=new Float32Array(N);const pr=why==='khoc'?0:F.tear.pair[lv],swp=h1(13)<.5?0:1;eyes.forEach(([e,ix,sd],ei)=>{const s0=P[ix+8];for(let k=0;k<nn;k++){const off=k?sd*u*.07*k:0,ln=u*(pr?pr[ei===swp?0:1]:len)*[1,.62,.38][k],sx=s0[0]+sd*u*.05+off,sy=s0[1]+u*.04,ph=h1(11+ei*5+k*3)*6,pts=[];
+     const fn=F.tear.fine[lv];for(let i=0;i<=Math.round(ln/1.2);i++){const t=i*1.2/ln,wob=fn?(.05*Math.sin(t*4.2+ph)+.035*(vn(t*5+ph,ei*3+k,1)-.5)):.03*Math.sin(t*5.5+ph),x=sx+sd*u*(.09*t+wob),y=sy+ln*t,br=cl3((vn(t*(fn?7:9),ei*7+k*3,1.1)-(fn?.28:.25))*(fn?2.4:2.2),fn?.3:.35,1),al=Math.pow(1-t,fn?.8:.75)*(pr?Math.max(br,.8):br)*(k?.8:1),sg=fn?u*w*(.62-.38*t):u*w*(1.05-.5*t);pts.push([x,y,Math.max(.8,sg),al*(fn?.9:1)])}
+     soft(m,pts)}
+    /* ONE extra short run per face (nặng; BAL tear.extra): from the lash line beside the main run on the seeded eye, ~1/3 of its length, same width taper and the same strength (solid, no breaks, never fainter than the main run, so it can not read as a pale streak) */
+    const X=F.tear.extra;if(X&&fx(X.n)>0&&why!=='khoc'&&ei===swp){const ln=u*len*X.len,sx=s0[0]+sd*u*(.05+X.off),sy=s0[1]+u*.04,ph=h1(41)*6,pts=[];
+     for(let i=0;i<=Math.round(ln/1.2);i++){const t=i*1.2/ln,x=sx+sd*u*(.07*t+.02*Math.sin(t*4.2+ph)),y=sy+ln*t,al=Math.pow(1-t,.5);pts.push([x,y,Math.max(1,u*w*X.w*(.9-.5*t)),al])}
+     soft(m,pts)}});
+   layers.push([blur(m,u*(F.tear.fine[lv]?.022:.016)),lash,a*1.25,1])}}
+ /* no hard edges: every mask fades to nothing before the canvas edge (the box is only a bit bigger than the effect) */
+ const edge=new Float32Array(N);{const mx=cw*.08,my=ch*.1;for(let y=0;y<ch;y++){const ey=cl3(Math.min(y,ch-1-y)/my,0,1);for(let x=0;x<cw;x++){const ex=cl3(Math.min(x,cw-1-x)/mx,0,1);edge[y*cw+x]=ex*ex*(3-2*ex)*ey*ey*(3-2*ey)}}}
+ /* the runs stay INSIDE THE FACE: a face oval built from the face points (outer eye corners at the eyes, the mouth at the lips, narrowing to the chin), inset ≈ 3 % of the face width and feathered —
+    not the pixel skin mask (ears, neck and the jaw shadow are skin too). Same clip for the streaks, the wash and the lip drag; every level, NPC path included. */
+ const mkFace=(ex,inset,fth)=>{const o=new Float32Array(N);const ey=(eA[1]+eB[1])/2,lipY=lc[1],chin=lc[1]+.62*u,xoL=Math.min(...P.slice(20,30).map(p=>p[0]),...P.slice(30,40).map(p=>p[0])),xoR=Math.max(...P.slice(20,30).map(p=>p[0]),...P.slice(30,40).map(p=>p[0]));
+  const bound=(y)=>{/* [left, right] of the face oval at row y */const t1=cl3((y-ey)/(lipY-ey),0,1),t2=cl3((y-lipY)/(chin-lipY),0,1),eL=xoL-ex*u,eR=xoR+ex*u,cL=lc[0]-.2*u,cR=lc[0]+.2*u,mL=eL+(cL-eL)*.25,mR=eR+(cR-eR)*.25;
+   const sm1=t=>t*t*(3-2*t);let L,R;if(y<=lipY){const t=sm1(t1);L=eL+(mL-eL)*t;R=eR+(mR-eR)*t}else{const t=Math.pow(t2,1.4);L=mL+(cL-mL)*t;R=mR+(cR-mR)*t}return[L+inset,R-inset]};
+  for(let y=0;y<ch;y++){const[L,R]=bound(y),fy=cl3((chin-inset-y)/fth,0,1),fyy=fy*fy*(3-2*fy);
+   for(let x=0;x<cw;x++){const d=cl3(Math.min(x-L,R-x)/fth,0,1);o[y*cw+x]=d*d*(3-2*d)*fyy}}return o};
+ /* the runs stay INSIDE THE FACE: a face oval built from the face points (eye extents at the eyes, mouth, chin), inset ≈ 3 % of the face width, feathered ≈ 5-7 % (wash, pink run, lip drag);
+    not the pixel skin mask (ears, neck, jaw shadow are skin too). The lash runs get a roomier copy of the same oval (the under-eye area of BOTH eyes must be inside). Every level, NPC path included. */
+ const face=mkFace(.2,u*.06,u*.3),faceT=mkFace(.55,0,u*.12);
+ const out=new Uint8ClampedArray(N*4);
+ for(let i=0;i<N;i++){let A=0,R=0,G=0,B=0;const k=cl3(Lum(i)/Lref,.74,1.1);
+  for(const[m,c,s,tf]of layers){const a=cl3(m[i]*s*(F.noclip?1:edge[i]*(tf?faceT[i]:face[i])),0,1);if(a<.004)continue;const oa=a+A*(1-a);R=(c[0]*k*a+R*A*(1-a))/oa;G=(c[1]*k*a+G*A*(1-a))/oa;B=(c[2]*k*a+B*A*(1-a))/oa;A=oa}
+  out[i*4]=Math.min(255,R);out[i*4+1]=Math.min(255,G);out[i*4+2]=Math.min(255,B);out[i*4+3]=Math.round(A*255)}
+ const oc=mkc();oc.getContext("2d").putImageData(new ImageData(out,cw,ch),0,0);return oc.toDataURL("image/png")}
+window.lkSmuDraw=lkSmuDraw;
 /* ---------- face-fx entries: pictures wait for Foreman C; chips + Sắc work now ---------- */
 /* ink faces the other way when the scar-fit cheek (the cheek facing the viewer) lies RIGHT of the face centre: pick the mirrored fx-muc-N-m (same side rule as the scar; today every por/fig row is the viewer-left cheek) */
 function lkMirror(file){try{const n=String(file||"").split("/").pop(),s=KIT_SCAR.fit&&KIT_SCAR.fit[n],v=KIT_VEIL.fit&&KIT_VEIL.fit[n];return !!(s&&v&&s[0]+s[2]/2>v[0]+v[2]/2+1)}catch(e){return false}}
@@ -193,7 +314,7 @@ KIT_FACEFX.add({id:"pox",z:22,ready:true,
  seen:(p,st)=>p===S||fxIllSeen(p)&&fxSeen(p),sac:(p,st)=>(lkB().pox.sac[st.k]||[])[st.st]||0,chip:()=>null,
  html:(p,file,st)=>lkFaceImg("kpox",`fx-pox-${st.k}-${st.st}.png`,lkSquare(file),file)});
 KIT_FACEFX.add({id:"lkface",z:24,ready:true,state:p=>{const L=lkItems(p,LK_FACE);return L.length?{L}:null},seen:p=>fxSeen(p),sac:(p,z)=>lkSac(z.L),chip:(p,z)=>[lkChips(z.L),"hot"],
- html:(p,file,z)=>{const sq=lkSquare(file);return z.L.map(([id,x])=>lkFaceImg("klk klk-"+id,`fx-${id}-${x.lv}.png`,sq,file)).join("")}});
+ html:(p,file,z)=>{const sq=lkSquare(file);return z.L.map(([id,x])=>id==="smu"?lkSmuImg(p,file,x):lkFaceImg("klk klk-"+id,`fx-${id}-${x.lv}.png`,sq,file)).join("")}});
 KIT_FACEFX.add({id:"lkhair",z:27,ready:true,state:p=>{const L=lkItems(p,LK_HAIR);return L.length?{L}:null},seen:p=>fxSeen(p),sac:(p,z)=>lkSac(z.L),chip:(p,z)=>[lkChips(z.L),"hot"],html:()=>""});
 KIT_FACEFX.add({id:"lkcloth",z:80,ready:true,state:p=>{const L=lkItems(p,LK_CLOTH);return L.length?{L}:null},seen:p=>fxSeen(p),sac:(p,z)=>lkSac(z.L),chip:(p,z)=>[lkChips(z.L),"hot"],html:()=>""});
 for(const k in LK_ACT)KIT_FACEFX.deny[k]={emp:1,thaihau:1};

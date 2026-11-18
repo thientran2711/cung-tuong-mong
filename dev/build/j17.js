@@ -49,9 +49,24 @@ function drawF(kind,age){if(!S)return"";const keys=Array.isArray(kind)?kind:band
  return""}
 /* a person keeps a face while in one age band; on entering a new band they get a new face from that band's pool */
 function faceFor(o,kind,age){const k=bandKeys(kind,age)[0];if(o.fc==null||o.fk!==k){o.fc="";o.fc=drawF(kind,age);o.fk=k}}
-/* how many of a role may exist at once = the pool size (a consort pool counts the inline fallback portraits too) */
-function roomFor(role){if(!S)return true;const n=poolOf(role).filter(f=>FAV[f]!==0).length;const cap=role==="consort"?Math.max(n,(AV.women||[]).length):n;
- const cnt=role==="consort"?1+(rivals||[]).filter(v=>v.alive).length:role==="maid"?1+(typeof allServ==="function"?allServ().filter(s=>s.role==="maid").length:0):role==="eunuch"?(typeof allServ==="function"?allServ().filter(s=>s.role!=="maid").length:0)+3:0;
+/* how many of a role may exist at once (review/staff-cap-apply, owner OD 18/11 ~02:10Z: faces 52 / 30 / 8):
+   servants = the FIGURE identity pool (FIGIX, j39): women servants (cung nữ, ma ma) <= maid + mama identities, young cung nữ <= maid identities,
+   in both cases minus the maid / mama identities consorts wear (j88: a raised maid keeps hers); eunuchs (household + the court eunuchs) <= eunuch identities.
+   Before the manifests load, the face lists (FPOOL) stand in; never the old face-*.webp load probe (FAV), so missing old files never stop hiring.
+   Consorts: unchanged, the face pool as before (the consort ceiling is CAPC, j27). */
+function roomFor(role){if(!S)return true;
+ if(role==="maid"||role==="eunuch"){const IX=typeof FIGIX!=="undefined"&&FIGIX?FIGIX:{};const K=r=>Object.keys(IX[r]||{}).filter(k=>IX[r][k]&&IX[r][k].length);
+  const SV=typeof allServ==="function"?allServ():[];
+  if(role==="eunuch"){const pool=K("eunuch").length||poolOf("eunuch").length;const C=S.court||{};
+   const cnt=SV.filter(s=>s&&s.role!=="maid").length+["tq","ksp","ped"].filter(k=>C[k]).length;return cnt<pool}
+  const km=K("maid"),kk=K("mama");const own=new Set(km.concat(kk));
+  const worn=new Set();[S].concat((rivals||[]).filter(v=>v&&v.alive!==false)).forEach(v=>{if(!v)return;for(const f of [v.fid,v===S?S.pid:null])if(f&&own.has(f))worn.add(f)});
+  const wm=[...worn].filter(f=>/^maid:/.test(f)).length;
+  const W=SV.filter(s=>s&&s.role==="maid");const all=1+W.length,young=1+W.filter(s=>(s.age||18)<36&&!s.old).length;
+  if(!km.length)return all<(poolOf("maid").length+poolOf("mama").length);
+  return all<own.size-worn.size&&young<km.length-wm}
+ const n=poolOf(role).filter(f=>FAV[f]!==0).length;const cap=role==="consort"?Math.max(n,(AV.women||[]).length):n;
+ const cnt=role==="consort"?1+(rivals||[]).filter(v=>v.alive).length:0;
  return cnt<cap}
 function kidVar(k){const used=new Set(allKids().map(([x])=>x).filter(x=>x!==k&&x.alive&&x.sex===k.sex&&x.fv).map(x=>x.fv));const c=[1,2,3,4].filter(v=>!used.has(v));return c.length?pick(c):0}
 /* give every present person a face once; old saves get theirs here too */
