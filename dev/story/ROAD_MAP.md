@@ -17,7 +17,7 @@ goes through Foreman B (one line in §7 CHANGE LOG), never edited silently by an
 | Part 3 · ch 12–14 | Ngôi Trung cung (endgame) | ch12 × 3 variants + ch13 + ch14 = 5 | B | st_con, st_dong, hau, ke exist (j67, main); childless ch12 + hồi form of 13/14 to build |
 | Fillers | shared arcs (only when a road chapter cannot run) | 8 shared + st_the | — | exist (j67, main) |
 | Side threads | Thanh mai trúc mã (j96 tm96a/b/c), rare endings (j97), Việc nhờ (j72), reign lines (jreign) | 3 + — | B keeps | exist (main) |
-| NPC roads | women (consorts, maids): one of the 36 roads of their rolled origin; men: ~20 templates | 1 unit = 1 NPC | D | 0 done |
+| NPC roads | women (consorts, maids): one of the 36 roads of their rolled origin; men: 20 templates (§4.10) | 1 unit = 1 NPC | D | **LIVE on main** (jnroad.js women + jnroadm.js men) |
 
 Grand total of numbered player chapters: 3 + 288 + 5 = 296 written chapters (+10 intros, +8 home roads); one life plays 14 of them.
 
@@ -430,6 +430,56 @@ still a maid at the end of the road → chapter 12 = len14 (jend14.js).
 - .10 Ma ma lâm bệnh — medicine before the full moon; her box listing every pupil (the network) [doc, v, Phùng cô cô]
 - .11 Chưởng sự — Endings: Người nối nghiệp Lưu ma ma (maid: SRK.maid[BAL.road.cnvMaRk]) / Ghế về tay người khác / Nội vụ phủ về tay Phùng cô cô; rare: Lưu ma ma trao lại cả Nội vụ phủ [Lưu ma ma, Phùng cô cô, v, eun]
 
+### 4.10 NPC men roads — LIVE (main, dev/build/jnroadm.js on the jnroad.js engine; owner OD:L1243/L1252/L1264/L1386)
+Status: BUILT, written here as it is on main (18/11, Q0 docs fix; canon check of these 20 templates by Foreman B pending — see FOREMAN_E_STATUS FOR MAIN). Code is the source; if this list and `NRM` in jnroadm.js differ, the code wins and this section is corrected in place.
+Shape: 20 templates × 8 chapters (.4–.11, `BAL.road.first`..`last`). Row = [title, cast key, win tag, lose tag]; .11 row adds a middle tag. Chapter tags are story words only: they never claim a rank, death, dismissal or heir (real state stays with its own systems).
+Who gets a road (real people only, `nrMenL`): S.men Thị vệ / Thái y / Vương gia / Nhạc sư / Sứ thần / Họa sư (Thanh mai trúc mã m96 excluded — his story owns him); court men tq, ksp, ty, ped; every staff eunuch; the five house heads (not the player's own father); sons of NPC consorts old enough (`BAL.nroad.men.kidAge`; the player's own children are her story, ch12). The Emperor is not here (jreign).
+Engine: same as the women (jnroad.js): due chapter → his odds (BAL.nroad base + his stat / div + Lợi thế after a won chapter + help hồi); gain AND loss on his real fields via `BAL.nroad.men.fx` (S.men loyal, court men af, house pow + j55 relations, princes fond/tal/hp, staff eunuch mp/loyal). A real rival is kept for the whole road and recast and told when gone. Help hồi = the 8 nr_* j72 follow-ups. Test stat per template: `sk` (loyal / sk / tal); court men use `BAL.nroad.men.st`. `off_thong` is the one allied road (a win binds the two houses, a loss splits them). Numbers: BAL.nroad.men only (ONE CORE).
+Cast keys: gd guard, eun eunuch, bac silver, man a real man, off an official/house, emp the Emperor, th Thái hậu, hh Hoàng hậu, v a consort, envoy an envoy, mis his master, mom the mother consort.
+
+
+**Thị vệ (S.men role Thị vệ)**
+- `gd_tl` «Đường lên Thống lĩnh» (test stat loyal): .4 Ca trực đêm mưa · .5 Kẻ đứng trên · .6 Đồng liêu ghen · .7 Bạc lót tay · .8 Hộ giá đi săn · .9 Kỳ khảo võ · .10 Lời tiến cử · .11 Đường lên Thống lĩnh
+- `gd_tinh` «Mối tình bên cổng cung» (test stat loyal): .4 Chiếc khăn rơi · .5 Lời hẹn dưới cây hòe · .6 Kẻ dòm ngó · .7 Thư tay · .8 Lệnh đổi ca · .9 Tin đồn trong cung · .10 Chọn giữa tình và chức · .11 Mối tình bên cổng cung
+- `gd_kho` «Án mất trộm ngự khố» (test stat loyal): .4 Đêm ngự khố mất đồ · .5 Dấu chân bên tường · .6 Kẻ tình nghi · .7 Thận Hình ti tra hỏi · .8 Món đồ trở lại · .9 Kẻ đứng sau · .10 Trình án · .11 Án mất trộm ngự khố
+
+**Thái y (S.men + court Thái y)**
+- `ty_thu` «Y thư thất truyền» (test stat loyal): .4 Cuốn sách nát · .5 Phương thuốc lạ · .6 Thử thuốc · .7 Đồng liêu dị nghị · .8 Bệnh dịch ngoài thành · .9 Tranh công · .10 Dâng sách · .11 Y thư thất truyền
+- `ty_tra` «Đơn thuốc bị tráo» (test stat loyal): .4 Thang thuốc khác màu · .5 Ai chạm vào thuốc · .6 Lời đe dọa · .7 Bệnh nhân trở nặng · .8 Thái y viện xét việc · .9 Chứng cứ · .10 Trước mặt Hoàng hậu · .11 Đơn thuốc bị tráo
+
+**Vương gia (S.men)**
+- `vg_dat` «Đất phong» (test stat loyal): .4 Chiếu ban đất · .5 Mùa màng · .6 Quan địa phương · .7 Lời gièm vào kinh · .8 Thuế đất · .9 Thái hậu hỏi han · .10 Dâng biểu · .11 Đất phong
+- `vg_bien` «Lòng người ngoài biên» (test stat loyal): .4 Tin biên ải · .5 Quân lương · .6 Tướng dưới quyền · .7 Sứ giặc đến · .8 Trận đầu · .9 Lời đồn mưu phản · .10 Về kinh · .11 Lòng người ngoài biên
+
+**Nhạc sư (S.men)**
+- `ns_tho` «Khúc nhạc mừng thọ» (test stat loyal): .4 Lệnh soạn khúc · .5 Bản phổ cũ · .6 Đàn bị hỏng · .7 Nhạc công bỏ đi · .8 Tập trước Thái hậu · .9 Kẻ chép trộm · .10 Đêm trước tiệc thọ · .11 Khúc nhạc mừng thọ
+
+**Sứ thần (S.men)**
+- `st_uoc` «Điều ước hai nước» (test stat loyal): .4 Quốc thư · .5 Lễ bộ tiếp sứ · .6 Điều khoản đầu · .7 Quà dâng Thái hậu · .8 Tai mắt quanh sứ quán · .9 Hội đàm · .10 Đóng ấn · .11 Điều ước hai nước
+
+**Họa sư (S.men)**
+- `hs_hoa` «Bức họa mỹ nhân» (test stat loyal): .4 Lệnh vẽ chân dung · .5 Phi tần ngồi họa · .6 Bạc lót tay · .7 Bức họa bị đổi · .8 Hoàng thượng xem tranh · .9 Lời vu · .10 Bức họa cuối · .11 Bức họa mỹ nhân
+
+**Tổng quản (court tq)**
+- `tq_an` «Ấn Tổng quản» (test stat loyal): .4 Ấn bị dời chỗ · .5 Kẻ nhòm ngó ghế · .6 Sổ chi tiêu · .7 Phe phi tần · .8 Hoàng thượng hỏi tội · .9 Thái hậu ra mặt · .10 Người nối tay · .11 Ấn Tổng quản
+- `tq_que` «Đường về quê» (test stat loyal): .4 Thư từ quê · .5 Xin phép về thăm · .6 Gửi bạc về quê · .7 Họ hàng tìm đến · .8 Người cũ trong làng · .9 Lời đồn ăn bớt · .10 Ngôi mộ tổ · .11 Đường về quê
+
+**Kính sự phòng (court ksp)**
+- `ksp_so` «Sổ ghi Kính sự phòng» (test stat loyal): .4 Một dòng bị tẩy · .5 Thẻ bài lật sai · .6 Phi tần đút lót · .7 Hoàng hậu xem sổ · .8 Kẻ chép sổ · .9 Tin có thai · .10 Sổ được trình · .11 Sổ ghi Kính sự phòng
+
+**Tiểu thái giám (staff eunuchs; court Nội vụ phủ ped uses this kind too)**
+- `eun_len` «Từ tiểu thái giám đi lên» (test stat loyal): .4 Việc nặng đầu tiên · .5 Sư phụ · .6 Đồng liêu chèn ép · .7 Việc kín của chủ · .8 Bạc đầu tiên · .9 Được giao việc lớn · .10 Lời tiến cử · .11 Từ tiểu thái giám đi lên
+
+**The five house heads (j55; the player's own father excluded)**
+- `off_ghe` «Giữ ghế trong triều» (test stat sk): .4 Tờ biểu đầu năm · .5 Kẻ dòm ghế · .6 Việc trong bộ · .7 Ngự sử xét sổ · .8 Lòng Hoàng thượng · .9 Môn sinh · .10 Buổi chầu lớn · .11 Giữ ghế trong triều
+- `off_dan` «Lời đàn hặc» (test stat sk): .4 Tấu đàn hặc · .5 Ngự sử tra xét · .6 Đồng minh trong triều · .7 Chứng cứ · .8 Lời trong hậu cung · .9 Đại Lý tự xét · .10 Hoàng thượng định đoạt · .11 Lời đàn hặc
+- `off_thong` «Thông gia với phủ khác» (test stat sk, allied road): .4 Lời ngỏ · .5 Xem tuổi · .6 Sính lễ · .7 Kẻ chen ngang · .8 Hoàng thượng hỏi đến · .9 Lời đồn trong kinh · .10 Ngày cưới · .11 Thông gia với phủ khác
+
+**Sons of NPC consorts, age >= BAL.nroad.men.kidAge**
+- `hz_hoc` «Thái phó và học vấn» (test stat tal): .4 Ngày đầu ở Thượng thư phòng · .5 Kinh sử · .6 Đồng môn · .7 Phụ hoàng khảo bài · .8 Cưỡi ngựa bắn cung · .9 Bài văn đầu tay · .10 Kỳ khảo cuối · .11 Thái phó và học vấn
+- `hz_le` «Lễ trưởng thành» (test stat tal): .4 Lễ đội mũ · .5 Phủ đệ đầu tiên · .6 Người hầu cận · .7 Ra mắt tông thân · .8 Việc triều đầu tiên · .9 Lời khuyên của mẫu phi · .10 Phụ hoàng ban thưởng · .11 Lễ trưởng thành
+- `hz_tran` «Ra trận lập công» (test stat tal): .4 Xin ra trận · .5 Tướng già dạy việc · .6 Quân lương · .7 Trận đầu · .8 Thư mẫu phi · .9 Công và tội · .10 Khải hoàn · .11 Ra trận lập công
+
 ## 5. Canon and continuity — every foreman's chapters (B, C, D)
 ### 5.1 Owner rules that every chapter obeys (read the source lines in full; never this summary instead)
 OD:L1247 real people (hostile roles real both ways, j9 relAdd) · OD:L1253 + OD:L478 context outcomes (jst14 f14Ctx; no fixed best
@@ -525,6 +575,7 @@ Proposed B split (OD:L1237, same item): helper B1 = dtq + muoi + cn; helper B2 =
 Each helper builds on the engine branch, one origin per review branch `review/road-<origin>`.
 
 ## 7. Change log
+- 11/18/2026 Q0 docs fix: §0 NPC roads row → LIVE; §4.10 written (the 20 men templates as on main, jnroadm.js).
 - 11/16/2026 created (opus lead of Foreman B): 288-chapter catalogue, code-key fix (cn/cnv), data shape, canon rules, split.
 - 11/16/2026 tt built (28 chapters); §4.1 rewritten to the built chapters (the .4 arcs already close their first conflict); tm96 = side story.
 - 11/16/2026 B2 built nc (+bd aliases), td, ch (84 chapters); §4.5–4.7 rewritten to the built chapters.

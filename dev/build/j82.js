@@ -388,14 +388,17 @@ function startContest(o){o=o||{};if(typeof S==="undefined"||!S){if(o.onDone)o.on
  intro()}
 
 /* =============== playArt: the same mini-game for works / lessons, no rivals =============== */
+/* optional (review/steal-minigame, jsmg): o.rows = intro rows (kit rows, heading o.rowsHead) · o.go = the start button label · o.resRows(raw, skipped) =
+   the result rows instead of "Màn chơi" + note. The skip button is always the KIT §13.6 quick option (o.quick). Absent → unchanged. */
 function playArt(o){o=o||{};const kind=kg82Kind(o.art,o.artName,true),K=KG82_KIND[kind];KG82.ctx="hoc";kg82Preload(kind);try{mgSet(kind,{occ:o.occ||"hoc"})}catch(e){KG82.lv=0}
  const d=kg82Open({art:o.artName||K.n,title:o.title||K.t,how:K.how,pic:kg82Pic(kind)});if(!d){if(o.onDone)o.onDone(5);return}const box=kg82Box();
  const QK=o.quick||{n:"Để trời định",sub:"tính 5/10"};/* KIT §13.6: the caller names its quick option (o.quick: kitQuick fields; roll:1 = the BAL.skip.od roll) */
  const done=(raw,skipped,ok)=>{KG82.phase="result";const qRow=skipped&&o.quick&&o.quick.sub==null?[QK.n,QK.roll?`${ok?"thành":"hỏng"}: ${ok?QK.win:QK.lose}`:`${QK.win}`,"t"]:null;
   const html=kg82Rows([qRow||["Màn chơi",`${raw}/10 · ${kg82Word(raw)}${skipped?" (để trời định)":""}`,"t"]].concat(o.note?[["Ghi chú",o.note,"n"]]:[]))+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`;
-  kg82ShowRes(html,qRow?(QK.roll?!!ok:null):raw>=5);kg82Set("score",qRow?"–":`${raw}/10`);kg82Set("time","đã hết");KG82.last={raw,skipped,ok};
+  kg82ShowRes(o.resRows?kg82Rows(o.resRows(raw,skipped))+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82ok">Đã hiểu</button></div>`:html,qRow?(QK.roll?!!ok:null):raw>=5);kg82Set("score",qRow?"–":`${raw}/10`);kg82Set("time","đã hết");KG82.last={raw,skipped,ok};
   $("kg82ok").onclick=()=>{kg82Close();try{if(o.onDone)o.onDone(raw,{skipped,ok})}catch(e){console.error(e)}}};
- KG82.phase="intro";box.innerHTML=`<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">Bắt đầu</button>${kitQuick(QK)}</div>`;
+ KG82.phase="intro";if(o.rows)box.classList.add("kgintro");
+ box.innerHTML=(o.rows?`<h4 class="kpst">${o.rowsHead||"Phần của ngươi"}</h4>`+kg82Rows(o.rows):"")+`<div class="kg82act"><button class="${kg82Btn()}" id="kg82go">${o.go||"Bắt đầu"}</button>${kitQuick(QK)}</div>`;
  $("kg82go").onclick=()=>kg82Play(kind,raw=>done(raw,false));$("kg82skip").onclick=()=>QK.roll?done(0,true,kitQuickRoll()):done(o.quick&&o.quick.sub==null?0:5,true)}
 window.startContest=startContest;window.playArt=playArt;
 

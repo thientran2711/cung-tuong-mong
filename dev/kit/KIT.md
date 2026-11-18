@@ -556,6 +556,13 @@ Header seal TÀI NGHỆ; "Cách chơi" line; HUD cells (`.kgc`, kept in the DOM 
 In-game pieces keep the existing lesson-game classes (`.lanes`, `.lbtns`, `.simon`, `.memo`, `.goban`, `.mgopts`, p1.html) which are part of the kit;
 game buttons use `.kgbtn` (or `.btn` inside `.kgbox`), `.on` = selected. The lesson overlay `#ov .mg` wears the same frame.
 
+**`playArt(o)` (j82, the one entry for a game outside a contest: works, practice, and the steal game jsmg)** — options, all optional except `art` / `onDone`:
+`art` (KG82_KIND key or art key) · `artName` (seal title before «:», default the art's name) · `title` · `occ` (mgTier occasion: hoc / hoi / trieu / exam / tuyen) · `note` (result row «Ghi chú»)
+· `onDone(raw, {skipped})`. Added for review/steal-minigame (no new CSS, existing kit parts only): `rows` = intro rows above the two buttons, drawn by `kitRows` under the
+`.kpst` heading `rowsHead` (default «Phần của ngươi»), the same intro block `startContest` uses (`.kgintro`) · `go` = the start button label (default «Bắt đầu»);
+the skip button is ALWAYS the §13.6 quick option (`quick:{n, sub, roll?}` → `kitQuick`, never a private button) · `resRows(raw, skipped)` = the result rows instead of «Màn chơi» + note (one end button `#kg82ok`, shown as the ✕ like every game).
+Example (jsmg): `playArt({art:"mua", artName:"Chặn ngự giá", occ:"trieu", rowsHead:"Trước khi ra tay", rows:[["Thắng","cơ duyên lần này lên một bậc: Khó → Năm ăn năm thua","g"],…], go:"Bắt đầu", quick:{n:"Thôi, không chơi", sub:"giữ nguyên Khó"}, resRows:(raw,sk)=>[["Kết quả",…]], onDone})`.
+
 ### 13.1 MINI-GAME ART · tranh bàn chơi (j82 + j91, owner 11/14: no code-drawn art where a painting is expected)
 Every board and every object in every mini-game is a PAINTING (Magnific gpt-2-6, one style ref, folder ba4aecfe-…, no faces, no text): `img/kit/mg-<môn>-*.webp`.
 The canvas of `.kgbox` only draws small live marks (aim trail, beat line, melody ribbon, ink strokes, silk threads, target rings, heat gauge, smoke colour, text labels) and PLACES the pictures.
@@ -3903,6 +3910,8 @@ Owner 11/15: a palace has the chủ vị's main hall and side halls where others
 MAPH.rivalSlots, also Càn Ninh) → the palace detail map → tap a hall → that hall's room with exactly its people.** Back: room → detail → Dư đồ.
 ```js
 kitPalaceMap({slot, k, why})   // → HTML: div.mapv.kpmv (inside the Dư đồ leather, kitLeather §34.1b) — slot 0..7 or "kn", k = palace key
+**Hall plaque names (E3, owner OD:L1475, 16/11 21:48Z):** every hall carries its own court name from ONE table, `HALL_PN` in `dev/build/jhall.js` (`hallName(palaceName, part)`, `hallRole(part)`; history: `dev/handover/reports/hall-names-history.md`). The generic role (Chính điện / Đông phối điện / Tây phối điện / Dãy nhà cung nhân) is shown ONLY as a small subtitle: the first words of the `.kpm-rs` line of each hall row, the `title` of a hotspot, and the room line after the place name (§15.1). Display-only: part ids / palace keys / slots unchanged. Consumers: `kpmParts`, `placeOf` (jpm.js), `resRoomName` (jres.js). A new palace in jpal.js → add its row to `HALL_PN` (scan: `node dev/test/hall-names-scan.js`).
+
 **r3 rules (owner OD:L1415 + 16/11 21:12Z):** `kpmArt(slot)` → `{src,dir,tam}`: the exact painted state (mourning tang-<buổi>, festival <lễ>-<buổi>, else <mùa>-<buổi>) with `tam:false`; a stand-in (missing state → season × nearest buổi, or a picture that does not paint EVERY hall of the place, see `KPM_HALLS` in jpm.js, audited by eye: `nhat-cac` = one pavilion only) is allowed ONLY with `tam:true` → kit chip `kitTam` (jgrey.js, top-right here because the leather crops the lower edge); it vanishes by itself when the exact picture lands. A hotspot/label is NEVER put on a hall that is not painted in the picture: those halls (Đông/Tây phối điện, Dãy nhà cung nhân) stay only in the kit list rows below. `.kpmv .mapw` keeps a 1.76:1 box while the painting loads. Test: dev/test/pl-courtyards-nostandin.js (0 unmarked stand-ins).
 kpmSplit(k)        // {chinh|dong|tay: {ppl:[rivals present], n, res:[residents]}} — n from S.where + countAt(k): Σn = the Dư đồ chip count
 kpmHallOf(p, k)    // = jres residenceOf(p).part when p lives in this palace, else "chinh" (guests)

@@ -140,3 +140,94 @@ setTimeout(()=>{try{if(typeof wrap67==="function")Object.keys(STORY).forEach(wra
 (function(){const a0=chAdvance67;chAdvance67=function(E){const r=a0.apply(this,arguments);try{if(rdOn()){const c=S.st.ch,f=S.st.f14,rd=f.rd;
   if(c&&!c.fin&&c.n>BAL.road.last&&f.re){const n=f.re.n,id=n===BAL.road.first-1?rd:ROAD14[rd][n],p=c.past.slice().reverse().find(x=>x.a===id);
    if(p)rdFinale({a:id,tag:p.tag},{k:p.k},1)}}}catch(e){console.error(e)}return r}})();
+/* ================= QUESTLINE Q3 — HELPERS IN HER ROAD (owner D-Q1 = "1", OD 18/11 07:56Z + OD:L1601 (5); QUESTLINES_AUDIT §4 Q3) =================
+   A «Nhờ …» option tagged in RDHP (jrdhp.js, data; the road files are not edited) asks a real helper. Before she picks, the option card's Gợi ý row
+   (KIT §28.6 kitHintRow, through the documented per-option `hint` override — no new kit part) opens with ONE willingness word (BAL.road.hp.word),
+   never odds. When she picks it, the helper answers one of 4 ways drawn from his / her nết × Tâm cơ × liking for her × own road × nợ ân
+   (rdHpW, every number BAL.road.hp): giúp hết lòng (the option's own odds) · giúp qua loa (odds − BAL.road.hp.half) · từ chối (the option does not
+   run: small cost noC, she keeps the hồi and picks again, that option is gone for this hồi) · phá ngầm / mách lẻo (the option fails, Đức −, the
+   road's rival oán + — jnroad «mách» shape). Never forced (OD:L1601 (5)): every tagged hồi keeps an option that asks nobody (dev/test/roadhp-scan.js);
+   a helper changes only the odds of HER option, never which endings stay open (the j67 / jst14 funnel is untouched).
+   Old saves: an untagged option rolls as before; A.hpNo (refused options of the open hồi) is new and optional. Co-op: only the host draws (nrGuest
+   → today's roll), and the co-op friend is never an NPC helper. window.__hpoff = 1 switches it off (measures); window.__hpLog collects the draws. */
+const RDHP_K=["full","half","no","sab"];
+function rdHpOff(){try{return !!window.__hpoff||(typeof nrGuest==="function"&&nrGuest())}catch(e){return false}}
+/* the tag of option o of beat bid of her thread A, or null */
+function rdHpTag(A,bid,o){try{if(rdHpOff()||!A||!o||!window.RDHP||typeof bid!=="string"||bid.startsWith("G."))return null;const b=beatDef67(A,bid);
+ if(!b||!Array.isArray(b.o))return null;const i=b.o.indexOf(o);return i<0?null:RDHP[A.a+":"+bid+":"+i]||null}catch(e){return null}}
+/* the helper: who (person or role), the voice he / she speaks with (jvoice kAddr speaker), nết, liking toward her (± affCap), Tâm cơ, nợ ân key */
+function rdHpWho(A,hp){const B=BAL.road.hp,cap=B.affCap,cl=x=>Math.max(-cap,Math.min(cap,+x||0)),af=o=>o&&o.af&&typeof o.af==="object"?(o.af.me||0)/2:0;
+ const P={role:hp,type:B.type[hp]||"go",p:null,sp:null,net:[],tone:null,aff:0,tc:null,known:!B.unk.includes(hp),name:"",dk:null};
+ const cons=v=>{if(!v||v===S||v.coop)return false;Object.assign(P,{p:v,sp:v,aff:cl(aff(v,S)),tc:v.tamco,name:v.name,dk:{k:v.queen?"hh":"rv",id:v.id}});return true};
+ try{switch(hp){
+  case "v":case "v2":cons(rv67(A,hp));break;
+  case "mis":cons(srvMis67());break;
+  case "hh":if(!cons(qOn()?rivals[0]:null))Object.assign(P,{sp:"hh",aff:cl((S.hh||0)-B.mid.hh),name:"Hoàng hậu",dk:{k:"hh"}});break;
+  case "th":Object.assign(P,{sp:"th",aff:cl((S.th||0)-B.mid.th),tone:S.thTrait||null,name:"Thái hậu",dk:{k:"th"}});break;
+  case "emp":Object.assign(P,{sp:"emp",aff:cl((S.sung||0)-B.mid.emp),tone:typeof kTone==="function"?kTone("emp"):null,name:"Hoàng thượng",dk:{k:"emp"}});break;
+  case "eun":{const t=S.court&&S.court.tq;Object.assign(P,{sp:{srv:"m",name:t&&t.name},name:t?t.name:"Tổng quản",net:t&&t.mnet?[t.mnet]:[],aff:cl(af(t)),dk:{k:"eun"}});break}
+  case "off":Object.assign(P,{sp:{role:"x",rw:"quan"}});break;
+  case "doc":{const t=S.court&&S.court.ty;Object.assign(P,{sp:{role:"x",rw:"quan"},name:"thái y",net:t&&t.mnet?[t.mnet]:[],aff:cl(af(t)),dk:{k:"doc"}});break}
+  case "maid":{const m=S.maid;if(m)Object.assign(P,{p:m,sp:{srv:"f",name:m.name},name:m.name,net:Array.isArray(m.net)?m.net:[],aff:cl((m.loyal||0)-50)});P.dk={k:"maid"};break}
+  case "man":{const m=man67(A);if(m)Object.assign(P,{p:m,sp:m,name:m.name,net:Array.isArray(m.net)?m.net:[],aff:cl((m.loyal==null?50:m.loyal)-50)});break}
+  case "dad":case "bro":case "mom":case "fam":{let d=null;try{d=dad67()||(typeof trS==="function"&&typeof clanOf==="function"?trS().H[clanOf(S)]:null)}catch(e){}
+   if(d){P.aff=cl(af(d));if(hp==="dad"){P.name=d.name||"";P.net=Array.isArray(d.net)?d.net:[]}}P.dk={k:"fam"};break}
+  case "n1":P.name=A.n1||"";break;
+  case "foe":P.name=S.foe||"";break}}catch(e){console.error(e)}
+ if(P.p&&!P.net.length)try{P.net=(Array.isArray(P.p.net)?P.p.net:traitsOf(P.p))||[]}catch(e){}
+ /* a helper whose line needs a person or a name that is missing here (no {mis} / {man} / {v}, no {foe} / {n1} name) speaks as an unknown
+    go-between: the go lines, the go weights and the word «Không rõ» (review E9r item 3) */
+ if((["v","v2","mis","man"].includes(hp)&&!P.p)||(["foe","n1"].includes(hp)&&!P.name))Object.assign(P,{role:"go",type:"go",known:false,sp:null,name:"",dk:null,net:[],aff:0,tc:null});
+ return P}
+/* the voice of a role when the helper has no speaker of its own (a line holding {goi} / {xung} is never shown raw) */
+const RDHP_SP={off:{role:"x",rw:"quan"},doc:{role:"x",rw:"quan"},eun:{srv:"m"},srv:{srv:"f"},maid:{srv:"f"},th:"th",emp:"emp",hh:"hh"};
+const rdHpTones=P=>P.net.concat(P.tone?[P.tone]:[]);
+/* the four weights [full, half, no, sab] (BAL.road.hp; each ≥ 0) */
+function rdHpW(A,P){const B=BAL.road.hp,w=(B.w[P.role]||B.w.go).slice();const m=B.trK&&B.trK[P.role]!=null?B.trK[P.role]:1,add=v=>{if(v)for(let i=0;i<4;i++)w[i]+=(v[i]||0)*m};
+ for(const t of new Set(rdHpTones(P)))add(B.tr[t]);
+ for(let i=0;i<4;i++)w[i]+=P.aff*B.aff[i];
+ if(P.tc!=null&&P.aff<0&&P.tc>B.tc0)w[3]+=(P.tc-B.tc0)*B.tcSab;
+ const nr=P.p&&P.p.nr;if(nr){if(nr.c==="me")w[3]+=B.rdRiv;if(nr.k>0)w[0]+=B.rdWon;else if(nr.k<0)w[1]+=B.rdLost}
+ if(P.dk&&typeof q72Debt==="function")try{const d=q72Debt(P.dk);if(d>0)w[0]+=Math.min(B.oweMax,d*B.owe)}catch(e){}
+ return w.map(x=>Math.max(0,x))}
+/* the one willingness word (true: the largest shown answer; sab stays hidden except a Nhiều chuyện helper's leak) */
+function rdHpWord(P,w){const B=BAL.road.hp,W=B.word;if(!P.known)return W.unk;const T=w[0]+w[1]+w[2]+w[3];
+ if(T>0&&rdHpTones(P).includes("Nhiều chuyện")&&w[3]*100/T>=B.lk)return W.lk;
+ const k=[0,1,2].reduce((m,i)=>w[i]>w[m]?i:m,0);return k===0?W.full:k===1?W.half:B.noRule.includes(P.role)?W.rule:B.noLow.includes(P.role)?W.low:W.no}
+function rdHpDraw(w){const T=w[0]+w[1]+w[2]+w[3];if(!(T>0))return 0;let r=Math.random()*T;for(let i=0;i<4;i++){r-=w[i];if(r<0)return i}return 0}
+const rdHpLk=(P,k)=>k===3&&rdHpTones(P).includes("Nhiều chuyện");
+/* the helper's answer line (jrdhp RDHPL, VANPHONG; address through jvoice kSay) */
+function rdHpLine(A,P,k){const L=window.RDHPL&&RDHPL[P.type];if(!L)return"";let s=L[rdHpLk(P,k)?"lk":RDHP_K[k]]||"";let rv=null;try{rv=rv67(A,"v")}catch(e){}
+ const ri=rv&&rv!==P.p?rv.name:"người khác";s=s.replace(/\{hn\}/g,P.name||"").replace(/\{ri\}/g,ri);
+ const sp=P.sp||(/\{(goi|Goi|xung|Xung)\}/.test(s)?RDHP_SP[P.role]||{srv:"f"}:null);
+ try{if(sp&&typeof kSay==="function")s=kSay(sp,S,s,P.role==="maid"?{}:sp.srv?{own:false}:{})}catch(e){}return s.charAt(0).toUpperCase()+s.slice(1)}
+/* how the card names the helper in front of the word */
+function rdHpLab(P){const R={dad:"Cha",bro:"Huynh trưởng",mom:"Mẫu thân",fam:"Người nhà",srv:"Kẻ hầu ấy",doc:"Thái y",off:"Vị quan ấy",dan:"Người ấy",si:"Vị ấy",go:"Người được nhờ"};
+ return R[P.role]||P.name||"Người được nhờ"}
+function rdHpNote(P,k){try{if(window.__hpLog)(window.__hpS=window.__hpS||[]).push({role:P.role,type:P.type,k:rdHpLk(P,k)?4:k,net:rdHpTones(P).slice(),aff:P.aff,word:P.word})}catch(e){}}
+/* refused options of the open hồi leave its option list (A.hpNo = {b: beat id, i: [raw indexes]}) */
+(function(){const o0=opts67;opts67=function(A,b){const L=o0.apply(this,arguments);try{const X=A&&A.hpNo;if(X&&b&&Array.isArray(b.o)&&beatDef67(A,X.b)===b)return L.filter(o=>!X.i.includes(b.o.indexOf(o)))}catch(e){}return L}})();
+setTimeout(()=>{
+ /* the word on the card before she picks (outermost PEND.j67) */
+ try{const p0=PEND.j67;PEND.j67=function(p){const r=p0.apply(this,arguments);try{if(!r||!r.o||rdHpOff())return r;const A=th67(p.t),b=A&&beatDef67(A,p.b);if(!b)return r;
+  opts67(A,b).forEach((o,i)=>{const tag=rdHpTag(A,p.b,o),ro=r.o[i];if(!tag||!ro)return;const P=rdHpWho(A,tag.hp),w=rdHpW(A,P),wd=rdHpWord(P,w),lab=rdHpLab(P);
+   const base=Object.assign({},ro);delete base.hint;delete base.risk;const hb=typeof kitHint==="function"?kitHint(base,null,1):{risk:"có rủi ro"};
+   ro.hpw=wd;ro.hint=lv=>{let h="";try{h=kitHint(base,null,lv).hint}catch(e){}return `${lab}: ${wd}`+(h?"; "+h:"")};
+   ro.risk=hb.risk==="an toàn"&&w[1]+w[3]>0?"có rủi ro":hb.risk})}catch(e){console.error(e)}return r}}catch(e){console.error(e)}
+ /* the answer when she picks (outermost res67) */
+ try{const r0=res67;res67=function(tk,bid,i,odds){let A=null,o=null,tag=null,b=null;
+  try{A=th67(tk);if(A&&A.cur===bid){b=beatDef67(A,bid);o=opts67(A,b)[i];tag=rdHpTag(A,bid,o)}}catch(e){}
+  const done=r=>{try{if(A&&A.hpNo&&A.cur!==bid)delete A.hpNo}catch(e){}return r};
+  if(!tag)return done(r0.apply(this,arguments));
+  const B=BAL.road.hp,a=ARC67[A.a];let P,w,k;try{P=rdHpWho(A,tag.hp);w=rdHpW(A,P);k=rdHpDraw(w);P.word=rdHpWord(P,w)}catch(e){console.error(e);return done(r0.apply(this,arguments))}
+  rdHpNote(P,k);const line=rdHpLine(A,P,k),kw=B.kw[rdHpLk(P,k)?"lk":RDHP_K[k]],head=`<b>${lab67(A)} · ${a.t}</b>: `;
+  if(k===2){const raw=b.o.indexOf(o),X=A.hpNo&&A.hpNo.b===bid?A.hpNo:{b:bid,i:[]};const left=opts67(A,b).filter(x=>x!==o&&!X.i.includes(b.o.indexOf(x)));
+   if(left.length){X.i.push(raw);A.hpNo=X;ap67(B.noC);log(`${head}${kw}. ${line} ${fmt(B.noC)}`);A.rq={i:A.i,t:[`${kw}: ${line}`]};A.cur=null;A.nb=bid;fireBeat67(A);return}
+   /* nothing else left in this hồi (a filter hid the free option): the refusal is a plain failure of the option */
+   log(`${head}${kw}. ${line}`);return done(r0.call(this,tk,bid,i,0))}
+  if(line)log(`${head}${kw}. ${line}`);
+  if(k===0)return done(r0.apply(this,arguments));
+  if(k===1)return done(r0.call(this,tk,bid,i,odds>=100?100-B.half:Math.max(B.min,odds-B.half)));
+  const r=r0.call(this,tk,bid,i,0);try{const fx={duc:-B.sab.duc};ap67(fx);let ex=fmt(fx);const v=rv67(A,"v");if(v&&v!==P.p){oanAdd(v,S,B.sab.oan);ex+=` · ${v.name} oán ta +${B.sab.oan}`}log(`${head}${kw}: ${ex}`)}catch(e){console.error(e)}
+  return done(r)}}catch(e){console.error(e)}},0);
+window.rdHpWho=rdHpWho;window.rdHpW=rdHpW;window.rdHpWord=rdHpWord;window.rdHpTag=rdHpTag;window.rdHpLine=rdHpLine;window.rdHpLab=rdHpLab;
