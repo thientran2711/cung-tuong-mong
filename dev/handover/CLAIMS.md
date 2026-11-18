@@ -535,3 +535,4 @@ Audit live consort figures c01–c32 (2K redo / m09 skin) | handover reports/con
 | REVIEW hud-mood-bar 04bb279 (SMALL; sonnet; brief briefs/review-hud-mood-bar.md) | review/hud-mood-bar | MAIN ROOT-46 | session_01UV1Szgt5ATvToTiS3v5M3Z | RUNNING | 18/11 05:54Z |
 | place-stage r5 (owner pick B 501 + vivid marker + 4-person iPad trial; sonnet; brief briefs/place-stage-r5.md; r4 SzjeRxj archived) | review/place-stage | MAIN ROOT-46 | session_01UV1SzkV3Bc1u4BHrVH1jFj | RUNNING | 18/11 05:54Z |
 | REVIEW questline-q1b 255f5b2a (BIG; E7br) | review/questline-q1b | E ROOT | session_01DgYSWkpB8TxDvheFX6vvwn | FAIL 255f5b2a (reports/questline-q1b-review.md) | 18/11 06:22Z |
+| REVIEW BIG mg-skip-all 0f542e1 (opus; prompt inline) | review/mg-skip-all | MAIN ROOT-46 | session_01UV1Szhzc66138A1td1yMfM | RUNNING | 18/11 06:27Z |
