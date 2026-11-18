@@ -77,7 +77,7 @@ function ptPanel(){const N=ptNews(),W=ptMine();const rows=[];const OQ=S&&Array.i
  for(const o of OQ)rows.push(`<p><b>${o.byNm} có lệnh cho ngươi</b> · trả lời trước ${ptWhen(o.due)} (quá hạn: coi như từ chối).</p>`);
  for(const a of N){const r=a.rep;rows.push(`<p><b>${r.t}</b>${r.ok===true?" · <span class=\"g\">thành</span>":r.ok===false?" · <span class=\"r\">hỏng</span>":""}</p>`+(typeof kitFacts==="function"?kitFacts(r.L):`<p>${r.L.join(" ")}</p>`)+(r.d.length&&typeof kitChips==="function"?kitChips(r.d):""))}
  for(const a of W)rows.push(`<p>${a.nm} đang ${a.lbl||"đi việc"} · về ${ptWhen(a.due)}.</p>`);
- const opts=OQ.map(o=>({n:"Nghe lệnh",x:`${o.byNm}: ${o.title||"có lệnh"} · giúp hết lòng, giúp qua loa, từ chối${o.pid==="err"?"":", hay mách lẻo"}`,fx:{},go:()=>{setTimeout(()=>ptOrdOpen(o),0)}}));if(ptWaitOk()){const K=ptNext();opts.push({n:"Đợi tin",x:`ngồi chờ đến ${ptWhen(K)}, khi người được sai trở về`,fx:{},go:()=>{setTimeout(()=>ptWait(),0)}})}
+ const opts=OQ.map(o=>({n:"Nghe lệnh",x:`${o.title||("Lệnh của "+o.byNm)} · trả lời trước ${ptWhen(o.due)}, quá hạn coi như từ chối · giúp hết lòng, giúp qua loa, từ chối${o.pid==="err"?"":", hay mách lẻo"}`,fx:{},go:()=>{setTimeout(()=>ptOrdOpen(o),0)}}));if(ptWaitOk()){const K=ptNext();opts.push({n:"Đợi tin",x:`ngồi chờ đến ${ptWhen(K)}, khi người được sai trở về`,fx:{},go:()=>{setTimeout(()=>ptWait(),0)}})}
  for(const a of N)a.read=1;
  return{title:OQ.length?"Lệnh và tin chờ":"Tin chờ người sai đi",h:rows.join("")||"<p>Không có ai đang đi việc.</p>",opts}}
 function ptOrdN(){return S&&Array.isArray(S.ordQ)?S.ordQ.length:0}
@@ -252,7 +252,7 @@ function ptErrCard(){if(!isSrv()||!S.srv)return null;const er=S.srv.err;if(!er||
  const nv=er.v!=null?` · ${m.name} thêm thân với người nhận quà`:"";
  return{t:`<p>${m.name} sai ngươi: ${er.n}.</p><p class="past">Việc vô hại, không có gì để mách lẻo.</p>`,who:pv(m),o:[
   {n:"Giúp hết lòng",fx:{},x:ptRecvRow(kind,null,`công lao +${X}${nv}`,""),go:()=>ptErrGo(er,kind,null,0)},
-  {n:"Giúp qua loa",fx:{tin:-P.errHalfTin},x:ptRecvRow(kind,null,`công lao +${X}${nv}`,"",ptHalfN(kind))+` · kèm: Chủ tin -${P.errHalfTin}`,go:()=>ptErrGo(er,kind,ptHalfN(kind),1)},
+  {n:"Giúp qua loa",fx:{tin:-P.errHalfTin},x:ptRecvRow(kind,null,`công lao +${X}${nv}`,"",ptHalfN(kind)),go:()=>ptErrGo(er,kind,ptHalfN(kind),1)},
   {n:"Từ chối",fx:{tin:-P.errRefuse},x:`không tốn khắc · Chủ tin -${P.errRefuse}`,go:()=>{er.none=1;log(`Ngươi thoái thác việc ${m.name} sai.`)}}]}}
 function ptErrFrame(){if(!ptOn()||!isSrv()||!S.srv||S.dead)return false;const er=S.srv.err;if(!er||er.none||er.acc||er.pop)return false;const m=srvM();if(!m)return false;er.pop=1;return !!ptOrdAdd("err",{},"Việc chủ sai",m)}
 (function(){try{if(typeof srvCards!=="function")return;const s0=srvCards;srvCards=function(){const X=s0.apply(this,arguments);try{if(ptOn()&&S.srv&&S.srv.err&&!S.srv.err.none&&!S.srv.err.acc){ptErrFrame();
