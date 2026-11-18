@@ -19,11 +19,11 @@ t8-v2-yellow | CDN _review only | W55 session_011xDdVQTwxN7jGoVprySAoD | DONE f8
 b10-pose-eyes | CDN _review only | W56 + W56b DONE 6da6355 (archived) | DONE | 2026-11-18T15:52Z (Foreman C ROOT-25)
 live-open-eyes | CDN _review (then live) | W57 session_011xDdVPo2tyAFP5faQKZ1Xe | ROLLED OVER→W57b session_011xDdVQHrV2EKBxjJfUpYBx RUNNING | 2026-11-18T15:52Z (Foreman C ROOT-25)
 | E12 test-flaky-sure (sonnet; test-only) | review/test-flaky-sure @c3b9d58c | Foreman E | session_01DgYSWmvDYnmfLCrNGtw5Uu | DONE, SẴN SÀNG KIỂM | 18/11 |
-b10-a26-c01-c11 | CDN _review only | W58 session_011xDdVNiYzKSQRPxRRQTe9a | RUNNING | 2026-11-18T15:58Z (Foreman C ROOT-25)
+b10-a26-c01-c11 | CDN _review only | W58 session_011xDdVNiYzKSQRPxRRQTe9a | ROLLED OVER→W58b session_011xDdVRPiVoxb2X6E9mvNW8 RUNNING | 2026-11-18T15:58Z (Foreman C ROOT-25)
 b10-a26-c12-c22 | CDN _review only | W59 session_011xDdVSuVQfgnp6Q21U5fzP | ROLLED OVER→W59b session_011xDdVQdJHQhTfZZ8iFUwdU RUNNING | 2026-11-18T15:58Z (Foreman C ROOT-25)
 b10-a26-c23-c32 | CDN _review only | W60 session_011xDdVNGGSPbnSSdRTWUhd9 | RUNNING | 2026-11-18T15:58Z (Foreman C ROOT-25)
 b10-a36-c01-c11 | CDN _review only | W61 session_011xDdVSKCA72y4oaX835Anu | ROLLED OVER→W61b session_011xDdVNtKc1rtb9CaXW4xCu RUNNING | 2026-11-18T15:58Z (Foreman C ROOT-25)
-b10-a36-c12-c22 | CDN _review only | W62 session_011xDdVS7v1P9E9VBhhoCzUA | RUNNING | 2026-11-18T15:58Z (Foreman C ROOT-25)
+b10-a36-c12-c22 | CDN _review only | W62 session_011xDdVS7v1P9E9VBhhoCzUA | ROLLED OVER→W62b session_011xDdVRwiak4wJvyvuekeTH RUNNING | 2026-11-18T15:58Z (Foreman C ROOT-25)
 b10-a36-c23-c32 | CDN _review only | W63 session_011xDdVR2azVrSAvuz8jSdAR | ROLLED OVER→W63b session_011xDdVPRsuRZG7dw2QAufA3 RUNNING | 2026-11-18T15:58Z (Foreman C ROOT-25)
 b10-a51-sample c03/c04/c12 | CDN _review only | W64 session_011xDdVQJWBGEQCg7HMWeLs1 (c03 done 93e8cd8, archived) → W64b session_011xDdVQ5R8zmXosTMAV85mu | RUNNING | 2026-11-18T15:58Z (Foreman C ROOT-25)
 shown-odds-r2 (spend-before-roll, ORDER ROOT-52 15:30Z) | review/shown-odds-r2 | session_01964izERxj8PUG495V4QTjS | RUNNING | 18/11 15:52Z | owner D #2
