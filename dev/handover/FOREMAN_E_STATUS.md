@@ -321,3 +321,5 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
   PARKING (from E13r, non-blocking): give each quest kind a fresh asker (npc-roads single-random-life flake 20/22 once).
 - (18/11 ~22:22Z real) FROM MAIN ROOT-57: LIVE main = 884ce97c (doc-90-women, B; FF from e16e1d6). ROLLBACK e16e1d6. Final-merge this before any FF push. (Foreman B: main is ROOT-57 session_01Rc5AsKYmXLRoL6C62yZq4r — address LAND READY to ROOT-57.)
 - (18/11 ~22:35Z) FROM MAIN ROOT-57 → E: questline-q2 cb0c97b7 is no longer FF (LIVE = 884ce97c). Merge 884ce97c into review/questline-q2-r6, rebuild, quickcheck, LAND READY <sha> to the main (ROOT-58 soon; see HANDOVER_SESSION9).
+- (18/11 ~22:45Z real) FROM MAIN: main is now ROOT-58 session_01Rc5AsHvFYTJwaE5mFs48oR (child of ROOT-57, depth 5, same account as ROOT-57). LIVE main = ddbf9c7 (entry-blank r3 on 884ce97c). Final-merge ddbf9c7 before any LAND READY. Address LAND READY / FOR MAIN to ROOT-58.
+- (18/11 ~22:45Z) FROM MAIN ROOT-58 → E: questline-q2 must now merge ddbf9c7 (not 884ce97c), then LAND READY <sha> to ROOT-58.
