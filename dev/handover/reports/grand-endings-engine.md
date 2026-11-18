@@ -85,3 +85,20 @@ Steps:
 2. Verify: `MODES=kind,cruel node dev/measure/ge-measure.js - 4 2 /home/user/wt/e1bs/m6.json cnv_mat sens` (8 lives ≈ 10 min) → need `IN shade cnv_mat`. Then one full measure all 3 roads (`- 1 2 out.json`, ~24 lives, alone) for the table.
 3. `bash dev/site/build_site.sh` → commit assets.json + index.html + sw.js → `bash dev/tools/quickcheck.sh` ALONE (nothing else running; perf is reviewer-cleared, re-measured against main).
 4. Report table here + CLAIMS row (E1b row says READY 2ae4715 → replace) + FOREMAN_E_STATUS line, then «SẴN SÀNG KIỂM grand-endings-engine <sha>» to Foreman E session_01DgYSWmvDYnmfLCrNGtw5Uu.
+
+## FIX 1 (E1c) — review E1r fix 4 closed + main merge (18/11 11:55Z) · tip **177c730b** (pushed)
+LINEAGE: E1c depth 3. START_CTX ~4 %.
+PRIORITY #1 CHECK: OD grand-ending lines (L1612/L1617/L1623) | main none (no S.ge / BAL.ge) | review/* review/grand-endings-design r3 + review/grand-endings-engine (this) + review/questline-q3 jrdhp.js (pattern: GE-owned data tags REAL options, road file untouched) | claims E1/E1b only.
+| # | status | what |
+|---|---|---|
+| 4 | **DONE f0e25a57** | jgedata.js only (jrd_cnv.js of Foreman B NOT edited; no new options needed). Scheming REAL options already on the cnv_mat_3 / cnv_mat_4 chains now pull their ending AND carry the ác tag, so a cruel player following those chains picks harsh options: P3 «Gác ô ra đi» (ác «Bẻ ô ra đi» = leaves with the palace's secrets): «Nhờ người dò ai giữ lại» (7.s2, new ác), «Giữ kín, chờ thời» (10.c1, new ác), «Đem chuyện gói bùa ra nói lại» (11.c2, was ác). P4 «Tỷ muội cùng hầu» (ác «Mượn chị lên cao» = a bond kept by leverage): «Gặp {v} hỏi chuyện cung {mis}» (5.s2, new ác), «Đổi lấy một lời hứa» (9.t1 «cả hai giữ thóp nhau», new ác), «Cho {mis} biết {v} cũng định kéo nàng vào» (10.c2, was ác). Each name occurs once in dev/build (no cross-road bleed). Kind bots still prefer the gentle Chuỗi (pull 3 + thiện 2 > pull 3 − ác 2). No player text changed (VANPHONG untouched). |
+| 5b | DONE 8da9e685 | merged origin/main 12a1e4be (poison-road r2): assemble.py union = main's list (adds jpq.js) + jbalge after jbal2, jgecat/jgedata/jge after jdh2. Site rebuilt 177c730b. |
+
+Measure m7 (`MODES=kind,cruel node dev/measure/ge-measure.js - 8 2 m7.json cnv_mat sens`, 16 lives, alone, PAR 2; lives "given she lives to ch14" — the bot revives dead lives):
+| road | lives | inChar [.30,.60] | random ≤.20 | open11 [1,2.6] | kind→thiện ≥.70 | cruel→ác ≥.70 |
+|---|---|---|---|---|---|---|
+| cnv_mat before (E1b m5) | 8 | .25 | – | 2 | .75 | **.50 OUT** |
+| cnv_mat after (m7) | 16 | .50 IN | 0 (no rand lives in this run) | 1.81 IN | .75 IN | **1.00 IN** (8/8) |
+Cruel per target (lt / lean): j0 −8/−29.4 · −6/−22.6 · j1 −9/−35.5 · −5/−21.1 · j2 (P3) −4/−10.3 · −9/−31.9 (won «Bẻ ô ra đi», odds 88) · j3 (P4) −5/−13.9 · −7/−22.6. Kind: the 2 non-thiện lives both aim at cnv_mat_2 «Tỳ nữ lên phượng» (natural A, its Chuỗi is scheming) — same as before, band held. tt_co / nc_tuc data unchanged (not re-measured; their bands from E1r/E1 runs stand).
+Tests on 177c730b: ge-guard **6/6** · ge-engine **104/104** · build_site OK · quickcheck **PASS** vs live 12a1e4be (core gates, time-spill, old save, 0 errors; render 200/187, tab 340/343, buổi 1003/796, tasks>200 14/14 — buổi spread is box noise per E1r perf section).
+SẴN SÀNG KIỂM grand-endings-engine 177c730b
