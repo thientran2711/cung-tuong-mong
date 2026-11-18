@@ -100,3 +100,7 @@ Từ nay chỉ còn **một sổ duy nhất**: FIGURE_GATE. Các sổ cũ (art-c
 11. Dấu trên đầu: nhún nhẹ + phát sáng (mới) thắng "không phát sáng" (cũ)?
 12. Dư đồ: luôn lấy từ Phượng Lệnh, chỉ vẽ phần còn thiếu — đúng không?
 13. Thú nuôi: 3 giai đoạn hay 4 giai đoạn?
+
+## OWNER ANSWERS 23:25Z (18/11)
+- Đã chốt: câu 2, 3, 5, 8, 10, 11, 12, 13. Câu 2/3/5/8/13 đã ghi vào FIGURE_GATE; câu 10/11/12 chuyển cho main ghi vào sổ UI.
+- Còn mở: câu 1 (trang điểm), 4 (cổ vân kiên), 6 (mảnh vàng cũ), 7 (4 chân dung phi tần), 9 (hình tạm); sếp hỏi lại câu 1, 6, 7, 9 nên em phải giải thích trước; câu 4 chưa trả lời.

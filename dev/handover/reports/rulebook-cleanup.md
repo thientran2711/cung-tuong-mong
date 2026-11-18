@@ -140,3 +140,10 @@ art-events-effects: L20–21 (new-game identity screen UI), L24 (Tự học word
 
 ### HANDOVER (R1c)
 Done: all 10 files processed in one pass. Remaining for others: answer the QUESTIONS; R1b owns A0–H. If FIGURE_GATE size (163 KB) is a problem, next prune = I.1/I.2 per-instance lines (event/room approvals) once the owner answers Q1/Q2/Q6.
+
+### FOR MAIN (owner answers 23:25Z)
+UI/kit items, not art: main writes them into its own UI books (not FIGURE_GATE). Owner answer 18/11 ~23:25Z real: "Lật trang chỉ có ở sổ Tuần lục, điện thoại dọc thì không lật, đúng, 11 đúng, 12 đúng, 13 4 giai đoạn, có vẽ ảnh già rồi mà"
+- Q10 page-turn effect: only in the Tuần lục book; no page turn on a portrait phone. Owner: "Lật trang chỉ có ở sổ Tuần lục, điện thoại dọc thì không lật, đúng".
+- Q11 head mark: small bob + glow (new) wins over "no glow" (old). Owner: "11 đúng".
+- Q12 Dư đồ: always comes from Phượng Lệnh; paint only the missing parts. Owner: "12 đúng".
+(Q2, Q3 + maid sleeves, Q5, Q8, Q13 were written into dev/art/FIGURE_GATE.md as canon overwrites.)
