@@ -35,6 +35,8 @@ Thi hành: `dev/build/j84.js` (module cuối trong assemble.py) sửa dữ liệ
 | Tab kẻ hầu | Cung nhân (mục con của Hậu cung) | Kẻ hầu (tên tab; trong câu vẫn dùng "kẻ hầu") |
 | Tab con cái | Hoàng tự | Con cái (tên tab) |
 | Tab rương | Tư trang (chữ ngắn cũng "Tư trang") | Rương đồ, Rương |
+| Phòng bày đồ quý (owner OD 17/11 ~21:22Z) | **Đa Bảo Các** (thanh trái, đầu bảng; phòng người khác: "Đa Bảo Các của <tên>") | Nơi trưng bày, Phòng trưng bày, Kệ trưng bày |
+| Bộ đồ bày (display-set-bonus) | «Bộ <tên>: Đức +2.» · «Bộ <tên>: còn thiếu <món>.» · «Bộ <tên> khuyết: <món> héo úa.» · «Bộ <tên> đủ lại.» · tới trần: «Bộ <tên>: đủ bộ, nhưng đã tới mức, không thêm.» | set, combo, bonus, điểm bộ |
 | Tab phe | Phe phái (chữ ngắn "Phe") | — |
 | Việc học một môn (Tài nghệ, Tứ đức) (sếp 15/11) | Tự học · Học với thầy · Học với ma ma · Học với Thái hậu (tên thật người dạy giữ trong lời, vd. "ma ma giáo tập") | Tự rèn, Tự luyện, Theo ma ma giáo tập, Xin Thái hậu cho học cùng |
 | Khoảng số trên thẻ việc (sếp 15/11) | "tiến bộ Thi một hai phần", "Sủng +3 đến +8" | "+1..2", "0..10" |
