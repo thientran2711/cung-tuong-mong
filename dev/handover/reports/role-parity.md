@@ -88,3 +88,46 @@ Commits: ff81e63 merge main · 47dc7f0 code · 586e5e8 root site · f2b8fb0 dete
 - my families: rouge 3 (up/hh probe world), harm:gift 9 (probe item) — both probe limits.
 - part-1 §4.3 probe-limit families (138 rows, unchanged in kind): cx3:sell/test (item-detail menu), cx:study, cx3:teachD/teachV (kid card), cx3:use/facDiv/staff*/cx:maidR, mediate, harm:pushp/tat/trip (rank), hh:conf/cutpay, maid column. Next worker: add probe worlds for these, never filler code.
 - NOTE for reviewers: NPC behaviour changed by design (flat monthly rolls → choices): fewer NPC affairs at start (no roll 2), no flat affair deaths (evidence instead), NPC hidden pregnancies hidden only by forgery, NPC rouge borrowing/stealing and poison buying only when chosen.
+
+## PART 1 FIX (worker ROLE-PARITY #3 opus session_01Rc5AsN67UuWKQGjGP9MeW8, depth 4, branch review/role-parity-2)
+PRIORITY #1 CHECK ('role-parity'): OD 0 new | ledger 0 | claims 8 (C-AG role-parity rows) | main 0 | review/* review/role-parity d6c2dc17, review/role-parity-r1 75f9dd84, review/role-parity-2 f2b8fb0c (continued here), review/role-parity-4 (Foreman B, stopped) | archive 0 → reused the part-2 scan; no new parity family built.
+START_CTX ~3 % of 1M; finished well under START + 25 %.
+
+### PART1 FIX READY 72fbb3fb
+Commits on review/role-parity-2: fe0f1959 merge origin/main **e16e1d66** (conflicts: assemble.py module list keeps jagacts4.js + jgedata_w1.js + jmapz.js; index.html / sw.js regenerated) · 72fbb3fb the fix + rebuilt root site.
+
+| reviewer item | done |
+|---|---|
+| (a) seeded page, identical runs | already in part 2; re-proved: 3 full scans on 72fbb3fb's code give byte-identical JSON (sha256 787b66e8…): 2 runs on the plain build, 1 on the CDN build (build_site.sh). NEW: the scan page now aborts EVERY http(s) request (as ag2perf-deeds) — before, a CDN build loaded the CDN asset index during the probe and gave other rows than the plain build (role-parity.test FAILED on the CDN build with 2 new / 8 gone rows). |
+| (b) per-rank TARGET states | gates(): a TARGET LADDER, the same for both doers — one fixed target (first non-Empress consort of the shared target list) put at every rank t1…t7 + Hoàng hậu seat, once as she is and once in the state the deed needs (standing with the doer in the garden via jagharm HA.here = the hook the NPC deed uses when it lands; holding a stealable piece (jlost loOk); at odds with a third person; no slap mark); restored after each check. New symmetric world "staff": the doer's own servants span loyal 10/25/45, in trouble this tuần, fond of someone (undo list). AG.sc (jagent agSocT per-tuần SOC target cache, keyed by id not rank) reset per probe world — it carried a target list drawn at rank 0 into the rank-6 probe (the t7 «Nương theo» N-RANK). |
+| (c) cap + side key | role-parity.test.js: open list keyed role\|key\|side; `OPEN_CAP=111`, FAIL when role-parity-open.json holds more (raising the cap is a visible diff). open.json regenerated from the seeded scan. |
+| (d) «Chuyện cũ» | EXEMPT in role-parity-exempt.json: the person card's kit tab (jpcf SKIP_TAB, data-pct) that shows past-events info — a tab, not an act. |
+| (e) promotion exact | re-proved on the seeded scan: NPC and player onlyRisen = onlyBorn = [] |
+
+### Open rows before → after (role\|key\|side)
+| family | before (open.json f2b8fb0c) | after |
+|---|---|---|
+| harm:tat | 4 | 0 |
+| harm:trip | 2 | 0 |
+| harm:pushp | 6 | 0 |
+| mediate | 8 | 0 |
+| harm:laydo / laydol | 2 | 0 |
+| follow | 1 | 0 |
+| cx3:staffChe / Doi / Phat (t2…hh) | 21 | 0 |
+| cx3:staffTam (hh) | 1 | 0 |
+| other families (unchanged kind, B3) | 105 | 103 |
+| new rows seen after the main merge (world draw moved with main's palace trim 13 → 10; the OLD scan on the merged build shows them too): up harm:accuse/banphe/expose/tieuhuy/trinhth/uyhiep N-ONLY, hh hh:judge P-ONLY, maid maid:accuse P-ONLY | 0 | 8 |
+| **total** | **150** | **111** |
+(The old scan on the merged build alone: 147 → 111 with the fix.) Left for Foreman B's B3, not touched here: cx3:sell/test/use/facDiv, cx3:teachD/V, cx:study, harm:gift, cx2:chest, rouge up/hh, up column (def_*, staffHoi, maidTalk, maidR, hhShield, talkGossip, xinhh + the 6 harm N-ONLY above), hh:conf/cutpay/judge, maid column.
+
+### Gates (72fbb3fb)
+| gate | result |
+|---|---|
+| role-parity.test.js | ALL PASS (cap 111 ok, no new gap, promotion exact both, riseCore same numbers, no page errors) |
+| quickcheck | PASS · open 1343 ms · old save ok · perf new/live render 192/162, tab 367/351, buổi 965/854 ms, tasks>200 18/18 · core gates PASS |
+| one-core-guard | PASS (inline 3988 < 4212) |
+| ag-all.test | ALL 21 PASS |
+| ag-stf2 | 23/23 PASS |
+| deeds ±3 % (ag2perf-deeds 160 buổi, seeds 1–4) | live main e16e1d6 615/569/594/609 = 2387 → branch 603/529/596/628 = 2356 (−1.3 %) PASS (no game code changed in this fix; the deeds diff is part 2's) |
+| coop-e2e | BLOCKED in this env (accepted) |
+Note: never run two scans at once on this box (the second Chromium is OOM-killed, as the reviewer saw).
