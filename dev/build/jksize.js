@@ -276,6 +276,8 @@ KIT_SIZE.v3={
 KIT_SIZE.fig3={M:{h:300,cw:140},L:{h:370,cw:162},XL:{h:480,cw:220}};Object.assign(KIT_SIZE.fig,{M3:KIT_SIZE.fig3.M,L3:KIT_SIZE.fig3.L,XL3:KIT_SIZE.fig3.XL});
 Object.assign(KIT_SIZE.lay,{M:{fig:"M3"},L:{fig:"L3"},XL:{fig:"XL3"}});
 /* narrow T3 ladder (kszNarrow3): figure height = f × modal height, at most max; column cw. NS = the small portrait ("one"). */
+/* KIT 56.6 (owner 18/11 ~16:10Z, fullbody-frame s4): the scene picture of a frame is BIG (it fills what the text leaves) only while everything under it fits with NO scroll; when the frame would scroll it steps down this ladder of KIT_SIZE.pic classes (biggest first, never below the smallest) just far enough to remove the scroll. ONE rule (kszPicStep3), no per-frame size. */
+KIT_SIZE.v3.picLadder=["LL","NL","NM","NS"];
 KIT_SIZE.v3.narrow={minRight:274,NL:{f:.26,max:260,cw:112},NM:{f:.19,max:180,cw:96}};Object.assign(KIT_SIZE.v3.pres,{NL:"fig",NM:"fig",NS:"one"});
 Object.assign(KIT_SIZE.fig,{NL3:{h:260,cw:112},NM3:{h:180,cw:96}});Object.assign(KIT_SIZE.lay,{NL:{fig:"NL3"},NM:{fig:"NM3"},NS:{fig:"NM3"}});
 /* subject boxes of EVERY event picture (ev-*, info-*, act-cat-*: 329, each one looked at, 16/11 s23) [x0,y0,x1,y1] (0..1). One registry; a picture added later MUST get its box here (test kit-size7-focus.js fails a picture without one). */
@@ -339,6 +341,14 @@ function kszEvMin3(c){const im=c.querySelector("img"),src=im&&im.getAttribute("s
  const base=KIT_SIZE.v3.evMin[(c.closest(".ksz3")||{dataset:{}}).dataset.pres]||56;const sj=c.dataset.subj?c.dataset.subj.split(",").map(Number):null;if(!sj||!n||!c.classList.contains("k3ev"))return base;
  const w=c.clientWidth;const NM=KIT_SIZE.pic.NM;return Math.max(base,Math.min(Math.ceil(w*NM.h/NM.w),Math.ceil((sj[3]-sj[1])*n[1]*(w/n[0])*1.06)))/* the strip's floor is at most the standard NARROW strip ratio (NM 300x84): a taller subject is shown whole by kitPicFocus (zoom-out), never by a taller frame */}
 function kszPicFit3(root){root.querySelectorAll(".k3ev,.k3mpic").forEach(c=>{const im=c.querySelector("img");if(c.classList.contains("k3ev"))c.style.minHeight=kszEvMin3(c)+"px";if(!im||!im.naturalWidth)return;kitPicFocus(c,im)})}
+
+/* KIT 56.6 picture step-down. overflow = how many px the frame's info column / body / button area scroll (0 = fits). Kept only if it helps: a scroll the picture cannot remove (text + buttons alone too tall) leaves the picture as it was. Returns the class used ("" = big/fill). */
+function kszOver3(dlg){const mb=document.getElementById("mb"),R=dlg.querySelector(".k3right"),B=dlg.querySelector(".k3body");let o=0;[R,B,mb].forEach(e=>{if(e&&e.getClientRects().length)o=Math.max(o,e.scrollHeight-e.clientHeight)});return o>1?o:0}
+function kszPicH3(k){const p=KIT_SIZE.pic[k];return typeof p.h==="number"?p.h:p.h[kitSzMode()]}
+function kszPicStep3(dlg){try{const ev=dlg.querySelector(".k3right>.k3ev");dlg.dataset.picc="";if(!ev)return"";const reset=()=>{ev.style.flex="";ev.style.height="";ev.style.minHeight=kszEvMin3(ev)+"px"};reset();const base=kszOver3(dlg);if(!base)return"";const h0=ev.offsetHeight;let best="",bo=base;
+ for(const k of KIT_SIZE.v3.picLadder){const h=kszPicH3(k);if(h>=h0)continue;ev.style.flex="none";ev.style.minHeight="0";ev.style.height=h+"px";kszPicFit3(dlg);const o=kszOver3(dlg);if(o<bo){bo=o;best=k}if(!o)break}
+ if(!best){reset();kszPicFit3(dlg);return""}
+ const h=kszPicH3(best);ev.style.flex="none";ev.style.minHeight="0";ev.style.height=h+"px";kszPicFit3(dlg);dlg.dataset.picc=best;return best}catch(e){console.error("kszPicStep3",e);return""}}
 /* kitPicFocus(box, img) — THE focal crop (owner 16/11 19:54Z "cái lá thư chưa có đúng vị trí"; owner 21:1xZ: the picture ALWAYS FILLS its frame, never letterboxed / blur-padded):
    `cover` at every size, positioned so the centre of the subject box (KIT_PIC_SUBJ) sits at the centre of the visible window (clamped to the picture). When the subject is
    bigger than the window the window still shows its centre (the frame, not the picture, adapts: kszEvMin3 grows the strip up to the standard NARROW ratio). No box: centred. */
@@ -359,16 +369,16 @@ function kszBtnGrid3(root){root.querySelectorAll(".k3btns").forEach(g=>{const B=
  bs.forEach(b=>b.style.setProperty("--k3s",b.dataset.kbs==="S"?1:long))})}
 /* the left column decides the body height; the event picture in the info grows into what the text leaves */
 function kitFrameApply3(dlg){try{kszFigFit(dlg)}catch(e){}kszBtnGrid3(dlg);const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor");
- if(R){R.style.minHeight=L?L.offsetHeight+"px":(dlg.dataset.pres==="one"?KIT_SIZE.v3.picMinS+"px":"");/* XL: the body stays the figure's height, more text scrolls inside the info column */if(dlg.dataset.ksz==="XL"&&L){R.style.maxHeight=L.offsetHeight+"px";R.style.overflow="auto"}}kszPicFit3(dlg);kszPicFit3(dlg);return dlg.dataset.ksz}
+ if(R){R.style.minHeight=L?L.offsetHeight+"px":(dlg.dataset.pres==="one"?KIT_SIZE.v3.picMinS+"px":"");/* XL: the body stays the figure's height, more text scrolls inside the info column */if(dlg.dataset.ksz==="XL"&&L){R.style.maxHeight=L.offsetHeight+"px";R.style.overflow="auto"}}kszPicFit3(dlg);kszPicFit3(dlg);kszPicStep3(dlg);return dlg.dataset.ksz}
 /* does the content fit this size? (info column measured with the event picture at its smallest) */
 function kitFrameFits3(dlg,strict){const K=dlg.dataset.ksz,m=kitSzMode();if(K==="XL"&&!strict)return true;const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor"),ev=R&&R.querySelector(":scope>.k3ev");
- const mh=R.style.minHeight,mx=R.style.maxHeight;R.style.minHeight="";R.style.maxHeight="";if(ev){ev.style.flex="none";ev.style.height=kszEvMin3(ev)+"px"}
- const need=R.offsetHeight;if(ev){ev.style.flex="";ev.style.height=""}R.style.minHeight=mh;R.style.maxHeight=mx;const lh=L?L.offsetHeight:0;
+ const mh=R.style.minHeight,mx=R.style.maxHeight;R.style.minHeight="";R.style.maxHeight="";const ef=ev&&ev.style.flex,eh=ev&&ev.style.height,em=ev&&ev.style.minHeight;if(ev){ev.style.flex="none";ev.style.minHeight="";ev.style.height=kszEvMin3(ev)+"px"}
+ const need=R.offsetHeight;if(ev){ev.style.flex=ef;ev.style.height=eh;ev.style.minHeight=em}R.style.minHeight=mh;R.style.maxHeight=mx;const lh=L?L.offsetHeight:0;
  if(dlg.dataset.pres==="fig")return L||!dlg.querySelector(".k3fill")?need<=lh+2:true;const btn=dlg.querySelector(":scope>.k3btns");
  const body=Math.max(need,lh,KIT_SIZE.v3.picMinS);return (L?need<=lh+2:body<=KIT_SIZE.v3.bodyS)&&body+(btn?btn.offsetHeight:0)<=KIT_SIZE.v3.capS[m]}
 /* THE picker: the smallest size whose presentation holds the content */
 function kitFramePick3(sp,host){for(const K of ["S","M","L","XL"]){host.innerHTML=kszFrame3(sp,K);const d=host.firstElementChild;kitFrameApply3(d);if(kitFrameFits3(d))return K}return"XL"}
-Object.assign(window,{kszFrame3,kitFrameApply3,kitFrameFits3,kitFramePick3,kszPicFit3,kszBtnGrid3});
+Object.assign(window,{kszPicStep3,kszFrame3,kitFrameApply3,kitFrameFits3,kitFramePick3,kszPicFit3,kszBtnGrid3});
 /* ---- v3 sample content: every kind × S / M / L / XL with a REALISTIC length for that size (kit page + dev/test/kit-size3.js) ---- */
 function kszSpecs3(){const P=kszPeople(),ch=(l,v,c)=>kitChip(l,v,c),op=(t,rows)=>({t,pic:kszOptPic(t),rows}),me=S,mx=S&&S.maid,q=P.q,th=P.th,v2=P.v2,emp=P.emp;
  const pay=i=>{try{return BAL.pay[i]}catch(e){return null}};const pr=i=>[RANKS[i].n,pay(i)!=null?ch("Bạc",pay(i),"g"):"theo phẩm","t"];
@@ -518,10 +528,10 @@ function kitFrameApplyLive3(dlg){try{kszFeetFit(dlg)}catch(e){}const g=dlg.query
  const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor");
  if(R){R.style.maxHeight="";R.style.overflow="";R.style.minHeight=L?L.offsetHeight+"px":(dlg.dataset.pres==="one"?KIT_SIZE.v3.picMinS+"px":"");if(dlg.dataset.ksz==="XL"&&L){/* XL (approved #3): the body stays the figure's height; more content scrolls inside the info column */
   R.style.maxHeight=L.offsetHeight+"px";R.style.overflow="auto"}}
- kszPicFit3(dlg);kszPicFit3(dlg);return dlg.dataset.ksz}
+ kszPicFit3(dlg);kszPicFit3(dlg);kszPicStep3(dlg);return dlg.dataset.ksz}
 function kitFrameFitsLive3(dlg,strict){const K=dlg.dataset.ksz;if(K==="XL"&&!strict)return true;if(/^N/.test(K)){const mb=document.getElementById("mb");return !mb||mb.scrollHeight<=mb.clientHeight+1}/* narrow: only the screen limits the stack: nothing may scroll inside the frame body */const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor"),ev=R&&R.querySelector(":scope>.k3ev");if(!R)return true;
- const mh=R.style.minHeight,mx=R.style.maxHeight;R.style.minHeight="";R.style.maxHeight="";if(ev){ev.style.flex="none";ev.style.height=kszEvMin3(ev)+"px"}
- const need=R.offsetHeight;if(ev){ev.style.flex="";ev.style.height=""}R.style.minHeight=mh;R.style.maxHeight=mx;const lh=L?L.offsetHeight:0;
+ const mh=R.style.minHeight,mx=R.style.maxHeight;R.style.minHeight="";R.style.maxHeight="";const ef=ev&&ev.style.flex,eh=ev&&ev.style.height,em=ev&&ev.style.minHeight;if(ev){ev.style.flex="none";ev.style.minHeight="";ev.style.height=kszEvMin3(ev)+"px"}
+ const need=R.offsetHeight;if(ev){ev.style.flex=ef;ev.style.height=eh;ev.style.minHeight=em}R.style.minHeight=mh;R.style.maxHeight=mx;const lh=L?L.offsetHeight:0;
  /* the frame must also stay inside the screen (modal box): Fold / iPad */
  const M=document.getElementById("modal"),room=M?M.clientHeight-24:9999;
  if(dlg.dataset.pres==="fig")return (L||!dlg.querySelector(".k3fill")?need<=lh+2:true)&&dlg.offsetHeight<=room;const btn=dlg.querySelector("#mb>.k3btns");
