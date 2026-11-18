@@ -49,3 +49,4 @@ b10-a26-c12-c22 (cont.) | CDN _review only | W59c session_011xDdVSp5UYKyVUagQ99Q
 a18-scan-2 (D4b/D3e + sheets) | CDN _review only | W65b session_011xDdVP6v9KEJDivhyAkbCb | RUNNING | 2026-11-18T16:55Z (Foreman C ROOT-27)
 new-faces-sample (n01–n03) | CDN _review only | W67 session_011xDdVSVdUZSmt6L1fcPygZ | RUNNING | 2026-11-18T16:59Z (Foreman C ROOT-27)
 yellow-deeper sample | CDN _review only | W68 session_011xDdVQbC2u4UfLmkcMAt3J | RUNNING | 2026-11-18T16:59Z (Foreman C ROOT-27)
+princess-rank-sample | CDN _review only | W69 session_011xDdVR1dCYEdUEDNx5i8Dh | RUNNING | 2026-11-18T17:14Z (Foreman C ROOT-28)
