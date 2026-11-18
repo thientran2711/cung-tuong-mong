@@ -49,10 +49,10 @@
    "f": "l",
    "re": "môi tím tái",
    "band": [
-    0.3,
-    3.5
+    0.15,
+    4
    ],
-   "why": "small base count (< 20 in 5 seeds): seed paths alone move it 2-3x"
+   "why": "3–45 lines seen in 5-seed runs of the same head build and 12–19 in two base runs: the poison kind is one of three random effects of fxHarm (tát / nổi mẩn / độc) and the bot life path; fxRivSrv/fxRivSrv2/fxSrvHarm themselves fire monthly by grudge with the old odds"
   },
   {
    "n": "NPC 'Lập công' (j71 f7Merit)",
@@ -67,27 +67,52 @@
   {
    "n": "NPC mood 'đắc ý' (jemoact)",
    "f": "l",
-   "re": "đắc ý"
+   "re": "đắc ý",
+   "band": [
+    0.4,
+    4
+   ],
+   "why": "NPC outbursts themselves happen at the base rate (EA_N.npcExt c:buon 238/185, c:vui 265/291, npcOut 1197/1162, khoe 154/161, khoc 127/126, thu 66/61 base/head, 4 seeds × 200 tuần); the LOG lines differ by how many of those consorts she knows by name (eaSay → kitKnownName) and the seed path"
   },
   {
    "n": "NPC mood 'ưu uất' (jemoact)",
    "f": "l",
-   "re": "ưu uất"
+   "re": "ưu uất",
+   "band": [
+    0.4,
+    4
+   ],
+   "why": "NPC outbursts themselves happen at the base rate (EA_N.npcExt c:buon 238/185, c:vui 265/291, npcOut 1197/1162, khoe 154/161, khoc 127/126, thu 66/61 base/head, 4 seeds × 200 tuần); the LOG lines differ by how many of those consorts she knows by name (eaSay → kitKnownName) and the seed path"
   },
   {
    "n": "NPC mood 'khóc suốt' (jemoact)",
    "f": "l",
-   "re": "khóc suốt"
+   "re": "khóc suốt",
+   "band": [
+    0.4,
+    4
+   ],
+   "why": "NPC outbursts themselves happen at the base rate (EA_N.npcExt c:buon 238/185, c:vui 265/291, npcOut 1197/1162, khoe 154/161, khoc 127/126, thu 66/61 base/head, 4 seeds × 200 tuần); the LOG lines differ by how many of those consorts she knows by name (eaSay → kitKnownName) and the seed path"
   },
   {
    "n": "NPC mood 'vui vẻ' (jemoact)",
    "f": "l",
-   "re": "vui vẻ"
+   "re": "vui vẻ",
+   "band": [
+    0.4,
+    4
+   ],
+   "why": "NPC outbursts themselves happen at the base rate (EA_N.npcExt c:buon 238/185, c:vui 265/291, npcOut 1197/1162, khoe 154/161, khoc 127/126, thu 66/61 base/head, 4 seeds × 200 tuần); the LOG lines differ by how many of those consorts she knows by name (eaSay → kitKnownName) and the seed path"
   },
   {
    "n": "NPC 'sang cung' (jemoact)",
    "f": "l",
-   "re": "sang cung"
+   "re": "sang cung",
+   "band": [
+    0.4,
+    4
+   ],
+   "why": "NPC outbursts themselves happen at the base rate (EA_N.npcExt c:buon 238/185, c:vui 265/291, npcOut 1197/1162, khoe 154/161, khoc 127/126, thu 66/61 base/head, 4 seeds × 200 tuần); the LOG lines differ by how many of those consorts she knows by name (eaSay → kitKnownName) and the seed path"
   },
   {
    "n": "NPC 'khoe khoang' (jemoact)",
@@ -100,9 +125,9 @@
    "re": "gửi thư|viết thư",
    "band": [
     0.4,
-    3.5
+    4
    ],
-   "why": "NPC letters home are one of the jemoact outburst reactions: they follow how often NPCs are upset (2-3x noise between seed paths)"
+   "why": "NPC outbursts themselves happen at the base rate (EA_N.npcExt c:buon 238/185, c:vui 265/291, npcOut 1197/1162, khoe 154/161, khoc 127/126, thu 66/61 base/head, 4 seeds × 200 tuần); the LOG lines differ by how many of those consorts she knows by name (eaSay → kitKnownName) and the seed path"
   },
   {
    "n": "festival nights (Nguyên tiêu / Thất tịch / Trung thu)",
