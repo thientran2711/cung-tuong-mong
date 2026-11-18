@@ -1,9 +1,9 @@
 /* ================= j95s LIVE SERVANTS + REASONED RECORD (owner OD 18/11 ~19:30Z, OD L1901 points 2 + 3; brief live-servants) =================
    (2) Every maid / eunuch — HERS and everyone's (consorts, Hoàng hậu, Thái hậu's household) — lives her own day: a per-khắc plan of duties,
-       meals, breaks, errands, visits to a friend and sleep, each with its cause (law 6b real people). When her mistress goes out she takes SOME
-       of her people, not all: a retinue whose size comes from her rank (BAL.slv.ret, Hoàng hậu up to 5) and the place (BAL.slv.occ); the close
-       maid goes if she is free, otherwise whoever is free (weighted by trust); the rest stay on their own plans. The player's maids obey the
-       SAME rule (two-way law): her close maid no longer walks with her always.
+       meals, breaks, errands, visits to a friend, her daily rest turn and sleep (the night watch by turns), each with its cause (law 6b real people).
+       When her mistress goes out she takes the people she PICKED for the day (owner OD 18/11 ~19:45Z (4), canon overwrite of the old rank retinue):
+       the player in the entourage picker (end of this file), every NPC mistress once a day by her own reasons (trait, formal place, mood; trust
+       picks who, BAL.slv.ent) — two-way law; the rest stay on their own plans.
    (3) Every row of the ONE record (S.roster, j95) carries its real cause: the servants' rows name their plan / their mistress's order /
        the retinue pick; a last guard replaces an empty or filler reason ("phận sự trong cung", "phận sự", "") of anyone with the cause read
        from the row itself (her act, her target, the deed she walks to). Moves made after the plan (jagday deeds, events, j95fixHouse) are
@@ -14,20 +14,32 @@
    Off switch for measuring: BAL.slv.on = 0 (the old rows: close maid follows always, the others "phận sự trong cung").
    ===================================================================================================================================== */
 Object.assign(BAL,{slv:{on:1,
- /* retinue ceiling by consort rank 0..7 (owner OD L1901: "hoàng hậu ... 5 người tùy tùng", lower ranks fewer; never above the household BAL.promo.cap) */
- ret:[1,1,1,2,2,3,4,5],retTh:5,retNd:5,
- /* share of the ceiling she takes to a place (the Emperor / Thái hậu / court: full train; a stroll: fewer); others = occ._ */
- occ:{dtd:1,thu:1,tn:1,kn:.8,vuon:.6,tyv:.4,_:.6},
+ /* ENTOURAGE (owner OD 18/11 ~19:45Z point (4), CANON OVERWRITE of the old "retinue size by rank"): the player picks HOW MANY and WHO follow her the first
+    time each day she leaves her palace (one picker a day, no adding once out); every NPC mistress picks the same way once a day by her own reasons.
+    The NPC's share of her present + free people she takes: base, × her trait (pomp-lovers take more, the discreet few), × formal (going before the
+    Emperor / Thái hậu: a fuller train), × moodLow when her mood is low; at least one when anyone is free (she never walks alone unless nobody is free);
+    trust picks WHO (weight = lòng ^ loyalP); the close maid first when free unless her trait says otherwise (Kín đáo / Xảo quyệt take only the trusted). */
+ ent:{base:.5,tr:{"Kiêu ngạo":1.8,"Ham vui":1.4,"Tham vọng":1.3,"Ân cần":1,"Khiêm nhường":.5,"Kín đáo":.3,"Xảo quyệt":.4,"Lạnh lùng":.6},formal:{dtd:1.5,thu:1.5,tn:1.5},moodLow:.6,loyalP:2,trustOnly:["Kín đáo","Xảo quyệt"]},
  /* her day: weights of each kind of khắc by canonical buổi slot 0 sáng · 1 trưa · 2 chiều · 3 tối (serve, clean, eat, brk = break, err = errand, vis = visit a friend, sleep) */
  /* err + vis at khắc 0 = the share of buổi she spends out (one errand or visit, the whole buổi) */
  day:[{serve:40,clean:30,eat:10,brk:5,err:15,vis:0,sleep:0},{serve:30,clean:10,eat:25,brk:20,err:10,vis:5,sleep:0},{serve:25,clean:20,eat:0,brk:15,err:20,vis:15,sleep:0},{serve:30,clean:5,eat:15,brk:10,err:0,vis:5,sleep:35}],
  closeServe:2.5,/* the close maid serves her mistress this many times more often */
  sleepFrom:2,/* tối: sleep only from this khắc (0-based) */
+ sleepJit:1,/* + 0..sleepJit khắc per servant and day (some go to bed later: the late shift) */
+ /* REST RHYTHM (MAIN 18/11 20:07Z, law 6b): each servant has ONE rest turn a day ("nghỉ theo lượt") in the buổi drawn by rest.buoi (canonical slot weights
+    sáng · trưa · chiều · tối), rest.len khắc long; the night watch rotates through the household day by day, and last night's watcher sleeps in the
+    first afterWatch khắc of sáng ("ngủ bù") */
+ rest:{buoi:[10,55,35,0],len:[1,2]},afterWatch:2,
+ /* WITNESSES + GOSSIP (owner OD 18/11 ~19:45Z): who stands at a place at a khắc sees what happens there (record rows: only her companions see her day);
+    servants who meet (same place + khắc, in one of gos.acts) pass what they know: p (in 100) × (1 + qv(gos.q, the teller)), at most gos.hop hands from
+    the eye-witness; each servant keeps gos.keep items, an item is forgotten after gos.days days. A servant who learns a thing tells her mistress by
+    the kn chain's tell / keep choice (jagknow knTell; to the player: a TIN BÁO "bao" line). */
+ gos:{p:30,q:{chuyen:1,trung:-.2,nhat:-.5,lanh:.2},hop:3,keep:24,days:3,acts:["eat","brk","shift","visit","errand","stay","clean","follow"]},
  run:[1,2],/* one thing lasts 1..2 khắc */
  err:{nvp:30,tyv:25,ksp:20,tgk:15},illTyv:3,/* errand places; Thái y viện × illTyv when her mistress is ill / with child */
  friendAf:30,/* a colleague in another palace she visits = thiện cảm at least this */
  night:1/* servants of a household on night watch (tối, the khắc others sleep) */}});
-Object.assign(ACT95,{brk:"nghỉ tay giữa phiên",stay:"ở lại trông cung",nightw:"canh đêm"});
+Object.assign(ACT95,{brk:"nghỉ tay giữa phiên",stay:"ở lại trông cung",nightw:"canh đêm",shift:"nghỉ theo lượt"});
 const J95S={stat:{life:0,ret:0,close:0,fallback:0,guard:0,keep:0},errs:[],guardBy:{}};
 function j95sOn(){try{return !!(BAL.slv&&BAL.slv.on)}catch(e){return false}}
 function j95sErr(w,e){try{if(J95S.errs.length<20)J95S.errs.push(w+": "+(e&&e.message||e))}catch(x){}}
@@ -47,7 +59,6 @@ function j95sHouses(ppl){const H=new Map();const add=(o,q)=>{let h=H.get(o);if(!
  for(const p of ppl){if(p.kind==="mm"||p.kind==="st"){const o=p.ref;if(!o)continue;if(o!==S&&(!o.alive))continue;add(o,{id:p.id,kind:p.kind,close:p.kind==="mm",sv:p.kind==="st"?j95sv(p.id):null,name:p.name,home:p.home})}
   else if(p.kind==="el"&&p.ref&&!p.ref.eid&&p.home==="tn"&&!S.thDead)add("th",{id:p.id,kind:"el",close:false,sv:p.ref,name:p.name,home:"tn"})}
  return H}
-function j95sRetMax(o){const B=BAL.slv;try{if(o==="th")return B.retTh;if(o===S&&S.succ&&S.succ.p==="c")return B.retNd;const r=Math.max(0,Math.min(B.ret.length-1,rkOf(o)||0));return B.ret[r]}catch(e){return 1}}
 /* ---------- her own day (per khắc, deterministic per buổi) ---------- */
 function j95sErrand(o,r){const B=BAL.slv.err;const L=[];let ill=false;try{ill=o!=="th"&&o!==S?!!(illOf(o)||o.preg):!!(o===S&&(illOf(S)||S.preg))}catch(e){}
  for(const k in B){if(k==="nvp"&&!j95nvp())continue;L.push([k,B[k]*(k==="tyv"&&ill?BAL.slv.illTyv:1)])}const k=j95sPw(r,L);const ow=j95sOw(o);
@@ -57,9 +68,20 @@ function j95sFriend(q,o){const s=q.sv;if(!s||!s.af)return null;let best=null,ba=
  for(const k in s.af){const a=s.af[k];if(!(a>ba))continue;const x=J95S.sv?J95S.sv.get(+k):servById(+k);if(!x||x.out)continue;const m=ownerOf(x);if(!m||m===o||(m!==S&&(!m.alive||m.out)))continue;best=[x,m];ba=a}
  if(!best)return null;const pk=palaceOf(best[1]);return[pk,"visit","s"+best[0].sid,`hết phiên, sang ${j95sPn(pk)} thăm bạn thân ${best[0].name}`]}
 function j95sServeWhy(c,ow){return ["hầu "+ow+" chải đầu, dâng trà sáng","dọn bữa trưa, hầu "+ow,"hầu "+ow+" buổi chiều","hầu "+ow+" dùng bữa tối, sửa soạn nghỉ"][c]||"hầu "+ow}
-function j95sLife(R,q,o,hk,watch){const B=BAL.slv;const c=R.c;const r=j95sRng(R,q.id);const ow=j95sOw(o);const oid=j95sOid(o);const W=Object.assign({},B.day[c]||B.day[0]);
+/* ---------- the rest rhythm (MAIN 18/11 20:07Z): per servant and DAY — her rest turn, her bedtime, the household's night watch by turns ---------- */
+function j95sRhythm(q,ix,n){const B=BAL.slv;const d=j95sDay();const r=j95rng(j95hash(j95seed()+"|rest|"+d+"|"+q.id));
+ const c=j95sPw(r,B.rest.buoi.map((w,i)=>[i,w]));const len=B.rest.len[0]+Math.floor(r()*(B.rest.len[1]-B.rest.len[0]+1));const k0=Math.floor(r()*(4-len+1));
+ const sl=Math.min(3,B.sleepFrom+Math.floor(r()*(B.sleepJit+1)));const wn=Math.min(B.night,n);const rot=x=>((x%n)+n)%n;
+ let watch=false,slept=false;for(let i=0;i<wn;i++){if(rot(d+i)===ix)watch=true;if(rot(d-1+i)===ix)slept=true}
+ return{c,k0,len,sl,watch,slept:slept&&n>wn}}
+function j95sLife(R,q,o,hk,Y){const B=BAL.slv;const c=R.c;const r=j95sRng(R,q.id);const ow=j95sOw(o);const oid=j95sOid(o);const W=Object.assign({},B.day[c]||B.day[0]);const watch=Y.watch;
  if(q.close)W.serve*=B.closeServe;if(!q.sv||q.kind==="el")W.vis=0;/* a visit needs a friend she has (servants with a thiện cảm book) */
- const out=[];let i=0;while(i<4){let w=Object.assign({},W);if(c!==3||i<B.sleepFrom)w.sleep=0;
+ const out=[];let i=0;
+ /* last night's watcher sleeps in at the start of sáng; the rest turn of the day; bedtime of the day (Y.sl) */
+ if(c===0&&Y.slept)for(;i<Math.min(4,B.afterWatch);i++)out.push([hk,"sleep",null,"ngủ bù sau phiên canh đêm đêm qua"]);
+ while(i<4){if(c===Y.c&&i===Y.k0&&i+Y.len<=4){for(let j=0;j<Y.len;j++,i++)out.push([hk,"shift",null,`đến lượt nghỉ của nàng (khắc ${Y.k0+1}–${Y.k0+Y.len}, mỗi ngày một lượt)`]);continue}
+  let w=Object.assign({},W);if(c!==3||i<Y.sl)w.sleep=0;else w={sleep:1};/* from her bedtime on she sleeps (the watcher keeps watch) */
+  if(c===Y.c)w.err=w.vis=0;/* her rest turn is in this buổi: she stays in */
   /* a walk out of her palace (an errand, a visit to a friend) takes the whole buổi: she sets out and comes back with the buổi change, never
      in the middle (her mistress's stage changes at the buổi change anyway; perf gate 4x per khắc) — at most one per buổi, decided at khắc 0 */
   if(i>0)w.err=w.vis=0;let k=j95sPw(r,Object.entries(w));let len=B.run[0]+Math.floor(r()*(B.run[1]-B.run[0]+1));let row;
@@ -67,25 +89,50 @@ function j95sLife(R,q,o,hk,watch){const B=BAL.slv;const c=R.c;const r=j95sRng(R,
   if(k==="vis"){row=j95sFriend(q,o);if(!row)k="brk"}
   if(k==="err")row=hk==="lc"?null:j95sErrand(o,r);if(k==="err"&&!row)k="clean";
   if(k==="sleep"&&watch)row=[hk,"nightw",oid,`đến phiên canh đêm cho ${ow}`];
-  else if(k==="sleep")row=[hk,"sleep",null,"hết phiên, về phòng cung nhân ngủ"];
+  else if(k==="sleep")row=[hk,"sleep",null,`hết phiên, về phòng cung nhân ngủ (giờ ngủ của nàng: khắc ${Y.sl+1} buổi tối)`];
   if(!row){row=k==="serve"?[hk,"serve",oid,j95sServeWhy(c,ow)]:k==="clean"?[hk,"clean",oid,`đến phiên quét dọn ${hk==="lc"?"chỗ ở của "+ow:j95sPn(hk)}`]:k==="eat"?[hk,"eat",null,"đến giờ cơm của cung nhân"]:[hk,"brk",null,"xong việc, nghỉ tay trong phòng cung nhân"]}
-  for(let j=0;j<len&&i<4;j++,i++)out.push(row.slice())}
+  for(let j=0;j<len&&i<4;j++,i++){if(c===Y.c&&i===Y.k0&&i+Y.len<=4&&j>0)break;if(c===3&&i>=Y.sl&&k!=="sleep"&&j>0)break;out.push(row.slice())}}
  return out}
-/* ---------- the retinue ---------- */
-function j95sOcc(k){const O=BAL.slv.occ;if(O[k]!=null)return O[k];return /^r\d+$/.test(k||"")?O.kn:O._}
-function j95sPick(R,o,oid,H,k,s0,base,kh,prev){const r=j95sRng(R,"ret|"+oid+"|"+s0+"|"+k);const max=j95sRetMax(o);
- const free=H.filter(q=>!j95sBusy(base[q.id][Math.max(s0,kh)]));
+/* ---------- THE ENTOURAGE (owner OD 18/11 ~19:45Z (4)) — one pick a day per mistress: the player in the picker (below), every NPC by her own reasons ---------- */
+/* free = she can be taken along now: at her palace, not on a deed / meeting / errand / visit of her own, not asleep or on her rest turn */
+function j95sFree(x,hk){return !!x&&!j95sBusy(x)&&x[0]===hk&&x[1]!=="sleep"&&x[1]!=="nightw"&&x[1]!=="shift"}
+function j95sNotFree(x){if(!x)return"không có trong cung";const a=x[1]||"";if(a==="sleep")return"đang ngủ";if(a==="shift")return"đang nghỉ theo lượt";if(a==="nightw")return"đang canh đêm";
+ const w=ACT95[a]||String(a).replace(/^ag_/,"");return x[0]&&x[0]!=="home"&&!/^r\d+$/.test(x[0])?`${w} ở ${j95sPn(x[0])}`:`đang ${w}`}
+function j95sDay(){try{return wk()}catch(e){return 0}}
+/* the day's pick store (personal, lazy; old saves load): S.ent = the player's {d, ids, at}; S.entN = {d, P:{oid:{ids, why}}} the NPC mistresses' */
+function j95sEntN(){const d=j95sDay();if(!S.entN||S.entN.d!==d)S.entN={d,P:{}};return S.entN}
+/* an NPC mistress picks once a day at her first outing: how many by her reasons (trait, formal place, mood), who by trust */
+function j95sNpcPick(R,o,oid,H,k,free){const B=BAL.slv.ent;const r=j95rng(j95hash(j95seed()+"|ent|"+j95sDay()+"|"+oid));let tr=[];try{tr=o==="th"?traitsOf("th"):traitsOf(o)}catch(e){}
+ let f=B.base,why=[];for(const t of tr)if(B.tr[t]!=null){f*=B.tr[t];why.push(t.toLowerCase())}
+ if(B.formal[k]){f*=B.formal[k];why.push("đi chầu nên cần đủ lễ")}
+ try{const e=o!=="th"&&typeof emoGet==="function"?emoGet(o):null;if(e&&e.v>=40&&emoLv(e.k)>=2){f*=B.moodLow;why.push("tâm trạng không vui")}}catch(x){}
+ if(!free.length)return{ids:[],why:"không ai rảnh"};
+ const n=Math.max(1,Math.min(free.length,Math.round(free.length*Math.min(1,f)+(r()-.5))));
+ const trust=tr.some(t=>B.trustOnly.includes(t));const cl=free.find(q=>q.close);const mem=[];
+ const lv=q=>Math.max(5,q.close?100:((q.sv&&q.sv.loyal)||50));const lw=q=>Math.pow(lv(q)/50,B.loyalP);
+ if(cl)mem.push(cl);/* the close maid first when she is free */
+ const pool=free.filter(q=>!mem.includes(q));if(trust)pool.sort((x,y)=>lv(y)-lv(x));/* the discreet / scheming take the most trusted, no chance */
+ while(mem.length<n&&pool.length){const q=trust?pool[0]:j95sPw(r,pool.map(x=>[x,lw(x)]));mem.push(q);pool.splice(pool.indexOf(q),1)}
+ const ow=j95sOw(o);const cBusy=H.find(q=>q.close&&!free.includes(q));
+ const w=(cBusy?`cung nữ thân cận ${cBusy.name} không rảnh, `:"")+`${ow} chọn ${mem.length===H.length&&H.length>1?"cả "+mem.length+" người":mem.length+" người"} theo hầu`+(why.length?` (${why.join(", ")})`:"")+(trust?", chỉ người tin cẩn":"");
+ return{ids:mem.map(q=>q.id),why:w}}
+/* the player's pick of today, or (no picker today: a summons, an event moved her) the NPC rule for her too, said so in the reason */
+function j95sPickOf(R,o,oid,H,k,free){const d=j95sDay();
+ if(o===S){const E=S.ent;if(E&&E.d===d)return{ids:(E.ids||[]).slice(),why:E.ids&&E.ids.length?`ngươi chọn ${E.ids.length} người theo hầu hôm nay`:"ngươi đi một mình hôm nay",me:1};
+  const P=j95sNpcPick(R,o,oid,H,k,free);P.why="ngươi đi gấp, không kịp chọn: "+P.why.replace(/^.*?ngươi chọn/,"theo lệ chọn");return P}
+ /* stored once she really takes someone; nobody free at this outing → she walks alone now and picks at her next outing */
+ const N=j95sEntN();if(N.P[oid])return N.P[oid];const P=j95sNpcPick(R,o,oid,H,k,free);if(P.ids.length)N.P[oid]=P;return P}
+function j95sPick(R,o,oid,H,k,s0,base,kh,prev){
  /* an outing already under way (started before this khắc): those already walking with her stay with her */
- if(prev&&prev.length)return{mem:H.filter(q=>prev.includes(q.id)&&!j95sBusy(base[q.id][kh])),close:null,why0:null};
- const n=Math.min(free.length,Math.max(1,Math.ceil(max*j95sOcc(k))));if(!n)return{mem:[]};
- const mem=[];const cl=H.find(q=>q.close);let why0=null;
- if(cl&&free.includes(cl))mem.push(cl);else if(cl){const x=base[cl.id][Math.max(s0,kh)];why0=`cung nữ thân cận ${cl.name} đang bận (${ACT95[x[1]]||String(x[1]).replace(/^ag_/,"")})`}
- const pool=free.filter(q=>!mem.includes(q));while(mem.length<n&&pool.length){const q=j95sPw(r,pool.map(x=>[x,Math.max(5,(x.sv&&x.sv.loyal)||50)]));mem.push(q);pool.splice(pool.indexOf(q),1)}
- return{mem,close:cl&&mem.includes(cl)?cl:null,why0}}
+ if(prev&&prev.length)return{mem:H.filter(q=>prev.includes(q.id)&&!j95sBusy(base[q.id][kh])),why:null};
+ const at=Math.max(s0,kh);const free=H.filter(q=>j95sFree(base[q.id][at],q.home));const P=j95sPickOf(R,o,oid,H,k,free);
+ /* the day's pick ∩ who is still free now (a picked maid called away by a deed does not walk; nobody is added once out) */
+ const mem=H.filter(q=>P.ids.includes(q.id)&&free.includes(q));const gone=H.filter(q=>P.ids.includes(q.id)&&!free.includes(q));
+ return{mem,why:P.why+(gone.length?`; ${gone.map(q=>q.name+" "+j95sNotFree(base[q.id][at])).join(", ")}`:"")}}
 function j95sPass(R,kh,ppl){if(!j95sOn())return 0;const t0=performance.now();let n=0;const st=J95S.stat;const H=j95sHouses(ppl);
  /* nothing changed since the last pass (same buổi and khắc, same places of every mistress, same households and planned deeds, and her
     people's rows are still the ones written then): skip — j95sync runs several times per khắc (perf gate: 4x per-khắc ≤ +10 %) */
- let dOn=false;try{dOn=typeof agDOn==="function"&&agDOn()}catch(e){}let sig=R.key;const mem=[];
+ let dOn=false;try{dOn=typeof agDOn==="function"&&agDOn()}catch(e){}let sig=R.key+"|"+(S.ent&&S.ent.d===j95sDay()?S.ent.ids.join(","):"-");const mem=[];
  for(const [o,hh] of H){const oid=j95sOid(o);const op=R.P[oid];sig+="|"+oid+":";if(op)for(let i=0;i<4;i++)sig+=(op[i]&&op[i][0])+",";sig+=":";
   for(const q of hh){sig+=q.id+"/"+q.home;if(dOn&&q.kind==="st"){const sl=agDaySlot(q.id);if(sl&&sl.k)sig+="/"+sl.k}sig+=",";mem.push(q.id)}}
  const LS=J95S.last;if(LS&&LS.R===R&&LS.sig===sig){let same=true;for(const id of mem){const e=R.P[id],w=LS.rows[id];if(!e||!w){same=false;break}for(let i=0;i<4;i++){const x=e[i],y=w[i];if(x!==y&&(!x||!y||x[0]!==y[0]||x[1]!==y[1]||x[2]!==y[2]||x[3]!==y[3])){same=false;break}}if(!same)break}
@@ -97,21 +144,21 @@ function j95sPass(R,kh,ppl){if(!j95sOn())return 0;const t0=performance.now();let
  for(const [o,hh] of H){const oid=j95sOid(o);if(o===S&&typeof isSrv==="function"&&isSrv())continue;
   const op=R.P[oid];const hk0=hh[0].home;if(!op)continue;
   /* her people's own rows first (kept rows stay, the rest = their day); one servant per household keeps the night watch */
-  const base={};const wn=Math.min(BAL.slv.night,hh.length);
+  const base={};
   hh.forEach((q,ix)=>{const e=R.P[q.id];if(!e)return;const hk=q.home;let L=null;
    /* a deed she planned for this buổi (jagday / jagstaff slot) is where she is */
    try{if(q.kind==="st"&&typeof agDOn==="function"&&agDOn()){const sl=agDaySlot(q.id);if(sl&&sl.k)L=agRow(sl)}}catch(x){}
-   if(!L){const ck=q.id+"|"+hk+"|"+(ix<wn?1:0);L=hk==="lc"?null:(LC[ck]||(LC[ck]=j95sLife(R,q,o,hk,ix<wn)))}
+   if(!L&&hk!=="lc"){const Y=j95sRhythm(q,ix,hh.length);const ck=q.id+"|"+hk+"|"+[Y.c,Y.k0,Y.len,Y.sl,Y.watch?1:0,Y.slept?1:0].join(",");L=LC[ck]||(LC[ck]=j95sLife(R,q,o,hk,Y))}
    const b=[];for(let i=0;i<4;i++){const x=e[i];b.push(i<kh||j95sKeep(x)||!L?x:L[i])}base[q.id]=b});
   /* her outings from this khắc on: runs of khắc away from home */
   const away=i=>{const k=op[i]&&op[i][0];return !!k&&k!==hk0&&k!=="lc"&&k!==J95OUT_&&hk0!=="lc"};
   const ret={};/* id → [i...] */const why={};
   for(let i=kh;i<4;){if(!away(i)){i++;continue}const k=op[i][0];let s0=i;while(s0>0&&op[s0-1]&&op[s0-1][0]===k)s0--;let e0=i;while(e0+1<4&&op[e0+1]&&op[e0+1][0]===k)e0++;
    let prev=null;if(s0<kh){prev=hh.filter(q=>{const x=R.P[q.id]&&R.P[q.id][kh-1];return x&&x[1]==="follow"&&x[2]===oid}).map(q=>q.id)}
-   const P=j95sPick(R,o,oid,hh,k,s0,base,kh,prev);const ow=j95sOw(o);const nm=P.mem.length;
-   for(const q of P.mem){const w=prev&&prev.length?`theo hầu ${ow} ở ${j95sPn(k)} (đi cùng từ đầu)`:q===P.close?`${ow} sang ${j95sPn(k)}, cung nữ thân cận theo hầu`:P.why0?`${P.why0}, nên ${ow} chọn ${q.name} theo hầu`:`${ow} sang ${j95sPn(k)}, chọn theo hầu (tùy tùng ${nm} người)`;
+   const P=j95sPick(R,o,oid,hh,k,s0,base,kh,prev);const ow=j95sOw(o);
+   for(const q of P.mem){const w=prev&&prev.length?`theo hầu ${ow} ở ${j95sPn(k)} (đi cùng từ đầu)`:`${ow} sang ${j95sPn(k)}: ${P.why}`;
     for(let j=Math.max(i,kh);j<=e0;j++){if(j95sKeep(base[q.id][j]))break;/* only a deed / meeting takes her away mid-outing; her own day waits */(ret[q.id]=ret[q.id]||{})[j]=[k,"follow",oid,w]}
-    st.ret++;if(q===P.close)st.close++;else if(P.why0)st.fallback++}
+    st.ret++;if(q.close)st.close++}
    i=e0+1}
   /* write: retinue rows, else her day (while her mistress is out, serving = staying behind to keep the palace) */
   for(const q of hh){const e=R.P[q.id],b=base[q.id];if(!e||!b)continue;for(let i=kh;i<4;i++){let x=ret[q.id]&&ret[q.id][i];
@@ -149,3 +196,42 @@ function j95here(k,kh){try{const R=S.roster;if(!R||R.key!==j95key()||!k)return[]
 function j95whereId(id,kh){try{const R=S.roster;if(!R||R.key!==j95key())return null;kh=kh==null?j95kh():kh;const x=R.P[id]&&R.P[id][kh];if(!x)return null;
  return{place:x[0],placeName:j95sPn(x[0]),act:ACT95[x[1]]||x[1],tgt:x[2]?((R.who[x[2]]||[x[2]])[0]):"",why:x[3]||"",kh}}catch(e){return null}}
 Object.assign(window,{j95here,j95whereId});
+/* ================= THE PLAYER'S ENTOURAGE PICKER (owner OD 18/11 ~19:45Z point (4), verbatim in the brief) =================
+   The FIRST time in a day she leaves her palace (a place tapped on Dư đồ, or an act that walks her there), ONE card asks who follows her: any number,
+   up to all her people who are at the palace AND free now (close maid + maids + eunuchs); one who is out, asleep, on her rest turn or busy is shown
+   greyed with the reason (kit GREYED OPTION, jgrey kitOff). Tap a person = picked / not picked (kit option row + the kit selection outline .ksel,
+   aria-pressed, the same pattern as the identity card's road choice). "Lên đường" walks with the picked ones, "Đi một mình" alone, "Thôi" = she stays
+   (the card comes again on her next departure). Once she has left, the picker does not come back that day (no adding people once out); the pick
+   holds for every outing of the day (each time: the picked ones who are still free). Store: S.ent = {d: day, ids, at}. Kit parts only (dialog card,
+   option rows, .ksel, kitOff). Gain and loss (law 3): who walks with her sees what she sees (more eyes: news reaches her from them, jagknow), and
+   knows what she does there (more mouths: they may tell it on, the gossip chain); who stays keeps the palace. Two-way: NPC mistresses pick by
+   j95sNpcPick. Off in co-op (j95on false: the record is off there) and for a servant start (isSrv) / a home life (isKc). */
+function j95sMine(){const R=S.roster;if(!R||R.key!==j95key())return[];const kh=j95kh();const L=[];
+ const add=(id,s,role,close)=>{const e=R.P[id];if(!e)return;const x=e[kh];L.push({id,s,name:s.name,role,close,x,free:j95sFree(x,"home")})};
+ if(S.maid&&S.maid.name)add("mm:me",S.maid,"Cung nữ thân tín",true);
+ for(const s of S.staff||[])if(s&&!s.out&&s.sid!=null)add("s"+s.sid,s,s.role==="eunuch"?"Thái giám":"Cung nữ",false);
+ return L}
+function j95sEntAsk(k){const L=j95sMine();if(!L.some(p=>p.free))return false;/* nobody free: no card, she goes alone; the card comes at her next departure */
+ const opts=L.map(p=>{const c={n:p.name,fx:{},entId:p.id,sel:p.free&&p.close,x:`kèm: ${p.role.toLowerCase()} (lòng ${Math.round(p.s.loyal||0)}) ${p.free?"đang ở cung và rảnh":j95sNotFree(p.x)}`};
+  if(!p.free)kitOff(c,j95sNotFree(p.x),"không theo được hôm nay");return c});
+ const go=ids=>{S.ent={d:j95sDay(),ids,at:k};let ok=false;try{goTo(k);ok=S.place!=="home"||Q.length>0}catch(e){j95sErr("ent",e)}if(!ok)delete S.ent;/* she did not leave (a gate, no khắc): the card comes again */};
+ const goOpt={n:"Lên đường",fx:{},entGo:1,x:"",go:()=>go(opts.filter(c=>c.entId&&c.sel&&!c.off).map(c=>c.entId))};
+ opts.push(goOpt,{n:"Đi một mình",fx:{},x:"thành: không ai biết việc ngươi làm bên ngoài · mất: không ai thấy giùm ngươi; mọi người ở lại trông cung",go:()=>go([])},{n:"Thôi",fx:{},x:""});
+ j95sEntX(opts);
+ let who=null;try{who=S.maid&&typeof pMaid==="function"?pMaid():null}catch(e){}
+ Q.push({t:"Chọn người theo hầu",who,h:`<p>Hôm nay ra khỏi cung, ngươi dẫn ai theo? Chọn bao nhiêu người cũng được, trong những người đang ở cung và rảnh. Đã đi rồi thì hôm nay không gọi thêm người được nữa.</p><p class="past">Người theo hầu thấy những gì ngươi thấy, có thêm tai mắt cho ngươi; nhưng họ cũng biết việc ngươi làm và có thể kể lại với người khác. Người ở lại trông cung.</p>`,opts,entp:1});
+ showModal();return true}
+function j95sEntX(opts){const g=opts.find(c=>c.entGo);if(!g)return;const n=opts.filter(c=>c.entId&&c.sel&&!c.off);
+ g.x=n.length?`thành: ${n.length} người theo (${n.map(c=>c.n).join(", ")}), thấy giùm ngươi những gì xảy ra · mất: họ biết việc ngươi làm, có thể kể lại với người khác`:"kèm: chưa chọn ai, bấm vào tên để chọn người theo";
+ if(!n.length)kitOff(g,"chưa chọn ai","bấm vào tên người muốn dẫn theo");else delete g.off}
+/* the picked rows wear the kit selection outline; a tap on a person toggles her (the card stays open) */
+function j95sEntMark(){const m=Q[0];if(!m||!m.entp)return;document.querySelectorAll("#modal .opt[data-m]").forEach(b=>{const c=m.opts[+b.dataset.m];if(!c||!c.entId)return;b.classList.toggle("ksel",!!c.sel);b.setAttribute("aria-pressed",c.sel?"true":"false")})}
+(function(){const s0=showModal;showModal=function(){const r=s0.apply(this,arguments);try{j95sEntMark()}catch(e){}return r}})();
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#modal .opt[data-m]");if(!b)return;const m=Q[0];if(!m||!m.entp)return;const c=m.opts[+b.dataset.m];if(!c||!c.entId)return;
+ e.preventDefault();e.stopImmediatePropagation();if(c.off)return;c.sel=!c.sel;j95sEntX(m.opts);showModal()},true);
+/* the gate: her first departure of the day from her palace asks first (inner gates — access card, walk — still run when she really goes) */
+function j95sEntNeed(k){try{if(!j95sOn()||!j95on()||!S||S.dead||S.out||S.confined||Q.length)return false;if(!k||k==="home"||S.place!=="home"||k===S.place)return false;
+  if(window.__accSilent||window.__accStay||window.__j95sEntOff)return false;if(typeof isSrv==="function"&&isSrv())return false;if(typeof isKc==="function"&&isKc())return false;
+  if(S.ent&&S.ent.d===j95sDay())return false;if(typeof accessOf==="function"){const a=accessOf(S,k);if(a&&!a.ok)return false}return true}catch(e){return false}}
+(function(){const g0=goTo;goTo=function(k){if(j95sEntNeed(k)&&j95sEntAsk(k))return;return g0.apply(this,arguments)}})();
+Object.assign(window,{j95sMine,j95sEntAsk});

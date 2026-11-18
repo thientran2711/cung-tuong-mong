@@ -67,6 +67,10 @@ function knThere(id,h,w){const now=agKh();if(now<w[0])return false;for(let kh=w[
 function knSlotK(s){try{const sl=typeof agDaySlot==="function"?agDaySlot("s"+s.sid):null;if(sl&&sl.k)return sl.k;const P=S.agS&&S.agS.d===wk()&&S.agS.P[s.sid];const x=P&&P[Math.min(3,S.buoi||0)];return x&&x.k||""}catch(e){return""}}
 function knSrvKnows(s,m,h,w,hid){const sk=knSid(s,m);
  /* the confidant maid has no row and no plan: she is about her mistress's errands all day and listens on her own (the "Nghe ngóng" odds × her lòng) */
+ /* live servants (j95s, owner OD 18/11 ~19:45Z (4)): she has a row now — she knows it only where she stood (with her mistress when picked to follow,
+    at the palace otherwise); out on an errand or a visit she may overhear it on the way (the same "Nghe ngóng" odds) */
+ if(s.sid==null&&knwMid(s,m)){const mid=knwMid(s,m);if(knThere(mid,h,w))return"here";const R=agRec();const x=R&&R.P[mid]&&R.P[mid][Math.min(agKh(),J95.KH-1)];
+  return x&&(x[1]==="errand"||x[1]==="visit")&&knHit("l"+sk+"|"+hid,odA(s,SRVA.listen.o(s))*cl(s.loyal||0,0,100)/100)?"listen":""}
  if(s.sid==null)return knHit("l"+sk+"|"+hid,odA(s,SRVA.listen.o(s))*cl(s.loyal||0,0,100)/100)?"listen":"";
  if(knThere("s"+s.sid,h,w))return"here";const k=knSlotK(s);
  if(/:watch$/.test(k)&&m&&h.k===palaceOf(m))return"watch";
@@ -89,7 +93,7 @@ function knFor(x,h,noFriend){if(!x)return null;const hid=knHid(h);const M=knMemo
  const now=agKh(),D=knRelay();
  if(!r){for(const s of knStaff(x)){const how=knSrvKnows(s,x,h,w,hid);if(!how)continue;const q=Math.max(how==="here"&&s.sid!=null?knFirst("s"+s.sid,h,w):w[0],w[0]);
    /* the confidant maid walks with her mistress (one khắc to step aside and tell); any other servant walks from where she saw / heard it */
-   const at=q+(s.sid==null?Math.min(1,D):knWalkTo(knSrvFrom(s,how,h),id,q));if(at>now){KN.stat.wait=(KN.stat.wait||0)+1;continue}/* still on her way to tell */if(knTell(s,x,hid)==="tell"){r={by:"s"+knSid(s,x),how,s,at};break}}}
+   const at=q+(s.sid==null&&!knwMid(s,x)?Math.min(1,D):knWalkTo(knSrvFrom(s,how,h),id,q));if(at>now){KN.stat.wait=(KN.stat.wait||0)+1;continue}/* still on her way to tell */if(knTell(s,x,hid)==="tell"){r={by:"s"+knSid(s,x),how,s,at};break}}}
  if(!r){let o=0;try{o=oSee(x,false)*knB().eye/100}catch(e){}if(knHit("e"+id+"|"+hid,o)){const at=w[0]+knWalkTo(h.k,id,w[0]);/* her Tai mắt / a passer-by walks from the place to her */if(at<=now){r=knEye(x,h,hid);if(r)r.at=at}}}
  if(!r&&!noFriend){const F=knB().friend;for(const v of liveRivals(true)){if(v===x||!v.alive||v.out)continue;const a=aff(v,x);if(a<F)continue;/* the news travels when they meet (same place this khắc), or a close friend sends word (aff ≥ close) */const meet=(()=>{const nw=agKh();return knAt(id,nw)!=null&&knAt("v"+v.id,nw)===knAt(id,nw)})();if(a<knB().close&&!meet)continue;const k=knFor(v,h,true);if(!k||k.by==="le"||k.how==="self")continue;
    let fa=now;if(!meet&&D>0){const ka=M.at["v"+v.id+"|"+hid+"|n"];if(ka==null)continue;fa=ka+knWalkTo(knAt("v"+v.id,ka),id,ka);if(fa>now)continue}/* sending word: her messenger's real walk from where she was when she knew to x (AG-ALL-2d4) */
@@ -485,3 +489,53 @@ function knSellArc(A,ok){if(!ok||!knOn())return"";const r=knSellPick(S);if(!r)re
  try{if(typeof GB67==="object"&&GB67.spy&&GB67.spy.o){for(const i of [0,1]){const op=GB67.spy.o[i];if(!op)continue;const g0=op.go;op.go=function(A,ok){let a="";try{a=g0?g0.apply(this,arguments)||"":""}catch(e){}return [a,knSellArc(A,ok)].filter(Boolean).join(" ")}}}}catch(e){}
 })();
 Object.assign(window,{btTerms,btRaw,btOdds,tmFear,knSellNews,knSellPick,knSellGive,knSellCard,knSellNpcBuy,knSellTick,knSellPrice,knSellArc});
+
+/* ================= WITNESSES + GOSSIP — the per-servant knowledge record (owner OD 18/11 ~19:45Z (4); brief live-servants #2) =================
+   Owner (verbatim): "Chỉ có những người mình dẫn theo thì mới biết được những cái thông tin mà mình thấy ngay ngày hôm đó ... sẽ có cung nữ biết chuyện
+   này, sẽ có cung nữ biết chuyện kia đó. Rồi nhiều khi họ truyền tay nhau, bởi vì cái tính người ta nhiều chuyện đó, thì về người ta mới kể lại".
+   ONE record S.knw (personal, lazy; old saves load): I = the things that happened {w what, pl place, wk day, b buổi, kh khắc, ab about whom},
+   K[record id] = {item: [from, hop]} — who knows what, from whom ("saw" = she stood there; else the record id of the one who told her).
+   1. SEEN: a deed that lands (agLand, every NPC's deed; twDo for the player's own shared deeds) is seen by every servant whose record row stands at
+      that place at that khắc (not asleep): her companions see her day, those left at home do not (rows from j95s: the picked entourage).
+   2. GOSSIP: each khắc, servants who stand at one place in a talking act (BAL.slv.gos.acts: meals, breaks, rest turn, visits, errands, keeping the
+      palace, walking in a train) pass what they know: p × (1 + qv(gos.q, the teller)) (a chatty one more, a timid one less), at most gos.hop hands.
+   3. TOLD UP: a servant who learns a thing (seen or heard) tells HER mistress by the chain's own choice (knTell: tell / keep / sell by lòng and nết),
+      unless the mistress was there or it is about herself; the player gets it as a TIN BÁO "bao" line in the servant's voice (knBao); an NPC
+      mistress then knows it (K["v<id>"]). Two-way: the same rule for every household. Numbers BAL.slv.gos (j95s). */
+function knwOn(){try{return knOn()&&typeof j95sOn==="function"&&j95sOn()&&j95on()}catch(e){return false}}
+function knwMid(s,m){try{if(!m||!(typeof j95sOn==="function"&&j95sOn()))return"";if(m===S&&S.maid===s)return"mm:me";if(m!==S&&m.maid===s)return"mm:"+m.id;return""}catch(e){return""}}
+function knwSt(){const d=wk();const Z=S.knw||(S.knw={I:{},K:{},n:0,d});if(Z.d!==d){Z.d=d;const G=BAL.slv.gos;for(const i in Z.I)if(Z.I[i].wk<d-G.days)delete Z.I[i];for(const k in Z.K){for(const i in Z.K[k])if(!Z.I[i])delete Z.K[k][i];if(!Object.keys(Z.K[k]).length)delete Z.K[k]}Z.seen={}}return Z}
+function knwSrv(id){return /^s\d+$/.test(id)||id.indexOf("mm:")===0}
+function knwObj(id){try{if(id==="mm:me")return{s:S.maid,m:S};if(id.indexOf("mm:")===0){const v=RV(+id.slice(3));return v&&v.maid?{s:v.maid,m:v}:null}const s=j95sv(id);return s?{s,m:ownerOf(s)}:null}catch(e){return null}}
+function knwAdd(Z,id,iid,from,hop){const K=Z.K[id]||(Z.K[id]={});if(K[iid])return false;K[iid]=[from,hop];const ks=Object.keys(K);if(ks.length>BAL.slv.gos.keep)delete K[ks[0]];return true}
+function knwName(id){try{const R=agRec();return (R&&R.who&&R.who[id]&&R.who[id][0])||id}catch(e){return id}}
+/* she tells her mistress (or keeps it): the chain's own choice */
+function knwUp(Z,id,iid){const I=Z.I[iid];const o=knwObj(id);if(!I||!o||!o.s||!o.m)return;const m=o.m;const mk=m===S?"me":"v"+m.id;if(I.ab===mk)return;
+ const mz=Z.K[mk]&&Z.K[mk][iid];if(mz)return;/* she knows already (she was there, or another told her) */
+ let c="keep";try{c=knTell(o.s,m,"knw:"+iid)}catch(e){}if(c!=="tell")return;const fr=Z.K[id][iid][0];
+ knwAdd(Z,mk,iid,id,Z.K[id][iid][1]+1);
+ if(m===S){const what=(fr==="saw"?`tận mắt thấy ở ${agPlaceTxt(I.pl)}: `:`nghe ${knwName(fr)} kể: `)+I.w;try{knBao(o.s,S,what,I.pl,I.b!==(S.buoi||0)||I.wk!==wk())}catch(e){}}}
+function knwSee(pl,kh,what,ab,key){if(!knwOn()||!pl)return 0;const R=agRec();if(!R||!R.P)return 0;const Z=knwSt();Z.seen=Z.seen||{};if(key){if(Z.seen[key])return 0;Z.seen[key]=1}
+ const iid="i"+wk()+"."+(++Z.n);Z.I[iid]={w:what,pl,wk:wk(),b:S.buoi||0,kh,ab};const L=[];
+ for(const id in R.P){const x=R.P[id][kh];if(!x||x[0]!==pl)continue;if(knwSrv(id)){if(x[1]==="sleep")continue;if(knwAdd(Z,id,iid,"saw",0))L.push(id)}
+  else if(id==="me"||/^v\d+$/.test(id))knwAdd(Z,id,iid,"saw",0)}/* the mistresses who stood there saw it too (they need no telling) */
+ if(!L.length){for(const k in Z.K)delete Z.K[k][iid];delete Z.I[iid];return 0}
+ for(const id of L)knwUp(Z,id,iid);KN.stat.knwSee=(KN.stat.knwSee||0)+L.length;return L.length}
+/* the khắc's gossip: servants at one place in a talking act share what they know */
+function knwGossip(){if(!knwOn())return 0;const R=agRec();if(!R||!R.P||R.key!==j95key())return 0;const kh=j95kh();const Z=knwSt();const gk=R.key+":"+kh;if(Z.gk===gk)return 0;Z.gk=gk;
+ const G=BAL.slv.gos;const A=new Set(G.acts);const by={};let n=0;
+ for(const id in Z.K){if(!knwSrv(id))continue;const x=R.P[id]&&R.P[id][kh];if(!x||!A.has(x[1]))continue;(by[x[0]]=by[x[0]]||[]).push(id)}
+ for(const id in R.P){if(!knwSrv(id)||Z.K[id])continue;const x=R.P[id][kh];if(!x||!A.has(x[1])||!by[x[0]])continue;by[x[0]].push(id)}
+ for(const pl in by){const L=by[pl];if(L.length<2)continue;
+  for(const a of L){const K=Z.K[a];if(!K)continue;const o=knwObj(a);const q=o&&o.s?qv(G.q,o.s,0):0;
+   for(const iid in K){const [,hop]=K[iid];if(hop>=G.hop||!Z.I[iid])continue;
+    for(const b of L){if(b===a||(Z.K[b]&&Z.K[b][iid]))continue;if(!knHit("g"+gk+"|"+a+">"+b+"|"+iid,G.p*(1+q)))continue;if(knwAdd(Z,b,iid,a,hop+1)){n++;knwUp(Z,b,iid)}}}}}
+ KN.stat.knwGos=(KN.stat.knwGos||0)+n;return n}
+/* who knows a thing / what one person knows (dev + tests; roster.js --who reads S.knw from the save) */
+function knwOf(id){const Z=S.knw;if(!Z||!Z.K[id])return[];return Object.keys(Z.K[id]).map(i=>Object.assign({id:i,from:Z.K[id][i][0],hop:Z.K[id][i][1]},Z.I[i]||{})).filter(x=>x.w)}
+(function(){
+ const l0=agLand;agLand=function(p,seen){const r=l0.apply(this,arguments);try{if(r&&p&&knwOn()){const v=RV(p.vid);const t=agPerson(p.t);if(v)knwSee(p.pl,p.kh,`${v.name} ${p.act}${t?" "+(t===S?S.name:t.name||""):""}`.trim(),"v"+v.id,"a:"+(p.key||"")+":"+p.vid+":"+p.k+":"+p.kh)}}catch(e){agErr("knwSee",e)}return r};
+ const tw0=twDo;twDo=function(a,t,k){const r=tw0.apply(this,arguments);try{if(a===S&&r&&knwOn()){const H=agHereKh();if(H)knwSee(H.k,H.kh,`${S.name}: ${String(r).replace(/^Ngươi\s+/,"")}`,"me","m:"+H.R.key+":"+k+":"+H.kh+":"+(t&&t.id||""))}}catch(e){agErr("knwSeeMe",e)}return r};
+ const s0=j95sync;j95sync=function(){const r=s0.apply(this,arguments);try{knwGossip()}catch(e){agErr("knwGossip",e)}return r};
+})();
+Object.assign(window,{knwSee,knwGossip,knwOf});

@@ -3,7 +3,8 @@
    usage: node dev/tools/roster.js <save> [tuần] [buổi] [khắc] [--json]
           node dev/tools/roster.js <save> --who <name | id | role> [--all] [--json]
      --who : ONE person (or a group by role) — "now: <place>, khắc k of buổi b (week w), doing <act>, with <target>, because <reason>"
-             + her timeline across the record (S.rlog: this week + 4 before, and the current buổi; default the last 8 buổi, --all = all).
+             + her timeline across the record (S.rlog: this week + 4 before, and the current buổi; default the last 8 buổi, --all = all)
+             + her rest / sleep rows today, the day's entourage pick (a mistress) and what she knows (S.knw: saw it / heard from whom).
              <name>: any part of the name (accents optional) · <id>: a record id (me, v12, mm:me, s34, emp, th, k:me:0, m3…) ·
              <role>: "cung nữ của ta" (her close maid + her maids), "thái giám của ta", "người hầu của ta", "cung nữ thân tín của ta",
              or the role as the record writes it ("cung nữ của Tô Uyển Dung").
@@ -79,11 +80,23 @@ function whoMode(q){const R=S.roster,L=S.rlog||{e:{},who:{}};const WHOD=Object.a
   else{const last=B.slice().reverse().find(x=>x.get(id,3));if(last)now=Object.assign({wk:last.wk,b:last.b,kh:3,old:1},last.get(id,3))}
   const tl=[];for(const x of (ALL?B:B.slice(-8))){let run=null;for(let kh=0;kh<4;kh++){const e=x.get(id,kh);if(!e)continue;const sig=[e.place,e.act,e.tgt,e.why].join('|');const plan=x.cur&&kh>x.kh;
     if(run&&run.sig===sig&&run.plan===plan){run.k2=kh;continue}run={wk:x.wk,b:x.b,k1:kh,k2:kh,sig,plan,e};tl.push(run)}}
-  out.push({id,name:nm,role:rl,now,timeline:tl.map(r=>({wk:r.wk,b:r.b,kh:[r.k1+1,r.k2+1],plan:r.plan?1:0,place:r.e.placeName,act:r.e.act,tgt:r.e.tgt,why:r.e.why}))})}
+  /* (5) her rest rhythm today: the rows of today's buổi that are sleep / rest turn / night watch / break */
+  const RH=new Set([ACT.sleep,ACT.shift,ACT.nightw,ACT.brk].filter(Boolean));const rhythm=tl.filter(r=>r.wk===wk&&RH.has(r.e.act)).map(r=>({b:r.b,kh:[r.k1+1,r.k2+1],act:r.e.act,why:r.e.why,plan:r.plan?1:0}));
+  if(!ALL){/* the timeline above keeps the last 8 buổi; the rhythm reads the whole of today */}
+  /* (4) entourage: the player's day pick (S.ent) or an NPC mistress's (S.entN) */
+  let entourage='';const dn=x=>(WHOD[x]||[x])[0];
+  if(id==='me'&&S.ent&&S.ent.d===wk)entourage=S.ent.ids.length?`picked ${S.ent.ids.map(dn).join(', ')} (first departure to ${pn(S.ent.at)})`:`went alone (first departure to ${pn(S.ent.at)})`;
+  else if(S.entN&&S.entN.d===wk&&S.entN.P[id])entourage=`${S.entN.P[id].ids.map(dn).join(', ')} — ${S.entN.P[id].why}`;
+  /* (4) what she knows (witness + gossip record S.knw) */
+  const Z=S.knw;const knows=Z&&Z.K&&Z.K[id]?Object.keys(Z.K[id]).filter(i=>Z.I[i]).map(i=>{const I=Z.I[i],F=Z.K[id][i];return{what:I.w,place:pn(I.pl),wk:I.wk,b:I.b,kh:I.kh,from:F[0],fromName:F[0]==='saw'?'':dn(F[0]),hop:F[1]}}):[];
+  out.push({id,name:nm,role:rl,now,rhythm,entourage,knows,timeline:tl.map(r=>({wk:r.wk,b:r.b,kh:[r.k1+1,r.k2+1],plan:r.plan?1:0,place:r.e.placeName,act:r.e.act,tgt:r.e.tgt,why:r.e.why}))})}
  if(JSONOUT){console.log(JSON.stringify(out));return 0}
  for(const o of out){console.log(`${o.name} — ${o.role} (${o.id})`);const n=o.now;
   if(n&&n.place!==undefined)console.log(`  now: ${n.placeName||pn(n.place)}, khắc ${n.kh+1} of buổi ${nb(n.b)} (week ${n.wk}), doing ${n.act||'—'}${n.tgt?`, with ${n.tgt}`:''}, because ${n.why||'—'}${n.old?' (last record; she is not in the current buổi)':''}`);
   else console.log('  now: not in the current record (gone from the palace, or not in it yet)');
   console.log(`  timeline${ALL?'':' (last 8 buổi; --all for every buổi kept)'}:`);
-  for(const r of o.timeline)console.log(`   week ${r.wk} · ${nb(r.b)} · khắc ${r.kh[0]}${r.kh[1]!==r.kh[0]?'–'+r.kh[1]:''}${r.plan?' (plan)':''}: ${r.place} · ${r.act}${r.tgt?' · với '+r.tgt:''} · ${r.why}`)}
+  for(const r of o.timeline)console.log(`   week ${r.wk} · ${nb(r.b)} · khắc ${r.kh[0]}${r.kh[1]!==r.kh[0]?'–'+r.kh[1]:''}${r.plan?' (plan)':''}: ${r.place} · ${r.act}${r.tgt?' · với '+r.tgt:''} · ${r.why}`);
+  if(o.rhythm&&o.rhythm.length)console.log(`  rest / sleep today (week ${wk}): ${o.rhythm.map(r=>`${nb(r.b)} khắc ${r.kh[0]}${r.kh[1]!==r.kh[0]?'–'+r.kh[1]:''} ${r.act}${r.plan?' (plan)':''} (${r.why})`).join(' · ')}`);
+  if(o.entourage)console.log(`  entourage today: ${o.entourage}`);
+  if(o.knows&&o.knows.length){console.log(`  knows (${o.knows.length}; who saw / who told her):`);for(const k of o.knows)console.log(`   ${k.what} — ${k.from==='saw'?`saw it at ${k.place}`:`heard from ${k.fromName} (hand ${k.hop})`} · week ${k.wk} · ${nb(k.b)} · khắc ${k.kh+1}`)}}
  return 0}
