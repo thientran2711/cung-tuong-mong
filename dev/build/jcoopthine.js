@@ -59,8 +59,19 @@ E.base=function(V){const o=V&&V.o;const mx=o?Math.max(0,...(o.pq||[]).map(x=>x.n
  return E.bs||{}};
 E.sent=function(cur){E.bs=J(cur);E.pn=(S&&S.thpn)||0};
 COOP.on("thinview",V=>{try{if(!on()||host()||!E.bs||!V||!V.o)return;const top=(S&&S.thpn)||0;for(const x of V.o.pq||[])if(x.n>E.pn&&x.n<=top){TH.pApply(E.bs,x.p);E.pn=x.n}}catch(e){console.error("thin E base",e)}});
-{const ds=TH.doSend;TH.doSend=function(){const id=ds.apply(this,arguments);if(id&&!host())E.last=id;return id}}
-COOP.on("room",()=>{E.bs=null;E.pn=0;E.last=""});COOP.on("week",()=>{E.bs=null});
+{const ds=TH.doSend;TH.doSend=function(op){const id=ds.apply(this,arguments);if(id&&!host()){E.last=id;if(op==="erd"||op==="ready"){EID.push(id);if(EID.length>20)EID.shift()}}return id}}
+/* review coop-thin-f1 r1 #2 (net): her ready on a socket that died. A phone's socket can look open while it is dead (4G, sleep): her erd +
+   ready sent on it are lost, the socket then closes and COOP reconnects, and nobody sent them again: the host waited for her, her #next
+   said "Chờ hảo hữu…", the room stood (coop-cyc THIN=6: her maid's card never asked; dev/test/coop-thin-e-net.js N1–N4). Now: after her
+   reconnect (room), or a Worker "nohost" for one of her erd / ready (his socket was gone), her baseline is the host's copy (E.bs null: the
+   resent diff starts from what he really holds, nothing doubled) and, at the next view, if she still waits on that same buổi, her ready is
+   sent again (once per loss; the host's ready is idempotent; a buổi he already stepped arrives in that view and nothing is resent). */
+const EID=[];let rr=0;
+COOP.on("room",()=>{E.bs=null;E.pn=0;E.last="";if(!host()&&E.mine)rr=1});COOP.on("week",()=>{E.bs=null});
+COOP.on("thin",()=>{if(rr&&!host())setTimeout(()=>{try{reNet()}catch(e){console.error(e)}},0)});
+COOP.on("error",m=>{try{if(host()||!m||m.code!=="nohost"||!m.id||!EID.includes(m.id))return;E.bs=null;E.last="";if(E.mine)rr=1;lg(["nohost",m.id])}catch(e){}});
+function reNet(){if(!rr)return;if(host()||!E.mine||E.mine!==bk()){rr=0;return}if(!on()||!TH.view||!S||S.dead||Q.length||S.mg||CW.inLife)return;/* the room level comes back after the reconnect snapshot ("thin"): wait for it */
+ rr=0;lg(["re-net",E.mine]);E.stat.reNet=(E.stat.reNet|0)+1;E.mine="";setTimeout(()=>{try{gReady()}catch(x){console.error(x)}},0)}
 CW.eAsked=()=>on()&&(host()?(E.hr===bk()||E.forced===bk()):E.mine===bk());
 CW.eWait=()=>!!(on()&&!host()&&E.mine&&E.mine===bk()&&((S&&S.buoi)||0)<LAST());
 /* her buổi moved by the host's patch: what lives outside S on her phone (display / per-seat counters) */
@@ -78,10 +89,11 @@ function gView(V){if(!on()||host()||!S||!V||!V.o)return;const k=bk();
  /* the host reloaded after her ready (his page holds her ready in memory only): send it again, against his reloaded copy of her */
  if(e&&e.boot){if(E.boot&&E.boot!==e.boot&&E.mine===bk()){lg(["re-ready",E.boot,e.boot]);E.stat.reRd++;E.mine="";E.boot=e.boot;setTimeout(()=>{try{gReady()}catch(x){console.error(x)}},0)}else E.boot=e.boot}
  if(e&&e.go===wkx()&&CW.ngoW!==e.go&&(S.buoi||0)>=LAST()){CW.ngoW=e.go;E.stat.go++;lg(["go",e.go]);try{CW.nCheck()}catch(x){console.error(x)}}
+ reNet();
  try{CW.lockNext()}catch(x){}}
 COOP.on("thinview",V=>{try{gView(V)}catch(e){console.error("thin E view",e)}});
 let wasMg=false;
-if(typeof render==="function"){const f=render;render=function(){const r=f.apply(this,arguments);try{const mg=!!(S&&S.mg);const left=wasMg&&!mg;wasMg=mg;if(left&&on()&&!host()&&S&&!S.dead&&!Q.length){const V=TH.view;
+if(typeof render==="function"){const f=render;render=function(){const r=f.apply(this,arguments);try{if(rr)reNet()/* net: her dialog was open at the view */}catch(e){}try{const mg=!!(S&&S.mg);const left=wasMg&&!mg;wasMg=mg;if(left&&on()&&!host()&&S&&!S.dead&&!Q.length){const V=TH.view;
   if(V&&V.o&&V.o.w===(COOP.state.week||0)&&typeof V.o.buoi==="number"&&V.o.buoi>(S.buoi||0)&&E.mine!==bk())gReady()}}catch(e){}return r}}
 COOP.on("week",()=>{E.mine="";seen="";/* her ready for the NEW week may arrive before this event (race): keep it */const w=COOP.state.week||0;for(const k of Object.keys(E.rd))if((E.rd[k].w|0)<w)delete E.rd[k];E.hr="";E.forced=""});
 
