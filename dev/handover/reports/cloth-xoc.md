@@ -248,3 +248,20 @@ Mud: BAL bun.lv/add/tide shifted one level; lv3 = 12 strips, 6 drop clusters up 
 | c30 | 1 | 24079 | -53.4 | -12.8 | 0 | +3.99 | 6 | -3.2 |
 | c30 | 2 | 40550 | -62.9 | -17.1 | 0 | +5.52 | 1 | -3.4 |
 | c30 | 3 | 58257 | -65.7 | -22.8 | 0 | +7.55 | 39 | -3.4 |
+
+## r6f (s42: TEA, owner 00:18Z + again now: faint/small on orange) — SẴN SÀNG KIỂM review/cloth-xoc be9d08e (QUICKCHECK PASS; mud = r6e, wet = r6c final)
+Root cause: same as mud — tea-brown multiply on saturated red/orange stays red. 'stain' blend now pulls toward tea brown by cloth saturation (BAL stain.tea.pull .45, tra.tm .9), never lighter. Look: translucent amber core + tide ring (tea.core .2, ring .6, cap .5) instead of the near-opaque blob; sizes .3/.36/.44 of robe width; second splash moved from hem to the lap (hem clipped it into a flat horizontal patch). Full-body panels CDN img/_review/cloth-xoc/full-tra-{c01,c30,c03,c12}.png. Table (Lab chroma drop on c01/c03 = red/green turning tea-brown, intended):
+| fig | lv | changed px | min dL* | mean dL* | lighter px | mean dC* | greyer px (dC*<-3) | mean dhue° |
+|---|---|---|---|---|---|---|---|---|
+| c01 | 1 | 2824 | -37.1 | -13.3 | 0 | -2.72 | 1266 | +4.7 |
+| c01 | 2 | 10851 | -38.0 | -16.4 | 0 | -2.06 | 4718 | +4.9 |
+| c01 | 3 | 22756 | -38.1 | -17.4 | 0 | -1.21 | 6327 | +4.5 |
+| c03 | 1 | 5869 | -35.8 | -11.7 | 0 | -0.44 | 700 | -12.9 |
+| c03 | 2 | 15455 | -36.5 | -14.9 | 0 | +0.39 | 983 | -13.4 |
+| c03 | 3 | 29523 | -36.0 | -16.1 | 0 | +1.04 | 1060 | -13.1 |
+| c12 | 1 | 5189 | -36.3 | -17.9 | 0 | +3.41 | 0 | -11.1 |
+| c12 | 2 | 17989 | -37.0 | -18.7 | 0 | +3.58 | 19 | -11.1 |
+| c12 | 3 | 32227 | -37.2 | -18.6 | 0 | +3.43 | 18 | -11.1 |
+| c30 | 1 | 6334 | -31.3 | -17.8 | 0 | +8.18 | 0 | -9.1 |
+| c30 | 2 | 18167 | -30.5 | -16.5 | 0 | +7.47 | 3 | -5.5 |
+| c30 | 3 | 28403 | -48.6 | -16.3 | 0 | +7.20 | 108 | -4.2 |
