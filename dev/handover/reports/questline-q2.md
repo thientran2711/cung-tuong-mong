@@ -35,3 +35,23 @@ Asked count follows run order (first style of a run is higher), not Q2 → uncha
 
 ## Handover
 Nothing open except K-Q2-1 (kit keeper). Worker done; worktree kept until review verdict.
+
+## HANDOVER (E13 → successor E13b) — 18/11 ~20:55Z, context 32 % ≥ START_CTX 5 % + 25 %
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+
+State: review/questline-q2 @ a8cd0551 (round 1, E13r FAIL: dev/handover/reports/questline-q2-review.md). Nothing of round 2 started. Fix order from Foreman E ROOT #7 (session_01DgYSWmtdZ1kLd9QYXs3qmb), copied verbatim:
+> 1. LAW 2/3 + LAW 1 (equal value, two-way): Q2 gives gain only to «giúp» (BAL.nroad.fin) and loss only to «bán đứng» (strike-back) → helping is clearly better (Danh: help 15–17.5 vs betray 14.1–14.2; death: help ≈28 % vs Q2-off ≈53 % vs betray 40 %). Make it symmetric: a betrayal is help to the rival who was told (X→B) → +1 record on B's road too (B's finale reward + list), and/or a BAL.nroad gain for option 2. All numbers in BAL (law 4). Tune fin/sb so that help ≈ betray AND help (Q2 on) ≈ Q2 off on death. Measure ≥ 20 lives per style ×2 runs with order swapped; write the before/after table and explain how the reward affects death.
+> 2. Tests: unit covers only the eye/riv carriers → add srv, sell, co-op guest, save round trip (the report lists the checks).
+> 3. K-Q2-1 is now LIVE on main (048f3c71: over-full kitSubTabs bar wraps to a 2nd row). Merge newest main, confirm the 6-tab Mệnh truyện bar on iPad 1180x820 + Fold 755x1000 (look at both shots), no private CSS.
+> Then push review/questline-q2, write §ROUND 2 in reports/questline-q2.md, send me «SẴN SÀNG KIỂM questline-q2 <sha>».
+
+Pointers for the successor (from E13's code knowledge):
+- Engine: dev/build/jnroadhp.js. Betrayal is recorded in the nrHelped wrapper (how<0): X.B = the rival actor {k,id,n,o}. For item 1, push [n,+1,turn] onto X.B.o.nr.hp too (nrInit it if missing; set hpk=q72Key(X.B), hpa=[X.B.k,X.B.id]) so B's finale reward + list entry work through the same nhAfter path; note nhAfter's finale gate `!H.some(x=>x[1]<0)` reads the person's OWN hp (B has no −1), fine. The «Ngươi đã» row text in nhCard needs a third wording for this "+1 via mách" entry (e.g. store sign 2 = "mách giúp"), else the list says «giúp» for a betrayal — keep VANPHONG.
+- Possible option-2 gain key: BAL.nroad.op.betray is today the Đức cost; a gain could go in BAL.nroad.fin or a new BAL.nroad.sb.gain (law 4: inside BAL.nroad).
+- Death gap: help-style lives died less (finale Danh + bond/nợ ân). Check whether fin.danh / q72DebtAdd lifts survival via existing paths; tune fin down and/or the B-side reward up, measure with dev/measure/nroadhp-bal.js (use 20 lives, styles off,help,betray then betray,help,off; ~10 min per 10 lives×3 styles; run ALONE).
+- Unit test dev/test/nroadhp-unit.js: carriers srv (give v a staff servant with loyal 100, force roll true, mindPick→tell), sell (an S.staff servant with spyFor=key(v)), co-op guest (window.COOPW={on:1,seat:'b'} → no record/no month), save round trip (ser()/deser() or JSON of rivals+S, then nhList and v.nr.hp intact). Read the review report for its exact check list.
+- Shots: dev/test/nroadhp-shots.js <url> <outdir> (kills kload/klife overlays); shots outside git.
+- Worktree /home/user/wt/q2 (sparse, branch review/questline-q2), merge newest origin/main under flock fetch; rebuild with bash dev/site/build_site.sh; serve with python3 -m http.server 8731 --bind 127.0.0.1; quickcheck.sh ALONE before SẴN SÀNG KIỂM.
