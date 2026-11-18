@@ -566,7 +566,7 @@ setTimeout(()=>{try{
  if(typeof renderStage==="function"){const rs0=renderStage;renderStage=function(){j95final();return rs0.apply(this,arguments)}}
  /* the data paths too (the stage list is state: saved, read by the map count and the bots, which draw nothing): after every arrival, khắc,
     buổi or lãnh cung visit the stage list = the record; redraw only if it changed */
- for(const n of ["goTo","spend","nextBuoi","endTurn","coldVisit","talk","closeModal","chooseM"]){if(typeof window[n]!=="function")continue;const o=window[n];window[n]=function(){const r=o.apply(this,arguments);try{if(j95final()&&typeof renderStage==="function")renderStage()}catch(e){j95err("final:"+n,e)}return r}}
+ for(const n of ["goTo","spend","nextBuoi","endTurn","coldVisit","talk","closeModal","chooseM"]){if(typeof window[n]!=="function")continue;const o=window[n];window[n]=function(){const r=o.apply(this,arguments);try{if(j95final()&&typeof renderStage==="function"){window.__rdefer=(window.__rdefer||0)+1;try{renderStage()}finally{window.__rdefer--}}}catch(e){j95err("final:"+n,e)}return r}/* ag2-perf B: its layout fits wait for the next frame (jlag2 renderAfter) */}
  if(typeof homePeople==="function"){const hp0=homePeople;homePeople=function(){const L=hp0.apply(this,arguments);try{if(j95on()&&S&&!S.dead&&S.roster&&S.roster.key===j95key()&&!(typeof isSrv==="function"&&isSrv())&&Array.isArray(L))j95elderFix(L,"home",S.roster,j95kh())}catch(e){j95err("home",e)}return L}}
 }catch(e){j95err("finalwrap",e)}},0);
 /* ================= PEOPLE LEDGER (owner core law 16/11 13:40Z + 13:50Z s17; review/people-ledger) =================

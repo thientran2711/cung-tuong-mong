@@ -12,7 +12,11 @@
     getBoundingClientRect, innerText) in the middle of a render forced a full layout of the page each time the render had written in between
     (8–12 forced layouts per render, ~40 % of render() time). Inside a render the fit is queued once per key and runs when the OUTERMOST
     render returns (same task, before the frame is painted, so the screen is the same); outside a render it runs at once, as before. */
- const RA=new Map();window.renderAfter=function(k,fn){if(window.__rdep>0){RA.set(k,fn);return}fn()};/* a key queued again keeps its first place in the queue and runs its latest fn */
+ const RA=new Map();let raT=0;window.renderAfter=function(k,fn){if(window.__rdep>0){RA.set(k,fn);return}
+  /* ag2-perf B (C-AG #12 18/11): a stage redraw done INSIDE a sim step (j95 final wrapper: window.__rdefer > 0) runs every renderStage wrapper
+     (their state work stays in the step), but its layout-reading fits wait for the next animation frame (coalesced per key; none while the
+     page is hidden; a render() before then flushes them at its end) */
+  if(window.__rdefer>0){RA.set(k,fn);if(!raT)raT=requestAnimationFrame(()=>{raT=0;if(!(window.__rdep>0))raFlush()});return}fn()};/* a key queued again keeps its first place in the queue and runs its latest fn */
  const raFlush=()=>{for(let i=0;i<4&&RA.size;i++){const L=[...RA.values()];RA.clear();for(const f of L)try{f()}catch(e){console.error("renderAfter",e)}}};
  setTimeout(()=>{try{
   if(typeof render==="function"){const r0=render;let d=0;render=function(){d++;window.__rdep=d;try{return r0.apply(this,arguments)}finally{d--;window.__rdep=d;if(!d){raFlush();window.__rendN++}}};window.render=render}
