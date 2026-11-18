@@ -9,7 +9,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,BASE0,OUT
 const BASE=BASE0+(BASE0.includes('?')?'&':'?')+'khost=1';
 const sleep=t=>new Promise(r=>setTimeout(r,t));const L=(...a)=>console.error(new Date().toISOString().slice(11,19),...a);
 /* Cảnh động off in this test: the sandbox has no GPU and the animated stage starves the renderer, so real input events would queue for minutes */
-const LIFE=()=>{try{localStorage.setItem('ctm-rot-tip','1')}catch(e){}OPT.fxon=false;SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;
+const LIFE=()=>{try{localStorage.setItem('ctm-rot-tip','1')}catch(e){}OPT.fxon=false;SLOT=3;document.getElementById('title').hidden=true;for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!isSrv())break}Q.length=0;document.getElementById('modal').hidden=true;
  document.querySelectorAll('[id^=kroul],#dawn,#kload,.kmov').forEach(e=>e.remove());if(S.place!=='home'&&typeof goTo==='function'){}render();try{pxScene()}catch(e){}return S.name};
 function watch(p,errs){p.on('pageerror',e=>errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|net::ERR/.test(m.text()))errs.push('console: '+m.text())})}
 const shot=async(p,n)=>{if(!SHOTS)return;for(let t=0;t<2;t++){try{await p.screenshot({path:`${OUT}/${n}.jpg`,type:'jpeg',quality:55,timeout:150000});return}catch(e){}}};

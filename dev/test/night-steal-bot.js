@@ -24,7 +24,7 @@ const SEEDRNG=`(function(){let s=(window.__seed||1)>>>0;Math.random=function(){s
      const first=d&&d.wk===wk()?(d.flip0||d.pick):null;if(first||h){T("nights");for(const v of liveRivals(true)){const tr=(traitsOf(v)[0])||"?";L.ex=L.ex||{};L.ex[tr]=(L.ex[tr]||0)+1}if(first==="me"||(d&&d.pick==="me")||h===S)T("meNights");
        const ph=d&&d.wk===wk()&&d.pick!=null?(d.pick==="me"?S:liveRivals(true).find(x=>x.id===d.pick)):h;const hd=nt.h||ph;if(hd){L.N=L.N||[];L.N.push([hd===S?1:0,rkOf(hd),nt.tr,nt.win])}}}}catch(e){}return r};
    for(let l=0;l<n;l++){L={tr:{}};try{localStorage.clear()}catch(e){}
-    for(let i=0;i<60;i++){start();if(!(typeof isSrv==="function"&&isSrv()))break}if(DIFF&&typeof diffApply==="function"){S.diff=DIFF;diffApply()}Q.length=0;S.mg=0;
+    for(let i=0;i<60;i++){try{nlNew()}catch(e){}start();if(!(typeof isSrv==="function"&&isSrv()))break}if(DIFF&&typeof diffApply==="function"){S.diff=DIFF;diffApply()}Q.length=0;S.mg=0;
     for(let w=0;w<Y*36&&!S.dead;w++){
      if(window.__G0)for(const v of liveRivals(true))v.ghen=0;S.sung=Math.max(S.sung,SUNG);S.danh=Math.max(S.danh,15);S.suc=Math.max(S.suc,60);S.duc=Math.max(S.duc,55);S.bac=Math.max(S.bac,80);S.rank=Math.max(S.rank,2);
      if(S.tonight==="me"){S.tonight=null;try{night(S)}catch(e){}}

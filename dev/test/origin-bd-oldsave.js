@@ -19,7 +19,7 @@ const [,,URL,MAIN]=process.argv;
   const snap=()=>({save:JSON.stringify(ser()),k:S.origin.k,name:S.name,rank:S.rank,turn:S.turn,kids:(S.kids||[]).length,n:S.st.ch&&S.st.ch.n,plan:S.st.ch&&S.st.ch.plan.join(','),
    rd:S.st.f14?S.st.f14.rd||'':'-',act:S.st.f14&&S.st.f14.act?JSON.stringify(S.st.f14.act):'',story:JSON.stringify(S.st.story||S.st.q||null).length,M:S.st.M?JSON.stringify(Object.keys(S.st.M)).length:0});
   const out={};let late=null;
-  for(let life=0;life<6&&!(out.tut&&out.road&&late);life++){if(life){window.__forceOrigin='bd';quiet=true;start();quiet=false;await new Promise(r=>setTimeout(r,300));late=null}
+  for(let life=0;life<6&&!(out.tut&&out.road&&late);life++){if(life){window.__forceOrigin='bd';quiet=true;try{nlNew()}catch(e){}start();quiet=false;await new Promise(r=>setTimeout(r,300));late=null}
   for(let m=1;m<=72;m++){const t=S.turn;for(let g=0;g<40&&S&&!S.dead&&S.turn===t;g++){Q.length=0;used=0;try{nextBuoi()}catch(e){out.err=e.message;break}}
    if(!S||S.dead)break;const A=S.st&&S.st.M;try{if(A&&!A.done&&!A.cur&&A.nb){A.due=0;fireBeat67(A)}if(A&&A.cur){const bd=beatDef67(A,A.cur);const O=opts67(A,bd);res67(thKey67(A),A.cur,0,O[0]&&O[0].o!=null?oOf67(A,O[0],bd):100)}}catch(e){}
    if(S.st&&S.st.ms&&typeof msDone67==='function'){S.st.ms.t0=-99}Q.length=0;if(S.dead)break;

@@ -30,7 +30,7 @@ const URL='file://'+path.resolve(process.argv[2]||path.join(__dirname,'../index.
   /* the act's own success roll = the first roll(o) made by the act's f (or its own odds helper); side rolls (a servant refuses,
      caught, confess, belief, punish) are forced to "no" so the act reaches its own roll */
   const SIDE=/^(runAct|caught|servCaught|mindBelief|punish|framed|confessRisk)$/;const OWN=/(^|\.)f$|^(loSteal|tsbFire|wdFrame|plantItem|trip|wdAccuse|xxAccuse)$/,LAST=/^tsbBulNpc$/;/* tsbBulNpc rolls a side 'what to ask' first, its own odds last */
-  const who=()=>{const s=(new Error().stack||'').split('\n')[3]||'';const m=s.match(/at (?:new )?([\w.$<>\[\] ]+?) \(/);return m?m[1]:'?'};
+  const who=()=>{const L=(new Error().stack||'').split('\n');const nm=i=>{const m=(L[i]||'').match(/at (?:new )?([\w.$<>\[\] ]+?) \(/);return m?m[1]:'?'};const w=nm(3);return w==='aRoll'?nm(4):w};/* aRoll (j9, round 2) = the act's own roll: look through it */
   roll=function(o){if(!cap)return roll0(o);const w=who();cap.all.push(Math.round(o)+'@'+w);if(SIDE.test(w))return false;if(cap.o==null&&OWN.test(w))cap.o=o;if(LAST.test(w))cap.last=o;return roll0(o)};
   /* the word each real screen prints for act k (j15 rvGroups person menu, j6 rvButtons) */
   const wordIn=(html,k)=>{const i=html.indexOf(`data-a="${k}"`);if(i<0)return null;const s=html.slice(i,html.indexOf('</button>',i)).replace(/<[^>]+>/g,' ');/* the act's own word = the FIRST ladder word on the button (later ones belong to side lines, e.g. the punishment's odds) */let w=null,at=1e9;for(const x of KIT_ODDS){const j=s.indexOf(x);if(j>=0&&(j<at||(j===at&&x.length>w.length))){w=x;at=j}}return w};
