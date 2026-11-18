@@ -1648,6 +1648,9 @@ under 1000 px; the choice is remembered per tab (`hclh-kcat-<tab>-<n>`).
 Fold/phones: a compact row under the name/stats; iPad (≥ 1000 px): the empty middle of the bar, two columns. The stage keeps only the place name
 (text on the painting, one line, light halo), the court chips and the figures; name tags under figures are text on the painting too (rank + name, one line).
 Floating notes (`.kmnote`) sit just above the bottom tab bar.
+PLACE STAGE LAYOUT (owner 18/11 ~02:50Z + ~03:02Z, OD:L1814/L1818; `dev/build/jplst.js`, review/place-stage): NO plaque over the stage (`#sc-t` stays in the DOM as the data carrier, hidden).
+  Slots: (1) people-count chip (`.kchip.j59hchip` = kit person icon + number) = FIRST item of the stage rail (kitStageRail item `{id:"here",order:0,chip:()=>html}`, new `chip` item kind: a non-button, never tappable), V/L/M stand under it; none at 0 people.
+  (2) place name = top of the right column (`#kpname`, kit paper like `.k3p`, 1.1rem bold); the court cards (`#kshR`) are shifted down by `--kpnh` (name height + 6). (3) the place-entry line (`S.visit.msg` minus the count: "Thái giám chặn cửa", "Hoàng thượng không ra vườn hôm nay"…) = the TIN BÁO TOAST (§87 `#ktbtoast.ktbt`, owner 18/11 ~03:3xZ "chip giống tai mắt báo"; review/tinbao-ui-r7r): one gold pill line under the top bar, 3 s (longer lines up to 8 s), once per visit line, no modal, no sound; `kitLineToast(text)` in jplst.js is a thin twin of jtinbao's toastShow (same ids/classes/CSS) until ag-all-2 lands, then it calls it. A line that carries a BUTTON ("… vừa rời đi [Theo]") stays tappable as the persistent top-of-stage `.kmnote.kmslot > .kchip`; never over a head. Figures keep the full kit size (no plaque cap).
 
 ### 31.13 SELECTED STATE — ONE look for every picker (jk3 §8, owner 11/14 approved; kit owner #2)
 Dung mạo faces (`kitPicker .kpki`), consort / servant / kid picker strips (`.pface`), origin wheel tiles (`.krt`), pressed kit toggles (`.ksel`):
@@ -2334,6 +2337,9 @@ How: `.kpb` becomes display:contents so its figure column and text join #mb's gr
 still run; kitEsFit hands 32.7 columns to kitDpFit). Test: `node dev/test/dialog-person.js <site url> WxH@dpr <outdir> <tag> [kinds]`
 (kinds host, th, invite, ally2, many, men, pic). Shots before / after: dev/shots/dialog-person/ (755x1000, 1180x820, 1366x1024, 412x1058).
 Options in the right column follow 32.9 (all short → 2-column grid, else rows); the "one per row" above is the long case.
+
+### 84c PERSON-LESS FRAME — main picture fills the column (map-tap-go, owner 18/11 ~06:10Z "no empty space"; kit part owned by the map-tap-go worker, KIT_REQUESTS row closed)
+A T7 frame (kitFrameLive3 / kszFrame3) whose subject is no person — a place card (m.placeK), or `sp.noWho` — carries NO narrator and NO second picture: its ONE picture is the left main picture. S / narrow ("one"): the standard kit picture (KIT_SIZE.pic[picS], 120x160, centred). M / L / XL ("fig"): `.k3main.k3mpic.k3fill` = the picture FILLS the left column (align-self stretch, cover-crop with kitPicFocus, true ratio, never stretched); the right column decides the body height (fits = the frame stays inside the screen). Used by every person-less VIỆC frame (today: the place card; scan: dev/test/map-tap-go.js + kit-conform place:*). kit-conform rule: a `.k3fill` picture must be as tall as `.k3right` (no empty band). Sample: kit page §84c.
 
 ### 32.8 PLACE CARD — the place-event frame for every place card (owner 11/15 08:55Z + 08:58Z) — `kitPlaceDress` / `kitPlaceSil` (jplace)
 **16/11 (owner "Má nó, kit chung đâu", review/kit-sweep) — SUPERSEDES the layout below:** the place card is template T2 (§8.2): ONE place picture LEFT (headArt moved by `kitOnePic`), RIGHT kit rows (`kitRows`: Chủ vị · Đường đi · Còn · Bóng người · Giờ) + the card's own lines as kit fact rows, options below as kit option rows scrolling inside the frame. No top band + second picture, no `.kplhost` portrait cell, no `.kplinfo` box, no silhouettes drawn on the picture (the count is a row). Text below kept for history.
@@ -3113,6 +3119,8 @@ merit invitation, opened for real and measured (layout, one person, banner in th
   green jade · 2 silver flower + aquamarine · 3 jade lotus bud · 4 amethyst chrysanthemum + luan · 5 ruby peony · 6 gold phoenix on a jade cloud ·
   7 amber-gold phoenix with spread wings (Hoàng hậu; owner 11/15 swapped 6↔7). Size factor `KIT_MEMARK.sc[r]` (0.78 → 1.22). Sheet dev/shots/me-mark/ranks8.jpg.
 - Where: her stage figure `#mefig` (any slot) and her figure in dialogs / event stages (`kitStageFig` adds `.kesme`). Never on anyone else.
+- STAGE SIZE (owner 18/11 ~06:15Z "chốt A1"): the marker STAYS ON THE HEAD on stages (owner ~06:10Z "vẫn nằm trên đầu"); `KIT_SLOTS.band` 70 (3-line tag + 11 px gap) and `KIT_FIG.h` .79 are unchanged; the tallest phoenix crown shrinks every figure just enough through j59 `meCap` (kitMeMarkRoom = marker + bounce + edge) — Hoàng hậu in the tallest crown ≈ 472 px on a 623 px stage (ladder step A1).
+- GLOW: `.kmemark` / `.kmmapmk` drop-shadow stack uses the Hoàng hậu title pill's gold (`--dh` = RCOL[7] #ffc400, jtitle kdh tier 8): white core + 3 halos 6/12/22 px.
 - ONE placement rule: marker bottom = top of her head (first opaque row of the figure art, hair ornaments included) − `KIT_MEMARK.gap` (1.2 %)
   × her drawn figure height. Measured: Fold stage 7.7 px on a 644 px figure, iPad 6.5 px, iPad dialog 6.3 px on 524 px, 390 dialog 3.8 px on
   320 px (all = rule). Height 8.5 % of the figure × sc[r], 26–72 px; when the room above the head is short (dialog, scene title, plaques,
