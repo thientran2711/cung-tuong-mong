@@ -30,3 +30,6 @@ Measurement (px at 1800 tall, by eye on a 10 px ruler): see message to ROOT-12; 
 Test keys m02-ty1-a18 / m03-ty1-a18, refs eIyOFEidqL (m09 hd), sheet, face fig; 1024x2304 canvas with headroom; singles + 50 % overlays in img/_review/maid-ty-m09/v22-*, v23-*.
 v22 (v2.1 sentence '7.5 heads from skull top'): face (hairline->chin) m02 155, m03 152 vs m09 172 (-10 %/-12 %) FAIL.
 v23 (v22 + '7.0 heads' + 'head and face exactly as large as reference 1'): m02 ~163, m03 ~165 vs 172-173 (-5 %/-4.6 %), gate 3 % still not met; stopped per order, no more gens. Prompt delta recorded in the messages to Foreman C.
+
+## 18/11 ~00:33Z owner rule (via ROOT-12, 04:05Z)
+Any flowers/patterns on fabric must read as real silk EMBROIDERY (fine satin-stitch threads stitched into the cloth, following the folds), never pasted/printed/AI-looking. Add to the frozen prompt for any future gen (trung y is plain, so it only matters for held props/accents and the consort-tier reuse of this prompt): sentence to append to DESIGN: "any flower or pattern on the fabric is real silk embroidery: fine satin-stitch threads stitched into the cloth, following the folds, never printed or pasted-on".
