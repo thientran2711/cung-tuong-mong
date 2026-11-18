@@ -1018,3 +1018,4 @@ c12 a18 t1-t3 full hairpins (Round 35) | claude/cung-tuong-mong-handover-hj0h8w 
 | cloth-tea r3 (one shape every costume, higher on chest; sonnet; successor of SzjMK4R) | review/cloth-tea | MAIN s43 | session_01UV1SzghNErbDFn6nXtyBwa | RUNNING | 18/11 02:47Z |
 | avatar-makeup (stage + every avatar frame at mirror strength; sonnet; brief briefs/avatar-makeup.md) | review/avatar-makeup | MAIN s43 | session_01UV1SzhLWPwoF94YDo85yN1 | RUNNING | 18/11 02:48Z |
 | HANDOVER-ARCHIVE (sonnet; MAIN s43 02:58Z + 03:05Z; owner OD L1817) | claude/cung-tuong-mong-handover-hj0h8w (dev/archive) | D | session_01964izCJRFLeyiak4tyF3BJ | RUNNING | 18/11 02:55Z |
+scale room artifact (Phòng co giãn) | claude/cung-tuong-mong-handover-hj0h8w dev/art/scale-room | session_011xDdVRWmQKBpjh3ayt7u8f | RUNNING | 2026-11-18T02:55Z (Foreman C ROOT-15)
