@@ -198,57 +198,94 @@ ${typeof kitCompactCSS==="function"?kitCompactCSS("button.ka.kart.kopt",84,112):
    the repeated class only lift the specificity above theirs (2 ids, 5 classes). */
 html body #modal :is(#mb,*)>.opts.opts.opts>button.ka.kopt.kart{grid-column:1/-1!important;order:0!important}
 html body #modal :is(#mb,*)>.opts.opts.opts:has(> button.ka.kopt.kart),html body #modal :is(#mb,*)>.kpscopts.kpscopts.kpscopts:has(> button.ka.kopt.kart),.kitpg-opts:has(> button.ka.kopt.kart){display:grid!important;flex-direction:unset!important;grid-template-columns:minmax(0,1fr)!important;grid-auto-rows:max-content!important;align-items:stretch!important;align-content:start!important}
-/* equal sizes: a row is never lower than the picture + padding (the options area scrolls, KIT 32.5: a "1fr" row would be squeezed into
-   its height), so cards with the usual rows are all the same height; a card with more text grows, never clips */
-html body button.ka.kart.kopt{min-height:calc(var(--kah,112px) + 18px)!important;box-sizing:border-box}
-/* review/opt-pics r1: the person dialog (jk4 32.7 .kdper) sets min-height:max-content on every option (2 ids, 3 classes); in its short
-   scrolling grid at 844x390 that let the rows shrink to 41 px and the 130 px cards OVERLAPPED. The picture floor must win there too. */
 /* review/pcard-actrow: a person dialog (kdper, picture/figure column left) lists its option rows as a FLEX COLUMN: in the grid form above the auto rows stayed at the 130 px floor
    while a long row (Cần / Được / Mất) overflowed its box and was cut (spy-target picker, 755 px) */
 html body #modal .dlg.kdper>#mb>.opts.opts.opts.opts.opts:has(> button.ka.kopt.kart){display:flex!important;flex-direction:column!important;grid-template-columns:none!important;gap:8px!important}
 html body #modal .dlg.kdper>#mb>.opts.opts.opts.opts.opts>button.ka.kopt.kart{flex:0 0 auto!important;height:auto!important}
-html body #modal :is(#mb,*)>:is(.opts,.kpscopts):is(.opts,.kpscopts):is(.opts,.kpscopts)>button.ka.kart.kopt{min-height:calc(var(--kah,112px) + 18px)!important}
 `;document.head.appendChild(st)})();
-/* ===== review/opt-card-short VARIANTS (owner 18/11 "nút hành động dài quá"): html.kov-A / kov-B / kov-C chosen through window.KIT_OPT_VAR. TEMPORARY review switch: after the owner's pick the winner becomes the only rule and this block is deleted. ===== */
-function kitOptShortTier(t){t=String(t).replace(/^\(|\)$/g,"");const m=t.match(/^chơi\s+(\d+)\s+phần\s+(?:đã\s+)?ra\s+([^,]+?),\s*(\d+)\s+phần\s+ra\s+([^,]+?)(?:,|$)/);if(m)return `${m[1]} phần: ${m[2]} · ${m[3]} phần: ${m[4]}`;
- const n=t.match(/^chơi\s+(\d+)\s+phần\s+(?:đã\s+)?ra\s+([^,]+?)(?:,|$)/);return n?`${n[1]} phần: ${n[2]}`:""}
+/* ===== KIT §6.2 FINAL (owner 18/11 ~07:25Z, review/opt-card-short): ONE card form for EVERY dialog option =====
+   picture 66x88 (3:4 rectangle, B form) + title (odds chip under it) + EXACTLY two rows: Tốn and Được. An option without a cost / gain still shows the row, greyed ("Tốn: không" / "Được: không"),
+   so every card is the same size. Mất folds into the Tốn row, the extra Được rows into the Được row (copies, marked .kdup). Everything else (Cần, Bại, Kèm, Ghi chú, lead text) is folded (.kofold) and
+   opens from the "!" in the card's corner (kitOptInfo); the tap never chooses the option. EXCEPTION: a DISABLED card keeps its red Cần row (the player must see why it is dead). */
 function kitOptCompactRows(b){try{if(!b||b.dataset.kocr==="1")return;const kb=b.querySelector(".kb");if(!kb)return;b.dataset.kocr="1";
  const note=kb.querySelector(".kr-note"),ton=kb.querySelector(".kr-ton .krv");
  if(note){[...note.querySelectorAll(".krv > .ef")].forEach(e=>{const t=(e.textContent||"").trim().replace(/^\(|\)$/g,"");
-  if(/^trả khi làm xong$/i.test(t)&&ton){const x=document.createElement("span");x.className="ef n";x.textContent="trả khi làm xong";const sp=document.createElement("span");sp.className="ksep";sp.textContent="·";ton.append(sp,x);e.remove()}
-  else{const sh=kitOptShortTier(t);if(sh){e.title=t;e.textContent=sh}}});
+  if(/^trả khi làm xong$/i.test(t)&&ton){const x=document.createElement("span");x.className="ef n";x.textContent="trả khi làm xong";const sp=document.createElement("span");sp.className="ksep";sp.textContent="·";ton.append(sp,x);e.remove()}});
   note.querySelectorAll(".krv > .ksep").forEach(s=>{if(!s.previousElementSibling||!s.nextElementSibling)s.remove()});if(!note.querySelector(".krv > .ef"))note.remove()}}catch(e){}}
 window.kitOptCompactRows=kitOptCompactRows;
-/* ONE card form for every option of a dialog (owner 18/11 ~09:02Z): an option without a picture of its own gets the §59 placeholder in the same slot when a sibling has a picture */
+/* a picture-less option gets the §59 placeholder in the same slot when a sibling has a picture (one form per dialog) */
 let KIT_OPT_UNI=0;function kitOptUnify(b){if(KIT_OPT_UNI)return;try{KIT_OPT_UNI=1;const c=b.parentElement;if(!c)return;const sib=[...c.children].filter(x=>x.matches&&x.matches("button.ka")&&x.matches(KIT_OPT_SEL));if(!sib.some(x=>x.querySelector(":scope > .kaart")))return;
- sib.forEach(x=>{if(x.querySelector(":scope > .kaart")||x.classList.contains("kcard"))return;x.__koph=1;delete x.dataset.kopt;kpOptArt(x);if(window.KIT_OPT_VAR==="B"||window.KIT_OPT_VAR==="C")kitOptCompactRows(x)})}catch(e){}finally{KIT_OPT_UNI=0}}
-(function(){const k0=kpOptArt;kpOptArt=function(b){const r=k0.apply(this,arguments);try{if(window.KIT_OPT_VAR){if(window.KIT_OPT_VAR==="B"||window.KIT_OPT_VAR==="C")kitOptCompactRows(b);kitOptUnify(b)}}catch(e){}return r};window.kpOptArt=kpOptArt})();
-function kitOptVarSet(v){window.KIT_OPT_VAR=v||"";let st=document.getElementById("kit-opt-var");if(!st){st=document.createElement("style");st.id="kit-opt-var";document.head.appendChild(st)}
- if(!v){st.textContent="";return}const O="html body #modal button.ka.kart.kopt.kopt";
- const INL=`${O} small.kb>.kr>.krv{display:block!important}
+ sib.forEach(x=>{if(x.querySelector(":scope > .kaart")||x.classList.contains("kcard"))return;x.__koph=1;delete x.dataset.kopt;kpOptArt(x);kitOptCompactRows(x);kitOptFinal(x)})}catch(e){}finally{KIT_OPT_UNI=0}}
+function kitOptFinal(b){try{if(!b||!b.matches||!b.matches("button.ka.kopt")||b.classList.contains("kcard")||b.closest(".pc"))return;
+ {const k1=b.querySelector("small.kb");if(b.__kofSig&&k1&&b.__kofSig===k1.innerHTML+"|"+b.className)return}/* idempotent: our own DOM edits must not re-trigger the observers that call us */
+ b.querySelectorAll(".kfill,.kobang,.kdup").forEach(e=>e.remove());b.querySelectorAll(".kofold").forEach(e=>e.classList.remove("kofold"));
+ const body=b.querySelector(":scope > .kabody")||b;let kb=body.querySelector(":scope > small.kb, :scope > .kb");if(!kb){kb=document.createElement("small");kb.className="kb";body.appendChild(kb)}
+ const row=(cls,lab,chips)=>{const r=document.createElement("span");r.className="kr "+cls;r.innerHTML=`<span class="krl">${lab}</span><span class="krv"></span>`;const v=r.querySelector(".krv");chips.forEach((c,i)=>{if(i){const sp=document.createElement("span");sp.className="ksep kdup";sp.textContent="·";v.appendChild(sp)}v.appendChild(c)});return r};
+ const chipsOf=r=>r?[...r.querySelectorAll(":scope > .krv > .ef, :scope > .krv > .kwhy")]:[];
+ const dupOf=c=>{const x=c.cloneNode(true);x.classList.add("kdup");return x};
+ const R=k=>[...kb.querySelectorAll(":scope > .kr-"+k)];
+ let ton=R("ton")[0],mats=R("mat"),gains=[...R("thanh"),...R("duoc")],gain=gains[0];
+ if(!ton){if(mats.length){ton=row("kr-ton kdup0","Tốn",[]);ton.querySelector(".krv").append(...chipsOf(mats[0]).map(dupOf));mats=[];/* the Mất row folds below; its chips already stand in Tốn */ kb.dataset.komat="1"}
+  else{ton=row("kr-ton kfill","Tốn",[]);const e=document.createElement("span");e.className="ef n";e.textContent="không";ton.querySelector(".krv").appendChild(e)}}
+ else if(mats.length){const v=ton.querySelector(".krv");mats.forEach(m=>chipsOf(m).forEach(c=>{const sp=document.createElement("span");sp.className="ksep kdup";sp.textContent="·";v.append(sp,dupOf(c))}))}
+ if(gain){const v=gain.querySelector(".krv");gains.slice(1).forEach(g=>chipsOf(g).forEach(c=>{const sp=document.createElement("span");sp.className="ksep kdup";sp.textContent="·";v.append(sp,dupOf(c))}))}
+ else{gain=row("kr-duoc kfill","Được",[]);const e=document.createElement("span");e.className="ef n";e.textContent="không";gain.querySelector(".krv").appendChild(e)}
+ const keep=new Set([ton,gain]);const dis=b.classList.contains("kdis");
+ let extra=false;[...kb.children].forEach(r=>{if(keep.has(r)||r.classList.contains("kdup0"))return;r.classList.add("kofold");if(!(r.classList.contains("kr-mat")||gains.includes(r)))extra=true});
+ /* order: (Cần when disabled) · Tốn · Được · the folded rest */
+ const why=dis?kb.querySelector(":scope > .kr-why"):null;if(why)kb.prepend(why);const anchor=why?why.nextSibling:kb.firstChild;kb.insertBefore(ton,anchor);ton.after(gain);
+ const lead=b.querySelector(".klead");if(lead){lead.classList.add("kofold");extra=true}
+ if(extra){const m=document.createElement("span");m.className="kobang";m.setAttribute("role","button");m.setAttribute("aria-label","Xem thêm");m.title="Xem thêm";m.textContent="!";b.appendChild(m)}
+ b.dataset.kofin="1";b.__kofSig=kb.innerHTML+"|"+b.className}catch(e){console.error("kitOptFinal",e)}}
+window.kitOptFinal=kitOptFinal;
+(function(){const k0=kpOptArt;kpOptArt=function(b){const r=k0.apply(this,arguments);try{kitOptCompactRows(b);kitOptFinal(b);kitOptUnify(b)}catch(e){}return r};window.kpOptArt=kpOptArt})();
+/* "!" on a card: the full card (every row, lead text) in an overlay; tap anywhere closes; the option is NOT chosen */
+function kitOptInfo(b){try{let z=document.getElementById("kpinfo");if(!z){z=document.createElement("div");z.id="kpinfo";z.setAttribute("role","dialog");z.addEventListener("click",e=>{e.stopPropagation();z.hidden=true});document.body.appendChild(z)}
+ const c=b.cloneNode(true);c.removeAttribute("id");c.querySelectorAll("[id]").forEach(e=>e.removeAttribute("id"));c.querySelectorAll(".kaart,.kobang,.kfill,.kdup,.kdup0").forEach(e=>e.remove());c.querySelectorAll(".kofold").forEach(e=>e.classList.remove("kofold"));
+ c.querySelectorAll(".kr-ton,.kr-duoc").forEach(r=>{if(!r.querySelector(".krv > *"))r.remove()});
+ c.classList.remove("kopt","kart");c.classList.add("kopinfo");c.disabled=true;c.style.removeProperty("min-height");c.type="button";z.innerHTML="";z.appendChild(c);z.hidden=false}catch(e){console.error(e)}}
+window.kitOptInfo=kitOptInfo;
+document.addEventListener("click",e=>{try{const m=e.target&&e.target.closest&&e.target.closest("button.ka.kopt > .kobang");if(!m)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();kitOptInfo(m.parentElement)}catch(x){}},true);
+
+/* ===== KIT §6.2c DIALOG NUMBER LINES BEHIND "!" (owner 18/11 07:25Z): the formula / threshold lines of a dialog's info (Phẩm = …, Thường dưới 6 · Khá 6 · …) are NOT shown in the dialog;
+   kitNumBox(html) puts a "!" in the info's corner (float right) and keeps the lines hidden (.knum); the key sentences stay as normal text. Tap "!" = the lines in the overlay (#kpinfo). */
+function kitNumBox(h){return `<span class="knbang" role="button" tabindex="0" aria-label="Xem thêm" title="Xem thêm">!</span><div class="knum">${h}</div>`}
+window.kitNumBox=kitNumBox;
+document.addEventListener("click",e=>{try{const m=e.target&&e.target.closest&&e.target.closest(".knbang");if(!m)return;const n=(m.parentElement||document).querySelector(":scope > .knum");if(!n)return;e.preventDefault();e.stopPropagation();e.stopImmediatePropagation();
+ let z=document.getElementById("kpinfo");if(!z){z=document.createElement("div");z.id="kpinfo";z.setAttribute("role","dialog");z.addEventListener("click",ev=>{ev.stopPropagation();z.hidden=true});document.body.appendChild(z)}
+ z.innerHTML=`<div class="kopinfo knumpop">${n.innerHTML}</div>`;z.hidden=false}catch(x){}},true);
+(function(){const st=document.createElement("style");st.id="kit-num-bang";st.textContent=`
+#modal .knum{display:none!important}
+#modal .knbang{float:right;margin:0 0 4px 8px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:700 .85rem/1 var(--body,sans-serif);color:var(--gold,#8f5f0c);background:#fffaf0;border:1px solid var(--gold,#8f5f0c);cursor:help;position:relative}
+#modal .knbang::after{content:"";position:absolute;inset:-9px}
+#kpinfo>.knumpop{width:min(560px,92vw);box-sizing:border-box;padding:12px 14px;background:#fffaf0;border:1px solid var(--gold,#8f5f0c);border-radius:10px;color:var(--ink,#2a1a12);cursor:zoom-out;font-size:.9rem}
+#kpinfo>.knumpop p{margin:0 0 6px}`;document.head.appendChild(st)})();
+(function(){const st=document.createElement("style");st.id="kit-opt-final";const mk=O=>`${O}{--kaw:66px!important;--kah:88px!important;min-height:106px!important;height:auto!important;align-items:flex-start!important;box-sizing:border-box;position:relative}
+${O}>.kaart{flex:0 0 66px!important;width:66px!important;height:88px!important;align-self:flex-start!important}
+${O} .kat{flex-wrap:wrap!important;padding-right:26px}
+${O} .kat>.kan{flex:1 1 100%!important;min-width:0!important}
+${O} small.kb{row-gap:1px!important}
+${O} small.kb>.kr>.krv{display:block!important}
 ${O} small.kb>.kr>.krv>*{display:inline!important}
 ${O} small.kb>.kr>.krv>.ksep{display:inline!important;margin:0 4px!important;opacity:.55}
-${O} small.kb{row-gap:1px!important}`;
- const TT=`${O} .kat{flex-wrap:wrap!important}\n${O} .kat>.kan{flex:1 1 100%!important;min-width:0!important}`;
- const AB=`${O}{--kaw:54px!important;--kah:72px!important;min-height:0!important;height:auto!important;align-items:flex-start!important}
-${O}>.kaart{flex:0 0 54px!important;width:54px!important;height:72px!important;align-self:flex-start!important}`;
- const C=`${O}{--kaw:40px!important;--kah:40px!important;min-height:0!important;height:auto!important;display:grid!important;grid-template-columns:40px minmax(0,1fr)!important;column-gap:8px!important;row-gap:3px!important;align-items:center!important;padding:6px 10px!important}
-${O}>.kaart{grid-column:1!important;grid-row:1!important;width:40px!important;height:40px!important;flex:none!important}
-${O}>.kabody{display:contents!important}
-${O}>.kabody>.kat{grid-column:2!important;grid-row:1!important}
-${O}>.kabody>*:not(.kat){grid-column:1/-1!important}`;
- st.textContent=TT+"\n"+(v==="C"?C:AB)+"\n"+(v==="A"?"":INL)}
-window.kitOptVarSet=kitOptVarSet;
+${O} .kofold{display:none!important}
+${O} .kfill .ef{color:var(--dim,#9a8a78)!important;font-weight:400!important}
+${O} .kfill .krl{opacity:.6}
+${O}>.kobang{position:absolute;top:5px;right:6px;width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font:700 .85rem/1 var(--body,sans-serif);color:var(--gold,#8f5f0c);background:#fffaf0;border:1px solid var(--gold,#8f5f0c);cursor:help;z-index:2}
+${O}>.kobang::after{content:"";position:absolute;inset:-9px}`;
+ st.textContent=mk("html body #modal#modal button.ka.kart.kopt.kopt")+"\n"+mk("html body .kitpg-opts>button.ka.kart.kopt.kopt")+`
+#kpinfo{position:fixed;inset:0;z-index:100001;background:#1a0f08cc;display:grid;place-items:center;cursor:zoom-out;padding:16px}
+#kpinfo[hidden]{display:none!important}
+#kpinfo>button.kopinfo{width:min(560px,92vw);max-height:86vh;overflow:auto;text-align:left;cursor:zoom-out;opacity:1!important;pointer-events:none;background:#fffaf0!important;color:var(--ink,#2a1a12)!important;filter:none!important}`;document.head.appendChild(st)})();
 /* kit sample page (§6.2): three options of "Hoàng hậu triệu kiến" through the real modal markup → kaNorm → kpOptArt */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Thẻ lựa chọn: tranh bên trái, thông tin bên phải (thẻ gọn)",html:()=>
  `<div class="opts kitpg-opts">`+
  [["Cúi đầu nhận lỗi","tốn: 1 khắc"],["Thưa rằng do Hoàng thượng định","tốn: 1 khắc"],["Dâng lễ vật xin bỏ qua","tốn: Bạc -20, 1 khắc"]]
   .map(([n,x],i)=>`<button class="opt" data-ksample="${i}">${n}<small>${typeof kitParse==="function"?kitParse(x):x}</small></button>`).join("")+`</div>`})}catch(e){}
-/* kit sample page (§6.2b, review/kit-fit, owner 16/11 s21): the card picks its picture form from its text — short text → SQUARE (no empty space under the
-   text), long text → the tall 3:4 picture (kitOptFit, jk4) */
-try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2b",title:"Thẻ lựa chọn: chữ ngắn thì tranh vuông, chữ dài thì tranh đứng (không chừa khoảng trống)",html:()=>
+/* kit sample page (§6.2b FINAL): no cost / no gain → grey "không" rows, long note behind "!", every card one size */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2b",title:"Thẻ lựa chọn: một cỡ, chỉ Tốn và Được (còn lại sau dấu !)",html:()=>
  `<div class="opts kitpg-opts">`+
- [["Tiếp","thân +3"],["Xin về tảo mộ tổ tiên",`tốn: Sức -${BAL.kitpage.demo.tomb.suc} · được: Đức +${BAL.kitpage.demo.tomb.duc}, cha mẹ vui lòng`],["Dâng lễ vật xin Hoàng hậu bỏ qua cho lần này",`tốn: Bạc -${BAL.kitpage.demo.gift.bac}, ${BAL.kitpage.demo.k} khắc · được: Hoàng hậu thiện cảm +${BAL.kitpage.demo.gift.hh}, Danh +${BAL.kitpage.demo.gift.danh} · mất: Thái hậu thiện cảm -${BAL.kitpage.demo.gift.th} · cần: Bạc ≥ ${BAL.kitpage.demo.gift.bac}`]]
+ [["Tiếp","thân +3"],["Xin về tảo mộ tổ tiên",`tốn: Sức -${BAL.kitpage.demo.tomb.suc} · được: Đức +${BAL.kitpage.demo.tomb.duc}, cha mẹ vui lòng · ghi chú: chơi 6 phần ra Khá`],["Thôi, không làm gì","ghi chú: để lần sau"]]
   .map(([n,x],i)=>`<button class="opt" data-ksample="${i}">${n}<small>${typeof kitParse==="function"?kitParse(x):x}</small></button>`).join("")+`</div>`})}catch(e){}
 /* kit sample page (§6.3, review/pcard-actrow): the acts of a person card = the same long row, one per line (pop-up / tab / any width) */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.3",title:"Việc trên thẻ người: hàng dài, mỗi việc một dòng",html:()=>

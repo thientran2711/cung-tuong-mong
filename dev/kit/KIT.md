@@ -685,15 +685,14 @@ Grid rows: every card in a row has the row's height (fitted to content, `grid-au
 
 ## 6.2 OPTION CARD = SMALL ACT CARD WITH ITS PICTURE LEFT (owner 15/11 "Hình minh họa cho từng hành động bên trái. Bên phải là thông tin. Tôi nói hoài vậy."; review/opt-pics) — `dev/build/jopic.js` (after jph) + jk4 `kitCompactCSS`
 Markup: dev/handover/refs/owner-option-picture-left.jpg (docs branch). Owner rulings 15/11: keep BOTH act-card forms — the big Hành sự card
-(§6 / §6.1) unchanged; the SMALL card (§43) gets a 3:4 PORTRAIT RECTANGLE picture when its text is at least as tall as that picture, else the SQUARE form (§6.2b, owner 16/11 s21); every dialog option card is that small card.
+(§6 / §6.1) unchanged; every dialog option card is the ONE final form of §6.2b (66x88 picture, Tốn + Được, "!").
 - WHERE: every option of every dialog — `#modal .opts > button.ka` (events, dilemmas, nights, reactions, servant matters, festivals, co-op,
   pickers) and kit choice panels `.kpscopts > button.ka`. Not: the identity card's approved pinned pair (`.nlopts`). ONE place: the outermost
   `kaNorm1` wrapper calls `kpOptArt(b)` after the j63 frame (and kitHideOut / kitHint) built the card. Nobody adds pictures by hand.
-- LAYOUT: `.kaart` (kitArtFrame picture, 84x112, cover-cropped, category edge colour `--kcc0`) LEFT · `.kabody` (title + risk chip / odds,
+- LAYOUT: `.kaart` (kitArtFrame picture, 66x88 per §6.2b, cover-cropped, category edge colour `--kcc0`) LEFT · `.kabody` (title + risk chip / odds,
   Cần / Tốn / Được / Mất / Gợi ý rows as §6 / §28.6) RIGHT. CSS = the §43 small-card rule set `kitCompactCSS(B,w,h)` (jk4, ONE string, used for
   `.kpane` act cards with B=`button.ka.kart` and for options with B=`button.ka.kart.kopt`). Options: one card per row, full width
-  (overrides 31.16 `k3grid` when the cards have pictures; owner L109), card min-height = picture + padding, so the usual cards are all the
-  same size; a card with more text grows, never clips. The tiny portrait icon beside an option title (j25 `.md`) is removed: the picture replaces it.
+  (overrides 31.16 `k3grid` when the cards have pictures; owner L109), all cards of a dialog one height (§6.2b). The tiny portrait icon beside an option title (j25 `.md`) is removed: the picture replaces it.
 - TAP ON THE PICTURE = `kitPicZoom(src)`: the picture large over the screen (`#kpzoom`), tap anywhere closes; it does NOT choose the option
   (capture-phase click handler). Any other kit part may call `kitPicZoom(src)`.
 - WHICH PICTURE — `kitOptPic(title, button)` → `{src, key, how}`; owner ruling: one picture per MEANING GROUP, reused everywhere; first hit wins:
@@ -713,29 +712,21 @@ Markup: dev/handover/refs/owner-option-picture-left.jpg (docs branch). Owner rul
   ids in dev/figwork/optpics/gens.txt, prompts in prompts.json): `opt-thoi` (closing a fan, turning away), `opt-thua-trinh` (hands folded
   in a polite bow before a seated superior), `opt-buong-tay` (letting a jade pendant go by a lake), `opt-rinh-cho` (dark: watching from behind
   a lattice for the moment), `opt-canh-giu` (barring and locking the palace door, casket moved), `opt-hoang-so` (alarm, toppled cup).
-- Kit sample page §47: "§6.2" (the three options of the owner's markup "Hoàng hậu triệu kiến" through kaNorm → kpOptArt).
+- Kit sample page §47: "§6.2" + "§6.2b" (options with and without cost/gain; the three options of the owner's markup "Hoàng hậu triệu kiến" through kaNorm → kpOptArt).
 - Tests: `dev/test/opt-pics.js` (every option kind → its picture source; layout at the design sizes: picture left 84x112, nothing wider than
   its box, zoom opens and does not choose). Scan of every option title (static + bot): dev/test/opt-pics-table.md (before/after).
 
-### 6.2b PICTURE FORM BY CONTENT — tall or square, never empty space under the text (owner 16/11 s21, VIỆC "Tiết Thanh minh", Fold; refs/owner-viec-thanhminh.jpg; review/kit-fit) — `kitOptFit` / `kitOptFitAll` / `KIT_OPT_SQ` (jk4, beside `kitCompactCSS`)
-Owner rule (verbatim): "Bất kỳ khi nào mà mày cho thợ ráp nút vào á, mà mày thấy có một cái khoảng trống ở dưới thì phải lập tức đổi hình liền, đổi cái hình đại diện liền đó."
-- ONE rule for EVERY compact act card (`button.ka.kart` in the kitCompactCSS form: dialog options `.kopt`, person-card act rows §6.3, narrow-pane act
-  cards §43, the kit page). ONE PICTURE SIZE PER GROUP (owner 17/11 "nút to nút nhỏ", VIỆC "Kẻ hầu xin", Fold; review/opt-pic-same): all option cards of one
-  dialog (`#modal .dlg`) — else all siblings of one list — get the SAME picture size and shape; it never grows or shrinks with one card's text.
-  The size comes from the SHORTEST text block `m` of the group (`kitOptGroup` / `kitOptFit0`, jk4):
-  ALL TALL 3:4 (84x112, 72x96 in a pane < 420 px) when even the shortest text fills the tall picture (m >= tall height);
-  else ALL SQUARE, side = m clamped to [`KIT_OPT_SQ.min` × w, w] (84 → 38..84 px, 72 → 32..72 px), so the shortest card is as tall as its text and nothing is
-  left empty under it. Longer cards keep the same square (picture top-left, text grows the card). Same meaning picture (kitOptPic §6.2), cover-cropped;
-  class `kasq`, `data-kapic="tall|sq"`.
-- PERSON / SUBJECT DIALOGS (owner 17/11 ~05:00Z, final rule; `kitOptIsPerson` / `kitOptFill`, jk4): when the group is a person card's act rows (`.pc`) or a dialog with a figure column
-  (`.kpsubj` / `.kszfig` / kdper), the square form is NEVER used: every card is ONE size (the tallest text sets the height, min picture height 72 px) and its
-  picture is a TALL 3:4 RECTANGLE filling the card height (width = 3/4 of the height, 54..84 px and the text column keeps >= 190 px, cover-cropped, same meaning picture), `data-kapic="fill"`.
-  Same on every card whatever its text length; nothing is left empty beside the text. The options area scrolls (KIT §8.2 T3 / L191).
-- Re-measured automatically: after every kaNorm pass, after showModal, and by a ResizeObserver on each card + its text (dialog fit, fonts, rotation).
-  No screen sets a picture size by hand. The big Hành sự card (§6) is not touched (its picture is wider than 112 px).
-- Residual: a text block shorter than the minimum square (one title line, no rows) keeps (min − text) px; reported as "at min" by the test.
-- Test: `node dev/test/kit-fit.js <url> <outdir> <tag> [WxH,..] [shots]` — empty px under the text of every option card in every frame kind (rule ≤ 2 px) and `UNEQUAL option pictures` (more than one picture size in one dialog = violation), `PERSON DIALOG cards not one size`, `PERSON DIALOG card picture is square` and `ONE WORD PER LINE` (any value/text cell of a card wrapped to about one word per line).
-- Residual: in a 2-up row a card stretched to a much taller sibling shows the empty px under its own text (grid stretch, not the picture); unchanged by this rule.
+### 6.2b FINAL OPTION CARD — ONE size, Tốn + Được only, "!" for the rest (owner 18/11 ~07:25Z, review/opt-card-short; supersedes the tall/square form-by-content rule, the person-dialog fill rule and the review switch) — `kitOptFinal` / `kitOptInfo` / `kitNumBox` (jopic), `kitOptEqual` (jk4), frame rule in jksize
+Owner (verbatim core): "mấy cái nút … cùng một kích thước thôi … cái hình đại diện hình chữ nhật … tốn không được không … màu xám … ghi chú nằm trong cái nút hình dấu than … chỉ còn hiện ở cái ô này là tốn và được thôi."
+- EVERY dialog option card (`button.ka.kopt`, not a person card `.pc` row §6.3): picture box 66x88 (3:4 rectangle, never square, never stretched; same box in every dialog), min height 106 px; the cards of ONE dialog are ONE height = the tallest card of that dialog (`kitOptEqual`, `data-kapic="eq"`).
+- A card that has no picture of its own gets the §59 placeholder when a sibling has one (`kitOptUnify`): no picture-less card next to picture cards. The odds chip sits UNDER the title (title row wraps; the title keeps the full width).
+- ROWS: exactly **Tốn** and **Được** are visible. No cost → grey row "Tốn: không"; no gain → grey row "Được: không" (`.kfill`). Mất folds into Tốn; further Được rows (Được ngay / Thành) fold into the Được row (copies, `.kdup`). Rolled cards: the Thành row is the Được row.
+  Everything else — Cần, Bại, Kèm, Ghi chú, Vì sao, the lead text — is folded (`.kofold`, display none) and opens from the **"!"** in the card's top-right corner (`kitOptInfo(b)` → `#kpinfo` overlay = the whole card, every row; tap anywhere closes; the tap NEVER chooses the option, capture-phase handler like `kitPicZoom`). The "!" exists only when something is folded. "trả khi làm xong" (a Ghi chú) moves into Tốn (`kitOptCompactRows`).
+  EXCEPTION: a DISABLED card (`kdis`) keeps its red Cần row visible — the player must see why it is dead.
+- DIALOG NUMBER LINES: formula / threshold lines of a dialog's info (Phẩm = …, Thường dưới 6 · Khá 6 · Tinh xảo 10 · Tuyệt phẩm 15) are wrapped with `kitNumBox(html)` (jopic): hidden (`.knum`), a "!" floats in the info's corner and opens them in `#kpinfo`; the key sentences ("Chỉ vật liệu quý mới thành Tuyệt phẩm…", "Vật liệu tốt, quý còn làm quà…") stay as text. Used by the three material dialogs (jwkr, jtds, j83).
+- FRAME RULE (every layout, jksize `.k3right`): the portrait/figure AND the info (event picture, text, chips) STAND STILL; only the option list (`.opts`) scrolls (`overflow:clip` on `.k3right`, `overflow-y:auto` on `.opts`, min 112 px). The right column never scrolls as a whole.
+- Person-card act rows (`.pc > .pcr`, §6.3) are NOT dialog options: they keep `kitOptFill` (tall 3:4 filling the row). Removed: `KIT_OPT_VAR`, `kitOptVarSet`, `kitOptFit0` early exit, `kitOptShortTier`, the square form (`kasq`) for dialog options.
+- Tests: `node dev/test/opt-card-scan.js <url> <out> <tag> 755x1000,1180x820 none <cases>` (card heights equal per dialog, picture box, title em, visible rows, fixed-top check = scroll every scroller, portrait/info must not move) and `node dev/test/opt-card-bang.js <url> <out> [WxH]` ("!" on a card / on the dialog opens the overlay and chooses nothing).
 
 ## 6.3 PERSON-CARD ACT ROWS — every act a person card offers is the LONG HORIZONTAL ROW (owner 16/11, iPad 755x1000 shot of Tiểu Hoa's card; review/pcard-actrow) — `dev/build/jk4.js` (after the §43 compact block)
 Owner: "this button does not follow the shared kit; if the text is long we HAVE a kit part for that, the long horizontal option row — why not use it?"

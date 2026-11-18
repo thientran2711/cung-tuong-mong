@@ -99,7 +99,7 @@ function tdsTchAsk(k,then){const V=VIR.find(x=>x.k===k),fee=virCost(virLv(S,k),S
  for(let m=0;m<3;m++){const need=fee+(K.mat[m]||0);O.push({n:`${r.n} · ${K.mn[m]}`,fx:{},x:`${K.mat[m]?`tốn: Bạc -${K.mat[m]} (trả khi làm xong) · `:""}${wkOddsTxt(S,kind,m)}${K.fin?" · "+wkFinTxt(K):""}${newSt?` · kèm: học ${rcpStN(kind,st[0])}`:""}`,
   dis:S.bac<need?`thiếu bạc (cần ${need})`:"",go:()=>{if(S.bac<need){log(`Không đủ bạc: cần ${need}.`);tdsReset();return}tdsRun(k,lm,{kind,mat:m,r:rid,subj:wkrSubj(kind,r)})}})}
  O.push({n:"Thôi",fx:{},go:()=>tdsReset()});
- Q.push({act:1,t:`${r.n}: dùng vật liệu gì?`,who:pMe(),h:`<p>Phẩm = phần chơi (0..10) + ${V.n} bậc ${l}: +${wkLvQ(S,k)} + vật liệu (thường +${WMAT[0]}, tốt +${WMAT[1]}, quý +${WMAT[2]}).</p><p class="past">${wkThTxt()}</p><p>Chỉ vật liệu quý mới thành Tuyệt phẩm.${fee?` Phí thầy ${fee} bạc trả riêng.`:""}</p>`,opts:O})}})();
+ Q.push({act:1,t:`${r.n}: dùng vật liệu gì?`,who:pMe(),h:`${kitNumBox(`<p>Phẩm = phần chơi (0..10) + ${V.n} bậc ${l}: +${wkLvQ(S,k)} + vật liệu (thường +${WMAT[0]}, tốt +${WMAT[1]}, quý +${WMAT[2]}).</p><p class="past">${wkThTxt()}</p>`)}<p>Chỉ vật liệu quý mới thành Tuyệt phẩm.${fee?` Phí thầy ${fee} bạc trả riêng.`:""}</p>`,opts:O})}})();
 /* run the lesson itself (j85 lessonVir, or review/tuduc-mg tdPlay); the work is made once the lesson really happened */
 function tdsRun(k,mode,pick){TDV.pend=Object.assign({k,mode},pick);TDV.hit=null;
  if(mode==="prac"){if(!tdsOK(k,"prac")){tdsReset();return}apply({suc:-BAL.tds.pracSuc});spend(BAL.tds.pracK);TDV.hit={k};tdsFinish("tự học");save();render();return}

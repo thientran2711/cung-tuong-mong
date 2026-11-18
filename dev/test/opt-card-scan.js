@@ -7,7 +7,7 @@ const MEAS=`(()=>{const M=document.getElementById('modal');if(!M||M.hidden)retur
  return{title:((d.querySelector('.kpt,.kpttl,h2')||{}).textContent||'').slice(0,40),subj:!!d.querySelector('.kpsubj,.kszfig')||d.classList.contains('kdper'),
  opts:[...d.querySelectorAll('.opts > button.ka, .kpscopts > button.ka')].filter(b=>b.offsetParent).map(b=>{const a=b.querySelector(':scope > .kaart'),t=b.querySelector(':scope > .kabody')||b;const A=a?R(a):{width:0,height:0},B=R(b);const kn=b.querySelector('.kan');const fs=kn?parseFloat(getComputedStyle(kn).fontSize)||16:16;
   const rows=[...b.querySelectorAll('small.kb > .kr')].map(r=>({l:(r.querySelector('.krl')||{}).textContent,n:lines(r.querySelector('.krv')||r)}));
-  return{t:((kn||t).textContent||'').trim().slice(0,30),pic:a&&getComputedStyle(a).display!=='none'?Math.round(A.width)+'x'+Math.round(A.height):'NONE',ch:Math.round(B.height),text:Math.round(R(t).height),titleEm:kn?+(R(kn).width/fs).toFixed(1):0,rows:rows.map(r=>r.l+':'+r.n).join(' '),dlgH:Math.round(R(d).height)}})}})()`;
+  return{t:((kn||t).textContent||'').trim().slice(0,30),pic:a&&getComputedStyle(a).display!=='none'?Math.round(A.width)+'x'+Math.round(A.height):'NONE',ch:Math.round(B.height),text:Math.round(R(t).height),titleEm:kn?+(R(kn).width/fs).toFixed(1):0,rows:rows.map(r=>r.l+':'+r.n).join(' '),vis:[...b.querySelectorAll('small.kb > .kr')].filter(r=>r.getClientRects().length).map(r=>((r.querySelector('.krl')||{}).textContent||'').trim()).join('/'),bang:!!b.querySelector(':scope > .kobang'),dlgH:Math.round(R(d).height)}})}})()`;
 (async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});const ALL=[];
  for(const sz of (SIZES||'755x1000,1180x820').split(',')){const [W,H]=sz.split('x').map(Number);
   const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:2,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce'});
@@ -15,7 +15,7 @@ const MEAS=`(()=>{const M=document.getElementById('modal');if(!M||M.hidden)retur
   await p.goto(URL,{waitUntil:'domcontentloaded'});await p.addStyleTag({content:'#kroul,#kroulw,.kroul,.kcf{display:none!important}'});
   await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function'&&window.__ctmBuilt);await sleep(2500);
   await p.evaluate(v=>{try{kitReward=()=>{}}catch(e){}try{window.kitReward=()=>{}}catch(e){}const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}SLOT=3;document.getElementById('title').hidden=true;
-   window.__nlInner=1;for(let i=0;i<400;i++){start();if(!isSrv())break}window.__nlInner=0;quiet=false;Q.length=0;const md=document.getElementById('modal');if(md)md.hidden=true;S.th=Math.max(S.th||0,40);S.bac=500;if(v&&v!=='none')kitOptVarSet(v);render()},VAR);
+   window.__nlInner=1;for(let i=0;i<400;i++){start();if(!isSrv())break}window.__nlInner=0;quiet=false;Q.length=0;const md=document.getElementById('modal');if(md)md.hidden=true;S.th=Math.max(S.th||0,40);S.bac=500;render()},VAR);
   await sleep(800);const rows=[];
   for(const k of CASES){const ok=await p.evaluate(async k=>{const W=t=>new Promise(r=>setTimeout(r,t));Q.length=0;const md=document.getElementById('modal');md.hidden=true;
     const R0=liveRivals(true).filter(v=>!v.queen);R0.slice(0,3).forEach(v=>S.met[v.id]=1);const v=R0[0],v2=R0[1]||R0[0];
@@ -36,11 +36,16 @@ const MEAS=`(()=>{const M=document.getElementById('modal');if(!M||M.hidden)retur
     Q.forEach(m=>m.must=1);showModal();await W(900);return document.getElementById('modal').hidden?'hidden':true},k).catch(e=>'ERR '+e.message.slice(0,160));
    if(ok!==true){rows.push({k,skip:String(ok)});continue}
    await p.evaluate(()=>Promise.all([...document.querySelectorAll('#modal img')].map(i=>i.complete?0:new Promise(r=>{i.onload=i.onerror=r;setTimeout(r,15000)}))));await sleep(1800);
-   await p.evaluate(()=>{const o=document.querySelector('#modal .opts, #modal .kpscopts');if(o)o.scrollIntoView({block:'start'})});await sleep(300);
-   const r=await p.evaluate(MEAS);r.k=k;rows.push(r);
+   const r=await p.evaluate(MEAS);r.k=k;
    if(SHOTS==='all'||(SHOTS||'').split(',').includes(k))await p.screenshot({path:`${OUT}/${TAG}-${k}-${sz}.jpg`,type:'jpeg',quality:80});
+   /* FIXED TOP (owner 18/11): scroll every scroller of the dialog to its end; the portrait / info boxes must not move */
+   r.fix=await p.evaluate(async()=>{const d=document.querySelector('#modal .dlg');await new Promise(r=>setTimeout(r,2500));/* the fit ladder re-lays the frame once after the first paint (image loads) */const T=[...d.querySelectorAll('.kszfig,.kpsubj,.k3ev,.k3mpor,.kpmain,.kfacts,.kph')].filter(e=>e.offsetParent);const pos=()=>{const t0=d.getBoundingClientRect().top;return T.map(e=>e.isConnected&&e.offsetParent?Math.round(e.getBoundingClientRect().top-t0):null)};/* relative to the dialog: the pop-up may re-centre, the content must not move inside it */
+    const S=[...d.querySelectorAll('*'),d].filter(e=>{const cs=getComputedStyle(e);return /auto|scroll/.test(cs.overflowY)&&e.scrollHeight>e.clientHeight+2});const p0=pos();S.forEach(e=>e.scrollTop=e.scrollHeight);await new Promise(r=>setTimeout(r,250));const p1=pos();
+    const mv=p0.map((v,i)=>(v!==null&&p1[i]!==null&&Math.abs(v-p1[i])>1)?T[i].className.toString().slice(0,14):'').filter(Boolean);const moved=mv.length>0;const scr=S.map(e=>(e.className||e.id||e.tagName).toString().slice(0,18)).join('|');const keep=S.map(e=>e.scrollTop);return{moved,mv:mv.join('+'),scr,n:S.length}});
+   if(SHOTS==='all'||(SHOTS||'').split(',').includes(k))await p.screenshot({path:`${OUT}/${TAG}-${k}-${sz}-scrolled.jpg`,type:'jpeg',quality:80});
+   rows.push(r);
    await p.evaluate(()=>{Q.length=0;const md=document.getElementById('modal');md.hidden=true});}
   ALL.push({sz,rows,errs});await ctx.close()}
  for(const s of ALL){console.log(`== ${s.sz} errors ${s.errs.length} ${s.errs.slice(0,2).join('|')}`);for(const r of s.rows){if(r.skip){console.log(`  ${r.k.padEnd(8)} skip ${r.skip}`);continue}
-  console.log(`  ${r.k.padEnd(8)} dlg ${r.opts[0]?r.opts[0].dlgH:'-'} subj ${r.subj?1:0} cards ${r.opts.length} ch ${r.opts.map(o=>o.ch).join('/')} pic ${r.opts.map(o=>o.pic).join('/')} titEm ${r.opts.map(o=>o.titleEm).join('/')} text ${r.opts.map(o=>o.text).join('/')}`)}}
+  console.log(`  ${r.k.padEnd(8)} fix ${r.fix?(r.fix.moved?'MOVED<'+r.fix.mv+'>':'fixed')+'['+r.fix.scr+']':'-'} vis ${r.opts.map(o=>o.vis).join(',')} dlg ${r.opts[0]?r.opts[0].dlgH:'-'} subj ${r.subj?1:0} cards ${r.opts.length} ch ${r.opts.map(o=>o.ch).join('/')} pic ${r.opts.map(o=>o.pic).join('/')} titEm ${r.opts.map(o=>o.titleEm).join('/')} text ${r.opts.map(o=>o.text).join('/')}`)}}
  fs.writeFileSync(`${OUT}/${TAG}.json`,JSON.stringify(ALL,null,1));await b.close()})().catch(e=>{console.error(e);process.exit(2)});

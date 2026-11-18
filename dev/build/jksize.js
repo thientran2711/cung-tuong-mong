@@ -550,6 +550,14 @@ html body #modal .dlg.kszlive.kszlive{width:var(--kszw)!important;max-width:calc
 #modal .dlg.kszlive[data-narrow="1"]{overflow-x:hidden;overflow-y:auto}
 #modal .dlg.kszlive[data-pres="one"] .k3right{justify-content:center}
 #modal .dlg.kszlive .k3right>.kpmain{flex:none;min-width:0;display:block;padding:0;margin:0}
+/* KIT §6.2 FINAL / frame rule (owner 18/11 07:25Z, EVERY layout): the portrait + the info (event picture, text, chips) STAND STILL; only the option list scrolls. The right column never scrolls as a whole. */
+html body #modal .dlg.kszlive .k3right{overflow:hidden!important;overflow:clip!important}
+html body #modal .dlg.kszlive .k3right>:not(.opts){flex:none!important}
+/* narrow / stacked frame (the options are a sibling of .k3body inside #mb): same rule — #mb never scrolls, .k3body (portrait + info) stands still, only .opts scrolls */
+html body #modal .dlg.kszlive>#mb:has(>.opts.k3btns){display:flex!important;flex-direction:column!important;overflow:clip!important;min-height:0!important;flex:1 1 auto!important}
+html body #modal .dlg.kszlive>#mb:has(>.opts.k3btns)>.k3body{flex:none!important}
+html body #modal .dlg.kszlive>#mb>.opts.opts.opts.k3btns{flex:1 1 auto!important;min-height:112px!important;overflow-y:auto!important;overscroll-behavior:contain}
+html body #modal .dlg.kszlive .k3right>.opts.opts.opts{flex:0 1 auto!important;min-height:112px!important;overflow-y:auto!important;overscroll-behavior:contain;max-height:none!important}
 html body #modal .dlg.kszlive #mb .opts.opts.opts.k3btns.k3btns{display:grid!important;flex-direction:row!important;grid-template-columns:repeat(var(--k3c,1),minmax(0,1fr))!important;align-content:start!important;gap:${KIT_SIZE.v3.btn.gap}px;margin:0;flex:none;max-height:none;overflow:visible;position:static}
 #modal .dlg.kszlive>#mb>.opts.k3btns{padding:0 12px 12px;box-sizing:border-box}
 html body #modal .dlg.kszlive #mb .opts.opts.opts.k3btns.k3btns>button{grid-column:span var(--k3s,1)!important;order:0!important;width:auto;min-width:0;max-width:none;margin:0}
