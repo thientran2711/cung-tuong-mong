@@ -1,0 +1,19 @@
+#!/usr/bin/env python3
+"""states-sample r3 (owner 18/11 ~21:36Z: 'dùng lại cái prom cũ' for nhà nghèo): the OLD live ngheo prompt (review/khuecac dev/art/khuecac/mkprompt.py --ngheo, verbatim
+sentences) with ONLY these adaptations to our style: identity-ref wording (single identity image), style-ref sentence, closed-lips words, plain-cloth drape sentence.
+Usage: python3 ngheo_old.py c06|c25"""
+import sys
+OLD={"c06":("face with a petite pointed chin, warm round-almond eyes, softly rounded brows","vermilion and ivory","holding a bundle of hemp thread skeins in both hands"),
+"c25":("oval face, almond eyes","deep cherry red and black-gold","holding a small woven bamboo basket of herbs on her forearm")}
+def prompt(c):
+    feat,col,prop=OLD[c]
+    return ("Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference portraits; full-body standing figure head to feet, centered, plain light parchment background, soft even light; fair porcelain skin; serene gentle neutral expression, soft eyes, closed lips or faint smile, lips closed, no teeth, mouth never open; elegant, slim, clearly adult; beautiful/handsome romantic-lead looks for everyone; face clearly visible, 3/4 or frontal view. ONE single figure only. "
+    "A young unmarried woman of a modest family that has fallen on hard times (daughter of a poor village scholar), about 19 years old, fresh and youthful but clearly adult, a very beautiful woman: luminous porcelain skin, soft rosy blush, large soft bright eyes, delicate small nose, small rosy lips, gentle faint smile. "
+    f"Keep EXACTLY the face, facial features and hair colour of the woman in the identity reference image (her own features: {feat}); she must be instantly recognisable as the same person; change ONLY her clothes, hairstyle and accessories. The style reference image is only for skin, drawing style, fabric and embroidery: never copy its face, body or pose. "
+    "Her forehead is bare and clean: NO huadian, no forehead mark, no forehead flower, no dot between the brows; no moles, no beauty marks, clean even skin (if the reference face shows any dark spot, do not copy it). "
+    f"Outfit (modest and plain but NEAT, clean, well-kept and pretty; NO patches, NO rags, NO dirt, NO tears, never pitiful): a simple cross-collar short jacket of plain cotton or linen with narrow sleeves ending at the wrists, over a plain long skirt of the same simple cloth, a plain cloth apron or a simple cloth sash tied neatly; no embroidery or only a thin plain border, no silk sheen, no vest, no brocade; soft muted, slightly faded tones of her own colours ({col}) mixed with undyed natural beige. "
+    "Hair of an unmarried girl: simple and tidy, half-up with one small loop tied with a plain cloth ribbon, the rest of her long black hair falling smoothly down her back; at most ONE plain wooden or simple silver hairpin; no earrings or only tiny plain ones; no pearls, no jade, no gold, no flowers in her hair. "
+    "Plain cotton cloth with simple soft folds, matte, hanging simply and naturally. "
+    f"Pose: calm still standing pose, slightly turned at an angle, {prop}; sleeves, ribbons, skirt and hair hang still and straight, nothing flying or floating, no wind. "
+    "Eyes open, looking gently toward the viewer, soft, warm and round-almond, never narrow, slanted, upturned or closed; face calm and kind, revealing no personality. Rendering as rich, luminous and detailed as the style reference portrait (near-3D, soft volumetric light on face and cloth), not a pale sketch or a light watercolour wash. Plain light parchment background, the whole figure from top of head to feet inside the frame with margin around it.")
+if __name__=="__main__": print(prompt(sys.argv[1]))
