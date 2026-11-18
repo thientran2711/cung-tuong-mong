@@ -4,7 +4,8 @@
    E3 the host steps both once (his step + her step in withSeat b), her buổi arrives as a part-D patch · E4 her own change of this buổi
    (bac, a log line) reaches the host's copy before her step and is not undone · E5 the world is read-only in her step (unit: an NPC
    number + a world key put back, her viewer row kept) · E6 host clock: a forced step runs both with her not ready ·
-   E7 buổi tối: both ready → the night runs → week merged once · E8 no page errors. */
+   E7 buổi tối: both ready → the night runs → week merged once · E9 cycle flags by do cyb · E10 night by do tn + the view ·
+   E11 her summons = a part-D card built on the host · E12 a world window's end on her household runs on the host · E8 no page errors. */
 const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),path=require('path');
 const WURL=process.argv[2]||'https://ctm-coop.victoria-tntt.workers.dev';const LVL=+(process.argv[3]||5);const SWAP=+(process.argv[4]||0);
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,c?300:2500):''))};
@@ -80,6 +81,28 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  const fin=[await st(H),await st(G)];ok(fin[0].b===fin[1].b,'E7 same buổi both seats after the week',fin.map(x=>[x.w,x.b]));
  console.log('E stat host',JSON.stringify(fin[0].E),'guest',JSON.stringify(fin[1].E));
  console.log('E log host',JSON.stringify(await H.p.evaluate(()=>COOPW.thin.E.log.slice(-25))));
+ /* E9: her cycle flags reach the host's copy of her by the intent do cyb (no ctm-p2 relay); the host reads them from her person */
+ for(let i=0;i<3;i++){await clear(H);await clear(G);await sleep(300)}
+ await G.p.evaluate(()=>{window.__sent=[];S.cyb=S.cyb||{};S.cyb.back=wk();S.cyb.rk=wk();S.cyb.rv='lui';render()});
+ const w9=await G.p.evaluate(()=>wk());
+ ok(await until(H,w=>{const c=COOPW.fcyb();const B=COOPW.thin.seatOf('b');return c&&c.back===w&&B.S.cyb&&B.S.cyb.rv==='lui'},w9,15000),'E9 her cycle answer is in the host copy of her (fcyb reads her person)',await H.p.evaluate(()=>[COOPW.fcyb(),COOPW.thin.E.stat.cyb]));
+ {const s9=await G.p.evaluate(()=>window.__sent.slice());ok(s9.includes('do:cyb')&&!s9.some(x=>/^act:ctm-p2:cyb/.test(x)),'E9 sent as do cyb, no ctm-p2 cyb relay',s9)}
+ /* E10: the night (tn) without the ctm-tn relay: her claim = do tn; the host's own change rides the view */
+ await G.p.evaluate(()=>{window.__sent=[];S.tonight='me';render()});
+ ok(await until(H,()=>!!(S.tn&&S.tn.w===wk()&&S.tn.who===902&&S.tonight===COOPW.friend()),null,15000),'E10 her claim (do tn) taken by the host: his S.tn = her',await H.p.evaluate(()=>[S.tn,S.tonight&&S.tonight.id]));
+ const npc=await H.p.evaluate(()=>{const v=rivals.find(x=>x&&!x.coop&&x.alive&&!x.out);S.tonight=v;render();return v.id});
+ ok(await until(G,id=>{const t=S.tonight;return t&&t!=='me'&&t.id===id},npc,15000),'E10 the host\'s change reaches her phone through the view',await G.p.evaluate(()=>[S.tn,S.tonight==='me'?'me':S.tonight&&S.tonight.id]));
+ {const s10=await G.p.evaluate(()=>window.__sent.slice());ok(s10.includes('do:tn')&&!s10.some(x=>/^act:ctm-tn/.test(x)),'E10 sent as do tn, no ctm-tn relay',s10)}
+ /* E11: the host gives her the night: her Kính sự phòng summons is a part-D card built in her context on the host */
+ await H.p.evaluate(()=>{COOPW.thin.E.nk=-1;S.tonight=COOPW.friend();render()});
+ ok(await until(G,()=>Q.some(q=>q&&q.thin&&/Kính sự phòng/.test(JSON.stringify(q)+((document.getElementById('modal')||{}).textContent||''))),null,20000),'E11 her summons arrives as a part-D card (built on the host)',await G.p.evaluate(()=>[Q.map(q=>q.thin?'thin:'+(q.t||''):q.t).slice(0,4),S.tonight==='me']));
+ ok(await H.p.evaluate(()=>COOPW.thin.E.stat.night>=1&&COOPW.thin.seatOf('b').S.tonight==='me'),'E11 her stored person has the night (tonight = me)');
+ /* E12: a world window's end on HER household runs on the host in her context (phóng cung: her aged maid leaves; her choice "let") */
+ const nm='E-maid-'+Date.now().toString(36);
+ for(const o of [G])await o.p.evaluate(nm=>{(S.staff=S.staff||[]).push({name:nm,role:'maid',age:BAL.srvAge.ask+2,loyal:10});render()},nm);
+ await H.p.evaluate(nm=>{const B=COOPW.thin.seatOf('b');(B.S.staff=B.S.staff||[]).push({name:nm,role:'maid',age:BAL.srvAge.ask+2,loyal:10});},nm);
+ await H.p.evaluate(()=>{const w={id:99001,k:'phong',t0:wk()-1,t1:wk(),x:{n:0,mine:0}};WORLD_X.EVD.phong.end(w)});
+ ok(await until(G,nm=>!(S.staff||[]).some(s=>s&&s.name===nm),nm,20000),'E12 her aged maid left (her household, run on the host, patch)',await H.p.evaluate(nm=>[COOPW.thin.E.stat.wwEnd,(COOPW.thin.seatOf('b').S.staff||[]).some(s=>s&&s.name===nm)],nm));
  ok(!H.errs.length&&!G.errs.length,'E8 no page errors',[H.errs.slice(0,3),G.errs.slice(0,3)]);
  const nok=res.filter(r=>!r[0]).length;console.log('RESULT',res.length-nok+'/'+res.length);
  await b.close();process.exit(nok?1:0)})().catch(e=>{console.error(e);process.exit(2)});
