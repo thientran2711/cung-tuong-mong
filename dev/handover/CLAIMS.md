@@ -44,7 +44,7 @@ B10 consorts c31, c32 | claude/cung-tuong-mong-handover-hj0h8w | session_011xDdV
 princess-sample (Nam Chiếu + Bắc Địch, 2 figures, sample only) | handover branch | W43 session_011xDdVQdxDP3b4j6yvJdVcN (Foreman C ROOT-20) | DONE 04fbcbf | 2026-11-18 08:22Z
 | E8 STEAL MINI-GAME READY FF (E8r3 PASS 814078e5; main 9c581406 merged) | review/steal-minigame | E ROOT #3 | session_01DgYSWm5h3LgBS7jeBr3BtW | READY FF 6b5414a8 | 18/11 10:05Z |
 | d19-gift-work — Biếu quà làm lành with a work/item (ORDER ROOT-49 07:41Z; opus BIG; brief briefs/d19-gift-work.md) | review/d19-gift-work | B | session_01N1tNP3DzrQ7aYVjZPFWzCr | RUNNING | 18/11 08:20Z |
-| live-test-reds (ORDER ROOT-49 07:39Z; sonnet; brief briefs/live-test-reds.md) | review/live-test-reds | B | session_01N1tNP5EJX7wasCWUcM3KTF (depth 1) | RUNNING | 18/11 08:20Z |
+| live-test-reds (ORDER ROOT-49 07:39Z; sonnet; brief briefs/live-test-reds.md) | review/live-test-reds | B | session_01N1tNP5EJX7wasCWUcM3KTF (depth 1) | SẴN SÀNG KIỂM da15c5c4 | 18/11 08:20Z |
 | E7c2 QUESTLINE Q1c help-hồi text (opus; successor of E7c) | review/questline-q1c | E ROOT #3 | session_01DgYSWkXhh7hPLBJjzFYMWJ | READY 628ca5d (on q1a a77e7cb; PASS b013ddf content) | 18/11 09:15Z |
 | LAND-E: q0-ff + hall-names + monthly-ration-r6 + steal-minigame stacked on newest main (sonnet lander; brief briefs/root50-land-e.md) | review/land-e | MAIN ROOT-50 | session_01UV1Szgqm1V3Q2nHLNtTnK7 | READY 5bb50424 HELD for C-AG | 18/11 08:50Z |
 | E7r4 re-review q1a 90796d3 + q1b 7f12b48c (+q1c 154506f rebase) (opus BIG) | review/questline-q1a/b/c | E ROOT #3 | session_01DgYSWnPaLxwygTLN5J8FwP | RUNNING | 18/11 08:37Z |
