@@ -5,7 +5,7 @@
 - frame-cold (withered grey) + frame-consort-6 (grander HQP) drawn — NOT approved/uploaded (owner never decided; 6 may look grander than 7).
 - 10 emotion badges (final Sợ + Giận), approved; 8 rank markers me-mark-0..7 (6↔7 swapped), approved. kitMeMark v2 (jmark.js): 8 markers as items (Tư trang tab "Dấu ấn", Dùng, rank-chest hook via kitReward), one placement rule (marker bottom = head top − 1.2 % figure height, shrinks in dialogs), bob only.
 - jemo tap tooltip (kpPop mood + cause).
-- jkpor (portrait fit) f1db91621: same 1.14 scale, head top 3 % under window top, body centred (all 32 consort sheets dev/shots/rank0/portrait-fit.jpg).
+- jkpor (portrait fit) f1db91621: same 1.14 scale, head top 3 % under window top, body centred (all c01–c32 sheets dev/shots/rank0/portrait-fit.jpg).
 
 ## WIP (this commit)
 - jkpor: per-picture FACE-size normalisation for every family (owner: kids' heads at different zoom). jkpor.js now reads `img/POR_FACE.json`
