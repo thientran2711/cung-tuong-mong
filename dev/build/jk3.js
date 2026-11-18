@@ -100,6 +100,8 @@ function kgfTags(d){try{document.querySelectorAll(".mspot[data-kgft]").forEach(t
 /* the map re-draws (render) and pans (scroll of any map box): re-check while the list is open */
 (function(){let q=0;const go=()=>{cancelAnimationFrame(q);q=requestAnimationFrame(()=>{const d=document.getElementById("kgfdrop");if(d||document.querySelector(".mspot[data-kgft]"))kgfTags(d)})};
  document.addEventListener("scroll",go,{capture:true,passive:true});addEventListener("resize",go);
+ /* the map can also be moved without a scroll event (centring / zoom moves the picture box): while the list is open only, a light re-check every 300 ms; idle otherwise */
+ setInterval(()=>{if(!document.hidden&&document.getElementById("kgfdrop"))go()},300);
  if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);try{go();setTimeout(go,350)}catch(e){}return r}}})();
 function kgfRail(){try{if(kgfRail.done||typeof kitStageRail!=="object")return;kgfRail.done=1;
  [["cn","Cung nhân",1],["ct","Chí tôn",2]].forEach(([k,lab,o])=>kitStageRail.add({id:"kgf-"+k,order:60+o,label:lab,title:lab+" · chạm để mở danh sách",count:()=>kgfCount(k),active:()=>window.__kgfOpen===k,when:()=>kgfPhoneMap()&&kgfCount(k)>0,onTap:()=>{window.__kgfOpen=window.__kgfOpen===k?null:k;const R=$$("kshR");if(R)R.dataset.full="";k3Stage();kgfDrop()}}))}catch(e){}}
