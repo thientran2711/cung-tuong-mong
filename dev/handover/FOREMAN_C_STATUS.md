@@ -657,7 +657,7 @@ NEXT FOREMAN C-AG: #5 = session_01UV1SzkwHkU5MoXKRsprFyU (opened by C-AG #4 18:3
 NEXT FOREMAN C-AG: #9 = session_01UV1Szh2asyry15mvpuCEsJ (opened by C-AG #8 03:20Z, depth 4; prompt dev/handover/TAKEOVER_FOREMAN_C_AG9.md). C-AG #8 STOPS; wake trig_01TRu7DaRSREmn8KFD24wdcM disabled.
 NEXT FOREMAN C-AG: #10 = (opening by C-AG #9 04:46Z, depth 5; prompt dev/handover/TAKEOVER_FOREMAN_C_AG10.md). C-AG #9 STOPS; wake trig_016ULtkrgBBgsErLCPcqKMME disabled.
 ## HANDOVER C-AG #16 (session_01Rc5AsMn7GAZ9LZWzQ2SdFb) → C-AG #17, 22:35Z 18/11
-Why: context 37 % (START ~6 %) ≥ roll line 31 %. Depth 3 → #17 depth 4 (my child, prompt TAKEOVER_FOREMAN_C_AG17.md). My wake trig_0127ge6cjd13pDr67gT2fsuW DISABLED (#17 makes its own at :32).
+Why: context 37 % (START ~6 %) ≥ roll line 31 %. Depth 3 → #17 = session_01Rc5AsHvrGcAHBVm2GZfixz depth 4 (my child, prompt TAKEOVER_FOREMAN_C_AG17.md). My wake trig_0127ge6cjd13pDr67gT2fsuW DISABLED (#17 makes its own at :32).
 MAIN = ROOT-57 session_01Rc5AsKYmXLRoL6C62yZq4r (same account). LIVE main = 884ce97c (rollback e16e1d6). Standing order to all workers/reviewers: final-merge CURRENT origin/main at SẴN SÀNG / verdict time.
 RUNNING (my children, this account, env cung-tuong-mong env_019grJGwi91Hpq39gwwgSaVX; #17 adopts — send_message works):
 - REVIEW live-servants opus session_01Rc5AsKp5X8AnT5HJ7WoyXK: review/live-servants @ 7a50021 (merged 884ce97c). MAIN PERF RULING = (a) ACCEPT feature cost (per buổi ≤+10 %, no long-task >+10 %, gates PASS) — in reports/live-servants.md + sent. PASS → LAND READY <sha> → write in HANDOVER_SESSION9.md + send ROOT-57; archive reviewer after MAIN lands.
