@@ -1006,3 +1006,4 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | CAL PREVIEW (sonnet; s42 order 02:04Z): ag-all-2-land on Cloudflare Pages, ?hieuchuan=1 | (deploy only) | C-AG | session_01UV1SzgwDRVVjeacdPPtR47 | RUNNING | 18/11 02:05Z |
 | REVIEW greet-stranger 54431a1 (sonnet; brief briefs/review-greet-stranger.md) | review/greet-stranger | MAIN s42 | (opening) | RUNNING | 18/11 02:10Z |
 | LOOK FX SAMPLES (face/hair/small cloth marks; full-body panels for owner; sonnet; brief briefs/look-fx-samples.md) | review/look-fx | MAIN s42 | session_01UV1SzhzDHZiWyYW2YZdA9A | RUNNING | 18/11 02:14Z |
+| hoa-dien r3c LIVE f986ff6a (main 62a6846f → f986ff6a; ROLLBACK 62a6846f) | review/hoa-dien-r3c | MAIN s42 | session_01UV1Szk7eZQzR2d2t4rhiFj | LIVE | 18/11 02:12Z |
