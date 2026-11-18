@@ -1031,7 +1031,7 @@ function kitOptFill(E,done){const pad=x=>{const cs=getComputedStyle(x);return (p
  done("fill")}
 /* ONE PICTURE SIZE PER GROUP (owner 17/11 "nút to nút nhỏ", §6.2b): every option card of one dialog (or one sibling list) gets the SAME picture size.
    The size is the one the SHORTEST card text allows (no empty space under any text-shortest card); all tall when every text fills the tall picture. */
-function kitOptFit0(b){try{if(!b||!b.isConnected)return;const G=kitOptGroup(b);if(!G.includes(b))G.push(b);G.forEach(x=>{kitOptSet(x,0);x.style.removeProperty("min-height")});
+function kitOptFit0(b){try{if(!b||!b.isConnected)return;if(window.KIT_OPT_VAR){const G=kitOptGroup(b);G.forEach(x=>{kitOptSet(x,0);x.style.removeProperty("min-height")});return}const G=kitOptGroup(b);if(!G.includes(b))G.push(b);G.forEach(x=>{kitOptSet(x,0);x.style.removeProperty("min-height")});
  const E=[];let w=0,h=0;G.forEach(x=>{const art=x.querySelector(":scope > .kaart");x.dataset.kapic="";if(!x.isConnected||getComputedStyle(art).display==="none"||getComputedStyle(x).flexDirection!=="row")return;
   const a=art.getBoundingClientRect();if(a.width<24||a.width>112||a.height<a.width*1.15)return;E.push(x);w=Math.max(w,a.width);h=Math.max(h,a.height)});
  if(!E.length)return;E.forEach(x=>x.style.removeProperty("min-height"));const lo=Math.round(w*KIT_OPT_SQ.min),bhs=()=>E.map(x=>x.querySelector(":scope > .kabody").getBoundingClientRect().height);

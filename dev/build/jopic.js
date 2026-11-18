@@ -160,7 +160,7 @@ window.kitOptStackTitle=kitOptStackTitle;
 function kpOptArt(b){if(!b||b.classList.contains("kcard"))return;if(b.dataset.kopt==="1"&&b.querySelector(":scope > .kaart"))return;
  const kan=b.querySelector(":scope > .kat > .kan, :scope > .kabody > .kat > .kan");if(!kan)return;
  const name=typeof kpActName==="function"?kpActName(kan):kitOptPlain(kan.textContent);
- const p=kitOptPic(name,b);
+ let p=kitOptPic(name,b);if(!p.src&&b.__koph&&typeof KIT_PH!=="undefined"&&KIT_PH.act){let tn="light";try{if(typeof kitPhTone==="function")tn=kitPhTone(name)}catch(e){}p={src:KIT_PH.act[tn]||KIT_PH.act.light,key:"",how:"ph",tone:tn}}
  /* the tiny portrait / icon beside the title goes: the picture on the left replaces it (owner) */
  kan.querySelectorAll(":scope > .md, :scope > img").forEach(e=>e.remove());b.querySelectorAll(":scope > .md").forEach(e=>e.remove());
  if(!p.src){b.classList.add("kopt");b.dataset.kopt="1";return}
@@ -209,6 +209,36 @@ html body #modal .dlg.kdper>#mb>.opts.opts.opts.opts.opts:has(> button.ka.kopt.k
 html body #modal .dlg.kdper>#mb>.opts.opts.opts.opts.opts>button.ka.kopt.kart{flex:0 0 auto!important;height:auto!important}
 html body #modal :is(#mb,*)>:is(.opts,.kpscopts):is(.opts,.kpscopts):is(.opts,.kpscopts)>button.ka.kart.kopt{min-height:calc(var(--kah,112px) + 18px)!important}
 `;document.head.appendChild(st)})();
+/* ===== review/opt-card-short VARIANTS (owner 18/11 "nút hành động dài quá"): html.kov-A / kov-B / kov-C chosen through window.KIT_OPT_VAR. TEMPORARY review switch: after the owner's pick the winner becomes the only rule and this block is deleted. ===== */
+function kitOptShortTier(t){t=String(t).replace(/^\(|\)$/g,"");const m=t.match(/^chơi\s+(\d+)\s+phần\s+(?:đã\s+)?ra\s+([^,]+?),\s*(\d+)\s+phần\s+ra\s+([^,]+?)(?:,|$)/);if(m)return `${m[1]} phần: ${m[2]} · ${m[3]} phần: ${m[4]}`;
+ const n=t.match(/^chơi\s+(\d+)\s+phần\s+(?:đã\s+)?ra\s+([^,]+?)(?:,|$)/);return n?`${n[1]} phần: ${n[2]}`:""}
+function kitOptCompactRows(b){try{if(!b||b.dataset.kocr==="1")return;const kb=b.querySelector(".kb");if(!kb)return;b.dataset.kocr="1";
+ const note=kb.querySelector(".kr-note"),ton=kb.querySelector(".kr-ton .krv");
+ if(note){[...note.querySelectorAll(".krv > .ef")].forEach(e=>{const t=(e.textContent||"").trim().replace(/^\(|\)$/g,"");
+  if(/^trả khi làm xong$/i.test(t)&&ton){const x=document.createElement("span");x.className="ef n";x.textContent="trả khi làm xong";const sp=document.createElement("span");sp.className="ksep";sp.textContent="·";ton.append(sp,x);e.remove()}
+  else{const sh=kitOptShortTier(t);if(sh){e.title=t;e.textContent=sh}}});
+  note.querySelectorAll(".krv > .ksep").forEach(s=>{if(!s.previousElementSibling||!s.nextElementSibling)s.remove()});if(!note.querySelector(".krv > .ef"))note.remove()}}catch(e){}}
+window.kitOptCompactRows=kitOptCompactRows;
+/* ONE card form for every option of a dialog (owner 18/11 ~09:02Z): an option without a picture of its own gets the §59 placeholder in the same slot when a sibling has a picture */
+let KIT_OPT_UNI=0;function kitOptUnify(b){if(KIT_OPT_UNI)return;try{KIT_OPT_UNI=1;const c=b.parentElement;if(!c)return;const sib=[...c.children].filter(x=>x.matches&&x.matches("button.ka")&&x.matches(KIT_OPT_SEL));if(!sib.some(x=>x.querySelector(":scope > .kaart")))return;
+ sib.forEach(x=>{if(x.querySelector(":scope > .kaart")||x.classList.contains("kcard"))return;x.__koph=1;delete x.dataset.kopt;kpOptArt(x);if(window.KIT_OPT_VAR==="B"||window.KIT_OPT_VAR==="C")kitOptCompactRows(x)})}catch(e){}finally{KIT_OPT_UNI=0}}
+(function(){const k0=kpOptArt;kpOptArt=function(b){const r=k0.apply(this,arguments);try{if(window.KIT_OPT_VAR){if(window.KIT_OPT_VAR==="B"||window.KIT_OPT_VAR==="C")kitOptCompactRows(b);kitOptUnify(b)}}catch(e){}return r};window.kpOptArt=kpOptArt})();
+function kitOptVarSet(v){window.KIT_OPT_VAR=v||"";let st=document.getElementById("kit-opt-var");if(!st){st=document.createElement("style");st.id="kit-opt-var";document.head.appendChild(st)}
+ if(!v){st.textContent="";return}const O="html body #modal button.ka.kart.kopt.kopt";
+ const INL=`${O} small.kb>.kr>.krv{display:block!important}
+${O} small.kb>.kr>.krv>*{display:inline!important}
+${O} small.kb>.kr>.krv>.ksep{display:inline!important;margin:0 4px!important;opacity:.55}
+${O} small.kb{row-gap:1px!important}`;
+ const TT=`${O} .kat{flex-wrap:wrap!important}\n${O} .kat>.kan{flex:1 1 100%!important;min-width:0!important}`;
+ const AB=`${O}{--kaw:54px!important;--kah:72px!important;min-height:0!important;height:auto!important;align-items:flex-start!important}
+${O}>.kaart{flex:0 0 54px!important;width:54px!important;height:72px!important;align-self:flex-start!important}`;
+ const C=`${O}{--kaw:40px!important;--kah:40px!important;min-height:0!important;height:auto!important;display:grid!important;grid-template-columns:40px minmax(0,1fr)!important;column-gap:8px!important;row-gap:3px!important;align-items:center!important;padding:6px 10px!important}
+${O}>.kaart{grid-column:1!important;grid-row:1!important;width:40px!important;height:40px!important;flex:none!important}
+${O}>.kabody{display:contents!important}
+${O}>.kabody>.kat{grid-column:2!important;grid-row:1!important}
+${O}>.kabody>*:not(.kat){grid-column:1/-1!important}`;
+ st.textContent=TT+"\n"+(v==="C"?C:AB)+"\n"+(v==="A"?"":INL)}
+window.kitOptVarSet=kitOptVarSet;
 /* kit sample page (§6.2): three options of "Hoàng hậu triệu kiến" through the real modal markup → kaNorm → kpOptArt */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2",title:"Thẻ lựa chọn: tranh bên trái, thông tin bên phải (thẻ gọn)",html:()=>
  `<div class="opts kitpg-opts">`+
