@@ -164,3 +164,104 @@ Confirmation run on f759ba30 (80 lives, ≤120 months, with a tracer that logs a
 - residence-seats.js (R1–R9b): PASS. residence-oldsave: PASS. seatcap-sim: no over-cap. one-core-guard: 0 fails.
 
 SẴN SÀNG KIỂM d88883dfcf9fc29700a4d2e45029a5146eb19801
+
+## RE-MERGE 18/11 (worker r2, review/residence-seats-r2)
+PRIORITY #1 CHECK (MAIN s43 03:32Z): OD L1536/1538/1541/1545 (owner seat table 17/11 ~04:30Z + harem 20 ~04:32Z — read VERBATIM) | main jbal.js BAL.seat old {7:1,6:1,5:2,4:4,3:6} | review/residence-seats d88883dfc, review/residence-seats-r1 a6e0fbc2 (PASS 17/11 17:38Z, never landed) | claims D (old workers archived).
+
+START_CTX ≈ 3 % (get_session read 0; own estimate). Branch review/residence-seats-r2 = r1 a6e0fbc2 + origin/main 94a93759 (merge aaf1bede) + coop-e2e test fix (528d165c) + over-cap fix (668fbb1c).
+
+### 1. Merge (token-level)
+- Conflict j7.js:151 coldvisit "Xin Hoàng thượng ân xá": kept the branch guard (kitOff "hậu cung đã đủ người" + roomFor check in go) AND main's BAL value (`BAL.eff.j7.sungGo_9`, balSg). Both sides survive.
+- index.html / sw.js: generated, rebuilt with dev/site/build_site.sh (not hand-merged).
+- j17 comment: "consort ceiling is CAPC" → "BAL.harem.cap through roomFor, j27" (CAPC is gone).
+- BAL: main's one-core keys kept; branch keys `seat {7:1,6:1,5:1,4:2,3:3}`, `res {side:1,halls:[dong,tay]}`, `harem {cap:20}`, ps.harem (10 NPCs + her) kept. SEATCAP = BAL.seat (R6).
+
+### 2. Family rescan on the merged build (every add / return of a living consort, outside co-op)
+| path | state after merge |
+|---|---|
+| jagmaid.js amRise callers (new on main: amNight, send path, monthly fav loops) | all behind `roomFor("consort")` |
+| jworld đại tuyển tú (:125) | roomFor per girl + palFix |
+| jworld đại xá (:215) | roomFor per return; **NEW: palFix right after** (see 3) |
+| j8:331, j8:436 OUT queen (C.push only if roomFor), j8:468 pardon | guarded |
+| j7 newgirl / coldvisit ân xá, j14:26 petition, j72:481 letter, j55 sớ tuyển tú, j15 pardon button | guarded (r1) |
+| CAPC | none left |
+Typed numbers seen but not cap rules (pre-existing, unchanged): j27 tuyenTu `>=8`, j7 newgirl `<9`, j8 `<4`.
+
+### 3. Bug found by the r2 bot measure → fixed (668fbb1c)
+The first bot run on 528d165c gave **16 monthly samples with 3 co-residents** under one chủ vị (r1: 0). Tracer (indiag, outside git) caught it: main's jworld **đại xá** brings a consort back from lãnh cung AFTER the month's palFix; she still held her old `resHead/resHall`, already refilled → 3 in one house for one month (next palFix trimmed it).
+Fix, ONE CORE (jpal palFix): anyone out of the palace (lãnh cung, dead; not co-op rows) gives up her room (`resHead/resHall=null`), so EVERY return path (đại xá, ân xá, pardon, petition, letter) is housed fresh, never back into a taken room. Đại xá also calls palFix at once, like đại tuyển tú. Test **R10** (dev/test/residence-seats.js): she leaves a full house, it is refilled, she returns directly and via `WORLD_X.EVD.xa.start` → no house over cap before or after palFix.
+
+### 4. Gates on 668fbb1c
+- one-core-guard: PASS, 0 fails (inlineNow 3839 ≤ baseline 3842).
+- quickcheck.sh --runs 5 (interleaved vs live 94a93759): **PASS** — core gates PASS, time-spill PASS, old save ok; median new/live: render 140/135 ms, tab 325/328 ms, buổi 829/799 ms (+3.8 %, gate ≤ +5 %), tasks>200ms 14/12.
+- residence-seats.js R1–R10 (6 games): PASS. capAt 20; full harem = {chinh 7, dong 6, tay 6}; start harem 10–12 + her.
+- residence-oldsave (live save → branch): PASS (4 Phi + 3 QP kept, S.seatKeep stamped, she is housed "Đông phối điện · Thừa Minh cung").
+- seatcap-sim (6 lives × 120 months, idle): exit 0, 0 over-cap; max holders Tần ≤3, Phi ≤2, QP 1, HQP ≤1, HH 1.
+- coop-e2e: **63/63** on 668fbb1c. Live main 94a93759 gave 62/63, with one flaky timing check ("week after rebirth advances"), so the branch is not worse. Earlier, on aaf1bede, the branch got 62/63: "friend starts as Người lạ" failed because she and the friend were housed under the same chủ vị, and j61 sameHouse makes housemates known. The test now accepts that reason (528d165c, test only). No co-op code was touched.
+- Shots (528d165c; 668fbb1c changes no UI) LOOKED at: iPad 1180x820 — stage "Đông phối điện · Khải Tường cung" with her room art, Dư đồ fine; Fold 755x1000 — "Đông phối điện · Cảnh Phúc cung", Dư đồ + Hậu cung fine (map pans, right-edge label partly off-screen = existing pan). 0 page errors, no horizontal overflow, no overlap. Shots kept outside git, deleted.
+- Note: about 6/40 fresh games show her at Ngọc Thanh các — servant starts (isSrv), which palFix skips by design. Not a bug.
+
+### 5. Bots vs live main (dev/measure/run_rs.js + inresseat.js, an_rs.py; ≤120 months per life)
+Live main 94a93759 (before) vs the branch, run side by side, 1 browser each. **Before = 60 lives.** After = 44 lives on the final head 668fbb1c (the box has 4 cores; the run was still going at the deadline), plus 64 lives on 528d165c (same rules; it only lacks the lãnh-cung return fix in 3) for the reach table, giving 108 branch lives.
+The old side lost about 40 min twice: quickcheck.sh writes and then deletes the same `_old.html` file in the worktree root that the measure was serving. Its lives are fine; that time is just missing.
+
+Final head 668fbb1c, 44 lives:
+#### Lives
+
+| | lives | ended in game (death/ending) | reached 10 years (cap) | TIMEOUT | CRASH | months played (sum) | months per life (median) |
+|---|---|---|---|---|---|---|---|
+| before | 60 | 31 | 29 | 0 | 0 | 5333 | 111 |
+| after | 44 | 26 | 18 | 0 | 0 | 3496 | 97.5 |
+
+#### Promotion pace (months from start; median [p25–p75]; reach = lives that got there, per 100 lives)
+
+| | Tần reach | to Tần | Phi reach | to Phi | Quý phi reach | to QP | HQP reach | Hoàng hậu reach | to HH |
+|---|---|---|---|---|---|---|---|---|---|
+| before | 58 (97/100) | 10 [7–16] | 56 (93/100) | 19 [14–28] | 53 (88/100) | 30 [24–36] | 49 (82/100) | 38 (63/100) | 59.5 [43–77] |
+| after | 40 (91/100) | 10.5 [7–18] | 35 (80/100) | 22 [15–32] | 30 (68/100) | 34 [27–44] | 29 (66/100) | 16 (36/100) | 61.5 [53–102] |
+
+#### Harem size (living consorts + her), per game year: max over lives / mean of each life's yearly max (lives still playing that year)
+
+| | start (y1 mean) | max ever | y1 | y2 | y3 | y4 | y5 | y6 | y7 | y8 | y9 | y10 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| before | 12.8 | 20 | 16 / 12.8 (60) | 17 / 14.0 (60) | 18 / 16.2 (57) | 19 / 15.8 (55) | 18 / 15.7 (47) | 20 / 16.9 (43) | 18 / 15.9 (41) | 18 / 15.7 (34) | 20 / 16.5 (33) | 18 / 16.0 (31) |
+| after | 13.0 | 20 | 17 / 13.0 (44) | 19 / 14.0 (41) | 20 / 18.2 (35) | 20 / 17.7 (31) | 20 / 16.7 (30) | 20 / 19.7 (29) | 20 / 18.6 (25) | 20 / 18.8 (24) | 20 / 20.0 (22) | 20 / 19.4 (21) |
+
+#### Co-residents per chủ vị (monthly samples) and where she lives while below Tần
+
+| | samples | 0 | 1 | 2 | 3+ | over cap (>2) | her months below Tần | in a side hall (Đông/Tây phối điện) | Ngọc Thanh các | other |
+|---|---|---|---|---|---|---|---|---|---|---|
+| before | 18506 | 6131 (33/100) | 2513 (14/100) | 2137 (12/100) | 7725 (42/100) | 7725 | 2603 | 0 (0/100) | 2590 (100/100) | 13 |
+| after | 13427 | 67 (0/100) | 2143 (16/100) | 11217 (84/100) | 0 (0/100) | 0 | 2155 | 1482 (69/100) | 485 (23/100) | 188 |
+
+#### Perf (ms per buổi = nextBuoi wall time, both builds run at the same time, one browser each)
+
+| | buổi timed | ms per buổi (mean) | per-life mean: median [p25–p75] |
+|---|---|---|---|
+| before | 64165 | 20.1 | 19.8 [18.2–21.1] |
+| after | 42100 | 21.1 | 19.8 [17.7–22.7] |
+
+after vs before: +4.8 % (gate ≤ +5 %)
+
+Promotion reach, all branch lives (528d165c 64 + 668fbb1c 44 = 108) vs live 60:
+
+| | lives | Tần reach | to Tần | Phi reach | to Phi | Quý phi reach | to QP | HQP reach | Hoàng hậu reach | to HH |
+|---|---|---|---|---|---|---|---|---|---|---|
+| live main | 60 | 97/100 | 10 [7–16] | 93/100 | 19 [14–28] | 88/100 | 30 [24–36] | 82/100 | 63/100 | 59.5 [43–77] |
+| branch | 108 | 94/100 | 9 [7–17] | 86/100 | 22 [16–35] | 76/100 | 36.5 [28–49] | 70/100 | 37/100 | 66 [60–102] |
+
+Gates: **co-residents >2 = 0** (13 427 samples on 668fbb1c; it was 16 on 528d165c before the fix, and 7 725 on live). **Harem max 20** in every year. Start harem 13.0 (y1 mean, her included; BAL.ps.harem = 10 NPCs + her, plus first-month arrivals). Perf per buổi +4.8 % (gate ≤ +5 %; the interleaved quickcheck gives +3.8 %).
+She lives in a side hall in 69/100 of her months below Tần. The Ngọc Thanh các months (23/100) come from servant starts (isSrv, skipped by design) and from months when every chủ vị is full or seats are empty.
+
+### 6. FLAG for the owner — promotion reach with halved seats
+**OWNER FLAG.** Halving the seats lowers how often she reaches the top ranks. On newest main, live vs branch, per 100 lives:
+
+- Hoàng hậu: **63 → 37** (r1 measured 56 → 35)
+- Quý phi: 88 → 76, and 6 months later (36.5 vs 30)
+- Phi: 93 → 86, 3 months later
+- HQP: 82 → 70
+- Tần: about the same (97 → 94)
+
+This follows directly from the owner seat table (Phi 2, QP 1). I did not change any BAL value to offset it. If the owner wants HH reach back near live, the levers are BAL ones: the promotion odds and the demotion review. That is for the owner to decide.
+
+SẴN SÀNG KIỂM 668fbb1c252dfc7901d61366cb578c34040ae0ba
