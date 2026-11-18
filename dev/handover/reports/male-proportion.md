@@ -57,3 +57,19 @@ All values at game scale (man skull→feet = 1.07 × m09), alpha width at fixed 
 Gens this round 2 (160 cr) + 2 bg removals (6 cr) = 166 cr; total W22 8 gens, ~664 cr (FIGURE_GATE G cap of 6 counted per round).
 Reading: face h inside 0…+5 %; head wider than m09 (+6.6 %); shoulders clearly broader (+34 %); waist/hip silhouette now equal to m09's (no bulk); neck visibly at least as wide as m09's in the crop row (skin-mask neck number unreliable under collar, judged on sheet). Hem is 23 % narrower than m09's flared skirt by design (straight skirt, owner wants slim).
 Weak points: heads 8.13 (a touch over 8); sleeves/skirt are plain, embroidery sparse (slim version; richer border/sash can be added in the costume pass); face drifted slightly toward v2 g4 (same man).
+
+## v4 — W22, 18/11 (owner: v2 "mập quá", v3 "ốm quá" → in between; then "vẽ sao thì vẽ, đẹp là được") — RESULT: PASS (best k1)
+PRIORITY #1 CHECK: OD 0 | ledger 0 | claims 0 | main 0 | review/* 0 | archive 0 — reuse v3 slim (WDlwfGTcXe) + v2 g4 (w4vEGRs7EI) + m09 (eIyOFEidqL) as refs. Tolerance ±5 %, D4b soft closed-lip smile (all three show a faint closed smile).
+Note: the first v4 call was interrupted client-side but DID run: 3 gens (0eSJFNnTfW, UPhC0qFwny, iGb18lQ3uK) found in the folder, looked at, cut (DoJ4LCLpcl, YMsU5tuWeC, rgd8cNIxtc) — counted as the v4 round (3 gens).
+Files (CDN img/_review/male-proportion/, md5 OK, nothing live): nam_mau_v4_fresh.png (= k1), nam_mau_v4_vs_m09.jpg (m09 | v2 | v3 | v4 on the same red lines, numbers printed under each man, head-width crop row).
+Game scale, alpha widths at 17/38/50/90 % of body (include sleeves/arms):
+| | heads | face h | cheek | shoulder | waist | hip | hem | verdict |
+|---|---|---|---|---|---|---|---|---|
+| v2 g4 | 7.64 | +8.3 % | +13.2 % | +59 % | +42 % | +92 % | +44 % | too fat |
+| v3 h1 | 8.13 | +1.8 % | +6.6 % | +34 % | −5 % | +8 % | −23 % | too thin |
+| **v4 k1 (chosen)** | 8.13 | **+1.8 %** | **+6.0 %** | **+45 %** | **+10 %** | **+19 %** | **+13 %** | **pass** |
+| v4 k2 | 8.05 | +2.8 % | +7.9 % | +45 % | +16 % | +18 % | +9 % | pass, a bit fuller |
+| v4 k3 | 8.10 | +2.2 % | +6.4 % | +39 % | +7 % | +14 % | +5 % | pass, closest to v3 |
+Waist +10 % is inside the asked +8…+12 %; shoulders +45 % (asked +30…35 %, slightly broader = "well-built"); cheek ≥ m09; neck visibly ≥ m09 in the crop row (not scripted). Medium sleeves, skirt with gentle folds, embroidered cuffs/collar/hem. Handsome, same man.
+Credits this round: 3 gens 120 + 3 cuts 9 = 129 cr; W22 total 11 gens, ~793 cr.
+Weak points: heads 8.13 (a touch over 8); shoulders +45 % > asked range; hip +19 % comes with the fuller skirt; embroidery still modest. Alternatives k3 (leaner) / k2 (fuller) available in the folder.
