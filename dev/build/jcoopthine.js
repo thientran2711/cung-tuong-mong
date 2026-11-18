@@ -25,7 +25,7 @@ const CW=window.COOPW;if(!CW||!CW.thin||!CW.X||typeof COOP!=="object")return;
 const TH=CW.thin,X=CW.X,J=X.J,D=TH.D,LV=5;
 const host=()=>CW.seat==="a",on=()=>TH.on(LV);
 const LAST=()=>typeof B4L==="number"?B4L:2;
-const E=TH.E={on,stat:{rd:0,erd:0,ops:0,big:0,step:0,her:0,herSkip:0,forced:0,wrW:0,wrR:0,addDrop:0,rmBack:0,ridBack:0,curtain:0,go:0,cyb:0,tn:0,wwEnd:0,night:0,owe:0,adopt:0},rd:{},hr:"",forced:"",mine:"",log:[]};
+const E=TH.E={on,stat:{rd:0,erd:0,ops:0,big:0,step:0,her:0,herSkip:0,forced:0,wrW:0,wrR:0,addDrop:0,rmBack:0,ridBack:0,curtain:0,go:0,cyb:0,tn:0,wwEnd:0,night:0,owe:0,adopt:0,reRd:0,hostBack:0},rd:{},hr:"",forced:"",mine:"",log:[]};
 const lg=x=>{E.log.push(x);if(E.log.length>80)E.log.shift()};
 const bk=()=>(COOP.state.week||0)+":"+((S&&S.buoi)||0);
 const wkx=()=>typeof wk==="function"?wk():0;
@@ -57,7 +57,10 @@ function gView(V){if(!on()||host()||!S||!V||!V.o)return;const k=bk();
  if(seen&&seen!==k){const [w0]=seen.split(":");if(+w0===(COOP.state.week||0)){used=0;popIdx=null;popMsg="";try{if(typeof curtain==="function"&&!S.dead){curtain();E.stat.curtain++}}catch(e){}}E.mine="";try{render()}catch(e){}}
  /* her phone behind / ahead of her own buổi on the host (a reload rebuilt her week): the host's copy wins (buoi is the host's), once no patch is pending */
  {const P=V.o.P&&V.o.P[CW.seat],mx=Math.max(0,...(V.o.pq||[]).map(x=>x.n|0));if(P&&V.o.w===(COOP.state.week||0)&&typeof P.buoi==="number"&&P.buoi!==(S.buoi||0)&&(S.thpn||0)>=mx&&!S.mg&&!Q.length){lg(["adopt",S.buoi,P.buoi]);S.buoi=P.buoi;used=0;popIdx=null;popMsg="";E.stat.adopt++;try{render()}catch(x){}}}
+ if(V.o.w===(COOP.state.week||0)&&typeof V.o.buoi==="number"){CW.rbuoi=V.o.buoi;CW.rweek=V.o.w}
  seen=k;const e=V.o.e;try{CW.tnView(e)}catch(x){console.error(x)}
+ /* the host reloaded after her ready (his page holds her ready in memory only): send it again, against his reloaded copy of her */
+ if(e&&e.boot){if(E.boot&&E.boot!==e.boot&&E.mine===bk()){lg(["re-ready",E.boot,e.boot]);E.stat.reRd++;E.mine="";E.boot=e.boot;setTimeout(()=>{try{gReady()}catch(x){console.error(x)}},0)}else E.boot=e.boot}
  if(e&&e.go===wkx()&&CW.ngoW!==e.go&&(S.buoi||0)>=LAST()){CW.ngoW=e.go;E.stat.go++;lg(["go",e.go]);try{CW.nCheck()}catch(x){console.error(x)}}
  try{CW.lockNext()}catch(x){}}
 COOP.on("thinview",V=>{try{gView(V)}catch(e){console.error("thin E view",e)}});
@@ -134,6 +137,16 @@ COOP.on("week",()=>{if(on()&&host())setTimeout(()=>{try{if(CW.tnHer())CW.herNigh
     D.later(seat,()=>{if(!S||S.dead)return;try{ev.home(wc,{got})}catch(e){console.error("thin E ww home",k,e)}});return r}}
   /* vu cổ: she is the culprit (her entry on the host): her own choice ("clean" / "open") read from her person */
   if(EV.vuco)EV.vuco.meOf=(w,key)=>{try{if(!on()||!host())return undefined;const B=TH.seatOf(other());const M=B&&B.S&&B.S.wwMe;return M&&M[w.id]?M[w.id][key]:undefined}catch(e){return undefined}}}}
+/* a HOST reload: his copy of her person (her store) is rebuilt from the week's base, which knows none of her buổi steps this week (her
+   step would run again from buổi sáng). Her store is kept per room with D's cards / patches (D.save, after every withSeat) and taken
+   back once per store when it is the same week, seat and life. */
+const ELS=()=>"ctm-thin-e:"+(COOP.state.room||"");
+{const sv=D.save;D.save=function(){const r=sv.apply(this,arguments);try{if(on()&&host()){const seat=other();const B=TH.seatOf(seat);
+  if(B&&B.S)localStorage.setItem(ELS(),JSON.stringify({w:COOP.state.week||0,seat,life:B.S.life||0,name:B.S.name||"",S:B.S}))}}catch(e){}return r}}
+{const so=TH.seatOf;TH.seatOf=function(seat){const B=so.apply(this,arguments);try{if(B&&!B.eL&&on()&&host()&&seat===other()){B.eL=1;
+  const o=JSON.parse(localStorage.getItem(ELS())||"null");
+  if(o&&o.S&&o.seat===seat&&o.w===(COOP.state.week||0)&&(o.life||0)===(B.S.life||0)&&(o.name||"")===(B.S.name||"")&&(o.S.buoi||0)>=(B.S.buoi||0)){
+   const thq=B.S.thq;B.S=o.S;if(thq)B.S.thq=thq;E.stat.hostBack++;lg(["her-back",o.w,o.S.buoi])}}}catch(e){console.error("thin E her back",e)}return B}}
 /* ---------- the world is read-only in her step (put back at its end) ---------- */
 const ROWF=new Set(["rel","oan","ghen","ev"]);
 /* one field as text; other NPCs / S inside it are written as refs so the copy never drags the world along */
@@ -161,7 +174,11 @@ function wRestore(o){const L=npcs(),R=new Set(L.concat(o.L));
  if(rid!==o.rid){rid=o.rid;E.stat.ridBack++}}
 E.wSnap=wSnap;E.wRestore=wRestore;
 /* the night: his go rides the view (the guest reads o.e.go), never the ctm-nr relay */
-{const hv=TH.hostView;TH.hostView=function(){const o=hv.apply(this,arguments);if(o&&on())o.e={go:CW.ngo===(COOP.state.week||0)?CW.ngo:-1,w:COOP.state.week||0,tnb:CW.tnb|0};return o}}
+/* boot: this page load of the host (a host reload loses her ready, held in memory: her phone sends it again when boot changes);
+   the room's buổi at level 5 = the host's own (CW.rbuoi / rweek: the server's buổi stays at the week start) */
+const BOOT=Date.now().toString(36)+Math.random().toString(36).slice(2,6);
+{const hv=TH.hostView;TH.hostView=function(){const o=hv.apply(this,arguments);if(o&&on()){const Sh=CW.ctx?TH.outerS:S;if(Sh){CW.rbuoi=Sh.buoi||0;CW.rweek=COOP.state.week||0}
+  o.e={go:CW.ngo===(COOP.state.week||0)?CW.ngo:-1,w:COOP.state.week||0,tnb:CW.tnb|0,boot:BOOT}}return o}}
 /* her in-week change of the night (Tranh sủng, Chặn ngự giá, cáo bệnh …): the intent replaces the ctm-tn claim; runs in the host's context */
 TH.onDo("tn",(a,m)=>{const base=m&&m.base;E.stat.tn++;setTimeout(()=>{try{CW.tnDo(a,base)}catch(e){console.error("thin E tn",e)}},0);return {ok:1}});
 /* his ready / clock / a closed dialog: try the step again */
