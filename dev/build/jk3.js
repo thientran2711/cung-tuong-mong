@@ -89,10 +89,18 @@ function kgfDrop(){try{let d=document.getElementById("kgfdrop");const k=window._
 /* MAIN ROOT-57 (owner 21:40Z «must not cover the map's place tags more than needed»): while the list is open, a map place tag (.mspot) the list would cover steps right
    just clear of the list (translate only, nothing else changes; data-kgft marks the ones moved); closing the list or panning the map puts every tag back / re-checks */
 function kgfTags(d){try{document.querySelectorAll(".mspot[data-kgft]").forEach(t=>{t.style.translate="";delete t.dataset.kgft});if(!d||!d.isConnected)return;
- const sc=document.querySelector(".game.maptab .mapsc,.mapv .mapsc");if(!sc)return;if(!sc.__kgft){sc.__kgft=1;sc.addEventListener("scroll",()=>{cancelAnimationFrame(sc.__kgfq);sc.__kgfq=requestAnimationFrame(()=>kgfTags(document.getElementById("kgfdrop")))},{passive:true})}
- const a=d.getBoundingClientRect(),m=sc.getBoundingClientRect();
- sc.querySelectorAll(".mspot").forEach(t=>{if(!t.offsetParent)return;const z=t.getBoundingClientRect();if(z.width<2||z.right<=a.left||z.left>=a.right+2||z.bottom<=a.top||z.top>=a.bottom)return;
-  const dx=Math.ceil(a.right+4-z.left);if(z.right+dx<=m.right-2){t.style.translate=dx+"px 0";t.dataset.kgft=dx}})}catch(e){console.error("kgfTags",e)}}
+ const sc=d.parentNode&&d.parentNode.querySelector(".mapsc")||document.querySelector(".game.maptab .mapsc,.mapv .mapsc");if(!sc)return;
+ const a=d.getBoundingClientRect(),m=sc.getBoundingClientRect(),T=[...sc.querySelectorAll(".mspot")].filter(t=>t.offsetParent).map(t=>({t,z:t.getBoundingClientRect()})).filter(o=>o.z.width>2);
+ const ov=(z,l,r)=>l<z.right&&r>z.left;const vis=z=>z.right>m.left&&z.left<m.right&&z.bottom>m.top&&z.top<m.bottom;
+ T.forEach(o=>{const z=o.z;if(!vis(z)||!ov(z,a.left,a.right+2)||z.bottom<=a.top||z.top>=a.bottom)return;
+  /* step right just clear of the list, then past any other tag it would land on (≤4 hops), only if it stays inside the map view */
+  let L=a.right+4;for(let k=0;k<4;k++){const w=z.right-z.left,R=L+w;const h=T.find(q=>q!==o&&!q.moved&&vis(q.z)&&ov(q.z,L,R)&&q.z.top<z.bottom&&q.z.bottom>z.top);if(!h)break;L=h.z.right+3}
+  let dx=Math.ceil(L-z.left);if(z.right+dx>m.right-2||L-a.right>z.right-z.left)dx=Math.ceil(a.right+4-z.left);/* no free gap near: just clear of the list (readable beats hidden) */
+  if(z.right+dx<=m.right-2){o.t.style.translate=dx+"px 0";o.t.dataset.kgft=dx;o.moved=1;o.z={left:z.left+dx,right:z.right+dx,top:z.top,bottom:z.bottom}}})}catch(e){console.error("kgfTags",e)}}
+/* the map re-draws (render) and pans (scroll of any map box): re-check while the list is open */
+(function(){let q=0;const go=()=>{cancelAnimationFrame(q);q=requestAnimationFrame(()=>{const d=document.getElementById("kgfdrop");if(d||document.querySelector(".mspot[data-kgft]"))kgfTags(d)})};
+ document.addEventListener("scroll",go,{capture:true,passive:true});addEventListener("resize",go);
+ if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);try{go();setTimeout(go,350)}catch(e){}return r}}})();
 function kgfRail(){try{if(kgfRail.done||typeof kitStageRail!=="object")return;kgfRail.done=1;
  [["cn","Cung nhân",1],["ct","Chí tôn",2]].forEach(([k,lab,o])=>kitStageRail.add({id:"kgf-"+k,order:60+o,label:lab,title:lab+" · chạm để mở danh sách",count:()=>kgfCount(k),active:()=>window.__kgfOpen===k,when:()=>kgfPhoneMap()&&kgfCount(k)>0,onTap:()=>{window.__kgfOpen=window.__kgfOpen===k?null:k;const R=$$("kshR");if(R)R.dataset.full="";k3Stage();kgfDrop()}}))}catch(e){}}
 /* owner ruling via ROOT-56: an open group list closes with ONE tap anywhere outside it (map, tag, figure) — that tap only closes — and with Esc */
