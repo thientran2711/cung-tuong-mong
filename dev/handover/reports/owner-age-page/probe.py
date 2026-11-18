@@ -18,7 +18,7 @@ jobs=[]
 for age in DIRS:
     for i in range(1,33):
         c=f"c{i:02d}"
-        if age!="a18" and c not in SAMPLE: continue
+        pass
         for t in range(1,9):
             for v in range(3): jobs.append((age,c,t,v))
 with cf.ThreadPoolExecutor(24) as ex: res=list(ex.map(lambda j:head(url(*j)),jobs))
