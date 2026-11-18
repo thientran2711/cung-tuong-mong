@@ -1,4 +1,5 @@
 PRIORITY #1 CHECK ('doAct spend runAct'): OD 0 | ledger 0 | claims 0 | main 0 | review/* 0 | archive 0 (round 2 of shown-odds-one-path, LIVE a2ce736a; reports/shown-odds-one-path.md + reports/review-shown-odds-one-path.md)
+18 LAWS: read '★ THE 18 LAWS — READ FIRST' at the top of dev/rules/START_CORE.md first (ORDER MAIN ROOT-52 18/11 16:12Z/16:13Z); reviewers FAIL any break of a law the work touches.
 
 # D #2 brief — SHOWN-ODDS-ONE-PATH ROUND 2: spend-before-roll (opus; odds/rules = BIG)
 Coordinator: Foreman D #2 session_01964izF9UKqsAGRKtcUxqfx. Report via send_message there + dev/handover/reports/shown-odds-one-path.md § ROUND 2 (handover branch) + one line in dev/handover/FOREMAN_D_STATUS.md.
