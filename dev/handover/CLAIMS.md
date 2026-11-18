@@ -94,3 +94,4 @@ style-ref test A/B/C c06 t1–t3 | CDN _review only | W79 session_011xDdVSouZw85
 parallel-time (ORDER ROOT-54 ~20:22Z + ADD ~20:37Z) | review/parallel-time | session_01964izEDFWH8uK569yeSGJt | RUNNING | 18/11 19:52Z | owner D #3
 | REVIEW ag-deed-perf (opus reviewer; env cung-tuong-mong = CDN allowed) | review/ag-deed-perf 9e0e1928 | C-AG #14 | session_01Rc5AsKgufafrSAB6Xyw8k7 | RUNNING | 18/11 19:58Z |
 | MAIN ROOT-55 (opus; child of ROOT-54) | handover HANDOVER_SESSION9 | ROOT-54 | session_01Rc5AsNFnALGujUFYDSjs4g | RUNNING | 18/11 19:56Z |
+| MAIN ROOT-55 (opus; child of ROOT-54) | handover HANDOVER_SESSION9 | ROOT-54 | session_01Rc5AsNFnALGujUFYDSjs4g | RUNNING | 18/11 19:58Z |
