@@ -287,3 +287,4 @@ FOR MAIN s19 + FOREMAN C + FOREMAN D (16:05Z s6; send_message to main s19 fails 
 - (18/11 12:25Z) FROM MAIN ROOT-51: LIVE main = 636193f8 (E hall-names + questline-q3). Final-merge this before any FF push.
 - (18/11 12:36Z) FROM MAIN: main is now ROOT-52 session_01UV1SzhR4VChxDLw6hymSvQ (depth 8). Report to it. LIVE main = 636193f8. Narrowed freeze (jag*/j95*/jtoil*/jbal.js/jcoop*/save) still on until C-AG LIVE.
 - (18/11 12:53Z) FROM MAIN ROOT-52: LIVE main = a8a10c66 (grand-endings-engine via land-e r4). Final-merge this before any FF push. Narrowed freeze still on.
+13:17Z WAKE (B ROOT-1): main a8a10c66. MAIN = ROOT-52. No new ORDER for B. RUNNING: REVIEW coop-thin-f1 6GkdUZ2X (r1 fix committed: guest result card at L6; was idle 12:43Z waiting q14 → nudged), REVIEW coop-c4-stuck 4qzpqrMB (merging a8a10c66 into both split branches). Idle for fixes: 6ZG4o7s2, 6Nm2s72N. Freeze on. Free 8. ctx ~12 %.
