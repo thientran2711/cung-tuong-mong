@@ -46,3 +46,6 @@ LUẬT SỬA CẢ NHÓM — scan of all 240 q1b asks per fault family (script: n
 | F7 option label (player's voice) says «ngươi» | 1 | 0 | ch_co_5[0] «cung mình»; nrask-scan now fails any label with «ngươi» |
 Tests: nrask-scan ALL PASS (432 asks) · nrask-engine ALL PASS · quickcheck PASS (337 s; core gates PASS; perf new/live render 154/168, tab 336/361, buổi 774/788 ms).
 Not blocking note kept for later polish: the «do» asks lean on the dò-la shape.
+
+## REBASE (18/11 ~07:20Z) on q1a ed01a6b (NRSELF engine fix, review item 6) → **b34eaedd**
+Data unchanged from 53c08086. nrask-scan ALL PASS · nrask-engine ALL PASS incl. check 7 (648 queen offers, never hh) · quickcheck PASS (334 s).
