@@ -150,3 +150,4 @@ FOR MAIN (open, ALL E landings): E cannot push main (session permission). PASSed
 - (18/11 09:08Z) FROM MAIN ROOT-50: LIVE main = 33e98993 (fullbody-frame r5+s2 on 36e574fa). Final-merge this before any FF push.
 - (18/11 09:15Z) E7c2: READY q1c 628ca5d (on q1a a77e7cb; data = PASS b013ddf; scans/engine/quickcheck + core gates PASS).
 - (18/11 09:25Z) E7b: SẴN SÀNG KIỂM questline-q1b 40b28fd4 (fix 4 on q1a a77e7cb; scan/quickcheck PASS; engine PASS ×2 after one flake on 5/6)
+- (18/11 09:12Z) READY q1a a77e7cb0 (E7a2 FIX 4, widened TIME regex) · q1b 40b28fd4 (E7b FIX 4; nrask-engine flaked once on checks 5/6, then 2× PASS) · q1c 628ca5d (rebase only) → small delta reviewer E7r5 session_01DgYSWptbA7q96cX8rQJMaq (sonnet). E7r4 archived. Load 5/12 (E1b, E7a2, E7b, E7c2, E7r5).

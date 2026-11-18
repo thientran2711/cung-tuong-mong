@@ -49,3 +49,4 @@ princess-sample (Nam Chiếu + Bắc Địch, 2 figures, sample only) | handover
 | E7r4 re-review q1a 90796d3 + q1b 7f12b48c (+q1c 154506f rebase) (opus BIG) | review/questline-q1a/b/c | E ROOT #3 | session_01DgYSWnPaLxwygTLN5J8FwP | RUNNING | 18/11 08:37Z |
 | REVIEW fullbody-frame r5+s2 824cfccf (sonnet SMALL UI; brief briefs/root50-review-fullbody-frame.md) | review/fullbody-frame-s2 | MAIN ROOT-50 | session_01UV1SzhAzQ2MZqRroHgFoiK | LIVE 33e98993 | 18/11 08:50Z |
 poison-road-fix | review/poison-road-fix | session_01964izENMh7RgrvjTLQsBZa | RUNNING | 18/11 09:15Z | owner D #1
+| E7r5 delta re-review q1a a77e7cb + q1b 40b28fd4 (+q1c 628ca5d) (sonnet) | review/questline-q1a/b/c | E ROOT #3 | session_01DgYSWptbA7q96cX8rQJMaq | RUNNING | 18/11 09:12Z |
