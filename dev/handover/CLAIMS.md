@@ -505,6 +505,6 @@ art-matrix planner (MAIN s43 order) | claude/cung-tuong-mong-handover-hj0h8w (re
 | lyf-tier (her own figure shows cold-palace art when S.lyF exists; sonnet; brief briefs/lyf-tier.md) | review/lyf-tier | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:34Z |
 | REVIEW kit-set-lines 699bc1b (SMALL; sonnet; brief briefs/review-kit-set-lines.md) | review/kit-set-lines | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:34Z |
 | E4f monthly-ration FIX 1 (opus; briefs/E4f-monthly-ration-fix1.md; E4 rolled over, E4r FAIL a0f3f53) | review/monthly-ration | E ROOT | session_01DgYSWpaM3yuPRsuWXP8kqd | RUNNING | 18/11 05:42Z |
-| REVIEW map-tap-go 1996eca (BIG; opus; brief briefs/review-map-tap-go.md) | review/map-tap-go | MAIN ROOT-45 | (opening) | RUNNING | 18/11 05:39Z |
+| REVIEW map-tap-go 1996eca (BIG; opus; brief briefs/review-map-tap-go.md) | review/map-tap-go | MAIN ROOT-45 | session_01UV1SzjFu8b4mksbwcWenpd | RUNNING | 18/11 05:39Z |
 B7 consort a18 t1–t8 + Nữ đế, painter A (c02,c04,c07,…c32) | _review CDN consort-tiers/<cNN>/b7 + handover reports | C | session_011xDdVQrs6nBYoBQAva6sSz | RUNNING | 2026-11-18T05:40Z
 B7 consort a18 t1–t8 + Nữ đế, painter B (c03,c06,c08,…c31) | _review CDN consort-tiers/<cNN>/b7 + handover reports | C | session_011xDdVSniP7aH2vrv4nFbVT | RUNNING | 2026-11-18T05:40Z
