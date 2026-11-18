@@ -37,3 +37,19 @@ Files (md5-verified): https://ctm-img.victoria-tntt.workers.dev/img/_review/cons
 ## t7 embroidery scan (ROOT-20 order, 18/11)
 Opened t7 v0/v1/v2 at native res. v0 flat/in the weave (kept). v1 and v2 looked shaded/raised (decal-like) -> REDRAWN with "directional silk-thread satin/split stitches, flat, matte, tone-on-tone, no shadow/highlight/relief" (same colours, same files). | person | t7 | pasted? | redrawn gens |: c16 | v0 | no | 0 ; c16 | v1 | yes | 1 ; c16 | v2 | yes | 1. Result flatter, thread-like (c17 peonies still a little shaded, accepted). Extra credits 2 x 135 = 270.
 ~100% xong / ~0% chơi được.
+
+## t7 embroidery rescan of c01 / c02 / c12 (ROOT-20 order, W42, 18/11)
+Opened t7 v0/v1/v2 of c01, c02, c12 at native res: the golden phoenixes (and shaded peonies) were glossy/raised, decal-like -> all 9 REDRAWN (same colours, pose, held item; refs = live t7 + m09 STYLE; prompt = real directional silk-thread satin/split stitches, flat, matte, tone-on-tone, no shadow/highlight/relief, not glossy gold). Old files kept on CDN as *_prev3.png, new under the same names (img/_review/consort-tiers/<cNN>/b10/<cNN>_a18_t7_v0|v1|v2.png).
+| person | t7 version | pasted? | redrawn gens |
+|---|---|---|---|
+| c01 | v0 coral-pink | yes (glossy gold phoenix) | 1 |
+| c01 | v1 sage+yellow | yes | 1 |
+| c01 | v2 periwinkle+yellow | yes | 1 |
+| c02 | v0 navy blue | yes | 1 |
+| c02 | v1 sage+yellow | yes | 1 |
+| c02 | v2 rose-mauve+yellow | yes | 1 |
+| c12 | v0 mint | yes | 1 |
+| c12 | v1 mauve-pink+yellow | yes | 1 |
+| c12 | v2 teal-blue+yellow | yes | 1 |
+Looked at all 9: phoenix now pale/tone-on-tone and flat; poses/held items same as before by eye (IoU vs live not re-measured). The old per-person b10 sheets (c01/c02/c12 *_b10_sheet.jpg) still show the OLD t7 — regenerate them (sheet2.py) if needed. 9 gens x 135 = 1215 credits.
+~100% xong / ~0% chơi được.
