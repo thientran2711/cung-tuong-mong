@@ -16,3 +16,16 @@ PRIORITY #1 CHECK: OD line "(18/11 ~06:25Z UTC, ROOT-46 chat; CANON OVERWRITE" r
 ## Notes for MAIN / owner
 - At 0.80 the sky band is still a clearly visible soft box (its own gradient + hard top/bottom edge) and the text behind it is hard to read for ~2.5 s; that is the approved band, only less opaque than before. If the owner wants the UI more readable she should pick 70 (BTR_OP=.7 or __btrOp).
 - The review shots folder img/_review/buoi-banner/ is not in the branch (shots stay off git); I did not touch/wipe anything.
+
+---
+# ROUND 2: review/buoi-banner 3d675bd -> r7 b12fccb — PASS
+
+PRIORITY #1 CHECK: same OD line + owner 06:35Z change list (sub line bigger/darker, group flush to stage top, feathered band); no other branch touches jbuoi.js.
+
+Verdict: PASS b12fccb (review/buoi-banner-r7 = 3d675bd + merge of live origin/main 97de885, generated files rebuilt; fast-forwardable). 3d675bd itself lacked 97de885 (main moved while the worker finished), so I merged on r7. Tree vs main = jbuoi.js + KIT.md §74 notes + index.html + sw.js only.
+- Flush: .btr-stage padding-top = --btr-top (.stage top - 2 px, measured at open), justify flex-start. Looked at ipad-b2 and fold-b3: title, icon, seal, sub line and band start right at the stage top, centred. Header / stats / tabs / bottom bar unmoved and visible.
+- Feather: vertical mask on .btr-sky (0 -> 26 % -> 72 % -> 0), box-shadow line removed; no hard box edge any more.
+- Sub line: bold, 1.3-1.9 rem, full-strength ink + soft halo; readable on the shots, though over busy cards (ipad-b2) it still competes with the text behind it at 0.80.
+- Backdrop removal, Gọn = title only (~0.7 s), tap-skip, kitPace timing: as in round 1. Art/motion/season/festival unchanged.
+- Tests on b12fccb: buoi-transition REAL=1 fold+ipad+ipad-pro FAIL 0; buoi-art 0; buoi-moon 0; one-core PASS. Co-op e2e / old-save not re-run (no state/network code in the diff).
+- Note: in the Luân hồi (rebirth) picker the buổi overlay is not visible in the test shot (the picker sits above z 36 like live); unchanged from live.
