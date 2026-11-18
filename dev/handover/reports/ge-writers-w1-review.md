@@ -72,3 +72,34 @@ Agrees with the worker table (all 2.07 open .11, both shadings 1.00).
 5. Lean: W2 holds ≥3 thiện and ≥3 ác per Chuỗi; W1 has 5 endings with 2 thiện. W1 measure is IN for both shadings, so no fix required, but pick one family rule for W3.
 6. **W2 (not this review):** on the W1+W2 merge one-core-guard FAILs 44 ("BAL.cn_*_n set 3 times") because W2 adds its rows with Object.assign blocks; W1 already learnt this and put rows inside the BAL.ge literal. W2 must do the same. jbalge.js / assemble.py merge cleanly by hand: 100 ids × gate/fail/rw, no key collision; assemble order jgedata.js, jgedata_w1.js, jgedata_w2.js.
 7. Lean tags read sensibly (spot-read all 11 lists); a few judgment calls (tt_mat «Trình thư lên Hoàng thượng» = thiện) left as written.
+
+---
+# ROUND 2 — review of 46aeac92 (fix round E11a2), order from Foreman E ROOT #5
+PRIORITY #1 CHECK ('ge-writers|GE writer|jgedata'): OD 0 | ledger 0 | claims 8 | main 5 | review/* 2 (ge-writers-w1 under review, ge-writers-w2 @ 4c0d9248 merge test) | archive 0. 18 LAWS re-read (START_CORE top block).
+Local copies: (A) 46aeac92 + origin/main d3ea24e8 — **assemble.py conflicts with main** (main added 12 modules jagday…jmgcal on the same line; resolved by keeping main's list + the jgedata_w1.js line; index.html / sw.js rebuilt); (B) = A + origin/review/ge-writers-w2 @ 4c0d9248 (assemble, jbalge both waves' rows unioned; test files = W1's shared block).
+
+## VERDICT: **PASS 46aeac92 — land after the B patch** (muoi_no_4 only; see (a)). The coordinator must re-merge with newest main first (assemble.py line conflict, keep both).
+
+## The 4 fixes, checked as families
+| fix | result |
+|---|---|
+| 1 real people (law 6b) | OK — dtq_binh_3 now the world's Vương gia (j22 MROLES, every life) and her real option «Bóc cả hai ra đọc trước»; dtq_huynh_4 = the road's sứ giặc + his «chuyện riêng» (dtq_huynh ch6); muoi_lau_3 = the old boatman himself + his daughter (road option «Hứa đưa con gái lão ra»); tt_mat_3 = the pact's real clause (tt_mat ch6 «điều khoản giữ ngươi dưới một bậc»); extra scan fixes dtq_bien_4 (huynh's thân binh, ch6 ✔), dtq_vu_2 (Thái tử → Hoàng thượng ✔), muoi_tuoc_4 (the road's «tấm biển trước cửa nhà» ✔), tt_oan_3 (Cung Chính ti = game spelling ✔). muoi_no_4 kept for the FOR B patch → (a). |
+| 2 cross-wave variety | OK — tt_tranh_3 fail «Lơ lửng giữa hai phe», dtq_binh_2 cw reworded; on copy B (pilots + W1 + W2 = 25 branches) the shared guard reads 0 repeats: ge-guard **6/6**. |
+| 3 Queen form + palaces | OK — tt_mat: Hoàng hậu / nàng ta everywhere, no «bà» / bare «nàng» for her; muoi_no_2 «nàng ta». Thọ Khang cung = where former consorts live as Thái phi in the game (3 uses, e.g. «nay là Thái phi ở Thọ Khang cung») — fits a retiring Queen; chùa Hộ Quốc = the game's temple (Thái hậu's sutra gifts, 10 files). |
+| 4 one shared test block | OK — ge-guard variety block = W2's units (t/a/ft sentences, ht/ha/cw/fail, case-blind) + W1's t ≠ a; ge-engine roads = CLI arg (list | all) → env GE_ROADS → pilots, url `-`. W2's existing `GE_ROADS=` calls keep working, so W2 can copy it verbatim; diff vs W2 today = header comment + the t ≠ a line + the switch. |
+
+## Ruling (a) — muoi_no_4 FOR B patch (jrd_muoi ch8 c3): NOT exact yet, two gaps
+1. **Numbers row missing (laws 2, 3, 4):** every ch8 beat option takes its cost/gain from `BAL.road` (dev/build/jbalroad.js:191 `muoi_no_8:{s1,s2,c1,c2,t1,x1}`). The patch text adds `c3` with three options that speak of costs («hiệu buôn mất một món bạc», «ép người lúc cùng đường») but no `muoi_no_8.c3:[…]` row → B must add it in the same patch: three options of equal value (law 2), each a gain AND a loss (law 3), numbers only there (law 4).
+2. **The scholar would exist only in some lives (law 6b again):** ch8 plays `nc = 1 + rI67(3)` of the c-pool (j67.js:82). As a 3rd c-beat he is met in about two lives of three, and c1 / c2 (whose names sit in muoi_no Chuỗi lists today) come up less often. muoi_no_4 «Thư sinh trả nợ» could then be won by a player who never met him (cond = duc + tai only). Fix: either B gives the scholar a beat that ALWAYS plays (own slot in `p`, or a t-slot that is not the 65 % one), or Foreman E adds an engine term «a named option was taken» (cond, like ["e",…]) so muoi_no_4 opens only after one of his three options. Then the W1 successor adds the three names to muoi_no_4 pull + lean (thiện: the first two, ác: the third), reruns ge-guard + the muoi_no measure; a light re-check by me (or any reviewer) of that one ending.
+Recommended dtq_binh ch7 c4 (Vương gia in the road): fine to land later; same two points apply (BAL row; it is a c-pool beat, so it is colour, not a condition).
+
+## Ruling (b) — ge-engine `- all` cold flake: TEST-TIMING FAMILY, not W1 (FOR MAIN / Foreman E)
+My runs on copy A: **241/456** (first run after the new main merge + build), then 456/456, 456/456 (after a fresh rebuild each), pilots-only cold 104/104 ×2; copy B 808/808. Failure shape: every life after the first reports «the life runs the road "tt_co"» — the helper `window.__life` (ge-engine.js:19–21) waits only for `S.origin && S.st.f14`, which the OLD life already satisfies, so on a slow cold page it returns the stale life and all later checks read tt_co. Same wait in `window.__ge` of dev/measure/ge-measure.js (and any test copied from them). Fix once for the family: wait until `S.st.f14.rd === road` (or a new S object) with a timeout, in both files. Not caused by W1's data (same code on the pilots; W1 only made the list longer).
+
+## Tests (copy A unless marked)
+ge-guard 6/6 · ge-engine all 456/456 ×2 (+ 1 cold 241, above) · one-core PASS (A and B) · quickcheck PASS (core gates PASS, open 1539 ms, old save ok, perf render 230/255, tab 463/444, buổi 1186/1125, tasks>200 19/19; only «NOT BUILT» = my uncommitted local merge) · copy B: ge-guard 6/6, ge-engine all **808/808**, one-core PASS (W2 rows now inside the BAL.ge literal, 100 ids × gate/fail/rw, no collision). Measure not rerun: words only, no pull / close / lean / cond change (checked in the diff).
+
+## 18 LAWS (round 2)
+2 equal-value / 3 gain-and-loss / 4 ONE CORE: OK for W1 data; the FOR B patch needs its BAL row (a.1). 6b real people: OK for 43 endings; muoi_no_4 waits on (a). 7 cổ trang: OK (no %, no digits; «y» for a man in the patch). 11 whole group: each fix done as a family with tables. Others n/a or unchanged from round 1.
+
+## Still FOR E (from round 1 + the worker): engine term «the followed / needed person alive» (tt_mat_2/4 Queen, every FOLLOW ending); one HH seat rule for all HH endings incl. cnv_mat_2; inChar .89 vs Chuỗi length; game-wide palace aliases (Càn Ninh / Khôn Ninh, Từ Ninh / Đức Thọ) for the wording owner.
