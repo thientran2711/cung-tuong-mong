@@ -96,7 +96,7 @@ Object.assign(BAL,{shelf:{
  plant:{start:80,hw:3,wither:35,deadW:3,witherLux:.3,khacSelf:1,/* OWNER DECIDED (OD 17/11 ~18:15Z, option 1): servants care plants + pets at 0 khắc to her; 'Tự tay chăm' = khacSelf khắc; ONE 'Chăm sóc' act */srvBase:.45,srvLoyK:.006,srvMax:1.1,qCut:[.6,.9],/* servant care words: below qCut[0] vụng về, below qCut[1] tạm được, else khéo tay */srvTr:{"Cẩn thận":.2,"Chăm chỉ":.2,"Lười biếng":-.3,"Vụng về":-.2},
   gain:[10,45],word:[.35,.8],/* her care score: below word[0] "chưa khéo", at or above word[1] "rất khéo tay" */game:{rounds:3,steps:10,band:[6,8],ms:[260,170]}},
  /* the shared deed "Ghé chơi" (TW call): friendship + a look at the room */
- visit:{rel:3,w:.6,affMin:-15,base:5,herW:15,upW:5},/* a drop-in visit = kind g3call (her ally need); target weight base + liking (+ her, + a superior) *//* anyone not on bad terms may call (owner: NPCs come to her room as she goes to theirs) */
+ visit:{rel:3,w:.6,affMin:-15,dayP:12,base:5,herW:15,upW:5},/* a drop-in visit = kind g3call (her ally need); dayP = the chance (in 100) her free buổi lets her go (the old odds, read in npcWhy done); target weight base + liking (+ her, + a superior) *//* anyone not on bad terms may call (owner: NPCs come to her room as she goes to theirs) */
  seeDeeds:["call","visit","help","apol","provoke","humil","test","mediate","warn"],
  /* Tố xa xỉ / Tố vượt phẩm, the room cause. Nobody knows the scores (owner (d)): a charge rests on what one SAW, a TIP (rumour) or a GUESS; the inquiry settles the truth.
     guessO: a hostile NPC with nothing seen / heard still accuses on a guess guessO in 100 a month (npcO in 100 with something seen / heard); vp*: a ngự ban piece above rank is allowed, so a proven charge only sends it back to the chest */
@@ -269,7 +269,7 @@ npwReg("g3call",{who:c=>[c.v],why:v=>{const V=BAL.shelf.visit;let N={};try{N=agN
   const L=[S].concat(liveRivals(true)).filter(x=>x&&x!==v&&x.alive!==false&&!x.out&&aff(v,x)>=V.affMin);const t=npwPick(L,x=>V.base+Math.max(0,aff(v,x))+(x===S?V.herW:0)+(rkOf(x)>rkOf(v)?V.upW:0));
   return t?{s:n,t,r:"muốn thân với "+npwNm(t),k:palaceOf(t)}:null}});
 (function(){if(typeof agDecide0!=="function")return;const d0=agDecide0;agDecide0=function(v){const r=d0.apply(this,arguments);try{if(r||!v||v.confined)return r;
-  const w=npcWhy("g3call",{v});const t=w&&w.tgt;if(!t)return r;const c={k:"call",t,tag:"social",act:AGACTW.call,need:"ally",why:w.why,at:(kh,vv,tt)=>palaceOf(tt)};const sl=agSlot(v,c.at,t);if(!sl)return r;
+  const w=npcWhy("g3call",{v},()=>roll(BAL.shelf.visit.dayP));/* the chance to drop in this buổi = the old dayP (her free buổi); cd stamped only when she goes */const t=w&&w.tgt;if(!t)return r;const c={k:"call",t,tag:"social",act:AGACTW.call,need:"ally",why:w.why,at:(kh,vv,tt)=>palaceOf(tt)};const sl=agSlot(v,c.at,t);if(!sl)return r;
   let N={};try{N=agNeedsC(v)}catch(e){}agPlan(v,c,N,sl[0],sl[1]);return 1}catch(e){console.error("shelf call day",e)}return r}})();
 /* any visiting deed landing at the target's palace shows the visitor the room (sang thăm, giúp, tạ lỗi, khiêu khích …) */
 (function(){if(typeof agLand0!=="function")return;const l0=agLand0;agLand0=function(p){const r=l0.apply(this,arguments);try{if(r&&p&&BAL.shelf.seeDeeds.includes(p.k)&&p.k!=="call"){const v=RV(p.vid),t=agPerson(p.t);if(v&&t&&p.pl===palaceOf(t))shelfSee(v,t,"tận mắt")}}catch(e){console.error("shelf land",e)}return r}})();

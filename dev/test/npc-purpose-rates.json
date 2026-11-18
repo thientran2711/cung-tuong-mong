@@ -16,30 +16,33 @@
    "f": "c",
    "re": "^Chủ thưởng",
    "band": [
-    0.25,
-    5
+    0.3,
+    3.5
    ],
-   "why": "only lives that start on the cung nữ road count; how many tuần a seed spends there differs between builds (targeted servant-start check in the rates report)"
+   "why": "maid-road event: judged per tuần on the cung nữ road (base scaled by the head/base maid-road tuần)",
+   "per": "srv"
   },
   {
    "n": "maid road: 'quở mắng' (j42 srvCard)",
    "f": "l",
    "re": "quở mắng",
    "band": [
-    0.25,
-    5
+    0.3,
+    3.5
    ],
-   "why": "only lives that start on the cung nữ road count; how many tuần a seed spends there differs between builds (targeted servant-start check in the rates report)"
+   "why": "maid-road event: judged per tuần on the cung nữ road (base scaled by the head/base maid-road tuần)",
+   "per": "srv"
   },
   {
    "n": "maid road: 'Bạc lạ' bribe (j42 srvCard)",
    "f": "c",
    "re": "^Bạc lạ",
    "band": [
-    0.25,
-    5
+    0.3,
+    3.5
    ],
-   "why": "only lives that start on the cung nữ road count; how many tuần a seed spends there differs between builds (targeted servant-start check in the rates report)"
+   "why": "maid-road event: judged per tuần on the cung nữ road (base scaled by the head/base maid-road tuần)",
+   "per": "srv"
   },
   {
    "n": "poisoning sign 'môi tím tái' (jface)",
@@ -116,10 +119,10 @@
    "f": "c",
    "re": "^Một ánh mắt",
    "band": [
-    0.3,
+    0.05,
     3.5
    ],
-   "why": "small base count (< 20 in 5 seeds): seed paths alone move it 2-3x"
+   "why": "the old card came from any man at random; now only a man who has met her (m.seen), has tình ý or a romantic nature, one at a time in the palace: the bot seldom meets men, real play meets them at the places she visits"
   },
   {
    "n": "visitor card 'Thái hậu triệu' (j24 thCall)",
@@ -245,31 +248,36 @@
   "srvWatch": "cung nữ road only: the mistress watches a maid who spies or betrays",
   "cmConf": "close maid confides a secret: needs a maid with a secret and lòng ≥ secTrust, then the old secTell roll (0-3 per run)",
   "h54Tut": "a mother hires an arts master: needs a daughter at home and the old P×30 roll (0-5 per run)",
-  "wdFrame": "contraband planted on a hated wearer: old frameP roll after the reason (0-4 per run)"
+  "wdFrame": "contraband planted on a hated wearer: old frameP roll after the reason (0-4 per run)",
+  "thCall": "the Thái hậu calls her: needs Thái hậu regard ≥ ap.th and wins the visitor rotation (0-15 per run)",
+  "exposeMe": "j95b a foe exposes her lie: needs an open lie case and hostility ≥ lie.expose (0-10 per run)",
+  "f7Gamble": "festival gambling contest variant only (0-3 per run)",
+  "omen": "weekly comet card: hostility ≥ dil.omenBar (40) and a 36-tuần cd (0-3 per run)"
  },
  "base": {
-  "drop-in visit 'ghé chơi' (jshelf g3call)": 62,
-  "maid road: mistress mood 'Chủ thưởng' (j42 srvCard)": 6,
-  "maid road: 'quở mắng' (j42 srvCard)": 12,
-  "maid road: 'Bạc lạ' bribe (j42 srvCard)": 2,
-  "poisoning sign 'môi tím tái' (jface)": 12,
+  "_srvWeeks": 308,
+  "drop-in visit 'ghé chơi' (jshelf g3call)": 63,
+  "maid road: mistress mood 'Chủ thưởng' (j42 srvCard)": 19,
+  "maid road: 'quở mắng' (j42 srvCard)": 20,
+  "maid road: 'Bạc lạ' bribe (j42 srvCard)": 12,
+  "poisoning sign 'môi tím tái' (jface)": 19,
   "NPC 'Lập công' (j71 f7Merit)": 6,
-  "NPC mood 'đắc ý' (jemoact)": 82,
-  "NPC mood 'ưu uất' (jemoact)": 53,
-  "NPC mood 'khóc suốt' (jemoact)": 26,
-  "NPC mood 'vui vẻ' (jemoact)": 26,
-  "NPC 'sang cung' (jemoact)": 60,
-  "NPC 'khoe khoang' (jemoact)": 41,
+  "NPC mood 'đắc ý' (jemoact)": 103,
+  "NPC mood 'ưu uất' (jemoact)": 37,
+  "NPC mood 'khóc suốt' (jemoact)": 23,
+  "NPC mood 'vui vẻ' (jemoact)": 23,
+  "NPC 'sang cung' (jemoact)": 66,
+  "NPC 'khoe khoang' (jemoact)": 36,
   "letters 'gửi thư / viết thư'": 28,
-  "festival nights (Nguyên tiêu / Thất tịch / Trung thu)": 146,
-  "visitor card 'Có người đến' (j24)": 262,
-  "visitor card 'Một ánh mắt' (j24 manPoem)": 13,
-  "visitor card 'Thái hậu triệu' (j24 thCall)": 3,
-  "visitor card 'Lời cảnh báo' (j24 maidWarn)": 32,
-  "visitor card 'Kẻ hầu xin' (j24 svAsk)": 8,
-  "news seller 'Có người bán tin' (jagknow knSell)": 28,
-  "omen 'Điềm báo' (jty tyPlot)": 15,
-  "NPC affair 'tư thông' (j22)": 1
+  "festival nights (Nguyên tiêu / Thất tịch / Trung thu)": 129,
+  "visitor card 'Có người đến' (j24)": 233,
+  "visitor card 'Một ánh mắt' (j24 manPoem)": 24,
+  "visitor card 'Thái hậu triệu' (j24 thCall)": 2,
+  "visitor card 'Lời cảnh báo' (j24 maidWarn)": 21,
+  "visitor card 'Kẻ hầu xin' (j24 svAsk)": 7,
+  "news seller 'Có người bán tin' (jagknow knSell)": 25,
+  "omen 'Điềm báo' (jty tyPlot)": 7,
+  "NPC affair 'tư thông' (j22)": 0
  },
  "baseInfo": "5 seeds × 200 tuần, npbase/index.html"
 }

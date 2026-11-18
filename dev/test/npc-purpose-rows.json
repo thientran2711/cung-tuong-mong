@@ -2407,7 +2407,7 @@
 "status": "PARTIAL",
 "group": "G3",
 "event": "agent-layer internal dice (re-plan, 2nd goal, slot, summon, seat, jeal",
-"done": "const w=npcWhy(\"g3call\",{v});"
+"done": "const w=npcWhy(\"g3call\",{v}"
 },
 {
 "f": "jemo.js",

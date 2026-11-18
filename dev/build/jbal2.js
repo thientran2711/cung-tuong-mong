@@ -1289,7 +1289,7 @@ Object.assign(BAL.ag.why.cd,{exposeMe:6,lieMe:6,blameMe:4,frameMe:4});
    g3.bmBac  she blackmails for silver when her bạc is under this (need = bmBac − bạc), else she would rather report (hostility)
    g3.mood   weekly stay-home factor: base + sg[her feeling] × its strength / div (sad → stays in, glad → goes out), held to [lo, hi]
    g3.maid   a maid's chat: odds o she has heard where someone is (the player's foe first)
-   g3.call   a drop-in visit (jshelf): her ally need (0..1) × k must reach min (k = 100: the npwReg 0..100 scale; cd.g3call tuần between two calls ≈ the old 12 %/buổi dayP)
+   g3.call   a drop-in visit (jshelf): her ally need (0..1) × k must reach min (k = 100: the npwReg 0..100 scale); the chance she drops in this buổi = BAL.shelf.visit.dayP (old odds, a new life does not send every lonely consort at once); cd.g3call tuần after a call
    g3.scape  a scapegoat (jworld2 án trộm): the accuser's hostility to her target must reach min */
 BAL.ag.why.g3={soon:12,two:.7,newRk:10,bmBac:60,mood:{b:1,div:120,lo:.4,hi:1.9,sg:{vui:1,binh:0,buon:-1,gian:.5,so:-1,ghen:.5,lo:-.5,dau:-1,muu:.5}},maid:{o:15},call:{min:25,k:100},scape:{min:30},lean:{c:2,k:"vuon"},ty:{preg:50},
  heir:{go:20,wait:60,age:2},deb:{p:4,gap:12,o:30,div:2,old:16,oldD:10,lo:10,hi:85}};
@@ -1297,7 +1297,7 @@ BAL.ag.why.g3={soon:12,two:.7,newRk:10,bmBac:60,mood:{b:1,div:120,lo:.4,hi:1.9,s
             age = push per year of the eldest eligible son above six
    g3.deb   j51 kvDebate (ministers' memorial, PARKING_LOT #7): p = % a month the court raises lệ lập đích (was KV.deb), gap = months between two (KV.debGap);
             the Emperor's odds to switch = o + (Tài gap + được thương gap) / div − oldD when the heir is ≥ old, held to [lo, hi] */
-Object.assign(BAL.ag.why.cd,{g3call:4,g3scape:8,g3acc:1,tyCall:1});/* tyCall: a patient sends for the thái y at most once a tuần (old 25 % a buổi ≈ one round a tuần) */
+Object.assign(BAL.ag.why.cd,{g3call:1,g3scape:8,g3acc:1,tyCall:1});/* tyCall: a patient sends for the thái y at most once a tuần (old 25 % a buổi ≈ one round a tuần) */
 // G2 kinds (npc-purpose G2, review/npc-purpose-g2: monthly no-actor chains; kinds registered in jagwhyg2.js) — numbers only here
 Object.assign(BAL.ag.why.cd,{loTake:3,loTry:4,loClear:2,loWear:6,kcWeek:6,kcMeet:4,kcVh:12,kcSuit:8});
  /* jkc: kcDebt.fail = % the gambling brother, refused, fails to raise the debt himself (his own try) → the creditor comes; kcWeek s = motive weight × mul (a weight ≥ .35 is a real motive); kcTm: he seeks her places with weight h×seek vs home; meets her when longing h ≥ meet; Emperor notices beauty when sắc − vhSac ≥ min; kcSuit: a house her standing reaches (q ≤ kgt + reach) seeks her with s = danh tiếng × kapW */
@@ -1365,7 +1365,7 @@ Object.assign(BAL.ag.why,{g2b:{
 Object.assign(BAL.ag.why.cd,{fxSrvHarm:3,fxRivSrv:3,fxRivSrv2:3,fxSlapBack:1,emoKid:12});  /* jface/jemo cadence in tuần: a servant's spite, a rival's strike at servants, a mistress's slap, a child's glad mood */
 Object.assign(BAL.ag.why,{
  fxSrv:{p:8,rivP:6,hot:40,hot2:25,hostAdd:3,grudge:40,loyW:2,spite:30,penLow:30,timid:30,slapBase:20,timidSl:20},  /* jface: p/rivP = success of the chosen strike (old monthly odds); hot = grudge needed to strike at her servants; hot2 = dislike needed to strike at another consort's servants (fxRivSrv2; the old line had no gate at all); hostAdd = old +3 for a target she hates (≥ hot); servant s = grudge + (loy.out−loyal)×loyW + spite×netQ; punished consort lies low with penLow + timid×netQ vs her grudge; mistress slaps back: slapBase + spite − timidSl×timid + dislike */
- emo:{goBase:20,angW:1,timid:40,calm:20,ofEmp:30,ofAf:40,manMet:20,manDt:5,kidSib:25,kidPet:25},  /* jemo: sad consort alone (mood v) vs goBase+liking; servant fear = anger×angW + timid×netQ vs calm + loyalty above mid; officials: Emperor's temper ofEmp, patron with af ≥ ofAf; men: met/letters manMet+tình, tình moved ≥ manDt; child: siblings ×kidSib, pets ×kidPet */
+ emo:{goBase:20,angW:1,timid:40,calm:20,ofEmp:30,ofAf:40,ofP:6,manMet:20,manDt:5,kidSib:25,kidPet:25},  /* jemo: sad consort alone (mood v) vs goBase+liking; servant fear = anger×angW + timid×netQ vs calm + loyalty above mid; officials: Emperor's temper ofEmp, patron with af ≥ ofAf, it reaches him this tuần with ofP % (the old weekly 6 %; without it every official turned glad/worried every tuần); men: met/letters manMet+tình, tình moved ≥ manDt; child: siblings ×kidSib, pets ×kidPet */
  cmood:{thHi:70,base:20,kidsFew:2,kidW:25,hhSad:20,hhFav:15,oan:40,busy:3,busyW:10}  /* jcmood: TH glad when her regard th ≥ thHi; worried while heirs < kidsFew; HH jealous anger = grudge vs hhSad+liking; glad when her favour leads by hhFav; tired when ≥ busy pairs of consorts bear oán ≥ oan */
 });
 Object.assign(BAL.ag.why.cd,{ilBack:2,ilBuy:4,ilConf:2,wkUse:6,illSeek:3,rcpAcc:1,rcpGos:3,rcpGift:3,rcpTh:3,petHh:0,petMan:3,thyLeak:2,thyTell:1,thyBribe:3});  /* jil/j83/jrcp/jpet/jthaiy cadence in tuần per person */
