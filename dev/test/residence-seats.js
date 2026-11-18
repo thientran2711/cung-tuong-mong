@@ -10,6 +10,8 @@
    R7 harem: roomFor('consort') false at BAL.harem.cap living consorts (her counted); a new game starts with BAL.ps.harem (+ her)
    R8 Dư đồ: no separate Ngọc Thanh các spot while she is housed; her host palace spot carries her face; home name = her hall's name;
       the stage at home paints her hall (SCIMG.home = <palace>-cung-dong-phoi|tay-phoi-*)
+   R10 (re-merge 18/11) back from lãnh cung into a full house: a consort who leaves gives up her room (palFix), so when she returns
+      (straight away, or by jworld đại xá) no chủ vị holds more than resCap() even before the next palFix
    exit 1 on any fail or page error. */
 const {chromium}=require('playwright');const [,,URL,GAMES='6']=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch({args:['--blink-settings=imagesEnabled=false']});const ctx=await b.newContext({serviceWorkers:'block',viewport:{width:755,height:1000}});
@@ -41,6 +43,12 @@ const {chromium}=require('playwright');const [,,URL,GAMES='6']=process.argv;cons
   {const h=hosts().find(x=>x!==S);const low=[S].concat(rivals).filter(y=>live(y)&&!y.queen&&rkOf(y)<3);
    if(h&&low.length>=3){for(const y of low.slice(0,3)){y.resHead=key(h);y.resHall=null;if(y!==S&&y.palLone){y.pal=null;y.palLone=0}}palFix();R1('R4');ok(mates(h).length<=resCap(),'R4 trim '+mates(h).length);
     for(const y of low){const r=residenceOf(y);ok(!!r.part,'R4 lost '+y.name)}}else F.push('R4 setup: no head or <3 lower')}
+  /* R10: she lived under h, went to lãnh cung, h was refilled, then she comes back */
+  {const h=hosts().find(x=>x!==S&&mates(x).some(y=>y!==S));if(!h)F.push('R10 setup: no house with an NPC');else{const v=mates(h).find(y=>y!==S);const hall=v.resHall;v.out=true;palFix();
+    if(mates(h).length<resCap()){const y=rivals.find(x=>live(x)&&!x.queen&&rkOf(x)<3&&x.resHead!==key(h)&&x!==v);if(y){y.resHead=key(h);y.resHall=hall;palFix()}}
+    ok(v.resHead==null,'R10 out consort kept her room');v.out=false;ok(mates(h).length<=resCap(),'R10 return over cap '+mates(h).length);R1('R10a');
+    v.out=true;palFix();const rl=roll;roll=()=>true;try{WORLD_X.EVD.xa.start({})}catch(e){F.push('R10 đại xá '+e.message)}finally{roll=rl}
+    ok(!v.out,'R10 đại xá did not bring her back');R1('R10b');palFix();R1('R10c')}}
   /* R5 */
   S.rank=3;palFix();ok(S.pal!=null||!PALN.some((_,i)=>![S].concat(rivals).some(p=>p.pal===i&&live(p))),'R5 Tần without palace');ok(!S.resHead,'R5 resHead kept at Tần');
   S.rank=2;palFix();R2('R5 demote');ok(S.pal==null,'R5 demoted keeps palace');
