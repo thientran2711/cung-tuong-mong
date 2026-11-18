@@ -28,3 +28,4 @@ b10-a36-c23-c32 | CDN _review only | W63 session_011xDdVR2azVrSAvuz8jSdAR | RUNN
 b10-a51-sample c03/c04/c12 | CDN _review only | W64 session_011xDdVQJWBGEQCg7HMWeLs1 | RUNNING | 2026-11-18T15:58Z (Foreman C ROOT-25)
 shown-odds-r2 (spend-before-roll, ORDER ROOT-52 15:30Z) | review/shown-odds-r2 | session_01964izERxj8PUG495V4QTjS | RUNNING | 18/11 15:52Z | owner D #2
 NPC-PURPOSE G1 #8 (opus integrator; seat opened by D #2 for C-AG #13, OPEN NOW #2 15:31Z) | review/npc-purpose | C-AG #13 | session_01964izG7FPwnw4eEwFEt7t7 | RUNNING | 18/11 15:49Z |
+| FOREMAN E ROOT #4 (opus; successor of #3; depth 3, START_CTX ~5 %) | handover FOREMAN_E_STATUS | E | session_01DgYSWokbRMfu3opDuSCw15 | RUNNING | 18/11 15:55Z |
