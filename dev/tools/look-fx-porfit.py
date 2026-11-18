@@ -42,7 +42,7 @@ def rows(fb, size, ck):
     fx, fy, fw, fh = fb; W, H = size
     cx = fx + fw / 2 + CX * fw; w = WR * fw; by = fy + BN * fh; h = (fy + BT * fh - by) / .835; t = by - .165 * h; l = cx - w / 2
     v = [round(l, 1), round(t, 1), round(w, 1), round(h, 1), 0.0]
-    s = [round(l + ck[0] * w, 2), round(t + ck[1] * h, 2), round(ck[2] * w, 2), round(ck[3] * h, 2), 0.0]
+    s = [round(l + ck[0] * w, 2), round(t + ck[1] * h, 2), round(ck[2] * w, 2), round(ck[3] * h, 2), ck[4]]
     return v, s
 if __name__ == '__main__':
     mode, vfp = sys.argv[1], sys.argv[2]; ck = cheek(); vf = json.load(open(vfp))

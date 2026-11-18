@@ -32,5 +32,8 @@ const {chromium}=require('playwright');const D=require('./lib/device');const fs=
  const LOOKS=[['thuydau'],['daumua'],['poxscar'],['muc'],['bui'],['muoi'],['moho'],['cao']];let n=0;
  for(const id of FIGS){await g.evaluate(i=>__lfw.set(i),id);await g.evaluate(()=>{__lfw.mark('cao',1);__lfw.render()});await p.waitForTimeout(4000); /* warm-up: first portrait load of a figure is slow */
   for(const [m] of LOOKS.filter(x=>!process.env.LFW_ONLY||process.env.LFW_ONLY.split(',').includes(x[0])))for(const lv of (process.env.LFW_LVS||'1,2,3').split(',').map(Number)){await g.evaluate(([m,lv])=>{__lfw.mark(m,lv);__lfw.render()},[m,lv]);await p.waitForTimeout(2500);
+   const diag=()=>g.evaluate(()=>[...document.querySelectorAll('#__lfwbox img')].map(i=>({c:(i.className||'').toString().slice(0,18),ok:i.complete&&i.naturalWidth>0,nw:i.naturalWidth,f:i.src.split('/').pop().slice(0,34)})));
+   /* every cell must be rendered: wait (max 20 s) until every <img> of the box is loaded, log what was missing (a blank cell was a slow CDN picture in the harness, not a game bug: see report R5) */
+   let dg=await diag();for(let w=0;w<20&&dg.some(x=>!x.ok);w++){await p.waitForTimeout(1000);dg=await diag()}const bad=dg.filter(x=>!x.ok);if(bad.length)console.log('NOT LOADED',id,m,lv,JSON.stringify(bad));
    const el=await g.$('#__lfwbox');const f=`${out}/${dev}-${id}-${m}-lv${lv}.png`;await el.screenshot({path:f});n++}}
  console.log(JSON.stringify({shots:n,errs:errs.slice(0,5)}));await b.close();srv.close()})();
