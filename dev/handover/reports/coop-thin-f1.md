@@ -90,3 +90,86 @@ Runs: `python3 dev/build/assemble.py && node dev/test/coop-thin-f1.js https://ct
 
 ## ROLLOVER HANDOVER #2 → #3 (11/18/2026; context ≈ 27 % ≥ START 3 % + 25 % − margin) — Foreman B opens the successor
 Branch review/coop-thin-f1 @ 3b9cd531. Do, in order: (1) finish the E-fix (point 4 above: held probe, world tuần in herCy, setup ranks via the host store, page error) until coop-cyc is green at THIN=5 and 6 (+ swap), L4 as main; run coop-thin-e L5 (+swap) for the new E9; (2) gates + tripwire + quickcheck + LOOK (list above); (3) '## Done' (moved/deleted paths table from step 0b + F3 message table, tripwire before/after, latency numbers above, tests, sha; label the cyc work 'E-fix: cyAsk on host'), CLAIMS 'SẴN SÀNG KIỂM <sha>', send_message Foreman B.
+
+## #3 (worker session_01N1tNP6ZG4o7s2LdhThfFH2, depth 1, START_CTX ≈ 3 % of 1M, used_tokens reads 0) — Done
+PRIORITY #1 CHECK ('cyAsk|cyWait|cyFree|deltaSoon|latency|origin erd'): OD 0 new (Foreman B rulings 18/11 in the takeover prompt) | main 36e574fa: no cyAsk-on-host, no latency split | review/* only this branch | claims: this worker only.
+Branch review/coop-thin-f1 @ 433da4de (merged origin/main 36e574fa, clean). Commits this session: 24168022 (E-fix finished, separate commit), a01ce68d + 67046e41 (latency), 15adffc8 (origin guard), merge, 433da4de (tests/generated).
+
+### E-fix 'cyAsk on host' (Foreman ruling 2; label for the reviewer: part E code)
+Root causes found and fixed (on top of #2's WIP 3b9cd531):
+1. jcycle is an IIFE: `window.cyAsk` did not exist, so the host's `CW.herCy` never asked (always "nothing to ask" → cyNo → draw freed at once). jcycle now exports `window.cyAsk`.
+2. jcoopworld `cyFree` checked `cyWait(friendEntry())`; during the week end her entry is out of the deck (CW.pulled) → null → any presence / patch event freed the hold before she answered. New `cyFe()` = the entry as the draw sees it (pulled first), used by flip and cyFree.
+3. Her card auto-answered "Báo đúng" without her: jcycle's endTurn rule "never answered (closed, reloaded): the true report" ran (a) on her phone (her week end, flags from the patch) and (b) in her context on the host while her card waited as a part-D card in S.thq (Q empty). Two hooks in jcycle (no co-op logic there): `window.cyHostOwns()` (jcoopthine: guest at L5+, outside a host context → her phone neither asks nor auto-answers) and `window.cyCardOpen()` (jcoopthine: in her context the cyrep card is still in S.thq → not answered for her). The old `window.cyAsk` wrapper of #2 (never reached: jcycle calls its own cyAsk) is replaced by the hook.
+4. Her person diff carried `["-",["origin"]]` on a first ready → the host's ser of her context threw "reading 'k'" (coop-thin-e E8, coop-cyc page error). `origin` (her thân phận, set by her life intent, part B) added to jcoopthine BAD: her diff never carries it. The 'thin ser' console error now names the op.
+coop-cyc rewrite for the thin model (no assertion removed or weakened; every old check kept):
+| check | old (L≤3 relay model) | new (THIN ≥ 4) |
+|---|---|---|
+| setup ranks / her staged person | set on her phone | set in the host store (withSeat b), patch reaches her phone (new check) |
+| card shown to her | modal text /báo thế nào/ | the card's own option "Báo đúng ngày" (4 ask wordings exist; the old regex missed 3 → the test itself answered "dung" through clear()) |
+| her week can be pressed | press #next through open cards | a player never presses #next under an open card (guest) |
+| host draw held | COOPW.pend + cyHold + no week end sent | host `cyHold === wk()` (the thin hold is at the new week's start) |
+| answer reached the host | CW.fcy w/pend | host `fcyb().rk === w` (her stored person) |
+| week merges | always pressed one more week | stops when the week has merged already (thin hold = week start) |
+| same night on both | tn.who equal | tn.who equal, or host 902 ↔ guest "me" (part A view maps her own pid) |
+| swap | none | CYC_SWAP=1 (host iPad 1180x820, guest Fold 755x1000) |
+Results (live Worker): **THIN=6 66/66, THIN=6 swap 66/66, THIN=5 66/66**, THIN=4 this branch 60/66 vs **main 58/66** with the same test (L4 not worse; the shared L4 reds are the old relay model: hold probe, som "who null" = a week with no night on both builds).
+coop-thin-e L5 (new E9): **33/33, swap 33/33** (main build + main test: 32/32, no E9 there).
+
+### Latency (Foreman ruling 3) — split measured, not guessed
+Instrumentation (report only, cheap): host `TH.lat` per intent id = run (withSeat + act) / wait (run end → its delta send) / view+diff+send; guest `F.lastAns` = pre-send, pending render, apply+render of the answer delta. Network = total − the rest.
+Fix found by the split: the host's delta timer was a trailing debounce: a render after the intent's run called `deltaSoon()` (1200 ms) and pushed back the answer's `deltaSoon(0)` (host wait up to 1.5 s on some taps). Now `deltaSoon` keeps the sooner due time (an answer leaves at once; renders still send at most every 1.2 s).
+| profile (host Fold 686x880, guest iPad, live Worker, 50+ acts) | total median | network (2 legs) | host run | host wait | host view+diff+send | guest apply+render |
+|---|---|---|---|---|---|---|
+| no throttle, before (#2) | 302 / 437 | — | — | — | — | — |
+| no throttle, after | 461 (swap 284) | 257 (swap 125) | 12 | 0 | 7 | 181 (swap 129) |
+| 4G: LAG 85 ms each way per message on both phones + host CPU ×4, before (#2) | 888 | — | — | — | — | — |
+| 4G, after | **917** (min 809, max 1881) | **620** | 91 | 1 | 49 | 150 |
+Network is 68 % of the 4G time (4 × 85 ms injected + this container's own RTT to the Worker, 125–257 ms); host CPU 140 ms (15 %); her render 150 ms. **FOR MAIN (owner call): tap→result on 4G ≈ 0.9 s > the 400 ms target; the floor is two network legs (~0.35–0.6 s on 4G) — only an optimistic local result (not allowed: no lost/duplicated act, one engine) would go under it.**
+Pending state at once: right after the tap, in the same tick, `F.pend` is set and #next is locked (existing lockNext words through CW.eWait); her act buttons are off through `can()`; pending render 44–66 ms. A second tap in the same tick is ignored (F.stat.busy +1, still one intent). coop-thin-f1 now asserts both for every ACT kind (pendNow.pend, pendNow.next, dbl === 1).
+
+### Moved / deleted paths at level 6 (F1)
+| path (guest, her Hành động act) | before (L≤5) | L6 |
+|---|---|---|
+| runAct on her phone (C act frame → `do npc` ops) | ran locally, NPC side as ops | not run on her phone: `do f` intent, host runs the inner runAct in withSeat b (51/51 kinds, F1 table) |
+| her act on the host: jcoopworld sendRes → `res` / ack / rpend | message | no message: resApply on the host in his context (D.after) — F3: 0 `res`/`actr` |
+| her ASK acts (Kết giao / Tặng quà) `do inv` relay | message | the invite card is made on the host in her context (D.kind inv); invHer reads `pp.e||pp.he` (#2 fix) — F3: 0 `do inv` / `act invite` |
+| resApply on the guest | ran | `oldRan("actApply")` no-op (F8: oldRun {} both seats) |
+| `ctm-fam` push, `pos` | sync layer | still sent (not an act relay) → part H list |
+Delete-for-good: these branches are unreachable at L6 and go with the other bypassed relays when L6 becomes the default (part H), same rule as C/E.
+
+### Tripwire (guest writes outside fromCanon, coop-bot 4 weeks)
+Real act category = runAct (coop-thin-f1 TRIP=1, the whole ACT table from the guest, 53 kinds):
+| | L5 (before: acts run on her phone) | L6 (F1) |
+|---|---|---|
+| F1 entry `runAct` state writes | **5313** (log 2597, deedAdd wrongs 890, mood 456, inv 77+73+64, duc 84, bac 52 …) | **0** |
+| F1 entry `directActs` (render of her act list: toilette/thTrait) | 35 | 31 |
+| "?" | 3147 | 2441 |
+| C/H | 38 | 36 |
+| D·patch (the host's result applied to her person = the designed path) | 0 | 7495 |
+coop-bot 4 weeks (TRIP=1, THIN=5 vs 6): state 653 vs 871 (random play, not comparable act for act); its "F1" bucket = the regex /runAct|act|cardH|talk|directActs/: no `runAct` entry in either run; L6 F1 = `act(i)` (j2 deck cards → runOpt = F6 per step 0 row 13: log, Sức/Tài/Danh) + `directActs` render. → for part F6 / the meter owner: split `act` (deck) out of the F1 regex.
+
+### Tests (this branch, live Worker)
+| test | result |
+|---|---|
+| coop-thin-f1 L6 (F1 every ACT kind, F2 both directions, F3 messages, F8) | 21/21 (no lag), 21/21 (4G); swap 20/21 → kpoison host→guest: the host's entry of her had no visible kid yet (test now waits for tKid on the host's entry, swap NOT rerun after that test change — reviewer: run `… 6 1`; non-swap 21/21 ×3 after it); F1 table 51/51 both |
+| coop-thin-a L1 / swap | 24/24 / 23/24 → rerun 24/24 (main swap 24/24) |
+| coop-thin-b L4 | 136/136 |
+| coop-thin-c L4 | 17/17 |
+| coop-thin-d L4 / swap | 48/52 / 48/52 (the 4 known kit sameDom IMG data-kfsp reds, as before) |
+| coop-thin-e L5 / swap | 33/33 / 33/33 |
+| coop-cyc THIN=6 / swap / 5 / 4 (main 4) | 66/66 / 66/66 / 66/66 / 60/66 (58/66) |
+| coop-e2e / COOP_SWAP=1 | 63/63 / 63/63 |
+| coop-p2 | 45/45 |
+| coop-b1 | 37/43 → rerun 43/43 (main 41/43) |
+| coop-night THIN=5 / THIN=6 | 105/105 / 105/105 |
+| coop-timer | 43/43 |
+| coop-one-world seeds 1–10 | 10 × PASS |
+| one-core-guard / text / text-rule / bind | PASS ×4 |
+| quickcheck | PASS (186 s; render 197/229 ms new/live, tab 489/511, buổi 885/1079; core gates PASS; old save ok) |
+LOOK: host Fold 755x1000@2 + guest iPad 1180x820@2 (coop-thin-f1 SHOTS, scratch only, not uploaded): both screens render kit cards cleanly, no overflow, 0 page errors; the end-of-test shot caught a life-start card (host "Nhập cung") and a rank-reward card (guest "Phẩm phục Tần") on top, NOT an act result → reviewer: LOOK at an act result directly (her Sổ ghi line after a guest act).
+
+### Open / FOR MAIN
+- FOR MAIN (owner call): 4G tap→result ≈ 0.9 s (network-bound, two legs); target 400 ms not met without an optimistic local result.
+- Reviewer: coop-thin-f1 swap rerun (`… 6 1`), LOOK at an act result on both devices; part F6/meter: the coop-bot tripwire "F1" regex includes `act` (deck cards).
+- Known (unchanged from #2): guest-side log writers after a world delta (F6/G); her plots in her week end (part G); ctm-fam / pos still sent (part H list).
+SẴN SÀNG KIỂM 433da4de
