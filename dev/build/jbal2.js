@@ -195,7 +195,7 @@ Object.assign(BAL,{coopBribe:{pay:20,tin:5}});
    capped; none within gap days of the last visit, none while she is pregnant, in lãnh cung, or he is gravely ill. On top of the night
    (BAL.night): Sủng + sung, Danh + danh, every consort ghen + ghen, the consort whose tablet was flipped ghen + lostGhen and quý ngươi − lostRel,
    the Hoàng hậu − hh; Thái hậu displeased at thP + neg × thNeg % (neg = her archetype, jtrong TH_ARCH), Thái hậu quý ngươi − thLoss × her trọng.
-   show: "Phô tài" on the visit card (odds o + w × her best art's level, Sức − suc, Sủng / Danh on success).
+   show: "Phô tài" on the visit card (odds o + artOE of her best art = the balance-core curve; w = the pre-curve weight, unused; Sức − suc, Sủng / Danh on success).
    Advising him to rest: Đức + adviseDuc, Sủng − adviseSung, Thái hậu + adviseTh. q = the night's prep quality (no bath, no wrapping: he came).
    tea: the short visit "Hoàng thượng ghé cung uống chén trà" (j24 Có người đến pool): gate Sủng ≥ minSung, p %, Sủng / Ân tình gains.
    night: the one night rule (j8 nightGain / nightFx) for every road into a night (tablet, Tranh sủng, Chặn ngự giá, the visit) and every NPC night (j75 rivalNight);
