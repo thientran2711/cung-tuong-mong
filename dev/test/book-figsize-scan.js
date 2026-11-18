@@ -4,12 +4,12 @@
 const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,CJ,OUT]=process.argv;if(OUT)fs.mkdirSync(OUT,{recursive:true});
 const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];let CASES=JSON.parse(fs.readFileSync(CJ));if(process.env.CASES)CASES=CASES.filter(c=>process.env.CASES.split(',').includes(c[0]));
 (async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});let bad=0;const html=fs.readFileSync(SRC);
- for(const [W,H] of SZ){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:process.env.SHOTS?+(process.env.DSF||2):1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',ignoreHTTPSErrors:true});await ctx.addInitScript(()=>{window.__bot=1});
+ for(const [W,H] of SZ){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:process.env.SHOTS?+(process.env.DSF||2):1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',ignoreHTTPSErrors:true});await ctx.addInitScript(()=>{window.__bot=1;let s=12345;Math.random=()=>{s=(s*1664525+1013904223)%4294967296;return s/4294967296}});
   await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:html,contentType:'text/html; charset=utf-8'}));
   const p=await ctx.newPage();await p.goto('http://ctm.test/index.html',{waitUntil:'domcontentloaded',timeout:120000});
   await p.waitForFunction(()=>typeof start==='function'&&typeof kitBook==='function',null,{timeout:120000});
-  await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;
-   for(const e of [...document.body.querySelectorAll('*')]){const cs=getComputedStyle(e);if(cs.position==='fixed'&&/Luân hồi/.test(e.textContent||''))e.remove()}});
+  await p.evaluate((HERF)=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;{const k1=kitFigOf,HER=HERF;window.kitFigOf=kitFigOf=function(q){if(q===S&&HER)return IMG_BASE+'img/'+HER;return k1.apply(this,arguments)}}
+   for(const e of [...document.body.querySelectorAll('*')]){const cs=getComputedStyle(e);if(cs.position==='fixed'&&/Luân hồi/.test(e.textContent||''))e.remove()}},process.env.HER||'fig-consort-c32-tcold-a18.webp');
   await p.evaluate(()=>document.fonts&&document.fonts.ready);await p.waitForTimeout(5000);const rows=[];
   for(const [name,FIG] of CASES){
    const r=await p.evaluate(async([name,FIG])=>{
@@ -28,7 +28,7 @@ const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];let C
    r.name=name;rows.push(r);
    if(process.env.SHOTS&&OUT){await p.evaluate(()=>{for(const c of document.body.children)c.style.visibility=c.id==='dawn'?'visible':'hidden'});await p.screenshot({path:`${OUT}/${W}x${H}-${name}.jpg`,type:'jpeg',quality:60});{const bx=await p.evaluate(()=>{const e=document.querySelector('#dawn .kbk-sheet .kbk-por')||document.querySelector('#dawn .kbk-por');const r=e.getBoundingClientRect();return[r.x,r.y,r.width,r.height]});await p.screenshot({path:`${OUT}/${W}x${H}-${name}-col.png`,clip:{x:Math.max(0,bx[0]-10),y:Math.max(0,bx[1]-10),width:bx[2]+20,height:bx[3]+20}})}await p.evaluate(()=>{for(const c of document.body.children)c.style.visibility=''})}}
   const f1=x=>x==null?'-':(+x).toFixed(1);
-  for(const r of rows)console.log(`${W}x${H} ${(r.name||'').padEnd(30)} ${r.err||`fac ${r.fac.toFixed(2)} body ${f1(r.body)} (${(r.body/r.col).toFixed(3)} col${f1(r.col)}) figW ${f1(r.figW)}/colW ${f1(r.colW)} foot ${f1(r.foot)} crop ${f1(r.crop)} over ${r.over} textOvl ${r.ovl}${r.fit?' FIT '+r.fit:''} asp ${r.asp.toFixed(3)} ${r.dbg}`}`);
+  for(const r of rows)console.log(`${W}x${H} ${(r.name||'').padEnd(30)} ${r.err||`fac ${r.fac.toFixed(2)} body ${f1(r.body)} (${(r.body/r.col).toFixed(3)} col${f1(r.col)}) figW ${f1(r.figW)}/colW ${f1(r.colW)} foot ${f1(r.foot)} src ${r.src} crop ${f1(r.crop)} over ${r.over} textOvl ${r.ovl}${r.fit?' FIT '+r.fit:''} asp ${r.asp.toFixed(3)} ${r.dbg}`}`);
   const grp={};rows.filter(r=>!r.err).forEach(r=>{const k=r.fac.toFixed(2);(grp[k]=grp[k]||[]).push(r.body)});
   for(const k in grp){const a=grp[k],sp=(Math.max(...a)-Math.min(...a))/Math.max(...a);console.log(`${W}x${H} fac ${k}: n ${a.length} min ${Math.min(...a).toFixed(1)} max ${Math.max(...a).toFixed(1)} spread ${(sp*100).toFixed(1)} %`);if(sp>.03)bad++}
   for(const r of rows)if(!r.err&&(r.crop>1||r.fit)){bad++;console.log('FAIL crop/fit',r.name,r.crop,r.fit)}

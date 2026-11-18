@@ -10,8 +10,12 @@ const KIT_FIG={h:.79,man:1.07,maxPx:542,men:{emperor:1,eunuch:1,official:1,physi
  fac(src,age){const m=/fig-([a-z]+)-/.exec(src||"");const un=/unknown-fig-m\./.test(src||""); /* the unknown-man silhouette is a man too (review/men) */
   return((m&&this.men[m[1]])||un?this.man:1)*this.kid(age)}};
 window.KIT_FIG=KIT_FIG;
-/* KIT 34.6 · KIT_BOOK.r0 = painted-width / body ratio that fixes the ONE book body: body(woman) = min(column height × .935, base column width / r0) = her own Tổng lược figure as it stands live (owner 18/11: "to đẹp rồi", Fold 641 px, iPad 567 px) */
+/* KIT 34.6 · THE ONE BOOK BODY = her own Tổng lược figure as it stands live (owner 18/11: "Cái hình tao vừa gửi là cái size mà tao muốn"; nobody is shrunk, every other figure is brought to her size).
+   kitBookStd(Hc, base) = the standard column-height factor: Hs = min(Hc, base column width / (her painted-width-to-body ratio × .935)); the body of any figure = Hs × its --kfr (woman .935, man 1).
+   Her figure not measured yet → KIT_BOOK.r0 (.33, the catalog median of the live Fold scan). base = the narrow column width (--porb). */
 window.KIT_BOOK={r0:.33};
+function kitBookStd(Hc,base){let r=KIT_BOOK.r0;try{const h=kitStageFig(S,{cap:false}),src=(/src="([^"]+)"/.exec(h||"")||[])[1],b=src&&kitFigBody(src);if(b&&b.ar){const sp=Math.max(.2,b.b-kitFigTop(b));r=Math.max(.2,(b.r||1)-(b.l||0))*b.ar/sp}}catch(e){}return base>0?Math.min(Hc,base/(r*.935)):Hc}
+window.kitBookStd=kitBookStd;
 /* KIT 33.8 · STAGE PET (owner 16/11 18:00Z, review/stage-pets) — the ONE "theo hầu" pet of every person on a room / place stage (j59), player and NPCs:
    it stands in ONE fixed spot, on the person's RIGHT, feet on the same floor line, its painted body overlapping the person's outer art by at most KIT_PET.ov of its own width
    (never the torso / face: the class heights stay below the waist line). No fancy placement (no perch on a shoulder / hand), no outdoor-only rule, big pets appear anywhere.

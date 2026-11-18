@@ -114,7 +114,7 @@ var KBK_ART_LINE=window.KBK_ART_LINE={b:.0244};
         own painted width gave every figure another size: scan spread 53 %). A wide robe / the grey silhouette (its art fills the picture width, kitFigBody reports it as a standard
         figure so its true extent is 0..1 here) is NOT shrunk and NOT cut: it gets a wider column on ITS page (j87 personBody: --porf = its painted width, text takes the rest); only a figure wider than the 72 % cap of the page is scaled to it. */
      const sil=/unknown-fig-/.test(s1),L0=sil?0:(b1.l||0),R0=sil?1:(b1.r||1);
-     const baseW=parseFloat((getComputedStyle(box.closest(".kbk")||box).getPropertyValue("--porb"))||0),Hs=baseW?Math.min(Hc,baseW/(KIT_BOOK.r0*.935)):Hc,g=kitBookFig(Object.assign({},b1,{ar:ar1}),kf*KIT_FIG.man,Hs);const pw1=Math.max(.2,R0-L0)*g.iw,inW=(box.closest(".kbk-in")||box).clientWidth||pwc;
+     const baseW=parseFloat((getComputedStyle(box.closest(".kbk")||box).getPropertyValue("--porb"))||0),Hs=kitBookStd(Hc,baseW),g=kitBookFig(Object.assign({},b1,{ar:ar1}),kf*KIT_FIG.man,Hs);const pw1=Math.max(.2,R0-L0)*g.iw,inW=(box.closest(".kbk-in")||box).clientWidth||pwc;
      const kk=pwc&&pw1>pwc+1?pwc/pw1:1;dyF=g.dy*kk;dxF=-L0*g.iw*kk;   /* painted left edge on the column's left edge */
      f.style.height=(g.ih*kk).toFixed(1)+"px";f.style.width=(g.iw*kk).toFixed(1)+"px";f.style.visibility="";f.dataset.kbody=(g.body*kk).toFixed(1);if(kk<1)f.dataset.kfit=kk.toFixed(3);
      /* KIT 32.2b EQUAL GAPS (owner 16/11 s21/s22, whole group): the two frame lines round the figure are the running-head rule (.kbk-rh)
