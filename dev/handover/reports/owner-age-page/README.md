@@ -1,7 +1,7 @@
-# owner-age-page (W66, 18/11)
-Age-tab page: tabs 18/26/36/51 -> people with figures -> t1..t8 grid -> overlay with 3 outfits; "Bậc sau" rolls into the next person at t8.
-- page.html: manifest inlined (`/*MANIFEST*/…/*END*/`); strips relative `<age>/<cNN>.webp`; princess/cung-nữ tabs (`x/`, `cn/`) kept from v9 (Foreman C publishes those files).
-- build.sh: probe.py (HEAD all keys -> manifest.json) -> build.py (strips 1920x9200 webp) -> cdn_sync to CDN -> re-inject manifest into page.html. Rerun when painters add people.
-- CDN: https://ctm-img.victoria-tntt.workers.dev/img/_review/owner-age-page/{a18,a26,a36,a51}/<cNN>.webp, manifest.json, shots/
-- Strips: a18 c01–c32, a26 c03 c04 c12, a36 c03 c12 (c04 not yet painted), a51 c03 c04 c12 = 40. a18/c11.webp is 2.7 MB (slightly over 2.5).
-- Shots: fold_*/ipad_* (1list, 2grid, 3over, 4next) at 755x1000 and 1180x820; no overflow, no page errors.
+# owner-page-90 (W73, 18/11) — "90 nhân vật nữ"
+PRIORITY #1 CHECK: reused owner-age-page v13 (page.html/build.py/probe.py), FIGURES list on CDN img/FIGURES.json, file names fig-<role>-<id>-<state>-<age>.webp (states: kc thiếu nữ, ngheo, tm1-4 trung y, tcold/cold lãnh cung, plain cung nữ, t1-8 maid ranks).
+- Page: page.html (title "90 nhân vật nữ"; one pool c01–c32 + m01–m52 + công chúa/mẫu lên phi). Per person+age: row "Thiếu nữ · Nhà nghèo · Trung y 1-4 · Lãnh cung" then ranks. "Bậc sau" walks states -> ranks -> next person. Quốc tang 4th cell where q/<age>/<cNN>.webp exists (only c03 a18 now). Missing = not shown. Nhà nghèo exists only at a18 (CDN has no other age).
+- Files to publish (relative to page): page.html, s/<age>/<id>.webp (336 sheets, 320x570 cells in a row, ~88 MB total: publish per age: s/a18 first, then a26, a36, a51), q/a18/c03.webp, + existing a18..a51/<cNN>.webp strips, x/, cn/.
+- CDN copy: https://ctm-img.victoria-tntt.workers.dev/img/_review/owner-age-page/{s,q,shots,manifest90.json}
+- Rebuild: build90.sh (probe90.py -> states90.json, build90.py). Shots: shots/p90_{fold,ipad}_*.png.
+- Handover: nothing pending.
