@@ -223,11 +223,11 @@ function knErrGive(s,m,k,t,late){if(!m||(m!==S&&(!m.alive||m.out)))return;let f=
 function knErrSell(s,m,k,t){const b=byKey(s.spyFor);if(!b)return;KN.stat.sold=(KN.stat.sold||0)+1;
  if(t&&b===t&&(k==="scout"||k==="scoutF"))affAdd(t,m,-knB().scout.oan);
  if(b===S){const w=t===S?"{goi}":t?spyWho(t):"";knBao(s,S,`${m.name} vừa sai {xung} ${/^listen/.test(k)?"đi nghe ngóng các cung":"đi dò la "+w}${k==="scout"?", {xung} dò được rồi":k==="caught"?", {xung} bị bắt gặp":""}`,t&&t!==S?palaceOf(t):palaceOf(m),0,1)}}
-function knErr(s,m,k,t){const c=knErrPick(s,m);if(c==="tell")knErrGive(s,m,k,t,0);else if(c==="late"){S.knQ=(S.knQ||[]).concat([{at:agKey(),sid:s.sid,k,t:t?t.id:null}]).slice(-knB().keep)}
+function knErr(s,m,k,t){const c=knErrPick(s,m);if(c==="tell")knErrGive(s,m,k,t,0);else if(c==="late"){S.knQ=(S.knQ||[]).concat([{at:agKey(),sid:s.sid,k,t:t?key(t)/* "me" for her: RV alone lost an NPC's late report on the player (review ag-later #2) */:null}]).slice(-knB().keep)}
  else if(c==="sell")knErrSell(s,m,k,t);return c}
 /* late reports land once the buổi has turned */
 function knFlush(){if(!S||!S.knQ||!S.knQ.length)return;const key=agKey();const L=S.knQ.filter(x=>x.at!==key);if(!L.length)return;S.knQ=S.knQ.filter(x=>x.at===key);
- for(const x of L){try{const s=allServ().find(v=>v.sid===x.sid);if(!s||s.out)continue;const m=ownerOf(s);const t=x.t!=null?RV(x.t):null;knErrGive(s,m,x.k,t&&t.alive?t:null,1)}catch(e){agErr("knFlush",e)}}}
+ for(const x of L){try{const s=allServ().find(v=>v.sid===x.sid);if(!s||s.out)continue;const m=ownerOf(s);const t=x.t!=null?byKey(x.t):null;/* the target gone (dead) before the buổi turned: the late word is moot, never a nameless line */if(x.t!=null&&(!t||(t!==S&&!t.alive))){KN.stat.e_gone=(KN.stat.e_gone||0)+1;continue}knErrGive(s,m,x.k,t,1)}catch(e){agErr("knFlush",e)}}}
 function knListenDo(s,m,ok){const v=ok?knListenPick(m):null;KN.stat.listen++;knErr(s,m,v?"listen":"listenF",v);return""}
 function knScoutDo(s,m,t,ok){KN.stat.scout++;if(!t)return"";if(ok){KN.stat.scoutOk++;knErr(s,m,"scout",t);return""}
  /* a failed try: caught (BAL.ag.know.scout.caught %: the target's regard falls whatever she reports) or back empty-handed */
