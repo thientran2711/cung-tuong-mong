@@ -45,3 +45,10 @@ OWNER (verbatim, ~21:13Z): "Vẽ lại giùm tao làm một cái prompt mới. 3
 
 ## UPDATE 21:20Z (Foreman C) — NO a65 redo
 OWNER (verbatim, ~21:19Z): "Cái bộ nào tuổi 65 vẽ rồi không cần vẽ lại đâu, phí credit lắm." → a65 sets already made (any build) are KEPT; never redo them. Done a65: c01 c02 c03 c09 c10 c11 c12 c17 c18 c19 c25 c26 c27 c28 (+ c29 if W94 finished it). Only missing a65 people + all a51 are painted.
+
+## UPDATE 21:40Z (Foreman C ROOT-31 session_01PEhRbu5yidvWvqSGRBbjVQ) — JOB C GO with the NEW 3f ITEMS
+PRIORITY #1 CHECK ('items mass hairpin nu de ngheo phi collar'): OD 0 | ledger 0 | claims 0 | main 0 | review/* 0 | archive 0 (topic lives in this brief + FIGURE_GATE 3e/3f + reports/items-sample.md).
+OWNER (verbatim, ~21:36Z, Lượt 42): "Tiếp đến là lượt 42 đồ cầm trên tay, ok rồi vậy đi tiến hành mà làm."
+OWNER (verbatim, 18/11): "Tiếp tục làm như vậy cho tất cả các ảnh của những phi tần còn lại đi. ... Cho dù mày có đổi phiên đi chăng nữa, cho dù mày có mở thợ mới đi chăng nữa thì làm ơn nhắc các thợ là đọc kỹ." → re-read FIGURE_GATE + consort-B10 before EVERY person.
+JOB C (mass) = a18 t1/t4/t5/t6 × v0/v1/v2 for c01–c32 with build.py at or after c4291fcf (new 3f items + new LOWV colours 5df887f7). Check `git log --oneline -1 -- dev/art/t8-prompt-B/build.py` contains c4291fcf in its history before your first gen. Every low-B cell made before c4291fcf is WRONG and is redone (c01 c02(t1) c05 c06(t1) c09(t1) c13 c17 c18 c19 c21 c22(t1) c25 c26). Same file names (overwrite). NEVER t2/t3 (new design not approved). Per cell check like W108 items-sample: item matches prompt, hands grip it, face visible, lips closed, no forehead mark, eyes open; ONE item per figure, NOT every rank holding a fan.
+Split: W108 c01–c08 · W94 c09–c16 (if its context is under its rollover line, else say NOT-FIT) · new painter P1 c17–c24 · new painter P2 c25–c32. One person = 12 gens; after each person: sheet <cNN>_a18_low_sheet.jpg (row old / row new is not needed, new only), report line in reports/root31-mass-<you>.md, READY to ROOT-31 at your rollover line. Lean: previews ≤600 px.
