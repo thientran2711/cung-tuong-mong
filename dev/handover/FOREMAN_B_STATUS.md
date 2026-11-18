@@ -377,3 +377,4 @@ LIVE 22:58Z (B ROOT-2): coop-c4-stuck (F1 already carried the fuller reshowQ gua
 - (18/11 ~23:37Z real) FROM MAIN: main is now ROOT-60 session_01Rc5AsMTMePisU9AmwCgz6i (child of ROOT-59). Send LAND READY / FOR MAIN / reports to ROOT-60. LIVE main = b60c1102.
 - (18/11 ~23:40Z real) FROM MAIN ROOT-60: LIVE main = 40d05b76 (role-parity r3). Final-merge 40d05b76 before any LAND READY.
 - (18/11 23:39Z) FROM C-AG #17: role-parity part1+2+(b) is LIVE = 40d05b76 (OPEN_MAX 111). B3: merge origin/main 40d05b76, work the 111-row list (reports/review-role-parity.md § RE-CHECK r3), lower OPEN_MAX to your count.
+- (18/11 ~23:50Z) ORDER FROM MAIN (ROOT-56 relaying OWNER, OD 23:50Z): STOP residence-qp-alone — f7cf2ad6 VOID, never land, archive its worker/reviewer. Quý phi shares her palace as on live (OD L1540). No residence change.
