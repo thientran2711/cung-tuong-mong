@@ -41,7 +41,7 @@ nc_su_10:[{k:"thu",h:"Ở cửa thành có người tâu xe sứ đoàn mang the
 /* nc_tuc «Người ngoại tộc» */
 nc_tuc_5:[{k:"hh",h:"Lễ Nguyên đán, Nội vụ phủ bắt mọi người mặc lễ phục theo phẩm. {Me} không dám trái lệ. {Me} chỉ xin được cài một cây trâm cố hương trên tóc. {call} thưa với Hoàng hậu giúp {me} một câu được không?",
  o:[["Thỉnh an Hoàng hậu, thưa xin cho nàng","Hoàng hậu cho rằng ngươi xin phá lệ cho người ngoài"],["Dâng lễ Khôn Ninh cung, xin cho cài trâm cố hương","lễ bị trả về, người ta bàn ngươi mua lòng Trung cung"]]}],
-nc_tuc_6:[{k:"y",h:"Bát canh ở cung {me} sạch như nước giếng, vậy mà cả cung đồn {me} bỏ bùa. Thận hình ty cho mười ngày. {Me} cần một vị thái y chịu nghiệm lại bát canh ấy và nói thật điều tận mắt thấy.",
+nc_tuc_6:[{k:"y",h:"Bát canh ở cung {me} sạch như nước giếng, vậy mà cả cung đồn {me} bỏ bùa. Thận hình ty chỉ cho một hạn ngắn. {Me} cần một vị thái y chịu nghiệm lại bát canh ấy và nói thật điều tận mắt thấy.",
  o:[["Mời thái y quen nghiệm lại, trả công hậu","thái y sợ liên lụy, ghi tên ngươi vào sổ"],["Tự tìm sách thuốc, xem bát canh có gì","ngươi nói sai một vị thuốc, lời đồn càng to"]]}],
 nc_tuc_7:[{k:"che",h:"Lệnh soát cung sắp ban, mà trong cung {me} có bài vị của tổ tiên. Người ta gọi đó là bàn thờ thần lạ. {Me} không nỡ đốt. {call} cất giùm {me} vài hôm, đến khi chuyện lắng xuống.",
  o:[["Cất bài vị trong cung mình","người ta bàn ngươi giữ đồ thờ của người ngoại tộc"],["Bỏ bạc gửi bài vị ra một ngôi chùa ngoài cung","người mang đi bị hỏi giữa đường, bài vị suýt mất"]]}],
@@ -288,7 +288,7 @@ add("nc_gian_7",A("che","Thị vệ đứng ngoài cửa, mà trong cung {me} c�
  "Nhận cung nữ cố hương sang hầu cung mình","thị vệ theo nàng ấy sang tận cửa cung ngươi","Bỏ bạc gửi nàng ấy xuống Châm công cục","Châm công cục hỏi gốc gác, nàng ấy bị giữ lại"));
 add("nc_gian_8",A("emp","Hoàng thượng tin {me}, nên kể cả đường hành quân. {Me} không muốn biết thêm một chữ nào nữa. {Call} khéo khuyên ngài đừng bàn việc quân ở cung {me}, để {me} khỏi phải chọn.",
  "Khuyên Hoàng thượng đừng bàn việc quân trong hậu cung","Hoàng thượng cho rằng ngươi dạy ngài cách trị nước","Dâng lễ nhờ lão thái giám hầu ngự khéo can","lão thái giám can vụng, ngài lại càng hỏi nàng"));
-add("nc_gian_9",A("y","Lão Kha có bệnh suyễn, vào ngục mười ngày mà không có thuốc thì không qua khỏi. Chết trong ngục thì người ta sẽ nói {me} giết người diệt khẩu. Nếu {call} quen một vị thái y, xin cho lão một thang thuốc.",
+add("nc_gian_9",A("y","Lão Kha có bệnh suyễn, vào ngục mà không có thuốc thì khó qua khỏi. Chết trong ngục thì người ta sẽ nói {me} giết người diệt khẩu. Nếu {call} quen một vị thái y, xin cho lão một thang thuốc.",
  "Mời thái y quen vào ngục bắt mạch cho lão Kha","Đại Lý tự ghi tên ngươi là người lo thuốc cho phạm nhân","Tự sắc thuốc suyễn gửi vào ngục","thuốc bị cai ngục giữ lại khám, lời đồn lan ra"));
 add("nc_gian_10",A("hh","Hoàng thượng gọi {me} đến một mình, mà Trung cung đã sai người đứng chờ ngoài điện. Nếu Hoàng hậu cũng hỏi tội, {me} không còn chỗ đứng. {Call} thưa với Hoàng hậu, xin bà đợi ngài xét xong.",
  "Thỉnh an Hoàng hậu, xin bà khoan hỏi tội","Hoàng hậu cho rằng ngươi chen vào việc của Trung cung","Dâng Khôn Ninh cung một hộp trầm, xin hoãn một ngày","hộp trầm bị trả lại kèm một lời trách"));
@@ -340,7 +340,7 @@ add("td_an_7",A("hh","Nhà kẻ thù đã cài người vào cung, sắp vu cho 
  "Thỉnh an Hoàng hậu, xin bà nghe nàng trước","Hoàng hậu cho rằng ngươi đoán trước chuyện chưa xảy ra","Dâng Khôn Ninh cung lễ, xin một buổi gặp riêng","lễ bị trả về, kẻ tố biết ngươi đứng về phía nàng"));
 add("td_an_8",A("thu","Sổ xuất ấn của Binh bộ năm ấy sắp bị đốt theo lệ. {Me} cần một người ngoài cung chép lại trang có ấn giả trước ngày đốt. {Call} giúp {me} tìm người ấy.",
  "Bỏ bạc nhờ thái giám tìm người chép sổ Binh bộ","người chép bị bắt, sổ bị đem đốt sớm","Nhờ người nhà mình hỏi một thư lại Binh bộ","người nhà ngươi bị Binh bộ ghi là kẻ dòm sổ"));
-add("td_an_9",A("emp","Tờ sớ đã soạn, chỉ còn chọn ngày. Ngày giỗ tiên đế thì chạm chữ hiếu, ngày vui thì như phá cuộc vui. Có khi {call} đoán ý Hoàng thượng được hơn {me}. Xin dò giúp ngài vui vào ngày nào.",
+add("td_an_9",A("emp","Tờ sớ đã soạn, chỉ còn chọn ngày. Gần lễ của tiên đế thì chạm chữ hiếu, gặp dịp vui thì như phá cuộc vui. Có khi {call} đoán ý Hoàng thượng được hơn {me}. Xin dò giúp ngài vui vào ngày nào.",
  "Dò ý Hoàng thượng xem ngày nào ngài vui lòng","Hoàng thượng thấy ngươi dò ý, cho là có mưu","Dâng lễ nhờ quan Khâm thiên giám xem ngày giúp","quan Khâm thiên giám nói lộ, nhà kia biết trước"));
 add("td_an_10",A("do","Tam ty đã ngồi, mà {B} lại sai người gặp riêng một vị quan xét án. {Me} cần biết họ đã nói gì với nhau. {Call} giúp {me} một lần.",
  "Sai người dò xem quan xét án đã gặp ai","người của ngươi bị gia nhân quan xét án đuổi","Tự hỏi các phi tần có cha anh trong Tam ty","ngươi bị đồn chạy án cho nhà tội thần"));
@@ -509,8 +509,8 @@ add("cnv_ban_7",A("che","Xuân Đào sốt li bì ở Tân Giả khố, mà ở 
  "Xin đưa Xuân Đào về cung mình dưỡng bệnh","người ta bàn ngươi đón kẻ bị đày về","Bỏ bạc nhờ ma ma Tân Giả khố trông Xuân Đào","ma ma nhận bạc mà bỏ mặc Xuân Đào"));
 add("cnv_ban_8",A("do","Phiên làm chứng sắp mở, mà người của {B} đã đến dọa Xuân Đào hai lần. {Call} giúp {me} biết họ còn định dọa những ai.",
  "Sai người canh chỗ ở của Xuân Đào","người canh bị người của {B} đánh đuổi","Tự hỏi chuyện các cung nữ cùng phòng Xuân Đào","ngươi hỏi lộ, người kia đổi cách dọa"));
-add("cnv_ban_9",A("hh","Bàn phân xử đã bày, mà chứng cứ chỉ đủ một nửa. Nếu Trung cung cho thêm mười ngày, {me} tìm được nửa kia. {Call} thưa với Hoàng hậu giúp.",
- "Thỉnh an Hoàng hậu, xin hoãn phân xử mười ngày","Hoàng hậu cho rằng ngươi kéo dài chuyện của kẻ hầu","Dâng lễ nhờ nữ quan Trung cung xin hoãn","nữ quan xin hoãn lộ, Thu Cúc bị dọa phải đổi lời"));
+add("cnv_ban_9",A("hh","Bàn phân xử đã bày, mà chứng cứ chỉ đủ một nửa. Nếu Trung cung cho thêm ít lâu, {me} tìm được nửa kia. {Call} thưa với Hoàng hậu giúp.",
+ "Thỉnh an Hoàng hậu, xin hoãn phân xử ít lâu","Hoàng hậu cho rằng ngươi kéo dài chuyện của kẻ hầu","Dâng lễ nhờ nữ quan Trung cung xin hoãn","nữ quan xin hoãn lộ, Thu Cúc bị dọa phải đổi lời"));
 add("cnv_ban_10",A("hh","Sổ đồ ra cửa sau có tên mấy thái giám Nội vụ phủ. Nếu sổ đến tay Trung cung, không ai chôn được. {Call} xin Hoàng hậu cho người đến lấy sổ.",
  "Thỉnh an Hoàng hậu, xin bà cho người đến lấy sổ","Hoàng hậu cho rằng ngươi gây chuyện với Nội vụ phủ","Dâng lễ nhờ nữ quan Trung cung đi lấy sổ","nữ quan đến chậm, sổ đã bị sửa một trang"));
 /* cnv_mat */
