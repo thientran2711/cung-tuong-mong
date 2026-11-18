@@ -429,3 +429,4 @@ LESSONS: workers' test harness randomised makeup → false 'glow' (now forced of
 - (18/11 04:44Z) LOAD: main running 6 (owner bugs/UI/looks only: look-fx-wire #3 SzkGvAo, place-stage r4 SzjeRxj, book-figsize r5 Szkhy, cloth-tea SzghNEr, opt-card-short Szk6j15, + C-AG #9 relay) | B 2 ORDERS 04:35Z (life-preload-fu, cloth-bake-static) | C ROOT-16/17 art | D #12 running 4 + staff-cap-row3 | E waiting owner to open | moved: none (no non-UI item held by main).
 - (18/11 04:46Z) C-AG #9 rolled over → C-AG #10 session_01UV1SzjAd8BYMMz2rKFZitp (depth 5; at depth ≥6 no child foreman). No PASS yet; ag-all-2-land lander gates ~06:00Z.
 - (18/11 04:54Z) Owner: cào lv2=step3, lv3=step3; stage ladder re-shoot with pet. look-fx-wire #3 R9 PARTIAL 008addf rolled over → opening #4.
+- (18/11 05:01Z) Owner now talks to ROOT-45 directly. Ordered place-stage r4: iPad Ngự hoa viên 4-person trial.
