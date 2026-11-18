@@ -18,7 +18,7 @@ phoenix-t1t6-fix | review/phoenix-t1t6-fix (CDN _review only) | W53 session_011x
 c03-v1-t678 (+c26 v0 t1–t4, c29 instrument) | CDN _review + c03 live | W54 session_011xDdVRCEBrDDZRTJBtFKxq | DONE 7500754 (archived) | 2026-11-18T15:42Z (Foreman C ROOT-24)
 t8-v2-yellow | CDN _review only | W55 session_011xDdVQTwxN7jGoVprySAoD | DONE f8b4e6d (archived) | 2026-11-18T15:45Z (Foreman C ROOT-24)
 b10-pose-eyes | CDN _review only | W56 + W56b DONE 6da6355 (archived) | DONE | 2026-11-18T15:52Z (Foreman C ROOT-25)
-live-open-eyes | CDN _review (then live) | W57 session_011xDdVPo2tyAFP5faQKZ1Xe | ROLLED OVER→W57b session_011xDdVQHrV2EKBxjJfUpYBx (D2 done) ROLLED OVER→W57c session_011xDdVP5kh5q2wGJ1mspzTP RUNNING (live push) | 2026-11-18T15:52Z (Foreman C ROOT-25)
+live-open-eyes | CDN _review (then live) | W57 session_011xDdVPo2tyAFP5faQKZ1Xe | ROLLED OVER→W57b session_011xDdVQHrV2EKBxjJfUpYBx (D2 done) ROLLED OVER→W57c session_011xDdVP5kh5q2wGJ1mspzTP DONE 198004f (live push) | 2026-11-18T15:52Z (Foreman C ROOT-25)
 | E12 test-flaky-sure (sonnet; test-only) | review/test-flaky-sure @c3b9d58c | Foreman E | session_01DgYSWmvDYnmfLCrNGtw5Uu | DONE, SẴN SÀNG KIỂM | 18/11 |
 b10-a26-c01-c11 | CDN _review only | W58 session_011xDdVNiYzKSQRPxRRQTe9a | ROLLED OVER→W58b session_011xDdVRPiVoxb2X6E9mvNW8 RUNNING | 2026-11-18T15:58Z (Foreman C ROOT-25)
 b10-a26-c12-c22 | CDN _review only | W59 session_011xDdVSuVQfgnp6Q21U5fzP | ROLLED OVER→W59b session_011xDdVQdJHQhTfZZ8iFUwdU RUNNING | 2026-11-18T15:58Z (Foreman C ROOT-25)
@@ -34,7 +34,7 @@ NPC-PURPOSE G1 #8 (opus integrator; seat opened by D #2 for C-AG #13, OPEN NOW #
 | E11r-w1 REVIEW ge-writers-w1 (opus BIG) | review/ge-writers-w1 | E | session_01DgYSWmTELUPTfw8Lqf2S4Y | RUNNING | 18/11 16:02Z | START_CTX ~3 % |
 shown-odds-r2-rv (BIG review of b39e6678) | review/shown-odds-r2-rv | session_01964izFyUaSfxgcEB3KDJP9 | RUNNING | 18/11 16:32Z | owner D #2
 a18-yellow-crown-face | CDN _review only | W65 session_011xDdVPrcwYuVJ3sqp3A6kR | RUNNING | 2026-11-18T16:31Z (Foreman C ROOT-26)
-b10-a51-sample (redo v1/v2) | CDN _review only | W64c session_011xDdVSr7GTAGeSvcq7r3hm | RUNNING | 2026-11-18T16:22Z (Foreman C ROOT-26)
+b10-a51-sample (redo v1/v2) | CDN _review only | W64d session_011xDdVSSRETnCf8t9wP8DxX | RUNNING | 2026-11-18T16:22Z (Foreman C ROOT-26)
 b10-a36-c23-c32 (cont.) | CDN _review only | W63d session_011xDdVNxbaxsJ1Mg9QwjJJj | RUNNING | 2026-11-18T16:31Z (Foreman C ROOT-26)
 owner-age-page | CDN _review + artifact WFjg87H9M2Ch5kebxT8BmJ | W66 session_011xDdVNiXzQbPgFB8psRugn | RUNNING | 2026-11-18T16:48Z (Foreman C ROOT-27)
 b10-a26-c01-c11 (cont.) | CDN _review only | W58c session_011xDdVPYYVz3XP6dvfzwGWf | RUNNING | 2026-11-18T16:52Z (Foreman C ROOT-27)
