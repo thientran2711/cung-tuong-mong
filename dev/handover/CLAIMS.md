@@ -12,6 +12,6 @@ B10 3 colour versions c04, c06, c07–c10 | _review CDN consort-tiers/<cNN>/b10 
 | review person-dialog-restore (sonnet small reviewer) | review/person-dialog-restore-r1 | ROOT-48 reviewer | session_01UV1SzkyUiNKEkWJM3e9b5U | PASS b2a9d3496 | 18/11 07:20Z |
 | E8f STEAL MINI-GAME FIX 1 (after E8r FAIL 1c4fe5ad; brief briefs/E8f-steal-minigame-fix1.md) | review/steal-minigame | E ROOT #3 | session_01DgYSWm5h3LgBS7jeBr3BtW | SẴN SÀNG KIỂM ea93a33d (report dev/handover/reports/steal-minigame.md) | 18/11 08:42Z |
 | place-stage r5b SMALL review 48e61b6 | review/place-stage | MAIN ROOT-48 | session_01UV1Szk3GeTZ4n7QfERhnEV | RUNNING | 18/11 07:16Z |
-| E8r2 re-review steal-minigame ea93a33d (opus BIG) | review/steal-minigame | E ROOT #3 | session_01DgYSWkfWz9j4tYaMi5BLHA | RUNNING | 18/11 07:16Z |
+| E8r2 re-review steal-minigame ea93a33d (opus BIG) | review/steal-minigame | E ROOT #3 | session_01DgYSWkfWz9j4tYaMi5BLHA | DONE FAIL r2 (stale base only) | 18/11 07:16Z |
 | opt-card-short #2 (OD 07:25Z verdict build) | review/opt-card-short | MAIN ROOT-48 | session_01UV1Szke4R4h6YSy7KRfqhR | RUNNING | 18/11 07:18Z |
 | E7a2 questline-q1a FIX 2 (opus; successor of E7a) | review/questline-q1a | E ROOT #3 | session_01DgYSWnDfnkgz7A4beCa3p4 | RUNNING | 18/11 07:20Z |
