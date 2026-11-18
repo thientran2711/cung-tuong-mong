@@ -30,3 +30,47 @@ START_CTX ~3 % (depth 1).
 img/item-<key>.webp (+ item512): lxmay0 Than liễu, lxmay1 Thanh đại, lxmay2 Họa mi đại, lxmay3 Loa tử đại · lxson0 Son sáp, lxson1 Son hoa hồng, lxson2 Son điểm giáng, lxson3 Son thiên chu cống · lxma0 Yên chi giấy, lxma1 Yên chi bánh, lxma2 Yên chi hoa hồng, lxma3 Yên chi tiến cống · lxmat0 Phấn gạo, lxmat1 Phấn hoa lài, lxmat2 Phấn ngọc trâm, lxmat3 Phấn trân châu ngự. Visual keys: item-list-ration.md §B (C1–C4). When painted: add the key to `LX_ART` in jration.js.
 
 ## Scan (group): every place a cosmetic is given goes through IT keys + lxFix (stipGoods, goodsGive, shop buy, borrow, steal, tribute, old save) — test covers each.
+
+---
+# FIX 1 (E4f session_01DgYSWpaM3yuPRsuWXP8kqd, depth 1, START_CTX ~4 %) — review E4r FAIL a0f3f53, all 7 points
+PRIORITY #1 CHECK ('sonphan|rashGive|lxAllergy|toilMkLayer|IT_ALIAS|BAL.pay'): OD L762, L1577 (08:25Z ration, law C), PL #5 | main: jrash.js rashGive (REUSED for the allergy), j8 IT_ALIAS + itClean (REUSED to fold sonphan), j8 taintHit (REUSED for pha chì), jtoil toilMkLayer/toilMkDraw/toilMakeupSvg (shared render path, extended), jecon BAL.pay (law C price), jbal BAL.thy.cost (same "share of bổng" pattern) | review/* review/monthly-ration only | claims E4 rolled over, E4r FAIL.
+
+**Branch** review/monthly-ration **sha e5d989b** (rebased on origin/main a95e8d4; generated index.html/sw.js taken from main then rebuilt with build_site.sh).
+
+## The 7 fixes
+1. **A part she does not own is not painted.** One new field on the look's colours: `col.no` = parts she lacks (jration lxCapRec at the sitting, lxColPick for the mirror preview). jtoil (makeup owner = MAIN; minimal change, inside the shared render path so EVERY face of that kind follows): `toilColFix` keeps `no`; `toilMkLayer` puts it in the cache key; `toilMkDraw` skips the brow (may), lid + shimmer (mat), lip + gloss (son), blush blobs (ma) layers; the mesh-less SVG fallback `toilMakeupSvg` skips blush (ma) and lip (son). The record travels (S.toilette.col, co-op friend rec), so her stage figure, avatar, close-up and the friend's view all match. NPC faces are not painted by jtoil today (toilLookOfP → null for NPCs); their record carries `no` too.
+2. **Law C flat.** `uses` flat 6 at every tier (tier = finer name/look, dearer box, never more lần); `n` 2 boxes every rank (unchanged); price of a box = max(floor price by tier, ceil(BAL.ration.buyK 0.2 × BAL.pay[buyer rank])) — `lxPrice`, read through a getter on IT[k].pr so shop, buy, sell, gift value and mua gấp show the ONE number ("giá theo thể diện người mua", like BAL.thy.cost ≈ share of bổng). Mua gấp gives a box of her rank's tier; NPCs buy at their own rank's price. Measure `node dev/measure/ration-lawc.js <worktree>` (bot per rank, real page: 24 months × 3 sittings, ration only; top-up = mua gấp to hold Kiều diễm every sitting; NPC 12 real months):
+| rank | bổng | cov Đoan trang | cov Kiều diễm | top-up Kiều diễm / bổng | NPC parts | NPC 0-part months |
+|---|---|---|---|---|---|---|
+| 0 | 40 | 1 | 0.67 | 60.0 phần trăm | 3.83 | 0 |
+| 1 | 55 | 1 | 0.67 | 61.8 phần trăm | 3.92 | 0 |
+| 2 | 70 | 1 | 0.67 | 60.0 phần trăm | 3.92 | 0 |
+| 3 | 95 | 1 | 0.67 | 61.1 phần trăm | 3.83 | 0 |
+| 4 | 125 | 1 | 0.67 | 60.8 phần trăm | 3.92 | 0 |
+| 5 | 165 | 1 | 0.67 | 60.6 phần trăm | 3.92 | 0 |
+| 6 | 215 | 1 | 0.67 | 60.5 phần trăm | 3.83 | 0 |
+| 7 | 280 | 1 | 0.67 | 60.0 phần trăm | 3.92 | 0 |
+spread: cov Đoan trang 0, cov Kiều diễm 0, top-up 1.8 points
+   Spread: ration-only coverage 0 (target ±0.05), top-up share ≤ 2 points (target ±10). Before (E4r): Kiều diễm 0.04 → 0.38, top-up 80 % → 9 % of bổng.
+3. **One allergy system.** `lxAllergy` now calls jrash `rashGive` (timed rash, picture, Thái y card, Sắc by severity): bột ngứa → severity by BAL.ration.allergy.nguaW; pha chì → chiW + j8 `taintHit` (the same lead hurt as every tainted item); the first use of a clean box rolls RASH.cos (sev 1, "son phấn không hợp", as the old sonphan hook). Old flat Sắc −4 / p.lxRash removed; the text is rashGive's own (text = effect). jrash's dead sonphan useItem hook retired (comment points to jration).
+4. **One cosmetic family.** `IT_ALIAS.sonphan = "lxson0"` (itClean renames old pieces on load, taint kept; lxFix also converts any piece met before itClean). Givers moved to lx boxes: SHOP_ALL (removed; jration adds lx tiers 0–1), BEST.night → lxson1, BEST.dau → lxma1, j24 gift → lxma0, jts gifts → lxson0, jts themes phu/huong/xuan tags → lx keys, TS_SLOT "Hương, phấn" + jlux luxThemeTags → any lx box, jcui Hương khôi prize → lxma2, TAINT.chi.on → lx only, jstip down/unit sonphan rows dropped. IT.sonphan stays defined (old saves before rename, art stand-in). Scan `python3 dev/test/sonphan-scan.py --base origin/main`: **before 22 lines / 18 givers → after 11 lines / 0 givers** (left: item definition, ITIMG art row, j98 grade row, jecon priceTier row, comments, alias).
+5. **NPC order.** stipGoods wrapper: `lxNpcSpend(v)` (the past month's sittings) runs BEFORE the issue, `lxNpcMonth(v)` (buy / borrow / ask her / steal) after it; test `npcIssueFull` (issued boxes arrive full). jstip's NPC goods trim never drops lx boxes.
+6. **Small.** Item text drops the bracket when it repeats the label ("Hộp phấn mắt dùng khi điểm trang: …"); tribute chance added for `sinhthan` (her birthday, 50 like Vạn thọ `birthday`).
+7. **Shots + runs** below.
+
+## Tests (sha e5d989b)
+- `node dev/test/monthly-ration.js <wt> <out>`: **ALL PASS** (49 checks, Fold 755x1000@2 + iPad 1180x820@2; new: allergy/allergyChi via rash, alias, oldSonphan, noGiver, lawC shares 0.2 at every rank, colNo, txt, npcIssueFull).
+- `node dev/test/monthly-ration-shots.js <wt> <out>` (new): **ALL PASS** Fold + iPad — mirror col.no=son, face A/B layers keyed by col.no, ration line names the boxes, visit cards (no %), ask-her event, no h-scroll, no page errors.
+- `python3 dev/test/sonphan-scan.py --base origin/main`: PASS.
+- dev/test/stipend.js (Fold + iPad): exit 0, no page errors.
+- dev/test/makeup-theme.js 1180x820@2: fail [] · makeup-lux.js 1180x820@2: fail [] · coop-toil-look.js (host + guest): 29/29 passed. (Why they "hung" for E4r: served by `python3 -m http.server`, which sends dev/index.html without a charset → the page fails to parse ("Invalid or unexpected token") and the test waits forever; serve with charset=utf-8, e.g. a 3-line node server.)
+- stipend-oldsave: not run separately (needs a mk-oldsave fixture); old save covered by quickcheck (live-build save loads and plays) + monthly-ration test oldFix / oldSonphan.
+- `bash dev/tools/quickcheck.sh` on e5d989b: **QUICKCHECK PASS** · old save ok · core gates PASS · perf new/live render 184/231, tab 364/380, buổi 854/1003 ms.
+
+## Shots (CDN 401 on account E → handover branch dev/handover/shots/monthly-ration/; LOOKED at each)
+- face-ab-{755x1000,1180x820}.jpg — the shared colour layer over her portrait: đủ 4 thứ · thiếu son môi (lips stay her own) · thiếu phấn má (no blush) · thiếu mày + phấn mắt. NOTE (pre-existing, not this branch): on this portrait (por-consort-c18-t1-a18) the face mesh puts the lip layer on the right cheek and a brow ghost on the forehead — the streak disappears exactly when son is missing, so it is the lip layer misplaced. On c14 the layers sit right. → FOR MAIN (makeup owner): check img/mk-fit for consort-c18 t1.
+- mirror-noson-{755x1000,1180x820}.jpg — Son môi missing: only owned colours, note (Thiếu / Dung nhan / Đường kiếm), Mua gấp (Bạc −17 at Thường tại = lxPrice × rush), reveal cleared (Fold no longer covered).
+- cards-{755x1000,1180x820}.jpg — Mượn / Xin / Lấy trộm son phấn as kit option cards (shown together in one card for the shot), odds words only.
+- askher-{755x1000,1180x820}.jpg — "Sang mượn son phấn" event (Chia cho nàng một nửa / Khéo từ chối).
+
+Art list for Foreman C unchanged (16 icons, see above).
