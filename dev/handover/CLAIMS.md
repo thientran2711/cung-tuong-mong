@@ -9,6 +9,9 @@
 | life-preload-fu LIVE ecd1aed4 (main 636193f8 → ecd1aed4, B) | review/life-preload-fu-r2v | B | session_01N1tNP55xTbEXtQ5JMTp7Y3 | LIVE ecd1aed4 | 18/11 12:40Z |
 | REVIEW coop-c4-stuck r1 (opus BIG) of a4f193e5 | review/coop-c4-stuck-r1 (+ -tests split) | B | session_01N1tNP4qzpqrMB5FZNZNqSm | PASS review/coop-c4-stuck-r1 ca661db3 (full, waits freeze) · PASS review/coop-c4-stuck-r1-tests f60b4024 → LIVE 13:41Z (main a8a10c66 → f60b4024) (tests only) | 18/11 13:39Z |
 | AG2-PERF #2 (opus; ag2-perf deeds floor) | review/ag2-perf | C-AG #12 | session_01UV1SzimZ43DghURhgEAv8W | ARCHIVED | 18/11 13:19Z |
+| coop-thin F2 (opus BIG; places/goTo/visits as intents on TH.F.reg) | review/coop-thin-f2 | B | (opening) | RUNNING | 18/11 22:55Z |
+| role-parity-3 B3 (opus; alias 9 + probe rows consort+hh; only B editor of role-parity-scan.js) | review/role-parity-3 | B | (opening) | RUNNING | 18/11 22:55Z |
+| role-parity-4b B4 (opus; probe rows maid+srv+promoted; scan changes via B3) | review/role-parity-4b | B | (opening) | RUNNING | 18/11 22:55Z |
 | NPC-PURPOSE G1 #7 (opus; integrator) | review/npc-purpose | C-AG #12 | session_01UV1Szm5ZanhFs7Ye4GwSCZ | RUNNING | 18/11 13:28Z |
 | NPC LANDER #6 (opus; ag-all-2-land + npc-chain-land) | review/ag-all-2-land, review/npc-chain-land | C-AG #12 | session_01UV1SzgbHcTuGMRy7HBkdcc | RUNNING | 18/11 13:35Z |
 | REVIEW AG LATER #3 (opus BIG reviewer; ag-all-2-land + npc-chain-land + ag2-perf) | review/ag-all-2-land, review/npc-chain-land | C-AG #12 | session_01UV1SziGFScPvg84cnnNiFu | RUNNING | 18/11 13:39Z |
