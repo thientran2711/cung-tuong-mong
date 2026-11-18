@@ -18,7 +18,7 @@ const {chromium}=require('playwright');const [,,URL,NL]=process.argv;
   const others=Object.keys(ARC67).filter(id=>ARC67[id].o==='bd'&&id!=='bd_hoa');localStorage.setItem('ctm-arcs',JSON.stringify({bd:others}));localStorage.setItem('ctm-tm96','1');
   window.__forceOrigin='bd';quiet=true;start();quiet=false;await new Promise(r=>setTimeout(r,300));BD_OLD.push(...keep);
   if(!S.st.f14||S.st.f14.road!=='bd_hoa')return{err:'road '+(S.st.f14&&S.st.f14.road)};
-  const r=__play(()=>S.st.M&&S.st.M.a==='bd_hoa_6'&&S.st.M.cur);return{save:JSON.stringify(ser()),at:S.st.M&&S.st.M.a,err:r.err,plan:S.st.ch.plan.filter(x=>/bd_hoa/.test(x)).join(',')}});
+  const r=__play(()=>S.st.M&&S.st.M.a==='bd_hoa_6'&&!S.st.M.done);return{save:JSON.stringify(ser()),at:S.st.M&&S.st.M.a,err:r.err,plan:S.st.ch.plan.filter(x=>/bd_hoa/.test(x)).join(',')}});
  chk('old bd_hoa life reaches .6 and saves',sv.save&&sv.at==='bd_hoa_6',{at:sv.at,err:sv.err,plan:sv.plan});
  await p.context().close();
  if(sv.save){p=await boot();await p.evaluate(PLAY);
