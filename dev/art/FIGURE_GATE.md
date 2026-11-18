@@ -47,6 +47,8 @@ V0 COLOUR (canon overwrite; OWNER 18/11 ~18:35Z (verbatim): "Từ từ, cái hì
 5. Consort sleeves/hem must not read as a maid's. Đáp ứng/Thường tại may be shorter; from Tần up the outer robe reaches the floor; no trains; Hoàng hậu not bulky. Feet/slippers visible.
 6. Collars: crossed collar (giao lĩnh) unless the live original says otherwise.
 
+7. ONE PROMPT STRUCTURE FOR EVERY RANK AND STATE (OWNER 18/11 ~19:12Z (verbatim): "Ủa, tức là cái hình đó tại sao mày đã mất công vẽ mới lại hoàn toàn mà mày không làm theo cái kiểu mới? Mày nói là lúc sau mà mày có làm theo kiểu mới giống như của hoàng hậu là mày thêm một số chi tiết cho từng bậc chẳng hạn đó. Tại sao mày không làm những các cái bậc thấp luôn mà từ cái bậc tầng trở lên thì mày mới làm? Tức là từ bậc 4 trở lên mày mới làm là sao? Cho nên rõ ràng là tao nhìn từ bậc 4 trở lên là thấy đẹp hơn. Đúng ra là cái luật này tao phải theo từ bậc thấp lên luôn chứ. Có nghĩa là cho dù tao có làm bậc cung nữ hay là bậc tiểu thư hay bậc con nhà nghèo thì cũng phải có đầy đủ những cái này chứ, nó phải thống nhất chứ."): t1–t3 (and maid ranks, tiểu thư, nhà nghèo, every state) use the SAME full outfit-sentence structure and detail sentences as the t4–t8 ladder (spec5 LAD pattern + stitched embroidery + fabric drape + rich fine silk), only stepped down in richness for the rank/state; never the short old spec2 TIERS text. Builder: dev/art/t8-prompt-B/build.py --low (W77).
+
 ## D. FACE / POSE / STYLE
 1. Face = the person's OWN face (her por + face master), never m09's face; small drift from her old figure is OK.
 2. Clean bare forehead: NO hoa điền, no dot/mark (hoa điền is an item).
