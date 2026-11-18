@@ -35,3 +35,13 @@ Shots (scratch, not in git, looked at): Fold event-stage xốc cold = creases on
 
 ## Open
 - Tea is OFF (MAIN's worker); same wait-layer path will serve it with no change.
+
+## REVIEW r1 (sonnet SMALL reviewer, session_01N1tNP6FHq1uXMKTRfLvg5j; branch review/cloth-bake-static, base = current origin/main a95e8d41, no merge needed)
+PRIORITY #1 CHECK: OD 0 for the fix itself (ID-card rule = OD:L1677 + 18/11 03:20Z/03:30Z lines) | ledger 0 | claims 0 conflicts | main 0 | review/* tea untouched.
+1. Paths: git grep kitFxLayers/kitFxPut/kitStageFig/kitFaceZoom: stage, #mefig, NPC, co-op token, podium all go through kitFxPut; Dư đồ/event-stage (jk4, jpdlg, j79, j87, jfigseal, jkitpage, jmark) all go through kitStageFig; mirror = kitFaceZoom + toilReveal. 24-case test PASS on Fold + iPad. FOUND ONE MISS: on a cold cache the kitFxPut paths (podium, token) patched the layer but left the plain picture visible under it (warm hides it, `kclo-on`). FIXED in clothPatch (toggle kclo-on on the layer's own picture); test now has a 5th path `put` (cold/warm x uot/bun/xoc) = 30 cases, PASS both devices (before fix: 3 cold cases MISSING).
+2. Leak: clothPatch is a one-shot querySelectorAll keyed by the bake entry id; no listeners, no timers, nothing to clear. A wait layer only ever receives the picture of its own file+level, so a fast switch cannot paint another person; layers in a closed view are detached nodes (harmless). Residual (pre-existing): a failed bake leaves a blank invisible wait layer (before: no layer) and the entry is not retried until evicted; no visual harm.
+3. ID-card claim: backed for SMALL avatars (OD:L1677: base + lasting marks only). NOT fully backed for the LARGE person-card portrait: OD 17/11 20:25Z says the large portrait always shows today's look. Cloth marks are body marks and portraits are face crops (robe off-frame), so nothing is visibly missing today. QUESTION FOR MAIN: should the large full-body card figure (if any) show cloth? Not a FAIL.
+4. KIT FIRST: layer built in the kit slot via kitFxLayers wrapper (jcloth.js); regex accepts the wait layer so order cold = warm; only CSS is `img.kclo-wait{opacity:0}` (invisible placeholder, no look). OK.
+5. Tea OFF untouched; switches still read BAL.looks.* (no BAL change). 
+Tests: cloth-bake-static 30/30 Fold 755x1000@2 + iPad 1180x820@2; cloth-xoc OK; cloth-stain OK; one-core-guard PASS fails 0; quickcheck PASS (164 s, old save ok, perf same as live; core gates + time-spill PASS); coop-e2e 63/63. Shots (scratch, not in git, looked at): Fold event-stage xốc cold, iPad mirror reveal xốc cold, iPad put xốc cold = creases on robe, face untouched.
+VERDICT: PASS (with the r1 fix).
