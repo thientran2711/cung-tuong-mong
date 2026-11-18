@@ -48,3 +48,28 @@ origin/main moved to 997e049c (look-fx r13, jlooks + tests only) during the revi
 Shots were scratch-only (not uploaded) and are deleted.
 
 For MAIN only (not D's): jsgame card "Đang thỉnh tranh…" overlaps the KÈM label (live).
+
+## ROUND 2 REVIEW — shown-odds-r2 (spend-before-roll) BIG (D #2 reviewer session_01964izFyUaSfxgcEB3KDJP9, opus; START_CTX ~4 % of 1M, end ~27 %)
+PRIORITY #1 CHECK ('fzRun / aRoll / spend then roll / shown==rolled across spend'): OD 0 | ledger 0 | claims 1 (this review) | main: round 1 j9 actCtx/actOdds + C-AG ag-all-2-land e18697fe (servDo, twDo, SRVA, eyes(), inviteO, stf2Bribe) | review/*: review/shown-odds-r2 b39e6678 (under review), review/npc-chain-land feel-shown.test.js (not on main; its case = our steal-tonight row) | archive 0.
+
+**VERDICT: PASS cf1fc7467e1cde55672a283b6fdd772f349f925d** (branch review/shown-odds-r2-rv; FF from live main 5e6490b4). Reviewer fixes on the verdict branch (small, same one way):
+1. **4 paths the worker + scan missed** (odds shown through a variable, e.g. `o=petBuyO(k)` … `word(o)`): j53 "Xin Hoàng thượng cử Đại học sĩ" (Sủng -4 applied BEFORE the roll → rolled always 2 below shown), j54 "Nhờ con nói giúp" (Mẫu tử -4 before the roll → -2), j61 "Hỏi người hầu: đó là ai?", jpet buy. All now read before the spend. Scan: is_shown also follows `x=EXPR … word(x)` (live → 4 AFTER, fixed → 0). Spend test +4 rows: live FAIL 4/79 (k61 62/89, pet 78/87, kt53 65/48, h54 70/68), branch 79/79.
+2. **Final merge of live e18697fe (C-AG ag-all-2-land)**: 15 source files conflicted on the same act lines; kept C-AG's code, re-applied the freeze. C-AG moved servant "Hỏi chuyện" into servDo → aRoll there + fzRun at the button; bribeServ now weighs stf2Bribe by its odds → new j9 `aOdd(o,a)` (the odds an own roll uses; aRoll = aOdd + roll) so the frozen odds feed that weight too; new j42 "poison" (spend then roll) and j21 invite (odds stored after the spend) read before the spend; jtwoway twDo own roll = aRoll (her talk-card deeds were re-read inside fzRun).
+3. Final merge of live 5e6490b4 (shop-panel; build files only).
+
+### Checks (brief 1–6)
+- 1 Family: scan PASS (57 spend paths: FROZEN 33, SIDE 24); planted spend-then-roll copy (j83 sell) → scan FAIL 1 AFTER. Hunt over all 118 spend sites (non-literal rolls after the spend, scan-unlisted): found the 4 above; after merge only jthaiy:96 (BAL constants, not shown).
+- 2 Correctness: frozen = actOdds/the card value before the spend (same ACTX parts: lá số, spy, sent pen, oddsCl once); side rolls (caught/confess/punish/belief/news/odds-cap soft fail) stay roll(); NPC rolls unchanged (aOdd needs actor S or ACTX.fz of that actor); effects still after the spend; no double oddsCl; no typed numbers added (one-core guard PASS, inline 4211 ≤ 4212); actOdds/optOdds/jointO/runAct signatures unchanged.
+- 3 Tests: shown-odds-spend live a2ce736 FAIL (4/75, steal-tonight 64→48) / branch PASS; break fzRun → FAIL 6/75 (not vacuous). Round-1 shown-odds 90/90 (pre-merge), 97/97 (merged).
+- 4 Gates on merged code: odds-cap PASS · one-core-guard PASS · quickcheck --runs 6 PASS ×2 (e18697fe merge: render 206/237, tab 399/392, buổi 1077/1221 ms; old save ok) + final on cf1fc7467e1cde55672a283b6fdd772f349f925d: quickcheck --runs 6 PASS (render 177/202, tab 356/339, buổi 847/1013 ms; old save ok), spend test 79/79 · coop-e2e 63/63 (pre-merge and on the e18697fe merge) · paired bot (bot-same sens 8 steps, live vs branch, before and after merge): no runaway, 0 page errors, lives differ as expected (rolls changed), no HH rate (short run).
+- Shots Fold 755x1000@2 + iPad 1180x820@2 (scratch, deleted): act screens render, ladder words only, 0 page errors, no horizontal overflow. No text change.
+- 5 FREEZE: diff vs live touches none of jag*/j95*/jtoil*/jbal.js/jcoop*/save logic.
+- 18 LAWS touched: 4 ONE CORE PASS (one freeze path, BAL only), 7 odds in words PASS (no text change), 11 whole group PASS after reviewer fixes (+4 paths, + C-AG new paths).
+
+### Touched files (vs live 5e6490b4)
+dev/build j2 j8 j9 j10 j21 j25 j29 j30 j42 j53 j54 j55 j61 j70 j72 j77 j78 j83 j92 jaudit jdress jecon jgift jlost jpet jpetcare jpoison jpromsv jrash jrcp jsgame jtsb jtwoway jveil jwhy; dev/test/shown-odds-spend.test.js, dev/test/shown-odds.test.js; dev/tools/shown-odds-scan.py; index.html, sw.js, assets.json.
+
+### Open (report only)
+- jagent agReact "join" (cùng nàng): pays agSpendKh() then twDo re-reads D.o — shown oj on the card, rolled after the spend. jagent.js is frozen → one-line fix for C-AG: `const oj0=oj;…go:()=>{…fzRun(oj0,null,()=>twDo(S,…))}` (twDo already uses aRoll).
+- jagstf2 stf2Bribe (C-AG): the take weight × stf2Tr(trait) means the real chance of "Nhận bạc" ≠ the shown Mua chuộc word even without any spend — a C-AG design question (owner law 4/7), not this branch.
+- Co-op invitations (jcoop, frozen) roll when the friend answers; j70 plots roll weeks later (by design).
