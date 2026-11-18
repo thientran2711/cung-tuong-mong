@@ -79,26 +79,30 @@ function k3chitonG(){let R=[];try{R=typeof kitCourtRows==="function"?kitCourtRow
 function kgfPhoneMap(){try{const m=kitSideHost();return !!m&&m.classList.contains("mapv")&&kitView().pages===1}catch(e){return false}}
 function kgfCount(k){try{if(!S||S.dead)return 0;if(k==="cn"){if(typeof isSrv==="function"&&isSrv())return 0;return(S.maid?1:0)+(S.staff||[]).filter(s=>s&&s!==S.maid).length}return(typeof kitCourtRows==="function"?kitCourtRows():[]).length}catch(e){return 0}}
 function kgfDrop(){try{let d=document.getElementById("kgfdrop");const k=window.__kgfOpen,mv=kitSideHost();
- if(!k||!kgfPhoneMap()||!mv||!S||S.dead){if(d)d.remove();return}
- const lab=k==="cn"?"Cung nhân":"Chí tôn",n=kgfCount(k);if(!n){if(d)d.remove();return}
+ if(!k||!kgfPhoneMap()||!mv||!S||S.dead){if(d)d.remove();kgfTags(null);return}
+ const lab=k==="cn"?"Cung nhân":"Chí tôn",n=kgfCount(k);if(!n){if(d)d.remove();kgfTags(null);return}
  const items=k==="cn"?k3crewList():k3court();
  if(!d){d=document.createElement("div");d.id="kgfdrop";d.className="ksh kgfdrop"}if(d.parentNode!==mv)mv.appendChild(d);
  const h=`<div class="k3p kgf kgfopen"><div class="k3h kgf-t" style="cursor:default"><span>${esc(lab)} · ${n}</span></div><div class="kgf-l">${items}</div></div>`;if(d.__h!==h){d.innerHTML=h;d.__h=h}
  const rl=document.getElementById("krail"),m0=mv.getBoundingClientRect(),r0=rl?rl.getBoundingClientRect():null;d.style.top=Math.round((r0&&r0.height?r0.bottom-m0.top:52)+6)+"px";
- const ar=document.querySelector("#kshR .kas,#kshR .k3py");const bot=ar?ar.getBoundingClientRect().top-m0.top-6:m0.height-8;d.style.maxHeight=Math.max(120,Math.round(bot-parseFloat(d.style.top)))+"px"}catch(e){console.error("kgfDrop",e)}}
+ const ar=document.querySelector("#kshR .kas,#kshR .k3py");const bot=ar?ar.getBoundingClientRect().top-m0.top-6:m0.height-8;d.style.maxHeight=Math.max(120,Math.round(bot-parseFloat(d.style.top)))+"px";kgfTags(d)}catch(e){console.error("kgfDrop",e)}}
+/* MAIN ROOT-57 (owner 21:40Z «must not cover the map's place tags more than needed»): while the list is open, a map place tag (.mspot) the list would cover steps right
+   just clear of the list (translate only, nothing else changes; data-kgft marks the ones moved); closing the list or panning the map puts every tag back / re-checks */
+function kgfTags(d){try{document.querySelectorAll(".mspot[data-kgft]").forEach(t=>{t.style.translate="";delete t.dataset.kgft});if(!d||!d.isConnected)return;
+ const sc=document.querySelector(".game.maptab .mapsc,.mapv .mapsc");if(!sc)return;if(!sc.__kgft){sc.__kgft=1;sc.addEventListener("scroll",()=>{cancelAnimationFrame(sc.__kgfq);sc.__kgfq=requestAnimationFrame(()=>kgfTags(document.getElementById("kgfdrop")))},{passive:true})}
+ const a=d.getBoundingClientRect(),m=sc.getBoundingClientRect();
+ sc.querySelectorAll(".mspot").forEach(t=>{if(!t.offsetParent)return;const z=t.getBoundingClientRect();if(z.width<2||z.right<=a.left||z.left>=a.right+2||z.bottom<=a.top||z.top>=a.bottom)return;
+  const dx=Math.ceil(a.right+4-z.left);if(z.right+dx<=m.right-2){t.style.translate=dx+"px 0";t.dataset.kgft=dx}})}catch(e){console.error("kgfTags",e)}}
 function kgfRail(){try{if(kgfRail.done||typeof kitStageRail!=="object")return;kgfRail.done=1;
  [["cn","Cung nhân",1],["ct","Chí tôn",2]].forEach(([k,lab,o])=>kitStageRail.add({id:"kgf-"+k,order:60+o,label:lab,title:lab+" · chạm để mở danh sách",count:()=>kgfCount(k),active:()=>window.__kgfOpen===k,when:()=>kgfPhoneMap()&&kgfCount(k)>0,onTap:()=>{window.__kgfOpen=window.__kgfOpen===k?null:k;const R=$$("kshR");if(R)R.dataset.full="";k3Stage();kgfDrop()}}))}catch(e){}}
 /* owner ruling via ROOT-56: an open group list closes with ONE tap anywhere outside it (map, tag, figure) — that tap only closes — and with Esc */
 function kgfClose(){if(!window.__kgfOpen)return false;window.__kgfOpen=null;const R=$$("kshR");if(R)R.dataset.full="";k3Stage();try{kitStageRail.paint()}catch(e){}return true}
 document.addEventListener("click",e=>{if(!window.__kgfOpen)return;const t=e.target;if(t&&t.closest&&t.closest("#kgfdrop,#kshR .kgfopen,[data-kgf],#krail [data-rail^=kgf-]"))return;if(kgfClose()){e.stopPropagation();e.preventDefault()}},true);
 document.addEventListener("keydown",e=>{if(e.key==="Escape"&&kgfClose())e.stopPropagation()},true);
-/* ROOT-56 flag: a figure's emotion face chip (.kemo) never sits under the right column — if it would, it steps left of the column (translate only; reset every pass) */
-function kgfClearEmo(){try{const st=$$("stage"),R=$$("kshR");if(!st||!R||R.hidden||!R.offsetHeight)return;const q=R.getBoundingClientRect();
- const hitq=z=>z.width>2&&Math.min(z.right,q.right)-Math.max(z.left,q.left)>1&&Math.min(z.bottom,q.bottom)-Math.max(z.top,q.top)>1;
- st.querySelectorAll(".kemo").forEach(e=>{if(R.contains(e))return;e.style.marginLeft="";if(!e.offsetParent)return;let z=e.getBoundingClientRect(),m=0;
-  for(let i=0;i<3&&hitq(z);i++){m-=Math.ceil(z.right-q.left+6);e.style.setProperty("margin-left",m+"px","important");z=e.getBoundingClientRect()}})}catch(e){console.error("kgfClearEmo",e)}}
+/* ROOT-56 flag: a figure's emotion face chip (.kemo seal) never sits under the right column — handled in the ONE kit part kitFigSeal (jfigseal: stage plaque columns are a
+   no-go zone, KIT_FIGSEAL.pad); here we only re-run the seal placement after the column changes (no private margin shifts, no polling) */
+function kgfClearEmo(){try{if(typeof kitFigSealAll==="function")kitFigSealAll()}catch(e){console.error("kgfClearEmo",e)}}
 window.kgfClearEmo=kgfClearEmo;
-try{setInterval(()=>{if(!document.hidden)kgfClearEmo()},400)}catch(e){}
 /* Ân sủng chips (owner 11/15 04:05Z): Tai mắt + the Ân sủng facts under the court chips, same plaque card and column width, one value per line,
    labels never cut. Có thai / Lật thẻ on the chance scale (chanceLvl, j1: Rất thấp…Rất cao), never the act ladder. Bổng lộc lives only here. */
 function k3AsRows(){/* consort-only facts (Lật thẻ, Có thai, Bổng lộc…): none on the cung nữ road nor in lãnh cung (review/small-bugs-2) */if(!S||S.dead||(window.kitRoad&&kitRoad()))return[];const L=[];const hv=k=>{const b=k3hc(k);return b?k3val(b):""};
