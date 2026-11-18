@@ -58,7 +58,7 @@ Reference set = c12 a18 approved ladder (img/_review/maid-consort-sample/: t1 r7
 | t8 Hoàng hậu | grandest phượng quan, paired phoenixes, longest dangles | YELLOW mixed with FRESH/bright colours (crimson, jade…); not bulky |
 | Thái hậu | phoenix crown of Hoàng-hậu rank, dignified | YELLOW mixed with MUTED/deep colours (trầm) at every age |
 | Nữ đế | phoenix crown WITH DRAGON + phoenix, and a row of bead tassels (lưu) hanging at the FRONT like the Emperor's crown, reaching the FOREHEAD only (never over the eyes/face) | yellow like Hoàng hậu, with DRAGON + PHOENIX embroidery (dragon is what marks her as Nữ đế) |
-AGE 51 (a51), EVERYONE (maids, mamas, consorts, any rank): no fresh/bright colours — deep, muted (trầm) colours, dressed like a dignified older lady (đứng đắn) through the COSTUME (cut, colours, fewer youthful frills); pose stays lively (hands may hold/do things), not stiff. Thái hậu at a51 = muted as well.
+AGE 51 (a51), EVERYONE (maids, mamas, consorts, any rank): no fresh/bright colours — deep, muted (trầm) colours, dressed like a dignified older lady (đứng đắn) through the COSTUME. POSE (owner 18/11 ~03:50Z, verbatim: "Sửa lại cái luật tuổi 51 á, tức là cái dáng đứng á, là cái dáng đứng là phải bởi vì lớn tuổi rồi không thể nào mà cái tay để lung tung hay là linh hoạt được. Lên 51 tuổi rồi thì để cái tay để phía trước á, cầm một món gì đó rồi để phía trước thôi."): both hands held IN FRONT of the body, holding one item in front; no raised/loose/lively hand poses at a51. Thái hậu at a51 = muted as well.
 Open claim: t9 Hoàng thái hậu + t10 Nữ đế consort tiers (CLAIMS row 17/11 02:02Z, session_011xDdVShLvZ7X2KBzWPp6Aj, no report = stale) — resume under this gate, samples first.
 
 ## E. APPROVAL FLOW
