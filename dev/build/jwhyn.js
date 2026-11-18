@@ -42,8 +42,9 @@ function whyGreetF(host){const th=host==="th",G=trGreet(S,host),B=BAL.trong,A=th
  const tags=th?DEED.greet:DEED.greetHH;F.push(...whyTrongF(th?"th":host,tags));
  if(th){const rk=rkOf(S)||0;const rkF=1+A.rk*(rk-3);if(rkF!==1)F.push({k:"rank",t:rkF>1?"phẩm vị ngươi cao":"phẩm vị ngươi còn thấp",s:rkF>1?1:-1})}
  const eh=trEmo(th?S.thO:host),ew=trEmo(S);const H=th?"Thái hậu":"Hoàng hậu";
- if((TR_MH[eh]||1)!==1)F.push({k:"mood",t:`${H} đang ${(EMO[eh]||eh).toLowerCase()}`,s:TR_MH[eh]>1?1:-1});
- if((TR_MW[ew]||1)!==1)F.push({k:"mood",t:`ngươi đang ${(EMO[ew]||ew).toLowerCase()}`,s:TR_MW[ew]>1?1:-1});
+ const mh=TR_MH[trMK(TR_MH,th?S.thO:host)]||1,mw=TR_MW[trMK(TR_MW,S)]||1;const fN=(p,k)=>(typeof feelName==="function"&&typeof feelLv==="function"?feelName(k,feelLv(p,k)):EMO[k]||k).toLowerCase();
+ if(mh!==1)F.push({k:"mood",t:`${H} đang ${fN(th?S.thO:host,eh)}`,s:mh>1?1:-1});
+ if(mw!==1)F.push({k:"mood",t:`ngươi đang ${fN(S,ew)}`,s:mw>1?1:-1});
  if(G.n>=1&&1-(th?A.rep:B.hhRep)*G.n<1)F.push({k:"rep",t:"mấy hôm liền ngày nào cũng sang: được ít dần",s:-1});
  const reg=th?S.th:S.hh,cap=th?A.cap:B.hhCap;if(reg>cap)F.push({k:"cap",t:`${H} đã quý ngươi lắm: khó thêm`,s:-1});
  return{F,gain:G.gain,k:th?"th":"hh",who:th?"th":host}}
