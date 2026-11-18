@@ -10,3 +10,5 @@ Refs: a36 own t1 CqnuiZYEEy; a51 = live img/hd/fig-consort-c11-t1-a51.webp as PN
 - images_generate gpt-2-6, width 1024 height 2304, resolution 2k, count 1, refs [own t1, m09]. 4 in flight; then remove_background (folderReference) → fin.py cNN aXX t8v0=url ... (black-fill check + sheet) → look at sheet → push.sh cNN aXX → READY.
 - push.sh: S must be your scratchpad; needs $S/root = git worktree of origin/main (has dev/site/cdn_sync.py). Tools in t8-mass-B-W77t-tools/ (S path fixed by sed).
 - Colours per variant (same at every age): t8 v0 own pink-grey+yellow, v1 yellow main+lilac accent, v2 yellow+leaf green; t7 v0 pink-grey main, v1 leaf green, v2 sky blue (yellow larger parts on all).
+## UPDATE from Foreman C (OWNER 21:35Z)
+a36 must look YOUNG for her age (trẻ trước tuổi); a51 visibly older but aging beautifully (đẹp lão). build.py AGE_TXT a36/a51 updated on handover branch claude/cung-tuong-mong-handover-hj0h8w (c6bc9510; a18/a26 unchanged). RE-FETCH build.py from that tip before generating a36/a51 (the age wording in this handover's method notes is stale).
