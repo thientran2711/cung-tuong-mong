@@ -178,3 +178,39 @@ Mud table (r6b):
 | c30 | 2 | 19713 | -52.9 | -10.9 | 0 | +3.48 | 0 | -3.3 |
 | c30 | 3 | 27181 | -63.6 | -16.6 | 0 | +5.39 | 0 | -3.9 |
 Samples (CDN img/_review/cloth-xoc/): drywet-uot-{c01,c30,c03,c12}.png and drywet-bun-{c01,c30,c03,c12}.png = DRY | lv1 | lv2 | lv3, waist->hem, 2x; stain-{uot,bun}-1..3.png full figures 2400 px. Looked at all: no grey, no speckle, no lotus halo, shoes clean, neck/hands clean.
+
+## r6c (after MAIN s41 on 11648eb: MUD OK; WET FAIL 'lighter-than-dry white bands' c01/c30) — SẴN SÀNG KIỂM review/cloth-xoc 5444f0d (QUICKCHECK PASS, tests OK, creases byte-identical to 8dab3d4, effects OFF)
+Whole-figure FINAL vs DRY diff (every pixel, all 4 robes x 3 levels): max ΔL* = 0.00, pixels ΔL*>+2 = 0, max channel increase = 0, alpha changed = 0 (map img/_review/cloth-xoc/wet-lighter-map.png = all empty). So nothing is lighter than dry; the 'white bands' were DRY slots left between the vertical wet streaks next to deepened cloth (contrast), plus pixels the mask never wetted. Root causes killed:
+1. Dry slots: lv2/lv3 now add a soak FLOOR over the whole robe below the chest (BAL uot.deep.floor [0,0,.6,.92], soft noise), per-level darkness darkL [0,.2,.22,.3]; light pixels no longer deepen less than dark ones (removed (1-.3·L) factor). lv3 reads clearly soaked in the robe's own hue.
+2. Never-wetted spots: the cloth mask drops every skin-coloured pixel, so cream/pink embroidery (c03 lotus, c01 peony) and cream lining touching the hands stayed dry and glowed. New stain-only masks in clothMask: skinT = neck + hand blobs near the body centre (|x-cx| < .2 fw, above the knees) trimmed to <= 3 px around a core of tight face-colour pixels (BAL xoc.skin.handX .2, core .35); mS = cloth mask built with skinT; protL uses skinT + held items with a 2 px feather near the centre only. Creases still use the old m/protS/prot (checked: crease output hash identical to 8dab3d4).
+Wet table (r6c):
+| fig | lv | changed px | min dL* | mean dL* | lighter px | mean dC* | greyer px (dC*<-3) | mean dhue° |
+|---|---|---|---|---|---|---|---|---|
+| c01 | 1 | 47115 | -14.2 | -7.8 | 0 | +5.11 | 0 | -2.5 |
+| c01 | 2 | 154713 | -24.6 | -12.3 | 0 | +7.76 | 0 | -3.2 |
+| c01 | 3 | 155010 | -35.7 | -23.1 | 0 | +9.02 | 56 | -4.2 |
+| c03 | 1 | 81969 | -11.4 | -5.1 | 0 | +3.60 | 0 | -1.8 |
+| c03 | 2 | 155195 | -18.8 | -10.1 | 0 | +6.11 | 3 | -3.2 |
+| c03 | 3 | 155290 | -30.6 | -20.2 | 0 | +6.90 | 327 | -4.6 |
+| c12 | 1 | 37329 | -9.9 | -3.9 | 0 | +2.42 | 0 | -1.4 |
+| c12 | 2 | 151543 | -16.7 | -8.9 | 0 | +4.88 | 27 | -3.0 |
+| c12 | 3 | 155380 | -29.0 | -19.6 | 0 | +6.49 | 58 | -4.7 |
+| c30 | 1 | 40305 | -9.6 | -5.8 | 0 | +1.85 | 0 | -2.0 |
+| c30 | 2 | 144917 | -15.9 | -8.5 | 0 | +2.15 | 36 | -2.7 |
+| c30 | 3 | 148165 | -25.8 | -18.8 | 0 | +3.05 | 652 | -3.9 |
+Mud table (r6c, look unchanged except embroidery now takes mud too):
+| fig | lv | changed px | min dL* | mean dL* | lighter px | mean dC* | greyer px (dC*<-3) | mean dhue° |
+|---|---|---|---|---|---|---|---|---|
+| c01 | 1 | 3453 | -46.6 | -7.7 | 0 | +1.36 | 0 | -0.2 |
+| c01 | 2 | 17534 | -54.3 | -9.9 | 0 | +1.28 | 11 | +0.1 |
+| c01 | 3 | 25978 | -65.4 | -14.1 | 0 | +1.63 | 113 | +0.2 |
+| c03 | 1 | 3716 | -49.0 | -8.6 | 0 | +0.29 | 80 | -6.2 |
+| c03 | 2 | 18681 | -52.7 | -10.3 | 0 | +1.30 | 203 | -5.1 |
+| c03 | 3 | 27661 | -60.2 | -15.2 | 0 | +1.92 | 670 | -7.2 |
+| c12 | 1 | 4701 | -40.2 | -8.6 | 0 | +1.72 | 0 | -5.2 |
+| c12 | 2 | 20356 | -52.9 | -10.9 | 0 | +2.29 | 0 | -4.8 |
+| c12 | 3 | 28600 | -61.1 | -16.0 | 0 | +3.34 | 0 | -6.6 |
+| c30 | 1 | 4758 | -44.9 | -9.0 | 0 | +3.04 | 2 | -2.7 |
+| c30 | 2 | 19713 | -52.9 | -10.9 | 0 | +3.48 | 0 | -3.3 |
+| c30 | 3 | 27181 | -63.6 | -16.6 | 0 | +5.39 | 0 | -3.9 |
+Samples (CDN img/_review/cloth-xoc/): drywet-{uot,bun}-{c01,c30,c03,c12}.png (DRY | lv1 | lv2 | lv3, waist->hem, 2x), stain-{uot,bun}-1..3.png (2400 px full), wet-lighter-map.png. Looked at 3-5x zooms of hands/beads/cup/branch/neck on all 4: no halo ring, no dry lobes; the remaining light folds are in the dry art too (uniform multiplicative deepen, s .76-.95 measured there).
