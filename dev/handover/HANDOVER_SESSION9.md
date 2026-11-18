@@ -1084,3 +1084,7 @@ OWNER PENDING: 4 stage makeup shots (sent Lượt 24, her pick of mirror vs stag
 Wake: trig_01XziXcTa6TV3ACMFhLctFAr 02:34Z fires into s42 → s42 relays; s43 sets its own hourly wake at :32.
 - (18/11 02:21Z) s42 FINAL: successor MAIN s43 = (see next line).
 - (18/11 02:22Z) s42 FINAL: successor MAIN s43 = session_01UV1Szine3C2fgBgQ8qCx5w (depth 6 → workers only; owner opens a ROOT at its rollover). s42 stops (relays only). s42 wake trig_01XziXcTa6TV3ACMFhLctFAr 02:34Z → relay to s43.
+
+## S43 (main, child of s42)
+- (18/11 02:30Z real) MAIN SESSION 43 = session_01UV1Szine3C2fgBgQ8qCx5w; START_CTX ≈ 6 % (estimate; context_usage reads 0) → rollover at 31 %, ceiling 60 %; depth 6 → WORKERS/REVIEWERS only; at rollover write handover + FOR MAIN line, owner opens a ROOT main from claude.ai.
+- (18/11 02:30Z) LOAD: main running ~19 sessions (owner bugs/UI/looks/go-live only: place-banner, opt-card-short, book-figsize, result-reason, look-fx, cloth-xoc r6 tea, 5 reviewers, staff-cap-apply, idle workers) | B ROOT-2 (no new order) | C ROOT-13 not opened (owner) | D #11 2 running, free 10 (no non-UI main item to move) | C-AG #8 running | moved: none (all main items = owner bugs/UI). Brief template briefs/s43-common.md.
