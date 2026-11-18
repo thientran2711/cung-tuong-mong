@@ -40,6 +40,10 @@ const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);if(!c)console.error('FAIL',n,JS
    for(const n of (D.lean.p||[]).concat(D.lean.m||[]))if(!N.has(n))bad.push(`${b} lean: not an option: ${n}`);
    const both=(D.lean.p||[]).filter(n=>(D.lean.m||[]).includes(n));if(both.length)bad.push(`${b} lean: both + and −: ${both}`);
    info[b]={chuoi:D.e.map(e=>e.pull.length),khoa:D.e.map(e=>e.close.length),lean:[D.lean.p.length,D.lean.m.length]}}
+  /* variety guard, whole family (E11): no two endings of ANY live branch share a narration sentence (t / a / ft), a «Đạt được khi» line (ht / ha), a condition line (cw) or a fail name */
+  {const seen={};for(const b in GE_DATA)GE_DATA[b].e.forEach((e,i)=>{const id=b+'_'+(i+1);
+    const units=[].concat(...['t','a','ft'].map(k=>String(e[k]||'').split(/(?<=[.!?…”])\s+/).map(x=>x.trim()).filter(x=>x.length>12).map(x=>[k,x])),['ht','ha','cw','fail'].map(k=>[k,String(e[k]||'').trim()]));
+    for(const [k,x] of units){const key=x.toLowerCase();if(seen[key]&&seen[key]!==id+'.'+k)bad.push(`duplicate narration ${id}.${k} = ${seen[key]}: ${x.slice(0,60)}`);else seen[key]=id+'.'+k}})}
   return {bad,info,live:Object.keys(GE_DATA),it:!!IT[BAL.ge.kimsach]&&IT[BAL.ge.kimsach].pr===0&&IT[BAL.ge.kimsach].keep===1}});
  console.log('live branches',R.live.join(' '),JSON.stringify(R.info));
  chk('3 pilot branches live (tt_co, cnv_mat, one nc road)',R.live.includes('tt_co')&&R.live.includes('cnv_mat')&&R.live.some(b=>/^nc_/.test(b)),R.live);

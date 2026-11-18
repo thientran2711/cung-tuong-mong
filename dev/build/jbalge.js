@@ -53,3 +53,40 @@ BAL.ge={
  /* the funnel target: open endings by chapter for a consistent player (measured, reported) */
  funnel:{4:4,8:[2,3],11:[1,2]}
 };
+/* ---------- writers wave W2 (jgedata_w2.js: cn_* · nc_gian nc_su nc_vuong · td_*): gates, fail losses, rewards — same scales and sizes as the pilot rows ---------- */
+Object.assign(BAL.ge.gate,{
+ cn_chu_1:{danh:45,maid:50},cn_chu_2:{duc:40,danh:35},cn_chu_3:{duc:40,sung:35},cn_chu_4:{sung:50,tamco:40},
+ cn_tinh_1:{tamco:40},cn_tinh_2:{sung:50,tamco:45},cn_tinh_3:{duc:40,danh:40},cn_tinh_4:{duc:45},
+ cn_ban_1:{tai:50,danh:40},cn_ban_2:{duc:45,danh:30},cn_ban_3:{duc:40,sung:35},cn_ban_4:{tamco:45,sung:45},
+ cn_than_1:{danh:40,duc:35},cn_than_2:{mat:4,danh:50},cn_than_3:{duc:35,tamco:35},cn_than_4:{tamco:45,mat:3},
+ nc_gian_1:{tamco:45,mat:4},nc_gian_2:{sung:50,duc:40},nc_gian_3:{duc:35,tamco:40},nc_gian_4:{tai:40,duc:30},
+ nc_su_1:{danh:45,sung:40},nc_su_2:{tai:50,mat:3},nc_su_3:{tamco:45,mat:4},nc_su_4:{duc:35},
+ nc_vuong_1:{tamco:45,danh:45},nc_vuong_2:{sung:45,duc:40},nc_vuong_3:{sung:50,tamco:40,mat:3},nc_vuong_4:{tamco:35},
+ td_an_1:{danh:40,th:35},td_an_2:{tamco:45,sung:50},td_an_3:{tai:55,danh:35},td_an_4:{duc:35,sung:35},
+ td_ke_1:{mat:4,tamco:45},td_ke_2:{duc:45,danh:35},td_ke_3:{mat:4,maid:50},td_ke_4:{tamco:35,duc:30},
+ td_song_1:{danh:40,sung:45},td_song_2:{tamco:50,mat:4},td_song_3:{duc:35,maid:45},td_song_4:{duc:45,th:30},
+ td_tha_1:{duc:45,sung:40},td_tha_2:{tamco:45,mat:3},td_tha_3:{duc:40,th:30},td_tha_4:{danh:30,duc:40}});
+Object.assign(BAL.ge.fail,{
+ cn_chu_1:{danh:-10,sung:-4},cn_chu_2:{danh:-8},cn_chu_3:{sung:-8,danh:-4},cn_chu_4:{sung:-10,danh:-6},
+ cn_tinh_1:{rank:-1,sung:-10},cn_tinh_2:{sung:-10},cn_tinh_3:{rank:-1,danh:-8},cn_tinh_4:{danh:-6},
+ cn_ban_1:{danh:-8},cn_ban_2:{danh:-6,duc:-4},cn_ban_3:{sung:-6},cn_ban_4:{danh:-12,duc:-8},
+ cn_than_1:{danh:-10},cn_than_2:{rank:-1,danh:-10},cn_than_3:{sung:-6},cn_than_4:{danh:-8,sung:-6},
+ nc_gian_1:{rank:-1,danh:-12},nc_gian_2:{sung:-8},nc_gian_3:{sung:-6,danh:-4},nc_gian_4:{sung:-8},
+ nc_su_1:{danh:-10},nc_su_2:{danh:-8},nc_su_3:{sung:-8,danh:-6},nc_su_4:{sung:-4},
+ nc_vuong_1:{sung:-10,danh:-6},nc_vuong_2:{danh:-8},nc_vuong_3:{sung:-8,danh:-8},nc_vuong_4:{sung:-6},
+ td_an_1:{danh:-10},td_an_2:{danh:-8,duc:-4},td_an_3:{danh:-6},td_an_4:{sung:-6},
+ td_ke_1:{danh:-10,mat:-2},td_ke_2:{sung:-8},td_ke_3:{mat:-3},td_ke_4:{sung:-8,danh:-4},
+ td_song_1:{danh:-8},td_song_2:{rank:-1,danh:-12},td_song_3:{sung:-6},td_song_4:{rank:-1,sung:-8},
+ td_tha_1:{danh:-6},td_tha_2:{sung:-8,danh:-6},td_tha_3:{danh:-6},td_tha_4:{danh:-10}});
+Object.assign(BAL.ge.rw,{
+ cn_chu_1:{rank:1,danh:30,sung:18,rel:8},cn_chu_2:{danh:24,duc:12,rel:8},cn_chu_3:{danh:20,duc:12,bac:300,rel:6},cn_chu_4:{seat:"TM",danh:30,sung:15,rel:8},
+ cn_tinh_1:{danh:18,duc:10,bac:200,rel:6},cn_tinh_2:{rank:1,sung:30,danh:18,rel:6},cn_tinh_3:{danh:24,sung:20,duc:8,rel:8},cn_tinh_4:{danh:20,duc:15,rel:6},
+ cn_ban_1:{rank:1,danh:30,tai:10,rel:8},cn_ban_2:{danh:24,duc:12,rel:8},cn_ban_3:{danh:20,duc:12,bac:300,rel:6},cn_ban_4:{rank:1,danh:24,sung:20,rel:6},
+ cn_than_1:{danh:36,duc:10,rel:8},cn_than_2:{danh:36,sung:18,mat:2,rel:8},cn_than_3:{danh:20,duc:12,rel:6},cn_than_4:{danh:30,tamco:10,rel:8},
+ nc_gian_1:{danh:30,tamco:10,mat:2,rel:8},nc_gian_2:{rank:1,sung:24,danh:24,rel:8},nc_gian_3:{danh:20,duc:12,bac:300,rel:6},nc_gian_4:{danh:20,duc:10,rel:6},
+ nc_su_1:{danh:36,sung:18,rel:8},nc_su_2:{danh:30,tai:10,rel:8},nc_su_3:{danh:30,tamco:10,rel:8},nc_su_4:{danh:20,duc:12,rel:6},
+ nc_vuong_1:{danh:36,sung:18,rel:8},nc_vuong_2:{rank:1,danh:30,duc:8,rel:8},nc_vuong_3:{rank:1,danh:30,sung:18,rel:8},nc_vuong_4:{danh:20,duc:12,rel:6},
+ td_an_1:{danh:36,duc:10,rel:8},td_an_2:{rank:1,danh:30,tamco:10,rel:8},td_an_3:{danh:30,tai:10,rel:8},td_an_4:{danh:20,duc:12,rel:6},
+ td_ke_1:{rank:1,danh:30,mat:2,rel:8},td_ke_2:{danh:24,duc:12,rel:8},td_ke_3:{danh:24,mat:3,rel:8},td_ke_4:{danh:18,duc:10,rel:6},
+ td_song_1:{rank:1,danh:30,sung:15,rel:8},td_song_2:{danh:36,sung:18,rel:8},td_song_3:{danh:20,duc:12,bac:300,rel:6},td_song_4:{danh:24,duc:15,rel:8},
+ td_tha_1:{danh:24,duc:12,rel:8},td_tha_2:{rank:1,danh:30,tamco:10,rel:8},td_tha_3:{danh:20,duc:15,rel:6},td_tha_4:{danh:20,duc:12,rel:6}});
