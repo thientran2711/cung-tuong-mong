@@ -18,6 +18,8 @@ const bdAlive=id=>bdP(id,"alive")!==-1;/* dead = -1 (0 is the book's "unset") */
 const bdKill=id=>{bdP(id,"alive",-1);return ""};
 const bdMove=(id,w)=>{bdP(id,"w",w);return ""};
 const bdMeet=id=>{bdP(id,"met",1);return ""};
+/* the .4 rare rows of the bd premises (j97 R97L shape; j97 appends them; numbers BAL.arc.rare.<road>) */
+const BD97=[];
 RDQ.bdOlac=()=>bdAlive("olac");RDQ.bdLie=()=>bdAlive("lie");
 
 /* ---------- LEGACY: old bd premises play the nc chapters (moved from jrd_nc.js, unchanged) ---------- */
