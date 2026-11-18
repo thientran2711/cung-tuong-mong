@@ -59,8 +59,10 @@ function errTick(){if(errOn()||!S||S.dead)return;const now=errNow();let ch=false
 function errRead(t){try{t.read=1;if(errOn()&&Array.isArray(S.away)){const a=S.away.find(x=>x&&x.id===t.id);if(a)a.read=1}}catch(e){}}
 function errPanel(){const N=errNews(),W=errMine();const facts=[],sec=[];let subj=null;
  for(const t of N){const r=t.rep||{},p=errPerson(t.who);if(!subj&&p)subj=p;
-  facts.push(r.t||`${t.nm} đã về.`);(r.L||[]).forEach(l=>facts.push(l));
-  if((r.d||[]).length&&typeof kitChips==="function")sec.push({h:"Được · mất",html:kitChips(r.d)});errRead(t)}
+  facts.push(r.t||`${t.nm} đã về.`);
+  /* gain / loss chips right under the title line (kit chips, visible without scrolling); the lines below are only what she learned */
+  if((r.d||[]).length&&typeof kitChips==="function")facts.push({text:"Được · mất: "+kitChips(r.d),kind:"me"});
+  (r.L||[]).forEach(l=>facts.push(l));errRead(t)}
  for(const t of W){const p=errPerson(t.who);if(!subj&&p)subj=p;facts.push(`${t.nm} đang ${t.lbl||"đi việc"} · về ${errWhen(t.due)}.`)}
  if(!facts.length)facts.push("Không có ai đang đi việc.");
  const opts=[];try{if(errOn()&&PTIME.waitOk&&PTIME.waitOk()){const K=PTIME.next();opts.push({n:"Đợi tin",x:`ngồi chờ đến ${errWhen(K)}, khi người được sai trở về`,fx:{},go:()=>{setTimeout(()=>PTIME.wait(),0)}})}}catch(e){}
@@ -79,7 +81,7 @@ function errRun(fn,ctx,args,spec){
  const t=errAdd(sv,{k:spec.k},[],[]);
  /* the act finishes its own log lines and result card AFTER runAct returns (doAct): read them at the end of this tick = this act's report, nothing else can run in between */
  setTimeout(()=>{try{const n=Math.max(0,Math.min((S.logs||[]).length,(S.logSeq||0)-l0));
-  const L=(S.logs||[]).slice(0,n).map(x=>typeof plain==="function"?plain(x):String(x).replace(/<[^>]*>/g,"")).map(x=>x.replace(/^T\d+\/\d+\s+\S+\s+tuần\s*/,"").replace(/\s*\(sai [^)]*đi\)\s*/,' ').replace(/\s+—\s+/g,' · ').trim()).filter(Boolean).reverse();
+  const L=(S.logs||[]).slice(0,n).map(x=>String(x).split(/ — (?=<span class="[gr]">)/)[0]).map(x=>typeof plain==="function"?plain(x):String(x).replace(/<[^>]*>/g,"")).map(x=>x.replace(/^T\d+\/\d+\s+\S+\s+tuần\s*/,"").replace(/\s*\(sai [^)]*đi\)\s*/,' ').replace(/\s+—\s+/g,' · ').trim()).filter(Boolean).reverse();
   const dl=[];if(b0)for(const [k,nm] of RKEYS){const x=(S[k]||0)-(b0[k]||0);if(x)dl.push([nm,x])}
   if(t.rep){if(L.length)t.rep.L=L;t.rep.d=dl}}catch(e){console.error(e)}},0);
  errLedger();try{errSync()}catch(e){console.error(e)}return r}
