@@ -1,7 +1,7 @@
 # art-matrix — W33 planner report (Foreman C ROOT-17, MAIN s43 order 18/11 03:51Z)
 
 PRIORITY #1 CHECK ('art-matrix'): OD 0 earlier matrix (OD ~03:50Z 18/11 = the order itself; OD:L1203 FP faces "from the 84" overwritten by 18/11 "công chúa phiên bang vẽ riêng") | ledger 0 | claims 1 (MAIN s43 order, never started; t9/t10 tiers claim session_011xDdVShLvZ7X2KBzWPp6Aj stale; FP art #5 session_011xDdVQLLoooSkPhJraizSu samples only) | main: assets.json (live CDN list, 29 540 files) + dev/art/ART_COMPLETENESS.md (stale) | review/* 0 | archive 0.
-NO painting done. Sources: game code origin/main a95e8d4 (dev/build/j*.js, BAL jbal.js/jbal2.js), assets.json on the same commit, FIGURE_GATE.md, FOREMAN_C_STATUS.md. Owner rulings applied: no ma ma art (ma ma = older cung nữ); men prompt-only (no proportion gate); c01/c05/c12 a18 consort sets approved.
+NO painting done. Sources: game code origin/main a95e8d4 (dev/build/j*.js, BAL jbal.js/jbal2.js), assets.json on the same commit, FIGURE_GATE.md, FOREMAN_C_STATUS.md. Owner rulings applied: no ma ma art (ma ma = older cung nữ); men prompt-only (no proportion gate); c01/c05/c12 a18 rank-ladder sets approved.
 Age bands: a18 18–25 · a26 26–35 · a36 36–50 · a51 51+ (BAL.ageBand [26,36,51], jbal.js:294).
 
 ## 1. TOTALS (images to paint)
@@ -12,7 +12,7 @@ Plan A = strict prune (only combos the code can NEVER reach are removed). Plan B
 
 | group | faces | images per face A / B | FULL repaint A | FULL repaint B | missing today (never painted) |
 |---|---|---|---|---|---|
-| Women (32 consort + 52 cung nữ ids) | 84 | 97 / 86 | 8 148 | 7 224 | 671 (B 587): Thái hậu + Nữ đế tiers only |
+| Women (90 nhân vật nữ pool: 84 painted, ids c01–c32 + m01–m52) | 84 | 97 / 86 | 8 148 | 7 224 | 671 (B 587): Thái hậu + Nữ đế tiers only |
 | Foreign princesses (Nam Chiếu 3 + Bắc Địch 3) | 6 | 77 / 70 | 462 | 420 | 462 / 420 (nothing live; a18 samples on review only) |
 | Men (owner list of 72 faces) | 72 | per role, §4 | 654 | 654 | ≈ 300 (new faces + robes, §4) |
 | **TOTAL** | 162 | | **9 264** | **8 298** | **≈ 1 430 (B ≈ 1 310)** |
@@ -20,9 +20,9 @@ Plan A = strict prune (only combos the code can NEVER reach are removed). Plan B
 
 Credits at 120 cr/image: full repaint A ≈ **1.11 M cr**, B ≈ **1.00 M cr**; missing-only ≈ **172 k cr** (B ≈ 157 k). At the measured ~190 cr/image: A ≈ 1.76 M, B ≈ 1.58 M, missing-only ≈ 0.27 M.
 
-KEY FINDING: today's CDN already has EVERY woman tier × all 4 bands for all 84 faces (t1–t8, tm0–tm4, ty1–ty8, lãnh cung, kc; ngheo a18) — see §3. So the only true art holes for women are Thái hậu + Nữ đế tiers (and foreign princesses as a whole). A full repaint is ~5–6× the missing-only cost. Recommendation for MAIN/owner: (1) paint the missing tiers + FP + new men faces first; (2) run the free gate measure (dev/art/figure-gate/overlay_m09.py, no credits) over the live women sets and repaint only the figures that FAIL the gate, person by person, instead of a blind full repaint.
+KEY FINDING: today's CDN already has EVERY woman tier × all 4 bands for all 84 painted women (t1–t8, tm0–tm4, ty1–ty8, lãnh cung, kc; ngheo a18) — see §3. So the only true art holes for women are Thái hậu + Nữ đế tiers (and foreign princesses as a whole). A full repaint is ~5–6× the missing-only cost. Recommendation for MAIN/owner: (1) paint the missing tiers + FP + new men faces first; (2) run the free gate measure (dev/art/figure-gate/overlay_m09.py, no credits) over the live women sets and repaint only the figures that FAIL the gate, person by person, instead of a blind full repaint.
 
-## 2. WOMEN — tier × age matrix per face (84 faces) with PRUNE
+## 2. WOMEN — tier × age matrix per face (84 painted women) with PRUNE
 
 Tiers per face (owner list): pre-entry kc (thiếu nữ thường) + ngheo (con nhà nghèo); cung nữ ranks tm0 Tân Giả khố / tm1 Cung nữ / tm2 Đại cung nữ / tm3 Chưởng sự cô cô / tm4 Nữ quan (=ma ma dress, j88.js:43-45); consort t1 Đáp ứng … t8 Hoàng hậu; Thái hậu; Nữ đế; trung y ty1–ty8 (per rank); lãnh cung (ONE outfit, not per rank, j66.js:7-8).
 

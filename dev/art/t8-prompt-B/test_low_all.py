@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Self-test of build.py --low for all 32 consorts: python3 test_low_all.py  (exit 0 = green)."""
+"""Self-test of build.py --low for all faces c01–c32: python3 test_low_all.py  (exit 0 = green)."""
 import importlib.util, os, re, sys
 H=os.path.dirname(os.path.abspath(__file__))
 spec=importlib.util.spec_from_file_location("b",os.path.join(H,"build.py")); b=importlib.util.module_from_spec(spec); sys.argv=["x"]; spec.loader.exec_module(b)
@@ -40,4 +40,4 @@ for i in range(1,33):
         if not os.path.exists(f): err.append(f"golden missing {f}"); continue
         if open(f,encoding="utf-8").read()!=b.build_low(c,t,"v0"): err.append(f"golden_low differs: t{t}_v0_{c}")
 if err: print("\n".join(err[:60])); print(f"FAIL {len(err)} problems / {n} builds"); sys.exit(1)
-print(f"OK {n} builds (32 consorts x t1..t6 x v0/v1/v2 x 4 ages), goldens c01..c32 match"); 
+print(f"OK {n} builds (faces c01..c32 x t1..t6 x v0/v1/v2 x 4 ages), goldens c01..c32 match"); 

@@ -471,7 +471,7 @@ shown even for a stranger (stage 0 "Người lạ"); every other tile reads "ch�
 `kitPicker({id, title, items:[{k, face, label}], cur, filters:[[key,label]], filter, rows:2, note, onPick(k), onFilter(key)})`: small rectangular
 kit frames (no tassels), whole rows only in pages (‹ ›, "trang 2/4 · 32 dung mạo"; no inner scroll, no half row), selection = gold ring +
 ✓ badge on a pale-gold tile (`.ksel`), radio semantics, arrow keys + Enter/Space. Filter tabs = sub-tab look. j86 (face pick on the identity
-card) uses it with `facePool(filter)` (84 faces, filters Phi tần / Cung nữ) when present, else the 32 consort faces; the standing figure follows.
+card) uses it with `facePool(filter)` (the 84 painted women of «90 nhân vật nữ») when present, else the first painted set c01–c32; the standing figure follows.
 
 ## 24. VEIL OVERLAY (kit 2, for j70 scars)
 `scarOf(p).veil` → the veil is drawn over the face in every tall portrait (`.kin > img.kveil`, over the portrait image box), every small frame

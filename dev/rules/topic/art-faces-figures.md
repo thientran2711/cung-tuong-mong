@@ -36,7 +36,7 @@ Format: [source:Lnn] = line in the source file (OD = dev/OWNER_DECISIONS.md on t
 [HANDOVER.md:L92] - Huadian (forehead ornament): consorts only (incl. maids promoted to consort), never maids/servants/cold palace; size like c03 t1 (small, visible); 8 DISTINCT tiers (t7 Hoàng quý phi, t8 Hoàng hậu clearly grander via material/detail, never larger). No facial moles on anyone.
 [HANDOVER.md:L93] - Poses: calm standing (no flying sleeves/sashes, no swirling hems) for ALL figure art incl. Part C.
 ### OD:L7 2026-11-14
-[OD:L8] - Faces: pool = 84 women (32 consorts + 52 maids). Part C = 52 maids in consort tiers t1–t8 + cold. NPC consorts only draw a maid face once that face has consort-tier art (F88_NEED_C).
+[OD:L8] - Faces: ONE pool «90 nhân vật nữ» = 84 painted women (one face each, the player included, each with the FULL rank ladder of pictures: thiếu nữ ngoài cung → cung nữ → every consort rank → mama / tổng quản / Thái hậu) + 6 princesses (3 Nam Chiêu, 3 Bắc Địch) painted separately. Any woman placed in the game (player or NPC) draws from this pool: drawn face + her age + her current rank = the picture shown (internal ids c01–c32 / m01–m52 stay; F88_NEED_C gates a face until its rank-ladder art exists).
 [OD:L10] - No facial moles on anyone. Removal combined with adding huadian in one edit pass.
 [OD:L11] - Poses: calm standing, may turn at an angle, NO flying sleeves/sashes/hems; HANDS varied with props, different per age.
 [OD:L13] - Disfigurement (hủy dung): claw marks ON the face, 1/2/3 strokes by severity (approved); visible when the player knows.
