@@ -1226,4 +1226,16 @@ Object.assign(BAL.ag.why,{
  loTake:{rivW:1,greed:40,timid:25},   /* jlost: who takes an item — rival s = danger × scheme weight × rivW; servant s = netQ(greed)×greed, netQ(timid)×timid (careless) */
  loTry:{want:30,prDiv:20,clear:35,wear:25,cct:20,cctBac:40,book:30,bookBac:20,ask:30,keep:30,frMul:5}  /* jlost: owner looks for it (want + price/prDiv), suspect clears her name (clear), holder wears it (wear + malice/2); her way: cct/book (when bạc ≥ …Bac) or ask (+liking); keep vs plant (keep vs her worst grudge); friend who saw it tells: recog.fr × frMul */
 });
+// G2a (worker a adds its Object.assign lines below this line)
+//
+//
+// G2b (worker b adds its Object.assign lines below this line)
+//
+//
+// G2c (worker c adds its Object.assign lines below this line)
+//
+//
+// G2d (worker d adds its Object.assign lines below this line)
+//
+//
 // end G2 kinds
