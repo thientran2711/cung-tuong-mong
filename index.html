@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"0f542e1b+","t":"2026-11-18T06:20Z","c":"mg-skip-all r2: one quick-button look everywhere (kquick css, never an option card), playArt default fix, KIT 13.6 + MINIGAMES, page test m…","b":"16074d5b54ae","h":[{"s":"8c210d6b+","t":"2026-11-18T06:21Z","c":"act-pic-match: EVENTS.json + FIGURES-kids.json rebuilt (same 17/11 02:41Z incident), cdn_sync refuses bulk overwrite of top-level manifests…"},{"s":"b7ea2748+","t":"2026-11-18T06:12Z","c":"kit-set-lines: display-room test pins rank so the real-data pair is never over rank"},{"s":"22891730+","t":"2026-11-18T06:08Z","c":"k61StageDesc: restore the existing k61Desc untouched (rename only my new helper)"},{"s":"8f5ea906+","t":"2026-11-18T06:11Z","c":"face-reveal-anim: kitReveal (KIT 79) — the real face appears in place out of the grey (frame, avatar, room-stage figure, event figure); Gọn…"},{"s":"04bb2793+","t":"2026-11-18T05:52Z","c":"hud-mood-bar: owner picked layout 1 (full row); switch and slim layout removed; KIT 49.4"},{"s":"c1104d92+","t":"2026-11-18T05:41Z","c":"face-zoom-aspect test: SEED / FORCE options for same-character before/after shots"},{"s":"16b4dad8+","t":"2026-11-18T05:32Z","c":"cloth-bake-static: cloth layer on every static figure path on a cold cache (wait layer + patch on bake done); test + report"},{"s":"231cd3b3+","t":"2026-11-18T03:27Z","c":"review display-set-bonus: VANPHONG rows (Đa Bảo Các + set wording); cap line drops 'điểm'; j8 'Điểm trang lộng lẫy' night quality reads wor…"},{"s":"bd8547f2+","t":"2026-11-18T03:28Z","c":"men-forbidden r6: old saves drop officials / festival princes standing in the hậu cung on load (menLoadFix, same ONE rule)"},{"s":"c743265c+","t":"2026-11-18T03:18Z","c":"review life-preload r6: title prefetch chained on undefined (lWant returns its promise); gate cap really 25 s (no re-run after cap / Vào cu…"}]};
+window.CTM_BI={"s":"8af2fc24+","t":"2026-11-18T06:31Z","c":"mg-skip-all r2: one quick-button look everywhere (kquick css, never an option card), playArt default fix, KIT 13.6 + MINIGAMES, page test m…","b":"45275ce81c45","h":[{"s":"c9ada2a3+","t":"2026-11-18T06:14Z","c":"Fix S.lyF: recognise the fallen Ly person by lyF===1 (S carries the object), not truthiness; her own figure keeps her rank tier. + dev/test…"},{"s":"d959a9e0+","t":"2026-11-18T06:28Z","c":"buoi-banner: owner pick BTR_OP = 0.85 on the 73a7d3f layout (title overlaps the band, flush at the stage top); ladder hook removed"},{"s":"8c210d6b+","t":"2026-11-18T06:21Z","c":"act-pic-match: EVENTS.json + FIGURES-kids.json rebuilt (same 17/11 02:41Z incident), cdn_sync refuses bulk overwrite of top-level manifests…"},{"s":"b7ea2748+","t":"2026-11-18T06:12Z","c":"kit-set-lines: display-room test pins rank so the real-data pair is never over rank"},{"s":"22891730+","t":"2026-11-18T06:08Z","c":"k61StageDesc: restore the existing k61Desc untouched (rename only my new helper)"},{"s":"8f5ea906+","t":"2026-11-18T06:11Z","c":"face-reveal-anim: kitReveal (KIT 79) — the real face appears in place out of the grey (frame, avatar, room-stage figure, event figure); Gọn…"},{"s":"04bb2793+","t":"2026-11-18T05:52Z","c":"hud-mood-bar: owner picked layout 1 (full row); switch and slim layout removed; KIT 49.4"},{"s":"c1104d92+","t":"2026-11-18T05:41Z","c":"face-zoom-aspect test: SEED / FORCE options for same-character before/after shots"},{"s":"16b4dad8+","t":"2026-11-18T05:32Z","c":"cloth-bake-static: cloth layer on every static figure path on a cold cache (wait layer + patch on bake done); test + report"},{"s":"231cd3b3+","t":"2026-11-18T03:27Z","c":"review display-set-bonus: VANPHONG rows (Đa Bảo Các + set wording); cap line drops 'điểm'; j8 'Điểm trang lộng lẫy' night quality reads wor…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -29572,9 +29572,9 @@ function lyEntry(info){const y=lyAlive();return y?{kind:"fallen",lid:"c:ly",name
 function lcPeople(info){const n=(BAL.mort&&BAL.mort.ly&&BAL.mort.ly.lcShow)||3;const L=rivals.filter(v=>v.alive&&v.out).slice(0,n).map(v=>({kind:"fallen",ref:v,name:v.name,ini:v.name.split(" ").pop()[0],col:"#6a7a8a",info}));
  const q=lyEntry("Phế phi");if(q)L.push(q);return L}
 (function(){const w0=figWho;figWho=function(p){try{if(p&&p.kind==="fallen"&&!p.ref){const o=lyFallen();if(lyArt()&&o.fid&&!/^fallen:/.test(o.fid)){delete o.fid}return o}const n=npcFixOf(p);if(n)return n}catch(e){}return w0.apply(this,arguments)};
- const r0=figRoles;figRoles=function(who){if(who&&who.lyF)return lyArt()?["fallen"]:["consort"];if(who&&who.npcFix)return[NPCFIX[who.npcFix].role];return r0.apply(this,arguments)};
- const t0=figTierOf;figTierOf=function(who){if(who&&who.lyF)return -1;return t0.apply(this,arguments)};
- if(typeof f88Wear==="function"){const e0=f88Wear;f88Wear=function(who){if(who&&(who.lyF||who.npcFix))return true;return e0.apply(this,arguments)}}
+ const r0=figRoles;figRoles=function(who){if(who&&who.lyF===1)return lyArt()?["fallen"]:["consort"];if(who&&who.npcFix)return[NPCFIX[who.npcFix].role];return r0.apply(this,arguments)};
+ const t0=figTierOf;figTierOf=function(who){if(who&&who.lyF===1)return -1;return t0.apply(this,arguments)};
+ if(typeof f88Wear==="function"){const e0=f88Wear;f88Wear=function(who){if(who&&(who.lyF===1||who.npcFix))return true;return e0.apply(this,arguments)}}
  if(typeof pFaceOf==="function"){const f0=pFaceOf;pFaceOf=function(p){const r=f0.apply(this,arguments);try{if(p&&((p.kind==="fallen"&&!p.ref)||npcFixOf(p))){const src=figFor(p,"por");if(src)return Object.assign({},r,{src,hue:0})}}catch(e){}return r}}})();
 /* ================= j89 TRANH SỰ KIỆN (data only: no CSS, no HTML, no UI) =================
    img/EVENTS.json = {default, categories:{cat:{title,files:[...]}}, events:{eventId:cat}}; art = img/ev-<cat>[-n].webp, 3:4, no faces.
@@ -31113,7 +31113,7 @@ function grpOf(p,K){return p===S?"me":p===S.emp?"emp":K.has(p)?"kid":"adult"}
 function nm(p){return p===S.emp?"Hoàng thượng":p===S.thO?"Thái hậu":p.name||"người hầu"}
 /* give p a lifespan once */
 function assign(p,K,oldSave){if(!p||typeof p!=="object"||p.tho>0||p.nb)return;const a=ageOf(p);if(!(a>=0))return;const g=grpOf(p,K);
- let fl=g==="me"?M.life.floorMe:g==="emp"?M.life.floorEmp:p.lyF&&M.ly?M.ly.floor:0;if(oldSave&&(g==="me"||g==="emp"))fl=Math.max(fl,M.oldFloor);
+ let fl=g==="me"?M.life.floorMe:g==="emp"?M.life.floorEmp:p.lyF===1&&M.ly?M.ly.floor:0;if(oldSave&&(g==="me"||g==="emp"))fl=Math.max(fl,M.oldFloor);
  p.tho=mortRoll(g,a,fl);p.thoM=1+R(12);if((p.tho-a)*12+(p.thoM-(S.month||1))<M.life.minMo)p.tho=a+1;p.thoO=Math.random()*100<M.sudden?0:M.omen[0]+R(M.omen[1]-M.omen[0]+1);
  if(p===S&&M.life.show){const w=p.tho<BAL.cut.tho[0]?"yểu mệnh":p.tho<BAL.cut.tho[1]?"trung thọ":p.tho<BAL.cut.tho[2]?"thượng thọ":"hạc thọ";
   log(`Thầy tướng xem tay ngươi, phán: số ${w}${M.life.show>=2?`, thọ chừng ${p.tho} tuổi`:""}.`)}}
@@ -31128,14 +31128,14 @@ const left=p=>(p.tho-ageOf(p))*12+(p.thoM-S.month);
 const OFFICIAL={tq:"Tổng quản thái giám",ksp:"Thái giám Kính sự phòng",ped:"Thái giám Nội vụ phủ",ty:"Thái y"},HEIRN=["Vương","Trần","Phùng","Tô","Cao","Lưu","Hà","Đỗ"];
 /* a person reaches the end of the lifespan (or an accident): remove them the way the game already does for that kind of person */
 /* death ledger for audits / bots: S.mort.dl = [{g group, a age, c cause, y year}] (last 300) */
-function note(p,why,K){try{const g=p===S?"me":p===S.emp?"emp":p===S.thO?"th":p.lyF?"ly":K.has(p)?"kid":rivals.includes(p)?"consort":p===S.maid?"maid":(S.men||[]).includes(p)?"men":Object.values(S.court||{}).includes(p)?"court":"staff";
+function note(p,why,K){try{const g=p===S?"me":p===S.emp?"emp":p===S.thO?"th":p.lyF===1?"ly":K.has(p)?"kid":rivals.includes(p)?"consort":p===S.maid?"maid":(S.men||[]).includes(p)?"men":Object.values(S.court||{}).includes(p)?"court":"staff";
  const c=!why?"lifespan":/Thích khách|độc/.test(why)?"plot":/ngã|nghẹn|ngất|trượt|cảm hàn sau|trúng phong|chè hạt sen/.test(why)&&p.tho-ageOf(p)>0?"accident":"lifespan";
  (S.mort.dl=S.mort.dl||[]).push({g,a:ageOf(p),c,y:S.year});if(S.mort.dl.length>300)S.mort.dl.shift()}catch(e){}}
 function kill(p,why,K){let ev="";note(p,why,K);
  if(p===S){S.mort.cause=why;die(why);return ""}
  /* D4 (owner OD:L641–643): every NPC can die; the dead person's portrait, figure and name are retired (npcRetire, jnpcd) so a replacement is a NEW person */
  if(p!==S.emp&&p!==S.thO&&!K.has(p)&&typeof npcRetire==="function")npcRetire(p);
- if(p.lyF)return typeof lyDie==="function"?lyDie(p,why):(p.dead=1,"");
+ if(p.lyF===1)return typeof lyDie==="function"?lyDie(p,why):(p.dead=1,"");
  if(p===S.emp){S.mort.empDue=why||(p.thoO?"Ngài lâm trọng bệnh đã lâu, thuốc thang vô hiệu":"Ngài trúng phong đột ngột giữa đêm");return ""}
  if(p===S.thO){if(!S.thDead){S.thDead=true;S.th=0;S.thIll=null;ev+=`<b>Thái hậu băng hà, thọ ${S.thAge} tuổi.</b> ${why?why+". ":""}`}return ev}
  if(K.has(p)){const mine=(S.kids||[]).includes(p);return kidDie(p,why||p.nbWhy||(p.nb?"yểu mệnh khi chưa đầy tháng":p.age<BAL.mortx.youngAge?pick(["mất vì đậu mùa","mất vì sốt cao","nhiễm dịch mà mất"]):"lâm bệnh mà mất"),mine)}
@@ -56096,6 +56096,8 @@ const BTR_POS=[{s:{t:.12,v:1},m:{t:1.1,v:0}},{s:{t:.5,v:1},m:{t:1.1,v:0}},{s:{t:
 const BTR_MOONBAND={trungthu:1,nguyentieu:1,vulan:1,giaothua:1},BTR_PHASE=["crescent","full","halfL"];
 function btrMoon(b,V,tuan){if(b!==3)return{ph:"",none:0};if(V.fest&&BTR_MOONBAND[V.fest.k])return{ph:"",none:1};const t=Math.max(0,Math.min(2,tuan|0));return{ph:BTR_PHASE[t],none:0}}
 let btrPrev=null,btrEl=null,btrEnd=null;
+/* owner 18/11 ~06:20Z: the game UI stays visible under the animation; NO opaque full-screen backdrop (tint / ink wash / vignette removed); the whole animation lies on the screen at BTR_OP = 0.85 (owner pick 18/11 from the 70 / 80 / 85 ladder) */
+const BTR_OP=.85;
 /* the 4 painted pieces (~130 KB, SW-cached after the first fetch) are warmed once the game has been running a while, so the FIRST buổi change already shows them (on demand = not at boot) */
 const BTR_KEEP=[];function btrWarm(){try{if(typeof S==="undefined"||!S){setTimeout(btrWarm,7000);return}if(btrStill())return;["wash","mist","hills","orb"].forEach(n=>{const i=new Image();BTR_KEEP.push(i);i.src=BTR_BASE+"buoi-"+n+".webp"})}catch(e){}}
 setTimeout(btrWarm,9000);
@@ -56115,19 +56117,18 @@ function buoiShift(){
   const mix=VF?34:22;d.style.cssText=`--bt-tint:color-mix(in srgb,${VT} ${mix}%,${C.tint});--bt-wash:color-mix(in srgb,#2a1c10 ${b===3?0:16}%,color-mix(in srgb,${VT} ${Math.round(mix*.6)}%,${C.wash}));--bt-ink:${C.ink};--bt-s0:${C.sky[0]};--bt-s1:${C.sky[1]}`;
   const artKey=V.fest&&BTR_ART[V.fest.k]?V.fest.k:BTR_ART[V.sea]?V.sea:"";
   const MN=btrMoon(b,V,(window.__btrVar&&window.__btrVar.tuan!=null)?window.__btrVar.tuan:(S.tuan||0));
-  const still=btrStill(),dawn=b===0&&prev===3,haze=!dawn&&VS.haze&&!VF,dur=still?260:kitPace(dawn?2000:1700);
-  d.innerHTML=still?`<i class="btr-tint"></i>`:
-   `<i class="btr-tint"></i><i class="btr-wash"></i>${dawn||haze?`<i class="btr-mist${haze?" "+VS.haze:""}"></i>`:""}${dawn?`<i class="btr-light"></i>`:""}<i class="btr-vig"></i>`+
+  const still=btrStill(),dawn=b===0&&prev===3,haze=!dawn&&VS.haze&&!VF,dur=still?700:kitPace(dawn?2000:1700);
+  d.innerHTML=still?`<div class="btr-stage"><div class="btr-title"><i class="btr-plate"></i><b>${BUOI[b]}</b></div></div>`:
+   `${dawn||haze?`<i class="btr-mist${haze?" "+VS.haze:""}"></i>`:""}${dawn?`<i class="btr-light"></i>`:""}`+
    `<div class="btr-stage"><div class="btr-sky"><i class="btr-skybg"></i>${artKey?`<i class="btr-skin" style="background-image:url(${BTR_BASE}buoi-band-${artKey}.webp)"></i>`:""}<i class="btr-hills"></i><i class="btr-orb btr-sun"></i><i class="btr-orb btr-moon${MN.none?" btr-nomoon":MN.ph?" btr-mph":""}"${MN.ph?` style="background-image:url(${BTR_BASE}buoi-moon-${MN.ph}.webp)"`:""}></i></div>`+
    `<div class="btr-title"><i class="btr-plate"></i>${BTR_ICON[b]?`<i class="btr-ico" style="background-image:url(${BTR_BASE}buoi-ico-${b}.webp)"></i>`:""}<b>${BUOI[b]}</b>${typeof kitSeal==="function"?kitSeal({cls:"btr-seal"}):""}${V.fest&&V.fest.name?`<small class="btr-sub">${V.fest.name}</small>`:""}</div></div>`;
-  document.body.appendChild(d);btrEl=d;
+  try{const sg=document.querySelector(".stage");d.style.setProperty("--btr-top",(sg?Math.max(0,Math.round(sg.getBoundingClientRect().top)-2):0)+"px")}catch(e){}
+  d.style.opacity=BTR_OP;document.body.appendChild(d);btrEl=d;
   let done=false;const end=ms=>{if(done)return;done=true;btrEnd=null;removeEventListener("pointerdown",skip,true);d.style.transition=`opacity ${ms||250}ms`;d.style.opacity="0";setTimeout(()=>{d.remove();if(btrEl===d)btrEl=null},(ms||250)+30)};
   const skip=()=>end(140);btrEnd=()=>end(0);
   if(!still){
    const A=d.animate?1:0;if(A){
-    const dim=dur;d.querySelector(".btr-tint").animate([{opacity:0},{opacity:.96,offset:.1},{opacity:.9,offset:.5},{opacity:0}],{duration:dim,easing:"ease-in-out",fill:"forwards"});
-    d.querySelector(".btr-wash").animate([{opacity:0,transform:"translateX(-6%) scale(1.1)"},{opacity:.82,offset:.16},{opacity:.62,offset:.5},{opacity:0,transform:"translateX(7%) scale(1.2)"}],{duration:dim,easing:"ease-in-out",fill:"forwards"});
-    d.querySelector(".btr-vig").animate([{opacity:0},{opacity:.85,offset:.2},{opacity:.7,offset:.55},{opacity:0}],{duration:dim,fill:"forwards"});
+    const dim=dur;
     const mi=d.querySelector(".btr-mist");if(mi)mi.animate([{opacity:0,transform:"translateX(-4%)"},{opacity:.9,offset:.35},{opacity:0,transform:"translateX(5%)"}],{duration:dim,easing:"ease-in-out",fill:"forwards"});
     const li=d.querySelector(".btr-light");if(li)li.animate([{opacity:0,transform:"translateY(30%) scale(.7)"},{opacity:.95,offset:.5},{opacity:0,transform:"translateY(-6%) scale(1.15)"}],{duration:dim,easing:"ease-out",fill:"forwards"});
     const sk=d.querySelector(".btr-sky");sk.animate([{opacity:0,transform:"translateY(-16px)"},{opacity:1,offset:.16,transform:"none"},{opacity:1,offset:.82},{opacity:0}],{duration:dim,fill:"forwards"});
@@ -56140,32 +56141,29 @@ function buoiShift(){
     if(dawn&&typeof kitFxBurst==="function")setTimeout(()=>{try{kitFxBurst("glowburst",{x:innerWidth*.5,y:innerHeight*.62},1,{scale:1.8,a0:.8})}catch(e){}},dim*.3);
    }
    addEventListener("pointerdown",skip,true);
-  }else if(d.animate)d.querySelector(".btr-tint").animate([{opacity:.7},{opacity:0}],{duration:dur,fill:"forwards"});
+  }else if(d.animate)d.querySelector(".btr-stage").animate([{opacity:0},{opacity:1,offset:.25},{opacity:1,offset:.7},{opacity:0}],{duration:dur,fill:"forwards"});
   setTimeout(()=>{if(!window.__btrHold)end(still?30:kitPace(260))},dur);
  }catch(e){console.error("buoiShift",e)}}
 (function(){const st=document.createElement("style");st.id="btr-css";st.textContent=`
 .btr{position:fixed;inset:0;z-index:36;pointer-events:none;overflow:hidden}
 .btr>*,.btr-sky>*,.btr-plate{position:absolute;pointer-events:none}.btr-title,.btr-stage{position:absolute}
-.btr-tint{inset:0;background:radial-gradient(ellipse 120% 100% at 50% 52%,color-mix(in srgb,var(--bt-tint) 78%,#fff),var(--bt-tint) 55%,color-mix(in srgb,var(--bt-tint) 82%,var(--bt-wash)));opacity:0}
-.btr-wash{inset:-14%;background:var(--bt-wash);-webkit-mask:url("${BTR_BASE}buoi-wash.webp") center/cover no-repeat;mask:url("${BTR_BASE}buoi-wash.webp") center/cover no-repeat;opacity:0;will-change:transform,opacity}
-.btr-vig{inset:0;background:radial-gradient(ellipse 90% 85% at 50% 50%,#0000 38%,color-mix(in srgb,var(--bt-wash) 78%,#0000) 100%);opacity:0}
 .btr-mist{left:-15%;right:-15%;top:22%;bottom:-8%;background:url("${BTR_BASE}buoi-mist.webp") center/100% 100% no-repeat;opacity:0;will-change:transform,opacity}
 .btr-mist.warm{filter:sepia(1) saturate(2.2) brightness(1.1)}.btr-mist.cold{filter:hue-rotate(170deg) brightness(1.15)}
 .btr-light{left:50%;top:50%;width:min(110vw,760px);aspect-ratio:2/1;margin-left:calc(min(110vw,760px)/-2);margin-top:6%;border-radius:50%;background:radial-gradient(ellipse,#fff3c8dd,#ffd88a66 45%,#ffd88a00 72%);opacity:0;mix-blend-mode:screen}
-.btr-stage{inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(14px,3.4vmin,34px);padding:0 16px}
+.btr-stage{inset:0;display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:0;padding:var(--btr-top,0px) 16px 0}
 .btr-stage>*{position:relative}
-.btr-sky{width:min(92vw,720px);height:clamp(128px,26vmin,220px);opacity:0;flex:none}
-.btr-skybg{inset:0;border-radius:64px 64px 18px 18px;background:linear-gradient(var(--bt-s0),var(--bt-s1));-webkit-mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000);mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000);box-shadow:0 0 0 1px #0001,0 8px 28px #0003}
+.btr-sky{width:min(92vw,720px);height:clamp(128px,26vmin,220px);opacity:0;flex:none;-webkit-mask:linear-gradient(180deg,#0000,#000 26%,#000 72%,#0000);mask:linear-gradient(180deg,#0000,#000 26%,#000 72%,#0000)}
+.btr-skybg{inset:0;border-radius:64px 64px 18px 18px;background:linear-gradient(var(--bt-s0),var(--bt-s1));-webkit-mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000);mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000)}
 .btr-skin{inset:0;background:center/cover no-repeat;-webkit-mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000);mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000)}
 .btr-hills{left:0;right:0;bottom:0;height:80%;background:url("${BTR_BASE}buoi-hills.webp") center bottom/100% 100% no-repeat;opacity:.9;-webkit-mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000);mask:linear-gradient(90deg,#0000,#000 9%,#000 91%,#0000)}
 .btr-orb{left:0;top:0;width:var(--orb,52px);height:var(--orb,52px);opacity:0;background:url("${BTR_BASE}buoi-orb.webp") no-repeat;background-size:200% 100%;will-change:transform,opacity}
 .btr-sun{background-position:0 0}.btr-moon{background-position:100% 0}.btr-moon.btr-mph{background-size:contain;background-position:center;filter:drop-shadow(0 0 2px rgba(90,52,20,.85)) drop-shadow(0 0 7px rgba(60,40,90,.5))}.btr-moon.btr-nomoon{display:none}
-.btr-title{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;column-gap:14px;row-gap:2px;width:min(92vw,640px);min-height:clamp(112px,21vmin,170px);padding:10px 24px;box-sizing:border-box;flex:none}
+.btr-title{position:relative;margin-top:calc(clamp(128px,26vmin,220px) * -.6);display:flex;flex-wrap:wrap;align-items:center;justify-content:center;column-gap:14px;row-gap:2px;width:min(92vw,640px);min-height:clamp(112px,21vmin,170px);padding:10px 24px;box-sizing:border-box;flex:none}
 .btr-plate{inset:0;background:var(--bt-tint);-webkit-mask:url("${BTR_BASE}buoi-wash.webp") center/100% 100% no-repeat;mask:url("${BTR_BASE}buoi-wash.webp") center/100% 100% no-repeat;opacity:.96}
 .btr-title b{position:relative;font-family:var(--display);font-weight:700;font-size:clamp(2.1rem,8.5vmin,3.7rem);letter-spacing:.14em;color:var(--bt-ink);text-shadow:0 1px 0 #fff7,0 0 16px color-mix(in srgb,var(--bt-tint) 92%,#fff0);white-space:nowrap}
 .btr-ico{position:relative;width:clamp(48px,10vmin,80px);aspect-ratio:1;background:center/contain no-repeat;filter:drop-shadow(0 2px 4px #0003)}
 .btr-seal{position:relative;width:clamp(34px,6vmin,50px);height:clamp(34px,6vmin,50px);opacity:0}
-.btr-sub{position:relative;flex:1 0 100%;text-align:center;font-family:var(--display);font-size:clamp(.95rem,3vmin,1.25rem);letter-spacing:.22em;color:var(--bt-ink);opacity:.82}
+.btr-sub{position:relative;flex:1 0 100%;text-align:center;font-family:var(--display);font-weight:700;font-size:clamp(1.3rem,4.4vmin,1.9rem);letter-spacing:.16em;color:var(--bt-ink);opacity:1;text-shadow:0 0 10px color-mix(in srgb,var(--bt-tint) 92%,#fff0),0 0 3px color-mix(in srgb,var(--bt-tint) 80%,#fff0)}
 `;document.head.appendChild(st)})();
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§74",title:"buổi transition · buoiShift (qua buổi: nước mực toàn màn, vầng trời, chữ thư pháp; mùa + lễ)",
  html:()=>`<div class="kitpg-row">${[0,1,2,3].map(b=>`<button type="button" class="kbtn alt" onclick="(function(){const s=S.buoi;S.buoi=${b};buoiShift();S.buoi=s})()">${BUOI[b]}</button>`).join("")}</div>`+
@@ -68203,7 +68201,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="16074d5b54ae";window.CTM_BUILD=BUILD;
+const BUILD="45275ce81c45";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
