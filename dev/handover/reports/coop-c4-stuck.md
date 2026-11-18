@@ -48,3 +48,42 @@ Repro rate: before ≈ 6 % (2/36 thin-c L3, instrumented main). After: 0/10 thin
 - Conflict risk: coop-thin-f1 / life-preload-fu-r2 touch jcoopworld.js. My game diff is the reshowQ lines only (+3). The test edits are mechanical one-line appends; whoever lands second re-runs the patch (the scan regex is in this report, script /home/user/wt/c4-scr/patch_clear.py logic: append `||m.querySelector('.dlg .kit-x')` to each `#mr button` chain).
 - life-preload-fu r2's ask (B was blamed for this flake): confirmed NOT B. It is this harness bug, and it is on main too.
 - CLAIMS: the original row was pruned from CLAIMS.md by someone else, so it was re-added.
+
+## REVIEW r1 (opus reviewer session_01N1tNP4qzpqrMB5FZNZNqSm, for Foreman B) — PASS
+depth 1 · START_CTX ≈ 3 % of 1M (used_tokens reads 0; estimate) · finished ≈ 12 %.
+PRIORITY #1 CHECK ('reshowQ' / 'kit-x clear' / 'stuck dialog'): OD 0 | ledger 0 | main jcoopworld reshowQ (only guard) | review/* none other | claims: this review only. The worker's report has the line.
+
+Branches (both descend from origin/main a8a10c66):
+- **FULL review/coop-c4-stuck-r1 @ ca661db3** (ca661db3e2d45de4434b87366007db4babad9a02) — tests + jcoopworld reshowQ guard. Touches dev/build/jcoopworld.js (+ built index.html, sw.js) → waits for the MAIN freeze (C-AG LIVE).
+- **SPLIT review/coop-c4-stuck-r1-tests @ f60b4024** (f60b4024b4b4237872263021501e128601b72d87) — tests only (27 files under dev/test/, no game file, no built file). May land now. In it coop-c4-stuck S1 prints "reshowQ book guard not in this build, S1 not run" (S1 tests the guard); S2–S5 run. Once the guard lands, the full branch's test runs S1 again.
+
+### (1) Root cause — proved
+- jty tyWeek "Điềm báo" has one option {n:"Đã rõ",fx:{}}. j3 kitCancelIx drops it from the option list (KIT_CLOSE_W pure close), and jk4 kitCloseSync adds the kit ✕ only when kitModalCloser finds a real closer (= chooseM(cancelIx)). So "Đã rõ" is not a dead button: it IS the ✕ (kit rule, same for every pure-close card). Not a game bug; no kit change needed.
+- NEW S2b (both seats, Fold 686x880 / iPad 1180x820, + swap): a REAL Playwright pointer tap (hit-tested) on the ✕ closes the card. For this one check other layers are made click-through: the harness leaves the life-start Luân hồi roulette (kitRoulette step 0, never picked by the helpers), edict movies and panels on top; a player closes those first.
+- The old clear() pressed only #mr / .opts buttons → 'stuck' on a ✕-only card → pend true / sent -1 = the flake signature. Confirmed.
+
+### (2) No weakened test — old vs new
+| helper | before | after (r1) |
+|---|---|---|
+| clear() in 26 files (27 chains) | #mr button → .opts button → (book/✕ labels) → 'stuck' | same chain, then the dialog's kit ✕ **only if on screen** (r1 tightened the worker's `m.querySelector('.dlg .kit-x')` to `[...].find(x=>x.offsetParent!==null)`) → 'stuck'. The ✕ is last: it never skips a real choice. Hidden dialog path unchanged (returns '', the week cannot end → the test FAILS). |
+| coop-e2e press() | a click counted at once | counted only when it took (stricter) |
+| coop-lag CLEAR1 | already presses any visible dialog button (all.pop()) | unchanged |
+| solo tests | wipe Q directly | not affected |
+Shared helper instead of 26 copies: not cheap (each file's clear differs); one-line appends kept. Family scan after the main merge: every '#mr button' chain has the visible-✕ fallback (26/26).
+NEW negative checks S5 (both seats): (a) a queued card with the dialog truly hidden → clear() presses nothing, the card stays queued (showModal held so the room's own armed reshow cannot race it); (b) a ✕-only card whose ✕ is not on screen → clear() says 'stuck', never clicks it.
+
+### (3) reshowQ guard — no double show, no loop
+- Shows only when Q non-empty AND #modal hidden; showModal draws Q[0] only. Re-arms (400 ms) only while .kbk-bar is up with the same condition; the render hook arms only when !qT → one timer at a time. Solo: CW.on false → untouched.
+- Checked live L0 / L3 / L5, both seats, + swap (S1/S3 green every run).
+
+### (4) life-preload-fu r2 flake: same harness bug (as the worker says). Note for that reviewer.
+
+### Gates (live Worker)
+FULL branch (before the 2nd main merge, on 1b5ca1dc): coop-c4-stuck L3 ×10 all green (17/17, one 18/18) · L0 18/18 · L5 17/17 · L3 swap 17/17 · L5 swap 18/18 · coop-thin-c L3 ×10 16–17/16–17 · thin-c L5 16/16 · coop-e2e ×5 63/63 + COOP_SWAP 63/63 · p2 45/45 · night 105/105 · thin-e L5 32/32 + swap 32/32 · one-world seeds 1–10 PASS · one-core PASS · quickcheck PASS (228 s, old save ok, perf same as live).
+After merging main a8a10c66: c4 L3 ×3 + 2 green, L5 swap: one S5a race FAIL (16/17) → fixed (hold showModal) → L5 swap ×3 green, L0 17/17 · thin-c L3 ×3 16/16 · e2e 63/63 + swap 63/63 · thin-e L5 32/32 · p2 45/45 · night 105/105 · one-world 1–3 PASS · one-core PASS · quickcheck PASS (195 s, old save ok).
+SPLIT branch: c4 L3 ×3 13/13 · L0 13/13 · L5 swap ×2 13/13 · e2e ×2 63/63 + swap 63/63 · thin-c L3 ×5 16–17 · p2 45/45 · one-core PASS. (No built file changes → quickcheck not needed.)
+No shots taken for the verdict (no UI change); CDN review folder not used.
+
+Verdict: **PASS FULL review/coop-c4-stuck-r1 ca661db3** (waits for the freeze) · **PASS SPLIT review/coop-c4-stuck-r1-tests f60b4024** (may land now).
+Touched files FULL: dev/build/jcoopworld.js, index.html, sw.js, dev/test/{coop-ask-srvprobe,coop-b1,coop-b2b5,coop-bot,coop-c4-stuck,coop-chat,coop-cyc,coop-dbg-hostdeath,coop-e2e,coop-guest-maid,coop-looks-act,coop-looks,coop-night,coop-one-world-play,coop-p2,coop-pets,coop-play,coop-r2,coop-rejoin-stats,coop-rev2,coop-sleep,coop-timer-lag,coop-timer,coop-toil-look,oldroom-r1,show-why-coop,sw-update}.js. SPLIT: the same dev/test files only.
+Side note (not this task): in co-op the life-start Luân hồi roulette (#kroul) can stay on screen over a running world when nobody picks; harmless for a player (she taps it first) but worth knowing for later harness work.
