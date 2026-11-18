@@ -202,6 +202,12 @@ def hand(key,right):
     if key=="two": return "the item in both hands lowered before her at waist height, a slight turn of the body, head tilted gently toward the viewer"
     if key=="scroll": return f"the rolled scroll in one hand lowered at her side, the other hand lifting her sleeve slightly, body turned slightly three-quarters to the {d}"
     return f"the box in both hands at waist height before her, body turned slightly three-quarters to the {d}"
+# per-person headdress text (her OWN live a18 headdress motif, copied from the live fig-consort-cNN-t8-a18 image, scaled up to the rank). Only used with --head.
+HEAD={
+"c04-t8":"her OWN headdress design from her first reference, enlarged to imperial grandeur: one large gold phoenix with spread wings perched on top of a wide gold crown band set with small pink flowers, pearls and a single blue sapphire at the centre, gold blossom-branch sprigs curving out to both sides of the head with a large pink peony at each temple, and long gold-and-pearl strand dangles hanging from the sides",
+"c25-t8":"her OWN headdress design from her first reference, enlarged to imperial grandeur: three gold phoenixes with swept-back spread wings (one large central phoenix rising from the middle of a gold crown band, a smaller phoenix on each side facing outward) set with a single red ruby at the centre and small ruby flowers, a coral-pink peony at each temple, and long straight gold-and-pearl tassel dangles hanging from the sides",
+}
+
 def item_for(c):
     n=int(c[1:])
     if c in GOLDEN_ITEM: return GOLDEN_ITEM[c]
@@ -672,4 +678,12 @@ if __name__=="__main__":
     # a51 DARK (Foreman C ROOT-30, owner 23:05Z "màu tối giống như là ma hoặc là Thái hậu"): W90 found the shared "fresh, clear and luminous" clause kept c13 a51 bright; a51 only swaps it, every other age byte-identical
     # OWNER 18/11 ~21:06Z real (verbatim): "51 tuổi và 65 tuổi là phải dùng của những cái màu của những người già xài á, không có dùng cái màu tươi rói nha ... mặc dù già nhưng không có nghĩa là màu đen hay màu nâu ... Mà nó là một cái màu nó sang, mà cái kiểu mình nhìn vô mình thấy nó là một cái người đã lớn tuổi, trầm tĩnh lớn tuổi" → a51 AND a65 use the elder clause (a51 text = the approved a51d2 sample)
     if AGE in ("a51","a65"): _o=_o.replace("all colours fresh, clear and luminous, never dusty or greyed; ","all colours in the DEEPER, DARKER mature shades described above (rich and dignified, never bright, never pastel, never dusty or washed-out); the colour names and hex values below are her young colours, darken them as described above; "+("elegant, luxurious elder colours that read as a calm, dignified older lady, never vivid or fresh bright colours, yet never black or brown; " if AGE=="a65" else "")).replace("one fresh accent","one accent").replace("a fresh ","a ")
+    # --head (ROOT-31 order, owner 18/11 ~21:36Z "ai cũng có trâm cài y chang nhau"): per-person headdress = the motif/shape of HER OWN live a18 hairpins, scaled up for the rank. Off by default (goldens unchanged).
+    if "--head" in sys.argv:
+        _k=a[0]+("-t7" if "--t7" in sys.argv else "-t8")
+        if _k in HEAD:
+            _old8="a FULL tall imperial nine-phoenix crown, clearly taller and wider than a noble consort's crown, with a large central gold phoenix holding a pearl string in its beak, jewelled wings spreading wide on both sides, kingfisher-blue inlay, rubies and pearls, and a few clean pearl tassels at the sides;"
+            _old7="(one large gold phoenix with spreading wings, grander and taller than a noble consort's headdress, but clearly simpler than the Empress's nine-phoenix crown) with pearl strands, kingfisher-blue inlay and a few gold tassels."
+            _n=_o.count(_old8)+_o.count(_old7); assert _n==1,("head slot not found",_n)
+            _o=_o.replace(_old8,"a FULL tall imperial crown, clearly taller and wider than a noble consort's crown, "+HEAD[_k]+";").replace(_old7,HEAD[_k]+".")
     print(_o,end="")
