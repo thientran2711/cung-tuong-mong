@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"6b17fe4f","t":"2026-11-18T01:39Z","c":"coop-thin-e #3: her stored buổi never ahead of the host's (week base carries her tối: clamp at store build; guest adopts only up to the vie…","b":"3bf0026c26d2","h":[{"s":"eb3675a6+","t":"2026-11-17T22:59Z","c":"review coop-thin-c r1 #2: merge origin/main b048e495 (kit-display-room r2, jdisp/jshelf only; generated files from main + site rebuilt)"},{"s":"4eac30bc+","t":"2026-11-17T22:57Z","c":"review coop-thin-c r1 #2: her NPC pack resend (F1) listens on any guest seat, not only while the C switch is on: a level drop / build hold …"},{"s":"c7375c0c+","t":"2026-11-17T22:33Z","c":"batch s38a: dudo-blank-r1 2270c4c5 merged onto main 99f3978d; site rebuilt"},{"s":"99f3978d+","t":"2026-11-17T21:07Z","c":"batch s37a: display-shelf-r3rv 41418cd8 merged onto main 4c8568f5; site rebuilt"},{"s":"4c8568f5+","t":"2026-11-17T20:30Z","c":"batch s36a: main 60b0e3bf (display-shelf) merged; jdisp gated on BAL.shelf.ui (=0, room hidden); site rebuilt"},{"s":"da86e866","t":"2026-11-17T20:29Z","c":"Thẻ hành sự chia hai khối THÀNH và BẠI cho rõ được mất; khung dài có chữ \"Kéo xuống\" nhắc còn nữa; thẻ người chỉ ghi tước vị một lần, không…"},{"s":"9c6292d3+","t":"2026-11-17T20:17Z","c":"review display-shelf r2: Thái hậu rebuke through the one stat path ap (favour runs -100..100; cl(...,0,100) RAISED a negative favour to 0);…"},{"s":"85545ce7+","t":"2026-11-17T20:02Z","c":"world_check2 §1: a kind she died in is played again on a new life (fresh() kept as window.__wcFresh) — her random death mid-loop failed tha…"},{"s":"fc7c649f+","t":"2026-11-17T19:42Z","c":"review looks-2 r2: looks-2 layer scan follows the owner's AVATAR = ID CARD rule (17/11 ~18:10Z, main kit-fx-register): portrait/avatar rows…"},{"s":"0a508368+","t":"2026-11-17T18:53Z","c":"wx-anim: site rebuilt"}]};
+window.CTM_BI={"s":"9f596384+","t":"2026-11-18T02:13Z","c":"coop-thin-e #3: host keeps her ready for the new week when it arrives before his week event (coop-bot L5 stuck at week 3)","b":"8b77ba2a3aca","h":[{"s":"3b69182e","t":"2026-11-18T01:50Z","c":"hoa-dien r3 onto main 3da5720a (makeup-lux live): hoa-dien (jhd.js + hooks) replayed on the new main, replacing the old stacked branch. Sha…"},{"s":"631a703e","t":"2026-11-18T01:37Z","c":"review staff-cap-fix r6: hire pick refused at the cap gives the silver back (+ staff-cap.js case); site rebuilt"},{"s":"4cdcffa9+","t":"2026-11-18T00:44Z","c":"review looks-s40: site rebuilt from merged sources (glow v8)"},{"s":"eb3675a6+","t":"2026-11-17T22:59Z","c":"review coop-thin-c r1 #2: merge origin/main b048e495 (kit-display-room r2, jdisp/jshelf only; generated files from main + site rebuilt)"},{"s":"4eac30bc+","t":"2026-11-17T22:57Z","c":"review coop-thin-c r1 #2: her NPC pack resend (F1) listens on any guest seat, not only while the C switch is on: a level drop / build hold …"},{"s":"c7375c0c+","t":"2026-11-17T22:33Z","c":"batch s38a: dudo-blank-r1 2270c4c5 merged onto main 99f3978d; site rebuilt"},{"s":"99f3978d+","t":"2026-11-17T21:07Z","c":"batch s37a: display-shelf-r3rv 41418cd8 merged onto main 4c8568f5; site rebuilt"},{"s":"4c8568f5+","t":"2026-11-17T20:30Z","c":"batch s36a: main 60b0e3bf (display-shelf) merged; jdisp gated on BAL.shelf.ui (=0, room hidden); site rebuilt"},{"s":"da86e866","t":"2026-11-17T20:29Z","c":"Thẻ hành sự chia hai khối THÀNH và BẠI cho rõ được mất; khung dài có chữ \"Kéo xuống\" nhắc còn nữa; thẻ người chỉ ghi tước vị một lần, không…"},{"s":"9c6292d3+","t":"2026-11-17T20:17Z","c":"review display-shelf r2: Thái hậu rebuke through the one stat path ap (favour runs -100..100; cl(...,0,100) RAISED a negative favour to 0);…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -3465,26 +3465,34 @@ function staffInit(){sidN=Math.max(sidN,...allServ().map(s=>s.sid),0);capSweep()
   if(s.role==="eunuch"&&roll(20)){const m=pick(L.filter(x=>x.role==="maid"&&!x.lover&&ownerOf(x)!==ownerOf(s)));if(m){s.lover=m.sid;m.lover=s.sid}}}}
 function fillStaff(p,free){const [cm,ce]=capOf(p);let [m,e]=hhHas(p);
  while(m<cm&&roomFor("maid")&&(free||p.bac>=BAL.house.hireBac)){p.staff.push(mkServ("maid"));m++;if(!free)ap(p,{bac:-BAL.house.hireBac})}while(e<ce&&roomFor("eunuch")&&(free||p.bac>=BAL.house.hireBac)){p.staff.push(mkServ("eunuch"));e++;if(!free)ap(p,{bac:-BAL.house.hireBac})}}
-/* OVER THE TABLE (old saves, a demotion, the cold palace; review/staff-root): Nội vụ phủ takes the extra servants back and sends them elsewhere.
-   Never the personal maid (not in staff), a named palace woman (eid), a co-op guest's servant; the least trusted go first, her own eyes and
-   ears (spyFor "me") and lovers last; `stay` (a servant just placed, e.g. a plant) is never the one sent away. A servant she trusts (loyal >= BAL.promo.trimTrust) leaves with a farewell scene, the others with a log line.
-   NPCs: data only. The host decides (co-op guest skips: the household is a world key). */
+/* OVER THE TABLE (old saves, a demotion, the cold palace; review/staff-root; review/staff-cap-fix owner 18/11): Nội vụ phủ takes the extra servants back
+   and sends them elsewhere. ONE RULE: the household NEVER stays over the table BAL.promo.cap — every servant counts (hhHas), the cap is met by
+   sending others away; only those who cannot be moved stay: the personal maid (not in staff), a named palace woman (eid, jstaff post) and a
+   co-op player's servant (coop). Order: the least trusted go first; her own eyes and ears (spyFor "me"), lovers, a servant coming home (srvHome)
+   and `stay` (one just placed, e.g. a plant) last — but they DO go when nobody else can (the arrival is refused).
+   EVERY removal from her household is told to her: a servant she trusts (loyal >= BAL.promo.trimTrust) with a farewell scene, the others in ONE
+   grouped kit notice (kitPanel kind "notice") per trim; plus a log line. NPCs: data only. The host decides (co-op guest trims only her own: capSweep). */
 function capTrim(p,stay){const gone=[];try{if(!p||!Array.isArray(p.staff)||p.coop||(S&&p===S.thO))return gone;const c=capOf(p),h=hhHas(p);
- const keep=s=>(s.spyFor==="me"?1000:0)+(s.lover?200:0)+(s.loyal||0);
- /* HER OWN servant coming home (staff-root-fix-1, Foreman B rule): a servant marked by srvHome() is treated exactly like `stay` at the
-    trim after she comes back (never the one sent away; another goes, or she stays over the table), and the mark is cleared as soon
-    as that side of the household is within the table again (then she is an ordinary servant for later trims) */
- const home=s=>s===stay||!!(s&&s.home);
- [["maid",0],["eunuch",1]].forEach(([role,i])=>{while(h[i]>c[i]){const L=p.staff.filter(s=>s&&!home(s)&&s.role===role&&!s.eid&&!s.coop).sort((a,b)=>keep(a)-keep(b));if(!L.length)break;
-  const x=L[0];p.staff.splice(p.staff.indexOf(x),1);h[i]--;x.spyFor=x.spyFor==="me"?null:x.spyFor;gone.push(x);
+ const keep=s=>(s===stay||s.home?5000:0)+(s.spyFor==="me"?1000:0)+(s.lover?200:0)+(s.loyal||0);
+ [["maid",0],["eunuch",1]].forEach(([role,i])=>{while(h[i]>c[i]){const L=p.staff.filter(s=>s&&s.role===role&&!s.eid&&!s.coop).sort((a,b)=>keep(a)-keep(b));if(!L.length)break;
+  const x=L[0];p.staff.splice(p.staff.indexOf(x),1);h[i]--;x.spyFor=x.spyFor==="me"?null:x.spyFor;delete x.home;gone.push(x);
   try{if(x.fid&&typeof figUsed==="function"&&!(window.COOPW&&COOPW.on&&COOPW.seat==="b")){const U=figUsed();const k=U.indexOf(x.fid);if(k>=0)U.splice(k,1)}}catch(e){}}});
- if(p===S&&gone.length){const T=gone.filter(s=>(s.loyal||0)>=BAL.promo.trimTrust),O=gone.filter(s=>!T.includes(s));
-  if(O.length)log(`Nội vụ phủ định lại kẻ hầu theo phẩm vị: ${O.map(s=>s.name).join(", ")} được điều sang hầu nơi khác.`);
-  for(const s of T)Q.push({t:"Nội vụ phủ điều người",who:pServ(s),h:`<p>Nội vụ phủ định lại số kẻ hầu theo phẩm vị của ngươi. ${s.name} phải sang hầu nơi khác.</p><p>${s.name} quỳ lạy từ biệt: “Nô tỳ đi rồi, xin chủ tử giữ gìn. Có việc gì, chủ tử cứ sai người gọi, nô tỳ vẫn nhớ ơn.”</p>`,btn:"Đành vậy"})}
- /* the mark goes once her side of the household is back within the table (another left); while only she could go, she keeps it and stays */
+ if(p===S&&gone.length)capTell(gone,c);
  for(const s of p.staff){const i=s&&s.role==="maid"?0:1;if(s&&s.home&&h[i]<=c[i])delete s.home}}catch(e){console.error("capTrim",e)}return gone}
+/* the one way she is told that Nội vụ phủ took servants back (capTrim; jstaff fitCap goes through capTrim) */
+function capTell(gone,c){c=c||capOf(S);const T=gone.filter(s=>(s.loyal||0)>=BAL.promo.trimTrust),O=gone.filter(s=>!T.includes(s));
+ log(`Nội vụ phủ định lại kẻ hầu theo phẩm vị: ${gone.map(s=>s.name).join(", ")} được điều sang hầu nơi khác.`);
+ if(O.length){const nm=O.map(s=>s.name).join(", ");try{if(typeof kitPanel==="function")kitPanel({kind:"notice",title:"Nội vụ phủ điều người",sub:"Định lại kẻ hầu theo phẩm vị",subject:pServ(O[0]),
+   facts:[capLaw(c),`${nm} ${O.length>1?"đều ":""}được điều sang hầu nơi khác.`],btn:"Đã hiểu"});
+  else Q.push({t:"Nội vụ phủ điều người",who:pServ(O[0]),h:`<p>Nội vụ phủ định lại số kẻ hầu theo phẩm vị của ngươi. ${nm} được điều sang hầu nơi khác.</p>`,btn:"Đã hiểu"})}catch(e){console.error("capTell",e)}}
+ for(const s of T)Q.push({t:"Nội vụ phủ điều người",who:pServ(s),h:`<p>Nội vụ phủ định lại số kẻ hầu theo phẩm vị của ngươi. ${s.name} phải sang hầu nơi khác.</p><p>${s.name} quỳ lạy từ biệt: “Nô tỳ đi rồi, xin chủ tử giữ gìn. Có việc gì, chủ tử cứ sai người gọi, nô tỳ vẫn nhớ ơn.”</p>`,btn:"Đành vậy"})}
+/* the household law as she reads it, from the one table (BAL.promo.cap via capOf) */
+function capLaw(c){let w="";try{w=S.out?"Ở lãnh cung":`Phẩm ${typeof prRankName==="function"?prRankName(rkOf(S)):RANKS[Math.max(0,Math.min(RANKS.length-1,S.rank|0))].n}`}catch(e){}
+ return `${w||"Phẩm vị này"} theo lệ giữ ${c[0]} cung nữ (kể cả cung nữ thân tín)${c[1]?`, ${c[1]} thái giám`:", không có thái giám"}.`}
+/* can p take one more servant of this role without staying over the table (room under the cap, or an ordinary servant Nội vụ phủ can move)? */
+function capRoom(p,role){try{const i=role==="maid"?0:1;if(hhHas(p)[i]<capOf(p)[i])return true;return(p.staff||[]).some(s=>s&&s.role===role&&!s.eid&&!s.coop&&!s.home)}catch(e){return false}}
 /* the one shared mark for a servant handed back to her own mistress (co-op settle: refused seat / refused 'srv'; any later return path):
-   honoured by capTrim until her side of the household is within the table, then cleared */
+   capTrim sends the others first; she goes only when nobody else can (never over the table); the mark clears once that side is within the table */
 function srvHome(s){if(s&&typeof s==="object")s.home=1;return s}
 /* co-op guest (review/staff-root-r1): her own household is a PERSONAL key (jcoopworld W_KEYS has no staff), so the guest trims HER OWN
    household itself (old save, demotion, cold palace); the NPC households and the face list (fidUsed, a world key) stay the host's */
@@ -3497,7 +3505,7 @@ function bestSent(p){const L=(p.staff||[]).filter(s=>!s.spyFor);if(!L.length)ret
 function servCaught(p,s){if(!s)return"";if(roll(30)){p.staff.splice(p.staff.indexOf(s),1);return `${s.name} bị đánh chết trong ngục Thận Hình ti. `}s.loyal=cl(s.loyal-BAL.eff.j10.loyalServCaught,0,100);s.trouble=wk();return""}
 /* acts on servants (same functions for NPC mistresses) */
 function threatServ(a,s){const o=ownerOf(s);if(!o||!s.lover)return"";s.spyFor=key(a);return `${NMc(a)} dọa tố chuyện đối thực của ${s.name}; hắn/nàng sợ hãi, thành tai mắt. `}
-function plantServ(a,t){if(!a.staff)a.staff=[];const s=bestSent(a);if(!s||a.bac<BAL.house.plantBac)return"";ap(a,{bac:-BAL.house.plantBac});if(roll(odA(a,40+a.tamco/4+nq(s,"sharp",BAL.net.k.poachSharp)))){a.staff.splice(a.staff.indexOf(s),1);s.spyFor=key(a);(t.staff=t.staff||[]).push(s);/* a full household: the plant takes the place of its least trusted servant (one table, review/staff-root) */capTrim(t,s);return `${NMc(a)} cài ${s.name} vào cung ${NM(t)} làm tai mắt. `}evA(t,a,BAL.eff.j10.evPlantServ);return `Nội vụ phủ thấy lạ, ${NM(t)} không nhận ${s.name}. `}
+function plantServ(a,t){if(!a.staff)a.staff=[];const s=bestSent(a);if(!s||a.bac<BAL.house.plantBac)return"";ap(a,{bac:-BAL.house.plantBac});if(capRoom(t,s.role)&&roll(odA(a,40+a.tamco/4+nq(s,"sharp",BAL.net.k.poachSharp)))){a.staff.splice(a.staff.indexOf(s),1);s.spyFor=key(a);(t.staff=t.staff||[]).push(s);/* a full household: the plant takes the place of its least trusted servant (one table, review/staff-root) */capTrim(t,s);return `${NMc(a)} cài ${s.name} vào cung ${NM(t)} làm tai mắt. `}evA(t,a,BAL.eff.j10.evPlantServ);return `Nội vụ phủ thấy lạ, ${NM(t)} không nhận ${s.name}. `}
 function servMonth(){let ev="";capSweep();for(const p of consorts()){if(!p.staff)p.staff=[];
   /* co-op guest (review/servant-mline-r2): an NPC household's own month (loyalty, NPC-vs-NPC spies, refilling) rolls on the host;
      the guest keeps only what concerns her: her spies' reports, her servants' friends, NPC acts aimed at her (pickTarget gives only her) */
@@ -3945,8 +3953,10 @@ function reLot(better){if(S.dead||Q.length)return;if(!better){if(S.relot||S.bac<
 const ACTDOM={spy:"Mưu kế",frame:"Mưu kế",poison:"Mưu kế",rumor:"Mưu kế",bribe:"Mưu kế",block:"Mưu kế",musk:"Mưu kế",catswap:"Mưu kế",ksab:"Mưu kế",kpoison:"Mưu kế",pond:"Mưu kế",kframe:"Mưu kế",plant:"Mưu kế",accuse:"Danh",vp:"Danh",takeaway:"Con cái",ally:"Giao thiệp",gift:"Giao thiệp",steal:"Sủng",road:"Sủng"};
 /* ================= LÃNH CUNG: a playable state for every consort ================= */
 function cold(why){if(S.dead)return;if(S.out)return;S.out=1;S.coldWhy=why;S.coldRank=S.rank;S.coldTurn=S.turn;S.rank=0;S.confined=0;S.preg=S.fake?0:S.preg;S.fake=0;
- const keep=(S.staff||[]).filter(s=>s.loyal>=BAL.loy.trust).slice(0,1);(S.staff||[]).filter(s=>!keep.includes(s)).forEach(s=>{});S.staff=keep;
- log(`<span class="r">${why}. Ngươi bị đưa vào lãnh cung.</span>`);Q.push({t:"Lãnh cung",cls:"end",who:pMe(),h:`<p>${why}.</p><p>Cửa lãnh cung đóng lại sau lưng. Bổng lộc chỉ còn chút gạo mốc, kẻ hầu bỏ đi gần hết${keep.length?`; chỉ ${keep[0].name} ở lại`:""}.</p><p class="past">Chưa hết đường: minh oan, cầu xin, nhờ người bên ngoài, hay chờ ân xá.</p>`,btn:"Bước vào"});coldVisit();deal()}
+ /* the cold palace keeps only what the one household table allows (BAL.promo.cap row 0 via capOf; review/staff-cap-fix): the most trusted stay, the others are named here */
+ const cc=capOf(S),kp=[];for(const [role,n] of [["maid",cc[0]-1],["eunuch",cc[1]]])kp.push(...(S.staff||[]).filter(s=>s.role===role&&s.loyal>=BAL.loy.trust).sort((a,b)=>b.loyal-a.loyal).slice(0,Math.max(0,n)));
+ const keep=kp.concat((S.staff||[]).filter(s=>s.coop&&!kp.includes(s))),left=(S.staff||[]).filter(s=>!keep.includes(s));S.staff=keep;
+ log(`<span class="r">${why}. Ngươi bị đưa vào lãnh cung.</span>`);Q.push({t:"Lãnh cung",cls:"end",who:pMe(),h:`<p>${why}.</p><p>Cửa lãnh cung đóng lại sau lưng. Bổng lộc chỉ còn chút gạo mốc, kẻ hầu bỏ đi gần hết${left.length?`: Nội vụ phủ điều ${left.map(s=>s.name).join(", ")} sang nơi khác`:""}${keep.length?`; chỉ ${keep.map(s=>s.name).join(", ")} ở lại`:""}.</p><p class="past">Chưa hết đường: minh oan, cầu xin, nhờ người bên ngoài, hay chờ ân xá.</p>`,btn:"Bước vào"});coldVisit();deal()}
 function coldVisit(){S.place="lc";const f=rivals.filter(v=>v.alive&&v.out);S.visit={k:"lc",people:lcPeople("Phế phi · cùng cảnh ngộ"),talked:false,tk:{},msg:"Gió lùa qua song cửa mục. Ở đây chỉ có những người bị quên lãng."}}
 function restore(full,why){S.out=0;S.rank=full&&S.coldRank>=7&&seatHas(S,7)?7:seatDown(S,full?S.coldRank:S.coldRank-1);S.place="home";S.visit={k:"home",people:homePeople(),talked:false,tk:{}};S.lastPromo=S.turn;fillStaff(S,true);
  log(`<b class="g">${why}. Ngươi được rời lãnh cung, phục vị ${RANKS[S.rank].n}.</b>`);Q.push({t:"Rời lãnh cung",cls:"end",who:pMe(),h:`<p>${why}.</p><p>Ngươi được phục vị <b>${RANKS[S.rank].n}</b>.</p>`,btn:"Tạ ơn"});deal();if(typeof feedback==="function")feedback("decree")}
@@ -4974,7 +4984,7 @@ function fillStaff(p,free){const [cm,ce]=capOf(p);let [m,e]=hhHas(p);
  while(e<ce&&roomFor("eunuch")&&(free||p.bac>=BAL.house.hireBac)){const s=get("eunuch");if(!s)break;p.staff.push(s);e++;if(!free)ap(p,{bac:-BAL.house.hireBac})}}
 /* hiring: she picks among this month's candidates (age, origin, impression only) */
 function hireCard(role){const P=npool()[role];if(!P.length){Q.push({t:"Nội vụ phủ",h:`<p>Tháng này Nội vụ phủ không còn ${role==="maid"?"cung nữ":"thái giám"} nào. Tháng sau sẽ có người mới.</p>`});showModal();return}
- Q.push({act:1,t:"Nội vụ phủ đưa người",h:`<p>Người hiện có (chỉ biết tuổi, xuất thân và dáng vẻ; nết thật phải ở lâu mới biết):</p>`,opts:P.map(s=>({n:`${s.name}, ${s.age} tuổi`,fx:{bac:BAL.eff.j29.bacFx},x:`${s.org} · trông ${s.imp}`,go:()=>{const i=P.indexOf(s);if(i>=0)P.splice(i,1);S.staff.push(s);log(`Nhận ${s.name} từ Nội vụ phủ. Bạc ${balSg(BAL.eff.j29.bacFx)}.`)}})).concat([{n:"Thôi",fx:{},x:"không nhận ai"}])});showModal()}
+ Q.push({act:1,t:"Nội vụ phủ đưa người",h:`<p>Người hiện có (chỉ biết tuổi, xuất thân và dáng vẻ; nết thật phải ở lâu mới biết):</p>`,opts:P.map(s=>({n:`${s.name}, ${s.age} tuổi`,fx:{bac:BAL.eff.j29.bacFx},x:`${s.org} · trông ${s.imp}`,go:()=>{/* the table again at the moment she takes him (one rule, review/staff-cap-fix) */if(hhHas(S)[role==="maid"?0:1]>=capOf(S)[role==="maid"?0:1]){/* the pick paid (fx) before go: nobody joins, so the silver comes back (review/staff-cap-fix-r6) */ap(S,{bac:-BAL.eff.j29.bacFx});log(`Cung ngươi đã đủ người hầu theo phẩm vị; Nội vụ phủ không đưa thêm, bạc trả lại.`);return}const i=P.indexOf(s);if(i>=0)P.splice(i,1);S.staff.push(s);log(`Nhận ${s.name} từ Nội vụ phủ. Bạc ${balSg(BAL.eff.j29.bacFx)}.`)}})).concat([{n:"Thôi",fx:{},x:"không nhận ai"}])});showModal()}
 document.addEventListener("click",e=>{const b=e.target.closest("[data-hire]");if(!b||b.disabled)return;e.stopPropagation();e.preventDefault();if(!S||S.dead||Q.length||S.bac<BAL.house.hireBac)return;const [cm,ce]=capOf(S),[nm,ne]=hhHas(S);const role=b.dataset.hire;if(role==="maid"?nm>=cm:ne>=ce)return;hireCard(role)},true);
 /* 'Xem người': a costly look (Bạc -15, 1 khắc) reveals the trait */
 document.addEventListener("click",e=>{const b=e.target.closest("[data-svlook]");if(!b||b.disabled)return;e.stopPropagation();const s=servById(+b.dataset.svlook);if(!s||S.bac<BAL.house.lookBac||!can(1)||Q.length)return;apply({bac:-BAL.house.lookBac});spend(1);servLearn(s,"Cho người dò xét lai lịch");render()},true);
@@ -28371,7 +28381,7 @@ function kpodFromItem(m){if(!m||typeof m.h!=="string"||!/class="(ktlist|h54list)
 .kpod-skip .kpod-beam,.kpod-skip .kpod-pool{animation:none!important}.kpod-skip .kpod-motes i{animation-delay:0s}
 .kpod-red .kpod-motes{display:none}
 @keyframes kpodMote{0%{opacity:0;transform:translateY(10px) scale(.6)}30%{opacity:1}70%{opacity:.8}100%{opacity:0;transform:translateY(-26px) scale(1)}}
-.kpod-ft{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 12px 14px;background:linear-gradient(#f5ecdc00,#f5ecdcf0 40%)}
+.kpod-ft{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 12px 14px;background:none}/* owner 17/11: the scene backdrop runs edge to edge and the button sits ON it (no cream band under the dais) */
 .kpod-next{min-width:180px;font-size:1rem;cursor:pointer}
 .kpod-mine{display:flex;align-items:center;gap:6px;font-size:.8rem;color:var(--ink);background:#fffaf0e8;border:1px solid var(--k-hair);border-radius:var(--k-rad);padding:3px 10px}
 .kpod-fx{position:absolute;inset:0;pointer-events:none;overflow:hidden;z-index:5}
@@ -31304,7 +31314,9 @@ const WD_LIST=[
  ["tram_dao","tram","Trâm gỗ đào",0,0,"nau",{sac:1}],["tram_dong","tram","Trâm đồng mai hoa",0,0,"vang",{sac:1}],
  ["tramngoc","tram","Trâm ngọc bích",1,0,"xanh",{sac:2}],["tram_hoalua","tram","Trâm hoa lụa",1,0,"hong",{sac:2}],
  ["tram_ngoclan","tram","Trâm bạc ngọc lan",2,1,"trang",{sac:2}],["thoa_diep","tram","Thoa bạc song điệp",2,1,"trang",{sac:3}],
- ["tram_hong","tram","Trâm thạch anh hồng",3,1,"hong",{sac:3}],["hoadien_bac","tram","Hoa điền bạc khảm lưu ly",3,2,"lam",{sac:3,danh:1}],
+ ["tram_hong","tram","Trâm thạch anh hồng",3,1,"hong",{sac:3}],["hd_mai","hd","Hoa điền mai trắng",1,0,"trang",{}],["hd_dao","hd","Hoa điền hoa đào",2,0,"hong",{}],["hoadien_bac","hd","Hoa điền bạc khảm lưu ly",3,2,"lam",{}],
+ ["hd_diep","hd","Hoa điền hồ điệp",4,2,"lam",{}],["hd_lan","hd","Hoa điền lá lan phỉ thúy",5,2,"xanh",{}],["hd_sen","hd","Hoa điền liên hoa hồng ngọc",6,2,"hong",{}],
+ ["hd_maudon","hd","Hoa điền mẫu đơn điểm thúy",7,3,"do",{}],["hd_phuong","hd","Hoa điền kim phượng",8,3,"vang",{}],
  ["thoa_vang","tram","Thoa vàng hồ điệp",4,2,"vang",{sac:4,danh:1}],["tram_phithuy","tram","Trâm phỉ thúy hải đường",4,1,"xanh",{sac:4,danh:1}],
  ["boodieu","tram","Bộ diêu vàng",5,2,"vang",{sac:5,danh:2}],["dientu_thuy","tram","Điền tử điểm thúy",5,2,"lam",{sac:5,danh:2}],
  ["bd_phuong","tram","Bộ diêu kim phượng ngậm châu",6,3,"vang",{sac:6,danh:3}],["tram_maudon","tram","Trâm hồng ngọc mẫu đơn",6,2,"do",{sac:6,danh:2}],
@@ -31324,10 +31336,14 @@ const WD_LIST=[
  ["nt_longchon","y","Áo lông chồn ngự tứ",5,4,"nau",{sac:5,danh:3}],["nt_bachhoa","y","Cát phục «Bách hoa» ngự tứ",6,4,"hong",{sac:6,danh:4}],["nt_hocuu","y","Hồ cừu trắng ngự tứ",7,4,"trang",{sac:7,danh:5}],
  ["y_tang","y","Áo tang vải trắng",0,0,"trang",{},"mặc trong quốc tang"]];
 const WD_ITEMS={};
+/* hoa-dien (OD 17/11 ~17:30Z/~17:45Z real): ONE item table, three kinds. sl "hd" = a hoa điền (forehead ornament): never worn through the wardrobe,
+   it is PLACED during makeup (jhd). WD_SLN[sl] = [kind name, wear verb, slot name, verb lower] for every display that names a WD slot. */
+const WD_SLN={tram:["Trâm cài","Cài","Cài tóc","cài"],y:["Y phục","Mặc","Y phục","mặc"],hd:["Hoa điền","Dán","Trán","dán khi điểm trang"]};
+function wdSlN(sl,i){return (WD_SLN[sl]||WD_SLN.y)[i|0]}
 (function(){for(const [k,sl,n,P,g,col,w,note] of WD_LIST){const it={k,sl,n,P,g,col,w,nt:g===4?1:0,pr:g===4?0:WD_PR[P],icon:`https://ctm-img.victoria-tntt.workers.dev/img/wd-${k.replace(/_/g,"-")}.webp`,note:note||""};WD_ITEMS[k]=it;
-  const d=`${sl==="tram"?"Cài tóc":"Mặc"}: ${Object.keys(w).length?plainFx(w):"giản dị"} · ${WD_GRADE[g]}${it.nt?" · chỉ có khi được ban, không bán, không tặng":""}${note?" · "+note:""}`;
+  const d=`${sl==="hd"?"Dán trán khi điểm trang: đặt khéo thì dung nhan thêm phần":`${sl==="tram"?"Cài tóc":"Mặc"}: ${Object.keys(w).length?plainFx(w):"giản dị"}`} · ${WD_GRADE[g]}${it.nt?" · chỉ có khi được ban, không bán, không tặng":""}${note?" · "+note:""}`;
   /* register in the chest's IT table; keep old fields of the three old hair items (tramngoc, boodieu, tramphuong) but hide their rank hint */
-  IT[k]=Object.assign(IT[k]||{tg:sl==="tram"?["hh","rv"]:["rv"]},{n,kd:sl==="tram"?"Trâm cài":"Y phục",d,pr:it.pr,wsl:sl,wd:1});if(it.nt){IT[k].keep=1;IT[k].tg=[]}
+  IT[k]=Object.assign(IT[k]||{tg:sl==="y"?["rv"]:["hh","rv"]},{n,kd:wdSlN(sl,0),d,pr:it.pr,wsl:sl,wd:1});if(it.nt){IT[k].keep=1;IT[k].tg=[]}
   if(itm(k).sl==="hair")delete IT[k].sl}})();
 function plainFx(o){return Object.entries(o||{}).filter(([k,v])=>v&&NAMES[k]).map(([k,v])=>`${NAMES[k]} ${v>0?"+":""}${v}`).join(", ")}
 /* old ngự-ban things are ngự tứ too */
@@ -31340,7 +31356,7 @@ function wdPOf(p){try{if(!p)return 1;const rr=typeof personRoleRank==="function"
   if(p.out)return 0;return (typeof rkOf==="function"&&(p===S||p.rank!=null)?rkOf(p):0)+1}catch(e){return 1}}
 function wdKey(p){return p===S?"me":p&&p.id!=null?String(p.id):p&&p.name?"n:"+p.name:"?"}
 function wdHash(s){let h=7;s=String(s);for(let i=0;i<s.length;i++)h=(h*31+s.charCodeAt(i))>>>0;return h}
-function wdPool(sl,P,noNt){return WD_LIST.filter(r=>r[1]===sl&&r[3]===P&&(!noNt||r[4]!==4)&&r[0]!=="y_tang"&&!WD_SRVONLY.includes(r[0])).map(r=>r[0])}
+function wdPool(sl,P,noNt){const L=WD_LIST.filter(r=>r[1]===sl&&r[3]===P&&(!noNt||r[4]!==4)&&r[0]!=="y_tang"&&!WD_SRVONLY.includes(r[0])&&!(sl==="hd"&&typeof hdDropped==="function"&&hdDropped(r[0]))).map(r=>r[0]);return !L.length&&sl==="hd"&&typeof hdKeptNear==="function"?hdKeptNear(P):L}
 function wdDefault(p,sl){const P=Math.min(8,wdPOf(p));const L=wdPool(sl,P,true);return L.length?L[wdHash(wdKey(p)+sl)%L.length]:null}
 /* lazily give everybody (old saves too) a default outfit at their own P: nobody starts wrong */
 function wdOf(p){if(!p)return null;if(!p.wd||typeof p.wd!=="object"){p.wd={tram:null,y:null};
@@ -31376,9 +31392,9 @@ function wdSlots(p){const w=wdOf(p);const lab=wdKnownStatus(p);return ["tram","y
 window.wdSlots=wdSlots;window.WD=WD;window.WD_ITEMS=WD_ITEMS;
 
 /* ---------- putting things on: the same rules for everyone ---------- */
-function wdWearEntry(p,e){const it=wdItem(e);if(!it)return"";const w=wdOf(p);const old=w[it.sl];if(old&&old.from!=="base"){p.inv=p.inv||[];p.inv.push(old)}w[it.sl]=e;return it.n}
+function wdWearEntry(p,e){const it=wdItem(e);if(!it||it.sl==="hd")return"";const w=wdOf(p);const old=w[it.sl];if(old&&old.from!=="base"){p.inv=p.inv||[];p.inv.push(old)}w[it.sl]=e;return it.n}
 function wdTakeOff(p,sl){const w=wdOf(p);const e=w[sl];if(!e)return;if(e.from!=="base"){p.inv=p.inv||[];p.inv.push(e)}w[sl]=null}
-function wdWear(p,ix){const e=p.inv&&p.inv[ix];if(!e||e.h||!wdItem(e))return"";p.inv.splice(ix,1);delete e.w;return wdWearEntry(p,e)}
+function wdWear(p,ix){const e=p.inv&&p.inv[ix];if(!e||e.h||!wdItem(e)||wdItem(e).sl==="hd")return"";p.inv.splice(ix,1);delete e.w;return wdWearEntry(p,e)}
 /* what someone BELIEVES an item's P is: true if known, else a fixed hidden noise per item kind (per person) */
 function wdBelP(p,k){const it=WD_ITEMS[k];if(!it)return 0;if(p===S?wdKnowsItem(k):((p.wdk||{})[k]))return it.P;
  const n=WD.autoErr[wdHash(wdKey(p)+k)%WD.autoErr.length];return it.P+n}
@@ -31444,8 +31460,8 @@ function wdAgent(p){const L=[p.maid].concat(p.staff||[]).filter(s=>s&&!s.spyFor&
 /* ---------- getting things: a real item into the chest (rewards, purchases, gifts) ---------- */
 function wdNtFree(){S.wdNt=S.wdNt||[];return WD_LIST.filter(r=>r[4]===4&&!S.wdNt.includes(r[0])).map(r=>r[0])}
 const WD_SRVONLY=["y_chuongsu","y_nuquan","y_mama"]; /* servant-road robes: given only by jpromo (BAL.promo.srv), never random/shop */
-function wdPickAt(P,sl,gMin){P=cl(Math.round(P),0,8);let L=WD_LIST.filter(r=>r[4]!==4&&r[0]!=="y_tang"&&!WD_SRVONLY.includes(r[0])&&(!sl||r[1]===sl)&&r[3]===P&&r[4]>=(gMin||0));
- if(!L.length)L=WD_LIST.filter(r=>r[4]!==4&&r[0]!=="y_tang"&&!WD_SRVONLY.includes(r[0])&&(!sl||r[1]===sl)&&r[3]===P);return L.length?pick(L)[0]:null}
+function wdPickAt(P,sl,gMin){P=cl(Math.round(P),0,8);const hdOk=r=>!(r[1]==="hd"&&typeof hdDropped==="function"&&hdDropped(r[0]));let L=WD_LIST.filter(r=>r[4]!==4&&r[0]!=="y_tang"&&!WD_SRVONLY.includes(r[0])&&hdOk(r)&&(!sl||r[1]===sl)&&r[3]===P&&r[4]>=(gMin||0));
+ if(!L.length)L=WD_LIST.filter(r=>r[4]!==4&&r[0]!=="y_tang"&&!WD_SRVONLY.includes(r[0])&&hdOk(r)&&(!sl||r[1]===sl)&&r[3]===P);if(!L.length&&sl==="hd"&&typeof hdKeptNear==="function"){const K=hdKeptNear(P);return K.length?pick(K):null}return L.length?pick(L)[0]:null}
 function wdGain(p,k,src){src=src||{};const it=WD_ITEMS[k];if(!p||!it)return null;p.inv=p.inv||[];const e={k,from:src.from||"emp"};
  if(src.giver)e.giver=src.giver;e.d=wdWhen();if(it.nt){e.own=wdKey(p);S.wdNt=S.wdNt||[];if(!S.wdNt.includes(k))S.wdNt.push(k)}
  if(src.nvp){e.nvp=1;if(p===S)wdReveal(k,"y phục Nội vụ phủ đưa theo phẩm mới");else{p.wdk=p.wdk||{};p.wdk[k]=1}}
@@ -32456,7 +32472,7 @@ function kitSceneEndLabel(cls,o){if(o&&o.end)return String(o.end);for(const k in
 window.kitSceneEndLabel=kitSceneEndLabel;
 /* kitSceneFit(ov): a scene taller than the room left above the button (short landscape, 844x390) is scaled down (CSS zoom on .kmst, never below .55) so nothing
    runs under the button; room = overlay height minus the button row (css .km-endon padding). Runs when the button appears and on resize. */
-function kitSceneFit(ov){try{const st=ov&&ov.querySelector(".kmst");if(!st)return;st.style.zoom="";const cs=getComputedStyle(ov);const avail=ov.clientHeight-(parseFloat(cs.paddingBottom)||0)-(parseFloat(cs.paddingTop)||0);
+function kitSceneFit(ov){try{const st=ov&&ov.querySelector(".kmst");if(!st||ov.classList.contains("km-full"))return;st.style.zoom="";const cs=getComputedStyle(ov);const avail=ov.clientHeight-(parseFloat(cs.paddingBottom)||0)-(parseFloat(cs.paddingTop)||0);
  const els=[...st.children].flatMap(c=>[c,...c.children]).filter(e=>!/kmdark|kmleaves|kmglow|kmfls|kmleaf/.test(e.className||"")&&e.getBoundingClientRect().width>0);
  const h=els.length?Math.max(...els.map(e=>e.getBoundingClientRect().bottom))-Math.min(...els.map(e=>e.getBoundingClientRect().top)):st.scrollHeight;if(avail>0&&h>avail+2)st.style.zoom=String(Math.max(.55,Math.floor(avail/h*100)/100))}catch(e){}}
 window.kitSceneFit=kitSceneFit;addEventListener("resize",()=>document.querySelectorAll(".kmov.km-endon").forEach(kitSceneFit));
@@ -32698,7 +32714,11 @@ window.kitReward=kitReward;window.kitFlyItem=kitFlyItem;window.kitAlarm=kitAlarm
  padding:max(12px,env(safe-area-inset-top)) 16px max(12px,env(safe-area-inset-bottom));user-select:none;-webkit-user-select:none;cursor:pointer;overflow:hidden}
 .kmov.km-out{animation:kmFadeOut .24s ease forwards}
 .kmst{position:relative;width:100%;max-width:760px;max-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px}
-.kmov.km-endon{box-sizing:border-box;padding-bottom:calc(68px + env(safe-area-inset-bottom,0px))}
+.kmov{--kmend-room:calc(68px + env(safe-area-inset-bottom,0px))}
+.kmov.km-endon{box-sizing:border-box;padding-bottom:var(--kmend-room)}
+/* KIT 81b (owner 17/11 toil-reveal bug): a FULL-BLEED scene (its own backdrop fills the screen: .km-full) has NO padding top or bottom, so the backdrop runs edge to edge
+   and the scene-end button sits ON it (no dark band under the button, top and bottom the same). Its own content keeps clear of the button with var(--kmend-room). */
+.kmov.km-full,.kmov.km-full.km-endon{padding:0}
 .kmend{position:absolute;bottom:max(18px,env(safe-area-inset-bottom));left:50%;transform:translateX(-50%);z-index:9;min-width:140px;animation:kmendin calc(.35s*var(--pace)) ease-out both}
 @keyframes kmendin{from{opacity:0;transform:translate(-50%,8px)}to{opacity:1;transform:translate(-50%,0)}}
 @media (prefers-reduced-motion:reduce){.kmend{animation:none}}
@@ -33356,14 +33376,23 @@ window.KIT_BAKE=KIT_BAKE;
   const b=KIT_BAKE.pick(q,m[2],"sm");if(b.attr)h=h.replace(m[0],`<img${m[1]}${b.attr.trim()} src="${b.src}"`)}catch(e){}return h}})();
 /* kitFxPut(img,p,host): lay the face layers of person p over the DRAWN picture img inside host (room stage, podium, any figure) */
 function kitFxPut(img,p,host){{if(!img||!p||(typeof kitIsKnown==="function"&&!kitIsKnown(p)))return;const fx=kitFxLayers(p,kitFile(img.currentSrc||img.src));if(!fx)return;const s=document.createElement("span");s.className="kfxf";s.innerHTML=fx;
-  /* lay the box over the DRAWN picture: object-fit contain/cover + object-position, and the image's own transform (kit owner #2: the veil sat beside the face) */
-  const cs=getComputedStyle(img);const L0=img.offsetLeft,T0=img.offsetTop,bw=img.offsetWidth,bh=img.offsetHeight;let L=L0,T=T0,w=bw,h=bh;const nw=img.naturalWidth,nh=img.naturalHeight;
+  s.__img=img;s.style.cssText="position:absolute;pointer-events:none;z-index:2";kfxGeom(s);img.classList.add("kfxon");host.appendChild(s);KFX_L.add(s)}}
+/* ROOT FIX (owner 17/11 03:58Z, toil-reveal-fix): the face layer follows ITS OWN picture, never the stage. It is laid over the DRAWN picture (object-fit contain/cover + object-position,
+   the image's own transform AND its translate / rotate / scale properties: j59 slides the figures with `translate`, the touch kit presses with `scale`) and re-laid every frame while
+   the picture moves (transition / animation / class / style change on the stage); it is hidden whenever its picture is not shown (slot off, another person's place). */
+const KFX_L=new Set();let kfxT=0,kfxRaf=0;
+function kfxGeom(s){const img=s.__img;if(!img||!img.isConnected){s.style.display="none";return}const cs=getComputedStyle(img);if(cs.display==="none"||cs.visibility==="hidden"||!img.offsetParent&&cs.position!=="fixed"||!img.offsetWidth){s.style.display="none";return}
+  s.style.display="";const L0=img.offsetLeft,T0=img.offsetTop,bw=img.offsetWidth,bh=img.offsetHeight;let L=L0,T=T0,w=bw,h=bh;const nw=img.naturalWidth,nh=img.naturalHeight;
   if(nw&&nh&&/contain|cover|scale-down/.test(cs.objectFit)){const k=cs.objectFit==="cover"?Math.max(bw/nw,bh/nh):Math.min(bw/nw,bh/nh,cs.objectFit==="scale-down"?1:99);w=nw*k;h=nh*k;
    const op=(cs.objectPosition||"50% 50%").split(/\s+/);const f=(v,free)=>/%$/.test(v)?free*parseFloat(v)/100:/px$/.test(v)?parseFloat(v):/left|top/.test(v)?0:/right|bottom/.test(v)?free:free/2;
    L+=f(op[0]||"50%",bw-w);T+=f(op[1]||"50%",bh-h)}
   const to=(cs.transformOrigin||"").split(/\s+/).map(parseFloat);const tor=to.length>=2&&!isNaN(to[0])?`${to[0]-(L-L0)}px ${to[1]-(T-T0)}px`:"50% 50%";
-  s.style.cssText=`position:absolute;pointer-events:none;z-index:2;left:${L}px;top:${T}px;width:${w}px;height:${h}px;transform:${cs.transform};transform-origin:${tor}`;img.classList.add("kfxon");host.appendChild(s)}}
-function kitFigFx(){try{const st=$("stage");if(!st)return;st.querySelectorAll(".kfxf").forEach(e=>e.remove());const ppl=typeof curPeople==="function"?curPeople():[];const put=kitFxPut;
+  const st=s.style;st.left=L+"px";st.top=T+"px";st.width=w+"px";st.height=h+"px";st.transform=cs.transform;st.transformOrigin=tor;st.translate=cs.translate||"none";st.rotate=cs.rotate||"none";st.scale=cs.scale||"none";st.opacity=cs.opacity}
+function kfxSyncAll(){KFX_L.forEach(s=>{if(!s.isConnected){KFX_L.delete(s);return}kfxGeom(s)})}
+function kfxKick(){kfxT=performance.now()+900;if(kfxRaf||!KFX_L.size)return;const f=()=>{kfxSyncAll();if(performance.now()<kfxT)kfxRaf=requestAnimationFrame(f);else kfxRaf=0};kfxRaf=requestAnimationFrame(f)}
+["transitionrun","transitionend","animationstart","animationend"].forEach(e=>document.addEventListener(e,kfxKick,true));addEventListener("resize",kfxKick);
+window.kfxKick=kfxKick;window.kfxSyncAll=kfxSyncAll;
+function kitFigFx(){try{const st=$("stage");if(!st)return;st.querySelectorAll(".kfxf").forEach(e=>{KFX_L.delete(e);e.remove()});if(!st.__kfxmo&&window.MutationObserver){st.__kfxmo=new MutationObserver(ms=>{if(ms.some(r=>!r.target.closest(".kfxf")))kfxKick()});st.__kfxmo.observe(st,{attributes:true,subtree:true,attributeFilter:["class","style","hidden"]})}const ppl=typeof curPeople==="function"?curPeople():[];const put=kitFxPut;
  /* the person of a place token: its ref, or (Hoàng thượng, Thái hậu, cung nữ thân tín, thái y) the one KIT_FACEFX person lookup */
  st.querySelectorAll("#tokens .tok").forEach(b=>{const p=ppl[+b.dataset.p];put(b.querySelector("img.figimg"),p&&(p.ref||(window.KIT_FACEFX?KIT_FACEFX.person(p):null)),b)});
  const me=$("mefig");if(me&&typeof S!=="undefined")put(me,S,me.parentElement)}catch(e){}}
@@ -36719,7 +36748,7 @@ function wdSew(p,fk){const g=wdFabOf(fk);if(!g)return null;const e={k:g,src:"may
   return u0.apply(this,arguments)}})();
 /* 3. old saves: a worn hair item (e.w) goes into the Cài tóc slot; a running S.dress becomes its garment in the Y phục slot */
 (function(){const o0=wdOf;wdOf=function(p){if(p&&typeof p==="object"&&!p.__wdmig){p.__wdmig=1;try{
-  const worn=[];if(p.inv)for(let i=p.inv.length-1;i>=0;i--){const e=p.inv[i];if(e&&e.w&&!e.h&&IT[e.k]&&itm(e.k).wsl){p.inv.splice(i,1);delete e.w;worn.push(e)}}
+  const worn=[];if(p.inv)for(let i=p.inv.length-1;i>=0;i--){const e=p.inv[i];if(e&&e.w&&!e.h&&IT[e.k]&&itm(e.k).wsl&&itm(e.k).wsl!=="hd"){p.inv.splice(i,1);delete e.w;worn.push(e)}}
   if(!p.wd)o0.call(this,p);
   for(const e of worn){if(!p.wd.tram||p.wd.tram.from==="base"||p.wd.tram.src==="cap")wdWearEntry(p,e);else{p.inv=p.inv||[];p.inv.push(e)}}
   if(p.dress){const d=p.dress;p.dress=null;if(d.until>((S&&S.turn)|0)&&IT[d.k])wdSew(p,d.k)}}catch(e){console.error("wdmig",e)}finally{delete p.__wdmig}}
@@ -36748,9 +36777,9 @@ function wdVpSeen(){const r=rkOf(S);const L=(S.inv||[]).filter(e=>e&&e.w&&!e.h&&
 /* 7. the bag: WD items in their tabs, with their painting, grade and Xa xỉ N; worn + pawned ones too */
 try{const t=KINV_CATS.find(c=>c[0]==="trang");if(t&&!t[2].includes("Trâm cài"))t[2].push("Trâm cài");
  if(!KINV_CATS.some(c=>c[0]==="y"))KINV_CATS.splice(1,0,["y","Y phục",["Y phục"]])}catch(e){}
-function wdBagItem(k,extra){const w=WD_ITEMS[k];return Object.assign({cat:w.sl==="tram"?"trang":"y",src:w.icon,src512:w.icon,name:w.n,grade:w.g|0,qty:1,lux:wdLux(k),
- tip:`${w.n} · ${w.sl==="tram"?"Trâm cài":"Y phục"}`},extra)}
-(function(){const k0=kinvItems;kinvItems=function(){const L=k0.apply(this,arguments).map(x=>WD_ITEMS[x.g.k]?Object.assign(x,wdBagItem(x.g.k,{qty:x.qty,tip:`${WD_ITEMS[x.g.k].n}${x.qty>1?" ×"+x.qty:""} · ${WD_ITEMS[x.g.k].sl==="tram"?"Trâm cài":"Y phục"}`})):x);
+function wdBagItem(k,extra){const w=WD_ITEMS[k];return Object.assign({cat:w.sl==="y"?"y":"trang",src:w.icon,src512:w.icon,name:w.n,grade:w.g|0,qty:1,lux:wdLux(k),
+ tip:`${w.n} · ${wdSlN(w.sl,0)}`},extra)}
+(function(){const k0=kinvItems;kinvItems=function(){const L=k0.apply(this,arguments).map(x=>WD_ITEMS[x.g.k]?Object.assign(x,wdBagItem(x.g.k,{qty:x.qty,tip:`${WD_ITEMS[x.g.k].n}${x.qty>1?" ×"+x.qty:""} · ${wdSlN(WD_ITEMS[x.g.k].sl,0)}`})):x);
   try{const w=wdOf(S);const W=["tram","y"].filter(sl=>w[sl]&&WD_ITEMS[w[sl].k]).map(sl=>wdBagItem(w[sl].k,{id:-1,g:{k:w[sl].k,i:-1,n:1,w:1,wdSlot:sl},on:true,onText:"Đang mặc"}));
    const P=(S.wdPawn||[]).map((x,i)=>x&&x.e&&WD_ITEMS[x.e.k]?wdBagItem(x.e.k,{id:-1,g:{k:x.e.k,i:-1,n:1,wdPawn:i},mark:["đang cầm","n"]}):null).filter(Boolean);
    return W.concat(L,P)}catch(e){console.error(e);return L}}})();
@@ -36758,7 +36787,7 @@ function wdBagItem(k,extra){const w=WD_ITEMS[k];return Object.assign({cat:w.sl==
 function wdEntryOf(g){if(g.wdSlot)return wdOf(S)[g.wdSlot];if(g.wdPawn!=null)return ((S.wdPawn||[])[g.wdPawn]||{}).e;return S.inv[g.i]}
 /* wdItemLists(e,o) → {gr, D, M, G, lux, from, known} (KIT §70 kitItemDetail composes them; wdItemRowsE = the old 4-row block) */
 function wdItemLists(e,o){o=o||{};const w=wdItem(e);if(!w)return null;const gr=KIT_GRADE[w.g|0];const D=[],M=[],G=[];const fx=plainFx(w.w);
- D.push(`${w.sl==="tram"?"cài":"mặc"}: ${fx||"giản dị, không thêm"}`);
+ D.push(w.sl==="hd"?`${wdSlN("hd",3)}: đặt khéo thì dung nhan thêm phần, xa xỉ cộng vào tổng`:`${wdSlN(w.sl,3)}: ${fx||"giản dị, không thêm"}`);
  const known=wdKnowsE(e);if(known&&wdP(e,S)>wdPOf(S)&&!(w.nt&&e.own))M.push("đồ phẩm trên ngươi: dễ bị hặc");if(w.nt)M.push("mất, làm vỡ là tội bất kính");
  if(e.h&&e.gh)M.push("không phải đồ của ngươi");
  G.push(known?`đồ phẩm ${wdPName(wdP(e,S))}`:"chưa rõ phẩm");const from=wdSrcTxt(e)||"";
@@ -36769,7 +36798,7 @@ function wdItemRowsE(e,o){const L=wdItemLists(e,o);if(!L)return"";const G=[`xa x
 function wdActBtns(e,g){const w=wdItem(e);if(!w)return[];const B=[];const ag=wdAgent(S);const sl=w.sl;
  if(g.wdPawn!=null){const P=S.wdPawn[g.wdPawn];B.push(pbtn(`data-wd="redeem" data-i="${g.wdPawn}"`,"Chuộc lại",`tốn: 1 khắc, Bạc -${P.back} · thành: món đồ về lại rương`,S.bac<P.back?`thiếu bạc (cần ${P.back})`:whyTime(1)));return B}
  if(g.wdSlot){if(sl==="tram")B.push(pbtn(`data-wd="off" data-sl="tram"`,"Tháo trâm","thành: cất vào rương, để tóc trơn",""));return B}
- const ix=g.i;B.push(pbtn(`data-wd="wear" data-ix="${ix}"`,sl==="tram"?"Cài":"Mặc",`tốn: 1 khắc · thành: vào ô ${sl==="tram"?"Cài tóc":"Y phục"}, ${plainFx(w.w)||"giản dị"}`,whyTime(1)));
+ const ix=g.i;if(sl!=="hd")B.push(pbtn(`data-wd="wear" data-ix="${ix}"`,wdSlN(sl,1),`tốn: 1 khắc · thành: vào ô ${wdSlN(sl,2)}, ${plainFx(w.w)||"giản dị"}`,whyTime(1)));
  B.push(pbtn(`data-kinvact="gift" data-ix="${ix}"`,"Tặng","tốn: 2 khắc · thành: chọn người nhận",w.nt?"đồ ngự tứ: không được đem tặng":whyTime(2)));
  const ntWhy=w.nt?"đồ ngự tứ: bán, cầm là bất kính":"",agWhy=ag?"":"chưa có ma ma hay thái giám tin cẩn";const pr=w.pr||0;
  const lo=Math.round(pr*WD.sellLo/100),hi=Math.round(pr*WD.sellHi/100),pct=ag?wdSellPct(S,ag):0;
@@ -36778,7 +36807,7 @@ function wdActBtns(e,g){const w=wdItem(e);if(!w)return[];const B=[];const ag=wdA
  return B}
 function wdOpen(x){const g=x.g,e=wdEntryOf(g),w=wdItem(e);if(!w)return;const B=wdActBtns(e,g);const pawn=g.wdPawn!=null?S.wdPawn[g.wdPawn]:null;
  const F=[];if(g.n>1)F.push(`Trong rương: ${g.n} món.`);if(g.wdSlot)F.push("Ngươi đang mặc.");if(g.wdSlot==="y")F.push("Muốn thay, chạm ô Y phục ở Đang mang rồi chọn bộ khác.");
- kitModal({kind:"info",title:w.n,sub:`${w.sl==="tram"?"Trâm cài":"Y phục"} · ${KIT_GRADE[w.g|0].n}`,
+ kitModal({kind:"info",title:w.n,sub:`${wdSlN(w.sl,0)} · ${KIT_GRADE[w.g|0].n}`,
   itemPic:kitItem({src:w.icon,name:"",grade:w.g,size:"lg",qty:g.n,lux:wdLux(w.k)}).replace('<span class="kitn"></span>',''),
   html:`<div class="kinvrows">${wdItemRowsE(e,{pawn})}</div>${F.length?kitFacts(F):""}${B.length?`<div class="rbtn kinvacts">${B.join("")}</div>`:""}`,btn:"Lui"})}
 function wdFabOpen(x){const g=x.g,it=itm(g.k),gk=wdFabOf(g.k),w=WD_ITEMS[gk];const B=[];const i=g.i;
@@ -40334,7 +40363,9 @@ function lockNext(){const n=$("next");if(!n)return;const eR=!!(CW.on&&eW()&&CW.e
  if(lock){if(!n.disabled)n.disabled=true;if(n.dataset.coopWait!=="1")n.dataset.coopWait="1";/* owner 16/11 (owner-coop-stuck.jpg: faded "Sang buổi", no word): every lock says why */
   const s=COOP.state;const t=(CW.bend||eR||nReady()||waiting()||CW.pend)?CTM_WAIT.coopWaitPeer:wb?CTM_WAIT.coopWaitPeer2:CW.hold?CTM_WAIT.coopWaitBuild:frozen()?(s.status==="moved"?CTM_WAIT.coopMoved:s.status!=="open"?CTM_WAIT.coopRelink:CTM_WAIT.coopAbsent):CTM_WAIT.coopLinking;if(t&&n.textContent!==t){/* keep the button's own width (the tabs beside it must not shrink): the longer words wrap inside */
   if(!n.style.maxWidth&&n.offsetWidth)n.style.maxWidth=n.offsetWidth+"px";n.classList.add("kcwait");n.textContent=t}}
- else if(n.dataset.coopWait){delete n.dataset.coopWait;n.style.maxWidth="";n.classList.remove("kcwait");n.disabled=!!(S&&(S.dead||Q.length||S.mg));const t=CW.on?"Sẵn sàng":S&&(S.buoi||0)>=(typeof B4L==="number"?B4L:2)?"Sang ngày mới":"Sang buổi";if(n.textContent!==t)n.textContent=t}}
+ else if(n.dataset.coopWait){delete n.dataset.coopWait;n.style.maxWidth="";n.classList.remove("kcwait");n.disabled=!!(S&&(S.dead||Q.length||S.mg));const t=CW.on?"Sẵn sàng":S&&(S.buoi||0)>=(typeof B4L==="number"?B4L:2)?"Sang ngày mới":"Sang buổi";if(n.textContent!==t)n.textContent=t}
+ /* nothing locks it and nothing is open (render's own rule): a dialog closed by the host's patch (part D / E) without a render left it off */
+ else if(CW.on&&n.disabled&&S&&!S.dead&&!Q.length&&!S.mg)n.disabled=false}
 /* ---------- phase 2 (PROTOCOL §9): same buổi, same place, acts between the two ---------- */
 Object.assign(CW,{bend:false,whereKey:"",lastWhere:null,fpos:null,posKey:"",p2:true,allow:false,acts:{},rpend:{}});
 const bkey=()=>wk()+":"+((S&&S.buoi)||0);
@@ -45914,7 +45945,7 @@ function kitItemInfo(x){const e=x&&typeof x==="object"?x:{k:x};const k=e.k;const
  try{
   if(e.wk){const a=typeof itemArt==="function"?itemArt(e):null;const ti=Math.max(0,Math.min(3,e.wk.ti|0));name=e.wk.n||name;g=ti;gn=typeof WTIER!=="undefined"?WTIER[ti]:"";
    src=a?a.src:"";src512=a?a.src512:"";sub="Tác phẩm tự tay"}
-  else if(typeof WD_ITEMS==="object"&&WD_ITEMS[k]){const w=WD_ITEMS[k];name=w.n||name;src=w.icon||"";g=w.g|0;sub=w.sl==="tram"?"Trâm cài":"Y phục"}
+  else if(typeof WD_ITEMS==="object"&&WD_ITEMS[k]){const w=WD_ITEMS[k];name=w.n||name;src=w.icon||"";g=w.g|0;sub=wdSlN(w.sl,0)}
   else if(it.vl){src=typeof vlSrc==="function"?vlSrc(k):"";g=typeof vlG==="function"?vlG(e):0;sub=it.kd||"Mạng che mặt"}
   else{const a=typeof itemArt==="function"?itemArt(k):null;if(a){src=a.src;src512=a.src512;g=a.grade|0}else if(typeof ITIMG==="object"&&ITIMG[k])src=`https://ctm-img.victoria-tntt.workers.dev/img/item-${ITIMG[k]}.webp`}
  }catch(err){}
@@ -47135,7 +47166,7 @@ function kitItemRef(r){try{if(r==null||r==="")return null;if(r.k!=null&&r.I&&r.k
  return{kidR:1,k,e,g,I,wd,it,work,veil,worn,who:who&&who!==S?who:null,qty:(g&&g.n)||r.qty||1}}catch(err){console.error("kitItemRef",err);return null}}
 /* kind · slot: "Trâm cài · cài tóc", "Trang sức · đeo tay", "Tác phẩm tự tay · Thêu" */
 function kidKind(R){const it=R.it||{};if(R.work){const A=typeof ARTS!=="undefined"?ARTS.find(a=>a.k===R.e.wk.a):null;return"Tác phẩm tự tay"+(A?" · "+A.n:"")}
- if(R.wd){const w=WD_ITEMS[R.k];return w.sl==="tram"?"Trâm cài · cài tóc":"Y phục · mặc"}
+ if(R.wd){const w=WD_ITEMS[R.k];return w.sl==="tram"?"Trâm cài · cài tóc":w.sl==="hd"?"Hoa điền · dán trán khi điểm trang":"Y phục · mặc"}
  if(R.veil)return(it.kd||"Mạng che mặt")+" · che mặt";
  const sl=it.sl?({hair:"cài tóc",wrist:"đeo tay",waist:"đeo eo",scent:"đeo bên mình"}[it.sl]||""):it.dr?"may áo":"";return(it.kd||"Đồ vật")+(sl?" · "+sl:"")}
 /* theme tags (Hội phối đồ đề, jts TS_THEME + any item's own `th` list) */
@@ -47209,7 +47240,7 @@ document.addEventListener("click",ev=>{const t=ev.target;if(!t||!t.closest)retur
  const pick=c.dataset.kidpick;kitItemCard(e?{e}:who&&c.dataset.kidsl?{wdSlot:c.dataset.kidsl,who}:{k:c.dataset.kid,who},pick&&e?{acts:kidPickActs(e,ix,pick),closeModal:true}:{})},true);
 /* a pick tile inside a slot panel (Bên mình: "Chạm một món để cài / đeo / may áo") → the card with the ONE act (no blind wear) */
 function kidPickActs(e,ix,pick){const W=typeof WD_ITEMS==="object"?WD_ITEMS:{};const it=IT[e.k]||{};
- try{if(W[e.k]){const w=W[e.k];return[pbtn(`data-wd="wear" data-ix="${ix}"`,w.sl==="tram"?"Cài":"Mặc",`tốn: 1 khắc · thành: vào ô ${w.sl==="tram"?"Cài tóc":"Y phục"}, ${plainFx(w.w)||"giản dị"}`,typeof whyTime==="function"?whyTime(1):"")]}
+ try{if(W[e.k]){const w=W[e.k];if(w.sl==="hd")return[];return[pbtn(`data-wd="wear" data-ix="${ix}"`,wdSlN(w.sl,1),`tốn: 1 khắc · thành: vào ô ${wdSlN(w.sl,2)}, ${plainFx(w.w)||"giản dị"}`,typeof whyTime==="function"?whyTime(1):"")]}
   if(pick==="use"||it.dr){const g=typeof wdFabOf==="function"?wdFabOf(e.k):null;return[pbtn(`data-kinvact="use" data-ix="${ix}"`,"May áo",g&&W[g]?`thành: ${W[g].n} vào ô Y phục, ${plainFx(W[g].w)||"giản dị"} · kèm: áo đang mặc cất vào rương`:`thành: Sắc +${it.dr} trong 3 tháng`,"")]}
   const over=it.rk&&it.rk>S.rank;return[pbtn(`data-kinvact="wear" data-ix="${ix}"`,"Đeo",`thành: ${kinvPlain(it.w)}${over?" · kèm: vượt phẩm, dễ bị tố":""}`,"")]}catch(err){return[]}}
 document.addEventListener("keydown",ev=>{const f=document.getElementById("kidfl");if(f&&ev.key==="Escape"){ev.stopPropagation();ev.preventDefault();kitItemCardClose();return}
@@ -47452,7 +47483,10 @@ function toilFOf(host){let fest=false;try{fest=!!(typeof festToday==="function"&
 /* ---------- DIEMTRANG-SCORE (owner 16/11 ~22:30Z, OD "answer to the diemtrang-score proposal"): freehand drawing on HER face, strict
    scoring against a hidden ideal taken from the face itself, no guide lines; diêm dúa earned by choices and revealed only in the result;
    vụng earned by a part that went wrong. ONE CORE: every number here; NPCs and the bot use the same table (toilNpcPlay). ---------- */
-Object.assign(BAL.toil,{skillShare:10,
+/* hoa-dien: the parts' weights in ONE place (were typed .4/.3/.3 in toilFinish, toilNpcPlay and the live HUD); hd = the hoa điền placed (jhd),
+   counted only on a day she placed one (weights are normalised over the parts present, so a day without one scores exactly as before) */
+function toilRaw(P){const W=BAL.toil.w;let s=0,n=0;for(const k in W){const v=P&&P[k];if(typeof v!=="number")continue;s+=W[k]*v;n+=W[k]}return n?Math.round(100*s/n):0}
+Object.assign(BAL.toil,{w:{brow:.4,powder:.3,son:.3,hd:.25},skillShare:10,
  /* brow: tolerance = brow length × (tol + tolSk × skill); a stroke counts for the nearer brow; over = stroke beyond the brow ends;
     messy = spread of the strokes across the line above the brow's own thickness; sym = the two brows at different heights */
  brow:{tol:.11,tolSk:.04,overK:1.2,messyK:.6,symK:.35,smear:30,near:3,slack:.3,end:.6,thk:.6},
@@ -47471,7 +47505,7 @@ Object.assign(BAL.toil,{skillShare:10,
  pop:{brow:[.8,.5],powder:[.8,.6],over:.3,spill:.3,lip:[.75,.4]},
  tone:{mat:{hoadao:"w",hongmai:"c",rangchieu:"w",kimsa:"w",tuvi:"c",hophach:"w"},ma:{hongphan:"c",hoadao:"w",haiduong:"c",yenchi:"c",rangchieu:"w",hongsen:"c",camquyt:"w"},
   son:{haiduong:"c",dotham:"c",chusa:"w",manchin:"c",sanho:"w",camdao:"w",hophach:"w"}},
- teaseGhen:2,
+ teaseGhen:2,harshAff:2,harshWin:40,harshDanh:-1,harshDuc:-1,harshGhen:1,replyGhen:2,replySuc:-2,level:{dep:.6,tuyet:.8},/* whole-look strength of Kiều diễm / Khuynh thành: eye (eye, eyeH, wing, low, shim) and lip (lip, gloss) in TOIL_MKS are x this; blush has its own BAL.toil.blush; 1 = the v18 look; owner pick 17/11 ~00:10Z: Kiều diễm 60 %, Khuynh thành 80 % (kk sheets) */blush:{vua:.1373,dep:.1637,tuyet:.2092},/* blush colour strength of Đoan trang (vua) / Kiều diễm (dep) / Khuynh thành (tuyet); TOIL_MKS reads it. vua: owner pick 17/11 ~22:25Z = 60 % of the old visible blush (R-G 10.2); dep/tuyet: owner row 3 17/11 ~21:37Z, she now picks their level herself (kk sheets) */vungB:.5,vungSm:1,vungSide:1,vungRot:-1,vungSmSize:.7,/* the ONE corner smudge (owner 17/11 ~18:58Z: other direction): side -1 = left end of the lip in the picture, rot -1 = streak angled down-left, vungSmSize = smudge size (v17: V2-B side +1 = right end, 70 % of the v16 size) *//* vụng A lip smear beyond the lip line (x the v11 offset; owner 17/11 ~17:20Z: smudge a bit more) */lod:{fullAt:95,maxAt:25,boost:1.9,steps:3,cue:{lip:1,eye:1,wing:1.3,low:1.3,bl:1.3,vung:.3},look:{tuyet:.3,dep:.65}},/* size-aware makeup (owner 17/11 ~17:45Z): face px >= fullAt = the approved strength; as the face shrinks to maxAt px the macro cues (lip colour, eye/lid colour, wing, lower lash, blush, vụng powder) are multiplied up to x boost (per-cue weight in cue), in `steps` steps */vungPuff:{big:.75,small:.5,al:.7,alv:.1},/* vụng A powder puffs (v11): size x the BLUSH disc radius = .75 or .5 (a mix on every cheek, per-day seed; owner ~17:00Z: not every blob blush-sized or it hides the blush), more opaque, the SAME blur profile as the blush (BLP.wide, used directly in toilMkDraw) and a much less white alpha, layered over the blush (owner 17/11 ~16:20Z) *//* share of vụng days that are the 'đánh quá tay, như hề' variant B (the rest: A 'không biết trang điểm'); picked once per day from col.seed */presetDiem:2,mixH:1,showyH:1,cakeH:[[.3,1],[.55,2]],
  /* NPCs and the bot: how well each part goes, by skill (same skill formula), spread per part */
  play:{q0:.53,qSk:.15,spread:.44,diemPre:.3}});
 function toilDense(P,n){const L=[0];for(let i=1;i<P.length;i++)L.push(L[i-1]+Math.hypot(P[i][0]-P[i-1][0],P[i][1]-P[i-1][1]));const T=L[L.length-1]||1,o=[];
@@ -47518,9 +47552,9 @@ function toilPowderQ(G,I,sk){const B=BAL.toil.cheek,lo=B.doseLo-B.doseLoSk*sk,hi
 function toilLipQ(dtR,d,lr,sk){const B=BAL.toil.lip;const qt=Math.max(0,1-Math.abs(dtR)/(B.ttol+B.ttolSk*sk)),qp=Math.max(0,1-d/(lr*(B.tol+B.tolSk*sk)));return qt*qp}
 /* the look from parts + score: vụng (with the part that went wrong) · else by score up to Khuynh thành (makeup-lux: no overdone level; how lavish the
    whole look is, is the luxury total's business at events) */
-function toilLookOf(P,score){const B=BAL.toil;const parts=[["brow",P.brow],["powder",P.powder],["son",P.son]].filter(x=>typeof x[1]==="number");
+function toilLookOf(P,score){const B=BAL.toil;const parts=[["brow",P.brow],["powder",P.powder],["son",P.son],["hoadien",P.hd]].filter(x=>typeof x[1]==="number");/* r2: a vụng hoa điền (below the same fail cut) is a slip like the others */
  const worst=parts.reduce((a,x)=>!a||x[1]<a[1]?x:a,null);if(score<B.tier[0]||(worst&&worst[1]<B.fail))return{look:"vung",slip:worst?worst[0]:"brow"};
- return{look:score>=B.tier[1]?"dep":null}}/* the picture id (main's toil art: dep); the LEVEL (up to Khuynh thành) comes from the score in toilMk */
+ return{look:score>=B.tier[2]?"tuyet":score>=B.tier[1]?"dep":null}}
 /* an NPC's day from WORLD facts only (Thái hậu alive, a festival) — never this seat's own rank / place / night:
    both co-op seats read the same allowance for the same consort (review r1, CO-OP FIRST) */
 function toilNpcOcc(){const L=[];try{if(!S.thDead)L.push("th");if(typeof festToday==="function"&&festToday())L.push("fest")}catch(e){}return L.length?L:["thuong"]}
@@ -47531,15 +47565,15 @@ function toilMk(rec){if(!rec||!rec.makeup)return"moc";const o=TOIL_OLDLV[rec.loo
 function toilLv(k){return BAL.toil.lv[TOIL_OLDLV[k]||k]||BAL.toil.lv.moc}
 /* the makeup part of a person's xa xỉ today (0 = bare face / no sitting / not a consort today). Reads the RAW NPC roll (TOIL_NPC0): jlux's toilNpc reads luxOf */
 function toilMkRec(p){try{if(!p||!toilOn(p))return null;if(p===S)return toilToday(S);if(p.coop){const t=p.toilette;return t&&t.wk===toilWk()?t:null}return TOIL_NPC0(p)}catch(e){return null}}
-function toilMkLux(p){const r=toilMkRec(p);return r&&r.makeup?toilLv(toilMk(r)).lux:0}
+function toilMkLux(p){const r=toilMkRec(p);return r&&r.makeup?toilLv(toilMk(r)).lux+(r.hd&&typeof hdLux==="function"?hdLux(r.hd):0):0}
 /* a look's xa xỉ: its tier word + the existing kit chip "Xa xỉ N" (jinv kitLuxChip) — no beauty number (owner ~15:45Z: the NAME is the beauty) */
 function toilLvChips(k){const L=toilLv(k);return `${kitChip(TOIL_LUXW[TOIL_OLDLV[k]||k]||TOIL_LUXW.moc,"n")}${kitLuxChip({sc:L.lux})}`}
 /* the ladder of the five looks (kitRows): name | xa xỉ word + number — the mirror shows it before she paints */
 function toilLvRows(){return TOIL_LVS.map(k=>[TOIL_MK[k],toilLvChips(k)])}
 /* NPCs and the bot: the same parts, score and look from skill (hash of person + day: no Math.random, both co-op seats agree) */
-function toilNpcPlay(sk,h,col,want,style,occ,rk){const N=BAL.toil.play,B=BAL.toil;const r=i=>(wdHash(h+":"+i)%1000)/1000;
- const q=i=>Math.max(0,Math.min(1,N.q0+N.qSk*sk+(r(i)+r(i+5)-1)*N.spread));const P={brow:q(0),powder:q(1),son:q(2)};
- const raw=Math.round(100*(.4*P.brow+.3*P.powder+.3*P.son));const score=Math.max(0,Math.min(100,Math.round(raw*(100-B.skillShare)/100)+Math.round(B.skillShare*sk)));
+function toilNpcPlay(sk,h,col,want,style,occ,rk,hq){const N=BAL.toil.play,B=BAL.toil;const r=i=>(wdHash(h+":"+i)%1000)/1000;
+ const q=i=>Math.max(0,Math.min(1,N.q0+N.qSk*sk+(r(i)+r(i+5)-1)*N.spread));const P={brow:q(0),powder:q(1),son:q(2)};if(typeof hq==="number")P.hd=hq;
+ const raw=toilRaw(P);const score=Math.max(0,Math.min(100,Math.round(raw*(100-B.skillShare)/100)+Math.round(B.skillShare*sk)));
  return Object.assign({score,parts:P},toilLookOf(P,score))}
 /* ---------- the dress verdict (her clothes NOW, for formality F) ---------- */
 function toilDress(p,F){let st="ok";try{st=wdStatus(p)}catch(e){}if(st==="tang")return{v:"tang",style:"showy"};
@@ -47555,8 +47589,9 @@ function toilNpc(v){const N=BAL.toil.npc,h=wdHash(wdKey(v)+":"+toilWk()),r1=(h%1
  const style=dv==="giandi"?"plain":dv==="photruong"?"showy":"fit";let hoa=0;try{hoa=kg82Lv(v,"hoa")||0}catch(e){}const sk=Math.max(0,Math.min(1,(v.sac||50)/BAL.toil.sacDiv+hoa/BAL.toil.hoaDiv));
  /* her colours: a showy day → a diêm dúa preset, a plain day → a thanh nhã one, else either (BAL.toil.play.diemPre) */
  const want=style==="showy"||(style!=="plain"&&((h>>>4)%1000)/1000<BAL.toil.play.diemPre)?"diem":"";const L=TOIL_PRE.filter(x=>(x[2]==="diem")===(want==="diem"));const col=Object.assign({},L[(h>>>12)%L.length][4]);
- const R=toilNpcPlay(sk,h,col,want,style,toilNpcOcc(),v.rank);
- return{wk:toilWk(),dv,style,makeup,score:R.score,look:R.look,slip:R.slip,col:Object.assign(col,want?{want}:{}),npc:1}}
+ /* hoa-dien: her hoa điền of the day, placed by the SAME formula (jhd hdNpc: her hand, hashed per day, cap BAL.hd.npcCap) */
+ const HD=makeup&&typeof hdNpc==="function"?hdNpc(v,h,sk):null;const R=toilNpcPlay(sk,h,col,want,style,toilNpcOcc(),v.rank,HD?HD.q:null);
+ return Object.assign({wk:toilWk(),dv,style,makeup,score:R.score,look:R.look,slip:R.slip,col:Object.assign(col,want?{want}:{}),npc:1},HD?{hd:HD}:{})}
 const TOIL_NPC0=toilNpc;/* the raw roll (no luxOf inside): toilMkLux reads it, jlux's wrapper (dress verdict from luxOf) stays outside */
 /* makeup-lux (OD L1638 "nó sẽ cộng điểm chung với các cái bộ đồ ... trang sức ... không có xét riêng"): the ONE luxury total luxOf(p) = worn pieces
    (jinv) + pet (jpet) + today's makeup level (BAL.toil.lv[level].lux). Every event judgement that reads luxOf therefore counts the face too, the
@@ -47624,7 +47659,7 @@ function toilGhenOf(v,L){const B=BAL.toil;let g=(L.showy?B.ghenShowy:0)+(L.mk===
 function toilRival(v,doIt){if(!v||!toilOn(S)||toilSeen(v))return null;const L=toilLook(),B=BAL.toil;const T=traitsOf(v);const frugal=T.some(t=>t==="Ân cần"||t==="Khiêm nhường");
  const g=Math.round(toilGhenOf(v,L));let aff=0,txt="";
  if(frugal&&(L.plain||L.mk==="moc")){aff=B.praisePlain;txt=`nàng ta chuộng giản dị: quý ta +${aff}`}else if(frugal&&L.showy){aff=B.frownShowy;txt=`ta ăn vận phô trương: nàng ta quý ta ${aff}`}
- if((L.dv==="diem"||L.mk==="vung")&&!txt){const n=BAL.toil.teaseGhen;txt=`nàng ta che miệng cười ${L.dv==="diem"?`lối ăn vận ${TOIL_DV.diem}`:`gương mặt điểm trang ${toilMkW("vung")}`} của ta: bớt ghen ${n}`;if(doIt){v.ghen=cl((v.ghen||0)-n,0,100);toilMark(v)}return{txt,aff:0,g:0}}
+ if((L.dv==="diem"||L.mk==="vung")&&!txt){const n=BAL.toil.teaseGhen;txt=`thấy ta ${L.dv==="diem"?"ăn vận diêm dúa":"điểm trang "+toilMkW("vung")}, nàng ta bớt ghen (Ghen -${n})`;if(doIt){v.ghen=cl((v.ghen||0)-n,0,100);toilMark(v)}return{txt,aff:0,g:0}}
  if(g)txt=[txt,`${L.showy?"ta ăn vận phô trương":`dung nhan ta ${toilMkW("tuyet")}`}: nàng ta ghen +${g}`].filter(Boolean).join(" · ");if(!txt)return null;
  if(doIt){if(aff)affAdd(v,S,aff);if(g)v.ghen=cl((v.ghen||0)+g,0,100);toilMark(v)}return{txt,aff,g}}
 function toilCrowd(doIt){const L=toilLook();if(!L.showy&&L.mk!=="tuyet")return{n:0};if(toilSeen("crowd"))return{n:0};let n=0;const R=liveRivals(false).filter(v=>!v.queen&&!v.out);
@@ -47665,10 +47700,10 @@ function toilSkill(){const B=BAL.toil;let h=0;try{h=kg82Lv(S,"hoa")||0}catch(e){
 function toilHUD(o){{const d=document.getElementById("kg82");if(d)d.classList.remove("kg-idle")}for(const k in o)kg82Set(k,o[k])}
 /* bots (dev/measure inpage4, window.__bot) cannot play the overlay: an average sitting — keep the clothes, a face drawn from skill + chance */
 function toilAuto(){const occ=toilOcc(),F=Math.max(...occ.map(o=>o.F)),d=toilDress(S,F),sk=toilSkill();/* the same table as the NPCs (toilNpcPlay), seeded: no Math.random */
- const col=toilColFix(S.toilette&&S.toilette.col);const R=toilNpcPlay(sk.sk,wdHash(String(S.name||"")+":"+toilWk()),col,col.want||"",d.style,occ.map(o=>o.k),S.rank);
- S.toilette={day:toilWk()*10,wk:toilWk(),score:R.score,makeup:true,style:d.style,dv:d.v,F,occ:occ.map(o=>o.k),look:R.look,slip:R.slip,parts:R.parts,col,auto:1}}
+ const col=toilColFix(S.toilette&&S.toilette.col);const h0=wdHash(String(S.name||"")+":"+toilWk()),HD=typeof hdNpc==="function"?hdNpc(S,h0,sk.sk):null;const R=toilNpcPlay(sk.sk,h0,col,col.want||"",d.style,occ.map(o=>o.k),S.rank,HD?HD.q:null);
+ S.toilette={day:toilWk()*10,wk:toilWk(),score:R.score,makeup:true,style:d.style,dv:d.v,F,occ:occ.map(o=>o.k),look:R.look,slip:R.slip,parts:R.parts,col,auto:1};if(HD)S.toilette.hd=HD}
 function toilOpen(){if(!S||S.dead)return;if(window.__bot){toilAuto();return}KG82.ctx="hoc";const occ=toilOcc();
- const d=kg82Open({art:"Điểm trang",title:"Trước gương đồng",how:"Hồi 1: chọn y phục theo dịp hôm nay. Hồi 2–4: tự tay kẻ mày lên đúng chân mày, đánh phấn hồng lên hai gò má, chấm son đúng chỗ khi vòng khép vừa môi. Không có đường chỉ: tay vụng thì mặt vụng."});
+ const d=kg82Open({art:"Điểm trang",title:"Trước gương đồng",how:"Hồi 1: chọn y phục theo dịp hôm nay. Hồi 2–4: tự tay kẻ mày lên đúng chân mày, đánh phấn hồng lên hai gò má, chấm son đúng chỗ khi vòng khép vừa môi. Có hoa điền thì chọn một chiếc, kéo vào giữa trán, nghiêng cho cân rồi dán. Không có đường chỉ: tay vụng thì mặt vụng."});
  if(!d)return;["chai-bg","chai-brow","chai-puff","chai-rouge"].forEach(n=>{try{kg82Img(n)}catch(e){}});try{KIT_VEIL.load()}catch(e){}
  TOIL.st={occ,F:Math.max(...occ.map(o=>o.F)),parts:{},dv:null,start:wdCur(S)};toilMkPre();toilHUD({score:"–",round:"1/4",time:"không hạn"});toilDressUI()}
 /* (a) CHỌN Y PHỤC — the bag (kitInvGrid, the same items as Tư trang) + the worn slots + her portrait in the chosen dress */
@@ -47678,7 +47713,7 @@ function toilWorn(sl){if(sl==="tram"||sl==="y"){const e=wdOf(S)[sl],w=wdItem(e);
 function toilPorAt(rank){const f0=figTierOf;try{figTierOf=function(w){return w===S?rank:f0.apply(this,arguments)};return figFor(S,"por")}catch(e){return""}finally{figTierOf=f0}}
 function toilPor(){let P=0;try{const it=wdItem(wdOf(S).y);P=it?it.P:0}catch(e){}const rank=P>=1?Math.min(7,P-1):S.rank;const me=pMe();const src=toilPorAt(rank)||me.src;return{src,rank}}
 function toilDressUI(){const box=kg82Box();if(!box)return;box.hidden=false;const st=TOIL.st;toilMkPre();
- const items=kinvItems().filter(x=>x&&x.g&&(WD_ITEMS[x.g.k]?x.g.wdPawn==null:(IT[x.g.k]&&["wrist","waist","scent"].includes(itm(x.g.k).sl)))).map(x=>Object.assign({},x,{cat:WD_ITEMS[x.g.k]?(WD_ITEMS[x.g.k].sl==="tram"?"tram":"y"):"trang"}));
+ const items=kinvItems().filter(x=>x&&x.g&&(WD_ITEMS[x.g.k]?x.g.wdPawn==null&&WD_ITEMS[x.g.k].sl!=="hd":(IT[x.g.k]&&["wrist","waist","scent"].includes(itm(x.g.k).sl)))).map(x=>Object.assign({},x,{cat:WD_ITEMS[x.g.k]?(WD_ITEMS[x.g.k].sl==="tram"?"tram":"y"):"trang"}));
  const sel=toilSelFind(items);items.forEach(x=>{x.sel=!!(sel&&sel.x===x)});
  const tabs=[{k:"tram",label:"Trâm cài"},{k:"y",label:"Y phục"},{k:"trang",label:"Trang sức"}];
  const slots=TOIL_SL.map(([k,label,gk])=>({k,label,item:toilWorn(k),ghost:keqArt(gk)||"",sel:!!(sel&&sel.sl===k)}));const x=luxOf(S),wb=wearBonus(S);
@@ -47727,9 +47762,13 @@ function toilDressDone(keep){const st=TOIL.st;if(keep&&st.start!==wdCur(S)){/* "
 
 /* (b) TRANG ĐIỂM — three hồi on her face in the mirror */
 const TOIL_MIR={cx:527/1024,cy:282/1024,rx:176/1024,ry:194/1024};/* the glass of the bronze mirror in mg-chai-bg (1024²) */
+/* ONE anchor table per face picture (owner 17/11, toil-reveal-fix): the mouth point every toilette placement uses (mirror, reveal close-up) is the centre of the
+   face-mesh lips in img/mk-fit (the same table the brows / cheeks / lips targets and the colour layers use); toil-fit only gives the face width / height / aspect / tilt */
+function toilRow(f){const r=TOIL_FIT.fit&&TOIL_FIT.fit[f];if(!r)return r;let m=null;try{const g=MK_FIT.g[MK_FIT.face(f)];m=g&&g[f]}catch(e){}if(!m||m.length<24)return r;let x=0,y=0;for(let i=0;i<12;i++){x+=m[2*i];y+=m[2*i+1]}const o=r.slice();o[0]=+(x/12/40).toFixed(2);o[1]=+(y/12/40).toFixed(2);/* cheeks from the same points (the blush discs of toilMakeupSvg read o[2..5]) */try{const A=r[8]||1.3,J=toilIdeal(m,{x:0,y:0,w:100,h:100*A},r[6]);if(J&&J.cheeks&&J.cheeks.length===2){o[2]=+J.cheeks[0].x.toFixed(2);o[3]=+(J.cheeks[0].y/A).toFixed(2);o[4]=+J.cheeks[1].x.toFixed(2);o[5]=+(J.cheeks[1].y/A).toFixed(2)}}catch(e){}return o}
+window.toilRow=toilRow;
 function toilFace(src){const n=String(src||"").split("?")[0].split("/").pop();let r=null;
  /* the measured mouth (https://ctm-img.victoria-tntt.workers.dev/img/toil-fit.json) defines the face box when there is one: mouth at (.46, .49) of the box, like the veil box */
- try{const v=TOIL_FIT.fit&&TOIL_FIT.fit[n];if(v)return[v[0]-.46*v[6],v[1]-.49*v[7],v[6],v[7],v[9]||0]}catch(e){}try{r=KIT_VEIL.fit&&KIT_VEIL.fit[n]}catch(e){}return r||[32,37,34,22,0]}
+ try{const v=toilRow(n);if(v)return[v[0]-.46*v[6],v[1]-.49*v[7],v[6],v[7],v[9]||0]}catch(e){}try{r=KIT_VEIL.fit&&KIT_VEIL.fit[n]}catch(e){}return r||[32,37,34,22,0]}
 function toilGeom(W,H,src){const ky=H*.94/(TOIL_MIR.ry*2*1024),k=Math.min(ky,W/(1024*.62));const S0=1024*k;const ox=W/2-TOIL_MIR.cx*S0,oy=H/2-TOIL_MIR.cy*S0;
  const mx=W/2,my=H/2,rx=TOIL_MIR.rx*S0,ry=TOIL_MIR.ry*S0;const f=toilFace(src);const IW=384,IH=506;const fx=f[0]/100*IW,fy=f[1]/100*IH,fw=f[2]/100*IW,fh=f[3]/100*IH,rot=(f[4]||0)*Math.PI/180;
  const s=rx*1.55/fw;const ax=toilAxisX(src),fcx=ax!=null?ax*IW:fx+fw/2,fcy=fy+fh*.3;/* the eye-mesh axis sits in the middle of the glass (the face-box centre when there is no mesh) */const cs=Math.cos(rot),sn=Math.sin(rot);
@@ -47777,12 +47816,13 @@ function toilMakeup(){const st=TOIL.st,box=kg82Box();box.innerHTML="";box.hidden
   /* the tool follows the finger */
   if(ptr){if(phase===0)kg82Spr(g,"chai-brow",ptr[0],ptr[1],null,G.fws*.55,{ax:.95,ay:.02});else if(phase===1)kg82Spr(g,"chai-puff",ptr[0],ptr[1],puffR*2.2,null,{alpha:.92})}
   if(phase===2)kg82Spr(g,"chai-rouge",W-Math.min(70,W*.12),H-Math.min(60,H*.13),Math.min(96,W*.16),null,{});
-  g.font=`700 15px ${kg82Col("--display","serif")}`;g.textAlign="center";g.fillStyle=kg82Col("--ink","#2a1a12");kg82Lbl(g,["Tự tay kẻ mày lên đúng chân mày","Đánh phấn hồng lên hai gò má","Chạm khi vòng đỏ khép vừa môi"][phase]||"",W/2,22,W-20);
+  g.font=`700 15px ${kg82Col("--display","serif")}`;g.textAlign="center";g.fillStyle=kg82Col("--ink","#2a1a12");kg82Lbl(g,["Tự tay kẻ mày lên đúng chân mày","Đánh phấn hồng lên hai gò má","Chạm khi vòng đỏ khép vừa môi",TOIL.hdLbl||""][phase]||"",W/2,22,W-20);
   kg82DrawPops(g,pops,now)}
  function next(){if(!ready||stop)return;/* review r2: nothing finishes before THIS face is anchored */if(phase===0){st.parts.brow=browQ();kg82Pop(pops,W/2,H*.2,st.parts.brow>=PB.brow[0]?"Mày cong như liễu!":st.parts.brow>=PB.brow[1]?"Mày tạm đều":"Nét mày lệch",st.parts.brow>=PB.brow[1]?kg82Col("--good","#2d7a52"):kg82Col("--red","#c23b22"))}
   else if(phase===1){const r=powQ();st.parts.powder=r.q;st.parts.over=r.over;st.parts.thick=r.thick;kg82Pop(pops,W/2,H*.2,r.q>=PB.powder[0]?"Phấn mịn đều!":r.over>PB.over?"Phấn dày quá":r.spill>PB.spill?"Phấn lem ra ngoài":"Phấn chưa đều",r.q>=PB.powder[1]?kg82Col("--good","#2d7a52"):kg82Col("--red","#c23b22"))}
   phase++;t0=0;ring0=performance.now();cur=null;ptr=null;
-  if(phase>=3){st.parts.son=sonQ();stop=true;draw(performance.now());setTimeout(()=>toilFinish(true),650);return}
+  if(phase>=3){st.parts.son=sonQ();stop=true;draw(performance.now());/* hoa-dien: the placing step (jhd) on the same glass, then the result */
+   if(typeof hdStep==="function"&&hdStep({C,G,box,file,draw:()=>draw(performance.now()),done:()=>toilFinish(true)}))return;setTimeout(()=>toilFinish(true),650);return}
   toilHUD({round:`${phase+2}/4`});setBtn()}
  function setBtn(){const a=box.querySelector(".kg82act");const h=phase<2?`<div class="kg82act"><button class="${kg82Btn()}" id="toilnx"${ready?"":" disabled"}>${phase===0?"Kẻ xong":"Đánh xong"}</button></div>`:"";if(a)a.remove();if(h){box.insertAdjacentHTML("beforeend",h);$("toilnx").onclick=()=>{if(!stop&&ready)next()}}}
  function pdown(e){if(stop||!ready)return;e.preventDefault();C.__down=true;if(!t0)t0=performance.now();const p=C.at(e);ptr=p;if(phase===0){cur=[p]}else if(phase===2)tapLip(p);else if(phase===1){try{kitSfx("mgPuff")}catch(x){}}try{C.cv.setPointerCapture(e.pointerId)}catch(x){}}
@@ -47795,30 +47835,30 @@ function toilMakeup(){const st=TOIL.st,box=kg82Box();box.innerHTML="";box.hidden
  let last=performance.now();
  function frame(now){if(stop)return;const dt=Math.min(250,now-last);last=now;
   /* the face points may still be on their way: hold the board; if they never come, her hand is played from skill (the NPC table) */
-  if(!ready){if(anchor()){ready=true;t0=0;setBtn()}else if(now-wait0>BAL.toil.meshWait){const R=toilNpcPlay(sk.sk,wdHash(String(S.name||"")+":"+toilWk()),toilColFix(st.col),(st.col&&st.col.want)||"",st.style,st.occ.map(o=>o.k));
+  if(!ready){if(anchor()){ready=true;t0=0;setBtn()}else if(now-wait0>BAL.toil.meshWait){const h0=wdHash(String(S.name||"")+":"+toilWk()),HD=typeof hdNpc==="function"?hdNpc(S,h0,sk.sk):null;if(HD)st.hd={k:HD.k};const R=toilNpcPlay(sk.sk,h0,toilColFix(st.col),(st.col&&st.col.want)||"",st.style,st.occ.map(o=>o.k),undefined,HD?HD.q:null);
    Object.assign(st.parts,R.parts);st.auto=1;stop=true;setTimeout(()=>toilFinish(true),0);return}else{g.drawImage(baseLayer(),0,0,W,H);g.font=`700 15px ${kg82Col("--display","serif")}`;g.textAlign="center";g.fillStyle=kg82Col("--ink","#2a1a12");kg82Lbl(g,"Đang soi gương…",W/2,22,W-20);raf=requestAnimationFrame(frame);return}}
   if(phase===1&&ptr&&C.__down){for(const p of cpts)if(Math.hypot(p.x-ptr[0],p.y-ptr[1])<=puffR){p.c+=dt/(400*CK);pdirty=true}}
   if(phase===2&&lips[li]&&now-ring0>per*3){dots.push({x:lips[li][0]+lr*3,y:lips[li][1],q:0});li++;ring0=now;if(li>=3)next()}
   const lim=LIM[phase];const left=lim?Math.max(0,lim-(t0?now-t0:0)):0;
   if(phase===1&&now-pqT>250){pqT=now;pq=powQ().q}
-  const sc=Math.round(100*(.4*(phase>0?st.parts.brow||0:bs)+.3*(phase>1?st.parts.powder||0:phase===1?pq:0)+.3*(phase===2?sonQ():0)));
+  const sc=toilRaw({brow:phase>0?st.parts.brow||0:bs,powder:phase>1?st.parts.powder||0:phase===1?pq:0,son:phase===2?sonQ():0});
   toilHUD({score:`${sc}/100`,time:lim?`${Math.ceil(left/1000)} giây`:"theo nhịp"});if(lim&&left<=0){next();if(stop)return}
   draw(now);raf=requestAnimationFrame(frame)}
  toilHUD({round:"2/4"});setBtn();raf=requestAnimationFrame(frame);KG82.run={stop:()=>{stop=true;cancelAnimationFrame(raf)}};
  TOIL.test={get I(){return I},get brows(){return brows},get cpts(){return cpts},get lips(){return lips},next,browQ,powQ,sonQ,setPowder:v=>{cpts.forEach(p=>p.c=cheeks.some(c=>Math.hypot(p.x-c.x,p.y-c.y)<=c.r)?v:0);pdirty=true},strokes,dots,get lr(){return lr}}}
 function toilFinish(made){const st=TOIL.st;if(!st)return;try{if(KG82.run&&KG82.run.stop)KG82.run.stop()}catch(e){}KG82.run=null;
- const sk=toilSkill();let score=0,raw=0,bonus=0;if(made){const P=st.parts;raw=Math.round(100*(.4*(P.brow||0)+.3*(P.powder||0)+.3*(P.son||0)));bonus=Math.round(BAL.toil.skillShare*sk.sk);score=Math.max(0,Math.min(100,Math.round(raw*(100-BAL.toil.skillShare)/100)+bonus))}
+ const sk=toilSkill();let score=0,raw=0,bonus=0;if(made){const P=st.parts;raw=toilRaw({brow:P.brow||0,powder:P.powder||0,son:P.son||0,hd:typeof P.hd==="number"?P.hd:null});bonus=Math.round(BAL.toil.skillShare*sk.sk);score=Math.max(0,Math.min(100,Math.round(raw*(100-BAL.toil.skillShare)/100)+bonus))}
  if(!st.dv){const d=toilDress(S,st.F);st.dv=d.v;st.style=d.style}
  /* diemtrang-score: vụng = a part that went wrong (or a low total); else by the total, Khuynh thành the most (makeup-lux: no overdone level) */
  const P0=st.parts,occK=st.occ.map(o=>o.k);
- const L=made?toilLookOf({brow:P0.brow||0,powder:P0.powder||0,son:P0.son||0},score):{look:null};const look=L.look;
- S.toilette={day:toilWk()*10,wk:toilWk(),score,makeup:!!made,style:st.style,dv:st.dv,F:st.F,occ:occK,look};if(L.slip)S.toilette.slip=L.slip;if(made){S.toilette.col=toilColFix(st.col);S.toilette.col.seed=toilWk()}TOIL.prev=null;
+ const L=made?toilLookOf(Object.assign({brow:P0.brow||0,powder:P0.powder||0,son:P0.son||0},typeof P0.hd==="number"?{hd:P0.hd}:{}),score):{look:null};const look=L.look;
+ S.toilette={day:toilWk()*10,wk:toilWk(),score,makeup:!!made,style:st.style,dv:st.dv,F:st.F,occ:occK,look};if(L.slip)S.toilette.slip=L.slip;if(made&&st.hd&&typeof st.parts.hd==="number")S.toilette.hd={k:st.hd.k,q:+st.parts.hd.toFixed(3),dx:st.hd.dx,dy:st.hd.dy,a:st.hd.a};if(made){S.toilette.col=toilColFix(st.col);S.toilette.col.seed=toilWk()}TOIL.prev=null;
  /* makeup-lux: the day's verdict reads the ONE total, now with the face in it (clothes + jewels + makeup level) */
  try{const d=toilDress(S,st.F);st.dv=d.v;st.style=d.style;S.toilette.dv=d.v;S.toilette.style=d.style}catch(e){}
  const mk=toilMk(S.toilette);const good=mk==="dep"||mk==="tuyet";const tOk=made&&good?true:made&&mk==="vung"?false:null;if(tOk===null)try{kitSfx("mirror")}catch(e){}/* win / lose: kg82ShowRes(html,tOk) below plays it once */
  log(`Sáng nay ta điểm trang: y phục ${TOIL_DV[st.dv]}, ${made?`dung nhan ${toilMkW(mk)}`:`để ${toilMkW("moc")}`}.`);
  const rows=[["Y phục",`<span class="ef ${st.style==="fit"?"g":"r"}"><b>${TOIL_DV[st.dv]}</b></span>`]];/* the day's verdict: the ONE total (clothes + jewels + face + pet) */
- if(made){const P=st.parts;rows.push(["Kẻ mày",`<span class="ef t">${Math.round(100*(P.brow||0))}/100</span>`],["Đánh phấn",`<span class="ef t">${Math.round(100*(P.powder||0))}/100</span>`],["Chấm son",`<span class="ef t">${Math.round(100*(P.son||0))}/100</span>`],
+ if(made){const P=st.parts;rows.push(["Kẻ mày",`<span class="ef t">${Math.round(100*(P.brow||0))}/100</span>`],["Đánh phấn",`<span class="ef t">${Math.round(100*(P.powder||0))}/100</span>`],["Chấm son",`<span class="ef t">${Math.round(100*(P.son||0))}/100</span>`],...(typeof P.hd==="number"&&st.hd?[["Dán hoa điền",`<span class="ef t">${Math.round(100*P.hd)}/100</span> · ${WD_ITEMS[st.hd.k]?WD_ITEMS[st.hd.k].n:""}`]]:[]),
   ["Phần chơi",`<span class="ef t">${Math.round(raw*(100-BAL.toil.skillShare)/100)}</span>`],[`Tay nghề (Họa bậc ${sk.hoa}, Sắc ${S.sac|0}${sk.mama?", "+sk.mama.name+" giúp":""})`,kitChip("cộng",bonus,"g")],["Dung nhan",`<span class="ef ${good?"g":mk==="vung"?"r":"t"}"><b>${TOIL_MK[mk]}</b></span>`])}
  else rows.push(["Dung nhan",`<span class="ef n">${TOIL_MK.moc}</span>`]);
  /* makeup-lux (OD L1639): the look's xa xỉ word + number (judged only at events, inside the ONE total, never this face alone) */
@@ -47938,10 +47978,10 @@ window.TOIL_TRAIT=TOIL_TRAIT;
 for(const [k,B] of Object.entries(TOIL_BAND)){const P=TOIL_SAY[k];if(!P)continue;const T=[];for(const [b,L] of Object.entries(B))for(const x of L)T.push(`[${b}]${x}`);for(const sub of Object.keys(P))P[sub]=P[sub].concat(T)}
 window.TOIL_SAY=TOIL_SAY;window.TOIL_BAND=TOIL_BAND;
 /* diemtrang-score: the funny line for a vụng face names the part that went wrong (S.toilette.slip); diêm dúa gets its own */
-const TOIL_SLIP={th:{brow:"“Đôi mày này một bên lên núi, một bên xuống sông à?”",powder:"“Má bên đỏ bên trắng thế kia, ngươi định ra hát tuồng sao?”",son:"“Son lem ra tận cằm, ngươi vừa ăn vụng mứt đỏ của ai thế?”"},
- hh:{brow:"“Muội kẻ mày lúc trời chưa sáng hay sao, bên cao bên thấp thế kia?”",powder:"“Phấn của muội… hình như chỉ chịu nằm một bên má.”",son:"“Son của muội hôm nay muốn đi dạo ra ngoài môi rồi.”"},
- emp:{brow:"“Hôm nay ái phi nhướn một bên mày với trẫm đấy à?”",powder:"“Một bên má ửng hồng, một bên trắng bệch: nàng đang thẹn một nửa sao?”",son:"“Son của ái phi chấm lạc chỗ rồi, để trẫm lau cho.”"},
- rival:{brow:"“Mày của muội hôm nay như hai con sâu cãi nhau.” Nàng ta che miệng cười khúc khích.",powder:"“Muội đánh phấn hay vừa ngã vào thúng bột thế?” Nàng ta che miệng cười.",son:"“Son của muội lem cả ra ngoài kìa.” Nàng ta che miệng cười khúc khích."},
+const TOIL_SLIP={th:{brow:"“Đôi mày này một bên lên núi, một bên xuống sông à?”",powder:"“Má bên đỏ bên trắng thế kia, ngươi định ra hát tuồng sao?”",son:"“Son lem ra tận cằm, ngươi vừa ăn vụng mứt đỏ của ai thế?”",hoadien:"“Hoa điền dán xiêu vẹo thế kia, trán ngươi cũng nghiêng theo à?”"},
+ hh:{brow:"“Muội kẻ mày lúc trời chưa sáng hay sao, bên cao bên thấp thế kia?”",powder:"“Phấn của muội… hình như chỉ chịu nằm một bên má.”",son:"“Son của muội hôm nay muốn đi dạo ra ngoài môi rồi.”",hoadien:"“Hoa điền của muội hôm nay nghiêng hẳn một bên, như sắp rơi đến nơi.”"},
+ emp:{brow:"“Hôm nay ái phi nhướn một bên mày với trẫm đấy à?”",powder:"“Một bên má ửng hồng, một bên trắng bệch: nàng đang thẹn một nửa sao?”",son:"“Son của ái phi chấm lạc chỗ rồi, để trẫm lau cho.”",hoadien:"“Hoa điền của ái phi nghiêng rồi, để trẫm dán lại cho.”"},
+ rival:{brow:"“Mày của muội hôm nay như hai con sâu cãi nhau.” Nàng ta che miệng cười khúc khích.",powder:"“Muội đánh phấn hay vừa ngã vào thúng bột thế?” Nàng ta che miệng cười.",son:"“Son của muội lem cả ra ngoài kìa.” Nàng ta che miệng cười khúc khích.",hoadien:"“Hoa điền của muội dán lệch cả rồi kìa.” Nàng ta che miệng cười khúc khích."},
  diem:{th:"“Son phấn dày thế này, ai gia tưởng gánh hát vào cung.”",hh:"“Muội định đi hội đèn hay đến thỉnh an bổn cung vậy?”",emp:"“Trẫm suýt tưởng hoa mẫu đơn biết đi.”",rival:"“Ôi chao, phấn son của muội hôm nay… đậm đà thật đấy.” Nàng ta che miệng cười khúc khích."}};
 /* VOICE BY TÍNH TÌNH (owner 17/11 06:05Z): the slip tease is a tone pool of the teaser (jtone_b.js TONE_POOL "toilSlip:<who>:<slip>"); the old one-liners stay as the fallback */
 function toilSlipSay(who,mk,sp){try{const tp=kTP;if(mk==="diem"){const P=tp("toilSlip:diem:"+who);return P?kLine("toilslip:diem:"+who,P,{sp,ls:S,t:kToneSt(sp,who)}):TOIL_SLIP.diem[who]||""}if(mk!=="vung")return"";const sl=(toilToday(S)||{}).slip;if(!sl)return"";
@@ -47977,24 +48017,32 @@ const TOIL_GEST={
  "emp-":["Hoàng thượng khẽ nhíu mày rồi cầm tấu chương lên","Hoàng thượng ngồi chưa ấm chỗ đã gọi người hầu trà","Hoàng thượng chỉ ừ một tiếng, chẳng hỏi han gì thêm","Ánh mắt Hoàng thượng lướt qua ta rồi dừng ở nơi khác","Hoàng thượng đứng dậy sớm hơn thường lệ"],
  "v+":["Nàng ta nắm tay ta, giọng thân mật hẳn","Nàng ta ghé lại gần, cười như chị em lâu ngày","Nàng ta khen ta trước mặt mọi người","Nàng ta cười tươi, kéo ta đi cùng một đoạn","Nàng ta khẽ gật đầu với ta, vẻ thân thiện"],
  "v-":["Nàng ta cười, nhưng tay vò nát chiếc khăn lụa","Nàng ta liếc ta một cái, sắc như dao","Nàng ta quay sang thì thầm với người bên cạnh","Nàng ta phe phẩy quạt, giọng mát như nước giếng","Nàng ta cười khẩy, quay mặt đi"]};
-function toilGest(r){if(r.g!=null)return r.g;const host=r.host;const k=(host==="th"?"th":host==="emp"?"emp":host&&host.queen?"hh":"v")+(r.n>0?"+":"-");
+/* ONE reaction line (owner 17/11 06:30Z): a spoken line that already ends with its own gesture ("…” Nàng ta che miệng cười.") or a plain narration needs no second gesture */
+function toilSayOwnGest(t){t=String(t||"");return !/[“"]/.test(t)||/[”"]\s*[A-ZÀ-Ỹ][^”"]*[.!…]\s*$/.test(t)}
+function toilGest(r){if(r.g!=null)return r.g;if(r.say!=null&&toilSayOwnGest(r.say))return r.g="";const host=r.host;const k=(host==="th"?"th":host==="emp"?"emp":host&&host.queen?"hh":"v")+(r.n>0?"+":"-");
  return r.g=TOIL_GEST[k]?kLine("toil-gest:"+k,kTP("toilGest:"+k)||TOIL_GEST[k],{about:host}):""}
-function toilLit(r){const g=toilGest(r);return (g?g+" — ":"")+r.line+"."}
+function toilLit(r){const g=toilGest(r);let l=String(r.line||"");if(!g)l=l.charAt(0).toUpperCase()+l.slice(1);return (g?g+" — ":"")+l+(/[.)]$/.test(l)?"":".")}
 /* r = {k, who (face), host ("th" | "emp" | consort), n (signed change shown in words), line (numbers), ctx} */
 /* the gesture is drawn once: the event panel shows it (long form) and the Sổ ghi line of the reaction gets it too (jvoice kLitLog, long form);
    the result card keeps the short facts (kShort) */
-function toilReact(r){try{toilGest(r);if(r.s0!=null)kLitLog(r.s0,r.g)}catch(e){}TOIL_POP.push(r);clearTimeout(TOIL_POPT);TOIL_POPT=setTimeout(toilFlush,0)}
+function toilReact(r){try{if(r.say==null)r.say=toilSay(r.k,Object.assign({host:r.host},r.ctx));toilGest(r);if(r.s0!=null)kLitLog(r.s0,r.g)}catch(e){}TOIL_POP.push(r);clearTimeout(TOIL_POPT);TOIL_POPT=setTimeout(toilFlush,0)}
 function toilBack(host,n){if(!n)return;if(host==="th")apply({th:n});else if(host==="emp")apply({sung:n>0?1:-1});else if(host&&host!==S)affAdd(host,S,n)}
 function toilFlush(){if(!TOIL_POP.length||!S||S.dead)return;const L=TOIL_POP.splice(0).sort((a,b)=>Math.abs(b.n)-Math.abs(a.n));const top=L.slice(0,BAL.toil.popMax),rest=L.slice(BAL.toil.popMax);
  top.forEach((r,i)=>{const bad=r.n<0;const who=toilWho(r.host==null?null:r.host)||"";const more=i===top.length-1&&rest.length?`<p class="past">Còn: ${rest.map(x=>`${x.name||toilWho(x.host)} — ${x.line}`).join(" · ")}.</p>`:"";
-  const h=`<p>${toilSay(r.k,Object.assign({host:r.host},r.ctx))}</p><p class="past">${toilLit(r)}</p>${more}`;
+  const h=`<p>${r.say!=null?r.say:toilSay(r.k,Object.assign({host:r.host},r.ctx))}</p><p class="past">${toilLit(r)}</p>${more}`;
   const back=Math.ceil(Math.abs(r.n)*BAL.toil.sorryBack);
   /* cost mode (KIT 28.6 / §53 kitHint): the options' fx are empty (the change happens in go), so each says its own true hint */
   const nm=r.name||who,boss=r.host==="th"||r.host==="emp"||(r.host&&r.host.queen),them=lv=>lv?nm:boss?"bề trên":"nàng ta";
-  const opts=bad?[
+  const peer=bad&&!boss&&r.host&&r.host!=="th"&&r.host!=="emp";/* mocked / envied by a consort: she answers, she does not apologise (owner 17/11 06:30Z); a scolding from above keeps "Xin lỗi" */
+  const opts=peer?[
+    {n:"Cười cho qua",fx:{},hideOut:true,hint:"cho qua, không đổi gì",risk:"an toàn",go:()=>{log("Ta mỉm cười cho qua, như chẳng nghe thấy.")}},
+    {n:"Đáp lại khéo",fx:{suc:BAL.toil.replySuc},hideOut:true,hint:lv=>lv?`đáp khéo thì thêm danh tiếng, thành bại khó đoán, hỏng thì ${nm} càng phật ý${r.v?", nàng ta càng ghen":""}`:"có thể thêm danh tiếng, cũng có thể mất lòng",risk:"có rủi ro",go:()=>{if(roll(BAL.toil.replyWin)){apply({danh:BAL.toil.replyDanh});log(`Ta đáp lại khéo léo, ${nm} đỏ mặt, người nghe gật gù.`)}else{toilBack(r.host,-1);if(r.v)r.v.ghen=cl((r.v.ghen||0)+BAL.toil.replyGhen,0,100);log("Ta đáp lại, không khí càng gượng.")}}},
+    {n:"Đáp trả gay gắt",fx:{},hideOut:true,hint:lv=>lv?`đáp thẳng thì ${nm} nể ta hơn hoặc oán ta hơn; nàng ta chắc kém quý ta đi, hỏng thì mất danh, mất đức`:"đáp thẳng, mất chút thiện cảm; có thể được nể, cũng có thể mất lòng",risk:"có rủi ro",go:()=>{toilBack(r.host,-BAL.toil.harshAff);if(roll(BAL.toil.harshWin)){apply({danh:BAL.toil.replyDanh});if(r.v)r.v.ghen=cl((r.v.ghen||0)-BAL.toil.harshGhen,0,100);log(`Ta đáp trả thẳng thừng; ${nm} cứng họng, không dám trêu nữa.`)}else{apply({danh:BAL.toil.harshDanh,duc:BAL.toil.harshDuc});log(`Ta đáp trả gay gắt, ai nghe cũng chê ta nóng nảy.`)}}},
+    {n:"Im lặng lui đi",fx:{},hideOut:true,hint:"lặng lẽ rời đi, không đổi gì",risk:"an toàn",go:()=>{log("Ta im lặng quay đi, không đáp lời.")}}]
+  :bad?[
     {n:"Xin lỗi",fx:{},hideOut:true,hint:lv=>`${them(lv)} nguôi giận phần nào`,risk:"an toàn",go:()=>{toilBack(r.host,back);log(`Ta cúi đầu nhận lỗi; ${r.name||who} nguôi giận phần nào.`)}},
     {n:"Cười trừ",fx:{},hideOut:true,hint:"cho qua, không đổi gì",risk:"an toàn",go:()=>{log("Ta cười trừ cho qua.")}},
-    {n:"Đáp lại",fx:{suc:-2},hideOut:true,hint:lv=>lv?`đáp khéo thì thêm danh tiếng, thành bại khó đoán, hỏng thì ${nm} càng phật ý${r.v?", nàng ta càng ghen":""}`:"có thể thêm danh tiếng, cũng có thể mất lòng",risk:"có rủi ro",go:()=>{if(roll(BAL.toil.replyWin)){apply({danh:BAL.toil.replyDanh});log("Ta đáp lại khéo léo, người nghe gật gù.")}else{toilBack(r.host,-1);if(r.v)r.v.ghen=cl((r.v.ghen||0)+2,0,100);log("Ta đáp lại, không khí càng gượng.")}}}]
+    {n:"Đáp lại",fx:{suc:BAL.toil.replySuc},hideOut:true,hint:lv=>lv?`đáp khéo thì thêm danh tiếng, thành bại khó đoán, hỏng thì ${nm} càng phật ý${r.v?", nàng ta càng ghen":""}`:"có thể thêm danh tiếng, cũng có thể mất lòng",risk:"có rủi ro",go:()=>{if(roll(BAL.toil.replyWin)){apply({danh:BAL.toil.replyDanh});log("Ta đáp lại khéo léo, người nghe gật gù.")}else{toilBack(r.host,-1);if(r.v)r.v.ghen=cl((r.v.ghen||0)+BAL.toil.replyGhen,0,100);log("Ta đáp lại, không khí càng gượng.")}}}]
    :[{n:r.host==="emp"||r.host==="th"||(r.host&&r.host.queen)?"Tạ ơn":"Cảm tạ",fx:{},hideOut:true,hint:"nhận lời khen, không đổi gì",risk:"an toàn",go:()=>{}}];
   Q.push({t:TOIL_EV[r.k]||"Dung nhan",who:r.who,h,opts,hideOut:true,toilEv:r.k,art:`https://ctm-img.victoria-tntt.workers.dev/img/ev-toil-${r.k}.webp`/* banner by ab06, 640×480 */})});
  try{render()}catch(e){}}
@@ -48017,40 +48065,112 @@ window.toilOpen=toilOpen;window.toilDress=toilDress;window.toilFx=toilFx;window.
 const TOIL_FIT={url:"https://ctm-img.victoria-tntt.workers.dev/img/toil-fit2.json"/* toil-fit2.json = toil-fit.json with 1402 mouths moved onto the face-mesh lips (dev/art/mkfit/fixtoil.py); kept as THE fit file (kit keeper K2) */,fit:null,_ld:0,load(){if(this.fit||this._ld)return;this._ld=1;try{fetch(this.url).then(r=>r.ok?r.json():null).then(j=>{if(j){TOIL_FIT.fit=j;try{if(typeof S!=="undefined"&&S&&!Q.length)render()}catch(e){}}}).catch(()=>{})}catch(e){}}};
 try{TOIL_FIT.load()}catch(e){}
 const TOIL_LOOKS={
- /* owner 15/11 on the sheet: "đẹp" subtle and natural; "diêm dúa" = the old đẹp a little stronger (pretty, just noticeably overdone, never a clown) */
- dep:{skin:[255,250,244,.13,.62],blush:[238,128,144,.21,.165,0],lip:[206,60,80,.33,.072,.032],powder:0},
- /* owner 15/11 22:xxZ: "vụng" = deliberate clumsy makeup in her colours: uneven blotchy blush, a powder patch (the colour layer adds lips past the line, smudged lids, crooked brows, smeared ink) */
- vung:{skin:[255,252,248,.08,.6],blush:[236,112,130,.30,.17,0],lip:[206,60,80,.4,.08,.036],powder:0,vung:1},
- diem:{skin:[255,252,248,.24,.64],blush:[236,104,124,.40,.20,0],lip:[198,40,64,.56,.084,.038],powder:0}};
+ vua:{skin:[255,250,244,.13,.62],blush:[238,128,144,.21,.165,0],lip:[206,60,80,.33,.072,.032],powder:0},
+ dep:{skin:[255,251,246,.185,.63],blush:[237,116,134,.305,.1825,0],lip:[202,50,72,.445,.078,.035],powder:0},
+ /* tuyệt (Khuynh thành): luminous, dewy: a pearl-gold glow on the cheekbones (glow), glossy refined lips, a touch of sparkle by the eyes (TOIL_MKS.tuyet.shim); never heavy */
+ tuyet:{skin:[255,248,236,.24,.66],blush:[238,120,138,.3,.2,0],lip:[200,48,72,.5,.08,.036],powder:0,glow:1},
+ /* vụng: uneven smudged blush (see toilMakeupSvg jitter), a pale caked patch, lip colour past the line (colour layer) */
+ vung:{skin:[255,252,248,.08,.6],blush:[236,112,130,.3,.17,0],lip:[206,60,80,.4,.08,.036],powder:0,vung:1}};
 /* the picture a record draws (makeup-lux): its own look id; an old save's "diem" face = Khuynh thành; a level with no picture of its own on this
    build (Khuynh thành before toil-looks5) draws the nearest one (Kiều diễm); mặt mộc / no makeup = none */
 function toilArt(k){if(!k)return null;k=TOIL_OLDLV[k]||k;if((typeof TOIL_MKS==="object"&&TOIL_MKS[k])||(typeof TOIL_LOOKS==="object"&&TOIL_LOOKS[k]))return k;return k==="tuyet"?"dep":null}
-function toilLookRec(r){if(!r||!r.makeup||!r.look)return null;return toilArt(r.look)}
+function toilLookRec(r){if(!r||!r.makeup)return null;const k=toilMk(r);return k==="moc"?null:toilArt(k)}
 function toilLookOfP(p){try{if(!S)return null;if(p&&p!==S&&p.coop){return toilLookRec(toilFriendRec(p))}if(p!==S)return null;if(TOIL.prev)return toilArt(TOIL.prev.look);return toilLookRec(toilToday(S))}catch(e){return null}}
 const TOIL_SVGC={};
 function toilRnd(seed){let a=(seed*2654435761)>>>0||1;return()=>{a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^t>>>15,t|1);t^=t+Math.imul(t^t>>>7,t|61);return((t^t>>>14)>>>0)/4294967296}}
 /* col = her picks (toilColOf): the blush disc and the fallback lip oval take HER colours; noLip = the lips come from the colour layer (§60) */
-function toilMakeupSvg(file,look,col,noLip){const L=TOIL_LOOKS[look];const v=TOIL_FIT.fit&&TOIL_FIT.fit[file];if(!L||!v)return"";col=col||toilColDef();
- const key=file+"|"+look+"|"+col.ma+"|"+col.son+"|"+(noLip?1:0)+"|"+(L.vung?col.seed|0:"");if(TOIL_SVGC[key])return TOIL_SVGC[key];
+function toilMakeupSvg(file,look,col,noLip){const L=TOIL_LOOKS[look];const v=toilRow(file);if(!L||!v)return"";col=col||toilColDef();if(MK_FIT.face(file))noLip=true;/* a face with a mesh gets its lips ONLY from the colour layer (mesh points); the oval is for mesh-less faces */
+ const key=file+"|"+(v===TOIL_FIT.fit[file]?0:1)+"|"+look+"|"+col.ma+"|"+col.son+"|"+(noLip?1:0)+"|"+(L.vung?col.seed|0:"");if(TOIL_SVGC[key])return TOIL_SVGC[key];
  const A=v[8]||1.3,Y=y=>y*A,[mx,my,lx,ly,rx,ry,fw]=v;const H=100*A;const c=(a)=>`rgb(${a[0]},${a[1]},${a[2]})`;
  const cx=(lx+rx)/2,cy=Y((ly+ry)/2);const d=Math.hypot(rx-lx,Y(ry)-Y(ly))||fw*.5;const ang=Math.atan2(Y(ry)-Y(ly),rx-lx)*180/Math.PI;
  const sk=L.skin,bl=toilColRGB("ma",col.ma).concat(L.blush.slice(3)),lp=toilColRGB("son",col.son).concat(L.lip.slice(3));const br=fw*bl[4]*1.0;
  /* vụng: the two cheeks differ (size, place, strength) and a patch of caked powder sits off the cheek — seeded per day, in face units, so portrait and figure match */
- const R=toilRnd((col.seed|0)+7);const jl=L.vung?[1+.45*R(),(R()-.5)*fw*.09,(R()-.3)*fw*.08,1.25]:[1,0,0,1],jr=L.vung?[.7+.3*R(),(R()-.5)*fw*.07,(R()-.6)*fw*.07,.75]:[1,0,0,1];
- const pw=L.vung?[(R()<.5?lx:rx)+(R()-.5)*fw*.12,Y(ly)-fw*(.04+.06*R()),fw*(.05+.03*R())]:null;
+ const R=toilRnd((col.seed|0)+7);const jl=L.vung?[1.2+.5*R(),(R()-.5)*fw*.12,(R()-.3)*fw*.1,1.25]:[1,0,0,1],jr=L.vung?[.55+.25*R(),(R()-.5)*fw*.1,(R()-.6)*fw*.09,.7]:[1,0,0,1];
+ const ja=L.vung?[.6+.25*R(),.65+.3*R(),R()*70-35,R()*70-35]:Array.of(1,1,0,0);const pw=L.vung?[(R()<.5?lx:rx)+(R()-.5)*fw*.12,Y(ly)-fw*(.04+.06*R()),fw*(.05+.03*R())]:null;
  /* skin light: an oval over the face, feathered; blush: two feathered discs (the hard stop makes the diêm dúa circles); lips: a blurred oval */
  const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 ${H.toFixed(2)}" preserveAspectRatio="none">`+
  `<defs><radialGradient id="s"><stop offset="0" stop-color="${c(sk)}" stop-opacity="${sk[3]}"/><stop offset="${L.powder?.7:.45}" stop-color="${c(sk)}" stop-opacity="${(sk[3]*(L.powder?.85:.6)).toFixed(3)}"/><stop offset="1" stop-color="${c(sk)}" stop-opacity="0"/></radialGradient>`+
  `<radialGradient id="b"><stop offset="0" stop-color="${c(bl)}" stop-opacity="${bl[3]}"/><stop offset="${bl[5]||.35}" stop-color="${c(bl)}" stop-opacity="${(bl[3]*(bl[5]?.92:.55)).toFixed(3)}"/><stop offset="1" stop-color="${c(bl)}" stop-opacity="0"/></radialGradient>`+
- `<filter id="f" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="${(fw*.012).toFixed(3)}"/></filter></defs>`+
+ `<filter id="f" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="${(fw*.012).toFixed(3)}"/></filter><filter id="g" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="${(fw*.05).toFixed(3)}"/></filter></defs>`+
  `<g transform="rotate(${ang.toFixed(2)} ${cx.toFixed(2)} ${cy.toFixed(2)})"><ellipse cx="${cx.toFixed(2)}" cy="${(cy-d*(L.powder?.02:.18)).toFixed(2)}" rx="${(d*sk[4]*1.25).toFixed(2)}" ry="${(d*sk[4]*1.55).toFixed(2)}" fill="url(#s)"/></g>`+
- `<circle cx="${(lx+jl[1]).toFixed(2)}" cy="${(Y(ly)+jl[2]).toFixed(2)}" r="${(br*jl[0]).toFixed(2)}" fill="url(#b)" fill-opacity="${Math.min(1,jl[3])}"/><circle cx="${(rx+jr[1]).toFixed(2)}" cy="${(Y(ry)+jr[2]).toFixed(2)}" r="${(br*jr[0]).toFixed(2)}" fill="url(#b)" fill-opacity="${jr[3]}"/>`+(pw?`<ellipse cx="${pw[0].toFixed(2)}" cy="${pw[1].toFixed(2)}" rx="${pw[2].toFixed(2)}" ry="${(pw[2]*.7).toFixed(2)}" fill="rgb(255,250,246)" fill-opacity=".42" filter="url(#f)"/>`:"")+
+ `<ellipse cx="${(lx+jl[1]).toFixed(2)}" cy="${(Y(ly)+jl[2]).toFixed(2)}" rx="${(br*jl[0]).toFixed(2)}" ry="${(br*jl[0]*(L.vung?ja[0]:1)).toFixed(2)}" transform="rotate(${ja[2].toFixed(1)} ${(lx+jl[1]).toFixed(2)} ${(Y(ly)+jl[2]).toFixed(2)})" fill="url(#b)" fill-opacity="${Math.min(1,jl[3])}"/><ellipse cx="${(rx+jr[1]).toFixed(2)}" cy="${(Y(ry)+jr[2]).toFixed(2)}" rx="${(br*jr[0]).toFixed(2)}" ry="${(br*jr[0]*(L.vung?ja[1]:1)).toFixed(2)}" transform="rotate(${ja[3].toFixed(1)} ${(rx+jr[1]).toFixed(2)} ${(Y(ry)+jr[2]).toFixed(2)})" fill="url(#b)" fill-opacity="${jr[3]}"/>`+(pw?`<ellipse cx="${pw[0].toFixed(2)}" cy="${pw[1].toFixed(2)}" rx="${pw[2].toFixed(2)}" ry="${(pw[2]*.7).toFixed(2)}" fill="rgb(255,250,246)" fill-opacity=".2" filter="url(#f)"/>`:"")+
+ (L.glow?`<ellipse cx="${lx.toFixed(2)}" cy="${(Y(ly)-fw*.07).toFixed(2)}" rx="${(fw*.13).toFixed(2)}" ry="${(fw*.06).toFixed(2)}" transform="rotate(${ang.toFixed(2)} ${lx} ${Y(ly).toFixed(2)})" fill="rgb(255,240,208)" fill-opacity="${look==="tuyet"?.34:.18}" filter="url(#g)"/><ellipse cx="${rx.toFixed(2)}" cy="${(Y(ry)-fw*.07).toFixed(2)}" rx="${(fw*.13).toFixed(2)}" ry="${(fw*.06).toFixed(2)}" transform="rotate(${ang.toFixed(2)} ${rx} ${Y(ry).toFixed(2)})" fill="rgb(255,240,208)" fill-opacity="${look==="tuyet"?.34:.18}" filter="url(#g)"/>`:"")+
+ (L.vung?`<ellipse cx="${(mx+(R()<.5?-1:1)*fw*.05).toFixed(2)}" cy="${(Y(my)+fw*.045*A/1.3).toFixed(2)}" rx="${(fw*.085).toFixed(2)}" ry="${(fw*.032).toFixed(2)}" transform="rotate(${ang.toFixed(2)} ${mx} ${Y(my).toFixed(2)})" fill="${c(lp)}" fill-opacity=".5" filter="url(#f)"/>`:"")+
  (noLip?"":`<ellipse cx="${mx}" cy="${Y(my).toFixed(2)}" rx="${(fw*lp[4]).toFixed(2)}" ry="${(fw*lp[5]).toFixed(2)}" transform="rotate(${ang.toFixed(2)} ${mx} ${Y(my).toFixed(2)})" fill="${c(lp)}" fill-opacity="${lp[3]}" filter="url(#f)"/>`)+`</svg>`;
  return TOIL_SVGC[key]="data:image/svg+xml;charset=utf-8,"+encodeURIComponent(svg)}
 window.toilMakeupSvg=toilMakeupSvg;window.TOIL_FIT=TOIL_FIT;
 /* her face layers: skin light + blush (SVG, as approved) under the colour layer (lips, eyelids, brows painted from the picture itself, §60) */
-function toilFaceLayer(p,file){const lk=toilLookOfP(p);if(!lk)return"";const col=toilColOfP(p);const mk=toilMkLayer(file,lk,col);const src=toilMakeupSvg(file,lk,col,!!mk);if(!src&&!mk)return"";
- return (src?`<img class="kmkl kmkl-${lk}" src="${src}" alt="" aria-hidden="true" style="--fleft:0%;--ftop:0%;--fwidth:100%;--fheight:100%">`:"")+mk}
+/* ---------- KHUYNH THÀNH SKIN SHINE v4 (owner 17/11 ~21:50Z, ~21:55Z, ~22:35Z): real dewy / glass-skin shine. The light CATCHES the skin's own high points (cheekbones, nose bridge + tip, brow bone, cupid's bow, chin, a touch on the forehead)
+   and those highlights shimmer softly IN PLACE, each breathing on its own slow phase (2 / 3 / 6 s), plus an occasional tiny soft glint on one high point. NO travelling band, NO global brightness pulse.
+   ONE kit-fx layer over the whole picture box (<i class="kff kglw">), built once per picture (canvas, cached): for each high point a small image of HER OWN skin luminance (skin pixels brighter than their surroundings = the picture's real specular,
+   lifted to a soft additive pink-white with a slight bloom, falling off to nothing); the face points are only READ to place the zones. Screen blend, CSS only (opacity breathing). Numbers: BAL.toil.glow (variant A subtle / B medium / C stronger). */
+Object.assign(BAL.toil,{glow:{use:"B",col:[255,242,238],/* pink-white, never yellow, never grey */tolG:.028,tolB:.04,tolK:2,/* skin hue tolerance (ratios g/r, b/r) */
+ v:{A:{amp:.4,bloom:.3,gl:0,glA:.6,rad:1,haze:.1,st:8,eye:1},B:{amp:.62,bloom:.5,gl:0,glA:.85,rad:1.1,haze:.18,st:13,eye:1},C:{amp:.85,bloom:.7,gl:0,glA:1,rad:1.2,haze:.27,st:19,eye:1}},/* haze = dreamy bloom on the skin, st = twinkling stars on the face, eye = catchlight twinkles in both irises (owner ~23:05Z: glam moment of the dress-up games) */
+ per:[2,4,8],/* s: breathing periods (all divide the 16 s sample loop) */auto:true,first:3000,gap:[8000,15000],burstMs:2600,/* owner 17/11 23:10Z: sparkle is NOT constant: calm glowing skin, then every 8-15 s (random) a 1-2 s twinkle burst (stars + iris catchlights), then it settles */scope:"face",stars:7,size:.72,/* star + iris-twinkle size x (owner 18/11 00:47Z: grains a little smaller than v7 = 1) *//* stars per burst, one in each of this many randomly chosen zones, scattered over the WHOLE face (owner 17/11 23:2xZ: whole face, fewer at once) */zones:[["fore",[[-.45,-.95,0],[.45,-1,0]]],["templeL",[[-1.05,-.6,0],[-.95,-.15,0]]],["templeR",[[1.05,-.6,0],[.95,-.15,0]]],["cheekL",[[-.62,-.1,.5],[-.45,.1,.56]]],["cheekR",[[.62,-.1,.5],[.45,.1,.56]]],["nose",[[0,0,.28],[0,0,.46]]],["eyeL",[[-.95,-.15,0],[-.85,.1,0]]],["eyeR",[[.95,-.15,0],[.85,.1,0]]],
+ ["chin",[[-.14,.4,1],[.14,.45,1]],1],["jawL",[[-.62,.25,.92],[-.8,.05,.8]],1],["jawR",[[.62,.25,.92],[.8,.05,.8]],1],["lowCheekL",[[-.66,.1,.78],[-.55,.3,.72]],1],["lowCheekR",[[.66,.1,.78],[.55,.3,.72]],1]],loMin:2,/* >= this many of the stars of a burst go to the LOWER face (zones marked 1: chin, jaw, lower cheeks; owner 23:3xZ "cả phần cằm nữa") *//* [name,[[x in u from the eye midpoint, y in u, y in mouth distances]...]] two candidate spots each; never on the lips *//* "face" now; "body" = same burst on the body skin, reserved for the dressing result (owner 23:10Z) */lo:.4,/* breathing floor (share of amp) */glSize:.13/* glint radius x eye distance */}});
+const TOIL_GLC={},TOIL_GLQ=[];
+function toilGlowLayer(file,col){const v=MK_FIT.get(file);if(!v)return"";const G=BAL.toil.glow,key=file+"|"+G.use;let e=TOIL_GLC[key];if(!e){e=TOIL_GLC[key]={inner:"",pend:1};TOIL_GLQ.push(key);if(TOIL_GLQ.length>40)delete TOIL_GLC[TOIL_GLQ.shift()];toilGlowPaint(file,v,e,key)}
+ return `<i class="kff kglw" data-gk="${key}" aria-hidden="true" style="--fleft:0%;--ftop:0%;--fwidth:100%;--fheight:100%">${e.inner}</i>`}
+function toilGlowPaint(file,v,e,key){const im=new Image();im.crossOrigin="anonymous";im.decoding="async";
+ im.onload=()=>{try{e.inner=toilGlowBuild(im,v,key)}catch(x){e.inner=""}e.pend=0;document.querySelectorAll("i.kglw").forEach(x=>{if(x.dataset.gk===key)x.innerHTML=e.inner})};
+ im.src=IMG_U("https://ctm-img.victoria-tntt.workers.dev/img/"+file)}
+function toilGlowBuild(im,v,key){const G=BAL.toil.glow,V=G.v[G.use]||G.v.B,W=im.naturalWidth,H=im.naturalHeight,K=Math.max(1,Math.min(3,360/W)),cw=Math.round(W*K),ch=Math.round(H*K);
+ const c=document.createElement("canvas");c.width=cw;c.height=ch;const g=c.getContext("2d",{willReadFrequently:true});g.drawImage(im,0,0,cw,ch);const D=g.getImageData(0,0,cw,ch).data;
+ const P=toilMkPts(v).map(([x,y])=>[x/100*cw,y/100*ch]);const Gm=toilMkGeom(P,{blr:1}),{u,ang,mid,eyeY,mY,cheeks,lc}=Gm;const d=mY-eyeY,cs=Math.cos(ang),sn=Math.sin(ang);
+ /* her skin colour (read-only face points: cheeks + forehead windows) and a per-pixel skin-likeness (hue by ratios, so cream cloth / gold thread / hair / lips drop out) */
+ const win=[...cheeks.map(q=>[q.x,q.y]),[mid[0],mid[1]-.55*u]];const a3=[[],[],[]];win.forEach(([px,py])=>{const rr=Math.max(2,Math.round(u*.07));for(let y=-rr;y<=rr;y++)for(let x=-rr;x<=rr;x++){const X=Math.round(px+x),Y=Math.round(py+y);if(X<0||Y<0||X>=cw||Y>=ch)continue;const j=(Y*cw+X)*4;if(D[j+3]>200){a3[0].push(D[j]);a3[1].push(D[j+1]);a3[2].push(D[j+2])}}});
+ const med=a=>{a.sort((x,y)=>x-y);return a.length?a[a.length>>1]:200};const ref=[med(a3[0]),med(a3[1]),med(a3[2])],Lr=.299*ref[0]+.587*ref[1]+.114*ref[2],rg=ref[1]/ref[0],rb=ref[2]/ref[0];
+ const N=cw*ch,S=new Float32Array(N),L=new Float32Array(N);
+ for(let i=0,j=0;i<N;i++,j+=4){const l=.299*D[j]+.587*D[j+1]+.114*D[j+2];L[i]=l;if(D[j+3]<200||D[j]<60)continue;const kk=l/Lr;if(kk<.5||kk>1.4)continue;const dg=(D[j+1]/D[j]-rg)/G.tolG,db=(D[j+2]/D[j]-rb)/G.tolB,dd=Math.sqrt(dg*dg+db*db);S[i]=Math.max(0,Math.min(1,G.tolK-dd))}
+ /* local brightness (box blur) → how much a pixel stands above its surroundings = the picture's own specular */
+ const R=Math.max(2,Math.round(u*.3)),B=new Float32Array(N),T=new Float32Array(N);
+ for(let y=0;y<ch;y++){let s=0;for(let x=-R;x<=R;x++)s+=L[y*cw+Math.min(cw-1,Math.max(0,x))];for(let x=0;x<cw;x++){T[y*cw+x]=s/(2*R+1);s+=L[y*cw+Math.min(cw-1,x+R+1)]-L[y*cw+Math.max(0,x-R)]}}
+ for(let x=0;x<cw;x++){let s=0;for(let y=-R;y<=R;y++)s+=T[Math.min(ch-1,Math.max(0,y))*cw+x];for(let y=0;y<ch;y++){B[y*cw+x]=s/(2*R+1);s+=T[Math.min(ch-1,y+R+1)*cw+x]-T[Math.max(0,y-R)*cw+x]}}
+ const fx=(X,Y)=>[mid[0]+X*cs-Y*sn,mid[1]+X*sn+Y*cs];/* face frame (X along the eye line, Y down, units px) → picture px */
+ const bro=i=>{const q=P.slice(40+i*10,50+i*10);const m=q.reduce((a,p)=>[a[0]+p[0]/q.length,a[1]+p[1]/q.length],[0,0]);return m};const b0=bro(0),b1=bro(1);
+ const top=P.slice(0,12).reduce((a,p)=>p[1]<a[1]?p:a,P[0]);
+ const sg=cheeks.map(c=>c.x>=mid[0]?1:-1);
+ /* zones: [name, centre px, radius (x u), weight] */
+ const Z=[["cheekA",[cheeks[0].x,cheeks[0].y-.17*u],.3,1],["cheekB",[cheeks[1].x,cheeks[1].y-.17*u],.3,1],["noseBridge",fx(0,.32*d),.14,.85],["browA",[b0[0],b0[1]-.16*u],.26,.7],["browB",[b1[0],b1[1]-.16*u],.26,.7],["forehead",fx(0,-.85*u),.3,.5]];
+ const rad=V.rad,cc=G.col,pp=[],inner=[];let gi=0;const url=cv=>cv.toDataURL("image/png");
+ Z.forEach(([nm,[cx0,cy0],r0,w],zi)=>{const r=r0*u*rad,x0=Math.max(0,Math.floor(cx0-r)),y0=Math.max(0,Math.floor(cy0-r)),x1=Math.min(cw,Math.ceil(cx0+r)),y1=Math.min(ch,Math.ceil(cy0+r)),zw=x1-x0,zh=y1-y0;if(zw<3||zh<3)return;
+  /* this zone's own specular: skin pixels brighter than their surroundings */const sp=new Float32Array(zw*zh);let mx=0,bx=cx0,by=cy0;
+  for(let y=0;y<zh;y++)for(let x=0;x<zw;x++){const i=(y0+y)*cw+x0+x,dx=(x0+x-cx0)/r,dy=(y0+y-cy0)/r,q=Math.sqrt(dx*dx+dy*dy);if(q>=1)continue;const f=Math.pow(1-q*q,2),ex=Math.max(0,L[i]-B[i]+.25*Math.max(0,L[i]-Lr*.96)),s=S[i]*ex*f;sp[y*zw+x]=s;if(s>mx){mx=s;bx=x0+x;by=y0+y}}
+  const o=document.createElement("canvas");o.width=zw;o.height=zh;const og=o.getContext("2d"),id=og.createImageData(zw,zh),O=id.data;
+  for(let y=0;y<zh;y++)for(let x=0;x<zw;x++){const i=(y0+y)*cw+x0+x,dx=(x0+x-cx0)/r,dy=(y0+y-cy0)/r,q=Math.sqrt(dx*dx+dy*dy);if(q>=1||S[i]<=0)continue;const f=Math.pow(1-q*q,2),sn2=mx>0?sp[y*zw+x]/mx:0,a=Math.min(1,f*(.22+.78*sn2)*S[i]*w);const j=(y*zw+x)*4;O[j]=cc[0];O[j+1]=cc[1];O[j+2]=cc[2];O[j+3]=Math.round(a*255)}
+  og.putImageData(id,0,0);/* slight bloom: the same shine blurred under the sharp one */const o2=document.createElement("canvas");o2.width=zw;o2.height=zh;const g2=o2.getContext("2d");g2.filter=`blur(${Math.max(.8,r*.12).toFixed(1)}px)`;g2.globalAlpha=V.bloom;g2.drawImage(o,0,0);g2.filter="none";g2.globalAlpha=1;g2.drawImage(o,0,0);
+  const per=G.per[(zi*7+3)%G.per.length],del=-(((zi*37+11)%60)/10).toFixed(1),pc=v=>(v*100).toFixed(2)+"%";
+  inner.push(`<b class="kg-hl" style="left:${pc(x0/cw)};top:${pc(y0/ch)};width:${pc(zw/cw)};height:${pc(zh/ch)};background-image:url(${url(o2)});--amp:${V.amp*w>1?1:(V.amp).toFixed(2)};--lo:${G.lo};--per:${per}s;--del:${del}s"></b>`);pp.push([nm,bx,by,w])});
+ /* twinkling 4-point stars (soft, pink-white / pale gold, varied size) popping and fading on cheekbones, brow bone, temple, outer eye corners, forehead; never on the lips */
+ const rnd=toilRnd(97),pc2=v=>(v*100).toFixed(2)+"%",ex=P.slice(20,40).map(q=>q[0]),eA=P.slice(20,30),eB=P.slice(30,40),ec=a=>a.reduce((q,p)=>[q[0]+p[0]/a.length,q[1]+p[1]/a.length],[0,0]);
+ const oA=eA.reduce((a,p)=>p[0]<a[0]?p:a,eA[0]),oB=eB.reduce((a,p)=>p[0]>a[0]?p:a,eB[0]);
+ const R2=G.zones;R2.forEach(([zn,cand,lo],zi)=>cand.forEach(([zx,zy,zd],ci)=>{const [sx,sy]=fx(zx*u,zy*u+zd*d),sz=u*(.18+.24*rnd())*G.size,dur=(1+.5*rnd()).toFixed(2),del=(rnd()*.9).toFixed(2),rot=(rnd()*30-15).toFixed(0),gold=(zi+ci)%3===1;
+  inner.push(`<b class="kg-st${gold?" gold":""}" data-z="${zi}" data-lo="${lo?1:0}" style="left:${pc2((sx-sz/2)/cw)};top:${pc2((sy-sz/2)/ch)};width:${pc2(sz/cw)};height:${pc2(sz/ch)};--sd:${dur}s;--sl:${del}s;--sr:${rot}deg"></b>`)}));
+ /* both irises: tiny twinkling catchlights (the eye ring centre, slightly up-left) */
+ if(V.eye)[eA,eB].forEach((E,i)=>{const c0=ec(E),sz=u*.27*G.size;[[-.07,-.06,1,3],[.06,.05,.55,6]].forEach(([dx,dy,sc,dur],j)=>{const x=c0[0]+dx*u,y=c0[1]+dy*u,z=sz*sc;inner.push(`<b class="kg-st eye" style="left:${pc2((x-z/2)/cw)};top:${pc2((y-z/2)/ch)};width:${pc2(z/cw)};height:${pc2(z/ch)};--sd:${(1+.4*j).toFixed(2)}s;--sl:${(.1+i*.15+j*.25).toFixed(2)}s;--sr:0deg"></b>`)})});
+ /* dreamy haze on her skin: her skin pixels (face blobs only) blurred into a soft pink-white bloom, very slow breathing */
+ {const hz=document.createElement("canvas");hz.width=cw;hz.height=ch;const hg=hz.getContext("2d"),hd=hg.createImageData(cw,ch),HD=hd.data;for(let i=0,j=0;i<N;i++,j+=4){const s=S[i];if(s<=0)continue;const dx=(i%cw-mid[0])/(1.9*u),dy=((i/cw|0)-(eyeY+.25*d))/(2.3*u);if(dx*dx+dy*dy>=1)continue;HD[j]=cc[0];HD[j+1]=cc[1];HD[j+2]=cc[2];HD[j+3]=Math.round(255*s*(1-dx*dx-dy*dy))}
+  hg.putImageData(hd,0,0);const h2=document.createElement("canvas");h2.width=cw;h2.height=ch;const g3=h2.getContext("2d");g3.filter=`blur(${Math.max(1,u*.09).toFixed(1)}px)`;g3.drawImage(hz,0,0);inner.unshift(`<b class="kg-hz" style="left:0;top:0;width:100%;height:100%;background-image:url(${url(h2)});--haze:${V.haze}"></b>`)}
+ return inner.join("")}
+(function(){const st=document.createElement("style");st.id="kglow-css";st.textContent=`.kfx>i.kglw,.kfxf>i.kglw{position:absolute;display:block;pointer-events:none;left:var(--fleft);top:var(--ftop);width:var(--fwidth);height:var(--fheight)}
+.kglw>b{position:absolute;display:block;mix-blend-mode:screen}
+.kglw>b.kg-hl{background-size:100% 100%;background-repeat:no-repeat;opacity:calc(var(--amp,.6)*var(--lo,.4));animation:kghl var(--per,3s) ease-in-out var(--del,0s) infinite}
+.kglw>b.kg-hz{background-size:100% 100%;opacity:var(--haze,.18);animation:kghz 8s ease-in-out infinite}
+.kglw>b.kg-st{opacity:0;background:url("data:image/svg+xml;utf8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Cdefs%3E%3CradialGradient id='g'%3E%3Cstop offset='0' stop-color='%23fff' stop-opacity='1'/%3E%3Cstop offset='.18' stop-color='%23fff2f0' stop-opacity='.95'/%3E%3Cstop offset='1' stop-color='%23ffe4e8' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Ccircle cx='50' cy='50' r='24' fill='url(%23g)' opacity='.75'/%3E%3Cpath d='M50 0C52 36 64 48 100 50C64 52 52 64 50 100C48 64 36 52 0 50C36 48 48 36 50 0Z' fill='url(%23g)'/%3E%3C/svg%3E") center/100% 100% no-repeat;}
+.kglw.on>b.kg-st.pk,.kglw.on>b.kg-st.eye{animation:kgst var(--sd,1.2s) ease-in-out var(--sl,0s) 1 both}
+.kglw>b.kg-st.gold{filter:sepia(.55) saturate(1.6) hue-rotate(-10deg) brightness(1.05)}
+@keyframes kghz{0%,100%{opacity:calc(var(--haze,.18)*.7)}50%{opacity:var(--haze,.18)}}
+@keyframes kgst{0%,100%{opacity:0;transform:scale(.25) rotate(var(--sr,0deg))}30%{opacity:1;transform:scale(1) rotate(calc(var(--sr,0deg) + 18deg))}65%{opacity:.9;transform:scale(.8) rotate(calc(var(--sr,0deg) + 32deg))}}`;(document.head||document.documentElement).appendChild(st)})();
+window.toilGlowLayer=toilGlowLayer;
+/* the burst clock: every 8-15 s (random) add .on to every glow layer for burstMs, then remove it */
+/* the burst clock: every 8-15 s (random) one burst: per layer pick BAL.toil.glow.stars zones at random (one candidate star in each), mark them .pk, add .on for burstMs, then remove */
+function toilGlowOn(x){const G=BAL.toil.glow,Z=G.zones,sh=a=>{for(let k=a.length-1;k>0;k--){const m=Math.floor(Math.random()*(k+1));[a[k],a[m]]=[a[m],a[k]]}return a},lo=sh(Z.map((z,i)=>z[2]?i:-1).filter(i=>i>=0)),up=sh(Z.map((z,i)=>z[2]?-1:i).filter(i=>i>=0)),nl=Math.min(lo.length,G.loMin+(Math.random()<.4?1:0));
+ const pick=new Set([...lo.slice(0,nl),...up.slice(0,Math.max(0,G.stars-nl))]);
+ x.querySelectorAll("b.kg-st").forEach(b=>b.classList.remove("pk"));const by={};x.querySelectorAll("b.kg-st[data-z]").forEach(b=>{(by[b.dataset.z]=by[b.dataset.z]||[]).push(b)});pick.forEach(z=>{const L=by[z];if(L&&L.length)L[Math.floor(Math.random()*L.length)].classList.add("pk")});x.classList.remove("on");void x.offsetWidth;x.classList.add("on")}
+window.toilGlowOn=toilGlowOn;
+(function(){const go=()=>{const G=BAL.toil.glow;if(G.auto===false){setTimeout(go,1000);return}document.querySelectorAll("i.kglw").forEach(toilGlowOn);setTimeout(()=>document.querySelectorAll("i.kglw.on").forEach(x=>x.classList.remove("on")),G.burstMs);setTimeout(go,G.gap[0]+Math.random()*(G.gap[1]-G.gap[0]))};if(typeof window!=="undefined")setTimeout(go,BAL.toil.glow.first)})();
+function toilFaceLayer(p,file){const lk=toilLookOfP(p);if(!lk)return"";const col=toilColOfP(p);const mk=toilMkLayer(file,lk,col);const src=mk?"":toilMakeupSvg(file,lk,col,false);if(!src&&!mk)return"";
+ return (src?`<img class="kmkl kmkl-${lk}" src="${src}" alt="" aria-hidden="true" style="--fleft:0%;--ftop:0%;--fwidth:100%;--fheight:100%">`:"")+mk+(lk==="tuyet"?toilGlowLayer(file,col):"")}
 if(typeof kitFxLayers==="function"){const fx0=kitFxLayers;kitFxLayers=function(p,file){const h=fx0.apply(this,arguments);let m="";try{m=toilFaceLayer(p,file)}catch(e){}return m+h}}
 
 /* ================= §60 MAKEUP COLOURS · kitSwatches (owner 15/11 19:05Z, review/mk-colour) =================
@@ -48061,13 +48181,14 @@ if(typeof kitFxLayers==="function"){const fx0=kitFxLayers;kitFxLayers=function(p
    outer/inner, both upper eyelids + lower lash line, both brows; 60 points in 1/4000 of the picture). The colour layer is painted FROM THE
    PICTURE ITSELF in a canvas (lip / lid / brow pixels recoloured with their own light and shade, soft masks), so it reads as painted, not pasted;
    it is one <img class="kmkl kmkc"> over the same box as the picture. A picture without points keeps the older SVG lip oval (never guessed). */
+/* warm entries (hue 5-35 deg, sat >= 50 %) moved 34 % toward 222,60,54 = owner pick "Cam ánh đỏ" 17/11 ~23:55Z (the tone read too orange); pink / gold / brown entries unchanged */
 const TOIL_COL={
- mat:{label:"Phấn mắt",def:"hoadao",L:[["hoadao","Phấn hoa đào","hoa đào",[234,148,146]],["hongmai","Phấn hồng mai","hồng mai",[214,104,128]],["rangchieu","Phấn ráng chiều","ráng chiều",[226,128,96]],
-  ["kimsa","Phấn kim sa","kim sa",[204,160,92]],["nautram","Phấn nâu trầm","nâu trầm",[150,100,82]],["tuvi","Phấn tử vi","tử vi",[170,116,168]],["hophach","Phấn hổ phách","hổ phách",[214,132,62]]]},
+ mat:{label:"Phấn mắt",def:"hoadao",L:[["hoadao","Phấn hoa đào","hoa đào",[234,148,146]],["hongmai","Phấn hồng mai","hồng mai",[214,104,128]],["rangchieu","Phấn ráng chiều","ráng chiều",[225,105,82]],
+  ["kimsa","Phấn kim sa","kim sa",[204,160,92]],["nautram","Phấn nâu trầm","nâu trầm",[150,100,82]],["tuvi","Phấn tử vi","tử vi",[170,116,168]],["hophach","Phấn hổ phách","hổ phách",[217,108,59]]]},
  ma:{label:"Phấn má",def:"hongphan",L:[["hongphan","Phấn hồng phấn","hồng phấn",[238,128,144]],["hoadao","Phấn má hoa đào","hoa đào",[242,150,140]],["haiduong","Phấn hải đường","hải đường",[230,110,126]],
-  ["yenchi","Yên chi","yên chi",[214,76,100]],["rangchieu","Phấn ráng chiều","ráng chiều",[240,140,108]],["hongsen","Phấn hồng sen","hồng sen",[226,120,160]],["camquyt","Phấn cam quýt","cam quýt",[246,150,96]]]},
+  ["yenchi","Yên chi","yên chi",[214,76,100]],["rangchieu","Phấn ráng chiều","ráng chiều",[234,113,90]],["hongsen","Phấn hồng sen","hồng sen",[226,120,160]],["camquyt","Phấn cam quýt","cam quýt",[238,119,82]]]},
  son:{label:"Son môi",def:"haiduong",L:[["haiduong","Son hải đường","hải đường",[206,60,80]],["dotham","Son đỏ thắm","đỏ thắm",[176,20,40]],["hongdao","Son hồng đào","hồng đào",[226,104,112]],
-  ["chusa","Son chu sa","chu sa",[204,54,38]],["manchin","Son mận chín","mận chín",[132,36,66]],["sanho","Son san hô","san hô",[232,104,86]],["camdao","Son cam đào","cam đào",[238,122,74]],["hophach","Son hổ phách","hổ phách",[214,92,40]]]},
+  ["chusa","Son chu sa","chu sa",[210,56,43]],["manchin","Son mận chín","mận chín",[132,36,66]],["sanho","Son san hô","san hô",[229,89,75]],["camdao","Son cam đào","cam đào",[227,108,87]],["hophach","Son hổ phách","hổ phách",[213,92,66]]]},
  may:{label:"Màu mày",def:"nau",L:[["nau","Mày nâu trầm","nâu trầm",[84,56,42]],["den","Mày đen tuyền","đen tuyền",[34,28,28]],["thanhdai","Mày thanh đại","thanh đại",[46,58,76]],
   ["naunhat","Mày nâu nhạt","nâu nhạt",[122,88,64]],["khoi","Mày khói","khói",[88,82,82]]]}};
 window.TOIL_COL=TOIL_COL;
@@ -48101,7 +48222,18 @@ function toilColFix(c){const o=toilColDef();if(c&&typeof c==="object"){for(const
 function toilColOfP(p){if(p&&p!==S&&p.coop){const r=toilFriendRec(p);return toilColFix(r&&r.col)}if(TOIL.prev)return TOIL.prev.col;const r=p===S?toilToday(S):null;return toilColFix(r&&r.col)}
 function toilColText(c){c=toilColFix(c);return ["mat","ma","son","may"].map(k=>toilColE(k,c[k])[1]).join(", ")}
 /* strength by look: lip / eyelid colour share, eyelid height (share of the lid→brow gap), brow tint, outer wing, lower lash line */
-const TOIL_MKS={vung:{lip:.62,eye:.5,eyeH:.62,brow:.5,wing:0,low:0,vung:1},dep:{lip:.54,eye:.5,eyeH:.5,brow:.45,wing:.08,low:0},diem:{lip:.86,eye:.7,eyeH:.68,brow:.68,wing:.22,low:.4}};
+/* the ladder (owner 17/11 04:36/04:44Z): vừa = the old 'đẹp' layer; đẹp = halfway between the old đẹp and the old Kiều diễm; diêm dúa = OVERDONE (heavy blush, very red lips, too much powder);
+   vụng = lip colour smeared past the lip line + uneven smudged blush, brows NEVER drawn or touched; mặt mộc = no layer */
+const TOIL_MKS={
+ /* bl = blush strength, blr = blush size (x the eye distance), sk = skin-light lift, hl = soft luminous cheekbone (round, never a streak), dabs = white powder dabs, gloss = natural sheen INSIDE the lip. Every skin-side layer is clipped to the skin mask (toilMkDraw). */
+ vung:{lip:.5,eye:.4,eyeH:.5,brow:0,wing:0,low:0,vung:1,bl:.3,r:.17,sk:.08,dabs:2},/* A: 'không biết trang điểm' */
+ vua:{lip:.44,eye:.5,eyeH:.5,brow:.45,wing:.08,low:0,bl:BAL.toil.blush.vua,r:.165,sk:.13},/* = the ?v=2 Đoan trang (approved by the owner 17/11 13:48Z) */
+ dep:{lip:.7,eye:.9,eyeH:.8,brow:.7,wing:.3,low:.34,shim:.5,gloss:.65,bl:BAL.toil.blush.dep,r:.2,sk:.3,hl:1},/* Kiều diễm = the ?v=5 Khuynh thành look, moved down one step (owner 17/11 ~14:00Z) */
+ tuyet:{lip:.76,eye:.96,eyeH:.9,brow:.78,wing:.42,low:.3,shim:.75,gloss:.78,bl:BAL.toil.blush.tuyet,r:.21,sk:.4,hl:1,glam:1},/* Khuynh thành: splendid, between Kiều diễm and the heavy v7 (owner 14:40Z) */
+ diem:{lip:.92,eye:1,eyeH:.95,brow:.82,wing:.36,low:.6,shim:.5,gloss:.2,bl:.56,r:.24,sk:.32,diff:1},/* Diêm dúa = the v6 look, blush more diffuse (loang, lower centre) */
+ vungB:{lip:1,eye:1,eyeH:1.18,brow:.9,wing:.55,low:.85,shim:.6,gloss:.2,bl:.78,r:.18,bp:"soft",sk:.36}};/* v18 (owner 17/11 19:55Z): blush SIZE = Đoan trang .165 / Kiều diễm .2 (was .23), outer edge blurred (BLP.soft); colour strength kept. Vụng về B "đánh quá tay, như hề" = the v7 Diêm dúa look; A = TOIL_MKS.vung */
+["dep","tuyet"].forEach(k=>["lip","eye","eyeH","wing","low","shim","gloss"].forEach(q=>{if(TOIL_MKS[k][q]!=null)TOIL_MKS[k][q]*=BAL.toil.level[k]}));/* BAL.toil.level = the one number that lowers the whole look */
+function toilVungB(col){const sd=((col&&col.seed)|0);if(!sd)return false;let h=Math.imul(sd^(sd>>>15),2246822519);h=Math.imul(h^(h>>>13),3266489917);h^=h>>>16;return((h>>>0)/4294967296)<(BAL.toil.vungB||0)}
 const MK_FIT={g:{},ld:{},face(f){const m=/^(?:por|fig)-([a-z]+-[a-z]*\d+)-/.exec(String(f||""));return m?m[1]:null},
  get(f){const g=this.face(f);if(!g)return null;const t=this.g[g];if(t)return t[f]||null;this.load(g);return null},
  load(g){if(this.ld[g])return;this.ld[g]=1;try{fetch("https://ctm-img.victoria-tntt.workers.dev/img/mk-fit/"+g+".json").then(r=>r.ok?r.json():null).then(j=>{if(j){MK_FIT.g[g]=j;try{if(typeof S!=="undefined"&&S&&!Q.length&&!TOIL.st)render();else if(TOIL.st&&TOIL.prev&&TOIL.prevUI)TOIL.prevUI()}catch(e){}}}).catch(()=>{})}catch(e){}}};
@@ -48127,26 +48259,49 @@ const TOIL_BLANK="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAA
 const TOIL_MKC={},TOIL_MKQ=[];
 function toilMkPts(v){const P=[];for(let i=0;i<60;i++)P.push([v[2*i]/40,v[2*i+1]/40]);return P}/* → % of width / height */
 function toilMkBox(v){const P=toilMkPts(v);let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;P.forEach(([x,y])=>{x0=Math.min(x0,x);x1=Math.max(x1,x);y0=Math.min(y0,y);y1=Math.max(y1,y)});
- const mx=(x1-x0)*.14,my=(y1-y0)*.14;return[x0-mx,y0-my,x1-x0+2*mx,y1-y0+2*my].map(n=>+n.toFixed(3))}
-function toilMkLayer(file,look,col){const v=MK_FIT.get(file);if(!v||!TOIL_MKS[look])return"";const key=[file,look,col.mat,col.son,col.may,look==="vung"?col.seed|0:""].join("|");
- let e=TOIL_MKC[key];if(!e){e=TOIL_MKC[key]={box:toilMkBox(v),src:""};TOIL_MKQ.push(key);if(TOIL_MKQ.length>80)delete TOIL_MKC[TOIL_MKQ.shift()];toilMkPaint(file,v,look,col,e,key)}
+ const mx=(x1-x0)*.3,my=(y1-y0)*.3;return[x0-mx,y0-my,x1-x0+2*mx,y1-y0+2*my].map(n=>+n.toFixed(3))}
+const TOIL_MKA={};/* key -> [file,look,col]: the size pass (toilLodPass) re-fetches the same layer at another strength step */
+function toilMkLayer(file,look,col,step){const v=MK_FIT.get(file);if(!v||!TOIL_MKS[look])return"";const base=[file,look,col.mat,col.ma,col.son,col.may,look==="vung"?(col.seed|0)+"/"+BAL.toil.vungSm+"/"+BAL.toil.vungSide+"/"+BAL.toil.vungRot+"/"+BAL.toil.vungSmSize:""].join("|"),key=step?base+"|L"+step:base;TOIL_MKA[base]=[file,look,col];
+ let e=TOIL_MKC[key];if(!e){e=TOIL_MKC[key]={box:toilMkBox(v),src:""};TOIL_MKQ.push(key);if(TOIL_MKQ.length>200)delete TOIL_MKC[TOIL_MKQ.shift()];toilMkPaint(file,v,look,col,e,key,step||0)}
  const b=e.box;return `<img class="kmkl kmkc kmkl-${look}" data-mkk="${key}" src="${e.src||TOIL_BLANK}" alt="" aria-hidden="true" style="--fleft:${b[0]}%;--ftop:${b[1]}%;--fwidth:${b[2]}%;--fheight:${b[3]}%">`}
-function toilMkPaint(file,v,look,col,e,key){const im=new Image();im.crossOrigin="anonymous";im.decoding="async";
- im.onload=()=>{try{e.src=toilMkDraw(im,v,look,col,e.box)}catch(x){e.src=TOIL_BLANK}document.querySelectorAll("img.kmkc").forEach(x=>{if(x.dataset.mkk===key)x.src=e.src})};
+function toilMkPaint(file,v,look,col,e,key,step){const im=new Image();im.crossOrigin="anonymous";im.decoding="async";
+ im.onload=()=>{try{e.src=toilMkDraw(im,v,look,col,e.box,(function(){try{return toilRow(file)}catch(x){return null}})(),(step||0)/BAL.toil.lod.steps)}catch(x){e.src=TOIL_BLANK}document.querySelectorAll("img.kmkc").forEach(x=>{if(x.dataset.mkk===key)x.src=e.src})};
  im.onerror=()=>{e.src=TOIL_BLANK};im.src=IMG_U("https://ctm-img.victoria-tntt.workers.dev/img/"+file)}
+/* size-aware makeup: one pass over every colour layer on screen; its face width in px (layer box = face + 30 % each side) picks the strength step, so every renderer (stage figure, avatar frame, close-up) gets the same curve */
+function toilLodStep(px){const L=BAL.toil.lod;if(!(px>0)||px>=L.fullAt)return 0;const t=Math.min(1,(L.fullAt-px)/(L.fullAt-L.maxAt));return Math.round(t*L.steps)}
+let toilLodRaf=0;
+function toilLodPass(){toilLodRaf=0;try{document.querySelectorAll("img.kmkc").forEach(im=>{const cur=im.dataset.mkk||"";const base=cur.replace(/\|L\d+$/,""),A=TOIL_MKA[base];if(!A)return;const w=im.getBoundingClientRect().width;if(!(w>0))return;const st=toilLodStep(w/1.6),have=+((/\|L(\d+)$/.exec(cur)||[])[1]||0);if(st===have)return;
+ const html=toilMkLayer(A[0],A[1],A[2],st);const key=st?base+"|L"+st:base,e=TOIL_MKC[key];if(!html||!e)return;im.dataset.mkk=key;if(e.src)im.src=e.src})}catch(x){}}
+function toilLodSched(){if(!toilLodRaf)toilLodRaf=requestAnimationFrame(toilLodPass)}
+if(typeof MutationObserver==="function"&&typeof document!=="undefined"){const go=()=>{try{new MutationObserver(toilLodSched).observe(document.body,{childList:true,subtree:true});window.addEventListener("resize",toilLodSched)}catch(e){}};if(document.body)go();else document.addEventListener("DOMContentLoaded",go)}
+window.toilLodPass=toilLodPass;window.toilLodStep=toilLodStep;
 /* soft-edged fill (canvas shadow: works where ctx.filter does not) */
 function toilSoft(g,path,blur,alpha,K){const OFF=4000;g.save();g.shadowColor=`rgba(0,0,0,${alpha})`;g.shadowBlur=Math.max(.5,blur*K);g.shadowOffsetX=OFF*K;g.translate(-OFF,0);g.beginPath();path(g);g.fillStyle="#000";g.fill("evenodd");g.restore()}
 function toilSmooth(g,P){/* closed smooth curve through the midpoints */const n=P.length;const m=i=>[(P[i%n][0]+P[(i+1)%n][0])/2,(P[i%n][1]+P[(i+1)%n][1])/2];const s=m(n-1);g.moveTo(s[0],s[1]);for(let i=0;i<n;i++){const q=m(i);g.quadraticCurveTo(P[i][0],P[i][1],q[0],q[1])}g.closePath()}
-function toilMkDraw(im,v,look,col,box){const W=im.naturalWidth,H=im.naturalHeight,T=TOIL_MKS[look];
+/* per-face geometry from the mesh points (px): eye span, eye-to-mouth, the face outline oval, the cheek ovals (feathered, swept up toward the temple), fitted into the outline.
+   The mesh has no jaw points: the outline oval is built from the eye span + eye-to-mouth (width 1.5x the outer-eye span, down to the chin ~0.85 u under the mouth). */
+function toilMkGeom(P,T){const av=a=>a.reduce((q,p)=>[q[0]+p[0]/a.length,q[1]+p[1]/a.length],[0,0]);const ca=av(P.slice(20,30)),cb=av(P.slice(30,40)),lc=av(P.slice(0,12));
+ const u=Math.hypot(ca[0]-cb[0],ca[1]-cb[1])||20,mid=[(ca[0]+cb[0])/2,(ca[1]+cb[1])/2],ang=Math.atan2(cb[1]-ca[1],cb[0]-ca[0]),eyeY=mid[1],mY=lc[1];
+ const ex=P.slice(20,40).map(p=>p[0]),span=Math.max(...ex)-Math.min(...ex),eyeBot=Math.max(...P.slice(20,40).map(p=>p[1]));
+ const ocx=(Math.max(...ex)+Math.min(...ex))/2,ol={cx:ocx,cy:eyeY+(mY-eyeY)*.55+u*.05,rx:span*1.02,ry:(mY-eyeY)+u*1.5,ang};
+ const inOl=(x,y)=>{const dx=x-ol.cx,dy=y-ol.cy,c=Math.cos(-ang),s=Math.sin(-ang),X=dx*c-dy*s,Y=dx*s+dy*c;return(X*X)/(ol.rx*ol.rx)+(Y*Y)/(ol.ry*ol.ry)<=1};
+ const bs=(T.blr||1)*u;const cheeks=[ca,cb].map(e=>{const sg=e[0]>=mid[0]?1:-1,cx=e[0]+(e[0]-mid[0])*.04+sg*bs*.05,cy=e[1]+(mY-eyeY)*.56-bs*.03;let k=1,rx=bs*.4,ry=bs*.27;const rot=ang-sg*.3;
+  const fits=k=>{for(let t=0;t<8;t++){const a=t*Math.PI/4,x=Math.cos(a)*rx*k,y=Math.sin(a)*ry*k,c=Math.cos(rot),s=Math.sin(rot),px=cx+x*c-y*s,py=cy+x*s+y*c;if(!inOl(px,py)||py<eyeBot+u*.07)return false}return true};
+  /* owner 17/11 13:48Z: the blush is NEVER shrunk to fit; the clip (outline x skin x no eyes) alone cuts it */return{x:cx,y:cy,rx:rx*k,ry:ry*k,rot,fit:k}});
+ return{u,mid,ang,eyeY,mY,cheeks,ol,inOl,eyeBot,ca,cb,lc}}
+window.toilMkGeom=toilMkGeom;
+function toilLodT(T,lod,look){if(!lod)return T;const L=BAL.toil.lod,o=Object.assign({},T),lw=(L.look&&L.look[look])||1;for(const k in L.cue)if(o[k])o[k]=o[k]*(1+(L.boost-1)*lod*L.cue[k]*(k==='bl'?1:lw));return o}
+function toilMkDraw(im,v,look,col,box,row,lod){const W=im.naturalWidth,H=im.naturalHeight,T=toilLodT((look==='vung'&&toilVungB(col))?TOIL_MKS.vungB:TOIL_MKS[look],lod,look);
  const bx=box[0]/100*W,by=box[1]/100*H,bw=box[2]/100*W,bh=box[3]/100*H;const K=Math.max(1,Math.min(3,160/bw));/* small figure faces are worked at ≥160 px */
  const cw=Math.max(2,Math.round(bw*K)),chh=Math.max(2,Math.round(bh*K));const mk=()=>{const c=document.createElement("canvas");c.width=cw;c.height=chh;const g=c.getContext("2d");g.setTransform(cw/bw,0,0,chh/bh,-bx*cw/bw,-by*chh/bh);return[c,g]};
  const P=toilMkPts(v).map(([x,y])=>[x/100*W,y/100*H]);const [c0,g0]=mk();g0.drawImage(im,0,0,W,H);
  const ca=P.slice(20,30).reduce((a,p)=>[a[0]+p[0]/10,a[1]+p[1]/10],[0,0]),cb=P.slice(30,40).reduce((a,p)=>[a[0]+p[0]/10,a[1]+p[1]/10],[0,0]);const u=Math.hypot(ca[0]-cb[0],ca[1]-cb[1])||20;
  /* lips: outer minus the mouth opening */
  const R=toilRnd((col.seed|0)+11),VU=!!T.vung;const lc=P.slice(0,12).reduce((a,p)=>[a[0]+p[0]/12,a[1]+p[1]/12],[0,0]);
- /* vụng: the lip colour goes past the lip line (bigger, shifted outline), patchy */
- const lipO=VU?(()=>{const sx=1.12+.1*R(),sy=1.3+.2*R(),dx=(R()-.5)*u*.09,dy=(R()-.35)*u*.05;return P.slice(0,12).map(([x,y])=>[lc[0]+(x-lc[0])*sx+dx,lc[1]+(y-lc[1])*sy+dy])})():P.slice(0,12);
- const [cl,gl]=mk();toilSoft(gl,g=>{toilSmooth(g,lipO);toilSmooth(g,P.slice(12,20))},u*(VU?.05:.035),1,K);
+ /* vụng (v15, owner 18:58Z): the lip keeps its OWN outline (nothing grows); ONE faint smudge streak past the lip line at one corner, like lipstick rubbed by a finger (BAL.toil.vungSm = strength) */
+ const lipO=P.slice(0,12);let SMG=null;if(VU){const xs=lipO.map(q=>q[0]),ys=lipO.map(q=>q[1]),x0=Math.min(...xs),x1=Math.max(...xs),lw=x1-x0,lh=Math.max(...ys)-Math.min(...ys),sd=(R(),BAL.toil.vungSide),k=BAL.toil.vungSm;SMG={x:(sd<0?x0:x1)+sd*lw*.02,y:lc[1]+lh*.35,rx:lw*(.2+.1*k)*BAL.toil.vungSmSize,ry:lh*.42*BAL.toil.vungSmSize,rot:BAL.toil.vungRot*.6,a:Math.min(.95,.6*k)}}
+ const [cl,gl]=mk();toilSoft(gl,g=>{toilSmooth(g,lipO);toilSmooth(g,P.slice(12,20))},u*(.052+.04*T.lip),1,K);/* owner 17/11 13:25Z: no visible lip outline; the darker the lip, the softer the edge */
+ if(SMG)toilSoft(gl,g=>{g.ellipse(SMG.x,SMG.y,SMG.rx,SMG.ry,SMG.rot,0,Math.PI*2)},u*.05,SMG.a,K);
  /* eyelids: soft layers from the lash line up toward the brow, stronger at the lash line, a small wing at the outer corner; the eye itself stays clear */
  const [ce,ge]=mk();const lerp=(a,b,t)=>[a[0]+(b[0]-a[0])*t,a[1]+(b[1]-a[1])*t];
 const eh=VU?[.6+.55*R(),.3+.35*R()]:[1,1];let en=0;
@@ -48157,34 +48312,66 @@ const eh=VU?[.6+.55*R(),.3+.35*R()]:[1,1];let en=0;
    toilSoft(ge,g=>{g.moveTo(wing[0],wing[1]);U.forEach(p=>g.lineTo(p[0],p[1]));top.slice().reverse().forEach(p=>g.lineTo(p[0],p[1]));g.closePath()},u*(VU?.1:.05),.34,K)}
   if(T.low){ge.save();ge.globalAlpha=T.low;ge.lineCap="round";ge.lineWidth=u*.035;ge.strokeStyle="#000";ge.shadowColor="#000";ge.shadowBlur=u*.03*K;
    ge.beginPath();const lo=[inn].concat(Lo,[out]).map(p=>[p[0],p[1]+u*.022]);ge.moveTo(lo[0][0],lo[0][1]);lo.slice(1).forEach(p=>ge.lineTo(p[0],p[1]));ge.stroke();ge.restore()}
+  ge.save();ge.globalCompositeOperation="destination-out";ge.lineCap="round";ge.lineJoin="round";ge.lineWidth=u*.05;ge.strokeStyle="rgba(0,0,0,.9)";ge.beginPath();U.forEach((p,i)=>i?ge.lineTo(p[0],p[1]-u*.012):ge.moveTo(p[0],p[1]-u*.012));ge.stroke();ge.restore();/* v16: the photo's lashes stay visible under every look */
   ge.save();ge.globalCompositeOperation="destination-out";ge.beginPath();U.forEach((p,i)=>i?ge.lineTo(p[0],p[1]):ge.moveTo(p[0],p[1]));Lo.forEach(p=>ge.lineTo(p[0],p[1]));ge.closePath();ge.fill();ge.restore()};
  eye(P.slice(20,27),P.slice(27,30),P.slice(45,50));eye(P.slice(30,37),P.slice(37,40),P.slice(55,60));
+ /* tuyệt / diêm dúa: pearl-gold shimmer on the lid (T.shim) and a gloss on the lower lip (T.gloss), soft dabs, never a sticker */
+ const [csh,gsh]=mk();if(T.shim||T.gloss){const U1=P.slice(20,27),U2=P.slice(30,37),B1=P.slice(45,50),B2=P.slice(55,60);const dab=(x,y,r,a)=>toilSoft(gsh,g=>{g.arc(x,y,r,0,7)},r*.7,a,K);
+  for(const [U,B] of [[U1,B1],[U2,B2]]){const bA=t=>{const f=t*(B.length-1),i=Math.min(B.length-2,Math.floor(f));return lerp(B[i],B[i+1],f-i)};if(T.shim)[2,4].forEach((k,j)=>{const q=lerp(U[k],bA(.86-.74*k/6),.35);dab(q[0],q[1],u*(j===0?.04:.03),T.shim)})}}
+ /* gloss = a soft sheen on the LOWER lip, inside the lip shape (it is multiplied by the lip mask below): never a white bar that reads as teeth */
+ const [cgl,ggl]=mk();if(T.gloss){const ib=Math.max(...P.slice(12,20).map(q=>q[1])),ob=Math.max(...P.slice(0,12).map(q=>q[1])),gy=ib+(ob-ib)*.42;
+  toilSoft(ggl,g=>{g.ellipse(lc[0],gy,u*.085,u*.013,0,0,7)},u*.018,T.gloss,K)}
+ /* SKIN pass (owner 17/11 13:08Z, 13:28Z): skin light, blush, luminous cheekbones, powder patches. Painted in real colour, clipped in the loop to
+    FACE OUTLINE (an oval built from THIS face's own mesh: eye span, eye-to-mouth) ∩ SKIN colour − EYE polygons. Blush size comes from toilMkGeom (scaled to the face, shrunk until it fits the outline). */
+ const [cs,gs]=mk();const G=toilMkGeom(P,T);const {ang,mid,eyeY,mY,cheeks,ol}=G;
+ if(row&&row.length>=7){const Wp=W/100,Hp=H/100,rf=T.r||.17,rr=row[6]*Wp*rf;[[row[2],row[3]],[row[4],row[5]]].forEach((q,i)=>{Object.assign(cheeks[i],{x:q[0]*Wp,y:q[1]*Hp,rx:rr,ry:rr,rot:0,fit:1})})}
+ const mc=toilColRGB("ma",col.ma);const sp=(x,y)=>[(x-bx)*cw/bw,(y-by)*chh/bh];
+ /* soft gaussian-like fall-off (a feathered oval, never a disc with an edge) */
+ const BLP={puff:[[0,1],[.4,.86],[.78,.34],[1,0]],diff:[[0,.62],[.3,.52],[.65,.25],[1,0]],patch:[[0,1],[.45,.88],[.78,.4],[1,0]],v2:[[0,1],[.35,.55],[1,0]],wide:[[0,.8],[.3,.62],[.62,.27],[1,0]],soft:[[0,.82],[.25,.6],[.5,.3],[.75,.09],[1,0]]};
+ const blob=(g,cx,cy,rx,ry,rot,rgb,al,flat,prof)=>{g.save();g.translate(cx,cy);g.rotate(rot);g.scale(rx,ry);const gr=g.createRadialGradient(0,0,0,0,0,1);const st=prof||(flat?[[0,1],[.55,.92],[.8,.45],[1,0]]:[[0,1],[.2,.9],[.4,.66],[.6,.36],[.8,.12],[1,0]]);st.forEach(([t,f])=>gr.addColorStop(t,`rgba(${rgb[0]},${rgb[1]},${rgb[2]},${(al*f).toFixed(3)})`));g.fillStyle=gr;g.beginPath();g.arc(0,0,1,0,7);g.fill();g.restore()};
+ const cmx=mid[0],cmy=eyeY+(mY-eyeY)*.5;
+
+ if(T.sk)blob(gs,cmx,cmy,u*1.22,u*1.6,ang,[255,249,240],T.sk);
+ if(T.hl)cheeks.forEach(c=>blob(gs,c.x,c.y-u*.16,u*.2,u*.15,0,[255,244,226],.2));/* tuyệt: soft round lights on the cheekbones (wide fall-off), never a streak */
+ cheeks.forEach((c,i)=>{const j=VU?[.7+.7*R(),.7+.7*R(),(R()-.5)*u*.12,(R()-.5)*u*.09,.55+.8*R()]:[1,1,0,0,1];
+  blob(gs,c.x+j[2],c.y+j[3],c.rx*j[0],c.ry*j[1],c.rot+(VU?(R()-.5)*.5:0),mc,Math.min(.9,T.bl*j[4]),0,look==='vua'?BLP.v2:T.bp?BLP[T.bp]:T.diff?BLP.diff:BLP.wide);
+  if(VU){/* small uneven blotches beside the cheek */for(let k=0;k<2;k++)blob(gs,c.x+(R()-.5)*c.rx*1.1,c.y+(R()-.5)*c.ry*1.2,u*(.09+.06*R()),u*(.06+.05*R()),R()*3,mc,.18+.12*R(),0,BLP.wide)}});
+ /* vụng: powder PATCHES and streaks (irregular, a little cakey), not dots: long thin or lumpy, random turn, flat top */
+ const PZ=BAL.toil.vungPuff,RZ=toilRnd((col.seed|0)+23),bigI=RZ()<.5?0:1;/* own rng: the other draws keep their v8 values; per day one cheek gets the big puff, the other the small one */
+ if(T.dabs)cheeks.forEach((c,ci)=>{const nb=1+(R()<.55?1:0);for(let k=0;k<nb;k++){const rr=c.rx*((k===0)===(ci===bigI)?PZ.big:PZ.small)*(.92+.16*R());blob(gs,c.x+(R()-.5)*c.rx*.5+(k?rr*.45:0),c.y+(R()-.5)*c.ry*.5+(k?rr*.3:0),rr,rr*(.9+.15*R()),R()*3.1,[255,250,244],(PZ.al+PZ.alv*R())*(1+(BAL.toil.lod.boost-1)*(lod||0)*BAL.toil.lod.cue.vung),0,BLP.wide)}});/* vụng A: 1-2 ROUND soft powder-puff blobs per cheek, 50 %/75 % of the blush disc, blush blur, opaque, layered over the blush */
+ const [cfo,gfo]=mk();toilSoft(gfo,g=>{g.save();g.translate(ol.cx,ol.cy);g.rotate(ol.ang);g.scale(ol.rx,ol.ry);g.arc(0,0,1,0,7);g.restore()},u*.06,1,K);/* the face outline oval (soft edge) */
+ /* the eyes (dilated) are cut out of the skin pass */
+ const [cx2,gx]=mk();[[20,27,27,30],[30,37,37,40]].forEach(([a,b,c2,d])=>{const poly=P.slice(a,b).concat(P.slice(c2,d));const ec=poly.reduce((q,p)=>[q[0]+p[0]/poly.length,q[1]+p[1]/poly.length],[0,0]);const gp=poly.map(p=>[ec[0]+(p[0]-ec[0])*1.45,ec[1]+(p[1]-ec[1])*1.6]);toilSoft(gx,g=>{g.moveTo(gp[0][0],gp[0][1]);gp.forEach(p=>g.lineTo(p[0],p[1]));g.closePath()},u*.05,1,K)});
  /* brows */
  const [cbw,gb]=mk();toilSoft(gb,g=>{toilSmooth(g,P.slice(40,50));toilSmooth(g,P.slice(50,60))},u*.03,1,K);
  /* vụng ink (painted in the brow colour itself): one brow redrawn too high / too thick, the other's tail dragged long, a smear of ink off a tail */
  const [ci,gi]=mk();if(VU){gi.lineCap="round";gi.lineJoin="round";gi.strokeStyle="#000";const side=R()<.5?0:1;
   const Bu=[P.slice(40,45),P.slice(50,55)],Bl=[P.slice(45,50),P.slice(55,60)];/* upper edge outer→inner, lower edge inner→outer */
   const line=(L,w,a,blur)=>{gi.save();gi.globalAlpha=a;gi.lineWidth=w;gi.shadowColor="#000";gi.shadowBlur=blur*K;gi.beginPath();L.forEach((p,i)=>i?gi.lineTo(p[0],p[1]):gi.moveTo(p[0],p[1]));gi.stroke();gi.restore()};
-  const up=-(.035+.035*R())*u;line(Bu[side].map((p,i)=>[p[0],p[1]+up*(.4+.6*Math.sin(Math.PI*i/4))]),u*(.05+.02*R()),.62,u*.01);
-  const o=Bl[1-side],t=o[4],t2=o[3];const ext=[t[0]+(t[0]-t2[0])*(.9+.6*R()),t[1]+(t[1]-t2[1])*.9+u*(.05+.05*R())];line([t2,t,ext],u*.04,.55,u*.012);
-  const sm=Bl[side][4];line([sm,[sm[0]+(sm[0]-lc[0])*.18,sm[1]+u*(.18+.12*R())]],u*.07,.32,u*.06)}
- const D=g0.getImageData(0,0,cw,chh),mI=gi.getImageData(0,0,cw,chh).data,mL=gl.getImageData(0,0,cw,chh).data,mE=ge.getImageData(0,0,cw,chh).data,mB=gb.getImageData(0,0,cw,chh).data,o=D.data;
+  /* owner 17/11 04:15Z: vụng stays PRETTY — no drawn / thick brows, no ink: only soft faults (uneven blush + a caked powder patch in the SVG layer, lip line a little off, soft uneven lids) */}
+ const D=g0.getImageData(0,0,cw,chh),mI=gi.getImageData(0,0,cw,chh).data,mL=gl.getImageData(0,0,cw,chh).data,mE=ge.getImageData(0,0,cw,chh).data,mB=gb.getImageData(0,0,cw,chh).data,mSh=gsh.getImageData(0,0,cw,chh).data,mGl=ggl.getImageData(0,0,cw,chh).data,mS=gs.getImageData(0,0,cw,chh).data,mX=gx.getImageData(0,0,cw,chh).data,mO=gfo.getImageData(0,0,cw,chh).data,o=D.data;
  const Lum=i=>.299*o[i]+.587*o[i+1]+.114*o[i+2];let sl=0,nl=0,se=0,ne=0;
  for(let i=0;i<o.length;i+=4){const l=Lum(i);if(mL[i+3]>140){sl+=l;nl++}if(mE[i+3]>60&&l>110){se+=l;ne++}}
- const Ll=nl?sl/nl:150,Le=ne?se/ne:205;const tl=toilColRGB("son",col.son),te=toilColRGB("mat",col.mat),tb=toilColRGB("may",col.may);
+ const Ll=nl?sl/nl:150,Le=ne?se/ne:205;
+ /* her cheek skin colour (median of small windows on the cheeks, taken from the picture itself) */
+ const skc=(()=>{const ch=[[],[],[]];cheeks.forEach(c=>{const [px,py]=sp(c.x,c.y),rr=Math.max(2,Math.round(u*.06*cw/bw));for(let y=-rr;y<=rr;y+=1)for(let x=-rr;x<=rr;x+=1){const X=Math.round(px+x),Y=Math.round(py+y);if(X<0||Y<0||X>=cw||Y>=chh)continue;const j=(Y*cw+X)*4;if(o[j+3]>0){ch[0].push(o[j]);ch[1].push(o[j+1]);ch[2].push(o[j+2])}}});const med=a=>{a.sort((x,y)=>x-y);return a.length?a[a.length>>1]:200};return[med(ch[0]),med(ch[1]),med(ch[2])]})();
+ const skinM=(i,lo,hi)=>{const dr=o[i]-skc[0],dg=o[i+1]-skc[1],db=o[i+2]-skc[2],d=Math.sqrt(dr*dr*.6+dg*dg+db*db);return d<=lo?1:d>=hi?0:1-(d-lo)/(hi-lo)};const tl=toilColRGB("son",col.son),te=toilColRGB("mat",col.mat),tb=toilColRGB("may",col.may);
  const Ltb=Math.max(20,.299*tb[0]+.587*tb[1]+.114*tb[2]);const cl3=(x,a,b)=>x<a?a:x>b?b:x;
  /* vụng patchiness: smooth value noise in face units (same blotches on portrait and figure) */
  const NS=u*.14,hv=(x,y)=>{let h=(x*374761393+y*668265263+(col.seed|0)*982451653)|0;h=Math.imul(h^h>>>13,1274126177);return((h^h>>>16)>>>0)/4294967296};
  const nz=(x,y)=>{const fx=(x-lc[0])/NS,fy=(y-lc[1])/NS,ix=Math.floor(fx),iy=Math.floor(fy),tx=fx-ix,ty=fy-iy,sx=tx*tx*(3-2*tx),sy=ty*ty*(3-2*ty);
   const a=hv(ix,iy),b=hv(ix+1,iy),c=hv(ix,iy+1),d=hv(ix+1,iy+1);return a+(b-a)*sx+(c-a)*sy+(a-b-c+d)*sx*sy};
- for(let i=0;i<o.length;i+=4){const ab=mB[i+3]/255,ae=mE[i+3]/255,al=mL[i+3]/255,ai=VU?mI[i+3]/255:0;if(!(ab||ae||al||ai)){o[i+3]=0;continue}
-  const pn=VU?.35+.75*nz(bx+((i>>2)%cw)*bw/cw,by+Math.floor((i>>2)/cw)*bh/chh):1;
+ for(let i=0;i<o.length;i+=4){const ab=mB[i+3]/255,ae=mE[i+3]/255,al=mL[i+3]/255,ai=VU?mI[i+3]/255:0,as=mSh[i+3]/255,ag=mGl[i+3]/255,ak=mS[i+3]/255;if(!(ab||ae||al||ai||as||ag||ak)){o[i+3]=0;continue}
+  const pn=VU?.6+.55*nz(bx+((i>>2)%cw)*bw/cw,by+Math.floor((i>>2)/cw)*bh/chh):1;
   const r0=o[i],g1=o[i+1],b0=o[i+2],l=Lum(i);let r=r0,g=g1,b=b0,keep=1;
+  if(ak){const a=ak*skinM(i,26,56)*(1-mX[i+3]/255)*(mO[i+3]/255);if(a>.002){r+=(mS[i]-r)*a;g+=(mS[i+1]-g)*a;b+=(mS[i+2]-b)*a;keep*=1-a}}
   if(ab){/* only the brow hairs (darker than the skin) take the colour, with their own light */const dk=cl3((Le-l)/(Le*.42),0,1);const a=ab*T.brow*dk;
    if(a>0){const k=Math.min(2.4,l/Ltb)*(look==="diem"?.9:1);r+=(tb[0]*k-r)*a;g+=(tb[1]*k-g)*a;b+=(tb[2]*k-b)*a;keep*=1-a}}
-  if(ae){const a=Math.min(1,ae*T.eye*pn);const k=cl3(l/Le,.35,1.12);r+=(te[0]*k-r)*a;g+=(te[1]*k-g)*a;b+=(te[2]*k-b)*a;keep*=1-a}
-  if(al){let a=Math.min(1,al*T.lip*pn);const q=l/Ll;const k=cl3(q,.55,1.22);/* highlights on the lip keep some of their shine */if(q>1.22)a*=Math.max(.45,1-(q-1.22)*1.6);
+  if(ae){const a=Math.min(1,ae*T.eye*pn)*skinM(i,46,92)*Math.min(1,mO[i+3]/200+.0);const k=cl3(l/Le,.35,1.12);r+=(te[0]*k-r)*a;g+=(te[1]*k-g)*a;b+=(te[2]*k-b)*a;keep*=1-a}
+  if(al){let a=Math.min(1,al*T.lip*pn);const q=l/Ll;const k=VU?cl3(Math.pow(q,1.25),.8,1.02):cl3(Math.pow(q,1.15),.66,1.2);/* highlights on the lip keep some of their shine; vụng: the smear past the line is as dark as the lip itself (readable at stage size) */if(!VU&&q>1.22)a*=Math.max(.45,1-(q-1.22)*1.6);
    r+=(tl[0]*k-r)*a;g+=(tl[1]*k-g)*a;b+=(tl[2]*k-b)*a;keep*=1-a}
+  if(as){const a=Math.min(.9,as)*skinM(i,46,92)*(mO[i+3]/255);r+=(Math.min(255,te[0]*.35+235)-r)*a;g+=(Math.min(255,te[1]*.35+215)-g)*a;b+=(Math.min(255,te[2]*.35+170)-b)*a;keep*=1-a}
+  if(ag){const a=Math.min(.8,ag)*(al>.35?1:0);r+=(255-r)*a*.8;g+=(236-g)*a*.8;b+=(230-b)*a*.8;keep*=1-a*.8}
   if(ai){const a=Math.min(1,ai*pn);const k=.85;r+=(tb[0]*k-r)*a;g+=(tb[1]*k-g)*a;b+=(tb[2]*k-b)*a;keep*=1-a}
   const A=1-keep;if(A<.004){o[i+3]=0;continue}/* overlay pixel so that mix(original, it, A) = the painted pixel */
   o[i]=cl3(Math.round(r0+(r-r0)/A),0,255);o[i+1]=cl3(Math.round(g1+(g-g1)/A),0,255);o[i+2]=cl3(Math.round(b0+(b-b0)/A),0,255);o[i+3]=Math.round(A*255)}
@@ -48252,18 +48439,22 @@ function toilPreName(col){if(!col)return"";const k=toilPreOf(col);const p=TOIL_P
 function toilFigAt(){let P=0;try{const it=wdItem(wdOf(S).y);P=it?it.P:0}catch(e){}const rank=P>=1?Math.min(7,P-1):S.rank;const f0=figTierOf;try{figTierOf=function(w){return w===S?rank:f0.apply(this,arguments)};return figFor(S,"")}catch(e){return""}finally{figTierOf=f0}}
 /* the dressing-room plate (https://ctm-img.victoria-tntt.workers.dev/img/toil-mirror-room.webp, 1200x800): bx = its CSS background-position-x (.ktrv-plate), gx = the bronze mirror's glass centre across the picture (measured) */
 const TOIL_PLATE={w:1200,h:800,bx:.52,gx:630/1200};/* gx = the mirror axis of symmetry measured on the painting (frame rows 60-470, left half vs flipped right half: x = 629.5-631 of 1200; dev/test/mirror-center.js re-measures it from the picture) */
-function toilReveal(o,done){let fin=false;const end=()=>{if(fin)return;fin=true;try{done()}catch(e){console.error(e)}};
+/* the face mesh (https://ctm-img.victoria-tntt.workers.dev/img/mk-fit) of a file must be loaded BEFORE its colour layers are built: the layer is baked into the reveal markup and is not redrawn when the mesh arrives
+   (r2 FAIL 17/11: a lip patch on the chin = the fallback lip oval from the old fit row, drawn while the mesh was still loading). Waits up to ~2.5 s, then goes on (the mesh-less fallback below draws no lips). */
+function toilMkReady(files,cb){let n=0;const need=()=>files.filter(f=>f&&MK_FIT.face(f)&&!MK_FIT.get(f));const go=()=>{if(!need().length||++n>31)return cb();setTimeout(go,80)};go()}
+function toilReveal(o,done){let fin=false;try{if(typeof kmStage==="function"&&kmOn()&&S&&TOIL_FIT.fit&&!o.mkWait){const f0=toilFigAt(),p0=toilPor();if(f0&&p0.src){o.mkWait=1;return toilMkReady([kitFile(f0),kitFile(p0.src)],()=>toilReveal(o,done))}}}catch(e){}
+ const end=()=>{if(fin)return;fin=true;try{done()}catch(e){console.error(e)}};
  try{if(typeof kmStage!=="function"||!kmOn()||!S||!TOIL_FIT.fit)return end();const fig=toilFigAt(),por=toilPor();if(!fig||!por.src)return end();
-  const ff=kitFile(fig),pf=kitFile(por.src),v=TOIL_FIT.fit[ff];if(!v)return end();const A=v[8]||1.3,red=kmReduced(),look=o.look;
+  const ff=kitFile(fig),pf=kitFile(por.src),v=toilRow(ff);if(!v)return end();const A=v[8]||1.3,red=kmReduced(),look=o.look;
   /* the close-up is HER PORTRAIT laid exactly over her face in the figure (same mouth point, same face width from img/toil-fit.json): the figure picture is too soft at 5x, the portrait has the pixels */
-  let porH="",porG=null;try{const pv=TOIL_FIT.fit[pf];if(pv&&pv[6]){const Ap=pv[8]||1.3,wp=100*v[6]/pv[6],hp=wp*Ap/A,pfx=kitFxLayers(S,pf);porG={l:v[0]-pv[0]*wp/100,wp};
+  let porH="",porG=null;try{const pv=toilRow(pf);if(pv&&pv[6]){const Ap=pv[8]||1.3,wp=100*v[6]/pv[6],hp=wp*Ap/A,pfx=kitFxLayers(S,pf);porG={l:v[0]-pv[0]*wp/100,wp};
    porH=`<span class="ktrv-pw" style="left:${(v[0]-pv[0]*wp/100).toFixed(2)}%;top:${(v[1]-pv[1]*hp/100).toFixed(2)}%;width:${wp.toFixed(2)}%;height:${hp.toFixed(2)}%"><img src="${IMG_U("https://ctm-img.victoria-tntt.workers.dev/img/"+pf)}" alt=""><span class="kfxf">${pfx}</span></span>`}}catch(e){}
   const fx=(()=>{try{return kitFxLayers(S,ff)}catch(e){return""}})();
   const rows=[["Dung nhan",`<span class="ef ${o.good?"g":look==="vung"?"r":"t"}"><b>${TOIL_MK[look]}</b></span>`]];if(o.made)rows.push(["Kiểu",o.pre]);rows.push(["Xa xỉ son phấn",toilLvChips(look)]);rows.push(["Hôm nay",TOIL_HINT[look]]);
   const html=`<div class="ktrv ktrv-${look}" style="--ktpx:${v[0]}%;--ktpy:${(v[1]-v[6]*.25/A).toFixed(2)}%"><div class="ktrv-cam"><i class="ktrv-plate" style="background-image:url(${IMG_U("https://ctm-img.victoria-tntt.workers.dev/img/toil-mirror-room.webp")})"></i><i class="ktrv-lt"></i>`+
    `<div class="ktrv-fig"><span class="ktrv-fw"><img src="${IMG_U("https://ctm-img.victoria-tntt.workers.dev/img/"+ff)}" alt=""><span class="kfxf">${fx}</span>${porH}</span></div></div>`+
    `<div class="ktrv-card kgr">${kitRows(rows)}</div></div>`;
-  const rt=kmStage("ktrv-ov",html,{manual:true});const ov=rt.ov,R=ov.querySelector(".ktrv"),fw=ov.querySelector(".ktrv-fw"),im=fw.querySelector("img");
+  const rt=kmStage("ktrv-ov km-full",html,{manual:true});const ov=rt.ov,R=ov.querySelector(".ktrv"),fw=ov.querySelector(".ktrv-fw"),im=fw.querySelector("img");
   const hint=document.createElement("div");hint.className="kmhint";hint.textContent="Chạm để bỏ qua";ov.appendChild(hint);
   fw.style.setProperty("--kta",(1/A).toFixed(5));/* the box = the picture box from the fit aspect (no wait for the picture), so the % layers (makeup, portrait) and the camera always sit on the picture */
   let ph=0;const T=[];const later=(ms,f)=>{if(!o.manual)T.push(setTimeout(()=>{try{f()}catch(e){console.error(e)}},ms))};
@@ -48316,11 +48507,11 @@ window.toilReveal=toilReveal;
 .ktrv-fw>img{display:block;height:100%;width:auto;max-width:none;transition:opacity .6s ease}
 .ktrv-fw>.kfxf{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;transition:opacity .6s ease}
 .ktrv-pw{position:absolute;opacity:0;transition:opacity .6s ease;pointer-events:none}.ktrv-pw>img{display:block;width:100%;height:100%;max-width:none}.ktrv-pw>.kfxf{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none}
-.ktrv-zin .ktrv-pw{opacity:1}.ktrv-zin.ktrv-hasp .ktrv-fw>img,.ktrv-zin.ktrv-hasp .ktrv-fw>.kfxf{opacity:0}.ktrv-red .ktrv-pw,.ktrv-red .ktrv-fw>img{transition:none}
+.ktrv-zin .ktrv-pw{opacity:1}/* owner 17/11: the portrait is only a face patch; its edges FEATHER into the figure picture (never a hard cut line, the figure stays under it) */.ktrv-pw{-webkit-mask-image:linear-gradient(to bottom,#000 80%,transparent),linear-gradient(to right,transparent,#000 7%,#000 93%,transparent);mask-image:linear-gradient(to bottom,#000 80%,transparent),linear-gradient(to right,transparent,#000 7%,#000 93%,transparent);-webkit-mask-composite:source-in;mask-composite:intersect}.ktrv-red .ktrv-pw,.ktrv-red .ktrv-fw>img{transition:none}
 .ktrv-in .ktrv-fw,.ktrv-zin .ktrv-fw{opacity:1;transform:none}
 .ktrv-wob .ktrv-fw{animation:ktWob .9s ease-in-out 2}
 @keyframes ktWob{0%,100%{transform:none;filter:none}20%{transform:rotate(-1.6deg) skewX(2deg);filter:blur(1.4px)}50%{transform:rotate(1.4deg) skewX(-2deg);filter:blur(.8px)}75%{transform:rotate(-.8deg)}}
-.ktrv-card{position:absolute;left:50%;bottom:max(34px,env(safe-area-inset-bottom));transform:translate(-50%,12px);width:min(92vw,420px);opacity:0;transition:opacity .5s ease .5s,transform .5s ease .5s}/* frame (background, border, radius, padding, shadow) = the ONE j93 frame rule .kmlist,.kprev-card,.ktrv-card (kit keeper K2) */
+.ktrv-card{position:absolute;left:50%;bottom:calc(var(--kmend-room,68px) + 10px);transform:translate(-50%,12px);width:min(92vw,420px);opacity:0;transition:opacity .5s ease .5s,transform .5s ease .5s}/* frame (background, border, radius, padding, shadow) = the ONE j93 frame rule .kmlist,.kprev-card,.ktrv-card (kit keeper K2) */
 .ktrv-zoomed .ktrv-card{opacity:1;transform:translate(-50%,0)}
 
 `;document.head.appendChild(st)})();
@@ -48442,7 +48633,7 @@ window.luxPiece=luxPiece;
 function luxTotal(p,o){try{return luxOf(p||S,o).sc|0}catch(e){return 0}}
 function luxParts(p){p=p||S;const o={y:0,trang:0,mk:0,pet:0,total:0};try{for(const k of luxWorn(p)){const v=luxVal(k);/* what luxOf sums (jinv), so the parts add up to the total */const w=typeof WD_ITEMS==="object"?WD_ITEMS[k]:null;
   if((w&&w.sl==="y")||(p.dress&&p.dress.k===k&&!w))o.y+=v;else o.trang+=v}}catch(e){}
- try{o.pet=typeof petLuxOf==="function"?petLuxOf(p):0}catch(e){}try{o.mk=typeof toilMkLux==="function"?toilMkLux(p):0}catch(e){}
+ try{o.pet=typeof petLuxOf==="function"?petLuxOf(p):0}catch(e){}try{o.mk=typeof toilMkLux==="function"?toilMkLux(p):0}catch(e){}/* hoa-dien: o.hd = the hoa điền part OF mk (already inside mk and the total) */try{const r=typeof toilMkRec==="function"?toilMkRec(p):null;o.hd=r&&r.makeup&&r.hd&&typeof hdLux==="function"?hdLux(r.hd):0}catch(e){}
  o.total=luxTotal(p);return o}
 window.luxTotal=luxTotal;window.luxParts=luxParts;
 let LUX_LAST=null;
@@ -48585,6 +48776,199 @@ window.luxGift=luxGift;
 /* the rider words: a frugal host pleased by plain dress is not "thiếu lễ" (jtoil's head said so when the look added a line) */
 (function(){if(typeof aaThieuLeTxt!=="function")return;const t0=aaThieuLeTxt;aaThieuLeTxt=function(host,f0){const s=t0.apply(this,arguments);try{const L=leAttire(S,"",host);
  if(L.state==="plain"&&luxHostKind(host)==="frugal"&&(f0||L.delta).duc>=0){const who=host==="th"?"Thái hậu":host==="emp"?"Hoàng thượng":host&&host.queen?"Hoàng hậu":"chủ nhà";return s.replace(/^thiếu lễ \([^)]*\)/,`y phục giản dị hợp ý ${who}`)}}catch(e){}return s}})();
+/* ================= jhd: HOA ĐIỀN — an owned item + the placing step of makeup (review/hoa-dien) =================
+   Owner (OD 17/11 ~17:30Z real, verbatim key words): "hoa điền là cái thứ mà tôi có thể dán vào trên trán của từng người ... thứ nhất tôi có thể mua
+   được nè, người khác tặng nè, kiếm được nè ... mỗi lần được thăng phẩm là được một cái ... khi tôi trang điểm á, thì tôi có thể tự dán lên".
+   OD 17/11 ~17:45Z real: "thêm cho tôi cái mini game ... một bước là dán hoa điền ... cho nó méo qua méo lại ... điều chỉnh được cái vị trí ... đặt
+   khớp đúng cái vị trí mà bạn đặt á, thì được cao điểm ... đặt không khớp thì nó vẫn được tính ... Hoa điền cũng cộng vào tổng xa xỉ luôn."
+   - ITEMS: ONE table (j92 WD_LIST, slot "hd", 8 tiers P1..P8, motifs flowers / leaves / butterfly / phoenix only, OD:L1104). Never worn through the
+     wardrobe (wdWear refuses "hd"); placed during makeup only. Sources: shop restock, NPC gifts (NPCs hold some; j8 gift rule, tg "rv"),
+     found (monthly), +1 per promotion (her and NPCs).
+   - STEP: after the lips (jtoil toilMakeup phase 3 → hdStep): pick one of hers (or none) → drag it (relative drag) + tilt it (two kit buttons)
+     → "Dán". q = hdQ(distance to the forehead anchor / eye distance, tilt error vs the eye line). No clock: nothing rewards speed.
+     q is one more makeup part (BAL.toil.w.hd) in toilRaw → the score → the look (Vụng về ↔ Khuynh thành); a miss still counts (q > 0 near).
+   - NPCs (and her auto bot) place by the SAME q from their hand (hdNpc: hashed per person per day, the ag-all-2 mgHand when it is in, cap
+     BAL.hd.npcCap), so both co-op seats agree.
+   - XA XỈ: the placed hoa điền adds wdLux(k) into toilMkLux → luxOf → luxTotal (ONE total; luxParts.hd = its share of mk).
+   - THỬ TAY: KG82_KIND.hoadien + KG82_ENG.hoadien (same board, same hdQ, reads env.lv via BAL.mgTier.lev.hoadien) → listed by jmgcal mgCalKinds.
+   - FOREHEAD ANCHOR: from the face mesh (https://ctm-img.victoria-tntt.workers.dev/img/mk-fit: brows' inner ends, raised BAL.hd.up × eye distance, perpendicular to the eye line); a
+     per-face table from Foreman C (window.HD_ANCHOR[file] = [x,y] in 1/4000 of the picture) wins when it exists. Painted hoa điền on the
+     portraits stay until C ships clean foreheads (brief: hide only if C says it is a separate layer).
+   ============================================================================================================== */
+Object.assign(BAL,{hd:{
+ ink:{hd_mai:.67,hd_dao:.64,hoadien_bac:.63,hd_diep:.56,hd_lan:.59,hd_sen:.54,hd_maudon:.55,hd_phuong:.43},/* r3 (owner ~23:40Z "cùng 13.5 mà có cái to cái nhỏ"): share of each sprite's box that is INK (alpha > 40, measured once offline on the 8 sprites; the sprites are already trimmed to their mark, so the box = the visible bbox) */
+ tone:{on:1,sat:.85,metal:{h0:28,h1:62,s:.35,v:.55}},/* r3 (owner 01:18Z "hạ cái saturate là được, pha màu vô còn chi"): tone = SATURATION ONLY, baked once into the layer canvas: each non-metal pixel keeps its luminance and its hue, its distance from that grey is scaled by sat (no darken, no lift to white, opacity untouched). Gold / metal pixels (hue h0..h1 deg, s, v) are left alone. on:0 = off */
+ sizeByRank:[.115,.115,.115,.125,.125,.135,.135,.135],/* r3 (owner ~23:55Z): size = share of face width BY THE WEARER'S RANK, indexed like RANKS (Đáp ứng, Thường tại, Quý nhân = 11.5 % · Tần, Phi = 12.5 % · Quý phi, Hoàng quý phi, Hoàng hậu = 13.5 %); BAL.hd.size is the fallback. The equal-visible-area rule (inkK) then sizes every design inside that share */
+ inkK:.6,inkDef:.6,    /* every design gets the same visible INK AREA = inkK × (size × face width)² (a design with less ink per box is drawn bigger) */
+ boxW:1.5,boxH:1.5,    /* … still capped: width ≤ boxW × size × face width, height ≤ boxH × size × face width (forehead cap for tall designs). */
+           /* r3 (owner 17/11 ~23:00Z): a hoa điền is sized to FIT a box, width ≤ size × face width AND height ≤ boxH × that width (scaled by the LIMITING side), so wide (mẫu đơn), round and tall (kim phượng) designs read the same visual size */
+ size:.135,            /* sticker width / face width (owner's pick 0.085, Foreman C huadian-size) */
+ up:.38,           /* anchor: above the brows' inner-end midpoint, × eye distance, perpendicular to the eye line */
+ tolD:.24,tolA:30,     /* q of a part falls to 0 at this distance (× eye distance) / this tilt (degrees). r1: .45 → .24 = careful-bot top grade
+                          70 % → ~25 % at Vừa (ease 2) while the painted hoa điền still marks the spot; RE-MEASURE when clean foreheads land */
+ wD:.7,wA:.3,          /* share of distance vs tilt in q */
+ skTol:.5,             /* her makeup skill (toilSkill .sk 0..1) widens both tolerances by up to +50 % */
+ mkLv:2,               /* board ease of the makeup step (0..5 like env.lv); r1: 3 → 2 = BAL.mgTier.mid (Vừa at matching level) */
+ a0:[12,24],           /* the hoa điền comes off the tray tilted this many degrees (hashed per day; she straightens it) */
+ rot:3,                /* degrees per tilt tap */
+ npc:{q0:.5,qSk:.3,spread:.4},npcCap:.95,
+ drop:["hd_mai","hoadien_bac"],/* TEMPORARY until Foreman C's repaint lands (owner 02:37Z: dropped designs are REPAINTED under the SAME keys: hd_mai = real white plum, hoadien_bac = silver + lưu ly with gradient); when the new sprites land, empty this list and the keys come back (no save mapping needed then). r3 (owner 00:56Z: a design that is ONE flat colour is dropped; the rule is how it LOOKS): hoa điền designs no longer given out (shop, gifts, finds, promotion, NPC holdings). The items stay in the table so old saves still show them; hdMap sends an owned / recorded one to the nearest KEPT design by phẩm (tie: the lower). Dropping another design later = one more key in this list. */
+ shop:35,              /* % a restock brings a hoa điền */
+ npcHave:60,           /* % a consort holds one (once) */
+ find:4,               /* % per month her people find one */
+ pop:[.8],             /* q ≥ [0] "ngay ngắn"; below BAL.toil.fail = "dán vụng" (the same cut that makes any makeup part vụng); between: "hơi lệch" */
+ vungA:9,              /* r2 (owner OD 17/11 ~21:03Z): the SHOWN hoa điền always sits at the forehead anchor; a vụng one (q < BAL.toil.fail) shows this fixed tilt */
+ edFw:.42,
+ npcShow:0}});         /* r3 (MAIN s38 22:15Z): NPCs' hoa điền layer OFF until Foreman C's per-face HD_ANCHOR lands (stale meshes put it off the forehead on some figures); her own (and the co-op friend's) stays ON */          /* eye distance / face width (fallback when a picture has no face-width row) */
+/* board ease → tolerance (mgLev reads BAL.mgTier.lev[kind][name]: ease 0 → [0], ease 5 → [1]) */
+try{BAL.mgTier.lev=BAL.mgTier.lev||{};BAL.mgTier.lev.hoadien={tol:[.7,1.2]}}catch(e){}
+
+/* ---------- items ---------- */
+function hdDropped(k){return !!(BAL.hd.drop&&BAL.hd.drop.includes(k))}
+function hdKeptNear(P){const K=WD_LIST.filter(r=>r[1]==="hd"&&!hdDropped(r[0]));if(!K.length)return[];let best=1e9;K.forEach(r=>{best=Math.min(best,Math.abs(r[3]-P))});const c=K.filter(r=>Math.abs(r[3]-P)===best);const lo=Math.min(...c.map(r=>r[3]));return c.filter(r=>r[3]===lo).map(r=>r[0])}
+function hdMap(k){if(!hdDropped(k))return k;const w=WD_ITEMS[k];const L=hdKeptNear(w?w.P:1);return L.length?L[0]:k}
+function hdIsK(k){const w=typeof WD_ITEMS==="object"?WD_ITEMS[k]:null;return !!(w&&w.sl==="hd")}
+function hdOwned(p){const L=[];const seen={};for(const e of ((p&&p.inv)||[])){if(e&&!e.h&&hdIsK(e.k)&&hdDropped(e.k))e.k=hdMap(e.k);if(e&&!e.h&&hdIsK(e.k)&&!seen[e.k]){seen[e.k]=1;L.push(e)}}return L.sort((a,b)=>WD_ITEMS[b.k].P-WD_ITEMS[a.k].P)}
+function hdLux(rec){return rec&&rec.k&&hdIsK(rec.k)?wdLux(rec.k):0}
+function hdPick(P){try{return wdPickAt(P,"hd",0)}catch(e){return null}}
+/* the sprite placed on the face: img/hd-<key>.webp (transparent, Foreman C ART REQUEST) — until it exists, the item's own picture */
+const HD_IMG={};function hdImg(k){let i=HD_IMG[k];if(i)return i;const w=WD_ITEMS[k];i=new Image();i.decoding="async";const U=s=>typeof IMG_U==="function"?IMG_U(s):s;
+ /* r1: 7 of the 8 have no painting yet (neither hd-<key> nor wd-hd-*): the board must never show an invisible sticker → last fallback = the one
+    painted hoa điền that exists (wd-hoadien-bac), until Foreman C ships the sprites */
+ const fb=[w&&w.icon,WD_ITEMS.hoadien_bac&&WD_ITEMS.hoadien_bac.icon].filter((s,j,a)=>s&&a.indexOf(s)===j);
+ i.onerror=()=>{const n=i.__fb|0;if(n<fb.length){i.__fb=n+1;i.src=U(fb[n])}};i.src=U(`https://ctm-img.victoria-tntt.workers.dev/img/hd-${k.replace(/_/g,"-")}.webp`);return HD_IMG[k]=i}
+
+/* ---------- vụng = below the ONE makeup fail cut (BAL.toil.fail), for her, NPCs and every view ---------- */
+function hdVung(q){return typeof q==="number"&&q<BAL.toil.fail}
+/* ---------- the score: ONE formula for her, NPCs, the bot and Thử tay ---------- */
+function hdQ(d,a,sk,lvF){const B=BAL.hd;const tf=(1+B.skTol*Math.max(0,Math.min(1,sk||0)))*(lvF||1);
+ const qd=Math.max(0,Math.min(1,1-d/(B.tolD*tf))),qa=Math.max(0,Math.min(1,1-Math.abs(a)/(B.tolA*tf)));return B.wD*qd+B.wA*qa}
+function hdLvF(lv){try{const v=mgLev({lv},"hoadien","tol");if(v!=null)return v}catch(e){}return 1}
+/* NPC / bot: her best hoa điền for her phẩm (Kiêu ngạo / Tham vọng reach one above), q from her hand (hashed per day: no Math.random) */
+function hdNpc(v,h,sk){try{const L=hdOwned(v);if(!L.length)return null;let cap=Math.min(8,wdPOf(v));try{if(v!==S&&wdNpcBias(v)>0)cap++}catch(e){}
+  const e=L.find(x=>WD_ITEMS[x.k].P<=cap)||L[L.length-1];const B=BAL.hd;
+  let c=B.npc.q0+B.npc.qSk*(sk||0);try{const H=BAL.ag&&BAL.ag.mg2&&BAL.ag.mg2.hand;if(v!==S&&H&&H.on&&typeof mgHand==="function")c=mgHand("hoadien",v)/10}catch(x){}
+  const r=i=>(wdHash(String(h)+":hd"+i)%1000)/1000;const q=Math.max(0,Math.min(B.npcCap,c+(r(1)+r(2)-1)*B.npc.spread));return{k:e.k,q:+q.toFixed(3)}}catch(x){return null}}
+
+/* ---------- forehead anchor (canvas coords) of a face drawn at img {x,y,w,h} ---------- */
+function hdTone(g,S){const T=BAL.hd.tone;if(!T||!T.on||T.sat>=1)return;try{const im=g.getImageData(0,0,S,S),d=im.data,M=T.metal;for(let i=0;i<d.length;i+=4){if(!d[i+3])continue;let r=d[i],gg=d[i+1],b=d[i+2];const mx=Math.max(r,gg,b),mn=Math.min(r,gg,b),sat=mx?(mx-mn)/mx:0,v=mx/255;let h=0;if(mx!==mn){const dl=mx-mn;h=mx===r?((gg-b)/dl)%6:mx===gg?(b-r)/dl+2:(r-gg)/dl+4;h=(h*60+360)%360}
+ if(h>=M.h0&&h<=M.h1&&sat>=M.s&&v>=M.v)continue;const L=.299*r+.587*gg+.114*b;d[i]=Math.max(0,Math.min(255,L+(r-L)*T.sat));d[i+1]=Math.max(0,Math.min(255,L+(gg-L)*T.sat));d[i+2]=Math.max(0,Math.min(255,L+(b-L)*T.sat))}g.putImageData(im,0,0)}catch(x){}}
+function hdSizeOf(p){try{let r=(typeof wdPOf==="function"?wdPOf(p):1)-1;r=Math.max(0,Math.min(7,r|0));const z=BAL.hd.sizeByRank&&BAL.hd.sizeByRank[r];return z||BAL.hd.size}catch(e){return BAL.hd.size}}
+function hdFit(key,nw,nh,fw,size){const B=BAL.hd,wm=(size||B.size)*fw,ink=(B.ink&&B.ink[key])||B.inkDef;const ka=Math.sqrt(B.inkK*wm*wm/(ink*nw*nh)),k=Math.min(ka,wm*B.boxW/nw,wm*B.boxH/nh);return{w:nw*k,h:nh*k,k}}
+function hdAnchor(file,img,fws,G){const B=BAL.hd;let m=null;try{m=MK_FIT.get(file)}catch(e){}
+ const P=i=>[img.x+m[2*i]/4000*img.w,img.y+m[2*i+1]/4000*img.h];
+ if(m&&m.length>=120){const eye=s=>{let x=0,y=0;for(let i=0;i<10;i++){const p=P(s+i);x+=p[0]/10;y+=p[1]/10}return[x,y]};const E=[eye(20),eye(30)].sort((a,b)=>a[0]-b[0]);
+  const ed=Math.hypot(E[1][0]-E[0][0],E[1][1]-E[0][1])||fws*BAL.hd.edFw,ang=Math.atan2(E[1][1]-E[0][1],E[1][0]-E[0][0]),mx=(E[0][0]+E[1][0])/2;
+  let at=null;try{const o=window.HD_ANCHOR&&window.HD_ANCHOR[file];if(o)at=[img.x+o[0]/4000*img.w,img.y+o[1]/4000*img.h]}catch(e){}
+  if(!at){/* r2: the brow's inner END on its centre line = mean of the 2 contour points nearest the face midline (upper + lower edge) */const inner=s=>{const L=[];for(let i=0;i<10;i++)L.push(P(s+i));L.sort((a,b)=>Math.abs(a[0]-mx)-Math.abs(b[0]-mx));return[(L[0][0]+L[1][0])/2,(L[0][1]+L[1][1])/2]};const a=inner(40),b=inner(50);
+   const mid=[(a[0]+b[0])/2,(a[1]+b[1])/2];at=[mid[0]+Math.sin(ang)*B.up*ed,mid[1]-Math.cos(ang)*B.up*ed]}
+  return{x:at[0],y:at[1],ed,ang:ang*180/Math.PI,mesh:true}}
+ /* no face points: the face box of toil-fit (top-centre of the face), so the board still plays */
+ if(G&&G.T){const p=G.T(.5,.06);return{x:p[0],y:p[1],ed:fws*BAL.hd.edFw,ang:0,mesh:false}}return null}
+
+/* ---------- the board: drag + tilt + Dán. o = {C, G, file, box, k, sk, lvF, paint(g,now), label, seed, onEnd(q,info)} ---------- */
+function hdBoard(o){const B=BAL.hd,{C,G}=o,{g,W,H}=C;let stop=false,raf=0;const pops=[];
+ const A=hdAnchor(o.file,G.img,G.fws,G);const img=hdImg(o.k);
+ const sgn=(o.seed%2)?1:-1;let ang=(A?A.ang:0)+sgn*(B.a0[0]+(o.seed%1000)/1000*(B.a0[1]-B.a0[0]));
+ let pos=[G.mx+G.rx*.42,G.my+G.ry*.62];let drag=null;
+ const Wd=()=>B.size*G.fws;
+ function sticker(){if(!img.complete||!img.naturalWidth)return;const F=hdFit(o.k,img.naturalWidth,img.naturalHeight,G.fws,hdSizeOf(S)),w=F.w,h=F.h;g.save();g.translate(pos[0],pos[1]);g.rotate(ang*Math.PI/180);g.drawImage(img,-w/2,-h/2,w,h);g.restore()}
+ function frame(now){if(stop)return;o.paint(g,now);sticker();kg82DrawPops(g,pops,now);raf=requestAnimationFrame(frame)}
+ function down(e){if(stop)return;e.preventDefault();drag=C.at(e);try{C.cv.setPointerCapture(e.pointerId)}catch(x){}}
+ function move(e){if(stop||!drag)return;const p=C.at(e);pos=[Math.max(0,Math.min(W,pos[0]+p[0]-drag[0])),Math.max(0,Math.min(H,pos[1]+p[1]-drag[1]))];drag=p}
+ function up(){drag=null}
+ C.cv.addEventListener("pointerdown",down);C.cv.addEventListener("pointermove",move);C.cv.addEventListener("pointerup",up);C.cv.addEventListener("pointercancel",up);
+ function result(){const d=A?Math.hypot(pos[0]-A.x,pos[1]-A.y)/A.ed:9;let a=((ang-(A?A.ang:0))%360+540)%360-180;const q=hdQ(d,a,o.sk,o.lvF);
+  return{q,info:{k:o.k,dx:A?+((pos[0]-A.x)/A.ed).toFixed(3):0,dy:A?+((pos[1]-A.y)/A.ed).toFixed(3):0,a:+a.toFixed(1)}}}
+ function commit(){if(stop)return;const R=result();const vung=hdVung(R.q);const t=R.q>=B.pop[0]?"Hoa điền ngay ngắn giữa trán!":vung?"Dán vụng mất rồi":"Hơi lệch một chút";
+  kg82Pop(pops,A?A.x:W/2,(A?A.y:H*.3)-G.fws*.12,t,vung?kg82Col("--red","#c23b22"):kg82Col("--good","#2d7a52"));
+  /* r2 (owner OD 17/11 ~21:03Z "tôi gắn sao kệ tôi, nhưng mà kết quả cuối cùng thì nó vẫn sẽ là theo cái vị trí mà tôi muốn"): the result snaps to the
+     forehead anchor; straight when good, the fixed vụng tilt when low — the same look every view then draws (hdFaceLayer) */
+  if(A){pos=[A.x,A.y];ang=A.ang+(vung?B.vungA:0)}
+  const a=o.box.querySelector(".kg82act");if(a)a.remove();setTimeout(()=>{stop=true;cancelAnimationFrame(raf);o.onEnd(R.q,R.info)},900)}
+ const act=`<div class="kg82act"><button class="${kg82Btn(true)}" id="hdl">Nghiêng trái</button><button class="${kg82Btn(true)}" id="hdr">Nghiêng phải</button><button class="${kg82Btn()}" id="hdok">Dán</button></div>`;
+ const old=o.box.querySelector(".kg82act");if(old)old.remove();o.box.insertAdjacentHTML("beforeend",act);
+ $("hdl").onclick=()=>{ang-=B.rot};$("hdr").onclick=()=>{ang+=B.rot};$("hdok").onclick=commit;
+ raf=requestAnimationFrame(frame);
+ /* test oracle (like KG82.peek): where the anchor and the sticker are, in client px */
+ HD.peek=()=>A?{anchor:C.client(A.x,A.y),at:C.client(pos[0],pos[1]),ang,ideal:A.ang,ed:A.ed*(C.cv.getBoundingClientRect().width/W),mesh:A.mesh}:null;
+ return{stop:()=>{stop=true;cancelAnimationFrame(raf)},result}}
+const HD={peek:()=>null};window.HD=HD;
+
+/* ---------- the makeup step (called by jtoil toilMakeup after the lips; return true = it took over) ---------- */
+function hdStep(ctx){try{if(!S||!TOIL.st)return false;const L=hdOwned(S);if(!L.length)return false;const st=TOIL.st;
+ TOIL.hdLbl="Chọn một hoa điền để dán";/* keep the glass painted while she chooses (pictures may still be arriving) */let pk=true;const loop=()=>{if(!pk)return;ctx.draw();requestAnimationFrame(loop)};loop();KG82.run={stop:()=>{pk=false}};
+ const btn=e=>{const w=WD_ITEMS[e.k];return `<button class="${kg82Btn(true)}" data-hdk="${e.k}">${w.n}<small>${KIT_GRADE[w.g|0].n} · xa xỉ ${wdLux(w.k)}</small></button>`};
+ const old=ctx.box.querySelector(".kg82act");if(old)old.remove();
+ ctx.box.insertAdjacentHTML("beforeend",`<div class="kg82act">${L.map(btn).join("")}<button class="${kg82Btn(true)}" data-hdk="">Không dán<small>để trán trơn</small></button></div>`);
+ try{toilHUD({round:"Hoa điền",time:"thong thả"})}catch(e){}
+ ctx.box.querySelectorAll("[data-hdk]").forEach(b=>b.onclick=()=>{pk=false;const k=b.dataset.hdk;try{sfx("tap")}catch(e){}
+  if(!k){const a=ctx.box.querySelector(".kg82act");if(a)a.remove();TOIL.hdLbl="";ctx.done();return}
+  TOIL.hdLbl="Kéo hoa điền vào giữa trán, nghiêng cho cân";
+  const run=hdBoard({C:ctx.C,G:ctx.G,file:ctx.file,box:ctx.box,k,sk:(st.sk&&st.sk.sk)||0,lvF:hdLvF(BAL.hd.mkLv),seed:wdHash(k+":"+toilWk()),paint:()=>ctx.draw(),
+   onEnd:(q,info)=>{st.parts.hd=q;st.hd=info;TOIL.hdLbl="";ctx.done()}});
+  KG82.run={stop:run.stop}});
+ return true}catch(e){console.error("hdStep",e);return false}}
+
+/* ---------- r2 (owner OD 17/11 ~21:03Z): the SHOWN hoa điền on every picture of a person (portrait, figure on the stage, avatar, mirror reveal,
+   NPCs, co-op friend) — one layer through kitFxLayers, like the makeup colour layer. ALWAYS at that picture's forehead anchor (face mesh /
+   HD_ANCHOR), never where she dragged it; straight when q ≥ BAL.toil.fail, the fixed tilt BAL.hd.vungA when vụng. Size BAL.hd.size × face width.
+   Painted once per (picture, hoa điền, vụng) into a transparent canvas the size of the picture; a picture without face points shows none (never guessed). */
+const HD_FL={},HD_FLQ=[];
+function hdShown(p){try{const r=typeof toilMkRec==="function"?toilMkRec(p):null;if(!r||!r.makeup||!r.hd||!hdIsK(r.hd.k))return null;return{k:hdMap(r.hd.k),vung:hdVung(r.hd.q),sz:hdSizeOf(p)}}catch(e){return null}}
+function hdFaceLayer(p,file){if(!BAL.hd.npcShow&&p&&p!==S&&!p.coop)return"";const sh=hdShown(p);if(!sh||!file)return"";let v=null;try{v=MK_FIT.get(file)}catch(e){}if(!v)return"";
+ const key=[file,sh.k,sh.vung?1:0,sh.sz].join("|");let e=HD_FL[key];if(!e){e=HD_FL[key]={src:"",box:null};HD_FLQ.push(key);if(HD_FLQ.length>80)delete HD_FL[HD_FLQ.shift()];hdFlPaint(file,sh,e,key)}
+ return `<img class="kmkl" data-hdl="${key}" src="${e.src||TOIL_BLANK}" alt="" aria-hidden="true" style="${hdBoxCss(e.box)}">`}
+function hdBoxCss(b){b=b||[0,0,100,100];return `--fleft:${b[0]}%;--ftop:${b[1]}%;--fwidth:${b[2]}%;--fheight:${b[3]}%`}
+/* r3 (owner OD 17/11 ~22:40Z "cái hình hoa điền vẽ nét lắm mà sao đưa tao hình mà câm"): ROOT CAUSE of the soft look = the layer was a
+   picture-sized canvas (≤1024 px wide) and the sprite (192 px native) was drawn into it at ~30 canvas px, then the whole canvas was scaled again
+   to the display size × dpr (two resamplings, the first one down to a few pixels). Now the layer is a TIGHT canvas holding the sprite at its
+   NATIVE resolution (rotated inside its own bounding square) and the <img> is placed over the picture with the --f* box (percent of the picture),
+   so the browser resamples the full-res sprite ONCE, to display size × dpr, in every view (stage, portrait, mirror, NPC, co-op friend). */
+function hdFlPaint(file,sh,e,key){const U=s=>typeof IMG_U==="function"?IMG_U(s):s;const face=new Image();face.decoding="async";const spr=new Image();spr.crossOrigin="anonymous";spr.decoding="async";
+ let n=0;const go=()=>{if(++n<2)return;try{if(!face.naturalWidth||!spr.naturalWidth){e.src=TOIL_BLANK;return}
+   const B=BAL.hd,K=Math.min(1,1024/face.naturalWidth),W=Math.round(face.naturalWidth*K),H=Math.round(face.naturalHeight*K);
+   let fw=0;try{const r=toilRow(file);if(r&&r[6])fw=r[6]/100*W}catch(x){}
+   const A=hdAnchor(file,{x:0,y:0,w:W,h:H},fw||W*.3,null);if(!A){e.src=TOIL_BLANK;return}if(!fw)fw=A.ed/B.edFw;
+   const nw=spr.naturalWidth,nh=spr.naturalHeight,S=Math.ceil(Math.hypot(nw,nh))+2,sc=hdFit(sh.k,nw,nh,fw,sh.sz).k,bs=S*sc;/* bs = side of the tight box in picture canvas px */
+   const c=document.createElement("canvas");c.width=S;c.height=S;const g=c.getContext("2d");g.imageSmoothingEnabled=true;g.imageSmoothingQuality="high";
+   const ang=A.ang+(sh.vung?B.vungA:0);g.translate(S/2,S/2);g.rotate(ang*Math.PI/180);g.drawImage(spr,-nw/2,-nh/2,nw,nh);hdTone(g,S);
+   e.box=[(A.x-bs/2)/W*100,(A.y-bs/2)/H*100,bs/W*100,bs/H*100];e.src=c.toDataURL("image/png");e.at=[A.x/W,A.y/H,ang]}catch(x){e.src=TOIL_BLANK}
+  document.querySelectorAll("img[data-hdl]").forEach(x=>{if(x.dataset.hdl===key){x.src=e.src;x.style.cssText=hdBoxCss(e.box)}})};
+ face.onload=go;face.onerror=go;spr.onload=go;spr.onerror=()=>{const w=WD_ITEMS[sh.k];if(!spr.__fb&&w&&w.icon){spr.__fb=1;spr.src=U(w.icon)}else go()};
+ face.src=U("https://ctm-img.victoria-tntt.workers.dev/img/"+file);spr.src=U(`https://ctm-img.victoria-tntt.workers.dev/img/hd-${sh.k.replace(/_/g,"-")}.webp`)}
+if(typeof kitFxLayers==="function"){const fx0=kitFxLayers;kitFxLayers=function(p,file){const h=fx0.apply(this,arguments);let m="";try{m=hdFaceLayer(p,file)}catch(e){}return h+m}}
+window.hdFaceLayer=hdFaceLayer;window.HD_FL=HD_FL;window.hdVung=hdVung;
+
+/* ---------- Thử tay / mini-game kind: the same board on her own face ---------- */
+function kgHoaDien(box,env){const C=kg82Canvas(box,.86,620),{g,W,H}=C;C.cv.style.touchAction="none";let por={src:""};try{por=toilPor()}catch(e){}
+ const file=String(por.src||"").split("?")[0].split("/").pop();const G=toilGeom(W,H,por.src);const face=new Image();face.decoding="async";face.src=typeof IMG_U==="function"?IMG_U(por.src):por.src;
+ const k="hoadien_bac";let run=null,stop=false,raf=0;const t0=performance.now();
+ function paint(gg){gg.fillStyle="#efe0c6";gg.fillRect(0,0,W,H);const bg=kg82Img("chai-bg");if(bg.complete&&bg.naturalWidth)gg.drawImage(bg,G.bg.x,G.bg.y,G.bg.s,G.bg.s);
+  gg.save();gg.beginPath();gg.ellipse(G.mx,G.my,G.rx,G.ry,0,0,Math.PI*2);gg.clip();gg.fillStyle="#d9c7a3";gg.fillRect(G.mx-G.rx,G.my-G.ry,G.rx*2,G.ry*2);
+  if(face.complete&&face.naturalWidth)gg.drawImage(face,G.img.x,G.img.y,G.img.w,G.img.h);gg.restore();
+  gg.font=`700 15px ${kg82Col("--display","serif")}`;gg.textAlign="center";gg.fillStyle=kg82Col("--ink","#2a1a12");kg82Lbl(gg,run?"Kéo hoa điền vào giữa trán, nghiêng cho cân":"Đang soi gương…",W/2,22,W-20)}
+ /* wait for THIS face's points (like the makeup board), then the board; no points after BAL.toil.meshWait → the face-box anchor */
+ function wait(now){if(stop)return;let m=null;try{m=MK_FIT.get(file)}catch(e){}if(m||now-t0>BAL.toil.meshWait){let sk=0;try{sk=toilSkill().sk}catch(e){}
+   run=hdBoard({C,G,file,box,k,sk,lvF:hdLvF(env.lv),seed:wdHash(k+":"+Date.now()),paint,onEnd:q=>{if(!stop){stop=true;env.end(Math.round(q*100)/10)}}});return}
+  paint(g);raf=requestAnimationFrame(wait)}
+ raf=requestAnimationFrame(wait);
+ return()=>{stop=true;cancelAnimationFrame(raf);if(run)run.stop()}}
+try{KG82_ENG.hoadien=kgHoaDien;KG82_KIND.hoadien={e:"hoadien",n:"Dán hoa điền",t:"Điểm trang trước gương",how:"Kéo hoa điền vào giữa trán, nghiêng cho cân với đôi mắt rồi bấm Dán. Không tính giờ: đặt càng khớp càng được phần."};
+ KG82_SPR.hoadien=["chai-bg"]}catch(e){console.error("hd kind",e)}
+
+/* ---------- getting one: shop, NPC hands (→ their gifts), found, +1 per promotion ---------- */
+(function(){if(typeof restock!=="function")return;const r0=restock;restock=function(){const r=r0.apply(this,arguments);try{if(roll(BAL.hd.shop)){const k=hdPick(Math.max(1,Math.min(8,wdPOf(S)-1+R(3))));if(k&&!S.shop.includes(k))S.shop.push(k)}}catch(e){}return r}})();
+(function(){if(typeof wdNpcInit!=="function")return;const n0=wdNpcInit;wdNpcInit=function(v){const r=n0.apply(this,arguments);try{if(v&&!v.hdI){v.hdI=1;if(roll(BAL.hd.npcHave)){const k=hdPick(Math.max(1,Math.min(8,wdPOf(v)-1+R(2))));if(k){v.inv=v.inv||[];v.inv.push({k,from:"base0"})}}}}catch(e){}return r}})();
+function hdGive(p,why){const P=Math.max(1,Math.min(8,wdPOf(p)));const k=hdPick(P);if(!k)return"";const g=wdGain(p,k,{from:why==="promo"?"nvp":"find",nvp:why==="promo"});if(!g)return"";const n=WD_ITEMS[k].n;
+ if(p!==S)return"";return why==="promo"?` Nội vụ phủ đưa sang một <b>${n}</b> mừng tấn phong (đã vào Rương).`:`Cung nữ dọn rương cũ, tìm được một ${n}.${g.txt||""}`}
+(function(){if(typeof promoteP!=="function")return;const p0=promoteP;promoteP=function(p){const r0=rkOf(p),al=p===S||p.alive;const r=p0.apply(this,arguments);
+ try{if(al&&rkOf(p)>r0){const t=hdGive(p,"promo");if(t&&typeof r==="string")return r+t}}catch(e){console.error("hd promo",e)}return r}})();
+(function(){if(typeof wdMonth!=="function")return;const m0=wdMonth;wdMonth=function(){const r=m0.apply(this,arguments);try{if(S&&!S.dead&&!S.out&&roll(BAL.hd.find)){const t=hdGive(S,"find");if(t)try{log(t)}catch(e){}}}catch(e){}return r}})();
+
+/* ---------- old saves: a hoa điền worn in the Cài tóc slot (it was a "tram" until hoa-dien) goes back to the chest ---------- */
+(function(){const o0=wdOf;wdOf=function(p){const w=o0.apply(this,arguments);try{if(w&&w.tram&&hdIsK(w.tram.k)){const e=w.tram;w.tram=null;if(e.from!=="base"){p.inv=p.inv||[];p.inv.push(e)}const k=wdDefault(p,"tram");if(k)w.tram={k,from:"base"}}}catch(e){}return w};window.wdOf=wdOf})();
+window.hdQ=hdQ;window.hdNpc=hdNpc;window.hdOwned=hdOwned;window.hdAnchor=hdAnchor;window.hdLux=hdLux;window.hdStep=hdStep;
 /* ================= jstory: STORY LABELS · DEADLINES · PRICE BY RANK · NON-SILVER ROUTES (owner 15/11 13:55Z + 17:06Z) =================
    Wraps only (j67 chapters, j4 old story, j97 rare chance, j72 side quests); loaded after jk2b/jaudit so the kit option wrappers sit inside.
    (1) Every story dialog is titled with its line, quest, chapter and act: "Chính tuyến · Báo thù cho nhà · Chương 2 · Hồi 3/5" (j67 lab67,
@@ -50545,7 +50929,7 @@ function tsMkNpc(v,w,cid){if(v&&v.coop){const r=toilFriendRec(v);if(r&&r.makeup)
  const bold=knows?w.bold:mktR(h+":b")<BAL.toil.play.diemPre,tone=knows?w.tone:(mktR(h+":t")<.5?"w":"c");
  const L=TOIL_PRE.filter(x=>(x[2]==="diem")===bold&&(x[3]==="warm"?"w":"c")===tone);const col=Object.assign({},(L.length?L:TOIL_PRE)[h%(L.length||TOIL_PRE.length)][4]);if(bold)col.want="diem";
  let hoa=0;try{hoa=kg82Lv(v,"hoa")||0}catch(e){}const sk=Math.max(0,Math.min(1,(v.sac||50)/BAL.toil.sacDiv+hoa/BAL.toil.hoaDiv));
- const R=toilNpcPlay(sk,h,col,bold?"diem":"","fit",["fest"],v.rank);return{makeup:true,score:R.score,look:R.look,col,knows}}
+ const HD=typeof hdNpc==="function"?hdNpc(v,h,sk):null;const R=toilNpcPlay(sk,h,col,bold?"diem":"","fit",["fest"],v.rank,HD?HD.q:null);return Object.assign({makeup:true,score:R.score,look:R.look,col,knows},HD?{hd:HD}:{})}
 /* the makeup points of one entrant (rec = a toilette record) against the want; returns {pts, add (to the total), mk, tone, bold} */
 function tsMkPts(rec,w){const P=BAL.toil.taste.pts;let s=0;const mk=toilMk(rec);const o={mk,tone:"",bold:false};
  if(!rec||!rec.makeup)s=P.moc;else{s=toilLv(mk).dep-BAL.toil.lvBase;if(mk!=="vung"){const t=toilToneOf(rec.col);o.tone=t;s+=t===w.tone?P.toneOk:(t==="w"||t==="c")?P.toneBad:0;
@@ -50553,9 +50937,9 @@ function tsMkPts(rec,w){const P=BAL.toil.taste.pts;let s=0;const mk=toilMk(rec);
  o.pts=s;o.add=Math.round(s*BAL.toil.taste.w);return o}
 /* her sitting before presenting: the ONE morning mirror (jtoil colour pick → three hồi → reveal), judged as a festival; the bot sits from skill */
 function tsMkSit(th,m,done){const w=tsMkWant(th,m);if(toilToday(S)){done();return}const occ=[{k:"fest",n:`Hội phối đồ · ${TS_THEME[th].n}`,F:2}];
- if(tsBot()||typeof kg82Open!=="function"){const d=toilDress(S,2),sk=toilSkill(),col=toilColFix(S.toilette&&S.toilette.col);const R=toilNpcPlay(sk.sk,mktH(String(S.name||"")+":hoi:"+toilWk()),col,col.want||"",d.style,["fest"],S.rank);
-  S.toilette={day:toilWk()*10,wk:toilWk(),score:R.score,makeup:true,style:d.style,dv:d.v,F:2,occ:["fest"],look:R.look,slip:R.slip,parts:R.parts,col,auto:1};setTimeout(done,0);return}
- KG82.ctx="hoc";const d=kg82Open({art:"Điểm trang",title:`Trước gương đồng · ${TS_THEME[th].n}`,how:`Trước khi ra mắt: chọn son phấn hợp đề, rồi kẻ mày, đánh phấn, chấm son. Không có đường chỉ: tay vụng thì mặt vụng.`});
+ if(tsBot()||typeof kg82Open!=="function"){const d=toilDress(S,2),sk=toilSkill(),col=toilColFix(S.toilette&&S.toilette.col);const h0=mktH(String(S.name||"")+":hoi:"+toilWk()),HD=typeof hdNpc==="function"?hdNpc(S,h0,sk.sk):null;const R=toilNpcPlay(sk.sk,h0,col,col.want||"",d.style,["fest"],S.rank,HD?HD.q:null);
+  S.toilette={day:toilWk()*10,wk:toilWk(),score:R.score,makeup:true,style:d.style,dv:d.v,F:2,occ:["fest"],look:R.look,slip:R.slip,parts:R.parts,col,auto:1};if(HD)S.toilette.hd=HD;setTimeout(done,0);return}
+ KG82.ctx="hoc";const d=kg82Open({art:"Điểm trang",title:`Trước gương đồng · ${TS_THEME[th].n}`,how:`Trước khi ra mắt: chọn son phấn hợp đề, rồi kẻ mày, đánh phấn, chấm son, dán hoa điền nếu có. Không có đường chỉ: tay vụng thì mặt vụng.`});
  if(!d){setTimeout(done,0);return}["chai-bg","chai-brow","chai-puff","chai-rouge"].forEach(n=>{try{kg82Img(n)}catch(e){}});try{KIT_VEIL.load()}catch(e){}
  TOIL.st={occ,F:2,parts:{},dv:null,start:wdCur(S),hoi:{th,want:w,key:w.key}};TOIL.after=done;try{toilMkPre()}catch(e){}toilHUD({score:"–",round:"2/4",time:"không hạn"});toilColUI()}
 /* leaving the mirror any way (Đã hiểu after the reveal, ✕, Esc) hands the contest back: exactly once */
@@ -51504,7 +51888,7 @@ function plateBox(){const vw=innerWidth,vh=innerHeight;const P=PL(),R=P.rim;cons
 /* ---------- the scene ---------- */
 function kitCardFlip(o){o=o||{};const deck=o.deck||[];if(!deck.length)return;
  const me=o.pick==="me"&&o.turned==="me";const sp=me?1:CF.other;const SL=CF.slow||1;const T={};for(const k in CF.t)T[k]=CF.t[k]*sp;const still=red();
- const ov=document.createElement("div");ov.className="kmov kcf"+(still?" km-red":" kcf-act");ov.setAttribute("role","dialog");ov.setAttribute("aria-label","Lật thẻ bài");ov.style.setProperty("--kcf-s",SL);ov.__t0=performance.now();
+ const ov=document.createElement("div");ov.className="kmov kcf km-full"+(still?" km-red":" kcf-act");ov.setAttribute("role","dialog");ov.setAttribute("aria-label","Lật thẻ bài");ov.style.setProperty("--kcf-s",SL);ov.__t0=performance.now();
  const B=plateBox();const P=PL();let F=P.fa;let fx=B.W*F.x0,fy=B.H*F.y0,FW=B.W*(F.x1-F.x0),FH=B.H*(F.y1-F.y0);
  const toB=()=>{F=P.fb;fx=B.W*F.x0;fy=B.H*F.y0;FW=B.W*(F.x1-F.x0);FH=B.H*(F.y1-F.y0);after=grid(Math.max(1,keep.length),FW,FH);keep.forEach((c,i)=>keepPos.set(c,after[i]))};
  const all=grid(deck.length,FW,FH);const keep=deck.filter(c=>!c.bar);let after=grid(Math.max(1,keep.length),FW,FH);
@@ -56111,10 +56495,9 @@ function mk(post,i,age){const nm=post.names[i%post.names.length];if(typeof sidN!
  return{sid:typeof sidN!=="undefined"?++sidN:Date.now(),eid:post.id,n:i,name:nm[0],call:nm[1],role:"maid",rk:post.rk,age,retire:rint(...(B().retire||[63,68])),
   tr:post.tr||"trung",loyal:70+R(16),spyFor:null,lover:null,af:{},hue:0,face:-1,fc:"",fk:"",fid:"",elder:1,since:S?S.year:1}}
 const elderCallOf=m=>{const st=(m.staff||[]).find(s=>s.eid);return st?st.call:"ma ma"};
-/* keep the household rule: a master over her cap sends an ordinary maid back to Nội vụ phủ (never a named one, a spy of hers, a lover) */
-function fitCap(m){try{if(!m||!m.staff||m===S.thO)return;const cap=capOf(m)[0];let n=hhHas(m)[0];
- while(n>cap){/* a servant coming home (j10 srvHome mark, staff-root-fix-1) is never the one sent away here either */const L=m.staff.filter(s=>s.role==="maid"&&!s.eid&&!s.home&&s.spyFor!=="me"&&!s.lover);const x=L[L.length-1]||m.staff.find(s=>s.role==="maid"&&!s.eid&&!s.home);if(!x)break;
-  m.staff.splice(m.staff.indexOf(x),1);try{if(x.fid){const U=figUsed();const i=U.indexOf(x.fid);if(i>=0)U.splice(i,1)}}catch(e){}n--;if(m===S)log(`Nội vụ phủ điều ${x.name} sang cung khác để ${elderCallOf(m)} về hầu.`)}}catch(e){}}
+/* keep the household rule: a master over her cap sends ordinary servants back to Nội vụ phủ (never a named one) — the ONE trim (j10 capTrim,
+   review/staff-cap-fix): same order, and she is told of every removal */
+function fitCap(m){try{if(!m||!m.staff||m===S.thO)return;capTrim(m)}catch(e){}}
 /* every post filled, each woman in the right household; her rank within the master's cap (srkMax) */
 function place(st){const post=postOf(st.eid);if(!post)return;const m=masterFor(post);if(!m)return;if(!m.staff)m.staff=[];
  for(const o of [S,S.thO].concat(rivals||[]))if(o&&o!==m&&Array.isArray(o.staff)&&o.staff.includes(st))o.staff.splice(o.staff.indexOf(st),1);
@@ -66931,7 +67314,7 @@ const CW=window.COOPW;if(!CW||!CW.thin||!CW.X||typeof COOP!=="object")return;
 const TH=CW.thin,X=CW.X,J=X.J,D=TH.D,LV=5;
 const host=()=>CW.seat==="a",on=()=>TH.on(LV);
 const LAST=()=>typeof B4L==="number"?B4L:2;
-const E=TH.E={on,stat:{rd:0,erd:0,ops:0,big:0,step:0,her:0,herSkip:0,forced:0,wrW:0,wrR:0,addDrop:0,rmBack:0,ridBack:0,curtain:0,go:0,cyb:0,tn:0,wwEnd:0,night:0,owe:0,adopt:0,reRd:0,hostBack:0,clamp:0},rd:{},hr:"",forced:"",mine:"",log:[]};
+const E=TH.E={on,stat:{rd:0,erd:0,ops:0,big:0,step:0,her:0,herSkip:0,forced:0,wrW:0,wrR:0,addDrop:0,rmBack:0,ridBack:0,curtain:0,go:0,cyb:0,tn:0,wwEnd:0,night:0,owe:0,adopt:0,reRd:0,hostBack:0,clamp:0,press:0},rd:{},hr:"",forced:"",mine:"",log:[]};
 const lg=x=>{E.log.push(x);if(E.log.length>80)E.log.shift()};
 const bk=()=>(COOP.state.week||0)+":"+((S&&S.buoi)||0);
 const wkx=()=>typeof wk==="function"?wk():0;
@@ -66972,7 +67355,7 @@ COOP.on("thinview",V=>{try{gView(V)}catch(e){console.error("thin E view",e)}});
 let wasMg=false;
 if(typeof render==="function"){const f=render;render=function(){const r=f.apply(this,arguments);try{const mg=!!(S&&S.mg);const left=wasMg&&!mg;wasMg=mg;if(left&&on()&&!host()&&S&&!S.dead&&!Q.length){const V=TH.view;
   if(V&&V.o&&V.o.w===(COOP.state.week||0)&&typeof V.o.buoi==="number"&&V.o.buoi>(S.buoi||0)&&E.mine!==bk())gReady()}}catch(e){}return r}}
-COOP.on("week",()=>{E.mine="";seen="";E.rd={};E.hr="";E.forced=""});
+COOP.on("week",()=>{E.mine="";seen="";/* her ready for the NEW week may arrive before this event (race): keep it */const w=COOP.state.week||0;for(const k of Object.keys(E.rd))if((E.rd[k].w|0)<w)delete E.rd[k];E.hr="";E.forced=""});
 
 /* ---------- HOST ---------- */
 /* her ops onto her stored person (in her context: runDo); the part-D patch then starts after them (they are hers, never echoed back) */
@@ -67086,6 +67469,13 @@ const BOOT=Date.now().toString(36)+Math.random().toString(36).slice(2,6);
 {const hv=TH.hostView;TH.hostView=function(){const o=hv.apply(this,arguments);if(o&&on()){o.e={go:CW.ngo===(COOP.state.week||0)?CW.ngo:-1,w:COOP.state.week||0,tnb:CW.tnb|0,boot:BOOT}}return o}}
 /* her in-week change of the night (Tranh sủng, Chặn ngự giá, cáo bệnh …): the intent replaces the ctm-tn claim; runs in the host's context */
 TH.onDo("tn",(a,m)=>{const base=m&&m.base;E.stat.tn++;setTimeout(()=>{try{CW.tnDo(a,base)}catch(e){console.error("thin E tn",e)}},0);return {ok:1}});
+/* the OUTERMOST nextBuoi (this module is the last one): 12 modules after jcoopworld wrap nextBuoi with after-step work (jexam exTick,
+   jpromo prCheck, jclose greet / wxSync, jstory lapse, jlooks sweep, jgift, jfe, jkc/jkc2, jspread, jweather, jaudit). #next calls the
+   outer chain, so a "Sẵn sàng" press that steps nothing ran all of it once more on each seat (the real step runs it again: on the host for
+   him, and in her context for her). At level 5 a press is only the intent; the chain runs only inside a real step (CW.allow: his step /
+   her step in withSeat; CW.allowN: the night's go = her week end). */
+if(typeof nextBuoi==="function"){const f=nextBuoi;nextBuoi=function(){if(!(on()&&CW.on)||CW.allow||CW.allowN)return f.apply(this,arguments);E.stat.press++;
+  if((CW.isWaiting&&CW.isWaiting())||(CW.isFrozen&&CW.isFrozen())||CW.pend||!CW.base)return;return CW.eNext()}}
 /* his ready / clock / a closed dialog: try the step again */
 if(typeof render==="function"){const f=render;render=function(){const r=f.apply(this,arguments);try{if(on()&&host()&&!CW.ctx&&(E.hr||E.forced))check()}catch(e){}return r}}
 }catch(e){console.error("jcoopthine",e)}})();
@@ -67119,7 +67509,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="3bf0026c26d2";window.CTM_BUILD=BUILD;
+const BUILD="8b77ba2a3aca";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
