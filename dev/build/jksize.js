@@ -288,6 +288,7 @@ window.kitPicSubj=kitPicSubj;
 .ksz3 .k3mpic,.ksz3 .k3ev{position:relative;overflow:hidden;border-radius:6px;border:1px solid var(--gold,#8f5f0c);box-shadow:inset 0 0 0 1px #fffaf0;box-sizing:border-box}
 /* S event picture = ONE standard kit size (owner 16/11 19:54Z: no stretched ratio): KIT_SIZE.pic[V.picS] (PM 120x160, 3:4), centred in the body */
 .ksz3 .k3main.k3mpic{flex:none;width:${Z.pic[V.picS].w}px;height:${Z.pic[V.picS].h}px;min-height:0;align-self:center}
+.ksz3[data-pres="fig"] .k3body>.k3main.k3mpic.k3fill{align-self:stretch;height:auto;min-height:${Z.pic[V.picS].h}px}/* KIT 84c: person-less main picture fills its column */
 .ksz3 .k3ev{flex:1 1 auto;min-height:${V.evMin.fig}px}.ksz3[data-pres="one"] .k3ev{min-height:${V.evMin.one}px}
 .ksz3 .k3mpic>.ksart,.ksz3 .k3ev>.ksart{position:absolute;inset:0;width:100%;height:100%;aspect-ratio:auto;margin:0;border:0;box-shadow:none;border-radius:0}
 .ksz3 .k3mpic>.ksart img,.ksz3 .k3ev>.ksart img{width:100%;height:100%;object-fit:cover;display:block}
@@ -310,9 +311,11 @@ function kszPor3(p){const [r,n]=kszRankName(p);let col="";try{col=kitPersonCol(p
  const tag=typeof kitTitleTag3==="function"?kitTitleTag3(p,r,n,col):kitNameRank(r,n,col);let f;try{f=p&&p.kind==="th"?pTH():kitFace(p)}catch(e){f={src:"",ini:"?"}}
  return `<div class="k3main k3mpor">${tag}${pcPort(f)}</div>`}
 /* spec {kind,title,sub,who?,pic?,facts,rows,opts} + size K → frame html (kitFrameApply3 after mount) */
-function kszFrame3(sp,K){const V=KIT_SIZE.v3,pres=V.pres[K]||"fig",foc=V.focus[sp.kind]||"person",who=kszWho3(sp),ev=kszEvSrc3(sp);
+function kszFrame3(sp,K){const V=KIT_SIZE.v3,pres=V.pres[K]||"fig",foc=V.focus[sp.kind]||"person",who=sp.noWho?null:kszWho3(sp),ev=kszEvSrc3(sp);
  const R=[];let left="";
- if(pres==="one"){if(foc==="event")left=kszPic3(ev,"k3main k3mpic");else{left=who?kszPor3(who):"";R.push(kszPic3(ev,"k3ev"))}}
+ /* KIT 84c PERSON-LESS frame (sp.noWho / a place card): the main picture is the left column — standard size in "one" (S / narrow), FILLING the column (cover-crop, true ratio, k3fill) in "fig" (M/L/XL); no narrator, no second picture */
+ if(!who)left=kszPic3(ev,pres==="one"?"k3main k3mpic":"k3main k3mpic k3fill");
+ else if(pres==="one"){if(foc==="event")left=kszPic3(ev,"k3main k3mpic");else{left=who?kszPor3(who):"";R.push(kszPic3(ev,"k3ev"))}}
  else{left=who?kszFigHtml(who):"";R.push(kszPic3(ev,"k3ev"))}
  let facts=(sp.facts||[]).slice();
  /* event-centred S: a person is a small avatar INSIDE the info → when no fact row carries anyone, the narrator's line is added */
@@ -353,7 +356,7 @@ function kitFrameApply3(dlg){try{kszFigFit(dlg)}catch(e){}kszBtnGrid3(dlg);const
 function kitFrameFits3(dlg,strict){const K=dlg.dataset.ksz,m=kitSzMode();if(K==="XL"&&!strict)return true;const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor"),ev=R&&R.querySelector(":scope>.k3ev");
  const mh=R.style.minHeight,mx=R.style.maxHeight;R.style.minHeight="";R.style.maxHeight="";if(ev){ev.style.flex="none";ev.style.height=kszEvMin3(ev)+"px"}
  const need=R.offsetHeight;if(ev){ev.style.flex="";ev.style.height=""}R.style.minHeight=mh;R.style.maxHeight=mx;const lh=L?L.offsetHeight:0;
- if(dlg.dataset.pres==="fig")return need<=lh+2;const btn=dlg.querySelector(":scope>.k3btns");
+ if(dlg.dataset.pres==="fig")return L||!dlg.querySelector(".k3fill")?need<=lh+2:true;const btn=dlg.querySelector(":scope>.k3btns");
  const body=Math.max(need,lh,KIT_SIZE.v3.picMinS);return (L?need<=lh+2:body<=KIT_SIZE.v3.bodyS)&&body+(btn?btn.offsetHeight:0)<=KIT_SIZE.v3.capS[m]}
 /* THE picker: the smallest size whose presentation holds the content */
 function kitFramePick3(sp,host){for(const K of ["S","M","L","XL"]){host.innerHTML=kszFrame3(sp,K);const d=host.firstElementChild;kitFrameApply3(d);if(kitFrameFits3(d))return K}return"XL"}
@@ -508,7 +511,7 @@ function kitFrameFitsLive3(dlg,strict){const K=dlg.dataset.ksz;if(K==="XL"&&!str
  const need=R.offsetHeight;if(ev){ev.style.flex="";ev.style.height=""}R.style.minHeight=mh;R.style.maxHeight=mx;const lh=L?L.offsetHeight:0;
  /* the frame must also stay inside the screen (modal box): Fold / iPad */
  const M=document.getElementById("modal"),room=M?M.clientHeight-24:9999;
- if(dlg.dataset.pres==="fig")return need<=lh+2&&dlg.offsetHeight<=room;const btn=dlg.querySelector("#mb>.k3btns");
+ if(dlg.dataset.pres==="fig")return (L||!dlg.querySelector(".k3fill")?need<=lh+2:true)&&dlg.offsetHeight<=room;const btn=dlg.querySelector("#mb>.k3btns");
  const body=Math.max(need,lh,KIT_SIZE.v3.picMinS);return (L?need<=lh+2:body<=KIT_SIZE.v3.bodyS)&&body+(btn?btn.offsetHeight:0)<=KIT_SIZE.v3.capS[kitSzMode()]}
 /* a live 3-part frame is still the one on screen: its body is in #mb and its options (if any) were not replaced by a rebuild */
 function kszLive3Ok(dlg){const X=dlg&&dlg.__ksz3;return !!(X&&X.body.isConnected&&X.mb.isConnected&&X.mb.contains(X.body)&&(!X.opts||X.mb.contains(X.opts)))}
@@ -516,7 +519,7 @@ function kszLiveLay3(dlg,K){const X=dlg.__ksz3;if(!X||!kszLive3Ok(dlg))return;co
  Object.assign(dlg.dataset,{ksz:K,pres,focus:foc,lay:K});if(nar)dlg.dataset.narrow="1";else delete dlg.dataset.narrow;
  if(nar&&KIT_SIZE.fig[K+"3"]){const Z=V.narrow[K],F=KIT_SIZE.fig[K+"3"],Mm=document.getElementById("modal"),mh=Mm?Mm.clientHeight:900;F.h=Math.round(Math.min(Z.max,Z.f*mh));F.cw=Z.cw;dlg.style.setProperty("--kszfh",F.h+"px");dlg.style.setProperty("--kszcw",F.cw+"px")}else{dlg.style.removeProperty("--kszfh");dlg.style.removeProperty("--kszcw")}
  const body=X.body,right=X.right;[...body.children].forEach(c=>{if(c!==right)c.remove()});right.querySelectorAll(":scope>.k3ev").forEach(c=>c.remove());
- let left="",ev=true;if(pres==="one"){if(foc==="event"){left=kszPic3(X.src,"k3main k3mpic");ev=false}else left=X.who?kszPor3(X.who):""}else left=X.who?kszFigHtml(X.who):"";
+ let left="",ev=true;if(!X.who){left=kszPic3(X.src,pres==="one"?"k3main k3mpic":"k3main k3mpic k3fill");ev=false}/* KIT 84c person-less frame (place card): its picture is the left main picture; fills the column in fig sizes */else if(pres==="one"){if(foc==="event"){left=kszPic3(X.src,"k3main k3mpic");ev=false}else left=X.who?kszPor3(X.who):""}else left=X.who?kszFigHtml(X.who):"";
  if(left)body.insertAdjacentHTML("afterbegin",left);if(ev&&X.src)right.insertAdjacentHTML("afterbegin",kszPic3(X.src,"k3ev"));
  if(X.opts){if(pres==="one"||nar)X.mb.appendChild(X.opts);else right.appendChild(X.opts);/* narrow: option cards BELOW the figure row, full width; else kit-option-rows r2: stack label over value when the column is too narrow */const bs=[...X.opts.querySelectorAll(":scope>button")],w=X.opts.clientWidth;X.opts.classList.remove("kszstk")}
  body.querySelectorAll("img").forEach(im=>{if(!im.complete)im.addEventListener("load",()=>kszLiveRepick3(dlg),{once:true})});
@@ -538,7 +541,7 @@ function kitFrameLive3(m){try{const M=document.getElementById("modal"),mb=docume
  const main=body.querySelector(":scope > .kpmain");if(!main||main.querySelector(KSZ_LIVE_SKIP)||body.querySelector(":scope > .kpsubj.kes2"))return false;
  /* menus and pages are not event frames: a pick-list (≥ KIT_SIZE.v3.live.maxOpts options) or a sectioned page (≥ maxSecs headed sections) keeps its page layout */
  const LV=KIT_SIZE.v3.live,o0=mb.querySelector(":scope > .opts");if(o0&&o0.querySelectorAll(":scope > button").length>=LV.maxOpts)return false;if(main.querySelectorAll(":scope > .kpsec > .kpst").length>=LV.maxSecs)return false;
- let P=[];try{P=kitStagePeople(m)}catch(e){}const who=P[0]||kszWho3({kind});const src=kszLiveSrc3(m,mb,kind);const opts=mb.querySelector(":scope > .opts");
+ let P=[];try{P=kitStagePeople(m)}catch(e){}const who=m&&m.placeK?null:(P[0]||kszWho3({kind}));/* a place card (jplace) has no person column: the narrator never stands on it (owner 18/11 map-tap-go) */const src=kszLiveSrc3(m,mb,kind);const opts=mb.querySelector(":scope > .opts");
  /* the old layout classes go (their fit passes then find nothing to do); the game's nodes are moved, never rebuilt */
  dlg.classList.remove("kesdlg","kdper","kdpbanner","kdscroll");dlg.classList.add("kszf","ksz3","kszlive");dlg.style.removeProperty("--dart");dlg.style.removeProperty("height");dlg.style.removeProperty("--kdpic");
  const B=document.createElement("div");B.className="k3body";const R=document.createElement("div");R.className="k3right";B.appendChild(R);R.appendChild(main);

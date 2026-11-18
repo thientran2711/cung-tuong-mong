@@ -6,7 +6,7 @@ fs.mkdirSync(DIR,{recursive:true});const fails=[];const chk=(c,msg)=>{if(!c)fail
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:DPR,serviceWorkers:'block'});await ctx.route(u=>/ctmload=1|x-ctm-load/.test(String(u)),r=>r.abort());const p=await ctx.newPage();
  const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,200)));p.setDefaultTimeout(60000);const out={vp:VP};
  await p.goto(URL,{waitUntil:'domcontentloaded',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof deser==='function',null,{timeout:0});await p.waitForTimeout(1500);
- await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;new MutationObserver(()=>document.querySelectorAll('.kroul,#kload,.kmov.kcf').forEach(e=>e.remove())).observe(document.body,{childList:true})});
+ await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;new MutationObserver(()=>document.querySelectorAll('.kroul,#kload,#klife,.kmov.kcf').forEach(e=>e.remove())).observe(document.body,{childList:true})});
  for(let i=0;i<20;i++){await p.evaluate(()=>{window.S0=typeof S!=='undefined'?S:null;try{store.set(NL_KEY,null)}catch(e){}start()});
   await p.waitForFunction(()=>typeof S!=='undefined'&&S&&S!==window.S0&&S.origin,null,{timeout:30000});
   const ok=await p.evaluate(()=>S.origin.k!=='cnv'&&!isSrv()&&!S.out&&qOn()&&S.rank<7&&rivals.some(v=>!v.queen&&!v.out));if(ok)break}
