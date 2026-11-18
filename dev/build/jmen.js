@@ -55,13 +55,27 @@ function menSched(){menInit();const W={},Y={};const b=S.buoi||0,night=b===B4L,w=
  for(const m of S.men){if(!m.alive||menBanned(m))continue;const rw=m.rw;let k=null,ww="";const i=+m.id.slice(1)||0;
   if(rw==="thị vệ"){k=menDuty(m,w,b);ww=k?"duty":""}
   else if(rw==="thái y"){const sick=L.filter(v=>(v.preg||v.ill||(v.suc!=null&&v.suc<40))&&menHcPal(v));if(sick.length&&b===2){k=menHcPal(npwPick(sick,v=>(v.ill?60:0)+(v.preg?30:0)+Math.max(0,40-(v.suc==null?40:v.suc))+1));ww="summons"}else if(!night){k="tyv";ww="duty"}}
-  else if(rw==="vương gia"){if(f&&!night){k="vuon";ww="fest"}else if(!S.thDead&&b===0&&(w+i)%4===0){k="tn";ww="visit"}}
+  else if(rw==="vương gia"){if(!S.thDead&&b===0&&(w+i)%4===0){k="tn";ww="visit"}}
   else if(rw==="nhạc sư"||rw==="họa sư"){const o=menOrder(m,w);if(o&&o.b===b){k=o.k;ww="order"}}
-  else if(rw==="sứ thần"){if(b===0&&(w+i)%3===0){k="thu";ww="duty"}else if(f&&!night){k="vuon";ww="fest"}}
+  else if(rw==="sứ thần"){if(b===0&&(w+i)%3===0){k="thu";ww="duty"}}
+  if(k&&!menLawful(m,k,ww))k=null;/* ONE rule (owner OD:L168 + 18/11): the schedule never puts a man in the hậu cung without a lawful reason */
   if(k){W[m.id]=k;Y[m.id]={w:ww,k}}}
  S.menW=W;S.menWhy=Y;menMinW(b,w,f)}
-/* officials (j55): two at the morning audience by turn of the week; one at a festival banquet */
-function menMinW(b,w,f){S.minW={};try{if(typeof trS==="function"&&typeof tdOn==="function"&&tdOn()){const H=Object.values(trS().H||{});if(H.length){if(b===0){S.minW[H[w%H.length].c]="thu";S.minW[H[(w+2)%H.length].c]="thu"}if(f&&b>0)S.minW[H[(w+1)%H.length].c]="vuon"}}}catch(e){}}
+/* officials (j55): two at the morning audience by turn of the week (Cần Chính điện, nội đình). A festival banquet with officials is held in the
+   OUTER court (owner OD:L168 + 18/11 ~02:20Z: men may not enter the hậu cung; review/men-forbidden): S.minF = the house at the banquet, on no stage,
+   only told by the eunuch on the Ngoại triều card. Before, one official stood in Ngự hoa viên every buổi > 0 of a festival, alone at night too. */
+function menMinW(b,w,f){S.minW={};S.minF=null;try{if(typeof trS==="function"&&typeof tdOn==="function"&&tdOn()){const H=Object.values(trS().H||{});if(H.length){if(b===0){S.minW[H[w%H.length].c]="thu";S.minW[H[(w+2)%H.length].c]="thu"}if(f&&b>0&&b<B4L)S.minF=H[(w+1)%H.length].c}}}catch(e){}}
+/* who may stand in the hậu cung (menZone "hc") on the schedule: a thái y summoned to a sick consort, a craftsman with a Nội vụ phủ work order,
+   a prince paying his respects to Thái hậu at her palace. Everyone else inside the hậu cung is a stray (menPlans → the 'Nam nhân nơi cấm địa' card). */
+function menLawful(m,k,why){if(!k||menZone(k)!=="hc")return true;if(why==="summons"||why==="order"||why==="stray")return true;return why==="visit"&&k==="tn"}
+/* old saves (review/men-forbidden-r6): a save made before this rule can hold, for the rest of that buổi, an official (S.minW / j95 record "q:")
+   or a prince / envoy at a festival (why "fest") standing in the hậu cung. On load the same rule clears them; the banquet official goes to S.minF. */
+function menLoadFix(){if(!S||!S.men)return;const b=S.buoi||0,f=typeof festToday==="function"&&festToday(),Y=S.menWhy||{},OUT=typeof J95OUT_!=="undefined"?J95OUT_:"ngoai";
+ const R=S.roster;if(R&&R.P)for(const id in R.P){const e=R.P[id],q=id.indexOf("q:")===0;if(!Array.isArray(e)||!(q||(manById(id)&&(Y[id]||{}).w==="fest")))continue;
+  for(let i=0;i<e.length;i++)if(Array.isArray(e[i])&&e[i][0]&&e[i][0]!==OUT&&menZone(e[i][0])==="hc")e[i]=[OUT,"away",null,q?"dự yến lễ tết ở ngoại triều":"phận sự ở ngoài hậu cung"]}
+ for(const c in (S.minW||{}))if(menZone(S.minW[c])==="hc"){delete S.minW[c];if(f&&b>0&&b<B4L)S.minF=c}
+ for(const id in (S.menW||{})){const y=Y[id]||{};if(y.w==="fest"&&menZone(S.menW[id])==="hc"){delete S.menW[id];delete Y[id]}}}
+if(typeof deser==="function")(function(){const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{menLoadFix()}catch(e){console.error("men load",e)}return r}})();
 function menPlace(){menSched();const W=S.menW,Y=S.menWhy;const b=S.buoi||0,w=wk();menPlanWeek();
  /* today's plans come true where they were planned */
  for(const P of (S.menPlans||[])){if(P.w!==w||P.done)continue;const m=manById(P.m);if(!m||menBanned(m)){P.done=1;continue}const v=P.v!=null?RV(P.v):null;
@@ -108,7 +122,7 @@ const MEN_NT={box:{x:.445,y:.805,w:.11,h:.12}};
    reason and the options. The lock mark is .kmlock so the shared kit label (integrator, review/book-release) can take it over when it lands. */
 (function(){const h0=mapHTML;mapHTML=function(){let h=h0.apply(this,arguments);try{if(menRoad())h=h.replace(/<div class="mspot sm off empty" title="Ngoại triều: ([^"]*)" style="([^"]*)"><span class="mlab">Ngoại triều<\/span><\/div>/,(a,why,st)=>`<button class="mspot sm kmen-nt" data-mennt="1" title="Ngoại triều: ${why}" style="${st}"><span class="mlab"><span class="kmlock" aria-label="cấm vào">🔒</span> Ngoại triều</span><span class="mmeta"><em>${why}</em></span></button>`)}catch(e){}return h}})();
 function menNtCard(){if(!S||S.dead||Q.length)return;const T=(typeof trS==="function"&&typeof tdOn==="function"&&tdOn())?trS():null;const left=Math.max(0,BAL.time.khac-used);
- const opts=[];if(T&&left>=1)opts.push({n:"Hỏi thái giám tin ngoại triều",fx:{bac:-5},x:"Chắc chắn · tốn: 1 khắc",go:()=>{spend(1);const L=Object.keys(S.minW||{}).map(c=>T.H[c]&&`${TDOFF[c]||"Quan"} ${T.H[c].name} (${S.minW[c]==="thu"?"vào chầu ở Ngự thư phòng":"dự yến ở Ngự hoa viên"})`).filter(Boolean);
+ const opts=[];if(T&&left>=1)opts.push({n:"Hỏi thái giám tin ngoại triều",fx:{bac:-5},x:"Chắc chắn · tốn: 1 khắc",go:()=>{spend(1);const L=Object.keys(S.minW||{}).map(c=>T.H[c]&&`${TDOFF[c]||"Quan"} ${T.H[c].name} (vào chầu ở ${placeName("thu")})`).concat(S.minF&&T.H[S.minF]?[`${TDOFF[S.minF]||"Quan"} ${T.H[S.minF].name} (dự yến lễ tết ở ngoại triều)`]:[]).filter(Boolean);
   log(L.length?`Thái giám kể: buổi này ${L.join("; ")}.`:"Thái giám kể: buổi này không có vị quan nào vào chầu.")}});
  opts.push({n:"Thôi",fx:{},x:""});
  kitModal({kind:"rule",title:"Ngoại triều",showOut:true,sections:[{h:"Vì sao không vào được",rows:[["Luật","Ngoại triều là nơi Hoàng thượng thiết triều với bá quan: nữ quyến hậu cung không được bước vào.","t"],["Ai được vào","Hoàng thượng, quan lại, thị vệ, sứ thần; thái giám đi truyền chỉ.","t"]]}],opts})}
