@@ -33,7 +33,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const pn=ptPanel();o.panel=!!(pn&&pn.h&&pn.h.length>20);o.news2=PTIME.news().length;
   /* 4 Đợi tin across a buổi: send "Nghe ngóng chung" at khắc 3 */
   toB0();spend(2);const L=talkOpts({kind:"maid"}).find(a=>a&&a.n==="Nghe ngóng chung");o.lpk=L&&L.pk;spend(talkK(L));const txt=L.run();o.ltxt=txt;
-  const la=PTIME.away("mm:me");o.ldue=la&&la.due;o.lnow=ptNow();o.waitOk=PTIME.waitOk();const b0=S.buoi||0;PTIME.wait();Q.length=0;o.wb=[b0,S.buoi||0,used];o.lback=!!(la&&la.back);
+  const la=PTIME.away("mm:me");o.ldue=la&&la.due;o.lnow=ptNow();o.waitOk=PTIME.waitOk();const b0=S.buoi||0;Q.length=0;S.mg=0;for(let w=0;w<3&&!la.back;w++){PTIME.wait();Q.length=0;S.mg=0}/* a modal popping on the way stops the jump (the player reads it, then taps «Đợi tin» again) */o.wb=[b0,S.buoi||0,used];o.lback=!!(la&&la.back);
   /* 5 invite */
   toB0();const v=liveRivals(true).find(x=>x.alive&&!x.out&&!x.confined&&!sameHouse(S,x));o.inv=!!v;
   if(v){BAL.invite.hate=-999;const before=used;invite(v.id);const ia=ptZ().find(a=>a.kind==="invite"&&!a.back);o.ia=ia?{who:ia.who,due:ia.due,now:ptNow()}:null;o.iused=used-before;
@@ -71,7 +71,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const i=rivals.findIndex(v=>v&&v.alive&&!v.out&&!together(S,v)&&(typeof k61Named!=="function"||k61Named(v))&&ACT.rumor&&ACT.rumor.ok(S,v));o.hv=i>=0;
   if(i>=0){const v=rivals[i];o.hk=harmK(v,"rumor");o.hx=ptHarmX(v,"rumor");const u0=used;window.__j70inst=1;doAct(i,"rumor");window.__j70inst=0;Q.length=0;const a=ptZ().find(x=>x.kind==="harm"&&!x.back);o.ha=a?{due:a.due,k:a.a.k}:null;o.hu=used-u0;spend(1);o.hback=!!(a&&a.back)}
   /* maid road */
-  localStorage.clear();for(let k=0;k<40;k++){window.__nlInner=1;start();window.__nlInner=0;if(isSrv())break}o.srv=isSrv();if(!o.srv)return o;Q.length=0;S.mg=0;toB0();
+  localStorage.clear();for(let k=0;k<40;k++){window.__nlInner=1;start();window.__nlInner=0;if(isSrv())break}if(!isSrv()){try{srvInit();deal()}catch(e){}}o.srv=isSrv();if(!o.srv)return o;Q.length=0;S.mg=0;toB0();
   S.srv.err={b:bid(),k:"vuon",n:"Ra Ngự hoa viên hái hoa cắm bình"};const p0=S.place,u0=used;o.fr=ptErrFrame();const d=Q[Q.length-1];o.nopt=d&&d.opts.length;o.on=d&&d.opts[0].n;o.ox=d&&d.opts[0].x;
   if(d){Q.pop();d.opts[0].go()}Q.length=0;o.place=[p0,S.place];o.used=used-u0;o.done=!!(S.srv.sent&&S.srv.sent.done);
   const m=srvM();const t=liveRivals(true).find(v=>v!==m&&v.alive&&!v.out);if(t){const c=PEND.cnvOrd({k:"spy",t:t.id});o.cn=c&&c.o.length;o.cnn=c&&c.o[0].n;o.cnx=c&&c.o[0].x}

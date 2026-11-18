@@ -50,7 +50,7 @@ function ptTick(){if(ptBusyTick||!S||S.dead)return;const now=ptNow();const L=ptZ
  /* keep the list short: read reports and NPC tasks older than a day go */
  try{const now2=ptNow(),day=ptKH()*3;S.away=ptZ().filter(a=>!a.back||(a.by==="me"&&!a.read)||now2-a.due<day)}catch(e){}
  try{ptLedger()}catch(e){ptErr("ledger",e)}ptIcon()}
-function ptLand(a){a.back=1;PT.stat.back++;const fn=a.a&&a.a.npc?PT.run.npc:PT.run[a.kind];if(!fn){a.rep={t:a.lbl||"Đã về",ok:null,L:[`${a.nm} đã về.`],d:[]};return}
+function ptLand(a){a.back=1;PT.stat.back++;const fn=a.a&&a.a.npc?PT.run.npc:a.a&&a.a.run?PT.run[a.a.run]:PT.run[a.kind];/* a.run: the button's own runner when it shares a BAL row (kind) with others */if(!fn){a.rep={t:a.lbl||"Đã về",ok:null,L:[`${a.nm} đã về.`],d:[]};return}
  const me=a.by==="me";const b=me&&typeof rsnap==="function"?rsnap():null;const s0=S.logSeq||0;let r=null;
  try{r=a.fz!=null&&typeof fzRun==="function"?fzRun(a.fz,null,()=>fn(a)):fn(a)}catch(e){ptErr("run "+a.kind,e)}
  if(!me)return;
@@ -219,3 +219,7 @@ function ptErrFrame(){if(!ptOn()||!isSrv()||!S.srv||S.dead)return false;const er
  Q.push({t:"Việc chủ sai",who:pv(m),h:`<p>${m.name} sai ngươi: ${er.n}.</p>`,opts:[{n:"Đi",fx:{},x:ptRecvRow(kind,null,gain,""),go:()=>{er.acc=1;S.srv.sent={k:er.k,n:er.n,until:bid(),done:0,v:er.v||null};
   if(!ptRecvGo(er.k,kind,()=>{const r=srvErrandDone();if(r)log(r)})){/* the place is shut right now: the order stays on her Phận sự list (the old card) */er.acc=0}}}]});try{showModal()}catch(e){}return true}
 (function(){try{if(typeof srvCards!=="function")return;const s0=srvCards;srvCards=function(){const X=s0.apply(this,arguments);try{if(ptOn()&&S.srv&&S.srv.err&&!S.srv.err.none&&!S.srv.err.acc){setTimeout(()=>{try{if(ptErrFrame())render()}catch(e){}},0)}}catch(e){ptErr("srvCards",e)}return X}}catch(e){ptErr("srvCards wire",e)}})();
+/* ---- 11. Sai cung nữ dò la khẩu vị (jrcp rcpAskQ maid): the same learn / loyalty rows at the due khắc ---- */
+ptReg("taste",a=>{if(!S.maid)return{ok:null};let r=null;try{r=rcpPeople().find(x=>ledgerId(x)===a.a.rid)}catch(e){}if(!r){log(`${S.maid.name} trở về: không hỏi được người ấy.`);return{ok:null}}
+ if(roll(a.a.o)){const u=rcpUnknown(r);if(u.length)log(rcpLearn(r,pick(u),`${S.maid.name} dò la`));return{ok:true,t:`${S.maid.name} dò la khẩu vị trở về`}}
+ S.maid.loyal=cl((S.maid.loyal||0)-BAL.eff.jrcp.loyalGo_2,0,100);log(`${S.maid.name} dò la không ra gì, còn bị mắng.`);return{ok:false,t:`${S.maid.name} dò la khẩu vị trở về`}});
