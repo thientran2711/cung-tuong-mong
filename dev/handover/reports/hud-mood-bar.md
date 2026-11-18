@@ -1,4 +1,4 @@
-# hud-mood-bar report (branch review/hud-mood-bar, sha 7f4edf7, base main a95e8d4)
+# hud-mood-bar report (branch review/hud-mood-bar, sha bdfab16, base main a95e8d4)
 PRIORITY #1 CHECK: OD L600 (Sims mood), L1689 (bar = signed sum), tail 18/11 ~05:40Z; main jmood.js (S.mood.v, mbBand, kitSignedBar KIT §49.1), jpcf.js (data-emo-open handler = existing mood box); review/npc-chain-land not fetched (not on origin in this clone) so moodBar(S) is read only if defined; claims: none on the HUD.
 
 ## What
@@ -14,3 +14,9 @@ NOT done: co-op / Fold cover 412x1058 shots, old-save and high-mood shots, kit-c
 
 ## Shots (CDN, delete after verdict: python3 dev/site/cdn_sync.py --wipe-review hud-mood-bar)
 https://ctm-img.victoria-tntt.workers.dev/img/_review/hud-mood-bar/{fold-row-act,fold-slim-act,ipadAir-row-act,ipadAir-slim-act,fold-row-box}.png
+
+## Update bdfab16
+- Nghi ngoi card ("Tam trang dang ...") now reads mbBand(kitMoodVal()) (jrest.js), one accessor; the feeling line "Duoc: bot <cam xuc>" unchanged.
+- Checked: +60 ("Han hoan", green) and old save (no S.mood -> "Binh than" 0) on fold, header 151 px, no errors/overflow.
+- 412x1058 shows the rotate prompt in host mode (no top bar): accepted by main. Co-op shots, mood-bar.js and kit-conform not run here (no 2-player harness; both scripts launch Chromium without the proxy bypass, local goto times out).
+- NEXT (after the owner picks row|slim): remove window.KIT_MOODBAR switch + the losing CSS in jmood.js, rebuild, push, report; main opens the small review.
