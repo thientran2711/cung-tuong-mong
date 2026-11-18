@@ -86,3 +86,12 @@ PRIORITY #1 CHECK: owner order via ROOT-18 (verbatim in the order); reuses round
 - Sheets rebuilt: empN_ages.jpg (1-4) and emp_all_r3.jpg (4 rows). All 10 gens looked at, 1 gen per figure, no regen.
 - Credits: 10 gens × 135 + 10 cuts × 3 = 1380 cr (total this task ≈ 4000 cr). Nothing live.
 Weak: emp3's ornate robe is busier than the others and a little redder at a51; emp2 a36 beard very light; a51 yellows are muted gold-brown (as asked, trầm); emp1/emp4 a18-a36 are the pale saffron/yellow of earlier rounds so a51 reads deeper than they do.
+
+## M1 round 4 (W37, 18/11) — owner: yellow = emp1's soft golden yellow (round-3 bright yellow "gớm"); redo emp2 + emp3 all ages; fix a51 proportion for all four
+- Colour ref: emp1 a26 cut passed in every gen (soft warm golden yellow, fine tone-on-tone embroidery).
+- emp2 (all 4 ages): robe in emp1's yellow, black only as thin collar/cuff/hem borders + slim belt; face, tall crown, scroll kept. a26 first (1 gen), a36/a51 from it (1 gen each), a18 needed 2 gens (first came back in the old bright yellow with red lining because the face-ref image pulled the old costume; regen with only the new a26 as ref worked).
+- emp3 (all 4 ages): NEW refined robe — flowing, fine tone-on-tone embroidery, no red roundels/heavy red bands, small tidy shoulder pieces, relaxed three-quarter stance with a jade ruyi in one hand (a51 both hands). Refs emp1 a26 (colour/elegance/proportion) + his own a26. 4 gens.
+- emp1 a51 and emp4 a51 redrawn with his own a26 as body/head reference + current a51 as face ref, muted deeper emp1-yellow, both hands in front (ruyi / closed fan). 1 gen each. emp1/emp4 a18/a26/a36 unchanged.
+- Check sheet img/_review/men/emperor/emp_check_a26_a51_r4.jpg: all four emperors, a26 | a51 at the same height — head and body line up for each man. Sheets rebuilt: empN_ages.jpg (1-4), emp_all_r4.jpg (4 rows). All images looked at.
+- Credits: 11 gens × 135 + 11 cuts × 3 = 1518 cr. Nothing live. Gens per figure: ≤2 (emp2 a18 = 2).
+Weak: emp2's yellow is a touch more orange-gold than emp1's; emp3's yellow is paler/softer than emp1's; a51 yellows are deliberately muted/darker; emp4 a18-a36 keep the pale saffron + green trim from earlier rounds (owner OK'd emp4 earlier) so emp4 reads slightly greener than emp1.
