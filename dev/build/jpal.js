@@ -4,9 +4,16 @@
    - Hoàng quý phi (6) có cung riêng, ở một mình. Hoàng hậu (7) ở một mình tại Càn Ninh (residents("kn") chỉ còn nàng).
    - Quý nhân, Thường tại, Đáp ứng ở thiên điện dưới một chủ vị; hết chỗ thì ở một mình một cung/điện phụ còn trống (PALN), nhường lại khi có chủ vị cần cung.
    - Tần mới phong mà chưa có cung trống: tạm ở thiên điện một chủ vị, có cung trống thì được dời sang, ghi một dòng. Người chơi: lên Tần là được ban cung (S.palCer, lễ dời cung của j27).
-   - Bản đồ có 8 cung phía đông; thêm 5 cung phía tây (các khu viện mái xanh trên bản đồ, cạnh Ngọc Thanh các) cho đủ mọi ghế chủ vị của BAL.seat (Tần + Phi + Quý phi) + 1 HQP.
+   - Bản đồ có 8 cung phía đông; thêm các cung phía tây của PAL_WEST (khu viện mái xanh cạnh Ngọc Thanh các). PALN = 8 + PAL_WEST = 10 cung
+     (owner 18/11 ~19:45Z: bớt 13 → 10; MAIN ROOT-55 bỏ Trữ Tú, Hàm Phúc, Thái Cực điện). 10 ≥ ghế chủ vị của BAL.seat (Tần + Phi + Quý phi) + 1 HQP;
+     các cung dư là chỗ ở tạm (palLone). Đổi số cung = sửa MỘT bảng PAL_WEST; không nơi nào gõ số cung.
+   - Save có người ở cung đã bỏ (S.pal / v.pal >= PALN.length): palFix dời họ sang cung trống (hay thiên điện), mỗi người một dòng log.
    - Save cũ: palFix chạy khi nạp; ai đang ở dưới HH/HQP (hay sai chỗ) được dời, ghi "… dời sang …". */
-[["Vĩnh Thọ cung",.303,.222],["Dực Khôn cung",.368,.222],["Trữ Tú cung",.303,.338],["Hàm Phúc cung",.368,.338],["Thái Cực điện",.368,.455]].forEach(([n,x,y],i)=>{
+/* THE west palace table (name, map x, y). Dropped 18/11: ["Trữ Tú cung",.303,.338],["Hàm Phúc cung",.368,.338],["Thái Cực điện",.368,.455]
+   (their old slot indices were 10-12, i.e. the tail, so the 10 kept palaces keep their indices in every save). */
+const PAL_WEST=[["Vĩnh Thọ cung",.303,.222],["Dực Khôn cung",.368,.222]];
+const PAL_GONE=["Trữ Tú cung","Hàm Phúc cung","Thái Cực điện"]; /* names of the old tail slots, only for the save-migration log line */
+PAL_WEST.forEach(([n,x,y],i)=>{
  if(MAPH.rivalSlots.some(s=>s.name===n))return;const s={slot:9+i,name:n,box:{x,y,w:.058,h:.105},anchor:{x:+(x+.029).toFixed(3),y:+(y+.04).toFixed(3)}};MAPH.rivalSlots.push(s);PALN.push(n)});
 palHeadOK=function(p){return !!p&&(p===S?!S.out&&!S.dead:p.alive&&!p.out)&&!p.queen&&rkOf(p)>=3};
 function palHostOK(p){return palHeadOK(p)&&rkOf(p)<=5&&p.pal!=null}
@@ -15,6 +22,10 @@ houseOf=function(p){if(!p)return null;const r=rkOf(p);if(p===S)return r>=3?key(S
  if(r>=3&&(p.pal!=null||p.queen))return key(p);
  const h=p.resHead!=null&&byKey(p.resHead);if(h&&h!==p&&(h===S?palHostOK(S):palHostOK(h)))return p.resHead;return key(p)};
 palFix=function(){if(!S||!rivals)return;rivals.forEach(ensureT2);const all=[S].concat(rivals);
+ /* SAVE MIGRATION (13 → 10 palaces): anyone (player or NPC) whose pal points past the palace list is re-housed below like anyone without a
+    palace; a chủ vị gets a free palace (no ban-cung ceremony, she did not rise), a lone lower consort a side hall or a free palace. One log line each. */
+ const gone=[];for(const p of all)if(p.pal!=null&&!(p.pal>=0&&p.pal<PALN.length)){const i=p.pal-PALN.length;gone.push([p,PAL_GONE[i]||"cung cũ"]);p.pal=null;p.palLone=0}
+ const S0pc=S.palCer;
  const was=[];for(const p of rivals){if(!palLive(p)||p.queen)continue;const h=p.resHead!=null&&byKey(p.resHead);if(h&&(h.queen||rkOf(h)>=6||(h!==S&&!palLive(h))))was.push([p,h.queen?"Càn Ninh cung":PALN[h.pal]||"cung cũ"])}
  if(S.pal!=null&&!palHeadOK(S)){log(`Ngươi dời khỏi ${PALN[S.pal]}.`);S.pal=null}
  for(const v of rivals)if(v.pal!=null&&!(palHeadOK(v)||(v.palLone&&palLive(v)&&rkOf(v)<3))){v.pal=null;v.palLone=0}
@@ -60,7 +71,9 @@ palFix=function(){if(!S||!rivals)return;rivals.forEach(ensureT2);const all=[S].c
  for(const h of hs)hallFix(h);
  if(!sv&&palLive(S)&&rkOf(S)<3&&S.resHead!==S0){try{if(S.resHead)log(`Ngươi được xếp ở ${palName("home")}.`);else if(S0)log(`Ngươi dời về ${HOMEN}.`)}catch(x){}}
  for(const p of moved)try{log(`${RANKS[p.rank].n} ${p.name} có cung trống, được dời sang ${PALN[p.pal]}.`)}catch(e){}
- for(const [p,w] of was){if(!palLive(p))continue;try{log(`${p.name} dời khỏi ${w}, dời sang ${houseName(p)}.`)}catch(e){}}};
+ for(const [p,w] of was){if(!palLive(p))continue;try{log(`${p.name} dời khỏi ${w}, dời sang ${houseName(p)}.`)}catch(e){}}
+ if(gone.some(g=>g[0]===S))S.palCer=S0pc;
+ for(const [p,w] of gone){if(!palLive(p))continue;try{log(p===S?`${w} đóng cửa; ngươi dời sang ${houseName(S)}.`:`${w} đóng cửa; ${RANKS[p.rank].n} ${p.name} dời sang ${houseName(p)}.`)}catch(e){}}};
 /* palaceOf: j27's "lower consort under the queen = Càn Ninh" exception can no longer fire (palFix never puts anyone under the queen),
    so the j9/j27 palaceOf is kept as it is. (An earlier override here answered "home" for anyone without a house, e.g. servants,
    and so seated them in HER palace: measured, it halved her climb; see BALANCE_REPORT.) */
