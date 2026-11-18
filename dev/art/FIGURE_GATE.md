@@ -38,4 +38,4 @@ Ranks: t1 Đáp ứng, t2 Thường tại, t3 Quý nhân, t4 Tần, t5 Phi, t6 Q
 
 ## E. APPROVAL FLOW
 1. No mass production until the owner approves 3–4 consecutive good people (different painters).
-2. The owner reviews ONE sheet per person (row + overlay + in-game ladder), never piecemeal singles; final height check in the "Phòng co giãn" artifact (https://claude.ai/artifact/D4NP5oJbtHfSPUBMTLHNe4), where she can scale each figure herself; her saved values become fig-ht.json rows (dev/art/scale-room/rows_to_ht.py).
+2. The owner reviews ONE sheet per person: the row on the red skull-top/feet lines + the m09 overlay (+ in-game ladder), never piecemeal singles. Owner 18/11 ~03:38Z (verbatim): "Tao nghĩ là phòng co giãn tao cũng không có cần vô nữa đâu, bởi vì hiện tại tao thấy cách mày làm cũng khá là hợp ý tao rồi. Cái cách mà mày đặt cái người đó vô so, rồi sau đó có một cái đường màu đỏ đo từ đỉnh đầu của từng người là ok." → the "Phòng co giãn" artifact is NOT used (kept only, not sent).
