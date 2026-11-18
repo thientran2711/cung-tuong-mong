@@ -53,4 +53,4 @@ poison-road-fix | review/poison-road-fix | session_01964izENMh7RgrvjTLQsBZa | RU
 | REVIEW cloth-tea a2230b9b (sonnet SMALL; brief briefs/root50-review-cloth-tea.md) | review/cloth-tea-look | MAIN ROOT-50 | session_01UV1SzjS8nVnNPfmxPsAqV1 | RUNNING | 18/11 09:17Z |
 | REVIEW look-fx-wire 9f08c1b9 (sonnet FULL; brief briefs/root50-review-look-fx-wire.md) | review/look-fx-wire | MAIN ROOT-50 | session_01UV1SzhWn2B5k9NprCfHfxX | RUNNING | 18/11 09:21Z |
 odds-cap-r2 | review/odds-cap-r2-rv | session_01964izFjKYQX8MLy9amEugm | LIVE 5cbfd620 | 18/11 09:23Z | owner D #1
-| E9 QUESTLINE Q3 helpers in her road (opus; D-Q1=1 OD L1876) | review/questline-q3 | E ROOT #3 | (opening) | RUNNING | 18/11 09:32Z |
+| E9 QUESTLINE Q3 helpers in her road (opus; D-Q1=1 OD L1876) | review/questline-q3 | E ROOT #3 | session_01DgYSWnjvT7tLSRk7kckeRH | RUNNING | 18/11 09:32Z |
