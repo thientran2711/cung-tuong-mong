@@ -97,3 +97,10 @@ Total gens 30 (20 yellow first gens + 3 face gens + 7 second gens) = 4,050 cr; e
 2. c12 t1, c14 t5 (fingertips at the jaw) kept as not covering.
 3. Rows with new yellow still read slightly paler than the old amber ones (they now match c03 t8 v1, as ordered).
 4. Nothing live. Scan scripts in /home/user/wt/w65-work (ephemeral; mediapipe needs `apt-get update && apt-get install libegl1`).
+
+## HANDOVER (W65 -> successor, 18/11 ~16:55Z; context high, rollover)
+Done: yellow/crown/face scan + 23 fixes above (READY went to ROOT-26, forwarded to ROOT-27). NOT done (new ROOT-27 rules after my scan):
+1. D4b: closed-lip smile ALWAYS; scan all 768 for teeth/open mouth -> regen. (My face sheets sheets/face_1..8 = a18-scan/face_*.jpg on the CDN showed closed-lip smiles in what I looked at; no dedicated teeth check was run.)
+2. D3e item value ladder t1-t8 (same kind OK, luxury rises with rank; t6/t7/t8 items reserved to their rank; lower ranks must not hold ruyi/jewelled box/censer/gem fan/phoenix fan/imperial scroll-seal box; c03 a18 live set = list only, ask ROOT-27). Re-read FIGURE_GATE (handover branch, newest) first.
+3. Waiting on ROOT-27: decision on the 10 borderline crowns (t7 v1+v2 of c04 c08 c09 c10 c13) and per-person row-sheet rebuild.
+Reuse: scan scripts in /home/user/wt/w65-work (ephemeral): face.json (landmarks of all 768), sm/ (1200px copies), sheets.py (face + t7/t8 contact sheets), ylab.py (yellow dE), ba.py (before|after), upload root /home/user/wt/w65-up. Magnific upload ids: colour ref fHGh02nCDY, m09 style eIyOFEidqL.
