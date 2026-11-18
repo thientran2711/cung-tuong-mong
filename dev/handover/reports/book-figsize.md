@@ -82,3 +82,9 @@ Chip "?": sits at the right edge of the column; with the centred crop a wide cro
 ## Shots (CDN, delete after verdict; wipe: cdn_sync.py --wipe-review book-figsize) LOOKED 3x
 https://ctm-img.victoria-tntt.workers.dev/img/_review/book-figsize/r5-<dev>-<name>.jpg , dev fold|ipad, name SELF | fig-thaihau-1 (Hoang hau) | fig-consort-c09-ty6-a36 | fig-emperor-a18-1 | fig-kid-p16-a51 (child art) | fig-maid-m50-t6-a51 (widest robe, pink). Left half BEFORE main, right AFTER; column at the same x in every AFTER. Pages = real kitBook renderer with real catalog figures (no live save in sandbox).
 ~90% xong / ~80% chơi được.
+
+## r5b (MAIN s43 feedback: SIZE = owner's p.5 size) — review/book-figsize-r5 @ bac50f39
+- Size is ONE fixed BAL number now: BAL.bookFigW=.343 (jbal2.js): adult body = figure column width / .343 (capped by column height), independent of her outfit and of kind. Fold 641.4 / iPad 533.5 (her shot 642 / 534). Children x age factor (smaller), emperor as live.
+- Scan 37 kinds x 5 devices (755x1000, 1180x820, 1366x1024, 412x1058, 390x844): ALL OK on all 5: column x/width identical on every kind, adult spread 0.0 % (body 641.4 / 533.5 / 618.1 / 358.6 / 338.2), face band crop 0, text overlap 0, feet cut 0, aspect ok, crown cut <= 6 px. (First run of 390 failed only on a mis-timed first case; two warm-up renders added, re-run ALL OK.)
+- Shots (CDN img/_review/book-figsize/r5-<fold|ipad>-<name>.jpg, left BEFORE main, right AFTER; SELF, Hoang hau, wide pink, emperor, child art, widest robe pink): LOOKED, text column at the same x on every AFTER, her figure = her shot size, wide robes cropped at the column edge with face whole. Delete after verdict: python3 dev/site/cdn_sync.py --wipe-review book-figsize.
+~95% xong / ~90% chơi được.
