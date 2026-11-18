@@ -1,0 +1,19 @@
+# men-emperor — 4 Emperor (Hoàng thượng) identities at a18, prompt-only (W32, 18/11)
+
+PRIORITY #1 CHECK: OD 85 | ledger 11 | claims 8 (none RUNNING for emperor figures) | main 15 (live fig-emperor-a18-*.webp) | review/* 2 | archive 0 — reused: approved man look img/_review/male-proportion/man_prompt_fresh.png + its prompt (male-proportion.md §prompt-only man), live emperor art for role/identity.
+
+Rules applied: FIGURE_GATE WHO (men = prompt only, no proportion gate), D4b brighter closed-lip smile, F Emperor (yellow-main OR black+gold-main, dragons, stiff SHORT cầu vai, crossed collar, NO Qing feathered hat), STYLE_ANCHOR men colours (no pink/purple). Model gpt-2-6, folder ba4aecfe…, 768x2000, style ref face-consort-01 only, bg cut.
+
+Live a18 as listed: fig-emperor-a18-1 / -2 = ONE man (e1) in two outfits (yellow medallion robe + gold crown; fan / scroll); face-emperor-1..8 = 8 older/younger faces (several with Qing-style or black hats, beards). Owner's art plan wants 4 Hoàng thượng faces, so these are 4 NEW distinct young identities, each with his own robe + crown (no shared template).
+
+| who | gens | robe / crown | notes |
+|---|---|---|---|
+| emp1 | 1 | imperial yellow, gold dragons + waves, jade belt; small gold+jade guan, long pin | gentlest face, closed smile; pointed cầu vai |
+| emp2 | 1 | BLACK + gold dragons, dark-red lining, gold borders; tall black-gold crown, scroll | sharper jaw, confident; black+gold family (suits a51 later) |
+| emp3 | 1 | golden yellow, crimson collar/borders, red clouds; flat miện board, bead strings only to brow | softest/palest face; rounded cầu vai; hands in front |
+| emp4 | 2 | pale saffron yellow, jade-green trim + collar; gold dragon-head crown, red jade pin, fan | light stubble, manlier; gen1 was navy+gold → off-rule, regenerated yellow-main |
+
+Files (CDN img/_review/men/emperor/, md5 verified, nothing live): emp1_a18.png … emp4_a18.png (cut, 768x2000), emp_a18_row.jpg (4 side by side, feet aligned), emp_a18_faces.jpg (face crops sheet).
+Credits: 5 gens x 80 = 400 + 4 cuts x 3 = 12 → 412 cr. Gens per figure: 1,1,1,2 (max 4).
+
+Weak points: the 4 faces share one "gpt-2-6 handsome" look (same eye/brow family; told apart mostly by jaw, stubble, crown, robe) — fine at game size, a face-swap pass could widen it; emp3's face is small under the wide miện; faces are all ~18-22, older bands (a26/a36/a51) not drawn; robes are bulky-wide in sleeves (not gate-checked: men have no proportion gate). Not matched to live e1 face (live ones are for review only; swap-in is the foreman's call).
