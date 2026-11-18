@@ -409,8 +409,7 @@ try{Object.assign(PD_END,{"Ở lại quê nhà":12,"Làm thiếp nhà phú hộ"
 function kc2End(h,t){if(S.dead)return;S.kc.end=h;Q=Q.filter(m=>m.cls==="end"||m.nl);over(h,t+` <span class="past">(${S.kc.kd==="dan"?"Thôn nữ chờ tuyển":"Công chúa chờ hòa thân"} · ${kcTitle()})</span>`,h);try{showModal()}catch(e){}}
 (function(){if(typeof kpWhy!=="function")return;const w0=kpWhy;kpWhy=function(){if(S&&S.kc&&S.kc.kd&&!S.kc.inPal)return `mới ${S.turn||0}/${KIEP.mo} tháng ở nhà, chưa vào cung`;return w0.apply(this,arguments)}})();
 (function(){if(typeof lifeSave!=="function")return;const l0=lifeSave;lifeSave=function(f){const r=l0.apply(this,arguments);try{if(S&&S.kc&&S.kc.kd&&!S.kc.inPal){const p=lifeLog();if(p[0]&&p[0].n===S.name&&p[0].kc===1&&!p[0].kc2){p[0].kc2=1;p[0].f=String(p[0].f||"").replace("Tiểu thư ngoài cung",S.kc.kd==="dan"?"Thôn nữ chờ tuyển":"Công chúa chờ hòa thân");store.set("cung-luanhoi",p)}}}catch(e){}return r}})();
-(function(){const t0=showTitle;showTitle=function(){const r=t0.apply(this,arguments);try{document.querySelectorAll("#slots .slot").forEach(el=>{const b=el.querySelector("[data-load]");if(!b)return;const d=loadSlot(+b.dataset.load);
- if(d&&d.S&&d.S.kc&&d.S.kc.kd&&!d.S.kc.inPal){const sp=el.querySelector(".past");if(sp)sp.textContent=sp.textContent.replace("Tiểu thư ngoài cung",d.S.kc.kd==="dan"?"Thôn nữ chờ tuyển":"Công chúa chờ hòa thân")}})}catch(e){}return r}})();
+/* the Chọn sổ rows say who the sổ is through j74 slotWho (one place, kd lives included); the old #slots .slot text patch is gone with the old rows */
 
 /* ---------- UI: the jkc panels with this road's people and words ---------- */
 (function(){const f0=kcFamList;kcFamList=function(w){if(!S||!S.kc||!S.kc.kd)return f0.apply(this,arguments);return S.kc.fam.filter(m=>m.alive&&!(m.hide&&!S.kc.sx)&&(w==="ban"?!!m.out:!m.out))}})();
