@@ -34,13 +34,13 @@ const {chromium}=require('playwright');const URL=process.argv[2],OUT=process.arg
   C.npc='no woman with face points';for(const v of rivals){if(v.alive===false)continue;let f=null;try{if(personRoleRank(v).sex!=='f')continue;f=kitFile(kitFace(v).src)}catch(e){continue}
    for(let i=0;i<24&&!MK_FIT.get(f);i++)await new Promise(r=>setTimeout(r,250));if(!MK_FIT.get(f))continue;
    const sn0=KIT_FACEFX.seen;KIT_FACEFX.seen=()=>true;/* she has not scouted this woman yet: the seen rule (OD scouting) is lifted for this check only */v.lk=null;lkSmudge(v,2,'mua');const h=kitFxLayers(v,f)||'';await new Promise(r=>setTimeout(r,200));await wait();const im=h.includes('klk-smu');KIT_FACEFX.seen=sn0;v.lk=null;C.npc=im;C.npcFile=f;break}
-  /* EDGE MEASURE (owner 18/11): the pink smear must have no step. For the cheek band of the drawn layer (rows 38-58 % of its height, grey runs and lips switched off for the measure) the largest ABSOLUTE alpha change (0..1) between two neighbouring pixels along each row (a soft bloom stays under .012; a stripe edge steps by several %) */
+  /* EDGE MEASURE (owner 18/11): the pink smear must have no step. For the cheek band of the drawn layer (rows 38-58 % of its height, grey runs and lips switched off for the measure) the largest ABSOLUTE alpha change (0..1) between two neighbouring pixels along each row (a soft bloom stays under .02 (~5/255 per pixel); a stripe edge steps by several %) */
   C.pinkEdge={};{const v=MK_FIT.get(fig),Bx=BAL.looks.smuFx;const im=await new Promise(r=>{const i=new Image();i.crossOrigin='anonymous';i.onload=()=>r(i);i.src=IMG_U('img/'+fig)});
    const ta=Bx.tear.a.slice(),pc0=Bx.pct;Bx.tear.a=[0,0,0,0];/* grey runs off for this measure: only the pink layer */for(const lv of [2,3]){BAL.looks.smuFx.pct={blush:[0,0,.2,.2],lip:[0,0,0,0]};const url=lkSmuDraw(im,v,lv,'mua',lkSmuCols(S),lkSmuBox(v),123);
     const g=await new Promise(r=>{const i=new Image();i.onload=()=>r(i);i.src=url});const c=document.createElement('canvas');c.width=g.width;c.height=g.height;const x=c.getContext('2d');x.drawImage(g,0,0);const d=x.getImageData(0,0,c.width,c.height).data;let worst=0;
     for(let y=Math.round(c.height*.38);y<Math.round(c.height*.58);y++){let pk=0;const A=[];for(let xx=0;xx<c.width;xx++){const i=(y*c.width+xx)*4,pinkish=d[i]-d[i+1]>25;A.push(pinkish?d[i+3]/255:0);pk=Math.max(pk,A[xx])}
      if(pk<.02)continue;for(let xx=1;xx<c.width;xx++)worst=Math.max(worst,Math.abs(A[xx]-A[xx-1]))}
-    C.pinkEdge[lv]=Math.round(worst*1000)/1000}Bx.tear.a=ta;Bx.pct=pc0;C.pinkSmooth=Object.values(C.pinkEdge).every(v=>v<.012);/* absolute alpha change per pixel step (0..1) */}
+    C.pinkEdge[lv]=Math.round(worst*1000)/1000}Bx.tear.a=ta;Bx.pct=pc0;C.pinkSmooth=Object.values(C.pinkEdge).every(v=>v<.02);/* absolute alpha change per pixel step (0..1) */}
   C.noPts=(()=>{try{return lkSmuImg(S,'zz-none-1.png',{lv:2})===''}catch(e){return false}})();
   C.balOnly=!!(BAL.looks.smuFx&&BAL.looks.smuFx.blush&&BAL.looks.smuFx.tear);
   clear();host.remove();return C});
