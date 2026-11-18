@@ -34,8 +34,10 @@ for(const id in NRM){const R=NRM[id];
   if(E.k==="do"&&!/\{B\}/.test(E.h))bad.push(`${k}: a «do» ask must name {B}`);
   /* review E7cr (FAIL b99f4bc) as rules, whole families:
      (4) no time word that contradicts the card's deadline (BAL.nroad.dl, shown on the card; true information only) */
-  const TIME=/(ngày mai|đêm nay|sáng mai|tối nay|(?<!mấy )hôm nay|mồng|(^|[^\p{L}])(hai|ba|bốn|năm|mười) ngày(?![\p{L}]))/iu;
+  const TIME=/(ngày mai|đêm nay|sáng mai|tối nay|(?<!mấy )hôm nay|mồng|rằm|tết|ngày giỗ|(đợi|ở được|trong|còn|hạn) (một|hai|ba|bốn|năm|sáu|mười) (ngày|tuần|tháng|năm)|(^|[^\p{L}])(hai|ba|bốn|năm|mười) ngày(?![\p{L}]))/iu;
   for(const t of [E.c,E.h].concat(...E.o))if(TIME.test(t))bad.push(`${k}: time word «${t.match(TIME)[0].trim()}» vs the card deadline`);
+  /* labels are the player's own action: she says «mình», never the narration's «ngươi» */
+  E.o.forEach(o=>{if(/ngươi/.test(o[0]))bad.push(`${k}: label says «ngươi» («${o[0]}»)`)});
   /* (5) money only as a cost: the asker never asks her for a gift */
   if(/xin \{call\} (ban|cho) \{me\}/.test(E.h))bad.push(`${k}: a handout ask (OD:L1601 (2))`);
   const all=[E.h].concat(...E.o).join(' ¦ '),road=k0.replace(/_\d+$/,''),grp=road.split('_')[0];
