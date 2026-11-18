@@ -76,3 +76,9 @@ Seen: the 3 lower-west courts are painted only, no tag; Fold right-edge tags (Tr
 
 ### r2b — on main 790cda59 (map-labels-missing live) — **review/map-zones @ 635c406**
 Merged origin/main 790cda59 (only index.html/sw.js conflicted → rebuilt). Re-run: quickcheck **PASS** (old save ok, core gates PASS, perf new/live render 281/278, tab 489/476, buổi 1266/1397 ms); pal-trim-oldsave **PASS**; map-labels-scan DSF=2 Fold 755x1000 + iPad 1180x820, day + night **PASS** (leaders 0, 0 overlaps), courtyards 10 **PASS** (both first try). Shots fold-/ipad- r2-overview-day/-night/-courtyard replaced with this build, LOOKED: the 3 dropped palaces are gone (their courts are painted only), tags clean, no clipping on iPad.
+
+### r3 — fixes for review FAIL 635c406 (reports/review-map-zones.md) — **review/map-zones @ 5a83694**
+1. Side-hall residents of a dropped palace (incl. the PLAYER below Tần) now get their one log line too ("Trữ Tú cung đóng cửa; ngươi dời sang Dưỡng Xuân hiên · Cảnh Phúc cung."). Whole group: every live resident whose host sat in a dropped slot.
+2. A resident of a dead/out host in a dropped slot logs the dropped palace's name (PAL_GONE via goneN), never «cung cũ»; no person gets two lines (the `was` line wins).
+3. Law 14, rewritten in place: jres.js (header "8 cung"/"0..7", line 48 "5 west (8–12)"), jpm.js header "8 cung phi tần", PROGRESS_balance.md "PALN 13". Grep of 13-palace / 5-west / slot 9-13 wording over dev (excl. measure data + old reports): none left.
+Tests: pal-trim-oldsave now 2 cases — heads (player + Quý phi + lone Quý nhân in dropped slots) PASS; residents (player below Tần under a dropped host + a resident of a DEAD dropped host) PASS; every moved person exactly one line, no «cung cũ». quickcheck PASS (render 231/230, tab 432/418, buổi 1031/962 ms, core gates PASS). No UI change since r2b (map shots still valid).
