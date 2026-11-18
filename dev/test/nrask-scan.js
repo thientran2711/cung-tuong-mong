@@ -23,7 +23,8 @@ if(kinds.includes('bac'))fail('BAL.nroad.kinds deals «bac» (D-Q2: off by defau
 const rd={};for(const f of fs.readdirSync(B).filter(f=>/^jrd_.*\.js$/.test(f))){const t=fs.readFileSync(path.join(B,f),'utf8');
  for(const m of t.matchAll(/rdDef\("([a-z0-9_]+)",(\d+),/g)){const road=m[1],n=+m[2];(rd[road]=rd[road]||[]).push(n)}}
 const men=fs.readFileSync(path.join(B,'jnroadm.js'),'utf8');
-const menIds=[...new Set([...men.matchAll(/\bdef\("([a-z0-9_]+)","[a-z]+",/g)].map(m=>m[1]))];
+/* men templates that can ask: the hz (NPC princes) templates never ask (jnroadm nrMenL: a son has e.a=null) — no coverage owed there */
+const menIds=[...new Set([...men.matchAll(/\bdef\("([a-z0-9_]+)","([a-z]+)",/g)].filter(m=>m[2]!=="hz").map(m=>m[1]))];
 const isHelp=n=>n>=helpN[0]&&n<=helpN[1];
 /* load every jnrask file in one sandbox (the files share window.NRASK) */
 const sb={window:{}};sb.window.window=sb.window;vm.createContext(sb);
