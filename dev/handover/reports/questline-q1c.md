@@ -1,4 +1,4 @@
-# Q1c — men help asks (jnrask_m.js) — SẴN SÀNG KIỂM 99aa2c5 (fix 1, rebased on q1a 54f10e8)
+# Q1c — men help asks (jnrask_m.js) — fix 2 at 65a1421 (rebase on E7a2 q1a pending, then SẴN SÀNG KIỂM)
 PRIORITY #1 CHECK: OD L644/L1072/L1243/L1252 | main none (Q1 engine not on main yet) | review/questline-q1a 1b6005a (engine + shared nrask-scan, hz exempt), review/questline-q1b 344e1e9 (no clash), review/questline-q1c (this) | claims E7c2 session_01DgYSWkXhh7hPLBJjzFYMWJ (successor of E7c session_01DgYSWmbeLw227mrkMikC5W)
 START_CTX ~5 % · lineage depth 2 · worker (no children).
 
@@ -44,3 +44,11 @@ nrVoiceM («thần» for every S.men man vs VANPHONG vi thần / thị vệ nô 
 review/questline-q1c = 5432087 (data) + e80c8cf (fix 1) + 99aa2c5 on review/questline-q1a 54f10e8 (force-with-lease over 2148089; only index.html/sw.js conflicted → rebuilt).
 New engine rules met: (a) ≥1 {B}-free ask per chapter (asks naming {B} are not drawn without a real rival) — was 2 chapters with {B} in both asks: off_ghe_5#1, off_thong_7#1 reworded → 0; (b) NRSELF ty: a Thái y is never asked for kind «y» — ty_thu_6#0, ty_tra_7#0 → che, ty_thu_9#0, ty_tra_9#1 → thu (kinds per chapter still differ). nrask-m-scan checks both. nrVoiceM is now by trade (E7a): shots show Thị vệ «nô tài», Tổng quản «nô tài».
 Tests on 99aa2c5: nrask-scan ALL PASS (also with q1b b34eaed: no men failure, no dup key), nrask-m-scan PASS, nrask-engine ALL PASS, nrask-m-shots SHOTS OK Fold + iPad (looked; local only, CDN 401), quickcheck PASS (core gates PASS, old save ok).
+
+## FIX 2 (E7cr2 FAIL 99aa2c5, review ROUND 2) — 65a1421 (pushed; rebase on E7a2's q1a sha still to come)
+| family | before (rule hits on 99aa2c5) | fixed | after |
+|---|---|---|---|
+| label says the narration's «ngươi» (labels are her own action → «mình»); all 408 labels scanned | 1 | ksp_so_10#0 | 0 |
+| future-dated words vs the card deadline (rằm, tết, ngày giỗ, future «N tháng»); past ones («đêm qua», «tuần trước», «đã nửa tháng») and durations of the ask («hoãn một năm») kept | 10 | gd_tinh_5#0/#1 (đêm rằm → đêm hẹn, title + label too), st_uoc_10#0 (đợi ba tháng / ở được một tháng → còn xa / không thể ở lâu), off_dan_6#1 (quà tết ×3 → quà ban dịp lễ), vg_dat_8#1 (áo tết → sắp tới), hs_hoa_10#1 (ngày giỗ → lễ cúng sắp tới) | 0 |
+nrask-m-scan carries both rules. ksp_so_7 (hh when the player is Hoàng hậu) is covered by E7a2's engine queen-alias filter (Foreman E).
+Tests on 65a1421: nrask-m-scan PASS, nrask-scan ALL PASS, nrask-engine ALL PASS. Quickcheck/shots to be re-run after the rebase on E7a2's sha (text-only change since 99aa2c5, which passed both).
