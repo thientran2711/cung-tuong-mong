@@ -77,3 +77,12 @@ M1 W37 TOTAL (emperor group done): 12 gens × 135 + 12 cuts × 3 = 1656 cr; 1 ge
 - emp3 a18/a26/a36/a51 ALL redone: refs = emp1 a26 cut (body/head scale) + emp3's own a26 (face, robe, miện); a26 first (1 gen), then a18/a36/a51 from the new a26 (+ emp1 a26, a18 also old emp3 a18 for the younger face). 4 gens. Slimmer body, rounded shoulder pieces, hands together kept; painterly.
 - Check sheet img/_review/men/emperor/emp3_check.jpg: emp1 a26 | emp3 a18 | a26 | a36 | a51, scaled to the same total bbox height. Caveat: emp3's tall miện counts in the height, so emp3 is scaled ~6-8 % smaller than emp1 on that sheet; by eye head and body match.
 - Credits: 7 gens × 135 + 7 cuts × 3 = 966 cr (round total with round 1: 2622 cr). Nothing live. Old emp3_a26/a36/a51 on CDN overwritten by the new ones.
+
+## M1 round 3 (W37, 18/11) — owner: emp3 ugly (costume + stiff stance); emp1/2/4 OK but a51 colours yellow-dominant; emp2 costume = emperor not vương gia
+PRIORITY #1 CHECK: owner order via ROOT-18 (verbatim in the order); reuses round-2 cuts as face/proportion refs.
+- emp2: NEW costume all 4 ages — imperial yellow robe, gold dragons, black only as narrow collar/cuff/hem borders + black-gold belt; crown + scroll kept. a26 first (1 gen), a18/a36/a51 from it (3 gens); a51 muted antique yellow-gold, both hands holding the scroll.
+- emp3: NEW costume all 4 ages — yellow-dominant robe, large gold five-claw dragon roundels, crimson/gold borders, layered inner robes; relaxed three-quarter stance, right hand holding a jade ruyi, left arm hanging (a18–a36); a51 upright, both hands holding the ruyi. Same face, miện kept, emp1 a26 as head/body reference. a26 first, then the others (4 gens).
+- emp1 a51, emp4 a51 recoloured yellow-dominant (muted antique imperial yellow-gold, dark only as trim), everything else kept (1 gen each from the current a51). emp1/emp4 a18/a26/a36 unchanged.
+- Sheets rebuilt: empN_ages.jpg (1-4) and emp_all_r3.jpg (4 rows). All 10 gens looked at, 1 gen per figure, no regen.
+- Credits: 10 gens × 135 + 10 cuts × 3 = 1380 cr (total this task ≈ 4000 cr). Nothing live.
+Weak: emp3's ornate robe is busier than the others and a little redder at a51; emp2 a36 beard very light; a51 yellows are muted gold-brown (as asked, trầm); emp1/emp4 a18-a36 are the pale saffron/yellow of earlier rounds so a51 reads deeper than they do.
