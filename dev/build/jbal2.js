@@ -691,9 +691,9 @@ Object.assign(BAL,{mind:{like:3,likeSung:1,herMood:30,learnTalk:20,spyPri:50,dis
    (od for her, odA for an NPC). lv = art level the card needs; sucMin = Sức an NPC keeps before she spends on it (her card: the khắc / Sức rule);
    c / w / l = cost / gain / loss (vu's loss and side effects: BAL.tw.g.vu; ky's Danh / Tâm cơ: BAL.tw.g.ky).
    qf = a small gift to the Emperor (her "Dâng một cành hoa"): bac cost, o odds when his flower is not known, w gain (wKnown when it is) */
-Object.assign(BAL,{deck:{vu:{lv:3,sucMin:40,c:{suc:-20},o:[48,8],st:["sac",5],w:{sung:15,danh:3}},
- cam:{lv:3,sucMin:30,c:{suc:-10},o:[48,8],st:["tai",5],w:{sung:12},l:{sung:-2}},
- ky:{lv:3,sucMin:25,c:{suc:-5},o:[53,8],st:null,w:{sung:5},l:{sung:-1}},
+Object.assign(BAL,{deck:{vu:{lv:2,sucMin:40,c:{suc:-20},o:[48,8],st:["sac",5],w:{sung:15,danh:3}},
+ cam:{lv:2,sucMin:30,c:{suc:-10},o:[48,8],st:["tai",5],w:{sung:12},l:{sung:-2}},
+ ky:{lv:2,sucMin:25,c:{suc:-5},o:[53,8],st:null,w:{sung:5},l:{sung:-1}},
  qf:{bac:5,o:50,w:2,wKnown:6}}});
 /* palace voice (jvoice, VANPHONG §2): mood of an address from the real relation (S.sung − sungMid, S.th / S.hh − favMid, aff()):
    ≥ warm → warm words (ái phi, con, muội muội, tỷ tỷ), ≤ cold → "ngươi"; nuong = first rank called "nương nương" / allowed "bổn cung" (Tần);

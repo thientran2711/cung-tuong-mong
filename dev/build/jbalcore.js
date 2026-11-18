@@ -116,6 +116,10 @@ function rungDown(o,n){const F=[0].concat(BAL.odds.cut),top=100;let i=0;for(let 
  /* course gates (BAL.art.gate) and per-point quality (BAL.art.fx) in the same texts */
  {const Y=ARTFX.y,cure="tự bào chế thuốc an thai; chữa bệnh cho con: Sức khỏe con +30",gi=BAL.art.gate.yCure-1;const at=Y.findIndex(t=>t.includes(cure));
   if(at>=0&&at!==gi&&Y[gi]){Y[at]=Y[at].replace(" · "+cure,"");Y[gi]+=" · "+cure}}
+ /* the deck art cards open at BAL.deck[k].lv (review/balance-2 r2): the «mở …» line sits at that bậc, the course's short line says that bậc */
+ for(const k of ["cam","vu","ky"]){const X=ARTFX[k],gi=BAL.deck[k].lv-1;const at=X?X.findIndex(t=>/ · mở «/.test(t)):-1;
+  if(at>=0&&at!==gi&&X[gi]){const m=X[at].match(/ · (mở «.*)$/);X[at]=X[at].replace(" · "+m[1],"");X[gi]+=" · "+m[1]}
+  const a=ARTS.find(x=>x.k===k);if(a&&a.u)a.u=a.u.replace(/^Bậc \d+/,`Bậc ${BAL.deck[k].lv}`)}
  for(const k of ["theu","nau"])if(ARTFX[k])ARTFX[k][0]=ARTFX[k][0].replace(/phẩm \+\d+ mỗi bậc \(thang 100\)/,`phẩm theo điểm môn, Tông sư +${Math.round(100*BAL.art.fx.q)} (thang 100)`);
  for(const k of ["dung","ngon"])if(VIRFX[k])VIRFX[k].forEach((s,i,arr)=>arr[i]=s.replace(/(\(|thỉnh an |tố giác )\+(3|6|9|12|15)(?!\d)/,(m,a)=>`${a}+${O[i+1]}`));
 }catch(e){console.error("artfx text",e)}})();
