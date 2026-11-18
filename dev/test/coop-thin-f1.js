@@ -58,7 +58,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  await G.p.evaluate(()=>{S.inv=S.inv||[];for(const k of ['yensao','yensao','yensao','hacdinh','hacdinh'])S.inv.push({k});if(S.maid){S.maid.loyal=60;delete S.maid.spyFor}});
  const kinds=process.env.NOACT?[]:(await G.p.evaluate(()=>Object.keys(ACT))).filter(k=>!process.env.KINDS||process.env.KINDS.split(',').includes(k));const table=[];let nAct=0,nOk=0;
  const npcOf=(o,id)=>o.p.evaluate(id=>{const v=rivals.find(x=>x&&x.id===id&&!x.coop);return v?JSON.parse(JSON.stringify(v,(k,x)=>k==='hh'?undefined:x)):null},id);
- const herS=o=>o.p.evaluate(()=>({bac:S.bac,danh:S.danh,sung:S.sung,duc:S.duc,suc:S.suc,tamco:S.tamco,inv:(S.inv||[]).length,log:String((S.logs||[])[0]||'').replace(/<[^>]+>/g,'').slice(0,120)}));
+ const herS=o=>o.p.evaluate(()=>({bac:S.bac,danh:S.danh,sung:S.sung,duc:S.duc,suc:S.suc,tamco:S.tamco,inv:(S.inv||[]).length,log:String((S.logs||[])[0]||'').replace(/<[^>]+>/g,'').slice(0,120),logs:(S.logs||[]).slice(0,5).map(x=>String(x).replace(/<[^>]+>/g,''))}));
  const hostHer=()=>H.p.evaluate(()=>{const B=COOPW.thin.seatOf('b');const s=B&&B.S||{};return {bac:s.bac,danh:s.danh,sung:s.sung,duc:s.duc,suc:s.suc,tamco:s.tamco,inv:(s.inv||[]).length,log:String((s.logs||[])[0]||'').replace(/<[^>]+>/g,'').slice(0,120)}});
  const dd=(B,A2)=>{const o=[];const d=(x,y,p)=>{if(JSON.stringify(x)===JSON.stringify(y))return;if(x&&y&&typeof x==='object'&&typeof y==='object'&&!Array.isArray(x)&&!Array.isArray(y)){for(const f of new Set([...Object.keys(x),...Object.keys(y)]))d(x[f],y[f],p+'.'+f);return}o.push(p)};d(B,A2,'');return o};
  for(const k of kinds){await G.p.evaluate(()=>{Q.length=0;S.mg=null;S.confined=0;S.rank=Math.max(S.rank||0,4);S.bac=Math.max(S.bac||0,5000);S.suc=Math.max(S.suc||0,90);S.dead=false;try{closeModal()}catch(e){}});await H.p.evaluate(()=>{Q.length=0;S.mg=null;try{closeModal()}catch(e){}});
@@ -83,9 +83,10 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   const ans=await G.p.evaluate(()=>COOPW.thin.F.lastAns);
   const num=o=>o?[o.sung,o.bac,o.danh,o.suc,o.alive,!!o.out,o.rank,(o.inv||[]).length,(o.kids||[]).length]:null;/* rel/oan/ghen/ev are each phone's own viewer rows */
   const sameW=JSON.stringify(num(hA))===JSON.stringify(num(gA));/* her log line: her phone's render adds the Sổ ghi sync suffix (jlogsync lsSync, as in solo); the host's copy holds the act line */
-  const herSame=Object.keys(hh).every(x=>x==='log'?String(her1.log).startsWith(String(hh.log).slice(0,60)):her1[x]===hh[x]);
+  /* her phone may add its own lines after it (guest-side log writers from the world delta: evidence gained, staff cap — tripwire F6/G) */
+  const herSame=Object.keys(hh).every(x=>x==='log'?her1.logs.some(l=>l.startsWith(String(hh.log).slice(0,60))):x==='logs'||her1[x]===hh[x]);
   const good=!r.err&&r.out===''&&!r.local&&r.npcOps===0&&r.sent===1&&got&&run1===run0+1&&sameW&&herSame;nAct++;if(good)nOk++;
-  const row={k,id:pick,staged:!!st,hostRan:run1-run0,ans:ans&&ans.r&&ans.r.st,ms:ans&&ans.ms,text:ans&&ans.r&&ans.r.r,npc:dd(hB,hA).slice(0,8),her:Object.keys(her1).filter(x=>x!=='log'&&her0[x]!==her1[x]).map(x=>x+':'+her0[x]+'→'+her1[x]),log:her1.log.slice(0,60)};table.push(row);
+  const row={k,id:pick,staged:!!st,hostRan:run1-run0,ans:ans&&ans.r&&ans.r.st,ms:ans&&ans.ms,text:ans&&ans.r&&ans.r.r,npc:dd(hB,hA).slice(0,8),her:Object.keys(her1).filter(x=>x!=='log'&&x!=='logs'&&her0[x]!==her1[x]).map(x=>x+':'+her0[x]+'→'+her1[x]),log:her1.log.slice(0,60)};table.push(row);
   if(!good)ok(false,'F1 '+k,{r,got,run:[run0,run1],sameW,hA:num(hA),gA:num(gA),herSame,her1,hh,flog:await G.p.evaluate(()=>COOPW.thin.F.log.slice(-4)),hlog:await H.p.evaluate(()=>COOPW.thin.F.log.slice(-4))})}
  if(!process.env.NOACT)ok(nAct>0&&nAct===nOk,`F1 every ACT kind from the guest: not run on her phone, run once on the host in her context, world + her person the same on both phones (${nOk}/${nAct}; ${kinds.length} kinds, ${table.filter(x=>x.skip).length} without a target)`);
  console.log('ACT table:');for(const x of table)console.log(' ',JSON.stringify(x).slice(0,300));
