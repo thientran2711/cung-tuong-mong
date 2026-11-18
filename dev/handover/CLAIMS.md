@@ -1002,7 +1002,6 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | OWNER UI BUG place-banner (count icon missing, chip on chip, banner covers head/ornament; options A/B/C; sonnet; brief briefs/place-banner.md) | review/place-banner | MAIN s42 | session_01UV1SzmHEoDtWWruq6yMGnZ | RUNNING | 18/11 01:49Z |
 | OWNER UI BUG opt-card-short (option cards too tall: stretched picture, long notes; options A/B/C; sonnet; brief briefs/opt-card-short.md) | review/opt-card-short | MAIN s42 | session_01UV1Szk6j15PHjAL8gMSR9z | RUNNING | 18/11 01:58Z |
 | REVIEW men-forbidden 13286b4 (opus BIG; brief briefs/review-men-forbidden.md) | review/men-forbidden | MAIN s42 | session_01UV1Szh3jq9brqAHDsVQitM | RUNNING | 18/11 02:01Z |
-| OWNER UI BUG book-figsize (one body height on every book figure; sonnet; brief briefs/book-figsize.md) | review/book-figsize | MAIN s42 | session_01UV1Szh... (worker, this session) | RUNNING | 18/11 02:03Z |
 | OWNER UI BUG result-reason (result card lines need short WHY; whole group; sonnet; brief briefs/result-reason.md) | review/result-reason | MAIN s42 | session_01UV1SzirzUecQTMVipMrcQ1 | RUNNING | 18/11 02:07Z |
 | CAL PREVIEW (sonnet; s42 order 02:04Z): ag-all-2-land on Cloudflare Pages, ?hieuchuan=1 | (deploy only) | C-AG | session_01UV1SzgwDRVVjeacdPPtR47 | RUNNING | 18/11 02:05Z |
 | REVIEW greet-stranger 54431a1 (sonnet; brief briefs/review-greet-stranger.md) | review/greet-stranger | MAIN s42 | (opening) | RUNNING | 18/11 02:10Z |
@@ -1010,3 +1009,4 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | hoa-dien r3c LIVE f986ff6a (main 62a6846f → f986ff6a; ROLLBACK 62a6846f) | review/hoa-dien-r3c | MAIN s42 | session_01UV1Szk7eZQzR2d2t4rhiFj | LIVE | 18/11 02:12Z |
 | REVIEW cloth-xoc 7270a76 (wet FINAL + mud approved; sonnet SMALL; brief briefs/review-cloth-xoc.md) | review/cloth-xoc | MAIN s42 | (opening) | RUNNING | 18/11 02:17Z |
 | REVIEW smudge r16 50939b0 (sonnet SMALL; brief briefs/review-smudge-r16.md) | review/smudge-code-r16 | MAIN s42 | (opening) | RUNNING | 18/11 02:20Z |
+| OWNER UI BUG book-figsize (one body height on every book figure; sonnet; brief briefs/book-figsize.md) | review/book-figsize | MAIN s42 | session_01UV1Szgp1qDfnHSk36y8CPg | READY-FOR-REVIEW cf415829 | 18/11 02:03Z |
