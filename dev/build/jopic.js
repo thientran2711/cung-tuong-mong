@@ -323,9 +323,9 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2c",title:"Khu
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.2d",title:"Thẻ lựa chọn: hai cách xếp (một hàng dài / hai cột) và ba bậc nút S · M · L, mỗi bậc một cỡ",html:()=>{
  const card=(n,x,i)=>`<button class="opt" data-ksample="d${i}">${n}<small>${typeof kitParse==="function"?kitParse(x):x}</small></button>`;
  const set=(lab,lay,t,L)=>`<div class="kpnote">${lab}</div><div class="opts kitpg-opts" data-kol="${lay}" data-kot="${t}" style="--k3c:${lay}">`+L.map(([n,x],i)=>card(n,x,i)).join("")+`</div>`;
- return set("Hai cột, bậc S (chữ ngắn)","2","S",[["Tiếp","tốn: 1 khắc"],["Lui về","tốn: 1 khắc"]])
-  +set("Một hàng dài, bậc M","1","M",[["Cúi đầu nhận lỗi","tốn: 1 khắc"],["Dâng lễ vật xin bỏ qua","tốn: Bạc -20, 1 khắc"]])
-  +set("Một hàng dài, bậc L (chữ dài nhất)","1","L",[["Xin về tảo mộ tổ tiên cho trọn đạo hiếu","tốn: Sức -5 · được: Đức +2, cha mẹ vui lòng"]])}})}catch(e){}
+ return set("Hai cột, bậc S (chữ ngắn)","2","S",[["Tiếp","tốn: "+BAL.kitpage.demo.k+" khắc"],["Lui về","tốn: "+BAL.kitpage.demo.k+" khắc"]])
+  +set("Một hàng dài, bậc M","1","M",[["Cúi đầu nhận lỗi","tốn: "+BAL.kitpage.demo.k+" khắc"],["Dâng lễ vật xin bỏ qua","tốn: Bạc -"+BAL.kitpage.demo.gift.bac+", "+BAL.kitpage.demo.k+" khắc"]])
+  +set("Một hàng dài, bậc L (chữ dài nhất)","1","L",[["Xin về tảo mộ tổ tiên cho trọn đạo hiếu","tốn: Sức -"+BAL.kitpage.demo.tomb.suc+" · được: Đức +"+BAL.kitpage.demo.tomb.duc+", cha mẹ vui lòng"]])}})}catch(e){}
 /* kit sample page (§6.3, review/pcard-actrow): the acts of a person card = the same long row, one per line (pop-up / tab / any width) */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§6.3",title:"Việc trên thẻ người: hàng dài, mỗi việc một dòng",html:()=>
  `<div class="pc"><div class="pcr"><div class="pcb">`+
