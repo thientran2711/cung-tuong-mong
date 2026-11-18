@@ -8,6 +8,7 @@ Checks ticked per figure (FIGURE_GATE): reads ~65 (wrinkles, much silver, not wh
 | c09 t8 v0/v1/v2, t7 v0/v1/v2 | 6 | yes (sheet c09_a65_sheet.jpg) |
 | c10 t8 v0/v1/v2, t7 v0/v1/v2 | 6 | yes |
 | c11 t8 v0/v1/v2, t7 v0/v1/v2 | 6 | yes |
-Notes: c09 t7 v0 robe is pale lavender-grey (her original colour, deepened by the prompt only slightly) — builder text unchanged. Uploaded t1-a51 refs (Magnific ids): c09 tCRvzslmZJ, c10 79fykPFJAL, c11 dt4oWODXSL.
-## Handover (next: c12, then c13–c16)
+| c12 t8 v0/v1/v2, t7 v0/v1/v2 | 6 | yes |
+Notes: c09 t7 v0 robe is pale lavender-grey (her original colour, deepened by the prompt only slightly) — builder text unchanged. Uploaded t1-a51 refs (Magnific ids): c09 tCRvzslmZJ, c10 79fykPFJAL, c11 dt4oWODXSL, c12 79fygtPJAL.
+## Handover (W92 stops after c12 at the rollover; NEXT = c13, then c14, c15, c16)
 Work dir /home/user/wt/w92work (finish.py cNN t8_v0=URL … does download+sheet+cdn_sync; needs /home/user/wt/w92-cdn = sparse worktree of origin/main with dev/site/cdn_sync.py). Workflow per person: upload ref (creations_upload_image of https://ctm-img.victoria-tntt.workers.dev/img/hd/fig-consort-cNN-t1-a51.webp, fileName fig-consort-cNN-t1-a51.png; c13 rgXL37zxtc and c05 If3hxHCtvE already uploaded on the old account), build 6 prompts, gen 4 then 2, look at each, bg-remove, finish.py, send READY.
