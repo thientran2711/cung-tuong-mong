@@ -90,4 +90,4 @@ style-ref test A/B/C c06 t1–t3 | CDN _review only | W79 session_011xDdVSouZw85
 | stage-here (opus UI: stage = where she is, every tab + closing alert; OD 19:45Z (5)) | review/stage-here | MAIN ROOT-54 | session_01Rc5AsK9y5NbRATifWtFqG7 | RUNNING | 18/11 19:33Z |
 | maid6-sample (sonnet SAMPLE: right column with 6 maids; OD 19:45Z (6)) | review/maid6-sample | MAIN ROOT-54 | session_01Rc5AsKdV3XxBzzwBixbNBN | RUNNING | 18/11 19:33Z |
 | errand-scene (sonnet UI/motion: maid walks off/on stage for every errand; OD 20:05Z) | review/errand-scene | MAIN ROOT-54 | session_01Rc5AsLfkFKRGnjiTepddVL | RUNNING | 18/11 19:38Z |
-parallel-time (ORDER ROOT-54 ~20:22Z + ADD ~20:37Z) | review/parallel-time | (opening) | RUNNING | 18/11 19:52Z | owner D #3
+parallel-time (ORDER ROOT-54 ~20:22Z + ADD ~20:37Z) | review/parallel-time | session_01964izEDFWH8uK569yeSGJt | RUNNING | 18/11 19:52Z | owner D #3
