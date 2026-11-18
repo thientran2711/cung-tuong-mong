@@ -142,3 +142,15 @@ nrask-m-scan keeps its own copy (q1c's file); the shared rule is a superset.
 ### Tests (90796d3, built)
 nrask-scan ALL PASS (192 asks) · nrask-engine ALL PASS (7c 21 chapters, 504 draws) · quickcheck PASS · core gates PASS · old save ok · perf new/live render 188/209, tab 430/435, buổi 1139/952 ms.
 Not done (Foreman E's call, reviewer notes B/C): render-time re-check of the queen filter in nrAskOf; nrPickRoad dealing tt_mat to the queen NPC.
+
+## Fix 4 (E7a2, 18/11) — review/questline-q1a @ a77e7cb0dc6fb8261704ec7cb16460110da757a6
+PRIORITY #1 CHECK ('questline-q1|TIME|nrask-scan'): OD 0 | main none | review/* q1a (this), q1b 7f12b48c, q1c 154506f | claims E7a2, E7b, E7c2
+Branch rebuilt on origin/main 36e574f (newest at push), 8 q1a commits + this one (cherry-picks clean).
+1. tt_co_10#1: «…trước khi cửa cung đóng» → «Lá thư này phải ra khỏi cung trước buổi triều ấy.»; label «…trước giờ đóng cửa cung» → «Sai thái giám của mình mang thư ra khỏi cung».
+2. nrask-scan TIME widened: (sáng|trưa|chiều|tối|đêm|ngày|hôm) (mai|mốt|kia), (sáng|trưa|chiều|tối|đêm) nay, mai mốt, (tuần|tháng|năm) (sau|tới), sang năm, từ chiều, từ trưa, giờ đóng cửa, cửa cung đóng, kiệu sắp đến, canh một…năm, (trước|đến|tới|kịp|ngay) giờ Tý…Hợi. Kept on purpose (not deadlines): bare «trước giờ ấy» (= before an event, q1b nc_gian_10) and «hay đi qua cổng tây vào giờ Thân» (a habit, q1c gd_tinh_8, PASSED data).
+| tree | old jnrask.js + new rule | after |
+|---|---|---|
+| q1a | FAIL tt_co_10#1 (cửa cung đóng, giờ đóng cửa) | ALL PASS |
+| q1a + q1c 154506f | — | ALL PASS |
+| + q1b 7f12b48c | — | 3 FAIL = E7b's: td_ke_9#0 «chiều mai», cnv_mat_8#0/#1 «Kiệu sắp đến» |
+Tests: nrask-scan ALL PASS · nrask-engine ALL PASS · quickcheck PASS (2nd run; 1st run had the same G3 «tutorial 0 intro pages» float flake as in Fix 2) · perf new/live render 215/221, tab 459/468, buổi 895/1123 ms.
