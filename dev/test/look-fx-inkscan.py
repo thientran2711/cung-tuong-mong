@@ -84,7 +84,7 @@ _C = {}
 def measure(k, P_list):
     r = KF[k]
     if _C.get('k') != k: sq = square(k); _C.update(k=k, v=(skin(sq), facemask(k), keepvis(keep(r)), eyetruth(r), mirrored(k)))   # per-picture masks cached (the --fit search calls this ~500 times per picture)
-    sk, fm, kv, et, mir = _C['v']; out = []
+    sk, fm, kv, et, mir = _C["v"]; fm = 1.0 if os.environ.get("NOFACE") else fm; out = []
     for P in P_list:
         res = []
         for n in (1, 2, 3):
