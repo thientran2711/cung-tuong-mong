@@ -1,0 +1,11 @@
+PRIORITY #1 CHECK: OD 18/11 ~06:45Z (full-body frame redo, verbatim) + 17/11 03:12Z/03:14Z (book column) + 18/11 ~05:45Z (cut rule, now OVERWRITTEN) | main dev/build/jsl.js:111 kitBookFigClamp, j87.js:586 .kbk-por overflow, KIT §56.3 / §34.6 | review/* review/book-figsize-r5 ce8a6d48 (BAL.bookFigW, crop rule = superseded), c12-ingame W29 note | claims book-figsize r5 SzkhyYuitpjvm16Zn3P
+
+# fullbody-frame step 1 — Tuần lục sample (MAIN ROOT-47; worker = book-figsize SzkhyYu, same code area start to finish)
+Read dev/handover/briefs/root47-common.md first (rules, KIT FIRST, devices, report format).
+OWNER WORDS (verbatim, OD 18/11 ~06:45Z) — read the full line in dev/OWNER_DECISIONS.md.
+GOAL: the new approved figure canvas (c03 a18 t1..t8, 1520x2688 transparent, https://ctm-img.victoria-tntt.workers.dev/img/_review/consort-tiers/c03/b8/c03_a18_t{1..8}.png; *_prev.png = rejected, ignore) must sit in the Tuần lục person page EXACTLY: whole figure visible (crown, both hands, sleeves, full skirt/hem, feet), NOTHING cut, never squeezed (aspect kept). Change the LAYOUT of the page (figure column width/height, text column, margins) so the frame = this canvas shape (1520:2688 ≈ 0.5655) at the largest size that fits; the text column adapts. The 'wide robes CUT at the column edge' rule (r5c) is OVERWRITTEN by the owner — do not crop.
+STEP 1 ONLY: Tuần lục (and the pages that share its clamp: Mệnh truyện, Sổ luân hồi follow automatically if same kit part — say so). Do NOT touch the other frames yet (notices/info/tin trong cung = step 2 after her OK).
+Keep in mind old live figures (≈64 % not redrawn, other canvases): show what one of them looks like in the new frame too (no cut, no squeeze).
+BRANCH: review/fullbody-frame (from latest origin/main 1c3abe3; you may reuse code from review/book-figsize-r5 where it still fits, e.g. the seal slot in the name row).
+SHOTS for the owner (LOOK 3x each first, full screen, real kitBook renderer): Fold 755x1000@2 + iPad 1180x820@2 × c03 t1 (lowest rank) + c03 t8 (widest/highest) + one old live wide figure; before|after. Upload to img/_review/fullbody-frame/ and send ROOT-47 the URLs + measured numbers (frame w×h, figure w×h, text column width, anything cut = must be 0).
+No go-live, no review yet: owner looks first. Report dev/handover/reports/fullbody-frame.md (handover branch). Rollover per root47-common.
