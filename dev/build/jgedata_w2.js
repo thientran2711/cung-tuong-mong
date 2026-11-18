@@ -395,7 +395,7 @@ Object.assign(GE_DATA,{
    fail:"Cổng thành đóng chặt",ft:"Đêm ấy cổng không mở. Em ngươi bị bắt cùng mấy người lính, và tờ chiếu kết tội có nhắc cả tên ngươi."},
   {pull:["Gửi kịp áo bông và bạc","Gửi ngay thuốc trị thương","Bắt người hát vè","Gửi bạc ra biên lo cho em","Cho em trốn đi xa","Xin cho em vào chùa tu","Dặn em sống kín, đừng khoe công","Nhờ lái buôn đưa em đổi doanh","Lặng lẽ đưa em sang doanh khác","Đọc xong thì đốt","Gửi thư qua lái buôn kèm hàng","Viết thư bằng thơ","Báo em lánh đi vài ngày","Dặn em đừng gặp ai riêng","Dặn em xin về đội đồn điền","Giữ tên Tiểu Thạch","Đưa em vào Nam, xa hẳn nhà {foed}","Hỏi em muốn gì","Đi gặp em",
     /* ác side (ha: chị em lục lâm) */"Mua lại miệng hắn","Mua tay hắn","Tung một bài vè khác"],
-   close:["Quỳ nhận em, dâng hết công trận","Thưa: xin cho y về cấm quân","Họ cha, nhờ công trận"],
+   close:["Quỳ nhận em, dâng hết công trận","Thưa: xin cho y về cấm quân","Họ cha, nhờ công trận","Dâng bản ghi công của em"],
    cond:[["s","duc"],["s","maid"]],fo:[],
    cw:"cần Đức dày và người hầu tin cẩn lo đường cho hai chị em",
    t:"Ngươi rời cung, em rời quân, hai chị em gặp nhau ở một bến sông phía nam. Không họ, không công trận, không ai đuổi theo. Hai người theo thuyền buôn đi khắp các bến, và mỗi năm ngày giỗ cha mẹ, lại thả một ngọn đèn hoa xuống dòng nước.",
