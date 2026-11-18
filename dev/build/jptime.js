@@ -253,7 +253,7 @@ function ptErrCard(){if(!isSrv()||!S.srv)return null;const er=S.srv.err;if(!er||
  return{t:`<p>${m.name} sai ngươi: ${er.n}.</p><p class="past">Việc vô hại, không có gì để mách lẻo.</p>`,who:pv(m),o:[
   {n:"Giúp hết lòng",fx:{},x:ptRecvRow(kind,null,`công lao +${X}${nv}`,""),go:()=>ptErrGo(er,kind,null,0)},
   {n:"Giúp qua loa",fx:{tin:-P.errHalfTin},x:ptRecvRow(kind,null,`công lao +${X}${nv}`,"",ptHalfN(kind)),go:()=>ptErrGo(er,kind,ptHalfN(kind),1)},
-  {n:"Từ chối",fx:{tin:-P.errRefuse},x:`không tốn khắc · Chủ tin -${P.errRefuse}`,go:()=>{er.none=1;log(`Ngươi thoái thác việc ${m.name} sai.`)}}]}}
+  {n:"Từ chối",fx:{tin:-P.errRefuse},x:"không tốn khắc",go:()=>{er.none=1;log(`Ngươi thoái thác việc ${m.name} sai.`)}}]}}
 function ptErrFrame(){if(!ptOn()||!isSrv()||!S.srv||S.dead)return false;const er=S.srv.err;if(!er||er.none||er.acc||er.pop)return false;const m=srvM();if(!m)return false;er.pop=1;return !!ptOrdAdd("err",{},"Việc chủ sai",m)}
 (function(){try{if(typeof srvCards!=="function")return;const s0=srvCards;srvCards=function(){const X=s0.apply(this,arguments);try{if(ptOn()&&S.srv&&S.srv.err&&!S.srv.err.none&&!S.srv.err.acc){ptErrFrame();
    /* the Phận sự card opens the same answer card (one path) */const c=Array.isArray(X)&&X.find(x=>x&&x.n==="Việc chủ sai");if(c){c.k=0;c.x="trả lời lệnh chủ: giúp hết lòng · giúp qua loa · từ chối";c.go=()=>{const o=ptOrdQ().find(z=>z.pid==="err")||ptOrdAdd("err",{},"Việc chủ sai",srvM());if(o)setTimeout(()=>ptOrdOpen(o),0)}}}}catch(e){ptErr("srvCards",e)}return X}}catch(e){ptErr("srvCards wire",e)}})();
