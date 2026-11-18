@@ -48,7 +48,7 @@ const [,,URL,NL,NM]=process.argv;const NLIV=+NL||2,MON=+NM||120;
    if(e.g==='men'&&riv){x.bk='man';x.bi=riv.id}else if(e.g==='off'&&riv){x.bk='off';x.bi=riv}else{const v=liveRivals(false)[0];if(v){x.bk='rv';x.bi=v.id}}
    x.p={nr:e.p.nr.r,nn:e.p.nr.n};const q=q72();q.a.push(x);const X=q72X(x);const title=plain(q72Title(X));const intro=plain(typeof X.T.h==='function'?X.T.h(X):X.T.h);
    let tries=0;while(q.a.includes(x)&&tries++<12){used=0;S.suc=90;q72Do(x.u,oi)}
-   out.push({tid,k:e.a[0],vg:e.p.role==='Vương gia',oi,title,intro,hb:e.p.nr.hb,done:!q.a.includes(x),hist:q.h[0]&&q.h[0].res})}
+   out.push({tid,k:e.a[0],vg:e.p.role==='Vương gia',gd:e.p.role==='Thị vệ',oi,title,intro,hb:e.p.nr.hb,done:!q.a.includes(x),hist:q.h[0]&&q.h[0].res})}
   let hz=null;try{const v=liveRivals(false)[0];const kd=mkKid('m',nrB().men.kidAge);v.kids=v.kids||[];v.kids.push(kd);const e=nrMenL().find(z=>z.p===kd);
    if(e){nrMenInit(e);const f0=[kd.fond,kd.tal,kd.hp];for(let i=0;i<8;i++){kd.nr.t=0;nrMenMonth(0)}hz={r:kd.nr.r,k:NRM[kd.nr.r]&&NRM[kd.nr.r].k,l:kd.nr.l,x:kd.nr.x,f0,f1:[kd.fond,kd.tal,kd.hp]}}else hz={err:'no entry'}}catch(x){hz={err:x.message}}
   let card='';try{const m=(S.men||[]).find(m=>m.id!=='m96');nrMenInit(L.find(e=>e.p===m));m.nr.l=[[4,1]];m.nr.e='x';try{k61Know([m],'meet',true,3)}catch(e){}card=manCard(m)}catch(e){card='ERR '+e.message}
@@ -60,7 +60,7 @@ const [,,URL,NL,NM]=process.argv;const NLIV=+NL||2,MON=+NM||120;
   const G=H.goi.charAt(0).toUpperCase()+H.goi.slice(1);
   chk('men help: every quest made',H.out.length>0&&H.out.every(z=>!z.err),H.out.filter(z=>z.err));
   chk('men help: title names him, road and chapter',H.out.every(z=>/: «.+» · Chương \d+ «.+»/.test(z.title)),H.out.map(z=>z.title));
-  chk('men help: voice thần / nô tài / bản vương + '+G+', never tỷ/muội/nô tỳ',H.out.every(z=>(z.k==='eun'||z.k==='ksp'?/nô tài|Nô tài/:z.vg?/bản vương|Bản vương/:/thần|Thần/).test(z.intro)&&z.intro.includes(G)&&!/tỷ tỷ|muội muội|nô tỳ/i.test(z.intro)),H.out.map(z=>[z.k,z.intro]));
+  chk('men help: voice by VANPHONG §2 (vi thần / Thị vệ + thái giám nô tài / bản vương) + '+G+', never tỷ/muội/nô tỳ',H.out.every(z=>(z.k==='eun'||z.k==='ksp'||z.gd?/nô tài|Nô tài/:z.vg?/bản vương|Bản vương/:/vi thần|Vi thần/).test(z.intro)&&z.intro.includes(G)&&!/tỷ tỷ|muội muội|nô tỳ/i.test(z.intro)),H.out.map(z=>[z.k,z.intro]));
   chk('men help: option 0 feeds his chapter or fails honestly',H.out.filter(z=>z.oi===0).every(z=>z.done&&(z.hb>0||z.hist==='fail')),H.out.filter(z=>z.oi===0));
   chk('men help: betrayal makes his chapter harder',H.out.filter(z=>z.oi===2).every(z=>z.done&&(z.hb<0&&z.hist==='bad'||!z.title)),H.out.filter(z=>z.oi===2&&!(z.hb<0)));
   console.log('  prince:',JSON.stringify(H.hz));
