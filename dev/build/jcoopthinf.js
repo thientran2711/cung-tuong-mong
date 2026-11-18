@@ -82,7 +82,8 @@ let loaded="";
 TH.onDo("f",(a,m)=>{a=a||{};const id=m&&m.id;if(loaded!==LSK()){DONE.clear();doneLoad();loaded=LSK()}
  if(id&&DONE.has(id)){F.stat.dup++;lg(["dup",a.n,id]);return DONE.get(id)}
  const R=F.R[a.n];if(!R||!on(R.lv)){return {st:"off"}}
- if(Array.isArray(a.ops)&&a.ops.length){TH.pApply(S,a.ops);try{D.rebase()}catch(e){}}
+ if(Array.isArray(a.ops))a.ops=a.ops.filter(o=>!(Array.isArray(o[1])&&E.BAD&&E.BAD.has(o[1][0])));/* belt: her diff never writes a host-owned key (buoi, origin, thq …) */
+ if(Array.isArray(a.ops)&&a.ops.length){lg(["ops",a.n,a.ops.slice(0,16).map(o=>String(o[0])+(Array.isArray(o[1])?o[1].map(x=>typeof x==="object"?"#":x).join("."):"")+(typeof o[2]==="number"||typeof o[2]==="string"?"="+String(o[2]).slice(0,12):""))]);TH.pApply(S,a.ops);try{D.rebase()}catch(e){}}
  let out={st:"ok"};const keep=[];
  try{for(const [n,g,s] of R.ctx||[]){keep.push([s,g()]);s(n in (a.c||{})?a.c[n]:null)}
   const args=R.dec(a.a);if(!args){out={st:"gone"}}
@@ -95,8 +96,14 @@ TH.onDo("f",(a,m)=>{a=a||{};const id=m&&m.id;if(loaded!==LSK()){DONE.clear();don
  lg(["run",a.n,out.st]);if(id){DONE.set(id,out);doneSave()}return out});
 
 /* ---------- the wrapper ---------- */
+/* F2 (whole family, F1 too): her phone reconnected and the room's level is not back yet (TH.lvl 0 until the server's "thin" answer): a tap
+   in that gap must not take the old road (her walk / act run on her phone, then thrown away by the host's next view = a lost or doubled
+   tap). It is refused with the existing linking words (the same gap #next is locked in, jcoopworld lockNext). */
+const gap=lv=>!host()&&!!CW.on&&(CW.lvWas|0)>=(lv||LV)&&!on(lv);
+const gapWord=()=>{try{return (typeof CTM_WAIT==="object"&&CTM_WAIT.coopLinking)||"Đang nối…"}catch(e){return "Đang nối…"}};
 F.reg=function(name,R){const f=window[name];if(typeof f!=="function"||F.R[name])return false;F.R[name]=R;PRE[name]=f;
- window[name]=function(){if(!on(R.lv)||host())return f.apply(this,arguments);
+ window[name]=function(){if(gap(R.lv)&&(!R.lv||R.mine(arguments))){F.stat.gap=(F.stat.gap|0)+1;lg(["gap",name]);line(gapWord());return R.ret!==undefined?R.ret:""}
+  if(!on(R.lv)||host())return f.apply(this,arguments);
   if(!R.lv&&!R.mine(arguments))return f.apply(this,arguments);/* F1 order kept */
   if(!gOn(R.lv)){F.stat.local++;return f.apply(this,arguments)}
   if(R.lv&&!R.mine(arguments)){F.stat.gate=(F.stat.gate|0)+1;return f.apply(this,arguments)}/* F2: a decision card first (local, read-only) */

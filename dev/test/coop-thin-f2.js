@@ -93,7 +93,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   if(gate){/* the host's palace has a greeting / access card first: pass it the solo way (her own grant), the visit is then the intent */await G.p.evaluate(k=>{accGrant(S,k)},kH)}
   const row=await walk('visitPal',hid,'P2 guest→host');await sleep(1200);
   /* the host walks to the same place (his own engine, local): his people list reads her where = her stored place (one source, no pos) */
-  await H.p.evaluate(k=>{const m=k===palaceOf(S)?'home':k;try{accGrant(S,m)}catch(e){}used=0;if(S.place!==m)goTo(m);Q.length=0;try{closeModal()}catch(e){}render()},row.g1.place);await sleep(800);
+  await H.p.evaluate(k=>{const m=k===palaceOf(S)||k==='r901'?'home':k;try{accGrant(S,m)}catch(e){}used=0;if(S.place!==m)goTo(m);Q.length=0;try{closeModal()}catch(e){}render()},row.g1.place);await sleep(800);
   const hs=await H.p.evaluate(()=>{const f=COOPW.friend();return {sees:(S.visit&&S.visit.people||[]).some(p=>p.ref===f),hp:S.place,fw:S.where&&S.where[f.id]}});
   ok(row.got&&row.ran===1&&row.r.local===0&&row.g1.place===kH&&row.h1.place===kH,'P2 guest→host: her visit to the host\'s palace ran once on the host; she is there on both phones',{row,kH,gate});
   ok(hs.sees,'P2 the host at the same place sees her (his stage, his where of her = her stored place)',hs)}
@@ -133,7 +133,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  for(const [fn,pickSrc,chk] of [
   ['scout',"(S.seenLoc={},0)||rivals.find(v=>v&&!v.coop&&v.alive&&!v.out&&!locKnown(v)&&!together(S,v))",'g1.used===g0.used+1'],
   ['invite',"rivals.find(v=>v&&!v.coop&&v.alive&&!v.out&&!sameHouse(S,v))",'g1.used===g0.used+1&&g1.inv===arg'],
-  ['accAsk',"(()=>{for(const x of places()){try{const st=accState(x.k);if(st&&st.ask&&!st.empAway&&!st.here)return x.k}catch(e){}}return null})()",'g1.used===g0.used+1&&g1.cards>g0.cards']]){
+  ['accAsk',"(()=>{for(const x of places()){try{const st=accState(x.k);if(st&&st.ask&&st.askOk&&!st.empAway&&!st.here)return x.k}catch(e){}}return null})()",'g1.used===g0.used+1&&g1.cards>g0.cards']]){
   await reset();await G.p.evaluate(()=>{used=0;render()});await sync();
   const arg=await G.p.evaluate(src=>{const v=(0,eval)(src);return v==null?null:typeof v==='object'?v.id:v},pickSrc);
   if(arg==null){ok(true,'P5 '+fn+': no target in this world (skipped)');continue}
@@ -141,8 +141,36 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   const g0=await st();const run0=await H.p.evaluate(()=>COOPW.thin.F.stat.run);
   const r=await G.p.evaluate(([fn,arg])=>{Q.length=0;try{closeModal()}catch(e){}const F=COOPW.thin.F,s0=F.stat.sent,l0=F.stat.local;const u0=used;window[fn](arg);return {sent:F.stat.sent-s0,local:F.stat.local-l0,pend:!!F.pend,id:F.pend&&F.pend.id,usedNow:used===u0}},[fn,arg]);
   const got=r.id?await until(G,id=>!COOPW.thin.F.pend&&COOPW.thin.F.lastAns&&COOPW.thin.F.lastAns.id===id,r.id,15000):false;await sleep(600);await sync();
-  const g1=await st();const run1=await H.p.evaluate(()=>COOPW.thin.F.stat.run);const good=r.sent===1&&r.local===0&&r.pend&&r.usedNow&&got&&run1===run0+1&&(0,eval)('(g0,g1,arg)=>'+chk)(g0,g1,arg);
-  table.push({P5:fn,arg,r,got,g0,g1});ok(good,'P5 '+fn+' from the guest: an intent, run once on the host, its khắc / result reach her phone',{arg,r,got,g0,g1,ran:run1-run0})}
+  const g1=await st();const run1=await H.p.evaluate(()=>COOPW.thin.F.stat.run);
+  const dbg=fn==='accAsk'?{g:await G.p.evaluate(k=>{const st=accState(k);return {ask:st.ask,away:st.empAway,can:can(1),Q:Q.length,emp:S.where&&S.where.emp,b:S.buoi}},arg),h:await H.p.evaluate(k=>COOPW.thin.withSeat('b',()=>{const st=accState(k);return {ask:st.ask,away:st.empAway,can:can(1),Q:Q.length,emp:S.where&&S.where.emp,b:S.buoi,used}}),arg)}:null;const good=r.sent===1&&r.local===0&&r.pend&&r.usedNow&&got&&run1===run0+1&&(0,eval)('(g0,g1,arg)=>'+chk)(g0,g1,arg);
+  table.push({P5:fn,arg,r,got,g0,g1});ok(good,'P5 '+fn+' from the guest: an intent, run once on the host, its khắc / result reach her phone',{arg,r,got,g0,g1,ran:run1-run0,dbg,fl:got?null:{g:await G.p.evaluate(()=>COOPW.thin.F.log.slice(-6)),h:await H.p.evaluate(()=>COOPW.thin.F.log.slice(-6))}})}
+ /* P6: a real map tap (Dư đồ tab, j77Tap): pending at once, no place card while pending, arrival switches her to the act tab (j38, via ctx
+    back) and the HOST's tab stays his own */
+ await reset();if(await G.p.evaluate(()=>S.place!=='home'))await walk('goTo','home','home');
+ {await H.p.evaluate(()=>{tab='go';render()});await G.p.evaluate(()=>{used=0;tab='go';render()});await sync();
+  const k=await G.p.evaluate(()=>{for(const x of places()){try{if(x.k!=='home'&&!accState(x.k).why&&walkOk(travel(S.place,x.k)))return x.k}catch(e){}}return null});
+  const r=await G.p.evaluate(k=>{const F=COOPW.thin.F,s0=F.stat.sent;Q.length=0;j77Tap(k,'');return {sent:F.stat.sent-s0,pend:!!F.pend,id:F.pend&&F.pend.id,Q:Q.length,tab}},k);
+  const got=r.id?await until(G,id=>!COOPW.thin.F.pend&&COOPW.thin.F.lastAns&&COOPW.thin.F.lastAns.id===id,r.id,15000):false;await sleep(400);
+  const g=await G.p.evaluate(()=>({place:S.place,tab,Q:Q.length}));const ht=await H.p.evaluate(()=>tab);
+  ok(!!k&&r.sent===1&&r.pend&&r.Q===0&&r.tab==='go'&&got&&g.place===k&&g.tab==='act'&&ht==='go','P6 a real map tap: intent, no card while pending, she arrives and her phone turns to the act tab; the host\'s tab stays his',{k,r,got,g,hostTab:ht});
+  await H.p.evaluate(()=>{tab='act';render()})}
+ /* P7: walk spill (a walk longer than the khắc left: pay now, the buổi turns, the rest is paid in the new buổi on arrival): the khắc are
+    BAL.walk (travel), the arrival is an intent with her __walkSpill (the rest) in ctx */
+ await reset();if(await G.p.evaluate(()=>S.place!=='home'))await walk('goTo','home','home');
+ {const k=await G.p.evaluate(()=>{if((S.buoi||0)>=B4L)return null;for(const x of places()){try{if(x.k==='home'||accState(x.k).why)continue;const tc=travel(S.place,x.k);if(tc>=2){used=BAL.time.khac-1;const P=walkSpill(x.k);used=0;if(P&&P.ok)return x.k}}catch(e){}}return null});
+  if(!k)ok(true,'P7 walk spill: no buổi left today / no far open place (skipped)');
+  else{const b0=await G.p.evaluate(()=>S.buoi||0);const r=await G.p.evaluate(k=>{used=BAL.time.khac-1;const tc=travel(S.place,k);const P=walkSpill(k);walkGo(k);return {tc,now:P.now,rest:P.rest,ws:!!window.__walkSpill,used}},k);
+   /* the room turns the buổi: the host presses too */
+   const t0=Date.now();while(Date.now()-t0<40000){await press1(H);await clear(H);await clear(G)/* a new-buổi card on her phone: she taps it, the walk goes on (solo too) */;await sleep(600);if(await G.p.evaluate(([k,b])=>(S.buoi||0)===b+1&&S.place===k&&!COOPW.thin.F.pend,[k,b0]))break}
+   await sleep(800);await sync();const g=await G.p.evaluate(()=>({place:S.place,buoi:S.buoi||0,used,ws:!!window.__walkSpill}));const h=await herPl();
+   const fl=await G.p.evaluate(()=>({HF:null,F:COOPW.thin.F.log.slice(-6),A:COOPW.thin.F.lastAns,E:(COOPW.thin.E.log||[]).slice(-8)}));fl.HF=await H.p.evaluate(()=>COOPW.thin.F.log.slice(-6));ok(g.place===k&&h.place===k&&g.buoi===b0+1&&g.used===r.rest&&!g.ws,'P7 walk spill: she pays what is left, the buổi turns, she arrives in the new buổi on both phones having paid the rest (khắc = travel())',{k,r,g,h,fl})}}
+ /* P9: the reconnect gap (her level back to 0 until the server's thin answer): a walk tap takes no road (not run here, not sent), the
+    linking word shows; once the level is back the same tap is an intent again */
+ await reset();
+ {const r=await G.p.evaluate(()=>{const TH=COOPW.thin,F=TH.F;const lv=TH.lvl,was=COOPW.lvWas;COOPW.lvWas=Math.max(was|0,lv);TH.lvl=0;const g0=F.stat.gap|0,s0=F.stat.sent,l0=F.stat.local,p0=S.place,u0=used;
+   Q.length=0;const k=places().map(x=>x.k).find(k=>{try{return k!==S.place&&k!=='home'&&accessOf(S,k).ok&&!accEtq(S,k)}catch(e){return false}});let out;try{goTo(k)}finally{TH.lvl=lv;COOPW.lvWas=was}
+   return {k,gap:(F.stat.gap|0)-g0,sent:F.stat.sent-s0,local:F.stat.local-l0,same:S.place===p0&&used===u0}});
+  ok(r.gap===1&&r.sent===0&&r.local===0&&r.same,'P9 reconnect gap: a walk tap takes no road (not run on her phone, not sent), the linking word shows',r)}
  await G.p.evaluate(()=>{if('__etqHH' in window)ACC_ETQ.hostHome=window.__etqHH});
  /* latency */
  {const ms=table.filter(x=>x&&typeof x.ms==='number').map(x=>x.ms).sort((a,b)=>a-b);if(ms.length)console.log('LATENCY tap→arrival ms (LAG '+(+process.env.LAG||0)+', host CPU ×'+(+process.env.CPU||1)+'): n='+ms.length+' median='+ms[ms.length>>1]+' min='+ms[0]+' max='+ms[ms.length-1])}

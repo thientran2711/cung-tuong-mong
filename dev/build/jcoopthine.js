@@ -58,7 +58,12 @@ E.base=function(V){const o=V&&V.o;const mx=o?Math.max(0,...(o.pq||[]).map(x=>x.n
  if(!E.bs||done&&(S.thpn||0)>=mx){const P=o&&o.P&&o.P[CW.seat];if(P){const b=J(P);for(const k of BAD)delete b[k];for(const k of X.W_KEYS)delete b[k];E.bs=b;E.pn=mx}}
  return E.bs||{}};
 E.sent=function(cur){E.bs=J(cur);E.pn=(S&&S.thpn)||0};
-COOP.on("thinview",V=>{try{if(!on()||host()||!E.bs||!V||!V.o)return;const top=(S&&S.thpn)||0;for(const x of V.o.pq||[])if(x.n>E.pn&&x.n<=top){TH.pApply(E.bs,x.p);E.pn=x.n}}catch(e){console.error("thin E base",e)}});
+COOP.on("thinview",V=>{try{if(!on()||host()||!E.bs||!V||!V.o)return;const top=(S&&S.thpn)||0;for(const x of V.o.pq||[])if(x.n>E.pn&&x.n<=top){TH.pApply(E.bs,x.p);E.pn=x.n}
+ /* F2 (found by coop-thin-f2 P7): the host's patch carries her buổi ("=" buoi) — her base must never hold a BAD key, else her next diff
+    (an intent or a ready) says ["-",["buoi"]] and the host deletes her stored buổi before running it (her walk spill paid full price; an act
+    reading S.buoi saw buổi 0) — same family as the "-origin" crash of E8 */
+ for(const k of BAD)delete E.bs[k]}catch(e){console.error("thin E base",e)}});
+E.BAD=BAD;
 {const ds=TH.doSend;TH.doSend=function(op){const id=ds.apply(this,arguments);if(id&&!host()){E.last=id;if(op==="erd"||op==="ready"){EID.push(id);if(EID.length>20)EID.shift()}}return id}}
 /* review coop-thin-f1 r1 #2 (net): her ready on a socket that died. A phone's socket can look open while it is dead (4G, sleep): her erd +
    ready sent on it are lost, the socket then closes and COOP reconnects, and nobody sent them again: the host waited for her, her #next
