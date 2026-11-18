@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"48ed79db+","t":"2026-11-18T02:41Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…","b":"cf7662fb89dd","h":[{"s":"29385ec6+","t":"2026-11-18T02:07Z","c":"greet-stranger: site rebuilt"},{"s":"3b69182e","t":"2026-11-18T01:50Z","c":"hoa-dien r3 onto main 3da5720a (makeup-lux live): hoa-dien (jhd.js + hooks) replayed on the new main, replacing the old stacked branch. Sha…"},{"s":"631a703e","t":"2026-11-18T01:37Z","c":"review staff-cap-fix r6: hire pick refused at the cap gives the silver back (+ staff-cap.js case); site rebuilt"},{"s":"4cdcffa9+","t":"2026-11-18T00:44Z","c":"review looks-s40: site rebuilt from merged sources (glow v8)"},{"s":"eb3675a6+","t":"2026-11-17T22:59Z","c":"review coop-thin-c r1 #2: merge origin/main b048e495 (kit-display-room r2, jdisp/jshelf only; generated files from main + site rebuilt)"},{"s":"4eac30bc+","t":"2026-11-17T22:57Z","c":"review coop-thin-c r1 #2: her NPC pack resend (F1) listens on any guest seat, not only while the C switch is on: a level drop / build hold …"},{"s":"c7375c0c+","t":"2026-11-17T22:33Z","c":"batch s38a: dudo-blank-r1 2270c4c5 merged onto main 99f3978d; site rebuilt"},{"s":"99f3978d+","t":"2026-11-17T21:07Z","c":"batch s37a: display-shelf-r3rv 41418cd8 merged onto main 4c8568f5; site rebuilt"},{"s":"4c8568f5+","t":"2026-11-17T20:30Z","c":"batch s36a: main 60b0e3bf (display-shelf) merged; jdisp gated on BAL.shelf.ui (=0, room hidden); site rebuilt"},{"s":"da86e866","t":"2026-11-17T20:29Z","c":"Thẻ hành sự chia hai khối THÀNH và BẠI cho rõ được mất; khung dài có chữ \"Kéo xuống\" nhắc còn nữa; thẻ người chỉ ghi tước vị một lần, không…"}]};
+window.CTM_BI={"s":"095fde74+","t":"2026-11-18T03:37Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…","b":"0ae7320ae221","h":[{"s":"c743265c+","t":"2026-11-18T03:18Z","c":"review life-preload r6: title prefetch chained on undefined (lWant returns its promise); gate cap really 25 s (no re-run after cap / Vào cu…"},{"s":"2aca2aac+","t":"2026-11-18T03:17Z","c":"review cloth-tea-r6: kclo-on hides the picture by clip-path, not visibility (visibility:hidden made kfxGeom hide the cloth layer too: her f…"},{"s":"2b1b0701","t":"2026-11-18T03:00Z","c":"review staff-cap-apply r6: site rebuilt on db24027f"},{"s":"64488e4f+","t":"2026-11-18T02:38Z","c":"cloth-xoc r6e: rebuild site"},{"s":"af71f94a+","t":"2026-11-18T02:17Z","c":"smudge r16: stage4 + avatar probe tests, options script score fix (look tier by score), FINAL mode"},{"s":"e1f60927+","t":"2026-11-18T02:25Z","c":"result-reason: every result card line says a short why (kitWhy, KIT 7); values left-aligned next to labels"},{"s":"29385ec6+","t":"2026-11-18T02:07Z","c":"greet-stranger: site rebuilt"},{"s":"3b69182e","t":"2026-11-18T01:50Z","c":"hoa-dien r3 onto main 3da5720a (makeup-lux live): hoa-dien (jhd.js + hooks) replayed on the new main, replacing the old stacked branch. Sha…"},{"s":"631a703e","t":"2026-11-18T01:37Z","c":"review staff-cap-fix r6: hire pick refused at the cap gives the silver back (+ staff-cap.js case); site rebuilt"},{"s":"4cdcffa9+","t":"2026-11-18T00:44Z","c":"review looks-s40: site rebuilt from merged sources (glow v8)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -46,6 +46,13 @@ window.CTM_WAIT=window.CTM_WAIT||{
  dlLeft:"Còn lại",
  dlLeftN:"còn {n} món",
  dlNone:"không còn",
+ /* life gate (jload.js, review/life-preload): the pictures of THIS life come in before she enters */
+ lifeHead:"Sửa soạn nhập cung",
+ lifeLabel:"Tranh người trong kiếp này",
+ lifeNote:"Đang thỉnh dung nhan những người ngươi sắp gặp, cảnh phòng và tranh việc đầu tiên. Xong là vào cung ngay.",
+ lifeSlow:"Đường xa chậm. Có thể vào cung ngay; tranh nào chưa về sẽ tới sau.",
+ lifeGo:"Vào cung ngay",
+ picWait:"Đang thỉnh tranh…",
  /* Sổ mây (jcloud.js) */
  cloudNet:"Chưa với tới mây; đường xa thông là tự gửi lại.",
  cloudBusy:"Đang gửi sổ đi, lấy sổ về…",
@@ -811,6 +818,13 @@ window.CTM_WAIT=window.CTM_WAIT||{
  dlLeft:"Còn lại",
  dlLeftN:"còn {n} món",
  dlNone:"không còn",
+ /* life gate (jload.js, review/life-preload): the pictures of THIS life come in before she enters */
+ lifeHead:"Sửa soạn nhập cung",
+ lifeLabel:"Tranh người trong kiếp này",
+ lifeNote:"Đang thỉnh dung nhan những người ngươi sắp gặp, cảnh phòng và tranh việc đầu tiên. Xong là vào cung ngay.",
+ lifeSlow:"Đường xa chậm. Có thể vào cung ngay; tranh nào chưa về sẽ tới sau.",
+ lifeGo:"Vào cung ngay",
+ picWait:"Đang thỉnh tranh…",
  /* Sổ mây (jcloud.js) */
  cloudNet:"Chưa với tới mây; đường xa thông là tự gửi lại.",
  cloudBusy:"Đang gửi sổ đi, lấy sổ về…",
@@ -3495,9 +3509,10 @@ A("trip","Ngáng chân",{c:{duc:-4},ok:(a,t)=>together(a,t),o:a=>odA(a,50+a.tamc
 const EUN=["Tiểu Lộ Tử","Tiểu Phúc Tử","Tiểu Thuận Tử","Tiểu An Tử","Tiểu Hỉ Tử","Tiểu Quế Tử","Tiểu Lâm Tử","Tiểu Đức Tử","Tiểu Thọ Tử","Tiểu Xuân Tử"];
 let sidN=0;
 /* ONE household table (owner 17/11 OD 02:50Z + 04:48Z, review/staff-root): BAL.promo.cap[rank] = [maids INCLUDING the personal (close) maid, eunuchs],
-   for her AND every NPC consort (two-way law); cold palace = the lowest row; Thái hậu = BAL.promo.capTh; a cung nữ (servant road) keeps no household.
+   for her AND every NPC consort (two-way law); cold palace = the lowest row; Thái hậu = BAL.promo.capTh; Nữ đế (succession path c) = BAL.promo.capNd; a cung nữ (servant road) keeps no household.
    hhHas(p) = the same count of what the household holds now: the personal maid (S.maid / an NPC's own maid) is the "+1", counted once, here only. */
 function capOf(p){const B=BAL.promo,C=B.cap;if(S&&p&&p===S.thO)return B.capTh.slice();if(p===S&&typeof isSrv==="function"&&isSrv())return C[0].map(()=>0);
+ if(p===S&&S.succ&&S.succ.p==="c"&&B.capNd)return B.capNd.slice();
  return C[p&&p.out?0:Math.max(0,Math.min(C.length-1,rkOf(p)||0))].slice()}
 function hhHas(p){const L=(p&&p.staff)||[];return[L.filter(s=>s.role==="maid").length+1,L.filter(s=>s.role==="eunuch").length]}
 function mkServ(role){const n=role==="maid"?(AV.maids||[]).length:0;const used=allServ().map(x=>x.name);const pool=(role==="maid"?MAIDS:EUN).filter(x=>!used.includes(x));
@@ -4244,7 +4259,8 @@ function bandKeys(kind,age){if(kind==="consort")return age<=35?["consort","womid
  return [kind]}
 const FAV={};
 /* jreg: pools added by later modules (man, ct1–5…) are probed too */
-regEach(FPOOL,(k,L)=>{for(const f of (L||[])){try{const im=new Image();im.onload=()=>{FAV[f]=1};im.onerror=()=>{FAV[f]=0};im.src="https://ctm-img.victoria-tntt.workers.dev/img/"+f+".webp"}catch(e){}}},"FPOOL probe");
+/* "@W<n>" (j25 CW) = AVATARS.women[n], an inline face, not a file: it is available at once (never probed as img/@W<n>.webp: 33× 404, review/life-preload) */
+regEach(FPOOL,(k,L)=>{for(const f of (L||[])){try{if(f[0]==="@"){FAV[f]=(f[1]==="W"&&(AV.women||[])[+f.slice(2)])?1:0;continue}const im=new Image();im.onload=()=>{FAV[f]=1};im.onerror=()=>{FAV[f]=0};im.src="https://ctm-img.victoria-tntt.workers.dev/img/"+f+".webp"}catch(e){}}},"FPOOL probe");
 function fsrc(fc,fb){if(!fc||FAV[fc]===0)return fb||"";return "https://ctm-img.victoria-tntt.workers.dev/img/"+fc+".webp"}
 function poolOf(role){const pre={eunuch:"eun",emperor:"emp",thaihau:"th",official:"off"}[role];return pre?Object.keys(FPOOL).filter(k=>k.startsWith(pre)&&/\d$/.test(k)).flatMap(k=>FPOOL[k]):FPOOL[role]||[]}
 function facesPresent(){const U=new Set();if(!S)return U;const add=o=>{if(o&&o.fc)U.add(o.fc)};add(S);add(S.maid);add(S.emp);if(S.thF)U.add(S.thF);(S.men||[]).forEach(m=>{if(m.alive)add(m)});
@@ -4254,9 +4270,24 @@ function drawF(kind,age){if(!S)return"";const keys=Array.isArray(kind)?kind:band
  return""}
 /* a person keeps a face while in one age band; on entering a new band they get a new face from that band's pool */
 function faceFor(o,kind,age){const k=bandKeys(kind,age)[0];if(o.fc==null||o.fk!==k){o.fc="";o.fc=drawF(kind,age);o.fk=k}}
-/* how many of a role may exist at once = the pool size (a consort pool counts the inline fallback portraits too) */
-function roomFor(role){if(!S)return true;const n=poolOf(role).filter(f=>FAV[f]!==0).length;const cap=role==="consort"?Math.max(n,(AV.women||[]).length):n;
- const cnt=role==="consort"?1+(rivals||[]).filter(v=>v.alive).length:role==="maid"?1+(typeof allServ==="function"?allServ().filter(s=>s.role==="maid").length:0):role==="eunuch"?(typeof allServ==="function"?allServ().filter(s=>s.role!=="maid").length:0)+3:0;
+/* how many of a role may exist at once (review/staff-cap-apply, owner OD 18/11 ~02:10Z: faces 52 / 30 / 8):
+   servants = the FIGURE identity pool (FIGIX, j39): women servants (cung nữ, ma ma) <= maid + mama identities, young cung nữ <= maid identities,
+   in both cases minus the maid / mama identities consorts wear (j88: a raised maid keeps hers); eunuchs (household + the court eunuchs) <= eunuch identities.
+   Before the manifests load, the face lists (FPOOL) stand in; never the old face-*.webp load probe (FAV), so missing old files never stop hiring.
+   Consorts: unchanged, the face pool as before (the consort ceiling is CAPC, j27). */
+function roomFor(role){if(!S)return true;
+ if(role==="maid"||role==="eunuch"){const IX=typeof FIGIX!=="undefined"&&FIGIX?FIGIX:{};const K=r=>Object.keys(IX[r]||{}).filter(k=>IX[r][k]&&IX[r][k].length);
+  const SV=typeof allServ==="function"?allServ():[];
+  if(role==="eunuch"){const pool=K("eunuch").length||poolOf("eunuch").length;const C=S.court||{};
+   const cnt=SV.filter(s=>s&&s.role!=="maid").length+["tq","ksp","ped"].filter(k=>C[k]).length;return cnt<pool}
+  const km=K("maid"),kk=K("mama");const own=new Set(km.concat(kk));
+  const worn=new Set();[S].concat((rivals||[]).filter(v=>v&&v.alive!==false)).forEach(v=>{if(!v)return;for(const f of [v.fid,v===S?S.pid:null])if(f&&own.has(f))worn.add(f)});
+  const wm=[...worn].filter(f=>/^maid:/.test(f)).length;
+  const W=SV.filter(s=>s&&s.role==="maid");const all=1+W.length,young=1+W.filter(s=>(s.age||18)<36&&!s.old).length;
+  if(!km.length)return all<(poolOf("maid").length+poolOf("mama").length);
+  return all<own.size-worn.size&&young<km.length-wm}
+ const n=poolOf(role).filter(f=>FAV[f]!==0).length;const cap=role==="consort"?Math.max(n,(AV.women||[]).length):n;
+ const cnt=role==="consort"?1+(rivals||[]).filter(v=>v.alive).length:0;
  return cnt<cap}
 function kidVar(k){const used=new Set(allKids().map(([x])=>x).filter(x=>x!==k&&x.alive&&x.sex===k.sex&&x.fv).map(x=>x.fv));const c=[1,2,3,4].filter(v=>!used.has(v));return c.length?pick(c):0}
 /* give every present person a face once; old saves get theirs here too */
@@ -5462,6 +5493,21 @@ function figPick(who){const roles=figRoles(who);if(!roles.length)return null;con
   const sc=k=>{const L=M[k];const b=figBest(L,tier,age);let s=-figDist(b,tier,age);if((S.men||[]).includes(who))s+=4*Math.max(...L.map(f=>figSubOk(who,f)));s+=3*Math.max(...L.map(f=>figLook(who,f)));return s};
   let best=-1e9;for(const k of free)best=Math.max(best,sc(k));const top=free.filter(k=>sc(k)>=best-.5);const k=pick(top);who.fid=k;figUsed().push(k);return k}
  return null}
+/* SERVANT FACES ARE FREED (review/staff-cap-apply, MAIN s42: faces ran out after ~52 maids over one life). A servant identity (maid / mama /
+   eunuch) belongs to a person while anyone in the game still holds her: when a servant needs a face and every identity of her group is taken,
+   figGC frees the servant identities no live person holds any more (sent away, dismissed, dead, married out — every removal path at once, no
+   per-path code). Held = any fid / pid / fromMaid value reachable from S and the consorts (households, the Thái hậu's women, the court, the
+   Nội vụ phủ candidates, records). Consort identities are never freed. The co-op guest never writes the face list (a host world key). */
+const FIG_SERV=["maid","mama","eunuch"];
+function figGC(){try{if(!S||(window.COOPW&&COOPW.on&&COOPW.seat==="b"))return 0;const U=figUsed();const sig=S.turn+"|"+U.length;if(figGC.sig===sig)return 0;
+ const held=new Set(),seen=new Set();const SKIP={fidUsed:1,fseen:1,usedFaces:1};
+ const walk=(o,d)=>{if(!o||typeof o!=="object"||seen.has(o)||d>40)return;seen.add(o);if(Array.isArray(o)){for(const x of o)walk(x,d+1);return}
+  for(const k in o){if(SKIP[k])continue;const v=o[k];if(typeof v==="string"){if(k==="fid"||k==="pid"||k==="fromMaid")held.add(v)}else if(v&&typeof v==="object")walk(v,d+1)}};
+ walk(S,0);walk(typeof rivals!=="undefined"?rivals:[],0);
+ const keep=U.filter(k=>!FIG_SERV.includes(String(k).split(":")[0])||held.has(k));const n=U.length-keep.length;
+ if(n){S.fidUsed=keep}figGC.sig=S.turn+"|"+S.fidUsed.length;return n}catch(e){console.error("figGC",e);return 0}}
+(function(){const p0=figPick;figPick=function(who){try{if(who&&!who.fid&&S&&who!==S){const roles=figRoles(who).map(norm).filter(r=>FIG_SERV.includes(r));
+  if(roles.length){const U=new Set(figUsed());if(!roles.some(r=>Object.keys(FIGIX[r]||{}).some(k=>!U.has(k))))figGC()}}}catch(e){}return p0.apply(this,arguments)}})();
 figFor=function(p,kind){try{if(!FIGS.length||!p||!S)return"";const who=figWho(p);if(!who)return"";const k=figPick(who);if(!k)return"";const r=k.split(":")[0];const L=(FIGIX[r]||{})[k];if(!L||!L.length)return"";
  const f=figBest(L,figTierOf(who),figAgeOf(who));if(!f)return"";if(kind==="por")return figPath(f.por);return figPath(f.file||f.src)}catch(e){return""}};
 /* round portraits: the identity's por-*.webp once it has loaded; the old face until then (or if it fails) */
@@ -24118,7 +24164,30 @@ function kaSentence(before){const n=Math.max(0,Math.min(S.logs.length,(S.logSeq|
 /* owner 11/15: other people's feelings (ghen / oán of the consorts) are not HER gains or losses — they go to a separate KÈM line,
    collapsed ("12 phi tần ghen thêm 8"), tap to see who; a person she has not met is "người chưa quen" (no name) */
 function kaNamed(v){try{return v===S||typeof k61Named!=="function"||k61Named(v)}catch(e){return true}}
-function kaResultRows(before){const G=[],B=[];const K=[];const skip=new Set();
+/* KIT PART kitWhy (KIT 7, owner 18/11 09:03Z): every result line says SHORTLY WHY. ONE source = the Sổ ghi lines of this span (S.logs since before.seq),
+   never a second wording: a clause "lead: … Sức +10" gives the lead; a person is matched by name in the log; no log clause → the act's own title →
+   a short fixed cause per stat (KA_WHYD). Never a colon, never a % — it stays one short phrase after the value ("Sức +18 · nghỉ qua đêm"). */
+const KA_WHYD={suc:{"+":"nghỉ ngơi","-":"mệt vì việc trong cung"},sung:{"+":"được Hoàng thượng để mắt","-":"lâu không được gặp Hoàng thượng"},bac:{"+":"bổng lộc và quà tặng","-":"chi tiêu trong cung"},danh:{"+":"tiếng lành đồn xa","-":"tiếng không hay đồn ra"},duc:{"+":"giữ nết tốt","-":"lỡ lời lỡ việc"},sac:{"+":"chăm dưỡng nhan sắc","-":"nhan sắc kém đi"},tai:{"+":"luyện thêm tài nghệ","-":"bỏ bê tài nghệ"},tamco:{"+":"thêm kinh nghiệm cung đình","-":"bớt cảnh giác"},tin:{"+":"được tin cậy","-":"mất lòng tin"}};
+const KA_WHYM="chuyện trong cung";const KA_WHYBAD=/^(thành|hỏng|bại|không thành|thành công|thất bại)[.!]?$/i;
+function kaWhyClip(t){t=String(t||"").replace(/\s+/g," ").replace(/[:：]/g," ").replace(/\s*\([^)]*\)\s*$/,"").replace(/[\s.!?…·,;]+$/,"").trim();if(!t)return"";t=t.charAt(0).toLocaleLowerCase("vi")+t.slice(1);if(t.length>44){t=t.slice(0,44);const i=t.lastIndexOf(" ");t=(i>20?t.slice(0,i):t).replace(/[\s,;]+$/,"")+"…"}return t}
+function kaWhyCl(before){try{const n=Math.max(0,Math.min(S.logs.length,(S.logSeq||0)-before.seq));const out=[];for(const h of S.logs.slice(0,n).reverse()){const t=plain(String(h).replace(/<span class="ld">[^<]*<\/span>/,""));for(const s of t.split(kRx("(?<=[.!?…])\\s+(?=[A-ZÀ-Ỹ\"“])",""))){for(const c of s.split(/\s·\s/))if(c.trim())out.push(c.trim())}}return out}catch(e){return[]}}
+function kaWhyLead(c,i){const m=c.match(/^([^:]{3,50}):\s/);return m&&!/^Vì sao/i.test(m[1])&&!/→|\d/.test(m[1])&&!KA_WHYBAD.test(m[1].trim())?m[1]:null}
+/* stat line: the clause of the log that states this stat's change */
+function kaWhyStat(C,nm,d,title,key){const re=new RegExp("(^|[^\\p{L}])"+nm.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"\\s*(?:[+−-]\\s*\\d|\\d+\\s*→)","u");const sg=d>0?"+":"-";
+ let c=C.find(x=>re.test(x));let r=c&&kaWhyLead(c);
+ if(!r&&key==="bac"){c=C.find(x=>/[+−-]\s*\d+\s*bạc/i.test(x)&&(d>0)===!/[−-]\s*\d+\s*bạc/i.test(x));r=c&&kaWhyLead(c)}
+ if(!r&&title&&!/^Trong cung vừa qua$/.test(title))r=title;
+ if(!r&&KA_WHYD[key])r=KA_WHYD[key][sg];
+ return kaWhyClip(r||KA_WHYM)}
+/* person line: "Vì sao: <name>: <why> → …" first, then the log sentence that names her (strangers: "chưa quen biết …"), then the act title */
+function kaWhyWho(C,v,named,title){try{const nm=v&&v.name;const subj=named&&nm?nm:null;
+ const vs=subj&&C.find(x=>/^Vì sao:/i.test(x)&&x.includes(subj));if(vs){const m=vs.replace(/^Vì sao:\s*/i,"").replace(subj,"").replace(/^[^:]*?:\s*/,"").replace(/\s*→.*$/,"");if(m.trim().length>3)return kaWhyClip(m)}
+ const hit=C.find(x=>!/^Vì sao:/i.test(x)&&!/→/.test(x)&&(subj?x.includes(subj):/chưa quen biết/.test(x)));
+ if(hit){let t=hit;if(subj)t=t.replace(new RegExp("^.*?"+subj.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"\\s*"),"");else t=t.replace(/^.*?chưa quen biết\s*/,"");t=t.replace(/\s*\(.*$/,"");if(t.length>3){const c=kaWhyClip(t);if(c&&!KA_WHYBAD.test(c))return c}}
+ }catch(e){}
+ return kaWhyClip(title&&!/^Trong cung vừa qua$/.test(title)?title:KA_WHYM)}
+function kaWhyHtml(r){return r?`<span class="kwy"> · ${r}</span>`:""}
+function kaResultRows(before,title){const G=[],B=[];const K=[];const skip=new Set();const WC=kaWhyCl(before);
  const q=typeof queenP==="function"?queenP():null;const R=before.rel||{};
  const per=[];const U={g:[],b:[]};/* [who, goodParts, badParts] */
  for(const v of (typeof rivals!=="undefined"?rivals:[])){const b=R[v.id];if(!b)continue;const a=aff(v,S),m=aff(S,v),e=v.ev||0,g=v.ghen||0,o=Math.round(oan(v,S));const gp=[],bp=[];
@@ -24128,27 +24197,31 @@ function kaResultRows(before){const G=[],B=[];const K=[];const skip=new Set();
   if(g!==b.g)K.push({v,k:"ghen",d:g-b.g});
   if(o!==b.o)K.push({v,k:"oán",d:o-b.o});
   if(e!==b.e)(e>b.e?gp:bp).push(`chứng cứ về nàng ${kaN(e-b.e)}`);
-  if(gp.length||bp.length){if(kaNamed(v))per.push([kaWho(v),gp,bp]);else{/* name-mask: strangers are ONE aggregate row per direction, never "<tước> ???" rows */if(gp.some(t=>/^(quý ngươi|ngươi quý)/.test(t)))U.g.push(v);if(bp.some(t=>/^(ghét ngươi|ngươi bớt)/.test(t)))U.b.push(v)}}}
- {/* the ONE shared list helper kitNameList: all strangers -> "N vị chưa quen biết" */if(U.g.length)per.push([kitNameList(U.g),["quý ngươi hơn"],[]]);if(U.b.length)per.push([kitNameList(U.b),[],["ghét ngươi hơn"]])}
+  if(gp.length||bp.length){if(kaNamed(v))per.push([kaWho(v),gp,bp,kaWhyWho(WC,v,true,title)]);else{/* name-mask: strangers are ONE aggregate row per direction, never "<tước> ???" rows */if(gp.some(t=>/^(quý ngươi|ngươi quý)/.test(t)))U.g.push(v);if(bp.some(t=>/^(ghét ngươi|ngươi bớt)/.test(t)))U.b.push(v)}}}
+ {/* the ONE shared list helper kitNameList: all strangers -> "N vị chưa quen biết" */if(U.g.length)per.push([kitNameList(U.g),["quý ngươi hơn"],[],kaWhyWho(WC,null,false,title)]);if(U.b.length)per.push([kitNameList(U.b),[],["ghét ngươi hơn"],kaWhyWho(WC,null,false,title)])}
  for(const [k,nm] of RKEYS){if(skip.has(k))continue;const now=S[k]||0,d=now-(before[k]||0);if(!d)continue;
-  if(k==="th"||k==="hh"){const who=k==="th"?"Thái hậu":(q&&q!==S?kaWho(q):"Hoàng hậu");per.push([who,d>0?[`quý ngươi hơn (${before[k]}→${now}, ${kaN(d)})`]:[],d<0?[`ghét ngươi hơn (${before[k]}→${now}, ${kaN(d)})`]:[]]);continue}
-  {const up=typeof kGood==="function"?kGood(k,d):d>0;(up?G:B).push(`<span class="ef ${up?"g":"r"}">${nm} ${before[k]}→${now} (${kaN(d)})</span>`)}}
- if(S.maid&&before.maid!=null&&S.maid.loyal!==before.maid){const d=S.maid.loyal-before.maid;(d>0?G:B).push(`<span class="ef ${d>0?"g":"r"}">Lòng ${S.maid.name} ${before.maid}→${S.maid.loyal} (${kaN(d)})</span>`)}
- for(const [who,gp,bp] of per){if(gp.length)G.push(`<span class="ef t">${who}:</span> <span class="ef g">${gp.join(", ")}</span>`);if(bp.length)B.push(`<span class="ef t">${who}:</span> <span class="ef r">${bp.join(", ")}</span>`)}
+  if(k==="th"||k==="hh"){const who=k==="th"?"Thái hậu":(q&&q!==S?kaWho(q):"Hoàng hậu");per.push([who,d>0?[`quý ngươi hơn (${before[k]}→${now}, ${kaN(d)})`]:[],d<0?[`ghét ngươi hơn (${before[k]}→${now}, ${kaN(d)})`]:[],kaWhyWho(WC,k==="th"?{name:"Thái hậu"}:(q&&q!==S?q:{name:"Hoàng hậu"}),true,title)]);continue}
+  {const up=typeof kGood==="function"?kGood(k,d):d>0;(up?G:B).push(`<span class="ef ${up?"g":"r"}">${nm} ${before[k]}→${now} (${kaN(d)})</span>`+kaWhyHtml(kaWhyStat(WC,nm,d,title,k)))}}
+ if(S.maid&&before.maid!=null&&S.maid.loyal!==before.maid){const d=S.maid.loyal-before.maid;(d>0?G:B).push(`<span class="ef ${d>0?"g":"r"}">Lòng ${S.maid.name} ${before.maid}→${S.maid.loyal} (${kaN(d)})</span>`+kaWhyHtml(kaWhyStat(WC,"Lòng",d,title,"maid")))}
+ for(const [who,gp,bp,why] of per){const W=kaWhyHtml(why);if(gp.length)G.push(`<span class="ef t">${who}:</span> <span class="ef g">${gp.join(", ")}</span>${W}`);if(bp.length)B.push(`<span class="ef t">${who}:</span> <span class="ef r">${bp.join(", ")}</span>${W}`)}
+ K.why=WC;K.ttl=title;
  return [G,B,K]}
 /* KIT PART kitKemRow(K) (KIT 7 + 28.6, kit sample page): the KÈM line of a result — other people's feelings, one summary per kind and
    direction ("12 phi tần ghen thêm 8" / "3 phi tần bớt oán 2–5"), the names behind a tap (.kkem.on); K = [{v, k:"ghen"|"oán", d}] */
+/* the reason of a KÈM line (ghen / oán of the others): a Sổ ghi clause naming that feeling, else the act title, else the fixed cause */
+const KA_WHYK={ghen:{"+":"lời đồn về ngươi lan ra","-":"lòng ghen nguôi dần theo ngày"},"oán":{"+":"chuyện cũ chưa nguôi","-":"oán nguôi dần theo ngày"}};
+function kaWhyKem(K,k,up){try{const C=K.why||[];const c=C.find(x=>new RegExp("(^|[^\\p{L}])"+k+"\\s*(?:[+−-]\\s*\\d)","u").test(x));const r=c&&kaWhyLead(c);if(r)return kaWhyClip(r);const t=K.ttl;if(t&&!/^Trong cung vừa qua$/.test(t))return kaWhyClip(t);return KA_WHYK[k][up?"+":"-"]}catch(e){return""}}
 function kitKemRow(K){if(!K||!K.length)return"";const grp={};for(const x of K){const key=x.k+(x.d>0?"+":"-");(grp[key]=grp[key]||[]).push(x)}
  const parts=Object.entries(grp).map(([key,L])=>{const up=key.endsWith("+"),k=key.slice(0,-1);const ds=L.map(x=>Math.abs(x.d));const lo=Math.min(...ds),hi=Math.max(...ds);
   const amt=lo===hi?`${lo}`:`${lo}–${hi}`;const verb=up?`${k} thêm ${amt}`:`bớt ${k} ${amt}`;
   const names=L.map(x=>`${kaNamed(x.v)?kaWho(x.v):"người chưa quen"} ${up?"+":"−"}${Math.abs(x.d)}`);
-  return `<span class="kkem" role="button" tabindex="0" aria-expanded="false"><span class="kkems">${L.length} ${L.length>1?"phi tần":"người"} ${verb}</span><span class="kkeml">${names.join(" · ")}</span></span>`});
+  const wy=kaWhyHtml(kaWhyKem(K,k,up));return `<span class="kkem" role="button" tabindex="0" aria-expanded="false"><span class="kkems">${L.length} ${L.length>1?"phi tần":"người"} ${verb}</span>${wy}<span class="kkeml">${names.join(" · ")}</span></span>`});
  return `<span class="kr kr-kem"><span class="krl">Kèm</span><span class="krv">${parts.join('<span class="ksep">·</span>')}</span></span>`}
 const kaKemHTML=kitKemRow;
 /* KIT PART kitResultSeal(ok) (KIT 7): the result seal — true → THÀNH (.ok), false → BẠI (.bad), no roll → "KẾT QUẢ" (.sure, the kit's grey seal, no stamp) */
 function kitResultSeal(ok){return ok===true?{cls:"ok",t:"THÀNH"}:ok===false?{cls:"bad",t:"BẠI"}:{cls:"sure",t:"KẾT QUẢ"}}
 resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;
- const [G,B,K]=kaResultRows(before);const n=Math.max(0,(S.logSeq||0)-before.seq);let sen="";try{sen=kaSentence(before)}catch(e){}if(sen&&kaPlain(sen).replace(/[.!…\s]+$/,"").toLowerCase()===kaPlain(title||"").replace(/[.!…\s]+$/,"").toLowerCase())sen="";
+ const [G,B,K]=kaResultRows(before,title);const n=Math.max(0,(S.logSeq||0)-before.seq);let sen="";try{sen=kaSentence(before)}catch(e){}if(sen&&kaPlain(sen).replace(/[.!…\s]+$/,"").toLowerCase()===kaPlain(title||"").replace(/[.!…\s]+$/,"").toLowerCase())sen="";
  const why=S.logs.slice(0,Math.min(n,S.logs.length)).map(plain).join(" ");
  /* the seal follows the outcome FOR HER (net real changes + what the log says), not which branch fired */
  const failTxt=/chặn kịp|phát giác|bị lộ|bị bắt|không thành|hỏng|từ chối|không ai tin|trách ngươi|quở|bị phạt|mắng|thư giả|vu khống|thất bại|không dò ra|không biết gì|cũng không biết|không thấy gì|không tìm ra|chưa duyệt/i.test(why);/* act audit: a failed search/scout read THÀNH */
@@ -24176,7 +24249,9 @@ resultShow=function(title,before,okHint){if(!S||!before||S.dead)return;
 .rtoast.karesult .ksen{color:var(--ink);line-height:1.35}
 .rtoast.karesult .kb{grid-template-columns:3.4rem minmax(0,1fr);font-size:.8rem;line-height:1.4}
 .rtoast.karesult .kb .ef{font-weight:600}.rtoast.karesult .kb .ef.t{color:var(--ink);font-weight:700}
-.rtoast.karesult .kitem{display:block}
+.rtoast.karesult .kitem{display:block;text-align:left;align-items:flex-start;justify-content:flex-start;width:auto;min-width:0}/* .kitem is also the item cell (centred): a result line is left-aligned, value next to its label */
+.rtoast.karesult .kwy,.kb .kwy{color:var(--dim);font-weight:400;font-size:.74rem}
+
 .kb .kr-kem .krl{color:var(--dim)}
 .kb .kkem{display:block;cursor:pointer;color:var(--ink)}
 .kb .kkem .kkems{text-decoration:underline dotted;text-underline-offset:3px}
@@ -42694,7 +42769,8 @@ const st=document.createElement("style");st.id="kit-ht";st.textContent=`
    Test hook: window.KLOAD {phase, core:{have,total,files,left}, fig:{…}, paused, err}. */
 (function(){
 const KLOAD=window.KLOAD={phase:"idle",core:{have:0,total:0,files:0,left:0},fig:{have:0,total:0,files:0,left:0},paused:false,err:""};
-if(!("caches" in window)||!window.fetch||!/^https?:$/.test(location.protocol)||window.__bot)return;
+/* no Cache Storage / file:// / bot: no download sets, but the LIFE GATE below still runs (it only waits for the pictures the screen asks for) */
+const OFF=!("caches" in window)||!window.fetch||!/^https?:$/.test(location.protocol)||!!window.__bot;
 const AC="ctm-assets",LS="ctm-bgpause";
 /* how much has arrived, in words (never MB / %): the number beside the kit bar and the panel row */
 const dlPortion=g=>{const r=g.total?g.have/g.total:0,P=CTM_WAIT.dlPart;return r>=1?P[4]:r>=.9?P[3]:r>=.5?P[2]:r>=.25?P[1]:P[0]};
@@ -42791,7 +42867,7 @@ async function getOne(c,f,grp){const g=KLOAD[grp];let got=0;
  KLOAD.err="net";throw new Error("net")}
 let tickT=0;function tick(grp){if(tickT)return;tickT=setTimeout(()=>{tickT=0;speed.push([Date.now(),KLOAD[grp].have]);if(grp==="core")paint();else paintChip()},250)}
 async function pool(list,n,grp,stop){const c=await caches.open(AC);let i=0,dead=false;
- const w=async()=>{while(i<list.length&&!dead){if(stop&&stop())return;const f=list[i++];
+ const w=async()=>{while(i<list.length&&!dead){if(stop&&stop())return;while(grp!=="core"&&(LIFE.busy>0||LIFE.on))await new Promise(ok=>setTimeout(ok,300));/* the life set goes first */const f=list[i++];
    if(grp!=="core"&&await c.match(keyOf(f))){const g=KLOAD[grp];g.have+=f[2];g.left--;g.files++;continue}  /* the game showed it meanwhile (sw.js cached it) */
    try{await getOne(c,f,grp)}catch(e){dead=true;throw e}}};
  await Promise.all(Array.from({length:Math.min(n,list.length)},w))}
@@ -42865,7 +42941,113 @@ async function runBg(){if(bgRun||KLOAD.paused||!figList.length)return;bgRun=true
  bgRun=false;paintChip()}
 
 window.kitLoadReady=function(cb){if(!el)cb();else enterCb.push(cb)};
-(async function(){try{KLOAD.phase="check";
+
+/* ---------- LIFE GATE (owner OD 18/11 ~01:50Z "vô game mà thấy những cái ô nó trống ... cảm giác như nó bị lag"; review/life-preload; KIT §35.3) ----------
+   The 'core' set above is the same for every life; the faces, figures, room and event pictures of ONE life are 'fig' / 'lazy' (on use).
+   1. LIFE SET (kitLifeSet): the pictures this life needs now — her portrait + figure, the Emperor, the Thái hậu, her maid, the court physician and
+      eunuch, her servants, the people standing in the place she is in, consorts whose figure is already chosen, the room scene, the pictures of the
+      first queued dialogs (Q) — PLUS every picture the screen itself is showing and has not finished (Luân hồi wheel, identity card, top bar chips…).
+   2. Whenever a life starts or changes (new life, Tiếp tục, Luân hồi, co-op join, a load: a new S object reaches render(), or start() is called),
+      the kit loading screen of §35 covers the game at once (same frame, kitProgress, CTM_WAIT words; never % / MB) until every one of them is in
+      and decoded, then fades out. A slow line: after 6 s the kit button "Vào cung ngay"; after 25 s she enters anyway.
+   3. During play the life set is re-checked after renders (at most every 2.5 s) and anything new (people met, a new rank tier, a new palace) is
+      fetched at once; the background 'fig' pool waits while the life set is busy (front of the line).
+   4. A dialog whose picture is not in yet waits hidden for it (at most 3 s), never opens with an empty picture box.
+   Test hook: KLOAD.life {n, bytes, ms, late, why}; node dev/test/life-preload.js. */
+const LIFE={busy:0,on:false,keep:new Map(),done:new Set(),seen:new WeakSet(),again:false,go:false,dirty:0};
+KLOAD.life=null;window.KLIFE=LIFE;LIFE.pend=()=>lPending();
+const lAbs=u=>{u=String(u||"");if(!u||/^(data|blob):/.test(u))return"";try{return new URL(typeof IMG_U==="function"?IMG_U(u):u,location.href).href}catch(e){return""}};
+let SIZE=null;function sizeOf(u){try{if(!MAN)return 0;if(!SIZE){SIZE=new Map();for(const f of MAN.files)SIZE.set(f[0],f[2])}const m=/img\/[^?#]*/.exec(u);return m?SIZE.get(decodeURIComponent(m[0]))||0:0}catch(e){return 0}}
+const lOk=u=>LIFE.done.has(u)||((LIFE.keep.get(u)||{}).ok!=null);
+/* one picture: load + decode (kept alive meanwhile, so it paints at once); raw = the string the game itself uses (PORK key of j39 porOf) */
+function lWant(u,raw){if(LIFE.done.has(u))return Promise.resolve(true);let e=LIFE.keep.get(u);if(e)return e.p;const im=new Image();im.decoding="async";e={im,ok:null};LIFE.keep.set(u,e);LIFE.busy++;
+ let res;e.p=new Promise(r=>{res=r});
+ const fin=ok=>{if(e.ok!=null)return;e.ok=ok;LIFE.busy--;res(ok);
+  if(ok&&/\/por-/.test(u))try{if(typeof PORK!=="undefined"){[u,raw].forEach(k=>{if(k&&PORK[k]!==1){PORK[k]=1;LIFE.dirty=1}})}}catch(x){}
+  setTimeout(()=>{LIFE.keep.delete(u);LIFE.done.add(u)},90000)};
+ im.onload=()=>{(im.decode?im.decode().catch(()=>0):Promise.resolve()).then(()=>fin(true))};im.onerror=()=>fin(false);im.src=u;setTimeout(()=>fin(false),45000)/* review r6: a picture that never answers (stalled line) no longer holds LIFE.busy (fig pool, title prefetch) forever */;return e.p/* review r6: the title prefetch chains on it (was undefined: pPump threw after the first picture) */}
+/* the pictures of THIS life (raw strings → absolute); never assigns a figure to someone who has none yet (figFor would pick one) */
+function kitLifeSet(){const M=new Map();const add=r=>{if(r&&typeof r==="string"){const a=lAbs(r);if(a)M.set(a,r)}};
+ try{if(typeof S==="undefined"||!S||typeof figFor!=="function")return M;
+  const ppl=[S,{kind:"emp"},{kind:"th"},S.maid,S.court&&S.court.ty,S.court&&S.court.ksp].concat(S.staff||[]);
+  try{if(typeof curPeople==="function")curPeople().forEach(p=>ppl.push(p))}catch(e){}
+  try{(typeof rivals!=="undefined"&&rivals||[]).forEach(v=>{if(v&&!v.dead&&v.fid)ppl.push(v)})}catch(e){}
+  /* only people whose figure is already chosen (fid): never choose one here — a choice made on a save's copy (title prefetch) would differ
+     from the one the game makes later, and someone without one has not been on screen yet (the gate's DOM scan covers the first screen) */
+  for(const p of ppl){if(!p)continue;try{const w=typeof figWho==="function"?figWho(p):p;if(!w||!w.fid)continue;add(figFor(p,"por"));add(figFor(p))}catch(e){}}
+  try{if(typeof evArt==="function")add(evArt())}catch(e){}
+  try{if(typeof Q!=="undefined"&&typeof kitEvArt==="function")Q.slice(0,3).forEach(m=>{const a=kitEvArt(m);if(a&&a.src)add(a.src)})}catch(e){}}catch(e){}
+ return M}
+window.kitLifeSet=kitLifeSet;
+/* pictures on screen that have not arrived yet (inside the viewport, a real box, not hidden) */
+function lPending(root){const out=[],H=innerHeight,W=innerWidth;for(const im of (root||document).querySelectorAll("img")){if(im.complete)continue;const s=im.currentSrc||im.src;if(!s||/^data:/.test(s))continue;
+ if(im.closest("#klife,#kload"))continue;const r=im.getBoundingClientRect();if(r.width<16||r.height<16||r.bottom<0||r.top>H||r.right<0||r.left>W)continue;
+ if(!im.offsetParent&&getComputedStyle(im).position!=="fixed")continue;out.push(s)}return out}
+/* CSS backgrounds of the visible screen (room scene, cards, icons drawn as backgrounds): absolute URLs, not yet here */
+function lBgs(){const out=[],H=innerHeight,W=innerWidth;for(const e of document.body.getElementsByTagName("*")){const bg=getComputedStyle(e).backgroundImage;if(!bg||bg==="none"||bg.indexOf("url(")<0)continue;
+ if(e.closest("#klife,#kload"))continue;const r=e.getBoundingClientRect();if(!r.width||!r.height||r.bottom<0||r.top>H||r.right<0||r.left>W)continue;
+ for(const m of bg.matchAll(/url\("?([^")]+)"?\)/g)){const u=lAbs(m[1]);if(u&&!/^data:/.test(u))out.push(u)}}return out}
+/* a core picture is in the local cache since the first loading screen: never a reason to show the gate */
+let CORE=null;function lCore(u){try{if(!MAN)return true;if(!CORE)CORE=new Set(MAN.files.filter(f=>f[3]==="core").map(f=>f[0]));const m=/img\/[^?#]*/.exec(u);return !!m&&CORE.has(decodeURIComponent(m[0]))}catch(e){return true}}
+let lel=null;
+function lCover(){if(lel)return lel;lel=document.createElement("div");lel.id="klife";lel.className="modal kpscene kload klife";
+ try{kitBackdrop(lel,"title")}catch(e){}
+ lel.innerHTML=`<div class="dlg kpanel kpsc" data-kind="notice"><div class="klh">${typeof kpHeader==="function"?kpHeader("notice","Cung Tường Mộng",CTM_WAIT.lifeHead):""}</div><div class="klb"></div><div class="kpopts"></div></div>`;
+ document.body.appendChild(lel);return lel}
+function lPaint(have,total,slow){if(!lel)return;const b=lel.querySelector(".klb"),o=lel.querySelector(".kpopts");
+ b.innerHTML=kitProgress({label:CTM_WAIT.lifeLabel,have,total,sub:slow?CTM_WAIT.lifeSlow:""})+`<div class="kpnote">${CTM_WAIT.lifeNote}</div>`;
+ const want=slow?`<button class="kbtn alt" data-klife="go">${CTM_WAIT.lifeGo}</button>`:"";if(o.innerHTML!==want)o.innerHTML=want}
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-klife]");if(!b)return;e.stopPropagation();LIFE.go=true},true);
+const lSleep=t=>new Promise(ok=>setTimeout(ok,t));
+async function lifeGate(why){if(LIFE.off)return;/* test hook: KLIFE.off = no gate (mid-load shots of §59.1) */if(LIFE.on){LIFE.again=true;return}
+ if(why!=="start"){const L=kitLifeSet();lBgs().forEach(u=>{if(!lCore(u))L.set(u,u)});let miss=0;/* a background not yet seen this session counts as missing: a short gate (local cache) rather than one empty frame */const mw=[];L.forEach((raw,u)=>{if(!lOk(u)&&!lCore(u)){miss++;mw.push(u.split("/").pop());lWant(u,raw)}});
+  /* pictures already on the device (core set, or brought in by the title prefetch) paint within a frame: not a reason for the screen */
+  const pd=lPending().filter(u=>{const a=lAbs(u);return !lOk(a)&&!lCore(a)});KLOAD.lifeMiss=mw.concat(pd.map(u=>u.split("/").pop())).slice(0,12);if(!miss&&!pd.length){(KLOAD.lifes=KLOAD.lifes||[]).push({why,n:L.size,bytes:0,ms:0,late:0,cached:true});return}}
+ LIFE.on=true;LIFE.go=false;const t0=Date.now();lCover();
+ const st=KLOAD.life={why,n:0,bytes:0,ms:0,late:0};(KLOAD.lifes=KLOAD.lifes||[]).push(st);const all=new Set();let quiet=0,it=0,fin=false;
+ try{for(;;){const L=kitLifeSet();if(it++%5===0)lBgs().forEach(u=>{if(!L.has(u))L.set(u,u)});L.forEach((raw,u)=>{lWant(u,raw);all.add(u)});const pend=lPending();pend.forEach(u=>all.add(u));
+   if(LIFE.dirty&&![...L.keys()].some(u=>!lOk(u))&&Date.now()-t0<25000){LIFE.dirty=0;try{if(typeof S!=="undefined"&&S&&typeof render==="function")render()}catch(e){}quiet=0;await lSleep(60);continue}
+   const lp=[...L.keys()].filter(u=>!lOk(u)),pset=new Set(pend);let have=0;all.forEach(u=>{if(!pset.has(u)&&(lOk(u)||!L.has(u)))have++});
+   const slow=Date.now()-t0>6000;lPaint(have,Math.max(1,all.size),slow);
+   if(!pend.length&&!lp.length){if(++quiet>=2){if(fin)break;/* last round: draw once more (icons that wait for a probe, e.g. letters → painted icon), then check again incl. backgrounds */
+     fin=true;quiet=0;it=0;try{if(typeof S!=="undefined"&&S&&typeof render==="function")render()}catch(e){}}}else quiet=0;
+   if(LIFE.go||Date.now()-t0>25000){st.late=pend.length+lp.length;break}
+   await lSleep(120)}}catch(e){console.error("life gate",e)}
+ st.n=all.size;st.bytes=[...all].reduce((s,u)=>s+sizeOf(u),0);st.ms=Date.now()-t0;
+ const c=lel;lel=null;if(c){c.classList.add("out");setTimeout(()=>c.remove(),500)}
+ LIFE.on=false;/* review r6: the loop above already re-reads kitLifeSet() of the CURRENT S every round; a re-run after the 25 s cap or 'Vào cung ngay' covered the game again for the same pictures (25 s + 25 s, one flash between) */
+ if(LIFE.again){LIFE.again=false;if(!st.late&&!LIFE.go)setTimeout(()=>lifeGate("again"),0)}}
+window.kitLifeGate=lifeGate;
+/* TITLE PREFETCH (owner 18/11 02:06Z "không lẽ bây giờ tôi cứ bấm từng kiếp"): as soon as the game opens, the life sets of EVERY saved life
+   (all slots, newest first) come in the background, 4 at a time, before the generic 'fig' set (it waits while LIFE.busy) — so tapping any life
+   is usually instant and the gate above shows nothing. The set of a save is read by lending its S / rivals to kitLifeSet for one synchronous call. */
+function kitSaveLifeSet(d){const M=new Map();if(!d||!d.S)return M;const S0=S,R0=rivals;
+ try{S=d.S;rivals=Array.isArray(d.R)?d.R:[];try{if(!S.origin&&typeof originByKey==="function")S.origin=originByKey(d.ok)}catch(e){}return kitLifeSet()}catch(e){KLOAD.prefetchErr=String(e);return M}finally{S=S0;rivals=R0}}
+window.kitSaveLifeSet=kitSaveLifeSet;
+const PQ=[];let pAct=0;function pPump(){while(pAct<4&&PQ.length){const [u,raw]=PQ.shift();if(lOk(u))continue;pAct++;lWant(u,raw).then(()=>{pAct--;pPump()})}}
+function titlePrefetch(){try{if(window.__bot||typeof SK!=="function"||typeof loadSlot!=="function")return;
+ const L=[];for(let n=1;n<=3;n++){const d=loadSlot(n);if(d&&d.S)L.push(d)}L.sort((a,b)=>(b.at||0)-(a.at||0));
+ const seen=new Set();let n=0,bytes=0;for(const d of L)kitSaveLifeSet(d).forEach((raw,u)=>{if(seen.has(u)||lOk(u))return;seen.add(u);PQ.push([u,raw]);n++;bytes+=sizeOf(u)});
+ KLOAD.prefetch={lives:L.length,n,bytes};pPump()}catch(e){console.error("title prefetch",e)}}
+(function wait(k){try{if(typeof FIGIX!=="undefined"&&Object.keys(FIGIX).length&&!(typeof S!=="undefined"&&S)){titlePrefetch();return}}catch(e){}if(k<90)setTimeout(()=>wait(k+1),1000)})(0);/* FIGIX (the figure index) is built a moment after FIGS */
+/* a dialog never opens with an empty picture box: hidden (layout kept) until its pictures are in, at most 3 s */
+function lDlgWait(){try{const M=document.getElementById("modal");if(!M||M.hidden||LIFE.on)return;const d=M.querySelector(".dlg");if(!d)return;
+ if(!lPending(d).length){M.classList.remove("klifewait");return}const t0=Date.now();M.classList.add("klifewait");clearInterval(lDlgWait.t);
+ lDlgWait.t=setInterval(()=>{if(!lPending(M).length||Date.now()-t0>3000||M.hidden){clearInterval(lDlgWait.t);M.classList.remove("klifewait")}},80)}catch(e){}}
+(function(){const st=document.createElement("style");st.id="kit-life";st.textContent=`#modal.klifewait>.dlg{opacity:0;pointer-events:none}
+.modal.klife{z-index:2147483500}.modal.klife .dlg.kpsc{opacity:0;animation:klifeIn .3s ease .45s forwards}@keyframes klifeIn{to{opacity:1}}`;document.head.appendChild(st)})();
+let lReq=0;
+function lArm(){try{if(window.__bot||(window.COOPW&&COOPW.ctx))return;if(typeof S==="undefined"||!S||typeof S!=="object")return;
+ if(!LIFE.seen.has(S)){LIFE.seen.add(S);lifeGate("life");return}
+ const now=Date.now();if(now-lReq<2500)return;lReq=now;/* off the render path (perf): when the page is idle */
+ (window.requestIdleCallback||(f=>setTimeout(f,200)))(()=>{try{kitLifeSet().forEach((raw,u)=>lWant(u,raw))}catch(e){}},{timeout:3000})}catch(e){}}
+setTimeout(function(){try{
+ if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);lArm();return r};window.render=render}
+ if(typeof start==="function"){const s0=start;start=function(){if(!window.__bot&&!(window.COOPW&&COOPW.ctx))lifeGate("start");return s0.apply(this,arguments)};window.start=start}
+ if(typeof showModal==="function"){const m0=showModal;showModal=function(){const r=m0.apply(this,arguments);if(!window.__bot)lDlgWait();return r};window.showModal=showModal}
+}catch(e){console.error("life gate wiring",e)}},0);
+
+if(!OFF)(async function(){try{KLOAD.phase="check";
  /* show the screen at once if this device has no cache yet; a returning player sees nothing unless something is missing */
  let first=false;try{first=!(await caches.has(AC))}catch(e){}
  if(first){screen();paint()}
@@ -45940,7 +46122,10 @@ function kitPgEvOpts(){const W=o=>typeof word==="function"?word(o):"Khó lườn
 function kitPgSeals(){const s=ok=>{const r=kitResultSeal(ok);return `<span class="rtoast karesult ${r.cls}"><b class="seal">${r.t}</b></span>`};return `<div class="kitpg-row kitpg-seal">${s(true)}${s(false)}${s(null)}</div>`}
 function kitPgKem(){let L=[];try{L=liveRivals(true).slice(0,3)}catch(e){}if(!L.length)L=[{name:"Phi tần A"},{name:"Phi tần B"}];
  return `<span class="kb" onclick="const k=event.target.closest('.kkem');if(k)k.classList.toggle('on')">${kitKemRow(L.map((v,i)=>({v,k:"ghen",d:4+i*2})))}</span>`}
+function kitPgWhy(){const w=(c,t,r)=>`<span class="kitem"><span class="ef ${c}">${t}</span>${kaWhyHtml(r)}</span>`;
+ return `<span class="kb rtoast karesult" style="position:static;display:grid"><span class="kr kr-duoc"><span class="krl">Được</span><span class="krv">${w("g","Sức 56→74 (+18)","nghỉ qua đêm")}</span></span><span class="kr kr-mat"><span class="krl">Mất</span><span class="krv">${w("r","Sủng 26→25 (−1)","lâu không được gặp Hoàng thượng")}${w("r","Bạc 80→65 (−15)","sai tai mắt dò chủ hội")}</span></span></span>`}
 KIT_SAMPLES.push(
+ {id:"§7",title:"Result card lines: value · short why (one source = Sổ ghi)",html:kitPgWhy},
  {id:"§53",title:"kitChip tones · kitRisk",html:()=>`<p>${kitChip("Sủng",3)}${kitChip("Danh",-2)}${kitChip("Thường","n")}${kitChip("có rủi ro","w")}${kitChip("đủ Sức","ok")}${kitChip("thiếu bạc","no")}</p><p>${kitRisk("an toàn")}${kitRisk("có rủi ro")}${kitRisk("liều")}</p>`},
  {id:"§53",title:"Event option in cost mode: Tốn + kitHintRow + kitRisk (no Tốn when free)",html:kitPgEvOpts},
  {id:"§53",title:"kitResultSeal: THÀNH · BẠI · KẾT QUẢ",html:kitPgSeals},
@@ -47921,10 +48106,13 @@ window.PROMO_SET=1;
 Object.assign(BAL,{promo:{
  /* THE household table (one core, review/staff-root; owner 17/11 04:48Z "phẩm thấp nhất chỉ có 1 cung nữ hoặc 1 thái giám", OD:L1155 ceiling):
     [maids incl. the personal (close) maid, eunuchs] per consort rank 0..7, for her AND every NPC consort (j10 capOf / hhHas read it; cold palace = row 0).
-    Đáp ứng 1 · Thường tại 2 · Quý nhân 3 · Tần 3 · Phi 4 · Quý phi 5 · Hoàng quý phi 6 · Hoàng hậu 6. Low ranks keep no eunuch of their own. */
- cap:[[1,0],[2,0],[2,1],[2,1],[3,1],[3,2],[4,2],[4,2]],
+    Owner final OD 18/11 ~02:15Z + ~02:50Z (review/staff-cap-apply): Đáp ứng 1+0 · Thường tại 2+0 · Quý nhân 2+0 · Tần 2+1 ·
+    Phi 3+1 · Quý phi 3+2 · Hoàng quý phi 4+2 · Hoàng hậu 5+2. Eunuchs start at Tần. */
+ cap:[[1,0],[2,0],[2,0],[2,1],[3,1],[3,2],[4,2],[5,2]],
+ /* Nữ đế (j99succ path "c"): harem style, mostly cung nữ (owner OD 18/11 ~02:05Z + ~02:50Z: 5 + 3) */
+ capNd:[5,3],
  /* Thái hậu's household (jstaff: her named women Giáo tập ma ma, Chưởng sự cô cô, Quản sự ma ma while the queen seat is empty) */
- capTh:[4,2],
+ capTh:[5,2],
  /* a servant she trusts this much leaves her household (over the table) with a farewell scene, not a log line (j10 capTrim) */
  trimTrust:70,
  wrist:["vongngoc","vongngoc_r1","vongngoc_r2","vongngoc_r3","vongngoc_r4","vongvang","vongvang","vongvang"],
@@ -47941,7 +48129,7 @@ Object.assign(BAL,{promo:{
  /* servant road: index = SRK.maid rank 1..4, 5 = ma ma; "wd:" = a WD garment / pin */
  srv:[[],[["vaibong",1],["banhtrai",1]],[["wd:y_luamoc",1],["wd:tram_dong",1],["vaibong",1],["tragoi",1],["banhtrai",1]],
   [["wd:y_chuongsu",1],["luahang",1],["tragoi",1],["traicay",1],["tuithom",1]],[["wd:y_nuquan",1],["luahang",2],["trahop",1],["traicay",1],["ruoucuc",1]],[["wd:y_mama",1],["luahang",1],["trahop",1],["traicay",1],["ruoucuc",1]]]}});
-/* ---------- staff capacity: one more servant at every rank ---------- */
+/* ---------- staff capacity: the table above (rank-ups that raise it bring one more servant) ---------- */
 /* (the private capOf wrapper that lived here is gone: j10 capOf reads BAL.promo.cap for everyone — review/staff-root) */
 /* ---------- the set ---------- */
 function prRankName(r){return r>=7?"Hoàng hậu":RANKS[Math.max(0,Math.min(7,r))].n}
@@ -47957,7 +48145,7 @@ function prGive(p,L){const E=[];p.inv=p.inv||[];for(const [k,n,kind] of L)for(le
   if(kind==="wd"&&typeof wdGain==="function"){const g=wdGain(p,k,{from:"nvp",giver:"Nội vụ phủ",nvp:1});if(g&&g.e)E.push(g.e)}
   else{const e={k,from:"nvp",giver:"Nội vụ phủ",d:S.turn};p.inv.push(e);E.push(e)}}
  return E}
-/* one new servant, free, while under the rank's cap (maids first). Faces are unique in the whole palace (j17 roomFor = the face pool), so:
+/* one new servant, free, while under the rank's cap (maids first). Faces are unique in the whole palace (j17 roomFor = the figure identity pool, FIGIX 52 maid + 8 ma ma / 30 eunuch), so:
    1. this month's Nội vụ phủ candidate (j29 npool), 2. a new person while the face pool has room, 3. (her only) a servant Nội vụ phủ moves
    from the lowest-ranked household that has one to spare. null when nobody can come. */
 function prStaff(p){try{if(!p||typeof mkServ!=="function")return null;p.staff=p.staff||[];const [cm,ce]=capOf(p);
@@ -54678,6 +54866,47 @@ window.kitPhFit=kitPhFit;
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§59",title:"Tranh tạm (chưa có tranh riêng): một bộ cho mỗi hướng và cỡ — dọc PS·PM·PL, ngang LS·LM·LL, dài, vuông 56·64·72; sáng · tối",html:()=>{const box=(w,h,tone)=>{const f=kitPhPick(w,h,tone);return `<div style="width:${w}px;max-width:100%;text-align:center"><div style="width:${w}px;height:${h}px;max-width:100%">${kitSceneArt(f,"",{shape:w<h?"tall":"wide",cap:false}).replace('class="ksart','style="height:100%;aspect-ratio:auto" class="ksart')}</div><small>${f.replace(/^img\/ph-|\.webp$/g,"")}</small></div>`};
  return ["light","dark"].map(t=>`<div class="kitpg-row" style="align-items:flex-end;gap:8px;margin-bottom:6px">${[[84,112],[120,160],[162,216],[192,96],[300,140],[56,56],[64,64],[72,72]].map(([w,h])=>box(w,h,t)).join("")}</div><div class="kitpg-row" style="margin-bottom:6px">${box(520,120,t)}</div>`).join("")}})}catch(e){}
 window.kitPhTone=kitPhTone;window.KIT_PH=KIT_PH;
+/* ================= §59.1 LOADING STATE — a picture that is on its way (owner OD 18/11 ~01:50Z + 02:06Z "phải có một cái dòng chữ ... đang tải hình";
+   review/life-preload, kit-keeper delegate of MAIN s41). §59 above = "this has NO picture yet" (still-life); §59.1 = "the picture is coming":
+   every <img> slot (portrait chips, figures, frames, event / act picture boxes, Hậu cung rows, servant rows, Dư đồ markers, Luân hồi cards…) whose
+   picture has not arrived shows a soft parchment ground that breathes (opacity only; still under reduced motion / Hiệu ứng Gọn) — never the dark
+   ground of the slot, never empty — and, when the slot is at least 72 px tall and its box is positioned, the line CTM_WAIT.picWait in the middle.
+   ONE rule for the whole game, no per-place code: a MutationObserver (added <img>, changed src) + one capture load/error listener.
+   Marks: img[data-kwait="1"|"s"], slot [data-kwaitp="Đang thỉnh tranh…"]. Test: dev/test/life-preload.js (no empty box), kit sample §59.1. ===== */
+(function(){const st=document.createElement("style");st.id="kit-ph-wait";st.textContent=`
+img[data-kwait]{background:radial-gradient(ellipse at 50% 42%,#fbf4e4 0,#f3e7cf 55%,#eadbbd 100%);animation:kphBreath calc(1.6s*var(--pace,1)) ease-in-out infinite}
+img[data-kwait="s"],img[data-kwait="fs"],img[data-kwait="ms"]{animation:none}
+img[data-kwait^="f"],img[data-kwait^="m"]{background:url("https://ctm-img.victoria-tntt.workers.dev/img/kit/unknown-fig-f.webp") center bottom/contain no-repeat;opacity:.55}
+img[data-kwait^="m"]{background-image:url("https://ctm-img.victoria-tntt.workers.dev/img/kit/unknown-fig-m.webp")}
+@keyframes kphBreathF{50%{opacity:.3}}
+img[data-kwait="f"],img[data-kwait="m"]{animation-name:kphBreathF}
+@keyframes kphBreath{50%{opacity:.62}}
+[data-kwaitp]::after{content:attr(data-kwaitp);position:absolute;left:4px;right:4px;top:50%;transform:translateY(-50%);text-align:center;font:600 .72rem/1.25 var(--display,serif);color:#8a6a40;letter-spacing:.02em;pointer-events:none;z-index:2;text-shadow:0 1px 0 #fff8}
+`;document.head.appendChild(st)})();
+const KPHW_TXT=()=>(typeof CTM_WAIT!=="undefined"&&CTM_WAIT.picWait)||"Đang thỉnh tranh…";
+function kitPhWaitClear(im){try{if(!im.hasAttribute("data-kwait"))return;im.removeAttribute("data-kwait");const p=im.parentElement;if(p&&p.hasAttribute("data-kwaitp")&&!p.querySelector(":scope>img[data-kwait]"))p.removeAttribute("data-kwaitp")}catch(e){}}
+let KPHW_Q=[],KPHW_T=0;
+function kitPhWaitMark(im){try{if(!im||im.tagName!=="IMG"||im.hasAttribute("data-kph-sample"))return;const s=im.getAttribute("src");
+ if(!s||/^(data|blob):/.test(s)||(im.complete&&im.naturalWidth)){kitPhWaitClear(im);return}if(im.complete)return;/* failed: jcdn retries or hides it */
+ const still=typeof reducedMotion==="function"&&reducedMotion();
+ /* a full-body cut-out (fig-*) waits as the kit's faint unknown silhouette (j59 / j61 unknown-fig-f|m), never as a paper box; no line */
+ const fm=/\/fig-/.test(s)?(/\/fig-(emp|eun|off|man|men|ty|phys|ksp|prince|vuong|guard|thaigiam|king)/.test(s)?"m":"f"):"";
+ im.setAttribute("data-kwait",fm?fm+(still?"s":""):still?"s":"1");if(fm)return;KPHW_Q.push(im);
+ if(!KPHW_T)KPHW_T=requestAnimationFrame(()=>{KPHW_T=0;const L=KPHW_Q;KPHW_Q=[];/* the line: one layout read per frame for the whole batch */
+  /* one line per picture area: a slot whose centre lies inside an area that already carries the line (layered art bands) gets none */
+  const has=[...document.querySelectorAll("[data-kwaitp]")].map(e=>e.getBoundingClientRect());
+  for(const x of L){if(!x.hasAttribute("data-kwait"))continue;const p=x.parentElement;if(!p||p.hasAttribute("data-kwaitp"))continue;const r=x.getBoundingClientRect();
+   if(r.height<72||r.width<64||getComputedStyle(p).position==="static")continue;const cx=r.left+r.width/2,cy=r.top+r.height/2;
+   if(has.some(q=>cx>=q.left&&cx<=q.right&&cy>=q.top&&cy<=q.bottom))continue;p.setAttribute("data-kwaitp",KPHW_TXT());has.push(p.getBoundingClientRect())}})}catch(e){}}
+window.kitPhWaitMark=kitPhWaitMark;
+document.addEventListener("load",e=>{if(e.target&&e.target.tagName==="IMG")kitPhWaitClear(e.target)},true);
+document.addEventListener("error",e=>{if(e.target&&e.target.tagName==="IMG")kitPhWaitClear(e.target)},true);
+(function(){const one=n=>{if(n.nodeType!==1)return;if(n.tagName==="IMG")kitPhWaitMark(n);else if(n.firstElementChild)n.querySelectorAll("img").forEach(kitPhWaitMark)};
+ try{new MutationObserver(ms=>{for(const m of ms){if(m.type==="attributes")kitPhWaitMark(m.target);else m.addedNodes.forEach(one)}}).observe(document.documentElement,{childList:true,subtree:true,attributes:true,attributeFilter:["src"]});
+  document.querySelectorAll("img").forEach(kitPhWaitMark)}catch(e){}})();
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§59.1",title:"Tranh đang về (đang thỉnh): nền giấy dịu thở nhẹ + dòng chữ ở ô từ 72 px; ô nhỏ chỉ có nền",html:()=>{
+ const box=(w,h,mv)=>`<div style="position:relative;width:${w}px;height:${h}px;border-radius:6px;overflow:hidden;border:1px solid var(--line)"${h>=72?` data-kwaitp="${KPHW_TXT()}"`:""}><img data-kph-sample data-kwait="${mv}" alt="" style="width:100%;height:100%;display:block"></div>`;
+ return `<div class="kitpg-row" style="align-items:flex-end;gap:8px">${[[44,44],[84,112],[120,160],[162,216],[300,140]].map(([w,h])=>box(w,h,"1")).join("")}${box(120,160,"s")}</div>`}})}catch(e){}
 /* ================= jopic: OPTION CARD = COMPACT ACT CARD WITH ITS PICTURE LEFT — KIT §6.2 (owner 15/11, review/opt-pics) =================
    Owner (verbatim, repeated): "Hình minh họa cho từng hành động bên trái. Bên phải là thông tin. Tôi nói hoài vậy."
    Markup dev/handover/refs/owner-option-picture-left.jpg (docs branch). Coordinator: ONE act-card form = the COMPACT card of Hậu cung (KIT §43):
@@ -69620,7 +69849,15 @@ Object.assign(BAL,{looks:{
  cry:{o:70,lv:1,lvLong:2},
  /* harm acts as minigames (jslap engine): her level from the game, an NPC's from the slap rank table; dodge lowers one level (nhẹ = miss) */
  act:{nuoc:{duc:-2,ev:-3,w:1},tea:{duc:-3,ev:-4,w:1,hotSuc:5},ink:{duc:-4,ev:-6,w:.8},npcUp:50},
- pox:{thuydau:{sea:["Xuân"],cont:1,die:0},sac:{thuydau:[0,3,5,8],daumua:[0,6,10,14]},spread:35,spreadWk:3,scar:[0,1,1,2]}}});
+ pox:{thuydau:{sea:["Xuân"],cont:1,die:0},sac:{thuydau:[0,3,5,8],daumua:[0,6,10,14]},spread:35,spreadWk:3,scar:[0,1,1,2]},
+ /* SMUDGE = a CODE effect on her makeup colours (owner 17/11 ~23:30Z), per level 0..3 = không / nhẹ / vừa / nặng. Lengths in u = the distance between the two eyes
+    (so portrait, figure, mirror all match); a = strength of that colour. blush/lid run DOWN the cheek (vertical, gravity), tear = grey lash-run lines, lip = colour
+    dragged past the line from a mouth corner + a drip under the lower lip, blot = blotchy blush, streak = how much the runs break into separate streaks, cry = least
+    tear-run when the cause is crying. */
+ smuFx:{blush:{len:[0,.8,1.15,1.65],a:[0,.34,.4,.48],blot:[0,0,0,0],wash:[0,0,.055,.075],sgain:[0,1,.5,.5]}/* wash = soft diffuse bleed of the blush into the skin (alpha of a wide feathered halo, spreading down / outward) */,lid:{len:[0,.5,.8,1.05],a:[0,.24,0,0]}/* vừa / nặng: no eyeshadow run (it was the pink vertical stripe, owner 01:21Z) */,
+  tear:{len:[0,.5,1,1.7],a:[0,.25,.34,.42],dark:1.2/* x on the grey runs' opacity at every level: OWNER PICK 18/11 ~02:05Z "lem phấn 20 %" = 1.2 */,extra:{n:[0,0,0,1],len:.33,off:.075,w:1}/* nặng: ONE extra short grey run per face (about 1/3 of the main run) starting at the lash line beside the main run on a seeded eye; same colour and strength as the main run */,w:[0,.026,.03,.04],n:[0,1,1,1],pair:[0,0,[.55,1.5],0],fine:[0,0,0,1]}/* fine = nặng runs taper (thick at the lash line, thinning), wander and break; pair = vừa: one eye's run SHORT, the other LONG (which eye is seeded per face) *//* pair = vừa: one eye's run SHORT, the other LONG (not mirrored; which one is seeded per face) */,cry:{len:.8,a:.36,w:.03},
+  lip:{sm:[0,0,.6,1],a:[0,0,.32,.44]},streak:[0,.35,.3,.3],
+  big:{at:100,max:130,boost:1.25,steps:3}/* LARGE faces (face px from `at` up to `max`): the grey runs are up to x boost darker, in `steps` steps, so a big face is not washed (owner 18/11 01:23Z, inverse of the small-size boost) */,pct:{blush:[0,.2,.2,.2],lip:[0,.2,.2,.2]}/* OWNER KNOB (OD 18/11 ~00:58Z): opacity share of the blush smear and of the lip smear at vừa / nặng; she picks 5 / 10 / 15 / 20 % from option images; null = the older wash / lip.a numbers */}}});
 window.LOOKS_ART={};
 const LK_N={smu:["","Phấn son lem nhẹ","Phấn son lem nhem","Phấn son lem nhem nặng"],bui:["","Mặt lấm bụi","Bụi bám đầy mặt","Bụi bám đầy mặt"],
  muoi:["","Mặt lấm muội khói","Mặt lấm muội khói","Mặt đen muội khói"],moho:["","Mồ hôi làm phấn trôi","Mồ hôi làm phấn trôi","Mồ hôi đẫm, phấn trôi hết"],
@@ -69745,6 +69982,119 @@ function lkPoxScar(p,st){try{if(!p||p.scar||typeof SCAR70==="undefined")return""
 (function(){if(typeof illMonthP!=="function")return;const i0=illMonthP;illMonthP=function(p){const i=p&&p.ill;const was=i&&i.k==="daumua"?(i.st|0)||1:0;const r=i0.apply(this,arguments);
  try{if(was&&p&&!p.ill&&p.alive!==false&&!p.dead){const t=lkPoxScar(p,was);if(t&&p===S)return (r||"")+t}}catch(e){}return r}})();
 (function(){if(typeof kitScarOf!=="function")return;const k0=kitScarOf;kitScarOf=function(p){const r=k0.apply(this,arguments);try{if(r&&p&&p.scar&&p.scar.how==="daumua"){const f=`fx-pox-scar-${r.sev}.png`;return lkArt(f)?{sev:r.sev,src:"https://ctm-img.victoria-tntt.workers.dev/img/"+f}:null}}catch(e){}return r}})();
+/* ---------- SMUDGE = CODE on her makeup colours (owner 17/11 ~23:30Z: "phấn son lem nhem ... vẽ được từ code giống như bên trang điểm", NOT Magnific) ----------
+   Same recipe as the §60 colour layer (jtoil toilMkDraw): one canvas painted from the picture's own face points (https://ctm-img.victoria-tntt.workers.dev/img/mk-fit, read-only), cached per picture + level +
+   colours, drawn as ONE <img class="klk klk-smu"> in the face-effects slot (kitFxLayers: stage, portrait, mirror, NPC women), above the makeup (layer law, z24).
+   Her colours = her toilette picks (son / má / mắt / mày); every other woman's = sampled from her picture (her makeup is painted in the base art). The runs are DIRECTIONAL
+   SMEARS of the makeup's own shapes (blush disc, lid band, lip outline) along gravity (down the cheek), broken into streaks, plus grey lash-run tear lines; levels in BAL.looks.smuFx.
+   Needs makeup (lkMadeUp) — no makeup, nothing to smudge. A picture without face points gets nothing (never guessed). */
+const LK_SMC={},LK_SMQ=[];
+function lkSmuBox(v){const P=toilMkPts(v);let x0=1e9,y0=1e9,x1=-1e9,y1=-1e9;P.forEach(([x,y])=>{x0=Math.min(x0,x);x1=Math.max(x1,x);y0=Math.min(y0,y);y1=Math.max(y1,y)});
+ const w=x1-x0,h=y1-y0;return[x0-.32*w,y0-.06*h,w*1.64,h*1.72].map(n=>+n.toFixed(3))}
+function lkSmuCols(p){try{if(p===S||p&&p.coop){const c=toilColOfP(p);return{son:toilColRGB("son",c.son),ma:toilColRGB("ma",c.ma),mat:toilColRGB("mat",c.mat),may:toilColRGB("may",c.may),seed:c.seed|0}}}catch(e){}return null}
+const LK_SMA={};/* base key -> [file,lv,why,cols]: the size pass re-fetches the same layer at another strength step */
+function lkSmuLayer(file,lv,why,cols,step){const v=MK_FIT.get(file);if(!v)return null;
+ const base=[file,lv,why,cols?[cols.son,cols.ma,cols.mat,cols.may,cols.seed].join(","):"npc"].join("|"),key=step?base+"|L"+step:base;LK_SMA[base]=[file,lv,why,cols];
+ let e=LK_SMC[key];if(!e){e=LK_SMC[key]={box:lkSmuBox(v),src:""};LK_SMQ.push(key);if(LK_SMQ.length>120)delete LK_SMC[LK_SMQ.shift()];lkSmuPaint(file,v,lv,why,cols,e,key,step||0)}return{e,key}}
+function lkSmuImg(p,file,x){try{const cols=lkSmuCols(p),lv=cl(x.lv|0,1,3),why=x.why==="khoc"?"khoc":"";const r=lkSmuLayer(file,lv,why,cols,0);if(!r)return"";
+ const b=r.e.box;return `<img class="klk klk-smu" data-lsk="${r.key}" src="${r.e.src||TOIL_BLANK}" alt="" aria-hidden="true" style="--fleft:${b[0]}%;--ftop:${b[1]}%;--fwidth:${b[2]}%;--fheight:${b[3]}%">`}catch(err){return""}}
+function lkSmuPaint(file,v,lv,why,cols,e,key,step){const im=new Image();im.crossOrigin="anonymous";im.decoding="async";
+ im.onload=()=>{try{const L=window.BAL&&BAL.toil&&BAL.toil.lod;e.src=lkSmuDraw(im,v,lv,why,cols,e.box,lkSmuSeed(file,cols),L&&step<10?(step||0)/L.steps:0,step>=10?(step-10)/lkB().smuFx.big.steps:0)}catch(x){e.src=TOIL_BLANK}document.querySelectorAll("img.klk-smu").forEach(q=>{if(q.dataset.lsk===key)q.src=e.src})};
+ im.onerror=()=>{e.src=TOIL_BLANK};im.src=IMG_U("https://ctm-img.victoria-tntt.workers.dev/img/"+file)}
+/* SIZE-AWARE strength (owner 17/11 ~17:30Z + 17:53Z, 18/11 02:20Z): the SAME curve as the makeup colour layer (jtoil toilLodStep / BAL.toil.lod: face width in px -> step 0..steps; boost, cue per part), never a second table.
+   One pass over every smudge layer on screen, run inside toilLodPass (same scheduler). Pink bloom ← cue.bl, lip smear ← cue.lip, grey runs ← cue.eye. No BAL.toil.lod (makeup LOD not in this build) = factor 1. */
+function lkLodMul(lod,cue){const L=window.BAL&&BAL.toil&&BAL.toil.lod;if(!L||!lod)return 1;return 1+(L.boost-1)*lod*((L.cue&&L.cue[cue])||1)}
+/* face px -> step: 0..steps = small (the makeup layer's own toilLodStep), 10+k = large face (k 1..big.steps, BAL.looks.smuFx.big), 0 = the approved strength in between */
+function lkSmuStep(px){const s=window.toilLodStep?toilLodStep(px):0;if(s>0)return s;const B=lkB().smuFx.big;if(!(px>B.at))return 0;return 10+Math.min(B.steps,Math.max(1,Math.round(Math.min(1,(px-B.at)/(B.max-B.at))*B.steps)))}
+function lkLodPass(){try{if(typeof toilLodStep!=="function")return;document.querySelectorAll("img.klk-smu").forEach(im=>{const cur=im.dataset.lsk||"",base=cur.replace(/\|L\d+$/,""),A=LK_SMA[base];if(!A)return;const w=im.getBoundingClientRect().width;if(!(w>0))return;
+  const st=lkSmuStep(w/1.6),have=+((/\|L(\d+)$/.exec(cur)||[])[1]||0);if(st===have)return;const r=lkSmuLayer(A[0],A[1],A[2],A[3],st);if(!r)return;im.dataset.lsk=r.key;if(r.e.src)im.src=r.e.src})}catch(x){}}
+if(typeof toilLodPass==="function"){const tp0=toilLodPass;toilLodPass=function(){tp0();lkLodPass()};window.toilLodPass=toilLodPass}
+function lkSmuSeed(file,cols){let h=cols?cols.seed|0:0;for(let i=0;i<file.length;i++)h=(Math.imul(h,31)+file.charCodeAt(i))|0;return h}
+function lkSmuDraw(im,v,lv,why,cols,box,seed,lod,big){lod=lod||0;big=big||0;const W=im.naturalWidth,H=im.naturalHeight,F=lkB().smuFx;
+ const bx=box[0]/100*W,by=box[1]/100*H,bw=box[2]/100*W,bh=box[3]/100*H,K=Math.max(1,Math.min(4,420/bw)),cw=Math.max(8,Math.round(bw*K)),ch=Math.max(8,Math.round(bh*K));
+ const P=toilMkPts(v).map(([x,y])=>[(x/100*W-bx)*K,(y/100*H-by)*K]);const mkc=()=>{const c=document.createElement("canvas");c.width=cw;c.height=ch;return c};
+ const c0=mkc(),g0=c0.getContext("2d",{willReadFrequently:true});g0.setTransform(cw/bw,0,0,ch/bh,-bx*cw/bw,-by*ch/bh);g0.drawImage(im,0,0,W,H);g0.setTransform(1,0,0,1,0,0);
+ const D=g0.getImageData(0,0,cw,ch).data,N=cw*ch,cl3=(x,a,b)=>x<a?a:x>b?b:x;
+ const cen=a=>a.reduce((s,p)=>[s[0]+p[0]/a.length,s[1]+p[1]/a.length],[0,0]);
+ let eA=cen(P.slice(20,30)),eB=cen(P.slice(30,40));let iA=20,iB=30;if(eA[0]>eB[0]){[eA,eB]=[eB,eA];[iA,iB]=[iB,iA]}/* A = the eye on the left of the picture */
+ const u=Math.hypot(eA[0]-eB[0],eA[1]-eB[1])||40,lc=cen(P.slice(0,12));const eyes=[[eA,iA,-1],[eB,iB,1]];
+ const h1=i=>{let h=(i*374761393+seed*668265263)|0;h=Math.imul(h^h>>>13,1274126177);return((h^h>>>16)>>>0)/4294967296};
+ const vn=(x,y,s)=>{const fx=x/s,fy=y/s,ix=Math.floor(fx),iy=Math.floor(fy),tx=fx-ix,ty=fy-iy,sx=tx*tx*(3-2*tx),sy=ty*ty*(3-2*ty),q=(a,b)=>h1(a*7919+b*104729+13);
+  const a=q(ix,iy),b=q(ix+1,iy),c=q(ix,iy+1),d=q(ix+1,iy+1);return a+(b-a)*sx+(c-a)*sy+(a-b-c+d)*sx*sy};
+ const paint=fn=>{const c=mkc(),g=c.getContext("2d");fn(g);const d=g.getImageData(0,0,cw,ch).data,m=new Float32Array(N);for(let i=0;i<N;i++)m[i]=d[i*4+3]/255;return m};
+ const blur=(m,r)=>{r=Math.max(1,Math.round(r));const t=new Float32Array(N),o=new Float32Array(N),n=2*r+1;
+  for(let y=0;y<ch;y++){let s=0;for(let x=-r;x<=r;x++)s+=m[y*cw+cl3(x,0,cw-1)];for(let x=0;x<cw;x++){t[y*cw+x]=s/n;s+=m[y*cw+cl3(x+r+1,0,cw-1)]-m[y*cw+cl3(x-r,0,cw-1)]}}
+  for(let x=0;x<cw;x++){let s=0;for(let y=-r;y<=r;y++)s+=t[cl3(y,0,ch-1)*cw+x];for(let y=0;y<ch;y++){o[y*cw+x]=s/n;s+=t[cl3(y+r+1,0,ch-1)*cw+x]-t[cl3(y-r,0,ch-1)*cw+x]}}return o};
+ /* directional smear DOWN (gravity): out[y] = max(m[y], the run carried from above, fading linearly over len), run broken into streaks by a smooth column noise */
+ const smear=(m,len,streak,keep)=>{const L=Math.max(2,len),o=new Float32Array(N),sw=Math.max(2,u*.05);
+  for(let x=0;x<cw;x++){const sf=1-streak+streak*Math.min(1,vn(x,7,sw)*1.55);let c=0;for(let y=0;y<ch;y++){const a=m[y*cw+x];c=Math.max(a,c-1/L);o[y*cw+x]=Math.max(keep*a,(c-a*.55)*sf)}}return o};
+ const add=(a,b)=>{for(let i=0;i<N;i++)a[i]=Math.max(a[i],b[i]);return a};
+ /* colours: hers from the toilette, everyone else's sampled from the picture */
+ const avg=(m,thr)=>{let r=0,g=0,b=0,n=0;for(let i=0;i<N;i++)if(m[i]>thr){r+=D[i*4];g+=D[i*4+1];b+=D[i*4+2];n++}return n?[r/n,g/n,b/n]:null};
+ const mixc=(a,b,t)=>a.map((x,i)=>x+(b[i]-x)*t);
+ const rad=u*.5,cheeks=eyes.map(([e,ix,sd])=>[e[0]+sd*u*.12,e[1]+u*.95]);
+ let cSon,cMa,cMat,cMay;
+ if(cols){cSon=cols.son;cMa=cols.ma;cMat=cols.mat;cMay=cols.may}else{
+  const lipM=paint(g=>{g.fillStyle="#000";g.beginPath();toilSmooth(g,P.slice(0,12));toilSmooth(g,P.slice(12,20));g.fill("evenodd")});
+  cSon=avg(lipM,.7)||[196,70,84];if(cSon[0]<cSon[1]+25)cSon=mixc(cSon,[196,70,84],.6);
+  const chM=paint(g=>{g.fillStyle="#000";cheeks.forEach(c=>{g.beginPath();g.arc(c[0],c[1],rad*.35,0,7);g.fill()})});cMa=mixc(avg(chM,.5)||[232,150,150],[238,128,144],.45);
+  cMat=mixc(cMa,[214,124,110],.4);cMay=[84,60,52]}
+ const lash=mixc(cMay,[92,88,96],.55).map(x=>Math.round(x*.8));/* grey-brown mascara run, never pure black */
+ const fx=(a,k)=>a[lv]*(k||1);
+ /* skin shade: every colour takes the picture's own light so it sits IN the face */
+ const Lum=i=>.299*D[i*4]+.587*D[i*4+1]+.114*D[i*4+2];let sl=0,sn=0;cheeks.forEach(c=>{const i=Math.round(c[1])*cw+Math.round(c[0]);if(i>=0&&i<N){sl+=Lum(i);sn++}});const Lref=Math.max(90,sn?sl/sn:190);
+ const layers=[];
+ const sk=new Float32Array(N);for(let i=0;i<N;i++){const r=D[i*4],g=D[i*4+1],b=D[i*4+2];sk[i]=r>140&&r-g>=20&&g>=b&&r-b>=26&&.299*r+.587*g+.114*b>135?1:0}/* skin-coloured pixels */
+ /* soft line: dense points [x,y,sigma,alpha] splatted as gaussians, max-combined (no overlap ladders) */
+ const soft=(m,pts)=>{for(const[x,y,sg,al]of pts){const R=Math.ceil(sg*2.6),x0=Math.max(0,Math.floor(x-R)),x1=Math.min(cw-1,Math.ceil(x+R)),y0=Math.max(0,Math.floor(y-R)),y1=Math.min(ch-1,Math.ceil(y+R));
+   for(let yy=y0;yy<=y1;yy++)for(let xx=x0;xx<=x1;xx++){const d2=(xx-x)*(xx-x)+(yy-y)*(yy-y),v=al*Math.exp(-d2/(2*sg*sg)),i=yy*cw+xx;if(v>m[i])m[i]=v}}return m};
+ const along=(P0,P1,st,fn)=>{const n=Math.max(2,Math.round(Math.hypot(P1[0]-P0[0],P1[1]-P0[1])/st)),o=[];for(let i=0;i<=n;i++){const t=i/n;o.push(fn(P0[0]+(P1[0]-P0[0])*t,P0[1]+(P1[1]-P0[1])*t,t))}return o};
+ /* 1 blush: the cheek disc dragged down by water, softened; blotchy patches at nặng */
+ {let m=new Float32Array(N);cheeks.forEach(([cx,cy])=>{const d=paint(g=>{const gr=g.createRadialGradient(cx,cy,0,cx,cy,rad);gr.addColorStop(0,"rgba(0,0,0,1)");gr.addColorStop(.5,"rgba(0,0,0,.7)");gr.addColorStop(1,"rgba(0,0,0,0)");g.fillStyle=gr;g.fillRect(cx-rad,cy-rad,2*rad,2*rad)});add(m,d)});
+  let sm=lv>=2?new Float32Array(N):smear(m,u*fx(F.blush.len),F.streak[lv],.0);/* vừa / nặng: NO pink run at all, only the diffuse flush below */{const g=F.blush.sgain[lv];for(let i=0;i<N;i++)sm[i]*=g;if(lv>=2)sm=blur(blur(sm,u*.05),u*.03)}/* the pink run: lighter and diffused (wide feather, no band edges) */const bl=fx(F.blush.blot);
+  if(bl>0)for(let y=0;y<ch;y++)for(let x=0;x<cw;x++){const i=y*cw+x,n=vn(x,y,u*.2),t=cl3((n-.38)/.3,0,1);sm[i]=Math.max(sm[i],m[i]*bl*t*(.6+.4*vn(x+999,y,u*.5)))}
+  const PC=F.pct,wa=(PC?PC.blush[lv]/1.55:fx(F.blush.wash))*lkLodMul(lod,'bl');/* pct = the owner's knob: the smudge's own pink-smear opacity (share) at vừa / nặng; the layer peaks at wash × 1.55 */
+  if(wa>0){/* "spread blush" = the SAME soft radial bloom the makeup blush uses (toilMakeupSvg gradient: full at the centre, .55 at .35, 0 at the rim), only a little larger / lower / outward — no stripe, no edge */
+   const wm=new Float32Array(N);cheeks.forEach(([cx,cy],ci)=>{const sd=ci?1:-1,wx=cx+sd*rad*.25,wy=cy+rad*.4,R=rad*1.55;add(wm,paint(g=>{const gr=g.createRadialGradient(wx,wy,0,wx,wy,R);gr.addColorStop(0,"rgba(0,0,0,1)");gr.addColorStop(.35,"rgba(0,0,0,.55)");gr.addColorStop(.7,"rgba(0,0,0,.14)");gr.addColorStop(1,"rgba(0,0,0,0)");g.fillStyle=gr;g.fillRect(wx-R,wy-R,2*R,2*R)}))});
+   const wb=blur(blur(wm,u*.05),u*.03);for(let i=0;i<N;i++)sm[i]=Math.max(sm[i],wb[i]*wa/Math.max(.01,fx(F.blush.a)))}
+  layers.push([blur(blur(sm,u*.03),u*.012),cMa,fx(F.blush.a)*1.55])}
+ /* 2 eyeshadow run from the lower lid */
+ {const m=new Float32Array(N);eyes.forEach(([e,ix])=>{const L=[P[ix+6],P[ix+7],P[ix+8],P[ix+9],P[ix]];for(let k=0;k<4;k++)soft(m,along(L[k],L[k+1],u*.03,(x,y)=>[x,y+u*.05,u*.05,1]))});
+  layers.push([blur(smear(m,u*fx(F.lid.len),F.streak[lv],.35),u*.014),cMat,fx(F.lid.a)*1.3])}
+ /* 3 lipstick smeared past the line: a soft halo along the lower lip, pushed a little toward one corner, + a feathered drag from that corner that fades out; no hard shapes */
+ const sm=fx(F.lip.sm);if(sm>0){const side=h1(3)<.5?-1:1,O=P.slice(0,12);let xl=1e9,xr=-1e9,cL,cR;O.forEach(p=>{if(p[0]<xl){xl=p[0];cL=p}if(p[0]>xr){xr=p[0];cR=p}});const cr=side<0?cL:cR;
+  const low=O.filter(p=>p[1]>=lc[1]-u*.01).sort((a,b)=>a[0]-b[0]),m=new Float32Array(N);
+  for(let i=0;i<low.length-1;i++)soft(m,along(low[i],low[i+1],u*.02,(x,y)=>[x+side*u*.035*sm,y+u*.055*sm,u*.065,.6]));
+  soft(m,along(cr,[cr[0]+side*u*.27*sm,cr[1]+u*.16*sm],u*.015,(x,y,t)=>[x,y,u*(.07-.035*t),.65*(1-.85*t)]));
+  layers.push([blur(m,u*.03),cSon,Math.min(.9,(F.pct?F.pct.lip[lv]:fx(F.lip.a))*1.7*lkLodMul(lod,'lip'))])}/* lip smear opacity: same knob family (pct.lip) */
+ /* 4 lash-run: mascara / liner washed down the cheek from under each eye — thin, wavering, fading, grey-brown (vừa / nặng, or crying) */
+ {let len=fx(F.tear.len),a=fx(F.tear.a)*lkLodMul(lod,'eye')*(F.tear.dark||1)*(1+(F.big.boost-1)*big),w=fx(F.tear.w),nn=fx(F.tear.n);if(why==="khoc"){len=Math.max(len,F.cry.len);a=Math.max(a,F.cry.a);w=Math.max(w,F.cry.w);nn=Math.max(nn,1)}
+  if(len>0){const m=new Float32Array(N);const pr=why==='khoc'?0:F.tear.pair[lv],swp=h1(13)<.5?0:1;eyes.forEach(([e,ix,sd],ei)=>{const s0=P[ix+8];for(let k=0;k<nn;k++){const off=k?sd*u*.07*k:0,ln=u*(pr?pr[ei===swp?0:1]:len)*[1,.62,.38][k],sx=s0[0]+sd*u*.05+off,sy=s0[1]+u*.04,ph=h1(11+ei*5+k*3)*6,pts=[];
+     const fn=F.tear.fine[lv];for(let i=0;i<=Math.round(ln/1.2);i++){const t=i*1.2/ln,wob=fn?(.05*Math.sin(t*4.2+ph)+.035*(vn(t*5+ph,ei*3+k,1)-.5)):.03*Math.sin(t*5.5+ph),x=sx+sd*u*(.09*t+wob),y=sy+ln*t,br=cl3((vn(t*(fn?7:9),ei*7+k*3,1.1)-(fn?.28:.25))*(fn?2.4:2.2),fn?.3:.35,1),al=Math.pow(1-t,fn?.8:.75)*(pr?Math.max(br,.8):br)*(k?.8:1),sg=fn?u*w*(.62-.38*t):u*w*(1.05-.5*t);pts.push([x,y,Math.max(.8,sg),al*(fn?.9:1)])}
+     soft(m,pts)}
+    /* ONE extra short run per face (nặng; BAL tear.extra): from the lash line beside the main run on the seeded eye, ~1/3 of its length, same width taper and the same strength (solid, no breaks, never fainter than the main run, so it can not read as a pale streak) */
+    const X=F.tear.extra;if(X&&fx(X.n)>0&&why!=='khoc'&&ei===swp){const ln=u*len*X.len,sx=s0[0]+sd*u*(.05+X.off),sy=s0[1]+u*.04,ph=h1(41)*6,pts=[];
+     for(let i=0;i<=Math.round(ln/1.2);i++){const t=i*1.2/ln,x=sx+sd*u*(.07*t+.02*Math.sin(t*4.2+ph)),y=sy+ln*t,al=Math.pow(1-t,.5);pts.push([x,y,Math.max(1,u*w*X.w*(.9-.5*t)),al])}
+     soft(m,pts)}});
+   layers.push([blur(m,u*(F.tear.fine[lv]?.022:.016)),lash,a*1.25,1])}}
+ /* no hard edges: every mask fades to nothing before the canvas edge (the box is only a bit bigger than the effect) */
+ const edge=new Float32Array(N);{const mx=cw*.08,my=ch*.1;for(let y=0;y<ch;y++){const ey=cl3(Math.min(y,ch-1-y)/my,0,1);for(let x=0;x<cw;x++){const ex=cl3(Math.min(x,cw-1-x)/mx,0,1);edge[y*cw+x]=ex*ex*(3-2*ex)*ey*ey*(3-2*ey)}}}
+ /* the runs stay INSIDE THE FACE: a face oval built from the face points (outer eye corners at the eyes, the mouth at the lips, narrowing to the chin), inset ≈ 3 % of the face width and feathered —
+    not the pixel skin mask (ears, neck and the jaw shadow are skin too). Same clip for the streaks, the wash and the lip drag; every level, NPC path included. */
+ const mkFace=(ex,inset,fth)=>{const o=new Float32Array(N);const ey=(eA[1]+eB[1])/2,lipY=lc[1],chin=lc[1]+.62*u,xoL=Math.min(...P.slice(20,30).map(p=>p[0]),...P.slice(30,40).map(p=>p[0])),xoR=Math.max(...P.slice(20,30).map(p=>p[0]),...P.slice(30,40).map(p=>p[0]));
+  const bound=(y)=>{/* [left, right] of the face oval at row y */const t1=cl3((y-ey)/(lipY-ey),0,1),t2=cl3((y-lipY)/(chin-lipY),0,1),eL=xoL-ex*u,eR=xoR+ex*u,cL=lc[0]-.2*u,cR=lc[0]+.2*u,mL=eL+(cL-eL)*.25,mR=eR+(cR-eR)*.25;
+   const sm1=t=>t*t*(3-2*t);let L,R;if(y<=lipY){const t=sm1(t1);L=eL+(mL-eL)*t;R=eR+(mR-eR)*t}else{const t=Math.pow(t2,1.4);L=mL+(cL-mL)*t;R=mR+(cR-mR)*t}return[L+inset,R-inset]};
+  for(let y=0;y<ch;y++){const[L,R]=bound(y),fy=cl3((chin-inset-y)/fth,0,1),fyy=fy*fy*(3-2*fy);
+   for(let x=0;x<cw;x++){const d=cl3(Math.min(x-L,R-x)/fth,0,1);o[y*cw+x]=d*d*(3-2*d)*fyy}}return o};
+ /* the runs stay INSIDE THE FACE: a face oval built from the face points (eye extents at the eyes, mouth, chin), inset ≈ 3 % of the face width, feathered ≈ 5-7 % (wash, pink run, lip drag);
+    not the pixel skin mask (ears, neck, jaw shadow are skin too). The lash runs get a roomier copy of the same oval (the under-eye area of BOTH eyes must be inside). Every level, NPC path included. */
+ const face=mkFace(.2,u*.06,u*.3),faceT=mkFace(.55,0,u*.12);
+ const out=new Uint8ClampedArray(N*4);
+ for(let i=0;i<N;i++){let A=0,R=0,G=0,B=0;const k=cl3(Lum(i)/Lref,.74,1.1);
+  for(const[m,c,s,tf]of layers){const a=cl3(m[i]*s*(F.noclip?1:edge[i]*(tf?faceT[i]:face[i])),0,1);if(a<.004)continue;const oa=a+A*(1-a);R=(c[0]*k*a+R*A*(1-a))/oa;G=(c[1]*k*a+G*A*(1-a))/oa;B=(c[2]*k*a+B*A*(1-a))/oa;A=oa}
+  out[i*4]=Math.min(255,R);out[i*4+1]=Math.min(255,G);out[i*4+2]=Math.min(255,B);out[i*4+3]=Math.round(A*255)}
+ const oc=mkc();oc.getContext("2d").putImageData(new ImageData(out,cw,ch),0,0);return oc.toDataURL("image/png")}
+window.lkSmuDraw=lkSmuDraw;
 /* ---------- face-fx entries: pictures wait for Foreman C; chips + Sắc work now ---------- */
 function lkFaceImg(cls,f,st){return st&&lkArt(f)?`<img class="${cls}" src="https://ctm-img.victoria-tntt.workers.dev/img/${f}" alt="" aria-hidden="true" style="${kitFxVars(st)}" onerror="this.remove()">`:""}
 function lkSquare(file){try{return KIT_RASH.style(file)}catch(e){return""}}
@@ -69755,7 +70105,7 @@ KIT_FACEFX.add({id:"pox",z:22,ready:true,
  seen:(p,st)=>p===S||fxIllSeen(p)&&fxSeen(p),sac:(p,st)=>(lkB().pox.sac[st.k]||[])[st.st]||0,chip:()=>null,
  html:(p,file,st)=>lkFaceImg("kpox",`fx-pox-${st.k}-${st.st}.png`,lkSquare(file))});
 KIT_FACEFX.add({id:"lkface",z:24,ready:true,state:p=>{const L=lkItems(p,LK_FACE);return L.length?{L}:null},seen:p=>fxSeen(p),sac:(p,z)=>lkSac(z.L),chip:(p,z)=>[lkChips(z.L),"hot"],
- html:(p,file,z)=>{const sq=lkSquare(file);return z.L.map(([id,x])=>lkFaceImg("klk klk-"+id,`fx-${id}-${x.lv}.png`,sq)).join("")}});
+ html:(p,file,z)=>{const sq=lkSquare(file);return z.L.map(([id,x])=>id==="smu"?lkSmuImg(p,file,x):lkFaceImg("klk klk-"+id,`fx-${id}-${x.lv}.png`,sq)).join("")}});
 KIT_FACEFX.add({id:"lkhair",z:27,ready:true,state:p=>{const L=lkItems(p,LK_HAIR);return L.length?{L}:null},seen:p=>fxSeen(p),sac:(p,z)=>lkSac(z.L),chip:(p,z)=>[lkChips(z.L),"hot"],html:()=>""});
 KIT_FACEFX.add({id:"lkcloth",z:80,ready:true,state:p=>{const L=lkItems(p,LK_CLOTH);return L.length?{L}:null},seen:p=>fxSeen(p),sac:(p,z)=>lkSac(z.L),chip:(p,z)=>[lkChips(z.L),"hot"],html:()=>""});
 for(const k in LK_ACT)KIT_FACEFX.deny[k]={emp:1,thaihau:1};
@@ -69768,6 +70118,305 @@ function lkMergeIn(p,key,bag){if(!p||!bag||!bag.it)return;const part=key==="stai
  try{if(p===S&&window.COOPW&&COOPW.on&&typeof sendPos==="function")sendPos()}catch(e){}}
 window.lkMergeIn=lkMergeIn;window.lkGive=lkGive;window.lkItem=lkItem;window.lkOutdoor=lkOutdoor;window.lkSmudge=lkSmudge;window.lkStain=lkStain;window.lkInk=lkInk;window.lkCry=lkCry;
 window.lkSmuOf=lkSmuOf;window.lkInkOf=lkInkOf;window.lkStainOf=lkStainOf;window.lkPoxScar=lkPoxScar;window.LK_ACT=LK_ACT;
+/* ================= jcloth: SLOPPY / CREASED OUTFIT = a CODE filter over her existing outfit picture (owner 17/11 ~23:20Z, no new art) =================
+   Owner (verbatim, dev/OWNER_DECISIONS.md 17/11 ~23:20Z): the "ăn mặc lôi thôi" look is a code effect that makes the existing outfit picture look
+   wrinkled / crumpled / sloppy ("nhăn, nhàu, lôi thôi"), not new drawings. Used by looks-2 CLOTHES "xoc" (Áo xốc xếch) now, by any later dressing result.
+   ONE kit effect in the face-fx / figure layer path (KIT_FACEFX entry "lkcloth", the same box as the picture, like the makeup colour layer of jtoil):
+     (a) cloth mask = figure alpha minus skin pixels (colour-matched to HER OWN face), minus hair (dark pixels joined to the head) and the head zone;
+     (b) inside the mask: crease shading from a noise height-field = vertical fold lines that follow the robe's fall + diagonal pulls at the waist and
+         the sleeves, applied as dark crease lines + light/shade relief + a few small highlights (multiply / screen on the picture's own colours);
+     (c) a slight displacement warp of the hem, the collar / lapel and a small skew so the robe sits askew.
+   The result is a baked canvas image of the whole figure (cache per picture + level), laid over the picture; the picture underneath is hidden (class kclo-on)
+   so the warped edge never shows a ghost. Numbers: BAL.looks.xoc (nhẹ / vừa / nặng); BAL.looks.xoc.on = 0 keeps the live feature OFF until the owner approves
+   (the sample page / tests call clothXocBake directly). Core = pure functions (no game globals): usable from any tool. ================= */
+Object.assign(BAL.looks,{xoc:{on:1,
+ /* per level 1..3 (nhẹ / vừa / nặng), r3: counts of creases per body place (waist = fan out of the tie, belt = bunched above the sash, elbow = per arm,
+    hem = bunched above the hem, drag = shoulder→waist diagonals), dep = band strength 0..1, sg = band half-width (px at a 900-px figure),
+    dark = how much a full-strength band darkens (multiply), lite = ridge light (screen), warp = hem wave (% of figure width), skew = hem tilt, collar = lapel drift */
+ lv:[null,{waist:4,belt:4,bust:0,elbow:4,hem:4,drag:0,dep:1,sg:1.8,dark:.8,lite:.3,warp:.8,skew:1.2,collar:1,zig:0},{waist:5,belt:8,bust:4,elbow:8,hem:8,drag:0,dep:1,sg:2,dark:.9,lite:.34,warp:1.6,skew:2.6,collar:2.2,zig:0},{waist:6,belt:12,bust:8,elbow:12,hem:16,drag:0,dep:1,sg:2.2,dark:1,lite:.38,warp:2.8,skew:4.5,collar:3.6,zig:1.3}],
+ /* body anchors as a share of the figure box (waist tie row, elbow bend, shoulder), ridge = offset / width (in band widths) / strength of the lit edge, comp = brightness kept */
+ body:{waist:.34,elbowX:.24,elbowY:.43,shoulder:.17},ridge:{off:1.5,w:.35,k:1,edge:.3,soft:2.4},comp:.85,bunchK:4,
+ /* r4d (owner 17/11: crease = Magnific DECALS): mode 'decal' lays CDN img/fx-crease-1..4 (tall vertical fold patches), fx-crease-knot-1, fx-crease-hem-1 through drawDecalOnCloth (blend 'shade' = the grey fold shading scales the robe's own colour, hue kept);
+    mode 'code' = the older stroke code (kept, off). dec: per level lv[1..3] n patches (2/4/6), knot / hem on or off, sc = patch width / robe width, op, pos = patch anchors (share of robe box, down the skirt), rot = max tilt, shadeK = contrast of the shading */
+ dec:{mode:'decal',patch:4,lv:[null,{n:2,knot:0,hem:0,sc:.18,op:.85},{n:4,knot:0,hem:0,sc:.18,op:.92},{n:6,knot:0,hem:1,sc:.19,op:1}],pos:[[.44,.62],[.6,.72],[.3,.74],[.72,.66],[.5,.82],[.4,.52]],knotAt:[.5,.36],knotSc:.34,hemAt:[.5,.96],hemSc:.9,rot:.14,shadeK:1.5},
+ seed:7,light:[-.55,-.8],skin:{de:15,lum:.32,min:.003,max:.02,fill:.25,asp:2.6,handX:.2,core:.35},hair:{de:26,reach:.34},head:.012,item:60,lowA:.55,lowB:.65}});
+/* r4 TASK 2: stain DECALS on the cloth (tra = tea, uot = wet, bun = mud). Decal art = CDN img/fx-stain-<kind>-<n>.webp (transparent webp); code places it on ANY figure through the cloth mask.
+   on:0 = live feature OFF. lv[1..3] (nhẹ / vừa / nặng): n = decals, sc = decal width as a share of the robe width, op = opacity, wet = overall cloth darkening (wet cloth), pos = anchors tried in order
+   (fx, fy = share of the robe box: chest / sleeve / hem), blend = multiply | soft | normal (folds and the robe's own pattern show through), variants = how many decal files exist per kind. */
+Object.assign(BAL.looks,{stain:{on:{uot:1,bun:1,tra:0}/* per kind: wet + mud ON (owner approved), tea OFF until the owner approves tea (flip tra to 1) */,
+ lv:[null,{n:1,sc:.16,op:.6,wet:.5},{n:2,sc:.2,op:.72,wet:.78},{n:3,sc:.26,op:.85,wet:1}],
+ anchor:{chest:[.5,.27],sleeve:[.2,.5],hem:[.5,.93],hemL:[.22,.94],hemR:[.78,.94],hemH1:[.5,.85],hemH2:[.28,.79],hemH3:[.72,.76],hemH4:[.45,.7],sleeveL:[.14,.6],sleeveR:[.86,.6],lap:[.42,.66]},
+ kind:{tra:{pos:["chest","lap","sleeve"],blend:"stain",variants:3,wet:0,scm:1.4,dy:0,opm:1,tint:[135,82,38],tm:.9,lv:[null,{n:1,sc:.3,op:1.3},{n:2,sc:.36,op:1.2},{n:3,sc:.44,op:1.15}]},uot:{pos:["hem","sleeveL","sleeveR","hemL","hemR"],blend:"wet",variants:2,wet:1,scm:1.15,dy:0,opm:1,rotm:.4,deep:{k:.95,dark:.2,pow:1,paleP:.5,satMin:.07,warm:[1,.97,.88],rad:5,cling:2.2,hem:.84,hemV:.34,hemF:11,nx:5,ny:1.1,front:[0,.5,.75,1],floor:[0,0,.6,.92],darkL:[0,.2,.22,.3]}},bun:{pos:["hem"],blend:"mud",tm:.35,variants:8,base:2,wet:0,scm:1,tilt:.5,scatter:1,lv:[null,{n:8,sc:.32,op:.9},{n:9,sc:.34,op:.92},{n:12,sc:.38,op:1}],
+  /* r6 lv2/lv3 = lv1 (owner OK) + painted mud pieces placed by code: d = decal number (fx-stain-bun-d), n = how many, sc = width share of the robe, at "hem" = its bottom edge on the real hem of that column, else fy = height of its bottom edge (0 top .. 1 hem), x = horizontal range, op = opacity */
+  /* owner 18/11 (after 02:40Z panels): new lv1 = old lv2, new lv2 = old lv3, new lv3 = darker + higher + more marks; must read on warm / red robes too */
+  add:[null,[{d:3,n:2,sc:.11,fy:[.8,.88],x:[.15,.85],op:.5},{d:5,n:2,sc:.055,fy:[.82,.9],x:[.2,.8],op:.5}],
+   [{d:3,n:4,sc:.12,fy:[.72,.88],x:[.12,.88],op:.55},{d:5,n:3,sc:.06,fy:[.72,.88],x:[.15,.85],op:.55},{d:4,n:1,sc:.24,at:"hem",x:[.25,.75],op:.4}],
+   [{d:3,n:6,sc:.13,fy:[.62,.86],x:[.1,.9],op:.7},{d:5,n:4,sc:.065,fy:[.64,.86],x:[.12,.88],op:.7},{d:4,n:2,sc:.26,at:"hem",x:[.2,.8],op:.55}]],
+  tide:[null,{h:.08,v:.6,f:9,soft:.03,op:.42},{h:.15,v:.55,f:9,soft:.045,op:.55},{h:.23,v:.5,f:9,soft:.06,op:.7}],col:[122,84,50],warm:.35,shoe:.85}},
+ rot:.5,jit:.05,
+ /* r6e tea look: translucent amber (core = inside darkness, ring = tide-line edge, cap = max strength, pull = how far it is pulled toward tea brown on saturated red / orange cloth) */
+ tea:{core:.5,ring:.25,cap:.5,mix:.9,tint:[170,98,42],base:1,texK:.3,texMin:.7,texMax:1.3,at:[.3,.28],rot:0,dripX:[-.12,.14,0],dripY:.2,dripLen:[.05,.04,.03],dripW:.006,dripOp:.7,
+  /* r6h: one fixed splash (decal 1, no turn, no size jitter) for every costume; sc = width share of the robe; drips = thin runs down the grain */
+  lv:[null,{sc:.14,op:1,drips:1},{sc:.2,op:1,drips:2},{sc:.27,op:1,drips:3}]}}});
+/* ---------- tiny deterministic noise ---------- */
+function clothHash(x,y,s){let h=(x*374761393+y*668265263+s*2147483647)|0;h=(h^(h>>>13))*1274126177|0;return((h^(h>>>16))>>>0)/4294967295}
+function clothNoise(x,y,s){const xi=Math.floor(x),yi=Math.floor(y),fx=x-xi,fy=y-yi,u=fx*fx*(3-2*fx),v=fy*fy*(3-2*fy);
+ const a=clothHash(xi,yi,s),b=clothHash(xi+1,yi,s),c=clothHash(xi,yi+1,s),d=clothHash(xi+1,yi+1,s);return a+(b-a)*u+(c-a)*v+(a-b-c+d)*u*v}
+function clothFbm(x,y,s,o){let t=0,a=.5,f=1,n=0;for(let i=0;i<(o||3);i++){t+=a*clothNoise(x*f,y*f,s+i*17);n+=a;a*=.5;f*=2.03}return t/n}
+const clothSmooth=(a,b,x)=>{const t=Math.max(0,Math.min(1,(x-a)/(b-a)));return t*t*(3-2*t)};
+function clothBlur(src,W,H,r){/* separable box blur x2, Float32 */const t=new Float32Array(W*H),o=new Float32Array(W*H),k=2*r+1;
+ for(let y=0;y<H;y++){let s=0;const b=y*W;for(let x=-r;x<=r;x++)s+=src[b+Math.min(W-1,Math.max(0,x))];for(let x=0;x<W;x++){t[b+x]=s/k;s+=src[b+Math.min(W-1,x+r+1)]-src[b+Math.max(0,x-r)]}}
+ for(let x=0;x<W;x++){let s=0;for(let y=-r;y<=r;y++)s+=t[Math.min(H-1,Math.max(0,y))*W+x];for(let y=0;y<H;y++){o[y*W+x]=s/k;s+=t[Math.min(H-1,y+r+1)*W+x]-t[Math.max(0,y-r)*W+x]}}return o}
+/* ---------- (a) the cloth mask: figure alpha − skin − hair − head ---------- */
+function clothRGB2Lab(r,g,b){const f=v=>{v/=255;return v>.04045?Math.pow((v+.055)/1.055,2.4):v/12.92},R=f(r),G=f(g),B=f(b);
+ const X=(R*.4124+G*.3576+B*.1805)/.95047,Y=R*.2126+G*.7152+B*.0722,Z=(R*.0193+G*.1192+B*.9505)/1.08883,q=t=>t>.008856?Math.cbrt(t):7.787*t+16/116;
+ return[116*q(Y)-16,500*(q(X)-q(Y)),200*(q(Y)-q(Z))]}
+/* d = Uint8ClampedArray RGBA of W×H; face = {x,y,w,h} in pixels (the lower-face box, band = nose bridge) or null. Returns {m: Float32 0..1 cloth, y0: first cloth row, y1: last, cx} */
+function clothMask(d,W,H,face,B){const n=W*H,Lab=new Float32Array(n*3);let y0=H,y1=0,x0=W,x1=0;
+ for(let i=0;i<n;i++){if(d[i*4+3]>128){const y=(i/W)|0,x=i-y*W;if(y<y0)y0=y;if(y>y1)y1=y;if(x<x0)x0=x;if(x>x1)x1=x;const l=clothRGB2Lab(d[i*4],d[i*4+1],d[i*4+2]);Lab[i*3]=l[0];Lab[i*3+1]=l[1];Lab[i*3+2]=l[2]}}
+ const fh=y1-y0+1,fw=x1-x0+1;if(!face)face={x:x0+fw*.40,y:y0+fh*.085,w:fw*.24,h:fh*.07};
+ const cx=face.x+face.w/2,chin=face.y+face.h+(B.head||0)*fh;
+ /* skin reference = HER OWN face: median Lab of the opaque pixels in the face box */
+ const S=[];for(let y=Math.max(0,face.y|0);y<Math.min(H,face.y+face.h);y++)for(let x=Math.max(0,face.x|0);x<Math.min(W,face.x+face.w);x++){const i=y*W+x;if(d[i*4+3]>240)S.push(i)}
+ const med=k=>{const a=S.map(i=>Lab[i*3+k]).sort((p,q)=>p-q);return a.length?a[a.length>>1]:0},sl=med(0),sa=med(1),sb=med(2);
+ const skin=new Uint8Array(n),skinT=new Uint8Array(n),tol=B.skin.de;
+ for(let i=0;i<n;i++){if(d[i*4+3]<128)continue;const da=Lab[i*3+1]-sa,db=Lab[i*3+2]-sb,dl=Lab[i*3]-sl;
+  /* skin = the same chroma as her face (hue + saturation), allowed to be darker (shade) but not far lighter; robe cream has less chroma / other hue */
+  if(Math.sqrt(da*da+db*db)<tol*.62&&dl>-sl*B.skin.lum&&dl<14&&Lab[i*3+1]>sa-4)skin[i]=1}
+ /* skin = only real blobs (face, neck, hands, feet); a few robe-trim pixels with a skin-like colour are not skin: drop components smaller than skin.min of the figure area */
+ {const seen=new Uint8Array(n),minA=B.skin.min*fw*fh;for(let s=0;s<n;s++){if(!skin[s]||seen[s])continue;const comp=[s],st=[s];seen[s]=1;while(st.length){const i=st.pop(),y=(i/W)|0,x=i-y*W;for(const j of[x>0?i-1:-1,x<W-1?i+1:-1,y>0?i-W:-1,y<H-1?i+W:-1]){if(j>=0&&skin[j]&&!seen[j]){seen[j]=1;st.push(j);comp.push(j)}}}
+  let bx0=W,bx1=0,by0=H,by1=0;for(const i of comp){const y=(i/W)|0,x=i-y*W;if(x<bx0)bx0=x;if(x>bx1)bx1=x;if(y<by0)by0=y;if(y>by1)by1=y}const bw=bx1-bx0+1,bh=by1-by0+1;
+  /* real skin blobs (hands, neck, feet) are compact; a long thin strip or a ragged lace of skin colour is robe trim / embroidery (r3) */
+  const fill=comp.length/(bw*bh),asp=bh/Math.max(1,bw);/* tall thin = lapel / trim strip; hands are wide or round */
+  const neck=by0<=chin+fh*.06&&bx0<cx+fw*.2&&bx1>cx-fw*.2&&comp.length>=minA;/* r5: the neck / V-neckline skin touches the head zone: always skin, even when it is a tall thin strip (it was dropped as 'lapel trim' and the stain layers darkened her neck) */
+  if(!neck&&(comp.length<minA||comp.length>B.skin.max*fw*fh||fill<B.skin.fill||asp>B.skin.asp))for(const i of comp)skin[i]=0;
+  else if(neck||(Math.abs((bx0+bx1)/2-cx)<B.skin.handX*fw&&by1<y0+fh*B.lowB))for(const i of comp)skinT[i]=1}}/* r6c skinT (stain layers): TRUE skin = neck + hands (near the body centre, above the knees); skin-coloured embroidery off to the side or low on the skirt (c03 lotus, c01 peony) is cloth and gets wet / muddy like the rest *//* too big = a skin-coloured robe, not a hand / neck */
+ /* hair = dark pixels of the head zone's hair colour, grown downwards while the colour stays hair (long hair over the shoulders), limited reach */
+ const hair=new Uint8Array(n);let hl=0,ha=0,hb=0,hn=0;const hy1=Math.min(H,face.y+face.h*.2|0);
+ for(let y=y0;y<hy1;y++)for(let x=(cx-fw*.30)|0;x<cx+fw*.30;x++){const i=y*W+x;if(d[i*4+3]>240&&Lab[i*3]<30){hl+=Lab[i*3];ha+=Lab[i*3+1];hb+=Lab[i*3+2];hn++}}
+ if(hn>40){hl/=hn;ha/=hn;hb/=hn;const lim=Math.min(H-1,(chin+fh*B.hair.reach)|0),st=[];
+  const near=i=>{const dl=Lab[i*3]-hl,da=Lab[i*3+1]-ha,db=Lab[i*3+2]-hb;return Math.sqrt(dl*dl+da*da+db*db)<B.hair.de&&Lab[i*3]<48};
+  for(let y=y0;y<=chin;y++)for(let x=0;x<W;x++){const i=y*W+x;if(d[i*4+3]>128&&near(i)){hair[i]=1;if(y>chin-fh*.03)st.push(i)}}
+  while(st.length){const i=st.pop(),y=(i/W)|0,x=i-y*W;for(const j of[i-1,i+1,i-W,i+W]){if(j<0||j>=n)continue;const yy=(j/W)|0;if(yy>lim||hair[j]||d[j*4+3]<=128)continue;if(near(j)){hair[j]=1;st.push(j)}}}}
+ const m=new Float32Array(n);
+ for(let y=0;y<H;y++)for(let x=0;x<W;x++){const i=y*W+x;if(d[i*4+3]<128||y<=chin||skin[i]||hair[i])continue;m[i]=d[i*4+3]/255}
+ /* drop specks: skin / hair holes are fine, but isolated 1-px cloth islands inside the skin (finger gaps) are not cloth */
+ const mb=clothBlur(m,W,H,1);for(let i=0;i<n;i++)m[i]=Math.min(m[i],mb[i]>.34?1:0)*(d[i*4+3]/255);
+ {/* r6c: a hand blob can swallow touching cream lining (loose skin colour test) -> dry glowing lobes once the robe is soaked. TRUE skin for the stain layers = pixels within ~3 px of a CORE of tight face-colour pixels */const core=new Float32Array(n);for(let i=0;i<n;i++)if(skinT[i]){const da=Lab[i*3+1]-sa,db=Lab[i*3+2]-sb;if(Math.sqrt(da*da+db*db)<tol*B.skin.core)core[i]=1}const cb=clothBlur(core,W,H,3);for(let i=0;i<n;i++)if(skinT[i]&&cb[i]<.04)skinT[i]=0}
+ const mS=new Float32Array(n);for(let y=0;y<H;y++)for(let x=0;x<W;x++){const i=y*W+x;if(d[i*4+3]<128||y<=chin||skinT[i]||hair[i])continue;mS[i]=d[i*4+3]/255}{const mb2=clothBlur(mS,W,H,1);for(let i=0;i<n;i++)mS[i]=Math.min(mS[i],mb2[i]>.34?1:0)*(d[i*4+3]/255)}/* r6c stain cloth mask */
+ /* protect = skin, hair and "items" (pixels far from the robe's own colour: jade pendant, held fan, jewellery), grown a little; folds and warp never touch it */
+ const rl=[],ra=[],rb=[];for(let i=0;i<n;i+=7)if(m[i]>.9){rl.push(Lab[i*3]);ra.push(Lab[i*3+1]);rb.push(Lab[i*3+2])}const md=a=>{a.sort((p,q)=>p-q);return a.length?a[a.length>>1]:0},rLl=md(rl),rLa=md(ra),rLb=md(rb),pr=new Float32Array(n);
+ for(let i=0;i<n;i++){if(d[i*4+3]<128)continue;if(skin[i]||hair[i]){pr[i]=1;continue}if(m[i]>.5){const dl=Lab[i*3]-rLl,da=Lab[i*3+1]-rLa,db=Lab[i*3+2]-rLb;if(Math.sqrt(dl*dl+da*da+db*db)>B.item)pr[i]=1}}
+ const prot=clothBlur(clothBlur(pr,W,H,3),W,H,3);for(let i=0;i<n;i++)prot[i]=Math.min(1,prot[i]*4);
+ const ps=new Float32Array(n);for(let i=0;i<n;i++)ps[i]=skin[i]||hair[i]?1:0;const protS=clothBlur(clothBlur(ps,W,H,3),W,H,3);for(let i=0;i<n;i++)protS[i]=Math.min(1,protS[i]*4);/* strokes avoid only skin + hair (embroidery is part of the robe); warp also avoids items */
+ /* r5 protF: skin + hair map with a SOFT 2-3 px feather and no halo (stain layers: wet, tea, mud); protS stays as it was for the creases */
+ const psT=new Float32Array(n);for(let i=0;i<n;i++)psT[i]=skinT[i]||hair[i]?1:0;const pd=clothBlur(psT,W,H,2),ps2=new Float32Array(n);for(let i=0;i<n;i++)ps2[i]=pd[i]>.1?1:0;/* r5b: hands / wrists / fingers 100 % out: skin grown 2 px (finger shadows, antialiased edge), then a soft 2 px feather */
+ const protF=clothBlur(clothBlur(ps2,W,H,1),W,H,1);for(let i=0;i<n;i++)protF[i]=Math.min(1,protF[i]*1.5);
+ /* r6b protL (stain layers only): skin/hair (protF) + held items (prot) — but the item test is a colour test, so on the LOWER skirt it caught embroidered motifs (c03 lotus) and the wet/mud left a dry halo around them; skin-coloured motifs (pink lotus) were taken as skin too; hands never reach below .55-.65 of the figure, so there nothing is kept out */
+ const pI=clothBlur(clothBlur(pr,W,H,1),W,H,1),protL=new Float32Array(n),fh0=y1-y0+1;/* items with a TIGHT 2 px feather (the wide prot left a dry glowing ring round hands / beads once the robe is soaked) */for(let y=0;y<H;y++){const lo=1-clothSmooth(y0+fh0*B.lowA,y0+fh0*B.lowB,y);for(let x=0;x<W;x++){const i=y*W+x,ctr=1-clothSmooth(B.skin.handX,B.skin.handX+.05,Math.abs(x-cx)/fw);protL[i]=Math.min(1,Math.max(protF[i]*1.5,Math.min(1,pI[i]*1.5)*lo*ctr))}/* held items sit at the hands (centre); far-off colour tests were embroidery */}
+ return{m:clothBlur(m,W,H,1),mS:clothBlur(mS,W,H,1),y0,y1,x0,x1,cx,chin,skin,skinT,hair,prot,protS,protF,protL}}
+/* ---------- (b) crease map: every crease = a STRAIGHT (or gently tapered) soft gaussian dark band + a thin lighter ridge on its lit side (r3) ----------
+   Painted-fold shading, not a relief / noise texture: no gradient lighting, no swirl, no turbulence (r1/r2 read as glass / zebra). Strokes are placed by
+   the body: a fan of short folds out of the waist tie, bunched horizontal wrinkles just above the belt and above the hem, crumples at the elbow bend,
+   1–2 diagonal drag lines shoulder→waist. dk = darkness 0..1 (multiply in the robe's own hue), lt = ridge light 0..1 (screen). */
+function clothRng(s){let a=(s*2654435761)>>>0;return()=>{a=(a+0x6D2B79F5)>>>0;let t=a;t=Math.imul(t^(t>>>15),t|1);t^=t+Math.imul(t^(t>>>7),t|61);return((t^(t>>>14))>>>0)/4294967296}}
+function clothField(W,H,mk,L,seed){const n=W*H,dk=new Float32Array(n),lt=new Float32Array(n),fh=mk.y1-mk.y0+1,fw=mk.x1-mk.x0+1,cx=mk.cx,B=BAL.looks.xoc,
+  waist=mk.y0+fh*B.body.waist,R=clothRng(seed*977+13),pr=mk.protS,u=fh/900;/* u = 1 at the 900-px figure height the picture set is painted at */
+ /* one crease: straight line (x0,y0) → angle, length len; sg = band half-width (px), dep = darkness; the ridge sits on the side facing the light, thinner */
+ const lx=B.light[0],ly=B.light[1];
+ const stroke=(x0,y0,ang,len,sg,dep)=>{const dx=Math.cos(ang),dy=Math.sin(ang);let nx=-dy,ny=dx;if(nx*lx+ny*ly<0){nx=-nx;ny=-ny}/* n points toward the light */
+  const sgw=sg*u,r=sgw*3.5+2,xa=Math.min(x0,x0+dx*len)-r,xb=Math.max(x0,x0+dx*len)+r,ya=Math.min(y0,y0+dy*len)-r,yb=Math.max(y0,y0+dy*len)+r,ro=sgw*B.ridge.off,rw=sgw*B.ridge.w;
+  for(let yy=Math.max(0,ya|0);yy<=Math.min(H-1,yb);yy++)for(let xx=Math.max(0,xa|0);xx<=Math.min(W-1,xb);xx++){const i=yy*W+xx;if(mk.m[i]<.3)continue;
+   const px=xx-x0,py=yy-y0,t=(px*dx+py*dy)/len;if(t<-.05||t>1.05)continue;const tc=Math.max(0,Math.min(1,t));
+   const tp=Math.pow(Math.sin(Math.PI*(.04+tc*.92)),.7)*(t<0?1+t*20:t>1?1-(t-1)*20:1);/* tapered both ends, thickest a little before the middle */
+   const sd=px*nx+py*ny,w=sgw*(.55+.45*tp)*(sd>0?B.ridge.edge:B.ridge.soft),g=Math.exp(-.5*(sd/w)*(sd/w))*tp*dep,/* crisp on the lit side, soft fall-off on the shade side */ri=Math.exp(-.5*Math.pow((sd-ro*(.6+.4*tp))/rw,2))*tp*dep*B.ridge.k;
+   const keep=1-Math.min(1,Math.max(pr[i]*1.6,mk.prot[i]*1.2));dk[i]=1-(1-dk[i])*(1-g*keep);lt[i]=Math.max(lt[i],ri*keep)}};
+ const rowSpan=y=>{let a=-1,b=-1;const yy=Math.max(0,Math.min(H-1,y|0));for(let x=0;x<W;x++)if(mk.m[yy*W+x]>.9&&pr[yy*W+x]<.3){if(a<0)a=x;b=x}return[a,b]};
+ const J=()=>R()-.5,D=L.dep,S=L.sg;
+ /* 1. fan of short folds hanging out of the waist tie: start just below the knot, open downward ±35°, longest in the middle */
+ for(let q=0;q<L.waist;q++){const f=L.waist>1?q/(L.waist-1)-.5:0,ang=Math.PI/2-f*1.5+J()*.25,ox=cx+f*fw*.08+J()*fw*.03,oy=waist+fh*(.015+R()*.03);/* splayed out of the knot (against the robe's own vertical pleats, so they read as creases) */
+  stroke(ox,oy,ang,fh*(.05+.05*(1-Math.abs(f))+R()*.03),S*(.7+R()*.6),D*(.55+R()*.55))}
+ /* bunch = a small stack of near-parallel short creases (fabric pushed together): k strokes stepped along the normal by gap, lengths and tilt jittered */
+ const bunch=(x,y,ang,k,len,gap,sg,dep)=>{const nx=-Math.sin(ang),ny=Math.cos(ang);for(let j=0;j<k;j++){const o=(j-(k-1)/2)*gap*(.8+R()*.4),l=len*(.55+R()*.6),sh=(R()-.5)*len*.35;
+  stroke(x+nx*o+Math.cos(ang)*sh-Math.cos(ang)*l/2,y+ny*o+Math.sin(ang)*sh-Math.sin(ang)*l/2,ang+J()*.18,l,sg*(.75+R()*.4),dep*(.7+R()*.4))}};
+ const per=B.bunchK,gp=fh*.0065;
+ /* 2. bunched horizontal wrinkles just above the belt (fabric pushed up by the sash) */
+ for(let q=0;q<Math.ceil(L.belt/per);q++){const y=waist-fh*(.02+R()*.03),sp=rowSpan(y);if(sp[0]<0)continue;const a0=Math.max(sp[0],cx-fw*.28),a1=Math.min(sp[1],cx+fw*.28);if(a1-a0<fw*.1)continue;
+  bunch(a0+fw*.06+R()*Math.max(1,a1-a0-fw*.12),y,J()*.25,Math.min(per,L.belt-q*per),fw*.2,gp,S*.85,D)}
+ /* 2b. cluster of folds under the bust (r4) */
+ for(let q=0;q<Math.ceil((L.bust||0)/per);q++){const y=mk.y0+fh*(.235+R()*.03),sp=rowSpan(y);if(sp[0]<0)continue;const sd=q%2?1:-1,bx=cx+sd*fw*(.19+R()*.06);if(bx<sp[0]||bx>sp[1])continue;
+  bunch(bx,y,J()*.3,Math.min(per,L.bust-q*per),fw*.16,gp,S*.9,D)}
+ /* 3. crumples at the inner elbow / sleeve bend: a stack of short diagonal creases on each arm, slanting down toward the body */
+ for(const sd of[-1,1])for(let q=0;q<Math.ceil(L.elbow/per);q++){const ex=cx+sd*fw*(B.body.elbowX+J()*.05),ey=mk.y0+fh*(B.body.elbowY+J()*.04),ang=(sd<0?0:Math.PI)+sd*(.45+R()*.2);
+  bunch(ex,ey,ang,Math.min(per,L.elbow-q*per),fw*.15,gp,S*.75,D*.9)}
+ /* 4. bunched wrinkles above the hem: stacks of short, near-level creases spread across the skirt */
+ for(let q=0;q<Math.ceil(L.hem/per);q++){const y=mk.y1-fh*(.04+R()*.07),sp=rowSpan(y);if(sp[0]<0||sp[1]-sp[0]<fw*.25)continue;
+  bunch(sp[0]+(.12+R()*.76)*(sp[1]-sp[0]),y,J()*.3,Math.min(per,L.hem-q*per),fw*.22,gp*1.1,S,D)}
+ /* 5. drag lines: long, faint, straight diagonals from the shoulder down toward the waist knot */
+ for(let q=0;q<L.drag;q++){const sd=q%2?1:-1,sx=cx+sd*fw*(.27+R()*.05),sy=mk.y0+fh*(B.body.shoulder+.04+R()*.03),tx=cx-sd*fw*.06,ty=waist+fh*.02,ang=Math.atan2(ty-sy,tx-sx);
+  stroke(sx,sy,ang,Math.hypot(tx-sx,ty-sy)*.85,S*.75,D*.32)}
+ return{dk,lt}}
+/* ---------- the effect: one call = baked ImageData ---------- */
+function clothXocBake(d,W,H,lv,opt){opt=opt||{};const B=BAL.looks.xoc,L=B.lv[cl(lv|0,1,3)],n=W*H,seed=opt.seed==null?B.seed:opt.seed;
+ const mk=opt.mask||clothMask(d,W,H,opt.face||null,B),m=mk.m,fh=mk.y1-mk.y0+1,fw=mk.x1-mk.x0+1;
+ const F=B.dec.mode==="decal"?{dk:new Float32Array(n),lt:new Float32Array(n)}:clothField(W,H,mk,L,seed),dk=clothBlur(F.dk,W,H,1),lt=F.lt;
+ /* cloth layer = original colours: crease = multiply toward the robe's OWN hue darkened (a touch more saturated, never grey), ridge = soft screen.
+    Mean brightness kept: the small loss of the creases is spread back over the mask (cp share). */
+ let ms=0,mc=0;for(let i=0;i<n;i++)if(m[i]>.5){ms+=dk[i]*L.dark-lt[i]*L.lite*.6;mc++}const comp=0;
+ const cloth=new Float32Array(n*4);
+ for(let i=0;i<n;i++){const k=m[i];if(k<.01)continue;const r=d[i*4],g=d[i*4+1],b=d[i*4+2],lum=(r*.3+g*.59+b*.11)/255,mx=Math.max(r,g,b,1);
+  const a=dk[i]*L.dark*(.75+.35*lum),li=lt[i]*L.lite*(1-lum*.5);
+  for(let c=0;c<3;c++){const v=c===0?r:c===1?g:b,sat=v/mx;/* the channel's share of the colour: dominant channels darken less -> own hue, a bit richer */
+   let o=v*(1-Math.min(.34,a*.5));/* the robe hue darkened (all channels scaled alike: no brown / grey cast) */o=o+(255-o)*li;cloth[i*4+c]=Math.max(0,Math.min(255,o))*k}cloth[i*4+3]=k}
+ /* (c) warp ONLY the hem and the collar / lapel edge (uneven hem, askew collar); never hands, face, hair, pendants (protect map) */
+ const hem0=mk.y1-fh*.12,col0=mk.y0+fh*.1,col1=mk.y0+fh*.24,hw=L.warp/100*fw,sk=L.skew/100*fw,cw=L.collar/100*fw,out=new Uint8ClampedArray(d.length);
+ const dxo=new Float32Array(n),dyo=new Float32Array(n);
+ for(let y=mk.y0;y<=mk.y1;y++){const wh=clothSmooth(hem0,mk.y1,y),wc=clothSmooth(col0,col0+fh*.03,y)*(1-clothSmooth(col1-fh*.05,col1,y));
+  for(let x=0;x<W;x++){const i=y*W+x,u=(x-mk.cx)/fw,free=1-mk.prot[i];
+   const hx=((clothFbm(u*3+1.7,y/fh*2,seed+3,2)-.5)*2*hw+hw*.55*Math.sin(u*5.4+1.2))*wh;
+   const zg=(L.zig||0)/100*fw*(Math.abs(((u*13+.37)%1+1)%1-.5)*4-1)*clothSmooth(mk.y1-fh*.06,mk.y1-fh*.01,y);/* crumpled zig-zag along the hem edge (lv3) */
+   const hy=((clothFbm(u*4.2+8.3,y/fh*3,seed+4,2)-.5)*1.6*hw+sk*u*1.6)*wh+zg*free;
+   const lap=clothSmooth(.32,.1,Math.abs(u));/* lapel only, near the centre line */
+   const cxo=(cw*Math.max(0,-u)*3+cw*.5*(clothFbm(u*5,y/fh*7,seed+6,2)-.5)*2)*wc*lap,cyo=cw*Math.max(0,u)*1.4*wc*lap;
+   dxo[i]=(hx+cxo)*free;dyo[i]=(hy+cyo)*free}}
+ const dxs=clothBlur(dxo,W,H,3),dys=clothBlur(dyo,W,H,3);
+ /* base = the picture with the cloth taken out (skin, hair, jewels stay put) */
+ /* underlay = the picture with the SHADED cloth left where it was: a hem or lapel that slides away shows the cloth layer under it (robes are layered), never a hole */
+ const fa=new Float32Array(n);for(let i=0;i<n;i++)fa[i]=d[i*4+3]/255;const fab=clothBlur(fa,W,H,Math.max(3,Math.round(fw*.03)));/* distance from the OUTER silhouette: the underlay keeps only the interior, so the outline itself can move */
+ const nc=new Float32Array(n);for(let i=0;i<n;i++){const y=(i/W)|0;nc[i]=(mk.skin[i]||mk.hair[i]||y<=mk.chin)?d[i*4+3]/255:0}const ncb=clothBlur(nc,W,H,1);/* what stays put: skin, hair, head, jewels (the rim of the robe is NOT part of it, so no ghost outline) */
+ const base=new Float32Array(n*4);for(let i=0;i<n;i++){const a=Math.min(ncb[i],d[i*4+3]/255),ie=clothSmooth(.8,.97,fab[i]),ca=cloth[i*4+3]*ie,oa=ca+a*(1-ca);base[i*4]=cloth[i*4]*ie+d[i*4]*a*(1-ca);base[i*4+1]=cloth[i*4+1]*ie+d[i*4+1]*a*(1-ca);base[i*4+2]=cloth[i*4+2]*ie+d[i*4+2]*a*(1-ca);base[i*4+3]=oa}
+ for(let y=0;y<H;y++)for(let x=0;x<W;x++){const i=y*W+x;let r=0,g=0,b=0,a=0;
+  if(m[i]>.01||dxs[i]!==0||dys[i]!==0){const sx=x-dxs[i],sy=y-dys[i],x0=Math.floor(sx),y0=Math.floor(sy),fx=sx-x0,fy=sy-y0;
+   if(x0>=0&&y0>=0&&x0<W-1&&y0<H-1){const j=y0*W+x0,w0=(1-fx)*(1-fy),w1=fx*(1-fy),w2=(1-fx)*fy,w3=fx*fy;
+    r=cloth[j*4]*w0+cloth[(j+1)*4]*w1+cloth[(j+W)*4]*w2+cloth[(j+W+1)*4]*w3;g=cloth[j*4+1]*w0+cloth[(j+1)*4+1]*w1+cloth[(j+W)*4+1]*w2+cloth[(j+W+1)*4+1]*w3;
+    b=cloth[j*4+2]*w0+cloth[(j+1)*4+2]*w1+cloth[(j+W)*4+2]*w2+cloth[(j+W+1)*4+2]*w3;a=cloth[j*4+3]*w0+cloth[(j+1)*4+3]*w1+cloth[(j+W)*4+3]*w2+cloth[(j+W+1)*4+3]*w3}}
+  /* cloth over base ("over", premultiplied) */
+  const ba=base[i*4+3],oa=a+ba*(1-a);if(oa>0){out[i*4]=(r+base[i*4]*(1-a))/oa;out[i*4+1]=(g+base[i*4+1]*(1-a))/oa;out[i*4+2]=(b+base[i*4+2]*(1-a))/oa;out[i*4+3]=oa*255}}
+ /* r4: away from every crease and from the hem / lapel warp the output is BYTE-IDENTICAL to the picture (no resampling, no blur, no brightness shift) */
+ for(let i=0;i<n;i++){if(dk[i]<.002&&lt[i]<.002&&Math.abs(dxs[i])<.01&&Math.abs(dys[i])<.01){out[i*4]=d[i*4];out[i*4+1]=d[i*4+1];out[i*4+2]=d[i*4+2];out[i*4+3]=d[i*4+3]}}
+ if(B.dec.mode==="decal"&&opt.decals){const D=B.dec,DL=D.lv[cl(lv|0,1,3)],R=clothRng(seed*53+9),fw2=mk.x1-mk.x0+1,fh2=mk.y1-mk.y0+1,at=(a)=>[mk.x0+fw2*a[0],mk.y0+fh2*a[1]],P=opt.decals.patch||[];
+  if(P.length)for(let q=0;q<DL.n;q++){const a=at(D.pos[q%D.pos.length]),j=at([ (R()-.5)*.05,(R()-.5)*.06]);drawDecalOnCloth(out,W,H,mk,P[Math.floor(R()*P.length)%P.length],a[0]+j[0]-mk.x0,a[1]+j[1]-mk.y0,DL.sc*(.8+.5*R()),(R()-.5)*2*D.rot,DL.op,"shade")}
+  if(DL.knot&&opt.decals.knot&&opt.decals.knot.length){const a=at(D.knotAt);drawDecalOnCloth(out,W,H,mk,opt.decals.knot[0],a[0],a[1],D.knotSc,0,DL.op*.8,"shade")}
+  if(DL.hem&&opt.decals.hem&&opt.decals.hem.length){const a=at(D.hemAt);drawDecalOnCloth(out,W,H,mk,opt.decals.hem[0],a[0],a[1],D.hemSc,0,DL.op,"shade")}}
+ return{data:out,mask:mk,field:F}}
+/* ---------- TASK 2: one decal on the cloth (generic: stains now, crease decals later) ----------
+   out = RGBA Uint8ClampedArray (W×H, modified in place); mk = clothMask result; dec = {w,h,data RGBA} (transparent decal);
+   (ax,ay) = decal centre in pixels, scale = decal width as a share of the robe width, rot radians, op 0..1, blend multiply | soft | normal.
+   Clipped by the cloth mask and kept off skin / hair / held items (protect map); the figure's own alpha is never changed. */
+function clothDecalMid(dec){let t=0,n=0;for(let i=0;i<dec.w*dec.h;i++){const a=dec.data[i*4+3]/255;t+=a*dec.data[i*4]/255;n+=a}dec.mid=n?t/n:.7}
+function clothDecalRing(dec){const n=dec.w*dec.h,A=new Float32Array(n);for(let i=0;i<n;i++)A[i]=dec.data[i*4+3]/255;const r=Math.max(2,Math.round(.05*Math.min(dec.w,dec.h))),Ab=clothBlur(A,dec.w,dec.h,r),R=new Float32Array(n);for(let i=0;i<n;i++)R[i]=Math.min(1,Math.max(0,A[i]-Ab[i])*3.2);dec.A=A;dec.ring=R}
+/* r6b: a decal drawn much smaller than its file (768 px -> 20-60 px) was point-sampled -> aliased pixel speckle. clothDecalMip = premultiplied 2x2 box halvings (cached on the decal) so the draw samples a copy at most 2x its drawn size: soft watercolour edges stay soft */
+function clothDecalMip(dec,dw){let m=dec;while(m.w>dw*2&&m.w>8&&m.h>8){if(!m.half){const w=m.w>>1,h=m.h>>1,o=new Uint8ClampedArray(w*h*4),D=m.data;for(let y=0;y<h;y++)for(let x=0;x<w;x++){let a=0,r=0,g=0,b=0;for(const[dx,dy]of[[0,0],[1,0],[0,1],[1,1]]){const j=((2*y+dy)*m.w+2*x+dx)*4,al=D[j+3];a+=al;r+=D[j]*al;g+=D[j+1]*al;b+=D[j+2]*al}const i=(y*w+x)*4;o[i+3]=a/4;if(a){o[i]=r/a;o[i+1]=g/a;o[i+2]=b/a}}m.half={w,h,data:o}}m=m.half}return m}
+/* r6h tea: ONE look on every costume = the cloth's own light/shade (its folds) re-coloured to one fixed amber, so orange and white robes get the same mark; never lighter than the dry cloth */
+/* r6h: the ONE tea splash shape, drawn by code (a soft irregular blob, same lobes every time), so no costume can get a different picture */
+let clothTeaDec=null;
+function clothTeaShape(){if(clothTeaDec)return clothTeaDec;const N=128,data=new Uint8ClampedArray(N*N*4);for(let y=0;y<N;y++)for(let x=0;x<N;x++){const dx=(x+.5-N/2)/(N/2),dy=(y+.5-N/2)/(N/2),r=Math.hypot(dx,dy),t=Math.atan2(dy,dx),R=.62*(1+.1*Math.cos(2*t+1)+.08*Math.cos(3*t+2)+.05*Math.cos(5*t+.5)),a=1-clothSmooth(R-.22,R+.04,r);const i=(y*N+x)*4;data[i]=data[i+1]=data[i+2]=200;data[i+3]=Math.round(255*a)}return clothTeaDec={w:N,h:N,data}}
+let clothTeaLm=150;
+function clothTeaMix(out,i,sv){const T=BAL.looks.stain.tea,r=out[i*4],g=out[i*4+1],b=out[i*4+2],L=r*.3+g*.59+b*.11,tx=Math.min(T.texMax,Math.max(T.texMin,L/clothTeaLm)),k=T.base+T.texK*(tx-1),a=Math.min(1,sv/T.cap*T.mix);
+ const tr=T.tint[0]*k,tg=T.tint[1]*k,tb=T.tint[2]*k,nr=r+(tr-r)*a,ng=g+(tg-g)*a,nb=b+(tb-b)*a,NL=nr*.3+ng*.59+nb*.11,f=NL>L&&NL>0?L/NL:1;out[i*4]=nr*f;out[i*4+1]=ng*f;out[i*4+2]=nb*f}
+function drawDecalOnCloth(out,W,H,mk,dec,ax,ay,scale,rot,op,blend,tint,tm){const B=BAL.looks.stain;const fw=mk.x1-mk.x0+1,dw=Math.max(2,fw*scale);if(blend!=="shade")dec=clothDecalMip(dec,dw);const sc=dw/dec.w,dh=dec.h*sc,c=Math.cos(rot),sn=Math.sin(rot),R=Math.hypot(dw,dh)/2+1;let n=0;
+ for(let y=Math.max(0,Math.floor(ay-R));y<=Math.min(H-1,Math.ceil(ay+R));y++)for(let x=Math.max(0,Math.floor(ax-R));x<=Math.min(W-1,Math.ceil(ax+R));x++){const i=y*W+x,mm0=(blend==="shade"?mk.m:mk.mS)[i];if(mm0<.5)continue;const mm=clothSmooth(.5,.97,mm0);
+  const px=x-ax,py=y-ay,u=(px*c+py*sn)/sc+dec.w/2,v=(-px*sn+py*c)/sc+dec.h/2;if(u<0||v<0||u>=dec.w-1||v>=dec.h-1)continue;
+  const u0=u|0,v0=v|0,fx=u-u0,fy=v-v0,j=(v0*dec.w+u0)*4,w0=(1-fx)*(1-fy),w1=fx*(1-fy),w2=(1-fx)*fy,w3=fx*fy,D=dec.data,k=dec.w*4;
+  const da=(D[j+3]*w0+D[j+7]*w1+D[j+k+3]*w2+D[j+k+7]*w3)/255;if(da<.01)continue;
+  const ef=Math.min(1,Math.min(u,v,dec.w-1-u,dec.h-1-v)/(.16*Math.min(dec.w,dec.h)+1));/* feathered rim: no hard patch edge */
+  const wedge=blend==="shade"?1:1-(1-clothSmooth(.05,.15,Math.abs((x-mk.cx)/fw)))*(1-clothSmooth(mk.y0+(mk.y1-mk.y0+1)*.2,mk.y0+(mk.y1-mk.y0+1)*.3,y));/* r5: never on the neckline wedge (bare neck / chest skin in the V) */
+  const a=Math.min(1,(blend==="stain"?1:wedge)*da*op*mm*ef*ef*(3-2*ef)*(1-(blend==='shade'?Math.min(1,Math.max(mk.protS[i]*1.6,mk.prot[i]*1.2)):mk.protL[i])));if(a<.003)continue;
+  const mx0=Math.max(1,out[i*4],out[i*4+1],out[i*4+2]);
+  if(blend==="stain"){/* translucent stain: only the decal SHAPE is used; multiply by a tea-brown factor so the fabric texture and folds stay visible; darker tide-line ring at the edge, lighter centre */
+   if(!dec.A)clothDecalRing(dec);const ii=(Math.round(v)*dec.w+Math.round(u)),sv=Math.min(B.tea.cap,op*mm*ef*(1-mk.protL[i])*(B.tea.core*dec.A[ii]+B.tea.ring*dec.ring[ii]));if(sv<.01)continue;
+   clothTeaMix(out,i,sv);n++;continue}/* r6e: on saturated red / orange cloth a tea-brown multiply stays red: pull toward a deeper tea brown by the cloth's saturation (BAL tra.tm), never lighter */
+  for(let q=0;q<3;q++){let dc=D[j+q]*w0+D[j+4+q]*w1+D[j+k+q]*w2+D[j+k+4+q]*w3;if(tint)dc=dc+(tint[q]-dc)*tm;const b=out[i*4+q];let o;
+   if(blend==="shade"){if(dec.mid==null)clothDecalMid(dec);const dl=dc/255-dec.mid;const sat=1-b/mx0;/* shade tinted to the robe: the weaker channels darken more, so shadows are the robe's own deeper hue, not neutral grey */o=b*(1+BAL.looks.xoc.dec.shadeK*(dl<0?dl*(1+.9*sat):dl*.45))}else if(blend==="normal")o=dc;else if(blend==="soft")o=dc<128?2*b*dc/255:255-2*(255-b)*(255-dc)/255;else if(blend==="mud"){const sat=1-Math.min(out[i*4],out[i*4+1],out[i*4+2])/mx0,e=Math.min(1,tm*sat*2.2);o=Math.min(b,b*dc/255*(1-e)+dc*.85*e)}else o=b*dc/255;/* mud (r6e): multiply, pulled toward the mud colour on saturated cloth; multiply: the robe's folds and pattern show through */
+   out[i*4+q]=b+(o-b)*a}n++}
+ return n}
+/* r6 wet colour: local robe colour (blurred over the cloth only) gives the HUE; each channel is scaled by (channel / brightest channel)^P, so the weaker channels drop more: the robe's own hue gets deeper and richer, never neutral grey. Very pale / near-white cloth borrows the hue of the robe around it (wider blur) and a warm floor, so ivory turns deeper warm ivory, not grey. */
+function clothLocalColour(o,W,H,mk,r){const n=W*H,R=new Float32Array(n),G=new Float32Array(n),Bc=new Float32Array(n),M=new Float32Array(n);for(let i=0;i<n;i++){const m=mk.mS[i]>.5&&mk.protL[i]<.3?1:0;M[i]=m;R[i]=o[i*4]*m;G[i]=o[i*4+1]*m;Bc[i]=o[i*4+2]*m}
+ const out=[];for(const rr of[r,r*4]){const a=clothBlur(R,W,H,rr),b=clothBlur(G,W,H,rr),c=clothBlur(Bc,W,H,rr),m=clothBlur(M,W,H,rr);for(let i=0;i<n;i++){const z=m[i];if(z<.05){a[i]=o[i*4];b[i]=o[i*4+1];c[i]=o[i*4+2]}else{a[i]/=z;b[i]/=z;c[i]/=z}}/* no cloth around: the pixel's own colour (never 0 = black) */out.push([a,b,c])}return out}
+function clothWetDeepen(o,i,C,s,P){if(s<=0)return;let r=C[0][0][i],g=C[0][1][i],b=C[0][2][i],mx=Math.max(1,r,g,b),sat=1-Math.min(r,g,b)/mx;
+ if(sat<P.satMin){const R2=C[1][0][i],G2=C[1][1][i],B2=C[1][2][i],m2=Math.max(1,R2,G2,B2),s2=1-Math.min(R2,G2,B2)/m2,t=1-sat/P.satMin;/* near-white: take the wider robe hue, else a warm floor */
+  let hr=R2/m2,hg=G2/m2,hb=B2/m2;if(s2<P.satMin){const f=1-s2/P.satMin;hr=hr+(1-hr)*f;hg=hg+(P.warm[1]-hg)*f;hb=hb+(P.warm[2]-hb)*f}r=r/mx*(1-t)+hr*t;g=g/mx*(1-t)+hg*t;b=b/mx*(1-t)+hb*t;mx=Math.max(r,g,b);sat=1-Math.min(r,g,b)/mx}
+ const p=P.pow*(1+P.paleP*(1-Math.min(1,sat/.5))),dk=1-(P.dk||P.dark)*s;
+ for(let q=0;q<3;q++){const v=o[i*4+q],h=Math.pow((q===0?r:q===1?g:b)/mx,p),f=(1-s)+s*h;o[i*4+q]=Math.min(v,v*f*dk)}}
+/* r6: a decal's ALPHA stamped into a float field (wet shapes), same placement maths as drawDecalOnCloth; returns pixels touched */
+function clothFieldDecal(F,W,H,mk,dec,ax,ay,scale,rot,op){const fw=mk.x1-mk.x0+1,dw=Math.max(2,fw*scale);dec=clothDecalMip(dec,dw);const sc=dw/dec.w,dh=dec.h*sc,c=Math.cos(rot),sn=Math.sin(rot),Rr=Math.hypot(dw,dh)/2+1;let n=0;
+ for(let y=Math.max(0,Math.floor(ay-Rr));y<=Math.min(H-1,Math.ceil(ay+Rr));y++)for(let x=Math.max(0,Math.floor(ax-Rr));x<=Math.min(W-1,Math.ceil(ax+Rr));x++){const i=y*W+x;if(mk.mS[i]<.5)continue;
+  const px=x-ax,py=y-ay,u=(px*c+py*sn)/sc+dec.w/2,v=(-px*sn+py*c)/sc+dec.h/2;if(u<0||v<0||u>=dec.w-1||v>=dec.h-1)continue;const da=dec.data[((v|0)*dec.w+(u|0))*4+3]/255;if(da<.01)continue;
+  const ef=Math.min(1,Math.min(u,v,dec.w-1-u,dec.h-1-v)/(.16*Math.min(dec.w,dec.h)+1)),a=Math.min(1,da*op*ef*ef*(3-2*ef));if(a>F[i])F[i]=a;n++}return n}
+/* kind = "tra" | "uot" | "bun", lv 1..3, decals = [{w,h,data}] (variants of that kind); opt.base = RGBA already shaded (e.g. the xoc bake) else the picture; returns {data,mask,count} */
+function clothStainBake(d,W,H,kind,lv,decals,opt){opt=opt||{};const B=BAL.looks.stain,K=B.kind[kind],L=(K.lv||B.lv)[cl(lv|0,1,3)],seed=opt.seed==null?BAL.looks.xoc.seed:opt.seed,
+ mk=opt.mask||clothMask(d,W,H,opt.face||null,BAL.looks.xoc),out=new Uint8ClampedArray(opt.base||d),R=clothRng(seed*131+kind.charCodeAt(0)),fw=mk.x1-mk.x0+1,fh=mk.y1-mk.y0+1;let count=0;
+ /* wet cloth (r6): soaked silk = UNEVEN wet zones (shoulders, sleeves, hem wicking UP the pleats) + the wet decals' SHAPES (fx-stain-uot-*), one field; colour = clothWetDeepen: the robe's OWN hue, deeper (ivory -> warmer deeper ivory, blue -> deeper blue, red -> deeper red), never lighter, never greyer; drip runs under sleeve ends / hem; clear of skin / hair / items */
+ if(K.wet&&L.wet){let ls=0,lc=0;for(let i=0;i<W*H;i+=5)if(mk.mS[i]>.9){ls+=d[i*4]*.3+d[i*4+1]*.59+d[i*4+2]*.11;lc++}const pale=cl(((lc?ls/lc/255:.5)-.55)*3,0,1);/* pale robes keep most of the robe DRY: smaller, sparser patches */
+  const WP=K.deep,lvl=cl(lv|0,1,3),ws=L.wet*(1-.2*pale),t0=.74-.07*lvl+.1*pale,Wf=new Float32Array(W*H),Lm=new Float32Array(W*H);for(let i=0;i<W*H;i++)Lm[i]=out[i*4]*.3+out[i*4+1]*.59+out[i*4+2]*.11;const Lb=clothBlur(Lm,W,H,4);
+  const hemTop=new Float32Array(W);for(let x=0;x<W;x++)hemTop[x]=WP.hem-WP.hemV*clothFbm(x/fw*WP.hemF+seed*.13,.5,seed+41,3);/* hem wet line per COLUMN: tongues wicking up the pleats, never a horizontal band */
+  for(let y=mk.y0;y<=mk.y1;y++){const fy=(y-mk.y0)/fh;for(let x=mk.x0;x<=mk.x1;x++){const i=y*W+x;if(mk.mS[i]<.5)continue;const u=Math.abs((x-mk.cx)/fw),n=clothFbm(x/fw*WP.nx+seed*.37,y/fh*WP.ny,seed+21,3),
+    zone=Math.max(clothSmooth(.05,.16,fy)*(1-clothSmooth(.27,.4,fy))*.9,clothSmooth(.18,.32,u)*clothSmooth(.2,.3,fy)*(1-clothSmooth(.7,.85,fy))*.8,clothSmooth(hemTop[x],hemTop[x]+.12,fy),clothSmooth(.32,.4,fy)*(1-clothSmooth(.66,.8,fy))*(1-clothSmooth(.14,.26,u))*WP.front[lvl])*(1-.25*pale);
+    Wf[i]=clothSmooth(t0,t0+.16,n*.62+zone*(.5+.9*clothFbm(x/fw*WP.nx*.6+9,y/fh*WP.ny+3,seed+33,2))*.62)*clothSmooth(mk.chin,mk.chin+fh*.07,y)*(1-(1-clothSmooth(.05,.15,u))*(1-clothSmooth(mk.y0+fh*.2,mk.y0+fh*.3,y)))}}
+  if(decals&&decals.length)for(let q=0;q<L.n;q++){const an=B.anchor[K.pos[q%K.pos.length]],dec=decals[Math.floor(R()*decals.length)%decals.length];/* wet decals: only their SHAPE joins the wet field (their own grey-blue colour is never painted) */
+   count+=clothFieldDecal(Wf,W,H,mk,dec,mk.x0+fw*(an[0]+(R()-.5)*B.jit*2),mk.y0+fh*(an[1]+(R()-.5)*B.jit*2),L.sc*(K.scm||1)*(.85+.3*R()),(R()-.5)*2*B.rot*(K.rotm||1),L.op*(K.opm||1)*(.9+.2*R()))}
+  const dn=1+lvl*2;for(let q=0;q<dn;q++){/* drip runs under the sleeve ends / hem: thin vertical wet streaks */
+   const fx=R()<.5?.1+.14*R():.76+.14*R(),fyy=(R()<.55?.6:.88)+.05*R(),dx=mk.x0+fw*fx,dy0=mk.y0+fh*fyy,len=fh*(.05+.05*R()),sg=Math.max(1,fw*.006);
+   for(let y=dy0|0;y<Math.min(H,dy0+len);y++){const t=(y-dy0)/len,a=Math.sin(Math.PI*Math.min(1,t*1.3))*.75;for(let x=Math.floor(dx-sg*3);x<=dx+sg*3;x++){if(x<0||x>=W)continue;const i=y*W+x;Wf[i]=Math.max(Wf[i],a*Math.exp(-.5*((x-dx)/sg)**2))}}}
+  const Wb=clothBlur(Wf,W,H,2),C=clothLocalColour(out,W,H,mk,WP.rad);
+  const WQ=Object.assign({},WP,{dk:WP.darkL[lvl]}),fl=WP.floor[lvl];/* r6c: lv2/lv3 soak the WHOLE robe below the chest a little (floor), so no dry slot is left between wet streaks — a dry slot next to deepened cloth reads as a white band */
+  for(let i=0;i<W*H;i++){const y=(i/W)|0,fl0=fl?fl*clothSmooth(mk.chin+fh*.05,mk.chin+fh*.2,y)*(.85+.3*clothFbm((i%W)/fw*1.5,y/fh*1.5,seed+71,2)):0,w0=Math.max(Wb[i],fl0);const k=mk.mS[i]*(1-mk.protL[i]);if(k<.02||w0<.002)continue;const lm=Lm[i];
+   const s=Math.min(1,w0*ws*k*WP.k+Math.max(0,Lb[i]-lm)/255*WP.cling*w0*ws*k);/* cloth clings: the SHADOW side of the folds deepens a little more */
+   clothWetDeepen(out,i,C,s,WQ)}}
+ const T=kind==="tra"&&B.tea&&B.tea.lv?B.tea:null;
+ if(T&&decals&&decals.length){/* r6h owner: ONE cup of tea, ONE identical splash (same decal, same turn, same size, same amber) on every costume, high on the chest clear of the elbow fold; lv3 = a bit larger + more drips */
+  let ls=0,lc=0;for(let i=0;i<W*H;i+=5)if(mk.mS[i]>.9){ls+=d[i*4]*.3+d[i*4+1]*.59+d[i*4+2]*.11;lc++}clothTeaLm=Math.max(60,lc?ls/lc:150);
+  const TL=T.lv[cl(lv|0,1,3)],dec=clothTeaShape(),sc=TL.sc,ax=mk.x0+fw*T.at[0],ay=mk.y0+fh*T.at[1];
+  count+=drawDecalOnCloth(out,W,H,mk,dec,ax,ay,sc,T.rot,TL.op,"stain",T.tint,0);
+  const dw=fw*sc;for(let q=0;q<TL.drips;q++){/* drip runs: thin, tapered, straight down from the lower edge of the splash, fixed places */
+   const dx=ax+dw*T.dripX[q],dy0=ay+dw*T.dripY,len=fh*T.dripLen[q],sg=Math.max(.8,fw*T.dripW);
+   for(let y=dy0|0;y<Math.min(H,dy0+len);y++){const t=(y-dy0)/len,a=TL.op*T.dripOp*(1-t)*Math.min(1,t*6+.3);for(let x=Math.floor(dx-sg*3);x<=dx+sg*3;x++){if(x<0||x>=W)continue;const i=y*W+x,k=mk.mS[i]*(1-mk.protL[i]);if(k<.3)continue;clothTeaMix(out,i,Math.min(T.cap,a*Math.exp(-.5*((x-dx)/sg)**2)*k*T.cap))}}}}
+ const D0=K.base?decals.slice(0,K.base):decals;
+ if(D0&&D0.length&&!K.wet&&!T)for(let q=0;q<L.n;q++){const nm=K.pos[q%K.pos.length],an=B.anchor[nm],dec=D0[Math.floor(R()*D0.length)%D0.length];
+  if(K.scatter){/* r5 mud follows the cloth grain: each streak is the strip decal turned VERTICAL, its foot on the hem line, running UP along the pleat, lengths vary, thinning with level; never a horizontal mark */
+   const Ls=L.sc*K.scm*(.55+.6*R()),Lp=Ls*fw,ax=mk.x0+fw*(.1+.8*R()),ay=mk.y0+fh*.975-Lp*(.35+.2*R());
+   count+=drawDecalOnCloth(out,W,H,mk,dec,ax,ay,Ls,Math.PI/2+(R()-.5)*K.tilt,L.op*(.9+.2*R()),K.blend,K.tint,K.tm);continue}
+  const ax=mk.x0+fw*(an[0]+(R()-.5)*B.jit*2),ay=mk.y0+fh*(an[1]+(K.dy||0)+(R()-.5)*(K.jy||B.jit)*2);
+  count+=drawDecalOnCloth(out,W,H,mk,dec,ax,ay,L.sc*(K.scm||1)*(.85+.3*R()),(R()-.5)*2*B.rot*(K.rotm||1),L.op*(K.opm||1)*(.9+.2*R()),K.blend,K.tint,K.tm)}
+ if(K.add&&K.add[cl(lv|0,1,3)]&&decals){/* r6 mud pieces (lv2/lv3): soft tide band up the pleats + sparse drops / drips / splash on the real hem; never rows of spikes; shoes mostly clean */
+  const base=new Uint8ClampedArray(out),hemY=new Int32Array(W);for(let x=0;x<W;x++){hemY[x]=mk.y1;for(let y=mk.y1;y>=mk.y0;y--)if(mk.mS[y*W+x]>.5){hemY[x]=y;break}}
+  const T=K.tide&&K.tide[cl(lv|0,1,3)];if(T){const F=new Float32Array(W*H);for(let x=mk.x0;x<=mk.x1;x++){const ht=fh*T.h*(1-T.v+T.v*clothFbm(x/fw*T.f+seed*.21,.3,seed+57,3)),sf=fh*T.soft;
+    for(let y=Math.max(mk.y0,Math.floor(hemY[x]-ht-sf*2));y<=hemY[x];y++){const i=y*W+x;if(mk.mS[i]<.5)continue;const up=hemY[x]-y;F[i]=(1-clothSmooth(ht-sf,ht+sf,up))*(.55+.45*(1-up/(ht+sf)))+.25*Math.exp(-.5*((up-ht)/(sf*.5+1))**2)}}/* darker at the hem, faint tide line at the top */
+   const Fb=clothBlur(F,W,H,2);for(let i=0;i<W*H;i++){const f=Fb[i];if(f<.004)continue;const k=f*T.op*mk.mS[i]*(1-mk.protL[i]);if(k<.003)continue;const v0=out[i*4],v1=out[i*4+1],v2=out[i*4+2],mx=Math.max(1,v0,v1,v2),sat=1-Math.min(v0,v1,v2)/mx,e=Math.min(1,K.warm*sat*k*2.2);for(let q=0;q<3;q++){const m=out[i*4+q]*(1-k+k*K.col[q]/255);out[i*4+q]=Math.min(out[i*4+q],m*(1-e)+K.col[q]*.72*e)}count++}}/* r6e: on saturated (red / orange) cloth a brown multiply stays red: pull toward real mud brown there, never lighter */
+  const R2=clothRng(seed*977+lv*13);for(const a of K.add[cl(lv|0,1,3)]){const dec=decals[a.d-1];if(!dec||!dec.w)continue;for(let q=0;q<a.n;q++){
+   const fx=a.x[0]+(a.x[1]-a.x[0])*((q+.15+.7*R2())/a.n),ax=mk.x0+fw*fx,xi=cl(Math.round(ax),0,W-1),sc=a.sc*(.85+.3*R2()),dh=dec.h*(fw*sc/dec.w);
+   const by=a.at==="hem"?hemY[xi]+dh*.04:mk.y0+fh*(a.fy[0]+(a.fy[1]-a.fy[0])*R2()),ay=by-dh/2;
+   count+=drawDecalOnCloth(out,W,H,mk,dec,ax,ay,sc,(R2()-.5)*.12,a.op*(.9+.2*R2()),"mud",null,K.warm)}}
+  if(K.shoe){/* shoes peek out under the centre of the hem: keep them mostly clean (a few drops may stay) */for(let y=Math.floor(mk.y1-fh*.05);y<=mk.y1;y++)for(let x=mk.x0;x<=mk.x1;x++){const i=y*W+x,u=Math.abs(x-mk.cx)/fw,z=K.shoe*(1-clothSmooth(.1,.18,u))*clothSmooth(mk.y1-fh*.05,mk.y1-fh*.03,y);if(z<=0)continue;for(let q=0;q<3;q++)out[i*4+q]=out[i*4+q]+(base[i*4+q]-out[i*4+q])*z}}}
+ return{data:out,mask:mk,count}}
+window.drawDecalOnCloth=drawDecalOnCloth;window.clothStainBake=clothStainBake;
+window.clothXocBake=clothXocBake;window.clothMask=clothMask;
+/* ---------- game wiring (only when the game is there): looks-2 CLOTHES "xoc" -> baked figure layer in the kit fx path ---------- */
+if(typeof KIT_FACEFX!=="undefined"&&typeof lkItem==="function"){
+ const CLO={},CLQ=[],BLANK="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
+ try{const st=document.createElement("style");st.textContent="img.kclo{pointer-events:none}img.kclo-on{clip-path:inset(100%)!important}";document.head.appendChild(st)}catch(e){}
+ /* the figure picture -> canvas -> clothXocBake -> data URL (async, once per picture + level, cached 24); a redraw of the stage puts it in */
+ /* decal files (transparent webp) fetched once per kind+variant, cached; a missing file just means that decal is skipped */
+ const DEC={};function clothDecalKey(key){if(!DEC[key])DEC[key]=fetch(IMG_U("https://ctm-img.victoria-tntt.workers.dev/img/"+key+".webp"),{mode:"cors"}).then(r=>r.ok?r.blob():Promise.reject()).then(bl=>createImageBitmap(bl)).then(bm=>{const c=document.createElement("canvas");c.width=bm.width;c.height=bm.height;const g=c.getContext("2d",{willReadFrequently:true});g.drawImage(bm,0,0);const id=g.getImageData(0,0,c.width,c.height);return{w:c.width,h:c.height,data:id.data}}).catch(()=>null);return DEC[key]}
+ function clothDecal(kind,n){return clothDecalKey("fx-stain-"+kind+"-"+n)}
+ /* the figure picture -> canvas -> xoc bake (creases) -> stain decals (tra / uot / bun) -> data URL (async, once per picture + effect set, cached 24); a redraw of the stage puts it in */
+ function clothPaint(file,fx,e){fetch(IMG_U("https://ctm-img.victoria-tntt.workers.dev/img/"+file),{mode:"cors"}).then(r=>r.blob()).then(bl=>createImageBitmap(bl)).then(bm=>{const W=bm.width,H=bm.height,c=document.createElement("canvas");c.width=W;c.height=H;const g=c.getContext("2d",{willReadFrequently:true});g.drawImage(bm,0,0);
+  const id=g.getImageData(0,0,W,H);let face=null;try{const f=window.KIT_VEIL&&KIT_VEIL.fit&&KIT_VEIL.fit[file];if(f)face={x:f[0]/100*W,y:f[1]/100*H,w:f[2]/100*W,h:f[3]/100*H}}catch(x){}
+  let sd=7;for(const ch of file)sd=(sd*31+ch.charCodeAt(0))%9973;let cur=id.data,mk=null;
+  let pre=Promise.resolve(null);if(fx.xoc&&BAL.looks.xoc.dec.mode==="decal")pre=Promise.all([[1,2,3,4].map(i=>clothDecalKey("fx-crease-"+i)),[clothDecalKey("fx-crease-knot-1")],[clothDecalKey("fx-crease-hem-1")]].map(a=>Promise.all(a))).then(r=>({patch:r[0].filter(Boolean),knot:r[1].filter(Boolean),hem:r[2].filter(Boolean)}));
+  return pre.then(dc=>{if(fx.xoc){const o=clothXocBake(cur,W,H,fx.xoc,{face,seed:sd,decals:dc});cur=o.data;mk=o.mask}
+  const kinds=["tra","uot","bun"].filter(k=>fx[k]);let wait=Promise.resolve();
+  for(const k of kinds)wait=wait.then(()=>Promise.all(Array.from({length:BAL.looks.stain.kind[k].variants},(_,i)=>clothDecal(k,i+1)))).then(ds=>{const o=clothStainBake(id.data,W,H,k,fx[k],ds.filter(Boolean),{face,seed:sd,base:cur,mask:mk});cur=o.data;mk=o.mask});
+  return wait.then(()=>{g.putImageData(new ImageData(cur,W,H),0,0);e.src=c.toDataURL("image/png");try{if(typeof kitFigFx==="function")kitFigFx()}catch(x){}})})}).catch(()=>{e.src=""})}
+ function clothXocLayer(file,fx){if(!/^fig-/.test(file))return"";if(typeof fx==="number")fx={xoc:fx};const on={};if(BAL.looks.xoc.on&&fx.xoc)on.xoc=fx.xoc;for(const k of["tra","uot","bun"])if(BAL.looks.stain.on[k]&&fx[k])on[k]=fx[k];if(!Object.keys(on).length)return"";
+  const key=file+"|"+JSON.stringify(on);let e=CLO[key];if(!e){e=CLO[key]={src:"",t:0};CLQ.push(key);if(CLQ.length>24)delete CLO[CLQ.shift()];clothPaint(file,on,e)}
+  return e.src?`<img class="kclo" src="${e.src}" alt="" aria-hidden="true" style="--fleft:0%;--ftop:0%;--fwidth:100%;--fheight:100%">`:""}
+ const ent=KIT_FACEFX.get("lkcloth");if(ent){const h0=ent.html;ent.html=(p,file,z)=>{const fx={};for(const a of z.L)if(a[0]==="xoc"||a[0]==="tra"||a[0]==="uot"||a[0]==="bun")fx[a[0]]=a[1].lv;return Object.keys(fx).length?clothXocLayer(kitFile(file),fx):h0.apply(this,arguments)}}
+ /* the cloth layer goes UNDER every face mark and the makeup (it repaints only the robe; the head is the picture's own) */
+ (function(){if(typeof kitFxLayers!=="function")return;const f0=kitFxLayers;kitFxLayers=function(p,file){const h=f0.apply(this,arguments);if(!h||h.indexOf("kclo")<0)return h;const M=[];const rest=h.replace(/<img class="kclo"[^>]*>/g,m=>{M.push(m);return""});return M.join("")+rest}})();
+ /* hide the plain picture under a finished cloth layer; toggled on every put so a cleared effect shows the picture again */
+ (function(){if(typeof kitFxPut!=="function")return;const p0=kitFxPut;kitFxPut=function(img,p,host){const r=p0.apply(this,arguments);try{if(img)img.classList.toggle("kclo-on",!!(host&&host.querySelector(".kfxf img.kclo")))}catch(e){}return r}})();
+ window.clothXocLayer=clothXocLayer}
 /* ================= jdisp: kitDisplayRoom — ĐA BẢO CÁC, the full-screen display room (KIT §89; owner OD 17/11 ~18:30Z (A), ~18:25Z (c)(d), ~18:33Z (3)) =================
    KIT PART ONLY (view + drawer + rail icon). Data = the C-AG display-shelf API (review/display-shelf, jshelf.js): shelfOf(p).g[group], shelfPut(p,ix),
    shelfTake(p,group), shelfWhyNot(p,e), shelfGrp(k), BAL.shelf.groups, luxPiece(k). Until that branch lands on main every call is guarded: no real API ⇒ the rail icon
@@ -70896,7 +71545,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="cf7662fb89dd";window.CTM_BUILD=BUILD;
+const BUILD="0ae7320ae221";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
