@@ -167,3 +167,5 @@ receiver-choice audit (ORDER MAIN ~21:16Z, OD 21:15Z/21:30Z; shares C-AG role-pa
 | Art rule book cleanup → FIGURE_GATE only (sonnet R1) | handover: dev/art + dev/rules art lines | Foreman C ROOT-32 | session_01PEhRby57EjhpPwSsH64rjg | RUNNING | 18/11 22:40Z |
 art rule book cleanup part 2 (figures/costumes + FIGURE_GATE A0–H) | claude/cung-tuong-mong-handover-hj0h8w | session_01PEhRbvZyEYZiUzmUijtacq (R1b, Foreman C ROOT-33) | RUNNING | 2026-11-18T22:41Z
 art rule book cleanup part 2 (other art topics → FIGURE_GATE I) | claude/cung-tuong-mong-handover-hj0h8w | session_01PEhRbx4FcwX6zsqPPxGawP (R1c, Foreman C ROOT-33) | RUNNING | 2026-11-18T22:41Z
+Thái hậu missing c04–c08,c13–c16 | handover | TH2 (Foreman C ROOT-33) | RUNNING | 2026-11-18T23:00Z
+Thái hậu missing c21–c24,c28–c32 | handover | TH3 (Foreman C ROOT-33) | RUNNING | 2026-11-18T23:00Z

@@ -657,6 +657,9 @@ PDATA={"nc":("dusty teal-blue and silver","oval face with soft cheeks, gentle al
 "bd":("deep teal-green and ivory fur","oval face with gently high cheekbones, warm round-almond eyes, softly arched brows, a small rosy mouth")}
 PTALL={"nc":"Nam Chiếu (Nanzhao, Yunnan) princess","bd":"Bắc Địch (northern steppe) princess"}
 IDENT=" From the identity reference keep ONLY her face, facial features and hairstyle colour; do NOT copy the outfit, hair ornaments or accessories of the reference, dress her in the NEW outfit below. The style reference image is only for skin, drawing style, fabric and embroidery: never copy its face, body or pose."
+TH_ITEMS=[("a string of sandalwood prayer beads","one"),("a jade-headed dragon-head staff","one"),("a thread-bound sutra book with a gold-brocade cover","two"),("a small gilded bronze hand censer","two"),("a scroll of calligraphy on yellow silk","two"),("an ivory-handled silk fan","one"),("a small white-jade ruyi","two"),("an embroidered silk prayer-bead pouch","one"),("a carved sandalwood box","two"),("a hand mirror in a bronze-and-jade frame","one")]
+# owner 18/11 ~22:55Z (FIGURE_GATE A0 REFERENCES): royal ranks incl. Thai hau = 3 images; image 3 = royal-yellow swatch TdwDfOyVNR
+TH_SWATCH=" Image 3 is only a colour reference for the royal yellow, never copy anything but its colour; the Empress Dowager's yellow is that royal yellow in its deep antique-gold, subdued shade as the colour rule says."
 def _pose(item,hk,right):
     return f" Pose: calm standing pose; she holds {item} in a contrasting colour, not the robe colour, the item held below the chin, the hand really gripping it, the whole face fully visible. Her hands interact naturally with the item (gently presenting, turning or touching it), lively and natural, while her head stays up facing the viewer, eyes open, lips closed, never looking down. Her hands and body: {low_hand(hk,right)}."
 CLOSE=" Every hairpin is inserted into the hair pointing upward or backward with dangles hanging down, no hairpin horizontal or sticking out to the side. Luminous smooth porcelain skin, bare clean forehead with no forehead mark and no flower mark, eyes open, floor-length robe with slippers visible, no train, no cup, nothing covering the face."
@@ -707,11 +710,13 @@ def build_state(c,state,v="v0"):
     if state=="nude":
         return build_nude_own(c,face,right)
     if state=="thaihau":
-        i=(item_for(c)+2)%10; item,hk=ITEMS[i]
+        # owner 18/11 ~22:05Z + FIGURE_GATE H: Thai hau holds ONLY an item of the H THAI HAU list (never a t8 consort item)
+        item,hk=TH_ITEMS[(item_for(c)+2)%10]
         s=PRE+f" An imperial consort, the Empress Dowager (Thái hậu), dignified and gracious. Her face: {face}."+IDENT+" "+AGE_TXT[AGE]
         s+=f" Outfit (the Empress Dowager (Thái hậu), as splendid as the Empress but dignified and restrained): a ceremonial robe of deep antique-gold yellow silk mixed with a muted deep {main0} (a trầm, subdued shade), richly embroidered on the chest, shoulders and wide sleeves with phoenixes, peonies and clouds in antique-gold and deep kingfisher-blue silk thread, over it a long ceremonial silk mantle falling from the shoulders to the floor, edged with a band of antique-gold brocade and pearls, a STIFF, STRUCTURED, squared shoulder piece (cầu vai cứng) of embroidered antique-gold brocade with a pearl edge, standing firm and horizontal over both shoulders to show her authority, and her own collar: a high upright round standing collar of deep brocade fastened at the throat with a small jade button (not a crossed collar, not a cloud collar), strands of pearls and jade across the chest, a jade-and-gold belt with tassels, floor-length robe with slippers visible, slim tall silhouette; a full imperial phoenix crown of the Empress's rank, a large central gold phoenix holding a pearl string in its beak, jewelled wings spreading to both sides, kingfisher-blue inlay, rubies and pearls, and a few clean pearl tassels at the sides."
         s+=f" COLOUR RULE: all colours MUTED and deep, rich and dignified, never bright, never pastel; the robe is deep antique-gold yellow mixed with muted deep {main0} (collar, inner robe, wide borders and a few panels), the yellow is a deep antique gold, not pale cream, not lemon, not bright; the crown, hairpin and jewellery in an old antique gold; gold only as thin accents on the borders; NOT an all-yellow robe."
         s+=" The phoenix is the main embroidered motif, larger and more prominent than the flowers."
+        s+=TH_SWATCH
         s+=" All flowers, birds and the phoenix are fine silk-thread embroidery stitched directly into the fabric, flat and integrated with the cloth, following its folds, not appliqué, not pasted patches, not raised. "+FAB
         return s+_pose(item,hk,right)+CLOSE+END
     # kc / ngheo: stepped-down versions of the --low t1 structure (outfit sentence = TIER_LOW[1] pattern)
