@@ -11,3 +11,7 @@ Note: on iPad the plaque overlaps the first stage chip row / tab row (expected: 
 ## For main
 - Old CDN art img/fx/buoi-* (wash, mist, hills, orb, band-*, ico-*, moon-*) now unused: delete from CDN on your word (I did not touch them).
 - After her pick: set BTR_OP, wipe review folder: `python3 dev/site/cdn_sync.py --wipe-review buoi-banner`.
+
+## UPDATE (ROOT-46 FAIL of be73c79 → fixed, sha 5a40cb2)
+- Shots re-made from ONE save per device, scene + backdrop + figures loaded, Luân hồi / loading overlays cleared, top bar reads "Buổi trưa" in all 6, same moment (anim paused at 40 %). LOOKed at all 6 at full size. Same 6 URLs (overwritten): fold-trua-{70,80,85}.png, ipad-trua-{70,80,85}.png.
+- Plaque now compact (top = hud bottom + 1 px, ~22 px high, centred). Fold: free gap, hides nothing. iPad: still grazes the top ~15 px of the Hoàng thượng card + "Tất cả" tab for ~1.5 s; no fully clear centred spot exists (stage starts 3 px under the bar). Alternative: shift off-centre into the gap beside the place plaque — on request.
