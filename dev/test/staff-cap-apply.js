@@ -6,6 +6,7 @@
       the palace still hires; the forced worst palace (OD 17/11 04:32Z chủ vị HH, HQP, QP, Phi x2, Tần x3, every other consort Quý nhân,
       Thái hậu alive) at 12 / 16 / 20 / 24 consorts fills EVERY household to its table row.
    4. Nữ đế (succession path c) keeps BAL.promo.capNd.
+   5. servant faces are freed when nobody holds them (j39 figGC): a 30-year heavy-turnover life never runs out of faces.
    usage: node dev/test/staff-cap-apply.js  (build first: python3 dev/build/assemble.py). PASS/FAIL table; exit 1 on any FAIL. */
 const {chromium}=require('playwright');const SV=require('./coop-serve.js');
 const T=[];const ok=(c,n,x)=>T.push([c?'PASS':'FAIL',n,x==null?'':String(x).slice(0,400)]);
@@ -47,6 +48,15 @@ const T=[];const ok=(c,n,x)=>T.push([c?'PASS':'FAIL',n,x==null?'':String(x).slic
  /* 3b. before-fix probe for the report: how many staff maids the OLD face-pool rule would allow */
  const r3b=await p.evaluate(()=>{const n=poolOf('maid').length,ne=poolOf('eunuch').length;return{oldMaidPool:n,oldEunPool:ne}});
  ok(true,'info: old FPOOL sizes (the old cap)',JSON.stringify(r3b));
+ /* 5. faces are freed (MAIN s42): a 30-year life with heavy servant turnover never runs out of servant identities; live faces stay unique */
+ const r5=await p.evaluate(()=>{__T.fresh('muoi');const see=()=>{for(const s of allServ())figFor({ref:s});if(S.maid)figFor({kind:'maid'})};const out=[];let gcMs=0,gcN=0;
+  const g0=figGC;figGC=function(){const t=performance.now();const r=g0.apply(this,arguments);gcMs=Math.max(gcMs,performance.now()-t);gcN++;return r};
+  const cons0=figUsed().filter(k=>/^consort:/.test(k));
+  for(let m=0;m<360;m++){S.turn=(S.turn||0)+1;for(const v of [S].concat(rivals)){if(!v.staff)continue;for(let i=v.staff.length-1;i>=0;i--)if(Math.random()<.3&&!v.staff[i].eid)v.staff.splice(i,1);try{fillStaff(v,true)}catch(e){}}see();
+   if(m%120===119){const L=allServ();out.push({y:(m+1)/12,serv:L.length,noFig:L.filter(s=>!s.fid).length,used:figUsed().length})}}
+  figGC=g0;const L=allServ().concat(S.maid?[S.maid]:[]).map(s=>s.fid).filter(Boolean);const dup=L.length-new Set(L).size;
+  const consLost=cons0.filter(k=>!figUsed().includes(k)).length;return{out,dup,consLost,gcN,gcMs:Math.round(gcMs)}});
+ ok(r5.out.every(o=>o.noFig===0)&&!r5.dup&&!r5.consLost,'30-year life, ~30 % servants replaced every month: every servant keeps a figure, no two live servants share a face, consort faces never freed',JSON.stringify(r5));
  /* 4. Nữ đế */
  const r4=await p.evaluate(()=>{__T.fresh('muoi');S.rank=7;S.succ={on:1,p:"c"};const c=capOf(S);S.succ=null;const c2=capOf(S);return{nd:c,hh:c2}});
  ok(JSON.stringify(r4.nd)===JSON.stringify(t1.nd)&&r4.nd[0]>=r4.hh[0]&&r4.nd[1]>=r4.hh[1],'Nữ đế (succession c) reads BAL.promo.capNd, >= the Hoàng hậu row',JSON.stringify(r4));
