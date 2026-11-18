@@ -24,3 +24,21 @@ Credits: 9 × 135 = 1215 cr.
 Files (md5-verified, https://ctm-img.victoria-tntt.workers.dev/img/_review/consort-tiers/c06/b7/): c06_a18_t1..t8.png, c06_a18_nude.png, c06_a18_row9.jpg, c06_a18_live_vs_new.jpg, c06_a18_faces.jpg. Nothing live, no manifests.
 Gen ids: t1 mERzgNghJQ, t2 JNfFMvnOq4, t3 SymCcmrUb8, t4 w4vuTCn7EI, t5 kspoRoS16B, t6 jUBmGvGLD0, t7 8a62LnOIrU, t8 IfiAscxtvE, Nữ đế s78vnq6l8e.
 ~100% xong c06 / ~0% chơi được (nothing live; owner review pending).
+
+
+## B9 — c06 a18 t1–t8, owner's ONE-GEN method (brief consort-B9.md + ROOT-18 method)
+PRIORITY #1 CHECK: approved sample c03 b8; method = owner verbatim via ROOT-18: m09 (eIyOFEidqL) in the STYLE slot (skin/drawing style/fabric) + the LIVE original as the image ref; prompt "Copy EXACTLY everything from image 1: hair, headdress, face, costume, pose, proportions, held item, fabric material and stitching. ONLY change the robe colour to <tone>." No soft/flowing words, no redesign. (The earlier B7/B8 c06 attempts were stopped/cancelled; nothing of them is used.)
+ROW SCAN: live row = one coral/terracotta robe. Faults: t5 and t6 have an embroidered phoenix (t1–t6 never) → swapped for peonies+butterflies in the same places; t8 held a teacup → small round fan; everything else (cape, layers, embroidery, crowns, pins) kept. All foreheads: "clean bare forehead".
+| rank | colour | bbox w/h live → new (Δ) | gens |
+|---|---|---|---|
+| t1 | soft wisteria lilac | 0.346 → 0.361 (+4.5 %) | 1 |
+| t2 | soft celadon green | 0.379 → 0.393 (+3.6 %) | 1 |
+| t3 | soft powder blue | 0.345 → 0.375 (+8.9 %) | 1 |
+| t4 | soft dusty mauve | 0.402 → 0.411 (+2.1 %) | 1 PASS |
+| t5 | soft teal-aqua (phoenix→flowers) | 0.329 → 0.356 (+8.2 %) | 1 |
+| t6 | pale apricot-peach (phoenix→flowers) | 0.407 → 0.407 (+0.1 %) | 1 PASS |
+| t7 | soft lavender-grey + soft golden-yellow inner/borders/sash, phoenix kept | 0.368 → 0.384 (+4.5 %) | 1 |
+| t8 | warm golden yellow, phoenix kept, cup→fan | 0.311 → 0.349 (+12.1 %) | 1 |
+By eye (live_vs_new): pose, cut, layers, embroidery, crowns, capes identical to the originals; only the colour (+ swaps) changed; pastel/soft colours, t7/t8 phoenix visible. Bbox over ±3 % on 6 of 8 (sleeves redrawn slightly wider); not regenerated (owner: no regen).
+Credits 8 gens × 135 = 1080 cr. Gen ids t1 SymEA59Ub8 t2 CqzTlo8EEy t3 P3u50UQ42C t4 huZYxISvqL t5 gOtC2lbSXO t6 cpgOaVF0eP t7 w4vQnPK7EI t8 LwovRJ1swO. (Earlier unused step-1 copies of this session are ignored.) Files CDN img/_review/consort-tiers/c06/b9/: c06_a18_t1..t8.png, c06_a18_row8.jpg, c06_a18_live_vs_new.jpg (live | new). Nothing live.
+~100% xong c06 / ~0% chơi được.
