@@ -133,3 +133,7 @@ receiver-choice audit (ORDER MAIN ~21:16Z, OD 21:15Z/21:30Z; shares C-AG role-pa
 | a65 t7/t8 c18-c24 (W93b, successor of W93 archived; c17 done) | handover reports/root30-* | Foreman C ROOT-30 | session_01PEhRbwkvpUCLkUR7Px8uzB | RUNNING | 18/11 20:58Z |
 | states-sample (W102; Nữ đế/Thái hậu/khuê các/nhà nghèo/NC+BD princess SAMPLES, owner 21:00Z; W90 a51d DONE + archived) | handover reports/states-sample | Foreman C ROOT-30 | session_01PEhRbwi7fEXZQzQ53o2SJP | RUNNING | 18/11 21:02Z |
 | review map-zones r2 (opus BIG REVIEWER, save migration) | review/map-zones 635c406 | MAIN ROOT-56 | session_01Rc5AsHqtcKNRQksnJ7opWp | RUNNING | 18/11 21:08Z |
+| elder a51+a65 c04-c08 then c01-c03 (W91b; W91 archived, c01-c03 a65 done) | handover reports/root30-* | Foreman C ROOT-30 | session_01PEhRbtdMaCURPSpmkE28xr | RUNNING | 18/11 21:07Z |
+| t1-t6 B a18 c05 redo + c06-c08 (W96b; W96 archived) | handover reports/root30-* | Foreman C ROOT-30 | session_01PEhRbvpwtaXBrXr7MSPqEt | RUNNING | 18/11 21:07Z |
+| t1-t6 B a18 c13-c16 (W98c; W98b archived) | handover reports/root30-* | Foreman C ROOT-30 | session_01PEhRbvmhvjbnyXNtWvi5XK | RUNNING | 18/11 21:07Z |
+| t1-t6 B a18 c21 redo + c22-c24 (W100b; W100 archived) | handover reports/root30-* | Foreman C ROOT-30 | session_01PEhRbx2zDU43WAo2ZXCqpm | RUNNING | 18/11 21:07Z |
