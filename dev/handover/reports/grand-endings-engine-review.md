@@ -51,3 +51,30 @@ Isolation: (i) A/B in-page with GE switched off (BAL.ge.on=false + the 24 Thiên
 
 ## Tests (7)
 ge-guard **6/6** · ge-engine **104/104** · ge-shots **51/51** (755x1000@2, 1180x820@2, 390x844@2; no overflow, words on screen, 0 page errors) · quickcheck **PASS ×3**. Shots LOOKED at (scratch only, not in git, not uploaded): Hồi ngã rẽ 1 (3 options visible + «Kéo xuống» to the 4th; greyed state checked by ge-engine bondOff), ngã rẽ 2 (3), Đại kết cục event (rank-up, rewards rows, Kim sách, world line), title notice, Bảng tab, Sổ luân hồi (Thiên mệnh 1/320 + row + note), fail (loss rows), quiet. All readable at Fold + iPad; faults = fix 3 chip, K-GE-3 at phones.
+
+## ROUND 2 (E1r2) — **PASS grand-endings-engine 177c730b**
+Reviewer E1r2 session_01DgYSWq2J1J1agw2gLRXGDw (for Foreman E). START_CTX ~3 %. Delta 2ae4715..177c730b = f48857ee (E1b fixes 1/2/3/nit a + part of 4) + f0e25a57 (E1c fix 4) + 8da9e685 (merge origin/main 12a1e4be) + 177c730b (site rebuild). origin/main 12a1e4be is an ancestor (checked after a fresh fetch).
+PRIORITY #1 CHECK: OD L1612/L1617/L1623 | review/grand-endings-design r3 + review/grand-endings-engine | round 1 E1r FAIL 2ae4715 (this file) | worker report sections E1b + «FIX 1 (E1c)» read; no new tool (reused ge-measure / ge-guard / ge-engine / ge-shots / quickcheck).
+
+| # | round-1 fix | verdict | evidence |
+|---|---|---|---|
+| 1 | jst14 «Xoay chiều» row | HELD | jst14.js:197 findIndex matches «Kết quả» or «Kết cục» (row lands under the result row again); log line text kept (it is a log, not a card label) |
+| 2 | «kết cục xuất thân» leftovers | HELD | j67 ×2 player text + jtabs gloss → «Khép nẻo đời» xấu đi; comments j67/jtabs/jroad too; `grep -i "kết cục xuất thân" dev/build/j*.js` = 0 |
+| 3 | «an toàn» chip lie on Hồi kết nhánh | HELD | ge1 ×4 + ge2 ×3 options carry `risk:"có rủi ro"` (KIT §28 word, `.kchip.w`) + one shared hint each (no leak of which pair owns an ending). Shots looked at (755x1000@2: ngã rẽ 1, ngã rẽ 2): amber «có rủi ro» + GỢI Ý line on every option |
+| 4 | cnv_mat cruel→ác band | HELD | f0e25a57 touches **jgedata.js only** (`git diff 2ae4715 HEAD -- 'dev/build/jrd_*'` empty; no player text changed). cnv_mat lean.m +4 (+6 from E1b) and P3 / P4 pulls +3 each. All 11 tagged names exist once in jrd_cnv.js (real options). None sits in a close list or in lean.p. Meaning checked against jrd_cnv (beat text + lx/rt): P3 «Nhờ người dò ai giữ lại» (spying on Kính sự phòng), «Giữ kín, chờ thời» («chưa lộ bài … Ngươi ghi nhớ cái tên» = a grudge held for later), «Đem chuyện gói bùa ra nói lại» = secrets as leverage (matches ha «mang theo … bí mật hậu cung»). P4 «Gặp {v} hỏi chuyện cung {mis}» (goes to her mistress's enemy; «lòng ngươi áy náy»), «Đổi lấy một lời hứa» («cả hai giữ thóp nhau»), «Cho {mis} biết {v} cũng định kéo nàng vào» (fail: «{mis} thấy bị lợi dụng») = a bond kept by leverage (ha «mượn tên chủ cũ … để nàng ta nợ ngươi»). All harsh/scheming; no gentle option mis-tagged |
+| 5 | merge origin/main | HELD | 8da9e685: assemble.py = main's list (incl. jpq.js) + jbalge after jbal2, jgecat/jgedata/jge after jdh2 — the only non-generated resolution. Rebuild reproducible (build_site output differs from the commit only in the CTM_BI build-line stamp) |
+| nit a | funnel chapters typed | HELD | jge.js:62 reads `Object.keys(GB().funnel)` (BAL.ge.funnel {4,8,11}, values unchanged) |
+
+### My measure (alone, PAR 2, sens bot; lives "given she lives to ch14")
+| run | lives | inChar | open11 | kind→thiện | cruel→ác | shade band per road |
+|---|---|---|---|---|---|---|
+| cnv_mat kind+cruel (`MODES=kind,cruel … - 4 2 … cnv_mat sens`) | 8 | .25 | 1.50 IN | .75 IN | **1.00 IN** | **IN shade cnv_mat** |
+| nc_tuc kind+cruel (control, data unchanged) | 4 | .75 | 2.75 | 1.00 IN | 1.00 IN | IN shade nc_tuc |
+Page errors 0, 12/12 lives ok. In these kind/cruel-only runs inChar and open11 are counted on kind/cruel lives only, 4–8 lives each. They are noise, not the band check. cnv_mat inChar pooled with E1c m7 = 10/24 = .42 IN. nc_tuc open11 2.75 on 4 lives vs .50 / 2.05–2.25 in round 1 on the same data. The band this fix was about (shade per road) holds on both roads.
+
+### Gates / tests on 177c730b
+ge-guard **6/6** (ERRORS 0) · ge-engine **104/104** · ge-shots 755x1000@2 **17/17** (looked at ngã rẽ 1 + 2) · build_site OK · quickcheck **PASS** alone vs live 12a1e4be (core gates incl. one-core-guard, rules-one-source, kit-conform, coop-one-world; time-spill; old save; 0 errors; render 233/268, tab 493/441, buổi 1027/1288, tasks>200 18/16 — box noise, no GE cost per round-1 perf section).
+ONE CORE: no new numbers in the delta (data names + kit text fields only). KIT FIRST: kit option fields `risk` / `hint` only, no CSS / private part (K-GE-3 stays a filed kit gap). VANPHONG: new hints cổ trang, no %, no digits.
+
+### Notes (not fixes)
+(g) cnv_mat lean tags are now 7 thiện / 18 ác (tt_co 7/8, nc_tuc 7/7). Kind bands still hold (.75). If writers add options later, give cnv_mat more thiện tags so a neutral player is not nudged toward ác shading. (h) «Giữ kín, chờ thời» is the mildest of the new ác tags; it is fair (a grudge held: «Ngươi ghi nhớ cái tên»), but writers may revisit it. Round-1 notes (b)–(f) still stand for their later steps.
