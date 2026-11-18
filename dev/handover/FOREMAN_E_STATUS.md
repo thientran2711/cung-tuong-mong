@@ -94,3 +94,4 @@ TOOLS / LESSON: handover worktree /home/user/wt/ho (detached). NEVER `git pull -
 FOR MAIN (open): Foreman E is now session_01DgYSWmvDYnmfLCrNGtw5Uu (E ROOT #3). Still READY FF: review/hall-names 282865b, review/questline-q0-ff 8a1955dc (E cannot push main).
 - (18/11 07:20Z) E7a fix r2 (review E7ar 4 items) SẴN SÀNG KIỂM questline-q1a 54f10e85ea0438884fcba07a354bbacb80ad41f9
 - (18/11 07:45Z) E7b: SẴN SÀNG KIỂM questline-q1b 2b80a8a3 (rebased on q1a 54f10e8; every chapter keeps a {B}-free ask; scan/engine/quickcheck PASS)
+- (18/11 07:20Z) E7c2: SẴN SÀNG KIỂM questline-q1c 99aa2c5 (fix 1 rebased on q1a 54f10e8; +≥1 {B}-free ask per chapter, no «y» for Thái y; scans/engine/shots/quickcheck PASS).

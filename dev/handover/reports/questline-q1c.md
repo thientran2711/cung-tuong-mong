@@ -1,4 +1,4 @@
-# Q1c — men help asks (jnrask_m.js) — SẴN SÀNG KIỂM 2148089 (fix 1 after E7cr FAIL b99f4bc)
+# Q1c — men help asks (jnrask_m.js) — SẴN SÀNG KIỂM 99aa2c5 (fix 1, rebased on q1a 54f10e8)
 PRIORITY #1 CHECK: OD L644/L1072/L1243/L1252 | main none (Q1 engine not on main yet) | review/questline-q1a 1b6005a (engine + shared nrask-scan, hz exempt), review/questline-q1b 344e1e9 (no clash), review/questline-q1c (this) | claims E7c2 session_01DgYSWkXhh7hPLBJjzFYMWJ (successor of E7c session_01DgYSWmbeLw227mrkMikC5W)
 START_CTX ~5 % · lineage depth 2 · worker (no children).
 
@@ -39,3 +39,8 @@ Whole families, not just the listed asks: I listed EVERY ask naming {B} (63) per
 nrask-m-scan now carries a rule for each family (time words, handout, S.men {B} post/phủ/trade verbs, ty {B} binding, eun_len {B} people, off kin); on b99f4bc it reports 30 hits, on 2148089 0.
 Tests on 2148089 (q1a 1b6005a + q1c; scan also with q1b 255f5b2a): nrask-scan ALL PASS (both), nrask-m-scan PASS, nrask-engine ALL PASS, quickcheck PASS (core gates PASS, old save ok, render 167/144, tab 276/310, buổi 703/676).
 nrVoiceM («thần» for every S.men man vs VANPHONG vi thần / thị vệ nô tài): engine side (jnroadm.js:147) → sent to E7a 18/11 ~06:55Z (it is moving address to jvoice kAddr). Rebase on E7a's new q1a sha (ed01a6b seen on origin) when E7a reports done.
+
+## REBASE on q1a fix r2 54f10e8 → 99aa2c5 (E7a 06:52Z)
+review/questline-q1c = 5432087 (data) + e80c8cf (fix 1) + 99aa2c5 on review/questline-q1a 54f10e8 (force-with-lease over 2148089; only index.html/sw.js conflicted → rebuilt).
+New engine rules met: (a) ≥1 {B}-free ask per chapter (asks naming {B} are not drawn without a real rival) — was 2 chapters with {B} in both asks: off_ghe_5#1, off_thong_7#1 reworded → 0; (b) NRSELF ty: a Thái y is never asked for kind «y» — ty_thu_6#0, ty_tra_7#0 → che, ty_thu_9#0, ty_tra_9#1 → thu (kinds per chapter still differ). nrask-m-scan checks both. nrVoiceM is now by trade (E7a): shots show Thị vệ «nô tài», Tổng quản «nô tài».
+Tests on 99aa2c5: nrask-scan ALL PASS (also with q1b b34eaed: no men failure, no dup key), nrask-m-scan PASS, nrask-engine ALL PASS, nrask-m-shots SHOTS OK Fold + iPad (looked; local only, CDN 401), quickcheck PASS (core gates PASS, old save ok).
