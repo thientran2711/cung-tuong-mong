@@ -1048,3 +1048,4 @@ LESSONS s41: verify any worker art/asset count on the CDN before telling her (52
 - (18/11 02:04Z) OWNER: book figure sizes differ (KIT §34.6 broken) → worker book-figsize. OWNER angry: '30 mini game link' = THỬ TAY calibration ?hieuchuan=1 in C-AG ag-all-2-land (not live) — s42 Lượt 8 wrongly said no record (grep missed 'thử tay/hiệu chuẩn'). Asked C-AG #8 for ETA + early preview.
 - (18/11 02:05Z) OWNER ANGRY: option cards mixed forms in one dialog + title one word per line (KIT FIRST breach) → added to opt-card-short brief (same §6.2 kit part).
 - (18/11 02:06Z) cloth-xoc 504b228 (r6d mud per owner 02:40Z + wet r6c) SẴN SÀNG KIỂM; full-body panels uot/bun c01+c30 LOOKED → sent owner (Lượt 13); waiting her mud word, then SMALL review → land.
+- (18/11 02:07Z) OWNER UI BUG result card no reasons (OD ~09:03Z) → worker result-reason. C-AG #8: Thử tay preview = separate-origin Pages build of ag-all-2-land (her save untouched) → s42 said GO; land ETA 04:00–04:30Z.
