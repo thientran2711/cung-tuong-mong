@@ -1324,5 +1324,7 @@ Object.assign(BAL,{actHere:{plant:15}});
 BAL.rcv={kw:["Giúp hết lòng","Làm qua loa","Từ chối","Mách lẻo"],help:{af:[8,3],half:.5,qAf:5,danh:2},
  /* the Sức a summons costs (her «Vâng chỉ» card jts tsSummonMe and the summoned NPC, one number) */
  sumSuc:5,
+ /* the bạc to take a gift to Thái y viện (her giftin card j8 and an NPC receiver, one number) */
+ chk:10,
  /* per-kind factor on the L1876 weights [full, half, no, sab] (tunable): refusing the throne is rare, sending a gift back less common than keeping it */
  k:{help:[1,1,1,1],gift:[1,1,.5,1],emp:[1,1,.2,.2]}};
