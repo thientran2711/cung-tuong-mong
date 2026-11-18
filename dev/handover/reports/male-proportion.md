@@ -25,3 +25,22 @@ Weak points: headroom only 32 px above the topknot (pin tip); sleeves very wide/
 
 ## For the kit
 Men (emperor, eunuch, official, physician, man, princes) = this proportion: scale skull top → feet = 1.07 × the woman; face h at that scale ≈ the woman's.
+
+## v2 — W22, 18/11 (head too narrow → redraw) — RESULT: FAIL on face height after 6/6 gens (best = g4, honest report)
+
+PRIORITY #1 CHECK: OD 0 | ledger 0 | claims 0 | main 0 | review/* 0 | archive 0 — reuse W19 standard (YMsSPlqWeC). START_CTX ≈ 8 % (own estimate). FIGURE_GATE A8 text was not yet in the fetched copy; task text used.
+Files (CDN, md5-verified, nothing live) img/_review/male-proportion/: nam_mau_v2_fresh.png (= g4, cut, 768x2000), nam_mau_v2_vs_m09.jpg (m09 | man at game scale on red lines, man skull-top line 7 % higher, head-width crops with cheek lines).
+Tool: face mesh (lm10→152 = F, cheek lm234↔454, skull top = y10−0.30F, same as overlay_m09.py). Man scaled so skull→feet = 1.07 × m09. Heads = skull→feet / (1.45 F) (m09 = 7.7 in this metric).
+| gen | prompt dial | heads | face h vs m09 | head width (cheek) vs m09 | neck | pass |
+|---|---|---|---|---|---|---|
+| old nam mẫu (W19) | – | 8.54 | −3.1 % | −2.7 % | – | no (narrow) |
+| g1 (w4vEAdZ7EI→gOtaR1ESXO) | "7.8 heads, wide head" | 9.10 | −9.1 % | −5.9 % | – | no |
+| g2 (p8O9ELxehw→Ifi25e4tvE) | same | 8.64 | −4.2 % | −1.6 % | – | no |
+| g3 (s78h39hl8e→N2HKVEx6D9) | "7.2 heads, face = 1/9" | 7.61 | +8.7 % | +11.1 % | thick | no (face too big) |
+| **g4 (w4vEGRs7EI→3z5rpHbREY)** | same | 7.64 | **+8.3 %** | **+13.2 %** | thick (see sheet) | no (face +8.3 > +3) |
+| g5 (jUBt6CMLD0→Bh93bvroQR) | "7.6 heads, face = 1/10" | 8.80 | −6.0 % | −3.9 % | – | no |
+| g6 (8a6Z5YiIrU→lJIvZyzgv9) | same | 8.83 | −6.3 % | −6.5 % | – | no |
+Credits: 6 gens × 40 = 480 + 6 bg removals × 3 = 18 → ~498 cr (3 calls count 2). Gen count 6/6 (max reached, loop stopped).
+Result: head width and neck now clearly ≥ m09 (cheeks +13 %, neck visibly thick, shoulders broad), the "narrow head" complaint is fixed, but the face is +8.3 % taller than m09 — over the 0…+3 % target and over ±3 % tolerance; heads 7.64 (target 7.75–8). The model answers prompts in two clusters (head ~ −5 % or ~ +8 %), nothing in between; "7.2 heads/face 1/9" → big, "7.6/face 1/10" → small.
+Weak points: (1) face +8.3 %; (2) neck measured by skin mask is unreliable under the collar (judge on the sheet); (3) robe/pose are the W19 pattern (fan, wide sleeves). Not wired anywhere.
+Suggested next (not done, budget spent): ONE more gen with "7.4 heads / face = 1/9.6" between the two clusters, or owner accepts g4 (face +8 %) as "bigger-headed man" (tolerance decision is hers). Measure/sheet scripts: kept in W22 worktree only (neck skin-mask is rough).
