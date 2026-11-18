@@ -12,3 +12,10 @@ IoU vs live (%): v0 96.8 95.4 96.7 97.8 97.1 91.5 92.4 89.6 | v1 95.6 93.5 97.1 
 Rules ticked: C3 colours soft/muted; C4a one gen m09+live; C4b original design kept; C4c/t7 own non-yellow MAIN + t8-yellow trim, t8 v1 yellow; C4d phoenix only t7/t8, t1–t6 none; C4e fabric of original; D2 bare forehead (checked all 24 face crops); D3 one item, no cup; D3b no feet wording; no soft/flowing wording; embroidery sentence in every prompt.
 Honest notes: t7/t8 phoenixes are stitched-looking but a little decal-like at zoom (pale, slightly raised); t7 v2 terracotta is the strongest colour; t1 v1 / t5 v1 / t7 v1 are all green-family (not adjacent ranks).
 ~100% xong c29 / ~60% chơi được (waiting for owner approval).
+
+## t7 EMBROIDERY RESCAN (ROOT-20 order, 18/11 ~08:10Z)
+| person | t7 version | pasted? | redrawn |
+| c29 | v0 navy | smooth gold, decal-like | yes, 1 gen |
+| c29 | v1 sage | smooth gold, decal-like | yes, 1 gen |
+| c29 | v2 rose | smooth gold, decal-like | yes, 1 gen |
+Redraw prompt: satin stitch/couching lines in matte silk floss, weave visible, no relief/shadow/gloss. Result: matte thread-like phoenixes; they are now paler (cream) than before. IoU t7 91.9/89.4/91.8. Same filenames re-uploaded + sheet refreshed.

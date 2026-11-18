@@ -13,3 +13,11 @@ Below 95: t1 v0 91.7, t2 v0 93.5, t8 v0/v1/v2 89.3/88.9/91.9 (final), v2 t2 92.9
 Rules ticked: C3 soft muted colours; C4a one gen m09+live; C4b original design kept; t7 own non-yellow MAIN + yellow trim; t8 v1 yellow; C4d phoenix only t7/t8; D2 bare forehead; D3 one item no cup; D3b no feet/soft wording; embroidery sentence in every prompt.
 Honest notes: t7/t8 phoenix embroidery reads stitched but slightly pale/decal-like at zoom; v1 t5 teal and v1 t7 sage are both green-family (t6 mauve between).
 ~100% xong c30 / ~60% chơi được (waiting for owner approval).
+
+## t7 EMBROIDERY RESCAN (ROOT-20 order, 18/11 ~08:10Z)
+| person | t7 version | pasted? | redrawn |
+| c30 | v0 powder blue | raised gold relief, glossy = pasted look | yes, 1 gen |
+| c30 | v1 sage | same | yes, 1 gen |
+| c30 | v2 rose | same | yes, 1 gen |
+Same redraw prompt; result flat matte thread-like, phoenix paler cream. IoU t7 95.4/96.0/95.6. Same filenames re-uploaded + sheet refreshed. Gens now c29 33, c30 31.
+New rules (3 families, held item contrast, v1/v2 new hairpins) came after c29/c30 were painted: NOT applied to them. Known gaps: c29/c30 v1/v2 keep the original hairpins; some v2 colours are near-shades of v0 (c29 t1 periwinkle vs lilac, c30 t8 v0 blue / v2 teal); c30 t1/t3 hankerchief and t4 lantern share the robe tone in v0 only.
