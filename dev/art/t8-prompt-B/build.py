@@ -822,7 +822,36 @@ def spec5pose(o,c,t):
     new=f" Pose: {pose}. The item is in a contrasting colour, not the robe colour, and the hand really grips it; the whole face fully visible with the head up toward the viewer, eyes open, lips closed, never looking down, nothing covering the face."
     o=o[:a]+new+o[b:]
     return o.replace("do NOT copy the outfit, hair ornaments or accessories of the reference","do NOT copy the reference's poses, outfit, hair ornaments or accessories",1)
+# ---------- --nude2 A|B|C|D (N1 round 10, brief nude-r10, owner 18/11 ~22:35Z): Nữ đế = the approved Hoàng hậu t8 output (`build.py cNN v0 --head --spec5pose`) COPIED, changing ONLY: (a) phoenix->dragon (+ "larger" once on the crown), (b) + stiff short shoulder piece sentence, (c) + front bead tassels to the forehead only, (d) item = one from FIGURE_GATE H NỮ ĐẾ list (never her t8 item), (e) colour slot per option. Nothing else. Only reached with --nude2. ----------
+NUDE2_ITEM={"c06":"a gold dragon-framed round fan","c25":"a gold-and-jade ruyi with a dragon"}   # FIGURE_GATE H NỮ ĐẾ #5 / #4; their t8 items are a gold ruyi (c06) / phoenix seal box (c25)
+NUDE2_SHOULDER=" a STIFF, SHORT, structured shoulder piece (cầu vai cứng) over each shoulder, slightly pointed outward, never a soft drooping cape,"
+NUDE2_TAS={"A":"a row of bead tassels (lưu) hanging in front from the rim of the crown, reaching the forehead only, never over the eyes or the face",
+"B":"a row of bead tassels (lưu) hanging in front from the rim of the crown, reaching the forehead only, never over the eyes or the face",
+"C":"a row of bead tassels (lưu) hanging in front from the rim of the crown, reaching the forehead only, never over the eyes or the face",
+"D":"only five bead tassels (lưu) hanging in front from the rim of the crown, the outer ones short and the middle ones longer, reaching the forehead only, never over the eyes or the face"}
+NUDE2_COL={"B":"a DEEP, low-saturation crimson like #7E2A33 (a dark muted wine-crimson, never a bright or AI-looking red, never orange, never coral)",
+"C":"black silk richly embroidered with gold thread (the yellow clearly more than the black, black never the main colour)"}
+def nude2(o,c,opt):
+    assert c in NUDE2_ITEM and opt in "ABCD"
+    t8item=ITEMS[item_for(c)][0]; assert t8item in o,("t8 item not in pose",c,t8item)
+    o=o.replace(t8item,NUDE2_ITEM[c])                                   # (d)
+    o=o.replace("phoenixes","dragons").replace("phoenix","dragon")        # (a)
+    assert o.count("a FULL tall imperial crown")==1
+    o=o.replace("a FULL tall imperial crown","a larger FULL tall imperial crown",1)   # (a) "larger" once
+    m=" slim tall silhouette;"; assert o.count(m)==1
+    o=o.replace(m," slim tall silhouette,"+NUDE2_SHOULDER[:-1]+";",1)     # (b)
+    m="; the most splendid outfit of all"; assert o.count(m)==1
+    o=o.replace(m,", and "+NUDE2_TAS[opt]+m,1)                          # (c)
+    if opt in "BC":                                                      # (e)
+        a=o.index("her ORIGINAL robe colour is kept exactly"); b=o.index("the royal golden yellow is the DOMINANT")
+        o=o[:a]+o[b:]
+        assert o.count("her colour is the second colour")==1
+        o=o.replace("her colour is the second colour",NUDE2_COL[opt]+" is the second colour",1)
+    assert "phoenix" not in o.lower()
+    return o
 if __name__=="__main__":
+    NUDE2=None
+    if "--nude2" in sys.argv: i=sys.argv.index("--nude2"); NUDE2=sys.argv[i+1]; sys.argv[i:i+2]=[]
     if "--age" in sys.argv: AGE=sys.argv[sys.argv.index("--age")+1]; sys.argv[sys.argv.index("--age"):sys.argv.index("--age")+2]=[]
     STATE=None
     if "--state" in sys.argv: i=sys.argv.index("--state"); STATE=sys.argv[i+1]; sys.argv[i:i+2]=["--state"]
@@ -850,4 +879,5 @@ if __name__=="__main__":
             _old7="(one large gold phoenix with spreading wings, grander and taller than a noble consort's headdress, but clearly simpler than the Empress's nine-phoenix crown) with pearl strands, kingfisher-blue inlay and a few gold tassels."
             _n=_o.count(_old8)+_o.count(_old7); assert _n==1,("head slot not found",_n)
             _o=_o.replace(_old8,"a FULL tall imperial crown, clearly taller and wider than a noble consort's crown, "+HEAD[_k]+";").replace(_old7,HEAD[_k]+".")
+    if NUDE2: _o=nude2(_o,a[0],NUDE2)
     print(_o,end="")
