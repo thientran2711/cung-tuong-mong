@@ -66,7 +66,8 @@ function kitFigBody(src,cb){const KIT_FB=window.__KITFB||(window.__KITFB={});con
        down to k/20 of the painted height (fractions of the picture width), so a dialog can fit "head → knees" into a capped column */
     const wl=[],wr=[];let ml=w,mr=-1;for(let k=0,y=t;k<=20;k++){const ye=t+Math.round((b-t)*k/20);for(;y<=ye;y++){const q=y*w*4;for(let i=0;i<ml;i++)if(d[q+i*4+3]>40){ml=i;break}for(let i=w-1;i>mr;i--)if(d[q+i*4+3]>40){mr=i;break}}
      wl.push((mr<0?l:ml)/w);wr.push((mr<0?r+1:mr+1)/w)}
-    v={t:t/h,b:(b+1)/h,l:l/w,r:(r+1)/w,ht:ht/h,ar:nw/nh,cl:cl/w,cr:cr/w,wl,wr}}}catch(x){}
+    let hx=null;try{/* KIT 56.5: x of the HEAD = centre of the painted run over the first 12 % of the body below the skull top (crown / hair included, they are symmetric about the head) */let hl=w,hr=-1;const y0=Math.round(ht),y1=Math.min(h-1,Math.round(ht+bh*.12));for(let y=y0;y<=y1;y++){const q=y*w*4;for(let i=0;i<w;i++)if(d[q+i*4+3]>40){if(i<hl)hl=i;break}for(let i=w-1;i>=0;i--)if(d[q+i*4+3]>40){if(i>hr)hr=i;break}}if(hr>hl)hx=(hl+hr+1)/2/w}catch(e){}
+    v={t:t/h,b:(b+1)/h,l:l/w,r:(r+1)/w,ht:ht/h,hx:hx,ar:nw/nh,cl:cl/w,cr:cr/w,wl,wr}}}catch(x){}
    /* review/fig-headtop (owner 17/11 "exactly location"): a grey silhouette fills its whole picture width (hem to hem) while a real woman's art is ~.86 of hers; its l..r (what the slot clamp kitSlotIn pushes inside the stage) are those of a standard figure of the same body, so the silhouette stands at the SAME x as the real person in that slot, never nudged inwards (the gap to the next person is the slot gap) */
    try{if(/unknown-fig-/.test(src)&&v.cl!=null&&v.cr>v.cl){const mid=(v.cl+v.cr)/2,hw=KIT_FIG_HALF/Math.max(.2,v.ar);v.l=Math.max(0,mid-hw);v.r=Math.min(1,mid+hw);v.wl=v.wl.map(()=>v.l);v.wr=v.wr.map(()=>v.r)}}catch(x){}done(v)};
  im.onerror=()=>{done({t:0,b:1,l:0,r:1,ht:0,ar:.45});setTimeout(()=>{if(KIT_FB[src]===e)delete KIT_FB[src]},1500)};/* review/stage-fig-size: a failed load is not cached for good (it fixed a wrong .45 aspect = squashed figure); measured again next time */if(kitHtLoad(()=>{im.src=src}))im.src=src;/* review/fig-headtop: the picture is measured only once the head-top table is in (a figure measured without it would take its crown for its head and stay cached) */return null}
@@ -117,12 +118,11 @@ window.KIT_SLOTS=KIT_SLOTS;window.kitSlotIn=kitSlotIn;window.kitSlotsN=kitSlotsN
 window.kitSlotSwE=kitSlotSwE;window.kitSlotCxE=kitSlotCxE;window.kitSlotSw=kitSlotSw;window.kitSlotCx=kitSlotCx;window.kitSlotScale=kitSlotScale;window.kitSlotNeed=kitSlotNeed;
 function kitBookFig(b,fac,H,o){const bt=kitFigTop(b),span=Math.max(.2,b.b-bt),rel=o&&o.stage?Math.min(KIT_FIG.h*H,KIT_FIG.maxPx):H/KIT_FIG.man,body=Math.min(rel*(fac||1),H*.98),ih=body/span;return{ih,iw:ih*(b.ar||.45),dy:ih*(1-b.b),body,span}}
 window.kitBookFig=kitBookFig;
-/* KIT 56.4 · kitFullFigX(b, iw, cw) — the ONE horizontal place of a FULL-BODY figure in the figure column of a frame (owner 18/11 ~07:50Z, step 2 of the Tuần lục rule 56.3:
-   centre pop-ups, news / notices / event dialogs, info panels, the coach / tips, the identity card). The layout of each frame stays; the figure is the ONE body
-   SKULL TOP -> feet (kitFigTop), nothing is cut: its core is centred on the column, but the painted art never starts left of the column's left edge
-   (b.l .. b.r = the whole painted width, sleeves / train included), so a wide robe spreads to the RIGHT, under the text, which is drawn ON TOP of the
-   transparent figure (z-index). Returns the left of the picture box from the column's left edge (px). iw = picture box width, cw = column width. */
-function kitFullFigX(b,iw,cw){const cl=b.cl!=null?b.cl:b.l,cr=b.cr!=null?b.cr:b.r;let x=cw/2-iw*(cl+cr)/2;if(x+b.l*iw<0)x=-b.l*iw;return x}
+/* KIT 56.4 + 56.5 · kitFullFigX(b, iw, cw, lim) — the ONE horizontal place of a FULL-BODY figure in the figure column of EVERY frame that shows a person (owner 18/11 ~07:50Z + ~09:25Z):
+   (56.5) the person's HEAD sits at the horizontal CENTRE of the column (b.hx = head centre measured by kitFigBody; fallback the core centre); nothing is cut: a wide robe spreads both sides,
+   under the text, which is drawn ON TOP of the transparent figure; only when the painted art would pass the frame's own left edge (lim = px the column has to its left, inside the frame) the figure is moved
+   right by just that much (the head then is off-centre by that amount: reported by the scan). Returns the left of the picture box from the column's left edge (px). iw = picture box width, cw = column width. */
+function kitFullFigX(b,iw,cw,lim){const cc=b.hx!=null?b.hx:((b.cl!=null?b.cl:b.l)+(b.cr!=null?b.cr:b.r))/2;let x=cw/2-iw*cc;const L=Math.max(0,+lim||0);if(x+b.l*iw<-L)x=-L-b.l*iw;return x}
 window.kitFullFigX=kitFullFigX;
 /* KIT 33.4 · kitImgErr — the ONE null-safe fallback for inline <img onerror>: a picture that fails after a re-render detached it
    does nothing (no "reading 'classList' of null" page errors). o.sel: ancestor to mark (default the parent); o.cls: class to add;

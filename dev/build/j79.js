@@ -883,14 +883,18 @@ function kpIdFig(M,tries){let src="";try{src=typeof figFor==="function"?figFor(S
  if(KPID_OK[crisp]||!lo)show(crisp);
  else{show(lo);const pre=new Image();pre.decoding="async";pre.src=crisp;const fin=()=>{KPID_OK[crisp]=1;show(crisp)};(pre.decode?pre.decode().then(fin,()=>{pre.complete&&pre.naturalWidth?fin():0}):(pre.onload=fin))}
  if(!M.__kidRes){M.__kidRes=1;addEventListener("resize",()=>{clearTimeout(M.__kidT);M.__kidT=setTimeout(()=>{if(M.classList.contains("kpfig"))kpIdLay(M)},60)})}}
-const KPID_OK={};
+const KPID_OK={};const KPID_WR=.5;/* widest painted width / body height over all faces (side layout cap, kpIdLay) */
 /* the geometry (screen px, from the modal box — the design canvas): phone portrait keeps the figure-on-top layout (CSS, --kidh) */
 function kpIdLay(M){try{const im=M.querySelector(":scope > img.kidfig2"),d=M.querySelector(".dlg");if(!im||!d)return;const W=M.clientWidth||innerWidth,H=M.clientHeight||innerHeight;
  /* KIT 32.2b EQUAL GAPS (owner 16/11 s21 + s22 "whole group"): her full figure stands between the two frame lines of the card scene —
     one page (html.kv1, portrait): the screen top and the panel's top edge (figure ABOVE the panel); spread: the screen top and bottom
     (figure in the column left of the panel). Gap above the painted head = gap under the feet, each ≥ KIT_DP_GAP (5 % of that height,
     ≥ 14 px); a figure the column width keeps shorter is centred between the lines (equal larger gaps), never left on the floor. */
- const one=typeof kitView==="function"?kitView().pages===1:(W<600&&H>W);
+ /* KIT 56.7 (owner 18/11 ~09:30Z "Trả về cái màn hình luân hồi cũ"): the OLD approved phone layout = her figure LEFT, ONE long vertical panel RIGHT. One page (html.kv1) takes it whenever the screen leaves the panel its kit minimum next to the smallest figure column
+    (the same test as the narrow centre pop-ups: KIT_SIZE.v3.narrow.minRight + KIT_SIZE.fig3.M.cw); a narrower one-page screen (390 / 412 px portrait phone) keeps figure ABOVE the panel. No pixel breakpoint. */
+ const p1=typeof kitView==="function"?kitView().pages===1:(W<600&&H>W);
+ const KZ=typeof KIT_SIZE==="object"?KIT_SIZE:null,side=p1&&(W-16-12-(KZ?KZ.fig3.M.cw:140)>=(KZ?KZ.v3.narrow.minRight:274)),one=p1&&!side;
+ M.classList.toggle("kpside",side);
  d.style.removeProperty("width");d.style.removeProperty("max-width");
  /* the panel is the ONE frame size (KIT 8.1 tokens --kpw/--kph, never set here; merge review/newgame-ui-r1); the figure column is the space
     left of it (its left edge minus 8 px), so a tab with more cells can never widen it over her */
@@ -903,12 +907,16 @@ function kpIdLay(M){try{const im=M.querySelector(":scope > img.kidfig2"),d=M.que
  const fb=fb0||{t:0,b:1,ht:0,l:0,r:1,ar:(im.naturalWidth&&im.naturalHeight)?im.naturalWidth/im.naturalHeight:.33};if(!fb0&&!im.naturalWidth)im.addEventListener("load",()=>kpIdLay(M),{once:true});
  const A=lb-lt,G=typeof KIT_DP_GAP!=="undefined"?Math.max(KIT_DP_GAP.min,KIT_DP_GAP.pct*A):Math.max(14,A*.05);
  const ar=fb.ar||.35,bf=Math.max(.3,fb.b-kitFigTop(fb)),pf=Math.max(bf,fb.b-fb.t);/* body = head top → feet (28.11a); painted = top of the crown / hairpin → feet (the gap is measured on it) */
- const cRef=(typeof BAL==="object"&&BAL.bookFrame&&BAL.bookFrame.cRef)||.072;let Hs=Math.min((A-2*G)/(1+cRef),H*(port?.80:.84));/* KIT 56.4: body = the room of the tallest Hoàng hậu crown, never this face's own crown *//* the standard body height: same for every face on this screen */
+ const cRef=(typeof BAL==="object"&&BAL.bookFrame&&BAL.bookFrame.cRef)||.131;let Hs=Math.min((A-2*G)/(1+cRef),H*(port?.80:.84));/* KIT 56.4: body = the room of the tallest Hoàng hậu crown, never this face's own crown *//* the standard body height: same for every face on this screen */
  /* ONE body for every face on this screen (KIT 28.11a, 56.4): head top → feet; no per-face shrink and no cap for the widest robe */
  /* KIT 56.4 (owner 18/11 ~07:50Z, step 2 of 56.3): the old per-screen cap that shrank EVERY face for the widest robe (KPID_WR) is gone — never shrink the whole set for outliers; a wide robe / sleeve spreads under the panel, which is drawn on top (z-index 1), and nothing is cut */
+ /* KIT 56.7 side layout (the old approved phone card): the column is narrow BY CONSTRUCTION, so the ONE body of this screen is capped so the widest painted figure (KPID_WR = widest painted width / body height, measured .496 over the 420 faces) stands in it whole — the same body for every face, her whole figure beside the panel, never under it */
+ if(side)Hs=Math.min(Hs,colW*.98/KPID_WR);
+ /* KIT 56.8 (owner 18/11 ~18:30Z): iPad landscape card: the left figure is the SAME size as the figure of the Luan hoi book (BAL.bookFigBody.kv2), not bigger */
+ if(!one&&!port&&!side&&BAL.bookFigBody)Hs=Math.min(Hs,BAL.bookFigBody.kv2);
  Hs=Math.max(40,Hs);let ih=Hs/bf,iw=ih*ar;
  const floor=lb-(A-Hs*(1+cRef))/2;/* 32.2b: the painted figure centred between the two lines → gap above the crown = gap under the feet */
- let left=Math.round(colL+kitFullFigX(fb,iw,colW));const top=Math.round(floor-fb.b*ih);
+ let left=Math.round(colL+kitFullFigX(fb,iw,colW,colL));const top=Math.round(floor-fb.b*ih);
  Object.assign(im.style,{left:left+"px",top:top+"px",bottom:"auto",width:Math.round(iw)+"px",height:Math.round(ih)+"px",objectFit:"fill"});
  im.style.removeProperty("-webkit-mask-image");im.style.removeProperty("mask-image");
  /* review/fig-cutout-code: the HD twin is picked from `sizes` (jfighd kitFigHD); refresh it to the width just set, or a stale smaller
@@ -994,6 +1002,9 @@ button.ka.kcard.kart{border-left:4px solid var(--kcc0,var(--line))!important}
 
 /* kv3:.kv1 */:where(.kv1) .modal.kpscene.kpfig{justify-content:center!important;align-items:flex-end!important;padding:8px!important}:where(.kv1) .modal.kpscene.kpfig .dlg.kpsc{max-width:100%!important}
  :where(.kv1) .modal.kpscene.kpfig>img.kidfig2{top:6px;bottom:auto;left:0;width:100vw;height:var(--kidh,calc(40*var(--kvh,1dvh)))}
+/* KIT 56.7: one page wide enough for a column + a panel (Fold 755x1000): figure LEFT, one long vertical panel RIGHT (the old approved phone layout, owner 18/11) */
+.modal.kpscene.kpfig.kpside{--kpw:min(560px,calc(100% - 16px - 12px - 140px));--kph:calc(100% - 16px);justify-content:flex-end!important;align-items:center!important;padding:8px!important}
+.modal.kpscene.kpfig.kpside .dlg.kpsc{max-width:var(--kpw)!important}
  :where(.kv1) .dlg.kpsc .kpid.kpidf .kstgrid{grid-template-columns:repeat(4,minmax(0,1fr))}:where(.kv1) .dlg.kpsc .kpid.kpidf .kst-tile{flex-direction:column;align-items:flex-start;justify-content:flex-start;gap:0}:where(.kv1) .dlg.kpsc .kpid.kpidf .kst-tile>.kstv{text-align:left}
 /* 4 · status grouped by purpose */
 #hud2.kgrp{flex-wrap:wrap}

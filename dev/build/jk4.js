@@ -462,7 +462,7 @@ function kitDpFit(){try{const o=kitDpOn();if(!o||!o.d.classList.contains("kdper"
  const prof=(b,f)=>{if(!b.wl)return[b.l,b.r];const k=Math.max(0,Math.min(20,Math.ceil(f*20-1e-6)));return[b.wl[k],b.wr[k]]};
  const lay=(top,rows)=>{const Hu=floor-top;if(Hu<40)return false;
   /* review/fig-headtop (owner 17/11): people side by side stand level by the HEAD TOP; crowns / pins / hats stick out above. Body = head top .. feet; kT = the one body scale of this column, set by the figure whose painted top (crown) needs the most headroom, so no head gear leaves the column and every body keeps its kit ratio */
-  const kT=Hu/(1+((typeof BAL==="object"&&BAL.bookFrame&&BAL.bookFrame.cRef)||.072));/* KIT 56.4: the room is the tallest Hoàng hậu crown's (BAL.bookFrame.cRef above the skull top), the same for every person: nobody is shrunk for an outlier crown, a taller one rises into the chip line, never cut */
+  const kT=Hu/(1+((typeof BAL==="object"&&BAL.bookFrame&&BAL.bookFrame.cRef)||.131));/* KIT 56.4: the room is the tallest Hoàng hậu crown's (BAL.bookFrame.cRef above the skull top), the same for every person: nobody is shrunk for an outlier crown, a taller one rises into the chip line, never cut */
   const at=m=>{const sz=L.map(x=>{const rel=Math.min(1,x.fac);const span=Math.max(.2,x.b.b-x.b.t);const ih=kT*rel*m/Math.max(.2,x.b.b-kitFigTop(x.b));const iw=ih*(x.b.ar||1);
     const fv=Math.min(1,Hu/(ih*span));const [vl,vr]=prof(x.b,Math.min(fv,L.length>1?1:KIT_DP_CROP.knee));/* two people: the whole visible part counts (review/stage-slots-fix-r1: no overlap); one person: the column edge may cut a hem */
     const cl=x.b.cl!=null?x.b.cl:x.b.l,cr=x.b.cr!=null?x.b.cr:x.b.r;return{ih,iw,span,fv,core:iw*(cr-cl),cl,cr,l:Math.min(vl,cl),r:Math.max(vr,cr),t:x.b.t,b:x.b.b}});
@@ -475,7 +475,7 @@ function kitDpFit(){try{const o=kitDpOn();if(!o||!o.d.classList.contains("kdper"
   const W=narrow?col.clientWidth:need;const kN=sz.length;
   /* the tallest person sets the chip line: right above the painted top when the people are shorter than the column */
   const gap=Math.max(0,Hu-Math.max(...sz.map(s=>s.ih*s.span)));col.dataset.kdpcrop=sz.some(s=>s.fv<.995)?"1":"0";
-  L.forEach((it,i)=>{const s=sz[i];const ih=s.ih,iw=s.iw;const cxs=kitSlotCx(i,kN,6,W-12);const left=kN===1?kitFullFigX(it.b,iw,W):cxs-iw*(s.l+s.r)/2;
+  L.forEach((it,i)=>{const s=sz[i];const ih=s.ih,iw=s.iw;const cxs=kitSlotCx(i,kN,6,W-12);const left=kN===1?kitFullFigX(it.b,iw,W,Math.max(0,col.getBoundingClientRect().left-d.getBoundingClientRect().left-4)):cxs-iw*(s.l+s.r)/2;
    const ftop=s.fv<.995?top-ih*s.t:floor-gap/2-ih*s.b;/* cropped: painted top under the chips, the rest runs past the floor (cut); 32.2b: full figure centred, equal gaps */
    Object.assign(it.f.style,{left:left.toFixed(1)+"px",top:ftop.toFixed(1)+"px",width:iw.toFixed(1)+"px",zIndex:String(2+i),visibility:""});
    const wr=it.f.querySelector(".kesfi");if(wr)Object.assign(wr.style,{width:iw.toFixed(1)+"px",height:ih.toFixed(1)+"px",margin:"0",maxWidth:"none"});

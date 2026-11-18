@@ -33,8 +33,8 @@ function kitPersonDlgFit(root){try{const R=root||document;R.querySelectorAll(".k
  const H=box.clientHeight,W=box.clientWidth;if(H<60||W<40)return;
  const ar=im.naturalWidth&&im.naturalHeight?im.naturalWidth/im.naturalHeight:(b.ar||.45);
  const Hf=fl?Math.max(40,Math.min(H,fl.lb-fl.G-box.getBoundingClientRect().top)):H;/* feet one gap above the lower line */
- const span=Math.max(.2,b.b-b.t);let ih=(Hf-4)*rel/(1+((typeof BAL==="object"&&BAL.bookFrame&&BAL.bookFrame.cRef)||.072))/Math.max(.2,b.b-kitFigTop(b)),iw=ih*ar;/* KIT 56.4: the ONE body = the column height / (1 + the tallest Hoàng hậu crown); never sized by this person's own crown *//* review/fig-headtop: body = head top .. feet at the kit ratio; the crown never leaves the column *//* the painted body (head-top .. feet) fills the column between the gaps; KIT 56.4 (owner 18/11 ~07:50Z): a wide hem / sleeve is NOT cut, it spreads right under the text (drawn on top) */
- const fx=kitFullFigX(b,iw,W);
+ const span=Math.max(.2,b.b-b.t);let ih=(Hf-4)*rel/(1+((typeof BAL==="object"&&BAL.bookFrame&&BAL.bookFrame.cRef)||.131))/Math.max(.2,b.b-kitFigTop(b)),iw=ih*ar;/* KIT 56.4: the ONE body = the column height / (1 + the tallest Hoàng hậu crown); never sized by this person's own crown *//* review/fig-headtop: body = head top .. feet at the kit ratio; the crown never leaves the column *//* the painted body (head-top .. feet) fills the column between the gaps; KIT 56.4 (owner 18/11 ~07:50Z): a wide hem / sleeve is NOT cut, it spreads right under the text (drawn on top) */
+ const fx=kitFullFigX(b,iw,W,Math.max(0,box.getBoundingClientRect().left-(col.closest(".kpdlg")||col).getBoundingClientRect().left-4));
  f.style.cssText="position:absolute;left:0;top:0;width:100%;height:100%;margin:0";
  const wr=f.querySelector(".kesfi");if(wr)wr.style.cssText=`position:absolute;left:${fx.toFixed(1)}px;top:${(Hf-ih*b.b).toFixed(1)}px;width:${iw.toFixed(1)}px;height:${ih.toFixed(1)}px;margin:0;max-width:none`;
  im.style.cssText=`width:${iw.toFixed(1)}px;height:${ih.toFixed(1)}px;max-width:none;max-height:none`;col.dataset.kpdfit="1"})}catch(e){console.error("kitPersonDlgFit",e)}}

@@ -1,0 +1,44 @@
+/* figure-head-fade-scan.js — owner 18/11 ~09:25Z (fullbody-frame S3): (1) the scroll fade / «Kéo xuống» belongs ONLY to the scrolling column: the figure's own COLUMN rect (painted figure ∩ figure column) is pixel-identical with the cues hidden (the scrolling text column may still run over a robe that spreads under it, owner: «row đè lên cái hình thôi»);
+   (2) the person's HEAD sits at the horizontal centre of the figure column (head-centre offset px; only a figure that would pass the frame's own left edge may be off-centre, by exactly that much).
+   Frames: centre pop-up news/notice (M/L/XL), choice, coach (kitPersonDlg), Nội vụ phủ shop, identity card. usage: node dev/test/figure-head-fade-scan.js <index.html> [outdir]  env SZ CASES SHOTS=1 */
+const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=process.argv;if(OUT)fs.mkdirSync(OUT,{recursive:true});
+const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
+let CASES=[['hoang-hau','img/fig-thaihau-1.webp'],['hh-h3-a36','img/fig-thaihau-h3-a36.webp'],['hh-h1-a51','img/fig-thaihau-h1-a51.webp'],['hh-h2-a18','img/fig-thaihau-h2-a18.webp'],['widest-robe','img/fig-maid-m48-t8-a51.webp'],['crown-tallest','img/fig-maid-m50-t8-a18.webp'],['man','img/fig-man-bacdich-1-a36.webp'],['old-maid-wide','img/fig-maid-m50-t6-a51.webp'],['SELF','SELF']];
+if(process.env.CASES)CASES=CASES.filter(c=>process.env.CASES.split(',').includes(c[0]));
+const KINDS=(process.env.KINDS||'news,choice,pdlg,shop,idcard').split(',');
+(async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});let bad=0;const html=fs.readFileSync(SRC);
+ for(const [W,H] of SZ){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+(process.env.DSF||1),hasTouch:true,isMobile:W<1100,serviceWorkers:'block',ignoreHTTPSErrors:true});await ctx.addInitScript(()=>{window.__bot=1;let s=12345;Math.random=()=>{s=(s*1664525+1013904223)%4294967296;return s/4294967296}});
+  await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:html,contentType:'text/html; charset=utf-8'}));
+  const p=await ctx.newPage();await p.goto('http://ctm.test/index.html',{waitUntil:'domcontentloaded',timeout:120000});
+  await p.waitForFunction(()=>typeof start==='function'&&typeof kitPersonDlg==='function',null,{timeout:120000});
+  await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;for(const e of [...document.body.querySelectorAll('*')]){const cs=getComputedStyle(e);if(cs.position==='fixed'&&/Luân hồi/.test(e.textContent||''))e.remove()}document.getElementById('modal').hidden=true});await p.waitForTimeout(3500);
+  for(const kind of KINDS)for(const [name,FIG] of [['warmup',CASES[0][1]],...CASES]){
+   if(kind==='shop'&&name!=='warmup')continue;
+   const r=await p.evaluate(async([kind,name,FIG])=>{const sleep=t=>new Promise(r=>setTimeout(r,t));const self=FIG==='SELF';
+    const k0=window.__k0||(window.__k0=kitFigOf);window.kitFigOf=kitFigOf=function(q){if(q&&q.__t&&!self)return IMG_BASE+FIG;return k0.apply(this,arguments)};
+    const f0=window.__f0||(window.__f0=figFor);window.figFor=figFor=function(q){return q===S&&!self?IMG_BASE+FIG:f0.apply(this,arguments)};
+    Q.length=0;document.getElementById('modal').hidden=true;document.querySelectorAll('#kscanpd').forEach(e=>e.remove());await sleep(300);
+    const who=self?S:Object.assign({},liveRivals(true)[0],{__t:1,age:36});const long=n=>'<p>'+'Một tin dài hơn rất nhiều, nói về chuyện trong cung và nhiều điều khác nữa. '.repeat(n)+'</p>';
+    let col,im,frame;
+    if(kind==='news'){Q.push({t:'Tin trong cung',who,h:long(14)});showModal();frame='#modal .dlg';im='#modal .kszfs img';col='#modal .kszfs'}
+    else if(kind==='choice'){Q.push({t:'Việc thử',who,h:long(5),opts:[{n:'Một',fx:{}},{n:'Hai',fx:{}}]});showModal();frame='#modal .dlg';im='#modal .kszfs img';col='#modal .kszfs'}
+    else if(kind==='pdlg'){const root=document.createElement('div');root.id='kscanpd';root.style.cssText='position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;background:#0006';root.innerHTML=kitPersonDlg({kind:'guide',title:'Lời dặn',p:who,fig:kitFigOf(who),name:'<b>Một người</b>',html:long(6),btns:[{k:'a',t:'Đã rõ'}]});document.body.appendChild(root);frame='#kscanpd .kpdlg';im='#kscanpd .kpdfig img';col='#kscanpd .kpdfig';for(let i=0;i<30;i++){kitPersonDlgFit(root);await sleep(250)}}
+    else if(kind==='shop'){S.shop=Object.keys(IT).filter(k=>IT[k].pr).slice(0,12);kitShopNvp();frame='#modal .dlg';im='#modal .kpsubj.kes .kesimg';col='#modal .kpsubj.kes'}
+    else if(kind==='idcard'){if(self)return{err:'skip'};Q.push({nl:1,t:'Nhập cung',h:'<p>x</p>'});showModal();frame='#modal';im='#modal img.kidfig2';col='ID'}
+    for(let i=0;i<40;i++){const e=document.querySelector(im);if(e&&e.complete&&e.naturalWidth&&(kind==='idcard'?!e.classList.contains('kidlo'):e.style.height||kind==='shop'))break;await sleep(250)}await sleep(2200);
+    try{kitScrollCues(document.getElementById('modal'))}catch(e){}
+    const e=document.querySelector(im);if(!e)return{err:'no figure'};const src=e.getAttribute('src'),bd=await new Promise(res=>{const v=kitFigBody(src,()=>res(kitFigBody(src)));if(v)res(v)});
+    const r=e.getBoundingClientRect();let cr;if(col==='ID'){const k=document.getElementById('modal').dataset.kidcol.split(',').map(Number);cr={left:k[0],width:k[1]-k[0]}}else{const c=document.querySelector(col).getBoundingClientRect();cr={left:c.left,width:c.width}}
+    const hx=r.left+(bd.hx!=null?bd.hx:((bd.cl+bd.cr)/2))*r.width,off=hx-(cr.left+cr.width/2);
+    const fr=document.querySelector(frame).getBoundingClientRect();const L=r.left+bd.l*r.width,Rr=r.left+bd.r*r.width;const cutFrame=kind==='idcard'?0:Math.max(0,fr.left-L)+Math.max(0,Rr-fr.right);
+    const tg=kind==='idcard'?null:document.querySelector(frame).querySelector('.kt3,.kdh,.ktag'),tq=tg&&tg.getBoundingClientRect(),pt=r.top+bd.t*r.height,tagOver=tq&&tq.right>L&&tq.left<Rr?Math.max(0,tq.bottom-pt):0,crownGap=pt-fr.top;
+    const colR=col==='ID'?{left:cr.left,right:cr.left+cr.width}:{left:cr.left,right:cr.left+cr.width};return{off,cutFrame,tagOver,crownGap,fig:[Math.max(L,colR.left),r.top+bd.t*r.height,Math.min(Rr,colR.right),r.top+bd.b*r.height].map(Math.round),cues:[...document.querySelectorAll('.kscue.on')].length,src:src.split('/').pop()}},[kind,name,FIG]);
+   if(r.err){if(r.err!=='skip'&&name!=='warmup')console.log(`${W}x${H} ${kind} ${name} ${r.err}`);continue}
+   if(name==='warmup'&&kind!=='shop')continue;
+   /* the cue (fade box 36 px above its anchor + the strip) must not intersect the figure's own column rect */
+   const diff=await p.evaluate(fg=>[...document.querySelectorAll('.kscue.on')].filter(c=>{const q=c.getBoundingClientRect(),sib=c.classList.contains('sib'),t=sib?q.top:q.top-(c.classList.contains('sm')?20:36),bt=sib?q.bottom:q.top+4;return q.right>fg[0]+1&&q.left<fg[2]-1&&bt>fg[1]&&t<fg[3]}).length,r.fig);
+   if(process.env.SHOTS&&OUT)await p.screenshot({path:`${OUT}/${W}x${H}-${kind}-${name}.jpg`,type:'jpeg',quality:72});
+   console.log(`${W}x${H} ${kind.padEnd(7)} ${(kind==='shop'?'eunuch':name).padEnd(14)} head-centre offset ${r.off.toFixed(1)} px | cut at frame ${r.cutFrame.toFixed(1)} | name over figure ${r.tagOver.toFixed(1)} px | crown top below frame top ${r.crownGap.toFixed(1)} px | cues on ${r.cues} | cues over the figure column ${diff} | ${r.src}`);
+   if(Math.abs(r.off)>1.5)console.log('  note: head off-centre (frame left edge limit or measure)');if(diff!==0){bad++;console.log('FAIL cue touches the figure',kind,name)}if(r.tagOver>1){bad++;console.log('FAIL name tag over the figure',kind,name)}if(r.cutFrame>1){bad++;console.log('FAIL cut at frame',kind,name)}}
+  await ctx.close()}
+ await b.close();console.log(bad?`FAIL ${bad}`:'ALL OK');process.exit(bad?1:0)})().catch(e=>{console.error(e);process.exit(2)});
