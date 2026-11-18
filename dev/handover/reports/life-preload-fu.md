@@ -64,3 +64,9 @@ life-preload.js: ROOT env, CONT clicks the title slot `#slots [data-load]` (the 
 
 ### Tests on r1
 quickcheck PASS twice (85a8ba81 and d0044419; open 1.3–1.6 s, old save ok, core gates incl. one-core-guard PASS) · coop-e2e 63/63 ×2 + COOP_SWAP 63/63 on d0044419 · coop-p2 45/45 (merge) / 46/46 (d0044419) · coop-thin-e 32/32 ×2 · coop-thin-c L3 see (2). Shots: scratch only, none on the CDN (nothing to wipe).
+
+## R2 (worker, answer to REVIEW r1 FAIL on B) — branch review/life-preload-fu-r2 @ 53a69974 (base r1 d0044419, A fix kitFigWaitBody kept)
+Change (jload.js lArm, co-op same-life path only): after the quiet fetch, ONE post-merge redraw 150 ms later when a dialog is queued ( → the co-op render wrap re-arms reshowQ), no cover. This is the old gate-end render without the cover.
+Finding: the stuck queued dialog is NOT caused by B. Baseline coop-thin-c L3 on pure origin/main a95e8d41 (+ only a call counter): **1 of 5 runs FAILED 14/16 with the identical signature** (C4 week merged once: guest Q ["Điềm báo","Hội phối đồ: báo đề","Lời cảnh báo"], modal false, pend true, sent -1). a28baaea: 5/5 green (16-17 checks). So it is a pre-existing intermittent in thin-c C4 (main ≈ 20 %), not a regression of this branch.
+Runs on r2 build (live Worker): coop-e2e 6/6 63/63, COOP_SWAP=1 63/63, coop-thin-c L3 5/6 (the one failure = the same main flake, 14/16 at C4), quickcheck PASS (open 1463 ms, render 212/204, tab 386/363, buổi 1130/933, tasks>200ms 15/14, core gates PASS; one earlier run FAILed only "not built" before the commit + longTaskMax 2880 noise while another test shut down).
+Ask for MAIN/B: the thin-c C4 flake (dialog queued, modal hidden, week never ends, on main too) deserves its own job; B must not be blamed for it.
