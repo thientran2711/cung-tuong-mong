@@ -22,6 +22,7 @@ Earlier today (verbatim): "Tôi không hiểu là bạn kiểm cái kiểu gì. 
 5. Crowns/buns are EXTRA height above the head; never shrink the head or the body to make room (use a taller canvas, generous headroom).
 6. Skull-top detection = the GAME's method (dev/art/headtop/headtop.py): MediaPipe face mesh, head top = y(landmark 10) − 0.30 × F, F = landmark 10 → chin (152); face size compared = F. Tool dev/art/figure-gate/overlay_m09.py does exactly this (needs face_landmarker.task + libegl1). Haar boxes are NOT used (they disagreed by up to 40%). Before go-live every figure gets its img/fig-ht.json head-top row (same script) — the game scales skull top → feet (jkit.js KIT_FIG / kitFigBody); without the row the crown counts as height and the figure shrinks.
 7. Output with every report: the row + overlay sheet (all ranks), and the in-game-scale ladder.
+8. MEN (nam mẫu): also compare HEAD WIDTH at game scale (man skull→feet = 1.07 × m09): face-mesh cheek-to-cheek width (landmark 234 ↔ 454) and neck width must be ≥ m09's; face height ≈ m09 +0…+3%. Owner 18/11 ~03:58Z (verbatim): "Tiếp đến là hình mẫu nam, chuẩn nha. Khoan, hình mẫu này cái đầu, vẽ hình mẫu khác đi. Tao thấy cái đầu nó bị nhỏ á. Tức là nó không phải nó nhỏ về bề dọc mà nó nhỏ về ngang á. Không biết nữa. Nếu mà so với hình cái cung nữ á, là cái đầu của cô cung nữ rõ ràng là cổ to hơn."
 
 ## B. HAIRPINS / HEADDRESS (trâm cài)
 1. Every rank has FULL hairpins from t1 (Đáp ứng) up — flowers + several trâm with dangles/tassels — like the LIVE original of the same person and rank (img/hd/fig-consort-<cNN>-t<N>-a18.webp). Never "one or two sticks" (looks like a maid).
@@ -64,3 +65,8 @@ Open claim: t9 Hoàng thái hậu + t10 Nữ đế consort tiers (CLAIMS row 17/
 ## E. APPROVAL FLOW
 1. No mass production until the owner approves 3–4 consecutive good people (different painters).
 2. The owner reviews ONE sheet per person: the row on the red skull-top/feet lines + the m09 overlay (+ in-game ladder), never piecemeal singles. Owner 18/11 ~03:38Z (verbatim): "Tao nghĩ là phòng co giãn tao cũng không có cần vô nữa đâu, bởi vì hiện tại tao thấy cách mày làm cũng khá là hợp ý tao rồi. Cái cách mà mày đặt cái người đó vô so, rồi sau đó có một cái đường màu đỏ đo từ đỉnh đầu của từng người là ok." → the "Phòng co giãn" artifact is NOT used (kept only, not sent).
+
+## G. AUTO-REGEN + GEN COUNT (owner 18/11 ~03:56Z, verbatim: "Bây giờ á, cứ làm theo cái luật đi, đo ra không đúng cái mốc thì auto vẽ lại. Đó, vẽ lại rồi mày duyệt lại đến khi mà mày thấy là vẽ ra đúng rồi đúng không? Tức là mày phải cho tao, gửi cho tao để mày báo cho tao là ok, vẽ ra đúng được bao nhiêu lượt để vẽ ra được đúng như vậy, để tao còn biết đường tao tính. Ví dụ như phải tốn quá nhiều lượt để mà vẽ thì mình có thể nâng cái trần của cái mức phần trăm từ 3% lên cao hơn chẳng hạn.")
+1. Any figure outside the gate (A–D) is regenerated automatically — no asking — until it passes; keep the approved design (colour, pins, costume) of that rank.
+2. Every report states the NUMBER OF GENS per figure until PASS (table: figure | gens | final face % | pass). The owner uses it to decide whether to raise the ±3% ceiling.
+3. Safety stop: after 6 failed gens on one figure, stop that figure and report it with the best one and its %.

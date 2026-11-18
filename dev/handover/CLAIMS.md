@@ -438,18 +438,20 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | REVIEW result-reason 0db60e0e (sonnet SMALL; brief briefs/review-result-reason.md) | review/result-reason | MAIN s43 | session_01UV1SziWJ2pGVgUMJzwxqQF | RUNNING | 18/11 02:24Z |
 | REVIEW staff-cap-apply fc470e4 (opus BIG; brief briefs/review-staff-cap-apply.md) | review/staff-cap-apply | MAIN s43 | session_01UV1Szjx5c2mp4L6PXwg2zG | PASS e24d5838 (review/staff-cap-apply-r6, FF of main 95d5f767; was 635a2381) | 18/11 02:30Z |
 | look-fx WIRE (upload 24 approved face finals + LOOKS_ART + fig fit rows re-measure; sonnet; brief briefs/look-fx-wire.md) | review/look-fx-wire | MAIN s43 | session_01UV1Szi3XiPz3MUDBq5ZkxC (R4; prev SziKwgY, Szm7mHX) | RUNNING | 18/11 02:31Z |
-c12 a18 t1-t3 full hairpins (Round 35) | claude/cung-tuong-mong-handover-hj0h8w (art, _review CDN) | session_011xDdVR9qZRXuyczR6JVteS | RUNNING | 2026-11-18T02:46Z (Foreman C ROOT-15)
+c12 a18 t1-t3 full hairpins (Round 35) | claude/cung-tuong-mong-handover-hj0h8w (art, _review CDN) | session_011xDdVR9qZRXuyczR6JVteS | DONE (archived by ROOT-15) | 2026-11-18T02:46Z (Foreman C ROOT-15)
 | cloth-tea r3 (one shape every costume, higher on chest; sonnet; successor of SzjMK4R) | review/cloth-tea | MAIN s43 | session_01UV1SzghNErbDFn6nXtyBwa | RUNNING | 18/11 02:47Z |
 | avatar-makeup (stage + every avatar frame at mirror strength; sonnet; brief briefs/avatar-makeup.md) | review/avatar-makeup | MAIN s43 | merged into look-fx-wire (Szm7mHX) f6ffb09a | HANDED ON | 18/11 02:48Z |
 | HANDOVER-ARCHIVE (sonnet; MAIN s43 02:58Z + 03:05Z; owner OD L1817) | claude/cung-tuong-mong-handover-hj0h8w (dev/archive) | D | session_01964izCJRFLeyiak4tyF3BJ | DONE c1cc04f5 (archived) | 18/11 02:55Z |
 scale room artifact (Phòng co giãn) | claude/cung-tuong-mong-handover-hj0h8w dev/art/scale-room | session_011xDdVRWmQKBpjh3ayt7u8f | RUNNING | 2026-11-18T02:55Z (Foreman C ROOT-15)
-c12 a18 t1+t4 head fix (Round 37) | claude/cung-tuong-mong-handover-hj0h8w (art, _review CDN) | session_011xDdVQ868623tH3nMJMf2J | RUNNING | 2026-11-18T03:03Z (Foreman C ROOT-15)
+c12 a18 t1+t4 head fix (Round 37) | claude/cung-tuong-mong-handover-hj0h8w (art, _review CDN) | session_011xDdVQ868623tH3nMJMf2J | DONE (archived by ROOT-15) | 2026-11-18T03:03Z (Foreman C ROOT-15)
 | BALANCE CHAIN RE-DO (opus; MAIN s37 21:06Z: balance-core-r2 → night-final-r2 → night-ledger-r1 on newest main) | review/balance-chain | D | session_01964izE1x6qUogL4pcSrLjd | RUNNING | 18/11 03:05Z |
 | REVIEW cloth switches 7b23023d (xoc+uot+bun ON, tra OFF; sonnet SMALL; brief briefs/review-cloth-switches.md) | review/cloth-tea | MAIN s43 | session_01UV1Szk6FimApZS1a8pXbax | RUNNING | 18/11 03:06Z |
-male proportion standard (nam mẫu) | claude/cung-tuong-mong-handover-hj0h8w (art, img/_review/male-proportion) | session_011xDdVPUwCzpXaNaKCq9BQr | RUNNING | 2026-11-18T03:10Z (Foreman C ROOT-15)
+male proportion standard (nam mẫu) | claude/cung-tuong-mong-handover-hj0h8w (art, img/_review/male-proportion) | session_011xDdVPUwCzpXaNaKCq9BQr | DONE (archived by ROOT-15) | 2026-11-18T03:10Z (Foreman C ROOT-15)
 | place-stage (owner layout: no plaque, entry lines as tai-mắt chip, count top-left, name top-right, full size; sonnet; successor of SzmHEoD) | review/place-stage | MAIN s43 | session_01UV1SziagD584pr6UpyJayd | RUNNING | 18/11 03:12Z |
-c12 a18 Nữ đế sample (first step of t10 tier) | claude/cung-tuong-mong-handover-hj0h8w (art) | session_011xDdVRDstwu4ckD2NmLQBs | RUNNING | 2026-11-18T03:15Z (Foreman C ROOT-15)
+c12 a18 Nữ đế sample (first step of t10 tier) | claude/cung-tuong-mong-handover-hj0h8w (art) | session_011xDdVRDstwu4ckD2NmLQBs | DONE (archived by ROOT-15) | 2026-11-18T03:15Z (Foreman C ROOT-15)
 | FOREMAN C-AG #9 (opus; successor of #8, opened by C-AG #8) | handover FOREMAN_C_STATUS | C-AG #8 | session_01UV1Szh2asyry15mvpuCEsJ | RUNNING | 18/11 03:20Z |
 | book-figsize r5 (one layout, crop wide robes at column, kids child size; sonnet; successor of Szgp1qD) | review/book-figsize-r5 | MAIN s43 | session_01UV1SzkhyYuitpjvm16Zn3P | RUNNING | 18/11 03:33Z |
 | NPC-PURPOSE (opus): every NPC action from a goal, no dice-only events (owner 18/11 04:08Z); phase 1 scan now, phase 2 after ag-all-2 live | review/npc-purpose | C-AG #9 | session_01UV1SziWp3UtGjdFMm4o1Vd | RUNNING | 18/11 03:55Z |
 | RESIDENCE-SEATS r2 re-merge on newest main (opus; MAIN s43 03:32Z) | review/residence-seats-r2 | D | session_01964izDkKFe51gntX9F2gZ9 | RUNNING | 18/11 03:58Z |
+c12 a18 regen ±3% t2,t3,t5,t6,t7,t8 + Nữ đế (Round 38, auto-regen + gen count) | claude/cung-tuong-mong-handover-hj0h8w (art, _review CDN) | session_011xDdVPnjHecS9RjeTvnfBe | RUNNING | 2026-11-18T04:00Z (Foreman C ROOT-16)
+nam mẫu v2 (wider head/neck, height +7% approved) | claude/cung-tuong-mong-handover-hj0h8w (art, img/_review/male-proportion) | session_011xDdVQFLRu1hiQA6r1onWU | RUNNING | 2026-11-18T04:00Z (Foreman C ROOT-16)
