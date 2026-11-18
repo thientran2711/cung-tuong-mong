@@ -91,3 +91,17 @@ SHOTS (LOOKED at full size; CDN img/_review/place-stage/, wipe after verdict):
 - iPad 4 people: https://ctm-img.victoria-tntt.workers.dev/img/_review/place-stage/r5b-four-ipadAir-vuon-hi.jpg
 All: Hoàng hậu in the phoenix crown (c09 rank 7), pet (chó) at her feet, worn title pill on line 1.
 ~95% xong / chờ kiểm
+
+## r5b REDO — SẴN SÀNG KIỂM place-stage 48e61b6 (A1; replaces a341aea = wrong pick; worker r5)
+PRIORITY #1 CHECK ('marker|kmemark|figseal|kfseal'): OD ~06:10Z/06:15Z/06:20Z (relayed by ROOT-46/47) | main jmark.js, jfigseal.js | review/place-stage a341aea -> 48e61b6 | claims place-stage r5.
+Branch review/place-stage @ 48e61b6 (live main d219fce merged). Pushed.
+WHAT:
+1. A1: marker back ON THE HEAD (a341aea tag-spot code removed); KIT_FIG.h .79 unchanged; KIT_SLOTS.band 46 -> 70; figure scale comes from the existing j59 meCap (marker + bounce room), so every figure shrinks just enough for the tallest crown. Hoàng hậu c09 in the tallest crown = 453 px on the NEW 601 px stage (472 px on the old 623 px stage = same proportion; crown top 77 px under the frame top), marker bounce top 12.3 px inside the frame (all 18 places x 5 devices).
+2. Glow = Hoàng hậu pill gold token (--dh = RCOL[7] #ffc400, kdh tier 8): white core + 6/12/22 px halos, .kmemark and .kmmapmk (jmark.js KMM_GOLD).
+3. Seal (img.kemo.kfseal, jfigseal.js, KIT_FIGSEAL): ONE fixed offset from the figure's standing anchor: centre = anchor x ± dx*body, feet y − dy*body; anchor = picture centre (slot centre) + painted feet (kitFigBody b); dx .194, dy .916 (measured medians of the old head-edge rule: dy was already .914-.923, dx varied .12-.194); right first, left (mirror) when the right would leave the frame; size unchanged (k .105 x body, 22-50). Measured on 5 devices x 18 places: dy .915-.923, dx +.194 or mirrored -.175..-.183 (frame clamp), 0 seals outside the frame.
+TESTS: scan 18 places x 5 devices (fold, ipadAir, ipadPro, pixel, iphone14; HH=1 PET=cho TITLE=s8 EXTRA=2): 0 page errors, figH 453 everywhere, markAt head, bounce min 12.3, tag gap 11 / inside frame, no tag overlap. Quickcheck: perf PASS (render 199/201 ms, tab 397/429, buổi 897/1108); G3 kit-conform is FLAKY (tutorial probe "0 intro pages (want 4)") — it failed once on my merged tree and fails on live main d219fce too, passed on my tree on re-run (CORE GATES PASS 199 s): not caused by this branch. stage-tag-contrast.py not run (harness page timeout here; tag text/colours untouched).
+4-PERSON iPad Ngự hoa viên (iPad Air 1180x820): 4 fixed columns, count chip "4", same size; seals at the same relative spot on the maid and Hoàng hậu.
+SHOTS (LOOKED; CDN img/_review/place-stage/, wipe after verdict; the folder also still holds my older r5b-* shots of the rejected a341aea — delete them):
+- AFTER Fold: https://ctm-img.victoria-tntt.workers.dev/img/_review/place-stage/a1-after-fold-vuon-hi.jpg | iPad: https://ctm-img.victoria-tntt.workers.dev/img/_review/place-stage/a1-after-ipadAir-vuon-hi.jpg (4 people, Hoàng hậu tallest crown + chó, title pill)
+- BEFORE (live main, same script): https://ctm-img.victoria-tntt.workers.dev/img/_review/place-stage/a1-before-fold-vuon-hi.jpg | https://ctm-img.victoria-tntt.workers.dev/img/_review/place-stage/a1-before-ipadAir-vuon-hi.jpg
+~96% xong / chờ kiểm
