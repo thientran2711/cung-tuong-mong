@@ -35,28 +35,33 @@ label.ck input{width:22px;height:22px;accent-color:var(--ok)}
 #lb button{font:inherit;padding:10px 16px;border-radius:8px;border:0;background:var(--card);color:var(--fg);cursor:pointer}
 #lb .ck{color:#fff}
 .sr{position:absolute;left:-9999px}
+.age>h3{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.age>h3 button{font:inherit;font-size:12px;text-transform:none;letter-spacing:0;padding:6px 10px;border-radius:8px;border:1px solid var(--line);background:var(--card);color:var(--fg);cursor:pointer}
 </style>
 <div class="bar">
  <h1>Duyệt trung y</h1>
- <span class="cnt" id="cnt">Đã chọn: 0 / 0</span>
+ <span class="cnt" id="cnt">Làm skin: 0 / 0</span>
  <div class="seg" role="group" aria-label="Lọc">
-  <button id="f-all" aria-pressed="true">Tất cả</button><button id="f-on" aria-pressed="false">Đã chọn</button><button id="f-off" aria-pressed="false">Chưa chọn</button>
+  <button id="f-all" aria-pressed="true">Tất cả</button><button id="f-on" aria-pressed="false">Làm skin</button><button id="f-off" aria-pressed="false">Chưa tích</button>
  </div>
+ <div class="seg" id="tabs" role="tablist" aria-label="Tuổi"></div>
  <select id="sel" aria-label="Nhảy tới người"></select>
 </div>
-<p class="note">Mỗi ảnh có ô «Chọn». Có tích = giữ. Không tích = bỏ hoặc vẽ lại. Chưa chia vào đâu. Bấm vào ảnh để xem lớn. Tên màu dưới ảnh là bậc trung y (1 lụa ngà … 8 lụa vàng nhạt).</p>
+<p class="note">Mỗi ảnh có ô «Làm skin». Có tích = bộ này chuyển làm skin để bán hoặc thưởng trong game. Không tích = cất kho, không đụng tới, không đưa lên game. Bấm vào ảnh để xem lớn. Mọi ảnh đều ghi «Trung y» kèm bậc màu (1 lụa ngà … 8 lụa vàng nhạt), dù tranh vẽ giống đồ phi tần.</p>
 <div id="warn" class="warn" hidden>Chưa nối được nơi lưu. Các ô tích chỉ giữ trong lần mở này.</div>
 <main id="main"></main>
-<div id="lb" hidden><div class="big" id="lbimg"></div><div class="t" id="lbt"></div><label class="ck"><input type="checkbox" id="lbck"><span>Chọn</span></label><button id="lbx">Đóng</button></div>
+<div id="lb" hidden><div class="big" id="lbimg"></div><div class="t" id="lbt"></div><label class="ck"><input type="checkbox" id="lbck"><span>Làm skin</span></label><button id="lbx">Đóng</button></div>
 <script>
 const MAN=/*MAN*/[];
 const COL=["","lụa ngà","lụa lục nhạt","lụa lam nhạt","lụa hồng phấn","lụa tím nhạt","lụa hồng đào","lụa cam nhạt","lụa vàng nhạt"];
 const AGES={a18:"18 tuổi",a26:"26 tuổi",a36:"36 tuổi",a51:"51 tuổi"};
-const ticks={};let filt="all",coll=null,cur=null;
+const ticks={};let filt="all",coll=null,cur=null,agef="a18";
 const byId={};MAN.forEach(m=>byId[m.id]=m);
 const main=document.getElementById("main"),cells={};
 const people={};MAN.forEach(m=>{((people[m.person]=people[m.person]||{})[m.age]=people[m.person][m.age]||[]).push(m)});
 const sel=document.getElementById("sel");
+const tabs=document.getElementById("tabs");
+Object.keys(AGES).forEach(a=>{const b=document.createElement("button");b.textContent=AGES[a].replace(" tuổi","");b.setAttribute("role","tab");b.dataset.a=a;b.setAttribute("aria-pressed",a===agef);b.onclick=()=>{agef=a;[...tabs.children].forEach(x=>x.setAttribute("aria-pressed",x.dataset.a===a));paint();window.scrollTo(0,0)};tabs.appendChild(b)});
 const pname=p=>(p[0]==="c"?"Phi tần ":"Cung nữ ")+p;
 sel.innerHTML='<option value="">Nhảy tới…</option>'+Object.keys(people).sort().map(p=>`<option value="p-${p}">${pname(p)}</option>`).join("");
 sel.onchange=()=>{const e=document.getElementById(sel.value);if(e){e.scrollIntoView({block:"start"});sel.value=""}};
@@ -67,12 +72,13 @@ Object.keys(people).sort().forEach(p=>{
  const s=document.createElement("section");s.className="p";s.id="p-"+p;
  s.innerHTML=`<h2>${pname(p)}</h2>`;
  ["a18","a26","a36","a51"].forEach(a=>{const L=people[p][a];if(!L)return;
-  const d=document.createElement("div");d.className="age";d.innerHTML=`<h3>${AGES[a]}</h3>`;
+  const d=document.createElement("div");d.className="age";d.dataset.a=a;d.innerHTML=`<h3>${AGES[a]}<button type="button">Chọn cả hàng</button></h3>`;
+  d.querySelector("button").onclick=()=>L.forEach(m=>{if(!(ticks[m.id]&&ticks[m.id].skin))setTick(m.id,true)});
   const r=document.createElement("div");r.className="row";
   L.sort((x,y)=>x.variant.localeCompare(y.variant)).forEach(m=>{
    const c=document.createElement("div");c.className="cell";c.id="c-"+m.id;
    const t=+m.variant.slice(2);
-   c.innerHTML=`<div class="img" data-s="${sheet(m)}" style="background-position:${pos(m)}"></div><div class="lbl">Bậc ${t} · ${COL[t]}</div><label class="ck"><input type="checkbox"><span>Chọn</span></label>`;
+   c.innerHTML=`<div class="img" data-s="${sheet(m)}" style="background-position:${pos(m)}"></div><div class="lbl">Trung y · Bậc ${t} · ${COL[t]}</div><label class="ck"><input type="checkbox"><span>Làm skin</span></label>`;
    const im=c.querySelector(".img");io.observe(im);im.onclick=()=>openLb(m.id);
    c.querySelector("input").onchange=e=>setTick(m.id,e.target.checked);
    cells[m.id]=c;r.appendChild(c)});
@@ -81,18 +87,18 @@ Object.keys(people).sort().forEach(p=>{
 const warn=document.getElementById("warn");
 function paint(){
  let n=0;
- MAN.forEach(m=>{const on=!!(ticks[m.id]&&ticks[m.id].checked);if(on)n++;const c=cells[m.id];c.classList.toggle("on",on);c.querySelector("input").checked=on;
-  c.hidden=filt==="on"?!on:filt==="off"?on:false});
- document.querySelectorAll("section.p").forEach(s=>{s.querySelectorAll(".age").forEach(a=>a.hidden=![...a.querySelectorAll(".cell")].some(c=>!c.hidden));s.hidden=![...s.querySelectorAll(".age")].some(a=>!a.hidden)});
- document.getElementById("cnt").textContent=`Đã chọn: ${n} / ${MAN.length}`;
- if(cur){document.getElementById("lbck").checked=!!(ticks[cur]&&ticks[cur].checked)}
+ MAN.forEach(m=>{const on=!!(ticks[m.id]&&ticks[m.id].skin);if(on)n++;const c=cells[m.id];c.classList.toggle("on",on);c.querySelector("input").checked=on;
+  c.hidden=filt==="on"?!on:filt==="off"?on:false;c.closest(".age").dataset.n=1});
+ document.querySelectorAll("section.p").forEach(s=>{s.querySelectorAll(".age").forEach(a=>a.hidden=a.dataset.a!==agef||![...a.querySelectorAll(".cell")].some(c=>!c.hidden));s.hidden=![...s.querySelectorAll(".age")].some(a=>!a.hidden)});
+ document.getElementById("cnt").textContent=`Làm skin: ${n} / ${MAN.length}`;
+ if(cur){document.getElementById("lbck").checked=!!(ticks[cur]&&ticks[cur].skin)}
 }
 async function setTick(id,v){
- ticks[id]={checked:v,ts:Date.now()};paint();
- if(coll){try{await coll.doc(id).set({checked:v,ts:Date.now()})}catch(e){warn.hidden=false;warn.textContent="Không lưu được ô vừa tích ("+(e&&e.code||"lỗi")+"). Hãy thử lại."}}
+ ticks[id]={skin:v,ts:Date.now()};paint();
+ if(coll){try{await coll.doc(id).set({skin:v,ts:Date.now()})}catch(e){warn.hidden=false;warn.textContent="Không lưu được ô vừa tích ("+(e&&e.code||"lỗi")+"). Hãy thử lại."}}
 }
 function openLb(id){cur=id;const m=byId[id],t=+m.variant.slice(2);const i=document.getElementById("lbimg");i.style.backgroundImage=`url(${sheet(m)})`;i.style.backgroundPosition=pos(m);
- document.getElementById("lbt").textContent=`${pname(m.person)} · ${AGES[m.age]} · Bậc ${t} · ${COL[t]}`;document.getElementById("lbck").checked=!!(ticks[id]&&ticks[id].checked);document.getElementById("lb").hidden=false}
+ document.getElementById("lbt").textContent=`${pname(m.person)} · ${AGES[m.age]} · Trung y · Bậc ${t} · ${COL[t]}`;document.getElementById("lbck").checked=!!(ticks[id]&&ticks[id].skin);document.getElementById("lb").hidden=false}
 document.getElementById("lbck").onchange=e=>{if(cur)setTick(cur,e.target.checked)};
 document.getElementById("lbx").onclick=()=>{cur=null;document.getElementById("lb").hidden=true};
 document.getElementById("lb").onclick=e=>{if(e.target.id==="lb"){cur=null;e.currentTarget.hidden=true}};
@@ -102,7 +108,7 @@ paint();
 (async()=>{
  let db=null;try{db=await claude.use("db")}catch(e){}
  if(!db){warn.hidden=false;return}
- coll=db.collection("ticks");
+ coll=db.collection("skin");
  const t=setTimeout(()=>{warn.hidden=false},10000);
  try{coll.onSnapshot(s=>{clearTimeout(t);warn.hidden=true;const seen={};s.docs.forEach(d=>{seen[d.id]=1;ticks[d.id]=d.data()});Object.keys(ticks).forEach(k=>{if(!seen[k]&&ticks[k].ts&&Date.now()-ticks[k].ts>5000)delete ticks[k]});paint()},e=>{warn.hidden=false})}catch(e){warn.hidden=false}
 })();
