@@ -57,3 +57,38 @@ OPEN (measured, not tuned — reported honestly):
 - Origin spread with the new gate (mH2): ch / nc 50 %, cn / td / tt 33 %, dtq 19 %, bd / muoi 13 %, **cnv 7 %, thd 7 %** (OD:L43 asks 20–40 %, cnv 20–25 %).
 GATES (all on this sha or its build): one-core-guard PASS (fails 0, inline 6588 < 6691) · quickcheck.sh PASS ×2 (core gates PASS incl. rules-one-source, time-spill PASS, old save from live loads + plays a buổi, open 1.7 s, render 313/329 ms) · buổi in quickcheck 1338/1195 ms (+12 %) is popup count (fixed 40 ms sleep per popup); seeded check 9 games × 16 buổi: script time per step 195/188 ms (+3.7 %), total +2.9 % → within +5 % · balance-core.js 0 FAIL, 0 page errors · coop-e2e (live Worker) 62/62 (r2: 60/60) · shots.js Fold 755x1000 + iPad 1180x820: SHOTS OK, home + act tab looked at (no overlap, nothing cut) · bot lives on the merged build 0 page errors. No images committed.
 SẴN SÀNG KIỂM de993ca846040a6666e201ce898d46da041338de
+
+## ROUND 2 (worker opus, brief D11-balance-2-fix2; HANDOVER — C3 misses on deaths, next tuning round for a successor)
+PRIORITY #1 CHECK ('balance-2|artO|BAL.art.odds|Múa trong yến tiệc|Danh wall'): OD 1 | ledger 0 | claims 8 (balance-2 rows, D) | main 15 | review/* 4 (review/balance-2, review/balance-2-r1, review/balance-core-r2*, review/mg-balance-2*)
+
+START_CTX ≈ 4 %; rolled over at ≈ 34 % (Foreman D #11 03:04Z: hand over if C3 misses). WIP head **review/balance-2 @0cefa0f8f** = balance-core + balance-2 deltas (r1 371e3a22 + origin/main 99f3978d merged in af5b9bdd, site rebuilt 5d956715; dev/index.html in the tree is still the C2 build: rebuild before review).
+
+### Changes on top of r1 (all BAL / two-way: her cards and the NPC's same act read the same keys)
+- C1 9c5963b3: BAL.odb.j2.odO_3 30→42 (Múa trong yến tiệc), odO_7 30→40 (Làm thơ dâng lên), BAL.odb.j68f.odP_2 30→40 (Làm thơ vịnh mai), BAL.odb.j68e.odP_5 40→46; BAL.deck vu/cam/ky o[0] 40/40/45 → 48/48/53; j2 Múa failure danh -6 → -BAL.tw.g.vu[2] (=4, the same as an NPC dance).
+- C2 d673c0b2: BAL.deck cam/ky/vu lv 3→2; jbalcore.js moves the ARTFX «mở …» line and ARTS.u "Bậc n" to BAL.deck[k].lv (checked in-page).
+- C3 0cefa0f8: BAL.deck.vu.lv back to 3 (cam/ky stay at 2).
+- Tools: dev/measure/inb2r2.js (card ledger + art path), artscan.py (family scan: 56 artO/artOE/artSide/virO/deckOdds reads with card, Danh win/loss, live term), anr2.py (arm table + per-origin).
+
+### Measured (sens bot, Vừa, 8 y cap, seeds 1000+shard paired; ~26 lives/shard)
+| arm | lives | HH | ended before HH/cap | ended < 3 y | Phi, month | Quý phi, month | HH month | Danh m12/24/36 | deaths /100 y (poison / birth / illness) | kids /y |
+|---|---|---|---|---|---|---|---|---|---|---|
+| live (origin/main) | 168 | 32 (19 %) | 31 % | 11 % | 89 %, m24 | 73 %, m39 | m63.5 | 74/83/90 | 3.27 (2.02 / 0.48 / 0.48) | 0.045 |
+| C1 | 68 | 9 (13 %) | 29 % | 13 % | 85 %, m24 | 69 %, m45 | m67 | 83/74/75 | 2.38 | 0.102 |
+| C2 | 156 | 31 (20 %) | 43 % | 22 % | 84 %, m27 | 69 %, m39 | m66 | 84/76/84.5 | 6.59 (2.54 / 2.20 / 1.16) | 0.101 |
+| C3 | 156 | 35 (22 %) | 37 % | 16 % | 85 %, m24 | 70 %, m39 | m64 | 81.5/76/90 | 4.80 (2.01 / 1.23 / 0.89) | 0.089 |
+
+Per-origin HH, C3 (live): tt 6/16 (1/16), dtq 5/16 (3/17), muoi 2/16 (1/16), cn 3/15 (4/16), nc 5/15 (4/17), bd 4/16 (1/17), td 2/15 (7/18), ch 4/15 (2/18), thd 3/16 (5/17), cnv 1/16 (4/16).
+
+Danh wall fixed: Múa failure drain 265 → ~92 Danh/life (live 100); Danh m24 is 76 vs 36 at r1 (live 83). HH ≥ live from C3; Phi / Quý phi are at the same median month, with reach 3–4 points lower.
+
+### Why it is not ready
+Deaths are 4.8 vs 3.3 per 100 y. Poison is now equal to live; C2's poisoning excess came from NPC Kinh hồng vũ at bậc 2, where every NPC dance gives ghen +BAL.tw.g.vu[0] to all. What is left over:
+- **Childbirth** (1.23 vs 0.48): kids per year are about 2× live **already at C1 / r1**, so this is carried balance-core, not this round's keys.
+- **Illness** (0.89 vs 0.48).
+
+Gates already run on C3: one-core-guard 0 fails (inline 3785 < 3843), text-rule PASS, balance-core 42/0, page errors 0. NOT yet run: quickcheck perf, coop-e2e, old save, Fold / iPad shots, residence-seats combined arm (/home/user/wt/b2res is C1-based and must be rebuilt).
+
+### Next for the successor (BAL only, two-way)
+1. Doubled conception (carried balance-core): diff j8 nightCh (artSide vu/y in place of arts.vu*2 / y*1.5), stealBase (BAL.steal.m: more stolen nights?), empnight artOE, and jcycle against origin/main. Count nights per year for live vs C3 (add it to inb2r2.js) and bring kids per year back near 0.045.
+2. The y-art care family: careOdds (j13 artO(p,"y") in place of y*5), treatO "self" 30+artO, Uống thuốc phá thai od(odO_4+artO), gate.yCure 3. On the slow ladder these lower recovery and birth care. Re-base them in BAL (e.g. a care base) so the mid-life care odds match live.
+3. Re-measure C3+fix (≥150 lives) against the same live dir (/home/user/wt/b2out/live is lost with this container; re-run live with seeds 1000+shard). Then run the gates, the residence arm, the shots, and § ROUND 2 final "SẴN SÀNG KIỂM <sha>".
