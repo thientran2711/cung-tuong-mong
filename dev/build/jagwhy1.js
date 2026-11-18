@@ -102,3 +102,30 @@ npwReg("ladyJob",{grp:"lady",who:()=>{const L=[];if(!S.thDead)L.push(NPW1_TH);co
   const v=lady===NPW1_TH?npwPick(L.filter(v=>(v.th||0)>=J.th),v=>v.th):npwPick(L.filter(v=>aff(lady,v)>=J.aff),v=>aff(lady,v));
   return v?{s:npwB().min+(lady===NPW1_TH?v.th:aff(lady,v))/2,t:v,r:npw1Job(lady,v)}:null}});
 npwReg("q72Collect",{grp:"debt",who:c=>c.C,why(c){return {s:npwB().min+c.n*npw1B("q72").debt,r:"cần đến ân tình ngươi còn nợ"}}});
+/* ---- G1 part 5: an NPC's day with the Emperor (jgift) and the wardrobe (j92). BAL.ag.why.{empDay,wd} ----
+   empDay     a consort seeks the Emperor's company when she wants favour: (want − Sủng) × k + amb for an ambitious nết; the act is her best art
+   wdRemark   who remarks on an outfit: the Thái hậu when it breaks the rules (or praises one she regards ≥ wd.thOk); a consort who BELIEVES it
+              wrong and bears the wearer a grudge (hostility ≥ wd.host), or believes it right and likes her (liking ≥ wd.fr); the Empress keeps the
+              rules (any wrong outfit). Same wearer at most every wd.gap tuần
+   wdSpy      her tai mắt digs at Nội vụ phủ only for a consort who is set against her, the most hostile first
+   wdDress    a consort changes her clothes when she believes they are wrong, or for a festival · wdNotice the Emperor notices a bright outfit
+              on the one he favours (Sủng ≥ wd.notice) · wdSearch a framed consort searches her room first when she is watchful (tai mắt) or
+              distrusts her accuser · wdPawn a consort short of silver (bac < wd.poor) pawns a piece */
+npwReg("empDay",{grp:"consort",who:()=>liveRivals(false).filter(v=>v&&!v.coop&&!v.out&&!v.confined),why(v){const E=npw1B("empDay");
+ const s=(E.want-(v.sung||0))*E.k+(traitsOf(v).some(t=>E.ambT.includes(t))?E.amb:0);return s>0?{s,t:S.emp||null,r:"mong được Hoàng thượng đoái hoài"}:null}});
+function npw1Art(v){const a=v.arts||{};return (a.ky||0)>=1&&(a.ky||0)>=(a.cam||0)?"ky":(a.cam||0)>=1?"cam":"walk"}
+npwReg("wdRemark",{grp:"wd",who:c=>{const L=others(c.p).filter(v=>v!==S&&v.alive&&!v.out&&!v.confined);if(!S.thDead)L.unshift(NPW1_TH);return L},
+ why(x,c){const W=npw1B("wd"),p=c.p,st=c.st;
+  if(x===NPW1_TH){if(st!=="ok")return {s:npwB().min+W.th,t:p,r:"giữ lễ chế trong cung",k:st};const g=p===S?S.th:(p.th||0);return g>=W.thOk?{s:npwB().min+g/2,t:p,r:"quý người biết giữ lễ",k:st}:null}
+  const q=queenP();const sure=x===q||["tram","y"].every(sl=>{const e=wdOf(p)[sl];return !e||((x.wdk||{})[e.k])});const view=sure?st:wdBelStatus(x,p);
+  if(x===q&&view!=="ok")return {s:npwB().min+W.queen,t:p,r:"giữ phép trong hậu cung",k:view};
+  if(view!=="ok"){const h=hostility(x,p);return h>=W.host?{s:npwB().min+h,t:p,r:npw1Gr(x,p),k:view}:null}
+  const f=aff(x,p);return f>=W.fr?{s:npwB().min+f/2,t:p,r:"quý nàng",k:view}:null}});
+function wdNpwGap(p){return wk()>=(p.wdRmW||0)}
+function wdNpwR(p,o){p.wdRmW=wk()+npw1B("wd").gap;const x=o.who;if(x===NPW1_TH)return{name:"Thái hậu",face:pTH(),sure:true,th:1,why:o.why};const q=queenP();
+ return{v:x,name:wdNm(x),face:pv(x),why:o.why,sure:x===q||["tram","y"].every(sl=>{const e=wdOf(p)[sl];return !e||((x.wdk||{})[e.k])})}}
+npwReg("wdSpy",{grp:"srv",who:c=>c.w?[c.w]:[],why(w,c){const b=npwPick(c.cand,z=>Math.max(0,hostility(z[0],S)-npw1B("wd").spyHost));return b?{s:npwB().min+hostility(b[0],S),t:b[0],r:"dò kẻ có ý hại ngươi",k:b}:null}});
+npwReg("wdDress",{grp:"consort",who:c=>[c.v],cdOf:()=>0,why(v){const b=wdBelStatus(v,v);if(b!=="ok")return {s:npwB().min+npw1B("wd").dress,r:"thấy y phục mình chưa hợp"};return (typeof wdFest==="function"&&wdFest())?{s:npwB().min,r:"sửa soạn cho ngày lễ"}:null}});
+npwReg("wdNotice",{grp:"emp",who:()=>S.emp&&!S.empDead?[S.emp]:[],cdOf:()=>0,why(e,c){const g=c.p===S?S.sung:(c.p.sung||0);return g>=npw1B("wd").notice?{s:npwB().min+g/2,t:c.p,r:"để mắt tới người mình sủng"}:null}});
+npwReg("wdSearch",{grp:"consort",who:c=>[c.t],cdOf:()=>0,why(t,c){const W=npw1B("wd");const e=eyes(t)*W.eye,h=hostility(t,c.a);return (e>=W.eyeBar||h>=W.host)?{s:npwB().min+e+h/2,t:c.a,r:e>=W.eyeBar?"vốn tinh ý":"không tin kẻ tố mình"}:null}});
+npwReg("wdPawn",{grp:"consort",who:()=>liveRivals(true).filter(v=>(v.bac||0)<npw1B("wd").poor),why(v){return {s:npwB().min+(npw1B("wd").poor-(v.bac||0)),r:"túng bạc"}}});

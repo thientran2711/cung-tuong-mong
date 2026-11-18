@@ -1241,7 +1241,8 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "monthly outfit remark (speaker random); who overhears; NPC re-dress",
-"fp": "  if(!p.confined&&roll(st===\"ok\"?WD.remarkOk:st===\"tang\"?7"
+"fp": "  if(!p.confined&&roll(st===\"ok\"?WD.remarkOk:st===\"tang\"?7",
+"done": "function wdRemarker(p,st){const o=wdNpwGap(p)&&npcWhy(\"wdRemark\",{p,st})"
 },
 {
 "f": "j92.js",
@@ -1249,7 +1250,8 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "monthly outfit remark (speaker random); who overhears; NPC re-dress",
-"fp": " if(!S.thDead&&roll(12))return{name:\"Thái hậu\",face:pTH"
+"fp": " if(!S.thDead&&roll(12))return{name:\"Thái hậu\",face:pTH",
+"done": "function wdRemarker(p,st){const o=wdNpwGap(p)&&npcWhy(\"wdRemark\",{p,st})"
 },
 {
 "f": "j92.js",
@@ -1257,7 +1259,8 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "monthly outfit remark (speaker random); who overhears; NPC re-dress",
-"fp": "!L.length)return null;const v=pick(L);return{v,name:wdNm(v),face:pv(v)"
+"fp": "!L.length)return null;const v=pick(L);return{v,name:wdNm(v),face:pv(v)",
+"done": "function wdRemarker(p,st){const o=wdNpwGap(p)&&npcWhy(\"wdRemark\",{p,st})"
 },
 {
 "f": "j92.js",
@@ -1265,7 +1268,8 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "monthly outfit remark (speaker random); who overhears; NPC re-dress",
-"fp": " if(view===\"ok\"&&!(roll(35)))return\"\";/* praise is rarer th"
+"fp": " if(view===\"ok\"&&!(roll(35)))return\"\";/* praise is rarer th",
+"done": "function wdRemarker(p,st){const o=wdNpwGap(p)&&npcWhy(\"wdRemark\",{p,st})"
 },
 {
 "f": "j92.js",
@@ -1273,7 +1277,8 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "monthly outfit remark (speaker random); who overhears; NPC re-dress",
-"fp": "){if(o===p)continue;if(o===S?(roll(BAL.odb.j92.rbWdRemark+eyes(S)*8)):"
+"fp": "){if(o===p)continue;if(o===S?(roll(BAL.odb.j92.rbWdRemark+eyes(S)*8)):",
+"done": "const hw=new Set(npcWit(whereOf(p),null,{vs:p})"
 },
 {
 "f": "j92.js",
@@ -1281,7 +1286,8 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "monthly outfit remark (speaker random); who overhears; NPC re-dress",
-"fp": "ction wdNpcDress(v){if(!v.wd||roll(70)&&!wdTang())return;wdAutoFor(v,w"
+"fp": "ction wdNpcDress(v){if(!v.wd||roll(70)&&!wdTang())return;wdAutoFor(v,w",
+"done": "function wdNpcDress(v){if(!v.wd||!(wdTang()||npcWhy(\"wdDress\",{v})))return;"
 },
 {
 "f": "j92.js",
@@ -1289,7 +1295,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "tai mắt outfit report; framed NPC searches; servant breaks ngự tứ; Emp",
-"fp": "t(){const w=watcher();if(!w||!roll(WD.taimat+eyes(S)*3))return\"\";"
+"fp": "t(){const w=watcher();if(!w||!roll(WD.taimat+eyes(S)*3))return\"\";",
+"done": "const sp=npcWhy(\"wdSpy\",{w:w.s||S.maid,cand})"
 },
 {
 "f": "j92.js",
@@ -1297,7 +1304,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "tai mắt outfit report; framed NPC searches; servant breaks ngự tứ; Emp",
-"fp": "d.length)return\"\";const [v,e]=pick(cand);const t=wdReveal(e.k,`${w.nam"
+"fp": "d.length)return\"\";const [v,e]=pick(cand);const t=wdReveal(e.k,`${w.nam",
+"done": "const sp=npcWhy(\"wdSpy\",{w:w.s||S.maid,cand})"
 },
 {
 "f": "j92.js",
@@ -1305,7 +1313,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "tai mắt outfit report; framed NPC searches; servant breaks ngự tứ; Emp",
-"fp": " if(t!==S&&roll(25)){if(lo){wdFrameTake(t,i);return"
+"fp": " if(t!==S&&roll(25)){if(lo){wdFrameTake(t,i);return",
+"done": "if(t!==S&&npcWhy(\"wdSearch\",{t,a}))"
 },
 {
 "f": "j92.js",
@@ -1313,7 +1322,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "tai mắt outfit report; framed NPC searches; servant breaks ngự tứ; Emp",
-"fp": " wdNtRemove(p,x.e,how);if(roll(55)){ap(p,{sung:-6});punish(p,\"làm "
+"fp": " wdNtRemove(p,x.e,how);if(roll(55)){ap(p,{sung:-6});punish(p,\"làm ",
+"done": "const tl=npcTell(p,{from:liveRivals(true).filter(y=>y!==p),to:S.emp||S})"
 },
 {
 "f": "j92.js",
@@ -1321,7 +1331,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "tai mắt outfit report; framed NPC searches; servant breaks ngự tứ; Emp",
-"fp": "  if(st===\"over\"){if(roll(40)){ap(p,{sung:WD.overSung});if(p="
+"fp": "  if(st===\"over\"){if(roll(40)){ap(p,{sung:WD.overSung});if(p=",
+"done": "if(npcWhy(\"wdNotice\",{p}))"
 },
 {
 "f": "j92.js",
@@ -1329,7 +1340,8 @@
 "status": "PARTIAL",
 "group": "G1",
 "event": "tai mắt outfit report; framed NPC searches; servant breaks ngự tứ; Emp",
-"fp": "ivals(true))if((v.bac||0)<15&&roll(20)){const i=(v.inv||[]).findIndex("
+"fp": "ivals(true))if((v.bac||0)<15&&roll(20)){const i=(v.inv||[]).findIndex(",
+"done": "for(const o of npcWhyAll(\"wdPawn\"))"
 },
 {
 "f": "j95.js",
@@ -1767,7 +1779,8 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "NPC consort's day with the Emperor (weekly)",
-"fp": "||v.coop||v.out||v.confined||!roll(BAL.empDay.p*100))continue;"
+"fp": "||v.coop||v.out||v.confined||!roll(BAL.empDay.p*100))continue;",
+"done": "const o=npcWhy(\"empDay\")"
 },
 {
 "f": "jgift.js",
@@ -1775,7 +1788,8 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "NPC consort's day with the Emperor (weekly)",
-"fp": "t kind=(v.arts&&v.arts.ky>=1&&roll(40))?\"ky\":(v.arts&&v.arts.cam>=1&&r"
+"fp": "t kind=(v.arts&&v.arts.ky>=1&&roll(40))?\"ky\":(v.arts&&v.arts.cam>=1&&r",
+"done": "const o=npcWhy(\"empDay\")"
 },
 {
 "f": "jlost.js",

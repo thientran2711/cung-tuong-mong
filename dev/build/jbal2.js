@@ -1130,7 +1130,7 @@ Object.assign(BAL,{odb:{
  j78:{odTop:40},/* odO: Kể tội reads odO_18 through P3C.tell (merge r2 M1) */
  j8:{rbInspect:40,rbSearch:35,odO1:30,odO3:40,odO1_2:45,odO2:30,rbSeenNPC:15},
  j83:{odPts:35},
- j92:{rbWdRemark:30},
+
  jact:{odO:35},
  jeitem:{rbEitReWk:100},
  jface:{rbOk:40,rbFxIllMonth:30,rbFxIllMonth_2:35,rbFxServMonth:2},
@@ -1244,3 +1244,9 @@ Object.assign(BAL.ag.why.cd,{meHarm:6,meAlly:24,hhCane:8,hhMe:12,hhGreed:24,empA
 Object.assign(BAL.ag.why,{e68:{gap:4,visitGap:6,greed:40},fav:{aff:10,max:2,jobW:4,thLow:20,th:40,host:40,tai:40,taiB:60,home:15,
  w:{poor:60,ill:55,job:50,th:35,spy:40,preg:30,love:45,maid:25,art:20,home:25}},job:{th:20,aff:10,tai:60},q72:{gap:3,debt:10}});
 Object.assign(BAL.ag.why.cd,{npcFavor:6,ladyJob:12,q72Collect:4});
+/* npc-purpose G1 part 5 (jgift NPC day with the Emperor, j92 wardrobe; jagwhy1). empDay: (want − Sủng) × k + amb (ambT nết), cd 16 ≈ the old 6 %/tuần each;
+   wd: th = Thái hậu's push on a wrong outfit, thOk = her regard to praise, queen = Empress's push, host / fr = grudge to sneer / liking to praise, gap = tuần
+   between two remarks on one wearer (old 35 / 10 % a month), spyHost = hostility toward her above which tai mắt dig, dress = push to change clothes,
+   notice = Sủng for the Emperor to notice a bright outfit, eye / eyeBar = tai mắt weight / bar for a framed consort to search first, poor = bac to pawn */
+Object.assign(BAL.ag.why,{empDay:{want:45,k:1.5,amb:20,ambT:["Tham vọng","Kiêu ngạo"]},wd:{th:20,thOk:40,queen:15,host:35,fr:30,gap:8,spyHost:20,dress:20,notice:50,eye:5,eyeBar:25,poor:15}});
+Object.assign(BAL.ag.why.cd,{empDay:16,wdRemark:4,wdSpy:4,wdPawn:4});
