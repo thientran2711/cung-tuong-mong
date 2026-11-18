@@ -122,3 +122,75 @@ logic → no C-AG LIVE wait needed. Note for npc-chain-land (jfeel FEEL.cur): wr
 - "Vì sao" factor list does not name spyKnowB (habits learned) — the word is right, the factor line is missing (wording job).
 - vp / xx not reached by the test (dress-cause setup).
 - 237 OTHER places: no ACTX on either side by construction; not proven shown == rolled one by one.
+
+
+## ROUND 2 — spend-before-roll (D #2 worker session_01964izERxj8PUG495V4QTjS, opus; START_CTX ~4 % of 1M (get_session reads 0; own estimate))
+PRIORITY #1 CHECK ('spend before roll / fzRun / frozen odds / shown==rolled across spend'): OD 0 | ledger 0 | claims 1 (this job, D #2 brief D2-shown-odds-r2.md) | main: round 1 a2ce736a j9 actCtx/actOdds (reused), dev/tools/shown-odds-scan.py + dev/test/shown-odds.test.js (extended) | review/* 1: review/npc-chain-land dev/test/feel-shown.test.js (C-AG; its case 2 = the shown 64 / rolled 74 report; ported as row steal-tonight) | archive 0.
+
+Branch **review/shown-odds-r2** from live main a2ce736a. Order: FOREMAN_D_STATUS 18/11 15:30Z (ROOT-52).
+
+### The fault (whole group)
+A do-path pays the khắc first (spend) and only THEN rolls, re-reading the odds after the spend. What runs inside spend can move them:
+j95 roster resync (who is where -> sent-servant pen), jwxk weather (kmEmpO storm, look acts), jmen / j76 carry, and on C-AG's branch
+the agent / feeling events (khắc 32→34, Đức 60→56). Probe on live: in a quiet state 740 sampled act/khắc pairs did not move, so the
+test makes the spend move the world (as an event does) — then live fails on almost every act.
+
+### Fix — ONE way (j9, BAL only, no typed number)
+- `fzRun(o,k,fn)`: the do-path reads the odds she saw BEFORE the spend and runs the act inside it (effects still after the spend, as today).
+- `aRoll(o,a)`: an act's OWN success roll. Inside fzRun (or runAct(S,…) that took them into ACTX.fz) it rolls the frozen odds;
+  everywhere else it is roll(o) — NPC rolls and every path without fzRun unchanged. Side rolls (caught, refuse, confess, belief,
+  punish, news…) stay roll(). All own rolls of one act use the same frozen odds (batnat rolls twice on one o).
+- runAct(S,t,k): takes fzRun's odds into ACTX.fz when the key matches. Names/signatures actOdds / optOdds / jointO / runAct unchanged (C-AG npc-chain-land).
+- Own rolls -> aRoll (every ACT with odds, incl. later redefinitions): j8 spy*·ally·rumor·frame·poison·accuse·bribe·block·ksab·kpoison·pond·kframe·takeaway·
+  plantItem·stealNight (steal/road), j9 pushPond·trip·overhear, j30 lygian·slowpoison·tocao·expose·xinhh, j70 huydung, j78 trinhth·trinhhh·uyhiep,
+  j92 wdAccuse (vp)·wdFrame (giahoa), jdress xxAccuse, jecon spyk·bribel·blockf, jlost loSteal (laydo/laydol), jpet thaopet, jpetcare petsteal,
+  jpoison pgGive, jrash rash, jtsb thathu·phonghoa·tsbBulNpc (batnat/uyhiep), jwhy spy (the live ACT.spy.f)·spyMaidRun, j29 bribeServ,
+  j10 facInvite·jointScheme, j55 tdAsk·tdGift·tdProbe·tdLeak, j83 wkSell, jaudit dbDo, jveil vlAsk.
+
+### Do-paths — before / after (dev/tools/shown-odds-scan.py SPEND-THEN-ROLL + the dynamic test)
+| do-path (spend then roll) | odds she saw | live a2ce736a | branch |
+|---|---|---|---|
+| j8 doAct (person menu j15/j6, jsgame "act", j70 Ra tay ngay) | actOdds | re-read after spend (runAct) | fzRun(actOdds before spend) |
+| j8 PEND.plantpick (sai người / tại chỗ; j25 pays on pick) | dialog word | re-read after spend | the dialog's own value (fz) |
+| j2 talk place acts (placeHarms: runAct, pushPond, trip, overhear) | a.o on the card | re-read after spend | fzRun(a.o) |
+| jsgame sgpick "Giao cho người làm" / "Tự ra tay" (pay = spend) | J.p0 | re-read after pay | p0 read before pay; game result + roll use it (+ step) |
+| jwhy spyPick (sai cung nữ dò la) | spyRoll | re-read after pay | fzRun(spyRoll) |
+| jpoison pgpick (quà có độc) | X.o | re-read | fzRun(X.o) |
+| j10 hỏi (servant) · hỏi (court) · mời vào phe · hợp mưu · mua | nv askTalk · rbCourtAct · inviteOdds · jointO · sgServOdds | after spend (court: after its own +me too) | read before spend |
+| j55 nhờ cha dâng sớ · biếu quà · dò la / tung chứng cứ nhà ngoại | askO · giftO · probeO / leakO | after | fzRun |
+| j83 bán đồ · jaudit / jpromsv đề bạt · jveil xin ban mạng | wkSellO · dbOdds · G.o | after | fzRun |
+| j21 scout · j25 thỉnh an · j42 trò chuyện / vu · j72 · j77 nhờ dẫn vào · jgift kmEmpAct · jlost đòi lại · jrcp dò khẩu vị | inline formula | after | read before spend |
+| j8 empAct | judge rolls BEFORE its spend; cutpay/conf/reward/pardon no roll | ok | unchanged |
+
+Scan: live **FAIL 16** (AFTER 16, FROZEN 4, SIDE 36 of 56 paths) -> branch **PASS** (FROZEN 28, SIDE 28). SIDE = only side chances after the
+spend whose odds are never printed as a ladder word (punish risk, roll(60), the odds-cap soft fail roll(BAL.odds.hi), giveTo's oSee …; two by
+name in SIDE_EXPR with the reason). Closure paths (talk a.run, jsgame J.run) are not statically resolvable — covered by the dynamic test.
+
+### Test — dev/test/shown-odds-spend.test.js (new; seeded roster incl. crypto; `node … [index] [seed]`)
+The spend itself moves the world (outermost spend wrapper: her Tâm cơ / Sủng / Danh / Đức / Sắc ±30, she moves in/out of the target's place,
+weather flips), then the REAL do-path runs; the act's own roll (side rolls forced no) must equal the odds shown before the click.
+Rows: every ACT with odds via doAct (2 cases: lá số +10 & spy knowledge / lá số −10 near cap), plant sent + tại chỗ (dialog word too),
+steal-tonight (= the C-AG case: her Tranh sủng on a night she is not called), jsgame "Giao cho người làm" × 5 place acts, spyPick, scout, kmEmpAct.
+- branch: **75/75 PASS** seed 1 (seeds 1–12: 69–77 rows each, all PASS, 0 page errors)
+- live a2ce736a: **FAIL (exit 1)** seed 1: **4/75** (71 FAIL) — e.g. steal-tonight shown 64 / rolled 48 (the C-AG family), spy 46/60, frame 40/54, plant (sent) 40/50, spyPick 63/57, kmEmp 50/20 (weather), scout 56/53.
+- dev/test/shown-odds.test.js (round 1, runAct direct): branch **96/96** on the final build (99/99 on the first commit; its roster is not crypto-seeded, so the case count drifts — no FAIL either way).
+- Not reached (no target in the test state, analytic + scan only): musk/catswap/petcare (no odds), kframe, steal/road by menu (steal-tonight covers), pushp/trip (together), xinhh, tat (sure), blockf, thaopet, petsteal, pgift, phonghoa (some seeds).
+
+### Gates (final sha b39e66781b63c03d3165f383a5bcc8eee838d5ad)
+- shown-odds-spend 75/75 (seeds 1, 3; 1–12 on the first commit) · live FAIL exit 1 (4/75)
+- shown-odds (round 1) 96/96 · shown-odds-scan PASS (both sections; live FAIL 16 spend paths) · odds-cap PASS · one-core-guard PASS (inline 4211 ≤ 4212, 0 fails)
+- quickcheck --runs 6 **PASS** (core gates PASS, old save ok; render 185/160, tab 314/335, buổi 823/903 ms new/live)
+- coop-e2e **63/63 PASS** (on e4ffb745; the last commit only changes where doAct takes its frozen odds from inside the card game)
+- No Fold / iPad shots: no text or layout change (same words; the values are now the shown ones).
+
+**SẴN SÀNG KIỂM b39e66781b63c03d3165f383a5bcc8eee838d5ad** — branch review/shown-odds-r2 (2 commits on live a2ce736a).
+
+### Freeze
+Touched: dev/build j2 j8 j9 j10 j21 j25 j29 j30 j42 j55 j70 j72 j77 j78 j83 j92 jaudit jdress jecon jgift jlost jpet jpetcare jpoison jpromsv jrash jrcp jsgame jtsb jveil jwhy; dev/test/shown-odds-spend.test.js (new), dev/test/shown-odds.test.js, dev/tools/shown-odds-scan.py; index.html, sw.js.
+**None** of jag*/j95*/jtoil*/jbal.js/jcoop*/save logic -> no C-AG LIVE wait. (j95 roster resync is one of the things that moves odds in the spend; it is not touched — the roll no longer reads after it.)
+Note C-AG npc-chain-land: its jfeel hook wraps actOdds once (round-1 advice) — the frozen odds come from actOdds, so feeling points are in shown and rolled alike; its feel-shown case 2 (doAct steal) should now hold across the spend. Merge conflicts expected only where it edits the same j2/j10/j19 lines (j10 jointScheme/facInvite own roll lines, j2 talk run line).
+
+### Open (not fixed here)
+- Co-op invitations (jcoopworld invMe / invHer: the friend answers later, then runAct) — jcoop* frozen; no spend between card and roll in that code, but the world moves while waiting: for C-AG / co-op owner.
+- j70 "Bày mưu" plots: pay now, roll weeks later by design (the card says "lúc ra tay: …"); not a spend-then-roll.
+- No text/layout change (same words, values now the shown ones) -> no Fold / iPad shots taken.
