@@ -36,7 +36,9 @@ DH.a_doc={n:"Thư hương",g:"ngay",me:1,how:n=>`Đọc sách ${nTimes(n)}`};
 DH.a_nhan={n:"Dung nhan như ngọc",g:"ngay",me:1,how:n=>`Điểm trang, dưỡng nhan ${nTimes(n)}`};
 for(const k in MAST)DH["l_"+k]={n:MAST[k],g:"nghe",u:"bậc",how:n=>`${artN(k)} lên bậc ${n}`};
 for(const k in WORK)DH["m_"+k]={n:WORK[k][0],g:"nghe",how:n=>`${WORK[k][1]} ${nTimes(n)}`};
-const GROUPS=[["thi","Hội thi"],["nghe","Tài nghệ"],["ngay","Ngày thường"],["an","Ân sủng"]];
+const GROUPS=[["tm","Thiên mệnh"],["thi","Hội thi"],["nghe","Tài nghệ"],["ngay","Ngày thường"],["an","Ân sủng"]];
+/* «Thiên mệnh» (jge.js, grand endings): one title per grand-ending shading, earned only by reaching it — never listed as "still to earn", never counted in the totals until earned */
+const dhTot=()=>Object.keys(DH).filter(k=>DH[k].g!=="tm"||((S&&S.dh||{})[k]&&S.dh[k].i>=0)).length;
 window.DH_CAT=DH;
 /* her acts that count (runOpt names; only when the act succeeds) */
 const ACTK=[[/^Thỉnh an/,"a_thinh"],[/^Đọc (sách|binh thư)/,"a_doc"],[/^(Điểm trang|Dưỡng nhan)/,"a_nhan"]];
@@ -171,25 +173,26 @@ window.dhPick=dhPick;
 /* ---------- NHIỆM VỤ › Danh hiệu ---------- */
 let DHTAB="goal";
 function tabsHTML(cur){const n=earned(S).length;const L=[];if(typeof kitGoalNow==="function"&&kitGoalNow())L.push({k:"goal",label:"Mục tiêu"});
- L.push({k:"dh",label:"Danh hiệu",n:`${n}/${Object.keys(DH).length}`,tip:`đã có ${n} trên ${Object.keys(DH).length} danh hiệu`});
+ L.push({k:"dh",label:"Danh hiệu",n:`${n}/${dhTot()}`,tip:`đã có ${n} trên ${dhTot()} danh hiệu`});
+ if(typeof window.geBoardPanel==="function")L.push({k:"tm",label:"Thiên mệnh"});
  return L.length>1&&typeof kitTabRowHTML==="function"?`<div class="pctabs kcattabs kdhtabs" role="tablist">${kitTabRowHTML(L,cur,"data-kdhtab")}</div>`:""}
 function dhPanel(){if(!S)return;dhSync(S,true);DHTAB="dh";const wk=wornKey(S),E=earned(S);const sec=[];const tb=tabsHTML("dh");if(tb)sec.push({h:"",html:tb});
  const wo=wk&&dhObj(S,wk);sec.push({h:"Danh hiệu trên đầu",rows:[wo?[kitTitlePlate(wo),[esc(wo.fx||"chỉ để làm đẹp")],"t"]:["Trên đầu","chưa mang danh hiệu nào"]]});
  try{if(typeof window.dh2Secs==="function")for(const x of window.dh2Secs())sec.push(x)}catch(e){console.error("dh2Secs",e)}/* phase 2 (jdh2): hiệu ban + đường sám hối */
  for(const [g,gl] of GROUPS){const keys=Object.keys(DH).filter(k=>DH[k].g===g);const got=keys.filter(k=>E.includes(k)).map(k=>dhObj(S,k)).sort((a,b)=>b.tier-a.tier);
-  const rest=keys.filter(k=>!E.includes(k));const rows=got.map(o=>[kitTitlePlate(o),[esc(DH[o.key].how(need(o.key)[S.dh[o.key].i])),esc(o.key===wk?o.fx:(chTxt(o.key,S.dh[o.key].i)||o.fx)||"chỉ để làm đẹp")],"t"]);
+  const rest=g==="tm"?[]:keys.filter(k=>!E.includes(k));const rows=got.map(o=>[kitTitlePlate(o),[esc(DH[o.key].how(need(o.key)[S.dh[o.key].i])),esc(o.key===wk?o.fx:(chTxt(o.key,S.dh[o.key].i)||o.fx)||"chỉ để làm đẹp")],"t"]);
   rest.forEach(k=>{const N=need(k),c=count(S,k);rows.push([esc(DH[k].n),[esc(DH[k].how(N[0])),`đã ${Math.min(c,N[0])}/${N[0]}`],"n"])});
   if(rows.length)sec.push({h:`${gl} · ${got.length}/${keys.length}`,rows})}
  const opts=E.filter(k=>k!==wk).map(k=>dhObj(S,k)).sort((a,b)=>b.tier-a.tier).map(o=>({n:`Đeo «${o.name}»`,fx:{},x:chTxt(o.key,S.dh[o.key].i)||o.fx||"tấm danh hiệu trên đầu",go:()=>dhPick(o.key,1)}));
  if(wk&&wo&&choices(wk,S.dh[wk].i).length>1)opts.unshift({n:`Đổi phần thưởng «${wo.name}»`,fx:{},x:chTxt(wk,S.dh[wk].i),go:()=>dhPick(wk,1)});
  if(wk)opts.push({n:"Tháo danh hiệu",fx:{},x:wo&&wo.fx?"mất: "+wo.fx.replace(/ \(khi đeo\)$/,""):"bỏ tấm danh hiệu trên đầu",go:()=>{dhWear(S,null);dhPanel()}});
  opts.push({n:"Đóng",fx:{},go:()=>{}});
- kitPanel({kind:"info",title:"Danh hiệu",sub:`Đã có ${E.length} trên ${Object.keys(DH).length} · bấm một tấm để xem`,sections:sec,opts,dh:1},true);showModal()}
+ kitPanel({kind:"info",title:"Danh hiệu",sub:`Đã có ${E.length} trên ${dhTot()} · bấm một tấm để xem`,sections:sec,opts,dh:1},true);showModal()}
 window.dhPanel=dhPanel;
 /* the goal panel gets the same tab row on top */
 (function(){const g0=window.kitGoalDetail;if(typeof g0!=="function")return;
- window.kitGoalDetail=function(){if(DHTAB==="dh"&&!arguments[0])return dhPanel();const kp=kitPanel;kitPanel=function(spec,front){try{if(spec&&!spec.dh){const tb=tabsHTML("goal");if(tb)spec.sections=[{h:"",html:tb}].concat(spec.sections||[])}}catch(e){}return kp.apply(this,arguments)};
+ window.kitGoalDetail=function(){if(DHTAB==="dh"&&!arguments[0])return dhPanel();if(DHTAB==="tm"&&!arguments[0]&&window.geBoardPanel)return window.geBoardPanel(tabsHTML("tm"));const kp=kitPanel;kitPanel=function(spec,front){try{if(spec&&!spec.dh){const tb=tabsHTML("goal");if(tb)spec.sections=[{h:"",html:tb}].concat(spec.sections||[])}}catch(e){}return kp.apply(this,arguments)};
   try{return g0.apply(this,arguments)}finally{kitPanel=kp}}})();
 document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-kdhtab]");if(!b)return;e.stopPropagation();e.preventDefault();const t=b.dataset.kdhtab;
- if(t===DHTAB&&b.classList.contains("on"))return;Q.shift();if(t==="dh")dhPanel();else{DHTAB="goal";window.kitGoalDetail(true)}},true);
+ if(t===DHTAB&&b.classList.contains("on"))return;Q.shift();if(t==="dh")dhPanel();else if(t==="tm"&&window.geBoardPanel){DHTAB="tm";window.geBoardPanel(tabsHTML("tm"))}else{DHTAB="goal";window.kitGoalDetail(true)}},true);
 }catch(e){console.error("jdh",e)}})();
