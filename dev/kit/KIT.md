@@ -618,6 +618,16 @@ No text over text: a pop (`kg82Pop`) replaces any live pop it would land on; a r
 - Not a tài nghệ frame (no figure): pet care mini-game (`petcGameBox`).
 - Sample: kit page §13.4.
 
+### 13.6 QUICK BUTTON · kitQuick (owner 18/11 ~05:45Z + ~05:55Z, review/mg-skip-all) — `dev/build/j79.js`, odds `BAL.skip` (jbal2)
+The ONE quick / skip choice of EVERY mini-game, beside its start button (the old `#mgskip` look: `.kbtn.alt` + class `kquick`, big line = name, `<small>` line).
+- `kitQuick({id, n, win, lose, sure, sub, data})` → button HTML (default id `kg82skip`, name "Để trời định"); `kitQuickSub(o)` → only the small line (j5 `#mgskip`, j83).
+- Small line = the odds WORD of `BAL.skip.od` (`word(od(BAL.skip.od))`, VANPHONG ladder, never %) · `thành: <win>` · `hỏng: <lose>`; `sure:1` = no roll, no word (a sure act shows no odds word).
+- `kitQuickRoll()` = THE quick roll (`roll(od(BAL.skip.od))`), the only one; co-op: it runs where the game runs (the seat that plays).
+- `sub:"…"` = a game whose quick choice keeps its OWN rule (contests / exams: the mark of a girl of her level; court acts: the act's odds; slap: no play) — same part, its own line.
+- Name per game type: "Để trời định" (lessons, Tu đức, care games), "Học nhanh" (Tài nghệ lessons / practice), "Điểm trang nhanh" (makeup), "Kết nhanh" (veil craft).
+- Outcome table (a quick result never beats a good own play): lesson won = tiến bộ một phần (j5/j83: 1 of 3 pts; jtd: the progress of a `BAL.skip.raw` play), lost = 0 · works / crafts = never a product (sure) · makeup won = Đoan trang (`BAL.toil.tier[0]`, the middle tier), lost = Vụng về; "Để mặt mộc" stays its own choice · care (pet, plant) won = `BAL.skip.care` of the gain, lost = nothing.
+- Audit: `node dev/test/mg-skip-audit.js` (every game listed, FAILS a new game frame without kitQuick); page test `dev/test/mg-skip.js`.
+
 ## 14. SCENE PANEL (j79) — identity card, opening story, title screen
 - Compact translucent kit frame (`rgba(255,250,240,.90)` + blur) to one side in landscape (max 440 px / 44vw, vertically centred, right) and in the
   lower part in portrait; the background art stays visible. Fits ONE screen, no scrolling, buttons always visible (tested at the 4 sizes).
