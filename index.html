@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"ddc29092+","t":"2026-11-18T08:52Z","c":"d19-gift test: parity table in bạc (worth to her vs giver's sale price, thiện cảm from giftVal/wkEval)","b":"cdc637b1f568","h":[{"s":"9c581406+","t":"2026-11-18T07:37Z","c":"review map-tap-go r9: merge origin/main e0b9662 (generated files rebuilt from merged sources)"},{"s":"c571aaea+","t":"2026-11-18T07:26Z","c":"map-tap-go: KIT 84c person-less VIỆC frame — main picture fills the left column (k3fill), kit-conform rule, kit page sample, KIT_REQUESTS c…"},{"s":"5ae28ddb+","t":"2026-11-18T07:13Z","c":"place-stage r5 redo: A1 (marker back on the head, KIT_FIG.h .79, band 70, vivid gold glow) + seal at ONE fixed offset from the standing anc…"},{"s":"5c5d1e8b+","t":"2026-11-18T07:04Z","c":"review person-dialog-restore r1: greet result card carries the greeting line (was the ambient weather line); rebuilt"},{"s":"2eea9a2b+","t":"2026-11-18T06:45Z","c":"review coop-thin-e r1: coop-thin-e E2 diagnostics; a setup press that landed in the new week is stepped first (swap flake 2/7)"},{"s":"8af2fc24+","t":"2026-11-18T06:31Z","c":"mg-skip-all r2: one quick-button look everywhere (kquick css, never an option card), playArt default fix, KIT 13.6 + MINIGAMES, page test m…"},{"s":"c9ada2a3+","t":"2026-11-18T06:14Z","c":"Fix S.lyF: recognise the fallen Ly person by lyF===1 (S carries the object), not truthiness; her own figure keeps her rank tier. + dev/test…"},{"s":"d959a9e0+","t":"2026-11-18T06:28Z","c":"buoi-banner: owner pick BTR_OP = 0.85 on the 73a7d3f layout (title overlaps the band, flush at the stage top); ladder hook removed"},{"s":"8c210d6b+","t":"2026-11-18T06:21Z","c":"act-pic-match: EVENTS.json + FIGURES-kids.json rebuilt (same 17/11 02:41Z incident), cdn_sync refuses bulk overwrite of top-level manifests…"},{"s":"b7ea2748+","t":"2026-11-18T06:12Z","c":"kit-set-lines: display-room test pins rank so the real-data pair is never over rank"}]};
+window.CTM_BI={"s":"8a542ff1+","t":"2026-11-18T09:16Z","c":"review d19-gift-work r1: spend the 2 khắc only when the piece really went; site rebuilt","b":"55851f7c6ea4","h":[{"s":"824cfccf+","t":"2026-11-18T08:43Z","c":"scroll-cue-scan: every dialog with a Kéo xuống cue (94 dialogs x Fold+iPad)"},{"s":"9c581406+","t":"2026-11-18T07:37Z","c":"review map-tap-go r9: merge origin/main e0b9662 (generated files rebuilt from merged sources)"},{"s":"c571aaea+","t":"2026-11-18T07:26Z","c":"map-tap-go: KIT 84c person-less VIỆC frame — main picture fills the left column (k3fill), kit-conform rule, kit page sample, KIT_REQUESTS c…"},{"s":"5ae28ddb+","t":"2026-11-18T07:13Z","c":"place-stage r5 redo: A1 (marker back on the head, KIT_FIG.h .79, band 70, vivid gold glow) + seal at ONE fixed offset from the standing anc…"},{"s":"5c5d1e8b+","t":"2026-11-18T07:04Z","c":"review person-dialog-restore r1: greet result card carries the greeting line (was the ambient weather line); rebuilt"},{"s":"2eea9a2b+","t":"2026-11-18T06:45Z","c":"review coop-thin-e r1: coop-thin-e E2 diagnostics; a setup press that landed in the new week is stepped first (swap flake 2/7)"},{"s":"8af2fc24+","t":"2026-11-18T06:31Z","c":"mg-skip-all r2: one quick-button look everywhere (kquick css, never an option card), playArt default fix, KIT 13.6 + MINIGAMES, page test m…"},{"s":"c9ada2a3+","t":"2026-11-18T06:14Z","c":"Fix S.lyF: recognise the fallen Ly person by lyF===1 (S carries the object), not truthiness; her own figure keeps her rank tier. + dev/test…"},{"s":"d959a9e0+","t":"2026-11-18T06:28Z","c":"buoi-banner: owner pick BTR_OP = 0.85 on the 73a7d3f layout (title overlaps the band, flush at the stage top); ladder hook removed"},{"s":"8c210d6b+","t":"2026-11-18T06:21Z","c":"act-pic-match: EVENTS.json + FIGURES-kids.json rebuilt (same 17/11 02:41Z incident), cdn_sync refuses bulk overwrite of top-level manifests…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -6258,6 +6258,13 @@ window.KIT_SLOTS=KIT_SLOTS;window.kitSlotIn=kitSlotIn;window.kitSlotsN=kitSlotsN
 window.kitSlotSwE=kitSlotSwE;window.kitSlotCxE=kitSlotCxE;window.kitSlotSw=kitSlotSw;window.kitSlotCx=kitSlotCx;window.kitSlotScale=kitSlotScale;window.kitSlotNeed=kitSlotNeed;
 function kitBookFig(b,fac,H,o){const bt=kitFigTop(b),span=Math.max(.2,b.b-bt),rel=o&&o.stage?Math.min(KIT_FIG.h*H,KIT_FIG.maxPx):H/KIT_FIG.man,body=Math.min(rel*(fac||1),H*.98),ih=body/span;return{ih,iw:ih*(b.ar||.45),dy:ih*(1-b.b),body,span}}
 window.kitBookFig=kitBookFig;
+/* KIT 56.4 · kitFullFigX(b, iw, cw) — the ONE horizontal place of a FULL-BODY figure in the figure column of a frame (owner 18/11 ~07:50Z, step 2 of the Tuần lục rule 56.3:
+   centre pop-ups, news / notices / event dialogs, info panels, the coach / tips, the identity card). The layout of each frame stays; the figure is the ONE body
+   SKULL TOP -> feet (kitFigTop), nothing is cut: its core is centred on the column, but the painted art never starts left of the column's left edge
+   (b.l .. b.r = the whole painted width, sleeves / train included), so a wide robe spreads to the RIGHT, under the text, which is drawn ON TOP of the
+   transparent figure (z-index). Returns the left of the picture box from the column's left edge (px). iw = picture box width, cw = column width. */
+function kitFullFigX(b,iw,cw){const cl=b.cl!=null?b.cl:b.l,cr=b.cr!=null?b.cr:b.r;let x=cw/2-iw*(cl+cr)/2;if(x+b.l*iw<0)x=-b.l*iw;return x}
+window.kitFullFigX=kitFullFigX;
 /* KIT 33.4 · kitImgErr — the ONE null-safe fallback for inline <img onerror>: a picture that fails after a re-render detached it
    does nothing (no "reading 'classList' of null" page errors). o.sel: ancestor to mark (default the parent); o.cls: class to add;
    o.text: put img.dataset.i as the parent's text; o.swap: replace the img by img.dataset.i. */
@@ -25155,15 +25162,15 @@ function kpIdFig(M,tries){let src="";try{src=typeof figFor==="function"?figFor(S
  /* review/newgame-ui (owner 15/11 "mỗi người 1 chiều cao … che cả nhân vật … 1 lúc sau mới thấy hình"):
     1) ONE standard figure tier: every face is drawn with the same BODY height (head top → feet, kitFigBody, as KIT 33.6) on the same floor
        line, whatever the picture's margins or width (was object-fit:contain in a fixed box: wide robes came out shorter);
-    2) a FIXED column left of the panel, the panel a fixed width per viewport (kpIdLay); robe / sleeve wider than the column is cut with a
-       soft fade at the column edge, so the panel never covers her;
+    2) a FIXED column left of the panel, the panel a fixed width per viewport (kpIdLay); KIT 56.4 (owner 18/11 ~07:50Z): a robe / sleeve wider than the column
+       spreads under the panel (drawn on top, transparent figure), nothing is cut or faded;
     3) the low-res copy (kitTn, ~4 KB, prefetched with the page of faces) shows at once, the crisp figure swaps in once decoded. */
  const lo=kitTn(src);const crisp=src;M.__kidWant=crisp;
  const show=s1=>{if(M.__kidWant!==crisp)return;if(im.getAttribute("src")!==s1){im.src=s1}im.classList.toggle("kidlo",s1!==crisp);kpIdLay(M)};
  if(KPID_OK[crisp]||!lo)show(crisp);
  else{show(lo);const pre=new Image();pre.decoding="async";pre.src=crisp;const fin=()=>{KPID_OK[crisp]=1;show(crisp)};(pre.decode?pre.decode().then(fin,()=>{pre.complete&&pre.naturalWidth?fin():0}):(pre.onload=fin))}
  if(!M.__kidRes){M.__kidRes=1;addEventListener("resize",()=>{clearTimeout(M.__kidT);M.__kidT=setTimeout(()=>{if(M.classList.contains("kpfig"))kpIdLay(M)},60)})}}
-const KPID_OK={};const KPID_WR=.5;/* widest painted width / body height over all faces (see kpIdLay) */
+const KPID_OK={};
 /* the geometry (screen px, from the modal box — the design canvas): phone portrait keeps the figure-on-top layout (CSS, --kidh) */
 function kpIdLay(M){try{const im=M.querySelector(":scope > img.kidfig2"),d=M.querySelector(".dlg");if(!im||!d)return;const W=M.clientWidth||innerWidth,H=M.clientHeight||innerHeight;
  /* KIT 32.2b EQUAL GAPS (owner 16/11 s21 + s22 "whole group"): her full figure stands between the two frame lines of the card scene —
@@ -25183,13 +25190,12 @@ function kpIdLay(M){try{const im=M.querySelector(":scope > img.kidfig2"),d=M.que
  const fb=fb0||{t:0,b:1,ht:0,l:0,r:1,ar:(im.naturalWidth&&im.naturalHeight)?im.naturalWidth/im.naturalHeight:.33};if(!fb0&&!im.naturalWidth)im.addEventListener("load",()=>kpIdLay(M),{once:true});
  const A=lb-lt,G=typeof KIT_DP_GAP!=="undefined"?Math.max(KIT_DP_GAP.min,KIT_DP_GAP.pct*A):Math.max(14,A*.05);
  const ar=fb.ar||.35,bf=Math.max(.3,fb.b-kitFigTop(fb)),pf=Math.max(bf,fb.b-fb.t);/* body = head top → feet (28.11a); painted = top of the crown / hairpin → feet (the gap is measured on it) */
- let Hs=Math.min((A-2*G)*bf/pf,H*(port?.80:.84));/* the standard body height: same for every face on this screen */
- /* ONE common tier per screen (coordinator 16/11, KIT 28.11a): the body height is capped so the WIDEST painted figure of the 420 faces a new
-    game can show (KPID_WR = widest painted width / body height, measured .496 on consort-c05-t4-a18, dev/test/newgame-ui.js) still fits the
-    column whole; every face, consort and maid, gets that same body height — no robe cut, no spill, no per-face shrink */
- Hs=Math.max(40,Math.min(Hs,colW*.98/KPID_WR));let ih=Hs/bf,iw=ih*ar;
- const floor=lb-(A-ih*pf)/2;/* 32.2b: the painted figure centred between the two lines → gap above the crown = gap under the feet */
- let left=Math.round((colL+colW/2)-((fb.l+fb.r)/2)*iw);const top=Math.round(floor-fb.b*ih);
+ const cRef=(typeof BAL==="object"&&BAL.bookFrame&&BAL.bookFrame.cRef)||.072;let Hs=Math.min((A-2*G)/(1+cRef),H*(port?.80:.84));/* KIT 56.4: body = the room of the tallest Hoàng hậu crown, never this face's own crown *//* the standard body height: same for every face on this screen */
+ /* ONE body for every face on this screen (KIT 28.11a, 56.4): head top → feet; no per-face shrink and no cap for the widest robe */
+ /* KIT 56.4 (owner 18/11 ~07:50Z, step 2 of 56.3): the old per-screen cap that shrank EVERY face for the widest robe (KPID_WR) is gone — never shrink the whole set for outliers; a wide robe / sleeve spreads under the panel, which is drawn on top (z-index 1), and nothing is cut */
+ Hs=Math.max(40,Hs);let ih=Hs/bf,iw=ih*ar;
+ const floor=lb-(A-Hs*(1+cRef))/2;/* 32.2b: the painted figure centred between the two lines → gap above the crown = gap under the feet */
+ let left=Math.round(colL+kitFullFigX(fb,iw,colW));const top=Math.round(floor-fb.b*ih);
  Object.assign(im.style,{left:left+"px",top:top+"px",bottom:"auto",width:Math.round(iw)+"px",height:Math.round(ih)+"px",objectFit:"fill"});
  im.style.removeProperty("-webkit-mask-image");im.style.removeProperty("mask-image");
  /* review/fig-cutout-code: the HD twin is picked from `sizes` (jfighd kitFigHD); refresh it to the width just set, or a stale smaller
@@ -26729,7 +26735,9 @@ function wkBookPages(){const d=wkBookData();const date=kitDate(S.month,S.year,S.
 /* full-page figure (owner 04:30Z): the figure column spans the whole page body; the figure's height = the body height (men ×1, women
    ×1/KIT_FIG.man through --kfr); the text column beside it scrolls into a "(tiếp theo)" page, the figure never shrinks */
 .kbk-person.kbk-full,.kbk.narrow .kbk-person.kbk-full{grid-template-columns:var(--porf) minmax(0,1fr);grid-template-areas:"por head" "por flow";grid-template-rows:auto minmax(0,1fr);height:100%}
-.kbk-person.kbk-full>.kbk-por{align-self:stretch;height:100%;min-height:0;position:relative;display:flex;justify-content:flex-start;align-items:flex-end;overflow:hidden}
+.kbk-person.kbk-full>.kbk-phead{box-sizing:border-box;padding-right:52px}/* KIT 34.6 r5: room for the mood seal slot (jfigseal), the same on every page */
+.kbk-person.kbk-full>.kbk-por{align-self:stretch;height:100%;min-height:0;position:relative;display:flex;justify-content:flex-start;align-items:flex-end;overflow:visible}
+.kbk-person.kbk-full>.kbk-por{z-index:0}.kbk-person.kbk-full>.kbk-phead,.kbk-person.kbk-full>.kbk-flow{position:relative;z-index:1}/* KIT 56.3: the figure (transparent) may spread under the text; the text is drawn ON TOP */
 .kbk-person.kbk-full>.kbk-por>.kesf{height:100%;margin:0;display:flex;flex-direction:column;justify-content:flex-end;align-items:flex-start;min-height:0;max-width:100%}
 .kbk-person.kbk-full>.kbk-por .kesfi{display:block;position:relative;height:calc(100% * var(--kfr,1));width:auto;max-width:none;flex:0 0 auto}
 .kbk-person.kbk-full>.kbk-por .kesfi>.kesimg{display:block;height:100%!important;width:auto!important;max-width:none!important;max-height:none!important}
@@ -30760,6 +30768,9 @@ Object.assign(BAL,{skip:{od:40,raw:5,care:.5}});
 /* FACE REVEAL motion (owner 18/11 ~06:20Z, KIT §79 jreveal.js): ms = the grey veil clears from the face outward; lite = Gọn / reduced motion short fade;
    win = how long after a face is learned every place that first draws it (frame, avatar, stage figure) still plays its one reveal */
 Object.assign(BAL,{faceReveal:{ms:Math.round(1000*BAL.pace),lite:350,win:8000}});
+/* BOOK FIGURE (owner 18/11 ~07:10Z + ~07:20Z, KIT §56.3): ONE body size for everybody = SKULL TOP to FEET = figure column width / bookFigW (her p.5 shot: Fold col 220 -> 641, iPad col 183 -> 534). Layout = live; nothing cut, nobody shrunk, the text is drawn on top.
+   cRef = the tallest Hoàng hậu crown above the skull top / body (catalog scan 18/11: thaihau-h3-a36 .072); gap = px the crown keeps under the running-head rule; footGap = px the feet keep above the page's bottom line when the feet line is moved down for her crown. */
+BAL.bookFigW=.343;Object.assign(BAL,{bookFrame:{cRef:.072,gap:8,footGap:10}});
 /* ================= jnwq: NO WORD GAMES, family C (owner 16/11 07:20Z + 07:25Z, s11, review/nw-quiz) =================
    The four vấn đáp / quiz kinds of the promotion exam (jexam EXK: le, tc, xa, thq) are now SKILL games of the same subject, winnable by what is SHOWN
    (same easy rules as mg-easy: Gợi ý button, first-time demo card, tier by level, wrong tries bounce back, quiet auto-hint when she stalls):
@@ -37943,20 +37954,20 @@ function kitDpFit(){try{const o=kitDpOn();if(!o||!o.d.classList.contains("kdper"
  const prof=(b,f)=>{if(!b.wl)return[b.l,b.r];const k=Math.max(0,Math.min(20,Math.ceil(f*20-1e-6)));return[b.wl[k],b.wr[k]]};
  const lay=(top,rows)=>{const Hu=floor-top;if(Hu<40)return false;
   /* review/fig-headtop (owner 17/11): people side by side stand level by the HEAD TOP; crowns / pins / hats stick out above. Body = head top .. feet; kT = the one body scale of this column, set by the figure whose painted top (crown) needs the most headroom, so no head gear leaves the column and every body keeps its kit ratio */
-  const kT=Hu/Math.max(.2,...L.map(x=>Math.min(1,x.fac)*Math.max(.2,x.b.b-x.b.t)/Math.max(.2,x.b.b-kitFigTop(x.b))));
+  const kT=Hu/(1+((typeof BAL==="object"&&BAL.bookFrame&&BAL.bookFrame.cRef)||.072));/* KIT 56.4: the room is the tallest Hoàng hậu crown's (BAL.bookFrame.cRef above the skull top), the same for every person: nobody is shrunk for an outlier crown, a taller one rises into the chip line, never cut */
   const at=m=>{const sz=L.map(x=>{const rel=Math.min(1,x.fac);const span=Math.max(.2,x.b.b-x.b.t);const ih=kT*rel*m/Math.max(.2,x.b.b-kitFigTop(x.b));const iw=ih*(x.b.ar||1);
     const fv=Math.min(1,Hu/(ih*span));const [vl,vr]=prof(x.b,Math.min(fv,L.length>1?1:KIT_DP_CROP.knee));/* two people: the whole visible part counts (review/stage-slots-fix-r1: no overlap); one person: the column edge may cut a hem */
     const cl=x.b.cl!=null?x.b.cl:x.b.l,cr=x.b.cr!=null?x.b.cr:x.b.r;return{ih,iw,span,fv,core:iw*(cr-cl),cl,cr,l:Math.min(vl,cl),r:Math.max(vr,cr),t:x.b.t,b:x.b.b}});
    /* review/stage-slots-fix-r1 (owner OD:L1049): fixed slots (kitSlot*, jkit), no overlap: the column must be as wide as the widest visible art × (k+1) for k ≥ 2 people */
    const tot=kitSlotNeed(sz.map(s=>s.iw*(s.r-s.l)));return{sz,tot}};
   /* target scale: 1 = the tallest person fills the column; a short column zooms (crop at the floor) up to minVis of the body in view */
-  const minFull=KIT_DP_CROP.minH*innerHeight;const mT=Hu<minFull?Math.min(minFull/Hu,1/KIT_DP_CROP.minVis):1;
-  let m=mT,A=at(m);if(A.tot+12>Wmax){let lo=.1,hi=mT;for(let i=0;i<22;i++){const md=(lo+hi)/2;if(at(md).tot+12<=Wmax)lo=md;else hi=md}m=lo;A=at(m)}
+  /* KIT 56.4 (owner 18/11 ~07:50Z, step 2 of 56.3): no zoom-and-cut at the floor any more; the ONE body skull top -> feet is sized by the column HEIGHT only (the tallest crown's room, `kT` above) */const mT=1;
+  let m=mT,A=at(m);if(L.length>1&&A.tot+12>Wmax){/* only SEVERAL people side by side are scaled to the column width (so they never overlap); ONE person is never shrunk for a wide robe: it spreads under the text (KIT 56.4) */let lo=.1,hi=mT;for(let i=0;i<22;i++){const md=(lo+hi)/2;if(at(md).tot+12<=Wmax)lo=md;else hi=md}m=lo;A=at(m)}
   const {sz,tot}=A;const need=Math.min(Wmax,Math.max(tot,capW)+12);if(!narrow)d.style.setProperty("--kdpw",Math.round(need)+"px");
   const W=narrow?col.clientWidth:need;const kN=sz.length;
   /* the tallest person sets the chip line: right above the painted top when the people are shorter than the column */
   const gap=Math.max(0,Hu-Math.max(...sz.map(s=>s.ih*s.span)));col.dataset.kdpcrop=sz.some(s=>s.fv<.995)?"1":"0";
-  L.forEach((it,i)=>{const s=sz[i];const ih=s.ih,iw=s.iw;const cxs=kitSlotCx(i,kN,6,W-12);const left=cxs-iw*(s.l+s.r)/2;
+  L.forEach((it,i)=>{const s=sz[i];const ih=s.ih,iw=s.iw;const cxs=kitSlotCx(i,kN,6,W-12);const left=kN===1?kitFullFigX(it.b,iw,W):cxs-iw*(s.l+s.r)/2;
    const ftop=s.fv<.995?top-ih*s.t:floor-gap/2-ih*s.b;/* cropped: painted top under the chips, the rest runs past the floor (cut); 32.2b: full figure centred, equal gaps */
    Object.assign(it.f.style,{left:left.toFixed(1)+"px",top:ftop.toFixed(1)+"px",width:iw.toFixed(1)+"px",zIndex:String(2+i),visibility:""});
    const wr=it.f.querySelector(".kesfi");if(wr)Object.assign(wr.style,{width:iw.toFixed(1)+"px",height:ih.toFixed(1)+"px",margin:"0",maxWidth:"none"});
@@ -38080,7 +38091,8 @@ html body #modal .dlg.kdper.kdpall.kdpbanner>#mb>.opts{grid-row:3!important}
 #modal .dlg.kdper>#mb,.modal .dlg.kdscroll.kdper>#mb{flex:1 1 auto!important;min-height:0;display:grid!important;overflow:hidden!important;
  grid-template-columns:var(--kdpw,240px) minmax(0,1fr);grid-template-rows:max-content minmax(0,1fr);column-gap:14px;align-content:stretch}
 #modal .dlg.kdper>#mb>.kpb.kdpb{display:contents!important}
-#modal .dlg.kdper>#mb>.kpb>.kpsubj.kes{grid-column:1;grid-row:1/-1;position:relative!important;display:block!important;top:auto;max-height:none!important;height:auto;min-height:0;overflow:clip!important;margin:0}
+#modal .dlg.kdper>#mb>.kpb>.kpsubj.kes{grid-column:1;grid-row:1/-1;position:relative!important;display:block!important;top:auto;max-height:none!important;height:auto;min-height:0;overflow:visible!important;z-index:0;margin:0}/* KIT 56.4: the figure column does not clip; the text and the options are drawn on top of the transparent figure */
+#modal .dlg.kdper>#mb>.kpb>.kpmain,#modal .dlg.kdper>#mb>.opts{position:relative;z-index:1}
 /* KIT 32.2 crop (review/stage-fig-size): the column clips — a hem / sleeve wider than the capped column and the legs of a cropped figure are cut at its edge */
 #modal .dlg.kdper>#mb>.kpb>.kpmain,#modal .dlg.kdper>#mb>.kdpr{grid-column:2;min-width:0}
 #modal .dlg.kdper>#mb>.opts{grid-column:2;grid-row:-2/-1;min-height:0!important;max-height:none;overflow-y:auto!important;align-self:stretch;margin-top:8px;
@@ -38598,10 +38610,10 @@ function kitPersonDlgFit(root){try{const R=root||document;R.querySelectorAll(".k
  const H=box.clientHeight,W=box.clientWidth;if(H<60||W<40)return;
  const ar=im.naturalWidth&&im.naturalHeight?im.naturalWidth/im.naturalHeight:(b.ar||.45);
  const Hf=fl?Math.max(40,Math.min(H,fl.lb-fl.G-box.getBoundingClientRect().top)):H;/* feet one gap above the lower line */
- const span=Math.max(.2,b.b-b.t);let ih=Math.min((Hf-4)*rel/Math.max(.2,b.b-kitFigTop(b)),(Hf-4)/span),iw=ih*ar;/* review/fig-headtop: body = head top .. feet at the kit ratio; the crown never leaves the column *//* the painted body (head-top .. feet) fills the column between the gaps; a wide hem / sleeve is cut by the column edge */
- const cx=((b.cl!=null?b.cl:b.l)+(b.cr!=null?b.cr:b.r))/2;
+ const span=Math.max(.2,b.b-b.t);let ih=(Hf-4)*rel/(1+((typeof BAL==="object"&&BAL.bookFrame&&BAL.bookFrame.cRef)||.072))/Math.max(.2,b.b-kitFigTop(b)),iw=ih*ar;/* KIT 56.4: the ONE body = the column height / (1 + the tallest Hoàng hậu crown); never sized by this person's own crown *//* review/fig-headtop: body = head top .. feet at the kit ratio; the crown never leaves the column *//* the painted body (head-top .. feet) fills the column between the gaps; KIT 56.4 (owner 18/11 ~07:50Z): a wide hem / sleeve is NOT cut, it spreads right under the text (drawn on top) */
+ const fx=kitFullFigX(b,iw,W);
  f.style.cssText="position:absolute;left:0;top:0;width:100%;height:100%;margin:0";
- const wr=f.querySelector(".kesfi");if(wr)wr.style.cssText=`position:absolute;left:${(W/2-iw*cx).toFixed(1)}px;top:${(Hf-ih*b.b).toFixed(1)}px;width:${iw.toFixed(1)}px;height:${ih.toFixed(1)}px;margin:0;max-width:none`;
+ const wr=f.querySelector(".kesfi");if(wr)wr.style.cssText=`position:absolute;left:${fx.toFixed(1)}px;top:${(Hf-ih*b.b).toFixed(1)}px;width:${iw.toFixed(1)}px;height:${ih.toFixed(1)}px;margin:0;max-width:none`;
  im.style.cssText=`width:${iw.toFixed(1)}px;height:${ih.toFixed(1)}px;max-width:none;max-height:none`;col.dataset.kpdfit="1"})}catch(e){console.error("kitPersonDlgFit",e)}}
 window.kitPersonDlg=kitPersonDlg;window.kitPersonDlgFit=kitPersonDlgFit;
 (function(){let t=0;addEventListener("resize",()=>{clearTimeout(t);t=setTimeout(()=>kitPersonDlgFit(),140)})})();
@@ -38609,14 +38621,14 @@ window.kitPersonDlg=kitPersonDlg;window.kitPersonDlgFit=kitPersonDlgFit;
 html body .dlg.kpanel.kpdlg{box-sizing:border-box;width:var(--kpw);min-width:0;max-width:var(--kpw);height:var(--kph);min-height:var(--kph);max-height:var(--kph);display:flex;flex-direction:column;overflow:hidden;margin:0}
 .kpdlg>.kph{flex:none}
 .kpdlg>.kpdb{flex:1 1 auto;min-height:0;display:grid;grid-template-columns:clamp(110px,38%,248px) minmax(0,1fr);gap:12px;padding:8px 14px 4px}
-.kpdlg .kpsubj.kes{position:relative;display:flex;flex-direction:column;align-items:center;min-height:0;min-width:0;overflow:hidden}
+.kpdlg .kpsubj.kes{position:relative;z-index:0;display:flex;flex-direction:column;align-items:center;min-height:0;min-width:0;overflow:visible}
 .kpdlg .kpdcap{flex:none;margin:0 0 2px;text-align:center;max-width:100%}
-.kpdlg .kpdfig{position:relative;flex:1 1 auto;min-height:0;width:100%;overflow:hidden}
+.kpdlg .kpdfig{position:relative;flex:1 1 auto;min-height:0;width:100%;overflow:visible}
 .kpdlg .kpdfig .kesf{margin:0}
 .kpdlg .kpdfig .kesfi{display:block}
 .kpdlg .kpdfig .kesimg{display:block;filter:url(#kfa) var(--klf,brightness(1)) drop-shadow(0 6px 8px #3a201033)}
 .kpdlg .kpdfig .kesf>.kpsn{display:none}
-.kpdlg .kpdr{min-width:0;min-height:0;display:flex;flex-direction:column;gap:8px}
+.kpdlg .kpdr{position:relative;z-index:1;min-width:0;min-height:0;display:flex;flex-direction:column;gap:8px}/* KIT 56.4: text drawn ON TOP of the figure */
 .kpdlg .kdpban{flex:none;margin:0;padding:0}
 .kpdlg .kdpban>.ksart{width:100%;height:clamp(84px,calc(17*var(--kvh,1dvh)),150px);aspect-ratio:auto}
 .kpdlg .kdpban>.ksart img{width:100%;height:100%;object-fit:cover}
@@ -38966,20 +38978,20 @@ var KBK_ART_LINE=window.KBK_ART_LINE={b:.0244};
  function clamp(){q=0;try{document.querySelectorAll(".kbk-person.kbk-full .kesfi").forEach(f=>{const box=f.closest(".kbk-person");if(!box)return;
    const por=box.querySelector(":scope>.kbk-por"),pg=box.closest(".kbk-pg");if(!por)return;
    f.style.transform="";{const i0=f.querySelector("img");if(i0&&i0.style.maskImage){i0.style.maskImage="";i0.style.webkitMaskImage=""}}
-   /* KIT 34.6 (owner 16/11 "Nhân vật sao chưa theo tỉ lệ chuẩn"): the figure (real or silhouette) is sized by its BODY — kitBookFig, the stage / dialog rule:
-      body = min(KIT_FIG.h × column, maxPx) × fac, feet on the column floor, true aspect. Not measured yet → hidden (never shown at its raw box size). */
-   let dyF=0,dxF=0;{const i1=f.querySelector("img"),s1=i1&&i1.getAttribute("src"),b1=s1?kitFigBody(s1,soon):null,Hc=por.clientHeight;
-    if(!b1||!Hc){f.style.visibility="hidden"}else{const kf=parseFloat(getComputedStyle(box).getPropertyValue("--kfr"))||1;let kk=1;
-     const ar1=i1.naturalWidth&&i1.naturalHeight?i1.naturalWidth/i1.naturalHeight:b1.ar,g=kitBookFig(Object.assign({},b1,{ar:ar1}),kf*KIT_FIG.man,Hc);const pwc=por.clientWidth,pw1=Math.max(.2,(b1.r||1)-(b1.l||0))*g.iw;if(pwc&&pw1>pwc)kk=pwc/pw1;dyF=g.dy*kk;dxF=-(b1.l||0)*g.iw*kk;   /* fitted INTO the narrow column by its PAINTED width (sleeves / train included): feet visible, nothing cut, painted left edge on the column's left edge */
-     f.style.height=(g.ih*kk).toFixed(1)+"px";f.style.width=(g.iw*kk).toFixed(1)+"px";f.style.visibility="";f.dataset.kbody=(g.body*kk).toFixed(1);
-     /* KIT 32.2b EQUAL GAPS (owner 16/11 s21/s22, whole group): the two frame lines round the figure are the running-head rule (.kbk-rh)
-        and the page frame's bottom line: the painted border's inner edge on art pages (KBK_ART_LINE.b of the page height, measured on
-        book-right/left.webp), the drawn .kbk-in frame on plain pages. Gap above the painted head = gap under the feet: the figure is raised
-        by half the difference (never lowered past its column floor — the page number row — never above the column top). */
+   /* KIT 56.3 FULL-BODY FIGURE (owner 18/11 ~07:10Z + ~07:20Z, overwrites the 17/11 narrow-column fit, the 18/11 "wide robes cropped" and the frame-shape rules): LAYOUT = the live Tuần lục layout (--porf column, text column as live).
+      SIZE = ONE body for everybody: SKULL TOP (kitFigBody ht = head-top table / face mesh, never crown, bun or hat) to FEET = column width / BAL.bookFigW (her p.5 shot: Fold 641 / iPad 534); kids by KIT_FIG.fac.
+      Nothing is cut, nobody is shrunk: a wide robe / sleeve / lantern spreads out of the column over the text area (the text is drawn ON TOP, the figure is transparent); the painted left edge is on the column's left edge as live.
+      Crowns rise into the free paper; ONE feet line for everybody: the column floor, moved DOWN (toward the page's bottom line) only as far as the tallest Hoàng hậu crown (BAL.bookFrame.cRef) needs to clear the running-head rule by BAL.bookFrame.gap px; only if that is not enough the ONE body is lowered for all. */
+   let dyF=0,dxF=0;{const i1=f.querySelector("img"),s1=i1&&i1.getAttribute("src"),b1=s1?kitFigBody(s1,soon):null,Hc=por.clientHeight,BF=BAL.bookFrame;
+    if(!b1||!Hc||!por.clientWidth){f.style.visibility="hidden"}else{
+     const ar1=i1.naturalWidth&&i1.naturalHeight?i1.naturalWidth/i1.naturalHeight:b1.ar,kid=/fig-kid-/.test(s1)&&typeof KIT_FIG==="object"?KIT_FIG.fac(s1):1;
+     let body=por.clientWidth/BAL.bookFigW,shift=0;
      try{const inEl=box.closest(".kbk-in"),rh=inEl&&inEl.querySelector(":scope > .kbk-rh");const rel=e=>{let y=0,x=e;while(x&&x!==inEl){y+=x.offsetTop;x=x.offsetParent}return x===inEl?y:null};const pt=inEl?rel(por):null;
       const pgE=box.closest(".kbk-pg"),art=!!(pgE&&(pgE.classList.contains("r")&&box.closest(".kbk.art-right")||pgE.classList.contains("l")&&box.closest(".kbk.art-left")));
-      if(pt!=null){const lt=rh&&rh.offsetParent?rh.offsetTop+rh.offsetHeight:0,lb=art?pgE.offsetHeight*(1-KBK_ART_LINE.b)-inEl.offsetTop:inEl.clientHeight,figH=g.ih*kk*Math.max(.2,b1.b-b1.t),feet=pt+Hc;
-       const s=Math.max(-(Hc-figH),Math.min(0,((lb-feet)-(feet-figH-lt))/2));dyF+=s;f.dataset.kgap=Math.round(feet+s-figH-lt)+"/"+Math.round(lb-feet-s)}}catch(e){}}}
+      if(pt!=null){const lt=rh&&rh.offsetParent?rh.offsetTop+rh.offsetHeight:0,lb=(art?pgE.offsetHeight*(1-KBK_ART_LINE.b)-inEl.offsetTop:inEl.clientHeight)-BF.footGap,feet0=pt+Hc,need=lt+BF.gap+body*(1+BF.cRef);
+       shift=Math.max(0,Math.min(need-feet0,lb-feet0));if(feet0+shift<need-.5)body=Math.max(60,(feet0+shift-lt-BF.gap)/(1+BF.cRef));f.dataset.kshift=Math.round(shift)}}catch(e){}
+     const bd=Math.max(.2,b1.b-kitFigTop(b1)),ih=body*kid/bd,iw=ih*ar1;dyF=ih*(1-b1.b)+shift;dxF=-b1.l*iw;
+     f.style.height=ih.toFixed(1)+"px";f.style.width=iw.toFixed(1)+"px";f.style.visibility="";f.dataset.kbody=(ih*(b1.b-kitFigTop(b1))).toFixed(1);{const im=f.querySelector("img");if(im)im.style.clipPath=""}}}
    const w0=f.offsetWidth;if(!w0||!box.offsetWidth)return;
    f.style.transformOrigin="50% 100%";const t=Math.abs(dyF)>0.5||Math.abs(dxF)>0.5?`translate(${dxF.toFixed(1)}px,${dyF.toFixed(1)}px)`:"";if(f.style.transform!==t)f.style.transform=t})}catch(e){}}
  function soon(){if(!q){q=requestAnimationFrame(clamp);setTimeout(clamp,450);setTimeout(clamp,1300)}}
@@ -62461,7 +62473,7 @@ const KIT_SIZE={
   M :{w:{kv1:470,kv2:470},cap:{kv1:400,kv2:400},pic:"PM",ban:"NS"},
   L :{w:{kv1:560,kv2:560},cap:{kv1:518,kv2:518},pic:"PL",ban:"NM"},
   XL:{w:{kv1:562,kv2:860},cap:{kv1:732,kv2:732},pic:"PL",ban:"NL"}},
- /* the 4 figure sizes = BODY height h (measured: head top → feet, crowns not counted) of an adult woman, × KIT_FIG.fac per person; cw = column width (wide robes cut) */
+ /* the 4 figure sizes = BODY height h (measured: head top → feet, crowns not counted) of an adult woman, × KIT_FIG.fac per person; cw = column width (a wide robe spreads under the text, KIT 56.4) */
  fig:{S:{h:150,cw:104},M:{h:230,cw:140},L:{h:310,cw:176},XL:{h:420,cw:220}},
  /* ONE layout per frame kind (owner (7)): figure size + column. "big" = VIỆC / ĐIỀU / LUẬT / BÁO / ĐÊM; "small" = KẾT QUẢ / TIN (two or three lines). */
  lay:{big:{fig:"L"},small:{fig:"M"}},
@@ -62512,8 +62524,10 @@ window.kitBtnSize=kitBtnSize;window.kitFrameSize=kitFrameSize;window.kitFrameApp
 /* (1)(6)(7) figure: tag ABOVE the head (kitTitleTag3: rank line 1, name line 2), ONE column width per layout, body height = layout size × KIT_FIG.fac (kszFigFit) */
 .kszfig{flex:none;width:var(--kszcw);display:flex;flex-direction:column;align-items:center;gap:2px}
 .kszfig>.kt3{text-align:center;width:max-content;max-width:calc(var(--kszcw) + 24px)}
-.kszfig>.kszfs{display:block;width:var(--kszcw);height:var(--kszfh);overflow:hidden;position:relative}
-.kszfig>.kszfs>img{position:absolute;left:50%;bottom:0;height:100%;width:auto;max-width:none;translate:-50% 0}
+.kszfig>.kszfs{display:block;width:var(--kszcw);height:var(--kszfh);overflow:visible;position:relative}
+.kszfig>.kszfs>img{position:absolute;left:0;bottom:0;height:100%;width:auto;max-width:none}
+/* KIT 56.4: the figure is transparent and may spread out of its column; the info column is drawn ON TOP of it */
+.kszfig{position:relative;z-index:0}.kszfig>.kt3{position:relative;z-index:2}.kszf .kszright,.ksz3 .k3right{position:relative;z-index:1}
 /* frame pictures: portrait slot (no person), narrow banner (with person), long-story picture on TOP (XL) */
 .kszpic{flex:none;width:var(--kszpw);height:var(--kszph)}
 .kszban{width:min(100%,var(--kszbw));height:var(--kszbh);align-self:center;flex:none}
@@ -62568,8 +62582,12 @@ function kszFigHtml(p){let src=kitFigOf(p);if(p&&p.kind==="th"&&(!src||/unknown|
 /* (6) ONE figure scale: the measured BODY (kitFigBody ht → b) of every figure = the layout's body height × KIT_FIG.fac (never the picture box) */
 function kszFigFit(root){(root||document).querySelectorAll(".kszf .kszfig>.kszfs>img").forEach(im=>{const f=im.closest(".kszf");const lay=KIT_SIZE.lay[f.dataset.lay||"big"]||KIT_SIZE.lay.big;
  const v=typeof kitFigBody==="function"?kitFigBody(im.src,()=>kszFigFit(f)):null;if(!v)return;const age=im.dataset.age===""?null:+im.dataset.age;
- const body=KIT_SIZE.fig[lay.fig].h*(typeof KIT_FIG==="object"?KIT_FIG.fac(im.src,age):1)*(f.__kszShrink||1);/* KIT 32.8 feet-fit: ×shrink only when the frame cap would cut the feet (kszFeetFit) */const H=body/Math.max(.2,v.b-kitFigTop(v));
- im.style.height=H+"px";im.style.bottom=(-(1-v.b)*H)+"px";im.parentElement.style.height=Math.ceil(H*(v.b-v.t))+"px"})}
+ /* KIT 56.4 (owner 18/11 ~07:50Z, step 2 of 56.3): ONE body SKULL TOP -> feet for everybody of this layout (men are NOT taller: no x1.07; a child by age); crowns / robes / sleeves are not measured. */
+ const kidf=typeof KIT_FIG==="object"&&age!=null?KIT_FIG.kid(age):1;f.__kszKid=kidf;const body=KIT_SIZE.fig[lay.fig].h*kidf*(f.__kszShrink||1);/* KIT 32.8 feet-fit: ×shrink only when the frame cap would cut the feet (kszFeetFit) */const H=body/Math.max(.2,v.b-kitFigTop(v));
+ const ar=im.naturalWidth&&im.naturalHeight?im.naturalWidth/im.naturalHeight:v.ar,W=H*ar,cw=im.parentElement.clientWidth||KIT_SIZE.fig[lay.fig].cw;
+ /* nothing is cut: .kszfs is overflow visible; the painted art is centred on the column, a wide robe spreads right under the text (drawn on top, z-index) */
+ im.style.height=H+"px";im.style.width=W+"px";im.style.left=kitFullFigX(v,W,cw).toFixed(1)+"px";im.style.translate="none";im.style.bottom=(-(1-v.b)*H)+"px";im.parentElement.style.height=Math.ceil(body*(1+kszCrown()))+"px"/* the same column height for everybody: skull top -> feet + the room of the tallest Hoàng hậu crown; a taller crown rises into the tag's free space (never cut) */})}
+function kszCrown(){return(typeof BAL==="object"&&BAL.bookFrame&&BAL.bookFrame.cRef)||.072}
 window.kszFigFit=kszFigFit;
 /* spec: {kind,title,sub,who,pic,ban,facts,rows,opts,btn,long} → frame html (size picked after mount by kitFrameApply) */
 function kszFrame(sp){const right=[];if(sp.long==null)sp.long=!sp.who&&(sp.facts||[]).join(" ").length>600;
@@ -62605,7 +62623,7 @@ function kszSheet(area){const old=document.getElementById("kszsheet");if(old)old
    ["XL","VIỆC · Thái hậu · SAME layout (column, figure scale); only the info area is bigger · GỢI Ý = full-width box",{kind:"choice",title:"Thái hậu chê dung nhan",sub:"Trung tuần · buổi chiều",who:P.th,ban:"https://ctm-img.victoria-tntt.workers.dev/img/ev-thinh-an.webp",facts:[{who:P.th,text:"cho gọi ta đến trước mặt các phi tần, chê ta trang điểm lòe loẹt, không ra dáng người hầu hạ thánh giá."},"Các phi tần đứng quanh, có người che miệng cười."],
      opts:[op("Quỳ xuống nhận lỗi, xin Thái hậu dạy bảo",[["Tốn",`${BAL.kitpage.demo.k} khắc`],["Được",ch("Thiện cảm",6)+ch("Đức",1)],["Mất",ch("Danh",-1)],["Gợi ý","Thái hậu ưa người biết phận, nhận lỗi trước mặt mọi người thì bà nguôi giận nhanh"]]),op("Thưa rằng phấn son do Nội vụ phủ phát theo phẩm",[["Được",ch("Danh",1)],["Mất",ch("Thiện cảm",-4)],["Gợi ý","nói đúng lý nhưng làm bà mất mặt trước các phi tần"]]),op("Dâng chén trà, đổi sang chuyện kinh Phật",[["Cần","Tài nghệ Trà ≥ 2"],["Được",ch("Thiện cảm",4)],["Gợi ý","nếu trà không ngon bà càng giận"]]),op("Im lặng",[["Mất",ch("Thiện cảm",-2)]])]}]];
   for(const [k,lab,sp] of L)h+=`<div style="margin:10px 0 18px"><div class="kszlab">${lab}</div><div class="kszn" data-ksztbl></div><div data-want="${k}">${kszFrame(sp)}</div></div>`;
-  h+=`<h3>(6)(7) ONE figure scale + ONE column per layout: every person's measured BODY = the same height (× 1.07 men); Thái hậu is never bigger than a consort</h3><p class="kszn">Layout "big" (VIỆC · ĐIỀU · LUẬT · BÁO · ĐÊM): figure L body ${Z.fig.L.h} px, column ${Z.fig.L.cw} · layout "small" (KẾT QUẢ · TIN): figure M body ${Z.fig.M.h} px, column ${Z.fig.M.cw}. The frame size S..XL changes only the info area.</p><div class="kszrow" style="align-items:flex-end">${[["Thái hậu",P.th],["Hoàng hậu",P.q],["phi tần",P.v2],["Hoàng thượng",P.emp]].filter(x=>x[1]).map(([l,p])=>`<div><div class="kszlab">${l}</div><div class="kszf" data-lay="big" style="width:auto;box-shadow:none;border:0;background:none">${kszFigHtml(p)}</div></div>`).join("")}</div>`}
+  h+=`<h3>(6)(7) ONE figure scale + ONE column per layout: every person's measured BODY = the same height (men are not taller, KIT 56.4); Thái hậu is never bigger than a consort</h3><p class="kszn">Layout "big" (VIỆC · ĐIỀU · LUẬT · BÁO · ĐÊM): figure L body ${Z.fig.L.h} px, column ${Z.fig.L.cw} · layout "small" (KẾT QUẢ · TIN): figure M body ${Z.fig.M.h} px, column ${Z.fig.M.cw}. The frame size S..XL changes only the info area.</p><div class="kszrow" style="align-items:flex-end">${[["Thái hậu",P.th],["Hoàng hậu",P.q],["phi tần",P.v2],["Hoàng thượng",P.emp]].filter(x=>x[1]).map(([l,p])=>`<div><div class="kszlab">${l}</div><div class="kszf" data-lay="big" style="width:auto;box-shadow:none;border:0;background:none">${kszFigHtml(p)}</div></div>`).join("")}</div>`}
  if(area==="buttons"){
   h+=`<h2>KIT SIZE 2 · THE action button + pictures</h2><p class="kszn">ONE button (kszBtn) everywhere: row 1 = picture LEFT + name, TỐN / ĐƯỢC / MẤT RIGHT; row 2 = GỢI Ý in one full-width box. Inside one frame every button is the SAME width and the same class (the largest one needed). The class (kitBtnSize) only sets the picture: S square 56 (≤ 2 rows, ≤ 70 characters) · LS square 72 (≤ 3 rows, ≤ 160) · LR 3:4 84x112 (more). The red tag on each sample = the kit class used.</p>`;
   h+=`<h3>S · in one frame (3.3 / 3.5): same width, square 56</h3><div class="kszopts" style="max-width:380px">${[op("Cúi đầu nhận lỗi",[["Tốn",`${BAL.kitpage.demo.k} khắc`]]),op("Thưa rằng do Hoàng thượng định",[["Tốn",`${BAL.kitpage.demo.k} khắc`]]),op("Dâng lễ vật xin bỏ qua",[["Tốn",ch("Bạc",-20)+` ${BAL.kitpage.demo.k} khắc`]]),op("Im lặng",[])].map(kszBtn).join("")}</div>`;
@@ -62939,9 +62957,14 @@ function kszLiveRoom3(dlg){const M=document.getElementById("modal");if(!M)return
    (dlg.__kszShrink, read by kszFigFit) just enough; the bottom is never cropped. Not touched when it already fits. */
 function kszFeetFit(dlg){try{const B=dlg.querySelector(".k3body"),L=B&&B.querySelector(":scope>.kszfig");dlg.__kszShrink=1;if(!L)return;kszFigFit(dlg);
  const cap=parseFloat(getComputedStyle(dlg).maxHeight);if(!(cap>0))return;
- for(let i=0;i<4;i++){const mbx=document.getElementById("mb"),fixed=dlg.clientHeight-(mbx?mbx.clientHeight:B.offsetHeight),room=cap-fixed-22,over=L.offsetHeight-room;if(over<=0.5)break;
-  const fs=L.querySelector(".kszfs"),h=fs?fs.offsetHeight:0;if(h<=60)break;dlg.__kszShrink=Math.max(.3,dlg.__kszShrink*Math.max(.3,(h-over-1)/h));kszFigFit(dlg)}}catch(e){console.error("kszFeetFit",e)}}
+ /* KIT 56.4 (owner 18/11 ~07:50Z): the room is measured for the TALLEST crown (Hoàng hậu, BAL.bookFrame.cRef above the skull top), never for this person: every person of the frame gets the same body, nobody is shrunk for being an outlier */
+ const lay=KIT_SIZE.lay[dlg.dataset.lay||"big"]||KIT_SIZE.lay.big,cRef=(typeof BAL==="object"&&BAL.bookFrame&&BAL.bookFrame.cRef)||0;
+ for(let i=0;i<4;i++){const mbx=document.getElementById("mb");let fixed=2;[...dlg.children].forEach(c=>{if(c!==mbx&&c.getClientRects().length&&getComputedStyle(c).position!=="absolute")fixed+=c.offsetHeight});if(mbx)[...mbx.children].forEach(c=>{if(c!==B&&c.getClientRects().length)fixed+=c.offsetHeight});const room=cap-fixed-26;/* the room = the cap minus the frame's own parts (header, buttons, body padding): the same for every person, never read from the current figure */
+  const fs=L.querySelector(".kszfs"),h=fs?fs.offsetHeight:0;if(h<=60)break;const body0=KIT_SIZE.fig[lay.fig].h*(dlg.__kszKid||1),tg=L.querySelector(":scope>.kt3"),part=L.offsetHeight-h+(tg&&!tg.querySelector(".kdh,.kdh-cap")?kszPlateH():0),allow=(room-part)/(1+cRef),cur=body0*dlg.__kszShrink;
+  if(allow>=cur-.5)break;dlg.__kszShrink=Math.max(.3,allow/body0);kszFigFit(dlg)}}catch(e){console.error("kszFeetFit",e)}}
 window.kszFeetFit=kszFeetFit;
+/* KIT 56.4: the height a worn-title plate adds to the name tag (measured once); the room of every frame is reckoned WITH the plate, so a person with a title and one without get the same body */
+let KSZ_PLATEH=null;function kszPlateH(){if(KSZ_PLATEH!=null)return KSZ_PLATEH;let h=0;try{const T=typeof KIT_TITLES!=="undefined"&&KIT_TITLES[0],pl=T&&typeof kitTitlePlate==="function"?kitTitlePlate(T,{cls:"kdh-cap"}):"";if(pl){const x=document.createElement("div");x.className="kszf";x.style.cssText="position:absolute;visibility:hidden;left:-9999px;top:0";x.innerHTML=`<div class="kszfig"><div class="kt3">${pl}</div></div>`;document.body.appendChild(x);h=x.querySelector(".kt3").offsetHeight+2;x.remove()}}catch(e){}return KSZ_PLATEH=h}
 function kitFrameApplyLive3(dlg){try{kszFeetFit(dlg)}catch(e){}const g=dlg.querySelector(".opts.k3btns");if(g)kszBtnGridLive3(g);
  const R=dlg.querySelector(".k3right"),L=dlg.querySelector(".k3body>.kszfig,.k3body>.k3mpor");
  if(R){R.style.maxHeight="";R.style.overflow="";R.style.minHeight=L?L.offsetHeight+"px":(dlg.dataset.pres==="one"?KIT_SIZE.v3.picMinS+"px":"");if(dlg.dataset.ksz==="XL"&&L){/* XL (approved #3): the body stays the figure's height; more content scrolls inside the info column */
@@ -63024,17 +63047,18 @@ function kitAgendaFact(o,text){const p=kitAgendaPic(o);return p?{text:text||o.n,
 Object.assign(window,{kitAgendaPic,kitAgendaFact});
 /* ===== kit-thanh-bai r2 (s34/s36): SCROLL CUE for every frame scroll column (reviewer r1 FAIL 1). A column of a modal frame (.k3right, #mb, .body, …) that scrolls and is NOT at its end gets a bottom fade + a small "Kéo xuống" chip (.kscue, sticky at the column's bottom, goes when she reaches the end). One place: kitScrollCues(); called after every showModal / frame pass / resize / scroll. ===== */
 function kitScrollCues(root){try{const M=root||document.getElementById("modal");if(!M||M.hidden)return;
- const cand=[...M.querySelectorAll(".dlg, .dlg *")].filter(e=>{if(e.closest(".kscue"))return false;const cs=getComputedStyle(e);return(cs.overflowY==="auto"||cs.overflowY==="scroll")&&e.clientHeight>=100&&e.scrollHeight>e.clientHeight+6||(e.__kscue&&e.isConnected)});
- for(const e of cand){let c=e.querySelector(":scope > .kscue");const more=e.scrollHeight>e.clientHeight+6&&e.scrollTop+e.clientHeight<e.scrollHeight-6;
+ const cand=[...M.querySelectorAll(".dlg, .dlg *")].filter(e=>{if(e.closest(".kscue"))return false;/* KIT 56.4 / owner OD 18/11 07:25Z: a person frame's figure column and info stay fixed, only the option / button list scrolls: no scroll hint on a container that holds the figure column */if(e.querySelector(":scope > .kszfig, :scope > .kpsubj.kes, :scope > .kpb > .kpsubj.kes, :scope > .k3body > .kszfig, :scope > .kpdb > .kpsubj.kes")){const k0=e.querySelector(":scope > .kscue");if(k0)k0.remove();return false}const cs=getComputedStyle(e);return(cs.overflowY==="auto"||cs.overflowY==="scroll")&&e.clientHeight>=100&&e.scrollHeight>e.clientHeight+6||(e.__kscue&&e.isConnected)});
+ for(const e of cand){if(e.clientHeight<260&&e.clientHeight>0){/* a SHORT scroller (item grid, option list): the hint is its own 16 px strip BELOW it, never over its text */const k0=e.querySelector(":scope > .kscue");if(k0)k0.remove();let sb=e.__kscueSib;if(!sb||!sb.isConnected){sb=document.createElement("div");sb.className="kscue sib";sb.setAttribute("aria-hidden","true");sb.innerHTML='<b class="kscc">Kéo xuống ▾</b>';e.after(sb);e.__kscueSib=sb;e.__kscue=1;if(!e.__kscl){e.__kscl=1;e.addEventListener("scroll",()=>kitScrollCues(),{passive:true})}}sb.classList.toggle("on",e.scrollHeight>e.clientHeight+6&&e.scrollTop+e.clientHeight<e.scrollHeight-6);continue}let c=e.querySelector(":scope > .kscue");const more=e.scrollHeight>e.clientHeight+6&&e.scrollTop+e.clientHeight<e.scrollHeight-6;
   if(!c&&e.scrollHeight>e.clientHeight+6){c=document.createElement("div");c.className="kscue";c.setAttribute("aria-hidden","true");c.innerHTML='<i class="kscg"></i><b class="kscc">Kéo xuống</b>';e.appendChild(c);e.__kscue=1;
    if(!e.__kscl){e.__kscl=1;e.addEventListener("scroll",()=>kitScrollCues(),{passive:true});new MutationObserver(()=>{const k=e.querySelector(":scope > .kscue");if(k&&e.lastElementChild!==k)e.appendChild(k);else kitScrollCues()}).observe(e,{childList:true})}}
-  if(c){if(e.lastElementChild!==c)e.appendChild(c);/* always the LAST child: sticky bottom only works from the end of the content */c.classList.toggle("on",!!more)}}}catch(err){console.error("kitScrollCues",err)}}
+  if(c){c.classList.toggle("sm",e.clientHeight<260);/* a short scroller (item grid): a slim footer strip, never the tall fade over its text */if(e.lastElementChild!==c)e.appendChild(c);/* always the LAST child: sticky bottom only works from the end of the content */c.classList.toggle("on",!!more)}}}catch(err){console.error("kitScrollCues",err)}}
 window.kitScrollCues=kitScrollCues;
 (function(){const sm=window.showModal;if(typeof sm==="function"){window.showModal=showModal=function(){const r=sm.apply(this,arguments);try{setTimeout(kitScrollCues,120);setTimeout(kitScrollCues,700)}catch(e){}return r}}
  window.addEventListener("resize",()=>kitScrollCues());
  const st=document.createElement("style");st.id="k-scroll-cue";st.textContent=`
 .kscue{position:sticky;bottom:0;flex:none;height:0;width:100%;margin:0;padding:0;pointer-events:none;display:none;z-index:5}
 .kscue.on{display:block}
+.kscue.sib{position:static;height:auto;width:auto;text-align:center;padding:1px 0 0;pointer-events:none}.kscue.sib.on{display:block}.kscue.sib .kscc{position:static;transform:none;display:inline-block;font-size:.64rem}
 .kscue .kscg{position:absolute;left:0;right:0;bottom:0;height:36px;background:linear-gradient(to bottom,rgba(253,249,238,0),rgba(253,249,238,1) 42%)}/* r4: the chip sits in the SOLID lower part of the fade (never over readable text) */
 .kscue .kscc{position:absolute;left:50%;bottom:2px;transform:translateX(-50%);font-size:.66rem;line-height:1.25;font-weight:700;color:#7a5a1e;background:#fbf1d6;border:1px solid #c9a24a;border-radius:999px;padding:0 9px;white-space:nowrap;box-shadow:0 1px 3px rgba(0,0,0,.18)}`;document.head.appendChild(st)})();
 /* ================= jemoact: HÀNH ĐỘNG THEO CẢM XÚC — emotion acts, extreme mood, forced outbursts (review/emotion-acts) =================
@@ -65827,7 +65851,7 @@ function kfsBox(fig){const r=fig.getBoundingClientRect();let bx=r.left,by=r.top,
  if(nw&&nh&&bw>0&&bh>0){const ar=nw/nh;if(bw/bh>ar){const w=bh*ar;bx+=(bw-w)/2;bw=w}else{const h=bw/ar;by+=(bh-h)/2;bh=h}}return{bx,by,bw,bh}}
 const KFS_SEAL=new WeakMap();
 /* the element the seal is a child of: the nearest ancestor of the figure that does not clip its children (a figure picture box such as .kszfs is overflow:hidden), made a positioning parent (.kfshost) when it is static */
-function kfsHost(fig){let e=fig.parentElement;while(e&&e!==document.body){const c=getComputedStyle(e);if(c.overflowX==="visible"&&c.overflowY==="visible"){if(c.position==="static")e.classList.add("kfshost");return e}e=e.parentElement}return fig.offsetParent||fig.parentElement}
+function kfsHost(fig){{const bk=fig.closest&&fig.closest(".kbk-person.kbk-full");if(bk){if(getComputedStyle(bk).position==="static")bk.classList.add("kfshost");return bk}}/* KIT 34.6 r5: on a book person page the seal belongs to the page, not to the clipped figure column */let e=fig.parentElement;while(e&&e!==document.body){const c=getComputedStyle(e);if(c.overflowX==="visible"&&c.overflowY==="visible"){if(c.position==="static")e.classList.add("kfshost");return e}e=e.parentElement}return fig.offsetParent||fig.parentElement}
 function kfsDrop(fig){const s=KFS_SEAL.get(fig);if(s){s.remove();KFS_SEAL.delete(fig)}}
 function kitFigSeal(fig){try{
  if(!fig||!fig.isConnected||typeof emoOn!=="function"||!emoOn())return kfsDrop(fig);
@@ -65843,6 +65867,8 @@ function kitFigSeal(fig){try{
  const B=kfsBox(fig);if(B.bh<60){el.style.display="none";return}
  const K=KIT_FIGSEAL,ht=b.ht!=null?b.ht:b.t,body=Math.max(20,(b.b-ht)*B.bh);
  const s=Math.round(Math.max(K.min,Math.min(K.max,body*K.k)));
+ /* KIT 34.6 r5 (owner 18/11 ~03:35Z "figure runs under the ? chip"): on a BOOK person page the seal sits in ONE fixed slot, the right end of the name row of the text column (padding reserved by .kbk-phead), never on any figure, the same slot on every page */
+ if(host.matches&&host.matches(".kbk-person.kbk-full")){const ph=host.querySelector(":scope>.kbk-phead");if(ph){const q=Math.min(s,46),css=`left:${ph.offsetLeft+ph.offsetWidth-q}px;top:${ph.offsetTop+2}px;width:${q}px;height:${q}px`;if(el.style.cssText!==css)el.style.cssText=css;el.dataset.kfsb="book";return}}
  const k=Math.min(20,Math.max(1,K.rows|0)),rr=b.wr&&b.wr[k]!=null?b.wr[k]:null,ll=b.wl&&b.wl[k]!=null?b.wl[k]:null;
  /* owner 18/11 ~06:20Z: ONE fixed offset from the figure's standing anchor (ax = slot centre, feet = floor line), in body heights, so it scales with the figure and sits at the same spot for everyone: centre = ax ± dx x body, feet − dy x body (right first; left when the right would leave the frame) */
  const ax=B.bx+B.bw/2,feet=B.by+B.bh*b.b;/* standing anchor: picture centre = slot centre, painted feet = floor line */
@@ -68577,7 +68603,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="cdc637b1f568";window.CTM_BUILD=BUILD;
+const BUILD="55851f7c6ea4";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
