@@ -101,3 +101,4 @@ TOTAL 111
 1 | cx4:rougeBorrow | N-ONLY cx4:rougeBorrow
 1 | cx:hhShield | P-ONLY cx:hhShield
 1 | cx:maidR | P-ONLY cx:maidR
+- (18/11 ~23:45Z) REVIEWER role-parity (opus): LAND READY 40d05b76473d085618947982464956277b7a15b7 (review/role-parity-r3 = LAND READY #2 1d29d229 + final-merge LIVE b60c1102 stage-rightcol r8; quickcheck PASS on this sha; sent to ROOT-59; replaces 1d29d229 / f2f5c069 / e12a91c). coop-e2e BLOCKED = sandbox proxy 403 only, no co-op/sync file touched.
