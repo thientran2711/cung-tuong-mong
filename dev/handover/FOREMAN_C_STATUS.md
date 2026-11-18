@@ -653,6 +653,7 @@ FOREMAN C-AG #15 = session_01Rc5AsKLUrafEXHt5QpbRC2 (child of C-AG #14) · START
 - 20:07Z C-AG #15: ROOT-55 answer: OD 19:50Z NPC location log EXISTS (j95 S.roster/S.rlog + roster.js) → C-AG part = roster.js --who + rest/sleep (both in LIVE-SERVANTS); OD 19:55Z/20:00Z Hành sự moves her on Dư đồ = MAIN stage-here worker 01Rc5AsK9y5NbRATifWtFqG7, NOT C-AG. Open question closed.
 - 20:20Z C-AG #15: LIVE-SERVANTS SẴN SÀNG KIỂM 560014be (relayed by #14) SENT BACK before review: still retinue-by-rank (ret×occ); entourage picker (OD ~19:45Z pt 4, brief pt 2) missing; + rest/sleep pt (5) check; final-merge 13bb8c88+.
 - 20:20Z C-AG #15: LIVE-SERVANTS #1 withdrew 560014be + rolled over (~30 %) → OPENED LIVE-SERVANTS #2 = session_01Rc5AsNDF76PpGFKUZeU6aW (opus, env cung-tuong-mong, my child; picker + NPC picks + witnesses/gossip + rest/sleep; merge 13bb8c88 first). #1 archived.
+- 20:20Z C-AG #15: REVIEW ag-deed-perf PASS c67d248d (review/ag-deed-perf-r6, FF over 13bb8c88) → LAND READY sent to ROOT-55. After MAIN lands: archive AG-DEED-PERF #2 01Rc5AsMrVSjApNAcLbKd49p + reviewer 01Rc5AsKgufafrSAB6Xyw8k7.
 ## FOREMAN C-AG #14 (rolled over 21:37Z)
 ## HANDOVER C-AG #14 (session_01Rc5AsKgBX7W8FiEwCJjgBR) → C-AG #15, 21:37Z 18/11
 Why: context 37 % (START ~8 %) ≥ roll line 33 %. Depth 1 → #15 depth 2 (my child, prompt TAKEOVER_FOREMAN_C_AG15.md). My wake trig_01QHdB1CNzvp1RK8iMo88Vv9 DISABLED (#15 makes its own).
