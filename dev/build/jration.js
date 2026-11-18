@@ -169,7 +169,7 @@ function lxStolenNote(v,g){try{log(`<span class="r">Một hộp ${lxName(g)} tro
 function lxAskHer(v,part){try{if(window.__bot||(typeof isSrv==="function"&&isSrv()))return;const e=lxLend(S,part);if(!e)return;const lbl=TOIL_COL[part].label.toLowerCase();
  Q.push({ev:1,t:"Sang mượn son phấn",who:typeof pv==="function"?pv(v):null,h:`<p>Cung nữ của ${rkName(v)} ${v.name} sang thưa: chủ tử nhà nàng hết ${lbl}, xin ngươi chia cho một ít.</p>${kitRows([["Rương ngươi",`${lxName(e)}, còn ${e.u} lần dùng`,"n"]])}`,
   opts:[{n:"Chia cho nàng một nửa",fx:{},x:`thành: ${v.name} thiện cảm ${balSg(BAL.ration.npc.askAff)} · mất: nửa hộp ${lbl}`,go:()=>{const g=lxGive(S,v,e,"half");affAdd(v,S,BAL.ration.npc.askAff);log(`Ngươi chia cho ${v.name} ${lxName(g)}, ${g.u} lần dùng.`)}},
-   {n:"Khéo từ chối",fx:{},x:`mất: ${v.name} thiện cảm ${BAL.ration.borrow.fail}`,go:()=>{affAdd(v,S,BAL.ration.borrow.fail);log(`Ngươi khéo từ chối ${v.name}.`)}}]})}catch(x){console.error("rt ask",x)}}
+   {n:"Khéo từ chối",fx:{},x:`thành: giữ nguyên hộp ${lbl} · mất: ${v.name} thiện cảm ${BAL.ration.borrow.fail}`,go:()=>{affAdd(v,S,BAL.ration.borrow.fail);log(`Ngươi khéo từ chối ${v.name}.`)}}]})}catch(x){console.error("rt ask",x)}}
 /* ---------- 6. tribute cosmetics with a bestowal ---------- */
 (function(){if(typeof bestow!=="function")return;const b0=bestow;bestow=function(p,why){const r=b0.apply(this,arguments);try{const T=BAL.ration.tribute,ch=T.ch[why]||0;if(!lxOn()||!p||p.dead||!ch||!roll(ch))return r;
   const part=BAL.ration.parts[lxHash(`${p.id!=null?p.id:"me"}:${S.turn}:${why}`)%BAL.ration.parts.length],k=lxKey(part,3);p.lxBest=S.turn;
