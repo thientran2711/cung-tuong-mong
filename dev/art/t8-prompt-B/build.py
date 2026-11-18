@@ -656,6 +656,24 @@ def build_trieu(c,t,v="v0"):
     s+=" Pose: calm formal court standing pose, no held item; her hands folded formally in front of her at waist height with the wide sleeves falling over them, upright dignified posture, body turned very slightly three-quarters, the whole face fully visible, head up facing the viewer, eyes open, lips closed, never looking down."
     s+=" Every hairpin is inserted into the hair pointing upward or backward with dangles hanging down, no hairpin horizontal or sticking out to the side. Luminous smooth porcelain skin, bare clean forehead with no forehead mark and no flower mark, eyes open, floor-length robe with slippers visible, no train, no cup, nothing covering the face."
     return s+END
+# ---------- POSE8 (owner 18/11 ~21:45Z via ROOT-31: "8 bậc phải là 8 cái tư thế, 8 cái tương tác với đồ cầm tay khác nhau"): flag --pose8 ----------
+# Only with --pose8 the shared Pose paragraph (calm standing pose ... held below the chin ... three-quarters) is REPLACED by ONE rank-specific
+# full-body pose + its own way of using the item. Everything else (outfit, colour, face, closing rules) is byte-identical; without --pose8 nothing changes.
+# Keep always: full body head to feet, face fully visible, head up, eyes open, lips closed, standing (no sitting), item never in front of the face.
+POSE8={
+1:"in the middle of a gentle half-step forward, one foot slightly ahead of the other, the long sleeves and skirt swaying softly with the movement, body in soft three-quarter view; she carries {item} lightly in one hand lowered at her side at hip height (hanging from the hand or the crook of the arm if it is a basket or lantern), the other hand gathering a sleeve",
+2:"standing relaxed with her weight on one hip, a soft S-curve of the body, shoulders slightly tilted; she holds {item} in one hand at hip height away from the body, turned a little toward the viewer, the other hand resting on her sash",
+3:"standing straight with her head up, the arm raised so that she holds {item} in one hand at shoulder height BESIDE her face (never in front of it), the elbow bent, the other hand holding her opposite sleeve at the waist",
+4:"standing with the body turned three-quarters away from the viewer and her head turned back over her shoulder toward the viewer, face fully visible; she holds {item} in both hands at waist height at the side of the body toward the viewer, looking back as if just called",
+5:"standing with her chest open and her weight on one leg; she lifts {item} in one hand to chest height beside her body and turns it to show it, while the other hand raises a wide sleeve out to the side with a flowing gesture",
+6:"leaning forward very slightly from the waist with a graceful bow of the shoulders but her head up, both arms extended forward; she offers {item} on both open palms held out before her at waist height, presenting it to the viewer",
+7:"in a slow graceful turn with the skirt and long sleeves swinging out around her, body in three-quarter view to the left, one foot lifted onto its toes; she holds {item} in one hand extended out to the side at hip height, the other hand holding the sleeve, the head up toward the viewer",
+8:"standing perfectly still and formal, facing the viewer frontally, feet together, spine straight and chin level; she holds {item} centred in both hands at chest height below the chin, the arms close to the body, the stance of the highest court rank"}
+def pose8(o,t):
+    m=re.search(r" Pose: calm standing pose; she holds (.+?) in a contrasting colour",o); assert m,"pose paragraph not found"
+    item=m.group(1); i=o.index(" Pose: calm standing pose;"); j=o.index(" Every hairpin is inserted")
+    new=(" Pose: "+POSE8[t].format(item=item)+". The item is in a contrasting colour, not the robe colour, and the hand really grips or touches it; her hands interact with it naturally. Full body from head to feet visible, standing (never sitting), the whole face fully visible with the head up toward the viewer, eyes open, lips closed, never looking down. Never copy the pose of any reference image: the pose is exactly as described here.")
+    return o[:i]+new+o[j:]
 if __name__=="__main__":
     if "--age" in sys.argv: AGE=sys.argv[sys.argv.index("--age")+1]; sys.argv[sys.argv.index("--age"):sys.argv.index("--age")+2]=[]
     STATE=None
@@ -666,6 +684,9 @@ if __name__=="__main__":
     if "--trieu" in sys.argv: i=sys.argv.index("--trieu"); TRIEUN=int(sys.argv[i+1]); sys.argv[i:i+2]=["--trieu"]
     a=[x for x in sys.argv[1:] if not x.startswith("--")]
     _o=build_state(a[0],STATE,a[1] if len(a)>1 else "v0") if STATE else build_trieu(a[0],TRIEUN,a[1] if len(a)>1 else "v0") if "--trieu" in sys.argv else build_low(a[0],LOWN,a[1] if len(a)>1 else "v0") if "--low" in sys.argv else build_t7(a[0],a[1] if len(a)>1 else "v0") if "--t7" in sys.argv else build(a[0],a[1] if len(a)>1 else "v0","--golden" in sys.argv)
+    if "--pose8" in sys.argv:
+        _t=LOWN if "--low" in sys.argv else 7 if "--t7" in sys.argv else 8
+        _o=pose8(_o,_t)
     # a51 DARK (Foreman C ROOT-30, owner 23:05Z "màu tối giống như là ma hoặc là Thái hậu"): W90 found the shared "fresh, clear and luminous" clause kept c13 a51 bright; a51 only swaps it, every other age byte-identical
     # OWNER 18/11 ~21:06Z real (verbatim): "51 tuổi và 65 tuổi là phải dùng của những cái màu của những người già xài á, không có dùng cái màu tươi rói nha ... mặc dù già nhưng không có nghĩa là màu đen hay màu nâu ... Mà nó là một cái màu nó sang, mà cái kiểu mình nhìn vô mình thấy nó là một cái người đã lớn tuổi, trầm tĩnh lớn tuổi" → a51 AND a65 use the elder clause (a51 text = the approved a51d2 sample)
     if AGE in ("a51","a65"): _o=_o.replace("all colours fresh, clear and luminous, never dusty or greyed; ","all colours in the DEEPER, DARKER mature shades described above (rich and dignified, never bright, never pastel, never dusty or washed-out); the colour names and hex values below are her young colours, darken them as described above; "+("elegant, luxurious elder colours that read as a calm, dignified older lady, never vivid or fresh bright colours, yet never black or brown; " if AGE=="a65" else "")).replace("one fresh accent","one accent").replace("a fresh ","a ")
