@@ -29,3 +29,4 @@ b10-a51-sample c03/c04/c12 | CDN _review only | W64 session_011xDdVQJWBGEQCg7HMW
 shown-odds-r2 (spend-before-roll, ORDER ROOT-52 15:30Z) | review/shown-odds-r2 | session_01964izERxj8PUG495V4QTjS | RUNNING | 18/11 15:52Z | owner D #2
 NPC-PURPOSE G1 #8 (opus integrator; seat opened by D #2 for C-AG #13, OPEN NOW #2 15:31Z) | review/npc-purpose | C-AG #13 | session_01964izG7FPwnw4eEwFEt7t7 | RUNNING | 18/11 15:49Z |
 | FOREMAN E ROOT #4 (opus; successor of #3; depth 3, START_CTX ~5 %) | handover FOREMAN_E_STATUS | E | session_01DgYSWokbRMfu3opDuSCw15 | RUNNING | 18/11 15:55Z |
+| fullbody-frame-s3 (sonnet SMALL UI; owner 09:25Z OD L1878: no fade on figure + head centred, kit, whole group) | review/fullbody-frame-s3 | MAIN ROOT-52 | session_01UV1SzhJ3JicrwJmcbMVHSA | RUNNING | 18/11 15:57Z |
