@@ -269,3 +269,24 @@ Handover line: START_CTX ≈ 6 % (own estimate; context_usage read 0). G2 = sess
 - Known: dev/test/outside/route.js fails at '#slots button[data-new="1"]' (stale selector, also on base). BAL.lux.npcCalm/npcCalmProud and ag.par3.cnv.aff.see now unread (left in place).
 - Player-visible (examples): reasons now named — "Tai mắt báo: X oán ngươi, cho người tra sổ nguyệt sự…", "X mời ngươi vào phe Y (cùng oán Z)", "Thánh chỉ: hậu vị bỏ trống đã lâu, Hoàng thượng rước…", dress gossip "<rank name> vốn có hiềm khích, đem chuyện ngươi phung phí đồn khắp cung", maid report "hôm nay thấy V ở <nơi>"; events with no motive no longer happen (robbery without an enemy, frame without envy, Emperor's strike while he still favours her, item vanishing with no taker).
 - Merge note for G1: assemble.py list gets 'jagwhyg2.js','jagwhyg2a.js'…'jagwhyg2d.js' right after 'jagwhy.js'; jbal2 G2 block sits at the same spot as G3's → keep both sides. Site rebuilt on the branch (index.html/sw.js) — take a fresh build after the merge.
+
+## INTEGRATION (G1 #4 integrator session_01UV1SzktT6YzdpEuSryJ3J1, 18/11 ~07:10Z)
+PRIORITY #1 CHECK: OD 0 | ledger 0 | claims 8 | main 0 | review/* 3 — reused review/npc-purpose (jagwhy helper, motiveOK j95, P95B j95b); no new helper/gate.
+Handover line: START_CTX ≈ 4 % of the 1M window (own estimate; context_usage read 0).
+Head review/npc-purpose @b723a1e = G1 964cfa7 + G3 63007f9 + G2 8a51bac + live main 9bbd78b (all by git merge, no rebase). Base still review/ag-all-2-land 47568e9 — waiting C-AG "LIVE <sha>" for the final merge + gates.
+Merge resolutions: jbal2 G1 / G3 / G2 blocks after BAL.ag.why all kept (both sides); assemble.py list = union (jagwhy.js, jagwhyg2*.js, jagwhy1.js); jmen.js (main men-forbidden 13286b4/7090b01 vs G1): thái y = G1's pick by need (npwPick), vương gia = main's rule (no festival stand in the hậu cung) + menLawful/menLoadFix from main; rows json auto-merged and checked row-by-row against each owning group's branch (0 diffs); index.html/sw.js rebuilt.
+Kept from G2 (reviewer note): dev/test/one-core-guard.js counts Object.assign(BAL.<path>,{k}) as BAL.<path>.k (path-aware; real same-path duplicate still fails).
+Integrator fix: dev/test/agmaid_check.js "off switch BAL.ag.on=0" expected the old blind roll(3) for fake illness in rivalNight (j8); G1 made it npcWhy("fakeIll") → the check now asserts no blind roll 3 (23/23 PASS). Same family scanned: no other test asserts an old roll on the off switch (ag-stf2 grep hit = 0 FAIL).
+| gate (b723a1e / 0178db5) | result |
+|---|---|
+| npc-purpose-scan --strict (all groups, 412 rows) | PASS · G1 open 0/done 108/out 8 · G2 open 0/live-off 17/done 182/out 1 · G2-last done 7/out 3 · G3 open 0/live-off 14/done 43/out 29 |
+| one-core-guard | PASS |
+| npc-why + npc-purpose-g1..g1g | 10 + 11/9/8/11/10/11/11 PASS |
+| ag-all 21, ag-all-b, ag-all-c, ag-walk 10, ag-know 25, ag-truth 10, ag-betray 20, ag-sell 19, ag-later 9, ag-carry 9, ag-soft 19, ag-taimat 25, ag-taimat2 16, ag-paywin 9 | all PASS (ag-know flaky once after the G3 merge, PASS ×3 on rerun) |
+| long suite: agmaid 23, agent 16, agemp 20, greet 13, ag-kh2, ag-rd, ag-mgcal, ag-dayk, ag-mg2 26, ag-mgh, ag-par3, ag-stf2, ag-toil2, ag-wx, world_check, world_check2 | all PASS / 0 FAIL |
+| men-forbidden | bad = [] |
+| npc-roads | 13/14 (only fail = file:// fetch of VOICES.json, harness; same as G2 noted) |
+| coop-e2e ×3 (live Worker) | 63/63 · 63/63 · 63/63 |
+| quickcheck ×2 (incl. core gates G4 50-coop-one-world, old save) | PASS · PASS |
+PERF WATCH: vs today's live main buổi reads +20-80 % (noisy; one run 1858/1010, the next 948/1138). Against review/ag-all-2-land (same code minus npc-purpose), quickcheck.js 5 runs: buổi 1067/1082 ms, render 185/199, tab 392/395 → npc-purpose adds ≈ 0; the gap vs live is ag-all-2's own cost. Engine-only probe (80 × nextBuoi, no UI): 13.8 s new vs 14.4 s live main. Final measure on the head after LIVE.
+NEXT: on C-AG "LIVE <sha>": git merge it, rebuild, full gates again, perf vs the new live, then "SẴN SÀNG KIỂM <sha>" to C-AG #10. Worktree /home/user/wt/npcp.
