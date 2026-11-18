@@ -108,7 +108,7 @@ function kaBody(R,dis){kaNoteDedup(R);const one=R.one!==false;let h="";
 (function(){const kp0=kitParse;kitParse=function(str){const s=String(str||"");if(/class="kb/.test(s))return s;const M=kaModelStr(s);const R=kaRows(M);const o=kaOdds(M);return (o?`<span class="kodds">${o}</span>`:"")+kaBody(R).replace(/^<small class="kb">/,'<span class="kb">').replace(/<\/small>$/,"</span>")}})();
 /* ---------- the frame: rebuild a button into [title + odds] + rows ---------- */
 const KA_SEL="button.kcard,.pcb button,.rbtn button,button.btn,button.opt,.opts button,.srvb button";
-function kaNorm1(b){if(b.dataset.ka==="1"){const kan=b.querySelector(":scope > .kat > .kan");if(kan)[...b.childNodes].reverse().forEach(n=>{if(n.nodeType===1&&!n.matches(".kat,.klead,.kb,.kinfo"))kan.prepend(n)});return}if(b.closest(".hud2,#hud2,.tabs,.mapnav"))return;
+function kaNorm1(b){if(b.classList.contains("kquick"))return;/* KIT §13.6: the quick button keeps its own one look (never an option card) */if(b.dataset.ka==="1"){const kan=b.querySelector(":scope > .kat > .kan");if(kan)[...b.childNodes].reverse().forEach(n=>{if(n.nodeType===1&&!n.matches(".kat,.klead,.kb,.kinfo"))kan.prepend(n)});return}if(b.closest(".hud2,#hud2,.tabs,.mapnav"))return;
  const isCard=b.classList.contains("kcard");const sm=isCard?null:[...b.children].find(c=>c.tagName==="SMALL");
  if(!isCard&&!sm)return;
  b.dataset.ka="1";const dis=b.disabled;
