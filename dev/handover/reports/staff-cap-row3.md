@@ -48,3 +48,27 @@ The reviewer's note (review-staff-cap-apply.md note 1: skip `figGC` while `COOPW
 - Worktree /home/user/wt/scr (sparse not needed: test-only), local http server killed after use.
 
 SẴN SÀNG KIỂM 456010f80370081106b9f99580834d4024cf44bf — SMALL
+
+## § FIX ROUND 2 (worker, sonnet) — branch review/staff-cap-row3 @ ddc234dd0bb0fafb5f33e7494b8f701f33db7468 (from bc7640dd; reviewer fixes in warm-continue.js / route.js kept)
+PRIORITY #1 CHECK ('tutorial.js|askOnce|botOff|staff-cap-row3'): OD 0 | ledger 0 | claims 8 | main 9 | review/* 2 | archive 6
+
+**Verdict: TEST bug (tier stays SMALL, tests only). No dev/build change. No real game bug in the botOff/quiet family.**
+Why `asked:false`:
+1. The old test did `data-tgo=slots` click then `[data-load]` click in the same tick → the sổ list was not rendered yet → silent fallback `deser(loadSlot(2))`, which leaves `quiet=true` (initial value, j1.js:86) → jtut `botOff()` → loop returns before `askOnce`. (Reviewer's probe.) The real path j6.js:84 (the only `[data-load]` handler; `deser(` has no other caller) sets `quiet=true; deser; quiet=false`. Probe on the real path: `quiet:false, bot:false`.
+2. Even on the real path the ask was blocked by `busy()`: the week-1 sổ replays its entry cards (Tiền truyện, Tuyển chọn, Nhập cung scene "Tạ ơn", Mệnh truyện ✕), queued a moment after the click. A player taps them away, then the ask shows. The test never did.
+3. Same cause broke `tour/skip/replay` on a fresh life on this box: `lib/roulette.js passNewLifePopups` returns when Q is still empty, and its priority list has `'Vào cung ngay'` (card now says `Vào cung`; `Thân phận` card needs `Nhận thân phận` before any `Vào cung…` route button; the Nhập cung scene `.kmend` and the ✕ were not reached). Original bc7640dd tutorial.js `tour` fails identically (checked).
+Whole family: every other consumer of a slot load uses `[data-load]` (real path, quiet cleared); botOff/quiet readers (jtut loop/addReplay, tdPop, card67, kmOn, jbuoi) are all correct after the real load. `lib/roulette.js` left untouched (only tutorial.js and tut-replay.js use that helper; tut-replay.js not run here — note for Foreman D).
+
+Fix (dev/test/tutorial.js only): `old` loads via wait `#modal [data-load]` → click (no deser shortcut); new local `tapEntry()` taps entry cards (Nhận thân phận → Cúi đầu → Tạ ơn/Vào cung/Đã hiểu/Tiếp → Đóng/✕) until nothing is left; `newLife` waits for Q then calls it.
+
+| mode | before (bc7640dd) | after (ddc234dd, alone) | after merged with review/title-stale-sel |
+|---|---|---|---|
+| tour | FAIL (cards not passed) | PASS | PASS |
+| skip | FAIL (same) | PASS | PASS |
+| old | FAIL (null.click) | PASS | PASS |
+| bot | not reached | PASS | PASS |
+| replay | FAIL | **FAIL — real game bug**: jtut.js:398 `addReplay` still looks for dead `[data-tgo="cont"]`, so "Xem lại lời dặn" is never added | PASS |
+`replay` is fixed by review/title-stale-sel @bc853163 (not redone here). Merge-check: scratch merge of title-stale-sel onto bc7640dd was clean; overlaps = none with my diff (mine: dev/test/tutorial.js only; theirs: jtut.js, index.html, sw.js, tests). Merged tree, all 5 modes: Fold 755x1000@2 ×3 PASS, iPad 1180x820@2 ×1 PASS. Alone: tour,skip,old,bot PASS in 2 of 3 planned runs (container restarted before the 3rd; no failure seen). So "all modes PASS" is true only once title-stale-sel is merged — order: merge title-stale-sel first (or together).
+Gates on ddc234dd: one-core-guard 0 fails · quickcheck PASS (render 167/197, tab 345/342, buổi 965/856 — buổi +13 % vs live in this single noisy run; the diff has no game line, reviewer's run was 862/911; re-run if it matters) · old save ok · core gates PASS. Other touched tests unchanged by me (reviewer: staff-cap-apply, route, life-preload, warm-continue, sw-update main PASS). Fold/iPad card shots: not needed for dev/build (none touched); I looked at the `asked` flow shots (entry cards + Mệnh truyện card) on Fold — no overlap. `grep -rn "^<<<<<<< " dev` empty. No images committed.
+
+SẴN SÀNG KIỂM ddc234dd0bb0fafb5f33e7494b8f701f33db7468
