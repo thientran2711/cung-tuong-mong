@@ -56,3 +56,5 @@ Tests on 65a1421: nrask-m-scan PASS, nrask-scan ALL PASS, nrask-engine ALL PASS.
 ## REBASE on q1a a615eb7 (E7a2, rebuilt on main b2a9d34) → b013ddf
 review/questline-q1c = 01cc869 + 782eed7 + 4c039a2 + 91d8ab1 (my 4 commits, data unchanged from 65a1421) + b013ddf (site rebuilt) on a615eb7; force-with-lease over 65a1421. Diff vs q1a: only assemble.py (+jnrask_m.js after jnrask.js), jnrask_m.js, nrask-m-scan.js, nrask-m-shots.js (+ generated index.html/sw.js).
 Tests on b013ddf: nrask-m-scan PASS; nrask-scan ALL PASS (with q1b b34eaed added: 7 fails, all Q1b keys, 0 men keys); nrask-engine ALL PASS (7c loads every jnrask*.js); nrask-m-shots SHOTS OK Fold + iPad (local only, CDN 401); quickcheck PASS (open 1336 ms, old save ok, perf render 151/156, tab 354/362, buổi 875/781) — core gates: G3 kit-conform FAIL only «tutorial: 0 intro pages (want 4)», the known tutorial flake (Foreman E: not q1c's).
+
+## VERDICT: PASS b013ddf (E7r3 round 3, 18/11 08:20Z). Next: when E7a2 sends the new q1a sha, rebase q1c (data unchanged), run scans + quickcheck, send «READY q1c <sha>».
