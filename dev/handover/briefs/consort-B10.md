@@ -7,7 +7,7 @@ PER PERSON, PER RANK t1–t8 (a18), THREE files, all with the C4a one-gen method
 - v0 ORIGINAL: original colours kept exactly (only m09 skin/style) — "y nguyên màu sắc, y nguyên tư thế".
 - v1 + v2: two NEW colours (ONLY the robe colour changes).
 - t8 Hoàng hậu: v0 original + v1 warm golden YELLOW + v2 another colour.
-- t7 Hoàng quý phi: v0 original + v1/v2 = her own colour as MAIN with yellow parts mixed in, the yellow = the same deeper warm golden yellow as her t8 (owner 08:30Z).
+- t7 Hoàng quý phi: v0 original + v1/v2 = her own colour as MAIN with yellow parts mixed in, the yellow = the same deeper warm golden yellow as her t8 (owner 08:30Z). NEVER a yellow MAIN robe at t7 (c07/c08 v1 failed this, ROOT-19 18/11): the main robe = her own non-yellow colour; yellow only on inner robe/borders/sash.
 Also (FIGURE_GATE): remove hoa điền/forehead marks; one held item, no cup; t1–t6 no phoenix (replace); t7/t8 phoenix main stitched; no soft/feet wording.
 Already-made recolours (b9 / b8s / v4) count as v1 where they follow C4a; then make v0 + v2.
 OUTPUT img/_review/consort-tiers/<cNN>/b10/<cNN>_a18_tN_v0|v1|v2.png + one sheet per person (rows = v0/v1/v2, columns t1–t8). Report §B10. READY per person.
