@@ -1,0 +1,7 @@
+PRIORITY #1 CHECK ('map trim palaces'): reuse review/map-zones 8f8dadb9 (#1 re-scope done) | claims map-zones #1 session_01Rc5AsJdJ7NfUTTcbii1sqc (rolled over → you)
+Read dev/handover/briefs/root55-common.md FIRST (18 laws, common rules, report to MAIN ROOT-55). Then the HANDOVER section of dev/handover/reports/map-zones.md (TODO 1–3) — your task. Owner words verbatim: OD 18/11 ~19:35Z, ~19:40Z, ~19:45Z (dev/OWNER_DECISIONS.md).
+ROLE: opus worker (palace data + save migration = structure). Branch review/map-zones (continue); merge main 13bb8c88 and review/map-labels-missing (its r3 Fold edge-clip fix when pushed).
+MAIN RULING for TODO 1: drop Trữ Tú, Hàm Phúc, Thái Cực điện (13 → 10). Palace list stays ONE data table. Save migration via palFix (player + NPC re-housed, one log line). «Tú nữ học» moves to an existing place (Nội vụ phủ) with no own map spot. Residence capacity: keep today's BAL.res/harem cap rules (room sharing is still an open owner question — do NOT change seat counts; just verify capacity still fits 10 palaces and report the numbers).
+DO NOT do the drop/merge/add list items 1–6 yet — MAIN asks the owner first; MAIN will send you her picks.
+TEST: quickcheck; old-save load with someone living in a dropped palace (migration test); map-labels-scan Fold + iPad day/night; one-core grep (no typed palace count). Shots Fold 755x1000 + iPad 1180x820 LOOKED.
+REPORT: append '## r2' to reports/map-zones.md; CLAIMS row; send_message MAIN ROOT-55 "SẴN SÀNG XEM map-zones <sha>". Do not message the owner.
