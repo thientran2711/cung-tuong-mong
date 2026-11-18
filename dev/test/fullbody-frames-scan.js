@@ -28,7 +28,7 @@ const KINDS=(process.env.KINDS||'news,notice,choice,pdlg,idcard,shop').split(','
     const sleep=t=>new Promise(r=>setTimeout(r,t));let root=null,dlg=null,sel=null,txt=null,frame=null;
     if(kind==='news'||kind==='notice'||kind==='choice'){const o={t:kind==='news'?'Tin trong cung':kind==='notice'?'Một báo':'Việc thử',who,h:'<p>x</p>'};
      o.h=LONG_(kind==='choice'?5:8);if(kind==='choice')o.opts=[{n:'Một',fx:{}},{n:'Hai',fx:{}}];Q.push(o);showModal();
-     const t0=Date.now();while(Date.now()-t0<25000){const d=document.querySelector('#modal:not([hidden]) .dlg.kszf');const i=d&&d.querySelector('.kszfs img');if(i&&i.complete&&i.naturalWidth&&i.style.width)break;await sleep(250)}await sleep(1200);
+     const t0=Date.now();while(Date.now()-t0<25000){const d=document.querySelector('#modal:not([hidden]) .dlg.kszf');const i=d&&d.querySelector('.kszfs img');if(i&&i.complete&&i.naturalWidth&&i.style.height)break;await sleep(250)}await sleep(1200);
      dlg=document.querySelector('#modal:not([hidden]) .dlg.kszf');if(!dlg)return{err:'no frame'};sel='.kszfs img';txt='.k3right';frame=dlg}
     else if(kind==='pdlg'){root=document.createElement('div');root.id='kscanpd';root.style.cssText='position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;background:#0006';
      root.innerHTML=kitPersonDlg({kind:'guide',title:'Lời dặn',sub:'thử',p:who,fig:kitFigOf(who),name:'<b>Một người</b>',pic:{src:'',lab:''},html:'<p>'+'Một lời dặn dài hơn một chút. '.repeat(8)+'</p>',btns:[{k:'a',t:'Đã rõ'}]});document.body.appendChild(root);
