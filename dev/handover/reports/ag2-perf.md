@@ -124,3 +124,30 @@ Next levers (in order, each must keep dev/test/ag2perf-diff.js seeded diff 0 vs 
 3. agLand0 chain (jagharm/jagknow/jshelf wrappers) and agPlaceTxt/placeName: per-khắc memo of place names.
 Tools: ag2perf-prof.js (profile), ag2perf-probe.js (timing, ×9 alternating vs live f60b4024; judge medians too: the mean swings ±40 % between sets), ag2perf-deeds.js, ag2perf-diff.js. Scratch (container only): /home/user/wt/ag2out (pA1.json / pL1.json profiles). Worktrees: ag2p2 (now on review/ag-deed-perf), ag2live3 (f60b4024), ag2base (02466132), ag2m (84bd47c4 + ece17b1b local merge, not pushed).
 ~84% xong / ~62% chơi được
+
+## AG-DEED-PERF (worker session_01UV1SzjwvRPnDTMQuN3wnw9, depth 8, START_CTX ~7 %, 18/11)
+PRIORITY #1 CHECK: reused jlag2 renderAfter/__rdefer (ag2-perf B), ag2perf-diff/probe/prof tools; main: none | review/*: review/ag-deed-perf only | claims: me only.
+Head **514143ec** (review/ag-deed-perf) = ece17b1b + 3 commits. OUTCOME-IDENTICAL: dev/test/ag2perf-diff.js now takes K= (spend(1) K times per buổi, so the khắc path is in the proof); K=3 seeds 1/2/3 × 160 buổi vs ece17b1b: diff 0 / 0 / 0, RNG counts equal (61178 / 56012 / 57022) ⇒ same deeds.
+| # | change | file | proof |
+|---|---|---|---|
+| L1 | jplst lay2 (getBoundingClientRect place name / toast / chip fit) inside a sim step (window.__rdefer > 0) → renderAfter("plst-lay") = next frame, coalesced; any other redraw runs it at once as before | jplst.js | diff 0 |
+| L2 | agTell builds its news line (agPlaceTxt → placeName → places() through ~10 wrappers) only when a servant actually tells (lazy line) | jagday.js | diff 0 |
+Not done (why): agHeard → agOptsG providers (cx2, agOpts, par3, harm …; ~20 % of spend(1)) DRAW Math.random (605 draws in 20 calls, seed 1 × 40) — skipping or target-filtering them changes the RNG stream ⇒ not identical; a memo cannot help (≤ 2 calls per consort per khắc). agLand0 asOpts recompute: 2 calls / 40 buổi and they roll. Whole renderStage deferral: its wrappers write the stage list (S.visit.people). Rest of the median gap is spread thin (allServ via servById 2 %, k61St 2 %, j95stage/j95ppl …), no single lever.
+### 4x CPU spend(1), ag2perf-probe 40 buổi, seeds 1-3 cycled, 9 runs each, alternating live / base / head (ms)
+| build | khắc mean | vs live | khắc median (mean of 9) | vs live | buổi mean | buổi median |
+|---|---|---|---|---|---|---|
+| live f60b4024 | 4.91 | – | 1.39 | – | 134.5 | 45.1 |
+| base ece17b1b | 5.90 | +20 % | 3.10 | +123 % | 196.3 | 97.6 |
+| head (L1+L2) | 5.01 | **+2 %** | 2.47 | **+78 %** | 194.3 | 93.7 |
+Head vs base: khắc mean −15 %, median −20 %. Target "≤ +10 % vs live, mean AND median": mean MET, median NOT met; the median gap (≈ +1 ms / khắc at 4x) is the AG-ALL-2 per-khắc work itself (re-decide providers that roll dice, NPC stage moves), not removable outcome-identical. Per-khắc split (median / mean, ms): j95sync chain 2.0 / 3.5 (live 1.1 / 1.6), agWatch 0.1 / 1.3, agRdTick 0 / 0.9, renderStage 0 / 0.6.
+### Gates (head 514143ec)
+| gate | result |
+|---|---|
+| seeded diff vs ece17b1b, K=3, seeds 1/2/3 × 160 | 0 / 0 / 0 |
+| quickcheck (cpu 4, 3 runs) | **PASS** · old save ok · render 264/305 · tab 593/536 · buổi 1332/1443 · tasks>200 22/22 · core gates PASS |
+| one-core-guard | PASS |
+| G4 coop-one-world seeds 7+3 ×2 | 4/4 PASS |
+| ag suites 12 (ag-all 21, betray 20, carry 9, know 25, later 9, paywin 9, sell 19, soft 20, taimat 25, taimat2 16, truth 11, walk 10) | 12/12 PASS |
+Pending: when C-AG sends "LIVE <sha>" (ag-all-2 live): merge live into review/ag-deed-perf, re-run diff + the ×9 timing vs the new live.
+Scratch (container only): /home/user/wt/adpout (bench.sh, dif.sh, kids.js, selfU.js, callers.js, pre*.js). Worktrees: /home/user/wt/adp (branch), /home/user/wt/live (f60b4024).
+~85% xong / ~62% chơi được
