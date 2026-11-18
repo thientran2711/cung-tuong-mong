@@ -995,3 +995,4 @@ looks-2 overlay art (fx-stain-tra/uot, smudge, ink, pox, scars, messy hair) | im
 | OWNER BUG greet-stranger (male stranger: no face/name after greeting + duplicate result lines; opus; brief briefs/greet-stranger-bug.md) | review/greet-stranger | MAIN s41 | session_01UV1SzknEXr3P2cemBDGhow | RUNNING | 18/11 01:40Z |
 | looks batch LIVE f6ee11b1 (main 3da5720a → f6ee11b1; ROLLBACK 3da5720a): toil-looks5 + tuyet-glow v8; CDN 38 JSON | review/looks-s40 | MAIN s41 | session_01UV1Szk7eZQzR2d2t4rhiFj | LIVE | 18/11 01:36Z |
 | CHECK garden-night (scene light per buổi + history: outer men in inner garden at night; report only; opus) | handover reports/garden-night-check.md | MAIN s41 | session_01UV1SziLuyrJEqfUqguNP1W | RUNNING | 18/11 01:38Z |
+| staff-cap-fix LIVE 62a6846f (main f6ee11b1 → 62a6846f; ROLLBACK f6ee11b1): capTrim one rule + every removal told + hireCard refund | review/staff-cap-fix-r6 | MAIN s41 | session_01UV1SzkW9AbJs8kAvGGWzkv | LIVE | 18/11 01:43Z |
