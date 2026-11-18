@@ -68,3 +68,13 @@ Known: where buildings sit right at the Fold's east edge the tag is just off-scr
 3. No dot/line off-screen: a building whose tag would sit outside the default view gets NO dot/leader (tag shows when she pans); a leader exists only when its tag AND dot are inside the visible box (scan leadOff). Buildings in view keep their tag whole inside.
 Scan PASS: Fold 755x1000, iPad 1180x820, 412x1058 at DSF 2, day/night, ranks 2/3/6, 13 courtyards (21/21 PASS). QUICKCHECK PASS 181 s. KIT.md §85.7 updated. Shots (looked): dev/handover/shots/map-labels-missing/*.jpg (Fold, iPad day/night/courtyard + 412).
 Known: Fold east edge — tags of buildings centred beyond the visible edge are not on screen at open (pan); no dot/line is drawn for them.
+
+## r2d (owner 18/11 ~21:50Z via MAIN ROOT-55) — READY 790cda59 (merged main fa411d6f; keeps all r2c leader fixes)
+1. CANON OVERWRITE: an empty palace shows ONLY its grey name tag (j27: no «cung trống» line); Ngoại triều (forbidden, not a palace) keeps its reason line. Scan: empty palaces must have NO info text.
+2. Marker glow: her «ta ở đây» marker (map .kmmapmk + stage .kmemark, jmark.js) = RIM glow on an UNDER-layer: img.kmglw (same picture, black, blurred) exactly behind the real picture, colour = HER CURRENT RANK colour RCOL[S.rank] (vivid), real picture keeps only a hairline dark rim; the old stacked filter (white core + 3 gold halos on the picture) is deleted. One kit token (KIT.md §85.7 MARKER GLOW). Scan markBad: layer exists, glow z-index under picture, --dh == RCOL[rank], no brightness filter on the picture; marker close crops *-marker.jpg (rank 6 orange rim, rank 4 purple rim looked).
+Glow group scan (grep drop-shadow/blend glows): | element | before | over the picture? | action |
+| .kmmapmk / .kmemark (her marker) | container filter: white core + gold halos | washed the picture | FIXED (under-layer, rank colour) |
+| .kitb item tiles (jinv/jts/jmcal), .kdr-glow (shelf), .krev .kitb | drop-shadow halo around the icon | no (outside) | unchanged |
+| .kmglow orb (jewel box reveal), .kievflame, .btr-light | screen-blend scene light, under/behind the subject | no | unchanged |
+| .kdh title pill sweep (jtitle) | thin screen sweep over the pill text | text pill, not a picture | unchanged, note |
+Scan 21/21 PASS (Fold 755x1000, iPad 1180x820, 412x1058, DSF 2, day/night, ranks 2/3/6, courtyards). QUICKCHECK PASS 166 s. Shots (looked): dev/handover/shots/map-labels-missing/ (Fold+iPad day/night/courtyard, marker crops, 412).
