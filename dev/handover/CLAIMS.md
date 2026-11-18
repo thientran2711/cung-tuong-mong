@@ -539,3 +539,4 @@ Audit live consort figures c01–c32 (2K redo / m09 skin) | handover reports/con
 | fullbody-frame step 1 Tuần lục sample (owner 18/11 06:45Z: c03 canvas fits exactly, no cut; sonnet; brief briefs/fullbody-frame-s1.md) | review/fullbody-frame | MAIN ROOT-47 | session_01UV1SzjVbe2rs236yVuGUDn (SzkhyYu rolled over, archived) | READY-FOR-OWNER-LOOK (no review) 5e1b8e66 | 18/11 07:35Z |
 | REVIEW person-dialog-restore e6bda27 (SMALL; sonnet; prompt inline) | review/person-dialog-restore | MAIN ROOT-47 | session_01UV1SzmHVSD9r5fHMn8YFJK | RUNNING | 18/11 06:39Z |
 | FOREMAN E ROOT #3 (opus; successor of E ROOT #2 SWqAEkHo) | handover FOREMAN_E_STATUS | E ROOT | session_01DgYSWmvDYnmfLCrNGtw5Uu | RUNNING | 18/11 06:52Z |
+| look-fx-wire #8 (per-picture eye keep-out + rescan 9691 rows; tcold fit rows; figFor tcold check; r9f shots; sonnet; prompt inline, R9e handover) | review/look-fx-wire | MAIN ROOT-47 | session_01UV1SziknRk94szkCaXqvn1 | RUNNING | 18/11 06:53Z |
