@@ -1105,7 +1105,7 @@ Wake: trig_01XziXcTa6TV3ACMFhLctFAr 02:34Z fires into s42 → s42 relays; s43 se
 
 ## S43 → ROOT MAIN HANDOVER (18/11 02:35Z real; s43 context 28 % measured, rollover line 31 %; depth 6 → owner opens a ROOT main from claude.ai)
 FOR MAIN: s43 stops at depth 6. The OWNER opens a ROOT main from claude.ai with the paste block given in the s43 chat (Lượt 7). Read this section + "## S43 (main, child of s42)" above.
-LIVE: main f8276cdb (greet-stranger r6). ROLLBACK chain … → f986ff6a → f8276cdb.
+LIVE: main b32cdb39 (result-reason, 02:38Z). ROLLBACK chain … → f986ff6a → f8276cdb → b32cdb39.
 OWNER RULINGS s43 (OD tail from "(18/11 ~09:25Z owner clock" to the end, VERBATIM): stage + avatar makeup = mirror strength (avatar frames get the makeup layer, whole group); book: everyone UP to her Tổng lược size, no shrink/crop; face marks already approved with C → ship the 24 finals; TONE LADDER for ink/soot/scratch (100/85/70/55/40 %); PLACE BANNER = one plaque, line 1 icon+name+count, line 2 happening line; every shot to her = FULL SCREEN, whole figure, same character when comparing size (she was angry at a cropped sheet).
 LAND ORDER (FF-only from live main; wipe img/_review/<topic> after verdict; tell C-AG each new main): life-preload (URGENT) → men-forbidden → result-reason (regate on f8276cdb) → cloth-xoc (r6 sha) → smudge r16 → staff-cap-apply → AG after C-AG BIG PASS.
 RUNNING (all report to MAIN — tell them the new main id):
@@ -1126,3 +1126,4 @@ OWNER PENDING: tea verdict; opt-card A/B/C; ladder pick (when sent); place-banne
 Wake: s43 trigger trig_01DnGumsCEWwRGKJbfBNDc4D (:32) → DELETE it when the ROOT main sets its own (s43 leaves it on so wakes still reach s43 until then; s43 relays only).
 - (18/11 02:36Z) look-fx-wire Szm7mHX LADDER READY (ladder-muc/muoi/cao + -3x on CDN img/_review/look-fx/) LOOKED (whole faces, c01+c30, 100→40 %: ink greys out, soot fades, scratch pinker) → sent owner; waiting her % per mark → worker sets ONE BAL strength per mark, then wire.
 - (18/11 02:52Z) OWNER (OD logged): place stage = drop the entry line, count icon top of left column, place name top of right column (bigger), figures full size → place-banner SzmHEoD re-ordered. TEA too dirty: lv1 smaller on light cloth, new lv3 ≈ old lv2, redo lv2, one-cup look → cloth-xoc SzjMK4R. Banner line source = j2.js visit msg/cap (per place, e.g. vuon emp absent).
+- (18/11 02:38Z) LIVE: main f8276cdb → b32cdb39 (result-reason r6, reviewer SziWJ2p PASS; notes: some fallback reasons = act name; top sentence repeats reasons). ROLLBACK f8276cdb. Reviewer + worker SzirzUe archived; C-AG told. ROOT main: tell life-preload / men-forbidden / cloth-xoc / smudge / staff-cap reviewers their PASS must be FF of b32cdb39.
