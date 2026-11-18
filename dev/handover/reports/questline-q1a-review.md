@@ -77,3 +77,52 @@ D. Edge: a rival who dies between offer and render still prints «kẻ kia» in 
 
 ## Re-review
 FIX 1 (engine + test) and FIX 2 (data + scan) → small re-review: diff + nrask-scan/-engine on the merged set + one queen shot.
+
+# ROUND 3 — reviewer E7r3 (opus, ONE reviewer for q1a + q1b + q1c), 18/11
+PRIORITY #1 CHECK ('questline-q1|NRASK|NRQX|nrAskPick'): OD 0 new | main none (no NRASK on main 9c58140) | review/* questline-q1a a615eb7 · q1b 2f79ae26 · q1c b013ddf (the three under review) | claims E7a2 / E7b / E7c2 (this slice)
+START_CTX ≈ 3 % (own estimate).
+Setup: LOCAL merge origin/main 9c58140 + q1a a615eb7 + q1b 2f79ae26 + q1c b013ddf (not pushed). **q1a is NOT on newest main any more** (main moved b2a9d34 → 9c58140: place-stage / map-tap-go); only conflict = assemble.py list (main added jplst.js; kept it + jnroadm → jnrask → jnrask_b → jnrask_m) and generated index.html/sw.js (rebuilt with build_site.sh). The landing sha must be rebased on main again.
+Method: own NRASK dump of all 636 asks (318 chapters) + whole-family scans across ALL three files (one reviewer → one standard), engine code read (jnroad.js:100–131), tests, shots.
+
+## VERDICT: q1a FAIL · q1b FAIL · q1c PASS
+One cross-file family is open: **time words vs the card deadline** (j72 card prints «hạn 6 tuần», BAL.nroad.dl, j72.js:142). Round 2 made this a FAIL family for q1c (E7cr2 fix 2: «rằm», «mồng một», a future span shorter than the deadline) and q1c fixed it + put the rule in nrask-m-scan (men only). The SAME words stand in q1a and q1b data (LUẬT SỬA CẢ NHÓM: the family is the whole help-ask set, not one file). Seen on screen: cn_chu_10#1 Fold offer reads «Đêm mai bổn cung phải đến gian trà nhỏ…» directly above the chip «hạn 6 tuần».
+Rule (same as q1c's): no fixed date (đêm nay / tối nay / sáng mai / ngày mai / đêm mai / «Mai …» / rằm / Tết / cuối tháng) and no future span shorter than the deadline («N ngày nữa», «mấy hôm nữa», «trong ba ngày», «trong một tháng»). Kept as fine: event-relative «trước khi …», «trước kỳ khóa sổ», «đêm hẹn», past spans («đã nửa tháng», «ba năm trước»), spans longer than the deadline («ba tháng nữa»), durations of the ask itself («nới hạn thêm một tháng», «hoãn thuế một năm»).
+
+## Tests (merged tree, built)
+| test | result |
+|---|---|
+| node dev/test/nrask-scan.js | ALL PASS · 636 asks, 318 chapters, 1272 labels/loss lines (no rule for time words outside the men file → gap, see q1a fix 2) |
+| node dev/test/nrask-m-scan.js | PASS (204 asks) |
+| node dev/test/nrask-engine.js | ALL PASS (1–9, 7b, 7c: 92 chapters with queen-naming asks, 2208 draws queen asker + queen player → 0; live queen offers 0; other askers still draw them, 91 chapters) |
+| bash dev/tools/quickcheck.sh | QUICKCHECK PASS first run · 408 s · core gates PASS (kit-conform green, no G3 tutorial float this time) · time-spill PASS · open 1556 ms · old save ok · perf new/live render 185/185, tab 387/427, buổi 954/1032 ms |
+| own scans | chapters with no {B}-free ask 0/318 · non-hh asks naming the queen 37 (all filtered for a queen asker / player) · chapters left with no ask for a queen asker or player → stock card: 22 (63 when also no rival; engine fallback by design) · «ngươi» in labels 0 · time-word family: q1a 8 asks, q1b 18 asks, q1c 0 |
+| shots Fold 755x1000@2 + iPad 1180x820@2 (nrask-shots / nrask-m-shots; local scratch, deleted with this verdict; not in git, CDN not used) | SHOTS OK on all 24 (no overflow, no raw slot, no page error). LOOKED: cn_chu_10#1 offer (Fold) shows the time-word fault above «hạn 6 tuần»; cn_chu_10 tab (iPad) kit option rows Tốn/Thành/Bại + Năm ăn năm thua / Khá chắc; ch_co_8#1 (Fold) «Xin muội muội khéo tiến cử bổn cung hầu ngài ở Ngự thư phòng ít lâu» reads right, no target needed; thd_tho_8#0 (iPad) asks for the paper/ink check, no shared past; ksp_so_10 tab (Fold) label «Nói với Hoàng thượng mình tin sổ ấy», ladder Khó / Chắc; gd_tinh_5#1 (iPad) «đêm hẹn», Thị vệ «nô tài … tiểu chủ», rival veiled «Vương gia ???». Kit j72 card + KIT §6.2 option cards only, no private CSS |
+ONE CORE: no number typed in any jnrask*.js (scan: no digits); costs / odds / deadline stock BAL.nroad.*. Old saves: engine test 5 PASS (no p.av → stock), missing entry → stock card (test 4).
+
+## q1a — FAIL a615eb7e (round 2 fixes HOLD; one cross-file family open)
+| round 2 item | check | state |
+|---|---|---|
+| FIX 1 queen-alias filter | jnroad.js:125 NRQX (Hoàng hậu / Trung cung / Khôn Ninh / cô mẫu / ngôi hậu / hậu vị / phượng ấn / mẫu nghi, case-free) next to NRSELF; :126 nrAskTxt = h + c (step title, used by jnrask_m) + labels + loss lines; :127–128 nrAskPick skips any matching ask when nrSelfOf gives hh (asker «queen» at jnroad.js:136, player Hoàng hậu via nrMeQueen at :104; maid site :289 and men site jnroadm.js:136 covered by nrMeQueen). Own alias sweep of all 636 asks: other names for her («chính cung», «mẫu hậu») only in asks of kind hh or meaning the asker's own palace / the Thái hậu — none missed | FIXED |
+| test 7c | nrask-engine 7c loads every dev/build/jnrask*.js, queen asker + queen player, 2208 draws → 0; other askers keep them | FIXED |
+| FIX 2 {B}-free ask per chapter | 19 rewordings read (git diff 54f10e8..a615eb7): kinds kept, no «kẻ kia», facts kept; nrask-scan rule for every jnrask*.js (nrask-scan.js:53); own count 0/318 chapters without a {B}-free ask | FIXED |
+| foreign commit a95e8d4 | `git log origin/main..review/questline-q1a` = 7 q1a commits only; a95e8d4 is on main | FIXED |
+
+### Fixes (numbered)
+1. **Time words vs «hạn 6 tuần» (family of q1c round-2 fix 2), 8 asks in jnrask.js** — reword each without a fixed date / a span shorter than the deadline (e.g. «sắp tới», «đêm hẹn», «trước khi …»), labels + loss lines to match:
+   - jnrask.js:35 tt_co_10#0 «Sáng mai triều hội… Đêm nay {call} được hầu» (also states a summoning as fact)
+   - jnrask.js:37 tt_co_10#1 «Phụ thân phải biết ngay đêm nay… trước canh ba»
+   - jnrask.js:60 tt_oan_10#0 «Ngày mai Hoàng thượng phán án»
+   - jnrask.js:69 tt_tranh_6#0 «…trước Tết»
+   - jnrask.js:341 cn_chu_10#0 and :343 cn_chu_10#1 «Đêm mai …» (seen on the Fold offer)
+   - jnrask.js:350 cn_tinh_6#0 «hạn trước rằm» and :352 cn_tinh_6#1 «khai trước rằm»
+   Optional, same spirit: jnrask.js dtq_binh_7#0 «Đêm trước {call} được hầu» states a future summoning as fact («Nếu {call} được hầu đêm trước…»).
+2. **Move the TIME rule into the shared nrask-scan (all jnrask*.js)** — q1a owns nrask-scan; take q1c's TIME regex (nrask-m-scan.js:37) and add the words q1c's regex misses: «đêm mai», «Mai » at sentence start, «(\S+) (ngày|hôm) nữa», «mấy hôm nữa», «cuối tháng», «trong (một|hai|ba) (ngày|tháng)». Must FAIL on today's tree (q1a 8 + q1b 18) and PASS after both fixes.
+
+### Notes (not blocking)
+A. Rebase on newest main 9c58140 before landing (assemble.py conflict = jplst.js; keep it).
+B. Render-time edge: an ask is checked against the queen filter at offer time only; if the player becomes Hoàng hậu while the help quest is open (6 weeks), a queen-naming ask still shows. Rare; Foreman E may decide (re-check in nrAskOf → stock).
+C. Still open from round 2 (pre-existing on main, Foreman E's call): the queen NPC is dealt road tt_mat «Mật ước với Hoàng hậu» (nrPickRoad); her help hồi now falls to stock, so no wrong text shows.
+D. «{Call} được gần thánh giá» (tt_co_7, tt_oan_9, tt_mat_6, dtq_bien_5; q1c ty_thu_8) is the stock emp line on main (jnroad.js:198) — not a fault; q1b chose to soften its own copies.
+
+### Re-review
+Small: diff of jnrask.js + nrask-scan.js, nrask-scan on the q1a+q1b+q1c merge (time rule must PASS), nrask-engine.

@@ -77,3 +77,45 @@ thd_tho_8:1 (do) and ch_co_8:1 (emp), offer + Việc nhờ tab, 8 shots, looked 
 
 ### Re-review
 Text-only: fixes 1–2 in jnrask_b.js → rerun nrask-scan (after q1c's ksp_so_10) + nrask-engine; a SMALL diff-only re-review is enough.
+
+# ROUND 3 — reviewer E7r3 (opus, ONE reviewer for q1a + q1b + q1c), 18/11
+PRIORITY #1 CHECK ('questline-q1|NRASK|NRQX|nrAskPick'): OD 0 new | main none (no NRASK on main 9c58140) | review/* questline-q1a a615eb7 · q1b 2f79ae26 · q1c b013ddf (the three under review) | claims E7a2 / E7b / E7c2 (this slice)
+START_CTX ≈ 3 % (own estimate).
+Setup: LOCAL merge origin/main 9c58140 + q1a a615eb7 + q1b 2f79ae26 + q1c b013ddf (not pushed). **q1a is NOT on newest main any more** (main moved b2a9d34 → 9c58140: place-stage / map-tap-go); only conflict = assemble.py list (main added jplst.js; kept it + jnroadm → jnrask → jnrask_b → jnrask_m) and generated index.html/sw.js (rebuilt with build_site.sh). The landing sha must be rebased on main again.
+Method: own NRASK dump of all 636 asks (318 chapters) + whole-family scans across ALL three files (one reviewer → one standard), engine code read (jnroad.js:100–131), tests, shots.
+
+## VERDICT: q1a FAIL · q1b FAIL · q1c PASS
+One cross-file family is open: **time words vs the card deadline** (j72 card prints «hạn 6 tuần», BAL.nroad.dl, j72.js:142). Round 2 made this a FAIL family for q1c (E7cr2 fix 2: «rằm», «mồng một», a future span shorter than the deadline) and q1c fixed it + put the rule in nrask-m-scan (men only). The SAME words stand in q1a and q1b data (LUẬT SỬA CẢ NHÓM: the family is the whole help-ask set, not one file). Seen on screen: cn_chu_10#1 Fold offer reads «Đêm mai bổn cung phải đến gian trà nhỏ…» directly above the chip «hạn 6 tuần».
+Rule (same as q1c's): no fixed date (đêm nay / tối nay / sáng mai / ngày mai / đêm mai / «Mai …» / rằm / Tết / cuối tháng) and no future span shorter than the deadline («N ngày nữa», «mấy hôm nữa», «trong ba ngày», «trong một tháng»). Kept as fine: event-relative «trước khi …», «trước kỳ khóa sổ», «đêm hẹn», past spans («đã nửa tháng», «ba năm trước»), spans longer than the deadline («ba tháng nữa»), durations of the ask itself («nới hạn thêm một tháng», «hoãn thuế một năm»).
+
+## Tests (merged tree, built)
+| test | result |
+|---|---|
+| node dev/test/nrask-scan.js | ALL PASS · 636 asks, 318 chapters, 1272 labels/loss lines (no rule for time words outside the men file → gap, see q1a fix 2) |
+| node dev/test/nrask-m-scan.js | PASS (204 asks) |
+| node dev/test/nrask-engine.js | ALL PASS (1–9, 7b, 7c: 92 chapters with queen-naming asks, 2208 draws queen asker + queen player → 0; live queen offers 0; other askers still draw them, 91 chapters) |
+| bash dev/tools/quickcheck.sh | QUICKCHECK PASS first run · 408 s · core gates PASS (kit-conform green, no G3 tutorial float this time) · time-spill PASS · open 1556 ms · old save ok · perf new/live render 185/185, tab 387/427, buổi 954/1032 ms |
+| own scans | chapters with no {B}-free ask 0/318 · non-hh asks naming the queen 37 (all filtered for a queen asker / player) · chapters left with no ask for a queen asker or player → stock card: 22 (63 when also no rival; engine fallback by design) · «ngươi» in labels 0 · time-word family: q1a 8 asks, q1b 18 asks, q1c 0 |
+| shots Fold 755x1000@2 + iPad 1180x820@2 (nrask-shots / nrask-m-shots; local scratch, deleted with this verdict; not in git, CDN not used) | SHOTS OK on all 24 (no overflow, no raw slot, no page error). LOOKED: cn_chu_10#1 offer (Fold) shows the time-word fault above «hạn 6 tuần»; cn_chu_10 tab (iPad) kit option rows Tốn/Thành/Bại + Năm ăn năm thua / Khá chắc; ch_co_8#1 (Fold) «Xin muội muội khéo tiến cử bổn cung hầu ngài ở Ngự thư phòng ít lâu» reads right, no target needed; thd_tho_8#0 (iPad) asks for the paper/ink check, no shared past; ksp_so_10 tab (Fold) label «Nói với Hoàng thượng mình tin sổ ấy», ladder Khó / Chắc; gd_tinh_5#1 (iPad) «đêm hẹn», Thị vệ «nô tài … tiểu chủ», rival veiled «Vương gia ???». Kit j72 card + KIT §6.2 option cards only, no private CSS |
+ONE CORE: no number typed in any jnrask*.js (scan: no digits); costs / odds / deadline stock BAL.nroad.*. Old saves: engine test 5 PASS (no p.av → stock), missing entry → stock card (test 4).
+
+## q1b — FAIL 2f79ae26 (round 2 fixes HOLD; one cross-file family open)
+| round 2 item | check | state |
+|---|---|---|
+| fix 1 thd_tho_8#0 (hh) | asks the player to have the Trung cung check the paper and ink; no shared past (iPad shot read) | FIXED |
+| fix 2 ch_co_8#1 (emp) | asks to be recommended to serve at Ngự thư phòng so cô mẫu cannot send her; needs no target, reads right when her rival is the player (Fold shot read) | FIXED |
+| family «player's past / standing as fact» | own scan of every sentence with {call}/{Call} + từng / được gần / được hầu / được ngồi / nghe lời / hiểu ý / thân với / quen biết / được sủng …: jnrask_b.js 0 claims left (nc_gian_7#0 «Lúc {call} hầu ngài, xin…» and td_song_10#1 «{Call} vào hầu, nhắc bà…» are requests, fine) | FIXED 10 → 0 |
+| rebase | on q1a a615eb7; diff vs q1a = jnrask_b.js + assemble.py + generated files only | OK |
+
+### Fixes (numbered)
+1. **Time words vs «hạn 6 tuần» (family of q1c round-2 fix 2), 18 asks in jnrask_b.js** — reword each without a fixed date / a span shorter than the deadline; labels + loss lines to match:
+   - :18 nc_gian_6#0 «Trước rằm» · :24 nc_gian_9#0 «mười ngày nữa thì bị thẩm» · :26 nc_gian_10#0 «đêm nay ngài gọi {me}» · :31 nc_su_6#0 «mười ngày nữa là Vạn thọ» · :59 nc_vuong_7#0 «đến cuối tháng»
+   - :101 td_song_8#0 «trong một tháng không có thuốc tốt» (a limit shorter than the deadline, = q1c st_uoc_10)
+   - :409 ch_benh_9#1 label «… đóng dấu ngay đêm nay» · :145 ch_benh_10#0 «Đêm nay Thái y viện nói là đêm quyết» · :410 ch_benh_10#1 «Đêm nay là đêm quyết»
+   - :171 ch_bi_10#0 «… một đêm, sáng mai {me} sẽ quyết» · :437 ch_bi_10#1 label «Sai người canh cửa Ngự sử đài đêm nay»
+   - :185 thd_tho_10#0 «mấy hôm nữa thì dán» · :198 thd_sach_10#0 «Mai cha {me}… Đêm nay» · :462 thd_sach_10#1 «Ngày mai cha {me} quỳ»
+   - :238 cnv_chu_10#0 «Đêm nay {me} bị giải» · :267 cnv_ma_5#0 «trong ba ngày» · :271 cnv_ma_7#0 «bảy ngày nữa tra» · :273 cnv_ma_8#0 «Ba ngày nữa là chung thẩm»
+   Then rerun nrask-scan with q1a's new shared time rule (q1a fix 2) on the q1a+q1b+q1c merge: ALL PASS.
+
+### Re-review
+Text-only: diff of jnrask_b.js + nrask-scan / nrask-engine on the merge.
