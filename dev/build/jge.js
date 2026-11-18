@@ -116,7 +116,7 @@ function geApply(s,res){const id=s.b+"_"+(res.i+1);const out=[];
    if(n)out.push(res.sh==="t"?`Cả lục cung thêm thiện cảm với ngươi`:`Cả lục cung thêm kính sợ ngươi`)}
   if(W.mis){const v=geMis();if(v&&v.alive){relAdd(S,v,W.mis);out.push(`${v.name} thêm gắn bó với ngươi`)}}
   /* the one treasure: Kim sách Thiên mệnh, the shading title engraved (cannot be sold, given or lost) */
-  const k=GB().kimsach;if(IT[k]){S.inv=S.inv||[];S.inv.push({k,from:"ge",own:"me",giver:"Hoàng thượng",d:S.turn,nt:1,ti:res.ti});out.push(`Phần thưởng: ${IT[k].n} khắc «${res.ti}» (đã vào Rương)`)}
+  const k=GB().kimsach;if(IT[k]){/* the one Ngự tứ path (j97 r97give), engraved */if(typeof r97give==="function"&&r97give(k,"Hoàng thượng")){const it=S.inv[S.inv.length-1];it.from="ge";it.ti=res.ti}out.push(`Phần thưởng: ${IT[k].n} khắc «${res.ti}» (đã vào Rương)`)}
   S.gePt=(S.gePt||0)+GB().pt;
   geBoardAdd(S,res.ti,res.sh,s.b);geBook(s,res);
   log(`<b class="g">Đại kết cục · ${res.ti}.</b> Thiên hạ truyền tai: ${S.name} đã thành “${res.ti}”.`)}
