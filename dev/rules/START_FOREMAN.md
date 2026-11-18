@@ -12,7 +12,7 @@ BEFORE you open ANY worker, write ANY brief or order, answer ANY owner question,
 - At every rollover the outgoing foreman/main moves finished entries older than 24 h of its STATUS/HANDOVER into dev/archive/ so the live file stays ≤ 100 KB.
 
 
-LINEAGE (owner 17/11, every foreman and main): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; at depth ≥ 7 (limit 8) never open a child foreman, and any main/foreman that CANNOT open its child (create_session refused) does the same — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
+LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai ra cái luật là tầng 6 trở lên là bị cấm mở quảng đốc. Tầng 8 của mày là maximum thì cùng lắm là đâu đó tầng 7 là mới không mở quảng đốc thôi chứ."): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; at depth ≥ 7 (limit 8) never open a child foreman, and any main/foreman that CANNOT open its child (create_session refused) does the same — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
 
 Holds: main chat + foremen (sessions, claims, rollover, models, agent caps, work sizing).
 
