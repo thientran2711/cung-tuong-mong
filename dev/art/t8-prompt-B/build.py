@@ -159,6 +159,15 @@ ORIG1={
 "c16":("muted sage green silk like #9CA283","a cream like #E6DCC0"),
 "c20":("soft rose pink silk like #E9B5AE","a pale pink like #F0D6CF"),
 "c25":("brick rust red silk like #8C4D40","a warmer red like #B86457"),
+"c12":("pale sage green silk like #C9D2B4","a cream like #E8DCC4"),
+"c13":("apricot peach silk like #EBA98E","a soft peach like #F0C5B0"),
+"c14":("butter cream yellow silk like #EBDDB0","a pale cream like #F0E6CC"),
+"c15":("soft coral pink silk like #E0A398","a pale pink like #EBC4BA"),
+"c17":("soft rose pink silk like #E5A598","a pale blush like #F0C6BB"),
+"c18":("mauve rose silk like #BF868F","a soft lilac-pink like #D9B5C5"),
+"c19":("dusty rose silk like #B97E78","a pale pink like #E3B9B0"),
+"c21":("rose red silk like #C9746C","a blush pink like #E8B5AC"),
+"c22":("soft lavender silk like #CDB9DC","a pale pink like #EBC7D0"),
 }
 # 3f t8 list (10 items): (text, hand-template key)
 ITEMS=[("a gold ruyi set with gems","one"),("an imperial phoenix-embroidered round fan with a gold-and-jade handle and pearl tassels","two"),
