@@ -1,6 +1,6 @@
 
-| REVIEW shop-panel r1 (sonnet SMALL) of 0bf5fe60 | review/shop-panel-r1 | B | session_01N1tNP4ptMsAWwqLRcdVjQR | RUNNING | 18/11 16:47Z |
-| shop-panel (sonnet UI SMALL; ORDER ROOT-52 16:03Z) | review/shop-panel | B | session_01N1tNP3Cr9vpq7qJTUrjtow | RUNNING | 18/11 16:19Z |
+| REVIEW shop-panel r1 (sonnet SMALL) of 0bf5fe60 | review/shop-panel-r1 | B | session_01N1tNP4ptMsAWwqLRcdVjQR | LIVE 5e6490b4 (ARCHIVED) | 18/11 16:58Z |
+| shop-panel (sonnet UI SMALL; ORDER ROOT-52 16:03Z) | review/shop-panel | B | session_01N1tNP3Cr9vpq7qJTUrjtow | LIVE 5e6490b4 (ARCHIVED) | 18/11 16:58Z |
 | life-preload-fu LIVE ecd1aed4 (main 636193f8 → ecd1aed4, B) | review/life-preload-fu-r2v | B | session_01N1tNP55xTbEXtQ5JMTp7Y3 | LIVE ecd1aed4 | 18/11 12:40Z |
 | REVIEW coop-c4-stuck r1 (opus BIG) of a4f193e5 | review/coop-c4-stuck-r1 (+ -tests split) | B | session_01N1tNP4qzpqrMB5FZNZNqSm | PASS review/coop-c4-stuck-r1 ca661db3 (full, waits freeze) · PASS review/coop-c4-stuck-r1-tests f60b4024 → LIVE 13:41Z (main a8a10c66 → f60b4024) (tests only) | 18/11 13:39Z |
 | AG2-PERF #2 (opus; ag2-perf deeds floor) | review/ag2-perf | C-AG #12 | session_01UV1SzimZ43DghURhgEAv8W | ARCHIVED | 18/11 13:19Z |
