@@ -16,7 +16,7 @@ B10 3 colour versions c04, c06, c07–c10 | _review CDN consort-tiers/<cNN>/b10 
 | E8r2 re-review steal-minigame ea93a33d (opus BIG) | review/steal-minigame | E ROOT #3 | session_01DgYSWkfWz9j4tYaMi5BLHA | DONE FAIL r2 (stale base only) | 18/11 07:16Z |
 | opt-card-short #2 (OD 07:25Z verdict build) | review/opt-card-short | MAIN ROOT-49 | session_01UV1Szke4R4h6YSy7KRfqhR | SẴN SÀNG KIỂM 5a21d8ef | 18/11 08:20Z |
 | E7a2 questline-q1a FIX 2 (opus; successor of E7a) | review/questline-q1a | E ROOT #3 | session_01DgYSWnDfnkgz7A4beCa3p4 | RUNNING | 18/11 07:20Z |
-| fullbody-frame step 2 (all full-body frames, OD 07:50Z) | review/fullbody-frame-s2 | MAIN ROOT-48 | session_01UV1SzhJ3JicrwJmcbMVHSA | RUNNING | 18/11 07:31Z |
+| fullbody-frame step 2 (all full-body frames, OD 07:50Z) | review/fullbody-frame-s2 | MAIN ROOT-48 | session_01UV1SzhJ3JicrwJmcbMVHSA | READY FOR REVIEW 3849dddf | 18/11 |
 | BALANCE FINAL = balance-chain ce3f5611 + balance-2 r2 deltas + Next 1–2 (conception, y-care) + residence-seats-r2 merge (opus) | review/balance-final | D | session_01964izCP81mLjwwymWk5t2Q | RUNNING | 18/11 07:32Z |
 | look-fx-wire R9f (per-picture keep-out, tcold + t5-t8 fig rows) | review/look-fx-wire df129e4 | MAIN ROOT-47 | worker #8 | READY FOR CHECK | 18/11 |
 B10 consorts c02/c03/c05/c22–c32 | claude/cung-tuong-mong-handover-hj0h8w | session_011xDdVRdfNz9bDn1Croq298 (W40, Foreman C) | RUNNING | 2026-11-18T07:37Z
