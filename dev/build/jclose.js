@@ -102,9 +102,9 @@ function kitLinePos(el){try{const nx=document.getElementById("next");let bot=inn
    nothing free → the toast waits hidden (refit every 300 ms shows it again when there is room; never placed over a kept thing). */
 const KIT_TOAST_KEEP='header.hud,#tabs,.pctabs,.ktsub,.kpbar,[role="tablist"],#kpname,#sc-t,.tok .tag,.j59n,.kpod-plq,.dlg h2,.dlg .dlgt,button,a[href],[role="button"],[role="tab"],[data-tab],input,select,.kchip,.chip,.kmchip,.kwhy,.kodds,.k3p,.kat,.kan,.kr,.krl,.krv,.kr2b,.kname,.knr,.krt,[class*="name"],h1,h2,h3,h4,.mspot,.mlab,[data-ak],[onclick],[tabindex]:not([tabindex="-1"])';
 /* PEOPLE (MAIN ROOT-56 LOOK of 1f33d3c, owner OD 18/11 ~19:45Z (5) chip "trên cái nền"): a toast never covers a person. Stage figures count by
-   the TOP 60 % of their box (head + upper body), face chips (.tok, .pface) and portrait frames (.kfr/.kpor/.pframe/.kpf: the whole frame) by
+   the TOP 60 % of their box (head + upper body), face chips (.tok, .pface) and portrait frames (.kfr/.kpor/.pframe/.kpf) and card scene-art frames (.ksart, people painted in them): the whole frame by
    their whole box, whatever their size (a big portrait is still a face). */
-const KIT_TOAST_PEOPLE='#mefig,.figimg,.tok.fig,.kfig,.tok,.pface,.kfr,.kpor,.pframe,.kpf';
+const KIT_TOAST_PEOPLE='#mefig,.figimg,.tok.fig,.kfig,.tok,.pface,.kfr,.kpor,.pframe,.kpf,.ksart';
 const KIT_TOAST_FIG='#mefig,.figimg,.tok.fig,.kfig';
 function kitToastPeopleRects(el){const H=innerHeight,out=[];
  for(const e of document.querySelectorAll(KIT_TOAST_PEOPLE)){if(el&&(el===e||el.contains(e)))continue;if(e.closest("#ktbtoast,#kupdline,#krail"))continue;if(!e.getClientRects().length)continue;
