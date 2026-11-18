@@ -157,7 +157,7 @@ function toilMk(rec){if(!rec||!rec.makeup)return"moc";const o=TOIL_OLDLV[rec.loo
 /* one level's two numbers (makeup-lux): {dep, lux} from BAL.toil.lv */
 function toilLv(k){return BAL.toil.lv[TOIL_OLDLV[k]||k]||BAL.toil.lv.moc}
 /* the makeup part of a person's xa xỉ today (0 = bare face / no sitting / not a consort today). Reads the RAW NPC roll (TOIL_NPC0): jlux's toilNpc reads luxOf */
-function toilMkRec(p){try{if(!p||!toilOn(p))return null;if(p===S)return toilToday(S);if(p.coop)return toilFriendRec(p)/* ONE look path for the friend (toilFx / toilLookP / toilLookOfP read the same record) */;return TOIL_NPC0(p)}catch(e){return null}}
+function toilMkRec(p){try{if(!p||!toilOn(p))return null;if(p===S)return toilToday(S);if(p.coop){const t=p.toilette;return t&&t.wk===toilWk()?t:null}/* the friend's sitting = the record toilFriendRec reads; NOT toilFriendRec itself: its no-sitting branch calls toilDress → luxOf → here (loop) */return TOIL_NPC0(p)}catch(e){return null}}
 function toilMkLux(p){const r=toilMkRec(p);return r&&r.makeup?toilLv(toilMk(r)).lux:0}
 /* a look's xa xỉ: its tier word + the existing kit chip "Xa xỉ N" (jinv kitLuxChip) — no beauty number (owner ~15:45Z: the NAME is the beauty) */
 function toilLvChips(k){const L=toilLv(k);return `${kitChip(TOIL_LUXW[TOIL_OLDLV[k]||k]||TOIL_LUXW.moc,"n")}${kitLuxChip({sc:L.lux})}`}
