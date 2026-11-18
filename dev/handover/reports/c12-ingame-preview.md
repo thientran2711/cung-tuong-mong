@@ -39,3 +39,35 @@ Rows computed with dev/art/headtop/headtop.py (face_rows, HAIR_K .30, mediapipe 
 
 ## Handover
 No code, no kit change, nothing on main or review/*. Only dev/handover/reports/c12-ingame-preview.md here. ~100% xong / ~100% chơi được for this preview.
+
+## W29 clip preview (owner 18/11 ~05:45Z: "cái khung như thế nào thì đặt cái người như vậy; cái áo mà bị mất thì cắt bỏ cái áo")
+PRIORITY #1 CHECK: OD 17/11 03:12Z/03:14Z (book column) | main dev/kit/KIT.md §56.3 + line 1804 "Wide robes are CUT (column clip), never squeezed" | review/* none | claims none. Reused the W25 harness (rebuilt: scripts not committed). No game source changed; main = a95e8d4 built site, served from disk.
+
+Images (CDN, md5-verified) — https://ctm-img.victoria-tntt.workers.dev/img/_review/c12-ingame/
+| file | content |
+|---|---|
+| tuanluc_fold_clip.png / tuanluc_ipad_clip.png | c12_a18_r12_nude_smile (wide robe) with the proposed rule; Fold 755x1000@2 / iPad 1180x820@2 |
+| tuanluc_fold_slim.png / tuanluc_ipad_slim.png | c12_a18_r10_t1_smile (slim) in the same slot, current game code |
+
+Measured (CSS px, body = skull top → feet, `f.dataset.kbody`):
+| | column w x h | slim t1 (now) | r12 now (shrunk) | r12 with rule |
+|---|---|---|---|---|
+| Fold | 220 x 821 | body 614.1 (img 267x696) | 516.1 (228x595) | 613.3 (271x707) |
+| iPad | 183 x 658 | body 510.8 (img 222x579) | 429.3 (190x495) | 510.2 (226x588) |
+Result: r12 stands at the slim body height (diff <0.2 %), −16 % size gone. Looked at both images: crown, face, hands/seal and feet fully inside; only the outer robe/sleeve flare is cut by the column's right edge (flat cut, no squeeze, no overlap with the text column). No page error. Caveat: head-top row of the slim t1 was estimated (330/4000 = painted top; mediapipe not installed), r12 row 492 as in W25; effect on the comparison < 1 %.
+
+Finding that explains the bug: the slim t1 is ALSO shrunk today (to 614 of 767 body, 80 %), because `pw1` (painted width incl. sleeves, 273 px) > column 220. Every figure is shrunk until its PAINTED width = the column, so a wide robe loses more height than a slim one. The column already clips: `.kbk-person.kbk-full>.kbk-por{…overflow:hidden}` exists at j87.js:586 (no CSS change needed).
+
+### Exact change for main
+1. dev/build/jsl.js:111 (inside `kitBookFigClamp`'s `clamp`), replace
+   `if(pwc&&pw1>pwc)kk=pwc/pw1;`
+   with
+   `if(pwc)kk=Math.min(1,pwc/(KBK_STD_W*g.body));`   (kk no longer depends on THIS figure's painted width; same scale for every figure; `pw1` then unused, delete it)
+   and add next to `var KBK_ART_LINE=…` (jsl.js ~line 118 area, above the IIFE): `var KBK_STD_W=window.KBK_STD_W=.3587;   /* painted width of the standard slim figure (c12 t1) per body height; the column width ÷ this = the one book scale; wider robes/sleeves are cut by the column */`
+   The line after it already sets `dxF=-(b1.l||0)*g.iw*kk` (painted left edge on the column's left edge) and dyF — keep.
+2. Tested exactly this way (the page's real `clamp` source with that single replace, `kitFigBody(s1,soon)` callback stubbed): slim t1 = 613.3/510.2, r12 = 613.3/510.2.
+3. dev/kit/KIT.md: line 1798 — replace "the figure is fitted INTO it by its painted width (aspect kept, feet visible, nothing cut, painted left edge on the page's left edge)" with "every figure gets the SAME scale (column width ÷ KBK_STD_W of the slim standard figure, never shrunk by its own robe width; feet visible, face/crown never cut, painted left edge on the page's left edge); a robe/sleeve wider than the column is CUT by the column (overflow hidden, j87.js:586)"; line 1799/1804 "Wide robes are CUT" stays; §56.3 (line 3335) sentence "then scales it down … until its PAINTED width fits the column … Wide figures … nothing is cut" → "sized by the one column scale; wide figures are cut at the column edge, nothing runs under the text"; §34.6 line 2069 "fits the figure into it" → "scales it by the one column scale (KBK_STD_W)". Also dev/kit sample page if it states the fit rule; update dev/test/book-col-scan.js to expect equal `dataset.kbody` for slim and wide figures (cut allowed) instead of "painted width ≤ column".
+4. Whole-group (LUẬT SỬA CẢ NHÓM): the same `clamp` serves Tuần lục, Mệnh truyện and Sổ luân hồi person pages (`.kbk-person.kbk-full`), so all three change together; phones (`.kbk.narrow`) same rule.
+Open point for sếp (not decided here): robe cut is on the RIGHT edge only (left edge aligned to the page); centring a wide figure so both sides are cut equally would keep her centred but breaks the "painted left edge on the page's left edge" rule (OD 17/11 03:12Z).
+
+~100% xong / ~100% chơi được for this preview.
