@@ -514,7 +514,7 @@ B8 SAMPLE c01 a18 t1–t8 colour-only | _review CDN consort-tiers/c01/b7 + hando
 | toil-react-top (live test fail 'modal is on top' ×2; ORDER ROOT-46 05:55Z) | review/toil-react-top | D | session_01964izBr5E6cMkNDj5LwxL5 (SMALL review of 3aa504ad; worker archived) | RUNNING | 18/11 05:55Z |
 | FOREMAN E ROOT #2 (opus; successor of E ROOT SzmtCW13) | handover FOREMAN_E_STATUS | E ROOT | session_01DgYSWqAEkHoFF4gFWC5Yxg | RUNNING | 18/11 05:57Z |
 | REVIEW hud-mood-bar 04bb279 (SMALL; sonnet; brief briefs/review-hud-mood-bar.md) | review/hud-mood-bar | MAIN ROOT-46 | session_01UV1Szgt5ATvToTiS3v5M3Z | RUNNING | 18/11 05:54Z |
-| place-stage r5 (owner pick B 501 + vivid marker + 4-person iPad trial; sonnet; brief briefs/place-stage-r5.md; r4 SzjeRxj archived) | review/place-stage | MAIN ROOT-46 | session_01UV1SzkV3Bc1u4BHrVH1jFj | RUNNING | 18/11 05:54Z |
+| place-stage r5 (owner pick B 501 + vivid marker + 4-person iPad trial; sonnet; brief briefs/place-stage-r5.md; r4 SzjeRxj archived) | review/place-stage | MAIN ROOT-46 | session_01UV1SzkV3Bc1u4BHrVH1jFj | READY FOR REVIEW a341aea | 18/11 05:54Z |
 | look-fx-wire #6 (R9c LOOK fails: hard wedge/box edge round marks, mouth speck, harness shots; sonnet; brief briefs/look-fx-wire-6.md; #5 archived) | review/look-fx-wire | MAIN ROOT-46 | session_01UV1Szj7AXEQ5AejCQrVCNJ | RUNNING | 18/11 06:02Z |
 | REVIEW emo-seal-vanish 631ad03 (SMALL; sonnet; prompt inline) | review/emo-seal-vanish | MAIN ROOT-46 | session_01UV1SziaV41D5V819KWSfQU | PASS 22891730 (r6) | 18/11 06:00Z |
 | E8 STEAL MINI-GAME (PL #3b; opus; BIG; brief briefs/E8-steal-minigame.md) | review/steal-minigame | E ROOT #2 | session_01DgYSWm5h3LgBS7jeBr3BtW | RUNNING | 18/11 06:06Z |
@@ -533,6 +533,6 @@ Audit live consort figures c01–c32 (2K redo / m09 skin) | handover reports/con
 | toil-react-top (live test fail 'modal is on top' ×2; ORDER ROOT-46 05:55Z) | review/toil-react-top | D | (to open) | ORDERED | 18/11 05:55Z |
 | FOREMAN E ROOT #2 (opus; successor of E ROOT SzmtCW13) | handover FOREMAN_E_STATUS | E ROOT | session_01DgYSWqAEkHoFF4gFWC5Yxg | RUNNING | 18/11 05:57Z |
 | REVIEW hud-mood-bar 04bb279 (SMALL; sonnet; brief briefs/review-hud-mood-bar.md) | review/hud-mood-bar | MAIN ROOT-46 | session_01UV1Szgt5ATvToTiS3v5M3Z | RUNNING | 18/11 05:54Z |
-| place-stage r5 (owner pick B 501 + vivid marker + 4-person iPad trial; sonnet; brief briefs/place-stage-r5.md; r4 SzjeRxj archived) | review/place-stage | MAIN ROOT-46 | session_01UV1SzkV3Bc1u4BHrVH1jFj | RUNNING | 18/11 05:54Z |
+| place-stage r5 (owner pick B 501 + vivid marker + 4-person iPad trial; sonnet; brief briefs/place-stage-r5.md; r4 SzjeRxj archived) | review/place-stage | MAIN ROOT-46 | session_01UV1SzkV3Bc1u4BHrVH1jFj | READY FOR REVIEW a341aea | 18/11 05:54Z |
 | REVIEW questline-q1b 255f5b2a (BIG; E7br) | review/questline-q1b | E ROOT | session_01DgYSWkpB8TxDvheFX6vvwn | FAIL 255f5b2a (reports/questline-q1b-review.md) | 18/11 06:22Z |
 | REVIEW BIG mg-skip-all 0f542e1 (opus; prompt inline) | review/mg-skip-all | MAIN ROOT-46 | session_01UV1Szhzc66138A1td1yMfM | RUNNING | 18/11 06:27Z |

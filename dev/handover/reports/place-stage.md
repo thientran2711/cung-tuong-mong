@@ -72,3 +72,22 @@ BAKE PLAN (nothing of this is in code yet, only the scan injects it):
 5. Tests: dev/test/place-stage-scan.js on 18 places x 5 devices (DEV=fold|ipadAir|ipadPro|pixel|iphone14 PLACES=all) add checks tag-bottom gap >= 6, plate inside the frame, marker inside the frame, marker not over the name text; quickcheck (bash dev/tools/quickcheck.sh --runs 3 on a COMMITTED built tree; bash dev/site/build_site.sh first); stage-tag-contrast.py via the harness server (a plain `python3 -m http.server` start was DENIED; use D.serveRoot in a node wrapper); the 4-person iPad: scan knob EXTRA=1 (+ FIX4 url fig-maid-m04-a18 for a frozen 4th); shots Fold 755x1000@2 + iPad 1180x820@2 full screen with HH=1 PET=cho TITLE=s8 (the scan knobs, see r4 STATUS), LOOK 3x, upload img/_review/place-stage/ (python3 dev/site/cdn_sync.py img/_review/place-stage), wipe after verdict. Then "SẴN SÀNG KIỂM <sha>" to ROOT-46.
 KNOWN: count chip = OTHERS (3 with 4 standing); iPad full-screen place = 4 equal columns (puzzle slots L1439) - keep; lyf-tier bug is owned by another worker (22dac5c on review/lyf-tier), do NOT touch; jk4.js PT/HT rank-line change (1536421) is in this branch.
 Worktrees are gone with the container; recreate: git fetch --depth=30 origin review/place-stage main; git worktree add /home/user/wt/place-stage-r5 origin/review/place-stage; merge origin/main; bash dev/site/build_site.sh.
+
+## r5 REPORT — SẴN SÀNG KIỂM place-stage a341aea (18/11 ~06:40Z; r5 worker)
+PRIORITY #1 CHECK ('marker|kmemark|danh hiệu'): OD L1306/1831/1835/1841/1853 | main jmark.js kitMeMark, j59 meCap | review/place-stage 2bd09cc -> a341aea | claims place-stage r5.
+Branch review/place-stage @ a341aea = live main 97de885 merged (hud-mood-bar + face-reveal included; assemble.py: jplst.js last). Pushed.
+WHAT (B 501 exactly as in the ladder sample Bmax2):
+1. KIT_SLOTS.band 46 -> 70 (jkit.js): 3-line tag 57 px, gap to frame bottom 11 px measured.
+2. KIT_FIG.h .79 -> .71 for EVERYBODY (same value the sample used, no new rule; plain consorts shrink with the same ratio, per main's ruling).
+3. Marker B (jmark.js, KIT §41 written): on a stage her marker stands beside her name tag (kmmTagSpot, 40 px, tagGap 5, flips to the right if the left leaves the frame); kitMeMarkRoom = edge only so meCap no longer reserves head room; dialog figures (.kesme) keep the head rule. Same art, same bob.
+4. Glow = same gold token as the Hoàng hậu title pill (--dh = RCOL[7] #ffc400, jtitle kdh tier 8): white core + halos 6/12/22 px, for .kmemark and .kmmapmk (map marker, same marker). No new colour.
+SIZE NOTE: at stage 623 px (before hud-mood-bar) Hoàng hậu in the tallest crown = 501 px, crown 52 px under the frame top (reproduced exactly). After main's mood bar landed the stage is 601 px, so the same .71 gives 483 px (crown 47 px under the top). The ratio is what she approved; if she wants 501 px literally, KIT_FIG.h would be .74 — her call, not changed.
+TESTS: scan 18 places x 5 devices (fold, ipadAir, ipadPro, pixel, iphone14; HH=1 PET=cho TITLE=s8; dev/test/place-stage-scan.js with new chk fields) on the pre-merge tree: 90 cells, 0 page errors, figH 501 everywhere, tag bottom gap 11 (>=6), tag inside frame, marker at tag + inside frame, tags never overlap each other; the only flag (pixel/thu, marker vs tag 8 px2) fixed by tagGap 2->5 and re-run clean. After the merge: fold + ipadAir x 18 places re-scanned: clean, figH 483. quickcheck x2 (pre- and post-merge): PASS 159/160 s (render 172/205 ms new/live, core gates PASS).
+NOT RUN: stage-tag-contrast.py (title-tag-r1.js timed out opening the harness page in this container; only the marker moved, tag text/colours untouched).
+4-PERSON iPad Ngự hoa viên (iPad Air 1180x820): 4 fixed columns 193/426/660/893, count chip "4", same figure size, no overlap of names; the two grey stranger silhouettes' wide hems touch (art margins, -17 px alpha gap) — puzzle slots OD L1439 unchanged. Fold stays 2.
+SHOTS (LOOKED at full size; CDN img/_review/place-stage/, wipe after verdict):
+- Fold 755x1000@2: https://ctm-img.victoria-tntt.workers.dev/img/_review/place-stage/r5b-fold-vuon-hi.jpg (-lo = marker at the bottom of its bounce)
+- iPad 1180x820@2: https://ctm-img.victoria-tntt.workers.dev/img/_review/place-stage/r5b-ipadAir-vuon-hi.jpg
+- iPad 4 people: https://ctm-img.victoria-tntt.workers.dev/img/_review/place-stage/r5b-four-ipadAir-vuon-hi.jpg
+All: Hoàng hậu in the phoenix crown (c09 rank 7), pet (chó) at her feet, worn title pill on line 1.
+~95% xong / chờ kiểm
