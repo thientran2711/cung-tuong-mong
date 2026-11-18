@@ -1,0 +1,21 @@
+PRIORITY #1 CHECK ('choice-value-audit'): OD 0 | ledger 0 | claims 8 | main 0 | review/* 1 | archive 0 | review/* review/choice-value-audit (work under review) | claims D row (this job)
+18 LAWS: read '★ THE 18 LAWS — READ FIRST' at the top of dev/rules/START_CORE.md first; reviewers FAIL any break of a law the work touches. This work IS laws 2 (EQUAL-VALUE) + 3 (GAIN-AND-LOSS); check also 4 (ONE CORE), 7 (cổ trang wording), 11 (whole group), 1 (two-way where options are shared with NPCs).
+
+# D #3 brief — CHOICE-VALUE-AUDIT BIG REVIEW (opus)
+Coordinator: Foreman D #3 session_01964izEJF8ZxnnWaqFS3YQi. Report via send_message there + dev/handover/reports/review-choice-value-audit.md (handover branch claude/cung-tuong-mong-handover-hj0h8w) + one line in dev/handover/FOREMAN_D_STATUS.md. MAIN = ROOT-56 session_01Rc5AsMXM16MfHRicSPRHEC (other account → FOR MAIN lines in STATUS).
+READ FIRST: dev/rules/START_CORE.md + START_WORKER.md + START_REVIEWER.md in full; the owner's words in dev/OWNER_DECISIONS.md L582 + L1877 (+ ref picture it names); dev/kit/VANPHONG.md; only topic files the work touches.
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+
+## Under review
+review/choice-value-audit @84ca6625 (worker #2 session_01964izCU5vXM4nLAiNKfjgz; LIVE 790cda59 merged). Worker brief: briefs/D2-choice-value-audit.md (MAIN's ORDER ROOT-52 15:56Z verbatim; plan ACCEPTED by ROOT-53 18:45Z). Report: reports/choice-value-audit.md (read all, incl. «#2 FINISH»). Verdict branch: review/choice-value-audit-rv.
+
+## Check
+1. Family complete: run dev/tools/choice-value-scan.js yourself on LIVE (must FAIL with real rows) and on the branch (must PASS, seeds 7/11/23/31). Plant one cost-only option and one dominated option → scanner must FAIL. Hunt option sources the scan may miss (grep option builders, event cards, GỢI Ý hints, act menus, mini-game choices, shop/pay-more choices — OD:L474 family).
+2. Each fixed row: the gain is real and visible (cổ trang wording, no %), the equal value is plausible (no option clearly better), numbers only in BAL (one-core guard), no typed numbers in text. Exempt classes (knowledge / look / bet / ending) each justified.
+3. The removal of «Hoảng sợ đứng nhìn» (cứu giá): law 16 (never undo a working rule without asking) — is there an OD line that made it? If yes → FAIL unless it was given a gain instead; if no → note as OWNER FLAG.
+4. BIG gates: one-core guard/text/bind/text-rule, odds-cap.js, coop-e2e (0 page errors), quickcheck --runs 6, old save load, paired bot run branch vs live (no runaway; report Sức/Bạc per buổi shift), Fold 755x1000@2 + iPad 1180x820@2 look at 3 changed choice cards.
+5. FINAL MERGE newest origin/main, rebuild index.html/sw.js (assemble.py + build_site.sh), quickcheck again, FF from live (origin/main ancestor of head). Known overlaps: balance-final (j24 loan lines, jecon duty card → union), parallel-time (jstip) — whichever lands second re-merges.
+End: "PASS <full FF sha>" (= LAND READY, with touched-file list + the OWNER FLAGS list) or "FAIL <n> @<sha> + list" to D #3. No PR, never push main. Memory tight: tests one at a time, ≤2 browsers.
