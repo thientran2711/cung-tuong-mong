@@ -1,0 +1,33 @@
+seed 7 runs 8 month runs 4
+1. guest raw endTurn: world paths moved only on the guest / differently (the safety net takes these back):
+  R.an                      1
+  R.bac                     8
+  R.danh                    7
+  R.dsn                     125
+  R.emo                     150
+  R.inv                     5
+  R.kids                    20
+  R.lk                      5
+  R.mem                     1
+  R.staff                   50
+  R.suc                     19
+  R.sung                    2
+  R.tamco                   1
+  R.tho                     1
+  R.thoX                    1
+  R.tsbFW                   4
+  R.wdSeen                  74
+  R.wdk                     3
+  S.court.ksp               13
+  S.court.ped               9
+  S.court.tq                6
+  S.court.ty                6
+  S.emp.emo                 3
+2. guest sent week, world paths changed vs base:
+  (none)
+3. merged vs host, world paths differing:
+  (none)
+4. her act after the week end kept: 8/8
+5. old room: {"hasMenW":false,"hasCmW":false,"hasThIllW":false,"menP":{"tinh":33,"letters":0,"trysts":0,"knowsMe":[],"af":0},"menInP":false,"rt":{"name":"Host m0","tinh":33,"cmTh":3,"seen":true}}
+6. worldOn single player: true true
+PASS coop-one-world
