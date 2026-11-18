@@ -64,6 +64,21 @@ const {chromium}=require('playwright');const D=require('./lib/device');
    for(let t=0;t<8;t++){const K=nrAskPick({r,n},A,role);if(NRSELF[role].includes(K.hk)){self.push([role,r,n,K]);break}}}
   let qOff=0;const qs=[];for(const id of Object.keys(NRASK)){const m=id.match(/^(.+)_(\d+)$/);if(!ROAD14[m[1]])continue;for(let t=0;t<3;t++){clear();v.queen=true;
    v.nr=v.nr||{};Object.assign(v.nr,{r:m[1],n:+m[2],h:+m[2],hs:0,c:w.id,x:0,o:m[1].split('_')[0]});if(nrOffer(v)){qOff++;const c=q.ch.find(c=>/^nr_/.test(c.tid));if(c&&c.tid==="nr_hh")qs.push(id)}}}
+  /* 7b. the player is Hoàng hậu → nobody deals her an hh ask or stock card */
+  const r0=S.rank;S.rank=BAL.voice.hq;const meQ=[];for(const r of roads)for(let n=BAL.road.first;n<=BAL.road.last;n++){const A=nrCh(r,n);if(!A)continue;
+   for(let t=0;t<6;t++){const K=nrAskPick({r,n},A,"",true);if(K.hk==="hh"){meQ.push([r,n]);break}}}S.rank=r0;out.meQ=meQ.slice(0,5);out.nMeQ=meQ.length;
+  /* 8. voice = jvoice kAddr (VANPHONG §2) for consort askers, by rank pairs; men by trade */
+  const RI=nm=>RANKS.findIndex(x=>x.n===nm);const pairs=[["Quý phi","Thường tại",/bổn cung/,/muội muội/],["Thường tại","Quý phi",/tần thiếp/,/nương nương/],["Quý phi","HH",/thần thiếp/,/Hoàng hậu nương nương/],["QUEEN","Quý nhân",/bổn cung/,/./]];
+  const vb=[];const vs=[];const idv=Object.keys(NRASK).find(id=>[].concat(NRASK[id]).some(a=>/\{me\}/.test(a.h)&&/\{call\}|\{Call\}/.test(a.h)&&!/\{B\}/.test(a.h)));const iv=[].concat(NRASK[idv]).findIndex(a=>/\{me\}/.test(a.h)&&/\{call\}|\{Call\}/.test(a.h)&&!/\{B\}/.test(a.h));const av=[].concat(NRASK[idv])[iv];
+  for(const [ar,pr,rx,rc] of pairs){const rk0=v.rank,sr=S.rank;v.rank=ar==="QUEEN"?v.rank:RI(ar);S.rank=pr==="HH"?BAL.voice.hq:RI(pr);clear();const x=mk('nr_'+av.k,iv,idv,ar==="QUEEN");const r=render(x);
+   vs.push(`${ar}→${pr}: ${r.h.slice(0,150)}`);if(!rx.test(r.h)||!rc.test(r.h)||/\btỷ\b|\bmuội\b(?! muội)/.test(r.h.replace(/muội muội/g,"")))vb.push([ar,pr,r.h]);v.rank=rk0;S.rank=sr;v.queen=false}
+  const mv=[];for(const [role,want] of [["Thị vệ","nô tài"],["Thái y","vi thần"],["Vương gia","bản vương"],["Họa sư","vi thần"]]){const X={A:{k:"man",o:{role}}};const r=nrVoiceM(X,()=>"tiểu chủ");if(!r||r.me!==want)mv.push([role,r])}
+  out.voice={bad:vb,samples:vs,men:mv};
+  /* 9. no real rival {B} → never an ask naming {B}, never the stock «do»; nothing prints «kẻ kia» */
+  const nb=[];for(const id of Object.keys(NRASK)){const m=id.match(/^(.+)_(\d+)$/);const A=nrCh(m[1],+m[2]);if(!A)continue;for(let t=0;t<6;t++){const K=nrAskPick({r:m[1],n:+m[2]},A,"",false);
+   const a=K.av>=0?[].concat(NRASK[id])[K.av]:null;if(K.hk==="do"||a&&/\{B\}/.test(a.h+a.o.join(" "))){nb.push([id,K]);break}}}
+  v.nr=v.nr||{};Object.assign(v.nr,{r:"tt_tranh",n:7,h:7,hs:0,c:"me",x:0,o:"tt"});clear();const offB=nrOffer(v);const cB=q.ch.find(c=>/^nr_/.test(c.tid));let kk="";if(cB){const X=q72X(cB);kk=plain(q72Txt(X.T.h,X))}
+  out.noB={nb:nb.slice(0,5),n:nb.length,offB,cB:cB&&{tid:cB.tid,bk:cB.bk,av:cB.p.av},kk};
   v.queen=false;out.self={bad:self.slice(0,6),nb:self.length,qOff,qs:qs.slice(0,6),nq:qs.length};clear();return out});
  if(R.err){chk('setup',false,R.err)}else{
   console.log('kinds dealt (default):',JSON.stringify(R.kinds));console.log('kinds dealt (+bac):',JSON.stringify(R.kinds2));
@@ -75,6 +90,11 @@ const {chromium}=require('playwright');const D=require('./lib/device');
   chk('5. old save quests (no p.av, nr_bac) open with stock text and end',!R.old.length,R.old);
   chk('6. ask quest played: option 0 → hb>0 or honest fail',R.play[0].done&&(R.play[0].hb>0||R.play[0].hist==='fail'),R.play[0]);
   chk('6. ask quest betrayed → hb<0',R.play[1].done&&R.play[1].hb<0&&R.play[1].hist==='bad',R.play[1])
+  chk(`7b. player is Hoàng hậu → no hh ask / stock card`,R.nMeQ===0,R.meQ);
+  for(const z of R.voice.samples)console.log('   voice',z);
+  chk('8. consort voice = jvoice kAddr by rank pair (bổn cung / tần thiếp / thần thiếp …), never a bare tỷ/muội across ranks',!R.voice.bad.length,R.voice.bad);
+  chk('8. men voice by trade (Thị vệ nô tài, Thái y / Họa sư vi thần, Vương gia bản vương)',!R.voice.men.length,R.voice.men);
+  chk('9. no real rival → no {B} ask, no stock «do», no «kẻ kia» on the card',R.noB.n===0&&!/kẻ kia/i.test(R.noB.kk),R.noB);
   chk(`7. no asker is sent to herself (NRSELF ${JSON.stringify(R.self&&R.self.qOff)} queen offers): queen never hh, Thái y never y`,R.self.nb===0&&R.self.nq===0&&R.self.qOff>0,R.self)}
  chk('no page errors',!errs.length,errs);
  await b.close();srv.close();const f=ok.filter(z=>!z[1]).length;console.log(f?`${f} FAIL`:'ALL PASS');process.exit(f?1:0)})();
