@@ -45,7 +45,8 @@ Object.assign(BAL,{looks:{
     tear-run when the cause is crying. */
  smuFx:{blush:{len:[0,.8,1.15,1.65],a:[0,.34,.4,.48],blot:[0,0,0,0],wash:[0,0,.055,.075],sgain:[0,1,.5,.5]}/* wash = soft diffuse bleed of the blush into the skin (alpha of a wide feathered halo, spreading down / outward) */,lid:{len:[0,.5,.8,1.05],a:[0,.24,.34,.44]},
   tear:{len:[0,.5,1,1.7],a:[0,.24,.42,.55],w:[0,.026,.03,.04],n:[0,1,1,3],pair:[0,0,[.55,1.5],0],fine:[0,0,0,1]}/* fine = nặng runs taper (thick at the lash line, thinning), wander and break; pair = vừa: one eye's run SHORT, the other LONG (which eye is seeded per face) *//* pair = vừa: one eye's run SHORT, the other LONG (not mirrored; which one is seeded per face) */,cry:{len:.8,a:.36,w:.03},
-  lip:{sm:[0,0,.6,1],a:[0,0,.32,.44]},streak:[0,.35,.3,.3]}}});
+  lip:{sm:[0,0,.6,1],a:[0,0,.32,.44]},streak:[0,.35,.3,.3],
+  pct:{blush:[0,0,.1,.1],lip:[0,0,.1,.1]}/* OWNER KNOB (OD 18/11 ~00:58Z): opacity share of the blush smear and of the lip smear at vừa / nặng; she picks 5 / 10 / 15 / 20 % from option images; null = the older wash / lip.a numbers */}}});
 window.LOOKS_ART={};
 const LK_N={smu:["","Phấn son lem nhẹ","Phấn son lem nhem","Phấn son lem nhem nặng"],bui:["","Mặt lấm bụi","Bụi bám đầy mặt","Bụi bám đầy mặt"],
  muoi:["","Mặt lấm muội khói","Mặt lấm muội khói","Mặt đen muội khói"],moho:["","Mồ hôi làm phấn trôi","Mồ hôi làm phấn trôi","Mồ hôi đẫm, phấn trôi hết"],
@@ -231,7 +232,7 @@ function lkSmuDraw(im,v,lv,why,cols,box,seed){const W=im.naturalWidth,H=im.natur
  {let m=new Float32Array(N);cheeks.forEach(([cx,cy])=>{const d=paint(g=>{const gr=g.createRadialGradient(cx,cy,0,cx,cy,rad);gr.addColorStop(0,"rgba(0,0,0,1)");gr.addColorStop(.5,"rgba(0,0,0,.7)");gr.addColorStop(1,"rgba(0,0,0,0)");g.fillStyle=gr;g.fillRect(cx-rad,cy-rad,2*rad,2*rad)});add(m,d)});
   let sm=lv>=2?new Float32Array(N):smear(m,u*fx(F.blush.len),F.streak[lv],.0);/* vừa / nặng: NO pink run at all, only the diffuse flush below */{const g=F.blush.sgain[lv];for(let i=0;i<N;i++)sm[i]*=g;if(lv>=2)sm=blur(blur(sm,u*.05),u*.03)}/* the pink run: lighter and diffused (wide feather, no band edges) */const bl=fx(F.blush.blot);
   if(bl>0)for(let y=0;y<ch;y++)for(let x=0;x<cw;x++){const i=y*cw+x,n=vn(x,y,u*.2),t=cl3((n-.38)/.3,0,1);sm[i]=Math.max(sm[i],m[i]*bl*t*(.6+.4*vn(x+999,y,u*.5)))}
-  const wa=fx(F.blush.wash);if(wa>0){/* a wide feathered halo from each cheek, centre pushed down and outward, heavily blurred: the blush bleeds into the skin, no edge */
+  const PC=F.pct,wa=PC?PC.blush[lv]/1.55:fx(F.blush.wash);/* pct = the owner's knob: the smudge's own pink-smear opacity (share) at vừa / nặng; the layer peaks at wash × 1.55 */if(wa>0){/* a wide feathered halo from each cheek, centre pushed down and outward, heavily blurred: the blush bleeds into the skin, no edge */
    const wm=new Float32Array(N);cheeks.forEach(([cx,cy],ci)=>{const sd=ci?1:-1,wx=cx+sd*rad*.35,wy=cy+rad*.55,R=rad*1.9;add(wm,paint(g=>{const gr=g.createRadialGradient(wx,wy,0,wx,wy,R);gr.addColorStop(0,"rgba(0,0,0,1)");gr.addColorStop(.45,"rgba(0,0,0,.55)");gr.addColorStop(1,"rgba(0,0,0,0)");g.fillStyle=gr;g.fillRect(wx-R,wy-R,2*R,2*R)}))});
    const wb=blur(blur(wm,u*.2),u*.1),core=blur(blur(sk,u*.3),u*.12);/* the wash fades out well before the face contour (core = deep inside the skin) */for(let i=0;i<N;i++){const c=cl3((core[i]-.8)/.17,0,1);sm[i]=Math.max(sm[i],wb[i]*c*c*(3-2*c)*wa/Math.max(.01,fx(F.blush.a)))}}
   layers.push([blur(blur(sm,u*.03),u*.012),cMa,fx(F.blush.a)*1.55])}
@@ -243,7 +244,7 @@ function lkSmuDraw(im,v,lv,why,cols,box,seed){const W=im.naturalWidth,H=im.natur
   const low=O.filter(p=>p[1]>=lc[1]-u*.01).sort((a,b)=>a[0]-b[0]),m=new Float32Array(N);
   for(let i=0;i<low.length-1;i++)soft(m,along(low[i],low[i+1],u*.02,(x,y)=>[x+side*u*.035*sm,y+u*.055*sm,u*.065,.6]));
   soft(m,along(cr,[cr[0]+side*u*.27*sm,cr[1]+u*.16*sm],u*.015,(x,y,t)=>[x,y,u*(.07-.035*t),.65*(1-.85*t)]));
-  layers.push([blur(m,u*.03),cSon,fx(F.lip.a)*1.7])}
+  layers.push([blur(m,u*.03),cSon,(F.pct?F.pct.lip[lv]:fx(F.lip.a))*1.7])}/* lip smear opacity: same knob family (pct.lip) */
  /* 4 lash-run: mascara / liner washed down the cheek from under each eye — thin, wavering, fading, grey-brown (vừa / nặng, or crying) */
  {let len=fx(F.tear.len),a=fx(F.tear.a),w=fx(F.tear.w),nn=fx(F.tear.n);if(why==="khoc"){len=Math.max(len,F.cry.len);a=Math.max(a,F.cry.a);w=Math.max(w,F.cry.w);nn=Math.max(nn,1)}
   if(len>0){const m=new Float32Array(N);const pr=why==='khoc'?0:F.tear.pair[lv],swp=h1(13)<.5?0:1;eyes.forEach(([e,ix,sd],ei)=>{const s0=P[ix+8];for(let k=0;k<nn;k++){const off=k?sd*u*.07*k:0,ln=u*(pr?pr[ei===swp?0:1]:len)*[1,.62,.38][k],sx=s0[0]+sd*u*.05+off,sy=s0[1]+u*.04,ph=h1(11+ei*5+k*3)*6,pts=[];
