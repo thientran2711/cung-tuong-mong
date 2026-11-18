@@ -59,3 +59,20 @@ Kinds that never or almost never fired on head (fire/asks over 1000 tuần): g3c
 
 ## NEXT
 Integrator fixes 1-9 (+ should-fix), re-runs the 5×200-tuần rate table vs base and puts it in §INTEGRATION; then sends the new head. PHASE B (after C-AG "LIVE <sha>"): full re-gate as briefed.
+
+## PHASE A RE-CHECK on 421465a1 (G1 #5; base = review/ag-all-2-land 7301df77) — FAIL (narrow: rate family, untracked events)
+Reviewer re-ran everything itself on the same box: npc-purpose-scan --strict PASS (419 rows); quickcheck --runs 5 paired vs 7301df77: render 255/233 ms (+9 %, close to the line), tab 514/491 (+5 %), buổi 1258/1683 (−25 %), old save ok → PASS; 12 seeds × 200 tuần bot (same evbot.js) base vs head, 0 page errors.
+Fixed and verified in code: 1 g3call (×call.k scale; "ghé chơi" no longer off band), 2 tryst base 35 (Kín đáo pair clears min) / seek, 3 story clock reset via the new `on` hook, 4 npcTell knowers (npwIn/npwMat, cn3 from [mo] only, npwRegard for Emperor/Thái hậu), 5 p3MaidSaw, 6 petHh cd 0, 7 npcWhy(kind,ctx,done) = roll before stamp (kcVh) + menGrudge cd 9, 8 srvCard (per-actor cd, no longer off band), 9 heirName / tyCall converted, KV.deb → BAL.ag.why.g3.deb. Helper additions (npwOnFire, lim, done, npwRegard/npwIn/npwMat) are inside jagwhy = still ONE helper. Rare-kind list with reasons (rates json) accepted (affair, menGrudge, j70Guard, q72Collect, ktFav …).
+STILL FAILING (criterion 6, ≥ ~10x, base+head ≥ 8, 12 seeds — none of these is in the gate's hand-picked `track` list):
+| event (source) | base | head |
+|---|---|---|
+| card "Tin đồn" (j68 FAM6 rumor family) | 16 | 0 |
+| card "Tìm thấy đồ thất lạc" (jlost:86 found again) | 11 | 0 |
+| log "Cung Chính ti soát …" (jlost:112-116 search) | 14 | 0 |
+| card "Đồ thất lạc" (jlost losses) | 67 | 172 (2.5x, with no find/search after it) |
+| log "… Hoàng hậu nhờ …" (j71) | 21 | 0 |
+| log "… oán chưa dứt …" (jmem/jpcf) | 16 | 0 |
+| card "Nhận lỗi" (j92) | 1 | 20 |
+| card "Long thể bất an" (jworld2 crisis 'benh' / j13) | 0 | 13 |
+| log "… giận …" NPC anger lines | 7 | 61 |
+FIX: (R1) explain or fix each row above (the lost-item chain looks broken: losses 2.5x, finds and searches 0). (R2) the rate gate must judge EVERY card title and every name-stripped log head with base+head ≥ minN (as cmp.js does), not only a hand-picked track list; rows outside the band need a written reason in the rates json like `rare`. Then send the new head; PHASE B follows on live 55db864a.
