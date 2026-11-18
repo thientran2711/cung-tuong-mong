@@ -588,3 +588,4 @@ FOREMEN: C-AG #11 session_01UV1SzkgegQEiMEPpSv12RN (depth 6) HOLD jcoop*/jag*/j9
 - (18/11 09:08Z) LIVE PUSH (FF): main 36e574fa → 33e98993 = fullbody-frame r5+s2 (C-AG said GO). ORDER C: c03 a18 go-live (hold lifted). fullbody-frame-s2 worker archived.
 - (18/11 09:17Z) cloth-tea #2 SẴN SÀNG KIỂM a2230b9b (via ROOT-49 relay; softness fixed whole cloth group; bake ~450 ms async, HD cache cap 8). SMALL review = session_01UV1SzjS8nVnNPfmxPsAqV1 (incl. iPad memory check). jbal one key → ask C-AG GO at PASS.
 - (18/11 09:17Z) C-AG #11 STANDING GO: any landing whose only core touch is ≤ a few ADDED/flag BAL keys lands without asking (cloth-tea pre-approved); jcoop*/jag*/j95*/jtoil*/assemble/save logic still WAIT (land-e = WAIT, assemble.py).
+- (18/11 09:21Z) look-fx-wire 9f08c1b9 (one shared eye pad BAL.looks.keep.fit.eye; scan 17800 pics touching 0). MAIN LOOKED muc: OK. FULL review = session_01UV1SzhWn2B5k9NprCfHfxX. Owner sees r9g pairs when she wakes.
