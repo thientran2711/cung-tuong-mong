@@ -56,3 +56,17 @@ Tests: steal-mg-unit on main merge 37 PASS / 0 FAIL / 0 page errors; steal-mg-nf
 Shots (local, scratch, deleted): Fold 755x1000 and iPad 1180x820@2 (lib/device), deck card Chặn ngự giá on the main merge: TÀI NGHỆ seal «Chặn ngự giá: Theo bước múa», Cách chơi, «TRƯỚC KHI RA TAY» Thắng green «cơ duyên lần này lên một bậc: Năm ăn năm thua → Khá chắc», Thua hay không chơi, Độ khó «Khó · hầu Hoàng thượng, tài nghệ bậc 0»; Bắt đầu (red) / «Thôi, không chơi · giữ nguyên Năm ăn năm thua» (drawn by kitQuick in my test resolution); iPad with her figure left; no cut text, no %, 0 page errors. (steal-mg-shot.js timed out once waiting #kg82go — same load race as round 1; a direct probe opened the game fine.)
 
 Non-blocking note: a guest who reloads in the middle of her own game loses the held jnf "ch" (in memory only); the host's wait ends after coopMs + waitMs → her pick counts as Thôi. Acceptable edge; mention when jnf's co-op night goes live.
+
+## ROUND 3 — E8r3 small delta re-review of review/steal-minigame @ 814078e5 (merge of origin/main b2a9d349 + kitQuick switch)
+PRIORITY #1 CHECK: branch review/steal-minigame only (E8, PL #3b); round 2 FAIL had one blocking point (stale base / playArt vs KIT §13.6); delta only.
+
+### VERDICT: PASS 814078e5
+- **Base**: b2a9d349 is an ancestor. origin/main has since moved to 9c581406 (place-stage / map-tap-go merges) → NOT a fast-forward from current main. A trial merge into 9c581406 conflicts ONLY in assemble.py (list: main's + 'jsmg.js' last) and generated index.html / sw.js (rebuild); j82.js and KIT.md auto-merge. Coordinator: merge origin/main, resolve assemble.py, rebuild, rerun quickcheck before the ff.
+- **j82 playArt** = main's QK/kitQuick/qRow kept; added only `rows/rowsHead` (kgintro + kpst + kg82Rows), `go`, `resRows`. No private skip button; no `o.skip/skipSub` left in playArt or jsmg (remaining skipSub hits are jslap/jlooks slapGame, main's, via kitQuick). KIT §13 text says the skip button is always §13.6 `quick` — matches the code.
+- **jsmg** passes `quick:{n:"Thôi, không chơi",sub:\`giữ nguyên ${n0}\`}`.
+- **mg-skip-audit**: games 21, withKitQuick 21, fails 0 → PASS.
+- **steal-mg-unit** (branch tip build): 37 PASS / 0 FAIL / 0 page errors.
+- **steal-mg-nf** on a local merge with origin/review/balance-chain (assemble.py = balance-chain list + jsmg last, rebuilt, not pushed; served charset=utf-8): 11/11 PASS (her both acts won/lost/skipped, NPC win/lose, co-op C1–C4, stale mg), 0 page errors.
+- **quickcheck** `bash dev/tools/quickcheck.sh` @ 814078e5: `QUICKCHECK PASS · 146 s · open 1121 ms · old save ok · perf (median of 3, new/live): render 167/146, tab 370/297, buổi 924/741 ms, tasks>200ms 18/13 · core gates PASS` (kit-conform, one-core, rules-one-source, time-spill all PASS; no G3 flake this run).
+- **Shots** (Fold 755x1000@2 and iPad 1180x820@2, steal-mg-shot.js; looked at intro / skip / win / result): TÀI NGHỆ seal, Cách chơi, «TRƯỚC KHI RA TAY» rows (Thắng green «cơ duyên lần này lên một bậc: Năm ăn năm thua → Khá chắc»), Bắt đầu (red) + kit quick «Thôi, không chơi / giữ nguyên …» (kitQuick look), iPad with her figure left; skip result row «không chơi: cơ duyên giữ nguyên …» + ✕ close. No cut text, no overflow (ov checks empty), no %, 0 page errors.
+No handover needed.
