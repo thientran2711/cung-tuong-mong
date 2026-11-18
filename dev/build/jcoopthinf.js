@@ -2,7 +2,7 @@
    §3 row F; report dev/handover/reports/coop-thin-f1.md; owner GO 17/11 ~01:40Z, no option-1 patching ~02:05Z). Behind the room level:
    TH.on(6), on only when BOTH seats run a build with it (Worker: level = min(want, cap a, cap b)). Solo and rooms below level 6 run nothing.
    ONE wrapper for every engine function a part moves (F1 runAct; F2–F5 register goTo / buy / useItem / mini-game scores the same way):
-     TH.F.reg(name, {mine(args)→bool, enc(args)→plain|null, dec(a)→args|null, log:bool, ctx:[[name,get,set],…]})
+     TH.F.reg(name, {mine(args)→bool, enc(args)→plain|null, dec(a)→args|null, log:bool, ctx:[[name,get,set],…], title(args)→the result card's title})
    GUEST (seat b, level 6, not inside a host context or a world step still on her phone): the call never runs here. Her person diff since the
      host's copy (E.base: ONE baseline, shared with `do ready`) rides IN the intent (atomic: a resend is applied once), `do f {n,a,c,ops}`;
      the act is PENDING (a second act tap is ignored, #next locked with the existing wait words, act buttons off through can()); the caller
@@ -28,6 +28,15 @@ const LSK=()=>"ctm-thin-f:"+(COOP.state.room||"");
 const PRE={};/* name → the function below the wrapper (the host runs it) */
 
 /* ---------- guest ---------- */
+/* reviewer r1 (her act's result card): in solo and below level 6 the caller that snapshots her stats before an act (rsnap: wrapR doAct,
+   the place pop-up j65, the other result-card callers) shows the kit result card (resultShow, #rtoast) right after the act. At level 6
+   the act's result comes later in the host's answer, so that check sees no change and her phone showed NO result card. The snapshot the
+   caller took in the same tick rides with the pending intent; the card is shown once, when the answer (with her patch) has landed: the
+   same kit card, title and rows as solo. A caller that took no snapshot never had a card (solo neither): none here. */
+let snapV=null;
+if(typeof rsnap==="function"){const r0=rsnap;rsnap=function(){const o=r0.apply(this,arguments);snapV=o;Promise.resolve().then(()=>{if(snapV===o)snapV=null});return o}}
+function cardLater(p,dr){const b=p.bf;if(!b||!dr||!dr.r||dr.r.st!=="ok"||typeof resultShow!=="function")return;
+ setTimeout(()=>{try{if(!S||S.dead)return;if((S.logSeq||0)!==b.seq||RKEYS.some(([k])=>(S[k]||0)!==b[k])){F.stat.card=(F.stat.card|0)+1;resultShow(p.ttl||"",b,null)}}catch(e){console.error("thin F card",e)}},0)}
 function gOn(){return on()&&!host()&&!!CW.seat&&!CW.ctx&&!!S&&!S.dead&&!CW.inLife&&!CW.inFC&&!CW.allow&&!CW.allowN&&!(TH.C&&TH.C.inWorld&&TH.C.inWorld())}
 function line(t){try{if(typeof kitLine==="function")kitLine(t);else log(t)}catch(e){}}
 function sendF(p){COOP.send({t:"do",op:"f",args:p.msg,base:TH.view?TH.view.v:0,id:p.id});E.last=p.id;p.at=Date.now()}
@@ -40,11 +49,11 @@ function intent(name,args){const R=F.R[name],t00=performance.now();
  let ops=[],cur=null;try{cur=E.curP();ops=TH.pDiff(E.base(V),cur)}catch(e){console.error("thin F diff",e)}
  const L=E.packs(ops);const last=L.pop()||[];const rid="f"+Date.now().toString(36)+Math.random().toString(36).slice(2,5);
  L.forEach((o,i)=>TH.doSend("erd",{id:rid,i,ops:o}));if(cur)E.sent(cur);
- const p=F.pend={id:"d"+rid,n:name,msg:{n:name,a,c,ops:last},t0:Date.now(),tries:0,pre:Math.round(performance.now()-t00)};sendF(p);F.stat.sent++;lg(["sent",name,p.id,ops.length]);
+ const p=F.pend={id:"d"+rid,n:name,msg:{n:name,a,c,ops:last},t0:Date.now(),tries:0,pre:Math.round(performance.now()-t00)};p.bf=snapV;try{if(p.bf&&R.title)p.ttl=R.title(args)}catch(e){}sendF(p);F.stat.sent++;lg(["sent",name,p.id,ops.length]);
  /* the pending state shows at once: #next locked + her act buttons off, in this same tick (no lost tap: the tap is held as the intent) */
  const t1=performance.now();try{CW.lockNext();render()}catch(e){}p.pr=Math.round(performance.now()-t1);return true}
 function answered(dr){const p=F.pend;if(!p||!dr||dr.id!==p.id)return;F.pend=null;F.stat.ans++;const ms=Date.now()-p.t0;F.stat.ms.push(ms);if(F.stat.ms.length>40)F.stat.ms.shift();
- lg(["ans",p.n,ms,dr.r&&dr.r.st]);F.lastAns={id:p.id,n:p.n,ms,r:dr.r,pre:p.pre,pr:p.pr,tries:p.tries};try{CW.lockNext();render()}catch(e){}}
+ lg(["ans",p.n,ms,dr.r&&dr.r.st]);F.lastAns={id:p.id,n:p.n,ms,r:dr.r,pre:p.pre,pr:p.pr,tries:p.tries};try{CW.lockNext();render()}catch(e){}cardLater(p,dr);}
 COOP.on("thinview",V=>{try{if(!host()&&V&&V.o)answered(V.o.dr)}catch(e){console.error("thin F view",e)}});
 COOP.on("error",m=>{try{const p=F.pend;if(!p||!m||m.id!==p.id||host())return;if(m.code==="nohost"||m.code==="nothin")p.at=0/* resend at the next tick */}catch(e){}});
 setInterval(()=>{const p=F.pend;if(!p||host())return;if(!on()||COOP.frozen)return;if(Date.now()-p.at<8000)return;
@@ -79,7 +88,7 @@ F.reg=function(name,R){const f=window[name];if(typeof f!=="function"||F.R[name])
   intent(name,[...arguments]);return R.ret!==undefined?R.ret:""};return true};
 
 /* ---------- F1: runAct (her Hành động acts) ---------- */
-F.reg("runAct",{log:true,
+F.reg("runAct",{log:true,title:A=>ACT[A[2]]?ACT[A[2]].n:"",
  mine:A=>isMe(A[0])&&!!A[1]&&!isMe(A[1]),
  enc:A=>{const t=A[1],k=A[2],x=A[3];const id=t[RAW]?t[RAW].id:t.id;if(id==null||!ACT[k])return null;
   const o={t:id,k};if(typeof x==="number"){o.x=x;const e=S.inv&&S.inv[x];if(e)o.xe=J(C0(e))}else if(x!=null)o.xv=J(x);return o},
