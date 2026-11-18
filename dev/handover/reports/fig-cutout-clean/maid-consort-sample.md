@@ -469,3 +469,10 @@ Looked at every face at 2x (mouth strip + whole head, before | after): lips clos
 Credits: 9 × 175 = 1575 cr (uploads free).
 Weak points: (1) the smile is subtle by design — on t1/t4 the lift is faint at game size; stronger = one more retouch per figure (175 cr). (2) Lips came out slightly fuller/glossier/pinker than before, most on t7/t8 (same colour family). (3) t8 −3.3 is the loosest face number (gate OK). (4) Masks left on the CDN as c12_a18_r10_mask_*.png (review folder; wipe with the verdict).
 Files (md5-verified, https://ctm-img.victoria-tntt.workers.dev/img/_review/maid-consort-sample/): c12_a18_r10_t{1..8}_smile.png, c12_a18_r10_nude_smile.png (768x2000 transparent), c12_a18_r10_faces_before_after.jpg (9 heads before | after), c12_a18_r10_row_all.jpg (row on red skull-top/feet lines), c12_a18_r10_overlay_m09_all.jpg (m09 overlay with %). Nothing live.
+
+### Round 40 ADDENDUM — owner ~04:35Z via ROOT-16 ("gửi tờ 8 người hàng ngang, rồi gửi riêng từng người full độ phân giải")
+c12_a18_r10_row8.jpg = t1..t8 in ONE horizontal row on the red skull-top/feet lines (each figure 924 px tall skull top → feet, sheet 3696x1254, rank labels, no m09 overlay; Nữ đế separate). Per-figure full resolution: the 768x2000 smile PNGs + full-res JPGs on parchment (c12_a18_r10_tK_full.jpg, nude_full.jpg). All md5-verified. Nothing live.
+- https://ctm-img.victoria-tntt.workers.dev/img/_review/maid-consort-sample/c12_a18_r10_row8.jpg
+- PNG: https://ctm-img.victoria-tntt.workers.dev/img/_review/maid-consort-sample/c12_a18_r10_t{1..8}_smile.png, https://ctm-img.victoria-tntt.workers.dev/img/_review/maid-consort-sample/c12_a18_r10_nude_smile.png
+- JPG: https://ctm-img.victoria-tntt.workers.dev/img/_review/maid-consort-sample/c12_a18_r10_t{1..8}_full.jpg, https://ctm-img.victoria-tntt.workers.dev/img/_review/maid-consort-sample/c12_a18_r10_nude_full.jpg
+- Sheets: https://ctm-img.victoria-tntt.workers.dev/img/_review/maid-consort-sample/c12_a18_r10_faces_before_after.jpg, c12_a18_r10_row_all.jpg, c12_a18_r10_overlay_m09_all.jpg (same folder)
