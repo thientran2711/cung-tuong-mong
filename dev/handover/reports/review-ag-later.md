@@ -95,3 +95,20 @@ Next: LANDER #3 merges 49122cf5 / 0863517a + reshowQ fix + main a95e8d4 → SẴ
   Fix list to LANDER #4: (1) agReplanB redraws only replanned / changed people (keep → reuse D.P[id][b]); (2) memo agOptsG per person per bkey + needs; (3) cache j95planRival per bkey; (4) tl2Meet/tl2See: per-day look cache, skip pairs not together; (5) stage DOM refresh out of the step. Target ≤ +10 % on the same probe (×80 and ×160).
 Verdict: NO PASS yet (perf FAIL item open; odds-cap merge + reshowQ + live main pending on LANDER #4's head).
 ~81% xong / ~60% chơi được
+
+### REVIEWER #2 — round 4 + HANDOVER (18/11 ~13:40Z, rollover at context 58 %; START_CTX 4 %)
+State of play:
+- Lander: NPC LANDER #6 session_01UV1SzgbHcTuGMRy7HBkdcc; heads ag-all-2-land 44a83196 / npc-chain-land f7ef7148 (live a8a10c66); SẴN SÀNG KIỂM after the ag2-perf merge + gates. Foreman C-AG #12 session_01UV1SzjsNq3uC3tq7Tc8S4S; MAIN ROOT-52 session_01UV1SzhR4VChxDLw6hymSvQ. PASS shas (ag-all-2-land FIRST) → C-AG #12 + ROOT-52.
+- Perf owner: AG2-PERF #2 session_01UV1SzimZ43DghURhgEAv8W on review/ag2-perf (25c66b1c judged NOT final by C-AG; judge only its new sha via the lander's merged heads).
+GATE (ROOT-52, via C-AG #12): (a) 4× CPU per-KHẮC time ≤ live, measured on the khắc-step function AG2-PERF names in its SẴN SÀNG KIỂM (time the same function on live); per-buổi recorded as info only (+28 % known, not gating). (b) NPC deeds per 160 buổi ≥ 95 % of the PRE-PERF ag-all-2 head 02466132/7301df77, seeds 1-3; else consorts + close servants 100 % and only far NPCs may drop. Either miss = FAIL. (c) part A judged by OD L1637 (every re-pick has a cause, cap = one BAL key BAL.ag.day.redecideCap); B / F1 / F2 seeded diff 0 (dev/test/ag2perf-diff.js).
+My numbers on 25c66b1c (deterministic probe, crypto seeded + clock frozen; rerun twice identical): deeds 1642 → 1355 = 82.5 % (s1 546→447, s2 566→431, s3 530→477); consort agLand 1101→927 = 84 %; cap binds only 15–20× / 160 buổi, 'keep' 383–485 → raising the cap cannot fix it; lever = keep her previous plan (D.P[id][b-1] deed if valid) instead of a deed-less schedule row; when the cap binds the order is agDayList (fixed), not the cause order the comment promises → sort by cause or rotate. Sent to AG2-PERF #2.
+Earlier perf (engine, UI stubbed, 120 buổi × 3, non-crypto-seeded): 7301df77 41.8 vs live 12a1e4be 30.1 ms/buổi (+39 %); 4× throttle live = 168 ms/buổi.
+Open checks for the final head (all ag-all-2-land FIRST, then npc-chain-land):
+ 1. odds-cap merge: agSoftTxt → j63 oddsSoft (her Sức once) / same wording for NPCs, no 'undefined' — tools/soft-line.js (12 buổi, agTry→miss, agSoft→on).
+ 2. reshowQ / qBlocked co-op stall fix: coop-e2e ×9 under 2 busy loops (run.sh) 63/63 every run, G4 7+3 ×5.
+ 3. Perf gate above (tools/eng.js THROTTLE=4 for per-buổi info; per-khắc on the named function; tools/deeds.js for deeds, N 160, seeds 1-3, vs 02466132).
+ 4. quickcheck --runs 5 --cpu 4 (old save), long suite (long.sh + toil-harsh kn-late th-name men-forbidden soft-line; npc: feelings18 mood-mem moodknow-step0 ag-moodknow), set-bonus-check, shelf-check, ag-truth (deterministic now).
+ 5. PASS sha must have live main as ancestor.
+Known flake (pre-existing, not blocking): ag-know 'ONE RULE (NPC)' fixture ~1 in 4.
+Tools: dev/handover/tools/review-ag-later/ (eng.js, deeds.js, soft-line.js, harsh.js→dev/test/toil-harsh.js, kn-late.js, th-name.js, run.sh, long.sh). Tests already on the branches: toil-harsh, kn-late, th-name, eng-probe (dev/test/eng-probe.js = eng.js without THROTTLE).
+~81% xong / ~60% chơi được
