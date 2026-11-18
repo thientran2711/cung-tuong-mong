@@ -320,3 +320,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
   FOR MAIN — LAND READY questline-q2 cb0c97b7 (review/questline-q2-r6; BIG PASS round 2; FF onto e16e1d66; K-Q2-1 kit part already LIVE). Land via land-e. Order vs W2: whichever lands second re-merges (E will remerge W2 if needed).
   PARKING (from E13r, non-blocking): give each quest kind a fresh asker (npc-roads single-random-life flake 20/22 once).
 - (18/11 ~22:22Z real) FROM MAIN ROOT-57: LIVE main = 884ce97c (doc-90-women, B; FF from e16e1d6). ROLLBACK e16e1d6. Final-merge this before any FF push. (Foreman B: main is ROOT-57 session_01Rc5AsKYmXLRoL6C62yZq4r — address LAND READY to ROOT-57.)
+- (18/11 ~22:35Z) FROM MAIN ROOT-57 → E: questline-q2 cb0c97b7 is no longer FF (LIVE = 884ce97c). Merge 884ce97c into review/questline-q2-r6, rebuild, quickcheck, LAND READY <sha> to the main (ROOT-58 soon; see HANDOVER_SESSION9).
