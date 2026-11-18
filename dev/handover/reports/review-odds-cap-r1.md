@@ -241,3 +241,80 @@ Notes (no FAIL):
 Everything else from r1 (FAIL 1–5) is closed. After the fixes, a short re-check is enough: A by a unit draw, B by grep, C by a Fold shot.
 
 FAIL 3 @9df9204d010f4b03747c3fa5bba11b5684cc11aa
+
+# § ROUND 3 — review/odds-cap @ 27713d87945a59ba9e69e1d88fd892b086ea48c8 (merged with main → 591cedf921e914d256dbbd8d2b7077760beec31c)
+PRIORITY #1 CHECK ('odds-cap|capRes|Nắm chắc|Thú tội'): OD 2 | ledger 0 | claims 8 | main 15 | review/* 2 | archive 23
+
+Reviewer opus, 18/11. START_CTX ≈ 3 % (estimate). Brief: dev/handover/briefs/D12-odds-cap-r3-review.md. I read START_CORE, START_WORKER and START_REVIEWER, § ROUND 2 above, odds-cap.md § FIX ROUND 3, and OD L1657, L1659 (1) and L1664 verbatim.
+
+## Merges
+- 27713d8 + origin/main 9bbd78b (cloth-bake-static) → f399581.
+- + origin/main 4dcd50e (hud-mood-bar, face-zoom) → 591cedf.
+- Both merges conflicted only in the built index.html / sw.js; I rebuilt with dev/site/build_site.sh.
+- Main's new lines add no o:100, "Chắc chắn", typed clamp, raw draw or typed ladder word (the scan still reads 14).
+- 591cedf fast-forwards from origin/main 4dcd50e and from review/odds-cap-r1 9df9204d. It is pushed to review/odds-cap-r1.
+
+## A. capRes direct draw — PASS
+My own 200 000-draw run per o, written independently of the worker's test (ok ~ Bernoulli(o), then capRes from j1):
+
+| o | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 50 | 90 | 91 | 92 | 93 | 94 | 95 | 96 | 97 | 98 | 99 | 100 |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| P(final win) | .050 | .049 | .050 | .050 | .050 | .050 | .060 | .070 | .080 | .090 | .100 | .503 | .901 | .911 | .920 | .930 | .940 | .950 | .951 | .949 | .950 | .951 | .949 |
+
+The floor is .05, the cap is .950, and there is no dip at 96–99.
+
+Fix I made:
+- dev/test/odds-cap.js was NOT run by any suite runner (quickcheck / coregates / nightly).
+- I added dev/tools/quickcheck.d/40-odds-cap.sh (a G4 hook, ~0.1 s). It runs the test on the sha's own build through a new env OC_BUILD in odds-cap.js.
+- It now runs in every quickcheck: "hooks 4" in the core-gates line.
+
+## B. Typed ladder words — PASS
+- My own scan, beyond the worker's tool: a broad grep for every quoted rung, and every rung after `? : ( , =`.
+- 14 are left, and all are non-odds:
+  - KIT_ODDS (j79:192);
+  - the difficulty "Khó" (jdiff) and the minigame tier "Khó" (jmgt);
+  - kit-sample chance demos (jkitpage 144/153/156, jksize 382, jopic 226).
+- The only other hits are the "Chắc chắn?" confirm buttons (new life, room forget, save overwrite, kitConfirm) and the j13:66 help line.
+
+Each family site:
+
+| site | new behaviour | verdict |
+|---|---|---|
+| j95 Lặng im (risk 0) | it rolls only when risk > 0, so the word shows only then | right |
+| j95 / j95b / jagent / jagmaid / jgift / jrcp / jtds decisions | no word; shot: "Giữ làm con bài" shows only ĐƯỢC, "Giả như không thấy" only GHI CHÚ | right (KIT.md:494) |
+| jhouse Đổi người fix:1 | harmless and redundant: the act already has `open`, and oddsSure(a) counts a.open, so it was never capped. "Đổi người losing a 5 % soft fail" did not really happen. No value change. | ok |
+| j15 deadly acts | the real word(oddsCl(o+lotB)) + lotTag instead of a forced "Liều" | right (jaudit #9) |
+| j8 nx() night word | word(BAL.night.vO[…]); vO [40,50,60,75,85] gives exactly the old words (Khó / Năm ăn năm thua / Khá chắc / Chắc / Rất chắc); see the note below | ok, key justified |
+| jroute rtX o ≥ 100 | no word. These are rtX(100) options whose go() never rolls (pay / work for her); the broken "Chắc cy" is gone. | right |
+| jtsb Thu làm tai mắt | no act word (the act itself never fails); the side leak shows chanceW(BAL.odb.jtsb.leakO) under KÈM; roll(35) → roll(leakO = 35), the same value | right, key justified (was a typed 35) |
+| jrcp spy | word(rcpSpyO()) always; the button is locked with no maid anyway | right |
+
+- No odds VALUE changed in B, so there is no balance re-measure.
+- Night note: nx() is a GRADED night (thành = best, hỏng = worst of s = q+b+mood+R(3)), not a pass/fail roll. So vO is a display ladder, as the typed words were before. No change in meaning.
+
+## C. Failure text stays in BẠI — PASS
+- kem-split-scan, run by me: 205 'hỏng:' literals, 0 failure items shown as KÈM.
+- I read the diffs of Thú tội, phá thai ×2 (j22 / j42), the poison taster, accuse lose and reign lose. Each joins its failure parts inside the hỏng item.
+- Shots: the Thú tội card BẠI reads "Hoàng thượng không tha — có thể bị ban chết", with no KÈM row. The phá thai card BẠI reads "băng huyết — có thể băng huyết mà chết: khả năng vừa · Sức −30"; its KÈM "mất đứa bé" is a side effect of success, which is correct. On the decision dialog, the Tố giác BẠI is all in one row.
+
+## Gates
+| gate | result |
+|---|---|
+| one-core-guard / core gates | PASS (one-core-guard, rules-one-source, kit-conform, coop-one-world, hooks 4 incl. 40-odds-cap), on 3f71500c ×2 and 591cedf |
+| quickcheck, 6 interleaved pairs per run, 3 runs | PASS ×3, old save loads and plays a buổi. Medians new/live: render 164/142, 159/143, 159/150 ms; buổi 790/742, 828/846, 776/736 ms; tab even. |
+| render cost check | quickcheck plays a NEW random life per run, so I also loaded the SAME 4 saves into both builds (iPad, CPU 4×, alternating, 8 pairs). Min render: new 1126 ms vs live 1085 ms in total (+3.8 %); one save alone swung 110 ↔ 177 ms between rounds. render() calls capRes / exSimC / capRank7 0 times, and oddsOf about 29× per render (trivial). → the quickcheck render gap is life-mix noise, not this branch. Within +5 %. |
+| odds tests | odds-cap.js PASS · kem-split-scan 0/205 · typed-ladder-scan 14 (all non-odds) |
+| coop-e2e (regression guard) | branch f399581 63/63 · live 9bbd78b 63/63 — no worse |
+| shots Fold 755x1000@2 + iPad 1180x820@2, LOOKED at | Thú tội card, phá thai card, the "Bắt gặp" decision dialog (Tố giác / Giữ làm con bài / Lặng im / Giả như không thấy). No overlap, no cut text, page errors 0, no horizontal overflow. Scratch only, never in git or the CDN; deleted. |
+
+## Notes (not FAIL; for main / a one-core backlog)
+1. Pre-existing typed odds / amounts next to this family, untouched by this branch:
+   - j8 night prep "Điểm trang lộng lẫy" chanceW(40) + night1 roll(40);
+   - nx() "Danh -4 … chanceW(40)" (night1 applies BAL.eff.j8.danhGo_2);
+   - Tiến cử chanceW(30);
+   - phá thai chanceW(25) / chanceW(20).
+   They should read BAL like leakO now does.
+2. Wording: "băng huyết — có thể băng huyết mà chết" repeats itself; "băng huyết — có thể mất mạng" would read better.
+3. The § ROUND 2 notes still stand: the HH-reach check after A, Thú tội lethality as a design point, and the Che chở duplicate Danh key.
+
+PASS 591cedf921e914d256dbbd8d2b7077760beec31c
