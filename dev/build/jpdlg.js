@@ -22,6 +22,8 @@ function kitPersonDlg(o){o=o||{};try{
 function kitPersonDlgFit(root){try{const R=root||document;R.querySelectorAll(".kpdlg .kpsubj.kes").forEach(col=>{
  const box=col.querySelector(".kpdfig"),f=col.querySelector(".kesf"),im=f&&f.querySelector(".kesimg");if(!box||!im)return;
  const src=im.getAttribute("src");const again=()=>requestAnimationFrame(()=>kitPersonDlgFit(R));
+ /* KIT 56.15 (owner OD 18/11 ~21:20Z (1), via MAIN): the person dialog follows the SAME figure standard as the option frames: the crowned Hoàng hậu stands from just under the name tag to the bottom of the column at the standard body (KIT_SIZE.fig.L3.h + the crown room), and when the text is short the FRAME height follows that figure height (no empty band under her feet); the default pop-up height (--kph) is only the cap. --kph is set on the dialog itself, once per viewport. */
+ try{const dlg=col.closest(".kpdlg"),db=col.closest(".kpdb"),key=innerWidth+"x"+innerHeight;if(dlg&&db&&dlg.__hFit!==key){dlg.__hFit=key;dlg.style.removeProperty("--kph");const ko=dlg.querySelector(":scope>.kpopts");dlg.style.setProperty("--kpbh",ko?ko.offsetHeight+10+"px":"0px");const cap=dlg.offsetHeight,chrome=dlg.offsetHeight-db.clientHeight,tg=col.querySelector(".kpsn"),G=(typeof KIT_DP_GAP!=="undefined"&&KIT_DP_GAP.min)||14,std=(typeof KIT_SIZE==="object"&&KIT_SIZE.fig&&KIT_SIZE.fig.L3&&KIT_SIZE.fig.L3.h)||351,cr=(typeof BAL==="object"&&BAL.bookFrame&&BAL.bookFrame.cRef)||.131,colNeed=(tg?tg.offsetHeight:0)+2*G+std*(1+cr)+4,dr=db.querySelector(".kpdr"),cs=getComputedStyle(db),textNeed=dr?(()=>{const o=dr.style.alignSelf,o2=dr.style.height;dr.style.alignSelf="start";dr.style.height="auto";const h=dr.offsetHeight;dr.style.alignSelf=o;dr.style.height=o2;return h})()+parseFloat(cs.paddingTop)+parseFloat(cs.paddingBottom):0,want=Math.round(chrome+Math.max(colNeed,textNeed));if(cap>0&&want>0&&want<cap-1){dlg.style.setProperty("--kph",want+"px");again();return}}}catch(e){}
  if(!im.complete&&!im.dataset.kpdl){im.dataset.kpdl=1;im.addEventListener("load",again,{once:true})}
  const b=(src?kitFigBody(src,again):null)||(typeof kitFigWaitBody==="function"&&kitFigWaitBody(im,again));if(!b)return;
  const kfr=parseFloat(im.style.getPropertyValue("--kfr"))||1;const rel=Math.min(1,kfr*(KIT_FIG.man||1));
@@ -61,7 +63,9 @@ html body .dlg.kpanel.kpdlg{box-sizing:border-box;width:var(--kpw);min-width:0;m
 .kpdlg .kpdt p{margin:0 0 6px}
 .kpdlg .kpdt .kb{margin:4px 0 2px}
 .kpdlg .kpdt .ktut-do{color:var(--gold);font-weight:600}
-.kpdlg>.kpopts{flex:none;display:flex;justify-content:flex-end;flex-wrap:wrap;gap:8px;padding:6px 14px 12px;margin:0;position:static;min-height:0}
+/* KIT 56.15: the buttons sit at the bottom of the RIGHT column only (over its free corner), so the figure column runs from the name tag to the frame's bottom edge; the right column keeps --kpbh free under its text */
+.kpdlg{position:relative}.kpdlg>.kpdb{padding-bottom:12px}.kpdlg .kpdr{padding-bottom:var(--kpbh,0px)}
+.kpdlg>.kpopts{position:absolute;right:14px;bottom:12px;left:auto;display:flex;justify-content:flex-end;flex-wrap:wrap;gap:8px;padding:0;margin:0;min-height:0;max-width:calc(100% - var(--kpdcw,38%) - 40px)}
 .kpdlg>.kpopts .kbtn{min-height:40px;padding:6px 16px;font-size:.86rem}
-/* kv3:.kv1 */:where(.kv1) .kpdlg>.kpdb{grid-template-columns:var(--kpdcw,clamp(84px,32%,140px)) minmax(0,1fr);gap:9px;padding:8px 10px 2px}:where(.kv1) .kpdlg .kpdt{font-size:.84rem}:where(.kv1) .kpdlg>.kpopts{padding:6px 10px 10px}
+/* kv3:.kv1 */:where(.kv1) .kpdlg>.kpdb{grid-template-columns:var(--kpdcw,clamp(84px,32%,140px)) minmax(0,1fr);gap:9px;padding:8px 10px 2px}:where(.kv1) .kpdlg .kpdt{font-size:.84rem}:where(.kv1) .kpdlg>.kpopts{right:10px;bottom:10px}
 `;document.head.appendChild(st)})();
