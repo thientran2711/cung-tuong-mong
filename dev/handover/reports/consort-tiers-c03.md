@@ -101,3 +101,6 @@ Gens: 16 x 135 = 2160 cr, 1 gen per figure, 0 retries. IoU vs live: v0 97.8 97.8
 FLAGS for foreman: (1) approved v1 t3 sage green ≈ v0 t3 original sage green (two alike); (2) approved v1 t7 is teal with no yellow and t8 v1 is pale pink-peach, not the warm golden yellow the B10 brief wants for t8 v1 — owner approved b8, so kept; say if she wants them redone.
 Files (md5 --check same): https://ctm-img.victoria-tntt.workers.dev/img/_review/consort-tiers/c03/b10/ — c03_a18_tN_v0|v1|v2.png (24) + c03_a18_b10_sheet.jpg. Nothing live.
 ~100% xong c03 B10 / ~0% chơi được.
+
+## B10 fix: c03 t6 v2 (W49, ROOT-20 order, 18/11)
+Reason: v2 t6 muted teal-aqua too close to the original deep emerald (C3a). Regen (1 gen, refs = live c03 t6 + m09 style): soft muted dusty lilac-mauve robe, phoenix replaced by peonies/lotus/small birds/butterflies, held lantern in contrasting warm cream-gold (not the robe colour), bare forehead, flat stitched embroidery. Looked by eye: OK. Re-uploaded c03_a18_t6_v2.png + c03_a18_b10_sheet.jpg (same names). Note: v1 t6 is dusty rose, so lilac is a third family.
