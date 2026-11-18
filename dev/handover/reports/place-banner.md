@@ -39,3 +39,14 @@ Summary: 18 places x 5 devices: count chip everywhere, chip-on-chip nowhere, mar
 - SMALL review: j59.js, jmark.js (kmmAvoid), dev/test/place-banner-scan.js + generated files.
 
 ~100% xong (chờ kiểm) / chơi được sau khi kiểm
+
+## ROLLOVER HANDOVER (worker hit START_CTX+25 % at ~25 % of window; MAIN opens the successor)
+START_CTX ~5 %, now 24.8 % (248k/1M). The d333d638 bake is the OLD pick (superseded twice by the owner, MAIN s43 messages 02:31–03:11Z, OD last lines VERBATIM there). NEW ORDER (read OD last lines):
+1. NO plaque on the stage at all (remove #sc-t panel + j59ease/J59EASE: figures keep TODAY's full size, NO scaling; nothing over her head, marker included).
+2. People-count chip (j59hchip, j59ico/j59hdrCount, kit chip) = TOP of the LEFT button column (V/L/M shifted down a bit).
+3. Place NAME = TOP of the RIGHT column, bigger font (the Hoàng thượng/Thái hậu/Hoàng hậu… cards shift down).
+4. Place-entry lines (j2.js cap/msg: "Hoàng thượng không ra vườn hôm nay", "Thái giám chặn cửa"…) = the SAME small chip the stage already uses at the top for "Tai mắt báo" news (find it: grep "Tai mắt báo" dev/build/*.js; reuse, KIT FIRST; if not a kit part STOP and tell MAIN). Audit every kind of place-entry line: table kind -> where it shows now (blocked at gate / met someone / gain / loss must still show in its result/event card).
+5. Whole group: every place/stage kind, 5 devices (scan script dev/test/place-banner-scan.js exists; add checks: no #sc-t plaque, count chip in left column, name in right column, figTop unchanged vs live main, marker visible).
+6. Branch from live main e24d5838 (my review/place-banner is on f8276cdb + d333d638; rebase/restart: keep j59hdrCount count logic (kitHereCount for every place), the kmmAvoid fix in jmark.js (avoid plaques/chips, hide marker if no room), delete .j59ln/J59EASE parts).
+7. FULL-SCREEN shots only (whole figure head to feet, NEVER crops): Fold 755x1000 + iPad 1180x820, Ngự hoa viên, SAME character/scene/count: live main | yours side by side. Seed the game identically for both builds (same S, same people), look at them, then send MAIN "SHOTS READY" before "SẴN SÀNG KIỂM". Scratch shots /home/user/wt/pb-shots; worktree /home/user/wt/place-banner; handover worktree /home/user/wt/ho-pb; CDN img/_review/place-banner/ (wipe after verdict: python3 dev/site/cdn_sync.py --wipe-review place-banner).
+Learned: scan harness = dev/test/place-banner-scan.js (HOST mode, DEV=fold|ipadAir|ipadPro|pixel|iphone14, PLACES=all|k1,k2, SHOTS=dir); wait for images + ~1.5 s before measuring (marker placement is async, kmmSched); r3 on Fold opens a place-card dialog; bash (not sh) for quickcheck: `bash dev/tools/quickcheck.sh --runs 3`; commit built files (bash dev/site/build_site.sh) or quickcheck says NOT BUILT.
