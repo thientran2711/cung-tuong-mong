@@ -17,7 +17,7 @@ Branch `review/steal-minigame` (from origin/main 550dd1b) — **sha 1c4fe5ad** (
 - `node dev/test/steal-mg-unit.js dev/index.html` (main build): 38/38 PASS, 0 page errors — ladder (each rung +1, cap, order), NPC feign/road win/lose (roll value = rung up / plain, one record per try, token gone), co-op friend no roll, HER doAct steal/road win/lose/skip, HER deck cards win/lose (card odds restored), one try a night → one game, at Nắm chắc no game, save has no new state.
 - `node dev/test/steal-mg-nf.js <url>` on a LOCAL merge with origin/review/balance-chain d9fe15ed (not pushed): 7/7 PASS — her Tranh sủng / Chặn ngự giá in the flip choice won → resolve reads one rung up; lost / skipped → plain; NPC attacker win/lose; stale "mg" → "open". On main prints SKIP.
 - balance-chain's own tests on that merge: night-multi 6/7 (case 2 NPC-vs-NPC FAILS the same WITHOUT jsmg — baseline of the merge with newer main, not this branch); night-final 9 PASS / case 7 FAIL, identical without jsmg (story dialog covers the choice in that run). No regression from jsmg.
-- `steal-mg-unit` re-run on the final site build: 37 PASS lines, 0 FAIL, 0 page errors. No dev/test/quickcheck.sh exists on main (not run).
+- `steal-mg-unit` re-run on the final site build: 37 PASS lines, 0 FAIL, 0 page errors. (Correction in FIX 1: quickcheck is dev/tools/quickcheck.sh — see FIX 1.)
 - Old save: night-steal-oldsave.js (main build save → new build): loads, same name, 6 weeks, 0 errors; its own FAIL line also fails main→main (outdated asserts hasBal/tries), not this branch.
 - NPC chance to win the game (win 5): bậc 0 .36 · 1 .47 · 2 .58 · 3 .69 · 4 .79 · 5 .86 (kg82NpcRaw distribution).
 
@@ -37,3 +37,24 @@ Looked at each. 5 shots per device (intro · Múa running · natural result · w
 
 ## Handover
 Not needed (context well under the rollover line). START_CTX ≈ 3 %.
+
+
+## FIX 1 (after E8r FAIL 1c4fe5ad) — sha ea93a33d
+PRIORITY #1 CHECK: review dev/handover/reports/steal-minigame-review.md + brief briefs/E8f-steal-minigame-fix1.md | jnf.js (balance-chain d9fe15ed) read, NOT changed | claims: E8 this session.
+
+| # | Review point | Fix |
+|---|---|---|
+| 1 BLOCKING | host's game (S.nfX.st "mg") dropped the friend's "ch" (jnf.js:336 takes only "open"); friend timed out by host game time | jsmg adds its own COOP "act" listener: a friend "ch" that arrives while st "mg" sets x.fr itself; when the host's game ends x.myAt restarts (jnf's friend wait counts from then). jnf.js unchanged. |
+| 2 BLOCKING | friend's own game rung never reached the host resolve | GUEST: her pick sends SMG {ph:"mg"} at once; jnf's "ch" (from mine()) is HELD by a COOP.send wrapper until her game ends, then SMG {ph:"up", v, up} goes out, then the held "ch" (same socket → the host has her rung before her choice). HOST: "mg" notice holds jnf's friend wait open (x.myAt kept fresh, max BAL.steal.mg.coopMs = 120000) ; "up" stores FRUP → nfCtxUp gives the friend (a.coop) the token in the one resolve (same oSteal hook, same win/rung/cap). Her «lên Khá chắc» line is now true. |
+| (found) | a REAL (async) game on the jnf path: chooseM renders inside, and the stale-"mg" render reset turned st back to "open" before the game opened → resolve ran without her rung | PEND flag: the reset skips while her pick is being recorded. The old sync test hook hid it; co-op C1 (async game) caught it. |
+| 3 | KIT.md | §13: playArt options documented (rows / rowsHead / go / skip / skipSub / resRows + the old ones), example. |
+| 4 | quickcheck | `bash dev/tools/quickcheck.sh` at ea93a33d: **QUICKCHECK PASS · 122 s · open 1254 ms · old save ok · perf new/live render 157/137, tab 318/302, buổi 701/697 ms, tasks>200ms 11/11 · core gates PASS**. |
+| 5 | «cơ hội» in source | jsmg rows / result / log now write «cơ duyên» (owner quote in the header comment kept verbatim). |
+| 6 | NPC balance | reviewer's probe (branch build, 8 lives, all NPC × mode, 200 rolls): NPC odds Tranh sủng 65.5 → 71.5 effective (game won .52), Chặn ngự giá 56.9 → 62.0 (.45) ≈ +9 % relative more NPC steals. NPC game-win chance by bậc (kg82NpcRaw vs win 5): 0 .36 · 1 .47 · 2 .58 · 3 .69 · 4 .79 · 5 .86. Two-way by design (she wins ~as often at matching skill). No BAL change made; knobs if Foreman E / D want less: BAL.steal.mg.npcP (chance an NPC plays) or BAL.steal.k. |
+| 7 | unit case 7 vacuous | now runs with __bot removed and playArt stubbed: at 93 → playArt not called, at 50 → called once and won. |
+| family | every place the game result crosses co-op | main (no jnf): her deck card / person-menu act run on her own seat (runAct local; co-op thin = local frame then ops sent; jcoopworld ASK invites = ally/gift only) → her token applies on her seat; the host never rolls an NPC game for v.coop. jnf: points 1–2 above. jnf itself still parks co-op (nfParked) today; this is ready for coop-thin E. |
+
+Tests (FIX 1):
+- `steal-mg-unit.js` (main build ea93a33d): 37 PASS, 0 FAIL, 0 page errors.
+- `steal-mg-nf.js` on a LOCAL merge with origin/review/balance-chain d9fe15ed (not pushed): **11/11 PASS** — the 7 earlier + co-op C1 friend picks during host's (async) game → kept, resolved after, host rung on; C2 friend wins her game → her resolve odds one rung up; C3 loses → plain; C4 guest order «mg» → (game) → «up:1» → «ch». Co-op cases lift only jnf's nfParked gate in the test (COOPW.on reads false inside nfParked).
+- quickcheck PASS (above).
