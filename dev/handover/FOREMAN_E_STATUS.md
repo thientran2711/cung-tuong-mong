@@ -12,3 +12,4 @@ FOR MAIN (open): PL #2 AI narrator needs sếp's API key + a cost cap decision b
 - (18/11 05:12Z) E2 DONE b42a7c70 (dev/design/QUESTLINES_AUDIT.md: gaps G1–G6, phases Q0/H1/Q1a-c/Q2/Q3/Q4) → archived. Opening E5 Q0 docs (sonnet) + E6 H1 expert (opus). Next: Q1a/b/c after H1; Q2 after review/npc-chain-land lands (C-AG); Q3 waits D-Q1; Q4 = GE step 5.
 FOR MAIN (open): questline owner decisions (QUESTLINES_AUDIT §6, rec first): D-Q1 a helper she asks answers one of 4 ways — giúp hết lòng / giúp qua loa / từ chối / phá ngầm-mách lẻo, drawn from the helper's traits × tâm cơ × liking (rec) · D-Q2 drop the «xin bạc» help kind she rejected (rec) · D-Q3 NPC identity keeps the house table, GE §2.9 wording fixed (rec). Only Q3 waits on D-Q1.
 - (18/11 05:13Z) E5 Q0 = session_01DgYSWpZXvejYRmdjtJ3Ccz · E6 H1 = session_01DgYSWm57KGQqbv88WBygrf RUNNING. Load 5/12 (E1, E3, E4, E5, E6).
+SẴN SÀNG KIỂM hall-names b5315ff (E3)
