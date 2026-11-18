@@ -521,7 +521,7 @@ B8 SAMPLE c01 a18 t1–t8 colour-only | _review CDN consort-tiers/c01/b7 + hando
 
 M1 emperors emp1..4 a26/a36/a51 | _review CDN men/emperor | C | session_011xDdVQBz2KHs59V8xnTA4S | RUNNING | 2026-11-18T06:05Z
 Audit live consort figures c01–c32 (2K redo / m09 skin) | handover reports/consort-live-audit.md | C | session_011xDdVQBTXU7CBRNL2FPEVf | DONE | 2026-11-18T06:05Z
-| REVIEW lyf-tier 22dac5c (SMALL; sonnet; prompt inline) | review/lyf-tier | MAIN ROOT-46 | session_01UV1SzkwG1gCApRdP2jjZYj | RUNNING | 18/11 06:09Z |
+| REVIEW lyf-tier 22dac5c (SMALL; sonnet; prompt inline) | review/lyf-tier | MAIN ROOT-46 | session_01UV1SzkwG1gCApRdP2jjZYj | PASS 2848c13 (report reports/review-lyf-tier.md) | 18/11 06:09Z |
 | REVIEW buoi-banner 8b50182 (SMALL; keep animation, drop backdrop; owner opacity pick in the morning) | review/buoi-banner | MAIN ROOT-46 | session_01UV1SzgYgbwU8fMtXp6MSMc | DONE PASS ece0403 (superseded); round 2 superseded; FINAL: PASS 68d240d (review/buoi-banner-r8, ff of main 4cb3a9e) | 18/11 06:10Z |
 | REVIEW face-reveal-anim 8f5ea90 (SMALL; sonnet; prompt inline) | review/face-reveal-anim | MAIN ROOT-46 | session_01UV1SzimcXuUf9Ahi1zHTBi | PASS 97de885 | 18/11 06:13Z |
 | look-fx-wire #7 (real-game shots, c30/daumua/poxscar 3x, veil halo, mồ hôi; sonnet; briefs/look-fx-wire-7.md; #6 Szj7AXE stopped) | review/look-fx-wire | MAIN ROOT-46 | session_01UV1Szhm9U5aM2PN8e5HgtG | RUNNING | 18/11 06:15Z |
