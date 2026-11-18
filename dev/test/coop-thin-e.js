@@ -46,11 +46,13 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  await G.p.evaluate(()=>{window.__sent=[];const s=COOP.send;COOP.send=function(m){try{window.__sent.push(m.t==='act'?'act:'+m.k+':'+(m.mode||''):m.t==='do'?'do:'+m.op:m.t)}catch(e){}return s.apply(this,arguments)}});
  for(let i=0;i<4;i++){await clear(H);await clear(G);await sleep(300)}
  const st=async o=>o.p.evaluate(()=>({w:COOP.state.week,b:S.buoi||0,bac:S.bac,lg:(S.logs||[]).length,dis:document.getElementById('next').disabled,nt:document.getElementById('next').textContent,E:JSON.parse(JSON.stringify(COOPW.thin.E.stat))}));
+ /* review r1: the setup week's last press can land after the week turned (her ready for the NEW week's buổi): let the host step that one first */
+ if(await G.p.evaluate(()=>!!(COOPW.eAsked&&COOPW.eAsked()))){const b0=await G.p.evaluate(()=>S.buoi||0);console.log('setup left her ready: one host step first');await press(H);await until(G,b=>(S.buoi||0)!==b,b0,20000);for(let i=0;i<3;i++){await clear(H);await clear(G);await sleep(300)}}
  const h0=await st(H),g0=await st(G);
  /* E4 setup: her own change this buổi */
  await G.p.evaluate(()=>{S.bac=(S.bac||0)+7;window.__mark='E-test-'+Date.now();(S.logs=S.logs||[]).unshift({t:window.__mark});render()});
  const gb=g0.bac+7;
- ok(await press(G),'E2 guest pressed Sẵn sàng');await sleep(2500);
+ {const pg=await press(G);ok(pg,'E2 guest pressed Sẵn sàng',pg?undefined:await G.p.evaluate(()=>{const n=document.getElementById('next');const W=COOPW;return {dis:n.disabled,cw:n.dataset.coopWait,nt:n.textContent,Q:Q.map(q=>q.t),mg:!!S.mg,dead:!!S.dead,modal:(document.getElementById('modal')||{}).hidden,eWait:W.eWait&&W.eWait(),wait:W.isWaiting(),fz:W.isFrozen(),pend:W.pend,base:!!W.base,inLife:W.inLife,mine:W.thin.E.mine,b:S.buoi,w:COOP.state.week,ov:[...document.querySelectorAll('.krbox,#kroul,#title')].filter(e=>e.offsetParent!==null).map(e=>e.id||e.className).slice(0,4),log:W.thin.E.log.slice(-6)}}))}await sleep(2500);
  const g1=await st(G),h1=await st(H);
  ok(g1.b===g0.b&&h1.b===h0.b,'E2 her ready alone steps nobody',[g0.b,g1.b,h0.b,h1.b]);
  ok(g1.dis===true,'E2 her #next locked while she waits',g1.nt);
