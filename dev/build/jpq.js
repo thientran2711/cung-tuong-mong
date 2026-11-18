@@ -128,7 +128,7 @@ function pqLine(who,k,X){const P=PGX[k],Q=BAL.pq;const won=k==="hacdinh"?`${PQ_N
   d.t=String(d.t).replace("Hoàng thượng và Thái hậu luôn có người nếm thử, không thể.","Hoàng thượng và Thái hậu luôn có người nếm thử: chỉ khi có nguyên cớ mới dám, bị lần ra là tội chết, nhà mẹ đẻ liên lụy.");
   const R=[];for(const who of ["emp","th"]){if(who==="th"&&S.thDead)continue;const M=pqMotive(S,who);
    for(const k of pqKinds(S)){const vgC=M.ok&&M.road==="vg";const X=pqOdds(S,who,e,k,vgC||!!(S.heir&&S.heir.k&&S.heir.k.alive&&!S.heir.v));
-    const O={n:`${PGX[k].n} vào ${dn} dâng ${PQ_N[who]}`,fx:{},x:pqLine(who,k,X),o:X.o,base:BAL.pg.base,why:()=>pqOdds(S,who,e,k).F,
+    const O={n:`${PGX[k].n} vào ${dn} dâng ${PQ_N[who]}`,fx:{},kgt:who/* kit: the target's own portrait (jopic kitOptPic), like every other target row */,x:pqLine(who,k,X),o:X.o,base:BAL.pg.base,why:()=>pqOdds(S,who,e,k).F,
      go:()=>{spend(BAL.pq.khac);const i=S.inv.indexOf(e);const r=pqGive(S,who,i,k);if(r&&!S.dead){log(r);Q.push({t:`Dâng món lên ${PQ_N[who]}`,who:who==="emp"?pEmp():pTH(),h:`<p>${r}</p>`})}}};
     if(!M.ok)kitOff(O,M.miss,"mở khi có nguyên cớ");R.push(O)}}
   if(R.length){const i=d.o.findIndex(o=>o&&o.n==="Thôi");d.o.splice(i<0?d.o.length:i,0,...R)}}catch(x){console.error("pq pick",x)}return d}})();
