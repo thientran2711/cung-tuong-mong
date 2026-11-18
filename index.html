@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"29385ec6+","t":"2026-11-18T02:07Z","c":"greet-stranger: site rebuilt","b":"31d3d575ce56","h":[{"s":"3b69182e","t":"2026-11-18T01:50Z","c":"hoa-dien r3 onto main 3da5720a (makeup-lux live): hoa-dien (jhd.js + hooks) replayed on the new main, replacing the old stacked branch. Sha…"},{"s":"631a703e","t":"2026-11-18T01:37Z","c":"review staff-cap-fix r6: hire pick refused at the cap gives the silver back (+ staff-cap.js case); site rebuilt"},{"s":"4cdcffa9+","t":"2026-11-18T00:44Z","c":"review looks-s40: site rebuilt from merged sources (glow v8)"},{"s":"eb3675a6+","t":"2026-11-17T22:59Z","c":"review coop-thin-c r1 #2: merge origin/main b048e495 (kit-display-room r2, jdisp/jshelf only; generated files from main + site rebuilt)"},{"s":"4eac30bc+","t":"2026-11-17T22:57Z","c":"review coop-thin-c r1 #2: her NPC pack resend (F1) listens on any guest seat, not only while the C switch is on: a level drop / build hold …"},{"s":"c7375c0c+","t":"2026-11-17T22:33Z","c":"batch s38a: dudo-blank-r1 2270c4c5 merged onto main 99f3978d; site rebuilt"},{"s":"99f3978d+","t":"2026-11-17T21:07Z","c":"batch s37a: display-shelf-r3rv 41418cd8 merged onto main 4c8568f5; site rebuilt"},{"s":"4c8568f5+","t":"2026-11-17T20:30Z","c":"batch s36a: main 60b0e3bf (display-shelf) merged; jdisp gated on BAL.shelf.ui (=0, room hidden); site rebuilt"},{"s":"da86e866","t":"2026-11-17T20:29Z","c":"Thẻ hành sự chia hai khối THÀNH và BẠI cho rõ được mất; khung dài có chữ \"Kéo xuống\" nhắc còn nữa; thẻ người chỉ ghi tước vị một lần, không…"},{"s":"9c6292d3+","t":"2026-11-17T20:17Z","c":"review display-shelf r2: Thái hậu rebuke through the one stat path ap (favour runs -100..100; cl(...,0,100) RAISED a negative favour to 0);…"}]};
+window.CTM_BI={"s":"f6d2e63f+","t":"2026-11-18T02:30Z","c":"place-banner: count chip for every place, one plaque, marker never over the banner; options A/B/C (review switch window.j59pb)","b":"218acda8e01b","h":[{"s":"29385ec6+","t":"2026-11-18T02:07Z","c":"greet-stranger: site rebuilt"},{"s":"3b69182e","t":"2026-11-18T01:50Z","c":"hoa-dien r3 onto main 3da5720a (makeup-lux live): hoa-dien (jhd.js + hooks) replayed on the new main, replacing the old stacked branch. Sha…"},{"s":"631a703e","t":"2026-11-18T01:37Z","c":"review staff-cap-fix r6: hire pick refused at the cap gives the silver back (+ staff-cap.js case); site rebuilt"},{"s":"4cdcffa9+","t":"2026-11-18T00:44Z","c":"review looks-s40: site rebuilt from merged sources (glow v8)"},{"s":"eb3675a6+","t":"2026-11-17T22:59Z","c":"review coop-thin-c r1 #2: merge origin/main b048e495 (kit-display-room r2, jdisp/jshelf only; generated files from main + site rebuilt)"},{"s":"4eac30bc+","t":"2026-11-17T22:57Z","c":"review coop-thin-c r1 #2: her NPC pack resend (F1) listens on any guest seat, not only while the C switch is on: a level drop / build hold …"},{"s":"c7375c0c+","t":"2026-11-17T22:33Z","c":"batch s38a: dudo-blank-r1 2270c4c5 merged onto main 99f3978d; site rebuilt"},{"s":"99f3978d+","t":"2026-11-17T21:07Z","c":"batch s37a: display-shelf-r3rv 41418cd8 merged onto main 4c8568f5; site rebuilt"},{"s":"4c8568f5+","t":"2026-11-17T20:30Z","c":"batch s36a: main 60b0e3bf (display-shelf) merged; jdisp gated on BAL.shelf.ui (=0, room hidden); site rebuilt"},{"s":"da86e866","t":"2026-11-17T20:29Z","c":"Thẻ hành sự chia hai khối THÀNH và BẠI cho rõ được mất; khung dài có chữ \"Kéo xuống\" nhắc còn nữa; thẻ người chỉ ghi tước vị một lần, không…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -8022,8 +8022,19 @@ function j59person(p){return !!p&&p.kind!=="chest"&&p.kind!=="task"&&!(p.kind===
 function j59ico(){return `<img class="j59ico" src="https://ctm-img.victoria-tntt.workers.dev/img/kit/unknown-ico-n.webp" alt="" draggable="false">`}
 function j59chipIco(n){return j59ico()+`<span class="j59n">+${n}</span>`}
 /* place header (every place with people): "Ở đây còn N người." -> [icon] N (the rest of a longer stage line is kept); "Không gặp ai." stays text */
-function j59hdrCount(){try{const m=document.querySelector("#sc-t .rmsg");if(!m||m.dataset.j59h===m.innerHTML)return;const t=m.innerHTML;const r=/^\s*·?\s*Ở đây (?:có|còn) (\d+) người\.?\s*/.exec(t);if(!r)return;
-  m.innerHTML=` <span class="kchip n j59hchip">${j59ico()}<span class="j59n">${r[1]}</span></span>`+(t.length>r[0].length?" · "+t.slice(r[0].length):"");m.classList.add("j59hc");m.setAttribute("aria-label",`Ở đây còn ${r[1]} người`);m.dataset.j59h=m.innerHTML}catch(e){}}
+function j59hdrCount(){try{const m=document.querySelector("#sc-t .rmsg");if(!m)return;const t0=m.dataset.j59t!=null?m.dataset.j59t:m.innerHTML;if(m.dataset.j59h===m.innerHTML&&m.dataset.j59t===t0)return;
+  /* place-banner (owner 18/11): ONE plaque. Line 1 = place icon + name + head-count chip (never wraps); line 2 = the happening line, always on its own line inside the same plaque.
+     The count belongs to EVERY place with people, whatever the stage line says: the number is the ONE head count kitHereCount(), the line keeps the rest */
+  const r=/^\s*·?\s*Ở đây (?:có|còn) (\d+) người\.?\s*/.exec(t0);const n=r?+r[1]:kitHereCount();const rest=(r?t0.slice(r[0].length):t0).replace(/^\s*·\s*/,"").trim();
+  m.dataset.j59t=t0;m.innerHTML=(n>0?` <span class="kchip n j59hchip">${j59ico()}<span class="j59n">${n}</span></span>`:"")+(rest?`<span class="j59ln">${rest}</span>`:"");m.classList.add("j59hc");if(n>0)m.setAttribute("aria-label",`Ở đây còn ${n} người`);m.dataset.j59h=m.innerHTML}catch(e){}}
+/* place-banner (owner 18/11): her head + her marker (kmemark) must clear the ONE place plaque: the figures are eased up just as much as needed (never below .8 of KIT_FIG; if the plaque is still too tall the marker hides, see kmmAvoid) */
+const J59EASE={min:.8,room:36};
+function j59ease(){try{const st=document.getElementById("stage");if(!st)return;const els=[...st.querySelectorAll("#tokens .tok.fig,#mefig")];els.forEach(e=>{e.style.scale="";e.style.transformOrigin=""});const mt=document.getElementById("j59metag");if(mt)mt.style.translate="";
+ const t=document.getElementById("sc-t");const R=st.getBoundingClientRect();const tb=t&&t.offsetParent?t.getBoundingClientRect().bottom-R.top+J59EASE.room:0;
+ const f=[...st.querySelectorAll("#tokens .tok.fig .figimg,#mefig")].filter(e=>e.offsetParent&&e.getBoundingClientRect().width>2);if(!f.length||!tb)return;
+ const top=Math.min(...f.map(e=>e.getBoundingClientRect().top-R.top)),bot=Math.max(...f.map(e=>e.getBoundingClientRect().bottom-R.top));if(top>=tb)return;
+ const sc=Math.max(J59EASE.min,(bot-tb)/(bot-top));els.forEach(e=>{e.style.transformOrigin="50% 100%";e.style.scale=sc.toFixed(3)});
+ try{if(typeof kmmSched==="function")kmmSched()}catch(e){}const me=document.getElementById("mefig");if(mt&&me&&me.offsetParent)mt.style.translate="0 "+(-(1-sc)*me.getBoundingClientRect().height).toFixed(0)+"px"}catch(e){}}
 function j59chips(st,R,P,again){/* morechip-fix: placed once now and once more on the next frame, after the side column (k3Stage) has its full height */if(!again)requestAnimationFrame(()=>{try{if(st.isConnected)j59chips(st,R,P,1)}catch(e){}});/* KIT 33.9 swipe stage: P: {pg, pages, before, after, xl, xr}. NO arrow buttons — two "+N" chips in the top corners of the backdrop: LEFT = people already passed (left of the view), RIGHT = people still to come; hidden at 0. Pure kit chip, not tappable (the row is swiped) */
  for(const side of ["l","r"]){let c=st.querySelector(".j59more.j59m"+side);const n=P&&P.pages>1?(side==="r"?P.after:P.before):0;
   if(!(n>0)){if(c)c.remove();continue}
@@ -8214,7 +8225,11 @@ const css=document.createElement("style");css.textContent=`
 /* morechip-corners: the big kit chip (KIT 33.9): readable at Fold 755 */
 .kchip.j59more{display:flex;align-items:center;gap:3px;font-size:1.05rem;line-height:1.2;padding:3px 9px 3px 6px;border-radius:16px;border-width:2px;margin:0;box-shadow:0 2px 6px rgba(60,30,10,.28);background:#fff8ee}
 .kchip.j59more .j59ico{height:1.7rem;width:auto;display:block;flex:none;pointer-events:none;user-select:none}
-html body .stage #sc-t h2 .rt1{display:inline-block!important;padding:1px 10px;border:2px solid var(--line,#8a6a3a);border-radius:14px;background:#fff8ee;box-shadow:0 2px 6px rgba(60,30,10,.28);text-shadow:none!important;vertical-align:middle}.rmsg.j59hc{white-space:nowrap!important}.kchip.j59hchip{display:inline-flex;align-items:center;gap:3px;padding:1px 9px 1px 6px;border-radius:14px;border-width:2px;margin:0 0 0 4px;vertical-align:middle;font-size:1rem;font-weight:700;line-height:1.2;background:#fff8ee;box-shadow:0 2px 6px rgba(60,30,10,.28);color:var(--ink,#3a2a1a)}.kchip.j59hchip .j59ico{height:1.5rem;width:auto;display:block;flex:none}
+/* place-banner (owner 18/11): ONE plaque for the place header. The place name is plain bold text ON the panel (no chip on chip), the place icon is one text line high, the count chip is the only chip */
+html body .stage #sc-t h2 .rt1{display:inline!important;padding:0!important;border:0!important;border-radius:0!important;background:none!important;box-shadow:none!important;font-weight:800;font-size:1.05rem}
+html body .stage #sc-t h2>.kplic{display:inline-block!important;width:1.5rem!important;height:1.5rem!important;margin:0 5px 0 0!important;vertical-align:middle;flex:none}
+html body .stage #sc-t h2:has(>.kplic){display:block!important;text-align:left}
+.rmsg.j59hc{white-space:nowrap!important}html body .stage #sc-t h2 .rmsg.j59hc .j59ln{display:block!important;white-space:normal!important;margin-top:1px;max-width:100%}.kchip.j59hchip{display:inline-flex;align-items:center;gap:3px;padding:1px 9px 1px 6px;border-radius:14px;border-width:2px;margin:0 0 0 4px;vertical-align:middle;font-size:1rem;font-weight:700;line-height:1.2;background:#fff8ee;box-shadow:0 2px 6px rgba(60,30,10,.28);color:var(--ink,#3a2a1a)}.kchip.j59hchip .j59ico{height:1.5rem;width:auto;display:block;flex:none}
 .stage.j59 #mefig,.stage.j59 #j59metag,.stage.j59 #tokens,.stage.j59 .kspet{translate:var(--j59dx,0px) 0;transition:var(--j59tr,none);will-change:translate}
 .stage.j59{touch-action:pan-y}
 .stage.j59 #mefig,.stage.j59 #tokens img{-webkit-user-drag:none;user-select:none}
@@ -8309,7 +8324,7 @@ function kitHereMsg(){try{const V=S&&S.visit;if(!V)return;const m=String(V.msg||
     the record can bring people in after the line was written) */
  if(m&&!/^(Ở đây (có|còn) \d+ người\.?|Không gặp ai\.?)$/.test(m)){if(/^Ở đây (có|còn) \d+ người\./.test(m)&&n)V.msg=m.replace(/^Ở đây (có|còn) \d+ người\./,`Ở đây còn ${n} người.`);return}
  V.msg=n?`Ở đây còn ${n} người.`:"Không gặp ai."}catch(e){}}
-const r0=renderStage;renderStage=function(){j59CourtNames();kitHereMsg();const r=r0.apply(this,arguments);try{j59lay()}catch(e){}j59hdrCount();return r};
+const r0=renderStage;renderStage=function(){j59CourtNames();kitHereMsg();const r=r0.apply(this,arguments);try{j59lay()}catch(e){}j59hdrCount();j59ease();if(!window.__j59eT){window.__j59eT=1;/* figures/pictures settle after the first frame: measure again */requestAnimationFrame(()=>{try{j59ease()}catch(e){}});setTimeout(()=>{try{j59ease()}catch(e){}window.__j59eT=0},700)}return r};
 /* every module has wrapped countAt by the time the game runs: the outermost wrap answers her own place from the stage itself */
 /* the maid road (j42 srvVisitOf) fills a place by its own rules: the same rules count its other places for the Dư đồ, so the
    number on the map is the number she meets on arrival (audit: dev/test/stage-counts.js) */
@@ -44542,7 +44557,7 @@ function kmmHead(src,cb){const o=KMM_HEAD[src];if(o&&o.v)return o.v;if(o){o.w.pu
 function kitMeMapMark(){try{const r=kmmCur();if(r==null)return"";return `<span class="kmmapmk${kmmMotion()?" kmmove":""}" aria-hidden="true" style="--kmm-mapsc:${((KIT_MEMARK.sc[r]||1)*(KIT_MEMARK.big||1)).toFixed(3)}"><img alt="" draggable="false" src="${kmmSrc(r)}" onerror="this.parentNode.style.display='none'"></span>`}catch(e){return""}}
 function kmmMotion(){try{if(matchMedia("(prefers-reduced-motion: reduce)").matches)return false;return!(typeof OPT!=="undefined"&&OPT&&OPT.fxon===false)}catch(e){return false}}
 function kmmIsMe(fig){return!!fig&&(fig.id==="mefig"||!!fig.closest(".kesme"))}
-function kmmAvoid(){const L=[];document.querySelectorAll("#sc-t h2,#kshL,#kshR,.k3chips,.kchip,.kmnote,#j59metag .tag").forEach(e=>{const r=e.getBoundingClientRect();if(r.width>0&&r.height>0)L.push(r)});return L}
+function kmmAvoid(){const L=[];document.querySelectorAll("#sc-t,#kshL,#kshR,.k3chips,.kchip,.kmnote,#j59metag .tag").forEach(e=>{const r=e.getBoundingClientRect();if(r.width>0&&r.height>0)L.push(r)});return L}
 /* the drawn picture box inside an <img> (object-fit: contain) */
 function kmmBox(fig){const fr=fig.getBoundingClientRect();let bx=fr.left,by=fr.top,bw=fr.width,bh=fr.height;const nw=fig.naturalWidth,nh=fig.naturalHeight;
  if(nw&&nh){const ar=nw/nh;if(bw/bh>ar){const w=bh*ar;bx+=(bw-w)/2;bw=w}else{const h=bw/ar;by+=(bh-h)/2;bh=h}}return{bx,by,bw,bh}}
@@ -44559,8 +44574,8 @@ function kitMeMark(fig){try{
  const cx=B.bx+B.bw*hd.x,headTop=B.by+B.bh*hd.t,gap=Math.max(1,B.bh*K.gap),bottom=headTop-gap;
  /* room above the head: the host's top edge, and anything the marker must not cover (scene title, plaques, chips) */
  /* dialogs: the room above the figure is the figure column (the free space over the head inside the dialog), not just the figure box */
- let roomTop=hr.top+1;const col=fig.id==="mefig"?null:fig.closest(".kesf");if(col){const cb=(col.parentElement||col).getBoundingClientRect();roomTop=Math.min(roomTop,cb.top+2)}for(const q of kmmAvoid()){const W=H*ar;if(cx+W/2>q.left&&cx-W/2<q.right&&q.bottom<=bottom&&q.bottom>roomTop-1)roomTop=Math.max(roomTop,q.bottom+1)}
- if(bottom-roomTop<H)H=Math.max(K.tiny,Math.floor(bottom-roomTop));
+ let roomTop=hr.top+1;const col=fig.id==="mefig"?null:fig.closest(".kesf");if(col){const cb=(col.parentElement||col).getBoundingClientRect();roomTop=Math.min(roomTop,cb.top+2)}for(const q of kmmAvoid()){const W=H*ar;if(cx+W/2>q.left&&cx-W/2<q.right&&q.bottom>roomTop-1&&q.top<bottom)roomTop=Math.max(roomTop,q.bottom+1)}/* place-banner (owner 18/11): the marker never covers the stage plaque, even when her head already stands under it */
+ if(bottom-roomTop<H)H=Math.floor(bottom-roomTop);if(H<K.tiny){mk.style.visibility="hidden";return mk}mk.style.visibility="";
  const W=Math.round(H*ar),top=bottom-H;
  mk.style.cssText=`left:${(cx-hr.left-W/2+host.scrollLeft).toFixed(1)}px;top:${(top-hr.top+host.scrollTop).toFixed(1)}px;width:${W}px;height:${H}px`;
  mk.dataset.r=r;mk.dataset.gap=(headTop-(top+H)).toFixed(1);mk.classList.toggle("kmmove",kmmMotion());return mk}catch(e){console.error("kitMeMark",e);return null}}
@@ -67295,7 +67310,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="31d3d575ce56";window.CTM_BUILD=BUILD;
+const BUILD="218acda8e01b";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

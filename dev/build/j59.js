@@ -85,23 +85,18 @@ function j59ico(){return `<img class="j59ico" src="img/kit/unknown-ico-n.webp" a
 function j59chipIco(n){return j59ico()+`<span class="j59n">+${n}</span>`}
 /* place header (every place with people): "Ở đây còn N người." -> [icon] N (the rest of a longer stage line is kept); "Không gặp ai." stays text */
 function j59hdrCount(){try{const m=document.querySelector("#sc-t .rmsg");if(!m)return;const t0=m.dataset.j59t!=null?m.dataset.j59t:m.innerHTML;if(m.dataset.j59h===m.innerHTML&&m.dataset.j59t===t0)return;
-  /* place-banner (owner 18/11): the count belongs to EVERY place with people, whatever the stage line says (Ngự hoa viên "Hoa nở rộ…", empty-palace lines…): the number is the ONE head count kitHereCount(), the line keeps the rest */
-  const r=/^\s*·?\s*Ở đây (?:có|còn) (\d+) người\.?\s*/.exec(t0);const n=r?+r[1]:kitHereCount();const rest=r?t0.slice(r[0].length):t0.replace(/^\s*·\s*/,"");if(!(n>0))return;
-  m.dataset.j59t=t0;m.innerHTML=` <span class="kchip n j59hchip">${j59ico()}<span class="j59n">${n}</span></span>`+(rest.trim()?" · "+rest:"");m.classList.add("j59hc");m.setAttribute("aria-label",`Ở đây còn ${n} người`);m.dataset.j59h=m.innerHTML}catch(e){}}
-/* place-banner OPTIONS (review only; the chosen one gets baked in, the rest deleted): window.j59pb("A"|"B"|"C"|"") */
-function j59pbApply(){try{const o=document.documentElement.dataset.pb||"";const st=document.getElementById("stage");if(!st)return;
- let ln=st.querySelector(".j59line");const m=document.querySelector("#sc-t .rmsg");
- if(o==="B"&&m){let txt="";for(const k of m.childNodes){if(k.nodeType===1&&k.classList.contains("j59hchip"))continue;txt+=k.textContent}txt=txt.replace(/^\s*·\s*/,"").trim()||(ln?ln.textContent:"");
-  if(txt){if(!ln){ln=document.createElement("div");ln.className="j59line";st.appendChild(ln)}ln.textContent=txt;[...m.childNodes].forEach(k=>{if(!(k.nodeType===1&&k.classList.contains("j59hchip")))k.remove()});m.dataset.j59h=m.innerHTML}else if(ln)ln.remove()}else if(ln)ln.remove();
- if(o==="B"&&ln){const R=st.getBoundingClientRect();const tg=[...st.querySelectorAll(".tok .tag,#j59metag .tag")].filter(g=>g.offsetParent&&g.getBoundingClientRect().width>2);ln.style.bottom=(tg.length?Math.max(6,R.bottom-Math.min(...tg.map(g=>g.getBoundingClientRect().top))+6):6).toFixed(0)+"px"}
- const els=[...st.querySelectorAll("#tokens .tok.fig,#mefig,#j59metag")];els.forEach(e=>{e.style.scale="";e.style.transformOrigin="";e.style.translate=""});
- if(o==="A"||o==="B"||o==="C"){const t=document.getElementById("sc-t");const R=st.getBoundingClientRect();const tb=t&&t.offsetParent?t.getBoundingClientRect().bottom-R.top+42:0;/* +36 px = room for her marker above the head */
-  const f=[...st.querySelectorAll("#tokens .tok.fig .figimg,#mefig")].filter(e=>e.offsetParent&&e.getBoundingClientRect().width>2);if(!f.length||!tb)return;
-  const top=Math.min(...f.map(e=>e.getBoundingClientRect().top-R.top)),bot=Math.max(...f.map(e=>e.getBoundingClientRect().bottom-R.top));if(top>=tb)return;
-  const sc=Math.max(o==="C"?.6:.88,(bot-tb)/(bot-top));
-  st.querySelectorAll("#tokens .tok.fig,#mefig").forEach(e=>{e.style.transformOrigin="50% 100%";e.style.scale=sc.toFixed(3)});
-  try{if(typeof kmmSched==="function")kmmSched()}catch(e){}const mt=document.getElementById("j59metag"),me=document.getElementById("mefig");if(mt&&me&&me.offsetParent){mt.style.translate="0 "+(-(1-sc)*me.getBoundingClientRect().height).toFixed(0)+"px"}}}catch(e){}}
-window.j59pb=function(o){document.documentElement.dataset.pb=o||"";j59pbApply()};
+  /* place-banner (owner 18/11): ONE plaque. Line 1 = place icon + name + head-count chip (never wraps); line 2 = the happening line, always on its own line inside the same plaque.
+     The count belongs to EVERY place with people, whatever the stage line says: the number is the ONE head count kitHereCount(), the line keeps the rest */
+  const r=/^\s*·?\s*Ở đây (?:có|còn) (\d+) người\.?\s*/.exec(t0);const n=r?+r[1]:kitHereCount();const rest=(r?t0.slice(r[0].length):t0).replace(/^\s*·\s*/,"").trim();
+  m.dataset.j59t=t0;m.innerHTML=(n>0?` <span class="kchip n j59hchip">${j59ico()}<span class="j59n">${n}</span></span>`:"")+(rest?`<span class="j59ln">${rest}</span>`:"");m.classList.add("j59hc");if(n>0)m.setAttribute("aria-label",`Ở đây còn ${n} người`);m.dataset.j59h=m.innerHTML}catch(e){}}
+/* place-banner (owner 18/11): her head + her marker (kmemark) must clear the ONE place plaque: the figures are eased up just as much as needed (never below .8 of KIT_FIG; if the plaque is still too tall the marker hides, see kmmAvoid) */
+const J59EASE={min:.8,room:36};
+function j59ease(){try{const st=document.getElementById("stage");if(!st)return;const els=[...st.querySelectorAll("#tokens .tok.fig,#mefig")];els.forEach(e=>{e.style.scale="";e.style.transformOrigin=""});const mt=document.getElementById("j59metag");if(mt)mt.style.translate="";
+ const t=document.getElementById("sc-t");const R=st.getBoundingClientRect();const tb=t&&t.offsetParent?t.getBoundingClientRect().bottom-R.top+J59EASE.room:0;
+ const f=[...st.querySelectorAll("#tokens .tok.fig .figimg,#mefig")].filter(e=>e.offsetParent&&e.getBoundingClientRect().width>2);if(!f.length||!tb)return;
+ const top=Math.min(...f.map(e=>e.getBoundingClientRect().top-R.top)),bot=Math.max(...f.map(e=>e.getBoundingClientRect().bottom-R.top));if(top>=tb)return;
+ const sc=Math.max(J59EASE.min,(bot-tb)/(bot-top));els.forEach(e=>{e.style.transformOrigin="50% 100%";e.style.scale=sc.toFixed(3)});
+ try{if(typeof kmmSched==="function")kmmSched()}catch(e){}const me=document.getElementById("mefig");if(mt&&me&&me.offsetParent)mt.style.translate="0 "+(-(1-sc)*me.getBoundingClientRect().height).toFixed(0)+"px"}catch(e){}}
 function j59chips(st,R,P,again){/* morechip-fix: placed once now and once more on the next frame, after the side column (k3Stage) has its full height */if(!again)requestAnimationFrame(()=>{try{if(st.isConnected)j59chips(st,R,P,1)}catch(e){}});/* KIT 33.9 swipe stage: P: {pg, pages, before, after, xl, xr}. NO arrow buttons — two "+N" chips in the top corners of the backdrop: LEFT = people already passed (left of the view), RIGHT = people still to come; hidden at 0. Pure kit chip, not tappable (the row is swiped) */
  for(const side of ["l","r"]){let c=st.querySelector(".j59more.j59m"+side);const n=P&&P.pages>1?(side==="r"?P.after:P.before):0;
   if(!(n>0)){if(c)c.remove();continue}
@@ -296,11 +291,7 @@ const css=document.createElement("style");css.textContent=`
 html body .stage #sc-t h2 .rt1{display:inline!important;padding:0!important;border:0!important;border-radius:0!important;background:none!important;box-shadow:none!important;font-weight:800;font-size:1.05rem}
 html body .stage #sc-t h2>.kplic{display:inline-block!important;width:1.5rem!important;height:1.5rem!important;margin:0 5px 0 0!important;vertical-align:middle;flex:none}
 html body .stage #sc-t h2:has(>.kplic){display:block!important;text-align:left}
-html[data-pb="A"] body .stage #sc-t{background:none!important;border:0!important;box-shadow:none!important;backdrop-filter:none!important}
-html[data-pb="A"] body .stage #sc-t h2,html[data-pb="A"] body .stage #sc-t h2 *:not(.kchip):not(.kchip *){text-shadow:0 0 2px #fff8ee,0 0 5px #fff8ee,0 0 10px #fff8ee,0 0 14px #fff8eecc!important}
-html[data-pb="B"] body .stage #sc-t .rmsg>.j59hchip~*{display:none}
-.stage .j59line{position:absolute;z-index:3;left:76px;right:76px;bottom:6px;margin:0 auto;width:max-content;max-width:calc(100% - 152px);padding:3px 10px;background:var(--k3pl,#fff8ee);border:1px solid var(--line,#8a6a3a);border-radius:8px;box-shadow:0 1px 4px #3a20101f;font-size:.88rem;font-weight:600;line-height:1.25;color:#3a1d10;text-align:center;pointer-events:none}
-.rmsg.j59hc{white-space:nowrap!important}.kchip.j59hchip{display:inline-flex;align-items:center;gap:3px;padding:1px 9px 1px 6px;border-radius:14px;border-width:2px;margin:0 0 0 4px;vertical-align:middle;font-size:1rem;font-weight:700;line-height:1.2;background:#fff8ee;box-shadow:0 2px 6px rgba(60,30,10,.28);color:var(--ink,#3a2a1a)}.kchip.j59hchip .j59ico{height:1.5rem;width:auto;display:block;flex:none}
+.rmsg.j59hc{white-space:nowrap!important}html body .stage #sc-t h2 .rmsg.j59hc .j59ln{display:block!important;white-space:normal!important;margin-top:1px;max-width:100%}.kchip.j59hchip{display:inline-flex;align-items:center;gap:3px;padding:1px 9px 1px 6px;border-radius:14px;border-width:2px;margin:0 0 0 4px;vertical-align:middle;font-size:1rem;font-weight:700;line-height:1.2;background:#fff8ee;box-shadow:0 2px 6px rgba(60,30,10,.28);color:var(--ink,#3a2a1a)}.kchip.j59hchip .j59ico{height:1.5rem;width:auto;display:block;flex:none}
 .stage.j59 #mefig,.stage.j59 #j59metag,.stage.j59 #tokens,.stage.j59 .kspet{translate:var(--j59dx,0px) 0;transition:var(--j59tr,none);will-change:translate}
 .stage.j59{touch-action:pan-y}
 .stage.j59 #mefig,.stage.j59 #tokens img{-webkit-user-drag:none;user-select:none}
@@ -395,7 +386,7 @@ function kitHereMsg(){try{const V=S&&S.visit;if(!V)return;const m=String(V.msg||
     the record can bring people in after the line was written) */
  if(m&&!/^(Ở đây (có|còn) \d+ người\.?|Không gặp ai\.?)$/.test(m)){if(/^Ở đây (có|còn) \d+ người\./.test(m)&&n)V.msg=m.replace(/^Ở đây (có|còn) \d+ người\./,`Ở đây còn ${n} người.`);return}
  V.msg=n?`Ở đây còn ${n} người.`:"Không gặp ai."}catch(e){}}
-const r0=renderStage;renderStage=function(){j59CourtNames();kitHereMsg();const r=r0.apply(this,arguments);try{j59lay()}catch(e){}j59hdrCount();j59pbApply();return r};
+const r0=renderStage;renderStage=function(){j59CourtNames();kitHereMsg();const r=r0.apply(this,arguments);try{j59lay()}catch(e){}j59hdrCount();j59ease();if(!window.__j59eT){window.__j59eT=1;/* figures/pictures settle after the first frame: measure again */requestAnimationFrame(()=>{try{j59ease()}catch(e){}});setTimeout(()=>{try{j59ease()}catch(e){}window.__j59eT=0},700)}return r};
 /* every module has wrapped countAt by the time the game runs: the outermost wrap answers her own place from the stage itself */
 /* the maid road (j42 srvVisitOf) fills a place by its own rules: the same rules count its other places for the Dư đồ, so the
    number on the map is the number she meets on arrival (audit: dev/test/stage-counts.js) */
