@@ -792,11 +792,12 @@ def build_trieu(c,t,v="v0"):
         sp=SH_OLD5
         edge=TRIEU_EDGE[t]+" (the exact shoulder-piece design of the rank-5 consort)" if t==7 else TRIEU_EDGE[t]+"; "+SH_OLD5_VAR
     s=PRE+f" An imperial consort{', the Empress' if t==8 else ''}. Her face: {face}. From the identity reference keep ONLY her face, facial features and hairstyle colour; do NOT copy the outfit, hair ornaments or accessories of the reference, dress her in the NEW outfit below. The style reference image is only for skin, drawing style, fabric and embroidery: never copy its face, body or pose. {AGE_TXT[AGE]}"
-    robe=f"{gc} mixed with {mc}" if t==8 else mc
+    robe="golden yellow silk mixed with coral red" if t==8 else mc   # t8 colour words as in the HH prompt; exact yellow in COLOUR RULE
+    if t>=7: head=head.replace(" (the same family of crown as the Empress's phoenix crown, but with no phoenix)","")
     slv=TRIEU_SLV_HI if t>=7 else TRIEU_SLV
     mantle=TRIEU_MANTLE if t==8 else ""
     if t<=3: lux=lux.replace('pearl-fringed ','pearl-studded ')
-    s+=f" Outfit ({rk}): the formal court robe (triều phục) of {robe}, a floor-length Han-style robe with a crossed collar edged with a thin gold line, richly embroidered on the chest, shoulders and wide sleeves with {emb}{', ' if mantle else '; '}{mantle}{TRIEU_PANELS}{TRIEU_COVER}a jewelled shoulder piece (cầu vai) over each shoulder, {sp}, its edge: {edge}; {slv}a wide jewelled belt at the waist with a jade pendant set hanging at the front; {lux.replace('LUXURY: ','')}; floor-length robe with slippers visible, slim tall silhouette; {head}."
+    s+=f" Outfit ({rk}): the formal court robe (triều phục) of {robe}, a floor-length Han-style robe with a crossed collar edged with a thin gold line, richly embroidered on the chest, shoulders and wide sleeves with {emb}{', ' if mantle else '; '}{mantle}{TRIEU_PANELS}{TRIEU_COVER}a jewelled shoulder piece (cầu vai) over each shoulder, {sp}, its edge: {edge}; {slv}{lux.replace('LUXURY: ','')}; floor-length robe with slippers visible, slim tall silhouette; {head}."
     s+=" COLOUR RULE: fresh but restrained colours in deep, toned-down shades with a soft subdued trầm feel, as gentle as the soft golden yellow of an imperial robe, never rực, never glaring, never neon, never bright, never saturated; never dusty, grey, muddy or dark; "
     if t==8: s+=f"the MAIN colour of the Empress's robe and sleeves is {gc}, with {dc} like {dh} in the linings and belt and {mc} like {mh} as the second colour (collar band, sash, cuff linings and the shoulder-piece trim); "
     else:
