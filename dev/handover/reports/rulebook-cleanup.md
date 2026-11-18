@@ -67,3 +67,39 @@ Art lines still in non-art books: START_WORKER.md (WORKER_BRIEF:L17 / PREAMBLE a
 
 ### HANDOVER
 R1b done and pushed (commit "rulebook-cleanup R1b …"). Nothing pending except the QUESTIONS. R1c edits only FIGURE_GATE section I at the end (no overlap).
+
+### SUMMARY FOR OWNER — R1b (sections A0–H of FIGURE_GATE + moved lines; for ROOT-33 to turn into Vietnamese)
+#### A. Topics that STAY in FIGURE_GATE (topic — rule now — date)
+A0 approved forms: copy builder output unchanged; only held item + pose may change; calm with rank/age; not listed = sample only (22:20Z).
+References: style image m09 (never pink "style B") + own t1 face; royal ranks t6+ also the yellow swatch (22:35Z/22:55Z).
+Approved forms table: t8, t7, a51/a65, headdress, held items t1–t6, poses spec5, Thái hậu, nhà nghèo (22:00–22:35Z).
+Owner's words 03:35Z: all checks in ONE file; m09 row on red lines from skull top.
+WHO 03:45Z: women = old live figure body; men = prompt only; children normal; no separate mama figure; tolerance ±5%.
+A proportion/row: no m09 overlay for women, keep old body, row on red skull-top/feet lines, crowns are extra height (07:08Z).
+B hairpins: full pins from t1; v1/v2 different pins same rank richness + may change hairstyle (07:50/07:55Z); t7/t8 crown per version based on v0 (16:25Z); every rank ≥ rank below, t6/t7/t8 crowns differ; real trâm no combs; no fixed formula (05:15Z); copy the old prompt (05:25Z); t1–t8 hairpin words = old prompt words (22:45Z); rank names.
+C costume: embroidery stitched into silk, not pasted (07:45/07:55Z); one style ref m09 (18:52Z); m09 = style/skin/fabric only; each rank own colour, only colour changes, not rực, fresh for a18–a36 (18:45/18:00Z); method copy-then-recolour; three completely different colours v0/v1/v2 (07:55Z); row scan before painting; slim ≠ plain (04:27Z); one gen = m09 + old figure (07:52Z); original design wins (07:40Z); fabric drape sentence (17:55Z); v0 colour = own t1 + m09 (18:35Z); t8 prompt B frozen (18:20Z); the yellow = C2, t8 yellow dominant (19:05Z); phoenix required t7/t8, never below t7 (18/11); sleeves/hem/feet, giao lĩnh collar; one prompt structure for every rank/state (19:12Z).
+C8 (moved): huadian 8.5 % + flowers/leaves/butterfly/phoenix only + consorts only; veils; trung y colours per tier; dress items not on a rack; khuê các/nhà nghèo clothes; foreign princess rules (own costume below Quý phi, own court robe from Quý phi, feedback of samples, no invented uniform); each person own colour (17/11).
+D face/pose: own face, bare forehead; one item, never a cup; poses = spec5 table, front/3-quarter only, no look-back, nothing covers face (16:25Z, 22:45Z); held item value = rank, top-3 items reserved, fixed 10-item lists per rank t1–t8 (16:35–17:15Z); item contrasts with robe (08:00Z); natural feet; style anchor text (moved); closed-lip smile for everyone (16:37Z); fresh gens, Magnific gpt-2-6 only.
+D6 (moved): face pool, no moles, hủy dung, ageing hair, allergy, 8 appearance overlays, expressions, no rosy layer (L1305), HD faces, makeup presets/looks, hand-written brief tags.
+E approval: no mass before she approves 3–4 good people; one sheet per person; pilot→approval→roll out; draw everything; HD previews; 4 ages × every rank.
+F ladder: hairpins + costume per rank table; Nữ đế (own prompt 22:40Z, dragon crown, tassels to forehead, woman's dress, shoulder piece stiff, own robe each); Thái hậu; Emperor (yellow dominant, same C2 yellow, own robe each, clean-shaven young, stiff shoulders, wide sleeves); age 51 face/hair/pose/original copy; a65.
+G auto-regen + gen count; age look a36/a51; t7/t8 no more review; redraw rule = re-run same prompt (22:02Z); reply numbering "Lượt N"; style B for t1–t5, t6 final (23:30Z); 3–4 sample options; 22:05Z rules (hair same at every rank, praised images = benchmarks, Thái hậu collar, held items by status, triều phục luxury/headwear); a51/a65 elder colours (21:06Z), trầm = lower saturation (22:50Z), a51 silver streaks (22:58Z), emperor 23:15Z.
+H held-item lists by status: nhà nghèo, khuê các, Thái hậu, Nữ đế, Nam Chiêu, Bắc Địch (22:05Z).
+#### B. Lines DELETED as superseded (topic — deleted — replaced by)
+huadian size — OD:L512, L231, L97, L103, L152, L240, L245, L476, L490 — OD:L592 (8.5 %).
+huadian motifs — OD:L216, L212 — OD:L1104.
+khuê các / poor — OD:L206, L209, L210, L214 — FIGURE_GATE 21:00Z + 22:05Z blocks (+ OD:L211 kept for origins).
+trung y status — OD:L391, L460 — OD:L392.
+foreign maid — OD:L1210 — OD:L1239 (no invented maid uniform); OD:L1209 sample order (done).
+colour/design per rank — C-ROOT-6 12:46Z, 12:48Z — FG C4a/4b/C3 (recolour only), C1 embroidery.
+duplicates already in FG — C-ROOT-15 03:35, 02:43, 03:45, 04:05 (×2), 04:00, 04:08Z; ROOT-52 16:42Z — FG Owner's words, WHO, B1, F, 3e.
+a51 pose — C-ROOT-15 03:50Z — AGE 51 15:55Z.
+makeup — OD:L472 — OD:L687.
+calm poses — OD:L11, HANDOVER:L93 — A0 rule 3 + D3a facing rule (QUESTION 3).
+huadian dup — HANDOVER:L92 — OD:L9/L592.
+credits/art order — START_ART OD:L122, L48, L29 — OD:L751 (draw all), OD:L93 (pilot), FG D5.
+STYLE_ANCHOR — :16 (smile) — FG D4b; START_ART copies of STYLE_ANCHOR (older) — FG D4; "pass 2–3 consort portraits as refs" — REFERENCES.
+FG t6 — 22:12Z small yellow, 23:25Z proposal — T6 FINAL 23:30Z.
+FG style B — 21:50Z "style ref B" — REFERENCES 22:35Z.
+FG emperor — 21:50Z e2–e4 redo, 22:35Z e2–e4 rewrite — 22:02Z redraw rule, 23:15Z.
+FG a51/a65 — 19:55Z t7/t8 exception, 22:30Z a65 colours, 22:45Z AGE COLOURS, "two levels" colour segment of the 15:55Z line — 22:50Z trầm, 21:06Z ELDER COLOURS.
