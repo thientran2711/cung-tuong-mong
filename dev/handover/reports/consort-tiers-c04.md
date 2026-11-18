@@ -61,3 +61,23 @@ By eye (c04_t678_live_vs_new.jpg): design, embroidery, crown, cape, fabric ident
 ## B9 v5 — c04 t7 redone (owner: Hoàng quý phi's yellow must match Hoàng hậu's)
 One gen, one-gen method: image 1 = LIVE c04 t7, image 2 = approved new c04 t8 (colour reference), m09 STYLE slot. "Copy EXACTLY … ONLY change the robe colour: main colour = the SAME warm golden yellow as image 2; keep a small soft misty blue-grey only as a minor accent." Result: same warm golden yellow as t8, blue-grey only on sleeve linings/small panels; original design, phoenix (sleeve, chest, hem), pearl cape, crown, round fan kept. bbox w/h live 0.368 → 0.405 (+10.0 %, wider sleeves; not regenerated). 135 cr, gen id SymEYo1Ub8. Previous t7 (blue-grey + yellow) kept as c04_a18_t7_v4.png. Files: c04_a18_t7.png, c04_a18_t7_t8.jpg (pair), row8, live_vs_new.
 ~100% xong c04 / ~0% chơi được.
+
+
+## B10 — c04 t1–t8 × v0/v1/v2 (W39, 18/11)
+PRIORITY #1 CHECK: brief consort-B10.md, FIGURE_GATE C4a/C4b/C4d/D2/D3, c04 B9 v1–v5 (reused as v1), OD owner quote in brief; nothing new built, same one-gen method.
+Method: ONE gen per image, gpt-2-6, 9:16 2K transparent, refs = live hd original fig-consort-c04-tN-a18 (image) + m09 eIyOFEidqL (style slot). Prompt "Copy EXACTLY … ONLY change the robe colour to X" (v0: "do not change any colour"). Forced swaps: forehead dot removed (t5/t6), t2 one item, t5/t6 phoenix → crane / peonies+butterflies, t8 cup → round fan; t7/t8 phoenix kept.
+| rank | v0 (original) | v1 (= b9) | v2 |
+|---|---|---|---|
+| t1 | purple | powder blue | buttery cream |
+| t2 | purple, one branch | sage | powder blue |
+| t3 | purple | dusty pink | pale apricot |
+| t4 | purple | pale apricot | pale mint |
+| t5 | purple, small crane | celadon aqua | dusty rose |
+| t6 | purple, peonies+butterflies | coral-rose | soft sage |
+| t7 | purple, phoenix | warm golden yellow (blue-grey accent) | misty blue-grey + same golden yellow inner/borders/sash, phoenix |
+| t8 | purple, phoenix, fan | warm golden yellow | crimson-rose + gold trim, phoenix, fan |
+Redone after looking: t7 v0 first came out PINK (kept as c04_a18_t7_v0_pink_rejected.png) → regen with "same deep violet-purple"; t7 v2 first = yellow like v1 → regen as blue-grey + yellow.
+By eye: pose/headdress/face/embroidery as live, bare forehead, one held item, no cup, t1–t6 no phoenix, t7/t8 phoenix. No bbox gate measured (women: no gate, FIGURE_GATE A1). Not checked: t8 v2 crimson is the most saturated.
+Gens: 15 + 2 redo = 17 × 135 = 2295 cr (v1 reused). Gen ids v0 t1 SymEMoHUb8 t2 s78aT58l8e t3 mERnJozhJQ t4 u5YM6ElQLD t5 WDlJ5TTcXe t6 w4vQdPa7EI t7 LwovMrZswO t8 gOtCD65SXO; v2 t1 CqzTNciEEy t2 lJIfMfLgv9 t3 xSXmcaIjfW t4 KLDozv2kqp t5 eIyisWFdqL t6 ksp8nH216B t7 tC3zyIemZJ t8 5jMBG5ZKxe.
+Files CDN img/_review/consort-tiers/c04/b10/: c04_a18_tN_v0|v1|v2.png (1520x2688 RGBA), c04_a18_sheet.jpg (rows v0/v1/v2 × t1–t8).
+~100% xong c04 / ~0% chơi được.
