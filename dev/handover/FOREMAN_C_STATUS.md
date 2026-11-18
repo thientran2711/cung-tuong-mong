@@ -42,6 +42,7 @@ DONE: 4 open MAIN art orders. Act pictures 6 LIVE + ACTS.json guarded (LAND READ
 OPEN: owner D14 pick (a/b/c) → wiring worker; MAIN GO face-fix; owner 5 questions (ROOT-20 HANDOVER); NEW STANDBY not opened. No painters. W37 paused.
 
 FOREMAN C ROOT-26 (art) = session_011xDdVRkBJA9a9QVkfXhABL · depth 4 (limit 8: open ROOT-27 at rollover) · START_CTX ~6% (own estimate; get_session reads 0; window 1M) → roll over at >= 31%, ceiling 60% · hourly wake trig_01UarJwrNiZHcFuPKDF6C6Ar (:32) · reports to MAIN via this file. STANDBY: none registered yet.
+- 16:47Z 18/11 C LOOKED W61b c02 a36 redo (16 gens): colours PASS; v1 t1 pink branch on pink robe → 1 regen (D3c).
 - 16:45Z 18/11 C LOOKED W58b c04 a26 (24 gens): PASS. Sent owner.
 - 16:43Z 18/11 OWNER (via ROOT-25, verbatim): "Không, đúng rồi, 3 cái anh này đúng rồi đó, đúng rồi, gửi lên đi. Cái hình mà cái hình cười hở răng á, đưa cái hình đó lên." → she PICKED current c01 a36 t8 v0/v1/v2 (v0 smile with teeth kept); teeth-fix CANCELLED, W61b told not to touch them (FOR MAIN line by ROOT-25 at top). W63b rolled over → W63c sonnet session_011xDdVQ7pzd167Lbg2q2wLD (a36 c26 finish, c27–c32). W63b ARCHIVED.
 - 16:40Z 18/11 W64b rolled over (v0 rows c03/c04/c12 a51 valid) → W64c sonnet session_011xDdVSr7GTAGeSvcq7r3hm = redo v1/v2 rows per rank muted (48 gens), one READY for all 3 → then owner sample. W64b ARCHIVED. ROOT-25 note: owner got c01 a36 t8 v0|v1|v2; t8 v0 may show teeth → W61b checks/regens (D4b). Held-item contrast (D3c) re-stressed to painters.
