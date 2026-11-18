@@ -6,3 +6,6 @@ Scan `node dev/test/opt-card-scan.js` 12 cases x Fold 755x1000@2 + iPad 1180x820
 LOOKED (mat2, dress, many, choice, child; Fold + iPad): picture strip only when options would scroll, all cards visible, no name over figure, one "!" colour, no cut text. Fold mat2/dress empty band under options = XL tall frame by 16:05Z rule (accepted by worker, owner may judge). fullbody-frame-s4 Fold "Thân phận kiếp này" screen out of scope.
 Laws: 7 (no %), 9 KIT FIRST (KIT_OPT/kszEvLaw10 in kit), 10 (frame>layout>one size per tier, picture drops/shrinks), 11 whole group scanned, 12 both devices: no violation found.
 PASS LAND READY ad86bcc09ebfced487991a51ee3caef65f138b81 (FF from 94d11623)
+
+## SUPERSEDED / STOPPED (owner FAIL, OD 18/11 ~21:20Z)
+The PASS above is withdrawn: owner failed ad86bcc0 (figure must fill the column, name tag at top, card titles centred, real event text). My checks did not cover those four points. Partial notes still valid for the re-review: quickcheck + scan columns (SCROLLBIG/TIERCHK/OVERFLOW/BANG) were clean on ad86bcc0; re-run on the new sha and add look-checks for the four owner points. origin/main 94d11623 was already merged.
