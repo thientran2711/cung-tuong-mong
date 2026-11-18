@@ -1326,7 +1326,7 @@ Object.assign(BAL,{ptime:{on:1,kinds:{
  harm:{o:1,n:2},    /* a deed on a consort done by a sent servant (not together: "phải sai người đi", j8 doAct / bestSent) */
  plant:{o:1,n:2},   /* Sai người lẻn vào cung cài đồ */
  gift:{o:1,n:2},    /* Tặng quà by hand when not together (a servant carries it) */
- bribe:{o:1,n:2},   /* Mua chuộc / Cài người vào cung khác (the servant sent) */
+ bribe:{o:1,n:2},   /* Cài người hầu vào cung khác (j10 PEND.plantsv → jptime §19): the servant walks over, placed at due. «Mua chuộc» kẻ hầu cung khác (j10 servAct mua) = FACE: she meets the servant herself (2 khắc) */
  clothes:{o:0,n:2}, /* Sai cung nữ đến Nội vụ phủ xin y phục (jeitem): the option's own Sức is the order (no khắc, as before) */
  buy:{o:1,n:2},     /* Sai cung nữ thân tín mua lén ngoài cung (the goods still come next tuần) */
  errand:{o:1,n:2},  /* maid road: Việc chủ sai (receiver side: her own walk + task) */
@@ -1339,7 +1339,7 @@ Object.assign(BAL,{ptime:{on:1,kinds:{
  npcinv:{o:0,n:2},  /* TWO-WAY: an NPC host sends word (AG cx3:invite2): her servant is away n, the guest / her invitation lands at due */
  shop:{o:0,n:2},    /* Nhờ thái giám mua đồ (PEND.shop): the eunuch goes for the tray (no khắc before, none now), the tray comes at due */
  },
- half:15,           /* the receiver's «Giúp qua loa» answer: the order's odds − half and n − 1 khắc (same number on both sides, OD 18/11 ~21:15Z) */
+ repMax:8,          /* the most unread reports of hers kept behind the «tin» icon (older ones count as read) */
  ansK:2,            /* an order to her (maid road) waits as a notice; unanswered after ansK khắc = «Từ chối» with its cost (OD 18/11 ~21:15Z) */
  errRefuse:3,       /* «Việc chủ sai» (a harmless errand): Từ chối = Chủ tin −errRefuse (no one to tell on: 3 answers) */
  errHalfTin:1       /* «Việc chủ sai»: Giúp qua loa = the same công lao, done sloppily: Chủ tin −errHalfTin, n − 1 khắc */

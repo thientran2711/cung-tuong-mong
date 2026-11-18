@@ -30,7 +30,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const s0=S.logSeq;spend(R.spy.n-R.spy.o);o.used3=used;o.back=!!(aw&&aw.back);o.rep=aw&&aw.rep?{t:aw.rep.t,L:aw.rep.L.length}:null;o.news=PTIME.news().length;o.q=Q.length;
   o.ledAfter=S.roster&&S.roster.P["mm:me"]?S.roster.P["mm:me"].map(e=>e[1]):null;
   /* panel reads the news */
-  const pn=ptPanel();o.panel=!!(pn&&pn.h&&pn.h.length>20);o.news2=PTIME.news().length;
+  const pn=ptPanel();o.panel=!!(pn&&Array.isArray(pn.facts)&&pn.facts.join(" ").length>20&&!pn.h);o.news2=PTIME.news().length;
   /* 4 Đợi tin across a buổi: send "Nghe ngóng chung" at khắc 3 */
   toB0();spend(2);const L=talkOpts({kind:"maid"}).find(a=>a&&a.n==="Nghe ngóng chung");o.lpk=L&&L.pk;spend(talkK(L));const txt=L.run();o.ltxt=txt;
   const la=PTIME.away("mm:me");o.ldue=la&&la.due;o.lnow=ptNow();o.waitOk=PTIME.waitOk();const b0=S.buoi||0;Q.length=0;S.mg=0;for(let w=0;w<3&&!la.back;w++){PTIME.wait();Q.length=0;S.mg=0}/* a modal popping on the way stops the jump (the player reads it, then taps «Đợi tin» again) */o.wb=[b0,S.buoi||0,used];o.lback=!!(la&&la.back);
@@ -72,13 +72,13 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   if(i>=0){const v=rivals[i];o.hk=harmK(v,"rumor");o.hx=ptHarmX(v,"rumor");const u0=used;window.__j70inst=1;doAct(i,"rumor");window.__j70inst=0;Q.length=0;const a=ptZ().find(x=>x.kind==="harm"&&!x.back);o.ha=a?{due:a.due,k:a.a.k}:null;o.hu=used-u0;spend(1);o.hback=!!(a&&a.back)}
   /* maid road */
   localStorage.clear();for(let k=0;k<40;k++){window.__nlInner=1;start();window.__nlInner=0;if(isSrv())break}if(!isSrv()){try{srvInit();deal()}catch(e){}}o.srv=isSrv();if(!o.srv)return o;Q.length=0;S.mg=0;toB0();
-  o.P={ansK:BAL.ptime.ansK,half:BAL.ptime.half,lo:BAL.odds.lo};S.srv.err={b:bid(),k:"vuon",n:"Ra Ngự hoa viên hái hoa cắm bình"};S.ordQ=[];const p0=S.place,q0=Q.length;o.fr=ptErrFrame();o.noPop=Q.length===q0;const oq=(S.ordQ||[])[0];o.oq=oq?{pid:oq.pid,dl:oq.due-ptNow()}:null;
-  o.pan=ptPanel().opts.map(x=>x.n);if(oq){ptOrdOpen(oq)}const d=Q[Q.length-1];o.on=d&&d.opts.map(x=>x.n);o.ox=d&&d.opts[0].x;o.qx=d&&d.opts[1]&&d.opts[1].x;
+  o.P={ansK:BAL.ptime.ansK,half:BAL.road.hp.half,lo:BAL.odds.lo};S.srv.err={b:bid(),k:"vuon",n:"Ra Ngự hoa viên hái hoa cắm bình"};S.ordQ=[];const p0=S.place,q0=Q.length;o.fr=ptErrFrame();o.noPop=Q.length===q0;const oq=(S.ordQ||[])[0];o.oq=oq?{pid:oq.pid,dl:oq.due-ptNow()}:null;
+  o.pan=ptPanel().opts.map(x=>x.n);/* shown = charged: the real walk + the task (FAIL 7 item 3) */o.nF=ptRecvN("vuon","errand",0);o.nH=ptRecvN("vuon","errand",1);o.walk=ptRecvWalk("vuon");o.nExp=o.walk+BAL.ptime.kinds.errand.n-BAL.walk.near;if(oq){ptOrdOpen(oq)}const d=Q[Q.length-1];o.on=d&&d.opts.map(x=>x.n);o.ox=d&&d.opts[0].x;o.qx=d&&d.opts[1]&&d.opts[1].x;
   const u0=used;if(d){Q.pop();d.opts[0].go()}Q.length=0;o.place=[p0,S.place];o.used=used-u0;o.done=!!(S.srv.sent&&S.srv.sent.done);
   const m=srvM();const t=liveRivals(true).find(v=>v!==m&&v.alive&&!v.out);
-  if(t){const c=PEND.cnvOrd({k:"spy",t:t.id});o.cn=c&&c.o.map(x=>x.n);o.cnx=c&&c.o[0].x;o.chx=c&&c.o[1].x;
+  if(t){const c=PEND.cnvOrd({k:"spy",t:t.id});o.cn=c&&c.o.map(x=>x.n);o.cnN=[ptRecvN(palaceOf(t),"spy",0),ptRecvN(palaceOf(t),"spy",1)];/* her công lao on the hết lòng row (item 6) */o.cnMerit=BAL.eff.j42.srvDoOrder_2;o.cnx=c&&c.o[0].x;o.chx=c&&c.o[1].x;
    /* the master's order arrives as a NOTICE (no pop-up) */const q1=Q.length;S.ordQ=[];window.__j95boff=1;const dd=mkP("cnvOrd",{k:"spy",t:t.id});window.__j95boff=0;pushDil(dd,"Lệnh của "+m.name);o.ordNo=Q.length===q1&&S.ordQ.length===1;
-   /* qua loa = the same odds formula − BAL.ptime.half */o.hp=[ordOdds("plant"),ordHalf(()=>ordOdds("plant"))];
+   /* qua loa = the same odds formula − BAL.road.hp.half */o.hp=[ordOdds("plant"),ordHalf(()=>ordOdds("plant"))];
    /* unanswered past the deadline = Từ chối with its cost */const tin0=S.tin;if(S.ordQ[0])S.ordQ[0].due=ptNow();ptTick();o.late={left:S.ordQ.length,dt:S.tin-tin0}}
   /* NPC receiver (two-way): an NPC servant ordered by its master picks among the SAME 4 (jagstf2 stf2Ord) */
   try{const K=BAL.ag.stf2.ord,K0=Object.assign({},K);Object.assign(K,{obey:0,refuse:0,tell:0,half:5});const v=rivals.find(x=>x&&x.alive&&!x.out&&bestSent(x));const sv=v&&bestSent(v);
@@ -87,13 +87,13 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  console.log(JSON.stringify(r2));
  ok(!r2.hv||(r2.hk===R.o&&/chờ 2 khắc/.test(r2.hx)&&r2.ha&&r2.hu===R.o&&r2.hback),"9 harm deed by a sent servant: order khắc, servant away, lands at due",{hk:r2.hk,hx:r2.hx,ha:r2.ha,hu:r2.hu});
  ok(!r2.srv||(r2.fr&&r2.noPop&&r2.oq&&r2.oq.pid==="err"&&r2.oq.dl===r2.P.ansK&&r2.pan.includes("Nghe lệnh")),"10 receiver: Việc chủ sai = a NOTICE (no pop-up), answer before ansK khắc, «Nghe lệnh» in the 信 panel",{oq:r2.oq,pan:r2.pan});
- ok(!r2.srv||(JSON.stringify(r2.on)==='["Giúp hết lòng","Giúp qua loa","Từ chối"]'&&/tốn: 2 khắc \(cả đường đi\)/.test(r2.ox)&&/tốn: 1 khắc/.test(r2.qx)),"10 receiver: Việc chủ sai = 3 answers (harmless: nothing to tell on); hết lòng n khắc, qua loa n−1",{on:r2.on,ox:r2.ox,qx:r2.qx});
- ok(!r2.srv||(r2.place[1]==="vuon"&&r2.used===R.n&&r2.done),"10 receiver walks there; total = n khắc (no double charge); errand done",{place:r2.place,used:r2.used});
- ok(!r2.srv||(r2.cn&&r2.cn.length===4&&r2.cn[0]==="Giúp hết lòng"&&r2.cn[1]==="Giúp qua loa"&&r2.cn[2]==="Từ chối"&&/^Mách lẻo/.test(r2.cn[3])&&/Chủ tin -5 \(hoảng sợ\)/.test(r2.cnx)&&/tốn: 1 khắc/.test(r2.chx)),"10 receiver: master's order = the SAME 4 answers (OD L1876); dò la mirrors the sender row",{cn:r2.cn,cnx:r2.cnx,chx:r2.chx});
- ok(!r2.srv||(r2.ordNo&&r2.hp&&r2.hp[1]===Math.max(r2.P.lo,r2.hp[0]-r2.P.half)),"10 receiver: the master's order is a notice; qua loa odds = odds − BAL.ptime.half",{ordNo:r2.ordNo,hp:r2.hp});
+ ok(!r2.srv||(JSON.stringify(r2.on)==='["Giúp hết lòng","Giúp qua loa","Từ chối"]'&&r2.nF===r2.nExp&&r2.nH===r2.nF-1&&r2.ox.includes(`tốn: ${r2.nF} khắc (cả đường đi)`)&&r2.qx.includes(`tốn: ${r2.nH} khắc (cả đường đi)`)),"10 receiver: Việc chủ sai = 3 answers (harmless: nothing to tell on); hết lòng = real walk + task, qua loa one khắc less",{on:r2.on,ox:r2.ox,qx:r2.qx,nF:r2.nF,nH:r2.nH,walk:r2.walk});
+ ok(!r2.srv||(r2.place[1]==="vuon"&&r2.used===r2.nF&&r2.done),"10 receiver walks there; charged = shown (walk + task, via spend); errand done",{place:r2.place,used:r2.used,shown:r2.nF});
+ ok(!r2.srv||(r2.cn&&r2.cn.length===4&&r2.cn[0]==="Giúp hết lòng"&&r2.cn[1]==="Giúp qua loa"&&r2.cn[2]==="Từ chối"&&/^Mách lẻo/.test(r2.cn[3])&&/Chủ tin -5 \(hoảng sợ\)/.test(r2.cnx)&&r2.cnx.includes(`tốn: ${r2.cnN[0]} khắc`)&&r2.chx.includes(`tốn: ${r2.cnN[1]} khắc`)&&r2.cnN[1]===r2.cnN[0]-1&&r2.cnx.includes(`ngươi công lao +${r2.cnMerit}`)),"10 receiver: master's order = the SAME 4 answers (OD L1876); dò la mirrors the sender row; khắc shown = real walk + task; her công lao shown",{cn:r2.cn,cnx:r2.cnx,chx:r2.chx,cnN:r2.cnN});
+ ok(!r2.srv||(r2.ordNo&&r2.hp&&r2.hp[1]===Math.max(r2.P.lo,r2.hp[0]-r2.P.half)),"10 receiver: the master's order is a notice; qua loa odds = odds − BAL.road.hp.half",{ordNo:r2.ordNo,hp:r2.hp});
  ok(!r2.srv||(r2.late&&r2.late.left===0&&r2.late.dt<0),"10 receiver: unanswered past the deadline = Từ chối with its cost",r2.late);
  ok(!r2.srv||(r2.npcHalf==="half"&&JSON.stringify(r2.npcOpts)==='["obey","half","refuse","tell"]'),"10 two-way: an NPC servant picks among the same 4 (stf2Ord → half)",{h:r2.npcHalf,o:r2.npcOpts,e:r2.npcErr});
  ok(r2.srv!==false,"10 a maid-road life was started",r2.srv);
  ok(!(r2.errs||[]).length,"no jptime errors (part 2)",r2.errs);
  ok(!errs.length,"8 no page errors",errs.slice(0,3));
- await b.close();const f=res.filter(x=>!x).length;console.log(f?`${f} FAIL`:'ALL OK');process.exit(f?1:0)})();
+ await b.close();const f=res.filter(x=>!x).length;console.log(f?`${f} FAIL`:'ALL OK');process.exit(f?1:0)})().catch(e=>{/* a crash inside the page is a clean FAIL line (reviewer note) */console.log("FAIL crash: "+(e&&e.message||e).toString().slice(0,300));process.exit(1)});

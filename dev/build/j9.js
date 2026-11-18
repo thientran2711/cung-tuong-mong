@@ -34,9 +34,9 @@ function npcEncounters(){const by={};for(const v of liveRivals(true)){const k=S.
 
 /* sending someone instead of going: same act, lower odds, the servant may be caught and confess */
 let ACTX={a:null,pen:0};
-/* «Giúp qua loa» (owner OD 18/11 ~21:15Z, the 4 answers of OD L1876 for every receiver): while a receiver does the order half-heartedly, the deed's odds − BAL.ptime.half.
+/* «Giúp qua loa» (owner OD 18/11 ~21:15Z, the 4 answers of OD L1876 for every receiver): while a receiver does the order half-heartedly, the deed's odds − BAL.road.hp.half (the ONE qua-loa number, OD L1876).
    ONE flag for every road (her maid road srvDoOrder / ordOdds, an NPC servant's deed through runAct / actCtx, Việc chủ sai merit). */
-var ORDHALF=0;function ordHalf(fn){const h0=ORDHALF;ORDHALF=(BAL.ptime&&BAL.ptime.half)||15;try{return fn()}finally{ORDHALF=h0}}
+var ORDHALF=0;function ordHalf(fn){const h0=ORDHALF;ORDHALF=BAL.road.hp.half;try{return fn()}finally{ORDHALF=h0}}
 /* ONE act context (review/shown-odds-one-path, ORDER ROOT-52 18/11): the roll (runAct) and EVERY screen that prints an act's odds
    build the same ACTX here — sent-servant penalty (pen), her lá số on the act's domain (lotB via dom), fresh spy knowledge of the
    target (spyKnowB via t) — so the word on the card is the odds the roll uses (shown == rolled; dev/test/shown-odds.test.js).

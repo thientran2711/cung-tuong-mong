@@ -35,8 +35,24 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    spend(R.npcinv.n);r.back=!!(a&&a.back);r.where=S.where[v.id]===palaceOf(v);r.qAfter=S.invQ.length;return r});
   /* 17 shop */
   E("shop",()=>{toB0();Q.length=0;invAct("shop");const a=land("shop");const r={q0:Q.length,away:!!PTIME.away("eun:nvp")};spend(R.shop.n);r.back=!!(a&&a.back);r.q=Q.map(x=>x.t);Q.length=0;return r});
+  /* 18 FAIL 7 item 4: an NPC deed by a SENT servant (mindRun / runAct / exec70) = S.away + due khắc; the servant is locked; the NPC's away maid is locked for every deed */
+  E("npcDeed",()=>{toB0();Q.length=0;const L=liveRivals(true).filter(v=>v&&v.alive&&!v.out&&!v.confined&&(v.staff||[]).length);const v=L.find(x=>!sameHouse(x,S));if(!v)return null;
+   S.place="home";S.where=S.where||{};for(const w of ["home","vuon","nvp","tn","cnh"]){S.where[v.id]=w;if(!together(v,S))break}if(together(v,S))return{tog:1};const x={};const n0=S.away.length;const sv=bestSent(v);
+   x.r=mindRun(v,S,"rumor",0);const a=S.away[S.away.length-1];x.sent=S.away.length===n0+1&&a&&a.by==="v"+v.id&&a.kind==="harm";x.who=a&&a.who;x.svId=(v.staff||[]).some(z=>ptPid(z,v)===(a&&a.who))?a.who:null;x.due=a?a.due-ptNow():null;
+   x.busy=!!(a&&ptBusy(a.who));const b2=bestSent(v);x.notSame=!b2||ptPid(b2,v)!==a.who;
+   x.r2=runAct(v,S,"rumor");x.sent2=S.away.length>=n0+(b2?2:1);
+   const l0=S.logSeq||0;spend(BAL.ptime.kinds.harm.n);x.back=!!(a&&a.back);x.logged=(S.logSeq||0)>l0;
+   /* NPC maid away = locked for her other deeds */S.away.push({id:"t-m",who:"mm:"+v.id,nm:"x",kind:"spy",by:"v"+v.id,t0:ptNow(),due:ptNow()+2,back:0,a:{},lbl:""});
+   x.maidLock=AGRUN["cx2:maidTalk"]?AGRUN["cx2:maidTalk"](v)==="":true;S.away=S.away.filter(z=>z.id!=="t-m");return x});
+  /* 19 Cài người hầu vào cung (j10 plantsv): the servant walks over, placed at due (BAL.ptime.kinds.bribe true) */
+  E("plantsv",()=>{toB0();Q.length=0;if(!(S.staff||[]).length)return null;S.bac=Math.max(S.bac||0,BAL.house.plantBac+50);const d=PEND.plantsv({});const op=d&&d.o.find(x=>x.kgt);if(!op)return null;
+   const u0=used,t0=ptNow();op.go();const a=S.away.filter(z=>z.kind==="bribe").pop();const x={x:op.x,u:used-u0,away:!!a,due:a?a.due-t0:null};spend(BAL.ptime.kinds.bribe.n);x.back=!!(a&&a.back);return x});
+  /* FAIL 7 item 1: jptime never re-registers «tin» on render, and stays off it when MAIN's jerr errIcon is in the build */
+  E("icon",()=>{const x={};let n=0;const s0=kitStatusIcon.set;kitStatusIcon.set=function(id){if(id==="tin")n++;return s0.apply(this,arguments)};try{render();render();x.onRender=n;
+    window.errIcon=function(){x.err=(x.err||0)+1};ptIcon();x.setWithErr=n;delete window.errIcon}finally{kitStatusIcon.set=s0}
+   const sp=ptPanel();x.facts=Array.isArray(sp.facts);x.noH=!sp.h;return x});
   o.errs=PT.stat.errs.slice();return o});
- console.log(JSON.stringify(r));
+ console.log(JSON.stringify(r));const BAL_HN=2;
  const S=r.stip;ok(S&&S.u===0&&S.away&&S.due===2&&/chờ 2 khắc/.test(S.x)&&S.back&&S.rep,"12 jstip đi đòi: no order khắc, maid away 2, lands at due",S);
  const V=r.veil;ok(V&&V.u===1&&V.away&&V.lock2&&V.back&&/chờ 2 khắc/.test(V.j)&&V.paid<0&&V.net===V.paid,"13 jveil mua lén: 1 khắc order, agent away + locked, bạc paid once, lands at due",V);
  const M=r.mkt;ok(M&&M.u===0&&M.who&&M.due===2&&M.back&&/chờ 2 khắc/.test(M.x),"14 jmkt tai mắt: a real runner goes, lands at due",M);
@@ -45,5 +61,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  const G=r.giftin;ok(G&&G.q0===0&&/^v/.test(G.by||"")&&G.back&&G.q.includes("Quà tặng"),"16 NPC gift: carried by her servant, «Quà tặng» at due (not at once)",G);
  const I=r.inv;ok(I&&I.wrapped&&I.q===0&&I.away&&I.dup===1&&I.back&&I.where&&I.qAfter===0,"16 NPC invitation: runner away, one at a time, lands at due (no double wait)",I);
  const H=r.shop;ok(H&&H.q0===0&&H.away&&H.back&&H.q.includes("Nhờ thái giám mua đồ"),"17 shop: the tray comes at due",H);
+ const N=r.npcDeed;ok(N&&(!N.tog&&(N.r===""&&N.sent&&N.who===N.svId&&N.due===BAL_HN&&N.busy&&N.notSame&&N.r2===""&&N.sent2&&N.back&&N.maidLock)),"18 two-way: NPC deed by a sent servant = away + due khắc, servant locked, lands; NPC maid away locked for other deeds",N);
+ const P=r.plantsv;ok(P===null||(P&&P.u===1&&P.away&&P.due===2&&P.back&&/chờ 2 khắc/.test(P.x)),"19 Cài người hầu vào cung: servant away 2, placed at due",P);
+ const IC=r.icon;ok(IC&&IC.onRender===0&&IC.setWithErr===0&&IC.err===1&&IC.facts&&IC.noH,"FAIL7-1 «tin»: never registered on render; MAIN's errIcon owns it when present; fallback panel = kit facts spec",IC);
  ok(!(r.errs||[]).length,"no jptime errors",r.errs);ok(!errs.length,"no page errors",errs.slice(0,3));
- await b.close();console.log(res.every(Boolean)?"ALL OK":"FAILED");process.exit(res.every(Boolean)?0:1)})();
+ await b.close();console.log(res.every(Boolean)?"ALL OK":"FAILED");process.exit(res.every(Boolean)?0:1)})().catch(e=>{/* a crash inside the page is a clean FAIL line (reviewer note) */console.log("FAIL crash: "+(e&&e.message||e).toString().slice(0,300));process.exit(1)});

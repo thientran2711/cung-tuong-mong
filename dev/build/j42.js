@@ -323,10 +323,10 @@ PEND.cnvScold=()=>{const m=srvM();if(!isSrv()||!m)return null;
  return{t:`<p>${m.name} ${hasT(m,"Kiêu ngạo")?"chê trà nguội, hắt cả chén vào người ngươi":hasT(m,"Kín đáo")?"nghi ngươi lén lút ra ngoài, gọi vào tra hỏi":"trách ngươi làm việc chậm chạp"}.</p>`,who:pv(m),o:cnvPend(S,cnvScoldOpts(S,m))}};
 /* the one row of a master's order (the card here and the receiver card in jptime read it): what, the gain, the loss */
 function ordRow(k,t){const desc={spy:`dò la cung ${t.name}, xem nàng gặp ai, nói gì`,plant:`lén giấu hình nhân bùa ngải vào tẩm cung ${t.name}`,poison:`bỏ thuốc độc vào bát canh dâng ${t.name}`}[k];
- const gain={spy:`Chủ tin +4 · Bạc +3 · chủ nắm ${balAb(BAL.eff.j42.evN)} chứng cứ của ${t.name}`,plant:`Chủ tin +8 · Bạc +10 · ${t.name} bị vu, mất Danh`,poison:`Chủ tin +12 · Bạc +20 · ${t.name} trúng độc · ${kpDeathWord(kpDeathP("poison",t),"nàng")}`}[k];
+ const gain={spy:`Chủ tin +4 · Bạc +3 · chủ nắm ${balAb(BAL.eff.j42.evN)} chứng cứ của ${t.name}`,plant:`Chủ tin +8 · Bạc +10 · ${t.name} bị vu, mất Danh`,poison:`Chủ tin +12 · Bạc +20 · ${t.name} trúng độc · ${kpDeathWord(kpDeathP("poison",t),"nàng")}`}[k]+` · ngươi công lao +${BAL.eff.j42.srvDoOrder_2}`;/* her own gain (srvDoOrder srvMerit): shown = applied, law 3 */
  return{say:desc,gain,loss:"Chủ tin -2, nửa phần bị bắt"}}
 PEND.cnvOrd=pp=>{const m=srvM(),t=RV(pp.t);if(!isSrv()||!m||!t||!t.alive||t.out)return null;const k=pp.k,o=ordOdds(k);const R=ordRow(k,t),desc=R.say;
- const tail=` · thành: ${R.gain} · hỏng: ${R.loss}`;const O=cnvOrdOpts(S,m,t,()=>srvDoOrder(k,t));O[0].x=word(o)+tail;const hf=O.find(x=>x.id==="half");if(hf)hf.x=word(oddsCl(o-((BAL.ptime&&BAL.ptime.half)||15)))+tail;
+ const tail=` · thành: ${R.gain} · hỏng: ${R.loss}`;const O=cnvOrdOpts(S,m,t,()=>srvDoOrder(k,t));O[0].x=word(o)+tail;const hf=O.find(x=>x.id==="half");if(hf)hf.x=word(oddsCl(o-BAL.road.hp.half))+tail;
  return{t:`<p>${m.name} gọi ngươi vào phòng trong, đóng cửa: “Ngươi đi ${desc}.”</p><p class="past">Kẻ hầu nào làm cũng một luật: hỏng thì nửa phần bị bắt; bị bắt thì 3 phần bị đánh chết ở Thận Hình ti, hoặc phải khai ra chủ.</p>`,who:pv(m),o:cnvPend(S,O)}};
 /* ===== ONE CORE (AG-ALL-2 G10, OD 17/11 ~14:50Z): the options of a servant's dilemma — ordered by her master (cnvOrdOpts), bribed by another
    palace (cnvBribeOpts), framed by a colleague (cnvFrameOpts) — built ONCE. a = the servant: S on the maid road (the PEND card renders them,
@@ -340,7 +340,7 @@ function cnvRun(a,op,fxDone){if(!op)return"";if(!fxDone)stfAp(a,op.fx);let ok=tr
 function cnvPend(a,O){return O.map(op=>({n:op.n,fx:op.fx||{},x:op.x||"",go:()=>{const r=cnvRun(a,op,true);if(r)log(r)}}))}
 function cnvOrdOpts(a,m,t,obey){const mal=m.malice||40;const q=queenP();const who=q&&q!==m&&q!==t&&q!==S?q:t;
  return [{id:"obey",n:"Giúp hết lòng",tag:"work",fx:{},x:"",go:obey},
-  /* the 4 answers of OD L1876 for every order (owner 18/11 ~21:15Z): «Giúp qua loa» = the same deed, odds − BAL.ptime.half (ordHalf) */
+  /* the 4 answers of OD L1876 for every order (owner 18/11 ~21:15Z): «Giúp qua loa» = the same deed, odds − BAL.road.hp.half (ordHalf, the ONE qua-loa number of OD L1876) */
   {id:"half",n:"Giúp qua loa",tag:"half",fx:{},x:"",go:obey?()=>ordHalf(obey):null},
   {id:"refuse",n:"Từ chối",tag:"help",fx:{tin:mal>=60?-15:-10},x:`kèm: bị phạt quỳ đá vụn, Sức ${balSg(BAL.eff.j42.sucGo_2)}: ${chanceW(mal/2)}`,go:()=>{if(!roll(mal/2))return"";stfAp(a,{suc:BAL.eff.j42.sucGo_2});
     if(a===S){log(`${m.name} sai người phạt ngươi quỳ trên đá vụn. Sức -20.`);if(S.suc<=0)die("Quỳ phạt đến kiệt sức mà chết");return""}if((a.suc||0)<=0&&typeof asOut==="function")asOut(a,"dead");return""}},
