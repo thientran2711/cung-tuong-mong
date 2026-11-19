@@ -73,3 +73,52 @@ Baseline before parallel time = 9aad0c66 (first parent of 1a4df595).
 
 ## Done — review/coop-ptime-reds @ be1b357c (pushed; = LIVE 2bda29a1 + fixes; index.html / sw.js / assets.json rebuilt by build_site.sh)
 Commits: b2fe6908 (faults + f1/f2 tests), be1b357c (tick stat, f3 G1, launch flags, undef-scan). Shots: none (no UI change). Worktrees removed after push.
+
+## REVIEW r1 — PASS review/coop-ptime-reds-r1 @ b3979a21 (opus BIG, session_01N1tNP5SHLVhU9jjuhFnqjA, 11/19/2026)
+PRIORITY #1 CHECK: grep OWNER_DECISIONS / HANDOVER_1115_PM / PROGRESS for ptTickHer, kitNotice, F.pend busy, rcvAsk coop → no ruling against; git grep origin/main + origin/review/*: j29 sv fix also on review/runact-sv-fix 868c682c (reused verbatim, not re-made); UICAP / TH.uiPlay / kitNotice / ptOpenTin / errOpen / rcvOpen / ptOrdOpen reused (no new kit part, no new number). CLAIMS row 308 read; Foreman B = ROOT-7 (FOREMAN_B_STATUS).
+
+Branch = be1b357c + 3 reviewer commits + merge of main 80c52782 (npc-purpose G1 #15 + manifest-floor; only index/sw/assets conflicted, rebuilt by build_site.sh). j29.js = byte-identical to 868c682c's hunk (git merge-tree with origin/review/runact-sv-fix: j29 merges clean, only the generated assets.json / index.html / sw.js conflict → rebuild).
+
+### Checks
+- (a) faults real + probe + family: undef-scan LIVE 2bda29a1 FAIL 2 (j29 `sv`, jcloth `arguments`) → branch PASS (244 names). Solo probe: LIVE «sv is not defined» ×4 on the «qua loa» runAct lines → branch 0. jptime `.coop` guards (pushDil giftin, PEND.giftpick, ptNpcWire, ptNpcSent, ptMaidOut, illBuy) are the whole family of the co-op-rival rows; jrcv rcvAsk coop → O[0] (= yes, checked for RCVK.ally). OK.
+- (b) solo parallel time unchanged: the `.coop` guards are false in solo (no co-op rival); ptTickHer runs only `on()&&!host()`; ptime2 ALL OK; ptime row 5 «invite» FAILS on LIVE 2bda29a1 too (2/2 runs, random rival) = pre-existing, not this branch. No typed number (one-core ×4 PASS; the 1000 ms tick is timing only).
+- (c) two-way: gifts / invites to the co-op friend go through the ASK road (rcvAsk coop branch + thInv), NPC↔seat gates guarded both ways (ptNpcWire / ptNpcSent). Leftovers below.
+- (d) ptTickHer: lands once (host lands only still-due tasks, DONE dedupe by intent id → resend answered from DONE), her ctx + her `used` (never the host's clock), khắc counted once (nested ptTick in her ctx suppressed unless PTIN), reconnect/resend safe (F2 net-loss path unchanged). 4G: f2 LAG=85 CPU=4 26/26 (one run had P10/P10c red: her view after the reconnect came late under lag → P10c inherited it; rerun 26/26; P10 is not touched by this branch).
+- (e) items: f3 G1/G5 gift + take staged both ways, no item lost / doubled (f3 37/37, swap 37/37); e2e 68/68 ×2.
+- (f) solo deferred acts: 0 page errors on the branch (LIVE: «sv is not defined» ×4).
+
+### Faults found by the review and fixed (commits b53fe12f, faec381d)
+| # | fault | probe | before (be1b357c) | after (b3979a21) |
+|---|---|---|---|---|
+| R1 | her pt notices («X đã đi … về khắc …», «X đã về: có tin báo», order / rcv / errand) raised by her run on the HOST showed on the host's screen, never on hers (pt:back new with ptTickHer; pt:go already on LIVE) | zz-probe-notice (two clients, local Worker) | host: pt:go + pt:back · guest: none | host: none · guest: pt:back (+pt:go at send) · ptTickHer answered ~400 ms |
+| R2 | her tap while the auto ptTickHer intent was pending was refused «busy» = tap lost in silence (f4 swap D1 red: busy 2, sent 0) | zz-probe-held (PTIME.wait then goTo 20 ms later) | busy 1, run 0, place home | held 1, goTo sent once after the tick answer, run +1, place vuon |
+| R3 | f3 swap G5: receiver choice may send the piece back (R.kept) — G1 was staged, G5 not (law 11 family) | f3 swap | 37 ok + 1 FAIL | 37/37 |
+Fix R1: "kitNotice" in UICAP (jcoopthin) + noteGo() remaps the notice's go-button to her own opener (pt:ord → ptOrdOpen, pt: → ptOpenTin, errand: → errOpen, rcv: → rcvOpen; none → no button). Fix R2: F.next (one held tap behind ptTickHer only; any other pending = busy as before), sent from answered() / give-up; dropped with the «not done» words on a stale room/buổi (dropP). Tests: f2 P5b asserts her notices on her phone only; f4 D1 accepts sent+held = 1; f3 G5 staged like G1.
+
+### Gates (faec381d; merged b3979a21 re-ran one-core ×4, undef-scan, both probes, quickcheck)
+| gate | result |
+|---|---|
+| coop-thin a / b / c | 24/24 · 136/136 · 17/17 |
+| d / d swap | 46/52 · 46/52 (the 6 pre-existing kit sameDom rows) |
+| e / e swap / e-net | 33/33 · 33/33 · 20/20 |
+| f1 / f1 swap | 22/22 · 22/22 |
+| f2 / f2 swap / f2 4G (LAG 85, CPU 4) | 27/27 · 26/26 · 26/26 (rerun; first run 25+2 P10/P10c lag flake, see d) |
+| f3 / f3 swap | 37/37 · 37/37 |
+| f4 / f4 swap | 18/18 · 19/19 |
+| coop-cyc / swap | 73/73 · 73/73 |
+| coop-e2e / swap | 68/68 · 68/68 |
+| p2 / timer / night | 46/46 · 43/43 · 99/99 |
+| coop-one-world seeds 1–10 | 10/10 PASS |
+| role-parity.test | ALL PASS |
+| ptime / ptime2 | row 5 invite FAIL (same on LIVE 2/2 = pre-existing) · ALL OK |
+| one-core ×4 / undef-scan | PASS ×4 · PASS |
+| Worker npm test | thin ALL OK |
+| quickcheck b3979a21 (old save) | PASS · open 1493 ms · old save ok · perf new/live render 195/211, buổi 1256/1916 |
+
+### Leftovers FOR B / D / MAIN (not a FAIL)
+- (worker's, confirmed) other rcvAsk kinds aimed at the co-op friend still rolled for him (facFound / facJoin / facInvite / invite / rougeBorrow / call / mediate / blockf); thInv 2 answers vs receiver-choice 4; guest log-line order.
+- notices raised in HER ctx outside a tapRun (E-step, life, world frames) are no longer shown on the host but are not shown on her phone either (jrcv rcvPend re-raise covers rcv only) — needs a pending-notice relay like rcvPend.
+- each due event's auto ptTickHer briefly (~400 ms local, ~1 s on 4G) turns her act buttons off; a tap in that window is now held, not lost, but the lock is visible.
+- ptime.test row 5 «invite» fails on LIVE 2bda29a1 (random rival; where ≠ home) → FOR D: fix the test's rival pick or the invite landing.
+- f2 P10 (answer lost) can go red under LAG 85: her post-reconnect view arrives after the 500 ms + sync window; P10c then inherits her stale place → widen the wait or add an `until` on her place.
+Shots: none (no layout change). CDN img/_review/coop-ptime-reds/: nothing made.
