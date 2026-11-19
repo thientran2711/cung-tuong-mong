@@ -79,3 +79,53 @@ pt-scan.py (E21) on 1d49cfc9: 6b unguarded 0; 6c NO BOOK 0 (54 give/buy/receive:
 ### FOR E / E21
 - Roll share BAL.orig.br.nc.pf untouched (E21 flips at merge).
 - No shared helper changed; holder words above are new strings for ptO — pt-scan may need them in its holder list.
+## §BUILT (E21 lead: scaffold + pt_hai + pt_su; writer 2 = pt_tang + pt_dang on review/phutang-road-w2)
+Plan change vs §PLAN (d): no `jkc2_pf.js` — jrd_pt.js loads after j4/j67/j1 so ORIGIN_BR.pf / STORY.pf / QUEST67.pf live in jrd_pt.js; KC2LAND.pf sits in jkc2.js itself (its place loop runs at load), fam_pf in j72.js beside fam_bd.
+### Wiring (files outside the pt files; each a small, listed edit)
+| file | edit |
+|---|---|
+| jkc2.js | kc2Br() returns "pf"; KC2LAND.pf (land, dad, mom, court, fest «Lễ Thanh tẩy cuối hạ», places np_*, own place lines, own card words tx); place loop over Object.keys(KC2LAND) with `pre`/`line`; kc2Pre reads `pre`; family names (Thiên hoàng / Hoàng hậu / Hoàng huynh / Hoàng thúc / Hoàng muội); home cards (viết chữ, thanh tẩy ở đền Thần, bến Nan Ba), fest option, treaty, hồi 3 text, gifts; 5 literal «Nam Chiếu»/«phụ vương» lines the pf (and nc) life reaches now print `${L.land}` / `${L.dad}` (same output for nc — helps E20's Cao Ly rename); SCIMG np* = neutral palace pictures until C paints; n_send pf = ev-hoa-than; BAL.kcv.pf = BAL.kcv.nc |
+| joi.js | OI_TXT.pf (intro panels a/d/h), OI_CAP.pf, «Lễ ra mắt» for pf, sứ thần Phù Tang, OI_SELT.pf |
+| j72.js | fam_pf letter (phụ hoàng asks the next embassy's ship into Minh Châu), BAL.m72.pfOk |
+| j97.js | PT97 → R97L (beside BD97) |
+| jgecat.js | label «Công chúa hòa thân · Phù Tang» |
+| assemble.py | jbalpt.js after jbalbd.js; jrd_pt.js, jrd_pt2.js after jrd_bd2.js |
+### Per-chapter table — pt_hai · Vượt bể (people: Tá Bá Kim Thành, Tiểu Ngọc, Nham Lão, Thân Lão, Kim Hựu Thành, Ô Cửu)
+| ch | title | x1 climax (win/lose · win2/mid · mid) | moves / objects | thiện / ác options |
+|---|---|---|---|---|
+| .4 | Thuyền thứ tư chưa tới | chờ gió mùa · hồi môn bù cống · viết thư đòi cống bù | ruong/nhatky → Nham Lão, danhsach → envoy; van; hoimon → kho; rare «Lửa hiệu trên Ngũ Đảo» (nt_dongchau) | stand by the envoy / mock {v} |
+| .5 | Thư từ Phúc Châu | thủy sư đi ngay · thương thuyền Tân La · chờ gió | thu → vua/ta/hl | send water / keep the letter, bribe the Tự |
+| .6 | Người giữ kiêng | luật Đại Hy · lễ thanh tẩy · để thủy thủ xử theo lệ (Thân Lão dies) | Thân Lão nguc → cang / tn / dead; luoc | save him / let custom kill him |
+| .7 | Thương thuyền Tân La | thương quán Tân La · trả bạc khi người về · để thủy sư tìm | Kim Hựu Thành → kinh / cang; nhatky → ta / kho; giaythue; trang | buy / have Thị bạc seize it |
+| .8 | Giặc biển Đông Hải | thủy sư đánh đêm (lose: Tiểu Ngọc dies, chest sinks) · chuộc bằng ngọc · cho Ô Cửu một bến | Ô Cửu → nguc / hb / cang; ngoctrai → Ô Cửu; ruong → kho / bien; manhao; haido | ransom / give a pirate a harbour |
+| .9 | Bến Minh Châu | vào chầu kể chuyện · ở lại chữa bệnh · để Hồng Lư tự lo | Tiểu Ngọc → kinh; niem → ta / kho / chay; ruong escort | bring her in / bribe {v}'s cousin |
+| .10 | Kiểm cống | trình chứng (lose: cấm túc BAL.road.pt.conf.hai10) · bù bằng hồi môn · để ngài xét | nhatky → hl; tram; hoimon | prove + counter-accuse {v}'s cousin (law 1) / drop it |
+| .11 | Danh sách sứ đoàn | ghi mực son + lễ tế biển · ghi người chết là «ở lại học đạo» · thuyền hộ tống | envoy → tn (S.men leaves); Tiểu Ngọc kinh / tn; Thân Lão, Nham Lão → tn; Ô Cửu dead / tn / cang; guong → tn; rare «Đèn trên mặt bể» (bienngu) | honest roll / hide the dead |
+### Per-chapter table — pt_su · Khiển Đường sứ (people: Tá Bá Kim Thành, Cát Thành Trọng Lữ; unnamed Hồng Lư tự khanh, Lễ bộ thượng thư, sứ Tân La)
+| ch | title | x1 climax | moves / objects | thiện / ác options |
+|---|---|---|---|---|
+| .4 | Quốc thư hai mặt trời | «thiên tử» = người giữ đền Thần · nhận lỗi thay · không dám bàn | quocthu → hl / kimthanh / kho; rare «Hai mặt trời, một bầu trời» (ngocboi) | read faithfully / kneel first |
+| .5 | Hồi thư | buồn mà còn đến · thư riêng cho phụ hoàng · «thư của Đại Hy, {land} phải vui» | hoithu → envoy; togiang → hl | soften the word / let «Vương» stand |
+| .6 | Chỗ ngồi đêm Nguyên đán | {land} trên Tân La (lose: Biên cương −BAL.road.pt.bien) · hai bàn đối diện · đỡ đại sứ ngồi tạm | — | yield / block {v} |
+| .7 | Lạy hay vái | quỳ lạy cùng đại sứ (lose: cấm túc su7) · «quỳ một gối là lễ trọng nhất» · ngồi yên | — | shield the envoy / leave him alone |
+| .8 | Hồi tứ | đủ sách cả luật lệnh · đổi lụa lấy thuốc + thầy thuốc · nhận theo Hộ bộ | kiem → vua / kho; sach | give the books / keep the treasures home |
+| .9 | Lưu học sinh | cho dự thi (win: Trọng Lữ làm Hiệu thư lang, stays) · khuyên về nước · để đại sứ quyết | trongla flags quan / ve | open the exam / send him home |
+| .10 | Thuyền về | lệnh giả, tra người sai (law 1 vs {v}'s father; lose: mang tiếng vu Lễ bộ) · hoãn không truy · để ngài xét | lenh → ta / hl / vua / chay | expose / burn the order |
+| .11 | Ai về cố quốc | chiếu cho thuyền vào bến · thuyền hộ tống · đứng đến khi thuyền khuất | ptSail: envoy → tn, scholar → tn unless he holds office; hoithu, thuta, quat, but → tn; rare «Bài thơ trăng Tam Lạp» (nt_haiduong) | — |
+### Lead measures (review/phutang-road; all 4 roads merged at 16cc8f1d)
+| Check | Result |
+|---|---|
+| dev/measure/pt-scan.py (6b + 6c family scan, all 4 roads; stops at a told return) | 6b: 0 unguarded · 6c: 103 give/buy/receive options, 58 booked (ptO / PTP), 45 used up, 0 NO BOOK |
+| dev/measure/pt-roads-bal.js STATIC pt_hai / pt_su (copy of bd-roads-bal r2: values incl. climaxes, dominance) | no-loss 0 · spread > 6: 0 (after re-levelling pt_hai_7.c1 + pt_hai_9.c1; before 2 at 6.3) · climax dominance 0 · not harder at rank 0 · digits/% 0 · unknown tokens none |
+| dev/test/road-full.js pt_hai (1 life, full frame; test now reads the origin from the premise arc, pt_* → pf) | PASS: 1:nhap14 2:sung14 3:tap14 4:pt_hai 5–11 pt_hai_5…11 12–14 endgame, fin = the .11 ending |
+| bot ≥20 lives / road | RUNNING (2 parallel processes; 4+ chromiums crashed the 15 GB box: «Target crashed» = renderer memory under load, not the roads — a single pt_su life alone plays to ch.14, heap < 400 MB, 0 errors) |
+### FOR C (pictures via MAIN; nothing drawn) — lead part
+- Branch: `img/origin-wide-pf.webp` (16:9) + `img/bg-origin-pf.webp` (3:4) — home phase places np* use neutral palace pictures until then (SCIMG npTam…npHo; n_send shows ev-hoa-than). Emblem img/kit/origin-pf.webp = KIT REQUEST (like bd).
+- Home places (KC2LAND.pf): Phòng của ngươi (bình phong giấy dó, gương đồng), Chính điện của Thiên hoàng (rèm trúc), Vườn rêu, Đền Thần bên bờ biển (cổng gỗ son giữa nước triều), Khách quán sứ Đại Hy, Chợ Tây kinh đô, Bến Nan Ba (bốn thuyền sứ chờ gió). Tang-era dress only (áo kiểu Đường + váy xếp; no thập nhị đơn).
+- pt_hai: .4 bến Minh Châu nhìn ra khơi · rare «Lửa hiệu trên Ngũ Đảo» (lửa dọc bờ, đốm lửa ngoài khơi) · .8 thuyền buồm đen sau dãy đảo đá · .11 rare «Đèn trên mặt bể» (đèn giấy trôi trên biển đêm, Hoàng thượng đứng bên).
+- pt_su: .4 sứ thần dâng quốc thư giữa điện · rare «Hai mặt trời, một bầu trời» (nàng cầm bút dưới quốc thư) · .6 yến Nguyên đán hai dãy sứ · .11 rare «Bài thơ trăng Tam Lạp» (trăng trên bến, thuyền nhổ neo).
+### FOR E
+- Base = review/bd-roads (Foreman E OK 06:56Z); phutang-road lands AFTER bd-roads PASS+LAND; I re-merge bd-roads' newest head (E14d sends its r2 sha) before SẴN SÀNG KIỂM.
+- Shared files touched (jkc2 / joi / j72 / j97 / jgecat / assemble): small edits listed above; E20 (caoly-road, from main) edits the nc text on some of the same jkc2 lines — whoever lands second resolves; my edits there are `kc2Br()==="pf"?…:` prefixes and `${L.land}`/`${L.dad}` in place of the literal «Nam Chiếu»/«phụ vương» (same output for nc).
+- BAL.kcv.pf = BAL.kcv.nc (home-phase carry row) until a kc2val pass re-measures pf.
+- Women of the roads (Tiểu Ngọc, the mother) live in the PTP book only — same filed jworld item as bd's women guests.
