@@ -576,3 +576,88 @@ out10b = {'khon-ninh-cung-ngu-2w': dict(out10['khon-ninh-cung-ngu-2w'], prompt=o
 for k, v in out10b.items(): assert v['prompt'] != out10[k]['prompt'] and FLOOR10 not in v['prompt'], k
 json.dump(out10b, open(os.path.join(D, 'prompts_v10b.json'), 'w'), ensure_ascii=False, indent=1)
 print('v10b', list(out10b))
+# ---- v11 (owner Lượt 635 via ROOT-53, L14 rewritten: each room = FRONTAL + ANGLED-CAMERA version of the SAME room; worker PR10)
+# A17: angled = the room's frontal prompt UNCHANGED except: straight-on/guide wording removed, ANG11 camera sentence added,
+#      image 3 = the frontal picture itself (same room), image 4 = Phi v9 4RFIyNR9Aa (the owner's angle model) as camera guide only.
+ANGREF = '4RFIyNR9Aa'
+ANG11 = (" ANGLED CAMERA (owner Lượt 635): this is the SAME room as image 3: the same furniture, the same colours, the same walls, windows and objects, "
+    "the same room identity; only the camera is turned to an oblique angle: it stands in the right part of the room and looks towards the back-left "
+    "corner, turned about forty degrees to the left, so the back wall runs diagonally into the depth and much more of the left side wall with its "
+    "windows is seen; the {SUBJ} is seen at a slant from its front corner, so two of its faces show (its front and its side), like the slanting view "
+    "of the bed in image 4. The furniture still stands square to the walls; only the camera is turned. Image 4 is a guide ONLY for this oblique camera "
+    "angle, NOT for its colours, furniture or arrangement. It must NOT look like the straight-on view of image 3, and never a mirror of it.")
+STRAIGHT = [("seen straight on along its central axis, with", "with"), ("seen straight on with THREE walls:", "with THREE walls:"),
+            (", centred, square to it and seen straight on,", ", centred, square to it,"), ("exactly centred and seen straight on,", "exactly centred,"),
+            (", like the wall layout of image 3", ""), (GUIDE_S, ""),
+            (" Image 3 is a guide ONLY for the wall layout, the camera distance and the people scale, NOT for its colours, furniture or arrangement.", "")]
+SAME_IMG3 = "(this same room, drawn straight on)"
+def angled(p, subj):
+    room = p[p.index(' ROOM: ') + 7:p.index(' CAMERA AND SCALE:')]
+    floor = p[p.index(' FLOOR: ') + 8:p.index(', no large rug')]
+    for a, b in STRAIGHT: room = room.replace(a, b)
+    assert 'straight on' not in room and 'image 3' not in room.replace('than in image 3', ''), room
+    return room9(room + ANG11.replace('{SUBJ}', subj), SAME_IMG3, floor)
+out11 = {}
+# 1) HQP bedroom FRONTAL 3-wall, redo of 9ZHmVqFNYZ: HQPB10 room words (own layout, window left, bed right half) + WL3;
+#    changes (owner Lượt 635): bed big with real space; soft honey orange like Xm9gqieBfo → image 3 = Xm9gqieBfo (same room) instead of the HH-B mirror.
+BIG11 = (" BED SIZE (owner Lượt 635): the canopy bed is big and takes real space in the room: about one third of the picture width, its crown near the "
+         "top edge, standing free with open floor around it, never squeezed between shelves, screens or other furniture.")
+SAMEX = (" Image 3 is this same room as drawn before (there seen with two walls): keep its furniture, its arrangement and its soft honey-orange colour "
+         "level, but now seen straight on with three walls.")
+h1 = HQPB10.replace('{WALLS}', WL3).replace(', like the wall layout of image 3', '').replace(GUIDE_S, SAMEX) + BIG11
+out11['truong-xuan-cung-hqp-ngu-F3'] = dict(prompt=room9(h1, "(this same room as drawn before)", "warm polished wooden floorboards"), refs=[*G9, 'Xm9gqieBfo'])
+# 3) HQP reception ANGLED of O6EoWbJynm ; 4) HH bedroom ANGLED of cpS5YIl0eP ; 5) HH reception ANGLED of bxMA4ov5Y2
+out11['truong-xuan-cung-hqp-A'] = dict(prompt=angled(out10['truong-xuan-cung-hqp-3w']['prompt'], "host daybed on its platform with the arch frame"), refs=[*G9, 'O6EoWbJynm', ANGREF])
+out11['khon-ninh-cung-ngu-A'] = dict(prompt=angled(out9['khon-ninh-cung-ngu-B3']['prompt'] + '', "canopy bed") , refs=[*G9, 'cpS5YIl0eP', ANGREF])
+out11['khon-ninh-cung-A'] = dict(prompt=angled(out10b['khon-ninh-cung-3w']['prompt'], "throne platform with its arch frame"), refs=[*G9, 'bxMA4ov5Y2', ANGREF])
+# HH bedroom (owner Lượt 635: HH beds big) — same BIG11 sentence on the angled HH bedroom
+out11['khon-ninh-cung-ngu-A']['prompt'] = out11['khon-ninh-cung-ngu-A']['prompt'].replace(ANG11.replace('{SUBJ}', 'canopy bed'), ANG11.replace('{SUBJ}', 'canopy bed') + BIG11)
+# 6) Cảnh Phúc QUÝ PHI bedroom FRONTAL 2-wall (palaces alternate; L14) — room words of approved v6 gOmViD0SXO; changes: two walls (window LEFT, L19),
+#    rank colour t6 option B #4F86A8 + royal yellow touches (L17, B21). image 3 = gOmViD0SXO (same room as drawn before).
+QV6 = json.load(open(os.path.join(D, 'prompts_v6.json')))['canh-phuc-cung-quyphi-ngu']
+QV6 = QV6 if isinstance(QV6, str) else QV6['prompt']
+QR = QV6[QV6.index(' ROOM: ') + 7:QV6.index(' ROOM SHAPE')]
+for a, b in [("seen straight on as a correct box of three walls with square corners: the back wall straight across the picture and the left and right side walls running towards the viewer in clear one-point perspective",
+              "seen straight on with TWO walls only: the back wall straight across the picture and the LEFT side wall running towards the viewer in clear perspective, meeting at a square corner"),
+             ("tall carved lattice windows in the right side wall", "tall carved lattice windows in the LEFT side wall"),
+             ("tall curio shelves standing flat against the left side wall", "tall curio shelves standing flat against the back wall at its right end"),
+             ("rose red gauze curtains", "soft steel-blue gauze curtains"), ("rose red silk brocade bedding", "soft steel-blue silk brocade bedding"),
+             ("the rose red cushions", "the steel-blue cushions"), ("round stools with rose red cushions", "round stools with steel-blue cushions"),
+             ("lanterns with rose red tassels", "lanterns with steel-blue tassels"), ("a rose red silk robe", "a steel-blue silk robe"),
+             ("The rose red accent colour is woven through the bedding, curtains and cushions.",
+              "RANK COLOUR (Quý phi, L17): steel blue like #4F86A8, a soft medium steel blue, woven through the bedding, bed curtains, cushions and tassels, "
+              "with royal yellow like #EFBD69 as touches (the brocade throw, cushion trims, tassels) and ivory and soft jade-green as partners.")]:
+    assert a in QR, a; QR = QR.replace(a, b)
+assert 'rose red' not in QR
+QR += RECT + (" Image 3 is this same room as drawn before (there with three walls and rose red silks): keep its furniture and its arrangement around the "
+              "centred bed with the two moon gates, but now with two walls and the rank colour written here.") + FLOOR10
+out11['canh-phuc-cung-quyphi-ngu-F2'] = dict(prompt=room9(QR, "(this same room as drawn before)", "warm polished wooden floorboards"), refs=[*G9, 'gOmViD0SXO'])
+for k, v in out11.items():
+    p = v['prompt']
+    assert p.startswith(C9_STYLE) and C9_END.split('{FLOOR}')[1] in p and v['refs'][:2] == list(G9) and v['refs'][2] not in DRIFT_IMG3, k
+    for w in ('everywhere', 'BRIGHT', 'bright', 'MUCH HIGHER', 'coffered', 'high ceiling', 'floor-to-ceiling', 'farther back', 'throne-like', 'apricot', 'ruby', '{'):
+        assert w not in p, (k, w)
+json.dump(out11, open(os.path.join(D, 'prompts_v11.json'), 'w'), ensure_ascii=False, indent=1)
+print('v11', {k: len(v['prompt']) for k, v in out11.items()})
+# ---- v11b: ANGLED versions of the two v11 frontals (image 3 = the new frontal gen itself; same angled() rule)
+STRAIGHT += [(" square to it and seen straight on,", " square to it,"), (SAMEX, ""), ("seen straight on with TWO walls only", "with TWO walls only"),
+             (" Image 3 is this same room as drawn before (there with three walls and rose red silks): keep its furniture and its arrangement around the "
+              "centred bed with the two moon gates, but now with two walls and the rank colour written here.", "")]
+out11b = {'truong-xuan-cung-hqp-ngu-A': dict(prompt=angled(out11['truong-xuan-cung-hqp-ngu-F3']['prompt'], "canopy bed"), refs=[*G9, '0eUkgjhTfW', ANGREF]),
+          'canh-phuc-cung-quyphi-ngu-A': dict(prompt=angled(out11['canh-phuc-cung-quyphi-ngu-F2']['prompt'], "canopy bed"), refs=[*G9, '9ZHmQHVNYZ', ANGREF])}
+for k, v in out11b.items():
+    for w in ('straight on,', '{', 'rose red'): assert w not in v['prompt'], (k, w)
+json.dump(out11b, open(os.path.join(D, 'prompts_v11b.json'), 'w'), ensure_ascii=False, indent=1)
+print('v11b', {k: len(v['prompt']) for k, v in out11b.items()})
+# ---- v11c: 1 redo of HQP bedroom ANGLED (rgXWBWExtc only a small turn, reads too close to its frontal 0eUkgjhTfW = owner Lượt 635 fault):
+#      ONLY the ANG11 sentence is made stronger (A17).
+ANG11C = ANG11.replace("turned about forty degrees to the left, so the back wall runs diagonally into the depth",
+    "turned strongly, about sixty degrees to the left, so the back wall runs steeply diagonally into the depth").replace(
+    "so two of its faces show (its front and its side), like the slanting view of the bed in image 4.",
+    "so its long side and its foot end both show clearly and the bed runs diagonally across the picture, exactly like the slanting bed in image 4; "
+    "the picture is clearly a different view from image 3.")
+assert ANG11C != ANG11
+p = out11b['truong-xuan-cung-hqp-ngu-A']['prompt']
+out11c = {'truong-xuan-cung-hqp-ngu-A-r1': dict(prompt=p.replace(ANG11.replace('{SUBJ}', 'canopy bed'), ANG11C.replace('{SUBJ}', 'canopy bed')), refs=out11b['truong-xuan-cung-hqp-ngu-A']['refs'])}
+assert out11c['truong-xuan-cung-hqp-ngu-A-r1']['prompt'] != p
+json.dump(out11c, open(os.path.join(D, 'prompts_v11c.json'), 'w'), ensure_ascii=False, indent=1)
