@@ -608,3 +608,11 @@ Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as 
 - scope: tp1-5 pr1-5
 - luot: 483, 486 (G4)
 - why: phi bạch never gold/yellow below t6
+
+### X18 · old store drawing style 'semi-realistic / near-3D / realistic rendering'
+- regex: `semi-realistic|near-3D|realistic rendering`
+- scope: any
+- unless: -
+- negation: no
+- luot: 779 (C1, via ROOT-57; MG2)
+- why: the drawing style is the approved thiếu nữ style ONLY (master M01/M02); the old store style clause is gone from every builder. Scope 'any' = every prompt of every scope, faces and states included

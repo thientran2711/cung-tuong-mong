@@ -672,7 +672,16 @@ BANNED = [{'id': 'X01',
   'unless': '',
   'negation': '',
   'luot': '483, 486 (G4)',
-  'why': 'phi bạch never gold/yellow below t6'}]
+  'why': 'phi bạch never gold/yellow below t6'},
+ {'id': 'X18',
+  'title': "old store drawing style 'semi-realistic / near-3D / realistic rendering'",
+  'regex': 'semi-realistic|near-3D|realistic rendering',
+  'slot': '',
+  'scope': 'any',
+  'unless': '',
+  'negation': 'no',
+  'luot': '779 (C1, via ROOT-57; MG2)',
+  'why': "the drawing style is the approved thiếu nữ style ONLY (master M01/M02); the old store style clause is gone from every builder. Scope 'any' = every prompt of every scope, faces and states included"}]
 
 # G15 (owner Lượt 559): QUÝ NHÂN t3 DESIGN = option B v2. The t3 outfit-design words of the store (TIER_LOW[3] robe in t8-prompt-B/build.py) are REPLACED
 # by the Outfit words of dev/handover/reports/quy-nhan/m13_a26_t3_v2_optB.prompt.txt, copied verbatim; slots only: lilac -> {main}, deep teal -> {sec}
@@ -824,7 +833,7 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False):
         (fails if req else warns).append(item)
     text = _strip_kc_faces(text)   # B8 (BW3): the owner's verbatim KC face words are approved as a whole: never scanned for banned phrases (m13 "PHOENIX eyes" = eye shape, not the X08 motif; m43 "covering the teeth completely")
     for x in X:
-        if scope not in parse_scope(x["scope"]): continue
+        if x["scope"] != "any" and scope not in parse_scope(x["scope"]): continue   # 'any' = every scope incl. face/states (X18, Lượt 779), as for S entries
         xa = (x.get("ages") or "all").split()   # B23 (BW6): X rules may be age-limited like S rules
         if age and "all" not in xa and age not in xa: continue
         if x.get("unless") and x["unless"] in found: continue
