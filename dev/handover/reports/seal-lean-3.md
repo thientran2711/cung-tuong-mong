@@ -54,3 +54,9 @@ Note: Fold event take = seal pops beside the figure at the dialog's left; stays 
 - fig-seal Fold/iPad (default + GIAN3) pass; quickcheck PASS 203 s (open 1534, render 235/219, tab 470/501, buoi 1409/1121). Videos re-recorded (same CDN names): full-*, event-*, close-{gian,buon,vui,binh}-* for 755x1000 + 1180x820 (GIAN3 base .../anim/).
 
 - r5b: d467fe70 = bd012c4e merged with LIVE main d9b32074 (index/sw rebuilt); only the merge changed, fig-seal Fold/iPad GIAN3 re-run pass; r5 videos stay valid.
+
+## r6 @ 1b933c7c (up to date with LIVE main d9b32074) — ROOT-68 FAIL: blank frames at part swaps
+- Fix: the real still stays visible until the FIRST big picture has been painted (class kemo-hide added 150 ms after the clone's first <img> is attached; kemo-lean stays the state class), and every previous picture stays UNDER the next one for lean.overlapMs 150 (never hide-then-show) at every swap: still->out, out->loop, loop->back; back->still = clone removed and still shown in the same task.
+- Test-side finding: the blank ~2 frames ROOT-68 saw at ~4.5 s of the iPad event video came from my test hack (making the dialog person angry re-creates her kfseal with a COLD giận still -> kemo-wait hidden until loaded). The video script now warms the giận stills first (the real game has them cached). The kemo-wait gap on a cold re-created still is kfseal's own re-creation, unchanged.
+- Frame-step at 25 fps over the whole dialog lean (red-pixel + beige-square detector on the seal crop, DOM log every 20 ms), Fold + iPad: 0 blank frames (min red share 0.39 of median = the loop->back pose change, never 0), 0 beige squares. One dip at dialog fade-in belongs to the dialog's own opening fade.
+- fig-seal Fold/iPad GIAN3 pass; quickcheck PASS 211 s (open 1636, render 231/249, tab 592/509, buoi 1270/1456). Videos re-recorded, same CDN names (full-*, event-*, close-{gian,buon,vui,binh}-* x 755x1000 + 1180x820).

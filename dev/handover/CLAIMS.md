@@ -255,7 +255,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | FOREMAN E (opus; ex-ROOT STANDBY, depth 0; took over from E ROOT #9 at depth limit) | handover FOREMAN_E_STATUS | owner STANDBY | session_01DgYSWkgmeMCRaqRT4UCEJE | DONE → E #11 | 19/11 06:50Z |
 | caoly-road (foreign-princess-3 step 2a: Nam Chiếu princess road → Cao Ly, sonnet E20) | review/caoly-road; briefs/E20-caoly-rename.md | FOREMAN E | session_01DgYSWmHCamFvjQHK274SMZ | READY FOR REVIEW 30d7cca8 | 19/11 ~08:10Z |
 | phutang-road lead (foreign-princess-3 step 2b: NEW Phù Tang roads pt_hai/pt_su + plan, opus E21) | review/phutang-road; briefs/E21-phutang-road.md | FOREMAN E | session_01DgYSWm2JdhtEH6d41VumRy | RUNNING | 19/11 06:49Z |
-| seal-lean-3 fast pop / slow shrink / head-size max (sonnet; OD 06:55Z) | review/seal-lean-3 | MAIN ROOT-65 | session_01Rc5AsKzdGvNFdCvLo4rm8G | READY (d467fe70) | 19/11 07:03Z |
+| seal-lean-3 fast pop / slow shrink / head-size max (sonnet; OD 06:55Z) | review/seal-lean-3 | MAIN ROOT-65 | session_01Rc5AsKzdGvNFdCvLo4rm8G | READY (1b933c7c) | 19/11 07:03Z |
 | phutang-road writer 2 (pt_tang + pt_dang, opus E21b, under E21) | review/phutang-road-w2; briefs/E21b-phutang-road-w2.md | FOREMAN E | session_01DgYSWkdwE7LuxhVqAQnJah | DONE 1d49cfc9 (archived 08:01Z) | 19/11 07:03Z |
 | bd-roads r2 + Ba Tư lead (opus E14d, successor of E14c) | review/bd-roads | FOREMAN E | session_01DgYSWqB4qyr7uRTdKD8895 | RUNNING | 19/11 07:06Z |
 | role-parity-drift-2 (opus; 12 new red rows from landings 7fb7c104..98f9f0f1; law 1 + law 11) | review/role-parity-drift-2 | B | session_01N1tNP6PEK9T9BWXhYLZvAd | RUNNING | 19/11 07:30Z |
