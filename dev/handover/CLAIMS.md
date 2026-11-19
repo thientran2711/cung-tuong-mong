@@ -282,3 +282,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | palace-chatter successor: apply K-HEAD-SAY jchat-say.patch + end-to-end run (opus E17c) | review/palace-chatter; briefs/E17c-palace-chatter-say.md | FOREMAN E #11 | session_01DgYSWnKfwZsB2F92BggLCq | RUNNING | 19/11 10:49Z |
 | kyngo-daily BIG REVIEW (opus E18r) of 8cb39e38 | review/kyngo-daily; briefs/E18r-review-kyngo-daily.md | FOREMAN E #11 | session_01DgYSWnzDSXLeyEPaWuBrQQ | RUNNING | 19/11 11:00Z |
 | REVIEW role-parity-drift-2 r1 (sonnet SMALL, tooling only) of 6ffe38a4 | review/role-parity-drift-2-r1 | B | session_01N1tNP6yFh7EgvwXvnX7ku3 | RUNNING | 19/11 11:06Z |
+| coop-thin F6a #2 (opus; successor of 5ex6HrG5 at 594fe744) | review/coop-thin-f6 | B | session_01N1tNP5kNmqN7AE6fHZAd5u | RUNNING | 19/11 11:07Z |
