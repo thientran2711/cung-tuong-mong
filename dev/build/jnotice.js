@@ -112,7 +112,8 @@ function picOf(it){return it&&it.pic||""}
 function kitNoticeOpen(id){try{if(typeof kitPanel!=="function")return null;const one=id!=null?NT.list.find(x=>x.id===id):null;
  const U=unread();const L=one?[one]:(U.length?U:NT.list.slice(0,6));if(!L.length)return null;
  const lead=L[0];/* plain kit text rows (kpsec html), not kitFacts: no person figure is guessed from the words — the panel stays SMALL */
- const html=L.map(x=>`<p class="kntp">${esc(x.text)}${!one&&x.seen?" <small>(đã xem)</small>":""}</p>`).join("");
+ const seenL=new Set();const LL=L.filter(x=>{const k=one||L.length===1?x.text:x.line;if(seenL.has(k))return false;seenL.add(k);return true});/* the same line twice (two buổi of one happening) shows once */
+ const html=LL.map(x=>`<p class="kntp">${esc(one||L.length===1?x.text:x.line)}${!one&&x.seen?" <small>(đã xem)</small>":""}</p>`).join("");/* a list = the short lines (the kit frame sizing keeps it small); one notice = its full text */
  const go=L.find(x=>typeof x.go==="function");const opts=go?[{n:go.goLabel||"Để ta xem",fx:{},go:()=>{try{go.go()}catch(e){}boxPaint()}},{n:"Để sau",fx:{},go:()=>{boxPaint()}}]:undefined;/* review r4: a kit panel with options has no ✕ (jksize) — «Để sau» always lets her close it without being sent to Dư đồ */
  const m=kitPanel({kind:"notice",title:"Tin báo",sub:one?"":(U.length?`${U.length} tin mới`:"Đã xem hết"),sections:[{html}],opts,onClose:()=>boxPaint()},true);m.__ntc=lead;showModal();picSwap(document,lead);for(const t of [0,150,400,800,1500])setTimeout(()=>{if(NT.open===m)picSwap(document,lead)},t);NT.open=m;
  for(const x of L)x.seen=true;const c=$("kntchip");if(c)chipHide(c);setTimeout(boxPaint,0);return m}catch(e){console.error("kitNoticeOpen",e);return null}}
@@ -151,6 +152,8 @@ const st=document.createElement("style");st.id="kit-notice";st.textContent=`
 #kntchip.kntc{left:0;transform:none;white-space:nowrap;max-width:none;width:max-content}
 #kntchip.kntc .khap{flex:0 0 auto;margin:0;width:16px;height:16px;line-height:16px;font-size:.72rem;vertical-align:0;animation:none}
 body.kdlg-on #kntchip,body.kbk-open #kntchip{visibility:hidden!important}`;document.head.appendChild(st);
+/* compatibility alias (errand adapter guessed it): kitNotice.add({id,text,onTap}) = kitNotice({id,line:text,go:onTap}); new code calls kitNotice({...}) */
+kitNotice.add=function(o){o=o||{};return kitNotice({id:o.id,line:o.line||o.text,text:o.text,pic:o.pic,go:typeof o.onTap==="function"?o.onTap:(o.go||null),goLabel:o.goLabel||(o.onTap?"Để ta xem":"")})};
 Object.assign(window,{kitNotice,kitNoticeDrop,kitNoticeSeen,kitNoticeList,kitNoticeOpen,kitNoticeBox:boxPaint});
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§42.2",title:"kitNotice · ô ! trên thanh trên + chip một dòng ở trên + khung Tin báo",
  html:()=>`<div class="kitpg-row" style="display:flex;gap:14px;align-items:center;flex-wrap:wrap"><button type="button" class="krailb kglyph kntb kbusy kbadge" style="position:relative;width:32px;height:32px;min-width:0;min-height:0;padding:0;display:flex;align-items:center;justify-content:center"><i class="khap" style="margin:0">!</i></button>`+
