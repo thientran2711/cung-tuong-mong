@@ -55,3 +55,16 @@ Tests: dev/test/manifest-guard-selftest.py = **12 pass, 0 fail** (fake CDN write
 1. Land baf63a2d first (floor only) to unblock G4 for npc-purpose 126dadaa / choice-value 02e151e3 / palace-chatter (they need to merge main after it). e0e0e5ae (tooling) after review.
 2. The OD log has no line for Lượt 557 / 562 (old kc out / consort kc kept). MAIN should record it (OD is MAIN's file).
 HANDOVER: none needed. Job done; only the review is left.
+
+## REVIEW (C-AG #23 rv) PASS-A baf63a2dfc49f585736fee896eb4e8b1b20cc21e
+PRIORITY #1 CHECK: OD 1 (OD line "19/11 ~19:30Z ... Lượt 557/562" records the pull-down) | main manifest-floor.json | review/cdn-kc-guard | claims C-AG #23.
+Floor-only, 1 file. Owner order verified (lv1-kc-swap.md Lượt 557 + 562, OD record). Nothing lost (Law 6c): 156 maid kc a26/a36/a51 files kept in img/_rejected/live-old/, consort kc 128 restored. Floor 264 = live 264. --live-check PASS, quickcheck 70 rc 0.
+
+## REVIEW (C-AG #23 rv) PASS 7a3225024f6a070d0aabed457d90d15ae72b666b
+PRIORITY #1 CHECK: as above.
+- Selftest 16/16, quickcheck 70 rc 0, live-check PASS (live CDN).
+- Push-path family (Law 11): git grep of the whole repo finds no other writer to the CDN manifests (no curl PUT / wrangler r2 / direct api.cloudflare.com outside cdn_sync.py); wrangler = Worker deploys only. put() + DELETE guarded inside cdn_sync, so scripts that import it (lv1-tools pattern) are covered; --prune skips top-level manifests; is_guarded() = every FIGURES*.json + ACTS/EVENTS; live-check walks every FIGURES*.json on the CDN.
+- Real dry runs vs live CDN: unchanged/grown FIGURES-kc + FIGURES-hd push normally (normal art pushes unaffected; art files are not guarded keys); 4 rows cut -> REFUSED; --allow-shrink without --reason -> refused; with "owner Lượt 557" -> SHRINK ALLOWED (dry run, nothing recorded).
+- Shots (Fold 755x1000 + iPad 1180x820; Tể tướng daughter kc dress, thầy đồ daughter ngheo): whole figure in, nothing cut, portraits framed. Shots wiped from the CDN; live-check still PASS.
+- origin/main = baf63a2d is an ancestor of 7a322502: fast-forward OK.
+- Notes (non-blocking): DELETE guard is unconditional (ALLOW_SHRINK never set True), stricter than documented; START_ART.md line left to MAIN.
