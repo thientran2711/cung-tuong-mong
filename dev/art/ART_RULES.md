@@ -73,7 +73,7 @@ D9 | Clean bare forehead: every prompt says clearly NOTHING on the forehead (no 
 D10 | Nothing ever covers any part of the face (held item below the chin). | 18/11 16:25Z | FG 137
 D11 | STYLE: semi-realistic painterly guofeng, near-3D, soft light, fair un-rosied skin (choice B); everyone beautiful at every age; never tanned, sly, glare, smirk, pout, hand at mouth, caricature. | 11/14; OD:L1305 | FG 145-152, 173
 D12 | a36 = young for her age (no lines); a51 = visibly older but beautiful, soft fine lines, clear silver-grey streaks at temples, never white hair, never haggard. | 18/11 16:30Z, 21:35Z, 22:58Z | FG 201, 217, 236
-D13 | AGE LOOK (owner Lượt 583 + 623): everyone looks younger than her age. a51 must LOOK ABOUT 45 (NOT 'clearly 50' — that drew her too old): a few soft fine lines at most, only a little silver at the temples; still clearly older than a36. a65 looks a gentle ~58–60. Never write 'clearly ~50' in any prompt. | Lượt 623 (19/11) | FG - | over: Lượt 583 (19/11)
+D13 | AGE LOOK (owner Lượt 583 + 623): everyone looks younger than her age. a51 must LOOK ABOUT 45 (NOT 'clearly 50' — that drew her too old): a few soft fine lines at most, only a little silver at the temples; still older than a36. Never write 'clearly ~50' in any prompt. | Lượt 623 (19/11) | FG - | over: Lượt 623 (19/11); Lượt 583 (19/11)
 
 ## E. Standing angles, poses, held items
 E1 | ANGLE: 14 angles (7 + 7 mirrored); angle AND pose are a SEEDED RANDOM draw per (person, rank): 8 distinct values inside one person; across people the same rank must not share one angle (roughly even counts); never "rank X = angle Y for everyone". | Lượt 469, 476 | FG 28 | over: Lượt 229, 289, 295, 308, 321, 3d2 frontal-only (FG 138)
