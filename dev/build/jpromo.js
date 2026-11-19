@@ -38,8 +38,8 @@ Object.assign(BAL,{promo:{
   [["gamto",1],["luahang",1],["trahop",1],["traicay",1],["ruoucuc",1],["yensao",1]],
   [["gamto",2],["trahop",2],["traicay",1],["ruoucuc",1],["yensao",1],["nhansam",1]],
   [["gamvang",1],["gamto",1],["trahop",2],["traicay",1],["ruoucuc",2],["yensao",1],["nhansam",1]]],
- /* servant road: index = SRK.maid rank 1..4, 5 = ma ma; "wd:" = a WD garment / pin */
- srv:[[],[["vaibong",1],["banhtrai",1]],[["wd:y_luamoc",1],["wd:tram_dong",1],["vaibong",1],["tragoi",1],["banhtrai",1]],
+ /* servant road: index = SRK.maid rank 1..5, 6 = ma ma (BAL.srvRk, maid-ladder-6: nhị đẳng row inserted); "wd:" = a WD garment / pin */
+ srv:[[],[["vaibong",1],["banhtrai",1]],[["vaibong",1],["tragoi",1],["banhtrai",1]],[["wd:y_luamoc",1],["wd:tram_dong",1],["vaibong",1],["tragoi",1],["banhtrai",1]],
   [["wd:y_chuongsu",1],["luahang",1],["tragoi",1],["traicay",1],["tuithom",1]],[["wd:y_nuquan",1],["luahang",2],["trahop",1],["traicay",1],["ruoucuc",1]],[["wd:y_mama",1],["luahang",1],["trahop",1],["traicay",1],["ruoucuc",1]]]}});
 /* ---------- staff capacity: the table above (rank-ups that raise it bring one more servant) ---------- */
 /* (the private capOf wrapper that lived here is gone: j10 capOf reads BAL.promo.cap for everyone — review/staff-root) */
@@ -94,11 +94,11 @@ function prServLine(s,r){const maid=s.role==="maid";const self=maid?"Nô tỳ":"
 function prServSub(s){const b=[];try{b.push(srkName(s))}catch(e){}if(s.age)b.push(`${s.age} tuổi`);if(s.org)b.push(s.org);return b.join(" · ")}
 /* ---------- her: any code path that raises her rank (render diff, like j93 kmDiff) ---------- */
 function prRoad(){return typeof isSrv==="function"&&isSrv()}
-function prSrvRk(){return S.srv&&S.srv.mama?5:Math.max(0,S.srv&&S.srv.rk|0)}
+function prSrvRk(){return S.srv&&S.srv.mama?BAL.srvRk.mama:Math.max(0,S.srv&&S.srv.rk|0)}
 function prCheck(){if(!S||S.dead)return;const srv=prRoad();let z=S.prSeen;
  if(!z||typeof z!=="object"){S.prSeen={r:srv?null:S.rank,s:srv?prSrvRk():null};return}
  if(srv){const cur=prSrvRk();if(z.s==null||S.srv.lau>0){z.s=cur;return}if(cur>z.s){const E=[];for(let i=z.s+1;i<=cur;i++)E.push(...prGive(S,prSrvSetFor(i)));z.s=cur;
-   prChest(E,{kind:"pouch",title:`Đồ thưởng ${cur===5?"Ma ma":SRK.maid[cur]}`,from:"Nội vụ phủ phát theo bậc mới"});window.__prN=(window.__prN||0)+1}else if(cur<z.s)z.s=cur;return}
+   prChest(E,{kind:"pouch",title:`Đồ thưởng ${cur===BAL.srvRk.mama?"Ma ma":SRK.maid[cur]}`,from:"Nội vụ phủ phát theo bậc mới"});window.__prN=(window.__prN||0)+1}else if(cur<z.s)z.s=cur;return}
  if(S.out)return;const cur=S.rank;const from=z.r==null?-1:z.r;
  if(cur>from){const E=[],staff=[];for(let r=from+1;r<=cur;r++){E.push(...prGive(S,prSetFor(r)));const s=prStaff(S);if(s)staff.push([s,r])}z.r=cur;z.s=null;
   prChest(E,{title:`Phẩm phục ${prRankName(cur)}`,from:`Nội vụ phủ phụng chỉ đưa tới · ${prRankName(cur)}`});window.__prN=(window.__prN||0)+1;
