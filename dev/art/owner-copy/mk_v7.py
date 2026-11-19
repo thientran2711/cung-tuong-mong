@@ -1,7 +1,7 @@
 # Owner Lượt 331: add ONLY the changed parts to the approved V6 / princess V4 prompts.
 B='/home/user/cung-tuong-mong/dev/art/owner-copy/'
 ONE="ONE SINGLE SLEEVE LAYER: each very long wide sleeve begins at the shoulder and falls in one piece to below her hands; NO shorter outer sleeve, NO half-sleeve or elbow-length layer, NO short jacket sleeve or cuff layer visible on top of it. "
-UP="HAIR UP: ALL of her hair is swept UP and gathered into the tall high chignon on top of her head under the crown, smooth at the nape; NO hair hanging loose down her back or over her shoulders. "
+UP="HAIR UP: ALL of her glossy pure BLACK hair (never brown) is swept UP and gathered into the tall high chignon on top of her head under the crown, smooth at the nape; NO hair hanging loose down her back or over her shoulders. "
 LS="SLEEVES: very long, very wide, flowing sleeves that fall well past her hands down toward her knees, at least as long and wide as the sleeves of the lowest consort ranks, ONE single sleeve layer (no shorter outer sleeve on top); the brocade flows and drapes softly like heavy silk, never stiff. "
 def ins(s,anchor,add):
     assert anchor in s,anchor[:40]; i=s.index(anchor); return s[:i]+add+s[i:]
