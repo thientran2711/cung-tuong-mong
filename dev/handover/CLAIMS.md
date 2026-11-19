@@ -209,4 +209,4 @@ kc/ngheo NEW c13+c16 (4 gens) | handover | session_01PEhRbvGFP6YSgT5DTgo3yu (K4,
 | role-parity-drift (opus; 25 cx2 N-only rows on LIVE) | review/role-parity-drift | B | session_01N1tNP5o5V6dzpfsYEuSczb | RUNNING | 19/11 02:58Z |
 | REVIEW art-wiring-1119 r1 (opus BIG) of 69a26198 | review/art-wiring-1119-r1 | B | session_01N1tNP6nQ6XCj5Xu1dFX9af | RUNNING | 19/11 02:58Z |
 | REVIEW maid-ladder-6 r1 (opus BIG) of cb5a7cb3 | review/maid-ladder-6-r1 | B | session_01N1tNP3R1PQaRUv57AFoczD | RUNNING | 19/11 03:05Z |
-| seal-anim-sheet (sonnet; show-only, owner asked to see each seal animation) | handover report | MAIN ROOT-62 | (opening) | RUNNING | 19/11 03:15Z |
+| seal-anim-sheet (sonnet; show-only, owner asked to see each seal animation) | handover report | MAIN ROOT-62 | session_01Rc5AsLhf6D4pDFssmG94et | RUNNING | 19/11 03:15Z |
