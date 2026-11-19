@@ -38,3 +38,7 @@ road-saves.js / npc-roads.js / road-end.js: timed out at my 250 s cap (too slow 
 - NIT-2: jgedata.js:119/120 (nc_tuc ending «treo tấm da trước cửa cung ngươi») refers to a wolf-hide beat that exists only on the bd road (jrd_nc.js:527); pre-existing, now more jarring in Cao Ly. Reword to a Cao Ly-fit insult or leave to E14d.
 - NIT-3: scene art keys nn*/origin-wide-nc still show the Yunnan look (lake, white towers, peacock) until Foreman C repaints (report FOR C) — a Cao Ly life shows Nam Chiếu pictures meanwhile; Foreman E to decide whether to gate shipping on it.
 - NIT-4: caoly-oldsave.js check 1 should test `old.land`, not the save string.
+
+## ROUND 2 — r2 10c432fa: PASS (READY e5241e4a)
+FIX 1 verified: kc2MigNc (jkc2.js, wraps deser) rewrites S.kc.fam titles Hoàng huynh/Hoàng thúc/Mẫu hậu → Thế tử huynh/Vương thúc/Vương hậu for origin nc only (bd and court envoys untouched), thanh-mai «Phó sứ Nam Chiếu» strings → Cao Ly, ids/roles unchanged, idempotent; new lives already use «Vương hậu» (KC2LAND.nc.mom). NIT-4 done (precondition uses old.land).
+Tests on r2 merged with live d9b32074 (then final-merged 6b1ab390 → review/caoly-road-r6 @ e5241e4a, ancestor of origin/main, index.html/sw.js rebuilt): caoly-oldsave 14/14 (old home save: fam migrated, ids unchanged, no Nam Chiếu, 0 page errors); ge_guard ERRORS 0 + ge-guard 6/6; one-core-guard PASS; npc-roads-tokscan titleBad 0 tagBad 0 errs 0; quickcheck PASS (core gates, time-spill, old save, perf equal to live). NIT-1/2/3 left to E per E #11's call.
