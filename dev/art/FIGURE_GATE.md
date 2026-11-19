@@ -901,3 +901,6 @@ ROOT-44 Lượt 306 actions: m19 secondary = B soft teal blue #6E9CA8 (all 8 ran
 ### OWNER LƯỢT 377 (19/11, VERBATIM, ROOT-45 chat) — a full 8-rank set for a COMPLETELY NEW person
 "Rồi, bây giờ mày mày làm cho tao bật 1, 2, 3, 4, 5, 6, 7, 8 hoàn chỉnh luôn nhưng mà một người hoàn toàn mới."
 → TEST OF THE WHOLE PIPELINE on a brand-new person: (1) new thiếu nữ picture = COMMON_v3 + a new {PERSON} line (new face, hair, 2 colours, look group), M09 eIyOFEidqL only, seed 7172; (2) ranks t1–t6 = build.py --low N store text verbatim + slots + added laws; t7 = build_t7, t8 = build (HH vàng) + t8o (màu gốc), prompt-B fabric; every prompt STORE CHECK PASS; (3) one sheet t1–t8 + t8o. Handled by ROOT-46.
+### OWNER LƯỢT 381 (19/11, VERBATIM, ROOT-45 chat; logged by ROOT-46) — correction of Lượt 377: NO new thiếu nữ picture
+"Rồi mắc cái mớ gì mày phải vẽ hình thiếu nữ trước trong khi đã có 90 gương mặt hình thiếu nữ. Vẽ hồi hồi nãy duyệt hết rồi."
+→ "Người hoàn toàn mới" = one of the already-approved thiếu nữ faces that has no rank set yet (not m19, not a princess) — NEVER draw a new thiếu nữ for a rank test. Chosen: m39 v4 (approved Lượt 322; gen tCRFXOSmZJ, cut JNCRSC2Oq4, prompt face-common/m39.v4.FULL.txt) as image 1; t1–t8 + t8o from dev/art/store-all/build_all.py m39 N, every prompt STORE CHECK PASS (dev/art/check_store.py). ROOT-46 helper re-tasked at once.
