@@ -37,7 +37,7 @@ function rkTrack(){if(!S||S.dead)return;const k=S.rk=S.rk||{t:[],mr:-1,sr:-1,k:(
  if(S.srv){const r=S.srv.rk|0;if(r>k.sr){if(k.t.length<70)k.t.push([y,m,"s",r]);k.sr=r}if(S.srv.mama)k.mama=1}
  const nk=(S.kids||[]).length;while(nk>k.k){const c=S.kids[k.k];if(k.t.length<78)k.t.push([y,m,"k",c&&c.sex==="m"?1:0]);k.k++}}
 function rkSummary(endk,fate){const k=S.rk||{};const kids=S.kids||[];const y=Math.max(0,(S.year||1)-1);
- const mr=rkSrvNever()?-1:Math.max(S.rank|0,S.maxRank|0,k.mr==null?-1:k.mr);const sr=S.srv?Math.max(S.srv.rk|0,k.sr==null?-1:k.sr):-1;
+ const mr=rkSrvNever()?-1:Math.max(S.rank|0,S.maxRank|0,k.mr==null?-1:k.mr);const sr0=S.srv?Math.max(S.srv.rk|0,k.sr==null?-1:k.sr):-1;/* the board keeps its 5 servant steps (rank/worker score.js): a six-rung maid rung is sent as its tier (BAL.srvRk.tier, maid-ladder-6) */const sr=sr0>=0?srkTier(sr0):-1;
  let fig="",por="";try{fig=typeof figFor==="function"?figFor(S)||"":""}catch(e){}try{por=typeof figFor==="function"?figFor(S,"por")||"":""}catch(e){}
  if(!por)try{por=fsrc(S.fc,"")}catch(e){}
  /* the server keeps only "img/<file>.webp": strip the CDN base (assemble.py turns every quoted "img/…" literal into IMG_BASE+"img/…", so no quoted img/ here) */

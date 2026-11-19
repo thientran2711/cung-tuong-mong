@@ -178,9 +178,9 @@ EVD.trom={place:()=>"home",
 /* ---------- 13 ĐẠI PHÓNG CUNG NHÂN (row 13): maids at BAL.srvAge.ask (j42 rule, ageing j17) leave every household at once (spring, or
    after a trộm / rét); rich NPCs pay Nội vụ phủ to keep a good one; Nội vụ phủ refills (fillStaff) at the end. Her: send them off with silver,
    keep one, or let them go. */
-/* mãn hạn = the j42 rule she meets as a maid: at BAL.srvAge.ask Nội vụ phủ asks her to leave; a chưởng sự (rk >= 3) may stay as ma ma.
-   (srvAge.out 30 was never reached in a live household: NPC maids turn over or rise to rk 3 first — world-ret-phong r1 bot, 0 in 2700 tuần.) */
-const aged=s=>s&&s.role==="maid"&&(s.age||0)>=BAL.srvAge.ask&&!s.eid&&!s.coop&&!((s.rk||0)>=3)&&s!==S.maid;
+/* mãn hạn = the j42 rule she meets as a maid: at BAL.srvAge.ask Nội vụ phủ asks her to leave; a chưởng sự (rk >= BAL.srvRk.cs) may stay as ma ma.
+   (srvAge.out 30 was never reached in a live household: NPC maids turn over or rise to chưởng sự first — world-ret-phong r1 bot, 0 in 2700 tuần.) */
+const aged=s=>s&&s.role==="maid"&&(s.age||0)>=BAL.srvAge.ask&&!s.eid&&!s.coop&&!((s.rk||0)>=BAL.srvRk.cs)&&s!==S.maid;
 /* ONE pool for every phóng cung opener and for the release itself: her household + the living NPC households not in lãnh cung
    (a dead or cold-palace household is never counted, so the gate never opens an empty release). */
 const phongHH=()=>liveR();/* liveRivals: alive and not in lãnh cung */

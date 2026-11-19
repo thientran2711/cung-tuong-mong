@@ -170,7 +170,7 @@ function asMonth(){if(!asOn())return"";let ev="";const B=asB();
    if(s.role==="maid"&&(s.age||20)>=18&&(s.loyal>=BAL.srvGrant.tin)&&srk(s)>=1&&roll(BAL.srvGrant.base+(s.vow?BAL.srvGrant.bond:0))){const N=asNeeds(s);const c=mindPick([["stay",BAL.ag.routine/BAL.ag.unit],["wed",(N.love+(s.vow?B.vowW:0))*BAL.ag.needW]],s);asC(s,c==="wed"?"grantWed":"grantStay");
     if(c==="wed"){s.wed=1;asOut(s,"wed");const man=s.vow&&manById(s.vow);if(asSee(p))ev+=`${s.name}, cung nữ của ${NM(p)}, được chủ ban gả${man?" cho "+man.name:""}. `;continue}else s.loyal=cl(s.loyal-BAL.srvGrant.stayLoy,0,100)}
    /* Tuổi (j42 cnvAge, BAL.srvAge): Xuất cung / Ở lại làm ma ma (chưởng sự) / Xin chủ giữ lại */
-   if(s.role==="maid"&&(s.age||0)>=BAL.srvAge.ask&&!s.ageDone){s.ageDone=1;const N=asNeeds(s);const O=[["out",(N.love+(s.vow?B.vowW:0)+B.outW)*BAL.ag.needW],["keep",s.loyal/100*BAL.ag.routine/BAL.ag.unit]];if(srk(s)>=3)O.push(["mama",(N.mp+N.bac+B.outW)*BAL.ag.needW]);
+   if(s.role==="maid"&&(s.age||0)>=BAL.srvAge.ask&&!s.ageDone){s.ageDone=1;const N=asNeeds(s);const O=[["out",(N.love+(s.vow?B.vowW:0)+B.outW)*BAL.ag.needW],["keep",s.loyal/100*BAL.ag.routine/BAL.ag.unit]];if(srk(s)>=BAL.srvRk.cs)O.push(["mama",(N.mp+N.bac+B.outW)*BAL.ag.needW]);
     const c=mindPick(O,s);asC(s,"age_"+c);if(c==="out"){asOut(s,"age");continue}if(c==="mama")s.mama=1}
    if(s.role==="maid"&&(s.age||0)>=(s.mama?BAL.srvAge.mama:BAL.srvAge.out)){asOut(s,"age");continue}}
   if(sch)p.schLast=p.schemes||0}

@@ -228,11 +228,11 @@ function exRun(P,e,done){e.pend={raws:[]};const raws=e.pend.raws;let i=0;const n
    tuần opens (card «Khảo hạch Nội vụ phủ» in Phận sự); pass = the rise at once (the old j42 rise: rank, merit 0, Chủ tin +5, «Thăng bậc»);
    fail / missed window = wait BAL.ex.srvCd[to] months. The choice «Ở lại làm ma ma» (age 25) is an exam the same way (target "mama").
    Rounds = the low-rank exam (lễ nghi + nữ công, exRounds tier 0); examiner = a ma ma of Nội vụ phủ; her mistress's trust (Chủ tin) moves
-   the bar like the examiner's liking (BAL.ex.attDiv). Bar BAL.ex.srvBar[to] (to 1..4, 5 = ma ma).
+   the bar like the examiner's liking (BAL.ex.attDiv). Bar BAL.ex.srvBar[to] (to 1..BAL.srvRk.nq, BAL.srvRk.mama = ma ma; maid-ladder-6).
    NPC servants (j14 servRanks, maids and eunuchs): the same exam, rolled at their rank as level (exRaw), seeded by servant + month so both
    co-op clients roll the same; fail = wait BAL.ex.srvCd months. State: S.srv.ex = {to, w0, w1, cd, lapse, pend, last, n}; NPC s.exCd. */
 function exSrvName(to){return to==="mama"?"Ma ma":SRK.maid[to]||"Cung nữ"}
-function exSrvIx(to){return to==="mama"?5:Math.max(1,Math.min(4,to|0))}
+function exSrvIx(to){const K=BAL.srvRk;return to==="mama"?K.mama:Math.max(1,Math.min(K.nq,to|0))}/* maid-ladder-6: rungs 1..BAL.srvRk.nq, ma ma BAL.srvRk.mama */
 function exSrvCdN(to){const c=BAL.ex.srvCd;return c[exSrvIx(to)]}
 function exSrvS(){if(!S||!S.srv)return{};let e=S.srv.ex;if(!e||typeof e!=="object")e=S.srv.ex={};return e}
 function exSrvPlan(to){const B=BAL.ex;const V=EX_VIR[0];const A=exArtPart(S,0);const tin=Math.round(S.tin||0);
@@ -271,10 +271,10 @@ function exSrvTick(){if(!exOn()||!isSrv()||S.dead)return;const e=exSrvS();if(e.p
 function exSrvMama(){if(!exOn()){S.srv.mama=1;log("Ngươi ở lại cung làm ma ma.");return}S.srv.ex={to:"mama"};exSrvOpen("mama")}
 /* NPC servants: one seeded roll per month at their rank as level; true = the rise is given */
 function exSrvNpc(s){try{if(!exOn())return true;if(s.coop)return true;if(s.exCd>S.turn)return false;const lv=srk(s);
- const rnd=exRng(((s.sid||1)*7919+(S.turn||0)*104729)|0);const raws=[0,1].map(()=>exRaw(lv,rnd,null,s,Math.max(1,Math.min(4,lv+1))));/* mg2: their rank as level (servants keep no art levels), the target rank as the stake */const avg=(raws[0]+raws[1])/2;const B=BAL.ex;
- const tot=Math.round(avg*B.wPlay)+Math.round((s.loyal||50)/25);const pass=tot>=(B.srvBar||[0,18,20,22,24])[Math.max(1,Math.min(4,lv+1))];
+ const rnd=exRng(((s.sid||1)*7919+(S.turn||0)*104729)|0);const raws=[0,1].map(()=>exRaw(lv,rnd,null,s,Math.max(1,Math.min(BAL.srvRk.nq,lv+1))));/* mg2: their rank as level (servants keep no art levels), the target rank as the stake */const avg=(raws[0]+raws[1])/2;const B=BAL.ex;
+ const tot=Math.round(avg*B.wPlay)+Math.round((s.loyal||50)/25);const pass=tot>=B.srvBar[Math.max(1,Math.min(BAL.srvRk.nq,lv+1))];
  const N=window.__exN;N.npcSrvSit=(N.npcSrvSit||0)+1;if(pass){N.npcSrvPass=(N.npcSrvPass||0)+1;s.exCd=0;return true}
- s.exCd=S.turn+(B.srvCd||[1,1,1,2,2])[Math.max(1,Math.min(4,lv+1))];return false}catch(e){return true}}
+ s.exCd=S.turn+B.srvCd[Math.max(1,Math.min(BAL.srvRk.nq,lv+1))];return false}catch(e){return true}}
 (function(){const d0=deal;deal=function(){const r=d0.apply(this,arguments);try{if(exOn()&&isSrv()&&S.srv.ex&&S.srv.ex.w1!=null)exSrvAdd()}catch(e){}return r}})();
 (function(){const n0=nextBuoi;nextBuoi=function(){const r=n0.apply(this,arguments);try{exSrvTick()}catch(e){console.error("srv exam tick",e)}return r}})();
 (function(){const r0=render;render=function(){try{exSrvTick()}catch(e){}return r0.apply(this,arguments)}})();

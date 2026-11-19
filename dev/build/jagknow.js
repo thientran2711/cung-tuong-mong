@@ -336,7 +336,7 @@ function tmOn(){try{return !!(BAL.ag&&BAL.ag.know&&BAL.ag.know.tm)&&!window.__tm
 function tmWant(a,s){const W=tmB().want,o=ownerOf(s);if(!o)return["",0];const L=[];const out=(a.rank||0)>(o.rank||0);
  if(nq(s,"greed",1)>0&&(a.bac||0)>=nv(s,"bribeCost"))L.push(["bac",W.bac]);
  if(out&&(s.loyal||0)<BAL.loy.low)L.push(["protect",W.protect]);
- if(out&&srk(s)<tmB().post)L.push(["post",W.post]);
+ if(out&&srk(s)<(s.role==="maid"?BAL.srvRk.cs:tmB().post))L.push(["post",W.post]);
  let foe=false;try{foe=aff(a,o)<0||aff(o,a)<0}catch(e){}if(s.grudge&&foe)L.push(["revenge",W.revenge]);
  return L.sort((x,y)=>y[1]-x[1])[0]||["",0]}
 const tmOdds0=typeof bribeOdds==="function"?bribeOdds:null;
