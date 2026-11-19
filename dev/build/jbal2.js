@@ -373,6 +373,18 @@ Object.assign(BAL,{nroad:{
  bacRk:[2,4,6],
  /* palace news lines a month (NPC chapter ends), at most */
  newsMo:2,
+ /* QUESTLINE Q2 (QUESTLINES_AUDIT §3 H-a/H-d, §4 Q2; engine jnroadhp.js): the side line as a process + two-way.
+    fin = the reward when an NPC wins her road FINALE (the chapter that closes the road) after the player's help on that road and no betrayal
+      (round 2, laws 1–2: a betrayal is help to the rival she told — that rival gets a «mách tin» record on her own road and her next chapter
+      gains `help` above, so the same fin reward can come from either option; review/questline-q2 §ROUND 2)
+      (nothing on a lost or drawn finale, OD:L1601 (4)): index = how many of fin.rk ranks HER rank reaches (as bacRk); danh = her Danh,
+      rel = the asker's bond to her (j72 q72Rel), owe = nợ ân the asker owes her (j72 ledger);
+    sb = strike-back of a betrayal: the fact reaches the betrayed NPC only through a real carrier (her own Tai mắt oSee × BAL.ag.know.eye, her
+      servants' Nghe ngóng + tell choice, a bought servant of the player who sells it, the rival who heard it and dislikes the player — the
+      jagknow rules, BAL.ag.know.tell); checked each month for mo months after the betrayal; when it lands: oán oan toward the player
+      (feeds hostility → the NPC's agent deeds aim at her, jagent agSpite; no flat roll), a servant / man loses oan of lòng instead;
+    hpMax = lines kept in the Mệnh truyện «Phụ tuyến» list (oldest dropped) */
+ fin:{rk:[2,4,6],danh:[2,3,4,6],rel:[4,6,8,10],owe:1},sb:{oan:15,mo:6},hpMax:12,
  /* fix (ONE CORE): the test stat of someone who lacks it, the loyalty a man starts from, how many of the coldest people a rival is
     drawn from (people / houses) */
  st0:40,loy0:50,rvTop:3,offTop:2,
