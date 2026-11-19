@@ -983,3 +983,4 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - (19/11 ~01:49Z real) odds-meter-back worker = session_01Rc5AsJj8qdidmEiDujymyR (opus, child of C-AG #18), reports to ROOT-61.
 - (19/11 ~02:30Z) REVIEW live-servants r2: LAND READY **b1c3631e** (supersedes 55e806b1; final merges of main 73790cb7 + 96188526; gates re-run PASS). Kit note for MAIN: opt-card-short folds word-losses behind "!" (Tốn: không) in every dialog. Report reports/review-live-servants.md § RE-MERGE.
 - (19/11 ~02:03Z real) LANDED live-servants r2 → main b1c3631e (rv Kp5X8AnT LAND READY, FF). ROLLBACK 96188526. Law-3 display regression from opt-card (worded loss hidden → «Tốn: không») added to odds-meter-back worker JJ8qdidm.
+- (19/11 ~02:05Z real) Owner overwrote badge row (OD (19/11 ~02:05Z real)): «ta ở đây»+«!» one row; mood chip at the head; two lines women/men. errand 88f3233a held; worker LTeVAfb7 + rv MQH6saAB told.
