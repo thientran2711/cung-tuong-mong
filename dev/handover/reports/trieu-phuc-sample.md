@@ -355,3 +355,25 @@ QUESTIONS FOR ROOT-40 (blocking a clean t8):
 - Q3. The colour proposals (a)/(b)/(c) above.
 - Q4. Ask her what is wrong on t2/t4 (not guessed).
 Prompts: `python3 dev/art/t8-prompt-B/build.py c06 v0 --trieu N` (N=1..8). NO gen made; no ledger lines.
+
+## 23. ROUND 15 DONE (F3c, ROOT-46 GO 19/11 ~08:09Z, owner Lượt 364) — copy-whole prompts + Nữ quan colour/cloth ref; 8 gens + 8 cuts, 0 regens
+Context ~22 % (START ~5 %).
+PROMPTS: dev/art/owner-copy/trieu/t1..t8_c06.txt = approved original (t1–t6 golden_low W72 of review/t8-prompt-B, t7/t8 goldenC2) verbatim + ONE triều phục block + law sentences (commit 54340ba48; make.py):
+- Lượt 355 sleeves: t1–t3 KNEES, t4–t6 ANKLES (mk_ranks_v3 sentences); t7/t8 TOUCH THE FLOOR (mk_hqp_hh template).
+- Lượt 337 hair: t1–t3 HALF-UP loose ("hair in a neat bun"/"neat/layered chignon" → "hair half-up"; the crown "sitting on her half-up hair"); t4–t8 up (t7/t8 + template HAIR UP sentence).
+- Lượt 364 prompt-B fabric on t7/t8: "FABRIC: thick gold-embroidered brocade with a graceful, flowing drape." before COLOUR RULE.
+REFS: 1 TdU0vvvVNR own t1 face [image] · 2 eIyOFEidqL m09 [style] · 3 s7IO0AUl8e live Nữ quan m37 tm4 [image] (re-uploaded, md5 = CDN hd; P3uYQte42C is an older m37 picture, not used).
+SETTINGS: gpt-2-6 1024x2304 2k seed 7172 count 1, parchment bg (no transparentBackground) → images_remove_background. Stored prompts read back from creations_get: 8/8 byte-EQUAL. Ledger: 8 lines ts 2026-11-19T08:30:00Z.
+GEN → CUT: t1 u5Wx8J0QLD→ksewubR16B · t2 Syh6KTmUb8→N2qYw936D9 · t3 gOmNKoISXO→9ZHnw6ZNYZ · t4 0eU83k7TfW→9ZHnw3ANYZ · t5 lJt95ICgv9→tCRHeCamZJ · t6 s7I4bhVl8e→jUoybwhLD0 · t7 KLpUa0ykqp→Syh6rNnUb8 · t8 EbYrX2WuuO→9ZHnwYTNYZ.
+FILES: CDN https://ctm-img.victoria-tntt.workers.dev/img/_review/trieu-phuc/r15/c06_a18_trieu15_t1..t8.png (transparent 1024x2304) + c06_sheet15_8up.jpg; sheet also in git dev/art/owner-copy/trieu/r15/.
+LOOK (every image + all 8 faces at full size):
+- Faces: same c06 face on all 8, lips closed, eyes even and open, nothing over the face. PASS.
+- Cloth: the Nữ quan image worked: robe now has the tone-on-tone velvet/damask sheen of tm4 (value spread 0.27–0.35 vs tm4 0.31; r14 was 0.18). Drape soft, sleeves flowing.
+- Sleeves: t1–t3 ≈ knees; t4–t6 ≈ shin/ankle; t7/t8 near the floor. Hair: t1–t3 half-up loose, t4–t8 up under the crown. PASS.
+- Rank ladder: crowns grow t1→t8, no phoenix t1–t6, phoenix crown t7, nine-phoenix t8; cầu vai small t1–t3 → fringed t4–t6 → long pearl fringe t7/t8 (t8 fringe to the elbow and longer, ≥ t7). t8 cầu vai reads curved-up/stiff under the cloud collar.
+- Poses: near-frontal with a slight turn on all 8 (the originals' own pose words); t1/t3/t4/t5 the same "item in both hands at waist" stance (originals' text).
+HONEST FAULTS:
+- Red is LIGHTER/warmer than the Nữ quan red: median t1–t6 #B14E46–#BB4F46 (value 0.69–0.73) vs tm4 #9A4640 (0.60); t7 #C16147, t8 mostly yellow. Likely cause: the originals still say "coral red #D5745E" (add-only conflict).
+- t5: the original's "sheer silk shawl" appears as a peach sheer layer (original text, not added).
+- t8: yellow body still dominant (original HH text); red only on sleeves/collar/panels as specified.
+- Poses repeat across t1/t3/t4/t5 (original texts).
