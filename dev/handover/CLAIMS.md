@@ -298,3 +298,5 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW coop-thin-f6 (F6a) r1 (opus BIG) of d8d8447f | review/coop-thin-f6-r1 | B | session_01N1tNP5ayE9b7ZYtFitWYfo | RUNNING | 19/11 15:00Z |
 | medallion RESCAN (sonnet; ROOT-70 ORDER via C-AG #23: whole-group seal overlap scan on LIVE 2bda29a1, fix kit part only if overlap) | review/medallion-size; briefs/cag23-medallion-rescan.md | C-AG #23 for ROOT-70 | session_01Rc5AsLcyZcKPXfLQqD3k63 | DONE — RESCAN CLEAN, no fix (archived 19/11 15:31Z) | 19/11 15:15Z |
 | MAIN ROOT-71 (opus; from MAIN STANDBY, depth 0) | handover HANDOVER_SESSION9 | ROOT-70 TAKE OVER NOW | session_01Rc5AsJ8S2aNYjotfjzaioU | RUNNING | 19/11 15:35Z | START_CTX ~10 % |
+| REVIEW coop-thin-hostnull r1 (opus BIG) of 1fc3b8a0 | review/coop-thin-hostnull-r1 | B | PENDING-H | RUNNING | 19/11 16:05Z |
+| coop-ptime-reds (opus; LIVE co-op f1/f2/f3/d reds + runAct 'sv is not defined' since parallel-time) | review/coop-ptime-reds | B | PENDING-P | RUNNING | 19/11 16:05Z |
