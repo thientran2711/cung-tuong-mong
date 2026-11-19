@@ -152,3 +152,18 @@ Sources: {'contrast': 74, 'listed secondary': 13}
 - t6: 6 6 6 6 6 7 7 6 6 6 6 7 6 6
 - t7: 6 6 6 6 6 6 6 6 7 6 7 7 6 6
 - t8: 6 7 6 6 6 6 6 7 6 6 6 6 7 6
+
+## 6. Lượt 487 redraw — TN2 (successor of TN1), 19/11 ~17:35–18:05Z
+Prompts: `build_all.py m13|m20 1..8` re-run (gate PASS 16/16). Only t1 changed vs TN1's files: the builder default is now own-picture-only (Lượt 482, `NOSTYLE_FOR` = True for every rank), so t1 lost the style image/sentences (answer to §4 q2 from ROOT-49: own picture only at ALL ranks). Refs: t1–t5 [thiếu nữ]; t6–t8 [thiếu nữ, swatch TdwDfOyVNR] (swatch kept pending owner, conflict #4). gpt-2-6 1024x2304 2k seed 7172, folder ba4aecfe. Old 16 (§3) stay SKINS, untouched.
+| | t1 | t2 | t3 | t4 | t5 | t6 | t7 | t8 |
+|---|---|---|---|---|---|---|---|---|
+| m13 gen | gOmT2gXSXO | SyhVzTDUb8 | SyhVnjrUb8 | mEZwlsdhJQ | KLp2RGfkqp | CqnP91TEEy (regen 1, seed 7173) | s7IcVBsl8e | gOmTplGSXO |
+| m13 cut | 3zKhLB5REY | DoO16bBpcl | BhNs2xVoQR | BhNs2LDoQR | JNCeqdBOq4 | 6AbtxvRiJO | KLp28nckqp | 5jDZoYiKxe |
+| m20 gen | bxMRn6w5Y2 | 5jDZczYKxe | rgXzDEHxtc | SyhVtAlUb8 | JNCefu1Oq4 | 0eUbwdPTfW | 8aigR9nIrU | SyhVfgtUb8 |
+| m20 cut | WDgHOrncXe | vQAJc3Ta47 | jUoYvXXLD0 | fHzyTzbCDY | hu27WzlvqL | vQAJcYBa47 | kseAII016B | Lw8WafQswO |
+| angle (plan) m13 / m20 | 1 / 10 | 3 / 5 | 4 / 2 | 6 / 8 | 8 / 7 | 11 / 1 | 13 / 0 | 5 / 9 |
+Rejected: m13 t6 YMlFF7lWeC (turn ~15–20° instead of 3/4 R; round-fan painting lilac = main colour). Regens used: 1 (cap 2).
+LOOK (every gen looked at, 1024 px): both colours clearly visible on all t1–t6 (m13 lilac + deep teal, m20 slate blue + warm coral rose: inner skirt/borders/sash); phi bạch = secondary on t1–t6 only; t7/t8 no stole/ribbon/sash drape (t8 = store floor mantle only); no gold/yellow outfit colour below t6; HQP t7 clearly richer (pearl layers, jade pendants, jewelled crown), below HH.
+Faults (kept, not regen-worthy): (1) angles read softer than asked — 3/4 asks land ~30° (m13 t3/t6, m20 t3/t8), slight turns read near-frontal (m20 t4/t6); (2) m20 t7 pose text names a "gold-and-coral bead string" → coral = her secondary family (B16 builder fault: pose item colour words not checked against secondary), string held at cheek as in TN1's round; (3) m13 t7 jewel casket enamel blue-green, close to her secondary teal; (4) t5 store "broad gold brocade girdle" reads as a gold band on both people; (5) m13 t4/t5 hair flowers lilac = main colour (F3); (6) m20 store hex "slate blue like #A79E9C" is a grey-taupe value (store data, render reads slate blue anyway); (7) 14-angle coverage: the global seeded plan gives these two people 13/14 angles — angle 12 missing, 1/5/8 twice (TN1's old diagonal gave 14/14; the balanced plan does not guarantee it per pair).
+Sheets (CDN, 200 OK): img/_review/rank-test/v487/m13_8rank_angles.jpg, m20_8rank_angles.jpg, m13_m20_14angles.jpg; cuts img/_review/rank-test/v487/cut/{m13,m20}_t1..t8.png. Repo copy: dev/handover/review-sheets/rank-test/v487/.
+Credits: 17 gens × 135 = 2,295 + 16 cuts × 3 = 48 → 2,343. Ledger: 16 lines (TN2, Lượt 487). STOP — waiting for owner verdict.
