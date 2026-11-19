@@ -1477,3 +1477,4 @@ ROOT-52 Lượt 620: J2 rewritten — a51/a65 = deeper/darker elder colours like
 ROOT-52 Lượt 621: phone landscape live measure (iPhone 14 844x390 stage 828x171, Android 915x412 stage 899x193): picture cover full width, rows ~50–90 % visible (top half cut), bed visible; figures tiny (~21x39 / 33x61 px). Sheet place-rank-phone-phi-ngu.jpg; script stage_exact/live_phone.js.
 ROOT-52 ~20:05Z: context ~31 % (> roll line 28 %) → ROLLING OVER; TAKEOVER_FOREMAN_C_ROOT53.md; opening child ROOT-53.
 ROOT-52: ROOT-53 opened session_01PEhRbuf8GDz77QZRdK2XXP; ROOT-52 watch trigger deleted; ROOT-52 stops.
+ROOT-53 19/11 ~20:10Z: Lượt 622 takeover msg; Lượt 623 sent NF2 sheet ncv3_all.jpg (c01–c32) to owner with fault list. Workers acked: NF2 done, NDX3/MMX4 HOLD, IT1 done, PR9 idle. Old trigger trig_01MpKG… not found (gone); new watch trig_0144HvYmmuS4dFqQ9ukFSu4b.
