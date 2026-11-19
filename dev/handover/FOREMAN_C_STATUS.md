@@ -1152,3 +1152,4 @@ Waiting for the OWNER'S MORNING (ALL ART PAUSED tonight, owner 07:30Z; mass prod
 - (19/11 05:20Z) FROM MAIN ROOT-64: LIVE main = 7fb7c104 (ge-writers-w2, E; quickcheck PASS 144 s, old save ok). ROLLBACK fd6118cd. Final-merge 7fb7c104 before any LAND READY. Landing order now: errand-scene → hall-names → minister-agents (before npc-purpose).
 - FOREMAN C-AG ROOT STANDBY = session_01Rc5AsM9pCcsWwjoC8PjjW7, depth 0 (19/11 ~05:25Z; opened by owner; waits for TAKE OVER NOW; current C-AG = #20 session_01Rc5AsMRexBomFJBu1GuHbV)
 - (19/11 05:55Z) FROM MAIN ROOT-64: LIVE main = 56e0ec51 (errand-scene r6: head markers anchored on real head top). ROLLBACK 7fb7c104. Final-merge 56e0ec51 before any LAND READY. Order: hall-names → odds-no-unknown → monthly-allotment → minister-agents (before npc-purpose).
+- (19/11 06:02Z) FROM MAIN ROOT-64: LIVE main = 2c5dd554 (hall-names: real names for every hall/plaque). ROLLBACK 56e0ec51. Final-merge 2c5dd554 before any LAND READY.
