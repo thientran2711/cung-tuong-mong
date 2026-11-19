@@ -1,5 +1,5 @@
 # FIGURE GATE — the ONE checklist for every full-body figure (Foreman C, owner 18/11 ~03:35Z)
-
+> **CURRENT RULES = dev/art/ART_RULES.md (one line per rule, newest wins). This file = full history + owner verbatim.** Tool: `python3 dev/art/rule.py find <words>` · `set <ID> "<text>" --luot N` (replace in place) · `add <A-N> "<text>" --luot N` · `check`. Open contradictions: dev/art/ART_RULES_CONFLICTS.md.
 ## ⛔ ONE BOOK — ART RULES LIVE ONLY IN THIS FILE
 ONE BOOK: never create another art rule file; new owner art rules go INTO this file in place (canon overwrite) the same hour. Owner 18/11 ~22:45Z real, verbatim: "Rồi mày nói là có quá nhiều sổ luật đúng không? Rồi bây giờ tao cần mày phải chọn lọc lại hết những cái sổ luật này nè. Những cái ý nào ý cũ gạch bỏ, không xài lại. Những ý nào ý mới tiếp tục giữ nguyên. Ok, chứ bây giờ mà mày nói từ bữa nay sổ chỉ nằm ở đây nhưng mà ba cái sổ kia vẫn cứ nằm đó và thợ mới hoặc là quản đốc mới vẫn cứ tạo sổ mới là cũng như không."
 
