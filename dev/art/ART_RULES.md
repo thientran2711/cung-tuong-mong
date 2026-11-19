@@ -130,6 +130,7 @@ J2 | a51 and a65 (everyone, every rank, maids too): elegant calm elder colours =
 J3 | a51/a65 dress reads dignified through the costume; pose calm but still interacting with the item. | 18/11 04:05Z, 15:55Z | FG 178, 200
 J4 | Trung y / lãnh cung a51/a65: deeper clause but hue stays inside that rank's pale trung-y colour family. | 19/11 01:30Z | FG 138
 J5 | a65 Emperor = consort a65 age text adapted: silver hair + silver beard, still majestic; young Emperor (a18/a26) clean-shaven. | Lượt 170; 18/11 23:15Z | FG 529, 240
+J6 | AGE TEXT a51/a65 for EVERYONE at every rank/costume = the Nữ đế a51/a65 age wording that reads young and beautiful (owner Lượt 520: copy those two age prompts to all). | Lượt 520 (19/11) | FG -
 
 ## K. Ma ma, cung nữ, Thái hậu, Nữ đế, princesses, men, thiếu nữ
 K1 | MA MA: outfit = the Ma ma NPC (brown live a36/a51) outfit, approved; front short tà = TWO tà; hair flowers vary per person (kind + colour); colours = her own base colour (m01 sage green) deeper at a51/a65 (brown versions = skins). | Lượt 229, 397 | FG 592, 11 | over: 19/11 01:40Z NPC brown colours (FG 526)
@@ -146,6 +147,7 @@ K11 | MEN never wear pink or purple; colours deep blue, navy, teal, green, black
 K12 | THIẾU NỮ = two states only: khuê các (noble) and nhà nghèo (poor: neat, pretty, never ragged, some embroidery); existing liked images re-made as 2K transparent, new drawings only for people missing. | 18/11 21:00Z, 22:05Z | FG 191, 251
 K13 | TRUNG Y: 8 tiers in pale rank colours (Đáp ứng ivory … HH pale yellow); trung y / lãnh cung figures hold an item and use spec5 poses. | OD:L392; 19/11 01:10Z | FG 122, 138
 K14 | Everyone in the palace is richly dressed (maids in embroidered silk with hairpins); nobody looks poor. | 11/14 | FG 153
+K15 | HAIR FLOWERS only for consorts (phi tần): cung nữ, ma ma, nữ quan wear NO hair flowers (Lượt 520). | Lượt 520 (19/11) | FG -
 
 ## L. Places / rooms
 L1 | Rooms follow the occupant's rank (bed + room); accent colour = rank colour; luxury rises with rank, never reaching Khôn Ninh; low ranks pretty/carved, never poor; each consort quarters = reception room + bedroom. | Lượt 446, 437, 442 | FG 24
@@ -159,6 +161,7 @@ L8 | Tần < Phi < Quý phi each clearly richer than v2, below Khôn Ninh; Khôn
 L9 | Dư đồ / palace map / courtyards come from Phượng Lệnh (grade nhất); missing states painted in the same style; we paint only rooms / the final place view. | OD:L1415, L1270 | FG 351-352
 L10 | New scenes start as edits of approved game scenes (no glossy floors, no AI look); every full backdrop exists in portrait AND landscape; 4 seasons × buổi. | OD:L86, L50, L137 | FG 325, 316, 328
 L11 | EVERY rank step has a DIFFERENT room layout, even inside the same palace (Tần ≠ Phi ≠ Quý phi bedrooms and receptions), so each is fresh, never a copy. | Lượt 491 (19/11) | FG -
+L12 | FLOOR SHARE (Lượt 520): all room layouts are OK — keep them; but EVERY room shows TOO MUCH empty floor at the bottom: shrink the visible empty floor in every room (even the Phi bedroom v3 — 'ít hơn nữa, nhỏ hơn nữa'); Tần bedroom + receptions most. Rooms with HQP (t7) bedroom + reception added to compare with Hoàng hậu. | Lượt 520 (19/11) | FG -
 
 ## M. Skins
 M1 | Every picture the owner PRAISED but then asked to redraw is KEPT as a SKIN (never deleted/overwritten), logged in dev/art/SKINS.md (person, rank/age, cut id, path, why). | Lượt 413 | FG 18

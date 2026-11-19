@@ -613,3 +613,25 @@ CREDITS r22: 828 (6 gens × 135 + 4 cuts × 3; the 2 first tries were not cut).
 CDN: img/_review/trieu-phuc/r19/c06_a18_trieu22_t1/t2/t3/t5.png + c06_sheet22.jpg. The sheet is 10 cells: r20 t1 | r21 t1 | r22 t1 | r21 t2 | r22 t2 | r21 t3 | r22 t3 | r21 t4 (kept, density ref) | r21 t5 | r22 t5. Repo copy: dev/handover/review-sheets/trieu-phuc/c06_sheet22.jpg. Ledger: 6 lines.
 STOP after this round (ROOT-49). No handover needed: TP3 finished inside its context budget.
 TIMING NOTE (TP3): ROOT-49's "owner paused drawing — HOLD" message was queued at 17:42:45Z but only reached TP3 after the push. The first 4 gens (17:40:45Z) were made before it. The 2 regens (t1 lJt0Vrvgv9, t2 9ZH8t41NYZ, 17:44:25Z) and the cuts were made AFTER the pause was queued, without TP3 knowing (270 + 18 credits). TP3 is now on HOLD. Ledger times have been corrected to the real creation times.
+
+## §33 — r23 HANDOVER (TP3 → successor; ROOT-49 GO for owner Lượt 520 arrived 18:11Z; TP3 is past its START+25 % line, so NO r23 gens by TP3)
+ORDER (ROOT-49, Lượt 520, rules A18 LAW #0 + A20): r23 = t1–t5, COLOUR changes ONLY, diff each against r22 (r22/tN_c06_RAN.txt; t4 has no r22 prompt, so its base is r21/t4). t6–t8 untouched. Her points:
+- (1) t1 Đáp ứng HUE wrong: her colour is NOT green.
+- (2) t2 Thường tại still dull and dark ("rầm và đậm"), not fresh.
+- (3) ALL colours a little fresher: "tươi một xíu thôi, đừng tươi quá".
+- (4) t3, t4, t5 OK (embroidery unchanged), but their HÀ BÍ colours look sunken ("chìm"), so make the hà bí colours fresher on t1–t5.
+Read messages between every gen. LOOK at each, make a sheet r22|r23, push, message ROOT-49, STOP.
+POINT 1 FINDING (TP3, no gen): Đáp ứng's own rank colour is WHITE JADE / IVORY, not green.
+- FIGURE_GATE ~l.259 (owner 18/11, TRIỀU PHỤC HEADWEAR): "Đáp ứng colour = white jade / pale jade (bronze allowed, never brown)".
+- FIGURE_GATE [OD:L365]: "Đáp ứng: settled on IVORY WHITE (warm ivory, not pure white)". This is the game's rank colour: frame and Trung y tier "Đáp ứng ivory" ([OD:L392]).
+- Where the green came from: r18/build_r18.py DEEP[1] = "a deep lustrous jade-celadon green like #6FA88A (the white-jade hue made much stronger, clearly jade, …)". The r18 pass made the white jade "much stronger" and it turned into celadon green. r20, r21 and r22 inherited it, and TP3's r22 #8DC2A2 is still green.
+- The t1 collar and sash are already white jade (#E4EEE2) and stay as they are.
+PROPOSED r23 DIFF (colour words only; successor: check with ROOT-49 if unsure):
+- t1 hà bí + cuff (2 places): "a lighter, fresh lustrous jade-celadon green like #8DC2A2 (…)" → "a lustrous warm IVORY white-jade, a milky ivory-white with a pearly jade sheen like #EFE6D2 (the Đáp ứng rank colour, NOT green, never grey or brown)". In the cuff sentence, "green" ("in the hà bí green", FIX1) → "ivory".
+- t2 hà bí + cuff: "a deep rich jade green like #2E7D57" → "a fresh, clear jade green like #3E9A6C (fresher and lighter than a deep jade, never dull or dark)".
+- t3: "a deep rich sapphire blue like #2B55A3" → "a fresh, clear sapphire blue like #3566B8".
+- t4 (base r21/t4): "a deep rich peony rose-pink like #C2457A" → "a fresh, clear peony rose-pink like #CF5788".
+- t5: "a deep rich violet-purple like #6A44A8" → "a fresh, clear violet-purple like #7A55B8".
+- All t1–t5: in the COLOUR RULE add "only a LITTLE fresher (tươi một xíu thôi, đừng tươi quá)". t4 does not have r22's fresher wording yet, so it gets the same r22 phrase.
+- Keep everything else exactly as r22, including the refs, seed 7172 and settings. FIX1/FIX2 are in r22, which the owner has seen; per LAW #0, do not add or remove anything she did not ask for, and ask ROOT-49 if in doubt.
+- Recipe: §29/§30/§32. The build is a new r23/build_r23.py on top of r22 (rep() with an exact-count assert). Sheet cells are r22|r23 per rank, made as in §32's script, then cdn_sync → img/_review/trieu-phuc/r19/c06_a18_trieu23_tN.png + c06_sheet23.jpg, then rm -rf img.
