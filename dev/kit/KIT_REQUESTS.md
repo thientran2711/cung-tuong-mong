@@ -89,3 +89,8 @@ KIT FIRST: the worker draws nothing. Data is ready in jshelf.js `shelfView(p)` �
 
 ## 18/11 parallel-time (Foreman D worker) — KIT REQUEST K-PT-1 (art: Foreman C; nothing drawn by the worker)
 | 18/11 | parallel-time | **K-PT-1 painted status icon `img/kit/ico-tin.webp`** for `kitStatusIcon` id `tin` (KIT §77.1: someone sent away / a report back): a folded letter with a red seal, same painted style and 128 px as ico-download / ico-update. Until then the kit glyph fallback `信` is used (§77.1 allows a glyph for a status without a painted icon). |
+
+## 18/11 stage-here (MAIN ROOT-54 UI worker) — closing alert icon (owner OD 18/11 ~19:45Z (5))
+| Date | Who | Part | Used in | Given to | Status |
+|---|---|---|---|---|---|
+| 18/11 | stage-here | **K-ICO-ALERT** `img/kit/ico-alert.webp` painted square rail icon "Sắp đóng cửa" (same family as ico-cal / ico-goal; e.g. a small closing palace gate or a hanging bell), read by the existing rail `busy` motion + seal dot | kitStageRail item `closing` (jstagehere.js) | Foreman C | rail text glyph "!" (KIT §77.1 glyph mode) + `kbusy` + `kbadge` in use; swap = add `icon:"img/kit/ico-alert.webp"` and drop `glyph` in jstagehere.js |

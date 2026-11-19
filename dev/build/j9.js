@@ -158,7 +158,7 @@ function walkFarK(){return BAL.walk.far}
 function travel(a,b){if(a===b)return 0;{const W=window.__walkSpill;if(W&&S&&(S.buoi||0)===W.b&&a===W.from&&b===W.k)return W.rest}const [r1,c1]=mapPos(a||"home"),[r2,c2]=mapPos(b);const far=Math.abs(r1-r2)+Math.abs(c1-c2)>1;return far?BAL.walk.far:BAL.walk.near}
 function nextBuoi(){if(!S||S.dead||Q.length||S.mg)return;if((S.buoi||0)>=B4L){S.buoi=0;endTurn();return}
  S.buoi=(S.buoi||0)+1;used=0;const ev=b4NpcActs()?rivalsBuoi():"";if(S.dead){render();return}placeWhere();popIdx=null;popMsg="";
- if(S.out)coldVisit();else if(S.place!=="home"){const k=S.place;S.place="home";const u=used;goTo(k);used=u}else S.visit={k:"home",people:homePeople(),talked:false,tk:{}};
+ if(S.out)coldVisit();else if(S.place!=="home"){const k=S.place;S.place="home";const u=used;/* review stage-here r4 (OD 18/11 ~19:45Z: her room comes back only at a new day or when she walks home): a card the buổi turn already queued (rivalsBuoi) must not make goTo refuse and leave her at home — hold the queue aside for this refresh, then put it back first */const q0=Q.splice(0);try{goTo(k)}finally{Q.unshift(...q0)}used=u}else S.visit={k:"home",people:homePeople(),talked:false,tk:{}};
  if(ev)Q.push({t:"Tin trong cung buổi này",kind:"news",h:`<p class="past">${when()} · ${BUOI[S.buoi]}</p><p>${ev}</p>`});curtain();render()}
 A("pushp","Đẩy xuống hồ sen",{c:{duc:-12},ok:(a,t)=>whereOf(a)==="vuon"&&together(a,t),o:a=>odA(a,40+a.tamco/4),f:(a,t)=>pushPond(a,t)});
 A("trip","Ngáng chân",{c:{duc:-4},ok:(a,t)=>together(a,t),o:a=>odA(a,50+a.tamco/5),f:(a,t)=>trip(a,t)});
