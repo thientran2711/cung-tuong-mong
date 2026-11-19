@@ -26,3 +26,9 @@ PHASE 2: MASS (Foreman C opens the painters after Phase 1).
 - Output: img/_review/nude-mass/cNN_aNN_nude.png + one sheet per 8 people (sheet_cAA-cBB.jpg, rows people × cols ages). cdn_sync.
 - Report: reports/nude-mass-<painter>.md. READY to Foreman C ROOT-34 (session_01PEhRbxEqMo11RRz1YMMxN4) per batch of 8 people.
 Roll over at START_CTX+25 % (ceiling 60 %): write the handover in the report and tell me; I open the successor.
+
+## UPDATE 19/11 ~00:20Z (Foreman C ROOT-34)
+- OWNER GO for the elder ages (verbatim): "Ok, vẽ hàng loạt nữ đế đi. 51, 65 gì đó vẽ đi." → all 5 ages for everyone.
+- Builder = N4's 421fee3 (or later): `python3 build.py cNN v0 --state nude --spec5pose --nudeopt auto --age aNN`. Phase 1 is done; mass painters go straight to Phase 2.
+- a65 face ref = her a51 t1 when no a65 t1 exists. Keep the a65 yellow as soft as the a51 (no ochre/mustard).
+- Split: N4 c01–c08 · N5 c09–c16 · N6 c17–c24 · N7 c25–c32 (c06 and c25 a18 already exist; skip them).
