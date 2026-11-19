@@ -109,6 +109,6 @@ const until=async(o,fn,arg,ms=40000)=>{try{await o.p.waitForFunction(fn,arg,{tim
   if((await H.p.evaluate(()=>COOP.week))>wk0&&(await G.p.evaluate(()=>COOP.week))>wk0)break;await sleep(300)}}
  ok((await H.p.evaluate(()=>COOP.week))>wk0&&(await G.p.evaluate(()=>COOP.week))>wk0,'a week ends and merges on both seats');
  const gn=await G.p.evaluate(()=>S.name);ok(await until(H,n=>COOPW.base.P.b.name===n&&rivals.some(v=>v.coop&&v.name===n),gn,20000)||await H.p.evaluate(n=>COOPW.base.P.b.name===n,gn),'after the merge the host still has her (host-built) person',gn);
- ok(await H.p.evaluate(()=>{const t=COOPW.thin.selfTest();return t.sameA&&t.sameB}),'withSeat round trip after the merged week');
+ {const t=await H.p.evaluate(()=>COOPW.thin.selfTest());ok(t.sameA&&t.sameB,'withSeat round trip after the merged week',t.sameA&&t.sameB?undefined:{paths:t.paths,diffAt:t.diffAt,err:t.err})}
  const E=[...H.errs,...G.errs].filter(e=>!/ResizeObserver/.test(e));ok(!E.length,'no page errors',E.slice(0,5));
  const f=res.filter(r=>!r[0]).length;console.log(`\n${res.length-f}/${res.length} ok`);await b.close();process.exit(f?1:0)})().catch(e=>{console.error(e);process.exit(2)});
