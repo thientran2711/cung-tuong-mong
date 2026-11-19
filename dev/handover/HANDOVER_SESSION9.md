@@ -1030,3 +1030,4 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 
 ## MAIN = ROOT-63 session_01Rc5AsN8fHJWShQ7rSPxjx5; START_CTX ~5 % of 1M; depth 1 (limit 8)
 - (03:35Z) LOAD: main running 3 (errand rv MQH6saAB + errand worker L23c5v2N + odds-meter-back Jj8qdidm; owner bugs/UI/go-live only) | B free 5 | C art (emo-anim TOP #1, face seals #2) | D running parallel-time/receiver-choice/rare-reach | E running ge-writers-w2 + kỳ ngộ thường ngày | moved: none. Hourly wake trig_01Cnbswe4uCLj5pyPQCEyp1S (minute 32).
+- (19/11 03:39Z) LANDED maid-ladder-6 → main c12a5878 (B LAND READY 03:24Z, BIG PASS 3R1PQaRU; quickcheck PASS 163 s, old save ok, perf ≤ live; FF). ROLLBACK 1cf5e8bb. CDN img/_review/maid-ladder-6 already empty.
