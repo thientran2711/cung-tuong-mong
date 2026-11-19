@@ -66,6 +66,46 @@ CP_DONG_NGU = ("Cảnh Phúc cung Đông phối điện bedroom, the cosy bedcha
     + QN + " Exactly two beds; only the two colours soft blue (curtains) and cream-ivory (fabrics)." + NOPE + RECT + GUIDE_S + FB)
 OUT['canh-phuc-cung-dong-phoi-ngu'] = dict(prompt=room9(CP_DONG_NGU, GUIDE, 'warm polished wooden floorboards'), refs=[*G9, M3])
 
+# ---- PR14 (successor of PR13): rooms 4+. Owner Lượt 804: every NEW bedroom carries the bed-height sentence (canopy crown above the
+#      standing women's heads); 'high ceiling' is a gate drift word, so "far below the high ceiling" -> "far below the ceiling beams".
+#      Bedrooms: FLOOR11G_CLOSE (PR13 lesson; gave PASS on the HQP frontal in PR11); beds on the BACK wall (PR13 room 3: side-wall beds got cut).
+BEDH = (" BED HEIGHT (owner Lượt 804): each bed is a tall canopy frame bed about 2.4 m high: its canopy top rises clearly above the head of a "
+        "standing woman, far below the ceiling beams; never a low box.")
+FG = P['FLOOR11G_CLOSE']
+W2R = P['W2'].replace(' (owner Lượt 613: two walls read wider)', '')
+# 4) Cảnh Phúc ĐÔNG phối reception — same occupants as room 3 (pair ĐQ: curtains soft blue, fabrics cream-ivory). TWO walls (alternation; room 3 = 3w),
+#    windows in the RIGHT wall (room 2 = left). Own layout: TM đông = daybed centred + mirrored rows; TM tây = daybed right half + moon gate left;
+#    here the daybed LEFT of centre with a crabapple screen, a tall curio shelf (duobaoge) right of it on the back wall, ONE round-backed armchair
+#    pair + tea table along the right window wall. CARD_CP. Image 3 = 2-wall model window right 4RFIyNR9Aa.
+CP_DONG_REC = ("Cảnh Phúc cung Đông phối điện reception room, the small sitting room where two lower-ranking imperial consorts (a Đáp ứng and a "
+    "Quý nhân) living in the east side hall of a palace in ancient China receive their guests, a real room in daily use, no bed anywhere, " + W2R + ": "
+    "wooden pillars, lattice windows in the RIGHT side wall onto a sunny garden; against the back wall, a little LEFT of its middle, square to it and "
+    "seen straight on, the host seat, the large clear main subject: a luohan daybed (a wide low carved lacquered rosewood daybed with a three-sided "
+    "carved panel back, a small low kang table with a tea set standing in its middle, flat silk cushions) with a painted folding screen of crabapple "
+    "blossoms behind it; to the right of it on the back wall a tall carved curio shelf (duobaoge) with porcelain, jade pieces and boxes; along the right "
+    "window wall, square to it, a pair of round-backed rosewood armchairs with a small tea table between them; hanging paper lanterns with tassels, "
+    "vases of crabapple blossoms, a small incense burner, an embroidery frame, potted plants. " + P['CARD_CP'] + "COLOURS BY OBJECT TYPE (owner Lượt 491, "
+    "766): ALL the curtains of the room are soft blue like #7E9CCB (the sheer window curtains tied back, the curtain of the moon gate, the lantern "
+    "tassels), and ALL the furniture fabrics are cream-ivory like #EAE3D0 (the daybed cushions, the armchair cushions, the table runner). " + QN
+    + " Only the two colours soft blue (curtains) and cream-ivory (fabrics)." + NOPE + P['NOSOFA'] + RECT + GUIDE_S + FR)
+OUT['canh-phuc-cung-dong-phoi'] = dict(prompt=room9(CP_DONG_REC, GUIDE, 'warm polished wooden floorboards'), refs=[*G9, M2])
+
+# 5) Cảnh Phúc TÂY phối bedroom — pair Thường tại + Thường tại (TT, both t2): the whole room one rank colour, soft green (curtains AND fabrics).
+#    THREE walls, windows in the LEFT side wall (room 3 = right). Own layout, beds on the BACK wall: two built-in ALCOVE beds set INTO the back
+#    wall (carved alcove fronts), flanking a central moon-gate opening onto a small inner dressing room (room 1 = free-standing beds + shelf between;
+#    TM đông = beds side by side + screen). CARD_CP. Image 3 = 3-wall model window LEFT 1ldYySkr4r. + FLOOR11G_CLOSE + BEDH.
+CP_TAY_NGU = ("Cảnh Phúc cung Tây phối điện bedroom, the cosy bedchamber SHARED by two lower-ranking imperial consorts (two Thường tại) living in "
+    "the west side hall of a palace in ancient China, a real room in daily use, " + WL3 + ": wooden pillars, lattice windows in the LEFT side wall onto "
+    "a sunny garden; the back wall, seen straight on, is a carved rosewood partition holding TWO alcove canopy beds (bat-carved alcove fronts with "
+    "gauze curtains), one in its left part and one in its right part, both square to the back wall and whole inside the picture, together the large "
+    "clear main subject; between the two beds, in the middle of the back wall, a round moon-gate opening onto a small inner dressing room with a "
+    "bronze mirror; in front of each bed a low bed step with slippers; along the left window wall a small dressing table with a stool, along the right "
+    "wall a clothes rack with a robe and a small cabinet; hanging paper lanterns with tassels, vases of crabapple blossoms, a small embroidery basket. "
+    + P['CARD_CP'] + "COLOURS (owner Lượt 491, 766): both occupants have the same rank, so the whole room has ONE rank colour, soft green like #7FB394: "
+    "the gauze curtains of BOTH beds, the window curtains, the lantern tassels, the bedding and cushions of BOTH beds, the stool cushion and the robe "
+    "on the rack; the two beds look alike. " + QN + " Exactly two beds; the only rank colour is soft green." + NOPE + RECT + GUIDE_S + BEDH + FG)
+OUT['canh-phuc-cung-tay-phoi-ngu'] = dict(prompt=room9(CP_TAY_NGU, GUIDE, 'warm polished wooden floorboards'), refs=[*G9, M3X])
+
 # GATE (as v9): common block present, method refs, no drift words, no phoenix/yellow below t7.
 for k, v in OUT.items():
     p = v['prompt']
