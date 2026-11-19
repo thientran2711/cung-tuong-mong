@@ -6,7 +6,8 @@
    Output: one row per global-`quiet` read (shadowed params / locals / object keys / strings are skipped), its enclosing function, the
    kind of thing it gates (card in Q, Sổ ghi line, screen effect, save, behaviour switch), and whether an intent engine reaches it
    (static call graph over dev/build/*.js: a function's own calls + every wrapper of the same name; over-approximate on purpose).
-   Roots = the engine functions registered with TH.F.reg (parsed from jcoopthinf.js) + chooseM (her card pick, part D `do pick`). */
+   Roots = the engine functions registered with TH.F.reg (parsed from jcoopthinf.js) + chooseM (her card pick, part D `do pick`) + nextBuoi
+   (her buổi step, part E herStep). */
 const fs=require('fs'),path=require('path');
 let acorn,walk;try{acorn=require('acorn');walk=require('acorn-walk')}catch(e){console.error('needs acorn + acorn-walk (NODE_PATH); see the header');process.exit(2)}
 const DIR=path.join(__dirname,'..','build');
@@ -49,7 +50,7 @@ for(const f of files){const src=fs.readFileSync(path.join(DIR,f),'utf8');let ast
 /* roots: the registered engines */
 const thf=fs.readFileSync(path.join(DIR,'jcoopthinf.js'),'utf8');
 const roots=new Set();for(const m of thf.matchAll(/F\.reg\("(\w+)"/g))roots.add(m[1]);for(const m of thf.matchAll(/for\(const n of \[([^\]]+)\]\)F\.reg/g))for(const x of m[1].matchAll(/"(\w+)"/g))roots.add(x[1]);
-roots.add('chooseM');
+roots.add('chooseM');roots.add('nextBuoi');/* part E: her buổi step (TH.tapRun since F2 r2) */
 /* cut: the names that do nothing inside her context on the host (TH.NOOP + the UICAP list in jcoopthin.js; resultShow runs) */
 const thn=fs.readFileSync(path.join(DIR,'jcoopthin.js'),'utf8');const CUT=new Set();
 for(const m of thn.matchAll(/TH\.NOOP=\[([^\]]+)\]/g))for(const x of m[1].matchAll(/"(\w+)"/g))CUT.add(x[1]);
