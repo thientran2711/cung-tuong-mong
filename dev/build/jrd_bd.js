@@ -54,6 +54,8 @@ RDQ.bdOlac=()=>bdAlive("olac");RDQ.bdLie=()=>bdAlive("lie");
    ge3 Mũi tên trường săn (trap / turn the blow back on {v}), ge4 Về với thảo nguyên (the steppe calls, Ba Đồ, the west gate).
    ===================================================================================================================================== */
 const BDCF=k=>BAL.road.bd.conf[k];
+const BDBOW=()=>bdO("cungvua")==="ta"?" Cây cung sừng của ngài, ngươi dâng trả tận tay khi về đến trại.":"";/* bd_san .11: the Emperor's bow goes back */
+const BDGATE=()=>{const h=bdO("nguatay");return !h||h==="cua"};/* bd_san .10: the west-gate horse still waits at the gate */
 const bdConfine=k=>{S.confined=Math.max(S.confined||0,BDCF(k));return ""};
 RTHEME67.bd_san="emp";
 ARC67.bd_san=bdArc("bd_san",{o:"bd",t:"Mùa thu săn",w:"emp",sj:"cuộc săn thu ở Bắc Uyển",cast(A){return rdCast(A,["v"])},
@@ -70,7 +72,7 @@ ARC67.bd_san=bdArc("bd_san",{o:"bd",t:"Mùa thu săn",w:"emp",sj:"cuộc săn th
  c1:{h:"{v} mượn ngựa",w:"v",need:["v"],t:"{v} sai người sang mượn Tuyết Câu cho em gái nàng ta cưỡi trong cuộc săn. Từ chối thì mất lòng, cho mượn thì ngựa ở trong tay người khác một ngày.",o:[
   {n:"Cho mượn, dặn Ba Đồ theo sát",wx:"{v} không có cớ trách",lx:"ngựa ở trong tay người khác",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1]);return""},rt:"Tuyết Câu về chuồng lành lặn.",rf:"Tuyết Câu về chuồng, chân sau sưng."},
   {n:"Khéo từ: ngựa chỉ quen tay chủ",wx:"ngựa ở yên trong chuồng",lx:"{v} cho là ngươi khinh nhà nàng",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"{v} cười nhạt, cho người về."},
-  {n:"Tặng em gái {v} một con ngựa khác",wx:"được lòng cả hai chị em",lx:"bạc ra",go:(A,_ok,G)=>{rdRel(A,"v",G[0]);return""},rt:"Em gái {v} nhận con ngựa hồng, cảm ơn ngươi trước mặt mọi người."}]},
+  {n:"Tặng em gái {v} một con ngựa khác",wx:"được lòng cả hai chị em",lx:"bạc ra",go:(A,_ok,G)=>{rdRel(A,"v",G[0]);return bdO("nguahong","emv")},rt:"Em gái {v} nhận con ngựa hồng, cảm ơn ngươi trước mặt mọi người."}]},
  c2:{h:"Con nai trắng",w:"emp",t:"Thị vệ báo trong rừng phong có một con nai trắng. Người xưa nói ai bắn được nai trắng thì được trời thương. Hoàng thượng muốn tự tay bắn.",o:[
   {n:"Lùa nai về phía ngự giá",f:"ride",wx:"ngài bắn được nai, nhớ ai lùa nó",lx:"phi ngựa giữa rừng, dễ ngã",rt:"Con nai chạy thẳng về phía ngài. Mũi tên vàng trúng ngay vai nó.",rf:"Con nai rẽ ngang, mất hút sau đồi."},
   {n:"Khuyên ngài tha nai, lấy điềm lành",f:"bend",wx:"ngài thấy ngươi có lòng",lx:"thị vệ cho là ngươi làm mất hứng",rt:"Hoàng thượng hạ cung: “Trời đã cho xem, không cần lấy.”"},
@@ -112,13 +114,13 @@ rdDef("bd_san",5,{t:"Chuồng ngựa Thượng tứ viện",w:"emp",sj:"chuồng
   {n:"Viết thư nhờ sứ {land} xin cho y",wx:"có giấy tờ đàng hoàng",lx:"sứ {land} biết ngươi cần người",rt:"Sứ {land} gửi một tờ thỉnh, Thượng tứ viện chuẩn.",rf:"Thư đi mà chưa có hồi âm."},
   {n:"Bảo y cứ làm, chờ dịp",wx:"không tốn gì",lx:"Ba Đồ buồn lòng",rt:"Ba Đồ cúi đầu, không nói gì."}]},
  c2:{h:"{v} xin một con ngựa {land}",w:"v",need:["v"],t:"{v} tâu xin một con ngựa {land} cho cung mình. Nàng ta xin đúng con ngựa ô mà ngươi định dâng Hoàng thượng.",o:[
-  {n:"Nhường con ngựa ô cho {v}",wx:"{v} không có cớ nói ngươi giữ của",lx:"mất con ngựa tốt",go:(A,_ok,G)=>{rdRel(A,"v",G[0]);return""},rt:"{v} nhận ngựa, cười với ngươi lần đầu."},
+  {n:"Nhường con ngựa ô cho {v}",wx:"{v} không có cớ nói ngươi giữ của",lx:"mất con ngựa tốt",go:(A,_ok,G)=>{rdRel(A,"v",G[0]);return bdO("nguao","v")},rt:"{v} nhận ngựa, cười với ngươi lần đầu."},
   {n:"Tâu rằng ngựa ô chưa thuần, chọn con khác cho nàng",wx:"giữ được ngựa ô",lx:"{v} biết ngươi lựa lời",go:(A,ok,G)=>{if(!ok)rdOan(A,"v",G[0]);return""},rt:"{v} nhận con ngựa khác, không nói gì.",rf:"{v} nói: “Chưa thuần mà định dâng Hoàng thượng?”"},
-  {n:"Mời {v} ra chuồng tự chọn",wx:"công bằng trước mắt mọi người",lx:"{v} chọn đúng con ngươi quý",go:(A,_ok,G)=>{rdRel(A,"v",G[0]);return""},rt:"{v} chọn con ngựa hồng, khen ngươi rộng rãi."}]},
+  {n:"Mời {v} ra chuồng tự chọn",wx:"công bằng trước mắt mọi người",lx:"{v} chọn đúng con ngươi quý",go:(A,_ok,G)=>{rdRel(A,"v",G[0]);return bdO(bdO("nguahong")?"nguao":"nguahong","v")},rt:()=>bdO("nguahong")==="emv"?"Con ngựa hồng đã ở chỗ em gái nàng; {v} chọn con ngựa ô, khen ngươi rộng rãi.":"{v} chọn con ngựa hồng, khen ngươi rộng rãi."}]},
  t1:{h:"Sổ cỏ khô",w:"emp",t:"Ba Đồ cho ngươi xem: sổ ghi mỗi ngày đổ mười xe cỏ cho dãy chuồng {land}, mà chỉ có sáu xe đến. Người ký sổ là thuộc hạ của Tổng quản.",o:[
-  {n:"Đưa sổ lên Hoàng thượng",f:"keep",wx:"ngài thấy ngươi giữ của công",lx:"Tổng quản thành kẻ thù",rt:"Hoàng thượng sai Nội vụ phủ tra, kẻ ký sổ bị đánh đòn.",rf:"Nội vụ phủ tra mà không ra gì, sổ bị nói là ghi nhầm."},
-  {n:"Đem sổ đến nói riêng với Tổng quản",f:"bend",wx:"Tổng quản nợ ngươi một lần",lx:"cỏ có thể vẫn thiếu",rt:"Tổng quản đổi người ký sổ, mười xe cỏ đến đủ."},
-  {n:"Giữ bản chép sổ, chờ lúc cần",f:"steppe",wx:"có một chứng cứ trong tay",lx:"ngựa vẫn đói ít lâu",rt:"Bản chép nằm trong rương áo cưỡi của ngươi.",go:()=>{RD_FL("bd_san.ledger","kept");return""}}]},
+  {n:"Đưa sổ lên Hoàng thượng",f:"keep",go:()=>bdO("so","vua"),wx:"ngài thấy ngươi giữ của công",lx:"Tổng quản thành kẻ thù",rt:"Hoàng thượng sai Nội vụ phủ tra, kẻ ký sổ bị đánh đòn.",rf:"Nội vụ phủ tra mà không ra gì, sổ bị nói là ghi nhầm."},
+  {n:"Đem sổ đến nói riêng với Tổng quản",f:"bend",go:()=>bdO("so","tongquan"),wx:"Tổng quản nợ ngươi một lần",lx:"cỏ có thể vẫn thiếu",rt:"Tổng quản đổi người ký sổ, mười xe cỏ đến đủ."},
+  {n:"Giữ bản chép sổ, chờ lúc cần",f:"steppe",wx:"có một chứng cứ trong tay",lx:"ngựa vẫn đói ít lâu",rt:"Bản chép nằm trong rương áo cưỡi của ngươi.",go:()=>bdO("so","chep")}]},
  x1:{h:"Ai giữ chìa khóa chuồng",w:"emp",t:"Cuối tháng, Hoàng thượng hỏi ai nên trông dãy chuồng ngựa {land}. Tổng quản Thượng tứ viện đứng chờ. Ba Đồ đứng sau lưng ngươi.",o:[
   {n:"Tâu xin cho Ba Đồ giữ chìa khóa",e:["win","lose"],rt:"Hoàng thượng giao chìa khóa cho Ba Đồ, dưới quyền ngươi trông coi. Tổng quản cúi đầu.",rf:"Hoàng thượng nói: “Người {land} giữ ngựa {land}, thế thì Thượng tứ viện để làm gì?”",go:()=>bdMeet("bado")},
   {n:"Tâu xin hai người cùng trông",e:["win","mid"],rt:"Tổng quản giữ sổ, Ba Đồ giữ chuồng. Hai người phải hỏi ngươi khi bất đồng.",rf:"Hai người cãi nhau ngay trước cửa chuồng."},
@@ -131,19 +133,19 @@ rdDef("bd_san",6,{t:"Đai yên bị cắt",w:"maid",sj:"sợi đai yên của Tu
  g:"Hoàng thượng hẹn cưỡi ngựa với ngươi ở bãi tập Tây Uyển. Sáng hôm ấy, đai yên của Tuyết Câu bị cắt gần đứt. Sợi đai là chứng cứ, nhưng chứng cứ chỉ có giá khi có người nói ra ai cầm dao.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Ba Đồ giữ lại sợi đai",w:"maid",if:RDW(1),t:"Ba Đồ thắng yên lúc trời chưa sáng thì thấy sợi đai bị cứa sâu, chỉ còn một lớp da. Y không thay, mà giữ nguyên, dắt ngựa về chuồng và nhắn vào cung.",o:[
-  {n:"Bảo y giữ nguyên sợi đai, không cho ai chạm",f:"proof",wx:"chứng cứ còn nguyên",lx:"buổi cưỡi ngựa phải hoãn",rt:"Sợi đai được cuộn trong vải, cất trong rương áo cưỡi của ngươi.",go:()=>{RD_FL("bd_san.girth","kept");return""}},
-  {n:"Thay đai mới, vẫn đi cưỡi như hẹn",f:"calm",wx:"Hoàng thượng không phải chờ",lx:"kẻ cắt đai biết việc đã lộ",rt:"Ngươi cưỡi bên ngài cả buổi, mặt không đổi sắc.",go:()=>{RD_FL("bd_san.girth","kept");return""}},
+  {n:"Bảo y giữ nguyên sợi đai, không cho ai chạm",f:"proof",wx:"chứng cứ còn nguyên",lx:"buổi cưỡi ngựa phải hoãn",rt:"Sợi đai được cuộn trong vải, cất trong rương áo cưỡi của ngươi.",go:()=>{bdO("dai","kept");return""}},
+  {n:"Thay đai mới, vẫn đi cưỡi như hẹn",f:"calm",wx:"Hoàng thượng không phải chờ",lx:"kẻ cắt đai biết việc đã lộ",rt:"Ngươi cưỡi bên ngài cả buổi, mặt không đổi sắc.",go:()=>{bdO("dai","kept");return""}},
   {n:"Cho Ba Đồ rình xem ai quay lại chuồng",f:"trap",wx:"có thể bắt tận tay",lx:"Ba Đồ thức trắng, dễ bị phát hiện",rt:"Đêm ấy có bóng người lén vào chuồng tìm sợi đai.",rf:"Không ai quay lại."}]},
  s2:{h:"Ngã ngựa ở bãi tập",w:"maid",if:RDW(0),t:"Đai yên đứt khi Tuyết Câu đang phi. Ngươi ngã xuống cát, may chỉ trầy tay. Ba Đồ nhặt sợi đai lên: vết cắt gọn như dao.",o:[
-  {n:"Giữ sợi đai, không nói với ai",f:"proof",wx:"chứng cứ trong tay",lx:"người ta tưởng ngươi vụng",rt:"Sợi đai cất trong rương. Người ta chỉ biết ngươi ngã ngựa.",go:()=>{RD_FL("bd_san.girth","kept");return""}},
-  {n:"Đưa sợi đai cho Hoàng thượng xem ngay",f:"open",wx:"ngài thấy rõ có kẻ hại ngươi",lx:"kẻ cắt đai kịp xóa dấu",rt:"Hoàng thượng cầm sợi đai, mặt sầm lại.",rf:"Hoàng thượng hỏi: “Đai cũ thì đứt, có gì lạ?”",go:()=>{RD_FL("bd_san.girth","given");return""}},
-  {n:"Cười cho qua, xin cưỡi lại ngay",f:"calm",wx:"không ai thấy ngươi sợ",lx:"tay đau, cưỡi khó",rt:"Ngươi thắng đai mới, phi thêm ba vòng bãi.",go:()=>{RD_FL("bd_san.girth","kept");return""}}]},
+  {n:"Giữ sợi đai, không nói với ai",f:"proof",wx:"chứng cứ trong tay",lx:"người ta tưởng ngươi vụng",rt:"Sợi đai cất trong rương. Người ta chỉ biết ngươi ngã ngựa.",go:()=>{bdO("dai","kept");return""}},
+  {n:"Đưa sợi đai cho Hoàng thượng xem ngay",f:"open",wx:"ngài thấy rõ có kẻ hại ngươi",lx:"kẻ cắt đai kịp xóa dấu",rt:"Hoàng thượng cầm sợi đai, mặt sầm lại.",rf:"Hoàng thượng hỏi: “Đai cũ thì đứt, có gì lạ?”",go:()=>{bdO("dai","given");return""}},
+  {n:"Cười cho qua, xin cưỡi lại ngay",f:"calm",wx:"không ai thấy ngươi sợ",lx:"tay đau, cưỡi khó",rt:"Ngươi thắng đai mới, phi thêm ba vòng bãi.",go:()=>{bdO("dai","kept");return""}}]},
  c1:{h:"Thái giám cung {v}",w:"v",need:["v"],t:"Một phu ngựa nhỏ ở Thượng tứ viện kể với Ba Đồ: đêm trước có một thái giám cung {v} vào chuồng, nói là đến xem ngựa hồng của chủ.",o:[
   {n:"Cho người hỏi thẳng thái giám ấy",wx:"nghe y nói gì",lx:"{v} biết ngươi đã nghi",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1]);return""},rt:"Thái giám ấp úng, khai đã vào chuồng nhưng không làm gì.",rf:"Thái giám chối, rồi chạy về mách {v}."},
-  {n:"Giữ phu ngựa nhỏ làm chứng",wx:"có một người chứng",lx:"bạc nuôi miệng",rt:"Phu ngựa nhỏ nhận bạc, hứa sẽ nói khi được hỏi."},
+  {n:"Giữ phu ngựa nhỏ làm chứng",/*bd6c: a person, not an object*/wx:"có một người chứng",lx:"bạc nuôi miệng",rt:"Phu ngựa nhỏ nhận bạc, hứa sẽ nói khi được hỏi."},
   {n:"Sang cung {v} hỏi khéo",wx:"xem {v} có biết không",lx:"{v} thấy ngươi đến tận nơi",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1]);return""},rt:"{v} tái mặt: nàng ta không biết người của mình vào chuồng.",rf:"{v} nói: “Chuồng ngựa ai vào chẳng được?”"}]},
  c2:{h:"Phu ngựa nhỏ",w:"maid",t:"Phu ngựa nhỏ ở Thượng tứ viện còn kể: con dao cắt đai là dao cắt cỏ của chuồng, sáng ra đã được treo lại chỗ cũ.",o:[
-  {n:"Cho lấy con dao về giữ",wx:"thêm một chứng vật",lx:"Tổng quản hỏi vì sao mất dao",rt:"Con dao được gói chung với sợi đai."},
+  {n:"Cho lấy con dao về giữ",wx:"thêm một chứng vật",lx:"Tổng quản hỏi vì sao mất dao",rt:"Con dao được gói chung với sợi đai.",go:()=>bdO("daocat","ta")},
   {n:"Nhờ Ba Đồ đánh dấu con dao, để nguyên chỗ",wx:"xem ai lấy lại",lx:"có thể không ai lấy",rt:"Ba Đồ khắc một vạch nhỏ dưới chuôi dao."},
   {n:"Bỏ bạc để phu ngựa nhỏ chuyển sang hầu chuồng của ngươi",wx:"người chứng ở gần ngươi",lx:"bạc ra",rt:"Phu ngựa nhỏ sang dãy chuồng {land} làm việc."}]},
  t1:{h:"Hoàng thượng hỏi đến",w:"emp",t:"Hoàng thượng hỏi vì sao buổi cưỡi ngựa hôm ấy lại có chuyện. Ngài nhìn tay ngươi.",o:[
@@ -151,7 +153,7 @@ rdDef("bd_san",6,{t:"Đai yên bị cắt",w:"maid",sj:"sợi đai yên của Tu
   {n:"Thưa: đai cũ đứt, thiếp sơ ý",f:"calm",wx:"không làm ồn",lx:"kẻ cắt đai yên tâm",rt:"Hoàng thượng sai Thượng tứ viện đổi hết yên cũ."},
   {n:"Xin ngài cho thiếp tự tra",f:"trap",wx:"có thời gian bắt người",lx:"ngài chờ kết quả",rt:"Hoàng thượng gật: “Mười ngày.”"}]},
  x1:{h:"Sợi đai trước Thận hình ty",w:"emp",t:"Thận hình ty mở phiên xét. Thái giám cung {v} quỳ một bên, ngươi đứng một bên. Trên án là sợi đai bị cắt.",o:[
-  {n:"Trình sợi đai, con dao và lời phu ngựa nhỏ",e:["win","lose"],rt:"Phu ngựa nhỏ nói rõ đêm ấy. Thái giám cung {v} cúi đầu nhận tội, khai người sai bảo.",rf:"Phu ngựa nhỏ run quá, nói lẫn lộn. Thận hình ty cho là ngươi dựng chuyện.",go:()=>{RD_FL("bd_san.girth","given");return""}},
+  {n:"Trình sợi đai, con dao và lời phu ngựa nhỏ",e:["win","lose"],rt:"Phu ngựa nhỏ nói rõ đêm ấy. Thái giám cung {v} cúi đầu nhận tội, khai người sai bảo.",rf:"Phu ngựa nhỏ run quá, nói lẫn lộn. Thận hình ty cho là ngươi dựng chuyện.",go:()=>{bdO("dai","given");bdO("dai","tht");if(bdO("daocat")==="ta")bdO("daocat","tht");return""}},
   {n:"Đặt bẫy: để lộ tin còn sợi đai thứ hai",e:["win","lose"],rt:"Đêm ấy kẻ cắt đai quay lại chuồng tìm, Ba Đồ bắt tận tay.",rf:"Không ai mắc bẫy; người ta cười ngươi bày trò."},
   {n:"Rút đơn, chỉ xin đổi người giữ yên",e:"mid",lx:"kẻ cắt đai vẫn yên ổn",rt:"Từ nay chỉ Ba Đồ được chạm vào yên của Tuyết Câu."}]}},
  E:{win:{tag:"Kẻ cắt đai bị bắt",w:"emp",t:"Thái giám cung {v} bị đánh đòn, đuổi ra khỏi cung. Ai cũng biết hắn không tự làm, nhưng sợi đai đã nói đủ.",go:(A,G)=>{rdOan(A,"v",G[0]);return""}},
@@ -224,7 +226,7 @@ rdDef("bd_san",9,{t:"Hội bắn mùa xuân",w:"emp",sj:"hội bắn cung mùa x
  g:"Đầu xuân, Hoàng thượng mở hội bắn cho các hoàng tử, con nhà tướng và thị vệ. Ngài muốn ngươi có mặt. Người nhà {v} có một em trai là tay cung giỏi nhất cấm quân.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Ngài mời ngươi dạy bắn",w:"emp",if:RDW(1),t:"Hoàng thượng nói: “Trẫm muốn các hoàng tử học cách bắn trên lưng ngựa. Nàng dạy được không?”",o:[
-  {n:"Nhận dạy các hoàng tử",f:"teach",wx:"các hoàng tử gọi ngươi là thầy",lx:"dạy hỏng thì mang tiếng",rt:"Sau một tháng, hai hoàng tử bắn trúng bia khi ngựa đang phi.",rf:"Một hoàng tử ngã ngựa trong buổi tập đầu."},
+  {n:"Nhận dạy các hoàng tử",/*bd6c: a task, not an object*/f:"teach",wx:"các hoàng tử gọi ngươi là thầy",lx:"dạy hỏng thì mang tiếng",rt:"Sau một tháng, hai hoàng tử bắn trúng bia khi ngựa đang phi.",rf:"Một hoàng tử ngã ngựa trong buổi tập đầu."},
   {n:"Xin dạy thị vệ trước, hoàng tử sau",f:"safe",wx:"không đặt hoàng tử vào chỗ liều",lx:"chậm",rt:"Thị vệ học trước, rồi tự dạy lại các hoàng tử."},
   {n:"Xin ngài cho Ba Đồ dạy thay",f:"steppe",wx:"Ba Đồ được đứng trước các hoàng tử",lx:"triều thần chê dùng người rợ",rt:"Ba Đồ dạy, ngươi đứng xem. Hoàng thượng ban cho y một tấm áo."}]},
  s2:{h:"Không có tên ngươi",w:"maid",if:RDW(0),t:"Danh sách hội bắn dán ở Tây Uyển, không có tên ngươi. {maid} nghe nói Lễ bộ gạch tên vì “phi tần không bắn trước mặt hoàng tử”.",o:[
@@ -241,13 +243,13 @@ rdDef("bd_san",9,{t:"Hội bắn mùa xuân",w:"emp",sj:"hội bắn cung mùa x
   {n:"Khuyên ngài để cây cung trong kho",wx:"giữ được vật của tiên đế",lx:"ngài tiếc",rt:"Cây cung được lau dầu, đặt lại vào hộp gấm."}]},
  t1:{h:"Gió ngược",w:"emp",t:"Ngày hội, gió bắc thổi ngược. Các tay cung Đại Hy bắn lệch cả. Ngươi biết cách bắn trong gió thảo nguyên.",o:[
   {n:"Chỉ cho các hoàng tử cách nghiêng tên",f:"teach",wx:"các hoàng tử bắn trúng",lx:"ngươi tự bỏ lợi thế",rt:"Các hoàng tử bắn trúng liền ba mũi. Hoàng thượng nhìn ngươi gật đầu."},
-  {n:"Giữ cách bắn cho riêng mình",f:"self",wx:"chỉ ngươi bắn trúng trong gió",lx:"người ta nói ngươi giấu nghề",rt:"Mũi tên của ngươi trúng hồng tâm giữa gió."},
+  {n:"Giữ cách bắn cho riêng mình",/*bd6c: a skill, not an object*/f:"self",wx:"chỉ ngươi bắn trúng trong gió",lx:"người ta nói ngươi giấu nghề",rt:"Mũi tên của ngươi trúng hồng tâm giữa gió."},
   {n:"Tâu xin dời hội sang buổi chiều lặng gió",f:"safe",wx:"hội công bằng cho mọi người",lx:"ngài phải đợi",rt:"Chiều xuống, gió lặng. Hội bắn lại từ đầu."}]},
  x1:{h:"Mũi tên cuối",w:"emp",t:"Còn mũi tên cuối. Em trai {v} đang dẫn trước một điểm. Hoàng thượng nhìn sang ngươi.",o:[
   {n:"Tự giương cung bắn mũi cuối",e:["win","lose"],rt:"Mũi tên của ngươi xẻ đôi mũi tên của em trai {v} trên hồng tâm. Cả Tây Uyển đứng dậy.",rf:"Gió đổi chiều đúng lúc buông dây, tên ngươi cắm ngoài vòng."},
-  {n:"Đưa cây cung cho hoàng tử ngươi đã dạy",e:["win","mid"],rt:"Hoàng tử bắn trúng hồng tâm, quay lại cúi đầu với ngươi trước cả triều.",rf:"Hoàng tử bắn trúng vòng hai. Ngài vẫn khen."},
+  {n:"Đưa cây cung cho hoàng tử ngươi đã dạy",/*bd6c: her own bow, lent for one shot, back in her hand*/e:["win","mid"],rt:"Hoàng tử bắn trúng hồng tâm, quay lại cúi đầu với ngươi trước cả triều.",rf:"Hoàng tử bắn trúng vòng hai. Ngài vẫn khen."},
   {n:"Hạ cung, chúc em trai {v} thắng",e:"mid",lx:"ngươi không bắn mũi cuối",go:(A,_ok,G)=>{rdRel(A,"v",G[0]);return""},rt:"Em trai {v} thắng hội. {v} gật đầu với ngươi từ xa."}]}},
- E:{win:{tag:"Cung thần của hậu cung",w:"emp",t:"Hoàng thượng ban cho ngươi cây cung sừng của tiên đế. Từ nay, hội bắn nào cũng có ghế của ngươi."},
+ E:{win:{tag:"Cung thần của hậu cung",w:"emp",t:"Hoàng thượng ban cho ngươi cây cung sừng của tiên đế. Từ nay, hội bắn nào cũng có ghế của ngươi.",go:()=>bdO("cungtd","ta")},
   mid:{tag:"Tên trúng, người không nhớ",t:"Hội bắn tan. Người ta nhớ ai thắng, còn ngươi được nhớ là người đã có mặt."},
   lose:{tag:"Tên trượt trước cả triều",w:"v",t:"Cả triều thấy mũi tên của ngươi cắm ngoài vòng. {v} sai người mang sang một bó tên tập, gọi là quà."}}});
 
@@ -259,13 +261,13 @@ rdDef("bd_san",10,{t:"Tiếng gọi thảo nguyên",w:"maid",sj:"con ngựa th�
   {n:"Treo túi cỏ trong chuồng Tuyết Câu",f:"north",wx:"ngựa và người cùng nhớ quê",lx:"người ta thấy ngươi buồn",rt:"Tuyết Câu hít túi cỏ, hí một tiếng dài."},
   {n:"Đưa thư cho Hoàng thượng đọc",f:"open",wx:"ngài hiểu lòng ngươi",lx:"thư nhà thành chuyện của triều",rt:"Ngài đọc, rồi hỏi: “Nàng có muốn về thăm không?”",rf:"Ngài đọc, rồi không nói gì."}]},
  s2:{h:"Đàn ngựa ở chợ biên",w:"maid",if:RDW(0),t:"Người buôn từ chợ biên về kể: đàn ngựa {land} năm nay có một con trắng giống hệt Tuyết Câu, là con của mẹ nó. Người chăn hỏi thăm công chúa.",o:[
-  {n:"Bỏ bạc mua con ngựa ấy về kinh",f:"stay",wx:"có thêm một con ngựa quê nhà",lx:"bạc ra",rt:"Con ngựa trắng về đến Thượng tứ viện, đứng cạnh Tuyết Câu."},
+  {n:"Bỏ bạc mua con ngựa ấy về kinh",f:"stay",wx:"có thêm một con ngựa quê nhà",lx:"bạc ra",rt:"Con ngựa trắng về đến Thượng tứ viện, đứng cạnh Tuyết Câu.",go:()=>bdO("nguatrang","tuv")},
   {n:"Nhờ người buôn mang thư hỏi thăm người chăn",f:"north",wx:"có tin quê",lx:"thư qua tay người lạ",rt:"Người buôn nhận thư, hứa mùa sau mang hồi âm."},
   {n:"Lặng im, không hỏi thêm",f:"open",wx:"không ai thấy ngươi nhớ nhà",lx:"lòng ngươi nặng",rt:"Ngươi về cung, đóng cửa sớm."}]},
  c1:{h:"Con ngựa ở cửa Tây",w:"maid",t:"Ba Đồ thưa: con ngựa thắng sẵn ở cửa Tây là ngựa nhanh nhất y từng nuôi. Nếu ngươi muốn, một đêm là ra khỏi kinh, mười đêm là tới cỏ.",o:[
-  {n:"Bảo Ba Đồ trả ngựa về chuồng",wx:"không để lại dấu",lx:"Ba Đồ buồn",rt:"Ba Đồ cúi đầu, dắt ngựa về."},
-  {n:"Bảo Ba Đồ cứ để ngựa đó",wx:"một đường lui còn mở",lx:"có người thấy ngựa lạ ở cửa Tây",rt:"Con ngựa vẫn buộc ở cửa Tây, cỏ đầy máng.",rf:"Lính cửa Tây hỏi ngựa của ai.",go:()=>{RD_FL("bd_san.westgate",1);return""}},
-  {n:"Cho Ba Đồ cưỡi con ngựa ấy về thăm nhà",wx:"y về quê mà ngươi ở lại",lx:"mất người giữ ngựa một thời gian",rt:"Ba Đồ lạy ngươi ba lạy, ra cửa Tây lúc gà gáy.",go:()=>bdMove("bado","tn")}]},
+  {n:"Bảo Ba Đồ trả ngựa về chuồng",wx:"không để lại dấu",lx:"Ba Đồ buồn",rt:"Ba Đồ cúi đầu, dắt ngựa về.",go:()=>bdO("nguatay","chuong")},
+  {n:"Bảo Ba Đồ cứ để ngựa đó",wx:"một đường lui còn mở",lx:"có người thấy ngựa lạ ở cửa Tây",rt:"Con ngựa vẫn buộc ở cửa Tây, cỏ đầy máng.",rf:"Lính cửa Tây hỏi ngựa của ai.",go:()=>{RD_FL("bd_san.westgate",1);bdO("nguatay","cua");return""}},
+  {n:"Cho Ba Đồ cưỡi con ngựa ấy về thăm nhà",wx:"y về quê mà ngươi ở lại",lx:"mất người giữ ngựa một thời gian",rt:"Ba Đồ lạy ngươi ba lạy, ra cửa Tây lúc gà gáy.",go:()=>{bdO("nguatay","bado");return bdMove("bado","tn")}}]},
  c2:{h:"{v} hỏi về cửa Tây",w:"v",need:["v"],t:"{v} vô tình nhắc trong buổi thỉnh an: “Nghe nói có con ngựa {land} buộc ở cửa Tây cả tháng, chẳng biết đợi ai.”",o:[
   {n:"Cười: ngựa của người buôn",wx:"câu chuyện dừng ở đó",lx:"{v} chưa tin",go:(A,ok,G)=>{if(!ok)rdOan(A,"v",G[0]);return""},rt:"Không ai hỏi thêm.",rf:"{v} cười: “Người buôn nào buộc ngựa ở cửa cung?”"},
   {n:"Thưa thật: ngựa của phu ngựa nhà mình",wx:"không ai bắt được lỗi nói dối",lx:"{v} nắm được một chuyện",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"{v} gật đầu, không nói gì nữa."},
@@ -274,16 +276,18 @@ rdDef("bd_san",10,{t:"Tiếng gọi thảo nguyên",w:"maid",sj:"con ngựa th�
   {n:"Thưa: thiếp quay lại, vì ngài ở đây",f:"stay",wx:"ngài yên lòng",lx:"một lời hứa phải giữ",rt:"Ngài nắm tay ngươi đến sáng."},
   {n:"Thưa: thiếp không biết",f:"north",wx:"ngươi không nói dối ngài",lx:"ngài lo",rt:"Ngài im lặng, rồi nói: “Trẫm hiểu.”",rf:"Ngài đứng dậy, ra về sớm."},
   {n:"Xin ngài cùng đi một chuyến ra ải",f:"open",wx:"ngài thấy được quê ngươi",lx:"đi ra ải là việc lớn",rt:"Ngài cười: “Để mùa thu.”"}]},
- x1:{h:"Đêm ở cửa Tây",w:"maid",t:"Đêm rằm, trăng sáng như ban ngày. Con ngựa ở cửa Tây vẫn chờ. Gió từ phương bắc thổi vào tận sân cung ngươi.",o:[
+ x1:{h:"Đêm ở cửa Tây",w:"maid",t:()=>"Đêm rằm, trăng sáng như ban ngày. "+({chuong:"Con ngựa Ba Đồ thắng sẵn đã về chuồng, nhưng Tuyết Câu cứ hí trong đêm. ",bado:"Ba Đồ đã cưỡi con ngựa cửa Tây về thảo nguyên. Chuồng Tuyết Câu thiếu một người. "}[bdO("nguatay")]||"Con ngựa ở cửa Tây vẫn chờ. ")+"Gió từ phương bắc thổi vào tận sân cung ngươi.",o:[
   {n:"Ở lại, xin Hoàng thượng cho về thăm cố hương theo lễ",e:["win","lose"],rt:"Hoàng thượng chuẩn: mùa thu năm sau, ngươi theo sứ đoàn về thăm {land}, có cấm quân hộ tống.",rf:"Lễ bộ bác: phi tần hòa thân không có lệ về nước."},
-  {n:"Lên ngựa ra cửa Tây, phi một vòng đồng rồi về trước sáng",e:["win","lose"],rt:"Ngươi phi đến tận bờ sông, nhìn về phương bắc, rồi quay về trước khi trống canh năm. Không ai biết, trừ con ngựa.",rf:"Lính cửa Tây giữ ngươi lại lúc quay về. Sáng ra, cả cung biết.",go:()=>{RD_FL("bd_san.rode",1);return""}},
-  {n:"Bảo Ba Đồ dắt ngựa về chuồng, đóng cửa sổ",e:"mid",lx:"gió bắc không còn gọi",rt:"Con ngựa về chuồng. Ngươi đóng cửa sổ, ngồi đến sáng."}]}},
+  {n:"Lên ngựa ra cửa Tây, phi một vòng đồng rồi về trước sáng",if:()=>BDGATE(),e:["win","lose"],rt:"Ngươi phi đến tận bờ sông, nhìn về phương bắc, rồi quay về trước khi trống canh năm. Không ai biết, trừ con ngựa.",rf:"Lính cửa Tây giữ ngươi lại lúc quay về. Sáng ra, cả cung biết.",go:()=>{RD_FL("bd_san.rode",1);return""}},
+  {n:"Bảo Ba Đồ dắt ngựa về chuồng, đóng cửa sổ",if:()=>BDGATE(),e:"mid",lx:"gió bắc không còn gọi",rt:"Con ngựa về chuồng. Ngươi đóng cửa sổ, ngồi đến sáng.",go:()=>bdO("nguatay","chuong")},
+  {n:"Thắng Tuyết Câu, ra cửa Tây phi một vòng đồng rồi về trước sáng",if:()=>!BDGATE(),e:["win","lose"],rt:"Ngươi phi đến tận bờ sông, nhìn về phương bắc, rồi quay về trước khi trống canh năm. Không ai biết, trừ Tuyết Câu.",rf:"Lính cửa Tây giữ ngươi lại lúc quay về. Sáng ra, cả cung biết.",go:()=>{RD_FL("bd_san.rode",1);return""}},
+  {n:"Đóng cửa sổ, ngồi đến sáng",if:()=>!BDGATE(),e:"mid",lx:"gió bắc không còn gọi",rt:"Ngươi đóng cửa sổ, ngồi đến sáng. Sáng ra, gió đã đổi chiều."}]}},
  E:{win:{tag:"Gió bắc trong tay áo",w:"emp",t:"Ngươi vẫn ở Đại Hy, nhưng gió thảo nguyên không bỏ ngươi. Hoàng thượng biết điều ấy, và không bắt ngươi quên."},
-  mid:{tag:"Ngựa về chuồng",t:"Con ngựa ở cửa Tây không còn. Ngươi vẫn ra chuồng thăm Tuyết Câu, nhưng thôi nhìn về phương bắc."},
+  mid:{tag:"Ngựa về chuồng",t:"Cửa Tây không còn con ngựa nào chờ ngươi. Ngươi vẫn ra chuồng thăm Tuyết Câu, nhưng thôi nhìn về phương bắc."},
   lose:{tag:"Bị bắt ở cửa Tây",w:"emp",t:"Phi tần ra khỏi cửa cung lúc nửa đêm. Hoàng thượng không trách, nhưng cho đóng cửa cung ngươi.",go:()=>bdConfine("san10")}}});
 
-rdDef("bd_san",11,{t:"Vi trường năm sau",w:"emp",sj:"cuộc săn thu năm sau",cast(A){return rdCast(A,["v"])},
- g:"Thu lại về, cuộc săn ở Bắc Uyển lại mở. Ba Đồ thấy trong rừng phong có người lạ mặc áo thị vệ mà không mang thẻ. Lần này, một mũi tên sẽ không chỉ quyết ai nhìn thấy ngươi.",
+rdDef("bd_san",11,{t:"Vi trường năm sau",w:"emp",sj:"cuộc săn thu năm sau",cast(A){if(bdP("bado","w")!=="kinh"){bdMove("bado","kinh");if(bdO("nguatay")==="bado")bdO("nguatay","chuong");RD_FL("bd_san.badove",1)}return rdCast(A,["v"])},
+ g:()=>(RD_FL("bd_san.badove")?"Ba Đồ đã về lại kinh sau một mùa cỏ, dắt theo con ngựa cửa Tây, cúi đầu nhận lại chuồng Tuyết Câu. ":"")+"Thu lại về, cuộc săn ở Bắc Uyển lại mở. Ba Đồ thấy trong rừng phong có người lạ mặc áo thị vệ mà không mang thẻ. Lần này, một mũi tên sẽ không chỉ quyết ai nhìn thấy ngươi.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Ngươi cưỡi đầu đoàn",w:"emp",if:RDW(1),t:"Hoàng thượng cho ngươi cưỡi Tuyết Câu đi ngay sau ngự mã. Các phi tần ngồi xe phía sau nhìn theo.",o:[
   {n:"Đi sát ngự mã, mắt nhìn rừng",f:"guard",wx:"ngài có người canh bên cạnh",lx:"không còn là cuộc vui",rt:"Ngươi thấy trước mọi bụi cây động."},
@@ -302,16 +306,16 @@ rdDef("bd_san",11,{t:"Vi trường năm sau",w:"emp",sj:"cuộc săn thu năm sa
   {n:"Để mặc {v}",wx:"không dính vào",lx:"nếu có chuyện, xe {v} ở đầu",rt:"Xe {v} đi sát ngự giá."},
   {n:"Xin Thái bộc giữ mọi xe ở sau",wx:"công bằng cho mọi người",lx:"{v} biết ngươi chặn",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Thái bộc giữ xe lại. {v} nhìn ngươi."}]},
  t1:{h:"Hoàng thượng trao cung",w:"emp",t:"Trước khi vào rừng, Hoàng thượng trao cho ngươi cây cung sừng của mình: “Nàng giữ, trẫm cưỡi cho nhẹ.”",o:[
-  {n:"Nhận cung, đi sát ngài",f:"guard",wx:"có cung trong tay khi cần",lx:"cả đoàn thấy ngài tin ngươi quá",rt:"Cây cung nằm ngang yên Tuyết Câu."},
+  {n:"Nhận cung, đi sát ngài",f:"guard",go:()=>bdO("cungvua","ta"),wx:"có cung trong tay khi cần",lx:"cả đoàn thấy ngài tin ngươi quá",rt:"Cây cung nằm ngang yên Tuyết Câu."},
   {n:"Xin ngài giữ cung",f:"share",wx:"ngài tự vệ được",lx:"ngài nghĩ ngươi từ chối",rt:"Ngài cười, đeo cung lên vai."},
-  {n:"Nhận cung, lắp sẵn một mũi tên",f:"scout",wx:"sẵn sàng",lx:"người ta thấy ngươi căng thẳng",rt:"Ngươi lắp tên, tay không run."}]},
+  {n:"Nhận cung, lắp sẵn một mũi tên",f:"scout",go:()=>bdO("cungvua","ta"),wx:"sẵn sàng",lx:"người ta thấy ngươi căng thẳng",rt:"Ngươi lắp tên, tay không run."}]},
  x1:{h:"Mũi tên từ rừng phong",w:"emp",t:"Giữa trưa, một mũi tên rít ra từ rừng phong, nhắm thẳng ngự giá. Mũi thứ hai đang lên dây.",o:[
   {n:"Thúc Tuyết Câu chắn mũi tên",e:["win","lose"],rt:"Mũi tên cắm vào yên Tuyết Câu, cách tay ngươi một tấc. Ngự giá an toàn. Hoàng thượng ôm lấy ngươi giữa cấm quân.",rf:"Tuyết Câu trúng tên vào vai, ngã quỵ. Ngươi ngã theo, mũi thứ hai sượt qua ngự giá.",go:(A,ok)=>{if(!ok)bdP("tuyetcau","hurt",1);return""}},
   {n:"Bắn trả về phía rừng, bắt sống kẻ bắn",e:["win","lose"],rt:"Mũi tên của ngươi xuyên tay kẻ đang kéo dây. Cấm quân bắt được hắn, hắn khai người sai khiến.",rf:"Tên ngươi trượt. Kẻ bắn chạy mất vào rừng."},
   {n:"Kéo cương ngự mã chạy khỏi bãi",e:["mid","lose"],rt:"Ngự mã theo Tuyết Câu chạy ra khỏi bãi. Cả hai về đến trại, ngài không bị gì.",rf:"Ngự mã hoảng, hất ngài ngã ở bìa rừng."}]}},
- E:{win:{tag:"Nữ kỵ bên ngự giá",w:"emp",t:"Từ hôm ấy, Hoàng thượng đi đâu cũng có ngươi cưỡi bên. Thượng tứ viện, Tây Uyển, Bắc Uyển: con ngựa trắng đi sau ngự mã ai cũng biết là ai."},
-  mid:{tag:"Ngựa về chuồng, người về cung",t:"Cuộc săn khép lại sớm. Ngươi đã giữ được ngài, nhưng không ai kể chuyện ấy như một chiến công."},
-  lose:{tag:"Mũi tên lạc",w:"v",t:"Kẻ bắn không bị bắt. Hậu cung thì thầm: mũi tên ấy nhắm vào ai, có khi chỉ người {land} biết.",go:(_A,G)=>e67bien(G[0])}}});
+ E:{win:{tag:"Nữ kỵ bên ngự giá",w:"emp",t:()=>"Từ hôm ấy, Hoàng thượng đi đâu cũng có ngươi cưỡi bên. Thượng tứ viện, Tây Uyển, Bắc Uyển: con ngựa trắng đi sau ngự mã ai cũng biết là ai."+BDBOW(),go:()=>bdO("cungvua",bdO("cungvua")?"vua":0)},
+  mid:{tag:"Ngựa về chuồng, người về cung",t:()=>"Cuộc săn khép lại sớm. Ngươi đã giữ được ngài, nhưng không ai kể chuyện ấy như một chiến công."+BDBOW(),go:()=>bdO("cungvua",bdO("cungvua")?"vua":0)},
+  lose:{tag:"Mũi tên lạc",w:"v",t:()=>"Kẻ bắn không bị bắt. Hậu cung thì thầm: mũi tên ấy nhắm vào ai, có khi chỉ người {land} biết."+BDBOW(),go:(_A,G)=>{bdO("cungvua",bdO("cungvua")?"vua":0);return e67bien(G[0])}}}});
 RD97L.push(rdRare({a:"bd_san_11",tag:"Hoàng thượng trao cương ngựa ngự",w:"emp",n:"Nhảy sang lưng ngự mã, cầm cương thay ngài",
  path:["Bắn ngay","Chọn con ngựa xấu","Tâu xin cho Ba Đồ","Đặt bẫy","Trình sợi đai","Nhận lời, cưỡi Tuyết Câu","Xin dạy các công chúa","Dùng cách chữa thảo nguyên","Tự giương cung","Nhận dạy các hoàng tử","Đi sát ngự mã","Nhận cung"],
  bad:["Ngồi xe","Thưa: thiếp thôi cưỡi","Thưa: thiếp không dám"],x:[()=>S.suc>=RR("bd_san_11").bar,"Sức từ "+RR("bd_san_11").bar],
@@ -328,6 +332,8 @@ RD97L.push(rdRare({a:"bd_san_11",tag:"Hoàng thượng trao cương ngựa ngự
    bribe the judges, the whole army) · ge4 Con trai hai cõi (shelter the Khả đôn, race under the prince's banner, the brother's oath to her son).
    ===================================================================================================================================== */
 RTHEME67.bd_soi="emp";
+const BDKD=()=>bdP("kd","w");/* where the Khả đôn is (law 6b): "tn" home, "kinh" in the capital, "ai" with her kin at the western border */
+const BDKDAT=()=>RD_FL("bd_soi.chua")?"chùa ngoài thành":"nhà khách Lễ bộ";
 const BDSON=()=>{try{return !!son67()}catch(e){return false}};
 ARC67.bd_soi=bdArc("bd_soi",{o:"bd",t:"Sói đầu đàn",w:"emp",sj:"kim trướng của {land}",cast(A){return rdCast(A,["v"])},
  g:"{pv} ngã ngựa trong buổi săn mùa đông, nằm mê man trong kim trướng. Thúc phụ Hô Diên Liệt sai sứ vào kinh, xin Đại Hy công nhận mình giữ trướng. Em trai Ô Lặc của ngươi mới mười sáu tuổi, gửi thư cầu cứu. Hoàng thượng hỏi ngươi.",
@@ -335,11 +341,11 @@ ARC67.bd_soi=bdArc("bd_soi",{o:"bd",t:"Sói đầu đàn",w:"emp",sj:"kim trư�
  B:{s1:{h:"Tin dữ từ thảo nguyên",w:"emp",t:"Người đưa tin quỳ ngoài cung, áo lông còn đọng tuyết: {pv} ngã ngựa, chưa tỉnh. Thúc phụ Hô Diên Liệt đã dời lều mình vào sát kim trướng.",o:[
   {n:"Xin Hoàng thượng cho thái y theo sứ lên bắc",f:"kin",wx:"{pv} có thầy thuốc giỏi",lx:"Đại Hy nhúng tay vào việc trướng",rt:"Hoàng thượng sai hai thái y theo người đưa tin lên đường ngay.",rf:"Thái y viện tâu: đường tuyết, không ai dám đi."},
   {n:"Hỏi người đưa tin ai đang giữ quân",f:"cold",wx:"biết rõ thế trong trướng",lx:"bị coi là lạnh lòng",rt:"Người đưa tin kể: quân cận vệ còn theo {pv}, nhưng các bộ lạc nhỏ đã sang lều thúc phụ."},
-  {n:"Gửi ngay vòng ngọc của mẹ cho Ô Lặc làm tin",f:"kin",wx:"em trai biết ngươi đứng về phía nó",lx:"thúc phụ biết ngươi chọn phe",rt:"Chiếc vòng ngọc theo người đưa tin về bắc.",go:()=>bdMeet("olac")}]},
+  {n:"Gửi ngay vòng ngọc của mẹ cho Ô Lặc làm tin",f:"kin",wx:"em trai biết ngươi đứng về phía nó",lx:"thúc phụ biết ngươi chọn phe",rt:"Chiếc vòng ngọc theo người đưa tin về bắc.",go:()=>{bdO("vongngoc","olac");return bdMeet("olac")}}]},
  s2:{h:"Sứ của thúc phụ",w:"emp",t:"Sứ của Hô Diên Liệt vào chầu, dâng hai mươi con ngựa và một bức thư: “Đại Hy công nhận ta, ta giữ biên ải yên như {pv}.” Sứ nhìn ngươi khi nói câu ấy.",o:[
   {n:"Đứng sau rèm nghe hết, không nói",f:"cold",wx:"biết thúc phụ muốn gì",lx:"sứ cho là ngươi đã ngả",rt:"Ngươi nghe đến chữ cuối, ghi nhớ từng điều kiện.",go:()=>bdMeet("lie")},
   {n:"Xin Hoàng thượng hỏi sứ về sức khỏe {pv}",f:"kin",wx:"sứ lộ là thúc phụ không mong {pv} tỉnh",lx:"sứ ghi hận",rt:"Sứ ấp úng, nói {pv} đã già.",rf:"Sứ đáp trơn tru: {pv} sẽ khỏi."},
-  {n:"Nhận ngựa thay Hoàng thượng, cảm ơn sứ",f:"bend",wx:"sứ yên lòng, nói nhiều hơn",lx:"người ta nghĩ ngươi nhận quà thúc phụ",rt:"Sứ cảm động, kể cả chuyện các bộ lạc đã theo ai."}]},
+  {n:"Nhận ngựa thay Hoàng thượng, cảm ơn sứ",f:"bend",go:()=>bdO("nguasu","tuv"),wx:"sứ yên lòng, nói nhiều hơn",lx:"người ta nghĩ ngươi nhận quà thúc phụ",rt:"Sứ cảm động, kể cả chuyện các bộ lạc đã theo ai."}]},
  c1:{h:"Thư của Ô Lặc",w:"maid",t:"Thư của Ô Lặc viết bằng chữ thảo nguyên, nét còn non: “Chị, thúc phụ nói em còn nhỏ. Các bộ nghe thúc phụ. Em sợ.”",o:[
   {n:"Hồi thư dạy em cách giữ quân cận vệ",wx:"Ô Lặc có người chỉ đường",lx:"thư có thể lọt vào tay thúc phụ",rt:"Thư đi theo đoàn buôn, giấu trong yên ngựa.",rf:"Thư bị giữ ở biên ải.",go:()=>bdMeet("olac")},
   {n:"Đưa thư em lên Hoàng thượng",wx:"ngài thấy ngươi không giấu",lx:"việc nhà thành việc triều",rt:"Hoàng thượng đọc xong, nói: “Thằng bé viết chữ đẹp.”"},
@@ -349,9 +355,9 @@ ARC67.bd_soi=bdArc("bd_soi",{o:"bd",t:"Sói đầu đàn",w:"emp",sj:"kim trư�
   {n:"Im lặng, cúi đầu",wx:"không gây chuyện",lx:"người ta nghĩ ngươi chịu lời ấy",rt:"Ngươi uống trà, không đáp."},
   {n:"Mời {v} sang uống sữa ngựa, kể chuyện kim trướng",wx:"{v} bớt khinh",lx:"mất một buổi chiều",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1]);return""},rt:"{v} nghe chuyện kim trướng, lần đầu hỏi tên em trai ngươi.",rf:"{v} chê sữa ngựa chua."}]},
  t1:{h:"Bản đồ trong Binh bộ",w:"emp",t:"Một đêm, người của thúc phụ lén đưa vào cung ngươi một lời nhắn: nếu ngươi chép được bản đồ đồn ải phía bắc trong kho Binh bộ, thúc phụ sẽ gả Ô Lặc cho con gái mình và để nó sống.",o:[
-  {n:"Đưa lời nhắn lên Hoàng thượng",f:"open",wx:"ngài thấy ngươi một lòng",lx:"thúc phụ biết ngươi trình",rt:"Hoàng thượng sai Binh bộ đổi chỗ cất bản đồ.",rf:"Hoàng thượng hỏi: “Người của hắn vào được cung nàng bằng đường nào?”",go:()=>{RD_FL("bd_soi.letters","given");return""}},
-  {n:"Giữ lời nhắn, chưa đáp",f:"cold",wx:"giữ được thế chờ",lx:"thúc phụ cho là ngươi đang nghĩ",rt:"Lời nhắn nằm dưới đáy hộp trang sức.",go:()=>{RD_FL("bd_soi.letters","kept");return""}},
-  {n:"Đốt lời nhắn trước mặt người đưa",f:"kin",wx:"thúc phụ biết ngươi không mua được",lx:"thúc phụ thôi giữ thể diện cho em ngươi",rt:"Lời nhắn cháy trong lò. Người đưa lui ra.",go:()=>{RD_FL("bd_soi.letters","burnt");return""}}]},
+  {n:"Đưa lời nhắn lên Hoàng thượng",f:"open",wx:"ngài thấy ngươi một lòng",lx:"thúc phụ biết ngươi trình",rt:"Hoàng thượng sai Binh bộ đổi chỗ cất bản đồ.",rf:"Hoàng thượng hỏi: “Người của hắn vào được cung nàng bằng đường nào?”",go:()=>{bdO("thuluc","given");return""}},
+  {n:"Giữ lời nhắn, chưa đáp",f:"cold",wx:"giữ được thế chờ",lx:"thúc phụ cho là ngươi đang nghĩ",rt:"Lời nhắn nằm dưới đáy hộp trang sức.",go:()=>{bdO("thuluc","kept");return""}},
+  {n:"Đốt lời nhắn trước mặt người đưa",f:"kin",wx:"thúc phụ biết ngươi không mua được",lx:"thúc phụ thôi giữ thể diện cho em ngươi",rt:"Lời nhắn cháy trong lò. Người đưa lui ra.",go:()=>{bdO("thuluc","burnt");return""}}]},
  x1:{h:"Hoàng thượng hỏi ý ngươi",w:"emp",t:"Hoàng thượng triệu sứ của thúc phụ và người đưa tin của Ô Lặc vào cùng một điện. Ngài quay sang ngươi: “Trẫm nên công nhận ai?”",o:[
   {n:"Tâu: chờ {pv} tỉnh, chưa công nhận ai",e:["win","lose"],rt:"Hoàng thượng phán: Đại Hy chỉ biết một chủ kim trướng là {pv}. Sứ thúc phụ tái mặt.",rf:"Sứ thúc phụ nói lớn: “Chờ đến khi biên ải loạn sao?” Triều thần xôn xao."},
   {n:"Tâu: Ô Lặc là con trưởng của {pv}, xin ban ấn cho em",e:["win2","lose"],rt:"Hoàng thượng ban một tờ chiếu nhận Ô Lặc là người nối trướng. Người đưa tin của em quỳ lạy ngươi.",rf:"Triều thần nói ngươi bênh em ruột; Hoàng thượng gác chiếu lại."},
@@ -363,27 +369,27 @@ ARC67.bd_soi=bdArc("bd_soi",{o:"bd",t:"Sói đầu đàn",w:"emp",sj:"kim trư�
 BD97.push({a:"bd_soi",tag:"Phụ hãn tỉnh lại",w:"emp",n:"Xin Hoàng thượng cho thiếp tự mang thuốc lên kim trướng",
  path:["thái y theo sứ","vòng ngọc của mẹ","Hồi thư dạy em","Đốt lời nhắn","Đưa lời nhắn lên Hoàng thượng","chờ {pv} tỉnh"],bad:["Nhận ngựa thay","Giữ lời nhắn, chưa đáp"],x:[()=>S.duc>=BAL.arc.rare.bd_soi.bar,`Đức từ ${BAL.arc.rare.bd_soi.bar}`],
  t:"Ngươi theo sứ đoàn lên bắc, mang thang thuốc của Thái y viện và chiếc khăn lông của {mh}. Đêm thứ ba ở kim trướng, {pv} mở mắt, gọi tên ngươi bằng tên thuở nhỏ. Thúc phụ quỳ ngoài trướng đến sáng. Trước khi ngươi về, {pv} trao cho ngươi chiếc ấn sói bằng bạc: “Con giữ. Thảo nguyên nhớ ai đã cứu nó.”",
- go:(_A,_ok,G)=>e67bien(G[0]),rw:"nt_dongchau",ti:"Người gọi Phụ hãn tỉnh lại"});
+ go:(_A,_ok,G)=>{bdO("ansoi","ta");return e67bien(G[0])},rw:"nt_dongchau",ti:"Người gọi Phụ hãn tỉnh lại"});
 
 rdDef("bd_soi",5,{t:"Hai phong thư",w:"emp",sj:"thư của thúc phụ và của em trai",cast(A){return rdCast(A,["v"])},
  g:"Mùa xuân, hai phong thư từ thảo nguyên đến cung ngươi trong cùng một tuần. Thúc phụ Hô Diên Liệt xin một bản chép bản đồ đồn ải phía bắc. Ô Lặc xin chị một lời với Hoàng thượng. Thư nào lên ngự án, thư nào nằm lại, là việc của ngươi.",
  p:[["s1","s2","s3"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Thúc phụ hứa hẹn",w:"emp",if:()=>RDW(1)()&&rdPrev()!=="win2",t:"Đại Hy chưa công nhận ai, thúc phụ phải nhún. Thư của ông ta lời lẽ ngọt: “Cháu gái cho ta bản đồ, ta để Ô Lặc làm tả hiền vương, cả nhà yên.”",o:[
-  {n:"Trình cả hai phong thư lên Hoàng thượng",f:"honest",wx:"ngài thấy ngươi không giữ gì riêng",lx:"thúc phụ biết thư bị trình",rt:"Hoàng thượng đọc hai thư, đặt thư của Ô Lặc lên trên.",rf:"Hoàng thượng hỏi: “Thư này đến bằng đường nào?”",go:()=>{RD_FL("bd_soi.letters","given");return""}},
-  {n:"Giữ thư thúc phụ làm chứng, chưa đáp",f:"hold",wx:"có trong tay chữ ký của thúc phụ",lx:"thúc phụ chờ, rồi nóng",rt:"Thư thúc phụ cất trong hộp ấn của ngươi.",go:()=>{RD_FL("bd_soi.letters","kept");return""}},
+  {n:"Trình cả hai phong thư lên Hoàng thượng",f:"honest",wx:"ngài thấy ngươi không giữ gì riêng",lx:"thúc phụ biết thư bị trình",rt:"Hoàng thượng đọc hai thư, đặt thư của Ô Lặc lên trên.",rf:"Hoàng thượng hỏi: “Thư này đến bằng đường nào?”",go:()=>{bdO("thuluc","given");return""}},
+  {n:"Giữ thư thúc phụ làm chứng, chưa đáp",f:"hold",wx:"có trong tay chữ ký của thúc phụ",lx:"thúc phụ chờ, rồi nóng",rt:"Thư thúc phụ cất trong hộp ấn của ngươi.",go:()=>{bdO("thuluc","kept");return""}},
   {n:"Đáp thư thúc phụ: cháu cần thời gian",f:"wolf",wx:"thúc phụ tưởng ngươi đã xiêu",lx:"có chữ của ngươi trong tay thúc phụ",rt:"Thư đáp của ngươi đi theo đoàn buôn.",go:()=>bdMeet("lie")}]},
  s2:{h:"Ô Lặc cảm ơn chị",w:"maid",if:()=>rdPrev()==="win2",t:"Ô Lặc gửi theo thư một con chim ưng non: “Ấn của Đại Hy cứu em. Nhưng thúc phụ nói ấn ấy là của chị, không phải của em.”",o:[
-  {n:"Viết cho em: ấn là của em, chị chỉ xin hộ",f:"honest",wx:"Ô Lặc vững lòng",lx:"thúc phụ đọc được thì lấy làm cớ",rt:"Ô Lặc đọc thư trước các trưởng lão.",go:()=>bdMeet("olac")},
-  {n:"Viết cho em: mọi lệnh phải hỏi chị trước",f:"hold",wx:"không ai lừa được em",lx:"các bộ nói Ô Lặc là con rối",rt:"Ô Lặc nghe lời, mỗi lệnh đều gửi thư hỏi."},
-  {n:"Gửi người dạy em đọc sổ quân",f:"wolf",wx:"em biết quân mình có bao nhiêu",lx:"người của ngươi trong trướng em",rt:"Một lão thư lại của sứ quán theo đoàn buôn lên bắc."}]},
+  {n:"Viết cho em: ấn là của em, chị chỉ xin hộ",f:"honest",wx:"Ô Lặc vững lòng",lx:"thúc phụ đọc được thì lấy làm cớ",rt:"Ô Lặc đọc thư trước các trưởng lão.",go:()=>{bdO("chimung","ta");return bdMeet("olac")}},
+  {n:"Viết cho em: mọi lệnh phải hỏi chị trước",f:"hold",wx:"không ai lừa được em",lx:"các bộ nói Ô Lặc là con rối",rt:"Ô Lặc nghe lời, mỗi lệnh đều gửi thư hỏi.",go:()=>bdO("chimung","ta")},
+  {n:"Gửi người dạy em đọc sổ quân",f:"wolf",wx:"em biết quân mình có bao nhiêu",lx:"người của ngươi trong trướng em",rt:"Một lão thư lại của sứ quán theo đoàn buôn lên bắc.",go:()=>bdO("chimung","ta")}]},
  s3:{h:"Thư của thúc phụ không còn ngọt",w:"emp",if:RDW(0),t:"Thúc phụ thấy Đại Hy im lặng, nên viết thẳng: “Bản đồ đồn ải, hoặc Ô Lặc sẽ ngã ngựa như cha nó.”",o:[
-  {n:"Trình thư dọa lên Hoàng thượng",f:"honest",wx:"ngài có cớ cảnh cáo thúc phụ",lx:"thúc phụ biết không lay được ngươi",rt:"Hoàng thượng sai Lễ bộ gửi sang bắc một tờ quở.",rf:"Hoàng thượng chỉ nói: “Việc trong trướng của họ.”",go:()=>{RD_FL("bd_soi.letters","given");return""}},
-  {n:"Giữ thư dọa, chờ ngày dùng",f:"hold",wx:"có chữ dọa của thúc phụ trong tay",lx:"Ô Lặc vẫn trong vòng nguy",rt:"Thư dọa nằm chung với thư cũ.",go:()=>{RD_FL("bd_soi.letters","kept");return""}},
+  {n:"Trình thư dọa lên Hoàng thượng",f:"honest",wx:"ngài có cớ cảnh cáo thúc phụ",lx:"thúc phụ biết không lay được ngươi",rt:"Hoàng thượng sai Lễ bộ gửi sang bắc một tờ quở.",rf:"Hoàng thượng chỉ nói: “Việc trong trướng của họ.”",go:()=>{bdO("thuluc","given");return""}},
+  {n:"Giữ thư dọa, chờ ngày dùng",f:"hold",wx:"có chữ dọa của thúc phụ trong tay",lx:"Ô Lặc vẫn trong vòng nguy",rt:"Thư dọa nằm chung với thư cũ.",go:()=>{bdO("thuluc","kept");return""}},
   {n:"Gửi người về giữ cho Ô Lặc",f:"wolf",wx:"em có người canh",lx:"bạc ra, người đi đường xa",rt:"Hai kỵ sĩ của sứ quán lên bắc, ngủ ngoài lều Ô Lặc."}]},
  c1:{h:"Lão thư lại Binh bộ",w:"emp",t:"Bản đồ đồn ải nằm trong kho Binh bộ. Một lão thư lại giữ kho mang ơn {pv} từ thời làm sứ, lão nhắn: muốn chép thì lão để cửa kho mở một đêm.",o:[
   {n:"Bảo lão khóa kho, quên chuyện ấy",wx:"tay sạch",lx:"lão thấy ngươi không tin",rt:"Lão thư lại thở phào."},
-  {n:"Nhờ lão chép một bản, cất ở chỗ lão",wx:"có bản đồ mà không qua tay ngươi",lx:"bản chép ở trong tay người khác",rt:"Lão chép trong ba đêm, cất dưới sàn nhà mình.",go:()=>{RD_FL("bd_soi.map","kept");return""}},
-  {n:"Nhờ lão chép một bản sai các đồn",wx:"có thứ để đưa thúc phụ",lx:"lão sợ",rt:"Lão chép, đổi chỗ năm đồn.",rf:"Lão chép sai cả chỗ mình không định sai.",go:()=>{RD_FL("bd_soi.map","false");return""}}]},
+  {n:"Nhờ lão chép một bản, cất ở chỗ lão",wx:"có bản đồ mà không qua tay ngươi",lx:"bản chép ở trong tay người khác",rt:"Lão chép trong ba đêm, cất dưới sàn nhà mình.",go:()=>{bdO("bando","kept");return""}},
+  {n:"Nhờ lão chép một bản sai các đồn",wx:"có thứ để đưa thúc phụ",lx:"lão sợ",rt:"Lão chép, đổi chỗ năm đồn.",rf:"Lão chép sai cả chỗ mình không định sai.",go:()=>{bdO("bando","false");return""}}]},
  c2:{h:"{v} và người nhà ở Binh bộ",w:"v",need:["v"],t:"Người nhà {v} làm Thị lang Binh bộ. {v} vô tình kể: kho bản đồ sắp kiểm lại, ai chép trộm sẽ lộ.",o:[
   {n:"Cảm ơn {v} đã nhắc",wx:"{v} tưởng ngươi không dính",lx:"{v} để ý ngươi hơn",go:(A,_ok,G)=>{rdRel(A,"v",G[0]);return""},rt:"{v} cười, không nói thêm."},
   {n:"Hỏi {v} ngày kiểm kho",wx:"biết trước",lx:"{v} nghi",go:(A,ok,G)=>{if(!ok)rdOan(A,"v",G[0]);return""},rt:"{v} nói ngày, như không để ý.",rf:"{v} nhìn ngươi: “Phi tần hỏi kho Binh bộ làm gì?”"},
@@ -393,9 +399,9 @@ rdDef("bd_soi",5,{t:"Hai phong thư",w:"emp",sj:"thư của thúc phụ và củ
   {n:"Cho hắn chờ thêm",f:"hold",wx:"thúc phụ chưa động",lx:"hắn đi lại Hội Đồng quán, dễ bị để ý",rt:"Người đưa thư ở lại thêm một tháng."},
   {n:"Gửi hắn một lời hứa không ký tên",f:"wolf",wx:"thúc phụ tin ngươi đang lo",lx:"lời hứa có thể bị dùng",rt:"Hắn mang lời hứa về bắc."}]},
  x1:{h:"Ngày kiểm kho Binh bộ",w:"emp",t:"Sáng mai Binh bộ kiểm kho. Đêm nay là đêm cuối để quyết bản đồ đi đâu, hoặc không đi đâu cả.",o:[
-  {n:"Giữ bản đồ, không trao ai",e:["win","lose"],rt:"Lão thư lại đưa bản chép về cung ngươi, giấu trong rương áo cưỡi. Sáng ra kho đủ, không ai biết có bản thứ hai.",rf:"Binh bộ đếm thấy dấu mực mới trên bản gốc. Lão thư lại bị hỏi.",go:()=>{RD_FL("bd_soi.map","kept");return""}},
-  {n:"Đưa thúc phụ bản đồ giả",e:["win","lose"],rt:"Bản đồ sai năm đồn theo người đưa thư về bắc. Thúc phụ sẽ đánh vào chỗ không có ai.",rf:"Người đưa thư bị khám ở biên ải, bản đồ giả rơi vào tay Binh bộ.",go:()=>{RD_FL("bd_soi.map","false");return""}},
-  {n:"Đốt bản chép, trình lão thư lại lên Hoàng thượng xin tha",e:["mid","lose"],rt:"Bản chép thành tro. Hoàng thượng tha lão thư lại, khen ngươi thật thà.",rf:"Lão thư lại bị cách chức, oán ngươi.",go:()=>{RD_FL("bd_soi.map","burnt");return""}}]}},
+  {n:"Giữ bản đồ, không trao ai",e:["win","lose"],rt:"Lão thư lại đưa bản chép về cung ngươi, giấu trong rương áo cưỡi. Sáng ra kho đủ, không ai biết có bản thứ hai.",rf:"Binh bộ đếm thấy dấu mực mới trên bản gốc. Lão thư lại bị hỏi.",go:()=>{bdO("bando","kept");return""}},
+  {n:"Đưa thúc phụ bản đồ giả",e:["win","lose"],rt:"Bản đồ sai năm đồn theo người đưa thư về bắc. Thúc phụ sẽ đánh vào chỗ không có ai.",rf:"Người đưa thư bị khám ở biên ải, bản đồ giả rơi vào tay Binh bộ.",go:()=>{bdO("bando","false");return""}},
+  {n:"Đốt bản chép, trình lão thư lại lên Hoàng thượng xin tha",e:["mid","lose"],rt:"Bản chép thành tro. Hoàng thượng tha lão thư lại, khen ngươi thật thà.",rf:"Lão thư lại bị cách chức, oán ngươi.",go:()=>{bdO("bando","burnt");return""}}]}},
  E:{win:{tag:"Bản đồ trong tay ngươi",w:"emp",t:"Bản đồ đồn ải ở chỗ ngươi chọn. Thúc phụ chờ, Ô Lặc chờ, và chỉ ngươi biết tờ giấy ấy nằm ở đâu."},
   mid:{tag:"Không còn bản đồ",t:"Không còn bản chép nào. Thúc phụ phải tìm đường khác, và ông ta sẽ tìm."},
   lose:{tag:"Dấu mực mới",w:"emp",t:"Binh bộ biết có người đã chép bản đồ. Chưa ai nói tên ngươi, nhưng người ta đã nhìn về phía cung ngươi.",go:(_A,G)=>e67bien(G[0])}}});
@@ -464,32 +470,37 @@ rdDef("bd_soi",7,{t:"Chợ ngựa đóng cửa",w:"emp",sj:"chợ ngựa biên �
 
 rdDef("bd_soi",8,{t:"Khả đôn vào kinh",w:"emp",sj:"{mh} lánh nạn ở kinh thành",cast(A){return rdCast(A,["v"])},
  g:"Thúc phụ vây lều {mh}. Bà trốn khỏi thảo nguyên với mười kỵ sĩ, đến cửa ải xin vào kinh. Che chở bà là việc của một người con, nhưng thúc phụ sẽ coi đó là cớ.",
- p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
+ p:[["s1","s2"],["c1","c2","c3"],["t1"],["x1"]],
  B:{s1:{h:"{mh} đến cửa ải",w:"emp",if:RDW(1),t:"Tổng binh ải bắc gửi tấu gấp: {mh} Khả đôn của {land} đang ở ngoài cửa ải, xin vào. Thúc phụ gửi thư: ai cho bà vào là kẻ thù.",o:[
-  {n:"Xin Hoàng thượng mở ải đón {mh}",f:"open",wx:"{mh} được vào",lx:"thúc phụ có cớ",rt:"Cửa ải mở. {mh} vào kinh bằng xe của Lễ bộ.",go:()=>{bdP("kd","w","kinh");return""}},
-  {n:"Xin đón {mh} vào lén, không lễ",f:"quiet",wx:"bà vào mà không ồn",lx:"bà phải vào như kẻ trốn",rt:"{mh} vào kinh trong xe chở cỏ, ở tạm chùa ngoài thành.",go:()=>{bdP("kd","w","kinh");return""}},
-  {n:"Gửi người đưa {mh} sang bộ lạc bên ngoại",f:"send",wx:"bà an toàn mà Đại Hy không dính",lx:"bà ở xa ngươi",rt:"{mh} sang bộ lạc bên ngoại ở ải tây."}]},
+  {n:"Xin Hoàng thượng mở ải đón {mh}",f:"open",wx:"{mh} được vào",lx:"thúc phụ có cớ",rt:"Cửa ải mở. {mh} vào kinh bằng xe của Lễ bộ, ở nhà khách Lễ bộ.",go:()=>bdMove("kd","kinh")},
+  {n:"Xin đón {mh} vào lén, không lễ",f:"quiet",wx:"bà vào mà không ồn",lx:"bà phải vào như kẻ trốn",rt:"{mh} vào kinh trong xe chở cỏ, ở tạm chùa ngoài thành.",go:()=>{RD_FL("bd_soi.chua",1);return bdMove("kd","kinh")}},
+  {n:"Gửi người đưa {mh} sang bộ lạc bên ngoại",f:"send",wx:"bà an toàn mà Đại Hy không dính",lx:"bà ở xa ngươi",rt:"{mh} sang bộ lạc bên ngoại ở ải tây.",go:()=>bdMove("kd","ai")}]},
  s2:{h:"{mh} đã ở ngoài thành",w:"maid",if:RDW(0),t:"{maid} báo: có một bà già người {land} quỳ trước cửa Đức Thắng, nói là mẹ của phi tần {land}. Lính cửa không cho vào.",o:[
-  {n:"Tự ra cửa thành đón mẹ",f:"open",wx:"cả kinh thành thấy ngươi đón mẹ",lx:"phi tần ra cửa thành là việc lớn",rt:"Ngươi quỳ trước mẹ giữa cửa Đức Thắng. Lính cửa quỳ theo.",rf:"Thái giám giữ ngươi lại ở cửa cung.",go:()=>{bdP("kd","w","kinh");return""}},
-  {n:"Sai người đưa {mh} vào chùa ngoài thành",f:"quiet",wx:"bà có chỗ ở",lx:"bà không được vào kinh",rt:"{mh} nghỉ ở chùa, ngươi gửi áo ấm và sữa.",go:()=>{bdP("kd","w","kinh");return""}},
-  {n:"Gửi bạc, xin bà về ải tây",f:"send",wx:"không có cớ cho thúc phụ",lx:"bà buồn",rt:"{mh} nhận bạc, khóc, rồi lên đường về tây."}]},
- c1:{h:"Đội kỵ sĩ của {mh}",w:"emp",t:"Mười kỵ sĩ theo {mh} xin được giữ gươm. Lễ bộ nói người ngoại quốc không được mang gươm trong kinh.",o:[
+  {n:"Tự ra cửa thành đón mẹ",f:"open",wx:"cả kinh thành thấy ngươi đón mẹ",lx:"phi tần ra cửa thành là việc lớn",rt:"Ngươi quỳ trước mẹ giữa cửa Đức Thắng. Lính cửa quỳ theo.",rf:"Thái giám giữ ngươi lại ở cửa cung. Đến tối, Lễ bộ mới cho {mh} vào tạm chùa ngoài thành.",go:(A,ok)=>{if(!ok)RD_FL("bd_soi.chua",1);return bdMove("kd","kinh")}},
+  {n:"Sai người đưa {mh} vào chùa ngoài thành",f:"quiet",wx:"bà có chỗ ở",lx:"bà không được vào kinh",rt:"{mh} nghỉ ở chùa, ngươi gửi áo ấm và sữa.",go:()=>{RD_FL("bd_soi.chua",1);return bdMove("kd","kinh")}},
+  {n:"Gửi bạc, xin bà về ải tây",f:"send",wx:"không có cớ cho thúc phụ",lx:"bà buồn",rt:"{mh} nhận bạc, khóc, rồi lên đường về tây, ở bộ lạc bên ngoại.",go:()=>bdMove("kd","ai")}]},
+ c1:{h:"Đội kỵ sĩ của {mh}",w:"emp",if:()=>BDKD()==="kinh",t:"Mười kỵ sĩ theo {mh} xin được giữ gươm. Lễ bộ nói người ngoại quốc không được mang gươm trong kinh.",o:[
   {n:"Xin cho đội vệ của {mh} mang gươm",wx:"bà có người giữ",lx:"triều thần sợ",rt:"Hoàng thượng chuẩn: mười gươm, không hơn."},
   {n:"Đổi kỵ sĩ lấy thị vệ Đại Hy",wx:"không ai nói gì",lx:"bà sống giữa người lạ",rt:"Mười kỵ sĩ giao gươm. Thị vệ Đại Hy đứng ngoài cửa bà."},
   {n:"Bỏ bạc thuê vệ sĩ trong kinh cho bà",wx:"bà có người giữ mà không mang gươm",lx:"bạc ra",rt:"Sáu vệ sĩ thuê ở tiêu cục đứng ngoài cửa bà."}]},
- c2:{h:"{v} nói {mh} là gián điệp",w:"v",need:["v"],t:"{v} nói với Thái hậu: “Khả đôn {land} ở ngoài thành, ai biết bà gặp những ai?”",o:[
+ c2:{h:"{v} nói {mh} là gián điệp",w:"v",need:["v"],if:()=>BDKD()==="kinh",t:()=>"{v} nói với Thái hậu: “Khả đôn {land} ở "+(RD_FL("bd_soi.chua")?"ngoài thành":"ngay trong kinh")+", ai biết bà gặp những ai?”",o:[
   {n:"Mời {v} đến thăm {mh}",wx:"{v} tận mắt thấy bà chỉ là một người mẹ",lx:"{v} có thể nói thêm",go:(A,ok,G)=>{ok?rdRel(A,"v",G[0]):rdOan(A,"v",G[1]);return""},rt:"{v} về, không nói thêm.",rf:"{v} về kể bà nói tiếng {land} với người lạ."},
   {n:"Xin Thái hậu cử người canh {mh}",wx:"không ai còn cớ",lx:"mẹ ngươi bị canh như tù",rt:"Thái hậu cử hai ma ma đến ở cùng {mh}."},
   {n:"Đáp: mẹ thiếp gặp con gái mình",wx:"giữ được thể diện",lx:"{v} thêm oán",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Thái hậu gật, {v} im."}]},
- t1:{h:"Thúc phụ đòi người",w:"emp",t:"Thư thúc phụ đến: “Trả Khả đôn về, hoặc chợ ngựa không bao giờ mở lại.”",o:[
+ c3:{h:"Đội kỵ sĩ của {mh} ở ải tây",w:"emp",if:()=>BDKD()!=="kinh",t:"Mười kỵ sĩ theo {mh} giữ lều bà ở bộ lạc bên ngoại. Tổng binh ải tây tâu về: có cho người của Khả đôn mang gươm ra vào ải không.",o:[
+  {n:"Xin cho đội vệ của {mh} mang gươm ra vào ải",wx:"bà có người giữ",lx:"Binh bộ sợ",rt:"Hoàng thượng chuẩn: mười gươm, không hơn."},
+  {n:"Xin lính ải Đại Hy canh lều bà",wx:"không ai nói gì",lx:"bà sống giữa người lạ",rt:"Mười kỵ sĩ giao gươm. Lính ải Đại Hy đứng ngoài lều bà."},
+  {n:"Bỏ bạc thuê người bộ lạc canh lều cho bà",wx:"bà có người giữ mà Đại Hy không dính",lx:"bạc ra",rt:"Sáu tay cung của bộ lạc bên ngoại đứng ngoài lều bà."}]},
+ t1:{h:"Thúc phụ đòi người",w:"emp",t:()=>BDKD()==="kinh"?"Thư thúc phụ đến: “Trả Khả đôn về, hoặc chợ ngựa không bao giờ mở lại.”":"Thư thúc phụ đến: “Bộ lạc bên ngoại giấu Khả đôn ở ải tây. Trả bà về, hoặc chợ ngựa không bao giờ mở lại.”",o:[
   {n:"Xin Hoàng thượng đáp: Khả đôn là khách của Đại Hy",f:"open",wx:"cả thảo nguyên biết Đại Hy che chở bà",lx:"thúc phụ có cớ đánh",rt:"Thư đáp đóng ấn Đại Hy về bắc."},
   {n:"Đáp thư bằng lời mẹ: bà chỉ đến thăm con",f:"quiet",wx:"thúc phụ không có cớ",lx:"lời nói có thể không đủ",rt:"{mh} tự viết thư, giọng bình thản."},
   {n:"Dùng {mh} làm mồi nhử",f:"bait",wx:"thúc phụ sẽ sai người đến, và sẽ bị bắt",lx:"mẹ ngươi ở trong vòng nguy",rt:"Ngươi để lộ tin {mh} sắp về ải. Người của thúc phụ đến chặn đường."}]},
- x1:{h:"Đêm có người đến",w:"emp",t:"Đêm rằm, có người lạ trèo tường chùa ngoài thành nơi {mh} ở. Cấm quân ở xa. Ngươi được báo trước một khắc.",o:[
-  {n:"Đón {mh} vào cung, công khai",e:["win","lose"],rt:"{mh} vào ở cung ngươi, có chiếu của Hoàng thượng. Kẻ trèo tường bị bắt ở chùa trống.",rf:"Trên đường vào cung, xe của bà bị chặn. Bà bị thương nhẹ.",go:()=>{bdP("kd","w","kinh");return""}},
+ x1:{h:"Đêm có người đến",w:"emp",t:()=>"Đêm rằm, "+(BDKD()!=="kinh"?"tin gấp từ ải tây: có người lạ lảng vảng quanh lều bộ lạc bên ngoại nơi {mh} ở. Lính ải ở xa.":"có người lạ trèo tường "+BDKDAT()+" nơi {mh} ở. Cấm quân ở xa.")+" Ngươi được báo trước một khắc.",o:[
+  {n:"Đón {mh} vào cung, công khai",e:["win","lose"],rt:()=>"{mh} vào ở cung ngươi, có chiếu của Hoàng thượng. Kẻ lạ bị bắt ở "+(BDKD()!=="kinh"?"lều":BDKDAT())+" trống.",rf:"Trên đường vào cung, xe của bà bị chặn. Bà bị thương nhẹ.",go:()=>{RD_FL("bd_soi.chua",0);return bdMove("kd","kinh")}},
   {n:"Phục sẵn thị vệ, bắt người của thúc phụ",e:["win","lose"],rt:"Năm người của thúc phụ bị bắt sống. Chúng khai thúc phụ sai giết Khả đôn.",rf:"Người của thúc phụ thoát hai tên. Bà bị kinh hãi, ốm nặng."},
-  {n:"Đưa {mh} về ải tây trong đêm",e:["mid","lose"],rt:"{mh} về bộ lạc bên ngoại an toàn. Kinh thành không có chuyện gì.",rf:"Xe của bà bị theo dõi đến tận ải.",go:()=>{bdP("kd","w","ai");return""}}]}},
- E:{win:{tag:"Mẹ ở bên ngươi",w:"emp",t:"{mh} ở kinh, có Đại Hy che chở. Cả thảo nguyên biết thúc phụ đã sai người giết Khả đôn, và đã thất bại."},
+  {n:"Đưa {mh} về ải tây trong đêm",if:()=>BDKD()==="kinh",e:["mid","lose"],rt:"{mh} về bộ lạc bên ngoại an toàn. Kinh thành không có chuyện gì.",rf:"Xe của bà bị theo dõi đến tận ải.",go:()=>bdMove("kd","ai")},
+  {n:"Đưa {mh} đi sâu vào bộ lạc bên ngoại trong đêm",if:()=>BDKD()!=="kinh",e:["mid","lose"],rt:"Bộ lạc bên ngoại nhổ lều, đưa {mh} đi sâu về tây. Kẻ lạ mất dấu.",rf:"Kẻ lạ bám theo đoàn xe suốt đêm.",go:()=>bdMove("kd","ai")}]}},
+ E:{win:{tag:"Mẹ ở bên ngươi",w:"emp",t:()=>"{mh} ở "+(BDKD()==="kinh"?"kinh":"ải tây")+", có Đại Hy che chở. Cả thảo nguyên biết thúc phụ đã sai người giết Khả đôn, và đã thất bại."},
   mid:{tag:"Mẹ ở xa",t:"{mh} ở bộ lạc bên ngoại. Bà an toàn, ngươi yên lòng một nửa."},
   lose:{tag:"Mẹ bị thương",w:"emp",t:"{mh} bị thương, phải nằm. Thúc phụ có cớ nói Đại Hy không giữ được khách của mình.",go:(_A,G)=>e67bien(G[0])}}});
 
@@ -503,9 +514,9 @@ rdDef("bd_soi",9,{t:"Hội đua ngựa mùa hạ",w:"emp",sj:"hội đua chọn 
  s2:{h:"Ô Lặc xin chị chỉ cách",w:"maid",if:RDW(0),t:"Ô Lặc viết: “Em ngã ngựa hai lần khi tập. Thúc phụ cười. Chị dạy em.”",o:[
   {n:"Viết cho em cách cưỡi trên cỏ ướt",f:"self",wx:"em cưỡi vững hơn",lx:"thư không thay được người dạy",rt:"Ô Lặc tập theo thư, ngã ít hơn."},
   {n:"Gửi Ba Đồ lên dạy em",f:"champ",wx:"em có thầy",lx:"Thượng tứ viện mất người",rt:"Ba Đồ lên bắc theo đoàn buôn.",go:()=>bdMove("bado","tn")},
-  {n:"Gửi em bộ yên của mình",f:"gift",wx:"em ngồi vững",lx:"đồ của phi tần lên thảo nguyên",rt:"Bộ yên của ngươi theo thư lên bắc."}]},
+  {n:"Gửi em bộ yên của mình",f:"gift",wx:"em ngồi vững",lx:"đồ của phi tần lên thảo nguyên",rt:"Bộ yên của ngươi theo thư lên bắc.",go:()=>bdO("yen","olac")}]},
  c1:{h:"Người chấm đua",w:"emp",t:"Ba trưởng lão chấm hội đua. Một người là bạn cũ của {pv}, một người theo thúc phụ, một người chưa nghiêng bên nào.",o:[
-  {n:"Gửi quà cho người chưa nghiêng",wx:"có thêm một phiếu",lx:"quà có thể bị lộ",rt:"Trưởng lão nhận quà, gửi lời cảm ơn {mh}."},
+  {n:"Gửi quà cho người chưa nghiêng",wx:"có thêm một phiếu",lx:"quà có thể bị lộ",rt:"Trưởng lão nhận quà, gửi lời cảm ơn {mh}."/*bd6b: a message, wherever she is*/},
   {n:"Mua chuộc người chấm của thúc phụ",wx:"thúc phụ mất một phiếu",lx:"bị lộ thì cả hội nói ngươi gian",rt:"Người chấm của thúc phụ nhận vàng, hứa giữ miệng.",rf:"Người chấm của thúc phụ nhận vàng, rồi đưa thư cho thúc phụ xem.",go:()=>{RD_FL("bd_soi.bribe",1);return""}},
   {n:"Viết thư cho cả ba, xin xét công bằng",wx:"không ai nói được ngươi gian",lx:"không đổi được gì",rt:"Ba trưởng lão nhận thư, không trả lời."}]},
  c2:{h:"{v} nói ngựa thảo nguyên",w:"v",need:["v"],t:"{v} cười trong yến: “Phi tần mà về thảo nguyên đua ngựa, thì Đại Hy gọi là gì?”",o:[
@@ -515,9 +526,9 @@ rdDef("bd_soi",9,{t:"Hội đua ngựa mùa hạ",w:"emp",sj:"hội đua chọn 
  c3:{h:"Cờ của hoàng tử",w:"emp",if:BDSON,t:"Con trai ngươi, hoàng tử, đã biết cưỡi ngựa. Các trưởng lão nói: con của con gái {pv} cũng có máu kim trướng.",o:[
   {n:"Cho tay đua mang cờ của hoàng tử",wx:"cả thảo nguyên nhớ tên con ngươi",lx:"Đại Hy lo hoàng tử bị kéo về bắc",rt:"Cờ hoàng tử thêu sói trắng, sẽ đi đầu hội đua."},
   {n:"Gửi các trưởng lão một bức thư hoàng tử viết",wx:"các bộ biết con ngươi",lx:"triều thần dị nghị",rt:"Hoàng tử viết bằng chữ {land} ngươi dạy."},
-  {n:"Giữ hoàng tử ra khỏi việc này",wx:"con ngươi yên",lx:"các bộ quên con ngươi",rt:"Ngươi không nhắc đến con."}]},
+  {n:"Giữ hoàng tử ra khỏi việc này",/*bd6c: a person, not an object*/wx:"con ngươi yên",lx:"các bộ quên con ngươi",rt:"Ngươi không nhắc đến con."}]},
  t1:{h:"Đêm trước hội",w:"maid",t:"Đêm trước hội, có tin: con ngựa của Ô Lặc bị đầu độc. Người làm là ai, ai cũng đoán được.",o:[
-  {n:"Gửi gấp con ngựa tốt nhất của mình",f:"gift",wx:"em có ngựa",lx:"ngựa đi xa, mệt",rt:"Con ngựa tới hồ Bạch Thủy lúc gà gáy."},
+  {n:"Gửi gấp con ngựa tốt nhất của mình",f:"gift",wx:"em có ngựa",lx:"ngựa đi xa, mệt",rt:()=>bdP("tuyetcau","w")==="kinh"?"Tuyết Câu tới hồ Bạch Thủy lúc gà gáy.":"Tuyết Câu đã ở chỗ em; con ngựa ô của ngươi tới hồ Bạch Thủy lúc gà gáy.",go:()=>bdP("tuyetcau","w")==="kinh"?bdMove("tuyetcau","tn"):bdO("nguao_ta","olac")},
   {n:"Bảo em đua bằng ngựa của tay đua thay",f:"champ",wx:"vẫn có người đua",lx:"em không tự đua",rt:"Tay đua thay dắt ngựa đến chỗ xuất phát."},
   {n:"Nhắn em tố thúc phụ trước các trưởng lão",f:"self",wx:"các bộ biết ai gian",lx:"không có chứng thì thành vu",rt:"Ô Lặc đứng lên giữa hội, nói thẳng.",rf:"Thúc phụ cười: “Có chứng không?”"}]},
  x1:{h:"Vòng đua cuối",w:"emp",t:"Vòng đua cuối quanh hồ Bạch Thủy. Con trai thúc phụ dẫn trước. Tin về đến kinh qua chim ưng: ngươi còn một lời gửi kịp.",o:[
@@ -537,8 +548,9 @@ rdDef("bd_soi",10,{t:"Đêm tuyết Âm Sơn",w:"emp",sj:"quân Đại Hy ở �
   {n:"Nhắn em: giữ lều, chờ chị",f:"army",wx:"em không liều",lx:"thúc phụ có thêm thời gian",rt:"Ô Lặc rút về sau hồ, giữ lều."}]},
  s2:{h:"Ô Lặc im lặng",w:"maid",if:RDW(0),t:"Đã hai tuần không có thư Ô Lặc. Người buôn nói lều em bị vây ở chân Âm Sơn.",o:[
   {n:"Xin Hoàng thượng sai sứ đến hỏi thúc phụ",f:"envoy",wx:"thúc phụ phải trả lời Đại Hy",lx:"sứ có thể bị giữ",rt:"Sứ Đại Hy lên bắc mang ấn của Hoàng thượng."},
-  {n:"Gửi chim ưng tìm em",f:"oath",wx:"có tin thật",lx:"chim có thể không về",rt:"Chim ưng về sau ba ngày, mang một mẩu vải của em: em còn sống.",rf:"Chim ưng không về."},
-  {n:"Xin quân ở ải tiến gần",f:"army",wx:"thúc phụ thấy quân Đại Hy",lx:"có thể châm lửa",rt:"Quân ở ải tiến thêm nửa ngày đường."}]},
+  {n:"Gửi chim ưng tìm em",f:"oath",if:()=>bdO("chimung")==="ta",wx:"có tin thật",lx:"chim có thể không về",rt:"Chim ưng về sau ba ngày, mang một mẩu vải của em: em còn sống.",rf:"Chim ưng không về.",go:(A,ok)=>{if(!ok)bdO("chimung","mat");return""}},
+  {n:"Xin quân ở ải tiến gần",f:"army",wx:"thúc phụ thấy quân Đại Hy",lx:"có thể châm lửa",rt:"Quân ở ải tiến thêm nửa ngày đường."},
+  {n:"Gửi người buôn quen tìm em",f:"oath",if:()=>bdO("chimung")!=="ta",wx:"có tin thật",lx:"người buôn có thể không về",rt:"Người buôn về sau năm ngày, mang một mẩu vải của em: em còn sống.",rf:"Người buôn không về."}]},
  c1:{h:"Tổng binh ải Âm Sơn",w:"emp",t:"Tổng binh ải Âm Sơn tâu: quân ông đủ đánh, nhưng tuyết dày, ra ải thì khó về.",o:[
   {n:"Xin Tổng binh giữ ải, chỉ đánh nếu thúc phụ vượt ải",wx:"không mất quân",lx:"em ngươi tự lo",rt:"Tổng binh nhận lời, ở yên sau ải."},
   {n:"Gửi Tổng binh áo bông và lương",wx:"quân sẵn sàng",lx:"bạc ra",rt:"Áo bông lên ải trước tuyết lớn."},
@@ -568,8 +580,9 @@ rdDef("bd_soi",11,{t:"Chủ nhân kim trướng",w:"emp",sj:"kim trướng của
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Tang {pv}",w:"emp",if:RDW(1),t:"Tin tang đến. Hoàng thượng cho ngươi để tang theo lễ {land} ba ngày, cho treo cờ trắng trước cung.",o:[
   {n:"Để tang theo lễ {land}, mời sứ hai bên cùng đến",f:"peace",wx:"cả hai bên phải cúi đầu trước linh {pv}",lx:"thúc phụ có dịp gần ngươi",rt:"Sứ thúc phụ và sứ Ô Lặc cùng quỳ trước bàn thờ, không ai dám nói lời nào.",rf:"Sứ thúc phụ không đến."},
-  {n:"Để tang riêng, đóng cửa cung",f:"self",wx:"lòng ngươi được yên",lx:"việc triều chờ",rt:"Ba ngày ngươi không gặp ai, trừ {mh}."},
-  {n:"Gửi chiếc ấn sói bằng bạc của {pv} cho Ô Lặc",f:"heir",wx:"các bộ thấy ấn trong tay em",lx:"thúc phụ biết ngươi đã chọn",rt:"Chiếc ấn theo chim ưng về hồ Bạch Thủy.",go:()=>bdMeet("olac")}]},
+  {n:"Để tang riêng, đóng cửa cung",f:"self",wx:"lòng ngươi được yên",lx:"việc triều chờ",rt:()=>BDKD()==="kinh"?"Ba ngày ngươi không gặp ai, trừ {mh}.":"Ba ngày ngươi không gặp ai; mỗi sáng có thư {mh} từ ải tây."},
+  {n:"Gửi chiếc ấn sói bằng bạc của {pv} cho Ô Lặc",f:"heir",if:()=>bdO("ansoi")==="ta",wx:"các bộ thấy ấn trong tay em",lx:"thúc phụ biết ngươi đã chọn",rt:()=>"Chiếc ấn theo "+(bdO("chimung")==="ta"?"chim ưng":"người đưa tin")+" về hồ Bạch Thủy.",go:()=>{bdO("ansoi","olac");return bdMeet("olac")}},
+  {n:"Gửi thư tang của chị cho Ô Lặc, xin các bộ nhận em",f:"heir",if:()=>bdO("ansoi")!=="ta",wx:"các bộ thấy chị đứng sau em",lx:"thúc phụ biết ngươi đã chọn",rt:"Thư tang của ngươi được đọc trước các trưởng lão ở hồ Bạch Thủy.",go:()=>bdMeet("olac")}]},
  s2:{h:"Tang {pv}, và một lời đồn",w:"emp",if:RDW(0),t:"Tin tang đến cùng một lời đồn: thúc phụ đã ngồi vào kim trướng trước khi {pv} tắt thở.",o:[
   {n:"Xin Hoàng thượng chưa công nhận ai trước lễ tang",f:"peace",wx:"thúc phụ chưa có danh",lx:"thúc phụ có quân",rt:"Hoàng thượng phán: Đại Hy chờ hết tang mới bàn."},
   {n:"Viết thư cho các trưởng lão, nhắc lệ cổ",f:"self",wx:"các trưởng lão nhớ lệ",lx:"lệ cổ có thể không đủ",rt:"Bảy trưởng lão đọc thư trước lều tang."},
@@ -590,11 +603,11 @@ rdDef("bd_soi",11,{t:"Chủ nhân kim trướng",w:"emp",sj:"kim trướng của
   {n:"Viết tên Ô Lặc",e:["win","lose"],rt:"Ô Lặc nhận chiếu của Đại Hy, ngồi vào kim trướng. Thúc phụ lùi về núi.",rf:"Chiếu đến, nhưng thúc phụ không lùi. Các bộ chia đôi.",go:(A,ok)=>{if(!ok)bdP("olac","w","ai");return""}},
   {n:"Viết: chia thảo nguyên, mỗi bên một nửa",e:["mid","lose"],rt:"Thảo nguyên chia đôi. Ô Lặc giữ hồ Bạch Thủy, thúc phụ giữ Âm Sơn.",rf:"Hai bên ký rồi lại đánh."},
   {n:"Viết tên thúc phụ, đổi lời thề giữ biên ải",e:["mid","lose"],rt:"Thúc phụ ngồi vào kim trướng, thề giữ yên biên ải. Ô Lặc được làm tả hiền vương.",rf:"Thúc phụ ngồi vào trướng, rồi quên lời thề.",go:(A,ok)=>{if(!ok)bdKill("olac");return""}}]}},
- E:{win:{tag:"Em trai lên ngôi hãn",w:"emp",t:"Ô Lặc ngồi kim trướng với chiếu của Đại Hy. Mỗi mùa thu, ngựa thảo nguyên lại xuống chợ biên, kèm một phong thư cho chị."},
+ E:{win:{tag:"Em trai lên ngôi hãn",w:"emp",/*bd6b: win only from «Viết tên Ô Lặc», which never kills him*/t:"Ô Lặc ngồi kim trướng với chiếu của Đại Hy. Mỗi mùa thu, ngựa thảo nguyên lại xuống chợ biên, kèm một phong thư cho chị."},
   mid:{tag:"Thảo nguyên chia đôi",t:"Thảo nguyên có hai chủ, cả hai đều gọi ngươi là người nhà, không ai nghe ngươi trọn. Biên ải yên, lòng ngươi không yên."},
-  lose:{tag:"Thúc phụ thắng, mối hòa lung lay",w:"emp",t:"Thúc phụ ngồi kim trướng. Ô Lặc lưu lạc. Đại Hy nhìn ngươi như một tờ hòa ước đã cũ.",go:(_A,G)=>e67bien(G[0])}}});
+  lose:{tag:"Thúc phụ thắng, mối hòa lung lay",w:"emp",t:()=>"Thúc phụ ngồi kim trướng. "+(bdAlive("olac")?"Ô Lặc lưu lạc.":"Ô Lặc đã chết trong tay người của thúc phụ.")+" Đại Hy nhìn ngươi như một tờ hòa ước đã cũ.",go:(_A,G)=>e67bien(G[0])}}});
 RD97L.push(rdRare({a:"bd_soi_11",tag:"Kim trướng gọi ngươi là Khả đôn",w:"emp",n:"Viết tên chín trưởng lão, xin họ chọn trước mặt hai sứ",
  path:["vòng ngọc của mẹ","Trình cả hai phong thư","Giữ bản đồ","Tha Thát Mộc","Bắt sống Thát Mộc","mở chợ ngựa ở ải tây","Đón {mh} vào cung","dũng sĩ","Chỉ xin sứ thần","Đổi binh lấy lời thề"],
  bad:["Chém Thát Mộc","Mua chuộc","Dùng {mh} làm mồi"],x:[()=>S.danh>=RR("bd_soi_11").bar,"Danh từ "+RR("bd_soi_11").bar],
- t:"Ngươi không viết tên ai. Ngươi viết tên chín trưởng lão, xin họ chọn ngay trước điện Đại Hy. Chín người đứng dậy, cùng quay về phía ngươi: theo lệ cổ, con gái {pv} mà giữ được thảo nguyên qua một mùa đông, thì kim trướng gọi là Khả đôn. Ô Lặc ngồi trướng, nhưng ấn sói ở trong tay ngươi; thúc phụ quỳ nhận lệnh từ một tờ thư có chữ ký của ngươi.",
+ /*bd6b: the rare replaces the x1 choice, Ô Lặc alive*/t:()=>"Ngươi không viết tên ai. Ngươi viết tên chín trưởng lão, xin họ chọn ngay trước điện Đại Hy. Chín người đứng dậy, cùng quay về phía ngươi: theo lệ cổ, con gái {pv} mà giữ được thảo nguyên qua một mùa đông, thì kim trướng gọi là Khả đôn. "+(bdO("ansoi")==="olac"?"Ô Lặc ngồi trướng, ấn sói trong tay em, nhưng lời là lời của ngươi; ":bdO("ansoi")==="ta"?"Ô Lặc ngồi trướng, nhưng ấn sói ở trong tay ngươi; ":"Ô Lặc ngồi trướng, nhưng chín trưởng lão nghe lời ngươi; ")+"thúc phụ quỳ nhận lệnh từ một tờ thư có chữ ký của ngươi.",
  go:(_A,G)=>e67bien(G[0]),rw:"bienngu",ti:"Khả đôn của kim trướng"}));

@@ -67,7 +67,7 @@ Object.assign(BAL.road.fx,{
   c1:[bdS({tamco:-1},{duc:2}),bdR("tamco",{mat:1,tamco:1},{danh:-2},{suc:-1}),bdS({suc:-1},{duc:3})],
   c2:[bdG(bdR("tamco",{tamco:2},{danh:-1},{suc:-1}),[3]),bdG(bdS({danh:-1},{duc:2}),[2]),bdG(bdS({tamco:-1},{mat:1}),[2])],
   t1:[bdS({tamco:-1},{sung:4}),bdR("sung",{duc:3},{sung:-3},{suc:-1}),bdS({bac:-40},{sung:2,danh:1})],
-  x1:[bdX(35,"sung","stay",{suc:-2}),bdX(40,"suc","north"),{c:{sung:-2},w:{duc:1}}],
+  x1:[bdX(35,"sung","stay",{suc:-2}),bdX(40,"suc","north"),{c:{sung:-2},w:{duc:1}},bdX(40,"suc","north"),{c:{sung:-2},w:{duc:1}}],/* 4–5 = 2–3 when the west-gate horse is gone */
   E:bdE({sung:4,tamco:3},{sung:-4,danh:-2})},
  bd_san_11:{s1:[bdS({suc:-2},{sung:3}),bdS({tamco:-1},{duc:2,danh:1}),bdR("tamco",{mat:1,tamco:1},{suc:-2},{suc:-1})],
   s2:[bdR("sung",{sung:3},{danh:-2},{suc:-1}),bdS({bac:-30},{mat:1}),bdS({tamco:-1},{mat:1})],
@@ -114,7 +114,8 @@ Object.assign(BAL.road.fx,{
   c1:[bdR("sung",{mat:1,duc:1},{danh:-2},{tamco:-1}),bdS({duc:-1},{tamco:2}),bdS({bac:-60},{duc:2,mat:1})],
   c2:[bdG(bdR("duc",{duc:2},{danh:-1},{tamco:-1}),[2,3]),bdS({duc:-1},{danh:2}),bdG(bdS({danh:-1},{duc:3}),[2])],
   t1:[bdR("sung",{danh:3,duc:2},{danh:-3}),bdS({tamco:-1},{duc:2}),bdS({duc:-3},{tamco:3,mat:1})],
-  x1:[bdX(35,"sung","open",{suc:-2}),bdX(40,"tamco","bait",{duc:-3}),bdX(50,"duc","send",{danh:-2})],
+  c3:[bdR("sung",{mat:1,duc:1},{danh:-2},{tamco:-1}),bdS({duc:-1},{tamco:2}),bdS({bac:-60},{duc:2,mat:1})],/* = c1, the Khả đôn at the western border */
+  x1:[bdX(35,"sung","open",{suc:-2}),bdX(40,"tamco","bait",{duc:-3}),bdX(50,"duc","send",{danh:-2}),bdX(50,"duc","send",{danh:-2})],
   E:Object.assign(bdE({duc:4,danh:3},{danh:-3,sung:-2}),{lose:{fx:{danh:-3,sung:-2},k:-1,g:[-2]}})},
  bd_soi_9:{s1:[bdR("suc",{danh:5},{danh:-3}),bdS({bac:-50},{duc:2,danh:1}),bdS({suc:-2},{duc:3})],
   s2:[bdS({tamco:-1},{duc:2}),bdS({mat:-1},{duc:2,danh:1}),bdS({bac:-40},{duc:3})],
@@ -125,14 +126,14 @@ Object.assign(BAL.road.fx,{
   x1:[bdX(35,"suc","self"),bdX(45,"tamco","champ",{bac:-60}),{c:{danh:-2},w:{duc:1}}],
   E:Object.assign(bdE({danh:6,sung:2},{danh:-3,sung:-2}),{lose:{fx:{danh:-3,sung:-2},k:-1,g:[-2]}})},
  bd_soi_10:{s1:[bdR("sung",{sung:3,duc:1},{sung:-2},{tamco:-1}),bdS({suc:-1},{mat:1,tamco:1}),bdS({duc:-1},{tamco:3})],
-  s2:[bdR("danh",{danh:3,duc:1},{danh:-2},{bac:-30}),bdR("tamco",{mat:1,duc:1},{suc:-2},{suc:-1}),bdS({duc:-2},{danh:3})],
+  s2:[bdR("danh",{danh:3,duc:1},{danh:-2},{bac:-30}),bdR("tamco",{mat:1,duc:1},{suc:-2},{suc:-1}),bdS({duc:-2},{danh:3}),bdR("tamco",{mat:1,duc:1},{suc:-2},{suc:-1})],/* 4 = 2 sent by a trader when the hawk is not hers */
   c1:[bdS({danh:-1},{duc:2}),bdS({bac:-80},{danh:2,duc:1}),bdS({duc:-1},{mat:1,danh:1})],
   c2:[bdG(bdS({danh:-1},{duc:3}),[2]),bdG(bdS({duc:-1},{sung:3}),[3]),bdG(bdR("tamco",{tamco:2},{danh:-1},{suc:-1}),[3,-2])],
   c3:[bdS({sung:-2},{danh:4}),bdS({danh:-1},{sung:3}),bdS({tamco:-1},{danh:2,duc:1})],
   t1:[bdS({sung:-1},{duc:3}),bdS({tamco:-1},{duc:2,sung:1}),bdS({duc:-3},{sung:4})],
   x1:[bdX(40,"duc","envoy",{suc:-2}),bdX(25,"tamco","oath",{suc:-2}),bdX(45,"sung","army",{duc:-3})],
   E:Object.assign(bdE({danh:6,sung:3},{danh:-4,sung:-3}),{lose:{fx:{danh:-4,sung:-3},k:-1,g:[-3]}})},
- bd_soi_11:{s1:[bdR("duc",{duc:3,danh:2},{danh:-2},{bac:-40}),bdS({sung:-1},{duc:3}),bdS({tamco:-1},{mat:1,danh:1})],
+ bd_soi_11:{s1:[bdR("duc",{duc:3,danh:2},{danh:-2},{bac:-40}),bdS({sung:-1},{duc:3}),bdS({tamco:-1},{mat:1,danh:1}),bdS({tamco:-1},{mat:1,danh:1})],/* 4 = 3 without the wolf seal */
   s2:[bdR("sung",{danh:3},{danh:-2},{suc:-1}),bdS({tamco:-1},{duc:2,danh:1}),bdS({bac:-40},{mat:1,tamco:1})],
   c1:[bdS({danh:-1},{sung:2,duc:1}),bdS({tamco:-1},{duc:3}),bdS({duc:-2},{tamco:2,danh:1})],
   c2:[bdG(bdS({danh:-1},{duc:3}),[3]),bdG(bdS({duc:-2},{bac:120}),[3]),bdS({tamco:-1},{sung:2})],

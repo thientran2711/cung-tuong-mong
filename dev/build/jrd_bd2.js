@@ -81,8 +81,8 @@ rdDef("bd_tuyet",5,{t:"Kho Thường Bình",w:"emp",sj:"lương kho Thường B�
   {n:"Nhận lời, rồi cho người xem lương có mốc không",f:"le",wx:"nếu lương mốc, nhà {v} bị lộ",lx:"nếu lương tốt, ngươi thành kẻ nghi oan",go:(A,ok,G)=>{ok?rdOan(A,"v",G[0]):rdRel(A,"v",G[1])},rt:"Một phần lương nhà {v} đã mốc; Hộ bộ trả lại.",rf:"Lương tốt cả; {v} cười: “Tỷ tỷ cẩn thận quá.”"}]},
  t1:{h:"Rương hồi môn",w:"me",t:"Trong kho cung ngươi còn chiếc rương hồi môn mang từ {land} sang: yên bạc, chuỗi san hô, tấm thảm của {mh}. Lang trung bộ Hộ nói: cầm rương ấy, kho sẽ cho ứng lương trước.",o:[
   {n:"Đem rương hồi môn cầm cho kho Thường Bình",f:"an",wx:"lương ra ải ngay",lx:"của hồi môn nằm trong kho người ta",go:()=>bdO("hoimon","kho"),rt:"Rương hồi môn được niêm ấn, đưa vào kho Thường Bình; sổ kho ghi tên ngươi."},
-  {n:"Giữ rương, xin Hoàng thượng làm bảo lãnh",f:"le",wx:"của hồi môn còn nguyên",lx:"ngươi mượn uy Hoàng thượng",rt:"Hoàng thượng phê một chữ “chuẩn” vào giấy ứng lương.",rf:"Hoàng thượng bảo: “Việc kho là việc của Hộ bộ.”"},
-  {n:"Giữ rương, chờ kho tự mở",wx:"của hồi môn còn nguyên",lx:"lương chậm",rt:"Rương hồi môn vẫn nằm trong kho cung ngươi."}]},
+  {n:"Giữ rương, xin Hoàng thượng làm bảo lãnh",f:"le",go:()=>bdO("hoimon","ta"),wx:"của hồi môn còn nguyên",lx:"ngươi mượn uy Hoàng thượng",rt:"Hoàng thượng phê một chữ “chuẩn” vào giấy ứng lương.",rf:"Hoàng thượng bảo: “Việc kho là việc của Hộ bộ.”"},
+  {n:"Giữ rương, chờ kho tự mở",go:()=>bdO("hoimon","ta"),wx:"của hồi môn còn nguyên",lx:"lương chậm",rt:"Rương hồi môn vẫn nằm trong kho cung ngươi."}]},
  x1:{h:"Ngày kho mở sổ",w:"emp",t:"Đầu tháng giêng, Hộ bộ mở sổ kho Thường Bình trước mặt Hoàng thượng. Lang trung bộ Hộ đọc từng dòng; đến dòng lương ra ải, ngài quay sang hỏi ngươi.",o:[
   {n:"Tâu: xin mở kho theo lệ cứu đói",e:["win","lose"],rt:"Hoàng thượng chuẩn theo lệ cũ. Xe lương ra ải mang dấu kho Thường Bình.",rf:"Lệ cũ chỉ cứu dân Đại Hy; tờ sớ của ngươi bị gác lại."},
   {n:"Tâu: xin mua theo giá kho, bạc của thần thiếp",e:["win","mid"],rt:"Hộ bộ bán cho ngươi theo giá kho; không ai nói được gì.",rf:"Hộ bộ bán, nhưng chỉ đủ nửa số xe."},
@@ -217,7 +217,7 @@ rdDef("bd_tuyet",9,{t:"Sốt trong trại",w:"maid",sj:"cơn sốt trong trại 
   {n:"Thưa: xin nghe Thái y viện",e:"mid",lx:"không phải lời của ngươi",rt:"Hoàng thượng phê theo Thái y viện."}]}},
  E:{win:{tag:"Trại hết sốt",w:"emp",t:"Trại dưới chân Nhạn Môn hết sốt. Người lánh nạn gọi ngươi bằng một tiếng {land} nghĩa là người mẹ.",go:(_A,G)=>e67bien(G[0])},
   mid:{tag:"Sốt qua, người vơi",t:"Sốt đã qua. Trại vơi đi một phần, và những người còn lại không nhắc đến những người đã đi."},
-  lose:{tag:"Trại vắng sau cơn sốt",w:"emp",t:"Cơn sốt cuốn đi nhiều người, trong đó có A Sử Na Cát. Bộ lạc chôn trưởng lão bên chân ải, quay mặt về phía bắc.",go:(_A,G)=>{bdKill("asnc");return e67bien(G[0])}}}});
+  lose:{tag:"Trại vắng sau cơn sốt",w:"emp",t:"Cơn sốt cuốn đi nhiều người, trong đó có A Sử Na Cát. Bộ lạc chôn trưởng lão bên chân ải, quay mặt về phía bắc.",go:(_A,G)=>{bdKill("asnc");return e67bien(G[0])}}}});/*bd6b: he dies in the camp under the wall, where .8 put him (w "ai")*/
 
 /* .10 Mở cửa ải — the gate: open for people, open for the tribe, or hold [emp, v] */
 rdDef("bd_tuyet",10,{t:"Mở cửa ải",w:"emp",sj:"lệnh bài cửa ải Nhạn Môn",cast(A){return rdCast(A,["v"])},
@@ -313,7 +313,7 @@ ARC67.bd_hen=bdArc("bd_hen",{o:"bd",t:"Lời thề bên đống đá",w:"emp",sj
   {n:"Xin cho thông dịch Tứ Di quán dịch thay",wx:"không phải đứng gần chàng",lx:"Hoàng thượng thấy ngươi ngại",rt:"Thông dịch Tứ Di quán bước lên; ngươi lui về sau."}]},
  c2:{h:"{v} để ý",w:"v",need:["v"],t:"{v} cười trong buổi thỉnh an: “Đội trưởng hộ vệ {land} cứ nhìn về phía hậu cung. Chẳng biết là nhìn ai.”",o:[
   {n:"Đáp: người thảo nguyên nhìn trời, không nhìn người",wx:"lời {v} rơi xuống đất",lx:"thành ra cãi nhau",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1])},rt:"Cả điện cười; {v} không nói tiếp.",rf:"Cả điện im; ai cũng nhớ câu của {v}."},
-  {n:"Gửi lễ cho {v}, xin nàng ta thôi nói",wx:"{v} thôi nói",lx:"{v} biết ngươi sợ",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"{v} nhận lễ, cười khẽ."},
+  {n:"Gửi lễ cho {v}, xin nàng ta thôi nói",wx:"{v} thôi nói",lx:"{v} biết ngươi sợ",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"{v} nhận lễ, cười khẽ."},/*bd6c: a gift of silver, the option's Bạc cost*/
   {n:"Dò xem ai kể cho {v}",f:"uy",wx:"tìm ra tai mắt",lx:"hai cung thành thù",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"Người kể là một thái giám ở Hội Đồng quán; ngươi cho người trả hắn về Nội vụ phủ.",rf:"Không tìm ra ai."}]},
  t1:{h:"Lời hẹn ở Thượng uyển",w:"maid",t:"Cung nữ thân tín của ngươi về báo: Thác Bạt Phong xin được gặp ngươi một lần, ở góc vườn Thượng uyển nơi đoàn hộ vệ đi tuần, trước khi sứ đoàn vào nghị việc.",o:[
   {n:"Đến gặp, có cung nữ đứng canh",f:"tinh",wx:"được nói một lời",lx:"nếu bị thấy, là tội",rt:"Dưới gốc tùng, chàng chỉ nói: “Ta đến để xem nàng có được sống yên không.”",rf:"Một thị vệ đi qua; hai người phải tách ra, không kịp nói gì."},
@@ -504,17 +504,17 @@ rdDef("bd_hen",9,{t:"Ngục Đại Lý tự",w:"emp",sj:"phiên thẩm ở Đạ
   lose:{tag:"Phiên thẩm nghiêng về tội",w:"emp",t:"Phiên thẩm nghiêng về tội. Đại Lý tự định ngày xử, và người ta bắt đầu nói đến chữ “trảm”."}}});
 
 /* .10 Đêm trước phiên xử — plead, prove, or open the cell [emp, v] */
-rdDef("bd_hen",10,{t:"Đêm trước phiên xử",w:"emp",sj:"phiên xử Thác Bạt Phong",cast(A){return rdCast(A,["v"])},
- g:"Sáng mai Đại Lý tự xử Thác Bạt Phong. Đêm nay là đêm cuối ngươi còn làm được một điều: quỳ xin, đưa chứng cớ, hay mở cửa ngục.",
+rdDef("bd_hen",10,{t:"Đêm trước phiên xử",w:"emp",sj:"phiên xử Thác Bạt Phong",cast(A){return rdCast(A,["v"])},/*bd6b: .9 puts him in Đại Lý tự on every opening option, so all of .10 has him in the cell*/
+ g:"Sáng mai Đại Lý tự xử Thác Bạt Phong. Đêm nay là đêm cuối ngươi còn làm được một điều: quỳ xin, đưa chứng cớ, hay mở cửa ngục.",/*bd6b: in the cell (.9)*/
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
  B:{s1:{h:"Một chứng cớ còn thiếu",w:"emp",if:RDW(1),t:"Phiên thẩm nghiêng về chàng, chỉ thiếu một người: quản sự nhà {v}, kẻ đã đưa chén rượu. Y đang trốn trong phủ ngoại của {v}.",o:[
   {n:"Xin Hoàng thượng sai cấm quân bắt quản sự",f:"le",wx:"chứng nhân đến trước phiên xử",lx:"nhà {v} có người báo trước",rt:"Cấm quân bắt được quản sự lúc canh ba.",rf:"Quản sự đã trốn khỏi phủ."},
   {n:"Sai người dụ quản sự ra khai, hứa tha tội",f:"an",wx:"quản sự tự khai",lx:"hứa tha là hứa thay luật",rt:"Quản sự đến Đại Lý tự trước bình minh.",rf:"Quản sự không tin lời hứa."},
-  {n:"Mua chuộc ngục tốt, mở cửa ngục đêm nay",f:"uy",wx:"chàng không phải chờ phiên xử",lx:"mở ngục là tội lớn hơn mọi tội",go:(_A,ok)=>{if(ok)RD_FL("bd_hen.mo",1)},rt:"Ngục tốt nhận bạc, hẹn canh tư.",rf:"Ngục tốt nhận bạc rồi báo lên."}]},
+  {n:"Mua chuộc ngục tốt, mở cửa ngục đêm nay",f:"uy",wx:"chàng không phải chờ phiên xử",lx:"mở ngục là tội lớn hơn mọi tội",go:(_A,ok)=>{if(ok)RD_FL("bd_hen.mo",1)},rt:"Ngục tốt nhận bạc, hẹn canh tư.",rf:"Ngục tốt nhận bạc rồi báo lên."}]},/*bd6c: silver, the option's Bạc cost*/
  s2:{h:"Phiên xử nghiêng về tội",w:"emp",if:RDW(0),t:"Phiên thẩm nghiêng về tội; Đại Lý tự đã viết sẵn chữ “trảm”, chỉ chờ Hoàng thượng phê.",o:[
   {n:"Quỳ trước Dưỡng Tâm điện xin Hoàng thượng",f:"that",wx:"Hoàng thượng thấy ngươi",lx:"cả cung thấy ngươi quỳ vì một người đàn ông",rt:"Hoàng thượng mở cửa lúc nửa đêm: “Đứng lên. Trẫm nghe.”",rf:"Cửa điện không mở; ngươi quỳ đến sáng."},
   {n:"Sai người dụ quản sự nhà {v} ra khai",f:"an",wx:"có một chứng nhân",lx:"hứa tha là hứa thay luật",rt:"Quản sự đến Đại Lý tự trước bình minh.",rf:"Quản sự không tin lời hứa."},
-  {n:"Mua chuộc ngục tốt, mở cửa ngục đêm nay",f:"uy",wx:"chàng không phải chờ phiên xử",lx:"mở ngục là tội lớn hơn mọi tội",go:(_A,ok)=>{if(ok)RD_FL("bd_hen.mo",1)},rt:"Ngục tốt nhận bạc, hẹn canh tư.",rf:"Ngục tốt nhận bạc rồi báo lên."}]},
+  {n:"Mua chuộc ngục tốt, mở cửa ngục đêm nay",f:"uy",wx:"chàng không phải chờ phiên xử",lx:"mở ngục là tội lớn hơn mọi tội",go:(_A,ok)=>{if(ok)RD_FL("bd_hen.mo",1)},rt:"Ngục tốt nhận bạc, hẹn canh tư.",rf:"Ngục tốt nhận bạc rồi báo lên."}]},/*bd6c: silver, the option's Bạc cost*/
  c1:{h:"{v} đến cung ngươi",w:"v",need:["v"],t:"{v} đến cung ngươi lúc đêm: “Tỷ rút lời khai về chén rượu, muội rút đơn đòi đền mạng. Người của tỷ được về thảo nguyên.”",o:[
   {n:"Nhận lời {v}",f:"phan",wx:"chàng được về",lx:"quản sự nhà {v} thoát tội",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"{v} cười, đi ra. Sáng mai đơn đòi đền mạng sẽ được rút."},
   {n:"Từ chối: người chết cần một lời thật",f:"nghia",wx:"lời thật còn nguyên",lx:"{v} thành thù",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"{v} đứng dậy: “Tỷ tỷ sẽ hối.”"},
@@ -528,12 +528,12 @@ rdDef("bd_hen",10,{t:"Đêm trước phiên xử",w:"emp",sj:"phiên xử Thác 
   {n:"Nhắn: đoàn cứ đi, đừng chờ ai",f:"phan",wx:"sứ đoàn không dính vào ngươi",lx:"chàng có thể ở lại một mình",rt:"Chánh sứ cúi đầu."},
   {n:"Nhắn: chờ lời phán, đi đúng lệ",f:"le",wx:"sứ đoàn giữ phép",lx:"chậm",rt:"Chánh sứ cho tháo yên ngựa."}]},
  x1:{h:"Canh tư",w:"emp",t:"Canh tư. Ngoài trời tuyết cuối mùa rơi lất phất. Đây là lúc cuối ngươi còn làm được điều gì đó cho chàng.",o:[
-  {n:"Tâu hết với Hoàng thượng, xin ngài phán",e:["win","lose"],rt:"Hoàng thượng nghe hết, phê lên án: “Tha.” Sáng ra Thác Bạt Phong bước ra khỏi ngục Đại Lý tự.",rf:"Hoàng thượng nghe hết, rồi nói: “Luật là luật.”"},
+  {n:"Tâu hết với Hoàng thượng, xin ngài phán",e:["win","lose"],rt:"Hoàng thượng nghe hết, phê lên án: “Tha.” Sáng ra Thác Bạt Phong bước ra khỏi ngục Đại Lý tự.",rf:"Hoàng thượng nghe hết, rồi nói: “Luật là luật.”"},/*bd6b: in the cell (.9)*/
   {n:"Cho ngục tốt mở cửa, đưa chàng ra cửa Tây",if:()=>!!RD_FL("bd_hen.mo"),e:["win","lose"],rt:"Cửa ngục mở lúc canh tư; ngựa ở cửa Tây phi đi trước khi trời sáng.",rf:"Cửa ngục mở, nhưng lính tuần đến; tiếng tù và vang khắp kinh thành."},
   {n:"Chờ trời sáng",e:"mid",lx:"mọi việc tùy Đại Lý tự",rt:"Ngươi ngồi bên đèn đến sáng."}]}},
- E:{win:{tag:"Chàng ra khỏi ngục",w:"emp",t:"Thác Bạt Phong ra khỏi ngục Đại Lý tự. Ngươi không thấy chàng, chỉ nghe tiếng vó ngựa về phía Hội Đồng quán.",go:()=>{bdMove("phong",RD_FL("bd_hen.mo")?"tn":"kinh")}},
-  mid:{tag:"Án đày",t:"Đại Lý tự xử đày: Thác Bạt Phong bị trục xuất về thảo nguyên, không bao giờ được vào kinh nữa.",go:()=>{bdMove("phong","tn")}},
-  lose:{tag:"Tiếng tù và trong ngục",w:"emp",t:"Đêm ấy ngục Đại Lý tự có tiếng tù và. Sáng ra người ta báo: Thác Bạt Phong đã chết, ngực trúng tên của lính ngục. Nhà {v} rút đơn đòi đền mạng.",go:()=>{bdKill("phong");bdMove("phong","nguc")}}}});
+ E:{win:{tag:"Chàng ra khỏi ngục",w:"emp",t:"Thác Bạt Phong ra khỏi ngục Đại Lý tự. Ngươi không thấy chàng, chỉ nghe tiếng vó ngựa về phía Hội Đồng quán.",go:()=>{bdMove("phong",RD_FL("bd_hen.mo")?"tn":"kinh")}},/*bd6b: leaves the cell here (bdMove)*/
+  mid:{tag:"Án đày",t:"Đại Lý tự xử đày: Thác Bạt Phong bị trục xuất về thảo nguyên, không bao giờ được vào kinh nữa.",go:()=>{bdMove("phong","tn")}},/*bd6b: leaves the cell here (bdMove tn)*/
+  lose:{tag:"Tiếng tù và trong ngục",w:"emp",t:"Đêm ấy ngục Đại Lý tự có tiếng tù và. Sáng ra người ta báo: Thác Bạt Phong đã chết, ngực trúng tên của lính ngục. Nhà {v} rút đơn đòi đền mạng.",go:()=>{bdKill("phong");bdMove("phong","nguc")}}}});/*bd6b: dies in the cell here (bdKill)*/
 
 /* .11 Lời thề sau cùng — the embassy leaves; with him, without him, or for him (road finale) [emp, v] */
 rdDef("bd_hen",11,{t:"Lời thề sau cùng",w:"emp",sj:"lời thề bên đống đá",cast(A){return rdCast(A,["v"])},
@@ -563,7 +563,7 @@ rdDef("bd_hen",11,{t:"Lời thề sau cùng",w:"emp",sj:"lời thề bên đốn
   {n:"Đáp: buồn, và tỷ biết ai làm tỷ buồn",f:"uy",wx:"{v} biết ngươi không quên",lx:"thù hai cung đi đến cuối đời",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"{v} không cười nữa."},
   {n:"Đáp: không buồn, chỉ nhớ quê",f:"an",wx:"{v} không còn gì để soi",lx:"{v} nghĩ ngươi đã thua",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"{v} khẽ gật đầu."},
   {n:"Không đáp",wx:"không lỡ lời",lx:"{v} đứng đó đến cuối",rt:"Ngươi nhìn theo sứ đoàn."}]},
- t1:{h:"Thư gửi {pv}",w:"emp",t:"Sứ đoàn mang theo thư nhà của ngươi gửi {pv}. Dòng cuối, ngươi phải viết về Thác Bạt Phong.",o:[
+ t1:{h:"Thư gửi {pv}",w:"emp",t:"Sứ đoàn mang theo thư nhà của ngươi gửi {pv}. Dòng cuối, ngươi phải viết về Thác Bạt Phong.",o:[/*bd6b: the letter speaks of him alive or dead (both options fit either)*/
   {n:"Xin {pv} trọng đãi bộ lạc của chàng",f:"nghia",wx:"bộ lạc của chàng được che chở",lx:"{pv} hỏi vì sao",rt:"Ngươi viết: “Người ấy đã giữ lời. Xin phụ hãn giữ người ấy.”"},
   {n:"Xin {pv} không quên ai đã hại chàng",f:"uy",wx:"thảo nguyên sẽ nhớ",lx:"thư ấy là mồi lửa",rt:"Ngươi viết, rồi đóng dấu bằng sáp đỏ."},
   {n:"Không nhắc đến chàng",f:"phan",wx:"thư nhà sạch",lx:"chuyện của chàng không ai kể",rt:"Thư nhà chỉ kể chuyện trong cung."}]},
@@ -577,5 +577,5 @@ rdDef("bd_hen",11,{t:"Lời thề sau cùng",w:"emp",sj:"lời thề bên đốn
 RD97L.push(rdRare({a:"bd_hen_11",tag:"Hoàng thượng làm chứng lời thề",w:"emp",n:"Xin Hoàng thượng chứng cho lời thề xưa: chàng giữ biên ải, thiếp giữ Đại Hy",
  path:["Thưa thật","Đưa hòn đá cho Hoàng thượng","Kể hết chuyện đống đá","bát rượu kết nghĩa","Xin cho thái y làm chứng","tra chén rượu","Hồng Lô tự","đọc nguyên văn","Khai thật","Tâu hết với Hoàng thượng","Đến Thận hình ty","Xin Hoàng thượng giữ thái y","nghĩa huynh của Đại Hy"],bad:["Mua chuộc ngục tốt","Khai: không quen","Tâu: thư giả","Đưa bạc cho thái y"],
  x:[()=>bdPh()&&S.danh>=RR("bd_hen_11").bar,"Danh từ "+RR("bd_hen_11").bar],
- t:"Trên lầu cổng Tây, trước mặt sứ đoàn, Hoàng thượng cầm tay ngươi và nói bằng tiếng {land} ngươi đã dạy: “Lời thề của nàng, trẫm làm chứng.” Thác Bạt Phong xuống ngựa quỳ, thề giữ biên ải cho hai nước đến hết đời. Mỗi mùa thu sau đó, một con ngựa trắng từ biên ải về kinh, trên yên buộc một hòn đá nhỏ.",
+ t:"Trên lầu cổng Tây, trước mặt sứ đoàn, Hoàng thượng cầm tay ngươi và nói bằng tiếng {land} ngươi đã dạy: “Lời thề của nàng, trẫm làm chứng.” Thác Bạt Phong xuống ngựa quỳ, thề giữ biên ải cho hai nước đến hết đời. Mỗi mùa thu sau đó, một con ngựa trắng từ biên ải về kinh, trên yên buộc một hòn đá nhỏ.",/*bd6b: the rare x condition requires bdPh() (alive)*/
  go:(_A,G)=>{RD_FL("bd_hen.chung",1);return e67bien(G[0])},rw:"nt_dongchau",ti:"Người được Hoàng thượng chứng lời thề"}));
