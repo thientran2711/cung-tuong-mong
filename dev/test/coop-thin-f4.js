@@ -147,7 +147,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  /* ---- T: Tứ đức practice at bậc 5 (no game) ---- */
  {const k='cong',kind=await pick(`return TDS_KIND.cong`);const rid=await pick(`return (WKR[TDS_KIND.cong]||[])[0]?WKR[TDS_KIND.cong][0].id:null`);
   await stage(`S.vir=S.vir||{};S.vir.cong=5;S.suc=80;S.mg=null`);
-  await act('T1 Tứ đức Tự học at bậc 5 (tdsRun prac): the work made, in ONE place (her bag, both phones)',`tdsRun('cong','prac',{kind:${JSON.stringify(kind)},mat:0,r:${JSON.stringify(rid)},subj:''})`,{chk:x=>x.g1.inv.length===x.g0.inv.length+1&&x.h1.inv.length===x.g0.inv.length+1})}
+  await act('T1 Tứ đức Tự học at bậc 5 (tdsRun prac): the work made, in ONE place (her bag, both phones)',`tdsRun('cong','prac',{kind:${JSON.stringify(kind)},mat:0,r:${JSON.stringify(rid)},subj:''})`,{shot:'cook',chk:x=>x.g1.inv.length===x.g0.inv.length+1&&x.h1.inv.length===x.g0.inv.length+1})}
  /* double tap */
  if(ON){await reset();const r=await G.p.evaluate(()=>{const F=COOPW.thin.F,b0=F.stat.busy,s0=F.stat.sent;petcMaid(0);petcMaid(0);return {busy:F.stat.busy-b0,sent:F.stat.sent-s0,id:F.pend&&F.pend.id}});
   await until(G,id=>!COOPW.thin.F.pend,r.id,20000);ok(r.sent===1&&r.busy===1,'D1 double tap: one intent, the second tap ignored',r)}
