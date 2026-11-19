@@ -629,3 +629,4 @@ SEATS 16:04Z (B ROOT-6): running 5 / cap 12 (REVIEW F5 idle for turn; REVIEW F6a
 SEATS 16:18Z (B ROOT-6): running 5 / cap 12 (REVIEW F5 idle for turn; REVIEW F6a; F6b #4; REVIEW hostnull; coop-ptime-reds) | QUEUE: runact-sv-fix reviewer (on SSK) → G → H (serial after F6) → free 7 — MAIN ROOT-71, move items to B. ctx ~23 %.
 - (19/11 21:45Z) FROM MAIN ROOT-71: runact-sv-fix (LIVE bug j29 sv) = owner-bug fast lane, land as soon as its reviewer PASSes; send LAND READY to ROOT-71. Landing waits for CDN alarm fix (C-AG #23).
 - (19/11 22:08Z) FROM MAIN ROOT-71: LIVE main = 80c52782 (npc-purpose on baf63a2d cdn-kc floor 420→264). ROLLBACK baf63a2d. CDN alarm cleared (owner-ordered pull-down; guard lowered). Final-merge 80c52782 before any LAND READY; landing runs again now (main has push permission + hourly wake :32).
+- (19/11 22:12Z) FROM MAIN ROOT-71: LIVE main = 3584ea42 (cdn-kc-guard, tooling only, on 80c52782 npc-purpose). Final-merge 3584ea42 before LAND READY.
