@@ -15,14 +15,17 @@ face=row["face_words"].strip()
 assert face.startswith("Her face: ") and face.endswith(".")
 assert face in open(os.path.join(ROOT,row["prompt_file"]),encoding="utf-8").read(),"face words not verbatim in v3 FULL"
 os.makedirs(os.path.join(R,"prompts"),exist_ok=True)
-# ROOT-51 (owner Lượt 583) E11 interim: 5 clearly different items per person, one per age, from the approved Nữ đế item list (FIGURE_GATE H NỮ ĐẾ = build.py NUDE_LIST)
-# minus the yellow-silk folding fan (2nd fan = same look). 9 items, 5 consecutive per person (start = person number) -> never two alike inside one person.
-ITEMS=[('an imperial jade seal (ngọc tỷ) on a yellow silk cord','one'),('a gold dragon-headed sceptre','one'),('an imperial edict scroll on yellow silk with gold rollers','scroll'),('a gold-and-jade ruyi with a dragon','one'),('a gold dragon-framed round fan','two'),('a gold dragon-handled hand mirror','mirror'),('a jade tablet (hốt) edged in gold','two'),('a small gilded dragon censer','one'),('a gold-mounted jade dragon-ring pendant on a yellow cord','dangle')]
+# E11 items = IT1 lists in build.py (NUDE_LIST 25 + NUDE_AGE 5 per age, commit 438794d)
 AGES=["a18","a26","a36","a51","a65"]
+import ast as _ast
+_tree=_ast.parse(open(os.path.join(ROOT,"dev/art/t8-prompt-B/build.py"),encoding="utf-8").read())
+_lit={n.targets[0].id:n.value for n in _tree.body if isinstance(n,_ast.Assign) and len(n.targets)==1 and isinstance(n.targets[0],_ast.Name) and n.targets[0].id in ("NUDE_LIST","NUDE_AGE")}
+_NL=_ast.literal_eval(_lit["NUDE_LIST"]); _NA=_ast.literal_eval(_lit["NUDE_AGE"])
+assert len(_NL)==25 and all(len(v)==5 for v in _NA.values())
 WRAP=os.path.join(R,"_build_item.py")   # runs build.py unchanged except age_item() for tier 'nude' returns NDX_ITEM
 for age in ("a18","a26","a36","a51","a65"):
     argv=[sys.executable,WRAP,p,"v0","--state","nude","--spec5pose","--nudeopt","auto","--nostyle"]+(["--age",age] if age!="a18" else [])
-    it=ITEMS[(int(p[1:])-1+AGES.index(age))%len(ITEMS)]
+    it=_NL[_NA[age][(int(p[1:])-1)%5]]   # IT1 438794d (E11): build.NUDE_LIST[NUDE_AGE[age][(n-1)%5]]
     o=subprocess.run(argv,capture_output=True,text=True,check=True,env={**os.environ,"PYTHONDONTWRITEBYTECODE":"1","NDX_ITEM":it[0],"NDX_HK":it[1]}).stdout
     if "Her face: ." in o: o=o.replace("Her face: .",face,1)   # older builder: empty slot
     assert o.count(face)==1,"face words (BW3 builder fills them from KC_REFS)"
