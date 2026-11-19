@@ -127,6 +127,10 @@ async function nightGap(A,B){const w0=(await C(A)).week;await clear(A);await cle
  const same=async tag=>{const a=await A.p.evaluate(()=>({era:S.emp.era,d:[S.year,S.month,S.tuan],me:S.name,fr:((rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null)||{}).name,R:rivals.filter(v=>!v.coop).map(v=>v.id+v.name).join()}));
    const c=await B.p.evaluate(()=>({era:S.emp.era,d:[S.year,S.month,S.tuan],me:S.name,fr:((rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop)||null)||{}).name,R:rivals.filter(v=>!v.coop).map(v=>v.id+v.name).join()}));
    ok(a.era===c.era&&a.R===c.R,tag+': same Emperor and same consorts',[a.era,c.era]);ok(String(a.d)===String(c.d),tag+': same date',[a.d,c.d]);
+   /* art-wiring-1119: the Thái hậu is a pool face drawn by the host; both seats show the same picture (her own face's Thái hậu robe) */
+   {const th=o=>o.p.evaluate(()=>({f:typeof figFor==='function'?figFor({kind:'th'},'fig'):'',fid:S.thO&&S.thO.fid||null}));let x,y;const t0=Date.now();
+    while(Date.now()-t0<20000){x=await th(A);y=await th(B);if(x.f&&x.f===y.f)break;await sleep(400)}
+    ok(!!x.f&&x.f===y.f&&/^(consort|maid|mama):/.test(x.fid||''),tag+': both seats show the same Thái hậu picture (a pool face)',[x,y])}
    const okS=a.fr===c.me&&c.fr===a.me;ok(okS,tag+': each sees the other as a person',okS?[a.me,a.fr,c.me,c.fr]:{n:[a.me,a.fr,c.me,c.fr],trA:await A.p.evaluate(()=>COOPW.tr.slice(-14)),wsA:await A.p.evaluate(()=>window.__wsLog),trB:await B.p.evaluate(()=>COOPW.tr.slice(-8))});return[a,c]};
  /* "world" = each seat has its base; the friend's character (her `me` → the room's state) reaches the other seat a moment later: wait for it, as a player would see her appear */
  {const fr=o=>o.p.evaluate(()=>{const f=rivals.find(v=>v.coop)||rivals.flatMap(v=>v.staff||[]).find(x=>x.coop);return[S.name,f?f.name:null]});const t0=Date.now();
