@@ -544,14 +544,14 @@ MOTIF_LOW.update({
 "c01":["peonies", "a pink peony"],
 "c02":["plum blossoms", "a white jasmine sprig"],
 "c03":["lotus flowers", "a red camellia"],
-"c04":["orchids", "a small lotus"],
+"c04":["orchids", "a lotus"],
 "c05":["chrysanthemums", "a plum blossom"],
 "c07":["cranes", "a pale magnolia"],
 "c08":["auspicious clouds", "a begonia"],
 "c09":["bamboo leaves", "a pink peony"],
 "c10":["magnolias", "a white jasmine sprig"],
 "c11":["begonias", "a red camellia"],
-"c12":["pomegranates", "a small lotus"],
+"c12":["pomegranates", "a lotus"],
 "c13":["camellias", "a plum blossom"],
 "c14":["wisteria", "an orchid"],
 "c15":["swallows", "a pale magnolia"],
@@ -559,14 +559,14 @@ MOTIF_LOW.update({
 "c17":["peonies", "a pink peony"],
 "c18":["plum blossoms", "a white jasmine sprig"],
 "c19":["lotus flowers", "a red camellia"],
-"c20":["orchids", "a small lotus"],
+"c20":["orchids", "a lotus"],
 "c21":["chrysanthemums", "a plum blossom"],
 "c22":["butterflies", "an orchid"],
 "c23":["cranes", "a pale magnolia"],
 "c24":["auspicious clouds", "a begonia"],
 "c26":["magnolias", "a white jasmine sprig"],
 "c27":["begonias", "a red camellia"],
-"c28":["pomegranates", "a small lotus"],
+"c28":["pomegranates", "a lotus"],
 "c29":["camellias", "a plum blossom"],
 "c30":["wisteria", "an orchid"],
 "c31":["swallows", "a pale magnolia"],
@@ -977,7 +977,7 @@ MAID_ROWS=[["m01", "sage green and cream", "#E8CDB5", "#CAB295"],
   ["m51", "pale mint and silver", "#C0BDAB", "#D8D0BF"],
   ["m52", "pink lilac and gold", "#CEA6A9", "#B4898E"]]
 MAID_MOT=["peonies", "plum blossoms", "lotus flowers", "orchids", "chrysanthemums", "butterflies", "cranes", "auspicious clouds", "magnolias", "begonias", "camellias", "osmanthus", "wisteria"]
-MAID_FLOWER=["a small pink silk flower","a white jasmine sprig","a small plum blossom","a little orchid","a small peach blossom","a tiny camellia"]   # mjobs.py (maid) FLW
+MAID_FLOWER=["a pink silk flower","a white jasmine sprig","a plum blossom","an orchid","a peach blossom","a camellia"]   # ROOT-54 (A21, BW6 19/11): size words dropped from the NAME ("small", "little", "tiny") -> only the F13 SZ ladder sets the size   # mjobs.py (maid) FLW
 # OWNER Lượt 603 (ROOT-51 -> BW4): m01-m52 colours = dev/art/face-common/m_colours_proposed.json (NF1, FINAL, Lượt 599 revision): main name + main hex
 # (col 3) and the outfit SECONDARY name + hex (col 4; palette = "<main> and <secondary>"). M_COLS also feeds store-all/build_all.py secondary() (name like #HEX).
 import json as _json
