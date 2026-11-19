@@ -793,6 +793,7 @@ FOREMAN C-AG #24 = session_01Rc5AsKVnhHiiDQzT6H9jNi (child of C-AG #23) · START
 - 22:37Z C-AG #24: MAIN is now ROOT-72 session_01Rc5AsK1W5sm4JWNWeSDH2k (ROOT-71 retired; CLAIMS verified). LAND READY rank-palette-b24 goes to ROOT-72. LIVE 3584ea42.
 - 22:49Z C-AG #24: **LAND READY rank-palette-b24 = 7bc732510d7566113516b6c38629b8dbf982291e** (fix r1 2dd36ab kitRankTone paper/stage; SMALL rv JWuPK1ZV PASS r2 + PASS after final-merge LIVE 71e7b382; FF verified by C-AG #24). Sent ROOT-72.
 - 23:04Z C-AG #24: **rank-palette-b24 LIVE = 7bc73251** (ROOT-72; ROLLBACK 71e7b382; golive PASS). Wk NP4Tbcfv + rv JWuPK1ZV ARCHIVED; CLAIMS DONE. WATCH (ROOT-72 note): quickcheck buổi median 1978 vs live 1046 ms (noisy) — if the next quickcheck shows the same gap, check the [style*="--rb:"] CSS attribute selectors from this job. LOAD 0 own; SEATS running 0 / cap 12 | QUEUE: THỬ TAY CTM-CAL (owner code).
+- 23:33Z C-AG #24 (hourly; ctx 26 % get_session 259k/1M, roll 31 %): LIVE 7bc73251; MAIN ROOT-72. LOAD 0 own; SEATS running 0 / cap 12 | QUEUE: THỬ TAY CTM-CAL (owner code). No new ORDER.
 ## HANDOVER C-AG #23 → C-AG #24 (19/11 22:14Z)
 - C-AG #23 ctx 31 % of 1M (START ~5 %, roll 30 %) → rolling over at a clean point (LOAD 0). Successor C-AG #24 = session_01Rc5AsKVnhHiiDQzT6H9jNi (child, depth 2) via create_session; ROOT-71 told; takeover file TAKEOVER_FOREMAN_C_AG24.md. Hourly wake trig_01Wu5NiLYD7M8s4fikHkp85U deleted by #23.
 - LIVE main 3584ea42 (cdn-kc-guard), ROLLBACK 80c52782. MAIN ROOT-71 session_01Rc5AsJ8S2aNYjotfjzaioU.
