@@ -26,3 +26,6 @@ METHOD (works, ~3 gens per round):
 3. LOOK at every gen (creations_read hq medium) before cutting; regen max 3.
 4. `python3 dev/art/t8-prompt-B/nude_mass_sheet.py fetch cNN aNN <cut-out url>` then `... sheet cAA cBB` per 8 people, then `python3 dev/site/cdn_sync.py img/_review/nude-mass` (cdn_sync.py/manifest_guard.py copied untracked from origin/main). img/ is git-ignored; never commit images.
 Notes: creations_wait can time out at 60 s — pass timeoutSeconds 40. My local branch backup-local-stale holds other workers' unpushed commits (container diverged); push with `git fetch; git checkout -q -B n4 origin/<branch>` style, never rewrite. Prompt pasting is the main context cost (~1.4k tokens per gen) — successor: expect ~25 % window per ~20 gens.
+
+## ORDERS received after the handover (ROOT-34, owner GO verbatim: "Ok, vẽ hàng loạt nữ đế đi. 51, 65 gì đó vẽ đi.")
+a51 + a65 are GO for ALL people (c01–c08 included). a65 note: keep the a65 yellow the SAME soft yellow as a51 (the a65 AGE_TXT says "deeper antique gold" → builder tweak needed for --state nude a65, not done by N4). N5 = c09–c16, N6 = c17–c24, N7 = c25–c32 work on builder 421fee3; c01–c08 still unassigned after N4 (c01 a18/a26/a36 done). Foreman is now ROOT-35 session_01PEhRbwGPqHkqe1BAxK4nA2.
