@@ -903,19 +903,29 @@ NHAT_DANG_PENDING=None   # PENDING: nhất đẳng outfit wording. The owner has
 # Image 3 = the live fig-mama-k01 a36 picture, COSTUME only (cut, layers, embroidery, accessories), never its face, pose or (at a36) its colour.
 MAMA_REF={"name":"live fig-mama-k01-a36 = COSTUME only (cut, layers, embroidery, accessories), never its face/pose","magnific_id":"(upload the CDN file on the current account)","url":"https://ctm-img.victoria-tntt.workers.dev/img/fig-mama-k01-a36.webp"}
 MAMA_PENDING=None        # kept for old readers: wording now exists in build_mama()
-MAMA_IMG3=" Image 3 is only a costume reference for the cut, layers, embroidery and accessories of the outfit; never copy its face, hair, pose or background."
+MAMA_FLOWERS=[("peony","deep rose"),("plum blossom","white"),("lotus","pale pink"),("orchid","lilac"),("chrysanthemum","golden yellow"),("camellia","crimson"),("magnolia","ivory"),("peach blossom","soft coral")]   # per-person hair flower (owner Luot 229: every ma ma had the same flower + colour): kind + colour rotate by person number
+MAMA_HAIR=" Her hair, hairpins and hair flower come ONLY from the identity reference and this text; the style reference image must not influence her hair."
+MAMA_ANGLE="her body stands with the shoulders slightly turned (between frontal and three-quarter, as in the approved Nu de A picture), the whole face clearly visible and towards the viewer; never a dead-frontal ID-photo stance, never the body sideways."   # owner Luot 229 ANGLE LAW
+MAMA_IMG3=" Image 3 is only a costume reference for the cut, layers, embroidery and accessories of the outfit; never copy its face, hair, pose or background; its front layer has ONE panel, but the text above says TWO front panels (hai tà): follow the text for the front layer."
 def build_mama(c):
     assert c[0]=="m"; n=int(c[1:]); right=(n%2==1); pal,face=DATA[c]; main=pal.split(" and ")[0]; elder=AGE in ("a51","a65")
     fw=(f" Her face: {face}." if face else " Her face and facial features exactly as in the identity reference image.")
     s=PRE+" A palace ma ma (ma ma, a senior woman of the palace staff), dignified, gracious and still beautiful."+fw+MAID_IDENT+" "+AGE_TXT[AGE]
-    s+=(" Outfit (the ma ma costume, exactly the cut of image 3, never poor): a long robe of fine embroidered silk brocade with a subtle woven pattern; a sleeveless embroidered over-vest with a stand collar closed by a small knot button, with a band of gold-edged trim down the front, worn over a crossed-collar inner robe; wide layered sleeves hanging softly, each with a broad embroidered cuff band; a long embroidered front panel hanging from the waist over a layered, softly pleated skirt with a band of flower embroidery along the hem; a wide silk sash tied in a bow at the waist, a jade pendant on a silk cord with a tassel; delicate cream-and-blush peony and plum-blossom embroidery over the vest, sleeves, panel and hem; hair in a neat bun with one small gold hairpin and small earrings; soft slippers; the sleeves are wide, a palace ma ma's sleeves (never a consort's long trailing sleeves).")
+    fk,fc=MAMA_FLOWERS[(n-1)%len(MAMA_FLOWERS)]
+    s+=(" Outfit (the ma ma costume, exactly the cut of image 3, never poor): a long robe of fine embroidered silk brocade with a subtle woven pattern; a sleeveless embroidered over-vest with a stand collar closed by a small knot button, with a band of gold-edged trim down the front, worn over a crossed-collar inner robe; wide layered sleeves hanging softly, each with a broad embroidered cuff band; a short front layer made of TWO separate long embroidered front panels (hai tà, never one single panel), one hanging down each side of the front from the waist, each with a gold-edged border, the centre front of the skirt showing between them, over a layered, softly pleated skirt with a band of flower embroidery along the hem; a wide silk sash tied in a bow at the waist, a jade pendant on a silk cord with a tassel hanging at the centre between the two panels; delicate cream-and-blush peony and plum-blossom embroidery over the vest, sleeves, panel and hem; hair exactly as in the identity reference image (her own bun and hairpins kept), with small earrings, and one small fresh "+fk+" in "+fc+" tucked beside the bun; soft slippers; the sleeves are wide, a palace ma ma's sleeves (never a consort's long trailing sleeves).")
     if elder:
         s+=(" COLOUR RULE: the whole costume keeps exactly the rich earth-brown of image 3 (a warm brown-mauve brocade), "+("the same brown at a deeper, more subdued shade, dignified" if AGE=="a65" else "the same brown")+", with the cream-blush embroidery, olive-gold sash and the orange tassel as in image 3; no other main colour.")
     else:
         s+=(f" COLOUR RULE: take ONLY the cut from image 3; RECOLOUR the whole costume to her colour {main}, a medium-saturation, medium-lightness clear tone (fresh, never pale, never dark, never brown), with the embroidery in a lighter tone of the same colour and one soft gold accent; do not copy the brown of image 3.")
     s+=" Any flower or pattern on the fabric is fine silk-thread embroidery stitched directly into the fabric, flat, following the folds, never printed or pasted-on."
     item,hk=age_item(c,"mama","an embroidered handkerchief","one")
-    s+=_pose(item,hk,right)+CLOSE
+    s+=MAMA_HAIR+_pose(item,hk,right)+CLOSE
+    _fr=" body and face frontal, standing squarely facing the viewer, no turn."
+    assert s.count(_fr)==1,"PRE frontal sentence"
+    s=s.replace(_fr," "+MAMA_ANGLE)
+    _fr2="body and face frontal, standing squarely facing the viewer, no turn, head tilted gently toward the viewer."
+    assert s.count(_fr2)==1,"pose frontal sentence"
+    s=s.replace(_fr2,"the body with the shoulders slightly turned (not dead-frontal, not sideways), the face towards the viewer, head tilted gently toward the viewer.")
     return s+MAMA_IMG3+END
 MAID_IDENT=IDENT.replace("and hairstyle colour","her own hairstyle (the same at every rank) and hair colour",1)
 TM_FADED=["grey-blue","light indigo","earth brown"]
