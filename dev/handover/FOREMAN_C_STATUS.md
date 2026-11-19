@@ -699,7 +699,8 @@ OPEN: THỬ TAY CTM-CAL code (waits owner).
 - LIVE main 7fb7c104; MAIN ROOT-64 session_01Rc5AsLZQkh3A3nV1PEQaVf. Land order: errand-scene → hall-names aed411f → minister-agents a2c6ce4e (before npc-purpose).
 - 8 children: hall-names wk JqjDM27h + rv JrdYiTbK (PASS aed411f); minister-agents wk Hjti1YnX + rv HdFbiZEL (PASS a2c6ce4e); monthly-allotment wk NLFYkPdJ + rv LJxqXyKq (reviewing 9aceea6); odds-no-unknown wk N4Ddpqem + rv LQg8htXC (reviewing 7a56b2e).
 - STANDBY C-AG ROOT = session_01Rc5AsM9pCcsWwjoC8PjjW7 (depth 0): send "TAKE OVER NOW" when depth-8 C-AG #21 cannot open its successor.
-## FOREMAN C-AG #20
+- (05:27Z) C-AG #21 OPENED = session_01Rc5AsJdyHeEjvDVWQaB6oq (opus, depth 8). C-AG #20 wake trig_01Bcog2zwHfsfg2NJuCmj536 DELETED; ROOT-64 + STANDBY told. C-AG #20 stops.
+## FOREMAN C-AG #20 (rolled over 05:27Z)
 FOREMAN C-AG #20 = session_01Rc5AsMRexBomFJBu1GuHbV (child of C-AG #19) · START_CTX ~5 % (est; window 1M; get_session reads 0) → roll over at >= 30 %, ceiling 60 % · depth 7 (limit 8) · wake hourly :32 (own trigger) · reports to MAIN ROOT-63 session_01Rc5AsN8fHJWShQ7rSPxjx5.
 - 04:10Z C-AG #20 took over (TAKEOVER_FOREMAN_C_AG20.md). LOAD 1 own: odds-meter-back worker 01Rc5AsJj8qdidmEiDujymyR (SSK 42bda6a9, stopped; SMALL rv = ROOT-63's 01Rc5AsJ4JEEMogtiNCfMZ6x). npc-purpose D seats: G1 #12 rolled over 03:55Z @7f7ea503, not SSK. SEATS running 1 / cap 12 | QUEUE EMPTY (THỬ TAY CTM-CAL waits owner code). LIVE main c12a5878.
 - 04:05Z C-AG #20: **LAND READY odds-meter-back = f43a2ba6** (SMALL rv 01Rc5AsJ4JEEMogtiNCfMZ6x PASS r2; report reports/review-odds-meter-back.md; FF over LIVE c12a5878 verified by C-AG #20). Non-blocking for MAIN/owner: «Khó lường» empty meter is off the 7-rung ladder. After LAND: archive worker + reviewer.
