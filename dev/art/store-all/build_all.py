@@ -55,7 +55,30 @@ PRS={
        2:"ONE clear touch of her Japanese (Heian) homeland, clearly visible at game size: at the collar and sleeve openings the edges of three thin layered inner robes show in graded shades of wisteria purple with a soft crimson innermost edge, and her very long straight black hair hangs loose down her back.",
        3:"ONE clear touch of her Japanese (Heian) homeland, clearly visible at game size: at the collar and sleeve openings the edges of five thin layered inner robes show in graded shades of wisteria purple with a soft crimson innermost edge, and her very long straight black hair hangs loose down her back."}),
 }
+# Lượt 434 item 2: 8 DIFFERENT items per person, one per rank t1..t8, rising in luxury (item_age MAT per tier = richer materials per rank) and ROTATING per person/age.
+# Before: item_age.pick_kind gave the same KIND at every rank (m07 held a butterfly hair ornament at all 8). Now the kinds are chosen greedily across ranks t1..t8 so no kind repeats within one person at one age.
+LADDER_TIERS=["t%d"%i for i in range(1,9)]
+def _install_ladder(g):
+    IA=g["_IA"]; orig=g["age_item"]; cache={}
+    def kinds(c,age):
+        k=(c,age)
+        if k in cache: return cache[k]
+        n=int(re.sub(r"\D","",c) or 0) or sum(map(ord,c)); base=(n-1)+5*IA.AGES.index(age) if age in IA.AGES else n-1
+        used=set(); out={}
+        for j,t in enumerate(LADDER_TIERS):
+            L=IA.cell_kinds(age,t); i=(base+3*j)%len(L)
+            for d in range(len(L)):
+                x=L[(i+d)%len(L)]
+                if x not in used: break
+            used.add(x); out[t]=x
+        cache[k]=out; return out
+    def age_item(c,tier,item,hk):
+        if tier not in LADDER_TIERS: return orig(c,tier,item,hk)
+        age=g["AGE"]; ages=IA.TIER_AGES[tier]; a=age if age in ages else min(ages,key=lambda x:abs(int(x[1:])-int(age[1:])))
+        x=kinds(c,a)[tier]; return g["_art"](IA.fill(x,tier)),"L:"+g["_HK"].get(x,"two")
+    g["age_item"]=age_item; g["LADDER_KINDS"]=kinds
 def _inject(g):
+    _install_ladder(g)
     """princess rows live in the store itself (build.py PRINCESS_ROWS, data rows like the maids); here only assert they match this file's slot rows."""
     for pid,k in PR.items():
         d=PRS[k]; assert g["PRINCESS_ROWS"][pid]==(d["main"],d["sec"],d["hex1"],d["hex2"],d["motif"],d["flower"]),("store row differs",pid)
@@ -103,12 +126,35 @@ def laws(t):
     return L
 # Lượt 397 item 4 (PHI BẠCH): the draped sheer shawl behind the back / over the arms goes on EVERY thường phục rank t1-t6 (ROOT-47 ruling; wording differs where the store text has no shawl); NOT on t7 HQP, t8 Hoàng hậu, Nữ đế.
 # Its colour = the outfit's SECONDARY colour (second word group of her palette), explicit per person, so it does not melt into the dress.
+# Lượt 434 item 3: the phi bạch must be a CLEARLY DIFFERENT colour (another colour family AND tone) from the main robe colour, so the shawl never melts into the robe.
+# Her own secondary colour is used only if it is in another hue family than her main AND is not a neutral/metal (ivory, white, cream, silver, gold...); otherwise a contrasting harmonious colour from FAMILY_CONTRAST, rotated per person.
+FAMILY_WORDS=[("green",("green","celadon","jade","teal","mint","sage","aqua","olive","moss","emerald","willow","turquoise","peacock")),
+ ("blue",("blue","indigo","sapphire","azure","sky","cornflower","navy","periwinkle","powder")),
+ ("purple",("purple","violet","lilac","lavender","wisteria","orchid","mauve","plum","amethyst")),
+ ("pink",("pink","rose","blush","peach","salmon","magenta","fuchsia","coral")),
+ ("red",("red","crimson","vermilion","cherry","brick","rust","wine","burgundy","scarlet","maroon","terracotta")),
+ ("yellow",("yellow","gold","golden","amber","honey","apricot","orange","caramel","mustard","saffron","tan","sand","camel","oat")),
+ ("neutral",("ivory","white","cream","pearl","silver","grey","gray","beige","black","taupe","cocoa","brown","mocha"))]
+def family(word):
+    w=word.lower()
+    for fam,ws in FAMILY_WORDS:
+        if any(x in w for x in ws): return fam
+    return "other"
+FAMILY_CONTRAST={"green":["deep rose","crimson"],"pink":["jade green","deep teal"],"purple":["crimson","antique gold"],"neutral":["deep rose","deep teal"],
+ "yellow":["blue-violet","deep sapphire blue"],"red":["jade green","deep teal"],"blue":["warm coral rose","soft apricot-gold"],"other":["deep rose","deep teal"]}
+def phibach_colour(person,pal=None):
+    """(main, own secondary, family main, phi bạch colour, note)"""
+    pal=pal or LAST_G["DATA"][person][0]; main=pal.split(" and ")[0]; sec=pal.split(" and ")[-1] if " and " in pal else ""
+    fm=family(main); fs=family(sec) if sec else "neutral"
+    # the main may itself be a neutral robe (ivory...) -> contrast comes from the neutral row
+    if sec and fs not in ("neutral",fm,"other"):
+        return main,sec,fm,sec,"own secondary (other hue family)"
+    c=FAMILY_CONTRAST[fm]; col=c[_pn(person)%len(c)]
+    return main,sec,fm,col,"contrast (secondary %s is neutral/same family)"%(sec or "none")
 def phi_bach(person,has_shawl=True):
-    pal=LAST_G["DATA"][person][0]; main,sec=pal.split(" and ")[0],pal.split(" and ")[-1]
-    if sec in ("gold","silver") or " " in sec and sec.split()[-1] in ("gold","silver"): sec_w="a pale soft "+sec.split()[-1]+"-tinted tone of her secondary colour, clearly lighter than the robe"
-    else: sec_w=sec
+    main,sec,fm,col,why=phibach_colour(person)
     intro="the sheer shawl draped behind her back and over her arms" if has_shawl else "over her outfit she wears a sheer silk shawl (phi bạch) draped behind her back and over her arms; the shawl"
-    return f"PHI BẠCH: {intro} is in her SECONDARY colour ({sec_w}), clearly different from her main robe colour {main}, so it does not melt into the dress; it keeps its soft graceful drape."
+    return f"PHI BẠCH: {intro} is in a clearly DIFFERENT colour from her robe: {col} (another colour family and tone than her main robe colour {main}), so it never melts into the dress; it keeps its soft graceful drape."
 # Lượt 397 item 5 (Tần-style capelet / collar): CURVED cut lines, front opens gradually (no closed, buttoned top-to-bottom front); flowing (uyển chuyển).
 # Lượt 412 (owner approved the Phù Tang t4 test): this Tần cut is the Tần outfit for EVERYONE. Lower-edge SHAPE varies per person (index = person number mod 6, like the Nữ đế crowns),
 # every variant still reads as the same short round shoulder capelet overall. (The store sentence says the outline is smooth and round; the variants only shape the LOWER EDGE; owner approved the result.)
@@ -130,8 +176,7 @@ def extras(S0,person,rank):
     L=[]
     if isinstance(rank,int) and rank<=6:
         L.append(phi_bach(person,"shawl" in S0))   # owner Lượt 397 via ROOT-47: phi bạch on EVERY thường phục rank t1-t6 (consorts and princesses), also where the store text has no shawl; never t7/t8/Nữ đế/triều phục
-        if "capelet" in S0: L.append(capelet_cut(person))
-        elif "cloud collar" in S0: L.append(collar_cut(person))
+        if "capelet" in S0 and rank==4: L.append(capelet_cut(person))   # Lượt 434: the curved/open-V cut is ONLY for the Tần t4 capelet; t5 (and every other rank) keeps the approved store collar (closed high collar covering the neck)
     return L
 def princess_sentences(k,t):
     d=PRS[k]; L=[f"She is a foreign princess from {d['country']} who has entered the imperial palace."]
