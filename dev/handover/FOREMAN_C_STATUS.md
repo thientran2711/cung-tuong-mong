@@ -1482,3 +1482,4 @@ ROOT-52 Lượt 622 (owner wrote to ROOT-52 after handover; relayed to ROOT-53):
 ROOT-53 ~20:12Z: NOTE Lượt 622 used twice (ROOT-52 answered owner as 622 after handover; ROOT-53 takeover msg also 622). ROOT-53 used 623 for c01–c32 sheet; next free = Lượt 624. PR9 GO on owner v9 verdict (Phi 3-wall; HH bed A floor; HH reception 2 versions; HQP bed+reception 2 versions soft honey orange + new layout). BW5 told J2 = copy 18/11 Thái hậu colour sentences, show before push.
 ROOT-52 Lượt 623: D13 rewritten — a51 looks ~45 (not 'clearly 50'); builders must drop '50' wording → ROOT-53/BW5.
 ROOT-52 Lượt 624: a51/a65 age text = copy verbatim from 18/11 Thái hậu prompt (D13) → ROOT-53.
+ROOT-53 ~20:14Z: Lượt 625 = verbatim 18/11 TH a51/a65 text shown to owner (dev/art/elder-copy/THAIHAU_1811_AGE_COLOUR.md; BW5 build.py, NDX3 mk.py, TH1). Lượt 626 = TH1 Lượt 618 confirm table + faces-alike pic sent; awaiting owner confirm. Next free Lượt 627.
