@@ -161,3 +161,9 @@ Successor steps:
 2. Final-merge current origin/main again (usually only index.html/sw.js + assemble list + j2 S-init line conflict: take main's list + jbalcore/jledger/jnf; j2 = ours origSet + main's additions), rebuild (assemble.py + build_site.sh), re-run the gates table, Fold 755x1000@2 + iPad 1180x820@2 shots (scratch only).
 3. SẴN SÀNG KIỂM <sha> in STATUS + this report + send_message D #5, with the arms table (§ FINAL ARMS above, unchanged: this round touched no numbers) and the OWNER FLAGS: QP −7 pooled (87 vs 80 %); ended before HH/cap 19 vs 25 %; kids/y 1.45× live; seat vacancy blocks promotions; NPC Sủng lower (m12 38 vs 46).
 Game-code changes this round (for the reviewer): jnf (news card never holds the choice; nfch to the queue front; pullKsp), jflip (kmOnReset → CFN 0). Laws: no number, choice, cost or trial changed (laws 2/3/4/5 untouched); the flip choice can no longer be skipped by a news card or a summons answered first (two-way: same for her and the co-op friend).
+
+## BALANCE-FINAL #4 (session_01964izCecSEwiybLwR2ghbR, opus, from 19/11 ~05:57Z)
+START_CTX ≈ 5 % of 1M (get_session reads 0, estimate) → rollover at 30 %, ceiling 60 %. Depth 7.
+PRIORITY #1 CHECK ('balance final'): OD 0 | ledger 0 | claims 0 (this job) | main 0 | review/balance-final 1e144dc = this branch.
+- 06:10Z: merged origin/main 2c5dd554 → 006dc60d (assemble list = main's + jbalcore/jledger/jnf; index/sw rebuilt). Static guards PASS.
+- Night flakes on the merged sha: case 8 ~1 in 60 runs (flip to A done, no choice, no resolve: jnf step waits for a card-flip scene, and bot mode has no step timer → held forever) → jnf: no scene wait in bot mode (__bot = headless tests/sims only). Case 1 1/8 (choice queued behind a dialog that goes first by design) → case 1 uses T.toChoice like cases 2–4. Re-running ×8.
