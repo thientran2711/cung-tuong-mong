@@ -50,6 +50,22 @@ TM_TAY_REC = ("Thừa Minh cung Tây phối điện reception room, the small si
     + " Only the two colours cream-ivory (curtains) and soft green (fabrics)." + NOPE + P['NOSOFA'] + RECT + GUIDE_S)
 OUT['thua-minh-cung-tay-phoi'] = dict(prompt=room9(TM_TAY_REC, GUIDE, 'warm polished wooden floorboards'), refs=[*G9, M2X])
 
+# BUILDER FIX after rooms 1–2 (too much floor): new rooms 3+ carry PR11's approved measured floor sentences.
+FB, FR = P['FLOOR11F_BED'], P['FLOOR11F_REC']
+# 3) Cảnh Phúc ĐÔNG phối bedroom — pair Đáp ứng (t1) + Quý nhân (t3): curtains soft blue, fabrics cream-ivory. THREE walls (alternation),
+#    windows at the RIGHT; own layout: the two beds against the LEFT and RIGHT side walls, square to them, a shared dressing table +
+#    crabapple screen in the middle of the back wall (rooms 1/đông TM = beds on the back wall). Palace card CARD_CP. Image 3 = 3-wall model cpS5YIl0eP.
+CP_DONG_NGU = ("Cảnh Phúc cung Đông phối điện bedroom, the cosy bedchamber SHARED by two lower-ranking imperial consorts (a Đáp ứng and a Quý nhân) "
+    "living in the east side hall of a palace in ancient China, a real room in daily use, " + P['W3'].replace(' (owner Lượt 613: two walls read wider)', '')
+    + ": wooden pillars, lattice windows in the RIGHT side wall onto a sunny garden; TWO canopy beds of carved lacquered wood with painted flowers, "
+    "together the large clear main subject, one standing against the LEFT side wall and one against the RIGHT side wall, each square to its wall with its "
+    "long side along the wall and its bed step facing the middle of the room, each bed whole inside the picture; in the middle of the back wall, seen "
+    "straight on, a carved partition with a round moon-gate opening and, in front of it, a shared dressing table with a bronze mirror and two stools; "
+    "beside each bed a small clothes rack with a robe; hanging paper lanterns with tassels, vases of crabapple blossoms, slippers at the bed steps, a "
+    "small embroidery basket. " + P['CARD_CP'] + pair_cols(3, 1).replace('never one bed soft blue and the other cream-ivory', 'never one bed blue and the other ivory')
+    + QN + " Exactly two beds; only the two colours soft blue (curtains) and cream-ivory (fabrics)." + NOPE + RECT + GUIDE_S + FB)
+OUT['canh-phuc-cung-dong-phoi-ngu'] = dict(prompt=room9(CP_DONG_NGU, GUIDE, 'warm polished wooden floorboards'), refs=[*G9, M3])
+
 # GATE (as v9): common block present, method refs, no drift words, no phoenix/yellow below t7.
 for k, v in OUT.items():
     p = v['prompt']
