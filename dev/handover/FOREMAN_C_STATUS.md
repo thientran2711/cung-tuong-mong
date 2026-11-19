@@ -1035,3 +1035,4 @@ Waiting for the OWNER'S MORNING (ALL ART PAUSED tonight, owner 07:30Z; mass prod
 - (19/11 ~00:34Z real) FROM MAIN ROOT-60: LIVE main = 8113f42e (questline-q2, E). Final-merge 8113f42e before any LAND READY.
 - (19/11 ~00:35Z real) FROM MAIN: main is now ROOT-61 session_01Rc5AsJBmT3vTTFe8sbCbUa (depth 8; no scheduled wake — send_message ROOT-61 on every LAND READY / FOR MAIN). LIVE main = 8113f42e.
 - (19/11 ~00:50Z real) FROM MAIN ROOT-60 (owner OD 19/11 ~00:50Z, verbatim in OD): the a65 age step is for EVERY woman in the 90-pool at every rank/role (cung nữ, ma ma, consorts, Thái hậu), not only consorts → list which roles/faces lack a65 pictures in reports/live-today.md and paint them (whole group); MAIN ROOT-61 wires a65 for every role.
+- (19/11 ~00:43Z real) FROM MAIN ROOT-61: LIVE main = d2da651b (live-today-1118 landed: today's owner-approved figures, quickcheck PASS). Final-merge d2da651b before any LAND READY.
