@@ -29,3 +29,16 @@ f6d1f3f4 is WITHDRAWN (it had the «!» on the head). 316fc975: «!» on the one
 - FLAG 1: kitNotice (stage-here r4) is NOT defined in the build yet; errNotify is guarded (kitNotice if function, else kitLine) and the stub test passes, but the real r4 API is unverified. ROOT-60's gate "land only after stage-here r4 is LIVE" is therefore not met by me.
 - FLAG 2: scan saw 1 figure with «!»; the whole-group claim rests on kitMarkLine being the one rule.
 Not run: real jptime (stub only). Not landed.
+
+## FINAL re-check — c4c25bbd (= r6 e81010e2 + main fd6118cd; FF over origin/main) — PASS LAND READY
+Withdrawn/superseded: f6d1f3f4, 316fc975 (owner OD 00:06Z/00:25Z/02:05Z), 88f3233a/babb5b36 (no bubble), 1489362f (r5: owner FAIL 03:50Z, bubble on the head). c4c25bbd = r6 "every head marker anchored from the REAL head top + gap" and r5 bubble kit part.
+Checked on my own merged builds (main f43a2ba6 and fd6118cd; my tree = c4c25bbd except the build-stamp line), Fold 755x1000 + iPad 1180x820:
+- bang-line-scan (HH=1): 19 stages, Fold 35 figures / iPad 58, PASS, 0 page errors (women level, men level and higher, mood chip at the head).
+- head-marker-gap.js: Fold 35 figures / 63 marks, iPad 56 to 58 figures / 89 to 91 marks, PASS: alpha under marks 0, overlaps 0, G3 mark overlap pairs 0 (no marker touches hair, headdress or face).
+- errand-scene.js: Fold 53/53, iPad 53/53 (one transient page error `r.updateLocalTransform is not a function` on one iPad run on r5, not reproduced in 6 later runs; the string is not in the repo sources).
+- stage-rightcol bad 0; oldsave-r1 16/16; node dev/tools/quickcheck.js PASS (78–95 s).
+- Bubble kit part kitHeadMarkHtml: ico-talk-y (notice) / ico-talk-w (plain), no disc, never the brown ico-talk; top-bar notice «!» stays.
+- «tin» ownership via PTIME.orders and errNotify → kitNotice (live) unchanged since the earlier pass.
+role-parity.test.js: FAIL "no NEW role-parity gap" (N-ONLY:cx2:chest / doctor, every tier) on errand builds AND on clean main 1cf5e8bb and c12a5878 → PRE-EXISTING in main, not caused by errand (earlier riseCore flake was the seed issue, since fixed on main).
+Owner shots (LOOKED, CDN img/_review/errand-scene/): final-ipad-1180x820-woman-man.jpg, final-fold-755x1000-man.jpg, final-fold-755x1000-woman.jpg (Fold fits only the player plus one figure, so man and woman are two Fold shots).
+Not run: real jptime (stub only); head-marker-video mp4 not reviewed (test-only commit). Not landed; delete CDN img/_review/errand-scene/ after landing.
