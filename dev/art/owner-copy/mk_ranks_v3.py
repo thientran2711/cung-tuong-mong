@@ -7,6 +7,7 @@ FL={1:['jasmine sprigs','peach blossoms','osmanthus clusters','pear blossoms','s
     4:['orchids','michelia blossoms','small lotus flowers','lilies','camellias'],
     5:['herbaceous peonies','full lotus blooms','China roses','narcissus flowers','double camellias'],
     6:['tree peonies','cotton-rose hibiscus flowers','queen-of-the-night (epiphyllum) flowers','large chrysanthemums','double magnolias']}
+SZ={1: 'HAIR FLOWER SIZE: the fresh hair flower is a LARGE full bloom about the size of her palm, clearly visible at game size (never tiny florets).', 2: 'HAIR FLOWER SIZE: the fresh hair flower is a LARGE full bloom about the size of her palm, clearly visible at game size (never tiny florets).', 3: 'HAIR FLOWER SIZE: the fresh hair flowers are LARGE full blooms about the size of her palm with a few buds, clearly visible at game size (never tiny florets).', 4: 'HAIR FLOWER SIZE: the fresh hair flowers are LARGER than a palm, one big bloom plus smaller blooms, clearly bigger than the lower ranks.', 5: 'HAIR FLOWER SIZE: two or three BIG full blooms, each larger than her palm, clearly bigger than the Tần rank.', 6: 'HAIR FLOWER SIZE: a big lush cluster of the LARGEST blooms of all ranks, each larger than her palm, the grandest hair flowers in the palace.'}
 FLCOL=" in a soft colour that suits her outfit (never her main robe colour)"
 ANG=[("FULLY FRONTAL, her body, shoulders and face squarely facing the viewer, no turn","a light graceful step, {item}","feet close together, one foot a little forward and lightly on its toes, toes peeking from under the hem"),
  ("a SLIGHT shoulder turn to the LEFT (about 15 degrees), body almost frontal, face toward the viewer","{item}, head tilted very slightly","weight on her back foot, the front foot turned slightly the same way as her shoulders, toes peeking under the hem"),
@@ -90,6 +91,9 @@ def build(k,t,hh_orig=False):
         s=s[:ha]+'Hair: '+d['hair'][t].format(fl=fl)+'. '+s[he:]
         if k=='cl':
             s=rep(s,"Every hairpin is inserted into the hair pointing upward or backward with dangles hanging down, no hairpin horizontal or sticking out to the side.","The binyeo hairpin lies HORIZONTALLY through the low bun at the nape, as in Korean royal fashion; any other small pins point upward or backward.")
+    if t<=6:
+        anc='No phoenix' if 'No phoenix' in s else 'All flowers'
+        s=s.replace(anc,SZ[t]+' '+anc,1)
     if pr and 4<=t<=7:
         i=s.index('All flowers'); s=s[:i]+d['touch']+' '+s[i:]
     if k=='bt' and (t<=7): s=rep(s,VEIL,'no floating scarf, stole or shawl; her only veil is the sheer head veil described above.')
