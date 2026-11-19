@@ -115,3 +115,20 @@ How the redraw avoids it:
   - The m13 v624 files are removed and DIFF_vs_1811_c04.md is regenerated for m05.
   - Gate PASS 48/48 (all 16 allowed people × a36/a51/a65).
   - The builder does NOT block the other groups; ask if a guard is wanted.
+
+## Part 3 — ROOT-54 GO: m05 Thái hậu samples drawn (18/11 base + HH additions)
+- Prompts: v624/m05_thaihau_a36/a51/a65.prompt.txt (= `build_all.py m05 thaihau --age aNN`, gate_th PASS, no makeup sentence (D14)), pasted unchanged.
+- Generation: gpt-2-6 1024x2304 2k, refs KLpSlnEkqp (KC cut) + TdwDfOyVNR (swatch). The outputs had an opaque parchment background, so images_remove_background was run on each.
+- Gens / cuts:
+  - a36 hu2yMqVvqL / 8aiw0KxIrU (sandalwood folding fan)
+  - a51 0eUkiIOTfW / WDg56vwcXe (jade dragon-head staff)
+  - a65 ksenaPr16B / YMlbNv3WeC (gilded bronze hand censer)
+  - 3 ledger lines SAMPLE-THAIHAU-L624.
+- Looked full size; no redo:
+  - Identity is consistent across ages; a36 young, a51 silver front/temples + fine lines, a65 largely silver + wrinkles.
+  - The stiff squared shoulder piece + standing collar with jade button, nine-phoenix crown, bun, yellow + coral + teal, sleeves to the floor, brocade, lips closed, clean forehead are all present.
+- Sheet: `dev/handover/review-sheets/thai-hau-sample/v624/sheet_m05_thai_hau.jpg`; cut-outs m05_thaihau_aNN.webp in the same folder.
+- Notes (flag only):
+  - (1) The a51 staff came out short (sceptre-like); the jade dragon head is at shoulder height but does not touch the face.
+  - (2) The ANGLE asked for a 45° turn to the left; all three are only slightly turned.
+  - (3) a36 is already deep/muted (the 18/11 rule), so a51/a65 read only a little deeper; ageing shows mostly in face and hair.
