@@ -228,3 +228,44 @@ HONEST FAULTS:
 - t7 Hoàng quý phi: pass; long fringe to the elbow, amber/royal-yellow panels clearly visible, clearly lighter than t8.
 - t8 Hoàng hậu: the mantle again merges with the wide sleeves (it reads as an outer yellow layer flowing from the shoulders, pearl-edged, not a clearly separate floor-length mantle); her hair has looped side braids beside the face, a different hairstyle from t1-t7; raw gen had a dark halo background (cut, see above). Next to the approved HH it is as splendid; the crown is as large.
 - Density per rank rises t1 < t2 ≈ t3 < t4 < t5 < t6 < t7 < t8.
+
+## 19. ROUND 13 DONE (F3, child of Foreman C ROOT-39, 19/11) — soft drape + few purposeful motifs + t8 red sleeves/collar; 8 gens + 1 background cut, 0 regens
+START_CTX ~10 % (estimate); end ~45 % (estimate), under the 60 % ceiling.
+PRIORITY #1 CHECK: OD 0 new | ledger r12 lines (§18) | claims none for r13 | main 0 | review/* 0 | reused §17–§18 + build.py --trieu + approved HH prompt B. Read: START_CORE/WORKER/ART, FIGURE_GATE A0 + REFERENCES + STYLE IMAGE FINAL + OWNER VERDICT 19/11 ~03:05Z item (4).
+APPROVED HH PROMPT B (exact stored text): dev/art/t8-prompt-B/golden_v0/t8_v0_c06.txt (the prompt of img/_review/t8-reprompt/c06_a18_t8_v0.png; no Magnific gen id for it in gen_ledger.jsonl, so the golden file is the stored text). Its fabric/drape words: "richly embroidered on the chest, shoulders and wide sleeves with large phoenixes, peonies and clouds in gold and kingfisher-blue silk thread (far denser and richer embroidery than any other rank)" + FAB "The silk has real weight: the wide sleeves and robe hang and fold naturally under their own weight, with natural creases, never stiff, flat or board-like." It has NO whole-robe cover sentence, NO "all over / evenly / close together / densest", NO brocade body silk.
+WHAT MADE r12 STIFF / OVER-EMBROIDERED (side by side with HH B): (1) TRIEU_COVER "the embroidery covers the whole robe ... every red or crimson area ... so that no large area is left bare" (not in HH); (2) motif lists "scattered evenly all over the silk", "spread evenly all over", "close together", "the densest of all", "with scrolling vines"; (3) "lustrous brocade silk" in t1–t3 luxury (heavy, board-like; HH has none); (4) the stole panels described as rigid "embroidered court panels hang like stoles" (no drape words). t8 RED: r12 said "the MAIN colour of the Empress's robe and sleeves is <yellow>" → the sleeves were told to be yellow, red only on trims.
+TEXT DIFF build.py (r12 → r13, only the --trieu block; every non-trieu output byte-identical, md5 of c06 v0 / --t7 / --low 3 / --low 6 / --state nude A unchanged):
+```
+- TRIEU_COVER="the embroidery covers the whole robe: the chest, the shoulders, both wide sleeves in full from the shoulder to the cuff, the whole skirt and every red or crimson area, with a continuous embroidered band along the whole hem, so that no large area is left bare; "
++ TRIEU_COVER="the embroidery is placed with purpose, not scattered: the rank motif only on the chest, on each sleeve and along the hem band, with smooth plain silk between them; "
+- two long narrow embroidered court panels hang like stoles from the collar ...
++ two long narrow court panels of soft silk hang and fold naturally like stoles from the collar ...   (drape words from HH FAB)
+- t1 "small, light plum blossom sprays and vines scattered evenly all over the silk, delicate and fine, close enough that the whole robe reads as embroidered"
++ t1 "small, light plum blossom sprays, delicate and fine"
+- t2 "... orchid sprays and leaves spread evenly all over the silk, fine and close together"   + t2 "light, delicate orchid sprays and leaves"
+- t3 "... lotus flowers and leaves spread evenly all over the silk, fine and close together"   + t3 "small and medium lotus flowers and leaves"
+- t4 "medium peonies and butterflies in gold thread with scrolling vines, fuller and richer than the ranks below"   + t4 "medium peonies and butterflies in gold thread, richer than the ranks below"
+- t5 "medium peonies and cranes in gold thread with scrolling vines, rich and close together"   + t5 "medium peonies and cranes in gold thread"
+- t6 "large peonies, cranes and clouds in gold thread with scrolling vines, very rich and close together, clearly the densest below the phoenix ranks"   + t6 "large peonies, cranes and clouds in gold thread, the richest below the phoenix ranks"
+- t7 "large gold phoenixes, peonies and clouds with scrolling vines, dense and splendid, yet clearly less dense than the Empress's own robe"   + t7 "large gold phoenixes, peonies and clouds, splendid, yet clearly less rich than the Empress's own robe"
+- t8 "large phoenixes, peonies and clouds in gold, coral and kingfisher-blue silk thread, the densest of all, as dense and rich as the Empress's everyday court robe"
++ t8 "large phoenixes, peonies and clouds in gold and kingfisher-blue silk thread (far denser and richer embroidery than any other rank)"   (HH B clause, copied)
+- t1/t2/t3 luxury "..., lustrous brocade silk, clearly more splendid ..."   + "..., clearly more splendid ..."
+- t8 COLOUR: "the MAIN colour of the Empress's robe and sleeves is <yellow>, with <deeper red> in the linings and belt and <Nữ quan red> as the second colour (collar band, sash, cuff linings and the shoulder-piece trim); "
++ t8 COLOUR: "the MAIN colour of the Empress's robe body, skirt and mantle is <yellow>; BOTH SLEEVES (the arms of the robe, from the shoulder down to the cuff) and the collar band with its collar trims are the court red, <Nữ quan red> like #99443F, clearly red, with <deeper red> like #893A37 in the linings and belt; the sash and the shoulder-piece trim also in that red; "
+```
+t7 colour unchanged.
+PROCEDURE (rule 0): `python3 dev/art/t8-prompt-B/build.py c06 v0 --trieu N --log --refs` N=1..8 (ledger ts 2026-11-19T03:10:47Z, lines 77–84); stdout pasted unchanged into Magnific gpt-2-6, 1024x2304, 2k, count 1, transparentBackground, folder ba4aecfe; refs in --refs order: style 6AbGv6EiJO [style], face gOm7wObSXO [image], swatch TdwDfOyVNR [image] on t6/t7/t8. Stored prompts read from creations_get output file by script (no hand copy): all 8 byte-EQUAL to the builder. `--log-fill` x8; `--verify dev/art/gen_ledger.jsonl --since 2026-11-19T03:10:00Z` = my 8 lines PASS (lines 15/16 FAIL = other workers' hand-prompt lines without magnific_prompt, not this round).
+GEN IDS: t1 mEZueLahJQ, t2 N2qAwaa6D9, t3 jUowqCcLD0, t4 79fNjUaJAL, t5 fHzq8rjCDY, t6 kselQzv16B, t7 WDgpZSlcXe, t8 iG5zOOF3uK (background not cut by the flag, opaque parchment) -> cut dt4mTUTXSL (images_remove_background; the file used).
+FILES (CDN https://ctm-img.victoria-tntt.workers.dev/img/_review/trieu-phuc/r13/): c06_sheet13_2x4.jpg, c06_sheet13_vsHH.jpg (t8 | approved HH c06_a18_t8_v0), c06_a18_trieu13_t1..t8.png. Old r11/r12 files stay (verdict giver wipes).
+LOOK (every image + both sheets):
+- Embroidery FEWER and purposeful: t1–t5 clearly better than r12 — motif groups on the chest, on each sleeve and a hem band, plain red silk between; t6 still fairly full on sleeves/panels; t7/t8 phoenix ranks still rich (t8 skirt has a large phoenix + peonies, by the copied HH clause "far denser"), but grouped, not scattered.
+- Drape: sleeves fold softly with natural creases on all 8, skirts flare a little; still a symmetric, formal frontal A-line (folded hands + frontal rule), so less flowing than HH B's mantle-and-sleeve layering. Better than r12, not yet as soft as HH.
+- t8 RED: sleeves (outer arms, from shoulder to cuff) and collar/trims now clearly red; body/skirt yellow. Red share of the figure ~11 %.
+- Checks PASS on all 8: closed lips, bare forehead, nothing over the face, frontal, hands folded no item, whole crown + symmetric tassel pins, no phoenix t1–t6, phoenix t7/t8, no mantle t1–t7, fringe none t1–t3 / short t4–t6 / long t7–t8.
+HONEST FAULTS:
+- Main red lands lighter/warmer than #99443F: median of red pixels t1–t6 ~#A14842..#A7514A, t7 #B6554B, t8 #B45F48 (more orange-coral than the Nữ quan brick).
+- t8: the mantle is still not a clearly separate floor-length mantle (reads as the yellow robe + red sleeves); the scalloped shoulder pieces are big and rigid-looking next to HH's draped cloud collar; t8 sleeves are red but the inner sleeve lining shows yellow at the cuffs only faintly. Raw t8 came back opaque (cut used).
+- t6: Quý phi rank trims (vermilion-rose) still hard to tell from the main red (as r12).
+- t1: white-jade trims read cream-ivory (as r12). t2: crown tip touches the top frame edge (no visible cut).
+- t7: amber/yellow panels and cuffs clear; colour kept as asked.
