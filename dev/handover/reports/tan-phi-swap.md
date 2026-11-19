@@ -74,3 +74,14 @@ JOB 2 recipe (4 gens, no mass):
 - Sheet: rows c06, c25; columns old t4 (img/_review/t8-reprompt/t1t6/<cNN>_a18_t4_v0.png) | new t4 | old t5 (current live/sample t5 image of that person) | new t5 → CDN img/_review/tan-phi/sheet1.jpg (cdn_sync.py, CLOUDFLARE_API_TOKEN=proxy-injected) → ROOT-36. Mass for everyone only after the owner says so.
 - Honest notes to carry: Phi F capelet lost its brocade, all-over gold flowers and dense pearl edge (Phi luxury); the sparse pearl overlay wording is ROOT-36's reading, still being confirmed by the owner.
 W106 stops here (rollover line reached).
+
+## JOB 2 DONE (painter subagent of Foreman C ROOT-38, 19/11 ~02:35Z)
+4 gens, 0 regens (4 of max 8). Prompts = exact build.py stdout (`c06|c25 v0 --low 4|5 --spec5pose`), refs [style 6AbGv6EiJO, own a18 t1 v0 face rgXsjcmxtc / u5WqFZ2QLD], gpt-2-6 1024x2304 2k, transparentBackground (alpha OK, no remove_background needed), folder ba4aecfe. Logged with `--log --gen-id --mprompt` in dev/art/gen_ledger.jsonl (new file); `--verify --since` = 4 PASS, 0 FAIL (Magnific metadata.prompt == builder stdout).
+Note: the t4 builder text now carries the beaded shoulder-yoke wording (open pearl/jade net with pearl fringe, "fewer, more widely spaced pearls"), not the e7522ad "few thin sparse strands" phrase quoted above.
+| Image | Gen id | Matches | Faults (honest) |
+|---|---|---|---|
+| c06 t4 new (Tần) | VX7BjJBMMU | frontal, bare forehead, closed lips, coral red robe, round smooth capelet + jade clasp, butterfly borders, NO cloud collar | pearl overlay reads as several looping swag chains, not clearly sparse; flute held in ONE hand (prompt's "across both hands" conflicts with the hairpin hand); pink silk flower in hair |
+| c06 t5 new (Phi) | xSBUT82jfW | frontal, bare forehead, closed lips, scalloped cloud collar with gold tassel fringe, layered robe with ivory under-skirt, peony medallions, larger headdress | flute one-handed (same conflict); new Phi lost the sheer gauze overlay the old Phi had; cloud collar is cream/gold-heavy over coral |
+| c25 t4 new (Tần) | Lw87MmWswO | frontal, bare forehead, closed lips, brick red, round capelet + jade clasp, bamboo borders, NO cloud collar, lantern on jade stick | pearl net covers the whole capelet top, medium density (airier than a dense net, but not "sparse strands"); bird embroidered on capelet |
+| c25 t5 new (Phi) | aFGHNWXfSh | frontal, bare forehead, closed lips, cloud collar + tassel fringe, layered robe, peony medallions, gold girdle, lantern | slight mid-step lean (still frontal); robe darker/browner than #8C4D40 brief in places |
+Sheet (rows c06, c25; Tan cu | Tan moi | Phi cu | Phi moi): CDN img/_review/tan-phi/sheet1.jpg (1580x1710) + out/tanphi_sheet1.jpg. No mass; waiting for the owner.
