@@ -24,4 +24,9 @@ Items now differ per age (builder 3f): a18 folding fan, a26 hand mirror, a36 ruy
 - gens kept: a18 yiu3unMPW9 · a26 hu2QGF6vqL (redo) · a36 jUowoXzLD0 · a51 vQAFApDa47 · a65 KLpsdgqkqp (redo, + dedot.py on the red tassel bead at mid-forehead, local edit of the file; strand now ends in a pearl).
 - FAILED, not used: a26 Lw878WlswO (centre tassel ended in a red drop between the brows = forehead dot), a65 6AbG5ZtiJO (red tassel beads on the forehead skin). Both logged in the ledger (verify PASS, prompt unchanged). 7 gens.
 - Items: a18 tú cầu, a26 small gold vase with flower sprig, a36 jade court tablet, a51 jade seal, a65 longevity peach. All frontal, calm, item below the chin, cloth still, lips closed, no crown flowers; a51 silver temples, a65 mostly silver.
-- Honest faults / note for foreman: option C (only five tassels, longer middle ones) tends to drop the centre tassel's red bead onto the forehead skin — expect 1 redo or a dedot per C person. a65 a65 peach is gold (item close to robe gold).
+- Honest faults / note for foreman: option C (only five tassels, longer middle ones) tends to drop the centre tassel's red bead onto the forehead skin — expect 1 redo or a dedot per C person. a65 peach is gold (item close to robe gold).
+
+## c21 DONE (option A, crimson second colour) — sheet img/_review/nude-mass/sheet_c21.jpg (CDN), copy out/n6c_c21_sheet.jpg
+- gens: a18 Lw87mMZswO · a26 N2qAKKw6D9 · a36 w4a9Exh7EI · a51 9ZH2KRVNYZ · a65 u5WKV7DQLD (all 1st try, no cut needed). --verify PASS.
+- Items: a18 small crimson lantern on a gold stick, a26 poetry book, a36 incense box, a51 sutra book, a65 thread-bound almanac. Frontal, calm, cloth still, lips closed, forehead clean (full fringe row ends above the brows), no crown flowers; a51 silver temples, a65 mostly silver.
+- Honest faults: a18 lantern hangs at waist height (stick held at chest); a26/a51/a65 all read as a crimson book at game size (three different builder items, same look) — item variety per age is weak for this person.
