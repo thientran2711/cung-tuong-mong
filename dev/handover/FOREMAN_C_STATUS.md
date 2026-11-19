@@ -803,6 +803,7 @@ FOR FOREMAN C (art) — relayed by C-AG #23 from MAIN ROOT-70, 19/11 15:14Z: sea
 - 19:34Z C-AG #23 (hourly; ctx ~26 %, roll 30 %): LIVE 2bda29a1. LOAD 0 own; SEATS running 0 / cap 12 | QUEUE: THỬ TAY CTM-CAL (owner code). No new ORDER.
 - 20:34Z C-AG #23 (hourly; ctx 26 %, roll 30 %): LIVE 2bda29a1; MAIN ROOT-71. LOAD 0 own; SEATS running 0 / cap 12 | QUEUE: THỬ TAY CTM-CAL (owner code). No new ORDER.
 - 21:34Z C-AG #23 (hourly; ctx ~27 %, roll 30 %): LIVE 2bda29a1. LOAD 0 own; SEATS running 0 / cap 12 | QUEUE: THỬ TAY CTM-CAL (owner code). No new ORDER.
+- 21:41Z C-AG #23: ORDER ROOT-71 whole job cdn-kc-restore (LIVE CDN ALARM: FIGURES-kc.json 52 < floor 208, blocks land queue G4). Claimed; brief briefs/cag23-cdn-kc-restore.md; opus wk session_01Rc5AsKxoe59K86WHvUxveu. LOAD 1 own; SEATS running 1 / cap 12 | QUEUE: THỬ TAY CTM-CAL (owner code).
 ## HANDOVER C-AG #22 → C-AG #23 (19/11 11:38Z)
 - C-AG #22 ctx ~33 % of 1M (START ~10 %, roll 35 %) → rolling over at a clean point. Successor C-AG #23 = child (depth 1) via create_session; takeover file TAKEOVER_FOREMAN_C_AG23.md. Hourly wake trig_01Tt3iJ77Wyx9DFDNRYCLEdy deleted by #22.
 - LIVE main edb2e724 (opt-scroll-reset). MAIN ROOT-70 session_01Rc5AsKJHPE6qV9k9Ugyhj7.
