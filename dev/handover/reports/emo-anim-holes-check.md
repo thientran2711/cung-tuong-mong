@@ -248,3 +248,20 @@ Young-men ghen / hanghai (known 26 % / 37 % at key 0.28) measure ~0 % now -> CDN
 | young-men | m-hon-out.webp | 0.00 | n | -1 / 57 |
 | young-men | m-hon.webp | 0.00 | n | -1 / 60 |
 | young-men | m-hon-back.webp | 0.00 | n | -1 / 60 |
+
+## Re-cut 19/11 (ROOT-47 helper): muu / hungkhoi discs
+Cause: ffmpeg chromakey 0.28 keyed the teal/slate muu disc to alpha ~120-170 (shows PURPLE on magenta) + holes. No new generation; same Seedance clips, same trims (frame-matched to the old CDN files), 288 px, 15 fps, edge-only despill, animated webp.
+Key: RGB distance to the sampled background green, alpha ramp 60..100 (dev/art/emo-anim/recut-muu/recut.py `rgb 60,100`). mo-hungkhoi-back: the source clip itself shows a green crescent between rim and disc (rim off-centre), so enclosed gaps bordering the pink disc are filled with the disc colour (recut-muu/fillcres.py); a faint disc-edge seam stays visible in ~f30-40.
+
+| file | clip id | trim (ss / frames) | holes % old -> new | disc-colour alpha mean old -> new (min frame) |
+|---|---|---|---|---|
+| m-muu-out | xSBy7TBjfW | 2.000 s / 31 | 6.08 -> 0.03 | 169 (123) -> 255 (255) |
+| m-muu | s7I9yeIl8e | 0 / 61 | 6.62 -> 0.00 | 153 (118) -> 255 (255) |
+| mo-muu-out | 9ZHY2ysNYZ | 0.133 s / 58 | 4.08 -> 0.01 | 175 (120) -> 255 (255) |
+| mo-muu | cpS8eWY0eP | 0.067 s / 60 | 3.93 -> 0.00 | 147 (122) -> 255 (255) |
+| mo-muu-back | Xm9EqafBfo (kept clip) | 0.133 s / 58 | 1.15 -> 0.77 | 224 (160) -> 254 (246) |
+| mo-hungkhoi-back | 4RFn8PD9Aa | 0.267 s / 57 | 4.43 -> 0.76 | 255 -> 255 (crescent filled) |
+
+Remaining 0.77 / 0.76 % = real background gap between sleeve and rim in the source (f8-11 mo-muu-back, f15 mo-hungkhoi-back), not a disc hole. Interior alpha (silhouette eroded 6 px) now >= 252.8 every frame; no green fringe (<= 0.1 % of edge band). Looked at mid + worst frames on magenta and #23232e: discs teal / pink, not purple.
+Uploaded (same names) to img/_review/emo-anim-mass/; before/after sheet: https://ctm-img.victoria-tntt.workers.dev/img/_review/emo-anim-mass/sheet-recut-muu.jpg
+Note: m-muu-back (not in this list) was cut the same old way; it measured 0 % holes but its disc-colour alpha is mean 201 (min frame 183), i.e. also semi-transparent - check / re-cut (clip in ledger line 834) if wanted.
