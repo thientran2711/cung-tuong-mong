@@ -4,7 +4,7 @@ const DIRTY=["poison","kpoison","frame","kframe","plant","musk","catswap","pushp
    the «…cung nữ thân tín…» routes (jecon econLoyalMaid), else the sent servant bestSent */
 const DIRTY_SENT={bribel:a=>typeof econLoyalMaid==="function"?econLoyalMaid(a):a.maid,laydol:a=>typeof econLoyalMaid==="function"?econLoyalMaid(a):a.maid};
 let ACTK=null;
-(function(){const r0=runAct;runAct=function(a,t,k){const p=ACTK;ACTK=k;try{let oc=null,sv=null;
+(function(){const r0=runAct;runAct=function(a,t,k){const p=ACTK;ACTK=k;try{let oc=null,sv=null;/* review coop-thin-f6 r1: sv lives here (the «qua loa» line below reads it; a const inside the if threw ReferenceError, solo too) */
   /* trung thành refuses (or begs against) a dishonourable order: the act does not happen */
   if(a&&k&&DIRTY.includes(k)&&!together(a,t)){sv=(DIRTY_SENT[k]||bestSent)(a);/* AG-ALL-2 G10: with the loop on the sent servant CHOOSES among the player maid's own "Lệnh của chủ" options (j42 cnvOrdOpts: Vâng lệnh / Từ chối / Mật báo) by her lòng and nết (jagstf2 stf2Ord); off → the old trung thành roll */
    oc=sv&&typeof stf2Ord==="function"?stf2Ord(a,sv,t,k):null;if(oc&&oc!=="obey"&&oc!=="half"){sv.kn=a===S?1:sv.kn;if(a===S&&oc==="refuse")servLearn(sv,"Từ chối việc bẩn");return a===S?(oc==="refuse"?`${sv.name} quỳ xin nương nương đừng làm việc thất đức; việc không thành. `:`${sv.name} viện cớ thoái thác; việc không thành. `):""}
