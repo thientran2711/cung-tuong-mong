@@ -127,3 +127,29 @@ BAL.cv.decl.suc (ap(p,{sung:BAL.eff.jts.sungGo_2,suc:…})), guarded until this 
 newgirl thiện cảm ±: BAL.cv.ngAff {warm:20, cold:-10} (text + newGirl()); guardrumour «Đút bạc»: BAL.cv.rumor {bac:40, danh:2}; contest tutor: BAL.cv.tutor {fest:20, fx:30};
 j24 borrow chance (card chanceW + monthly roll): BAL.cv.loanBack 40 — LANDER: balance-final names the same chance BAL.rk.loanBack; keep ONE when both land.
 ### FAIL 5 — report: KEY FINDING rewritten at the top (the owner's example IS live game content, the five cards above).
+### MAIN ROOT-59 ORDER (~23:05Z, STATUS line 279: the 4 owner flags) — applied
+1. «Hoảng sợ đứng nhìn» RESTORED in Cứu giá (j71 MF7 cuuhoang): Tốn Sủng −BAL.cv.cuu.sung (2) · Được Sức +BAL.cv.cuu.suc (6), «giữ được thân mình vô sự» (no wound / Sức risk) · Kèm ngài bị thương nhẹ.
+   vs «Lao vào» (Sức −10, risk −15, Sủng +8 …) and «Hô thị vệ» (free, Sủng +2): three roads, none dominates (scan PASS).
+2. «giữ lại N lượng bạc» kept only where N = the sibling's BAL price (unchanged from #1/#2).
+3. Sức +BAL.cv.rest 3 / Đức +BAL.cv.duc 1 kept.
+4. Scan: exempt classes (knowledge / look / bet / ending) are exempt from LAW 2 only; LAW 3 (COST-ONLY, HINT-NO-GAIN) is now judged on them too → still 0. vlout note reworded (a price / cover ladder).
+### Card look fix found in the shots
+Sure declines in jts showed their certain loss under «BẠI» (a fail block on a sure option): summons «Cáo bệnh» (Sủng → fx = Tốn), «Cáo bệnh, không dự» (Danh → fx = Tốn), «Không đến» (thiện cảm / oán → Kèm). Group grep: no other sure tsOpt with Được + Mất.
+### GATES (final sha 7f339bad = branch + LIVE d2da651b merged)
+| gate | result |
+|---|---|
+| choice-value-scan seeds 7 / 11 / 23 / 31 (92185b90 = + LIVE 9a1d6922) | **PASS** 359 / 364 / 363 / 322 modals · COST-ONLY 0 · HINT-NO-GAIN 0 · DOMINATED 0 · 0 page errors |
+| choice-value-scan seed 7 on 7f339bad (+ LIVE d2da651b) | **PASS** 350 modals |
+| scan on LIVE 1130a49e (seed 7, same scan) | **FAIL** · COST-ONLY 72 · HINT-NO-GAIN 8 · DOMINATED 66 — lists ksp / amNight / summons ×3 / trip ×4 «Cáo bệnh», hội phối đồ «Cáo bệnh, không dự», cmTt … |
+| --plant self-test | **PLANT OK · caught 3/3** (cost-only, dominated, fake-green «nhường đêm») |
+| one-core-guard / -text / -bind / -text-rule | PASS (7f339bad) |
+| odds-cap | PASS (7f339bad) |
+| quickcheck --runs 6 (92185b90) | PASS · old save ok · core gates PASS · perf new/live render 184/205 ms, tab 323/346, buổi 1005/1008 |
+| coop-e2e vs live Worker (92185b90) | 63/63 passed, 0 page errors |
+| paired bot run (runbal2 sens, CAP 25 min each, together; branch 55e5f652 vs live e16e1d66) | branch 6 lives (HH 3, 7.2 yrs) vs live 7 (HH 2, 5.1 yrs); mean Sức 34 vs 48, Đức 32 vs 36, Bạc 46 vs 47, Sủng 50 vs 69 → no runaway Sức / Đức / Bạc (small sample, bot noise) |
+| Fold 755x1000@2 + iPad 1180x820@2 shots (summons, ksp, trip, cmTt, amNight, Cứu giá) | looked at: rows fit, gains under Được, no overflow — scratch only, not in git |
+Hand-check list of every cost + word-only-gain option: reports/choice-value-wordgains.md (seed 7, 104 distinct options, all read as real gains).
+### SẴN SÀNG KIỂM 7f339bad (review/choice-value-audit)
+Touched by #3: dev/build/{jbal,j8,jagmaid,jts,jworld,jcmaid,jstip,j7,j71,j24}.js, dev/tools/choice-value-scan.js, index.html, sw.js (+ #1/#2 lists above).
+Lander notes: BAL.cv.loanBack vs balance-final BAL.rk.loanBack (same chance, keep one); receiver-choice reads BAL.cv.decl.suc (guarded) for the NPC «Cáo bệnh».
+#3 context at finish ≈ 22 % of 1M (estimate; START_CTX 5 %).
