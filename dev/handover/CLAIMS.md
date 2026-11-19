@@ -246,7 +246,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | ge-writers-w3 r2 fixes (opus E11d, successor of E11c) | review/ge-writers-w3 | E ROOT #8 | session_01DgYSWogWMATZVoosS7SFEk | RUNNING | 19/11 05:56Z |
 | MAIN ROOT-65 (opus; child of ROOT-64, depth 3) | handover HANDOVER_SESSION9 | ROOT-64 | session_01Rc5AsMRSKCNFbYwLJhNeY7 | DONE → ROOT-66 | 19/11 06:24Z |
 | FOREMAN C-AG #22 (opus; ex-ROOT STANDBY, depth 0; took over from C-AG #21) | handover FOREMAN_C_STATUS | owner STANDBY | session_01Rc5AsM9pCcsWwjoC8PjjW7 | RUNNING | 19/11 06:30Z |
-| REVIEW coop-thin-f3 r1 (opus BIG) of f659cf7b | review/coop-thin-f3-r1 | B | session_01N1tNP5fWL4VXMTtqchmHQX | RUNNING | 19/11 06:30Z |
+| REVIEW coop-thin-f3 r1 (opus BIG) of f659cf7b→abb9a6a6 | review/coop-thin-f3-r1 | B | session_01N1tNP5fWL4VXMTtqchmHQX | PASS review/coop-thin-f3-r1 e5c42937 (READY FF; lands with/after F2-r2; FOR B: jdis refusal on accepted player gifts) | 19/11 09:10Z |
 | coop-thin F4 (opus; pets/garden/kitchen/study; same worker as F3, stacked on F3) | review/coop-thin-f4 | B | session_01N1tNP2DFfqtxibVd8wgyr6 | SẴN SÀNG KIỂM 8d48cc57 (merged f3 abb9a6a6 + main 950508fc; report reports/coop-thin-f4.md) | 19/11 06:33Z |
 | ev-pic-followups (sonnet; MAIN ROOT-65 job via C-AG #22: iPad XL option frame scroll kit fix whole group + PEND:eunuch scene) | review/ev-pic-followups; briefs/cag22-ev-pic-followups.md | C-AG #22 for ROOT-65 | session_01Rc5AsMN9rc6gf4qRzmEoJF | READY (SẴN SÀNG KIỂM 59fb29c04) | 19/11 06:40Z |
 | seal-lean-2 r2 SMALL REVIEW (sonnet) | review/seal-lean-2 a64f06c7 | MAIN ROOT-65 | session_01Rc5AsK8sbYnJUkyP6AvmAw | DONE — LIVE 5400c87b | 19/11 06:37Z |
@@ -255,7 +255,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | FOREMAN E (opus; ex-ROOT STANDBY, depth 0; took over from E ROOT #9 at depth limit) | handover FOREMAN_E_STATUS | owner STANDBY | session_01DgYSWkgmeMCRaqRT4UCEJE | RUNNING | 19/11 06:50Z |
 | caoly-road (foreign-princess-3 step 2a: Nam Chiếu princess road → Cao Ly, sonnet E20) | review/caoly-road; briefs/E20-caoly-rename.md | FOREMAN E | session_01DgYSWmHCamFvjQHK274SMZ | READY FOR REVIEW 30d7cca8 | 19/11 ~08:10Z |
 | phutang-road lead (foreign-princess-3 step 2b: NEW Phù Tang roads pt_hai/pt_su + plan, opus E21) | review/phutang-road; briefs/E21-phutang-road.md | FOREMAN E | session_01DgYSWm2JdhtEH6d41VumRy | RUNNING | 19/11 06:49Z |
-| seal-lean-3 fast pop / slow shrink / head-size max (sonnet; OD 06:55Z) | review/seal-lean-3 | MAIN ROOT-65 | session_01Rc5AsKzdGvNFdCvLo4rm8G | READY (b66869d6) | 19/11 07:03Z |
+| seal-lean-3 fast pop / slow shrink / head-size max (sonnet; OD 06:55Z) | review/seal-lean-3 | MAIN ROOT-65 | session_01Rc5AsKzdGvNFdCvLo4rm8G | READY (08bd4868) | 19/11 07:03Z |
 | phutang-road writer 2 (pt_tang + pt_dang, opus E21b, under E21) | review/phutang-road-w2; briefs/E21b-phutang-road-w2.md | FOREMAN E | session_01DgYSWkdwE7LuxhVqAQnJah | DONE 1d49cfc9 (archived 08:01Z) | 19/11 07:03Z |
 | bd-roads r2 + Ba Tư lead (opus E14d, successor of E14c) | review/bd-roads | FOREMAN E | session_01DgYSWqB4qyr7uRTdKD8895 | RUNNING | 19/11 07:06Z |
 | role-parity-drift-2 (opus; 12 new red rows from landings 7fb7c104..98f9f0f1; law 1 + law 11) | review/role-parity-drift-2 | B | session_01N1tNP6PEK9T9BWXhYLZvAd | RUNNING | 19/11 07:30Z |
