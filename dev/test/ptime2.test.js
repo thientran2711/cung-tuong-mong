@@ -36,8 +36,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   /* 17 shop */
   E("shop",()=>{toB0();Q.length=0;invAct("shop");const a=land("shop");const r={q0:Q.length,away:!!PTIME.away("eun:nvp")};spend(R.shop.n);r.back=!!(a&&a.back);r.q=Q.map(x=>x.t);Q.length=0;return r});
   /* 18 FAIL 7 item 4: an NPC deed by a SENT servant (mindRun / runAct / exec70) = S.away + due khắc; the servant is locked; the NPC's away maid is locked for every deed */
-  E("npcDeed",()=>{toB0();Q.length=0;const L=liveRivals(true).filter(v=>v&&v.alive&&!v.out&&!v.confined&&(v.staff||[]).length);const v=L.find(x=>!sameHouse(x,S));if(!v)return null;
-   S.place="home";S.where=S.where||{};for(const w of ["home","vuon","nvp","tn","cnh"]){S.where[v.id]=w;if(!together(v,S))break}if(together(v,S))return{tog:1};const x={};const n0=S.away.length;const sv=bestSent(v);
+  E("npcDeed",()=>{toB0();Q.length=0;const L=liveRivals(true).filter(v=>v&&v.alive&&!v.out&&!v.confined&&(v.staff||[]).length);S.place="home";S.where=S.where||{};let v=null;/* a consort NOT in the same place as her (her place and theirs vary by life) */
+   for(const x of L.filter(x=>!sameHouse(x,S))){for(const w of ["vuon","nvp","tn","cnh","home"]){S.where[x.id]=w;if(!together(x,S)){v=x;break}}if(v)break;S.place="vuon"}if(!v)return{tog:1};const x={};const n0=S.away.length;const sv=bestSent(v);
    x.r=mindRun(v,S,"rumor",0);const a=S.away[S.away.length-1];x.sent=S.away.length===n0+1&&a&&a.by==="v"+v.id&&a.kind==="harm";x.who=a&&a.who;x.svId=(v.staff||[]).some(z=>ptPid(z,v)===(a&&a.who))?a.who:null;x.due=a?a.due-ptNow():null;
    x.busy=!!(a&&ptBusy(a.who));const b2=bestSent(v);x.notSame=!b2||ptPid(b2,v)!==a.who;
    x.r2=runAct(v,S,"rumor");x.sent2=S.away.length>=n0+(b2?2:1);
