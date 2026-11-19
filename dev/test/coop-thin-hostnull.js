@@ -2,7 +2,7 @@
    dev/handover/reports/coop-thin-hostnull.md). Two Playwright clients, host Fold 686x880 + guest iPad 1180x820 (swap=1: iPad hosts).
    usage: python3 dev/build/assemble.py && node dev/test/coop-thin-hostnull.js <workerURL> [level=9] [swap=0]   (UISCAN=<file>, LAG=<ms>, CPU=<rate>, SHOTS=<dir>)
    H1 (a) talk / scout / invite from the guest (the registrations with no walk repaint): run once, her result on her phone, the host's
-   screen = a fresh render of HIS state · H2 (b) her face reveal plays once on her phone, none on the host · H3 (c) more effects than the
+   screen = a fresh render of HIS state · H6 the repaint: his own open card kept, no loop, its cost · H2 (b) her face reveal plays once on her phone, none on the host · H3 (c) more effects than the
    old cap: none lost, in order, paced by BAL.coopUi · H4 (d) sounds / scenes her walk engines raise reach her phone, none on the host. */
 const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),path=require('path');
 const WURL=process.argv[2]||'https://ctm-coop.victoria-tntt.workers.dev';const LVL=+(process.argv[3]||9);const SWAP=+(process.argv[4]||0);
@@ -105,20 +105,35 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   const id=await G.p.evaluate(s=>{const v=(0,eval)(s);return v?v.id:null},src);if(id==null){ok(true,'H1 '+fn+': no target (skipped)');continue}
   const r=await herRun(fn,id);const hs=await hostSame();H1.push([fn,r,hs]);
   ok(r.sent===1&&r.got&&r.ran===1&&r.after.used===r.u0+1&&hs.same,'H1 '+fn+' from the guest: run once, her khắc +1 (as solo), the host\'s screen = his own state',{r,hs})}
+ /* H6 (a) r2, cost + safety of the host repaint: (i) the host's OWN open card is never rebuilt by her run unless her run wrote into #modal
+    (marker node kept, his card still Q[0], still open); (ii) no loop: with no run of hers, 3 s idle, no repaint / paintN step; (iii) cost:
+    her intent's host run time (TH.lat run: the repaint is no longer inside it), the repaint time (TH.rpMs / rpN), host long tasks */
+ {await reset();await H.p.evaluate(()=>{window.__lt=[];try{new PerformanceObserver(l=>{for(const e of l.getEntries())__lt.push(Math.round(e.duration))}).observe({type:'longtask',buffered:false})}catch(e){}});
+  await G.p.evaluate(i=>{popIdx=i;popMsg='';used=0;if(S.visit){S.visit.tk={};S.visit.talked=false}render()},PI);
+  const card=await H.p.evaluate(()=>{const c={t:'hn-own',h:'hn-own card',opts:[{n:'Thôi'}]};Q.unshift(c);showModal();const mb=document.getElementById('mb');mb.__hn=1;const mk=document.createElement('i');mk.id='hn-mark';mb.appendChild(mk);return !document.getElementById('modal').hidden});
+  const oi=await G.p.evaluate(()=>{const p=curPeople()[popIdx];return p?talkOpts(p).findIndex(a=>!a.open&&!a.lock&&canPay(a)):-1});
+  const r=oi>=0?await herRun('talk',oi):null;await sleep(600);
+  const m=await H.p.evaluate(()=>({mark:!!document.getElementById('hn-mark'),q0:Q[0]&&Q[0].t,open:!document.getElementById('modal').hidden,rpN:COOPW.thin.rpN|0}));
+  await H.p.evaluate(()=>{const i=Q.findIndex(c=>c.t==='hn-own');if(i>=0)Q.splice(i,1);showModal();render()});
+  ok(!!card&&!!r&&r.got&&r.ran===1&&m.mark&&m.q0==='hn-own'&&m.open,'H6 his own open card is not rebuilt by her run (her talk wrote no #modal): same card, still open',{card,r:r&&{got:r.got,ran:r.ran,paint:r.paint},m});
+  const i0=await H.p.evaluate(()=>[COOPW.thin.rpN|0,COOPW.thin.paintN|0]);await sleep(3000);const i1=await H.p.evaluate(()=>[COOPW.thin.rpN|0,COOPW.thin.paintN|0]);
+  ok(i0[0]===i1[0]&&i0[1]===i1[1],'H6 no repaint loop: 3 s with no run of hers, no repaint and no paint step',{i0,i1});
+  const c=await H.p.evaluate(()=>({run:(COOPW.thin.lat||[]).map(x=>Math.round(x.run||0)),rpN:COOPW.thin.rpN|0,rpMs:Math.round(COOPW.thin.rpMs||0),paintN:COOPW.thin.paintN|0,lt:__lt}));
+  console.log('COST host (CPU ×'+(+process.env.CPU||1)+', LAG '+(+process.env.LAG||0)+'): her runs (TH.lat run ms) '+JSON.stringify(c.run)+' · repaints '+c.rpN+' ('+c.rpMs+' ms total) · paintN '+c.paintN+' · long tasks '+JSON.stringify(c.lt))}
  /* H2 (b) her face reveal: she walks to a place where a consort she never met stands (arrival = k61Meet → krvFlip): the reveal plays once on HER
     phone, none on the host (no host reveal state, no host flip) */
  {await reset();if(await G.p.evaluate(()=>S.place!=='home'))await walk('goTo','home','home');await G.p.evaluate(()=>{used=0;render()});await sync();
   const pk=await G.p.evaluate(()=>{for(const v of rivals){try{if(!v||v.coop||!v.alive||v.out||met61(v))continue;const k=whereOf(v);if(k&&k!=='home'&&k!==S.place&&accessOf(S,k).ok&&!accEtq(S,k)&&!(typeof tyOn==='function'&&tyOn(S))&&walkOk(travel(S.place,k)))return {k,id:v.id,key:kOf61(v)}}catch(e){}}return null});
   if(!pk)ok(true,'H2 no unmet consort at an open place (skipped)');else{
    await G.p.evaluate(()=>{});
-   await H.p.evaluate(()=>{window.__hk=[];const kf=window.krvFlip;window.__kf0=kf;window.krvFlip=function(k){if(!COOPW.ctx)__hk.push(k);return kf.apply(this,arguments)};window.__hev=Object.keys(kitReveal.KRV.ev)});
+   await H.p.evaluate(()=>{window.__hk=[];const kf=window.krvFlip;window.__kf0=kf;window.krvFlip=function(k){if(!COOPW.ctx){__hk.push(k);(window.__hks=window.__hks||[]).push(String(new Error().stack).split("\n").slice(1,9).join(" < "))}return kf.apply(this,arguments)};window.__hev=Object.keys(kitReveal.KRV.ev)});
    await G.p.evaluate(()=>{window.__gk=[];const kf=window.krvFlip;window.__gkf0=kf;window.krvFlip=function(k){__gk.push(k);return kf.apply(this,arguments)}});
    const row=await walk('goTo',pk.k,'H2');await sleep(800);
    /* she talks to the stranger (face to face = met: k61Meet, j21 talk) */
    const oi=await G.p.evaluate(id=>{const i=(S.visit&&S.visit.people||[]).findIndex(p=>p.ref&&p.ref.id===id);if(i<0)return -1;popIdx=i;popMsg='';S.visit.tk={};S.visit.talked=false;used=0;render();const L=talkOpts(curPeople()[popIdx]);return L.findIndex(a=>!a.open&&!a.lock&&canPay(a))},pk.id);
    const tr=oi>=0?await herRun('talk',oi):null;row.got=row.got&&!!tr&&tr.got;row.ran=tr?tr.ran:0;await sleep(2500);
    const g=await G.p.evaluate(k=>({flips:__gk.filter(x=>x===k).length,all:__gk,met:met61(rivals.find(v=>kOf61(v)===k)||{}),ev:!!kitReveal.KRV.ev[k]}),pk.key);
-   const h=await H.p.evaluate(()=>({flips:__hk.length,ev:Object.keys(kitReveal.KRV.ev).filter(x=>!__hev.includes(x))}));
+   const h=await H.p.evaluate(()=>({st:window.__hks,flips:__hk.length,ev:Object.keys(kitReveal.KRV.ev).filter(x=>!__hev.includes(x))}));
    await H.p.evaluate(()=>{window.krvFlip=__kf0});await G.p.evaluate(()=>{window.krvFlip=__gkf0});
    ok(row.got&&row.ran===1&&g.met&&g.flips===1&&g.ev&&h.flips===0&&h.ev.length===0,'H2 her face reveal (she meets a stranger: walk there, talk face to face): played once on HER phone, none on the host',{pk,place:row.g1.place,g,h})}}
  /* H3 (c) more effects than the old cap: the host-side staging adds 7 lines to her scout run (seeLoc wrapped on the host only): all of them
