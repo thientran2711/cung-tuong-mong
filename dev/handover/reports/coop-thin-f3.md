@@ -101,3 +101,12 @@ Pending shows at once (#next locked, buttons off; D1: a 2nd tap ignored, one int
 LOOK (scratch only, deleted, nothing uploaded): host Fold 755x1000@2 + guest iPad 1180x820@2 at the wear card / shop: kit frames clean, no overflow, 0 page errors; the setup's rank edict ("Thánh chỉ … Tần", from the test's staging) sat on top of the result card → reviewer: LOOK at her wear card / shop panel directly.
 Laws: 1 gifts both directions (one path) · 4 no new number (one-core PASS) · 6c pieces traced, never lost / doubled (fixes above) · 7/9–12 no new word, no UI part changed.
 FOR B: (1) her own changes made on her phone outside intents (life-start items etc.) reach the host only with her next intent / ready diff (E/F1 design; the F3 table saw her bag 37–83 on her phone vs 1 in the host copy at setup); (2) the pet shop (kitShop key 'pet') = F4: add the key to KSH in jcoopthinf.
+
+### Quiet-gated emitters reached by F3 acts (B ROOT-4 05:35Z: F2 r1 FAIL "withSeat quiet=true silences her cards"; the fix = review/coop-thin-f2-r2, NOT rebuilt here)
+| emitter | reached from (F3 act in her context) | silenced today at L8 |
+|---|---|---|
+| jtq14 introCard / doneCard (Tống ma ma task cards «Xong việc …») | note("buy" / "sell" / gift / wear) after kitShopBuy, sellItem/econSell/wkSell, giveTo, wear / wdWearUI (seen in W1: the log line «Xong việc «Thay y phục…»» arrives, the card does not) | yes |
+| j55 tdPop | tdGiftGo → tdGift (Biếu quà nhà ngoại house news) | yes |
+| jts rank line (al && !quiet) | tsGiftBacGo / tsGiftPieceGo when the gift crosses a rank cut | yes |
+| j8 dhHieuGrant {quiet:1}, jdh2 giveItems(quiet), jmem o.quiet | own option flags, not the global | no (unchanged) |
+Plan: merge review/coop-thin-f2-r2 (+ main 7fb7c104) when B says SẴN SÀNG KIỂM, then rerun coop-thin-f3 L8 + swap with a check that the jtq14 done card reaches her phone after W1 / S1.
