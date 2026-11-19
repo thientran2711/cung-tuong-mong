@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"fef0deec","t":"2026-11-19T02:33Z","c":"bd_soi_11: «Viết tên Ô Lặc» base odds 35→45 (bot: 1 win in 17 lives)","b":"164d3aa9c592","h":[{"s":"0dc8f187+","t":"2026-11-18T22:28Z","c":"review coop-thin-f1 r1 #3: site build (index.html / sw.js rebuilt)"},{"s":"6e9277d8+","t":"2026-11-18T21:47Z","c":"entry-blank-r3 r2 (review item 6, whole group): a portrait on its way shows the kit portrait silhouette (§59.1 pf/pm, unknown-f|m); the lin…"},{"s":"3270145f+","t":"2026-11-18T21:25Z","c":"doc-90-women r1: rebuild generated index.html/sw.js (build hash, build line) after comment edits"},{"s":"668e0bf4+","t":"2026-11-18T21:26Z","c":"map-zones r6 (reviewer fix on r3 5a83694): a head in a dropped palace with a stale resHead to another dropped house got a second migration …"},{"s":"b02879db+","t":"2026-11-18T20:49Z","c":"ge-writers-w1: carry jrd_muoi ch8 c3 «Thư sinh Giang Nam» (forced from s1/s2 every life) + BAL muoi_no_8.c3, by MAIN ORDER 18:45Z; muoi_no_…"},{"s":"fcff501a+","t":"2026-11-18T20:41Z","c":"map-labels-missing r2c: tag touches its own building or keeps a short leader (\u003c=90px) ending on the real slip/info rect, dot >=40px from ot…"},{"s":"c67d248d+","t":"2026-11-18T19:53Z","c":"ag-deed-perf: site build (index.html, sw.js)"},{"s":"6aab33ad","t":"2026-11-18T20:05Z","c":"KIT_REQUESTS: K-Q2-1 DONE 048f3c7"},{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"},{"s":"a5013222+","t":"2026-11-18T18:03Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)"}]};
+window.CTM_BI={"s":"9531268c+","t":"2026-11-19T02:33Z","c":"bd-roads: site rebuilt after the writer-2 merge","b":"b9390bdbd02e","h":[{"s":"0dc8f187+","t":"2026-11-18T22:28Z","c":"review coop-thin-f1 r1 #3: site build (index.html / sw.js rebuilt)"},{"s":"6e9277d8+","t":"2026-11-18T21:47Z","c":"entry-blank-r3 r2 (review item 6, whole group): a portrait on its way shows the kit portrait silhouette (§59.1 pf/pm, unknown-f|m); the lin…"},{"s":"3270145f+","t":"2026-11-18T21:25Z","c":"doc-90-women r1: rebuild generated index.html/sw.js (build hash, build line) after comment edits"},{"s":"668e0bf4+","t":"2026-11-18T21:26Z","c":"map-zones r6 (reviewer fix on r3 5a83694): a head in a dropped palace with a stale resHead to another dropped house got a second migration …"},{"s":"b02879db+","t":"2026-11-18T20:49Z","c":"ge-writers-w1: carry jrd_muoi ch8 c3 «Thư sinh Giang Nam» (forced from s1/s2 every life) + BAL muoi_no_8.c3, by MAIN ORDER 18:45Z; muoi_no_…"},{"s":"fcff501a+","t":"2026-11-18T20:41Z","c":"map-labels-missing r2c: tag touches its own building or keeps a short leader (\u003c=90px) ending on the real slip/info rect, dot >=40px from ot…"},{"s":"c67d248d+","t":"2026-11-18T19:53Z","c":"ag-deed-perf: site build (index.html, sw.js)"},{"s":"6aab33ad","t":"2026-11-18T20:05Z","c":"KIT_REQUESTS: K-Q2-1 DONE 048f3c7"},{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"},{"s":"a5013222+","t":"2026-11-18T18:03Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -11510,10 +11510,14 @@ BAL.road.bd=BAL.road.bd||{};
 BAL.road.bd.rk=1;
 BAL.road.bd.man={age:{d:30,lie:48,olac:17,thatmoc:32,asnc:58,phong:24},trait:{thatmoc:"tham vọng",phong:"trung hậu",olac:"cẩn trọng"},loyal:60,away:1e9};/* steppe men in the capital (S.men) */
 BAL.road.bd.conf={san10:2,soi8:2};/* months of cấm túc a lost chapter puts her under (S.confined) */
-const bdR=(st,w,l,c,b)=>({c:c||{suc:-2},o:[b||45,["d",st,5],["-m","rank",BAL.road.bd.rk]],w,l,sc:1});/* risky: odds on one stat */
+BAL.road.bd.def={c:{suc:-2},cx:{suc:-3},mid:{duc:1},sc:1,b:45,d:5,f:10};/* the shapes' default cost / climax cost / mid ending / Lợi thế / base odds / stat divisor / flag bonus */
+const D_=BAL.road.bd.def;
+/* the rare tables share road ids with the fx tables (BAL.arc.fx.bd_san + BAL.arc.rare.bd_san), so they are set key by key (BAL.arc.rare.<id>=…):
+   one-core-guard reads every Object.assign(BAL…,{key}) as one flat key space */
+const bdR=(st,w,l,c,b)=>({c:c||D_.c,o:[b||D_.b,["d",st,D_.d],["-m","rank",BAL.road.bd.rk]],w,l,sc:D_.sc});/* risky: odds on one stat */
 const bdS=(c,w)=>({c,w});/* sure: a cost and a smaller gain */
-const bdX=(b,st,f,c)=>({c:c||{suc:-3},o:[b,["d",st,5],["f",f,10,0],["-m","rank",BAL.road.bd.rk]]});/* climax: base + stat + the chapter's flag */
-const bdE=(w,l)=>({win:{fx:w,k:1},mid:{fx:{duc:1},k:0},lose:{fx:l,k:-1}});
+const bdX=(b,st,f,c)=>({c:c||D_.cx,o:[b,["d",st,D_.d],["f",f,D_.f,0],["-m","rank",BAL.road.bd.rk]]});/* climax: base + stat + the chapter's flag */
+const bdE=(w,l)=>({win:{fx:w,k:1},mid:{fx:D_.mid,k:0},lose:{fx:l,k:-1}});
 const bdG=(o,g)=>Object.assign(o,{g});
 Object.assign(BAL.arc.fx,{
  bd_san:{s1:[bdR("suc",{danh:4,sung:2},{danh:-3}),bdS({tamco:-1},{duc:2}),bdS({bac:-40},{danh:2,duc:1})],
@@ -11523,7 +11527,7 @@ Object.assign(BAL.arc.fx,{
   t1:[bdR("suc",{danh:4,sung:2},{sung:-4}),bdS({danh:-1},{sung:2,duc:1}),bdR("tamco",{sung:3,danh:2},{danh:-2},{suc:-1},50)],
   x1:[bdX(35,"suc","ride"),bdX(45,"tamco","share",{suc:-2}),{c:{danh:-2}}],
   E:{win:{fx:{sung:6,danh:4},k:1},win2:{fx:{danh:5,tamco:3},k:1},mid:{fx:{duc:1},k:0},lose:{fx:{sung:-4,danh:-3},k:-1}}}});
-Object.assign(BAL.arc.rare,{bd_san:{p:.15,c:{suc:-4},np:2,sc:2,bar:45,fx:{danh:12,sung:6},g:[8]}});
+BAL.arc.rare.bd_san={p:.15,c:{suc:-4},np:2,sc:2,bar:45,fx:{danh:12,sung:6},g:[8]};
 Object.assign(BAL.road.fx,{
  bd_san_5:{s1:[bdR("tamco",{sung:4},{sung:-3}),bdS({tamco:-1},{duc:2}),bdS({bac:-30},{mat:1})],
   s2:[bdS({suc:-2},{tamco:2,danh:1}),bdR("tamco",{mat:1,danh:2},{danh:-2},{bac:-20}),bdS({tamco:-1},{duc:2})],
@@ -11575,7 +11579,7 @@ Object.assign(BAL.road.fx,{
   t1:[bdS({suc:-1},{sung:3}),bdS({sung:-1},{duc:3}),bdS({tamco:-1},{tamco:3})],
   x1:[bdX(35,"suc","guard"),bdX(35,"tamco","scout",{suc:-2}),bdX(50,"duc","share",{danh:-2})],
   E:Object.assign(bdE({sung:8,danh:5},{danh:-5,sung:-3}),{lose:{fx:{danh:-5,sung:-3},k:-1,g:[-3]}})}});
-Object.assign(BAL.road.rare,{bd_san_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:12,sung:6},bar:45,g:[8]}});
+BAL.road.rare.bd_san_11={p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:12,sung:6},bar:45,g:[8]};
 Object.assign(BAL.arc.fx,{
  bd_soi:{s1:[bdR("tamco",{duc:2,sung:2},{sung:-2},{bac:-30}),bdS({duc:-1},{mat:1,tamco:1}),bdS({bac:-40},{duc:3})],
   s2:[bdS({tamco:-1},{mat:1}),bdR("sung",{sung:3,danh:1},{danh:-2},{suc:-1}),bdS({danh:-1},{mat:1,bac:30})],
@@ -11584,7 +11588,7 @@ Object.assign(BAL.arc.fx,{
   t1:[bdR("sung",{sung:4},{sung:-3}),bdS({duc:-2},{tamco:2,mat:1}),bdS({sung:-1},{duc:3})],
   x1:[bdX(40,"tamco","kin",{suc:-2}),bdX(35,"sung","cold"),{c:{danh:-2},w:{duc:1}}],
   E:{win:{fx:{danh:5,sung:3},k:1},win2:{fx:{danh:4,duc:3},k:1},mid:{fx:{duc:1},k:0},lose:{fx:{danh:-3,sung:-3},k:-1,g:[-2]}}}});
-Object.assign(BAL.arc.rare,{bd_soi:{p:.15,c:{suc:-4},np:2,sc:2,bar:45,fx:{danh:12,duc:6},g:[8]}});
+BAL.arc.rare.bd_soi={p:.15,c:{suc:-4},np:2,sc:2,bar:45,fx:{danh:12,duc:6},g:[8]};
 Object.assign(BAL.road.fx,{
  bd_soi_5:{s1:[bdR("sung",{sung:4},{sung:-3}),bdS({tamco:-1},{mat:1}),bdS({duc:-2},{tamco:3})],
   s2:[bdS({tamco:-1},{duc:3}),bdS({duc:-1},{mat:1,tamco:1}),bdS({bac:-40},{tamco:2,mat:1})],
@@ -11638,7 +11642,7 @@ Object.assign(BAL.road.fx,{
   t1:[bdS({sung:-1},{danh:3}),bdS({tamco:-1},{sung:2,duc:1}),bdR("sung",{tamco:3,danh:2},{sung:-4},{suc:-1})],
   x1:[bdX(45,"sung","heir"),bdX(45,"duc","peace",{suc:-2}),bdX(50,"tamco","self",{duc:-3})],
   E:Object.assign(bdE({danh:10,sung:5},{danh:-6,sung:-4}),{lose:{fx:{danh:-6,sung:-4},k:-1,g:[-4]}})}});
-Object.assign(BAL.road.rare,{bd_soi_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:14,duc:6},bar:45,g:[10]}});
+BAL.road.rare.bd_soi_11={p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:14,duc:6},bar:45,g:[10]};
 
 /* ---- writer-2 block: bd_tuyet, bd_hen ---- */
 /* shapes: the lead block's bdR (risky) / bdS (sure) / bdX (climax, −rk per rank step) / bdE / bdG; bd2E = bdE with the ending go amounts (Biên cương, e67bien) */
@@ -11658,8 +11662,8 @@ Object.assign(BAL.arc.fx,{
   t1:[bdR("tamco",{tamco:2,duc:1},{danh:-4}),bdS({tamco:-1},{duc:3}),bdS({duc:-2},{sung:3})],
   x1:[bdX(35,"sung","that|phan"),bdX(45,"tamco","tinh",{suc:-2}),{c:{danh:-2},w:{duc:1}}],
   E:{win:{fx:{sung:6,danh:4},k:1},win2:{fx:{tamco:3,mat:2},k:1},mid:{fx:{duc:1},k:0},lose:{fx:{sung:-4,danh:-3},k:-1}}}});
-Object.assign(BAL.arc.rare,{bd_tuyet:{p:.15,c:{suc:-4},np:2,sc:2,bar:45,fx:{danh:10,duc:6,sung:4},g:[8]},
- bd_hen:{p:.15,c:{suc:-4},np:2,sc:2,bar:45,fx:{danh:10,sung:6,duc:3}}});
+BAL.arc.rare.bd_tuyet={p:.15,c:{suc:-4},np:2,sc:2,bar:45,fx:{danh:10,duc:6,sung:4},g:[8]};
+BAL.arc.rare.bd_hen={p:.15,c:{suc:-4},np:2,sc:2,bar:45,fx:{danh:10,sung:6,duc:3}};
 Object.assign(BAL.road.fx,{
  bd_tuyet_5:{s1:[bdR("tai",{danh:3},{danh:-2}),bdS({bac:-60},{duc:3}),bdS({suc:-1},{tamco:1})],
   s2:[bdR("danh",{danh:3},{danh:-2}),bdR("tamco",{mat:2,tamco:1},{duc:-2},{suc:-1}),bdS({bac:-60},{duc:3})],
@@ -11765,8 +11769,8 @@ Object.assign(BAL.road.fx,{
   t1:[bdS({suc:-2},{duc:2,danh:1}),bdS({duc:-2},{tamco:2,mat:1}),bdS({suc:-1},{tamco:1})],
   x1:[bdX(35,"tai","nghia|tinh"),bdX(45,"duc","that|le",{suc:-2}),{c:{danh:-2},w:{duc:1}}],
   E:bd2E({danh:10,sung:5},{danh:-6,sung:-4},6,-6)}});
-Object.assign(BAL.road.rare,{bd_tuyet_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:14,duc:6},bar:45,g:[10]},
- bd_hen_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:14,sung:6},bar:45,g:[10]}});
+BAL.road.rare.bd_tuyet_11={p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:14,duc:6},bar:45,g:[10]};
+BAL.road.rare.bd_hen_11={p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:14,sung:6},bar:45,g:[10]};
 /* ================= jroad: FULL ORIGIN ROADS, chapters 4–11 (owner OD:L1223/L1226/L1242; map dev/story/ROAD_MAP.md §3–§4) =================
    A road = one of the origin's four j67 premises grown into 8 chapters. Chapter .4 IS the premise arc ARC67[road] (unchanged); chapters
    .5–.11 are registered here as j67 arcs ARC67["<road>_<n>"] with o:"rd" (outside every pool: arcIds67 never deals them), so the j67
@@ -77960,7 +77964,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="164d3aa9c592";window.CTM_BUILD=BUILD;
+const BUILD="b9390bdbd02e";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

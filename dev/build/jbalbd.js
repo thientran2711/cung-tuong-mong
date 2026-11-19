@@ -7,10 +7,14 @@ BAL.road.bd=BAL.road.bd||{};
 BAL.road.bd.rk=1;
 BAL.road.bd.man={age:{d:30,lie:48,olac:17,thatmoc:32,asnc:58,phong:24},trait:{thatmoc:"tham vọng",phong:"trung hậu",olac:"cẩn trọng"},loyal:60,away:1e9};/* steppe men in the capital (S.men) */
 BAL.road.bd.conf={san10:2,soi8:2};/* months of cấm túc a lost chapter puts her under (S.confined) */
-const bdR=(st,w,l,c,b)=>({c:c||{suc:-2},o:[b||45,["d",st,5],["-m","rank",BAL.road.bd.rk]],w,l,sc:1});/* risky: odds on one stat */
+BAL.road.bd.def={c:{suc:-2},cx:{suc:-3},mid:{duc:1},sc:1,b:45,d:5,f:10};/* the shapes' default cost / climax cost / mid ending / Lợi thế / base odds / stat divisor / flag bonus */
+const D_=BAL.road.bd.def;
+/* the rare tables share road ids with the fx tables (BAL.arc.fx.bd_san + BAL.arc.rare.bd_san), so they are set key by key (BAL.arc.rare.<id>=…):
+   one-core-guard reads every Object.assign(BAL…,{key}) as one flat key space */
+const bdR=(st,w,l,c,b)=>({c:c||D_.c,o:[b||D_.b,["d",st,D_.d],["-m","rank",BAL.road.bd.rk]],w,l,sc:D_.sc});/* risky: odds on one stat */
 const bdS=(c,w)=>({c,w});/* sure: a cost and a smaller gain */
-const bdX=(b,st,f,c)=>({c:c||{suc:-3},o:[b,["d",st,5],["f",f,10,0],["-m","rank",BAL.road.bd.rk]]});/* climax: base + stat + the chapter's flag */
-const bdE=(w,l)=>({win:{fx:w,k:1},mid:{fx:{duc:1},k:0},lose:{fx:l,k:-1}});
+const bdX=(b,st,f,c)=>({c:c||D_.cx,o:[b,["d",st,D_.d],["f",f,D_.f,0],["-m","rank",BAL.road.bd.rk]]});/* climax: base + stat + the chapter's flag */
+const bdE=(w,l)=>({win:{fx:w,k:1},mid:{fx:D_.mid,k:0},lose:{fx:l,k:-1}});
 const bdG=(o,g)=>Object.assign(o,{g});
 Object.assign(BAL.arc.fx,{
  bd_san:{s1:[bdR("suc",{danh:4,sung:2},{danh:-3}),bdS({tamco:-1},{duc:2}),bdS({bac:-40},{danh:2,duc:1})],
@@ -20,7 +24,7 @@ Object.assign(BAL.arc.fx,{
   t1:[bdR("suc",{danh:4,sung:2},{sung:-4}),bdS({danh:-1},{sung:2,duc:1}),bdR("tamco",{sung:3,danh:2},{danh:-2},{suc:-1},50)],
   x1:[bdX(35,"suc","ride"),bdX(45,"tamco","share",{suc:-2}),{c:{danh:-2}}],
   E:{win:{fx:{sung:6,danh:4},k:1},win2:{fx:{danh:5,tamco:3},k:1},mid:{fx:{duc:1},k:0},lose:{fx:{sung:-4,danh:-3},k:-1}}}});
-Object.assign(BAL.arc.rare,{bd_san:{p:.15,c:{suc:-4},np:2,sc:2,bar:45,fx:{danh:12,sung:6},g:[8]}});
+BAL.arc.rare.bd_san={p:.15,c:{suc:-4},np:2,sc:2,bar:45,fx:{danh:12,sung:6},g:[8]};
 Object.assign(BAL.road.fx,{
  bd_san_5:{s1:[bdR("tamco",{sung:4},{sung:-3}),bdS({tamco:-1},{duc:2}),bdS({bac:-30},{mat:1})],
   s2:[bdS({suc:-2},{tamco:2,danh:1}),bdR("tamco",{mat:1,danh:2},{danh:-2},{bac:-20}),bdS({tamco:-1},{duc:2})],
@@ -72,7 +76,7 @@ Object.assign(BAL.road.fx,{
   t1:[bdS({suc:-1},{sung:3}),bdS({sung:-1},{duc:3}),bdS({tamco:-1},{tamco:3})],
   x1:[bdX(35,"suc","guard"),bdX(35,"tamco","scout",{suc:-2}),bdX(50,"duc","share",{danh:-2})],
   E:Object.assign(bdE({sung:8,danh:5},{danh:-5,sung:-3}),{lose:{fx:{danh:-5,sung:-3},k:-1,g:[-3]}})}});
-Object.assign(BAL.road.rare,{bd_san_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:12,sung:6},bar:45,g:[8]}});
+BAL.road.rare.bd_san_11={p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:12,sung:6},bar:45,g:[8]};
 Object.assign(BAL.arc.fx,{
  bd_soi:{s1:[bdR("tamco",{duc:2,sung:2},{sung:-2},{bac:-30}),bdS({duc:-1},{mat:1,tamco:1}),bdS({bac:-40},{duc:3})],
   s2:[bdS({tamco:-1},{mat:1}),bdR("sung",{sung:3,danh:1},{danh:-2},{suc:-1}),bdS({danh:-1},{mat:1,bac:30})],
@@ -81,7 +85,7 @@ Object.assign(BAL.arc.fx,{
   t1:[bdR("sung",{sung:4},{sung:-3}),bdS({duc:-2},{tamco:2,mat:1}),bdS({sung:-1},{duc:3})],
   x1:[bdX(40,"tamco","kin",{suc:-2}),bdX(35,"sung","cold"),{c:{danh:-2},w:{duc:1}}],
   E:{win:{fx:{danh:5,sung:3},k:1},win2:{fx:{danh:4,duc:3},k:1},mid:{fx:{duc:1},k:0},lose:{fx:{danh:-3,sung:-3},k:-1,g:[-2]}}}});
-Object.assign(BAL.arc.rare,{bd_soi:{p:.15,c:{suc:-4},np:2,sc:2,bar:45,fx:{danh:12,duc:6},g:[8]}});
+BAL.arc.rare.bd_soi={p:.15,c:{suc:-4},np:2,sc:2,bar:45,fx:{danh:12,duc:6},g:[8]};
 Object.assign(BAL.road.fx,{
  bd_soi_5:{s1:[bdR("sung",{sung:4},{sung:-3}),bdS({tamco:-1},{mat:1}),bdS({duc:-2},{tamco:3})],
   s2:[bdS({tamco:-1},{duc:3}),bdS({duc:-1},{mat:1,tamco:1}),bdS({bac:-40},{tamco:2,mat:1})],
@@ -135,7 +139,7 @@ Object.assign(BAL.road.fx,{
   t1:[bdS({sung:-1},{danh:3}),bdS({tamco:-1},{sung:2,duc:1}),bdR("sung",{tamco:3,danh:2},{sung:-4},{suc:-1})],
   x1:[bdX(45,"sung","heir"),bdX(45,"duc","peace",{suc:-2}),bdX(50,"tamco","self",{duc:-3})],
   E:Object.assign(bdE({danh:10,sung:5},{danh:-6,sung:-4}),{lose:{fx:{danh:-6,sung:-4},k:-1,g:[-4]}})}});
-Object.assign(BAL.road.rare,{bd_soi_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:14,duc:6},bar:45,g:[10]}});
+BAL.road.rare.bd_soi_11={p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:14,duc:6},bar:45,g:[10]};
 
 /* ---- writer-2 block: bd_tuyet, bd_hen ---- */
 /* shapes: the lead block's bdR (risky) / bdS (sure) / bdX (climax, −rk per rank step) / bdE / bdG; bd2E = bdE with the ending go amounts (Biên cương, e67bien) */
@@ -155,8 +159,8 @@ Object.assign(BAL.arc.fx,{
   t1:[bdR("tamco",{tamco:2,duc:1},{danh:-4}),bdS({tamco:-1},{duc:3}),bdS({duc:-2},{sung:3})],
   x1:[bdX(35,"sung","that|phan"),bdX(45,"tamco","tinh",{suc:-2}),{c:{danh:-2},w:{duc:1}}],
   E:{win:{fx:{sung:6,danh:4},k:1},win2:{fx:{tamco:3,mat:2},k:1},mid:{fx:{duc:1},k:0},lose:{fx:{sung:-4,danh:-3},k:-1}}}});
-Object.assign(BAL.arc.rare,{bd_tuyet:{p:.15,c:{suc:-4},np:2,sc:2,bar:45,fx:{danh:10,duc:6,sung:4},g:[8]},
- bd_hen:{p:.15,c:{suc:-4},np:2,sc:2,bar:45,fx:{danh:10,sung:6,duc:3}}});
+BAL.arc.rare.bd_tuyet={p:.15,c:{suc:-4},np:2,sc:2,bar:45,fx:{danh:10,duc:6,sung:4},g:[8]};
+BAL.arc.rare.bd_hen={p:.15,c:{suc:-4},np:2,sc:2,bar:45,fx:{danh:10,sung:6,duc:3}};
 Object.assign(BAL.road.fx,{
  bd_tuyet_5:{s1:[bdR("tai",{danh:3},{danh:-2}),bdS({bac:-60},{duc:3}),bdS({suc:-1},{tamco:1})],
   s2:[bdR("danh",{danh:3},{danh:-2}),bdR("tamco",{mat:2,tamco:1},{duc:-2},{suc:-1}),bdS({bac:-60},{duc:3})],
@@ -262,5 +266,5 @@ Object.assign(BAL.road.fx,{
   t1:[bdS({suc:-2},{duc:2,danh:1}),bdS({duc:-2},{tamco:2,mat:1}),bdS({suc:-1},{tamco:1})],
   x1:[bdX(35,"tai","nghia|tinh"),bdX(45,"duc","that|le",{suc:-2}),{c:{danh:-2},w:{duc:1}}],
   E:bd2E({danh:10,sung:5},{danh:-6,sung:-4},6,-6)}});
-Object.assign(BAL.road.rare,{bd_tuyet_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:14,duc:6},bar:45,g:[10]},
- bd_hen_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:14,sung:6},bar:45,g:[10]}});
+BAL.road.rare.bd_tuyet_11={p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:14,duc:6},bar:45,g:[10]};
+BAL.road.rare.bd_hen_11={p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:14,sung:6},bar:45,g:[10]};
