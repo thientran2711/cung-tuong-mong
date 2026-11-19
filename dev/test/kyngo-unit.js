@@ -4,7 +4,8 @@
    4 ONCE PER LIFE: a met id is never eligible again · 5 CONSERVATION: vat_lac return / keep — the piece is in exactly one chest, the case
    follows (held + keep by the finder = two-way recognition road) · 6 NPC finds HER lost piece (she is the owner in law 1) · 7 OLD SAVE: S / NPC
    without ky load and roll lazily · 8 Sổ luân hồi line renders, life line gets "Kỳ ngộ: …" · 9 ilAudit net stays 0 · 10 every card text is
-   cổ trang (no %, no OK words) · 11 the card is a PEND event in cost mode with an evId "kyngo:<id>" and a who face. */
+   cổ trang (no %, no OK words) · 11 the card is a PEND event in cost mode with an evId "kyngo:<id>" and a who face · 12 she is the WHO of an NPC's
+   encounter (pass at the end of her buổi, household with her) · 13 co-op friend entry never rolls · 14/15 no card with every option unpayable. */
 const {chromium}=require('playwright');const [,,URL]=process.argv;
 (async()=>{const b=await chromium.launch();const p=await (await b.newContext({viewport:{width:1180,height:820},serviceWorkers:'block'})).newPage();
  const errs=[];p.on('pageerror',e=>errs.push(e.message));
@@ -54,6 +55,25 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
   const bh=KY.bookHTML();ck("8 Sổ luân hồi block",/Kỳ ngộ/.test(bh)&&/kỳ ngộ đã gặp/.test(bh));
   /* 9 ledger */
   try{ilCensus();ck("9 ilAudit net 0",ilS().net===0,{net:ilS().net})}catch(e){ck("9 ilAudit",false,String(e))}
+  /* 12 (r2 F2) she is the WHO of an NPC's encounter: the NPC pass runs at the end of HER buổi, she walked there, her household with her */
+  {const D=KY.DEF.th_kinh,pl0=D.pl,wh0=D.when,wo0=D.who;const seen=[];D.pl=["*"];D.when=null;D.who=(F,L)=>{if(F!==S)seen.push({me:L.some(w=>w.kind==="rv"&&w.ref===S),hh:L.some(w=>w.own===S)});return null};
+   S.kyAt={b:wk()*B4N+(S.buoi||0),k:{}};for(const pl of places())S.kyAt.k[pl.k]=1;
+   if(!(S.staff||[]).length)S.staff=[{name:"Thử",role:"maid",alive:true,loyal:50}];
+   for(const v of liveRivals(true)){v.ky={m:0,cd:-1,seen:{},got:[],last:-1};for(const id in KY.DEF)if(id!=="th_kinh")v.ky.seen[id]=0}
+   KY.npcPass();ck("12 she is in the NPC's WHO list (end of her buổi)",seen.some(x=>x.me),{n:seen.length});ck("12b her servants walk with her",seen.some(x=>x.hh));
+   /* nextBuoi: the pass runs BEFORE the advance (the old wrap ran after → meHere looked at the new buổi) */
+   seen.length=0;for(const v of liveRivals(true))v.ky.last=-1;Q.length=0;try{nextBuoi()}catch(e){}Q.length=0;ck("12c nextBuoi → NPC pass sees her this buổi",seen.some(x=>x.me),{n:seen.length});
+   /* 13 (r2 F3) co-op: the friend entry (a human) never rolls on the host */
+   const fr=liveRivals(true)[0];const F13=[];D.who=(F,L)=>{F13.push(F);return null};if(fr){fr.coop=true;for(const v of liveRivals(true))v.ky.last=-1;KY.npcPass();delete fr.coop}
+   ck("13 co-op friend entry never rolls",fr&&F13.length>0&&!F13.includes(fr),{n:F13.length});
+   D.pl=pl0;D.when=wh0;D.who=wo0}
+  /* 14 (r2 F5) no card whose every option asks more Bạc than she has (vat_ngu: both options carry the buy price) */
+  {const D=KY.DEF.vat_ngu,pl0=D.pl,wh0=D.when,wo0=D.who,wt0=D.what;const k=Object.keys(IT).find(k=>IT[k].pr>=40&&!IT[k].nt);D.pl=["zz"];D.when=null;D.who=()=>({kind:"court",c:"ped",ref:{name:"Thử"}});D.what=()=>({rr:{k}});
+   S.ky={m:0,cd:-1,seen:{},got:[],last:-1};for(const id in KY.DEF)if(id!=="vat_ngu")S.ky.seen[id]=0;const b0=S.bac;
+   if(KY.band(S)<1||KY.band(S)>2)S.rank=1;S.bac=0;const poor=KY.elig(S,"zz").some(x=>x.id==="vat_ngu");S.bac=9999;const rich=KY.elig(S,"zz").some(x=>x.id==="vat_ngu");S.bac=b0;
+   ck("14 vat_ngu: not eligible when Bạc < price, eligible when she can pay",!poor&&rich,{poor,rich,k});D.pl=pl0;D.when=wh0;D.who=wo0;D.what=wt0}
+  /* 15 family scan of 14: the encounters whose EVERY option asks Bạc (cost or buy price) — each must be one the elig guard of 14 covers */
+  {const all=[];for(const id in B.E){const E=B.E[id];if(E.o&&E.o.every(O=>(O.c&&O.c.bac>0)||O.buy||O.s==="item"&&id!=="vat_lac"))all.push(id)}ck("15 every-option-costs-Bạc encounters = [vat_ngu] (gated by 14)",all.length===1&&all[0]==="vat_ngu",all)}
   ck("jky errors none",KY.errs.length===0,KY.errs);B.p0=p0;B.step=st0;return out});
  let f=0;for(const [n,ok,i] of R){if(!ok)f++;console.log((ok?"ok   ":"FAIL ")+n+(i?" · "+i:""))}
  if(errs.length){f++;console.log("FAIL page errors",errs.slice(0,3))}console.log(f?"FAIL "+f:"PASS");await b.close();process.exit(f?1:0)})();

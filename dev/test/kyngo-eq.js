@@ -14,5 +14,12 @@ for(const id in B.E){const E=B.E[id];
  for(const b of String(E.b).split('').map(Number)){const V=E.o.map(O=>val(O,b));const mx=Math.max(...V),mn=Math.min(...V);const r=mn>0?mx/mn:99;
   const why=[];if(r>B.eqTol)why.push('unequal '+r.toFixed(2));E.o.forEach((O,i)=>{if(!gain(O))why.push(`opt${i+1} no gain`);if(!cost(O)&&!O.buy)why.push(`opt${i+1} no real cost`)});
   if(why.length)bad++;rows.push([id,'band '+b,'',V.join(' / '),r.toFixed(2),why.length?'FAIL '+why.join(', '):'ok'])}}
+/* (r2 F7) every special priced in sv has a REAL reader: SPEC[s] exists, and every field a special writes is read somewhere else in the game */
+{const J=fs.readFileSync(path.join(__dirname,'../build/jky.js'),'utf8');const sp=J.slice(J.indexOf('const SPEC='),J.indexOf('/* ---------- her card'));
+ const others=fs.readdirSync(path.join(__dirname,'../build')).filter(f=>/^j.*\.js$/.test(f)&&f!=='jky.js').map(f=>fs.readFileSync(path.join(__dirname,'../build',f),'utf8')).join('\n');
+ const used=new Set();for(const id in B.E){const E=B.E[id];for(const O of E.o||[E.plain])if(O&&O.s)used.add(O.s)}
+ for(const s of used){const ok=new RegExp('\\b'+s+':\\(?c').test(sp)&&(B.sv[s]!=null);rows.push(['sv.'+s,'special','','','',ok?'ok':'FAIL no SPEC reader']);if(!ok)bad++}
+ const W=new Set();for(const m of sp.matchAll(/\b(?:F|s|L|P\.p|r|x)\.([A-Za-z]\w*)\s*=(?!=)/g))W.add(m[1]);
+ for(const f of W){const rd=new RegExp('\\.'+f+'\\b(?!\\s*=(?!=))').test(others);rows.push(['field .'+f,'written by a special','','','',rd?'ok':'FAIL write-only (dead gain)']);if(!rd)bad++}}
 console.log('id | band | bands | values | max/min | verdict');for(const r of rows)console.log(r.join(' | '));
 console.log(bad?`FAIL ${bad}`:'PASS (eqTol '+B.eqTol+')');process.exit(bad?1:0);

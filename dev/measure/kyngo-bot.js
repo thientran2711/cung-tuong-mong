@@ -15,7 +15,7 @@ const {chromium}=require('playwright');const [,,URL,LIVES,WEEKS,RANK,STYLE,OFF]=
     if(m&&m.ky&&m.opts&&m.opts.length){const o=m.opts[Math.floor(Math.random()*m.opts.length)];Q.shift();try{apply(o.fx||{});o.go()}catch(e){T.kyErr.push(String(e))}continue}Q.shift()}};
   for(let l=0;l<L;l++){for(let i=0;i<40;i++){try{store.set(NL_KEY,null)}catch(e){}start();let ok=false;try{ok=!isSrv()}catch(e){}if(ok)break}
    T.lives++;S.rank=RK;T.band=KY.band(S);KY.stat.reset();let last=wk(),hits=0;Q.length=0;
-   for(let w=0;w<W&&!S.dead;w++){for(let bu=0;bu<B4N&&!S.dead;bu++){T.buoi++;
+   for(let w=0;w<W&&!S.dead;w++){for(let bu=0;bu<B4N&&!S.dead;bu++){T.buoi++;S.rank=RK;/* r2: hold the rank every buổi (ma_giao etc. must not drop the band mid-life) */
      const n=ST==="home"?0:ST==="walk"?2:(Math.random()<.5?1:2);
      for(let j=0;j<n;j++){const pl=places().filter(x=>x.k!==S.place&&x.k!=="home"&&x.k[0]!=="r");const t=pl[Math.floor(Math.random()*pl.length)];if(t){try{goTo(t.k)}catch(e){}answer()}}
      const s=KY.stat.buoi();if(s.elig)T.elig++;if(s.hit){T.hit++;hits++;T.gaps.push(wk()-last);last=wk();T.ids[s.id]=(T.ids[s.id]||0)+1}

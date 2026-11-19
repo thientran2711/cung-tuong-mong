@@ -20,12 +20,19 @@ const VPS=(SIZES||"755x1000@2,1180x820@2").split(",");
   const force=async id=>p.evaluate(id=>{Q.length=0;S.ky={m:0,cd:-1,seen:{},got:[],last:-1};for(const k in KY.DEF)if(k!==id)S.ky.seen[k]=0;BAL.kyngo.p0=100;
    const D=KY.DEF[id];if(id==="th_kinh"){D._w=D.when;D.when=null}
    if(id==="vat_lac"){const v=liveRivals(true).find(x=>(x.inv||[]).some(e=>e&&loOk(e)));if(v)loLose(v,{cause:"mis"});Q.length=0}
-   const k=D.pl[0]==="*"?"vuon":D.pl[0];KY.arrive(S,k,"shot");if(D._w)D.when=D._w;showModal();return Q[0]&&Q[0].evId},id);
+   /* r2 F4: a piece whose NAME holds a bad-sounding word («Son điểm giáng») — its gain must stay under ĐƯỢC, never TỐN */
+   if(id==="vat_lac_g"){id="vat_lac";const v=liveRivals(true)[0];const e={k:"lxson2",from:"shot"};v.inv=v.inv||[];v.inv.push(e);loLoseE(v,e,"mis");Q.length=0;
+    for(const k in KY.DEF)if(k!=="vat_lac")S.ky.seen[k]=0;const L=KY.elig(S,"vuon").filter(x=>x.id==="vat_lac"&&x.X.lc.e===e);KY.DEF.vat_lac._x=KY.DEF.vat_lac.what;KY.DEF.vat_lac.what=()=>L[0]?L[0].X:null}
+   const k=D.pl[0]==="*"?"vuon":D.pl[0];KY.arrive(S,k,"shot");if(D._w)D.when=D._w;if(D._x){D.what=D._x;delete D._x}showModal();return Q[0]&&Q[0].evId},id);
   const shot=async n=>{await sleep(1500);await p.screenshot({path:`${OUT}/${sz}-${n}.png`});
    const m=await p.evaluate(()=>{const M=document.getElementById('modal');const r=M&&M.getBoundingClientRect();const o=[...document.querySelectorAll('#modal .opt')].map(x=>x.getBoundingClientRect()).filter(x=>x.width);
     return {open:!!M&&!M.hidden,ovx:document.documentElement.scrollWidth>innerWidth+1,optsIn:o.every(x=>x.bottom<=innerHeight+1&&x.right<=innerWidth+1),n:o.length}});return m};
   let id=await force("th_kinh");let m=await shot("1-choice");ck(`${sz} choice card (${id})`,m.open&&!m.ovx&&m.optsIn&&m.n>=2,m);
   await p.evaluate(()=>{const o=document.querySelector('#modal .opt');if(o)o.click()});m=await shot("2-result");ck(`${sz} result card`,m.open&&!m.ovx,m);
   id=await force("vat_lac");m=await shot("3-found-piece");ck(`${sz} found piece card (${id})`,id==="kyngo:vat_lac"&&m.open&&!m.ovx&&m.optsIn,m);
+  await p.evaluate(()=>{Q.length=0;const M=document.getElementById('modal');if(M)M.hidden=true});
+  id=await force("vat_lac_g");m=await shot("4-found-giang");
+  const g=await p.evaluate(()=>[...document.querySelectorAll('#modal .opt')].map(o=>{const t=o.innerText.replace(/\s+/g," ");const i=t.search(/Son điểm giáng/),j=t.search(/(ĐƯỢC|Được|được)/),k=t.search(/(TỐN|Tốn|tốn)/);return {t:t.slice(0,160),inGain:i>=0&&j>=0&&i>j,underCost:i>=0&&k>=0&&k<i&&(j<0||j>i)}}));
+  ck(`${sz} «giáng» piece: gain under ĐƯỢC on both options, never under TỐN`,id==="kyngo:vat_lac"&&g.length===2&&g.every(x=>!x.underCost),g);
   ck(`${sz} page errors`,errs.length===0,errs);await ctx.close()}
  console.log(fail?`FAIL ${fail}`:'PASS');await b.close();process.exit(fail?1:0)})();
