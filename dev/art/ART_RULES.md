@@ -141,7 +141,7 @@ I4 | THÁI HẬU (owner Lượt 607 + 616 + 618): every woman gets Thái hậu a
 
 ## J. Ages and colours (18 / 26 / 36 / 51 / 65)
 J1 | a18/a26/a36: colours "tươi kiểu trầm" (B14); never "dusty/muted/greyed" in a young prompt. | 18/11 23:20Z; 19/11 00:10Z | FG 103
-J2 | a51 and a65 (everyone, every rank, maids too): elegant calm elder colours = the person's OWN base colour made deeper/lower-saturation (trầm = less saturation, not dark); a65 more muted; never fresh/vivid, never black or brown. | Lượt 397; 18/11 21:06Z, 22:50Z | FG 11, 238, 234
+J2 | a51 and a65 (owner Lượt 620; everyone, every group, every rank, maids too): ELDER COLOURS = the person's own colours turned into the colours of an older woman — DEEPER, darker-toned, richer and more muted, calm and dignified (điềm tĩnh), like the 18/11 Thái hậu pictures (deep plum-purple + old gold, deep vermilion-maroon + ochre gold); a65 deeper/quieter than a51; NOT the 'less saturated, same lightness, never darker' version (TH1 Lượt 615 looked too young/fresh). Never fresh/vivid/rực, never grey, never black or brown-mud. Young ages a18–a36 keep B18. | Lượt 620 (19/11) | FG - | over: Lượt 397; 18/11 21:06Z, 22:50Z
 J3 | a51/a65 dress reads dignified through the costume; pose calm but still interacting with the item. | 18/11 04:05Z, 15:55Z | FG 178, 200
 J4 | Trung y / lãnh cung a51/a65: deeper clause but hue stays inside that rank's pale trung-y colour family. | 19/11 01:30Z | FG 138
 J5 | a65 Emperor = consort a65 age text adapted: silver hair + silver beard, still majestic; young Emperor (a18/a26) clean-shaven. | Lượt 170; 18/11 23:15Z | FG 529, 240
