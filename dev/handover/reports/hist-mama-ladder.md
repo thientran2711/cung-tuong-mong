@@ -76,3 +76,19 @@ The word 嬷嬷 / 妈妈 (Manchu *mama* = "grandmother, old woman") is a **role 
 
 ## Uncertain list ([?])
 exact stipend of senior maids; the precise rank or title of 精奇嬷嬷 in rules; exact release age in each reign; whether the Qing kept a formal "女官" row at all; the memoir example.
+
+## WEB VERIFICATION (19/11, standard WebSearch ×3; secondary sources only; primary texts still not read)
+| item | result | source |
+|---|---|---|
+| Release age of Qing maids ~25 | **CONFIRMED (corrected: 25 or 30, favoured maids may stay longer; mostly out before 25 from Yongzheng on)**. Game 25 / forced out 30 matches. Second-hand citation of 《钦定大清会典事例》. | [bjnews](https://www.bjnews.com.cn/detail/1764511797169590.html), [thepaper 21531040](https://www.thepaper.cn/newsDetail_forward_21531040) |
+| Maids = bao yi girls of the Upper Three Banners, chosen in the yearly Nội vụ phủ draft | **CONFIRMED** | [thepaper 9486151](https://www.thepaper.cn/newsDetail_forward_9486151), [ancientwarhistory](https://ancientwarhistory.com/the-hidden-world-of-qing-dynasty-palace-maids-selection-life-and-legacy/) |
+| Ma ma (嬷嬷/妈妈) come from OUTSIDE the maid draft: banner women selected separately, not through the xiunu/maid levy; ma ma and maids have their own grades (頭等/二等 for maids; ma ma also graded) | **CONFIRMED** (Renmin Univ. / Palace Museum scholars' dialogue). Supports: ma ma is not a promotion of the maid ladder, and she has her own internal grades | [thepaper 9486151](https://www.thepaper.cn/newsDetail_forward_9486151) |
+| Wet nurses prominent, hired outside; Puyi's nurse Wang Lianshou (late Qing) | **CONFIRMED in kind** | [SCMP](https://www.scmp.com/magazines/post-magazine/short-reads/article/3091590/chinas-imperial-wet-nurses-how-these-mothers), [Wikipedia Wang Lianshou](https://en.wikipedia.com/wiki/Wang_Lianshou) |
+| Lady Sun as Kangxi's 保母 | **STILL UNSURE via search** (not surfaced); keep as [MIX] from Spence / Zhou Ruchang; do not quote to the owner as sourced here |  |
+| 精奇嬷嬷 / 教引嬷嬷 exact duty and rank | **STILL UNSURE**; no source found. Use "teaching ma ma" in plain words only |  |
+| Senior maid pay (1–2 taels) | **STILL UNSURE**; keep numbers out of the game text |  |
+| Qing had no formal 女官 ladder; 掌事姑姑 a title | **STILL UNSURE for "no 女官"**; no source calls 掌事姑姑 an official post. Qing consort ranks are 8 (Hoàng hậu to Đáp ứng) from Kangxi, a separate system from servants (confirmed) | [Wikipedia imperial Chinese harem](https://kaweah.freedombox.rocks/kiwix/wikipedia_en_all_maxi_2023-10/Guifei) |
+| Ming had real 女官 with rank, honorary robes up to 5th rank, retirement with stipend | **CONFIRMED in outline** (6 bureaus table not found) | [newhanfu](https://www.newhanfu.com/65016.html), [Mingshi juan 74](https://zh.wikisource.org/wiki/%E6%98%8E%E5%8F%B2_(%E5%9B%9B%E5%BA%AB%E5%85%A8%E6%9B%B8%E6%9C%AC)/%E5%8D%B7074) |
+Best further source named by the searches: 毛立平、沈欣《壸政：清代后宫女性研究》, with a whole part on maids and 嬷嬷, their internal grades, mobility and relation to the mistress. A human should read it before any hard claim.
+
+**Verdict:** the recommendation is **unchanged**; the new evidence (ma ma enter by a separate banner-women selection, with their own grades) makes "ma ma is not a rung of the maid ladder" stronger, so the UI should say plainly that ma ma is a separate stay-on road shown as the 6th chip, gated by age 25 + senior rung + exam.
