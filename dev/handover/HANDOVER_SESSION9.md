@@ -1027,3 +1027,6 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - Live drift: role-parity.test red on 25 cx2 rows since live-servants → B order 02:40Z.
 - ROOT-62 hourly wake trig_01C2S2p4bs1sLp6uM4FdqS6h → ROOT-62 DELETES it after opening ROOT-63; ROOT-63 sets its own (minute 32).
 - (19/11 03:37Z) ROOT-63 opened = session_01Rc5AsN8fHJWShQ7rSPxjx5 (opus, depth 1). ROOT-62 wake trig_01C2S2p4bs1sLp6uM4FdqS6h DELETED. ROOT-62 stops.
+
+## MAIN = ROOT-63 session_01Rc5AsN8fHJWShQ7rSPxjx5; START_CTX ~5 % of 1M; depth 1 (limit 8)
+- (03:35Z) LOAD: main running 3 (errand rv MQH6saAB + errand worker L23c5v2N + odds-meter-back Jj8qdidm; owner bugs/UI/go-live only) | B free 5 | C art (emo-anim TOP #1, face seals #2) | D running parallel-time/receiver-choice/rare-reach | E running ge-writers-w2 + kỳ ngộ thường ngày | moved: none. Hourly wake trig_01Cnbswe4uCLj5pyPQCEyp1S (minute 32).
