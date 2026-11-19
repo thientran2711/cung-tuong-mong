@@ -36,3 +36,14 @@ Total ≈ 2 × 135 + 3 × 940 = 3 090 cr (+135 per redone keyframe). simulate_co
 ## 4. Cut (after creations_register_download)
 dev/art/emo-anim/mo/cut.py (edge-only despill) or cut.sh: 288 px, 15 fps, animated webp alpha, loop 0 for the LOOP file and loop 1 + ANIM bg 00000000 for -out/-back (per order). OUT trimmed to the burst, BACK from slide-in, last BACK frame = still. Still `th-gian` static = keyframe A cut to 160 px.
 Output: img/_review/emo-anim-groups/th-gian-out.webp, th-gian.webp, th-gian-back.webp (+ still/th-gian.webp) + frame sheet img/_review/emo-anim-groups/th-gian-frames.jpg.
+
+## RESULT (19/11 ~21:56Z) — gens run by ROOT-56 with the prompts above; cut + check by CP1
+Ids: A eIPl4i6dqL · B s7IMhSkl8e (= u5W30sFQLD flattened on green) · OUT 8ai7ZqUIrU · LOOP jUoTtNALD0 · BACK UPvdCAuwny · 3 090 cr.
+Cut: `python3 dev/art/emo-anim/groups/th_cut.py out|loop|back in.mp4 out.webp [start_s]` (OUT started at 1.07 s; LOOP/BACK auto).
+The Seedance screen is ≈ #00E406, not #00FF00, and the steam puffs are semi-transparent: th_cut.py un-mixes against the real screen
+colour, so puffs come out white/grey + transparent (the plain chromakey left them grey-green).
+CDN img/_review/emo-anim-groups/: th-gian-out.webp (45 fr, loop 1), th-gian.webp (60 fr, loop 0), th-gian-back.webp (60 fr, loop 1),
+all bg 00000000, 288 px 15 fps · still/th-gian.webp (160 px) · th-gian-frames.jpg (every frame, light/dark rows) · th-gian-preview.mp4
+(OUT + LOOP×2 + BACK + hold, light bg).
+Looked at every frame. Notes: OUT goes in two steps (hands on the rim, then fist out); BACK opens with a puff of steam that covers the
+hands for ~1 s and leaves a few tiny dots while it fades; the last BACK frames brighten the disc to keyframe A's colour (= the still).
