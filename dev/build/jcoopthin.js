@@ -22,7 +22,7 @@
 (function(){try{
 const CW=window.COOPW;if(!CW||!CW.X||typeof COOP!=="object")return;
 const X=CW.X,J=X.J,LS={get(k){try{return localStorage.getItem(k)}catch(e){return null}}};
-const TH=CW.thin={CAP:8/* F3 her bag / shop / wear / gifts as intents (jcoopthinf.js), F2 her places / goTo / visits as intents (jcoopthinf.js), F1 her acts as intents (jcoopthinf.js),  E buổi + night gate on the host (jcoopthine.js), B life + rebirth on the host (jcoopthinb.js), C world read-only on the guest (jcoopthinc.js), D remote dialogs (section 6) */,lvl:0,REG:[],bridge:[],rlog:[],view:null,hv:0,dn:0,dr:null,ctxN:0};
+const TH=CW.thin={CAP:9/* F4 her pets / garden / kitchen / study as intents (jcoopthinf.js), F3 her bag / shop / wear / gifts as intents (jcoopthinf.js), F2 her places / goTo / visits as intents (jcoopthinf.js), F1 her acts as intents (jcoopthinf.js),  E buổi + night gate on the host (jcoopthine.js), B life + rebirth on the host (jcoopthinb.js), C world read-only on the guest (jcoopthinc.js), D remote dialogs (section 6) */,lvl:0,REG:[],bridge:[],rlog:[],view:null,hv:0,dn:0,dr:null,ctxN:0};
 const host=()=>CW.seat==="a";
 const D={};   /* part D (remote dialogs), filled in section 6 */
 TH.on=n=>!!(CW.on&&!CW.hold&&TH.lvl>=(n||1));
@@ -195,6 +195,7 @@ TH.NOOP.push("resultShow");
    E's buổi step, B's life, C's world frame and D's deferred work stay quiet (turns that are not her tap). */
 const UICAP=new Set(["srvToast","kitLine","kitStatFx","feedback","kitCoins","kitGain","kitLose","kitReward","kitLearn","stipReveal","kitItemFx","kitSfx"/* F3 r1 review: her act sounds (jsfx W buy / sellItem / wkSell / giveTo → kitSfx) were silenced on the host and never played on her phone */]);
 for(const n of UICAP)if(!TH.NOOP.includes(n))TH.NOOP.push(n);
+TH.UICAP=UICAP;/* F4: a part adds the screen redraws it captures itself (its own wrappers push them to TH.uiCap); TH.uiPlay plays only names in this set */
 const uiArg=a=>{try{return JSON.parse(JSON.stringify(a,(k,v)=>typeof v==="function"||(typeof Node!=="undefined"&&v instanceof Node)?undefined:v))}catch(e){return null}};
 TH.tapRun=function(fn){const q0=quiet,u0=TH.uiCap;quiet=false;TH.uiCap=[];let r,ui;try{r=fn()}finally{quiet=q0;ui=TH.uiCap;TH.uiCap=u0}return {r,ui:ui&&ui.length?ui.slice(0,12):null}};
 /* guest: what her run on the host captured, played once on her own screen */
