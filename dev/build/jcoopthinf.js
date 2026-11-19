@@ -36,7 +36,7 @@ const PRE={};/* name → the function below the wrapper (the host runs it) */
 let snapV=null;
 if(typeof rsnap==="function"){const r0=rsnap;rsnap=function(){const o=r0.apply(this,arguments);if(CW.ctx&&o&&typeof o==="object")try{Object.defineProperty(o,"__ctx",{value:CW.ctx})}catch(e){}snapV=o;Promise.resolve().then(()=>{if(snapV===o)snapV=null});return o}}
 function cardLater(p,dr){const b=p.bf;if(!b||!dr||!dr.r||dr.r.st!=="ok"||typeof resultShow!=="function")return;
- setTimeout(()=>{try{if(!S||S.dead)return;if(p.force||(S.logSeq||0)!==b.seq||RKEYS.some(([k])=>(S[k]||0)!==b[k])){F.stat.card=(F.stat.card|0)+1;resultShow(p.ttl||"",b,p.force?true:null)}}catch(e){console.error("thin F card",e)}},0)}
+ setTimeout(()=>{try{if(!S||S.dead)return;if(p.force||(S.logSeq||0)!==b.seq||RKEYS.some(([k])=>(S[k]||0)!==b[k])){F.stat.card=(F.stat.card|0)+1;const R=F.R[p.n];resultShow(p.ttl||"",b,p.force?true:(R&&R.okHint?R.okHint():null))}}catch(e){console.error("thin F card",e)}},0)}
 function gOn(lv){return on(lv)&&!host()&&!!CW.seat&&!CW.ctx&&!!S&&!S.dead&&!CW.inLife&&!CW.inFC&&!CW.allow&&!CW.allowN&&!(TH.C&&TH.C.inWorld&&TH.C.inWorld())}
 function line(t){try{if(typeof kitLine==="function")kitLine(t);else log(t)}catch(e){}}
 function sendF(p){COOP.send({t:"do",op:"f",args:p.msg,base:TH.view?TH.view.v:0,id:p.id});E.last=p.id;p.at=Date.now()}
@@ -50,7 +50,7 @@ function intent(name,args){const R=F.R[name],t00=performance.now();
  let ops=[],cur=null;try{cur=E.curP();ops=TH.pDiff(E.base(V),cur)}catch(e){console.error("thin F diff",e)}
  const L=E.packs(ops);const last=L.pop()||[];const rid="f"+Date.now().toString(36)+Math.random().toString(36).slice(2,5);
  L.forEach((o,i)=>TH.doSend("erd",{id:rid,i,ops:o}));if(cur)E.sent(cur);
- const p=F.pend={id:"d"+rid,n:name,msg:{n:name,a,c,ops:last},t0:Date.now(),tries:0,pre:Math.round(performance.now()-t00)};p.bf=snapV;try{if(p.bf&&R.title)p.ttl=R.title(args)}catch(e){}p.force=!!R.snap;p.args=args;p.b0=S.buoi||0;p.w0=COOP.state.week||0;p.room=COOP.state.room||"";try{p.walk=R.walk?R.walk(args):null}catch(e){p.walk=null}sendF(p);F.stat.sent++;lg(["sent",name,p.id,ops.length]);
+ const p=F.pend={id:"d"+rid,n:name,msg:{n:name,a,c,ops:last},t0:Date.now(),tries:0,pre:Math.round(performance.now()-t00)};p.bf=snapV;try{if(p.bf&&R.title)p.ttl=R.title(args)}catch(e){}p.force=!!R.snap&&R.snap!=="soft"/* F3: "soft" = the caller's own wrapR rule (a card only when something changed, its ok word from the run) */;p.args=args;p.b0=S.buoi||0;p.w0=COOP.state.week||0;p.room=COOP.state.room||"";try{p.walk=R.walk?R.walk(args):null}catch(e){p.walk=null}sendF(p);F.lastMsg=p.msg;F.stat.sent++;lg(["sent",name,p.id,ops.length]);
  /* the pending state shows at once: #next locked + her act buttons off, in this same tick (no lost tap: the tap is held as the intent) */
  const t1=performance.now();try{CW.lockNext();render()}catch(e){}p.pr=Math.round(performance.now()-t1);return true}
 function answered(dr){const p=F.pend;if(!p||!dr||dr.id!==p.id)return;F.pend=null;F.stat.ans++;const ms=Date.now()-p.t0;F.stat.ms.push(ms);if(F.stat.ms.length>40)F.stat.ms.shift();
@@ -90,6 +90,10 @@ if(typeof can==="function"){const f=can;can=function(){if(F.pend&&on()&&!host()&
 
 /* ---------- host ---------- */
 const DONE=new Map();
+/* F3 (proven gap: a registered UI function wrapped by wrapR / with its own rsnap → resultShow ran IN her context on the host and opened her
+   result card on the HOST's screen): while such a registration runs for her the card is not shown here; it shows on her phone after the
+   answer (cardLater, R.snap "soft" = the same wrapR rule as solo) */
+let NORES=0;if(typeof resultShow==="function"){const rs=resultShow;resultShow=function(){if(NORES>0&&CW.ctx)return;return rs.apply(this,arguments)}}
 function doneLoad(){try{const o=JSON.parse(localStorage.getItem(LSK())||"null");if(o&&Array.isArray(o.d))for(const [k,v] of o.d)DONE.set(k,v)}catch(e){}}
 function doneSave(){try{while(DONE.size>60)DONE.delete(DONE.keys().next().value);localStorage.setItem(LSK(),JSON.stringify({d:[...DONE]}))}catch(e){}}
 let loaded="";
@@ -103,7 +107,8 @@ TH.onDo("f",(a,m)=>{a=a||{};const id=m&&m.id;if(loaded!==LSK()){DONE.clear();don
   const args=R.dec(a.a);if(!args){out={st:"gone"}}
   else{/* F2 r2 (review r1 item 1, every registration, F1 too): her tap runs as solo (TH.tapRun: quiet off → her cards into her Q = part D
       cards on her phone; her toasts / floaters / coin and item effects captured, played on HER phone with the answer; nothing on the host's screen) */
-   const T=TH.tapRun(()=>PRE[a.n].apply(null,args)),r=T.r,ui=T.ui;F.stat.run++;if(R.log&&r)log(r);out={st:"ok",r:typeof r==="string"?r.replace(/<[^>]+>/g,"").slice(0,200):null};
+   if(R.noRes)NORES++;let T;try{T=TH.tapRun(()=>PRE[a.n].apply(null,args))}finally{if(R.noRes)NORES--}/* F3: a registered UI function's own wrapR card shows on her phone (cardLater), never here */
+   const r=T.r,ui=T.ui;F.stat.run++;if(R.log&&r)log(r);out={st:"ok",r:typeof r==="string"?r.replace(/<[^>]+>/g,"").slice(0,200):null};
    if(typeof r==="boolean")out.rv=r;if(ui&&ui.length)out.ui=ui.slice(0,4);
    if(R.back){const c={};for(const [n,g] of R.ctx||[])if(R.back.includes(n))try{const v=g();c[n]=v===undefined?null:J(v)}catch(e){}out.c=c}
    if(R.host)try{R.host(args,out)}catch(e){console.error("thin F host",e)}}}
@@ -131,10 +136,17 @@ F.reg("runAct",{log:true,title:A=>ACT[A[2]]?ACT[A[2]].n:"",
  enc:A=>{const t=A[1],k=A[2],x=A[3];const id=t[RAW]?t[RAW].id:t.id;if(id==null||!ACT[k])return null;
   const o={t:id,k};if(typeof x==="number"){o.x=x;const e=S.inv&&S.inv[x];if(e)o.xe=J(C0(e))}else if(x!=null)o.xv=J(x);return o},
  dec:a=>{if(!a||!ACT[a.k])return null;const t=(rivals||[]).find(v=>v&&v.id===a.t);if(!t||t===S)return null;let x=a.xv;
-  if(a.xe){const s=JSON.stringify(a.xe);let i=(S.inv||[]).findIndex(e=>JSON.stringify(C0(e))===s);if(i<0&&typeof a.x==="number"&&S.inv[a.x]&&S.inv[a.x].k===a.xe.k)i=a.x;if(i<0)return null;x=i}
+  if(a.xe){const i=itemFind(a.xe,a.x);if(i<0)return null;x=i}
   else if(typeof a.x==="number")x=a.x;return [S,t,a.k,x]},
  ctx:[["sg",()=>typeof SG==="object"&&SG.mod?SG.mod:null,v=>{if(typeof SG==="object")SG.mod=v}],["err",()=>S.__err||null,v=>{S.__err=v||0}]]});
 function C0(e){const o=Object.assign({},e);delete o.ci;return o}
+/* F3 (whole family, F1's runAct item too): the item she tapped, found in her stored bag on the host. Tiers: the same index and the same
+   item (keys in any order: a patch / ilUid can add a key in another order on one phone), any same item, then the same index with the same
+   kind and no other ledger id (iu: a lazy id one phone may not have given yet), then the first piece of that kind with no other ledger id.
+   Never a piece of another kind. */
+const SJ=o=>JSON.stringify(o,(k,v)=>v&&typeof v==="object"&&!Array.isArray(v)?Object.keys(v).sort().reduce((r,x)=>(r[x]=v[x],r),{}):v);
+function itemFind(xe,x){if(!xe)return -1;const I=S.inv||[],s=SJ(xe);const eq=e=>!!e&&SJ(C0(e))===s;if(typeof x==="number"&&eq(I[x]))return x;let i=I.findIndex(eq);if(i>=0)return i;
+ const kin=e=>!!e&&!e.h&&e.k===xe.k&&(e.iu==null||xe.iu==null||e.iu===xe.iu)&&SJ((e.wk||null))===SJ(xe.wk||null);if(typeof x==="number"&&kin(I[x]))return x;return I.findIndex(kin)}
 
 /* ---------- F2: her places / goTo / visits (level 7; report dev/handover/reports/coop-thin-f2.md step 0) ----------
    Registered: goTo, visitPal, goSee, accEtqGo, accAsk, accSneak, talk, scout, invite, srvGoTo, kcGo (the engine functions every walk /
@@ -182,4 +194,118 @@ F.reg("kcGo",Object.assign({},W7,{ret:false,mine:A=>typeof A[0]==="string"&&!!S&
 /* gap 4: the "did she arrive?" callers (j77Tap, walkSpillTick) open the place card right after goTo; while her walk there is pending the
    card waits for the answer (placeCard) — never a card before the host has said, never a lost tap */
 if(typeof j77Card==="function"){const jc=j77Card;j77Card=function(k){const p=F.pend;if(p&&p.walk&&p.walk===k&&!host()&&on(L7)){p.card=1;return}return jc.apply(this,arguments)}}
+
+/* ---------- F3: her bag / shop / wear / gifts (level 8; report dev/handover/reports/coop-thin-f3.md step 0) ----------
+   ONE helper over the engine functions every bag / shop / wear / gift tap ends in. Arguments by kind: "me" (her S), "ix" (an index into
+   her S.inv: the index + the item itself, found by value on the host, as F1's runAct item), "who" (a person as an id — the friend = the
+   host's stand-in in her context — or a string "emp" / "th" / "maid", or nothing), "wl" (a list of persons), "v" (plain JSON). Her khắc
+   clock, the pop-up, the odds she saw (ACTFZ, j9 fzRun) and the gift moment's picture ride in ctx; what her run changed outside S comes
+   back (F2 gap 2). A function whose own wrapR / rsnap shows her result card: snap "soft" + noRes (the card shows on her phone with the
+   answer, never on the host). */
+const L8=8;
+const CX8=CX.concat([["fz",()=>{try{return ACTFZ}catch(e){return null}},v=>{try{ACTFZ=v||null}catch(e){}}],WF("__kitLastEvArt",null),WF("__tdOk",0)]);
+const BACK8=BACK.concat(["__tdOk"]);
+const ixE=x=>{if(typeof x!=="number")return null;const e=S.inv&&S.inv[x];return e?{x,xe:J(C0(e))}:null};
+const ixD=a=>{if(!a||!a.xe)return null;const i=itemFind(a.xe,a.x);return i<0?null:i};
+const pE=x=>{if(!x||typeof x!=="object")return null;const id=x[RAW]?x[RAW].id:x.id;const v=id!=null?vOf(id):null;return v&&v!==S?{id}:null};
+function encA(K,A){const o=[];for(let i=0;i<K.length;i++){const k=K[i],x=A[i];let e=null;
+  if(k==="me"){if(!isMe(x))return null;e=1}
+  else if(k==="ix")e=ixE(x);
+  else if(k==="who")e=x==null?{n:1}:typeof x==="string"?{s:x}:pE(x);
+  else if(k==="wl"){if(!Array.isArray(x))return null;const L=x.map(pE);if(L.some(y=>!y))return null;e={l:L.map(y=>y.id)}}
+  else e={v:x===undefined?null:J(x&&typeof x==="object"&&!Array.isArray(x)?Object.assign({},x):x)};
+  if(e==null)return null;o.push(e)}return o}
+function decA(K,a){if(!Array.isArray(a)||a.length!==K.length)return null;const o=[];for(let i=0;i<K.length;i++){const k=K[i],x=a[i];if(!x)return null;
+  if(k==="me")o.push(S);
+  else if(k==="ix"){const j=ixD(x);if(j==null)return null;o.push(j)}
+  else if(k==="who"){if(x.n)o.push(undefined);else if(typeof x.s==="string")o.push(x.s);else{const v=vOf(x.id);if(!v||v===S)return null;o.push(v)}}
+  else if(k==="wl"){const L=(x.l||[]).map(vOf);if(L.some(v=>!v||v===S))return null;o.push(L)}
+  else o.push(x.v)}return o}
+const live=()=>!!S&&!S.dead;
+/* after the answer: the panel she tapped in shows the new state (the kit shop / the dress panel / the item card list) */
+const reDraw=()=>{try{const b=document.getElementById("kg82");if(b&&!b.hidden&&typeof toilDressUI==="function")toilDressUI()}catch(e){}};
+/* a card choice (chooseM, wrapR "chooseM" in solo: the card titled with the option, shown when something changed): the choice's title rides
+   with the intent, and the half card her phone would show at once (only the card's own cost applied, the act still on the host) is not
+   shown — the whole card comes with the answer (cardLater) */
+let CHT=null,CHP=null;
+if(typeof chooseM==="function"){const cm=chooseM;chooseM=function(i){if(host()||!on(L8)||CW.ctx)return cm.apply(this,arguments);let t="";try{t=Q[0].opts[i].n||""}catch(e){}
+  CHT=String(t).replace(/<[^>]+>/g,"");CHP=F.pend;try{return cm.apply(this,arguments)}finally{CHT=null;CHP=null}}}
+if(typeof resultShow==="function"){const rs=resultShow;resultShow=function(){if(CHT!==null&&F.pend&&F.pend!==CHP&&F.R[F.pend.n]&&F.R[F.pend.n].lv===L8){F.stat.half=(F.stat.half|0)+1;return}return rs.apply(this,arguments)}}
+function reg8(name,K,o){o=o||{};const R=Object.assign({lv:L8,ctx:CX8,back:BACK8,enc:A=>encA(K,[...A].slice(0,K.length)),dec:a=>decA(K,a),done:reDraw,title:()=>CHT||""},o);
+ R.mine=A=>live()&&(o.mine?o.mine(A):isMe(A[0]));return F.reg(name,R)}
+/* the bag (Rương đồ) */
+reg8("useItem",["me","ix","who"],{log:true});
+reg8("sellItem",["me","ix"],{log:true});
+reg8("taintItem",["me","ix","v"],{log:true});
+reg8("itemTest",["me","ix"],{log:true});
+reg8("econSellUI",["ix"],{mine:()=>true,snap:"soft",noRes:true,title:()=>"Bán đồ"});
+reg8("invAct",["v"],{mine:A=>A[0]==="inspect",snap:"soft",noRes:true,title:()=>"Soát rương đồ"});
+reg8("wkSell",["me","ix"],{log:true,title:()=>"Bán ra ngoài cung"});
+reg8("wkShow",["ix"],{mine:()=>true,title:()=>"Bày ở yến tiệc"});
+/* wearing: jewels / hairpins (wear), the Y phục / Cài tóc slots (wd*), the veil (vl*) */
+reg8("wear",["me","ix"]);
+reg8("wdWear",["me","ix"],{log:false});
+reg8("wdTakeOff",["me","v"]);
+/* the UI functions (can + spend + engine + log in one): t = the title of their own wrapR card (none: no card in solo either) */
+for(const [n,K,t] of [["wdWearUI",["ix"],"Thay y phục"],["wdOffUI",["v"],null],["wdAutoUI",[],"Tự chọn đồ"],["wdSellUI",["ix"],"Bán lén"],["wdPawnUI",["ix"],"Cầm cố"],["wdRedeemUI",["v"],"Chuộc lại"],["vlWearUI",["ix"],"Đeo mạng che mặt"],["vlOffUI",[],null]])
+ reg8(n,K,t==null?{mine:()=>true}:{mine:()=>true,snap:"soft",noRes:true,title:()=>t});
+/* the shop: one engine for a tile (jinv kitShopBuy); on the host her shop data is rebuilt in her context (kitShop data mode, every
+   wrapper: the rare item, the buy-back tiles), never opening a modal, never touching the host's own open shop. The pet shop = F4. */
+const KSH={nvp:()=>kitShopNvp()};
+window.__kshBuild=key=>{if(!CW.ctx||!host()||!KSH[key])return undefined;window.__kshData=1;try{return KSH[key]()}finally{window.__kshData=0}};
+reg8("kitShopBuy",["v","v","v","v"],{mine:A=>!!KSH[A[0]]&&(A[0]!=="pet"||on(9))/* the pet shop = F4 (level 9) */,done:(A,r)=>{try{const o=KSHOP.reg[A[0]];if(o&&r&&r.rv){const x=kitShopRaw(o).find(y=>y&&y.k===A[1]);if(x&&x.stock!=null&&!x.sell)x.stock-=Math.max(1,A[2]|0);o.q=o.q||{};o.q[A[1]]=1}
+  kitShopRefresh(A[0])}catch(e){console.error("thin F3 shop",e)}}});
+reg8("vlBuyNvp",["me","v"],{log:true});
+reg8("vlBuyOut",["me","v"],{log:true});
+reg8("vlAsk",["me","v"],{log:true});
+/* gifts */
+/* gifts BETWEEN the two players: ONE path, the ASK act "gift" (jcoopworld runAct: her invite card first, then the Quà tặng card; F1-tested).
+   Every gift picker (item card Tặng, person card Tặng quà, Dâng / works) called giveTo straight onto the other player's entry: her gift
+   reached the host only through the withSeat bridge, his gift stayed in her ENTRY's bag on the host and never reached her (law 6c). At
+   level 8 a giveTo by a player onto the other player's entry is that act (the accepted invite runs giveTo again with CW.inv set: through). */
+if(typeof giveTo==="function"){const g0=giveTo;giveTo=function(a,r,ix){try{if(on(L8)&&a===S&&r&&typeof r==="object"&&CW.isF&&CW.isF(r)&&!CW.inv&&typeof runAct==="function"){F.stat.gAsk=(F.stat.gAsk|0)+1;return runAct(S,r,"gift",ix)}}catch(e){console.error("thin F3 gift",e)}return g0.apply(this,arguments)}}
+if(typeof wkGive==="function"){const w0=wkGive;wkGive=function(a,r,ix){try{if(on(L8)&&a===S&&r&&typeof r==="object"&&CW.isF&&CW.isF(r)&&!CW.inv&&typeof runAct==="function"){F.stat.gAsk=(F.stat.gAsk|0)+1;return runAct(S,r,"gift",ix)}}catch(e){console.error("thin F3 gift",e)}return w0.apply(this,arguments)}}
+reg8("giveTo",["me","who","ix"],{log:true});
+reg8("wkGive",["me","who","ix"],{log:true});
+reg8("wkPoison",["me","who","ix"],{log:true});
+reg8("plantHereGo",["who","ix"],{mine:()=>true});
+reg8("tsGiftBacGo",["wl"],{mine:()=>true});
+reg8("tsGiftPieceGo",["who","ix"],{mine:()=>true});
+reg8("courtGive",["me","v"],{log:true,title:A=>A[1]?"Biếu":""});
+reg8("tdGiftGo",["v"],{mine:()=>true,title:A=>{try{const h=trS().H[A[0]];return h?`Biếu quà ${h.name}`:""}catch(e){return ""}},okHint:()=>!!window.__tdOk});
+/* ---------- F4: her pets / garden / kitchen / study (level 9; report dev/handover/reports/coop-thin-f4.md step 0) ----------
+   reg9 = reg8 at level 9, two more argument kinds: "el" (a tapped button: its dataset travels, the host gets {dataset}) and "pm" (a person
+   or HER: rcpAskGo asks about herself too). Her open care screen (PETC.i) / plant screen (SHPC.g) and the Tứ đức lesson state (TDV) ride
+   in ctx. Mini-game SCORES (petcGain, shelfPlantGain, the art / cooking / Tứ đức games) = F5. */
+const L9=9;
+const OBJ=(n,o)=>[n,()=>{try{return J(o())}catch(e){return null}},v=>{try{const t=o();if(t&&v&&typeof v==="object")Object.assign(t,v)}catch(e){}}];
+/* review r1: her open care / plant screen keys ride as plain values set on the REAL objects (the old OBJ("shpc",()=>({g:SHPC.g})) assigned
+   onto a fresh copy: the host never saw her SHPC.g → her shelf plant "Để trời định" did nothing, or hit the plant in the HOST's open slot;
+   OBJ("petc",PETC) carried PETC.bath (listener functions, stripped by JSON) back onto the host's own running bath game) */
+const CX9=CX8.concat([["petc",()=>({i:PETC.i,game:PETC.game}),v=>{v=v&&typeof v==="object"?v:{};PETC.i=typeof v.i==="number"?v.i:-1;PETC.game=v.game==null?null:v.game}],
+ ["shpc",()=>SHPC.g==null?null:SHPC.g,v=>{SHPC.g=v==null?null:v}],OBJ("tdv",()=>TDV)]);
+function encA9(K,A){const K2=K.map(k=>k==="el"||k==="pm"?"v":k),A2=[...A].slice(0,K.length);for(let i=0;i<K.length;i++){
+  if(K[i]==="el"){const b=A2[i];if(!b||!b.dataset)return null;A2[i]={dataset:Object.assign({},b.dataset)}}
+  else if(K[i]==="pm"){const x=A2[i];if(isMe(x))A2[i]={me:1};else if(typeof x==="string")A2[i]={s:x};else{const e=pE(x);if(!e)return null;A2[i]={id:e.id}}}}return encA(K2,A2)}
+function decA9(K,a){const K2=K.map(k=>k==="el"||k==="pm"?"v":k);const o=decA(K2,a);if(!o)return null;for(let i=0;i<K.length;i++)if(K[i]==="pm"){const x=o[i];if(!x)return null;if(x.me)o[i]=S;else if(typeof x.s==="string")o[i]=x.s;else{const v=vOf(x.id);if(!v||v===S)return null;o[i]=v}}return o}
+function reg9(name,K,o){o=o||{};const R=Object.assign({lv:L9,ctx:CX9,back:BACK8,enc:A=>encA9(K,A),dec:a=>decA9(K,a),done:reDraw,title:()=>CHT||""},o);
+ R.mine=A=>live()&&(o.mine?o.mine(A):isMe(A[0]));return F.reg(name,R)}
+/* her care / plant screens draw into the HOST's DOM (petcClose → closeModal = the host's own card queue) when run in her context there:
+   captured instead, replayed on her phone with the answer (her pet / plant read from her patched person) */
+const UI9=n=>{if(typeof window[n]!=="function")return;const f=window[n];window[n]=function(){if(CW.ctx&&host()&&on(L9)){if(TH.uiCap&&TH.uiCap.length<12)TH.uiCap.push([n,String(arguments[0]==null?"1":arguments[0]).slice(0,300)||"1"]);return}return f.apply(this,arguments)}};
+["petcDraw","petcClose","shelfPlantDraw"].forEach(UI9);
+try{for(const n of ["petcDraw","petcClose","shelfPlantDraw","petcGrowShow"])TH.UICAP.add(n)}catch(e){}
+if(typeof petcGrowCard==="function"){const f=petcGrowCard;petcGrowCard=function(P){if(CW.ctx&&host()&&on(L9)){const i=tsbPets(S).indexOf(P);if(i>=0&&TH.uiCap&&TH.uiCap.length<12)TH.uiCap.push(["petcGrowShow",String(i)]);return}return f.apply(this,arguments)};
+ window.petcGrowShow=i=>{try{const P=tsbPets(S)[+i];if(P)f(P)}catch(e){}}}
+/* pets */
+KSH.pet=()=>petShop();
+reg9("petDo",["v","el"],{mine:A=>A[0]==="follow"||A[0]==="free",snap:"soft",noRes:true,title:A=>({follow:"Cho theo hầu",free:"Gửi về Ngự thú viên"})[A[0]]||""});
+reg9("petcMaid",["v"],{mine:()=>true});
+reg9("petcQuick",["v"],{mine:()=>true});
+/* garden: her shelf plant */
+reg9("shelfPlantQuick",[],{mine:()=>true});
+/* kitchen / study: recipe books, the taste questions, Tứ đức practice at bậc 5 (no game) */
+reg9("rcpRead",["ix"],{mine:()=>true});
+reg9("rcpAskGo",["v","pm"],{mine:()=>true});
+reg9("tdsRun",["v","v","v"],{mine:A=>A[1]==="prac"});
 }catch(e){console.error("jcoopthinf",e)}})();

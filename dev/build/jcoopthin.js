@@ -22,7 +22,7 @@
 (function(){try{
 const CW=window.COOPW;if(!CW||!CW.X||typeof COOP!=="object")return;
 const X=CW.X,J=X.J,LS={get(k){try{return localStorage.getItem(k)}catch(e){return null}}};
-const TH=CW.thin={CAP:7/* F2 her places / goTo / visits as intents (jcoopthinf.js), F1 her acts as intents (jcoopthinf.js),  E buổi + night gate on the host (jcoopthine.js), B life + rebirth on the host (jcoopthinb.js), C world read-only on the guest (jcoopthinc.js), D remote dialogs (section 6) */,lvl:0,REG:[],bridge:[],rlog:[],view:null,hv:0,dn:0,dr:null,ctxN:0};
+const TH=CW.thin={CAP:9/* F4 her pets / garden / kitchen / study as intents (jcoopthinf.js), F3 her bag / shop / wear / gifts as intents (jcoopthinf.js), F2 her places / goTo / visits as intents (jcoopthinf.js), F1 her acts as intents (jcoopthinf.js),  E buổi + night gate on the host (jcoopthine.js), B life + rebirth on the host (jcoopthinb.js), C world read-only on the guest (jcoopthinc.js), D remote dialogs (section 6) */,lvl:0,REG:[],bridge:[],rlog:[],view:null,hv:0,dn:0,dr:null,ctxN:0};
 const host=()=>CW.seat==="a";
 const D={};   /* part D (remote dialogs), filled in section 6 */
 TH.on=n=>!!(CW.on&&!CW.hold&&TH.lvl>=(n||1));
@@ -193,8 +193,9 @@ TH.NOOP.push("resultShow");
    gates read screenOff() (j1: true inside COOPW.ctx), so nothing of hers draws on the host's screen; her floaters / numbers / item and coin
    effects called in her run are captured here (UICAP, plain arguments only) and play on HER phone once, with the answer (TH.uiPlay).
    E's buổi step, B's life, C's world frame and D's deferred work stay quiet (turns that are not her tap). */
-const UICAP=new Set(["srvToast","kitLine","kitStatFx","feedback","kitCoins","kitGain","kitLose","kitReward","kitLearn","stipReveal","kitItemFx"]);
+const UICAP=new Set(["srvToast","kitLine","kitStatFx","feedback","kitCoins","kitGain","kitLose","kitReward","kitLearn","stipReveal","kitItemFx","kitSfx"/* F3 r1 review: her act sounds (jsfx W buy / sellItem / wkSell / giveTo → kitSfx) were silenced on the host and never played on her phone */]);
 for(const n of UICAP)if(!TH.NOOP.includes(n))TH.NOOP.push(n);
+TH.UICAP=UICAP;/* F4: a part adds the screen redraws it captures itself (its own wrappers push them to TH.uiCap); TH.uiPlay plays only names in this set */
 const uiArg=a=>{try{return JSON.parse(JSON.stringify(a,(k,v)=>typeof v==="function"||(typeof Node!=="undefined"&&v instanceof Node)?undefined:v))}catch(e){return null}};
 TH.tapRun=function(fn){const q0=quiet,u0=TH.uiCap;quiet=false;TH.uiCap=[];let r,ui;try{r=fn()}finally{quiet=q0;ui=TH.uiCap;TH.uiCap=u0}return {r,ui:ui&&ui.length?ui.slice(0,12):null}};
 /* guest: what her run on the host captured, played once on her own screen */
@@ -295,6 +296,7 @@ function pSnap(){const o=J(ser().S);for(const k of X.W_KEYS)delete o[k];return o
 /* person patch: [op, path, value]; path = keys, an array element as {i, id} (matched by its id / sid / name+bt / k on her side) */
 const eid=x=>plain(x)?(x.id!=null?"i"+x.id:x.sid!=null?"s"+x.sid:x.name!=null?"n"+x.name+"#"+(x.bt==null?"":x.bt):x.k!=null?"k"+x.k+"#"+(x.ci==null?"":x.ci):null):null;
 const jq=(a,b)=>JSON.stringify(a)===JSON.stringify(b);
+const SJ=o=>JSON.stringify(o,(k,v)=>v&&typeof v==="object"&&!Array.isArray(v)?Object.keys(v).sort().reduce((r,x)=>(r[x]=v[x],r),{}):v);
 /* thin E: the room's step is the host's alone: it travels as its value, never as a delta (a delta on a seat that is already there drifted to buổi 4) */
 const ABS=new Set(["buoi"]);
 function pDiff(a,b,pre,out){out=out||[];pre=pre||[];
@@ -315,12 +317,12 @@ TH.pDiff=(a,b)=>pDiff(a,b);
 D.rebase=()=>{if(D.cur&&CW.ctx)D.cur.p0=pSnap()};
 /* guest: one patch onto her live S */
 function pApply(root,L){let n=0;for(const [op,path,val,fr] of L||[]){try{if(op==="nv"){if(nvApply(path,val))n++;continue}let o=root;
-  for(let i=0;i<path.length-1;i++){const k=path[i];if(plain(k)&&Array.isArray(o)){o=o.find(e=>eid(e)===k.id)||(k.i<o.length&&eid(o[k.i])==null?o[k.i]:undefined)}else{if(typeof k!=="string"||BADK.test(k))o=undefined;else{if(!plain(o[k])&&(op==="+"||op==="="||op==="a")&&typeof path[i+1]==="string")o[k]={};o=o[k]}}if(!plain(o))break}
+  for(let i=0;i<path.length-1;i++){const k=path[i];if(plain(k)&&Array.isArray(o)){o=(k.i<o.length&&eid(o[k.i])===k.id?o[k.i]:null)/* F3: same position first (eid is not unique: two Yến sào are both "kyensao#") */||o.find(e=>eid(e)===k.id)||(k.i<o.length&&eid(o[k.i])==null?o[k.i]:undefined)}else{if(typeof k!=="string"||BADK.test(k))o=undefined;else{if(!plain(o[k])&&(op==="+"||op==="="||op==="a")&&typeof path[i+1]==="string")o[k]={};o=o[k]}}if(!plain(o))break}
   const k=path[path.length-1];if(!plain(o)||typeof k!=="string"||BADK.test(k))continue;
   const V=x=>{const c=J(x);return root===S&&typeof path[0]==="string"&&refKey(path[0])?unref(c):c};
   if(op==="+"){o[k]=(typeof o[k]==="number"?o[k]:0)+val}else if(op==="="){o[k]=V(val)}else if(op==="-"){delete o[k]}
   else if(op==="a"){if(!Array.isArray(o[k]))o[k]=[];if(fr)o[k].unshift(...V(val));else o[k].push(...V(val))}
-  else if(op==="r"&&Array.isArray(o[k])){for(const e of val){const t=JSON.stringify(e);let j=o[k].findIndex(z=>JSON.stringify(z)===t);if(j<0&&eid(e)!=null)j=o[k].findIndex(z=>eid(z)===eid(e));
+  else if(op==="r"&&Array.isArray(o[k])){for(const e of val){const t=SJ(e);let j=o[k].findIndex(z=>SJ(z)===t)/* F3: keys in any order (else the eid fallback took the FIRST piece of that kind) */;if(j<0&&eid(e)!=null)j=o[k].findIndex(z=>eid(z)===eid(e));
    if(j<0&&plain(e)&&Object.keys(e).length===1&&("$r" in e||"$k" in e)){const u=V(e);if(u)j=o[k].indexOf(u)}if(j>=0)o[k].splice(j,1)}}
   n++}catch(e){console.error("thin patch",e)}}return n}
 TH.pApply=pApply;
