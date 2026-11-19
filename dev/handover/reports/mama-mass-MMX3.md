@@ -35,6 +35,9 @@ c06 jade green · c07 pale pink · c08 pale green · c09 deep rose · c10 jade g
 | c06 | a36 | u5WyedyQLD | N2qtWyy6D9 | vQAO17Fa47 | after ruling A: no flower; jade green skirt/sash/cuffs/hem band; PASS |
 | c06 | a51 | jUoGfuHLD0 | gOmV3MWSXO | Lw8c6d5swO | PASS; gen painted dark glow bg, cut clean |
 | c06 | a65 | jUoGfuHLD0 | O6EXz8Kynm | 3zKvDbtREY | PASS |
+| c07 | a36 | YMlEy3QWeC | 6AbmpSwiJO | - | look PASS; cut NOT done (remove_bg errored, then HOLD) |
+| c07 | a51 | 1ldZhqUr4r | 8aiSkMSIrU | - | REJECTED: forehead mark (this ref gave a forehead cross in MMX1 too) → next: her a36 face YMlEy3QWeC |
+| c07 | a65 | 1ldZhqUr4r | jUoW3KVLD0 | - | REJECTED: forehead mark (same ref) → next: YMlEy3QWeC |
 
 Look sheet: https://ctm-img.victoria-tntt.workers.dev/img/_review/mama-mass/twocol/look/c06-gen1-flowerfault.jpg
 Otherwise good: jade green skirt, sash, sleeve cuffs/linings; vermilion vest/robe/panels; gold thin; same face; forehead clean; a51/a65 main stepped deeper.
@@ -48,3 +51,15 @@ Otherwise good: jade green skirt, sash, sleeve cuffs/linings; vermilion vest/rob
 
 ## Credits
 3 gens × 135 = 405 (no cuts).
+
+## HOLD (ROOT-50, 19/11 after c07 gens): owner says Nữ đế used OLD-style face refs instead of her new M09-style redraws. NO new gens until ROOT-50 confirms the face refs.
+Face refs used (inherited from MMX1/MMX1b/MMX2, uploaded to Magnific 19/11): consorts c/p/bd = CDN img/hd/fig-consort-<id>-t1-a36.webp (a36) and -t1-a51.webp (a51 + a65), list + ids in mama-mass-persons.md / MMX1 HANDOVER; maids m = CDN img/fig-maid-<id>-a36.webp / -a51.webp (MMX2). If they must change, every one of my gens so far (c06 ×3, c07 ×3) would need redrawing with the new refs.
+Credits: 3 rejected c06 (405) + c06 ×3 with cuts (414) + c07 ×3 gens (405) = 1,224.
+
+## ROOT-50 answers (19/11 18:28Z) — still HOLD, wait for GO
+- Face refs: my refs (img/hd/fig-consort-*-t1, fig-maid-*) are the same pictures the owner just rejected for Nữ đế; ROOT-50 is asking her which reference is valid (only a thiếu nữ picture made from prompt + M09). c06 ×3 + c07 a36 may need redrawing with the new refs.
+- Lượt 521 rules (no item repeated across ages; J6 Nữ đế age text; forehead wording kept, BW2 strengthens it in the builder) apply to EVERY picture from now on, redraws included. Check done: no person in my 33 repeats an item across ages.
+- On GO: pull, rebuild the 99 prompts from the current builder (--twocol <sec> --noflower), re-run check_store, swap face refs as ROOT-50 says, resume at c07 a51/a65 (and the c07 a36 cut).
+- OWNER Lượt 543 (via ROOT-50 18:32Z): ma ma two-colour OK. Identity ref = ONE picture, her KHUÊ CÁC 2K picture made from M09 (img/_review/kc2k/<id>_a18_kc_2k.png; m picks in kc2k-K3/K6a/K6b/K6c), list in dev/art/KC_REFS.json (REF1). Face words copied from the kc prompt (BW2 builder). People whose kc was not made from M09: do NOT draw. c06/c07 (old refs) will be redrawn. HOLD until GO + table.
+- Pre-check: kc2k/<id>_a18_kc_2k.png gives 200 for c06 c07 c12 and 404 for m05…m52, p01 and bd1 (another name or path; wait for KC_REFS.json).
+- ROOT-50 18:34Z: ONE reference only (owner: "Chỉ dùng một hình nhân vật thiếu nữ để làm hình mẫu") → image 2 costume 79fNlPEJAL DROPPED; costume from the approved two-colour prompt text only. Flagged to ROOT-50: the ma ma prompt names "image 2" in 4 places (cut of image 2; COLOUR RULE cut/brown of image 2; MAMA_IMG3 sentence) → BW2 builder + gate must rule; I use builder output only. HOLD until GO.

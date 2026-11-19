@@ -1,0 +1,1097 @@
+{
+ "rule": "ART_RULES B8 (owner Lượt 543/551): ONE identity ref = ref_id (Magnific remove_bg cut, pass directly as type image). Face words copied VERBATIM from face_words/person_line. m09_ok NO -> NOT drawn. NEVER img/_review/kc2k (REJECTED) or img/fig-*/hd t1.",
+ "m09": "eIyOFEidqL",
+ "style_new_character_only": "6AbGv6EiJO",
+ "royal_swatch_t6plus": "TdwDfOyVNR",
+ "rejected_sets": [
+  "img/_review/kc2k/ -> moved to img/_rejected/kc2k/",
+  "img/_review/kc2k-mass/ -> moved to img/_rejected/kc2k-mass/"
+ ],
+ "banned_refs": "dev/art/KC_BANNED_REFS.json (check: python3 dev/art/kc_ref.py --check ...; check_store.py --refs)",
+ "people": {
+  "m01": {
+   "id": "m01",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "hu2qEwOvqL",
+   "gen_id": "lJt4wwjgv9",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m01.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a classic OVAL face with a softly tapered chin and smooth high cheekbones, long clear almond eyes with crisp defined outer corners, elegantly arched medium brows, a straight slim nose, thin well-defined lips with naturally upturned corners. Expression: Bright lively eyes, a light cheerful closed-lip smile, lips softly together, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 17. Her face: a classic OVAL face with a softly tapered chin and smooth high cheekbones, long clear almond eyes with crisp defined outer corners, elegantly arched medium brows, a straight slim nose, thin well-defined lips with naturally upturned corners. Expression: Bright lively eyes, a light cheerful closed-lip smile, lips softly together, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), half-up: two small soft loops at the crown tied with thin cream ribbons and one small pearl flower hairpin, the rest falling loose down her back. Outfit: a cross-collar ruqun of smooth sage-green silk satin with a soft sheen and a cream floor-length skirt of plain silk, small embroidered peonies at the collar and cuffs, a soft silk sash with a small jade pendant, long sleeves; her signature colour family sage green and cream, gold only as thin accents. Pose: walking mid-step, raising a thread-bound book beside her cheek with one hand, chin slightly lifted, the other long sleeve floating out, body fully frontal, facing the viewer."
+  },
+  "m02": {
+   "id": "m02",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "BhNCmskoQR",
+   "gen_id": "8aiuhC3IrU",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m02.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a slender LONG OVAL face with a narrow chin, large gentle eyes with softly downturned outer corners, fully open and clear, long straight thin brows, a slim long nose, a small rosebud mouth. Expression: Soft warm eyes, a tender small closed-lip smile, lips softly together, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 18. Her face: a slender LONG OVAL face with a narrow chin, large gentle eyes with softly downturned outer corners, fully open and clear, long straight thin brows, a slim long nose, a small rosebud mouth. Expression: Soft warm eyes, a tender small closed-lip smile, lips softly together, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), fully loose and long down her back, a thin moss-green ribbon tied behind the head and one small silver comb above the ear. Outfit: a long open beizi of matte moss-green linen-silk reaching below the knee, worn over a cross-collar pale inner top and a pale silvery green floor-length skirt of plain silk, small embroidered plum blossoms along the front edges, a narrow silk sash with a silver-thread tassel knot, long sleeves; her signature colour family moss green and silver, silver only as thin accents. Pose: offering a closed folding fan forward with both hands, head tilted gently, body turned three-quarters to the left, face toward the viewer."
+  },
+  "m03": {
+   "id": "m03",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "bxMlxKk5Y2",
+   "gen_id": "SyhNJiRUb8",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m03.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a youthful ROUND face with full soft cheeks, LARGE round wide-set eyes with big clear irises, short soft brows, a short rounded nose, a wide-but-soft mouth with a plump lower lip, one small dimple in her left cheek. Expression: Wide clear innocent eyes, a pure sweet faint smile with lips closed, very youthful, the dimple showing softly, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 16. Her face: a youthful ROUND face with full soft cheeks, LARGE round wide-set eyes with big clear irises, short soft brows, a short rounded nose, a wide-but-soft mouth with a plump lower lip, one small dimple in her left cheek. Expression: Wide clear innocent eyes, a pure sweet faint smile with lips closed, very youthful, the dimple showing softly, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), one long braid brought forward over her right shoulder, tied with a slate-blue ribbon, the top hair smooth with one small silver flower hairpin. Outfit: a cross-collar ruqun of soft slate-blue cotton-silk with a long pale grey-blue pleated floor-length skirt of plain silk, small embroidered lotus flowers at the hem and cuffs, a soft silk sash with a little silver bell pendant, long sleeves; her signature colour family slate blue and silver, silver only as thin accents. Pose: walking lightly forward holding a small embroidery hoop with a half-finished flower in both hands, glancing softly at it with a fond look, sleeves swaying, body turned slightly to the right (about 15 degrees), face toward the viewer."
+  },
+  "m04": {
+   "id": "m04",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "MBJtEqLDCm",
+   "gen_id": "aFG5rpsfSh",
+   "refs_used": [
+    "JNCR9djOq4",
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m04.v3b.FULL.txt",
+   "pick_why": "Lượt 300 pose redo; Lượt 302 not re-asked = OK",
+   "face_words": "Her face: a DIAMOND face with a narrow brow line, high defined cheekbones and a small pointed chin, close-set almond eyes slightly upturned at the outer corners, fully open and alert, sharp willow-leaf brows, a slim straight nose, a small bow-shaped mouth with a clearly defined cupid's bow. Expression: A calm composed gaze, a refined faint closed-lip smile, upright graceful bearing, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 18. Her face: a DIAMOND face with a narrow brow line, high defined cheekbones and a small pointed chin, close-set almond eyes slightly upturned at the outer corners, fully open and alert, sharp willow-leaf brows, a slim straight nose, a small bow-shaped mouth with a clearly defined cupid's bow. Expression: A calm composed gaze, a refined faint closed-lip smile, upright graceful bearing, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), half-up: the top twisted into a small knot tied with an apricot ribbon whose ends fall behind, two small gold flower hairpins, the rest loose to her waist. Outfit: a cross-collar ruqun of warm apricot silk crepe with a pale apricot-cream floor-length skirt of plain silk, small embroidered orchids at the collar and cuffs, a soft silk sash with a small carnelian pendant, long sleeves; her signature colour family warm apricot and gold, gold only as thin accents. Pose: standing calmly, raising a sprig of plum blossom beside her cheek with one hand, the other hand resting at her sash, body FULLY FRONTAL facing the viewer (not turned), head up, chin level, face and eyes looking straight at the viewer."
+  },
+  "m05": {
+   "id": "m05",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "KLpSlnEkqp",
+   "gen_id": "9ZHz2M2NYZ",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m05.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a broad ROUND-OVAL face with full apple cheeks and a firm little chin, large round doe eyes with clearly defined double lids, thick softly arched brows, a short straight nose, full plump lips. Expression: A clear bright striking gaze, defined elegant features, a subtle poised closed-lip smile, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 16. Her face: a broad ROUND-OVAL face with full apple cheeks and a firm little chin, large round doe eyes with clearly defined double lids, thick softly arched brows, a short straight nose, full plump lips. Expression: A clear bright striking gaze, defined elegant features, a subtle poised closed-lip smile, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), half-up: two thin plaits from the temples joined at the back of the head with a coral ribbon, one small pearl flower hairpin, the rest loose. Outfit: a cross-collar ruqun of coral-red silk satin with a soft sheen and a long pale coral-pink pleated floor-length skirt of plain silk, small embroidered chrysanthemums at the collar and hem, a soft silk sash with a small red tassel knot, long sleeves; her signature colour family coral red and gold, gold only as thin accents. Pose: walking forward mid-step with sleeves flowing, an embroidered silk ball with short tassels held in one hand at her waist, body turned three-quarters to the right, face toward the viewer."
+  },
+  "m06": {
+   "id": "m06",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "gOm9JpLSXO",
+   "gen_id": "YMldTfCWeC",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m06.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a SOFT-ANGULAR oval face with a gently defined jaw and a slightly squared chin, wide-set calm almond eyes, fully open and clear, straight level brows, a straight refined nose, medium even lips. Expression: Sparkling eyes, a small playful closed-lip smile, head slightly tilted, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 19. Her face: a SOFT-ANGULAR oval face with a gently defined jaw and a slightly squared chin, wide-set calm almond eyes, fully open and clear, straight level brows, a straight refined nose, medium even lips. Expression: Sparkling eyes, a small playful closed-lip smile, head slightly tilted, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), fully loose and straight down her back, a thin pale grey ribbon tied around the head under the hair, one small silver flower comb at the crown. Outfit: a long open beizi of plain pale blue-grey silk reaching below the knee, worn over a cross-collar white inner top and a soft silver-grey floor-length skirt of matte linen-silk, small embroidered butterflies along the front edges, a narrow silk sash with a small moonstone pendant, long sleeves; her signature colour family pale blue-grey and silver, silver only as thin accents. Pose: stepping forward holding a calligraphy brush raised upright in one hand, sleeves fluttering, coming straight toward the viewer, body facing front."
+  },
+  "m07": {
+   "id": "m07",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "3zKcnbDREY",
+   "gen_id": "nVseV0pYQD",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m07.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a ROUND face with high plump cheeks and a small rounded chin, large round eyes slightly upturned at the outer corners, thick short straight brows, a small upturned button nose, small full pouty lips. Expression: Lively sparkling-bright eyes, a light happy closed-lip smile, lips gently together, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 16. Her face: a ROUND face with high plump cheeks and a small rounded chin, large round eyes slightly upturned at the outer corners, thick short straight brows, a small upturned button nose, small full pouty lips. Expression: Lively sparkling-bright eyes, a light happy closed-lip smile, lips gently together, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), half-up: a small braided crown across the top tied at the back with jade-green ribbons and a little row of small white flower hairpins, the rest loose. Outfit: a cross-collar ruqun of crisp pale jade-green plain silk with a high-waisted white floor-length skirt of cotton-silk tied just above the waist, small embroidered cranes at the hem, a soft silk sash with a small white jade pendant, long sleeves; her signature colour family pale jade green and white, silver only as thin accents. Pose: walking forward mid-step, long sleeves flowing behind her, a feathered shuttlecock held in one hand at her side, body turned slightly to the left (about 15 degrees), face toward the viewer."
+  },
+  "m08": {
+   "id": "m08",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "4RFGZQc9Aa",
+   "gen_id": "kseUss416B",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m08.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a soft EGG-SHAPED rounded oval face with gently full cheeks, large round-almond eyes with long lashes, low softly arched brows, a small straight nose, small heart-shaped lips with a fuller upper lip. Expression: Warm gentle eyes, a tender little closed-lip smile, lips gently together, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 18. Her face: a soft EGG-SHAPED rounded oval face with gently full cheeks, large round-almond eyes with long lashes, low softly arched brows, a small straight nose, small heart-shaped lips with a fuller upper lip. Expression: Warm gentle eyes, a tender little closed-lip smile, lips gently together, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), half-up: the top gathered into a small soft knot with peach silk ribbons and two small flower hairpins, the rest falling loose down her back with a few strands in front of one shoulder. Outfit: a cross-collar ruqun of peach-salmon (like #E4AC94) silk satin with a soft sheen and a paler peach (like #F6CFBC) floor-length skirt of plain silk, small embroidered peach blossoms at the collar and cuffs, a soft silk sash with a small jade pendant, long sleeves; her signature colour family peach-salmon and gold, gold only as thin accents. Pose: holding a round silk fan painted with plum blossoms in one hand, mid-step, the other hand lifting her sleeve, body fully frontal, facing the viewer."
+  },
+  "m09": {
+   "id": "m09",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "gOm4HrsSXO",
+   "gen_id": "yiuZ1KKPW9",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m09.v3.FULL.txt",
+   "pick_why": "Lượt 285 DUYỆT m09 v3",
+   "face_words": "Her face: a small HEART-SHAPED face with a narrow pointed chin and wide cheekbones, long almond eyes clearly UPTURNED at the outer corners (a cat-eye look), high thin arched brows, a small straight nose, a slightly fuller pouty lower lip. Expression: a sly, confident little smile with one corner of the mouth higher.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 18. Her face: a small HEART-SHAPED face with a narrow pointed chin and wide cheekbones, long almond eyes clearly UPTURNED at the outer corners (a cat-eye look), high thin arched brows, a small straight nose, a slightly fuller pouty lower lip. Expression: a sly, confident little smile with one corner of the mouth higher. Hair: glossy pure BLACK (never brown), half-up: the top in a small soft knot wrapped with a rose-pink ribbon and one small gold butterfly hairpin, the rest loose with soft side locks. Outfit: a cross-collar ruqun of smooth rose-pink silk satin with a soft sheen and a pale blush rose skirt of plain silk, small embroidered auspicious clouds only at the cuffs, a soft silk sash with a small rose quartz pendant, long sleeves; her signature colour family rose pink and gold, gold only as thin accents. Pose: walking mid-step carrying a pipa held upright against her body with both hands, long sleeves swaying, body turned three-quarters to the left."
+  },
+  "m10": {
+   "id": "m10",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "O6ERgEUynm",
+   "gen_id": "w4a6jlX7EI",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m10.v3.FULL.txt",
+   "pick_why": "Lượt 289 teeth redo (seed 7173) -> Lượt 291 'M10 ok'",
+   "face_words": "Her face: a LONG oval face with a gentle long chin and slim jaw, clear bright fully OPEN almond eyes with a gentle gaze (never half-closed, never sleepy, never hooded), long straight brows, a long slim nose, a small thin-lipped mouth. Expression: serene and graceful, a soft quiet closed-lip smile (lips together, no teeth), eyes wide awake and bright.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 19. Her face: a LONG oval face with a gentle long chin and slim jaw, clear bright fully OPEN almond eyes with a gentle gaze (never half-closed, never sleepy, never hooded), long straight brows, a long slim nose, a small thin-lipped mouth. Expression: serene and graceful, a soft quiet closed-lip smile (lips together, no teeth), eyes wide awake and bright. Hair: glossy pure BLACK (never brown), fully loose and very straight to the waist, the front locks drawn back and tied with a thin sage ribbon, one small gold leaf comb. Outfit: a light open beizi of matte sage-green linen-silk worn over a cross-collar cream inner top and a pale green floor-length skirt of plain silk, small embroidered magnolias along the front edges only, a sash with a small jade disc pendant, long sleeves; her signature colour family sage green and gold, gold only as thin accents. Pose: a graceful dance step, twirling one long sleeve outward, a book scroll tied with a ribbon held in the other hand, body turned three-quarters to the right."
+  },
+  "m11": {
+   "id": "m11",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "Syh9qs6Ub8",
+   "gen_id": "bxMsImL5Y2",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m11.v3.FULL.txt",
+   "pick_why": "Lượt 285 DUYỆT m11 v3",
+   "face_words": "Her face: a small ROUND baby face with full soft cheeks and a tiny rounded chin, very LARGE round eyes with big irises, short soft straight brows, a small button nose, a tiny rosebud mouth. Expression: shy and sweet, cheeks blushing, a small closed-lip smile, head tilted slightly.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 16, youngest-looking. Her face: a small ROUND baby face with full soft cheeks and a tiny rounded chin, very LARGE round eyes with big irises, short soft straight brows, a small button nose, a tiny rosebud mouth. Expression: shy and sweet, cheeks blushing, a small closed-lip smile, head tilted slightly. Hair: glossy pure BLACK (never brown), one thick loose braid over her shoulder in front from a small half-up section, tied with sky-blue ribbons, one small silver flower hairpin. Outfit: a cross-collar ruqun of soft sky-blue cotton-silk, a pale sky-blue pleated skirt, small embroidered begonias at the collar and cuffs, a sash with a small aquamarine pendant, long sleeves; her signature colour family sky blue and silver, silver only as thin accents. Pose: walking forward holding a bamboo flute in both hands close to her chest, sleeves trailing, near-frontal."
+  },
+  "m12": {
+   "id": "m12",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "xSB7FTWjfW",
+   "gen_id": "CqnKBtpEEy",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m12.v3.FULL.txt",
+   "pick_why": "Lượt 285 redo -> Lượt 289 'M10 và M12 ok'",
+   "face_words": "Her face: a SQUARE-ROUND face with a soft wide jaw and full apple cheeks, a DEEP DIMPLE in each cheek, bright wide-open eyes with straight lower lids, thick straight dark brows, a short rounded nose, a small soft mouth. Expression: a natural, sweet and cheerful smile, lips closed and only gently curved (never a stretched or wide grin), the two dimples showing softly in her cheeks, eyes bright and lively.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 17. Her face: a SQUARE-ROUND face with a soft wide jaw and full apple cheeks, a DEEP DIMPLE in each cheek, bright wide-open eyes with straight lower lids, thick straight dark brows, a short rounded nose, a small soft mouth. Expression: a natural, sweet and cheerful smile, lips closed and only gently curved (never a stretched or wide grin), the two dimples showing softly in her cheeks, eyes bright and lively. Hair: glossy pure BLACK (never brown), half-up: two small knots at the back of the crown tied with golden-yellow ribbons, one small flower hairpin, the rest loose. Outfit: a cross-collar ruqun of crisp pale golden-yellow silk with a long ivory pleated skirt of plain silk, small embroidered camellias at the collar and hem, a sash with a small amber pendant, long sleeves; her signature colour family pale golden yellow and ivory, gold only as thin accents. Pose: walking lightly with a closed oil-paper parasol held upright in one hand like a walking stick, the other hand swinging, skirt swirling, body turned three-quarters to the left."
+  },
+  "m13": {
+   "id": "m13",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "VX7IB7sMMU",
+   "gen_id": "5jDgjs6Kxe",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m13.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a slim V-SHAPED face with a narrow pointed chin and fine cheekbones, long PHOENIX eyes clearly upturned at the outer corners, fully open and bright, high thin arched brows, a slim long nose, thin lips with a sharp defined cupid's bow. Expression: Bright lively eyes, a light cheerful closed-lip smile, lips softly together, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 18. Her face: a slim V-SHAPED face with a narrow pointed chin and fine cheekbones, long PHOENIX eyes clearly upturned at the outer corners, fully open and bright, high thin arched brows, a slim long nose, thin lips with a sharp defined cupid's bow. Expression: Bright lively eyes, a light cheerful closed-lip smile, lips softly together, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), fully loose and long, a thin lilac ribbon tied at the back of the head and one small pearl flower comb above the left ear. Outfit: a cross-collar ruqun of lilac silk satin with a soft sheen and a high-waisted pale silvery lilac floor-length skirt of plain silk tied just above the waist, small embroidered osmanthus flowers at the hem, a soft silk sash with a small amethyst pendant, long sleeves; her signature colour family lilac and silver, silver only as thin accents. Pose: mid-step while adjusting a hairpin with one raised hand, her sleeve sliding back, a small wisteria spray in the other hand, body turned three-quarters to the left, face toward the viewer."
+  },
+  "m14": {
+   "id": "m14",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "mEZHy3chJQ",
+   "gen_id": "fHzK9PmCDY",
+   "refs_used": [
+    "iG5WzkW3uK",
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m14.v3c.FULL.txt",
+   "pick_why": "Lượt 302 pose redo v3c (refs own cut iG5WzkW3uK + M09); no later complaint found",
+   "face_words": "Her face: a soft OVAL face with plump lower cheeks and a rounded chin, very large clear almond eyes with slightly downturned outer corners, thin gently curved brows, a small button nose, soft full lips. Expression: Soft warm eyes, a tender small closed-lip smile, lips softly together, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 18. Her face: a soft OVAL face with plump lower cheeks and a rounded chin, very large clear almond eyes with slightly downturned outer corners, thin gently curved brows, a small button nose, soft full lips. Expression: Soft warm eyes, a tender small closed-lip smile, lips softly together, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), loose with a small half-up twist on the right side held by one small celadon jade hairpin, the side locks swept forward over one shoulder. Outfit: a cross-collar ruqun of ivory-white cotton-silk with a celadon floor-length skirt of plain silk, small embroidered wisteria sprays at the collar and cuffs, a celadon silk sash with a small celadon jade pendant, long sleeves; her signature colour family ivory white and celadon, silver only as thin accents. Pose: ANGLE: walking STRAIGHT TOWARD the viewer, body and face frontal; walking mid-step, the single pink lotus with a long stem held up lightly beside her shoulder in one hand, the other long sleeve swinging softly, head up, chin level, face and eyes looking straight at the viewer. Her LEGS and FEET for this pose: one foot stepping forward under the swinging hem, the back heel lifting, a natural easy walking stride; never both feet splayed outward, never stiff straight legs. No text, no labels."
+  },
+  "m15": {
+   "id": "m15",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "fHzKqW3CDY",
+   "gen_id": "5jDgjMaKxe",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m15.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a LONG OVAL face with gentle cheekbones and a small narrow chin, large soft round eyes, fully open and warm, fine high brows, a slim long nose, a wide-but-soft mouth with gently upturned corners. Expression: Wide clear innocent eyes, a pure sweet faint smile with lips closed, very youthful, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 19. Her face: a LONG OVAL face with gentle cheekbones and a small narrow chin, large soft round eyes, fully open and warm, fine high brows, a slim long nose, a wide-but-soft mouth with gently upturned corners. Expression: Wide clear innocent eyes, a pure sweet faint smile with lips closed, very youthful, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), half-up: the top drawn into a small low knot with a blush ribbon and a short pearl hairpin, the rest long and loose. Outfit: a long open beizi of blush-pink silk satin with a soft sheen reaching below the knee, worn over a cross-collar ivory inner top and a pearl-white floor-length skirt of plain silk, small embroidered pear blossoms along the front edges, a soft silk sash with a small pearl pendant, long sleeves; her signature colour family blush pink and pearl white, silver only as thin accents. Pose: stepping forward to offer a small jade hairpin box of pale lacquer in both hands, sleeves swinging, body in near side view (profile) facing left, head turned to face the viewer."
+  },
+  "m16": {
+   "id": "m16",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "5jDgLXuKxe",
+   "gen_id": "4RFGRqM9Aa",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m16.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a small ROUND face with soft cheeks and a tiny chin, close-set large round eyes, fully open and alert, thin straight brows, a tiny button nose, small thin lips. Expression: A calm composed gaze, a refined faint closed-lip smile, upright graceful bearing, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 16. Her face: a small ROUND face with soft cheeks and a tiny chin, close-set large round eyes, fully open and alert, thin straight brows, a tiny button nose, small thin lips. Expression: A calm composed gaze, a refined faint closed-lip smile, upright graceful bearing, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), two thin side plaits looped and joined at the back with lavender ribbons, the rest loose, one small gold flower hairpin. Outfit: a cross-collar ruqun of lavender-purple cotton-silk with a long pale lavender pleated floor-length skirt of plain silk, small embroidered apricot blossoms at the collar and hem, a soft silk sash with a small purple tassel knot, long sleeves; her signature colour family lavender purple and gold, gold only as thin accents. Pose: a graceful dance step, twirling one long sleeve, a small rabbit-shaped paper lantern held up by its short stick in the other hand, body turned three-quarters to the right, face toward the viewer."
+  },
+  "m17": {
+   "id": "m17",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "Cqnk5kDEEy",
+   "gen_id": "gOm9yZfSXO",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m17.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a SQUARE-ROUND face with a firm soft jaw and full cheeks, wide-open long almond eyes, thick straight brows, a short straight nose, a wide-but-soft mouth. Expression: A clear bright striking gaze, defined elegant features, a subtle poised closed-lip smile, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 17. Her face: a SQUARE-ROUND face with a firm soft jaw and full cheeks, wide-open long almond eyes, thick straight brows, a short straight nose, a wide-but-soft mouth. Expression: A clear bright striking gaze, defined elegant features, a subtle poised closed-lip smile, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), half-up: a small looped knot at the back of the crown tied with olive ribbons, the rest loose with a few strands at the temples. Outfit: a cross-collar ruqun of matte olive-green linen-silk with a pale olive-cream floor-length skirt of plain silk, small embroidered bamboo leaves at the collar and cuffs, a soft silk sash with a small jade bead pendant, long sleeves; her signature colour family olive green and gold, gold only as thin accents. Pose: walking while holding a kite reel with its string in both hands at her waist, sleeves trailing, coming straight toward the viewer, body facing front."
+  },
+  "m18": {
+   "id": "m18",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "s7IPw0Ll8e",
+   "gen_id": "N2qn3ku6D9",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m18.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a SLIM OVAL face with a gently pointed chin, large almond eyes with softly upturned outer corners, fully open and clear, softly arched thin brows, a slim straight nose, a small rosebud mouth. Expression: Sparkling eyes, a small playful closed-lip smile, head slightly tilted, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 18. Her face: a SLIM OVAL face with a gently pointed chin, large almond eyes with softly upturned outer corners, fully open and clear, softly arched thin brows, a slim straight nose, a small rosebud mouth. Expression: Sparkling eyes, a small playful closed-lip smile, head slightly tilted, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), fully loose, the top lightly gathered under a powder-blue ribbon bow at the back and one small pearl flower hairpin. Outfit: a cross-collar ruqun of powder-blue plain silk with a high-waisted pearl-white floor-length skirt of silk satin with a soft sheen tied just above the waist, small embroidered swallows at the hem, a soft silk sash with a small pearl tassel, long sleeves; her signature colour family powder blue and pearl white, silver only as thin accents. Pose: walking while holding a single sprig of pear blossom in both hands near her chest, sleeves trailing, body turned slightly to the left (about 15 degrees), face toward the viewer."
+  },
+  "m19": {
+   "id": "m19",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "tCRQ0thmZJ",
+   "gen_id": "8aiEYV3IrU",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m19.v3.FULL.txt",
+   "pick_why": "Lượt 285 DUYỆT m19 v3",
+   "face_words": "Her face: a soft graceful OVAL face with a gently tapered chin and smooth high cheeks, large gentle almond eyes with slightly heavy upper lids and long lashes, softly curved medium brows, a small straight refined nose, a small full rosy mouth with a defined cupid's bow. Expression: warm, elegant and composed, a gentle knowing smile.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 19. Her face: a soft graceful OVAL face with a gently tapered chin and smooth high cheeks, large gentle almond eyes with slightly heavy upper lids and long lashes, softly curved medium brows, a small straight refined nose, a small full rosy mouth with a defined cupid's bow. Expression: warm, elegant and composed, a gentle knowing smile. Hair: glossy pure BLACK (never brown), long and loose down her back, a thin apricot ribbon braided into one small side plait at the left temple, one small gold comb at the back. Outfit: a light open beizi of soft caramel-apricot silk gauze worn over a cross-collar ivory inner top and a pale apricot floor-length skirt of plain silk, small embroidered morning glories along the front edges, a sash with a small amber bead pendant, long sleeves; her signature colour family caramel apricot and gold, gold only as thin accents. Pose: standing with her weight on one leg, slowly unrolling a painting scroll held half-open in both hands at waist height, glancing up from it toward the viewer, body turned three-quarters to the right."
+  },
+  "m20": {
+   "id": "m20",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "UPv6ye3wny",
+   "gen_id": "eIPvB3pdqL",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m20.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a ROUND face with soft rounded cheeks, large round eyes with slightly downturned outer corners, fully open and bright, gently arched thin brows, a small rounded nose, small plump lips with softly upturned corners. Expression: Warm gentle eyes, a tender little closed-lip smile, lips gently together, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 17. Her face: a ROUND face with soft rounded cheeks, large round eyes with slightly downturned outer corners, fully open and bright, gently arched thin brows, a small rounded nose, small plump lips with softly upturned corners. Expression: Warm gentle eyes, a tender little closed-lip smile, lips gently together, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), half-up: two small loops at the back of the crown tied with slate-blue ribbons and one small pearl hairpin, long loose hair behind. Outfit: a cross-collar ruqun of slate-blue silk crepe with a pale blue-grey floor-length skirt of plain silk, small embroidered gardenias at the collar and cuffs, a soft silk sash with a small gold-rimmed jade pendant, long sleeves; her signature colour family slate blue and gold, gold only as thin accents. Pose: skipping lightly forward, holding a small empty bamboo bird cage up by its ring at her chest, skirt and ribbons fluttering, body fully frontal, facing the viewer."
+  },
+  "m21": {
+   "id": "m21",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "6AbY2ahiJO",
+   "gen_id": "WDgXVCBcXe",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m21.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a HEART-SHAPED face with soft full cheeks and a small pointed chin, wide-set large almond eyes, short gently arched brows, a small straight nose, rosy lips with a soft cupid's bow. Expression: Clear wide innocent eyes, a sweet pure faint closed-lip smile, fresh and very youthful, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 17. Her face: a HEART-SHAPED face with soft full cheeks and a small pointed chin, wide-set large almond eyes, short gently arched brows, a small straight nose, rosy lips with a soft cupid's bow. Expression: Clear wide innocent eyes, a sweet pure faint closed-lip smile, fresh and very youthful, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), half-up: the top hair braided into a small knot with an aqua ribbon, one small silver flower hairpin, the rest loose over the shoulders. Outfit: a cross-collar ruqun of aqua-celadon silk satin with a soft sheen and a long pale celadon pleated floor-length skirt of plain silk, small embroidered narcissus flowers at the collar and hem, a soft silk sash with a small celadon jade pendant, long sleeves; her signature colour family aqua celadon and silver, silver only as thin accents. Pose: raising a lotus-shaped silk lantern hanging from a short stick up beside her cheek with one hand, glancing at it, body turned three-quarters to the left, face toward the viewer."
+  },
+  "m22": {
+   "id": "m22",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "eIPv8g3dqL",
+   "gen_id": "0eUoDFCTfW",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m22.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a LONG OVAL face with a slightly pointed chin and slim cheeks, close-set long almond eyes, fully open and sharp-sighted, straight dark brows angled faintly upward, a long slim nose, thin lips with a slightly fuller lower lip. Expression: A composed serene gaze, a refined faint closed-lip smile, upright and graceful bearing, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 19. Her face: a LONG OVAL face with a slightly pointed chin and slim cheeks, close-set long almond eyes, fully open and sharp-sighted, straight dark brows angled faintly upward, a long slim nose, thin lips with a slightly fuller lower lip. Expression: A composed serene gaze, a refined faint closed-lip smile, upright and graceful bearing, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), fully loose and long with a thin dusty-rose ribbon woven through one lock at the side and a small taupe silk flower comb. Outfit: a cross-collar ruqun of dusty-rose silk damask with a subtle tone-on-tone pattern and a soft taupe floor-length skirt of plain silk, small embroidered hydrangeas at the collar and cuffs, a taupe silk sash with a small rose quartz pendant, long sleeves; her signature colour family dusty rose and taupe, gold only as thin accents. Pose: adjusting a hairpin with one raised hand, a round bronze hand mirror held by its handle in the other hand at her waist, body turned slightly to the right (about 15 degrees), face toward the viewer."
+  },
+  "m23": {
+   "id": "m23",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "xSBOL8qjfW",
+   "gen_id": "gOmNUUoSXO",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m23.v4b.FULL.txt",
+   "pick_why": "Lượt 316 NEW person v4 -> Lượt 322 v4b younger colours; Lượt 326 'm23 v4b OK'",
+   "face_words": "Her face: a softly HEART-SHAPED face with a gently tapered chin, long elegant almond eyes with clearly defined outer corners, fully open and bright, both eyes symmetrical with both irises looking straight at the viewer, never cross-eyed, straight refined brows, a slim straight nose, defined medium lips. Expression: A clear striking gaze, elegantly defined features, a subtle poised closed-lip smile, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 18. Her face: a softly HEART-SHAPED face with a gently tapered chin, long elegant almond eyes with clearly defined outer corners, fully open and bright, both eyes symmetrical with both irises looking straight at the viewer, never cross-eyed, straight refined brows, a slim straight nose, defined medium lips. Expression: A clear striking gaze, elegantly defined features, a subtle poised closed-lip smile, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), long and loose down her back, two thin braids from the temples joined at the back of her head by a small silver hair clasp, a few small pale-blue hydrangea florets pinned beside it. Outfit: a cross-collar ruqun of fresh light aqua-mint silk satin with a soft sheen, worn over a long soft pearl-white floor-length pleated skirt of plain silk, small embroidered orchid sprays at the collar and cuffs, a soft aqua-mint silk sash with a small white jade disc pendant, long sleeves; her signature colour family fresh aqua mint and pearl white, youthful and bright, never dull, dark or aged-looking, silver only as thin accents. Pose: ANGLE: a SLIGHT shoulder turn to the RIGHT (about 15 degrees), body almost frontal, face toward the viewer; standing gracefully, a small round fan of pale cream silk painted with a single red camellia held in one hand at her waist, the other hand resting lightly at her sash, head held up, chin level, gaze straight at the viewer, never looking down. Natural correct adult body proportions: head, shoulders, arms, hands, hips and legs in natural proportion, two normal arms with five-fingered hands, nothing distorted. Her LEGS and FEET for this pose: weight on one foot, the other foot resting slightly to the side, toes peeking under the hem; never both feet splayed outward, never stiff straight legs. No text, no labels."
+  },
+  "m24": {
+   "id": "m24",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "p8yhIrDehw",
+   "gen_id": "Lw8yUxPswO",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m24.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a LONG SOFT-SQUARE face with a gently squared jaw and level cheeks, large calm almond eyes with straight lower lids, fully open and clear, straight slightly thick brows, a straight slim nose, balanced medium-full lips. Expression: Sparkling merry eyes, a small playful closed-lip smile, head tilted slightly, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 19. Her face: a LONG SOFT-SQUARE face with a gently squared jaw and level cheeks, large calm almond eyes with straight lower lids, fully open and clear, straight slightly thick brows, a straight slim nose, balanced medium-full lips. Expression: Sparkling merry eyes, a small playful closed-lip smile, head tilted slightly, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), loose and long, gathered loosely low at the nape with a jade-green ribbon, one small gold hairpin at the crown. Outfit: a cross-collar ruqun of jade-green plain silk with a high-waisted pale jade floor-length skirt of matte linen-silk tied just above the waist, small embroidered irises at the hem, a soft silk sash with a small jade ring pendant, long sleeves; her signature colour family jade green and gold, gold only as thin accents. Pose: walking slowly while gazing at a small jade ruyi held in both hands near her chest, body turned three-quarters to the right, face toward the viewer."
+  },
+  "m25": {
+   "id": "m25",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "s7IPJ0xl8e",
+   "gen_id": "P3QAiPp42C",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m25.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a softly rounded HEART face with high cheekbones and a small dimple in each cheek, upturned round-almond eyes, fully open and bright, high arched brows, a small upturned nose, small full lips with a lifted cupid's bow. Expression: Bright lively eyes, a light cheerful closed-lip smile, lips softly together, the dimples showing softly, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 17. Her face: a softly rounded HEART face with high cheekbones and a small dimple in each cheek, upturned round-almond eyes, fully open and bright, high arched brows, a small upturned nose, small full lips with a lifted cupid's bow. Expression: Bright lively eyes, a light cheerful closed-lip smile, lips softly together, the dimples showing softly, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), half-up: two thin plaits from the temples crossed at the back and tied with violet ribbons, one small silver flower hairpin, the rest loose. Outfit: a cross-collar ruqun of lavender-violet silk satin with a soft sheen and a pale lilac floor-length skirt of plain silk, small embroidered violets at the collar and cuffs, a soft silk sash with a small amethyst bead pendant, long sleeves; her signature colour family lavender violet and silver, silver only as thin accents. Pose: lifting her skirt hem slightly with one hand as if stepping up a stair, a round silk fan painted with butterflies, with a short tassel, in the other hand, coming straight toward the viewer, body facing front."
+  },
+  "m26": {
+   "id": "m26",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "aFG5H4ufSh",
+   "gen_id": "yiu2i9KPW9",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m26.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a SOFT DIAMOND face with gentle cheekbones and a small rounded chin, large round doe eyes with long lashes, thin softly arched brows, a small rounded nose, a rosebud mouth with a slightly fuller lower lip. Expression: Soft warm eyes, a tender small closed-lip smile, lips softly together, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 18. Her face: a SOFT DIAMOND face with gentle cheekbones and a small rounded chin, large round doe eyes with long lashes, thin softly arched brows, a small rounded nose, a rosebud mouth with a slightly fuller lower lip. Expression: Soft warm eyes, a tender small closed-lip smile, lips softly together, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), fully loose with the front strands tied back by a thin blush ribbon, a small pink silk flower hairpin above the ear. Outfit: a cross-collar ruqun of blush-pink cotton-silk with a long pale pink pleated floor-length skirt of plain silk, small embroidered cherry blossoms at the collar and hem, a soft silk sash with a small gold-framed pendant, long sleeves; her signature colour family blush pink and gold, gold only as thin accents. Pose: skipping lightly forward, holding a folded letter at her chest with one hand, skirt and ribbons fluttering, body turned slightly to the left (about 15 degrees), face toward the viewer."
+  },
+  "m27": {
+   "id": "m27",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "gOm9PO5SXO",
+   "gen_id": "If3QfDEtvE",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m27.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a ROUND-OVAL face with rosy rounded cheeks, very large round bright eyes, short soft straight brows, a short rounded nose, small rosy lips with naturally upturned corners. Expression: Wide clear innocent eyes, a pure sweet faint smile with lips closed, very youthful, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 16. Her face: a ROUND-OVAL face with rosy rounded cheeks, very large round bright eyes, short soft straight brows, a short rounded nose, small rosy lips with naturally upturned corners. Expression: Wide clear innocent eyes, a pure sweet faint smile with lips closed, very youthful, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), one thick soft braid falling over her left shoulder, tied with spring-green ribbon, the top hair smooth with one small flower hairpin. Outfit: a cross-collar ruqun of soft spring-green plain silk with a pale green floor-length skirt of cotton-silk, small embroidered butterflies and grass flowers at the collar and cuffs, a soft silk sash with a small jade bead tassel, long sleeves; her signature colour family soft spring green and gold, gold only as thin accents. Pose: a light little twirl, holding a willow branch at her chest, skirt swirling out, body fully frontal, facing the viewer."
+  },
+  "m28": {
+   "id": "m28",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "9ZHzA2JNYZ",
+   "gen_id": "kseUsFL16B",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m28.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a small HEART-SHAPED face with a little button chin, large round eyes with crisp defined corners, fully open and alert, gently arched brows, a small straight nose, small thin lips. Expression: A calm composed gaze, a refined faint closed-lip smile, upright graceful bearing, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 16. Her face: a small HEART-SHAPED face with a little button chin, large round eyes with crisp defined corners, fully open and alert, gently arched brows, a small straight nose, small thin lips. Expression: A calm composed gaze, a refined faint closed-lip smile, upright graceful bearing, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), half-up: two small loops at the crown tied with coral ribbon bows, one small pearl flower hairpin, the rest loose. Outfit: a cross-collar ruqun of coral-pink silk satin with a soft sheen and a long ivory pleated floor-length skirt of plain silk, small embroidered rabbits and grasses at the hem, a soft silk sash with a small coral pendant, long sleeves; her signature colour family coral pink and ivory, gold only as thin accents. Pose: walking mid-step with sleeves flowing, a small paper pinwheel held up in one hand at her side, body turned three-quarters to the left, face toward the viewer."
+  },
+  "m29": {
+   "id": "m29",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "kseUgS216B",
+   "gen_id": "Lw8yw1JswO",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m29.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a LONG symmetrical OVAL face, wide-set long almond eyes with straight lower lids, fully open and clear, straight long brows, a long straight nose, full lips with a defined cupid's bow. Expression: A clear bright striking gaze, defined elegant features, a subtle poised closed-lip smile, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 19. Her face: a LONG symmetrical OVAL face, wide-set long almond eyes with straight lower lids, fully open and clear, straight long brows, a long straight nose, full lips with a defined cupid's bow. Expression: A clear bright striking gaze, defined elegant features, a subtle poised closed-lip smile, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), fully loose and straight, a thin pale celadon ribbon tied across the back of the head, one small silver flower comb at each side. Outfit: a long open beizi of pale celadon silk damask with a subtle tone-on-tone pattern reaching below the knee, worn over a cross-collar white inner top and a pale silvery green floor-length skirt of plain silk, small embroidered pine sprigs along the front edges, a soft silk sash with a small white jade pendant, long sleeves; her signature colour family pale celadon and silver, silver only as thin accents. Pose: adjusting a hairpin with one raised hand, the other hand holding a long vertical xiao flute upright at her side, body turned slightly to the right (about 15 degrees), face toward the viewer."
+  },
+  "m30": {
+   "id": "m30",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "xSBJ6nGjfW",
+   "gen_id": "kseUOH516B",
+   "refs_used": [
+    "EbY1qSbuuO",
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m30.v3b.FULL.txt",
+   "pick_why": "Lượt 300 pose redo; Lượt 302 'm30 OK'",
+   "face_words": "Her face: a slim EGG-SHAPED face with soft cheeks and a rounded chin, large almond eyes with softly downturned outer corners, fully open and clear, faintly arched brows, a small straight nose, small thin lips with a soft bow. Expression: Sparkling eyes, a small playful closed-lip smile, head slightly tilted, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 18. Her face: a slim EGG-SHAPED face with soft cheeks and a rounded chin, large almond eyes with softly downturned outer corners, fully open and clear, faintly arched brows, a small straight nose, small thin lips with a soft bow. Expression: Sparkling eyes, a small playful closed-lip smile, head slightly tilted, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), half-up: the top twisted into a small knot under a soft lilac ribbon bow, one small flower hairpin, the rest loose. Outfit: a cross-collar ruqun of soft lilac silk crepe with a pale grey-lilac floor-length skirt of plain silk, small embroidered lilies at the collar and cuffs, a soft silk sash with a small silver locket pendant, long sleeves; her signature colour family soft lilac and silver, silver only as thin accents. Pose: standing calmly with a small silk handkerchief raised in one hand at chest height, the other hand resting at her sash, body FULLY FRONTAL facing the viewer (not turned), head up, chin level, face and eyes looking straight at the viewer."
+  },
+  "m31": {
+   "id": "m31",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "iG5Wphl3uK",
+   "gen_id": "3zKcD5YREY",
+   "refs_used": [
+    "lJt47AWgv9",
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m31.v3b.FULL.txt",
+   "pick_why": "Lượt 300 pose redo; Lượt 302 not re-asked = OK",
+   "face_words": "Her face: a SOFT-ANGULAR long face with high cheekbones and a defined jaw, large almond eyes upturned at the outer corners, fully open and bright, fine arched brows, a straight slim nose, full lips. Expression: Lively sparkling-bright eyes, a light happy closed-lip smile, lips gently together, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 19. Her face: a SOFT-ANGULAR long face with high cheekbones and a defined jaw, large almond eyes upturned at the outer corners, fully open and bright, fine arched brows, a straight slim nose, full lips. Expression: Lively sparkling-bright eyes, a light happy closed-lip smile, lips gently together, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), half-up: two small loops at the crown tied with buttercup-yellow ribbons, the rest long and loose behind. Outfit: a cross-collar ruqun of pale buttercup-yellow silk satin with a soft sheen and a high-waisted ivory-cream floor-length skirt of plain silk tied just above the waist, small embroidered osmanthus sprigs at the hem, a soft silk sash with a small gold-and-jade pendant, long sleeves; her signature colour family pale buttercup yellow and gold, gold only as thin accents. Pose: standing still, body FULLY FRONTAL facing the viewer (not turned), weight on her right leg, left knee softly bent forward, holding a sprig of osmanthus in one hand at chest height, the other hand resting at her sash, head up, chin level, face and eyes looking straight at the viewer."
+  },
+  "m32": {
+   "id": "m32",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "u5Wrb7PQLD",
+   "gen_id": "lJt4w4Ugv9",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m32.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a small ROUND face with a little pointed chin, wide-set doe eyes, fully open and bright, short arched brows, a small rounded nose, small heart-shaped lips, a single dimple in her right cheek. Expression: Warm gentle eyes, a tender little closed-lip smile, lips gently together, the dimple showing softly, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 17. Her face: a small ROUND face with a little pointed chin, wide-set doe eyes, fully open and bright, short arched brows, a small rounded nose, small heart-shaped lips, a single dimple in her right cheek. Expression: Warm gentle eyes, a tender little closed-lip smile, lips gently together, the dimple showing softly, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), half-up: a small braided band across the crown tied at the back with a mint ribbon bow, two small pearl hairpins, the rest loose. Outfit: a cross-collar ruqun of pale mint-green cotton-silk with a long ivory pleated floor-length skirt of plain silk, small embroidered dragonflies at the collar and hem, a soft silk sash with a small jade cicada pendant, long sleeves; her signature colour family pale mint green and ivory, silver only as thin accents. Pose: twirling one long sleeve in a light dance step, a small swallow-shaped paper kite held by its frame in the other hand, coming straight toward the viewer, body facing front."
+  },
+  "m33": {
+   "id": "m33",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "nVseTaFYQD",
+   "gen_id": "jUoOgPXLD0",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m33.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a WIDE OVAL face with a gently rounded chin, large almond eyes with long lashes, softly arched brows, a small straight nose, full soft lips with gently upturned corners. Expression: Clear wide innocent eyes, a sweet pure faint closed-lip smile, fresh and very youthful, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 18. Her face: a WIDE OVAL face with a gently rounded chin, large almond eyes with long lashes, softly arched brows, a small straight nose, full soft lips with gently upturned corners. Expression: Clear wide innocent eyes, a sweet pure faint closed-lip smile, fresh and very youthful, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), fully loose with a lavender-blue ribbon tied in a small bow at the back, a short string of small pearls pinned at the crown. Outfit: a cross-collar ruqun of lavender-blue plain silk with a pale periwinkle floor-length skirt of silk satin with a soft sheen, small embroidered irises and leaves at the collar and cuffs, a soft silk sash with a small lapis pendant, long sleeves; her signature colour family lavender blue and silver, silver only as thin accents. Pose: walking forward holding a single iris stem in one hand at her waist, sleeves and sash swaying, body turned slightly to the left (about 15 degrees), face toward the viewer."
+  },
+  "m34": {
+   "id": "m34",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "kseUL3T16B",
+   "gen_id": "If3Qv5PtvE",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m34.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a small ROUND face with soft baby cheeks, almond eyes slightly upturned at the outer corners, fully open and alert, thin straight brows, a tiny button nose, a small rosebud mouth. Expression: A composed serene gaze, a refined faint closed-lip smile, upright and graceful bearing, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 16. Her face: a small ROUND face with soft baby cheeks, almond eyes slightly upturned at the outer corners, fully open and alert, thin straight brows, a tiny button nose, a small rosebud mouth. Expression: A composed serene gaze, a refined faint closed-lip smile, upright and graceful bearing, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), half-up: two small knots at the sides of the crown tied with peach-pink ribbons, the rest loose and long. Outfit: a long open beizi of peach-pink silk satin with a soft sheen reaching below the knee, worn over a cross-collar pale inner top and a pale peach floor-length skirt of cotton-silk, small embroidered pomegranate flowers along the front edges, a soft silk sash with a small red bead tassel, long sleeves; her signature colour family peach pink and gold, gold only as thin accents. Pose: swaying in a light turn, a small pellet drum held up by its handle near her shoulder, skirt swirling, body fully frontal, facing the viewer."
+  },
+  "m35": {
+   "id": "m35",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "rgX7l2oxtc",
+   "gen_id": "BhNCtKFoQR",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m35.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a SOFT-ANGULAR oval face with a gently defined jaw, large bright almond eyes with crisp outer corners, thick straight brows, a straight nose, a wide-but-soft mouth. Expression: A striking clear bright gaze, elegantly defined features, a subtle poised closed-lip smile, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 18. Her face: a SOFT-ANGULAR oval face with a gently defined jaw, large bright almond eyes with crisp outer corners, thick straight brows, a straight nose, a wide-but-soft mouth. Expression: A striking clear bright gaze, elegantly defined features, a subtle poised closed-lip smile, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), half-up: a small braided knot at the back with pale jade ribbons and two small white flower hairpins, the rest loose. Outfit: a cross-collar ruqun of pale jade-green silk crepe with a pearl-white floor-length skirt of plain silk, small embroidered jasmine flowers at the collar and cuffs, a soft silk sash with a small pearl pendant, long sleeves; her signature colour family pale jade green and pearl white, silver only as thin accents. Pose: adjusting a hairpin with one raised hand, the other hand holding an embroidered sachet with a tassel dangling at her waist, body turned three-quarters to the left, face toward the viewer."
+  },
+  "m36": {
+   "id": "m36",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "xSBJUZcjfW",
+   "gen_id": "DoOmofHpcl",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m36.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a DIAMOND face with gentle high cheekbones and a softly pointed chin, large round-almond eyes, fully open and clear, high softly arched brows, a slim straight nose, thin soft lips. Expression: Sparkling merry eyes, a small playful closed-lip smile, head tilted slightly, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 18. Her face: a DIAMOND face with gentle high cheekbones and a softly pointed chin, large round-almond eyes, fully open and clear, high softly arched brows, a slim straight nose, thin soft lips. Expression: Sparkling merry eyes, a small playful closed-lip smile, head tilted slightly, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), fully loose with a thin cream ribbon and a small gold flower comb set at the crown. Outfit: a cross-collar ruqun of ivory-cream silk satin with a soft sheen and a high-waisted warm cream floor-length skirt of matte linen-silk tied just above the waist, small embroidered ginkgo leaves at the hem, a soft silk sash with a small gold-thread tassel, long sleeves; her signature colour family ivory cream and gold, gold only as thin accents. Pose: turning lightly with a closed folding fan of carved sandalwood in both hands, sash fluttering, body turned slightly to the right (about 15 degrees), face toward the viewer."
+  },
+  "m37": {
+   "id": "m37",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "Cqnkl9tEEy",
+   "gen_id": "eIPvuP6dqL",
+   "refs_used": [
+    "UPv640Owny",
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m37.v3b.FULL.txt",
+   "pick_why": "Lượt 300 pose redo; Lượt 302 not re-asked = OK",
+   "face_words": "Her face: a LONG HEART face with a pointed chin and slim cheeks, large clear almond eyes, fully open and bright, thin straight brows, a small straight nose, thin lips set in a firm neat line. Expression: Bright lively eyes, a light cheerful closed-lip smile, lips softly together, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 17. Her face: a LONG HEART face with a pointed chin and slim cheeks, large clear almond eyes, fully open and bright, thin straight brows, a small straight nose, thin lips set in a firm neat line. Expression: Bright lively eyes, a light cheerful closed-lip smile, lips softly together, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), half-up: the top tied into a small knot with an aqua ribbon and a little cluster of small flower hairpins, the rest loose. Outfit: a cross-collar ruqun of pale aqua plain silk with a long pale silvery aqua pleated floor-length skirt of silk satin with a soft sheen, small embroidered waves and clouds at the collar and hem, a soft silk sash with a small aquamarine pendant, long sleeves; her signature colour family pale aqua and silver, silver only as thin accents. Pose: standing calmly, raising a lotus seed pod on a short stem beside her cheek with one hand, the other hand resting at her sash, body turned THREE-QUARTER to the LEFT (no more than three-quarter, the whole front of the body still visible, never side view), head up, chin level, face and eyes looking straight at the viewer."
+  },
+  "m38": {
+   "id": "m38",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "u5WrKP9QLD",
+   "gen_id": "5jDgjPYKxe",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m38.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a ROUND-OVAL face with rosy rounded cheeks, large doe eyes with softly downturned outer corners, gently curved brows, a small button nose, a small full rosebud mouth. Expression: Soft warm eyes, a tender small closed-lip smile, lips softly together, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 17. Her face: a ROUND-OVAL face with rosy rounded cheeks, large doe eyes with softly downturned outer corners, gently curved brows, a small button nose, a small full rosebud mouth. Expression: Soft warm eyes, a tender small closed-lip smile, lips softly together, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), half-up: a small loop at the back of the crown tied with apricot ribbons and a small pearl flower hairpin, long loose hair behind. Outfit: a long open beizi of warm apricot cotton-silk reaching below the knee, worn over a cross-collar ivory inner top and a pale apricot floor-length skirt of plain silk, small embroidered apricot fruits and leaves along the front edges, a soft silk sash with a small amber pendant, long sleeves; her signature colour family warm apricot and gold, gold only as thin accents. Pose: offering a single peony bloom forward with both hands, head tilted gently, body turned three-quarters to the right, face toward the viewer."
+  },
+  "m39": {
+   "id": "m39",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "JNCRSC2Oq4",
+   "gen_id": "tCRFXOSmZJ",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m39.v4.FULL.txt",
+   "pick_why": "Lượt 317 NEW person v4; Lượt 322 'm39 OK'",
+   "face_words": "Her face: a small ROUND face with soft full cheeks and a small rounded chin, large clear wide-open round eyes, both eyes symmetrical with both irises looking straight at the viewer, never cross-eyed, gently arched soft brows, a small button nose, small soft rosy lips. Expression: Wide clear innocent eyes, a pure sweet faint smile with lips closed, very youthful, eyes fully open.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 17. Her face: a small ROUND face with soft full cheeks and a small rounded chin, large clear wide-open round eyes, both eyes symmetrical with both irises looking straight at the viewer, never cross-eyed, gently arched soft brows, a small button nose, small soft rosy lips. Expression: Wide clear innocent eyes, a pure sweet faint smile with lips closed, very youthful, eyes fully open. Hair: glossy pure BLACK (never brown), two small soft buns low at the back of the head on either side, the rest long and loose down her back, a thin lilac ribbon wound around each bun, a few small white jasmine florets pinned beside them. Outfit: a cross-collar ruqun of soft lilac-purple silk satin with a gentle sheen, worn over a long ivory-white floor-length pleated skirt of plain silk, small embroidered white magnolia sprays at the collar and cuffs, a lilac silk sash with a small amethyst bead pendant, long sleeves; her signature colour family lilac purple and ivory white, silver only as thin accents. Pose: ANGLE: FULLY FRONTAL, body and face squarely facing the viewer; standing lightly, a small woven bamboo birdcage with a little yellow songbird held up in front of her chest with both hands, head held up, chin level, gaze straight at the viewer, never looking down. Natural correct adult body proportions: a normal-sized head in natural proportion to the body (never an oversized head), natural shoulders, arms, hands, hips and legs, two normal arms with five-fingered hands, nothing distorted. Her LEGS and FEET for this pose: feet close together, one foot a little forward, toes peeking from under the hem; never both feet splayed outward, never stiff straight legs. No text, no labels."
+  },
+  "m40": {
+   "id": "m40",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "gOm9yTKSXO",
+   "gen_id": "YMldMECWeC",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m40.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a HEART-SHAPED face with plump cheeks and a small pointed chin, close-set almond eyes with slightly downturned outer corners, fully open and alert, softly arched brows, a short straight nose, full lips. Expression: A calm composed gaze, a refined faint closed-lip smile, upright graceful bearing, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 17. Her face: a HEART-SHAPED face with plump cheeks and a small pointed chin, close-set almond eyes with slightly downturned outer corners, fully open and alert, softly arched brows, a short straight nose, full lips. Expression: A calm composed gaze, a refined faint closed-lip smile, upright graceful bearing, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), half-up: a small knot with a dusty-rose ribbon and one small gold flower hairpin, the side locks falling in front of both shoulders. Outfit: a cross-collar ruqun of dusty-rose silk crepe with a long pale rose pleated floor-length skirt of plain silk, small embroidered roses at the collar and hem, a soft silk sash with a small gold-rimmed pendant, long sleeves; her signature colour family dusty rose and gold, gold only as thin accents. Pose: raising a small camellia branch beside her cheek with one hand, glancing over it, body turned slightly to the left (about 15 degrees), face toward the viewer."
+  },
+  "m41": {
+   "id": "m41",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "MBJto16DCm",
+   "gen_id": "If3QfgZtvE",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m41.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a ROUND face with a firm little chin, wide-set large almond eyes, fully open and bright, thick short straight brows, a small straight nose, small full lips with defined edges. Expression: A clear bright striking gaze, defined elegant features, a subtle poised closed-lip smile, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 16. Her face: a ROUND face with a firm little chin, wide-set large almond eyes, fully open and bright, thick short straight brows, a small straight nose, small full lips with defined edges. Expression: A clear bright striking gaze, defined elegant features, a subtle poised closed-lip smile, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), loose with a thin willow-green ribbon tied around the head and knotted at the back, a small gold leaf hairpin. Outfit: a cross-collar ruqun of soft willow-green plain silk with a pale green floor-length skirt of matte linen-silk, small embroidered willow catkins at the collar and cuffs, a soft silk sash with a small jade leaf pendant, long sleeves; her signature colour family soft willow green and gold, gold only as thin accents. Pose: walking forward mid-step with sleeves flowing, a round paper lantern on a short stick in one hand, body fully frontal, facing the viewer."
+  },
+  "m42": {
+   "id": "m42",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "w4aiPRt7EI",
+   "gen_id": "1ldwLjhr4r",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m42.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: an OVAL face with softly flushed cheeks, large round eyes with gently lifted outer corners, gently arched brows, a small straight nose, a wide-but-soft mouth. Expression: Sparkling eyes, a small playful closed-lip smile, head slightly tilted, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 18. Her face: an OVAL face with softly flushed cheeks, large round eyes with gently lifted outer corners, gently arched brows, a small straight nose, a wide-but-soft mouth. Expression: Sparkling eyes, a small playful closed-lip smile, head slightly tilted, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), half-up: two small braided loops at the crown tied with peach-coral ribbons and one small flower hairpin, the rest loose. Outfit: a cross-collar ruqun of peach-coral silk satin with a soft sheen and a high-waisted pale peach floor-length skirt of plain silk tied just above the waist, small embroidered peach blossoms and leaves at the hem, a soft silk sash with a small coral bead pendant, long sleeves; her signature colour family peach coral and gold, gold only as thin accents. Pose: stepping forward holding a sprig of apricot blossom raised in one hand, sleeves fluttering, body turned three-quarters to the left, face toward the viewer."
+  },
+  "m43": {
+   "id": "m43",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "kseUUU416B",
+   "gen_id": "0eUoBbaTfW",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m43.v3.FULL.txt",
+   "pick_why": "Lượt 293 teeth redo, lips-pressed expression (exact redo wording not saved in the file)",
+   "face_words": "Her face: a SLENDER LONG OVAL face with fine cheekbones, long PHOENIX eyes with lifted outer corners, fully open and bright, fine thin brows, a slim straight nose, a small full mouth. Expression: Lively sparkling-bright eyes and a small calm closed-mouth smile, the lips fully pressed together and covering the teeth completely, eyes fully open.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 19. Her face: a SLENDER LONG OVAL face with fine cheekbones, long PHOENIX eyes with lifted outer corners, fully open and bright, fine thin brows, a slim straight nose, a small full mouth. Expression: Lively sparkling-bright eyes and a small calm closed-mouth smile, the lips fully pressed together and covering the teeth completely, eyes fully open. Hair: glossy pure BLACK (never brown), half-up: the top drawn back into a small low knot with a periwinkle ribbon and a small pearl flower hairpin, the rest loose. Outfit: a long open beizi of periwinkle silk damask with a subtle tone-on-tone pattern reaching below the knee, worn over a cross-collar white inner top and a pale silver-periwinkle floor-length skirt of plain silk, small embroidered hydrangea florets along the front edges, a soft silk sash with a small silver pendant, long sleeves; her signature colour family periwinkle and silver, silver only as thin accents. Pose: walking forward mid-step, long sleeves flowing behind her, a small rolled embroidery pattern scroll held at her side, body turned slightly to the right (about 15 degrees), face toward the viewer."
+  },
+  "m44": {
+   "id": "m44",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "nVsebgfYQD",
+   "gen_id": "EbY16GEuuO",
+   "refs_used": [
+    "1ldwsyqr4r",
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m44.v3c.FULL.txt",
+   "pick_why": "Lượt 302 pose redo v3c (refs own cut 1ldwsyqr4r + M09); no later complaint found",
+   "face_words": "Her face: a ROUND-OVAL face with smooth soft cheeks, wide-set large almond eyes, fully open and clear, gently arched brows, a small rounded nose, a small thin prim mouth. Expression: Warm gentle eyes, a tender little closed-lip smile, lips gently together, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 17. Her face: a ROUND-OVAL face with smooth soft cheeks, wide-set large almond eyes, fully open and clear, gently arched brows, a small rounded nose, a small thin prim mouth. Expression: Warm gentle eyes, a tender little closed-lip smile, lips gently together, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), one braid down her back from the crown, tied with blush-pink ribbons, the side locks loose in front of the ears, one small pink flower hairpin. Outfit: a cross-collar ruqun of ivory cotton-silk with a blush-pink floor-length skirt of silk satin with a soft sheen, small embroidered begonia sprays at the collar and cuffs, a blush silk sash with a small rose quartz pendant, long sleeves; her signature colour family ivory and blush pink, gold only as thin accents. Pose: ANGLE: FULLY FRONTAL, body and face squarely facing the viewer; a light twirl in place, the small porcelain vase with a single flower sprig held close to her chest with both hands, her skirt swirling out softly around her, head up, chin level, face and eyes looking straight at the viewer. Her LEGS and FEET for this pose: feet close together, one foot rising on tiptoe just behind the other as the skirt swirls, toes peeking under the hem; never both feet splayed outward, never stiff straight legs. No text, no labels."
+  },
+  "m45": {
+   "id": "m45",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "YMldVttWeC",
+   "gen_id": "8aiuhFAIrU",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m45.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a gently rounded DIAMOND face with soft cheekbones and a small chin, large bright round eyes, softly arched brows, a small straight nose, full soft lips with a cupid's bow. Expression: Clear wide innocent eyes, a sweet pure faint closed-lip smile, fresh and very youthful, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 18. Her face: a gently rounded DIAMOND face with soft cheekbones and a small chin, large bright round eyes, softly arched brows, a small straight nose, full soft lips with a cupid's bow. Expression: Clear wide innocent eyes, a sweet pure faint closed-lip smile, fresh and very youthful, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), half-up: two thin plaits from the temples joined at the back with a pale blue ribbon bow, one small silver flower hairpin, the rest loose. Outfit: a cross-collar ruqun of pale sky-blue plain silk with a long pearl-white pleated floor-length skirt of cotton-silk, small embroidered plum flowers at the collar and hem, a soft silk sash with a small pearl tassel, long sleeves; her signature colour family pale sky blue and pearl white, silver only as thin accents. Pose: walking mid-step carrying a hexagonal silk palace lantern hanging from a short stick in one hand, long sleeves swaying, body turned three-quarters to the right, face toward the viewer."
+  },
+  "m46": {
+   "id": "m46",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "kseUL4n16B",
+   "gen_id": "EbY1HS5uuO",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m46.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a SOFT-ANGULAR face with a gently squared chin and level cheekbones, close-set long almond eyes, fully open and sharp, straight fuller brows, a straight nose, thin firm lips. Expression: A composed serene gaze, a refined faint closed-lip smile, upright and graceful bearing, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 19. Her face: a SOFT-ANGULAR face with a gently squared chin and level cheekbones, close-set long almond eyes, fully open and sharp, straight fuller brows, a straight nose, thin firm lips. Expression: A composed serene gaze, a refined faint closed-lip smile, upright and graceful bearing, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), fully loose and long, the top hair lightly gathered under one small gold comb with a rust-red ribbon. Outfit: a long open beizi of rust-red silk satin with a soft sheen reaching below the knee, worn over a cross-collar cream inner top and a pale rose-beige floor-length skirt of matte linen-silk, small embroidered maple leaves along the front edges, a soft silk sash with a small red jade pendant, long sleeves; her signature colour family rust red and gold, gold only as thin accents. Pose: a graceful dance step, twirling one long sleeve, a sprig of red maple leaves in the other hand, coming straight toward the viewer, body facing front."
+  },
+  "m47": {
+   "id": "m47",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "jUoOS3uLD0",
+   "gen_id": "nVse0vFYQD",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m47.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a small HEART-SHAPED face with a short rounded chin, large doe eyes, fully open and bright, short soft brows, a short rounded nose, full pouty lips. Expression: A striking clear bright gaze, elegantly defined features, a subtle poised closed-lip smile, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 16. Her face: a small HEART-SHAPED face with a short rounded chin, large doe eyes, fully open and bright, short soft brows, a short rounded nose, full pouty lips. Expression: A striking clear bright gaze, elegantly defined features, a subtle poised closed-lip smile, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), half-up: two small loops at the crown tied with lilac ribbon bows and a tiny mint-green flower hairpin, the rest loose. Outfit: a cross-collar ruqun of pale lilac silk crepe with a long pale mint pleated floor-length skirt of plain silk, small embroidered clover flowers at the collar and hem, a soft silk sash with a small jade bead pendant, long sleeves; her signature colour family pale lilac and mint, silver only as thin accents. Pose: walking while holding a small chrysanthemum spray in both hands at her waist, sleeves trailing, body turned slightly to the left (about 15 degrees), face toward the viewer."
+  },
+  "m48": {
+   "id": "m48",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "BhNCvC8oQR",
+   "gen_id": "79f39OoJAL",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m48.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a WIDE OVAL face with softly rounded cheeks, round-almond eyes, fully open and warm, softly arched brows, a straight small nose, medium soft balanced lips. Expression: Sparkling merry eyes, a small playful closed-lip smile, head tilted slightly, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 18. Her face: a WIDE OVAL face with softly rounded cheeks, round-almond eyes, fully open and warm, softly arched brows, a straight small nose, medium soft balanced lips. Expression: Sparkling merry eyes, a small playful closed-lip smile, head tilted slightly, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), loose with a small half-up twist at the back held by a cream ribbon and one small gold flower hairpin, a long ribbon end falling behind. Outfit: a cross-collar ruqun of warm beige-cream plain silk with a pale cream floor-length skirt of silk satin with a soft sheen, small embroidered lotus leaves at the collar and cuffs, a soft silk sash with a small gold bead tassel, long sleeves; her signature colour family warm beige cream and gold, gold only as thin accents. Pose: walking with a jade pendant on a red cord held up dangling from one hand near her chest, skirt swirling, body fully frontal, facing the viewer."
+  },
+  "m49": {
+   "id": "m49",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "eIPvtakdqL",
+   "gen_id": "s7IP7Uol8e",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m49.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: an OVAL face with a softly rounded chin, clear almond eyes upturned at the outer corners, fully open and bright, high softly arched brows, a small straight nose, small full lips with a defined cupid's bow. Expression: Bright lively eyes, a light cheerful closed-lip smile, lips softly together, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 17. Her face: an OVAL face with a softly rounded chin, clear almond eyes upturned at the outer corners, fully open and bright, high softly arched brows, a small straight nose, small full lips with a defined cupid's bow. Expression: Bright lively eyes, a light cheerful closed-lip smile, lips softly together, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), fully loose with a thin powder-blue ribbon tied around the crown and a small silver flower hairpin above the left ear. Outfit: a cross-collar ruqun of powder-blue cotton-silk with a high-waisted pale silvery blue floor-length skirt of plain silk tied just above the waist, small embroidered swallows and willow at the hem, a soft silk sash with a small silver bell pendant, long sleeves; her signature colour family powder blue and silver, silver only as thin accents. Pose: mid-step while adjusting a hairpin with one raised hand, her sleeve sliding back, a carved wooden comb in the other hand, body turned three-quarters to the left, face toward the viewer."
+  },
+  "m50": {
+   "id": "m50",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "Tdw8XtrVNR",
+   "gen_id": "rgX7gg2xtc",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m50.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a ROUND face with wide soft cheeks, large almond eyes with slightly downturned outer corners, fully open and bright, gently curved brows, a small button nose, a tiny rosebud mouth. Expression: Soft warm eyes, a tender small closed-lip smile, lips softly together, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 16. Her face: a ROUND face with wide soft cheeks, large almond eyes with slightly downturned outer corners, fully open and bright, gently curved brows, a small button nose, a tiny rosebud mouth. Expression: Soft warm eyes, a tender small closed-lip smile, lips softly together, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), half-up: a small knot at the crown with soft pink ribbons and a thin pearl hair chain, the rest loose with short side locks. Outfit: a cross-collar ruqun of soft pink silk satin with a soft sheen and a pearl-white floor-length skirt of plain silk, small embroidered hydrangea blossoms at the collar and cuffs, a soft silk sash with a small pearl pendant, long sleeves; her signature colour family soft pink and pearl white, silver only as thin accents. Pose: holding a round silk fan painted with a lotus in one hand, mid-step, the other hand lifting her sleeve, body turned slightly to the right (about 15 degrees), face toward the viewer."
+  },
+  "m51": {
+   "id": "m51",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "VX7IBvoMMU",
+   "gen_id": "DoOmoIfpcl",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m51.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a LONG OVAL face with smooth cheeks and a gently rounded chin, large round-almond eyes, fully open and warm, straight soft brows, a slim straight nose, small full lips with gently upturned corners. Expression: Wide clear innocent eyes, a pure sweet faint smile with lips closed, very youthful, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 19. Her face: a LONG OVAL face with smooth cheeks and a gently rounded chin, large round-almond eyes, fully open and warm, straight soft brows, a slim straight nose, small full lips with gently upturned corners. Expression: Wide clear innocent eyes, a pure sweet faint smile with lips closed, very youthful, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), half-up: the top tied back into a small low twist with pale mint ribbons and one small pearl hairpin, the rest straight and loose. Outfit: a long open beizi of pale mint matte linen-silk reaching below the knee, worn over a cross-collar white inner top and a pale silvery mint floor-length skirt of plain silk, small embroidered orchid leaves and blossoms along the front edges, a soft silk sash with a small white jade pendant, long sleeves; her signature colour family pale mint and silver, silver only as thin accents. Pose: stepping forward to offer a half-open folding fan painted with a landscape in both hands, sleeves swinging, body in near side view (profile) facing left, head turned to face the viewer."
+  },
+  "m52": {
+   "id": "m52",
+   "m09_ok": "yes",
+   "set": "thiếu nữ v3 (19/11, COMMON_v3)",
+   "ref_id": "MBJtofgDCm",
+   "gen_id": "eIPvIvkdqL",
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "prompt_file": "dev/art/face-common/m52.v3.FULL.txt",
+   "pick_why": "Lượt 293 mass (v3), not re-asked",
+   "face_words": "Her face: a petite V-SHAPED face with soft cheeks tapering to a little pointed chin, wide-set large round eyes, fully open and alert, gently arched brows, a small straight nose, small thin lips. Expression: A calm composed gaze, a refined faint closed-lip smile, upright graceful bearing, eyes fully open, never a stretched grin.",
+   "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 16. Her face: a petite V-SHAPED face with soft cheeks tapering to a little pointed chin, wide-set large round eyes, fully open and alert, gently arched brows, a small straight nose, small thin lips. Expression: A calm composed gaze, a refined faint closed-lip smile, upright graceful bearing, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), half-up: a soft pink-lilac ribbon tied in a big bow at the back of the crown, two small flower hairpins, the rest loose. Outfit: a cross-collar ruqun of pink-lilac plain silk with a long pale lilac pleated floor-length skirt of silk satin with a soft sheen, small embroidered wisteria and butterflies at the collar and hem, a soft silk sash with a small gold-rimmed amethyst pendant, long sleeves; her signature colour family pink lilac and gold, gold only as thin accents. Pose: a graceful dance step, twirling one long sleeve, a hydrangea bloom held in the other hand, body turned three-quarters to the right, face toward the viewer."
+  },
+  "c01": {
+   "id": "c01",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "consort: no v3 thiếu nữ picture (only img/_review/kc2k 18/11 = REJECTED)"
+  },
+  "c02": {
+   "id": "c02",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "consort: no v3 thiếu nữ picture (only img/_review/kc2k 18/11 = REJECTED)"
+  },
+  "c03": {
+   "id": "c03",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "consort: no v3 thiếu nữ picture (only img/_review/kc2k 18/11 = REJECTED)"
+  },
+  "c04": {
+   "id": "c04",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "consort: no v3 thiếu nữ picture (only img/_review/kc2k 18/11 = REJECTED)"
+  },
+  "c05": {
+   "id": "c05",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "consort: no v3 thiếu nữ picture (only img/_review/kc2k 18/11 = REJECTED)"
+  },
+  "c06": {
+   "id": "c06",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "consort: no v3 thiếu nữ picture (only img/_review/kc2k 18/11 = REJECTED)"
+  },
+  "c07": {
+   "id": "c07",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "consort: no v3 thiếu nữ picture (only img/_review/kc2k 18/11 = REJECTED)"
+  },
+  "c08": {
+   "id": "c08",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "consort: no v3 thiếu nữ picture (only img/_review/kc2k 18/11 = REJECTED)"
+  },
+  "c09": {
+   "id": "c09",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "consort: no v3 thiếu nữ picture (only img/_review/kc2k 18/11 = REJECTED)"
+  },
+  "c10": {
+   "id": "c10",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "consort: no v3 thiếu nữ picture (only img/_review/kc2k 18/11 = REJECTED)"
+  },
+  "c11": {
+   "id": "c11",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "consort: no v3 thiếu nữ picture (only img/_review/kc2k 18/11 = REJECTED)"
+  },
+  "c12": {
+   "id": "c12",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "consort: no v3 thiếu nữ picture (only img/_review/kc2k 18/11 = REJECTED)"
+  },
+  "c13": {
+   "id": "c13",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "consort: no v3 thiếu nữ picture (only img/_review/kc2k 18/11 = REJECTED)"
+  },
+  "c14": {
+   "id": "c14",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "consort: no v3 thiếu nữ picture (only img/_review/kc2k 18/11 = REJECTED)"
+  },
+  "c15": {
+   "id": "c15",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "consort: no v3 thiếu nữ picture (only img/_review/kc2k 18/11 = REJECTED)"
+  },
+  "c16": {
+   "id": "c16",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "consort: no v3 thiếu nữ picture (only img/_review/kc2k 18/11 = REJECTED)"
+  },
+  "c17": {
+   "id": "c17",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "consort: no v3 thiếu nữ picture (only img/_review/kc2k 18/11 = REJECTED)"
+  },
+  "c18": {
+   "id": "c18",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "consort: no v3 thiếu nữ picture (only img/_review/kc2k 18/11 = REJECTED)"
+  },
+  "c19": {
+   "id": "c19",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "consort: no v3 thiếu nữ picture (only img/_review/kc2k 18/11 = REJECTED)"
+  },
+  "c20": {
+   "id": "c20",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "consort: no v3 thiếu nữ picture (only img/_review/kc2k 18/11 = REJECTED)"
+  },
+  "c21": {
+   "id": "c21",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "consort: no v3 thiếu nữ picture (only img/_review/kc2k 18/11 = REJECTED)"
+  },
+  "c22": {
+   "id": "c22",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "consort: no v3 thiếu nữ picture (only img/_review/kc2k 18/11 = REJECTED)"
+  },
+  "c23": {
+   "id": "c23",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "consort: no v3 thiếu nữ picture (only img/_review/kc2k 18/11 = REJECTED)"
+  },
+  "c24": {
+   "id": "c24",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "consort: no v3 thiếu nữ picture (only img/_review/kc2k 18/11 = REJECTED)"
+  },
+  "c25": {
+   "id": "c25",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "consort: no v3 thiếu nữ picture (only img/_review/kc2k 18/11 = REJECTED)"
+  },
+  "c26": {
+   "id": "c26",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "consort: no v3 thiếu nữ picture (only img/_review/kc2k 18/11 = REJECTED)"
+  },
+  "c27": {
+   "id": "c27",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "consort: no v3 thiếu nữ picture (only img/_review/kc2k 18/11 = REJECTED)"
+  },
+  "c28": {
+   "id": "c28",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "consort: no v3 thiếu nữ picture (only img/_review/kc2k 18/11 = REJECTED)"
+  },
+  "c29": {
+   "id": "c29",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "consort: no v3 thiếu nữ picture (only img/_review/kc2k 18/11 = REJECTED)"
+  },
+  "c30": {
+   "id": "c30",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "consort: no v3 thiếu nữ picture (only img/_review/kc2k 18/11 = REJECTED)"
+  },
+  "c31": {
+   "id": "c31",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "consort: no v3 thiếu nữ picture (only img/_review/kc2k 18/11 = REJECTED)"
+  },
+  "c32": {
+   "id": "c32",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "consort: no v3 thiếu nữ picture (only img/_review/kc2k 18/11 = REJECTED)"
+  },
+  "p01": {
+   "id": "p01",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "player: no thiếu nữ picture of any kind"
+  },
+  "p02": {
+   "id": "p02",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "player: no thiếu nữ picture of any kind"
+  },
+  "p03": {
+   "id": "p03",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "player: no thiếu nữ picture of any kind"
+  },
+  "nc1": {
+   "id": "nc1",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "princess Ba Tư: picture exists but made with COMMON_v2 princess prompt (cut 6Abnqu9iJO, nc1.v2.FULL.txt), not a v3 thiếu nữ"
+  },
+  "nc2": {
+   "id": "nc2",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "princess Cao Ly: picture exists but COMMON_v2 princess prompt (cut p8ymOwOehw, nc2.v2.FULL.txt), not a v3 thiếu nữ"
+  },
+  "nc3": {
+   "id": "nc3",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "princess Phù Tang: picture exists but COMMON_v2 princess prompt (cut ov6CN4g829, nc3.v2.FULL.txt), not a v3 thiếu nữ"
+  },
+  "bd1": {
+   "id": "bd1",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "princess Bắc Địch: COMMON_v2 samples only; Bắc Địch styles DROPPED by owner Lượt 283"
+  },
+  "bd2": {
+   "id": "bd2",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "princess Bắc Địch: COMMON_v2 samples only; Bắc Địch styles DROPPED by owner Lượt 283"
+  },
+  "bd3": {
+   "id": "bd3",
+   "m09_ok": "NO",
+   "ref_id": null,
+   "note": "princess Bắc Địch: COMMON_v2 samples only; Bắc Địch styles DROPPED by owner Lượt 283"
+  }
+ }
+}

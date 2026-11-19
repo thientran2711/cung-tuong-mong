@@ -177,3 +177,33 @@ Suggested method (keeps layout, changes only floor): for each room run its EXIST
 Check: measure open floor at the centre (bottom edge → base of the main piece) on a 10 % grid; target ≤ ~12 %; figures' feet line in composite_spread (cs.FEET) must still land on floor, not on furniture — check the people sheet. Look at each gen full size; regen only on a real (owner-point) fault; max 1 redo.
 Order + reporting: Cảnh Phúc 6 → sheet A → send ROOT-49; phối 2 + Khôn Ninh 2 → sheet B → send; HQP pair → its own sheet (extend sheets.py) → send; then STOP. READ messages (ReadNotifications) between every gen.
 Tools as v5: images_generate mode gpt-2-6, resolution 2k, 2688x1386, folderReference ba4aecfe-efce-47e2-b53f-30d292091886, refs gOmYI7iSXO + EbYJzsMuuO + image 3; creations_wait → creations_register_download → curl url → PIL WEBP q88 → img/_review/place-rank/<name>-ha-sang.webp (first cp current files to img/_review/place-rank/v5/ + cdn_sync). Grid preview helper: 1400x722 with red lines every 10 % (recreate; PR6's was in scratch). Sheets: python3 dev/art/place-rank/sheets.py FIGDIR img/_review/place-rank, then mv place-canh-phuc-cung-quyphi-ngu-canh-phuc-cung-quyphi-ngu-spread.jpg place-rank-quyphi-ngu-spread.jpg, copy jpgs to dev/handover/review-sheets/place-rank/, cdn_sync img/_review/place-rank. FIGDIR: curl https://ctm-img.victoria-tntt.workers.dev/img/{fig-consort-c06-t1-a18,fig-consort-c30-t1-a18,fig-maid-m19-t1-a18,fig-maid-m39-t1-a18}.webp. Ledger: one PLACE-RANK line per gen (see PR6 lines). Git: the ledger often conflicts on rebase (both sides append) → keep both sides' lines. Paste prompts verbatim from prompts.json (print them; never hand-type). Budget: 12 rooms × (1 + redo) ≈ 1,620–3,240 cr — confirm cap with ROOT-49.
+
+## v6 (owner Lượt 520, L12 + A18 LAW #0) — worker PR7 (session_01PEhRbwronSNrACtu2Qiwhx, depth 3), foreman ROOT-50
+Method: dev/art/place-rank/prompts.py v6 block → prompts_v6.json. Every room = its v5 prompt word for word; image 3 = that room's OWN current gen;
+ONLY the floor numbers change (base of main piece 4/5 → 7/8, open floor strip 1/5 → 1/10, "seen a little closer and lower so less floor shows",
+"keep the same room and the same arrangement as image 3"). Rooms without floor numbers (Tần reception, Phi bedroom, Khôn Ninh ×2) get ONE added FLOOR SHARE sentence.
+v5 copies: img/_review/place-rank/v5/ (disk + CDN).
+### Sheet A — Cảnh Phúc 6 (6 gens, 810 cr, 0 redos)
+| room | gen | open centre floor v5 → v6 |
+|---|---|---|
+| Tần bedroom | aFGy5YNfSh | ~25 % → ~13 % |
+| Phi bedroom | If3UHfPtvE | ~22 % → ~7 % |
+| Quý phi bedroom | gOmViD0SXO | ~20 % → ~9 % |
+| Tần reception | iG5hVwC3uK | ~27 % → ~7 % |
+| Phi reception | If3UKjGtvE | ~27 % → ~13 % |
+| Quý phi reception | 9ZHIVwlNYZ | ~25 % → ~11 % |
+Sheet: dev/handover/review-sheets/place-rank/place-rank-A-canh-phuc.jpg · CDN https://ctm-img.victoria-tntt.workers.dev/img/_review/place-rank/place-rank-A-canh-phuc.jpg
+Notes (ours, NOT prompt changes — LAW #0): Tần reception left armchair pair now larger close to the left edge; Phi bedroom bed curtains now reach the bottom ~90 % (figures stand in front of the bed bench).
+### Sheet B — phối 2 + Khôn Ninh 2 (4 gens, 540 cr, 0 redos)
+| room | gen | open centre floor before → v6 |
+|---|---|---|
+| phối bedroom | s7I0GAVl8e | ~22 % → ~10 % |
+| phối reception | jUoWAEyLD0 | ~28 % → ~12 % |
+| Khôn Ninh bedroom | YMlHuhtWeC | ~25 % → ~9 % |
+| Khôn Ninh reception | rgXnGrDxtc | ~15 % → ~4 % |
+Sheet: dev/handover/review-sheets/place-rank/place-rank-B-phoi-khon-ninh.jpg · CDN https://ctm-img.victoria-tntt.workers.dev/img/_review/place-rank/place-rank-B-phoi-khon-ninh.jpg
+Notes (ours, not changed): Khôn Ninh reception — the front low table + stools now reach the bottom edge, so on the people sheet figures 3–4 stand among/over the stools (feet not on clear floor).
+### Owner Lượt 548 (sheet A): all distances OK EXCEPT Phi bedroom v6 "gần quá" → v6b redraw (A20), only the camera distance
+Phi bedroom v6b aFGyN6afSh (prompts_v6b.json: FLOOR SHARE sentence says "same distance as image 3, NOT closer, whole bed fits, nothing cropped, camera only a little lower"; image 3 = own v3 SyhTG51Ub8). Open centre floor ~14 %. v6 If3UHfPtvE kept in img/_review/place-rank/v6/. Sheet A rebuilt.
+### Owner Lượt 554 (sheet B): phối ×2 + Khôn Ninh bedroom OK; Khôn Ninh reception REDO (table in the middle) → v6c 9ZHIFD7NYZ
+prompts_v6c.json: only her point — the "middle ground furnished with low tables/rugs" clause replaced by "NO table and NO stools in the middle … tea tables only between the side armchairs"; mat at the foot of the dais; FLOOR SHARE says "except that the low table and stools in the middle are removed". Image 3 = v6 rgXnGrDxtc (kept in v6/). Centre floor open ~16 % for the 4 people; feet on clear floor. Sheet B rebuilt.

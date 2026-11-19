@@ -5,3 +5,5 @@ Per-person finish: scratchpad finish.sh cNN (rows + CDN img/_review/nu-de/{nude_
 
 ## DONE
 - c13: 5 ages, 0 regens, 675 cr (gens cpSbhiA0eP jUoW6qTLD0 yiuBWSbPW9 3zKvpNLREY N2qtVNy6D9). Note: a65 holds scroll open at chest.
+- c14: STOPPED by ROOT-50 (~18:40Z) before any gen — owner: refs are WRONG (old picture; she wants the new M09-style pictures as ref). c14 prompts prepped only (scratch). NO gens until ROOT-50 GO with the correct ref path.
+- Checked: img/hd/fig-consort-c13-t1-aNN.webp (our ref) = same picture as live img/fig-consort-c13-t1-aNN.webp (FIGURES.json), 2× size. Asked ROOT-50 for the M09-style path.
