@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """ONE anchor table per face picture (owner 17/11, toil-reveal-fix; repeat of OD:L1482): offline sanity check of every player-face picture's anchors.
-For every por-/fig- picture of the 32 consort faces + the old player looks (dev/art/mkfit/*.json = img/mk-fit, dev/art/toil-fit2.json = img/toil-fit2.json):
+For every por-/fig- picture of faces c01–c32 + the old player looks (dev/art/mkfit/*.json = img/mk-fit, dev/art/toil-fit2.json = img/toil-fit2.json):
   1. both eyes sit above the lips, both brows above their eye, the eye line is level within 25 degrees, the eye distance is a plausible share of the face width;
   2. the toil-fit mouth (what places the mirror / reveal) is within 10 % of the face width of the face-mesh lip centre (the two tables never disagree);
   3. the independent whole-picture face mesh agreed or the points were replaced by it (dev/art/mkfit/verify.py, needs mediapipe, run when pictures change).

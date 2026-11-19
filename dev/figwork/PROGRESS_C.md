@@ -1,4 +1,4 @@
-# Part C (gộp C1 + C2): 52 cung nữ m01–m52 mặc thang áo phi tần t1–t8 + lãnh cung (nhánh review/maid-art-c)
+# Part C (gộp C1 + C2): nhân vật nữ m01–m52 mặc thang áo phi tần t1–t8 + lãnh cung (nhánh review/maid-art-c)
 
 Lịch sử trước 11/14 sáng: xem PROGRESS_C1.md (m01–m26) và PROGRESS_C2.md (m27–m52). Từ đây một thợ làm cả 52 người, ghi ở file này.
 

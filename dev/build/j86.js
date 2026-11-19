@@ -13,10 +13,10 @@ function fpKeys(){const M=FIGIX.consort||{};return pidKeys().filter(k=>M[k]&&M[k
 function fpPor(k){const L=(FIGIX.consort||{})[k];if(!L||!L.length)return"";const f=figBestRank(L,figTierOf(S),figAgeOf(S));return f&&f.por?figPath(f.por):""}
 function fpFace(k){const f=Object.assign({},pMe());f.src=fpPor(k);f.rw="";return f}
 function fpNum(k){return +String(k).replace(/\D/g,"")||0}
-/* the picker = the kit PORTRAIT PICKER (j79 kitPicker); the 84-face pool (facePool(filter), review/face-84) when present, else the 32 consort faces */
+/* the picker = the kit PORTRAIT PICKER (j79 kitPicker); the pool of 84 painted women (facePool(filter), review/face-84) when present, else the first painted set c01–c32 */
 /* j88 (review/face-84) API when present: faceOn() · facePool(filter) -> [{id, src, n, por, fig, mine}] · faceChoose(id) */
 const FP88=()=>typeof facePool==="function"&&typeof faceChoose==="function";
-/* owner 16/11 s23 (face picker, NO tabs): the game picks the face set from her identity, never she: a cung nữ life (isSrv / origin cnv) sees the 52 maid faces only, every phi tần life the whole 84 (32 consort + 52 maid, all have consort dress art) */
+/* owner 16/11 s23 (face picker, NO tabs): the game picks the face set from her identity, never she: a cung nữ life (isSrv / origin cnv) sees the faces m01–m52 only, every other life the whole pool of 84 painted women (all have the full rank-ladder art; BEHAVIOUR NOTE: owner 18/11 canon = one pool, so this filter is to be dropped by a code worker) */
 /* review/newgame-ui (owner 15/11 "quá lag"): the item list is built ONCE per (pool, her tier, age, dress, roll) — facePool walked all 84
    identities twice (por + fig) on every pick and every tab (≈ 0.3–1.8 s on a tablet); the cells show the small pre-sized copy (kitTn) */
 const FP_C={};lifeStore("FP_C face-picker items (hold her person copy)",()=>{for(const k in FP_C)delete FP_C[k]});

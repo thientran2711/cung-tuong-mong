@@ -810,7 +810,7 @@ if(typeof kitFxLayers==="function"){const fx0=kitFxLayers;kitFxLayers=function(p
    Like modern dress-up / makeup games: the colours she picks at the mirror (phấn mắt, phấn má, son môi, màu mày) show in EXACTLY those colours on
    HER OWN pictures (portrait + full-body figure, every place kitFxLayers draws her) all day. The picks live in p.toilette.col (old saves: none →
    the defaults below, which are the approved "đẹp" blush + lip colours). "diêm dúa" = the same picks, stronger (TOIL_MKS).
-   Placement: img/mk-fit/<face>.json (dev/art/mkfit/mkfit.py — MediaPipe face mesh on every picture of her 84 faces + old player looks: lips
+   Placement: img/mk-fit/<face>.json (dev/art/mkfit/mkfit.py — MediaPipe face mesh on every picture of the 84 painted women + old player looks: lips
    outer/inner, both upper eyelids + lower lash line, both brows; 60 points in 1/4000 of the picture). The colour layer is painted FROM THE
    PICTURE ITSELF in a canvas (lip / lid / brow pixels recoloured with their own light and shade, soft masks), so it reads as painted, not pasted;
    it is one <img class="kmkl kmkc"> over the same box as the picture. A picture without points keeps the older SVG lip oval (never guessed). */

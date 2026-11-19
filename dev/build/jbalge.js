@@ -33,18 +33,54 @@ BAL.ge={
  gate:{
   tt_co_1:{mat:4},tt_co_2:{duc:45,sung:45},tt_co_3:{dad:20},tt_co_4:{sung:50,tamco:40},
   cnv_mat_1:{sung:50},cnv_mat_2:{sung:55,tamco:40},cnv_mat_3:{duc:40,maid:55},cnv_mat_4:{mis:20},
-  nc_tuc_1:{tai:55,danh:40},nc_tuc_2:{th:40},nc_tuc_3:{tamco:45,mat:3},nc_tuc_4:{duc:35}},
+  nc_tuc_1:{tai:55,danh:40},nc_tuc_2:{th:40},nc_tuc_3:{tamco:45,mat:3},nc_tuc_4:{duc:35},
+ /* writer wave W1 (brief E11, jgedata_w1.js): tt_oan tt_tranh tt_mat · dtq_* · muoi_* (same scales and sizes as the pilots) */
+ tt_oan_1:{duc:45,danh:40},tt_oan_2:{tamco:45,mat:3},tt_oan_3:{tai:50,danh:35},tt_oan_4:{duc:40},
+ tt_tranh_1:{dad:30,duc:40},tt_tranh_2:{tamco:45,mat:3},tt_tranh_3:{duc:35,tai:40},tt_tranh_4:{sung:55},
+ tt_mat_1:{sung:50},tt_mat_2:{hh:20,duc:35},tt_mat_3:{tamco:45,mat:3},tt_mat_4:{duc:45,hh:10},
+ dtq_bien_1:{tai:45,dad:35},dtq_bien_2:{tamco:45,mat:4},dtq_bien_3:{sung:45},dtq_bien_4:{duc:40,suc:45},
+ dtq_vu_1:{duc:45,sung:40},dtq_vu_2:{tamco:50,dad:40},dtq_vu_3:{duc:35,dad:20},dtq_vu_4:{tamco:45,danh:35},
+ dtq_binh_1:{tamco:50,mat:4},dtq_binh_2:{duc:45,sung:45},dtq_binh_3:{tai:40,duc:35},dtq_binh_4:{dad:20,duc:40},
+ dtq_huynh_1:{dad:25,duc:35},dtq_huynh_2:{danh:40,sung:40},dtq_huynh_3:{tamco:45,dad:30},dtq_huynh_4:{sac:50,mat:2},
+ muoi_tuoc_1:{tai:40,danh:40},muoi_tuoc_2:{th:30},muoi_tuoc_3:{tamco:45},muoi_tuoc_4:{duc:35,dad:20},
+ muoi_lau_1:{duc:40,danh:40},muoi_lau_2:{tamco:45,mat:3},muoi_lau_3:{duc:35,tamco:30},muoi_lau_4:{tamco:40,danh:35},
+ muoi_doi_1:{duc:45,danh:35},muoi_doi_2:{tamco:45,dad:35},muoi_doi_3:{sung:45,danh:45},muoi_doi_4:{tamco:40,mat:3},
+ muoi_no_1:{tamco:45,mat:4},muoi_no_2:{duc:40,danh:30},muoi_no_3:{duc:35,dad:20},muoi_no_4:{duc:40,tai:35}},
  /* fail-outcome losses (her pair pointed at the ending and missed; none in the quiet form unless quietLoss) */
  fail:{
   tt_co_1:{rank:-1,danh:-12},tt_co_2:{sung:-8,danh:-4},tt_co_3:{sung:-8,danh:-6},tt_co_4:{danh:-10,duc:-6},
   cnv_mat_1:{sung:-8,danh:-6},cnv_mat_2:{rank:-1,danh:-10,mis:-15},cnv_mat_3:{sung:-8},cnv_mat_4:{mis:-15},
-  nc_tuc_1:{danh:-8,sung:-4},nc_tuc_2:{th:-12,danh:-6},nc_tuc_3:{danh:-10,duc:-6},nc_tuc_4:{sung:-8,danh:-4}},
+  nc_tuc_1:{danh:-8,sung:-4},nc_tuc_2:{th:-12,danh:-6},nc_tuc_3:{danh:-10,duc:-6},nc_tuc_4:{sung:-8,danh:-4},
+ /* writer wave W1 (brief E11, jgedata_w1.js): tt_oan tt_tranh tt_mat · dtq_* · muoi_* (same scales and sizes as the pilots) */
+ tt_oan_1:{danh:-10,duc:-4},tt_oan_2:{danh:-10,sung:-6},tt_oan_3:{danh:-8,tai:-4},tt_oan_4:{sung:-8,danh:-6},
+ tt_tranh_1:{danh:-8,duc:-4},tt_tranh_2:{danh:-10,sung:-8},tt_tranh_3:{sung:-6,danh:-4},tt_tranh_4:{rank:-1,danh:-8},
+ tt_mat_1:{rank:-1,danh:-10},tt_mat_2:{hh:-20,danh:-6},tt_mat_3:{danh:-10,hh:-15},tt_mat_4:{sung:-8,danh:-4},
+ dtq_bien_1:{danh:-8,sung:-6},dtq_bien_2:{sung:-10,danh:-8},dtq_bien_3:{sung:-6,danh:-6},dtq_bien_4:{sung:-8,danh:-6},
+ dtq_vu_1:{danh:-10,duc:-4},dtq_vu_2:{rank:-1,danh:-12},dtq_vu_3:{sung:-8,danh:-6},dtq_vu_4:{danh:-10,tamco:-4},
+ dtq_binh_1:{rank:-1,danh:-12},dtq_binh_2:{sung:-8,danh:-4},dtq_binh_3:{sung:-10,danh:-6},dtq_binh_4:{sung:-8,danh:-4},
+ dtq_huynh_1:{sung:-8,danh:-6},dtq_huynh_2:{danh:-10,sung:-4},dtq_huynh_3:{danh:-10,duc:-4},dtq_huynh_4:{danh:-12,sung:-6},
+ muoi_tuoc_1:{danh:-10,sung:-4},muoi_tuoc_2:{danh:-8,th:-10},muoi_tuoc_3:{th:-12,danh:-6},muoi_tuoc_4:{sung:-6,danh:-6},
+ muoi_lau_1:{danh:-8,duc:-4},muoi_lau_2:{rank:-1,danh:-10},muoi_lau_3:{sung:-8,danh:-6},muoi_lau_4:{danh:-8,tamco:-4},
+ muoi_doi_1:{sung:-6,danh:-6},muoi_doi_2:{danh:-10,duc:-6},muoi_doi_3:{danh:-10,sung:-4},muoi_doi_4:{danh:-10,duc:-4},
+ muoi_no_1:{danh:-8,sung:-6},muoi_no_2:{danh:-6,duc:-4},muoi_no_3:{sung:-6,danh:-6},muoi_no_4:{danh:-10,sung:-4}},
  /* rewards: the same SIZE for both shadings (fair: no "right" morality); only the sign of everyone's attitude differs (rel thiện → thiện cảm +, ác → oán +).
     rw.mul × the road's RD97L rare fx ≈ the size (start 3×); rank = steps (never above the seat rules: Hoàng hậu only by seat "HH"); mis = the named NPC's attitude */
  rw:{mul:3,
   tt_co_1:{danh:36,sung:18,mat:2,rel:8},tt_co_2:{rank:1,danh:30,sung:18,duc:6,rel:8},tt_co_3:{danh:24,duc:12,rel:6},tt_co_4:{rank:1,danh:30,sung:20,rel:8},
   cnv_mat_1:{rank:1,sung:30,danh:18,rel:6},cnv_mat_2:{seat:"HH",danh:30,sung:15,rel:8},cnv_mat_3:{danh:20,duc:12,bac:300,rel:6},cnv_mat_4:{rank:1,danh:24,sung:15,mis:20,rel:6},
-  nc_tuc_1:{rank:1,danh:30,sung:18,tai:10,rel:8},nc_tuc_2:{danh:36,th:20,rel:8},nc_tuc_3:{rank:1,danh:30,tamco:10,rel:10},nc_tuc_4:{danh:24,duc:12,rel:6}},
+  nc_tuc_1:{rank:1,danh:30,sung:18,tai:10,rel:8},nc_tuc_2:{danh:36,th:20,rel:8},nc_tuc_3:{rank:1,danh:30,tamco:10,rel:10},nc_tuc_4:{danh:24,duc:12,rel:6},
+ /* writer wave W1 (brief E11, jgedata_w1.js): tt_oan tt_tranh tt_mat · dtq_* · muoi_* (same scales and sizes as the pilots) */
+ tt_oan_1:{rank:1,danh:30,duc:10,sung:12,rel:8},tt_oan_2:{danh:30,tamco:10,mat:2,rel:8},tt_oan_3:{rank:1,danh:30,tai:10,rel:8},tt_oan_4:{danh:24,duc:12,bac:300,rel:6},
+ tt_tranh_1:{danh:30,duc:10,sung:12,rel:8},tt_tranh_2:{rank:1,danh:30,tamco:10,rel:8},tt_tranh_3:{danh:24,duc:12,bac:300,rel:6},tt_tranh_4:{seat:"HH",danh:30,sung:15,rel:8},
+ tt_mat_1:{seat:"HH",danh:30,sung:15,rel:8},tt_mat_2:{rank:1,danh:24,sung:15,hh:20,rel:6},tt_mat_3:{rank:1,danh:30,tamco:10,rel:10},tt_mat_4:{danh:24,duc:12,rel:6},
+ dtq_bien_1:{danh:36,tai:10,sung:12,rel:8},dtq_bien_2:{rank:1,danh:30,mat:2,rel:8},dtq_bien_3:{rank:1,danh:30,sung:18,rel:8},dtq_bien_4:{danh:24,duc:12,bac:300,rel:6},
+ dtq_vu_1:{rank:1,danh:30,duc:10,sung:12,rel:8},dtq_vu_2:{danh:36,tamco:10,mat:2,rel:10},dtq_vu_3:{danh:24,duc:12,bac:300,rel:6},dtq_vu_4:{rank:1,danh:30,tamco:10,rel:8},
+ dtq_binh_1:{danh:36,sung:18,mat:2,rel:8},dtq_binh_2:{rank:1,danh:30,sung:18,duc:6,rel:8},dtq_binh_3:{danh:24,sung:12,bac:300,rel:6},dtq_binh_4:{danh:24,duc:12,bac:300,rel:6},
+ dtq_huynh_1:{danh:24,duc:12,bac:300,rel:6},dtq_huynh_2:{rank:1,danh:30,sung:18,rel:8},dtq_huynh_3:{rank:1,danh:30,tamco:10,rel:8},dtq_huynh_4:{danh:24,sac:10,bac:300,rel:6},
+ muoi_tuoc_1:{danh:30,tai:10,bac:300,rel:6},muoi_tuoc_2:{rank:1,danh:30,sung:15,th:20,rel:8},muoi_tuoc_3:{danh:36,th:20,rel:8},muoi_tuoc_4:{danh:24,duc:12,bac:300,rel:6},
+ muoi_lau_1:{rank:1,danh:30,duc:10,sung:12,rel:8},muoi_lau_2:{rank:1,danh:30,mat:2,tamco:10,rel:8},muoi_lau_3:{danh:24,duc:12,bac:300,rel:6},muoi_lau_4:{rank:1,danh:30,tamco:10,rel:8},
+ muoi_doi_1:{danh:30,duc:12,bac:300,rel:8},muoi_doi_2:{rank:1,danh:30,tamco:10,rel:8},muoi_doi_3:{rank:1,danh:30,sung:18,duc:6,rel:8},muoi_doi_4:{rank:1,danh:30,mat:2,rel:8},
+ muoi_no_1:{rank:1,danh:30,mat:2,tamco:10,rel:8},muoi_no_2:{rank:1,danh:24,sung:15,duc:6,rel:6},muoi_no_3:{danh:24,duc:12,bac:300,rel:6},muoi_no_4:{danh:24,duc:12,bac:300,rel:6}},
  help:{rw:{danh:6,duc:3}},   /* her help to an NPC who then unlocks (NPC parity, build step 5 — not live in this pass) */
  npc:{on:false},             /* NPC grand endings wait for NPC roads (OD:L1243, unit D) */
  /* measured bands (dev/measure/ge-measure.js): an in-character bot that follows one ending's road reaches a grand ending in about one life of two or three;
