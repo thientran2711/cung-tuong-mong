@@ -334,7 +334,15 @@ def _sec_slot(person,rank,S):
     """Lượt 483 slot REPLACE (colour slot of the store COLOUR RULE, t1-t6): the secondary is no longer only 'in the inner robe and linings'."""
     if not (isinstance(rank,int) and rank<=6): return S
     sec,_=secondary(person)
-    return re.sub(r"with [^;]+? in the inner robe and linings",f"with {sec} in the inner robe and linings",S,count=1)   # colour slot swap only (no new wording, Lượt 489)
+    S=re.sub(r"with [^;]+? in the inner robe and linings",f"with {sec} in the inner robe and linings",S,count=1)   # colour slot swap only (no new wording, Lượt 489)
+    return _t3_slot(person,rank,S)
+# G15 (owner Lượt 559): QUÝ NHÂN t3 DESIGN = option B v2 -> dev/art/check_store.py g15_t3 (one copy of the wording, shared with the gate).
+def _t3_slot(person,rank,S):
+    if rank!=3: return S
+    import importlib.util as _iu
+    _sp=_iu.spec_from_file_location("check_store",os.path.join(ART,"check_store.py")); _cs_mod=_iu.module_from_spec(_sp); _sp.loader.exec_module(_cs_mod)
+    main=LAST_G["DATA"][person][0].split(" and ")[0]; sec,_=secondary(person)
+    return _cs_mod.g15_t3(S,main,sec)
 def build(person,rank,age="a18"):
     person=ALIAS.get(person,person); S0=store(person,rank,age); S=S0
     if rank=="nude": return S0,S0,[]
