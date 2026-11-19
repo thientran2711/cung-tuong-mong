@@ -199,7 +199,7 @@ kc/ngheo NEW c13+c16 (4 gens) | handover | session_01PEhRbvGFP6YSgT5DTgo3yu (K4,
 | ge-writers-w2 remerge #5 main 96188526 (sonnet E11w2m3) | review/ge-writers-w2 | E ROOT #7 → #8 | session_01DgYSWq43v8g897s6AtupYe | RUNNING | 19/11 01:50Z |
 | FOREMAN E ROOT #8 (opus; child of E ROOT #7, depth 7) | handover FOREMAN_E_STATUS | E ROOT #7 | session_01DgYSWoyrPRWJPqSp4gfECg | RUNNING | 19/11 01:50Z |
 | MAIN ROOT-62 (opus; owner-opened ROOT, depth 0; successor of ROOT-61) | handover HANDOVER_SESSION9 | owner | session_01Rc5AsJvnKvJMiKUjEhRST1 | RUNNING | 19/11 02:20Z |
-| maid-ladder-6 (opus; BIG) | review/maid-ladder-6 | B | session_01N1tNP6uwmf4WjfcYZ2eBKe | RUNNING | 19/11 02:30Z |
+| maid-ladder-6 (opus; BIG) | review/maid-ladder-6 | B | session_01N1tNP6uwmf4WjfcYZ2eBKe | SẴN SÀNG KIỂM cb5a7cb3 (on LIVE 1cf5e8bb; quickcheck PASS, coop-e2e 63/63, maid-ladder-6 13/13; report reports/maid-ladder-6.md; shots img/_review/maid-ladder-6/) | 19/11 ~03:45Z |
 | law3-cost-only (opus; SMALL) | review/law3-cost-only | B | session_01N1tNP6PHnsEVwUKbZMrXkQ | RUNNING | 19/11 02:30Z |
 | art-wiring-1119 (opus; SMALL) | review/art-wiring-1119 | B | session_01N1tNP59FAL2oqUhk7AUxRa | SẴN SÀNG KIỂM 69a26198 | 19/11 03:00Z |
 | coop-thin F2 #2 (opus; successor of 3eu44fWy at 6eaf01a) | review/coop-thin-f2 | B | session_01N1tNP54k39FoQxynYXS2Xp | RUNNING | 19/11 02:30Z |
