@@ -1,0 +1,35 @@
+# kc2k-K6b — thiếu nữ khuê các + thiếu nữ nhà nghèo, gương mặt m21–m36 (2K transparent re-make)
+PRIORITY #1 CHECK: OD/FIGURE_GATE A0 REFERENCES + rule 3 GAME COLOUR BENCHMARK (sheet5) + H lists + NAMING "CUNG NỮ" re-read | method = dev/handover/reports/kc2k-K3.md (HANDOVER K3 + EXACT PROMPT TEMPLATES) | live CDN img/fig-maid-mNN-{kc,ngheo}-a18.webp + img/FIGURES-kc.json (palette) | claims: order of Foreman C ROOT-35 (session_01PEhRbwGPqHkqe1BAxK4nA2). START_CTX ~4 % (1M window; rollover at ~29 %).
+OWNER GO (verbatim): "Rồi, tiến hành vẽ hình thiếu nữ khoai cát và thiếu nữ nhà nghèo đi."
+Scope: gương mặt m21–m36 (m01/m20/m37 done by K3) × khuê các + nhà nghèo = 32 gens.
+
+## Method (K3, unchanged except the two order additions)
+refs = [her live image (upload, neutral name ref-fNN-{kc,ng}.webp) type image, style3_girls Xm9tPkMBfo type style]; gpt-2-6, 9:16, 2k, extraSettings {"transparentBackground": true}; folder ba4aecfe-…; K3 KC / NGHEO templates verbatim.
+Additions ordered by ROOT-35: (1) khuê các colour = sheet5 tone level (c06/c25 robes, img/_review/low-B/t2t3-new/sheet5.jpg): after "same outfit with the same cut, embroidery and colour family (<PAL>)" one sentence "Colour strength: repaint the outfit colours at a medium tone level — a medium <hue> — medium saturation and medium lightness, clear and full-bodied, neither pale pastel or washed-out nor dark or dull, never glaring." (live palettes are pastel; same hue family kept). Nhà nghèo keeps the K3 faded poor-cloth text unchanged. (2) ONE item from the FIGURE_GATE H list of the status, neighbours differ, item in a contrasting colour (B10 HELD ITEM). Bare forehead (no hoa điền) is already in both templates.
+Check per image: live | new at ≤600 px (looked at every one) + numeric alpha scan (margin 12 % each side alpha>8 must be ~0 %).
+
+## Ledger (old item → new item; gen id; ref upload id)
+| face | status | old → new | gen | ref |
+|---|---|---|---|---|
+| m21 | kc | plum branch → H5 sprig of plum blossoms (kept) | EbYb75zuuO | p8y8q4Vehw |
+| m21 | ngheo | paper lantern → H4 bunch of fresh herbs tied with straw | TdwdQooVNR | 1ldli8sr4r |
+| m22 | kc | green herb sprig → H2 painted paper folding fan | DoOoqmTpcl | 1ldliI7r4r |
+| m22 | ngheo | hemp skein → H2 skein of hemp thread (kept) | mEZEsb7hJQ | w4a4WF57EI |
+| m23 | kc | nothing/tassel → H7 bamboo flute | 79f90sPJAL | aFGFSUnfSh |
+| m23 | ngheo | book → H3 wooden comb on plain cloth | s7I7G1yl8e | ksesiR316B |
+| m24 | kc | clasped hands (cup-like) → H1 embroidered silk handkerchief | 3zKzo9dREY | O6E6VpGynm |
+| m24 | ngheo | round fan → H9 plain bamboo-leaf fan | CqnqwvlEEy | hu2ulwFvqL |
+| m25 | kc | silk sachet → H9 painted-silk sachet with cord (kept) | xSBS2IgjfW | 3zKzomlREY |
+| m25 | ngheo | basket of herbs → H5 small basket of mulberry leaves | WDgDE7BcXe | MBJBHk1DCm |
+| m26 | kc | book → H3 thread-bound book (kept) | u5W5Oa0QLD | tCRCszumZJ |
+| m26 | ngheo | wooden bucket → H10 small clay pot of orchid sprout | rgXgZk4xtc | JNCNVHkOq4 |
+| m27 | kc | cup → H10 silk-covered round fan, wooden handle | 6AbAogtiJO | JNCNVq1Oq4 |
+| m27 | ngheo | scroll → H7 wooden spindle with spun thread | 0eUeF3HTfW | 79f9TqLJAL |
+| m28 | kc | cup → H6 small woven flower basket lined with silk | xSBSAQ4jfW | Lw8wGCbswO |
+| m28 | ngheo | scroll → H1 small woven bamboo basket with wild flowers | O6E6DLuynm | xSBS2fdjfW |
+
+## Sheet 1 — gương mặt m21–m25 (rows = face; cols = khuê các hiện tại | khuê các mới 2K | nhà nghèo hiện tại | nhà nghèo mới 2K)
+https://ctm-img.victoria-tntt.workers.dev/img/_review/kc2k-mass/sheet_K6b_1.jpg ; 2K files img/_review/kc2k-mass/mNN_a18_{kc,ngheo}_2k.png
+All 10 passed at first try (0 regens): same face/hair/outfit cut/pose, khuê các colours lifted from pastel to the medium sheet5 level, nhà nghèo stays faded matte cotton with one wooden pin, items = H list, bare forehead, closed lips, no cup, still sleeves; alpha margins 0.00 %, semi-transparent px 0.5–0.9 %.
+Honest notes: m23 khuê các honey-yellow sits at the upper end of "medium" (still within sheet5 level); m27 nhà nghèo spindle is small in the hands; m28 khuê các keeps the hanging cloth panel of the live outfit in front of the skirt (part of the outfit, not a second item); m22 nhà nghèo keeps a cloth ribbon in the hair (allowed). cutcheck.py not run (figwork not checked out).
+STATE: nothing live changed; only CDN review folder img/_review/kc2k-mass/ (K6b files: sheet_K6b_*.jpg + m21–m36 PNGs).
