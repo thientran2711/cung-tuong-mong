@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"588b553d+","t":"2026-11-19T17:19Z","c":"review coop-thin-hostnull r1: her night card-flip travels WITH its plan taken in her run (per-seat stoleFrom), cfShow plays that plan on he…","b":"22bbaf911448","h":[{"s":"69bd0766+","t":"2026-11-19T14:33Z","c":"seal-lean-3 r8 (ROOT-69, K-HEAD-SAY x EMO-SEAL LEAN): the big seal never covers a say bubble: no lean starts under an open bubble, a bubble…"},{"s":"d5821e86","t":"2026-11-19T12:13Z","c":"receiver-choice rv4: scan + card checks on the instant path (BAL.ptime.on=0); new check: with parallel time on her card waits only in S.ord…"},{"s":"9aad0c66+","t":"2026-11-19T12:03Z","c":"role-parity-drift-2: build line"},{"s":"43548e0e+","t":"2026-11-19T11:46Z","c":"coop-thin-f4 K2 (review parallel-time #4): accept the parallel-time road of rcpAskGo maid"},{"s":"a5e2d8e7+","t":"2026-11-19T09:30Z","c":"opt-scroll-reset r2: an option card picture load (fixed .kaart box) no longer re-picks the frame (first wheel lost); merged origin/main 620…"},{"s":"3b3f7631+","t":"2026-11-19T10:24Z","c":"ev-pic-followups r2: scan SHOT/DSF/TAG env for review shots"},{"s":"5d9cdd5d+","t":"2026-11-19T10:03Z","c":"rebuild"},{"s":"f01df861","t":"2026-11-19T09:09Z","c":"review coop-thin-f3 r1: merge F2 LAND READY 7627f79c; generated files rebuilt"},{"s":"4ed2831d+","t":"2026-11-19T07:18Z","c":"law3-cost-only: index.html / sw.js regenerated"},{"s":"0da546e9","t":"2026-11-19T07:16Z","c":"role-parity-drift r1: build line"}]};
+window.CTM_BI={"s":"2137358a","t":"2026-11-19T18:10Z","c":"review coop-thin-hostnull r1: the host repaint net at TH.withSeat too (every run of hers, not only tap runs: her part B life wrote the host…","b":"68cafb8e04fe","h":[{"s":"69bd0766+","t":"2026-11-19T14:33Z","c":"seal-lean-3 r8 (ROOT-69, K-HEAD-SAY x EMO-SEAL LEAN): the big seal never covers a say bubble: no lean starts under an open bubble, a bubble…"},{"s":"d5821e86","t":"2026-11-19T12:13Z","c":"receiver-choice rv4: scan + card checks on the instant path (BAL.ptime.on=0); new check: with parallel time on her card waits only in S.ord…"},{"s":"9aad0c66+","t":"2026-11-19T12:03Z","c":"role-parity-drift-2: build line"},{"s":"43548e0e+","t":"2026-11-19T11:46Z","c":"coop-thin-f4 K2 (review parallel-time #4): accept the parallel-time road of rcpAskGo maid"},{"s":"a5e2d8e7+","t":"2026-11-19T09:30Z","c":"opt-scroll-reset r2: an option card picture load (fixed .kaart box) no longer re-picks the frame (first wheel lost); merged origin/main 620…"},{"s":"3b3f7631+","t":"2026-11-19T10:24Z","c":"ev-pic-followups r2: scan SHOT/DSF/TAG env for review shots"},{"s":"5d9cdd5d+","t":"2026-11-19T10:03Z","c":"rebuild"},{"s":"f01df861","t":"2026-11-19T09:09Z","c":"review coop-thin-f3 r1: merge F2 LAND READY 7627f79c; generated files rebuilt"},{"s":"4ed2831d+","t":"2026-11-19T07:18Z","c":"law3-cost-only: index.html / sw.js regenerated"},{"s":"0da546e9","t":"2026-11-19T07:16Z","c":"role-parity-drift r1: build line"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -78826,6 +78826,11 @@ TH.withSeat=function(seat,fn){
     runs without D's steps (never takeQ on the rolled life) and is logged ("held-run", the tests assert none) */
  const hd=TH.held(seat)&&TH.curDo!=="life";if(hd)D.log.push(["held-run",seat,TH.curDo||"later"]);
  const dW=dOn&&TH.curDo!=="life"&&!hd;
+ /* review r1 (hostnull a, the whole family beyond tap runs): ANY run in her context may write the host's page — her part B life intent wrote the
+    host's open card (#modal: jload lDlgWait klifewait + the kit size attributes of his .dlg, outer showModal wrappers run past the NOOP), a
+    part D pick its #modal class — with no repaint (TH.tapRun sees only tap runs). This net watches every outer run of hers (part D on: the
+    host's after-run exists) and asks the same one repaint (rpAsk) when it wrote his DOM and no tap run inside already asked. */
+ let wso=null;const wpn=TH.paintN;if(dOn&&typeof MutationObserver==="function"&&document.body)try{wso=WSO=WSO||new MutationObserver(()=>{});wso.takeRecords();wso.observe(document.body,{subtree:true,childList:true,attributes:true,characterData:true})}catch(e){wso=null}
  try{if(B.fresh){fixRefs(S);B.fresh=false}if(dW&&D.hold)D.hold(S);v=standIn(PA,S);if(v)v.__inv0=(v.inv||[]).slice();if(dW&&!D.noPatch)try{p0=pSnap()}catch(e){console.error("thin p0",e)}D.cur={p0,rv:dW&&!D.noPatch?D.rvIn(seat):null};return fn()}
  finally{const sN=S;
   if(dW)try{D.takeQ()}catch(e){console.error("thin takeQ",e)}
@@ -78840,6 +78845,7 @@ TH.withSeat=function(seat,fn){
    if(dOn&&Array.isArray(e.inv))for(const x of e.inv)if(x&&x.k&&!x.h&&!(e.__inv0||[]).includes(x))TH.bridgeItems.push(J(x));
    for(const k of X.STAT)if(k!=="hh"&&typeof e[k]==="number"&&e[k]!==b[k]){TH.bridge.push([k,b[k],e[k]]);A.S[k]=e[k]}
    for(const [f,m] of [["rel","rl"],["oan","ro"]])if(e[f]!==b[f]){A.S[m]=A.S[m]||{};A.S[m][PID[seat]]=e[f];TH.bridge.push([m,b[f],e[f]])}}
+  if(wso)try{const R=wso.takeRecords();wso.disconnect();if(R.length&&TH.paintN===wpn){const M=document.getElementById("modal");TH.paintN++;TH.wsPaintN=(TH.wsPaintN|0)+1;rpAsk(!!M&&R.some(x=>x.target===M||M.contains(x.target)))}}catch(e){}/* before the context closes: rpAsk queues in AFTER */
   B.pers=persTake(A.S);swapView(seat,CW.seat,mks,A.S);persPut(A.S,hp);X.pushFriend(L);
   CW.ctx=undefined;TH.outerS=null;S=A.S;for(const r of REG)try{r[2](A.g[r[0]])}catch(e){}quiet=A.quiet;
   if(dOn)D.afterRun(seat)}};
@@ -78874,7 +78880,7 @@ const uiArg=a=>{try{return JSON.parse(JSON.stringify(a,(k,v)=>typeof v==="functi
    wrote into the host's page is seen here (MutationObserver.takeRecords: synchronous, no list of painters to keep up to date) and the host
    repaints his own screen from his own state when her context closes (rpAsk below). Her screen gets her own result with the
    answer (her view → one render). (c) No cap here: every effect her run raised is kept (BAL.coopUi paces them on her phone). */
-let PMO=null;TH.paintN=0;
+let PMO=null,WSO=null;TH.paintN=0;
 TH.tapRun=function(fn){const q0=quiet,u0=TH.uiCap;quiet=false;TH.uiCap=[];let mo=null;
  if(!u0&&CW.ctx&&host()&&typeof MutationObserver==="function"&&document.body)try{mo=PMO=PMO||new MutationObserver(()=>{});mo.takeRecords();mo.observe(document.body,{subtree:true,childList:true,attributes:true,characterData:true})}catch(e){mo=null}
  let r,ui,dirty=false,dm=false;try{r=fn()}finally{quiet=q0;ui=TH.uiCap;TH.uiCap=u0;if(mo)try{const R=mo.takeRecords();mo.disconnect();dirty=R.length>0;
@@ -80318,7 +80324,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="22bbaf911448";window.CTM_BUILD=BUILD;
+const BUILD="68cafb8e04fe";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

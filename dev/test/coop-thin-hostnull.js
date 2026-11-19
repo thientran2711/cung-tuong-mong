@@ -107,9 +107,12 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  ok(!!K,'H0 she stands at a place with a person, the host at home',{K,PI});
  /* H1 (a) the registrations with no walk repaint (talk, scout, invite): the host's screen is HIS after her run (repainted from host state) */
  const H1=[];
+ /* review r1 (H1 flake: his token "Phi ???" vs her name after a fresh render): what the HOST learned by himself (outside her context) — k61Know /
+    k61Meet calls with their callers, so a red row shows whether his own world (parallel time arrivals …) changed his knowledge with no render */
+ await H.p.evaluate(()=>{window.__hk61=[];for(const n of ['k61Know','k61Meet']){const f=window[n];if(typeof f!=='function'||f.__hn)continue;const w=function(){if(!COOPW.ctx)__hk61.push([n,Math.round(performance.now()),String(new Error().stack).split('\n').slice(2,7).map(x=>x.trim().split(' ')[1]).join('<')]);return f.apply(this,arguments)};w.__hn=1;window[n]=w;try{(0,eval)(n+'=window.'+n)}catch(e){}}});
  {await G.p.evaluate(i=>{popIdx=i;popMsg='';used=0;S.visit.tk={};S.visit.talked=false;render()},PI);await H.p.evaluate(()=>{render()});
   const oi=await G.p.evaluate(()=>{const p=curPeople()[popIdx];return talkOpts(p).findIndex(a=>!a.open&&!a.lock&&canPay(a))});
-  const r=await herRun('talk',oi);const hs=await hostSame();H1.push(['talk',r,hs]);
+  const k0=await H.p.evaluate(()=>__hk61.length);const r=await herRun('talk',oi);const hs=await hostSame();hs.hostLearn=await H.p.evaluate(k=>__hk61.slice(k),k0);H1.push(['talk',r,hs]);
   if(process.env.SHOTS){fs.mkdirSync(process.env.SHOTS,{recursive:true});for(const p of [H,G]){await tapText(p,/^Bỏ qua$/,1500)/* the Luân hồi intro overlay (as coop-thin-f5 shots) */;await p.p.evaluate(()=>{for(const el of document.querySelectorAll('.nl-intro,#nlIntro,[data-nlintro]'))el.remove()}).catch(()=>{})}await sleep(900);for(const [p,nm] of [[H,'host'],[G,'guest']]){const vp=p.p.viewportSize();await p.p.screenshot({path:path.join(process.env.SHOTS,`hn-talk-s${SWAP}-${nm}-${vp.width}x${vp.height}.jpg`),type:'jpeg',quality:70})}}/* LOOK: after her talk, host screen = his own place, her pop-up only on her phone */
   ok(r.sent===1&&r.got&&r.ran===1&&!!r.after.msg&&r.after.used>0&&hs.same,'H1 talk from the guest: run once on the host, her pop-up shows her result, the host\'s screen = his own state (repainted)',{r,hs})}
  for(const [fn,src] of [['scout',"(S.seenLoc={},0)||rivals.find(v=>v&&!v.coop&&v.alive&&!v.out&&!locKnown(v)&&!together(S,v))"],['invite',"rivals.find(v=>v&&!v.coop&&v.alive&&!v.out&&!sameHouse(S,v))"]]){
