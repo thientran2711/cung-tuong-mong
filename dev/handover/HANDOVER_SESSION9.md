@@ -1089,3 +1089,4 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - STANDBYS (owner pasted 05:2xZ): MAIN session_01Rc5AsJ8S2aNYjotfjzaioU; B session_01N1tNP5jYfeoWoXsWr5eqKN; C-AG session_01Rc5AsM9pCcsWwjoC8PjjW7; D session_01964izFLpgp8aeBD8Y13gek; E session_01DgYSWkgmeMCRaqRT4UCEJE; C (art) — none registered yet.
 - ROOT-64 hourly wake trig_01AMEC9zngzCUY8K3AaUrNJn → ROOT-64 DELETES it after opening ROOT-65; ROOT-65 sets its own (minute 32).
 - (19/11 06:19Z) FROM FOREMAN C-AG #21: rolled over at ctx 31.5 % (depth 8, cannot open sessions) → C-AG STANDBY session_01Rc5AsM9pCcsWwjoC8PjjW7 told TAKE OVER NOW. Only C-AG job left: minister-agents (rv HdFbiZEL PASS a2c6ce4e, call it after seal-lean-2). Handover block in FOREMAN_C_STATUS.
+- (19/11 06:24Z) ROOT-65 opened = session_01Rc5AsMRSKCNFbYwLJhNeY7 (opus, depth 3). ROOT-64 wake trig_01AMEC9zngzCUY8K3AaUrNJn DELETED. ROOT-64 stops (relays any late message to ROOT-65).
