@@ -26,3 +26,7 @@ Method: `build.py cNN v0 --state nude --spec5pose --nudeopt auto --age aNN` outp
 ## c18 DONE (option B: black second colour → deep midnight-navy at a51/a65; yellow-silk folding fan) — sheet img/_review/nude-mass/sheet_c18.jpg
 - gens → cuts: a18 9ZHZhF9NYZ → bxMxzGK5Y2 · a26 u5W53clQLD → KLpLYYGkqp · a36 If3fJZ7tvE → Xm9mUwuBfo · a51 P3Q3tqf42C → gOmOedbSXO · a65 N2q2vr26D9 → aFGFNiYfSh (face ref a51 CqnqL6tEEy).
 - All 1st try, all calm, fan below chin, lips closed, face clear, forehead clean (the centre fringe pearl only), no crown flowers, soft honey gold; a51 silver at temples, a65 mostly silver. a18/a65 raw had parchment/haze → removed by the cut (corners 0). 5 gens 675 cr.
+
+## HOLD (ROOT-36 ~00:50Z): STOP, c19 not started. Owner: same item at all 5 ages = fault (FIGURE_GATE 3f); frontal-only is new (3d2). c18 to be redone after N5b's item table + builder fix. Waiting for ROOT-36 GO.
+- One c19 a18 images_generate call returned an empty tool error just before the STOP; it may or may not have queued a gen (not seen; ignore any stray c19 a18 in the Magnific folder).
+- Ready for the redo: face refs c18–c24 (above); prompt helper = build.py output unchanged + no-background line; per-person cut/sheet/check flow works (c17, c18).
