@@ -15,7 +15,7 @@ def templ(t,src):
     s=s.replace('All flowers, birds and the phoenix','{TOUCH}All flowers, birds and the phoenix',1)
     s=s.replace('Eyes soft, warm and round-almond, never slanted or upturned, never teary.','Eyes: both eyes symmetrical, both irises looking straight at the viewer, never cross-eyed, never wall-eyed, never teary, eyelids fully open.')
     s=s.replace('HAIR UP: ALL of her hair is swept UP','HAIR UP: ALL of her glossy pure BLACK hair (never brown) is swept UP')
-    s=s.replace('very long, very wide, flowing sleeves that fall well past her hands down toward her knees, at least as long and wide as the sleeves of the lowest consort ranks',('very long, very wide, flowing sleeves that fall well past her hands and hang down to her ANKLES, almost touching the floor' if t==7 else 'very long, very wide, flowing sleeves that fall well past her hands and hang PAST her ankles all the way down until they TOUCH THE FLOOR'))
+    s=s.replace('very long, very wide, flowing sleeves that fall well past her hands down toward her knees, at least as long and wide as the sleeves of the lowest consort ranks','very long, very wide, flowing sleeves that fall well past her hands and hang PAST her ankles all the way down until they TOUCH THE FLOOR')
     s=s.replace('COLOUR RULE',FL2+'COLOUR RULE',1)
     for k,v in M19.items(): s=s.replace(v,'{'+k+'}')
     assert 'caramel' not in s and 'parasol' not in s and '{ITEM}' in s
