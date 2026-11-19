@@ -172,7 +172,10 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
   if(!isSrv()){for(const f of ["pool","artActs","directActs","illCards"])try{for(const c of window[f]()||[])addP(role,c.n,"deck")}catch(e){}
    try{const q=qinCard(S);if(q)addP(role,q.n,"garden")}catch(e){}}
   if(!isSrv())try{for(const a of talkOpts({kind:"emp"})||[])addP(role,a.n,"talk:emp")}catch(e){}
-  for(const k of PLS()){richK(S);Q.length=0;try{S.place="home";goTo(k);Q.length=0}catch(e){E("goTo "+k,e)}
+  /* role-parity-drift (19/11): live-servants (j95s) puts a «Chọn người theo hầu» card before her FIRST departure of the day (goTo returns at the card;
+     the visit happens only after her tap). The probe = her tap «Đi một mình»: the card's own go([]) writes S.ent {d: today, ids: [], at: k} — the same
+     write here, so goTo walks the real path (gates, khắc, people) instead of stopping at the card. S.ent is restored after each place. */
+  for(const k of PLS()){richK(S);Q.length=0;const e0=S.ent;try{S.place="home";if(typeof j95sDay==="function")S.ent={d:j95sDay(),ids:[],at:k};goTo(k);Q.length=0}catch(e){E("goTo "+k,e)}finally{if(e0===undefined)delete S.ent;else S.ent=e0}
    for(const pp of (S.visit&&S.visit.people)||[]){try{for(const a of talkOpts(pp)||[])addP(role,a.n,"talk:"+pp.kind)}catch(e){E("talk "+pp.kind,e)}}}
   S.place="home";Q.length=0;
   if(!isSrv()){for(let i=0;i<rivals.length;i++){const v=rivals[i];if(v===S)continue;try{for(const n of lab(rvCard(v,i)))addP(role,n,"rv")}catch(e){E("rv",e)}try{for(const a of topicOpts(v)||[])addP(role,a.n,"topic")}catch(e){E("topic",e)}}
