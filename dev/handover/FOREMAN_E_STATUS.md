@@ -351,3 +351,5 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
   · MAIN ORDER 00:41Z (law 8, owner ma ma question OD 19/11 00:40Z) → opened history expert E15 session_01DgYSWp57dyN9pFwnJw7znu (sonnet) → reports/hist-mama-ladder.md + one-line recommendation; FOR MAIN line when done; no code by E.
   · E13m: W2 remerge running (measure 22/22, quickcheck in progress) → LAND READY ge-writers-w2 <sha>.
   · E11c (W3) running; E14 + E14b (bd roads) running. Load 6/12.
+- (19/11 00:53Z) E15 DONE hist-mama-ladder (report reports/hist-mama-ladder.md, handover 9a399687).
+  FOR MAIN ROOT-61 — hist-mama-ladder: recommendation = show Ma ma as the 6th chip of the SAME ladder, a «stay-on» rung (age 25 + Nội vụ phủ exam), entered only from Chưởng sự cô cô and Nữ quan (matches live jexam/S.srv.mama); history: ma ma is an age/staying axis (kept elder maids, teaching ma ma) + outside-hired wet nurses, not a rank above Nữ quan. Written from knowledge; E15 now web-checks the [?] items — a VERIFIED line follows here. UI decision is yours (no code by E).
