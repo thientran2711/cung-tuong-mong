@@ -30,6 +30,9 @@ const bdMan=id=>{try{if(typeof menInit==="function")menInit()}catch(e){}if(!S.me
 const bdKill=id=>{bdP(id,"alive",-1);bdMan(id);return ""};
 const bdMove=(id,w)=>{bdP(id,"w",w);bdMan(id);return ""};
 const bdMeet=id=>{bdP(id,"met",1);return ""};
+/* BDO: the ONE object book of bd's four roads (law 6c): every object a chapter gives, buys, receives, loses, burns or hides has its
+   holder here, fb "bd.o.<thing>" = where/who holds it now (0 = never in play). bdO(k) reads, bdO(k,v) sets (returns "" for text use). */
+const bdO=(k,v)=>{const r=RD_FL("bd.o."+k,v);return v!=null?"":r};
 /* the book, as the chapter text and the later grand-ending wave read it */
 const bdWhere=id=>({tn:"thảo nguyên",ai:"biên ải",kinh:"kinh thành",nguc:"ngục"})[bdP(id,"w")]||"";
 /* the .4 rare rows of the bd premises (j97 R97L shape; j97 appends them; numbers BAL.arc.rare.<road>) */

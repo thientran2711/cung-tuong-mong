@@ -1,0 +1,35 @@
+/* scene-pic-scan.js — owner OD 18/11 ~16:10Z (fullbody-frame s4 (a)): a scene picture may stay BIG only when everything under it fits the frame with NO scroll; otherwise it shrinks by KIT_SIZE picture class.
+   Opens every PEND event + the info/news/result/notice/night/rule panels (long and short) + shop at each viewport; per dialog records the frame size (ksz), presentation, the scene picture box (class by size: nearest KIT_SIZE.pic entry) and whether anything in the frame scrolls (info column, button area, modal body).
+   Exit 1 when a dialog scrolls although a smaller picture class would remove the scroll (picture not at the smallest class) ; table printed per device: frame | content | pic class | scrolls.
+   usage: node dev/test/scene-pic-scan.js <index.html> [out.json]   env SZ=[[W,H],..] MAXP=n */
+const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
+(async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});const html=fs.readFileSync(SRC);let bad=0;const ALL=[];
+ for(const [W,H] of SZ){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',ignoreHTTPSErrors:true});await ctx.addInitScript(()=>{window.__bot=1;let s=12345;Math.random=()=>{s=(s*1664525+1013904223)%4294967296;return s/4294967296}});
+  await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:html,contentType:'text/html; charset=utf-8'}));
+  const p=await ctx.newPage();p.on('pageerror',()=>{});await p.goto('http://ctm.test/index.html',{waitUntil:'domcontentloaded',timeout:120000});
+  await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function'&&typeof kitScrollCues==='function',null,{timeout:120000});
+  await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;for(const e of [...document.body.querySelectorAll('*')]){const cs=getComputedStyle(e);if(cs.position==='fixed'&&/Luân hồi/.test(e.textContent||''))e.remove()}document.getElementById('modal').hidden=true});await p.waitForTimeout(3000);
+  const probe=()=>p.evaluate(()=>{const M=document.getElementById('modal');const d=document.querySelector('#modal:not([hidden]) .dlg');if(!d)return null;
+   const rc=e=>{const r=e.getBoundingClientRect();return [Math.round(r.width),Math.round(r.height)]};
+   const pics=[...d.querySelectorAll('.k3ev,.k3mpic,.kdlgart,.kpsubj.kes .ksart')].filter(e=>e.getClientRects().length&&!e.closest('.kszb')&&!e.closest('.kszfig')).map(e=>rc(e));
+   const scr=[];[d,...d.querySelectorAll('*')].forEach(e=>{if(!e.getClientRects().length)return;const cs=getComputedStyle(e);if(/auto|scroll/.test(cs.overflowY)&&e.scrollHeight>e.clientHeight+2&&e.clientHeight>20&&!e.classList.contains('kszfs'))scr.push((e.id?'#'+e.id:'')+'.'+String(e.className).split(' ')[0]+':'+e.clientHeight+'/'+e.scrollHeight)});
+   const K=typeof KIT_SIZE==='object'?KIT_SIZE.pic:{};const names=Object.keys(K).filter(k=>/^(PS|PM|PL|NS|NM|NL|LS|LM|LL)$/.test(k));
+   const cls=pics.map(([w,h])=>{let best='?',bd=1e9;for(const k of names){const z=K[k];const zw=typeof z.w==='number'?z.w:w,zh=typeof z.h==='number'?z.h:(z.h.kv2||200);const dd=Math.abs(zw-w)/Math.max(zw,1)+Math.abs(zh-h)/Math.max(zh,1);if(dd<bd){bd=dd;best=k}}return best});
+   const dr=d.getBoundingClientRect();return {dlg:(d.className||'').split(' ').filter(c=>/^(kszlive|ksz3|kpanel|kdper|kdpbanner|kdscroll)$/.test(c)).join('.'),kind:d.dataset.kind||'',ksz:d.dataset.ksz||'',pres:d.dataset.pres||'',pics,cls,scr,fh:Math.round(dr.height),mh:M.clientHeight,pic0:pics[0]?pics[0][1]:0}});
+  const close=()=>p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true;try{kitCoachOff&&kitCoachOff();kitTipOff&&kitTipOff()}catch(e){}});
+  const rec=async(name)=>{await p.waitForTimeout(1200);let o=await probe();if(!o){await close();return}o.name=name;o.dev=W+'x'+H;ALL.push(o);await close()};
+  const ids=await p.evaluate(()=>Object.keys(PEND));let n=0;
+  for(const id of ids){if(+process.env.MAXP&&n>=+process.env.MAXP)break;const ok=await p.evaluate(id=>{const v=liveRivals(true)[0];const iix=S.inv.findIndex(e=>e&&e.k==="tramngoc");for(const pp of [{v:v&&v.id,ix:iix},{ix:iix},{v:v&&v.id},{}]){let d=null;try{d=PEND[id](Object.assign({},pp))}catch(e){d=null}if(!d)continue;try{Q.length=0;pushDil(mkP(id,pp),'Tuyến truyện');showModal();if(Q.length)return true}catch(e){}}return false},id);if(ok){n++;await rec('PEND:'+id)}}
+  const long=k=>'<p>'+('Một đoạn dài nói về chuyện trong cung và nhiều điều khác nữa. '.repeat(k))+'</p>';
+  for(const [nm,fn] of [['news-long',()=>{Q.push({t:'Tin trong cung',who:liveRivals(true)[0],h:long(30)});showModal()}],['notice-long',()=>{Q.push({t:'Một báo',who:liveRivals(true)[0],h:long(30)});showModal()}],['result-long',()=>{Q.push({t:'Kết quả: thử',who:liveRivals(true)[0],h:long(30)});showModal()}],['night-long',()=>{Q.push({t:'Đêm',cls:'night',who:liveRivals(true)[0],h:long(30)});showModal()}],
+   ['news-noperson',()=>{Q.push({t:'Tin',h:long(30)});showModal()}],['info-long',()=>kitModal({kind:'info',title:'Một điều',subject:liveRivals(true)[0],facts:Array.from({length:30},(_,i)=>'Mục '+i+' dài dài dài dài dài dài dài.')})],
+   ['rule-long',()=>kitModal({kind:'rule',title:'Luật',sections:Array.from({length:6},(_,i)=>({h:'Thang '+i,tiers:Array.from({length:5},(_,j)=>({k:j+'–'+(j+2),n:'bậc',d:'một hai ba bốn',c:'g'}))}))})],
+   ['shop',()=>{S.shop=Object.keys(IT).filter(k=>IT[k].pr).slice(0,12);kitShopNvp()}],['tour',()=>window.kitTour()],['tip',()=>kitTip({id:'scan',title:'Lời dặn',html:long(20)})],
+   ['intel',()=>kitIntelPanel(liveRivals(true)[0])],['evidence',()=>kitEvidencePanel(liveRivals(true)[0])],['contest-round',()=>{Q.push({ev:1,t:'Tranh ghế',who:pMe(),h:long(8),opts:Array.from({length:5},(_,i)=>({n:'Lựa chọn '+i,fx:{}}))});showModal()}]])
+   {try{await p.evaluate(fn)}catch(e){continue}await rec(nm)}
+  await ctx.close()}
+ await b.close();
+ const by={};ALL.forEach(o=>{const k=o.dev+' | '+(o.dlg||'?')+' '+(o.kind||'-')+' ksz='+(o.ksz||'-')+' pres='+(o.pres||'-')+' | pic '+(o.cls.join(',')||'none')+' | scroll '+(o.scr.length?'YES':'no');(by[k]=by[k]||[]).push(o.name)});
+ Object.entries(by).sort().forEach(([k,v])=>console.log(k.padEnd(100),String(v.length).padStart(3),v.slice(0,3).join(',')));
+ const sc=ALL.filter(o=>o.scr.length&&o.pics.length);console.log('dialogs',ALL.length,'with pic',ALL.filter(o=>o.pics.length).length,'scrolling with pic',sc.length);sc.slice(0,60).forEach(o=>console.log('SCROLL',o.dev,o.name,o.ksz,'pic',JSON.stringify(o.pics),o.scr.join(' ')));
+ if(OUT)fs.writeFileSync(OUT,JSON.stringify(ALL));process.exit(0)})().catch(e=>{console.error(e);process.exit(2)});

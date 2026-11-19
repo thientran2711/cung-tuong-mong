@@ -1,5 +1,5 @@
 /* ================= ONE IDENTITY FOR LIFE, FOUR AGE BANDS FOR ALL, SMALL AGE EFFECTS ================= */
-/* bands for every group: 18-25 / 26-35 / 36-50 / 51+ */
+/* bands for every group: 18-25 / 26-35 / 36-50 / 51-64 / 65+ (BAL.ageBand; the labels below are refilled from it in jbal.js) */
 function band4(a){return ageBandIx(a)}
 const BAND4N=["18-25","26-35","36-50","51+"];
 function tagBand(x){const s=String(x==null?"":x).toLowerCase();const m=s.match(/\d+/);if(m)return band4(+m[0]);return /old|lao|51/.test(s)?3:/mid|trung|36/.test(s)?2:/adult|26/.test(s)?1:0}
