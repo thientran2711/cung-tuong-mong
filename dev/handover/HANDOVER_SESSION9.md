@@ -1000,3 +1000,4 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - Hourly wake minute 32 set (see next line). FROM MAIN lines written in FOREMAN_B/C/D/E_STATUS; send_message to C-AG #18, JJ8qdidm, MQH6saAB, L23c5v2N, ROOT-61.
 - ROOT-62 hourly wake = trig_01C2S2p4bs1sLp6uM4FdqS6h (minute 32). role-parity-3 bc79de0a stale → B reviewer remerge ordered.
 - (19/11 ~02:31Z real) Owner (via ROOT-61 relay) seal animation idle-sway + lean-in → OD + worker seal-lean session_01Rc5AsKsNitSW71UKQUtLKJ (sonnet); 8-frame khóc/giận loops never painted (C order 17/11 17:46Z unhandled, CDN 404) → re-ordered to Foreman C as TOP art item.
+- (19/11 ~02:42Z real) Owner: head «!» → bubble-talk glyph in the same yellow disc (OD 02:40Z) → C glyph ico-talk + wiring to errand worker L23c5v2N.
