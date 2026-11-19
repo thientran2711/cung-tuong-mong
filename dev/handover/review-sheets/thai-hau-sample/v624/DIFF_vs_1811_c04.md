@@ -5,6 +5,8 @@ BASE = dev/art/elder-copy/THAIHAU_1811_c04_a36_BASE.txt = Magnific prompt of c04
 Builder: `python3 dev/art/store-all/build_all.py mNN thaihau --age a36|a51|a65` (function thaihau(); every change below is asserted). Refs: image 1 = her KC set-B cut (m05 KLpSlnEkqp), image 2 = royal swatch TdwDfOyVNR. No style image.
 The OUTFIT sentence and the COLOUR RULE sentence are the 18/11 words; only the colour NAME slot changes ('royal purple' -> her main).
 
+B22 (owner Lượt 670): the yellow in the THREE-COLOUR sentence is 'the deep antique-gold royal yellow #CE9C48' (was #EFBD69); the m05 pictures drawn before B22 (b71117d) used #EFBD69 and ARE the approved yellow.
+
 ## m05 a36 — gate: THAI HAU GATE PASS (scope tp8 a36; exempt S03 = 18/11 colour rule kept: yes)
 
 1. **SLOT face (B8: her KC v3 face words)**
@@ -34,6 +36,9 @@ The OUTFIT sentence and the COLOUR RULE sentence are the 18/11 words; only the c
 9. **ADDED royal-yellow swatch sentence (18/11 TH_SWATCH, image 2) + D9 forehead**
    - 18/11: `nothing covering the face. Everyone beautiful at every age.`
    - now:   `nothing covering the face. Image 2 is only a colour reference for the royal yellow, never copy anything but its colour; the Empress Dowager's yellow is that royal yellow in its deep antique-gold, subdued shade as the colour rule says. NOTHING on the forehead (no hoa điền, no dot, no mark, nothing). Everyone beautiful at every age.`
+10. **B22 (owner Lượt 670): Thái hậu yellow = deep antique-gold royal yellow #CE9C48 (measured on the v624 m05 a36 robe), not #EFBD69**
+   - 18/11: `the royal golden yellow (honey-gold like #EFBD69)`
+   - now:   `the deep antique-gold royal yellow #CE9C48`
 
 ## m05 a51 — gate: THAI HAU GATE PASS (scope tp8 a51; exempt S33 = 18/11 colour rule kept: yes)
 
@@ -67,6 +72,9 @@ The OUTFIT sentence and the COLOUR RULE sentence are the 18/11 words; only the c
 10. **ADDED royal-yellow swatch sentence (18/11 TH_SWATCH, image 2) + D9 forehead**
    - 18/11: `nothing covering the face. Everyone beautiful at every age.`
    - now:   `nothing covering the face. Image 2 is only a colour reference for the royal yellow, never copy anything but its colour; the Empress Dowager's yellow is that royal yellow in its deep antique-gold, subdued shade as the colour rule says. NOTHING on the forehead (no hoa điền, no dot, no mark, nothing). Everyone beautiful at every age.`
+11. **B22 (owner Lượt 670): Thái hậu yellow = deep antique-gold royal yellow #CE9C48 (measured on the v624 m05 a36 robe), not #EFBD69**
+   - 18/11: `the royal golden yellow (honey-gold like #EFBD69)`
+   - now:   `the deep antique-gold royal yellow #CE9C48`
 
 ## m05 a65 — gate: THAI HAU GATE PASS (scope tp8 a65; exempt S33 = 18/11 colour rule kept: yes)
 
@@ -100,4 +108,7 @@ The OUTFIT sentence and the COLOUR RULE sentence are the 18/11 words; only the c
 10. **ADDED royal-yellow swatch sentence (18/11 TH_SWATCH, image 2) + D9 forehead**
    - 18/11: `nothing covering the face. Everyone beautiful at every age.`
    - now:   `nothing covering the face. Image 2 is only a colour reference for the royal yellow, never copy anything but its colour; the Empress Dowager's yellow is that royal yellow in its deep antique-gold, subdued shade as the colour rule says. NOTHING on the forehead (no hoa điền, no dot, no mark, nothing). Everyone beautiful at every age.`
+11. **B22 (owner Lượt 670): Thái hậu yellow = deep antique-gold royal yellow #CE9C48 (measured on the v624 m05 a36 robe), not #EFBD69**
+   - 18/11: `the royal golden yellow (honey-gold like #EFBD69)`
+   - now:   `the deep antique-gold royal yellow #CE9C48`
 

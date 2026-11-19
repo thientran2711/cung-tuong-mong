@@ -132,3 +132,10 @@ How the redraw avoids it:
   - (1) The a51 staff came out short (sceptre-like); the jade dragon head is at shoulder height but does not touch the face.
   - (2) The ANGLE asked for a 45° turn to the left; all three are only slightly turned.
   - (3) a36 is already deep/muted (the 18/11 rule), so a51/a65 read only a little deeper; ageing shows mostly in face and hair.
+
+## Part 3b — B22 (owner Lượt 670): Thái hậu yellow #CE9C48
+- In `build_all.py thaihau()`, a new asserted swap changes the THREE-COLOUR yellow "the royal golden yellow (honey-gold like #EFBD69)" to "the deep antique-gold royal yellow #CE9C48".
+- An assert makes sure no #EFBD69 is left in a Thái hậu prompt. Everything else of v624 is unchanged.
+- Gate PASS 48/48 (16 sắc sảo / tinh nghịch people × 3 ages).
+- v624/m05_thaihau_aNN.B22.prompt.txt = the current prompts. m05_thaihau_aNN.prompt.txt = exactly what was drawn at b71117d. DIFF_vs_1811_c04.md is regenerated.
+- No gens. Waiting for NF3's new m05 face block (owner: the face looks baby, not sắc sảo).
