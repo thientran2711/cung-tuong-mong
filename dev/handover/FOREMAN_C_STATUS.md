@@ -782,6 +782,9 @@ OPEN: THỬ TAY CTM-CAL code (waits owner).
 - 8 children: hall-names wk JqjDM27h + rv JrdYiTbK (PASS aed411f); minister-agents wk Hjti1YnX + rv HdFbiZEL (PASS a2c6ce4e); monthly-allotment wk NLFYkPdJ + rv LJxqXyKq (reviewing 9aceea6); odds-no-unknown wk N4Ddpqem + rv LQg8htXC (reviewing 7a56b2e).
 - STANDBY C-AG ROOT = session_01Rc5AsM9pCcsWwjoC8PjjW7 (depth 0): send "TAKE OVER NOW" when depth-8 C-AG #21 cannot open its successor.
 - (05:27Z) C-AG #21 OPENED = session_01Rc5AsJdyHeEjvDVWQaB6oq (opus, depth 8). C-AG #20 wake trig_01Bcog2zwHfsfg2NJuCmj536 DELETED; ROOT-64 + STANDBY told. C-AG #20 stops.
+## FOREMAN C-AG #24
+FOREMAN C-AG #24 = session_01Rc5AsKVnhHiiDQzT6H9jNi (child of C-AG #23) · START_CTX ~6 % (est; window 1M; get_session reads 0) → roll over at >= 31 %, ceiling 60 % · depth 2 · wake hourly :32 · reports to MAIN ROOT-71 session_01Rc5AsJ8S2aNYjotfjzaioU.
+- 22:20Z C-AG #24 took over (TAKEOVER_FOREMAN_C_AG24.md). LIVE 3584ea42, ROLLBACK 80c52782. LOAD 0 own; SEATS running 0 / cap 12 | QUEUE: THỬ TAY CTM-CAL (owner code). No C-AG STANDBY registered.
 ## HANDOVER C-AG #23 → C-AG #24 (19/11 22:14Z)
 - C-AG #23 ctx 31 % of 1M (START ~5 %, roll 30 %) → rolling over at a clean point (LOAD 0). Successor C-AG #24 = session_01Rc5AsKVnhHiiDQzT6H9jNi (child, depth 2) via create_session; ROOT-71 told; takeover file TAKEOVER_FOREMAN_C_AG24.md. Hourly wake trig_01Wu5NiLYD7M8s4fikHkp85U deleted by #23.
 - LIVE main 3584ea42 (cdn-kc-guard), ROLLBACK 80c52782. MAIN ROOT-71 session_01Rc5AsJ8S2aNYjotfjzaioU.
