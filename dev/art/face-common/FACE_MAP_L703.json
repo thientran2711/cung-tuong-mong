@@ -932,12 +932,12 @@
  "s16": {
   "group": "Quyến rũ",
   "hidden": false,
-  "ts": "2026-11-19T21:35:00Z",
-  "cut": "s7IM02Wl8e",
-  "gen": "u5W34WVQLD",
-  "ver": "v5",
-  "prompt_file": "dev/art/face-common/s16.v5.FULL.txt",
-  "kind": "SAMPLE-689"
+  "ts": "2026-11-19T22:08:16Z",
+  "cut": "hu2ynp3vqL",
+  "gen": "u5WiTRSQLD",
+  "ver": "v4c",
+  "prompt_file": "dev/art/face-common/s16.v4c.FULL.txt",
+  "kind": "RESTORE-712"
  },
  "s17": {
   "group": "Quyến rũ",
@@ -1102,12 +1102,12 @@
  "s33": {
   "group": "Quyến rũ",
   "hidden": false,
-  "ts": "2026-11-19T21:55:00Z",
-  "cut": "ov6w3kS829",
-  "gen": "eIPlOzYdqL",
-  "ver": "v5",
-  "prompt_file": "dev/art/face-common/s33.v5.FULL.txt",
-  "kind": "FULLSET-700"
+  "ts": "2026-11-19T22:08:16Z",
+  "cut": "N2qvybP6D9",
+  "gen": "N2qvJiB6D9",
+  "ver": "v5r2",
+  "prompt_file": "dev/art/face-common/s33.v5r2.FULL.txt",
+  "kind": "REDRAW-712"
  },
  "s34": {
   "group": "Quyến rũ",
@@ -1122,41 +1122,41 @@
  "s35": {
   "group": "Quyến rũ",
   "hidden": false,
-  "ts": "2026-11-19T21:55:00Z",
-  "cut": "kseYXeB16B",
-  "gen": "WDgKS2KcXe",
-  "ver": "v5b",
-  "prompt_file": "dev/art/face-common/s35.v5b.FULL.txt",
-  "kind": "FULLSET-700"
+  "ts": "2026-11-19T22:08:16Z",
+  "cut": "3zKC91UREY",
+  "gen": "TdwrzDAVNR",
+  "ver": "v5r2",
+  "prompt_file": "dev/art/face-common/s35.v5r2.FULL.txt",
+  "kind": "REDRAW-712"
  },
  "s36": {
   "group": "Quyến rũ",
   "hidden": false,
-  "ts": "2026-11-19T21:55:00Z",
-  "cut": "BhNUikdoQR",
-  "gen": "lJtDIfYgv9",
-  "ver": "v5",
-  "prompt_file": "dev/art/face-common/s36.v5.FULL.txt",
-  "kind": "FULLSET-700"
+  "ts": "2026-11-19T22:08:16Z",
+  "cut": "MBJjcPjDCm",
+  "gen": "9ZHh7RINYZ",
+  "ver": "v5r2",
+  "prompt_file": "dev/art/face-common/s36.v5r2.FULL.txt",
+  "kind": "REDRAW-712"
  },
  "s37": {
   "group": "Quyến rũ",
   "hidden": false,
-  "ts": "2026-11-19T21:55:00Z",
-  "cut": "WDgKUC2cXe",
-  "gen": "gOmptElSXO",
+  "ts": "2026-11-19T22:08:16Z",
+  "cut": "Lw8V5SlswO",
+  "gen": "O6E8sJQynm",
   "ver": "v5",
   "prompt_file": "dev/art/face-common/s37.v5.FULL.txt",
-  "kind": "FULLSET-700"
+  "kind": "A21-RETOUCH-712"
  },
  "s38": {
   "group": "Quyến rũ",
   "hidden": false,
-  "ts": "2026-11-19T21:55:00Z",
-  "cut": "lJtDhmMgv9",
-  "gen": "0eU1wnSTfW",
-  "ver": "v5b",
-  "prompt_file": "dev/art/face-common/s38.v5b.FULL.txt",
-  "kind": "FULLSET-700"
+  "ts": "2026-11-19T22:08:16Z",
+  "cut": "MBJjc4LDCm",
+  "gen": "p8yscIfehw",
+  "ver": "v5r2",
+  "prompt_file": "dev/art/face-common/s38.v5r2.FULL.txt",
+  "kind": "REDRAW-712"
  }
 }
