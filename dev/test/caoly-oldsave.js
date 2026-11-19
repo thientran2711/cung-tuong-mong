@@ -11,7 +11,7 @@ const {chromium}=require('playwright');const [,,URL,MAIN]=process.argv;
     if(S&&S.st&&S.st.ms&&typeof msDone67==='function'){S.st.ms.t0=-99}}
    Q.length=0;return{save:JSON.stringify(ser()),land:S.origin&&S.origin.land,n:S.origin&&S.origin.n,arc:S.st&&S.st.M&&S.st.M.id,ch:S.st&&S.st.ch&&S.st.ch.n}},[k,months]);await q.context().close();return s};
  const old=await mk(MAIN,'nc',40);console.log('old save (main build):',JSON.stringify({land:old.land,n:old.n,arc:old.arc,ch:old.ch}));
- chk('old save is a Nam Chiếu life (pre-rename)',/Nam Chiếu/.test(old.save),old.land);
+ chk('old save is a Nam Chiếu life (pre-rename)',old.land==='Nam Chiếu',old.land);
  const q=await boot(URL);
  const r=await q.evaluate(s=>{const kl=document.getElementById('kload');if(kl)kl.remove();document.getElementById('title').hidden=true;Q.length=0;deser(JSON.parse(s));
   const out={land:S.origin&&S.origin.land,n:S.origin&&S.origin.n,k:S.origin&&S.origin.k};const n0=S.st&&S.st.ch&&S.st.ch.n;const txt=[];
@@ -27,4 +27,24 @@ const {chromium}=require('playwright');const [,,URL,MAIN]=process.argv;
  chk('reads Cao Ly',/Cao Ly/.test((r.txt||'')+(r.goal||'')+(r.land||'')),{land:r.land});
  chk('no old Yunnan props (chim công / voi trắng / hoa trà) on a surface',!/chim công|voi trắng|hoa trà|Hoàng huynh/.test(r.txt||''),((r.txt||'').match(/.{30}(chim công|voi trắng|hoa trà|Hoàng huynh).{30}/)||[])[0]);
  chk('no page errors',errs.length===0,errs.slice(0,3));
+
+ /* CASE B (r2): a Nam Chiếu life saved in the HOME phase (S.kc present) keeps stored titles -> migrated on load (ids unchanged) */
+ const mkHome=async()=>{const q=await boot(MAIN);const s=await q.evaluate(async()=>{const kl=document.getElementById('kload');if(kl)kl.remove();try{localStorage.clear()}catch(e){}
+   SLOT=3;window.__forceOrigin='nc';document.getElementById('title').hidden=true;quiet=true;start();quiet=false;await new Promise(r=>{let n=0;const t=()=>{if((typeof S!=='undefined'&&S&&S.origin)||++n>150)r();else setTimeout(t,100)};t()});
+   if(!S.kc&&kcOk(S.origin.k))kcInit();for(let i=0;i<8;i++){try{Q.length=0;used=0;nextBuoi()}catch(e){}}
+   return{save:JSON.stringify(ser()),fam:S.kc&&S.kc.fam.map(m=>m.r+'/'+m.t),ids:S.kc&&S.kc.fam.map(m=>m.id||m.r)}});await q.context().close();return s};
+ const oh=await mkHome();console.log('old HOME save fam:',JSON.stringify(oh.fam));
+ chk('old home save really holds the old titles',/Hoàng huynh/.test((oh.fam||[]).join()),oh.fam);
+ const q2=await boot(URL);
+ const rh=await q2.evaluate(s=>{const kl=document.getElementById('kload');if(kl)kl.remove();document.getElementById('title').hidden=true;Q.length=0;deser(JSON.parse(s));
+  const fam=S.kc.fam.map(m=>m.r+'/'+m.t);const ids=S.kc.fam.map(m=>m.id||m.r);const men=JSON.stringify(S.men||[]);
+  const txt=[];for(let i=0;i<40;i++){Q.length=0;used=0;try{nextBuoi()}catch(e){return{err:e.message}}if(i%10===0){for(const t of['story','act']){tab=t;render();txt.push((document.getElementById('panel')||{}).textContent||'')}}}
+  const stored=JSON.stringify(S.kc);return{fam,ids,men,stored,txt:txt.join('\n'),k:S.origin.k,err:0}},oh.save);
+ console.log('after HOME load:',JSON.stringify(rh.fam));
+ chk('home life loads and plays 40 buổi',!rh.err,rh);
+ chk('family titles migrated: no Hoàng huynh / Hoàng thúc / Mẫu hậu in S.kc',!/oàng huynh|oàng thúc|Mẫu hậu/.test(rh.stored||''),rh.fam);
+ chk('migrated titles are Thế tử huynh / Vương thúc / Vương hậu',/Thế tử huynh/.test((rh.fam||[]).join())&&/Vương thúc/.test((rh.fam||[]).join())&&/Vương hậu/.test((rh.fam||[]).join()),rh.fam);
+ chk('ids / roles unchanged by the migration',JSON.stringify(rh.ids)===JSON.stringify(oh.ids),{a:rh.ids,b:oh.ids});
+ chk('no Nam Chiếu in her stored thanh-mai / panels of the home life',!/Nam Chiếu/.test((rh.men||'')+(rh.txt||'')),((rh.men||'')+(rh.txt||'')).match(/.{30}Nam Chiếu.{30}/));
+ chk('home life: no page errors',errs.length===0,errs.slice(0,3));
  console.log(ok.filter(x=>x).length+'/'+ok.length+' pass');await b.close()})();

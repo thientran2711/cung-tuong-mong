@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"30d7cca8+","t":"2026-11-19T07:43Z","c":"caoly-road: j55 news hook follows j4 Cao Ly strings, old-save test, scan/table scripts, rebuild site","b":"07f08dc02a2e","h":[{"s":"f01df861","t":"2026-11-19T09:09Z","c":"review coop-thin-f3 r1: merge F2 LAND READY 7627f79c; generated files rebuilt"},{"s":"4ed2831d+","t":"2026-11-19T07:18Z","c":"law3-cost-only: index.html / sw.js regenerated"},{"s":"0da546e9","t":"2026-11-19T07:16Z","c":"role-parity-drift r1: build line"},{"s":"eff20119+","t":"2026-11-19T06:33Z","c":"ev-pic-coverage: picture required in M/L/XL frames only, S frames reported apart (owner OD 19/11 ~04:55Z)"},{"s":"a64f06c7+","t":"2026-11-19T06:29Z","c":"seal-lean-2 r2: rebuild site"},{"s":"38af6387","t":"2026-11-19T06:23Z","c":"minister-agents review r1: one core (gift regard + backs in BAL.tdCourt, j55 reads tuyen.pow / imp.deep / clanRel), censor name unique in e…"},{"s":"18a9b64c+","t":"2026-11-19T05:22Z","c":"monthly-allotment r6 (reviewer): stat names from the one NAMES table (drop private STAT_NM); candle note puts the burnt candle in the card'…"},{"s":"6b041ea7+","t":"2026-11-19T05:21Z","c":"odds-no-unknown: vu oan hints no longer repeat the odds word the meter now shows"},{"s":"6eb0ab3d+","t":"2026-11-19T05:37Z","c":"hall-names r2: runtime test hall-names-lines.js (houseName plaque, palace list line, visit line, 'cùng cung' note; Fold + iPad)"},{"s":"c4c25bbd+","t":"2026-11-19T04:41Z","c":"head-marker-video: viewport-size recording, opening dialog cleared, maid notice kept unread, white plain state swapped at half time on the …"}]};
+window.CTM_BI={"s":"5bf3bd4d+","t":"2026-11-19T10:13Z","c":"caoly-road: j55 news hook follows j4 Cao Ly strings, old-save test, scan/table scripts, rebuild site","b":"1ad2e720ef21","h":[{"s":"f01df861","t":"2026-11-19T09:09Z","c":"review coop-thin-f3 r1: merge F2 LAND READY 7627f79c; generated files rebuilt"},{"s":"4ed2831d+","t":"2026-11-19T07:18Z","c":"law3-cost-only: index.html / sw.js regenerated"},{"s":"0da546e9","t":"2026-11-19T07:16Z","c":"role-parity-drift r1: build line"},{"s":"eff20119+","t":"2026-11-19T06:33Z","c":"ev-pic-coverage: picture required in M/L/XL frames only, S frames reported apart (owner OD 19/11 ~04:55Z)"},{"s":"a64f06c7+","t":"2026-11-19T06:29Z","c":"seal-lean-2 r2: rebuild site"},{"s":"38af6387","t":"2026-11-19T06:23Z","c":"minister-agents review r1: one core (gift regard + backs in BAL.tdCourt, j55 reads tuyen.pow / imp.deep / clanRel), censor name unique in e…"},{"s":"18a9b64c+","t":"2026-11-19T05:22Z","c":"monthly-allotment r6 (reviewer): stat names from the one NAMES table (drop private STAT_NM); candle note puts the burnt candle in the card'…"},{"s":"6b041ea7+","t":"2026-11-19T05:21Z","c":"odds-no-unknown: vu oan hints no longer repeat the odds word the meter now shows"},{"s":"6eb0ab3d+","t":"2026-11-19T05:37Z","c":"hall-names r2: runtime test hall-names-lines.js (houseName plaque, palace list line, visit line, 'cùng cung' note; Fold + iPad)"},{"s":"c4c25bbd+","t":"2026-11-19T04:41Z","c":"head-marker-video: viewport-size recording, opening dialog cleared, maid notice kept unread, white plain state swapped at half time on the …"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -70196,6 +70196,16 @@ function kc2Carry(kind,tier){const ok=S&&S.origin&&BAL.kcv[S.origin.k]?S.origin.
 (function(){const e0=kcEnter;kcEnter=function(rank){const r=e0.apply(this,arguments);try{if(S&&S.kc&&S.kc.inPal&&!S.kc.kd)kc2Carry("kc",Math.max(0,Math.min(2,S.rank)))}catch(e){console.error("kc2Carry kc",e)}return r}})();
 /* the tiểu thư card says the same (jkc text, one line added) */
 (function(){const p0=kcPathHTML;kcPathHTML=function(){const h=p0.apply(this,arguments);try{if(!kc2D())return h.replace("Phúc duyên khi qua tuyển tú","Phúc duyên khi qua tuyển tú; vào cung mang theo hành trang những năm ở nhà (Danh, Tư chất, người đã biết)")}catch(e){}return h}})();
+
+/* caoly-road old-save migration (E20 r2): a Nam Chiếu princess life saved before the Cao Ly rename keeps stored TITLES / ROLES (ids and keys unchanged).
+   On load, an nc life (not the bd branch) has them rewritten in place: S.kc.fam titles (Hoàng huynh / Hoàng thúc / Mẫu hậu) and every stored string of the
+   thanh-mai (S.men[*] with role «Phó sứ Nam Chiếu»). Past log lines (S.logs) are history and stay as written. */
+const KC2_NC_MIG={"Hoàng huynh":"Thế tử huynh","Hoàng thúc":"Vương thúc","Mẫu hậu":"Vương hậu"};
+function kc2MigNc(){if(!S||!S.origin||S.origin.k!=="nc")return;
+ if(S.kc&&Array.isArray(S.kc.fam))for(const m of S.kc.fam)if(m&&KC2_NC_MIG[m.t])m.t=KC2_NC_MIG[m.t];
+ const fix=o=>{if(!o||typeof o!=="object")return;for(const k in o){const v=o[k];if(typeof v==="string"){if(v.indexOf("Nam Chiếu")>=0)o[k]=v.split("Nam Chiếu").join("Cao Ly")}else fix(v)}};
+ if(Array.isArray(S.men))S.men.forEach(m=>{if(m&&m.role==="Phó sứ Nam Chiếu")fix(m)})}/* only the princess road's thanh-mai (j96 nc); court-event envoys of Nam Chiếu keep their name */
+(function(){const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{kc2MigNc()}catch(e){console.error("kc2MigNc",e)}return r}})();
 /* ================= jentry: ENTRY SELECTION EXAM · ORIGIN INTRO · ENTRY SCENE (review/entry-exam, Foreman D, 16/11) =================
    Owner lines (verbatim in dev/rules/topic/story-roads.md, balance-economy.md, art-animations.md): OD:L1244 (narrated intro with
    illustrations + entry animation + a minigame exam, high score → the top rank of that selection, fail → lower), OD:L1250 (the origin's
@@ -79192,7 +79202,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="07f08dc02a2e";window.CTM_BUILD=BUILD;
+const BUILD="1ad2e720ef21";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
