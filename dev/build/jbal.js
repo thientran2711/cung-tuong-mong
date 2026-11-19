@@ -228,8 +228,8 @@ function trystCh(p){return cl(conceiveCh(p),BAL.trystC[0],BAL.trystC[1])}
    master's household (staff entries: role maid, rank by SRK, capped by srkMax / capOf); the 2 eunuchs are the existing S.court.tq
    (Tổng quản: truyền chỉ, ngự tiền, gọi thị tẩm) and S.court.ksp (Kính sự phòng: sổ thị tẩm, sổ nguyệt tín, mua sắm Nội vụ phủ),
    both of the Emperor's household. Everyone else stays nameless. Change the numbers / names here.
-   post: id · title · palace · master ("th" Thái hậu; "hh" Hoàng hậu, kept by Thái hậu while the seat is empty) · rk (SRK maid rank:
-   4 ma ma, 3 cô cô) · age range at the start · names (the first holds the post at the start; successors take the next) · call = how
+   post: id · title · palace · master ("th" Thái hậu; "hh" Hoàng hậu, kept by Thái hậu while the seat is empty) · rk (SRK maid rank,
+   six rungs since maid-ladder-6: 5 ma ma post = Nữ quan rung, 4 cô cô = Chưởng sự cô cô) · age range at the start · names (the first holds the post at the start; successors take the next) · call = how
    the palace addresses her · tr (STR temperament key) · duties (shown on her card) */
 BAL.staff={retire:[63,68],gift:20,giftAf:10,talk:2,succAge:[46,54],
  /* say = the cuts of the office holder's greeting pool (jstaff): tn = Thái hậu thiện cảm [hi from, mid from]; kn = Hoàng hậu thiện cảm [hi from, mid above] (review/one-core-dup3-land) */
@@ -242,13 +242,13 @@ BAL.staff={retire:[63,68],gift:20,giftAf:10,talk:2,succAge:[46,54],
  /* the Giáo tập ma ma stands in her room while S.turn <= gtDays (new tú nữ only; jstaff gtAtHome) */
  gtDays:4,
  posts:[
-  {id:"gt",title:"Giáo tập ma ma",palace:"Nội vụ phủ",master:"th",tr:"trung",rk:4,age:[50,55],
+  {id:"gt",title:"Giáo tập ma ma",palace:"Nội vụ phủ",master:"th",tr:"trung",rk:5,age:[50,55],
    names:[["Tống Quế Chi","Tống ma ma"],["Lạc Ngọc Dung","Lạc ma ma"],["Ôn Tú Hà","Ôn ma ma"]],
    duties:["dạy tú nữ mới vào cung","giữ lễ nghi, cung quy","coi việc tuyển tú","dặn dò người mới"]},
-  {id:"tn",title:"Chưởng sự cô cô",palace:"Đức Thọ cung",master:"th",tr:"lanh",rk:3,age:[44,49],
+  {id:"tn",title:"Chưởng sự cô cô",palace:"Đức Thọ cung",master:"th",tr:"lanh",rk:4,age:[44,49],
    names:[["Hà Tú Dung","Hà cô cô"],["Mạnh Bích Liên","Mạnh cô cô"],["Kiều Thanh Đào","Kiều cô cô"]],
    duties:["truyền ý chỉ của Thái hậu","giữ cung quy","thi hành hình phạt","coi Tân Giả khố"]},
-  {id:"kn",title:"Quản sự ma ma",palace:"Càn Ninh cung",master:"hh",tr:"chuyen",rk:4,age:[54,60],
+  {id:"kn",title:"Quản sự ma ma",palace:"Càn Ninh cung",master:"hh",tr:"chuyen",rk:5,age:[54,60],
    names:[["Diệp Thanh Hòa","Diệp ma ma"],["Phùng Thục Trinh","Phùng ma ma"],["Lam Ngọc Hoàn","Lam ma ma"]],
    duties:["chia cung nữ về các cung","phát lệ bạc","coi Thượng cung cục","bẩm sổ tháng của lục cung"]}]};
 /* ONE CORE (owner OD:L1267) for the 14-chapter frame (jst14.js, review/story14-p1-r2): every number the frame uses or prints lives here; texts print these.
@@ -401,3 +401,9 @@ Object.assign(BAL,{cv:{ransom:60,/* bạc to ransom the maid's parents (j7 maidh
 Object.assign(BAL.cv,{glance:{chance:40,warm:10,cold:-5}/* j24 «Một ánh mắt»: event chance (%) · hắn tình ý when she answers / burns the poem */,vase:{take:{hh:-5,danh:-3,maid:30},leave:{maid:-30,duc:-3}}/* j3 vase: «Nhận tội thay nàng» / «Để nàng chịu đòn» */,coldL:{duc:5,rel:20,ign:{duc:-2}}/* j3 coldletter: «Giúp nàng» Đức + her thiện cảm · «Làm ngơ» */,confessTha:{tin:-6,suc:-8}/* j42 «Nhận tội, xin tha» */,spy:{suc:-10,rel:-10}/* j7 «Tìm kẻ tung tin»: a night of searching · the culprit's thiện cảm when caught */,ghost:{watch:{suc:-10},skip:{danh:-3,maid:-5}}/* j7 ghost: «Rình bắt kẻ giả ma» / «Mặc kệ» */,tong:{bac:-50,danh:-2}/* j7 foreignwed «Tiến cử một tông nữ» */,hostage:{pay:25,skip:-35}/* j7 maidhostage: maid loyalty when she ransoms / abandons the parents */,cmaidSkip:{duc:-1}/* j7 condemnedmaid «Không can dự» */,gift7:{miss:{th:-2,sung:-2},jade:60,npcMin:100,jit:25}/* j71 feast gift: «Không dâng lễ» costs Thái hậu / Sủng · «Dâng ngọc quý» price = what a rich rival (bạc ≥ npcMin) spends · jit = luck in the gift ranking */,closeDoor:{maid:-3}/* j71 «Đóng cửa cung giữ mình» */,stipSup:{danh:-2}/* jstip «Tố lên …»: the superior who backed the eunuch is blamed */,tsBorrow:{aff:25,cost:-2}/* jts hội phối đồ «Mượn áo»: thiện cảm needed · the favour owed */,facAsk:20/* j25 «Có người đến» (a faction head asks her in): event chance (%) */,secPayMul:2/* jcmaid «Trả nợ thay / Gửi tiền thuốc»: maid loyalty = secLoy × this (the «Mặc kệ» side loses secLoy × 1) */});
 /* LANDER: j24 reads BAL.rk.loanBack (review/balance-final jbal2 «rk» table, reviewer ruling); until that lands this line holds the same chance. jbal2 replaces BAL.rk whole, so delete this line when balance-final lands. */
 if(!BAL.rk)BAL.rk={loanBack:40};
+/* MAID LADDER (maid-ladder-6, owner OD 19/11 ~01:26Z «Cung nữ chia là thô sử, tam đẳng, nhị đẳng, nhất đẳng, nhất đẳng là đại cung nữ như giờ»):
+   SRK.maid = thô sử 0 · tam đẳng 1 · nhị đẳng 2 · nhất đẳng (Đại cung nữ) 3 · Chưởng sự cô cô 4 · Nữ quan 5; ma ma = the stay-on standing after it (index 6
+   in BAL.ex.srvBar/srvCd (jbal2) and the promo chest). Named rungs: every gate reads these, never a typed number. tier[rung] = the 5-step standing of the art, frame,
+   colour, leaderboard and bow order (tam + nhị đẳng share the «Cung nữ» robe until Foreman C paints their own). wage = Bạc per month by rung (was j42 CNV_WAGE). */
+BAL.srvRk={tam:1,nhi:2,dai:3,cs:4,nq:5,mama:6,tier:[0,1,1,2,3,4]};
+BAL.srvWage=[1,3,4,5,8,12];
