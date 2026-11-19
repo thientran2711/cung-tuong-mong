@@ -95,8 +95,10 @@ reg12("kc2SelEnd",["v"],{title:()=>"Tuyển chọn",
 /* ===== 8. the veil craft: vlCraftGame (mgEnd 12 = F5's held cost machinery), the end = vlCraftEnd ===== */
 capFn("vlCraftGame");
 {const v0=window.vlCraftGame;if(typeof v0==="function")window.vlCraftGame=function(m){if(hctx())stSet("veil",m);return v0.apply(this,arguments)};vlCraftGame=window.vlCraftGame}
-/* her start ran on her phone: its cost travels held (F5 aa ctx); the host takes it only when it is at least the solo khắc + Sức (VL; the material is paid by vlCraft in the end) */
-const vlHeld=m=>{const c=window.__aaPend;return !!c&&typeof c==="object"&&(c.khac|0)>=VL.craftK&&(+c.suc||0)<=-VL.craftSuc};
+/* her start ran on her phone: its cost travels held (F5 aa ctx); the host takes it only when it is at least the solo khắc + Sức + the material
+   she picked (VL; review r1: the held bạc too — vlCraftEnd gives the option's material back and vlCraft pays it once, so a held cost without
+   it made a ngọc veil with no material paid) */
+const vlHeld=m=>{const c=window.__aaPend;return !!c&&typeof c==="object"&&(c.khac|0)>=VL.craftK&&(+c.suc||0)<=-VL.craftSuc&&(+c.bac||0)<=-(VL.mat[m]||0)};
 /* mgEnd 12 means "an F6b end": below level 12 (or not her own tap) the game runs exactly as before (F5's wrapper sees no mgEnd) */
 if(typeof playArt==="function"){const p0=playArt;playArt=function(o){if(o&&o.mgEnd===12&&!g12())o=Object.assign({},o,{mgEnd:0});return p0.call(this,o)};window.playArt=playArt}
 reg12("vlCraftEnd",["v","v","v"],{title:()=>"Tự tay kết mạng che mặt",
@@ -109,7 +111,8 @@ reg12("vlCraftEnd",["v","v","v"],{title:()=>"Tự tay kết mạng che mặt",
 const frameOnly=n=>{const f=window[n];if(typeof f!=="function")return;window[n]=function(){if(!host()&&on()&&!document.getElementById("kg82box")){F.stat.noFrame=(F.stat.noFrame|0)+1;return}return f.apply(this,arguments)}};
 frameOnly("wdGroomShow");frameOnly("toilFinShow");
 capFn("wdGroomShow");
-reg12("wdGroomEnd",["v"],{title:()=>"Chải chuốt",dec:a=>{const x=X5.decA9(["v"],a);if(!x)return null;return ["ok","over","under"].includes(x[0])?[x[0]]:bad("wdGroomEnd")}});
+/* review r1: the end pays its 1 khắc (spend(1) in wdGroomEnd): refused when she has no khắc left (solo: wdGroomUI never opens the game then) */
+reg12("wdGroomEnd",["v"],{title:()=>"Chải chuốt",dec:a=>{const x=X5.decA9(["v"],a);if(!x)return null;return ["ok","over","under"].includes(x[0])&&!S.dead&&can(1)?[x[0]]:bad("wdGroomEnd")}});
 
 /* ===== 9. the mirror (Điểm trang; also the face of Hội phối đồ): the end = toilFinish (TOIL.st rides in ctx "toil"), its rows = toilFinShow ===== */
 capFn("toilFinShow");capFn("toilGo");

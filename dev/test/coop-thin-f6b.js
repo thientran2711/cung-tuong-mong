@@ -181,10 +181,12 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  await act('V2 Kết nhanh: no veil, the material back, cost once',KSK,{stage:vst,pre:vpre,twin:vtw(5,1),chk:x=>x.aaPaid===1&&x.g1.inv.length===x.g0.inv.length});
  await act('V3 over-max (vlCraftEnd raw 11): refused',`vlCraftEnd(0,11,false)`,{stage:vst,reject:1});
  await act('V4 forged end (no start ran, no held cost): refused, nothing made or paid',`window.__aaPend=null;vlCraftEnd(1,8,false)`,{stage:vst,reject:1});
+ await act('V5 forged held cost (review r1): Kết bằng ngọc played, its held bạc zeroed before the end: refused, nothing made or paid',`if(window.__aaPend)window.__aaPend.bac=0;`+KOK,{stage:vst,pre:vpre.replace('chooseM(0)','chooseM(2)')+KGO,raw:8,wait:900,reject:1});
  /* ---- R: Chải chuốt ---- */
  const rst=`S.suc=80;`;
  await act('R1 Chải chuốt «vùng giữa» (wdGroomEnd ok): same as solo',`wdGroomEnd('ok')`,{stage:rst,pre:`wdGroomUI();if(!document.getElementById('kg92go'))return 'no game'`,twin:`wdGroomEnd('ok')`,chk:x=>x.g1.used-x.g0.used===1});
  await act('R2 unknown zone: refused',`wdGroomEnd('far')`,{stage:rst,reject:1});
+ await act('R3 no khắc left (review r1): refused, no khắc spent',`wdGroomEnd('ok')`,{stage:rst+'used=BAL.time.khac;',reject:1});if(!ROWS||ROWS.some(x=>'R3'.startsWith(x)))await stage('used=0;');
  await G.p.evaluate(()=>{try{kg82Close()}catch(e){}});
  /* ---- M: the mirror ---- */
  const mst=`S.toilette=null;S.suc=80;`;const mpre=p=>`toilOpen();if(!TOIL.st)return 'no mirror';TOIL.st.parts=${JSON.stringify(p)};`;
