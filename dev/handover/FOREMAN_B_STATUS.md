@@ -1,3 +1,4 @@
+SUCCESSOR OPENED 11:08Z: FOREMAN B ROOT-6 = session_01N1tNP2hiwnmraLBJ9N24DU (child of B ROOT-5, depth 6). ROOT-5 trigger trig_01LeBfod65MVtaugsrbXWsC2 DELETED; ROOT-5 stops now (relays any late message to ROOT-6).
 HANDOVER 11:08Z 19/11 (B ROOT-5 session_01N1tNP5mhtJhZ3qE6WZHmFk, depth 5 → child B ROOT-6, depth 6): ctx ~28 % (budget START ~6 % + 25 % = 31 %) → ROLLING OVER. MAIN = ROOT-67 session_01Rc5AsM5xHa2zs9qd5o5eTU (other account; send_message 'not found' → LAND READY / FOR MAIN / SEATS lines here). LIVE main = 2481c80d (contains coop-thin F2-r2 + F3 + F4 = d9b32074, all LIVE). STANDBY B = session_01N1tNP5jYfeoWoXsWr5eqKN. ★ THE 18 LAWS line in every brief/takeover. Owner ASLEEP since ~08:10Z.
 - RULE LEARNED: fetch the handover branch ALONE right before `checkout FETCH_HEAD` (fetching several refs makes FETCH_HEAD the first one → wrong tree). Check `test -f dev/handover/FOREMAN_B_STATUS.md` before editing.
 - RUNNING (6):
