@@ -163,17 +163,65 @@ def age_item(c,tier,item,hk):
     # E11 (owner Lượt 583/585; IT1 lists, BW5 wiring 19/11): every tier with a 25-item age-split list picks LIST[AGE_DICT[AGE][(n-1)%5]]
     # (5 per age, so a person never repeats an item across ages); the item's own hand key is used exactly as in the list (same as the non-age path).
     n=int(c[1:]) if c[1:].isdigit() else sum(map(ord,c)); j=(n-1)%5
+    if tier in _E6_TIERS or tier=="nude":
+        it,k=_e6_picks(c,AGE)[tier]; return (it,"L:"+k) if tier in ("t1","t2","t3","t4","t5","t6") else (it,k)   # L3F kind -> low_hand (same as the build_all ladder)
     L=_E11_LISTS().get(tier)
     if L: lst,d=L; return lst[d[AGE][j]]
     if tier in _IA.AGE5:
         k=_IA.AGE5[tier][AGE][j]; return _art(_IA.fill(k,tier)),"L:"+_HK.get(k,"two")
     k=_IA.pick_kind(c,AGE,tier); return _art(_IA.fill(k,tier)),"L:"+_HK.get(k,"two")
+# E6 (owner; ROOT-53 19/11 Lượt 624 round): one person at one age never holds the same item KIND at two ranks t1-t8; Nữ đế never her t8 kind.
+# Pick = for t1..t8 the first combination (depth-first, each rank trying its 5 age items from (n-1)%5) with 8 different kinds; Nữ đế = first of her 5 whose kind != t8.
+_E6_TIERS=["t%d"%t for t in range(1,9)]
+_E6_KINDS=[("box",r"\bbox\b|casket"),("censer",r"censer|incense"),("healthballs",r"health balls"),("fan",r"\bfan\b"),("mirror",r"mirror"),
+ ("scroll",r"scroll"),("book",r"\bbook\b|almanac"),("lantern",r"lantern"),("flute",r"flute"),("vase",r"\bvase\b"),("basket",r"basket"),
+ ("sachet",r"sachet"),("beads",r"beads?\b|bead string"),("pendant",r"pendant"),("hairpin",r"hairpin"),("comb",r"\bcomb\b"),
+ ("handkerchief",r"handkerchief"),("hoop",r"\bhoop\b"),("ball",r"\bball\b|tú cầu"),("lute",r"\bpipa\b|\blute\b"),("parasol",r"parasol"),
+ ("warmer",r"hand warmer|\bwarmer\b"),("seal",r"\bseal\b"),("staff",r"\bstaff\b"),("peach",r"\bpeach\b"),("cage",r"\bcage\b|birdcage"),
+ ("drum",r"\bdrum\b"),("kite",r"\bkite\b"),("letter",r"\bletter\b"),("brush",r"\bbrush\b"),("whisk",r"whisk"),("screen",r"\bscreen\b"),
+ ("flask",r"flask"),("ruyi",r"\bruyi\b"),("sceptre",r"sceptre"),("tablet",r"tablet"),("coral",r"coral branch"),("figurine",r"statuette|jade mountain|jade crane|lingzhi|mandarin ducks"),
+ ("plant",r"potted|\bpot with\b"),("flowers",r"sprig|chrysanthemums|blossoms\b"),("fish",r"wooden fish"),("bell",r"\bbell\b")]
+def e6_kind(item):
+    import re as _re
+    for k,rx in _E6_KINDS:
+        if _re.search(rx,item): return k
+    return item
+_E6_CACHE={}
+def _e6_picks(c,age):
+    key=(c,age)
+    if key in _E6_CACHE: return _E6_CACHE[key]
+    n=int(c[1:]) if c[1:].isdigit() else sum(map(ord,c)); j=(n-1)%5; L=_E11_LISTS(); used=set(); out={}
+    opts=[[L[t][1][age][(j+k)%5] for k in range(5)] for t in _E6_TIERS]   # each rank: its 5 age items, preferred (n-1)%5 first
+    def dfs(i,used):
+        if i==len(_E6_TIERS): return []
+        lst=L[_E6_TIERS[i]][0]
+        for idx in opts[i]:
+            k=e6_kind(lst[idx][0])
+            if k in used: continue
+            r=dfs(i+1,used|{k})
+            if r is not None: return [idx]+r
+        return None
+    sel=dfs(0,frozenset()) or [o[0] for o in opts]   # no solution -> preferred picks (e6_check then FAILS)
+    for t,idx in zip(_E6_TIERS,sel): out[t]=L[t][0][idx]
+    lst,d=L["nude"]; k8=e6_kind(out["t8"][0])
+    out["nude"]=lst[next((d[age][(j+k)%5] for k in range(5) if e6_kind(lst[d[age][(j+k)%5]][0])!=k8),d[age][j])]
+    _E6_CACHE[key]=out; return out
+def e6_check(people,ages=("a18","a26","a36","a51","a65")):
+    """E6 gate: list of (person, age, kind, ranks) where a kind repeats in t1-t8, or Nữ đế = t8 kind."""
+    bad=[]
+    for c in people:
+        for a in ages:
+            p=_e6_picks(c,a); ks=[e6_kind(p[t][0]) for t in _E6_TIERS]
+            for k in set(ks):
+                if ks.count(k)>1: bad.append((c,a,k,[t for t in _E6_TIERS if e6_kind(p[t][0])==k]))
+            if e6_kind(p["nude"][0])==ks[-1]: bad.append((c,a,"nude=t8",ks[-1]))
+    return bad
 def _E11_LISTS():
     g=globals(); d={"t%d"%t:(g["L3F"][t],g["L3F_AGE"][t]) for t in range(1,7)}
     d.update({"t7":(g["ITEMS7"],g["ITEMS7_AGE"]),"t8":(g["ITEMS"],g["ITEMS_AGE"]),"nude":(g["NUDE_LIST"],g["NUDE_AGE"]),"thaihau":(g["TH_ITEMS"],g["TH_AGE"])})
     return d
 def _hh(fn,hk,right): return low_hand(hk,right) if hk.startswith("L:") else fn(hk,right)
-AGE_TXT={"a18":"about 22, youthful adult.","a26":"about 30, mature and poised.","a36":"about 36 but looking young for her age (trẻ trước tuổi): still youthful and very beautiful, only a touch more mature and poised than her young self, smooth skin, no visible lines, never an older face.","a65":"about 65, a truly elderly lady who ages beautifully (đẹp lão): clearly older than her 51-year-old self, with gentle visible wrinkles at the eyes, mouth and forehead, softer cheeks and jawline, a calm wise dignified look; her hair is largely silver-grey mixed with some dark strands (much more silver than at 51, but NOT pure white); still graceful, elegant and beautiful, never haggard. Her robe keeps exactly the same colours as described below, but every colour is an even calmer, more muted, less saturated shade suited to an elderly lady, never darker or heavier (dignified, not bright; the royal yellow becomes a soft muted antique gold).","a51":"about 51, a graceful beautiful older lady who ages beautifully (đẹp lão): a slightly fuller mature face, soft fine lines at the eyes and gentle smile lines, dignified and elegant, still lovely and refined; clearly VISIBLE silver-grey streaks at the temples and in the front of her warm dark-brown hair (a visible silver patch that is easy to see at game size, hair still mostly dark, never white hair); never a 20-30-year-old face, never haggard or plain. She looks younger than her age but still clearly about fifty at first glance, never like an 18-26-year-old. Her robe keeps the same colour families as described below, but every colour is a calmer, less saturated mature shade of the same hue at about the same lightness, quieter, never darker or heavier (e.g. pink becomes a soft muted rose, blue becomes a calm muted blue, green becomes a quiet muted jade, purple becomes a soft muted mauve, red becomes a muted rose-red; the royal yellow becomes a soft muted antique gold); dignified and calm, never bright, never grey."}
+AGE_TXT={"a18":"about 22, youthful adult.","a26":"about 30, mature and poised.","a36":"about 36 but looking young for her age (trẻ trước tuổi): still youthful and very beautiful, only a touch more mature and poised than her young self, smooth skin, no visible lines, never an older face.","a65":"about 65, a truly elderly lady who ages beautifully (đẹp lão): clearly older than her 51-year-old self, with gentle visible wrinkles at the eyes, mouth and forehead, softer cheeks and jawline, a calm wise dignified look; her hair is largely silver-grey mixed with some dark strands (much more silver than at 51, but NOT pure white); still graceful, elegant and beautiful, never haggard. Her robe keeps exactly the same colours as described below, but every colour is a DEEPER, DARKER, more subdued shade suited to an elderly lady (dignified, not bright; the royal yellow becomes a deeper antique gold).","a51":"about 51, a graceful beautiful older lady who ages beautifully (đẹp lão): a slightly fuller mature face, soft fine lines at the eyes and gentle smile lines, dignified and elegant, still lovely and refined; clearly VISIBLE silver-grey streaks at the temples and in the front of her warm dark-brown hair (a visible silver patch that is easy to see at game size, hair still mostly dark, never white hair); never a 20-30-year-old face, never haggard or plain. Her robe keeps the same colour families as described below, but every colour is a DEEPER, DARKER, rich mature shade, the dark dignified tones an empress dowager or senior palace matron wears (e.g. pink becomes deep rose-plum, blue becomes deep navy blue, green becomes deep dark jade, purple becomes deep aubergine, red becomes deep burgundy; the royal yellow becomes a deep antique gold); dignified and rich, never bright."}
 PRE=("Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference portraits; full-body standing figure head to feet, centered, plain light parchment background, soft even light; fair porcelain skin; gentle expression with soft eyes and a bright closed-lip smile, lips closed, no teeth, mouth never open; elegant, slim, clearly adult; beautiful/handsome romantic-lead looks for everyone; face clearly visible, body and face frontal, standing squarely facing the viewer, no turn.")
 END=" Eyes soft, warm and round-almond, never slanted or upturned, never teary. Everyone beautiful at every age. No text, no labels."
 # N5d item 1 (ROOT-36 order, FIGURE_GATE K3): ONE no-background sentence on EVERY figure prompt (all states), default ON. Import it: `from build import K3_BG` (W107b). Text verbatim from the order.
@@ -1076,7 +1124,7 @@ COLD_FAB=" The linen robe hangs straight and calm, the sleeves and sash fall nat
 # colour negatives = the approved yellow wording "not pale cream, beige or khaki" / "not beige/tan/ochre" (b10 prompts); a65 one step deeper than a51 (AGE_TXT a65 "clearly older than her 51-year-old self" + "DEEPER, DARKER").
 TYC_FACE=" Her face is HER OWN face from her first reference image (face and hair only — do NOT copy its outfit or sleeves), never a face from the style reference image."
 TYC_HUE=", still clearly {col} at a glance, never khaki, sand, beige or tan"   # {col} = the hue WITHOUT "pale" (fix1 round 2: "pale" pulled a65 back to pastel)
-_A51EX=""   # BW4: unused since J2 reached ty-cold (ROOT-51 GO); kept as an empty name
+_A51EX=AGE_TXT["a51"][AGE_TXT["a51"].index("(e.g. pink"):AGE_TXT["a51"].index("; the royal yellow")]+")"   # verbatim a51 example list: a65 at least this deep
 def _tyhue(col): return "pearl ivory (never yellowed)" if col=="ivory" else col.replace("pale ","",1)   # ty1: pearl ivory = approved palette word (b10 v2 lists)
 # TY0 fix2 (owner Lượt 229b: c06 cold a36 / ty4 a65 face + hair differ from her live picture; ROOT-40 approved 03:52Z). Cause: identity line kept only "hairstyle colour",
 # the outfit text prescribed a NEW bun (COLD_OUTFIT "simple neat low bun", TY_HAIR "neat bun with soft strands" -> bangs), CLOSE forbade her horizontal pin, consort face WORDS overrode image 2.
@@ -1102,8 +1150,8 @@ def build_ty_cold(c,state):
         N=int(state[2:]); col=TY_COLOUR[N]
         item,hk=age_item(c,"t%d"%N,"an embroidered handkerchief","one")
         s+=f" Outfit (her trung y, the plain inner robe worn alone, no outer garment): a plain {col} silk trung y inner robe (simple crossed collar, tied sash, long skirt, no embroidery, no outer layer), {col}, matte soft silk with gentle folds, no gloss."+TYC_TY_HAIR
-        if AGE=="a51": s+=f" COLOUR RULE: the whole trung y is a calmer, more muted, less saturated shade of the same {col} at about the same lightness, same hue family (dignified, never darker or heavier, never bright, never pastel, never grey, black or brown)"   # J2 (ROOT-51 -> BW4: everywhere incl. ty-cold)+TYC_HUE.format(col=_tyhue(col))+"; no other colour anywhere; this replaces the colour examples above."
-        elif AGE=="a65": s+=f" COLOUR RULE: the whole trung y is an even calmer, more muted, less saturated shade of the same {col} than at 51 (quieter than her 51-year-old trung y, never darker or heavier, never paler or pastel), same hue family (dignified, never bright, never grey, black or brown)"   # J2 (BW4)+TYC_HUE.format(col=_tyhue(col))+"; no other colour anywhere; this replaces the colour examples above."
+        if AGE=="a51": s+=f" COLOUR RULE: the whole trung y is a deeper, more muted shade of the same {col}, same hue family (rich and dignified, never bright, never pastel, never black or brown)"+TYC_HUE.format(col=_tyhue(col))+"; no other colour anywhere; this replaces the colour examples above."
+        elif AGE=="a65": s+=f" COLOUR RULE: the whole trung y is an even deeper, more muted shade of the same {col} than at 51 (DEEPER than her 51-year-old trung y, never lighter or paler, at least as deep as at 51 {_A51EX}), same hue family (rich and dignified, never bright, never pastel, never black or brown)"+TYC_HUE.format(col=_tyhue(col))+"; no other colour anywhere; this replaces the colour examples above."
         else: s+=f" COLOUR RULE: the whole trung y, collar and sash are one plain {col}, as soft and pale as the rank-colour portrait frame; no other colour anywhere."
         s+=" Any flower or pattern on the fabric would be real silk embroidery, never printed or pasted-on."
     s=s+_pose(item,hk,right)+CLOSE+END   # TYC_PIN_RULE is dropped in __main__ AFTER spec5pose (it anchors on that sentence)
@@ -1154,11 +1202,11 @@ def build_mama(c):
     s+=(" Outfit (the ma ma costume, exactly the cut of image 3, never poor): a long robe of fine embroidered silk brocade with a subtle woven pattern; a sleeveless embroidered over-vest with a stand collar closed by a small knot button, with a band of gold-edged trim down the front, worn over a crossed-collar inner robe; wide layered sleeves hanging softly, each with a broad embroidered cuff band; a short front layer made of TWO separate long embroidered front panels (hai tà, never one single panel), one hanging down each side of the front from the waist, each with a gold-edged border, the centre front of the skirt showing between them, over a layered, softly pleated skirt with a band of flower embroidery along the hem; a wide silk sash tied in a bow at the waist, a jade pendant on a silk cord with a tassel hanging at the centre between the two panels; delicate cream-and-blush peony and plum-blossom embroidery over the vest, sleeves, panel and hem; hair exactly as in the identity reference image (her own bun and hairpins kept), with small earrings, and one small fresh "+fk+" in "+fc+" tucked beside the bun; soft slippers; the sleeves are wide, a palace ma ma's sleeves (never a consort's long trailing sleeves).")
     if elder:
         # owner Lượt 397 item 3 (FIGURE_GATE LAW #1): a51/a65 keep the person's OWN a36 colour, each age a deeper step of the same family ("darker does not mean the same shade"); the old brown a51/a65 stay as skins
-        if AGE=="a51": step=f"a calmer, softer, less saturated mature shade of her {main}: a muted {main} at about the same lightness, clearly quieter and less fresh than at 36, never darker or heavier, still clearly {main}"   # BW4 J2: calmer, not darker
-        elif any(_w in main for _w in ("green","celadon","jade","teal","mint","sage","aqua")): step=f"an even calmer, more muted shade of her {main}: a soft muted {main}, clearly quieter and less saturated than at 51 (each age its own step, never the same shade), never darker, never grey, still in her {main} family"   # BW4 J2 + B19: no green-grey   # green people: EXACT old text (m01 approved, byte-identical)
+        if AGE=="a51": step=f"a DEEPER, more muted, mature shade of her {main}: a deeper muted {main}, clearly darker and less fresh than at 36 but still clearly {main}"
+        elif any(_w in main for _w in ("green","celadon","jade","teal","mint","sage","aqua")): step=f"an even DEEPER, dusky, older shade of her {main}: a deeper dusty {main}, clearly deeper and more muted than at 51 (each age its own deeper step, never the same shade), staying strictly in the same hue family as her {main}, never shifting to any other hue"   # BW5 (Lượt 624 J2 elder copy): pre-BW4 deeper wording; B19: the old green-grey words NOT restored (same words as the non-green a65 step)
         else:   # Lượt 407-fix (ROOT-47): a non-green person names ONLY her own colour family, deeper and older; no green example text (it drifted ivory/olive people to grey-green)
             _wh=(" (for ivory, cream or white: a soft warm muted ivory)" if any(_w in main for _w in ("ivory","cream","white","pearl")) else "")
-            step=f"an even calmer, more muted, older shade of her {main}{_wh}: a soft muted {main}, clearly quieter and less saturated than at 51 (each age its own step, never the same shade), never darker or heavier, staying strictly in the same hue family as her {main}, never shifting to any other hue"
+            step=f"an even DEEPER, dusky, older shade of her {main}{_wh}: a deeper dusty {main}, clearly deeper and more muted than at 51 (each age its own deeper step, never the same shade), staying strictly in the same hue family as her {main}, never shifting to any other hue"
         s+=(f" COLOUR RULE: take ONLY the cut from image 3; RECOLOUR the whole costume to her own colour {main} (the same colour family as her 36-year-old self) at "+step+", never brown, never black, never grey; with the embroidery in a lighter tone of the same colour and one soft gold accent; do not copy the brown of image 3.")
     else:
         s+=(f" COLOUR RULE: take ONLY the cut from image 3; RECOLOUR the whole costume to her colour {main}, a soft, gentle, held-back medium tone (clear but quiet, never fresh or bright, never pale or pastel-washed, never dark, never grey, never brown), with the embroidery in a lighter tone of the same colour and one soft gold accent; do not copy the brown of image 3.")
@@ -1224,7 +1272,7 @@ def build_maid(c,state):
         if k==4: _h="with a gold ornament worn over her hair,"; assert s.count(_h)==1,"tm4 hair"; s=s.replace(_h,"with a gold ornament worn over her hair, which is ALL pinned UP in a neat bun under the cap (nothing loose down her back),",1)
     if k in (1,2,4): s+=TM_NOFLOWER   # K15 (owner Lượt 520; ROOT-50 19/11 18:24Z): cung nữ tm1/tm2 + nữ quan tm4, the ma ma --noflower sentence copied VERBATIM (removal alone fails: the gen copies the face ref's flower)
     if k in (0,4): s+=f" COLOUR RULE: {colr}, the same at every age, never deeper, never another colour; this replaces the colour examples above."
-    elif elder: s+=f" COLOUR RULE: {colr} in a calmer, more muted, less saturated shade of the SAME colour at about the same lightness, same hue family (dignified, never darker or heavier, never bright, never grey, black or brown), no other main colour; this replaces the colour examples above."
+    elif elder: s+=f" COLOUR RULE: {colr} in a deeper, more muted shade of the SAME colour, same hue family (rich and dignified, never bright, never black or brown), no other main colour; this replaces the colour examples above."
     else: s+=f" COLOUR RULE: all colours clear, soft and held back, never fresh or bright, never dusty or grey; {colr}."+tone   # BW4 B18 (maids held back)
     s+=" Any flower or pattern on the fabric is fine silk-thread embroidery stitched directly into the fabric, flat, following the folds, never printed or pasted-on."
     item,hk=age_item(c,state,"an embroidered handkerchief","one")
@@ -1700,7 +1748,7 @@ if __name__=="__main__":
     # OWNER 18/11 ~21:06Z real (verbatim): "51 tuổi và 65 tuổi là phải dùng của những cái màu của những người già xài á, không có dùng cái màu tươi rói nha ... mặc dù già nhưng không có nghĩa là màu đen hay màu nâu ... Mà nó là một cái màu nó sang, mà cái kiểu mình nhìn vô mình thấy nó là một cái người đã lớn tuổi, trầm tĩnh lớn tuổi" → a51 AND a65 use the elder clause (a51 text = the approved a51d2 sample)
     if AGE not in ("a51","a65") and not STATE or STATE in ("nude","thaihau"):   # TH1 (Lượt 607 I4): Thái hậu a36 gets the same B18 LOW_TONE   # B18 (owner Lượt 583): neutral tone: t7/t8/Nữ đế 'fresh, clear and luminous' -> the SAME medium-tone sentence t1-t6 use (LOW_TONE); a51/a65 keep their elder clause below
         if AGE not in ("a51","a65") and TRIEUN is None and not BDQ and "--low" not in sys.argv: _o=_o.replace("all colours fresh, clear and luminous, never dusty or greyed; ",LOW_TONE,1)
-    if AGE in ("a51","a65"): _o=_o.replace("all colours fresh, clear and luminous, never dusty or greyed; ","all colours in calmer, softer mature shades of her own colours (the same hue at about the same lightness, only less saturated and quieter: elegant and dignified, never darker or heavier, never bright or rực, never pastel-washed, never grey, dusty, black or brown); the colour names and hex values below are her young colours, quieten them as described above; "+("elegant, luxurious elder colours that read as a calm, dignified older lady, a little more muted than at 51 but never darker, never vivid or fresh bright colours, yet never grey, black or brown; " if AGE=="a65" else "")).replace("one fresh accent","one accent").replace("a fresh ","a ")
+    if AGE in ("a51","a65"): _o=_o.replace("all colours fresh, clear and luminous, never dusty or greyed; ","all colours in the DEEPER, DARKER mature shades described above (rich and dignified, never bright, never pastel, never dusty or washed-out); the colour names and hex values below are her young colours, darken them as described above; "+("elegant, luxurious elder colours that read as a calm, dignified older lady, never vivid or fresh bright colours, yet never black or brown; " if AGE=="a65" else "")).replace("one fresh accent","one accent").replace("a fresh ","a ")
     # --head (ROOT-31 order, owner 18/11 ~21:36Z "ai cũng có trâm cài y chang nhau"): per-person headdress = the motif/shape of HER OWN live a18 hairpins, scaled up for the rank. Off by default (goldens unchanged).
     if "--head" in sys.argv:
         _k=a[0]+("-t7" if "--t7" in sys.argv else "-t8")
@@ -1718,13 +1766,10 @@ if __name__=="__main__":
     if (TRIEUN is not None and TRIEUN>=6) or STATE=="nude" or _ROYRANK:   # F2 r2 (ROOT-39 19/11 ~03:14Z): --bdq has NO swatch and NO image-3 sentence (the old QP had none; copy it whole)
         _r=" Image 3 is only a colour reference for the royal yellow, never copy anything but its colour; the royal yellow in the robe is exactly that colour."
         assert _o.count(END)==1 and _o.endswith(END),"END not at end"
-        if (STATE=="nude" or _ROYRANK) and AGE in ("a51","a65"): _r=" Image 3 is only a colour reference for the royal yellow, never copy anything but its colour; her yellow is that royal yellow in its calmer, muted antique-gold elder shade as the colour rule says."   # N4 1c
+        if (STATE=="nude" or _ROYRANK) and AGE in ("a51","a65"): _r=" Image 3 is only a colour reference for the royal yellow, never copy anything but its colour; her yellow is that royal yellow in its deeper, subdued antique-gold elder shade as the colour rule says."   # N4 1c
         _o=_o[:-len(END)]+_r+END
     # N4b (ROOT-35 / owner via brief UPDATE: "Keep the a65 yellow as soft as the a51 (no ochre/mustard)"): Nữ đế a65 only; every other output byte-identical
-    if STATE=="nude" and AGE=="a65":
-        _a="(dignified, not bright; the royal yellow becomes a soft muted antique gold)"; _b="her yellow is that royal yellow in its calmer, muted antique-gold elder shade as the colour rule says."
-        assert _o.count(_a)==1 and _o.count(_b)==1,"a65 nude yellow slots"
-        _o=_o.replace(_a,"(dignified, not bright; the royal yellow stays the SAME soft warm antique gold as at 51, a gentle honey-gold, never ochre, never mustard, never brownish)").replace(_b,"her yellow is that royal yellow in the same soft warm antique-gold elder shade as at 51, never ochre, never mustard, never brownish.")
+    # N4b (Nữ đế a65 "same soft antique gold as at 51") REMOVED by BW5 (owner Lượt 624 / ROOT-53): contradicts the verbatim 18/11 a65 text "the royal yellow becomes a deeper antique gold"
     # N5d item 1: K3_BG on every output. trieu already carried the old K3 wording -> replaced (never two K3 sentences). --nostyle = no style image: "second reference image is style only" would be false -> only the IGNORE-background part.
     _k3=K3_BG
     if "--nostyle" in sys.argv: _k3=_k3.replace("The second reference image is style only: IGNORE its background","IGNORE the reference image's background",1)

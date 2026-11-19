@@ -48,3 +48,11 @@ BW3 is fixing the builder. MMX4 on HOLD: NO gens until ROOT-51 says so.
 
 ## 20:20Z ROOT-53 OWNER ORDER
 Only faces of groups SẮC SẢO / TINH NGHỊCH may be produced (dev/art/face-common/LOOK_GROUPS.md). m13 (Tươi tắn) is STOPPED and dropped from this job; m05 (Sắc sảo) stays. HOLD for J2 rebuild + owner GO. Foreman now ROOT-53 session_01PEhRbuf8GDz77QZRdK2XXP.
+
+## 20:50Z REBUILD on 98fa7a3+877944c (ROOT-54; m05 only) — gate ONLY, no gens
+- Pulled to a8dbfcd. `build.py m05 --state mama --age aXX --nostyle --twocol auto --noflower` → mama-specs/m05-aXX.oneref.twocol.noflower.r54.prompt.txt (3); check_store same args PASS 3/3 (approved_check PASS).
+- Present in all 3: neat bun, NO flowers in hair, NO ribbons, TWO-COLOUR (coral red + teal), m05 face words.
+- Changes vs b4: items now a36 lidded food carrier, a51 abacus (E6). a51 D13 "clearly about fifty" line removed (D13 Lượt 624: verbatim 18/11 Thái hậu age text).
+- NOTE for the owner (LAW #0, nothing changed): a51/a65 colour text is back to "DEEPER, DARKER ... deep burgundy / deeper dusty coral red" (the 18/11 Thái hậu wording). That contradicts B18 (Lượt 583: ma ma tone soft and held back, never darker) which the b4 build had. Which one should win for ma ma?
+
+- 20:48Z ROOT-54 RULING: J2 wins for a51/a65 (owner Lượt 620/622 "everyone, every group, every rank, maids too"; B18 covers only a18–a36). Keep the DEEPER/DARKER Thái hậu colour text for ma ma a51/a65 (never vivid, never grey/black/mud). r54 prompts (8742bd7) accepted. HOLD until GO after BW6 same-rank fix.

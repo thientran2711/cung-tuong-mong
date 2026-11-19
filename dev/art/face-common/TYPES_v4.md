@@ -35,3 +35,6 @@ Mẫu: s01–s04 (`sNN.v4.FULL.txt`), làm y như c07–c32 (COMMON_v3 nguyên v
 | YÊU KIỀU | s06 | SMALL slender delicate OVAL narrowing to a FINE pointed chin; long slender graceful neck; soft thin WILLOW-LEAF brows (liễu mi) curving gently down at the ends; large soft tender almond eyes, slightly misty dreamy softness (never teary/red), outer corners very slightly lowered, fully open; tiny delicate nose; small cherry-blossom mouth, soft pale-pink lips | tender, gentle, delicate; shy faint smile; head inclined gently on her slender neck |
 
 Chỗ thay theo người — THƯ HƯƠNG: oval / trái xoan trán cao / mặt dài thanh; mắt hạnh vừa / mắt hạnh dài hơi cụp; mày thẳng / mày thẳng hơi cong cuối; vật: sách chỉ khâu / cuộn thư / bút lông / nghiên mực nhỏ. YÊU KIỀU: oval nhỏ / tim nhỏ cằm nhọn; mày liễu / mày liễu nhạt hơn; mắt mơ màng / mắt to dịu cụp nhẹ; miệng anh đào / môi nhỏ hồng nhạt.
+
+## Chủ chốt (Lượt 657)
+DÙNG: Kiêu kỳ, Lạnh lùng, Quyến rũ. KHÔNG DÙNG: Anh khí, Thư hương, Yêu kiều (Thư hương ≈ Yêu kiều). Nhóm cũ Tươi tắn/Dịu dàng/Trong trẻo/Đoan trang: chưa quyết.

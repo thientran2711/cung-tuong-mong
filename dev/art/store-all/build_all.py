@@ -62,6 +62,9 @@ LADDER_TIERS=["t%d"%i for i in range(1,9)]
 def _install_ladder(g):
     IA=g["_IA"]; orig=g["age_item"]
     def pick(c,tier,age):
+        # E11 + E6 (BW5, ROOT-52/53 19/11): the 25-item age-split lists (IT1) via the store's own pick _e6_picks (5 items per age, t1-t8 never repeat a kind); --olditem = old 10-list rotation
+        if "--olditem" not in sys.argv:
+            it,kind=g["_e6_picks"](c,age)[tier]; return (it,"L:"+kind) if int(tier[1:])<=6 else (it,kind)
         n=int(re.sub(r"\D","",c) or 0) or sum(map(ord,c)); ai=IA.AGES.index(age); idx=(n-1+3*ai)%10; N=int(tier[1:])
         if N<=6: it,kind=g["L3F"][N][idx]; return it,"L:"+kind
         return (g["ITEMS7"][idx] if N==7 else g["ITEMS"][idx])
@@ -101,6 +104,13 @@ def store(person,rank,age="a18"):
 def _fl():
     s=open(os.path.join(ART,"owner-copy","mk_ranks_v3.py"),encoding="utf-8").read(); g={}; exec(s[s.index("FL="):s.index("FLCOL=")],g); return g["SZ"]
 SZ=_fl()
+# F13 (owner Lượt 639, ROOT-53 -> BW5): exactly ONE hair flower at t1-t6 (never two or a pair), its SIZE grows with rank (t1 small ... t6 large); replaces the Lượt 323 size ladder (t3 'flowers', t4 'plus smaller blooms', t5 'two or three', t6 'cluster').
+_F13="HAIR FLOWER SIZE: exactly ONE fresh flower in her hair (never two, never a pair, no cluster), "
+SZ={1:_F13+"SMALL but clearly visible at game size.",2:_F13+"small-to-medium, a little bigger than at the lowest rank, clearly visible at game size.",
+    3:_F13+"MEDIUM, a full bloom about the size of her palm.",4:_F13+"LARGE, a full bloom larger than her palm, clearly bigger than the lower ranks.",
+    5:_F13+"BIG, a full bloom clearly bigger than at the Tần rank.",6:_F13+"the LARGEST single bloom of all ranks, the grandest hair flower in the palace."}
+F13_SWAP=[("with silver, pearl and fresh flowers,","with silver, pearl and ONE fresh flower,"),("decorated with fresh flowers and several","decorated with ONE fresh flower and several"),
+          ("small silk flowers and a fresh flower","a fresh flower")]   # F13: hair-ornament words that asked for several flowers -> one
 HAIR_LOW="HAIR (rank law): her hair stays LOOSE and flowing like her young-lady picture: at most the top half gathered up, most of her hair hanging loose down her back."
 HAIR_HIGH="HAIR (rank law): ALL her hair is swept UP into a high bun / chignon, nothing loose hanging down her back."
 def sleeve(t):
@@ -359,6 +369,7 @@ def _sec_slot(person,rank,S):
         _h="Hair: her own hairstyle decorated with"; assert S.count(_h)==1,("t4-6 hair slot",person,rank)
         S=S.replace(_h,"Hair: her own hair colour, ALL her hair swept UP into a high bun / chignon, decorated with",1)
     S=re.sub(r"with [^;]+? in the inner robe and linings",f"with {sec} in the inner robe and linings",S,count=1)   # colour slot swap only (no new wording, Lượt 489)
+    for _a,_b in F13_SWAP: S=S.replace(_a,_b)   # F13 one hair flower
     return _t3_slot(person,rank,S)
 # G15 (owner Lượt 559): QUÝ NHÂN t3 DESIGN = option B v2 -> dev/art/check_store.py g15_t3 (one copy of the wording, shared with the gate).
 def _t3_slot(person,rank,S):
@@ -482,6 +493,12 @@ def gate(person,rank,age,text):
         p=subprocess.run([sys.executable,os.path.join(ART,"check_store.py"),fn]+args,capture_output=True,text=True)
         return p.returncode==0 and "STORE CHECK PASS" in p.stdout, p.stdout.strip()
     finally: os.unlink(fn)
+def _E6_GATE(age):
+    """E6 (owner): one person, one age: t1-t8 never the same item kind; Nữ đế never her t8 kind. Uses the store's e6_check."""
+    old=sys.argv; sys.argv=["build.py"]; g={"__name__":"build_store","__file__":STORE}
+    try: exec(_PART1,g)
+    finally: sys.argv=old
+    return g["e6_check"]([p for p in PEOPLE if re.fullmatch(r"[cm]\d\d",p)],(age,))
 def check_all(age="a18"):
     bad=0; held=0
     for t in range(1,9):
@@ -495,6 +512,8 @@ def check_all(age="a18"):
         if not _kc_drawn(p): held+=1; continue
         ok,msg=gate(p,"nude",age,build(p,"nude",age)[1])
         if not ok: bad+=1; print("FAIL",p,"nude",age,"|",msg[:200])
+    e6=_E6_GATE(age)
+    if e6: bad+=len(e6); print("FAIL E6 item kind repeated (person, age, kind, ranks):",e6[:20])
     n=len(PEOPLE)*8+32; print(f"checked {n-held} prompts ({len(PEOPLE)} people x 8 ranks + 32 Nữ đế, age {age}; {held} HELD = not drawn, B8): {bad} FAIL"); return 1 if bad else 0
 if __name__=="__main__":
     a=sys.argv[1:]; age=a[a.index("--age")+1] if "--age" in a else "a18"
