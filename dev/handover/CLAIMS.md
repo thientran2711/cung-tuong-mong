@@ -281,3 +281,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | MAIN ROOT-69 (opus; child of ROOT-68, depth 7) | handover HANDOVER_SESSION9 | ROOT-68 | session_01Rc5AsMesCGqrqL1dGjCJXv | RUNNING | 19/11 10:48Z | START_CTX ~4 %
 | palace-chatter successor: apply K-HEAD-SAY jchat-say.patch + end-to-end run (opus E17c) | review/palace-chatter; briefs/E17c-palace-chatter-say.md | FOREMAN E #11 | session_01DgYSWnKfwZsB2F92BggLCq | RUNNING | 19/11 10:49Z |
 | kyngo-daily BIG REVIEW (opus E18r) of 8cb39e38 | review/kyngo-daily; briefs/E18r-review-kyngo-daily.md | FOREMAN E #11 | session_01DgYSWnzDSXLeyEPaWuBrQQ | RUNNING | 19/11 11:00Z |
+| REVIEW role-parity-drift-2 r1 (sonnet SMALL, tooling only) of 6ffe38a4 | review/role-parity-drift-2-r1 | B | session_01N1tNP6yFh7EgvwXvnX7ku3 | RUNNING | 19/11 11:06Z |
