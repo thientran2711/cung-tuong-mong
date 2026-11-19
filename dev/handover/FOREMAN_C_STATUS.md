@@ -1475,3 +1475,4 @@ ROOT-52 Lượt 618: owner likes old 18/11 Thái hậu (yellow+own main) but red
 ROOT-52 Lượt 619: B21 fixed: t6 Quý phi also royal yellow; foreign princesses nc1–nc3 NO yellow.
 ROOT-52 Lượt 620: J2 rewritten — a51/a65 = deeper/darker elder colours like 18/11 Thái hậu (not 'never darker'); BW5 to rewrite S33 sentence in builder + approved store; MMX4/NDX3/TH1 rebuild after.
 ROOT-52 Lượt 621: phone landscape live measure (iPhone 14 844x390 stage 828x171, Android 915x412 stage 899x193): picture cover full width, rows ~50–90 % visible (top half cut), bed visible; figures tiny (~21x39 / 33x61 px). Sheet place-rank-phone-phi-ngu.jpg; script stage_exact/live_phone.js.
+ROOT-52 ~20:05Z: context ~31 % (> roll line 28 %) → ROLLING OVER; TAKEOVER_FOREMAN_C_ROOT53.md; opening child ROOT-53.
