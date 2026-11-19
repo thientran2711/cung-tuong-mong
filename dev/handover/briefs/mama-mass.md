@@ -12,3 +12,9 @@ Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>
 Claude-Session: https://claude.ai/code/session_01PEhRbvMQSW6YDfv8K7jMGj
 Do not message anyone; do not touch other files. If a builder crash or store FAIL happens for a person, skip that person and report it.
 Final reply under 150 words: persons done, cut ids table file path (write dev/handover/reports/mama-mass-<range>.md with mNN aXX → cut id), sheet paths, credits, skips.
+
+## ADD (owner Lượt 407–408, N8b de3a768): c01–c32, p01–p03, bd1–bd3 too — ages a36/a51/a65 only
+- Face ref per person/age = the URL written in dev/handover/reports/mama-mass-persons.md (NOT the fig-maid pattern). Nobody has a65 → her a51; princesses fall back to a18.
+- Builder: `python3 dev/art/t8-prompt-B/build.py <ID> --state mama --age aXX` (works for all 93 ids).
+- Store check for non-m ids: SELF-compare form `python3 dev/art/check_store.py <prompt_file> <ID> --state mama --age aXX` must print PASS (ruling ROOT-47: the face slot of c-persons is their own face words, not the maid sentence). Ledger "store_check":"PASS-self".
+- nc1–nc3 are the same faces as p01–p03: skip nc.
