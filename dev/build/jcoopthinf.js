@@ -253,7 +253,7 @@ for(const [n,K,t] of [["wdWearUI",["ix"],"Thay y phục"],["wdOffUI",["v"],null]
    wrapper: the rare item, the buy-back tiles), never opening a modal, never touching the host's own open shop. The pet shop = F4. */
 const KSH={nvp:()=>kitShopNvp()};
 window.__kshBuild=key=>{if(!CW.ctx||!host()||!KSH[key])return undefined;window.__kshData=1;try{return KSH[key]()}finally{window.__kshData=0}};
-reg8("kitShopBuy",["v","v","v","v"],{mine:A=>!!KSH[A[0]],done:(A,r)=>{try{const o=KSHOP.reg[A[0]];if(o&&r&&r.rv){const x=kitShopRaw(o).find(y=>y&&y.k===A[1]);if(x&&x.stock!=null&&!x.sell)x.stock-=Math.max(1,A[2]|0);o.q=o.q||{};o.q[A[1]]=1}
+reg8("kitShopBuy",["v","v","v","v"],{mine:A=>!!KSH[A[0]]&&(A[0]!=="pet"||on(9))/* the pet shop = F4 (level 9) */,done:(A,r)=>{try{const o=KSHOP.reg[A[0]];if(o&&r&&r.rv){const x=kitShopRaw(o).find(y=>y&&y.k===A[1]);if(x&&x.stock!=null&&!x.sell)x.stock-=Math.max(1,A[2]|0);o.q=o.q||{};o.q[A[1]]=1}
   kitShopRefresh(A[0])}catch(e){console.error("thin F3 shop",e)}}});
 reg8("vlBuyNvp",["me","v"],{log:true});
 reg8("vlBuyOut",["me","v"],{log:true});
@@ -273,4 +273,39 @@ reg8("tsGiftBacGo",["wl"],{mine:()=>true});
 reg8("tsGiftPieceGo",["who","ix"],{mine:()=>true});
 reg8("courtGive",["me","v"],{log:true,title:A=>A[1]?"Biếu":""});
 reg8("tdGiftGo",["v"],{mine:()=>true,title:A=>{try{const h=trS().H[A[0]];return h?`Biếu quà ${h.name}`:""}catch(e){return ""}},okHint:()=>!!window.__tdOk});
+/* ---------- F4: her pets / garden / kitchen / study (level 9; report dev/handover/reports/coop-thin-f4.md step 0) ----------
+   reg9 = reg8 at level 9, two more argument kinds: "el" (a tapped button: its dataset travels, the host gets {dataset}) and "pm" (a person
+   or HER: rcpAskGo asks about herself too). Her open care screen (PETC.i) / plant screen (SHPC.g) and the Tứ đức lesson state (TDV) ride
+   in ctx. Mini-game SCORES (petcGain, shelfPlantGain, the art / cooking / Tứ đức games) = F5. */
+const L9=9;
+const OBJ=(n,o)=>[n,()=>{try{return J(o())}catch(e){return null}},v=>{try{const t=o();if(t&&v&&typeof v==="object")Object.assign(t,v)}catch(e){}}];
+/* review r1: her open care / plant screen keys ride as plain values set on the REAL objects (the old OBJ("shpc",()=>({g:SHPC.g})) assigned
+   onto a fresh copy: the host never saw her SHPC.g → her shelf plant "Để trời định" did nothing, or hit the plant in the HOST's open slot;
+   OBJ("petc",PETC) carried PETC.bath (listener functions, stripped by JSON) back onto the host's own running bath game) */
+const CX9=CX8.concat([["petc",()=>({i:PETC.i,game:PETC.game}),v=>{v=v&&typeof v==="object"?v:{};PETC.i=typeof v.i==="number"?v.i:-1;PETC.game=v.game==null?null:v.game}],
+ ["shpc",()=>SHPC.g==null?null:SHPC.g,v=>{SHPC.g=v==null?null:v}],OBJ("tdv",()=>TDV)]);
+function encA9(K,A){const K2=K.map(k=>k==="el"||k==="pm"?"v":k),A2=[...A].slice(0,K.length);for(let i=0;i<K.length;i++){
+  if(K[i]==="el"){const b=A2[i];if(!b||!b.dataset)return null;A2[i]={dataset:Object.assign({},b.dataset)}}
+  else if(K[i]==="pm"){const x=A2[i];if(isMe(x))A2[i]={me:1};else if(typeof x==="string")A2[i]={s:x};else{const e=pE(x);if(!e)return null;A2[i]={id:e.id}}}}return encA(K2,A2)}
+function decA9(K,a){const K2=K.map(k=>k==="el"||k==="pm"?"v":k);const o=decA(K2,a);if(!o)return null;for(let i=0;i<K.length;i++)if(K[i]==="pm"){const x=o[i];if(!x)return null;if(x.me)o[i]=S;else if(typeof x.s==="string")o[i]=x.s;else{const v=vOf(x.id);if(!v||v===S)return null;o[i]=v}}return o}
+function reg9(name,K,o){o=o||{};const R=Object.assign({lv:L9,ctx:CX9,back:BACK8,enc:A=>encA9(K,A),dec:a=>decA9(K,a),done:reDraw,title:()=>CHT||""},o);
+ R.mine=A=>live()&&(o.mine?o.mine(A):isMe(A[0]));return F.reg(name,R)}
+/* her care / plant screens draw into the HOST's DOM (petcClose → closeModal = the host's own card queue) when run in her context there:
+   captured instead, replayed on her phone with the answer (her pet / plant read from her patched person) */
+const UI9=n=>{if(typeof window[n]!=="function")return;const f=window[n];window[n]=function(){if(CW.ctx&&host()&&on(L9)){if(TH.uiCap&&TH.uiCap.length<12)TH.uiCap.push([n,String(arguments[0]==null?"1":arguments[0]).slice(0,300)||"1"]);return}return f.apply(this,arguments)}};
+["petcDraw","petcClose","shelfPlantDraw"].forEach(UI9);
+try{for(const n of ["petcDraw","petcClose","shelfPlantDraw","petcGrowShow"])TH.UICAP.add(n)}catch(e){}
+if(typeof petcGrowCard==="function"){const f=petcGrowCard;petcGrowCard=function(P){if(CW.ctx&&host()&&on(L9)){const i=tsbPets(S).indexOf(P);if(i>=0&&TH.uiCap&&TH.uiCap.length<12)TH.uiCap.push(["petcGrowShow",String(i)]);return}return f.apply(this,arguments)};
+ window.petcGrowShow=i=>{try{const P=tsbPets(S)[+i];if(P)f(P)}catch(e){}}}
+/* pets */
+KSH.pet=()=>petShop();
+reg9("petDo",["v","el"],{mine:A=>A[0]==="follow"||A[0]==="free",snap:"soft",noRes:true,title:A=>({follow:"Cho theo hầu",free:"Gửi về Ngự thú viên"})[A[0]]||""});
+reg9("petcMaid",["v"],{mine:()=>true});
+reg9("petcQuick",["v"],{mine:()=>true});
+/* garden: her shelf plant */
+reg9("shelfPlantQuick",[],{mine:()=>true});
+/* kitchen / study: recipe books, the taste questions, Tứ đức practice at bậc 5 (no game) */
+reg9("rcpRead",["ix"],{mine:()=>true});
+reg9("rcpAskGo",["v","pm"],{mine:()=>true});
+reg9("tdsRun",["v","v","v"],{mine:A=>A[1]==="prac"});
 }catch(e){console.error("jcoopthinf",e)}})();
