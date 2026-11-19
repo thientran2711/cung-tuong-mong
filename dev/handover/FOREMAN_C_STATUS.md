@@ -1332,3 +1332,4 @@ ROOT-48 ~16:31Z: R2B stopped result 92a79faf8 (1,080 cr): thua-minh dong-phoi-ng
 ROOT-48 Lượt 452 (owner on r19 sheet): t1 band wider; tassel on bí trụy all ranks; cầu vai over hà bí; sleeve length measured per Lượt 351; Phi + Quý phi more embroidery, whole sleeve → FIGURE_GATE 8b; sent to ROOT-47 r20 helper (priority now).
 ROOT-48 Lượt 453–454: t1 'NARROW' word was the cause (removed); tassel replaces 'no loose tassels'; cầu vai over hà bí sentence; ankle height same for all; bí trụy ladder FIGURE_GATE 8c → r20 helper.
 ROOT-48 Lượt 455 (owner): triều phục sleeves t1–t6 = one identical ankle sentence, all alike, no measure loop; t7/t8 unchanged → FIGURE_GATE 8b + r20 helper; r20 now redraws t1–t6.
+ROOT-48 Lượt 456 (owner, angry): triều phục t1–t6 = ONE uniform: common hà bí sentence (only colour + pattern + pendant material differ), common sleeve sentence; t7/t8 unchanged → FIGURE_GATE 8c rewritten, r20 helper told.
