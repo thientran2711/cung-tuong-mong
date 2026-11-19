@@ -33,5 +33,10 @@ Chưa có người. Câu mặt: TYPES_v4.md / make_nf3.py TYPES_C["Quyến rũ"]
 ## Trạng thái kiểu mặt (owner Lượt 657)
 - DÙNG (nhóm mới): Kiêu kỳ, Lạnh lùng, Quyến rũ.
 - KHÔNG DÙNG: Anh khí (s04), Thư hương (s05), Yêu kiều (s06 — Thư hương và Yêu kiều quá giống nhau). Câu mặt + ảnh mẫu giữ làm lịch sử (TYPES_v4.md, make_nf3.py), không vẽ thêm.
+- Lượt 680 gộp Trong trẻo vào Dịu dàng → HUỶ ở Lượt 682: tách lại như cũ.
 - CHƯA QUYẾT: nhóm cũ Tươi tắn, Dịu dàng, Trong trẻo, Đoan trang (không đánh "BỎ").
 - GIỮ: Sắc sảo, Tinh nghịch.
+
+
+## Chia lại nhóm (owner Lượt 673–680)
+Chủ tự chia lại m01–m52 + c01–c32 trên trang tick https://claude.ai/artifact/MYJSqYG4dyLpfo4VA9KnK3 (db picks/<id>.group). Kết quả trang đó THAY cho chia theo (n-1)%6.
