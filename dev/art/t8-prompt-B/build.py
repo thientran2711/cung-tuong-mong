@@ -876,22 +876,38 @@ TYC_FACE=" Her face is HER OWN face from her first reference image (face and hai
 TYC_HUE=", still clearly {col} at a glance, never khaki, sand, beige or tan"   # {col} = the hue WITHOUT "pale" (fix1 round 2: "pale" pulled a65 back to pastel)
 _A51EX=AGE_TXT["a51"][AGE_TXT["a51"].index("(e.g. pink"):AGE_TXT["a51"].index("; the royal yellow")]+")"   # verbatim a51 example list: a65 at least this deep
 def _tyhue(col): return "pearl ivory (never yellowed)" if col=="ivory" else col.replace("pale ","",1)   # ty1: pearl ivory = approved palette word (b10 v2 lists)
+# TY0 fix2 (owner Lượt 229b: c06 cold a36 / ty4 a65 face + hair differ from her live picture; ROOT-40 approved 03:52Z). Cause: identity line kept only "hairstyle colour",
+# the outfit text prescribed a NEW bun (COLD_OUTFIT "simple neat low bun", TY_HAIR "neat bun with soft strands" -> bangs), CLOSE forbade her horizontal pin, consort face WORDS overrode image 2.
+# Fix = the owner-approved kc2k K3 re-make sentence (reports/kc2k-K3.md l.44, "young" dropped for all ages); hair = "her own hairstyle exactly as in her first reference" (build.py t1-t3 hair wording).
+# Source numbering is pre-_reorder_refs: "first reference" here = image 2 (her picture) in the output. Style image goes as Magnific type "style" (as kc2k).
+TYC_REMAKE=(" Redraw this exact figure as a sharp, high-detail 2K full-body standing figure: the SAME woman as in the first reference image, same face and facial features, same hairstyle and hair colour, same proportions, whole figure from top of head to feet centered with margin around it."
+ " Use the style reference image ONLY as a style reference for skin rendering, painterly near-3D drawing style, fabric texture and embroidery; do not copy any of its people, faces, clothes or colours."
+ " Her face and her hairstyle come ONLY from her first reference image; change only her outfit, her held item, her pose and her age as described below.")
+TYC_COLD_HAIR_OLD="hair in a simple neat low bun held by ONE plain wooden hairpin"
+TYC_COLD_HAIR="her own hairstyle exactly as in her first reference, held by ONE plain wooden hairpin"
+TYC_TY_HAIR=" Hair: her own hairstyle exactly as in her first reference, with ONE small gold hairpin with a short pearl bead tassel; no flower."
+TYC_PIN_RULE=" Every hairpin is inserted into the hair pointing upward or backward with dangles hanging down, no hairpin horizontal or sticking out to the side."
+TYC_PRE_FR=" body and face frontal, standing squarely facing the viewer, no turn."
+TYC_PRE_RENDER="exactly matching the rendering of the reference portraits"
 def build_ty_cold(c,state):
     n=int(c[1:]); right=(n%2==1); pal,face=DATA[c]
     who="A palace maid" if c[0]=="m" else "An imperial consort"
-    s=PRE+f" {who}."+(f" Her face: {face}." if face else " Her face and facial features exactly as in the identity reference image.")+IDENT+TYC_FACE+" "+AGE_TXT[AGE]   # TY0 fix6: +TYC_FACE. AGE_TXT verbatim (rule 0); its generic a51/a65 colour examples are overridden by this state's own COLOUR RULE below (same hue family, no switch)
+    s=PRE+f" {who}."+TYC_REMAKE+" "+AGE_TXT[AGE]   # TY0 fix2 (ROOT-40 GO 03:52Z): kc2k K3 re-make sentence; NO consort face words, NO new hairstyle. AGE_TXT verbatim (rule 0); its generic a51/a65 colour examples are overridden by this state's own COLOUR RULE below (same hue family, no switch)
     if state=="cold":
         item,hk=age_item(c,"lanh","a plain wooden bowl","two")
-        s+=" "+COLD_OUTFIT+" COLOUR RULE: the linen stays the same undyed pale grey-white at every age (not beige, tan, khaki or cream), never dyed, never deeper, no other colour anywhere; this replaces the colour examples above."+COLD_FAB
+        s+=" "+COLD_OUTFIT.replace(TYC_COLD_HAIR_OLD,TYC_COLD_HAIR,1)+" COLOUR RULE: the linen stays the same undyed pale grey-white at every age (not beige, tan, khaki or cream), never dyed, never deeper, no other colour anywhere; this replaces the colour examples above."+COLD_FAB
     else:
         N=int(state[2:]); col=TY_COLOUR[N]
         item,hk=age_item(c,"t%d"%N,"an embroidered handkerchief","one")
-        s+=f" Outfit (her trung y, the plain inner robe worn alone, no outer garment): a plain {col} silk trung y inner robe (simple crossed collar, tied sash, long skirt, no embroidery, no outer layer), {col}, matte soft silk with gentle folds, no gloss."+TY_HAIR
+        s+=f" Outfit (her trung y, the plain inner robe worn alone, no outer garment): a plain {col} silk trung y inner robe (simple crossed collar, tied sash, long skirt, no embroidery, no outer layer), {col}, matte soft silk with gentle folds, no gloss."+TYC_TY_HAIR
         if AGE=="a51": s+=f" COLOUR RULE: the whole trung y is a deeper, more muted shade of the same {col}, same hue family (rich and dignified, never bright, never pastel, never black or brown)"+TYC_HUE.format(col=_tyhue(col))+"; no other colour anywhere; this replaces the colour examples above."
         elif AGE=="a65": s+=f" COLOUR RULE: the whole trung y is an even deeper, more muted shade of the same {col} than at 51 (DEEPER than her 51-year-old trung y, never lighter or paler, at least as deep as at 51 {_A51EX}), same hue family (rich and dignified, never bright, never pastel, never black or brown)"+TYC_HUE.format(col=_tyhue(col))+"; no other colour anywhere; this replaces the colour examples above."
         else: s+=f" COLOUR RULE: the whole trung y, collar and sash are one plain {col}, as soft and pale as the rank-colour portrait frame; no other colour anywhere."
         s+=" Any flower or pattern on the fabric would be real silk embroidery, never printed or pasted-on."
-    return s+_pose(item,hk,right)+CLOSE+END
+    s=s+_pose(item,hk,right)+CLOSE+END   # TYC_PIN_RULE is dropped in __main__ AFTER spec5pose (it anchors on that sentence)
+    assert s.count(TYC_PRE_FR)>=1; s=s.replace(TYC_PRE_FR," "+MAMA_ANGLE,1).replace(TYC_PRE_FR," the body with the shoulders slightly turned (not dead-frontal, not sideways), the face towards the viewer.")   # ANGLE LAW (owner Lượt 229 A), same sentence as build_mama
+    assert s.count(TYC_PRE_RENDER)==1; s=s.replace(TYC_PRE_RENDER,"exactly matching the rendering of the style reference image",1)   # PRE's "reference portraits" = the style faces -> name it style only
+    return s
 # ---------- N5d item 5: MAID ladder --state tm0..tm4 (+ nhat / mama PENDING). Names (FIGURE_GATE CUNG NỮ LADDER, Lượt 174, owner "174 đúng rồi"):
 #   tm0 = cung nữ thô sử | tm1 = tam đẳng (the CURRENT 'Cung nữ') | tm2 = nhị đẳng (the CURRENT 'Đại cung nữ', never say đại cung nữ) | nhất đẳng = NEW outfit, NO tm id, PENDING (owner has not picked the sheet) |
 #   tm3 = chưởng sự cô cô | tm4 = nữ quan (always red #99443F) | ma ma = PENDING (the NPC outfit wording exists nowhere in the repo, only the live picture fig-mama-k01).
@@ -1181,7 +1197,7 @@ def spec5pose(o,c,t,force=None):
     # only the turn/side words change, the hand/item action stays; every spec5 pose then states the frontal body.
     for _o,_n in SPEC5_FRONTAL: raw=raw.replace(_o,_n)
     if globals().get("STATE")=="cold": raw=raw.replace("a gold hairpin","her one plain wooden hairpin")   # TY0 fix2: COLD_OUTFIT "ONE plain wooden hairpin ... NO gold"; the pose keeps her wooden pin (same pose choice, no skip)
-    pose=raw.format(prop=prop)+", body and face frontal, facing the viewer squarely, no turn"+(", with stately grace" if t>=7 else ", poised" if t>=5 else "")
+    pose=raw.format(prop=prop)+(", the body with the shoulders slightly turned (not dead-frontal, not sideways), the face towards the viewer" if re.fullmatch(r"ty[1-8]|cold",str(globals().get("STATE"))) else ", body and face frontal, facing the viewer squarely, no turn")+(", with stately grace" if t>=7 else ", poised" if t>=5 else "")
     # N5b (ROOT-36 order; FIGURE_GATE A0 rule 3 + canon 19/11 (e) "Nữ đế mass pose = CALM at all ages (item below the chin, no flying cloth)"): --state nude only -> one calm sentence for every person and age; every other output byte-identical
     # F4 fix1 (ROOT-39, owner verdict 19/11 ~03:05Z item 5 "bộ trang phục nó lại thuần luộc, đi xuống dưới chân"): the N5b sentence ("standing still and upright ... elbows close to her body ... all hang straight down, still ... no movement") was the ONLY difference from the approved Hoàng hậu prompt B / Nữ đế A outfit+fabric text and made the robe a stiff tube.
     # Now = approved HH prompt B pose wording copied ("calm standing pose; she holds ... at chest height below the chin") + 3d2 frontal words + Nữ đế A "with stately grace"; only the canon (e) clause "no flying, floating or windblown cloth" kept. The fabric sentence (HH B: "hang and fold naturally ... natural creases, never stiff") is untouched and no longer contradicted.
@@ -1257,6 +1273,7 @@ def gen_refs(argv,prompt):
     a=[x for x in argv if not x.startswith("--")]; age=argv[argv.index("--age")+1] if "--age" in argv else "a18"
     own={"name":"own live t1 of %s at %s (a65 = her a65 t1 / live picture) = FACE only; re-make states: her live tier+age picture"%(a[0] if a else "?",age)}
     r=[{"image":1,**own}] if "--nostyle" in argv else [{"image":1,**REF_STYLE},{"image":2,**own}]   # ROOT-38: owner order 1 style, 2 own, 3 swatch
+    if "--state" in argv and re.fullmatch(r"ty[1-8]|cold",argv[argv.index("--state")+1]) and "--nostyle" not in argv: r[0]={**r[0],"magnific_type":"style"}; r[1]={**r[1],"magnific_type":"image","name":"her live picture of this state+age (a65: her NEW 2K a51 re-make) = face + hairstyle"}   # TY0 fix2
     if "--bdq" in argv: r[1]={"image":2,**REF_BDID}   # F2: BD princess identity = face only
     if "Image 3 is only a colour reference" in prompt: r.append({"image":3,**REF_SWATCH})
     if "--bdq" in argv: r.append({"image":3,**REF_QP})   # F2: costume source = the approved old Quý phi picture
@@ -1322,6 +1339,7 @@ if __name__=="__main__":
     if "--spec5pose" in sys.argv:
         _t=LOWN if "--low" in sys.argv else 7 if "--t7" in sys.argv else int(STATE[2:]) if STATE and STATE[:2]=="ty" else max(1,int(STATE[2])) if STATE and re.fullmatch(r"tm[0-4]",STATE) else 1 if STATE=="cold" else 8   # N5d item 4: trung y tN poses at rank N, cold at the lowest
         _o=spec5pose(_o,a[0],_t)
+    if STATE and re.fullmatch(r"ty[1-8]|cold",STATE): assert _o.count(TYC_PIN_RULE)==1; _o=_o.replace(TYC_PIN_RULE,"",1)   # TY0 fix2: her own (often horizontal) pin from image 2 stays
     if "--nostyle" in sys.argv:   # owner 18/11 ~22:30Z: only her own identity image is a reference, no style image -> drop ONLY the style-reference sentence
         _st=" The style reference image is only for skin, drawing style, fabric and embroidery: never copy its face, body or pose."
         assert _st in _o,"style sentence not found"
