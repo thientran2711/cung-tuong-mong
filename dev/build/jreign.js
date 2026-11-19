@@ -91,7 +91,7 @@ function rgJoinOpts(firstTime){const O=[];const fam=rgFam();const sd=S.reign.sid
 RGBT.c1a={w:"emp",t:"Đêm khuya ở Cần Chính điện, Hoàng thượng gác bút. Chồng tấu chương trước mặt ngài đã có lời phê sẵn của {q}. “Trẫm ngồi trên ngai mà chữ của trẫm chưa ra khỏi cửa điện.” Ngài quay sang ngươi: “{Goi} nghĩ sao?”",
  o:[{n:"Khuyên ngài nhẫn nại chờ thời",w:{...BAL.cv.reign.nhan},pw:1,s:"emp",wx:"Hoàng thượng thấy ngươi hiểu chuyện"},
   {n:"Khuyên ngài dựa vào lớp quan trẻ ở Hàn lâm viện",p:40,sk:[["tamco",3],["tai",5]],w:{sung:3},pw:3,s:"emp",l:{sung:1},lq:-10,wx:"ngài có thêm người của mình trong triều",lx:"lời bàn lọt ra ngoài, nhà Tể tướng để ý ngươi"},
-  {n:"Chỉ lặng lẽ mài mực hầu ngài",w:{...BAL.cv.reign.mai},wx:"không dính vào chính sự"}]};
+  {n:"Chỉ lặng lẽ mài mực hầu ngài",w:{...BAL.cv.reign.mai},wx:"giữ được thân mình ngoài chính sự"}]};
 RGBT.c1b={w:"th",if:()=>!S.thDead,t:"Thái hậu gọi các phi tần đến Đức Thọ cung bàn lễ tế tiên đế, rồi chậm rãi nói: “Hoàng đế còn trẻ, triều chính đã có đại thần phụ chính và ai gia lo liệu. Hậu cung chớ bàn chuyện triều đình.” Bà nhìn thẳng vào ngươi.",
  o:[{n:"Cúi đầu vâng dạ",w:{th:3},s:"th",wx:"Thái hậu hài lòng"},
   {n:"Thưa rằng thần thiếp chỉ lo hầu hạ bệ hạ chu toàn",p:45,sk:[["tamco",3],["duc",4]],w:{th:2,sung:1},l:{th:-3},wx:"vừa lòng cả hai bên",lx:"Thái hậu nghe ra ý khác"},
