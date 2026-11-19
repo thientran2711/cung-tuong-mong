@@ -64,3 +64,4 @@ File máy đọc: dev/art/face-common/OWNER_GROUPS_L686.json
 ## Lượt 695 (chủ) — sau khi sửa răng + duyệt Sắc sảo
 - c06 → Tươi tắn (từ Tinh nghịch). c14 → Đoan trang (từ Dịu dàng). c19, c31 → Tươi tắn (giữ).
 - Sắc sảo DUYỆT: c27 (người mới), s07, s08, s09 (người mới). Đã ghi vào OWNER_GROUPS_L686.json.
+- Lượt 696 (chủ, THAY Lượt 695): c06, c14, c19, c31 VẼ LẠI HẾT với mặt SẮC SẢO → nhóm Sắc sảo (quá nhiều Tươi tắn + Đoan trang rồi). → NF4.
