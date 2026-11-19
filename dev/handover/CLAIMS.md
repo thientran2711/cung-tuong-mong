@@ -252,3 +252,5 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | foreign-princess-3 history expert (sonnet E19; MAIN ORDER 06:23Z/06:35Z) | handover reports/foreign-princess-3-history.md | E ROOT #8 | session_01DgYSWkWBAJFRJzN3a7ix9a | RUNNING | 19/11 06:42Z |
 | FOREMAN E ROOT #9 (opus; child of E ROOT #8, depth 8 = limit) | handover FOREMAN_E_STATUS | E ROOT #8 | session_01DgYSWmYGTJUrUAYgMGzMCE | RUNNING | 19/11 06:46Z |
 | FOREMAN E (opus; ex-ROOT STANDBY, depth 0; took over from E ROOT #9 at depth limit) | handover FOREMAN_E_STATUS | owner STANDBY | session_01DgYSWkgmeMCRaqRT4UCEJE | RUNNING | 19/11 06:50Z |
+| caoly-road (foreign-princess-3 step 2a: Nam Chiếu princess road → Cao Ly, sonnet E20) | review/caoly-road; briefs/E20-caoly-rename.md | FOREMAN E | session_01DgYSWmHCamFvjQHK274SMZ | RUNNING | 19/11 06:49Z |
+| phutang-road lead (foreign-princess-3 step 2b: NEW Phù Tang roads pt_hai/pt_su + plan, opus E21) | review/phutang-road; briefs/E21-phutang-road.md | FOREMAN E | session_01DgYSWm2JdhtEH6d41VumRy | RUNNING | 19/11 06:49Z |
