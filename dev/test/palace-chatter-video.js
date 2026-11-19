@@ -1,7 +1,7 @@
 /* PALACE CHATTER VIDEO (owner OD 19/11 ~03:50Z: a REAL video, never pictures): Playwright recordVideo of the live branch build → H.264 mp4.
    Clip: (1) she comes home → her own maid greets her (bubble above the maid's head); (2) an idle line at home; (3) at a place with consorts:
-   a happening pair (gift) on one stage page talk back and forth; (4) an idle exchange there. Until the kit "say" state (K-HEAD-SAY) exists
-   the bubble is the plain WHITE §78.z bubble and the words run in the kit status line (stub look, said in the report).
+   a happening pair (gift) on one stage page talk back and forth; (4) an idle exchange there. The bubble is the kit part kitSay
+   (KIT §78.z "say", K-HEAD-SAY): the white speech bubble holding the line, above the speaker's head.
    usage: node dev/test/palace-chatter-video.js <baseURL> <W> <H> <out.mp4> */
 const {chromium}=require('./lib/pw-roulette');const fs=require('fs'),path=require('path'),os=require('os'),cp=require('child_process');
 const [,,BASE,W0,H0,OUT]=process.argv;const W=+W0||755,H=+H0||1000;const sleep=t=>new Promise(r=>setTimeout(r,t));
