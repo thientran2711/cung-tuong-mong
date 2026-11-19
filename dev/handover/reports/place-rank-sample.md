@@ -221,3 +221,9 @@ LAYOUTS (L11/L5): bedroom = back wall + right side wall; a walk-in babu bed cent
 Sheet: dev/handover/review-sheets/place-rank/place-rank-C-hqp-vs-hh.jpg · CDN https://ctm-img.victoria-tntt.workers.dev/img/_review/place-rank/place-rank-C-hqp-vs-hh.jpg
 Round credits (PR7): 17 gens × 135 = 2,295 cr (cap 3,300).
 STATUS: PR7 STOPPED after the HQP sample (A1). Open: HQP reception floor too big (foreman/owner decides on 1 more gen; suggested: same prompt, image 3 = the HQP bedroom s7I0dD0l8e as closeness guide).
+### Owner Lượt 563 + ROOT-50 order change (HQP first) — PR7
+- HQP pair sheet C sent first (above).
+- Phi bedroom: v6d gen lJtTf8Ggv9 REJECTED (floor ~20 %). Then v6e = v6b aFGyN6afSh TRIMMED with PIL (bottom 7 % + 3.5 % each side, resized back to 2688x1386): bottom strip ~10 %, whole bed inside, 0 cr. Originals in v6b/. People: people-canh-phuc-cung-phi-ngu.jpg.
+- Khôn Ninh reception v6f O6EXKHXynm (prompts_v6f.json): her two points only (GRAND large hall with high ceiling + rows of columns; TWO mirrored rows of armchairs + tea tables facing across the central aisle to the throne). v6c kept in v6c/. People: people-khon-ninh-cung.jpg.
+- Owner rule (Lượt 563): every room sent WITH people → single people files img/_review/place-rank/people-<room>.jpg (scratch helper people1.py = sheets.people()). Sheets A/B/C rebuilt.
+Credits PR7 round: 19 gens = 2,565 cr (cap 4,500).
