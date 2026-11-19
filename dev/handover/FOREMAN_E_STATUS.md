@@ -506,3 +506,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
   FOR MAIN (open): caoly LAND READY (new sha coming from E20r); kit request K-HEAD-SAY × EMO-SEAL LEAN; palace-chatter videos in E17c container (CDN R2 401); NEW FOREMAN E STANDBY still not reported; FOR C art lists (Ba Tư reports/bd-roads.md §BUILT, Cao Ly reports/caoly-road.md, Phù Tang reports/phutang-road.md).
   My wake trig_011GMU6jxheJHdpsq4VtzGn4 — successor DISABLES it (update_trigger enabled=false; if the classifier refuses, ask me to disable it myself) and sets its own (minute 47). SEATS 10 / 12.
   ★ THE 18 LAWS line in every brief/takeover prompt.
+  → child FOREMAN E #12 = session_01DgYSWoiPTxVs5xQni4RvZw (opus, depth 2). FOREMAN E #11 stops now.

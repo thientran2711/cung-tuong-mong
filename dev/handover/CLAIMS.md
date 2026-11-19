@@ -276,7 +276,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | MAIN ROOT-68 (opus; child of ROOT-67, depth 6) | handover HANDOVER_SESSION9 | ROOT-67 | session_01Rc5AsHe8w1z2UgZJUycHEJ | DONE → ROOT-69 | 19/11 09:57Z |
 | coop-thin F6b (opus; remaining mini-game ends as score intents, L12; parallel to F6a, stacked on F5) | review/coop-thin-f6b | B | session_01N1tNP4XtuMraUEmXvATwMg | ROLLOVER #1→#2 @ a4d77f3c (27/29; report reports/coop-thin-f6b.md) | 19/11 10:01Z |
 | kit-head-say SMALL REVIEW (sonnet) of 5d9cdd5d | review/kit-head-say; briefs/review-kit-head-say.md | MAIN ROOT-68 | session_01Rc5AsKGEciGWVZG7BD4KHc | DONE PASS 6b1ab390 — LIVE | 19/11 10:14Z |
-| FOREMAN E #11 (opus; child of FOREMAN E ex-standby, depth 1; PICKUP 10:20Z) | handover FOREMAN_E_STATUS | FOREMAN E | session_01DgYSWq1iGwKC5ebN2qhmFU | RUNNING | 19/11 10:14Z |
+| FOREMAN E #11 (opus; child of FOREMAN E ex-standby, depth 1; PICKUP 10:20Z) | handover FOREMAN_E_STATUS | FOREMAN E | session_01DgYSWq1iGwKC5ebN2qhmFU | DONE → E #12 | 19/11 10:14Z |
 | coop-thin F6b #2 (opus; successor of 4XtuMraU at a4d77f3c) | review/coop-thin-f6b | B | session_01N1tNP3uQwFDZBPxqqP6ZN8 | RUNNING | 19/11 10:34Z |
 | MAIN ROOT-69 (opus; child of ROOT-68, depth 7) | handover HANDOVER_SESSION9 | ROOT-68 | session_01Rc5AsMesCGqrqL1dGjCJXv | DONE → ROOT-70 | 19/11 10:48Z | START_CTX ~4 %
 | palace-chatter successor: apply K-HEAD-SAY jchat-say.patch + end-to-end run (opus E17c) | review/palace-chatter; briefs/E17c-palace-chatter-say.md | FOREMAN E #11 | session_01DgYSWnKfwZsB2F92BggLCq | DONE — SẴN SÀNG KIỂM 115717a8 (KIT REQUEST K-HEAD-SAY × EMO-SEAL LEAN open) | 19/11 11:30Z |
@@ -287,3 +287,5 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | medallion-size (sonnet; MAIN ROOT-69 order via C-AG #22: speaker face medallion too large over figure/title in event dialogs, kit part, whole group) | review/medallion-size; briefs/cag22-medallion-size.md | C-AG #22 for ROOT-69 | session_01Rc5AsMVX8FxdFVTmmDezsu | BLOCKED (waits seal-lean-3 LIVE; wk archived 19/11 11:40Z by C-AG #23) | 19/11 11:35Z |
 | MAIN ROOT-70 (opus; child of ROOT-69, depth 8 = LIMIT) | handover HANDOVER_SESSION9 | ROOT-69 | session_01Rc5AsKJHPE6qV9k9Ugyhj7 | RUNNING | 19/11 11:34Z |
 | FOREMAN C-AG #23 (opus; child of C-AG #22, depth 1) | handover FOREMAN_C_STATUS | C-AG #22 | session_01Rc5AsHuCYUKscp1y5MsPDQ | RUNNING | 19/11 11:40Z |
+| FOREMAN E #12 (opus; child of E #11, depth 2) | handover FOREMAN_E_STATUS | FOREMAN E #11 | session_01DgYSWoiPTxVs5xQni4RvZw | RUNNING | 19/11 11:38Z |
+| kyngo-daily FIX r2 (opus E18b; 9 fixes from E18r) | review/kyngo-daily; briefs/E18b-kyngo-fix-r2.md | FOREMAN E #11 | session_01DgYSWose5CuxgwKoCBMKGm | RUNNING | 19/11 11:37Z |
