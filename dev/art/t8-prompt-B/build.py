@@ -891,7 +891,25 @@ def build_ty_cold(c,state):
 # tm0 = THÔ SỬ design 842754fa (FIGURE_GATE Lượt 172). Sleeves: tm0/tm1 ~1 hand-span, tm2 ~2, tm3 ~3 (owner ladder); tm4 as live. Each maid keeps HER OWN hairstyle at every rank (owner ~01:55Z); the ranks differ by hairpins.
 # Re-make mode: image 1 = her live maid picture, image 2 = the style image (two approved portraits). Items: item_age.py tmK cell.
 NHAT_DANG_PENDING=None   # PENDING: nhất đẳng outfit wording. The owner has NOT chosen the reference sheet from her Phượng Lệnh art yet; do not write wording here until she does.
-MAMA_PENDING=None        # PENDING: ma ma = the Ma ma NPC outfit (fig-mama-k01); no wording exists in the repo -> ROOT-37 asked.
+# MA MA (MM1, owner GO 19/11 ~03:15Z via ROOT-39, verbatim: "Mama 18 tuoi gi dau ma mac do cung nu la sao" -> ma ma = the BROWN a36/a51 live picture of the Ma ma NPC fig-mama-k01; the pink a18 is a maid outfit, ignored).
+# WORDING IS WORDED FROM THE LIVE a36/a51 PICTURE (no earlier prompt text exists anywhere in the repo or in Magnific: owner-ordered, not copied). Colours by age (FIGURE_GATE l.496): a51/a65 = the NPC's brown; a36 = normal game colour (her palette main).
+# Image 3 = the live fig-mama-k01 a36 picture, COSTUME only (cut, layers, embroidery, accessories), never its face, pose or (at a36) its colour.
+MAMA_REF={"name":"live fig-mama-k01-a36 = COSTUME only (cut, layers, embroidery, accessories), never its face/pose","magnific_id":"(upload the CDN file on the current account)","url":"https://ctm-img.victoria-tntt.workers.dev/img/fig-mama-k01-a36.webp"}
+MAMA_PENDING=None        # kept for old readers: wording now exists in build_mama()
+MAMA_IMG3=" Image 3 is only a costume reference for the cut, layers, embroidery and accessories of the outfit; never copy its face, hair, pose or background."
+def build_mama(c):
+    assert c[0]=="m"; n=int(c[1:]); right=(n%2==1); pal,face=DATA[c]; main=pal.split(" and ")[0]; elder=AGE in ("a51","a65")
+    fw=(f" Her face: {face}." if face else " Her face and facial features exactly as in the identity reference image.")
+    s=PRE+" A palace ma ma (ma ma, a senior woman of the palace staff), dignified, gracious and still beautiful."+fw+MAID_IDENT+" "+AGE_TXT[AGE]
+    s+=(" Outfit (the ma ma costume, exactly the cut of image 3, never poor): a long robe of fine embroidered silk brocade with a subtle woven pattern; a sleeveless embroidered over-vest with a stand collar closed by a small knot button, with a band of gold-edged trim down the front, worn over a crossed-collar inner robe; wide layered sleeves hanging softly, each with a broad embroidered cuff band; a long embroidered front panel hanging from the waist over a layered, softly pleated skirt with a band of flower embroidery along the hem; a wide silk sash tied in a bow at the waist, a jade pendant on a silk cord with a tassel; delicate cream-and-blush peony and plum-blossom embroidery over the vest, sleeves, panel and hem; hair in a neat bun with one small gold hairpin and small earrings; soft slippers; the sleeves are wide, a palace ma ma's sleeves (never a consort's long trailing sleeves).")
+    if elder:
+        s+=(" COLOUR RULE: the whole costume keeps exactly the rich earth-brown of image 3 (a warm brown-mauve brocade), "+("the same brown at a deeper, more subdued shade, dignified" if AGE=="a65" else "the same brown")+", with the cream-blush embroidery, olive-gold sash and the orange tassel as in image 3; no other main colour.")
+    else:
+        s+=(f" COLOUR RULE: take ONLY the cut from image 3; RECOLOUR the whole costume to her colour {main}, a medium-saturation, medium-lightness clear tone (fresh, never pale, never dark, never brown), with the embroidery in a lighter tone of the same colour and one soft gold accent; do not copy the brown of image 3.")
+    s+=" Any flower or pattern on the fabric is fine silk-thread embroidery stitched directly into the fabric, flat, following the folds, never printed or pasted-on."
+    item,hk=age_item(c,"mama","an embroidered handkerchief","one")
+    s+=_pose(item,hk,right)+CLOSE
+    return s+MAMA_IMG3+END
 MAID_IDENT=IDENT.replace("and hairstyle colour","her own hairstyle (the same at every rank) and hair colour",1)
 TM_FADED=["grey-blue","light indigo","earth brown"]
 TM_NAME={"tm0":"cung nữ thô sử","tm1":"tam đẳng cung nữ","tm2":"nhị đẳng cung nữ","tm3":"chưởng sự cô cô","tm4":"nữ quan"}
@@ -925,7 +943,8 @@ def build_maid(c,state):
     item,hk=age_item(c,state,"an embroidered handkerchief","one")
     return s+_pose(item,hk,right)+CLOSE+END
 def build_state(c,state,v="v0"):
-    if state=="nhat" or state=="mama": raise SystemExit("PENDING: "+("nhat dang (the owner has not chosen the reference sheet for the new outfit)" if state=="nhat" else "ma ma (the Ma ma NPC outfit wording does not exist in the repo)"))
+    if state=="mama": return build_mama(c)
+    if state=="nhat": raise SystemExit("PENDING: nhat dang (the owner has not chosen the reference sheet for the new outfit)")
     if re.fullmatch(r"tm[0-4]",state): return build_maid(c,state)
     if state=="cold" or re.fullmatch(r"ty[1-8]",state): return build_ty_cold(c,state)
     n=int(c[1:]) if c[0]=="c" else 0
@@ -1188,6 +1207,7 @@ def gen_refs(argv,prompt):
     if "--bdq" in argv: r[1]={"image":2,**REF_BDID}   # F2: BD princess identity = face only
     if "Image 3 is only a colour reference" in prompt: r.append({"image":3,**REF_SWATCH})
     if "--bdq" in argv: r.append({"image":3,**REF_QP})   # F2: costume source = the approved old Quý phi picture
+    if "Image 3 is only a costume reference" in prompt: r.append({"image":3,**MAMA_REF})
     return r
 def _run_cmd(argv):
     import subprocess
