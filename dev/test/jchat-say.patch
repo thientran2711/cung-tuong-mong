@@ -1,5 +1,5 @@
 --- jchat.old.js	2026-11-19 09:23:28.874319384 +0000
-+++ jchat.new.js	2026-11-19 09:23:28.896099936 +0000
++++ jchat.new.js	2026-11-19 09:56:43.987244154 +0000
 @@ -103,20 +103,12 @@
  function noticeOn(P){try{const st=stage();for(const b of st.querySelectorAll(".kmerr-bang")){const r=b.getBoundingClientRect(),q=P.img.getBoundingClientRect();if(r.left+r.width/2>=q.left&&r.left+r.width/2<=q.right)return true}}catch(e){}return false}
  /* ---------- the bubble (KIT §78.z + §78.y; "say" = K-HEAD-SAY when the kit has it) ---------- */
@@ -21,7 +21,7 @@
 - if(!kit&&typeof kitLine==="function")try{kitLine(`${nameOf(P.e,P.p)}: “${txt}”`,ms)}catch(e){}
 - setTimeout(()=>{try{b.remove()}catch(e){}},ms);CH.stat.lines++;CH.log.push({t:Date.now(),who:P.p.name,txt,kit,tag:tag||""});if(CH.log.length>60)CH.log.shift();return true}
 + const lim=Math.max(1,c.maxBub|0||2);CH.bub=(CH.bub||[]).filter(h=>h&&!h.closed&&h.el.isConnected);while(CH.bub.length>=lim)CH.bub.shift().close();
-+ const h=typeof kitSay==="function"?kitSay(st,P.img,txt,{ms,title:`${nameOf(P.e,P.p)}: ${txt}`}):null;if(!h)return false;CH.bub.push(h);
++ const mk=()=>typeof kitSay==="function"?kitSay(st,P.img,txt,{ms,title:`${nameOf(P.e,P.p)}: ${txt}`}):null;let h=mk();if(!h&&CH.bub.length){CH.bub.shift().close(true);h=mk()}/* no room beside the other bubble (narrow stage, seal + plaque): take turns, the older line leaves */if(!h)return false;CH.bub.push(h);
 + CH.stat.lines++;CH.log.push({t:Date.now(),who:P.p.name,txt,kit:true,tag:tag||""});if(CH.log.length>60)CH.log.shift();return true}
  function dur(t){const c=C().say||{};return Math.round(Math.max(c.min||2600,Math.min(c.max||6000,(c.base||1400)+String(t).length*(c.ch||55))))}
  /* play the turns one after another; a turn whose speaker left the stage ends the exchange */

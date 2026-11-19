@@ -129,11 +129,14 @@ function ksayFigRange(f){const B=kmmBox(f);let l=0,r=1;try{const b=kitFigBody(f.
 function ksayPlace(rec,placed){const st=rec.st,fig=rec.fig,el=rec.el;if(!st.isConnected||!fig.isConnected)return false;const sex=kitBadgeSex(fig),L=kitMarkLine(st,sex);if(!L)return null;
  const K=KIT_HEADMK,T=ksayTier(st),R=st.getBoundingClientRect(),sc=st.offsetWidth?R.width/st.offsetWidth:1,cx=kbCentre(fig),gap=K.sayGap*sc,top0=R.top+2*sc,avail=L.bottom-top0,sw=R.width-6*sc;
  const others=kbFigs(st).filter(f=>f!==fig).map(f=>({f,t:kitHeadTop(f),x:ksayFigRange(f)})),pad=gap;
+ /* no-go: the stage plaque columns #kshR/#kshL (§28.8d, like the seal) and every mood seal on the stage (never covered by a bubble) */
+ const noGo=[...st.querySelectorAll("#kshR,#kshL,img.kfseal")].filter(e=>!e.hidden&&e.offsetHeight&&e.getClientRects().length&&getComputedStyle(e).visibility!=="hidden").map(e=>e.getBoundingClientRect());
  /* placement of the current size: ideal = on the line at the centre line; shift sideways around placed bubbles / heads that reach into the band; last resort rise above the blocker */
  const tryPlace=()=>{const r=el.getBoundingClientRect(),w=r.width,h=r.height;let bottom=L.bottom;
   for(let tries=0;tries<6;tries++){const topY=bottom-h;if(topY<top0)return null;
    const bad=[];for(const q of placed)if(q.top-pad<bottom&&q.bottom+pad>topY)bad.push([q.left-pad,q.right+pad]);
    for(const o of others)if(o.t!=null&&o.t-2*sc<bottom)bad.push([o.x[0]-2*sc,o.x[1]+2*sc]);
+   for(const z of noGo)if(z.top<bottom&&z.bottom>topY)bad.push([z.left-pad,z.right+pad]);
    const lo=R.left+2*sc,hi=R.right-2*sc-w,clamp=v=>Math.max(lo,Math.min(hi,v)),ideal=clamp(cx-w/2);
    const hit=l=>bad.some(b=>l<b[1]&&l+w>b[0]);const C=[ideal];for(const b of bad){C.push(clamp(b[1]),clamp(b[0]-w))}
    const good=C.filter(l=>l>=lo-.5&&l<=hi+.5&&!hit(l)).sort((a,b)=>{const ta=(cx>=a+10*sc&&cx<=a+w-10*sc)?0:1,tb=(cx>=b+10*sc&&cx<=b+w-10*sc)?0:1;return ta-tb||Math.abs(a-ideal)-Math.abs(b-ideal)});
@@ -145,7 +148,7 @@ function ksayPlace(rec,placed){const st=rec.st,fig=rec.fig,el=rec.el;if(!st.isCo
  const fits=()=>{const r=el.getBoundingClientRect();return r.height<=avail&&r.width<=sw};
  let P=null;el.classList.remove("k1");
  for(let f=1;f>=K.sayMinF-.001&&!P;f-=.1){el.style.setProperty("--ksay-fs",(T.fs*f).toFixed(2)+"px");
-  for(const wf of[1,1.25,1.5]){el.style.setProperty("--ksay-w",Math.min(T.w*wf,sw/sc).toFixed(1)+"px");if(lines()<=2&&fits()){P=tryPlace();if(P)break}}}
+  for(const wf of[1,1.25,1.5,.85,.72]){el.style.setProperty("--ksay-w",Math.min(T.w*wf,sw/sc).toFixed(1)+"px");if(lines()<=2&&fits()){P=tryPlace();if(P)break}}}
  if(!P){el.classList.add("k1");for(let f=1;f>=K.sayMinF-.001&&!P;f-=.1){el.style.setProperty("--ksay-fs",(T.fs*f).toFixed(2)+"px");if(fits())P=tryPlace()}}
  if(!P){window.__kitSayWhy={avail:Math.round(avail),sw:Math.round(sw),placed:placed.map(q=>[Math.round(q.left),Math.round(q.right),Math.round(q.top),Math.round(q.bottom)]),others:others.map(o=>[o.t&&Math.round(o.t),o.x.map(Math.round)]),cx:Math.round(cx),L:[Math.round(L.top),Math.round(L.bottom)],R:[Math.round(R.left),Math.round(R.right)]};return false}
  const left=P.left,bottom=P.bottom,w=P.w,h=P.h;
