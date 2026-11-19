@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"e38c9337+","t":"2026-11-19T00:50Z","c":"ge-writers W2 r2: rebuild on main fa411d6f","b":"793b709261fc","h":[{"s":"7d693c26+","t":"2026-11-19T01:22Z","c":"opt-card-short #10: samples = real events; LAW 3: a gain/loss worded only as Gợi ý now shows in Được/Tốn (was «không»)"},{"s":"2dd9cb23+","t":"2026-11-19T00:45Z","c":"review stage-here r4: buổi-turn visit refresh holds the queued cards aside so goTo (j2: returns on Q.length) keeps her where she is (OD 18/…"},{"s":"21904959+","t":"2026-11-18T23:40Z","c":"fullbody-frame s5: person dialog follows the figure standard: frame height follows the figure, figure column runs tag to frame bottom, butt…"},{"s":"cff7cf4d+","t":"2026-11-18T23:07Z","c":"questline-q2 r6 (reviewer): nhTip — a penalty (hb\u003c0) on the told rival's chapter is offset by the tip bonus, not taken as a bonus; rebuild"},{"s":"a837ad32+","t":"2026-11-18T23:30Z","c":"rel-picker r2: site rebuilt"},{"s":"8c23ab31","t":"2026-11-18T23:30Z","c":"role-parity r3 (reviewer): rebuilt root site on 1130a49e"},{"s":"9f00e409+","t":"2026-11-18T22:44Z","c":"stage-rightcol r7: place-tag re-check also every 300 ms while the group list is open (map moves without scroll events)"},{"s":"ca661db3+","t":"2026-11-18T13:38Z","c":"coop-c4-stuck S5a: hold showModal so the room's own armed reshow cannot race the negative check"},{"s":"0dc8f187+","t":"2026-11-18T22:28Z","c":"review coop-thin-f1 r1 #3: site build (index.html / sw.js rebuilt)"},{"s":"6e9277d8+","t":"2026-11-18T21:47Z","c":"entry-blank-r3 r2 (review item 6, whole group): a portrait on its way shows the kit portrait silhouette (§59.1 pf/pm, unknown-f|m); the lin…"}]};
+window.CTM_BI={"s":"a9c76829+","t":"2026-11-19T01:50Z","c":"ge-writers W2 r2: rebuild on main fa411d6f","b":"4a6c2a47ce35","h":[{"s":"5f7aef61","t":"2026-11-19T02:22Z","c":"seal-lean: kitEmoSeal idle sway (rotate only) + staggered lean-in with per-feeling motion; test + KIT 38.4 canon overwrite"},{"s":"03df1c9d+","t":"2026-11-19T01:41Z","c":"role-parity.test: deterministic riseCore block (SEED FIX)"},{"s":"de1f6916+","t":"2026-11-19T01:29Z","c":"review live-servants r2: ag-know ONE RULE (NPC) case follows the live-servants rule like §3 (consort's close maid planted at the garden, re…"},{"s":"7d693c26+","t":"2026-11-19T01:22Z","c":"opt-card-short #10: samples = real events; LAW 3: a gain/loss worded only as Gợi ý now shows in Được/Tốn (was «không»)"},{"s":"2dd9cb23+","t":"2026-11-19T00:45Z","c":"review stage-here r4: buổi-turn visit refresh holds the queued cards aside so goTo (j2: returns on Q.length) keeps her where she is (OD 18/…"},{"s":"21904959+","t":"2026-11-18T23:40Z","c":"fullbody-frame s5: person dialog follows the figure standard: frame height follows the figure, figure column runs tag to frame bottom, butt…"},{"s":"cff7cf4d+","t":"2026-11-18T23:07Z","c":"questline-q2 r6 (reviewer): nhTip — a penalty (hb\u003c0) on the told rival's chapter is offset by the tip bonus, not taken as a bonus; rebuild"},{"s":"a837ad32+","t":"2026-11-18T23:30Z","c":"rel-picker r2: site rebuilt"},{"s":"8c23ab31","t":"2026-11-18T23:30Z","c":"role-parity r3 (reviewer): rebuilt root site on 1130a49e"},{"s":"9f00e409+","t":"2026-11-18T22:44Z","c":"stage-rightcol r7: place-tag re-check also every 300 ms while the group list is open (map moves without scroll events)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -6713,7 +6713,7 @@ mindBelief=function(t,v,k){if(!t||t===S||!t.alive||t.out||!v)return;const kv=key
  const s=w[i][0];oanAdd(t,s,n);belOf(t,s).w+=n;mindLog(t,"_wrongBelief");t.blamed=t.blamed||{};t.blamed[key(s)]=(t.blamed[key(s)]||0)+1;
  if(s===S&&roll(BAL.odb.j43.rbTop+eyes(S)*8))noteAdd(t.id,`Nghe nói ${t.name} ngờ ngươi đứng sau chuyện ${ACT[k]?ACT[k].n.toLowerCase():"vừa rồi"}, dù không phải ngươi`)};
 /* the belief book fades with the grudges, month by month */
-(function(){const o0=oanMonth;oanMonth=function(){const r=o0.apply(this,arguments);try{for(const v of rivals){if(!v.bel)continue;for(const k in v.bel){const b=v.bel[k];b.r=Math.floor(b.r*.8);b.w=Math.floor(b.w*.8);if(!b.r&&!b.w)delete v.bel[k]}}}catch(e){}return r}})();
+(function(){const o0=oanMonth;oanMonth=function(){const r=o0.apply(this,arguments);try{for(const v of rivals){if(!v.bel)continue;for(const k in v.bel){const b=v.bel[k];b.r=Math.floor(b.r*.8);b.w=Math.floor(b.w*.8);if(!b.r&&!b.w)delete v.bel[k]}let e=true;for(const k in v.bel){e=false;break}if(e)delete v.bel/* no empty {} left behind (co-op merge3 keeps no empty object: merged ≠ host, quickcheck G4 coop-one-world seed 3); belOf makes it again */}}catch(e){}return r}})();
 /* her own hidden blows are guessed by the victim the same way */
 const M43HARM=new Set(BANDS.slice(1).flatMap(x=>x[2]).concat(PUSHK));
 (function(){const r0=runAct;runAct=function(a,t,k){const r=r0.apply(this,arguments);try{if(a===S&&t&&t!==S&&t.alive&&M43HARM.has(k)&&k!=="accuse"&&k!=="vp"&&k!=="xx"&&k!=="tocao"&&r&&!FAILRX.test(r))mindBelief(t,S,k)}catch(e){}return r}})();
@@ -62997,9 +62997,10 @@ function j95sync(watch,plan){if(!j95on())return;let R=S.roster;if(!R||R.key!==j9
  for(const id in R.P)if(!ids[id]){delete R.P[id]}
  /* her own line: past khắc keep where she was, now and later = where she stands */
  const me=j95mePlace();for(let i=kh;i<4;i++)R.P.me[i]=[me,me==="home"?"rest":"here",null,"ngươi tự chọn"];
- if(R.P["mm:me"])for(let i=kh;i<4;i++)R.P["mm:me"][i]=S.out?["lc","serve","me","hầu chủ ở lãnh cung"]:me==="home"?["home","serve","me","phận sự trong cung"]:[me,"follow","me","theo hầu ngươi"];
+ const SLV=typeof j95sOn==="function"&&j95sOn();/* j95s live servants: her people's rows are written by j95sPass (retinue + their own day) */
+ if(R.P["mm:me"]&&!SLV)for(let i=kh;i<4;i++)R.P["mm:me"][i]=S.out?["lc","serve","me","hầu chủ ở lãnh cung"]:me==="home"?["home","serve","me","phận sự trong cung"]:[me,"follow","me","theo hầu ngươi"];
  /* staff whose owner fell / rose: follow the owner's new home */
- for(const p of ppl)if((p.kind==="st"||p.kind==="mm")&&p.ref!==S){const e=R.P[p.id];for(let i=kh;i<4;i++){if(e[i][1]!=="follow"&&e[i][1]!=="errand"&&!/^ag_/.test(e[i][1])/* AG-ALL: her own planned deed (jagday) */&&e[i][0]!==p.home)e[i]=[p.home,"serve","v"+p.ref.id,"phận sự trong cung"]}}
+ if(!SLV)for(const p of ppl)if((p.kind==="st"||p.kind==="mm")&&p.ref!==S){const e=R.P[p.id];for(let i=kh;i<4;i++){if(e[i][1]!=="follow"&&e[i][1]!=="errand"&&!/^ag_/.test(e[i][1])/* AG-ALL: her own planned deed (jagday) */&&e[i][0]!==p.home)e[i]=[p.home,"serve","v"+p.ref.id,"phận sự trong cung"]}}
  /* jplx lists can change inside a buổi (a servant punished to Tân Giả khố, the rest list): now and later khắc follow them */
  for(const p of ppl){if((p.kind!=="px"&&p.kind!=="st")||!p.ref)continue;const e=R.P[p.id];if(!e)continue;const oid=p.ref===S?"me":"v"+p.ref.id;
   for(let i=kh;i<4;i++){const x=e[i];if(p.kind==="px"){if(x[0]!==p.home)e[i]=p.home==="tgk"?["tgk","laundry",oid,"bị phạt giặt giũ ở Tân Giả khố"]:["cnh","offduty",oid,"đến lượt nghỉ tay"]}
@@ -63037,7 +63038,7 @@ function j95fixHouse(R,kh,ppl){let n=0;const st=J95.stat;
   if(!v||!v.alive||v.out)ty[i]=["tyv","brew",null,"trực Thái y viện"];else if(x[0]!==palaceOf(v))ty[i]=[palaceOf(v),x[1],x[2],x[3]]}
  for(const p of ppl){const e=R.P[p.id];if(!e)continue;
   if(p.kind==="kid"){for(let i=kh;i<4;i++)if(e[i][0]!==p.home){e[i]=[p.home,e[i][1],null,e[i][3]];n++}continue}
-  if(p.kind!=="mm"&&p.kind!=="st")continue;const o=p.ref;if(o===S&&p.kind==="mm")continue;const oid=o===S?"me":"v"+o.id;const op=R.P[oid];
+  if(p.kind!=="mm"&&p.kind!=="st")continue;if(typeof j95sOn==="function"&&j95sOn())continue;/* j95s live servants write these rows */const o=p.ref;if(o===S&&p.kind==="mm")continue;const oid=o===S?"me":"v"+o.id;const op=R.P[oid];
   const home=[p.home,null,oid,p.home==="lc"?"hầu chủ ở lãnh cung":"phận sự trong cung"];
   for(let i=kh;i<4;i++){const x=e[i];if(/^ag_/.test(x[1]))continue;/* AG-ALL: her own planned deed (jagday) is where she is */
    if(p.kind==="mm"){const ok=op?op[i][0]:p.home;if(ok&&ok!==p.home&&ok!=="lc"){if(x[0]!==ok||x[1]!=="follow"){e[i]=[ok,"follow",oid,"theo hầu chủ ra ngoài"];n++}}
@@ -63168,12 +63169,12 @@ function j95followers(p){try{const R=S&&S.roster;if(!R||R.key!==j95key()||!p)ret
 
 /* ---------------- 9. LOG (this week + 4 before) and the dev table ---------------- */
 function j95log(R){try{const L=S.rlog=S.rlog||{e:{},who:{}};const ids=Object.keys(R.P);const D={P:[],A:[],T:[],W:[]};const ix=(arr,x)=>{x=x==null?"":String(x);let i=arr.indexOf(x);if(i<0){arr.push(x);i=arr.length-1}return i.toString(36).padStart(2,"0")};
- const s=ids.map(id=>{const q=R.P[id].map(e=>ix(D.P,e[0])+ix(D.A,ACT95[e[1]]||e[1])+ix(D.T,e[2])+ix(D.W,e[3]));return q.every(x=>x===q[0])?q[0]:q.join("")});
+ const s=ids.map(id=>{const q=R.P[id].map(e=>ix(D.P,e[0])+ix(D.A,typeof j95sActW==="function"?j95sActW(e[1]):(ACT95[e[1]]||e[1]))+ix(D.T,e[2])+ix(D.W,e[3]));return q.every(x=>x===q[0])?q[0]:q.join("")});
  const pn={};for(const k of D.P)if(k)pn[k]=j95pn(k);for(const id of ids)L.who[id]=R.who[id]||L.who[id]||[id,""];
  L.e[R.key]={wk:R.wk,b:R.b,nb:R.nb,ids,s,D,pn,m:(R.m||[]).map(o=>o?Object.entries(o).map(x=>x.join(":")).join(","):""),nv:(R.nv||[]).map(a=>(a||[]).join(",")),acts:(R.acts||[]).slice(-40),ev:R.ev||[]};
  for(const k in L.e)if(L.e[k].wk<R.wk-J95.LOGW)delete L.e[k];const keep={};for(const k in L.e)for(const id of L.e[k].ids)keep[id]=1;for(const id in L.who)if(!keep[id])delete L.who[id]}catch(e){}}
 function j95table(t,b,kh){/* the dev table (also used by dev/tools/roster.js logic) */const R=S.roster;const cur=t==null||(R&&R.wk===t&&R.b===(b==null?R.b:b));
- if(cur&&R){kh=kh==null?j95kh():kh;const rows=Object.keys(R.P).map(id=>{const e=R.P[id][kh];return{id,name:(R.who[id]||[id])[0],role:(R.who[id]||["",""])[1],place:e[0],placeName:j95pn(e[0]),act:ACT95[e[1]]||e[1],tgt:e[2]?((R.who[e[2]]||[e[2]])[0]):"",why:e[3]||""}});return j95check(rows,R.m&&R.m[kh],{wk:R.wk,b:R.b,kh})}
+ if(cur&&R){kh=kh==null?j95kh():kh;const rows=Object.keys(R.P).map(id=>{const e=R.P[id][kh];return{id,name:(R.who[id]||[id])[0],role:(R.who[id]||["",""])[1],place:e[0],placeName:j95pn(e[0]),act:typeof j95sActW==="function"?j95sActW(e[1]):(ACT95[e[1]]||e[1]),tgt:e[2]?((R.who[e[2]]||[e[2]])[0]):"",why:e[3]||""}});return j95check(rows,R.m&&R.m[kh],{wk:R.wk,b:R.b,kh})}
  const L=S.rlog&&S.rlog.e&&S.rlog.e[t+"-"+(b||0)];if(!L)return{error:"không có sổ cho thời điểm này"};kh=kh||0;
  const rows=L.ids.map((id,i)=>{const q=L.s[i].length===8?L.s[i]:L.s[i].slice(kh*8,kh*8+8);const g=j=>parseInt(q.slice(j*2,j*2+2),36);const P=L.D.P[g(0)],T=L.D.T[g(2)];return{id,name:(S.rlog.who[id]||[id])[0],role:(S.rlog.who[id]||["",""])[1],place:P,placeName:L.pn[P]||P,act:L.D.A[g(1)],tgt:T?((S.rlog.who[T]||[T])[0]):"",why:L.D.W[g(3)]}});
  const m={};(L.m[kh]||"").split(",").filter(Boolean).forEach(x=>{const [k,n]=x.split(":");m[k]=+n});return j95check(rows,L.m[kh]?m:null,{wk:t,b,kh})}
@@ -70671,7 +70672,7 @@ function agWalk(a,b){try{const B=BAL.ag.kh2.rd;if(!agRdOn()||!((B.see||0)+(B.go|
 /* a servant who stands at pl in khắc kh tells her master (not the player — her own servants are part 2c's TIN BÁO) by her own choice */
 function agTell(R,pl,kh,why0,who,interest){const B=BAL.ag.kh2.rd;let n=0;let why=null;const wy=()=>why!=null?why:(why=typeof why0==="function"?why0():why0);/* ag-deed-perf: the line (a place name: places() through every wrapper) is built only when a servant tells */
  for(const id in R.P){if(!/^s\d+$/.test(id))continue;const e=R.P[id][kh];if(!e||e[0]!==pl)continue;const s=servById(+id.slice(1));if(!s||s.out)continue;const m=ownerOf(s);
-  if(!m||m===S||m===who||!m.alive||m.out)continue;const it=interest?interest(m):1;if(!(it>0))continue;
+  if(!m||m===S||m===who||!m.alive||m.out)continue;/* live servants (j95s): walking with her master, who stands right here and sees it herself — no news to carry */{const mr=R.P["v"+m.id];if(mr&&mr[kh]&&mr[kh][0]===pl)continue}const it=interest?interest(m):1;if(!(it>0))continue;
   const c=mindPick([["tell",B.tell*cl((s.loyal||0)/100,0,1)*it],["quiet",B.quiet]],s);if(c!=="tell")continue;
   const busy=q=>R.P[id][q]&&(/^ag_(?!tell$)/.test(R.P[id][q][1]||"")||AG_NOTFREE.has(R.P[id][q][1]));
   let ks=kh;while(ks+1<J95.KH&&busy(ks+1))ks++;/* busy with her own deed (or not hers): she sets off when it ends, never over a deed row (ag-kh2 G9) */
@@ -71109,6 +71110,270 @@ try{if(typeof agReg==="function"){agReg("maid","staff",(p,N)=>asOpts(p,N));agReg
  const aw0=amWeek;amWeek=function(){if(asOn())return"";return aw0.apply(this,arguments)};
 })();
 Object.assign(window,{asPlanDraw,asDo,asOn,asNeeds,asOpts,asDecide,asRun,asTick,asMonth,asSt,asSeekReact,asHitPick,asStaff,asGrp});
+/* ================= j95s LIVE SERVANTS + REASONED RECORD (owner OD 18/11 ~19:30Z, OD L1901 points 2 + 3; brief live-servants) =================
+   (2) Every maid / eunuch — HERS and everyone's (consorts, Hoàng hậu, Thái hậu's household) — lives her own day: a per-khắc plan of duties,
+       meals, breaks, errands, visits to a friend, her daily rest turn and sleep (the night watch by turns), each with its cause (law 6b real people).
+       When her mistress goes out she takes the people she PICKED for the day (owner OD 18/11 ~19:45Z (4), canon overwrite of the old rank retinue):
+       the player in the entourage picker (end of this file), every NPC mistress once a day by her own reasons (trait, formal place, mood; trust
+       picks who, BAL.slv.ent) — two-way law; the rest stay on their own plans.
+   (3) Every row of the ONE record (S.roster, j95) carries its real cause: the servants' rows name their plan / their mistress's order /
+       the retinue pick; a last guard replaces an empty or filler reason ("phận sự trong cung", "phận sự", "") of anyone with the cause read
+       from the row itself (her act, her target, the deed she walks to). Moves made after the plan (jagday deeds, events, j95fixHouse) are
+       written into the same rows by their own code; this pass keeps them (deed / tryst / meet / punished / walking rows are never overwritten).
+   One record, no copy: everything runs inside j95sync (wraps j95fixHouse, the last step before the views and the map counts), so S.where,
+   the Dư đồ counts (j95counts / countAt), the stage (j95ledStage) and dev/tools/roster.js all read these rows. Deterministic per buổi
+   (j95rng seeded by the life + buổi key + person: the same buổi always gives the same day, however often it is recomputed).
+   Off switch for measuring: BAL.slv.on = 0 (the old rows: close maid follows always, the others "phận sự trong cung").
+   ===================================================================================================================================== */
+Object.assign(BAL,{slv:{on:1,
+ /* ENTOURAGE (owner OD 18/11 ~19:45Z point (4), CANON OVERWRITE of the old "retinue size by rank"): the player picks HOW MANY and WHO follow her the first
+    time each day she leaves her palace (one picker a day, no adding once out); every NPC mistress picks the same way once a day by her own reasons.
+    The NPC's share of her present + free people she takes: base, × her trait (pomp-lovers take more, the discreet few), × formal (going before the
+    Emperor / Thái hậu: a fuller train), × moodLow when her mood is low; at least one when anyone is free (she never walks alone unless nobody is free);
+    trust picks WHO (weight = lòng ^ loyalP); the close maid first when free unless her trait says otherwise (Kín đáo / Xảo quyệt take only the trusted). */
+ ent:{base:.5,tr:{"Kiêu ngạo":1.8,"Ham vui":1.4,"Tham vọng":1.3,"Ân cần":1,"Khiêm nhường":.5,"Kín đáo":.3,"Xảo quyệt":.4,"Lạnh lùng":.6},formal:{dtd:1.5,thu:1.5,tn:1.5},moodLow:.6,loyalP:2,trustOnly:["Kín đáo","Xảo quyệt"],
+  /* her mood counts as low at emoGet v ≥ mood.v and a feeling of level ≥ mood.lv (emoLv: 2 = sad / afraid / worried / jealous, 3 = angry);
+     trust weight of a servant = max(lv.min, lòng (the close maid: lv.close; none recorded: lv.def)) / lv.unit, raised to loyalP */
+  mood:{v:40,lv:2},lv:{min:5,close:100,def:50,unit:50}},
+ /* her day: weights of each kind of khắc by canonical buổi slot 0 sáng · 1 trưa · 2 chiều · 3 tối (serve, clean, eat, brk = break, err = errand, vis = visit a friend, sleep) */
+ /* err + vis at khắc 0 = the share of buổi she spends out (one errand or visit, the whole buổi) */
+ day:[{serve:40,clean:30,eat:10,brk:5,err:15,vis:0,sleep:0},{serve:30,clean:10,eat:25,brk:20,err:10,vis:5,sleep:0},{serve:25,clean:20,eat:0,brk:15,err:20,vis:15,sleep:0},{serve:30,clean:5,eat:15,brk:10,err:0,vis:5,sleep:35}],
+ closeServe:2.5,/* the close maid serves her mistress this many times more often */
+ sleepFrom:2,/* tối: sleep only from this khắc (0-based) */
+ sleepJit:1,/* + 0..sleepJit khắc per servant and day (some go to bed later: the late shift) */
+ /* REST RHYTHM (MAIN 18/11 20:07Z, law 6b): each servant has ONE rest turn a day ("nghỉ theo lượt") in the buổi drawn by rest.buoi (canonical slot weights
+    sáng · trưa · chiều · tối), rest.len khắc long; the night watch rotates through the household day by day, and last night's watcher sleeps in the
+    first afterWatch khắc of sáng ("ngủ bù") */
+ rest:{buoi:[10,55,35,0],len:[1,2]},afterWatch:2,
+ /* WITNESSES + GOSSIP (owner OD 18/11 ~19:45Z): who stands at a place at a khắc sees what happens there (record rows: only her companions see her day);
+    servants who meet (same place + khắc, in one of gos.acts) pass what they know: p (in 100) × (1 + qv(gos.q, the teller)), at most gos.hop hands from
+    the eye-witness; each servant keeps gos.keep items, an item is forgotten after gos.days days. A servant who learns a thing tells her mistress by
+    the kn chain's tell / keep choice (jagknow knTell; to the player: a TIN BÁO "bao" line). */
+ gos:{p:30,q:{chuyen:1,trung:-.2,nhat:-.5,lanh:.2},hop:3,keep:24,days:3,acts:["eat","brk","shift","visit","errand","stay","clean","follow"]},
+ run:[1,2],/* one thing lasts 1..2 khắc */
+ err:{nvp:30,tyv:25,ksp:20,tgk:15},illTyv:3,/* errand places; Thái y viện × illTyv when her mistress is ill / with child */
+ friendAf:30,/* a colleague in another palace she visits = thiện cảm at least this */
+ night:1/* servants of a household on night watch (tối, the khắc others sleep) */}});
+Object.assign(ACT95,{brk:"nghỉ tay giữa phiên",stay:"ở lại trông cung",nightw:"canh đêm",shift:"nghỉ theo lượt"});
+/* (review FAIL 1, law 7) a servant's own deed (jagday / jagstaff slot, record act "ag_maid:<k>" / "ag_srv:<k>", k = an SRVA row of j42 or empTea) in
+   player words — never the code key on screen. Secret deeds (spy, betray, frame, poison, pil, love matters) read as her own business: whoever looks
+   (the picker, the map views) does not learn the secret for free (law 6a). dev/tools/roster.js reads this same table. */
+const J95S_DW={sweep:"quét dọn trong cung",tea:"dâng trà hầu chủ",follow:"theo hầu chủ",nvp:"đi lĩnh đồ",rite:"học lễ nghi với cô cô",study:"luyện thêu thùa, chữ nghĩa",groom:"chải chuốt, giữ nhan sắc",rest:"nghỉ lấy sức",embro:"thêu khăn đem bán",med:"mua thuốc bổ",books:"quản sổ sách trong cung",errand:"đi việc chủ sai",spy:"lo việc riêng",massage:"đấm bóp hầu chủ",askRew:"xin chủ ban thưởng",tellMis:"bẩm tin cho chủ",askRec:"xin chủ tiến cử",beside:"đứng hầu bên chủ",greet:"đi thỉnh an",betray:"lo việc riêng",accuse:"đi tố giác",chat:"trò chuyện với bạn đồng liêu",gift:"tặng quà bạn đồng liêu",ask:"nhờ bạn đồng liêu giúp",frame:"lo việc riêng",tonic:"đi lấy thuốc bổ",learn:"học nghề thuốc",hail:"chào hỏi người quen",flirt:"lo việc riêng",token:"lo việc riêng",tryst:"lo việc riêng",vow:"lo việc riêng",cut:"lo việc riêng",listen:"đi nghe ngóng cho chủ",scout:"tự đi dò la cho chủ",watch:"canh chừng cung chủ",poison:"lo việc riêng",pil:"lo việc riêng",leave:"xin chủ cho đi hầu cung khác",empTea:"dâng trà nơi Hoàng thượng ngự"};
+const J95S_DW0="lo việc riêng";/* any deed key still without a word (a new deed added later): never the key itself */
+/* THE ONE act word for every player view of a record row (picker reasons, j95sWhy, j95here / j95whereId, the dev query) */
+function j95sActW(a){a=a==null?"":String(a);const w=ACT95[a];if(w)return w;let m=/^ag_(?:maid|srv):(\w+)$/.exec(a);if(m&&J95S_DW[m[1]])return J95S_DW[m[1]];
+ m=/^ag_(\w+)$/.exec(a);try{if(m&&typeof AGACTW==="object"&&AGACTW[m[1]])return AGACTW[m[1]]}catch(e){}return /^[\x00-\x7f]*$/.test(a)?J95S_DW0:a}
+const J95S={stat:{life:0,ret:0,close:0,fallback:0,guard:0,keep:0},errs:[],guardBy:{}};
+function j95sOn(){try{return !!(BAL.slv&&BAL.slv.on)}catch(e){return false}}
+function j95sErr(w,e){try{if(J95S.errs.length<20)J95S.errs.push(w+": "+(e&&e.message||e))}catch(x){}}
+/* rows this pass never overwrites: a planned or landed deed, a secret meeting, a forced list (rest / Tân Giả khố / cấm túc / lãnh cung), a walk to a deed */
+function j95sKeep(x){if(!x)return false;const a=x[1]||"";return /^ag_/.test(a)||a==="tryst"||a==="meet"||a==="offduty"||a==="laundry"||a==="confined"||a==="cold"||a==="called"||(a==="go"&&!!x[3])}
+/* busy = she cannot be taken along now (a deed, a meeting, an errand or a visit of her own) */
+function j95sBusy(x){if(!x)return true;const a=x[1]||"";return j95sKeep(x)||a==="errand"||a==="visit"}
+/* place names (placeName is slow: ~30 µs) kept for the buổi (a palace's name changes with its head only at a new buổi / housing fix) */
+function j95sPn(k){const R=S.roster;const key=R?R.key:"";if(!J95S.pnc||J95S.pnc.key!==key||J95S.pnc.w!==S)J95S.pnc={key,w:S,M:new Map()};const M=J95S.pnc.M;let v=M.get(k);if(v==null){v=j95pn(k);M.set(k,v)}return v}
+function j95sRng(R,tag){return j95rng(j95hash(j95seed()+"|"+R.key+"|slv|"+tag))}
+function j95sPw(r,L){const T=L.reduce((s,x)=>s+Math.max(0,x[1]),0);if(!(T>0))return L.length?L[0][0]:null;let q=r()*T;for(const x of L){q-=Math.max(0,x[1]);if(q<=0)return x[0]}return L[L.length-1][0]}
+/* who a mistress is in a reason line */
+function j95sOw(o){if(o===S)return"ngươi";if(o==="th")return"Thái hậu";try{if(o.queen)return"Hoàng hậu"}catch(e){}return o&&o.name||"chủ"}
+function j95sOid(o){return o===S?"me":o==="th"?"th":"v"+o.id}
+/* her household: [{id, kind (mm | st | el), close, sv (the servant object or null), name}] — the record's people of that mistress */
+/* perf (outcome-identical): j95sv(id) scans every household's staff per call; one sid → servant table per call, built in j95sv's own order (first match wins) */
+function j95sSvTab(){const M=new Map();try{for(const p of [S].concat(rivals,(S.thO?[S.thO]:[])))for(const s of (p&&p.staff)||[])if(s&&!M.has(s.sid))M.set(s.sid,s)}catch(e){}return M}
+function j95sHouses(ppl){const H=new Map();const add=(o,q)=>{let h=H.get(o);if(!h){h=[];H.set(o,h)}h.push(q)};let SV=null;const sv=id=>{if(!SV)SV=j95sSvTab();const s=SV.get(+String(id).slice(1));return s===undefined?null:s};
+ for(const p of ppl){if(p.kind==="mm"||p.kind==="st"){const o=p.ref;if(!o)continue;if(o!==S&&(!o.alive))continue;add(o,{id:p.id,kind:p.kind,close:p.kind==="mm",sv:p.kind==="st"?sv(p.id):null,name:p.name,home:p.home})}
+  else if(p.kind==="el"&&p.ref&&!p.ref.eid&&p.home==="tn"&&!S.thDead)add("th",{id:p.id,kind:"el",close:false,sv:p.ref,name:p.name,home:"tn"})}
+ return H}
+/* ---------- her own day (per khắc, deterministic per buổi) ---------- */
+function j95sErrand(o,r){const B=BAL.slv.err;const L=[];let ill=false;try{ill=o!=="th"&&o!==S?!!(illOf(o)||o.preg):!!(o===S&&(illOf(S)||S.preg))}catch(e){}
+ for(const k in B){if(k==="nvp"&&!j95nvp())continue;L.push([k,B[k]*(k==="tyv"&&ill?BAL.slv.illTyv:1)])}const k=j95sPw(r,L);const ow=j95sOw(o);
+ const why=k==="nvp"?`${ow} sai đi lĩnh đồ ở Nội vụ phủ`:k==="tyv"?(ill?`${ow} không khỏe, sai đi lấy thuốc ở Thái y viện`:`${ow} sai đi lấy thuốc bổ ở Thái y viện`):k==="ksp"?`${ow} sai đi Kính sự phòng hỏi chuyện`:`mang đồ của ${ow} xuống Tân Giả khố giặt`;
+ return[k,"errand",null,why]}
+function j95sFriend(q,o){const s=q.sv;if(!s||!s.af)return null;let best=null,ba=BAL.slv.friendAf-1;
+ for(const k in s.af){const a=s.af[k];if(!(a>ba))continue;const x=J95S.sv?J95S.sv.get(+k):servById(+k);if(!x||x.out)continue;const m=ownerOf(x);if(!m||m===o||(m!==S&&(!m.alive||m.out)))continue;best=[x,m];ba=a}
+ if(!best)return null;const pk=palaceOf(best[1]);return[pk,"visit","s"+best[0].sid,`hết phiên, sang ${j95sPn(pk)} thăm bạn thân ${best[0].name}`]}
+function j95sServeWhy(c,ow){return ["hầu "+ow+" chải đầu, dâng trà sáng","dọn bữa trưa, hầu "+ow,"hầu "+ow+" buổi chiều","hầu "+ow+" dùng bữa tối, sửa soạn nghỉ"][c]||"hầu "+ow}
+/* ---------- the rest rhythm (MAIN 18/11 20:07Z): per servant and DAY — her rest turn, her bedtime, the household's night watch by turns ---------- */
+/* perf (outcome-identical): the rhythm is a pure function of (day, life seed, person, place in her household, household size, BAL.slv): memo per day */
+/* (perf, same answer) the BAL key string is rebuilt only when one of its parts changed (same arrays, same numbers): the joins were most of this call */
+function j95sRhSame(a,c){if(a.length!==c.length)return false;for(let i=0;i<a.length;i++)if(a[i]!==c[i])return false;return true}
+function j95sRhBs(B){const c=J95S.rhb,R=B.rest;if(c&&c.f===B.sleepFrom&&c.j===B.sleepJit&&c.n===B.night&&j95sRhSame(R.buoi,c.a)&&j95sRhSame(R.len,c.l))return c.bs;
+ const bs=R.buoi.join()+"/"+R.len.join()+"/"+B.sleepFrom+"/"+B.sleepJit+"/"+B.night;J95S.rhb={a:R.buoi.slice(),l:R.len.slice(),f:B.sleepFrom,j:B.sleepJit,n:B.night,bs};return bs}
+function j95sRhythm(q,ix,n){const d=j95sDay(),sd=j95seed(),B=BAL.slv;const bs=j95sRhBs(B);
+ const M=J95S.rh&&J95S.rh.d===d&&J95S.rh.sd===sd&&J95S.rh.bs===bs?J95S.rh.M:(J95S.rh={d,sd,bs,M:new Map()}).M;
+ const k=q.id+"|"+ix+"|"+n;let v=M.get(k);if(!v){v=j95sRhythm0(q,ix,n);M.set(k,v)}return Object.assign({},v)}
+function j95sRhythm0(q,ix,n){const B=BAL.slv;const d=j95sDay();const r=j95rng(j95hash(j95seed()+"|rest|"+d+"|"+q.id));
+ const c=j95sPw(r,B.rest.buoi.map((w,i)=>[i,w]));const len=B.rest.len[0]+Math.floor(r()*(B.rest.len[1]-B.rest.len[0]+1));const k0=Math.floor(r()*(4-len+1));
+ const sl=Math.min(3,B.sleepFrom+Math.floor(r()*(B.sleepJit+1)));const wn=Math.min(B.night,n);const rot=x=>((x%n)+n)%n;
+ let watch=false,slept=false;for(let i=0;i<wn;i++){if(rot(d+i)===ix)watch=true;if(rot(d-1+i)===ix)slept=true}
+ return{c,k0,len,sl,watch,slept:slept&&n>wn&&d>0}}/* d 0 = the first day of her life in the game: there was no night before (no "ngủ bù") */
+function j95sLife(R,q,o,hk,Y){const B=BAL.slv;const c=R.c;const r=j95sRng(R,q.id);const ow=j95sOw(o);const oid=j95sOid(o);const W=Object.assign({},B.day[c]||B.day[0]);const watch=Y.watch;
+ if(q.close)W.serve*=B.closeServe;if(!q.sv||q.kind==="el")W.vis=0;/* a visit needs a friend she has (servants with a thiện cảm book) */
+ const out=[];let i=0;
+ /* last night's watcher sleeps in at the start of sáng; the rest turn of the day; bedtime of the day (Y.sl) */
+ if(c===0&&Y.slept)for(;i<Math.min(4,B.afterWatch);i++)out.push([hk,"sleep",null,"ngủ bù sau phiên canh đêm đêm qua"]);
+ while(i<4){if(c===Y.c&&i===Y.k0&&i+Y.len<=4){for(let j=0;j<Y.len;j++,i++)out.push([hk,"shift",null,`đến lượt nghỉ của nàng (khắc ${Y.len>1?(Y.k0+1)+"–"+(Y.k0+Y.len):Y.k0+1}, mỗi ngày một lượt)`]);continue}
+  let w=Object.assign({},W);if(c!==3||i<Y.sl)w.sleep=0;else w={sleep:1};/* from her bedtime on she sleeps (the watcher keeps watch) */
+  if(c===Y.c)w.err=w.vis=0;/* her rest turn is in this buổi: she stays in */
+  /* a walk out of her palace (an errand, a visit to a friend) takes the whole buổi: she sets out and comes back with the buổi change, never
+     in the middle (her mistress's stage changes at the buổi change anyway; perf gate 4x per khắc) — at most one per buổi, decided at khắc 0 */
+  if(i>0)w.err=w.vis=0;let k=j95sPw(r,Object.entries(w));let len=B.run[0]+Math.floor(r()*(B.run[1]-B.run[0]+1));let row;
+  if(k==="err"||k==="vis")len=4;
+  if(k==="vis"){row=j95sFriend(q,o);if(!row)k="brk"}
+  if(k==="err")row=hk==="lc"?null:j95sErrand(o,r);if(k==="err"&&!row)k="clean";
+  if(k==="sleep"&&watch)row=[hk,"nightw",oid,`đến phiên canh đêm cho ${ow}`];
+  else if(k==="sleep")row=[hk,"sleep",null,`hết phiên, về phòng cung nhân ngủ (giờ ngủ của nàng: khắc ${Y.sl+1} buổi tối)`];
+  if(!row){row=k==="serve"?[hk,"serve",oid,j95sServeWhy(c,ow)]:k==="clean"?[hk,"clean",oid,`đến phiên quét dọn ${hk==="lc"?"chỗ ở của "+ow:j95sPn(hk)}`]:k==="eat"?[hk,"eat",null,"đến giờ cơm của cung nhân"]:[hk,"brk",null,"xong việc, nghỉ tay trong phòng cung nhân"]}
+  for(let j=0;j<len&&i<4;j++,i++){if(c===Y.c&&i===Y.k0&&i+Y.len<=4&&j>0)break;if(c===3&&i>=Y.sl&&k!=="sleep"&&j>0)break;out.push(row.slice())}}
+ return out}
+/* ---------- THE ENTOURAGE (owner OD 18/11 ~19:45Z (4)) — one pick a day per mistress: the player in the picker (below), every NPC by her own reasons ---------- */
+/* free = she can be taken along now: at her palace, not on a deed / meeting / errand / visit of her own, not asleep or on her rest turn */
+function j95sFree(x,hk){return !!x&&!j95sBusy(x)&&x[0]===hk&&x[1]!=="sleep"&&x[1]!=="nightw"&&x[1]!=="shift"}
+function j95sNotFree(x){if(!x)return"không có trong cung";const a=x[1]||"";if(a==="sleep")return"đang ngủ";if(a==="shift")return"đang nghỉ theo lượt";if(a==="nightw")return"đang canh đêm";
+ const w=j95sActW(a);return x[0]&&x[0]!=="home"&&!/^r\d+$/.test(x[0])?`${w} ở ${j95sPn(x[0])}`:`đang ${w}`}
+function j95sDay(){try{return wk()}catch(e){return 0}}
+/* the day's pick store (personal, lazy; old saves load): S.ent = the player's {d, ids, at}; S.entN = {d, P:{oid:{ids, why}}} the NPC mistresses' */
+function j95sEntN(){const d=j95sDay();if(!S.entN||S.entN.d!==d)S.entN={d,P:{}};return S.entN}
+/* an NPC mistress picks once a day at her first outing: how many by her reasons (trait, formal place, mood), who by trust */
+function j95sNpcPick(R,o,oid,H,k,free){const B=BAL.slv.ent;const r=j95rng(j95hash(j95seed()+"|ent|"+j95sDay()+"|"+oid));let tr=[];try{tr=o==="th"?traitsOf("th"):traitsOf(o)}catch(e){}
+ let f=B.base,why=[];for(const t of tr)if(B.tr[t]!=null){f*=B.tr[t];why.push(t.toLowerCase())}
+ if(B.formal[k]){f*=B.formal[k];why.push("đi chầu nên cần đủ lễ")}
+ try{const e=o!=="th"&&typeof emoGet==="function"?emoGet(o):null;if(e&&e.v>=B.mood.v&&emoLv(e.k)>=B.mood.lv){f*=B.moodLow;why.push("tâm trạng không vui")}}catch(x){}
+ if(!free.length)return{ids:[],why:"không ai rảnh"};
+ const n=Math.max(1,Math.min(free.length,Math.round(free.length*Math.min(1,f)+(r()-.5))));
+ const trust=tr.some(t=>B.trustOnly.includes(t));const cl=free.find(q=>q.close);const mem=[];
+ const lv=q=>Math.max(B.lv.min,q.close?B.lv.close:((q.sv&&q.sv.loyal)||B.lv.def));const lw=q=>Math.pow(lv(q)/B.lv.unit,B.loyalP);
+ if(cl)mem.push(cl);/* the close maid first when she is free */
+ const pool=free.filter(q=>!mem.includes(q));if(trust)pool.sort((x,y)=>lv(y)-lv(x));/* the discreet / scheming take the most trusted, no chance */
+ while(mem.length<n&&pool.length){const q=trust?pool[0]:j95sPw(r,pool.map(x=>[x,lw(x)]));mem.push(q);pool.splice(pool.indexOf(q),1)}
+ const ow=j95sOw(o);const cBusy=H.find(q=>q.close&&!free.includes(q));
+ const w=(cBusy?`cung nữ thân cận ${cBusy.name} không rảnh, `:"")+`${ow} chọn ${mem.length===H.length&&H.length>1?"cả "+mem.length+" người":mem.length+" người"} theo hầu`+(why.length?` (${why.join(", ")})`:"")+(trust?", chỉ người tin cẩn":"");
+ return{ids:mem.map(q=>q.id),why:w}}
+/* the player's pick of today, or (no picker today: a summons, an event moved her) the NPC rule for her too, said so in the reason */
+function j95sPickOf(R,o,oid,H,k,free){const d=j95sDay();
+ if(o===S){const E=S.ent;if(E&&E.d===d)return{ids:(E.ids||[]).slice(),why:E.ids&&E.ids.length?`ngươi chọn ${E.ids.length} người theo hầu hôm nay`:"ngươi đi một mình hôm nay",me:1};
+  const P=j95sNpcPick(R,o,oid,H,k,free);P.why="ngươi đi gấp, không kịp chọn: "+P.why.replace(/^.*?ngươi chọn/,"theo lệ chọn");return P}
+ /* stored once she really takes someone; nobody free at this outing → she walks alone now and picks at her next outing */
+ const N=j95sEntN();if(N.P[oid])return N.P[oid];const P=j95sNpcPick(R,o,oid,H,k,free);if(P.ids.length)N.P[oid]=P;return P}
+function j95sPick(R,o,oid,H,k,s0,base,kh,prev){
+ /* an outing already under way (started before this khắc): those already walking with her stay with her */
+ if(prev&&prev.length)return{mem:H.filter(q=>prev.includes(q.id)&&!j95sBusy(base[q.id][kh])),why:null};
+ const at=Math.max(s0,kh);const free=H.filter(q=>j95sFree(base[q.id][at],q.home));const P=j95sPickOf(R,o,oid,H,k,free);
+ /* the day's pick ∩ who is still free now (a picked maid called away by a deed does not walk; nobody is added once out) */
+ const mem=H.filter(q=>P.ids.includes(q.id)&&free.includes(q));const gone=H.filter(q=>P.ids.includes(q.id)&&!free.includes(q));
+ return{mem,why:P.why+(gone.length?`; ${gone.map(q=>q.name+" "+j95sNotFree(base[q.id][at])).join(", ")}`:"")}}
+function j95sPass(R,kh,ppl){if(!j95sOn())return 0;const t0=performance.now();let n=0;const st=J95S.stat;const H=j95sHouses(ppl);
+ /* nothing changed since the last pass (same buổi and khắc, same places of every mistress, same households and planned deeds, and her
+    people's rows are still the ones written then): skip — j95sync runs several times per khắc (perf gate: 4x per-khắc ≤ +10 %) */
+ let dOn=false;try{dOn=typeof agDOn==="function"&&agDOn()}catch(e){}let sig=R.key+"|"+(S.ent&&S.ent.d===j95sDay()?S.ent.ids.join(","):"-");const mem=[];
+ for(const [o,hh] of H){const oid=j95sOid(o);const op=R.P[oid];sig+="|"+oid+":";if(op)for(let i=0;i<4;i++)sig+=(op[i]&&op[i][0])+",";sig+=":";
+  for(const q of hh){sig+=q.id+"/"+q.home;if(dOn&&q.kind==="st"){const sl=agDaySlot(q.id);if(sl&&sl.k)sig+="/"+sl.k}sig+=",";mem.push(q.id)}}
+ const LS=J95S.last;if(LS&&LS.R===R&&LS.sig===sig){let same=true;for(const id of mem){const e=R.P[id],w=LS.rows[id];if(!e||!w){same=false;break}for(let i=0;i<4;i++){const x=e[i],y=w[i];if(x!==y&&(!x||!y||x[0]!==y[0]||x[1]!==y[1]||x[2]!==y[2]||x[3]!==y[3])){same=false;break}}if(!same)break}
+  if(same){J95S.skip=(J95S.skip||0)+1;J95S.ms=(J95S.ms||0)+performance.now()-t0;return 0}}
+ 
+ J95S.sv=new Map();try{for(const x of allServ())if(x&&x.sid!=null)J95S.sv.set(x.sid,x)}catch(e){}
+ /* her day is the same all buoi long (seeded): computed once per buổi and person */
+ if(!J95S.lc||J95S.lc.key!==R.key||J95S.lc.w!==S)J95S.lc={key:R.key,w:S,L:{}};const LC=J95S.lc.L;
+ for(const [o,hh] of H){const oid=j95sOid(o);if(o===S&&typeof isSrv==="function"&&isSrv())continue;
+  const op=R.P[oid];const hk0=hh[0].home;if(!op)continue;
+  /* her people's own rows first (kept rows stay, the rest = their day); one servant per household keeps the night watch */
+  const base={};
+  hh.forEach((q,ix)=>{const e=R.P[q.id];if(!e)return;const hk=q.home;let L=null;
+   /* a deed she planned for this buổi (jagday / jagstaff slot) is where she is */
+   try{if(q.kind==="st"&&typeof agDOn==="function"&&agDOn()){const sl=agDaySlot(q.id);if(sl&&sl.k)L=agRow(sl)}}catch(x){}
+   if(!L&&hk!=="lc"){const Y=j95sRhythm(q,ix,hh.length);const ck=q.id+"|"+hk+"|"+[Y.c,Y.k0,Y.len,Y.sl,Y.watch?1:0,Y.slept?1:0].join(",");L=LC[ck]||(LC[ck]=j95sLife(R,q,o,hk,Y))}
+   const b=[];for(let i=0;i<4;i++){const x=e[i];b.push(i<kh||j95sKeep(x)||!L?x:L[i])}base[q.id]=b});
+  /* her outings from this khắc on: runs of khắc away from home */
+  const away=i=>{const k=op[i]&&op[i][0];return !!k&&k!==hk0&&k!=="lc"&&k!==J95OUT_&&hk0!=="lc"};
+  const ret={};/* id → [i...] */const why={};
+  for(let i=kh;i<4;){if(!away(i)){i++;continue}const k=op[i][0];let s0=i;while(s0>0&&op[s0-1]&&op[s0-1][0]===k)s0--;let e0=i;while(e0+1<4&&op[e0+1]&&op[e0+1][0]===k)e0++;
+   let prev=null;if(s0<kh){prev=hh.filter(q=>{const x=R.P[q.id]&&R.P[q.id][kh-1];return x&&x[1]==="follow"&&x[2]===oid}).map(q=>q.id)}
+   const P=j95sPick(R,o,oid,hh,k,s0,base,kh,prev);const ow=j95sOw(o);
+   for(const q of P.mem){const w=prev&&prev.length?`theo hầu ${ow} ở ${j95sPn(k)} (đi cùng từ đầu)`:`${ow} sang ${j95sPn(k)}: ${P.why}`;
+    for(let j=Math.max(i,kh);j<=e0;j++){if(j95sKeep(base[q.id][j]))break;/* only a deed / meeting takes her away mid-outing; her own day waits */(ret[q.id]=ret[q.id]||{})[j]=[k,"follow",oid,w]}
+    st.ret++;if(q.close)st.close++}
+   i=e0+1}
+  /* write: retinue rows, else her day (while her mistress is out, serving = staying behind to keep the palace) */
+  for(const q of hh){const e=R.P[q.id],b=base[q.id];if(!e||!b)continue;for(let i=kh;i<4;i++){let x=ret[q.id]&&ret[q.id][i];
+    if(!x){x=b[i];if(!j95sKeep(x)&&away(i)&&(x[1]==="serve"||x[1]==="follow"))x=[q.home,"stay",oid,`${j95sOw(o)} sang ${j95sPn(op[i][0])}, ở lại trông cung`]}
+    if(!x)continue;if(!e[i]||e[i][0]!==x[0]||e[i][1]!==x[1]||e[i][2]!==x[2]||e[i][3]!==x[3]){e[i]=x;n++}st.life++}}}
+ const rows={};for(const id of mem)if(R.P[id])rows[id]=R.P[id].map(x=>x&&x.slice());J95S.last={R,sig,rows};
+ J95S.ms=(J95S.ms||0)+performance.now()-t0;J95S.calls=(J95S.calls||0)+1;return n}
+/* ---------- (3a) the reason guard: no empty or filler reason in the record ---------- */
+const J95S_FILL=new Set(["","phận sự trong cung","phận sự"]);
+function j95sWhy(R,id,i,x,kind){const a=x[1]||"",k=x[0],t=x[2];const tn=t?((R.who[t]||[t])[0]):"";const pn=j95sPn(k);
+ if(a==="go"){for(let j=i+1;j<4;j++){const y=R.P[id][j];if(y&&y[0]===k&&y[1]!=="go")return`đang đến ${pn} để ${j95sActW(y[1])}`}return`đang đi đến ${pn}`}
+ if(/^ag_/.test(a))return`việc nàng tự định trong ngày: ${j95sActW(a)}${tn?" với "+tn:""}`;
+ if(kind==="man"){const m=(S.men||[]).find(z=>z.id===id);const rw=m&&m.rw;return rw==="thái y"?"phiên trực ở Thái y viện":rw==="thị vệ"?"phiên canh gác trong cung":rw?`được triệu vào cung (${rw})`:"được triệu vào cung"}
+ if(a==="serve"||a==="clean")return`${ACT95[a]}${tn?" cho "+tn:""} theo lịch trong ngày`;
+ if(a==="rest"||a==="here")return k==="home"||/^r\d+$/.test(k||"")?"ở cung mình nghỉ ngơi":`nghỉ ở ${pn}`;
+ return`${a?j95sActW(a):"ở"} ở ${pn}`}
+function j95sGuard(R,kh,ppl){let n=0;let K=null;const OK=J95S.ok||(J95S.ok=new WeakSet());/* a row checked once is not checked again (rows are replaced, never edited in place) */
+ for(const id in R.P){if(id==="me")continue;const e=R.P[id];for(let i=kh;i<4;i++){const x=e[i];if(!x)continue;{const w0=x[3];/* (perf, same answer) a real reason (a string, not filler, no edge blanks) is never touched: skip before the WeakSet */if(typeof w0==="string"&&w0.length>8&&w0!=="phận sự trong cung"&&w0.charCodeAt(0)>32&&w0.charCodeAt(w0.length-1)>32)continue}if(OK.has(x))continue;OK.add(x);if(!x[0]||x[0]===J95OUT_)continue;const w=x[3]==null?"":String(x[3]).trim();if(!J95S_FILL.has(w))continue;
+   if(!K){K={};for(const p of ppl)K[p.id]=p.kind}
+   const nw=j95sWhy(R,id,i,x,K[id]);if(nw&&nw!==w){e[i]=[x[0],x[1],x[2],nw];n++;J95S.guardBy[K[id]||id[0]]=(J95S.guardBy[K[id]||id[0]]||0)+1}}}
+ J95S.stat.guard+=n;return n}
+/* her party at a place = herself and every one of her people walking with her (not shadows, not drawn as others: the map counts the people
+   she would MEET there) — was: only her close maid (j95party) */
+(function(){const p0=j95party;j95party=function(id,k){if(id==="me")return true;/* cheap rejects first: countAt asks this for every person at every place */
+ if(k!==S.place||k==="home"||!id||(id[0]!=="s"&&id[0]!=="m"))return false;/* (perf, same answer: p0 = "me", or "mm:me" here at a place ≠ home — both met above) */if(p0(id,k))return true;if(!BAL.slv.on)return false;try{const R=S.roster;const e=R&&R.P[id];if(!e)return false;const x=e[j95kh()];return !!(x&&x[1]==="follow"&&x[2]==="me"&&x[0]===k&&R.key===j95key())}catch(e){return false}}})();
+/* a record never synced yet (R.kh unset: just planned, nothing shown) is written from khắc 0 — else the khắc before the first sync would keep the raw plan */
+(function(){const f0=j95fixHouse;j95fixHouse=function(R,kh,ppl){let n=f0.apply(this,arguments)||0;const k0=R&&R.kh==null?0:kh;try{n+=j95sPass(R,k0,ppl)}catch(e){j95sErr("pass",e)}try{n+=j95sGuard(R,k0,ppl)}catch(e){j95sErr("guard",e)}return n}})();
+window.__j95s=()=>({stat:J95S.stat,guardBy:J95S.guardBy,errs:J95S.errs,ms:+(J95S.ms||0).toFixed(1),calls:J95S.calls||0,skip:J95S.skip||0});
+/* READ API for the Dư đồ levels (map-zones: zone → palace → Chính điện / Đông viện / Tây viện → place view): who is at place k now (or at khắc kh),
+   read from the ONE record — never a private copy. Each: {id, name, role, act, tgt, why, vis} (vis = counted as a bóng by j95vis, same as the map). */
+function j95here(k,kh){try{const R=S.roster;if(!R||R.key!==j95key()||!k)return[];kh=kh==null?j95kh():kh;const L=[];
+ for(const id in R.P){const x=R.P[id][kh];if(!x||!j95at(x[0],k))continue;L.push({id,name:(R.who[id]||[id])[0],role:(R.who[id]||["",""])[1],act:j95sActW(x[1]),tgt:x[2]?((R.who[x[2]]||[x[2]])[0]):"",why:x[3]||"",vis:j95vis(id,x[0])})}
+ return L}catch(e){return[]}}
+/* where one person is now: {place, placeName, act, tgt, why, kh} (her maids by record id: "mm:me", "s<sid>") */
+function j95whereId(id,kh){try{const R=S.roster;if(!R||R.key!==j95key())return null;kh=kh==null?j95kh():kh;const x=R.P[id]&&R.P[id][kh];if(!x)return null;
+ return{place:x[0],placeName:j95sPn(x[0]),act:j95sActW(x[1]),tgt:x[2]?((R.who[x[2]]||[x[2]])[0]):"",why:x[3]||"",kh}}catch(e){return null}}
+Object.assign(window,{j95here,j95whereId});
+/* ================= THE PLAYER'S ENTOURAGE PICKER (owner OD 18/11 ~19:45Z point (4), verbatim in the brief) =================
+   The FIRST time in a day she leaves her palace (a place tapped on Dư đồ, or an act that walks her there), ONE card asks who follows her: any number,
+   up to all her people who are at the palace AND free now (close maid + maids + eunuchs); one who is out, asleep, on her rest turn or busy is shown
+   greyed with the reason (kit GREYED OPTION, jgrey kitOff). Tap a person = picked / not picked (kit option row + the kit selection outline .ksel,
+   aria-pressed, the same pattern as the identity card's road choice). "Lên đường" walks with the picked ones, "Đi một mình" alone, "Thôi" = she stays
+   (the card comes again on her next departure). Once she has left, the picker does not come back that day (no adding people once out); the pick
+   holds for every outing of the day (each time: the picked ones who are still free). Store: S.ent = {d: day, ids, at}. Kit parts only (dialog card,
+   option rows, .ksel, kitOff). Gain and loss (law 3): who walks with her sees what she sees (more eyes: news reaches her from them, jagknow), and
+   knows what she does there (more mouths: they may tell it on, the gossip chain); who stays keeps the palace. Two-way: NPC mistresses pick by
+   j95sNpcPick. Off in co-op (j95on false: the record is off there) and for a servant start (isSrv) / a home life (isKc). */
+function j95sMine(){const R=S.roster;if(!R||R.key!==j95key())return[];const kh=j95kh();const L=[];
+ const add=(id,s,role,close)=>{const e=R.P[id];if(!e)return;const x=e[kh];L.push({id,s,name:s.name,role,close,x,free:j95sFree(x,"home")})};
+ if(S.maid&&S.maid.name)add("mm:me",S.maid,"Cung nữ thân tín",true);
+ for(const s of S.staff||[])if(s&&!s.out&&s.sid!=null)add("s"+s.sid,s,s.role==="eunuch"?"Thái giám":"Cung nữ",false);
+ return L}
+const J95S_ENT_T=["Hôm nay ra khỏi cung, ngươi dẫn ai theo? Chọn bao nhiêu người cũng được, trong những người đang ở cung và rảnh. Đã đi rồi thì hôm nay không gọi thêm người được nữa.","Người theo hầu thấy những gì ngươi thấy, có thêm tai mắt cho ngươi; nhưng họ cũng biết việc ngươi làm và có thể kể lại với người khác. Người ở lại trông cung."];
+function j95sEntAsk(k){const L=j95sMine();if(!L.some(p=>p.free))return false;/* nobody free: no card, she goes alone; the card comes at her next departure */
+ const opts=L.map(p=>{const c={n:p.name,fx:{},entId:p.id,sel:p.free&&p.close,x:`(${p.role.toLowerCase()}, lòng ${Math.round(p.s.loyal||0)}${p.free?", đang ở cung và rảnh":""})`};/* not free: her reason is the Cần row (kitOff), never repeated here *//* a person's status = neutral info: the kit Ghi chú row (a whole "(…)" value), the same for every person row (review FAIL 3) */
+  if(!p.free)kitOff(c,j95sNotFree(p.x),"không theo được hôm nay");return c});
+ const go=ids=>{S.ent={d:j95sDay(),ids,at:k};let ok=false;try{goTo(k);ok=S.place!=="home"||Q.length>0}catch(e){j95sErr("ent",e)}if(!ok)delete S.ent;/* she did not leave (a gate, no khắc): the card comes again */};
+ const goOpt={n:"Lên đường",fx:{},entGo:1,x:"",go:()=>go(opts.filter(c=>c.entId&&c.sel&&!c.off).map(c=>c.entId))};
+ opts.push(goOpt,{n:"Đi một mình",fx:{},x:"thành: việc ngươi làm bên ngoài được giữ kín, mọi người ở lại trông cung · mất: không ai thấy giùm ngươi",go:()=>go([])},{n:"Thôi",fx:{},x:""});
+ j95sEntX(opts);
+ /* no `who`: a list of her people, nobody speaks — a person pop-up always carries the event banner (KIT 50 / OD:L448), and law 10 allows a big
+    picture only when the content fits without scrolling (review FAIL 4); the people are the option rows themselves */
+ Q.push({t:"Chọn người theo hầu",h:`<p>${J95S_ENT_T[0]}</p><p class="past">${J95S_ENT_T[1]}</p>`,opts,entp:1,pid:"entpick"});/* a picker she opened herself (her tap on Dư đồ), not an event: the kit act-picker switch (jk2b KIT_ACT_PIDS, as jpoison / jts) = no event picture (law 10: the list scrolls) */
+ showModal();return true}
+try{KIT_ACT_PIDS.add("entpick")}catch(e){}
+function j95sEntX(opts){const g=opts.find(c=>c.entGo);if(!g)return;const n=opts.filter(c=>c.entId&&c.sel&&!c.off);
+ g.x=n.length?`thành: ${n.length} người theo (${n.map(c=>c.n).join(", ")}), thấy giùm ngươi những gì xảy ra · mất: họ biết việc ngươi làm, có thể kể lại với người khác`:"(chưa chọn ai, bấm vào tên để chọn người theo)";
+ if(!n.length)kitOff(g,"chưa chọn ai","bấm vào tên người muốn dẫn theo");else delete g.off}
+/* the picked rows wear the kit selection outline; a tap on a person toggles her (the card stays open) */
+function j95sEntMark(){const m=Q[0];if(!m||!m.entp)return;document.querySelectorAll("#modal .opt[data-m]").forEach(b=>{const c=m.opts[+b.dataset.m];if(!c||!c.entId)return;b.classList.toggle("ksel",!!c.sel);b.setAttribute("aria-pressed",c.sel?"true":"false")})}
+/* the kit's event-art lookup (jk4 kitEvArt) tags any shown item with a guessed evId (text "tai mắt" → cat:tu-tinh); on the re-render after a tap
+   that tag would pull the event picture onto this act picker (jk2b want = …||m.evId) — the picker is not an event (KIT_ACT_PIDS), so the guess is
+   dropped before each render (KIT REQUEST filed: dev/kit/KIT_REQUESTS.md "kitEvArt evId tag on act pickers") */
+(function(){const s0=showModal;showModal=function(){try{const m=Q[0];if(m&&m.entp)delete m.evId}catch(e){}const r=s0.apply(this,arguments);try{j95sEntMark()}catch(e){}return r}})();
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("#modal .opt[data-m]");if(!b)return;const m=Q[0];if(!m||!m.entp)return;const c=m.opts[+b.dataset.m];if(!c||!c.entId)return;
+ e.preventDefault();e.stopImmediatePropagation();if(c.off)return;c.sel=!c.sel;j95sEntX(m.opts);showModal()},true);
+/* the gate: her first departure of the day from her palace asks first (inner gates — access card, walk — still run when she really goes) */
+function j95sEntNeed(k){try{if(!j95sOn()||!j95on()||!S||S.dead||S.out||S.confined||Q.length)return false;if(!k||k==="home"||S.place!=="home"||k===S.place)return false;
+  if(window.__accSilent||window.__accStay||window.__j95sEntOff)return false;if(typeof isSrv==="function"&&isSrv())return false;if(typeof isKc==="function"&&isKc())return false;
+  if(S.ent&&S.ent.d===j95sDay())return false;if(typeof accessOf==="function"){const a=accessOf(S,k);if(a&&!a.ok)return false}return true}catch(e){return false}}
+(function(){const g0=goTo;goTo=function(k){if(j95sEntNeed(k)&&j95sEntAsk(k))return;return g0.apply(this,arguments)}})();
+Object.assign(window,{j95sMine,j95sEntAsk});
 /* ================= jagharm: AG-ALL part C — the player's SCHEME / HARM acts as every consort's own options + AG-HAP ('!' from real deeds) =================
    Owner (verbatim, OD 17/11 ~13:20Z, L1588): "NPC sống tức là họ có thể có những cái option, có những cái nút chọn y chang tôi luôn mà."
    Owner (verbatim, OD 17/11 ~13:15Z, L1587): "cái dấu chấm than lấy từ chính hành động của nhân vật đi ... sẽ có những ngày rất là êm đềm ... sẽ có những cái
@@ -71499,6 +71764,10 @@ function knThere(id,h,w){const now=agKh();if(now<w[0])return false;for(let kh=w[
 function knSlotK(s){try{const sl=typeof agDaySlot==="function"?agDaySlot("s"+s.sid):null;if(sl&&sl.k)return sl.k;const P=S.agS&&S.agS.d===wk()&&S.agS.P[s.sid];const x=P&&P[Math.min(3,S.buoi||0)];return x&&x.k||""}catch(e){return""}}
 function knSrvKnows(s,m,h,w,hid){const sk=knSid(s,m);
  /* the confidant maid has no row and no plan: she is about her mistress's errands all day and listens on her own (the "Nghe ngóng" odds × her lòng) */
+ /* live servants (j95s, owner OD 18/11 ~19:45Z (4)): she has a row now — she knows it only where she stood (with her mistress when picked to follow,
+    at the palace otherwise); out on an errand or a visit she may overhear it on the way (the same "Nghe ngóng" odds) */
+ if(s.sid==null&&knwMid(s,m)){const mid=knwMid(s,m);if(knThere(mid,h,w))return"here";const R=agRec();const x=R&&R.P[mid]&&R.P[mid][Math.min(agKh(),J95.KH-1)];
+  return x&&(x[1]==="errand"||x[1]==="visit")&&knHit("l"+sk+"|"+hid,odA(s,SRVA.listen.o(s))*cl(s.loyal||0,0,100)/100)?"listen":""}
  if(s.sid==null)return knHit("l"+sk+"|"+hid,odA(s,SRVA.listen.o(s))*cl(s.loyal||0,0,100)/100)?"listen":"";
  if(knThere("s"+s.sid,h,w))return"here";const k=knSlotK(s);
  if(/:watch$/.test(k)&&m&&h.k===palaceOf(m))return"watch";
@@ -71521,7 +71790,7 @@ function knFor(x,h,noFriend){if(!x)return null;const hid=knHid(h);const M=knMemo
  const now=agKh(),D=knRelay();
  if(!r){for(const s of knStaff(x)){const how=knSrvKnows(s,x,h,w,hid);if(!how)continue;const q=Math.max(how==="here"&&s.sid!=null?knFirst("s"+s.sid,h,w):w[0],w[0]);
    /* the confidant maid walks with her mistress (one khắc to step aside and tell); any other servant walks from where she saw / heard it */
-   const at=q+(s.sid==null?Math.min(1,D):knWalkTo(knSrvFrom(s,how,h),id,q));if(at>now){KN.stat.wait=(KN.stat.wait||0)+1;continue}/* still on her way to tell */if(knTell(s,x,hid)==="tell"){r={by:"s"+knSid(s,x),how,s,at};break}}}
+   const at=q+(s.sid==null&&!knwMid(s,x)?Math.min(1,D):knWalkTo(knSrvFrom(s,how,h),id,q));if(at>now){KN.stat.wait=(KN.stat.wait||0)+1;continue}/* still on her way to tell */if(knTell(s,x,hid)==="tell"){r={by:"s"+knSid(s,x),how,s,at};break}}}
  if(!r){let o=0;try{o=oSee(x,false)*knB().eye/100}catch(e){}if(knHit("e"+id+"|"+hid,o)){const at=w[0]+knWalkTo(h.k,id,w[0]);/* her Tai mắt / a passer-by walks from the place to her */if(at<=now){r=knEye(x,h,hid);if(r)r.at=at}}}
  if(!r&&!noFriend){const F=knB().friend;for(const v of liveRivals(true)){if(v===x||!v.alive||v.out)continue;const a=aff(v,x);if(a<F)continue;/* the news travels when they meet (same place this khắc), or a close friend sends word (aff ≥ close) */const meet=(()=>{const nw=agKh();return knAt(id,nw)!=null&&knAt("v"+v.id,nw)===knAt(id,nw)})();if(a<knB().close&&!meet)continue;const k=knFor(v,h,true);if(!k||k.by==="le"||k.how==="self")continue;
    let fa=now;if(!meet&&D>0){const ka=M.at["v"+v.id+"|"+hid+"|n"];if(ka==null)continue;fa=ka+knWalkTo(knAt("v"+v.id,ka),id,ka);if(fa>now)continue}/* sending word: her messenger's real walk from where she was when she knew to x (AG-ALL-2d4) */
@@ -71917,6 +72186,83 @@ function knSellArc(A,ok){if(!ok||!knOn())return"";const r=knSellPick(S);if(!r)re
  try{if(typeof GB67==="object"&&GB67.spy&&GB67.spy.o){for(const i of [0,1]){const op=GB67.spy.o[i];if(!op)continue;const g0=op.go;op.go=function(A,ok){let a="";try{a=g0?g0.apply(this,arguments)||"":""}catch(e){}return [a,knSellArc(A,ok)].filter(Boolean).join(" ")}}}}catch(e){}
 })();
 Object.assign(window,{btTerms,btRaw,btOdds,tmFear,knSellNews,knSellPick,knSellGive,knSellCard,knSellNpcBuy,knSellTick,knSellPrice,knSellArc});
+
+/* ================= WITNESSES + GOSSIP — the per-servant knowledge record (owner OD 18/11 ~19:45Z (4); brief live-servants #2) =================
+   Owner (verbatim): "Chỉ có những người mình dẫn theo thì mới biết được những cái thông tin mà mình thấy ngay ngày hôm đó ... sẽ có cung nữ biết chuyện
+   này, sẽ có cung nữ biết chuyện kia đó. Rồi nhiều khi họ truyền tay nhau, bởi vì cái tính người ta nhiều chuyện đó, thì về người ta mới kể lại".
+   ONE record S.knw (personal, lazy; old saves load): I = the things that happened {w what, pl place, wk day, b buổi, kh khắc, ab about whom},
+   K[record id] = {item: [from, hop]} — who knows what, from whom ("saw" = she stood there; else the record id of the one who told her).
+   1. SEEN: a deed that lands (agLand, every NPC's deed; twDo for the player's own shared deeds) is seen by every servant whose record row stands at
+      that place at that khắc (not asleep): her companions see her day, those left at home do not (rows from j95s: the picked entourage).
+   2. GOSSIP: each khắc, servants who stand at one place in a talking act (BAL.slv.gos.acts: meals, breaks, rest turn, visits, errands, keeping the
+      palace, walking in a train) pass what they know: p × (1 + qv(gos.q, the teller)) (a chatty one more, a timid one less), at most gos.hop hands.
+   3. TOLD UP: a servant who learns a thing (seen or heard) tells HER mistress by the chain's own choice (knTell: tell / keep / sell by lòng and nết),
+      unless the mistress was there or it is about herself; the player gets it as a TIN BÁO "bao" line in the servant's voice (knBao); an NPC
+      mistress then knows it (K["v<id>"]). Two-way: the same rule for every household. Numbers BAL.slv.gos (j95s). */
+function knwOn(){try{return knOn()&&typeof j95sOn==="function"&&j95sOn()&&j95on()}catch(e){return false}}
+function knwMid(s,m){try{if(!m||!(typeof j95sOn==="function"&&j95sOn()))return"";if(m===S&&S.maid===s)return"mm:me";if(m!==S&&m.maid===s)return"mm:"+m.id;return""}catch(e){return""}}
+function knwSt(){const d=wk();const Z=S.knw||(S.knw={I:{},K:{},n:0,d});if(Z.d!==d){Z.d=d;const G=BAL.slv.gos;for(const i in Z.I)if(Z.I[i].wk<d-G.days)delete Z.I[i];for(const k in Z.K){for(const i in Z.K[k])if(!Z.I[i])delete Z.K[k][i];if(!Object.keys(Z.K[k]).length)delete Z.K[k]}Z.seen={}}return Z}
+function knwSrv(id){return /^s\d+$/.test(id)||id.indexOf("mm:")===0}
+/* perf (outcome-identical, live-servants #3): knwObj memo for ONE gossip pass (a pure lookup: j95sv + ownerOf), and qv of a servant whose nết is
+   already drawn read from a table by her nết (traitsOf(s) = s.net then, so qv is a pure function of it; a servant whose nết is not drawn yet goes
+   through qv itself, so its lazy draw happens exactly when it did) */
+let KNWO=null;const KNWQ=new WeakMap();
+function knwQv(tbl,s){try{if(s&&typeof s==="object"&&trRes(s)===s&&s!==S&&s.kind!=="emp"&&s.kind!=="th"&&s!==S.emp&&netOk(s.net,netSex(s))){let M=KNWQ.get(tbl);if(!M){M=new Map();KNWQ.set(tbl,M)}
+  const k=s.net[0]+"|"+s.net[1]+"|"+s.net[2];let v=M.get(k);if(v===undefined){v=qv(tbl,s,0);M.set(k,v)}return v}}catch(e){}return qv(tbl,s,0)}
+function knwObj(id){if(KNWO){if(KNWO.has(id))return KNWO.get(id);const o=knwObj0(id);KNWO.set(id,o);return o}return knwObj0(id)}
+function knwObj0(id){try{if(id==="mm:me")return{s:S.maid,m:S};if(id.indexOf("mm:")===0){const v=RV(+id.slice(3));return v&&v.maid?{s:v.maid,m:v}:null}const s=KNWO&&typeof j95sSvTab==="function"?knwSvT(id):j95sv(id);return s?{s,m:ownerOf(s)}:null}catch(e){return null}}
+/* the gossip pass's sid → servant table (j95sSvTab: j95sv's own order, first match) */
+function knwSvT(id){if(!KNWO.sv)KNWO.sv=j95sSvTab();const s=KNWO.sv.get(+String(id).slice(1));return s===undefined?null:s}
+function knwAdd(Z,id,iid,from,hop){const K=Z.K[id]||(Z.K[id]={});if(K[iid])return false;K[iid]=[from,hop];const ks=Object.keys(K);if(ks.length>BAL.slv.gos.keep)delete K[ks[0]];return true}
+/* knwAdd + the gossip group's count C kept exact (same add, same drop of the oldest) */
+function knwAddC(Z,id,iid,from,hop,T){const K=Z.K[id]||(Z.K[id]={});if(K[iid])return false;K[iid]=[from,hop];const C=T.C;
+ const c0=C.get(iid)||0;C.set(iid,c0+1);if(c0<T.n&&c0+1>=T.n)T.u--;else if(c0===0&&T.n>1)T.u++;
+ const ks=Object.keys(K);if(ks.length>BAL.slv.gos.keep){const e=ks[0];delete K[e];if(C.has(e)){const c=C.get(e);C.set(e,c-1);if(c>=T.n&&c-1<T.n)T.u++}}return true}
+function knwName(id){try{const R=agRec();return (R&&R.who&&R.who[id]&&R.who[id][0])||id}catch(e){return id}}
+/* she tells her mistress (or keeps it): the chain's own choice */
+function knwUp(Z,id,iid){const I=Z.I[iid];const o=knwObj(id);if(!I||!o||!o.s||!o.m)return;const m=o.m;const mk=m===S?"me":"v"+m.id;if(I.ab===mk)return;
+ const mz=Z.K[mk]&&Z.K[mk][iid];if(mz)return;/* she knows already (she was there, or another told her) */
+ let c="keep";try{c=knTell(o.s,m,"knw:"+iid)}catch(e){}if(c!=="tell")return;const fr=Z.K[id][iid][0];
+ knwAdd(Z,mk,iid,id,Z.K[id][iid][1]+1);
+ if(m===S){const what=(fr==="saw"?`tận mắt thấy ở ${agPlaceTxt(I.pl)}: `:`nghe ${knwName(fr)} kể: `)+I.w;try{knBao(o.s,S,what,I.pl,I.b!==(S.buoi||0)||I.wk!==wk())}catch(e){}}}
+function knwSee(pl,kh,what,ab,key){if(!knwOn()||!pl)return 0;const R=agRec();if(!R||!R.P)return 0;const Z=knwSt();Z.seen=Z.seen||{};if(key){if(Z.seen[key])return 0;Z.seen[key]=1}
+ const iid="i"+wk()+"."+(++Z.n);Z.I[iid]={w:what,pl,wk:wk(),b:S.buoi||0,kh,ab};const L=[];
+ for(const id in R.P){const x=R.P[id][kh];if(!x||x[0]!==pl)continue;if(knwSrv(id)){if(x[1]==="sleep")continue;if(knwAdd(Z,id,iid,"saw",0))L.push(id)}
+  else if(id==="me"||/^v\d+$/.test(id))knwAdd(Z,id,iid,"saw",0)}/* the mistresses who stood there saw it too (they need no telling) */
+ if(!L.length){for(const k in Z.K)delete Z.K[k][iid];delete Z.I[iid];return 0}
+ for(const id of L)knwUp(Z,id,iid);KN.stat.knwSee=(KN.stat.knwSee||0)+L.length;return L.length}
+/* the khắc's gossip: servants at one place in a talking act share what they know */
+function knwGossip(){if(!knwOn())return 0;const R=agRec();if(!R||!R.P||R.key!==j95key())return 0;const kh=j95kh();const Z=knwSt();const gk=R.key+":"+kh;if(Z.gk===gk)return 0;Z.gk=gk;
+ const G=BAL.slv.gos;const A=new Set(G.acts);const by={};let n=0;
+ for(const id in Z.K){if(!knwSrv(id))continue;const x=R.P[id]&&R.P[id][kh];if(!x||!A.has(x[1]))continue;(by[x[0]]=by[x[0]]||[]).push(id)}
+ for(const id in R.P){if(!knwSrv(id)||Z.K[id])continue;const x=R.P[id][kh];if(!x||!A.has(x[1])||!by[x[0]])continue;by[x[0]].push(id)}
+ /* perf: knHit("g"+gk+"|"+a+">"+b+"|"+iid, p) = the same FNV hash (knH), run from a cached state of its fixed head (seed|g<gk>|a>b|) */
+ const fnv=(h,t)=>{for(let i=0;i<t.length;i++){h^=t.charCodeAt(i);h=Math.imul(h,16777619)}return h};
+ KNWO=new Map();try{
+ for(const pl in by){const L=by[pl];if(L.length<2)continue;
+  /* perf: C = how many of this group know each thing (kept exact below: +1 on each add, −1 on the oldest dropped past gos.keep); a thing all of
+     them know already has no one to pass to — the b loop would skip every one of them, so it is skipped whole (no draw, no change) */
+  /* SN = each one's keys read once here, in for-in order; reused as her own loop below unless someone told her something since (D: then read again) —
+     her own record does not change while she tells (she is never her own listener; her mistress's record is another one) */
+  const C=new Map(),SN=new Map(),D=new Set();for(const b of L){const Kb=Z.K[b];if(Kb){const ar=[];for(const i in Kb){ar.push(i);C.set(i,(C.get(i)||0)+1)}SN.set(b,ar)}}const nL=L.length;
+  /* T.u = how many things this group does not all know yet; while it is 0 nobody has anything to pass on (every b loop would skip) */
+  const T={C,n:nL,u:0};for(const v of C.values())if(v<nL)T.u++;
+  for(const a of L){const K=Z.K[a];if(!K)continue;const o=knwObj(a);const q=o&&o.s?knwQv(G.q,o.s):0;let ha=null,HB=null;const p=G.p*(1+q);
+   if(!T.u)continue;let ks=D.has(a)?null:SN.get(a);if(!ks){ks=[];for(const i in K)ks.push(i)}
+   for(const iid of ks){if(!T.u)break;const [,hop]=K[iid];if(hop>=G.hop||!Z.I[iid])continue;if((C.get(iid)||0)>=nL)continue;
+    for(const b of L){if(b===a||(Z.K[b]&&Z.K[b][iid]))continue;
+     if(ha===null){ha=fnv(2166136261,String(knSeed()+"|"+"g"+gk+"|"+a+">"));HB=new Map()}let hb=HB.get(b);if(hb===undefined){hb=fnv(ha,b+"|");HB.set(b,hb)}
+     if(!((((fnv(hb,iid)>>>0)%10000)/100)<p))continue;if(knwAddC(Z,b,iid,a,hop+1,T)){D.add(b);n++;knwUp(Z,b,iid)}}}}}
+ }finally{KNWO=null}
+ KN.stat.knwGos=(KN.stat.knwGos||0)+n;return n}
+/* who knows a thing / what one person knows (dev + tests; roster.js --who reads S.knw from the save) */
+function knwOf(id){const Z=S.knw;if(!Z||!Z.K[id])return[];return Object.keys(Z.K[id]).map(i=>Object.assign({id:i,from:Z.K[id][i][0],hop:Z.K[id][i][1]},Z.I[i]||{})).filter(x=>x.w)}
+(function(){
+ const l0=agLand;agLand=function(p,seen){const r=l0.apply(this,arguments);try{if(r&&p&&knwOn()){const v=RV(p.vid);const t=agPerson(p.t);if(v)knwSee(p.pl,p.kh,`${v.name} ${p.act}${t?" "+(t===S?S.name:t.name||""):""}`.trim(),"v"+v.id,"a:"+(p.key||"")+":"+p.vid+":"+p.k+":"+p.kh)}}catch(e){agErr("knwSee",e)}return r};
+ const tw0=twDo;twDo=function(a,t,k){const r=tw0.apply(this,arguments);try{if(a===S&&r&&knwOn()){const H=agHereKh();if(H)knwSee(H.k,H.kh,`${S.name}: ${String(r).replace(/^Ngươi\s+/,"")}`,"me","m:"+H.R.key+":"+k+":"+H.kh+":"+(t&&t.id||""))}}catch(e){agErr("knwSeeMe",e)}return r};
+ const s0=j95sync;j95sync=function(){const r=s0.apply(this,arguments);try{knwGossip()}catch(e){agErr("knwGossip",e)}return r};
+})();
+Object.assign(window,{knwSee,knwGossip,knwOf});
 /* ================= jnroadhp: QUESTLINE Q2 — the NPC side line as a process + two-way (QUESTLINES_AUDIT.md §3 H-a/H-d, §4 Q2) =================
    Builds on jnroad.js / jnroadm.js (NPC roads + the help hồi) without copying them; every number is in BAL.nroad (jbal2.js: fin, sb, hpMax).
    (a) HELP RECORD H-a: v.nr.hp = [[chapter, sign, turn]] — every help (+1) / betrayal (−1) she gave on that person's road (consorts, maids,
@@ -74458,16 +74804,18 @@ img.kemo.kfseal.kemo-an{opacity:.85}
 `;document.head.appendChild(st)})();
 /* ================= jemoseal: kitEmoSeal — EVERY mood seal moves, everywhere it shows (KIT 38.4; owner 17/11 ~18:00Z + ~18:30Z (D)) =================
    ONE kit part for every img.kemo (pcPort frames, person cards, lists, mood box, the figure-head seal of jfigseal): no seal draws its own motion.
-   (1) MOTION: a per-key CSS motion class kemo-m-<m> (KIT_EMOSEAL.keys[k].m), switched on only while the seal is ON SCREEN (IntersectionObserver, class kemo-live), only with
-       Cảnh động on, no prefers-reduced-motion and not Gọn (OPT.fxon === false): vui glow + gentle sway · bình slow breathe · buồn droop + sink · giận shake + heat pulse · sợ tremble ·
-       ghen flicker · lo bob + sweat-drop dip · đau wince pulse · mưu glint · an "?" bob · khóc droop + tear-sink · hờn flicker. Transform / filter only (cheap on Fold with many seals).
+   (1) MOTION (owner 19/11 ~02:15Z): IDLE = every live seal sways extremely slightly and slowly (CSS `rotate` only, KIT_EMOSEAL.idle: +-deg, period s, never a shake); LEAN-IN = every few seconds
+       (random KIT_EMOSEAL.lean.min..max s per seal, never two seals together: global gap KIT_EMOSEAL.lean.gap) the seal scales up (KIT_EMOSEAL.lean.scale, as if leaning forward to talk), plays its
+       feeling's OWN stronger motion kemoL-<m> (KIT_EMOSEAL.keys[k].m, duration .d) and settles back to idle. Motions (data, per feeling): shake giận (fast + heat glow) · droop buồn/khóc (slow sad up-down) ·
+       sway vui (bright sway + glow) · tremble sợ · bob lo · flicker ghen/hờn (side glance) · glint mưu · wince đau · nod bình/an. Unknown key = defaultMotion. Live only while ON SCREEN (kemo-live), only with
+       Cảnh động on, no prefers-reduced-motion and not Gọn (OPT.fxon === false). Idle = `rotate`, lean = `transform`/`filter`: separate properties, never fight. Cheap on Fold (no layout, no per-frame JS).
    (2) FRAME LOOP source (optional, painted by Foreman C): img/kit/emo-anim/<set><k>.webp (animated webp / apng). Probed once per file; when it exists the seal swaps its still for the loop
-       while on screen and back to the still when it leaves (the loop never decodes off screen); no file = the still + the CSS motion. Same asset-set rule as the still: <set> = "" women, "m-" young men, "mo-" mature men.
-   (3) EFFECT-SPRITE layer (optional, painted): img/kit/emo-fx/<k>.webp (smoke puffs, tears, sweat, glint …): ONE sibling img.kemofx per live seal, centred on the seal at KIT_EMOSEAL.fxScale x its size,
-       pointer-events none, removed when the seal leaves the screen. No file = no layer. Nothing is drawn in code (no code-drawn tears / smoke).
+       DURING THE LEAN-IN only and back to the still when the lean ends or the seal leaves the screen; no file = the still + the CSS motion. Same asset-set rule as the still: <set> = "" women, "m-" young men, "mo-" mature men.
+   (3) EFFECT-SPRITE layer (optional, painted): img/kit/emo-fx/<k>.webp (smoke puffs, tears, sweat, glint …): ONE sibling img.kemofx per leaning seal, centred on the seal at KIT_EMOSEAL.fxScale x its size,
+       pointer-events none, removed when the lean ends or the seal leaves the screen. No file = no layer. Nothing is drawn in code (no code-drawn tears / smoke).
    KEYS: the seal map holds khoc + hon too (names "Khóc", "Hờn"); the mood logic (jemo EMO) decides when a person is in one — until then they never appear. ===== */
-window.KIT_EMOSEAL=window.KIT_EMOSEAL||{keys:{vui:{m:"sway"},binh:{m:"breathe"},buon:{m:"droop"},gian:{m:"shake"},so:{m:"tremble"},ghen:{m:"flicker"},lo:{m:"bob"},dau:{m:"wince"},muu:{m:"glint"},an:{m:"bob"},khoc:{m:"droop",name:"Khóc"},hon:{m:"flicker",name:"Hờn"},chanh:{m:"flicker"},phanno:{m:"shake"},runso:{m:"tremble"},matngu:{m:"droop"},tutin:{m:"bob"},hanghai:{m:"bob"},tinhtu:{m:"sway"},chuyentam:{m:"breathe"},hungkhoi:{m:"glint"},tinhnghich:{m:"bob"},hothen:{m:"droop"},chan:{m:"droop"},khochiu:{m:"flicker"},choang:{m:"wince"}},
- defaultMotion:"breathe",anim:"https://ctm-img.victoria-tntt.workers.dev/img/kit/emo-anim/",fx:"https://ctm-img.victoria-tntt.workers.dev/img/kit/emo-fx/",fxScale:1.7};
+window.KIT_EMOSEAL=window.KIT_EMOSEAL||{keys:{vui:{m:"sway",d:1.5},binh:{m:"nod",d:1.1},buon:{m:"droop",d:1.6},gian:{m:"shake",d:1.0},so:{m:"tremble",d:1.1},ghen:{m:"flicker",d:1.4},lo:{m:"bob",d:1.3},dau:{m:"wince",d:1.2},muu:{m:"glint",d:1.4},an:{m:"nod",d:1.1},khoc:{m:"droop",d:1.6,name:"Khóc"},hon:{m:"flicker",d:1.4,name:"Hờn"},chanh:{m:"flicker",d:1.4},phanno:{m:"shake",d:1.0},runso:{m:"tremble",d:1.1},matngu:{m:"droop",d:1.6},tutin:{m:"nod",d:1.1},hanghai:{m:"bob",d:1.3},tinhtu:{m:"sway",d:1.5},chuyentam:{m:"nod",d:1.1},hungkhoi:{m:"glint",d:1.4},tinhnghich:{m:"bob",d:1.3},hothen:{m:"droop",d:1.6},chan:{m:"droop",d:1.6},khochiu:{m:"flicker",d:1.4},choang:{m:"wince",d:1.2}},
+ defaultMotion:"nod",defaultDur:1.2,idle:{deg:1.2,per:[6,8]},lean:{scale:[1.12,1.18],min:4,max:8,gap:1.2},anim:"https://ctm-img.victoria-tntt.workers.dev/img/kit/emo-anim/",fx:"https://ctm-img.victoria-tntt.workers.dev/img/kit/emo-fx/",fxScale:1.7};
 const KES_HAVE={};/* url -> true | false | "wait" (probe result) */
 function kesProbe(url,cb){const h=KES_HAVE[url];if(h===true||h===false){cb(h);return}
  if(h&&h.w){h.w.push(cb);return}const e={w:[cb]};KES_HAVE[url]=e;const im=new Image();const done=ok=>{KES_HAVE[url]=ok;e.w.forEach(f=>{try{f(ok)}catch(x){}})};im.onload=()=>done(true);im.onerror=()=>done(false);im.src=url}
@@ -74480,16 +74828,27 @@ function kesFxSync(el){const f=el.__fx;if(!f||!el.isConnected)return;const w=el.
  f.style.cssText=`left:${(el.offsetLeft+w/2-W/2).toFixed(1)}px;top:${(el.offsetTop+h/2-H/2).toFixed(1)}px;width:${W.toFixed(1)}px;height:${H.toFixed(1)}px`}
 function kesReal(el){/* a key whose own still is not on screen (feelArt / feelFb walked to a nearest painting): the real still replaces it once it exists on the CDN */const k=kesKey(el);if(!k||el.__real)return;const set=kesSet(el,k),real=`https://ctm-img.victoria-tntt.workers.dev/img/kit/emo-${set}${k}.webp`;if((el.getAttribute("src")||"").indexOf(real)>=0)return;el.__real=1;
  kesProbe(real,ok=>{if(!ok)return;if(el.isConnected){el.dataset.kemos=real;if(!/emo-anim/.test(el.getAttribute("src")||""))el.setAttribute("src",real)}})}
+function kesR(a,b){return a+Math.random()*(b-a)}
+function kesSpec(k){return KIT_EMOSEAL.keys[k]||KIT_EMOSEAL.keys[k.replace(/^act-/,"")]}
+let kesLastLean=0;
+function kesLeanEnd(el){if(el.__lt){clearTimeout(el.__lt);el.__lt=0}el.classList.remove("kemo-lean");const still=el.dataset.kemos;if(still&&el.getAttribute("src")!==still)el.setAttribute("src",still);kesFxOff(el)}
+function kesSchedule(el){if(el.__ln)clearTimeout(el.__ln);const L=KIT_EMOSEAL.lean;el.__ln=setTimeout(()=>kesLean(el),kesR(L.min,L.max)*1000)}
+function kesLean(el,force){el.__ln=0;if(!el.isConnected||!el.classList.contains("kemo-live"))return;
+ const L=KIT_EMOSEAL.lean,now=performance.now(),wait=kesLastLean+L.gap*1000-now;
+ if(wait>0&&!force){el.__ln=setTimeout(()=>kesLean(el),wait+kesR(100,900));return}/* stagger: never two seals leaning together */
+ kesLastLean=now;const k=kesKey(el),spec=kesSpec(k),d=(spec&&spec.d)||KIT_EMOSEAL.defaultDur,still=el.dataset.kemos;
+ el.style.setProperty("--kemo-ls",kesR(L.scale[0],L.scale[1]).toFixed(3));el.style.setProperty("--kemo-ld",d+"s");
+ el.classList.remove("kemo-lean");void el.offsetWidth;el.classList.add("kemo-lean");
+ const set=kesSet(el,k);
+ kesProbe(KIT_EMOSEAL.anim+set+k+".webp",ok=>{if(ok&&el.isConnected&&el.classList.contains("kemo-lean")&&el.getAttribute("src")===still)el.setAttribute("src",KIT_EMOSEAL.anim+set+k+".webp")});
+ kesProbe(KIT_EMOSEAL.fx+k+".webp",ok=>{if(!ok||!el.isConnected||!el.classList.contains("kemo-lean")||el.__fx||!el.parentNode)return;
+  const f=document.createElement("img");f.className="kemofx kemofx-"+k;f.alt="";f.setAttribute("aria-hidden","true");f.src=KIT_EMOSEAL.fx+k+".webp";f.onerror=()=>f.remove();el.parentNode.appendChild(f);el.__fx=f;kesFxSync(el)});
+ el.__lt=setTimeout(()=>{kesLeanEnd(el);kesSchedule(el)},d*1000+150)}
 function kesLive(el,on){if(!el.isConnected)return;kesReal(el);
  if(!el.dataset.kemos){el.dataset.kemos=el.getAttribute("src")||""}
- el.classList.toggle("kemo-live",on&&kesMotionOK());const k=kesKey(el),spec=KIT_EMOSEAL.keys[k]||KIT_EMOSEAL.keys[k.replace(/^act-/,"")];if(!/kemo-m-/.test(el.className))el.classList.add("kemo-m-"+(spec?spec.m:KIT_EMOSEAL.defaultMotion));
- const still=el.dataset.kemos;
- if(on&&kesMotionOK()){const set=kesSet(el,k);
-  kesProbe(KIT_EMOSEAL.anim+set+k+".webp",ok=>{if(ok&&el.isConnected&&el.classList.contains("kemo-live")&&el.getAttribute("src")===still)el.setAttribute("src",KIT_EMOSEAL.anim+set+k+".webp")});
-  kesProbe(KIT_EMOSEAL.fx+k+".webp",ok=>{if(!ok||!el.isConnected||!el.classList.contains("kemo-live")||el.__fx||!el.parentNode)return;
-   const f=document.createElement("img");f.className="kemofx kemofx-"+k;f.alt="";f.setAttribute("aria-hidden","true");f.src=KIT_EMOSEAL.fx+k+".webp";f.onerror=()=>f.remove();el.parentNode.appendChild(f);el.__fx=f;kesFxSync(el)});
-  kesFxSync(el)}
- else{if(el.getAttribute("src")!==still&&still)el.setAttribute("src",still);kesFxOff(el)}}
+ const was=el.classList.contains("kemo-live"),live=on&&kesMotionOK();el.classList.toggle("kemo-live",live);const k=kesKey(el),spec=kesSpec(k);if(!/kemo-m-/.test(el.className))el.classList.add("kemo-m-"+(spec?spec.m:KIT_EMOSEAL.defaultMotion));
+ if(live){if(!was){const I=KIT_EMOSEAL.idle;el.style.setProperty("--kemo-id",I.deg+"deg");el.style.setProperty("--kemo-ip",kesR(I.per[0],I.per[1]).toFixed(2)+"s");el.style.setProperty("--kemo-i0","-"+kesR(0,I.per[1]).toFixed(2)+"s");if(!el.__ln)kesSchedule(el)}}
+ else{if(el.__ln){clearTimeout(el.__ln);el.__ln=0}kesLeanEnd(el)}}
 const KES_IO=typeof IntersectionObserver==="function"?new IntersectionObserver(es=>{for(const e of es)kesLive(e.target,e.isIntersecting)},{threshold:.01}):null;
 function kesWatch(el){if(!el||el.__kes)return;el.__kes=1;if(KES_IO)KES_IO.observe(el);else kesLive(el,true)}
 function kesScan(){document.querySelectorAll("img.kemo").forEach(kesWatch)}
@@ -74500,32 +74859,36 @@ addEventListener("resize",()=>document.querySelectorAll("img.kemo.kemo-live").fo
 kesScan();
 /* r2 reviewer fix: Cảnh động / Gọn switched in Settings applies to the seals already on screen at once (saveOpt does not re-render) */
 (function(){if(typeof saveOpt!=="function")return;const o=saveOpt;saveOpt=function(){const r=o.apply(this,arguments);try{document.querySelectorAll("img.kemo").forEach(el=>{if(!el.__kes)return;const b=el.getBoundingClientRect();kesLive(el,b.width>2&&b.bottom>0&&b.top<innerHeight&&b.right>0&&b.left<innerWidth)})}catch(e){}return r}})();
-window.kitEmoSeal={scan:kesScan,live:kesLive,probe:kesProbe};/* no pop: owner 17/11 ~18:10Z (Sims model), the seal has ONE source (jemo emoSealKey) */
+window.kitEmoSeal={scan:kesScan,live:kesLive,probe:kesProbe,lean:kesLean};/* no pop: owner 17/11 ~18:10Z (Sims model), the seal has ONE source (jemo emoSealKey) */
 (function(){const st=document.createElement("style");st.id="kemoseal-css";st.textContent=`
 img.kemo{transform-origin:50% 60%;will-change:auto}
 img.kemofx{position:absolute!important;pointer-events:none;z-index:8;object-fit:contain;max-width:none;max-height:none;margin:0;border-radius:0}
 @media (prefers-reduced-motion:no-preference){
-img.kemo.kemo-live.kemo-m-sway{animation:kemoSway 3.2s ease-in-out infinite}
-img.kemo.kemo-live.kemo-m-breathe{animation:kemoBreathe 4.6s ease-in-out infinite}
-img.kemo.kemo-live.kemo-m-droop{animation:kemoDroop 3.6s ease-in-out infinite}
-img.kemo.kemo-live.kemo-m-shake{animation:kemoShake 1.9s ease-in-out infinite}
-img.kemo.kemo-live.kemo-m-tremble{animation:kemoTremble .5s linear infinite}
-img.kemo.kemo-live.kemo-m-flicker{animation:kemoFlicker 2.2s steps(1,end) infinite}
-img.kemo.kemo-live.kemo-m-bob{animation:kemoBob 2.8s ease-in-out infinite}
-img.kemo.kemo-live.kemo-m-wince{animation:kemoWince 2.6s ease-in-out infinite}
-img.kemo.kemo-live.kemo-m-glint{animation:kemoGlint 3.4s ease-in-out infinite}
+img.kemo.kemo-live{animation:kemoIdle var(--kemo-ip,7s) ease-in-out var(--kemo-i0,0s) infinite}
+img.kemo.kemo-live.kemo-lean{animation:kemoIdle var(--kemo-ip,7s) ease-in-out var(--kemo-i0,0s) infinite,var(--kemo-lk,kemoL-nod) var(--kemo-ld,1.2s) ease-out 1 both}
+img.kemo.kemo-live.kemo-lean.kemo-m-nod{--kemo-lk:kemoL-nod}
+img.kemo.kemo-live.kemo-lean.kemo-m-sway{--kemo-lk:kemoL-sway}
+img.kemo.kemo-live.kemo-lean.kemo-m-droop{--kemo-lk:kemoL-droop}
+img.kemo.kemo-live.kemo-lean.kemo-m-shake{--kemo-lk:kemoL-shake}
+img.kemo.kemo-live.kemo-lean.kemo-m-tremble{--kemo-lk:kemoL-tremble}
+img.kemo.kemo-live.kemo-lean.kemo-m-flicker{--kemo-lk:kemoL-flicker}
+img.kemo.kemo-live.kemo-lean.kemo-m-bob{--kemo-lk:kemoL-bob}
+img.kemo.kemo-live.kemo-lean.kemo-m-wince{--kemo-lk:kemoL-wince}
+img.kemo.kemo-live.kemo-lean.kemo-m-glint{--kemo-lk:kemoL-glint}
 img.kemofx{animation:kemoFx 2.4s ease-in-out infinite}
 }
-
-@keyframes kemoSway{0%,100%{transform:rotate(-3deg);filter:drop-shadow(0 1px 1.5px #000a)}50%{transform:rotate(3deg);filter:drop-shadow(0 0 4px #ffe9a0) drop-shadow(0 1px 1.5px #000a)}}
-@keyframes kemoBreathe{0%,100%{transform:scale(1)}50%{transform:scale(1.045)}}
-@keyframes kemoDroop{0%,100%{transform:translateY(0) rotate(0)}50%{transform:translateY(7%) rotate(-3deg)}}
-@keyframes kemoShake{0%,100%{transform:translateX(0);filter:drop-shadow(0 1px 1.5px #000a)}15%{transform:translateX(-4%)}30%{transform:translateX(4%)}45%{transform:translateX(-3%);filter:drop-shadow(0 0 5px #ff9a6a) drop-shadow(0 1px 1.5px #000a)}60%{transform:translateX(2%)}75%{transform:translateX(0)}}
-@keyframes kemoTremble{0%{transform:translate(.8%,0)}25%{transform:translate(-.8%,.6%)}50%{transform:translate(.6%,-.6%)}75%{transform:translate(-.6%,.8%)}100%{transform:translate(.8%,0)}}
-@keyframes kemoFlicker{0%{opacity:1}30%{opacity:.78}38%{opacity:1}70%{opacity:.86}78%{opacity:1}}
-@keyframes kemoBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6%)}}
-@keyframes kemoWince{0%,100%{transform:scale(1)}8%{transform:scale(.93)}16%{transform:scale(1.02)}30%{transform:scale(1)}}
-@keyframes kemoGlint{0%,100%{filter:drop-shadow(0 1px 1.5px #000a)}50%{filter:drop-shadow(0 0 5px #d9c4ff) drop-shadow(0 1px 1.5px #000a)}}
+/* IDLE: ONLY the rotate property, extremely slight + slow, never a shake (owner 19/11 ~02:15Z) */
+@keyframes kemoIdle{0%,100%{rotate:calc(var(--kemo-id,1.2deg) * -1)}50%{rotate:var(--kemo-id,1.2deg)}}
+/* LEAN-IN: scale up to --kemo-ls (ease-out, leaning forward), the feeling's own stronger motion while leaned in, settle back. transform/filter only. */
+@keyframes kemoL-nod{0%{transform:scale(1)}18%{transform:scale(var(--kemo-ls))}34%{transform:scale(var(--kemo-ls)) translateY(5%)}50%{transform:scale(var(--kemo-ls))}66%{transform:scale(var(--kemo-ls)) translateY(4%)}82%{transform:scale(var(--kemo-ls))}100%{transform:scale(1)}}
+@keyframes kemoL-sway{0%{transform:scale(1)}18%{transform:scale(var(--kemo-ls)) rotate(0);filter:drop-shadow(0 0 4px #ffe9a0) drop-shadow(0 1px 1.5px #000a)}38%{transform:scale(var(--kemo-ls)) rotate(-6deg)}62%{transform:scale(var(--kemo-ls)) rotate(6deg);filter:drop-shadow(0 0 7px #ffe9a0) drop-shadow(0 1px 1.5px #000a)}82%{transform:scale(var(--kemo-ls)) rotate(-3deg)}100%{transform:scale(1);filter:drop-shadow(0 1px 1.5px #000a)}}
+@keyframes kemoL-droop{0%{transform:scale(1) translateY(0)}20%{transform:scale(var(--kemo-ls)) translateY(0)}45%{transform:scale(var(--kemo-ls)) translateY(9%) rotate(-3deg)}70%{transform:scale(var(--kemo-ls)) translateY(-2%) rotate(1deg)}85%{transform:scale(var(--kemo-ls)) translateY(6%) rotate(-2deg)}100%{transform:scale(1) translateY(0)}}
+@keyframes kemoL-shake{0%{transform:scale(1)}12%{transform:scale(var(--kemo-ls));filter:drop-shadow(0 0 6px #ff7a4a) drop-shadow(0 1px 1.5px #000a)}18%{transform:scale(var(--kemo-ls)) translateX(-5%)}26%{transform:scale(var(--kemo-ls)) translateX(5%)}34%{transform:scale(var(--kemo-ls)) translateX(-5%)}42%{transform:scale(var(--kemo-ls)) translateX(5%)}50%{transform:scale(var(--kemo-ls)) translateX(-4%);filter:drop-shadow(0 0 9px #ff5a2a) drop-shadow(0 1px 1.5px #000a)}58%{transform:scale(var(--kemo-ls)) translateX(4%)}66%{transform:scale(var(--kemo-ls)) translateX(-2%)}76%{transform:scale(var(--kemo-ls)) translateX(0)}100%{transform:scale(1);filter:drop-shadow(0 1px 1.5px #000a)}}
+@keyframes kemoL-tremble{0%{transform:scale(1)}15%{transform:scale(var(--kemo-ls)) translate(.8%,0)}25%{transform:scale(var(--kemo-ls)) translate(-.8%,.6%)}35%{transform:scale(var(--kemo-ls)) translate(.6%,-.6%)}45%{transform:scale(var(--kemo-ls)) translate(-.6%,.8%)}55%{transform:scale(var(--kemo-ls)) translate(.8%,0)}65%{transform:scale(var(--kemo-ls)) translate(-.8%,.6%)}75%{transform:scale(var(--kemo-ls)) translate(.6%,-.6%)}85%{transform:scale(var(--kemo-ls)) translate(-.4%,.4%)}100%{transform:scale(1)}}
+@keyframes kemoL-bob{0%{transform:scale(1)}20%{transform:scale(var(--kemo-ls)) translateY(0)}38%{transform:scale(var(--kemo-ls)) translateY(-7%)}56%{transform:scale(var(--kemo-ls)) translateY(1%)}74%{transform:scale(var(--kemo-ls)) translateY(-6%)}88%{transform:scale(var(--kemo-ls)) translateY(0)}100%{transform:scale(1)}}
+@keyframes kemoL-flicker{0%{transform:scale(1);opacity:1}18%{transform:scale(var(--kemo-ls)) translateX(0)}30%{transform:scale(var(--kemo-ls)) translateX(-5%);opacity:.8}42%{transform:scale(var(--kemo-ls)) translateX(-5%);opacity:1}58%{transform:scale(var(--kemo-ls)) translateX(0)}68%{transform:scale(var(--kemo-ls)) translateX(5%);opacity:.82}80%{transform:scale(var(--kemo-ls)) translateX(5%);opacity:1}100%{transform:scale(1);opacity:1}}
+@keyframes kemoL-glint{0%{transform:scale(1);filter:drop-shadow(0 1px 1.5px #000a)}25%{transform:scale(var(--kemo-ls))}50%{transform:scale(var(--kemo-ls));filter:drop-shadow(0 0 8px #d9c4ff) drop-shadow(0 1px 1.5px #000a)}75%{transform:scale(var(--kemo-ls));filter:drop-shadow(0 0 2px #d9c4ff) drop-shadow(0 1px 1.5px #000a)}100%{transform:scale(1);filter:drop-shadow(0 1px 1.5px #000a)}}
+@keyframes kemoL-wince{0%{transform:scale(1)}16%{transform:scale(var(--kemo-ls))}30%{transform:scale(calc(var(--kemo-ls) * .9)) rotate(-4deg)}42%{transform:scale(var(--kemo-ls)) rotate(2deg)}60%{transform:scale(calc(var(--kemo-ls) * .93)) rotate(-3deg)}78%{transform:scale(var(--kemo-ls))}100%{transform:scale(1)}}
 @keyframes kemoFx{0%,100%{opacity:.9;transform:translateY(0)}50%{opacity:1;transform:translateY(-3%)}}
 `;document.head.appendChild(st)})();
 /* ================= jemocause: kitMoodCauseRows — the tap list of a mood seal (KIT 38.5; owner 17/11 ~18:25Z (a)) =================
@@ -77865,7 +78228,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="793b709261fc";window.CTM_BUILD=BUILD;
+const BUILD="4a6c2a47ce35";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
