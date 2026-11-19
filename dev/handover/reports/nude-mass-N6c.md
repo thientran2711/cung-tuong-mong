@@ -9,3 +9,8 @@ Items now differ per age (builder 3f): a18 folding fan, a26 hand mirror, a36 ruy
 - gens: a18 u5WKRCGQLD · a26 8aifO5KIrU · a36 rgXSTnDxtc · a51 9ZH2aF4NYZ · a65 3zKnuU3REY (all 1st try, 5 × 135 cr). --verify 5 PASS.
 - Looked at every one (full + face crop): frontal, standing still, item held at chest below the chin, sleeves/mantle hang straight (no flying cloth), lips closed, bare forehead (the bead tassels end above the brows; no red dot on skin at full size), no crown flowers. a51 silver at temples, a65 mostly silver and older face.
 - Honest faults: a26 hand mirror is gold-framed with a pale face, close to the robe gold (contrast rule D3c is weak there); a65 yellow is a little deeper/ochre-leaning than a51 but still antique gold, not mustard.
+
+## c18 REDONE (option B, black second colour → deep midnight-navy at a51/a65) — sheet img/_review/nude-mass/sheet_c18.jpg (CDN), copy out/n6c_c18_sheet.jpg
+- gens: a18 tCRE9NTmZJ (→ cut 0eUdsAaTfW, raw had parchment haze) · a26 JNC6mKQOq4 · a36 BhNvOe1oQR · a51 gOmyo9OSXO · a65 lJtOBnagv9 (all 1st try, 5 × 135 cr + 3 cr cut). --verify PASS.
+- Items per age: a18 hand mirror, a26 imperial edict scroll (crimson), a36 ruyi, a51 hand censer, a65 walking staff. All frontal, calm, item below the chin, cloth hangs straight, lips closed, forehead clean (tassels end above the brows), no crown flowers; a51 silver temples, a65 mostly silver.
+- Honest faults: a36/a51/a65 items are the same as c17's at those ages (ruyi/censer/staff) — the builder picks them; 3f "neighbours differ" across people may want a builder change (foreman). a18 mirror back is a red dragon disk — reads fine.
