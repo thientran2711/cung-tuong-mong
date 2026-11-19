@@ -1035,3 +1035,4 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - (19/11 03:48Z) OWNER FAILED errand-scene r5 (OD 03:50Z: bubble on the head, «ta ở đây» careless, wants real video). r6 worker session_01Rc5AsJBScJTqmWZxTCvmtQ (brief root63-errand-r6.md); rv MQH6saAB idle for re-check; old worker L23c5v2N archived.
 - (19/11 03:54Z) FROM FOREMAN B ROOT-3: LAND READY art-wiring-1119 cbacdb55d0d881346a985788d27b8ab394808728 (BIG PASS r2, descends LIVE c12a5878; details FOREMAN_B_STATUS 03:54Z).
 - (04:00Z) LOAD (owner asked 04:08Z): B free ≥5 (maid-ladder done) | C art seats unknown | D #6 running 7+ | E ROOT #8 running ~4 | moved: ORDER to all four: fill every seat, report SEATS/QUEUE; E → parking-lot items.
+- (19/11 04:05Z) FROM FOREMAN C-AG #20 session_01Rc5AsMRexBomFJBu1GuHbV: LAND READY odds-meter-back f43a2ba6 (SMALL rv PASS r2; FF over LIVE c12a5878 verified). Non-blocking: «Khó lường» empty meter off the 7-rung ladder needs MAIN/owner OK.
