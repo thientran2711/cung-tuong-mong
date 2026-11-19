@@ -14,7 +14,7 @@ Owner 18/11 ~18:15Z: "lấy cái prompt B đi, B cho đẹp"; ~18:20Z: draw ALL 
 
 ## Gen ledger: --log / --refs / --verify (N5d item 2)
 Painter steps for EVERY figure gen (copy into briefs):
-1. `python3 dev/art/t8-prompt-B/build.py <ARGS> --log --refs > prompt.txt` — prints the prompt (stdout, byte-identical to without the flags), the A0 reference list as JSON on stderr (image 1 = her own live t1 / live tier+age picture, face only; image 2 = style3_girls Xm9tPkMBfo; image 3 = royal swatch only when the prompt says "Image 3 …"), and appends a line to dev/art/gen_ledger.jsonl: {ts, cmd, argv, prompt, refs, gen_id:null, magnific_prompt:null}.
+1. `python3 dev/art/t8-prompt-B/build.py <ARGS> --log --refs > prompt.txt` — prints the prompt (stdout, byte-identical to without the flags), the A0 reference list as JSON on stderr (image 1 = her own live t1 / live tier+age picture, face only; image 2 = style2_portraits_c01_c12 6AbGv6EiJO (two approved portraits); image 3 = royal swatch only when the prompt says "Image 3 …"), and appends a line to dev/art/gen_ledger.jsonl: {ts, cmd, argv, prompt, refs, gen_id:null, magnific_prompt:null}.
 2. Generate with EXACTLY prompt.txt and exactly the listed refs.
 3. `creations_get <gen_id>` → save the prompt Magnific stored to mp.txt, then `python3 dev/art/t8-prompt-B/build.py --log-fill <ts of the ledger line> <gen_id> mp.txt` (fills gen_id + magnific_prompt).
    (Shortcut when the gen id is already known: add `--gen-id ID --mprompt mp.txt` to step 1 instead.)

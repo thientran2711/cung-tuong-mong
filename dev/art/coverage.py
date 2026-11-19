@@ -18,7 +18,7 @@ dev/art/emperor-B/build.py for the Emperor) for EVERY person of the group and ch
   ITEM=   same held-item KIND as the same person at another age (3f: every age its own item)
   BG      the K3 background line ("IGNORE the style reference image's background ...") is missing
   ROYAL3  royal tier (t6+, Thái hậu, Nữ đế, triều phục 6-8) without the image-3 royal-yellow sentence
-  REFS    the builder does not emit the A0 reference list (style3_girls + own t1 + royal swatch) with the prompt
+  REFS    the builder does not emit the A0 reference list (style image + own t1 + royal swatch) with the prompt
   A0      the form is not in FIGURE_GATE A0 APPROVED FORMS (sample-only; info, does not make a cell red alone)
 A cell is GREEN only if every person passes every check except A0.  Usage:
   python3 dev/art/coverage.py            -> writes dev/art/BUILDER_COVERAGE.md

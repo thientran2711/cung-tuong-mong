@@ -868,7 +868,7 @@ def build_nude_own(c,face,right):
     s+=" All flowers, clouds and dragons are fine silk-thread embroidery stitched directly into the fabric, flat and integrated with the cloth, following its folds, not appliqué, not pasted patches, not raised. "+FAB
     return s+_pose(item,hk,right)+CLOSE+END
 # ---------- N5d item 4: --state ty1..ty8 (trung y) and --state cold (lãnh cung), consorts cNN and maids mNN, all 5 ages ----------
-# RE-MAKE MODE (FIGURE_GATE A0): image 1 = her live picture of that tier+age (face + figure), image 2 = style3_girls. Design = the approved maid-ty-m09 v2 recipe (dev/handover/reports/fig-cutout-clean/PROMPT_TEMPLATE.txt:
+# RE-MAKE MODE (FIGURE_GATE A0): image 1 = her live picture of that tier+age (face + figure), image 2 = the style image (two approved portraits). Design = the approved maid-ty-m09 v2 recipe (dev/handover/reports/fig-cutout-clean/PROMPT_TEMPLATE.txt:
 # DESIGN + HAIR sentences verbatim; its "like figure number COLNO of reference 2" is dropped: no sheet image in this builder). Colour per tier = FIGURE_GATE C8 [OD:L392] = jty.js TY_COL.
 # a51/a65: owner d0f31d3 (no switch): a DEEPER shade of the SAME colour, same hue family (AGE_TXT's generic "pink becomes deep rose-plum" is overridden by this sentence).
 # Cold = the OLD lãnh cung outfit sentence copied verbatim from main dev/figwork/jobs.json N-cNN-tcold (+ gp.py B: robe hanging straight and calm, opaque). Held item: ty N -> the tN rank cell of item_age.py, cold -> "lanh" cell.
@@ -896,7 +896,7 @@ def build_ty_cold(c,state):
 #   tm3 = chưởng sự cô cô | tm4 = nữ quan (always red #99443F) | ma ma = PENDING (the NPC outfit wording exists nowhere in the repo, only the live picture fig-mama-k01).
 # Wording is COPIED, never invented: tm1 = the m01 tam đẳng re-make prompt (maids-M1.md); tm2/tm3/tm4 = main dev/figwork/maid/mjobs.py mout() k=2/3/4 (tm3 colour = LIGHTER purple, owner "đỡ đậm hơn"; tm4 colour = the live Nữ quan red);
 # tm0 = THÔ SỬ design 842754fa (FIGURE_GATE Lượt 172). Sleeves: tm0/tm1 ~1 hand-span, tm2 ~2, tm3 ~3 (owner ladder); tm4 as live. Each maid keeps HER OWN hairstyle at every rank (owner ~01:55Z); the ranks differ by hairpins.
-# Re-make mode: image 1 = her live maid picture, image 2 = style3_girls. Items: item_age.py tmK cell.
+# Re-make mode: image 1 = her live maid picture, image 2 = the style image (two approved portraits). Items: item_age.py tmK cell.
 NHAT_DANG_PENDING=None   # PENDING: nhất đẳng outfit wording. The owner has NOT chosen the reference sheet from her Phượng Lệnh art yet; do not write wording here until she does.
 MAMA_PENDING=None        # PENDING: ma ma = the Ma ma NPC outfit (fig-mama-k01); no wording exists in the repo -> ROOT-37 asked.
 MAID_IDENT=IDENT.replace("and hairstyle colour","her own hairstyle (the same at every rank) and hair colour",1)
