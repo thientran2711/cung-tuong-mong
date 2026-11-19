@@ -208,3 +208,4 @@ kc/ngheo NEW c13+c16 (4 gens) | handover | session_01PEhRbvGFP6YSgT5DTgo3yu (K4,
 | emo-anim pilot — E1 (painter, Foreman C ROOT-39; main ROOT-62 order) | img/_review/emo-anim/ + reports/emo-anim.md | ROOT-39 | session_01PEhRbtgqB1cacgkhDCv8gn | DONE (samples) | 19/11 ~02:50Z |
 | role-parity-drift (opus; 25 cx2 N-only rows on LIVE) | review/role-parity-drift | B | session_01N1tNP5o5V6dzpfsYEuSczb | RUNNING | 19/11 02:58Z |
 | REVIEW art-wiring-1119 r1 (opus BIG) of 69a26198 | review/art-wiring-1119-r1 | B | session_01N1tNP6nQ6XCj5Xu1dFX9af | RUNNING | 19/11 02:58Z |
+| REVIEW maid-ladder-6 r1 (opus BIG) of cb5a7cb3 | review/maid-ladder-6-r1 | B | session_01N1tNP3R1PQaRUv57AFoczD | RUNNING | 19/11 03:05Z |
