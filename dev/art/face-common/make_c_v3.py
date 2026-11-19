@@ -219,3 +219,15 @@ open(os.path.join(D,'INDEX_c_v3.md'),'w').write(hdr+"\n".join(out)+"\n")
 print("wrote",len(out))
 tab=["| id | old (Lượt 562) | new (B18, Lượt 583) |","|---|---|---|"]+[f"| {c} | {OLDCOL[c][0]} + {OLDCOL[c][1]} | {NEW[c][0][0]} {NEW[c][0][1]}{' (o)' if c in ORIGHEX else ''} + {NEW[c][1][0]} {NEW[c][1][1]} |" for c in NEW]
 open(os.path.join(D,'INDEX_c_v3.md'),'a').write("\n## B18 neutral-tone colours c07–c32 (owner Lượt 583; c01–c06 drawn samples kept as they are)\nEvery colour = name + hex + the store medium-tone sentence (build.py LOW_TONE). (o) = hex measured from her game t1 robe (build.py ORIG1).\n\n"+"\n".join(tab)+"\n")
+
+# RANK DATA (ROOT-51 19:09Z, owner Lượt 583 B18): c01–c06 hex + tone ONLY for their rank prompts; their drawn thiếu-nữ files stay as drawn.
+RANK_ONLY={"c01":(("soft rose red","#C77078"),("pale jade green","#A9C7B3")),
+"c02":(("muted sapphire blue","#5E6F9E"),("silvery grey","#B3ADB4")),
+"c03":(("soft emerald green","#6E9A7E"),("cream","#EEE3CC")),
+"c04":(("muted royal purple","#7E5E8E"),("soft lavender","#C3B3D6")),
+"c05":(("muted peacock teal","#4F8584"),("dusty rose","#C99A9C")),
+"c06":(("soft vermilion","#D5745E"),("ivory","#F0E8DA"))}
+import json
+json.dump({"_note":"Rank-prompt colours for consorts c01–c32 (B18 Lượt 583): main/secondary name + hex + tone sentence. c01–c06 = rank data only (their drawn thiếu-nữ pictures/files stay as drawn). HOLD: no use until owner GO.",
+ "tone":LOW_TONE,**{c:{"main":v[0][0],"main_hex":v[0][1],"secondary":v[1][0],"secondary_hex":v[1][1]} for c,v in {**RANK_ONLY,**NEW}.items()}},
+ open(os.path.join(D,'c_rank_colours.json'),'w'),ensure_ascii=False,indent=1)
