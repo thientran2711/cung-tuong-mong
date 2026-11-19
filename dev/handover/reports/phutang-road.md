@@ -67,7 +67,9 @@ Holder words used in ptO beyond E21's list (FYI for pt-scan): binhbo, thusu (Min
 | unknown tokens | none | none |
 | page errors | 0 | 0 |
 | one-core-guard | PASS (fails 0) | PASS |
-Bot (bd-roads-bal.js copy with origin pf, scratch only, not in git): running 3 lives/road at the time of writing — result line added below when done. quickcheck: needs the build committed on the sha; left to E21's merge build (I commit only jrd_pt2.js + jbalpt.js to avoid index.html/sw.js merge conflicts).
+Bot (bd-roads-bal.js copy with origin pf, scratch only, not in git), 3 lives/road on a619703f: pt_tang 3/3 reached .11 (win 1, lose 2), pt_dang 3/3 reached .11 (win2 1, mid 2); errors 0, page errors 0. (≥20 lives/road = E21's pt-roads-bal at merge.)
+pt-scan.py (E21) on 1d49cfc9: 6b unguarded 0; 6c NO BOOK 0 (54 give/buy/receive: 35 booked, 19 used up) after fixing 7 (sỏi + ngọc → ptO; ship space ×2, a secret, a draft, the novice servant → pt6c comments).
+**W2 DONE review/phutang-road-w2 @1d49cfc9.** quickcheck: needs the build committed on the sha; left to E21's merge build (I commit only jrd_pt2.js + jbalpt.js to avoid index.html/sw.js merge conflicts).
 
 ### FOR C (pictures — draw nothing; list only)
 - pt_tang: chùa Pháp Vân (sân, tháp, chánh điện with the offered sword), Pháp sư Trí Viễn (Đại Hy master monk, 51+, eyes clouded; serene), Tịnh Viên (Phù Tang monk, 36), the sutra case with bronze lock, bình lưu ly of the relics, bến Minh Châu with an envoy ship at monsoon; buổi luận đạo in điện Tập Hiền (Quán chủ Thái Thanh quán, Đạo robe).
