@@ -224,7 +224,7 @@ function rpAsk(m){RPM=RPM||m;try{D.after(RPF)}catch(e){}}
 /* hostnull (c): ONE cap rule (BAL.coopUi, one core): at most BAL.coopUi.batch effects play at once; the rest wait in order and play
    BAL.coopUi.gapMs later, batch by batch — an effect is never dropped (the old answer kept only 4, the run 12). Returns the number queued. */
 const UIQ=[];let uiT=0;
-function uiPump(){uiT=0;const B=(typeof BAL==="object"&&BAL.coopUi)||{batch:4,gapMs:900};let n=0;
+function uiPump(){uiT=0;const B=BAL.coopUi/* one core (law 4): no typed fallback */;let n=0;
  while(UIQ.length&&n<Math.max(1,B.batch|0)){const [f,a]=UIQ.shift();try{window[f].apply(null,Array.isArray(a)?a:[a]);n++}catch(e){console.error("thin uiPlay",f,e)}}
  TH.uiN=(TH.uiN|0)+n;if(UIQ.length)uiT=setTimeout(uiPump,Math.max(0,B.gapMs|0))}
 TH.uiPlay=function(L){let n=0;for(const x of L||[]){if(!Array.isArray(x))continue;const [f,a]=x;if(!UICAP.has(f)||typeof window[f]!=="function")continue;UIQ.push([f,a]);n++}

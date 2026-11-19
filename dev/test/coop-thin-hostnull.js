@@ -182,6 +182,17 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
    aRoll=()=>false;COOPW.inv='hn-test';try{o.ally=String(ACT.ally.f(S,f)||'').replace(/<[^>]+>/g,'')}finally{COOPW.inv=false}
    o.allyNpc=n?String(ACT.ally.f(S,n)||'').replace(/<[^>]+>/g,''):'skip'}finally{roll=r0;aRoll=a0}return o});
   ok(!!r.hit[0]&&!!r.hit[1]&&!/không nhận/.test(r.gift)&&/không nhận/.test(r.npc)&&/thành/.test(r.ally)&&!/thành/.test(r.allyNpc),'H5 law 1: the gift / Kết giao the other player accepted is never refused by a roll after (an NPC still can)',r)}
+ /* H5b (review r1) law 1 the OTHER way: the same staging in HER context on the host (she gives / asks Kết giao, the HOST's entry accepted:
+    CW.inv set, target = his entry in her world): never refused after; an NPC still can. Item count (law 6c): the accepted gift left her chest once. */
+ {await reset();const r=await H.p.evaluate(()=>{const o={};const r0=roll,a0=aRoll;try{COOPW.thin.withSeat('b',()=>{const f=rivals.find(v=>v&&v.coop);o.f=!!f;if(!f)return;
+   const ik=Object.keys(IT).find(k=>{try{const i=itm(k);return i&&i.kd&&!(i.tg||[]).length&&!i.wk}catch(e){return false}});S.inv=S.inv||[];S.inv.push({k:ik,hn5b:1},{k:ik,hn5b:1});const e=S.inv[S.inv.length-1];
+   const n=rivals.find(v=>v&&!v.coop&&v.alive&&!v.out);for(const v of [f,n])if(v)v.dis=['kd:'+itm(ik).kd];o.hit=[disHit(f,e),n&&disHit(n,e)];roll=()=>true;
+   const c0=S.inv.filter(x=>x.hn5b).length;COOPW.inv='hn-test-b';try{o.gift=String(giveTo(S,f,S.inv.length-1)||'').replace(/<[^>]+>/g,'')}finally{COOPW.inv=false}o.left=c0-S.inv.filter(x=>x.hn5b).length;
+   o.npc=n?String(giveTo(S,n,S.inv.length-1)||'').replace(/<[^>]+>/g,''):'skip';o.npcKept=S.inv.filter(x=>x.hn5b).length;
+   aRoll=()=>false;COOPW.inv='hn-test-b';try{o.ally=String(ACT.ally.f(S,f)||'').replace(/<[^>]+>/g,'')}finally{COOPW.inv=false}
+   o.allyNpc=n?String(ACT.ally.f(S,n)||'').replace(/<[^>]+>/g,''):'skip';S.inv=S.inv.filter(x=>!x.hn5b)})}finally{roll=r0;aRoll=a0}return o});
+  ok(r.f&&!!r.hit[0]&&!!r.hit[1]&&!/không nhận/.test(r.gift)&&r.left===1&&/không nhận/.test(r.npc)&&r.npcKept===1&&/thành/.test(r.ally)&&!/thành/.test(r.allyNpc),'H5b law 1 the other way (her context): the gift / Kết giao the host accepted is never refused after, the gift left her chest once (an NPC still can refuse, the gift stays)',r);
+  for(let i=0;i<3;i++){await clear(H);await clear(G)}}
  if(process.env.UISCAN)try{fs.writeFileSync(process.env.UISCAN,JSON.stringify(await H.p.evaluate(()=>window.__uiscan)))}catch(e){console.error('uiscan',e.message)}
  const pe=[...H.errs,...G.errs].filter(e=>!/ERR_|net::|WebSocket/.test(e));ok(pe.length===0,'H8 no page errors',pe.slice(0,6));
  const n=res.filter(x=>x[0]).length;console.log(`coop-thin-hostnull L${LVL}${SWAP?' swap':''}: ${n}/${res.length}`);await b.close();process.exit(n===res.length?0:1)})().catch(e=>{console.error(e);process.exit(2)});
