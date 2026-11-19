@@ -1,7 +1,7 @@
 # cdn-kc-restore (worker for C-AG #23 / ROOT-71), 19/11 ~22:40Z
 PRIORITY #1 CHECK: OD 0 hits for FIGURES-kc | main dev/site/manifest-floor.json:30 (floor 420), manifest_guard.py, cdn_sync.py (guard exists) | review/* none | claims CLAIMS L309/310 (this job) | reports lv1-kc-swap.md = the cause (LV1, ROOT-50/51), FOREMAN_C_STATUS L1444/L1453 (FOR MAIN floor line never landed), FOREMAN_E_STATUS L571 (alarm).
 depth 2 (lineage limit 8) · START_CTX ~4 % (own estimate, get_session read 0, window 1M) · ending ~11 %.
-Branch review/cdn-kc-guard from LIVE main 2bda29a1: **baf63a2d** (floor only, can be cherry-picked) + **e0e0e5ae** (guard hardening). → SẴN SÀNG KIỂM cdn-kc-guard e0e0e5ae.
+Branch review/cdn-kc-guard from LIVE main 2bda29a1: **baf63a2d** (floor only, can be cherry-picked) + e0e0e5ae (guard hardening) + **7a322502** (ROOT-71 add: owner pull-down command). → SẴN SÀNG KIỂM cdn-kc-guard 7a322502.
 
 ## 1. CAUSE (evidence)
 - Nothing is broken on the CDN. The live FIGURES-kc.json (264 rows) is the owner-ordered state. The REPO FLOOR is stale.
@@ -44,6 +44,12 @@ None needed. The CDN was already correct. "CDN CLEAN FIGURES-kc 264 (floor 264)"
 | 9 | cdn/worker | read-only (no PUT) | n/a |
 | 10 | live-check coverage | fixed list (FIGURES-hd unchecked) | walks every FIGURES*.json on the CDN (`names_live()`) |
 Tests: dev/test/manifest-guard-selftest.py = **12 pass, 0 fail** (fake CDN writes, real CDN reads); wired into dev/tools/quickcheck.d/70-manifest-guard.sh (rc 0). Real CLI dry runs: unchanged FIGURES-kc → "same 1"; 4 rows cut → SHRINK … REFUSED; `--allow-shrink --reason test` → SHRINK ALLOWED (dry run, nothing recorded).
+
+## 6. ROOT-71 ADD (19/11 ~21:46Z): owner-ordered pull-downs lower the floor in the same change (7a322502)
+- `python3 dev/site/manifest_guard.py --set-floor-from-live FIGURES-x.json [...] --reason "owner Lượt N"`: each named guarded manifest's floor is lowered to what is live now (never raised), recorded on the CDN (img/_floor-sanctioned.json) and written to dev/site/manifest-floor.json (commit it). `cdn_sync --allow-shrink --reason …` does the same during the push.
+- `owner_reason()`: both refuse a reason that does not name the owner order (Lượt N / OD:Lnn / OD dd/mm). A shrink without an owner order still fails.
+- Documented in dev/art/CDN.md (the CDN guide art workers read: "OWNER-ORDERED PULL-DOWN"). dev/rules/START_ART.md is the verbatim owner canon (generated), so I did not edit it. If MAIN wants the line there too, MAIN places it.
+- Selftest now 16/16 (owner reason, set-floor-from-live against a stale 420 floor → 264 + CDN record, fake writes); quickcheck 70 rc 0.
 
 ## FOR MAIN / C-AG
 1. Land baf63a2d first (floor only) to unblock G4 for npc-purpose 126dadaa / choice-value 02e151e3 / palace-chatter (they need to merge main after it). e0e0e5ae (tooling) after review.
