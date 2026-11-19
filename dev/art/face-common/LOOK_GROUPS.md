@@ -9,7 +9,7 @@ m01, m07, m13, m19, m25, m31, m37, m43, m49, c01*, c07*, c13*, c19*, c25*, c31*,
 ## Dịu dàng (15 người)
 m02, m08, m14, m20, m26, m32, m38, m44, m50, c02*, c08*, c14*, c20*, c26*, c32*
 
-## Trong trẻo (15 người)
+## Trong trẻo (15 người) → GỘP vào Tươi tắn (owner Lượt 684)
 m03, m09, m15, m21, m27, m33, m39, m45, m51, c03*, c09*, c15*, c21*, c27*, nc2 Cao Ly*
 
 ## Đoan trang (14 người)
@@ -34,7 +34,8 @@ Chưa có người. Câu mặt: TYPES_v4.md / make_nf3.py TYPES_C["Quyến rũ"]
 - DÙNG (nhóm mới): Kiêu kỳ, Lạnh lùng, Quyến rũ.
 - KHÔNG DÙNG: Anh khí (s04), Thư hương (s05), Yêu kiều (s06 — Thư hương và Yêu kiều quá giống nhau). Câu mặt + ảnh mẫu giữ làm lịch sử (TYPES_v4.md, make_nf3.py), không vẽ thêm.
 - Lượt 680 gộp Trong trẻo vào Dịu dàng → HUỶ ở Lượt 682: tách lại như cũ.
-- CHƯA QUYẾT: nhóm cũ Tươi tắn, Dịu dàng, Trong trẻo, Đoan trang (không đánh "BỎ").
+- GỘP (owner Lượt 684): Trong trẻo GỘP VÀO Tươi tắn — một nhóm, tên "Tươi tắn". Dịu dàng giữ riêng.
+- CHƯA QUYẾT: nhóm cũ Tươi tắn (đã gộp Trong trẻo), Dịu dàng, Đoan trang (không đánh "BỎ").
 - GIỮ: Sắc sảo, Tinh nghịch.
 
 
