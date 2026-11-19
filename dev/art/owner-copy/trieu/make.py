@@ -4,7 +4,7 @@ Originals (orig/): t1-t6 = golden_low/tN_v0_c06.txt from branch review/t8-prompt
 Edits to the original text: NONE, except (a) the reference number "image 1 (her first reference)" -> "image 2 (her second reference)" because today's
 REFERENCES order puts the style image first (FIGURE_GATE A0 REFERENCES); apply it only with --refnum2. The block is inserted right before " Pose: calm standing pose;".
 Block words come from build.py (TRIEU_MAIN, TRIEU_PANELS, TRIEU table, TRIEU_EDGE, SH_OLD5, NUDE_OPT A) - no new colour words.
-Usage: python3 make.py [--refnum2]   -> writes tN_c06.txt + tN_c06.diff.txt next to this file."""
+Usage: python3 make.py   (NO --refnum2: refs are each original's own refs + image 3 Nữ quan)   -> writes tN_c06.txt + tN_c06.diff.txt next to this file."""
 import os, sys, re, difflib, importlib.util
 H=os.path.dirname(os.path.abspath(__file__))
 sys.argv_saved=sys.argv; B=os.path.join(H,'../../t8-prompt-B/build.py')
@@ -29,6 +29,12 @@ def block(t):
             + PAN.replace("each in the rank colour","each in that court red")
             + "the cloud collar sits on a STIFF, SHORT, structured shoulder piece (cầu vai cứng) of gold brocade edged with pearls over each shoulder, curving up and slightly pointed outward; "
             "from its edge hangs a LONG pearl fringe, several pearl strings deep, down to the elbow or longer, at least as long as the Hoàng quý phi's.")
+# ROUND 15b (ROOT-40 19/11 ~04:10Z, owner Lượt 241 "lấy cái hình nữ quan để mà làm ảnh màu đi, và chất vải đi"): refs = each original's own refs
+# (image 1 = own t1 face TdU0vvvVNR, image 2 = style m09 eIyOFEidqL) + image 3 = live Nữ quan m37 tm4 (s7IO0AUl8e, md5 = CDN img/hd/fig-maid-m37-tm4-a18.webp).
+NQ=(" Image 3 is the Nữ quan reference image: the court red colour and the fabric (sheen, weave, drape) of this court robe exactly like the robe of the Nữ quan reference image (image 3);"
+    " copy ONLY its colour and cloth, never its person, face, outfit cut, embroidery, hair, item or pose.")
+_block=block
+def block(t): return _block(t)+NQ
 def wdiff(a,b):
     ta=re.findall(r'\S+\s*',a); tb=re.findall(r'\S+\s*',b); out=[]
     for op,i1,i2,j1,j2 in difflib.SequenceMatcher(None,ta,tb,autojunk=False).get_opcodes():
