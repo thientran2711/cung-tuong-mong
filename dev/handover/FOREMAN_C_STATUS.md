@@ -671,7 +671,16 @@ NEXT FOREMAN C-AG: #4 = session_01UV1SzkyZBYRFoSWBF8fg27 (opened by C-AG #3 17:3
 NEXT FOREMAN C-AG: #5 = session_01UV1SzkwHkU5MoXKRsprFyU (opened by C-AG #4 18:35Z, depth 5; prompt dev/handover/TAKEOVER_FOREMAN_C_AG5.md). C-AG #4 STOPS; wake trig_0158XmaYdhYu6GqeJWSPB6d7 disabled.
 NEXT FOREMAN C-AG: #9 = session_01UV1Szh2asyry15mvpuCEsJ (opened by C-AG #8 03:20Z, depth 4; prompt dev/handover/TAKEOVER_FOREMAN_C_AG9.md). C-AG #8 STOPS; wake trig_01TRu7DaRSREmn8KFD24wdcM disabled.
 NEXT FOREMAN C-AG: #10 = (opening by C-AG #9 04:46Z, depth 5; prompt dev/handover/TAKEOVER_FOREMAN_C_AG10.md). C-AG #9 STOPS; wake trig_016ULtkrgBBgsErLCPcqKMME disabled.
-## FOREMAN C-AG #18
+## HANDOVER C-AG #18 (session_01Rc5AsLo1KXQFDUGVweKun8) → C-AG #19, 02:35Z 19/11
+Why: context 40 % (START ~6 % est) ≥ roll line 31 %. Depth 5 → #19 depth 6 (my child, prompt TAKEOVER_FOREMAN_C_AG19.md). My wake trig_01DLwLzuEPgHWE5Vo4zyq78x DISABLED (#19 makes its own at :32).
+MAIN = ROOT-62 session_01Rc5AsJvnKvJMiKUjEhRST1 (depth 0). LIVE main = b1c3631e.
+DONE this shift: opt-card-short LIVE 96188526 + live-servants LIVE b1c3631e (reviewers + worker archived, CLAIMS DONE).
+RUNNING (my children, this account, env cung-tuong-mong; #19 adopts):
+- CTM odds-meter-back (for MAIN) opus session_01Rc5AsJj8qdidmEiDujymyR: 3216fd90 sent back by ROOT-62 (law-3 filler fix); ROOT-62 opens its own reviewer on the next sha.
+- CTM errand-scene badge lines successor (for MAIN) opus session_01Rc5AsL23c5v2Nwya3bgsRc: reviewer MAIN's 01Rc5AsMQH6saABuVfGgPzYi.
+- npc-purpose (D, files only): no new G1 SẴN SÀNG.
+OPEN: THỬ TAY CTM-CAL code (waits owner).
+## FOREMAN C-AG #18 (rolled over 02:35Z)
 FOREMAN C-AG #18 = session_01Rc5AsLo1KXQFDUGVweKun8 (child of C-AG #17) · START_CTX ~6 % (est; window 1M; get_session reads 0) → roll over at >= 31 %, ceiling 60 % · depth 5 (limit 8) · wake trig_01DLwLzuEPgHWE5Vo4zyq78x hourly :32 · reports to MAIN ROOT-61 session_01Rc5AsJBmT3vTTFe8sbCbUa (depth 8, no own wake: send_message it on every LAND READY).
 - 00:40Z C-AG #18 took over. LOAD 2 own children: LIVE-SERVANTS #4 01Rc5AsLdRc1YbZ1vrMvV1Ro (SẴN SÀNG KIỂM 797f87e, waits verdict), REVIEW live-servants 01Rc5AsKp5X8AnT5HJ7WoyXK (re-checking 797f87e); + npc-purpose D seats (files only). Both told 'C-AG #18 is your foreman; MAIN ROOT-61'. LIVE main 8113f42e.
 - 01:14Z C-AG #18: for MAIN ROOT-61 (cannot open sessions) OPENED REVIEW opt-card-short 04f09798 = session_01Rc5AsN8cog61d64VwoXU4G (sonnet, my child, env cung-tuong-mong); MAIN's order verbatim; verdict → ROOT-61 + C-AG #18. Archive after LAND/FAIL handled.
