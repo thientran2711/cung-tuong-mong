@@ -23,3 +23,14 @@ Nothing written to art files, no gens. Did not overwrite c5cf264 (would destroy 
 (a) keep c5cf264 and present lanhlung_L761.jpg to the owner as-is (optionally rebuild the sheet with all 10 approved LL); or
 (b) redo after P1 NEW16 + MG1 FACE READY: rewrite colours in make_lanhlung_L761.py from P1, rebuild via builder, gate, regen 5.
 I wait for your message.
+
+## Update — foreman decision (a) KEEP c5cf264 (sent to owner). Next: Kiêu kỳ +5 prompts (no gens)
+- dev/art/face-common/make_kieuky_L761.py: same method as make_lanhlung_L761.py (T7 Kiêu kỳ v5 block, EYES_STRAIGHT, NEW_MOUTH, thướt tha, no "phoenix" anywhere — asserted).
+- Drafts s51–s55.v5.PH.txt with {ROOT_MAIN}/{ROOT_MAIN_HEX}/{ROOT_SEC}/{ROOT_SEC_HEX}. Fill ROOTS from P1 → script writes sNN.v5.FULL.txt.
+- 5 people (each unlike the 10 approved KK s10–s12, s19–s25 and unlike each other; DIFF list in the script):
+  s51 18 TR: firm angled jaw, thick brows · two tall loops fully up · ruqun + sheer shawl · gold wine cup
+  s52 17 FF: HEART-OVAL, wide forehead, small fuller lips · tilted tall bun, pearl-drop pin · half-sleeve jacket over top + high skirt · peacock feather
+  s53 18 SL (walking): large up-swept eyes, arched bridge · loose deep left part, gold comb + pearl chain · beizi · red lacquer jewel box on palm
+  s54 18 ST: TEARDROP-OVAL, very high cheekbones · low chignon, crossed silver pins · chest-high skirt + wide-sleeved short top · pearl strand on fingers
+  s55 17 SR: deep-set eyes, rounded chin, lifted nose tip · crown braid, ruby pin · sleeveless overvest over ruqun · red silk parasol
+- Gens wait for: (1) owner OK on Lạnh lùng, (2) P1 NEW16 READY (s51–s55 roots), (3) MG1 FACE READY.
