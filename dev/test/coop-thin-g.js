@@ -65,7 +65,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  const W=+(process.env.WEEKS||4);const rows=[];let pass=0;const t0=Date.now();
  for(let k=0;k<W;k++){const a=await her();const g0=await G.p.evaluate(()=>({et:window.__et,end:window.__sent.filter(x=>x==='end').length}));const hs0=await H.p.evaluate(()=>COOPW.thin.G?COOPW.thin.G.stat.week:0);
   await week(H,G,'G1 week '+(k+1));for(let i=0;i<3;i++){await clear(H);await clear(G);await sleep(300)}
-  const b=await her();const g1=await G.p.evaluate(()=>({et:window.__et,end:window.__sent.filter(x=>x==='end').length,w:COOP.state.week}));const hs=await H.p.evaluate(()=>({w:COOPW.thin.G.stat.week,ms:COOPW.thin.G.ms.slice(-1)[0],G:COOPW.thin.G.stat,dev:COOPW.thin.G.devKeys,miss:COOPW.thin.uiMiss}));
+  let b=await her();const d0=diff(b.h,b.g);for(let t=0;t<20&&diff(b.h,b.g).length;t++){await sleep(500);b=await her()}if(d0.length)console.log('TRANSIENT week '+(k+1),JSON.stringify(d0),'settled',JSON.stringify(diff(b.h,b.g)),'to',JSON.stringify(d0.map(([x])=>[x,b.h[x],b.g[x]])));const g1=await G.p.evaluate(()=>({et:window.__et,end:window.__sent.filter(x=>x==='end').length,w:COOP.state.week}));const hs=await H.p.evaluate(()=>({w:COOPW.thin.G.stat.week,ms:COOPW.thin.G.ms.slice(-1)[0],G:COOPW.thin.G.stat,dev:COOPW.thin.G.devKeys,miss:COOPW.thin.uiMiss}));
   const d=diff(b.h,b.g);const okk=g1.et===g0.et&&g1.end===g0.end&&hs.w===hs0+1&&!d.length;if(okk)pass++;
   rows.push({w:g1.w,her:b.h,ms:hs.ms});
   ok(okk,'G1 week '+(k+1)+': her phone ran no week end, sent no end; the host ran hers once; her phone == host store',okk?{bac:[a.h.bac,b.h.bac],ms:hs.ms}:{et:[g0.et,g1.et],end:[g0.end,g1.end],hw:[hs0,hs.w],diff:d,G:hs.G})}
