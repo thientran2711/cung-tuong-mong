@@ -6,7 +6,12 @@
   usage: python3 dev/site/manifest_guard.py NEW.json [--name FIGURES.json] [--live-file LIVE.json] [--allow-shrink]   exit 1 on FAIL
          python3 dev/site/manifest_guard.py --live-check      (checks the manifests that are live on the CDN against the floor: for quickcheck / nightly)
          python3 dev/site/manifest_guard.py --write-floor     (rewrites the floor from the live CDN; only ever grows: max(old, live))
-  cdn_sync.py calls check() before pushing any img/FIGURES*.json (not -hd); --allow-shrink on cdn_sync passes it through."""
+  cdn_sync.py calls check() before pushing any img/FIGURES*.json (every one, -hd included: is_guarded()) or ACTS/EVENTS; its put() and DELETE refuse an
+  unchecked guarded manifest, so a script that imports cdn_sync cannot skip the guard either (cdn-kc-guard 19/11).
+  INTENDED SHRINK (cdn-kc-guard 19/11: LV1 removed old kc art on the owner's order with --allow-shrink, but the repo floor stayed at 420 and every branch's
+  --live-check failed for hours): `cdn_sync.py --allow-shrink --reason "<owner order>"` records the lowered floor on the CDN in img/_floor-sanctioned.json
+  {name: {from: <floor it replaces>, to: <new floor>, reason, at}} and lowers dev/site/manifest-floor.json in that checkout (commit it on your branch).
+  Until the repo floor is updated, effective_floor() uses the CDN record while the repo entry still equals its 'from'; --write-floor applies it too."""
 import json, os, sys, urllib.request, collections
 PUBLIC = os.environ.get("CTM_IMG_BASE") or "https://ctm-img.victoria-tntt.workers.dev/"
 HERE = os.path.dirname(os.path.abspath(__file__)); FLOOR = os.path.join(HERE, "manifest-floor.json")
@@ -14,6 +19,29 @@ GUARDED = ("FIGURES.json", "FIGURES-servants.json", "FIGURES-others.json", "FIGU
 # act-pic-match 18/11: img/ACTS.json and img/EVENTS.json were overwritten at 17/11 02:41Z by the same stale-checkout push that shrank FIGURES.json
 # (every act without its key showed the kit placeholder, ~130 acts shared pictures). They are DICT manifests: guarded by the size of each section.
 DICT_GUARDED = {"ACTS.json": ("acts", "prefix", "log"), "EVENTS.json": ("categories", "events", "stories")}
+SANCTIONED = "_floor-sanctioned.json"
+def is_guarded(name):
+    """every img/FIGURES*.json (the list above + -hd + any new one) and the DICT manifests"""
+    return name in DICT_GUARDED or (name.startswith("FIGURES") and name.endswith(".json"))
+def sanctioned():
+    try:
+        j = fetch(SANCTIONED); return j if isinstance(j, dict) else {}
+    except Exception: return {}
+def effective_floor(floor, sanc=None, note=None):
+    """repo floor, with an intended lowering recorded on the CDN applied while the repo entry is still the one it replaced"""
+    sanc = sanctioned() if sanc is None else sanc; out = dict(floor)
+    for n, r in sanc.items():
+        if isinstance(r, dict) and r.get("to") and floor.get(n) in (r.get("from"), r.get("repo")):
+            out[n] = r["to"]
+            if note is not None: note.append(f"NOTE {n}: floor lowered on the CDN ({r.get('at')}: {r.get('reason')}); repo dev/site/manifest-floor.json still has the old floor -> run --write-floor and commit it")
+    return out
+def entry(name, j):
+    """floor entry {n, by} of a manifest as it is"""
+    return {"n": 0, "by": dsec(j, name)} if name in DICT_GUARDED else {"n": len(lst(j)), "by": dict(counts(lst(j)))}
+def lowered(old, new):
+    """the floor after an intended shrink: every old key down to the new count (keys the old floor did not have stay unfloored)"""
+    old = old or {"n": 0, "by": {}}
+    return {"n": min(old["n"], new["n"]), "by": {k: min(v, new["by"].get(k, 0)) for k, v in old["by"].items()}}
 def dsec(j, name):
     j = j if isinstance(j, dict) else {}
     return {k: len(j.get(k) or []) for k in DICT_GUARDED[name]}
@@ -55,25 +83,33 @@ def check(name, new, live=None, floor=None, index=None):
         miss = [f.get("file") for f in new if isinstance(f, dict) and f.get("file") and f.get("file") not in index]
         if miss: bad.append(f"{name}: {len(miss)} listed files are not on the CDN (e.g. {miss[:3]})")
     return bad
+def names_live(idx=None):
+    """GUARDED + every other img/FIGURES*.json on the CDN (a new manifest is guarded the day it appears)"""
+    idx = idx if idx is not None else {k for k, _, _ in fetch("_index.json")["files"]}
+    more = sorted(k[4:] for k in idx if k.count("/") == 1 and is_guarded(k[4:]) and k[4:] not in DICT_GUARDED and k[4:] not in GUARDED)
+    return list(GUARDED) + more
 def load_floor(): return json.load(open(FLOOR)) if os.path.exists(FLOOR) else {}
 def main():
     a = sys.argv[1:]; floor = load_floor()
     if "--write-floor" in a:
-        for n in GUARDED:
+        floor = effective_floor(floor)
+        for n in names_live():
             L = lst(fetch(n)); old = floor.get(n, {"n": 0, "by": {}}); by = dict(counts(L))
             floor[n] = {"n": max(old["n"], len(L)), "by": {k: max(old["by"].get(k, 0), by.get(k, 0)) for k in set(old["by"]) | set(by)}}
         for n in DICT_GUARDED:
             c = dsec(fetch(n), n); old = floor.get(n, {"n": 0, "by": {}}); floor[n] = {"n": 0, "by": {k: max(old["by"].get(k, 0), c[k]) for k in c}}
         json.dump(floor, open(FLOOR, "w"), indent=1, sort_keys=True); print("floor written", {n: floor[n]["n"] for n in floor}); return
     if "--live-check" in a:
-        idx = {k for k, _, _ in fetch("_index.json")["files"]}; bad = []
-        for n in GUARDED:
+        idx = {k for k, _, _ in fetch("_index.json")["files"]}; bad, notes = [], []; floor = effective_floor(floor, note=notes)
+        print("\n".join(notes)) if notes else None
+        for n in names_live(idx):
             bad += check(n, fetch(n), floor=floor, index=idx)
         for n in DICT_GUARDED:
             j = fetch(n); bad += dcheck(n, j, floor=floor)
             if n == "ACTS.json" and not j.get("log"): bad.append("ACTS.json: no 'log' rules (the live act table fell back to the 15/11 base)")
             if n == "ACTS.json" and not any(str(v).endswith("-h") for v in (j.get("acts") or {}).values()): bad.append("ACTS.json: no '-h' (hands-only) picture keys")
         print("\n".join(bad) if bad else "MANIFEST GUARD PASS (live manifests >= floor, every listed file on the CDN)"); sys.exit(1 if bad else 0)
+    floor = effective_floor(floor)
     p = [x for x in a if not x.startswith("--")][0]; name = a[a.index("--name") + 1] if "--name" in a else os.path.basename(p)
     live = json.load(open(a[a.index("--live-file") + 1])) if "--live-file" in a else fetch(name)
     bad = dcheck(name, json.load(open(p)), live=live, floor=floor) if name in DICT_GUARDED else check(name, json.load(open(p)), live=live, floor=floor)
