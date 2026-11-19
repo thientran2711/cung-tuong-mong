@@ -75,7 +75,13 @@ for age in ("a18","a26","a36","a51","a65"):
         TA,TC=_blk(age+" AGE TEXT"),_blk(age+" COLOUR TEXT")
         i=o.index("Her face:"); i=o.index("dress her in the NEW outfit below. ",i)+len("dress her in the NEW outfit below. ")
         j=o.index(HAIR)
-        o=o[:i]+TA+" "+TC+o[j:]
+        # D15 (owner Lượt 692+694, via ROOT-55): ELDER STYLE LOCK copied VERBATIM from the ma ma r55 a51 prompt, right after the age text;
+        # ref order here: image 1 identity, image 2 royal swatch, image 3 = her own Nữ đế a36 picture -> only "the second reference" -> "the third reference" (ROOT-55 allowed)
+        _src=open(os.path.join(ROOT,"dev/handover/reports/mama-specs/m05-a51.styleref.r55.prompt.txt"),encoding="utf-8").read()
+        _m=re.findall(r"STYLE LOCK \(same drawing as her 36-year-old picture, the second reference\):.*?no detailed wrinkles\.",_src); assert len(_m)==1
+        STYLE=_m[0].replace("the second reference","the third reference",1)
+        o=o[:i]+TA+" "+STYLE+" "+TC+o[j:]
+        assert o.count(STYLE)==1 and o.index(TA)<o.index(STYLE)<o.index(TC),"D15 gate"
         assert o.count(TA)==1 and o.count(TC)==1
     assert not re.search(r"Pose:[^.]*\b(stole|ribbon|sash|shawl)\b",o)
     assert "style reference" not in o.lower() and "Image 3" not in o
