@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """pt-scan (review/phutang-road, E21; copy of bd-scan r2): law 6b + 6c family scan over Phù Tang's own roads (jrd_pt.js + jrd_pt2.js).
-6b: every bdMove/bdKill of a BDP person; then every LATER line of the same road naming that person (or {mh} for kd) — flagged
+6b: every ptMove/ptKill of a PTP person (scan stops at a told return = a later cast moving him back to kinh); then every LATER line of the same road naming that person (or {mh} for kd) — flagged
     'UNGUARDED' unless the line (or its beat) reads the book (bdP / bdAlive / BDKD / bdWhere / a place-aware helper) or a told return exists.
 6c: every option whose name gives / buys / receives / sends / burns / hides a thing — flagged 'NO BOOK' unless its line sets bdO(...)
     or moves a BDP person/animal (a person is in BDP, not in bdO). Goods used up at once (bạc, lương, áo bông, quà) are listed as 'used up'.
@@ -8,7 +8,7 @@ usage: python3 dev/measure/bd-scan.py [files…]"""
 import re,sys
 FILES=[a for a in sys.argv[1:] if not a.startswith('-')] or ['dev/build/jrd_pt.js','dev/build/jrd_pt2.js']
 NAME={'kimthanh':['Kim Thành','đại sứ','Đại sứ'],'trongla':['Trọng Lữ'],'tieungoc':['Tiểu Ngọc'],'thanlao':['Thân Lão'],'namlao':['Nham Lão'],'huuthanh':['Kim Hựu Thành','thương chủ','thương nhân Tân La'],'ocuu':['Ô Cửu'],'tinhvien':['Tịnh Viên'],'trivien':['Trí Viễn'],'mh':[r'\{mh\}']}
-GUARD=re.compile(r'ptP\(|ptAlive\(|ptWhere\(|PTNGOC\(|PTLOG\(|RDQ\.pt|pt6b:|ptSail\(')
+GUARD=re.compile(r'ptP\(|ptAlive\(|ptWhere\(|PTNGOC\(|PTLOG\(|PTTVK\(|PTTNK\(|PTHT\(|PTOC\(|PTSAIL\(|RDQ\.pt|pt6b:|ptSail\(')
 GIVE=re.compile(r'\{n:"((?:[^"]*?)(?:Gửi|Tặng|Trao|Nhường|Mua|Bỏ bạc mua|Bán|Đốt|Cho lấy|Nhận ngựa|Nhận cung|Nhận|Giữ|Đưa|Chôn|Chuộc|Cầm|Dâng|Trả|Để kho bán|Giấu|Khâu)[^"]*)"')
 USED=re.compile(r'bạc|lương|áo bông|quà|gạo|nước|lễ vật|thuốc|thư|lời|người|tin|binh|quân|sứ|dũng sĩ|tay đua|tay cung')
 def SL(b):
@@ -28,7 +28,7 @@ for f in FILES:
   for i,c,l in rows:
     if not c:continue
     for m in re.finditer(r'pt(Move|Kill)\("(\w+)"(?:,"(\w+)")?\)',l):
-      if l.startswith('const pt'):continue
+      if l.startswith(('const pt','const PT')):continue
       moves.append((f,i,c,m.group(1),m.group(2),m.group(3) or 'dead'))
     for m in GIVE.finditer(l):
       seg=l[m.start():];seg=seg[:seg.find('}',seg.find('rt:'))+1] if 'rt:' in seg else seg
@@ -46,6 +46,7 @@ for f in FILES:
     for i,c,l in rows:
       if not c or c[0]!=mc[0] or c[1]<mc[1] or (c[1]==mc[1] and i<=mi):continue
       if c==mc and SL(beat[i])==SL(beat[mi]):continue  # same slot = the other options of the choice
+      if c!=mc and re.search(r'ptMove\("'+pid+r'","kinh"\)',l) and ('cast(' in l or l.lstrip().startswith('if(')):break  # a TOLD return in a later chapter's cast: from here on he is back where the text has him
       for nm in NAME[pid]:
         if (re.search(nm,l) if pid=='mh' else nm in l) and not l.lstrip().startswith(('/*','path:','bad:')):
           g=GUARD.search(l) or GUARD.search(beat[i]) or GUARD.search(chap[i])
