@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"42bda6a9+","t":"2026-11-19T03:34Z","c":"opt-loss-ton: also checks a worded gain never reads 'Được: không'; scans dialogs as the game shows them","b":"8b87181b8075","h":[{"s":"cb5a7cb3+","t":"2026-11-19T03:03Z","c":"maid-ladder-6: NPC exam mini-game tier clamps at BAL.srvRk.nq (last typed rung); scan table counted"},{"s":"5f7aef61","t":"2026-11-19T02:22Z","c":"seal-lean: kitEmoSeal idle sway (rotate only) + staggered lean-in with per-feeling motion; test + KIT 38.4 canon overwrite"},{"s":"03df1c9d+","t":"2026-11-19T01:41Z","c":"role-parity.test: deterministic riseCore block (SEED FIX)"},{"s":"de1f6916+","t":"2026-11-19T01:29Z","c":"review live-servants r2: ag-know ONE RULE (NPC) case follows the live-servants rule like §3 (consort's close maid planted at the garden, re…"},{"s":"7d693c26+","t":"2026-11-19T01:22Z","c":"opt-card-short #10: samples = real events; LAW 3: a gain/loss worded only as Gợi ý now shows in Được/Tốn (was «không»)"},{"s":"2dd9cb23+","t":"2026-11-19T00:45Z","c":"review stage-here r4: buổi-turn visit refresh holds the queued cards aside so goTo (j2: returns on Q.length) keeps her where she is (OD 18/…"},{"s":"21904959+","t":"2026-11-18T23:40Z","c":"fullbody-frame s5: person dialog follows the figure standard: frame height follows the figure, figure column runs tag to frame bottom, butt…"},{"s":"cff7cf4d+","t":"2026-11-18T23:07Z","c":"questline-q2 r6 (reviewer): nhTip — a penalty (hb\u003c0) on the told rival's chapter is offset by the tip bonus, not taken as a bonus; rebuild"},{"s":"a837ad32+","t":"2026-11-18T23:30Z","c":"rel-picker r2: site rebuilt"},{"s":"8c23ab31","t":"2026-11-18T23:30Z","c":"role-parity r3 (reviewer): rebuilt root site on 1130a49e"}]};
+window.CTM_BI={"s":"f43a2ba6+","t":"2026-11-19T03:42Z","c":"Merge remote-tracking branch 'origin/main' into review/odds-meter-back","b":"49ee08c7b31f","h":[{"s":"42bda6a9+","t":"2026-11-19T03:34Z","c":"opt-loss-ton: also checks a worded gain never reads 'Được: không'; scans dialogs as the game shows them"},{"s":"cb5a7cb3+","t":"2026-11-19T03:03Z","c":"maid-ladder-6: NPC exam mini-game tier clamps at BAL.srvRk.nq (last typed rung); scan table counted"},{"s":"5f7aef61","t":"2026-11-19T02:22Z","c":"seal-lean: kitEmoSeal idle sway (rotate only) + staggered lean-in with per-feeling motion; test + KIT 38.4 canon overwrite"},{"s":"03df1c9d+","t":"2026-11-19T01:41Z","c":"role-parity.test: deterministic riseCore block (SEED FIX)"},{"s":"de1f6916+","t":"2026-11-19T01:29Z","c":"review live-servants r2: ag-know ONE RULE (NPC) case follows the live-servants rule like §3 (consort's close maid planted at the garden, re…"},{"s":"7d693c26+","t":"2026-11-19T01:22Z","c":"opt-card-short #10: samples = real events; LAW 3: a gain/loss worded only as Gợi ý now shows in Được/Tốn (was «không»)"},{"s":"2dd9cb23+","t":"2026-11-19T00:45Z","c":"review stage-here r4: buổi-turn visit refresh holds the queued cards aside so goTo (j2: returns on Q.length) keeps her where she is (OD 18/…"},{"s":"21904959+","t":"2026-11-18T23:40Z","c":"fullbody-frame s5: person dialog follows the figure standard: frame height follows the figure, figure column runs tag to frame bottom, butt…"},{"s":"cff7cf4d+","t":"2026-11-18T23:07Z","c":"questline-q2 r6 (reviewer): nhTip — a penalty (hb\u003c0) on the told rival's chapter is offset by the tip bonus, not taken as a bonus; rebuild"},{"s":"a837ad32+","t":"2026-11-18T23:30Z","c":"rel-picker r2: site rebuilt"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -3756,7 +3756,7 @@ function renderStage(){const P=placeOf(S.place);try{if(S.visit&&typeof stageCapF
  $("popw").innerHTML=pw;kitFix($("popw"))}
 function rvButtons(v,i){const dis=!can(2)||!v.alive||v.out||S.dead;const b=(k,extra)=>{const a=ACT[k];if(!a||(a.kid&&!a.ok(S,v)))return"";const ok=a.ok(S,v),o=a.o?actOdds(S,v,k):null;
   return `<button data-r="${i}" data-a="${k}" ${dis||!ok?"disabled":""}>${k==="poison"||k==="kpoison"?ic("doc",14):""}${a.n}<small>${[o!=null&&ok?word(oddsCl(o))+lotTag(ACTDOM[k]):"",fmt(a.c),!ok&&a.x?a.x:ok&&a.x?a.x:""].filter(Boolean).join(" · ")||"không tốn"}</small></button>`};
- if(sameHouse(S,v))return `<p class="past">Cùng ${houseName(v)} với ngươi: không thể lấy lòng hay ra tay.</p>`;let h=`<p class="past" style="margin:2px 0">${together(S,v)?"Đang cùng chỗ với nàng":`Không cùng chỗ: phải sai người đi (khó hơn; việc hại: kẻ đi bị bắt, khai ra ngươi: ${chanceW(confessRisk(bestSent(S)))})`}</p><div class="rbtn">${["spy","ally","gift","rumor","bribe","block","frame","poison","accuse","vp","plant","musk","catswap","ksab","kpoison","pond","kframe","takeaway"].map(k=>b(k)).join("")}</div>`;
+ if(sameHouse(S,v))return `<p class="past">Cùng ${houseCung(v)} với ngươi: không thể lấy lòng hay ra tay.</p>`;let h=`<p class="past" style="margin:2px 0">${together(S,v)?"Đang cùng chỗ với nàng":`Không cùng chỗ: phải sai người đi (khó hơn; việc hại: kẻ đi bị bắt, khai ra ngươi: ${chanceW(confessRisk(bestSent(S)))})`}</p><div class="rbtn">${["spy","ally","gift","rumor","bribe","block","frame","poison","accuse","vp","plant","musk","catswap","ksab","kpoison","pond","kframe","takeaway"].map(k=>b(k)).join("")}</div>`;
  if(S.rank>=7)h+=`<div class="rbtn"><button data-e="${i}" data-k="judge" ${dis||evG(S,v)<BAL.ag.ev.judge?"disabled":""}>Xử tội<small>${evG(S,v)>=BAL.ag.ev.judge?"theo chứng cứ":`cần ${BAL.ag.ev.judge} chứng cứ`}</small></button><button data-e="${i}" data-k="conf" ${dis?"disabled":""}>Tịch thu trang sức<small>nàng thù -20</small></button><button data-e="${i}" data-k="reward" ${dis||S.bac<-BAL.tw.reward.bac?"disabled":""}>Ban thưởng<small>Bạc ${BAL.tw.reward.bac} · thiện cảm +20</small></button>${v.confined?`<button data-e="${i}" data-k="pardon" ${dis?"disabled":""}>Ân xá<small>hết cấm túc</small></button>`:""}</div>`;
  return h}
 /* KIT TAB MODE (design-scale p2): every .game class that depends on the open tab. Reset before EVERY panel render; the renderer of the open
@@ -4198,7 +4198,7 @@ function rvCard(v,i){const st=!v.alive?"Đã chết":v.out?"Ở lãnh cung":"";c
  const chips=[st?"":chip(together(S,v)?`Đang cùng chỗ với ngươi`:locKnown(v)?`Thấy ở ${placeName(locKnown(v))} (buổi này) · cách ${travel(S.place,locKnown(v))} khắc`:"Nơi ở: không rõ","loc"),"",chip(host?"Thù ngươi":v.rel>20?"Thân với ngươi":"Bình thường",host?"hot":v.rel>20?"ok":""),v.pg>=20?chip(`Ngươi ghen ${v.pg}`,"hot"):"",v.ev?chip(`${ic("chung-cu",14)}Chứng cứ ${v.ev}`,"hot"):"",illKnown(v)?chip(illName(v),"hot"):"",evG(v,S)?chip(`Nắm ${evG(v,S)} chứng cứ của ngươi`,"hot"):"",v.preg&&!v.hidden?chip(`${ic("thai",14)}Có thai tháng ${v.preg}`):"",v.confined?chip(`Cấm túc ${v.confined}`):"",v.hieu?chip(`Hiệu ${v.hieu}`,"ok"):"",vpItems(v).length?chip(`Vượt phẩm: ${vpItems(v).map(e=>itm(e.k).n).join(", ")}`,"hot"):"",v.enemy?chip("Kẻ thù nhà ngươi","hot"):"",v.oldmis?chip("Chủ cũ của ngươi","hot"):"",facOf(v)?chip(`Phe ${facOf(v).name}`):""].concat(v.kids.filter(k=>k.alive).map(k=>chip(`${ic("con",14)}${k.name} · ${k.age} tuổi${k.heir?" · Thái tử":""}`,k.heir?"ok":"")));
  let note="",groups=[],empty="";
  if(st){if(v.alive&&S.rank>=7)groups=[["",[pbtn(`data-e="${i}" data-k="pardon"`,"Ân xá","đưa nàng về cung",whyTime(2)||(roomFor("consort")?"":"hậu cung đã đủ người"))]]];else empty=v.alive?"Nàng ở lãnh cung. Chỉ Hoàng hậu mới ân xá được.":"Nàng đã mất."}
- else{note=sameHouse(S,v)?`Cùng ${houseName(v)} với ngươi: không thể lấy lòng hay ra tay.`:together(S,v)?"Cùng chỗ: làm tại chỗ.":"Không gặp mặt: phải sai người (khó hơn).";groups=rvGroups(v,i);groups.unshift(["Gặp mặt",[seeBtn(v),visitBtn(v),scoutBtn(v),inviteBtn(v)]])}
+ else{note=sameHouse(S,v)?`Cùng ${houseCung(v)} với ngươi: không thể lấy lòng hay ra tay.`:together(S,v)?"Cùng chỗ: làm tại chỗ.":"Không gặp mặt: phải sai người (khó hơn).";groups=rvGroups(v,i);groups.unshift(["Gặp mặt",[seeBtn(v),visitBtn(v),scoutBtn(v),inviteBtn(v)]])}
  return pcard({tabKey:"rival",f:pv(v),col:RCOL[v.queen?7:v.rank],name:v.name,rank:`${ic(RIMG[v.queen?7:v.rank],16)}${v.queen?"Hoàng hậu":RANKS[v.rank].n}`,status:st,out:!!st,ghen:st?null:v.ghen,lines,chips,note,groups,empty})}
 function rvTabHTML(){return `<div class="pgwrap">`+pager("rv",rivals.map(v=>({f:pv(v),name:shortN(v.name),dim:!v.alive||v.out})),i=>rvCard(rivals[i],i))+`</div>`}
 
@@ -5010,11 +5010,14 @@ function residents(k){const L=[];if(k==="kn"){const q=rivals.find(v=>v.queen&&v.
 /* palaceOf: a lower consort living under the queen is in Càn Ninh */
 /* (owner 11/14: nobody lives under the queen any more — palSolo; a stale link from an old save is cut in houseOf below until palFix runs) */
 (function(){const h0=houseOf;houseOf=function(p){const k=h0.apply(this,arguments);try{if(p&&k!==key(p)&&rkOf(p)<PAL_HEAD){const h=byKey(k);if(h&&palSolo(h))return key(p)}}catch(e){}return k}})();
-function houseName(p){const k=palaceOf(p);const hd=byKey(houseOf(p));return k==="home"?(p===S?palName("home"):`thiên điện ${palName("home")} (cung ngươi)`):hd===p?palName(k):`thiên điện ${palName(k)}`}
+function houseName(p){const k=palaceOf(p);const hd=byKey(houseOf(p));const hl=p!==S&&hd!==p&&typeof resHallOf==="function"?resHallOf(p):null;/* hall-names r2: her side hall's plaque, role word only when unknown */
+ const side=n=>hl?`${hl} · ${n}`:`thiên điện ${n}`;return k==="home"?(p===S?palName("home"):`${side(palName("home"))} (cung ngươi)`):hd===p?palName(k):side(palName(k))}
+/* houseCung(p): the palace two housemates share — "cùng cung" (同宮) is the court phrase for consorts of one palace in different halls (history check, hall-names r2) */
+function houseCung(p){return palName(palaceOf(p))}
 /* places carry the plan names; one entry per house */
 (function(){const p0=places;places=function(){const L=p0.apply(this,arguments).filter(x=>!(x.k[0]==="r"));for(const x of L)if(PLNAME[x.k]){x.n=PLNAME[x.k][0];x.fn=PLNAME[x.k][1]}
  const seen={};for(const v of rivals){if(!v.alive||v.out||v.queen)continue;const k=palaceOf(v);if(k==="home"||k==="kn"||seen[k])continue;seen[k]=1;const hd=RV(+k.slice(1));const R2=residents(k);
-  L.splice(L.length-3,0,{k,n:palName(k),fn:palFn(k),d:`${hd&&rkOf(hd)>=PAL_HEAD?"Chủ vị "+j78who(hd):"Ở thiên điện"}${R2.length>1?" · thiên điện: "+kitNameList(R2.filter(x=>x!==hd)):""}.`,sc:"rv",v:hd}) }
+  L.splice(L.length-3,0,{k,n:palName(k),fn:palFn(k),d:`${hd&&rkOf(hd)>=PAL_HEAD?"Chủ vị "+j78who(hd):"Ở thiên điện"}${R2.length>1?" · "+R2.filter(x=>x!==hd).map(x=>`${(typeof resHallOf==="function"&&resHallOf(x))||"thiên điện"}: ${kitNameList([x])}`).join(" · "):""}.`,sc:"rv",v:hd}) }
  return L}})();
 (function(){const p0=placeOf;placeOf=function(k){if(k==="home"){const R2=residents("home").filter(x=>x!==S);return{k,n:palName("home"),fn:"tẩm cung của ngươi",d:`Cung nữ và các con ở đây.${R2.length?" Thiên điện: "+kitNameList(R2)+".":""}`,sc:"home"}}return p0.apply(this,arguments)}})();
 /* the ceremony card when she first heads a palace: the Emperor grants the best empty one; she may ask for another */
@@ -5049,7 +5052,7 @@ function mapHTML(){const W=S.where||{};const disR=k=>S.out?"đang ở lãnh cung
 /* the palace screen: residents present stand in the scene; absent ones named 'đi vắng' only if known */
 (function(){const g=goTo;goTo=function(k){const r=g.apply(this,arguments);try{if(S.place===k&&S.visit&&(k==="home"||k==="kn"||k[0]==="r")){const R2=residents(k).filter(p=>p!==S);const here=R2.filter(p=>whereOf(p)===k);const away=R2.filter(p=>whereOf(p)!==k);
    const aw=away.map(p=>{const l=locKnown&&locKnown(p);return l?`${p.name} (đi vắng, ở ${palName(l)})`:null}).filter(Boolean);
-   S.visit.res={here:here.map(p=>p.id),away:aw};const line=`${palName(k)}: ${R2.length?R2.map(p=>`${p.name} (${p.queen?"Hoàng hậu":RANKS[p.rank].n}${byKey(houseOf(p))===p?", chủ vị":", thiên điện"})`).join(", "):"không ai ở"}.${aw.length?" "+aw.join("; ")+".":""}`;
+   S.visit.res={here:here.map(p=>p.id),away:aw};const line=`${palName(k)}: ${R2.length?R2.map(p=>`${p.name} (${p.queen?"Hoàng hậu":RANKS[p.rank].n}${byKey(houseOf(p))===p?", chủ vị":`, ${(typeof resHallOf==="function"&&resHallOf(p))||"thiên điện"}`})`).join(", "):"không ai ở"}.${aw.length?" "+aw.join("; ")+".":""}`;
    if(k!=="home")S.visit.msg=(S.visit.msg?S.visit.msg+" ":"")+line}}catch(e){}return r}})();
 (function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{palFix()}catch(e){}return r}})();
 /* on a narrow screen the zoomed map opens centred on where she stands */
@@ -25128,7 +25131,7 @@ function evidenceActs(p){if(!S||!p||p===S)return[];const n=evG(S,p);const i=riva
  const odds=k=>{let o=null;try{o=actOdds(S,p,k)}catch(e){}return o==null?"":word(oddsCl(o))};/* actOdds (j9): the odds evidenceDo's roll uses (one path) */
  const add=(k,o)=>{const a=ACT[k];if(!a)return;let ok=false;try{ok=a.ok(S,p)}catch(e){}R0.push(Object.assign({k,n:a.n,odds:"",why:"",cost:[],gain:[],fail:[],risk:[],go:()=>evidenceDo(p.id,k)},o(ok)))};
  const nf=(need)=>`cần ${need} chứng cứ, đang có ${n}`;
- const busy=()=>!p.alive?"nàng đã mất":p.out?"nàng ở lãnh cung":sameHouse(S,p)?`cùng ${houseName(p)} với ngươi`:t2||"";
+ const busy=()=>!p.alive?"nàng đã mất":p.out?"nàng ở lãnh cung":sameHouse(S,p)?`cùng ${houseCung(p)} với ngươi`:t2||"";
  add("accuse",ok=>{const need=accNeed(p);const tr=rkOf(p);const fall=p.queen||tr>=5?`${W} bị phế vào lãnh cung`:`${W} bị đày lãnh cung hoặc giáng xuống ${RANKS[Math.max(0,tr-2)].n}`;
   return{odds:odds("accuse"),why:busy()||(n<need?nf(need):rkOf(p)>=7&&S.rank<3?"tố Hoàng hậu cần phẩm Tần trở lên":""),cost:["2 khắc",`Chứng cứ -${n} (dùng hết)`],gain:[fall,"Danh +6"],fail:["Danh -8",`${W} quý ngươi ${balSg(BAL.eff.j8.f_6)}`,`${W} oán ngươi +${balOan(BAL.eff.j8.f_6,"hurt")}`].concat(tr>=7?["phạm thượng: bị giáng một bậc hoặc cấm túc"]:[]),risk:tr>=7?["thắng: 12 tháng không được tranh ghế Hoàng hậu"]:[]}});
  add("tocao",ok=>{const cr=realCrime(p);return{odds:odds("tocao"),why:busy()||(n<1?nf(1):!cr?"nàng không có tội thật nào (vượt phẩm, đồ cấm, từng bày mưu)":""),cost:["2 khắc",`Chứng cứ ${balSg(BAL.eff.j30.evF)}`],gain:[`${W} bị giáng xuống ${RANKS[Math.max(0,rkOf(p)-1)].n} vì ${cr||"tội thật"}`,"Danh +3"],fail:["Danh -5"]}});
@@ -40323,6 +40326,8 @@ function residenceOf(p){const R=(o)=>Object.assign({pal:null,head:null},o);if(!p
  if(h===S)return S.pal!=null?R({part:resSidePart(p,S),pal:S.pal,head:S}):R({part:"ngocthanh",head:S});
  if(h.queen)return R({part:"kn",head:h});
  return h.pal!=null?R({part:resSidePart(p,h),pal:h.pal,head:h}):R({part:"ngocthanh",head:h})}
+/* resHallOf(p) → the plaque of the side hall p lives in ("Dưỡng Xuân hiên"), or null (head, Càn Ninh, Ngọc Thanh, servants…) — hall-names r2, OD:L1474 residence lines */
+function resHallOf(p){try{const r=residenceOf(p);if((r.part==="dong"||r.part==="tay")&&r.pal!=null&&typeof PALN!=="undefined")return hallName(PALN[r.pal],r.part)}catch(e){}return null}
 function resRoomName(r){if(!r)return"";if(r.part==="ngocthanh")return typeof HOMEN!=="undefined"?HOMEN:"Ngọc Thanh các";
  if(r.part==="kn")return hallName("Càn Ninh cung","chinh")+" · Càn Ninh cung";if(r.part==="lc")return"Trường Môn viện";
  const pn=r.pal!=null&&typeof PALN!=="undefined"?PALN[r.pal]:"";return hallName(pn,r.part)+(pn?` · ${pn}`:"")}
@@ -43408,7 +43413,7 @@ function relRows(X,Y){const a=X.p,b=Y.p;const met=p=>p===S||(p!=="emp"&&p!=="th"
 /* "Đã biết về X" = facts about X only (each with its source); X = Ta → the box is hidden (her own facts are in her Tư chất / Mệnh truyện) */
 function relPair(X,Y){const p=X.p,o=Y.p;const strangers=[X,Y].filter(q=>q.met===false);
  const note=strangers.map(q=>`<p class="kr3note">Ta chưa gặp ${q.name}, chưa rõ nàng ta đối với người khác ra sao. Gặp nàng ta, dò la, hoặc có thêm tai mắt.</p>`).join("")+
-  (p!==S&&o===S&&p!=="emp"&&p!=="th"&&sameHouse(S,p)?`<p class="kr3note">Cùng ${houseName(p)} với ta.</p>`:"");
+  (p!==S&&o===S&&p!=="emp"&&p!=="th"&&sameHouse(S,p)?`<p class="kr3note">Cùng ${houseCung(p)} với ta.</p>`:"");
  const btn=p!==S&&p!=="emp"&&p!=="th"&&X.met!==false?seeBtn(p):"";
  const known=p!==S&&p!=="emp"&&p!=="th"&&X.met!==false?knownCol(p):"";
  return `<div class="krelpair"><h4 class="krelh">Quan hệ giữa ${X.k==="me"?"ta":X.name} và ${Y.k==="me"?"ta":Y.name}</h4>`+
@@ -77776,7 +77781,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="8b87181b8075";window.CTM_BUILD=BUILD;
+const BUILD="49ee08c7b31f";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
