@@ -1196,7 +1196,13 @@ def spec5pose(o,c,t,force=None):
              "{prop} upright in one hand at chest height, the other hand gently touching it, her long sheer silk stole over both arms"]
         _A5=["a18","a26","a36","a51","a65"]; _cn=int(re.sub(r"\D","",c) or 0)
         _np=_NP[((_A5.index(AGE) if AGE in _A5 else 0)+_cn)%5].format(prop=prop)
-        pose=f"calm standing pose; {_np}, the item held below the chin, body and face frontal, standing squarely facing the viewer, no turn, with stately grace; no flying, floating or windblown cloth"
+        # F4b angle (ROOT-40, owner Lượt 225/229 "ta không muốn ... đứng chính diện ... cái vai của họ vẫn có thể hơi nghiêng ... nữ đế A ... hơi nghiêng"; ANGLE LAW (A) overrides 3d2 for NEW Nữ đế gens): no dead-frontal words.
+        # Angle words COPIED from approved prompts only: Nữ đế A header "face clearly visible, 3/4 or frontal view" (A's pose carries no angle words) for every Nữ đế;
+        # odd pose SLOTS (1,3 of the 5) add Hoàng hậu B "body turned slightly three-quarters to the right" (the 3/4 end, like live tm0) -> neighbours alternate near-frontal / 3/4.
+        _ang=", body turned slightly three-quarters to the right" if (((_A5.index(AGE) if AGE in _A5 else 0)+_cn)%5)%2 else ""
+        pose=f"calm standing pose; {_np}, the item held below the chin{_ang}, with stately grace; no flying, floating or windblown cloth"
+        _fh="face clearly visible, body and face frontal, standing squarely facing the viewer, no turn."; assert o.count(_fh)==1,"nude frontal header"
+        o=o.replace(_fh,"face clearly visible, 3/4 or frontal view.",1)
     a=o.index(" Pose: calm standing pose;"); b=o.index(" Every hairpin is inserted")
     new=f" Pose: {pose}. The item is in a contrasting colour, not the robe colour, and the hand really grips it; the whole face fully visible with the head up toward the viewer, eyes open, lips closed, never looking down, nothing covering the face."
     o=o[:a]+new+o[b:]
