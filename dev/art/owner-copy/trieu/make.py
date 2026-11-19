@@ -22,7 +22,7 @@ def block(t):
                 + f"a jewelled shoulder piece (cầu vai) over each shoulder, {sp}, its edge: {EDGE[t]}; {head}.")
     if t==7:
         return (f" TRIỀU PHỤC (formal court uniform) details on this same outfit: it is worn as the formal court robe (triều phục); {RED}; "
-                + PAN.replace("the rank colour", "the rank colour, warm amber-gold like #DE9448,")
+                + PAN.replace("the rank colour", "the rank colour, honey-amber like #E3A25B,")
                 + f"over the cloud-collar cape a jewelled shoulder piece (cầu vai) over each shoulder, {SH_OLD5}, its edge: {EDGE[7]}.")
     return (" TRIỀU PHỤC (formal court uniform) details on this same outfit: BOTH SLEEVES (the arms of the robe, from the shoulder down to the cuff) and the collar band with its collar trims are the court red, "
             f"{mc} like {mh}, clearly red, with {dc} like {dh} in the linings; "
