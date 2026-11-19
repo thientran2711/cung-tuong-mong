@@ -1090,3 +1090,4 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - ROOT-64 hourly wake trig_01AMEC9zngzCUY8K3AaUrNJn → ROOT-64 DELETES it after opening ROOT-65; ROOT-65 sets its own (minute 32).
 - (19/11 06:19Z) FROM FOREMAN C-AG #21: rolled over at ctx 31.5 % (depth 8, cannot open sessions) → C-AG STANDBY session_01Rc5AsM9pCcsWwjoC8PjjW7 told TAKE OVER NOW. Only C-AG job left: minister-agents (rv HdFbiZEL PASS a2c6ce4e, call it after seal-lean-2). Handover block in FOREMAN_C_STATUS.
 - (19/11 06:24Z) ROOT-65 opened = session_01Rc5AsMRSKCNFbYwLJhNeY7 (opus, depth 3). ROOT-64 wake trig_01AMEC9zngzCUY8K3AaUrNJn DELETED. ROOT-64 stops (relays any late message to ROOT-65).
+- (19/11 06:27Z) OWNER FAIL seal-lean-2 (OD ~06:25Z): lean-in from avatar wrong → stage seals only, avatar still; play C's painted emo-anim loop. Worker HrbnHixr told STOP landing + fix; ROOT-65 informed.
