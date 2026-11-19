@@ -799,7 +799,7 @@ def build_bdq(o="1"):
         assert t.count(a)==1,a; t=t.replace(a,b)
     sw("Copy EXACTLY everything from image 1: hair, headdress, face, costume,","Copy EXACTLY everything from image 3: hair, headdress, costume,")
     sw("fabric material and stitching.","fabric material and stitching; her face from image 2 (face only).")
-    sw("Do NOT change any colour: the robe stays the same coral-terracotta as image 1, same colours everywhere.","Change ONLY the robe colour: the coral-terracotta of image 3 becomes "+BDQ_COL[o]+", same other colours everywhere. Add a modest soft ivory fur trim, only a narrow edge on the collar and the sleeve openings.")
+    sw("Do NOT change any colour: the robe stays the same coral-terracotta as image 1, same colours everywhere.","Change ONLY the robe colour: the coral-terracotta of image 3 becomes "+BDQ_COL[o]+", same other colours everywhere. Add "+BD_FURSLEEVE+", and the same broad fur band along the front edges of the robe.")   # F2 r3 (owner via ROOT-39 ~03:26Z: "chỗ nào có lông phải to hơn"): broad N3b fur wording copied, not "modest"
     return t+END
 # ---------- STATES (SAMPLES ONLY, owner 18/11 ~21:00Z real; brief dev/handover/briefs/states-sample.md): --state nude|thaihau|kc|ngheo|nc1|nc6|bd1|bd6 ----------
 # Same sentence structure as the 8 ranks (PRE, identity sentence, AGE_TXT, outfit, COLOUR RULE, embroidery+drape, item pose, closing hairpin rule, END). Existing outputs untouched: all code below is only reached with --state.
