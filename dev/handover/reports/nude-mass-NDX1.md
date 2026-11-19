@@ -11,14 +11,14 @@ PRIORITY #1 CHECK: FIGURE_GATE LAW #1 items 11/12 (one-ref), STORE GATE; owner L
 - PAINTER_BRIEF.md: sub-painter procedure (one person per subagent run), incl. forehead-dot rule.
 
 ## DONE (all ledger-logged, STORE CHECK PASS; cuts CDN img/_review/nu-de/cuts/cNN_aNN_nude.png; rows dev/handover/review-sheets/nu-de/nude_row_cNN.jpg + CDN img/_review/nu-de/)
-c01 c02 c03 c04 c05 c06 (a18 = earlier owner-approved nude3 cut, not redrawn) c07 c08 c09 c10 c11 — all 5 ages. c12 in flight (painter subagent) at handover time.
-Sheets: nude_all_c01-c08.jpg (batch 1). Credits ≈ 8.8k total so far (~65 gens incl. ~12 regens).
+c01 c02 c03 c04 c05 c06 (a18 = earlier owner-approved nude3 cut, not redrawn) c07 c08 c09 c10 c11 c12 — all 5 ages (c12 a51 1 regen: no silver). NDX1 STOPPED after c12 (ROOT-50 order); successor starts at c13.
+Sheets: nude_all_c01-c08.jpg (batch 1). Credits ≈ 9.6k total (~71 gens incl. ~13 regens). Balance check before resuming: account_balance.
 
 ## OPEN (sent to foreman, no answer yet — change nothing until told)
 1. Forehead dot copied from the t1 ref itself: c03 a51, c08 a51 (faint), c08 a36 (pink tassel bead). Proof forehead_dot_t1_vs_nude.jpg. Retouch dot or keep?
 2. c09 a18 tiny mole (also on her t1).
 3. Crowns: only 6 NUDE_CROWNS → repeats every 6 people (c03 = c09). More variants?
-4. Owner Lượt 520: c01 a36 style differs from game. Refs were exactly own t1 + swatch; store text says "near-3D realistic" and with no style image the face drifts glossier/rounder than the watercolour t1. Compare img/_review/nu-de/c01a36_ref_vs.jpg. Options: style image back for Nữ đế, or owner OK to soften store wording.
+4. Owner Lượt 520 (now with the owner, Lượt 522–524; NO recipe change until she answers): c01 a36 style differs from game. Refs were exactly own t1 + swatch; store text says "near-3D realistic" and with no style image the face drifts glossier/rounder than the watercolour t1. Compare img/_review/nu-de/c01a36_ref_vs.jpg. Options: style image back for Nữ đế, or owner OK to soften store wording.
 5. B15 two-colour sentence: ROOT-49 said keep Nữ đế prompts as they are (store COLOUR RULE already two-colour).
 
 ## NEXT

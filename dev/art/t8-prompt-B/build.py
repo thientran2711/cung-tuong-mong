@@ -987,9 +987,9 @@ def build_mama(c):
     s+=MAMA_HAIR+_pose(item,hk,right)+CLOSE
     _fr=" body and face frontal, standing squarely facing the viewer, no turn."
     assert s.count(_fr)>=1,"PRE frontal sentence"   # >=1: some item hand clauses (basket, vase...) end with the same phrase   # F4b-4 (ROOT-40): MAMA_ANGLE (invented) dropped -> the final __main__ angle pass gives the copied Nữ đế A / HH B wording, same as every path
-    if "--noflower" in sys.argv:   # owner Lượt 520 / ART_RULES K15: ma ma wear NO hair flowers (only consorts). Opt-in flag, removal ONLY (no sentence added); every other output byte-identical.
+    if "--noflower" in sys.argv:   # owner Lượt 520 / ART_RULES K15: ma ma wear NO hair flowers (only consorts). Opt-in flag: removes the flower wording + adds ONE negative sentence (ROOT-50 ruling A); every other output byte-identical.
         _fl=", and one small fresh "+fk+" in "+fc+" tucked beside the bun"; assert s.count(_fl)==1,"mama hair flower clause"; s=s.replace(_fl,"",1)
-        assert s.count(MAMA_HAIR)==1,"MAMA_HAIR"; s=s.replace(MAMA_HAIR," Her hair and hairpins come ONLY from the identity reference and this text; the style reference image must not influence her hair.",1)
+        assert s.count(MAMA_HAIR)==1,"MAMA_HAIR"; s=s.replace(MAMA_HAIR," Her hair and hairpins come ONLY from the identity reference and this text; the style reference image must not influence her hair. NO flowers in the hair (no fresh or silk flowers), only her hairpins.",1)   # + ROOT-50 ruling (A) 19/11: removal alone failed (gen copied the face ref's orchid, MMX3 c06) -> ONE added negative sentence
     return s+MAMA_IMG3+END
 MAID_IDENT=IDENT.replace("and hairstyle colour","her own hairstyle (the same at every rank) and hair colour",1)
 TM_FADED=["grey-blue","light indigo","earth brown"]
