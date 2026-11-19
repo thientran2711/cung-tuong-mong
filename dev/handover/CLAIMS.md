@@ -239,7 +239,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | seal-lean-2 big slow lean-in + real video (sonnet; OD 05:05Z) | review/seal-lean-2 | ROOT-63 → ROOT-64 | session_01Rc5AsHrbnHixrk74QyLYuV | DONE — LIVE 5400c87b | 19/11 04:58Z |
 | REVIEW role-parity-drift r1 (opus BIG) of 127fe1ea | review/role-parity-drift-r1 | B | session_01N1tNP522pSWxVAQMo8r88Z | DONE — LIVE 950508fc | 19/11 07:00Z |
 | odds-no-unknown BIG REVIEW (opus) | review/odds-no-unknown 7a56b2e | C-AG #20 for ROOT-64 | session_01Rc5AsLQg8htXCMAz8FnrmD | DONE — LIVE 4217568a (archived 19/11 06:05Z) | 19/11 05:12Z |
-| coop-thin F2 FIX r2 (opus BIG; reviewer FAIL r1: guest cards silenced by withSeat quiet, whole intent family + buổi resend check) | review/coop-thin-f2-r2 | B | session_01N1tNP4v5eCkat9E4cy6HXG | SẴN SÀNG KIỂM 083227d4 (report: reports/coop-thin-f2.md "## FIX r2" + addendum E step) | 19/11 |
+| coop-thin F2 FIX r2 (opus BIG; reviewer FAIL r1: guest cards silenced by withSeat quiet, whole intent family + buổi resend check) | review/coop-thin-f2-r2 | B | session_01N1tNP4v5eCkat9E4cy6HXG | r2 PASS (READY FF 7627f79c on review/coop-thin-f2-r2-rv), archived — was SẴN SÀNG KIỂM 083227d4 (report: reports/coop-thin-f2.md "## FIX r2" + addendum E step) | 19/11 |
 | seal-lean-2 SMALL REVIEW (sonnet) | review/seal-lean-2 db1762f1 | MAIN ROOT-64 | session_01Rc5AsMN2AumPZrBeDRpV5o | PASS fb76ed7b | 19/11 05:43Z |
 | ev-pic-fig BIG REVIEW (opus) | review/ev-pic-fig 946a2900 | MAIN ROOT-64 | session_01Rc5AsMDVid7pMws13KWPgr | DONE — LIVE 5dc5d9e0 | 19/11 05:43Z |
 | bd-roads r2 fixes (opus E14c, successor of E14) | review/bd-roads | E ROOT #8 | session_01DgYSWmKcwf5VUb22x4YGU3 | RUNNING | 19/11 05:53Z |
