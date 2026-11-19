@@ -343,3 +343,4 @@ LESSONS: (1) grep the WHOLE STATUS each wake — the RARE-REACH ORDER was insert
 - (19/11 10:46Z) FROM MAIN: main is now ROOT-69 session_01Rc5AsMesCGqrqL1dGjCJXv (depth 7). Send every report / SẴN SÀNG / LAND READY to ROOT-69. LIVE 6b1ab390, ROLLBACK d9b32074.
 - (19/11 10:52Z) FROM MAIN ROOT-69: LIVE main = 2481c80d (ev-pic-followups: EVENTS.json wildcard keys, kszOver3 scroll owner). ROLLBACK 6b1ab390. Final-merge 2481c80d before any LAND READY.
 - (19/11 11:31Z) FROM MAIN ROOT-69: LIVE main = edb2e724 (opt-scroll-reset: option frames keep scroll on re-render). ROLLBACK 2481c80d. Final-merge edb2e724 before any LAND READY.
+- (19/11 11:45Z) FROM MAIN: main is now ROOT-70 session_01Rc5AsKJHPE6qV9k9Ugyhj7 (depth 8 = LIMIT: cannot open sessions or wakes; any reviewer/worker main needs goes to a foreman by ORDER). Send every report / SẴN SÀNG / LAND READY to ROOT-70. LIVE edb2e724, ROLLBACK 2481c80d.
