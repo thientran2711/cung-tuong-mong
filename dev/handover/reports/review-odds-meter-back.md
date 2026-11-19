@@ -13,3 +13,8 @@ Laws touched, checked: 3 (gain-and-loss display) PASS · 4 (one core) PASS · 7 
    quickcheck on f43a2ba6: PASS · open 1360 ms · old save ok · perf new/live render 202/183, tab 397/351, buổi 1122/906 ms, tasks>200ms 18/17 · core gates PASS.
 
 Non-blocking, NOT this brief (for MAIN): cards with no cost still print the filler row «Tốn: không» (e.g. night1/tt3 roll cards) and the Được row repeats the "hỏng thì …" failure text; this is the pre-existing opt-card-short `kfill` the worker already flagged (owner 13:25Z «never Tốn: không», KIT §42.6). Also the worker's open question (unknown chance drawn as an empty meter + «Khó lường», off the 7-rung ladder) still needs MAIN/owner OK; I did not see it in the scans.
+
+## raw-id
+Verdict: **raw-id: test-only.** The «VIỆC night1 / tt3» chip text is the `title` arg of `pushDil(d,title)` (all.js:637 = j3.js:26 → `pushModal({t:title…})`). My shot script called `pushDil(mkP(id),id)` with the PEND id as title (copied from the worker's scan harness). Real call sites pass a named title: night1 → `pushFront(mkP("night1",…),"Đêm thị tẩm")` (j75.js:106, j8.js:307); tt3 → `setDil` = `pushDil(d,"Tuyến truyện")` (j4.js:4,14); others e.g. j42.js:191 "Hoàng thượng hỏi tên". Evidence is from code, not a real-play Fold/iPad run (not played through by hand). The fallback when no title is given is «Việc khó xử», never an id.
+## Khó lường ruling
+Not ruled for the empty meter in OD/VANPHONG. KIT.md:899 (origin/main) says «Khó lường» is gone; KIT.md:1100 only mentions it as an odds label in the retired risk-chip text. The empty-meter «Khó lường» is the worker's own wording (off the 7-rung ladder) → needs owner OK.
