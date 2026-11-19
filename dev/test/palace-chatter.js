@@ -72,18 +72,28 @@ const [,,BASE,W0,H0,OUT]=process.argv;const W=+W0||755,H=+H0||1000;const sleep=t
    if(!k)throw new Error('no place with 2 consorts');const ag0=window.agPlanned;const a=two[0],t=two[two.length-1];window.agPlanned=agPlanned=()=>[{who:ledgerId(a),k:'cx:gift',t:ledgerId(t),pl:k,kh:0}];
    await visit('home');await visit(k);const P=S.visit.people;const ia=P.findIndex(x=>x.ref===a),it=P.findIndex(x=>x.ref===t);hap.k=k;hap.ia=ia;hap.it=it;hap.names=P.map(x=>x.name);
    {const st=document.getElementById('stage');const vis=()=>CHAT.present().map(x=>x.p.ref);for(let g=0;g<6&&!(vis().includes(a)&&vis().includes(t));g++){const pg=(st.dataset.j59pg||'').split(',').map(Number);if(!(pg[1]>pg[0]+1))break;st.__j59p=pg[0]+1;render();await waitImgs();await Wt(800)}hap.both=vis().includes(a)&&vis().includes(t);hap.pg=st.dataset.j59pg||''}
-   CHAT.run=0;const n0=CHAT.log.length;CHAT.tick();await Wt(5500);hap.log=CHAT.log.slice(n0).map(x=>x.who);hap.stat=CHAT.stat.hap;
+   CHAT.run=0;const n0=CHAT.log.length;CHAT.tick();await Wt(5500);hap.log=CHAT.log.slice(n0).map(x=>x.who);hap.tags=CHAT.log.slice(n0).map(x=>x.tag);hap.stat=CHAT.stat.hap;
    window.agPlanned=agPlanned=ag0;ck('happening: the pair stands together',ia>=0&&it>=0&&Math.abs(ia-it)===1,hap);
-   ck('happening: they talk to each other first',hap.log.length>=1&&[a.name,t.name].some(n=>hap.log[0]&&hap.log[0].indexOf(n.split(' ').pop())>=0||hap.log[0]===n),hap)}catch(e){ck('happening: run',false,e.message)}
+   ck('happening: they talk to each other first',hap.log.length>=1&&[a.name,t.name].some(n=>hap.log[0]&&hap.log[0].indexOf(n.split(' ').pop())>=0||hap.log[0]===n),hap);
+   ck('happening: the first exchange is logged as the happening (tag hap)',hap.tags.length>=1&&hap.tags[0]==='hap',hap)}catch(e){ck('happening: run',false,e.message)}
   /* (6) eavesdrop exact lines */
-  let eav={};try{const v=liveRivals(true).find(v=>v.alive&&!v.out);const f=intelLearn(v,1,{by:'Ngươi',how:'Nghe lén'});eav.fact=f;eav.q=CHAT.eavLines(v,1);
-   ck('eavesdrop: the exact lines are quoted',/“[^”]+”/.test(eav.q)&&!/[{}]/.test(eav.q),eav)}catch(e){ck('eavesdrop: run',false,e.message)}
+  let eav={};try{const V=liveRivals(true).filter(v=>v.alive&&!v.out);let v=V.find(x=>watcher(x));
+   if(!v){v=V.find(x=>(x.staff||[]).length);const s=v.staff[0];eav.setLoyal=[s.name,s.loyal];s.loyal=Math.max(s.loyal,BAL.loy.close);s.tin=Math.max(tinOf(s),BAL.tinLv.watch)}/* a real servant of hers, made close for the test */
+   const w=watcher(v);eav.wS=watcher(S)&&watcher(S).name;const f=intelLearn(v,1,{by:'Ngươi',how:'Nghe lén'});eav.fact=f;eav.q=CHAT.eavLines(v,1);eav.w=w&&w.name;
+   const real=new Set([...(v.staff||[]).map(s=>s.name),v.maid&&v.maid.name].filter(Boolean));
+   ck('eavesdrop: the exact lines are quoted',/“[^”]+”/.test(eav.q)&&!/[{}]/.test(eav.q),eav);
+   const spk=eav.q.split(' — ').slice(1).join(' — ').split(/ — | · /).map(s=>(/^\s*(.+?): “/.exec(s)||[])[1]).filter(Boolean);eav.spk=spk;
+   ck('eavesdrop: the partner is her REAL servant by name (v.staff / her maid), no made-up person',spk.length>=1&&spk.every(n=>n===v.name||/^vị /.test(n)||real.has(n))&&spk.some(n=>real.has(n))&&!/thân cận của/.test(eav.q),eav);
+   ck('eavesdrop: watcher(v) is the consort\'s own (not her watcher)',w&&real.has(w.name),eav);
+   /* no close servant and no loyal maid → no partner → no quoted exchange (never an invented confidant) */
+   const keep=(v.staff||[]).map(s=>s.loyal),km=v.maid&&v.maid.loyal;(v.staff||[]).forEach(s=>s.loyal=0);if(v.maid)v.maid.loyal=0;intelLearn(v,1,{by:'Ngươi',how:'Nghe lén'});const q0=CHAT.eavLines(v,1);
+   (v.staff||[]).forEach((s,i)=>s.loyal=keep[i]);if(v.maid)v.maid.loyal=km;ck('eavesdrop: no real servant → no quoted exchange',q0==='',q0)}catch(e){ck('eavesdrop: run',false,e.message)}
   /* (7b) off switch */
   BAL.chat.on=0;const n1=CHAT.log.length;CHAT.tick();CHAT.greet();await Wt(1500);ck('BAL.chat.on 0 = silent',CHAT.log.length===n1);BAL.chat.on=1;
   /* old-save safety: S.pcx survives a save round trip, a save without it loads */
-  try{const j=JSON.parse(JSON.stringify(S));delete j.pcx;ck('old save: no S.pcx needed',true)}catch(e){ck('old save',false,e.message)}
-  return{C,kinds:CHAT.stat.kind,stat:CHAT.stat,errs:CHAT.errs,sample:seen.slice(0,12),greet:gl.slice(0,2)}});
+  try{const ec=CHAT.errs.length;delete S.pcx;CHAT.run=0;CHAT.tick();await Wt(400);ck('old save: a save without S.pcx plays (lazy memory, no error)',CHAT.errs.length===ec,{errs:CHAT.errs.slice(ec),pcx:typeof S.pcx})}catch(e){ck('old save',false,e.message)}
+  return{C,eav,kinds:CHAT.stat.kind,stat:CHAT.stat,errs:CHAT.errs,sample:seen.slice(0,12),greet:gl.slice(0,2)}});
  R.pageErrors=errs;const fail=R.C.filter(c=>!c[1]);for(const c of R.C)console.log((c[1]?'ok  ':'FAIL')+' '+c[0]+(c[1]?'':' '+JSON.stringify(c[2]).slice(0,600)));
- console.log('kinds:',JSON.stringify(R.kinds),'kitSay no room:',R.stat.noRoom|0,'lines:',R.stat.lines);console.log('sample:',JSON.stringify(R.sample));console.log('greet:',JSON.stringify(R.greet));if(errs.length)console.log('pageerrors',errs.slice(0,5));
+ console.log('kinds:',JSON.stringify(R.kinds),'kitSay no room:',R.stat.noRoom|0,'lines:',R.stat.lines);console.log('sample:',JSON.stringify(R.sample));console.log('greet:',JSON.stringify(R.greet));console.log('eav:',JSON.stringify({q:R.eav&&R.eav.q,w:R.eav&&R.eav.w,herWatcher:R.eav&&R.eav.wS}));if(errs.length)console.log('pageerrors',errs.slice(0,5));
  if(OUT)fs.writeFileSync(OUT,JSON.stringify(R,null,1));console.log(`PALACE-CHATTER ${W}x${H}: ${R.C.length-fail.length}/${R.C.length} ${fail.length||errs.length?'FAIL':'PASS'}`);
  await b.close();process.exit(fail.length||errs.length?1:0)})().catch(e=>{console.error(e);process.exit(1)});

@@ -28,9 +28,9 @@ const [,,BASE,W0,H0,OUT]=process.argv;const W=+W0||755,H=+H0||1000;const sleep=t
  mark('place');await p.evaluate(async()=>{const Wt=t=>new Promise(r=>setTimeout(r,t));const k='vuon';go(k);await waitImgs();const R2=S.visit.people.filter(q=>q.kind==='rival'&&q.ref).map(q=>q.ref);
   if(R2.length>=2){const a=R2[0],t=R2[R2.length-1];window.agPlanned=agPlanned=()=>[{who:ledgerId(a),k:'cx:gift',t:ledgerId(t),pl:k,kh:0}];go('home');await Wt(200);go(k);await waitImgs();
    const st=document.getElementById('stage');const vis=()=>CHAT.present().map(x=>x.p.ref);for(let g=0;g<6&&!(vis().includes(a)&&vis().includes(t));g++){const pg=(st.dataset.j59pg||'').split(',').map(Number);if(!(pg[1]>pg[0]+1))break;st.__j59p=pg[0]+1;render();await waitImgs();await Wt(600)}}
-  await Wt(500);CHAT.run=0;CHAT.tick()});
+  await Wt(500);CHAT.run=0;window.__hapN0=CHAT.log.length;CHAT.tick()});
  await sleep(11000);mark('idle place');await p.evaluate(()=>{window.agPlanned=agPlanned=()=>[];CHAT.run=0;CHAT.tick()});await sleep(9000);
- const log=await p.evaluate(()=>CHAT.log.map(x=>[x.tag,x.who,x.txt]));const DUR=(Date.now()-T0)/1000-tReady;
+ const log=await p.evaluate(()=>CHAT.log.map(x=>[x.tag,x.who,x.txt]));const hapFirst=await p.evaluate(()=>(CHAT.log[window.__hapN0]||{}).tag||null);/* F2: the first exchange at the place is the happening (tag hap) */const DUR=(Date.now()-T0)/1000-tReady;
  const vid=p.video();await ctx.close();await b.close();const webm=await vid.path();
  cp.execFileSync('ffmpeg',['-y','-loglevel','error','-ss',String(Math.max(0,tReady-0.2)),'-i',webm,'-t',String(DUR),'-c:v','libx264','-preset','slow','-crf','22','-pix_fmt','yuv420p','-movflags','+faststart','-an',OUT]);
- console.log(JSON.stringify({out:OUT,marks,log,errs,dur:DUR.toFixed(1)}));process.exit(errs.length?1:0)})().catch(e=>{console.error(e);process.exit(1)});
+ console.log(JSON.stringify({out:OUT,marks,hapFirst,log,errs,dur:DUR.toFixed(1)}));console.log(hapFirst==='hap'?'VIDEO happening first: PASS':'VIDEO happening first: FAIL ('+hapFirst+')');process.exit(errs.length||hapFirst!=='hap'?1:0)})().catch(e=>{console.error(e);process.exit(1)});

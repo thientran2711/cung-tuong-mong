@@ -131,13 +131,13 @@ function hapTopic(k){const H=(window.CHAT_L&&CHAT_L.hap)||{};const s=String(k||"
 function tick(){CH.t=0;if(!on())return arm();CH.stat.tick++;const b=busy();if(b||CH.run){CH.stat.skip++;return arm(true)}
  try{const L=present();if(!L.length){CH.stat.skip++;return arm()}let T=null;
   /* (c) a happening here first */
-  const H=hapPairs(L);if(H.length&&Math.random()<((C().w||{}).hap!=null?C().w.hap:.8)){const h=pick(H);const g=hapTopic(h.k);const pool=(CHAT_L.hap||{})[g]||(CHAT_L.hap||{}).any||[];
-   if(h.b){T=build(h.a,h.b,[[{pair:[],x:pool,w:1},0]]);if(T)CH.stat.hap++}}
+  const H=hapPairs(L);let hap=false;if(H.length&&Math.random()<((C().w||{}).hap!=null?C().w.hap:1)){const h=pick(H);const g=hapTopic(h.k);const pool=(CHAT_L.hap||{})[g]||(CHAT_L.hap||{}).any||[];
+   if(h.b){T=build(h.a,h.b,[[{pair:[],x:pool,w:1},0]]);if(T){CH.stat.hap++;hap=true}}}
   /* (b) idle chatter: a pair (or one person to her) */
   if(!T){const pairs=[];for(let i=0;i<L.length;i++)for(let j=i+1;j<L.length;j++){const tp=topicsFor(L[i],L[j]);if(tp.length)pairs.push([[L[i],L[j],tp],wPair(L[i],L[j])])}
    for(const a of L){const tp=topicsFor(a,null);if(tp.length)pairs.push([[a,null,tp],((C().w||{}).solo)||.6])}
    for(let n=0;n<6&&pairs.length&&!T;n++){const z=wpick(pairs);T=build(z[0],z[1],z[2]);const kk=z[0].k+"-"+(z[1]?z[1].k:"me");const K=CH.stat.kind=CH.stat.kind||{};K[kk]=K[kk]||[0,0];K[kk][T?0:1]++;if(!T)pairs.splice(pairs.findIndex(q=>q[0]===z),1)}}
-  if(T)play(T,"idle");else CH.stat.skip++}catch(e){err("tick",e)}arm()}
+  if(T)play(T,hap?"hap":"idle");else CH.stat.skip++}catch(e){err("tick",e)}arm()}
 function wPair(a,b){const W=C().w||{};if(a.k==="srv"&&b.k==="srv"||a.k==="srv"&&b.k==="eun"||a.k==="eun"&&b.k==="srv")return W.srv||1.2;
  try{if(a.e&&b.e&&typeof aff==="function"){const f=aff(a.e,b.e);if(f>=(BAL.voice&&BAL.voice.warm||40))return W.friend||1.5;if(f<=(BAL.voice&&BAL.voice.cold||-25))return W.rival||1.3}}catch(e){}return W.base||1}
 function wpick(L){let s=0;for(const x of L)s+=x[1];let r=Math.random()*s;for(const x of L){r-=x[1];if(r<=0)return x[0]}return L[L.length-1][0]}
@@ -170,9 +170,11 @@ if(typeof renderStage==="function"){const r0=renderStage;renderStage=function(){
 /* ---------- (d) eavesdrop → the exact lines ---------- */
 /* the exchange the target and her confidant really said, from the TRUE facts j78 just learnt (S.intel newest first) */
 function eavLines(v,n){try{const E=(window.CHAT_L&&CHAT_L.eav)||{};const I=(S.intel&&S.intel[v.id])||[];const now=typeof bkey==="function"?bkey():null;const F=I.filter(x=>x.bk===now).slice(0,n||1);if(!F.length)return"";
- const A={e:v,p:{name:v.name},sp:v,k:v.queen?"hh":"con"};let mate=null;try{const L=lr().filter(x=>x!==v&&typeof whereOf==="function"&&whereOf(x)===whereOf(v));mate=L.length?L.sort((a,b)=>aff(v,b)-aff(v,a))[0]:null}catch(e){}
- /* her confidant = the woman servant of her own palace who waits on her (the overheard partner answers as a servant: "Dạ, {xung}…") */
- const B={e:null,p:{name:"cung nữ thân cận của "+nameOf(v)},sp:{srv:"f",name:"cung nữ"},k:"srv"};void mate;
+ const A={e:v,p:{name:v.name},sp:v,k:v.queen?"hh":"con"};
+ /* her confidant = HER REAL servant (law 6b): watcher(v) (j22, the one picker: her most loyal close servant of v.staff, else her own maid), by name.
+    No such servant → nobody to talk to → no quoted exchange for this fact (the j78 fact itself is unchanged). */
+ let B=null;try{const w=typeof watcher==="function"?watcher(v):null;if(w&&w.name){const eun=!!(w.s&&w.s.role==="eunuch");B={e:null,p:{name:w.name},sp:{srv:eun?"m":"f",name:w.name},k:eun?"eun":"srv",real:w.s||v.maid||null}}}catch(e){err("eavB",e)}
+ if(!B){CH.stat.eavNoSrv=(CH.stat.eavNoSrv|0)+1;return""}
  const out=[];for(const f of F){const kind=String(f.k||f.kind||"").split(":")[0];const pool=E[kind]||E[f.kind]||E.any||[];if(!pool.length)continue;
   const X={c:ctx(A,B),v:eavSlots(v,f,kind)};const cand=pool.filter(x=>{const tg=tagOf(Array.isArray(x)?x[0]:x);return !tg||tagOk(tg,X.c)}).map(x=>[x,1]);
   for(let t=0;t<4&&cand.length;t++){const x=choose(cand);const ex=(Array.isArray(x)?x:[x]).map(untag);const T=[];let ok=true;
@@ -182,7 +184,7 @@ function eavLines(v,n){try{const E=(window.CHAT_L&&CHAT_L.eav)||{};const I=(S.in
 function eavSlots(v,f,kind){const o={};try{
  if(kind==="plan"&&v.plan){const t=typeof byKey==="function"?byKey(v.plan.t):null;if(t)o.t=t===S?S.name:nameOf(t)}
  if(kind==="affair"){const m=typeof manById==="function"&&v.affair?manById(v.affair):null;if(m)o.man=m.name}
- if(kind==="items"){const bad=(v.inv||[]).filter(e=>e.t||(IT[e.k]&&(itm(e.k).il||itm(e.k).mat)));if(bad.length)o.it=typeof iname==="function"?iname(bad[0]):""}
+ if(kind==="items"){const bad=(v.inv||[]).filter(e=>e.t||(IT[e.k]&&(itm(e.k).il||itm(e.k).mat)));if(bad.length&&typeof iname==="function"){const n=iname(bad[0]);if(n)o.it=n}}/* no real name → the {it} line is skipped, never a blank */
  if(kind==="hate"||kind==="ally"){const m=/để bụng (.+?) nhất|thân với (.+?) nhất/.exec(f.txt||"");if(m)o.h=(m[1]||m[2]||"").trim()}
  if(kind==="trait"){const m=/có nết (.+?)\./.exec(f.txt||"");if(m)o.tr=m[1].toLowerCase()}
  if(kind==="where"){try{o.pl2=placeName(whereOf(v))}catch(e){}}}catch(e){err("eavS",e)}return o}
