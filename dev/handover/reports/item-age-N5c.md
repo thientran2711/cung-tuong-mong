@@ -35,3 +35,19 @@ GUARD (12,806 builds = c01–c32 × 5 ages × every command, ± --spec5pose, sna
 
 ## Redo list / next (no gens until ROOT GO)
 Everything drawn with three-quarter poses or same-item-across-ages stays per 3d2 ("hình nào đã lỡ vẽ rồi thì thôi") unless ROOT orders a redo; Nữ đế c09–c11 (+c01, c02, c17) redo list per N5b handover.
+
+## Fix after W107 report
+- `--nude2` crashed ('t8 item not in pose') since pick_item: nude2() now looks for the age-table t8 item (age_item); `c06 v0 --head --nude2 A` OK with and without --olditem.
+
+## HANDOVER N5c → successor (rollover: past START_CTX + 25 %) — foreman now ROOT-37 session_01PEhRbvmuaY9UKYHVCvKcM9
+DONE (pushed): 793227c table + frontal + pick_item; 83de0af report + golden_low; ea3bd45 golden t4; this commit nude2 fix.
+NOT DONE — builder-gate orders from ROOT-36 (00:56–01:31Z, verbatim in its messages; split with W107/W107b in dev/handover/reports/builder-coverage.md § HANDOVER). Successor owns:
+1. K3 no-background sentence in build.py output for every figure state, default ON, as a module constant (W107b session_01PEhRbv2Jj3dTLMsN1f9GGg wants to import it; tell them the name, e.g. K3_BG). Exact text in ROOT-36 msg: " The second reference image is style only: IGNORE its background completely; the background is completely transparent with NOTHING behind or around her: no backdrop, no parchment, no painted flowers/branches, no smoke, no haze, no glow, no stain."
+2. --log (append {ts, cmd, prompt, refs, gen_id, magnific_prompt} to dev/art/gen_ledger.jsonl) and --verify dev/art/gen_ledger.jsonl [--since ts]: re-run cmd, compare with magnific_prompt (painter fetches with creations_get after the gen), PASS/FAIL per line, exit 1 on any FAIL. Write exact painter steps + usage lines for briefs; share API with W107b.
+3. spec5pose AGE offset (5 ages of one person = different poses, keep facing/calm skips); W107 will NOT touch spec5pose.
+4. --state ty N (ty1–ty8) and --state cold for consorts cNN AND maids mNN, all 5 ages incl. a65: re-make mode (image 1 = her live tier+age picture, image 2 = style3_girls), trung y design from reports/fig-cutout-clean/PROMPT_TEMPLATE.txt, C8 colours (maid-ty-m09.md l.13 / jty.js TY_COL), AGE_TXT verbatim; a51/a65 = deeper clause + "deeper shade of the same <C8 colour>, same hue family" (owner d0f31d3, no switch); spec5pose + pick_item (ty tier = rank cell: add ty rows to item_age or map ty N → tN; cold → "lanh").
+5. Maid mode tm0–tm4 + ma ma, all 5 ages: COPY old maid prompts (dev/handover/reports/maids-M1.md, main dev/figwork/jobs.json / maid*), owner ladder FIGURE_GATE "CUNG NỮ LADDER + MA MA" (59a21c8) + THÔ SỬ design (842754fa: plain coarse cotton/hemp, one faded colour, short crossed-collar jacket + plain ankle skirt, same-colour sash, sleeve ≈1 span, simple bun + wooden pin, no apron, work items). m01–m52 DATA/ORIG1/LOWNAME rows (ORIG1 measured from live fig-maid-mNN-t1-a18, PAL/MOT from main dev/figwork/maidC/mjobs.py:22,:31). Maid personality → SPEC5 list mapping by index, documented. pick_item rows tm0–tm4/mama already in item_age.py.
+6. After each block: `python3 dev/art/coverage.py` (BUILDER_COVERAGE.md) — a65 must be green for every women group.
+Owner 3d2 addendum (ROOT-36 01:28Z): frontal rewrite changes ONLY body/face direction words; never add stiff wording except where a CALM rule already says so. My spec5 addition is direction words only (", body and face frontal, facing the viewer squarely, no turn"); the nude "standing still" sentence is the pre-existing approved calm rule.
+emperor-B/build.py: I am NOT editing it any more — W107b may take it.
+Guard method: scratch snapshot of every command (c01–c32 × 5 ages × all modes ± --spec5pose), diff before/after, report changed groups; run with PYTHONDONTWRITEBYTECODE=1 (a tracked .pyc in __pycache__ breaks rebases).

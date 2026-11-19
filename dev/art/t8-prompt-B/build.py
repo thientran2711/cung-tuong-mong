@@ -968,7 +968,7 @@ NUDE2_COL={"B":"a DEEP, low-saturation crimson like #7E2A33 (a dark muted wine-c
 "C":"black silk richly embroidered with gold thread (the yellow clearly more than the black, black never the main colour)"}
 def nude2(o,c,opt):
     assert c in NUDE2_ITEM and opt in "ABCD"
-    t8item=ITEMS[item_for(c)][0]; assert t8item in o,("t8 item not in pose",c,t8item)
+    t8item=age_item(c,"t8",*ITEMS[item_for(c)])[0]; assert t8item in o,("t8 item not in pose",c,t8item)   # N5c: follow the age-table t8 item (--olditem = old)
     o=o.replace(t8item,NUDE2_ITEM[c])                                   # (d)
     o=o.replace("phoenixes","dragons").replace("phoenix","dragon")        # (a)
     assert o.count("a FULL tall imperial crown")==1
