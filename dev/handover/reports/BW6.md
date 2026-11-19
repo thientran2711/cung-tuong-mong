@@ -22,4 +22,4 @@ depth 7 · START_CTX ≈ 4 % (get_session used_tokens read 0; own estimate) · c
 ## TASK 2 — Sắc sảo mass: waiting for ROOT-54 "GO".
 
 ## HANDOVER line
-(open)
+BW6 TASK 1 done + reported to ROOT-54 (commits 0ee0570, 04df4ae; head e439ed0). Context ≈ 20 %. TASK 2 waits for ROOT-54 GO (flag: upstream c626007 "owner stop on Sắc sảo").
