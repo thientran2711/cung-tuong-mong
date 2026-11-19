@@ -1376,3 +1376,4 @@ ROOT-49 (owner Lượt 492 in ROOT-48 chat, triều phục r21 verdict) → ART_
 ROOT-49: TP2 past threshold, no r22 (handover e51091a: t1 darkness = wide #6FA88A cuff borders, no colour word changed) → TP3 session_01PEhRbxsdfr3zgnW59ToGrr (my child): t1 = r20 nVsuDuUYQD look, narrow cuff band in hà bí colour + lighter fresher green; r22 t1/t2/t3/t5 STOP.
 ROOT-49 Lượt 497: MMX2 rolled over (17350b5; m05–m36 24 gens, 3,312 cr); m35-m36 sheet LOOKED + SENT (faults: one colour per outfit; m36 ivory-beige near gold, a65 dull; items repeat by age as m05/m15/m25). MMX2b session_01PEhRbv5dfMQoFystPMjovj (my child) continues m38 m39 m40 m45 m46 m52.
 ROOT-48 Lượt 495 (owner, in ROOT-48 chat): pose table 30 = 3 groups × 10 (lively t1–t3, medium t4–t5, calm t6–t8) → dev/art/POSES_30.md draft sent to owner; ROOT-49 wires after OK.
+ROOT-48 Lượt 498 (owner): STOP ALL MASS drawing (Nữ đế NDX1 told; ROOT-49 stops ma ma successors + any mass).
