@@ -176,6 +176,7 @@ L10 | New scenes start as edits of approved game scenes (no glossy floors, no AI
 L11 | EVERY rank step has a DIFFERENT room layout, even inside the same palace (Tần ≠ Phi ≠ Quý phi bedrooms and receptions), so each is fresh, never a copy. | Lượt 491 (19/11) | FG -
 L12 | FLOOR SHARE (Lượt 520): all room layouts are OK — keep them; but EVERY room shows TOO MUCH empty floor at the bottom: shrink the visible empty floor in every room (even the Phi bedroom v3 — 'ít hơn nữa, nhỏ hơn nữa'); Tần bedroom + receptions most. Rooms with HQP (t7) bedroom + reception added to compare with Hoàng hậu. | Lượt 520 (19/11) | FG -
 L13 | ROOM PICTURES are ALWAYS shown to the owner WITH the people placed in them (people sheet), never a bare room (owner Lượt 563: 'phải đặt người lên tao mới biết được'). | Lượt 563 (19/11) | FG -
+L14 | ROOM LAYOUT (owner): ALL rooms are drawn in the style of the HQP (Trường Xuân) bedroom v7: three walls visible — left wall, right wall and the back wall in the middle (box view). Rank colours in rooms: HQP = ORANGE + yellow (bedsheet orange+yellow, never red+yellow), less yellow than HH; HH = yellow + RED (more red, e.g. red bedsheet, red in the reception). Ceilings high enough that people never look too big for the room. | Lượt 584 (19/11) | FG -
 
 ## M. Skins
 M1 | Every picture the owner PRAISED but then asked to redraw is KEPT as a SKIN (never deleted/overwritten), logged in dev/art/SKINS.md (person, rank/age, cut id, path, why). | Lượt 413 | FG 18
