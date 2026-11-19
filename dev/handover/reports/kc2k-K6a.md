@@ -50,3 +50,13 @@ https://ctm-img.victoria-tntt.workers.dev/img/_review/kc2k-mass/sheet_K6a_3.jpg
 Magnific picks (all first try): m12 kc s7I706rl8e, ngheo Lw8wciRswO; m13 kc DoOoruVpcl, ngheo dt4tstVXSL; m14 kc KLpLGllkqp, ngheo lJtJVPogv9; m15 kc JNCNXZROq4, ngheo u5W56EYQLD; m16 kc xSBScLRjfW, ngheo 6AbAvRQiJO. Margins 0.00 %.
 Honest notes: m13 ngheo shows the cloth ribbon but no visible wooden pin (no jewellery, ok); m14 ngheo jacket mostly natural beige, celadon carried by the skirt (as her live); m15 kc skirt stays cream (her design; vest/sash now medium pink).
 ~83 % of 36 (30/36 looked at) / ~0 % chơi được.
+
+## SHEET 4 — m17–m19 (last)
+https://ctm-img.victoria-tntt.workers.dev/img/_review/kc2k-mass/sheet_K6a_4.jpg
+Magnific picks (all first try): m17 kc u5W5iqTQLD, ngheo bxMxAdO5Y2; m18 kc KLpLzoBkqp, ngheo mEZEOYDhJQ; m19 kc iG5GaLU3uK, ngheo VX7Xx5GMMU. Margins 0.00 %. Note: m18 kc skirt stays cream (her design; vest now medium powder blue).
+
+## DONE — K6a scope complete
+36/36 images (m02–m19 × khuê các + nhà nghèo) in CDN img/_review/kc2k-mass/ as mNN_a18_{kc,ngheo}_2k.png (1520x2688 RGBA, straight from gpt-2-6 transparentBackground) + sheet_K6a_1..4.jpg. Gens: 36 picks + 4 tone redos (m02/m03/m06/m07 kc) = 40 gens × 135 = 5,400 cr. No regen needed for background haze (all margins 0.00 %).
+NOT done (not in scope): wiring into the game (img/fig-maid-mNN-{kc,ngheo}-a18.webp + FIGURES-kc.json) — waits the owner's look. cutcheck.py not run (figwork not checked out).
+RECOMMENDATION for the other faces (m21–m36, m38–m52): use the KC v2 tone sentence from the start (KC v1 was too weak on pastel faces).
+~100 % of K6a (36/36) / ~0 % chơi được (nothing live).
