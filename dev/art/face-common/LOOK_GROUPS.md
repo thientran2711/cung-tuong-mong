@@ -77,3 +77,4 @@ File máy đọc: dev/art/face-common/OWNER_GROUPS_L686.json
 - Groups Tinh nghịch and Tươi tắn DROPPED entirely → all 22 people moved to Kho (OWNER_GROUPS_L686.json value "Kho").
 - The 22 freed slots are filled with NEW faces in Sắc sảo (+7), Lạnh lùng (+7), Quyến rũ (+8) (same method as NF4 s19–s38; drawing must match s07).
 - Tick page picks: c06 and c19 (Sắc sảo) = redraw.
+- Lượt 738 (owner): the 22 dropped Tinh nghịch + Tươi tắn people are NOT Kho: they become the CÔNG CHÚA group (the emperor's daughters / consorts' children in the game; later they also need adult and child pictures). JSON value "Công chúa (Tinh nghịch)" / "Công chúa (Tươi tắn)". People: c01 c03 c07 c09 c12 c13 c15 c18 c21 c24 c25 c30 m01 m03 m05 m06 m07 m11 m12 m24 m25 m30. NOTE: m05 (Nữ đế / ma ma / Thái hậu sample person) is in this group.
