@@ -256,3 +256,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | phutang-road lead (foreign-princess-3 step 2b: NEW Phù Tang roads pt_hai/pt_su + plan, opus E21) | review/phutang-road; briefs/E21-phutang-road.md | FOREMAN E | session_01DgYSWm2JdhtEH6d41VumRy | RUNNING | 19/11 06:49Z |
 | seal-lean-3 fast pop / slow shrink / head-size max (sonnet; OD 06:55Z) | review/seal-lean-3 | MAIN ROOT-65 | session_01Rc5AsKzdGvNFdCvLo4rm8G | RUNNING | 19/11 07:03Z |
 | phutang-road writer 2 (pt_tang + pt_dang, opus E21b, under E21) | review/phutang-road-w2; briefs/E21b-phutang-road-w2.md | FOREMAN E | session_01DgYSWkdwE7LuxhVqAQnJah | RUNNING | 19/11 07:03Z |
+| bd-roads r2 + Ba Tư lead (opus E14d, successor of E14c) | review/bd-roads | FOREMAN E | session_01DgYSWqB4qyr7uRTdKD8895 | RUNNING | 19/11 07:06Z |
