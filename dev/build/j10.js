@@ -85,7 +85,8 @@ function servMonth(){let ev="";capSweep();for(const p of consorts()){if(!p.staff
   if(p!==S&&!AGP&&roll(2)){const t=pickTarget(p);if(t)plantServ(p,t)}
   if(p!==S&&!G)fillStaff(p,false)}
  return ev}
-/* ODDS CAP: Tra khảo a spy and Che chở before Thận Hình ti are chances (owner 17/11 17:00Z), rolled here once for every door (house card, staff tab) */
+/* ODDS CAP: Tra khảo a spy and Che chở before Thận Hình ti are chances (owner 17/11 17:00Z), rolled once for every door (house card, staff tab)
+   and, by the AG-ALL two-way rule, the same for an NPC mistress (servDo m): her Tâm cơ / Danh / rank */
 function traO(s,m){m=m||S;const T=BAL.house.tra;return oddsCl(Math.round(T.base+(m.tamco||0)/T.tcDiv-(s&&netIs(s,"loyal")?T.loyal:0)))}
 function cheO(m){m=m||S;const C=BAL.house.che;return oddsCl(Math.round(C.base+(m.danh||0)/C.danhDiv+rkOf(m)*C.rank))}
 function servAct(a,id){const s=servById(id);if(!s||S.dead||Q.length)return;const o=ownerOf(s);let r="";window.__servOk=true;
@@ -100,7 +101,7 @@ function servDo(m,a,s){const me=m===S,P=BAL.ag.par3.staff;let r="";if(!m||!s||!(
   if(o2&&o2!==m&&aRoll(nv(s,"askTalk"),m)){r=evA(m,o2,BAL.eff.j10.evServAct_2)?`${s.name} kể chuyện nghe từ ${f.name} bên cung ${o2.name}: chứng cứ ${balSg(BAL.eff.j10.evServAct_2)}.`:`${s.name} kể chuyện nghe từ ${f.name} bên cung ${o2.name}: không có gì sai trái, chỉ biết ${harmTxt(o2)}.`}else r=`${s.name} không biết gì mới.`;
   {const dt=allServ().find(x=>x.lover&&!(m.knowDT||[]).includes(x.sid)&&ownerOf(x)!==m);if(dt&&roll(P.hoi.dt)){m.knowDT=(m.knowDT||[]).concat([dt.sid,dt.lover]);if(me)r+=` Lại nghe đồn ${dt.name} và ${(servById(dt.lover)||{}).name} đối thực.`}}}
  else if(a==="doi"){m.staff.splice(m.staff.indexOf(s),1);r=`Trả ${s.name} về Nội vụ phủ.`}
- else if(a==="che"){pay({danh:BAL.eff.j10.danhServAct});if(!roll(cheO(m))){if(me)window.__servOk=false;s.loyal=cl(s.loyal+BAL.house.che.failLoy,0,100);r=`Che chở ${s.name}: <span class="r">hỏng</span>, Thận Hình ti không nể mặt: Danh ${balSg(BAL.eff.j10.danhServAct)}, lòng +${BAL.house.che.failLoy} (biết ơn ngươi đã ra mặt).`}else{s.loyal=cl(s.loyal+BAL.eff.j10.loyalServAct_3,0,100);r=`Che chở ${s.name} trước Thận Hình ti: lòng ${balSg(BAL.eff.j10.loyalServAct_3)}, Danh ${balSg(BAL.eff.j10.danhServAct)}.`}}
+ else if(a==="che"){pay({danh:BAL.eff.j10.danhServAct});if(!roll(cheO(m))){if(me)window.__servOk=false;s.loyal=cl(s.loyal+BAL.house.che.failLoy,0,100);r=`Che chở ${s.name}: <span class="r">hỏng</span>, Thận Hình ti không nể mặt: Danh ${balSg(BAL.eff.j10.danhServAct)}, lòng +${BAL.house.che.failLoy}${me?" (biết ơn ngươi đã ra mặt)":""}.`}else{s.loyal=cl(s.loyal+BAL.eff.j10.loyalServAct_3,0,100);r=`Che chở ${s.name} trước Thận Hình ti: lòng ${balSg(BAL.eff.j10.loyalServAct_3)}, Danh ${balSg(BAL.eff.j10.danhServAct)}.`}}
  return me?r:r?`${m.name}: ${r}`:""}
 function courtAct(a,k){const c=S.court[k];if(!c||S.dead||Q.length)return;let r="";
  if(a==="thuong"){if(S.bac<BAL.bacFee.court)return;r=courtGive(S,k)}
@@ -154,14 +155,14 @@ function facMonth(){let ev="";S.facs=(S.facs||[]).filter(f=>facMembers(f).length
   /* betrayal, split */
   const b=mindPickBy(M.filter(m=>m!==S&&m!==l&&aff(m,l)<0),m=>-aff(m,l)*mindW(m,"flee"),null);/* npc-mind: was FIRST */if(b&&!p3FacOn()&&roll(4))ev+=seenNPC(b,b,sellOut(b))||"";
   const top=M.filter(m=>m!==S).sort((a,c)=>c.sung-a.sung);if(top.length>=2&&top[0].ghen>60&&top[1].ghen>60&&!p3FacOn()&&roll(5))ev+=eyes(S)>=2?leaveFac(top[1]):(leaveFac(top[1]),"");
-  if(l!==S&&roll(6)){const E0=consorts().filter(x=>!M.includes(x)&&M.reduce((s,m)=>s+oan(m,x),0)/M.length>=25).filter(x=>!sameHouse(l,x));const e=mindPickBy(E0,x=>M.reduce((s,m)=>s+oan(m,x),0),l);if(e)/* npc-mind: was FIRST */ev+=seenNPC(l,e,jointScheme(f,e))}}
+  if(l!==S){const o=npcWhy("facJoint",{p:l,f},x=>!!x.tgt&&roll(6));if(o)ev+=seenNPC(l,o.tgt,jointScheme(f,o.tgt))}}/* npc-purpose G2: the leader moves only on a foe the whole faction hates */
  /* NPCs found, join, invite, divide */
  /* AG-ALL-2e2: with the day plan on, an NPC founds / asks to join / leaves / sells out / divides through her own options (jagacts3 cx3:fac*, the same functions as facAct) */
  if(!p3FacOn())for(const v of liveRivals(true)){if(facOf(v))continue;
   const fr=others(v).filter(x=>(x===S||x.alive)&&!sameHouse(v,x)&&(aff(v,x)>=35||clanOf(v)===clanOf(x)&&aff(v,x)>=15||consorts().some(e=>e!==v&&e!==x&&oan(v,e)>=30&&oan(x,e)>=30)));
   const x=mindPickBy(fr.filter(y=>y!==S),y=>BAL.mind.pick.j10fr.base+Math.max(0,aff(v,y)),v);/* npc-mind: was FIRST */if(x&&roll(25)){const g=facOf(x);/* RECEIVER CHOICE (jrcv): the leader / the friend answers */const r=g?askJoin(v,g):rcvAsk("facFound",v,x);ev+=eyes(S)>=2||g&&facOf(S)===g?r:""}}
- const mine=facOf(S);for(const f of S.facs){if(f===mine)continue;const l=facLeader(f);if(l&&l!==S&&!facOf(S)&&aff(l,S)>=35&&roll(10))rcvAsk("facInvite",l,S)/* her card: the 4 answers (jrcv) */}
- if(mine&&roll(5)){const o=S.facs.find(f=>f!==mine);const l=o&&facLeader(o);if(l&&l!==S){const r=divide(l,mine);if(r)ev+=r}}
+ const mine=facOf(S);for(const f of S.facs){if(f===mine)continue;const l=facLeader(f);const oa=l&&l!==S&&!facOf(S)&&aff(l,S)>=35?npcWhy("facAsk",{p:l,minAff:35},()=>roll(10)):null;if(oa)rcvAsk("facInvite",l,S)/* npc-purpose G2 reason + her card: the 4 answers (jrcv) */}
+ if(mine){const od=npcWhy("facDiv",{mine});const l=od&&od.who;if(l&&l!==S&&roll(5)){const r=divide(l,mine);if(r)ev+=r}}/* npc-purpose G2: a rival leader who bears her a grudge divides her faction */
  return ev}
 function facHTML(){const mine=facOf(S),F=S.facs||[];let h=`<div class="ph"><span>${mine?`Ngươi thuộc <b>${mine.name}</b>`:"Ngươi chưa vào phe nào"}</span><span>Họ: ${clanOf(S)||"không"}</span></div>`;
  if(!mine){const cands=liveRivals(true).filter(v=>!facOf(v)&&aff(v,S)>=BAL.facJoinAff&&!sameHouse(S,v));h+=`<div class="rbtn" style="margin-bottom:6px">${cands.slice(0,4).map(v=>`<button data-fa="lap" data-fv="${v.id}" ${!can(2)?"disabled":""}>${mdH(pv(v),"xs")}Lập phe cùng ${v.name}<small>2 khắc · ${rcvWord(v,S)}</small></button>`).join("")||`<span class="past">Cần một phi tần quý ngươi từ ${BAL.facJoinAff} để lập phe.</span>`}</div>`}
