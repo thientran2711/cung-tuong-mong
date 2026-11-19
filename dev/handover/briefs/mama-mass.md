@@ -1,3 +1,5 @@
+**⛔ OWNER Lượt 482 (ROOT-48 → MMX1/MMX2): the M09/style image 6AbGv6EiJO is RETIRED for all production (only for creating a brand-new character). Ma ma = her OWN picture only (one-ref, steps 1–2 below: `--nostyle`, image 1 own face, image 2 costume 79fNlPEJAL), never the style image.**
+
 # MA MA MASS — helper brief (Foreman C ROOT-47, owner Lượt 404: "hình mama rất là hợp ý tôi … tiến hành vẽ toàn bộ hình mama cho tất cả mọi người")
 Approved recipe = exactly the m01 pictures the owner approved (Lượt 395 a36 O6E2U81ynm + Lượt 402 a51 SyhcDOLUb8 / a65 bxM62jq5Y2), commit ec5fcd559. Change NOTHING in the recipe.
 Per person mNN (your range) × ages a36, a51, a65:
