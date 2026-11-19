@@ -235,7 +235,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | ge-writers-w3 BIG review (opus E11r-w3; cb72b507) | review/ge-writers-w3 | E ROOT #8 | session_01DgYSWn2u8M4jdAipxwpiJf | DONE FAIL cb72b507 (reports/ge-writers-w3-review.md: 3 fixes, law 6 b/c) | 19/11 |
 | kyngo-daily (Kỳ ngộ thường ngày design + build, opus E18) | review/kyngo-daily | E ROOT #8 | session_01DgYSWnqwrFPkcU8D76tS79 | RUNNING | 19/11 04:53Z |
 | palace-chatter line banks (sonnet E17b, under E17) | review/palace-chatter-lines | E ROOT #8 | session_01DgYSWnyBgE1MomXSwtCiXz | DONE a171292 | 19/11 04:58Z |
-| seal-lean-2 big slow lean-in + real video (sonnet; OD 05:05Z) | review/seal-lean-2 | ROOT-63 → ROOT-64 | session_01Rc5AsHrbnHixrk74QyLYuV | RUNNING | 19/11 04:58Z |
+| seal-lean-2 big slow lean-in + real video (sonnet; OD 05:05Z) | review/seal-lean-2 | ROOT-63 → ROOT-64 | session_01Rc5AsHrbnHixrk74QyLYuV | DONE — LIVE 5400c87b | 19/11 04:58Z |
 | REVIEW role-parity-drift r1 (opus BIG) of 127fe1ea | review/role-parity-drift-r1 | B | session_01N1tNP522pSWxVAQMo8r88Z | PASS — READY FF 1ed688ef | 19/11 06:10Z |
 | odds-no-unknown BIG REVIEW (opus) | review/odds-no-unknown 7a56b2e | C-AG #20 for ROOT-64 | session_01Rc5AsLQg8htXCMAz8FnrmD | DONE — LIVE 4217568a (archived 19/11 06:05Z) | 19/11 05:12Z |
 | coop-thin F2 FIX r2 (opus BIG; reviewer FAIL r1: guest cards silenced by withSeat quiet, whole intent family + buổi resend check) | review/coop-thin-f2-r2 | B | session_01N1tNP4v5eCkat9E4cy6HXG | SẴN SÀNG KIỂM 81ac2af8 (report: reports/coop-thin-f2.md "## FIX r2") | 19/11 |
@@ -248,7 +248,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW coop-thin-f3 r1 (opus BIG) of f659cf7b | review/coop-thin-f3-r1 | B | session_01N1tNP5fWL4VXMTtqchmHQX | RUNNING | 19/11 06:30Z |
 | coop-thin F4 (opus; pets/garden/kitchen/study; same worker as F3, stacked on F3) | review/coop-thin-f4 | B | session_01N1tNP2DFfqtxibVd8wgyr6 | RUNNING | 19/11 06:33Z |
 | ev-pic-followups (sonnet; MAIN ROOT-65 job via C-AG #22: iPad XL option frame scroll kit fix whole group + PEND:eunuch scene) | review/ev-pic-followups; briefs/cag22-ev-pic-followups.md | C-AG #22 for ROOT-65 | session_01Rc5AsMN9rc6gf4qRzmEoJF | RUNNING | 19/11 06:40Z |
-| seal-lean-2 r2 SMALL REVIEW (sonnet) | review/seal-lean-2 a64f06c7 | MAIN ROOT-65 | session_01Rc5AsK8sbYnJUkyP6AvmAw | RUNNING | 19/11 06:37Z |
+| seal-lean-2 r2 SMALL REVIEW (sonnet) | review/seal-lean-2 a64f06c7 | MAIN ROOT-65 | session_01Rc5AsK8sbYnJUkyP6AvmAw | DONE — LIVE 5400c87b | 19/11 06:37Z |
 | foreign-princess-3 history expert (sonnet E19; MAIN ORDER 06:23Z/06:35Z) | handover reports/foreign-princess-3-history.md | E ROOT #8 | session_01DgYSWkWBAJFRJzN3a7ix9a | RUNNING | 19/11 06:42Z |
 | FOREMAN E ROOT #9 (opus; child of E ROOT #8, depth 8 = limit) | handover FOREMAN_E_STATUS | E ROOT #8 | session_01DgYSWmYGTJUrUAYgMGzMCE | RUNNING | 19/11 06:46Z |
 | FOREMAN E (opus; ex-ROOT STANDBY, depth 0; took over from E ROOT #9 at depth limit) | handover FOREMAN_E_STATUS | owner STANDBY | session_01DgYSWkgmeMCRaqRT4UCEJE | RUNNING | 19/11 06:50Z |
