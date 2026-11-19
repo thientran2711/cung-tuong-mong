@@ -21,8 +21,7 @@ npwReg("ilBuy",{grp:"G2c",who:c=>liveRivals(true).filter(v=>v!==c.o),why:(v,c)=>
 npwReg("ilConf",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(o,c)=>{const W=BAL.ag.why.g2il;const s=W.conf+ilVal(c.x.e)/W.valDiv-Math.max(0,netQ(o,"timid"))*W.timid;return s>0?{s,r:"muốn xin lại "+ilNm(c.x.e)}:null}});
 /* ---- j83: her handmade work, poison seeking ---- */
 npwReg("wkUse",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(v,c)=>{let b=0;for(const o of wkUseOpts(v,c.w))b=Math.max(b,o.s);return b>0?{s:b,r:"dùng đồ tự làm cho việc riêng"}:null}});
-npwReg("illSeek",{grp:"G2c",who:c=>c.p?[c.p]:[],why:(v,c)=>{const B=BAL.ag.why.g2ill;if((v.malice||0)<=B.malice)return null;
- const t=npwPick(others(v).filter(t=>t.alive&&!t.out),t=>wkGrudge(v,t)-B.host);if(!t)return null;return {s:wkGrudge(v,t)*mindW(v,"scheme"),t,r:"căm "+npwNm(t)+", tìm độc dược"}}});
+/* (illSeek removed: an NPC consort seeks đồ cấm only as a day-plan choice now — role-parity part 2, jagacts4 cx4:ill<route> + IROUTE / illBuy) */
 /* ---- jrcp: allergy accusation, maid's gossip, a friend's pattern, Thái hậu's sutra ---- */
 npwReg("rcpAcc",{grp:"G2c",cd:"rcpAcc",who:c=>c.p?[c.p]:[],why:(q,c)=>{const B=BAL.ag.why.g2rcp;if(q===c.v)return {s:B.acc+Math.max(0,hostility(q,c.a)),t:c.a,r:"phát bệnh vì đồ "+npwNm(c.a)+" dâng"};
  if(q.queen)return {s:B.acc,t:c.a,r:"giữ phép lục cung"};const h=hostility(q,c.a);return h>=B.accHost?{s:h,t:c.a,r:"oán "+npwNm(c.a)+", nhân cớ tố cáo"}:null}});
