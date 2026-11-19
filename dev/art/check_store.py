@@ -691,6 +691,17 @@ def best_overlap(sentence, text):
     return best
 
 
+_KC_FACES = None
+def _strip_kc_faces(text):
+    """remove every exact KC_REFS face_words string (owner-approved identity words, ART_RULES B8) from the text used for the BANNED scan only."""
+    global _KC_FACES
+    if _KC_FACES is None:
+        import json
+        P = json.load(open(os.path.join(ART, "KC_REFS.json"), encoding="utf-8"))["people"]
+        _KC_FACES = [norm(p["face_words"]) for p in P.values() if p.get("m09_ok") == "yes" and (p.get("face_words") or "").startswith("Her face: ")]
+    for f in _KC_FACES:
+        if f in text: text = text.replace(f, " ")
+    return text
 def check_text(text, scope, S=None, X=None, age=None, skip_store=False):
     """-> (fails, warns, slots) ; fails/warns = list of (id, kind, detail)."""
     if S is None: S, X = load_registry()
@@ -706,6 +717,7 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False):
         ov = best_overlap(e["text"], text)
         item = (e["id"], "REWRITTEN" if ov >= 0.6 else "MISSING", f"{e['title']} (best overlap {ov:.0%})")
         (fails if req else warns).append(item)
+    text = _strip_kc_faces(text)   # B8 (BW3): the owner's verbatim KC face words are approved as a whole: never scanned for banned phrases (m13 "PHOENIX eyes" = eye shape, not the X08 motif; m43 "covering the teeth completely")
     for x in X:
         if scope not in parse_scope(x["scope"]): continue
         if x.get("unless") and x["unless"] in found: continue

@@ -343,7 +343,13 @@ def _t3_slot(person,rank,S):
     _sp=_iu.spec_from_file_location("check_store",os.path.join(ART,"check_store.py")); _cs_mod=_iu.module_from_spec(_sp); _sp.loader.exec_module(_cs_mod)
     main=LAST_G["DATA"][person][0].split(" and ")[0]; sec,_=secondary(person)
     return _cs_mod.g15_t3(S,main,sec)
+class NotDrawn(Exception): pass
+def _kc_drawn(person):   # B8 (BW3): same table + rule as build.py kc_drawn (dev/art/KC_REFS.json m09_ok yes + real face words)
+    import json as _j
+    p=_j.load(open(os.path.join(ART,"KC_REFS.json"),encoding="utf-8"))["people"].get(person)
+    return bool(p and p.get("m09_ok")=="yes" and (p.get("face_words") or "").startswith("Her face: "))
 def build(person,rank,age="a18"):
+    if not _kc_drawn(ALIAS.get(person,person)): raise NotDrawn(person)   # B8: people NOT drawn are refused (CLI exit 2, --check counts them HELD)
     person=ALIAS.get(person,person); S0=store(person,rank,age); S=S0
     if rank=="nude": return S0,S0,[]
     if "Her face: . " in S:
@@ -390,17 +396,19 @@ def gate(person,rank,age,text):
         return p.returncode==0 and "STORE CHECK PASS" in p.stdout, p.stdout.strip()
     finally: os.unlink(fn)
 def check_all(age="a18"):
-    bad=0
+    bad=0; held=0
     for t in range(1,9):
         ref=_frame(t,age)
         for p in PEOPLE:
+            if not _kc_drawn(ALIAS.get(p,p)): held+=1; continue   # B8: not drawn -> HELD (builder refuses)
             e=check(p,t,age,ref); ok,msg=gate(p,t,age,build(p,t,age)[1])
             if not ok: e=e+["check_store: "+msg[:200]]
             if e: bad+=1; print("FAIL",p,"t%d"%t,age,"|",e[:3])
     for p in [f"c{i:02d}" for i in range(1,33)]:   # Nữ đế (nude3) of every consort: gate only
+        if not _kc_drawn(p): held+=1; continue
         ok,msg=gate(p,"nude",age,build(p,"nude",age)[1])
         if not ok: bad+=1; print("FAIL",p,"nude",age,"|",msg[:200])
-    n=len(PEOPLE)*8+32; print(f"checked {n} prompts ({len(PEOPLE)} people x 8 ranks, age {age}): {bad} FAIL"); return 1 if bad else 0
+    n=len(PEOPLE)*8+32; print(f"checked {n-held} prompts ({len(PEOPLE)} people x 8 ranks + 32 Nữ đế, age {age}; {held} HELD = not drawn, B8): {bad} FAIL"); return 1 if bad else 0
 if __name__=="__main__":
     a=sys.argv[1:]; age=a[a.index("--age")+1] if "--age" in a else "a18"
     if "--style" in a: STYLE_OVERRIDE=True
@@ -409,7 +417,9 @@ if __name__=="__main__":
         for p,t in (("m19",1),("m19",3),("c06",7),("p01",2),("p03",8)):
             print(f"\n===== {p} t{t} {age} =====\n"+build(p,t,age)[1])
         sys.exit(0)
-    pos=[x for x in a if not x.startswith("--") and x!=age]; out=build(pos[0],(pos[1] if pos[1]=="nude" else int(pos[1])),age)[1]
+    pos=[x for x in a if not x.startswith("--") and x!=age]
+    if not _kc_drawn(ALIAS.get(pos[0],pos[0])): print(f"REFUSED {pos[0]}: NOT drawn (ART_RULES B8, dev/art/KC_REFS.json)",file=sys.stderr); sys.exit(2)
+    out=build(pos[0],(pos[1] if pos[1]=="nude" else int(pos[1])),age)[1]
     ok,msg=gate(pos[0],(pos[1] if pos[1]=="nude" else int(pos[1])),age,out)
     if not ok: print(msg,file=sys.stderr); sys.exit(1)
     print(out,end="")
