@@ -348,7 +348,7 @@ rdDef("bd_hen",5,{t:"Chiếc nhẫn trong tay áo",w:"maid",sj:"chiếc nhẫn �
  s3:{h:"Chiếc nhẫn giữa lời đồn",w:"maid",if:RDW(0),t:"Lời đồn còn chưa tắt mà chiếc nhẫn đã đến. Nếu ai thấy túi gấm này, lời đồn sẽ thành chứng cớ.",o:[
   {n:"Giữ chiếc nhẫn trong tay áo",f:"tinh",wx:"lời thề ở bên ngươi",lx:"lời đồn có chứng cớ",go:()=>bdO("da","ta"),rt:"Chiếc nhẫn nằm trong tay áo ngươi."},
   {n:"Gửi trả chiếc nhẫn ngay đêm nay",f:"nghia",wx:"không còn chứng cớ trong cung",lx:"chàng đau lòng",go:()=>bdO("da","tra"),rt:"Túi gấm về lại Hội Đồng quán trước canh ba."},
-  {n:"Dâng nhẫn vào lửa thánh ở Hỏa Tiên từ",f:"uy",wx:"không ai tìm ra",lx:"lời thề tan trong lửa",go:()=>bdO("da","chon"),rt:"Đêm ấy ngươi sai người thân tín mang chiếc nhẫn đến Hỏa Tiên từ ở Tây Thị, dâng vào lò lửa."}]},
+  {n:"Dâng nhẫn vào lửa thánh ở đền Hỏa Tiên",f:"uy",wx:"không ai tìm ra",lx:"lời thề tan trong lửa",go:()=>bdO("da","chon"),rt:"Đêm ấy ngươi sai người thân tín mang chiếc nhẫn đến đền Hỏa Tiên ở Tây Thị, dâng vào lò lửa."}]},
  s4:{h:"Chiếc nhẫn mới",w:"maid",if:()=>rdPrev()==="r97",t:"Lời thề cũ đã được trả bằng lời chúc trước mặt Hoàng thượng. Nay chàng gửi vào một chiếc nhẫn bạc khác, khắc một chữ: “nghĩa”.",o:[
   {n:"Giữ chiếc nhẫn bạc",f:"nghia",wx:"nghĩa cũ thành nghĩa mới",lx:"người ta hỏi nhẫn từ đâu",go:()=>bdO("da","ta"),rt:"Chiếc nhẫn bạc đặt trên án thư của ngươi."},
   {n:"Đưa chiếc nhẫn cho Hoàng thượng xem",f:"that",wx:"Hoàng thượng thấy ngươi không giấu",lx:"không còn gì là riêng",go:()=>bdO("da","vua"),rt:"Hoàng thượng cười: “Chữ nghĩa, tốt.”"},
@@ -364,7 +364,7 @@ rdDef("bd_hen",5,{t:"Chiếc nhẫn trong tay áo",w:"maid",sj:"chiếc nhẫn �
  t1:{h:"Nhẫn ở đâu thì yên",w:"me",t:"Đêm khuya, ngươi cầm chiếc nhẫn trong tay. Nhẫn ở đâu thì lời thề ở đó: trong tay áo, trong lửa thánh, hay trước lò lửa ở quê nhà.",o:[
   {n:"Gửi theo sứ đoàn, dâng lại trước lò lửa quê nhà",f:"nghia",wx:"lời thề về chỗ của nó",lx:"chàng phải tự mang về",if:()=>bdO("da")!=="vua",go:()=>bdO("da","tra"),rt:"Ngươi nhờ sứ đoàn mang chiếc nhẫn về dâng lại trước lò lửa thánh ở quê nhà."},
   {n:"Giữ lại, khâu vào lớp lót áo",f:"tinh",wx:"lời thề theo ngươi mọi lúc",lx:"áo nào cũng có thể bị khám",if:()=>bdO("da")!=="vua",go:()=>{bdO("da","ta");RD_FL("bd_hen.lot",1)},rt:"Chiếc nhẫn nằm trong lớp lót chiếc áo gấm của {mh}."},
-  {n:"Dâng nhẫn vào lửa thánh ở Hỏa Tiên từ, coi như lời thề đã trả",f:"uy",wx:"không còn gì để ai tìm",lx:"lòng ngươi nặng",if:()=>bdO("da")!=="vua",go:()=>bdO("da","chon"),rt:"Lửa ở Hỏa Tiên từ bùng lên một lát rồi lặng."},
+  {n:"Dâng nhẫn vào lửa thánh ở đền Hỏa Tiên, coi như lời thề đã trả",f:"uy",wx:"không còn gì để ai tìm",lx:"lòng ngươi nặng",if:()=>bdO("da")!=="vua",go:()=>bdO("da","chon"),rt:"Lửa ở đền Hỏa Tiên bùng lên một lát rồi lặng."},
   {n:"Để chiếc nhẫn ở chỗ Hoàng thượng",f:"that",wx:"không còn gì giấu",lx:"lời thề nằm trong tay người khác",if:()=>bdO("da")==="vua",rt:"Chiếc nhẫn nằm trong hộp gỗ ở Dưỡng Tâm điện."},
   {n:"Xin Hoàng thượng trả lại chiếc nhẫn",f:"tinh",wx:"lời thề về tay ngươi",lx:"Hoàng thượng biết ngươi còn giữ",if:()=>bdO("da")==="vua",go:(_A,ok)=>{if(ok)bdO("da","ta")},rt:"Hoàng thượng đặt chiếc nhẫn vào tay ngươi: “Của nàng thì nàng giữ.”",rf:"Hoàng thượng bảo: “Để trẫm giữ cho nàng.”"}]},
  x1:{h:"Lời đồn đến tai Hoàng thượng",w:"emp",t:"Lời đồn về túi gấm đến tai Hoàng thượng qua miệng người khác. Đêm ấy ngài không mang theo ai, đến thẳng cung ngươi: “Nàng có gì muốn nói với trẫm?”",o:[
@@ -558,7 +558,7 @@ rdDef("bd_hen",11,{t:"Lời thề sau cùng",w:"emp",sj:"lời thề trước l�
  c1:{h:"Chiếc nhẫn thề",w:"me",if:()=>["ta","chon"].includes(bdO("da")),t:"Chiếc nhẫn thề vẫn ở đó, nơi ngươi để nó. Sứ đoàn đi rồi, nó sẽ ở lại với ngươi suốt đời, hoặc không.",o:[
   {n:"Gửi chiếc nhẫn về lò lửa quê nhà",f:"nghia",wx:"lời thề về chỗ của nó",lx:"không còn gì để cầm",go:()=>{bdO("da","tra")},rt:"Chánh sứ nhận chiếc nhẫn, hứa dâng lại trước lò lửa thánh ở quê nhà."},
   {n:"Giữ chiếc nhẫn trong tay áo suốt đời",f:"tinh",wx:"lời thề ở với ngươi",lx:"một vật có thể thành chứng cớ",go:()=>{bdO("da","ta")},rt:"Chiếc nhẫn nằm trong tay áo ngươi."},
-  {n:"Dâng chiếc nhẫn vào lửa thánh",f:"uy",wx:"lời thề nằm yên",lx:"lòng ngươi đóng lại",go:()=>{bdO("da","chon")},rt:"Lò lửa ở Hỏa Tiên từ nuốt chiếc nhẫn, không để lại tro."}]},
+  {n:"Dâng chiếc nhẫn vào lửa thánh",f:"uy",wx:"lời thề nằm yên",lx:"lòng ngươi đóng lại",go:()=>{bdO("da","chon")},rt:"Lò lửa ở đền Hỏa Tiên nuốt chiếc nhẫn, không để lại tro."}]},
  c2:{h:"{v} đến tiễn sứ đoàn",w:"v",need:["v"],t:"{v} cũng đến tiễn sứ đoàn, đứng cạnh ngươi trên lầu cổng: “Tỷ tỷ buồn sao?”",o:[
   {n:"Đáp: buồn, và tỷ biết ai làm tỷ buồn",f:"uy",wx:"{v} biết ngươi không quên",lx:"thù hai cung đi đến cuối đời",go:(A,_ok,G)=>{rdOan(A,"v",G[0])},rt:"{v} không cười nữa."},
   {n:"Đáp: không buồn, chỉ nhớ quê",f:"an",wx:"{v} không còn gì để soi",lx:"{v} nghĩ ngươi đã thua",go:(A,_ok,G)=>{rdRel(A,"v",G[0])},rt:"{v} khẽ gật đầu."},
