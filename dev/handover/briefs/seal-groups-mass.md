@@ -1,4 +1,8 @@
 # SEAL GROUPS MASS — mood-seal sets per person group (owner GO Lượt 719, relayed by ROOT-56 22:01Z)
+>>> CORRECTION owner Lượt 721 (relayed by ROOT-56 22:02Z, verbatim): "Tôi chỉ duyệt thái hậu thôi, những nhóm còn lại đã duyệt đâu, gửi hình mẫu
+>>> của những nhóm còn lại chứ." → MASS only for (a) Thái hậu (remaining 37). Every OTHER group = ONE SAMPLE first: the «giận» seal, 3 parts +
+>>> preview MP4 + frame sheet, exactly like th-gian; send each sample to Foreman C as it is ready, order b, c, j, k, then the rest.
+>>> NO mass for a group until the owner approves its sample (A1). Credit math below changes: (a) ≈ 114 k + 10 samples × ≈ 3.1 k ≈ 145 k.
 Owner (verbatim, via ROOT-56): "Hình video của Thái Hậu ok rồi. Tiếp tục làm những người khác đi. Làm hàng loạt luôn đi."
 Orders: MAIN ROOT-70 15:40Z + 17:00Z + 17:10Z (dev/handover/FOREMAN_C_STATUS.md; owner words dev/OWNER_DECISIONS.md 19/11 ~15:35Z/~17:00Z/~17:10Z real).
 APPROVED SAMPLE = Thái hậu «giận»: CDN img/_review/emo-anim-groups/th-gian-*.webp, recipe + prompts + ids dev/art/emo-anim/groups/th-gian.md.
