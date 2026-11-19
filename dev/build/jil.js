@@ -59,7 +59,7 @@ function ilDur(e){if(!e||!e.k||e.from==="base")return false;if(e.wk)return e.wk.
  if(["kimbac","giaycoi"].includes(e.k))return false;return true}
 function ilVal(e){try{if(e.wk&&typeof wkSellVal==="function")return wkSellVal(e.wk);if(typeof wdPrice==="function")return wdPrice(e)|0}catch(x){}return ((IT[e.k]||{}).pr)|0}
 /* a new id given between two censuses (by a guard) is entered in the census map at once, so a later unrouted removal is still caught (reviewer r1) */
-function ilUid(e,p){const I=ilS();if(!e.iu){e.iu=(ilGuest()?1e7:0)+(++I.seq);if(I.at&&p)I.at[e.iu]=[e.k,ilKey(p),e.wk?1:0]}return e.iu}
+function ilUid(e,p){const I=ilS();if(!e.iu){e.iu=((ilCoop()&&(COOPW.ctx||COOPW.seat)!=="a")?1e7:0)/* the guest's numbers, also when the host runs her act in her context (coop-thin B/E/F): her S.il.seq never makes the host's numbers */+(++I.seq);if(I.at&&p)I.at[e.iu]=[e.k,ilKey(p),e.wk?1:0]}return e.iu}
 function ilLog(e,f,t,how){const I=ilS();I.log.push([typeof wk==="function"?wk():0,ilUid(e),e.k,f||"",t||"",how||""]);const cap=(BAL.il&&BAL.il.logCap)||600;if(I.log.length>cap)I.log.splice(0,I.log.length-cap)}
 function ilRng(a){return a[0]+R(a[1]-a[0]+1)}
 /* ---- the ONE rule: where a piece goes when it leaves p's hands ---- */
