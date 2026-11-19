@@ -152,7 +152,7 @@ const ORIGIN_LORE={
  cnv:["Ngươi là con nhà thường dân, qua kỳ tuyển cung nữ của Nội vụ phủ, vào cung làm kẻ hầu.","Không ai gọi tên ngươi; ngươi phải đi từ cung nữ lên từng bậc."]};
 /* Ba Tư for new bd lives (THE switch bdTxt, jrd_bd.js); old-premise lives keep the Bắc Địch lines above */
 if(typeof bdTxtProp==="function"){const L=ORIGIN_LORE.bd;
- bdTxtProp(L,0,L[0],"Ngươi lớn lên trong vương cung Taq, bên ngọn lửa thánh không bao giờ tắt. Nước mất ba phần cho Đại Thực; phụ vương gả ngươi sang xin Đại Hy làm chỗ dựa.");
+ bdTxtProp(L,0,L[0],"Ngươi lớn lên trong vương cung Tô Lận, bên ngọn lửa thánh không bao giờ tắt. Nước mất ba phần cho Đại Thực; phụ vương gả ngươi sang xin Đại Hy làm chỗ dựa.");
  bdTxtProp(L,1,L[1],"Thái hậu gọi ngươi là người Hồ mắt sâu; triều thần kẻ muốn giúp Ba Tư, kẻ sợ vạ lây, và ai cũng đo ngươi bằng cái giá của một nước đang mất.")}
 window.originLore=function(k){return ORIGIN_LORE[k]||null};
 if(typeof kpIdentity==="function")(function(){const k0=kpIdentity;kpIdentity=function(M,m){const r=k0.apply(this,arguments);

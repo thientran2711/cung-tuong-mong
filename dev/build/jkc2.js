@@ -42,10 +42,10 @@ for(const br of ["nc","bd"]){const L=KC2LAND[br].P,p=br==="bd"?"nb_":"nn_",inn={
  for(const k in L)KCPL[p+k]=[L[k],(br==="bd"?"nb":"nn")+k[0].toUpperCase()+k.slice(1),inn[k]?1:0,line[k]]}
 /* BA TƯ (owner OD 19/11 ~06:40Z; Foreman E 06:50Z): the bd home words follow THE one per-life switch bdTxt (jrd_bd.js): a life on an old
    Bắc Địch premise keeps the words above, every new bd life reads the Ba Tư words below (E19 foreign-princess-3 §A.2/§C.2). Text only. */
-if(typeof bdTxtProp==="function"){const B=KC2LAND.bd,N={land:"Ba Tư",dad:"Phụ vương",mom:"Vương hậu",title:"Công chúa Ba Tư",court:"vương cung Taq",sub:["Trong vương cung","Kinh thành Taq"],
+if(typeof bdTxtProp==="function"){const B=KC2LAND.bd,N={land:"Ba Tư",dad:"Phụ vương",mom:"Vương hậu",title:"Công chúa Ba Tư",court:"vương cung Tô Lận",sub:["Trong vương cung","Kinh thành Tô Lận"],
   fest:["Tết Nô Nhụ","Ngày xuân phân, cả kinh thành nhóm lửa đón năm mới, rót rượu nho, trai gái múa quanh lửa đến khuya."]},
- NP={tam:"Tẩm điện của ngươi",dien:"Đại điện Taq",vien:"Vườn ngự uyển",mieu:"Đền lửa thánh",dich:"Dịch quán sứ Đại Hy",cho:"Chợ tơ lụa",ho:"Sân mã cầu"},
- NL={tam:"Thảm dệt hoa trải khắp nền, đèn dầu bằng bạc, bình rượu nho đặt cạnh giường.",dien:"Phụ vương ngồi dưới vòm điện Taq, các đại thần bàn chuyện quân Đại Thực.",
+ NP={tam:"Tẩm điện của ngươi",dien:"Đại điện Tô Lận",vien:"Vườn ngự uyển",mieu:"Đền lửa thánh",dich:"Dịch quán sứ Đại Hy",cho:"Chợ tơ lụa",ho:"Sân mã cầu"},
+ NL={tam:"Thảm dệt hoa trải khắp nền, đèn dầu bằng bạc, bình rượu nho đặt cạnh giường.",dien:"Phụ vương ngồi dưới vòm điện Tô Lận, các đại thần bàn chuyện quân Đại Thực.",
   vien:"Hồ nước giữa bốn luống hoa, cây lựu trĩu quả; ngươi hay dạo ở đây lúc chiều.",mieu:"Lửa thánh cháy trong lò đá, không bao giờ để tắt; tư tế canh lửa ngày đêm.",
   dich:"Sứ đoàn Đại Hy ở đây, có thầy thông ngôn và một ma ma dạy lễ nghi.",cho:"Lái buôn trên con đường tơ lụa mang lụa Đại Hy đổi lấy bạc, thảm và lưu ly.",
   ho:"Sân mã cầu ngoài thành; gió thổi về phía đông, nơi Đại Hy."};
