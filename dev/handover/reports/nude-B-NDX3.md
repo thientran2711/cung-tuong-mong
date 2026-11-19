@@ -57,3 +57,8 @@ New diff (on top of ruling (b)), mk.py + _build_item.py:
 m05: ref KLpSlnEkqp + swatch TdwDfOyVNR, outfit A. Items a18 white-jade flute · a26 dragon parasol · a36 jade calligraphy brush · a51 jade tiger tally · a65 gold dragon hand warmer.
 a51/a65 colour rule now builder "DEEPER, DARKER" (no "never darker"); bun sentence 1/age; D14 wide grep 0 (face has "double lids" = shape only). check_store --scope nude PASS 5/5; kc_ref --check PASS.
 m01 is STOPPED (Tươi tắn); its prompt files are left as they were, not rebuilt.
+
+## UPDATE 5 — m05 sample drawn (GO ROOT-54, resumed by user): 5 gens + 5 cuts = 690 cr
+a18 lJtM5RKgv9/xSBcFrNjfW · a26 If37DjEtvE/Lw8T5OwswO · a36 EbY6t3XuuO/BhNSM53oQR · a51 ksenFd616B/bxMAuPm5Y2 · a65 Lw8TktAswO/KLpnLBAkqp
+Sheet: dev/handover/review-sheets/nu-de-B/nudeB_row_m05.jpg (516 KB, 3-line tags).
+Notes (LAW #0, no change): face round/young (owner: reads "baby", face block being rewritten by NF3); a36 brush small; a51 tiger tally reads as a round jade plaque; hair in bun at all 5 ages; forehead clean; a51 silver temples, a65 mostly silver; elder colours deeper.
