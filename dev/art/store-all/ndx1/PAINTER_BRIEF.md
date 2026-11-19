@@ -12,7 +12,7 @@ Scratch dir S = /tmp/claude-0/-home-user-cung-tuong-mong/f1b54cf7-4c52-5d19-a246
 1. `nd.py prep cNN` → must print PASS for all 5 ages (STORE CHECK). Any FAIL → stop and report.
 2. Upload her own t1 face pictures (folderReference `ba4aecfe-efce-47e2-b53f-30d292091886`), fileName `cNN_t1_aNN.webp`, url `https://ctm-img.victoria-tntt.workers.dev/img/hd/fig-consort-cNN-t1-aNN.webp` for a18, a26, a36, a51 (a65 has no t1 → use the a51 face id).
 3. For each age: `cat $S/cNN_aNN.txt` and pass that text EXACTLY, byte for byte (no edits, no trimming, no additions) as `prompt` to images_generate with:
-   mode `gpt-2-6`, width 1024, height 2304, resolution `2k`, extraSettings `{"transparentBackground": true}`, folderReference as above,
+   mode `gpt-2-6`, width 1024, height 2304, resolution `2k`, NO transparentBackground (B9, owner Lượt 780: drawn on the parchment of master M03, then `images_remove_background`), folderReference as above,
    references = `[{"type":"image","identifier":"<her face id for that age>"},{"type":"image","identifier":"TdwDfOyVNR"}]` (exactly two: her own t1 = image 1, royal-yellow swatch = image 2; NEVER the style image 6AbGv6EiJO).
    You may fire the 5 ages in parallel.
 4. creations_wait, then for each: `nd.py dl cNN aNN '<results.url>'` (quote the url).
