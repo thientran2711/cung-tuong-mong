@@ -60,3 +60,7 @@ File máy đọc: dev/art/face-common/OWNER_GROUPS_L686.json
 - Sản xuất người MỚI chỉ thuộc 4 nhóm: Sắc sảo, Kiêu kỳ, Lạnh lùng, Quyến rũ. KHÔNG vẽ thêm người mới cho Tươi tắn / Dịu dàng / Đoan trang / Tinh nghịch.
 - Viết lại prompt 4 nhóm này (tả mặt + tính cách thật mạnh), gửi chủ mẫu 3 người mỗi nhóm (12 người) → NF4.
 - Vẫn giữ: sửa răng c06 c14 c19 c31 (môi khép), c27 người mới.
+
+## Lượt 695 (chủ) — sau khi sửa răng + duyệt Sắc sảo
+- c06 → Tươi tắn (từ Tinh nghịch). c14 → Đoan trang (từ Dịu dàng). c19, c31 → Tươi tắn (giữ).
+- Sắc sảo DUYỆT: c27 (người mới), s07, s08, s09 (người mới). Đã ghi vào OWNER_GROUPS_L686.json.
