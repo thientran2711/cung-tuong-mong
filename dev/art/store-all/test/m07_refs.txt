@@ -1,0 +1,4 @@
+m07 test person (e08411c). Refs in A0 order, the same as build.py --refs prints (the M09 figure eIyOFEidqL is NOT a ref any more: FIGURE_GATE A0 REFERENCES, STYLE IMAGE FINAL 19/11 ~02:55Z):
+t1..t5 (2 images, prompt says image 2 = her face): image 1 = style 6AbGv6EiJO (style2_portraits_c01_c12), image 2 = her face
+t6, t7, t8 (3 images): image 1 = style 6AbGv6EiJO, image 2 = her face, image 3 = royal-yellow swatch TdwDfOyVNR (the prompt says "Image 3 is only a colour reference")
+Face = the owner-approved m07 thiếu nữ (Lượt 293, ledger line 243) Magnific 3zKcnbDREY; alternative = the old live picture https://ctm-img.victoria-tntt.workers.dev/img/hd/fig-maid-m07-t1-a18.webp. Use 3zKcnbDREY (it is her approved young-lady picture).
