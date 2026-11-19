@@ -500,3 +500,45 @@ LOOK (v2 full size + pendant/band crops):
   - (2) The band join + pendant sits at the lower shin/just above the ankle, as in r18.
   - (3) t6 pendant is a phoenix although the store text says "no phoenix anywhere" (owner-named pendant).
   - (4) The builder t1–t3 sleeve sentence says "thin light silk" next to the brocade sentence (both verbatim/owner-ordered).
+
+## §29 — r20 t1–t6 (helper of Foreman C ROOT-47; ROOT-48 look + owner Lượt 443–459) — 19/11 — 28 gens + 12 cuts
+The order changed five times while drawing. Every round was drawn and then replaced by the next message. All 28 gens are in the gen_ledger (ts 16:32–16:47Z), and the prompts of each superseded round are kept in dev/art/owner-copy/trieu/r20/{a,b,c,d}_superseded/.
+- a (ROOT-48 first r20 order: tips + pendant at the ankles, t4–t6 sleeves to the ankles with one added sentence, t6 lotus pendant, no yellow skirt): 6 gens + 6 cuts, t1 gOmcFrrSXO … t6 VX7b3f4MMU. LOOK: the tips and pendant sit just above the slippers; t4–t6 sleeves reach the ankles. Replaced by the owner's verdict on r19.
+- b (owner verdict on r19, own tassel/layer wording, t1/t4/t5/t6): 4 gens, no cuts. Replaced by ROOT-48's exact wording.
+- c (ROOT-48 exact wording + Lượt 455 one ankle sleeve sentence, per-rank hà bí styles): 6 gens, no cuts. Replaced by Lượt 456.
+- d (Lượt 456: one common hà bí, all-teardrop pendant): 6 gens, no cuts. Replaced by the Lượt 459 correction.
+FINAL (Lượt 455 + 459): `python3 r20/build_r20.py`. Base = r19 prompts. SHARED block (identical in t1–t6, slots in {}):
+"The TWO VERTICAL RANK-COLOUR BANDS are the hà bí (霞帔) worn as in the Song–Ming dynasties, the SAME on every rank: two long straight bands of the same width (about a hand wide), the same shape and the same thin gold-thread edge, in {colour}, a strong, saturated colour so the rank reads at a glance, never pastel, never muted, embroidered along their whole length with {pattern}; they come from behind the neck over the shoulders and hang straight down the front of the robe to her ANKLES, where their two tips meet and join into ONE point at ankle height, the same height on every rank; from that point hangs ONE palm-sized bí trụy (帔坠) pendant: a {pendant}, hanging at ankle level (NOT on the floor), and below the pendant hangs a small, soft silk tassel, short and graceful. The stiff shoulder piece (cầu vai) lies ON TOP of the hà bí bands at the shoulders and covers them there; the bands appear from under the shoulder piece."
+SHARED sleeve sentence, t1–t6: "SLEEVES: the wide sleeves of the outer robe are very long and hang all the way down to her ANKLES, one single sleeve layer, flowing softly, never stiff."
+OWN slots per rank:
+- Band colour: as in r19 (build_r18 DEEP).
+- Band pattern: florets / cloud scrolls / twining lotus / peonies + butterflies / scrolling vines / peonies + clouds.
+- Bí trụy (ladder 8c): silver-filigree teardrop / carved-ivory heart / carved-jade gourd / green-jade lotus set in gold / gold ruyi + gemstone / gold peony + pearls + a little yellow topaz, NO phoenix.
+- Cầu vai: each rank's own r19 text, unchanged.
+- Plus: t5 "much more embroidery over the WHOLE sleeve"; t6 "a little more embroidery". t6 keeps the store royal yellow (a little yellow is allowed).
+STORE: same FAIL list as r19 on t1–t5; t6 PASS.
+GEN → CUT:
+- t1 P3QXiOf42C → nVsuDuUYQD
+- t2 hu2wufsvqL → p8y1txCehw
+- t3 JNCpNNbOq4 → DoOkIx3pcl
+- t4 1ldAlwsr4r → UPvV9dVwny
+- t5 w4aM4R57EI → s7IWOp3l8e
+- t6 eIPrIqZdqL → Lw8YJp1swO
+CREDITS r20: 3816 (28×135 + 12×3).
+CDN: img/_review/trieu-phuc/r19/c06_a18_trieu20_t1..t6.png + c06_sheet20.jpg (t7/t8 = r18 kept). Scratchpad gui/19-trieu-phuc-r20.jpg. SKINS.md: r19 t1–t6 added.
+LOOK (full size + crops):
+- Brocade on all six.
+- Bands: the same width and edge on all six, each rank in its own colour and pattern.
+- Cầu vai: sits over the bands at the shoulders on all six.
+- Join + pendant: just above the robe's bottom border, at about the same height on all six.
+- Pendants match the ladder, and each has a soft tassel below it.
+- t5 sleeves are fully embroidered. t6 has a yellow inner panel and under-skirt, and no phoenix.
+- MEASURED sleeve hem (eye estimate on the full figure; knee ≈ 73 %, ankle ≈ 95 %):
+  - t1 77 %, t2 78 %, t3 77 % (just below the knee);
+  - t4 84 %, t5 85 % (mid/lower shin);
+  - t6 91 % (lower shin).
+  - No sleeve reaches the ankle, and t1–t3 are visibly shorter than t4–t6, although the sentence is the same (Lượt 455: a bit short is OK; no measure-and-regen).
+- Faults:
+  - (1) Sleeves: see the measurements above.
+  - (2) The t3 gen came back on a black background (the cut is clean).
+  - (3) t6's yellow inner panel and under-skirt are clearly visible.

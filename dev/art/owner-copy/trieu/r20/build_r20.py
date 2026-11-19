@@ -1,9 +1,10 @@
 #!/usr/bin/env python3
 """triều phục r20 FINAL (owner Lượt 455/456/458 via ROOT-48 → ROOT-47). TRIỀU PHỤC ONLY (no thường phục builder touched).
 Redraw ALL t1-t6; t7/t8 = r18 kept. Base = r19/tN_c06_RAN.txt. Replaced/added:
- - HÀ BÍ (Lượt 456): ONE common sentence, identical in t1-t6 except three slot words (band colour, band pattern, pendant
-   material); same width/shape/edge/length, tips joined at ankle height, same palm-sized openwork teardrop bí trụy with a
-   small soft silk tassel, cầu vai lying over the bands (ROOT-48 sentence (c)). Replaces the r19 per-rank hà bí sentence.
+ - HÀ BÍ (Lượt 456 corrected by Lượt 459): SHARED block = HABI below, word for word the same in t1-t6 (two bands, same
+   width/shape/edge, behind the neck over the shoulders and down the front, tips joined at ankle height for all, small soft
+   silk tassel below the pendant, cầu vai over the bands) + OWN slots per rank: band colour, band embroidery pattern, bí
+   trụy shape+material (ladder 8c). Each rank's own cầu vai text stays as in r19. Replaces the r19 per-rank hà bí sentence.
  - SLEEVES (Lượt 455): ONE identical ankle sentence in t1-t6 (the builder t4-t6 sentence); t1-t3 knee sentence replaced.
  - t5/t6: more embroidery over the whole sleeve; t6: a little yellow (store text kept), no phoenix.
 Superseded drafts: a_/b_/c_superseded/."""
@@ -18,14 +19,15 @@ R19 = os.path.join(T, 'r19')
 COLOUR = B18.DEEP  # (a) band colour slot, deep and saturated as before
 PATTERN = {1: 'small florets', 2: 'cloud scrolls', 3: 'twining lotus', 4: 'peonies and butterflies',
            5: 'scrolling vines', 6: 'peonies and clouds'}  # (b) no phoenix
-MATERIAL = {1: 'silver', 2: 'ivory', 3: 'jade', 4: 'green jade set in gold', 5: 'gold', 6: 'gold set with pearls'}  # (c)
+PENDANT = {1: 'silver-filigree teardrop', 2: 'carved-ivory heart', 3: 'carved-jade gourd', 4: 'green-jade lotus set in gold',
+           5: 'gold ruyi set with a gemstone', 6: 'gold peony set with pearls and a little yellow topaz, NO phoenix'}  # OWN slot: ladder 8c (Lượt 459)
 HABI = ("The TWO VERTICAL RANK-COLOUR BANDS are the hà bí (霞帔) worn as in the Song–Ming dynasties, the SAME on every rank: "
         "two long straight bands of the same width (about a hand wide), the same shape and the same thin gold-thread edge, in "
         "{colour}, a strong, saturated colour so the rank reads at a glance, never pastel, never muted, embroidered along "
         "their whole length with {pattern}; they come from behind the neck over the shoulders and hang straight down the "
         "front of the robe to her ANKLES, where their two tips meet and join into ONE point at ankle height, the same height "
-        "on every rank; from that point hangs ONE bí trụy (帔坠) pendant, the same shape and size on every rank: a palm-sized "
-        "openwork teardrop of {material}, hanging at ankle level (NOT on the floor), and below the pendant hangs a small, "
+        "on every rank; from that point hangs ONE palm-sized bí trụy (帔坠) pendant: a {pendant}, "
+        "hanging at ankle level (NOT on the floor), and below the pendant hangs a small, "
         "soft silk tassel, short and graceful. The stiff shoulder piece (cầu vai) lies ON TOP of the hà bí bands at the "
         "shoulders and covers them there; the bands appear from under the shoulder piece.")
 KNEE = B18.OLD_SLV
@@ -46,7 +48,7 @@ def rep(t, a, b):
 def build(n):
     t = open(os.path.join(R19, 't%d_c06_RAN.txt' % n), encoding='utf-8').read()
     old = B19.HABI.format(deep=B18.DEEP[n], style=B19.STYLE[n], pend=B19.PEND[n])
-    new = HABI.format(colour=COLOUR[n], pattern=PATTERN[n], material=MATERIAL[n])
+    new = HABI.format(colour=COLOUR[n], pattern=PATTERN[n], pendant=PENDANT[n])
     t = rep(t, old, new + (EMB5 if n == 5 else EMB6 if n == 6 else ''))
     if n <= 3:
         t = rep(t, KNEE, SLEEVE)
