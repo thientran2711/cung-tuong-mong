@@ -159,3 +159,33 @@ for k, r in ROOMS.items():
     assert 'right side' not in r['room'] and r['room'].count('right') == 1 + (k in V4) * CORNER.count('right') + (k == 'thua-minh-cung-dong-phoi-ngu') and '{' not in out[k], k
 json.dump(out, open(os.path.join(D, 'prompts.json'), 'w'), ensure_ascii=False, indent=1)
 print(len(out), max(len(v) for v in out.values()))
+
+# ---- v6 (owner Lượt 520, ART_RULES L12 + A18 LAW #0; ROOT-50 GO, worker PR7): FLOOR ONLY. Every room keeps its approved layout:
+# its v5 prompt word for word, image 3 = that room's OWN current gen, and ONLY the floor numbers change (base of the main piece 4/5 -> 7/8,
+# open floor strip 1/5 -> 1/10). Rooms without floor numbers get the one FLOOR6 sentence ADDED (B5: insert, never rewrite).
+V6REF = {'canh-phuc-cung-tan-ngu': 'EbY494KuuO', 'canh-phuc-cung-phi-ngu': 'SyhTG51Ub8', 'canh-phuc-cung-quyphi-ngu': 'VX7KHZNMMU',
+         'canh-phuc-cung-tan': 'WDgFohIcXe', 'canh-phuc-cung-phi': 'ov6ljBx829', 'canh-phuc-cung-quyphi': 'gOmTc4oSXO',
+         'thua-minh-cung-dong-phoi-ngu': 'cpSqbrH0eP', 'thua-minh-cung-dong-phoi': 'JNCp5R3Oq4',
+         'khon-ninh-cung-ngu': 'jUonRSTLD0', 'khon-ninh-cung': 'kse24n816B'}
+SAME6 = "keep the same room and the same arrangement as image 3 (this same room as drawn before), seen a little closer and lower so less floor shows"
+FLOOR6 = (" FLOOR SHARE (owner Lượt 520): " + SAME6[0].upper() + SAME6[1:] + ": the furniture comes down to about seven eighths of the picture height, "
+          "and the open floor in front is only a strip of about one tenth of the picture height at the centre, clearly less floor than in image 3.")
+V6SUB = [("its base reaching down to about four fifths of the picture height", "its base reaching down to about seven eighths of the picture height"),
+         ("a strip of about one fifth of the picture height at the centre, never more floor than in image 3",
+          "a strip of about one tenth of the picture height at the centre, clearly less floor than in image 3"),
+         ("Image 3 is only a guide for how close and how full the room is, NOT for where things stand: this room has its own different arrangement as written above.",
+          SAME6[0].upper() + SAME6[1:] + "."),
+         ("Image 3 is the previous version of this same room: keep its layout, closeness and fullness closely; only the colours change and the right corner is furnished.",
+          SAME6[0].upper() + SAME6[1:] + "."),
+         ("seen from as close as in image 3, the furniture fills", "seen a little closer and lower than in image 3, the furniture fills"),
+         ("lay the room out like image 3 (the room in image 3 is only a layout guide, not its colours or furniture): seen a little closer and lower than in image 3,", SAME6 + ",")]
+out6 = {}
+for k, p in out.items():
+    q = p
+    for a, b in V6SUB: q = q.replace(a, b)
+    if q == p:  # no floor numbers in this prompt -> ADD the one floor sentence after the room line
+        i = q.index(' FLOOR: '); q = q[:i] + FLOOR6 + q[i:]
+    assert 'four fifths of the picture height' not in q and 'one fifth of the picture height' not in q and 'seven eighths' in q, k
+    out6[k] = q
+json.dump(out6, open(os.path.join(D, 'prompts_v6.json'), 'w'), ensure_ascii=False, indent=1)
+print('v6', len(out6))
