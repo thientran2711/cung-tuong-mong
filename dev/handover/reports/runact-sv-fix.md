@@ -39,3 +39,7 @@ Verdict: PASS 868c682c (fast-forward of main 2bda29a1).
 5. No number/rule/UI change (laws 4, 9 untouched; text/wording unchanged).
 Gates: one-core PASS (3977 <= 4212); ag-stf2 ALL 23 PASS; coop-e2e 68/68; COOP_SWAP=1 68/68; quickcheck PASS (old save ok, perf same); ts-oldsave ok (12 weeks, 0 errs).
 coop-thin-f1 L6: main LIVE 19/26 (frame, kpoison, laydo, every ACT kind, F2 gift x2, page error sv); fix 20/22 twice (only F2 gift x2 = coop-ptime-reds), one run 19/22 and one 18/22 with F1 accuse / real-tap flakes (different case each run; main passes them -> random-world flake, not sv). No sv error in any fix run.
+
+## REVIEW r1 — FAST PATH (main moved to 3584ea42)
+Merged origin/main 3584ea42 onto review/runact-sv-fix-r1 (only index/sw conflicts; rebuilt by assemble.py + build_site.sh). Diff vs main = j29 (2 lines) + index/sw/assets. Probe (20 rounds x 19 DIRTY kinds, «qua loa» forced): main 40 `sv is not defined` throws, fix 0, 14 kinds reach «làm qua loa»; 0 page errors. one-core PASS (3837 <= 4212), ag-stf2 23/23, coop-e2e 68/68, quickcheck PASS (old save ok). Main re-fetched right before: still 3584ea42, fast-forwardable.
+PASS review/runact-sv-fix-r1 71e7b382
