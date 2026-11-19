@@ -36,6 +36,34 @@ G = {
   short="ma ma with the neat bun", sl="teal sleeves with coral red cuffs", head="her bun",
   shake="her silver hairpins wobble", jewels="hairpins wobbling", old="face",
   P=("she", "her", "her")),
+ # --- CANCELLED (ROOT-57, owner Lượt 800 misread): cn/nt/nl were a mistaken order (Lượt 796); kept only so the ledger prompt refs resolve. DO NOT USE. ---
+ "cn": dict(
+  who="a YOUNG PALACE MAID (cung nữ) of the Qing-style inner palace: a girl about eighteen, sweet round face with big round eyes, "
+      "black hair pinned UP in a simple neat bun with ONE plain silver hairpin with a tiny tassel (no flowers, no crown, no phoenix, nothing grand, no loose hair), "
+      "a plain maid's pale blue-green (#A9CFC4) silk jacket with a narrow ivory (#EAD7BF) collar, simple and modest, clearly a servant, not a consort",
+  same="Same young palace maid, same soft hand-painted storybook style, same simple neat bun with one plain silver hairpin, "
+       "same pale blue-green (#A9CFC4) maid's silk jacket with ivory (#EAD7BF) collar",
+  short="young palace maid with the neat bun", sl="pale blue-green sleeves with ivory cuffs", head="her bun",
+  shake="her little hairpin tassel swings", jewels="hairpin tassel swinging", old="young face",
+  P=("she", "her", "her")),
+ "nt": dict(
+  who="a YOUNG PRINCE of the Qing-style palace: a young man about twenty, handsome smooth face with no beard and no moustache, clear bright eyes, "
+      "black hair gathered into a neat topknot on top of his head held by a small gold crown ring (no big crown), "
+      "a scholar-prince's deep teal-blue (#4A7C8C) silk robe with a royal yellow (#EFBD69) collar and a little gold embroidery",
+  same="Same young prince, a young man about twenty with no beard, same soft hand-painted storybook style, same neat topknot with the small gold crown ring, "
+       "same deep teal-blue (#4A7C8C) silk robe with royal yellow (#EFBD69) collar",
+  short="young prince with the topknot", sl="deep teal-blue sleeves with royal yellow cuffs", head="his topknot",
+  shake="his topknot bobs", jewels="topknot bobbing", old="young face",
+  P=("he", "his", "him")),
+ "nl": dict(
+  who="an OLDER COURT OFFICIAL of the Qing-style palace: a man about fifty, firm face with a few lines at the eyes and brow, a short neat greying beard and moustache, "
+      "a round official's hat with a red silk tassel fringe and a small round button on top, "
+      "a dark navy (#2F3E5C) official's robe with a square embroidered rank badge on the chest and a string of court beads",
+  same="Same older court official, same soft hand-painted storybook style, same short greying beard and moustache, same round official's hat with red tassel fringe and top button, "
+       "same dark navy (#2F3E5C) official's robe with the square rank badge",
+  short="older official in the round official's hat", sl="dark navy sleeves", head="his official's hat",
+  shake="the red tassel fringe of his hat and his beard shake", jewels="hat tassel shaking", old="bearded face",
+  P=("he", "his", "him")),
 }
 def prompts(k):
     g = G[k]; s, p, o = g["P"]; S = s.capitalize(); sh = g["short"]
