@@ -306,3 +306,5 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | FOREMAN E #13 (opus; child of E #12, depth 3) | handover FOREMAN_E_STATUS | FOREMAN E #12 | session_01DgYSWn1PrMTN5k7RU4bD1R | RUNNING | 19/11 17:50Z | PICKUP 17:53Z START_CTX ~5 %, wake trig_01LeFDghMhHQ61kguGiZtCQk :47 |
 - PASS review/runact-sv-fix 868c682c (reviewer r1, main 2bda29a1 ancestor)
 | REVIEW coop-ptime-reds r1 (opus BIG) of be1b357c | review/coop-ptime-reds-r1 | B | session_01N1tNP5SHLVhU9jjuhFnqjA | RUNNING | 19/11 19:14Z |
+| cdn-kc-restore (opus; restore img/FIGURES-kc.json to floor + guard every FIGURES push) | CDN + dev/site | C-AG #23 for ROOT-71 | (C-AG opens) | ORDERED | 19/11 21:45Z |
+| cdn-kc-restore (opus; ROOT-71 ORDER via C-AG #23: live FIGURES-kc.json shrunk 52 < floor 208 → cause, rebuild, upload, live-check clean, close every FIGURES* push hole) | CDN + review/cdn-kc-guard; briefs/cag23-cdn-kc-restore.md | C-AG #23 for ROOT-71 | session_01Rc5AsKxoe59K86WHvUxveu | RUNNING | 19/11 21:41Z |

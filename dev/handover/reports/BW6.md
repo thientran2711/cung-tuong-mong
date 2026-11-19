@@ -29,3 +29,8 @@ BW6 TASK 1 done + reported to ROOT-54 (commits 0ee0570, 04df4ae; head e439ed0). 
 - Gate: check_store.py new banned rule X16 (scope tp1-6 pr1-6): `fresh flower \((a|an) (tiny|small|little|large|big|huge)\b` → FAIL. Tested: the old "a fresh flower (a tiny camellia)" → FAIL X16. Scan of all 87 people × t1–t6 (B8 bypassed): 0 size words left in the slot.
 - Gates: build_all --check ×5 ages 0 FAIL; check_store --self 0 problems (16 banned); 16 Sắc sảo + Tinh nghịch × t1–t8 × 5 ages 0 FAIL.
 - Task 2 CANCELLED by owner stop (ROOT-54 20:56Z): no gens. Next expected from ROOT-54: the owner's new face groups → LOOK_GROUPS.md.
+
+## Owner groups Lượt 686 wired (ROOT-54 21:13Z) — DONE, no gens
+- store look_groups() reads OWNER_GROUPS_L686.json (m + c). build_all: e12_caps per group size; group_angles = backtracking up to 14 people, cyclic construction above 14 (backtracking stalled at 20/30). Audit script reads the JSON too.
+- Numbers: same-rank-audit.md last section. AFTER: 0 cells over cap in all 5 groups; Sắc sảo (6) fully different; Tinh nghịch (14) all angle sentences different, items/grace ≤ 2.
+- UPDATE: the JSON was rewritten upstream (Lượt 695–700: 8 groups of 11 + "Kho"). Builders skip "Kho" and groups with only new s-ids. AFTER: 0 cells over cap; Sắc sảo (8 builder people) fully different; other groups (11): all angle sentences different, items/grace ≤ 2, class ≤ 3.

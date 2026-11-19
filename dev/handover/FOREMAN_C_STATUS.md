@@ -803,6 +803,7 @@ FOR FOREMAN C (art) — relayed by C-AG #23 from MAIN ROOT-70, 19/11 15:14Z: sea
 - 19:34Z C-AG #23 (hourly; ctx ~26 %, roll 30 %): LIVE 2bda29a1. LOAD 0 own; SEATS running 0 / cap 12 | QUEUE: THỬ TAY CTM-CAL (owner code). No new ORDER.
 - 20:34Z C-AG #23 (hourly; ctx 26 %, roll 30 %): LIVE 2bda29a1; MAIN ROOT-71. LOAD 0 own; SEATS running 0 / cap 12 | QUEUE: THỬ TAY CTM-CAL (owner code). No new ORDER.
 - 21:34Z C-AG #23 (hourly; ctx ~27 %, roll 30 %): LIVE 2bda29a1. LOAD 0 own; SEATS running 0 / cap 12 | QUEUE: THỬ TAY CTM-CAL (owner code). No new ORDER.
+- 21:41Z C-AG #23: ORDER ROOT-71 whole job cdn-kc-restore (LIVE CDN ALARM: FIGURES-kc.json 52 < floor 208, blocks land queue G4). Claimed; brief briefs/cag23-cdn-kc-restore.md; opus wk session_01Rc5AsKxoe59K86WHvUxveu. LOAD 1 own; SEATS running 1 / cap 12 | QUEUE: THỬ TAY CTM-CAL (owner code).
 ## HANDOVER C-AG #22 → C-AG #23 (19/11 11:38Z)
 - C-AG #22 ctx ~33 % of 1M (START ~10 %, roll 35 %) → rolling over at a clean point. Successor C-AG #23 = child (depth 1) via create_session; takeover file TAKEOVER_FOREMAN_C_AG23.md. Hourly wake trig_01Tt3iJ77Wyx9DFDNRYCLEdy deleted by #22.
 - LIVE main edb2e724 (opt-scroll-reset). MAIN ROOT-70 session_01Rc5AsKJHPE6qV9k9Ugyhj7.
@@ -1527,3 +1528,4 @@ ROOT-55 ~21:37Z: ROLLOVER at ~29 % (START 6 %) → ROOT-56 session_01PEhRbxQAS4s
 ROOT-56 19/11 ~21:40Z: depth 8, START_CTX ~4 %. Took over; telling NF4 NDX4 PR12 BW6 MMX4 TH1 CP1. Lượt 703 (face link + tick) with NF4.
 ROOT-56 Lượt 705: NF4 sheet c06/c14/c19/c31 Sắc sảo sent (cuts rgXcT8Jxtc rgXcTIOxtc gOmpdCcSXO SyheXu8Ub8). NF4 GO 20 more (new Kiêu kỳ: no 'phoenix' → 'long narrow almond eyes with sharply up-swept outer corners'). NDX4 round 4 running (NDX5 session_01PEhRbtmYSywEskZtUmAi7W standby). TH1 at roll line (successor needed when Thái hậu resumes → FOR MAIN). Cannot create/disable triggers at depth 8. Next free Lượt 706.
 ROOT-56 ~21:40Z: NF4 at ~27 % → finishes s19–s38 faces, then hands over in NF4.md (no self-successor). Lượt 703 tick page moved to MMX4 (depth 4, no gens).
+ROOT-56 Lượt 706: owner asked if the mood-seal (emo-anim) video order reached us. Found: 15:40Z ROOT-70 group-seal order (+17:00/17:03/17:10Z) in this file, never started (no emo-anim-groups anywhere). → CP1: sample Thái hậu 'giận' 3 parts first.
