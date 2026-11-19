@@ -65,3 +65,12 @@ Unit 1 = 8 × 135 + 12 × 940 = 12 360 cr. Session total so far: 9 270 + 6 180 +
   img/_review/emo-anim-groups/hh-uN-preview.mp4 "hh-<k>:Hoàng hậu · <VI caption>" …` (captions: hh_prompts.caption(k)) → cdn_sync →
   ledger lines (append; git add --sparse dev/art/gen_ledger.jsonl) → report here + send ROOT-57. Helper scripts in dev/art/emo-anim/groups
   (kf.py, cutset.py, preview_vi.py; work dir $SG2_G default /tmp/sg2/g). One try per gen, no redo without foreman OK.
+
+### UPDATE 23:53Z — foreman is now ROOT-58 (session_01PEhRbuLwt3mGKRm2EJUf5s); OWNER Lượt 811 → 812 (supersedes the unit plan above)
+- Hoàng hậu: ONLY the Thái hậu-APPROVED seals: giận vui buon so an (DONE) + binh ghen lo muu tutin hanghai (6 left, next unit(s)).
+  NOT dau (being redone), no seal the owner has not approved for Thái hậu.
+- Prompts: re-fetch the branch and copy SEAL5's CURRENT Thái hậu prompt per seal WORD FOR WORD (dev/art/emo-anim/groups/th_prompts*);
+  change ONLY the person block (hh_prompts.py SWAP list does this — check it still matches SEAL5's latest text, e.g. hanghai disc fix).
+- Disc colour never near chroma green (SEAL5's hăng hái fix).
+- pt / ptl: NOTHING until the owner OKs v2 (sent to her Lượt 812).
+- Report credits per batch to ROOT-58; stop if balance < 50 k (426.6 k shared at 23:52Z).
