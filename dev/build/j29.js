@@ -1,12 +1,12 @@
 /* ================= SERVANT TRAITS: every trait has an upside and a downside; hidden at hire; firing is priced; a small monthly pool ================= */
 const DIRTY=["poison","kpoison","frame","kframe","plant","musk","catswap","pushp","pond","ksab","vp","steal","takeaway","bribe"];
 let ACTK=null;
-(function(){const r0=runAct;runAct=function(a,t,k){const p=ACTK;ACTK=k;try{
+(function(){const r0=runAct;runAct=function(a,t,k){const p=ACTK;ACTK=k;try{let oc=null;
   /* trung thành refuses (or begs against) a dishonourable order: the act does not happen */
   if(a&&k&&DIRTY.includes(k)&&!together(a,t)){const sv=bestSent(a);/* AG-ALL-2 G10: with the loop on the sent servant CHOOSES among the player maid's own "Lệnh của chủ" options (j42 cnvOrdOpts: Vâng lệnh / Từ chối / Mật báo) by her lòng and nết (jagstf2 stf2Ord); off → the old trung thành roll */
-   const oc=sv&&typeof stf2Ord==="function"?stf2Ord(a,sv,t,k):null;if(oc&&oc!=="obey"){sv.kn=a===S?1:sv.kn;if(a===S&&oc==="refuse")servLearn(sv,"Từ chối việc bẩn");return a===S?(oc==="refuse"?`${sv.name} quỳ xin nương nương đừng làm việc thất đức; việc không thành. `:`${sv.name} viện cớ thoái thác; việc không thành. `):""}
+   oc=sv&&typeof stf2Ord==="function"?stf2Ord(a,sv,t,k):null;if(oc&&oc!=="obey"&&oc!=="half"){sv.kn=a===S?1:sv.kn;if(a===S&&oc==="refuse")servLearn(sv,"Từ chối việc bẩn");return a===S?(oc==="refuse"?`${sv.name} quỳ xin nương nương đừng làm việc thất đức; việc không thành. `:`${sv.name} viện cớ thoái thác; việc không thành. `):""}
    if(!oc&&sv&&netIs(sv,"loyal")&&roll(30)){sv.kn=a===S?1:sv.kn;const m=`${sv.name} quỳ xin ${a===S?"nương nương":NM(a)} đừng làm việc thất đức; việc không thành. `;if(a===S)servLearn(sv,"Từ chối việc bẩn");return a===S?m:""}}
-  const r=r0.apply(this,arguments);
+  const r=oc==="half"?(a===S?`${sv.name} làm qua loa cho xong việc. `:"")+ordHalf(()=>r0.apply(this,arguments)):r0.apply(this,arguments);
   /* nhát gan: rivals' spies never notice him; a trail he leaves is lost */
   if(a&&k&&!together(a,t)){const sv=bestSent(a);if(sv&&netIs(sv,"timid")&&roll(35)&&t!==S&&t.evm&&t.evm[key(a)]>0)t.evm[key(a)]--}
   return r}finally{ACTK=p}}})();
