@@ -1800,7 +1800,7 @@ def nude2(o,c,opt):
 #  (3) HH cloud collar -> the Nữ đế shoulder piece of her option (NUDE_OPT, approved A-D); (4) second colour = her option (NUDE_OPTMAP auto); (5) item = her Nữ đế item (FIGURE_GATE H list, NUDE_ITEM) + matching hand clause;
 #  (6) + HAIR UP / SLEEVES / FABRIC sentences copied verbatim from dev/art/owner-copy/tpl_hh.txt (prompt B, Lượt 331/355/364/369: hair up, one sleeve layer to the floor, "FABRIC: thick gold-embroidered brocade with a graceful, flowing drape.").
 NUDE3_HHSENT=("HAIR UP: ALL of her glossy pure BLACK hair (never brown) is swept UP and gathered into the tall high chignon on top of her head under the crown, smooth at the nape; NO hair hanging loose down her back or over her shoulders. "
- "SLEEVES: very long, very wide, flowing sleeves that fall well past her hands and hang PAST her ankles all the way down until they TOUCH THE FLOOR, ONE single sleeve layer (no shorter outer sleeve on top); the brocade flows and drapes softly like heavy silk, never stiff. "
+ "SLEEVES: very long, very wide, flowing sleeves that fall well past her hands and hang PAST her ankles all the way down until they TOUCH THE FLOOR, ONE single sleeve layer (no shorter outer sleeve on top); the brocade flows and drapes softly like heavy silk, never stiff. Even while her hands are raised to hold her item at chest height, each wide sleeve still hangs straight down from her forearm and its hem lies on the floor beside her feet; the sleeve hem is NEVER at knee or shin height. "
  "FABRIC: thick gold-embroidered brocade with a graceful, flowing drape.")
 def nude3(o,c):
     # F4b-6 (owner Lượt 371/373/375 STORE GATE): the HH t8 store text stays WORD FOR WORD; only slot words swap (motif phoenix->dragon, colour slot, item + hand clause);

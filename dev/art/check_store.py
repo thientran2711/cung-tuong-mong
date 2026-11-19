@@ -793,12 +793,19 @@ def grey_hits(text):
     return out
 # K18 LIVE GAME HANDS-OFF (owner Lượt 591, BW4): a live game picture path (img/fig-*, img/hd/*, any img/ path outside img/_review and img/_keep) in the prompt or --refs = FAIL.
 K18_LIVE = re.compile(r"(?:^|[/\s\"'(,])(img/(?!_review/|_keep/)[\w./-]+|fig-[\w-]+\.(?:webp|png|jpg))")
+FLOOR_SLEEVE_RX = re.compile(r"(?:SLEEVE LENGTH|SLEEVES:)[^.]*(?:touch(?:es|ing)? the floor|sweep(?:s|ing)? the floor|reach(?:es|ing)? the floor|to the floor)", re.I)   # SL1: floor-length sleeve sentence (any wording)
+
+
 def check_text(text, scope, S=None, X=None, age=None, skip_store=False):
     """-> (fails, warns, slots) ; fails/warns = list of (id, kind, detail)."""
     if S is None: S, X = load_registry()
     text = norm(text); fails, warns, found = [], [], {}
     for k, kind, d in master_common.check(text):   # B25 MASTER BLOCK (owner Lượt 745/766, MG1): EVERY scope, faces included -> missing / edited / doubled = FAIL
         fails.append((k, "MASTER " + kind, d))
+    # SL1 (owner Lượt 773/778): ANY prompt (every scope) whose sleeve sentence sends the sleeves to the floor must carry S37 (sleeve-hold sentence) exactly once
+    if FLOOR_SLEEVE_RX.search(text):
+        _s37 = next(e["text"] for e in S if e["id"] == "S37"); _n = text.count(norm(_s37))
+        if _n != 1: fails.append(("S37", "FLOOR SLEEVE", f"a floor-length sleeve sentence is present but the sleeve-hold sentence S37 appears {_n} times (must be exactly once)"))
     for e in S:
         req = e["scope"] == "any" or (e["scope"] == "any-but-nude" and scope != "nude") or scope in parse_scope(e["scope"]); conf = scope in parse_scope(e.get("confirm", ""))   # 'any' = every prompt of every scope (D9)
         if not (req or conf): continue

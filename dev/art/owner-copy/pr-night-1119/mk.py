@@ -82,6 +82,7 @@ def laws(c,t,s):
               "SLEEVES: very long, very wide, flowing sleeves, ONE single sleeve layer (no shorter outer sleeve on top); the brocade flows and drapes softly like heavy silk, never stiff.",
               "FABRIC: thick gold-embroidered brocade with a graceful, flowing drape.",
               "SLEEVE LENGTH: the very wide sleeves hang PAST her ankles all the way down until they TOUCH THE FLOOR.",
+              "Even while her hands are raised to hold her item at chest height, each wide sleeve still hangs straight down from her forearm and its hem lies on the floor beside her feet; the sleeve hem is NEVER at knee or shin height.",   # SL1 (owner Lượt 773/778)
               "Every colour is rich and clear, never faded or silvery."]
     add.append(EYES)
     if t in (4,5): s=s.replace(" Hair: her own hairstyle decorated with fresh flowers and",f" Hair: her own hairstyle decorated with fresh {FL[t][n-1]}{FLC} and",1)
