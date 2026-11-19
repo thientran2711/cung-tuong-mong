@@ -53,10 +53,11 @@ function giveFace(st){if(!S||!st||isGuest())return;
 function elderInit(){if(!S||isGuest())return;thH();
  for(const post of B().posts){let st=elderBy(post.id);if(!st)st=mk(post,0,rint(post.age[0],post.age[1]));place(st);giveFace(st)}
  for(const st of elders()){st.elder=1;try{const K=typeof k61S==="function"?k61S():S.known;if(K&&typeof kOf61==="function"){const k=kOf61(st);if((+K[k]||0)<2)K[k]=2}}catch(e){}}}
-/* the identity's picture: the a51 art of her identity */
+/* the identity's picture: her elder art = the a51 band or older (a65 at 65+ when painted, art-wiring-1119: BAL.ageBand), nearest age of her identity */
 function figRec(st){try{if(!st||!st.fid||typeof FIGIX==="undefined")return null;const r=st.fid.split(":")[0];const L=(FIGIX[r]||{})[st.fid]||[];if(!L.length)return null;
- if(r==="maid")return L.find(f=>(f.tier==null||f.tier==="")&&f.ageBand==="a51")||null;
- return L.find(f=>f.ageBand==="a51"&&f.por)||L.find(f=>f.ageBand==="a51")||figBest(L,null,st.age||55)}catch(e){return null}}
+ const ag=Math.max(BAL.ageBand[2],st.age||55);
+ if(r==="maid"){const N=L.filter(f=>f.tier==null||f.tier==="");return N.length?figBest(N,null,ag):null}
+ const P=L.filter(f=>f.por);return figBest(P.length?P:L,null,ag)}catch(e){return null}}
 const porSrc=st=>{const f=figRec(st);return f?figPath(f.por||f.file||f.src):""};
 const figSrc=st=>{const f=figRec(st);return f?figPath(f.file||f.src):""};
 if(typeof figFor==="function"){const ff=figFor;figFor=function(p,kind){try{let w=p&&(p.ref||p);if(w&&w.kind==="elder"&&w.ref)w=w.ref;if(w&&w.eid&&postOf(w.eid)){giveFace(w);const s=kind==="por"?porSrc(w):figSrc(w);if(s)return s}}catch(e){}return ff.apply(this,arguments)}}
