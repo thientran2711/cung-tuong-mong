@@ -51,6 +51,10 @@ const ST={};const lifted=k=>!!(TH.gLift&&TH.gLift[k]===L12&&on());
 const stSet=(k,v)=>{const s=CW.ctx;(ST[s]=ST[s]||{})[k]=v==null?1:v;F.stat.start=(F.stat.start|0)+1};
 const stTake=(k,v)=>{const o=ST[CW.ctx];if(!o||o[k]==null||(v!=null&&o[k]!==v))return false;delete o[k];return true};
 F.f6bStart=ST;
+/* F6a's game-first deck kinds lifted at level 12 (TH.gLift: from here the card is a plain host card, its tap rides F6a's act(i); its game
+   opens on her phone through the captures below). aaMG (the Tự học work cards) stays on the old road: its lesson picker opens on the
+   host side otherwise (no capture yet) — listed for H. */
+if(TH.gLift){TH.gLift.exam=L12;TH.gLift.toil=L12;TH.gLift.steal=L12}
 /* ===== 1-2. the exams (her exam, the servant exam): exRun plays on her phone with a throw-away state; the end = exEnd ===== */
 if(typeof exRun==="function"){const x0=exRun;
  exRun=function(P,e,done){const kind=P&&P.srv?"srv":"me";
