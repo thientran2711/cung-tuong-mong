@@ -34,6 +34,9 @@ function npcEncounters(){const by={};for(const v of liveRivals(true)){const k=S.
 
 /* sending someone instead of going: same act, lower odds, the servant may be caught and confess */
 let ACTX={a:null,pen:0};
+/* «Giúp qua loa» (owner OD 18/11 ~21:15Z, the 4 answers of OD L1876 for every receiver): while a receiver does the order half-heartedly, the deed's odds − BAL.road.hp.half (the ONE qua-loa number, OD L1876).
+   ONE flag for every road (her maid road srvDoOrder / ordOdds, an NPC servant's deed through runAct / actCtx, Việc chủ sai merit). */
+var ORDHALF=0;function ordHalf(fn){const h0=ORDHALF;ORDHALF=BAL.road.hp.half;try{return fn()}finally{ORDHALF=h0}}
 /* ONE act context (review/shown-odds-one-path, ORDER ROOT-52 18/11): the roll (runAct) and EVERY screen that prints an act's odds
    build the same ACTX here — sent-servant penalty (pen), her lá số on the act's domain (lotB via dom), fresh spy knowledge of the
    target (spyKnowB via t) — so the word on the card is the odds the roll uses (shown == rolled; dev/test/shown-odds.test.js).
@@ -41,7 +44,7 @@ let ACTX={a:null,pen:0};
 const ACT_NOSEND=["accuse","vp","xx","gift","steal","road","takeaway"];
 function actCtx(a,t,k,sv,x){const sent=!(x&&x.here)&&!together(a,t)&&!ACT_NOSEND.includes(k);/* x.here: she does it herself on the spot (no servant sent) */if(sent&&sv===undefined)sv=bestSent(a);
  const K0=ACTK;ACTK=k;let pen=0;try{pen=sent?sentPen(sv)-(sv?srk(sv)*3:0):0}finally{ACTK=K0}
- return{a,t,pen:pen+((x&&x.pen)||0),dom:ACTDOM[k]}}
+ return{a,t,pen:pen+((x&&x.pen)||0)+(ORDHALF||0),dom:ACTDOM[k]}}
 /* the odds an act's own roll will use, for display: ACT[k].o evaluated inside actCtx (then the one odds cap oddsCl) */
 function actOdds(a,t,k,x){const A2=ACT[k];if(!A2||typeof A2.o!=="function")return null;const X0=ACTX,K0=ACTK;ACTK=k;ACTX=actCtx(a,t,k,undefined,x);
  try{const o=A2.o(a,t);return o==null||o>=100?o:oddsCl(Math.round(o))}finally{ACTX=X0;ACTK=K0}}
@@ -62,7 +65,7 @@ function aOdd(o,a){/* the odds an act's own success uses: the frozen shown odds 
 function aRoll(o,a){const z=aOdd(o,a);return z>=100||roll(z)}
 function runAct(a,t,k,extra){const A2=ACT[k];if(!A2)return"";const sent=!together(a,t)&&!ACT_NOSEND.includes(k);const where=together(a,t)?placeName(whereOf(a)):"";
  if(sameHouse(a,t)&&k!=="accuse")return a===S?"Người cùng cung, ngươi không thể ra tay hay lấy lòng. ":"";
- const sv=sent?bestSent(a):null;ACTX=actCtx(a,t,k,sv);if(a===S&&ACTFZ&&(!ACTFZ.k||ACTFZ.k===k)){ACTX.fz=ACTFZ.o;ACTFZ=null}/* the odds she saw (fzRun) */let r="";try{r=A2.f(a,t,extra)}finally{ACTX={a:null,pen:0}}
+ const sv=sent?bestSent(a):null;ACTX=actCtx(a,t,k,sv);if(a===S&&ACTFZ&&(!ACTFZ.k||ACTFZ.k===k)){ACTX.fz=ORDHALF?oddsCl(ACTFZ.o-ORDHALF):ACTFZ.o;ACTFZ=null}/* the odds she saw (fzRun) */let r="";try{r=A2.f(a,t,extra)}finally{ACTX={a:null,pen:0}}
  const harm=!["ally","gift","spy"].includes(k);
  if(sent&&sv&&!/bị lộ|bị bắt|phát giác|chặn kịp|từ chối/.test(r))servMerit(sv,2);if(sent&&harm&&roll(confessRisk(sv))){const n=evA(t,a,BAL.eff.j9.evN);r+=`${sv?sv.name:"Kẻ"} được ${NM(a)} sai đi bị bắt, khai ra chủ${n?`: ${NM(t)} nắm thêm ${balAb(BAL.eff.j9.evN)} chứng cứ`:""}. `+servCaught(a,sv)}
  if(sent&&sv)r=r.replace(/\(sai người đi\)/,"");

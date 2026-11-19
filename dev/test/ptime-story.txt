@@ -1,0 +1,372 @@
+# PARALLEL TIME scan — reviewed STORY list (FAIL 7 item 5, round 4): (file<TAB>label) of send-shaped options that sit INSIDE an event /
+# road / premise / story dialog (their cost and outcome are the event's own: jrd_* road arcs use the rdHp 4 answers, j67 premises, j7 / j96 /
+# jkc / jorigins / jend14 / jreign / jstory events). Reviewed one by one 18/11 by the round-4 fixer. A NEW send label is NOT here, so the
+# scan flags it (exit 1) until someone classes it: add a PARALLEL rule with its proof, or add it here after review.
+j14.js	Nhờ ${son.name} cầu xin
+j14.js	Nhờ người bên ngoài
+j24.js	Nhờ ${m.role} đưa thư kêu oan
+j4.js	Nhờ ${st.stu} minh oan
+j53.js	Mời thầy cưỡi ngựa bắn cung
+j53.js	Mời thầy kèm con ôn luyện trước
+j53.js	Mời thầy riêng
+j54.js	Mời thầy dạy ${n}
+j67.js	Dò hỏi người đưa lễ
+j67.js	Mua chuộc gia nhân phủ hắn
+j67.js	Mua chuộc người giữ kho
+j67.js	Mời Thái y khám công khai
+j67.js	Mời các phi tần cùng chơi
+j67.js	Mời lương y vào châm cứu
+j67.js	Mời sứ thần sửa
+j67.js	Mời thái y chứng minh không phải do học
+j67.js	Mời thái y giỏi, uống thuốc quý
+j67.js	Mời thầy Hàn lâm dạy
+j67.js	Mời thầy giỏi kèm riêng
+j67.js	Mời thầy thuốc, giấu hắn
+j67.js	Mời trà, nói chuyện thật lòng
+j67.js	Mời {v} đến dự giờ
+j67.js	Nhờ Hàn lâm viện giám định
+j67.js	Nhờ Lễ bộ dò ý sứ
+j67.js	Nhờ Thái hậu nói giúp
+j67.js	Nhờ Thái hậu nói đỡ
+j67.js	Nhờ cha dâng kế
+j67.js	Nhờ học sĩ Hàn lâm
+j67.js	Nhờ ma ma nâng đỡ
+j67.js	Nhờ người báo cho Hoàng thượng
+j67.js	Nhờ người chép hồ sơ
+j67.js	Nhờ người dò nhà {v} vì sao nói vậy
+j67.js	Nhờ người hỏi lấy lại thư
+j67.js	Nhờ người trong cung {foe} lục tìm
+j67.js	Nhờ người xin cho em làm hỏa đầu quân
+j67.js	Nhờ {n1} minh oan
+j7.js	Mua chuộc Cung Chính ti
+j7.js	Mua chuộc Khâm Thiên giám
+j7.js	Mời sư làm lễ trừ tà
+j7.js	Mời thái y, vẫn dự yến
+j7.js	Nhờ Thái hậu đứng ra
+j96.js	Nhờ chàng đỡ một việc của nhà ngươi
+j96.js	Nhờ người gửi trả tín vật, dặn chàng quên mình
+j96.js	Nhờ {lvn} ra tay xóa dấu
+j96.js	Sai cung nữ chuyển lời: “Đừng tìm ta”
+j97.js	Mời cha và huynh cùng vào cung, ngồi chung một mâm
+j99succ.js	Mời đại nho vào cung dạy tân đế
+j99succ.js	Sai đại tướng dẹp loạn
+jend14.js	Mời thái y giỏi nhất
+jend14.js	Mời thầy giỏi dạy {k}
+jend14.js	Mời {v} đến nói chuyện
+jend14.js	Nhờ Thái hậu chỉ bảo
+jend14.js	Nhờ Thái hậu nói giúp
+jend14.js	Nhờ nhà mình vận động triều thần
+jkc.js	Mời danh sư
+jkc.js	Nhờ huynh trưởng dò tin trong cung
+jkc.js	Nhờ tổ mẫu khuyên cha dâng sớ
+jkc.js	Sai tỳ nữ nghe ngóng viện ${di.t.toLowerCase()}
+jkc.js	Sai tỳ nữ ngáng chân thứ muội
+jkc.js	Tự tay đưa thư cho người ấy
+jorigins.js	Mời Thái hậu vào ngồi thử
+jorigins.js	Mời các phi tần cùng múa
+jorigins.js	Mời sứ đoàn vào yết kiến Hoàng thượng
+jorigins.js	Nhờ sứ đoàn nhắn: ta vẫn bình an
+jrcp.js	Mời thái y làm chứng: chỉ là kiêng kỵ
+jrd_ch.js	Cho người dò lai lịch y
+jrd_ch.js	Cho người lẻn vào lấy
+jrd_ch.js	Cũng đến Thọ Khang cung mang quà
+jrd_ch.js	Mời Hoàng hậu đứng, ngươi đứng kề
+jrd_ch.js	Mời Thái hậu ngồi nghe, để lương y nghiệm chén thuốc của nhà buôn ngay giữa điện
+jrd_ch.js	Mời {v} cùng hầu một đêm
+jrd_ch.js	Mời {v} cùng lo việc
+jrd_ch.js	Mời {v} cùng thắp
+jrd_ch.js	Mời {v} cùng đứng ra
+jrd_ch.js	Mời {v} vào cùng hầu
+jrd_ch.js	Mời {v} đến, hỏi nàng muốn gì
+jrd_ch.js	Mời Đàm ma ma cùng đọc
+jrd_ch.js	Nhờ Hoàng thượng nhớ lại ngươi bằng một món quà
+jrd_ch.js	Nhờ Thái hậu viết một dòng
+jrd_ch.js	Nhờ Tổng quản cấm hộp ra cổng ba ngày
+jrd_ch.js	Nhờ Tổng quản thái giám
+jrd_ch.js	Nhờ Tổng quản đổi người giữ cửa
+jrd_ch.js	Nhờ ma ma Đức Thọ cung khuyên nàng
+jrd_ch.js	Nhờ người nhà báo tin cho Ngự sử về đất phong
+jrd_ch.js	Nhờ nhà ngoại cho người canh cửa Ngự sử đài
+jrd_ch.js	Nhờ nhà ngoại gửi người làm bánh vào
+jrd_ch.js	Nhờ nhà ngoại đối chiếu nét chữ với sổ Hàn lâm
+jrd_ch.js	Nhờ {v} cùng nói
+jrd_ch.js	Sai người mang trà sang tạ lỗi {v}
+jrd_ch.js	Sai {maid} đến chùa
+jrd_cn.js	Mua người đưa thư chép lại
+jrd_cn.js	Mời lão Ngự sử đồng khoa của cha đến dự lễ tế
+jrd_cn.js	Mời nàng đến, ôn chuyện cũ
+jrd_cn.js	Mời thái y giỏi nhất
+jrd_cn.js	Mời thái y ở lại cả đêm
+jrd_cn.js	Mời {v} cùng che chở Tố Nga
+jrd_cn.js	Mời {v} cùng nói chuyện năm xưa trước Hoàng hậu
+jrd_cn.js	Nhờ Hoàng hậu cho hỏi đúng phép
+jrd_cn.js	Nhờ Ngự sử nói ngoài triều
+jrd_cn.js	Nhờ Thái hậu nói một lời
+jrd_cn.js	Nhờ cung nữ ấy lấy trộm
+jrd_cn.js	Nhờ hắn chỉ mặt kẻ đem trâm
+jrd_cn.js	Nhờ lão Ngự sử đồng khoa thúc
+jrd_cn.js	Nhờ lão quản gia làm chứng thay
+jrd_cn.js	Nhờ ma ma cũ ở Nội vụ phủ
+jrd_cn.js	Nhờ người trong Hộ bộ đối chiếu
+jrd_cn.js	Nhờ thái y quen chép dòng ấy
+jrd_cn.js	Nhờ {eun} cho bà gặp con
+jrd_cn.js	Nhờ {eun} kiểm trại, mượn cớ khác
+jrd_cn.js	Nhờ {eun} đổi chưởng sự
+jrd_cn.js	Nhờ đồng liêu cũ kể chuyện thật
+jrd_cn.js	Sai một tiểu thái giám tin cẩn
+jrd_cn.js	Sai người về quê hắn
+jrd_cn.js	Sai thái giám tin cẩn đi thay
+jrd_cn.js	Sai {maid} đốt lò, mang trà mới
+jrd_cn.js	Đóng cửa, thôi mọi việc dò la
+jrd_cnv.js	Mua chuộc thái giám ấy
+jrd_cnv.js	Mời Lưu ma ma và Phùng cô cô cùng ngồi một bàn
+jrd_cnv.js	Mời bà ta ra, nói thẳng
+jrd_cnv.js	Mời ma ma ngồi, xin dạy lại từ đầu
+jrd_cnv.js	Mời ma ma ra nói với người của {v}
+jrd_cnv.js	Mời ma ma đứng ra nói
+jrd_cnv.js	Mời ngài cùng chọn
+jrd_cnv.js	Mời thái y lén đến
+jrd_cnv.js	Nhờ ma ma Càn Ninh cung nói giúp
+jrd_cnv.js	Nhờ người chép sổ tiệm
+jrd_cnv.js	Nhờ người dâng ngài một bình trà
+jrd_cnv.js	Nhờ người dò ai giữ lại
+jrd_cnv.js	Nhờ người ngoài cung mua lại một tấm làm chứng
+jrd_cnv.js	Nhờ người nói đỡ
+jrd_cnv.js	Nhờ người thân cận ngài nhắc tên
+jrd_cnv.js	Nhờ người đồng hương làm chứng
+jrd_cnv.js	Nhờ tiểu thái giám giữ kho mở cửa
+jrd_cnv.js	Nhờ tiểu thái giám truyền tin cho Hoàng thượng
+jrd_cnv.js	Nhờ {mis} che chở nàng
+jrd_cnv.js	Nhờ {v} nói giúp một câu
+jrd_cnv.js	Sai người báo {mis} một tiếng
+jrd_cnv.js	Sai người của mình xuống giúp
+jrd_cnv.js	Sai người dò xem ai bị hỏi trước
+jrd_cnv.js	Sai người ghi lại lời nàng nói
+jrd_cnv.js	Sai người mang bạc lo lót trong ngục
+jrd_cnv.js	Sai người mang áo ấm theo
+jrd_cnv.js	Sai người thân tín lấy một cuốn sổ gốc
+jrd_cnv.js	Sai người thân tín đem đi, dặn không mở
+jrd_cnv.js	Sai người tin cẩn vào ngục gặp bà
+jrd_cnv.js	Sai người xuống sân Nội vụ phủ xin tha
+jrd_cnv.js	Sai người đến Nội vụ phủ đòi đúng lệ
+jrd_cnv.js	Sai người đến thẳng Nội vụ phủ đòi
+jrd_cnv.js	Sai thái giám cung mình mang tờ đòi minh oan cho Xuân Đào
+jrd_dtq.js	Mời Hoàng thượng đi xem ruộng
+jrd_dtq.js	Mời {v} cùng góp áo rét
+jrd_dtq.js	Mời {v} sang cung uống trà
+jrd_dtq.js	Mời {v} xem quà, nói rõ đầu đuôi
+jrd_dtq.js	Nhờ Hoàng hậu chuyển lời
+jrd_dtq.js	Nhờ Hoàng hậu gác lời ấy
+jrd_dtq.js	Nhờ Ngự sử xin Đại Lý tự khanh hồi tị
+jrd_dtq.js	Nhờ Thái hậu giữ tráp đến ngày xử
+jrd_dtq.js	Nhờ Thái hậu nói giúp
+jrd_dtq.js	Nhờ Thái hậu nói một lời
+jrd_dtq.js	Nhờ cha báo Đại Lý tự có kẻ dọa
+jrd_dtq.js	Nhờ cha dâng biểu tạ tội trước
+jrd_dtq.js	Nhờ cha mời người Hàn lâm viện viết sớ biện
+jrd_dtq.js	Nhờ cha nộp hết bạc vào Hộ bộ, xin triều lo
+jrd_dtq.js	Nhờ cha xin Binh bộ cho huynh tự trình
+jrd_dtq.js	Nhờ cha xin Binh bộ đếm quân trước triều
+jrd_dtq.js	Nhờ cha xin Lễ bộ cho sứ triều đi cùng
+jrd_dtq.js	Nhờ cha đòi giặc theo hòa ước, qua Lễ bộ
+jrd_dtq.js	Nhờ gia đinh nhà bắt kẻ bám theo
+jrd_dtq.js	Nhờ gia đinh nhà canh chùa, chờ
+jrd_dtq.js	Nhờ huynh trưởng báo Hình bộ bắt ký thất
+jrd_dtq.js	Nhờ huynh trưởng báo Hình bộ truy nã hắn
+jrd_dtq.js	Nhờ huynh trưởng báo Đại Lý tự đi tìm
+jrd_dtq.js	Nhờ huynh trưởng hỏi Hàn lâm học sĩ về giấy mực
+jrd_dtq.js	Nhờ huynh trưởng nộp mẫu chữ của ký thất
+jrd_dtq.js	Nhờ huynh trưởng xin học sĩ già đối chiếu nét chữ
+jrd_dtq.js	Nhờ huynh trưởng đưa hắn đến Hình bộ
+jrd_dtq.js	Nhờ huynh trưởng đưa thẳng vào Hình bộ
+jrd_dtq.js	Nhờ mẹ dâng sổ tên lính cũ làm chứng
+jrd_dtq.js	Nhờ mẹ niêm bằng gia ấn
+jrd_dtq.js	Nhờ người chép lại bức thư giả
+jrd_dtq.js	Nhờ người dò ba tờ sớ
+jrd_dtq.js	Nhờ người trong Hàn lâm viện viết sớ biện
+jrd_dtq.js	Nhờ nhà mời một Ngự sử trung lập về xem
+jrd_dtq.js	Nhờ {eun} dâng ngài danh sách trăm thân binh
+jrd_dtq.js	Nhờ {eun} mang thư khuyên ông trao thẳng cho vua
+jrd_dtq.js	Nhờ {eun} nhắn cha: uống ít, tạ ơn nhiều
+jrd_dtq.js	Nhờ {eun} đưa cha một dòng chữ
+jrd_dtq.js	Nhờ {maid} hỏi người nhà bếp các phủ
+jrd_dtq.js	Nhờ {man} dò xem chuyện riêng là gì
+jrd_dtq.js	Sai Ngự thiện phòng dâng ngài canh an thần
+jrd_dtq.js	Sai người lấy mẫu mực ở cung {v}
+jrd_dtq.js	Sai người đến hỏi thăm bệnh
+jrd_dtq.js	Sai {maid} mang nước và áo rét ra
+jrd_dtq.js	Đáp {v}: thiếp chỉ là con gái đưa thư nhà
+jrd_dtq.js	Đổi người đưa thư
+jrd_dtq.js	Đổi đường đưa thư
+jrd_muoi.js	Mua chuộc người giữ sổ
+jrd_muoi.js	Mời các cung đến xem sổ
+jrd_muoi.js	Mời {v} cùng góp bạc cứu làng
+jrd_muoi.js	Nhờ Hoàng hậu hỏi về tờ sớ
+jrd_muoi.js	Nhờ Hoàng hậu tâu xin kiểm kho
+jrd_muoi.js	Nhờ Hoàng thượng hỏi Nội vụ phủ
+jrd_muoi.js	Nhờ Ngự sử xin cho lão khai kín
+jrd_muoi.js	Nhờ Thái hậu nhắc một lời
+jrd_muoi.js	Nhờ cha báo Tuần diêm Ngự sử niêm phong
+jrd_muoi.js	Nhờ cha báo quan bắt lão trộm sổ
+jrd_muoi.js	Nhờ cha giao cho Tuần diêm Ngự sử
+jrd_muoi.js	Nhờ cha mời Ngự sử đến tận làng
+jrd_muoi.js	Nhờ cha nộp sổ lên Hình bộ
+jrd_muoi.js	Nhờ cha đưa hai tờ cho Tuần diêm Ngự sử
+jrd_muoi.js	Nhờ huynh trưởng cải trang vào kho
+jrd_muoi.js	Nhờ huynh trưởng gặp thay, ghi lại
+jrd_muoi.js	Nhờ huynh trưởng hỏi quê từng người
+jrd_muoi.js	Nhờ huynh trưởng nộp sổ nghĩa quyên
+jrd_muoi.js	Nhờ huynh trưởng thuê người chép sổ
+jrd_muoi.js	Nhờ huynh trưởng trả gấp đôi để dân nói thật
+jrd_muoi.js	Nhờ huynh trưởng về huyện đếm lại
+jrd_muoi.js	Nhờ người nhà cứu trang sổ ấy
+jrd_muoi.js	Nhờ thầy kiện xin sao sổ
+jrd_muoi.js	Nhờ thầy kiện xin xử riêng tội nợ thuế
+jrd_muoi.js	Nhờ {eun} dò người
+jrd_muoi.js	Nhờ {eun} làm chứng kẻ mua bí mật
+jrd_muoi.js	Sai người dò chủ nợ
+jrd_muoi.js	Sai người nhắc {v}
+jrd_muoi.js	Sai người ra chợ mua một bao
+jrd_muoi.js	Sai người về Giang Nam tìm lão
+jrd_muoi.js	Sai thái giám cung mình đến dọa hắn
+jrd_muoi.js	Sai {maid} về quê trông việc
+jrd_nc.js	Cho người lẻn vào đổi lớp lót
+jrd_nc.js	Còn. Xin chuyển lời: con vẫn là con của {pv}
+jrd_nc.js	Giữ lão Kha lại làm người đưa thư
+jrd_nc.js	Mời ma ma chỉ dạy lễ phục Đại Hy
+jrd_nc.js	Mời ngài xem chữ ngươi đang chép
+jrd_nc.js	Mời người hiểu thuốc trong sứ quán cố hương
+jrd_nc.js	Mời phi tần đến xem ngươi thắp hương
+jrd_nc.js	Mời {v} dự yến đón sứ
+jrd_nc.js	Mời {v} sang uống trà, nói chuyện quê nhà
+jrd_nc.js	Nhận lão Kha làm người đưa thư riêng
+jrd_nc.js	Nhờ Hoàng thượng hỏi đến
+jrd_nc.js	Nhờ người hỏi xem ai thẩm án
+jrd_nc.js	Nhờ người nói xấu nhà {v} một câu
+jrd_nc.js	Nhờ phu nhân Thượng thư Lễ bộ chuyển lời
+jrd_nc.js	Nhờ sứ quán cố hương lên tiếng
+jrd_nc.js	Nhờ sứ thần {land} lo
+jrd_nc.js	Nhờ {pa} giữ y lại hỏi
+jrd_nc.js	Sai cung nữ thân tín ra Hội Đồng quán nghe lời
+jrd_nc.js	Sai người mang canh đến Dưỡng Tâm điện
+jrd_nc.js	Sai người mang thuốc đến thăm
+jrd_nc.js	Sai người mang trà sữa ra sứ quán
+jrd_nc.js	Sai người sang xem ngay trong đêm
+jrd_nc.js	Sai người đến xem {pa} có bị thương
+jrd_nc.js	Sai người đổi rượu thành nước trà
+jrd_nc.js	Sai thái giám mang trà ra sứ quán
+jrd_nc.js	Sai thái giám ra sứ quán hỏi chuyện
+jrd_nc.js	Sai thái giám thân tín đến chỗ cấm quân giữ người
+jrd_td.js	Mua chuộc hắn
+jrd_td.js	Mời Hoàng thượng ghé đúng đêm ấy
+jrd_td.js	Mời Ngự sử cùng đứng tên
+jrd_td.js	Mời Thái hậu
+jrd_td.js	Mời lễ quan giảng chữ hiếu
+jrd_td.js	Mời nàng vào
+jrd_td.js	Mời {eun} đến làm chứng
+jrd_td.js	Nhờ Ngự sử dâng thay
+jrd_td.js	Nhờ Ngự sử già nhắc khéo quan Đại Lý tự
+jrd_td.js	Nhờ Ngự sử năm xưa dò tiếp
+jrd_td.js	Nhờ Ngự sử năm xưa nối dây
+jrd_td.js	Nhờ Ngự sử nộp bản sớ gốc có son phê
+jrd_td.js	Nhờ Ngự sử xin Binh bộ sao y có đóng dấu
+jrd_td.js	Nhờ Ngự sử xin gọi thợ khắc ấn lên công đường
+jrd_td.js	Nhờ Ngự sử xin gọi thợ khắc ấn ra đối chất
+jrd_td.js	Nhờ Ngự sử xin mời sư chùa Giang Nam làm chứng tờ cung khai
+jrd_td.js	Nhờ Ngự sử xin đối chiếu sổ xuất ấn Binh bộ
+jrd_td.js	Nhờ Thái hậu hỏi giúp một lời
+jrd_td.js	Nhờ Thái hậu nói giúp
+jrd_td.js	Nhờ lái buôn đưa em đổi doanh
+jrd_td.js	Nhờ lão Ngự sử môn sinh cũ của cha nói thay
+jrd_td.js	Nhờ lão quan bộ Lễ dâng sớ trước
+jrd_td.js	Nhờ lão quản gia nộp thêm lời khai của thư lại
+jrd_td.js	Nhờ người quen xếp sổ ấy lên xe gần lối đi
+jrd_td.js	Nhờ người thế giao đứng tên dâng thay
+jrd_td.js	Nhờ người thế giao đứng đơn xin trả ruộng hương hỏa
+jrd_td.js	Nhờ người đối chiếu triện
+jrd_td.js	Nhờ người đối chiếu với ấn thật ở Binh bộ
+jrd_td.js	Nhờ người đủ cao xin giữ sổ
+jrd_td.js	Nhờ phó tướng giữ em bên mình
+jrd_td.js	Nhờ phó tướng xin rút đội em
+jrd_td.js	Nhờ phó tướng đưa em về hậu doanh
+jrd_td.js	Nhờ trạm dịch quân đưa thư
+jrd_td.js	Nhờ {eun} giúp một tay
+jrd_td.js	Nhờ {eun} sai hắn
+jrd_td.js	Nhờ {eun} tra sổ Nội vụ phủ
+jrd_td.js	Nhờ {foe} nói với họ hàng
+jrd_td.js	Nhờ ông dò trong Ngự sử đài
+jrd_td.js	Nhờ đoàn quân lương
+jrd_td.js	Sai người dâng canh, không nhắc án
+jrd_td.js	Sai người xuống Giang Nam
+jrd_td.js	Sai người đưa bà về, gửi lễ
+jrd_td.js	Sai {maid} ra cửa cung nghe ngục tốt thuật lại
+jrd_td.js	Đổi người đưa thư
+jrd_thd.js	Cử {n1} làm trưởng lớp
+jrd_thd.js	Mua chuộc hắn khai
+jrd_thd.js	Mời Thị giảng đến dự giờ
+jrd_thd.js	Mời cha vào cung bái kiến Hoàng thượng
+jrd_thd.js	Mời cung nữ vào ngồi nghe cho rõ
+jrd_thd.js	Mời các mẹ đến xem buổi cuối
+jrd_thd.js	Mời học sĩ già thử giấy đến cung
+jrd_thd.js	Mời thái y giỏi nhất xem bệnh
+jrd_thd.js	Mời thái y đến xem
+jrd_thd.js	Mời {v} cùng dạy một buổi
+jrd_thd.js	Mời {v} ra đề cho bọn trẻ
+jrd_thd.js	Mời {v} uống trà, dò ý
+jrd_thd.js	Nhờ Hàn lâm viện viết lời bình
+jrd_thd.js	Nhờ cha ghi lại lời ông
+jrd_thd.js	Nhờ cha đệ đơn xin Hình bộ nhận án sớm
+jrd_thd.js	Nhờ cha ở lại kèm hắn
+jrd_thd.js	Nhờ hắn báo tin mỗi đêm
+jrd_thd.js	Nhờ hắn đưa {n1} vào thành
+jrd_thd.js	Nhờ học sĩ Hàn lâm giảng câu ấy
+jrd_thd.js	Nhờ học trò của cha chép
+jrd_thd.js	Nhờ một Ngự sử xin cho chủ sự ấy hồi tị
+jrd_thd.js	Nhờ người dò kẻ đốt
+jrd_thd.js	Nhờ sĩ lâm dâng sớ xin tha
+jrd_thd.js	Nhờ {dad} viết thư giải nghĩa
+jrd_thd.js	Nhờ {n1} báo Ngự sử đài
+jrd_thd.js	Nhờ {n1} giữ hắn lại
+jrd_thd.js	Nhờ {n1} hỏi đồng khoa của {n2}
+jrd_thd.js	Nhờ {n1} lặng lẽ xin đổi đề
+jrd_thd.js	Nhờ {n1} so dấu son ở Hàn lâm viện
+jrd_thd.js	Nhờ {n1} tiến cử
+jrd_thd.js	Nhờ {n1} xin công văn gọi sổ
+jrd_tt.js	Cho người lẻn vào xem
+jrd_tt.js	Mua chuộc nữ quan
+jrd_tt.js	Mời bà vào cung nói chuyện
+jrd_tt.js	Mời cha và Hoàng hậu ra Noãn các
+jrd_tt.js	Mời cha và bà ra Noãn các
+jrd_tt.js	Mời cha vào cung
+jrd_tt.js	Mời huynh chúc
+jrd_tt.js	Mời huynh cùng quỳ dâng sổ phủ lên Hoàng thượng
+jrd_tt.js	Mời lại huynh một chén
+jrd_tt.js	Nhờ Ngự sử thanh liêm hỏi giúp
+jrd_tt.js	Nhờ Thái hậu sắp chỗ
+jrd_tt.js	Nhờ cha chuộc lại bản ước
+jrd_tt.js	Nhờ cha lo
+jrd_tt.js	Nhờ cha lên tiếng
+jrd_tt.js	Nhờ cha phân xử
+jrd_tt.js	Nhờ cha xin nhà Trung cung cũ xóa điều khoản
+jrd_tt.js	Nhờ chị dâu
+jrd_tt.js	Nhờ huynh trưởng
+jrd_tt.js	Nhờ lão giữ sổ phủ
+jrd_tt.js	Nhờ một Ngự sử ngoài hội thẩm
+jrd_tt.js	Nhờ người dò ai đang nắm phủ
+jrd_tt.js	Nhờ người nói giúp ở triều
+jrd_tt.js	Nhờ người ở Lại bộ lên tiếng
+jrd_tt.js	Nhờ quản gia giữ ấn
+jrd_tt.js	Nhờ thái giám Nội vụ phủ tra
+jrd_tt.js	Nhờ thái giám giữ ấn đưa vào
+jrd_tt.js	Sai người mang canh đến Dưỡng Tâm điện
+jrd_tt.js	Đổi người đưa thư
+jreign.js	Nghe ngóng các cung
+jreign.js	Nhờ Hoàng hậu nói giúp một lời
+jreign.js	Sai {maid} mang thư
+jroute.js	Nhờ Thái hậu nói giúp
+jroute.js	Sai người đổi bát nước
+jstory.js	Nhờ ${S.maid?S.maid.name:
+jstory.js	Nhờ người quen lo liệu, không dùng bạc
+jstory.js	Nhờ {maid} giấu ông trong kho củi sau cung
+jtruth.js	Mời Thái y nghiệm hình nhân
+jworld2.js	Nhờ cha nói giúp trước triều

@@ -29,10 +29,10 @@ function stf2Bribe(a,s,o,odds,cost){if(!stf2On()||!s||s===S||s.sid==null||!o)ret
  const O=cnvBribeOpts(s,a,o,cost);const W={take:odds,tell:ref*t/Math.max(.001,t+q),quiet:ref*q/Math.max(.001,t+q)};
  const c=mindPick(O.map(x=>[x,W[x.id]*stf2Tr(s,x.tag)]),s)||O[0];stf2C("bribe_"+c.id);stf2Do(s,c);
  return c.id==="take"?`${s.name} (người hầu của ${NM(o)}) nhận bạc của ${NM(a)}, thành tai mắt. `:c.id==="tell"?`${s.name} từ chối bạc của ${NM(a)} và mách chủ. `:`${s.name} từ chối bạc của ${NM(a)}. `}
-/* ordered to do a dishonourable deed (j29 runAct, sent servant sv of master a, target t) → "obey" | "refuse" | "tell" (the deed is not done) */
+/* ordered to do a dishonourable deed (j29 runAct, sent servant sv of master a, target t) → "obey" | "half" (done, odds − BAL.road.hp.half) | "refuse" | "tell" (the deed is not done) */
 function stf2Ord(a,sv,t,k){if(!stf2On()||!sv||sv===S||!a)return null;const K=BAL.ag.stf2.ord,lo=(sv.loyal||0)/100;
- const O=cnvOrdOpts(sv,a,t||a,null);const W={obey:K.obey*lo,refuse:K.refuse+(typeof netIs==="function"&&netIs(sv,"loyal")?K.loyalTr:0),tell:K.tell*(1-lo)*(sv.spyFor?K.spy:1)};
- const c=mindPick(O.map(x=>[x,W[x.id]*stf2Tr(sv,x.tag)]),sv)||O[0];stf2C("ord_"+c.id);if(c.id==="obey")return"obey";const d=stf2Do(sv,c);if(d.r)try{log(d.r)}catch(e){}return c.id}
+ const O=cnvOrdOpts(sv,a,t||a,null);const W={obey:K.obey*lo,refuse:K.refuse+(typeof netIs==="function"&&netIs(sv,"loyal")?K.loyalTr:0),tell:K.tell*(1-lo)*(sv.spyFor?K.spy:1),half:(K.half||0)*(1-lo)};
+ const c=mindPick(O.map(x=>[x,(W[x.id]||0)*stf2Tr(sv,x.tag)]),sv)||O[0];stf2C("ord_"+c.id);if(c.id==="obey"||c.id==="half")return c.id;const d=stf2Do(sv,c);if(d.r)try{log(d.r)}catch(e){}return c.id}
 /* ---------- the NPC staff's new options (the maid player's new cards) ---------- */
 (function(){if(typeof asOpts!=="function"||typeof AS_DO!=="object")return;const ao=asOpts;
  asOpts=function(s,N){const L=ao.apply(this,arguments);try{if(!stf2On())return L;const m=ownerOf(s);if(!m)return L;N=N||asNeeds(s);const K=BAL.ag.stf2,B=asB();
