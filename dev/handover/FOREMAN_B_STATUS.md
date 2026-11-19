@@ -1,4 +1,5 @@
 SUCCESSOR OPENED 11:08Z: FOREMAN B ROOT-6 = session_01N1tNP2hiwnmraLBJ9N24DU (child of B ROOT-5, depth 6). ROOT-5 trigger trig_01LeBfod65MVtaugsrbXWsC2 DELETED; ROOT-5 stops now (relays any late message to ROOT-6).
+SUCCESSOR OPENED 17:19Z: FOREMAN B ROOT-7 = session_01N1tNP3bh5eNWUZw2nJQW4G (child of B ROOT-6, depth 7). ROOT-6 trigger trig_01Hws1XUFGEJJXAtR1Ff6iA7 DELETED; ROOT-6 stops now (relays any late message to ROOT-7).
 HANDOVER 17:22Z 19/11 (B ROOT-6 session_01N1tNP2hiwnmraLBJ9N24DU, depth 6 → child B ROOT-7, depth 7): ctx ~29 % (budget START ~5 % + 25 % = 30 %) → ROLLING OVER. MAIN = ROOT-71 session_01Rc5AsJ8S2aNYjotfjzaioU (other account; send_message 'not found' → LAND READY / FOR MAIN / SEATS lines here). LIVE main = 2bda29a1, ROLLBACK c02748c2. STANDBY B = session_01N1tNP5jYfeoWoXsWr5eqKN. ★ THE 18 LAWS line in every brief/takeover. Owner ASLEEP.
 - RULE LEARNED: verify descent yourself (git merge-base --is-ancestor) before every LAND READY; MAIN keeps a LAND QUEUE — a LAND READY on an old LIVE waits for its turn, the reviewer final-merges newest LIVE only when MAIN calls it (don't remerge early, it goes stale again).
 - RUNNING (5):
