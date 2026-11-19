@@ -40,6 +40,14 @@ for age in ("a18","a26","a36","a51","a65"):
         if x in o: o=o.replace(x,", the other hand gently touching it",1); n+=1
     if ", her long sheer silk stole over both arms" in o: o=o.replace(", her long sheer silk stole over both arms","",1); n+=1
     assert n==1,("stole pose",n)
+    # NDX4 (owner Lượt 683 'sleeves don't reach the floor, sleeve fabric wrong — copy the Hoàng hậu'; K6 sleeves exactly like HH):
+    # the HH t8 sleeve sentences COPIED VERBATIM from the store builder (build_all.py l.119-120, t8 output), inserted after the shared weight/drape sentence as in HH.
+    _hh=subprocess.run([sys.executable,os.path.join(ROOT,"dev/art/store-all/build_all.py"),p,"8"]+(["--age",age] if age!="a18" else []),capture_output=True,text=True,check=True).stdout
+    HHS=[" SLEEVE LENGTH (rank law): very long, very wide sleeves that hang down past her ankles until they touch the floor."," ONE SINGLE SLEEVE LAYER: each sleeve begins at the shoulder and falls in one piece; NO shorter outer sleeve, NO half-sleeve or elbow-length layer, NO short jacket sleeve or cuff layer visible on top of it."]
+    for s in HHS: assert _hh.count(s)==1,("not verbatim in HH t8",s)
+    for s in (S07," The silk has real weight: the wide sleeves and robe hang and fold naturally under their own weight, with natural creases, never stiff, flat or board-like."): assert s in _hh,("HH fabric sentence missing in HH",s)
+    a_w=" The silk has real weight: the wide sleeves and robe hang and fold naturally under their own weight, with natural creases, never stiff, flat or board-like."
+    assert o.count(a_w)==1; o=o.replace(a_w,a_w+"".join(HHS),1)
     S17=" Her hands interact naturally with the item (gently presenting, turning or touching it), lively and natural, while her head stays up facing the viewer, eyes open, lips closed, never looking down."
     a="no flying, floating or windblown cloth."; assert o.count(a)==1; o=o.replace(a,a+S17,1)
     # F11 (owner Lượt 583): Nữ đế hair UP in a bun at EVERY age, stated explicitly
@@ -56,5 +64,6 @@ for age in ("a18","a26","a36","a51","a65"):
         assert o.count(TA)==1 and o.count(TC)==1
     assert not re.search(r"Pose:[^.]*\b(stole|ribbon|sash|shawl)\b",o)
     assert "style reference" not in o.lower() and "Image 3" not in o
+    for s in HHS+[S07,a_w]: assert o.count(s)==1,("NDX4 HH sleeve/fabric gate",s)   # GATE: every HH t8 sleeve/fabric sentence exactly once
     open(os.path.join(R,"prompts",f"{p}_{age}.txt"),"w",encoding="utf-8").write(o)
     print(p,age,len(o),"chars")
