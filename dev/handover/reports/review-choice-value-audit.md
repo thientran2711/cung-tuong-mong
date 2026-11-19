@@ -171,3 +171,21 @@ Merge LIVE c02748c2 (receiver-choice) into ef373140 → **a7828dcd** (pushed, FF
 ### Red (numbered)
 1. **Law 2 — j42 `cnvBribeOpts` «Bạc lạ» (she is a servant, a rival's eunuch offers bạc)**: «Từ chối, im lặng» `fx:{}` `x:""` has no gain, no cost, no effect; «Từ chối, bẩm chủ» gives Chủ tin +BAL.coopBribe.tin and costs her nothing → strictly dominated. NOT new code: the line is byte-identical on 1a4df595 / ef373140 / c02748c2; the PEND pass skips it (needs isSrv), only a servant life in the turn pass reaches it, and receiver-choice changed the seed-7 path so the scan now lands there. Same group: co-op twins `jcoopworld.js:922–923` and `:1097–1098` («im lặng» says «trả lại bạc», «bẩm chủ» also no cost to the servant — the −5 is briber↔mistress); NPC weights `jagstf2 stf2BribeW` + `jrcv rcvMaidBribe` read the same list.
    **Fix proposal (not done; needs one new BAL number):** `BAL.coopBribe.grudge` (= 5, same size as BAL.eff.jcoopworld.briber) — «bẩm chủ» kèm: «${briber} ghi hận ngươi», briber's thiện cảm toward the servant −grudge (real affAdd); «im lặng» thành: «trả lại bạc, giữ hòa khí với ${briber}». Apply to j42 + both jcoopworld cards; NPC weights unchanged (they already split tell/quiet by lòng). Then re-run scan seeds 7/11/23/31, one-core ×4, quickcheck, coop-e2e.
+
+## law-2 fix: coopBribe group + FINAL-MERGE 2bda29a1 (same session, D #7 GO 15:00Z) — LAND READY 1a7ab77c
+Fix (e7562420, numbers set by D #7): `BAL.coopBribe.grudge = 5` (jbal2). Whole group «Bạc lạ»:
+- j42 `cnvBribeOpts`: «Từ chối, bẩm chủ» keeps Chủ tin +BAL.coopBribe.tin, now kèm «<briber> ghi hận ngươi, thiện cảm −grudge» (real `affAdd(briber, servant, −grudge)` via one helper `cnvBribeAff`); «Từ chối, im lặng» thành «trả lại bạc, giữ hòa khí với <briber>, thiện cảm +grudge» (real `affAdd(..., +grudge)`). NPC servants (stf2Bribe / jrcv rcvMaidBribe) run the same go (guard: no regard row for a staff entry without an id); NPC weights unchanged.
+- jcoopworld twins (P2H.bribe :922–923, PEND.thBribe :1097–1098): same two lines from BAL; the briber's side (`briberRes`) applies `affAdd(S, fSrvE(), ∓grudge)` (told / quiet).
+- In-page probe on the card's real briber (a wrapper picks the briber, not pp.r): quiet −4 → 0 (+5 after the trust trait rounding), tell 0 → −5. Text prints balSg(BAL key) — no typed number.
+Merge: + LIVE 2bda29a1 (seal-lean-3: jemoseal / jfigseal / jmark only) → **1a7ab77c** (index.html / sw.js rebuilt), pushed, FF of 2bda29a1.
+| gate | sha | result |
+|---|---|---|
+| one-core ×4, odds-cap | e7562420, 1a7ab77c | PASS |
+| choice-value-scan seeds 7 / 11 / 23 / 31 | e7562420 | **PASS** 360 / 331 / 359 / 314 · 0 / 0 / 0 · 0 page errors |
+| choice-value-scan seed 7 | 1a7ab77c | PASS 347 |
+| receiver-choice.test | e7562420, 1a7ab77c | ALL PASS |
+| quickcheck --runs 6 | e7562420, 1a7ab77c | PASS · old save ok · core gates PASS (1a7ab77c perf new/live render 273/238, tab 489/472, buổi 1478/1280 — run noise, seal delta only) |
+| coop-e2e vs live Worker | e7562420 | 68/68, 0 page errors (2bda29a1 delta touches no co-op code) |
+| Fold 755x1000@2 + iPad 1180x820@2 «Bạc lạ», looked at 3× | e7562420 | three roads, each Tốn + Được, none dominates; no overflow, 0 page errors; scratch only |
+### VERDICT: LAND READY review/choice-value-audit 1a7ab77c (FF of 2bda29a1)
+LANDER: delete `jbal.js` BAL.rk guard when balance-final lands.
