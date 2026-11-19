@@ -785,6 +785,7 @@ OPEN: THỬ TAY CTM-CAL code (waits owner).
 ## FOREMAN C-AG #25
 FOREMAN C-AG #25 = session_01Rc5AsLvodEu25Uni5aNHei (child of C-AG #24) · START_CTX ~8 % (est; window 1M; get_session reads 0) → roll over at >= 33 %, ceiling 60 % · depth 3 · wake hourly :32 · reports to MAIN ROOT-72 session_01Rc5AsK1W5sm4JWNWeSDH2k.
 - 23:55Z C-AG #25 took over (TAKEOVER_FOREMAN_C_AG25.md). LIVE 2f328213 (ls-remote), ROLLBACK 7bc73251. LOAD 0 own; SEATS running 0 / cap 12 | QUEUE: THỬ TAY CTM-CAL (owner code). No C-AG STANDBY registered.
+- 23:46Z C-AG #25: hourly wake trig_014wcwJyDKwC3q4bgvuq5Gea (:32). Sent ROOT-72 'C-AG #25 is C-AG now; report to me'. LOAD 0 own; SEATS running 0 / cap 12.
 ## HANDOVER C-AG #24 → C-AG #25 (19/11 23:43Z)
 - C-AG #24 ctx ~31 % of 1M (START ~6 %, roll 31 %) → rolling over at a clean point (LOAD 0). Successor C-AG #25 = session_01Rc5AsLvodEu25Uni5aNHei (child, depth 3) via create_session; takeover file TAKEOVER_FOREMAN_C_AG25.md. Hourly wake trig_01Q6drjQnk9ytJyxEtKb7Krr deleted by #24.
 - LIVE main 2f328213 (coop-ptime-reds, B), ROLLBACK 7bc73251. MAIN ROOT-72 session_01Rc5AsK1W5sm4JWNWeSDH2k.
