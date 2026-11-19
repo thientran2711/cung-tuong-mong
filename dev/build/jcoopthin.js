@@ -122,8 +122,13 @@ TH.seatOf=function(seat){if(ST[seat])return ST[seat];
  const s=J(P.S);const pers={kn:[s.empKnown||{}],cm:s.cmP||{},men:s.menP||{}};
  for(const k of ["empKnown","cmP","menP","cnews","heir"])delete s[k];for(const k of X.W_KEYS)delete s[k];
  const g={};for(const r of REG)g[r[0]]=J(r[3]);g.used=0;g.deck=[];g.Q=[];g.popIdx=null;g.popMsg="";
- return ST[seat]={S:s,ok:P.ok||"tt",pers,g,fresh:true,pid:P.pid}};
-TH.seatDrop=seat=>{delete ST[seat]};
+ /* F6a #3 (law 4, her khắc clock): a dropped store (every room "state", a week, her accept) is rebuilt from the room's person, which does not
+    carry `used` (seat-local, outside S): rebuilt at 0, the host's runs in her context that are NOT her intents (ctxOut mkSync, part-D work,
+    hand refresh) saw no khắc spent → her mood log `left` / walk checks drifted from her phone. Same life + week + buổi → the clock carries */
+ {const K=KEEP[seat];if(K&&K.life===(P.life||0)&&K.w===(COOP.state.week||0)&&K.b===(s.buoi||0))g.used=K.used;delete KEEP[seat]}
+ return ST[seat]={S:s,ok:P.ok||"tt",pers,g,fresh:true,pid:P.pid,life:(P.life||0)}};
+const KEEP={};
+TH.seatDrop=seat=>{const B=ST[seat];if(B&&B.g&&typeof B.g.used==="number"&&B.S)KEEP[seat]={used:B.g.used,life:(B.life||0),w:(COOP.state.week||0),b:(B.S.buoi||0)};delete ST[seat]};
 /* {$r:id} / {$k:name} refs (stored state AND every part-D patch value on her phone, review coop-thin-e: a patch left raw {$r} in her S → pFaceOf/pv crash) */
 function unref(o){const kid=n=>{try{return allKids().map(x=>x[0]).find(k=>k.name===n)||null}catch(e){return null}};
  const fix=o=>{if(!plain(o))return o;if(o.$r!=null&&Object.keys(o).length===1)return rivals.find(v=>v.id===o.$r)||null;if(o.$k!=null&&Object.keys(o).length===1)return kid(o.$k);
