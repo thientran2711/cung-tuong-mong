@@ -33,7 +33,7 @@ async function open(b,dpr,rec){const ctx=await b.newContext({viewport:{width:W,h
   cp.execFileSync('ffmpeg',['-y','-loglevel','error','-ss',String(Math.max(0,dur-SECS-1.5)),'-i',`${OUT}/raw-${SZ}.webm`,'-an','-c:v','libx264','-pix_fmt','yuv420p','-crf','23','-preset','fast',`${OUT}/full-${SZ}.mp4`])}
  {const {ctx,p,errs}=await open(b,2,false);log.forced=[];
   for(const key of ['gian','buon','vui']){
-   const info=await p.evaluate(key=>{const vis=[...document.querySelectorAll('img.kemo.kemo-live')].filter(e=>{const r=e.getBoundingClientRect();return r.width>2&&r.top>0&&r.bottom<innerHeight});if(!vis.length)return null;
+   const info=await p.evaluate(key=>{const vis=[...document.querySelectorAll('img.kfseal.kemo-live')].filter(e=>{const r=e.getBoundingClientRect();return r.width>2&&r.top>0&&r.bottom<innerHeight});if(!vis.length)return null;
     const e=vis[0],set=(/emo-((?:m-|mo-)?)[a-z-]+\.webp/.exec(e.dataset.kemos||e.getAttribute('src'))||[0,''])[1];
     if(!new RegExp('kemo-'+key+'(\\s|$)').test(e.className+' ')){e.className=e.className.replace(/kemo-(?!live|lean|m-)[a-z0-9_-]+/,'kemo-'+key).replace(/kemo-m-\w+/,'').trim();e.dataset.kemos='img/kit/emo-'+set+key+'.webp';e.setAttribute('src',e.dataset.kemos);window.kitEmoSeal.live(e,true)}
     e.__ln&&clearTimeout(e.__ln);window.kitEmoSeal.lean(e,true);const c=document.querySelector('img.kemo-big');return c?{l:parseFloat(c.style.left),t:parseFloat(c.style.top),w:parseFloat(c.style.width),h:parseFloat(c.style.height)}:null},key);
