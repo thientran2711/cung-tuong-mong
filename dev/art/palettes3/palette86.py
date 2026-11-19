@@ -326,10 +326,11 @@ def cmd_solve(seed=1, iters=20000):
         rs = RS[k]; b = base[k]
         cand = [dict(b)]; cost = [0.0]
         if k not in FINAL_ROOTS:      # a root code may move a little (same names, same season) to break a ROOT-ROOT clash
-            for m in variants(b['main'], b['main_hex'], 'm', (-0.03, 0, 0.03), (-10, -5, 0, 5, 10)):
-                for s_ in variants(b['sec'], b['sec_hex'], 's', (-0.03, 0, 0.03), (-10, -5, 0, 5, 10)):
+            RDL, RDH = (-0.06, -0.03, 0, 0.03, 0.06), (-20, -12, -6, 0, 6, 12, 20)   # P2: widened (ROOT-ROOT clashes are FAILs now)
+            for m in variants(b['main'], b['main_hex'], 'm', RDL, RDH):
+                for s_ in variants(b['sec'], b['sec_hex'], 's', RDL, RDH):
                     if (m[1], s_[1]) == (b['main_hex'], b['sec_hex']): continue
-                    if classify(m[1], s_[1]) != rs or not contrast_ok(m[1], s_[1], 0.0) or not season_contrast(m[1], s_[1]): continue
+                    if not pair_tone_ok(m[1], s_[1]) or classify(m[1], s_[1]) != rs or not contrast_ok(m[1], s_[1], 0.0) or not season_contrast(m[1], s_[1]): continue
                     cand.append(pd(m, s_)); cost.append(25 + 100 * (dE(m[1], b['main_hex']) + dE(s_[1], b['sec_hex'])))
         vc[(k, rs)] = (cand, np.array(cost)); cur[k][rs] = dict(b, root=True)
         for se in SEASONS:
