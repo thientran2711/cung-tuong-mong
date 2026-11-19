@@ -9,7 +9,7 @@
    Empty rows are left out; rows are always in this order; a value is placed by meaning: a gain is green and in Được, a loss is red.
    kitParse() now returns these rows; kaNorm() rebuilds every button of the game into the frame (cards, .pcb, .opt, .btn, .rbtn). Spec: dev/kit/KIT.md "Act card". */
 const KA_ROWS=[["why","Cần"],["ton","Tốn"],["duoc","Được"],["mat","Mất"],["kem","Kèm"],["note","Ghi chú"]];
-const KA_ODDS=/^(Nắm chắc|Rất chắc|Khá chắc|Năm ăn năm thua|Chắc|Khó lường|Khó|Liều)$/;
+const KA_ODDS=/^(Nắm chắc|Rất chắc|Khá chắc|Năm ăn năm thua|Chắc|Khó|Liều)$/;
 const KA_TIME=/^(?:[●○]+\s*)?\d+(?:\s*[-–]\s*\d+)?\s*(khắc|việc)$/i;
 const KA_STAT=/^(Bạc|Sức|Sủng|Danh|Đức|Sắc|Tài|Tâm cơ|Tai mắt|Ân tình|Thai)\s*-\s?\d/;
 const kaPlain=h=>String(h||"").replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim();
@@ -88,7 +88,7 @@ function kaRows(M){const R={why:[],ton:[],duoc:[],mat:[],kem:[],note:[],one:true
  R.why=R.why.map(x=>({h:kaWhyCut(x.h),c:"r"}));const wt=R.why.map(x=>kaPlain(x.h).toLowerCase());R.note=R.note.filter(x=>!wt.some(w=>w.includes(kaPlain(x.h).toLowerCase())));
  return R}
 function kaWhyCut(h){return String(h).split(/\s·\s(?=(?:thành|hỏng|kèm|tốn|được)\s*:)/i)[0].replace(/[\s·—-]+$/,"")}
-function kaOdds(M){if(!M.odds)return"";if(M.odds==="Khó lường")return typeof kitOdds==="function"?kitOdds(-1,{none:"Khó lường"}).replace('class="kodm"','class="kodm oc"'):`<span class="oc oc2">Khó lường</span>`;/* review/odds-meter-back: an unknown chance (a hidden poison…) = the same kit meter, no step lit */return oddsChip(M.odds)+M.oddsX}
+function kaOdds(M){if(!M.odds)return"";/* review/odds-no-unknown: only the 7 ladder words exist (law 7); a rolled option names its odds by p (j17 oddsLead) */return oddsChip(M.odds)+M.oddsX}
 /* owner 11/15 05:50Z: a GHI CHÚ that only repeats CẦN ("(chỉ buổi tối)" when CẦN shows "Buổi tối") is dropped — a note must add real information */
 function kaNoteDedup(R){try{if(!R.note||!R.note.length)return;const why=R.why.map(x=>kaPlain(x.h).toLowerCase()).join(" ");
  R.note=R.note.filter(x=>{const p=kaPlain(x.h).toLowerCase().replace(/^[(\s]+|[)\s.]+$/g,"");const m=p.match(/^(?:chỉ )?(buổi (?:sáng|trưa|chiều|tối))$/);return !(m&&why.includes(m[1]))})}catch(e){}}

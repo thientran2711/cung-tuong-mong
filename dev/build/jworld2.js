@@ -115,7 +115,7 @@ EVD.ret={place:()=>"home",
   return `Tuyết lớn phủ kín cung cấm; than sưởi chia theo phẩm, cung thấp và lãnh cung rét cóng.${Sh.length?` Chia than cho các cung thấp: ${nmList(Sh)}.`:""}${Su.length?` Chịu rét: ${nmList(Su)}.`:""}`},
  end(){phongAfter(B().ret.phongP,"Sau trận đại hàn, Hoàng thượng cho giảm bớt người trong cung");return "Tuyết đã tan; Nội vụ phủ phát than như thường."},
  card(w){const b=B().ret;if(!meCons())return info(w);if(rkOf(S)<=b.rank)return Object.assign(info(w),{opts:[{n:"Bỏ bạc mua thêm than",fx:{bac:-b.buy.bac},x:"thành: qua mùa rét yên ổn"},
-   {n:"Chịu rét cho qua",fx:{suc:-b.cold.suc},x:`thành: giữ lại ${b.buy.bac} lượng bạc · kèm: có thể bị nhiễm phong hàn`,go:()=>{if(roll(b.catch)){const r=catchIll(S,b.ill);if(r)log(r)}}}]});
+   {n:"Chịu rét cho qua",fx:{suc:-b.cold.suc},x:`thành: giữ lại ${b.buy.bac} lượng bạc · kèm: nhiễm phong hàn: ${chanceW(b.catch)}`/* law 4: the side chance it rolls (b.catch) */,go:()=>{if(roll(b.catch)){const r=catchIll(S,b.ill);if(r)log(r)}}}]});
   return Object.assign(info(w),{opts:[{n:"Chia than cho các cung thấp",fx:{bac:-b.share.bac},x:`thành: Đức +${b.share.duc}, Danh +${b.share.danh}`,go:()=>apply({duc:b.share.duc,danh:b.share.danh})},{n:"Giữ than cho cung mình",fx:{},x:`thành: giữ lại ${b.share.bac} lượng bạc`}]})},
  night(){return false}};
 /* ---------- 8 NẠN CHÂU CHẤU (row 8): a flood / drought whose relief failed (j55) left Kho lúa low but not yet famine (dis.kho..kho),
