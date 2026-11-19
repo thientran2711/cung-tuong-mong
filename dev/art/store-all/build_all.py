@@ -522,6 +522,7 @@ def thaihau(person,age):
     sw(TH_OLD["tailpos"]," nothing covering the face."+swatch+g["D9_FOREHEAD"]+" Everyone beautiful at every age.",why="ADDED royal-yellow swatch sentence (18/11 TH_SWATCH, image 2) + D9 forehead")
     sw("the royal golden yellow (honey-gold like #EFBD69)","the deep antique-gold royal yellow #CE9C48",why="B22 (owner Lượt 670): Thái hậu yellow = deep antique-gold royal yellow #CE9C48 (measured on the v624 m05 a36 robe), not #EFBD69")
     assert "#EFBD69" not in F,"B22: #EFBD69 left in a Thái hậu prompt"
+    sys.path.insert(0,ART); import master_common as _MC; F=_MC.apply(F); D.append(("B25 MASTER block (owner Lượt 745/766; MG1 master_common.apply, last step, as every other path)","",""))   # SL1 (ROOT-57): the Thái hậu path starts from the 18/11 BASE file, so the master block was missing
     globals()["TH_DIFF"]=D
     return None,F,add
 TH_EXEMPT={"a18":"S03","a26":"S03","a36":"S03","a51":"S33","a65":"S33"}

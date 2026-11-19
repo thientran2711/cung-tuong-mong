@@ -96,17 +96,24 @@ for age in ("a18","a26","a36","a51","a65"):
     for a_,b_ in (("nine-phoenix crown","dragon crown"),("a large central gold phoenix holding a pearl string in its beak","a large central gold dragon holding a pearl"),("taller and wider than a noble consort's crown","taller and wider than the Empress's crown")):
         assert CROWN.count(a_)==1,a_; CROWN=CROWN.replace(a_,b_)
     LUU=", and a row of bead tassels (lưu) hanging in front from the rim of the crown to the forehead, ending above the eyebrows, the bare forehead clean under them"
-    m_=re.findall(r"the GRANDEST headdress of all: .*?(?=; the most majestic outfit of all)",o); assert len(m_)==1 and m_[0].count(LUU)==1
+    m_=re.findall(r"the GRANDEST headdress of all: .*?(?=; the most majestic outfit of all)",o); assert len(m_)==1
+    # SL1 (ROOT-57, option D fix): outfit option D has its OWN approved lưu words (build.py NUDE_OPT['D'].tas 'only five bead tassels …'); keep this person's
+    # lưu clause verbatim from her own build instead of asserting the option-A clause (A/B/C: identical to LUU, no change).
+    _lu=re.findall(r", and (?:a row of|only five) bead tassels \(lưu\)[^;]*?, the bare forehead clean under them",m_[0]); assert len(_lu)==1 and m_[0].endswith(_lu[0]),("lưu clause",_lu)
+    LUU=_lu[0]
     o=o.replace(m_[0],CROWN+LUU,1)
     assert o.count(CROWN+LUU+"; the most majestic outfit of all")==1 and "phoenix with raised wings" not in o and "pearl in its claws" not in o   # GATE crown
     # NDX4 r4 (owner Lượt 702 via ROOT-55): Nữ đế a51/a65 keep the a36 colours: elder colour sentence removed, COLOUR RULE = the a36 one verbatim,
     # and the swatch line = the a36 one (its 'deeper, subdued antique-gold elder shade' would contradict).
-    _cr=re.findall(r"COLOUR RULE: .*?(?=; the royal golden yellow is the DOMINANT)",o); assert len(_cr)==1
+    # SL1 (ROOT-57, option B fix): the WHOLE COLOUR RULE (incl. its second-colour clause) and the outfit's 'golden yellow silk mixed with <sec>' word
+    # are taken from a36 (B23: never darkens; build.py swaps black -> deep midnight-navy at a51/a65 for option B, which broke S35). Options A/C/D: identical text, no change.
+    _cr=re.findall(r"COLOUR RULE: .*? NOT an all-yellow robe\.",o); assert len(_cr)==1
+    _mx=re.findall(r"golden yellow silk mixed with [^,]*,",o); assert len(_mx)==1
     SW36=" Image 2 is only a colour reference for the royal yellow, never copy anything but its colour; the royal yellow in the robe is exactly that colour."
-    if age=="a36": CR36=_cr[0]; assert o.count(SW36)==1
+    if age=="a36": CR36=_cr[0]; MX36=_mx[0]; assert o.count(SW36)==1
     if age in ("a51","a65"):
         o=o.replace(" "+TC,"",1)
-        o=o.replace(_cr[0],CR36,1)
+        o=o.replace(_cr[0],CR36,1); o=o.replace(_mx[0],MX36,1)
         _sw=re.findall(r" Image 2 is only a colour reference for the royal yellow[^.]*\.",o); assert len(_sw)==1; o=o.replace(_sw[0],SW36,1)
     if age in ("a36","a51","a65"): assert o.count(CR36)==1,"COLOUR RULE = a36"
     assert not re.search(r"DEEPER|DARKER|darken|elder shade|antique gold|antique-gold",o),"GATE: no elder DEEPER/DARKER colour words in Nữ đế"   # (lower-case 'a little deeper or a soft ivory' is inside the approved a36 COLOUR RULE itself)

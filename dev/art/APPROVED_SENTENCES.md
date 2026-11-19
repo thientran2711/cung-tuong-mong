@@ -134,6 +134,18 @@ Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as 
 - picture: t8 Hoàng hậu prompt B (18/11 ~18:20Z 'Prompt này rất là ok') · c25 a18 t8 v0 · https://ctm-img.victoria-tntt.workers.dev/img/_review/t8-reprompt/c25_a18_t8_v0.png
 - vn: Hoàng quý phi / Hoàng hậu: tay áo rất dài, rất rộng, quá mắt cá chạm sàn.
 
+### S37 · SLEEVE HEM ON THE FLOOR while holding the item (t7-t8, Nữ đế, Thái hậu)
+- text: `Even while her hands are raised to hold her item at chest height, each wide sleeve still hangs straight down from her forearm and its hem lies on the floor beside her feet; the sleeve hem is NEVER at knee or shin height.`
+- scope: tp7-8 pr7-8 nude
+- confirm: -
+- ages: all
+- store: no
+- luot: 773, 774 (SL1; companion of S10, same places)
+- source: dev/art/store-all/build_all.py SLEEVE_FLOOR_HOLD (laws t>=7; Thái hậu inherits; nude-B/mk.py HHS)
+- proof: dev/art/approved/proof/m05_t8_a18_SL1.txt
+- picture: owner Lượt 773/774: Nữ đế a36/a51/a65 + Thái hậu a36 sleeves ended at the knees; sentence added so future pictures keep the hem on the floor (no redraw, owner Lượt 777)
+- vn: Dù tay nâng món đồ ngang ngực, tay áo rộng vẫn rủ thẳng từ cẳng tay, mép tay áo nằm trên sàn cạnh chân; không bao giờ chỉ tới gối hay ống chân.
+
 ### S11 · ONE SINGLE SLEEVE LAYER
 - text: `ONE SINGLE SLEEVE LAYER: each sleeve begins at the shoulder and falls in one piece; NO shorter outer sleeve, NO half-sleeve or elbow-length layer, NO short jacket sleeve or cuff layer visible on top of it.`
 - scope: tp1-8 pr1-8
@@ -399,12 +411,12 @@ Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as 
 - vn: Tuổi 51/65: mọi màu là sắc ĐẬM HƠN, TỐI HƠN, sang trọng điềm tĩnh như Thái hậu 18/11 (không rực, không pastel, không bạc màu); tên màu + mã hex là màu trẻ, làm đậm như câu tuổi.
 
 ### S35 · Nữ đế a51/a65 COLOUR RULE = the a36 one verbatim (B23: never darkens with age)
-- text: `COLOUR RULE: all colours clear, soft and gentle at a medium-light tone, like fine silk in soft daylight: medium-soft saturation, pretty and clean, the secondary colour a real pretty colour (it may be a little deeper or a soft ivory, never heavy, never black, never grey), never rực, never glaring, never neon, never pastel-washed or faded, never dusty, grey, muddy or black; the royal golden yellow is the DOMINANT colour of the robe, mantle, sleeves and skirt (more than half of everything visible), a deep, quiet wine-crimson like #7E2A33 is the second colour (collar, inner robe, wide borders and a few panels);`
+- text: `COLOUR RULE: all colours clear, soft and gentle at a medium-light tone, like fine silk in soft daylight: medium-soft saturation, pretty and clean, the secondary colour a real pretty colour (it may be a little deeper or a soft ivory, never heavy, never black, never grey), never rực, never glaring, never neon, never pastel-washed or faded, never dusty, grey, muddy or black; the royal golden yellow is the DOMINANT colour of the robe, mantle, sleeves and skirt (more than half of everything visible), {second} is the second colour (collar, inner robe, wide borders and a few panels);`
 - scope: nude
 - confirm: -
 - ages: a51 a65
 - store: no
-- luot: B23 (owner Lượt 702)
+- luot: B23 (owner Lượt 702); SL1: second colour = {second} slot (it is her outfit option's own second colour: A/C wine-crimson, B black silk …); mk.py asserts a51/a65 = her a36 rule verbatim
 - source: dev/art/nude-B/prompts/m05_a36.txt (COLOUR RULE)
 - proof: dev/art/nude-B/prompts/m05_a36.txt
 - picture: 

@@ -24,4 +24,16 @@ Checked: build_all m05/m29 t7+t8 → 1×; thaihau m05 a36 → 1×; mk.py m29 →
 - Pre-existing (not mine): `build_all.py m05 thaihau --age a36` gate FAILS on MASTER M01–M05 (master block not in the build_all thaihau path) — same with and without this change.
 - Brief step 4 (mk.py option D crash / option B S35) not started (stop order).
 - If m05 is ever redrawn: the current builder angle for m05 a36/a51/a65 differs from the pictures (BW6 re-plan): a36 picture FRONTAL vs builder 3/4 LEFT; a51 picture 3/4 LEFT vs builder slight LEFT; a65 picture FRONTAL vs builder slight LEFT. m29 prompts differ only by the master block + the new sentence.
-HANDOVER: none needed (task closed by stop order).
+
+
+## ROUND 2 — ROOT-57 23:11Z order (no gens): gate entry, mk.py option B/D, Thái hậu master block
+GENS: 0 · CREDITS: 0.
+1. check_store APPROVED **S37** (the new sentence), scope tp7-8 pr7-8 nude (= S10 places + Nữ đế; Thái hậu is checked at tp8). Proof dev/art/approved/proof/m05_t8_a18_SL1.txt (build_all m05 8). `--self` 0 problems; APPROVED_SENTENCES.md regenerated. m10 t7/t8 a51 store check PASS.
+2. nude-B/mk.py (prompts only):
+   - option D (m04/m16/m28) crash: mk.py asserted the option-A lưu words; option D has its own approved lưu (NUDE_OPT['D'].tas "only five bead tassels …"). Now the person's own lưu clause is kept verbatim from her build.
+   - option B (m10/m22) S35 FAIL at a51/a65: build.py swaps black → deep midnight-navy at a51/a65 (old N4 1c elder rule), so the COLOUR RULE's second-colour clause and the outfit "mixed with" word changed (B23: Nữ đế never darkens). mk.py now copies the WHOLE a36 COLOUR RULE (incl. second-colour clause) + the a36 "golden yellow silk mixed with <sec>," into a51/a65. The S35 gate text had option A's wine-crimson hard-coded → now a {second} slot (mk.py still asserts a51/a65 = a36 verbatim).
+   - Proof of no side effects: mk.py output for m05/m29 (options A/C) byte-identical before/after these two fixes.
+   - check_store --scope nude: PASS 25/25 for m04 m10 m16 m22 m28 (all 5 ages; new prompt files committed, no gens) and m05/m29 builder output.
+   - m05/m29 committed prompt files left as they were (they are the prompts of the current pictures).
+3. build_all thaihau: master_common.apply(F) as the last step (MG1 block, like every other path). Thái hậu gate now PASS for m01 m04 m10 m13 m29 m40 × a36/a51/a65 (was FAIL M01–M05).
+Pre-existing, not touched: check_store has TWO entries with id S35 (Nữ đế COLOUR RULE and K15 cung nữ hair flowers) — someone should renumber one.
