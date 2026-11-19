@@ -147,7 +147,7 @@ K11 | MEN never wear pink or purple; colours deep blue, navy, teal, green, black
 K12 | THIẾU NỮ = two states only: khuê các (noble) and nhà nghèo (poor: neat, pretty, never ragged, some embroidery); existing liked images re-made as 2K transparent, new drawings only for people missing. | 18/11 21:00Z, 22:05Z | FG 191, 251
 K13 | TRUNG Y: 8 tiers in pale rank colours (Đáp ứng ivory … HH pale yellow); trung y / lãnh cung figures hold an item and use spec5 poses. | OD:L392; 19/11 01:10Z | FG 122, 138
 K14 | Everyone in the palace is richly dressed (maids in embroidered silk with hairpins); nobody looks poor. | 11/14 | FG 153
-K15 | HAIR FLOWERS only for consorts (phi tần): cung nữ, ma ma, nữ quan wear NO hair flowers (Lượt 520). | Lượt 520 (19/11) | FG -
+K15 | HAIR FLOWERS only for consorts (phi tần): cung nữ, ma ma, nữ quan wear NO hair flowers (Lượt 520). NOTE (MMX3, ROOT-50 ruling A): removing the flower words is not enough (gen copies the face ref's flower), so ma ma `build.py --noflower` also adds "NO flowers in the hair (no fresh or silk flowers), only her hairpins."; gate check_store X14 (scope mama) bans hair-flower wording. | Lượt 520 (19/11) | FG -
 
 ## L. Places / rooms
 L1 | Rooms follow the occupant's rank (bed + room); accent colour = rank colour; luxury rises with rank, never reaching Khôn Ninh; low ranks pretty/carved, never poor; each consort quarters = reception room + bedroom. | Lượt 446, 437, 442 | FG 24
