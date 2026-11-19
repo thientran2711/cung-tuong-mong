@@ -1519,6 +1519,37 @@ BAL.bookFigW=.343;BAL.figWideRef=.65;/* painted width / body (skull top -> feet)
 /* DOING AN ACT ON THE SPOT (review/shown-odds-one-path): "Cài đồ vào rương nàng" done in her own palace is easier than sending
    someone by actHere.plant (was a typed -15 pen in j8 plantpick + a typed +15 on the j2 chest card); both read it through actCtx (j9). */
 Object.assign(BAL,{actHere:{plant:15}});
+/* RECEIVER CHOICE (owner OD 18/11 ~21:15Z, law 1 + 2 + 3; jrcv.js): every receiver of a request / order (she or any NPC) answers one of the SAME
+   4 answers as a helper (OD L1876): 0 giúp hết lòng · 1 làm qua loa · 2 từ chối · 3 mách lẻo–phá ngầm. An NPC receiver draws by the L1876 weights
+   (BAL.road.hp: role row v / hh × nết × liking toward the asker × tâm cơ, jroad rdHpW) through jmind mindPick (never argmax); she picks on her card.
+   Each answer has a gain and a cost for the receiver (law 3), of equal value (law 2):
+   help (Nhờ giúp đỡ, helpAsk): full = lends BAL.ag.cx2.help.bac (or tells a secret / receives warmly) · the asker's liking +af[0];
+   half = lends bac × half · liking +af[1]; no = keeps the bạc · both likings − BAL.ag.cx2.help.fail; sab = keeps it, tells the Hoàng hậu
+   (her liking of the receiver +qAf) · Đức − road.hp.sab.duc, the asker's oán + road.hp.sab.oan, the asker's Danh − danh.
+   ord (an order from above, two-option cards: Vâng / Cáo bệnh …): the NPC receiver weighs «obey» = full + half, «decline» = no (+ sab) — the SAME
+   options and numbers as her card. */
+/* the 4 answer names are the L1876 words BAL.road.hp.kw (full / half / no / lk), read by jrcv rcvKw — no copy here (one core).
+   «làm qua loa» (slot 1, every card, rcvYesO): the act at × help.half (the weaker result) and Sức − prop.suc × help.half (she still gives some time);
+   the risk = the L1876 «qua loa» minus BAL.road.hp.half read as the chance the asker sees through it → the asker's liking of the receiver − help.fail
+   (as an open refusal) and her oán + road.hp.sab.oan (worse than refusing openly). Shown on her card in words (chanceW), the same roll for an NPC. */
+BAL.rcv={help:{af:[8,3],half:.5,qAf:5,danh:2},
+ /* the Sức a summons costs (her «Vâng chỉ» card jts tsSummonMe and the summoned NPC, one number) */
+ sumSuc:5,
+ /* the bạc to take a gift to Thái y viện (her giftin card j8 and an NPC receiver, one number) */
+ chk:10,
+ /* the Thái y viện finds a tainted gift at the receiver's oSee + chkSee (her giftin card j8 and an NPC receiver, one number) */
+ chkSee:25,
+ /* per-kind factor on the L1876 weights [full, half, no, sab] (tunable): refusing the throne is rare, sending a gift back less common than keeping it */
+ k:{help:[1,1,1,1],gift:[1,1,.5,1],emp:[1,1,.2,.2]},
+ /* every request / proposal (jrcv rcvYesO / rcvNoO): «giúp hết lòng» costs the receiver Sức suc (her time); «từ chối» a proposal keeps her out of cliques: Danh + danh */
+ prop:{suc:4,danh:1,ghen:10},
+ /* Kết giao (law 2, review FAIL 6 #6): «nhận lời» = kết bè, Danh − danh (and the asker's worst foe quý the receiver − BAL.eff.j8.f_2, the mirror of the
+    thiện cảm gained); «từ chối» = Danh + danh and that foe + f_2 × help.half; «qua loa» = half of each */
+ ally:{danh:3},
+ /* a request to a JUDGE (the Hoàng hậu asked by «Xin Hoàng hậu giáng» xinhh / «Trình Hoàng hậu» trinhhh, OD 18/11 ~21:15Z law 1): she as the Hoàng hậu
+   gets the card, an NPC queen answers with the SAME options at the asker's shown odds (rcvJudge). yes = the act (xinhh: the lễ comes to the judge)
+   · cost: the punished one's oán + oan, and for taking a lễ to demote someone Đức − duc; no = the act's own refusal effect · gain: Danh + prop.danh */
+ judge:{oan:6,duc:3}};
 /* PARALLEL TIME (owner OD 18/11 ~20:15Z/~20:20Z/~20:35Z; jptime): every button where she asks / sends ANOTHER person.
    o = khắc the SENDER pays to give the order (her card's Tốn); n = khắc the person sent is away, counted from the tap, walk included
    (= the RECEIVER's own act length when she plays the receiver: the maid road order frame shows the same n). The result lands at tap + n.
