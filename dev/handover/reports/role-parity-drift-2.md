@@ -53,3 +53,25 @@ Last full gate set on 1e9e481a (merged main d9b32074); then re-merges with ×1 r
 - The probe worlds now set two more states the SAME way for both doers (social: acquaintance Quen biết 3; staff: confidant maid lòng; m-sour: servant lòng under BAL.eit.pil.loyal). Each is undone after its world (UNDO), so other rows are untouched (the gap list is otherwise identical to plain 98f9f0f1 minus the 12 + the 2 trimmed).
 - Design note (not changed, not mine to change): her «Lập phe cùng» needs the partner to like HER (aff(v,S) ≥ BAL.facJoinAff 30), an NPC founder picks by HER OWN liking (BAL.ag.par3.fac frAff 35 / clan / shared foe). Both roads exist at every rank; the gate words differ. If the foreman wants ONE gate for both, that is an owner-level rule change (law 16) — flagged, not done.
 
+
+## REVIEW r1 (sonnet reviewer, SMALL tooling/tests) — PASS 6ffe38a4
+
+PRIORITY #1 CHECK: brief review-role-parity-drift-2.md; reused reports/role-parity-drift-2.md + the pre-fix probe (main 2481c80d role-parity-scan/test); CLAIMS row 261/284 (no other reviewer). 18 LAWS read; touched laws checked: 1, 4, 11, 13, 16.
+Branch review/role-parity-drift-2-r1 = 6ffe38a4 (already descends LIVE main 2481c80d; no change needed). `git diff origin/main` = dev/tools/role-parity-scan.js, role-parity-open.json, dev/test/role-parity.test.js, role-parity-drift2-play.js, index.html build line. **dev/build untouched** → size rule OK.
+
+1. Bisect: pre-fix probe (main's scan) run on 4217568a and 98f9f0f1 builds. 98f9f0f1: exactly the 12 rows (up maidTalk, hh+up facFound N-ONLY, «Chứng cứ 2 ›» t1–t7+hh, maid:pil) + «up cx3:tell» closed. 4217568a: none of the 12 (one unrelated stray row maid:N-ONLY:maid:ask on that older build, not in the 12, absent on the tip). Claim CONFIRMED.
+2. Probe fairness (each is a fair real state, not a hidden gap):
+   - «Chứng cứ 2 ›» ×8: kit chip data-kev/data-kintel only opens an info panel (played D: no state change); whole group skipped, `data-kevact` real acts still counted. FAIR.
+   - cx3:facFound: social world sets k61 «Quen biết» 3 for her (the state NPCs start in; K restored by UNDO). The real "she has not met her yet" difference is already in the EXEMPT table (role-parity-exempt.json:107, «first meeting», reason documented) — not hidden. FAIR.
+   - cx2:maidTalk: her card is always shown (jact.js:69); NPC weighs it only under BAL.ag.cx2.maidTalk.below (jagacts2.js:57). Staff world sets the maid's lòng to below−25 via BAL for both (law 4 OK, no typed number); act exists both ways (played B). FAIR.
+   - maid:pil: NPC road = jeitem eitPilWho+eitPilPick (jeitem.js:47/101) vs her eitPilMaidOk (jeitem.js:103) — same loyal gate BAL.eit.pil.loyal; m-sour world sets S.tin / a.loyal under it via BAL. FAIR.
+3. role-parity-drift2-play.js: ALL PASS, 11/11 (A her+NPC, B her+NPC, C her+NPC, D, 2× no page errors); it calls the real handlers (facAct, maidTalkDo, eitPilTake, AGRUN, stipGoods→eitPilfer).
+4. OPEN 20 → 18 real: removed only «up cx:maidR» + «up cx3:tell» (diff), OPEN_MAX 18, test line "open baseline only shrinks (≤ 18)" ok; no exempt / open entry added.
+5. Gates on 6ffe38a4: role-parity ×3 ALL PASS, outputs byte-identical (md5 836ab814…); play 11/11; one-core-guard PASS (inline 3986 ≤ 4212); ag-stf2 ALL 23 PASS; quickcheck PASS (old save ok; perf new/live render 205/209, tab 361/330, buổi 882/1016).
+
+FLAG FOR MAIN (owner call, law 16 — NOT changed): «Lập phe cùng» gates.
+- Her: j10.js:167 facHTML lists consorts with `aff(v,S) >= BAL.facJoinAff` (30, jbal.js:374): the PARTNER must like HER; no clan / shared-foe road.
+- NPC founder: jagacts3.js:186 p3FacFr: `aff(v,x) >= BAL.ag.par3.fac.frAff` (35, jbal2.js:1220) OR same clan ≥15 OR shared foe ≥30: the FOUNDER must like the PARTNER; and `x!==S` excludes her (NPC→her road = invite j10.js:163 at aff(l,S)≥35).
+- Verdict: law 1 — the act exists both ways at every rank, so NOT a clear break; but the rule is not the same rule both ways (direction of liking differs; she lacks the clan / shared-foe road; 30 vs 35). Law 4 — two BAL keys decide one rule (facJoinAff vs par3.fac.frAff). Law 2 — not touched. Owner decides whether to make ONE gate.
+
+~100% review done. VERDICT: PASS 6ffe38a4f5c0d879050eef5b725550a641eb130e
