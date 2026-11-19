@@ -183,6 +183,16 @@ NEW={"c07":(("soft lavender","#B8A6CC"),("soft pale pink","#E6C4C4")),
 ORIGHEX={"c08","c10","c13","c15","c16","c18","c20","c21","c24","c27","c32"}
 OLDCOL={}
 
+# LIGHT (owner Lượt 586 via ROOT-51): "dịu" = LIGHT and gentle, never heavy/dark → every main/secondary below lightness 0.62 (HLS) is raised to 0.66 with saturation capped at 0.45, same hue; renamed "light <hue>".
+import colorsys,re
+def _light(nh):
+    n,h=nh; r,g,b=(int(h[i:i+2],16)/255 for i in (1,3,5)); H,L,S=colorsys.rgb_to_hls(r,g,b)
+    if L>=0.62: return nh
+    L2=max(L,0.66); S2=min(S,0.45); r,g,b=colorsys.hls_to_rgb(H,L2,S2)
+    n2="light "+re.sub(r"^(muted |soft |deep |pale )+","",n).replace("deep ","")
+    return (n2,"#%02X%02X%02X"%(round(r*255),round(g*255),round(b*255)))
+def LIGHTEN(d): return {k:(_light(v[0]),_light(v[1])) for k,v in d.items()}
+_NEW0=dict(NEW); NEW=LIGHTEN(NEW); ORIGHEX={c for c in ORIGHEX if NEW[c][0][1]==_NEW0[c][0][1]}
 CHANGED={"c01","c02","c05","c11","c14","c17","c23","c25","c26","c31"}
 pre,post=COMMON.split('{PERSON}')
 out=[]
@@ -218,7 +228,7 @@ hdr=("# c01–c32 NEW consort thiếu nữ v3 {PERSON} lines — index (NF1, own
 open(os.path.join(D,'INDEX_c_v3.md'),'w').write(hdr+"\n".join(out)+"\n")
 print("wrote",len(out))
 tab=["| id | old (Lượt 562) | new (B18, Lượt 583) |","|---|---|---|"]+[f"| {c} | {OLDCOL[c][0]} + {OLDCOL[c][1]} | {NEW[c][0][0]} {NEW[c][0][1]}{' (o)' if c in ORIGHEX else ''} + {NEW[c][1][0]} {NEW[c][1][1]} |" for c in NEW]
-open(os.path.join(D,'INDEX_c_v3.md'),'a').write("\n## B18 neutral-tone colours c07–c32 (owner Lượt 583; c01–c06 drawn samples kept as they are)\nEvery colour = name + hex + the store medium-tone sentence (build.py LOW_TONE). (o) = hex measured from her game t1 robe (build.py ORIG1).\n\n"+"\n".join(tab)+"\n")
+open(os.path.join(D,'INDEX_c_v3.md'),'a').write("\n## B18 neutral-tone colours c07–c32 (owner Lượt 583; c01–c06 drawn samples kept as they are)\nEvery colour = name + hex + the store medium-tone sentence (build.py LOW_TONE). (o) = hex measured from her game t1 robe (build.py ORIG1). Owner Lượt 586: colours below lightness 0.62 raised to light tints (LIGHTEN).\n\n"+"\n".join(tab)+"\n")
 
 # RANK DATA (ROOT-51 19:09Z, owner Lượt 583 B18): c01–c06 hex + tone ONLY for their rank prompts; their drawn thiếu-nữ files stay as drawn.
 RANK_ONLY={"c01":(("soft rose red","#C77078"),("pale jade green","#A9C7B3")),
@@ -227,6 +237,7 @@ RANK_ONLY={"c01":(("soft rose red","#C77078"),("pale jade green","#A9C7B3")),
 "c04":(("muted royal purple","#7E5E8E"),("soft lavender","#C3B3D6")),
 "c05":(("muted peacock teal","#4F8584"),("dusty rose","#C99A9C")),
 "c06":(("soft vermilion","#D5745E"),("ivory","#F0E8DA"))}
+RANK_ONLY=LIGHTEN(RANK_ONLY)
 import json
 json.dump({"_note":"Rank-prompt colours for consorts c01–c32 (B18 Lượt 583): main/secondary name + hex + tone sentence. c01–c06 = rank data only (their drawn thiếu-nữ pictures/files stay as drawn). HOLD: no use until owner GO.",
  "tone":LOW_TONE,**{c:{"main":v[0][0],"main_hex":v[0][1],"secondary":v[1][0],"secondary_hex":v[1][1]} for c,v in {**RANK_ONLY,**NEW}.items()}},

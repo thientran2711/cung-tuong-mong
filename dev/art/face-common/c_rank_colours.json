@@ -2,38 +2,38 @@
  "_note": "Rank-prompt colours for consorts c01–c32 (B18 Lượt 583): main/secondary name + hex + tone sentence. c01–c06 = rank data only (their drawn thiếu-nữ pictures/files stay as drawn). HOLD: no use until owner GO.",
  "tone": "all colours at ONE medium tone level, the same as the soft coral-red and brick-red robes of the game: medium saturation, medium lightness, neither too fresh nor too dark, never rực, never glaring, never neon, never pastel-washed, never dusty, grey, muddy or black.",
  "c01": {
-  "main": "soft rose red",
-  "main_hex": "#C77078",
+  "main": "light rose red",
+  "main_hex": "#CE8289",
   "secondary": "pale jade green",
   "secondary_hex": "#A9C7B3"
  },
  "c02": {
-  "main": "muted sapphire blue",
-  "main_hex": "#5E6F9E",
+  "main": "light sapphire blue",
+  "main_hex": "#929EBE",
   "secondary": "silvery grey",
   "secondary_hex": "#B3ADB4"
  },
  "c03": {
-  "main": "soft emerald green",
-  "main_hex": "#6E9A7E",
+  "main": "light emerald green",
+  "main_hex": "#99B8A4",
   "secondary": "cream",
   "secondary_hex": "#EEE3CC"
  },
  "c04": {
-  "main": "muted royal purple",
-  "main_hex": "#7E5E8E",
+  "main": "light royal purple",
+  "main_hex": "#AE97BA",
   "secondary": "soft lavender",
   "secondary_hex": "#C3B3D6"
  },
  "c05": {
-  "main": "muted peacock teal",
-  "main_hex": "#4F8584",
+  "main": "light peacock teal",
+  "main_hex": "#92BEBE",
   "secondary": "dusty rose",
   "secondary_hex": "#C99A9C"
  },
  "c06": {
-  "main": "soft vermilion",
-  "main_hex": "#D5745E",
+  "main": "light vermilion",
+  "main_hex": "#CF9081",
   "secondary": "ivory",
   "secondary_hex": "#F0E8DA"
  },
@@ -92,16 +92,16 @@
   "secondary_hex": "#F0E8DA"
  },
  "c16": {
-  "main": "muted sage green",
-  "main_hex": "#9CA283",
+  "main": "light sage green",
+  "main_hex": "#B0B59C",
   "secondary": "cream",
   "secondary_hex": "#E6DCC0"
  },
  "c17": {
   "main": "blush pink",
   "main_hex": "#E5B3AA",
-  "secondary": "muted deep teal",
-  "secondary_hex": "#4F7F7C"
+  "secondary": "light teal",
+  "secondary_hex": "#94BDBA"
  },
  "c18": {
   "main": "soft mauve rose",
@@ -110,8 +110,8 @@
   "secondary_hex": "#D9B5C5"
  },
  "c19": {
-  "main": "soft plum",
-  "main_hex": "#8E5D78",
+  "main": "light plum",
+  "main_hex": "#BA96AA",
   "secondary": "soft pink",
   "secondary_hex": "#E3B9B0"
  },
@@ -122,44 +122,44 @@
   "secondary_hex": "#A9C2AE"
  },
  "c21": {
-  "main": "soft rose red",
-  "main_hex": "#C9746C",
+  "main": "light rose red",
+  "main_hex": "#CF8881",
   "secondary": "blush pink",
   "secondary_hex": "#E8B5AC"
  },
  "c22": {
-  "main": "soft orchid purple",
-  "main_hex": "#A98AB0",
+  "main": "light orchid purple",
+  "main_hex": "#B397B9",
   "secondary": "soft pink",
   "secondary_hex": "#EBC7D0"
  },
  "c23": {
-  "main": "muted crimson red",
-  "main_hex": "#B04F4C",
-  "secondary": "soft jade green",
-  "secondary_hex": "#7FA88F"
+  "main": "light crimson red",
+  "main_hex": "#CB8886",
+  "secondary": "light jade green",
+  "secondary_hex": "#98B9A5"
  },
  "c24": {
-  "main": "soft coral red",
-  "main_hex": "#D97B60",
+  "main": "light coral red",
+  "main_hex": "#CF9381",
   "secondary": "pale blush cream",
   "secondary_hex": "#F3D1B1"
  },
  "c25": {
-  "main": "muted cherry red",
-  "main_hex": "#A84A52",
-  "secondary": "muted deep teal",
-  "secondary_hex": "#4C7A80"
+  "main": "light cherry red",
+  "main_hex": "#CA878C",
+  "secondary": "light teal",
+  "secondary_hex": "#92B9BE"
  },
  "c26": {
-  "main": "soft burgundy",
-  "main_hex": "#8A4A55",
+  "main": "light burgundy",
+  "main_hex": "#C28E97",
   "secondary": "soft celadon",
   "secondary_hex": "#A9C2AE"
  },
  "c27": {
-  "main": "terracotta coral red",
-  "main_hex": "#C27362",
+  "main": "light terracotta coral red",
+  "main_hex": "#CE9082",
   "secondary": "pale cream blush",
   "secondary_hex": "#EBCFBE"
  },
@@ -170,8 +170,8 @@
   "secondary_hex": "#EEEAE4"
  },
  "c29": {
-  "main": "soft ink blue",
-  "main_hex": "#4E5F7E",
+  "main": "light ink blue",
+  "main_hex": "#94A2BD",
   "secondary": "pale grey",
   "secondary_hex": "#C8C8CA"
  },
