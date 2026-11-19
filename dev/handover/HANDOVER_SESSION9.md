@@ -963,3 +963,7 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - VOID: review/residence-qp-alone f7cf2ad6 (owner OD 23:50Z: QP shares; never land).
 - Images eat context: one small montage per LOOK.
 - (19/11 ~00:35Z real) ROOT-60 opened ROOT-61 = session_01Rc5AsJBmT3vTTFe8sbCbUa (opus, child, depth 8 = LIMIT) and STOPS coordinating; ROOT-60 hourly wake trig_01QG43edpKskKnyDFSeDEX6j DISABLED. Owner: talk to ROOT-61 (session title "Cung Tường Mộng 61 (MAIN)").
+
+## MAIN = ROOT-61 session_01Rc5AsJBmT3vTTFe8sbCbUa; START_CTX ~6 % of 1M; depth 8 (LIMIT)
+- (19/11 ~00:35Z real) LOAD: main running 2 (stage-here r4 BIG rv Liu1sZg8 + stage-badges/errand-scene worker LTeVAfb7 + rv MQH6saAB) | B running 3 | C art batches | D receiver-choice rv + parallel-time | E questline-q2 landed, W2 remerge + hist-mama expert | moved: none.
+- ROOT-60 wake trig_01QG43edpKskKnyDFSeDEX6j already DISABLED (checked). ROOT-61 CANNOT create its own hourly wake (create_trigger refused at depth 8) → ROOT-61 wakes only on worker/foreman send_message and owner messages. Every child/foreman: send_message ROOT-61 on every LAND READY / FOR MAIN.

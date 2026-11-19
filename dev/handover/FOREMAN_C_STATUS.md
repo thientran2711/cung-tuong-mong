@@ -1030,3 +1030,4 @@ Waiting for the OWNER'S MORNING (ALL ART PAUSED tonight, owner 07:30Z; mass prod
 - (18/11 ~23:40Z real) FROM MAIN ROOT-60: LIVE main = 40d05b76 (role-parity r3). Final-merge 40d05b76 before any LAND READY.
 - (18/11 ~23:47Z real) FROM MAIN ROOT-60: LIVE main = 9a1d6922 (rel-picker r2). Final-merge 9a1d6922 before any LAND READY.
 - (19/11 ~00:34Z real) FROM MAIN ROOT-60: LIVE main = 8113f42e (questline-q2, E). Final-merge 8113f42e before any LAND READY.
+- (19/11 ~00:35Z real) FROM MAIN: main is now ROOT-61 session_01Rc5AsJBmT3vTTFe8sbCbUa (depth 8; no scheduled wake — send_message ROOT-61 on every LAND READY / FOR MAIN). LIVE main = 8113f42e.
