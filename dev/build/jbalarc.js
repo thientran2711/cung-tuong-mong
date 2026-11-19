@@ -63,12 +63,13 @@ Object.assign(BAL,{arc:{
  /* r97 = the rare-ending roll (owner 19/11 ~03:25Z: «Ví dụ như họ lúc nào cũng 100% đủ điều kiện thì lúc đó hãy gieo 9 hay 13%»): k = the share of a
     rare's own p a player gets on a road at full eligibility (p × k = 9–13.5 %); elig = the measured share of climaxes where every hidden condition
     holds (dev/measure/rarereach.js + rr-sum.js, report dev/handover/reports/rare-reach.md), per source: arc = the j97 arcs, road = the jroad .11
-    finales, kc = the jkc outside-palace rares, succ = the j99 succession rares. Set 19/11 from the rare-reach before-measure (61 lives,
-    3 styles, all 9 origins: arc 12.7 % of 55 climaxes; road: the after-measure with the road's Lợi thế carried (rdSc97); kc: mean of the 6 doors
-    over the jkc home-road probe (rr-kc.js); succ: no bot reaches the succession's second chapter, so it takes the arc value). The roll once eligible = min(1, p × k / elig[src]) (r97Roll, j97),
+    finales, kc = the jkc outside-palace rares, succ = the j99 succession rares. Set 19/11 from the rare-reach measures (before 63 + after 60
+    lives, 3 styles, all 9 origins, stop at chapter 12): arc 11.6 % (13 of 112 climaxes, both arms: the arc chains did not change); road 17.2 %
+    (5 of 29 finales, after-arm only: the road's Lợi thế is now carried from chapters .4–.10, rdSc97); kc: mean of the 6 doors over the jkc
+    home-road probe (rr-kc.js); succ: few bot lives reach the succession's second chapter (2, both eligible), so it takes the arc value). The roll once eligible = min(1, p × k / elig[src]) (r97Roll, j97),
     so the chance a road ends rare ≈ p × k, as if she were always eligible; never above sure. stay = the gain of choosing to stay in the palace
     after a rare ending that lets her leave. */
- r97:{stay:{sung:5},k:.9,elig:{arc:.13,road:.13,kc:.04,succ:.13},
+ r97:{stay:{sung:5},k:.9,elig:{arc:.12,road:.17,kc:.04,succ:.12},
   /* jkc outside-palace rares: base chance at full eligibility = p × kcF × k (kcR3: pFest at the festival door, kcR2: pTrave on the late door);
      the rest are each rare's condition floors (tm96 heart h, maid loyalty loy, gossip kld below, father af, Sức suc, outings oc at most,
      Tâm cơ tamco, Đức duc, Sắc sac). Was typed in jkc.js; values unchanged. */
