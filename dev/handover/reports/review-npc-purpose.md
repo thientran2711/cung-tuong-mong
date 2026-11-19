@@ -157,3 +157,14 @@ OPEN (blocking):
 2. **Gate stability**: "out against every base run" still flips on a 3.0x edge row (base runs 98/101 move the mean across the line). Judging the family (item 1) as one track row solves this case. Show 2 reruns with the same verdict.
 3. **Final-merge live 1a4df595** (parallel-time + role-parity-drift-2; MAIN ROOT-70): conflicts in assemble.py and dev/tools/role-parity-scan.js. Keep live's drift-2 and G1 #14's symmetric worlds; then head gaps = live gaps with the same scan.
 Delta re-gate on the merged head: static + npc-why/g1 suites + role-parity head/live + rates ×2 + quickcheck + coop ×1.
+
+## FINAL GATE on 509b7144 (contains live 2bda29a1; reviewer, 19/11 ~17:20Z) — NOT LAND READY (rates); carry-over results
+| check | result |
+|---|---|
+| scan --strict 419 · npc-why · logic · g1–g1g · ag-soft/know/sell · AG-ALL 21 · minister 11 | PASS (g1d check 8 flaky 3/21 = test bug: the first e68Tick may not fire; fixed test-only in 163ac776 by G1 #15, 20/20) |
+| quickcheck --runs 5 vs 2bda29a1 | PASS: render 236/236, tab 439/512, buổi 1310/1518, tasks 20/21, old save ok, core gates PASS |
+| role-parity head vs live (same scan) | head 17 gaps, live 18; none only on head (live-only: maid:errand 'Việc chủ sai') → L1 OK |
+| coop-e2e under 2 busy loops | 68/68 |
+| c8af1135 (before the 2bda29a1 merge) | suites + role-parity same; calm-down family track row (1.89x, real teller) and 'Một ánh mắt' accepted |
+| npc-purpose-rates ×2 vs 2bda29a1 | **FAIL ×2 (same verdict)**: track 'đắc ý' 3 → 26; c:'Có người tìm đến' 34 → 111; l:'Hoàng hậu tin cậy…' 0 → 14; l:'đắc ý ra mặt' 4 → 26 |
+G1 #15 probe (interim): 'đắc ý' = the same heard-share effect as the calm-down family (outbursts c:vui 50 vs 36; heard 54 % vs 30 %), so acceptable with a family why/track row. 'tin cậy' = reworded ladyJob line (family 20 → 14), so acceptable with a why. 'Có người tìm đến' 34 → 111 is REAL (AG.stat.wit 196 vs 114), cause being probed. NEXT: G1 #15's SẴN SÀNG with the fix → re-run rates ×2 + g1d + quickcheck ×1 (+ role-parity / coop only if game code outside the rate fix changes).
