@@ -2,7 +2,7 @@
 """SEAL3 full sets for bg- bé gái, bt- bé trai, mm- ma ma (owner Lượt 812 via ROOT-58: the Thái hậu-APPROVED seals, prompt kept y chang).
 Prompts = th_prompts.py (SEAL1/SEAL5 Thái hậu) WORD FOR WORD; only the PERSON BLOCK is swapped (look, hair/headwear, colours, he/his for bt).
 Seals: vui buon so an binh ghen lo muu tutin hanghai (gian done = the samples). NOT dau, no unreviewed seal.
-Disc fix (ROOT-58: never near chroma green): hanghai 'bright spring green' → 'bright cobalt blue' (th-hanghai disc was keyed half-transparent).
+Disc fix (ROOT-58: never near chroma green): hanghai 'bright spring green' → 'bright coral' (= SEAL4 sg4_set.py, foreman 23:52Z) (th-hanghai disc was keyed half-transparent).
 Ref for A = the group's approved giận A (bg gOmeqmUSXO, bt hu24MALvqL, mm w4aBKCf7EI); B ref = that seal's own A.
 usage: python3 grp_set_prompts.py bg|bt|mm [keys…]  → JSON {key: {A,B,out,loop,back}}"""
 import json, re, sys, os
@@ -23,7 +23,7 @@ X = {
 def swap(k, g, s):
     G0, x = G[g], X[g]
     s = s.replace(T.WHO, G0["who"]).replace(T.SAME, G0["same"]).replace(T.OLD, G0["short"])
-    s = s.replace("bright spring green", "bright cobalt blue")
+    s = s.replace("bright spring green", "bright coral")
     s = s.replace("wide royal yellow sleeves with plum cuffs", "wide " + G0["sl"])
     s = s.replace("with the large phoenix crown", "with " + x["head"]).replace("and the large phoenix crown", "and " + x["head"])
     s = s.replace("by her crown", "by " + x["head"]).replace("above her crown", "above " + x["head"])
