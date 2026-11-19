@@ -17,13 +17,12 @@ const VPS=(SIZES||"755x1000@2,1180x820@2").split(",");
   await p.evaluate(()=>{const M=document.getElementById('modal');Q.length=0;if(M)M.hidden=true});
   await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();document.getElementById('title').hidden=true;for(let i=0;i<40;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(!isSrv())break}Q.length=0;render()});
   await sleep(2500);
-  const force=async id=>p.evaluate(id=>{Q.length=0;S.ky={m:0,cd:-1,seen:{},got:[],last:-1};for(const k in KY.DEF)if(k!==id)S.ky.seen[k]=0;BAL.kyngo.p0=100;
-   const D=KY.DEF[id];if(id==="th_kinh"){D._w=D.when;D.when=null}
-   if(id==="vat_lac"){const v=liveRivals(true).find(x=>(x.inv||[]).some(e=>e&&loOk(e)));if(v)loLose(v,{cause:"mis"});Q.length=0}
+  const force=async id=>p.evaluate(id=>{Q.length=0;S.ky={m:0,cd:-1,seen:{},got:[],last:-1};for(const k in KY.DEF)if(k!==id)S.ky.seen[k]=0;BAL.kyngo.p0=100;BAL.kyngo.pity=0;
+   const gg=id==="vat_lac_g";if(gg){id="vat_lac";delete S.ky.seen.vat_lac}const D=KY.DEF[id];if(id==="th_kinh"){D._w=D.when;D.when=null}
+   if(id==="vat_lac"&&!gg){const v=liveRivals(true).find(x=>(x.inv||[]).some(e=>e&&loOk(e)));if(v)loLose(v,{cause:"mis"});Q.length=0}
    /* r2 F4: a piece whose NAME holds a bad-sounding word («Son điểm giáng») — its gain must stay under ĐƯỢC, never TỐN */
-   if(id==="vat_lac_g"){id="vat_lac";const v=liveRivals(true)[0];const e={k:"lxson2",from:"shot"};v.inv=v.inv||[];v.inv.push(e);loLoseE(v,e,"mis");Q.length=0;
-    for(const k in KY.DEF)if(k!=="vat_lac")S.ky.seen[k]=0;const L=KY.elig(S,"vuon").filter(x=>x.id==="vat_lac"&&x.X.lc.e===e);KY.DEF.vat_lac._x=KY.DEF.vat_lac.what;KY.DEF.vat_lac.what=()=>L[0]?L[0].X:null}
-   const k=D.pl[0]==="*"?"vuon":D.pl[0];KY.arrive(S,k,"shot");if(D._w)D.when=D._w;if(D._x){D.what=D._x;delete D._x}showModal();return Q[0]&&Q[0].evId},id);
+   if(gg){const v=liveRivals(true)[0];const e={k:"lxson2",from:"shot"};v.inv=v.inv||[];v.inv.push(e);const lc=loLoseE(v,e,"mis");Q.length=0;KY.DEF.vat_lac._x=KY.DEF.vat_lac.what;KY.DEF.vat_lac.what=()=>lc?{lc}:null}
+   const k=D.pl[0]==="*"?"vuon":D.pl[0];KY.arrive(S,k,"shot");if(D._w)D.when=D._w;if(D._x){D.what=D._x;delete D._x}showModal();return Q[0]&&Q[0].evId||"none"},id);
   const shot=async n=>{await sleep(1500);await p.screenshot({path:`${OUT}/${sz}-${n}.png`});
    const m=await p.evaluate(()=>{const M=document.getElementById('modal');const r=M&&M.getBoundingClientRect();const o=[...document.querySelectorAll('#modal .opt')].map(x=>x.getBoundingClientRect()).filter(x=>x.width);
     return {open:!!M&&!M.hidden,ovx:document.documentElement.scrollWidth>innerWidth+1,optsIn:o.every(x=>x.bottom<=innerHeight+1&&x.right<=innerWidth+1),n:o.length}});return m};
@@ -32,7 +31,7 @@ const VPS=(SIZES||"755x1000@2,1180x820@2").split(",");
   id=await force("vat_lac");m=await shot("3-found-piece");ck(`${sz} found piece card (${id})`,id==="kyngo:vat_lac"&&m.open&&!m.ovx&&m.optsIn,m);
   await p.evaluate(()=>{Q.length=0;const M=document.getElementById('modal');if(M)M.hidden=true});
   id=await force("vat_lac_g");m=await shot("4-found-giang");
-  const g=await p.evaluate(()=>[...document.querySelectorAll('#modal .opt')].map(o=>{const t=o.innerText.replace(/\s+/g," ");const i=t.search(/Son điểm giáng/),j=t.search(/(ĐƯỢC|Được|được)/),k=t.search(/(TỐN|Tốn|tốn)/);return {t:t.slice(0,160),inGain:i>=0&&j>=0&&i>j,underCost:i>=0&&k>=0&&k<i&&(j<0||j>i)}}));
-  ck(`${sz} «giáng» piece: gain under ĐƯỢC on both options, never under TỐN`,id==="kyngo:vat_lac"&&g.length===2&&g.every(x=>!x.underCost),g);
+  const g=await p.evaluate(()=>[...document.querySelectorAll('#modal .opt')].map(o=>{const t=o.innerText.replace(/\s+/g," ");const j=t.search(/ĐƯỢC/),k=t.search(/TỐN/);const i=t.search(/giáng|món đồ/);return {t:t.slice(0,220),inGain:j>=0&&!/chẳng được gì/.test(t),underCost:/giáng|món đồ/.test(t.slice(k,j>k?j:undefined))}}));
+  ck(`${sz} «giáng» piece: both options have a ĐƯỢC row (no «chẳng được gì»), no piece words under TỐN`,id==="kyngo:vat_lac"&&g.length===2&&g.every(x=>!x.underCost&&x.inGain),{id,g});
   ck(`${sz} page errors`,errs.length===0,errs);await ctx.close()}
  console.log(fail?`FAIL ${fail}`:'PASS');await b.close();process.exit(fail?1:0)})();

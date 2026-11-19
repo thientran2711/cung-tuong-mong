@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"18cbcadf+","t":"2026-11-19T11:40Z","c":"kyngo: result card lists gains/costs; final tuning p0 85/step 15/pity 2","b":"14d67023e39d","h":[{"s":"a5e2d8e7+","t":"2026-11-19T09:30Z","c":"opt-scroll-reset r2: an option card picture load (fixed .kaart box) no longer re-picks the frame (first wheel lost); merged origin/main 620…"},{"s":"3b3f7631+","t":"2026-11-19T10:24Z","c":"ev-pic-followups r2: scan SHOT/DSF/TAG env for review shots"},{"s":"5d9cdd5d+","t":"2026-11-19T10:03Z","c":"rebuild"},{"s":"f01df861","t":"2026-11-19T09:09Z","c":"review coop-thin-f3 r1: merge F2 LAND READY 7627f79c; generated files rebuilt"},{"s":"4ed2831d+","t":"2026-11-19T07:18Z","c":"law3-cost-only: index.html / sw.js regenerated"},{"s":"0da546e9","t":"2026-11-19T07:16Z","c":"role-parity-drift r1: build line"},{"s":"eff20119+","t":"2026-11-19T06:33Z","c":"ev-pic-coverage: picture required in M/L/XL frames only, S frames reported apart (owner OD 19/11 ~04:55Z)"},{"s":"a64f06c7+","t":"2026-11-19T06:29Z","c":"seal-lean-2 r2: rebuild site"},{"s":"38af6387","t":"2026-11-19T06:23Z","c":"minister-agents review r1: one core (gift regard + backs in BAL.tdCourt, j55 reads tuyen.pow / imp.deep / clanRel), censor name unique in e…"},{"s":"18a9b64c+","t":"2026-11-19T05:22Z","c":"monthly-allotment r6 (reviewer): stat names from the one NAMES table (drop private STAT_NM); candle note puts the burnt candle in the card'…"}]};
+window.CTM_BI={"s":"7540a03b+","t":"2026-11-19T11:48Z","c":"kyngo r2: 9 review fixes (E18r FAIL 8cb39e38)","b":"2c27fe891bdb","h":[{"s":"a5e2d8e7+","t":"2026-11-19T09:30Z","c":"opt-scroll-reset r2: an option card picture load (fixed .kaart box) no longer re-picks the frame (first wheel lost); merged origin/main 620…"},{"s":"3b3f7631+","t":"2026-11-19T10:24Z","c":"ev-pic-followups r2: scan SHOT/DSF/TAG env for review shots"},{"s":"5d9cdd5d+","t":"2026-11-19T10:03Z","c":"rebuild"},{"s":"f01df861","t":"2026-11-19T09:09Z","c":"review coop-thin-f3 r1: merge F2 LAND READY 7627f79c; generated files rebuilt"},{"s":"4ed2831d+","t":"2026-11-19T07:18Z","c":"law3-cost-only: index.html / sw.js regenerated"},{"s":"0da546e9","t":"2026-11-19T07:16Z","c":"role-parity-drift r1: build line"},{"s":"eff20119+","t":"2026-11-19T06:33Z","c":"ev-pic-coverage: picture required in M/L/XL frames only, S frames reported apart (owner OD 19/11 ~04:55Z)"},{"s":"a64f06c7+","t":"2026-11-19T06:29Z","c":"seal-lean-2 r2: rebuild site"},{"s":"38af6387","t":"2026-11-19T06:23Z","c":"minister-agents review r1: one core (gift regard + backs in BAL.tdCourt, j55 reads tuyen.pow / imp.deep / clanRel), censor name unique in e…"},{"s":"18a9b64c+","t":"2026-11-19T05:22Z","c":"monthly-allotment r6 (reviewer): stat names from the one NAMES table (drop private STAT_NM); candle note puts the burnt candle in the card'…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -77754,7 +77754,7 @@ figxLoad();setInterval(figxLoad,300000);
    E[id] = {w weight, b allowed bands, o:[{g gains, c costs, s special, od base odds of the option's roll}] | plain:{g,s}}.
    Measured / tuned by dev/measure/kyngo-bot.js (OD 19/11 ~03:25Z: the roll is set FROM the measured eligibility, no double gate). */
 Object.assign(BAL,{kyngo:{on:1,
- p0:85,step:15,pMax:95,pity:2,festP:4,wxP:2,cd:[1,1,1,2],V:[1,1,1.4,1.8],hard:[0,0,8,16],
+ p0:85,step:15,pMax:95,pity:2,festP:4,wxP:2,cd:[1,1,1,1],V:[1,1,1.4,1.8],hard:[0,0,8,16],
  eqTol:1.25,zeroMax:5,parTol:.35,
  pw:{vuon:1.4,lc:1,tn:1,kn:.8,thu:.8,dtd:.8,tyv:1,nvp:1,ksp:.8},fest:1.8,wx:1.4,world:1.5,
  seenOd:62,seenDanh:4,  /* «seen with a man / at the cold palace» roll inside an option: odds she is NOT seen; Danh lost when seen */
@@ -77769,7 +77769,7 @@ Object.assign(BAL,{kyngo:{on:1,
  E:{
   ma_phe:{w:1,b:"0123",o:[{g:{art:52},c:{kh:2,seen:1},a:"y",od:1},{g:{rel:30},c:{kh:2,seen:1},s:"intel",od:1}]},
   ma_giao:{w:1,b:"012",o:[{g:{},c:{suc:4,kh:1},s:"loi"},{g:{rel:16,art:28},c:{bac:30},a:"theu"}]},
-  ma_nhac:{w:1,b:"12",o:[{g:{art:44},c:{kh:2,seen:1},a:"cam",od:1},{g:{art:24,sung:4},c:{bac:30,kh:1},a:"cam"}]},
+  ma_nhac:{w:1,b:"123",o:[{g:{art:44},c:{kh:2,seen:1},a:"cam",od:1},{g:{art:24,sung:4},c:{bac:30,kh:1},a:"cam"}]},
   ma_hoa:{w:1,b:"123",o:[{g:{sung:8,rel:10},c:{bac:30,kh:1}},{g:{art:44},c:{kh:2,seen:1},a:"hoa",od:1}]},
   ma_ty:{w:1,b:"0123",o:[{g:{},c:{bac:20},s:"cure"},{g:{art:30,rel:16},c:{suc:8,kh:1},a:"y"}]},
   ma_co:{w:1,b:"23",o:[{g:{art:30,rel:20},c:{kh:2,suc:6},a:"ky"},{g:{rel:44,art:8},c:{danh:3,kh:1},a:"ky"}]},
@@ -77779,14 +77779,14 @@ Object.assign(BAL,{kyngo:{on:1,
   vat_cu:{w:.8,b:"23",o:[{g:{},c:{},s:"item",buy:1},{g:{th:30,duc:4},c:{kh:1},s:"give"}]},
   vat_thu:{w:.8,b:"0123",plain:{g:{rel:30,danh:2}}},
   vat_chung:{w:.9,b:"23",o:[{g:{tamco:4},c:{kh:1,oan:12},s:"ev"},{g:{rel:40},c:{kh:1}}]},
-  vat_ngu:{w:.7,b:"12",o:[{g:{},c:{},s:"item",buy:1},{g:{th:30},c:{},buy:1}]},
+  vat_ngu:{w:.7,b:"123",o:[{g:{},c:{},s:"item",buy:1},{g:{th:30},c:{},buy:1}]},
   de_mua:{w:1.2,b:"123",o:[{g:{sung:12},c:{suc:6,oan:8}},{g:{danh:5,th:12,sung:2},c:{kh:1,suc:2}}]},
   de_but:{w:1,b:"23",o:[{g:{art:34,sung:3},c:{kh:2},a:"thi"},{g:{sung:12},c:{kh:2,suc:4}}]},
   de_den:{w:1.2,b:"123",o:[{g:{danh:11},c:{bac:20,kh:1}},{g:{sung:12},c:{oan:10,kh:1}}]},
   de_su:{w:.8,b:"23",o:[{g:{danh:6,th:14},c:{kh:2}},{g:{art:20,danh:6},c:{kh:2,seen:1},a:"thi",od:1,seenW:"thi"}]},
   th_kinh:{w:1,b:"0123",o:[{g:{th:40},c:{suc:8,kh:2}},{g:{duc:6,rel:20,th:6},c:{kh:2}}]},
   th_tham:{w:.8,b:"123",plain:{g:{},s:"kn"}},
-  th_chi:{w:.8,b:"012",plain:{g:{art:24,rel:16},a:"y"}},
+  th_chi:{w:.8,b:"0123",plain:{g:{art:24,rel:16},a:"y"}},
   th_sao:{w:1,b:"123",o:[{g:{rel:56},c:{oan:10,kh:1}},{g:{art:26,danh:4},c:{kh:2},a:"thi"}]},
   sv_den:{w:1,b:"0123",o:[{g:{},c:{kh:1,oan:8},s:"spy"},{g:{rel:30,danh:3},c:{kh:2}}]},
   sv_tuyet:{w:.9,b:"0123",plain:{g:{rel:20,sucR:1}}},
@@ -77957,7 +77957,8 @@ function relTo(F,W,n){if(!W||!n)return;const r=W.ref;try{if(W.kind==="th"){ap(F,
  if(r&&(r===S||rivals.includes(r))){relAdd(F,r,n);return}
  if(r&&typeof r.af==="number"){if(F===S)r.af=cl(r.af+n,-100,100);return}
  if(r){r.af=r.af&&typeof r.af==="object"?r.af:{};const kk=F===S?"me":(F.id!=null?F.id:"x");r.af[kk]=cl((r.af[kk]||0)+n,-100,100);if(F===S&&W.kind==="sv")r.loyal=cl((r.loyal==null?KB().relLoyal:r.loyal)+Math.round(n/KB().relLoyK),0,100)}}catch(e){kerr("rel",e)}}
-/* F4: the kit reads a span class before any word (kaModelStr), so an item name holding a bad-sounding word («giáng») never flips a gain */
+/* F4: gains in kit class g, costs in class r (the kit uses the class when the words are neutral, j63 kaSent); the option line names no piece
+   («món đồ / di vật / món quý», the piece is named in the card text + kitItemTag): kaSent reads MEANING first, so a name holding «giáng» flipped a gain to TỐN (KIT REQUEST) */
 const gW=t=>`<span class="g">${t}</span>`,rW=t=>`<span class="r">${t}</span>`;
 function costText(C){const L=[];if(C.kh)L.push(`${C.kh} khắc`);if(C.suc)L.push(rW(`Sức -${C.suc}`));if(C.bac)L.push(rW(`Bạc -${C.bac}`));if(C.danh)L.push(rW(`Danh -${C.danh}`));return L.join(", ")}
 /* run one option for finder F (her or an NPC): costs, gains, the special, the risk roll; returns the result words */
@@ -78011,9 +78012,9 @@ function optX(c,i){const O=c.E.o[i],C=sc(O.c||{},c.b),L=[];if(O.buy||O.s==="item
  if(W.length)L.push("thành: "+W.join(", "));return L.join(" · ")}
 /* the gain words of a special (an option whose gain is a piece / a fact, never "không") */
 function specW(c,O,i){const s=O.s||(O.buy?"item":"");if(!s)return"";try{
- if(s==="item"||s==="ret"||s==="give"){if(c.X.lc)return i===0?`${loNm(c.X.lc.k)} về lại tay chủ`:`${loNm(c.X.lc.k)} vào rương ngươi`;
-  if(c.X.box)return i===1?`${itm(c.X.box.e.k).n} dâng lên Đức Thọ cung`:`${itm(c.X.box.e.k).n} vào rương ngươi`;
-  if(c.X.rr)return i===1?`${itm(c.X.rr.k).n} dâng lên Đức Thọ cung`:`${itm(c.X.rr.k).n} vào rương ngươi`}
+ if(s==="item"||s==="ret"||s==="give"){if(c.X.lc)return i===0?"món đồ về lại tay chủ":"món đồ vào rương ngươi";
+  if(c.X.box)return i===1?"di vật dâng lên Đức Thọ cung":"di vật vào rương ngươi";
+  if(c.X.rr)return i===1?"món quý dâng lên Đức Thọ cung":"món quý vào rương ngươi"}
  return {loi:"học được một lối mới",kn:"biết trước một mưu nhắm vào ngươi",intel:"biết thêm một chuyện kín",ev:"thêm một chứng cứ",spy:"thêm một tai mắt",cure:"dứt bệnh cũ",rk:"lên một bậc"}[s]||""}catch(e){return""}}
 function ctx(c){c.wn=wName(c.W);return c}
 function fireMe(c){ctx(c);const D=c.D;KY.cur=c;const title="Kỳ ngộ";
@@ -79601,7 +79602,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="14d67023e39d";window.CTM_BUILD=BUILD;
+const BUILD="2c27fe891bdb";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

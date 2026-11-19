@@ -162,7 +162,8 @@ function relTo(F,W,n){if(!W||!n)return;const r=W.ref;try{if(W.kind==="th"){ap(F,
  if(r&&(r===S||rivals.includes(r))){relAdd(F,r,n);return}
  if(r&&typeof r.af==="number"){if(F===S)r.af=cl(r.af+n,-100,100);return}
  if(r){r.af=r.af&&typeof r.af==="object"?r.af:{};const kk=F===S?"me":(F.id!=null?F.id:"x");r.af[kk]=cl((r.af[kk]||0)+n,-100,100);if(F===S&&W.kind==="sv")r.loyal=cl((r.loyal==null?KB().relLoyal:r.loyal)+Math.round(n/KB().relLoyK),0,100)}}catch(e){kerr("rel",e)}}
-/* F4: the kit reads a span class before any word (kaModelStr), so an item name holding a bad-sounding word («giáng») never flips a gain */
+/* F4: gains in kit class g, costs in class r (the kit uses the class when the words are neutral, j63 kaSent); the option line names no piece
+   («món đồ / di vật / món quý», the piece is named in the card text + kitItemTag): kaSent reads MEANING first, so a name holding «giáng» flipped a gain to TỐN (KIT REQUEST) */
 const gW=t=>`<span class="g">${t}</span>`,rW=t=>`<span class="r">${t}</span>`;
 function costText(C){const L=[];if(C.kh)L.push(`${C.kh} khắc`);if(C.suc)L.push(rW(`Sức -${C.suc}`));if(C.bac)L.push(rW(`Bạc -${C.bac}`));if(C.danh)L.push(rW(`Danh -${C.danh}`));return L.join(", ")}
 /* run one option for finder F (her or an NPC): costs, gains, the special, the risk roll; returns the result words */
@@ -216,9 +217,9 @@ function optX(c,i){const O=c.E.o[i],C=sc(O.c||{},c.b),L=[];if(O.buy||O.s==="item
  if(W.length)L.push("thành: "+W.join(", "));return L.join(" · ")}
 /* the gain words of a special (an option whose gain is a piece / a fact, never "không") */
 function specW(c,O,i){const s=O.s||(O.buy?"item":"");if(!s)return"";try{
- if(s==="item"||s==="ret"||s==="give"){if(c.X.lc)return i===0?`${loNm(c.X.lc.k)} về lại tay chủ`:`${loNm(c.X.lc.k)} vào rương ngươi`;
-  if(c.X.box)return i===1?`${itm(c.X.box.e.k).n} dâng lên Đức Thọ cung`:`${itm(c.X.box.e.k).n} vào rương ngươi`;
-  if(c.X.rr)return i===1?`${itm(c.X.rr.k).n} dâng lên Đức Thọ cung`:`${itm(c.X.rr.k).n} vào rương ngươi`}
+ if(s==="item"||s==="ret"||s==="give"){if(c.X.lc)return i===0?"món đồ về lại tay chủ":"món đồ vào rương ngươi";
+  if(c.X.box)return i===1?"di vật dâng lên Đức Thọ cung":"di vật vào rương ngươi";
+  if(c.X.rr)return i===1?"món quý dâng lên Đức Thọ cung":"món quý vào rương ngươi"}
  return {loi:"học được một lối mới",kn:"biết trước một mưu nhắm vào ngươi",intel:"biết thêm một chuyện kín",ev:"thêm một chứng cứ",spy:"thêm một tai mắt",cure:"dứt bệnh cũ",rk:"lên một bậc"}[s]||""}catch(e){return""}}
 function ctx(c){c.wn=wName(c.W);return c}
 function fireMe(c){ctx(c);const D=c.D;KY.cur=c;const title="Kỳ ngộ";
