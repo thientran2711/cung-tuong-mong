@@ -164,10 +164,13 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  await stage(`S.inv.push({k:'tranhco',tg3:'g1'},{k:'yensao',tg3:'g2'},{k:'tuithom',tg3:'g3'},{k:'yensao',tg3:'g4'})`);
  {const v=await pick(`const v=${npcT};return v&&v.id`);
   const iuG1=await H.p.evaluate(()=>__iu3('g2'));
+  /* receiver choice (jrcv rcvGiftIn, LIVE c02748c2): the consort answers the gift (take / send it back / have it checked); this row checks the
+     piece's road when she takes it: her answer is staged «take» on the host for the row only (her other answers keep the piece in ONE place too) */
+  await H.p.evaluate(()=>{if(typeof rcvPick==='function'&&!window.__rp3){window.__rp3=rcvPick;rcvPick=function(t,a,O,k){return k==='gift'?(O||[]).find(o=>o&&o.id==='take')||window.__rp3.apply(this,arguments):window.__rp3.apply(this,arguments)}}});
   await act('G1 Tặng quà (item card Tặng → gift dialog → giveTo a consort): the piece moves to her, once',
    `const m=Q[0];const i=m.opts.findIndex(o=>o.kgt&&o.kgt.id===${v});chooseM(i)`,{pre:`itemAct('gift',${ixOf('g2')})`,chk:x=>x.g1.inv.length===x.g0.inv.length-1&&x.g1.used===x.g0.used+2});
   const w=await H.p.evaluate(iu=>__where3('g2',iu,'yensao'),iuG1);ok(w.length===1&&w[0].startsWith('npc'+v+':'),'G1 law 6c: the gift is in ONE place: the consort\'s bag (host world)',{w,v});
-  const wg=await G.p.evaluate(([v,iu])=>{const t=rivals.find(x=>x&&x.id===v);return (t&&t.inv||[]).filter(e=>e&&(e.tg3==='g2'||(iu!=null&&e.iu===iu))).length},[v,iuG1]);ok(wg===1,'G1 her phone\'s world shows it in the consort\'s bag too',wg)}
+  const wg=await G.p.evaluate(([v,iu])=>{const t=rivals.find(x=>x&&x.id===v);return (t&&t.inv||[]).filter(e=>e&&(e.tg3==='g2'||(iu!=null&&e.iu===iu))).length},[v,iuG1]);ok(wg===1,'G1 her phone\'s world shows it in the consort\'s bag too',wg);await H.p.evaluate(()=>{if(window.__rp3){rcvPick=window.__rp3;delete window.__rp3}})}
  await act('G2 Dâng Hoàng thượng (giftto → giveTo emp)',`const m=Q[0];const i=m.opts.findIndex(o=>o.ik===${ixOf('g1')});chooseM(i)`,{pre:`pushDil(mkP('giftto',{t:'emp'}),'x')`,chk:x=>x.g1.inv.length===x.g0.inv.length-1});
  {const ck=await pick(`return S.court&&S.court.tq?'tq':S.court?Object.keys(S.court)[0]:null`);
   if(ck)await act('G3 Biếu Tổng quản (courtAct thuong → courtGive)',`courtAct('thuong',${JSON.stringify(ck)})`,{chk:x=>x.g0.bac-x.g1.bac===BV.court});

@@ -108,7 +108,7 @@ TH.onDo("f",(a,m)=>{a=a||{};const id=m&&m.id;if(loaded!==LSK()){DONE.clear();don
   else{/* F2 r2 (review r1 item 1, every registration, F1 too): her tap runs as solo (TH.tapRun: quiet off → her cards into her Q = part D
       cards on her phone; her toasts / floaters / coin and item effects captured, played on HER phone with the answer; nothing on the host's screen) */
    if(R.noRes)NORES++;let T;try{T=TH.tapRun(()=>PRE[a.n].apply(null,args))}finally{if(R.noRes)NORES--}/* F3: a registered UI function's own wrapR card shows on her phone (cardLater), never here */
-   const r=T.r,ui=T.ui;F.stat.run++;if(R.log&&r)log(r);out={st:"ok",r:typeof r==="string"?r.replace(/<[^>]+>/g,"").slice(0,200):null};
+   const r=T.r,ui=T.ui;if(a.n==="ptTickHer")F.stat.ptRun=(F.stat.ptRun|0)+1;else F.stat.run++;/* her due tasks landing (coop-ptime-reds) is not one of her acts: counted apart */if(R.log&&r)log(r);out={st:"ok",r:typeof r==="string"?r.replace(/<[^>]+>/g,"").slice(0,200):null};
    if(typeof r==="boolean")out.rv=r;if(ui&&ui.length)out.ui=ui.slice(0,4);
    if(R.back){const c={};for(const [n,g] of R.ctx||[])if(R.back.includes(n))try{const v=g();c[n]=v===undefined?null:J(v)}catch(e){}out.c=c}
    if(R.host)try{R.host(args,out)}catch(e){console.error("thin F host",e)}}}
