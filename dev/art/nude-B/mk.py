@@ -109,5 +109,8 @@ for age in ("a18","a26","a36","a51","a65"):
         _sw=re.findall(r" Image 2 is only a colour reference for the royal yellow[^.]*\.",o); assert len(_sw)==1; o=o.replace(_sw[0],SW36,1)
     if age in ("a36","a51","a65"): assert o.count(CR36)==1,"COLOUR RULE = a36"
     assert not re.search(r"DEEPER|DARKER|darken|elder shade|antique gold|antique-gold",o),"GATE: no elder DEEPER/DARKER colour words in Nữ đế"   # (lower-case 'a little deeper or a soft ivory' is inside the approved a36 COLOUR RULE itself)
+    # NDX4 r4 (ROOT-56, owner Lượt 702 item colour): the item word "hand warmer of gold" fights HELD ITEM COLOUR (came out gold in r3) -> only the colour word changes
+    if "a hand warmer of gold carved with dragons" in o: o=o.replace("a hand warmer of gold carved with dragons","a hand warmer of green jade carved with dragons")
+    assert "hand warmer of gold" not in o
     open(os.path.join(R,"prompts",f"{p}_{age}.txt"),"w",encoding="utf-8").write(o)
     print(p,age,len(o),"chars")
