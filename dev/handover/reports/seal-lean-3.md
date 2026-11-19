@@ -88,3 +88,9 @@ PRIORITY #1 CHECK: OD seal-lean-3 rows 19/11 (owner OK on giận videos) | main 
 - seal-say.js Fold + iPad: overlap frames 0/0/0, 0 errors. fig-seal Fold + iPad: grow .24-.42 s, hold 3.4-3.6 s, shrink 1.5-1.7 s, big = head, dialog lean once per open, moodSwap 0 zero frames, 0 errors. (One Fold shrink reading 1.46 s vs the 1.5 s threshold = load noise, css 1.8 s; rerun passes.)
 - quickcheck PASS 248 s (open 1699 ms, old save ok, core gates PASS, render 255/301, tab 631/634, buổi 1292/1424).
 - Same watch item as r8 (dialog seal not marked live under heavy load, identical on the base), not a regression.
+
+## REVIEW r8c (C-AG #23 rv) PASS 2bda29a19db54a16705a0e0bfb1fc7e172a2bc88
+PRIORITY #1 CHECK: OD seal-lean-3 rows 19/11 | main = c02748c2 (receiver-choice) merged in | review/seal-lean-3 2bda29a1 | claims seal-lean-3 = NEXT in land queue.
+- 2bda29a1 = 69bd0766 + LIVE c02748c2 (only index.html/sw.js conflicted, resolved by build_site.sh rebuild; no conflict markers). Seal sources identical to r8/r8b; branch vs main = the seal work only (10 files).
+- seal-say Fold + iPad: overlap 0/0/0, 0 errors. fig-seal Fold + iPad: dialog lean once per open, moodSwap 0 zero frames, 0 errors, grow .23-.41, hold 3.4-3.6, shrink 1.5-1.7 s (Fold first run read 1.45 vs the 1.5 threshold = load noise, css 1.8 s; rerun passes).
+- quickcheck PASS 238 s (open 1760 ms, old save ok, core gates PASS, render 289/277, tab 610/556, buổi 1679/1696).
