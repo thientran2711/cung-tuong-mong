@@ -76,3 +76,15 @@ I wait for your message.
 - Redraw 1 try each, same prompt/ref/seed except eye words: s51 p8ylzjyehw→cut YMlKiMSWeC, s54 w4aB1Xp7EI→cut tCRyDEwmZJ (276 credits). Eyes natural, level; s51 also lost the extra side flower. FACE_CUTS/FACE_MAP/crops point to the new ones; old cuts noted.
 - Sheet dev/handover/review-sheets/new-faces-v4/kieuky_L786_s51_s54.jpg (OLD|NEW + s10 s11 s12) by make_sheet_kieuky_L786.py.
 - s52/s53/s55 still have the slant words — no redraw unless the owner says.
+
+## HANDOVER (F1 rollover: context 35 % ≥ START_CTX 4 % + 25 %, 19/11 ~23:42Z) — the foreman opens the successor
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+
+State at febc11e:
+- Lạnh lùng s46–s50: owner OK (faces). s46/s49/s50 colour CODES softened (L770, no redraw); P1 owns their root_season re-seat.
+- Kiêu kỳ s51–s55: drawn; owner OK on colours (L786). s51/s54 redrawn for eyes (v5b) → waiting owner look at kieuky_L786_s51_s54.jpg. s52/s53/s55 still carry "sharply UP-SWEPT" eye words — redraw only if the owner asks (then: VER[sid]="v5b", drop sid from KEEP_AS_DRAWN in make_kieuky_L761.py, run it, gate, 1 gen, same ref eIyOFEidqL seed 7172 gpt-2-6 1024x2304 2k, folder ba4aecfe-efce-47e2-b53f-30d292091886).
+- Quyến rũ s56–s61: prompts built with P1 SOFT roots, gate PASS (make_quyenru_L761.py, DO NOT touch per owner L787). Gens wait for the owner's OK on Kiêu kỳ (A23) + foreman GO; 6 gens, 1 try each, NO retries/fix gens without asking the foreman (L777). Then sheet like make_sheet_kieuky_L761.py (benchmarks s16 s33 s34?), cuts (images_remove_background, 3 cr), FACE_CUTS (indent=0) / FACE_MAP (indent=1) / LOOK_GROUPS / face_page/faces crops, ledger lines.
+- Gotchas: dev/art/gen_ledger.jsonl is sparse/skip-worktree in this clone — rebuild from `git show HEAD:` + append, then `git add --sparse`. Branch history was force-rewritten once (unrelated histories) — fetch --depth=30 and check before rebasing. Credits so far by F1: 135 (stopped s46) + 690 (KK) + 276 (L786) = 1101.
