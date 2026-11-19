@@ -167,3 +167,30 @@ START_CTX ≈ 5 % of 1M (get_session reads 0, estimate) → rollover at 30 %, ce
 PRIORITY #1 CHECK ('balance final'): OD 0 | ledger 0 | claims 0 (this job) | main 0 | review/balance-final 1e144dc = this branch.
 - 06:10Z: merged origin/main 2c5dd554 → 006dc60d (assemble list = main's + jbalcore/jledger/jnf; index/sw rebuilt). Static guards PASS.
 - Night flakes on the merged sha: case 8 ~1 in 60 runs (flip to A done, no choice, no resolve: jnf step waits for a card-flip scene, and bot mode has no step timer → held forever) → jnf: no scene wait in bot mode (__bot = headless tests/sims only). Case 1 1/8 (choice queued behind a dialog that goes first by design) → case 1 uses T.toChoice like cases 2–4. Re-running ×8.
+- 07:00Z: night fixes f7be0fbb: jnf no card-flip scene wait in bot mode (__bot only: no step timer there, so a scene still up held the choice forever; the player game keeps the waitMs×2 bound); night-final case 1 + case 8 answer a dialog that goes first (visitor «Có người tìm đến», seen in both misses) via T.toChoice like cases 2–4; case 8 also FAILS if his visit was among those dialogs. Repeat harness 140 clean cases.
+- 07:20Z: merged origin/main 5dc5d9e0 → 81f3193a (j8 = main's punishDemoP + branch's punishMonths; j78/jaudit typed cấm-túc months → punishMonths(), same [2,3,1], one core; jksize = main's figure fill + branch's kszLive3Ok guard).
+- 08:20Z: merged origin/main 950508fc (role-parity-drift r1, clean) → 40159369. 08:50Z: 655bbdfd role-parity test riseCore = what riseCore itself gives (srvRise's Danh carry-over BAL.danhG.srvRise is a separate rule applied first). **review/balance-final = 655bbdfd (pushed). NOT YET SẴN SÀNG KIỂM: role-parity (below).**
+
+### Gates (#4)
+| gate | 81f3193a | 40159369 / 655bbdfd |
+|---|---|---|
+| static guards (one-core ×4, time-spill) | PASS | PASS |
+| night-final | 8/8 (+10/10 on f7be0fbb) | 4/4 |
+| night-multi | 4/4 (+12/12 earlier) | 2/2 |
+| coop-e2e | 68/68 | 68/68 |
+| coop-night | 104/105 once (step 4 timing), then 105/105 ×2 | 105/105 |
+| balance-core / ledger / night-steal-unit / night-coop-park | PASS / ALL PASS / PASS / 6/6 | same |
+| quickcheck --runs 6 | PASS (render 211/206, tab 440/446, buổi 1042/1037, tasks 17/20) | PASS (178/173, 393/391, 992/1041, 17/18) |
+| Fold 755x1000@2 + iPad 1180x820@2 | 0 page errors, no h-overflow; origin picker / load card looked at (scratch only) | — |
+| **role-parity.test** | — | **2 FAIL beyond live** (live 950508fc itself: 1 FAIL, gap `up:P-ONLY:cx2:maidTalk`) |
+
+Role-parity, branch-only (seeded scan, identical on 2 runs each side): gap cells `hh:N-ONLY:cx3:invite2`, `maid:P-ONLY:maid:askRew`, `up:N-ONLY:harm:blockf`, `up:N-ONLY:harm:xinhh`; promo `up:PROMO-npc-onlyRisen:harm:taint` (the risen NPC maid can pay the taint, her born clone cannot: riseCore +20 Bạc on both sides of main; the clone's start Bạc differs on the branch). Live-only: `up:P-ONLY:cx2:maidTalk`. Hypothesis (not proven): these come from the branch's numbers (start Bạc, odds/thresholds in the sampled states), not from a missing rule.
+
+### HANDOVER (#4 worker rollover at ≈ START_CTX + 25 %; the coordinator opens the successor)
+State: review/balance-final = **655bbdfd** (LIVE 950508fc merged). Everything PASS except role-parity (above).
+Successor steps:
+1. role-parity: for each branch-only cell run `node dev/tools/role-parity-scan.js` (see the test head) on branch vs live and find why the act is missing on one side: compare the sampled actor's state (bac, sung, odds gate) for harm:taint (jagharm L96: v.bac ≥ tuithom price + T.c), harm:xinhh / harm:blockf (jagharm), cx3:invite2, maid:askRew. If it is a number threshold the branch moved: either fix the scan's sample so both sides get the same state (test-only, if the gate is the same function for both sides — laws 1/4), or list it in dev/tools/role-parity-open.json WITH the reason; if a rule is truly one-sided, fix the game (law 1). Then role-parity on branch vs live: no gap beyond live's.
+2. Final-merge current origin/main (index/sw: `git checkout --theirs` + assemble.py + build_site.sh; assemble list = main's + jbalcore/jledger/jnf after jgrey), re-run the gates table one at a time, shots.
+3. SẴN SÀNG KIỂM <sha> in FOREMAN_D_STATUS + here + send_message Foreman D, with the arms table (§ FINAL ARMS, unchanged: no numbers touched in #3/#4) and the OWNER FLAGS: QP −7 pooled (87 vs 80 %); ended before HH/cap 19 vs 25 %; kids/y 1.45× live; seat vacancy blocks promotions; NPC Sủng lower (m12 38 vs 46).
+Game-code changes in #4: jnf (bot mode: no scene wait), j78/jaudit (cấm-túc months read punishMonths(), same values). Laws: no number, choice, cost or trial changed.
+Worktrees (lost with this box): /home/user/wt/bf4 = 655bbdfd, /home/user/wt/live4 = 950508fc. Repeat harness: dev/handover/reports/balance-final-tools/nf_repeat_gen.py.
