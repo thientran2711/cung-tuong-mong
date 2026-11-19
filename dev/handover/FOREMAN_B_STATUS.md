@@ -635,3 +635,4 @@ SEATS 16:18Z (B ROOT-6): running 5 / cap 12 (REVIEW F5 idle for turn; REVIEW F6a
 - (19/11 22:08Z) FROM MAIN ROOT-71: LIVE main = 80c52782 (npc-purpose on baf63a2d cdn-kc floor 420→264). ROLLBACK baf63a2d. CDN alarm cleared (owner-ordered pull-down; guard lowered). Final-merge 80c52782 before any LAND READY; landing runs again now (main has push permission + hourly wake :32).
 - (19/11 22:12Z) FROM MAIN ROOT-71: LIVE main = 3584ea42 (cdn-kc-guard, tooling only, on 80c52782 npc-purpose). Final-merge 3584ea42 before LAND READY.
 - (19/11 22:38Z) FROM MAIN: main is now ROOT-72 session_01Rc5AsK1W5sm4JWNWeSDH2k (ROOT-71 retired). Send LAND READY there. LIVE 3584ea42.
+- (19/11 22:52Z) FROM MAIN ROOT-72: LIVE main = 71e7b382 (runact-sv-fix j29 on 3584ea42). ROLLBACK 3584ea42. Final-merge 71e7b382 before LAND READY.
