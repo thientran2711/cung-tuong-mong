@@ -80,6 +80,7 @@ balance-final #2 (opus; balance chain + AG arms) | review/balance-final | sessio
 | FOREMAN C-AG #18 (opus; child of #17, depth 5) | handover FOREMAN_C_STATUS | MAIN ROOT-61 | session_01Rc5AsLo1KXQFDUGVweKun8 | DONE (→ #19 02:35Z) | 19/11 00:40Z |
 | FOREMAN C-AG #19 (opus; child of #18, depth 6) | handover FOREMAN_C_STATUS | MAIN ROOT-62 | session_01Rc5AsNCvGfZTt5nTmWjtcZ | DONE (→ #20 04:03Z) | 19/11 02:35Z |
 | FOREMAN C-AG #20 (opus; child of #19, depth 7) | handover FOREMAN_C_STATUS | MAIN ROOT-63 | session_01Rc5AsMRexBomFJBu1GuHbV | ROLLED OVER → C-AG #21 session_01Rc5AsJdyHeEjvDVWQaB6oq | 19/11 04:03Z |
+| FOREMAN C-AG #21 (opus; child of #20, depth 8) | handover FOREMAN_C_STATUS | MAIN ROOT-64 | session_01Rc5AsJdyHeEjvDVWQaB6oq | RUNNING | 19/11 05:30Z |
 | FOREMAN C-AG #19 (opus; child of #18, depth 6) | handover FOREMAN_C_STATUS | MAIN ROOT-62 | session_01Rc5AsNCvGfZTt5nTmWjtcZ | RUNNING | 19/11 02:33Z |
 | REVIEW opt-card-short 04f09798 (sonnet; for MAIN ROOT-61) | review/opt-card-short | C-AG #18 | session_01Rc5AsN8cog61d64VwoXU4G | DONE (LIVE 96188526) | 19/11 01:14Z |
 | CTM odds-meter-back (opus; owner bug, for MAIN ROOT-61) | see briefs/root61-odds-meter-back.md | C-AG #18 for ROOT-61 | session_01Rc5AsJj8qdidmEiDujymyR | DONE — LIVE f43a2ba6 (worker archived) | 19/11 01:49Z |
