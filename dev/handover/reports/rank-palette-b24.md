@@ -38,3 +38,21 @@ Laws touched: 4, 7(no), 9, 11, 12.
 5. PASS — build_site.sh OK (media-check, img-allowlist, assemble); build line published.
 6. Open point B21 (Quý phi yellow touch): no kit slot → not built, acceptable.
 EXACT FIXES: (a) rank text drawn over painted/dark grounds (stage name tag, any rank text not on cream paper) must use the RCOL colour itself (light, soft) with the existing dark text-shadow/outline, not the paper-darkened tone; keep kitToneOf only for text on cream paper. Do it in the ONE accessor (kitNameRank / kitRankCol path), not per place. (b) After fix re-shoot stage tags t1..t8 on a dark room AND cream paper; each must read its named colour (Quý phi orange, Hoàng quý phi red, Hoàng hậu gold, Đáp ứng cream) with readable edges. (c) Commit rebuilt index.html/sw.js/assets.json or tell coordinator.
+
+## FIX r1 (worker) — branch review/rank-palette-b24 @ 2dd36ab
+PRIORITY #1 CHECK: OD 2 | main j1 RCOL / jk4 kitRankTone | review/* this branch | claims rank-palette-b24 | reused the existing --rt pipeline, no new table.
+1. ONE accessor `kitRankTone(title,col,ground)` (jk4): ground "paper" = derived tone (kitToneOf, cream paper only); "stage" = RCOL base itself. Default call (no ground) returns paper tone + `;--rb:<RCOL base>` for the 8 harem ranks, so every builder (`style="--rt:${kitRankTone(..)}"`) carries both without per-place edits. CSS: paper → `--rt`; stage tags / `.kesov` captions / `.krs` / `.modal.night` → `var(--rb)` + dark ink edge (`0 0 1px/2px #1c100a, 0 1px 2px #000c`); non-harem roles (servants, emperor...) have no `--rb` and keep their previous look.
+2. Rebuilt index.html / sw.js / assets.json committed.
+3. Call sites of rank text and ground (all go through kitRankTone → --rt/--rb):
+| call site | element | ground | colour used |
+|---|---|---|---|
+| j59.js:45 j59tagHTML `.j59t` | stage name tag | painting (stage) | --rb (RCOL) |
+| jk4 kitNameRank `.knr-r/.krt` (+ .krs row) | rank over name | paper OR painting (.krs) | paper --rt / painting --rb |
+| j79 kitName/kitRankNameH `.kname .kti` (lines 18-20,128,613,1263-1269) | inline title in prose, lists, logs | paper (cream) ; night panel → --rb | --rt / --rb |
+| j79 `.kesov>.kpsn .kname .kti` (event captions over art) | caption on picture | painting | --rb |
+| j15.js:13 `.pcrk` / `.pcname.krt` | person card | paper | --rt |
+| jk4 kbk-pname / kpod-plq / kpstrip | Tuần lục heading, podium, strip | paper / night | --rt / --rb |
+| jinv.js:401, jkc2.js:72 kitName wrappers | via kitName | as kitName | as kitName |
+| jkitpage §1.3 swatches / §48.1 rows | kit page | paper / painting / night | all three shown |
+4. Shots (Fold 755x1000 + iPad 1180x820, looked 3×): img/_review/rank-palette-b24/sheet-755x1000.jpg, sheet-1180x820.jpg on this handover branch (top = t1..t8 stage-style tags with real `.j59t/.j59n` CSS on a dark painted room, below = cream paper; sheet bottom/right = kit §48.1 rows incl. painting + night). Pixel check on the painting row: Đáp ứng #eae3d0, Quý phi #e3a25b, Hoàng quý phi #d56f5f, Hoàng hậu #efbd69, Phi #a88bcb, Quý nhân #7e9ccb. Honest limit: the stage tags are a real-CSS reproduction in the kit page (the full game start() hung in this sandbox: CDN host blocked), not a live room screenshot; reviewer should re-check the live stage in host mode.
+5. B21 not built (OK).
