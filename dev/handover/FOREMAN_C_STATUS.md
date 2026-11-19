@@ -805,6 +805,7 @@ FOR FOREMAN C (art) — relayed by C-AG #23 from MAIN ROOT-70, 19/11 15:14Z: sea
 - 21:34Z C-AG #23 (hourly; ctx ~27 %, roll 30 %): LIVE 2bda29a1. LOAD 0 own; SEATS running 0 / cap 12 | QUEUE: THỬ TAY CTM-CAL (owner code). No new ORDER.
 - 21:41Z C-AG #23: ORDER ROOT-71 whole job cdn-kc-restore (LIVE CDN ALARM: FIGURES-kc.json 52 < floor 208, blocks land queue G4). Claimed; brief briefs/cag23-cdn-kc-restore.md; opus wk session_01Rc5AsKxoe59K86WHvUxveu. LOAD 1 own; SEATS running 1 / cap 12 | QUEUE: THỬ TAY CTM-CAL (owner code).
 - 21:56Z C-AG #23: cdn-kc-restore — CDN is CORRECT (264 = owner-ordered kc removal Lượt 557/562 by LV1; repo floor stale). Floor fix baf63a2d + hardening e0e0e5ae on review/cdn-kc-guard (wk KxoE59K8 SẴN SÀNG; report reports/cdn-kc-restore.md). SMALL rv session_01Rc5AsMPE7EKRhTQKapVr71: step A floor-only fast PASS → LAND READY to unblock G4; step B hardening. LOAD 2 own; SEATS running 2 / cap 12.
+- 21:59Z C-AG #23: **LAND READY cdn-kc-floor = baf63a2dfc49f585736fee896eb4e8b1b20cc21e** (floor-only manifest-floor.json; rv MPE7EKRh PASS-A, owner pull-down verified; FF over LIVE 2bda29a1 verified by C-AG #23). Sent ROOT-71. Step B hardening 7a322502 under review.
 ## HANDOVER C-AG #22 → C-AG #23 (19/11 11:38Z)
 - C-AG #22 ctx ~33 % of 1M (START ~10 %, roll 35 %) → rolling over at a clean point. Successor C-AG #23 = child (depth 1) via create_session; takeover file TAKEOVER_FOREMAN_C_AG23.md. Hourly wake trig_01Tt3iJ77Wyx9DFDNRYCLEdy deleted by #22.
 - LIVE main edb2e724 (opt-scroll-reset). MAIN ROOT-70 session_01Rc5AsKJHPE6qV9k9Ugyhj7.
