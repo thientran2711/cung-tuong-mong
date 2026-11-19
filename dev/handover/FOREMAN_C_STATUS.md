@@ -1459,4 +1459,4 @@ ROOT-51 Lượt 603: owner OK m01–m52 table (6a5523a) + phi bạch transparent
 ROOT-51 19/11 ~19:37Z: ROLLING OVER (context ~40 %, past the 29 % line) → TAKEOVER_FOREMAN_C_ROOT52.md; opening child ROOT-52. Owner Lượt 603 unanswered in full → ROOT-52 answers as Lượt 604 (ROOT-51 gave a short answer).
 ROOT-51: ROOT-52 opened session_01PEhRbwJ53CiD7ZimiAMPdm. ROOT-51 stops.
 
-ROOT-52 19/11 ~19:40Z: depth 4, START_CTX ~3 %. Took over; workers BW4 IT1 NF1 NDX3 MMX4 PR8 told new foreman.
+ROOT-52 19/11 ~19:40Z: depth 4, START_CTX ~3 %. Took over; workers BW4 IT1 NF1 NDX3 MMX4 PR8 told new foreman.ROOT-52 ~19:45Z: ROOT-51 also used Lượt 605 (L17 one common room prompt + room rank colours = triều phục B). ROOT-52 takeover msg also numbered 605 (collision). Next free = Lượt 606. Acks: NF1 idle, NDX3 HOLD, MMX4 HOLD (note: identity sentence hairstyle fixed by BW4 b4b796a). BW4 Lượt 603 wiring still pending.
