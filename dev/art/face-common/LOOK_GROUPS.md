@@ -41,3 +41,13 @@ Chưa có người. Câu mặt: TYPES_v4.md / make_nf3.py TYPES_C["Quyến rũ"]
 
 ## Chia lại nhóm (owner Lượt 673–680)
 Chủ tự chia lại m01–m52 + c01–c32 trên trang tick https://claude.ai/artifact/MYJSqYG4dyLpfo4VA9KnK3 (db picks/<id>.group). Kết quả trang đó THAY cho chia theo (n-1)%6.
+
+## KẾT QUẢ CHỦ CHIA LẠI (owner Lượt 686, trang tick MYJSqYG4dyLpfo4VA9KnK3; người không bấm = giữ nhóm đang gán; Trong trẻo đã gộp vào Tươi tắn) — THAY mọi danh sách trên
+File máy đọc: dev/art/face-common/OWNER_GROUPS_L686.json
+- Tươi tắn (30): m01 m03 m05 m06 m07 m11 m13 m15 m17 m21 m27 m31 m33 m35 m37 m38 m39 m41 m45 m47 m49 m51 c01 c07 c13 c15 c19 c21 c27 c31
+- Dịu dàng (17): m02 m08 m14 m18 m19 m20 m23 m26 m32 m44 m50 c02 c08 c14 c20 c26 c32
+- Đoan trang (17): m04 m10 m16 m22 m28 m29 m34 m36 m40 m43 m46 m52 c04 c10 c16 c22 c28
+- Sắc sảo (6): m09 c05 c11 c17 c23 c29  ← chủ: quá ít, mặt chưa đủ sắc; cần câu tả mạnh hơn
+- Tinh nghịch (14): m12 m24 m25 m30 m42 m48 c03 c06 c09 c12 c18 c24 c25 c30
+- Kiêu kỳ / Lạnh lùng / Quyến rũ: 0 người
+- c27: bị lé → làm NGƯỜI MỚI hoàn toàn (mặt mới). c06 c14 c19 c31: hở răng → vẽ lại môi khép.
