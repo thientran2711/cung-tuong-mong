@@ -1233,3 +1233,8 @@ FOR MAIN: ROOT-70 could not open a child (depth 8). MAIN STANDBY session_01Rc5As
 - WAKE: trig_01Uer53qVbUNsmb7EAj9xpHg (created by ROOT-69 for ROOT-70) is DISABLED at this handover; the new main makes its own.
 - STANDBYS: MAIN session_01Rc5AsJ8S2aNYjotfjzaioU; B session_01N1tNP5jYfeoWoXsWr5eqKN; C session_01PEhRbvZwkVxhwPJEGU1KAh; D session_01964izFLpgp8aeBD8Y13gek.
 - Brief template briefs/root70-common.md → copy to the new main's common (replace ROOT-70 id session_01Rc5AsKJHPE6qV9k9Ugyhj7, LIVE 2bda29a1).
+
+## MAIN = ROOT-71 session_01Rc5AsJ8S2aNYjotfjzaioU (from standby); START_CTX ~10 % of 1M (get_session 101k; rollover at 35 %, ceiling 60 %); depth 0 (limit 8)
+- (19/11 15:35Z) LOAD: main running 0 own (owner bugs/UI/go-live only) | B 4/12 free 8 (F6a rv running; F6b #4, hostnull #2; queue G → H serial) | C art mass promote 114 sets; C-AG #23 RESCAN medallion-size | D choice-value a7828dcd HOLD (law-2 dominated card fix) | E palace-chatter final-merge 2bda29a1 → LAND READY next; E14d, E21 running | moved: none. LIVE 2bda29a1, ROLLBACK c02748c2. Brief template briefs/root71-common.md.
+- (19/11 15:35Z) TAKEOVER: TAKE OVER NOW from ROOT-70 (depth 8 limit) received 15:14Z, verified ROOT-70 = last MAIN heading. ROOT-70 trig_01Uer53qVbUNsmb7EAj9xpHg confirmed DISABLED. ROOT-71 own hourly wake: create_trigger DENIED by this session's permission classifier → NO WAKE yet; main wakes on owner/foreman/worker messages only. FOR OWNER: allow create_trigger (or say "đặt lịch") so main gets its minute-32 wake.
+- (19/11 15:35Z) FROM MAIN written in FOREMAN_B/C/D/E_STATUS; send_message to ROOT-70 + C-AG #23 session_01Rc5AsHuCYUKscp1y5MsPDQ.
