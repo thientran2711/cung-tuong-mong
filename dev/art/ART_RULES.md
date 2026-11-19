@@ -108,7 +108,8 @@ G11 | No round chest badge/second "fan" stuck on the chest. | Lượt 306 | FG 8
 G12 | HQP/HH: all hair up, prompt-B brocade fabric, sleeves per G5; HQP t7 = more jewels/pearls/jade/gold than t6, still below HH; two HH colour sets: yellow set (t8) + original-colour set (t8o: her own main colour dominant, royal-yellow touches). | Lượt 486 (19/11) | FG 26, 870, 909, 636, 804 | over: Lượt 331, 364, 253, 301
 G13 | Colours across a person's ranks: her own MAIN + SECONDARY pair (rule B15) — see conflicts for "each rank its own colour". | Lượt 293, 306 | FG 786, 818
 G14 | t7 HQP and t8 HH MUST show the SECONDARY colour too (two-colour sentence B15 present in t7/t8 prompts; Lượt 512/519 secondary disappeared). | Lượt 529 (owner via ROOT-49 chat Lượt 521) (19/11) | FG -
-G15 | QUÝ NHÂN t3 REDESIGN: Quý nhân and Thường tại look too alike → 4 DIFFERENT Quý nhân outfit options side by side (A3), owner picks and rewrites the Quý nhân prompt. | Lượt 529 (owner via ROOT-49 chat Lượt 521) (19/11) | FG -
+G15 | QUÝ NHÂN t3 DESIGN = option B v2 (owner Lượt 559): SQUARE NECKLINE framed by a wide stiff embroidered band in the secondary colour + wide stiff brocade girdle + embroidered ceremonial APRON PANEL down the centre front to the ankles + a long jade-plaque/pearl pendant set on each side; wording = dev/handover/reports/quy-nhan/m13_a26_t3_v2_optB.prompt.txt Outfit sentence (colour words per person). Rejected: A (curved lapel, 'hiện đại'), C (lotus-petal overskirt, front too short), D (round neck). | Lượt 559 (19/11) | FG - | over: Lượt 529 (owner via ROOT-49 chat Lượt 521) (19/11)
+G16 | NO ROUND NECKLINE on any outfit ('cứ cổ tròn là bỏ hết', owner Lượt 559). | Lượt 559 (19/11) | FG -
 
 ## H. Triều phục (court robes)
 H1 | t7 HQP and t8 HH triều phục = approved r18, unchanged; t6 Quý phi yellow as in r20 approved (do not reduce). | Lượt 459, 467, 470 | FG 22-23
@@ -154,6 +155,7 @@ K13 | TRUNG Y: 8 tiers in pale rank colours (Đáp ứng ivory … HH pale yello
 K14 | Everyone in the palace is richly dressed (maids in embroidered silk with hairpins); nobody looks poor. | 11/14 | FG 153
 K15 | HAIR FLOWERS only for consorts (phi tần): cung nữ, ma ma, nữ quan wear NO hair flowers (Lượt 520). NOTE (MMX3, ROOT-50 ruling A): removing the flower words is not enough (gen copies the face ref's flower), so ma ma `build.py --noflower` also adds "NO flowers in the hair (no fresh or silk flowers), only her hairpins."; gate check_store X14 (scope mama) bans hair-flower wording. | Lượt 520 (19/11) | FG -
 K16 | NỮ ĐẾ 19/11 MASS REJECTED (owner Lượt 535): ALL Nữ đế pictures made 19/11 (NDX1/NDX2 c01–c13, build_all nude one-ref recipe, ref = img/hd/fig-consort-cNN-t1-aNN.webp) are DISCARDED — never into the store/kho, never as skins. Reason (owner): wrong reference (old picture, not her M09-style redraw of all people) AND prompt differs from the Nữ đế prompt she approved 18/11 (build.py --state nude --nudeopt A|B|C|D, owner ~23:33Z 18/11 + crowns 00:13Z 19/11). No Nữ đế gen until the correct reference + approved prompt are confirmed with her. | Lượt 535 (19/11) | FG -
+K17 | CONSORTS c01–c32 RENEWED (owner Lượt 562): all old c01–c32 pictures go to the ARCHIVE (never a reference again); draw 32 BRAND-NEW thiếu nữ faces with the set-B recipe (COMMON_v3 + own line, M09 eIyOFEidqL, NEW_CHARACTER_TEMPLATE), spread over the 6 looks (Tươi tắn, Dịu dàng, Trong trẻo, Đoan trang, Sắc sảo, Tinh nghịch), each clearly different from m01–m52 and from each other; sample first (A1), then mass; only after that every rank is drawn from her new thiếu nữ picture. | Lượt 562 (19/11) | FG -
 
 ## L. Places / rooms
 L1 | Rooms follow the occupant's rank (bed + room); accent colour = rank colour; luxury rises with rank, never reaching Khôn Ninh; low ranks pretty/carved, never poor; each consort quarters = reception room + bedroom. | Lượt 446, 437, 442 | FG 24
@@ -168,6 +170,7 @@ L9 | Dư đồ / palace map / courtyards come from Phượng Lệnh (grade nhấ
 L10 | New scenes start as edits of approved game scenes (no glossy floors, no AI look); every full backdrop exists in portrait AND landscape; 4 seasons × buổi. | OD:L86, L50, L137 | FG 325, 316, 328
 L11 | EVERY rank step has a DIFFERENT room layout, even inside the same palace (Tần ≠ Phi ≠ Quý phi bedrooms and receptions), so each is fresh, never a copy. | Lượt 491 (19/11) | FG -
 L12 | FLOOR SHARE (Lượt 520): all room layouts are OK — keep them; but EVERY room shows TOO MUCH empty floor at the bottom: shrink the visible empty floor in every room (even the Phi bedroom v3 — 'ít hơn nữa, nhỏ hơn nữa'); Tần bedroom + receptions most. Rooms with HQP (t7) bedroom + reception added to compare with Hoàng hậu. | Lượt 520 (19/11) | FG -
+L13 | ROOM PICTURES are ALWAYS shown to the owner WITH the people placed in them (people sheet), never a bare room (owner Lượt 563: 'phải đặt người lên tao mới biết được'). | Lượt 563 (19/11) | FG -
 
 ## M. Skins
 M1 | Every picture the owner PRAISED but then asked to redraw is KEPT as a SKIN (never deleted/overwritten), logged in dev/art/SKINS.md (person, rank/age, cut id, path, why). | Lượt 413 | FG 18

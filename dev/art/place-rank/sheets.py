@@ -71,3 +71,10 @@ def main_v3(figdir, outdir):
 
 if __name__ == '__main__':
     main(sys.argv[1], sys.argv[2])
+
+def main_hqp(figdir, outdir):
+    """HQP (t7) sample pair (owner Lượt 520) next to the Hoàng hậu (Khôn Ninh) pair for comparison."""
+    os.makedirs(outdir, exist_ok=True); figs = load_figs(figdir)
+    grid4([[('truong-xuan-cung-hqp-ngu', 'Hoàng quý phi (Trường Xuân cung) · phòng ngủ'), ('truong-xuan-cung-hqp', 'Hoàng quý phi (Trường Xuân cung) · tiếp khách')],
+           [('khon-ninh-cung-ngu', 'Hoàng hậu (Khôn Ninh) · phòng ngủ'), ('khon-ninh-cung', 'Hoàng hậu (Khôn Ninh) · tiếp khách')]],
+          os.path.join(outdir, 'place-rank-C-hqp-vs-hh.jpg'), figs)

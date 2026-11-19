@@ -225,7 +225,7 @@ HQP = {
  'truong-xuan-cung-hqp': dict(room="Trường Xuân cung chính điện reception room, the hall where the Imperial Noble Consort (Hoàng quý phi), the highest consort below the Empress, "
     "in ancient China receives her guests, a real room in daily use, no bed anywhere, seen straight on with the back wall straight across the picture and the right "
     "side wall running towards the viewer in clear perspective, meeting at a square corner; dark zitan pillars and beams with gold lacquer, a horizontal gilt "
-    "plaque with carved characters high on the back wall; a carved openwork floor-to-ceiling arch frame (a luozhao) spans the room from wall to wall, square to the "
+    "plaque carved with magnolias (no writing, no characters) high on the back wall; a carved openwork floor-to-ceiling arch frame (a luozhao) spans the room from wall to wall, square to the "
     "back wall, framing an inner raised area; inside it, on a low one-step platform against the back wall, exactly centred and seen straight on, the host seat: a "
     "wide square-backed zitan luohan daybed with gold lacquer and mother-of-pearl inlay, golden apricot brocade cushions embroidered with magnolias, a small low "
     "kang table with a gold-trimmed tea set in its middle, behind it a large folding screen with kingfisher-blue feather inlay and white magnolias with a pair of "
@@ -252,3 +252,15 @@ assert FLOOR6B != FLOOR6
 outb = {'canh-phuc-cung-phi-ngu': out6['canh-phuc-cung-phi-ngu'].replace(FLOOR6, FLOOR6B)}
 assert outb['canh-phuc-cung-phi-ngu'] != out6['canh-phuc-cung-phi-ngu']
 json.dump(outb, open(os.path.join(D, 'prompts_v6b.json'), 'w'), ensure_ascii=False, indent=1)
+
+# ---- v6c (owner Lượt 554 via ROOT-50, A20): Khôn Ninh reception v6 rgXnGrDxtc: "mấy cái ghế nó muốn đặt đi đâu mà đặt cái bàn nó nằm ngay giữa như vậy"
+# -> ONLY her point: no low table / stools in the middle of the floor; tea tables only beside the seats; centre floor open for the 4 people. Rest = v6 word for word.
+KN_MID = ("the open floor in the middle ground in front of the dais is furnished: small embroidered rugs, low carved tables with fruit and tea, "
+          "a tall gilt incense stand, potted peonies;")
+KN_MID6C = ("NO table and NO stools in the middle of the floor (owner Lượt 554): the floor in the middle in front of the dais stays open for people to stand; "
+            "the small tea tables stand only between the armchairs along the sides, each table beside its seats, and a tall gilt incense stand and potted "
+            "peonies stand only at the sides beside the dais;")
+kn = out6['khon-ninh-cung']
+assert KN_MID in kn and 'at most a small mat under the low tables in front of the dais' in kn
+outc = {'khon-ninh-cung': kn.replace(KN_MID, KN_MID6C).replace('at most a small mat under the low tables in front of the dais', 'at most a small mat at the foot of the dais').replace('Keep the same room and the same arrangement as image 3 (this same room as drawn before)', 'Keep the same room and the same arrangement as image 3 (this same room as drawn before), except that the low table and stools in the middle of its floor are removed')}
+json.dump(outc, open(os.path.join(D, 'prompts_v6c.json'), 'w'), ensure_ascii=False, indent=1)

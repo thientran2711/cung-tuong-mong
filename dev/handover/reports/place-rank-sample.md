@@ -205,3 +205,19 @@ Sheet: dev/handover/review-sheets/place-rank/place-rank-B-phoi-khon-ninh.jpg · 
 Notes (ours, not changed): Khôn Ninh reception — the front low table + stools now reach the bottom edge, so on the people sheet figures 3–4 stand among/over the stools (feet not on clear floor).
 ### Owner Lượt 548 (sheet A): all distances OK EXCEPT Phi bedroom v6 "gần quá" → v6b redraw (A20), only the camera distance
 Phi bedroom v6b aFGyN6afSh (prompts_v6b.json: FLOOR SHARE sentence says "same distance as image 3, NOT closer, whole bed fits, nothing cropped, camera only a little lower"; image 3 = own v3 SyhTG51Ub8). Open centre floor ~14 %. v6 If3UHfPtvE kept in img/_review/place-rank/v6/. Sheet A rebuilt.
+### Owner Lượt 554 (sheet B): phối ×2 + Khôn Ninh bedroom OK; Khôn Ninh reception REDO (table in the middle) → v6c 9ZHIFD7NYZ
+prompts_v6c.json: only her point — the "middle ground furnished with low tables/rugs" clause replaced by "NO table and NO stools in the middle … tea tables only between the side armchairs"; mat at the foot of the dais; FLOOR SHARE says "except that the low table and stools in the middle are removed". Image 3 = v6 rgXnGrDxtc (kept in v6/). Centre floor open ~16 % for the 4 people; feet on clear floor. Sheet B rebuilt.
+### Sheet C — NEW Hoàng quý phi (t7) pair vs Hoàng hậu (A1 sample, then STOP)
+PALACE: no palace for HQP in the game data/docs (OD L41 only says HQP lives alone) → picked **Trường Xuân cung** (in the game's Đông lục cung list, no rooms drawn yet).
+STYLE CARD (CARD_TX in prompts.py): flower = white magnolia (ngọc lan); carved endless swastika-fret borders + round longevity medallions; dark zitan sandalwood with gold lacquer + mother-of-pearl; square-backed furniture (Cảnh Phúc = round-backed); tall VASE-SHAPED doorway (Cảnh Phúc = round moon gate); kingfisher-blue feather-inlay screens.
+RANK (LUX7 + COL7, I1): richer than Quý phi, one step below the Empress; golden apricot yellow ONLY in bedding/seat brocades (warmer/softer than HH imperial yellow), deep ruby red curtains/lanterns/tassels, a pair of small phoenixes only (no golden phoenix statues).
+LAYOUTS (L11/L5): bedroom = back wall + right side wall; a walk-in babu bed centred, kingfisher screen left, vase doorway to a dressing room right, dressing table group right corner. Reception = back wall + right side wall; full-width carved luozhao arch frame, luohan daybed on a one-step platform centred under a gilt plaque, cloisonné flower stands, ONE chair row along the right wall, vase doorway left.
+| room | gen | result |
+|---|---|---|
+| HQP bedroom | u5WNiYGQLD | rejected: floor ~17 % |
+| HQP bedroom | s7I0dD0l8e | KEPT: floor ~11 % (image 3 = QP bedroom v6 gOmViD0SXO as closeness guide) |
+| HQP reception | vQAORPpa47 | rejected: floor ~19 % + Chinese characters on the plaque (our words "plaque with carved characters" → fixed to "carved with magnolias (no writing)") |
+| HQP reception | rgXnolAxtc | SHOWN WITH FAULT (redo 1/1 used): no text, design OK, but open centre floor ~23 % |
+Sheet: dev/handover/review-sheets/place-rank/place-rank-C-hqp-vs-hh.jpg · CDN https://ctm-img.victoria-tntt.workers.dev/img/_review/place-rank/place-rank-C-hqp-vs-hh.jpg
+Round credits (PR7): 17 gens × 135 = 2,295 cr (cap 3,300).
+STATUS: PR7 STOPPED after the HQP sample (A1). Open: HQP reception floor too big (foreman/owner decides on 1 more gen; suggested: same prompt, image 3 = the HQP bedroom s7I0dD0l8e as closeness guide).
