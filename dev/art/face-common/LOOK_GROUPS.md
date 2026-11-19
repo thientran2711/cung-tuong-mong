@@ -51,3 +51,8 @@ File máy đọc: dev/art/face-common/OWNER_GROUPS_L686.json
 - Tinh nghịch (14): m12 m24 m25 m30 m42 m48 c03 c06 c09 c12 c18 c24 c25 c30
 - Kiêu kỳ / Lạnh lùng / Quyến rũ: 0 người
 - c27: bị lé → làm NGƯỜI MỚI hoàn toàn (mặt mới). c06 c14 c19 c31: hở răng → vẽ lại môi khép.
+
+## Lượt 689 (chủ, qua ROOT-54) — CHỈ 4 NHÓM CHO NGƯỜI MỚI
+- Sản xuất người MỚI chỉ thuộc 4 nhóm: Sắc sảo, Kiêu kỳ, Lạnh lùng, Quyến rũ. KHÔNG vẽ thêm người mới cho Tươi tắn / Dịu dàng / Đoan trang / Tinh nghịch.
+- Viết lại prompt 4 nhóm này (tả mặt + tính cách thật mạnh), gửi chủ mẫu 3 người mỗi nhóm (12 người) → NF4.
+- Vẫn giữ: sửa răng c06 c14 c19 c31 (môi khép), c27 người mới.
