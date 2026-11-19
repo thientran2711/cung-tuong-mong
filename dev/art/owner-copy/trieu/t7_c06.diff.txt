@@ -1,0 +1,9 @@
+# t7 c06: orig/t7_v0_c06.txt -> t7_c06.txt (word diff)
+- 1
++ 2
+
+- first
++ second
+
+- 
++ TRIỀU PHỤC (formal court uniform) details on this same outfit: it is worn as the formal court robe (triều phục); the robe and both sleeves are the court red, brick-crimson silk, the exact red of the court robe of the Nữ quan (the palace women officials), a medium-saturation, medium-lightness true brick red with no coral, orange or pink cast like #99443F, with a slightly deeper brick-crimson like #893A37 in the linings; two long narrow court panels of soft silk hang and fold naturally like stoles from the collar down both sides of the front to the hem, each in the rank colour, warm amber-gold like #DE9448, with a gold-edged border and a tassel at its tip, the centre front of the robe showing between them; over the cloud-collar cape a jewelled shoulder piece (cầu vai) over each shoulder, medium-large (the size of a Phi's grand shoulder piece, never larger), curving up more, with a shaped cloud edge and gold edging, its edge: pearls and jade beads with small gems along a gold edge, with a LONG pearl fringe hanging down to the elbow, several pearl strings deep.

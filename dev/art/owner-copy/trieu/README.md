@@ -1,0 +1,13 @@
+# Triều phục c06 t1–t8: copy-whole prompts (F3c, ROOT-40 order 19/11 ~04:01Z). NO gens here; ROOT-40 runs them.
+- `orig/` = the approved originals, verbatim:
+  - t1–t6 = `golden_low/tN_v0_c06.txt` from branch `review/t8-prompt-B` (18/11 W72 approved texts). These are NOT the same as the golden_low files on the handover branch, which were rewritten later.
+  - t7 / t8 = `t8-prompt-B/goldenC2/t{7,8}_v0_c06.txt`.
+- `tN_c06.txt` = the original + ONE "TRIỀU PHỤC … details on this same outfit" block inserted before " Pose: calm standing pose;". `tN_c06.diff.txt` = word diff against the original.
+- The only other edit: "image 1 (her first reference)" → "image 2 (her second reference)" (`make.py --refnum2`). Today's REFERENCES order forces it: image 1 = style 6AbGv6EiJO, image 2 = own t1 face gOm7wObSXO. Without --refnum2 the originals' numbering is kept.
+- Refs: none of the originals mentions an image 3. If the royal swatch TdwDfOyVNR is passed on t6–t8 (A0 REFERENCES rule), the text has no line telling the model what it is.
+- Angles are kept verbatim from the originals: t1/t3/t4/t5 "a slight turn of the body, head tilted gently toward the viewer"; t2/t6/t7 "body turned slightly three-quarters to the left"; t8 "… to the right". So all are near-frontal or slight 3/4, none dead-frontal, and none at the full live-tm0 3/4.
+- Known add-only conflicts:
+  - Colour: the originals keep her coral red #D5745E as the main colour, while the block makes the robe and sleeves #99443F (t8: sleeves and collar only).
+  - Hair: t1–t6 originals keep their own hair ornaments (flowers, silver/gold hairpins), while the block adds a whole court crown with tassel hairpins.
+  - Robe: t4–t6 originals describe their own NEW outfits (layered robe, brocade, …), and the block says "worn as the formal court robe".
+- Regenerate: `python3 make.py --refnum2`.
