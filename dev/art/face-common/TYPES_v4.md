@@ -22,3 +22,16 @@ Mẫu: s01–s04 (`sNN.v4.FULL.txt`), làm y như c07–c32 (COMMON_v3 nguyên v
 2. LẠNH LÙNG "hiếm khi cười / nụ cười rất nhạt" vs COMMON "a natural soft smile" — viết "very faint barely-there smile", vẫn trong luật nhưng nụ cười có thể bị máy làm rõ hơn ý.
 3. KIÊU KỲ "cằm hơi ngẩng, nhìn xuống" vs COMMON "whole face clearly visible, eyes fully open (never hooded)" — mắt phượng nhìn xuống dễ thành mí sụp; dòng riêng ghi rõ "fully open". Xem mẫu.
 4. ANH KHÍ: không đụng luật nào. Kiếm (vỏ đen) là 1 vật cầm, không phải cốc/chén.
+
+## Cập nhật Lượt 640–648 (chủ duyệt)
+- Lượt 643/647: GIỮ Kiêu kỳ (s01 v4b, cằm ngẩng vừa phải), Lạnh lùng (s02 v4), Quyến rũ (s03). Đã thêm Kiêu kỳ + Lạnh lùng vào LOOK_GROUPS.md (0 người).
+- Lượt 648: Quyến rũ s03 v4c — bỏ "pink flush along the lower lids and outer corners", môi "soft rose tint" (da phải trắng trong như mọi người). COMMON không đổi.
+- Lượt 647: Anh khí s04 v4c — trở lại mặt v4 (mày kiếm, sống mũi cao, hàm rõ, nhìn thẳng); chỉ thêm câu nét vẽ mềm ("heroic features drawn softly … same soft painterly style … no harsh outlines"); không vũ khí (cành mai trắng).
+- Lượt 646: 2 kiểu mới:
+
+| kiểu | mẫu | câu mặt chung | biểu cảm |
+|---|---|---|---|
+| THƯ HƯƠNG | s05 | refined gentle OVAL, smooth high forehead, softly rounded chin; calm clear medium almond eyes with a THOUGHTFUL intelligent gaze (as if turning over a line of poetry), fully open; gentle STRAIGHT brows of even medium thickness; straight slim nose; small mouth, neat soft lips; quiet scholarly air | quiet, thoughtful, intelligent; calm knowing faint smile, as if she just understood something in her book |
+| YÊU KIỀU | s06 | SMALL slender delicate OVAL narrowing to a FINE pointed chin; long slender graceful neck; soft thin WILLOW-LEAF brows (liễu mi) curving gently down at the ends; large soft tender almond eyes, slightly misty dreamy softness (never teary/red), outer corners very slightly lowered, fully open; tiny delicate nose; small cherry-blossom mouth, soft pale-pink lips | tender, gentle, delicate; shy faint smile; head inclined gently on her slender neck |
+
+Chỗ thay theo người — THƯ HƯƠNG: oval / trái xoan trán cao / mặt dài thanh; mắt hạnh vừa / mắt hạnh dài hơi cụp; mày thẳng / mày thẳng hơi cong cuối; vật: sách chỉ khâu / cuộn thư / bút lông / nghiên mực nhỏ. YÊU KIỀU: oval nhỏ / tim nhỏ cằm nhọn; mày liễu / mày liễu nhạt hơn; mắt mơ màng / mắt to dịu cụp nhẹ; miệng anh đào / môi nhỏ hồng nhạt.

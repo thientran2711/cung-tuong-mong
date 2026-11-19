@@ -74,6 +74,63 @@ for i,(cid,age,face,shape,eyes,lips,hair,outfit,m,s,game,pose,item,itemshort) in
     o2=o2.replace(' an jade',' a jade')   # article after the swap (ivory→jade green)
     out[f"{cid}.v3b"]=line(age,face,EXPR[look],hair,o2,mn,mh,sn,sh,pose,ak)
 
+# ---- Lượt 640 (owner verdict on nf3_4kieu, via ROOT-53): v4b redraws; only her points change (A17) ----
+import copy
+TYPES_B=copy.deepcopy(TYPES)
+# s01: head lifted too high → chin lifted only moderately, still proud
+TYPES_B["Kiêu kỳ"]["face"]=TYPES["Kiêu kỳ"]["face"].replace("the chin LIFTED slightly so she looks a little down along her nose (the whole face still clearly visible)","the chin raised only a little (moderately, the head almost level) so she looks just slightly down along her nose (the whole face clearly visible)")
+TYPES_B["Kiêu kỳ"]["expr"]=TYPES["Kiêu kỳ"]["expr"].replace("chin lifted,","chin raised only a little,")
+# s03: not alluring enough → stronger allure in eyes, gaze, lips, slight head tilt (lips closed, no teeth)
+TYPES_B["Quyến rũ"]["face"]=TYPES["Quyến rũ"]["face"].replace("large glossy almond eyes whose outer corners curve softly UP","large glossy, liquid-bright almond eyes with long sweeping upper lashes whose outer corners curve softly UP").replace("FULL plump lips with a rich rose tint, closed","FULL plump glossy lips with a rich rose tint and a soft curved bow, closed")
+TYPES_B["Quyến rũ"]["expr"]="A seductive, alluring look: the head tilted slightly to one side, a slow lingering sidelong gaze from the fully open eyes straight to the viewer, a knowing half-smile with the full lips closed, one corner lifted more than the other, eyes fully open, never a stretched grin."
+# s04: too masculine + harder line style → same heroic spirit, clearly feminine, soft; no weapon-like item
+TYPES_B["Anh khí"]=dict(
+ face="a graceful OVAL face with a gently defined jawline and a soft small chin, smooth soft cheeks, dark well-shaped brows a little fuller than usual that lift gently toward the temples, large bright clear almond eyes with a steady direct gaze, fully open, a straight elegant nose with a slightly high bridge, softly full lips in a calm closed line; a soft, beautiful, clearly feminine young lady with a heroic spirit",
+ expr="A bright, steady, confident gaze straight at the viewer, a gentle assured closed-lip smile, head held upright with graceful poise, eyes fully open, never a stretched grin.")
+SB={"s01":"s01","s03":"s03","s04":"s04"}
+for sid,ty,age,hair,outfit,(mn,mh),(sn,sh),pose,ak in S:
+    if sid not in SB: continue
+    if sid=="s04": pose=pose.replace("a slim sheathed straight sword with a black lacquer scabbard and a white silk tassel held upright at her side in one hand","a sprig of white plum blossom held upright at chest height in one hand")
+    out[f"{sid}.v4b"]=line(age,TYPES_B[ty]['face'],TYPES_B[ty]['expr'],hair,outfit,mn,mh,sn,sh,pose,ak)
+
+# ---- Lượt 644 (owner via ROOT-53): c06 redo — keep her ivory skirt (secondary = ivory, not jade green) + crown hairpin upright ----
+for i,(cid,age,face,shape,eyes,lips,hair,outfit,m,s,game,pose,item,itemshort) in enumerate(R):
+    if cid!="c06": continue
+    n=i+1; look=NS['LOOKS'][(n-1)%6]; ak=["FF","SL","SR","TL","TR","ST"][(n-1+(n-1)//6)%6]
+    mn,mh=RC[cid]['main'],RC[cid]['main_hex']; sn,sh=IVORY
+    o2=outfit.replace("of vermilion","of soft vermilion").replace("an ivory","a ivory").replace("ivory",sn)
+    h2=hair+", one small gold hairpin at the crown pointing straight upward"
+    out["c06.v3c"]=line(age,face,EXPR[look],h2,o2,mn,mh,sn,sh,pose,ak)
+
+# ---- Lượt 646/647/648 (owner via ROOT-53): v4c ----
+TYPES_C=copy.deepcopy(TYPES_B)
+# 648 s03: face looked flushed → drop the pink flush words, lips soft rose tint; COMMON untouched
+TYPES_C["Quyến rũ"]["face"]=TYPES_B["Quyến rũ"]["face"].replace(", a soft pink flush along the lower lids and outer corners","").replace("rich rose tint","soft rose tint")
+# 647 s04: back to the FIRST (v4) heroic face + expression; only the rendering softened; no weapon (plum sprig as v4b)
+SOFT="; the heroic features are drawn softly, rendered in exactly the same soft painterly style, soft fine line work and soft shading as the reference, no harsh outlines, no heavy dark contour lines"
+TYPES_C["Anh khí"]=dict(face=TYPES["Anh khí"]["face"]+SOFT, expr=TYPES["Anh khí"]["expr"])
+# 646 two new types
+TYPES_C["Thư hương"]=dict(
+ face="a refined gentle OVAL face with a smooth high forehead and a softly rounded chin, calm clear almond eyes of medium size with a THOUGHTFUL, intelligent gaze as if still turning over a line of poetry, fully open and bright, gentle STRAIGHT brows of even medium thickness, a straight slim nose, a small mouth with neat soft lips; a quiet scholarly air of a girl from a family of letters",
+ expr="A quiet, thoughtful, intelligent look, a calm knowing faint closed-lip smile, as if she has just understood something in her book, eyes fully open, never a stretched grin.")
+TYPES_C["Yêu kiều"]=dict(
+ face="a SMALL slender delicate OVAL face narrowing to a FINE pointed chin, a long slender graceful neck, soft thin WILLOW-LEAF brows (liễu mi) that curve gently down at the ends, large soft tender almond eyes with a slightly misty dreamy softness (never teary, never red-rimmed), the outer corners very slightly lowered, fully open and bright, a tiny delicate nose, a small cherry-blossom mouth with soft pale-pink lips",
+ expr="A tender, gentle, delicate look, a shy faint closed-lip smile, the head inclined gently on her slender neck, eyes fully open, never a stretched grin.")
+S2=[
+("s05","Thư hương",17,"half-up: the top hair coiled into a low simple bun held by one plain dark wooden hairpin pointing upward, the rest long and loose",
+ "a cross-collar ruqun of soft bamboo-green silk satin with a soft sheen and a plum-purple floor-length skirt of plain silk, small embroidered orchids and bamboo leaves at the collar and cuffs, a plum-purple silk sash with a small white jade pendant, long sleeves",
+ C("soft bamboo green",95,.66,.34),C("plum purple",300,.50,.30),
+ "standing calmly with her weight on one leg, a thin thread-bound book with an indigo cover held half-open in both hands at her chest, glancing up from it toward the viewer","FF"),
+("s06","Yêu kiều",16,"fully loose and very long, fine and silky, a thin pale-lilac ribbon tied loosely at the back of the head, one small pearl hairpin pointing upward",
+ "a cross-collar ruqun of soft pale-lilac silk satin with a soft sheen and a celadon-green floor-length skirt of plain silk, small embroidered wisteria at the collar and hem, a celadon-green silk sash with a small pearl pendant, long sleeves",
+ C("soft pale lilac",275,.75,.40),C("celadon green",140,.55,.30),
+ "standing with fragile grace, weight resting on one leg, a single long-stemmed white lotus bud held lightly at her shoulder in one hand, the other hand resting softly at her waist","TR"),
+]
+for sid,ty,age,hair,outfit,(mn,mh),(sn,sh),pose,ak in S+S2:
+    if sid not in ("s03","s04","s05","s06"): continue
+    if sid=="s04": pose=pose.replace("a slim sheathed straight sword with a black lacquer scabbard and a white silk tassel held upright at her side in one hand","a sprig of white plum blossom held upright at chest height in one hand")
+    out[f"{sid}.v4c" if sid in ("s03","s04") else f"{sid}.v4"]=line(age,TYPES_C[ty]['face'],TYPES_C[ty]['expr'],hair,outfit,mn,mh,sn,sh,pose,ak)
+
 for k,v in out.items():
     open(os.path.join(D,f'{k}.FULL.txt'),'w').write(v)
     print(f"== {k}\n{v}\n")
