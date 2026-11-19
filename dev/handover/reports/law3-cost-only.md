@@ -46,3 +46,8 @@ ae218b59 already descends current origin/main c12a5878 (no new r1 branch needed)
 5. Gates: one-core-guard PASS (fails 0); quickcheck PASS (old save ok, core gates PASS, perf buổi 1246/966 ms, tasks>200ms 22/18 — within gate); coop-e2e 63/63 (run on scratch merge incl. this branch).
 6. Shots Fold 755x1000 + iPad 1180x820 of ksp (taken behind the «Rương đồ khuê các» loading overlay, dimmed): card «Tắm gội chờ giá» shows Tốn «không» / Được «không» in show-rows mode; in-play event card (text dump, hint mode) shows Gợi ý «được thị tẩm, gần Hoàng thượng đêm nay!», Tiến cử/Cáo bệnh hints correct. Display fault (Được «không» while the gain exists) = C-AG odds-meter-back, not failed here.
 Shots were scratch only (/tmp), none on CDN, nothing committed.
+
+## REVIEW r1 re-merge (live main fd6118cd incl. odds-meter-back f43a2ba6) — READY FF 55bced98
+review/law3-cost-only-r1 = ae218b59 + merge origin/main fd6118cd (only index.html/sw.js conflicted, rebuilt by build_site.sh); diff vs main = j8.js:303 + opt-card-scan.js:25 + index/sw.
+Gates: one-core-guard PASS (fails 0) · coop-e2e 68/68 · quickcheck PASS run alone (old save ok, buổi 1453/1292 ms). A first quickcheck run in parallel with coop-e2e + shots FAILED perf (buổi 4306 ms) = CPU contention, reran alone PASS.
+Shot ksp (Fold 755x1000, clean): «Tắm gội chờ giá» = Nắm chắc meter, TỐN «không», ĐƯỢC «được thị tẩm, gần Hoàng thượng đêm nay» (green frame) — the real gain now shows. Tiến cử / Cáo bệnh cards also show Tốn red + Được. iPad 1180x820: same rows, shot dimmed by the loading overlay but readable. Display fault gone with odds-meter-back. Shots scratch only, none on CDN.
