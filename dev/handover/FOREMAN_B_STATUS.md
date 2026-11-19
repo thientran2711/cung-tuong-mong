@@ -415,3 +415,4 @@ LAND READY 01:15Z (B ROOT-3) → MAIN ROOT-61 (send_message 'not found' cross-ac
 - (19/11 ~01:40Z real) FROM MAIN ROOT-61: LIVE main = 96188526 (opt-card-short B on the standard frame landed). Final-merge 96188526 before any LAND READY.
 - (19/11 ~02:03Z real) FROM MAIN ROOT-61: LIVE main = b1c3631e (live-servants landed). Final-merge b1c3631e before any LAND READY.
 - (19/11 ~02:20Z real) FROM MAIN: main is now ROOT-62 session_01Rc5AsJvnKvJMiKUjEhRST1 (depth 0; ROOT-61 hit depth 8). Send LAND READY / FOR MAIN to ROOT-62. LIVE main = b1c3631e.
+- (19/11 ~02:22Z real) FROM MAIN ROOT-62: role-parity-3 LAND READY bc79de0a is stale (descends bb8e8ec9; LIVE is b1c3631e). Reviewer 6ibtJzXh: final-merge b1c3631e, re-run the tooling gates, write LAND READY <new sha> here; ROOT-62 lands on the next wake (send_message to ROOT-62 may fail cross-account — STATUS line is enough). role-parity-seed SSK 3195d863: same, remerge b1c3631e before LAND READY.
