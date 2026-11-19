@@ -492,3 +492,87 @@ for k, v in out9.items():
     assert k != 'khon-ninh-cung' or 'imperial yellow' not in p
 json.dump(out9, open(os.path.join(D, 'prompts_v9.json'), 'w'), ensure_ascii=False, indent=1)
 print('v9', {k: len(v['prompt']) for k, v in out9.items()})
+
+# ---- v10 (owner Lượt 622 via ROOT-52/53; L14 every room 2 versions, L19 layout variety; A20 only her points; worker PR9)
+# KEPT: Phi bedroom v9 4RFIyNR9Aa (= 2-wall model), HH bedroom B v9 cpS5YIl0eP (= 3-wall model). Mirrors uploaded for "window LEFT":
+#   1ldYySkr4r = HH bedroom B mirrored, 8aiwqQTIrU = Phi bedroom v9 mirrored (img/_review/place-rank/v10ref/).
+M3, M2, M3X, M2X = 'cpS5YIl0eP', '4RFIyNR9Aa', '1ldYySkr4r', '8aiwqQTIrU'
+GUIDE = "(another approved room, used only as the guide written above)"
+GUIDE_S = (" Image 3 is a guide ONLY for the wall layout, the camera distance, the floor amount and the people scale, NOT for its colours, "
+           "furniture or arrangement: this room has its own arrangement as written here.")
+FLOOR10 = (" FLOOR AMOUNT (owner Lượt 622): no more open floor than in image 3: the furniture groups come forward close behind where the people "
+           "stand, their bases at about four fifths to seven eighths of the picture height, so only a little empty floor shows between them and the feet.")
+HQPC10 = ("RANK COLOURS (Hoàng quý phi = orange + yellow, owner Lượt 622: a SOFT honey orange, never deep, never strong): a soft, light honey orange, "
+          "lighter and gentler than #E3A25B, like #EDB57A, is the main colour of the silks (bedding, bed curtains, seat cushions, lantern tassels), with "
+          "pale golden yellow like #EFBD69 as its partner in the borders, linings and embroidery; clearly less yellow than an Empress's room; no red silks; "
+          "the wood stays dark zitan with gold lacquer.")
+WL2 = "seen with TWO walls only: the back wall straight across the picture and the LEFT side wall running towards the viewer in clear perspective, meeting at a square corner, like the wall layout of image 3"
+WL3 = "seen with THREE walls: the back wall straight across the middle of the picture and the left and right side walls running towards the viewer in clear perspective, meeting it at square corners, like the wall layout of image 3"
+out10 = {}
+# 1) Phi bedroom 3-wall: v9 Phi words; only the walls + image 3 change.
+KEEPPHI = " Keep the same room and the same arrangement as image 3 (this same room as drawn before), the whole canopy bed with its top inside the picture."
+assert KEEPPHI in PHI9
+PHI10 = PHI9.replace(KEEPPHI, " The same Cảnh Phúc bedroom " + WL3 + ": the round moon-gate partition and the shelves on the left side wall, tall lattice windows "
+        "onto the garden in the right side wall, the canopy bed against the back wall; the whole canopy bed with its top inside the picture." + GUIDE_S)
+out10['canh-phuc-cung-phi-ngu-3w'] = dict(prompt=room9(PHI10, GUIDE, "warm polished wooden floorboards"), refs=[*G9, M3])
+# 2) HH bedroom A 2-wall: v9 A words + less floor; image 3 = the 2-wall model (Phi v9).
+out10['khon-ninh-cung-ngu-2w'] = dict(prompt=room9(HHBED9.replace('{WALLS}', W2) + FLOOR10, GUIDE, "polished stone tiles"), refs=[*G9, M2])
+# 3) HH reception: less floor; 3-wall (as v9) + 2-wall (back + left wall; rows mirrored on the axis, the right row along the columns).
+KN10_2 = KN9.replace("with the back wall straight across the picture and both side walls running towards the viewer in correct perspective, meeting the back wall at square corners",
+        "with TWO walls only: the back wall straight across the picture and the LEFT side wall running towards the viewer in correct perspective, meeting at a square corner, the right side open between columns")
+KN10_2 = KN10_2.replace("one row along each side wall, mirrored exactly", "one row along the left side wall and one row along the line of columns on the open right side, mirrored exactly")
+KN10_2 = KN10_2.replace("at the windows of the side walls", "at the windows of the left wall").replace("against the side walls behind the chairs", "against the left wall behind the chairs")
+assert KN10_2.count('TWO walls only') == 1 and 'line of columns on the open right side' in KN10_2
+CAMKN = "(image 3 is another approved reception room, a guide ONLY for camera distance, eye level and people scale, NOT for its arrangement, colours or furniture: this hall has its own arrangement as written above)"
+out10['khon-ninh-cung-3w'] = dict(prompt=room9(KN9 + FLOOR10, GUIDE, "polished stone tiles"), refs=[*G9, M3])
+out10['khon-ninh-cung-2w'] = dict(prompt=room9(KN10_2 + FLOOR10, GUIDE, "polished stone tiles"), refs=[*G9, M2])
+# 4) HQP bedroom: NEW own layout (L19: window LEFT, bed in the right half, a canopy bed not the babu bed) + soft honey orange; 3-wall + 2-wall.
+HQPB10 = ("Trường Xuân cung chính điện bedroom, the private bedchamber of the Imperial Noble Consort (Hoàng quý phi), the highest consort below the Empress, "
+    "in ancient China, a real room in daily use, open and airy, {WALLS}; dark zitan pillars and beams with gold lacquer; tall carved lattice windows in the LEFT "
+    "side wall onto a sunny courtyard garden with a magnolia tree; against the back wall in the RIGHT half of the room, square to it and seen straight on, the "
+    "large clear main subject: a grand canopy bed of carved zitan with a tall carved gilded crown and gold lacquer, soft honey-orange silk curtains lined with "
+    "pale golden yellow, tied back, soft honey-orange silk brocade bedding with pale golden yellow borders, embroidered with white magnolias and a pair of small "
+    "phoenixes, pearl tassels on the curtain ties; in the middle of the back wall, left of the bed, a tall carved openwork partition with a vase-shaped doorway "
+    "giving a glimpse of a small study with books; a tall folding screen with kingfisher-blue feather inlay and magnolias stands beside the bed on its right; "
+    "under the left windows a gold-lacquer dressing table with a tall bronze mirror and a jewellery cabinet open with pearls and jade, and a square-backed zitan "
+    "chair; a zitan curio shelf of jade, coral and cloisonné treasures, ornate hanging palace lanterns with soft honey-orange tassels, a clothes stand with a soft "
+    "honey-orange silk robe, cloisonné vases of magnolia branches, a gold incense burner, slippers on the bed step. " + CARD_TX + LUX9 + HQPC10 + RECT + GUIDE_S + FLOOR10)
+out10['truong-xuan-cung-hqp-ngu-3w'] = dict(prompt=room9(HQPB10.replace('{WALLS}', WL3), GUIDE, "warm polished wooden floorboards"), refs=[*G9, M3X])
+out10['truong-xuan-cung-hqp-ngu-2w'] = dict(prompt=room9(HQPB10.replace('{WALLS}', WL2), GUIDE, "warm polished wooden floorboards"), refs=[*G9, M2X])
+# 5) HQP reception: its OWN layout (rgXnolAxtc) + soft honey orange; 2-wall (as drawn, image 3 = itself) + 3-wall.
+HR = HQP['truong-xuan-cung-hqp']['room']; HR = HR[:HR.index(CARD_TX)]
+for a, b in [('golden apricot brocade cushions', 'soft honey-orange brocade cushions with pale golden yellow borders'),
+             ('golden apricot cushions', 'soft honey-orange cushions'),
+             ('deep ruby red sheer curtains tied back with tassels', 'soft honey-orange sheer curtains tied back with pale golden tassels'),
+             ('lanterns with ruby red tassels', 'lanterns with soft honey-orange tassels')]:
+    assert a in HR, a; HR = HR.replace(a, b)
+HR = HR.replace('a carved openwork floor-to-ceiling arch frame', 'a tall carved openwork arch frame')
+assert 'ruby' not in HR and 'apricot' not in HR
+HR3 = HR.replace("seen straight on with the back wall straight across the picture and the right side wall running towards the viewer in clear perspective, meeting at a square corner",
+                 "seen straight on " + WL3.replace("seen with THREE walls", "with THREE walls").replace(", like the wall layout of image 3", ""))
+assert HR3 != HR
+REC10 = CARD_TX + LUX9.replace("on the bed and the main seats", "on the daybed and the main seats").replace("the bed looks imperial with a tall carved gilded crown", "the daybed looks imperial with a tall carved gilded back") + HQPC10 + NOSOFA + RECT
+out10['truong-xuan-cung-hqp-2w'] = dict(prompt=room9(HR + REC10 + " Keep the same room and the same arrangement as image 3 (this same room as drawn before); change the colours as written here." + FLOOR10.replace('no more open floor than in image 3', 'less open floor than in image 3, like the approved bedrooms'),
+                                        "(this same room as drawn before)", "warm polished wooden floorboards"), refs=[*G9, 'rgXnolAxtc'])
+out10['truong-xuan-cung-hqp-3w'] = dict(prompt=room9(HR3 + REC10 + GUIDE_S + FLOOR10, GUIDE, "warm polished wooden floorboards"), refs=[*G9, M3])
+for k, v in out10.items():
+    p = v['prompt']
+    assert p.startswith(C9_STYLE) and C9_END.split('{FLOOR}')[1] in p and v['refs'][:2] == list(G9) and v['refs'][2] not in DRIFT_IMG3, k
+    for w in ('everywhere', 'BRIGHT', 'bright', 'MUCH HIGHER', 'coffered', 'high ceiling', 'floor-to-ceiling', 'farther back', 'throne-like', 'apricot', 'ruby', '{'):
+        assert w not in p, (k, w)
+json.dump(out10, open(os.path.join(D, 'prompts_v10.json'), 'w'), ensure_ascii=False, indent=1)
+print('v10', {k: len(v['prompt']) for k, v in out10.items()})
+# ---- v10b (1 redo each, our full-size check: owner Lượt 622 point "less floor" NOT met in HH bedroom 2w WDg5tUgcXe (bed base ~62 % H),
+#      HH reception 3w 3zKfpXnREY / 2w eIPsQKidqL (platform ~70 %, aisle floor ~25-30 %)): ONLY the FLOOR AMOUNT sentence changes (A17).
+FLOOR10B_BED = (" FLOOR AMOUNT (owner Lượt 622: too much empty floor before): the camera stands closer, so the room fills the picture: the bed is large, "
+    "the front of its bed step at about four fifths of the picture height, and the furniture groups at the sides come forward to about seven eighths "
+    "of the picture height, so only a little empty floor shows between them and the feet.")
+FLOOR10B_REC = (" FLOOR AMOUNT (owner Lượt 622: too much empty floor before): the camera stands closer, so the hall fills the picture: the throne platform "
+    "is large, the front of its lowest step at about four fifths of the picture height, and the chair rows at the sides come forward to about seven eighths "
+    "of the picture height, so only a little empty floor of the aisle shows between them and the feet.")
+out10b = {'khon-ninh-cung-ngu-2w': dict(out10['khon-ninh-cung-ngu-2w'], prompt=out10['khon-ninh-cung-ngu-2w']['prompt'].replace(FLOOR10, FLOOR10B_BED)),
+          'khon-ninh-cung-3w': dict(out10['khon-ninh-cung-3w'], prompt=out10['khon-ninh-cung-3w']['prompt'].replace(FLOOR10, FLOOR10B_REC)),
+          'khon-ninh-cung-2w': dict(out10['khon-ninh-cung-2w'], prompt=out10['khon-ninh-cung-2w']['prompt'].replace(FLOOR10, FLOOR10B_REC))}
+for k, v in out10b.items(): assert v['prompt'] != out10[k]['prompt'] and FLOOR10 not in v['prompt'], k
+json.dump(out10b, open(os.path.join(D, 'prompts_v10b.json'), 'w'), ensure_ascii=False, indent=1)
+print('v10b', list(out10b))
