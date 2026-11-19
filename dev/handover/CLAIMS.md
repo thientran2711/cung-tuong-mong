@@ -80,7 +80,7 @@ balance-final #4 (opus; balance chain + AG arms) | review/balance-final | sessio
 | FOREMAN C-AG #18 (opus; child of #17, depth 5) | handover FOREMAN_C_STATUS | MAIN ROOT-61 | session_01Rc5AsLo1KXQFDUGVweKun8 | DONE (→ #19 02:35Z) | 19/11 00:40Z |
 | FOREMAN C-AG #19 (opus; child of #18, depth 6) | handover FOREMAN_C_STATUS | MAIN ROOT-62 | session_01Rc5AsNCvGfZTt5nTmWjtcZ | DONE (→ #20 04:03Z) | 19/11 02:35Z |
 | FOREMAN C-AG #20 (opus; child of #19, depth 7) | handover FOREMAN_C_STATUS | MAIN ROOT-63 | session_01Rc5AsMRexBomFJBu1GuHbV | ROLLED OVER → C-AG #21 session_01Rc5AsJdyHeEjvDVWQaB6oq | 19/11 04:03Z |
-| FOREMAN C-AG #21 (opus; child of #20, depth 8) | handover FOREMAN_C_STATUS | MAIN ROOT-64 | session_01Rc5AsJdyHeEjvDVWQaB6oq | RUNNING | 19/11 05:30Z |
+| FOREMAN C-AG #21 (opus; child of #20, depth 8) | handover FOREMAN_C_STATUS | MAIN ROOT-64 | session_01Rc5AsJdyHeEjvDVWQaB6oq | DONE (rolled to C-AG STANDBY 01Rc5AsM9pCcsWwjoC8PjjW7) | 19/11 05:30Z |
 | FOREMAN C-AG #19 (opus; child of #18, depth 6) | handover FOREMAN_C_STATUS | MAIN ROOT-62 | session_01Rc5AsNCvGfZTt5nTmWjtcZ | RUNNING | 19/11 02:33Z |
 | REVIEW opt-card-short 04f09798 (sonnet; for MAIN ROOT-61) | review/opt-card-short | C-AG #18 | session_01Rc5AsN8cog61d64VwoXU4G | DONE (LIVE 96188526) | 19/11 01:14Z |
 | CTM odds-meter-back (opus; owner bug, for MAIN ROOT-61) | see briefs/root61-odds-meter-back.md | C-AG #18 for ROOT-61 | session_01Rc5AsJj8qdidmEiDujymyR | DONE — LIVE f43a2ba6 (worker archived) | 19/11 01:49Z |
@@ -220,15 +220,15 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | bd-roads BIG review (opus E14r; 23278b63) | review/bd-roads | E ROOT #8 | session_01DgYSWnZE2bT1FR9J6cjqDy | RUNNING | 19/11 04:06Z |
 | CTM odds-no-unknown (opus; worker, MAIN ROOT-63 job via C-AG #20) | review/odds-no-unknown; briefs/root63-cag20-jobs.md | C-AG #20 for ROOT-63 | session_01Rc5AsN4DdpqemYGteNSCE6 | DONE — LIVE 4217568a (archived 19/11 06:05Z) | 19/11 05:35Z |
 | CTM hall-names (opus; worker, MAIN ROOT-63 job via C-AG #20) | review/hall-names c294e1d; briefs/root63-cag20-jobs.md | C-AG #20 for ROOT-63 | session_01Rc5AsJqjDM27hysYd7E48b | DONE — LIVE 2c5dd554 (archived 19/11 05:55Z) | 19/11 05:20Z |
-| CTM monthly-allotment (opus; worker, MAIN ROOT-63 job via C-AG #20) | review/monthly-allotment; briefs/root63-cag20-jobs.md | C-AG #20 for ROOT-63 | session_01Rc5AsNLFYkPdJUDpjgwsaU | SẴN SÀNG KIỂM 9aceea6 | 19/11 04:09Z | · SẴN SÀNG KIỂM 9aceea6 (19/11)
+| CTM monthly-allotment (opus; worker, MAIN ROOT-63 job via C-AG #20) | review/monthly-allotment; briefs/root63-cag20-jobs.md | C-AG #20 for ROOT-63 | session_01Rc5AsNLFYkPdJUDpjgwsaU | DONE — LIVE 98f9f0f1 (archived 19/11 06:17Z) | 19/11 04:09Z | · SẴN SÀNG KIỂM 9aceea6 (19/11)
 | CTM minister-agents (opus; worker, MAIN ROOT-63 job via C-AG #20) | review/minister-agents; briefs/root63-cag20-jobs.md | C-AG #20 for ROOT-63 | session_01Rc5AsHjti1YnXbSGeocwni | SẴN SÀNG KIỂM 0d3f2b0b | 19/11 04:09Z |
 | coop-thin F3 (opus; bag/shop/wear/gifts; stacked on F2) | review/coop-thin-f3 | B | session_01N1tNP4NVrwK67H3DPhD9Ld | RUNNING | 19/11 04:18Z |
 | REVIEW coop-thin-f2 r1 (opus BIG) of 4dabbd46 | review/coop-thin-f2-r1 | B | session_01N1tNP6D9LFcHNTVw1PfbmV | FAIL: her walk cards lost at L7 (withSeat quiet=true silences card emitters; fix for the intent family) + resend should check buổi; merge 3db28bd8 pushed; report reports/coop-thin-f2.md "
 | ev-pic-fig event scene picture + figure scale (opus; owner bug OD 04:15Z) | review/ev-pic-fig | MAIN ROOT-63 | session_01Rc5AsLHx5NBHb8tkZaoLUU | SẴN SÀNG KIỂM 739bfdf3 r1 (report reports/ev-pic-fig.md) | 19/11 05:38Z |
 | hall-names SMALL REVIEW (sonnet) | review/hall-names c294e1d | C-AG #20 for ROOT-63 | session_01Rc5AsJrdYiTbKYwJ53EVEQ | DONE — LIVE 2c5dd554 (archived 19/11 05:55Z) | 19/11 04:31Z |
-| monthly-allotment BIG REVIEW (opus) | review/monthly-allotment 9aceea6 | C-AG #20 for ROOT-63 | session_01Rc5AsLJxqXyKq4keVP4fuk | PASS 18a9b64c (LAND READY) | 19/11 04:32Z |
+| monthly-allotment BIG REVIEW (opus) | review/monthly-allotment 9aceea6 | C-AG #20 for ROOT-63 | session_01Rc5AsLJxqXyKq4keVP4fuk | DONE — LIVE 98f9f0f1 (archived 19/11 06:17Z) | 19/11 04:32Z |
 | minister-agents BIG REVIEW (opus) | review/minister-agents 822f17c4 | C-AG #20 for ROOT-63 | session_01Rc5AsHdFbiZELj46cV3rq8 | PASS a2c6ce4e | 19/11 04:46Z |
-| MAIN ROOT-64 (opus; child of ROOT-63, depth 2) | handover HANDOVER_SESSION9 | ROOT-63 | session_01Rc5AsLZQkh3A3nV1PEQaVf | RUNNING | 19/11 04:50Z |
+| MAIN ROOT-64 (opus; child of ROOT-63, depth 2) | handover HANDOVER_SESSION9 | ROOT-63 | session_01Rc5AsLZQkh3A3nV1PEQaVf | DONE → ROOT-65 | 19/11 04:50Z |
 | ge-writers-w2 remerge #6 main fd6118cd (sonnet E11w2m4) | review/ge-writers-w2 | E ROOT #8 | session_01DgYSWpk2DjqqfEB5ZQCeg7 | DONE 7fb7c104 | 19/11 04:50Z |
 | hist-kyngo (Kỳ ngộ thường ngày step 1, history expert, sonnet E16; MAIN ORDER 03:31Z) | handover reports/hist-kyngo.md | E ROOT #8 | session_01DgYSWo26476tX9sf2PverF | DONE 018d29b8 | 19/11 04:50Z |
 | palace-chatter (PL#6 bubble talk, opus lead E17; MAIN ORDER 04:06Z) | review/palace-chatter | E ROOT #8 | session_01DgYSWoCjG7erCEJGy1Y514 | RUNNING | 19/11 04:50Z |
@@ -243,3 +243,5 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | ev-pic-fig BIG REVIEW (opus) | review/ev-pic-fig 946a2900 | MAIN ROOT-64 | session_01Rc5AsMDVid7pMws13KWPgr | RUNNING | 19/11 05:43Z |
 | bd-roads r2 fixes (opus E14c, successor of E14) | review/bd-roads | E ROOT #8 | session_01DgYSWmKcwf5VUb22x4YGU3 | RUNNING | 19/11 05:53Z |
 | ge-writers-w3 r2 fixes (opus E11d, successor of E11c) | review/ge-writers-w3 | E ROOT #8 | session_01DgYSWogWMATZVoosS7SFEk | RUNNING | 19/11 05:56Z |
+| MAIN ROOT-65 (opus; child of ROOT-64, depth 3) | handover HANDOVER_SESSION9 | ROOT-64 | session_01Rc5AsMRSKCNFbYwLJhNeY7 | RUNNING | 19/11 06:24Z |
+| FOREMAN C-AG #22 (opus; ex-ROOT STANDBY, depth 0; took over from C-AG #21) | handover FOREMAN_C_STATUS | owner STANDBY | session_01Rc5AsM9pCcsWwjoC8PjjW7 | RUNNING | 19/11 06:30Z |
