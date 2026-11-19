@@ -63,3 +63,4 @@ Only faces of groups SẮC SẢO / TINH NGHỊCH may be produced (dev/art/face-c
 The 3 m05 gens from the r54 prompts were refused by the auto-mode permission check: a36 and a51 denied; a65 approval prompt closed unanswered; then the session restarted. 0 gens, 0 credits. Not retried. Told ROOT-55 with the prompt paths. Needs owner approval of images_generate in this session, or another worker.
 
 ## 21:17Z ROOT-55 made the 3 m05 gens itself from my r54 prompts (gpt-2-6 1024x2304 seed 7172, one ref KLpSlnEkqp): a36 BhNUblSoQR, a51 KLpnPqWkqp, a65 fHzNsafCDY. ROOT-55 does the sheet and the look. MMX4 makes NO gens; waiting.
+ROOT-55 19/11 ~21:30Z: ROOT-55 gen'd the 3 r54 prompts itself (gpt-2-6 1024x2304 2k seed 7172, ref KLpSlnEkqp): a36 BhNUblSoQR, a51 KLpnPqWkqp, a65 fHzNsafCDY. Sheet dev/handover/review-sheets/mama-m05/m05_mama_r55.jpg sent to owner (Lượt 689).
