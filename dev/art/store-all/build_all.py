@@ -384,6 +384,44 @@ def build(person,rank,age="a18"):
     add=(laws(rank,age) if isinstance(rank,int) else laws(rank))+[angle_sentence(person,rank),grace_sentence(person,rank)]+extras(S0,person,rank)+(princess_sentences(PR[person],rank) if person in PR else [])
     return S0,S.replace(anchor," "+" ".join(add)+anchor,1),add
 
+# ---------------- THÁI HẬU (owner Lượt 618, ART_RULES I4/B21/K5) ----------------
+# Thái hậu = the FULL Hoàng hậu t8 prompt of this person (store + every t8 law/extra sentence, verbatim: royal yellow #EFBD69 + her main + secondary,
+# THREE-COLOUR, sleeves to the floor, one sleeve layer, no hair flowers, head+body, FABRIC brocade, angle, grace, held-item colour, pose tail, swatch = image 2)
+# with ONLY 3 Thái hậu slots swapped: (1) who she is (old 18/11 header), (2) in the outfit sentence the Hoàng hậu cloud collar -> the sheet3 stiff shoulder piece
+# + round standing collar (K5, old 18/11 words verbatim) and the "grandest of all" claims -> "as splendid as the Empress but dignified and restrained",
+# (3) the pose -> the old Thái hậu pose with her Thái hậu item (IT1 list TH_ITEMS[TH_AGE[age][(n-1)%5]], E8/E11). Refs: her KC set-B cut + swatch TdwDfOyVNR.
+TH_HEAD_HH="An imperial consort, the Empress."
+TH_HEAD="An imperial consort, the Empress Dowager (Thái hậu), dignified and gracious."
+TH_SWAPS=[("Outfit (the Empress (Hoàng hậu), clearly much richer and more splendid than the lower ranks): the Empress's imperial phoenix ceremonial robe",
+           "Outfit (the Empress Dowager (Thái hậu), as splendid as the Empress but dignified and restrained): an imperial phoenix ceremonial robe"),
+          ("a wide jewelled gold-and-pearl cloud collar with layered pearl fringes over the shoulders,",
+           "a STIFF, STRUCTURED, squared shoulder piece (cầu vai cứng) of embroidered antique-gold brocade with a pearl edge, standing firm and horizontal over both shoulders to show her authority, and her own collar: a high upright round standing collar of deep brocade fastened at the throat with a small jade button (not a crossed collar, not a cloud collar),"),
+          ("the GRANDEST headdress of all: a FULL tall imperial nine-phoenix crown","a full imperial phoenix crown of the Empress's rank: a FULL tall imperial nine-phoenix crown"),
+          ("; the most splendid outfit of all, clearly grander than every other rank.",".")]
+def thaihau(person,age):
+    S0,F,add=build(person,8,age); g=LAST_G; person=ALIAS.get(person,person)
+    assert F.count(TH_HEAD_HH)==1,"TH header slot"; F=F.replace(TH_HEAD_HH,TH_HEAD,1)
+    for a,b in TH_SWAPS:
+        assert F.count(a)==1,("TH outfit slot",a[:60]); F=F.replace(a,b,1)
+    n=int(re.sub(r"\D","",person) or 1)
+    item,hk=g["TH_ITEMS"][g["TH_AGE"][age][(n-1)%5]]   # IT1 E11 pick (TH_ITEMS + TH_AGE), used directly: build.py age_item() ignores the given item and picks its own kind
+    m=re.search(r" Pose: [^.]*\.",F); assert m and F.count(" Pose:")==1,"TH pose slot"
+    po=g["_pose"](item,hk,n%2==1)
+    for ph in (", body and face frontal, standing squarely facing the viewer, no turn",", body and face frontal, facing the viewer squarely, no turn"):   # build.py ANGLE LAW (F4b-3/4): the same dead-frontal words it strips from every output; the ANGLE sentence above gives the turn
+        po=po.replace(ph,"")
+    assert "frontal" not in po,"TH pose: frontal words left"
+    F=F[:m.start()]+po+F[m.end():]
+    return S0,F,add
+def gate_th(person,age,text):
+    """Thái hậu gate = check_store.py APPROVED part at Hoàng hậu scope (--scope tp8 --age: every owner-approved t8 sentence verbatim + every ban)
+    + the builder invariant: thaihau() asserts the prompt = this person's HH t8 prompt with ONLY the 3 Thái hậu slots changed (store part 1 vs the HH store
+    would flag exactly those intended slots, so it is not used here)."""
+    with tempfile.NamedTemporaryFile("w",suffix=".txt",delete=False,encoding="utf-8") as f: f.write(text); fn=f.name
+    try:
+        p=subprocess.run([sys.executable,os.path.join(ART,"check_store.py"),fn,"--scope","tp8","--age",age],capture_output=True,text=True)
+        return p.returncode==0 and "PASS" in p.stdout and "FAIL" not in p.stdout, p.stdout.strip()
+    finally: os.unlink(fn)
+
 # ---------------- CHECK ----------------
 def _frame(rank,age):
     """frame sentences = those identical in the store outputs of c03 (green), c06 (red), c25 (cherry): colour/motif-dependent clauses drop out."""
@@ -443,8 +481,12 @@ if __name__=="__main__":
         sys.exit(0)
     pos=[x for x in a if not x.startswith("--") and x!=age]
     if len(pos)==3 and "--age" not in a and re.fullmatch(r"a(18|26|36|51|65)",pos[2]): age=pos.pop()   # ROOT-51: positional age (build_all.py m13 3 a26) used to build a18 silently
-    if len(pos)!=2: print("usage: build_all.py <person> <rank 1-8|nude> [aNN | --age aNN]",file=sys.stderr); sys.exit(2)
+    if len(pos)!=2: print("usage: build_all.py <person> <rank 1-8|nude|thaihau> [aNN | --age aNN]",file=sys.stderr); sys.exit(2)
     if not _kc_drawn(ALIAS.get(pos[0],pos[0])): print(f"REFUSED {pos[0]}: NOT drawn (ART_RULES B8, dev/art/KC_REFS.json)",file=sys.stderr); sys.exit(2)
+    if pos[1]=="thaihau":   # Lượt 618 I4: Thái hậu = HH t8 + 3 Thái hậu slots (see thaihau())
+        out=thaihau(pos[0],age)[1]; ok,msg=gate_th(pos[0],age,out)
+        if not ok: print(msg,file=sys.stderr); sys.exit(1)
+        print(out,end=""); sys.exit(0)
     out=build(pos[0],(pos[1] if pos[1]=="nude" else int(pos[1])),age)[1]
     ok,msg=gate(pos[0],(pos[1] if pos[1]=="nude" else int(pos[1])),age,out)
     if not ok: print(msg,file=sys.stderr); sys.exit(1)
