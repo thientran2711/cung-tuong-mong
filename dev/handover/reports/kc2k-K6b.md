@@ -61,3 +61,9 @@ Files: CDN img/_review/kc2k-mass/mNN_a18_{kc,ngheo}_2k.png (1520x2688 RGBA, tran
 STATE: nothing live changed; only CDN review folder img/_review/kc2k-mass/ (K6b files: sheet_K6b_*.jpg + m21–m36 PNGs).
 
 ~100 % xong (32/32 hình m21–m36, review folder only) / ~0 % chơi được (nothing live yet).
+
+## FIX 1 (ROOT-36 orders, 19/11 ~00:36Z): m21 + m25 khuê các too pastel; m28 khuê các read as TWO items
+Redone with K6a's KC v2 tone sentence (dev/handover/reports/kc2k-K6a.md: "Colour tone: keep her own hues (<PAL>) but deepen them one clear step to the game's medium tone level, the same tone level as the robes in the second reference image: medium saturation and medium lightness, rich and clearly coloured, never pastel, never pale or washed-out, never dark or muddy.") in place of my colour sentence; m28 + "ONLY a small woven flower basket … Nothing else hangs from her hands or her waist: no handkerchief, no hanging cloth, no pouch, no second item; ONE item only."
+New gens: m21 kc jUoU0rsLD0, m25 kc tCRCJIrmZJ, m28 kc UPvPeUGwny (replace EbYb75zuuO / xSBS2IgjfW / xSBSAQ4jfW). Same CDN file names overwritten (mNN_a18_kc_2k.png). Sheet (hiện tại | lần 1 | sửa): https://ctm-img.victoria-tntt.workers.dev/img/_review/kc2k-mass/sheet_K6b_fix1.jpg
+Looked: m21 a clear step deeper teal (sleeves/skirt), m25 clearly deeper violet, m28 basket alone (hanging cloth gone), coral deeper; faces/outfits/pose kept; margins 0.00 %.
+Note: sheets 1 and 2 still show the first m21/m25/m28 versions; sheet_K6b_fix1 supersedes those three cells. m26–m36 khuê các were made with my medium-tone sentence (sheet 2 judged "tone better, PASS" by ROOT-36); not redone unless asked.
