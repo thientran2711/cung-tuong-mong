@@ -1,7 +1,7 @@
 # runact-sv-fix — j29 runAct wrapper `sv` ReferenceError
 
 PRIORITY #1 CHECK: OD 0 | ledger 0 | claims runact-sv-fix (this worker) | main: bug live at dev/build/j29.js:7-12 (2bda29a1) | review/*: REVIEW F6a has the identical hoist on review/coop-thin-f6-r1 (same name `sv`, merges clean).
-Worker session_01N1tNP5qKRnDd9rqJPdwUFh (sonnet SMALL). Branch review/runact-sv-fix @ c623c7c8 (from origin/main 2bda29a1). START_CTX ~3 %.
+Worker session_01N1tNP5qKRnDd9rqJPdwUFh (sonnet SMALL). Branch review/runact-sv-fix @ 868c682c (from origin/main 2bda29a1). START_CTX ~3 %.
 
 ## Repro (LIVE build, solo, step 0)
 Fresh solo game, `stf2Ord` forced to «half» (the «qua loa» answer), `together` false, `runAct(S, rival, k)` for every k in DIRTY (19 kinds incl. bribel/laydo/laydol/giahoa/xx):
@@ -27,4 +27,4 @@ Other half-branch reader j83.js:247 (`hf`) is hoisted correctly; not affected.
 - assemble.py + build_site.sh rebuilt (index/sw/assets committed on the branch).
 
 ## Done
-SẴN SÀNG KIỂM c623c7c8
+SẴN SÀNG KIỂM 868c682c

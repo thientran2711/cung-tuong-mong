@@ -300,5 +300,5 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | MAIN ROOT-71 (opus; from MAIN STANDBY, depth 0) | handover HANDOVER_SESSION9 | ROOT-70 TAKE OVER NOW | session_01Rc5AsJ8S2aNYjotfjzaioU | RUNNING | 19/11 15:35Z | START_CTX ~10 % |
 | REVIEW coop-thin-hostnull r1 (opus BIG) of 1fc3b8a0 | review/coop-thin-hostnull-r1 | B | session_01N1tNP5FGJzDEEndPqePkcQ | RUNNING | 19/11 16:05Z |
 | coop-ptime-reds (opus; LIVE co-op f1/f2/f3/d reds + runAct 'sv is not defined' since parallel-time) | review/coop-ptime-reds | B | session_01N1tNP4mYCDDrFNfWP327T3 | RUNNING | 19/11 16:05Z |
-| runact-sv-fix (sonnet SMALL; LIVE j29 runAct `sv is not defined`, solo too; owner-bug fast lane) | review/runact-sv-fix | B | session_01N1tNP5qKRnDd9rqJPdwUFh | SẴN SÀNG KIỂM c623c7c8 | 19/11 17:25Z |
+| runact-sv-fix (sonnet SMALL; LIVE j29 runAct `sv is not defined`, solo too; owner-bug fast lane) | review/runact-sv-fix | B | session_01N1tNP5qKRnDd9rqJPdwUFh | SẴN SÀNG KIỂM 868c682c | 19/11 17:25Z |
 | REVIEW coop-thin-f6b r1 (opus BIG) of dcda88d7 | review/coop-thin-f6b-r1 | B | session_01N1tNP3MvM7Uixh5xp1DqdQ | RUNNING | 19/11 17:33Z |
