@@ -212,7 +212,7 @@ kc/ngheo NEW c13+c16 (4 gens) | handover | session_01PEhRbvGFP6YSgT5DTgo3yu (K4,
 | REVIEW maid-ladder-6 r1 (opus BIG) of cb5a7cb3 | review/maid-ladder-6-r1 | B | session_01N1tNP3R1PQaRUv57AFoczD | LIVE c12a5878 | 19/11 03:05Z |
 | seal-anim-sheet (sonnet; show-only, owner asked to see each seal animation) | handover report | MAIN ROOT-62 | session_01Rc5AsLhf6D4pDFssmG94et | SHEET READY | 19/11 03:15Z |
 | MAIN ROOT-63 (opus; child of ROOT-62, depth 1) | handover HANDOVER_SESSION9 | ROOT-62 | session_01Rc5AsN8fHJWShQ7rSPxjx5 | RUNNING | 19/11 03:37Z |
-| odds-meter-back r2 SMALL REVIEW (sonnet) | review/odds-meter-back 42bda6a9 | MAIN ROOT-63 | session_01Rc5AsJ4JEEMogtiNCfMZ6x | RUNNING | 19/11 03:43Z |
+| odds-meter-back r2 SMALL REVIEW (sonnet) | review/odds-meter-back 42bda6a9 | MAIN ROOT-63 | session_01Rc5AsJ4JEEMogtiNCfMZ6x | LIVE f43a2ba6 | 19/11 03:43Z |
 | errand-scene r6 head markers + real video (opus; successor of L23c5v2N) | review/errand-scene | MAIN ROOT-63 | session_01Rc5AsJBScJTqmWZxTCvmtQ | RUNNING | 19/11 03:48Z |
 rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach | worker see FOREMAN_D_STATUS 03:50Z line (opus) | RUNNING | 19/11 03:50Z | owner D #5
 | REVIEW law3-cost-only r1 (sonnet SMALL) of ae218b59 | review/law3-cost-only-r1 | B | session_01N1tNP6f1q3NHgpGP4qDDsQ | RUNNING | 19/11 03:55Z |
