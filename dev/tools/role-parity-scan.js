@@ -96,6 +96,22 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
   /* part-1 fix (b): the doer's OWN servants (the targets of Thưởng / Phạt / Đổi người / Che chở / Hỏi chuyện / Tâm sự / Tiến cử) span every state those
      acts read (loyal low / very low / high, in trouble this tuần, fond of someone) — the same states for her household and an NPC's, so a staff row is
      judged by the rule at that rank, never by how loyal the drawn servants happened to be */
+  /* balance-final #5: the doer is held dear (every other consort's feeling toward her ≥ 80, the same lift for her and an NPC doer): the acts gated on
+     someone's goodwill (Xin Hoàng hậu giáng · Nhờ ơn người quen rút thẻ bài · Mời đến cung ta) are judged by their rule, not by the drawn relations */
+  ["favour",a=>{for(const t of others(a)){try{const d=80-aff(t,a);if(d>0)affAdd(t,a,d)}catch(e){}}}],
+  /* balance-final #5: worlds that used to arise only from relations STACKING across worlds (now restored per world, see snapW) — the same state for her and an
+     NPC doer: «threat» = every other consort bears her a grudge (oan +60 → her «safe» need: Che chở kẻ hầu in trouble, Canh giữ các con ≥ BAL.ag.par4.kidGuard.host)
+     with a child and a servant in trouble this tuần; «faction-friend» = a faction of two others whose leader she likes (BAL.ag.par3.fac.clanAff: Xin vào phe) */
+  /* balance-final #5: «grudge» = her grievance against everyone passes her OWN harm gate (persF harmGate: a kind character such as Ân cần harms nobody below it,
+     and her trait softens each grudge added, so «malice» +60 left her at 48 < 60) — the same rule for her and an NPC doer; the «up» column samples ONE risen
+     maid, and her drawn character, not her rank, decided whether she ever schemes (Tẩm đồ); she is also calm in this world (jemo: a grief ≥ 60 «không còn lòng dạ nào»
+     blocks every scheme — the risen maid drawn on one seed had just been shamed by her old mistress); the emotion is put back after the world */
+  ["grudge",a=>{a.malice=80;let G=60;try{G=Math.max(G,(persF(a,"harmGate",0)||0)+10)}catch(e){}for(const t of others(a)){try{for(let i=0;i<12&&oan(a,t)<G;i++)oanAdd(a,t,15)}catch(e){}}
+    /* calm AFTER the grudges (jemo re-stirs a grief from its memory on every grudge added) */try{const p=typeof emoRes==="function"?emoRes(a):null;if(p){const b=p.emo;UNDO.push(()=>{p.emo=b});p.emo=null}}catch(e){}}],
+  ["threat",a=>{for(const t of others(a)){try{oanAdd(t,a,60)}catch(e){}}try{a.kids=(a.kids||[]).concat([{name:"Tiểu Bảo",sex:"m",age:5,hp:30,tal:20,fond:20,alive:true}])}catch(e){}
+    const L=(a.staff||[]).filter(s=>s&&!s.out&&s.loyal!=null);if(L[0]){const s=L[0],b={loyal:s.loyal,trouble:s.trouble};UNDO.push(()=>Object.assign(s,b));s.trouble=wk();s.loyal=60}}],
+  ["faction-friend",a=>{try{const T=others(a).filter(t=>t&&t!==S&&!facOf(t)).slice(0,2);if(T.length<2)return;S.facs=(S.facs||[]).concat([{id:9090902,m:T.map(key),name:"Phe thân"}]);
+    const l=facLeader(S.facs[S.facs.length-1]);const d=BAL.ag.par3.fac.clanAff+25-aff(a,l);if(d>0)affAdd(a,l,d)}catch(e){}}],
   ["staff",a=>{const L=(a.staff||[]).filter(s=>s&&!s.out&&s.loyal!=null);const o=liveRivals(true).find(x=>x&&x!==a&&!x.out);
     const ST=[s=>{s.loyal=10},s=>{s.loyal=25},s=>{s.loyal=45},s=>{s.trouble=wk();s.loyal=60},s=>{if(o)s.af=Object.assign({},s.af||{},{[o.id]:40});s.loyal=80}];
     L.forEach((s,i)=>{const b={loyal:s.loyal,trouble:s.trouble,af:s.af};UNDO.push(()=>Object.assign(s,b));ST[i%ST.length](s)})}]];
@@ -119,12 +135,22 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
   ["m-plain",a=>{a.sac=10;a.tai=10;a.duc=10}],
   ["m-secret",a=>{const m=MST(a);if(!m)return;const v=liveRivals(true).find(x=>x!==m&&!x.out&&!x.queen);const X=SV(a);X.sec=Math.max(2,SRVA.accuse.sec||0);X.intel=v?[v.id]:[];if(v){oanAdd(v,m,60)}}],
   ["m-emp",a=>{S.where=S.where||{};S.where.emp="vuon";const e=S.roster&&S.roster.P&&S.roster.P.emp;if(e)for(const x of e)if(Array.isArray(x))x[0]="vuon"}],
+  /* balance-final #5: a trusted maid (Chủ tin / lòng trung ≥ the gate + 10) whose mistress is at home (jagstaff asOpts «home»: Xin chủ ban thưởng /
+     Xin chủ tiến cử) — the same lift for the player maid (S.tin) and an NPC maid (loyal); before, the seeded world held no such NPC maid on one draw */
+  ["m-trust",a=>{const m=MST(a);if(!m)return;const g=Math.max(BAL.srvGate.rew,BAL.srvGate.rec)+10;if(a===S)S.tin=Math.max(S.tin||0,g);else a.loyal=Math.max(a.loyal||0,g);
+    const k=palaceOf(m);S.where=S.where||{};S.where[m.id]=k;const e=S.roster&&S.roster.P&&S.roster.P["v"+m.id];if(e)for(const x of e)if(Array.isArray(x))x[0]=k}],
   ["m-lonely",a=>{if(a===S)S.srv.af={};else a.af={}}]];
- const mSnap=()=>JSON.stringify({where:S.where,roster:S.roster,srv:S.srv,S:{suc:S.suc,sac:S.sac,tai:S.tai,duc:S.duc,bac:S.bac,ro:S.ro},sv:allServ().map(x=>({sid:x.sid,af:x.af,rk:x.rk,sec:x.sec,intel:x.intel,suc:x.suc,bac:x.bac,sac:x.sac,tai:x.tai,duc:x.duc})),R:rivals.filter(v=>v!==S).map(v=>({id:v.id,ro:v.ro,oan:v.oan}))});
+ const mSnap=()=>JSON.stringify({where:S.where,roster:S.roster,srv:S.srv,S:{suc:S.suc,sac:S.sac,tai:S.tai,duc:S.duc,bac:S.bac,ro:S.ro,tin:S.tin},sv:allServ().map(x=>({sid:x.sid,af:x.af,loyal:x.loyal,rk:x.rk,sec:x.sec,intel:x.intel,suc:x.suc,bac:x.bac,sac:x.sac,tai:x.tai,duc:x.duc})),R:rivals.filter(v=>v!==S).map(v=>({id:v.id,ro:v.ro,oan:v.oan}))});
  const mRest=j=>{const o=JSON.parse(j);S.where=o.where;S.roster=o.roster;S.srv=o.srv;Object.assign(S,o.S);for(const x of o.sv){const s=servById(x.sid);if(s)Object.assign(s,x)}for(const x of o.R){const v=rivals.find(r=>r.id===x.id);if(v)Object.assign(v,x)}};
  const N0={};try{for(const k of Object.keys(agNeedsC(liveRivals(true)[0]||S)))N0[k]=100}catch(e){};["company","desire","tea","order","love","self","tin","mp"].forEach(k=>N0[k]=100);
- const snapW=()=>JSON.stringify({facs:S.facs||[],menW:S.menW||null,S:{malice:S.malice,hh:S.hh,cutPay:S.cutPay,rank:S.rank,preg:S.preg,hidden:S.hidden,kids:S.kids,inv:S.inv,confined:S.confined},R:rivals.map(v=>({id:v.id,rank:v.rank,queen:v.queen,confined:v.confined,suc:v.suc,sung:v.sung,preg:v.preg,hidden:v.hidden,kids:v.kids,inv:v.inv,ev:v.ev,malice:v.malice,hh:v.hh,cutPay:v.cutPay}))});
- const restoreW=j=>{while(UNDO.length)try{UNDO.pop()()}catch(e){}const o=JSON.parse(j);S.facs=o.facs||[];S.menW=o.menW||{};Object.assign(S,o.S);for(const x of o.R){const v=rivals.find(r=>r.id===x.id);if(v)Object.assign(v,x)}};
+ /* balance-final #5: RELATIONS are part of the world too (j9 aff/rel/oan live in S.rl / S.ro / v.rel / v.rl / v.oan / v.ro): «social» (+40) and «disfavour» (−60)
+    used to STACK across every world and every role (by the Hoàng hậu probe every consort's feeling toward her was −60…−100 on one seeded draw and not on
+    another), so a relation-gated act (Mời đến cung ta: aff ≥ BAL.invite.hate · Xin Hoàng hậu giáng: BAL.m30.xinhhAff · Nhờ ơn người quen: BAL.favorRel)
+    was judged by how many worlds ran before it, not by its rule. Each world now starts from the same relations, for her and for an NPC doer. */
+ const relSnap=()=>({S:{rl:Object.assign({},S.rl||{}),ro:Object.assign({},S.ro||{})},R:rivals.filter(v=>v!==S).map(v=>({id:v.id,rel:v.rel,oan:v.oan,rl:Object.assign({},v.rl||{}),ro:Object.assign({},v.ro||{})}))});
+ const relRest=o=>{S.rl=o.S.rl;S.ro=o.S.ro;for(const x of o.R){const v=rivals.find(r=>r.id===x.id);if(v){v.rel=x.rel;v.oan=x.oan;v.rl=x.rl;v.ro=x.ro}}};
+ const snapW=()=>JSON.stringify({rels:relSnap(),facs:S.facs||[],menW:S.menW||null,S:{malice:S.malice,hh:S.hh,cutPay:S.cutPay,rank:S.rank,preg:S.preg,hidden:S.hidden,kids:S.kids,inv:S.inv,confined:S.confined},R:rivals.map(v=>({id:v.id,rank:v.rank,queen:v.queen,confined:v.confined,suc:v.suc,sung:v.sung,preg:v.preg,hidden:v.hidden,kids:v.kids,inv:v.inv,ev:v.ev,malice:v.malice,hh:v.hh,cutPay:v.cutPay}))});
+ const restoreW=j=>{while(UNDO.length)try{UNDO.pop()()}catch(e){}const o=JSON.parse(j);if(o.rels)relRest(o.rels);S.facs=o.facs||[];S.menW=o.menW||{};Object.assign(S,o.S);for(const x of o.R){const v=rivals.find(r=>r.id===x.id);if(v)Object.assign(v,x)}};
  const npcOpts=(role,v,grps,VL)=>{for(const [vn,f] of (VL||VAR)){const W=snapW(),W2=/^m-/.test(vn)?mSnap():null;SEED(7);try{AG.sc={}}catch(e){}try{rich(v);f(v)}catch(e){E("var "+vn,e)}
    for(let t=0;t<TRIES;t++){try{for(const o of agOptsG(v,Object.assign({},N0),null)||[])addN(role,o.k,"agOptsG")}catch(e){E("agOptsG",e)}
     /* part 2: her own real needs too (agNeeds: a full Đức / Danh weighs its cost little), not only the flat all-needs world N0 */

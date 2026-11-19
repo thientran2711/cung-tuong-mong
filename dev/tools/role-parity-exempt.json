@@ -100,8 +100,8 @@
 "label": "Điểm trang"
 },
 {
-"reason": "emotion card (BAL.ea.card): NPC side jemoact eaNpcWeek, same card table, chance by feeling (ag-all-parity 1a, NUM, no AG key)",
-"re": "^label:(Đọc sách giải khuây|Đàn hát tự thưởng|Đập đồ|Mắng cung nữ|Khóc thầm|Viết thư nhà)"
+"reason": "emotion card (BAL.ea.card): NPC side jemoact eaNpcWeek, same card table, chance by feeling (ag-all-parity 1a, NUM, no AG key); balance-final #5: + Thắp hương cầu an, the fear (sợ) card of the same table (jemoact mk huong), first seen once the scan has a world where she is afraid",
+"re": "^label:(Đọc sách giải khuây|Đàn hát tự thưởng|Đập đồ|Mắng cung nữ|Khóc thầm|Viết thư nhà|Thắp hương cầu an)"
 },
 {
 "reason": "first meeting (k61 greet): NPCs already know each other; NPC→her approach = jgreet gmOpts (ag-all-parity 1b)",
