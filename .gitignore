@@ -6,3 +6,4 @@
 /dev/handover/refs/*.jpg
 /dev/handover/refs/*.png
 img/*.json
+dev/site/.cdn-state.json
