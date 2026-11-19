@@ -28,15 +28,15 @@ build.py refs emitter (--log/--refs): YES · emperor-B refs emitter: NO
 | cung nữ tm2 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
 | cung nữ tm3 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
 | cung nữ tm4 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
-| trung y ty1 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
-| trung y ty2 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
-| trung y ty3 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
-| trung y ty4 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
-| trung y ty5 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
-| trung y ty6 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
-| trung y ty7 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
-| trung y ty8 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
-| lãnh cung | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
+| trung y ty1 | ✅* | ❌ POSE=(3)* | ❌ POSE=(6)* | ❌ POSE=(8)* | ❌ POSE=(11)* |
+| trung y ty2 | ❌ POSE=(1)* | ❌ POSE=(3)* | ❌ POSE=(5)* | ❌ POSE=(8)* | ❌ POSE=(11)* |
+| trung y ty3 | ❌ POSE=(1)* | ❌ POSE=(2)* | ❌ POSE=(7)* | ❌ POSE=(8)* | ❌ POSE=(11)* |
+| trung y ty4 | ❌ POSE=(1)* | ❌ POSE=(2)* | ❌ POSE=(6)* | ❌ POSE=(8)* | ❌ POSE=(11)* |
+| trung y ty5 | ✅* | ❌ POSE=(1)* | ❌ POSE=(6)* | ❌ POSE=(8)* | ❌ POSE=(10)* |
+| trung y ty6 | ❌ POSE=(2)* | ❌ POSE=(5)* | ❌ POSE=(11)* | ❌ POSE=(14)* | ❌ POSE=(18)* |
+| trung y ty7 | ❌ POSE=(2)* | ❌ POSE=(4)* | ❌ POSE=(12)* | ❌ POSE=(14)* | ❌ POSE=(20)* |
+| trung y ty8 | ❌ POSE=(3)* | ❌ POSE=(4)* | ❌ POSE=(11)* | ❌ POSE=(14)* | ❌ POSE=(21)* |
+| lãnh cung | ✅* | ❌ POSE=(2)* | ❌ POSE=(3)* | ❌ POSE=(3)* | ❌ POSE=(4)* |
 | triều phục 1 | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* |
 | triều phục 2 | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* |
 | triều phục 3 | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* |
@@ -69,15 +69,15 @@ Commands (example, a26): `dev/art/t8-prompt-B/build.py c01 --low 1 v0 --spec5pos
 | cung nữ tm2 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
 | cung nữ tm3 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
 | cung nữ tm4 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
-| trung y ty1 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
-| trung y ty2 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
-| trung y ty3 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
-| trung y ty4 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
-| trung y ty5 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
-| trung y ty6 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
-| trung y ty7 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
-| trung y ty8 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
-| lãnh cung | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
+| trung y ty1 | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* |
+| trung y ty2 | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* |
+| trung y ty3 | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* |
+| trung y ty4 | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* |
+| trung y ty5 | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* |
+| trung y ty6 | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* |
+| trung y ty7 | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* |
+| trung y ty8 | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* |
+| lãnh cung | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* |
 | triều phục 1 | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* |
 | triều phục 2 | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* |
 | triều phục 3 | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* |
@@ -305,11 +305,11 @@ Codes as above, plus NOSRC = no old prompt exists (rule 6: never invented; owner
 
 ## RED LIST (grouped)
 
-- **Consorts c01–c32 (32)** — POSE=: t6/a18, t6/a26, t6/a36, t6/a51, t6/a65, t7/a18, t7/a26, t7/a36, t7/a51, t7/a65, t8/a18, t8/a26, t8/a36, t8/a51 … (+9)
-- **Consorts c01–c32 (32)** — NOCMD (no builder mode): tm0/a18, tm0/a26, tm0/a36, tm1/a18, tm1/a26, tm1/a36, tm1/a51, tm1/a65, tm2/a18, tm2/a26, tm2/a36, tm2/a51, tm2/a65, tm3/a18 … (+54)
+- **Consorts c01–c32 (32)** — POSE=: t6/a18, t6/a26, t6/a36, t6/a51, t6/a65, t7/a18, t7/a26, t7/a36, t7/a51, t7/a65, t8/a18, t8/a26, t8/a36, t8/a51 … (+51)
+- **Consorts c01–c32 (32)** — NOCMD (no builder mode): tm0/a18, tm0/a26, tm0/a36, tm1/a18, tm1/a26, tm1/a36, tm1/a51, tm1/a65, tm2/a18, tm2/a26, tm2/a36, tm2/a51, tm2/a65, tm3/a18 … (+9)
 - **Consorts c01–c32 (32)** — POSE POSE=: tr1/a18, tr1/a26, tr1/a36, tr1/a51, tr1/a65, tr2/a18, tr2/a26, tr2/a36, tr2/a51, tr2/a65, tr3/a18, tr3/a26, tr3/a36, tr3/a51 … (+26)
-- **Maid faces m01–m52 (52) in every woman tier** — RUN: t1/a18, t1/a26, t1/a36, t1/a51, t1/a65, t2/a18, t2/a26, t2/a36, t2/a51, t2/a65, t3/a18, t3/a26, t3/a36, t3/a51 … (+78)
-- **Maid faces m01–m52 (52) in every woman tier** — NOCMD (no builder mode): tm0/a18, tm0/a26, tm0/a36, tm1/a18, tm1/a26, tm1/a36, tm1/a51, tm1/a65, tm2/a18, tm2/a26, tm2/a36, tm2/a51, tm2/a65, tm3/a18 … (+54)
+- **Maid faces m01–m52 (52) in every woman tier** — RUN: t1/a18, t1/a26, t1/a36, t1/a51, t1/a65, t2/a18, t2/a26, t2/a36, t2/a51, t2/a65, t3/a18, t3/a26, t3/a36, t3/a51 … (+123)
+- **Maid faces m01–m52 (52) in every woman tier** — NOCMD (no builder mode): tm0/a18, tm0/a26, tm0/a36, tm1/a18, tm1/a26, tm1/a36, tm1/a51, tm1/a65, tm2/a18, tm2/a26, tm2/a36, tm2/a51, tm2/a65, tm3/a18 … (+9)
 - **Foreign princesses Nam Chiếu nc1–3 / Bắc Địch bd1–3 (6)** — NOCMD (no builder mode): pre/a18, t2/a18, t2/a26, t2/a36, t2/a51, t2/a65, t3/a18, t3/a26, t3/a36, t3/a51, t3/a65, t4/a18, t4/a26, t4/a36 … (+72)
 - **Foreign princesses Nam Chiếu nc1–3 / Bắc Địch bd1–3 (6)** — POSE: t1/a18, t1/a26, t1/a36, t1/a51, t1/a65
 - **Foreign princesses Nam Chiếu nc1–3 / Bắc Địch bd1–3 (6)** — ITEM POSE POSE= ROYAL3: t6/a18, t6/a26, t6/a36, t6/a51, t6/a65

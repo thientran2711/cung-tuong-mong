@@ -64,7 +64,7 @@ def consort_cmd(i, t, a):
     if re.fullmatch(r"tr[1-8]", t): return [B, i, "--trieu", t[2], "v0"] + ag
     return None
 
-ITEMT = {**{"t%d" % n: "t%d" % n for n in range(1, 9)}, **{"tm%d" % n: "tm%d" % n for n in range(5)}, "th": "thaihau", "nude": "nude", "kc": "kc", "ngheo": "ngheo", "cold": "lanh"}
+ITEMT = {**{"t%d" % n: "t%d" % n for n in range(1, 9)}, **{"tm%d" % n: "tm%d" % n for n in range(5)}, "th": "thaihau", "nude": "nude", "kc": "kc", "ngheo": "ngheo", "cold": "lanh", **{"ty%d" % n: "t%d" % n for n in range(1, 9)}}  # N5d: trung y tN holds the rank-N item cell (item_age.py)
 A0_OK = {"t1", "t4", "t5", "t6", "t7", "t8", "th", "nude", "kc", "ngheo"}  # FIGURE_GATE A0 APPROVED FORMS rows (t5 = old Phi; redesign rejected)
 def a0_consort(t, a):
     if t == "th": return a in ("a36", "a51", "a65")

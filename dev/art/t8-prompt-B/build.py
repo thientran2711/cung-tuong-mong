@@ -773,7 +773,32 @@ def build_nude_own(c,face,right):
     s+=" The dragon is the main embroidered motif, larger and more prominent than the flowers."
     s+=" All flowers, clouds and dragons are fine silk-thread embroidery stitched directly into the fabric, flat and integrated with the cloth, following its folds, not appliqué, not pasted patches, not raised. "+FAB
     return s+_pose(item,hk,right)+CLOSE+END
+# ---------- N5d item 4: --state ty1..ty8 (trung y) and --state cold (lãnh cung), consorts cNN and maids mNN, all 5 ages ----------
+# RE-MAKE MODE (FIGURE_GATE A0): image 1 = her live picture of that tier+age (face + figure), image 2 = style3_girls. Design = the approved maid-ty-m09 v2 recipe (dev/handover/reports/fig-cutout-clean/PROMPT_TEMPLATE.txt:
+# DESIGN + HAIR sentences verbatim; its "like figure number COLNO of reference 2" is dropped: no sheet image in this builder). Colour per tier = FIGURE_GATE C8 [OD:L392] = jty.js TY_COL.
+# a51/a65: owner d0f31d3 (no switch): a DEEPER shade of the SAME colour, same hue family (AGE_TXT's generic "pink becomes deep rose-plum" is overridden by this sentence).
+# Cold = the OLD lãnh cung outfit sentence copied verbatim from main dev/figwork/jobs.json N-cNN-tcold (+ gp.py B: robe hanging straight and calm, opaque). Held item: ty N -> the tN rank cell of item_age.py, cold -> "lanh" cell.
+TY_COLOUR={1:"ivory",2:"pale sage-green",3:"pale blue",4:"pale powder-pink",5:"pale lavender-purple",6:"pale rose-red",7:"pale amber-orange",8:"pale yellow"}
+TY_HAIR=" HAIR: neat bun with soft strands; ONE small gold hairpin set close against the side of the bun with a short pearl bead tassel hanging down along the hair; the hairpin must lie within the hair outline: NO stick or rod sticking out sideways beyond the hair, no flower."
+COLD_OUTFIT="Outfit (the cold palace, ONE plain outfit identical for everyone): a plain UNDYED pale grey-white coarse linen robe with a simple cross collar and a plain linen sash, NO embroidery, NO pattern, NO colour, NO jewellery, NO gold; hair in a simple neat low bun held by ONE plain wooden hairpin, no flowers, no ornaments; clean, neat and tidy, never ragged, torn, dirty or poor-looking; she is still very beautiful, graceful and dignified."
+COLD_FAB=" The linen robe hangs straight and calm, the sleeves and sash fall naturally with NO swirling and NO flying fabric; all fabrics opaque."
+def build_ty_cold(c,state):
+    n=int(c[1:]); right=(n%2==1); pal,face=DATA[c]
+    who="A palace maid" if c[0]=="m" else "An imperial consort"
+    s=PRE+f" {who}. Her face: {face}."+IDENT+" "+AGE_TXT[AGE]   # AGE_TXT verbatim (rule 0); its generic a51/a65 colour examples are overridden by this state's own COLOUR RULE below (same hue family, no switch)
+    if state=="cold":
+        item,hk=age_item(c,"lanh","a plain wooden bowl","two")
+        s+=" "+COLD_OUTFIT+" COLOUR RULE: the linen stays the same undyed pale grey-white at every age, never dyed, never deeper, no other colour anywhere; this replaces the colour examples above."+COLD_FAB
+    else:
+        N=int(state[2:]); col=TY_COLOUR[N]
+        item,hk=age_item(c,"t%d"%N,"an embroidered handkerchief","one")
+        s+=f" Outfit (her trung y, the plain inner robe worn alone, no outer garment): a plain {col} silk trung y inner robe (simple crossed collar, tied sash, long skirt, no embroidery, no outer layer), {col}, matte soft silk with gentle folds, no gloss."+TY_HAIR
+        if AGE in ("a51","a65"): s+=f" COLOUR RULE: the whole trung y is a deeper, more muted shade of the same {col}, same hue family (rich and dignified, never bright, never pastel, never black or brown), no other colour anywhere; this replaces the colour examples above."
+        else: s+=f" COLOUR RULE: the whole trung y, collar and sash are one plain {col}, as soft and pale as the rank-colour portrait frame; no other colour anywhere."
+        s+=" Any flower or pattern on the fabric would be real silk embroidery, never printed or pasted-on."
+    return s+_pose(item,hk,right)+CLOSE+END
 def build_state(c,state,v="v0"):
+    if state=="cold" or re.fullmatch(r"ty[1-8]",state): return build_ty_cold(c,state)
     n=int(c[1:]) if c[0]=="c" else 0
     right=(n%2==1) if c[0]=="c" else (c=="nc")
     if state in ("nc1","nc6","bd1","bd6"):
@@ -946,6 +971,7 @@ def spec5pose(o,c,t):
         b=[r"look(?:ing)? back"]+([r"twirl",r"skipping",r"dance",r"swirl",r"light turn"] if (t>=6 or ag in ("a51","a65")) else [])
         # N2 r10b (ROOT-33, owner A0 rule 3): Nữ đế (--state nude) = top rank -> also skip walking / mid-step / turning / skirt-lifting / hairpin-adjusting frames (only affects --state nude)
         if globals().get("STATE")=="nude": b+=[r"walking",r"mid-step",r"turning",r"lifting her skirt",r"adjusting"]
+        if re.fullmatch(r"ty[1-8]|cold",str(globals().get("STATE"))): b+=[r"stole"]   # N5d item 4: trung y / cold linen robe has no stole
         return b
     def _raw(j):
         r_=SPEC5_POSES[tr][j]
@@ -1075,7 +1101,7 @@ if __name__=="__main__":
     a=[x for x in sys.argv[1:] if not x.startswith("--")]
     _o=build_bdq(BDQ) if BDQ else build_state(a[0],STATE,a[1] if len(a)>1 else "v0") if STATE else build_trieu(a[0],TRIEUN,a[1] if len(a)>1 else "v0") if "--trieu" in sys.argv else build_low(a[0],LOWN,a[1] if len(a)>1 else "v0") if "--low" in sys.argv else build_t7(a[0],a[1] if len(a)>1 else "v0") if "--t7" in sys.argv else build(a[0],a[1] if len(a)>1 else "v0","--golden" in sys.argv)
     if "--spec5pose" in sys.argv:
-        _t=LOWN if "--low" in sys.argv else 7 if "--t7" in sys.argv else 8
+        _t=LOWN if "--low" in sys.argv else 7 if "--t7" in sys.argv else int(STATE[2:]) if STATE and STATE[:2]=="ty" else 1 if STATE=="cold" else 8   # N5d item 4: trung y tN poses at rank N, cold at the lowest
         _o=spec5pose(_o,a[0],_t)
     if "--nostyle" in sys.argv:   # owner 18/11 ~22:30Z: only her own identity image is a reference, no style image -> drop ONLY the style-reference sentence
         _st=" The style reference image is only for skin, drawing style, fabric and embroidery: never copy its face, body or pose."
