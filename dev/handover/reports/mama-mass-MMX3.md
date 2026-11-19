@@ -11,6 +11,7 @@ Recipe = approved MMX1c two-colour sample (prompt mama-specs/c06-a36.oneref.twoc
 
 ## Prompt diff vs the approved sample (c06-a36.oneref.twocol.prompt.txt → c06-a36.oneref.twocol.noflower.prompt.txt)
 ```
++ ... the style reference image must not influence her hair. NO flowers in the hair (no fresh or silk flowers), only her hairpins. Pose: ...   (ruling A)
 - ... (her own bun and hairpins kept), with small earrings, and one small fresh camellia in crimson tucked beside the bun; soft slippers; ...
 + ... (her own bun and hairpins kept), with small earrings; soft slippers; ...
 - Her hair, hairpins and hair flower come ONLY from the identity reference and this text; ...
@@ -31,12 +32,19 @@ c06 jade green · c07 pale pink · c08 pale green · c09 deep rose · c10 jade g
 | c06 | a36 | u5WyedyQLD | aFGyHNwfSh | - | REJECTED: large pink orchid in hair (copied from face ref) |
 | c06 | a51 | jUoGfuHLD0 | If3UC8OtvE | - | REJECTED: same orchid |
 | c06 | a65 | jUoGfuHLD0 | Xm9svsWBfo | - | REJECTED: same orchid |
+| c06 | a36 | u5WyedyQLD | N2qtWyy6D9 | vQAO17Fa47 | after ruling A: no flower; jade green skirt/sash/cuffs/hem band; PASS |
+| c06 | a51 | jUoGfuHLD0 | gOmV3MWSXO | Lw8c6d5swO | PASS; gen painted dark glow bg, cut clean |
+| c06 | a65 | jUoGfuHLD0 | O6EXz8Kynm | 3zKvDbtREY | PASS |
 
 Look sheet: https://ctm-img.victoria-tntt.workers.dev/img/_review/mama-mass/twocol/look/c06-gen1-flowerfault.jpg
 Otherwise good: jade green skirt, sash, sleeve cuffs/linings; vermilion vest/robe/panels; gold thin; same face; forehead clean; a51/a65 main stepped deeper.
 
 ## Faults / notes
 1. **Removing the wording does not remove the flower.** The prompt keeps "hair exactly as in the identity reference image (her own bun and hairpins kept)" and the face refs are consort pictures wearing hair flowers, so the model copies the ref's flower. Meeting K15 needs ADDED words (e.g. a "no flowers in the hair" sentence) — outside my brief (LAW #0) → HOLD, asked ROOT-49 (19/11 ~19:00Z).
+2. ROOT-50 (successor foreman) ruling (A): `--noflower` also ADDS `NO flowers in the hair (no fresh or silk flowers), only her hairpins.` right after the hair sentence; check_store BANNED X14 (scope mama, negation-aware; --self 0 problems; old flower ma ma prompts now fail it); ART_RULES K15 note. 99 prompts rebuilt, all PASS. c06 a36 redraw: flower gone → mass continued.
+
+## Sheets (OLD one-colour | NEW two-colour, per person)
+- c06: https://ctm-img.victoria-tntt.workers.dev/img/_review/mama-mass/twocol/mama-twocol-c06.jpg
 
 ## Credits
 3 gens × 135 = 405 (no cuts).
