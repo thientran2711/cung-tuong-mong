@@ -21,12 +21,20 @@ Items now differ per age (builder 3f): a18 folding fan, a26 hand mirror, a36 ruy
 - Honest faults: a18 sceptre head rises to about collar/chin level at her right shoulder (clear of the face); a51 bead tassels end in small red beads just above the brows (on the fringe, not on skin) — same as c17 a51.
 
 ## c20 DONE (option C: five bead tassels, high standing collar; crimson second colour) — sheet img/_review/nude-mass/sheet_c20.jpg (CDN), copy out/n6c_c20_sheet.jpg
-- gens kept: a18 yiu3unMPW9 · a26 hu2QGF6vqL (redo) · a36 jUowoXzLD0 · a51 vQAFApDa47 · a65 KLpsdgqkqp (redo, + dedot.py on the red tassel bead at mid-forehead, local edit of the file; strand now ends in a pearl).
-- FAILED, not used: a26 Lw878WlswO (centre tassel ended in a red drop between the brows = forehead dot), a65 6AbG5ZtiJO (red tassel beads on the forehead skin). Both logged in the ledger (verify PASS, prompt unchanged). 7 gens.
+- gens kept: a18 DoO83wVpcl (redo, + dedot of the centre tassel red bead) · a26 hu2QGF6vqL (redo) · a36 jUowoXzLD0 · a51 vQAFApDa47 · a65 KLpsdgqkqp (redo, + dedot.py on the red tassel bead at mid-forehead, local edit of the file; strand now ends in a pearl).
+- FAILED, not used: a18 yiu3unMPW9 (small pale-pink flowers at both sides of the crown, found in the later side-of-head check) · a26 Lw878WlswO (centre tassel ended in a red drop between the brows = forehead dot), a65 6AbG5ZtiJO (red tassel beads on the forehead skin). Both logged in the ledger (verify PASS, prompt unchanged). 7 gens.
 - Items: a18 tú cầu, a26 small gold vase with flower sprig, a36 jade court tablet, a51 jade seal, a65 longevity peach. All frontal, calm, item below the chin, cloth still, lips closed, no crown flowers; a51 silver temples, a65 mostly silver.
 - Honest faults / note for foreman: option C (only five tassels, longer middle ones) tends to drop the centre tassel's red bead onto the forehead skin — expect 1 redo or a dedot per C person. a65 peach is gold (item close to robe gold).
 
 ## c21 DONE (option A, crimson second colour) — sheet img/_review/nude-mass/sheet_c21.jpg (CDN), copy out/n6c_c21_sheet.jpg
-- gens: a18 Lw87mMZswO · a26 N2qAKKw6D9 · a36 w4a9Exh7EI · a51 9ZH2KRVNYZ · a65 u5WKV7DQLD (all 1st try, no cut needed). --verify PASS.
+- gens: a18 Lw87mMZswO · a26 N2qAKKw6D9 · a36 WDgpPlJcXe (redo → cut lJtOQVFgv9; first gen w4a9Exh7EI FAILED: pink flowers at both sides of the crown) · a51 9ZH2KRVNYZ · a65 u5WKV7DQLD --verify PASS.
 - Items: a18 small crimson lantern on a gold stick, a26 poetry book, a36 incense box, a51 sutra book, a65 thread-bound almanac. Frontal, calm, cloth still, lips closed, forehead clean (full fringe row ends above the brows), no crown flowers; a51 silver temples, a65 mostly silver.
 - Honest faults: a18 lantern hangs at waist height (stick held at chest); a26/a51/a65 all read as a crimson book at game size (three different builder items, same look) — item variety per age is weak for this person.
+
+## SIDE-OF-HEAD FLOWER CHECK (added after c22, all 30 images c17–c22 re-checked)
+The face crop missed small pink silk flowers that the model sometimes tucks at the sides of the crown (prompt says no flowers). New check: crop both sides of the head at native size. Found and redone: c20 a18, c21 a36, c22 a26, c22 a36. c17–c19 clean (pearl rosettes only, no petals). Sheets c20/c21 re-made and re-uploaded.
+
+## c22 DONE (option B: black → midnight-navy at a51/a65) — sheet img/_review/nude-mass/sheet_c22.jpg (CDN), copy out/n6c_c22_sheet.jpg
+- gens kept: a18 YMlD7jZWeC · a26 Lw87CIJswO (redo) · a36 JNC65uVOq4 (redo) · a51 jUowvirLD0 · a65 5jDLoYrKxe. FAILED, not used: a26 8aifAW6IrU + a36 VX7B9pEMMU (pink flowers at the crown sides). 7 gens. --verify PASS.
+- Items: a18 gold flute held across both hands, a26 painted scroll (crimson), a36 lidded jewel casket, a51 hand warmer in crimson cover, a65 seal-paste box. Frontal, calm, cloth still, lips closed, forehead clean, no flowers; a51 silver temples, a65 mostly silver.
+- Honest faults: a51/a65 items are both small lidded boxes at game size; a65 box gold close to robe gold.
