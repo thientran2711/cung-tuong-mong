@@ -11,7 +11,7 @@ const KP_RULE="Kiếp chỉ tính là trọn khi sống đủ một năm trong c
 function kpSrv(){return typeof isSrv==="function"&&isSrv()}
 function kpNow(){if(!S)return true;if(S.kpTron)return true;const r0=S.kpR0!=null?S.kpR0:0;const mr=Math.max(S.rank||0,S.maxRank||0);
  if((S.turn||0)>=KIEP.mo)return "sống đủ một năm";
- if(S.srv&&(S.srv.risen||(S.srv.rk||0)>=3||(S.srv.rk0||0)>=3))return S.srv.risen?"được sủng hạnh":"lên Chưởng sự cô cô";
+ if(S.srv&&(S.srv.risen||(S.srv.rk||0)>=BAL.srvRk.cs||(S.srv.rk0||0)>=BAL.srvRk.cs))return S.srv.risen?"được sủng hạnh":"lên Chưởng sự cô cô";
  if(!S.srv&&mr>=Math.max(KIEP.rk,r0+1))return `thăng ${RANKS[Math.min(7,mr)].n}`;return false}
 function kpCheck(){if(!S||S.dead)return !!(S&&S.kpTron);if(S.kpTron)return true;if((typeof NLP!=="undefined"&&NLP)||S.kpR0==null)return false;const w=kpNow();if(w){S.kpTron=1;try{log(`<span class="pdl">Kiếp này đã trọn (${w}): từ nay chết hay bỏ ngang không còn mang nghiệp.</span>`)}catch(e){}return true}return false}
 function kpWhy(){const L=[];L.push(`mới ${S.turn||0}/${KIEP.mo} tháng trong cung`);if(S.srv)L.push("chưa lên Chưởng sự, chưa được sủng hạnh");else L.push(`chưa được thăng tới ${RANKS[Math.max(KIEP.rk,(S.kpR0||0)+1)].n}`);return L.join(", ")}
@@ -50,7 +50,7 @@ window.kpGate=function(i){try{const m=Q[0],c=m&&m.opts&&m.opts[i];if(c&&S&&!S.de
 /* cung nữ milestones */
 function kpMs(k,why){S.kpMs=S.kpMs||{};if(S.kpMs[k])return;S.kpMs[k]=1;try{pdAdd(KIEP.ms[k],why,"ms_"+k)}catch(e){}(S.kpMsL=S.kpMsL||[]).push(why)}
 function kpMsCheck(){if(!S||S.dead||!S.origin||S.origin.k!=="cnv"||!S.srv)return;
- if((S.srv.rk||0)>=3||(S.srv.rk0||0)>=3)kpMs("cs","cung nữ lên Chưởng sự cô cô");
+ if((S.srv.rk||0)>=BAL.srvRk.cs||(S.srv.rk0||0)>=BAL.srvRk.cs)kpMs("cs","cung nữ lên Chưởng sự cô cô");
  if(S.srv.risen)kpMs("sh","cung nữ được sủng hạnh, phong phi tần");
  if(S.srv.risen&&(S.rank||0)>=4)kpMs("phi","từ cung nữ lên Phi")}
 (function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{kpMsCheck();kpCheck()}catch(e){}return r}})();
