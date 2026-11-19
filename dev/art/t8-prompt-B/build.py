@@ -216,7 +216,24 @@ ITEMS=[("a gold ruyi set with gems","one"),("an imperial phoenix-embroidered rou
 ("a gold-mounted imperial scroll","scroll"),("a gold phoenix seal box","box"),("a phoenix-headed gold hand mirror with pearls","one"),
 ("a gold phoenix-shaped incense ball","one"),("a kingfisher-and-pearl phoenix folding fan with gold ribs","two"),
 ("a gold lidded jewel casket with a phoenix and pearls","box"),("an imperial book bound in gold-thread silk","two"),
-("a gold phoenix palace lantern with pearl tassels","two")]
+("a gold phoenix palace lantern with pearl tassels","two"),
+("a gold phoenix hairpin with pearl dangles, held in the hand","one"),
+("a pair of mandarin ducks carved in white jade on a pearl cord","one"),
+("a white-jade flute with gold phoenix bands","two"),
+("a small pipa lute inlaid with mother-of-pearl phoenixes","two"),
+("a closed imperial phoenix-embroidered silk parasol with a jade handle","one"),
+("a white-jade perfume flask with a gold phoenix stopper","one"),
+("a gold phoenix hair comb set with pearls, held in the hand","one"),
+("a small hand-held table screen of phoenix-embroidered imperial silk in a jade frame","two"),
+("a cloisonné hand censer with phoenixes and pearl tassels","one"),
+("a hand warmer of gold carved with phoenixes in an imperial silk cover","two"),
+("a small coral branch on a gold phoenix stand","box"),
+("a sutra book bound in phoenix-embroidered imperial silk","two"),
+("a small white-jade statuette of Guanyin on a gold stand","two"),
+("a carved imperial-jade longevity peach on a gold stand","two"),
+("a pair of imperial-jade health balls","two")]
+# E11 (owner Lượt 583/585, IT1): +15 items appended (the first 10 unchanged, same order) -> 25; {age: 5 indices}, 25 different items per rank, adjacent ranks (t1..t8, Nữ đế, Thái hậu) never share an item kind at one age. Pick: LIST[AGE_DICT[age][(n-1)%5]].
+ITEMS_AGE={"a18": [14, 10, 15, 7, 3], "a26": [12, 16, 17, 4, 11], "a36": [13, 18, 2, 1, 20], "a51": [8, 19, 22, 21, 5], "a65": [24, 6, 0, 23, 9]}
 GOLDEN_ITEM={"c06":0,"c16":1,"c20":2,"c25":3}   # as run in the A/B test
 EXTRA_ITEM={"c24":5}   # c24 would repeat neighbour c25
 def hand(key,right):
@@ -322,7 +339,24 @@ def build(c,v="v0",golden=False):
 ITEMS7=[("a gilded hand censer","c"),("an imperial round fan with a gold filigree frame and gems","two"),("a gold-filigree jewel casket set with gems","box"),
 ("a kingfisher-feather folding fan with gold ribs","two"),("a gold lotus-shaped incense box","box"),("a gold hand mirror set with gems","one"),
 ("a gold-mounted jade vase with peonies","one"),("a gold-filigree palace lantern with gem tassels","two"),("a gold flower basket set with gems","box"),
-("a gold-and-coral bead string held as a hand ornament","one")]
+("a gold-and-coral bead string held as a hand ornament","one"),
+("a gold-filigree butterfly hairpin with kingfisher-feather wings, held in the hand","one"),
+("a kingfisher-feather silk ball (tú cầu) with gem tassels","one"),
+("a jade flute with gold-filigree bands and gem tassels","two"),
+("a small pipa lute inlaid with gold filigree and gems","two"),
+("a closed kingfisher-feather silk parasol with a gold handle","one"),
+("a poetry book bound in kingfisher silk with gold clasps","two"),
+("a gold-filigree perfume flask set with gems","one"),
+("a gold-filigree hair comb set with gems, held in the hand","one"),
+("a small hand-held table screen of kingfisher-feather silk in a gold frame","two"),
+("a gold-filigree birdcage with its silk cover drawn back","one"),
+("a gold-filigree hand warmer in a kingfisher-silk cover","two"),
+("an imperial-jade ruyi with gold-filigree mounts","two"),
+("a sutra book bound in kingfisher silk","two"),
+("a jade walking staff with a gold-filigree head","one"),
+("a carved imperial-jade crane on a gold stand","two")]
+# E11 (owner Lượt 583/585, IT1): +15 items appended (the first 10 unchanged, same order) -> 25; {age: 5 indices}, 25 different items per rank, adjacent ranks (t1..t8, Nữ đế, Thái hậu) never share an item kind at one age. Pick: LIST[AGE_DICT[age][(n-1)%5]].
+ITEMS7_AGE={"a18": [1, 12, 6, 8, 11], "a26": [10, 16, 13, 19, 21], "a36": [14, 9, 2, 18, 7], "a51": [0, 3, 4, 5, 17], "a65": [22, 24, 23, 20, 15]}
 GOLDEN7={"c06":0,"c25":2}
 def hand7(key,right):
     d="right" if right else "left"
@@ -520,12 +554,104 @@ for _c in LOW_SIG: ITEMS_LOW[_c]=low_items(_c)
 
 # ITEMS t1-t6 = FIGURE_GATE 3f FIXED LISTS (Foreman C ROOT-30, 18/11 ~21:22Z real). OWNER (verbatim): "Ủa sao mày vẽ? Tao đang coi C05 nè, mày vẽ ai cũng cầm quạt vậy? Bậc nào cũng cầm quạt vậy, đâu phải. Ủa? Cái luật cầm đồ của tao đâu? Mày bỏ sót cái luật món cầm trên tay rồi. Và thêm một cái nữa là ai cũng có một Bậc nào cũng sẽ có một cái món đồ riêng cầm trên tay. Đã có một người làm cái danh sách đó rồi mà tại sao mày không làm theo? Rồi họ còn phải tương tác với cái món đồ đó nữa. ..."
 # The old LOW_SIG ladder (her signature item stepped up) is REPLACED: every rank takes ONE item from ITS OWN 3f list, spread so neighbouring people differ and one person never holds the same KIND of item at two ranks; each item kind has its own hand interaction (HAND_LOW).
-L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered silk handkerchief","kerchief"),("a small woven bamboo flower basket","basket"),("a sprig of fresh plum blossoms","sprig"),("a plain paper folding fan","ffan"),("a thread-bound book","book"),("a small embroidery hoop with silk","hoop"),("a small bamboo flute","flute"),("a small silk lantern on a short bamboo stick","lantern"),("a simple embroidered cloth sachet","dangle")],
-2:[("a silk round fan with a lacquered handle and a small tassel","rfan"),("an embroidered silk sachet with a tassel","dangle"),("a painted paper folding fan","ffan"),("a poetry book with a silk cover","book"),("a small porcelain vase with a flower sprig","vase"),("an embroidery hoop with a fine silk scene","hoop"),("a jade-bead tassel ornament","dangle"),("a silk-covered lantern with a tassel","lantern"),("a small lacquered comb box","box"),("a bamboo flute with a silk tassel","flute")],
-3:[("an embroidered silk round fan with a silk tassel","rfan"),("a small red-lacquered box","box"),("a painted scroll with wooden rollers","scroll"),("a painted silk folding fan with bone ribs","ffan"),("a small celadon vase with a flower sprig","vase"),("a silver hand mirror","mirror"),("an embroidered silk palace lantern","lantern"),("a silver-mounted thread-bound book","book"),("a carved peach-wood comb in a silk case","box"),("a small silver-wire flower basket","basket")],
-4:[("a round fan with a carved jade handle and jade tassel","rfan"),("a sandalwood folding fan with carved ribs","ffan"),("a lacquered jewel box","box"),("a scroll with jade rollers","scroll"),("a jade disc pendant on a silk cord","dangle"),("a silver-and-enamel hand mirror","mirror"),("a small cloisonné vase with flowers","vase"),("a gauze palace lantern with a jade pendant","lantern"),("a silver-mounted book box","box"),("a small white-jade vase with blossoms","vase")],
-5:[("a round fan with a gold-inlaid handle and gem tassel","rfan"),("a gilded lacquer box","box"),("a painted scroll with gold fittings","scroll"),("an ivory folding fan with gold leaf","ffan"),("a cloisonné enamel vase with flowers","vase"),("a gold-and-jade hand mirror","mirror"),("a gilded silver flower basket","basket"),("a silver-gilt palace lantern with pearl tassels","lantern"),("a coral-and-pearl bead tassel ornament","dangle"),("a gold-mounted embroidered silk book","book")],
-6:[("a white-jade ruyi","ruyi"),("a jewelled box","box"),("a round fan with a carved jade-and-gold handle and pearls","rfan"),("a gold-and-pearl hand mirror","mirror"),("a white-jade vase with gold mounts and flowers","vase"),("a pearl-embroidered silk folding fan with jade ribs","ffan"),("a carved jade incense box","box"),("a small coral branch on a gold stand","stand"),("a pearl-tasselled silk lantern with a jade top","lantern"),("a gold-mounted jade pendant on a silk cord","dangle")]}
+L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered silk handkerchief","kerchief"),("a small woven bamboo flower basket","basket"),("a sprig of fresh plum blossoms","sprig"),("a plain paper folding fan","ffan"),("a thread-bound book","book"),("a small embroidery hoop with silk","hoop"),("a small bamboo flute","flute"),("a small silk lantern on a short bamboo stick","lantern"),("a simple embroidered cloth sachet","dangle"),
+("a small paper kite painted like a swallow, its string on a bamboo reel","two"),
+("an embroidered silk ball (tú cầu) with a small tassel","dangle"),
+("a folded letter on flower-patterned paper tied with a silk cord","two"),
+("a small painted wooden comb box","box"),
+("a small glazed clay pot with an orchid","two"),
+("a plain wooden hand mirror","mirror"),
+("a closed plain silk parasol with a bamboo handle","one"),
+("a sutra book bound in plain blue cloth","book"),
+("a string of plain wooden prayer beads","dangle"),
+("a small hand warmer in a plain silk cover","two"),
+("a calligraphy brush with a bamboo shaft","one"),
+("a bamboo walking staff with a silk cord","one"),
+("a bundle of white chrysanthemums tied with a silk ribbon","sprig"),
+("a small wooden fish (mõ) with its striker","one"),
+("a pair of walnut health balls","two")],
+2:[("a silk round fan with a lacquered handle and a small tassel","rfan"),("an embroidered silk sachet with a tassel","dangle"),("a painted paper folding fan","ffan"),("a poetry book with a silk cover","book"),("a small porcelain vase with a flower sprig","vase"),("an embroidery hoop with a fine silk scene","hoop"),("a jade-bead tassel ornament","dangle"),("a silk-covered lantern with a tassel","lantern"),("a small lacquered comb box","box"),("a bamboo flute with a silk tassel","flute"),
+("a small pellet drum (trống lắc) with a lacquered handle","one"),
+("a small cricket cage of lacquered bamboo with a silk tassel","dangle"),
+("a lacquered butterfly hairpin, held in the hand","dangle"),
+("a small pipa lute with a lacquered body","two"),
+("a closed embroidered silk parasol with a lacquered handle","one"),
+("a small lacquered hand mirror","mirror"),
+("a painted scroll on lacquered rollers","scroll"),
+("a lace-edged embroidered silk handkerchief","kerchief"),
+("a small potted orchid in a glazed porcelain pot","two"),
+("a small lacquered hand warmer in an embroidered silk cover","two"),
+("a sutra book bound in embroidered silk","book"),
+("a thread-bound almanac in an embroidered silk cover","book"),
+("a carved wooden longevity peach","two"),
+("a string of agate prayer beads","dangle"),
+("a fly-whisk of white horsehair with a lacquered handle","one")],
+3:[("an embroidered silk round fan with a silk tassel","rfan"),("a small red-lacquered box","box"),("a painted scroll with wooden rollers","scroll"),("a painted silk folding fan with bone ribs","ffan"),("a small celadon vase with a flower sprig","vase"),("a silver hand mirror","mirror"),("an embroidered silk palace lantern","lantern"),("a silver-mounted thread-bound book","book"),("a carved peach-wood comb in a silk case","box"),("a small silver-wire flower basket","basket"),
+("an embroidered silk ball (tú cầu) with small silver bells","dangle"),
+("a silver butterfly hairpin, held in the hand","dangle"),
+("a small embroidered silk sachet with a silver bead","dangle"),
+("a bamboo flute with silver bands","flute"),
+("a small pipa lute inlaid with silver","two"),
+("a folded letter on silver-flecked flower paper","two"),
+("an embroidered silk handkerchief with silver thread","kerchief"),
+("a personal name seal of agate with a silk tassel","one"),
+("a silver hand warmer in an embroidered silk cover","two"),
+("a sutra book bound in finely embroidered silk","book"),
+("a calligraphy brush with a red-lacquer shaft and a silver cap","one"),
+("a small potted orchid in a celadon pot","two"),
+("a red-lacquer walking staff with a silver head","one"),
+("a pair of agate health balls","two"),
+("a small silver hand bell with a silk tassel","dangle")],
+4:[("a round fan with a carved jade handle and jade tassel","rfan"),("a sandalwood folding fan with carved ribs","ffan"),("a lacquered jewel box","box"),("a scroll with jade rollers","scroll"),("a jade disc pendant on a silk cord","dangle"),("a silver-and-enamel hand mirror","mirror"),("a small cloisonné vase with flowers","vase"),("a gauze palace lantern with a jade pendant","lantern"),("a silver-mounted book box","box"),("a small white-jade vase with blossoms","vase"),
+("a jade butterfly hairpin, held in the hand","dangle"),
+("a small cricket cage of jade-trimmed bamboo","dangle"),
+("a jade flute with a jade tassel","flute"),
+("a small pellet drum (trống lắc) with a carved jade handle","one"),
+("a small pipa lute inlaid with jade","two"),
+("a closed silk-brocade parasol with a carved jade handle","one"),
+("a poetry book bound in silk brocade with jade clasps","book"),
+("a small birdcage with a jade hook and its brocade cover drawn back","lantern"),
+("a carved jade hair comb, held in the hand","one"),
+("a jade name seal with a silk tassel","one"),
+("a small carved-jade hand warmer in a brocade cover","two"),
+("a small carved jade mountain on a rosewood stand","stand"),
+("a carved jade crane on a rosewood stand","stand"),
+("a carved jade longevity peach","two"),
+("a small jade statuette of Guanyin on a stand","stand")],
+5:[("a round fan with a gold-inlaid handle and gem tassel","rfan"),("a gilded lacquer box","box"),("a painted scroll with gold fittings","scroll"),("an ivory folding fan with gold leaf","ffan"),("a cloisonné enamel vase with flowers","vase"),("a gold-and-jade hand mirror","mirror"),("a gilded silver flower basket","basket"),("a silver-gilt palace lantern with pearl tassels","lantern"),("a coral-and-pearl bead tassel ornament","dangle"),("a gold-mounted embroidered silk book","book"),
+("a gold butterfly hairpin with gem wings, held in the hand","dangle"),
+("a gold-thread embroidered ball (tú cầu) with a gem tassel","dangle"),
+("a flute with gold bands and a gem tassel","flute"),
+("a small pipa lute inlaid with gold and mother-of-pearl","two"),
+("a closed gold-thread brocade parasol with a gilded handle","one"),
+("a gilded birdcage with its brocade cover drawn back","lantern"),
+("a gold-thread brocade handkerchief","kerchief"),
+("a gilded hair comb set with gems, held in the hand","one"),
+("a small hand-held table screen of gold-thread brocade embroidered with flowers","two"),
+("a gilded hand warmer in a brocade cover","two"),
+("a fine-jade name seal with a gem tassel","one"),
+("a sutra book bound in gold-thread brocade","book"),
+("a gilded walking staff with a jade head","one"),
+("a pair of fine-jade health balls","two"),
+("a carved fine-jade lingzhi fungus on a gilded stand","stand")],
+6:[("a white-jade ruyi","ruyi"),("a jewelled box","box"),("a round fan with a carved jade-and-gold handle and pearls","rfan"),("a gold-and-pearl hand mirror","mirror"),("a white-jade vase with gold mounts and flowers","vase"),("a pearl-embroidered silk folding fan with jade ribs","ffan"),("a carved jade incense box","box"),("a small coral branch on a gold stand","stand"),("a pearl-tasselled silk lantern with a jade top","lantern"),("a gold-mounted jade pendant on a silk cord","dangle"),
+("a pearl-and-gold butterfly hairpin, held in the hand","dangle"),
+("a small cricket cage of white jade and gold with a pearl tassel","dangle"),
+("a white-jade flute with gold bands","flute"),
+("a small pipa lute inlaid with mother-of-pearl and white jade","two"),
+("a closed pearl-embroidered silk parasol with a white-jade handle","one"),
+("a white-jade perfume flask with a gold stopper","one"),
+("a poetry book bound in pearl-embroidered silk with gold clasps","book"),
+("a pearl-embroidered silk handkerchief","kerchief"),
+("a small hand-held table screen of pearl-embroidered silk in a white-jade frame","two"),
+("a white-jade hair comb mounted in gold, held in the hand","one"),
+("a white-jade hand warmer in a pearl-embroidered cover","two"),
+("an openwork gold incense ball with pearl tassels","dangle"),
+("a hanging scroll of pine and cranes on pearl-embroidered silk with white-jade rollers","scroll"),
+("a carved white-jade longevity peach on a gold stand","two"),
+("a pair of white-jade health balls","two")]}
+# E11 (owner Lượt 583/585, IT1): +15 items appended (the first 10 unchanged, same order) -> 25; {age: 5 indices}, 25 different items per rank, adjacent ranks (t1..t8, Nữ đế, Thái hậu) never share an item kind at one age. Pick: LIST[AGE_DICT[age][(n-1)%5]].
+L3F_AGE={1:{"a18": [7, 12, 11, 5, 10], "a26": [0, 2, 4, 13, 8], "a36": [6, 16, 9, 1, 3], "a51": [19, 15, 23, 20, 17], "a65": [22, 24, 14, 18, 21]},2:{"a18": [15, 1, 10, 12, 13], "a26": [11, 16, 5, 14, 9], "a36": [0, 18, 2, 3, 19], "a51": [8, 6, 17, 4, 23], "a65": [22, 24, 20, 7, 21]},3:{"a18": [15, 10, 7, 13, 2], "a26": [11, 16, 1, 12, 17], "a36": [14, 4, 9, 5, 6], "a51": [3, 19, 23, 24, 8], "a65": [21, 20, 0, 22, 18]},4:{"a18": [13, 8, 1, 9, 10], "a26": [12, 15, 17, 14, 11], "a36": [3, 16, 20, 18, 0], "a51": [4, 19, 23, 6, 2], "a65": [7, 5, 22, 21, 24]},5:{"a18": [4, 13, 12, 11, 6], "a26": [1, 9, 10, 2, 5], "a36": [20, 15, 7, 14, 18], "a51": [17, 21, 24, 0, 16], "a65": [22, 19, 8, 3, 23]},6:{"a18": [16, 8, 5, 15, 10], "a26": [17, 11, 14, 12, 9], "a36": [1, 4, 19, 13, 20], "a51": [0, 18, 21, 24, 23], "a65": [22, 2, 7, 6, 3]}}
 HAND_LOW={"rfan":"the round fan held up in one hand at chest height, gently turned to show its painting, the other hand lightly touching its tassel, body and face frontal, standing squarely facing the viewer, no turn",
 "ffan":"the folding fan half-open in one hand at waist height, her fingers spreading its ribs, the other hand resting on her sash, body and face frontal, standing squarely facing the viewer, no turn",
 "kerchief":"the handkerchief draped over the fingers of one hand, lifted gently at waist height, the other hand smoothing its edge, body and face frontal, standing squarely facing the viewer, no turn",
@@ -806,7 +932,9 @@ QP_OLD="Copy EXACTLY everything from image 1: hair, headdress, face, costume, po
 BDQ_COL={"1":"jade-green like #4E9C86","2":"sapphire-blue like #4F78B4"}
 BDQ_COSTUME={"1":"KLpl1nHkqp","2":"UPv97BAwny"}   # F2 r4: our r3 BĐ gens = costume source per colour
 BDITEM="10"
-BD_ITEMS={"1":("a turquoise-and-coral bead string","bead"),"2":("a small fur-trimmed leather pouch","pouch"),"3":("a silver-mounted horn-handled whisk-fan of horsehair","fan"),"4":("a carved bone hand mirror with a turquoise rim","mirror"),"5":("a small felt-bound book","book"),"6":("a painted leather folding fan","fan"),"7":("a branch of dried steppe flowers tied with red cord","branch"),"8":("an embroidered silk bag with coral beads","pouch"),"9":("a small ornamented silver whistle-flute on a cord","flute"),"10":("a white-jade ruyi with a turquoise bead","ruyi")}
+BD_ITEMS={"1":("a turquoise-and-coral bead string","bead"),"2":("a small fur-trimmed leather pouch","pouch"),"3":("a silver-mounted horn-handled whisk-fan of horsehair","fan"),"4":("a carved bone hand mirror with a turquoise rim","mirror"),"5":("a small felt-bound book","book"),"6":("a painted leather folding fan","fan"),"7":("a branch of dried steppe flowers tied with red cord","branch"),"8":("an embroidered silk bag with coral beads","pouch"),"9":("a small ornamented silver whistle-flute on a cord","flute"),"10":("a white-jade ruyi with a turquoise bead","ruyi"),"11":("a small round felt fan trimmed with fur, with a silver handle","fan"),"12":("a carved horn comb set with turquoise, held in the hand","ruyi"),"13":("a small embroidered felt ball with coral tassels","pouch"),"14":("a small two-stringed horse-head fiddle","flute"),"15":("a turquoise-studded silver amulet box on a cord","bead"),"16":("a small felt-wrapped bundle of letters tied with red cord","book"),"17":("a silver-handled riding crop with a coral tassel","ruyi"),"18":("a small silver hand bell with coral beads","bead"),"19":("a small silver prayer wheel","ruyi"),"20":("a felt-bound sutra book with silver clasps","book"),"21":("a dark wooden walking staff with a silver ram's-head top","ruyi"),"22":("a small fur-lined silver hand warmer","pouch"),"23":("a silver-mounted turquoise snuff bottle","fan"),"24":("a bundle of dried wormwood tied with red cord","branch"),"25":("a silver-mounted eagle-feather fan","fan")}
+# E11 (owner Lượt 583/585, IT1): +15 items appended (the first 10 unchanged, same order) -> 25; {age: 5 indices}, 25 different items per rank, adjacent ranks (t1..t8, Nữ đế, Thái hậu) never share an item kind at one age. Pick: LIST[AGE_DICT[age][(n-1)%5]]. BD keys are the dict keys.
+BD_AGE={"a18": ["14", "11", "13", "9", "4"], "a26": ["5", "16", "12", "8", "7"], "a36": ["22", "10", "3", "17", "2"], "a51": ["23", "24", "25", "18", "1"], "a65": ["15", "20", "19", "21", "6"]}
 HAND_BD={"bead":"the bead string draped over the fingers of one hand at chest height below the chin, the other hand resting lightly on her sash","pouch":"the pouch held in one hand at waist height, the other hand resting lightly on its cord","fan":"the fan held up in one hand at chest height below the chin, the other hand resting lightly on her sash","mirror":"the hand mirror held in one hand at chest height with its back turned outward, the other hand touching a hairpin","book":"the book held open in both hands at waist height","branch":"the branch held up in one hand at chest height below the chin, the other hand touching a blossom","flute":"the flute held in both hands at chest height below the chin","ruyi":"the ruyi held upright in one hand at chest height below the chin, the other hand resting lightly on her sash"}
 def build_bdq(o="1"):
     # F2 r4 (owner Lượt 229 via ROOT-40 ~03:51Z, option A): image 2 = her BĐ rank-1 picture BhNIDfhoQR (face + her own hair), image 3 = our r3 BĐ gen (costume + headdress ONLY, no c06 person); hair braided BĐ-style pinned up high; item = FIGURE_GATE H BĐ #1; slight shoulder turn. Built from QP_OLD by swaps (provenance kept).
@@ -829,7 +957,24 @@ for _k in ("bd","nc"):   # 19/11 Lượt 407: the 6 princess faces bd1-3 / nc1-3
 for _id,_m,_mh,_s,_sh in (("nc1","indigo","#5E6694","warm ivory","#EAD7BF"),("nc2","soft jade green","#9EB28F","deep rose","#CF7E83"),("nc3","wisteria lilac","#CCA7C8","rose-red","#D18A92")):
     DATA[_id]=(f"{_m} and {_s}",DATA[_id][1]); ORIG1[_id]=(f"{_m} silk like {_mh}",f"{_s} like {_sh}"); M_COLS[_id]=(_m,_mh,_s,_sh)
 IDENT=" From the identity reference keep ONLY her face, facial features and hairstyle colour; do NOT copy the outfit, hair ornaments or accessories of the reference, dress her in the NEW outfit below. The style reference image is only for skin, drawing style, fabric and embroidery: never copy its face, body or pose."
-TH_ITEMS=[("a string of sandalwood prayer beads","one"),("a jade-headed dragon-head staff","one"),("a thread-bound sutra book with a gold-brocade cover","two"),("a small gilded bronze hand censer","two"),("a scroll of calligraphy on yellow silk","two"),("an ivory-handled silk fan","one"),("a small white-jade ruyi","two"),("an embroidered silk prayer-bead pouch","one"),("a carved sandalwood box","two"),("a hand mirror in a bronze-and-jade frame","one")]
+TH_ITEMS=[("a string of sandalwood prayer beads","one"),("a jade-headed dragon-head staff","one"),("a thread-bound sutra book with a gold-brocade cover","two"),("a small gilded bronze hand censer","two"),("a scroll of calligraphy on yellow silk","two"),("an ivory-handled silk fan","one"),("a small white-jade ruyi","two"),("an embroidered silk prayer-bead pouch","one"),("a carved sandalwood box","two"),("a hand mirror in a bronze-and-jade frame","one"),
+("a dark-sandalwood folding fan with a long silk tassel","one"),
+("an old-jade pendant carved with the longevity character on a silk cord","one"),
+("a small vase of old celadon with a single orchid","two"),
+("a palace lantern of longevity-pattern brocade on a sandalwood frame","two"),
+("a painting album bound in longevity-pattern brocade","two"),
+("a small hand warmer of gilt bronze in a brocade cover","two"),
+("an openwork gilt-bronze incense ball on a long silk tassel","one"),
+("a fly-whisk of white horsehair with a sandalwood handle","one"),
+("a carved old-jade longevity peach","two"),
+("a small old-jade statuette of Guanyin on a sandalwood base","two"),
+("a pair of old-jade health balls","two"),
+("a small potted orchid in a dark glazed pot","two"),
+("a carved old-jade lingzhi fungus on a sandalwood stand","two"),
+("a small gilt-bronze hand bell with a silk tassel","one"),
+("a thread-bound almanac in a brocade cover","two")]
+# E11 (owner Lượt 583/585, IT1): +15 items appended (the first 10 unchanged, same order) -> 25; {age: 5 indices}, 25 different items per rank, adjacent ranks (t1..t8, Nữ đế, Thái hậu) never share an item kind at one age. Pick: LIST[AGE_DICT[age][(n-1)%5]].
+TH_AGE={"a18": [9, 8, 11, 21, 4], "a26": [5, 7, 13, 6, 12], "a36": [2, 14, 0, 15, 10], "a51": [20, 18, 23, 22, 1], "a65": [16, 19, 17, 24, 3]}
 # owner 18/11 ~22:55Z (FIGURE_GATE A0 REFERENCES): royal ranks incl. Thai hau = 3 images; image 3 = royal-yellow swatch TdwDfOyVNR
 TH_SWATCH=" Image 3 is only a colour reference for the royal yellow, never copy anything but its colour; the Empress Dowager's yellow is that royal yellow in its deep antique-gold, subdued shade as the colour rule says."
 def _pose(item,hk,right):
@@ -842,7 +987,24 @@ NUDE_VAR=[("only five short bead tassels hanging at the front of the crown to th
 ("seven bead tassels at the front of the crown, graduated in length, ending at the forehead","slightly pointed outward")]
 # ---------- NỮ ĐẾ OWN PROMPT (N1 round 10, owner ~22:40Z, brief nude-r10 JOB 1): same sentence structure / length / wording style as the approved Hoàng hậu t8 prompt, her OWN marks: dragons only, STIFF SHORT shoulder piece, more majestic, woman's robe. Options via --nudeopt A|B|C|D (default A). Replaces the old (longer, NEVER/hex-heavy) --state nude text. ----------
 # N4 nude-mass PHASE 1a: FIGURE_GATE H NỮ ĐẾ list (1..10), one item per person, neighbours (+-8) differ, never her own t8 item/kind (c06 #5 fan, c25 #4 ruyi unchanged)
-NUDE_LIST=[('an imperial jade seal (ngọc tỷ) on a yellow silk cord', 'one'), ('a gold dragon-headed sceptre', 'one'), ('an imperial edict scroll on yellow silk with gold rollers', 'scroll'), ('a gold-and-jade ruyi with a dragon', 'one'), ('a gold dragon-framed round fan', 'two'), ('a gold dragon-handled hand mirror', 'mirror'), ('a jade tablet (hốt) edged in gold', 'two'), ('a yellow-silk folding fan with gold dragon ribs', 'ffan'), ('a small gilded dragon censer', 'one'), ('a gold-mounted jade dragon-ring pendant on a yellow cord', 'dangle')]
+NUDE_LIST=[('an imperial jade seal (ngọc tỷ) on a yellow silk cord', 'one'), ('a gold dragon-headed sceptre', 'one'), ('an imperial edict scroll on yellow silk with gold rollers', 'scroll'), ('a gold-and-jade ruyi with a dragon', 'one'), ('a gold dragon-framed round fan', 'two'), ('a gold dragon-handled hand mirror', 'mirror'), ('a jade tablet (hốt) edged in gold', 'two'), ('a yellow-silk folding fan with gold dragon ribs', 'ffan'), ('a small gilded dragon censer', 'one'), ('a gold-mounted jade dragon-ring pendant on a yellow cord', 'dangle'),
+("a gold dragon hairpin with jade dangles, held in the hand","dangle"),
+("a dragon-embroidered silk ball (tú cầu) with jade tassels","dangle"),
+("a white-jade flute with gold dragon bands","two"),
+("a closed dragon-embroidered silk parasol with a jade handle","one"),
+("a poetry book bound in dragon-embroidered silk","two"),
+("a small pipa lute inlaid with gold dragons","two"),
+("a small hand-held table screen of dragon-embroidered silk in a jade frame","two"),
+("a gold dragon-framed palace lantern with jade tassels","two"),
+("a calligraphy brush with a jade shaft and a gold dragon cap","one"),
+("a gold-mounted jade tiger tally (hổ phù) on a silk cord","dangle"),
+("an openwork gold dragon incense ball","dangle"),
+("a hand warmer of gold carved with dragons","two"),
+("a jade walking staff with a gold dragon head","one"),
+("a small imperial-jade mountain carving on a gold dragon stand","two"),
+("a carved imperial-jade crane on a gold dragon stand","two")]
+# E11 (owner Lượt 583/585, IT1): +15 items appended (the first 10 unchanged, same order) -> 25; {age: 5 indices}, 25 different items per rank, adjacent ranks (t1..t8, Nữ đế, Thái hậu) never share an item kind at one age. Pick: LIST[AGE_DICT[age][(n-1)%5]].
+NUDE_AGE={"a18": [11, 0, 17, 7, 12], "a26": [15, 14, 1, 10, 13], "a36": [23, 6, 5, 20, 18], "a51": [16, 3, 8, 9, 19], "a65": [2, 22, 4, 24, 21]}
 NUDE_PICK={'c01': 1, 'c02': 2, 'c03': 3, 'c04': 4, 'c05': 6, 'c06': 5, 'c07': 7, 'c08': 8, 'c09': 9, 'c10': 10, 'c11': 1, 'c12': 2, 'c13': 3, 'c14': 4, 'c15': 6, 'c16': 7, 'c17': 5, 'c18': 8, 'c19': 9, 'c20': 10, 'c21': 1, 'c22': 2, 'c23': 3, 'c24': 6, 'c25': 4, 'c26': 5, 'c27': 7, 'c28': 9, 'c29': 8, 'c30': 10, 'c31': 1, 'c32': 2}
 NUDE_ITEM={c:NUDE_LIST[k-1] for c,k in NUDE_PICK.items()}
 # N4 PHASE 1b: option per person spread evenly A,B,C,D,A,... (c01 A, c02 B, ...); `--nudeopt auto` uses it; explicit A|B|C|D still works
@@ -1084,12 +1246,19 @@ def build_state(c,state,v="v0"):
         return build_nude_own(c,face,right)
     if state=="thaihau":
         # owner 18/11 ~22:05Z + FIGURE_GATE H: Thai hau holds ONLY an item of the H THAI HAU list (never a t8 consort item)
+        # TH1 (owner Lượt 607, ART_RULES I4): Thái hậu in HER OWN root colours (M_COLS main + secondary WITH hexes) instead of the old "deep antique-gold yellow mixed with a trầm {main0}";
+        # ONE ref (B8, run with --nostyle; no royal-yellow swatch any more: no yellow robe); tone = B18 sentence via the shared swap in __main__ (a36 LOW_TONE, a51/a65 elder S33 clause);
+        # collar / mantle / stiff shoulder piece / HH-rank phoenix crown = the approved states-sample sheet3 design (K5) with only the colour words changed; hair UP (F11, S21 words).
         item,hk=age_item(c,"thaihau",*TH_ITEMS[(item_for(c)+2)%10])
+        _mn,_mh,_sn,_sh=M_COLS[c] if c in M_COLS else (main0,"","","")
+        assert _sh,"TH1: Thái hậu needs her m-table colours (M_COLS) -- "+c
+        MAIN=f"{_mn} like {_mh}"; SEC=f"{_sn} like {_sh}"
         s=PRE+f" An imperial consort, the Empress Dowager (Thái hậu), dignified and gracious. Her face: {face}."+IDENT+" "+AGE_TXT[AGE]
-        s+=f" Outfit (the Empress Dowager (Thái hậu), as splendid as the Empress but dignified and restrained): a ceremonial robe of deep antique-gold yellow silk mixed with a muted deep {main0} (a trầm, subdued shade), richly embroidered on the chest, shoulders and wide sleeves with phoenixes, peonies and clouds in antique-gold and deep kingfisher-blue silk thread, over it a long ceremonial silk mantle falling from the shoulders to the floor, edged with a band of antique-gold brocade and pearls, a STIFF, STRUCTURED, squared shoulder piece (cầu vai cứng) of embroidered antique-gold brocade with a pearl edge, standing firm and horizontal over both shoulders to show her authority, and her own collar: a high upright round standing collar of deep brocade fastened at the throat with a small jade button (not a crossed collar, not a cloud collar), strands of pearls and jade across the chest, a jade-and-gold belt with tassels, floor-length robe with slippers visible, slim tall silhouette; a full imperial phoenix crown of the Empress's rank, a large central gold phoenix holding a pearl string in its beak, jewelled wings spreading to both sides, kingfisher-blue inlay, rubies and pearls, and a few clean pearl tassels at the sides."
-        s+=f" COLOUR RULE: all colours MUTED and deep, rich and dignified, never bright, never pastel; the robe is deep antique-gold yellow mixed with muted deep {main0} (collar, inner robe, wide borders and a few panels), the yellow is a deep antique gold, not pale cream, not lemon, not bright; the crown, hairpin and jewellery in an old antique gold; gold only as thin accents on the borders; NOT an all-yellow robe."
+        s+=f" Outfit (the Empress Dowager (Thái hậu), as splendid as the Empress but dignified and restrained): a ceremonial robe of {_mn} silk, richly embroidered on the chest, shoulders and wide sleeves with phoenixes, peonies and clouds in gold and {_sn} silk thread, over it a long ceremonial silk mantle in {_sn} falling from the shoulders to the floor, edged with a band of gold brocade and pearls, a STIFF, STRUCTURED, squared shoulder piece (cầu vai cứng) of embroidered gold brocade with a pearl edge, standing firm and horizontal over both shoulders to show her authority, and her own collar: a high upright round standing collar of {_sn} brocade fastened at the throat with a small jade button (not a crossed collar, not a cloud collar), strands of pearls and jade across the chest, a jade-and-gold belt with tassels, floor-length robe with slippers visible, slim tall silhouette; a full imperial phoenix crown of the Empress's rank, a large central gold phoenix holding a pearl string in its beak, jewelled wings spreading to both sides, kingfisher-blue inlay, rubies and pearls, and a few clean pearl tassels at the sides."
+        s+=f" COLOUR RULE: all colours fresh, clear and luminous, never dusty or greyed; her own colours: {MAIN} is the MAIN colour of the robe and wide sleeves, {SEC} is the SECONDARY colour of the mantle, collar, inner robe and wide borders; the crown, hairpins and jewellery in gold; gold only as thin accents on the borders; NOT a yellow robe, no royal yellow."
+        s+=f" TWO-COLOUR RULE: the whole outfit uses EXACTLY TWO colours that clearly interact: the MAIN colour {MAIN} and the SECONDARY colour {SEC}, the secondary clearly visible in large areas (inner robe or skirt, wide borders, sash, cuffs, linings), never a single flat colour all over; gold or silver only as thin accents, never a third colour."
         s+=" The phoenix is the main embroidered motif, larger and more prominent than the flowers."
-        s+=TH_SWATCH
+        s+=" HAIR (rank law): ALL her hair is swept UP into a high bun / chignon, nothing loose hanging down her back."
         s+=" All flowers, birds and the phoenix are fine silk-thread embroidery stitched directly into the fabric, flat and integrated with the cloth, following its folds, not appliqué, not pasted patches, not raised. "+FAB
         return s+_pose(item,hk,right)+CLOSE+END
     # kc / ngheo: stepped-down versions of the --low t1 structure (outfit sentence = TIER_LOW[1] pattern)
@@ -1518,7 +1687,7 @@ if __name__=="__main__":
         if STATE=="mama": _o=re.sub(r"\b([Ii])mage 3\b",r"\1mage 2",_o)   # MMX1 (owner Lượt 479 ONE-REF for ma ma, FIGURE_GATE 11-12): no style image -> image 1 = her own face picture, the costume picture becomes image 2 (same renumber as consorts t2-t8 in store-all/build_all.py)
     # a51 DARK (Foreman C ROOT-30, owner 23:05Z "màu tối giống như là ma hoặc là Thái hậu"): W90 found the shared "fresh, clear and luminous" clause kept c13 a51 bright; a51 only swaps it, every other age byte-identical
     # OWNER 18/11 ~21:06Z real (verbatim): "51 tuổi và 65 tuổi là phải dùng của những cái màu của những người già xài á, không có dùng cái màu tươi rói nha ... mặc dù già nhưng không có nghĩa là màu đen hay màu nâu ... Mà nó là một cái màu nó sang, mà cái kiểu mình nhìn vô mình thấy nó là một cái người đã lớn tuổi, trầm tĩnh lớn tuổi" → a51 AND a65 use the elder clause (a51 text = the approved a51d2 sample)
-    if AGE not in ("a51","a65") and not STATE or STATE=="nude":   # B18 (owner Lượt 583): neutral tone: t7/t8/Nữ đế 'fresh, clear and luminous' -> the SAME medium-tone sentence t1-t6 use (LOW_TONE); a51/a65 keep their elder clause below
+    if AGE not in ("a51","a65") and not STATE or STATE in ("nude","thaihau"):   # TH1 (Lượt 607 I4): Thái hậu a36 gets the same B18 LOW_TONE   # B18 (owner Lượt 583): neutral tone: t7/t8/Nữ đế 'fresh, clear and luminous' -> the SAME medium-tone sentence t1-t6 use (LOW_TONE); a51/a65 keep their elder clause below
         if AGE not in ("a51","a65") and TRIEUN is None and not BDQ and "--low" not in sys.argv: _o=_o.replace("all colours fresh, clear and luminous, never dusty or greyed; ",LOW_TONE,1)
     if AGE in ("a51","a65"): _o=_o.replace("all colours fresh, clear and luminous, never dusty or greyed; ","all colours in calmer, softer mature shades of her own colours (the same hue at about the same lightness, only less saturated and quieter: elegant and dignified, never darker or heavier, never bright or rực, never pastel-washed, never grey, dusty, black or brown); the colour names and hex values below are her young colours, quieten them as described above; "+("elegant, luxurious elder colours that read as a calm, dignified older lady, a little more muted than at 51 but never darker, never vivid or fresh bright colours, yet never grey, black or brown; " if AGE=="a65" else "")).replace("one fresh accent","one accent").replace("a fresh ","a ")
     # --head (ROOT-31 order, owner 18/11 ~21:36Z "ai cũng có trâm cài y chang nhau"): per-person headdress = the motif/shape of HER OWN live a18 hairpins, scaled up for the rank. Off by default (goldens unchanged).
