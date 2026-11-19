@@ -528,3 +528,7 @@ OWNER (verbatim): "Lấy promp thô sử này làm cung nữ tam đẳng"
 ### STYLE IMAGE = style3_girls MINUS m09, NOTHING ADDED (owner 19/11 ~02:45Z, angry)
 OWNER (verbatim): "Ai nói với mày mấy cái áo của cô công nữ thứ ba làm ảnh vải vậy? Tao nói vẫn giữ cô thứ nhất và cô thứ hai, chỉ là bỏ cái cô M09 thôi. Ai kêu mày nhiều chuyện đi bỏ cái cô thứ ba vô."
 → Style image = the two remaining girls of style3_girls (c06 a18 t1 v0 + c25 a18 t1 v0), m09 cropped out, NOTHING added (never a maid picture). File img/_review/style-refs/style2_c06_c25.png. Lesson: change only what she names.
+
+### STYLE IMAGE = TWO SQUARE FACE PORTRAITS, NOT style3_girls (owner 19/11 ~02:50Z, Foreman C chat)
+OWNER (verbatim): "Khoan nha, cái cô thứ nhất và cô thứ hai này không phải là hai cái người mà tôi duyệt. Hai cái người mà gương mặt mà tôi duyệt là hình vuông kìa chứ không phải hình toàn thân. Vậy là ngay từ đầu, từ nãy tới giờ là mày làm sai hết rồi. Tao có hai cái người, cái hình gương mặt hình vuông, một người mã màu hồng, một người mã màu xanh lá cây. Hình vuông"
+→ The approved style references are two SQUARE face portraits (one pink-coded, one green-coded), NOT the full-body girls of style3_girls (the 18/11 ~23:45Z reading was wrong; style2_c06_c25 block above VOID). Candidates sent Lượt 207: square portraits img/face-consort-01 (pink), -05 (green), -12 (green), -18. ALL painters HOLD until she names them; then C builds the new style image and switches REF_STYLE in build.py.
