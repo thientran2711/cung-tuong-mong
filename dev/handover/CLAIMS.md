@@ -277,3 +277,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | coop-thin F6b (opus; remaining mini-game ends as score intents, L12; parallel to F6a, stacked on F5) | review/coop-thin-f6b | B | session_01N1tNP4XtuMraUEmXvATwMg | ROLLOVER #1→#2 @ a4d77f3c (27/29; report reports/coop-thin-f6b.md) | 19/11 10:01Z |
 | kit-head-say SMALL REVIEW (sonnet) of 5d9cdd5d | review/kit-head-say; briefs/review-kit-head-say.md | MAIN ROOT-68 | session_01Rc5AsKGEciGWVZG7BD4KHc | RUNNING | 19/11 10:14Z |
 | FOREMAN E #11 (opus; child of FOREMAN E ex-standby, depth 1; PICKUP 10:20Z) | handover FOREMAN_E_STATUS | FOREMAN E | session_01DgYSWq1iGwKC5ebN2qhmFU | RUNNING | 19/11 10:14Z |
+| coop-thin F6b #2 (opus; successor of 4XtuMraU at a4d77f3c) | review/coop-thin-f6b | B | session_01N1tNP3uQwFDZBPxqqP6ZN8 | RUNNING | 19/11 10:34Z |
