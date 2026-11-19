@@ -650,6 +650,23 @@ def build_low(c,t,v="v0"):
     s+=f" Pose: calm standing pose; she holds {item} in a contrasting colour, not the robe colour, the item held below the chin, the hand really gripping it, the whole face fully visible. Her hands interact naturally with the item (gently presenting, turning or touching it), lively and natural, while her head stays up facing the viewer, eyes open, lips closed, never looking down. Her hands and body: {low_hand(hk,right)}."
     s+=" Every hairpin is inserted into the hair pointing upward or backward with dangles hanging down, no hairpin horizontal or sticking out to the side. Luminous smooth porcelain skin, bare clean forehead with no forehead mark and no flower mark, eyes open, floor-length robe with slippers visible, no train, no cup, nothing covering the face."
     return s+END
+# N3b (owner 19/11 ~00:05Z via ROOT-34, verbatim: "lấy cái prompt của bên Quý Phi y chang như vậy, chỉ đơn giản là thêm một vài chi tiết cần có của ... cái người Bắc Địch này thôi, không có vẻ là một cái prompt mới."): --bdq 1|2 = the APPROVED Quý phi t6 text (build_low c06 t6 v0, prompt B) copied verbatim; ONLY these pieces are swapped: identity/face sentence, the coral colour words -> trầm BD_OPT colour, fur trim band + collar, turquoise/coral strands, belt plaque, no-side-braid. Off by default.
+def build_bdq(o="1"):
+    t=build_low("c06",6,"v0"); c,th,cape,rend,sig=BD_OPT[o]
+    pal,face=DATA["c06"]; bpal,bface=PDATA["bd"]
+    def sw(a,b):
+        nonlocal t
+        assert t.count(a)==1,a; t=t.replace(a,b)
+    sw("An imperial consort. Her face: "+face,"A foreign princess who became an imperial consort ("+PTALL["bd"]+"). Her face: "+bface)
+    sw("hairstyle colour and signature colour family;","hairstyle colour;")
+    sw("SATURATED coral red silk",c)
+    sw("in coral red and gold thread along the borders","in "+th+" with a few stitches of ivory and gold along the borders")
+    sw("an embroidered coral red pearl-edged cape/stole over the shoulders",cape+" over the shoulders, with "+BD_FURSLEEVE)
+    sw("many gold tassels;","many gold tassels and a few soft turquoise and pale coral bead strands in the hair, and a small metal plaque on the belt as the only marks of her homeland;")
+    i=t.index(" COLOUR RULE: robe, skirt, sleeves"); j=t.index(" COLOUR RULE: all colours fresh, clear"); k=t.index(" Hair: ")
+    t=t[:i]+f" COLOUR RULE: all colours fresh but restrained, in deep, toned-down shades with a soft subdued trầm feel, never rực, never glaring, never neon, never bright, never saturated; never dusty, grey, muddy or dark; {sig} is the main colour of the robe, sleeves, sleeve linings and cape, rendered as {rend}; the fur is ivory-white; gold as thin accents on the borders."+t[k:]
+    sw(" Hair: her own hairstyle decorated"," Hair: her own hairstyle, NO braids and NO side braid, decorated")
+    return t
 # ---------- STATES (SAMPLES ONLY, owner 18/11 ~21:00Z real; brief dev/handover/briefs/states-sample.md): --state nude|thaihau|kc|ngheo|nc1|nc6|bd1|bd6 ----------
 # Same sentence structure as the 8 ranks (PRE, identity sentence, AGE_TXT, outfit, COLOUR RULE, embroidery+drape, item pose, closing hairpin rule, END). Existing outputs untouched: all code below is only reached with --state.
 # PDATA (separate from DATA on purpose: tests iterate DATA) = the two approved foreign-princess sample faces (img/_review/princess-sample/{namchieu,bacdich}_a18_s1.png): (signature colour words, face words)
@@ -928,10 +945,12 @@ if __name__=="__main__":
     if "--state" in sys.argv: i=sys.argv.index("--state"); STATE=sys.argv[i+1]; sys.argv[i:i+2]=["--state"]
     LOWN=None
     if "--low" in sys.argv: i=sys.argv.index("--low"); LOWN=int(sys.argv[i+1]); sys.argv[i:i+2]=["--low"]
+    BDQ=None
+    if "--bdq" in sys.argv: i=sys.argv.index("--bdq"); BDQ=sys.argv[i+1]; sys.argv[i:i+2]=[]
     TRIEUN=None
     if "--trieu" in sys.argv: i=sys.argv.index("--trieu"); TRIEUN=int(sys.argv[i+1]); sys.argv[i:i+2]=["--trieu"]
     a=[x for x in sys.argv[1:] if not x.startswith("--")]
-    _o=build_state(a[0],STATE,a[1] if len(a)>1 else "v0") if STATE else build_trieu(a[0],TRIEUN,a[1] if len(a)>1 else "v0") if "--trieu" in sys.argv else build_low(a[0],LOWN,a[1] if len(a)>1 else "v0") if "--low" in sys.argv else build_t7(a[0],a[1] if len(a)>1 else "v0") if "--t7" in sys.argv else build(a[0],a[1] if len(a)>1 else "v0","--golden" in sys.argv)
+    _o=build_bdq(BDQ) if BDQ else build_state(a[0],STATE,a[1] if len(a)>1 else "v0") if STATE else build_trieu(a[0],TRIEUN,a[1] if len(a)>1 else "v0") if "--trieu" in sys.argv else build_low(a[0],LOWN,a[1] if len(a)>1 else "v0") if "--low" in sys.argv else build_t7(a[0],a[1] if len(a)>1 else "v0") if "--t7" in sys.argv else build(a[0],a[1] if len(a)>1 else "v0","--golden" in sys.argv)
     if "--spec5pose" in sys.argv:
         _t=LOWN if "--low" in sys.argv else 7 if "--t7" in sys.argv else 8
         _o=spec5pose(_o,a[0],_t)
