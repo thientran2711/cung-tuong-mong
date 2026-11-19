@@ -951,7 +951,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "NPC court acts (leak graft, gift minister…); monthly memorials",
-"done": "const pk=npwPick(opts,x=>x[1]);if(!pk||!force&&!roll(TD.so))"
+"done": "const pk=npwPick(opts,x=>x[1]);if(!pk)"
 },
 {
 "f": "j55.js",
