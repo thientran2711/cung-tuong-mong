@@ -56,7 +56,7 @@ R=[
 ("c09",15,"a ROUND-OVAL baby face with a smooth broad forehead and soft cheeks, very large clear doe eyes set wide apart, fully open and bright, faint thin straight brows, a short small nose with a soft round tip, a small full mouth shaped like a little bow","round-oval baby face, broad forehead","very large wide-set doe","small full bow",
  "half-up: two small soft twists from the temples tied together at the back with a white ribbon, the rest long and loose with soft side locks",
  "a cross-collar ruqun of powder-blue plain silk with a high-waisted white floor-length skirt of cotton-silk tied just above the waist, small embroidered swallows at the hem, a white silk sash with a small blue glass bead, long sleeves","powder blue","white","powder blue and white",
- "walking lightly forward, a small coral-red paper lantern shaped like a fish hanging from a short bamboo stick held in one hand at her side, glancing at it fondly","a small coral-red paper lantern shaped like a fish","fish paper lantern (coral red)"),
+ "walking lightly forward, a small white paper lantern shaped like a fish hanging from a short bamboo stick held in one hand at her side, glancing at it fondly","a small white paper lantern shaped like a fish","fish paper lantern (white)"),
 ("c10",18,"a refined LONG HEART face with a high forehead, a smooth tapered jaw and a small neat chin, medium-large almond eyes with long straight lower lids, fully open and bright, softly arched medium brows, a straight slim nose, a small mouth with thin even lips","long heart, high forehead","medium-large almond, straight lower lids","small, thin even",
  "fully loose and long, the hair from the temples drawn back and held by one plain carved cream-white jade comb at the back of the head, a thin peach ribbon below it",
  "a cross-collar ruqun of peach silk crepe with a cream floor-length skirt of plain silk, small embroidered lotus leaves at the collar and cuffs, a cream silk sash with a small carnelian pendant, long sleeves","peach","cream","peach and cream",
@@ -68,7 +68,7 @@ R=[
 ("c12",15,"a plump SHORT ROUND face with high round cheeks and a tiny pointed chin, wide bright round eyes with lifted outer corners, fully open, short thick slightly angled brows, a small snub nose, a small mouth with a little curled upper lip","plump short round, tiny pointed chin","wide bright round, lifted corners","small, curled upper lip",
  "half-up: two small braids from the temples looped up and tied at the back of the crown with mint-green ribbons with long tails, the rest loose",
  "a cross-collar ruqun of mint-green plain silk with a high-waisted white floor-length skirt of cotton-silk, small embroidered dragonflies at the hem, a white silk sash with a small green jade bead, long sleeves","mint green","white","mint green and white",
- "skipping lightly forward on one foot, waving a coral-red paper butterfly on a thin bamboo stick at shoulder height, skirt swinging","a coral-red paper butterfly on a thin bamboo stick","paper butterfly on stick (coral red)"),
+ "skipping lightly forward on one foot, waving a sky-blue paper butterfly on a thin bamboo stick at shoulder height, skirt swinging","a sky-blue paper butterfly on a thin bamboo stick","paper butterfly on stick (sky blue)"),
 ("c13",17,"a bright ROUNDED OVAL face with full soft cheeks and a softly rounded chin, large sparkling almond eyes with a lively upward tilt at the outer corners, fully open, thick softly arched brows, a short straight nose, a wide soft mouth with full even lips","rounded oval, full cheeks","large sparkling almond, upward tilt","wide soft, full even",
  "half-up: the top hair twisted on both sides into a small heart-shaped knot at the back tied with a cream ribbon, the rest long and loose",
  "a cross-collar ruqun of apricot silk satin with a soft sheen and a cream floor-length skirt of plain silk, small embroidered pomegranate blossoms at the collar and hem, a cream silk sash with a small carnelian bead, long sleeves","apricot","cream","apricot and cream",
@@ -84,7 +84,7 @@ R=[
 ("c16",18,"a balanced WIDE OVAL face with a smooth rounded jaw and a softly squared chin, calm wide-set almond eyes, fully open and bright, long gently arched brows, a straight refined nose, a medium mouth with a soft defined upper lip","wide oval, softly squared chin","calm wide-set almond","medium, defined upper lip",
  "loose and long, the top section smoothly gathered into a small flat twist at the back held by a cream-white jade hairpin pointing upward, the rest falling straight",
  "a light open beizi of sage-green linen-silk over a cross-collar cream inner top and a cream floor-length skirt of plain silk, small embroidered bamboo leaves along the front edges, a cream silk sash with a small jade disc pendant, long sleeves","sage green","cream","sage green and cream",
- "standing composed with her weight on one leg, a slim rose-red lacquered brush case held in both hands at her waist","a slim rose-red lacquered brush case","brush case (rose-red lacquer)"),
+ "standing composed with her weight on one leg, a slim black-lacquered brush case inlaid with mother-of-pearl held in both hands at her waist","a slim black-lacquered brush case inlaid with mother-of-pearl","brush case (black lacquer, mother-of-pearl)"),
 ("c17",18,"a striking HEART face with defined high cheekbones and a slim tapering jaw, large bright upturned almond eyes with dark lashes, fully open, crisp straight brows with a slight peak, a fine straight nose, full lips with a deep clear cupid's bow","striking heart, high cheekbones","large upturned almond","full, deep cupid's bow",
  "loose and long, a deep-teal ribbon tied around a small half-up section at the crown, its ends falling over one shoulder, one small silver hairpin",
  "a cross-collar ruqun of blush-pink silk satin with a soft sheen and a deep-teal floor-length skirt of plain silk, small embroidered lotus flowers at the collar and hem, a deep-teal silk sash with a small pearl pendant, long sleeves","blush pink","deep teal","blush pink and pale gold",
@@ -96,7 +96,7 @@ R=[
 ("c19",17,"a bright SOFT-DIAMOND face with full cheeks and a softly rounded chin, large almond eyes with lifted outer corners and a lively look, fully open, natural thick straight brows, a short neat nose, a medium mouth with full even lips and upturned corners","soft diamond, full cheeks","large almond, lifted corners","medium full, upturned corners",
  "half-up: three small twists along the crown joined at the back with a pink ribbon, one small pearl flower hairpin, the rest long and loose",
  "a cross-collar ruqun of plum silk satin with a soft sheen and a pink floor-length skirt of plain silk, small embroidered plum blossoms at the collar and hem, a pink silk sash with a small white jade pendant, long sleeves","plum","pink","plum and pink",
- "walking forward mid-step, a short pale green bamboo flute held in one hand at her side and swung lightly, the other sleeve flowing","a short pale green bamboo flute","bamboo flute (pale green)"),
+ "walking forward mid-step, a short dark mottled bamboo flute held in one hand at her side and swung lightly, the other sleeve flowing","a short dark mottled bamboo flute","bamboo flute (dark mottled)"),
 ("c20",17,"a soft ROUND-OVAL face with gently full cheeks, a small soft chin and a faint dimple in the right cheek, large tender almond-round eyes with long lashes and softly lowered outer corners, fully open, light long curved brows, a small straight nose, a small soft heart-shaped mouth","soft round-oval, right dimple","large tender almond-round, lowered corners","small heart-shaped",
  "fully loose and long, the front locks braided into two thin plaits tied together at the back of the head with a celadon ribbon, one small silver flower hairpin",
  "a cross-collar ruqun of lotus-pink silk satin with a soft sheen and a celadon floor-length skirt of plain silk, small embroidered lotus leaves at the hem, a celadon silk sash with a small jade pendant, long sleeves","lotus pink","celadon","lotus pink and celadon",
@@ -128,11 +128,11 @@ R=[
 ("c27",15,"a fresh small LONG-OVAL face with soft rounded cheeks and a gentle little chin, large bright round eyes with clear double lids, fully open, soft straight short brows, a small straight nose with a soft tip, a small mouth with a full rosy lower lip","small long-oval","large bright round, clear double lids","small, full rosy lower lip",
  "fully loose and long, a small cream ribbon tied to a thin lock at each side of the face",
  "a cross-collar ruqun of cinnabar plain silk with a high-waisted cream floor-length skirt of cotton-silk, small embroidered swallows at the hem, a cream silk sash with a small carnelian bead, long sleeves","cinnabar","cream","cinnabar and cream",
- "walking forward lightly, a bunch of sky-blue forget-me-nots held at her chest with both hands, glancing softly at them","a bunch of sky-blue forget-me-nots","forget-me-not bunch (sky blue)"),
+ "walking forward lightly, a small bunch of white chamomile daisies held at her chest with both hands, glancing softly at them","a small bunch of white chamomile daisies","chamomile daisies (white)"),
 ("c28",18,"a serene softly ROUNDED SQUARE face with a smooth jaw and a short gentle chin, calm large almond eyes with straight upper lids, fully open and bright, long thin level brows, a delicate straight nose, a small mouth with neat thin lips","rounded square, short chin","calm large almond, straight upper lids","small, neat thin",
  "loose and long, the top hair smoothly drawn back under a celadon silk ribbon tied in a flat knot at the back, one small white jade hairpin pointing upward",
  "a light open beizi of celadon silk crepe over a cross-collar white inner top and a white floor-length skirt of plain silk, small embroidered water ripples and carp along the front edges, a white silk sash with a small celadon jade pendant, long sleeves","celadon","white","celadon and white",
- "standing upright with her weight on one leg, a rose-red pomegranate blossom sprig held at her chest in one hand, the other hand resting at her sash","a rose-red pomegranate blossom sprig","pomegranate blossom sprig (rose red)"),
+ "standing upright with her weight on one leg, a sprig of white plum blossom held at her chest in one hand, the other hand resting at her sash","a sprig of white plum blossom","plum blossom sprig (white)"),
 ("c29",18,"a bold OVAL face with defined angular cheekbones, a firm straight jaw and a defined chin, large bright almond eyes with crisp clear lids and lifted corners, fully open, strong straight brows with a clean arch near the tail, a straight high nose, wide full lips with sharp edges","bold oval, angular cheekbones","large bright almond, crisp lids","wide full, sharp edges",
  "loose and very straight to the waist, parted at the side, a dusky plum-rose silk ribbon and one small silver crescent hairpin above the left temple",
  "a cross-collar ruqun of ink-blue silk satin with a soft sheen and a pale grey floor-length skirt of plain silk, small embroidered plum blossoms in snow at the collar and hem, a pale grey silk sash with a small white jade pendant, long sleeves","ink blue","pale grey","ink blue and pale grey",
@@ -140,11 +140,11 @@ R=[
 ("c30",16,"a pert ROUND-DIAMOND face with soft cheeks and a small pointed chin, large bright almond-round eyes with a playful upward flick at the outer corners, fully open, short slightly arched brows, a small turned-up nose, a small mouth with a plump upper lip","pert round-diamond","large almond-round, upward flick","small, plump upper lip",
  "half-up: a short braided ponytail high at the back of the crown tied with a white ribbon, the rest loose",
  "a short cross-collar jacket of moonlight-blue silk satin over a long white pleated floor-length skirt of plain silk, small embroidered kittens at the cuffs and jacket hem, a white silk sash with a small blue glass bead, long sleeves","moonlight blue","white","moonlight blue and white",
- "turning lightly mid-step, a little orange-red paper fox mask on a short stick swinging low at her side in one hand, the other hand raised in a little wave","a little orange-red paper fox mask on a short stick","paper fox mask on stick (orange-red), held low"),
+ "turning lightly mid-step, a little white paper fox mask on a short stick swinging low at her side in one hand, the other hand raised in a little wave","a little white paper fox mask on a short stick","paper fox mask on stick (white), held low"),
 ("c31",17,"a bright SOFT OVAL face with high round cheeks and a gently pointed chin, large clear eyes with a lively lift at the outer corners and a slight natural double lid, fully open, gently arched medium brows, a straight small nose, a medium mouth with full soft lips and lifted corners","soft oval, high round cheeks","large clear, lively lift","medium full soft, lifted corners",
  "half-up: the top hair gathered in a small twist on the right side of the crown held by a small deep rose silk flower, the rest long and loose over the left shoulder",
  "a cross-collar ruqun of pale jade silk satin with a soft sheen and a silvery-grey floor-length skirt of plain silk, small embroidered willow leaves and orioles at the collar and hem, a silvery-grey silk sash with a small white jade pendant, long sleeves","pale jade","silvery grey","pale jade and silver",
- "walking forward mid-step, a sprig of pink cherry blossom held up at shoulder height in one hand, the other sleeve swinging","a sprig of pink cherry blossom","cherry blossom sprig (pink)"),
+ "walking forward mid-step, a sprig of white apricot blossom held up at shoulder height in one hand, the other sleeve swinging","a sprig of white apricot blossom","apricot blossom sprig (white)"),
 ("c32",17,"a gentle WIDE OVAL face with soft full cheeks and a rounded chin, large warm round eyes with softly lowered outer corners and long lashes, fully open, soft low curved brows, a small rounded nose, a small full mouth with a soft bow","gentle wide oval, rounded chin","large warm round, lowered corners","small full, soft bow",
  "fully loose and long, an indigo-blue ribbon tied in a low loose bow at the nape, one small pearl comb above the right ear",
  "a cross-collar ruqun of ivory silk satin with a soft sheen and a soft grey-blue floor-length skirt of plain silk, small embroidered narcissus at the collar and cuffs, a soft grey-blue silk sash with a small pearl pendant, long sleeves","ivory","soft grey-blue","ivory and soft grey-blue",
@@ -153,6 +153,7 @@ R=[
 
 # B18 (owner Lượt 583 via ROOT-51): c07–c32 colours = softer name + hex + the store medium-tone sentence (t8-prompt-B/build.py LOW_TONE, verbatim
 # except its trailing "; " → "."). c01–c06 = the 6 drawn samples, KEPT unchanged (owner). hex: (o) = ORIG1 measured robe hex of her game t1 figure, else chosen medium tone.
+PFAB="The FABRIC is thin, light, flowing silk and gauze with a soft sheen and fine delicate embroidery, long soft graceful drapery that sways and trails elegantly (thướt tha); the small embroidered motifs are stitched in fine gold thread."   # princess recipe (COMMON_v2 fabric words, copied) + gold-thread embroidery (owner Lượt 592)
 LOW_TONE="all colours at ONE medium tone level, the same as the soft coral-red and brick-red robes of the game: medium saturation, medium lightness, neither too fresh nor too dark, never rực, never glaring, never neon, never pastel-washed, never dusty, grey, muddy or black."
 NEW={"c07":(("soft lavender","#B8A6CC"),("soft pale pink","#E6C4C4")),
 "c08":(("soft cherry-blossom pink","#F0B9BB"),("pale sage green","#A9B596")),
@@ -233,7 +234,30 @@ def TONE(d):
         sec=(ns,_hex(H2,_cl(L2,0.38,0.52),_cl(S2,0.20,0.35)))
         out[k]=(main,sec)
     return out
-_NEW0=dict(NEW); NEW=TONE(NEW); ORIGHEX={c for c in ORIGHEX if NEW[c][0][1]==_NEW0[c][0][1]}
+
+# PRINCESS TONE (owner Lượt 592 via ROOT-51, replaces TONE): she loves the 3 foreign princesses' colours (nc2 jade #9EB28F + deep rose #CF7E83,
+# nc3 wisteria lilac #CCA7C8 + rose-red #D18A92, nc1 indigo #5E6694 + ivory #EAD7BF). MAIN: same hue, L 0.62–0.75, S +0.08 clamped 0.32–0.50.
+# SECONDARY: a real pairing colour (lighter or deeper), ivory allowed (warm #EAD7BF), never grey/slate/taupe/yellow/brown. (name, hue, L, S) or (name, hex).
+IVORY=("warm ivory","#EAD7BF")
+SEC2={"c01":("jade green",145,.58,.30),"c02":IVORY,"c03":("deep rose",350,.62,.45),"c04":("rose-red",352,.66,.45),"c05":("dusty rose",355,.62,.40),
+"c06":("jade green",160,.55,.30),"c07":("rose-red",350,.62,.45),"c08":("jade green",130,.58,.30),"c09":("deep rose",350,.58,.42),"c10":("jade teal",175,.50,.35),
+"c11":("deep rose",345,.60,.45),"c12":("rose",345,.60,.45),"c13":("jade green",150,.52,.32),"c14":("blue-violet",245,.55,.35),"c15":("indigo blue",228,.47,.30),
+"c16":("plum rose",330,.55,.38),"c17":("teal",178,.48,.35),"c18":IVORY,"c19":("soft jade",150,.60,.28),"c20":("celadon green",140,.55,.30),"c21":("jade green",155,.52,.32),
+"c22":("rose pink",350,.68,.45),"c23":("jade green",150,.50,.32),"c24":("indigo blue",228,.45,.30),"c25":("teal",185,.48,.32),"c26":("celadon green",145,.58,.28),
+"c27":("deep teal",182,.45,.33),"c28":("rose-red",352,.62,.45),"c29":IVORY,"c30":("coral rose",5,.62,.45),"c31":("rose-red",350,.64,.45),"c32":("indigo blue",228,.47,.30)}
+IVORY_MAIN={"c14":"#EAD7BF","c32":"#EDDCC6"}
+def PTONE(d):
+    out={}
+    for k,((mn,mh),_s) in d.items():
+        nm=TONE_NAMES[k][0]
+        if k in IVORY_MAIN: main=(nm,IVORY_MAIN[k])
+        else:
+            H,L,S=_hls(mh); H=HUE_SET.get(k,H*360)/360
+            main=(nm,_hex(H,_cl(L,0.62,0.75),_cl(S+0.08,0.32,0.50)))
+        t=SEC2[k]; sec=t if len(t)==2 else (t[0],_hex(t[1]/360,t[2],t[3]))
+        out[k]=(main,sec)
+    return out
+_NEW0=dict(NEW); NEW=PTONE(NEW); ORIGHEX={c for c in ORIGHEX if NEW[c][0][1]==_NEW0[c][0][1]}
 CHANGED={"c01","c02","c05","c11","c14","c17","c23","c25","c26","c31"}
 pre,post=COMMON.split('{PERSON}')
 out=[]
@@ -252,7 +276,7 @@ for i,(cid,age,face,shape,eyes,lips,hair,outfit,m,s,game,pose,item,itemshort) in
             nw=new.split(' ')
             o2=o2.replace(hit,(' '.join(nw[:-1])+'-'+nw[-1] if len(nw)>1 else new) if '-' in hit else new)
         outfit=o2; m,s=mn,sn; mw,sw=f"{mn} like {mh}",f"{sn} like {sh}"
-    tone=(" Colour tone: "+LOW_TONE) if cid in NEW else ""
+    tone=(" Colour tone: "+LOW_TONE+" "+PFAB) if cid in NEW else ""
     person=(f"A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about {age}. Her face: {face}. Expression: {EXPR[look]} "
             f"Hair: glossy pure BLACK (never brown), {hair}. Outfit: {outfit}; her signature colour family {m} and {s}. {B15.format(m=mw,s=sw)}{tone} "
             f"Pose: {pose}, {ANG[ak]}")
@@ -269,7 +293,7 @@ hdr=("# c01–c32 NEW consort thiếu nữ v3 {PERSON} lines — index (NF1, own
 open(os.path.join(D,'INDEX_c_v3.md'),'w').write(hdr+"\n".join(out)+"\n")
 print("wrote",len(out))
 tab=["| id | old (Lượt 562) | new (B18, Lượt 583) |","|---|---|---|"]+[f"| {c} | {OLDCOL[c][0]} + {OLDCOL[c][1]} | {NEW[c][0][0]} {NEW[c][0][1]}{' (o)' if c in ORIGHEX else ''} + {NEW[c][1][0]} {NEW[c][1][1]} |" for c in NEW]
-open(os.path.join(D,'INDEX_c_v3.md'),'a').write("\n## B18 neutral-tone colours c07–c32 (owner Lượt 583; c01–c06 drawn samples kept as they are)\nEvery colour = name + hex + the store medium-tone sentence (build.py LOW_TONE). (o) = hex measured from her game t1 robe (build.py ORIG1). Owner Lượt 590: TONE = Quý nhân v2 option-B level (mains L 0.62–0.72 S 0.25–0.40; secondaries deeper L 0.38–0.52 S 0.20–0.35).\n\n"+"\n".join(tab)+"\n")
+open(os.path.join(D,'INDEX_c_v3.md'),'a').write("\n## B18 neutral-tone colours c07–c32 (owner Lượt 583; c01–c06 drawn samples kept as they are)\nEvery colour = name + hex + the store medium-tone sentence (build.py LOW_TONE). (o) = hex measured from her game t1 robe (build.py ORIG1). Owner Lượt 592: PTONE = the 3 foreign princesses' colour level (mains L 0.62–0.75 S 0.32–0.50; real pairing secondaries, ivory allowed, no grey) + their fabric words.\n\n"+"\n".join(tab)+"\n")
 
 # RANK DATA (ROOT-51 19:09Z, owner Lượt 583 B18): c01–c06 hex + tone ONLY for their rank prompts; their drawn thiếu-nữ files stay as drawn.
 RANK_ONLY={"c01":(("soft rose red","#C77078"),("pale jade green","#A9C7B3")),
@@ -278,7 +302,7 @@ RANK_ONLY={"c01":(("soft rose red","#C77078"),("pale jade green","#A9C7B3")),
 "c04":(("muted royal purple","#7E5E8E"),("soft lavender","#C3B3D6")),
 "c05":(("muted peacock teal","#4F8584"),("dusty rose","#C99A9C")),
 "c06":(("soft vermilion","#D5745E"),("ivory","#F0E8DA"))}
-RANK_ONLY=TONE(RANK_ONLY)
+RANK_ONLY=PTONE(RANK_ONLY)
 import json
 json.dump({"_note":"Rank-prompt colours for consorts c01–c32 (B18 Lượt 583): main/secondary name + hex + tone sentence. c01–c06 = rank data only (their drawn thiếu-nữ pictures/files stay as drawn). HOLD: no use until owner GO.",
  "tone":LOW_TONE,**{c:{"main":v[0][0],"main_hex":v[0][1],"secondary":v[1][0],"secondary_hex":v[1][1]} for c,v in {**RANK_ONLY,**NEW}.items()}},
