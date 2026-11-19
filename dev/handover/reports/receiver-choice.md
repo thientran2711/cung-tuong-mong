@@ -129,3 +129,41 @@ Touched: jrcv.js, jbal2.js (BAL.rcv: kw removed; chkSee, prop.ghen, judge), jags
 Context at hand-in ≈ 39 % (START ≈ 4 %, line 29 %): past the line with only push + report left (allowed); no further work in this session — any re-fix needs a fresh fixer.
 
 **SẴN SÀNG KIỂM 28ebffad8** (review/receiver-choice).
+
+---
+# ROUND 4 — RECEIVER-CHOICE #4 fixer (opus, session_01964izCDsA5LcnU3eN5Ucsy) — re-check #2 FAIL 6 @28ebffad8
+START_CTX ≈ 5 % of 1M (get_session read 0; own estimate) → rollover ≈ 30 %, ceiling 60 %. Finished at ≈ 22 %.
+PRIORITY #1 CHECK ('receiver choice'): OD L1876 / ~21:15Z read (brief chain) | main bb8e8ec9: j83 IROUTE / illBuy / illAllies, jration lxBorrowCard / lxAskHer, jagacts4 cx4:ill* / rouge*, jagstf2 stf2Ord, j29 DIRTY — all REUSED | review/*: review/stage-here 367a1ae0 (jnotice kitNotice API, guarded typeof), review/parallel-time 3efd6e46 (not touched; lands first) | claims: D row (this job).
+
+Branch **review/receiver-choice**, head **6be968a2** (final-merged origin/main bb8e8ec9; assemble.py = main's list + jrcv.js; index.html / sw.js rebuilt).
+
+## The 6 items
+1. **Flaky test → deterministic.** The rougeBorrow check now runs the asker's card `lxBorrowCard(a, ln).run()` on a SEEDED lender (300 draws), not the AG deed that picked its own lender. receiver-choice.test **×5: ALL PASS** (5/5, plus 5/5 again on the final head).
+2. **illMaid** (j83 IROUTE.maid / cx4:illMaid): illBuy "maid" asks the trusted maid through `stf2Ord(p, p.maid, null, "illMaid")` (the j42 cnvOrdOpts card — the same pick as bribel / laydo / laydol), her maid and an NPC's alike. Refuse / tell = nothing bought; her pre-paid bạc comes back.
+3. **illAlly** (j83 illBuy "ally" / cx4:illAlly): new **RCVK.illAlly** (x = item key): «Đưa … cho nàng» (holder holds evIllBuy chứng cứ) · «Nhường lại, lấy chút bạc» (item price × help.half, + Sức and the seen-through risk) · «Từ chối» · «Mách lẻo» (the Hoàng hậu holds ev.one chứng cứ of the asker). `illAllies` now includes her (`v===S||v.alive`), so an NPC can ask HER → her saveable card. Her asking card shows the holder's willingness word (rcvWord) instead of «có ngay».
+4. **lxAskHer** → **RCVK.rougeBorrow** (x = the part): «Chia cho nàng một nửa» · «Chia chút ít cho có» (lượt × half × half) · «Từ chối» · «Mách lẻo». Her lender card = PEND.rcvAsk through rcvCard (saveable, the notice path); an NPC lender picks from the same list (rcvPick). lxAskHer is kept only as a one-line alias. Her «Mượn son phấn» button shows rcvWord (no odds; od stays the NPC planner's worth). BAL.ration.npc.askAff removed (the asker's liking is BAL.rcv.help.af, one core).
+5. **Scan: no silent pass.** A REQ / PROP / ORDER / ORDER_SRV / JUDGE key that the probe never reaches → verdict **UNREACHED** = a gap, and a self-run no longer hides such a key. New probes: ORDER_SRV (illMaid: the ordered maid → stf2Ord), SELF-PICKED holder (illAlly) and lender (rougeBorrow, N→P / P→N / N↔N), precondition probes (tw:mediate inside the agent tick, cx3:facJoin with a leader, cx4:rougeBeg in the queen seat). The stricter check surfaced 5 more: facJoin / mediate / rougeBeg → now SAME through the new probes; **tw:visit** «Thăm lúc ốm mệt» was mis-read as the Emperor's visit ORDER → GIFT (the sick one only gains); **cx2:doctor** «Mời làm thái y tâm phúc» → GIFT (a paid office service, the thái y is the court seat S.court.ty, not a consort with her own answer list; her own button is the same sure deed — same ruling as staffUp). Reviewer: if you want the thái y to answer, that needs a living thái y person (law 6b) → parking lot. Test also checks with a synthetic input: an unreached REQ / ORDER_SRV key = 2 UNREACHED gaps.
+6. **Law 2, Kết giao** (BAL.rcv.ally {danh:3} + BAL.eff.j8.f_2): to kết giao is to take her side.
+   | answer | gain | cost |
+   |---|---|---|
+   | Nhận lời | lễ 30, thiện cảm +25, asker quý +8, ghen −10 | Sức −4, kết bè Danh −3, the asker's worst foe (rcvFoe = most hostile) quý the receiver −25 |
+   | Nhận nửa lễ | lễ 15, quý +3 | Sức −2, Danh −2, foe −13, seen-through risk |
+   | Từ chối | Danh +3, the foe quý the receiver +13 | lễ returned, both likings −3 |
+   | Mách lẻo | lễ 30, Hoàng hậu quý +5 | Đức −3, asker oán +6, asker Danh −2 |
+   Same numbers for an NPC receiver (test: Danh −3 / +3 exact, foe −25 exact, +13 scaled only by the foe's own nết / mood, one rule both ways).
+
+Also: **ONE NOTICE SYSTEM** — rcvCard: ptOrdAdd when parallel-time is on (only that notice); else when `window.kitNotice` exists, her card waits as ONE notice (id rcv:n, sticky, option row «Trả lời» opens the card), kept saveable in **S.rcvPend** and re-raised after a load; else the queued dialog (today's main has no kitNotice). Tested with a stub kitNotice: 1 notice, 0 queued dialogs, opens a 4-answer card, S.rcvPend emptied. **Judge shot staging** fixed (no NPC Hoàng hậu as asker / accused). Mutation: removing the illAlly rcvAsk + illMaid stf2Ord → 5 FAIL.
+
+## Gates (head 6be968a2)
+- receiver-choice.test ×5: ALL PASS ×5.
+- role-parity.test: ALL PASS.
+- coop-e2e: 63/63 PASS.
+- quickcheck --runs 6 (vs live bb8e8ec9): QUICKCHECK PASS · CORE GATES PASS (one-core-guard, rules-one-source, kit-conform, coop-one-world) · TIME-SPILL GUARD PASS · open 1627 ms · old save ok · perf new/live median render 198/172, tab 325/314, buổi 1072/964 ms, tasks>200 ms 18/17 (noisy box).
+- evtruth-scan: unchanged 12 (no new unchecked evidence line; evok markers on the new evA lines).
+- Scan: rows 104–110 (probe draw) · SAME 41 · OK 63–67 · gaps 0 · unclassified 0 / 267. Table: dev/tools/role-parity-table.md § RECEIVER CHOICE (round 3 AFTER → round 4).
+- Shots Fold 755x1000@2 + iPad 1180x820@2 (receiver-choice-shots.js: help / ally / call / judge / invite / illally / lend), looked at 3×: kit VIỆC dialog, kit option rows, «có rủi ro» on qua loa, TỐN Sức, no cut text; judge shot accuses a Quý phi, not «Hoàng hậu». Kept in scratch outside git, not uploaded.
+- Probe errors srv:kpoison / kframe / pond / ksab / takeaway (null .name / .heir) are the own-servant probe on acts without a usable target in this world (in the probe only, no page error).
+Landing: parallel-time first; after it is on main, re-merge (assemble.py / j21 / j29 / jbal2 + jptime invite → rcvInviteGo) and re-run every gate.
+Touched: jrcv.js (rcvCard kitNotice + S.rcvPend, RCVK.ally law 2 + rcvFoe, RCVK.illAlly, RCVK.rougeBorrow), jbal2.js (BAL.rcv.ally), j83.js (illAllies, illBuy maid / ally, her card words), jration.js (lxGive count, lxBorrowCard, lxAskHer alias, askAff gone), dev/tools/receiver-choice-scan.js, role-parity-table.md, dev/test/receiver-choice.test.js, receiver-choice-shots.js, assemble.py (merge), index.html, sw.js.
+
+**SẴN SÀNG KIỂM 6be968a2** (review/receiver-choice).
