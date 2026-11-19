@@ -87,8 +87,8 @@ TH.onDo("f",(a,m)=>{a=a||{};const id=m&&m.id;if(loaded!==LSK()){DONE.clear();don
  let out={st:"ok"};const keep=[];
  try{for(const [n,g,s] of R.ctx||[]){keep.push([s,g()]);s(n in (a.c||{})?a.c[n]:null)}
   const args=R.dec(a.a);if(!args){out={st:"gone"}}
-  else{const ui=TH.uiCap=[];let r;try{r=PRE[a.n].apply(null,args)}finally{TH.uiCap=null}F.stat.run++;if(R.log&&r)log(r);out={st:"ok",r:typeof r==="string"?r.replace(/<[^>]+>/g,"").slice(0,200):null};
-   if(typeof r==="boolean")out.rv=r;if(ui.length)out.ui=ui.slice(0,4);
+  else{const ui=TH.uiCap=R.lv?[]:null/* F2 registrations: her toasts play on her phone (F1 unchanged) */;let r;try{r=PRE[a.n].apply(null,args)}finally{TH.uiCap=null}F.stat.run++;if(R.log&&r)log(r);out={st:"ok",r:typeof r==="string"?r.replace(/<[^>]+>/g,"").slice(0,200):null};
+   if(typeof r==="boolean")out.rv=r;if(ui&&ui.length)out.ui=ui.slice(0,4);
    if(R.back){const c={};for(const [n,g] of R.ctx||[])if(R.back.includes(n))try{const v=g();c[n]=v===undefined?null:J(v)}catch(e){}out.c=c}
    if(R.host)try{R.host(args,out)}catch(e){console.error("thin F host",e)}}}
  catch(e){console.error("thin F run",a.n,e);out={st:"err",e:String(e&&e.message||e).slice(0,200)}}
@@ -143,6 +143,8 @@ const vOf=id=>(rivals||[]).find(v=>v&&v.id===id)||null;
 const idEnc=A=>{const v=vOf(A[0]);return v&&v!==S?{id:v.id}:null};
 const idDec=a=>a&&vOf(a.id)?[a.id]:null;
 /* host: her place moved → the host's world where + his stage follow her stored person at once (jcoopworld herPl7) */
+/* (and one render of the host's own screen: a stage her walk repainted inside her context shows her place until then). Only walks do this:
+   an extra host render in every run moves her Sổ ghi sync (jlogsync) out of step with the host's copy (bisected on F1, kept as main) */
 const herMoved=()=>{try{D.after(()=>{try{if(CW.keepFriendPos)CW.keepFriendPos();if(CW.refreshHere)CW.refreshHere()}catch(e){}})}catch(e){}};
 const placeCard=(A,r,p)=>{if(p&&p.card&&p.walk&&S&&S.place!==p.walk&&!Q.length&&typeof j77Card==="function")j77Card(p.walk)};
 const W7={lv:L7,ctx:CX,back:BACK,host:herMoved};

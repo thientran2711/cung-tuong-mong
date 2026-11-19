@@ -179,11 +179,16 @@ TH.withSeat=function(seat,fn){
    sounds (sfx / kitSfx / kitResultSfx), stat floaters (kitStatFx / kitStatGlow / kitStatDelta), overlays (kitEdict / kitGloom / kitReward /
    kitResultFx). ONE list (TH.NOOP); coop-thin-b.js checks each name is wrapped. */
 TH.NOOP=["render","showModal","save","kmPush","kmReset","kitLine","sfx","kitSfx","kitResultSfx","kitStatFx","kitStatGlow","kitStatDelta","kitEdict","kitGloom","kitReward","kitResultFx",
- /* F2 (her walks / visits on the host): her arrival must not repaint the host's stage, open his place page (phone shell) or toast on his
-    phone; a toast her run raises (srvToast / kitLine) is captured (TH.uiCap, set by part F's run) and plays on HER phone with the answer */
- "renderStage","resultShow","srvToast","k3ShowPlace","k3Shell"];TH.NOOPED=[];TH.uiCap=null;
+ /* F2 (her walks / visits on the host): her arrival must not open his place page (phone shell) or toast on his
+    phone; a toast her run raises (srvToast / kitLine) is captured (TH.uiCap, set by part F's run) and plays on HER phone with the answer.
+    renderStage is NOT here: its wrappers also write her person (name reveals, residence, roster: guest-side writers, F6/G) and F1/E rely on
+    them running once in her context; the host's stage is repainted right after her run instead (part F: D.after → render) */
+ "srvToast","k3ShowPlace","k3Shell"];TH.NOOPED=[];TH.uiCap=null;
+/* resultShow is not a no-op inside her context either (it writes her Sổ ghi line's stat suffix, F1 relies on it); a result card a run in her
+   context leaves for LATER (a timer: accEtqGo's +30 ms) carries a snapshot marked with her seat and never shows on the host (below) */
+TH.NOOP.push("resultShow");
 const UICAP=new Set(["srvToast","kitLine"]);
-for(const n of TH.NOOP)if(typeof window[n]==="function"){const f=window[n];window[n]=function(){if(CW.ctx){if(TH.uiCap&&UICAP.has(n)&&TH.uiCap.length<8)try{TH.uiCap.push([n,String(arguments[0]==null?"":arguments[0]).slice(0,300)])}catch(e){}return}
+for(const n of TH.NOOP)if(typeof window[n]==="function"){const f=window[n];window[n]=function(){if(CW.ctx&&n!=="resultShow"){if(TH.uiCap&&UICAP.has(n)&&TH.uiCap.length<8)try{TH.uiCap.push([n,String(arguments[0]==null?"":arguments[0]).slice(0,300)])}catch(e){}return}
   /* a result card whose snapshot was taken in another seat's context (her greeting's card at +30 ms, accEtqGo) is hers, never the host's */
   if(n==="resultShow"&&arguments[1]&&arguments[1].__ctx&&CW.seat!==arguments[1].__ctx)return;return f.apply(this,arguments)};TH.NOOPED.push(n)}
 
