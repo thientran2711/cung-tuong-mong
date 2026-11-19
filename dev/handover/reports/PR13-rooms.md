@@ -84,3 +84,19 @@ FOREMAN ANSWERS + OWNER ORDERS that arrived after the rollover (ROOT-57, 19/11 2
 - Owner Lượt 803: send rooms in BATCHES OF 5 ("PR13 BATCH n READY": 5 tagged sheet URLs + faults + credits), keep drawing without waiting. Batch 1 so far = rooms 1–3 (sent singly).
 - Owner Lượt 804 (room 1 beds look LOW): new rooms add the bed-height sentence (grep prompts for the Lượt 717 HQP bed fix 'canopy tall, open, airy'; else: "Each bed is a tall canopy frame bed about 2.4 m high: its canopy top rises clearly above the head of a standing woman, far below the high ceiling; never a low box."). Measure: canopy top above the tagged people's head line.
 - Owner Lượt 805 then 807 (807 wins): do NOT redraw anything already drawn. MEASURE every drawn bedroom (PR13 rooms 1 + 3, and approved: Cảnh Phúc Tần EbY494KuuO / Phi SyhTG51Ub8 + UPve2vXwny / Quý phi eIPlheldqL, HQP ov6w4kO829, HH cpS5YIl0eP, Thừa Minh đông phối s7I0GAVl8e) with people placed: canopy top vs head line → send ROOT-57 a RECOMMENDED-REDRAW list (room, link, measure, why); redraw only what the owner picks. Rule: any later prompt fix → list all already-drawn rooms it affects as recommended redraws. No redraw has run (PR13 made 0 redraws).
+
+# PR14 — successor of PR13 (session_01PEhRbtipUwfFGpHTpwcLYS; START_CTX ~5 % of 1M (estimate; get_session context_usage reads 0) → rollover at ~30 %, ceiling 60 %; coordinator ROOT-57)
+## Lượt 807 — canopy-top vs head-line MEASURE of every drawn bedroom (0 gens, 0 redraws)
+Method: each picture through stage_exact/ipad_tags.py (live iPad stage, 4 figs c06/c30/m19/m39); head line = feet − figure height = 90.6/599 = 15.1 % H (hair top of the tagged people ≈ 15–16 %). Read on the stage: CROWN = top of the bed's own canopy frame/crest; VALANCE = where the bed curtain/valance starts. Rule (Lượt 804): canopy top must rise clearly above the head line.
+| room | id | crown % H | valance % H | vs head (15–16 %) | verdict |
+|---|---|---|---|---|---|
+| Cảnh Phúc Tần bedroom | EbY494KuuO | ~6 | ~19 | crown 10 pt above | OK |
+| Cảnh Phúc Phi bedroom v3 | SyhTG51Ub8 | ~4 | ~16 | crown above | OK |
+| Cảnh Phúc Phi bedroom 3w | UPve2vXwny | ~3 (carved beam pillar-to-pillar) | ~17 | above | OK (already noted floor 20.3 %) |
+| Cảnh Phúc Quý phi bedroom | eIPlheldqL | ~2 | ~17 | above | OK |
+| Trường Xuân HQP bedroom | ov6w4kO829 | ~1 | ~15 | above | OK |
+| Khôn Ninh HH bedroom B | cpS5YIl0eP | ~4 | ~19 | above | OK |
+| Thừa Minh đông phối bedroom | s7I0GAVl8e | ~3 | ~16.5 | above | OK |
+| PR13 #1 Thừa Minh tây phối bedroom | KLpYH26kqp | 18 (left bed) / 21 (right bed) | ~22 | BELOW the head line | RECOMMENDED REDRAW |
+| PR13 #3 Cảnh Phúc đông phối bedroom | Lw8MjWZswO | no canopy frame (curtains hang from the picture top); bed top ~52 | — | far below | RECOMMENDED REDRAW (also beds cut by the frame edges, floor 19.0) |
+Note: on every approved bedroom the valance starts at face level (15–19 %) — the crown is what rises above; the bed-height sentence asks for the crown only.
