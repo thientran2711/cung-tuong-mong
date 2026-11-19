@@ -10,6 +10,8 @@ Scopes: `tp1-8` thường phục rank (consorts c01–c32, m01–m52) · `pr1-8`
 
 Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as a whole** — sheet sent for her one-time OK.
 
+**NEW CHARACTER (owner Lượt 555):** the only new-person prompt = `dev/art/NEW_CHARACTER_TEMPLATE.md` (set B: COMMON_v3 + mNN.v3 line, ONE ref M09 eIyOFEidqL). RETIRED, never approved sentences: COMMON v1/v2 (dev/art/_retired/face-common/), style-image sentences for 6AbGv6EiJO / style2_portraits / style3_girls Xm9tPkMBfo, kc2k / khuê các 18/11 recipes, the 'new-character style sentence', one-ref from img/hd/fig-*-t1.
+
 ## Sentences (S)
 
 ### S01 · TWO-COLOUR RULE (hai màu)
@@ -491,6 +493,14 @@ Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as 
 - negation: yes
 - luot: 323, 331, 411 (F2, H8)
 - why: flowers only t1-t6 thường phục
+
+### X14 · hair flowers on a ma ma (K15)
+- regex: `tucked beside the bun|hair flower|fresh flower|flowers? in (?:her|the) hair`
+- scope: mama
+- unless: -
+- negation: yes
+- luot: 520 (K15; ROOT-50 ruling A, MMX3)
+- why: ma ma, cung nữ, nữ quan wear NO hair flowers; only consorts
 
 ### X13 · style image sentence (style image retired)
 - regex: `drawing style of image \d|Image \d is only for the drawing style`
