@@ -294,3 +294,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW seal-lean-3 r8 (sonnet SMALL; ROOT-70 ORDER via C-AG #23) of 2111eb10 | review/seal-lean-3; reports/seal-lean-3.md | C-AG #23 for ROOT-70 | session_01Rc5AsMYavicZ6i6he17EQf | PASS 2111eb10 (LAND READY sent; waits owner OK) | 19/11 12:01Z |
 | coop-thin F6b #3 (opus; successor of 3uQwFDZB at 5e49d73d) | review/coop-thin-f6b | B | session_01N1tNP3ZKhXs5gAeKLeNMoh | ROLLOVER #3→#4 @ b08d3375 (F5-r1 + F6a ea367ecb merged; start-as-intent tokens; L12 33/37 before the last fix; report reports/coop-thin-f6b.md) | 19/11 13:40Z |
 | coop-thin F6b #4 (opus; successor of 3ZKhXs5g at b08d3375) | review/coop-thin-f6b | B | session_01N1tNP3pjtkkD3B4ih64gjM | RUNNING | 19/11 13:16Z |
+| coop-thin F6a #3 (opus; successor of 5kNmqN7A at f080a27a) | review/coop-thin-f6 | B | session_01N1tNP62bajsTWCCpnFwQkF | RUNNING | 19/11 13:18Z |
