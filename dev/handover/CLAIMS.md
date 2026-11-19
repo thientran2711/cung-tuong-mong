@@ -269,3 +269,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | review-ev-pic-followups (small reviewer for C-AG #22) | reports/review-ev-pic-followups.md | C-AG #22 | session_01Rc5AsNSd2h1ghrUbB8TXzd | DONE FAIL 59fb29c04 (iPad picture-fit regression, fix list in report) | 19/11 |
 | ev-pic-followups FIX r2 (opus; successor of MN9rc6gf after SMALL rv FAIL 59fb29c0: kszOver3 .opts, empnight, deterministic scan) | review/ev-pic-followups | C-AG #22 for ROOT-67 | session_01Rc5AsJJWkjfCMMzTar86tr | RUNNING | 19/11 08:46Z |
 | coop-thin hostnull fix (opus; host:null repaint + reveal flips + toast cap + walk sfx, whole family; stacked on F4-r1) | review/coop-thin-hostnull | B | session_01N1tNP4i9JQenzqhXnbDaGx | RUNNING | 19/11 09:00Z |
+| opt-scroll-reset BIG REVIEW (opus) | review/opt-scroll-reset a5e2d8e7 (stacked on ev-pic-followups) | C-AG #22 for ROOT-67 | session_01Rc5AsJNiFwrW3QTurwWfyi | RUNNING | 19/11 09:34Z |
