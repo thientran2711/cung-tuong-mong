@@ -9,7 +9,7 @@
    New games only: S.kc.kd exists only in lives started with this build; every older save (tiểu thư roads, palace lives) is untouched.
    Pictures: every home place and home person uses an existing placeholder (OUTSIDE_PLAN §14 rule) until main's art list is painted
    (dev/handover/reports/kc-roads-cn-nc.md, ART LIST). Kit only: deck cards, kcE PEND dialogs (KIT §28.6), kit rows, kitSkillCard, pcard, kpanel Q cards. */
-const KC2K={cnv:"dan",nc:"nc",bd:"nc"};
+const KC2K={cnv:"dan",nc:"nc",bd:"nc",pf:"nc"};/* pf (review/phutang-road): Phù Tang = 3rd hòa thân land, same home frame */
 for(const k of Object.keys(KC2K))if(!KC.ok.includes(k))KC.ok.push(k);
 /* the kind of the current life (S.kc.kd once the home life exists; before that, at the identity card, from the origin) */
 function kc2D(){try{if(S&&S.kc)return S.kc.kd||"";return S&&S.origin?KC2K[S.origin.k]||"":""}catch(e){return""}}

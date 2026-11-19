@@ -30,7 +30,7 @@ for f in FILES:
     for re_ in BAN:
       if re.search(re_,s):bad.append(f'{f}:{ln} {re_} :: {s[:160]}')
 # pf rows in shared files: lines that mention pf / Phù Tang
-for f in ['jkc2.js','joi.js','j72.js','jgecat.js']:
+for f in ['jkc2.js','joi.js','j72.js','jgecat.js','jentry.js']:
   src=open(os.path.join(B,f),encoding='utf8').read()
   for ln,line in enumerate(src.split('\n'),1):
     if 'Phù Tang' in line or re.search(r'\bpf\b',line):

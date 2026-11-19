@@ -21,7 +21,7 @@ window.__cmN=window.__cmN||{};
 function cmC(k,n){const N=window.__cmN;N[k]=(N[k]||0)+(n==null?1:n)}
 function cmB(){return BAL.cmaid}
 function cmOff(){try{return !S||window.__cmoff||!BAL.cmaid||(typeof isSrv==="function"&&isSrv())||(typeof isKc==="function"&&isKc())}catch(e){return true}}
-const CM_SRC={tt:"home",dtq:"home",muoi:"home",nc:"land",bd:"land",ch:"th",thd:"pick",cnv:"pick",td:"palace",cn:"room"};
+const CM_SRC={tt:"home",dtq:"home",muoi:"home",nc:"land",bd:"land",pf:"land",ch:"th",thd:"pick",cnv:"pick",td:"palace",cn:"room"};
 const CM_LBL={home:"từ nhà",land:"từ cố quốc",th:"người Thái hậu ban",pick:"tự tay chọn",palace:"Nội vụ phủ cắt cử",old:"gia nhân cũ",room:"bạn cùng phòng thuở làm cung nữ",noi:"Nội vụ phủ cắt cử"};
 const CM_TAL={theu:"khéo thêu thùa",nghe:"thính tai",thuoc:"biết thuốc",kin:"kín miệng"};
 const CM_SEC={lover:"đối thực với một thái giám",debt:"nợ cờ bạc ngoài cung",family:"mẹ già bệnh ở quê",spy:"từng nhận bạc của người cung khác"};
