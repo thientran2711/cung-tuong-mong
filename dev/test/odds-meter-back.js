@@ -2,7 +2,7 @@
    meter (kitOdds .kodm in .kat > .kodds) at the option's REAL odds (the ladder word of its own line = the odds the roll uses, law 4; a certain
    option = «Nắm chắc»), and NO kitRisk chip (.krisk «an toàn / có rủi ro / liều»).
    Scans every PEND event dialog (KIT_ACT_PIDS excluded) + approachOne visits (N draws). Prints counts + the options whose card still has no
-   meter (e.g. a "Khó lường" line: a roll(expr) the kit could not read).
+   meter (a rolled option names its odds by p: j17 oddsLead, review/odds-no-unknown).
    usage: node dev/test/odds-meter-back.js <index.html url> <out.json> [WxH,WxH…]   (default 755x1000,1180x820) — exit 1 on a FAIL */
 const {chromium}=require('playwright');const fs=require('fs');
 const [,,PAGE,OUT,SZS]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));
