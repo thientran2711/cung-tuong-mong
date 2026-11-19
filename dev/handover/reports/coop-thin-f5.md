@@ -20,7 +20,7 @@ Split rule (F4 step 0, rows 5 / 8 / 13 / 17 tsGame): an engine that receives a m
 | 9 | Thả đèn hoa đăng (3 wishes) | tsDenWish jts:310 → tsGame → onDone closure per wish | jts.js:314-320 | **F5** = the end (the card comes from the deck card Thả đèn = F6) |
 | 10 | "Để trời định" / "Học nhanh" / "Bỏ qua" of games 3–9 | kitQuickRoll / roll(odds) ON HER PHONE (j82:402, jtd:253, jts:97 skipRes) | | **F5** (the roll moves to the host) |
 | 11 | person-card game "Giao cho người làm" | jsgame → SG.mod → runAct / doAct | jsgame.js:244, :302 | F1 already (SG.mod rides in F1's ctx); overhear / bribeServ = F6 |
-| 12 | contest round (Tranh ghế) | j34 openMG → done(g) | j34.js:38 | D / world event |
+| 12 | contest round (Tranh ghế); festival contests (hội thi: j71 startContest ×2, j82 startContest) — added by review r1 | j34 openMG → done(g); startContest → onDone(result) | j34.js:38, j71.js:360, j82.js:347 | D / world event |
 | 13 | exam, entry selection, Thử tay calibration | jexam kg82, jentry kg82, jmgcal kg82 | jexam:207, jentry:54, jmgcal:42 | F6 / B (jentry = her life start) |
 | 14 | slap / dodge, nghiệm thân | jslap kg82, jroute kg82 | jslap:80, jroute:412 | D (dialog reactions) |
 | 15 | Phúc tuyển / tuyển tú (kc), steal game, veil craft, make-up / dress games, phối đồ theo đề | jkc:512, jkc2:343, jsmg:63, jveil:146, jmkt:162 / jtoil:316 / j92:472, jts:392 | | F6 (not in the F4 split rows) |
@@ -92,3 +92,39 @@ Known limits: the deferred cost amount and her start choices come from her phone
 = 6f77ed49 + merge origin/review/coop-thin-f4-r1 d9b32074 (F2 7627f79c → F3 8dc849c2 → F4 + main 62055a31). Conflicts: jcoopthinf CX9 (kept ONE shelf ctx fix = the F4 reviewer's R1, which also fixes PETC {i,game}; mine dropped), coop-thin-quiet-scan roots (theirs + `reg\d+` so reg10 counts), index.html / sw.js (rebuilt).
 Gates after the merge: coop-thin-f5 L10 28/28 · swap 28/28 · 4G 27/27 · TRIP F5 0 / 0 · coop-thin-f4 L9 18/18 · one-core ×4 PASS · quiet scan 32 reachable (F5 roots in) · quickcheck PASS (old save ok; render 210/228, tab 420/333, buổi 2120/970 ms new/live — buổi runs 2193/1361/2120 vs live 917/981/970: noisy box, gate passed).
 4G question (same local wrangler, LAG 85 + host CPU ×4): F4 rows 1008 ms median vs F5 1736 ms → the extra is F5 itself, not the local Worker: refused F5 ends (no engine run, tiny patch) answer in 520–710 ms; applied ends 1480–1850 ms = the host runs the whole end at CPU ×4 (cost + gain + the work made, log lines, item ledger) and her patch is larger (her new work, log). Not the score payload (a few numbers).
+
+## REVIEW r1 — PASS review/coop-thin-f5-r1 7f74ce44 (descends from origin/main edb2e724)
+PRIORITY #1 CHECK ('coop-thin F5 review'): OD 17/11 thin guest + L1487/L1489/L1493/L1494 (brief) | main 2481c80d: F1–F4 live (F4-r1 d9b32074 landed), no F5 | review/*: coop-thin-f5 e6ad9a29 (worker, reviewed here), coop-thin-hostnull 20a1f54f (not in main, not merged: land order puts it before F5 only if it lands first) | claims: this reviewer session_01N1tNP45gZxR8HqWwB9auYE.
+Reviewer session_01N1tNP45gZxR8HqWwB9auYE (opus), depth 6 (get_session lineage.depth), START_CTX ≈ 4 % of 1M (used_tokens reads 0; estimate) → rollover at ≈ 29 %, ceiling 60 %; finished below it.
+Branch = e6ad9a29 + reviewer fix 2f028612 + merge origin/main 2481c80d (c421437a) + FAST PATH merge origin/main edb2e724 (7f74ce44); only index.html / sw.js conflicted, rebuilt by build_site.sh; main re-fetched right before READY (edb2e724).
+
+### Fixed here (blocking, small)
+| # | finding | before | after |
+|---|---|---|---|
+| R1 | wkLessonEnd took WORDS from the wire: m.how / m.qx (Học lối mới's own lines) and m.wk.subj (her work's subject) came from her phone and went straight into log() HTML + the work's name (S.inv, giftable to the host / NPCs). A forged end could write any text / markup into her log and her items, and onto the host's screen once the work is given. Words must come from the code's tables (VANPHONG / one core), never the wire. | X1 (m.hw / how forged) and X2 (subj "&lt;img src=x&gt;") **applied** | j83 `WK_HOW` table (rcpMaster sends only the key `hw:"rcp"`), `wkSubjOK(kind,s)` = one rule for every subject wkSubj / a recipe (jwkr wkrSubj) can give; the host refuses anything else. X1 / X2 **refused**, L/W/M rows unchanged (solo identical: same words) |
+Test rows added to coop-thin-f5.js: **R1** resend after a lost answer (her views blocked → resend at 8 s → the host answers from DONE: the end ran ONCE, cost once, one work, her S.mg closed), **X1 / X2** forged words refused; LOOK shot on P1.
+
+### Checks (brief items 1–8)
+1. Same game on her phone (law 5): the end engines are the solo bodies moved into named functions (artLessonGain, wkLessonEnd, tsSummonEnd, tsDenEnd, tsSkipRes); kg82 / playArt / tsGame start and parameters (mgSet by rank) unchanged on her phone; only the end travels. Every gain computed on the host from BAL (law 4: one-core ×4 PASS); both seats read the host number (`same` check in every row). Twin rows (clone, old road, same rolls) equal the real delta for every applied row.
+2. Score check on the host (BAL.mgSc unit [0,1] / raw [0,10], kind / art / virtue / mode / wish tables): P3 1.01, G3 1.2, L3 11, T3 12, S3 11 refused (nothing applied, no cost); P2 / G2 / L2 zero applied. Honest games never exceed the ranges (petc 0..1 by construction, shelf sum/rounds, kg82 0..10). Tried to break it: forged words (R1 above, fixed). Not closable in F5 (FOR B, not a FAIL): an in-range forged score, a forged deferred cost (aa ctx: amount from her phone) and an end sent with no game open are all accepted — the START (pickers, aaDefer) stays on her phone by the F4 split, so the host has nothing to check them against. Closing that family = the start as an intent (host-side open-game token) in F6 / H. A modified client only; an honest phone never sends them.
+3. Cost once: L1/L2/L5/W1/W2/M1 aaPaid = 1 and her Sức / khắc once on both phones; R1 resend = paid once (DONE dedupe); D1 double end = one intent; refused end = no cost, no gain, lesson closed (law 3: nothing applied is not cost-only). Give-up after 3 tries / dropped on a buổi change = nothing applied on the host (canon), her "chưa thành" line. Items: works made in ONE place (W1 / L1: nwk +1 on both phones, none on the host), lantern Thư nhà in her bag (law 6c).
+4. Her cards / sounds once on her phone: aaShowLast captured (pushed first in the run, never cut by the answer's ui.slice(0,4)), aaN = 1 per lesson; hostCard false on every row; quick-tap sounds gated (SKH) on her phone, none on the host.
+5. Level gate: TH.CAP 10 / THINMAX 10; L9 old road 27/27 (nothing sent); f1–f4 green at L10 + swap; tripwire F5 L9 1501 (worker) → L10 **0** (here, two runs + swap).
+6. Orphans: every playArt / tsGame / kg82Play / openMG / startContest caller is in the step 0 table, except **j71 / j82 startContest (festival contests, hội thi)** — not named; it is the same family as row 12 (contest = D / world event). Added to row 12 below (doc only).
+7. Latency (local wrangler, 4G = LAG 85 + host CPU ×4, n = 22): median **1325 ms** (533–2766); refused ends 533–700 ms (network + a tiny run), applied care ends 556–700 ms, lessons / works 1.8–2.8 s. Confirms the worker: the extra over F4 is the host running a lesson end at CPU ×4 (aaPayMG + artLessonGain + wkFinishLesson: work made, log lines, item ledger, then the view diff), not the payload. No proven cheap cut: renders in her ctx are already NOOPs on the host; a smaller patch would need the view diff to skip her log ring (S.logs ≤150) — FOR MAIN / H, measure first. No-throttle: L10 664 ms, swap 246 ms median.
+8. LOOK (scratch only, nothing uploaded, deleted): host Fold 755x1000@2 — only his own screens (his entry selection «Tuyển chọn: Môn thi · Đàn», his Nhập cung scene) after her pet care end and her lesson end; nothing of hers. Guest iPad 1180x820@2 — her pet care screen «Chăm mèo …» and her Tài nghệ screen under the test's staged bag pop-ups (Rương đồ / Rương Nội vụ phủ = staging, same as F4 r1); her result card counted (aaN 1) under them.
+Laws: 3 (cost once / nothing) ✓ · 4 ✓ · 5 ✓ · 6c ✓ · 7 no new player word (the r1 fix keeps the same words, by key) · 9–12 no UI part changed · 1/2/6ab/8/13–18 not touched.
+
+### Gates (this branch; local wrangler dev = THINMAX 10, unless "live")
+| gate | result |
+|---|---|
+| coop-thin-f5 L10 / swap / 4G / L9 | 31/31 · 30/30 · 30/30 · 27/27 (merged 2481c80d head: 31/31 / 31/31; final 7f74ce44: 31/31, TRIP F5 0) |
+| coop-thin-f4 / f3 / f2 / f1 at L10 + swap | 18/18 + 19/19 · 37/37 + 37/37 · 25/25 + 25/25 · 23/23 + 22/22 |
+| coop-thin a L1 / b L4 / c L4 / d L4 / e L5 / e-net L6 (live) | 24/24 · 136/136 · 16/16 · 46/52 (6 kit sameDom = main's known class) · 33/33 · 20/20 |
+| quiet scan | 41 quiet reads, 32 reachable (unchanged); F5 roots in (petcGain shelfPlantGain wkLessonEnd tdFinish tsSummonEnd tsDenEnd) |
+| coop-cyc THIN=10 / swap | 73/73 (one earlier run: giau red, not reproduced) / 73/73 incl. the mixed part; main 2481c80d 74/74 |
+| coop-e2e / swap · p2 · night · timer (live) | 68/68 / 68/68 · 45/45 · 105/105 · 43/43 |
+| coop-b1 (live) | 31/43 and 32/43 beside other suites, **42/43** alone (red: ksab); main 2481c80d 36/43 and 38/43 (ksab / musk / takeaway / children rows) = the known flake class, load dependent |
+| coop-one-world seeds 1–10 · one-core ×4 · Worker npm test | 10 × PASS · PASS ×4 (both merged heads too) · thin ALL OK |
+| quickcheck | PASS (c421437a: old save ok; render 180/191, tab 305/349, buổi 1030/1050 ms new/live; core gates PASS) |
+FOR MAIN: deploy the Worker with THINMAX 10 at landing (all L10 tests ran on a local wrangler dev). FOR B: the forged-start family (item 2) → F6 / H.
