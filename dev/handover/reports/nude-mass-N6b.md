@@ -22,3 +22,7 @@ Method: `build.py cNN v0 --state nude --spec5pose --nudeopt auto --age aNN` outp
 ## c17 DONE (option A, round fan) — sheet img/_review/nude-mass/sheet_c17.jpg
 - a18/a26/a36 = N6's (calm, kept). a51 REDONE on 79e60ff: gen jUoUcARLD0 → cut Xm9mlVNBfo (soft honey antique gold, no mustard; calm; a little silver at temples). a65 NEW: gen O6E6Bp6ynm → cut N2q2mOe6D9 (face ref = a51 rgXgJzFxtc; mostly silver hair, older face, same soft gold as a51).
 - Checks every image: lips closed, face clear, fan below chin, no crown flowers, no hoa điền, colour not rực, elders read their age. 2 gens (270 cr) + 2 cuts.
+
+## c18 DONE (option B: black second colour → deep midnight-navy at a51/a65; yellow-silk folding fan) — sheet img/_review/nude-mass/sheet_c18.jpg
+- gens → cuts: a18 9ZHZhF9NYZ → bxMxzGK5Y2 · a26 u5W53clQLD → KLpLYYGkqp · a36 If3fJZ7tvE → Xm9mUwuBfo · a51 P3Q3tqf42C → gOmOedbSXO · a65 N2q2vr26D9 → aFGFNiYfSh (face ref a51 CqnqL6tEEy).
+- All 1st try, all calm, fan below chin, lips closed, face clear, forehead clean (the centre fringe pearl only), no crown flowers, soft honey gold; a51 silver at temples, a65 mostly silver. a18/a65 raw had parchment/haze → removed by the cut (corners 0). 5 gens 675 cr.
