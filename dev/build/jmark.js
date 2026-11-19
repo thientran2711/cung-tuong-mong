@@ -159,7 +159,7 @@ function ksayPlace(rec,placed){const st=rec.st,fig=rec.fig,el=rec.el;if(!st.isCo
  rec.rect={left,right:left+w,top:bottom-h,bottom};return true}
 function kitSayAll(){try{window.__kitSayAllRan=1;const by=new Map();for(let i=KSAY.length-1;i>=0;i--){const q=KSAY[i];if(!q.el.isConnected||!q.fig.isConnected){q.el.remove();KSAY.splice(i,1)}}
  for(const q of KSAY){const k=q.st;if(!by.has(k))by.set(k,[]);const pl=by.get(k);const ok=ksayPlace(q,pl);
-  if(ok===true){q.el.style.visibility="";if(!q.shown){q.shown=1;if(!q.still)q.el.classList.add("kin")}pl.push(q.rect)}
+  if(ok===true){try{window.kitEmoSeal&&window.kitEmoSeal.yield(q.rect)}catch(e){}q.el.style.visibility="";if(!q.shown){q.shown=1;if(!q.still)q.el.classList.add("kin")}pl.push(q.rect)}
   else if(ok===false||Date.now()-q.t0>KIT_HEADMK.sayWait)q.close(true)}}catch(e){window.__kitSayWhy="EXCALL "+(e&&e.stack||e)}}
 window.kitSayAll=kitSayAll;
 function kitSay(st,fig,text,opts){try{opts=opts||{};st=st||document.getElementById("stage");if(!st||!fig||!st.isConnected||!fig.isConnected)return null;
@@ -171,7 +171,7 @@ function kitSay(st,fig,text,opts){try{opts=opts||{};st=st||document.getElementBy
   if(now||still||!q.shown){el.remove();return}el.classList.remove("kin");el.classList.add("kout");setTimeout(()=>el.remove(),K.sayOut)};
  KSAY.push(q);const ok=ksayPlace(q,KSAY.filter(x=>x!==q&&x.st===st&&x.rect&&x.el.isConnected&&!x.closed).map(x=>x.rect));
  if(ok===false){q.close(true);return null}
- if(ok===true){el.style.visibility="";q.shown=1;if(!still)el.classList.add("kin")}
+ if(ok===true){try{window.kitEmoSeal&&window.kitEmoSeal.yield(q.rect)}catch(e){}el.style.visibility="";q.shown=1;if(!still)el.classList.add("kin")}
  else{const poll=()=>{if(q.closed||q.shown)return;kitSayAll();if(!q.closed&&!q.shown)setTimeout(poll,150)};setTimeout(poll,150)}/* not measured yet (no kitMarkLine): retry until placed or KIT_HEADMK.sayWait */
  if(opts.ms)q.tm=setTimeout(()=>q.close(),opts.ms);return q}catch(e){window.__kitSayWhy="EXC "+(e&&e.stack||e);return null}}
 window.kitSay=kitSay;window.kitSayClear=function(st){for(const q of KSAY.slice())if(!st||q.st===st)q.close(true)};
