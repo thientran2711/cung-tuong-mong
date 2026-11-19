@@ -191,6 +191,31 @@ for(const n of ["scout","invite"])F.reg(n,Object.assign({},W7,{host:null,mine:A=
 F.reg("srvGoTo",Object.assign({},W7,{ret:false,mine:A=>typeof A[0]==="string"&&!!S&&!S.dead&&!Q.length,enc:A=>({k:A[0]}),dec:a=>a&&typeof a.k==="string"?[a.k]:null}));
 F.reg("kcGo",Object.assign({},W7,{ret:false,mine:A=>typeof A[0]==="string"&&!!S&&!S.dead&&!Q.length,enc:A=>({k:A[0]}),dec:a=>a&&typeof a.k==="string"?[a.k]:null,
  done:(A,r)=>{if(r&&r.rv&&S&&S.place===A[0]){tab="act";try{render()}catch(e){}}}/* its tap handler switches to the act tab when it went (jkc :626) */}));
+/* PARALLEL TIME on the guest (coop-ptime-reds; jptime S.away): her sends created on the host (runAct gift / harm / plant …, scout, invite) or on
+   her phone land at their due khắc. The landing runs the act's own runner (roll, NPC answer, giveTo, runAct, ordered servant, late order =
+   Từ chối with its cost) = her act's effects, so it runs ONCE on the HOST in her context (her khắc clock `used` rides in ctx), never on her
+   phone (before: her phone landed it alone → NPC rolls / world writes made on her phone, then lost under the host's next view). Her phone only
+   decides that something is due (her clock is hers: spend stays on her phone) and asks; ptTick / «Đợi tin» (ptWait → spend → ptTick) both
+   end here (asked right after the tap, after the tap's own intent). A tick while another of her intents is pending is asked again by the 1 s check below (lands right after, never twice:
+   the host lands only what is still due in her stored person). Level 6 (F1: her runAct sends are host-made from there). */
+if(typeof ptTick==="function"&&typeof ptNow==="function"&&typeof ptZ==="function"){
+ const ptDue=()=>{try{if(!S||S.dead||typeof ptOn!=="function"||!ptOn())return false;const n=ptNow();
+  return ptZ().some(a=>a&&!a.back&&a.due<=n)||(Array.isArray(S.ordQ)&&S.ordQ.some(o=>o&&n>=o.due))}catch(e){return false}};
+ const t0=ptTick;let PTIN=0;
+ /* the ONE road her landings take: an intent run on the host in her context with HER clock (ctx used) */
+ window.ptTickHer=function(){PTIN++;try{return t0.apply(this,arguments)}finally{PTIN--}};
+ F.reg("ptTickHer",{lv:LV,ctx:[CX[0]],back:["used"],mine:()=>ptDue(),enc:()=>({}),dec:()=>[],ret:undefined});
+ ptTick=function(){
+  /* guest: her phone never lands; something due at her own tap moment → asked as the intent (a world step on her phone waits for the 1 s ask) */
+  /* asked AFTER the tap that moved her clock (setTimeout): sent in the same tick it would take the one pending slot and her act's own intent
+     (doAct: spend → runAct) would be refused as busy = her tap lost */
+  if(on()&&!host()){if(gOn()&&ptDue())setTimeout(ptAsk,0);return}
+  /* host inside her context but not her tick intent (her act run with the HOST's khắc clock, e.g. a spend inside runAct): her landings wait for her intent */
+  if(host()&&CW.ctx&&on()&&!PTIN)return;
+  return t0.apply(this,arguments)};
+ function ptAsk(){try{if(F.pend||host()||!on()||COOP.frozen||!gOn()||!ptDue())return;F.stat.ptAsk=(F.stat.ptAsk|0)+1;window.ptTickHer()}catch(e){}}
+ setInterval(ptAsk,1000);
+}
 /* gap 4: the "did she arrive?" callers (j77Tap, walkSpillTick) open the place card right after goTo; while her walk there is pending the
    card waits for the answer (placeCard) — never a card before the host has said, never a lost tap */
 if(typeof j77Card==="function"){const jc=j77Card;j77Card=function(k){const p=F.pend;if(p&&p.walk&&p.walk===k&&!host()&&on(L7)){p.card=1;return}return jc.apply(this,arguments)}}

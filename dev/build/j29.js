@@ -4,12 +4,12 @@ const DIRTY=["poison","kpoison","frame","kframe","plant","musk","catswap","pushp
    the «…cung nữ thân tín…» routes (jecon econLoyalMaid), else the sent servant bestSent */
 const DIRTY_SENT={bribel:a=>typeof econLoyalMaid==="function"?econLoyalMaid(a):a.maid,laydol:a=>typeof econLoyalMaid==="function"?econLoyalMaid(a):a.maid};
 let ACTK=null;
-(function(){const r0=runAct;runAct=function(a,t,k){const p=ACTK;ACTK=k;try{let oc=null;
+(function(){const r0=runAct;runAct=function(a,t,k){const p=ACTK;ACTK=k;try{let oc=null,sv=null;/* sv hoisted: the qua-loa line below names the ordered servant (was block-scoped → ReferenceError "sv is not defined", act lost) */
   /* trung thành refuses (or begs against) a dishonourable order: the act does not happen */
-  if(a&&k&&DIRTY.includes(k)&&!together(a,t)){const sv=(DIRTY_SENT[k]||bestSent)(a);/* AG-ALL-2 G10: with the loop on the sent servant CHOOSES among the player maid's own "Lệnh của chủ" options (j42 cnvOrdOpts: Vâng lệnh / Từ chối / Mật báo) by her lòng and nết (jagstf2 stf2Ord); off → the old trung thành roll */
+  if(a&&k&&DIRTY.includes(k)&&!together(a,t)){sv=(DIRTY_SENT[k]||bestSent)(a);/* AG-ALL-2 G10: with the loop on the sent servant CHOOSES among the player maid's own "Lệnh của chủ" options (j42 cnvOrdOpts: Vâng lệnh / Từ chối / Mật báo) by her lòng and nết (jagstf2 stf2Ord); off → the old trung thành roll */
    oc=sv&&typeof stf2Ord==="function"?stf2Ord(a,sv,t,k):null;if(oc&&oc!=="obey"&&oc!=="half"){sv.kn=a===S?1:sv.kn;if(a===S&&oc==="refuse")servLearn(sv,"Từ chối việc bẩn");return a===S?(oc==="refuse"?`${sv.name} quỳ xin nương nương đừng làm việc thất đức; việc không thành. `:`${sv.name} viện cớ thoái thác; việc không thành. `):""}
    if(!oc&&sv&&netIs(sv,"loyal")&&roll(30)){sv.kn=a===S?1:sv.kn;const m=`${sv.name} quỳ xin ${a===S?"nương nương":NM(a)} đừng làm việc thất đức; việc không thành. `;if(a===S)servLearn(sv,"Từ chối việc bẩn");return a===S?m:""}}
-  const r=oc==="half"?(a===S?`${sv.name} làm qua loa cho xong việc. `:"")+ordHalf(()=>r0.apply(this,arguments)):r0.apply(this,arguments);
+  const r=oc==="half"?(a===S&&sv?`${sv.name} làm qua loa cho xong việc. `:"")+ordHalf(()=>r0.apply(this,arguments)):r0.apply(this,arguments);
   /* nhát gan: rivals' spies never notice him; a trail he leaves is lost */
   if(a&&k&&!together(a,t)){const sv=bestSent(a);if(sv&&netIs(sv,"timid")&&roll(35)&&t!==S&&t.evm&&t.evm[key(a)]>0)t.evm[key(a)]--}
   return r}finally{ACTK=p}}})();
