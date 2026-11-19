@@ -3,194 +3,194 @@
  "tone": "all colours at ONE medium tone level, the same as the soft coral-red and brick-red robes of the game: medium saturation, medium lightness, neither too fresh nor too dark, never rực, never glaring, never neon, never pastel-washed, never dusty, grey, muddy or black.",
  "c01": {
   "main": "soft rose red",
-  "main_hex": "#C77078",
-  "secondary": "pale jade green",
-  "secondary_hex": "#A9C7B3"
+  "main_hex": "#C5777E",
+  "secondary": "jade green",
+  "secondary_hex": "#60A978"
  },
  "c02": {
-  "main": "muted sapphire blue",
-  "main_hex": "#5E6F9E",
-  "secondary": "silvery grey",
-  "secondary_hex": "#B3ADB4"
+  "main": "soft sapphire blue",
+  "main_hex": "#8190BB",
+  "secondary": "dusky rose",
+  "secondary_hex": "#A5505E"
  },
  "c03": {
   "main": "soft emerald green",
-  "main_hex": "#6E9A7E",
-  "secondary": "cream",
-  "secondary_hex": "#EEE3CC"
+  "main_hex": "#81BB96",
+  "secondary": "deep rose",
+  "secondary_hex": "#AE566C"
  },
  "c04": {
-  "main": "muted royal purple",
-  "main_hex": "#7E5E8E",
-  "secondary": "soft lavender",
-  "secondary_hex": "#C3B3D6"
+  "main": "soft royal purple",
+  "main_hex": "#A881BB",
+  "secondary": "deep lavender",
+  "secondary_hex": "#8160A9"
  },
  "c05": {
-  "main": "muted peacock teal",
-  "main_hex": "#4F8584",
+  "main": "soft peacock teal",
+  "main_hex": "#81BBBA",
   "secondary": "dusty rose",
-  "secondary_hex": "#C99A9C"
+  "secondary_hex": "#AA5F63"
  },
  "c06": {
   "main": "soft vermilion",
-  "main_hex": "#D5745E",
-  "secondary": "ivory",
-  "secondary_hex": "#F0E8DA"
+  "main_hex": "#C58777",
+  "secondary": "deep teal-green",
+  "secondary_hex": "#50A597"
  },
  "c07": {
   "main": "soft lavender",
-  "main_hex": "#B8A6CC",
-  "secondary": "soft pale pink",
-  "secondary_hex": "#E6C4C4"
+  "main_hex": "#B6A2CD",
+  "secondary": "dusky rose pink",
+  "secondary_hex": "#AF5A5A"
  },
  "c08": {
   "main": "soft cherry-blossom pink",
-  "main_hex": "#F0B9BB",
-  "secondary": "pale sage green",
-  "secondary_hex": "#A9B596"
+  "main_hex": "#D49B9D",
+  "secondary": "sage green",
+  "secondary_hex": "#8DA960"
  },
  "c09": {
   "main": "soft powder blue",
   "main_hex": "#9DB4CC",
-  "secondary": "soft white",
-  "secondary_hex": "#EEEAE4"
+  "secondary": "dusky rose",
+  "secondary_hex": "#9B4B51"
  },
  "c10": {
   "main": "soft peach",
-  "main_hex": "#F2C6A5",
-  "secondary": "cream",
-  "secondary_hex": "#F3E2CC"
+  "main_hex": "#D1B094",
+  "secondary": "deep teal",
+  "secondary_hex": "#50A5A5"
  },
  "c11": {
   "main": "soft lilac",
-  "main_hex": "#BBA5C8",
-  "secondary": "silvery grey",
-  "secondary_hex": "#B3ADB4"
+  "main_hex": "#BCA1CC",
+  "secondary": "deep jade green",
+  "secondary_hex": "#56AE89"
  },
  "c12": {
   "main": "soft mint green",
-  "main_hex": "#A8C8B4",
-  "secondary": "soft white",
-  "secondary_hex": "#EEEAE4"
+  "main_hex": "#A2CDB2",
+  "secondary": "deep rose",
+  "secondary_hex": "#91465F"
  },
  "c13": {
-  "main": "apricot peach",
-  "main_hex": "#EBA98E",
-  "secondary": "cream",
-  "secondary_hex": "#F0E2CC"
+  "main": "soft apricot",
+  "main_hex": "#D4AC9B",
+  "secondary": "deep teal-blue",
+  "secondary_hex": "#4B879B"
  },
  "c14": {
-  "main": "warm ivory cream",
-  "main_hex": "#EEDFC8",
-  "secondary": "muted blue-violet",
-  "secondary_hex": "#8A86B8"
+  "main": "soft ivory cream",
+  "main_hex": "#E3D4B5",
+  "secondary": "blue-violet",
+  "secondary_hex": "#6660A9"
  },
  "c15": {
   "main": "soft coral pink",
-  "main_hex": "#E0A398",
-  "secondary": "ivory",
-  "secondary_hex": "#F0E8DA"
+  "main_hex": "#D4A59B",
+  "secondary": "deep jade green",
+  "secondary_hex": "#56AE91"
  },
  "c16": {
-  "main": "muted sage green",
-  "main_hex": "#9CA283",
-  "secondary": "cream",
-  "secondary_hex": "#E6DCC0"
+  "main": "soft sage green",
+  "main_hex": "#B0BB81",
+  "secondary": "deep plum",
+  "secondary_hex": "#914678"
  },
  "c17": {
-  "main": "blush pink",
-  "main_hex": "#E5B3AA",
-  "secondary": "muted deep teal",
-  "secondary_hex": "#4F7F7C"
+  "main": "soft blush pink",
+  "main_hex": "#D49BA3",
+  "secondary": "teal",
+  "secondary_hex": "#488682"
  },
  "c18": {
   "main": "soft mauve rose",
   "main_hex": "#BF868F",
-  "secondary": "soft lilac-pink",
-  "secondary_hex": "#D9B5C5"
+  "secondary": "lilac-plum",
+  "secondary_hex": "#AC5D80"
  },
  "c19": {
   "main": "soft plum",
-  "main_hex": "#8E5D78",
-  "secondary": "soft pink",
-  "secondary_hex": "#E3B9B0"
+  "main_hex": "#BB81A1",
+  "secondary": "dusky pink",
+  "secondary_hex": "#AF695A"
  },
  "c20": {
   "main": "soft lotus pink",
-  "main_hex": "#E9B5AE",
-  "secondary": "soft celadon",
-  "secondary_hex": "#A9C2AE"
+  "main_hex": "#D4A29B",
+  "secondary": "celadon green",
+  "secondary_hex": "#60A96F"
  },
  "c21": {
-  "main": "soft rose red",
-  "main_hex": "#C9746C",
-  "secondary": "blush pink",
-  "secondary_hex": "#E8B5AC"
+  "main": "soft raspberry rose",
+  "main_hex": "#C5778F",
+  "secondary": "dusky pink",
+  "secondary_hex": "#AF675A"
  },
  "c22": {
   "main": "soft orchid purple",
-  "main_hex": "#A98AB0",
-  "secondary": "soft pink",
-  "secondary_hex": "#EBC7D0"
+  "main_hex": "#B081BB",
+  "secondary": "dusky pink",
+  "secondary_hex": "#AF5A6F"
  },
  "c23": {
-  "main": "muted crimson red",
-  "main_hex": "#B04F4C",
-  "secondary": "soft jade green",
-  "secondary_hex": "#7FA88F"
+  "main": "soft crimson red",
+  "main_hex": "#C57A78",
+  "secondary": "jade green",
+  "secondary_hex": "#60A97D"
  },
  "c24": {
-  "main": "soft coral red",
-  "main_hex": "#D97B60",
-  "secondary": "pale blush cream",
-  "secondary_hex": "#F3D1B1"
+  "main": "soft persimmon",
+  "main_hex": "#C59477",
+  "secondary": "indigo blue",
+  "secondary_hex": "#465891"
  },
  "c25": {
-  "main": "muted cherry red",
-  "main_hex": "#A84A52",
-  "secondary": "muted deep teal",
-  "secondary_hex": "#4C7A80"
+  "main": "soft cherry red",
+  "main_hex": "#C4787F",
+  "secondary": "teal",
+  "secondary_hex": "#477E85"
  },
  "c26": {
-  "main": "soft burgundy",
-  "main_hex": "#8A4A55",
-  "secondary": "soft celadon",
-  "secondary_hex": "#A9C2AE"
+  "main": "soft burgundy rose",
+  "main_hex": "#BB818B",
+  "secondary": "celadon green",
+  "secondary_hex": "#60A96F"
  },
  "c27": {
-  "main": "terracotta coral red",
-  "main_hex": "#C27362",
-  "secondary": "pale cream blush",
-  "secondary_hex": "#EBCFBE"
+  "main": "soft terracotta",
+  "main_hex": "#C57F77",
+  "secondary": "deep teal",
+  "secondary_hex": "#56AEAE"
  },
  "c28": {
   "main": "soft celadon",
-  "main_hex": "#A3BFAA",
-  "secondary": "soft white",
-  "secondary_hex": "#EEEAE4"
+  "main_hex": "#9AC8A5",
+  "secondary": "dusky rose",
+  "secondary_hex": "#914652"
  },
  "c29": {
   "main": "soft ink blue",
-  "main_hex": "#4E5F7E",
-  "secondary": "pale grey",
-  "secondary_hex": "#C8C8CA"
+  "main_hex": "#8196BB",
+  "secondary": "dusky plum rose",
+  "secondary_hex": "#9B4B6C"
  },
  "c30": {
   "main": "soft moonlight blue",
-  "main_hex": "#A9BCD3",
-  "secondary": "soft white",
-  "secondary_hex": "#EEEAE4"
+  "main_hex": "#A1B5CF",
+  "secondary": "deep coral rose",
+  "secondary_hex": "#A55750"
  },
  "c31": {
-  "main": "pale jade",
-  "main_hex": "#B4CDBE",
-  "secondary": "silvery grey",
-  "secondary_hex": "#B3ADB4"
+  "main": "soft pale jade",
+  "main_hex": "#A2CDB3",
+  "secondary": "deep rose",
+  "secondary_hex": "#AE566C"
  },
  "c32": {
-  "main": "ivory",
-  "main_hex": "#EEDCCE",
-  "secondary": "soft grey-blue",
-  "secondary_hex": "#A9B5C4"
+  "main": "soft ivory",
+  "main_hex": "#E3D4B5",
+  "secondary": "indigo blue",
+  "secondary_hex": "#466591"
  }
 }
