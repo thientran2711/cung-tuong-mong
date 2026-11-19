@@ -189,3 +189,13 @@ VERDICT (looked at the full lineups + the sheet): YES — the owner's style imag
 CONCLUSION: the stiff/opaque maids of the ladder rounds came from the PROMPT changes (M1/M2 ladder wording: single-figure/rank-ladder text, sleeve-shape clauses, "face/fabric" ref lines, image-type face ref), not from the style image. The owner's style image 6AbGv6EiJO can stay image 1 for maids (FIGURE_GATE STYLE IMAGE FINAL holds) as long as the old live prompt structure is copied.
 Remaining gaps vs LIVE (same for M2 and NEW): (a) held item/pose — the gens follow the prompt (broom, clasped hands); live a18 had the later item edit (handkerchief / fan, more frontal); (b) live is more washed/translucent at the sleeves and paler skirt (live tm0 skirt cream, NEW skirt blue gauze); (c) native size 1536x768 → needs the ultra 2x upscale (done here, faces stay faithful).
 Gens used: 2 of max 4.
+### REPRO 2 — 2K CHECK (ROOT-39 03:25Z/03:31Z) — numbers
+| gen | passed width x height / resolution | stored (creations_get) | file px | credits |
+|---|---|---|---|---|
+| M2 tm0 Lw87KE7swO | 1536x768 / 4k | 1536x768 / 1k | 1536x768 | 80 |
+| M2 tm1 EbY5mD0uuO | 1536x768 / 2k | 1536x768 / 1k | 1536x768 | 80 |
+| M3 tm0 bxMLKjl5Y2 | 1536x768 / 4k | 1536x768 / 1k | 1536x768 | 80 |
+| M3 tm1 1ldSxSqr4r | 1536x768 / 2k | 1536x768 / 1k | 1536x768 | 80 |
+| M3 tm1 YMlpVsjWeC | 2048x1024 / 2k | 1536x768 / 2k | 2048x1024 | 135 |
+| original tm1 nVjQEJ9YQD | ? | 1536x768 / 2k | 2048x1024 | 175 |
+CAUSE: no account cap. When width/height are passed, the tool now takes the resolution class from those pixel numbers and ignores `resolution` (1536x768 = 1k size). Pass width/height at the TARGET pixel size (2k lineup = 2048x1024; 4k = 3840x1920; the consort painters' 1024x2304 is already 2k-sized) and the 2k render comes back. YMlpVsjWeC (same seed, style 6AbGv6EiJO) looks like the 1k test: soft green, layered sheer under-skirt; rendering a little more detailed. Gens used: 3 of 4.
