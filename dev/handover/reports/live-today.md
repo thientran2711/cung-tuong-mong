@@ -86,6 +86,7 @@ HITS (7 figures, 11 files):
 | c04 th a36 (LIVE-2 new) | fig + hd | fix3 | grey haze round the hem |
 Fix = alpha only (colour pixels unchanged), feet band only; por busts untouched (no feet). First try (alpha-only halo removal) left the opaque core with a hard edge → rejected after looking; fix2/fix3 chosen per figure by looking.
 BACKUP: img/_backup/1119-shadow/<same path> (11 files; NOT 1118-live, which keeps the pre-today originals). --check same 11 before and after. Live md5 = local (spot c13 kc fig, c30 hd, c12 fig, c04-th hd).
+c12 ngheo follow-up (ROOT-36 01:27Z): thin leftover strips right of the right shoe removed (tools/thin.py: pixels that vanish under a 1.5-px opening, feet band only), fig + hd re-pushed, sheet refreshed.
 SHEET: https://ctm-img.victoria-tntt.workers.dev/img/_review/live-fix/shadow_before_after.jpg (each row: BEFORE dark|light bg → AFTER dark|light bg; hd where it exists).
 
 ### 4c. v1/v2 group + manifests (19/11 ~02:15Z)
