@@ -11,7 +11,7 @@ cut = sys.argv[1]
 sr = json.load(open(os.path.join(D, 's_root_colours.json')))
 VN = {'xuan': 'Xuân', 'ha': 'Hạ', 'thu': 'Thu', 'dong': 'Đông'}
 NEW = ['s56', 's57', 's58', 's59', 's60', 's61']; BEN = ['s16', 's33', 's34']
-MISSING = {'s60': ['chưa có hình:', 'Magnific chặn (NSFW)', 'lượt 1/1, chờ quản đốc']}
+MISSING = {}
 BENCH = {k: (sr[k]['main'], sr[k]['main_hex'], sr[k]['sec'], sr[k]['sec_hex']) for k in BEN}
 F = lambda s, b=False: ImageFont.truetype('/usr/share/fonts/truetype/dejavu/DejaVuSans%s.ttf' % ('-Bold' if b else ''), s)
 CW, FH, ZH, TH, GAP = 280, 660, 340, 96, 24
