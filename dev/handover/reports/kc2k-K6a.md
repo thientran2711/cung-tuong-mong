@@ -44,3 +44,9 @@ https://ctm-img.victoria-tntt.workers.dev/img/_review/kc2k-mass/sheet_K6a_2.jpg
 Magnific picks: m07 kc Syhy0dOUb8 (KC v2; v1 xSBSATqjfW rejected pastel), ngheo UPvP0Bxwny; m08 kc vQAQ7L4a47, ngheo If3fgxqtvE; m09 kc aFGFJSZfSh, ngheo yiuiX4MPW9; m10 kc EbYb4FNuuO, ngheo eIPIxocdqL; m11 kc jUoUYU4LD0, ngheo lJtJT6Kgv9. All first try with KC v2 except m07 (redo). All margins 0.00 %.
 Looked at all: items = ledger; bare forehead; closed lips; no cup. Honest notes: m07 kc skirt stays cream (her design; vest/sash now medium jade); m11 ngheo blue-grey stays on the light side of medium (faded-cloth rule).
 ~56 % of 36 (20/36: m02–m11 + m12 kc/ngheo, m13 kc looked at, sheet 3 next) / ~0 % chơi được.
+
+## SHEET 3 — m12–m16
+https://ctm-img.victoria-tntt.workers.dev/img/_review/kc2k-mass/sheet_K6a_3.jpg
+Magnific picks (all first try): m12 kc s7I706rl8e, ngheo Lw8wciRswO; m13 kc DoOoruVpcl, ngheo dt4tstVXSL; m14 kc KLpLGllkqp, ngheo lJtJVPogv9; m15 kc JNCNXZROq4, ngheo u5W56EYQLD; m16 kc xSBScLRjfW, ngheo 6AbAvRQiJO. Margins 0.00 %.
+Honest notes: m13 ngheo shows the cloth ribbon but no visible wooden pin (no jewellery, ok); m14 ngheo jacket mostly natural beige, celadon carried by the skirt (as her live); m15 kc skirt stays cream (her design; vest/sash now medium pink).
+~83 % of 36 (30/36 looked at) / ~0 % chơi được.
