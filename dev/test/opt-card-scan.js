@@ -22,7 +22,7 @@ const MEAS=`(()=>{const M=document.getElementById('modal');if(!M||M.hidden)retur
   await sleep(800);const rows=[];
   for(const k of CASES){const ok=await p.evaluate(async k=>{const W=t=>new Promise(r=>setTimeout(r,t));Q.length=0;const md=document.getElementById('modal');md.hidden=true;
     const R0=liveRivals(true).filter(v=>!v.queen);R0.slice(0,3).forEach(v=>S.met[v.id]=1);const QQ=liveRivals(true).find(x=>x.queen);const v=(window.__HH&&QQ)?QQ:R0[0],v2=R0[1]||R0[0];
-    const o=[{n:'Tiếp',fx:{},x:'thân +3',go:()=>{}},{n:'Từ chối khéo rồi lui về cung',fx:{bac:-10},x:'thân -3',hint:'giữ được thể diện',go:()=>{}}];
+    const o=[{n:'Tiếp',fx:{suc:-3},x:'thân +3',go:()=>{}},{n:'Từ chối khéo rồi lui về cung',fx:{suc:3},x:'thân -3',hint:'giữ được thể diện',go:()=>{}}];/* law 2 + 3 (law3-cost-only): demo pair symmetric, same as choice-value-audit's shot-script fixtures */
     const many=[1,2,3,4,5].map(i=>({n:'Cách thứ '+i+' để đối đáp cho phải lẽ',fx:{suc:-i},hint:'thành bại khó đoán, hỏng thì càng phật ý người trên',risk:'có rủi ro',go:()=>{}}));
     const j24=re=>{for(let i=0;i<400;i++){let m=null;try{m=approachOne()}catch(e){}if(m&&re.test(String(m.t||''))&&kitStagePeople(m).length)return m}return null};
     const pv=x=>x;const mR=j24(/Có người đến/),realH=(mR&&mR.h)||'<p>Nàng đến thỉnh an, dáng vẻ ngập ngừng như có điều muốn nói.</p>';
