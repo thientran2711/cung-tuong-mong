@@ -1386,3 +1386,4 @@ ROOT-48 Lượt 501 (owner): poses = upper body (hands/arms/head/torso), no leg/
 ROOT-49 Lượt 505: triều phục r22 (TP3 e89e094, 828 cr) LOOKED + SENT. t1 lighter jade like r20 but fewer robe florets + no hem border; t2 embroidered, sleeves plain, hà bí still deep green; t3 more, a few sleeve motifs; t5 larger peonies/birds, lost hem border. TP3 STOPPED.
 ROOT-49 Lượt 508: ma ma two-colour sample c06 a36 (MMX1c ce0edda, 138 cr; vermilion + jade green; one sentence added, --twocol flag) LOOKED + SENT. Waiting verdict + ruling secondary for a51/a65. MMX1c STOPPED.
 ROOT-48 Lượt 505 (owner): LAW #0 top of FIGURE_GATE — only owner's words change prompts; own remarks = notes + ask; no answer = no change.
+ROOT-49 Lượt 510: LAW #0 = ART_RULES first line (A18, Lượt 505). OWNER: Nữ đế pictures to be shown AS PRODUCED → NDX1 sends a sheet per finished person (dev/handover/review-sheets/nu-de/).
