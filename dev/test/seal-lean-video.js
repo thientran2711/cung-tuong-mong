@@ -1,11 +1,11 @@
 /* seal-lean-2 (owner 19/11 ~05:05Z): REAL video proof of the mood-seal lean-in. usage: node dev/test/seal-lean-video.js <W>x<H> <outdir> [SECS=34]
-   Records (Playwright recordVideo at 2x size) one natural full-screen take (>= SECS s, leans happen by themselves) + one forced lean per feeling (gian, buon, vui) and writes
-   <outdir>/log-<W>x<H>.json (lean timings + clone rect) and <outdir>/raw-<W>x<H>.webm. Cut/crop with ffmpeg afterwards (dev/test/seal-lean-cut.sh). */
-const {chromium}=require('playwright');const fs=require('fs');const path=require('path');
+   Context A (dpr 1, recordVideo size = viewport so the game FILLS the frame): ONE natural full-screen take of SECS s -> <outdir>/full-<WxH>.mp4.
+   Context B (dpr 2, no recording): per feeling (gian, buon, vui) one forced lean (grow -> hold -> shrink), clip screenshots of the big seal around its box (~8 fps, timed)
+   assembled by ffmpeg into <outdir>/close-<key>-<WxH>.mp4 (720x720, H.264). Writes <outdir>/log-<WxH>.json (lean timings). */
+const {chromium}=require('playwright');const fs=require('fs');const path=require('path');const cp=require('child_process');
 const [,,SZ,OUT]=process.argv;const [W,H]=SZ.split('x').map(Number);fs.mkdirSync(OUT,{recursive:true});const SECS=+process.env.SECS||34;
 const ROOT=path.resolve(__dirname,'../..');const MIME={html:'text/html;charset=utf-8',js:'text/javascript;charset=utf-8',json:'application/json',webp:'image/webp',png:'image/png',css:'text/css'};
-(async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:2,reducedMotion:'no-preference',serviceWorkers:'block',recordVideo:{dir:OUT+'/rec',size:{width:W*2,height:H*2}}});
- const t0=Date.now();
+async function open(b,dpr,rec){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:dpr,reducedMotion:'no-preference',serviceWorkers:'block',...(rec?{recordVideo:{dir:OUT+'/rec-'+SZ,size:{width:W,height:H}}}:{})});
  await ctx.route('**/*',async r=>{const u=new URL(r.request().url());if(u.host!=='em.local')return r.continue();
   const f=path.join(ROOT,decodeURIComponent(u.pathname));if(/assets\.json$/.test(f)||!fs.existsSync(f)||fs.statSync(f).isDirectory())return r.fulfill({status:404,body:''});
   r.fulfill({status:200,body:fs.readFileSync(f),headers:{'content-type':MIME[f.split('.').pop()]||'application/octet-stream'}})});
@@ -21,26 +21,29 @@ const ROOT=path.resolve(__dirname,'../..');const MIME={html:'text/html;charset=u
   S.met=S.met||{};const ks=['ghen','vui','buon','so','muu'];rivals.slice(0,5).forEach((v,i)=>{S.met[v.id]=1;try{k61Meet(v,'gặp',3)}catch(e){}v.emo={k:ks[i%5],v:60,why:'thử',w:0}});
   for(const m of (S.men||[]).slice(0,3)){try{k61Meet(m,'gặp',3)}catch(e){}m.emo={k:'so',v:60,why:'thử',w:0}}try{k61Meet(S.emp,'gặp',3)}catch(e){}render()});
  await p.waitForTimeout(3000);
- /* log every lean: start, end, key, big rect, peak size */
- await p.evaluate(()=>{window.__L=[];const ob=new MutationObserver(ms=>{for(const m of ms){for(const n of m.addedNodes)if(n.nodeType===1&&n.classList&&n.classList.contains('kemo-big')){const l={t:performance.now(),w:n.getBoundingClientRect().width,k:'',leanMs:0,rect:null,cls:n.className,maxW:0,vw:innerWidth,vh:innerHeight};window.__L.push(l);n.__l=l;
-   (function tick(){if(!n.isConnected){l.end=performance.now();return}const r=n.getBoundingClientRect();if(r.width>l.maxW){l.maxW=r.width}
-    l.inside=(l.inside===undefined?true:l.inside)&&r.left>=-1&&r.top>=-1&&r.right<=innerWidth+1&&r.bottom<=innerHeight+1;
-    if(r.width>=l.maxW*.98){l.rect={x:r.left,y:r.top,w:r.width,h:r.height};l.tBig=l.tBig||performance.now();l.tBigEnd=performance.now()}requestAnimationFrame(tick)})()}
+ await p.evaluate(()=>{window.__L=[];const ob=new MutationObserver(ms=>{for(const m of ms){for(const n of m.addedNodes)if(n.nodeType===1&&n.classList&&n.classList.contains('kemo-big')){const l={t:performance.now(),maxW:0,inside:true};window.__L.push(l);n.__l=l;
+   (function tick(){if(!n.isConnected){l.end=performance.now();return}const r=n.getBoundingClientRect();if(r.width>l.maxW)l.maxW=r.width;l.inside=l.inside&&r.left>=-1&&r.top>=-1&&r.right<=innerWidth+1&&r.bottom<=innerHeight+1;requestAnimationFrame(tick)})()}
    for(const n of m.removedNodes)if(n.__l)n.__l.end=performance.now()}});ob.observe(document.body,{childList:true})});
- const T0=await p.evaluate(()=>performance.timeOrigin),log={W,H,errs,natural:[],forced:[]};
- const mark=async()=>(await p.evaluate(()=>performance.timeOrigin+performance.now()))-t0;
- log.naturalStart=await mark();await p.waitForTimeout(SECS*1000);log.naturalEnd=await mark();
- log.natural=await p.evaluate(()=>window.__L.map(l=>({...l})));
- /* wait for any running lean to end before forced takes */
- await p.waitForFunction(()=>!document.querySelector('img.kemo-big'),null,{timeout:30000}).catch(()=>{});
- for(const key of ['gian','buon','vui']){
-  const info=await p.evaluate(key=>{const vis=[...document.querySelectorAll('img.kemo.kemo-live')].filter(e=>{const r=e.getBoundingClientRect();return r.width>2&&r.top>0&&r.bottom<innerHeight});if(!vis.length)return null;
-   const e=vis[0],set=(/emo-((?:m-|mo-)?)[a-z-]+\.webp/.exec(e.dataset.kemos||e.getAttribute('src'))||[0,''])[1];
-   if(!new RegExp('kemo-'+key+'(\\s|$)').test(e.className+' ')){e.className=e.className.replace(/kemo-(?!live|lean|m-)[a-z0-9_-]+/,'kemo-'+key).replace(/kemo-m-\w+/,'').trim();e.dataset.kemos='img/kit/emo-'+set+key+'.webp';e.setAttribute('src',e.dataset.kemos);window.kitEmoSeal.live(e,true)}
-   e.__ln&&clearTimeout(e.__ln);const n0=window.__L.length;window.kitEmoSeal.lean(e,true);const r=e.getBoundingClientRect();return{n0,small:{x:r.left,y:r.top,w:r.width,h:r.height},src:e.getAttribute('src')}},key);
-  if(!info){log.forced.push({key,err:'no seal'});continue}
-  const ts=await mark();await p.waitForFunction(()=>!document.querySelector('img.kemo-big'),null,{timeout:40000});const te=await mark();await p.waitForTimeout(1200);
-  const L=await p.evaluate(n0=>({...window.__L[n0]}),info.n0);log.forced.push({key,ts,te,small:info.small,src:info.src,big:L});
- }
- log.errs=errs;fs.writeFileSync(`${OUT}/log-${W}x${H}.json`,JSON.stringify(log,null,1));
- const vp=p.video();await ctx.close();await vp.saveAs(`${OUT}/raw-${W}x${H}.webm`);await b.close();console.log('done',errs.length,'errs')})();
+ return{ctx,p,errs}}
+(async()=>{const b=await chromium.launch();const log={W,H};
+ {const {ctx,p,errs}=await open(b,1,true);const t0=Date.now();await p.waitForTimeout(SECS*1000);log.natural=await p.evaluate(()=>window.__L.map(l=>({secs:+((l.end-l.t)/1e3).toFixed(1),bigPx:Math.round(l.maxW),inside:l.inside})));log.errsA=errs;
+  const v=p.video();await ctx.close();await v.saveAs(`${OUT}/raw-${SZ}.webm`);
+  /* the recording starts when the page opens; trim the load part (page open -> game drawn) with ffmpeg: keep the last SECS+1 s */
+  cp.execFileSync('ffprobe',['-v','error','-show_entries','format=duration','-of','csv=p=0',`${OUT}/raw-${SZ}.webm`]);const dur=+cp.execFileSync('ffprobe',['-v','error','-show_entries','format=duration','-of','csv=p=0',`${OUT}/raw-${SZ}.webm`]).toString();
+  cp.execFileSync('ffmpeg',['-y','-loglevel','error','-ss',String(Math.max(0,dur-SECS-1.5)),'-i',`${OUT}/raw-${SZ}.webm`,'-an','-c:v','libx264','-pix_fmt','yuv420p','-crf','23','-preset','fast',`${OUT}/full-${SZ}.mp4`])}
+ {const {ctx,p,errs}=await open(b,2,false);log.forced=[];
+  for(const key of ['gian','buon','vui']){
+   const info=await p.evaluate(key=>{const vis=[...document.querySelectorAll('img.kemo.kemo-live')].filter(e=>{const r=e.getBoundingClientRect();return r.width>2&&r.top>0&&r.bottom<innerHeight});if(!vis.length)return null;
+    const e=vis[0],set=(/emo-((?:m-|mo-)?)[a-z-]+\.webp/.exec(e.dataset.kemos||e.getAttribute('src'))||[0,''])[1];
+    if(!new RegExp('kemo-'+key+'(\\s|$)').test(e.className+' ')){e.className=e.className.replace(/kemo-(?!live|lean|m-)[a-z0-9_-]+/,'kemo-'+key).replace(/kemo-m-\w+/,'').trim();e.dataset.kemos='img/kit/emo-'+set+key+'.webp';e.setAttribute('src',e.dataset.kemos);window.kitEmoSeal.live(e,true)}
+    e.__ln&&clearTimeout(e.__ln);window.kitEmoSeal.lean(e,true);const c=document.querySelector('img.kemo-big');return c?{l:parseFloat(c.style.left),t:parseFloat(c.style.top),w:parseFloat(c.style.width),h:parseFloat(c.style.height)}:null},key);
+   if(!info){log.forced.push({key,err:'no seal'});continue}
+   const pad=Math.max(info.w,info.h)*.22,side=Math.max(info.w,info.h)+2*pad,cx=info.l+info.w/2,cy=info.t+info.h/2;
+   const clip={x:Math.max(0,Math.min(W-side,cx-side/2)),y:Math.max(0,Math.min(H-side,cy-side/2)),width:side,height:side};
+   const dir=`${OUT}/cl-${key}-${SZ}`;fs.mkdirSync(dir,{recursive:true});const fr=[];const t0=Date.now();
+   while(await p.evaluate(()=>!!document.querySelector('img.kemo-big'))&&Date.now()-t0<30000){const t=Date.now()-t0,f=`${dir}/${String(fr.length).padStart(4,'0')}.jpg`;await p.screenshot({path:f,type:'jpeg',quality:92,clip});fr.push([f,t])}
+   fs.writeFileSync(`${dir}/list.txt`,fr.map((x,i)=>`file '${x[0]}'\nduration ${((i+1<fr.length?fr[i+1][1]:x[1]+120)-x[1])/1000}`).join('\n')+`\nfile '${fr[fr.length-1][0]}'\n`);
+   cp.execFileSync('ffmpeg',['-y','-loglevel','error','-f','concat','-safe','0','-i',`${dir}/list.txt`,'-vf','scale=720:720:flags=lanczos,fps=25','-c:v','libx264','-pix_fmt','yuv420p','-crf','20',`${OUT}/close-${key}-${SZ}.mp4`]);
+   log.forced.push({key,secs:+((Date.now()-t0)/1000).toFixed(1),frames:fr.length,box:info});await p.waitForTimeout(1000)}
+  log.errsB=errs;await ctx.close()}
+ fs.writeFileSync(`${OUT}/log-${SZ}.json`,JSON.stringify(log,null,1));await b.close();console.log('done',JSON.stringify(log.natural),log.forced.map(f=>f.secs+'s/'+f.frames))})();
