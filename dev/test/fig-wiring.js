@@ -16,13 +16,14 @@ const MT={'.html':'text/html; charset=utf-8','.js':'text/javascript','.json':'ap
  const ctx=await b.newContext({viewport:{width:1180,height:820},serviceWorkers:'block'});await ctx.addInitScript(()=>{window.__bot=1});
  await ctx.route(/FIGURES[^/]*\.json/,async r=>{const n=r.request().url().match(/(FIGURES[^/?]*\.json)/)[1];
   if(FIGDIR&&fs.existsSync(path.join(FIGDIR,n)))return r.fulfill({status:200,body:fs.readFileSync(path.join(FIGDIR,n)),contentType:'application/json'});
-  try{const x=await ctx.request.get(CDN+n);return r.fulfill({status:x.ok()?200:404,body:x.ok()?await x.body():'[]',contentType:'application/json'})}catch(e){return r.fulfill({status:200,body:'[]',contentType:'application/json'})}});
+  for(let i=0;i<4;i++){try{const x=await ctx.request.get(CDN+n,{timeout:60000});if(x.ok())return r.fulfill({status:200,body:await x.body(),contentType:'application/json'});if(x.status()===404)break}catch(e){}}
+  return r.fulfill({status:404,body:'[]',contentType:'application/json'})});
  await ctx.route(/\.(webp|png|jpg|mp3|ogg|mp4|webm)(\?|$)/,r=>r.fulfill({status:200,body:Buffer.alloc(0),contentType:'image/webp'}));
  const p=await ctx.newPage();const errs=[];p.on('pageerror',e=>errs.push(e.message.slice(0,160)));
  await p.goto(url+'index.html?khost=0',{waitUntil:'domcontentloaded',timeout:120000});
  await p.waitForFunction(()=>typeof start==='function'&&typeof figFor==='function'&&typeof figIsTh==='function',null,{timeout:120000});
  await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title')&&(document.getElementById('title').hidden=true);window.__nlInner=1;start();window.__nlInner=0;Q.length=0});
- await p.waitForFunction(()=>typeof FIGS!=='undefined'&&FIGS.length>0&&f88Keys('maid').length>0&&Object.keys(FIGXT).length>0,null,{timeout:60000});
+ await p.waitForFunction(()=>typeof FIGS!=='undefined'&&FIGS.length>0&&f88Keys('maid').length>0&&Object.keys(FIGXT).length>0,null,{timeout:90000}).catch(async e=>{console.log('LOAD STATE',await p.evaluate(()=>({F:typeof FIGS!=='undefined'&&FIGS.length,X:typeof FIGXT!=='undefined'&&Object.keys(FIGXT).length,ok:typeof figxLoad!=='undefined'&&[figxLoad.ok,figxLoad.fail]})),errs);throw e});
  const res=await p.evaluate(()=>{
   const AGES=[18,30,40,55,64,66,75];const out={n:0,blank:[],bad:[],miss65:{},missTh:[],cnt:{}};const inc=k=>out.cnt[k]=(out.cnt[k]||0)+1;
   const base=s=>String(s||'').replace(/^.*\//,'');
@@ -64,8 +65,23 @@ const MT={'.html':'text/html; charset=utf-8','.js':'text/javascript','.json':'ap
   Object.assign(S,saveS);S.thO=thO0;S.fidUsed=U0;rivals.length=0;riv0.forEach(x=>rivals.push(x));
   /* THÁI HẬU DRAW: a fresh game draws a pool face for her (retired h1..h3 never), an old save's "thaihau:hN" is replaced */
   S.thO={fid:'thaihau:h2',age:60};S.fidUsed.push('thaihau:h2');const src=figFor({kind:'th'},'fig');out.draw={fid:S.thO.fid,src:base(src),stillUsed:S.fidUsed.includes('thaihau:h2')};
+  /* r2 RACE: before img/FIGURES-x.json is in, the Thái hậu draws NO face (her face is for life); once it is in she draws a face whose
+     Thái hậu robe is painted. Run 8 times (the reviewer's probe: 3/8 drew a maid face) */
+  {const X0=FIGXT,R0=FIGXR,ok0=figxLoad.ok,f0=figxLoad.fail;const race=[];
+   for(let i=0;i<8;i++){const old=S.thO&&S.thO.fid;if(old)S.fidUsed=S.fidUsed.filter(x=>x!==old);S.thO={age:58};
+    FIGXT={};FIGXR=[];figxLoad.ok=0;figxLoad.fail=0;const pre=figPick(S.thO);
+    FIGXT=X0;FIGXR=R0;figxLoad.ok=ok0;figxLoad.fail=f0;const post=figPick(S.thO);race.push([pre,post,!!(FIGXT[post]&&FIGXT[post].th.length)])}
+   out.race=race;out.raceBad=race.filter(r=>r[0]!=null||!r[2]).length}
+  /* r2 PIN: an old save keeps v0 for the reign running at its first load; a new life / the next reign wears the colours */
+  {const e0=S.emp,st0=S.figVStamp;const H=(k,era)=>wdHash(k+'|'+(era||''))%BAL.figVar;const era2=(e0.era||'')+' II';
+   const fk=f88Keys('consort').find(k=>H(k,e0.era)!==0&&H(k,era2)!==0)||'consort:c01';const w={fid:fk};const pin=[];
+   S.emp=Object.assign({},e0);delete S.emp.figV0;delete S.figVStamp;pin.push(['old save, same reign',figVOf(w)]);
+   S.emp=Object.assign({},S.emp,{name:(S.emp.era||'')+' II'});delete S.emp.figV0;pin.push(['old save, next reign',figVOf(w),'hash '+(H(fk,S.emp.era))]);
+   S.emp=Object.assign({},e0);delete S.emp.figV0;S.figVStamp=1;pin.push(['new life',figVOf(w),'hash '+(H(fk,S.emp.era))]);
+   S.emp=e0;S.figVStamp=st0;pin.push(fk);out.pin=pin;out.pinBad=(pin[0][1]!==0?1:0)+(pin[1][1]!==+pin[1][2].slice(5)?1:0)+(pin[2][1]!==+pin[2][2].slice(5)?1:0)}
   /* bands */out.bands=BAL.ageBand.slice();out.labels=BAND4N.slice();return out});
- const fails=res.blank.length+res.bad.length+(res.err?1:0)+(/^(consort|maid|mama):/.test(res.draw.fid)&&!res.draw.stillUsed?0:1)+errs.length;
+ console.log('race (pre-load pick, post-load pick, has th robe)',JSON.stringify(res.race),'bad',res.raceBad);console.log('pin',JSON.stringify(res.pin),'bad',res.pinBad);
+ const fails=(res.raceBad||0)+(res.pinBad||0)+res.blank.length+res.bad.length+(res.err?1:0)+(/^(consort|maid|mama):/.test(res.draw.fid)&&!res.draw.stillUsed?0:1)+errs.length;
  console.log('cells',res.n,'blank',res.blank.length,'bad',res.bad.length,res.err||'');console.log('counts',JSON.stringify(res.cnt));
  console.log('bands',JSON.stringify(res.bands),'labels',JSON.stringify(res.labels));console.log('old-save Thái hậu redraw',JSON.stringify(res.draw));
  if(res.blank.length)console.log('BLANK',res.blank.slice(0,20));if(res.bad.length)console.log('BAD',res.bad.slice(0,30));
