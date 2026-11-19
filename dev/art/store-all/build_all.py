@@ -67,8 +67,7 @@ def _install_ladder(g):
         return (g["ITEMS7"][idx] if N==7 else g["ITEMS"][idx])
     def age_item(c,tier,item,hk):
         if tier not in LADDER_TIERS: return orig(c,tier,item,hk)
-        age=g["AGE"]; ages=IA.TIER_AGES[tier]; a=age if age in ages else min(ages,key=lambda x:abs(int(x[1:])-int(age[1:])))
-        return pick(c,tier,a)
+        return pick(c,tier,g["AGE"])   # E7 (Lượt 529): the person's OWN age index always (was: nearest status age -> two ages could share one item); step 3 mod 10 = 5 distinct items
     g["age_item"]=age_item; g["LADDER_PICK"]=pick
 def _inject(g):
     _install_ladder(g)
@@ -200,7 +199,7 @@ def item_colour(person,rank,F):
 def extras(S0,person,rank):
     L=[]
     if isinstance(rank,int):
-        if rank<=6: L.append(outfit_colours(person))
+        L.append(outfit_colours(person))   # B15 two-colour sentence verbatim: t1-t6 (Lượt 489/499) + t7 HQP / t8 HH (G14, owner Lượt 529: the secondary disappeared at t7/t8)
         L.append(item_colour(person,rank,S0))
         if rank==7: L.append(HQP_LUX)
     if isinstance(rank,int) and rank<=6:
@@ -231,20 +230,38 @@ def grace_sentence(person,rank):
 _POSE_MEMO={}
 def _pose_tpl(g,tr,j,adapt=True):
     """spec5 entry verbatim; adapt=True -> SPEC5_ADAPT whenever the entry is listed there (also the lantern+item entry, which carries {prop}: one held item only, FIGURE_GATE D3)."""
+    if tr=="p30": return P30[j][1]   # E4: the 30 new poses (POSES_30.md verbatim, 'the item' = {prop})
     r_=g["SPEC5_POSES"][tr][j]
     if adapt and r_ in g["SPEC5_ADAPT"]: return g["SPEC5_ADAPT"][r_]
     return r_ if "{prop}" in r_ else g["SPEC5_ADAPT"][r_]
 def _banned(t,age,prop=""):
-    """store skips (look back; t6+/a51+ no twirl/skip/dance/swirl) + CALM WITH RANK (A0 rule 3) for re-picks: t6+ no butterfly/songbird/stair-step, t7-t8 no walking/mid-step;
-    'reading {prop}' only when the item is a book or scroll."""
-    b=[r"look(?:ing)? back"]+([r"twirl",r"skipping",r"dance",r"swirl",r"light turn"] if (t>=6 or age in ("a51","a65")) else [])
-    if t>=6 or age in ("a51","a65"): b+=[r"butterfly",r"songbird",r"stair"]
-    if t>=6: b+=[r"walking",r"mid-step",r"skipping",r"stepping"]   # Lượt 486: from Quý phi up calm, little movement (t1-t5 draw from the full lively pool)
-    if t>=7: b+=[r"stole",r"ribbon",r"sash"]   # Lượt 486: no shawl-like drape on t7/t8 (owner saw "cái dây" on m13 t8 = pose 'a breeze lifts her long stole')
+    """E4 (owner Lượt 529 + correction Lượt 534): t4+ may draw ANY of the 66 poses; walking/stepping poses ALLOWED at every rank (the Lượt 486 t6+ walking ban
+    and the t6+/a51+ calm skips are replaced by the rank's restraint ENDING, see POSE_END). Still banned (other current rules, not E4):
+    E2 no look-back over the shoulder · FIGURE_GATE D3d never looking down · G4 no shawl/stole/sash drape at t7/t8 · item logic ('reading'/'open' only with a book/scroll/fan)."""
+    b=[r"look(?:ing)? back",r"glancing back",r"back over her shoulder",r"looking down"]
+    if t>=7: b+=[r"stole",r"ribbon",r"sash",r"shawl"]   # G4 (+ "shawl": POSES_30 M8, check_store X05) / Lượt 486: no shawl-like drape on t7/t8 (owner saw "cái dây" on m13 t8 = pose 'a breeze lifts her long stole')
     if not re.search(r"book|scroll",prop): b+=[r"reading"]
     if not re.search(r"fan|book|scroll",prop): b+=[r" open "]
-    b+=[r"looking down"]   # FIGURE_GATE D3d / store pose tail: never looking down
     return b
+# ---------------- E4 POSE POOL (owner Lượt 529/534): 36 old spec5 poses + 30 new (dev/art/POSES_30.md) = 66 ----------------
+def _p30():
+    """the 30 new poses COPIED from dev/art/POSES_30.md (L1-L10 lively, M1-M10 medium, C1-C10 calm); only 'the item' -> {prop} (the rank's held item)."""
+    out=[]
+    for l in open(os.path.join(ART,"POSES_30.md"),encoding="utf-8"):
+        m=re.match(r"^([LMC])(\d+) (.+?)\s*$",l)
+        if m:
+            assert m.group(3).count("the item")==1,("POSES_30 'the item'",l)
+            out.append((m.group(1)+m.group(2),m.group(3).replace("the item","{prop}")))
+    assert len(out)==30,("POSES_30 count",len(out)); return out
+P30=_p30()
+# t1-t3 draw ONLY lively/airy poses: POSES_30 L1-L10 + every old spec5 pose with movement words (walking/stepping/twirl/dance/sway/breeze/flutter...).
+LIVELY_RX=r"walk|step|skip|twirl|danc|sway|swirl|breeze|flutter|float|flowing|swinging|trailing|butterfly|songbird"
+def lively(o):
+    tr,j=o
+    if tr=="p30": return P30[j][0][0]=="L"
+    return bool(re.search(LIVELY_RX,_pose_tpl(LAST_G,tr,j)))
+# ENDING at the END of the pose sentence (E4 alt framing, owner: "low 3 lively / middle 3 / top 2 calm endings"; wording = POSE_GROUPS.md Lượt 501 endings)
+def pose_end(t): return "the skirt hem swinging softly" if t<=3 else "the robe hem stirring slightly" if t<=6 else "the robe falling still and straight"
 # same GESTURE inside one person = a repeat even if the spec5 entry differs (e.g. two hairpin-adjusting entries)
 GESTURE_KEYS=[r"hairpin",r"stole",r"stair|skirt hem",r"cheek",r"offer",r"butterfly",r"songbird",r"twirl|dance",r"reading",r"both hands"]
 def _keys(txt): return {k for k in GESTURE_KEYS if re.search(k,txt)}
@@ -279,7 +296,7 @@ _PLAN={}
 def plan(age="a18"):
     if age in _PLAN: return _PLAN[age]
     store("c06",1,age); g=LAST_G
-    allp=[(L,j) for L in g["_SP5_ORDER"] for j in range(6)]
+    allp=[(L,j) for L in g["_SP5_ORDER"] for j in range(6)]+[("p30",j) for j in range(30)]   # E4: 66 poses
     def item(c,t):
         it=g["age_item"](c,"t%d"%t,None,None); return it[0] if isinstance(it,tuple) else it
     ca={t:{k:0 for k in range(14)} for t in range(1,9)}; cp={t:{k:0 for k in allp} for t in range(1,9)}; cg={t:{k:0 for k in range(8)} for t in range(1,9)}
@@ -292,7 +309,7 @@ def plan(age="a18"):
                 opts=list(opts); R.shuffle(opts); return min(opts,key=lambda o:cnt[t][o])
             a=best([k for k in range(14) if k not in ua],ca); ua.add(a); ca[t][a]+=1
             prop=item(c,t); keys=set().union(*[_keys(_pose_tpl(g,*u)) for u in up]) if up else set()
-            ok0=[o for o in allp if o not in up and not any(re.search(q,_pose_tpl(g,*o)) for q in _banned(t,age,prop))]
+            ok0=[o for o in allp if o not in up and (t>=4 or lively(o)) and not any(re.search(q,_pose_tpl(g,*o)) for q in _banned(t,age,prop))]   # E4: t1-t3 lively only
             ok=[o for o in ok0 if not (_keys(_pose_tpl(g,*o))&keys)] or ok0
             pz=best(ok,cp); up.append(pz); cp[t][pz]+=1
             gr=best([k for k in range(8) if k not in ug],cg); ug.add(gr); cg[t][gr]+=1
@@ -300,11 +317,15 @@ def plan(age="a18"):
     _PLAN[age]=P; return P
 def apply_dedupe(person,rank,age,S):
     pick,prop,sp,body=dedupe_pick(person,rank,age)
-    if pick==sp and _pose_tpl(LAST_G,*pick)==_pose_tpl(LAST_G,*pick,adapt=False): return S
     store(person,rank,age)   # LAST_G back to this rank
-    g=LAST_G; new=_frontal(g,_pose_tpl(g,*pick)).format(prop=prop)
-    a=" Pose: "+body; assert S.count(a)==1,("pose slot",person,rank)
-    return S.replace(a," Pose: "+new,1)
+    g=LAST_G
+    if not (pick==sp and _pose_tpl(g,*pick)==_pose_tpl(g,*pick,adapt=False)):
+        new=_frontal(g,_pose_tpl(g,*pick)).format(prop=prop)
+        a=" Pose: "+body; assert S.count(a)==1,("pose slot",person,rank)
+        S=S.replace(a," Pose: "+new,1)
+    # E4 (Lượt 529/534): the rank's ending at the END of the pose sentence (pose slot)
+    i=S.index(" Pose: "); j=S.index(". The item is in a contrasting colour",i)
+    return S[:j]+", "+pose_end(rank)+S[j:]
 TQ_RIGHT=", body turned slightly three-quarters to the right"
 def _clean_pose(S):
     """Lượt 440: the store's pose pass appends 'body turned slightly three-quarters to the right' at every odd pose slot (why almost everybody faced right); the ANGLE sentence (14 standing angles, left AND right) replaces it."""
