@@ -21,7 +21,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   calm();const z=L[0];let zbad=0;for(let i=0;i<30;i++){const id=rv6(null,v=>v===z?10:0);if(id!==z.id)zbad++}o.w5=zbad===0;
   calm();const ST=S.staff||[];o.ns=ST.length;if(ST.length>=3){const s=E68I.hairpinThief;for(const x of ST){x.loyal=80;if(x.net)x.net=x.net}const gq=ST[1];const net0=netIs;netIs=(s,k)=>k==="greed"?s===gq:net0(s,k);
    let gb=0;for(let i=0;i<20;i++){const pp=s.pp();if(!pp||[pp.a0,pp.a1,pp.a2][pp.g]!==gq.sid)gb++}netIs=(s,k)=>k==="greed"?false:net0(s,k);const pn=s.pp();netIs=net0;o.w6=gb===0&&!pn}else o.w6=true;
-  calm();const e=e68();e.nx=0;Q.length=0;e68Tick();const n1=Q.length;Q.length=0;e68Tick();const n2=Q.length;Q.length=0;o.e=[n1,n2,e.nx-wk()];o.w8=n2===0;
+  calm();const e=e68();/* the first tick may find no fitting event (no candidate / e68Make null): tick until one fires (bounded), then the gap must hold */let n1=0,tries=0;for(;tries<20&&!n1;tries++){e.nx=0;Q.length=0;e68Tick();n1=Q.length}const g=e.nx-wk();Q.length=0;e68Tick();const n2=Q.length;Q.length=0;o.e=[n1,n2,g,tries];o.w8=n1>0&&n2===0&&g===BAL.ag.why.e68.gap;
   return o});
  ok(r.n>=3,'setup',r.n);ok(r.w1,'1 no need → no NPC favour',r.np1);ok(r.w2,'2 short of silver → asks her friend to lend',{aff:r.af,np:r.np2});ok(r.w3a,'3a Thái hậu errand → the consort she regards');ok(r.w3b,'3b nobody regarded → no errand');
  ok(r.w4,'4 nothing owed → no collector');ok(r.w5,'5 rv6 picks only goal-valid consorts');ok(r.w6,'6 thief = greedy servant; none → no theft');ok(r.w8,'8 j68 gap holds',r.e);
