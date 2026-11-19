@@ -41,7 +41,10 @@ function gOn(lv){return on(lv)&&!host()&&!!CW.seat&&!CW.ctx&&!!S&&!S.dead&&!CW.i
 function line(t){try{if(typeof kitLine==="function")kitLine(t);else log(t)}catch(e){}}
 function sendF(p){COOP.send({t:"do",op:"f",args:p.msg,base:TH.view?TH.view.v:0,id:p.id});E.last=p.id;p.at=Date.now()}
 function intent(name,args){const R=F.R[name],t00=performance.now();
- if(F.pend){F.stat.busy++;return "busy"}
+ if(F.pend){/* review coop-ptime-reds r1: the pending one is her due-task tick (ptTickHer, asked by the game, not by her): her tap is HELD and sent
+    right after its answer (it was refused as busy = her tap lost, f4 swap D1); one held tap at most, a second tap is the ordinary double tap */
+  if(F.pend.n==="ptTickHer"&&name!=="ptTickHer"&&!F.next){F.next={name,args,snap:snapV};F.stat.held=(F.stat.held|0)+1;lg(["held",name]);return true}
+  F.stat.busy++;return "busy"}
  let a=null;try{a=R.enc(args)}catch(e){console.error("thin F enc",name,e)}if(a==null){F.stat.bad++;lg(["bad",name]);return "bad"}
  const V=TH.view;if(!V||!V.o){F.stat.bad++;return "bad"}
  if(R.snap&&typeof rsnap==="function")try{rsnap()}catch(e){}
@@ -55,7 +58,9 @@ function intent(name,args){const R=F.R[name],t00=performance.now();
  const t1=performance.now();try{CW.lockNext();render()}catch(e){}p.pr=Math.round(performance.now()-t1);return true}
 function answered(dr){const p=F.pend;if(!p||!dr||dr.id!==p.id)return;F.pend=null;F.stat.ans++;const ms=Date.now()-p.t0;F.stat.ms.push(ms);if(F.stat.ms.length>40)F.stat.ms.shift();
  lg(["ans",p.n,ms,dr.r&&dr.r.st]);F.lastAns={id:p.id,n:p.n,ms,r:dr.r/* the view's own object (main behaviour; the guest's name lens edits it in place) */,r0:dr.r?J(dr.r):null/* F2: the answer as sent */,pre:p.pre,pr:p.pr,tries:p.tries};
- back(p,dr.r);try{CW.lockNext();render()}catch(e){}cardLater(p,dr);}
+ back(p,dr.r);try{CW.lockNext();render()}catch(e){}cardLater(p,dr);nextGo();}
+/* the tap held behind her due-task tick: sent now (its own snapshot for the result card) */
+function nextGo(drop){const n=F.next;if(!n)return;F.next=null;if(drop||!on()||host())return;try{snapV=n.snap;intent(n.name,n.args)}catch(e){console.error("thin F held",e)}finally{snapV=null}}
 /* F2 (gap 2/3): what the host's run wrote OUTSIDE her person (her khắc `used`, the pop-up popIdx/popMsg, tab / __fromMap) comes back with
    the answer and is set here (only while she is still on the buổi the intent was made in: a buổi step resets them anyway); toasts her run
    raised on the host (srvToast / kitLine, no-ops there) play here; then the registration's after-hook (e.g. the place card of a walk that
@@ -67,7 +72,7 @@ function back(p,r){const R=F.R[p.n];if(!R||!r||r.st!=="ok")return;
 COOP.on("thinview",V=>{try{if(!host()&&V&&V.o)answered(V.o.dr)}catch(e){console.error("thin F view",e)}});
 COOP.on("error",m=>{try{const p=F.pend;if(!p||!m||m.id!==p.id||host())return;if(m.code==="nohost"||m.code==="nothin")p.at=0/* resend at the next tick */}catch(e){}});
 setInterval(()=>{const p=F.pend;if(!p||host())return;if(!on()||COOP.frozen)return;if(Date.now()-p.at<8000)return;
- if(p.tries>=3){F.pend=null;F.stat.give++;lg(["give",p.n,p.id]);line("Việc ấy chưa thành, xin thử lại.");try{CW.lockNext();render()}catch(e){}return}
+ if(p.tries>=3){F.pend=null;F.stat.give++;lg(["give",p.n,p.id]);line("Việc ấy chưa thành, xin thử lại.");try{CW.lockNext();render()}catch(e){}nextGo();return}
  p.tries++;F.stat.resend++;lg(["resend",p.n,p.id,p.tries]);sendF(p)},1000);
 /* F2 net loss (the whole intent family, F1 too): her socket can look open while dead (4G, sleep): the intent frame, or the host's answer,
    is lost, then COOP reconnects ("room"). Dropping the pending intent there lost her tap in silence (a P7 walk-spill red: the host ran the
@@ -78,7 +83,7 @@ setInterval(()=>{const p=F.pend;if(!p||host())return;if(!on()||COOP.frozen)retur
    `used`) belongs to the old buổi, so it is resent only once her reconnect view shows the SAME buổi (p.b0); another buổi → dropped with the
    same words. The check waits for her first view after the reconnect (p.rv), then the 1 s tick sends it (DONE dedupe on the host unchanged). */
 const stale=p=>p.room!==(COOP.state.room||"")||(COOP.state.week||0)!==p.w0;
-function dropP(p,why){F.pend=null;lg(["drop",p.n,p.id,why]);F.stat.drop=(F.stat.drop|0)+1;line("Việc ấy chưa thành, xin thử lại.");try{CW.lockNext();render()}catch(e){}}
+function dropP(p,why){F.pend=null;nextGo(1)/* stale room / buổi: the held tap goes with it (the same «not done» words below) */;lg(["drop",p.n,p.id,why]);F.stat.drop=(F.stat.drop|0)+1;line("Việc ấy chưa thành, xin thử lại.");try{CW.lockNext();render()}catch(e){}}
 COOP.on("room",()=>{const p=F.pend;if(!p)return;if(stale(p))return dropP(p,"room");
  p.rv=Date.now();p.at=Infinity/* held until her view after the reconnect (or 8 s: the check runs on what she has) */;F.stat.reNet=(F.stat.reNet|0)+1;lg(["reNet",p.n,p.id])});
 function reCheck(p){if(stale(p))return dropP(p,"room");if((S.buoi||0)!==p.b0)return dropP(p,"buoi");p.rv=0;p.at=0/* same buổi: sent again at the next tick */}
