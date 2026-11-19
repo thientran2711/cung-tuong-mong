@@ -18,3 +18,23 @@ PRIORITY #1 CHECK: OD rule 0(g) f0ac2bd (owner verbatim in FIGURE_GATE) | main: 
 - dev/figwork/spec.py (EMP_AGE, TH NPC Thái hậu, OFF officials, MT/MC/MA maids, MM mama, ET/EC/EA eunuchs), spec2–spec5.py (spec5 = consort ladder + POSES)
 - origin/main dev/figwork/maid/, maidB/, maidC/ (mjobs.py, lad3.py, age1114/), kids/kspec.py + kjobs.json, congtu/spec.py, artcomplete/ct_spec.py + kc_prompt.txt
 ## Status: WAITING for ROOT-36 GO (step 2 = copy old approved prompts into the red cells, cite file:line; no-source cells listed for the owner).
+
+## Step 2 progress (GO from ROOT-36, owner verbatim relayed 19/11)
+- b99b134 t4 Tần: TAN_CAPE_PEARLS = capelet + Phi G yoke sliced verbatim from PHI_VAR["G"] + sparser qualifier; guard: only --low 4 outputs differ.
+- b838d6b coverage.py follows N5c's item_age API; after N5c 793227c: FRONT + ITEM green on all built consort cells. Remaining on built cells: BG (N5c), REFS (N5c --log), POSE= (pose same at every age), ROYAL3 (t6–t8).
+- Split proposed to N5c (no reply yet): N5c = K3/--log/ty/cold/tm/mama/items/frontal; W107 = spec5 pose per age, ROYAL3 t6–t8, emperor-B, FP gaps. N5c also edited emperor-B in 793227c → W107 waits for the reply before editing.
+
+## Old-source map for the remaining RED (rule 6) — for ROOT-36 / owner
+| gap | old source | verdict |
+|---|---|---|
+| m01–m52 DATA (palette + face words) | origin/main dev/figwork/maidC/mjobs.py:22 (PAL m27–m52), :31 (PAL m01–m26), MOT list; maidB/mjobs.py | palette words = copyable; ORIG1 hex (measured from her live t1 figure) has no prompt source = a measurement step; LOWNAME/MOTIF_LOW/V2/LOWV1/LOWV2/T7V2/HEAD/SPEC5_IDS per person = no source → owner/ROOT-36 decide |
+| ROYAL3 on t6–t8 | build.py own sentence (nude/trieu≥6) " Image 3 is only a colour reference for the royal yellow …" | copy verbatim (A0 REFERENCES: t6+ = 3 images) |
+| spec5 pose per age | build.py SPEC5_POSES (6 poses per trait, copied from dev/figwork/spec5.py:46) | logic only (age offset into the same list), no new words |
+| Emperor a65 age text | none (dev/figwork/spec.py:46 EMP_AGE has a18–a51 only) | NO SOURCE → owner |
+| Emperor / men pose (spec5) + item table | spec5 POSES are women's; no men item rows in item_age.py | NO SOURCE → owner |
+| Emperor K3 line | build.py line says "around her" | copy needs her→him → ROOT-36 OK? |
+| NPC Thái hậu h1–h3 | dev/figwork/spec.py:52-55 (TH ages 50/58/65, THC robes) | old pre-gate style prompt; copyable as identity words only |
+| Eunuchs / officials / physicians / mama / maids (old) | dev/figwork/jobs.json (S-eunuch-u##, S-official-#, S-physician-#, S-mama-#, S-maid-#), spec.py:56-95 (OFF, MT/MC/MA, MM, ET/EC/EA) | old prompts exist; a men builder = new file built from them |
+| Công tử / quý tử older bands | origin/main dev/figwork/congtu/spec.py, artcomplete/ct_spec.py | copyable |
+| Children | origin/main dev/figwork/kids/kspec.py + kjobs.json | copyable |
+| Foreign princesses per person, t2–t5/t7/t8/TH/Nữ đế | build.py PDATA = one face per country; samples on review/foreign-princess-samples | no per-person old prompt on this branch → owner |
