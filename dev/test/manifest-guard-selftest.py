@@ -47,10 +47,24 @@ t("--prune excludes top-level *.json", 'not (k.count("/") == 1 and k.endswith(".
 # 9. record_sanctioned writes the CDN record + lowers the floor file (fake put, temp floor file)
 tmp = tempfile.NamedTemporaryFile("w", suffix=".json", delete=False); json.dump(fl, tmp); tmp.close()
 realF, G.FLOOR = G.FLOOR, tmp.name; C.req = fake_req; writes.clear(); G_s = G.sanctioned; G.sanctioned = lambda: {}
-C.record_sanctioned({"FIGURES-kc.json": (old, new)}, "selftest")
+C.record_sanctioned({"FIGURES-kc.json": (old, new)}, "selftest owner Lượt 0")
 f3 = json.load(open(tmp.name)); G.FLOOR = realF; G.sanctioned = G_s; C.req = real_req; os.unlink(tmp.name)
 t("record_sanctioned: CDN record written + floor file lowered", any("_floor-sanctioned.json" in u for _, u in writes) and f3["FIGURES-kc.json"] == new)
-# 10. live check passes on the real CDN
+# 10. owner-ordered pull-down: --set-floor-from-live lowers the floor to live in one command; a reason without an owner order fails
+t("owner_reason: 'owner Lượt 557' / 'OD:L1232' ok, 'cleanup' refused", G.owner_reason("owner Lượt 557") and G.owner_reason("OD:L1232") and not G.owner_reason("cleanup"))
+r = subprocess.run([sys.executable, "-I", os.path.join(R, "dev/site/manifest_guard.py"), "--set-floor-from-live", "FIGURES-kc.json", "--reason", "cleanup"], capture_output=True, text=True, cwd=R)
+t("--set-floor-from-live without an owner reason refused", r.returncode == 1 and "REFUSED" in r.stdout)
+r = subprocess.run([sys.executable, "-I", os.path.join(R, "dev/site/cdn_sync.py"), "--allow-shrink", "--reason", "cleanup", "--dry-run", "img/FIGURES-kc.json"], capture_output=True, text=True, cwd=R)
+t("--allow-shrink with a non-owner reason refused", r.returncode != 0 and "owner order" in (r.stdout + r.stderr))
+hi = copy.deepcopy(fl); hi["FIGURES-kc.json"] = {"n": 420, "by": dict(old["by"], **{"maid|kc": 208})}
+tmp = tempfile.NamedTemporaryFile("w", suffix=".json", delete=False); json.dump(hi, tmp); tmp.close()
+realF, G.FLOOR = G.FLOOR, tmp.name; C.req = fake_req; writes.clear(); G_s = G.sanctioned; G.sanctioned = lambda: {}; argv = sys.argv
+sys.argv = ["manifest_guard.py", "--set-floor-from-live", "FIGURES-kc.json", "--reason", "owner Lượt 557"]
+try: G.main()
+finally: sys.argv = argv; G.FLOOR = realF; G.sanctioned = G_s; C.req = real_req
+f4 = json.load(open(tmp.name)); os.unlink(tmp.name); liveE = G.entry("FIGURES-kc.json", live)
+t("--set-floor-from-live (stale 420 floor) -> floor = live 264 + CDN record written", f4["FIGURES-kc.json"]["n"] == liveE["n"] and f4["FIGURES-kc.json"]["by"]["maid|kc"] == liveE["by"]["maid|kc"] and any("_floor-sanctioned.json" in u for _, u in writes))
+# 11. live check passes on the real CDN
 r = subprocess.run([sys.executable, "-I", os.path.join(R, "dev/site/manifest_guard.py"), "--live-check"], capture_output=True, text=True, cwd=R)
 t("--live-check PASS on the live CDN", r.returncode == 0)
 print(f"\nmanifest-guard-selftest: {ok} pass, {fail} fail"); sys.exit(1 if fail else 0)

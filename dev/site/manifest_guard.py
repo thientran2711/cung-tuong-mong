@@ -11,7 +11,11 @@
   INTENDED SHRINK (cdn-kc-guard 19/11: LV1 removed old kc art on the owner's order with --allow-shrink, but the repo floor stayed at 420 and every branch's
   --live-check failed for hours): `cdn_sync.py --allow-shrink --reason "<owner order>"` records the lowered floor on the CDN in img/_floor-sanctioned.json
   {name: {from: <floor it replaces>, to: <new floor>, reason, at}} and lowers dev/site/manifest-floor.json in that checkout (commit it on your branch).
-  Until the repo floor is updated, effective_floor() uses the CDN record while the repo entry still equals its 'from'; --write-floor applies it too."""
+  Until the repo floor is updated, effective_floor() uses the CDN record while the repo entry still equals its 'from'; --write-floor applies it too.
+  OWNER-ORDERED PULL-DOWN (ROOT-71 19/11: Foreman C will take more old sets down: consort, servants, kids...): in the SAME change as the pull-down run
+         python3 dev/site/manifest_guard.py --set-floor-from-live FIGURES-x.json [more.json] --reason "owner Lượt 557"
+  = floor of each named manifest lowered to what is live now (never raised), recorded on the CDN (img/_floor-sanctioned.json) + written to
+  dev/site/manifest-floor.json (commit it on your branch). The reason MUST name the owner order (Lượt N / OD line), else refused (owner_reason())."""
 import json, os, sys, urllib.request, collections
 PUBLIC = os.environ.get("CTM_IMG_BASE") or "https://ctm-img.victoria-tntt.workers.dev/"
 HERE = os.path.dirname(os.path.abspath(__file__)); FLOOR = os.path.join(HERE, "manifest-floor.json")
@@ -20,6 +24,10 @@ GUARDED = ("FIGURES.json", "FIGURES-servants.json", "FIGURES-others.json", "FIGU
 # (every act without its key showed the kit placeholder, ~130 acts shared pictures). They are DICT manifests: guarded by the size of each section.
 DICT_GUARDED = {"ACTS.json": ("acts", "prefix", "log"), "EVENTS.json": ("categories", "events", "stories")}
 SANCTIONED = "_floor-sanctioned.json"
+import re
+def owner_reason(r):
+    """a shrink is only allowed for an owner order: the reason names it (Lượt N / Luot N / OD:Lnn / OD dd/mm)"""
+    return bool(re.search(r"(L[ưu][ợo]t\s*\d+|\bOD[: ]?L?\d+|\bOD\s+\d+/\d+)", r or "", re.I))
 def is_guarded(name):
     """every img/FIGURES*.json (the list above + -hd + any new one) and the DICT manifests"""
     return name in DICT_GUARDED or (name.startswith("FIGURES") and name.endswith(".json"))
@@ -91,6 +99,21 @@ def names_live(idx=None):
 def load_floor(): return json.load(open(FLOOR)) if os.path.exists(FLOOR) else {}
 def main():
     a = sys.argv[1:]; floor = load_floor()
+    if "--set-floor-from-live" in a:
+        reason = a[a.index("--reason") + 1] if "--reason" in a else ""
+        if not owner_reason(reason): print("REFUSED: --set-floor-from-live needs --reason naming the owner order (e.g. \"owner Lượt 557\")"); sys.exit(1)
+        names = [x for x in a[a.index("--set-floor-from-live") + 1:] if not x.startswith("--") and x != reason]
+        names = [os.path.basename(n) for n in names]
+        bad = [n for n in names if not is_guarded(n)]
+        if not names or bad: print(f"REFUSED: name guarded manifests (FIGURES*.json / ACTS.json / EVENTS.json); got {names}"); sys.exit(1)
+        eff = effective_floor(floor); sanc = {}
+        for n in names:
+            new = lowered(eff.get(n), entry(n, fetch(n))) if n in eff else entry(n, fetch(n))
+            if new != eff.get(n): sanc[n] = (eff.get(n), new)
+            print(f"{n}: floor {eff.get(n)} -> {new}")
+        if not sanc: print("floor already <= live: nothing to change"); return
+        sys.path.insert(0, HERE); import cdn_sync
+        cdn_sync.record_sanctioned(sanc, reason); return
     if "--write-floor" in a:
         floor = effective_floor(floor)
         for n in names_live():

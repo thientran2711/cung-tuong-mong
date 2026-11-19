@@ -310,8 +310,8 @@ def main():
     ap.add_argument("--index", action="store_true")
     ap.add_argument("-j", type=int, default=6, help="parallel uploads (default 6; the API pace CTM_CDN_RATE=3.2/s is the real limit)")
     a = ap.parse_args()
-    if a.allow_shrink and not a.reason.strip():
-        raise SystemExit("--allow-shrink needs --reason \"<owner order>\" (it is recorded on the CDN with the lowered floor)")
+    if a.allow_shrink and not GUARD.owner_reason(a.reason):
+        raise SystemExit("--allow-shrink needs --reason naming the owner order, e.g. --reason \"owner Lượt 557\" (recorded on the CDN with the lowered floor)")
     ALLOW_SHRINK[0] = False   # put()/DELETE stay guarded; main() clears each checked key itself
     sel = []
     for p in a.paths:
