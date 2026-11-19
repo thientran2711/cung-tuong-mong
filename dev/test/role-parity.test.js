@@ -12,7 +12,7 @@ const HTML=process.argv[2]||'dev/index.html';const res=[];const ok=(c,m,x)=>{res
  const OPEN=JSON.parse(fs.readFileSync(path.join(__dirname,'../tools/role-parity-open.json'),'utf8'));
  /* reviewer role-parity r2/r3 (part-1 fix (c), cap = merged baseline): the baseline is keyed role|key|SIDE (a P-ONLY row that turns N-ONLY is a new gap, not the same one) and may only
     SHRINK: OPEN_MAX = the count it was frozen at; lower it when rows close, never raise it without a reviewer */
- const OPEN_MAX=20;const gk=g=>g.role+"|"+g.key+"|"+g.side;const okOpen=new Set(OPEN.map(gk));
+ const OPEN_MAX=19;const gk=g=>g.role+"|"+g.key+"|"+g.side;const okOpen=new Set(OPEN.map(gk));
  ok(OPEN.length<=OPEN_MAX&&OPEN.every(g=>g.side),'open baseline only shrinks (≤ '+OPEN_MAX+' rows, each with its side)',OPEN.length);
  const fresh=R.gaps.filter(g=>!okOpen.has(gk(g)));const seen=new Set(R.gaps.map(gk));const gone=OPEN.filter(g=>!seen.has(gk(g)));
  ok(fresh.length===0,'no NEW role-parity gap (every role × act cell is held by both sides, exempt, or a listed open gap)',fresh.slice(0,25).map(g=>g.role+":"+g.side+":"+g.key));
