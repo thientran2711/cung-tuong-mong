@@ -37,3 +37,30 @@ Cuts: c06 rgXcT8Jxtc, c14 rgXcTIOxtc, c19 gOmpdCcSXO, c31 SyheXu8Ub8 (all first 
 Sheet: dev/handover/review-sheets/new-faces-v4/nf4_c06_c14_c19_c31_sacsao.jpg (≈220 KB): s07 ref, then old | new for each, 3-line tags.
 Credits part 3: 4 gens + 4 cuts = 552. NF4 total: 3,306.
 Note for owner Lượt 695 ("phoenix" pulls to heavy lined eyes): the Kiêu kỳ v5 block (s10–s12) still says "PHOENIX eyes". Not redrawn — waiting for the verdict on the 12-person sheet.
+
+## Part 4 — owner Lượt 700/701: full sets + s08
+- s08 (Lượt 701): ROOT-55 gen WDgKkfTcXe (s08.v5b, "almond eyes") → my cut 4RFmfAq9Aa = the s08 picture now.
+- make_nf4.py section 7 → s19–s38.v5 (s35/s38 v5b). Kiêu kỳ: "long narrow almond eyes with sharply UP-SWEPT outer corners" (no phoenix). Quyến rũ: beauty mark "her own LEFT eye (the eye on the RIGHT side of the picture)".
+- Kiêu kỳ s19–s25: cuts gOmphLeSXO VX7xJ0OMMU lJtDmsIgv9 9ZHhq9FNYZ 0eU17VOTfW xSB08sMjfW jUoTIJnLD0
+- Lạnh lùng s26–s32: cuts 8ai7RulIrU MBJjymCDCm kseYX7y16B WDgKUoPcXe p8ys4fUehw cpSkwvc0eP jUoTI3pLD0
+- Quyến rũ s33–s38: cuts ov6w3kS829 cpSkwCV0eP kseYXeB16B BhNUikdoQR WDgKUC2cXe lJtDhmMgv9
+- s35 and s38 were refused by the service's NSFW filter (false flag, 0 credits); v5b = same person with softer words ("magnetic, enchanting young lady", "CHARMING, alluring look", no "hips softly turned").
+- All checked at full size + crop: drawing matches s07, eyes aligned, lips closed.
+- Known, not fixed: Quyến rũ beauty mark — only s34 has it on her LEFT eye; s33/s35/s36/s37/s38 (and samples s16/s18) have it under her RIGHT eye (viewer's left). The extra "(the eye on the RIGHT side of the picture)" did not help. Flipping the picture is NOT an option (it would reverse the collar overlap). s37 has a small red stroke beside the lifted lip corner.
+- Groups written: OWNER_GROUPS_L686.json (Kiêu kỳ 10, Lạnh lùng 10, Quyến rũ 9, others 11, Kho 32) + LOOK_GROUPS.md.
+- Sheets: dev/handover/review-sheets/new-faces-v4/nf4_full_kieuky.jpg, nf4_full_lanhlung.jpg, nf4_full_quyenru.jpg (≈225 KB each, 3-line tags).
+- Credits part 4: 20 gens + 20 cuts + s08 cut = 2,763 (2 refused gens cost 0). NF4 total ≈ 6,069.
+
+## HANDOVER (ROOT-56: the Lượt 703 tick page goes to MMX4)
+depth 7 · START_CTX ≈4 % · now ≈33 % (past the START+25 % line; stopping here as ROOT-56 ordered).
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai ra cái luật là tầng 6 trở lên là bị cấm mở quảng đốc. Tầng 8 của mày là maximum thì cùng lắm là đâu đó tầng 7 là mới không mở quảng đốc thôi chứ."): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line.
+
+### For the tick page (Lượt 703) — everything MMX4 needs
+- Face map, 84 people (Kho excluded): dev/art/face-common/FACE_CUTS_L703.json → {id: {group, cut (Magnific remove_bg id), src}}. m = KC_REFS.json people[id].ref_id; c = latest kept ledger cut of face-common/cNN.*.FULL.txt (c06/c14/c19/c31 = the Lượt 696 Sắc sảo v5 cuts, c27 = c27.v4); s = NF4 cuts (s08 = 4RFmfAq9Aa).
+- Durable pictures: ready-made face crops 300×340 JPEG for all 84 in dev/art/face-common/face_page/faces/<id>.jpg (in git; 1.8 MB). Publish them as artifact `files` (faces/<id>.jpg) — durable, no expiring Magnific tokens.
+- Page draft: dev/art/face-common/face_page/template.html (tabs ALL + 8 groups with face count and ticked count, card = crop + id / group / src + "Vẽ lại" checkbox; ticks in db collection "picks", doc id = person id, {id, group, redraw, at}; status line; read-only fallback). To finish: replace `/*DATA*/[]` with the JSON list [{id, group, src}] built from FACE_CUTS_L703.json, publish with capabilities {db:{}, user:{}} and files faces/*.jpg, look at every tab, then one ArtifactData list of "picks".
+- Crop script (if more faces change): run python3 crop.py <out_dir> <cut.png…> (the skin-box face crop used above; its code is in this report's commit as dev/art/face-common/face_page/crop.py).

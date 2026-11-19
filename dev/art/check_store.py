@@ -424,15 +424,30 @@ APPROVED = [{'id': 'S01',
   'title': 'COLOUR RULE a51/a65 (elder: DEEPER, DARKER, rich and dignified = 18/11 Thái hậu copy; J2 Lượt 624)',
   'text': 'COLOUR RULE: all colours in the DEEPER, DARKER mature shades described above (rich and dignified, never bright, never pastel, never dusty or washed-out); the colour names and hex values below are her '
           'young colours, darken them as described above;',
-  'scope': 'tp1-8 pr1-8 nude',
+  'scope': 'tp1-8 pr1-8',
   'confirm': '',
   'ages': 'a51 a65',
-  'luot': 'J2 (owner Lượt 620/622/624: copy the 18/11 Thái hậu elder text verbatim, dev/art/elder-copy/THAIHAU_1811_AGE_COLOUR.md); A0 a51/a65 age texts (c04 elder sheet)',
+  'luot': 'B23 (owner Lượt 702): NOT for nude (Nữ đế keeps her bright a36 colours, see S35 + X17). J2 (owner Lượt 620/622/624: copy the 18/11 Thái hậu elder text verbatim, dev/art/elder-copy/THAIHAU_1811_AGE_COLOUR.md); A0 a51/a65 age texts (c04 elder sheet)',
   'source': 'dev/art/t8-prompt-B/build.py AGE_TXT',
   'proof': 'dev/art/approved/proof/bw5_elder_m05_t2_a51.txt',
   'picture': "Lượt 395 store sheets, approved Lượt 397 'vẽ rất là đẹp' · https://ctm-img.victoria-tntt.workers.dev/img/_review/morning-1119/sheet_congchua.jpg",
   'vn': 'Tuổi 51/65: mọi màu là sắc ĐẬM HƠN, TỐI HƠN, sang trọng điềm tĩnh như Thái hậu 18/11 (không rực, không pastel, không bạc màu); tên màu + mã hex là màu trẻ, làm đậm như câu tuổi.',
   'store': True},
+ {'id': 'S35',
+  'title': 'Nữ đế a51/a65 COLOUR RULE = the a36 one verbatim (B23: never darkens with age)',
+  'text': 'COLOUR RULE: all colours clear, soft and gentle at a medium-light tone, like fine silk in soft daylight: medium-soft saturation, pretty and clean, the secondary colour a real pretty colour '
+          '(it may be a little deeper or a soft ivory, never heavy, never black, never grey), never rực, never glaring, never neon, never pastel-washed or faded, never dusty, grey, muddy or black; '
+          'the royal golden yellow is the DOMINANT colour of the robe, mantle, sleeves and skirt (more than half of everything visible), a deep, quiet wine-crimson like #7E2A33 is the second colour '
+          '(collar, inner robe, wide borders and a few panels);',
+  'scope': 'nude',
+  'confirm': '',
+  'ages': 'a51 a65',
+  'luot': 'B23 (owner Lượt 702)',
+  'source': 'dev/art/nude-B/prompts/m05_a36.txt (COLOUR RULE)',
+  'proof': 'dev/art/nude-B/prompts/m05_a36.txt',
+  'picture': '',
+  'vn': 'Nữ đế 51/65 tuổi giữ màu sáng như ảnh 36 tuổi: câu COLOUR RULE y hệt bản 36 tuổi.',
+  'store': False},
  {'id': 'S34',
   'title': 'FOREHEAD: nothing on the forehead (D9)',
   'text': 'NOTHING on the forehead (no hoa điền, no dot, no mark, nothing).',
@@ -588,6 +603,16 @@ BANNED = [{'id': 'X01',
   'negation': 'no',
   'luot': 'ROOT-54 19/11 (A21 small fix, F13)',
   'why': 'the flower name slot must not carry a size ("a tiny camellia" at t3 MEDIUM contradicted the F13 size sentence); only the F13 SZ ladder sets the size'},
+ {'id': 'X17',
+  'title': 'Nữ đế a51/a65 elder darkening (B23: keeps the bright a36 colours)',
+  'regex': r'DEEPER, DARKER|darken them as described',
+  'slot': '',
+  'scope': 'nude',
+  'ages': 'a51 a65',
+  'unless': '',
+  'negation': 'no',
+  'luot': 'B23 (owner Lượt 702)',
+  'why': 'the Nữ đế never darkens with age: no DEEPER/DARKER elder colour sentence at a51/a65'},
  {'id': 'X13',
   'title': 'style image sentence (style image retired)',
   'regex': 'drawing style of image \\d|Image \\d is only for the drawing style',
@@ -753,6 +778,8 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False):
     text = _strip_kc_faces(text)   # B8 (BW3): the owner's verbatim KC face words are approved as a whole: never scanned for banned phrases (m13 "PHOENIX eyes" = eye shape, not the X08 motif; m43 "covering the teeth completely")
     for x in X:
         if scope not in parse_scope(x["scope"]): continue
+        xa = (x.get("ages") or "all").split()   # B23 (BW6): X rules may be age-limited like S rules
+        if age and "all" not in xa and age not in xa: continue
         if x.get("unless") and x["unless"] in found: continue
         if x.get("slot"):
             sid, sname = x["slot"].split(".")
