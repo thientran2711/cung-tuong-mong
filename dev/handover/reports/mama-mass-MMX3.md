@@ -35,6 +35,9 @@ c06 jade green · c07 pale pink · c08 pale green · c09 deep rose · c10 jade g
 | c06 | a36 | u5WyedyQLD | N2qtWyy6D9 | vQAO17Fa47 | after ruling A: no flower; jade green skirt/sash/cuffs/hem band; PASS |
 | c06 | a51 | jUoGfuHLD0 | gOmV3MWSXO | Lw8c6d5swO | PASS; gen painted dark glow bg, cut clean |
 | c06 | a65 | jUoGfuHLD0 | O6EXz8Kynm | 3zKvDbtREY | PASS |
+| c07 | a36 | YMlEy3QWeC | 6AbmpSwiJO | - | look PASS; cut NOT done (remove_bg errored, then HOLD) |
+| c07 | a51 | 1ldZhqUr4r | 8aiSkMSIrU | - | REJECTED: forehead mark (this ref gave a forehead cross in MMX1 too) → next: her a36 face YMlEy3QWeC |
+| c07 | a65 | 1ldZhqUr4r | jUoW3KVLD0 | - | REJECTED: forehead mark (same ref) → next: YMlEy3QWeC |
 
 Look sheet: https://ctm-img.victoria-tntt.workers.dev/img/_review/mama-mass/twocol/look/c06-gen1-flowerfault.jpg
 Otherwise good: jade green skirt, sash, sleeve cuffs/linings; vermilion vest/robe/panels; gold thin; same face; forehead clean; a51/a65 main stepped deeper.
@@ -48,3 +51,7 @@ Otherwise good: jade green skirt, sash, sleeve cuffs/linings; vermilion vest/rob
 
 ## Credits
 3 gens × 135 = 405 (no cuts).
+
+## HOLD (ROOT-50, 19/11 after c07 gens): owner says Nữ đế used OLD-style face refs instead of her new M09-style redraws. NO new gens until ROOT-50 confirms the face refs.
+Face refs used (inherited from MMX1/MMX1b/MMX2, uploaded to Magnific 19/11): consorts c/p/bd = CDN img/hd/fig-consort-<id>-t1-a36.webp (a36) and -t1-a51.webp (a51 + a65), list + ids in mama-mass-persons.md / MMX1 HANDOVER; maids m = CDN img/fig-maid-<id>-a36.webp / -a51.webp (MMX2). If they must change, every one of my gens so far (c06 ×3, c07 ×3) would need redrawing with the new refs.
+Credits: 3 rejected c06 (405) + c06 ×3 with cuts (414) + c07 ×3 gens (405) = 1,224.
