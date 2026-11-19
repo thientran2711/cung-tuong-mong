@@ -802,6 +802,7 @@ FOR FOREMAN C (art) — relayed by C-AG #23 from MAIN ROOT-70, 19/11 15:14Z: sea
 - 18:34Z C-AG #23 (hourly; ctx ~25 %, roll 30 %): LIVE 2bda29a1. LOAD 0 own; SEATS running 0 / cap 12 | QUEUE: THỬ TAY CTM-CAL (owner code). No new ORDER.
 - 19:34Z C-AG #23 (hourly; ctx ~26 %, roll 30 %): LIVE 2bda29a1. LOAD 0 own; SEATS running 0 / cap 12 | QUEUE: THỬ TAY CTM-CAL (owner code). No new ORDER.
 - 20:34Z C-AG #23 (hourly; ctx 26 %, roll 30 %): LIVE 2bda29a1; MAIN ROOT-71. LOAD 0 own; SEATS running 0 / cap 12 | QUEUE: THỬ TAY CTM-CAL (owner code). No new ORDER.
+- 21:34Z C-AG #23 (hourly; ctx ~27 %, roll 30 %): LIVE 2bda29a1. LOAD 0 own; SEATS running 0 / cap 12 | QUEUE: THỬ TAY CTM-CAL (owner code). No new ORDER.
 ## HANDOVER C-AG #22 → C-AG #23 (19/11 11:38Z)
 - C-AG #22 ctx ~33 % of 1M (START ~10 %, roll 35 %) → rolling over at a clean point. Successor C-AG #23 = child (depth 1) via create_session; takeover file TAKEOVER_FOREMAN_C_AG23.md. Hourly wake trig_01Tt3iJ77Wyx9DFDNRYCLEdy deleted by #22.
 - LIVE main edb2e724 (opt-scroll-reset). MAIN ROOT-70 session_01Rc5AsKJHPE6qV9k9Ugyhj7.
@@ -1519,3 +1520,6 @@ ROOT-55 Lượt 692 (owner): ma ma a51 tả thực → STYLE LOCK + a36 as 2nd r
 ROOT-55 ~21:26Z: PR11 rolled at 32 % → PR12 session_01PEhRbuLQNn7Wj8te4Ncp68 opened (depth 8) for Lượt 692 rooms. Lượt 693 = NF4 sheet (teeth, c27, s07–s09) sent; NF4 GO on Kiêu kỳ/Lạnh lùng/Quyến rũ ×3. Next free Lượt 694.
 ROOT-55 Lượt 694: owner OK ma ma, FROZEN (rule D16). Count: final recipe = m05 only (3 pictures). Next free Lượt 695.
 ROOT-55 Lượt 694b: owner: copy ma ma a51/a65 style lock to EVERYONE → D15 widened; BW6 all builders, NDX4 nude-B mk.py.
+ROOT-55 Lượt 695–700: groups moved; c06/c14/c19/c31 → Sắc sảo redraw (NF4); KHO 32 (11/group); Lượt 698 4-group sheet; Lượt 699 Nữ đế round 2 sent (NDX4 now adds D15 at a51/a65); Lượt 700 owner approved Kiêu kỳ/Lạnh lùng/Quyến rũ → NF4 20 more. ctx ~26 %. Next free Lượt 701.
+ROOT-55 Lượt 701: s08 redrawn by ROOT-55 (s08.v5b, 'phoenix' removed) → WDgKkfTcXe chosen; NF4 continues 4 groups; Nữ đế crown identical at all ages = fixed detailed crown sentence → NDX4 swaps to HH crown sentence (dragon) + D15, redraw 5. Next free Lượt 702.
+ROOT-55 Lượt 702: Nữ đế a51/a65 keep bright a36 colours (rule B added) → NDX4.
