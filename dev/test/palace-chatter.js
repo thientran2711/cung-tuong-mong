@@ -45,20 +45,20 @@ const [,,BASE,W0,H0,OUT]=process.argv;const W=+W0||755,H=+H0||1000;const sleep=t
   ck('greet: her own maid greets on arrival',gl.length>=1&&gl[0].who===maidName,{log:gl.slice(0,2),maid:maidName,gt:CHAT.gt,place:S.place,pres:CHAT.present().map(x=>x.p.name),prev:CHAT.prev,ppl:curPeople().map(x=>x.kind+':'+x.name),toks:[...document.querySelectorAll('#tokens .tok')].map(e=>e.className+'|'+e.style.visibility+'|'+e.style.display+'|'+(e.querySelector('img')||{}).naturalWidth),away:typeof ERR!=='undefined'&&ERR.awayOf?!!ERR.awayOf('mm:me'):null,tasks:typeof ERR!=='undefined'?ERR.tasks().map(x=>x.who+':'+x.back):null});
   ck('greet: said once',gl.filter(x=>x.who===maidName).length===1,gl.length);
   /* (4) bubble geometry of the greeting */
-  const geo=()=>{const st=document.getElementById('stage'),sr=st.getBoundingClientRect();const out=[];for(const e of document.querySelectorAll('.kchat-b')){const r=e.getBoundingClientRect();
+  const geo=()=>{const st=document.getElementById('stage'),sr=st.getBoundingClientRect();const out=[];for(const e of document.querySelectorAll('#stage .ksay-lay .ksay')){const r=e.getBoundingClientRect();
     let head=null;const figs=[...document.querySelectorAll('#tokens .tok.fig img.figimg')].filter(f=>{const q=f.getBoundingClientRect();const cx=r.left+r.width/2;return cx>=q.left&&cx<=q.right});
     for(const f of figs){const B=kitFigBody(f.currentSrc||f.src);if(!B)continue;const q=f.getBoundingClientRect();let bx=q.left,by=q.top,bw=q.width,bh=q.height;const ar=f.naturalWidth/f.naturalHeight;if(bw/bh>ar){const w=bh*ar;bx+=(bw-w)/2;bw=w}else{const h=bw/ar;by+=(bh-h)/2;bh=h}
      const top=by+B.t*bh;head=head==null?top:Math.min(head,top)}
-    out.push({b:r.bottom,head,gap:head==null?null:head-r.bottom,inside:r.left>=sr.left-1&&r.right<=sr.right+1&&r.top>=sr.top-1})}return out};
-  const G1=geo();ck('bubble: above the head with a gap, inside the stage',G1.length>=1&&G1.every(g=>g.inside&&(g.gap==null||g.gap>=2)),G1);
+    const tx=(e.querySelector('.ksay-t')||{}).textContent||'';out.push({txt:tx,said:CHAT.log.some(x=>x.txt===tx),b:r.bottom,head,gap:head==null?null:head-r.bottom,inside:r.left>=sr.left-1&&r.right<=sr.right+1&&r.top>=sr.top-1})}return out};
+  const G1=geo();ck('bubble (kitSay): the line inside the bubble, above the head with a gap, inside the stage',G1.length>=1&&G1.every(g=>g.inside&&g.txt&&g.said&&(g.gap==null||g.gap>=2)),G1);
   /* (3) idle chatter */
-  await Wt(6500);document.querySelectorAll('.kchat-b').forEach(e=>e.remove());CHAT.run=0;
+  await Wt(6500);kitSayClear(document.getElementById('stage'));CHAT.run=0;
   const seen=[];let bad=[],maxB=0,rawTok=0,ticks=0;const t0=performance.now();let tc=[];
-  const watch=setInterval(()=>{maxB=Math.max(maxB,document.querySelectorAll('#stage .kchat-b').length)},120);
+  const watch=setInterval(()=>{maxB=Math.max(maxB,document.querySelectorAll('#stage .ksay-lay .ksay').length)},120);
   const visit=async k=>{go(k);await Wt(300);clr();render();await waitImgs();await Wt(400)};
   const spots=['home'].concat(places().map(x=>x.k).filter(k=>['vuon','kn','tn','r2','r3','r4','r5','nvp'].includes(k)));
   for(const k of spots){if(k!=='home')await visit(k);else{go('home');await Wt(300);clr()}
-   for(let n=0;n<6;n++){CHAT.run=0;document.querySelectorAll('.kchat-b').forEach(e=>e.remove());const n0=CHAT.log.length;const pres=CHAT.present().map(x=>x.p.name);const a=performance.now();CHAT.tick();tc.push(performance.now()-a);ticks++;
+   for(let n=0;n<6;n++){CHAT.run=0;kitSayClear(document.getElementById('stage'));const n0=CHAT.log.length;const pres=CHAT.present().map(x=>x.p.name);const a=performance.now();CHAT.tick();tc.push(performance.now()-a);ticks++;
     await Wt(150);const nw=CHAT.log.slice(n0);for(const x of nw){if(!pres.includes(x.who))bad.push([k,x.who,pres]);if(/[{}]/.test(x.txt))rawTok++;seen.push(x.txt)}
     await Wt(2600)}}
   clearInterval(watch);
@@ -84,6 +84,6 @@ const [,,BASE,W0,H0,OUT]=process.argv;const W=+W0||755,H=+H0||1000;const sleep=t
   try{const j=JSON.parse(JSON.stringify(S));delete j.pcx;ck('old save: no S.pcx needed',true)}catch(e){ck('old save',false,e.message)}
   return{C,kinds:CHAT.stat.kind,stat:CHAT.stat,errs:CHAT.errs,sample:seen.slice(0,12),greet:gl.slice(0,2)}});
  R.pageErrors=errs;const fail=R.C.filter(c=>!c[1]);for(const c of R.C)console.log((c[1]?'ok  ':'FAIL')+' '+c[0]+(c[1]?'':' '+JSON.stringify(c[2]).slice(0,600)));
- console.log('kinds:',JSON.stringify(R.kinds));console.log('sample:',JSON.stringify(R.sample));console.log('greet:',JSON.stringify(R.greet));if(errs.length)console.log('pageerrors',errs.slice(0,5));
+ console.log('kinds:',JSON.stringify(R.kinds),'kitSay no room:',R.stat.noRoom|0,'lines:',R.stat.lines);console.log('sample:',JSON.stringify(R.sample));console.log('greet:',JSON.stringify(R.greet));if(errs.length)console.log('pageerrors',errs.slice(0,5));
  if(OUT)fs.writeFileSync(OUT,JSON.stringify(R,null,1));console.log(`PALACE-CHATTER ${W}x${H}: ${R.C.length-fail.length}/${R.C.length} ${fail.length||errs.length?'FAIL':'PASS'}`);
  await b.close();process.exit(fail.length||errs.length?1:0)})().catch(e=>{console.error(e);process.exit(1)});

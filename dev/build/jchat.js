@@ -10,9 +10,9 @@
    (c) the people of ONE happening at her place (jagday agPlanned: doer + target, place = here) stand next to each other on the stage (S.visit.people
        re-ordered once per visit) and are picked first; they talk about that deed (CHAT_L.hap);
    (d) eavesdrop (j9 overhear, j78 maid dò la): the result quotes the exchange word for word (CHAT_L.eav by the TRUE fact kind j78 learnt).
-   LOOK: KIT ONLY. The §78.z head bubble + §78.y kitBadgeAt place every bubble on the speaker's sex line (never on a head). The text state
-   "say" of that part is a KIT REQUEST (K-HEAD-SAY, dev/kit/KIT_REQUESTS.md); until it exists the speaker shows the plain WHITE bubble ("off")
-   and the line runs in the kit status line (kitLine). A person with a notice (yellow bubble, jerr) never gets a chatter bubble.
+   LOOK: KIT ONLY. Every line is shown by the kit part kitSay (KIT §78.z "say" state + §78.y, K-HEAD-SAY, jmark.js): the white speech bubble
+   holding the line, its own stage layer .ksay-lay (works in co-op / servant-road lives too), bottom on the speaker's sex line, never over a head,
+   inside the stage, no overlap. No layer / CSS / placement of ours. A person with a notice (yellow bubble, jerr) never gets a chatter bubble.
    NO REPEAT: an exchange / greeting is not used again until BAL.chat.noRepeat others were said (memory S.pcx, lazy; a guest seat keeps it in the page).
    CO-OP: display only, writes no shared state, syncs nothing. PERF: one setTimeout chain, work only at a tick; paused while hidden.
    ===================================================================================================================== */
@@ -101,22 +101,13 @@ function present(){const st=stage();if(!st)return[];const ppl=typeof curPeople==
   try{if(window.ERR&&ERR.awayOf&&p.kind==="maid"&&ERR.awayOf("mm:me"))continue}catch(x){}
   L.push({p,i,img,tok,sp,e,k:kindOf(p),id:lid(e)})}return L}
 function noticeOn(P){try{const st=stage();for(const b of st.querySelectorAll(".kmerr-bang")){const r=b.getBoundingClientRect(),q=P.img.getBoundingClientRect();if(r.left+r.width/2>=q.left&&r.left+r.width/2<=q.right)return true}}catch(e){}return false}
-/* ---------- the bubble (KIT §78.z + §78.y; "say" = K-HEAD-SAY when the kit has it) ---------- */
-function sayKit(){try{return !!(window.KIT_HEADMK&&KIT_HEADMK.say&&typeof kitHeadMarkHtml==="function")}catch(e){return false}}
-/* the ONE stage head-marker layer (jerr errLay, .kmerr-lay: absolute, inset 0, no pointer) — no layer or CSS of our own */
-function lay(st){try{let l=st.querySelector(":scope>.kmerr-lay");if(l)return l;if(window.ERR&&typeof ERR.sync==="function"){try{ERR.sync()}catch(e){}l=st.querySelector(":scope>.kmerr-lay");if(l)return l}
- if(document.getElementById("kerr-css")){l=document.createElement("div");l.className="kmfly kmerr kmerr-lay";st.appendChild(l);return l}}catch(e){err("lay",e)}return null}
-function clearB(){try{document.querySelectorAll(".kchat-b").forEach(e=>e.remove())}catch(e){}}
+/* ---------- the bubble (KIT §78.z "say" + §78.y = K-HEAD-SAY, kitSay) ---------- */
+function clearB(){try{kitSayClear(stage())}catch(e){}}
+/* the bubble = the kit part kitSay (KIT §78.z "say" + §78.y, K-HEAD-SAY): its own stage layer, placement, pop in/out; no layer / CSS / placement of ours */
 function show(P,txt,ms,tag){const st=stage();if(!st||!P.img.isConnected)return false;if(noticeOn(P))return false;const c=C();
- const lim=Math.max(1,c.maxBub|0||2);const cur=[...st.querySelectorAll(".kchat-b")];while(cur.length>=lim)cur.shift().remove();
- const w=document.createElement("span");const kit=sayKit();const title=`${nameOf(P.e,P.p)}: ${txt}`;
- w.innerHTML=kit?kitHeadMarkHtml(title,"img","say",txt):typeof kitHeadMarkHtml==="function"?kitHeadMarkHtml(title,"img","off"):"";const b=w.firstChild;if(!b)return false;
- const L=lay(st);if(!L)return false;b.classList.add("kchat-b");b.dataset.chat=CH.seq;L.appendChild(b);
- const sr=st.getBoundingClientRect(),sc=st.offsetWidth?sr.width/st.offsetWidth:1;const px=(window.KIT_HEADMK||{}).px||24;const hh=b.offsetHeight||px,ww=b.offsetWidth||px;
- const Pz=typeof kitBadgeAt==="function"?kitBadgeAt(st,P.img,kit?"say":"hap",ww,hh):null;if(!Pz){b.remove();return false}
- b.style.position="absolute";b.style.left=((Pz.left-sr.left)/sc)+"px";b.style.top=((Pz.top-sr.top)/sc)+"px";b.dataset.line=Pz.sex;
- if(!kit&&typeof kitLine==="function")try{kitLine(`${nameOf(P.e,P.p)}: “${txt}”`,ms)}catch(e){}
- setTimeout(()=>{try{b.remove()}catch(e){}},ms);CH.stat.lines++;CH.log.push({t:Date.now(),who:P.p.name,txt,kit,tag:tag||""});if(CH.log.length>60)CH.log.shift();return true}
+ const lim=Math.max(1,c.maxBub|0||2);CH.bub=(CH.bub||[]).filter(h=>h&&!h.closed&&h.el.isConnected);while(CH.bub.length>=lim)CH.bub.shift().close();
+ const mk=()=>typeof kitSay==="function"?kitSay(st,P.img,txt,{ms,title:`${nameOf(P.e,P.p)}: ${txt}`}):null;let h=mk();if(!h&&CH.bub.length){CH.bub.shift().close(true);h=mk()}/* no room beside the other bubble (narrow stage, seal + plaque): take turns, the older line leaves */if(!h){CH.stat.noRoom=(CH.stat.noRoom|0)+1;return false}CH.bub.push(h);
+ CH.stat.lines++;CH.log.push({t:Date.now(),who:P.p.name,txt,kit:true,tag:tag||""});if(CH.log.length>60)CH.log.shift();return true}
 function dur(t){const c=C().say||{};return Math.round(Math.max(c.min||2600,Math.min(c.max||6000,(c.base||1400)+String(t).length*(c.ch||55))))}
 /* play the turns one after another; a turn whose speaker left the stage ends the exchange */
 function play(T,tag){if(!T||!T.length)return false;CH.run=++CH.seq;const id=CH.run;let i=0;CH.stat.said++;
