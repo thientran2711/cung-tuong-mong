@@ -659,6 +659,9 @@ def build_low(c,t,v="v0"):
     s+=" Every hairpin is inserted into the hair pointing upward or backward with dangles hanging down, no hairpin horizontal or sticking out to the side. Luminous smooth porcelain skin, bare clean forehead with no forehead mark and no flower mark, eyes open, floor-length robe with slippers visible, no train, no cup, nothing covering the face."
     return s+END
 # N3b (owner 19/11 ~00:05Z via ROOT-34, verbatim: "lấy cái prompt của bên Quý Phi y chang như vậy, chỉ đơn giản là thêm một vài chi tiết cần có của ... cái người Bắc Địch này thôi, không có vẻ là một cái prompt mới."): --bdq 1|2 = the APPROVED Quý phi t6 text (build_low c06 t6 v0, prompt B) copied verbatim; ONLY these pieces are swapped: identity/face sentence, the coral colour words -> trầm BD_OPT colour, fur trim band + collar, turquoise/coral strands, belt plaque, no-side-braid. Off by default.
+BDITEM="10"
+BD_ITEMS={"1":("a turquoise-and-coral bead string","bead"),"2":("a small fur-trimmed leather pouch","pouch"),"3":("a silver-mounted horn-handled whisk-fan of horsehair","fan"),"4":("a carved bone hand mirror with a turquoise rim","mirror"),"5":("a small felt-bound book","book"),"6":("a painted leather folding fan","fan"),"7":("a branch of dried steppe flowers tied with red cord","branch"),"8":("an embroidered silk bag with coral beads","pouch"),"9":("a small ornamented silver whistle-flute on a cord","flute"),"10":("a white-jade ruyi with a turquoise bead","ruyi")}
+HAND_BD={"bead":"the bead string draped over the fingers of one hand at chest height below the chin, the other hand resting lightly on her sash","pouch":"the pouch held in one hand at waist height, the other hand resting lightly on its cord","fan":"the fan held up in one hand at chest height below the chin, the other hand resting lightly on her sash","mirror":"the hand mirror held in one hand at chest height with its back turned outward, the other hand touching a hairpin","book":"the book held open in both hands at waist height","branch":"the branch held up in one hand at chest height below the chin, the other hand touching a blossom","flute":"the flute held in both hands at chest height below the chin","ruyi":"the ruyi held upright in one hand at chest height below the chin, the other hand resting lightly on her sash"}
 def build_bdq(o="1"):
     t=build_low("c06",6,"v0"); c,th,cape,rend,sig=BD_OPT[o]
     pal,face=DATA["c06"]; bpal,bface=PDATA["bd"]
@@ -674,6 +677,11 @@ def build_bdq(o="1"):
     i=t.index(" COLOUR RULE: robe, skirt, sleeves"); j=t.index(" COLOUR RULE: all colours"); k=t.index(" Hair: ")
     t=t[:i]+f" COLOUR RULE: all colours fresh, clear and luminous, never dusty or greyed; {sig} is the main colour of the robe, sleeves, sleeve linings and cape, rendered as {rend}; the fur is ivory-white; gold as thin accents on the borders."+t[k:]
     sw(" Hair: her own hairstyle decorated"," Hair: her own hairstyle, NO braids and NO side braid, decorated")
+    # owner 19/11 ~00:45-00:50Z (FIGURE_GATE 3d2 + 3f): FRONTAL ONLY; item from the BD princess list (H), never a t6 consort item. --bditem N picks the list entry (default 10).
+    item,hk=BD_ITEMS[BDITEM]
+    sw("she holds a round fan with a carved jade-and-gold handle and pearls in a contrasting colour","she holds "+item+" in a contrasting colour")
+    sw("the round fan held up in one hand at chest height, gently turned to show its painting, the other hand lightly touching its tassel, body turned slightly three-quarters to the left",HAND_BD[hk]+", body facing the viewer squarely (frontal), shoulders level, not turned")
+    sw("3/4 or frontal view","frontal view")
     return t
 # ---------- STATES (SAMPLES ONLY, owner 18/11 ~21:00Z real; brief dev/handover/briefs/states-sample.md): --state nude|thaihau|kc|ngheo|nc1|nc6|bd1|bd6 ----------
 # Same sentence structure as the 8 ranks (PRE, identity sentence, AGE_TXT, outfit, COLOUR RULE, embroidery+drape, item pose, closing hairpin rule, END). Existing outputs untouched: all code below is only reached with --state.
@@ -955,6 +963,7 @@ if __name__=="__main__":
     if "--state" in sys.argv: i=sys.argv.index("--state"); STATE=sys.argv[i+1]; sys.argv[i:i+2]=["--state"]
     LOWN=None
     if "--low" in sys.argv: i=sys.argv.index("--low"); LOWN=int(sys.argv[i+1]); sys.argv[i:i+2]=["--low"]
+    if "--bditem" in sys.argv: i=sys.argv.index("--bditem"); BDITEM=sys.argv[i+1]; sys.argv[i:i+2]=[]
     BDQ=None
     if "--bdq" in sys.argv: i=sys.argv.index("--bdq"); BDQ=sys.argv[i+1]; sys.argv[i:i+2]=[]
     TRIEUN=None
