@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"be135f72+","t":"2026-11-19T07:43Z","c":"seal-lean-3: test measures layout size, frame from the figure's stage, video keys incl. binh","b":"0be7082df884","h":[{"s":"0da546e9","t":"2026-11-19T07:16Z","c":"role-parity-drift r1: build line"},{"s":"eff20119+","t":"2026-11-19T06:33Z","c":"ev-pic-coverage: picture required in M/L/XL frames only, S frames reported apart (owner OD 19/11 ~04:55Z)"},{"s":"a64f06c7+","t":"2026-11-19T06:29Z","c":"seal-lean-2 r2: rebuild site"},{"s":"38af6387","t":"2026-11-19T06:23Z","c":"minister-agents review r1: one core (gift regard + backs in BAL.tdCourt, j55 reads tuyen.pow / imp.deep / clanRel), censor name unique in e…"},{"s":"18a9b64c+","t":"2026-11-19T05:22Z","c":"monthly-allotment r6 (reviewer): stat names from the one NAMES table (drop private STAT_NM); candle note puts the burnt candle in the card'…"},{"s":"6b041ea7+","t":"2026-11-19T05:21Z","c":"odds-no-unknown: vu oan hints no longer repeat the odds word the meter now shows"},{"s":"6eb0ab3d+","t":"2026-11-19T05:37Z","c":"hall-names r2: runtime test hall-names-lines.js (houseName plaque, palace list line, visit line, 'cùng cung' note; Fold + iPad)"},{"s":"c4c25bbd+","t":"2026-11-19T04:41Z","c":"head-marker-video: viewport-size recording, opening dialog cleared, maid notice kept unread, white plain state swapped at half time on the …"},{"s":"360c0edd+","t":"2026-11-19T03:50Z","c":"ge-writers W2 r2: rebuild on main fa411d6f"},{"s":"cbacdb55+","t":"2026-11-19T03:45Z","c":"art-wiring-1119 r2: fix review r1 FAIL 1+2"}]};
+window.CTM_BI={"s":"aafa0a90+","t":"2026-11-19T08:11Z","c":"seal-lean-3: once-per-opening flag on the figure column (the .ksz3 shell persists), merge main 950508fc","b":"38a70b872c70","h":[{"s":"0da546e9","t":"2026-11-19T07:16Z","c":"role-parity-drift r1: build line"},{"s":"eff20119+","t":"2026-11-19T06:33Z","c":"ev-pic-coverage: picture required in M/L/XL frames only, S frames reported apart (owner OD 19/11 ~04:55Z)"},{"s":"a64f06c7+","t":"2026-11-19T06:29Z","c":"seal-lean-2 r2: rebuild site"},{"s":"38af6387","t":"2026-11-19T06:23Z","c":"minister-agents review r1: one core (gift regard + backs in BAL.tdCourt, j55 reads tuyen.pow / imp.deep / clanRel), censor name unique in e…"},{"s":"18a9b64c+","t":"2026-11-19T05:22Z","c":"monthly-allotment r6 (reviewer): stat names from the one NAMES table (drop private STAT_NM); candle note puts the burnt candle in the card'…"},{"s":"6b041ea7+","t":"2026-11-19T05:21Z","c":"odds-no-unknown: vu oan hints no longer repeat the odds word the meter now shows"},{"s":"6eb0ab3d+","t":"2026-11-19T05:37Z","c":"hall-names r2: runtime test hall-names-lines.js (houseName plaque, palace list line, visit line, 'cùng cung' note; Fold + iPad)"},{"s":"c4c25bbd+","t":"2026-11-19T04:41Z","c":"head-marker-video: viewport-size recording, opening dialog cleared, maid notice kept unread, white plain state swapped at half time on the …"},{"s":"360c0edd+","t":"2026-11-19T03:50Z","c":"ge-writers W2 r2: rebuild on main fa411d6f"},{"s":"cbacdb55+","t":"2026-11-19T03:45Z","c":"art-wiring-1119 r2: fix review r1 FAIL 1+2"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -75254,16 +75254,17 @@ function kesSchedule(el){if(el.__ln)clearTimeout(el.__ln);const L=KIT_EMOSEAL.le
    head markers use; one typical figure's head as a fraction of its body, measured once, stored as data). The same for every seal; a seal outside a stage (panel / dialog) = lean.head.f x the dialog figure height, else lean.head.panel x the short screen side. */
 function kesHead(el,r){const L=KIT_EMOSEAL.lean.head;let H=0;try{const st=(el.__fig&&el.__fig.closest("#stage"))||(el.closest&&el.closest("#stage"));if(st){const h0=+st.dataset.kmlH,sc=st.offsetHeight?st.getBoundingClientRect().height/st.offsetHeight:1;if(h0>20)H=h0*sc}
  if(!H&&el.__fig){const q=el.__fig.getBoundingClientRect();if(q.height>20)H=q.height*(KIT_FIG&&KIT_FIG.h||.79)}}catch(e){}
- return Math.max(r.width,H?H*L.f:Math.min(innerWidth,innerHeight)*L.panel)}
+ return H?H*L.f:Math.min(innerWidth,innerHeight)*L.panel}
 function kesLean(el,force){el.__ln=0;if(!el.isConnected||!el.classList.contains("kemo-live"))return;
  const L=KIT_EMOSEAL.lean,now=performance.now();
  if(!force&&((kesCur&&kesCur!==el&&kesCur.isConnected&&kesCur.classList.contains("kemo-lean"))||kesLastEnd+L.gap*1000>now)){/* stagger: never two seals leaning together, next only after the previous one fully ended + gap */
   el.__ln=setTimeout(()=>kesLean(el),Math.max(300,kesLastEnd+L.gap*1000-now)+kesR(100,900));return}
  if(kesCur&&kesCur!==el){const pv=kesCur;kesLeanEnd(pv);kesSchedule(pv)}/* forced (dialog opening): the cut stage seal is scheduled again */
  const r=el.getBoundingClientRect();if(r.width<2||r.bottom<=0||r.top>=innerHeight||r.right<=0||r.left>=innerWidth){kesSchedule(el);return}
- kesCur=el;{const rt=kesOpenRoot(el);if(rt)rt.__kl=1}const k=kesKey(el),spec=kesSpec(k),d=(spec&&spec.d)||KIT_EMOSEAL.defaultDur,still=el.dataset.kemos;
+ kesCur=el;const k=kesKey(el),spec=kesSpec(k),d=(spec&&spec.d)||KIT_EMOSEAL.defaultDur,still=el.dataset.kemos;
  const n=+Math.max(L.loops,L.holdMin/d).toFixed(3),hold=n*d,/* hold = holdMin s exactly (n may be a fraction of a loop) */tot=L.grow+hold+L.shrink;
- const hp=kesHead(el,r),S=Math.max(1,hp/Math.max(r.width,r.height));/* big size = THE HEAD of that person on the stage (owner 19/11 ~06:55Z), never bigger */
+ const hp=kesHead(el,r);if(Math.max(r.width,r.height)>hp*1.25){kesCur=null;kesSchedule(el);return}{const rt=kesOpenRoot(el);if(rt)rt.__kl=1}/* a seal already bigger than the head frame (box not laid out yet / mid-transition) never leans: it would pop BIGGER than the head */
+ const S=Math.max(1,hp/Math.max(r.width,r.height));/* big size = THE HEAD of that person on the stage (owner 19/11 ~06:55Z), never bigger */
  const bw=r.width*S,bh=r.height*S,/* big box never past the head, nor the screen */m=Math.round(Math.max(bw,bh)*L.margin)+L.marginPx,/* margin = room for the feeling motion (shake / sway amplitude) */ cx=r.left+r.width/2,cy=r.top+r.height/2;
  const bl=Math.max(m,Math.min(cx-bw/2,innerWidth-bw-m)),bt=Math.max(m,Math.min(cy-bh/2,innerHeight-bh-m));/* clamped inside the screen */
  const c=document.createElement("img");c.className="kemo-big kemo-m-"+(spec?spec.m:KIT_EMOSEAL.defaultMotion);c.alt="";c.setAttribute("aria-hidden","true");c.src=el.getAttribute("src");
@@ -78913,7 +78914,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="0be7082df884";window.CTM_BUILD=BUILD;
+const BUILD="38a70b872c70";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

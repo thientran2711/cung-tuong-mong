@@ -41,16 +41,17 @@ function kesSchedule(el){if(el.__ln)clearTimeout(el.__ln);const L=KIT_EMOSEAL.le
    head markers use; one typical figure's head as a fraction of its body, measured once, stored as data). The same for every seal; a seal outside a stage (panel / dialog) = lean.head.f x the dialog figure height, else lean.head.panel x the short screen side. */
 function kesHead(el,r){const L=KIT_EMOSEAL.lean.head;let H=0;try{const st=(el.__fig&&el.__fig.closest("#stage"))||(el.closest&&el.closest("#stage"));if(st){const h0=+st.dataset.kmlH,sc=st.offsetHeight?st.getBoundingClientRect().height/st.offsetHeight:1;if(h0>20)H=h0*sc}
  if(!H&&el.__fig){const q=el.__fig.getBoundingClientRect();if(q.height>20)H=q.height*(KIT_FIG&&KIT_FIG.h||.79)}}catch(e){}
- return Math.max(r.width,H?H*L.f:Math.min(innerWidth,innerHeight)*L.panel)}
+ return H?H*L.f:Math.min(innerWidth,innerHeight)*L.panel}
 function kesLean(el,force){el.__ln=0;if(!el.isConnected||!el.classList.contains("kemo-live"))return;
  const L=KIT_EMOSEAL.lean,now=performance.now();
  if(!force&&((kesCur&&kesCur!==el&&kesCur.isConnected&&kesCur.classList.contains("kemo-lean"))||kesLastEnd+L.gap*1000>now)){/* stagger: never two seals leaning together, next only after the previous one fully ended + gap */
   el.__ln=setTimeout(()=>kesLean(el),Math.max(300,kesLastEnd+L.gap*1000-now)+kesR(100,900));return}
  if(kesCur&&kesCur!==el){const pv=kesCur;kesLeanEnd(pv);kesSchedule(pv)}/* forced (dialog opening): the cut stage seal is scheduled again */
  const r=el.getBoundingClientRect();if(r.width<2||r.bottom<=0||r.top>=innerHeight||r.right<=0||r.left>=innerWidth){kesSchedule(el);return}
- kesCur=el;{const rt=kesOpenRoot(el);if(rt)rt.__kl=1}const k=kesKey(el),spec=kesSpec(k),d=(spec&&spec.d)||KIT_EMOSEAL.defaultDur,still=el.dataset.kemos;
+ kesCur=el;const k=kesKey(el),spec=kesSpec(k),d=(spec&&spec.d)||KIT_EMOSEAL.defaultDur,still=el.dataset.kemos;
  const n=+Math.max(L.loops,L.holdMin/d).toFixed(3),hold=n*d,/* hold = holdMin s exactly (n may be a fraction of a loop) */tot=L.grow+hold+L.shrink;
- const hp=kesHead(el,r),S=Math.max(1,hp/Math.max(r.width,r.height));/* big size = THE HEAD of that person on the stage (owner 19/11 ~06:55Z), never bigger */
+ const hp=kesHead(el,r);if(Math.max(r.width,r.height)>hp*1.25){kesCur=null;kesSchedule(el);return}{const rt=kesOpenRoot(el);if(rt)rt.__kl=1}/* a seal already bigger than the head frame (box not laid out yet / mid-transition) never leans: it would pop BIGGER than the head */
+ const S=Math.max(1,hp/Math.max(r.width,r.height));/* big size = THE HEAD of that person on the stage (owner 19/11 ~06:55Z), never bigger */
  const bw=r.width*S,bh=r.height*S,/* big box never past the head, nor the screen */m=Math.round(Math.max(bw,bh)*L.margin)+L.marginPx,/* margin = room for the feeling motion (shake / sway amplitude) */ cx=r.left+r.width/2,cy=r.top+r.height/2;
  const bl=Math.max(m,Math.min(cx-bw/2,innerWidth-bw-m)),bt=Math.max(m,Math.min(cy-bh/2,innerHeight-bh-m));/* clamped inside the screen */
  const c=document.createElement("img");c.className="kemo-big kemo-m-"+(spec?spec.m:KIT_EMOSEAL.defaultMotion);c.alt="";c.setAttribute("aria-hidden","true");c.src=el.getAttribute("src");
