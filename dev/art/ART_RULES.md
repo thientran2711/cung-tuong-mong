@@ -6,6 +6,7 @@ Line format: `ID | rule | source (Lượt / time) | FG = line in dev/art/FIGURE_
 Ranks: t1 Đáp ứng · t2 Thường tại · t3 Quý nhân · t4 Tần · t5 Phi · t6 Quý phi · t7 Hoàng quý phi (HQP) · t8 Hoàng hậu (HH). Ages: a18 a26 a36 a51 a65.
 
 ## A. Process / approval
+A18 | LAW #0 (TOP LAW): change a prompt ONLY for what the OWNER herself raised. Any fault/idea WE notice (foreman or worker) = a NOTE shown to her with "có muốn sửa không?"; no answer = NO change. Never turn our own remarks into prompt edits, restraints or rules (e.g. Lượt 497 "Quý phi m13 sash fluttering" was our note — no restraint). | Lượt 505 (19/11) | FG - | over: Lượt 503 (19/11)
 A1 | ANY new drawing (new design, new rule applied, new room, new rank) = ONE sample set first → owner verdict → only then more; a worker never redraws on its own after a sample is sent; foremen give ONE explicit GO per round. | Lượt 463, 464 | FG 30 | over: Lượt 229b, 234
 A2 | No mass production of a group until the owner gives an explicit GO for that group; samples may continue one gen at a time, each looked at before the next. | Lượt 234, 339 | FG 603, 879 | over: Lượt 229b hard stop
 A3 | A new DESIGN sample shows 3–4 clearly different options side by side; she picks one. Do NOT send colour-option rounds (credit cost) — pick colours by rule. | 18/11 22:25Z; Lượt 306 | FG 245, 818
@@ -23,7 +24,6 @@ A14 | A rank-pipeline test uses an already-approved thiếu nữ face with no ra
 A15 | Naming to the owner: thiếu nữ faces are "thiếu nữ khuê các / nhà nghèo (mNN)", never "cung nữ"; say "nhị đẳng", never "đại cung nữ". | 19/11 00:20Z, 01:55Z | FG 102, 536
 A16 | Every brief to a painter points to this file + FIGURE_GATE; reviewers FAIL any gen whose prompt differs from the store form except slots. | 18/11 22:20Z | FG 44
 A17 | BEFORE ANY GEN: diff the prompt against the LAST APPROVED prompt of that figure and change ONLY what the owner asked (credits burned by unasked changes upset her); list the diff in the report. | Lượt 492 (19/11) | FG -
-A18 | Foreman/worker critiques are shown to the owner as faults ONLY; never turn our own reading into a rule or a prompt change — act only on what the OWNER complains about (e.g. Lượt 497 'm13 Quý phi sash fluttering' was the foreman's note, she is fine with it: no restraint added). | Lượt 503 (19/11) | FG -
 
 ## B. Prompt build (store, shared vs own, method)
 B1 | LAW #1: the 19/11 store prompts (dev/art/store-all/build_all.py f73a457 / dev/art/t8-prompt-B/build.py) are APPROVED; never rewrite or "improve" their fabric/brushwork sentences. | Lượt 397, 395 | FG 6-7
