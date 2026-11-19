@@ -4,6 +4,7 @@
 Run: python3 dev/art/face-common/make_c_v3.py  (from repo root or anywhere)."""
 import os
 D=os.path.dirname(os.path.abspath(__file__))
+import sys as _s; _s.path.insert(0, D); import face_gate as FG   # MG1 B25: master block + D9 + face gate on every output
 COMMON=open(os.path.join(D,'COMMON_v3.txt')).read().strip()
 LOOKS=["Tươi tắn","Dịu dàng","Trong trẻo","Đoan trang","Sắc sảo","Tinh nghịch"]
 EXPR={  # copied from the m lines of each look group
@@ -282,7 +283,7 @@ for i,(cid,age,face,shape,eyes,lips,hair,outfit,m,s,game,pose,item,itemshort) in
             f"Pose: {pose}, {ANG[ak]}")
     if item not in pose: print('WARN item text not in pose',cid)
     full=pre+person+post
-    open(os.path.join(D,f'{cid}.v3.FULL.txt'),'w').write(full)
+    full=FG.final(full,cid); open(os.path.join(D,f'{cid}.v3.FULL.txt'),'w').write(full)
     out.append(f"| {cid} | {look} | {age} | {shape} | {eyes} | {lips} | {ANGN[ak]} | {itemshort} | {mw} + {sw} | {game}{' *' if cid in CHANGED else ''} |")
 hdr=("# c01–c32 NEW consort thiếu nữ v3 {PERSON} lines — index (NF1, owner Lượt 562, rule K17)\n\n"
 "Old c01–c32 pictures = ARCHIVED, never a reference. Recipe = set B: COMMON_v3.txt VERBATIM with {PERSON} replaced (cNN.v3.FULL.txt), gpt-2-6 1024x2304 2k seed 7172, ONE ref M09 eIyOFEidqL, no transparentBackground, parchment bg → images_remove_background.\n"

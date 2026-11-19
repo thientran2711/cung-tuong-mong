@@ -5,6 +5,7 @@ Only the COMMON mouth sentence and the 'closed-lip smile' words of the Expressio
 Run: python3 dev/art/face-common/make_nf4.py"""
 import os
 D=os.path.dirname(os.path.abspath(__file__))
+import sys as _s; _s.path.insert(0, D); import face_gate as FG   # MG1 B25: master block + D9 + face gate on every output
 OLD_MOUTH="mouth CLOSED with the lips softly together, absolutely NO teeth visible, a natural soft smile (never a stretched grin)."
 NEW_MOUTH=("MOUTH FULLY CLOSED: the upper lip and the lower lip rest pressed gently together along their whole length with no gap between them, "
            "a calm closed-lip smile made only by the lip corners; absolutely NO teeth visible at all, no white line or dark gap between the lips, "
@@ -17,7 +18,7 @@ for cid,f in SRC.items():
     t=t.replace(OLD_MOUTH,NEW_MOUTH).replace("closed-lip smile,","closed-lip smile with the lips fully sealed, no teeth,",1)
     out[f"{cid}.v3t"]=t
 for k,v in out.items():
-    open(os.path.join(D,f'{k}.FULL.txt'),'w').write(v)
+    v=FG.final(v,k) if __name__=="__main__" else v; open(os.path.join(D,f'{k}.FULL.txt'),'w').write(v)
     print(f"== {k}\n{v}\n")
 
 # ---------------- (3) TYPES v5 (owner Lượt 686): MUCH stronger face shape + personality per type; TYPES_v5.md copies these ----------------
@@ -99,7 +100,7 @@ for sid,age,sw,hair,outfit,(mn,mh),(sn,sh),pose,ak in S3:
     out2[f"{sid}.v5"]=line(age,ss_face(sw)+". "+EYES_STRAIGHT[:-1],SS["expr"],hair,outfit,mn,mh,sn,sh,pose,ak)
 for k in out2: assert out2[k].count(OLD_MOUTH)==1,k; out2[k]=out2[k].replace(OLD_MOUTH,NEW_MOUTH)   # owner teeth order: new faces get the strong mouth sentence too
 for k,v in out2.items():
-    open(os.path.join(D,f'{k}.FULL.txt'),'w').write(v)
+    v=FG.final(v,k) if __name__=="__main__" else v; open(os.path.join(D,f'{k}.FULL.txt'),'w').write(v)
     print(f"== {k}\n{v}\n")
 
 # ---------------- (5) owner Lượt 689: new people ONLY in Sắc sảo / Kiêu kỳ / Lạnh lùng / Quyến rũ; 3 samples each ----------------
@@ -163,7 +164,7 @@ for sid,ty,age,sw,hair,outfit,(mn,mh),(sn,sh),pose,ak in S4:
 out3["s12.v5b"]=out3["s12.v5"].replace("one small gold hairpin pointing backward","one small gold hairpin set upright at the crown, pointing straight upward")
 assert out3["s12.v5b"]!=out3["s12.v5"]
 for k,v in out3.items():
-    open(os.path.join(D,f'{k}.FULL.txt'),'w').write(v)
+    v=FG.final(v,k) if __name__=="__main__" else v; open(os.path.join(D,f'{k}.FULL.txt'),'w').write(v)
     print(f"== {k}\n{v}\n")
 
 # ---------------- (6) owner Lượt 696: c06 c14 c19 c31 become SẮC SẢO — new sharp face from the approved v5 block (s07/s09 recipe) ----------------
@@ -183,7 +184,7 @@ for cid,sw in SS6.items():
     t=t.replace(of,f).replace(oe,SS["expr"]).replace("about 16.","about 17.")
     out4[f"{cid}.v5"]=t
 for k,v in out4.items():
-    open(os.path.join(D,f'{k}.FULL.txt'),'w').write(v)
+    v=FG.final(v,k) if __name__=="__main__" else v; open(os.path.join(D,f'{k}.FULL.txt'),'w').write(v)
     print(f"== {k}\n{v}\n")
 
 # ---------------- (7) owner Lượt 700/701: full sets — Kiêu kỳ s19–s25 (7), Lạnh lùng s26–s32 (7), Quyến rũ s33–s38 (6) ----------------
@@ -247,7 +248,7 @@ for ty,start,nn,c0 in GROUP7:
         assert v.count(OLD_MOUTH)==1 and "phoenix" not in v.split("Her face:")[1].lower()
         out7[f"{sid}.v5"]=v.replace(OLD_MOUTH,NEW_MOUTH); S7.append((sid,ty))
 for k,v in out7.items():
-    open(os.path.join(D,f'{k}.FULL.txt'),'w').write(v)
+    v=FG.final(v,k) if __name__=="__main__" else v; open(os.path.join(D,f'{k}.FULL.txt'),'w').write(v)
 print("S7",S7)
 
 # s35/s38 were refused by the service's NSFW filter (false flag) -> v5b: softer words only (same face/person)
@@ -255,4 +256,4 @@ for sid in ("s35","s38"):
     v=out7[f"{sid}.v5"]
     for a,b in (("a sensual, magnetic, enchanting woman","a magnetic, enchanting young lady"),("A SEDUCTIVE, alluring look","A CHARMING, alluring look"),("walking slowly mid-step with her hips softly turned","walking slowly and gracefully mid-step")):
         assert a in v,(sid,a); v=v.replace(a,b)
-    open(os.path.join(D,f'{sid}.v5b.FULL.txt'),'w').write(v)
+    v=FG.final(v,sid) if __name__=="__main__" else v; open(os.path.join(D,f'{sid}.v5b.FULL.txt'),'w').write(v)

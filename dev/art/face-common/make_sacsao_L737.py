@@ -6,6 +6,7 @@ c06 / c19 redraw (Lượt 737) = re-run of the approved c06.v5 / c19.v5 prompts 
 make_nf4.py is loaded read-only (its file writes are swallowed). Run: python3 dev/art/face-common/make_sacsao_L737.py"""
 import os, io, builtins
 D = os.path.dirname(os.path.abspath(__file__))
+import sys as _s; _s.path.insert(0, D); import face_gate as FG   # MG1 B25: master block + D9 + face gate on every output
 _open = builtins.open
 def _ro_open(p, mode='r', *a, **k):
     if 'w' in mode or 'a' in mode: return io.StringIO()
@@ -67,5 +68,5 @@ for sid, age, sw, hair, outfit, (mn, mh), (sn, sh), pose, ak in S737:
     assert v.count(OLD_MOUTH) == 1, sid
     out[f"{sid}.v5"] = v.replace(OLD_MOUTH, NEW_MOUTH)
 for k, v in out.items():
-    _open(os.path.join(D, f'{k}.FULL.txt'), 'w').write(v)
+    v = FG.final(v, k); _open(os.path.join(D, f'{k}.FULL.txt'), 'w').write(v)
     print(f"== {k}\n{v}\n")

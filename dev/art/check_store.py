@@ -9,11 +9,15 @@ Part 2 APPROVED: the owner-approved sentences of the prompt's scope (table APPRO
 Part 3 BANNED REFS (owner Lượt 554/555): the prompt text or --refs id,id,... must not name an old khuê các set-A key/id (dev/art/KC_BANNED_REFS.json).
 Usage
   python3 dev/art/check_store.py <prompt_file> <store_args...> [--refs id,id]                     # both parts (scope from the args / prompt)
-  python3 dev/art/check_store.py <prompt_file> --scope tpN|prN|trieuN|mama|nude [--age aNN]   # approved part only (no store args)
+  python3 dev/art/check_store.py <prompt_file> --scope tpN|prN|trieuN|mama|nude|face [--age aNN]   # approved part only (no store args)
+  scope face = thiếu nữ face prompts (face-common mNN/cNN/sNN .FULL.txt, or a maker's stdout via prompt_file "-")
+MASTER BLOCK (owner B25, Lượt 745/766, MG1): in EVERY scope every sentence of dev/art/MASTER_COMMON.txt must be present verbatim exactly once
+  (dev/art/master_common.py); missing / edited / doubled = FAIL "MASTER ...".
   python3 dev/art/check_store.py --self | --audit | --registry-md
 Exit 1 = FAIL -> do NOT generate. Ledger lines carry "store_check":"PASS" and "approved_check":"PASS"."""
 import subprocess,sys,re,os,glob,collections
 ART=os.path.dirname(os.path.abspath(__file__)); ROOT=os.path.dirname(os.path.dirname(ART))
+sys.path.insert(0, ART); import master_common   # B25 ONE MASTER COMMON BLOCK (dev/art/MASTER_COMMON.txt), checked in EVERY scope
 NEG=re.compile(r"\b(no|not|never|without|nothing|none|nor)\b", re.I)
 
 # ---------------- APPROVED / BANNED tables (source of truth; APPROVED_SENTENCES.md is generated from these) ----------------
@@ -781,6 +785,8 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False):
     """-> (fails, warns, slots) ; fails/warns = list of (id, kind, detail)."""
     if S is None: S, X = load_registry()
     text = norm(text); fails, warns, found = [], [], {}
+    for k, kind, d in master_common.check(text):   # B25 MASTER BLOCK (owner Lượt 745/766, MG1): EVERY scope, faces included -> missing / edited / doubled = FAIL
+        fails.append((k, "MASTER " + kind, d))
     for e in S:
         req = e["scope"] == "any" or (e["scope"] == "any-but-nude" and scope != "nude") or scope in parse_scope(e["scope"]); conf = scope in parse_scope(e.get("confirm", ""))   # 'any' = every prompt of every scope (D9)
         if not (req or conf): continue
@@ -945,7 +951,7 @@ def main():
     if a[0]=="--audit": audit(a[a.index("--out")+1] if "--out" in a else os.path.join(ART,"APPROVED_AUDIT.md")); return 0
     if a[0]=="--registry-md":
         open(os.path.join(ART,"APPROVED_SENTENCES.md"),"w",encoding="utf-8").write(registry_md()); print("wrote dev/art/APPROVED_SENTENCES.md"); return 0
-    pf=a[0]; prompt=open(pf,encoding="utf-8").read()
+    pf=a[0]; prompt=sys.stdin.read() if pf=="-" else open(pf,encoding="utf-8").read()   # "-" = a builder's stdout piped in (face makers, MG1)
     # BANNED REFS (owner Lượt 554/555): old khuê các set A (kc2k / kc2k-mass keys or their Magnific ids) may never be used again.
     refs=a[a.index("--refs")+1] if "--refs" in a else ""
     if "--refs" in a: i=a.index("--refs"); a=a[:i]+a[i+2:]

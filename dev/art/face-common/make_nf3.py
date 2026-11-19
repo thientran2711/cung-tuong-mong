@@ -6,6 +6,7 @@ Pieces are taken from make_c_v3.py by exec of its definitions part (up to the wr
 Run: python3 dev/art/face-common/make_nf3.py  → writes s0N.v4.FULL.txt, c05.v3b.FULL.txt, c06.v3b.FULL.txt, prints them."""
 import os,json
 D=os.path.dirname(os.path.abspath(__file__))
+import sys as _s; _s.path.insert(0, D); import face_gate as FG   # MG1 B25: master block + D9 + face gate on every output
 src=open(os.path.join(D,'make_c_v3.py')).read()
 NS={'__file__':os.path.join(D,'make_c_v3.py')}
 exec(src[:src.index("pre,post=COMMON.split('{PERSON}')")],NS)
@@ -132,5 +133,5 @@ for sid,ty,age,hair,outfit,(mn,mh),(sn,sh),pose,ak in S+S2:
     out[f"{sid}.v4c" if sid in ("s03","s04") else f"{sid}.v4"]=line(age,TYPES_C[ty]['face'],TYPES_C[ty]['expr'],hair,outfit,mn,mh,sn,sh,pose,ak)
 
 for k,v in out.items():
-    open(os.path.join(D,f'{k}.FULL.txt'),'w').write(v)
+    v=FG.final(v,k); open(os.path.join(D,f'{k}.FULL.txt'),'w').write(v)
     print(f"== {k}\n{v}\n")
