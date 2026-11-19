@@ -321,6 +321,10 @@ def cmd_solve(seed=1, iters=int(os.environ.get('P86_ITERS', 20000))):
                        pink=np.array([(oklch(m[1])[2] >= 345 or oklch(m[1])[2] <= 30) for m, s in P]),
                        warm=np.array([summer_warm(m[1], s[1]) for m, s in P]) if se == 'ha' else None)
     # ---- variables and candidate lists: vc[(k, se)] = (list of pair dicts, cost array)
+    FAMIDX = {}                                          # P2: pool pair indices by (main family, secondary family)
+    for se in SEASONS:
+        fx = FAMIDX[se] = {}
+        for j, (m, s_) in enumerate(pairs[se]): fx.setdefault((family(m[1]), family(s_[1])), []).append(j)
     vc, cur = {}, {k: {} for k in order}
     for k in order:
         rs = RS[k]; b = base[k]
@@ -332,6 +336,14 @@ def cmd_solve(seed=1, iters=int(os.environ.get('P86_ITERS', 20000))):
                     if (m[1], s_[1]) == (b['main_hex'], b['sec_hex']): continue
                     if not pair_tone_ok(m[1], s_[1]) or classify(m[1], s_[1]) != rs or not contrast_ok(m[1], s_[1], 0.0) or not season_contrast(m[1], s_[1]): continue
                     cand.append(pd(m, s_)); cost.append(25 + 100 * (dE(m[1], b['main_hex']) + dE(s_[1], b['sec_hex'])))
+            # P2: or a pool pair of her root season with both colours in the same families as her root code (bigger move)
+            fm, fs = family(b['main_hex']), family(b['sec_hex']); extra = []
+            for j in FAMIDX[rs].get((fm, fs), ()):
+                m, s_ = pairs[rs][j]
+                if not pair_tone_ok(m[1], s_[1]) or classify(m[1], s_[1]) != rs: continue
+                e = dE(m[1], b['main_hex']) + dE(s_[1], b['sec_hex'])
+                if e <= 0.16: extra.append((40 + 100 * e, pd(m, s_)))
+            for c_, p_ in sorted(extra, key=lambda x: x[0])[:400]: cand.append(p_); cost.append(c_)
         vc[(k, rs)] = (cand, np.array(cost)); cur[k][rs] = dict(b, root=True)
         for se in SEASONS:
             if se == rs: continue
@@ -353,7 +365,7 @@ def cmd_solve(seed=1, iters=int(os.environ.get('P86_ITERS', 20000))):
             for j in ok:
                 nm = (P[j][0][0], P[j][1][0])
                 if nm not in seen: seen.add(nm); keep.append(j)
-                if len(keep) >= 1100: break
+                if len(keep) >= int(os.environ.get('P86_KEEP', 2500)): break
             keep = sorted(set(keep), key=lambda j: cost[j])
             vc[(k, se)] = ([pd(*P[j]) for j in keep], cost[keep])
     VARS = [(k, se) for k in order for se in SEASONS]
