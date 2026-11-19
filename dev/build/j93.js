@@ -21,7 +21,7 @@
 */
 const KM_DIR="img/kit/";
 function kmReduced(){try{return matchMedia("(prefers-reduced-motion: reduce)").matches||(typeof OPT!=="undefined"&&OPT.fxon===false)}catch(e){return false}}
-function kmOn(){return typeof S!=="undefined"&&S&&!window.__bot&&!(typeof quiet!=="undefined"&&quiet)}
+function kmOn(){return typeof S!=="undefined"&&S&&!screenOff()}
 function kmEsc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
 
 /* ---------- queue: one big moment at a time, after blocking screens ---------- */
