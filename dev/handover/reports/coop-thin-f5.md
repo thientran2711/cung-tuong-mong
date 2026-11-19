@@ -36,3 +36,54 @@ Old guest path at L10: unreachable for these ends (one switch, TH.on(10)); delet
 
 ## 0c. Tap-to-screen time before
 L9 today: the end is local on her phone (one render). Measured as the L9 column of coop-thin-f5.js in Done.
+
+## Done — SẴN SÀNG KIỂM 6f77ed49 (review/coop-thin-f5, pushed; stacked on review/coop-thin-f4 ac66808f; F4/F3/F2 -r1 fixes and main NOT merged yet — waiting for Foreman B)
+Commits: 71d6fb0a (F5 code), 938e2e96 (tests, quiet-scan roots, generated files), 6f77ed49 (coop-cyc local-Worker flags).
+Touched vs ac66808f: dev/build/jcoopthinf.js (F5 block: reg10, ctx CX10 = CX9 + "aa" (her held score + cost) + "tds", the host `pre` step in the shared run, cardLater okHint(dr)), jcoopthin.js (CAP 9 → 10), j23.js (artLessonGain), j83.js (wkLessonEnd; wkPractice / the j83 openMG wrapper call it), jrcp.js (rcpMaster calls it; S.mg.how / qx), jts.js (tsSkipRes, tsSummonEnd, tsDenEnd, tsDenCtx), jaudit.js (aaCardTo / aaShowLast hooks: solo unchanged), jbal2.js (BAL.mgSc), coop/worker/src/index.js (THINMAX 9 → 10); dev/test/coop-thin-f5.js (new), coop-thin-trip.js (F5 bucket), coop-thin-quiet-scan.js (roots), coop-cyc.js (local URL); index.html / sw.js (build_site.sh).
+Every solo refactor = the same body moved into a named function (one-core ×4 PASS, quickcheck PASS, solo rows identical in the twin check).
+**FOR B / MAIN: the live Worker must be deployed with THINMAX 10 before level 10 can be switched on (all tests here ran on a local `wrangler dev` of this branch's Worker; levels ≤ 9 ran on the live Worker).**
+
+### Moved paths (level 10; below 10 + solo unchanged)
+| end | engine (her end → `do f`, the host runs it in her context) | L9 (before) | L10 |
+|---|---|---|---|
+| pet care games | petcGain(kind, score) | her phone | P1 max / P2 zero same as solo; P3 over-max, P4 bad kind refused |
+| shelf plant water game | shelfPlantGain(score) | her phone | G1 / G2 same as solo; G3 over-max refused |
+| Tài nghệ lessons (Tự học, Học với thầy + both pickers) | wkLessonEnd → artLessonGain + wkFinishLesson; aaPayMG on the host (pre) | her phone (cost paid there) | L1 max / L2 zero / L5 teacher same as solo, cost once, ONE result card on her phone; L3 over-max refused (no cost, no gain, lesson closed); L4 Học nhanh rolled on the host |
+| Tự học, làm tác phẩm (bậc 5) / Học lối mới | wkLessonEnd (pa) | her phone | W1 work made in ONE place; W2 quick: no work, cost once; M1 (when a new sub-style is left) |
+| Tứ đức lessons with a game | tdFinish | her phone | T1 same as solo; T2 «Để trời định» rolled on the host; T3 over-max refused |
+| the summons (đàn / cờ / du hồ) | tsSummonEnd | her phone | S1 same as solo; S2 Bỏ qua rolled on the host; S3 over-max refused |
+| the lantern | tsDenEnd | her phone | N1 same as solo |
+Quick buttons: her phone never rolls (kitQuickRoll / tsSkipRes return null while her quick tap runs); the game's own quick path runs and its rows close at once; the host rolls. Every quick row is checked with her phone forced to the OTHER outcome.
+F4 bug found and fixed (whole family): ctx "shpc" copied her plant key onto a throw-away object, so the host ran her plant care with HIS SHPC.g = nothing happened (F4's shelfPlantQuick too; its G1 checked only "ran"). Now the key itself travels.
+Quiet scan: its roots missed every reg8 / reg9 / reg10 registration (F3–F5); fixed. 41 quiet reads, 32 reachable (unchanged); no new quiet-gated emitter reached first from an F5 end (lessons' jtq14 note "art" cards: TH.tapRun runs with quiet off → her Q → part D).
+
+### Tripwire (guest writes outside fromCanon during the F5 end table, TRIP=1, local Worker)
+| | L9 (before) | L10 | L10 swap |
+|---|---|---|---|
+| F5 ends | **1501** (log S.logs, wdOf, petcGain S.pets, aaPayMG S.mg, apply S.suc …) | **0** | **0** |
+| "?" / F1 / D / D·patch | 612 / 726 / 1323 / 122 | 663 / 742 / 727 / 1793 | 653 / 732 / 620 / 1532 |
+D = her start pickers (chooseM, local by the split); D·patch = designed (the host's answers).
+
+### Latency (end tap → answer on her phone, n = 22)
+| profile | median | min–max |
+|---|---|---|
+| L9 before (local) | 2 ms | 0–214 |
+| L10 no throttle / swap | 522 / 252 ms | 220–763 / 95–549 |
+| L10 4G (LAG 85 + host CPU ×4) | **1605 ms** | 644–2783 |
+The end shows pending at once (D1: a second end ignored, one intent); lessons are the slowest rows (the host runs the cost, the gain and the work).
+
+### Tests
+| test | result |
+|---|---|
+| coop-thin-f5 L10 / swap / 4G / L9 (old road) | 28/28 / 28/28 / 27/27 / 26/26 |
+| coop-thin-f4 L9 / swap · f3 L8 · f2 L7 · f1 L6 | 17/17 / 17/17 · 37/37 · 25/25 · 22/22 (first run 21/22: laydo staging, the known flaky row; rerun green) |
+| coop-thin-a L1 / b L4 / c L4 / d L4 / e L5 | 24/24 / 136/136 / 16/16 / 47/53 (= main: 6 kit sameDom) / 33/33 |
+| coop-cyc THIN=10 (local Worker) | 66/66 (mixed part skipped: no .tmp/old.html) |
+| coop-e2e / COOP_SWAP=1 | 68/68 / 68/68 |
+| coop-one-world seeds 1–10 | 10 × PASS |
+| one-core guard / text / text-rule / bind · Worker npm test | PASS ×4 · thin ALL OK |
+| quick scan (coop-thin-quiet-scan) | see above |
+| quickcheck | PASS (old save ok; render 189/178, tab 408/296, buổi 1081/879 ms new/live; one earlier run beside a suite FAILED only on tab 417 vs 290) |
+LOOK (scratch, deleted, nothing uploaded): guest iPad 1180x820@2 after L1 and host Fold 755x1000@2: the host shows only his own screen (no card / game of hers); her screen is covered by the test's staged rank edict (staging, as F4).
+Laws: 3 cost paid once on the host or not at all (refused end); 4 every range from BAL.mgSc, no typed number; 5 the same game and parameters on her phone; 6c the work made in ONE place (W1 / L1: her bag on both phones, none on the host); 7/9–12 no new word, no UI part changed.
+Known limits: the deferred cost amount and her start choices come from her phone (the start = pickers on her phone, by the F4 split); a refused end clears her lesson (no cost, no gain). Not F5 (step 0 rows 11–15): contests, exam, entry, Thử tay, slap, nghiệm thân, kc / steal / veil / make-up games = F6 / D / B.
