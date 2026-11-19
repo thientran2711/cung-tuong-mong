@@ -110,3 +110,8 @@ How the redraw avoids it:
   - (c) a36 keeps the 18/11 "all colours MUTED and deep" rule (not B18 soft).
   - (d) No K3 "transparent background" sentence (the base has parchment; B9 = parchment + remove_bg).
   - (e) The 18/11 angle words "body turned slightly three-quarters to the left" were replaced by her per-person HH ANGLE sentence.
+- **Update (ROOT-53 owner order):** only faces of the SẮC SẢO group (m05 m11 m17 m23 m29 m35 m41 m47) and the TINH NGHỊCH group (m06 m12 m18 m24 m30 m36 m42 m48) may be used (LOOK_GROUPS.md). m13 is Tươi tắn, so it is stopped.
+  - The v624 sample person is now **m05** (coral red #D4897D + teal #499597 + yellow #EFBD69). Items: a36 sandalwood folding fan, a51 jade-headed dragon staff, a65 gilded bronze hand censer.
+  - The m13 v624 files are removed and DIFF_vs_1811_c04.md is regenerated for m05.
+  - Gate PASS 48/48 (all 16 allowed people × a36/a51/a65).
+  - The builder does NOT block the other groups; ask if a guard is wanted.
