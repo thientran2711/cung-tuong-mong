@@ -83,11 +83,10 @@ function alLight(p,k){try{const L=BAL.allot.light;if(!alOn()||!p||!L.acts.includ
  if(p===S)apply(fx);else ap(p,fx);return {e,fx}}catch(x){console.error("al light",x);return 0}}
 /* her deck: the two study cards of j2 carry cx:"arts"/"book"; the card says what a candle adds (text = effect) */
 (function(){if(typeof runOpt!=="function")return;const r0=runOpt;runOpt=function(a){const r=r0.apply(this,arguments);try{if(r===true&&a&&a.cx&&p0ok()){const R=alLight(S,a.cx);
-  if(R)log(`Ngươi thắp ${IT[R.e.k].n} học đến khuya: ${Object.keys(R.fx).map(s=>`${STAT_NM[s]||s} +${R.fx[s]}`).join(", ")} thêm.`)}}catch(e){console.error("al runOpt",e)}return r}})();
+  if(R)log(`Ngươi thắp ${IT[R.e.k].n} học đến khuya: ${Object.keys(R.fx).map(s=>`${NAMES[s]||s} +${R.fx[s]}`).join(", ")} thêm.`)}}catch(e){console.error("al runOpt",e)}return r}})();
 function p0ok(){return !!(S&&!S.dead&&!(typeof isSrv==="function"&&isSrv()))}
-const STAT_NM={tai:"Tài",tamco:"Tâm cơ",sac:"Sắc",duc:"Đức",danh:"Danh",suc:"Sức"};
-function alLightNote(k){const L=BAL.allot.light;if(!alOn()||!L.acts.includes(k))return"";const D=BAL.ag.cx[k];const s=Object.keys(D.w).filter(x=>x!=="maid"&&D.w[x]>0).map(x=>`${STAT_NM[x]||x} +${L.add}`).join(", ");
- return `kèm: buổi tối có nến thì thắp học khuya, ${s} thêm, cháy một cây nến`}
+function alLightNote(k){const L=BAL.allot.light;if(!alOn()||!L.acts.includes(k))return"";const D=BAL.ag.cx[k];const s=Object.keys(D.w).filter(x=>x!=="maid"&&D.w[x]>0).map(x=>`${NAMES[x]||x} +${L.add}`).join(", ");
+ return `buổi tối có nến thì thắp học khuya: ${s} thêm · kèm: cháy một cây nến`}/* " · kèm: " = the card's red Kèm row (j19 cardH): the candle is the cost */
 /* ---------- 3. the servants' lệ tháng ---------- */
 function alSrvList(rk,lau){const B=BAL.allot.srv;if(lau)return B.lau.map(x=>x.slice());const L=B.goods[Math.max(0,Math.min(B.goods.length-1,rk|0))].map(x=>x.slice());
  /* seasonal clothing (四季衣裳): cloth only in the months of a new season; coarse coal in winter */
