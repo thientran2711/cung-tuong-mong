@@ -26,6 +26,7 @@ A cell is GREEN only if every person passes every check except A0.  Usage:
 Update the CMD templates below when a builder gains a mode (ty / cold / maid uniform / men / kids ...).
 """
 import os, re, sys, subprocess, collections, concurrent.futures as cf
+sys.dont_write_bytecode = True; os.environ["PYTHONDONTWRITEBYTECODE"] = "1"  # never touch the tracked __pycache__
 HERE = os.path.dirname(os.path.abspath(__file__))
 B = os.path.join(HERE, "t8-prompt-B", "build.py")
 E = os.path.join(HERE, "emperor-B", "build.py")
