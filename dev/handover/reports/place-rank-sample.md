@@ -276,3 +276,18 @@ Method: prompts.py v9 block → prompts_v9.json: ONE common block (C9_STYLE soft
 | HH bedroom A 2-wall | SyhDl6BUb8 | rgXnolAxtc | wide, red bedding; a sliver of left wall (≈2.5 walls); right chairs reach bottom-right edge |
 | HH bedroom B 3-wall | cpS5YIl0eP | s7I0dD0l8e | red + yellow; layout almost a copy of the HQP bedroom (L11) because image 3 = HQP bedroom |
 Files: img/_review/place-rank/v9/<room>-ha-sang.webp + people-ipad-tags-<room>.jpg (CDN). Sheet (ipad_tags.py, labelled "iPad ngang – dư đồ (toàn màn hình)"): dev/handover/review-sheets/place-rank/place-rank-v9-ipad-tags.jpg · CDN https://ctm-img.victoria-tntt.workers.dev/img/_review/place-rank/place-rank-v9-ipad-tags.jpg ; singles v9-ipad-tags-<room>.jpg. Live game files NOT replaced (samples only).
+
+## PR9 — v10 (owner Lượt 622 via ROOT-52/53; L14 every room 2 versions, L19 layout variety) — 11 gens = 1,485 cr (8 + 3 redos)
+KEPT by owner: Phi bedroom v9 4RFIyNR9Aa (2-wall model), HH bedroom B v9 cpS5YIl0eP (3-wall model). Mirrors for "window LEFT" uploaded as refs: 1ldYySkr4r (HH B mirrored), 8aiwqQTIrU (Phi v9 mirrored) — files img/_review/place-rank/v10ref/.
+A17 DIFF vs last approved/v9 prompts (prompts.py v10/v10b → prompts_v10.json, prompts_v10b.json): common block unchanged; (1) Phi 3w = v9 Phi words, only "keep arrangement of image 3" → THREE-walls sentence + image-3-as-guide sentence, image 3 aFGy→cpS5; (2) HH bed 2w = v9 A words + FLOOR AMOUNT sentence, image 3 rgXn→4RFI (redo b: stronger FLOOR sentence "camera closer, bed step ~4/5 H"); (3) HH reception = v9 words + FLOOR AMOUNT; 2w variant: walls = back + LEFT, rows = left wall + column line; image 3 = cpS5 / 4RFI (redo b both: "camera closer, platform step ~4/5 H, rows to ~7/8"); (4) HQP bedroom = NEW room line (window LEFT, canopy bed in the right half, vase doorway middle, dressing left) + soft honey orange "lighter than #E3A25B, like #EDB57A" (HQPC10), image 3 = mirrors; (5) HQP reception = its own v6 room line, colours → soft honey orange, 2w image 3 = itself rgXnolAxtc, 3w = THREE-walls + cpS5 guide.
+| room | gen (kept for sheet) | notes (ours) |
+|---|---|---|
+| Phi bedroom 3w | UPve2vXwny | 3 walls, moon gate left wall; right chair near bottom-right edge |
+| HH bedroom 2w | bxMA4dt5Y2 (r1 WDg5tUgcXe rejected: more floor) | bed closer, base ~75 % H, floor clearly less than v9 A |
+| HH reception 3w | bxMA4ov5Y2 (r1 3zKfpXnREY: floor unchanged) | platform closer, chair rows to ~95 % H |
+| HH reception 2w | 1ldYiaVr4r (r1 eIPsQKidqL: aisle ~30 %) | only a little less floor (aisle ~25 %) |
+| HQP bedroom 3w | 9ZHmVqFNYZ | window left + soft orange, BUT layout = mirror of HH bedroom B (centred babu bed) |
+| HQP bedroom 2w | Xm9gqieBfo | new layout as asked, soft peach-honey orange |
+| HQP reception 3w | O6EoWbJynm | own layout with 3 walls; floor ~25 % |
+| HQP reception 2w | KLpzPh6kqp | own layout recoloured; arch frame smaller; floor ~25 % |
+Sheet: dev/handover/review-sheets/place-rank/place-rank-v10-ipad-tags.jpg (CDN img/_review/place-rank/place-rank-v10-ipad-tags.jpg); singles v10-ipad-tags-<room>.jpg; bare img/_review/place-rank/v10/. Live game files untouched.
