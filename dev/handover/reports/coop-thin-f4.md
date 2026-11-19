@@ -37,3 +37,58 @@ Old guest path for the moved rows: unreachable at L9 (one switch); deleted for g
 
 ## 0c. Tap-to-screen time before
 Today (L8) every row above is local on her phone (one render, F3 measured 93–249 ms, median 150 ms); measured again as the L8 column of coop-thin-f4.js in Done.
+
+## Done — SẴN SÀNG KIỂM b4f2031c (review/coop-thin-f4, pushed; stacked on review/coop-thin-f3 f659cf7b; F2-r2 / F3-r1 / main NOT merged yet — waiting for Foreman B)
+Touched vs f659cf7b: dev/build/jcoopthinf.js (F4 block: reg9, kinds "el" / "pm", ctx CX9 = CX8 + PETC / SHPC.g / TDV, UI capture of her screens; kitShopBuy pet only at level 9), jcoopthin.js (CAP 8 → 9), jpetcare.js (petcGrowCard, petcMaid, petcQuick), jshelf.js (shelfPlantDraw, shelfPlantQuick), jrcp.js (rcpAskGo) — every solo refactor = the same body moved into a named function; dev/test/coop-thin-f4.js (new), coop-thin-trip.js (F4 bucket); index.html / sw.js / assets.json (build_site.sh).
+
+### Moved paths (level 9; below 9 + solo unchanged)
+| area | engine (her tap → `do f`, the host runs it in her context) | L8 (before) | L9 |
+|---|---|---|---|
+| pets | petDo follow / free (wrapR card on her phone: snap soft + noRes) | her phone | P1 / P2 green, same as solo (twin) |
+| pets | kitShopBuy key 'pet' (pet shop, petBuyOne odds + roll on the host) | her phone | P3 green (bạc −price, a pet or the sick-pet line) |
+| pets | petcMaid, petcQuick (the "Để trời định" roll) | her phone (inline in click handlers) | P4 green (twin) / P5 green |
+| garden | shelfPlantQuick (her shelf plant "Để trời định") | her phone | G1 green |
+| kitchen | rcpAskGo (Hỏi thái y / Sai cung nữ dò la: the card choice) | her phone (option closure) | K1 green (twin) / K2 green |
+| study | rcpRead (sách phổ) | her phone | R1 green (twin) |
+| study | tdsRun prac (Tứ đức Tự học bậc 5, no game) | her phone | T1 green: the work in her bag on both phones (one place) |
+Her screens on the host (wrapper gap proven by P5 / G1): petcDraw / petcClose (→ closeModal = the host's own card queue) / shelfPlantDraw / petcGrowCard (a 60 ms timer → "đã lớn" card on the HOST) do not run in her context there; captured (TH.uiCap) and replayed on her phone with the answer (P5 / G1: her screen open on her phone, none on the host).
+Level leak fixed: F3's kitShopBuy took any KSH key; the pet key is level 9 only (L8 run: P3 local again).
+F5 (not moved): petcGain / shelfPlantGain (care-game scores), the art lesson / cooking / practice / Học lối mới / Tứ đức games (playArt / kg82 → addArt + wkFinishLesson / tdFinish, cost deferred by jaudit aaPayMG). F6: deck act(i) cards (Đọc sách, Chép kinh, Trồng rau), j72 quest steps.
+
+### Quiet-gated emitters reached by F4 acts (fix = review/coop-thin-f2-r2, not rebuilt here)
+| emitter | reached from | silenced at L9 today |
+|---|---|---|
+| jtq14 introCard / doneCard (jtq14.js:117, :128) via note("buy") on the kit shop onBuy (jtq14.js:156) | kitShopBuy pet | yes |
+| jtq14 note("art") via addArt / addVir (jtq14.js:163-164) | not reached by F4 acts (lessons with a game = F5) | — |
+| jpetcare petcGrow quiet flag (own argument) | petcQuick → petcGain | no (and the card itself is captured → her phone) |
+
+### Tripwire (guest writes outside fromCanon during the F4 act table, TRIP=1)
+| | L8 (before) | L9 (after) | L9 swap |
+|---|---|---|---|
+| F4 entry (engines above) | **197–243** (wdOf __wdmig, log, petcInit S.pets, mkSync, petBonus, shelfPlantGain S.shelf …) | **0** | **0** |
+| "?" / F1 / D·patch | 199–207 / 212–216 / 54–78 | 291–301 / 292–302 / 303–330 | 291 / 292 / 303 |
+"?" and F1 rise with the number of renders (each answer = one render): their top writers are the render writers mkSync S.mk / S.mood, wdOf, leAttire (F6 / G items, same picture as F3); D·patch = designed.
+
+### Latency (tap → answer on her phone, live Worker, n = 10)
+| profile | median | min–max |
+|---|---|---|
+| L8 before: the tap itself (local) | 159–168 ms | 76–369 |
+| L9 no throttle, guest iPad / swap guest Fold | 731 / 419 ms | 441–1142 / 355–642 |
+| L9 4G (LAG 85 + host CPU ×4) | **1206 ms** | 1106–4656 |
+Pending shows at once (D1: second tap ignored, one intent).
+
+### Tests (live Worker)
+| test | result |
+|---|---|
+| coop-thin-f4 L9 / swap / 4G / L8 (old road) | 18/18 / 18/18 / 17/17 / 16/16 |
+| coop-thin-f3 L9 · f2 L9 · f1 L9 | 36/36 · 19/19 · 22/22 |
+| coop-thin-a L1 / b L4 / c L4 / d L4 / e L5 | 24/24 / 136/136 / 17/17 / 46/52 (= main: 6 kit sameDom) / 33/33 |
+| coop-cyc THIN=9 | 66/66 (mixed-build part skipped: no .tmp/old.html) |
+| coop-e2e / COOP_SWAP=1 | 63/63 / 63/63 |
+| coop-one-world seeds 1–10 | 10 × PASS |
+| one-core guard / text / text-rule / bind | PASS ×4 |
+| quickcheck fc424b08 | PASS (old save ok; render 243/255, tab 481/488, buổi 1406/1126 ms new/live; core gates PASS) |
+Not run this round: coop-night / timer / p2 / b1 / e-net (F4 touches no night / timer / pairing code; reviewer may run).
+LOOK (scratch, deleted, nothing uploaded): guest iPad 1180x820@2 her care screen after P5 (kit frame, "Vừa rồi No +20…" row redrawn from the host's answer) and her plant screen after G1; host Fold 755x1000@2 shows only his own screen (no care / plant panel of hers). The test's rank edict sits over the care card (staging, as F3). The plant card sub-title shows the test's slot key "f4p" (staging).
+Laws: 4 no new number (one-core PASS) · 6c the work made in ONE place (T1), pets counted both phones · 7/9–12 no new word, no UI part changed · 1 n/a (no act between the two in F4).
+FOR B: (1) merge F2-r2 / F3-r1 / main when you say, then rerun f4 L9 + swap; (2) mini-game score ends + cost deferral (aaPayMG) = F5; deck act(i) + j72 quests = F6.
