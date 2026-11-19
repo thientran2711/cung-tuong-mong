@@ -64,7 +64,7 @@ D5 | Eyes fully open and bright; never hooded, half-lidded, sleepy, narrow or sl
 D6 | EYE LAW: both eyes symmetrical, both irises look the same way. HEAD LAW: head held up, chin level or slightly raised. | Lượt 310 | FG 837
 D7 | HEAD-BODY LAW: the head turns WITH the body (no frontal head on a 3/4 body). | Lượt 326 | FG 864
 D8 | Faces never show personality; every face belongs to ONE LOOK GROUP LOOKS[(n-1)%6]: Tươi tắn, Dịu dàng, Trong trẻo, Đoan trang, Sắc sảo, Tinh nghịch (catalogue dev/art/face-common/LOOK_GROUPS.md). | Lượt 292, 293, 299 | FG 782, 786, 799 | over: Lượt 289 expression = personality
-D9 | Clean bare forehead: no hoa điền on any figure (item only); no moles. | 18/11 23:25Z; OD:L10 | FG 134, 165
+D9 | Clean bare forehead: every prompt says clearly NOTHING on the forehead (no hoa điền, no dot, no mark, nothing); no moles. Already-drawn pictures with a dot: leave them, no retouch, no credits. | Lượt 529 (owner via ROOT-49 chat Lượt 521) (19/11) | FG - | over: 18/11 23:25Z; OD:L10
 D10 | Nothing ever covers any part of the face (held item below the chin). | 18/11 16:25Z | FG 137
 D11 | STYLE: semi-realistic painterly guofeng, near-3D, soft light, fair un-rosied skin (choice B); everyone beautiful at every age; never tanned, sly, glare, smirk, pout, hand at mouth, caricature. | 11/14; OD:L1305 | FG 145-152, 173
 D12 | a36 = young for her age (no lines); a51 = visibly older but beautiful, soft fine lines, clear silver-grey streaks at temples, never white hair, never haggard. | 18/11 16:30Z, 21:35Z, 22:58Z | FG 201, 217, 236
@@ -73,12 +73,13 @@ D12 | a36 = young for her age (no lines); a51 = visibly older but beautiful, sof
 E1 | ANGLE: 14 angles (7 + 7 mirrored); angle AND pose are a SEEDED RANDOM draw per (person, rank): 8 distinct values inside one person; across people the same rank must not share one angle (roughly even counts); never "rank X = angle Y for everyone". | Lượt 469, 476 | FG 28 | over: Lượt 229, 289, 295, 308, 321, 3d2 frontal-only (FG 138)
 E2 | Never more turned than three-quarter (≥3/4 of the body visible); no profile/near-profile, no look-back over the shoulder, no back-turned body. | Lượt 297; 18/11 21:55Z | FG 794, 136
 E3 | POSE = the spec5 POSES table (dev/figwork/spec5.py) wording; the legs/feet are written INSIDE each pose, matched to it (no generic leg sentence); never one stiff identical stance, never "feet together/standing straight" forced. | Lượt 258, 259, 302 | FG 656, 662, 808, 144
-E4 | CALM WITH RANK AND AGE: the random angle/pose draw (E1) comes from a LIVELY pool for t1–t5 and a CALM, dignified pool for t6–t8; Thái hậu, Nữ đế, a51/a65 also calm (small restrained gestures, never wide arms/legs, dancing, twirling); maids may be lively. | Lượt 486 (19/11) | FG 26, 40, 200 | over: 18/11 22:20Z, 23:25Z
+E4 | POSES: pool = the 36 old poses + the 30 new = 66 standing poses — walking/stepping-leg poses are ALLOWED and stay in the pool (owner correction: 'vẫn dùng cái chân bước đi, chứ không nói là không dùng'). t4 Tần and up: ANY of the 66 + the rank's restraint ending at the end of the sentence. t1–t3: ONLY the lively/airy poses + a LIVELY ending (Thường tại must read lively, not calm). Alt framing she gave: low 3 lively / middle 3 / top 2 calm endings. Sample before mass. Already-drawn near-frontal poses: accepted, no redraw. | Lượt 534 (owner correction via ROOT-49 chat Lượt 530) (19/11) | FG - | over: Lượt 529 (owner via ROOT-49 chat Lượt 521) (19/11); Lượt 486 (19/11); 18/11 22:20Z, 23:25Z
 E5 | HELD ITEM: exactly ONE item, the hand really grips/uses it, below the chin, contrasting colour (B16), never a cup/teacup/teapot/bowl, real object. | 18/11; W102c | FG 135, 261
 E6 | The 8 ranks of a person = 8 DIFFERENT items rising in luxury; no pose or item kind repeated within one person. | Lượt 434, 266 | FG 20, 670
-E7 | Item comes from the rank list (3f, 10 per rank t1–t8) × age cell; each age of a person holds a different item; items of t6/t7/t8 are reserved to that rank. | 18/11 16:50Z, 17:15Z; 19/11 00:45Z | FG 140-142
+E7 | Item comes from the rank list (3f, 10 per rank t1–t8) × age cell; inside ONE person the ages NEVER repeat an item (a26 → a36 not the same item); items of t6/t7/t8 are reserved to that rank. Already-drawn people: LEAVE them, no redraw (credits). | Lượt 529 (owner via ROOT-49 chat Lượt 521) (19/11) | FG - | over: 18/11 16:50Z, 17:15Z; 19/11 00:45Z
 E8 | Non-consort statuses use their own 10-item lists (nhà nghèo, khuê các, Thái hậu, Nữ đế, princesses); never an item above her status. | 18/11 22:05Z | FG 260-268
 E9 | Men need their own pose table + item table (age × rank), owner approval before use. | Lượt 170 | FG 529
+E10 | Same-rank poses across people + the new-character style sentence ('hình mẫu nào lấy prompt như thế nào cứ y nguyên'): KEEP as is until the owner says otherwise. | Lượt 529 (owner via ROOT-49 chat Lượt 521) (19/11) | FG -
 
 ## F. Hair, hairpins, crowns per rank
 F1 | HAIR LAW: thiếu nữ + princesses before the palace = loose or half-up; t1–t3 = loose/flowing (half-up with most hair down OK); t4 Tần–t8 HH = hair UP in a bun/chignon, nothing loose down the back; cung nữ = always a bun. | Lượt 337, 331, 273 | FG 876, 870, 702 | over: 18/11 "hair same at every rank" (FG 248), Lượt 268
@@ -90,6 +91,7 @@ F6 | t6 Quý phi, t7 HQP, t8 HH headdresses clearly different from each other; t
 F7 | Nữ đế crown = phoenix-and-dragon crown, design differs per person; front bead tassels (lưu) reach the forehead only, never the eyes; no flowers on crown or pins. | Lượt 397; 18/11 04:00Z, 23:33Z | FG 9, 193-194, 255
 F8 | Maids: each maid keeps her own hairstyle at every rank; rank variety comes from the hairpins (each maid rank its own set, all with flower pins). | 19/11 01:55Z, 02:05Z | FG 536, 541
 F9 | Cao Ly: the binyeo goes HORIZONTALLY through the low bun. | Lượt 277 | FG 733
+F10 | Nữ đế crowns: OK as they are (incl. only 6 designs) — no change. Everything Nữ đế OK. | Lượt 529 (owner via ROOT-49 chat Lượt 521) (19/11) | FG -
 
 ## G. Thường phục (everyday rank robes)
 G1 | Rank DESIGNS (after the shifts): t4 Tần = the approved short round shoulder CAPELET with CURVED cut (Phù Tang test EbYOArVuuO), front opens gradually, curve shape varies per person; t5 Phi = the old Quý phi design; t6 Quý phi = the "thêu nhiều" design with cloud collar + TWO layered shoulder capes (Phi has one); t7 HQP = the old/store prompt with jewelled cloud-collar cape; t8 = store. | Lượt 412, 397, 253, 254, 306, 321, 329, 344 | FG 17, 13, 636, 640, 818, 855, 867, 885 | over: Lượt 257, 259 Tần collar A, 19/11 01:20Z Tần⇄Phi swap
@@ -105,6 +107,8 @@ G10 | Rank richness: high rank = rich and luxurious (layers, borders, stitched e
 G11 | No round chest badge/second "fan" stuck on the chest. | Lượt 306 | FG 818
 G12 | HQP/HH: all hair up, prompt-B brocade fabric, sleeves per G5; HQP t7 = more jewels/pearls/jade/gold than t6, still below HH; two HH colour sets: yellow set (t8) + original-colour set (t8o: her own main colour dominant, royal-yellow touches). | Lượt 486 (19/11) | FG 26, 870, 909, 636, 804 | over: Lượt 331, 364, 253, 301
 G13 | Colours across a person's ranks: her own MAIN + SECONDARY pair (rule B15) — see conflicts for "each rank its own colour". | Lượt 293, 306 | FG 786, 818
+G14 | t7 HQP and t8 HH MUST show the SECONDARY colour too (two-colour sentence B15 present in t7/t8 prompts; Lượt 512/519 secondary disappeared). | Lượt 529 (owner via ROOT-49 chat Lượt 521) (19/11) | FG -
+G15 | QUÝ NHÂN t3 REDESIGN: Quý nhân and Thường tại look too alike → 4 DIFFERENT Quý nhân outfit options side by side (A3), owner picks and rewrites the Quý nhân prompt. | Lượt 529 (owner via ROOT-49 chat Lượt 521) (19/11) | FG -
 
 ## H. Triều phục (court robes)
 H1 | t7 HQP and t8 HH triều phục = approved r18, unchanged; t6 Quý phi yellow as in r20 approved (do not reduce). | Lượt 459, 467, 470 | FG 22-23
@@ -130,7 +134,7 @@ J2 | a51 and a65 (everyone, every rank, maids too): elegant calm elder colours =
 J3 | a51/a65 dress reads dignified through the costume; pose calm but still interacting with the item. | 18/11 04:05Z, 15:55Z | FG 178, 200
 J4 | Trung y / lãnh cung a51/a65: deeper clause but hue stays inside that rank's pale trung-y colour family. | 19/11 01:30Z | FG 138
 J5 | a65 Emperor = consort a65 age text adapted: silver hair + silver beard, still majestic; young Emperor (a18/a26) clean-shaven. | Lượt 170; 18/11 23:15Z | FG 529, 240
-J6 | AGE TEXT a51/a65 for EVERYONE at every rank/costume = the Nữ đế a51/a65 age wording that reads young and beautiful (owner Lượt 520: copy those two age prompts to all). | Lượt 520 (19/11) | FG -
+J6 | AGE TEXT for EVERYONE in the palace (all groups, men AND women, every rank/costume) = the Nữ đế age wording of ALL FIVE ages (a18 a26 a36 a51 a65) copied verbatim. | Lượt 529 (owner via ROOT-49 chat Lượt 521) (19/11) | FG - | over: Lượt 520 (19/11)
 
 ## K. Ma ma, cung nữ, Thái hậu, Nữ đế, princesses, men, thiếu nữ
 K1 | MA MA: outfit = the Ma ma NPC (brown live a36/a51) outfit, approved; front short tà = TWO tà; hair flowers vary per person (kind + colour); colours = her own base colour (m01 sage green) deeper at a51/a65 (brown versions = skins). | Lượt 229, 397 | FG 592, 11 | over: 19/11 01:40Z NPC brown colours (FG 526)
@@ -147,7 +151,7 @@ K11 | MEN never wear pink or purple; colours deep blue, navy, teal, green, black
 K12 | THIẾU NỮ = two states only: khuê các (noble) and nhà nghèo (poor: neat, pretty, never ragged, some embroidery); existing liked images re-made as 2K transparent, new drawings only for people missing. | 18/11 21:00Z, 22:05Z | FG 191, 251
 K13 | TRUNG Y: 8 tiers in pale rank colours (Đáp ứng ivory … HH pale yellow); trung y / lãnh cung figures hold an item and use spec5 poses. | OD:L392; 19/11 01:10Z | FG 122, 138
 K14 | Everyone in the palace is richly dressed (maids in embroidered silk with hairpins); nobody looks poor. | 11/14 | FG 153
-K15 | HAIR FLOWERS only for consorts (phi tần): cung nữ, ma ma, nữ quan wear NO hair flowers (Lượt 520). | Lượt 520 (19/11) | FG -
+K15 | HAIR FLOWERS only for consorts (phi tần): cung nữ, ma ma, nữ quan wear NO hair flowers (Lượt 520). NOTE (MMX3, ROOT-50 ruling A): removing the flower words is not enough (gen copies the face ref's flower), so ma ma `build.py --noflower` also adds "NO flowers in the hair (no fresh or silk flowers), only her hairpins."; gate check_store X14 (scope mama) bans hair-flower wording. | Lượt 520 (19/11) | FG -
 
 ## L. Places / rooms
 L1 | Rooms follow the occupant's rank (bed + room); accent colour = rank colour; luxury rises with rank, never reaching Khôn Ninh; low ranks pretty/carved, never poor; each consort quarters = reception room + bedroom. | Lượt 446, 437, 442 | FG 24
