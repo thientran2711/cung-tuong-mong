@@ -536,3 +536,4 @@ SEATS 10:18Z (B ROOT-5): running 6 / cap 12 (REVIEW F5 45gZxR8H; hostnull #2 2tX
 10:35Z (B ROOT-5): F6b worker #1 4XtuMraU ROLLOVER (a4d77f3c: L12 code + test, f6b 27/29 — E1/E2 test staging only; f5 L10 27/27; one-core ×4) → ARCHIVED. #2 = session_01N1tNP3uQwFDZBPxqqP6ZN8 (opus; Hội phối đồ finish, prove E1/E2 = staging, all gates, merge F6a when SSK).
 - (19/11 10:40Z) FROM MAIN ROOT-68: LIVE main = 6b1ab390 (kit-head-say: K-HEAD-SAY speech bubbles kit part, font floor 10.5). ROLLBACK d9b32074. Final-merge 6b1ab390 before any LAND READY.
 - (19/11 10:46Z) FROM MAIN: main is now ROOT-69 session_01Rc5AsMesCGqrqL1dGjCJXv (depth 7). Send every report / SẴN SÀNG / LAND READY to ROOT-69. LIVE 6b1ab390, ROLLBACK d9b32074.
+- (19/11 10:52Z) FROM MAIN ROOT-69: LIVE main = 2481c80d (ev-pic-followups: EVENTS.json wildcard keys, kszOver3 scroll owner). ROLLBACK 6b1ab390. Final-merge 2481c80d before any LAND READY.
