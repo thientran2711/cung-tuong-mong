@@ -133,7 +133,7 @@ Object.assign(BAL.road.fx,{
   c1:[bdS({danh:-1},{sung:2,duc:1}),bdS({tamco:-1},{duc:3}),bdS({duc:-2},{tamco:2,danh:1})],
   c2:[bdG(bdS({danh:-1},{duc:3}),[3]),bdG(bdS({duc:-2},{bac:120}),[3]),bdS({tamco:-1},{sung:2})],
   t1:[bdS({sung:-1},{danh:3}),bdS({tamco:-1},{sung:2,duc:1}),bdR("sung",{tamco:3,danh:2},{sung:-4},{suc:-1})],
-  x1:[bdX(35,"sung","heir"),bdX(45,"duc","peace",{suc:-2}),bdX(50,"tamco","self",{duc:-3})],
+  x1:[bdX(45,"sung","heir"),bdX(45,"duc","peace",{suc:-2}),bdX(50,"tamco","self",{duc:-3})],
   E:Object.assign(bdE({danh:10,sung:5},{danh:-6,sung:-4}),{lose:{fx:{danh:-6,sung:-4},k:-1,g:[-4]}})}});
 Object.assign(BAL.road.rare,{bd_soi_11:{p:.12,np:2,sc:2,c:{suc:-4},fx:{danh:14,duc:6},bar:45,g:[10]}});
 
