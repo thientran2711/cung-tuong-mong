@@ -28,3 +28,18 @@ Task complete; nothing is in flight. Next steps belong to the foreman:
 1. Send the sheet to the owner.
 2. Add each new owner approval as a new entry. Copy it from the approved prompt by script, then run `--self`.
 3. After the owner rules on the WARN scopes, move them from `confirm:` to `scope:`.
+
+## UPDATE Lượt 504/505 (ROOT-49 orders)
+- **ONE gate:** `dev/art/check_approved.py` is DELETED. Everything is folded into `dev/art/check_store.py`:
+  - The original store logic is unchanged.
+  - The APPROVED (33) and BANNED (13) tables now live in that file and are the single source of truth.
+  - Ten of the sentences are marked `store: yes`. They are already demanded by the store part when a prompt is checked with store args, and are only re-checked in `--scope` mode.
+  - `APPROVED_SENTENCES.md` is GENERATED from those tables (`--registry-md`).
+  - Commands: `python3 dev/art/check_store.py <prompt> <store args>` · `… <prompt> --scope tpN|prN|trieuN|mama|nude [--age aNN]` · `--self` · `--audit` · `--registry-md`.
+- **LAW #0:** two items were our own interpretation, not the owner's words, so they are removed from the gate: ban X04 (neutral/metal secondary) and the "downcast eyes" part of X07. m39's "downcast eyes" is now a NOTE for the owner ("có muốn sửa không?").
+- **Rule renumbered:** ROOT-49's LAW #0 line took ID A18, so my rule is now **A19**, reworded to point at check_store.py. rule.py still flags A19 as similar to B3 (the store gate); the foreman may merge them.
+- **Audit now:** 3,990 prompts, 3,621 PASS, 369 FAIL.
+  - Ma ma: 341 FAIL, S01 missing. One new current one-ref file PASSES, apparently MMX1c's two-colour sample.
+  - m12: 25 FAIL, yellow at t1–t5.
+  - Triều phục: 3 FAIL.
+  - Sheets regenerated.

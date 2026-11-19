@@ -5,7 +5,7 @@ Usage: python3 dev/art/approved/make_sheet.py [LUOT]   -> dev/handover/review-sh
 import os, re, sys, textwrap
 from PIL import Image, ImageDraw, ImageFont
 H = os.path.dirname(os.path.abspath(__file__)); ROOT = os.path.dirname(os.path.dirname(os.path.dirname(H)))
-sys.path.insert(0, os.path.dirname(H)); import check_approved as CA  # noqa: E402
+sys.path.insert(0, os.path.dirname(H)); import check_store as CA  # noqa: E402  (APPROVED/BANNED tables live in check_store.py)
 OUT = os.path.join(ROOT, "dev/handover/review-sheets/approved"); TH = os.path.join(H, "thumbs")
 LUOT = sys.argv[1] if len(sys.argv) > 1 else "500"
 F = lambda n, b=False: ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans%s.ttf" % ("-Bold" if b else ""), n)
