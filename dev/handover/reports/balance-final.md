@@ -194,3 +194,38 @@ Successor steps:
 3. SẴN SÀNG KIỂM <sha> in FOREMAN_D_STATUS + here + send_message Foreman D, with the arms table (§ FINAL ARMS, unchanged: no numbers touched in #3/#4) and the OWNER FLAGS: QP −7 pooled (87 vs 80 %); ended before HH/cap 19 vs 25 %; kids/y 1.45× live; seat vacancy blocks promotions; NPC Sủng lower (m12 38 vs 46).
 Game-code changes in #4: jnf (bot mode: no scene wait), j78/jaudit (cấm-túc months read punishMonths(), same values). Laws: no number, choice, cost or trial changed.
 Worktrees (lost with this box): /home/user/wt/bf4 = 655bbdfd, /home/user/wt/live4 = 950508fc. Repeat harness: dev/handover/reports/balance-final-tools/nf_repeat_gen.py.
+
+## BALANCE-FINAL #5 (session_01964izE9WXNLGEJBpoxtTut, opus, from 19/11 ~09:16Z)
+START_CTX ≈ 3 % of 1M (get_session reads 0, estimate) → rollover 28 %, ceiling 60 %. Depth 7.
+PRIORITY #1 CHECK ('balance final' / 'role parity'): OD 0 | ledger 0 | claims 0 (this job) | main dev/tools/role-parity-scan.js + dev/test/role-parity.test.js (role-parity r3 / role-parity-drift r1) | review/balance-final = this branch.
+- 09:40Z: merged origin/main 62055a31 (law3-cost-only r1) → 755211d8. One conflict, j8 PEND.ksp: main's gain wording («thành: được thị tẩm, gần Hoàng thượng đêm nay») + the branch's BAL.rk.maidRise (main typed chanceW(30) = the same 30, one core). BAL.rk.loanBack = 40 (matches the choice-value lander note).
+
+### Role-parity: the 5 branch-only cells — cause PROVEN, a scan artifact (no game rule is one-sided)
+Reproduced on 755211d8 vs live 62055a31 with the unchanged scan: branch-only `hh:N-ONLY:cx3:invite2`, `maid:P-ONLY:maid:askRew`, `up:N-ONLY:harm:blockf`, `up:N-ONLY:harm:xinhh`, `up:PROMO-npc-onlyRisen:harm:taint` (live-only `maid:P-ONLY:maid:errand`, `up:P-ONLY:cx2:maidTalk`). Each act is ONE function for both sides (fn SAME); the difference is the sampled world:
+| cell | gate (same function both sides) | what the probe showed (seeded, both builds) |
+|---|---|---|
+| hh cx3:invite2 (her «Mời đến cung ta») | j21 inviteBtn: disabled when aff(v,her) < BAL.invite.hate (−30) | by the Hoàng hậu probe EVERY consort's feeling toward her was −60…−100 («nàng ghét ngươi, sẽ không đến») on the branch: the scan's «social» (+40) and «disfavour» (−60) worlds changed relations (S.rl / v.rel / v.rl / oan / ro) and snapW/restoreW never restored them, so they STACKED over 8 roles × ~17 worlds; on live the seeded draw happened to stay above −30 |
+| maid maid:askRew | jagstaff asOpts: mistress at home AND loyal ≥ BAL.srvGate.rew (60) | branch draw: every NPC maid with loyal ≥ 60 had her mistress out (vườn / NVP / Thái y viện), every maid whose mistress was home had loyal 45–57; live draw had 5 maids at home with loyal 61–76. No world gave «trusted maid, mistress home» |
+| up harm:xinhh / harm:blockf | j30 xinhh: Hoàng hậu aff ≥ BAL.m30.xinhhAff (40) · jecon blockf: a consort with rel ≥ BAL.favorRel (60) | base world: neither side passes (aff(Hoàng hậu, her) −5, risen NPC −25; best rel 8 / 0); the NPC passed only through stacked «social» worlds (it runs fewer worlds before «up» than her) |
+| up PROMO harm:taint (risen NPC vs her born clone) and, after the fix, up P-ONLY harm:taint | jagharm haOpts0: a target with danger band ≥ 1; danger() caps at 29 while the grievance < the doer's harmGate | the branch's risen maid drew «Ân cần» (BAL trait harmGate 60; her trait softens grudges: «malice» +60 left her at 48 < 60) → she schemes against no one; live's drew «Lạnh lùng / Thật thà» (no gate). Her character, not her rank or origin |
+Fix = the TEST, both sides the same (laws 1 / 4: no game rule changed):
+1. snapW / restoreW also save and restore relations (S.rl, S.ro, every v.rel / v.oan / v.rl / v.ro): every world starts from the same relations, for her and an NPC doer.
+2. Worlds that used to exist only through stacking, now explicit and symmetric: «favour» (everyone's feeling toward the doer ≥ 80), «grudge» (her grievance passes her own harmGate), «threat» (everyone bears her a grudge + a child + a servant in trouble: Che chở / Canh giữ các con), «faction-friend» (a faction of two whose leader she likes: Xin vào phe), maid «m-trust» (Chủ tin / loyal ≥ the gate + 10 with the mistress at home: Xin chủ ban thưởng / tiến cử; mSnap now restores S.tin and maid loyal).
+3. Emotion-card exemption (role-parity-exempt.json, the existing BAL.ea.card row) gains its missing 6th card «Thắp hương cầu an» (the fear card of the same jemoact table), first seen once a world makes her afraid.
+Result (fixed scan, branch vs live, same seed): **branch-only gaps = none**. Live-only: maid:errand, up cx2:maidTalk. Open-list rows now closed: maid:P-ONLY:maid:errand, up:P-ONLY:cx3:tell (cx3:tell left for a reviewer, per role-parity-drift). role-parity.test still FAILs on **live main's own rows** only — t1…hh `label:Chứng cứ 2 ›` + `maid:P-ONLY:maid:pil` (live 62055a31's own test fails on the same rows, from law3-cost-only; main's issue, not added to the open list). Promotion (amRise / srvRise act sets equal) + riseCore Sủng / Danh / Bạc / old-master jealousy: all ok.
+- 12:10Z: merged origin/main edb2e724 (opt-scroll-reset / ev-pic-followups r2 / kit-head-say; only index/sw conflicted) → 9f2d7a34; rebuilt → **822cd8bd**.
+
+### Gates (#5, on 822cd8bd, one at a time)
+| gate | result |
+|---|---|
+| static guards (one-core-guard / bind / text / text-rule, time-spill) | PASS ×5 |
+| role-parity.test | no branch-only gap; FAIL only on live's own rows (above); promotion + riseCore ok |
+| night-final | 3/3 |
+| night-multi | 3/3 |
+| coop-e2e | 68/68 |
+| coop-night | 105/105 |
+| balance-core / ledger / night-steal-unit / night-coop-park | PASS / PASS / PASS / ALL OK 6/6 |
+| quickcheck --runs 6 (vs live edb2e724) | PASS · old save ok · render 244/259, tab 426/442, buổi 1122/1400 ms, tasks>200ms 19/18 |
+| Fold 755x1000@2 + iPad 1180x820@2 | 0 page errors, no h-overflow; origin picker looked at (scratch only) |
+Game-code changes in #5: none beyond the main merges (j8 ksp: main's wording + BAL.rk.maidRise). Test-only: dev/tools/role-parity-scan.js, role-parity-exempt.json. Laws: no number, choice, cost or trial changed.
+**SẴN SÀNG KIỂM 822cd8bd** — arms table = § FINAL ARMS (unchanged since #3). OWNER FLAGS (for MAIN, not decided here): QP −7 pooled (87 vs 80 %); ended before HH/cap 19 vs 25 %; kids/y 1.45× live; seat vacancy blocks promotions; NPC Sủng lower (m12 38 vs 46).
