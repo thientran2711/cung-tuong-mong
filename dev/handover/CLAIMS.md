@@ -208,7 +208,7 @@ kc/ngheo NEW c13+c16 (4 gens) | handover | session_01PEhRbvGFP6YSgT5DTgo3yu (K4,
 | seal-lean SMALL REVIEW (sonnet) | review/seal-lean 5f7aef61 | MAIN ROOT-62 | session_01Rc5AsM8PddSPcKEW1WCkRV | PASS 1cf5e8bb8 | 19/11 02:35Z |
 | emo-anim pilot — E1 (painter, Foreman C ROOT-39; main ROOT-62 order) | img/_review/emo-anim/ + reports/emo-anim.md | ROOT-39 | session_01PEhRbtgqB1cacgkhDCv8gn | DONE (samples) | 19/11 ~02:50Z |
 | role-parity-drift (opus; 25 cx2 N-only rows on LIVE) | review/role-parity-drift | B | session_01N1tNP5o5V6dzpfsYEuSczb | RUNNING | 19/11 02:58Z |
-| REVIEW art-wiring-1119 r1 (opus BIG) of 69a26198 | review/art-wiring-1119-r1 | B | session_01N1tNP6nQ6XCj5Xu1dFX9af | PASS r2 cbacdb55 | 19/11 02:58Z |
+| REVIEW art-wiring-1119 r1 (opus BIG) of 69a26198 | review/art-wiring-1119-r1 | B | session_01N1tNP6nQ6XCj5Xu1dFX9af | LIVE fd6118cd, archived | 19/11 02:58Z |
 | REVIEW maid-ladder-6 r1 (opus BIG) of cb5a7cb3 | review/maid-ladder-6-r1 | B | session_01N1tNP3R1PQaRUv57AFoczD | LIVE c12a5878 | 19/11 03:05Z |
 | seal-anim-sheet (sonnet; show-only, owner asked to see each seal animation) | handover report | MAIN ROOT-62 | session_01Rc5AsLhf6D4pDFssmG94et | SHEET READY | 19/11 03:15Z |
 | MAIN ROOT-63 (opus; child of ROOT-62, depth 1) | handover HANDOVER_SESSION9 | ROOT-62 | session_01Rc5AsN8fHJWShQ7rSPxjx5 | DONE → ROOT-64 | 19/11 03:37Z |
