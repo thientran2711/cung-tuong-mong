@@ -17,7 +17,7 @@ function seatPut(p,r){if(p===S){S.rank=r;return r}if(p.queen)p.queen=false;p.ran
 function seatComp(p){try{if(typeof promoFullSeat==="function"&&rkOf(p)<7)return promoFullSeat(p,"seat",{})||""}catch(e){console.error("seatComp",e)}return""}
 function seatUp(p,r,why){if(seatHas(p,r)){if(r>=7){if(p===S){S.rank=7}else{p.rank=6;p.queen=true}}else seatPut(p,r);p.lastPromo=S.turn;return true}
  if(rkOf(p)<r)return seatComp(p)||false;return false}
-function seatGuest(){try{return !!(window.COOPW&&COOPW.on&&COOPW.seat!=="a")}catch(e){return false}}
+function seatGuest(){try{return !!(window.coopGuest&&coopGuest())}catch(e){return false}}
 window.__seatN=window.__seatN||{settle:0,down:0};
 /* SEATS HALVED (owner 17/11 04:30Z): a save made before BAL.seat was halved keeps every holder on her rank ("nobody is demoted");
    they are stamped once (S.seatKeep = {key: rank}) and the net skips them while they hold that rank; the full rank still takes nobody

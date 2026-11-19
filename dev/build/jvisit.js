@@ -15,7 +15,7 @@
       The result is written into the world (S.emp.visit = {w day, pid}); the visited seat plays the card (the guest after the merged week arrives),
       the other seat gets a news line. Numbers: BAL.visit (jbal2). Kit: the existing event card / night cards / modal button only (no new part). */
 (function(){if(typeof PEND!=="object"||!EVI||!EVI.empnight)return;const B=()=>BAL.visit;
-const cw=()=>!!(window.COOPW&&COOPW.on),host=()=>!cw()||COOPW.seat==="a",myPid=()=>cw()?(COOPW.seat==="a"?901:902):0;
+const cw=()=>!!(window.COOPW&&COOPW.on),host=()=>!(window.coopGuest&&coopGuest()),myPid=()=>cw()?((COOPW.ctx||COOPW.seat)==="a"?901:902):0/* part G: identity follows the seat whose turn runs (her context on the host) */;
 const day=()=>typeof wk==="function"?wk():(S.turn*3+(S.tuan||0));
 try{DEED.empvisit={"Lễ":-1}}catch(e){}
 /* the generic pool no longer draws it: the daily roll below decides */

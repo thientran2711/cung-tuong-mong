@@ -33,7 +33,7 @@ const H=()=>BAL.dh.hieu,C=()=>BAL.dh.conf,I=()=>BAL.dh.it;
 const DK=["sacphong","ngocan"];
 const isDh=e=>!!(e&&typeof e==="object"&&DK.includes(e.k)&&e.dhid);
 window.dhIsItem=isDh;
-const npcOK=()=>!(window.COOPW&&COOPW.on&&COOPW.seat!=="a");
+const npcOK=()=>!(window.coopGuest&&coopGuest());
 const pk=p=>p===S?"me":String(p&&p.id);
 function people(){const L=[S];try{for(const v of rivals||[])if(v&&!v.coop&&L.indexOf(v)<0)L.push(v)}catch(e){}return L}
 function alive(p){return !!p&&(p===S?!S.dead:p.alive!==false)}

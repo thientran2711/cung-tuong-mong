@@ -26,6 +26,7 @@ js+='\n'+cdn('jcoopthine.js',open(d+'build/jcoopthine.js',encoding='utf-8').read
 js+='\n'+cdn('jcoopthinf.js',open(d+'build/jcoopthinf.js',encoding='utf-8').read())
 # thin guest part F6b (review/coop-thin-f6b): the remaining mini-game ends as score intents (level 12); after jcoopthinf (uses TH.F.x5) = the outermost act / doAct / playArt / exRun wrappers
 js+='\n'+cdn('jcoopthinf6b.js',open(d+'build/jcoopthinf6b.js',encoding='utf-8').read())
+js+='\n'+cdn('jcoopthing.js',open(d+'build/jcoopthing.js',encoding='utf-8').read())
 # jreg (review/story-frame): every registry pass also covers the entries later modules added (regEach); sweep at the script end + after load timers
 js+='\ntry{regSweep();setTimeout(regSweep,0)}catch(e){console.error(e)}\n'
 open(d+'build/all.js','w',encoding='utf-8').write(js)

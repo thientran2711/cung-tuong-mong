@@ -27,7 +27,7 @@ function ilAlive(p){return !!p&&(p===S?!S.dead:p.alive!==false)}
    a piece of mine that lands in her entry is logged "sang hảo hữu" (never also put in my box: one gift = one item), a piece the live
    path takes out of my chest (res.fam "rm") is logged "hảo hữu lấy" and not netted. Co-op transport of jil parked at 7aba5de9. */
 function ilCoop(){try{return !!(window.COOPW&&COOPW.on)}catch(e){return false}}
-function ilGuest(){return ilCoop()&&COOPW.seat!=="a"}
+function ilGuest(){return ilCoop()&&!!(window.coopGuest&&coopGuest())}
 function ilPeople(){const L=[S];try{for(const v of rivals||[])if(v&&!v.coop&&L.indexOf(v)<0)L.push(v)}catch(e){}return L}
 /* every container slot of a person: chest, worn hairpin / robe (not the base robe), veil, pawned */
 function ilSlots(p){const o=[];if(!p)return o;for(const e of p.inv||[])if(e&&typeof e==="object"&&e.k)o.push(e);

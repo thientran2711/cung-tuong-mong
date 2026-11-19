@@ -37,7 +37,7 @@ function wxGearStamp(p){const t=(S&&S.turn)|0;for(const e of (p&&p.inv)||[])if(e
 function wxGearSweep(p){if(!p||!p.inv)return;wxGearStamp(p);const t=(S&&S.turn)|0,gone=[];
  p.inv=p.inv.filter(e=>{if(e&&itm(e.k).wxg&&e.wxe!=null&&e.wxe<=t){gone.push(itm(e.k).n);return false}return true});
  if(gone.length&&p===S)log(`<span class="r">${gone.join(", ")} dùng đã hết mùa, sờn rách nên bỏ đi.</span> Gặp mưa tuyết muốn che chắn thì phải mua cái mới.`)}
-function wxGearAll(){try{if(!S)return;wxGearSweep(S);const CW=window.COOPW;if(CW&&CW.on&&CW.seat!=="a")return;/* co-op: NPC world rolls stay on the host */
+function wxGearAll(){try{if(!S)return;wxGearSweep(S);if(window.coopGuest&&coopGuest())return;/* co-op: NPC world rolls stay on the host */
  for(const v of (typeof rivals!=="undefined"&&rivals)||[])if(v&&v.inv)wxGearSweep(v)}catch(e){console.error("wx gear",e)}}
 (function(){const b0=buy;buy=function(p){const r=b0.apply(this,arguments);try{if(r)wxGearStamp(p)}catch(e){}return r}})();
 (function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);wxGearAll();return r}})();

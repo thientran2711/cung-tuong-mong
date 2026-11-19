@@ -37,7 +37,7 @@ function khWhy(p,me){const K=khB();if(!K||!p)return"";khInit(p);const w=p.khSw||
 function khTonic(p){const K=khB();if(!K||!p)return;if(p.khTon===S.turn&&(p.khTonN||0)>=K.tonicMo)return;if(p.khTon!==S.turn){p.khTon=S.turn;p.khTonN=0}p.khTonN++;khHit(p,-K.tonic,0)}
 /* care sources = the jmort ones (one core: BAL.mort.life) */
 function khCareN(p){const L=BAL.mort&&BAL.mort.life;if(!L||!p)return 0;return (p.suc>=L.careSuc?1:0)+(p.doctor?1:0)+(p.arts&&p.arts.y>=L.careYt?1:0)}
-function khGuest(){return !!(window.COOPW&&COOPW.on&&COOPW.seat!=="a")}
+function khGuest(){return !!(window.coopGuest&&coopGuest())}
 /* months by which the book's night lies before the real conception (an affair the book was made to fit by an earlier night) */
 function khRecOff(p){const P=BAL.preT;if(!p||!p.preg||p.fake||!p.trueFather||p.pregMismatch||p.khBook)return 0;const L=p.nightLog||[],w0=p.pregWk||0;
  if(L.some(w=>Math.abs(w-w0)<=P.recSlack))return 0;let best=null;for(const w of L){const d=w0-w;if(d>=P.recMin&&d<=P.recMax&&(best==null||d<best))best=d}return best==null?0:Math.floor(best/TUAN.length)}

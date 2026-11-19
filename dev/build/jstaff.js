@@ -17,7 +17,7 @@
 const B=()=>(typeof BAL!=="undefined"&&BAL.staff)||{posts:[]};
 const postOf=id=>B().posts.find(p=>p.id===id)||null;
 const rint=(a,b)=>a+Math.floor(Math.random()*(b-a+1));
-const isGuest=()=>{try{return !!(window.COOPW&&COOPW.on&&COOPW.seat==="b")}catch(e){return false}};
+const isGuest=()=>{try{return !!(window.coopGuest&&coopGuest())}catch(e){return false}};
 const thH=()=>{if(!S)return null;S.thO=S.thO||{};if(!Array.isArray(S.thO.staff))S.thO.staff=[];return S.thO};
 /* ---------- Thái hậu's household joins the servant model ---------- */
 if(typeof allServ==="function"){const a0=allServ;allServ=function(){const L=a0.apply(this,arguments);try{if(S&&S.thO&&Array.isArray(S.thO.staff))for(const s of S.thO.staff)if(!L.includes(s))L.push(s)}catch(e){}return L}}
