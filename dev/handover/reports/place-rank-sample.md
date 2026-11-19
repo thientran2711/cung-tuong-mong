@@ -26,7 +26,26 @@ Redo extra sentences (added before "No phoenix anywhere…") are in gen_ledger n
 - 4 figures evenly spaced (composite_spread.py) on the Quý phi bedroom: dev/handover/review-sheets/place-rank/place-rank-quyphi-ngu-spread.jpg · https://ctm-img.victoria-tntt.workers.dev/img/_review/place-rank/place-rank-quyphi-ngu-spread.jpg
 - Script: dev/art/place-rank/sheets.py FIGDIR OUTDIR (reuses composite_spread.py).
 
-## Credits
+
+## v2 — Cảnh Phúc redrawn after ROOT-48 relays (owner add to Lượt 447 "mỗi nơi … đặc trưng phong cách"; Lượt 450 yellow gradient; phoenix warning). The relays arrived after the v1 push.
+STYLE CARDS (used in every prompt of that palace; full text in dev/art/place-rank/prompts.py):
+- Cảnh Phúc cung: crabapple blossom (hải đường) · dark rosewood + jade-green inlay · bats among auspicious clouds · round-backed rosewood furniture + moon-gate partition. Rank only changes richness (Tần plain → Phi more carving/inlay → Quý phi gilt, pearls, coral, cloisonné) + accent (pale pink / soft purple / rose red; Quý phi + one small pale gold-yellow accent, NO phoenix).
+- Thừa Minh Đông phối (Quý nhân): orchid · pale blue + painted flower lacquer · paper lanterns, simple lattice · modest carved lacquer couch/chairs. No yellow, no phoenix.
+- Khôn Ninh cung (Hoàng hậu): peony + phoenix · imperial yellow + gold + red lacquer pillars · gilded throne couch/bed on stone tiles. Most golden.
+Every rooms 1–8 prompt now says "No phoenix anywhere (no phoenix carving, embroidery, figure or pendant), no imperial yellow, no golden-yellow fabrics" (Quý phi: yellow only as the one small accent). The 4 kept Thừa Minh/Khôn Ninh pictures were drawn with the v1 wording ("No phoenix anywhere, no yellow silk or yellow fabric anywhere", see commit 5a428d6 prompts.json); they already match their cards.
+
+| picture v2 | gen id | verdict |
+|---|---|---|
+| canh-phuc-cung-tan-ngu | nVsEG05YQD | kept |
+| canh-phuc-cung-tan | UPvTg93wny | kept |
+| canh-phuc-cung-phi-ngu | Xm9xeC3Bfo | kept |
+| canh-phuc-cung-phi | lJtWLRMgv9 | kept |
+| canh-phuc-cung-quyphi-ngu | 8ais8iSIrU (redo of Lw8nxZqswO: clothes rack + side table at left edge) | kept, small gold-yellow throw = the Quý phi accent |
+| canh-phuc-cung-quyphi | kseZ53Q16B | kept; FAULT to watch: frieze bat has feathered wings (reads bat/eagle, not phoenix) |
+v1 Cảnh Phúc six + old sheet A/spread moved to img/_review/place-rank/v1/ (CDN) as skins. Sheets A + spread rebuilt (same paths).
+Credits v2: 7 × 135 = 945. TOTAL 20 gens = 2,700 credits.
+
+## Credits (v1)
 13 gens × 135 = 1,755 credits (10 kept + 3 redos).
 
 ## Faults / notes for the verdict
