@@ -11,7 +11,7 @@
         and when loyalty is under leaveLoyal she may ask to serve a higher palace (card: raise her pay / demote her / let her go).
    3. NPC mistresses: same rules — the favour road when their purse is short; proud NPC servants leave for a higher palace with room.
    Co-op: s.coop servants skip pride/leave. Old saves: new fields (s.proud) are optional. Numbers in BAL.sp (one source). ================= */
-Object.assign(BAL,{sp:{favPerBac:.2,favRef:4,favMin:3,favMax:30,favKeep:10,head:{maid:3,eunuch:2},
+Object.assign(BAL,{sp:{favPerBac:.2,favRef:4,favMin:3,favMax:30,favKeep:10,head:{maid:4/* Chưởng sự cô cô (maid-ladder-6) */,eunuch:2},
  proud:{tham:45,lanh:30,chuyen:30,nhat:10,trung:5},proudAvg:24,proudMo:6,proudLoy:3,bully:1,leaveCh:15,leaveLoyal:60,envySenior:5,
  keepMul:.5,keepMin:5,keepGain:6,keepMo:3,demoteLoy:15,demoteOthers:2,letOthers:2,
  k:1/* khắc a đề bạt takes (either road) */}});

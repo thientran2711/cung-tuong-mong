@@ -728,7 +728,7 @@ Markup: dev/handover/refs/owner-option-picture-left.jpg (docs branch). Owner rul
 Owner (verbatim core): "mấy cái nút … cùng một kích thước thôi … cái hình đại diện hình chữ nhật … tốn không được không … màu xám … ghi chú nằm trong cái nút hình dấu than … chỉ còn hiện ở cái ô này là tốn và được thôi."
 - EVERY dialog option card (`button.ka.kopt`, not a person card `.pc` row §6.3): picture box 66x88 (3:4 rectangle, never square, never stretched; same box in every dialog), min height 104 px, content centred vertically; the cards of ONE dialog are ONE height = the tallest card of that dialog (`kitOptEqual`, `data-kapic="eq"`).
 - A card that has no picture of its own gets the §59 placeholder when a sibling has one (`kitOptUnify`): no picture-less card next to picture cards. The odds chip sits UNDER the title (title row wraps; the title keeps the full width).
-- ROWS: exactly **Tốn** and **Được** are visible. No cost → grey row "Tốn: không"; no gain → grey row "Được: không" (`.kfill`). Mất folds into Tốn; further Được rows (Được ngay / Thành) fold into the Được row (copies, `.kdup`). Rolled cards: the Thành row is the Được row.
+- ROWS: exactly **Tốn** and **Được** are visible. No cost → grey row "Tốn: không"; no gain → grey row "Được: không" (`.kfill`). Mất folds into Tốn — and so does every CERTAIN loss (law 3, review/odds-meter-back): on a card with no roll of its own (no odds; the «Nắm chắc» meter of kitOptOdds is `data-ksure`) a «mất: …» parsed as a Bại row stands in Tốn too, never «Tốn: không» behind «!»; a rolled card's Bại stays folded (it is a failure outcome, not a price). The `.kdup` copies are on purpose: j65 dedupeBtns skips them (it used to delete the folded original, which emptied Tốn on the next pass); further Được rows (Được ngay / Thành) fold into the Được row (copies, `.kdup`). Rolled cards: the Thành row is the Được row.
   Everything else — Cần, Bại, Kèm, Ghi chú, Vì sao, the lead text — is folded (`.kofold`, display none) and opens from the **"!"** in the card's top-right corner (`kitOptInfo(b)` → `#kpinfo` overlay = the whole card, every row; tap anywhere closes; the tap NEVER chooses the option, capture-phase handler like `kitPicZoom`). The "!" exists only when something is folded. "trả khi làm xong" (a Ghi chú) moves into Tốn (`kitOptCompactRows`).
   A DISABLED card (`kdis`) has the same two rows; its "!" is the SAME colour as every other "!" (no red variant, owner 18/11 09:30Z) and the reason (Cần) is inside. The Được slot is always labelled "Được" (a rolled card's Thành row too).
 - DIALOG NUMBER LINES: formula / threshold lines of a dialog's info (Phẩm = …, Xa xỉ range / Lưu ý / Son phấn of the dress dialog, Thường dưới 6 · Khá 6 · Tinh xảo 10 · Tuyệt phẩm 15) are wrapped with `kitNumBox(html)` (jopic): hidden (`.knum`), a "!" sits INLINE in the top-right corner of the info block (absolute, same x as the card "!", never its own row) and opens them in `#kpinfo`; the key sentences ("Chỉ vật liệu quý mới thành Tuyệt phẩm…", "Vật liệu tốt, quý còn làm quà…") stay as text. Used by the three material dialogs (jwkr, jtds, j83).
@@ -896,7 +896,10 @@ img/veil*.png is rejected). Status chips such as "Hủy dung (vừa) · còn N t
 
 ## 25. DILEMMA OPTIONS WITHOUT RISK DATA (kit 2)
 `dilLine` derives the rows from the option's own outcome code: each `roll(N)`-guarded `apply/ap(S,…)/die` → "<effect>: <ladder word>"
-(gain → Được, loss → Kèm), unguarded `apply` → certain; a `roll(expr)` that can be evaluated gives the main odds word. "Khó lường" is gone.
+(gain → Được, loss → Kèm), unguarded `apply` → certain; a `roll(expr)` that can be evaluated gives the main odds word. Only the option's OWN
+code counts (`dilSrc`, j17): a `go` that is a global scene / step function (`go:nightScene`) opens the next step and is certain here; a certain
+`c6` option (no `p`) has no roll in its code (review/odds-meter-back). A truly unknown chance ("Khó lường", e.g. a gift that may hide poison)
+shows the kit meter with no step lit.
 
 ## 26. HONOUR PODIUM · BỤC VINH DANH (j90, kit owner, owner 11/14) — screen 1 of every ranking result
 Applies to EVERY ranking board of the game ("một lời phàn nàn là cả nhóm"): every contest that plays the j82 mini-game (`startContest`: j71 hội thi,
@@ -1069,7 +1072,7 @@ so stage blocks may stand beside a head or between figures, never over the paint
 ### 28.6 OPTION MODE "cost" (hidden outcomes for EVENT choices)
 - EVERY event choice (owner 11/15 14:30Z: main story, side stories, festivals, NPC visits, toilette reactions, servant matters, the palace
   grant, contests… — every event) shows ONLY the cost: the Tốn row with Sức / khắc / Bạc (`.ka.khideout`) and the Cần row; no Được / Mất /
-  Kèm / Ghi chú rows and no odds meter. NO COST → NO Tốn row (owner 13:25Z / 17:08Z: never "Tốn: không"; see §42.6). Active acts (Hành sự, person-card acts,
+  Kèm / Ghi chú rows; the head keeps the kit ODDS METER (see the kitOptOdds line below). NO COST → NO Tốn row (owner 13:25Z / 17:08Z: never "Tốn: không"; see §42.6). Active acts (Hành sự, person-card acts,
   their pickers, the shop, gifts) keep the full numbers (owner 15:05Z).
 - WHICH dialogs are events — `kitIsEventChoice(m)` (jk2b), ON BY DEFAULT:
   · every item built from a PEND entry (`mkP` / `pushDil` / `pushFront`: it carries `pid` / `pp`) EXCEPT the active-act pickers in
@@ -1080,7 +1083,7 @@ so stage blocks may stand beside a head or between figures, never over the paint
   An item flagged `act` (its own act's picker / confirm: Nội vụ phủ đưa người, Xuất gia?, Kiếp này chưa trọn, a map card, the learning
   pickers, Hảo hữu tìm đến), `shop` (Hàng chợ đen) or `showOut` is never an event. A NEW builder with choices must carry `ev`, `act` or `shop`
   (or come from PEND): `python3 dev/test/opt-scan.py --fail` lists every call site and fails on an unclassified one.
-- KIT PART `kitHint(o, m, lv)` → `{hint, risk}` (jk2b; pure, also for bots — review/event-balance). Read from the option's OWN data (fx + its
+- KIT PART `kitHint(o, m, lv)` → `{hint}` (jk2b; pure, also for bots — review/event-balance). Read from the option's OWN data (fx + its
   x / j67 line as `dilLineRaw` writes it: the odds, people and state of THIS moment), so it is TRUE now and changes with the context — no
   fixed answer to learn (owner 15:10Z). Words only, no stat number (a count in a story phrase is written in words: "hai mươi trượng").
   Order: the main gain first, the rough chance, the price beyond Tốn ("nhưng …"), what a failure brings ("hỏng thì …"). A story phrase of
@@ -1091,21 +1094,25 @@ so stage blocks may stand beside a head or between figures, never over the paint
     1 PLAIN — the roles (Thái hậu hài lòng, Hoàng hậu phật ý, bệ hạ để mắt hơn), the size "(nhiều)" / "(chút ít)", a rough chance
       ("dễ thành" / "thành bại khó đoán" / "khó thành") and the failure ("hỏng thì cả họ bị tru di").
     2 SHARP — names ("Hoa Băng Tâm thất sủng") and the reading of the moment the data carries ("ngài trọng tài, rất hợp").
-  · A hand-written override per option: `hint` (string or fn(lv)) and `risk`; it may never lie (must match the data).
+  · A hand-written override per option: `hint` (string or fn(lv)); it may never lie (must match the data).
   · An option with NO odds word (a decision, no roll) cannot fail: its "Mất:" items are a sure price and read "nhưng …", never "hỏng thì …" (review/pets-fix-r6: ts-b "Nhịn"
     read "hỏng thì mất thể diện").
 - KIT PART `kitHintRow(text)` → the row `Gợi ý | <span class="ef i">…</span>` (`.kr-hint`; `.ef.i` = dim italic value, kit act-card CSS j63).
-- KIT PART `kitRisk(word)` → the risk chip in the option head: a `kitChip` tone — "an toàn" `.kchip.g`, "có rủi ro" `.kchip.w` (amber, kit
-  chip CSS j79), "liều" `.kchip.r` — plus `.krisk` (pushed right in `.kat`). an toàn = cannot fail; liều = Khó / Liều or a deadly failure /
-  side; có rủi ro = any other odds, "Khó lường" or a side risk (lộ ra, nếu bị…). Never the odds word or a percentage.
+- KIT PART `kitOptOdds(b)` (jk2b, owner 19/11 ~01:48Z: «để lại cái thể hiện cái đó như cũ») → the option head shows the kit ODDS METER `kitOdds`
+  (§ odds meter, j79: 7 segments red → green + the VANPHONG ladder word Liều / Khó / Năm ăn năm thua / Khá chắc / Chắc / Rất chắc / Nắm chắc;
+  tap = the ladder). The meter is the card's own `.kat > .kodds` (kaNorm → kaOdds → oddsChip from the option's line = the odds the roll uses,
+  law 4); kitHideOut never removes it. An option with no roll (a certain outcome) gets the same meter at «Nắm chắc»; a truly unknown chance
+  ("Khó lường", kaOdds j63) = the same meter, no step lit. Never a percentage.
+  The «an toàn / có rủi ro / liều» risk chip (kitRisk, `.krisk`) is RETIRED everywhere.
 - After the choice the result card (section 7) shows the full Được / Mất + why, and the Tuần lục logs the truth.
 - Balance of the hidden outcomes: audited by bots on review/event-balance (owner 14:30Z / 15:10Z), which builds on `kitHint`.
 - Tests: `dev/test/opt-render.js` (every PEND event dialog + every direct builder + every act picker + the real night + clarity; `--bot`
   classifies every dialog the bot meets) and `dev/test/opt-scan.py` (static: every call site classified).
 - Use (data only): `Q.push({…, ev:1, opts:[…]})` for an event built outside PEND; `act:1` / `shop:1` for an active act's picker / a shop;
   `hideOut:true` on an item or one option hides it too; any other priced button: `data-khide="1"`.
-- KIT SAMPLE PAGE: the one page of §47 (`#kit`, jkitpage.js) — samples "§53" (kitChip tones, kitRisk ×3, an event option in cost mode run
-  through the real modal markup + kaNorm → kitHideOut: Tốn + kitHintRow + kitRisk, no Tốn when free; kitResultSeal ×3, kitKemRow).
+- KIT SAMPLE PAGE: the one page of §47 (`#kit`, jkitpage.js) — samples "§53" (kitChip tones, the 7 odds-meter steps, an event option in cost
+  mode run through the real modal markup + kaNorm → kitHideOut: odds meter + Tốn + kitHintRow, no Tốn when free, a certain option at «Nắm chắc»;
+  kitResultSeal ×3, kitKemRow).
   (The duplicate `?kit` / `kitSample()` page of review/opt-render was dropped by reviewer r7.)
 
 ### 28.7 PERSON CARD: portrait and bars always in view (owner D)
@@ -2914,7 +2921,7 @@ margin-bottom (falls back to `.ksub` when no bar). Before → after (scan rt/sca
 Open the game with `#kit` at the end of the address (or `kitSamplePage()` in the console): a full-screen page draws every registered kit part
 with the REAL kit functions at the current screen size; ✕ closes. Every new / changed kit part pushes its sample in the same commit as its
 KIT.md section: `KIT_SAMPLES.push({id:"§nn", title, html:()=>…})`. Now: §28.19 wide/tall/thumb, §21 card (skill with acts, chapter, empty),
-§46 kitChecks + kitInfo, §43 compact act in a `.kpanec`, §48 kitNameRank, §49.1 kitRel2, §53 kitChip tones + kitRisk + an event option in cost mode + kitResultSeal + kitKemRow, §52 kitRelTable + kitRelDelta, §57 kitNumDelta. Test: `node dev/test/kit-page.js <url> [outdir] [sizes]` (every sample renders, no
+§46 kitChecks + kitInfo, §43 compact act in a `.kpanec`, §48 kitNameRank, §49.1 kitRel2, §53 kitChip tones + odds meter + an event option in cost mode + kitResultSeal + kitKemRow, §52 kitRelTable + kitRelDelta, §57 kitNumDelta. Test: `node dev/test/kit-page.js <url> [outdir] [sizes]` (every sample renders, no
 error, no horizontal overflow, 0 page errors).
 
 _(Numbers: review/kit-fig2 used 37-40, then 42-45; main took 37-43 and tabs-kit 45-47, so kitNameRank = §48, Ân oán = §49, kitEventDp = §50; kitActCompact is main's §43 (one copy, the tabs-kit superset).)_
@@ -3263,13 +3270,13 @@ Copies (review r6 → r7): `kclPrep` gives each copied `<img>` the live one's `c
 shown and the copy hidden until the copy is decoded (≤ 350 ms), then turns; kitCurlSwap hides the sheet until decoded and turns from
 the start, or skips the turn if it is still not ready. A turning sheet never shows a blank portrait.
 
-## 53. EVENT-CHOICE PARTS · kitHint · kitRisk · kitHintRow · kitKemRow · kitResultSeal (owner 11/15 14:30Z / 15:05Z / 15:10Z, review/opt-render) — `dev/build/jk2b.js`, `dev/build/j63.js`
+## 53. EVENT-CHOICE PARTS · kitHint · kitOptOdds · kitHintRow · kitKemRow · kitResultSeal (owner 11/15 14:30Z / 15:05Z / 15:10Z, review/opt-render) — `dev/build/jk2b.js`, `dev/build/j63.js`
 Index of the shared parts review/opt-render added (number from the coordinator's registry; the rules live where they apply):
 - `kitIsEventChoice(m)` + `KIT_ACT_PIDS` + data flags `ev` / `act` / `shop` — which dialogs are events (cost mode): §28.6.
-- `kitHint(o, m, lv)` → `{hint, risk}` (pure, bots too), `kitHintLevel()` (Tâm cơ / Tai mắt → vague / plain / sharp): §28.6.
-- `kitHintRow(text)` (`.kr-hint`, `.ef.i` in j63 kit CSS), `kitRisk(word)` (kitChip g / w / r + `.krisk`, j79 kit chip CSS): §28.6.
+- `kitHint(o, m, lv)` → `{hint}` (pure, bots too), `kitHintLevel()` (Tâm cơ / Tai mắt → vague / plain / sharp): §28.6.
+- `kitHintRow(text)` (`.kr-hint`, `.ef.i` in j63 kit CSS), `kitOptOdds(b)` (the kit odds meter on every option, certain = «Nắm chắc»): §28.6.
 - `kitResultSeal(ok)` (THÀNH / BẠI / grey KẾT QUẢ, j63; not `kitSeal`, which is the Trân nữ seal §39), `kitKemRow(K)` (`.kb .kkem`): §7.
-- Samples on the kit page (§47): ids "§53" (chip tones + kitRisk; an event option in cost mode through the real modal markup → kaNorm →
+- Samples on the kit page (§47): ids "§53" (chip tones + the 7 odds-meter steps; an event option in cost mode through the real modal markup → kaNorm →
   kitHideOut; kitResultSeal ×3; kitKemRow). Tests: `dev/test/opt-render.js`, `dev/test/opt-scan.py --fail`.
 
 ## 54. ITEM REVEAL · GRADE CHIP · kitLose (owner 11/15 08:20Z + 17:02Z, review/game-feel) — `dev/build/jkrev.js` (before jfx, j84) — awaiting kit review
