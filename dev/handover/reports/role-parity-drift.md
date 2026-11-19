@@ -102,3 +102,11 @@ Branch review/role-parity-drift-r1 = 127fe1ea + final-merge origin/main fd6118cd
 1 two-way PASS (player acts = NPC acts; Đồng liêu friends) · 3 n/a · 4 PASS after R2 · 6a PASS after R1 · 9 PASS (no UI change, kit rows) · 11 PASS (family scan + R1) · 12 PASS (Fold + iPad) · 13 PASS (PRIORITY line) · 14 PASS (open row restored in place, no duplicate) · others not touched.
 
 **VERDICT: PASS — READY FF 1ed688ef2a80a54bf2c1173a47126040f611d094** (review/role-parity-drift-r1, descends LIVE 7fb7c104). Tier BIG.
+
+### REVIEW r1 — re-merge update (19/11 ~07:00Z): READY FF 950508fc005ce01ad74a4b050560fd492d61d048 (replaces 1ed688ef)
+Main moved 4× while I reran the gates (2c5dd554, 4217568a, 98f9f0f1, 5400c87b, 5dc5d9e0). Final sha 950508fc descends LIVE 5dc5d9e0 (checked after a re-fetch right before sending). Only index.html/sw.js conflicted each time; j42 auto-merged with 4217568a, and both reviewer fixes (ill-wisher group, BAL.srvx.colN) are still in. Diff vs main: the same 7 files.
+Full gates on f9fe6a2f (merged 98f9f0f1): one-core PASS, ag-stf2 23/23, quickcheck PASS (old save ok, perf new/live render 263/234, tab 477/428, buổi 1211/1185, tasks 18/18), coop-e2e 68/68 + SWAP 68/68. On 950508fc (ROOT-4 rule: ×1 + one-core): one-core PASS; role-parity ×1 = the same 12 rows as below.
+**⚠ LIVE DRIFT on main, NOT from this branch** — role-parity.test shows 12 new rows + one open row that is now closed. The same 12 rows (byte-identical list) show on plain main 98f9f0f1 with ONLY the probe fix added (no j42 change), so they come from main landings between 7fb7c104 and 98f9f0f1 (2c5dd554 errand-scene r6 + hall-names / 4217568a odds-no-unknown / 98f9f0f1 monthly-allotment). Nothing more by 5dc5d9e0.
+The 12 rows: up P-ONLY cx2:maidTalk · hh + up N-ONLY cx3:facFound · t1–t7 + hh P-ONLY label «Chứng cứ 2 ›» · maid P-ONLY maid:pil. Now closed: up P-ONLY cx3:tell (an evidence change on main likely closed it; do not trim it until the drift is fixed).
+Without this branch, plain main shows these 12 hidden under the 100 false probe rows; this branch adds no red row. I did not put them in the open list, because that would hide a fresh regression.
+**VERDICT stays PASS for the branch content — READY FF 950508fc.** FOR MAIN: the owners of those landings check law 1 on the 12 rows (a whole job like this one).
