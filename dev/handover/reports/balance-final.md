@@ -59,3 +59,23 @@ START_CTX ≈ 5 % of 1M (get_session reads 0, so this is an estimate) → rollov
 - 18:13Z: ncB shard 21 crashed within its first minute. inpage6.js's catch read S.origin while S was undefined, which hid the real error. A debug copy of the harness (/home/user/wt/dbg, catch guarded + error stack recorded as a 'dbg' field) re-ran seed 1021 for 3 lives (ch, thd, cnv) with NO crash, so it did not reproduce. 18:25Z: ncB 21 restarted for 60 lives on the debug harness; any crash there is recorded as a CRASH life with its stack. The other 3 shards use the normal harness; the catch only matters on a crash. Pace ≈ 4 min per life, so the arms finish ≈ 22:30Z.
 - 18:48Z: LIVE main = 94d11623 (shown-odds-r2 + monthly-ration-r6; jration.js is a new economy module). The nc arms were stopped at 6–9 lives per shard with 0 crashes in 30 lives. Merged 94d11623 → **review/balance-final 16b3c8c8** (pushed): token merge clean (assemble list, j24, j8, night-steal-unit); word-diff check keeps both sides; no reads of the BAL keys this branch removed. Static guards PASS (one-core-guard 349 modules 0 fails, bind 1243/0, text, text-rule, time-spill).
 - 18:50Z: FINAL arms started: rL = live 94d11623, rB = 16b3c8c8, shards 20–21, 60 lives each (120 per arm). Both arms use the guarded harness copy (/home/user/wt/dbg: the inpage6 catch is guarded, the stack is recorded). ETA ≈ 22:50Z.
+- ~20:50Z: the browsers leaked memory (~3 GB each after 2 h). I stopped them after 58 live + 46 branch lives (results are saved per life) and re-ran the rest as short shards (22–27, 13 lives each, a fresh browser per shard, same seeds on both arms).
+- 21:40Z: loss probe (dev harness inpl.js, 10 branch lives). Real pregnancy endings without a birth: 7 monthly miscarriage rolls (pregMonthP), 3 weather events (wxHit), 2 trips (trip), against 7 births. The probe also logged 134 false hits from nightCh's pregUnk wrapper, which clears S.preg for one call and restores it in `finally`. The miscarriage settings (BAL.pgRisk, BAL.mort.birth.misX .62) are identical on live and the branch.
+- 22:55Z–00:00Z: merged live main 53544bd8 → 7ebdb6c7, 1130a49e → d80645ec, 9a1d6922 → **778537e7** (all pushed). Conflicts: the assemble list (main's jgedata_w1, jmapz and jagacts4 added; 352 modules, no duplicates) and j42 srvRise. For srvRise I kept main's single riseCore promotion rule and apply the branch's balance-2 fault 9 Danh carry-over (BAL.danhG.srvRise) just before it. Static guards pass.
+
+### FINAL ARMS (AG build): live 94d11623 vs branch 16b3c8c8, seeds 1020–1027, YRSTOP 8, 0 crashes
+| arm | lives | HH | ended before HH/cap | ended < 3 y | Phi, median month | QP, median month | HH median month | Danh m12/24/36 |
+|---|---|---|---|---|---|---|---|---|
+| live | 136 | 53 (39 %) | 20 % | 9 % | 92 %, m27 | 86 %, m39 | m67 | 91/99.5/100 |
+| br | 124 | 50 (40 %) | 24 % | 8 % | 91 %, m24 | 82 %, m42 | m60.5 | 92/96/99 |
+
+| arm | life-years | deaths /100 y (poison / birth / illness / other) | early < 3 y deaths (poison) | kids /y | her births /y | her losses /y | loss share | NPC Sủng m12/24/36/60 |
+|---|---|---|---|---|---|---|---|---|
+| live | 828 | 2.29 (0.12/0.48/0.85/0.85) | 6 (1) | 0.074 | 0.064 | 0.039 | 0.38 | 46/39/39/31 |
+| br | 724 | 2.63 (0.00/1.11/0.41/1.11) | 7 (0) | 0.108 | 0.095 | 0.079 | 0.45 | 38/33/29/25 |
+
+Targets: HH 40 % vs 39 % (target ≥ live − 3: ✓). Deaths 2.63 vs 2.29 and early deaths 7 vs 6 (≈ live ✓; poison 0). Phi 91 vs 92 % ✓. QP 82 vs 86 % (−4, ≈). Danh m24 96 vs 99.5 (−3.5, ≈).
+- HH drop seen at 104 lives (47 % vs 37 %) was small-n: it closed to 39 vs 40 % at 136/124 lives on the same seeds. The pre-AG gap (+13) is gone because the AG build already raised live HH from 17 % to 39 %.
+- Birth deaths 1.11 vs 0.48 /100 y = 8 vs 4 deaths. This follows from 1.5× her births. The per-birth risk is unchanged.
+- Measurement caveat: "her nights /y" and "conceive %/night" (inbf.js) are NOT comparable between the arms. inbf wraps night(), which the live AG path rarely calls for her (0.7 nights/y counted live). Conceptions, births and losses are counted from S.preg/kids and ARE comparable.
+- Confirmation arms on the merged sha (cL = live 9a1d6922 vs cB = 778537e7, shards 20–23 × 13 lives) started 00:00Z.
