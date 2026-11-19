@@ -398,11 +398,19 @@ TH_SWAPS=[("Outfit (the Empress (Hoàng hậu), clearly much richer and more spl
            "a STIFF, STRUCTURED, squared shoulder piece (cầu vai cứng) of embroidered antique-gold brocade with a pearl edge, standing firm and horizontal over both shoulders to show her authority, and her own collar: a high upright round standing collar of deep brocade fastened at the throat with a small jade button (not a crossed collar, not a cloud collar),"),
           ("the GRANDEST headdress of all: a FULL tall imperial nine-phoenix crown","a full imperial phoenix crown of the Empress's rank: a FULL tall imperial nine-phoenix crown"),
           ("; the most splendid outfit of all, clearly grander than every other rank.",".")]
+def th1811(age):
+    t=open(os.path.join(ART,"elder-copy","THAIHAU_1811_AGE_COLOUR.md"),encoding="utf-8").read()
+    def sec(h):
+        m=re.search(r"^## "+re.escape(h)+r" \(verbatim\)\n(.+?)\n",t,re.M); assert m,("1811 section",h); return m.group(1).strip()
+    return sec(age+" AGE TEXT")+" "+sec(age+" COLOUR TEXT")
 def thaihau(person,age):
     S0,F,add=build(person,8,age); g=LAST_G; person=ALIAS.get(person,person)
     assert F.count(TH_HEAD_HH)==1,"TH header slot"; F=F.replace(TH_HEAD_HH,TH_HEAD,1)
     for a,b in TH_SWAPS:
         assert F.count(a)==1,("TH outfit slot",a[:60]); F=F.replace(a,b,1)
+    if age in ("a51","a65"):   # owner Lượt 624 (D13/J2, ROOT-53): a51/a65 age + colour text = VERBATIM 18/11 Thái hậu words, read from dev/art/elder-copy/THAIHAU_1811_AGE_COLOUR.md (never retyped)
+        old_age=g["AGE_TXT"][age]; assert F.count(old_age)==1,"TH age slot"
+        F=F.replace(old_age,th1811(age),1)
     n=int(re.sub(r"\D","",person) or 1)
     item,hk=g["TH_ITEMS"][g["TH_AGE"][age][(n-1)%5]]   # IT1 E11 pick (TH_ITEMS + TH_AGE), used directly: build.py age_item() ignores the given item and picks its own kind
     m=re.search(r" Pose: [^.]*\.",F); assert m and F.count(" Pose:")==1,"TH pose slot"

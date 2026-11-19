@@ -89,3 +89,8 @@ How the redraw avoids it:
 - nc1–nc3 have KC refs but are foreign princesses (no royal yellow, B21), and build_all thaihau fails on them (item_for). Not Thái hậu candidates unless the owner says so.
 - Items: n and n+5 share the same item at one age (IT1 design: 5 per age).
 - BW5 (item wiring in the build.py thaihau branch): not needed for this path. build_all thaihau() already uses TH_ITEMS/TH_AGE.
+
+## Part 2b — owner Lượt 624 (ROOT-53): a51/a65 age + colour = verbatim 18/11 Thái hậu text
+- `build_all.py thaihau()` at a51/a65 replaces the shared AGE_TXT block (age + "clearly about fifty" + calmer-colour sentence) with the 18/11 age + colour sentences. They are READ from `dev/art/elder-copy/THAIHAU_1811_AGE_COLOUR.md` (function `th1811`, never retyped). a36 is unchanged.
+- Gate: check_store --scope tp8 PASS 30/30. v618/m13_thaihau_a51/a65.prompt.txt are rebuilt.
+- **CONTRADICTION (flag; foreman/table job, not changed by me):** the HH elder COLOUR RULE = approved S33 ("…only less saturated and quieter … never darker or heavier …") and the elder swatch line ("calmer, muted antique-gold elder shade") are still in the prompt, next to the 18/11 "DEEPER, DARKER" text. J2 (Lượt 620/622) says deeper. To clean it, the foreman updates S33 in check_store APPROVED + the build.py `__main__` a51/a65 swap (+ the swatch elder line); Thái hậu follows automatically.
