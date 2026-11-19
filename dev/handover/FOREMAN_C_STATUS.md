@@ -1520,3 +1520,4 @@ ROOT-55 ~21:26Z: PR11 rolled at 32 % → PR12 session_01PEhRbuLQNn7Wj8te4Ncp68 o
 ROOT-55 Lượt 694: owner OK ma ma, FROZEN (rule D16). Count: final recipe = m05 only (3 pictures). Next free Lượt 695.
 ROOT-55 Lượt 694b: owner: copy ma ma a51/a65 style lock to EVERYONE → D15 widened; BW6 all builders, NDX4 nude-B mk.py.
 ROOT-55 Lượt 695–700: groups moved; c06/c14/c19/c31 → Sắc sảo redraw (NF4); KHO 32 (11/group); Lượt 698 4-group sheet; Lượt 699 Nữ đế round 2 sent (NDX4 now adds D15 at a51/a65); Lượt 700 owner approved Kiêu kỳ/Lạnh lùng/Quyến rũ → NF4 20 more. ctx ~26 %. Next free Lượt 701.
+ROOT-55 Lượt 701: s08 redrawn by ROOT-55 (s08.v5b, 'phoenix' removed) → WDgKkfTcXe chosen; NF4 continues 4 groups; Nữ đế crown identical at all ages = fixed detailed crown sentence → NDX4 swaps to HH crown sentence (dragon) + D15, redraw 5. Next free Lượt 702.
