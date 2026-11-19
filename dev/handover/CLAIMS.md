@@ -199,7 +199,7 @@ kc/ngheo NEW c13+c16 (4 gens) | handover | session_01PEhRbvGFP6YSgT5DTgo3yu (K4,
 | hist-mama-ladder (history expert, sonnet E15; MAIN ORDER 00:41Z) | handover report | E ROOT #7 | session_01DgYSWp57dyN9pFwnJw7znu | DONE 97c6164e | 19/11 00:54Z |
 | role-parity-seed (riseCore test seed fix; opus B3) | review/role-parity-seed | B | session_01N1tNP5LzLhxHn4SfWgKpNQ | LIVE 89aa1bd9 (with role-parity-3) | 19/11 01:17Z |
 | ge-writers-w2 remerge #5 main 96188526 (sonnet E11w2m3) | review/ge-writers-w2 | E ROOT #7 → #8 | session_01DgYSWq43v8g897s6AtupYe | RUNNING | 19/11 01:50Z |
-| FOREMAN E ROOT #8 (opus; child of E ROOT #7, depth 7) | handover FOREMAN_E_STATUS | E ROOT #7 | session_01DgYSWoyrPRWJPqSp4gfECg | RUNNING | 19/11 01:50Z |
+| FOREMAN E ROOT #8 (opus; child of E ROOT #7, depth 7) | handover FOREMAN_E_STATUS | E ROOT #7 | session_01DgYSWoyrPRWJPqSp4gfECg | DONE (rolled over 06:45Z) | 19/11 01:50Z |
 | MAIN ROOT-62 (opus; owner-opened ROOT, depth 0; successor of ROOT-61) | handover HANDOVER_SESSION9 | owner | session_01Rc5AsJvnKvJMiKUjEhRST1 | DONE → ROOT-63 | 19/11 02:20Z |
 | maid-ladder-6 (opus; BIG) | review/maid-ladder-6 | B | session_01N1tNP6uwmf4WjfcYZ2eBKe | SẴN SÀNG KIỂM cb5a7cb3 (on LIVE 1cf5e8bb; quickcheck PASS, coop-e2e 63/63, maid-ladder-6 13/13; report reports/maid-ladder-6.md; shots img/_review/maid-ladder-6/) | 19/11 ~03:45Z |
 | law3-cost-only (opus; SMALL) | review/law3-cost-only | B | session_01N1tNP6PHnsEVwUKbZMrXkQ | SẴN SÀNG KIỂM ae218b59 (on main c12a5878) (4 named rows: 3 = display, 1 = D's; 2 rows fixed; see reports/law3-cost-only.md) | 19/11 04:10Z |
@@ -250,3 +250,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | ev-pic-followups (sonnet; MAIN ROOT-65 job via C-AG #22: iPad XL option frame scroll kit fix whole group + PEND:eunuch scene) | review/ev-pic-followups; briefs/cag22-ev-pic-followups.md | C-AG #22 for ROOT-65 | session_01Rc5AsMN9rc6gf4qRzmEoJF | RUNNING | 19/11 06:40Z |
 | seal-lean-2 r2 SMALL REVIEW (sonnet) | review/seal-lean-2 a64f06c7 | MAIN ROOT-65 | session_01Rc5AsK8sbYnJUkyP6AvmAw | RUNNING | 19/11 06:37Z |
 | foreign-princess-3 history expert (sonnet E19; MAIN ORDER 06:23Z/06:35Z) | handover reports/foreign-princess-3-history.md | E ROOT #8 | session_01DgYSWkWBAJFRJzN3a7ix9a | RUNNING | 19/11 06:42Z |
+| FOREMAN E ROOT #9 (opus; child of E ROOT #8, depth 8 = limit) | handover FOREMAN_E_STATUS | E ROOT #8 | session_01DgYSWmYGTJUrUAYgMGzMCE | RUNNING | 19/11 06:46Z |
