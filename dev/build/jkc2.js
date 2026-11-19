@@ -546,3 +546,13 @@ function kc2Carry(kind,tier){const ok=S&&S.origin&&BAL.kcv[S.origin.k]?S.origin.
 (function(){const e0=kcEnter;kcEnter=function(rank){const r=e0.apply(this,arguments);try{if(S&&S.kc&&S.kc.inPal&&!S.kc.kd)kc2Carry("kc",Math.max(0,Math.min(2,S.rank)))}catch(e){console.error("kc2Carry kc",e)}return r}})();
 /* the tiểu thư card says the same (jkc text, one line added) */
 (function(){const p0=kcPathHTML;kcPathHTML=function(){const h=p0.apply(this,arguments);try{if(!kc2D())return h.replace("Phúc duyên khi qua tuyển tú","Phúc duyên khi qua tuyển tú; vào cung mang theo hành trang những năm ở nhà (Danh, Tư chất, người đã biết)")}catch(e){}return h}})();
+
+/* caoly-road old-save migration (E20 r2): a Nam Chiếu princess life saved before the Cao Ly rename keeps stored TITLES / ROLES (ids and keys unchanged).
+   On load, an nc life (not the bd branch) has them rewritten in place: S.kc.fam titles (Hoàng huynh / Hoàng thúc / Mẫu hậu) and every stored string of the
+   thanh-mai (S.men[*] with role «Phó sứ Nam Chiếu»). Past log lines (S.logs) are history and stay as written. */
+const KC2_NC_MIG={"Hoàng huynh":"Thế tử huynh","Hoàng thúc":"Vương thúc","Mẫu hậu":"Vương hậu"};
+function kc2MigNc(){if(!S||!S.origin||S.origin.k!=="nc")return;
+ if(S.kc&&Array.isArray(S.kc.fam))for(const m of S.kc.fam)if(m&&KC2_NC_MIG[m.t])m.t=KC2_NC_MIG[m.t];
+ const fix=o=>{if(!o||typeof o!=="object")return;for(const k in o){const v=o[k];if(typeof v==="string"){if(v.indexOf("Nam Chiếu")>=0)o[k]=v.split("Nam Chiếu").join("Cao Ly")}else fix(v)}};
+ if(Array.isArray(S.men))S.men.forEach(m=>{if(m&&m.role==="Phó sứ Nam Chiếu")fix(m)})}/* only the princess road's thanh-mai (j96 nc); court-event envoys of Nam Chiếu keep their name */
+(function(){const d0=deser;deser=function(){const r=d0.apply(this,arguments);try{kc2MigNc()}catch(e){console.error("kc2MigNc",e)}return r}})();
