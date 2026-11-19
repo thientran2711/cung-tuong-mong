@@ -82,3 +82,21 @@ FLOOR: warm polished wooden floorboards · MAT: the round table · KEY: the bed 
 ROOM: Tây phối điện of Khải Tường cung, the west side hall where a lower-ranking consort lives in an ancient Chinese palace, a real room in daily use, cooler in teal and dark rosewood: towards the back a bed behind a carved moon-shaped opening with teal curtains tied back; a long table with a zither, a teapot and cups; a tall bookcase with books and blue porcelain; a hanging scroll of orchids; a small desk with brush, inkstone and a letter; a tall stand with a pot of bamboo; a hanging lantern; a birdcage; a lattice window with summer sun and a wutong tree outside; depth comes from furniture placed through the middle and the back of the room, and the near left floor stays open with at most a small low stool.
 FLOOR: polished stone tiles · MAT: the long table · KEY: the moon-shaped bed opening
 Note: khai-tuong-cung-tay-phoi v1 long zither table + stools reach into the near left-centre (figures overlap) -> one redo below.
+
+## Sheet place-duong-tam-dien-tu-ninh-cung.jpg
+https://ctm-img.victoria-tntt.workers.dev/img/_review/place-mass/place-duong-tam-dien-tu-ninh-cung.jpg
+
+### duong-tam-dien — gen SyhcLTEUb8
+ROOM: Dưỡng Tâm điện, the Emperor's own working and living hall in an ancient Chinese imperial palace, a real room in daily use: towards the back a broad carved throne seat with yellow silk cushions on a low dais behind a large desk piled with memorials, brushes, a red ink box, an imperial seal and a jade paperweight; behind it a large screen with a painted landscape of mountains and clouds; red lacquer pillars; hanging golden lanterns; yellow silk curtains tied back; tall bookcases with stacked books and scroll boxes; a bronze crane incense burner; a celadon vase with a pine branch; a tea table with a tea set; a large bronze ding vessel on a stand; lattice windows onto a sunny summer courtyard; depth comes from furniture placed through the middle and the back of the room, and the near left floor stays open with at most a small low incense stand.
+FLOOR: polished stone tiles · MAT: the dais · KEY: the throne desk
+
+### tu-ninh-cung — gen EbYOv6YuuO
+ROOM: Từ Ninh cung, the Empress Dowager's hall in an ancient Chinese imperial palace, a real room in daily use, dignified and serene in deep brown, olive gold and dark red: towards the back a carved rosewood couch with olive-gold brocade cushions and a backrest on a low dais, beside it a small table with a rosary of prayer beads, a tea set and a lidded cup; behind it a screen with a painted pine, crane and longevity peaches; dark red lacquer pillars; hanging lanterns; heavy brocade curtains tied back; a small Buddhist altar shelf with a statue, candles and an incense burner; side tables with bonsai pines, a vase of chrysanthemums, a cabinet of sutras and scrolls, a walking stick on a stand, a bowl of peaches; lattice windows onto a quiet summer garden; depth comes from furniture placed through the middle and the back of the room, and the near left floor stays open with at most a small low incense stand.
+FLOOR: warm polished wooden floorboards · MAT: the dais · KEY: the couch and screen
+
+### khai-tuong-cung-tay-phoi — REDO gen ov6jexa829 (replaces YMlE3wDWeC; zither table moved to the centre, left half open)
+ROOM: Tây phối điện of Khải Tường cung, the west side hall where a lower-ranking consort lives in an ancient Chinese palace, a real room in daily use, cooler in teal and dark rosewood: towards the back a bed behind a carved moon-shaped opening with teal curtains tied back; in the middle distance, at the centre of the room, a modest table with a zither, a teapot and cups; a tall bookcase with books and blue porcelain; a hanging scroll of orchids; a small desk with brush, inkstone and a letter; a tall stand with a pot of bamboo; a hanging lantern; a birdcage; a lattice window with summer sun and a wutong tree outside; depth comes from furniture placed through the middle and the back of the room, and the near left half of the floor stays open and empty with at most a small low stool.
+FLOOR: polished stone tiles · MAT: the zither table · KEY: the moon-shaped bed opening
+
+## Summary
+18/18 rooms done, 20 gens (2 redos: chung-tu-cung-tay-phoi, khai-tuong-cung-tay-phoi), 2,700 credits. Live img/<room>-*.webp untouched.
