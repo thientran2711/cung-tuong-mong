@@ -37,7 +37,7 @@ function kesCan(el){const L=KIT_EMOSEAL.lean;try{if(el.closest(L.deny))return fa
 function kesSchedule(el){if(el.__ln)clearTimeout(el.__ln);const L=KIT_EMOSEAL.lean;el.__ln=setTimeout(()=>kesLean(el),kesR(L.min,L.max)*1000)}
 /* HEAD FRAME (owner 19/11 ~07:10Z, canon overwrite: NO per-figure measuring): ONE relative frame = lean.head.f x the stage's standard figure height (stage dataset kmlH = the one body height of the stage, the same value the
    head markers use; one typical figure's head as a fraction of its body, measured once, stored as data). The same for every seal; a seal outside a stage (panel / dialog) = lean.head.f x the dialog figure height, else lean.head.panel x the short screen side. */
-function kesHead(el,r){const L=KIT_EMOSEAL.lean.head;let H=0;try{const st=el.closest&&el.closest("#stage");if(st){const h0=+st.dataset.kmlH,sc=st.offsetHeight?st.getBoundingClientRect().height/st.offsetHeight:1;if(h0>20)H=h0*sc}
+function kesHead(el,r){const L=KIT_EMOSEAL.lean.head;let H=0;try{const st=(el.__fig&&el.__fig.closest("#stage"))||(el.closest&&el.closest("#stage"));if(st){const h0=+st.dataset.kmlH,sc=st.offsetHeight?st.getBoundingClientRect().height/st.offsetHeight:1;if(h0>20)H=h0*sc}
  if(!H&&el.__fig){const q=el.__fig.getBoundingClientRect();if(q.height>20)H=q.height*(KIT_FIG&&KIT_FIG.h||.79)}}catch(e){}
  return Math.max(r.width,H?H*L.f:Math.min(innerWidth,innerHeight)*L.panel)}
 function kesLean(el,force){el.__ln=0;if(!el.isConnected||!el.classList.contains("kemo-live"))return;
