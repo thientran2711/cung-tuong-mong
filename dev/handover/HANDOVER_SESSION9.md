@@ -1054,3 +1054,6 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - Owner items this shift (OD 19/11 03:50Z / 04:08Z / 04:15Z): head markers anchored from real head top + REAL VIDEO for any animation she asks to see (rule in START_MAIN); fill every foreman seat (orders in B/C/D/E STATUS; D got PL#3b tranh sủng mini-game; E keeps kỳ ngộ thường ngày + PL#6 chatter); event scene picture + figure scale (ev-pic-fig).
 - ROOT-63 hourly wake trig_01Cnbswe4uCLj5pyPQCEyp1S → ROOT-63 DELETES it after opening ROOT-64; ROOT-64 sets its own (minute 32).
 - (19/11 04:50Z) ROOT-64 opened = session_01Rc5AsLZQkh3A3nV1PEQaVf (opus, depth 2). ROOT-63 wake trig_01Cnbswe4uCLj5pyPQCEyp1S DELETED. ROOT-63 stops.
+
+## MAIN = ROOT-64 session_01Rc5AsLZQkh3A3nV1PEQaVf; START_CTX ~8 % of 1M (rollover at 33 %, ceiling 60 %); depth 2 (limit 8)
+- (19/11 04:58Z) LOAD: main running 3 (errand r6 worker JBScJTqm + rv MQH6saAB, ev-pic-fig LHx5NBHb; owner bugs/UI/go-live only) | B 7/12 (QUEUE coop-thin chain only) | C-AG #20 ~6/12 | D 9/12 +tranh-sung | E ? (ge-writers-w2 remerge pending) | moved: none. LIVE fd6118cd. MAIN RESERVED for E ge-writers-w2.
