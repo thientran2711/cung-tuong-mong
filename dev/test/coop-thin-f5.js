@@ -120,7 +120,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  const PK=await pick(`return Object.keys(PET).filter(k=>PET[k].pr&&PET[k].tr===0).slice(0,2)`);
  const petSt=`S.pets=[];S.petMax=Math.max(S.petMax||0,3);for(const t of ${JSON.stringify(PK)})S.pets.push({t,from:'x',src:'buy',care:80,at:tsbWk(),full:30,clean:30,joy:30,aff:20});S.petOn=0;`;
  const pc='petcOpen(0);PETC.game="feed"';
- await act('P1 Cho ăn, best score (petcGain feed 1): same as solo',`petcGain('feed',1)`,{stage:petSt,pre:pc,twin:`PETC.i=0;petcGain('feed',1)`,chk:x=>x.g1.pets!==x.g0.pets});
+ await act('P1 Cho ăn, best score (petcGain feed 1): same as solo',`petcGain('feed',1)`,{stage:petSt,pre:pc,twin:`PETC.i=0;petcGain('feed',1)`,chk:x=>x.g1.pets!==x.g0.pets,shot:'pet'});
  await act('P2 Tắm, zero score (petcGain bath 0): same as solo',`petcGain('bath',0)`,{stage:petSt,pre:pc,twin:`PETC.i=0;petcGain('bath',0)`});
  await act('P3 over-max score (petcGain feed 1.01): refused, nothing applied',`petcGain('feed',1.01)`,{stage:petSt,pre:pc,reject:1,chk:x=>x.g1.pets===x.g0.pets});
  await act('P4 unknown care kind: refused',`petcGain('poke',.5)`,{stage:petSt,pre:pc,reject:1});
@@ -167,6 +167,21 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  /* double end */
  if(ON){await reset();await stage(petSt);await pick(pc);const r=await G.p.evaluate(()=>{const F=COOPW.thin.F,b0=F.stat.busy,s0=F.stat.sent;petcGain('play',1);petcGain('play',1);return {busy:F.stat.busy-b0,sent:F.stat.sent-s0,id:F.pend&&F.pend.id}});
   await until(G,()=>!COOPW.thin.F.pend,null,20000);ok(r.sent===1&&r.busy===1,'D1 double end: one intent, the second ignored',r)}
+ /* review r1: R1 resend after her answer is lost (4G): the host runs the end ONCE (DONE), the cost paid once; X1/X2 no word of hers travels */
+ if(ON&&(!ROWS||ROWS.some(x=>'R1'.startsWith(x)||x==='R1'))){await until(G,()=>!COOPW.thin.F.pend,null,20000);await reset();await stage(lst);await sync();await G.p.evaluate(()=>{window.__raw=10});
+  const e=await pick('Q.length=0;try{closeModal()}catch(e){}'+lpre('self'));if(e)console.log('R1 pre:',e);await sleep(900);
+  const h0=await H.p.evaluate(()=>Object.assign({},COOPW.thin.F.stat,{her:__her()})),g0=await G.p.evaluate(()=>Object.assign({},COOPW.thin.F.stat,{her:__her()}));
+  await G.p.evaluate(()=>{window.__deafThin=true});await G.p.evaluate(KOK=>(0,eval)(KOK),KOK);
+  const rs=await until(G,n=>(COOPW.thin.F.stat.resend|0)>n,g0.resend|0,20000);await G.p.evaluate(()=>{window.__deafThin=false});
+  const got=await until(G,()=>!COOPW.thin.F.pend,null,30000);await sleep(1500);await sync();
+  const h1=await H.p.evaluate(()=>Object.assign({},COOPW.thin.F.stat,{her:__her()})),g1=await G.p.evaluate(()=>Object.assign({},COOPW.thin.F.stat,{her:__her()}));
+  const r={rs,got,run:(h1.run|0)-(h0.run|0),dup:(h1.dup|0)-(h0.dup|0),aaPaid:(h1.aaPaid|0)-(h0.aaPaid|0),suc:g1.her.suc-g0.her.suc,hsuc:h1.her.suc-h0.her.suc,used:g1.her.used-g0.her.used,nwk:g1.her.nwk-g0.her.nwk,mg:g1.her.mg};
+  ok(rs&&got&&r.run===1&&r.dup>=1&&r.aaPaid===1&&r.suc===-15&&r.hsuc===-15&&r.used===2&&r.nwk===1&&r.mg===null,'R1 resend after a lost answer: the end runs once on the host, the cost paid once, one work',r);
+  for(const [tag,mut] of [['X1 forged practice words (m.hw not in WK_HOW): refused','m.pa=1;m.hw="<b>x</b>"'],['X2 forged work subject (not one of wkSubj): refused','m.wk=Object.assign({},m.wk||{kind:WDEF[AK],mat:0},{subj:"<img src=x>"})']]){
+   await until(G,()=>!COOPW.thin.F.pend,null,20000);await reset();await stage(lst);await sync();const b0=await H.p.evaluate(()=>COOPW.thin.F.stat.mgBad|0);const n0=await H.p.evaluate(()=>__her().nwk);
+   await G.p.evaluate(([AK,mut])=>{const m={k:AK,l:1,mode:'self',wk:{kind:WDEF[AK],mat:0}};(0,eval)('(function(m,AK){'+mut+'})')(m,AK);wkLessonEnd(AK,m,7,{skipped:false})},[AK,mut]);
+   await until(G,()=>!COOPW.thin.F.pend,null,20000);await sleep(800);await sync();const b1=await H.p.evaluate(()=>COOPW.thin.F.stat.mgBad|0);const n1=await H.p.evaluate(()=>__her().nwk);
+   ok(b1-b0===1&&n1===n0,tag,{bad:b1-b0,nwk:[n0,n1]})}}
  /* latency */
  {const ms=table.filter(x=>typeof x.ms==='number').map(x=>x.ms).sort((a,b)=>a-b),lo=table.map(x=>x.r&&x.r.ms).filter(x=>typeof x==='number').sort((a,b)=>a-b);
   if(ms.length)console.log('LATENCY end→answer ms (LAG '+(+process.env.LAG||0)+', host CPU ×'+(+process.env.CPU||1)+'): n='+ms.length+' median='+ms[ms.length>>1]+' min='+ms[0]+' max='+ms[ms.length-1]);

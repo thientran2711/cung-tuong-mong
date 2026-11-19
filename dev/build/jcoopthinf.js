@@ -358,7 +358,8 @@ reg10("shelfPlantGain",["v"],{dec:a=>{const x=decA9(["v"],a);if(!x)return null;r
 /* Tài nghệ lessons / practice / Học lối mới: k, the lesson (S.mg as it was), the play, {skipped}; the host rolls a quick lesson (o.ok null) */
 reg10("wkLessonEnd",["v","v","v","v"],{enc:A=>{const m=A[1];if(!m||typeof m!=="object")return null;const c=Object.assign({},m);delete c.cost;return encA9(["v","v","v","v"],[A[0],c,A[2]==null?0:A[2],{skipped:!!(A[3]&&A[3].skipped)}])},
  dec:a=>{const x=decA9(["v","v","v","v"],a);if(!x)return null;const [k,m,raw,o]=x;const sk=!!(o&&o.skipped);
-  if(!ARTS.some(y=>y.k===k)||!m||m.k!==k||!["self","teacher","th","prac"].includes(m.mode)||(m.wk&&(!WK[m.wk.kind]||![0,1,2].includes(m.wk.mat||0))))return bad("wkLessonEnd");
+  if(!ARTS.some(y=>y.k===k)||!m||m.k!==k||!["self","teacher","th","prac"].includes(m.mode)||(m.wk&&(!WK[m.wk.kind]||![0,1,2].includes(m.wk.mat||0)||!wkSubjOK(m.wk.kind,m.wk.subj)))||(m.hw!=null&&!(m.hw in WK_HOW)))return bad("wkLessonEnd");
+  /* r1: no word of hers travels (her work's subject = one of wkSubj's, her practice's words = WK_HOW by key) */
   if(!sk&&!inR(raw,MSC().raw))return bad("wkLessonEnd");return [k,m,sk?0:raw,{skipped:sk}]},
  pre:A=>payAA(sc=>{const sk=!!A[3].skipped;sc.skip=sk;sc.raw=sk?null:cl(Math.round(A[2]||0),0,10);sc.ok=!sk&&sc.raw>=5})});
 /* Tứ đức: tdFinish pays its own cost; a quick play is rolled here (TDS.q, as the game's own quick button) */
