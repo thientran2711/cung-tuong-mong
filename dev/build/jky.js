@@ -62,32 +62,32 @@ const DEF={
  ma_giao:{pl:["nvp","tn"],when:()=>(S.buoi||0)<=1,who:(F,L)=>first(L,w=>w.kind==="el"&&w.eid==="gt"),
   t:c=>`<p>Trên bàn của ${c.wn} có cuốn sổ tay đã ố vàng, chép tay từng lối thêu, lối vẽ, lối nấu mà bà gom góp mấy chục năm dạy tú nữ. Bà gập sổ lại, nhìn ngươi rất lâu.</p>`,
   n:["Xin ma ma cho chép một lối","Xin bái ma ma làm thầy"]},
- ma_nhac:{pl:["vuon"],when:night,who:(F,L)=>first(L,w=>w.kind==="man"&&w.ref.role==="Nhạc sư"),
+ ma_nhac:{pl:["vuon"],when:()=>(S.buoi||0)>=2,who:(F,L)=>first(L,w=>w.kind==="man"&&w.ref.role==="Nhạc sư"),
   t:c=>`<p>Trăng lên sau hòn non bộ, có tiếng đàn ai gảy rất khẽ. Là ${c.wn}, ngồi một mình bên hồ. Thấy ngươi, y vội đứng dậy hành lễ, rồi nói nhỏ: “Khúc này cả cung chẳng còn ai đàn được nữa.”</p>`,
   n:["Ngồi lại nghe y dạy đàn","Xin bệ hạ cho y vào cung dạy"]},
  ma_hoa:{pl:["vuon","tn"],when:()=>(S.buoi||0)<B4L,who:(F,L)=>first(L,w=>w.kind==="man"&&w.ref.role==="Họa sư"),
   t:c=>`<p>${c.wn} đang dựng giá vẽ bên hàng liễu, ngẩng lên bắt gặp ngươi rồi dừng bút. Y nói người trong cung vẽ đã nhiều, nhưng hiếm ai đứng yên được như ngươi lúc này.</p>`,
   n:["Nhờ y nói tốt trước bệ hạ","Xin y chỉ cách đặt bút"]},
- ma_ty:{pl:["tyv"],when:night,who:(F,L)=>first(L,w=>w.kind==="court"&&w.c==="ty"),
+ ma_ty:{pl:["tyv"],who:(F,L)=>first(L,w=>w.kind==="court"&&w.c==="ty"),
   t:c=>`<p>Đêm khuya Thái y viện chỉ còn một ngọn đèn. ${c.wn} vẫn ngồi đọc mấy cuốn y thư cũ, thấy ngươi bèn mời ngồi và bắt mạch: “Bệnh cũ trong người, lão phu có một phương thuốc gia truyền.”</p>`,
   n:["Xin thái y chữa dứt","Xin học phương thuốc"]},
  ma_co:{pl:["thu","dtd"],who:(F,L)=>L.some(w=>w.kind==="emp")?null:first(L,w=>w.kind==="court"&&w.c==="tq"),
   t:c=>`<p>Hoàng thượng chưa về, ${c.wn} ngồi một mình trước bàn cờ dở ván. Ông chỉ quân trắng: “Ván này đánh từ đời tiên đế, chưa ai giải được. Nương nương có muốn thử?”</p>`,
   n:["Đánh hết ván cờ","Nhường ông một nước"]},
- ma_lao:{pl:["tn"],when:()=>(S.buoi||0)===0,who:(F,L)=>{const O=L.filter(w=>w.kind==="rv"&&w.ref!==F&&(w.ref.age|0)>=51);O.sort((a,b)=>(b.ref.age|0)-(a.ref.age|0));return O[0]||null},
+ ma_lao:{pl:["tn"],who:(F,L)=>{const O=L.filter(w=>w.kind==="rv"&&w.ref!==F&&(w.ref.age|0)>=51);O.sort((a,b)=>(b.ref.age|0)-(a.ref.age|0));return O[0]||null},
   t:c=>`<p>Bên hiên Phật đường, ${c.wn}, người đã hầu từ tiên triều, đang bày một ván cờ. Bà vẫy ngươi lại: “Ngồi đây. Bổn cung kể ngươi nghe cung này ngày trước.”</p>`,
   n:["Xin bà chỉ giáo nước cờ","Hầu bà nói chuyện cũ"]},
- vat_lac:{pl:OUT,who:(F,L,X)=>X.lc?{kind:"own",ref:loP(X.lc.own)}:null,what:F=>{const c=lostHere(F,false);return c?{lc:c}:null},
+ vat_lac:{pl:["*"],who:(F,L,X)=>X.lc?{kind:"own",ref:loP(X.lc.own)}:null,what:F=>{const c=lostHere(F,false);return c?{lc:c}:null},
   t:c=>`<p>Bên lối đi có vật gì lấp lánh trong cỏ. Ngươi cúi nhặt lên: là <b>${loNm(c.X.lc.k)}</b>, chính là món ${c.wn} báo mất hôm trước.</p>${loTag(c.X.lc.e)}`,
   n:["Mang trả tận tay","Giữ lại"]},
- vat_minh:{pl:OUT.concat(["home"]),who:(F,L)=>({kind:"maid"}),what:F=>{const c=lostHere(F,true);return c?{lc:c}:null},
+ vat_minh:{pl:["*","home"],who:(F,L)=>({kind:"maid"}),what:F=>{const c=lostHere(F,true);return c?{lc:c}:null},
   t:c=>`<p>Cung nữ chạy lại, hai tay dâng lên một món đồ: <b>${loNm(c.X.lc.k)}</b> của ngươi, tìm thấy dưới gốc cây bên lối. Gần đó còn vương một dấu vết của kẻ đã lấy.</p>${loTag(c.X.lc.e)}`},
  vat_cu:{pl:["nvp"],who:(F,L)=>first(L,w=>w.kind==="court"&&w.c==="ped"),what:()=>{const x=deadPiece();return x?{box:x}:null},
   t:c=>`<p>${c.wn} lén đưa ngươi vào kho sau Nội vụ phủ. Trong hộp gỗ là <b>${itm(c.X.box.e.k).n}</b>, di vật của người đã khuất, chờ ngày đem bán ra ngoài.</p>`,
   n:["Xin chuộc lại","Xin dâng Thái hậu thay người đã khuất"]},
- vat_thu:{pl:["vuon"],who:(F,L)=>{const o=first(L,w=>w.kind==="rv"&&w.ref!==F&&(w.ref.pets||[]).length);if(o)return o;return F!==S&&meHere("vuon")&&(S.pets||[]).length?{kind:"rv",ref:S}:null},
+ vat_thu:{pl:["*"],who:(F,L)=>{const o=first(L,w=>w.kind==="rv"&&w.ref!==F&&(w.ref.pets||[]).length);if(o)return o;return null},
   t:c=>`<p>Một con vật nhỏ lạc chủ, chạy lẫn vào bụi hoa. Ngươi ôm nó về tận tay ${c.wn}, nàng ta mừng rỡ cảm tạ mãi.</p>`},
- vat_chung:{pl:["lc","vuon"],when:night,who:(F,L,X)=>X.pl?{kind:"rv",ref:X.pl.a}:null,what:F=>{const q=plotBy(F);return q?{pl:q}:null},
+ vat_chung:{pl:["*"],when:()=>(S.buoi||0)>=2,who:(F,L,X)=>X.pl?{kind:"rv",ref:X.pl.a}:null,what:F=>{const q=plotBy(F);return q?{pl:q}:null},
   t:c=>`<p>Trong chậu lan bên tường có một mảnh thư gấp nhỏ. Nét chữ của ${c.wn}, viết về một việc nàng ta đang sắp đặt.</p>`,
   n:["Giữ làm chứng cứ","Lặng lẽ trả lại nàng ta"]},
  vat_ngu:{pl:["nvp"],when:()=>(S.buoi||0)===0,who:(F,L)=>first(L,w=>w.kind==="court"&&w.c==="ped"),what:()=>{const r=rareNvp();return r?{rr:r}:null},
@@ -96,7 +96,7 @@ const DEF={
  de_mua:{pl:["vuon"],when:()=>sev()>=1,who:(F,L)=>first(L,w=>w.kind==="emp"),
   t:c=>`<p>Mưa đổ xuống bất chợt. Dưới mái đình chỉ có ngươi và Hoàng thượng. Ngài cởi áo choàng khoác lên vai ngươi.</p>`,
   n:["Theo ngài về điện tránh mưa","Xin ngài giữ long thể"]},
- de_but:{pl:["thu"],when:night,who:(F,L)=>first(L,w=>w.kind==="emp"),
+ de_but:{pl:["thu","dtd","vuon"],when:()=>(S.buoi||0)>=1,who:(F,L)=>first(L,w=>w.kind==="emp"),
   t:c=>`<p>Hoàng thượng phê xong tấu chương, còn hứng, bèn trải giấy viết chữ. Ngài gọi ngươi lại gần.</p>`,
   n:["Xin ngài chỉ cho một nét chữ","Mài mực hầu bút"]},
  de_den:{pl:["vuon","dtd","tn","kn"],when:()=>{const f=fest();return !!(f&&["nguyentieu","trungthu","thattich"].includes(f.k)&&night())},who:(F,L)=>first(L,w=>w.kind==="emp"),
@@ -105,7 +105,7 @@ const DEF={
  de_su:{pl:["thu"],who:(F,L)=>first(L,w=>w.kind==="man"&&w.ref.role==="Sứ thần"),
   t:c=>`<p>${c.wn} đi ngang qua, dừng lại hỏi ngươi một câu về lễ nghi Đại Hy, như muốn thử người trong cung.</p>`,
   n:["Đáp khiêm cung","Đối lại một câu thơ"]},
- th_kinh:{pl:["tn"],when:()=>(S.buoi||0)===0,who:(F,L)=>L.some(w=>w.kind==="rv"&&w.ref!==F)?null:first(L,w=>w.kind==="th"),
+ th_kinh:{pl:["tn"],when:()=>(S.buoi||0)<B4L,who:(F,L)=>first(L,w=>w.kind==="th"),
   t:c=>`<p>Sớm tinh mơ, Phật đường chỉ có Thái hậu quỳ tụng kinh. Ma ma hầu kinh hôm nay ốm, người tự lật trang, mắt đã mỏi.</p>`,
   n:["Ở lại chép kinh cùng người","Xin ma ma dạy lễ nghi"]},
  th_tham:{pl:["home"],when:()=>{const f=fest();return !!(f&&f.k==="trungthu")},who:(F,L,X)=>X.pl?{kind:"own",ref:X.pl.a,hide:1}:null,what:F=>{const q=plotOn(F);return q?{pl:q}:null},
@@ -115,7 +115,7 @@ const DEF={
  th_sao:{pl:["vuon"],when:()=>{const f=fest();return !!(f&&f.k==="thattich"&&night())},who:(F,L)=>first(L,w=>w.kind==="rv"&&w.ref!==F&&band(w.ref)===band(F)),
   t:c=>`<p>Đêm Thất tịch, ${c.wn} cũng một mình ngắm sao bên hồ. Hai người cùng ngẩng nhìn Ngân Hà.</p>`,
   n:["Kết làm tri kỷ","Cùng đối thơ dưới sao"]},
- sv_den:{pl:OUT,when:night,who:(F,L)=>first(L,w=>w.kind==="sv"&&w.own!==F&&w.ref.role!=="eunuch"&&w.ref.spyFor!==key(F)),
+ sv_den:{pl:["*"],who:(F,L)=>first(L,w=>w.kind==="sv"&&w.own!==F&&w.ref.role!=="eunuch"&&w.ref.spyFor!==key(F)),
   t:c=>`<p>Một chiếc đèn lồng đứt dây rơi xuống. Ngươi kịp kéo ${c.wn}, cung nữ của ${nm(c.W.own)}, tránh sang một bên. Nàng ta run rẩy quỳ tạ ơn cứu mạng.</p>`,
   n:["Giữ nàng ta làm tai mắt","Đưa nàng ta về tận cung chủ"]},
  sv_tuyet:{pl:["vuon","lc","tn","kn","nvp"],when:()=>night()&&winter(),who:(F,L)=>first(L,w=>w.kind==="sv"&&w.ref.role==="eunuch"),
@@ -123,16 +123,16 @@ const DEF={
  sv_co:{pl:["tn","nvp"],when:()=>(S.buoi||0)===0,who:(F,L)=>first(L,w=>w.kind==="el"&&w.eid==="tn"),
   t:c=>`<p>${c.wn} đứng nhìn ngươi làm việc hồi lâu, rồi gọi ngươi lại: “Tay chân nhanh nhẹn, biết giữ quy củ. Ngươi muốn gì?”</p>`,
   n:["Xin cô cô dạy quy củ","Xin về hầu Đức Thọ cung"]},
- sv_tre:{pl:["vuon"],when:()=>{try{return ["Xuân","Hạ"].includes(SEASON[S.month-1])}catch(e){return false}},who:(F,L)=>first(L,w=>w.kind==="kid"&&w.own!==F),
+ sv_tre:{pl:["*"],who:(F,L)=>first(L,w=>w.kind==="kid"&&w.own!==F),
   t:c=>`<p>${c.wn} mải đuổi bướm lạc khỏi nhũ mẫu, khóc thút thít sau hòn non bộ. Ngươi dỗ dành rồi dắt về tận tay ${nm(c.W.own)}.</p>`}
 };
 const COOPSKIP={vat_lac:1,vat_cu:1,vat_ngu:1,vat_chung:1,sv_den:1};
 /* ---------- eligibility (the ONE gate) ---------- */
 function elig(F,k){const B=KB();if(!B||!B.on)return[];const z=kz(F),b=band(F),out=[];let L;try{L=kyPpl(k).filter(w=>w.ref!==F)}catch(e){kerr("ppl",e);return out}
  if(F!==S&&meHere(k))L.push({kind:"rv",ref:S});
- for(const id in DEF){const D=DEF[id],E=B.E[id];if(!E||z.seen[id]||!String(E.b).includes(String(b)))continue;if(F===S&&guest()&&COOPSKIP[id])continue;
+ for(const id in DEF){const D=DEF[id],E=B.E[id];if(!E||z.seen[id]!=null||!String(E.b).includes(String(b)))continue;if(F===S&&guest()&&COOPSKIP[id])continue;
   if(F!==S&&(id==="sv_co"||id==="ma_giao"&&b===0))continue;
-  if(!D.pl.includes(k))continue;try{if(D.when&&!D.when(F))continue;const X=D.what?D.what(F):{};if(!X)continue;const W=D.who(F,L,X);if(!W||(W.ref&&W.ref===F))continue;
+  if(!(D.pl.includes(k)||(k!=="home"&&D.pl.includes("*"))))continue;try{if(D.when&&!D.when(F))continue;const X=D.what?D.what(F):{};if(!X)continue;const W=D.who(F,L,X);if(!W||(W.ref&&W.ref===F))continue;
    out.push({id,D,E,W,X,k,F,b})}catch(e){kerr("elig "+id,e)}}
  return out}
 function chance(F,list){const B=KB(),z=kz(F);let p=Math.min(B.pMax,B.p0+B.step*z.m);const f=fest();if(f)p+=B.festP;if(sev()>=1)p+=B.wxP;return z.m>=B.pity?100:p}
@@ -206,7 +206,14 @@ const SPEC={
 /* ---------- her card ---------- */
 function optX(c,i){const O=c.E.o[i],C=sc(O.c||{},c.b),L=[];if(O.buy||O.s==="item"&&(c.X.box||c.X.rr)){const pr=buyPr(c);if(pr&&!(c.X.box&&i===1))C.bac=(C.bac||0)+pr}if(O.od&&C.seen)L.push(word(seenOd(Object.assign({},c,{oi:i}))));const t=costText(C);if(t)L.push("tốn: "+t);
  const G=sc(O.g,c.b),W=[];if(G.danh)W.push(`Danh +${G.danh}`);if(G.sung)W.push(`Sủng +${G.sung}`);if(G.th)W.push(`Thái hậu thiện cảm +${G.th}`);if(G.duc)W.push(`Đức +${G.duc}`);if(G.rel)W.push(`thiện cảm +${G.rel}`);if(G.art&&O.a)W.push(`${ART_N(O.a)} tiến bộ ${G.art} phần`);
+ const sw=specW(c,O,i);if(sw)W.push(sw);
  if(W.length)L.push("thành: "+W.join(", "));return L.join(" · ")}
+/* the gain words of a special (an option whose gain is a piece / a fact, never "không") */
+function specW(c,O,i){const s=O.s||(O.buy?"item":"");if(!s)return"";try{
+ if(s==="item"||s==="ret"||s==="give"){if(c.X.lc)return i===0?`${loNm(c.X.lc.k)} về lại tay chủ`:`${loNm(c.X.lc.k)} vào rương ngươi`;
+  if(c.X.box)return i===1?`${itm(c.X.box.e.k).n} dâng lên Đức Thọ cung`:`${itm(c.X.box.e.k).n} vào rương ngươi`;
+  if(c.X.rr)return i===1?`${itm(c.X.rr.k).n} dâng lên Đức Thọ cung`:`${itm(c.X.rr.k).n} vào rương ngươi`}
+ return {loi:"học được một lối mới",kn:c.X.pl?"biết trước một mưu nhắm vào ngươi":"được nhận làm đồ đệ",intel:"biết thêm một chuyện kín",ev:"thêm một chứng cứ",spy:"thêm một tai mắt",cure:"dứt bệnh cũ",rk:"lên một bậc"}[s]||""}catch(e){return""}}
 function ctx(c){c.wn=wName(c.W);return c}
 function fireMe(c){ctx(c);const D=c.D;KY.cur=c;const title="Kỳ ngộ";
  if(!c.E.o){const r=runOpt(c,0);const h=D.t(c)+`<p class="past">${r}.</p>`;Q.unshift({t:title,h,who:face(c.W),evId:"kyngo:"+c.id,ky:1});log(`Kỳ ngộ: ${String(D.t(c)).replace(/<[^>]+>/g,"").slice(0,80)}… ${r}.`);meet(c);return}

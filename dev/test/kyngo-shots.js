@@ -1,0 +1,31 @@
+/* kyngo-shots: the kỳ ngộ card on the two priority devices (law 12) — a choice card (th_kinh: Thái hậu), a card with a found piece
+   (vat_lac: kitItemTag), the result card, and the Sổ luân hồi block. Checks: no horizontal overflow, options inside the screen, 0 page errors.
+   usage: node dev/test/kyngo-shots.js <url of the SITE index.html> <outdir> [WxH@dpr,...]  → shots <outdir>/<size>-<n>.png, last line PASS / FAIL n */
+const {chromium}=require('playwright');const [,,URL,OUT,SIZES]=process.argv;const sleep=t=>new Promise(r=>setTimeout(r,t));const fs=require('fs');fs.mkdirSync(OUT,{recursive:true});
+const VPS=(SIZES||"755x1000@2,1180x820@2").split(",");
+(async()=>{const b=await chromium.launch();let fail=0;const ck=(n,ok,i)=>{if(!ok)fail++;console.log((ok?'ok   ':'FAIL ')+n+(i?' · '+JSON.stringify(i).slice(0,200):''))};
+ for(const sz0 of VPS){const [sz,dpr]=sz0.split("@");const [W,H]=sz.split("x").map(Number);const errs=[];
+  const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+(dpr||1),hasTouch:true,isMobile:W<1100,serviceWorkers:'block',reducedMotion:'reduce'});
+  await ctx.addInitScript(()=>{setInterval(()=>{document.querySelectorAll(".krskip").forEach(b=>b.click())},300)});
+  const p=await ctx.newPage();p.setDefaultTimeout(120000);p.on('pageerror',e=>errs.push(e.message.slice(0,200)));
+  await p.goto(URL,{waitUntil:'load',timeout:0});await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function'&&window.KY);await sleep(3000);
+  await p.addStyleTag({content:'#kroul,.kroul,.krbox,.kcf-w,.kmov.kcf,#kload,#klife{display:none!important}'});
+  /* Sổ luân hồi on the title screen (the real place: j74 «Sổ luân hồi» button → pastHTML, j97 block + the kỳ ngộ block) */
+  await p.evaluate(()=>{try{localStorage.setItem("ctm-kyngo",JSON.stringify({ma_phe:{n:1,first:{who:"Thẩm Như Ý",o:"Con gái Tể tướng",y:1}},de_mua:{n:2,first:{who:"Thẩm Như Ý",o:"Con gái Tể tướng",y:2}}}))}catch(e){}});
+  await p.evaluate(()=>{const b=document.querySelector('[data-tgo="past"]');if(b)b.click()});{await sleep(1500);await p.screenshot({path:`${OUT}/${sz}-0-book.png`});
+   const t=await p.evaluate(()=>document.body.innerText.includes("kỳ ngộ đã gặp"));ck(`${sz} Sổ luân hồi shows the kỳ ngộ block`,t)}
+  await p.evaluate(()=>{const M=document.getElementById('modal');Q.length=0;if(M)M.hidden=true});
+  await p.evaluate(()=>{const kl=document.getElementById('kload');if(kl)kl.remove();document.getElementById('title').hidden=true;for(let i=0;i<40;i++){try{store.set(NL_KEY,null)}catch(e){}start();if(!isSrv())break}Q.length=0;render()});
+  await sleep(2500);
+  const force=async id=>p.evaluate(id=>{Q.length=0;S.ky={m:0,cd:-1,seen:{},got:[],last:-1};for(const k in KY.DEF)if(k!==id)S.ky.seen[k]=0;BAL.kyngo.p0=100;
+   const D=KY.DEF[id];if(id==="th_kinh"){D._w=D.when;D.when=null}
+   if(id==="vat_lac"){const v=liveRivals(true).find(x=>(x.inv||[]).some(e=>e&&loOk(e)));if(v)loLose(v,{cause:"mis"});Q.length=0}
+   const k=D.pl[0]==="*"?"vuon":D.pl[0];KY.arrive(S,k,"shot");if(D._w)D.when=D._w;showModal();return Q[0]&&Q[0].evId},id);
+  const shot=async n=>{await sleep(1500);await p.screenshot({path:`${OUT}/${sz}-${n}.png`});
+   const m=await p.evaluate(()=>{const M=document.getElementById('modal');const r=M&&M.getBoundingClientRect();const o=[...document.querySelectorAll('#modal .opt')].map(x=>x.getBoundingClientRect()).filter(x=>x.width);
+    return {open:!!M&&!M.hidden,ovx:document.documentElement.scrollWidth>innerWidth+1,optsIn:o.every(x=>x.bottom<=innerHeight+1&&x.right<=innerWidth+1),n:o.length}});return m};
+  let id=await force("th_kinh");let m=await shot("1-choice");ck(`${sz} choice card (${id})`,m.open&&!m.ovx&&m.optsIn&&m.n>=2,m);
+  await p.evaluate(()=>{const o=document.querySelector('#modal .opt');if(o)o.click()});m=await shot("2-result");ck(`${sz} result card`,m.open&&!m.ovx,m);
+  id=await force("vat_lac");m=await shot("3-found-piece");ck(`${sz} found piece card (${id})`,id==="kyngo:vat_lac"&&m.open&&!m.ovx&&m.optsIn,m);
+  ck(`${sz} page errors`,errs.length===0,errs);await ctx.close()}
+ console.log(fail?`FAIL ${fail}`:'PASS');await b.close();process.exit(fail?1:0)})();

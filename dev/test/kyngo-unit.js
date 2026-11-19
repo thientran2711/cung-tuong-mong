@@ -43,7 +43,7 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
    else ck("5b keep (card)",false,{q:Q.map(x=>x.evId)});
   }else ck("5 conservation: setup (a consort with a losable piece)",false);
   /* 6: an NPC finds HER lost piece */
-  Q.length=0;const mine=(S.inv||[]).find(e=>e&&loOk(e));let c6=null;if(mine)c6=loLose(S,{cause:"mis"});Q.length=0;
+  Q.length=0;if(!(S.inv||[]).some(e=>e&&loOk(e))){const k=Object.keys(IT).find(k=>IT[k].pr>=LO.minPr*2&&!IT[k].nt&&!IT[k].evi&&!IT[k].keep);if(k)S.inv.push({k,from:"test"})}const mine=(S.inv||[]).find(e=>e&&loOk(e));let c6=null;if(mine)c6=loLose(S,{cause:"mis"});Q.length=0;
   const F=liveRivals(true)[0];if(c6&&F){F.ky={m:0,cd:-1,seen:{},got:[],last:-1};for(const id in KY.DEF)if(id!=="vat_lac")F.ky.seen[id]=0;
    const L6=KY.elig(F,"vuon").filter(x=>x.id==="vat_lac"&&x.X.lc.own==="me");ck("6 NPC can find HER lost piece (law 1)",L6.length>0,{n:L6.length});}
   else ck("6 setup (her losable piece)",!!c6,{});
