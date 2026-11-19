@@ -145,6 +145,15 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
  if(phase==="maid"){
   try{const L=[];for(const v of liveRivals(true))for(const s of (v.staff||[]))if(s&&s.role==="maid"&&g0(s)==="maid")L.push(s);for(const s of L.slice(0,16))npcOpts("maid",s,["maid"])}catch(e){E("npcMaid",e)}
   playerLabels("maid");
+  /* maid:pil (Lén giữ đồ Nội vụ phủ phát, parallel-time r5): ONE act, two timings — her card (j42 srvCards, jeitem eitPilMaidOk) and the NPC servant's
+     monthly pass when the goods come (jeitem eitPilfer → eitPilWho by ag2Ch → eitPilNpc: the same eitPilSee odds, the same four answers eitPilJudge).
+     The day options never hold the monthly pass, so both sides are judged by the RULE (as the target ladder): the same lòng states for both doers
+     (as she is, and low: 10), with her master holding a piece Nội vụ phủ gave this month (the pass runs only when goods came). */
+  try{const P=BAL.eit.pil;const m=srvM();const t0=S.tin;let tmp=null;
+   if(m&&typeof eitPilPick==="function"&&!eitPilPick(m)){const k=Object.keys(IT).find(x=>{try{return itm(x).pr>0}catch(e){return false}});if(k){tmp={k,from:"noivu",d:S.turn};m.inv=m.inv||[];m.inv.push(tmp)}}
+   for(const tin of [t0,10]){S.tin=tin;if(eitPilMaidOk())addP("maid","Lén giữ đồ Nội vụ phủ phát","pil-rule")}S.tin=t0;if(tmp)m.inv.splice(m.inv.indexOf(tmp),1);
+   const L=[];for(const v of liveRivals(true))for(const s of (v.staff||[]))if(s&&s.role==="maid"&&g0(s)==="maid")L.push([v,s]);
+   for(const [v,s] of L.slice(0,16)){const l0=s.loyal;for(const lo of [l0,10]){s.loyal=lo;if(eitPilWho(v).some(c=>c.s===s))addN("maid","maid:pil","eitPilWho")}s.loyal=l0}}catch(e){E("pil",e)}
   /* PROMOTION (player): srvRise, then the same S with the maid origin removed (= a born Đáp ứng in the same world): the act sets must be equal */
   try{S.age=Math.max(S.age||0,18);srvRise("role-parity scan");res.upMe={ok:!isSrv()&&S.rank===0,rank:S.rank};S.preg=0;S.hidden=false;playerLabels("up");
    const sv=S.srv;delete S.srv;playerLabels("t1me");S.srv=sv}catch(e){E("upMe",e)}}

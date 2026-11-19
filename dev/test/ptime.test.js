@@ -73,7 +73,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   /* maid road */
   localStorage.clear();for(let k=0;k<40;k++){window.__nlInner=1;start();window.__nlInner=0;if(isSrv())break}if(!isSrv()){try{srvInit();deal()}catch(e){}}o.srv=isSrv();if(!o.srv)return o;Q.length=0;S.mg=0;toB0();
   o.P={ansK:BAL.ptime.ansK,half:BAL.road.hp.half,lo:BAL.odds.lo};S.srv.err={b:bid(),k:"vuon",n:"Ra Ngự hoa viên hái hoa cắm bình"};S.ordQ=[];const p0=S.place,q0=Q.length;o.fr=ptErrFrame();o.noPop=Q.length===q0;const oq=(S.ordQ||[])[0];o.oq=oq?{pid:oq.pid,dl:oq.due-ptNow()}:null;
-  o.pan=ptPanel().opts.map(x=>x.n);/* shown = charged: the real walk + the task (FAIL 7 item 3) */o.nF=ptRecvN("vuon","errand",0);o.nH=ptRecvN("vuon","errand",1);o.walk=ptRecvWalk("vuon");o.nExp=o.walk+BAL.ptime.kinds.errand.n-BAL.walk.near;if(oq){ptOrdOpen(oq)}const d=Q[Q.length-1];o.on=d&&d.opts.map(x=>x.n);o.ox=d&&d.opts[0].x;o.qx=d&&d.opts[1]&&d.opts[1].x;
+  o.pan=ptPanel().opts.map(x=>x.n);/* shown = charged: the real walk + the task (FAIL 7 item 3) */o.nF=ptRecvN("vuon","errand",0);o.nH=ptRecvN("vuon","errand",1);o.walk=ptRecvWalk("vuon");o.nExp=Math.max(BAL.ptime.kinds.errand.n,BAL.ptime.taskMin+1,o.walk+BAL.ptime.kinds.errand.n-BAL.walk.near);if(oq){ptOrdOpen(oq)}const d=Q[Q.length-1];o.on=d&&d.opts.map(x=>x.n);o.ox=d&&d.opts[0].x;o.qx=d&&d.opts[1]&&d.opts[1].x;
   const u0=used;if(d){Q.pop();d.opts[0].go()}Q.length=0;o.place=[p0,S.place];o.used=used-u0;o.done=!!(S.srv.sent&&S.srv.sent.done);
   const m=srvM();const t=liveRivals(true).find(v=>v!==m&&v.alive&&!v.out);
   if(t){const c=PEND.cnvOrd({k:"spy",t:t.id});o.cn=c&&c.o.map(x=>x.n);o.cnN=[ptRecvN(palaceOf(t),"spy",0),ptRecvN(palaceOf(t),"spy",1)];/* her công lao on the hết lòng row (item 6) */o.cnMerit=srvOrdMerit();o.cnx=c&&c.o[0].x;o.chx=c&&c.o[1].x;
@@ -95,5 +95,36 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  ok(!r2.srv||(r2.npcHalf==="half"&&JSON.stringify(r2.npcOpts)==='["obey","half","refuse","tell"]'),"10 two-way: an NPC servant picks among the same 4 (stf2Ord → half)",{h:r2.npcHalf,o:r2.npcOpts,e:r2.npcErr});
  ok(r2.srv!==false,"10 a maid-road life was started",r2.srv);
  ok(!(r2.errs||[]).length,"no jptime errors (part 2)",r2.errs);
+ /* 11 FAIL 4 (round 5): CLICK the answers of a master's order (cnvOrd) — to ANOTHER palace the order is her pass (j41 accGrant), used == shown,
+    the deed runs, the order is gone only after; a refused walk keeps the order (used +0); «Giúp qua loa» never costs 0 khắc and is always one
+    khắc under «Giúp hết lòng» (laws 2/3) */
+ const r3=!r2.srv?null:await p.evaluate(()=>{const o={rows:[],zero:[],errs:[]};BAL.ptime.on=1;
+  const toB0=()=>{for(let i=0;i<12&&!((S.buoi||0)===0&&used===0);i++){Q.length=0;S.mg=0;try{nextBuoi()}catch(e){}Q.length=0}};
+  const m=srvM();if(!m||!isSrv())return o;const mk=palaceOf(m);o.min=BAL.ptime.taskMin;
+  const give=(k,t)=>{S.ordQ=[];Q.length=0;window.__j95boff=1;const dd=mkP("cnvOrd",{k,t:t.id});window.__j95boff=0;if(!dd)return null;pushDil(dd,"Lệnh của "+m.name);return S.ordQ[0]||null};
+  const click=(oq,i)=>{ptOrdOpen(oq);const d=Q[Q.length-1];if(!d||!d.opts[i])return null;const x=d.opts[i].x;Q.length=0;const u0=used,s0=S.logSeq||0;/* the deed's own dice are not under test (a caught plant ends in Tân Giả khố or death): rolls succeed during the click only */const roll0=roll;roll=()=>true;let r="";try{r=cnvRun(S,d.opts[i],true)}finally{roll=roll0}if(r)log(r);Q.length=0;return{x,used:used-u0,logs:(S.logSeq||0)-s0}};
+  const far=liveRivals(true).filter(v=>v!==m&&v!==S&&v.alive&&!v.out&&palaceOf(v)&&palaceOf(v)!==mk);
+  for(const k of ["spy","plant","poison"])for(const t of far.slice(0,2)){toB0();S.place="home";S.srv.lau=0;const pl=palaceOf(t);const kind=k==="spy"?"spy":k==="plant"?"plant":"harm";
+   const oq=give(k,t);if(!oq){o.rows.push({k,t:t.id,none:1});continue}const N=ptRecvN(pl,kind,0),H=ptRecvN(pl,kind,1);const c=click(oq,0);
+   o.rows.push({k,pl,N,H,used:c&&c.used,shown:c&&/tốn: (\d+) khắc/.exec(c.x||"")?+/tốn: (\d+) khắc/.exec(c.x)[1]:null,at:S.place,left:S.ordQ.length,logs:c&&c.logs})}
+  /* refused walk (Tân Giả khố): the order stays, nothing paid */
+  {toB0();S.place="home";const t=far[0];const oq=t&&give("spy",t);if(oq){S.srv.lau=1;const c=click(oq,0);o.refused={used:c&&c.used,left:S.ordQ.length,same:!!(S.ordQ[0]&&S.ordQ[0].id===oq.id),pass:!!(S.acPass&&S.acPass[palaceOf(t)]&&accHas(S,palaceOf(t)))};S.srv.lau=0}}
+  /* walk 0 (a consort in the master's own palace, or the errand at home): never 0 khắc, qua loa = hết lòng − 1, charged = shown */
+  for(const [kind,pl] of [["spy",mk],["plant",mk],["errand","home"],["errand",S.place]]){const F=ptRecvN(pl,kind,0),Hh=ptRecvN(pl,kind,1);o.zero.push({kind,pl,F,Hh})}
+  {toB0();S.place="home";const t=liveRivals(true).find(v=>v!==m&&v!==S&&v.alive&&!v.out&&palaceOf(v)===mk);if(t){const oq=give("spy",t);if(oq){const H=ptRecvN(mk,"spy",1);const c=click(oq,1);o.half0={H,used:c&&c.used,left:S.ordQ.length}}}}
+  /* item 4: ONE NOTICE SYSTEM — every jptime notice goes through window.kitNotice({id,line,text,go,goLabel}) when jnotice is in the build (no kitLine) */
+  {const got=[];let kl=0;const kn0=window.kitNotice,kl0=window.kitLine;window.kitNotice=sp=>{got.push(sp);return sp};const klW=kitLine;kitLine=function(){kl++;return null};
+   try{toB0();const a=ptSend({who:"pt:test",nm:"Cung nữ thử",kind:"spy",lbl:"đi nghe ngóng"});if(a)spend(a.due-ptNow());const t=far[0];if(t)give("spy",t);
+    o.note={n:got.length,go:got.some(x=>/đã đi/.test(x.line)),back:got.find(x=>/đã về: có tin báo/.test(x.line)),ord:got.find(x=>/có lệnh/.test(x.line)),kl};
+    o.note.back=o.note.back&&{id:o.note.back.id,go:typeof o.note.back.go,gl:o.note.back.goLabel,text:!!o.note.back.text};o.note.ord=o.note.ord&&{id:o.note.ord.id,go:typeof o.note.ord.go,gl:o.note.ord.goLabel}}
+   finally{window.kitNotice=kn0;kitLine=klW;S.ordQ=[]}}
+  o.errs=PT.stat.errs.slice();return o});
+ if(r3)console.log(JSON.stringify(r3));
+ const R3=r3?r3.rows.filter(x=>!x.none):[];
+ ok(!r3||(R3.length>=3&&R3.every(x=>x.used===x.N&&x.shown===x.N&&x.at===x.pl&&x.left===0&&x.logs>0&&x.N-x.H===1)),"11 cnvOrd answer to ANOTHER palace (spy/plant/poison): the order is her pass; used == shown, she is there, the deed ran, the order gone only after",R3);
+ ok(!r3||(r3.refused&&r3.refused.used===0&&r3.refused.left===1&&r3.refused.same&&!r3.refused.pass),"11 a refused walk keeps the order (same deadline), nothing paid, no pass left",r3&&r3.refused);
+ ok(!r3||(r3.zero.every(z=>z.Hh>=r3.min&&z.F-z.Hh===1)&&(!r3.half0||(r3.half0.used===r3.half0.H&&r3.half0.H>=r3.min&&r3.half0.left===0))),"11 «Giúp qua loa» never 0 khắc (≥ BAL.ptime.taskMin), always one khắc under hết lòng; walk-0 click charged = shown",{z:r3&&r3.zero,h:r3&&r3.half0});
+ ok(!r3||!r3.errs.length,"11 no jptime errors",r3&&r3.errs);
+ ok(!r3||(r3.note&&r3.note.go&&r3.note.back&&r3.note.back.go==="function"&&r3.note.back.gl&&r3.note.back.text&&r3.note.ord&&r3.note.ord.go==="function"&&r3.note.ord.gl==="Nghe lệnh"&&r3.note.kl===0),"12 ONE NOTICE SYSTEM: send / landing «đã về: có tin báo» / order notices go through kitNotice({id,line,text,go,goLabel}), no kitLine",r3&&r3.note);
  ok(!errs.length,"8 no page errors",errs.slice(0,3));
  await b.close();const f=res.filter(x=>!x).length;console.log(f?`${f} FAIL`:'ALL OK');process.exit(f?1:0)})().catch(e=>{/* a crash inside the page is a clean FAIL line (reviewer note) */console.log("FAIL crash: "+(e&&e.message||e).toString().slice(0,300));process.exit(1)});
