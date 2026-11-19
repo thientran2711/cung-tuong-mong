@@ -14,3 +14,8 @@ Items now differ per age (builder 3f): a18 folding fan, a26 hand mirror, a36 ruy
 - gens: a18 tCRE9NTmZJ (→ cut 0eUdsAaTfW, raw had parchment haze) · a26 JNC6mKQOq4 · a36 BhNvOe1oQR · a51 gOmyo9OSXO · a65 lJtOBnagv9 (all 1st try, 5 × 135 cr + 3 cr cut). --verify PASS.
 - Items per age: a18 hand mirror, a26 imperial edict scroll (crimson), a36 ruyi, a51 hand censer, a65 walking staff. All frontal, calm, item below the chin, cloth hangs straight, lips closed, forehead clean (tassels end above the brows), no crown flowers; a51 silver temples, a65 mostly silver.
 - Honest faults: a36/a51/a65 items are the same as c17's at those ages (ruyi/censer/staff) — the builder picks them; 3f "neighbours differ" across people may want a builder change (foreman). a18 mirror back is a red dragon disk — reads fine.
+
+## c19 DONE (dusty-rose second colour) — sheet img/_review/nude-mass/sheet_c19.jpg (CDN), copy out/n6c_c19_sheet.jpg
+- gens: a18 O6Eiasoynm · a26 s7IJowtl8e · a36 jUowXR7LD0 (→ cut dt4mPQVXSL, raw had parchment haze) · a51 s7IJoDUl8e · a65 xSBUdtijfW (all 1st try). --verify PASS.
+- Items: a18 sceptre, a26 edict scroll, a36 ruyi, a51 hand censer, a65 walking staff. Frontal, calm, cloth still, lips closed, forehead clean, no crown flowers; a51 silver temples, a65 mostly silver.
+- Honest faults: a18 sceptre head rises to about collar/chin level at her right shoulder (clear of the face); a51 bead tassels end in small red beads just above the brows (on the fringe, not on skin) — same as c17 a51.
