@@ -11,7 +11,7 @@
        pointer-events none, removed when the lean ends or the seal leaves the screen. No file = no layer. Nothing is drawn in code (no code-drawn tears / smoke).
    KEYS: the seal map holds khoc + hon too (names "Khóc", "Hờn"); the mood logic (jemo EMO) decides when a person is in one — until then they never appear. ===== */
 window.KIT_EMOSEAL=window.KIT_EMOSEAL||{keys:{vui:{m:"sway",d:2.8},binh:{m:"nod",d:3.0},buon:{m:"droop",d:3.6},gian:{m:"shake",d:2.0},so:{m:"tremble",d:2.4},ghen:{m:"flicker",d:3.0},lo:{m:"bob",d:2.8},dau:{m:"wince",d:2.8},muu:{m:"glint",d:3.0},an:{m:"nod",d:3.0},khoc:{m:"droop",d:3.6,name:"Khóc"},hon:{m:"flicker",d:3.0,name:"Hờn"},chanh:{m:"flicker",d:3.0},phanno:{m:"shake",d:2.0},runso:{m:"tremble",d:2.4},matngu:{m:"droop",d:3.6},tutin:{m:"nod",d:3.0},hanghai:{m:"bob",d:2.8},tinhtu:{m:"sway",d:2.8},chuyentam:{m:"nod",d:3.0},hungkhoi:{m:"glint",d:3.0},tinhnghich:{m:"bob",d:2.8},hothen:{m:"droop",d:3.6},chan:{m:"droop",d:3.6},khochiu:{m:"flicker",d:3.0},choang:{m:"wince",d:2.8}},
- defaultMotion:"nod",defaultDur:3.0,idle:{deg:.6,per:[8,11]},lean:{scale:[2.2,2.4],minFrac:.2,maxFrac:.5,grow:1.6,shrink:1.6,holdMin:5,loops:2,min:4,max:8,gap:1.2,z:9990},anim:"img/kit/emo-anim/",fx:"img/kit/emo-fx/",fxScale:1.7};
+ defaultMotion:"nod",defaultDur:3.0,idle:{deg:.6,per:[8,11]},lean:{scale:[2.2,2.4],minS:1.2,minFrac:.2,maxFrac:.5,margin:.09,marginPx:4,grow:1.6,shrink:1.6,holdMin:5,loops:2,min:4,max:8,gap:1.2,z:9990},anim:"img/kit/emo-anim/",fx:"img/kit/emo-fx/",fxScale:1.7};
 const KES_HAVE={};/* url -> true | false | "wait" (probe result) */
 function kesProbe(url,cb){const h=KES_HAVE[url];if(h===true||h===false){cb(h);return}
  if(h&&h.w){h.w.push(cb);return}const e={w:[cb]};KES_HAVE[url]=e;const im=new Image();const done=ok=>{KES_HAVE[url]=ok;e.w.forEach(f=>{try{f(ok)}catch(x){}})};im.onload=()=>done(true);im.onerror=()=>done(false);im.src=url}
@@ -41,8 +41,8 @@ function kesLean(el,force){el.__ln=0;if(!el.isConnected||!el.classList.contains(
  const r=el.getBoundingClientRect();if(r.width<2||r.bottom<=0||r.top>=innerHeight||r.right<=0||r.left>=innerWidth){kesSchedule(el);return}
  kesCur=el;const k=kesKey(el),spec=kesSpec(k),d=(spec&&spec.d)||KIT_EMOSEAL.defaultDur,still=el.dataset.kemos;
  const n=Math.max(L.loops,Math.ceil(L.holdMin/d)),hold=n*d,tot=L.grow+hold+L.shrink;
- const sc=Math.min(innerWidth,innerHeight)/Math.max(r.width,r.height);let S=Math.max(kesR(L.scale[0],L.scale[1]),L.minFrac*sc);S=Math.max(1.2,Math.min(S,L.maxFrac*sc));/* big enough to read the face: >= minFrac of the short screen side, never past maxFrac */
- const bw=r.width*S,bh=r.height*S,m=Math.round(Math.max(bw,bh)*.09)+4,/* margin = room for the feeling motion (shake / sway amplitude) */ cx=r.left+r.width/2,cy=r.top+r.height/2;
+ const sc=Math.min(innerWidth,innerHeight)/Math.max(r.width,r.height);let S=Math.max(kesR(L.scale[0],L.scale[1]),L.minFrac*sc);S=Math.max(L.minS,Math.min(S,L.maxFrac*sc));/* big enough to read the face: >= minFrac of the short screen side, never past maxFrac */
+ const bw=r.width*S,bh=r.height*S,m=Math.round(Math.max(bw,bh)*L.margin)+L.marginPx,/* margin = room for the feeling motion (shake / sway amplitude) */ cx=r.left+r.width/2,cy=r.top+r.height/2;
  const bl=Math.max(m,Math.min(cx-bw/2,innerWidth-bw-m)),bt=Math.max(m,Math.min(cy-bh/2,innerHeight-bh-m));/* clamped inside the screen */
  const c=document.createElement("img");c.className="kemo-big kemo-m-"+(spec?spec.m:KIT_EMOSEAL.defaultMotion);c.alt="";c.setAttribute("aria-hidden","true");c.src=el.getAttribute("src");
  c.style.cssText=`position:fixed;z-index:${L.z};left:${bl.toFixed(1)}px;top:${bt.toFixed(1)}px;width:${bw.toFixed(1)}px;height:${bh.toFixed(1)}px;pointer-events:none;object-fit:${getComputedStyle(el).objectFit||"contain"};`+
@@ -66,7 +66,7 @@ function kesScan(){document.querySelectorAll("img.kemo").forEach(kesWatch)}
 function kesSweep(){/* effect layers + big clones whose seal is gone */const L=[...document.querySelectorAll("img.kemo")];document.querySelectorAll("img.kemofx").forEach(f=>{if(!L.some(c=>c.__fx===f))f.remove()});document.querySelectorAll("img.kemo-big").forEach(f=>{if(!L.some(c=>c.__big===f))f.remove()})}
 let kesQ=0;function kesSched(){if(kesQ)return;kesQ=requestAnimationFrame(()=>{kesQ=0;kesScan();kesSweep()})}
 try{new MutationObserver(ms=>{if(ms.some(m=>[...m.addedNodes].some(n=>n.nodeType===1&&(n.matches&&n.matches("img.kemo")||n.querySelector&&n.querySelector("img.kemo")))||[...m.removedNodes].some(n=>n.nodeType===1)))kesSched()}).observe(document.body,{childList:true,subtree:true})}catch(e){}
-addEventListener("resize",()=>document.querySelectorAll("img.kemo.kemo-lean").forEach(el=>kesLeanEnd(el)));
+addEventListener("resize",()=>document.querySelectorAll("img.kemo.kemo-lean").forEach(el=>{kesLeanEnd(el);kesSchedule(el)}));
 kesScan();
 /* r2 reviewer fix: Cảnh động / Gọn switched in Settings applies to the seals already on screen at once (saveOpt does not re-render) */
 (function(){if(typeof saveOpt!=="function")return;const o=saveOpt;saveOpt=function(){const r=o.apply(this,arguments);try{document.querySelectorAll("img.kemo").forEach(el=>{if(!el.__kes)return;const b=el.getBoundingClientRect();kesLive(el,b.width>2&&b.bottom>0&&b.top<innerHeight&&b.right>0&&b.left<innerWidth)})}catch(e){}return r}})();
