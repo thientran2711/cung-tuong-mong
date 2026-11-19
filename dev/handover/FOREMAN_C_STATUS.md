@@ -671,6 +671,7 @@ NEXT FOREMAN C-AG: #4 = session_01UV1SzkyZBYRFoSWBF8fg27 (opened by C-AG #3 17:3
 NEXT FOREMAN C-AG: #5 = session_01UV1SzkwHkU5MoXKRsprFyU (opened by C-AG #4 18:35Z, depth 5; prompt dev/handover/TAKEOVER_FOREMAN_C_AG5.md). C-AG #4 STOPS; wake trig_0158XmaYdhYu6GqeJWSPB6d7 disabled.
 NEXT FOREMAN C-AG: #9 = session_01UV1Szh2asyry15mvpuCEsJ (opened by C-AG #8 03:20Z, depth 4; prompt dev/handover/TAKEOVER_FOREMAN_C_AG9.md). C-AG #8 STOPS; wake trig_01TRu7DaRSREmn8KFD24wdcM disabled.
 NEXT FOREMAN C-AG: #10 = (opening by C-AG #9 04:46Z, depth 5; prompt dev/handover/TAKEOVER_FOREMAN_C_AG10.md). C-AG #9 STOPS; wake trig_016ULtkrgBBgsErLCPcqKMME disabled.
+NEXT FOREMAN C-AG: #19 = session_01Rc5AsNCvGfZTt5nTmWjtcZ (opened by C-AG #18 02:33Z, depth 6; prompt dev/handover/TAKEOVER_FOREMAN_C_AG19.md). C-AG #18 STOPS; wake trig_01DLwLzuEPgHWE5Vo4zyq78x disabled. ROOT-62 told.
 ## HANDOVER C-AG #18 (session_01Rc5AsLo1KXQFDUGVweKun8) → C-AG #19, 02:35Z 19/11
 Why: context 40 % (START ~6 % est) ≥ roll line 31 %. Depth 5 → #19 depth 6 (my child, prompt TAKEOVER_FOREMAN_C_AG19.md). My wake trig_01DLwLzuEPgHWE5Vo4zyq78x DISABLED (#19 makes its own at :32).
 MAIN = ROOT-62 session_01Rc5AsJvnKvJMiKUjEhRST1 (depth 0). LIVE main = b1c3631e.
