@@ -134,3 +134,28 @@ d5e5c343 (+ edb2e724, only jopic card-frame scrolling) re-ran the static gates +
 - `eyes(S)*5` (odds bonus per eye) is typed in 11 modules (j22, j4, j68e–h, j7 ×2, j72, j92, j96, jroute) — one-core family for the BAL owner, pre-existing on LIVE.
 - Pre-existing on LIVE (re-check #2 notes stand): «Khó lường» odds word outside the VANPHONG ladder (j17/j63, ksp); MF7 «có rủi ro · thành bại khó đoán» hint on sure options with a Kèm risk.
 - My first try ran the four seeds in parallel on 4 CPUs → timeouts (exit 124, not a branch fault); re-ran one at a time.
+
+## FINAL-MERGE 1a4df595 (opus, session_01964izFKstgvyB8Sbpgkgc3, for Foreman D #7)
+PRIORITY #1 CHECK ('choice-value'): OD 1 | ledger 0 | claims 1 (= this job) | main 0 | review/* review/choice-value-audit d5e5c343, review/receiver-choice-rv c02748c2b (LAND READY, overlaps 1 hunk) | archive 0
+START_CTX ≈ 4 % of 1M (get_session reads 0; estimate) · depth 8 · finished ≈ 15 %.
+Merge: origin/main 1a4df595 (parallel-time 801b86b7 + role-parity-drift-2) into d5e5c343 → **ef373140** (pushed). Only conflicts: index.html / sw.js (generated) → rebuilt by assemble.py + build_site.sh. The six files both sides touched (j25 jact talkK, j42 ordRow / «Giúp qua loa», j8, jstip stipAskOdds, jtsb tsbHit) merged automatically; read every main-side hunk: no overlap with the branch's option-card values.
+Laws checked: 2, 3, 4, 7, 9, 11, 1 (role-parity).
+
+### Gates on ef373140 (one at a time)
+| gate | result |
+|---|---|
+| one-core-guard / -text / -bind / -text-rule | PASS ×4 |
+| odds-cap | PASS |
+| choice-value-scan 100 turns seeds 7 / 11 / 23 / 31 | **PASS** 347 / 340 / 360 / 315 modals · COST-ONLY 0 · HINT-NO-GAIN 0 · DOMINATED 0 · 0 page errors (covers LIVE's new «Giúp qua loa» order answer) |
+| --plant | PLANT OK 3/3 (exit 1 = only the 3 planted rows) |
+| ptime.test / ptime2.test | ALL OK / ALL OK |
+| role-parity.test | **ALL PASS** — no row stays red |
+| quickcheck --runs 6 | PASS · old save ok · core gates PASS · perf new/live render 231/244 ms, tab 466/500, buổi 1260/1399 |
+| coop-e2e vs live Worker | 68/68, 0 page errors (fold / ipad / solo) |
+| Fold 755x1000@2 + iPad 1180x820@2: ksp lật thẻ, Cứu giá, cmTt; looked at 3× | rows fit, no overflow, gains visible (Cáo bệnh «dưỡng sức…», Hoảng sợ đứng nhìn «giữ được thân mình vô sự», Dặn … «được tiếng hiền…»), 0 page errors; option pictures still «Đang thỉnh tranh» at shot time (CDN load, not branch). Scratch only, nothing uploaded |
+
+### Overlap with review/receiver-choice-rv c02748c2b (both FF of 1a4df595 → whichever lands second re-merges)
+Only real conflict: `dev/build/jration.js` lxAskHer — this branch gave «Khéo từ chối» a gain («giữ nguyên hộp …»); receiver-choice replaces the whole card with jrcv RCVK.rougeBorrow (4-answer card). **Resolution = take receiver-choice's jration.js** (this branch touches no other line of that file), rebuild index.html / sw.js. Trial union (not pushed): one-core ×4 PASS, odds-cap PASS, choice-value-scan seed 7 PASS 351 modals 0/0/0, receiver-choice.test ALL PASS.
+
+### VERDICT: LAND READY review/choice-value-audit ef373140 (FF of 1a4df595)
+LANDER: (1) delete `jbal.js` BAL.rk guard (`if(!BAL.rk)BAL.rk={loanBack:40};` + its comment) when balance-final lands; (2) jration.js vs receiver-choice-rv: take receiver-choice's lxAskHer (above).
