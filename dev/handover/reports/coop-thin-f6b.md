@@ -107,7 +107,7 @@ Other gates at the merged tree: one-world PASS; quiet scan 32 reachable (= befor
 ## ROLLOVER HANDOVER #3 → #4 (context ≈ START_CTX + 25 %)
 Branch review/coop-thin-f6b @ b08d3375 (pushed). Worktree /home/user/wt/f6bm (sparse, detached at b08d3375; /home/user/wt/f6b = old pre-merge tree, delete). Local Worker running: `cd /home/user/wt/f6b/coop/worker && npx wrangler dev --port 8787 --ip 127.0.0.1` (THINMAX 12; restart from f6bm/coop/worker if the container is new: npm install first).
 LEFT for #4:
-1. Read /home/user/wt/t2.log (ROWS=T1,L1 after fix 4) or rerun `DBG=1 ROWS=T1,L1 node dev/test/coop-thin-f6b.js http://127.0.0.1:8787 12 0`; then A1b (see above); then full L12 + swap ×2 + 4G (LAG=85 CPU=4) + TRIP=1 (bucket F6b = 0).
+1. Fix 4 VERIFIED at b08d3375: ROWS=T1,L1 = 12/12 (L1 826 ms, T1 817 ms, T1b card done). Next: A1b (see above); then full L12 + swap ×2 + 4G (LAG=85 CPU=4) + TRIP=1 (bucket F6b = 0).
 2. When Foreman B says F6a is SẴN SÀNG KIỂM: merge its SSK sha (review/coop-thin-f6) over 924a7e90; rerun.
 3. coop-thin-a L1 (`node dev/test/coop-thin-a.js http://127.0.0.1:8787 1`) and b L4; c/d/e/f1–f5 + f6 (F6a's own test at L11) at their levels; e2e + swap, coop-cyc (old.html built), one-world, one-core ×4, quiet scan; quickcheck (`bash dev/tools/quickcheck.sh`).
 4. Swap E1 flake of #2 (her phone suc/sung/th vs host after a hồi sức step inside the row) — re-check on the merged tree.
