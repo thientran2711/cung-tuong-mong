@@ -113,7 +113,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  const npcT="rivals.find(v=>v&&!v.coop&&v.alive!==false&&!v.out&&v.id<900&&!(typeof sameHouse==='function'&&sameHouse(S,v)))";
  /* F4 helpers: her pets, shelf plants, taste knowledge, recipe knowledge, maid loyalty, Tứ đức levels join the summary */
  const HELP4=()=>{const s0=window.__sum;window.__sum=s=>Object.assign(s0(s),{pets:(s.pets||[]).map(P=>P.t+':'+Math.round(P.full||0)+'/'+Math.round(P.clean||0)+'/'+Math.round(P.joy||0)+'/'+Math.round(P.aff||0)+'/'+(P.maidW||0)).join(','),petOn:s.petOn==null?null:s.petOn,
-   shelf:Object.entries((s.shelf&&s.shelf.g)||{}).filter(([g,e])=>e&&e.pc!=null).map(([g,e])=>g+':'+e.pc).sort().join(','),rcpK:JSON.stringify(s.rcpK||{}),rcpL:JSON.stringify(s.rcpL||{}),ml:s.maid?s.maid.loyal:null,vir:JSON.stringify(s.vir||{})})};
+   shelf:Object.entries((s.shelf&&s.shelf.g)||{}).filter(([g,e])=>e&&e.pc!=null).map(([g,e])=>g+':'+e.pc).sort().join(','),rcpK:JSON.stringify(s.rcpK||{}),rcpL:JSON.stringify(s.rcpL||{}),ml:s.maid?s.maid.loyal:null,vir:JSON.stringify(s.vir||{}),/* parallel time (jptime): her sends still away — a maid ask is a send that lands at the due khắc */ptTaste:(Array.isArray(s.away)?s.away:[]).filter(a=>a&&a.by==="me"&&!a.back&&a.who==="mm:me"&&a.a&&a.a.run==="taste").length,ptOn:!!(typeof BAL==="object"&&BAL.ptime&&BAL.ptime.on&&window.PTIME)})};
  await H.p.evaluate(HELP4);await G.p.evaluate(HELP4);
  /* F2 r2 (quiet off for her taps): a task card «Xong việc: …» (jtq14 doneCard) her F4 act earns (pet shop note "buy") reaches HER phone, once, never the host's (as F3 'W') */
  const DONEW=()=>{window.__done4=[];const seen=()=>{const m=document.getElementById('modal');if(!m||m.hidden)return;const t=(m.textContent||'').match(/Xong việc: ([^\n]{2,60}?)(Chương|$)/);if(t&&window.__done4[window.__done4.length-1]!==t[1].trim())window.__done4.push(t[1].trim())};
@@ -143,7 +143,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  /* ---- K: taste questions ---- */
  await act('K1 Hỏi thái y kiêng kỵ về chính mình (rcpAskGo ty, her): same as solo',`rcpAskGo('ty',S)`,{twin:true,chk:x=>x.g1.rcpK!==x.g0.rcpK});
  {const v=await pick(`const v=rcpPeople().find(r=>r&&typeof r==='object'&&rcpUnknown(r).length);return v?v.id:null`);
-  if(v!=null)await act('K2 Sai cung nữ dò la khẩu vị (rcpAskGo maid, a consort)',`rcpAskGo('maid',rivals.find(r=>r.id===${v}))`,{chk:x=>x.g1.rcpK!==x.g0.rcpK||x.g1.ml!==x.g0.ml});
+  if(v!=null)await act('K2 Sai cung nữ dò la khẩu vị (rcpAskGo maid, a consort)',`rcpAskGo('maid',rivals.find(r=>r.id===${v}))`,{chk:x=>x.g1.rcpK!==x.g0.rcpK||x.g1.ml!==x.g0.ml||/* parallel time (review parallel-time #4): her maid is SENT (order khắc paid, one more «taste» task away on HER state); what she learns lands at the due khắc */(x.g1.ptOn&&x.g1.ptTaste===x.g0.ptTaste+1&&x.g1.used>x.g0.used)});
   else ok(true,'K2 nobody left to ask about (skipped)')}
  /* ---- R: a recipe book read ---- */
  {const bk=await pick(`for(const k in IT)if(IT[k]&&IT[k].bk&&!rcpKnows(S,IT[k].bk.kind,IT[k].bk.sid))return k;return null`);
