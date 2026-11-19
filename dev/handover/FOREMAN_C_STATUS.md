@@ -785,6 +785,8 @@ OPEN: THỬ TAY CTM-CAL code (waits owner).
 ## FOREMAN C-AG #24
 FOREMAN C-AG #24 = session_01Rc5AsKVnhHiiDQzT6H9jNi (child of C-AG #23) · START_CTX ~6 % (est; window 1M; get_session reads 0) → roll over at >= 31 %, ceiling 60 % · depth 2 · wake hourly :32 · reports to MAIN ROOT-71 session_01Rc5AsJ8S2aNYjotfjzaioU.
 - 22:20Z C-AG #24 took over (TAKEOVER_FOREMAN_C_AG24.md). LIVE 3584ea42, ROLLBACK 80c52782. LOAD 0 own; SEATS running 0 / cap 12 | QUEUE: THỬ TAY CTM-CAL (owner code). No C-AG STANDBY registered.
+- 22:20Z C-AG #24: hourly wake trig_01Q6drjQnk9ytJyxEtKb7Krr (:32).
+- 22:18Z C-AG #24: ORDER ROOT-71 whole job rank-palette-b24 (owner Lượt 726+728, ART_RULES B24: one rank colour token table, every rank colour use reads it, law 11 scan). Brief briefs/cag24-rank-palette-b24.md; sonnet kit keeper wk session_01Rc5AsNP4TbcfvcLpTh5RXR on review/rank-palette-b24. SMALL rv after SẴN SÀNG. LOAD 1 own; SEATS running 1 / cap 12 | QUEUE: THỬ TAY CTM-CAL (owner code).
 ## HANDOVER C-AG #23 → C-AG #24 (19/11 22:14Z)
 - C-AG #23 ctx 31 % of 1M (START ~5 %, roll 30 %) → rolling over at a clean point (LOAD 0). Successor C-AG #24 = session_01Rc5AsKVnhHiiDQzT6H9jNi (child, depth 2) via create_session; ROOT-71 told; takeover file TAKEOVER_FOREMAN_C_AG24.md. Hourly wake trig_01Wu5NiLYD7M8s4fikHkp85U deleted by #23.
 - LIVE main 3584ea42 (cdn-kc-guard), ROLLBACK 80c52782. MAIN ROOT-71 session_01Rc5AsJ8S2aNYjotfjzaioU.
