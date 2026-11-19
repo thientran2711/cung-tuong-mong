@@ -1,0 +1,48 @@
+# palace-chatter — PL#6 BUBBLE TALK (worker E17, opus lead; session_01DgYSWoCjG7erCEJGy1Y514)
+★ THE 18 LAWS: read the block at the very top of dev/rules/START_CORE.md FIRST (all 18; laws 1–6 top priority); put this line in every brief/takeover prompt; reviewers FAIL any break.
+depth 8 (lineage limit 8: this session cannot open children — handover goes to Foreman E, who opens the successor). START_CTX ~3 % of 1M (get_session reads 0; own estimate). Rollover at ~28 %, ceiling 60 %.
+
+## PLAN (19/11 ~05:20Z)
+PRIORITY #1 CHECK ('bubble talk' / 'chatter' / 'speech bubble' / 'nghe lén' / 'kLine'): OD L1627 (5) + L1943/L1945/L1949 (read verbatim) | ledger 0 | main: jvoice.js kLine/kAddr/kSay/kSpk (palace-voice, LIVE: pools, no-repeat memory S.vl, co-op `o.shared` seed rotation, rank bands kBand), j78 eavesdrop facts (j78.js:104 "eavesdrops that now say WHAT was learned"), j2.js:164 "Nghe lén câu chuyện" option, jagday agPlanned()/agRec() (real NPC deeds per khắc + place = the happenings), jact "!" happenings, S.visit.people (= who stands on the stage), j6 renderStage, jfigseal kfsPerson (figure → person) | review/*: review/errand-scene r6 6be6674f = kitHeadMarkHtml (§78.z, white/yellow bubble ICON 24 px, no text) + kitMarkLine/kitBadgeAt (§78.y lines from the REAL head top); review/coop-chat kitChatBubble (§80 co-op letters — a panel bubble, not a head bubble; not reused for heads) | claims: this session (CLAIMS row 233) | reuse: everything above; NOTHING new for voice/address/no-repeat/placement.
+BASE: review/palace-chatter is cut from review/errand-scene 6be6674f (errand-scene not on main yet); I re-merge origin/main once errand-scene lands.
+
+### 0. KIT GAP → KIT REQUEST (law 9; I do NOT build it)
+The §78.z part is a 24 px ICON; the owner's bubble talk needs the SAME bubble holding a spoken LINE (manga style, tail to the speaker). That is missing. KIT REQUEST (filed in dev/kit/KIT_REQUESTS.md, FOR MAIN = kit keeper / errand-scene owner):
+- `kitHeadMarkHtml(title, role, "say", text)` — a "say" state of the SAME §78.z part (not a second bubble): white body + black text (the plain white state grown to fit text), dark rim, small tail down to the speaker's centre line; max width `KIT_HEADMK.sayW` (Fold/iPad), ≤ 2 text lines, kit font; pop-in/out = the khapNudge family, reduced motion = still.
+- placement through §78.y: `kitBadgeAt(st, fig, "say", w, h)` — bottom ON the speaker's sex line (never lower: never covers any head/hair/crown), centre on her centre line, clamped inside the stage, shifted sideways (tail stays on the speaker) when two bubbles of one exchange would overlap; when the frame room above the line is too small the bubble shrinks to one line, never sinks.
+- Until that part exists my code calls it guarded (`typeof` + state probe) and FALLS BACK to existing parts only: the plain WHITE §78.z bubble (state "off") above the speaker while she speaks + the line in the kit notice line (kitLine / Sổ ghi long form). Zero private CSS / frames in this branch.
+
+### 1. HOOKS (one new file dev/build/jchat.js, assembled after jerr/jmark; wraps, never edits callers)
+- (a) STAGE ENTER → MAID GREETING: wrap renderStage; when S.place becomes her own palace (home) after being elsewhere (or game load into home), and HER maid (her real personal maid, present in S.visit.people, not away on an errand — PTIME/S.away/S.erra) is on stage → the maid says a greeting (pool by time of day / season / her mood / what she came back from / rank band via kAddr: "Chủ tử về rồi", "Chào mừng chủ tử hồi cung" …). No maid present → nobody greets (law 6b). Once per arrival.
+- (b) IDLE CHATTER: one real-time timer, every BAL.chat.gap.min..max s (60..120 = the owner's 1–2 min), only while the stage is visible (no modal/dialog open, document visible, stage figures on screen). Picks a pair (or 3) from S.visit.people who are REALLY there this khắc (agRec place = S.place; servants of the place; never the dead/away), weighted by relation (friends, same palace, master–servant, rivals = barbed), and plays an exchange of 2–4 alternating lines, one bubble at a time per speaker, ≤ BAL.chat.maxBub bubbles on screen.
+- (c) HAPPENING → GROUPED TALK: the people of one happening at her place (agPlanned()/pend deed with doer + target t at S.place this khắc; jact "!" happenings fired on arrival) — (i) stage order: wrap curPeople so the participants stand next to each other (same view page on Fold 2-per-view / iPad), stable order otherwise; (ii) they talk back and forth about THAT deed (deed kind → topic pool: quarrel, gift, gossip, favour, visit, lesson …) with the real names/objects of the deed.
+- (d) EAVESDROP → EXACT LINES: the j2 "Nghe lén câu chuyện" result and j78 eavesdrop results quote the exchange word for word: the lines are built from the same pools filled with the TRUE facts j78 already reads (j78 facts unchanged — real evidence law 6a); the same quoted lines go to Sổ ghi (kitLine long form). A chatter exchange she sees on stage is also written to Sổ ghi only when it holds a true fact (otherwise it is flavour and not logged).
+- (e) SERVANT REPORT (OD (5) "gold-border bubble + a sound"): already the errand-scene yellow bubble + TIN BÁO (AG-ALL-2) — not rebuilt; I only make sure a chatter bubble never takes the yellow state or the report's spot (yellow wins; chatter waits).
+- SPEECH ONLY: no thought bubbles anywhere ("suy nghĩ trong đầu họ làm sao mà tôi biết được").
+
+### 2. LINE BANKS (data file dev/build/jchatl.js; filled through jvoice kSay/kAddr, chosen through kLine)
+- Axes: speaker kind (maid · eunuch · ma ma · cung nữ of the place · consort by band lo/mid/hi/hq · Hoàng hậu · Thái hậu · Hoàng thượng, rare) × listener (kAddr) × topic (season ×4, weather, time of day, place (each of the 18 places + home), festival days (FEST), food/tea, craft/tài nghệ, rank news (a real promotion/demotion this month), favour (who was summoned — real), illness/pregnancy (real), the deed of the happening) × relation (close / cold / foe → sweet-barbed per VANPHONG §2.4).
+- Slots only for REAL things: {ten}/{goi}/{xung} from kAddr; {p} = a real living person read from S (rival, Hoàng hậu, the summoned one); {pl} = a real place; {it} = a real item she/they own (S inventory / gift of the deed). A line whose slot cannot be filled with a real thing is skipped (law 6b/6c).
+- Size: ≥ 300 distinct lines (target ~360): greetings ~50, maid/eunuch idle ~70, consort pairs ~90 (exchanges of 2–4 lines), happening topics ~80, eavesdrop frames ~40, plus season/place riders. Cổ trang, no digits, no % (law 7), VANPHONG §2 address table. Written by a sonnet writer subagent under my brief (or Foreman E's writer if preferred), then I scan + edit every line.
+- NO REPEAT: kLine memory, window BAL.chat.noRepeat (lines) + the exchange key memory BAL.chat.pairRep (same pair+topic not again within N tuần); memory lives in S.pcx (lazy `S.pcx=S.pcx||{}`, ring-capped by BAL.chat.mem; old saves start empty; a new life clears it like S.vl, newlife-reset rule).
+
+### 3. NUMBERS (law 4): BAL.chat in jbal2.js
+on, gap{min:60,max:120} (s), greet{on,delay}, say{ms per char, min, max} (bubble time), turnGap (ms between lines), maxBub 2, exch{min:2,max:4}, noRepeat, pairRep, mem, w{friend,rival,servant,happening} pick weights, logFact 1. No number typed in jchat.js.
+
+### 4. PERF BUDGET
+One setTimeout chain (no rAF loop, no interval while hidden); work only at a tick: pick people (≤ ~1 ms), place ≤ 2 bubbles via kitBadgeAt (one layout read per bubble); paused when document.hidden, a dialog is open, Hiệu ứng "Gọn" keeps text but no pop motion; 0 bytes of new art; JS + pools ≤ ~45 KB raw. Perf smoke: 10 min sim at 4× tick → no long task > 50 ms from jchat, DOM bubble count never > maxBub.
+
+### 5. CO-OP
+Chatter is display only: never writes shared state, never syncs. Each seat plays it locally from the people on its own stage; lines chosen with kLine `o.shared` (seed by week+buổi+place) so two seats on the same stage see the same exchange text. Guest seat writes no S.pcx (memory kept in a page var).
+
+### 6. OLD-SAVE SAFETY
+No save field is required; S.pcx created lazily; deser of a main save + a review/errand-scene save → load OK, chatter starts empty. BAL.chat.on = 0 turns all of it off.
+
+### 7. TESTS
+- unit dev/test/palace-chatter.js: pools ≥ 300 distinct, every line cổ trang (no digit/%/Latin), every slot resolves to a real S entity or the line is skipped; speakers ⊆ S.visit.people present this khắc; greeting only by her own present maid; happening participants adjacent in curPeople; eavesdrop text = the quoted lines + j78 facts; no repeat within window over a 300-tick sim; maxBub never exceeded; BAL keys read (one-core-guard).
+- vp (VANPHONG scan on the new text), one-core-guard, quickcheck, old-save load, perf smoke.
+- Playwright: Fold 755x1000@2 + iPad 1180x820@2: real VIDEO (mp4, recordVideo → ffmpeg) of home arrival greeting + an idle exchange + a happening pair; frame checks (LOOKED) — bubble above heads with a gap (head-marker-gap.js rules G1–G5 extended to kind "say"), never over a head, inside the stage, text not cut. With the kit "say" state missing, the video shows the white-bubble fallback and says so.
+
+### 8. ORDER OF WORK
+1 KIT REQUEST + tell Foreman E (now) → 2 jchat.js hooks + BAL.chat + fallback display → 3 line banks (writer) + scans → 4 eavesdrop exact lines → 5 tests + video → 6 §BUILT, «SẴN SÀNG KIỂM palace-chatter <sha>».
+OPEN for Foreman E: (1) OK to use an in-process sonnet subagent as the line writer? (2) push the KIT REQUEST to main's kit keeper — the "say" state is the only blocker for the real look.
