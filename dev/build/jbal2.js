@@ -1358,6 +1358,9 @@ Object.assign(BAL,{ptime:{on:1,kinds:{
  errRefuse:3,       /* «Việc chủ sai» (a harmless errand): Từ chối = Chủ tin −errRefuse (no one to tell on: 3 answers) */
  errHalfTin:1       /* «Việc chủ sai»: Giúp qua loa = the same công lao, done sloppily: Chủ tin −errHalfTin, n − 1 khắc */
 }});
+/* ERRAND SCENE (owner OD 18/11 ~20:05Z..~20:20Z, jerr): n = khắc the person she sends stays away (counted from the tap, the walk included) when the parallel-time core
+   (jptime BAL.ptime.kinds[k].n) is not in the build; the scene reads the ONE state through the jerr adapter either way. msWalk = one walk off / on stage (ms, x BAL.pace via kitPace). */
+Object.assign(BAL,{errand:{n:2,msWalk:650}});
 /* ROLE PARITY part 2 (owner OD 18/11 ~21:30Z; law 1 two-way + law 4 one core): the NPC side of her buttons that had none (jagacts4 cx4:*).
    Costs / odds / gains are the player's own rows (BAL.btn.kidCare/kidGuard + BAL.bacFee, BAL.cyc, BAL.ration, IROUTE in j83, BAL.odb.j22);
    here only the WORTH of each deed to an NPC (g = needs it serves, as BAL.ag.par3) and its gates.
