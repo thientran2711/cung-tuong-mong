@@ -71,7 +71,7 @@ a18-t7t8-scan | scan only, no gens | W71 session_011xDdVRiT8Bh4RBNGVwjVBv | DONE
 t8-v0-reprompt-sample (+A/B fabric) | CDN _review only | W72 session_011xDdVNW3uEET1o4R4muEUH | RUNNING | 2026-11-18T17:48Z (Foreman C ROOT-29)
 owner-page-90 (90 nhân vật nữ states) | CDN _review + artifact WFjg87H9M2Ch5kebxT8BmJ | W73 session_011xDdVRHiLh6KNBQz1yhENy | DONE 4 links | 2026-11-18T17:59Z (Foreman C ROOT-29)
 ge-writers-w1 fix round 2 | review/ge-writers-w1 | E11a2 session_01DgYSWoSMJso8hGSAFMN9W6 (E11a archived) (reviewer E11r-w1 session_01DgYSWmTELUPTfw8Lqf2S4Y) | READY fd7c6775 (round 4: jrd_muoi ch8 c3 carried by MAIN ORDER + main 94d11623; reports/ge-writers-w1.md) | 2026-11-18T17:55Z (Foreman E ROOT #5 session_01DgYSWkmGWJMooE69PH8bHk)
-balance-final #2 (opus; balance chain + AG arms) | review/balance-final | session_01964izFstyuseJzaqthXyhP (#1 session_01964izCP81mLjwwymWk5t2Q rolled over 17:54Z) | RUNNING | 18/11 17:54Z | owner D #2
+balance-final #4 (opus; balance chain + AG arms) | review/balance-final | session_01964izCecSEwiybLwR2ghbR (#1 CP81, #2 FstyuseJ, #3 CNP7knjuDvDqSjZMv rolled over; #4 opened by D #6 19/11 05:57Z) | RUNNING | 18/11 17:54Z | owner D #2
 | FOREMAN C-AG #14 (opus ROOT; successor of #13) | handover FOREMAN_C_STATUS | MAIN ROOT-53 | session_01Rc5AsKgBX7W8FiEwCJjgBR | DONE (→ #15 20:03Z) | 18/11 18:00Z |
 | FOREMAN C-AG #15 (opus; child of #14, depth 2) | handover FOREMAN_C_STATUS | MAIN ROOT-55 | session_01Rc5AsKLUrafEXHt5QpbRC2 | DONE (→ #16 20:58Z) | 18/11 20:05Z |
 | FOREMAN C-AG #16 (opus; child of #15, depth 3) | handover FOREMAN_C_STATUS | MAIN ROOT-56 | session_01Rc5AsMn7GAZ9LZWzQ2SdFb | DONE (→ #17 22:35Z) | 18/11 21:05Z |
@@ -224,7 +224,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | CTM minister-agents (opus; worker, MAIN ROOT-63 job via C-AG #20) | review/minister-agents; briefs/root63-cag20-jobs.md | C-AG #20 for ROOT-63 | session_01Rc5AsHjti1YnXbSGeocwni | SẴN SÀNG KIỂM 0d3f2b0b | 19/11 04:09Z |
 | coop-thin F3 (opus; bag/shop/wear/gifts; stacked on F2) | review/coop-thin-f3 | B | session_01N1tNP4NVrwK67H3DPhD9Ld | RUNNING | 19/11 04:18Z |
 | REVIEW coop-thin-f2 r1 (opus BIG) of 4dabbd46 | review/coop-thin-f2-r1 | B | session_01N1tNP6D9LFcHNTVw1PfbmV | FAIL: her walk cards lost at L7 (withSeat quiet=true silences card emitters; fix for the intent family) + resend should check buổi; merge 3db28bd8 pushed; report reports/coop-thin-f2.md "
-| ev-pic-fig event scene picture + figure scale (opus; owner bug OD 04:15Z) | review/ev-pic-fig | MAIN ROOT-63 | session_01Rc5AsLHx5NBHb8tkZaoLUU | SẴN SÀNG KIỂM 946a2900 (report reports/ev-pic-fig.md) | 19/11 05:38Z |
+| ev-pic-fig event scene picture + figure scale (opus; owner bug OD 04:15Z) | review/ev-pic-fig | MAIN ROOT-63 | session_01Rc5AsLHx5NBHb8tkZaoLUU | SẴN SÀNG KIỂM 739bfdf3 r1 (report reports/ev-pic-fig.md) | 19/11 05:38Z |
 | hall-names SMALL REVIEW (sonnet) | review/hall-names c294e1d | C-AG #20 for ROOT-63 | session_01Rc5AsJrdYiTbKYwJ53EVEQ | DONE — LIVE 2c5dd554 (archived 19/11 05:55Z) | 19/11 04:31Z |
 | monthly-allotment BIG REVIEW (opus) | review/monthly-allotment 9aceea6 | C-AG #20 for ROOT-63 | session_01Rc5AsLJxqXyKq4keVP4fuk | PASS 18a9b64c (LAND READY) | 19/11 04:32Z |
 | minister-agents BIG REVIEW (opus) | review/minister-agents 822f17c4 | C-AG #20 for ROOT-63 | session_01Rc5AsHdFbiZELj46cV3rq8 | PASS a2c6ce4e | 19/11 04:46Z |
