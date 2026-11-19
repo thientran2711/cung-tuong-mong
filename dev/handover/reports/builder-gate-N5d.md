@@ -10,4 +10,4 @@ Guard per item: snapshot of 8350 builder commands (c01–c32 × 5 ages × 19 mod
 - coverage.py BG check now looks for the K3_BG text (`BGLINE`); build_npc.py cells keep the old NPC wording check (`BGLINE_NPC`). emperor-B/build.py not touched (W107b's).
 - Snapshot diff before/after: 8350 commands, 1606 error cells identical (same keys, same errors), every other output = old output with exactly K3_BG inserted before END (trieu: old K3 removed) → 0 other changes.
 - Pre-existing (not mine): `build.py cXX v0 --golden` no longer equals golden/pB_*.txt (differs at char 510, since the 3d2 frontal rewrite).
-- coverage: BG column green for every consort cell (was red everywhere); 540 red cells remain (POSE=, REFS, ...).
+- coverage: BG column no longer red for any build.py group (was red everywhere); only the Emperor (emperor-B, W107b's file) still shows BG. 540 red cells remain (POSE=, REFS, ...).
