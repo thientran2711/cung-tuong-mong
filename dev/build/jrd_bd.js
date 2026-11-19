@@ -29,8 +29,8 @@ const BDP={lie:{n:"Mi Hồ Lan",r:"vương thúc",w:"tn",want:"ngồi lên ngai 
  thatmoc:{n:"Đạt Lỗ",r:"vệ sĩ sứ đoàn",w:"tn",want:"một thái ấp của riêng mình",man:1},
  bado:{n:"Bạc Đồ",r:"mã phu Thượng tứ viện",w:"kinh",want:"được ghi tên chính ngạch, một ngày về lại quê nhà"},
  tuyetcau:{n:"Ngọc Câu",r:"ngựa của ngươi",w:"kinh",want:"cỏ và gió"},
- asnc:{n:"A La Hám",r:"lão tướng trấn Tật Lăng",w:"ai",want:"cứu đoàn người chạy nạn qua mùa đông",man:1},
- phong:{n:"Mi Hồ Phong",r:"người đã đính ước",w:"tn",want:"giữ lời thề trước lửa thánh",man:1},
+ asnc:{n:"A La Hám",r:"lão tướng trấn Tật Lăng",w:"ai",want:"đưa người nước mình chạy nạn qua mùa đông, tìm chỗ dựa ở Đại Hy",man:1},
+ phong:{n:"Mật Hồ Đạt",r:"người đã đính ước, đội trưởng hộ vệ sứ đoàn",w:"tn",want:"giữ lời thề trước lửa thánh",man:1},
  kd:{n:"Vương hậu",r:"mẹ",w:"tn",want:"giữ con trai mình sống, gặp lại con gái"}};
 const bdP=(id,k,v)=>{const key="bd.p."+id+"."+k;if(v!=null)RD_FL(key,v);const x=RD_FL(key);
  if(x)return x;if(k==="alive")return 1;if(k==="w")return BDP[id].w;return 0};
