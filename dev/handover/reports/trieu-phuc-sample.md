@@ -294,3 +294,29 @@ HONEST FAULTS:
 - t6: Quý phi vermilion-rose trims still close to the main red (as r12/r13).
 - t8: red slightly more orange than #99443F; crown tip close to the top frame edge; raw t8 opaque (cut used).
 - Hair updo clause is new wording, not copied (no approved source exists).
+
+## 21. HANDOVER F3b → successor (ROOT-40 order ~03:50Z: F3b is past its rollover line; NO gens by F3b; OWNER HARD STOP Lượt 229b still in force — nothing is drawn until ROOT-40 lifts it)
+STATE: r14 = §20 (Lượt 227). The builder on this branch = r14 build_trieu (TRIEU_HAIR, TRIEU_S5, HH B _pose with one item, t8 HH cloud collar, "true brick red ..." wording). Reruns r15+ must start from the owner's Lượt 229 verdict below, NOT from the r14 choices. The 4 unused gens of the 12 do NOT carry over: any new budget comes from the foreman.
+OWNER LƯỢT 229 on triều phục (verbatim: FIGURE_GATE "OWNER LƯỢT 229", the "Tiếp đến á, là triều phục ..." part; ROOT-40 rules (A) + (E)). Every item below is an r14 fault:
+1. COLOUR WRONG — "Tao nhớ là tao nói tao muốn cái màu triều phục nào đó. Tại sao mày không đưa vô ... Màu này không có đúng."
+   The colour she chose = the live Nữ quan (tm4) red. Owner 19/11 ~01:40Z (FIGURE_GATE line 490, verbatim): "Nữ quan là sẽ mặc, tất cả mọi người nữ quan đều sẽ mặc màu đỏ, bởi vì nó giống như là triều phục. Cái màu đỏ của nữ quan này chính là cái bộ màu đỏ của triều phục của phi tần mà tao muốn nè". Gate line 495: "THIS red (live tm4 Nữ quan red) = the red the owner wants for the consort TRIỀU PHỤC."
+   Its hex: #99443F (deeper #893A37, lit #A65D4F), measured by W104i on img/hd/fig-maid-m37-tm4-a18.webp (§16 line ~204; builder commit 0efa540 TRIEU_MAIN).
+   HONEST: r14's pixel medians for t1–t5 already measure #94453D–#9E473F ≈ #99443F, yet she says the colour is wrong. So the hex alone does not give her "Nữ quan red" look: the rendering (sheen, value, how much gold/pink trim sits on top) and the t8 yellow-dominant robe differ from the live m37 tm4 picture.
+   Successor: put r14 t1/t5/t8 beside the live m37 tm4 figure FIRST and describe the difference. Do not add new colour words of your own (r14 did, and that is a fault). Ask the foreman before changing refs. Example: the Nữ quan picture as a colour image would be a REFERENCES change, which needs an owner GO.
+2. ANGLE (ROOT-40 rule A, overrides 3d2 for new gens): "all frontal = cực kỳ boring". Mix three angles across the ranks:
+   - near-frontal with the shoulders slightly turned, like the approved Nữ đế A;
+   - her "3/4" = the angle of live maid tm0 (NOT a sideways body with the face turned back);
+   - in-between.
+   Never a dead-frontal ID photo. r14 used spec5 frontal words on every rank (spec5pose SPEC5_FRONTAL + "body and face frontal"), so build_trieu must drop/replace those. Note: spec5pose is shared, so change only the trieu path and keep md5 of the non-trieu outputs.
+3. t8 HOÀNG HẬU = APPROVED HH PROMPT COPIED WHOLE + ONLY triều phục details, never edit it.
+   - Source: `python3 dev/art/t8-prompt-B/build.py c06 v0` (= img/_review/t8-reprompt/c06_a18_t8_v0.png; stored text dev/art/t8-prompt-B/golden_v0/t8_v0_c06.txt).
+   - r14 t8 was still build_trieu's own sentence with HH pieces inside. Owner: "Trang phục hoàng hậu đang đẹp ... tất cả copy y chang ... chỉ thêm những cái chi tiết của triều phục thôi, không có sửa đổi cái prompt" + "Nhìn từ cái độ chi tiết, cái độ xa hoa, cái thêu" (vs the vsHH sheet).
+   - So t8 = the v0 output byte-for-byte, plus ONLY added triều phục sentences: the two court stole panels, the red sleeves/collar of the court robe, the cầu vai, the tassel length.
+   - Its embroidery density = HH B's ("far denser and richer"), NOT the r13/r14 grouped TRIEU_COVER.
+4. SHOULDER TASSELS (t8): "tua rua trên cái vai của hoàng hậu cũng ngắn ... phải dài hơn cả hoàng quý phi, hoặc dài cỡ hoàng quý phi". t7 = LONG fringe to the elbow (TRIEU_EDGE[7]), so t8 ≥ that. r14 replaced the t8 edge with HH's "layered pearl fringes", which came out short.
+5. CẦU VAI (t8): "phải cong và nhọn ... phải cứng và hơi nhọn một xíu" = curved, stiff, slightly pointed. r14 removed the cầu vai on t8 (HH cloud collar): WRONG direction. Put back a stiff, curved, slightly pointed shoulder piece, e.g. wording like NUDE_OPT "STIFF, SHORT, structured shoulder piece (cầu vai cứng) ... slightly pointed outward" or SH_OLD5's "curving up"; ask the foreman which approved wording to copy.
+6. t2 and t4 FAULTS + CONSISTENCY: "bậc 2 bị lỗi, bậc 4 cũng lỗi, không có ai giống ai hết trơn ... thợ muốn vẽ kiểu gì là vẽ" → "every rank from the same source".
+   - She did not name the t2/t4 faults. Likely candidates from the r14 images: t2 walking pose with a raised vase and "sleeve floating out"; t4 hand raised to the hairpin. Both are the odd ones out, so ask the foreman/owner before guessing.
+   - r14 used three different pose systems (spec5 lively t1–t5, HH B calm t6–t8, raw item tables): one common template is wanted.
+7. Hair (high updo, r14 TRIEU_HAIR) and the embroidery grouping for t1–t7: no owner comment in Lượt 229.
+POINTERS: approved forms FIGURE_GATE A0 table; HH B = `build.py c06 v0`; Nữ đế A = `build.py c06 v0 --state nude --spec5pose --nudeopt A`; live Nữ quan = img/hd/fig-maid-m37-tm4-a18.webp; r14 sheets https://ctm-img.victoria-tntt.workers.dev/img/_review/trieu-phuc/r14/; rule 0 tools (--log/--refs/--log-fill/--verify) as §20. LEDGER NOTE: full-file `--verify` crashes on ledger lines without "cmd" (kind/note lines, ~03:40Z); verify your own lines from a filtered copy. BRANCH NOTE: the remote branch was force-pushed ~03:5xZ (r14 content kept, commit hashes rewritten); fetch and reset before working, never rebase old local commits.
