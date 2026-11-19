@@ -2,7 +2,7 @@
    Fold 755x1000 scrolls only the option list. KIT 56.6 / 56.18: in EVERY centre option frame (every PEND event family + the Q-pushed option kinds, M / L / XL) #mb never scrolls (the portrait + info stand still),
    the option list is the ONE scroll owner, scrolled to its end the LAST option card is fully visible, and while there is more a «Kéo xuống» hint is on.
    Per frame x device: ksz, option count, scroll owner (#mb | opts | none), last card fully visible after scrolling to the end (y/n), hint on while more (y/n/-).
-   Exit 1 when #mb scrolls, the last card is clipped, the owner scrolls and the hint is off, the FIRST wheel did not scroll (w1), or (HOLD=ms) the list left its end within HOLD ms.
+   Hint rule = kitScrollCues: «more» is > 6 px, so an overflow of 6 px or less needs no hint (the last card must still be fully visible at the end). Exit 1 when #mb scrolls, the last card is clipped, the owner scrolls and the hint is off, the FIRST wheel did not scroll (w1), or (HOLD=ms) the list left its end within HOLD ms.
    usage: node dev/test/opt-frame-scroll-scan.js <index.html> [out.json]   env SZ=[[W,H],..] MAXP=n ONLY=regex HOLD=ms */
 const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820],[1366,1024]];
 (async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});const html=fs.readFileSync(SRC);const ALL=[];let ST=null;
@@ -21,7 +21,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=
    return {ksz:d.dataset.ksz||'',nopt:cards.length,owner,hint:oS||mbS?hint0:null,mbSc:mb.scrollHeight-mb.clientHeight,optSc:o.scrollHeight-o.clientHeight,picc:d.dataset.picc||'',cx:r.left+r.width/2,cy:r.top+Math.min(r.height,innerHeight-r.top)/2}});
   if(!a||!a.nopt)return a;/* a REAL wheel over the scroll owner, to its end (the way she scrolls) */
   const top=()=>p.evaluate(()=>{const d=document.querySelector('#modal:not([hidden]) .dlg'),mb=document.getElementById('mb'),o=d.querySelector('.opts');return Math.max(mb.scrollTop,o.scrollTop)});
-  for(let i=0;i<4&&a.owner!=='none';i++){await p.mouse.move(a.cx,a.cy);await p.mouse.wheel(0,1500);await p.waitForTimeout(250);if(!i)a.w1=(await top())>0}
+  for(let i=0;i<4&&a.owner!=='none';i++){await p.mouse.move(a.cx,a.cy);await p.mouse.wheel(0,1500);await p.waitForTimeout(250);if(!i){a.w1=(await top())>0||!(await p.evaluate(()=>{const o=document.querySelector('#modal:not([hidden]) .opts'),mb=document.getElementById('mb');return o.scrollHeight>o.clientHeight+2||mb.scrollHeight>mb.clientHeight+2}))}}/* w1: the first wheel scrolled, or the list settled to fit (nothing left to scroll) */
   /* HOLD=ms (opt-scroll-reset regression): scrolled to the end, the list must STAY at its end that long (no re-render loop snapping it back) */
   if(+process.env.HOLD&&a.owner!=='none'){const t0=await top();await p.waitForTimeout(+process.env.HOLD);const t1=await top();a.hold=t1>=t0-2;a.t0=t0;a.t1=t1}
   const z=await p.evaluate(()=>{const d=document.querySelector('#modal:not([hidden]) .dlg'),mb=document.getElementById('mb'),o=d.querySelector('.opts');const cards=[...o.children].filter(c=>!c.classList.contains('kscue')&&c.getClientRects().length);const last=cards[cards.length-1].getBoundingClientRect(),fr=d.getBoundingClientRect();
@@ -40,7 +40,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=
    {try{await p.evaluate(fn)}catch(e){continue}await rec(nm)}
   await ctx.close()}
  await b.close();
- const BAD=o=>o.owner==='#mb'||!o.lastVis||(o.owner!=='none'&&!o.hint)||o.w1===false||o.hold===false;const bad=ALL.filter(BAD);
+ const BAD=o=>o.owner==='#mb'||!o.lastVis||(o.owner!=='none'&&!o.hint&&Math.max(o.mbSc,o.optSc)>6)||o.w1===false||o.hold===false;const bad=ALL.filter(BAD);
  console.log('dev'.padEnd(10),'frame'.padEnd(26),'ksz'.padEnd(4),'opts'.padStart(4),'owner'.padEnd(6),'last card'.padEnd(10),'hint'.padEnd(5),'mb-over opt-over picc w1 hold');
  for(const o of ALL.sort((a,b)=>a.dev.localeCompare(b.dev)||a.name.localeCompare(b.name))){const f=BAD(o);console.log(o.dev.padEnd(10),o.name.padEnd(26),String(o.ksz).padEnd(4),String(o.nopt).padStart(4),o.owner.padEnd(6),(o.lastVis?'fully y':'CLIPPED n').padEnd(10),(o.hint===null?'-':o.hint?'y':'n').padEnd(5),String(o.mbSc).padStart(5),String(o.optSc).padStart(7),o.picc,o.w1===undefined?'-':o.w1?'y':'LOST',o.hold===undefined?'-':o.hold?'y':'SNAP '+o.t0+'>'+o.t1,f?' FAIL':'')}
  const by={};ALL.forEach(o=>{const k=o.dev+' '+o.ksz+' owner='+o.owner;by[k]=(by[k]||0)+1});Object.entries(by).sort().forEach(([k,v])=>console.log(k.padEnd(34),v));
