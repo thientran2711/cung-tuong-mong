@@ -652,6 +652,13 @@ for _c in DATA:
     if _c not in LOWNAME and _c in ORIG1: LOWNAME[_c]=(DATA[_c][0].split(" and ")[0],ORIG1[_c][0].split(" silk")[0])
 YEL_T6="; more luxury than the rank below: rich gold-thread embroidery covering much of the robe, a pearl-edged collar and cape trim, a few strands of pearls across the chest, and a grander gold headdress with more gold ornaments, elegant, NOT a pile of jewels, still clearly less grand than the imperial noble consort; plus a clearly visible amount of royal yellow: a yellow inner robe panel, a yellow sash and narrow yellow borders, the royal yellow is exactly the colour of the flat colour swatch image (image 3, a honey-gold close to hex #F2BC61, 18K gold tone, not pale cream, not beige, not mustard); image 3 is only a colour reference, never copy anything but its colour; her own colour stays clearly the main robe colour, much less yellow than an imperial noble consort's robe; COLOUR RULE:"
 LUX_T6="; more luxury than the rank below: rich gold-thread embroidery covering much of the robe, a pearl-edged collar and cape trim, a few strands of pearls across the chest, and a grander gold headdress with more gold ornaments, elegant, NOT a pile of jewels, still clearly less grand than the imperial noble consort; COLOUR RULE:"
+# 19/11 N8b (ROOT-46 one-builder job): the 3 foreign princesses p01 Ba Tư / p02 Cao Ly / p03 Phù Tang = DATA ROWS ONLY, added exactly like the maids above (palette, hex, motif, hair flower; no store sentence touched).
+# Their face = their reference image (empty face words, like the maids). Lets `build.py p01 v0 --low N|--t7|(t8)` and dev/art/check_store.py run on them.
+PRINCESS_ROWS={"p01":("indigo blue","ivory","#5B6CA6","#EFE6D2","arabesques","a red rose"),"p02":("rose","jade","#C9708A","#79A98F","chrysanthemums","a white plum blossom"),"p03":("wisteria","crimson","#9C88BC","#B8556A","wisteria","a purple wisteria sprig")}
+for _i,(_c,(_m,_s,_h1,_h2,_mo,_fl)) in enumerate(PRINCESS_ROWS.items()):
+    _pal=f"{_m} and {_s}"; DATA[_c]=(_pal,""); ORIG1[_c]=(f"{_m} silk like {_h1}",f"{_s} like {_h2}"); MOTIF_LOW[_c]=(_mo,_fl); LOWNAME[_c]=(_m,_m)
+    ITEMS_LOW[_c]=items3f(_c)
+    for _t in (4,5,6): OUTFIT_JOBS[f"{_c}-t{_t}"]=_g3["outfit"](_t,_pal,_mo).replace("Outfit for all four (","Outfit (",1).replace("(Tan)","(Tần)").replace("(Quy phi)","(Quý phi)")
 def low_outfit(c,t,v="v0"):
     if f"{c}-t{t}" in OUTFIT_LOW: o=OUTFIT_LOW[f"{c}-t{t}"]
     else:
@@ -1192,6 +1199,7 @@ SPEC5_IDS={"c%02d"%n:(t,m) for t,rng in (("kieungao",range(1,7)),("numi",range(7
 # N5d item 5: maid m01-m52 -> SPEC5 pose list BY INDEX (the game gives each maid a random trait, no fixed one): the six lists in the consorts' order, maid n takes list (n-1)%6 and slot (n-1)//6+1.
 _SP5_ORDER=["kieungao","numi","hienlanh","dangi","thamvong","thanhnha"]
 SPEC5_IDS.update({"m%02d"%n:(_SP5_ORDER[(n-1)%6],(n-1)//6+1) for n in range(1,53)})
+for _i,_c in enumerate(PRINCESS_ROWS): SPEC5_IDS[_c]=("kieungao",_i+1)   # N8b: princess rows (see PRINCESS_ROWS)
 def spec5pose(o,c,t,force=None):
     m=re.search(r" Pose: calm standing pose; she holds (.+?) in a contrasting colour",o); assert m,"pose paragraph not found"
     prop=m.group(1); tr,mi=SPEC5_IDS[c]; i=mi-1

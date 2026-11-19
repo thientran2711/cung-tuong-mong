@@ -12,7 +12,8 @@ hair flower, age. Everything else = store text byte for byte.
 ADDED SENTENCES (inserted as ONE block right before ' Pose:', never replacing anything), each = one owner law:
   HAIR by rank (Lượt 337) · SLEEVE LENGTH by rank (Lượt 355) · ONE SLEEVE LAYER (331/353) · HAIR FLOWER SIZE t1-t6 / NO flower t7-t8 (323/331) ·
   HEAD turns with BODY (326) · prompt-B FABRIC at t7/t8 (364) · princess: foreign-princess sentence + ONE national-touch sentence at EVERY rank t1-t8 (371), veil law Ba Tư (329/346).
-CHECK (check_all): for every person x rank, F minus the added sentences == STORE output (+ face slot) exactly; every frame sentence shared by the store outputs of c06 and c25
+GATE: every output is run through dev/art/check_store.py (owner Lượt 375 STORE GATE, ROOT-45's checker, reused, not duplicated); PASS required, else exit 1.
+Internal invariant (assert, not a second checker): F minus the added sentences == STORE output (+ face slot) exactly; every frame sentence shared by the store outputs of c06 and c25
 at that rank is present in F; every law sentence present. Any miss -> prints FAIL and exits 1.
 
 Usage:  build_all.py PERSON RANK [--age a18|a26|a36|a51|a65]     (PERSON c01..c32 m01..m52 p01..p03|bt|cl|pt ; RANK 1..8)
@@ -43,24 +44,21 @@ PRS={
        2:"ONE clear touch of her Persian homeland, clearly visible at game size: gold-thread arabesque and small-bird embroidery along the edges and hem, teardrop pearl earrings, and a sheer ivory silk veil over the back of her head that falls LONGER, down to her WAIST, held by a small gold jewelled tiara.",
        3:"ONE clear touch of her Persian homeland, clearly visible at game size: rich gold-thread arabesques, birds and pomegranate flowers along the borders, teardrop pearl earrings, and a LONG sheer ivory silk veil falling from a tall jewelled gold tiara with a central ruby all the way down her back to her KNEES."},
   veil_hi="the sheer veil over the back of her head is SHEER ROYAL-YELLOW silk gauze (still transparent, clearly royal golden yellow, not ivory), falling to her knees"),
-"cl":dict(country="Cao Ly (a Korean-style foreign kingdom)",main="deep rose",hex1="#C9708A",sec="jade green",hex2="#79A98F",motif="chrysanthemums",flower="a white plum blossom",
+"cl":dict(country="Cao Ly (a Korean-style foreign kingdom)",main="rose",hex1="#C9708A",sec="jade",hex2="#79A98F",motif="chrysanthemums",flower="a white plum blossom",
   touch="ONE clear touch of her Korean homeland, clearly visible at game size: a long ornate norigae tassel ornament (a jade knot with a long deep-rose silk tassel) hanging from her sash.",
   low={1:"ONE clear touch of her Korean homeland, clearly visible at game size: a small norigae tassel ornament (a jade knot with a deep-rose silk tassel) hanging from her ribbon.",
        2:"ONE clear touch of her Korean homeland, clearly visible at game size: a long ornate norigae tassel ornament (a jade knot with a long deep-rose silk tassel) hanging from her ribbon.",
        3:"ONE clear touch of her Korean homeland, clearly visible at game size: a triple norigae tassel ornament of jade and deep-rose silk hanging from her ribbon."}),
-"pt":dict(country="Phù Tang (a Japanese-style foreign kingdom)",main="wisteria purple",hex1="#9C88BC",sec="soft crimson",hex2="#B8556A",motif="wisteria",flower="a purple wisteria sprig",
+"pt":dict(country="Phù Tang (a Japanese-style foreign kingdom)",main="wisteria",hex1="#9C88BC",sec="crimson",hex2="#B8556A",motif="wisteria",flower="a purple wisteria sprig",
   touch="ONE clear touch of her Japanese (Heian) homeland, clearly visible at game size: at the collar and sleeve openings the edges of several thin layered inner robes show in graded shades of wisteria purple with a soft crimson innermost edge.",
   low={1:"ONE clear touch of her Japanese (Heian) homeland, clearly visible at game size: at the collar and sleeve openings the edges of two thin layered inner robes show in graded shades of wisteria purple with a soft crimson innermost edge, and her very long straight black hair hangs loose down her back.",
        2:"ONE clear touch of her Japanese (Heian) homeland, clearly visible at game size: at the collar and sleeve openings the edges of three thin layered inner robes show in graded shades of wisteria purple with a soft crimson innermost edge, and her very long straight black hair hangs loose down her back.",
        3:"ONE clear touch of her Japanese (Heian) homeland, clearly visible at game size: at the collar and sleeve openings the edges of five thin layered inner robes show in graded shades of wisteria purple with a soft crimson innermost edge, and her very long straight black hair hangs loose down her back."}),
 }
 def _inject(g):
+    """princess rows live in the store itself (build.py PRINCESS_ROWS, data rows like the maids); here only assert they match this file's slot rows."""
     for pid,k in PR.items():
-        d=PRS[k]; pal=f"{d['main']} and {d['sec']}"
-        g["DATA"][pid]=(pal,""); g["ORIG1"][pid]=(f"{d['main']} silk like {d['hex1']}",f"{d['sec']} like {d['hex2']}")
-        g["MOTIF_LOW"][pid]=(d["motif"],d["flower"]); g["LOWNAME"][pid]=(d["main"],d["main"])
-        g["ITEMS_LOW"][pid]=g["items3f"](pid); g["SPEC5_IDS"][pid]=("kieungao",1+list(PR).index(pid))
-        for t in (4,5,6): g["OUTFIT_JOBS"][f"{pid}-t{t}"]=g["_g3"]["outfit"](t,pal,d["motif"]).replace("Outfit for all four (","Outfit (",1).replace("(Tan)","(Tần)").replace("(Quy phi)","(Quý phi)")
+        d=PRS[k]; assert g["PRINCESS_ROWS"][pid]==(d["main"],d["sec"],d["hex1"],d["hex2"],d["motif"],d["flower"]),("store row differs",pid)
 
 def store(person,rank,age="a18"):
     """EXACT stdout of the store CLI for this person/rank (princess rows injected into the store's own tables)."""
@@ -130,12 +128,23 @@ def check(person,rank,age="a18",ref=None):
         if s.strip() and s not in F: errs.append("store frame sentence missing: "+s[:70])
     return errs
 PEOPLE=[f"c{i:02d}" for i in range(1,33)]+[f"m{i:02d}" for i in range(1,53)]+list(PR)
+import subprocess,tempfile
+def gate(person,rank,age,text):
+    """dev/art/check_store.py (owner Lượt 375 STORE GATE, reused) on this exact prompt with the SAME person's store args; PASS required."""
+    sp=ALIAS.get(person,person)
+    with tempfile.NamedTemporaryFile("w",suffix=".txt",delete=False,encoding="utf-8") as f: f.write(text); fn=f.name
+    try:
+        args=[sp,"v0"]+(["--low",str(rank)] if rank<=6 else ["--t7"] if rank==7 else [])+(["--age",age] if age!="a18" else [])
+        p=subprocess.run([sys.executable,os.path.join(ART,"check_store.py"),fn]+args,capture_output=True,text=True)
+        return p.returncode==0 and "STORE CHECK PASS" in p.stdout, p.stdout.strip()
+    finally: os.unlink(fn)
 def check_all(age="a18"):
     bad=0
     for t in range(1,9):
         ref=_frame(t,age)
         for p in PEOPLE:
-            e=check(p,t,age,ref)
+            e=check(p,t,age,ref); ok,msg=gate(p,t,age,build(p,t,age)[1])
+            if not ok: e=e+["check_store: "+msg[:200]]
             if e: bad+=1; print("FAIL",p,"t%d"%t,age,"|",e[:3])
     n=len(PEOPLE)*8; print(f"checked {n} prompts ({len(PEOPLE)} people x 8 ranks, age {age}): {bad} FAIL"); return 1 if bad else 0
 if __name__=="__main__":
@@ -145,4 +154,7 @@ if __name__=="__main__":
         for p,t in (("m19",1),("m19",3),("c06",7),("p01",2),("p03",8)):
             print(f"\n===== {p} t{t} {age} =====\n"+build(p,t,age)[1])
         sys.exit(0)
-    pos=[x for x in a if not x.startswith("--") and x!=age]; print(build(pos[0],int(pos[1]),age)[1],end="")
+    pos=[x for x in a if not x.startswith("--") and x!=age]; out=build(pos[0],int(pos[1]),age)[1]
+    ok,msg=gate(pos[0],int(pos[1]),age,out)
+    if not ok: print(msg,file=sys.stderr); sys.exit(1)
+    print(out,end="")
