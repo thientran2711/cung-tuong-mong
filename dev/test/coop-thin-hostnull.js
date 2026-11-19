@@ -136,6 +136,18 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
    const L=g.lines.map(x=>x[0]),T=g.lines.map(x=>x[1]);const B=g.B||{batch:4,gapMs:900};
    const inOrder=L.length===7&&L.every((x,i)=>x==='hn-cap '+i);const paced=L.length===7&&T[B.batch]-T[0]>=B.gapMs*0.8;
    ok(r.got&&inOrder&&paced&&h===0,'H3 more effects than the old cap (7 lines in one run): all 7 on her phone, in order, '+B.batch+' at once then the rest '+B.gapMs+' ms later (BAL.coopUi), none lost; none on the host',{L,dt:T.map(t=>t-T[0]),host:h})}}
+ /* H4 (d) her act's figure move (jpres: the act wrapper's kpmGo, e.g. Tát → slap) raised in her run on the host: captured, played once on HER
+    stage (kpmPlay), never on the host's stage — neither at once nor by the act wrapper's later timer (staging: her scout run on the host
+    also runs the Tát act body on the scouted consort) */
+ {await reset();await G.p.evaluate(()=>{used=0;render()});await sync();
+  const id=await G.p.evaluate(()=>{S.seenLoc={};const v=rivals.find(v=>v&&!v.coop&&v.alive&&!v.out&&!together(S,v)&&!locKnown(v));return v?v.id:null});
+  if(id==null||!await H.p.evaluate(()=>!!(ACT.tat&&ACT.tat.f)))ok(true,'H4 no one to scout / no Tát act (skipped)');else{
+   await H.p.evaluate(()=>{window.__r0=roll;roll=()=>true;window.__sl0=seeLoc;seeLoc=function(v){const r=__sl0.apply(this,arguments);try{ACT.tat.f(S,v)}catch(e){console.error(e)}return r};window.__kl=KPM_LOG.length});
+   await G.p.evaluate(()=>{window.__kp=[];const f=window.kpmPlay;window.__kp0=f;window.kpmPlay=function(m,a){__kp.push([m,a]);return f?f.apply(this,arguments):false}});
+   const r=await herRun('scout',id);await sleep(2500);
+   await H.p.evaluate(()=>{roll=__r0;seeLoc=__sl0});
+   const g=await G.p.evaluate(()=>{const o=__kp.slice();window.kpmPlay=__kp0;return o});const h=await H.p.evaluate(()=>KPM_LOG.length-__kl);
+   ok(r.got&&r.ran===1&&g.length===1&&g[0][0]==='slap'&&h===0,'H4 her act\'s figure move: played once on HER stage, none on the host\'s stage (not even after the act wrapper\'s timer)',{g,hostMoves:h})}}
  /* H5 (e) law 1 two-way: an ASK act the OTHER PLAYER accepted (CW.inv set, the target = her entry) is never refused by an NPC roll after:
     the gift a dislike would refuse (jdis, its roll forced on) is given; Kết giao (its roll forced to fail) succeeds. Control: the same gift to
     an NPC with the same staging is still refused (the NPC rule unchanged). */

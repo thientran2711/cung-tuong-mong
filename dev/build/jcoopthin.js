@@ -194,6 +194,7 @@ TH.NOOP.push("resultShow");
    effects called in her run are captured here (UICAP, plain arguments only) and play on HER phone once, with the answer (TH.uiPlay).
    E's buổi step, B's life, C's world frame and D's deferred work stay quiet (turns that are not her tap). */
 const UICAP=new Set(["srvToast","kitLine","kitStatFx","feedback","kitCoins","kitGain","kitLose","kitReward","kitLearn","stipReveal","kitItemFx","kitSfx"/* F3 r1 review: her act sounds (jsfx W buy / sellItem / wkSell / giveTo → kitSfx) were silenced on the host and never played on her phone */,
+ "kpmPlay"/* hostnull (d): her act's figure move on the stage (jpres kpmGo: slap / drag / thread …), played on HER stage */,"cfShow"/* hostnull (d): her night card-flip scene (jflip) */,
  "krvFlip"/* hostnull (b): her face reveal (jreveal krvFlip, raised by k61Know / k61Meet in her run) plays on HER phone, never on the host (below) */]);
 for(const n of UICAP)if(!TH.NOOP.includes(n))TH.NOOP.push(n);
 TH.UICAP=UICAP;/* F4: a part adds the screen redraws it captures itself (its own wrappers push them to TH.uiCap); TH.uiPlay plays only names in this set */
@@ -218,7 +219,7 @@ function uiPump(){uiT=0;const B=(typeof BAL==="object"&&BAL.coopUi)||{batch:4,ga
  while(UIQ.length&&n<Math.max(1,B.batch|0)){const [f,a]=UIQ.shift();try{window[f].apply(null,Array.isArray(a)?a:[a]);n++}catch(e){console.error("thin uiPlay",f,e)}}
  TH.uiN=(TH.uiN|0)+n;if(UIQ.length)uiT=setTimeout(uiPump,Math.max(0,B.gapMs|0))}
 TH.uiPlay=function(L){let n=0;for(const x of L||[]){if(!Array.isArray(x))continue;const [f,a]=x;if(!UICAP.has(f)||typeof window[f]!=="function")continue;UIQ.push([f,a]);n++}
- if(n&&!uiT)uiPump();return n};
+ if(n&&!uiT)uiT=setTimeout(uiPump,0)/* after every listener of the same view (her patch + render): an effect reads the state it shows */;return n};
 TH.uiQ=()=>UIQ.length;
 for(const n of TH.NOOP)if(typeof window[n]==="function"){const f=window[n];window[n]=function(){if(CW.ctx&&n!=="resultShow"){if(TH.uiCap&&UICAP.has(n))try{const a=[...arguments].map(uiArg);if(n==="kitLine"||n==="srvToast")a[0]=String(a[0]==null?"":a[0]).slice(0,300);TH.uiCap.push([n,a])}catch(e){}return}
   /* a result card whose snapshot was taken in another seat's context (her greeting's card at +30 ms, accEtqGo) is hers, never the host's */
@@ -226,6 +227,11 @@ for(const n of TH.NOOP)if(typeof window[n]==="function"){const f=window[n];windo
 /* hostnull (b): a face reveal her run raises (k61Know / k61Meet → jreveal krvFlip) belongs to HER screen: inside any other seat's context it
    never touches the host's reveal state (KRV: the host would replay her reveal on a face he already knew, at his next paint); inside her tap
    run it is captured and plays on her phone with the answer (her own krvFlip: once, the reveal window dedupes the flip her render also finds) */
+/* hostnull (d): a figure move her run raises (jpres kpmGo, gated off inside her context: kpmOn reads screenOff) is captured with the people as
+   references (her = "me", the other player = "f", an NPC = its id) and played on HER stage (kpmPlay finds them in her own world) */
+if(typeof kpmGo==="function"){const kg=kpmGo;const ref=p=>p===S?"me":p&&typeof p==="object"&&p.coop?"f":p&&typeof p==="object"&&p.id!=null?{id:p.id}:null;
+ kpmGo=function(m,p,q){if(CW.ctx){if(TH.uiCap&&typeof m==="string"&&p&&typeof p==="object"&&p.nodeType!==1){const a=ref(p);if(a)TH.uiCap.push(["kpmPlay",[m,a,q?ref(q):null]])}return false}return kg.apply(this,arguments)};
+ window.kpmPlay=function(m,a,b){const res=x=>x==="me"?S:x==="f"?(CW.friend?CW.friend():null):x&&x.id!=null?(rivals||[]).find(v=>v&&v.id===x.id)||null:null;const p=res(a);if(!p)return false;return kpmGo(m,p,b?res(b):null)}}
 if(typeof krvFlip==="function"){const kf=krvFlip;krvFlip=function(k){if(CW.ctx){if(TH.uiCap&&typeof k==="string"&&k)TH.uiCap.push(["krvFlip",[k]]);return}return kf.apply(this,arguments)}}
 
 /* stable text of the host's whole state (the round-trip check) */
