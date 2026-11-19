@@ -142,3 +142,13 @@ Unit (gate, pity, cooldown, once-per-life, conservation: every piece moved shows
 ## 15. Questions for MAIN (only real ones)
 1. OK to read "acts done at a place" as presence there (one roll per buổi max), or walks (goTo) only?
 2. Target gap 3–5 tuần with zero-share ≤ 5 per hundred over 6 months — OK as the measure bar?
+
+## 16. BUILD NOTES (step 3, after MAIN ROOT-67 OK 19/11 09:00Z) — what changed from the table above
+- MAIN (a) law 6c: no crafted piece is made from nothing. The ledger holds no paper / paint / silk stock for the Họa sư, the Emperor or a ma ma, so NO crafted piece is created at all: ma_hoa option 1 = "Nhờ y nói tốt trước bệ hạ" (Sủng + his regard, Bạc lễ); de_but option 1 = "Xin ngài chỉ cho một nét chữ" (Thi step); th_chi = knowledge (Y step + her regard), no thread. The only pieces that appear are pieces that already exist and MOVE: a jlost case piece (vat_lac, vat_minh), a dead person's effects in S.il.box "nvp" (vat_cu → her chest, or → the "th" box), the Nội vụ phủ weekly rare piece adRare() (vat_ngu, bought at BAL.kyngo.nguPr of its price → her chest, or → the "th" box). Every move is logged in S.il.log ("kyngo: …").
+- MAIN (b) law 1: she is a WHO for NPC encounters where she walked this buổi (S.kyAt): an NPC returns HER pet (vat_thu), finds HER lost piece (vat_lac: return → her chest; keep → her case held by that NPC with keep=1, so the existing recognition / loKeepHear road works for her), befriends her at Thất tịch (th_sao).
+- MAIN (c): no new seal kind; the card is a plain PEND event (pid "kyngo", evId "kyngo:<id>").
+- MAIN (d) law 3: every option of a choice has a gain and a real cost (khắc / Sức / Bạc lễ / a third person's grudge); dev/test/kyngo-eq.js FAILs an option with "no real cost".
+- WHO comes from the j95 location record S.roster (placeOfId: R.P[id][j95kh()]), the same record the stage and countAt read; servants and children stand with their mistress.
+- Hành sự acts count as presence (MAIN Q1) by act name → place (KY.actPlace); the cung nữ road's walks (srvGoTo) roll too.
+- NPC finders = consorts (host only). Maids are not finders in v1 (they have no Danh / art / chest of their own in the same form); sv_co and ma_giao band S stay hers only.
+- The intel special for an NPC finder = one evidence step (NPCs have no intel book); lối for an NPC finder = an art step (NPCs have no lối list).
