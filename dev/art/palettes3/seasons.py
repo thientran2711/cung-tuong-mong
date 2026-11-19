@@ -34,7 +34,7 @@ def metrics(m, s):
 def in_tone(h, role):
     """role 'm' (main) / 's' (secondary): inside the one tone of all four seasons"""
     L, C, H = oklch(h)
-    if is_white(h): return L <= 0.93
+    if is_white(h): return L <= 0.95
     t = TONE[role]
     return t['L'][0] - 1e-9 <= L <= t['L'][1] and t['C'][0] <= C <= t['C'][1] + 1e-9 and \
         not ((80 <= H < 100 and C > 0.06) or dE(h, '#EFBD69') < 0.045)

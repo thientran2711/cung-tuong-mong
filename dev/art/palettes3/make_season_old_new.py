@@ -148,7 +148,33 @@ def sheet_v86(old, new):
     OUT = os.path.join(OUT, 'v86'); os.makedirs(OUT, exist_ok=True)
     save(im, 'changes_old_new.jpg')
 
+def sheet_roots(old, new):
+    """owner Lượt 770: root codes changed (picture not redrawn): drawn colours | new code, per person"""
+    ch = json.load(open(os.path.join(os.path.dirname(os.path.abspath(__file__)), 'palette86_changes.json')))['roots']
+    ch = [c for c in ch if c['drawn'] and any(c['drawn'][x] != c['new'][x] for x in ('main_hex', 'sec_hex'))]
+    COLS, CW, RH, PAD, HEAD = 3, 790, 150, 12, 140
+    rows = (len(ch) + COLS - 1) // COLS; W = PAD * 2 + COLS * CW; H = HEAD + rows * RH + 40
+    im = Image.new('RGB', (W, H), BG); dr = ImageDraw.Draw(im)
+    dr.text((PAD + 4, 14), f'Mã màu gốc đổi, tranh giữ nguyên (Lượt 769/770) — {len(ch)} người', font=fnt(44, True), fill=INK)
+    dr.text((PAD + 4, 72), 'Trái = màu đã vẽ · phải = mã mới (cùng tông nhẹ tươi Xuân/Hạ) · trái của mỗi cặp = màu chính, phải = màu phụ',
+            font=fnt(23), fill=SUB)
+    for i, c in enumerate(ch):
+        r, cc = divmod(i, COLS); x, y = PAD + cc * CW, HEAD + r * RH
+        dr.rectangle([x + 4, y + 4, x + CW - 6, y + RH - 6], outline=(214, 208, 200), width=1)
+        dr.text((x + 14, y + 12), c['id'], font=fnt(32, True), fill=INK)
+        dr.text((x + 14, y + 54), VN[c['new']['season']], font=fnt(22), fill=SUB)
+        o, n = c['drawn'], c['new']
+        pair(dr, x + 120, y + 14, 150, 60, o['main_hex'], o['sec_hex']); dr.text((x + 282, y + 30), '→', font=fnt(30, True), fill=SUB)
+        pair(dr, x + 320, y + 14, 150, 60, n['main_hex'], n['sec_hex'])
+        dr.text((x + 484, y + 14), fit(dr, n['main'], fnt(21), CW - 496), font=fnt(21), fill=INK)
+        dr.text((x + 484, y + 44), fit(dr, '+ ' + n['sec'], fnt(21), CW - 496), font=fnt(21), fill=INK)
+        dr.text((x + 120, y + 86), fit(dr, f"vẽ: {o['main']} {o['main_hex']} + {o['sec']} {o['sec_hex']}", fnt(18), CW - 134), font=fnt(18), fill=SUB)
+        dr.text((x + 120, y + 112), f"mới: {n['main_hex']} + {n['sec_hex']}", font=fnt(18), fill=SUB)
+    global OUT
+    OUT = os.path.join(OUT, 'v86'); os.makedirs(OUT, exist_ok=True)
+    save(im, 'roots_drawn_vs_new.jpg')
+
 if __name__ == '__main__':
     new = json.load(open(os.path.join(ROOT, 'dev/art/face-common/palettes_season.json')))
     old = json.load(open(sys.argv[2]))
-    dict(xuan=sheet_xuan, ha=sheet_ha, tone=sheet_tone, v86=sheet_v86)[sys.argv[1]](old, new)
+    dict(xuan=sheet_xuan, ha=sheet_ha, tone=sheet_tone, v86=sheet_v86, roots=sheet_roots)[sys.argv[1]](old, new)
