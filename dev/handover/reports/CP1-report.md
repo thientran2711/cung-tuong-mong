@@ -74,3 +74,18 @@ nc1–nc3 are FOREIGN princesses → no yellow. None of the 87 is a royal-family
 2. "Recognisably hers" = generated main stays near her main hue where the season allows; a blue-main woman's Xuân/Thu must change main (peach/coral etc.), a coral-main woman's Hạ/Đông likewise.
 3. Hạ palettes are soft on purpose (gentle contrast); 3 use "ice pink" (#E2B6CB) as a very light secondary (c12, c24, c31) — the softest pairs on the sheet.
 4. "pale orchid" is the most used Đông main (light cool colour with a deep secondary).
+
+---
+
+# CP1 part 3 — mood-seal group (a) Thái hậu «giận» SAMPLE (order ROOT-56 21:41Z) — DONE, for the next foreman (ROOT-57)
+- Prompts + result notes: dev/art/emo-anim/groups/th-gian.md. Gens run by ROOT-56 (3 090 cr): A eIPl4i6dqL · B s7IMhSkl8e · OUT 8ai7ZqUIrU · LOOP jUoTtNALD0 · BACK UPvdCAuwny (ledger: 5 SEAL-GROUP lines).
+- Cut by CP1 with dev/art/emo-anim/groups/th_cut.py, which keys against the real screen colour: the Seedance screen is ≈ #00E406, and the old chromakey left the steam puffs grey-green. Every frame looked at.
+- CDN https://ctm-img.victoria-tntt.workers.dev/img/_review/emo-anim-groups/ :
+  - th-gian-out.webp (45 fr, loop 1), th-gian.webp (LOOP, 60 fr, loop 0), th-gian-back.webp (60 fr, loop 1); all bg 00000000, 288 px, 15 fps
+  - still/th-gian.webp (160 px)
+  - th-gian-frames.jpg (every frame, on light and dark rows)
+  - th-gian-preview.mp4 (OUT + LOOP×2 + BACK, light bg) ← send to the owner with the frame sheet
+- Notes for the owner (A18):
+  1. Thái hậu has no colour in RCOL. Royal yellow #EFBD69 follows B21; the deep plum trim #6E3A5E is my pick.
+  2. In BACK a steam puff covers the hands for ~1 s, then fades, leaving a few tiny dots.
+- A1: no more groups until the owner OKs this sample.
