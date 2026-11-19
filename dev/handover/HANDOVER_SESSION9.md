@@ -1140,3 +1140,4 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - C-AG #22 also runs opt-scroll-reset J7aS6giC (22 leftover option frames, root cause).
 - STANDBYS: MAIN session_01Rc5AsJ8S2aNYjotfjzaioU; B session_01N1tNP5jYfeoWoXsWr5eqKN; D session_01964izFLpgp8aeBD8Y13gek; E/C-AG/C new ones pending.
 - ROOT-66 hourly wake trig_01Y7AnqjhjQhgRh2LS8Tz5sm DELETED at handover; ROOT-67 creates its own at minute 32.
+- (19/11 08:46Z) ROOT-67 opened = session_01Rc5AsM5xHa2zs9qd5o5eTU (opus, depth 5). ROOT-66 wake trig_01Y7AnqjhjQhgRh2LS8Tz5sm DELETED. ROOT-66 stops (relays any late message to ROOT-67).
