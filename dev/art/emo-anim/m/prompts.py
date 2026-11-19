@@ -26,7 +26,7 @@ S = {  # key: (disc colour, face in the still, B: burst action, out action, loop
    "he keeps bawling in a loop: he rubs his eyes with both fists, his shoulders shake with sobs, his head tilts back and forward with each wail, small tears spring out and fall",
    "his sobs slow down, he lowers his fists from his eyes, lets go of the gold rim", "a crying face with tears"),
  "ghen": ("green", "same jealous sideways glare and puffed cheek",
-   "he is jealous and sulking: his arms come forward and cross tightly on top of the gold rim, his cheeks puffed in a pout, a jealous sideways glare, one hand tugging his sleeve, a small green sulk mark beside his head",
+   "he is jealous and sulking: his arms come forward and cross tightly on top of the gold rim, his cheeks puffed in a pout, a jealous sideways glare, one hand tugging his sleeve, a small dark scribble sulk mark beside his head",
    "he grows jealous: he leans forward and bursts out of the round frame toward the viewer, his head and shoulders push past the gold rim, his arms come out and cross tightly on top of the rim, cheeks puff into a pout, sideways glare",
    "he keeps sulking jealously in a loop: he pouts and puffs his cheeks, glares sideways and turns his head away with a huff, then glances back again, his crossed arms tighten on the rim",
    "he gives one last jealous huff, uncrosses his arms, lets go of the gold rim", "a jealous sideways glare with a puffed cheek"),

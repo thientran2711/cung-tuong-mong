@@ -3,9 +3,11 @@
 #
 #   dev/art/emo-anim/cut.sh <part> <in.mp4> <out.webp> [start_s] [end_s]
 #     part  = out | loop | back
-#     out   : auto-trims to the burst  (start = where the seal starts to grow/move, minus 2 frames; to the end)
+#     out   : auto-trims the still opening (the pilot cut ~2.3 s): start = first frame whose change from the opening pose
+#             (mean |diff| at 96 px vs frame 2) passes 25 % of the clip's biggest change, minus 4 frames; to the end.
 #     loop  : full clip (4 s)
-#     back  : auto-trims from where the slide-in starts (last frame still as big as the leaning-out pose, minus 2 frames; to the end)
+#     back  : same rule (drops only the near-frozen B-pose head, so LOOP->BACK has no jump; usually 0-0.7 s); to the end
+#             (last frame = keyframe A = the still).
 #     start_s/end_s override the auto trim (seconds in the source clip; end_s optional).
 #   Prints the trim used, frame count and size. Needs ffmpeg + python3 with numpy.
 #   Filter = exactly the brief: chromakey=0x00FF00:0.28:0.08, despill=type=green, 288x288 lanczos, 15 fps,
@@ -16,19 +18,16 @@ set -euo pipefail
 part=${1:?part out|loop|back}; in=${2:?in.mp4}; out=${3:?out.webp}; ss=${4:-}; to=${5:-}
 FILT="chromakey=0x00FF00:0.28:0.08,despill=type=green,scale=288:288:flags=lanczos,fps=15"
 
-auto_start() { # $1 = out|back ; prints start seconds
+auto_start() { # prints start seconds
   ffmpeg -loglevel error -i "$in" -vf "fps=15,scale=96:96" -f rawvideo -pix_fmt rgb24 - | python3 -I -c '
 import sys, numpy as np
 mode = sys.argv[1]
 a = np.frombuffer(sys.stdin.buffer.read(), np.uint8).reshape(-1, 96, 96, 3).astype(int)
-g = (a[..., 1] > 150) & (a[..., 0] < 90) & (a[..., 2] < 110)   # chroma-green pixels
-area = (~g).reshape(len(a), -1).sum(1).astype(float)           # seal + figure area per frame
-n = len(area)
-if mode == "out":   # first frame clearly bigger than the still (A)
-    base = area[:3].mean(); idx = next((i for i in range(n) if area[i] > base * 1.04), 0)
-else:               # back: last frame still about as big as the leaning-out pose (B)
-    base = area[:3].mean(); idx = max([i for i in range(n) if area[i] >= base * 0.95] or [0])
-idx = max(0, idx - 2)
+d = np.abs(a - a[2]).mean((1, 2, 3))                           # change vs. the opening pose (frame 2; frame 0 is the exact keyframe)
+n = len(d)
+thr = 0.25 * d.max()                                           # the big move (burst / slide) = a quarter of the full change
+idx = next((i for i in range(3, n) if d[i] > thr), 0)
+idx = max(0, idx - 4)                                          # keep ~0.27 s of run-up before it
 print(f"{idx/15:.2f}")
 ' "$1"
 }
