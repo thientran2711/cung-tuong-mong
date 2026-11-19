@@ -85,3 +85,44 @@ Note: the t4 builder text now carries the beaded shoulder-yoke wording (open pea
 | c25 t4 new (Tần) | Lw87MmWswO | frontal, bare forehead, closed lips, brick red, round capelet + jade clasp, bamboo borders, NO cloud collar, lantern on jade stick | pearl net covers the whole capelet top, medium density (airier than a dense net, but not "sparse strands"); bird embroidered on capelet |
 | c25 t5 new (Phi) | aFGHNWXfSh | frontal, bare forehead, closed lips, cloud collar + tassel fringe, layered robe, peony medallions, gold girdle, lantern | slight mid-step lean (still frontal); robe darker/browner than #8C4D40 brief in places |
 Sheet (rows c06, c25; Tan cu | Tan moi | Phi cu | Phi moi): CDN img/_review/tan-phi/sheet1.jpg (1580x1710) + out/tanphi_sheet1.jpg. No mass; waiting for the owner.
+
+---
+# F1 (child of Foreman C ROOT-39, 19/11 ~03:20Z) — owner verdict 19/11 ~03:05Z items (1)+(2)
+PRIORITY #1 CHECK ('tan-phi'): reused this report (JOB 1 builder fcba546/e7522ad + JOB 2 gens) + img/_review/tan-phi/sheet1.jpg | OD/ledger: FIGURE_GATE last block "OWNER VERDICT 19/11 ~03:05Z" | main 0 | review/t8-prompt-B d18fae6 (W72 golden_low = the prompts of the OLD t1t6 images) | claims 0. Read: START_CORE/WORKER/ART, FIGURE_GATE A0 + REFERENCES + last block.
+
+## Source of the OLD wording (never invented)
+OLD Tần / OLD Phi images = img/_review/t8-reprompt/t1t6/<cNN>_a18_t4|t5_v0.png (W72, 18/11 ~18:00Z). Their prompts = `git show d18fae6:dev/art/t8-prompt-B/golden_low/t4_v0_c06.txt` / `t5_v0_c06.txt` (W72 HANDOVER: "golden_low/ (12) prompts used"; held items in the images match these files: c06 t4 round fan with jade handle, c25 t4 box). Magnific search of the folder for those 12 gens was not conclusive (date filter ignored, 16k items), so git history is the source.
+- OLD Tần outfit (c06): "a layered silk robe of two or three visible layers with WIDE gold-thread embroidered borders of butterflies at collar, sleeves and hem, an embroidered cloud collar (yunjian) over the shoulders and an embroidered silk sash; elegant high chignon with gold and jade hairpins and small dangling gold bu yao tassel hairpins" + "Hair: her own hairstyle decorated with fresh flowers and several gold hairpins (trâm) with dangles, rich like her rank."
+- OLD Phi outfit (c06): "a silk brocade robe richly embroidered in gold with peonies and small birds, long trailing wide sleeves, a gold-embroidered waistband with hanging jade belt pendants and tassels, a sheer silk shawl; high ornate chignon with a LARGER gold headdress with dangling gold tassels and jade pins, gold earrings" + the same "fresh flowers and several gold hairpins" Hair sentence.
+HONEST FINDING: the OLD Tần prompt has NO "flowers and birds" words. Its only embroidery words are the motif borders ("WIDE gold-thread embroidered borders of <motif>"), "embroidered cloud collar", "embroidered silk sash" and the shared line "only flowers, birds, butterflies or other motifs" (still in every prompt). The all-over flowers + birds on the old Tần robe were the model's own fill. The new t4 already had the border words; what it had lost vs old = "a layered silk robe of two or three visible layers" and "fresh flowers" in the Hair sentence. Both restored. "elegant high chignon" / "high ornate chignon" stay OUT (FIGURE_GATE: HAIR SAME AT EVERY RANK, no hairstyle words).
+
+## Builder change (commit eeaf614, build.py build_low only)
+1. t4: robe clause = OLD Tần clause WHOLE ("a layered silk robe of two or three visible layers with WIDE gold-thread embroidered borders of <motif> at collar, sleeves and hem" … "an embroidered silk sash"); only the cloud collar stays replaced by the approved capelet (swap design kept: crossed collar, long trailing wide sleeves, jade belt pendants).
+2. t4: TAN_CAPE_PEARLS + "; the pearl net starts right at the collar at the throat and hangs down over the WHOLE capelet, as long as the capelet itself, its pearl fringe at the capelet's lower edge, never only half of it" (owner words: "rủ bằng, dài bằng cái áo ngắn ở ngoài luôn, ngay chỗ cái cổ luôn, chứ không phải là một nửa").
+3. t5: + ", a sheer silk shawl" (OLD Phi words verbatim) after the peony medallions.
+4. t4 + t5 (not --phiA..H samples): Hair sentence = OLD "Hair: her own hairstyle decorated with fresh flowers and several gold hairpins (trâm) with dangles, rich like her rank."
+Guard: 7008 builder commands before/after (c01–c32: --low 1–6 × v0/v1/v2 × 5 ages × ±spec5pose, --phiA–H, t8 v0–v2 ±head/t7/spec5pose, --trieu 1–8, states kc/ngheo/thaihau): 1920 changed = exactly every --low 4 and --low 5 without --phi (960 + 960); 0 others; 0 tracebacks. test_low_all.py OK 2304 (golden_low t4/t5 v0 c01–c32 regenerated).
+
+## Before / after diff (c06 a18 v0 --spec5pose; c25 identical except motif/colour)
+```
+t4 Outfit
+- a NEW outfit, a silk robe with a crossed collar, with WIDE gold-thread embroidered borders of butterflies at collar, sleeves and hem, long trailing wide sleeves, …, with fewer, more widely spaced pearls than usual, airy; no cloud collar, …
++ a NEW outfit, a layered silk robe of two or three visible layers with WIDE gold-thread embroidered borders of butterflies at collar, sleeves and hem, a crossed collar, long trailing wide sleeves, …, with fewer, more widely spaced pearls than usual, airy; the pearl net starts right at the collar at the throat and hangs down over the WHOLE capelet, as long as the capelet itself, its pearl fringe at the capelet's lower edge, never only half of it; no cloud collar, …
+t4 + t5 Hair
+- Hair: her own hairstyle decorated with several gold hairpins (trâm) with dangles, rich like her rank.
++ Hair: her own hairstyle decorated with fresh flowers and several gold hairpins (trâm) with dangles, rich like her rank.
+t5 Outfit
+- … the front of the skirt embroidered with large peony medallions; a LARGER gold headdress …
++ … the front of the skirt embroidered with large peony medallions, a sheer silk shawl; a LARGER gold headdress …
+```
+
+## Gens (4 of max 8, 0 regens, 540 credits)
+Prompts = exact build.py stdout (`c06|c25 v0 --low 4|5 --spec5pose`), Magnific metadata.prompt identical; refs [6AbGv6EiJO style, own a18 t1 face c06 rgXsjcmxtc / c25 u5WqFZ2QLD]; gpt-2-6 1024x2304 2k transparentBackground (alpha OK), folder ba4aecfe. Ledger dev/art/gen_ledger.jsonl lines 93–96 (`--log --gen-id --mprompt`); `--verify --since` = 4 PASS (the 1 FAIL in that window is line 16, not F1's).
+| Image | Gen id | Matches | Faults (honest, LOOKED) |
+|---|---|---|---|
+| c06 t4 Tần mới 2 | xSBUbF7jfW | frontal, closed lips, bare forehead; round capelet + jade clasp; pearl net now from collar to the capelet's lower edge with fringe (FULL length ✓); layered robe with ivory under-layer; butterfly borders + some flowers/butterflies on skirt; big peony + pins in hair | robe body still far less embroidered than OLD Tần (no birds, scattered small flowers only) — the old prompt has no words that force it; pearl net is fairly dense, not "sparse"; flute held in one hand (prompt "across both hands in the other hand" conflicts with the hairpin hand) |
+| c06 t5 Phi mới 2 | ov6aDVs829 | sheer silk shawl/gauze layer over sleeves ✓; cloud collar + tassel fringe; peony medallions, small birds; headdress + peony | hair dangles shorter/fewer than OLD Phi's long side dangles; flute one-handed (same conflict) |
+| c25 t4 Tần mới 2 | kselH7W16B | frontal; capelet + pearl net full length with fringe ✓; layered robe; bamboo borders; peony + pins; lantern on jade stick | robe body plain brick red between borders — no flowers/birds (OLD Tần c25 had flowers + birds all over); less luxurious than old |
+| c25 t5 Phi mới 2 | kselHJc16B | sheer shawl ✓ (clear gauze both sides); cloud collar + tassels; peony medallions + bird; headdress with dangles + peony; lantern | slight mid-step (still frontal); dangles less long than OLD Phi |
+Sheet (rows c06, c25; Tan cu | Tan moi 2 | Phi cu | Phi moi 2): https://ctm-img.victoria-tntt.workers.dev/img/_review/tan-phi/sheet2.jpg ; singles img/_review/tan-phi/v2/<cNN>_a18_t4|t5_new2.png.
+OPEN FOR ROOT-39 (owner): item (1) "hoa + chim trên áo như Tần cũ" is NOT reached by copying the old Tần words, because the old words never asked for it. To force it, a sentence must be added (e.g. the old Phi words "richly embroidered in gold with peonies and small birds", but that is Phi luxury and blurs t4/t5) — needs her ruling; F1 did not add it (never invent). No mass.
