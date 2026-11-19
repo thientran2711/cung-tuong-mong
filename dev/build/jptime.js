@@ -39,7 +39,7 @@ function ptX(kind,x){const w=ptWaitTxt(kind);/* no empty segment ("chờ 2 khắ
 function ptReg(kind,fn){PT.run[kind]=fn}
 /* send: called by a button after the person is chosen and BEFORE the order khắc is paid (t0 = now) */
 function ptSend(o){if(!S||!o||!o.who)return null;const r=ptRow(o.kind);/* the tap's khắc: a button that already paid its order passes paid (t0 = before the pay) */const now=Math.max(0,ptNow()-(o.paid||0));
- const a={byNm:o.byNm||"",id:++PT.seq+"-"+now+"-"+Math.floor(Math.random()*1e4),who:o.who,nm:o.nm||"",kind:o.kind,by:o.by||"me",t0:now,due:now+(o.n!=null?o.n:r.n),place:o.place||null,tgt:o.tgt||null,a:o.a||{},fz:o.fz==null?null:o.fz,lbl:o.lbl||"",back:0,rep:null,read:0};
+ const a={byNm:o.byNm||"",id:++PT.seq+"-"+now+"-"+ptZ().length/* no Math.random: a send never moves the game's random draws */,who:o.who,nm:o.nm||"",kind:o.kind,by:o.by||"me",t0:now,due:now+(o.n!=null?o.n:r.n),place:o.place||null,tgt:o.tgt||null,a:o.a||{},fz:o.fz==null?null:o.fz,lbl:o.lbl||"",back:0,rep:null,read:0};
  ptZ().push(a);PT.stat.sent++;try{ptLedger()}catch(e){ptErr("ledger",e)}
  if(a.by==="me"){try{if(typeof kitLine==="function")kitLine(`${a.nm} đã đi ${a.lbl||"làm việc"}, về ${ptWhen(a.due)}.`,2600)}catch(e){}ptIcon()}
  return a}
@@ -375,7 +375,7 @@ ptReg("npcAct",a=>ptNpcBack(a,(v,t)=>{let ix;if(a.a.item){v.inv=v.inv||[];v.inv.
  const T0=typeof TSB!=="undefined"?TSB.now:0;if(a.a.tsb&&typeof TSB!=="undefined")TSB.now=1;try{return runAct(v,t,a.a.k,ix)}finally{if(typeof TSB!=="undefined")TSB.now=T0}}));
 /* an NPC's trusted maid away on an errand (mm:<vid>) is away for EVERY deed of her mistress, not only the same deed sent again */
 function ptMaidOut(v){return !!v&&v!==S&&v.id!=null&&ptOn()&&ptBusy("mm:"+v.id)}
-(function(){try{if(typeof AGRUN==="undefined")return;for(const k of Object.keys(AGRUN)){if(!/maid/i.test(k)||k==="cx2:maidSpy")continue;const f0=AGRUN[k];if(!f0||f0.__ptm)continue;
+(function(){try{if(typeof AGRUN==="undefined")return;for(const k of Object.keys(AGRUN)){if(!/^cx\d*:maid/.test(k)||k==="cx2:maidSpy")continue;/* a MISTRESS's deed that uses her maid (cx2:maidTalk …); never the maid's own deeds ("maid:<key>", jagstaff) */const f0=AGRUN[k];if(!f0||f0.__ptm)continue;
   const f=function(v){if(ptMaidOut(v))return"";return f0.apply(this,arguments)};f.__ptm=1;AGRUN[k]=f}}catch(e){ptErr("maid lock",e)}})();
 (function(){try{if(typeof sendMaid==="function"){const s0=sendMaid;sendMaid=function(a){if(ptMaidOut(a))return"";return s0.apply(this,arguments)}}
  if(typeof amSendQ==="function"){const q0=amSendQ;amSendQ=function(v){if(ptMaidOut(v))return false;return q0.apply(this,arguments)}}}catch(e){ptErr("maid lock2",e)}})();
