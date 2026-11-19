@@ -6,6 +6,7 @@ B='/home/user/cung-tuong-mong/dev/art/owner-copy/'
 M19=dict(MAIN='caramel apricot',HEX1='#DFBBA1',SEC='soft teal blue',HEX2='#6E9CA8',AGE='about 22')
 ITEM19={7:'a closed parasol of gold silk inlaid with kingfisher feathers, handle of gold filigree set with gems, with gem tassels',
         8:'a closed parasol of imperial silk embroidered with phoenixes, handle of gold carved with phoenixes and set with pearls, with pearl phoenix tassels'}
+FL2='FABRIC: the robe stays a rich, heavy gold-embroidered BROCADE (never turned into plain silk); its grace comes from the cut and the drape: long soft vertical folds, the very wide sleeves and the hem swaying and pooling softly, supple and elegant, never stiff, boxy or armour-like; NO sheer gauze, voile or transparent outer layer over the robe, nothing wrapped around it. '
 def templ(t,src):
     s=open(B+src).read()
     fa=s.index('Her face: '); fe=s.index('From the identity reference')
@@ -15,6 +16,7 @@ def templ(t,src):
     s=s.replace('Eyes soft, warm and round-almond, never slanted or upturned, never teary.','Eyes: both eyes symmetrical, both irises looking straight at the viewer, never cross-eyed, never wall-eyed, never teary, eyelids fully open.')
     s=s.replace('HAIR UP: ALL of her hair is swept UP','HAIR UP: ALL of her glossy pure BLACK hair (never brown) is swept UP')
     s=s.replace('very long, very wide, flowing sleeves that fall well past her hands down toward her knees, at least as long and wide as the sleeves of the lowest consort ranks',('very long, very wide, flowing sleeves that fall well past her hands and hang down to her ANKLES, almost touching the floor' if t==7 else 'very long, very wide, flowing sleeves that fall well past her hands and hang PAST her ankles all the way down until they TOUCH THE FLOOR'))
+    s=s.replace('COLOUR RULE',FL2+'COLOUR RULE',1)
     for k,v in M19.items(): s=s.replace(v,'{'+k+'}')
     assert 'caramel' not in s and 'parasol' not in s and '{ITEM}' in s
     return s
