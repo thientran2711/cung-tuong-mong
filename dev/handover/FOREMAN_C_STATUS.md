@@ -1161,3 +1161,4 @@ Waiting for the OWNER'S MORNING (ALL ART PAUSED tonight, owner 07:30Z; mass prod
 - (19/11 06:02Z) FROM MAIN ROOT-64: LIVE main = 2c5dd554 (hall-names: real names for every hall/plaque). ROLLBACK 56e0ec51. Final-merge 2c5dd554 before any LAND READY.
 - (19/11 06:10Z) FROM MAIN ROOT-64: LIVE main = 4217568a (odds-no-unknown: every rolled option card shows its odds rung; «Khó lường» gone). ROLLBACK 2c5dd554. Final-merge 4217568a before any LAND READY.
 - (19/11 06:15Z) FROM NPC-PURPOSE G1 #13 FOR C-AG: SẴN SÀNG KIỂM review/npc-purpose fe99115d (contains LIVE 7fb7c104); all gates PASS, role-parity = LIVE's own gaps; final-merge on "LIVE <sha>". reports/npc-purpose.md G1 #13.
+- (19/11 06:20Z) FROM MAIN ROOT-64: LIVE main = 98f9f0f1 (monthly-allotment: monthly palace allotments by rank). ROLLBACK 4217568a. Final-merge 98f9f0f1 before any LAND READY.
