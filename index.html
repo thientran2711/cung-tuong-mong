@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"f01df861","t":"2026-11-19T09:09Z","c":"review coop-thin-f3 r1: merge F2 LAND READY 7627f79c; generated files rebuilt","b":"b4bf92bdeae6","h":[{"s":"4ed2831d+","t":"2026-11-19T07:18Z","c":"law3-cost-only: index.html / sw.js regenerated"},{"s":"0da546e9","t":"2026-11-19T07:16Z","c":"role-parity-drift r1: build line"},{"s":"eff20119+","t":"2026-11-19T06:33Z","c":"ev-pic-coverage: picture required in M/L/XL frames only, S frames reported apart (owner OD 19/11 ~04:55Z)"},{"s":"a64f06c7+","t":"2026-11-19T06:29Z","c":"seal-lean-2 r2: rebuild site"},{"s":"38af6387","t":"2026-11-19T06:23Z","c":"minister-agents review r1: one core (gift regard + backs in BAL.tdCourt, j55 reads tuyen.pow / imp.deep / clanRel), censor name unique in e…"},{"s":"18a9b64c+","t":"2026-11-19T05:22Z","c":"monthly-allotment r6 (reviewer): stat names from the one NAMES table (drop private STAT_NM); candle note puts the burnt candle in the card'…"},{"s":"6b041ea7+","t":"2026-11-19T05:21Z","c":"odds-no-unknown: vu oan hints no longer repeat the odds word the meter now shows"},{"s":"6eb0ab3d+","t":"2026-11-19T05:37Z","c":"hall-names r2: runtime test hall-names-lines.js (houseName plaque, palace list line, visit line, 'cùng cung' note; Fold + iPad)"},{"s":"c4c25bbd+","t":"2026-11-19T04:41Z","c":"head-marker-video: viewport-size recording, opening dialog cleared, maid notice kept unread, white plain state swapped at half time on the …"},{"s":"360c0edd+","t":"2026-11-19T03:50Z","c":"ge-writers W2 r2: rebuild on main fa411d6f"}]};
+window.CTM_BI={"s":"f69d1931","t":"2026-11-19T09:30Z","c":"coop-cyc: a local Worker URL (wrangler dev) gets the same browser flags as the coop-thin-f* tests","b":"811b9e544633","h":[{"s":"fcff501a+","t":"2026-11-18T20:41Z","c":"map-labels-missing r2c: tag touches its own building or keeps a short leader (\u003c=90px) ending on the real slip/info rect, dot >=40px from ot…"},{"s":"c67d248d+","t":"2026-11-18T19:53Z","c":"ag-deed-perf: site build (index.html, sw.js)"},{"s":"6aab33ad","t":"2026-11-18T20:05Z","c":"KIT_REQUESTS: K-Q2-1 DONE 048f3c7"},{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"},{"s":"a5013222+","t":"2026-11-18T18:03Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)"},{"s":"08774c0e+","t":"2026-11-18T17:38Z","c":"ag-stf2 (test only): bribe histogram picks a servant whose lòng moves her bribe odds. Root of the 'disloyal one takes more' red (npc ~3/20,…"},{"s":"0351e140","t":"2026-11-18T16:48Z","c":"shop-panel: «Để ta xem» outside option, 3-column Mua/Bán grid, smallest picture strip, test"},{"s":"ebf25660+","t":"2026-11-18T15:29Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…"},{"s":"9f9c6c2b+","t":"2026-11-18T14:26Z","c":"shown-odds-one-path r1: plant on the spot is done in person (actCtx x.here, no sent-servant pen); Vì sao names spy knowledge (whyKnow); tes…"},{"s":"aa997f3c+","t":"2026-11-18T13:46Z","c":"look-fx r13: index.html / sw.js rebuilt from merged sources"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -4760,8 +4760,10 @@ function lessonMode(k,mode){const l=S.arts[k],cost=tchFee(k);if(!S||S.dead||Q.le
  else if(mode==="th"){if(!can(2)||S.th<40||(S.buoi||0)!==0||S.thDead)return;apply({suc:-10,th:3})}
  else{if(!can(2)||S.bac<cost)return;apply({suc:-10,bac:-cost});tchPaid(k)}
  spend(2);S.mg={k,l,mode};save();render();resumeMG()}
-(function(){const r0=resumeMG;resumeMG=function(){const m=S.mg;if(!m)return;const a=ARTS.find(x=>x.k===m.k);openMG(m.k,m.l,g=>{S.mg=null;const gs=Math.max(1,Math.round(g*.6)),gg=m.mode==="self"?gs:m.mode==="teacher"?Math.max(g,gs+((typeof BAL!=="undefined"&&BAL.tchMin)||1)):g;log(`${m.mode==="self"?"Tự học":m.mode==="th"?"Học với Thái hậu":"Học với thầy"} ${a.n}. Tiến bộ +${gg}.`);addArt(m.k,gg);
-  if(m.mode==="teacher"&&roll(30)){if(roll(50)&&discover())log("Thầy dạy kể một sở thích của Hoàng thượng.");else{const t=evGuilty(S,liveRivals(true));if(t&&evA(S,t,BAL.eff.j23.evTop))log(`Thầy dạy buột miệng chuyện của ${t.name}: chứng cứ ${balSg(BAL.eff.j23.evTop)}.`);else log("Thầy dạy kể chuyện trong cung, toàn chuyện vô hại.")}}render()})}})();
+/* the lesson's gain (one function: the game's callback ends here; co-op thin F5 runs it on the host with her score) */
+function artLessonGain(m,g){S.mg=null;const a=ARTS.find(x=>x.k===m.k);const gs=Math.max(1,Math.round(g*.6)),gg=m.mode==="self"?gs:m.mode==="teacher"?Math.max(g,gs+((typeof BAL!=="undefined"&&BAL.tchMin)||1)):g;log(`${m.mode==="self"?"Tự học":m.mode==="th"?"Học với Thái hậu":"Học với thầy"} ${a.n}. Tiến bộ +${gg}.`);addArt(m.k,gg);
+  if(m.mode==="teacher"&&roll(30)){if(roll(50)&&discover())log("Thầy dạy kể một sở thích của Hoàng thượng.");else{const t=evGuilty(S,liveRivals(true));if(t&&evA(S,t,BAL.eff.j23.evTop))log(`Thầy dạy buột miệng chuyện của ${t.name}: chứng cứ ${balSg(BAL.eff.j23.evTop)}.`);else log("Thầy dạy kể chuyện trong cung, toàn chuyện vô hại.")}}render()}
+(function(){const r0=resumeMG;resumeMG=function(){const m=S.mg;if(!m)return;openMG(m.k,m.l,g=>artLessonGain(m,g))}})();
 function artTabHTML(){const nx=ARTS.map(a=>S.arts[a.k]);let h=`<div class="ph"><span>Mỗi buổi học tốn 2 khắc. Ba cách học, giá trị ngang nhau, tốn thứ khác nhau.</span>${S.master?`<span class="g">Danh sư còn dạy ${S.master} tháng</span>`:""}</div><div class="arts">`;
  h+=ARTS.map(a=>{const l=S.arts[a.k],need=l+2,cost=5+l*5,ms=ARTMS[a.k]||[];const t2=whyTime(2);
   const B=l>=5?[`<span class="ef g">Đã tinh thông</span>`]:[pbtn(`data-learn="${a.k}" data-mode="self"`,"Tự học",`tốn: Sức -15 · thành: tiến bộ một hai phần`,t2||(S.suc<BAL.sucNeed.self?"Sức dưới "+BAL.sucNeed.self:"")),
@@ -29625,15 +29627,22 @@ function wkFinLeft(){const m=S&&S.wkFin;return Math.max(0,(BAL.wkFinCap|0)-(m&&m
 function wkFinTxt(K){return !K||!K.fin?"":wkFinLeft()>0?`${plain(fmt(K.fin))}, mỗi tháng một lần`:"tháng này Đức đã tăng rồi"}
 /* lesson progress points of one play (0..3 by BAL.mgTier.lessonPts): ONE rule for her lesson (openMG below) and an NPC's (j85 npcStudyDo, mg2) */
 function wkLessonPts(raw){const P=BAL.mgTier.lessonPts;return raw>=P[2]?3:raw>=P[1]?2:raw>=P[0]?1:0}
+/* the end of every lesson / practice game (one function: the game's onDone ends here; co-op thin F5 runs it on the host with her score).
+   m = the lesson (S.mg: k, mode, wk = the work picked, pa = a practice / Học lối mới / resumed practice: how / qx = its own words);
+   cb = the lesson-progress callback of openMG (absent: the lesson's gain itself, artLessonGain) */
+function wkLessonEnd(k,m,raw,o,cb){const sk2=!!(o&&o.skipped);
+ if(m.pa){S.mg=null;if(sk2)log(m.qx||"Tự học nhanh: không ra thành phẩm.");else wkFinishLesson(k,m.wk||{kind:WDEF[k],mat:0},cl(Math.round(raw),0,10),m.how||"tự học");render();return}
+ const pick=m.wk||{kind:WDEF[k],mat:0},ms=S.master?2:1;raw=cl(Math.round(raw||0),0,10);const pts=sk2?(o.ok!=null?(o.ok?1:0):(kitQuickRoll()?1:0)):wkLessonPts(raw)/* ONE tier rule (ag) */;
+ if(m.mode==="prac"){S.mg=null;if(sk2)log("Tự học nhanh: không ra thành phẩm.");else wkFinishLesson(k,pick,raw,"tự học");render();return}
+ (cb||(g=>artLessonGain(m,g)))(pts*ms);if(sk2)return;try{wkFinishLesson(k,pick,raw,m.mode==="self"?"tự học":m.mode==="th"?"học với Thái hậu":"học");render()}catch(x){}}
 function wkFinishLesson(k,pick,raw,how){const kind=WK[pick.kind]&&WK[pick.kind].a===k?pick.kind:WDEF[k];const mat=pick.mat||0;const e=wkMake(S,kind,mat,raw,pick.subj);S.inv.push(e);const K=WK[kind];
  let fin="";if(K.fin){if(wkFinLeft()>0){apply(K.fin);S.wkFin=S.wkFin&&S.wkFin.t===S.turn?S.wkFin:{t:S.turn,n:0};S.wkFin.n++;fin=" "+fmt(K.fin)}else fin=" Tháng này Đức đã tăng rồi, món này không thêm Đức."}
  S.wkN=(S.wkN||0)+1;log(`<span class="g">Buổi ${how} làm ra ${e.wk.n}: phẩm ${WTIER[e.wk.ti]}</span> (${wkParts(S,kind,mat,raw)}). Cất vào rương${K.per?"; phải dâng trong tuần này":""}.${fin}`)}
-(function(){const o0=openMG;openMG=function(k,lv,cb){const m=S&&S.mg;if(!m||m.k!==k)return o0.apply(this,arguments);if(m.pa&&typeof playArt==="function"){S.mg=null;playArt({art:k,title:"Tự học",quick:{n:"Học nhanh",sure:1,win:"không ra thành phẩm"},onDone:(raw,o)=>{if(!(o&&o.skipped))wkFinishLesson(k,m.wk||{kind:WDEF[k],mat:0},cl(Math.round(raw),0,10),"tự học");else log("Tự học nhanh: không ra thành phẩm.");render()}});return}
+(function(){const o0=openMG;openMG=function(k,lv,cb){const m=S&&S.mg;if(!m||m.k!==k)return o0.apply(this,arguments);if(m.pa&&typeof playArt==="function"){S.mg=null;playArt({art:k,title:"Tự học",quick:{n:"Học nhanh",sure:1,win:"không ra thành phẩm"},mgEnd:1,onDone:(raw,o)=>wkLessonEnd(k,m,raw,o)});return}
  if(!m.wk)m.wk=wkPend||{kind:WDEF[k],mat:0};wkPend=null;const pick=m.wk;let skip=false;const ms=S.master?2:1;
  const cb2=g=>{const raw=wkRawOfPts(Math.round(g/ms));if(m.mode==="prac"){S.mg=null;if(skip)log("Tự học nhanh: không ra thành phẩm.");else wkFinishLesson(k,pick,raw,"tự học");render();return}if(skip)return cb(g);
   const r=cb(g);try{wkFinishLesson(k,pick,raw,m.mode==="self"?"tự học":m.mode==="th"?"học với Thái hậu":"học");render()}catch(x){}return r};
- if(typeof playArt==="function"){try{const an=ARTS.find(x=>x.k===k).n;playArt({art:k,title:`${m.mode==="prac"?"Tự học":"Học"} ${an}`,quick:m.mode==="prac"?{n:"Học nhanh",sure:1,win:"không ra thành phẩm"}:{n:"Học nhanh",roll:1,win:"tiến bộ một phần, không ra thành phẩm",lose:"không tiến bộ"},onDone:(raw,o)=>{const sk2=!!(o&&o.skipped);raw=cl(Math.round(raw||0),0,10);const pts=sk2?(o.ok!=null?(o.ok?1:0):(kitQuickRoll()?1:0)):wkLessonPts(raw)/* ONE tier rule (ag) */;
-   if(m.mode==="prac"){S.mg=null;if(sk2)log("Tự học nhanh: không ra thành phẩm.");else wkFinishLesson(k,pick,raw,"tự học");render();return}cb(pts*ms);if(sk2)return;try{wkFinishLesson(k,pick,raw,m.mode==="self"?"tự học":m.mode==="th"?"học với Thái hậu":"học");render()}catch(x){}}});return}catch(x){}}
+ if(typeof playArt==="function"){try{const an=ARTS.find(x=>x.k===k).n;playArt({art:k,title:`${m.mode==="prac"?"Tự học":"Học"} ${an}`,quick:m.mode==="prac"?{n:"Học nhanh",sure:1,win:"không ra thành phẩm"}:{n:"Học nhanh",roll:1,win:"tiến bộ một phần, không ra thành phẩm",lose:"không tiến bộ"},mgEnd:1,onDone:(raw,o)=>wkLessonEnd(k,m,raw,o,cb)});return}catch(x){}}
  const r=o0.call(this,k,lv,cb2);
  try{const sk=$("mgskip"),os=sk.onclick;const kind=WK[pick.kind]?pick.kind:WDEF[k];sk.innerHTML=`Học nhanh<small>${kitParse(kitQuickSub(m.mode==="prac"?{sure:1,win:"không ra thành phẩm"}:{win:"tiến bộ một phần, không ra thành phẩm",lose:"không tiến bộ"}))}</small>`;
   sk.onclick=()=>{skip=true;os()};const h=$("mgh");if(h)h.textContent+=` Tự tay làm (chơi): ra thành phẩm, ${WK[kind].w.toLowerCase()}: phẩm = phần chơi (từ 0 đến 10) + ${ARTS.find(x=>x.k===k).n} bậc ${wkLv(S,k)}: +${wkLv(S,k)}${WMAT[pick.mat||0]?` + vật liệu: +${WMAT[pick.mat||0]}`:""}.`}catch(x){}
@@ -29648,8 +29657,8 @@ function wkAsk(k,mode,run){const a=ARTS.find(x=>x.k===k),l=S.arts[k],fee=mode===
 (function(){const l0=lessonMode;lessonMode=function(k,mode){if(wkPend||!wkLessonOK(k,mode))return l0.apply(this,arguments);wkAsk(k,mode,()=>l0.call(this,k,mode))}})();
 /* practice once mastered: j82's playArt gives the raw score directly when present; otherwise the art's lesson game */
 function wkPractice(k){if(!wkLessonOK(k,"prac"))return;wkAsk(k,"prac",()=>{if(!wkLessonOK(k,"prac"))return;apply({suc:-10});spend(2);
- if(typeof playArt==="function"){const pick=wkPend||{kind:WDEF[k],mat:0};wkPend=null;const an=ARTS.find(x=>x.k===k).n;S.mg={k,l:5,mode:"prac",wk:pick,pa:1};
-  try{playArt({art:k,title:`Tự học ${an}`,quick:{n:"Học nhanh",sure:1,win:"không ra thành phẩm"},onDone:(raw,o)=>{S.mg=null;if(o&&o.skipped)log("Tự học nhanh: không ra thành phẩm.");else wkFinishLesson(k,pick,cl(Math.round(raw),0,10),"tự học");render()}});return}catch(x){S.mg=null}}
+ if(typeof playArt==="function"){const pick=wkPend||{kind:WDEF[k],mat:0};wkPend=null;const an=ARTS.find(x=>x.k===k).n;const m=S.mg={k,l:5,mode:"prac",wk:pick,pa:1};
+  try{playArt({art:k,title:`Tự học ${an}`,quick:{n:"Học nhanh",sure:1,win:"không ra thành phẩm"},mgEnd:1,onDone:(raw,o)=>wkLessonEnd(k,m,raw,o)});return}catch(x){S.mg=null}}
  S.mg={k,l:5,mode:"prac"};save();render();resumeMG()})}
 /* perishable works spoil at the end of the week */
 (function(){const e0=endTurn;endTurn=function(){const r=e0.apply(this,arguments);try{if(S&&!S.dead){const n0=S.inv.length;S.inv=S.inv.filter(e=>!(e.wk&&e.wk.p!=null&&e.wk.p<wk()));if(S.inv.length<n0)log("Món nấu, bình hoa để quá tuần đã hỏng, phải bỏ.");for(const v of rivals)if(v.inv)v.inv=v.inv.filter(e=>!(e.wk&&e.wk.p!=null&&e.wk.p<wk()))}}catch(x){}return r}})();
@@ -32176,6 +32185,9 @@ BAL.ag.bt={off:15,offMax:3,hon:5,honMax:3,mood:{gian:5,thuong:-5},fear:4,fearTim
    Outcome table (a quick result never beats a good own play): lessons won = tiến bộ một phần, lost = 0 · works / crafts = never a product ·
    makeup won = the middle tier (Đoan trang, BAL.toil.tier[0]), lost = Vụng về · care won = BAL.skip.care of the gain, lost = 0. */
 Object.assign(BAL,{skip:{od:40,raw:5,care:.5}});
+/* MINI-GAME SCORE RANGES (co-op thin F5, review/coop-thin-f5): the score a game end can report. unit = the care games (pet care, watering:
+   0..1 of the gain), raw = the kg82 / playArt / Tứ đức / tsGame play (0..10). A score outside its range is refused (the host never applies it). */
+Object.assign(BAL,{mgSc:{unit:[0,1],raw:[0,10]}});
 /* FACE REVEAL motion (owner 18/11 ~06:20Z, KIT §79 jreveal.js): ms = the grey veil clears from the face outward; lite = Gọn / reduced motion short fade;
    win = how long after a face is learned every place that first draws it (frame, avatar, stage figure) still plays its one reveal */
 Object.assign(BAL,{faceReveal:{ms:Math.round(1000*BAL.pace),lite:350,win:8000}});
@@ -46232,11 +46244,15 @@ function aaPunishTxt(sev){const m=has("nongnay")?3:has("nhantu")?1:2;return sev>
  let fin=null;
  const showLast=(title,before,ok,q0)=>{let n=0;const t=setInterval(()=>{if(++n>2400||(!ovOpen()&&!(S&&S.mg))){clearInterval(t);fin=null;
    try{if(S&&!S.dead&&Q.length<=q0)window.__aaR0(title,before,ok)}catch(e){console.error(e)}}},250)};
- window.aaPayMG=function(score){try{const m=S&&S.mg;const c=(m&&m.cost)||window.__aaPend;if(m)m.cost=null;window.__aaPend=null;if(!c||fin)return;
+ window.aaPayMG=function(score){try{const m=S&&S.mg;const c=(m&&m.cost)||window.__aaPend;if(m)m.cost=null;window.__aaPend=null;if(!c||(fin&&!window.aaCardTo))return;
   const before=rsnap(),q0=Q.length;apply({suc:c.suc||0,bac:c.bac||0,th:c.th||0});if(c.khac)spend(c.khac);
   const sc=score||{};const ok=sc.skip?null:sc.raw!=null?sc.raw>=5:sc.g!=null?sc.g>=2:true;
   const ttl=(window.__aaTitle||sc.title||"Trò tài nghệ")+(sc.skip?" · để trời định":sc.raw!=null?` · phần chơi ${sc.raw}/10`:"");window.__aaTitle=null;
+  /* co-op thin F5: the player whose game this is plays on another screen: her result card goes there (aaCardTo), never here */
+  if(typeof window.aaCardTo==="function"){window.aaCardTo(ttl,before,ok);return}
   fin=1;showLast(ttl,before,ok,q0)}catch(e){console.error(e)}};
+ /* the same one result card, shown here for a game paid on another screen (co-op thin F5: her phone after the host's answer) */
+ window.aaShowLast=function(ttl,before,ok){if(fin)return;fin=1;showLast(ttl,before,ok,Q.length)};
  if(typeof playArt==="function"){const p0=playArt;playArt=function(o){window.__aaL=1;if(o&&typeof o.onDone==="function"){const d0=o.onDone,ttl=o.title;
   o=Object.assign({},o,{onDone:function(raw,x){const sk=!!(x&&x.skipped);const r1=cl(Math.round(raw||0),0,10);window.aaPayMG({title:ttl,skip:sk,ok:r1>=5,raw:sk?null:r1});return d0.apply(this,arguments)}})}return p0.call(this,o)}}
  if(typeof openMG==="function"){const o0=openMG;openMG=function(k,lv,cb){window.__aaL=1;let ttl="";try{const m=S.mg,a=ARTS.find(x=>x.k===k);ttl=`${m&&m.mode==="prac"?"Tự học":m&&m.mode==="self"?"Tự học":m&&m.mode==="th"?"Học với Thái hậu":"Học"} ${a?a.n:""}`}catch(e){}
@@ -54989,7 +55005,9 @@ function tsEngSteer(box,env){const C=kg82Canvas(box,1.05,470),{g,W,H}=C;const lv
  raf=requestAnimationFrame(frame);return()=>{stop=true;cancelAnimationFrame(raf)}}
 Object.assign(KG82_ENG,{tspluck:tsEngPluck,tssteer:tsEngSteer});
 /* tsGame({kind, art, title, odds (cơ may thường 0–100), risk, ctx, intro:[rows], onDone(res)}): res {raw 0–10, skipped, guard} */
-function tsGame(o){const odds=oddsCl(Math.round(o.odds||50));const skipRes=()=>{const ok=roll(odds);return{raw:ok?7:3,skipped:true,ok,guard:o.risk?(roll(odds)?1:0):null}};
+/* ONE rule for "Bỏ qua" of a tsGame (the play is not played: the odds decide; co-op thin F5 rolls it on the host) */
+function tsSkipRes(odds,risk){const ok=roll(odds);return{raw:ok?7:3,skipped:true,ok,guard:risk?(roll(odds)?1:0):null}}
+function tsGame(o){const odds=oddsCl(Math.round(o.odds||50));const skipRes=()=>tsSkipRes(odds,o.risk);
  if(tsBot()||typeof kg82Open!=="function"){const r=skipRes();setTimeout(()=>o.onDone(r),0);return}
  const K=KG82_KIND[o.kind];KG82.ctx=o.ctx||"hoc";KG82.tsRisk=o.risk||null;KG82.tsGuard=null;try{mgSet(o.kind,{occ:o.occ||"trieu"})}catch(e){KG82.lv=0}kg82Preload(o.kind);
  const d=kg82Open({art:o.art||K.n,title:o.title||K.t,how:K.how,pic:typeof kg82Pic==="function"?kg82Pic(o.kind):""});if(!d){o.onDone(skipRes());return}const box=kg82Box();
@@ -55178,15 +55196,17 @@ function tsSummonGo(p){const k=tsSummonKind(p);
  if(p!==S){const raw=typeof kg82NpcRaw==="function"?(typeof mg2On==="function"&&mg2On()?kg82NpcRaw(p,k,{occ:"trieu"}):kg82NpcRaw(p,k==="duho"?"dan":k)):5;/* mg2: her own game kind on the summons board (occ trieu, as tsGame) */const g=tsSummonGain(raw);ap(p,{sung:g.sung});p.an=cl((p.an||0)+g.an,0,100);
   if(k==="duho"&&tsRebel()&&roll(40)){if(roll(tsSummonOdds(p,k)))ap(p,{sung:4,danh:3})}if(knows(p)||eyes(S)>=2)log(`${p.name} được Hoàng thượng triệu ${k==="dan"?"đánh đàn":k==="co"?"đánh cờ":"du hồ"}.`);return}
  tsSummonMe(k)}
+/* the end of her summons game (one function: tsGame's onDone ends here; co-op thin F5 runs it on the host with her play) */
+function tsSummonEnd(k,res,b){const nm={dan:"đánh đàn",co:"đánh cờ",duho:"du hồ"}[k];const g=tsSummonGain(res.raw);const L=[];apply({sung:g.sung});S.an=cl((S.an||0)+g.an,0,100);
+ L.push(res.raw>=5?`Hoàng thượng vui lòng (${nm}).`:`Hoàng thượng lơ đãng, ngồi được một lúc thì về (${nm}).`);
+ if(res.guard!=null){if(res.guard){apply({sung:BAL.eff.jts.sungOnDone,danh:BAL.eff.jts.danhOnDone});S.an=cl((S.an||0)+3,0,100);L.push(`Lau sậy động, ngươi kêu hộ giá kịp lúc; cấm quân bắt được kẻ lạ. Ngài nhớ ơn ngươi (Sủng ${balSg(BAL.eff.jts.sungOnDone)}, Danh ${balSg(BAL.eff.jts.danhOnDone)}, Ân tình +3).`)}else{apply({suc:-8});L.push("Lau sậy động, cấm quân xông tới trước; kẻ lạ bị bắt. Ngươi kinh hãi.")}}
+ log(L.join(" "));tsRes(`Hoàng thượng triệu ${nm}`,b,res.raw>=5||res.guard===1);render()}
 function tsSummonMe(k){const E=S.emp;/* a private summons: she is face to face with him (never a grey "Người lạ" emperor) */try{if(typeof k61Meet==="function"&&E&&!tsNamed(E))k61Meet(E,"Ngài triệu riêng, ngươi được diện kiến.")}catch(e){}const odds=tsSummonOdds(S,k);const nm={dan:"đánh đàn",co:"đánh cờ",duho:"du hồ"}[k];const reb=k==="duho"?tsRebel():0;
  const likes=k==="dan"&&E.known&&E.known.music?` Ngài thích khúc ${E.likes.music}.`:"";
  const kem=reb?[`biên cương bất ổn (${reb}), cấm quân đang lùng loạn đảng quanh kinh thành`]:[];
  const go=()=>{const b=tsPre();tsGame({kind:k,art:k==="dan"?"Cầm":k==="co"?"Kỳ":"Du hồ",title:k==="dan"?"Đàn cho Hoàng thượng nghe":k==="co"?"Đánh cờ cùng Hoàng thượng":"Du hồ cùng Hoàng thượng",odds,risk:reb&&roll(40)?1:0,
   intro:[["Hoàng thượng",k==="dan"?"nghe đàn trong thư phòng":k==="co"?"bày cờ trong thư phòng":"ngồi thuyền giữa hồ sen","n"]].concat(reb?[["Điềm báo","cấm quân canh hai bờ, có tin loạn đảng trà trộn","r"]]:[]),
-  onDone:res=>{const g=tsSummonGain(res.raw);const L=[];apply({sung:g.sung});S.an=cl((S.an||0)+g.an,0,100);
-   L.push(res.raw>=5?`Hoàng thượng vui lòng (${nm}).`:`Hoàng thượng lơ đãng, ngồi được một lúc thì về (${nm}).`);
-   if(res.guard!=null){if(res.guard){apply({sung:BAL.eff.jts.sungOnDone,danh:BAL.eff.jts.danhOnDone});S.an=cl((S.an||0)+3,0,100);L.push(`Lau sậy động, ngươi kêu hộ giá kịp lúc; cấm quân bắt được kẻ lạ. Ngài nhớ ơn ngươi (Sủng ${balSg(BAL.eff.jts.sungOnDone)}, Danh ${balSg(BAL.eff.jts.danhOnDone)}, Ân tình +3).`)}else{apply({suc:-8});L.push("Lau sậy động, cấm quân xông tới trước; kẻ lạ bị bắt. Ngươi kinh hãi.")}}
-   log(L.join(" "));tsRes(`Hoàng thượng triệu ${nm}`,b,res.raw>=5||res.guard===1);render()}})};
+  onDone:res=>tsSummonEnd(k,res,b)})};
  const g7=tsSummonGain(8),g3=tsSummonGain(3);
  tsPanel({t:`Hoàng thượng triệu ${nm}`,who:pEmp(),art:k==="duho"?"https://ctm-img.victoria-tntt.workers.dev/img/ev-le-ha.webp":k==="co"?"https://ctm-img.victoria-tntt.workers.dev/img/ev-hoang-de-vui-2.webp":"https://ctm-img.victoria-tntt.workers.dev/img/ev-tai-nghe.webp",
   h:`<p>Thái giám Càn Thanh cung đến truyền: “Hoàng thượng rảnh việc triều chính, cho mời ${tsGoi()} sang ${nm}.”${likes}</p>`,
@@ -55204,16 +55224,24 @@ function tsDenSeen(){const E=S.emp;return (E.mood||0)<=1&&(S.sung||0)>=BAL.tsx.d
 /* ONE rule for every lantern (hers and the NPCs', mg2): the odds of being seen / heard without a far lantern, and "far" from the play (raw ≥ 6) */
 function tsDenOdds(p){return agOdd(45+(p.tai||0)/4+(p.arts&&p.arts.hoa||0)*4)}/* one cap BAL.odds (review ag-all-2 r2 C4) */
 function tsDenFar(raw){return raw>=6}
-function tsDenWish(f){const s=tsS();const pdLeft=Math.max(0,6-(s.denPD||0));const hos=liveRivals(true).filter(v=>bandOf(danger(v,S))>=1&&!(S.dKnown&&S.dKnown[v.id])&&!knows(v));
- const odds=tsDenOdds(S);const seen=tsDenSeen();
- const play=(kind,after)=>{const b=tsPre();tsGame({kind:"den",art:"Hoa đăng",title:`Thả đèn đêm ${f.name}`,odds,intro:[["Điều cầu",kind,"t"],["Ghi chú","đèn trôi xa và sáng thì người bên hồ trông thấy","n"]],onDone:res=>{const far=tsDenFar(res.raw);after(far);tsRes("Thả đèn hoa đăng",b,true);render()}})};
+/* what her lantern can bring (one function: the card and the end read the same) */
+function tsDenCtx(){const s=tsS();return{s,pdLeft:Math.max(0,6-(s.denPD||0)),hos:liveRivals(true).filter(v=>bandOf(danger(v,S))>=1&&!(S.dKnown&&S.dKnown[v.id])&&!knows(v)),odds:tsDenOdds(S),seen:tsDenSeen()}}
+const TS_DENW=["tin tức","bình an","thánh ân"];
+/* the end of her lantern game (one function: tsGame's onDone ends here; co-op thin F5 runs it on the host with her play). i = the wish */
+function tsDenEnd(i,res,b){const f=tsDenFest();if(!f)return;const {s,pdLeft,hos,odds,seen}=tsDenCtx();const far=tsDenFar(res.raw);
+ if(i===0){if(hos.length&&(far||roll(odds))){const v=hos.sort((a,b)=>danger(b,S)-danger(a,S))[0];kn();S.dKnown=S.dKnown||{};S.dKnown[v.id]=wk();noteAdd(v.id,`nghe được bên hồ đêm ${f.name}: nàng có ý hại ngươi (mức ${BANDS[bandOf(danger(v,S))][1]})`);log(`Đêm ${f.name}, người hầu nghe được bên hồ: ${v.name} có ý hại ngươi (mức ${BANDS[bandOf(danger(v,S))][1]}).`)}
+  else if(!hos.length&&s.thuY!==S.year){s.thuY=S.year;S.inv.push({k:"thunha",from:"home"});log("Người nhà gửi thư vào cung nhân đêm hoa đăng. Được Thư nhà.")}else log("Đèn trôi chưa xa, chưa nghe được tin gì.")}
+ else if(i===1){apply({duc:BAL.eff.jts.ducGo});if(pdLeft&&typeof pdAdd==="function"){s.denPD=(s.denPD||0)+2;pdAdd(2,`thả đèn cầu bình an đêm ${f.name}`)}else log("Ngươi thả đèn cầu bình an.")}
+ else if(i===2){if(seen&&(far||roll(odds))){apply({sung:3});S.an=cl((S.an||0)+2,0,100);log(`Đêm ${f.name}, Hoàng thượng dạo bên hồ, trông thấy đèn của ngươi trôi xa, dừng lại hỏi han.`)}else{apply({duc:1});log("Ngươi thả đèn, lặng lẽ cầu thánh ân.")}}
+ tsRes("Thả đèn hoa đăng",b,true);render()}
+function tsDenWish(f){const {pdLeft,hos,odds,seen}=tsDenCtx();
+ const play=i=>{const b=tsPre();tsGame({kind:"den",art:"Hoa đăng",title:`Thả đèn đêm ${f.name}`,odds,intro:[["Điều cầu",TS_DENW[i],"t"],["Ghi chú","đèn trôi xa và sáng thì người bên hồ trông thấy","n"]],onDone:res=>tsDenEnd(i,res,b)})};
  tsPanel({t:`Đêm ${f.name}: thả đèn`,art:f.k==="nguyentieu"?"https://ctm-img.victoria-tntt.workers.dev/img/ev-le-xuan-2.webp":"https://ctm-img.victoria-tntt.workers.dev/img/ev-le-thu-2.webp",who:pMaid(),h:`<p>${S.maid.name} đã dán sẵn chiếc đèn hoa sen. Ngươi cầm bút, nghĩ xem nên cầu điều gì.</p>`,opts:[
   tsOpt({n:"Cầu tin tức người nhà",odds:hos.length?oddsCl(odds):null,duoc:hos.length?["người hầu ngoài bờ nghe được chuyện: biết lòng một người đang muốn hại ngươi"]:["người nhà cũng thả đèn, nhờ người gửi thư vào: Thư nhà"],note:"đèn trôi xa thì nghe rõ hơn",later:1,
-   go:()=>play("tin tức",far=>{if(hos.length&&(far||roll(odds))){const v=hos.sort((a,b)=>danger(b,S)-danger(a,S))[0];kn();S.dKnown=S.dKnown||{};S.dKnown[v.id]=wk();noteAdd(v.id,`nghe được bên hồ đêm ${f.name}: nàng có ý hại ngươi (mức ${BANDS[bandOf(danger(v,S))][1]})`);log(`Đêm ${f.name}, người hầu nghe được bên hồ: ${v.name} có ý hại ngươi (mức ${BANDS[bandOf(danger(v,S))][1]}).`)}
-    else if(!hos.length&&s.thuY!==S.year){s.thuY=S.year;S.inv.push({k:"thunha",from:"home"});log("Người nhà gửi thư vào cung nhân đêm hoa đăng. Được Thư nhà.")}else log("Đèn trôi chưa xa, chưa nghe được tin gì.")})}),
-  tsOpt({n:"Cầu bình an",duoc:pdLeft?[`Phúc duyên +2 (kiếp này còn được ${pdLeft})`,`Đức ${balSg(BAL.eff.jts.ducGo)}`]:[`Đức ${balSg(BAL.eff.jts.ducGo)}`],note:"Phúc duyên từ đèn có giới hạn: 6 mỗi kiếp",later:1,go:()=>play("bình an",far=>{apply({duc:BAL.eff.jts.ducGo});if(pdLeft&&typeof pdAdd==="function"){s.denPD=(s.denPD||0)+2;pdAdd(2,`thả đèn cầu bình an đêm ${f.name}`)}else log("Ngươi thả đèn cầu bình an.")})}),
+   go:()=>play(0)}),
+  tsOpt({n:"Cầu bình an",duoc:pdLeft?[`Phúc duyên +2 (kiếp này còn được ${pdLeft})`,`Đức ${balSg(BAL.eff.jts.ducGo)}`]:[`Đức ${balSg(BAL.eff.jts.ducGo)}`],note:"Phúc duyên từ đèn có giới hạn: 6 mỗi kiếp",later:1,go:()=>play(1)}),
   tsOpt({n:"Cầu thánh ân",odds:seen?oddsCl(odds):null,duoc:seen?["Hoàng thượng dạo bên hồ, trông thấy đèn: Sủng +3, Ân tình +2"]:["Đức +1"],kem:seen?[]:[`đêm nay Hoàng thượng không ra hồ (ngài đang phiền, hoặc Sủng của ngươi dưới ${BAL.tsx.denSung})`],later:1,
-   go:()=>play("thánh ân",far=>{if(seen&&(far||roll(odds))){apply({sung:3});S.an=cl((S.an||0)+2,0,100);log(`Đêm ${f.name}, Hoàng thượng dạo bên hồ, trông thấy đèn của ngươi trôi xa, dừng lại hỏi han.`)}else{apply({duc:1});log("Ngươi thả đèn, lặng lẽ cầu thánh ân.")}})}),
+   go:()=>play(2)}),
   tsOpt({n:"Thôi, không thả nữa",duoc:["không mất thêm gì"]})]})}
 /* NPCs float lanterns too, by the same rule (seen by the Emperor when he walks there and they are in favour) */
 function tsDenNpc(){const f=tsDenFest();if(!f)return;const s=tsS();const key=`${S.year}-${f.k}`;if(s.denN===key)return;s.denN=key;const E=S.emp;
@@ -59320,8 +59348,8 @@ function rcpTchAsk(k,then){const a=ARTS.find(x=>x.k===k),fee=rcpFeeNq(),O=[];con
 function rcpNewSt(k){return wkKindsOf(k).filter(x=>RCP_ST[x]).some(x=>RCP_ST[x].some(s=>!rcpKnows(S,x,s[0])))}
 function rcpMaster(k){if(!S||S.dead||Q.length||S.mg||(S.arts[k]||0)<5||!can(2)||S.suc<BAL.sucNeed.rcp)return;
  rcpTchAsk(k,()=>{wkAsk(k,"teacher",()=>{if(!can(2)||S.suc<BAL.sucNeed.rcp)return;const fee=tchFee(k);if(S.bac<fee)return;apply({suc:-10,bac:-fee});tchPaid(k);spend(2);
-  const pick=wkPend||{kind:WDEF[k],mat:0};wkPend=null;const an=ARTS.find(x=>x.k===k).n;S.mg={k,l:5,mode:"prac",wk:pick,pa:1};
-  try{playArt({art:k,title:`Học ${an} với thầy`,quick:{n:"Học nhanh",sure:1,win:"không ra thành phẩm"},onDone:(raw,o)=>{S.mg=null;if(o&&o.skipped)log("Học nhanh: không ra thành phẩm.");else wkFinishLesson(k,pick,cl(Math.round(raw),0,10),"học với thầy");render()}})}catch(x){S.mg=null}})})}
+  const pick=wkPend||{kind:WDEF[k],mat:0};wkPend=null;const an=ARTS.find(x=>x.k===k).n;const m=S.mg={k,l:5,mode:"prac",wk:pick,pa:1,how:"học với thầy",qx:"Học nhanh: không ra thành phẩm."};
+  try{playArt({art:k,title:`Học ${an} với thầy`,quick:{n:"Học nhanh",sure:1,win:"không ra thành phẩm"},mgEnd:1,onDone:(raw,o)=>wkLessonEnd(k,m,raw,o)})}catch(x){S.mg=null}})})}
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-rcpmt],[data-rcpls],[data-rcpq]");if(!b||b.disabled)return;ev.stopPropagation();
  if(b.dataset.rcpmt)rcpMaster(b.dataset.rcpmt);else if(b.dataset.rcpls)rcpListOpen(b.dataset.rcpls);else rcpAskQ(b.dataset.rcpq)},true);
 /* Tài nghệ cards: the teacher button with its real cost, the new-sub-style teacher at bậc 5, the learnt sub-styles */
@@ -77675,7 +77703,7 @@ figxLoad();setInterval(figxLoad,300000);
 (function(){try{
 const CW=window.COOPW;if(!CW||!CW.X||typeof COOP!=="object")return;
 const X=CW.X,J=X.J,LS={get(k){try{return localStorage.getItem(k)}catch(e){return null}}};
-const TH=CW.thin={CAP:9/* F4 her pets / garden / kitchen / study as intents (jcoopthinf.js), F3 her bag / shop / wear / gifts as intents (jcoopthinf.js), F2 her places / goTo / visits as intents (jcoopthinf.js), F1 her acts as intents (jcoopthinf.js),  E buổi + night gate on the host (jcoopthine.js), B life + rebirth on the host (jcoopthinb.js), C world read-only on the guest (jcoopthinc.js), D remote dialogs (section 6) */,lvl:0,REG:[],bridge:[],rlog:[],view:null,hv:0,dn:0,dr:null,ctxN:0};
+const TH=CW.thin={CAP:10/* F5 her mini-game score ends as intents (jcoopthinf.js), F4 her pets / garden / kitchen / study as intents (jcoopthinf.js), F3 her bag / shop / wear / gifts as intents (jcoopthinf.js), F2 her places / goTo / visits as intents (jcoopthinf.js), F1 her acts as intents (jcoopthinf.js),  E buổi + night gate on the host (jcoopthine.js), B life + rebirth on the host (jcoopthinb.js), C world read-only on the guest (jcoopthinc.js), D remote dialogs (section 6) */,lvl:0,REG:[],bridge:[],rlog:[],view:null,hv:0,dn:0,dr:null,ctxN:0};
 const host=()=>CW.seat==="a";
 const D={};   /* part D (remote dialogs), filled in section 6 */
 TH.on=n=>!!(CW.on&&!CW.hold&&TH.lvl>=(n||1));
@@ -78889,7 +78917,7 @@ const PRE={};/* name → the function below the wrapper (the host runs it) */
 let snapV=null;
 if(typeof rsnap==="function"){const r0=rsnap;rsnap=function(){const o=r0.apply(this,arguments);if(CW.ctx&&o&&typeof o==="object")try{Object.defineProperty(o,"__ctx",{value:CW.ctx})}catch(e){}snapV=o;Promise.resolve().then(()=>{if(snapV===o)snapV=null});return o}}
 function cardLater(p,dr){const b=p.bf;if(!b||!dr||!dr.r||dr.r.st!=="ok"||typeof resultShow!=="function")return;
- setTimeout(()=>{try{if(!S||S.dead)return;if(p.force||(S.logSeq||0)!==b.seq||RKEYS.some(([k])=>(S[k]||0)!==b[k])){F.stat.card=(F.stat.card|0)+1;const R=F.R[p.n];resultShow(p.ttl||"",b,p.force?true:(R&&R.okHint?R.okHint():null))}}catch(e){console.error("thin F card",e)}},0)}
+ setTimeout(()=>{try{if(!S||S.dead)return;if(p.force||(S.logSeq||0)!==b.seq||RKEYS.some(([k])=>(S[k]||0)!==b[k])){F.stat.card=(F.stat.card|0)+1;const R=F.R[p.n];resultShow(p.ttl||"",b,p.force?true:(R&&R.okHint?R.okHint(dr):null))/* F5: the hint may read the host's answer */}}catch(e){console.error("thin F card",e)}},0)}
 function gOn(lv){return on(lv)&&!host()&&!!CW.seat&&!CW.ctx&&!!S&&!S.dead&&!CW.inLife&&!CW.inFC&&!CW.allow&&!CW.allowN&&!(TH.C&&TH.C.inWorld&&TH.C.inWorld())}
 function line(t){try{if(typeof kitLine==="function")kitLine(t);else log(t)}catch(e){}}
 function sendF(p){COOP.send({t:"do",op:"f",args:p.msg,base:TH.view?TH.view.v:0,id:p.id});E.last=p.id;p.at=Date.now()}
@@ -78960,7 +78988,7 @@ TH.onDo("f",(a,m)=>{a=a||{};const id=m&&m.id;if(loaded!==LSK()){DONE.clear();don
   const args=R.dec(a.a);if(!args){out={st:"gone"}}
   else{/* F2 r2 (review r1 item 1, every registration, F1 too): her tap runs as solo (TH.tapRun: quiet off → her cards into her Q = part D
       cards on her phone; her toasts / floaters / coin and item effects captured, played on HER phone with the answer; nothing on the host's screen) */
-   if(R.noRes)NORES++;let T;try{T=TH.tapRun(()=>PRE[a.n].apply(null,args))}finally{if(R.noRes)NORES--}/* F3: a registered UI function's own wrapR card shows on her phone (cardLater), never here */
+   if(R.noRes)NORES++;let T;try{T=TH.tapRun(()=>{if(R.pre)R.pre(args)/* F5: what the host does first in her run (the deferred cost, the host's own rolls) */;return PRE[a.n].apply(null,args)})}finally{if(R.noRes)NORES--}/* F3: a registered UI function's own wrapR card shows on her phone (cardLater), never here */
    const r=T.r,ui=T.ui;F.stat.run++;if(R.log&&r)log(r);out={st:"ok",r:typeof r==="string"?r.replace(/<[^>]+>/g,"").slice(0,200):null};
    if(typeof r==="boolean")out.rv=r;if(ui&&ui.length)out.ui=ui.slice(0,4);
    if(R.back){const c={};for(const [n,g] of R.ctx||[])if(R.back.includes(n))try{const v=g();c[n]=v===undefined?null:J(v)}catch(e){}out.c=c}
@@ -79161,6 +79189,76 @@ reg9("shelfPlantQuick",[],{mine:()=>true});
 reg9("rcpRead",["ix"],{mine:()=>true});
 reg9("rcpAskGo",["v","pm"],{mine:()=>true});
 reg9("tdsRun",["v","v","v"],{mine:A=>A[1]==="prac"});
+/* ---------- F5: her mini-game SCORE ends (level 10; report dev/handover/reports/coop-thin-f5.md step 0) ----------
+   The game itself plays on HER phone (same game, same parameters as solo: law 5); only its end (the score + what she chose before) is ONE
+   intent. Ends = named engines: petcGain / shelfPlantGain (care games), wkLessonEnd (Tài nghệ lessons, Tự học làm tác phẩm, Học lối mới),
+   tdFinish (Tứ đức), tsSummonEnd / tsDenEnd (tsGame: the summons, the lantern). The host checks the score (BAL.mgSc ranges, its tables;
+   outside → refused, nothing applied), rolls every "Để trời định" / "Học nhanh" / "Bỏ qua" itself (her phone never rolls), pays the
+   game's deferred cost (jaudit aaPayMG) ONCE before the gain (solo order), then runs the engine in her context. Her result card: the
+   engine's own (cardLater) or jaudit's one card after the game (aaShowLast, captured) — on her phone only. */
+const L10=10;
+const inR=(x,r)=>typeof x==="number"&&isFinite(x)&&!!r&&x>=r[0]&&x<=r[1];
+const MSC=()=>BAL.mgSc;
+/* guest: an F5 game is open (MGC): the kg82 opening it made (KGN) — a later game, closed or not, never takes its place */
+let KGN=0,MGC=null,AA=null,HAA=null,SKH=0;
+/* Tứ đức (tdPlay: called by name from j85 / jtds pickers that keep their own copy) is known by its own busy flag at its opening */
+if(typeof kg82Open==="function"){const k0=kg82Open;kg82Open=function(){KGN++;try{if(!host()&&!(MGC&&MGC.n===-1)&&typeof TDS==="object"&&TDS.busy&&gOn(L10))MGC={k:"td",o:null,n:KGN}}catch(e){}return k0.apply(this,arguments)}}
+const mgOk=()=>!!MGC&&MGC.n===KGN&&!host()&&gOn(L10);
+const mgOpen=(k,o,fn)=>{const M={k,o,n:-1};MGC=M;const r=fn();if(MGC===M)M.n=KGN;return r};
+if(typeof playArt==="function"){const p0=playArt;playArt=function(o){if(host()||!gOn(L10)||!o||!o.mgEnd){if(!host())MGC=null;return p0.apply(this,arguments)}return mgOpen("pa",o,()=>p0.apply(this,arguments))};window.playArt=playArt}
+if(typeof tsGame==="function"){const t0=tsGame;tsGame=function(o){if(host()||!gOn(L10)||!o){if(!host())MGC=null;return t0.apply(this,arguments)}return mgOpen("ts",o,()=>t0.apply(this,arguments))};window.tsGame=tsGame}
+/* guest: the deferred cost is never paid here: jaudit's call is held with its score (the first one of this end), the cost rides in ctx */
+if(typeof window.aaPayMG==="function"){const a0=window.aaPayMG;window.aaPayMG=function(sc){if(mgOk()){if(!AA){const m=S&&S.mg;AA={c:J((m&&m.cost)||window.__aaPend||null),sc:J(sc||{}),t:window.__aaTitle||null}}F.stat.aaHeld=(F.stat.aaHeld|0)+1;return}return a0.apply(this,arguments)};
+ F.aaLocal=a0}
+/* guest: the quick button of an F5 game: the game's own quick path runs (its words, its onDone chain: the end intent) with the roll left
+   to the host (null), and its result rows are closed at once — the result comes from the host's answer */
+if(typeof kitQuickRoll==="function"){const q0=kitQuickRoll;kitQuickRoll=function(){if(SKH&&!host())return null;return q0.apply(this,arguments)};window.kitQuickRoll=kitQuickRoll}
+if(typeof tsSkipRes==="function"){const r0=tsSkipRes;tsSkipRes=function(odds,risk){if(SKH&&!host())return {raw:0,skipped:true,ok:null,guard:null,risk:risk?1:0};return r0.apply(this,arguments)};window.tsSkipRes=tsSkipRes}
+for(const n of ["sfx","kitSfx","kitResultSfx"])if(typeof window[n]==="function"){const f=window[n];window[n]=function(){if(SKH&&!host())return;return f.apply(this,arguments)}}
+document.addEventListener("click",e=>{const b=e.target&&e.target.closest&&e.target.closest("#kg82skip");if(!b||!mgOk()||typeof b.onclick!=="function")return;
+ e.stopImmediatePropagation();e.preventDefault();F.stat.skip=(F.stat.skip|0)+1;SKH=1;try{b.onclick.call(b,e)}finally{SKH=0}
+ const ok=document.getElementById("kg82ok");if(ok&&typeof ok.onclick==="function")ok.onclick.call(ok)},true);
+/* host: her held score + cost (ctx "aa"); the host's own pending cost / title are kept and put back after her run */
+const CXAA=["aa",()=>host()?{h:1,c:window.__aaPend||null,t:window.__aaTitle||null}:AA,v=>{if(!host())return;window.__aaPend=v&&v.c||null;window.__aaTitle=v&&v.t||null;HAA=v&&!v.h&&v.sc?v:null}];
+const CX10=CX9.concat([CXAA,OBJ("tds",()=>({q:TDS.q}))]);
+function payAA(fix){if(!HAA)return;const sc=Object.assign({},HAA.sc);if(fix)fix(sc);const t0=window.aaCardTo;
+ window.aaCardTo=(t,b,ok)=>{F.stat.aaCard=(F.stat.aaCard|0)+1;if(TH.uiCap&&TH.uiCap.length<12)TH.uiCap.push(["aaShowLast",[t,J(b||null),ok]])};
+ try{window.aaPayMG(sc);F.stat.aaPaid=(F.stat.aaPaid|0)+1}finally{window.aaCardTo=t0;HAA=null}}
+try{TH.UICAP.add("aaShowLast")}catch(e){}
+function reg10(name,K,o){o=o||{};const R=Object.assign({lv:L10,ctx:CX10,back:BACK8,enc:A=>encA9(K,A),dec:a=>decA9(K,a),done:reDraw,title:()=>""},o);
+ R.mine=A=>live()&&(o.mine?o.mine(A):true);const r=F.reg(name,R);if(!r)return r;
+ /* guest, after the end is sent: the held cost now travels with it (cleared here); an end that ran here after all (refused before sending)
+    pays its held cost here, never lost */
+ const w=window[name];window[name]=function(){const p0=F.pend,a=AA;const r=w.apply(this,arguments);if(!host()){const sent=!!F.pend&&F.pend!==p0;
+  if(a){if(sent){window.__aaPend=null;F.stat.aaSent=(F.stat.aaSent|0)+1}else try{F.aaLocal(a.sc)}catch(e){}AA=null}if(sent||a)MGC=null}return r};return true}
+/* a refused end applies nothing; a lesson's game is over all the same (her S.mg closed, as a game closed unplayed: no cost, no gain) */
+const bad=n=>{F.stat.mgBad=(F.stat.mgBad|0)+1;lg(["mgBad",n]);try{if(n==="wkLessonEnd"&&CW.ctx&&S)S.mg=null}catch(e){}return null};
+/* care games (her open care / plant screen rides in ctx: PETC.i / SHPC.g) */
+reg10("petcGain",["v","v"],{dec:a=>{const x=decA9(["v","v"],a);if(!x)return null;return ["feed","bath","play"].includes(x[0])&&inR(x[1],MSC().unit)?x:bad("petcGain")}});
+reg10("shelfPlantGain",["v"],{dec:a=>{const x=decA9(["v"],a);if(!x)return null;return inR(x[0],MSC().unit)?x:bad("shelfPlantGain")}});
+/* Tài nghệ lessons / practice / Học lối mới: k, the lesson (S.mg as it was), the play, {skipped}; the host rolls a quick lesson (o.ok null) */
+reg10("wkLessonEnd",["v","v","v","v"],{enc:A=>{const m=A[1];if(!m||typeof m!=="object")return null;const c=Object.assign({},m);delete c.cost;return encA9(["v","v","v","v"],[A[0],c,A[2]==null?0:A[2],{skipped:!!(A[3]&&A[3].skipped)}])},
+ dec:a=>{const x=decA9(["v","v","v","v"],a);if(!x)return null;const [k,m,raw,o]=x;const sk=!!(o&&o.skipped);
+  if(!ARTS.some(y=>y.k===k)||!m||m.k!==k||!["self","teacher","th","prac"].includes(m.mode)||(m.wk&&(!WK[m.wk.kind]||![0,1,2].includes(m.wk.mat||0))))return bad("wkLessonEnd");
+  if(!sk&&!inR(raw,MSC().raw))return bad("wkLessonEnd");return [k,m,sk?0:raw,{skipped:sk}]},
+ pre:A=>payAA(sc=>{const sk=!!A[3].skipped;sc.skip=sk;sc.raw=sk?null:cl(Math.round(A[2]||0),0,10);sc.ok=!sk&&sc.raw>=5})});
+/* Tứ đức: tdFinish pays its own cost; a quick play is rolled here (TDS.q, as the game's own quick button) */
+reg10("tdFinish",["v","v","v","v"],{snap:"soft",noRes:true,title:A=>{try{const V=VIR.find(x=>x.k===A[0]);return `${A[1]==="self"?"Tự học":"Học"} ${V?V.n:""}`}catch(e){return ""}},
+ dec:a=>{const x=decA9(["v","v","v","v"],a);if(!x)return null;const [k,mode,raw,sk]=x;if(!VIR.some(y=>y.k===k)||!(mode in TD_MODE))return bad("tdFinish");
+  if(!sk&&!inR(raw,MSC().raw))return bad("tdFinish");return [k,mode,sk?0:raw,!!sk]},
+ pre:A=>{if(A[3]){const ok=!!kitQuickRoll();A[2]=ok?BAL.skip.raw:0;TDS.q=ok}else TDS.q=null}});
+/* tsGame ends: res {raw, skipped, guard}; the snapshot of her card (b) stays on her phone (her result card = cardLater); a skipped play
+   is rolled here by the ONE rule (tsSkipRes) with her odds of now; hộ giá only when the road has it (tsRebel) */
+const tsRes0=(res,risk)=>{if(!res||typeof res!=="object")return null;if(res.skipped)return {skipped:true,risk:risk&&res.risk?1:0};
+ if(!inR(res.raw,MSC().raw))return null;const g=res.guard==null?null:res.guard;if(g!=null&&(!risk||(g!==0&&g!==1)))return null;return {raw:res.raw,skipped:false,guard:g}};
+const tsEnc=A=>encA9(["v","v"],[A[0],A[1]&&typeof A[1]==="object"?{raw:A[1].raw,skipped:!!A[1].skipped,guard:A[1].guard==null?null:A[1].guard,risk:A[1].risk?1:0}:null]);
+reg10("tsSummonEnd",["v","v"],{snap:"soft",noRes:true,enc:tsEnc,title:A=>`Hoàng thượng triệu ${({dan:"đánh đàn",co:"đánh cờ",duho:"du hồ"})[A[0]]||""}`,okHint:dr=>!!(dr&&dr.r&&dr.r.ok),
+ dec:a=>{const x=decA9(["v","v"],a);if(!x)return null;const k=x[0];if(!["dan","co","duho"].includes(k))return bad("tsSummonEnd");let rb=0;try{rb=k==="duho"?tsRebel():0}catch(e){}
+  const r=tsRes0(x[1],!!rb);return r?[k,r,null]:bad("tsSummonEnd")},
+ pre:A=>{if(A[1].skipped)A[1]=tsSkipRes(oddsCl(Math.round(tsSummonOdds(S,A[0])||50)),A[1].risk)},host:(A,out)=>{out.ok=A[1].raw>=5||A[1].guard===1}});
+reg10("tsDenEnd",["v","v"],{snap:"soft",noRes:true,enc:tsEnc,title:()=>"Thả đèn hoa đăng",okHint:()=>true,
+ dec:a=>{const x=decA9(["v","v"],a);if(!x)return null;if(![0,1,2].includes(x[0]))return bad("tsDenEnd");const r=tsRes0(x[1],false);return r?[x[0],r,null]:bad("tsDenEnd")},
+ pre:A=>{if(A[1].skipped)A[1]=tsSkipRes(oddsCl(Math.round(tsDenOdds(S)||50)),0)}});
 }catch(e){console.error("jcoopthinf",e)}})();
 
 try{regSweep();setTimeout(regSweep,0)}catch(e){console.error(e)}
@@ -79192,7 +79290,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="b4bf92bdeae6";window.CTM_BUILD=BUILD;
+const BUILD="811b9e544633";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
