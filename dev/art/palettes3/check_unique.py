@@ -1,7 +1,7 @@
 """UNIQUENESS GATE (owner Lượt 763, B20): EXACTLY the 86 consort faces, each a UNIQUE (main, secondary) pair in EVERY season.
 Consorts = ids in dev/art/face-common/OWNER_GROUPS_L686.json whose group is not "Kho" and not "Công chúa (…)".
 For each season (xuân / hạ / thu / đông), for every two consorts a, b:
-  FAIL  max(ΔE2000(main_a, main_b), ΔE2000(sec_a, sec_b)) < 10      (the two pairs read as the same pair)
+  FAIL  max(ΔE2000(main_a, main_b), ΔE2000(sec_a, sec_b)) < 8       (the two pairs read as the same pair; 10 -> 8 Foreman C ROOT-58)
   FAIL  the colour NAME pair (main, sec) is identical
   WARN  ΔE2000(main) < 6 and ΔE2000(sec) < 14                        (close mains, only the secondary tells them apart)
   NO exemptions (owner Lượt 770): two ★ roots that clash are a FAIL like any other pair — root colour CODES may change
@@ -15,7 +15,7 @@ ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', '..')
 FC = os.path.join(ROOT, 'dev', 'art', 'face-common')
 SEASONS = ('xuan', 'ha', 'thu', 'dong')
 VN = {'xuan': 'Xuân', 'ha': 'Hạ', 'thu': 'Thu', 'dong': 'Đông'}
-FAIL_DE, WARN_MAIN, WARN_SEC = 10.0, 6.0, 14.0
+FAIL_DE, WARN_MAIN, WARN_SEC = 8.0, 6.0, 14.0   # FAIL 10 -> 8: Foreman C ROOT-58 (P2 capacity86.py: one soft tone fits only ~62 Xuân pairs at 10, >= 118 at 8)
 
 
 def consort_ids():
@@ -67,7 +67,7 @@ def pair_verdict(p, q):
     """'FAIL' / 'WARN' / None for two season palettes p, q (dicts with main, main_hex, sec, sec_hex)"""
     dm, ds = de2000(p['main_hex'], q['main_hex']), de2000(p['sec_hex'], q['sec_hex'])
     if (p['main'], p['sec']) == (q['main'], q['sec']): return 'FAIL', dm, ds, 'same name pair'
-    if max(dm, ds) < FAIL_DE: return 'FAIL', dm, ds, 'max dE < 10'
+    if max(dm, ds) < FAIL_DE: return 'FAIL', dm, ds, f'max dE < {FAIL_DE:g}'
     if dm < WARN_MAIN and ds < WARN_SEC: return 'WARN', dm, ds, 'main dE < 6, sec dE < 14'
     return None, dm, ds, ''
 
