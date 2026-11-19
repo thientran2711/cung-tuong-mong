@@ -19,3 +19,25 @@ depth 5 · START_CTX ≈ 4 % (get_session used_tokens read 0; own estimate) · c
 
 ## HANDOVER line
 BW5 done: (1)(2)(3) pushed. Open for ROOT-52: the flags above. Context ≈ 20 %.
+
+---
+# Part 2 (ROOT-53 / ROOT-54)
+- Re-sample m13/m33 STOPPED by owner (Lượt 629/630) after the 8 gens; owner later: sheet "OK, đẹp" (Lượt 639).
+- PUSHED 98fa7a3 (merge 7e07be1): elder a51/a65 = 18/11 Thái hậu text verbatim (dev/art/elder-copy/THAIHAU_1811_AGE_COLOUR.md): AGE_TXT, shared COLOUR RULE swap, image-3 "deeper, subdued antique-gold", maid / trung y / ma ma elder clauses = the pre-BW4 (18/11) lines; D13 "clearly about fifty" dropped; N4b removed; greens: no "green-grey" (B19); gate S33 + proof approved/proof/bw5_elder_m05_t2_a51.txt.
+- Same commit: E6 — build.py e6_kind() + _e6_picks(c,age) (t1–t8 never repeat a kind, depth-first over each rank's 5 age items; Nữ đế ≠ t8 kind) + e6_check() run in build_all --check; build_all _install_ladder.pick now = _e6_picks (it had silently kept the old 10-item rotation; --olditem = old).
+- PUSHED 877944c: F13 one hair flower t1–t6 (build_all SZ ladder t1 small … t6 largest, hair-ornament swaps, BANNED X15). Gates 0 FAIL ×5.
+- D14: no change by me (owner Lượt 655 reverted it anyway).
+- BD_ITEMS/BD_AGE: no consumer in code (Bắc Địch held) — left.
+
+## SAME-RANK FIX (Lượt 650) — NOT DONE, needs a ruling
+- Items: E11 gives exactly 5 items per rank per age. A look group = 8 people (Sắc sảo m05 m11 m17 m23 m29 m35 m41 m47) → 8 DIFFERENT items at one rank+age is impossible; best possible = each item at most twice (ceil 8/5). Options: (a) allow ≤2 per item inside a group (spread evenly, the two sharers far apart in look/colour), or (b) IT1 extends to 8+ items per rank per age (40/rank).
+- Angle/grace: feasible. Code: store-all/build_all.py plan() (l.~319) is ONE plan from the a18 run used at every age (angle_sentence/grace_sentence call plan("a18")); balanced over all PEOPLE, not per group. Fix = per-age plan + inside each LOOK GROUP (dev/art/face-common/LOOK_GROUPS.md) a permutation (8 distinct of 14 angles, 8 distinct of 8 grace) per rank+age, still ≤ ceil across all people, still no repeat inside one person (E1). ANG14 (build.py) has 2 duplicate pairs (entries 1/12, 5/8 per audit) → needs 2 distinct sentences copied from approved angle words.
+- Gate to add in build_all --check: FAIL on repeat inside a group at one rank+age (item ≤ rule chosen above).
+
+## HANDOVER line (BW5 rollover)
+Context ≈ 25 % (START 4 % + ~21 %). Pushed: everything above. Open for successor: SAME-RANK FIX (ruling on items first), then Sắc sảo mass (only after ROOT-54 GO).
+
+## ROOT-54 orders received at rollover (20:46Z) — for the successor, no gens
+1. Flower-name clash (A21 small fix): where the hair-flower NAME slot carries a size word ("a tiny camellia", "small …", e.g. build.py LOW flower table / build_all slot "(a tiny camellia)", "(a small pink silk flower)"), drop the size adjective so only the F13 SZ ladder sets size.
+2. SAME-RANK (Lượt 650 + E12: NEW gens only, no redraws): inside one look group at one rank+age: 8 different items (ROOT-54 wants 8 distinct — note the 5-items-per-age E11 limit above; needs IT1 lists widened or a ruling), different angle sentence (≤2 per visual angle class), different grace line; deterministic; keep E6.
+3. Rerun the same-rank audit (dev/handover/reports/same-rank-audit.md method) on the new commit for Sắc sảo + Tinh nghịch; write before/after numbers there. Gates 0 FAIL. Push, send ROOT-54 commit + numbers. Mass NOT GO.
