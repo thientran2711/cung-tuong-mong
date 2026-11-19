@@ -1011,3 +1011,4 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - (19/11 02:34Z) C-AG rolled: #19 = session_01Rc5AsNCvGfZTt5nTmWjtcZ (depth 6; adopts odds-meter-back JJ8qdidm + errand L23c5v2N). Send C-AG requests to #19.
 - (19/11 ~02:50Z real) LANDED role-parity-3 + role-parity-seed → main 89aa1bd9 (B LAND READY 02:29Z; quickcheck PASS 181 s, old save ok, perf ≤ live; FF). ROLLBACK b1c3631e. Tooling only. role-parity.test stays red on 25 cx2 rows (LIVE drift from live-servants) → B order 02:40Z.
 - (19/11 ~03:00Z real) LANDED seal-lean → main 1cf5e8bb (rv M8PddSPc PASS LAND READY, final-merged 89aa1bd9, quickcheck PASS; FF). ROLLBACK 89aa1bd9. CDN seal-lean wiped; worker KsNitSW7 + rv M8PddSPc archived. emo-anim loops (Foreman C) will play during the lean-in when painted.
+- (19/11 ~03:00Z) errand badge-lines r4 babb5b36 pushed (intermediate); worker adds bubble marker next → one verdict on the bubble sha; rv pre-checks babb5b36.
