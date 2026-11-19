@@ -21,7 +21,7 @@ npwReg("dbPromo",{grp:"G2",who:c=>c.p?[c.p]:[],why:(p,c)=>{const W=npwB().dbProm
 npwReg("eitPil",{grp:"G2",each:true,who:c=>(c.C||[]).map(x=>x.s),why:(s,c)=>{const W=npwB().eitPil;const x=(c.C||[]).find(y=>y.s===s);if(!x)return null;const g=netQ(s,"greed");
  if(s.spyFor!=null)return{s:x.ch+W.spy,t:c.p,r:"làm tai mắt cho người ngoài, lấy đồ của chủ"};
  if(g>0)return{s:x.ch+g*W.greed,t:c.p,r:"tham của, lấy bớt đồ chủ được ban"};
- if((s.loyal|0)<W.sour)return{s:x.ch+W.sourS,t:c.p,r:"bất mãn với chủ, lấy bớt đồ"};return null}});
+ if((s.loyal|0)<BAL.eit.pil.loyal)return{s:npwB().min+x.ch+((s.loyal|0)<W.sour?W.sourS:0),t:c.p,r:"bất mãn với chủ, lấy bớt đồ"};return null}});/* G1 #12: a servant under the old candidacy gate (eit.pil.loyal) has her reason from why.min (was only < sour, x.ch + sourS: servants at 20–44 lòng lost it, pilfering fell to 0.4 of LIVE) */
 /* ---- jexam: the grown Emperor remembers the quyền thần only when his favour for her is low ---- */
 npwReg("psStrike",{grp:"G2",who:()=>S.emp?[S.emp]:[],why:()=>{const W=npwB().psStrike;const g=W.top-(S.sung||0);if(g<=0)return null;
  return{s:W.base+g*W.sung,t:S,r:"không còn sủng ngươi, nhớ chuyện cũ nhà quyền thần"}}});

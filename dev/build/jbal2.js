@@ -1486,7 +1486,7 @@ Object.assign(BAL.ag.why,{
  luxEdict:{th:40,frMul:1.5,hh:30,emp:20,perN:2},  /* jlux: who issues the thrift edict: Thái hậu th (× frMul when frugal), Hoàng hậu hh, Emperor emp, + perN per person with tiếng xa hoa */
  luxCalm:{calm:30,edict:20,rep:3,keep:15,proud:60},/* jlux: an NPC with tiếng xa hoa tones down: calm + edict (while it stands) + rep × tiếng xa hoa, vs keep + proud (Kiêu ngạo / Tham vọng) */
  dbPromo:{base:20,loy:1},           /* jaudit: the mistress raises the trusted servant she values most: s = base + (loyalty − trust) × loy */
- eitPil:{spy:15,greed:20,sour:20,sourS:5},/* jeitem: pilferer s = her inclination ch + spy (a spy) / greed × netQ greed / sourS when loyalty < sour; none of these → no pilfering */
+ eitPil:{spy:15,greed:20,sour:20,sourS:5},/* jeitem: pilferer s = her inclination ch + spy (a spy) / greed × netQ greed / a disloyal servant (lòng < BAL.eit.pil.loyal, the candidacy gate): why.min + ch (+ sourS when lòng < sour); none of these → no pilfering (G1 #12: the disloyal reason began only below sour, pilfering 0.4 of LIVE) */
  exTh:{base:20,need:40,tgt:20,fest:15},/* jexam: Thái hậu errand order: base + need (its live trouble rf is true) / tgt (aimed at a person) + fest (festival copy); rf false → not asked */
  psStrike:{top:60,base:10,sung:.5}, /* jexam: the grown Emperor remembers the quyền thần: s = base + (top − her Sủng) × sung; Sủng ≥ top → never */
  khAcc:{base:10,k:1},               /* jkh: false birth-date accuser: s = base + danger × scheme weight × k */
