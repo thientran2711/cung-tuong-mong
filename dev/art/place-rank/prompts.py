@@ -943,3 +943,24 @@ assert 'image 3' not in p
 out12d = {'canh-phuc-cung-quyphi-ngu-F12-r3': dict(prompt=p, refs=['gOmYI7iSXO', 'EbYJzsMuuO'])}
 json.dump(out12d, open(os.path.join(D, 'prompts_v12d.json'), 'w'), ensure_ascii=False, indent=1)
 print('v12d', len(p))
+# ---- v12e (owner Lượt 707 via ROOT-56, A20): góc xéo redo, same Phi v3 verbatim method, same refs + seed; ONLY her points:
+#  HQP bedroom / HQP reception / HH reception: the right corner looks empty → the model's 'bottom-right corner … almost clear' sentence → RIGHT12E.
+#  Quý phi bedroom: layout ≠ frontal, bed hidden/cut → windows in the LEFT side wall like the frontal + QP12E (layout of the frontal, bed fully visible).
+S_BR = "The bottom-right corner nearest the viewer stays almost clear, holding at most one small object; tea tables and stools stand further back in the room."
+RIGHT12E = ("RIGHT CORNER (owner Lượt 707): the right part of the room is furnished, never empty: along the right side, set back from the bottom edge, "
+    "a group of furniture fills the right corner (a tall cabinet or curio shelf with treasures, a tea table with two chairs or stools, a tall vase stand with flowers), "
+    "its front at about four fifths of the picture height, so a person standing in front of it covers it naturally.")
+QP12E = (" LAYOUT LIKE THE STRAIGHT VIEW OF THIS ROOM (owner Lượt 707): the canopy bed stands centred against the back wall on a low carved platform, "
+    "with a round moon-gate partition on EACH side of it in the back wall; tall curio shelves at the right end of the back wall; the dressing table "
+    "under the left windows. The WHOLE bed is clearly visible: its curtains tied back so the bed, its bedding and its foot are seen, never hidden "
+    "behind curtains or furniture, never cut by the picture edges.")
+out12e = {}
+for k in ('truong-xuan-cung-hqp-ngu-G12', 'truong-xuan-cung-hqp-G12', 'khon-ninh-cung-G12'):
+    p = out12[k]['prompt']; assert p.count(S_BR) == 1, k
+    out12e[k + '-r2'] = dict(prompt=p.replace(S_BR, RIGHT12E), refs=out12[k]['refs'], seed=(TAN_SEED if k == 'khon-ninh-cung-G12' else SYH_SEED))
+p = out12['canh-phuc-cung-quyphi-ngu-G12']['prompt']
+p = SUB(p, [("carved lattice windows at the back opening onto", "tall carved lattice windows in the LEFT side wall opening onto"),
+            (" FLOOR: warm polished wooden floorboards visible", QP12E + " FLOOR: warm polished wooden floorboards visible")])
+out12e['canh-phuc-cung-quyphi-ngu-G12-r1'] = dict(prompt=p, refs=out12['canh-phuc-cung-quyphi-ngu-G12']['refs'], seed=SYH_SEED)
+json.dump(out12e, open(os.path.join(D, 'prompts_v12e.json'), 'w'), ensure_ascii=False, indent=1)
+print('v12e', {k: (v['seed'], len(v['prompt'])) for k, v in out12e.items()})
