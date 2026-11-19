@@ -131,12 +131,14 @@ function tsMkWantTxt(w,k){k=k||{tone:1,bold:1};const L=[];if(k.tone)L.push(`son 
 /* the notice row: what she knows of the want, and the roads to learn it */
 function tsMkRow(th,m){const w=tsMkWant(th,m),k=tsMkKnown(w);return["Son phấn",k.tone&&k.bold?`đề chuộng ${tsMkWantTxt(w,k)}`:k.tone||k.bold?`đề chuộng ${tsMkWantTxt(w,k)}; còn lại chưa rõ`:`chưa rõ: hỏi ma ma, sai tai mắt, hỏi người từng dự, hay đoán theo sắc của đề và mùa ${tsMkSeason(m).toLowerCase()}`,k.tone&&k.bold?"g":"n"]}
 /* the three asking roads (tsOpt, odds in the ladder; a miss teaches nothing, never a wrong answer) */
+/* the odds of «Sai tai mắt dò bên chủ hội» (one formula: the card and the parallel-time landing, jptime) */
+function tsMkSpyO(){const B=BAL.toil.taste.scout;return B.spy.o0+eyes(S)*B.spy.kMat+(S.tamco||0)*B.spy.tamco}
 function tsMkScoutOpts(th,m){const w=tsMkWant(th,m),k=tsMkKnown(w);if(k.tone&&k.bold)return[];const B=BAL.toil.taste.scout;const L=[];const all={tone:1,bold:1};
  const got=(who,what)=>{tsMkLearn(w,what);log(`${who}: đề ${TS_THEME[th].n} chuộng ${tsMkWantTxt(w,what)}.`)};
  let mm=null;try{mm=wdMama(S)}catch(e){}
  if(mm){const o=B.mama.o0+(mm.loyal||0)*B.mama.loyal;L.push(tsOpt({n:`Hỏi ${mm.name}`,odds:o,need:[tsNeedBac(B.mama.cost)],duoc:["biết đề chuộng son phấn nào, kiểu nào"],kem:[`Bạc -${B.mama.cost} (lễ tạ)`],
   go:()=>{apply({bac:-B.mama.cost});if(roll(o))got(mm.name,all);else log(`${mm.name} lắc đầu: năm nay chưa nghe ngóng được.`)}}))}
- {const o=B.spy.o0+eyes(S)*B.spy.kMat+(S.tamco||0)*B.spy.tamco;L.push(tsOpt({n:"Sai tai mắt dò bên chủ hội",odds:o,need:[tsNeedBac(B.spy.cost),{t:`Tai mắt ≥${B.spy.need} (có ${S.mat||0})`,ok:eyes(S)>=B.spy.need}],duoc:["biết đề chuộng son phấn nào, kiểu nào"],kem:[`Bạc -${B.spy.cost}`],
+ {const o=tsMkSpyO();L.push(tsOpt({n:"Sai tai mắt dò bên chủ hội",odds:o,need:[tsNeedBac(B.spy.cost),{t:`Tai mắt ≥${B.spy.need} (có ${S.mat||0})`,ok:eyes(S)>=B.spy.need}],duoc:["biết đề chuộng son phấn nào, kiểu nào"],kem:[`Bạc -${B.spy.cost}`],
   go:()=>{apply({bac:-B.spy.cost});if(roll(o))got("Tai mắt báo",all);else log("Tai mắt về tay không.")}}))}
  {let f=null;try{f=liveRivals(true).filter(v=>!v.out&&aff(v,S)>=B.ask.need).sort((a,b)=>aff(b,S)-aff(a,S))[0]}catch(e){}
   if(f){const o=B.ask.o0+aff(f,S)*B.ask.aff+(S.tamco||0)*B.ask.tamco;L.push(tsOpt({n:`Hỏi ${f.name} (từng dự hội)`,odds:o,need:[{t:`nàng thân với ngươi (${aff(f,S)}/${B.ask.need})`,ok:aff(f,S)>=B.ask.need}],duoc:["biết đề chuộng son phấn tông nào"],
