@@ -1366,4 +1366,4 @@ ROOT-48 Lượt 485: triều phục r21 (TP2 dfe567d, 1,098 cr) LOOKED + SENT. F
 ROOT-48 Lượt 486 (owner on m13/m20): item colour ≠ outfit; no drape on t7/t8; HQP more jewels; lively poses low ranks, calm t6–t8 → FIGURE_GATE 12d; TN1.
 ROOT-48 Lượt 487 (owner): m13/m20 16 figures → SKINS; redraw all 16 after builder fixes → TN1 GO (~2,200 cr).
 
-ROOT-49 19/11 ~17:30Z: took over (depth 1, START_CTX ~4 %). RB1 rule book present (ART_RULES.md 174 lines + rule.py). Workers told to report to ROOT-49 directly.
+ROOT-49 19/11 ~17:30Z: took over (depth 1, START_CTX ~4 %). RB1 rule book present (ART_RULES.md 174 lines + rule.py). Workers told to report to ROOT-49 directly.ROOT-49 Lượt 489 (owner in ROOT-48 chat): two-colour = approved Cao Ly V2 sentence verbatim (pr_cl_t2_V2.txt) → ART_RULES B15 set + FIGURE_GATE 12c; TN1 copies it into build_all. Lượt numbering: 488 and 489 each used twice (ROOT-48 + ROOT-49); next = 490.
