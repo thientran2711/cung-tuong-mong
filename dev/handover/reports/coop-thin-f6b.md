@@ -117,3 +117,40 @@ LEFT for #4:
 - jtoil top-row button with NO toil card (jtoil.js click handler: spend(BAL.toil.khac) + toilOpen on her phone): with toil lifted its end is refused (no host start) → she plays for nothing (her local khắc is not canon) → make that start an intent on the host.
 - F5's own ends (petcGain, shelfPlantGain, wkLessonEnd, tdFinish, tsSummonEnd, tsDenEnd): held / start costs as sent by her phone.
 - F6a RDIFF already runs prCheck on the host at her ctx close; F6b's prSkip / prPost (her rank set) overlap it (idempotent) — H may drop one.
+
+## WORK #4 (worker session_01N1tNP3pjtkkD3B4ih64gjM, depth 7 of 8, START_CTX ≈ 3 % of 1M (used_tokens reads 0; estimate))
+PRIORITY #1 CHECK ('myCard|aaMG|gHand|hDeal|seatDrop|ordQ|ptime'): OD 0 | ledger 0 | claims 6 (F6a #3 62bajsTW SSK d8d8447f; coop-ptime-reds 4mYCDDrF; runact-sv-fix) | main 801b86b7 → 1a4df595 → c02748c2 (parallel-time, receiver-choice) | review/*: coop-thin-f5-r1 9b46e1ad, coop-thin-f6 d8d8447f | archive 0.
+- Merged: LIVE main 801b86b7 (f5cfdd3a), review/coop-thin-f5-r1 9b46e1ad (F5 LAND READY, carries LIVE 1a4df595; fedde6ef), review/coop-thin-f6 d8d8447f (F6a SSK: used-clock keep in seatDrop, RDIFF stand-in restore), LIVE main c02748c2 (06baef69). Every merge: only index.html / sw.js conflicted → rebuilt by build_site.sh.
+- Fix (5b2cb906): A1b — her Tự học (aaMG) card was not marked used on the host. Cause: aaMG is still F6a's old road (__g): F6a gHand shows HER OWN aaMG card in the host's slot (by name, else ANY aaMG card of hers — another subject, another name) → F6b's myCard looked the host card up by her name and missed. Now her phone sends {i, n, aa:1}; myCard falls back to the host's aaMG card in that slot, else the first unused aaMG card. ×3 green. (For H: her phone can show another Tự học subject than the host's card in that slot — the lesson applied is hers; lift aaMG to end it.)
+- Test fixes: T1b accepts a new hand dealt by the card's own khắc (F6a deals her new buổi hand as her context closes — solo rule); A1 taps her Tự học card by its slot (a standing / mood card can be dealt in front of it) and prints her hand when no game opens; PROF=1 prints the host's time per part of her intent; coop-thin-b prints the withSeat round-trip diff paths on a red row.
+- 4G 5× (Foreman B flag): at fedde6ef (before F6a SSK) 4G median 3943 ms; same rows on 930ad0cb 3930–4260 ms while the host's own work per intent was not larger (PROF: withSeat avg 64 ms, flush 28 ms) → the extra ~3.3 s was a WAIT, not host CPU; that tree also showed her side "Chờ hảo hữu" vs host "Sẵn sàng" at setup = the `used` clock drift F6a fixed in d8d8447f. At 06baef69: 4G median **775 ms** (min 654, max 3514, n=23) ≈ #2's 741 ms; PROF at 06baef69: withSeat avg 36 ms (max 160), ctxOut avg 5 ms, flush avg 22 ms, hostView avg 7 ms.
+
+## Done — SẴN SÀNG KIỂM dcda88d7 (review/coop-thin-f6b; local Worker THINMAX 12 — FOR MAIN: Worker deploy before level 12 can be switched on)
+Code = 06baef69 (+ test-only commits 9d40c959, dcda88d7). Gates on 06baef69 / dcda88d7, local wrangler dev:
+| gate | result |
+|---|---|
+| coop-thin-f6b L12 | 37/37 (×2) · latency median 559 ms (max 832); local tap→render 81 ms |
+| coop-thin-f6b L12 swap | 37/37 ×3 of 4 (one run: A1 her Tự học card did not open — fixed the slot tap, diag added, not seen since); latency median 174–448 ms |
+| coop-thin-f6b 4G (LAG 85, CPU ×4) | 37/37 · median 775 ms (see WORK #4) |
+| TRIP L12 | F6b end writes on her phone = **0** · F6b·game 15 (her game, reported: wdOf / leAttire / mktKnow) |
+| coop-thin-a L1 · c L3 · e L5 · f4 L9 · f5 L10 · f6 L11 | 24/24 · 16/16 · 33/33 · 18/18 · 30/30 · 38/38 |
+| coop-thin-b L4 | 136/136 ×3 of 5 (2 reds, each a different row: host own person / withSeat round trip; main c02748c2 3/3 green) — FLAKE, diag paths now print; reviewer: watch it |
+| coop-thin-d L1 | 3 red = **the same 3 on main c02748c2** (kit thInv img sp, Thân sơ patch, Quà tặng giftin) → inherited |
+| coop-thin-f1 L6 | 20/22: F2 gift ×2 — **inherited, owned by coop-ptime-reds** (main c02748c2: 18/24 incl. the j29 `sv` ReferenceError = runact-sv-fix) |
+| coop-thin-f2 L7 | 24/25: P5 invite (her khắc) — same family (receiver-choice / ptime), inherited, owned by coop-ptime-reds |
+| coop-thin-f3 L8 | 31/37 → G1 ×2 green on rerun (the red run: the consort returned the gift = a roll); X1/X2 gift — **inherited, owned by coop-ptime-reds** (main c02748c2: 35/38, same X1/X2) |
+| coop-e2e / COOP_SWAP=1 | 68/68 / 68/68 |
+| coop-cyc THIN=12 | 73/73 (one earlier run 71/73 'giau' host drew nobody — not reproduced) |
+| coop-timer THIN=12 · coop-night THIN=12 | 43/43 · 105/105 |
+| one-world | PASS |
+| one-core guard / bind / text / text-rule | PASS ×4 |
+| quiet scan | 41 global-quiet reads, 32 reachable (= before) |
+| quickcheck | PASS (open 1284 ms, old save ok, perf new/live render 186/204, buổi 1233/950 ms) |
+| LOOK Fold 755x1000 + iPad 1180x820 (V1 veil, M1 mirror) | her result cards on HER iPad only (kit cards), host Fold shows only its own screen. Note: in the SHOTS run her E1 promotion scroll (Thánh chỉ → Tần) showed over the V1 veil result (the harness closes her modals between rows; check in review) and one kg82ShowRes null page error after the shot step closed the game frame (shot harness only; non-shot runs 0 page errors). Shots in scratch only, never git. |
+Step 0 table / moved paths / quiet-gated emitters / tripwire: sections 0a–0c + WORK #2 / #3 above (unchanged). Start-as-intent tokens and the lift (TH.gLift exam / toil / steal = 12): WORK #3.
+### For H (NOT covered by F6b)
+- aaMG lift (lesson picker capture on the host + held cost check vs BAL); until then her phone may show another Tự học subject in the host's slot (F6a gHand any-aaMG fallback).
+- jtoil top-row button without a toil card (start on her phone: refused at the end when lifted) → make that start an intent.
+- F5's own ends (petcGain, shelfPlantGain, wkLessonEnd, tdFinish, tsSummonEnd, tsDenEnd): held / start costs as sent by her phone.
+- F6a RDIFF prCheck vs F6b prSkip / prPost overlap (idempotent) — drop one.
+- Merge coop-ptime-reds (session_01N1tNP4mYCDDrFNfWP327T3) and review/coop-thin-f6-r1 final sha when Foreman B sends them.
