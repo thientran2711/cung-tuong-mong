@@ -1,7 +1,7 @@
 PRIORITY #1 CHECK ('Theo hầu trọn buổi' / cost-only): OD 0 | ledger 0 | claims 1 (choice-value-audit, Foreman D) | main j68g.js:9-11 templeRite, j24.js:28 Kẻ hầu xin, j8.js:303 ksp | review/choice-value-audit 37a7342f (D: fixes j24 «Từ chối» + 60 cost-only rows) | archive 0 — reused D's scan dev/tools/choice-value-scan.js (not committed here; it lands with D).
 
 # law3-cost-only — worker report (opus, session_01N1tNP6PHnsEVwUKbZMrXkQ; coordinator Foreman B ROOT-3)
-START_CTX ~4 % (estimate). Branch **review/law3-cost-only** sha **770270f2** (base origin/main b1c3631e). SMALL.
+START_CTX ~4 % (estimate). Branch **review/law3-cost-only** sha **ae218b59** (final merge origin/main c12a5878; quickcheck PASS again, one-core PASS; fix commit 2d343c18). SMALL.
 
 ## STEP 0 — the 4 named rows are NOT open data faults
 | row (opt-card-short #10) | real data on main | verdict |
