@@ -11,7 +11,7 @@
 | AG2-PERF #2 (opus; ag2-perf deeds floor) | review/ag2-perf | C-AG #12 | session_01UV1SzimZ43DghURhgEAv8W | ARCHIVED | 18/11 13:19Z |
 | residence-qp-alone (opus; BIG; ORDER MAIN ROOT-58 23:15Z; QP/HQP/HH alone, Tần/Phi 2 per room, BAL.res) | review/residence-qp-alone | B | session_01N1tNP6NYP5kf382x8ggEJQ | VOID (owner STOP 23:50Z; f7cf2ad6 never lands) | 18/11 22:59Z |
 | REVIEW residence-qp-alone r1 (opus BIG; + R9b / residence-oldsave family) | review/residence-qp-alone-r1 | B | session_01N1tNP4pUoQ4cddrPigVinY | VOID (owner STOP 23:50Z) | 18/11 23:20Z |
-| coop-thin F2 (opus BIG; places/goTo/visits as intents on TH.F.reg) | review/coop-thin-f2 | B | session_01N1tNP3eu44fWyHnBJfJHuj | RUNNING (step 0 written) | 18/11 22:55Z |
+| coop-thin F2 (opus BIG; places/goTo/visits as intents on TH.F.reg) | review/coop-thin-f2 | B | session_01N1tNP3eu44fWyHnBJfJHuj | ROLLED OVER at 6eaf01a (handover in reports/coop-thin-f2.md) — B opens #2 | 18/11 22:55Z |
 | role-parity-3 B3 (opus; alias 9 + probe rows consort+hh; only B editor of role-parity-scan.js) | review/role-parity-3 | B | session_01N1tNP5LzLhxHn4SfWgKpNQ | RUNNING | 18/11 22:55Z |
 | REVIEW role-parity-3 r1 (opus; scan/test tooling; B4 scan diff inside) | review/role-parity-3-r1 | B | session_01N1tNP6ibtJzXhZ3UwApdbH | RUNNING | 19/11 00:18Z |
 | role-parity-4b B4 (opus; probe rows maid+srv+promoted; scan changes via B3) | review/role-parity-4b | B | session_01N1tNP2gQKk2oaABEKk69p3 | DONE (merged into B3 03e9fe6b, archived 19/11 00:27Z) | 18/11 22:55Z |

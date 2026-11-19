@@ -70,7 +70,7 @@ Code: review/coop-thin-a 89a9dc78 — dev/build/jcoopthin.js (header lists the A
 coop/worker/test/thin.test.mjs, dev/test/coop-thin-a.js, dev/test/coop-thin-trip.js.
 
 ### C1. Part levels and the flag
-- Part numbers: A=1, B=2, C=3, D=4, E=5, F=6 (F1–F6 share 6; sub-flags inside the part if needed), G=7, H=8. THINMAX on the Worker = 9.
+- Part numbers (Foreman B ruling 18/11 ~22:50Z, coop-thin-f2): A=1, B=2, C=3, D=4, E=5, F1=6, F2=7, F3=8, F4=9, F5=10, F6=11 (each F-part its own level, switchable alone), then G and H after F6 (12, 13). THINMAX on the Worker = 9 today: F5 / F6 / G / H need it raised (Worker change, coop/worker/src/index.js).
 - A part's code runs only when `COOPW.thin.on(n)` is true (co-op on, not `COOPW.hold`, room level ≥ n). The OLD path runs otherwise —
   and the part DELETES that old path when it ships (OD 17/11: no long-term mix), so in practice: new path behind `on(n)` until PASS, then the old branch goes.
 - A part that ships raises `TH.CAP` in jcoopthin.js to its number. **B and D run in parallel**: B sets CAP≥2 and D CAP≥4 only together with
