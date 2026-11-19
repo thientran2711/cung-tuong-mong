@@ -22,14 +22,14 @@ const CH={t:0,run:0,seq:0,visit:null,prev:undefined,stat:{tick:0,said:0,greet:0,
 window.CHAT=CH;
 function err(w,e){try{CH.errs.push(w+": "+(e&&e.message||e));if(CH.errs.length>30)CH.errs.shift()}catch(x){}}
 function guest(){try{return !!(window.COOPW&&COOPW.on&&COOPW.seat==="b")}catch(e){return false}}
-function on(){try{const c=C();return !!(c&&c.on&&typeof S!=="undefined"&&S&&!S.dead&&!window.__bot&&!(typeof quiet!=="undefined"&&quiet)&&!(typeof isSrv==="function"&&isSrv()))}catch(e){return false}}
+function on(){try{const c=C();return !!(c&&c.on&&typeof S!=="undefined"&&S&&!S.dead&&!window.__bot&&!(typeof quiet!=="undefined"&&quiet))}catch(e){return false}}
 function R(a,b){return a+Math.random()*(b-a)}
 function pick(L){return L[Math.floor(Math.random()*L.length)]}
 /* ---------- who is who ---------- */
-const SRVF={maid:1,elder:1,srv:1,mama:1,cn:1,ty2:1};const SRVM={eun:1,eunuch:1,ksp:1,tq:1};
+const SRVF=new Set(["maid","elder","srv","mama","cn"]);const SRVM=new Set(["eun","eunuch","ksp","tq"]);
 function kindOf(p){if(!p)return"";const k=p.kind;if(k==="chest"||k==="info")return"";
  if(k==="rival"||k==="fallen")return p.ref?(p.ref.queen?"hh":"con"):"";if(k==="hh")return"hh";if(k==="emp")return"emp";if(k==="th")return"th";if(k==="kid")return"kid";
- if(k==="ty"||k==="off"||k==="man")return"off";if(SRVM[k]||(p.ref&&p.ref.role==="eunuch"))return"eun";if(SRVF[k]||p.ref&&p.ref.role)return"srv";return""}
+ if(k==="ty"||k==="off"||k==="man")return"off";if(SRVM.has(k)||(p.ref&&p.ref.role==="eunuch"))return"eun";if(SRVF.has(k)||p.ref&&p.ref.role)return"srv";return""}
 /* the kAddr speaker of a stage person */
 function spk(p){const k=kindOf(p);if(!k)return null;if(k==="con"||k==="hh")return p.ref||"hh";if(k==="emp")return"emp";if(k==="th")return"th";
  if(k==="kid")return{kid:1,name:p.name};if(k==="off")return{role:"x",rw:"quan",name:p.name};if(k==="eun")return{srv:"m",name:p.name};return{srv:"f",name:p.name}}
@@ -40,7 +40,7 @@ function nameOf(e,p){try{if(e===S)return S.name;if(e&&typeof k61Named==="functio
 function lid(e){try{return typeof ledgerId==="function"&&e?ledgerId(e):null}catch(x){return null}}
 /* ---------- tags: "[#xuan,toi]" at the start of a line / exchange (all must hold) ---------- */
 const TAG=/^\[#([a-z0-9_,:-]+)\]\s*/;
-function ctx(A,B){const c={};try{const m=S.month||1;c.season=m<=3?"xuan":m<=6?"ha":m<=9?"thu":"dong";c.buoi=["sang","chieu","toi"][S.buoi|0]||"sang";
+function ctx(A,B){const c={};try{c.season=({"Xuân":"xuan","Hạ":"ha","Thu":"thu","Đông":"dong"})[SEASON[(S.month||1)-1]]||"xuan";/* the one season table (j1 SEASON) */c.buoi=["sang","chieu","toi"][S.buoi|0]||"sang";
  const w=S.wx||{};c.wet=w.f===1||w.k==="rain";c.snow=/^snow/.test(w.k||"");c.heat=w.f===2;c.storm=w.f===3;c.fest=typeof festToday==="function"?festToday():null;c.place=S.place||"home";
  c.band=typeof kBand==="function"?kBand(S):"lo";c.m=A&&B&&typeof kAddr==="function"?kAddr(A.sp,B.sp).m:"cool"}catch(e){err("ctx",e)}return c}
 function tagOk(t,c){for(const x of t.split(",")){if(!x)continue;if(x==="xuan"||x==="ha"||x==="thu"||x==="dong"){if(c.season!==x)return false}
@@ -50,8 +50,10 @@ function tagOk(t,c){for(const x of t.split(",")){if(!x)continue;if(x==="xuan"||x
  else if(x==="warm"||x==="cool"||x==="cold"){if(!t.split(",").filter(y=>/^(warm|cool|cold)$/.test(y)).includes(c.m))return false}
  else if(x.slice(0,3)==="pl:"){if(!x.slice(3).split(":").includes(c.place))return false}else if(x==="home"){if(c.place!=="home")return false}else if(x==="out"){if(c.place==="home")return false}}
  return true}
-function tagOf(s){const m=TAG.exec(s);return m?m[1]:""}
-function untag(s){return String(s).replace(TAG,"")}
+/* a tag may also follow the speaker mark: "A: [#out] …" */
+const TAGS2=/^([AB]:\s*)\[#([a-z0-9_,:-]+)\]\s*/;
+function tagOf(s){s=String(s);const m=TAG.exec(s);if(m)return m[1];const n=TAGS2.exec(s);return n?n[2]:""}
+function untag(s){return String(s).replace(TAG,"").replace(TAGS2,"$1")}
 /* ---------- real slots (law 6b/6c): a slot that cannot be filled with a real thing drops the line ---------- */
 function lr(){try{return (typeof liveRivals==="function"?liveRivals(true):[]).filter(v=>v&&v.alive&&!v.out)}catch(e){return[]}}
 const NEED={
@@ -63,7 +65,7 @@ const NEED={
  cold:(x)=>{try{const L=(rivals||[]).filter(v=>v.alive&&v.out&&!x.has(v));return L.length?pick(L):null}catch(e){return null}},
  kid:()=>{try{const L=(S.kids||[]).filter(k=>k.alive);return L.length?pick(L):null}catch(e){return null}},
  emp:()=>S.emp?"emp":null,th:()=>S.thDead?null:"th",fest:()=>{const f=typeof festToday==="function"&&festToday();return f||null}};
-function slotName(v){if(v==="emp")return"Hoàng thượng";if(v==="th")return"Thái hậu";if(v&&v.name&&v.m!=null&&v.t)return v.name;/* a festival */return nameOf(v)}
+function slotName(v){if(v&&v.queen&&!v.out)return"Hoàng hậu";if(v==="emp")return"Hoàng thượng";if(v==="th")return"Thái hậu";if(v&&v.name&&v.m!=null&&v.t)return v.name;/* a festival */return nameOf(v)}
 function fill(s,A,B,X){try{let t=String(s);
  const sp=t.charAt(0)==="B"?B:A,ls=sp===A?B:A;t=t.replace(/^[AB]:\s*/,"");
  t=t.replace(/\{A\}/g,A?nameOf(A.e,A.p):"").replace(/\{B\}/g,B?nameOf(B.e,B.p):"");
@@ -84,8 +86,9 @@ function hk(x){const s=Array.isArray(x)?x.join("|"):String(x);let h=0;for(let i=
 function fresh(x){const M=mem(),k=hk(x),g=(C().noRepeat|0)||60;return M.u[k]==null||M.n-M.u[k]>=g}
 function used(x){const M=mem();M.n=(M.n|0)+1;M.u[hk(x)]=M.n}
 /* choose from a list of candidates [item, weight] the freshest one (least recently used when all are spent) */
-function choose(L){if(!L.length)return null;const F=L.filter(x=>fresh(x[0]));if(F.length){let s=0;for(const x of F)s+=x[1];let r=Math.random()*s;for(const x of F){r-=x[1];if(r<=0)return x[0]}return F[F.length-1][0]}
- const M=mem();return L.slice().sort((a,b)=>(M.u[hk(a[0])]||0)-(M.u[hk(b[0])]||0))[0][0]}
+const kx=o=>o&&typeof o==="object"&&!Array.isArray(o)&&o.x!=null?o.x:o;/* a candidate object is remembered by its exchange */
+function choose(L){if(!L.length)return null;const F=L.filter(x=>fresh(kx(x[0])));if(F.length){let s=0;for(const x of F)s+=x[1];let r=Math.random()*s;for(const x of F){r-=x[1];if(r<=0)return x[0]}return F[F.length-1][0]}
+ const M=mem();return L.slice().sort((a,b)=>(M.u[hk(kx(a[0]))]||0)-(M.u[hk(kx(b[0]))]||0))[0][0]}
 /* ---------- the stage ---------- */
 function stage(){return document.getElementById("stage")}
 function busy(){try{if(document.hidden)return"hidden";const md=document.getElementById("modal");if(md&&!md.hidden)return"modal";if(typeof Q!=="undefined"&&Q&&Q.length)return"queue";
@@ -95,13 +98,14 @@ function present(){const st=stage();if(!st)return[];const ppl=typeof curPeople==
  for(const tok of st.querySelectorAll("#tokens .tok.fig")){const i=+tok.dataset.p;const p=ppl[i];if(!p)continue;const img=tok.querySelector("img.figimg");if(!img||!img.naturalWidth||tok.style.visibility==="hidden")continue;
   if(tok.classList.contains("j59off")||tok.closest(".j59off")||tok.style.display==="none")continue;const r=img.getBoundingClientRect();if(r.right<sr.left+4||r.left>sr.right-4||r.width<8)continue;
   const sp=spk(p);if(!sp)continue;const e=ent(p);if(e&&(e.dead||e.alive===false))continue;
-  try{if(window.ER&&ER.awayOf&&p.kind==="maid"&&ER.awayOf("mm:me"))continue}catch(x){}
+  try{if(window.ERR&&ERR.awayOf&&p.kind==="maid"&&ERR.awayOf("mm:me"))continue}catch(x){}
   L.push({p,i,img,tok,sp,e,k:kindOf(p),id:lid(e)})}return L}
 function noticeOn(P){try{const st=stage();for(const b of st.querySelectorAll(".kmerr-bang")){const r=b.getBoundingClientRect(),q=P.img.getBoundingClientRect();if(r.left+r.width/2>=q.left&&r.left+r.width/2<=q.right)return true}}catch(e){}return false}
 /* ---------- the bubble (KIT §78.z + §78.y; "say" = K-HEAD-SAY when the kit has it) ---------- */
 function sayKit(){try{return !!(window.KIT_HEADMK&&KIT_HEADMK.say&&typeof kitHeadMarkHtml==="function")}catch(e){return false}}
 /* the ONE stage head-marker layer (jerr errLay, .kmerr-lay: absolute, inset 0, no pointer) — no layer or CSS of our own */
-function lay(st){try{if(typeof errLay==="function"){if(typeof errCss==="function")errCss();return errLay(st)}}catch(e){}return null}
+function lay(st){try{let l=st.querySelector(":scope>.kmerr-lay");if(l)return l;if(window.ERR&&typeof ERR.sync==="function"){try{ERR.sync()}catch(e){}l=st.querySelector(":scope>.kmerr-lay");if(l)return l}
+ if(document.getElementById("kerr-css")){l=document.createElement("div");l.className="kmfly kmerr kmerr-lay";st.appendChild(l);return l}}catch(e){err("lay",e)}return null}
 function clearB(){try{document.querySelectorAll(".kchat-b").forEach(e=>e.remove())}catch(e){}}
 function show(P,txt,ms){const st=stage();if(!st||!P.img.isConnected)return false;if(noticeOn(P))return false;const c=C();
  const lim=Math.max(1,c.maxBub|0||2);const cur=[...st.querySelectorAll(".kchat-b")];while(cur.length>=lim)cur.shift().remove();
@@ -166,7 +170,8 @@ if(typeof renderStage==="function"){const r0=renderStage;renderStage=function(){
 /* the exchange the target and her confidant really said, from the TRUE facts j78 just learnt (S.intel newest first) */
 function eavLines(v,n){try{const E=(window.CHAT_L&&CHAT_L.eav)||{};const I=(S.intel&&S.intel[v.id])||[];const now=typeof bkey==="function"?bkey():null;const F=I.filter(x=>x.bk===now).slice(0,n||1);if(!F.length)return"";
  const A={e:v,p:{name:v.name},sp:v,k:v.queen?"hh":"con"};let mate=null;try{const L=lr().filter(x=>x!==v&&typeof whereOf==="function"&&whereOf(x)===whereOf(v));mate=L.length?L.sort((a,b)=>aff(v,b)-aff(v,a))[0]:null}catch(e){}
- const B=mate?{e:mate,p:{name:mate.name},sp:mate,k:mate.queen?"hh":"con"}:{e:null,p:{name:"cung nữ thân cận"},sp:{srv:"f",name:"cung nữ"},k:"srv"};
+ /* her confidant = the woman servant of her own palace who waits on her (the overheard partner answers as a servant: "Dạ, {xung}…") */
+ const B={e:null,p:{name:"cung nữ thân cận của "+nameOf(v)},sp:{srv:"f",name:"cung nữ"},k:"srv"};void mate;
  const out=[];for(const f of F){const kind=String(f.k||f.kind||"").split(":")[0];const pool=E[kind]||E[f.kind]||E.any||[];if(!pool.length)continue;
   const X={c:ctx(A,B),v:eavSlots(v,f,kind)};const cand=pool.filter(x=>{const tg=tagOf(Array.isArray(x)?x[0]:x);return !tg||tagOk(tg,X.c)}).map(x=>[x,1]);
   for(let t=0;t<4&&cand.length;t++){const x=choose(cand);const ex=(Array.isArray(x)?x:[x]).map(untag);const T=[];let ok=true;
@@ -178,7 +183,7 @@ function eavSlots(v,f,kind){const o={};try{
  if(kind==="affair"){const m=typeof manById==="function"&&v.affair?manById(v.affair):null;if(m)o.man=m.name}
  if(kind==="items"){const bad=(v.inv||[]).filter(e=>e.t||(IT[e.k]&&(itm(e.k).il||itm(e.k).mat)));if(bad.length)o.it=typeof iname==="function"?iname(bad[0]):""}
  if(kind==="hate"||kind==="ally"){const m=/để bụng (.+?) nhất|thân với (.+?) nhất/.exec(f.txt||"");if(m)o.h=(m[1]||m[2]||"").trim()}
- if(kind==="trait"){const m=/có nết (.+?)\./.exec(f.txt||"");if(m)o.tr=m[1]}
+ if(kind==="trait"){const m=/có nết (.+?)\./.exec(f.txt||"");if(m)o.tr=m[1].toLowerCase()}
  if(kind==="where"){try{o.pl2=placeName(whereOf(v))}catch(e){}}}catch(e){err("eavS",e)}return o}
 CH.eavLines=eavLines;
 /* j9 overhear (wrapped by j78) and j78 maid dò la: append the quoted exchange to the result / Sổ ghi line */

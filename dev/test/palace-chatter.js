@@ -8,7 +8,7 @@
 const {chromium}=require('./lib/pw-roulette');const fs=require('fs');
 const [,,BASE,W0,H0,OUT]=process.argv;const W=+W0||755,H=+H0||1000;const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<900});
- await ctx.addInitScript(()=>{let a=0x51c7e;Math.random=function(){a=(a+0x6D2B79F5)|0;let t=Math.imul(a^(a>>>15),1|a);t=(t+Math.imul(t^(t>>>7),61|t))^t;return((t^(t>>>14))>>>0)/4294967296}});
+ await ctx.addInitScript(()=>{let a=0x2f6e2b1;Math.random=function(){a=(a+0x6D2B79F5)|0;let t=Math.imul(a^(a>>>15),1|a);t=(t+Math.imul(t^(t>>>7),61|t))^t;return((t^(t>>>14))>>>0)/4294967296}});
  const p=await ctx.newPage();p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(BASE+'index.html',{waitUntil:'domcontentloaded'});
  for(let i=0;i<400;i++){const s=await p.evaluate(()=>{const b=document.querySelector('#kload [data-kl="go"]');if(b){b.click();return ''}return window.KLOAD&&['done','skipped','all'].includes(KLOAD.phase)&&!document.getElementById('kload')?'ok':''});if(s==='ok')break;await sleep(250)}
@@ -16,13 +16,14 @@ const [,,BASE,W0,H0,OUT]=process.argv;const W=+W0||755,H=+H0||1000;const sleep=t
  const R=await p.evaluate(async()=>{const Wt=t=>new Promise(r=>setTimeout(r,t));const C=[];const ck=(n,ok,d)=>C.push([n,!!ok,d===undefined?'':d]);
   SLOT=3;document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;quiet=false;Q.length=0;
   document.querySelectorAll('#kroul,#kroulw,#kload,#kboot,#klife,.kroul,.kmov').forEach(e=>e.remove());const clr=()=>{Q.length=0;try{closeModal()}catch(e){}const md=document.getElementById('modal');if(md)md.hidden=true};
+  const go=k=>{for(let t=0;t<3&&S.place!==k;t++){clr();try{if(k!=='home'&&typeof accGrant==='function')accGrant(S,k)}catch(e){}used=0;try{goTo(k)}catch(e){}clr()}if(S.place!==k)C.push(['travel '+k,false,{at:S.place,Q:Q.length}]);render()};
   S.buoi=0;used=0;deal();try{tab='act'}catch(e){}render();await Wt(1500);clr();
   const waitImgs=()=>Promise.race([Promise.all([...document.querySelectorAll('#stage img')].map(i=>i.complete?1:new Promise(r=>{i.onload=i.onerror=r}))),Wt(9000)]);
   /* (1) banks */
   const L=[];const add=x=>Array.isArray(x)?x.forEach(add):typeof x==='string'?L.push(x):x&&typeof x==='object'&&!(x instanceof RegExp)?Object.values(x).forEach(add):0;
   add(CHAT_L.greet);CHAT_L.topics.forEach(t=>add(t.x));add(CHAT_L.hap);add(CHAT_L.eav);const D=new Set(L.map(s=>s.replace(/^\[#[^\]]*\]\s*/,'').replace(/^[AB]:\s*/,'')));
   ck('bank: ≥ 300 distinct lines',D.size>=300,{all:L.length,distinct:D.size});
-  ck('bank: no digit / %',!L.some(s=>/[0-9%]/.test(s.replace(/^\[#[^\]]*\]/,''))),L.filter(s=>/[0-9%]/.test(s.replace(/^\[#[^\]]*\]/,''))).slice(0,3));
+  const txt0=s=>s.replace(/\[#[^\]]*\]/g,'').replace(/\{[a-zA-Z0-9]+\}/g,'');ck('bank: no digit / %',!L.some(s=>/[0-9%]/.test(txt0(s))),L.filter(s=>/[0-9%]/.test(txt0(s))).slice(0,3));
   const typed=L.filter(s=>/(^|[^\p{L}])(tiểu chủ|nương nương|chủ tử|thần thiếp|bổn cung|nô tỳ|nô tài)([^\p{L}]|$)/iu.test(s));ck('bank: address words only via jvoice tokens',!typed.length,typed.slice(0,3));
   const TAGS=/^(xuan|ha|thu|dong|sang|chieu|toi|wet|snow|heat|storm|dry|fest|nofest|lo|mid|hi|hq|warm|cool|cold|home|out|pl:[a-z0-9:]+)$/;const badTag=[];
   for(const s of L){const m=/^\[#([^\]]*)\]/.exec(s);if(m)for(const t of m[1].split(','))if(!TAGS.test(t))badTag.push(t)}ck('bank: every tag known',!badTag.length,[...new Set(badTag)].slice(0,5));
@@ -35,8 +36,8 @@ const [,,BASE,W0,H0,OUT]=process.argv;const W=+W0||755,H=+H0||1000;const sleep=t
   /* (7) BAL */
   ck('BAL.chat keys',BAL.chat&&BAL.chat.on===1&&BAL.chat.gap.min===60&&BAL.chat.gap.max===120&&BAL.chat.maxBub>=1,BAL.chat);
   /* (2) greeting: leave home, come back */
-  CHAT.log.length=0;const pl=places().find(x=>x.k==='vuon')?'vuon':places()[0].k;goTo(pl);await Wt(600);clr();render();await Wt(300);
-  goTo('home');await Wt(200);clr();await waitImgs();await Wt((BAL.chat.greet.delay||900)+1500);
+  CHAT.log.length=0;const pl=places().find(x=>x.k==='vuon')?'vuon':places()[0].k;go(pl);await Wt(600);clr();render();await Wt(300);
+  go('home');await Wt(200);clr();await waitImgs();await Wt((BAL.chat.greet.delay||900)+1500);
   const gl=CHAT.log.slice();const maidName=S.maid&&S.maid.name;
   ck('greet: her own maid greets on arrival',gl.length>=1&&gl[0].who===maidName,{log:gl.slice(0,2),maid:maidName,stat:CHAT.stat});
   ck('greet: said once',gl.filter(x=>x.who===maidName).length===1,gl.length);
@@ -51,9 +52,9 @@ const [,,BASE,W0,H0,OUT]=process.argv;const W=+W0||755,H=+H0||1000;const sleep=t
   await Wt(6500);document.querySelectorAll('.kchat-b').forEach(e=>e.remove());CHAT.run=0;
   const seen=[];let bad=[],maxB=0,rawTok=0,ticks=0;const t0=performance.now();let tc=[];
   const watch=setInterval(()=>{maxB=Math.max(maxB,document.querySelectorAll('#stage .kchat-b').length)},120);
-  const visit=async k=>{goTo(k);await Wt(300);clr();render();await waitImgs();await Wt(400)};
+  const visit=async k=>{go(k);await Wt(300);clr();render();await waitImgs();await Wt(400)};
   const spots=['home'].concat(places().map(x=>x.k).filter(k=>['vuon','kn','tn','r2','r3','r4','r5','nvp'].includes(k)));
-  for(const k of spots){if(k!=='home')await visit(k);else{goTo('home');await Wt(300);clr()}
+  for(const k of spots){if(k!=='home')await visit(k);else{go('home');await Wt(300);clr()}
    for(let n=0;n<6;n++){CHAT.run=0;document.querySelectorAll('.kchat-b').forEach(e=>e.remove());const n0=CHAT.log.length;const pres=CHAT.present().map(x=>x.p.name);const a=performance.now();CHAT.tick();tc.push(performance.now()-a);ticks++;
     await Wt(150);const nw=CHAT.log.slice(n0);for(const x of nw){if(!pres.includes(x.who))bad.push([k,x.who,pres]);if(/[{}]/.test(x.txt))rawTok++;seen.push(x.txt)}
     await Wt(2600)}}
@@ -64,9 +65,9 @@ const [,,BASE,W0,H0,OUT]=process.argv;const W=+W0||755,H=+H0||1000;const sleep=t
   const dup=seen.filter((x,i)=>seen.indexOf(x)!==i);ck('idle: no line repeated in the run',dup.length<=Math.floor(seen.length*0.05),{dup:dup.slice(0,3),n:seen.length});
   tc.sort((a,b)=>a-b);ck('perf: tick ≤ 15 ms (p90)',tc[Math.floor(tc.length*.9)]<=15,{p50:tc[tc.length>>1],p90:tc[Math.floor(tc.length*.9)],max:tc[tc.length-1]});
   /* (5) happening pair grouped + talks first (a real deed record with doer + target at this place; agPlanned is the jagday read-out) */
-  let hap={};try{const k='vuon';const L2=liveRivals(true).filter(v=>v.alive&&!v.out).slice(0,4);for(const v of L2)S.where[v.id]=k;
-   const ag0=window.agPlanned;const a=L2[0],t=L2[3]||L2[2];window.agPlanned=agPlanned=()=>[{who:ledgerId(a),k:'cx:gift',t:ledgerId(t),pl:k,kh:0}];
-   const rec0=window.recAt;await visit(k);const P=S.visit.people;const ia=P.findIndex(x=>x.ref===a),it=P.findIndex(x=>x.ref===t);hap.ia=ia;hap.it=it;hap.names=P.map(x=>x.name);
+  let hap={};try{let k=null,two=[];for(const x of places().map(q=>q.k)){if(['lc','tgk','ksp','tyv'].includes(x))continue;await visit(x);const R2=S.visit.people.filter(q=>q.kind==='rival'&&q.ref).map(q=>q.ref);if(R2.length>=2){k=x;two=R2;break}}
+   if(!k)throw new Error('no place with 2 consorts');const ag0=window.agPlanned;const a=two[0],t=two[two.length-1];window.agPlanned=agPlanned=()=>[{who:ledgerId(a),k:'cx:gift',t:ledgerId(t),pl:k,kh:0}];
+   await visit('home');await visit(k);const P=S.visit.people;const ia=P.findIndex(x=>x.ref===a),it=P.findIndex(x=>x.ref===t);hap.k=k;hap.ia=ia;hap.it=it;hap.names=P.map(x=>x.name);
    CHAT.run=0;const n0=CHAT.log.length;CHAT.tick();await Wt(5500);hap.log=CHAT.log.slice(n0).map(x=>x.who);hap.stat=CHAT.stat.hap;
    window.agPlanned=agPlanned=ag0;ck('happening: the pair stands together',ia>=0&&it>=0&&Math.abs(ia-it)===1,hap);
    ck('happening: they talk to each other first',hap.log.length>=1&&[a.name,t.name].some(n=>hap.log[0]&&hap.log[0].indexOf(n.split(' ').pop())>=0||hap.log[0]===n),hap)}catch(e){ck('happening: run',false,e.message)}
