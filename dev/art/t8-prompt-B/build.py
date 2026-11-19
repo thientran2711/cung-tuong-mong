@@ -977,4 +977,9 @@ if __name__=="__main__":
         assert _o.count(END)==1 and _o.endswith(END),"END not at end"
         if STATE=="nude" and AGE in ("a51","a65"): _r=" Image 3 is only a colour reference for the royal yellow, never copy anything but its colour; her yellow is that royal yellow in its deeper, subdued antique-gold elder shade as the colour rule says."   # N4 1c
         _o=_o[:-len(END)]+_r+END
+    # N4b (ROOT-35 / owner via brief UPDATE: "Keep the a65 yellow as soft as the a51 (no ochre/mustard)"): Nữ đế a65 only; every other output byte-identical
+    if STATE=="nude" and AGE=="a65":
+        _a="(dignified, not bright; the royal yellow becomes a deeper antique gold)"; _b="her yellow is that royal yellow in its deeper, subdued antique-gold elder shade as the colour rule says."
+        assert _o.count(_a)==1 and _o.count(_b)==1,"a65 nude yellow slots"
+        _o=_o.replace(_a,"(dignified, not bright; the royal yellow stays the SAME soft warm antique gold as at 51, a gentle honey-gold, never ochre, never mustard, never brownish)").replace(_b,"her yellow is that royal yellow in the same soft warm antique-gold elder shade as at 51, never ochre, never mustard, never brownish.")
     print(_o,end="")
