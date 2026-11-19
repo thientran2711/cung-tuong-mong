@@ -184,7 +184,7 @@ Nữ đế r10b + BD Quý phi (3 images) | handover | session_01PEhRbutG3NMnejgY
 | rel-picker r2 (sonnet worker) | review/rel-picker-r2 | ROOT-58 worker | SẴN SÀNG KIỂM 38079d9f | 18/11 |
 kc/ngheo NEW c13+c16 (4 gens) | handover | session_01PEhRbvGFP6YSgT5DTgo3yu (K4, Foreman C ROOT-33) | RUNNING | 2026-11-18T23:05Z
 | rel-picker r2 SMALL REVIEW (sonnet) | review/rel-picker-r2 | MAIN ROOT-59 | session_01Rc5AsJERhFud7eEWxD1toF | DONE 9a1d6922 landed, CDN wiped | 18/11 23:21Z |
-| stage-here r4 ONE NOTICE SYSTEM (opus; successor of session_01Rc5AsMY7PgErES6LptdBUE) | review/stage-here | MAIN ROOT-59 | session_01Rc5AsL5rJqVVXyTRsQXXPL | SẴN SÀNG KIỂM 8e29c099 (r4) | 19/11 |
+| stage-here r4 ONE NOTICE SYSTEM (opus; successor of session_01Rc5AsMY7PgErES6LptdBUE) | review/stage-here | MAIN ROOT-59 | session_01Rc5AsL5rJqVVXyTRsQXXPL | SẴN SÀNG KIỂM 367a1ae0 (r4b) | 19/11 |
 | MAIN ROOT-60 (opus; child of ROOT-59) | handover HANDOVER_SESSION9 | ROOT-59 | session_01Rc5AsMTMePisU9AmwCgz6i | RUNNING | 18/11 23:34Z |
 | stage-here r4 BIG REVIEW (opus) | review/stage-here 8e29c099 | MAIN ROOT-60 | session_01Rc5AsLiu1sZg8YMpZm9pwC | RUNNING | 19/11 00:20Z |
 | stage badges row + errand-scene finish (opus; successor of session_01Rc5AsLFZhaSRGU7o57KkKy) | review/errand-scene | MAIN ROOT-60 | session_01Rc5AsLTeVAfb7ZSU7mW53N | RUNNING | 19/11 00:31Z |
