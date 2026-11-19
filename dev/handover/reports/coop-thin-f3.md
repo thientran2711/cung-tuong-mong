@@ -110,3 +110,8 @@ FOR B: (1) her own changes made on her phone outside intents (life-start items e
 | jts rank line (al && !quiet) | tsGiftBacGo / tsGiftPieceGo when the gift crosses a rank cut | yes |
 | j8 dhHieuGrant {quiet:1}, jdh2 giveItems(quiet), jmem o.quiet | own option flags, not the global | no (unchanged) |
 Plan: merge review/coop-thin-f2-r2 (+ main 7fb7c104) when B says SẴN SÀNG KIỂM, then rerun coop-thin-f3 L8 + swap with a check that the jtq14 done card reaches her phone after W1 / S1.
+
+## Re-merge (B ROOT-4 06:48Z): SẴN SÀNG KIỂM 46ec7743 = f659cf7b + review/coop-thin-f2-r2 81ac2af8 + origin/main f3114755
+Conflicts: jcoopthinf host run (kept r2's TH.tapRun + F3 noRes around it), j55 tdAct gift (tdGiftGo now reads main's minister house MINC/minNs), j8 plantpick (main's `p: oddsCl(fz)` kept + plantHereGo), generated files (rebuilt by build_site.sh).
+New check "W done card": the «Xong việc: Thay y phục hay trang sức trong Tư trang» card her wear act earns shows on HER phone once, none on the host — PASS L8 and swap (was silenced by quiet before r2).
+coop-thin-f3 L8 37/37 · swap 37/38 in a 2-lane run (B1 her copy at the first act, the known first-act timing) → B1 swap alone 2/2 green.
