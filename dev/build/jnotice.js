@@ -112,7 +112,8 @@ function picOf(it){return it&&it.pic||""}
 function kitNoticeOpen(id){try{if(typeof kitPanel!=="function")return null;const one=id!=null?NT.list.find(x=>x.id===id):null;
  const U=unread();const L=one?[one]:(U.length?U:NT.list.slice(0,6));if(!L.length)return null;
  const lead=L[0];/* plain kit text rows (kpsec html), not kitFacts: no person figure is guessed from the words — the panel stays SMALL */
- const html=L.map(x=>`<p class="kntp">${esc(x.text)}${!one&&x.seen?" <small>(đã xem)</small>":""}</p>`).join("");
+ const seenL=new Set();const LL=L.filter(x=>{const k=one||L.length===1?x.text:x.line;if(seenL.has(k))return false;seenL.add(k);return true});/* the same line twice (two buổi of one happening) shows once */
+ const html=LL.map(x=>`<p class="kntp">${esc(one||L.length===1?x.text:x.line)}${!one&&x.seen?" <small>(đã xem)</small>":""}</p>`).join("");/* a list = the short lines (the kit frame sizing keeps it small); one notice = its full text */
  const go=L.find(x=>typeof x.go==="function");const opts=go?[{n:go.goLabel||"Để ta xem",fx:{},go:()=>{try{go.go()}catch(e){}boxPaint()}}]:undefined;
  const m=kitPanel({kind:"notice",title:"Tin báo",sub:one?"":(U.length?`${U.length} tin mới`:"Đã xem hết"),sections:[{html}],opts,onClose:()=>boxPaint()},true);m.__ntc=lead;showModal();picSwap(document,lead);for(const t of [0,150,400,800,1500])setTimeout(()=>{if(NT.open===m)picSwap(document,lead)},t);NT.open=m;
  for(const x of L)x.seen=true;const c=$("kntchip");if(c)chipHide(c);setTimeout(boxPaint,0);return m}catch(e){console.error("kitNoticeOpen",e);return null}}
