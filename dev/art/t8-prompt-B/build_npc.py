@@ -18,7 +18,7 @@ ids: thaihau-h1..h3 · eunuch-u01..u30 · official-o1..o6 · physician-p1..p2 ·
      man-vuonggia-1..2 · man-nhacsu-1 · man-hoasu-1 · man-suthan-1..2 · man-quytu-1..9 · man-bacdich-1 ·
      man-congtu-1..10 · kid-p01..p24 · kid-f01..f24   (NO SOURCE ids: see NOSRC)
 """
-import sys, os, json, importlib.util
+import sys, os, re, json, importlib.util
 sys.dont_write_bytecode = True
 HERE = os.path.dirname(os.path.abspath(__file__))
 
@@ -34,7 +34,12 @@ E = _load("ctm_emperor", os.path.join(HERE, "..", "emperor-B", "build.py"))
 
 PRE, END = B.PRE, B.END                      # build.py PRE (frontal, 3d2) / END, byte-identical
 W_AGE = B.AGE_TXT                            # women: build.py AGE_TXT a18..a65 (approved)
-M_AGE = E.AGE_TXT                            # men: emperor-B AGE_TXT a18..a51 (a65 HELD for the owner)
+M_AGE = E.AGE_TXT                            # men: emperor-B AGE_TXT a18..a65 = women AGE_TXT, gender words only (J6, owner Lượt 529)
+def _gswap(t):
+    t = re.sub(r"\bher\b", "his", t); t = re.sub(r"\bHer\b", "His", t); t = re.sub(r"\bshe\b", "he", t); t = re.sub(r"\bShe\b", "He", t)
+    return re.sub(r"\b(lady|woman)\b", "man", t)
+assert M_AGE == {a: _gswap(W_AGE[a]) for a in W_AGE}, "J6: men AGE_TXT must be the women AGE_TXT with gender words swapped only"
+D9 = B.D9_FOREHEAD                           # D9 (owner Lượt 529): owner words verbatim, right before END on every NPC output
 IDENT_F = B.IDENT                            # build.py IDENT (her)
 IDENT_M = (" From the identity reference keep ONLY his face, facial features and hairstyle colour; do NOT copy the outfit, crown or accessories "
            "of the reference, dress him in the NEW outfit below. The style reference image is only for skin, drawing style, fabric and embroidery: "
@@ -155,6 +160,7 @@ CT_P = {"a18": ["holding a closed folding fan", "holding a thin book", "holding 
                 "holding a tea cup", "holding an open book", "holding a jade pendant", "hands clasped behind the back", "holding a bamboo flute"]}
 def congtu(n, age):
     i = n - 1; k = CT_KIND[i]
+    if age not in CT_P: raise Held(f"NO SOURCE: công tử pose list (CT_P) has a18-a51 only; no old a65 pose source (men age text a65 exists since J6) -> ROOT-50/owner")
     if age in ("a18", "a26"):
         outfit = CT_ATT[k] + (", slightly richer fabric" if age == "a26" else "")
     else:
@@ -251,7 +257,12 @@ def prompt(i, age, rank=None):
         if i.startswith("eunuch-"): raise Held(NOSRC["eunuch-rank"])
         raise Held(f"no rank states for {i}")
     if gender(i) == "m" and not i.startswith("kid-") and age not in M_AGE:
-        raise Held(f"HELD for the owner: no approved men age text for {age} (emperor-B AGE_TXT has a18-a51; a65 held)")
+        raise Held(f"HELD for the owner: no approved men age text for {age}")
+    out = _prompt(i, age)
+    assert out.endswith(END) and D9 not in out
+    return out[:-len(END)] + D9 + END   # D9 (Lượt 529)
+
+def _prompt(i, age):
     pre, _, n = i.rpartition("-")
     if i.startswith("thaihau-h"): return thaihau(int(i[-1]), age)
     if i.startswith("eunuch-u"): return eunuch(int(i[-2:]), age)
