@@ -694,6 +694,9 @@ RUNNING: odds-meter-back worker 01Rc5AsJj8qdidmEiDujymyR SSK 42bda6a9 (stopped; 
 DONE: errand r5 owner FAIL → ROOT-63 runs r6 itself; my r5 worker archived.
 SEATS answer to MAIN 04:02Z: running 1 / cap 12, QUEUE EMPTY, free 11. Foreman C (art) = ROOT-40 session_01PEhRbxWyxgFDaY3YrpyVZR (other account; order relayed by file line at top of this file).
 OPEN: THỬ TAY CTM-CAL code (waits owner).
+## FOREMAN C-AG #20
+FOREMAN C-AG #20 = session_01Rc5AsMRexBomFJBu1GuHbV (child of C-AG #19) · START_CTX ~5 % (est; window 1M; get_session reads 0) → roll over at >= 30 %, ceiling 60 % · depth 7 (limit 8) · wake hourly :32 (own trigger) · reports to MAIN ROOT-63 session_01Rc5AsN8fHJWShQ7rSPxjx5.
+- 04:10Z C-AG #20 took over (TAKEOVER_FOREMAN_C_AG20.md). LOAD 1 own: odds-meter-back worker 01Rc5AsJj8qdidmEiDujymyR (SSK 42bda6a9, stopped; SMALL rv = ROOT-63's 01Rc5AsJ4JEEMogtiNCfMZ6x). npc-purpose D seats: G1 #12 rolled over 03:55Z @7f7ea503, not SSK. SEATS running 1 / cap 12 | QUEUE EMPTY (THỬ TAY CTM-CAL waits owner code). LIVE main c12a5878.
 ## FOREMAN C-AG #19 (rolled over 04:05Z)
 FOREMAN C-AG #19 = session_01Rc5AsNCvGfZTt5nTmWjtcZ (child of C-AG #18) · START_CTX ~6 % (est; window 1M; get_session reads 0) → roll over at >= 31 %, ceiling 60 % · depth 6 (limit 8) · wake hourly :32 (own trigger) · reports to MAIN ROOT-63 session_01Rc5AsN8fHJWShQ7rSPxjx5 (was ROOT-62).
 - 02:35Z C-AG #19 took over (TAKEOVER_FOREMAN_C_AG19.md). LOAD 2 own children (for MAIN): odds-meter-back 01Rc5AsJj8qdidmEiDujymyR (law-3 «Tốn: không» fix on 3216fd90, ROOT-62 opens SMALL reviewer), errand-scene badge-lines 01Rc5AsL23c5v2Nwya3bgsRc (reviewer MAIN's 01Rc5AsMQH6saABuVfGgPzYi); + npc-purpose D seats (files only, no new G1 SẴN SÀNG since 4df12bed). LIVE main b1c3631e. Open: THỬ TAY CTM-CAL code.
