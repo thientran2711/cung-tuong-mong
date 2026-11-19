@@ -38,3 +38,20 @@ Foreman E #11 ruling (19/11): MAIN's bar 3–5 tuần stands; M outside → FAIL
 
 Shots: scratch only (/home/user/wt/kyr-shots, not in git, not on CDN — E CDN is 401); regenerate with `node dev/test/kyngo-shots.js <url> <dir>`.
 Round 2: I stay open; send «SẴN SÀNG KIỂM kyngo-daily <sha>».
+
+## ROUND 2 (E18r) — PASS a2ae3ac2 — READY face71dd (review/kyngo-daily-rv)
+depth 2 · ctx ~22 %. PRIORITY #1 CHECK ('kyngo|kỳ ngộ'): OD 5 | ledger 0 | claims 8 | main 3 | review/* 1 (review/kyngo-daily) | archive 0.
+READY = review/kyngo-daily-rv @ face71dd: a2ae3ac2 + LIVE main edb2e724 (already contained) + index.html rebuilt by build_site.sh; fast-forward of origin/main.
+| r1 fix | verified |
+|---|---|
+| 1 bar | my bot, 1 life per process, rank held: M 6 lives gap 4.2 ✓, H 6 lives gap 4.2 ✓, zero 0, 0 errors, net 0–2 (OFF-baseline noise); L 4.0 (E18b) stands, nothing in r2 makes band L harder. Lever = BAL only (E[].b strings, cd[H] 1). Foreman ruling check: law 5 holds — hard [0,0,8,16] and V [1,1,1.4,1.8] unchanged, still rising with rank; law 4 holds |
+| 2 she as WHO | npcPass runs at the end of her buổi, before n0; her staff + kids join; unit 12/12b/12c run through the real nextBuoi; the z.last guard keeps one roll per buổi when nextBuoi is called again |
+| 3 co-op | npcPass skips v.coop; guard = worldOn(); unit 13 |
+| 4 gain words | g/r classes + the option line names no piece; Fold + iPad «Son phấn giáng» card LOOKED: TỐN 1 khắc only, ĐƯỢC on both options. The kit-wide kaSent fix is a KIT REQUEST for MAIN (dev/kit/KIT_REQUESTS.md); jky draws no look of its own → not a gate |
+| 5 soft-lock | elig drops any card whose every option costs more Bạc than she holds (NPCs too); unit 14/15 |
+| 6 typed numbers | loiK/loiArt, kidAge, relSung, relLoyal/relLoyK in BAL.kyngo; age = BAL.ageBand[2] |
+| 7 dead gain | ma_giao opt 2 = real Thêu art + regard; kyTeach removed; eq checks every special has a reader |
+| 8 Thái hậu | placeOfId("th","tn"); th_kinh wording fixed |
+| 9 tests | unit 22/22 |
+Gates on face71dd: kyngo-eq PASS · one-core-guard PASS · kyngo-unit 22/22 · kyngo-shots 12/12 on both devices (LOOKED 3×) · QUICKCHECK PASS (open 1416 ms, old save from live ok + buổi, core gates PASS incl. coop-one-world, TIME-SPILL PASS, perf new/live render 205/198, tab 423/417, buổi 978/1011 ms).
+Shots: scratch only, deleted after the verdict.
