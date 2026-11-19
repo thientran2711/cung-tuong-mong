@@ -1,6 +1,6 @@
 PRIORITY #1 CHECK: OD 19/11 ~06:55Z + ~07:05Z + ~07:10Z real | main dev/build/jemoseal.js KIT_EMOSEAL.lean, KIT.md §38.4 (no second implementation) | review/seal-lean(-2) landed | claims seal-lean-3.
 
-# seal-lean-3 — branch review/seal-lean-3 @ cc7297fa (on main 5400c87b)
+# seal-lean-3 — branch review/seal-lean-3 @ 358fe51b (merged main 5dc5d9e0) — r2 below supersedes sha/hold/videos
 Files: dev/build/jemoseal.js (+ rebuilt index.html/sw.js), dev/kit/KIT.md §38.4 (canon overwritten in place), dev/test/fig-seal.js, dev/test/seal-lean-video.js.
 
 ## What
@@ -22,3 +22,12 @@ Base https://ctm-img.victoria-tntt.workers.dev/img/_review/seal-lean-3/
 - full-755x1000.mp4 (Fold), full-1180x820.mp4 (iPad): natural take 34 s, 3 stage leans each (head seals of the two figures).
 - close-{gian,buon,vui,binh}-{755x1000,1180x820}.mp4: close-ups 720x720, one full cycle (pop-out -> hold -> shrink). binh/vui = green ordinary face with the new stronger motion.
 Frame check: seal pops to about head size above the figure, giận shows the painted loop + smoke, binh sways visibly, shrinks slowly back to the small still; inside screen; avatars still. NOTE: the painted loop for vui/binh does not exist yet (Foreman C), so those show CSS motion. Delete the CDN folder after the verdict (--wipe-review seal-lean-3).
+
+## r2 (OD ~07:25Z + main msg) @ 358fe51b
+- HOLD = 3 s (lean.holdMin 3, loops 0; n = 3/d loops, fractional OK) -> lean = .5 + 3 + 1.8 = 5.3 s. KIT.md 38.4 overwritten in place.
+- EVENT DIALOG: seal beside the figure in every .ksz3 dialog leans ONCE per opening (lean.open ".ksz3", openDelay .7 s, forced: ends a running stage lean which is rescheduled; root.__kl = once). Stage/panel seals unchanged.
+- 3-PART LOOPS: lean.parts {out:"-out",back:"-back"}: if <k>-out.webp + <k>.webp + <k>-back.webp exist: out while popping, loop during hold, back while shrinking; else single loop.
+- Test fig-seal (MOTION=1 SECS=30; leanCheck + eventLean): Fold/iPad/1366 all pass: grow .22-.29, hold 3.58-3.65 (measured at 95 % size incl. ramps = 3 s css), shrink 1.45-1.57, big <= frame (Fold 107/74 in dialog, iPad 83/67), leansInDialog 1 on each, 0 overlaps, 0 errors.
+- quickcheck PASS 186 s (open 1462 ms, perf 195/207 render, tab 399/349, buoi 1067/927).
+- Videos (CDN  base above, replaced): full-*, close-{gian,buon,vui,binh}-*, NEW event-755x1000.mp4 + event-1180x820.mp4 (full-screen: dialog opens, seal pops to head size beside the figure, holds, shrinks; LOOKED on frame sheets).
+Note: Fold event take = seal pops beside the figure at the dialog's left; stays inside the dialog/screen.
