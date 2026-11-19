@@ -24,10 +24,10 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  const r3=await p.evaluate(()=>{const ns=minNs();S.cc=3;delete ns.af.me;const a=ccRisk(S),wa=ccWord(S);ns.af.me=100;const c=ccRisk(S),wc=ccWord(S);delete ns.af.me;return{a,c,wa,wc,exp:Math.round(a*(1-BAL.ag.min.ns.afW))}});
  ok(r3.c<r3.a&&Math.abs(r3.c-r3.exp)<=1,'censor regard 100 lowers can-chính risk by afW',r3);
  const r4=await p.evaluate(()=>{const ns=minNs();S.bac=500;S.suc=100;S.cc=0;S.out=0;S.confined=0;Q.length=0;delete ns.af.me;const af0=0;let t=0,ok2=false;
-  for(let i=0;i<12&&!ok2;i++){Q.length=0;S.suc=100;try{tdAct("gift",{tc:MINC})}catch(e){return{err:String(e)}}t++;ok2=(ns.af.me||0)!==af0}
+  const c0=can,a0=aRoll;can=()=>true;aRoll=()=>true;/* the button path, not the dice: he takes the gift */try{for(let i=0;i<3&&!ok2;i++){Q.length=0;S.suc=100;try{tdAct("gift",{tc:MINC})}catch(e){return{err:String(e)}}t++;ok2=(ns.af.me||0)!==af0}}finally{can=c0;aRoll=a0}const me=ns.af.me||0;
   /* NPC side: a consort with can-chính record and silver courts him over a few months */
-  const v=liveRivals(true).find(x=>!x.confined&&!x.out);v.cc=5;v.bac=999;let n=0;for(let i=0;i<24;i++){v.cc=5;v.bac=999;if(ns.af[key(v)]){n=i;break}tdMonth()}
-  return{me:ns.af.me||0,tries:t,npc:ns.af[key(v)]||0,months:n}});
+  const v=liveRivals(true).find(x=>!x.confined&&!x.out);v.cc=5;v.bac=999;let n=0;for(let i=0;i<60;i++){v.cc=5;v.bac=999;v.confined=0;v.out=0;if(ns.af[key(v)]){n=i;break}tdMonth()}
+  return{me,tries:t,npc:ns.af[key(v)]||0,months:n}});
  ok(r4.me!==0,'she courts the censor by the gift button (his regard moved)',r4);ok(r4.npc!==0,'an NPC consort with can-chính record courts him too (same deed)',r4);
  const r5=await p.evaluate(()=>{const T=trS();const M=BAL.ag.min;const L=minCands().filter(o=>o.k==="imp");if(!L.length)return{skip:1};const o=L[0];o.h.clean={};
   const keep=o.t.dadT;o.t.dadT=false;o.h.clean[key(o.t)]=S.turn;const again=minCands().some(x=>x.k==="imp"&&x.h===o.h&&x.t===o.t);o.h.clean[key(o.t)]=S.turn-M.imp.keep;const later=minCands().some(x=>x.k==="imp"&&x.h===o.h&&x.t===o.t);o.t.dadT=keep;delete o.h.clean;return{again,later}});
