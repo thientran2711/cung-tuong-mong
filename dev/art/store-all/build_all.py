@@ -345,6 +345,12 @@ def _sec_slot(person,rank,S):
     if rank<=3 and re.search(r"\babout (36|51|65)\b",S):   # F11 (owner Lượt 583): at a36/a51/a65 the t1-t3 hair line says hair UP (the thiếu-nữ ref has loose hair)
         _h="Hair: her own hairstyle exactly as in her first reference, with"; assert S.count(_h)==1,("t1-3 hair slot",person,rank)
         S=S.replace(_h,"Hair: her own hair colour, ALL her hair swept UP into a bun / chignon (nothing hanging loose down her back), with",1)
+    elif rank<=3:   # owner reference law (ROOT-51 -> BW4): the hairstyle never comes from the reference; a18/a26 t1-t3 = loose (F11), said in words
+        _h="Hair: her own hairstyle exactly as in her first reference, with"; assert S.count(_h)==1,("t1-3 young hair slot",person,rank)
+        S=S.replace(_h,"Hair: her own hair colour, LOOSE and flowing (at most the top half gathered up, most of her hair hanging down her back), with",1)
+    else:   # t4-t6 (HAIR_HIGH rank law): hair UP, said in words, not "her own hairstyle"
+        _h="Hair: her own hairstyle decorated with"; assert S.count(_h)==1,("t4-6 hair slot",person,rank)
+        S=S.replace(_h,"Hair: her own hair colour, ALL her hair swept UP into a high bun / chignon, decorated with",1)
     S=re.sub(r"with [^;]+? in the inner robe and linings",f"with {sec} in the inner robe and linings",S,count=1)   # colour slot swap only (no new wording, Lượt 489)
     return _t3_slot(person,rank,S)
 # G15 (owner Lượt 559): QUÝ NHÂN t3 DESIGN = option B v2 -> dev/art/check_store.py g15_t3 (one copy of the wording, shared with the gate).

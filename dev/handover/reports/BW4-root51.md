@@ -48,3 +48,16 @@ People whose data has grey (drawn = KC ok):
 
 ## HANDOVER line
 BW4 done (push + report). Open questions for ROOT-51: grey replacements (B19 list), nc1–nc3 DATA colours, build_npc refs, ty-cold J2.
+
+---
+# Part 2: ROOT-51 add (from MMX4) — identity sentence = owner reference law
+- `build.py` `__main__` (every mode: t1–t8, Nữ đế, triều, maids tm0–tm4, ma ma, states; `--golden` exempt) rewrites every identity-sentence variant (the "hairstyle colour" ones, maid "her own hairstyle (the same at every rank)", Nữ đế "the reference's poses, outfit…") to the owner's words:
+  "From the identity reference keep ONLY her face, facial features, hair COLOUR and signature colour family; do NOT copy poses, outfit, HAIRSTYLE, hair ornaments or accessories of the reference, dress her in the NEW outfit below."
+  An assert stops the build if any old variant is left. My Part-1 maid/ma ma ident swap was removed (this replaces it).
+- The rank hair lines no longer say "her own hairstyle (exactly as in her first reference)", which would contradict "do NOT copy HAIRSTYLE". `store-all/build_all.py` (Hair: is a gate SLOT):
+  - t1–t3 at a18/a26: "Hair: her own hair colour, LOOSE and flowing (at most the top half gathered up, most of her hair hanging down her back), with …" (F11 + HAIR_LOW).
+  - t1–t3 at a36+: unchanged (bun).
+  - t4–t6: "Hair: her own hair colour, ALL her hair swept UP into a high bun / chignon, decorated with …" (HAIR_HIGH).
+- Not touched (men, flagged): emperor-B and build_npc IDENT_M still say "his face, facial features and hairstyle colour".
+- Flag: `build.py mNN --state ty1..ty8|cold --nostyle` crashes ("style sentence not found"). It crashed the same way before my edits.
+- Gates after Part 2: check_store --self 0 problems; build_all --check --age a18..a65 **0 FAIL ×5**; maid tm0–tm4 + ma ma samples STORE CHECK PASS.
