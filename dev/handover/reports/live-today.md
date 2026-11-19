@@ -87,3 +87,21 @@ HITS (7 figures, 11 files):
 Fix = alpha only (colour pixels unchanged), feet band only; por busts untouched (no feet). First try (alpha-only halo removal) left the opaque core with a hard edge → rejected after looking; fix2/fix3 chosen per figure by looking.
 BACKUP: img/_backup/1119-shadow/<same path> (11 files; NOT 1118-live, which keeps the pre-today originals). --check same 11 before and after. Live md5 = local (spot c13 kc fig, c30 hd, c12 fig, c04-th hd).
 SHEET: https://ctm-img.victoria-tntt.workers.dev/img/_review/live-fix/shadow_before_after.jpg (each row: BEFORE dark|light bg → AFTER dark|light bg; hd where it exists).
+
+### 4c. v1/v2 group + manifests (19/11 ~02:15Z)
+| group | source (img/_review/) | figures | files | looked | live check |
+|---|---|---|---|---|---|
+| V12 t7/t8 v1/v2 a18/a26/a36 (c12 a18 only) + c04 a51-dark v1/v2 | t8-reprompt/cNN_aXX_t{7,8}_v{1,2}.png (a51 = cNN_a51d_*) | 378 | 1128 (hd 372) | 16 sheets, all ok | --check same 1128; md5 3/3 |
+NOT pushed: the muted a51 v1/v2 (`cNN_a51_t*_v{1,2}`, 124 files) — superseded by the dark a51 (owner), same as LIVE-1. One master re-downloaded (c08 a26 t8 v2 came truncated the first time).
+TOTAL LIVE-2: 592 figures under new names (TH 96 + A65 118 + V12 378) = 1758 files; 0 live files overwritten (except the 11 shadow-fix files, backed up).
+ANCHORS: mk-fit for all 1184 new fig/por names measured (mkfit.py main_missing, filtered to our names: 1184 ok / 0 fail), then verify.py independent check 1184/1184 ok; only our keys added. fig-ht.json +592 rows (8893 → 9485, 0 missing). toil-fit2 not touched (no rows exist for new names; fixtoil only re-seats existing rows). Pushed img/mk-fit/consort-*.json + img/fig-ht.json, --check same 33. manifest_guard --live-check PASS.
+REPO COPIES: review/live-today-1118 2b512f9b (dev/art/headtop/fig-ht.json, dev/art/mkfit/consort-c01..c32.json + md5.json), rebased onto MAIN's merge d2da651b. Main untouched.
+
+## FOR MAIN WIRING (LIVE-2, 19/11 ~02:15Z) — files are LIVE, the game does not use them yet
+All files: https://ctm-img.victoria-tntt.workers.dev/img/ + `fig-KEY.webp` (900 tall) · `hd/fig-KEY.webp` (1800) · `por-KEY.webp` (384×506). mk-fit + fig-ht rows already live for every KEY. The picker only sees a file through an img/FIGURES.json row (FIGIX, j39/j66), so adding rows IS the wiring — but NOT naively, see the traps:
+1. **Consort as Thái hậu** — KEY `consort-cNN-th-{a36,a51,a65}` (32 people × 3 = 96; hd missing on 6). Feeds: her own figure (and a former consort NPC) once she is Thái hậu (S.thO is the separate NPC Thái hậu = fig-thaihau-h1..h3, keep those). Code slot: figTierOf (j39:32 / j66 wrapper) must return a tier for "she is Thái hậu"; FIGURES rows `{role:"consort", identity:"cNN", tier:"th", ageBand:"a36|a51|a65", file, por}`. TRAP: figTier("th") (j39:14) returns null → figDist ignores the tier → a `th` row would win for ANY rank. Add `th` handling in figTier (e.g. like `cold` → its own value, say 9) BEFORE adding rows.
+2. **a65 age** — KEY `consort-cNN-t{7,8}-a65` (v0, 21 people: c01–c05 c09–c13 c17–c19 c25–c32) + `-a65-v1` / `-a65-v2` (19 people; c05, c13 v0 only). Feeds: t7/t8 figure for an old consort (age ≥ ~60). Code slot: BAL.ageBand has 4 bands (a51 = 51+); a5th band or the figAge tie-break in figDist (|fa-age|/400) decides. FIGURES rows `{tier:7|8, ageBand:"a65"}` would already be preferred over a51 for ages ≥ 58 by that tie-break — check that is wanted, and add rows for the v0 KEYs only.
+3. **Outfit colours v1/v2** — KEY `consort-cNN-t{7,8}-{a18,a26,a36}-{v1,v2}` (+ `consort-c04-t{7,8}-a51-{v1,v2}`, + the a65 v1/v2 above) = 378 + 76. Feeds: the outfit-change feature (same person, same rank/age, other dress colour); v0 stays in the existing slot. Code slot: none exists — needs a FIGURES field (e.g. `outfit:"v1"`) that figPick/figDist SKIP unless her chosen outfit asks for it. TRAP: adding plain rows (same identity/tier/ageBand as v0) makes the picker choose randomly between v0/v1/v2.
+Exact KEY lists: `dev/handover/reports/live-today-tools/` g-lists are in the LIVE-2 scratch; regenerate with: identities × the patterns above, or from CDN img/_index.json (`img/fig-consort-c\d\d-(th-a\d\d|t[78]-a65(-v[12])?|t[78]-a\d\d-v[12])\.webp`).
+
+## HANDOVER: none needed — job complete. Context ~30 % (START_CTX ~4 %) — at the rollover line; any follow-up goes to a successor.
