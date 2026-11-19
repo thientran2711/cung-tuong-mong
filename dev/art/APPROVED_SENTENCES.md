@@ -88,11 +88,11 @@ Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as 
 
 ### S07 · FABRIC prompt B t7/t8/Nữ đế
 - text: `FABRIC: thick gold-embroidered brocade with a graceful, flowing drape.`
-- scope: tp7-8 pr7-8 nude
+- scope: tp6-8 pr7-8 nude trieu6-8 thaihau state:thaihau emperor
 - confirm: -
 - ages: all
 - store: no
-- luot: 364 (B12)
+- luot: 364 (B12); 781 (B12 rewritten: t6 Quý phi and above, Thái hậu, Hoàng thượng, Nữ đế, triều t6-t8)
 - source: dev/art/store-all/build_all.py FABRIC_B = prompt B
 - proof: dev/art/approved/proof/c06_t8_a18.txt
 - picture: t8 Hoàng hậu prompt B (18/11 ~18:20Z 'Prompt này rất là ok') · c25 a18 t8 v0 · https://ctm-img.victoria-tntt.workers.dev/img/_review/t8-reprompt/c25_a18_t8_v0.png
@@ -616,3 +616,11 @@ Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as 
 - negation: no
 - luot: 779 (C1, via ROOT-57; MG2)
 - why: the drawing style is the approved thiếu nữ style ONLY (master M01/M02); the old store style clause is gone from every builder. Scope 'any' = every prompt of every scope, faces and states included
+
+### X19 · transparent-background words (B9 GEN METHOD: draw on parchment, then images_remove_background)
+- regex: `background is (?:completely |fully )?transparent|transparent background|(?:completely|fully) transparent with NOTHING`
+- scope: any
+- unless: -
+- negation: no
+- luot: 780 (C2 = B9, via ROOT-57; MG2)
+- why: B9 GEN METHOD: no transparentBackground and no transparent-background prompt words; master M03 (plain light parchment) is the ONLY background sentence; the cut-out is images_remove_background after the gen. Scope 'any' incl. face and states

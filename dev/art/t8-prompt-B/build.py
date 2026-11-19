@@ -1995,7 +1995,8 @@ if __name__=="__main__":
     if "--nostyle" in sys.argv: _k3=_k3.replace("The second reference image is style only: IGNORE its background","IGNORE the reference image's background",1)
     if K3_BG_OLD in _o: assert _o.count(K3_BG_OLD)==1; _o=_o.replace(K3_BG_OLD,"",1)
     assert _o.count("IGNORE")==0 or "--golden" in sys.argv,"K3 already present"
-    if "--golden" not in sys.argv: _o=_o[:-len(END)]+_k3+END if _o.endswith(END) else _o+_k3   # --golden
+    # C2 (owner Lượt 780 = B9 GEN METHOD via ROOT-57, MG2): NO transparent-background sentence any more: drawn on the plain light parchment (master M03, the ONLY background sentence),
+    # then images_remove_background. K3_BG / K3_BG_OLD kept above only so old texts can be recognised; never added to an output.
     if "--golden" not in sys.argv and a and kc_drawn(a[0]):   # B8 (ROOT-51, TN4 m13): her KC face words name her own eyes (e.g. m13 "long PHOENIX eyes clearly upturned") -> the generic END eye clause contradicts them: dropped for KC people only
         _eye=" Eyes soft, warm and round-almond, never slanted or upturned, never teary."; assert _o.count(_eye)==1,"END eye clause"; _o=_o.replace(_eye,"",1); END=END.replace(_eye,"",1)
     if "--golden" not in sys.argv: assert _o.endswith(END) and D9_FOREHEAD not in _o,"D9"; _o=_o[:-len(END)]+D9_FOREHEAD+END   # D9 (Lượt 529): owner words verbatim, every output, right before END = frozen A/B reproduction (golden/pB_*.txt), never a gen mode
@@ -2017,7 +2018,12 @@ if __name__=="__main__":
         _o,_n=IDENT_RX.subn(IDENT_LAW,_o)
         assert "hairstyle colour" not in _o and "her own hairstyle (the same" not in _o,"identity sentence variant not covered: "+_o[max(0,_o.find("hairstyle")-200):_o.find("hairstyle")+80]
     if "--golden" not in sys.argv and os.environ.get("CTM_MASTER_LATER")!="1":   # B25 ONE MASTER COMMON BLOCK (owner Lượt 745/766, MG1): dev/art/MASTER_COMMON.txt verbatim, every output (golden = frozen reproduction, exempt; CTM_MASTER_LATER=1 = a post-editing caller (nude-B/mk.py) applies it as ITS last step; check_store FAILs any prompt without it)
-        sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); import master_common as _MC; _o=_MC.apply(_o)
+        sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); import master_common as _MC
+        _PRIN=bool(a) and a[0] in ("p01","p02","p03","bt","cl","pt")
+        _HIGH=(STATE in ("nude","thaihau")) or (TRIEUN is not None and TRIEUN>=6) or (not STATE and TRIEUN is None and not BDQ and ((LOWN if "--low" in sys.argv else 7 if "--t7" in sys.argv else 8)>=(7 if _PRIN else 6)))   # B12 (owner Lượt 781, MG2): fabric by rank
+        if _HIGH and (STATE=="thaihau" or TRIEUN is not None) and _MC.BROCADE not in _o:   # B12: triều t6-t8 / Thái hậu state get the store prompt-B fabric sentence right before Pose (thường phục t6-t8: store-all/build_all.py laws)
+            assert _o.count(" Pose:")==1,"B12 pose anchor"; _o=_o.replace(" Pose:"," "+_MC.BROCADE+" Pose:",1)
+        _o=_MC.apply(_o,high=_HIGH)
     print(_o,end="")
     _lg=[x for x in _RAW if x not in ("--log","--refs")]
     if "--gen-id" in _lg: _i=_lg.index("--gen-id"); _gid=_lg[_i+1]; _lg[_i:_i+2]=[]

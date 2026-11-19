@@ -48,7 +48,7 @@ assert IDENT_M.strip() in open(os.path.join(HERE, "..", "emperor-B", "build.py")
 _K3 = (" IGNORE the style reference image's background completely: the background is completely transparent with NOTHING behind or around her: "
        "no backdrop, no parchment, no painted flowers or branches, no smoke, no haze, no glow, no stain.")  # build.py build_trieu, verbatim
 assert _K3 in open(os.path.join(HERE, "build.py"), encoding="utf-8").read()
-K3 = {"f": _K3, "m": _K3.replace("around her:", "around him:")}
+K3 = {"f": "", "m": ""}   # C2 (owner Lượt 780 = B9 via ROOT-57, MG2): no transparent-background sentence; master M03 parchment is the only background sentence (then images_remove_background)
 STYLE_REF = "style2_portraits_c01_c12 6AbGv6EiJO"        # FIGURE_GATE A0 REFERENCES (every gen, image 1)
 
 class Held(Exception): pass                  # exit 3: owner decision pending / no old source
@@ -70,10 +70,11 @@ def _th_sleeves():
     assert "touch the floor" in floor and hold.startswith("Even while her hands are raised")
     return " " + floor + " " + hold
 TH_SLEEVES = _th_sleeves()
+# B12 (owner Lượt 781, MG2): Thái hậu fabric = store prompt-B brocade sentence (verbatim = master_common.BROCADE) right before Pose; M06 never inserted
 def thaihau(n, age):
     return (PRE + " A dignified, gentle Chinese empress dowager." + IDENT_F + " " + W_AGE[age]
             + (B.ELDER_M05_SENT if age in ("a51", "a65") else "")   # C5 (owner Lượt 779, MG2): her elder colours win over master M05 at a51/a65
-            + f" Outfit: a {THC[n - 1]}." + TH_SLEEVES + " Pose: calm standing pose; hands folded at her waist." + K3["f"] + END)
+            + f" Outfit: a {THC[n - 1]}." + TH_SLEEVES + " FABRIC: thick gold-embroidered brocade with a graceful, flowing drape." + " Pose: calm standing pose; hands folded at her waist." + K3["f"] + END)
 
 # ---------------------------------------------------------------------------------------------------------------
 # Eunuchs u01..u30 (base robe, no rank) -- dev/figwork/spec3.py:32-39 (N-eunuch-uNN: MF faces, ECOL colours, ET poses)
@@ -274,7 +275,7 @@ def prompt(i, age, rank=None):
     assert out.endswith(END) and D9 not in out
     out = out[:-len(END)] + D9 + END   # D9 (Lượt 529)
     sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); import master_common
-    return master_common.apply(out)   # B25 ONE MASTER COMMON BLOCK (owner Lượt 745/766, MG1), last step
+    return master_common.apply(out, high=i.startswith("thaihau"))   # + B12 (Lượt 781): Thái hậu = brocade, never M06   # B25 ONE MASTER COMMON BLOCK (owner Lượt 745/766, MG1), last step
 
 def _prompt(i, age):
     pre, _, n = i.rpartition("-")

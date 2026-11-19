@@ -62,7 +62,8 @@ def build(k,age="a26"):
     if REF2: s+=" "+REF2
     s+=" Luminous smooth porcelain skin, bare clean forehead, eyes open, floor-length robe with shoes visible, no train, no cup, nothing covering the face."
     sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); import master_common
-    return master_common.apply(s+D9_FOREHEAD+END)   # B25 ONE MASTER COMMON BLOCK (owner Lượt 745/766, MG1), last step
+    assert s.count(" Pose:")==1; s=s.replace(" Pose:"," "+master_common.BROCADE+" Pose:",1)   # B12 (owner Lượt 781, MG2): Hoàng thượng = store prompt-B brocade sentence, never M06
+    return master_common.apply(s+D9_FOREHEAD+END, high=True)   # B25 ONE MASTER COMMON BLOCK (owner Lượt 745/766, MG1), last step
 if __name__=="__main__":
     age="a26"
     if "--age" in sys.argv: age=sys.argv[sys.argv.index("--age")+1]
