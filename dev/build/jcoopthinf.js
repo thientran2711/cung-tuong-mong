@@ -390,6 +390,13 @@ reg10("tsDenEnd",["v","v"],{snap:"soft",noRes:true,enc:tsEnc,title:()=>"Thả đ
    Also: quest steps q72Do / q72Drop / q72Ask / q72Call, empAct (Hoàng hậu powers), servAct (servant buttons), elderAct (the elders),
    the person-card game jobs sgOver / sgServ; and the render-time derived writers that wrote her person on her phone (read-only there). */
 const L11=11;
+/* RENDER-DIFF ENGINES (the whole family, LUẬT SỬA CẢ NHÓM): game rules that run on every render and write her person — her rank's gift set +
+   servants (jpromo prCheck), the lux / allotment item boxes (jration lxInitAll, jallot alInitAll: items made, law 6c), her rank marks (jmark
+   kmmCheck), the life milestones (j52 pdCheck), the end of a life's span (jkiep kpCheck), the exam window (jexam exTick). In her context on
+   the host render is a no-op, so they run as her context closes; on her phone at level 11 they do not run (kpCheck only reads). */
+const RDIFF=["prCheck","lxInitAll","alInitAll","kmmCheck","pdCheck","kpCheck","exTick"];
+/* a card that opens a picker keeps itself in window.__adPend until the pick (jact): per player, swapped with her context */
+try{TH.reg("__adPend",()=>window.__adPend||null,v=>{window.__adPend=v||null})}catch(e){}
 const isSteal=a=>{try{return typeof isStealCard==="function"&&isStealCard(a)}catch(e){return false}};
 const uiFirst=a=>!!a&&(!!a.exam||!!a.toil||!!a.aaMG||isSteal(a));
 const plainCard=a=>{if(!a||typeof a!=="object")return null;const o={};for(const k of Object.keys(a)){const v=a[k];
@@ -405,8 +412,8 @@ if(typeof deal==="function"){const d0=deal;deal=function(){
 TH.ctxOut.push((seat,B)=>{if(!on(L11)||!host()||seat===CW.seat||!S||TH.held(seat))return;
  try{if(!S.dead&&!S.mg&&typeof deal==="function"&&(B.hk!==HKEY()||!Array.isArray(deck)||!deck.length)){deal();F.stat.hDeal=(F.stat.hDeal|0)+1}}catch(e){console.error("thin F6 deal",e)}
  for(const f of ["j76Std","eaSync","feelDeck"])try{if(typeof window[f]==="function")window[f]()}catch(e){}
- /* the render-diff engines of her person (render is a no-op in her context): her rank set (jpromo prCheck: the gift set + servants of a new rank) runs here, once */
- {const q0=quiet;quiet=false/* as her own render: its card shows (her Q → her phone) */;try{for(const f of ["prCheck"])try{if(typeof window[f]==="function")window[f]()}catch(e){console.error("thin F6 "+f,e)}}finally{quiet=q0}}
+ /* the render-diff engines of her person (render is a no-op in her context; ONE list RDIFF, below): run here, once, as her render would */
+ {const q0=quiet,t0=performance.now();quiet=false/* as her own render: its card shows (her Q → her phone) */;try{for(const f of RDIFF)try{if(typeof window[f]==="function")window[f]()}catch(e){console.error("thin F6 "+f,e)}}finally{quiet=q0;const ms=performance.now()-t0;F.stat.rdN=(F.stat.rdN|0)+1;F.stat.rdMs=Math.round(((F.stat.rdMs||0)*9+ms)/10*10)/10}}
  B.hd=S.dead?[]:(Array.isArray(deck)?deck:[]).map(plainCard).filter(Boolean)});
 /* host: the view carries her hand; a hand left from an older buổi / week (her context not entered since) is brought up to date at once */
 let HREF="";
@@ -456,5 +463,5 @@ reg11("sgServ",["v","v"],{snap:"soft",noRes:true,dec:a=>{const x=decA9(["v","v"]
 /* (a render is a part-C world frame on her phone: gOn is false there; her own week end / buổi step still on her phone = G / E, left as is) */
 let WKD=0;for(const n of ["endTurn","nextBuoi","monthTick"])if(typeof window[n]==="function"){const f=window[n];window[n]=function(){WKD++;try{return f.apply(this,arguments)}finally{WKD--}}}
 const rOn=()=>on(L11)&&!host()&&!!CW.seat&&!CW.ctx&&!!S&&!S.dead&&!CW.inFC&&!CW.inLife&&!CW.allow&&!CW.allowN&&!WKD;
-for(const [n,me] of [["mkSync",1],["emoSee",0],["feelMig",0],["prCheck",0]])if(typeof window[n]==="function"){const f=window[n];window[n]=function(p){if(rOn()&&(!me||isMe(p))){F.stat.ro=(F.stat.ro|0)+1;return}return f.apply(this,arguments)}}
+for(const [n,me] of [["mkSync",1],["emoSee",0],["feelMig",0]].concat(RDIFF.filter(x=>x!=="exTick").map(x=>[x,0])))if(typeof window[n]==="function"){const f=window[n];window[n]=function(p){if(rOn()&&(!me||isMe(p))){F.stat.ro=(F.stat.ro|0)+1;if(n==="kpCheck")return !!(S&&S.kpTron);return}return f.apply(this,arguments)}}
 }catch(e){console.error("jcoopthinf",e)}})();
