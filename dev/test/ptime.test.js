@@ -81,7 +81,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    /* qua loa = the same odds formula − BAL.road.hp.half */o.hp=[ordOdds("plant"),ordHalf(()=>ordOdds("plant"))];
    /* unanswered past the deadline = Từ chối with its cost */const tin0=S.tin;if(S.ordQ[0])S.ordQ[0].due=ptNow();ptTick();o.late={left:S.ordQ.length,dt:S.tin-tin0}}
   /* NPC receiver (two-way): an NPC servant ordered by its master picks among the SAME 4 (jagstf2 stf2Ord) */
-  try{const K=BAL.ag.stf2.ord,K0=Object.assign({},K);Object.assign(K,{obey:0,refuse:0,tell:0,half:5});const v=rivals.find(x=>x&&x.alive&&!x.out&&bestSent(x));const sv=v&&bestSent(v);
+  try{const K=BAL.ag.stf2.ord,K0=Object.assign({},K);Object.assign(K,{obey:0,refuse:0,tell:0,half:5,loyalTr:0});/* review #4 de-flake: half weighs ×(1−loyal/100) and a loyal-trait servant adds loyalTr to refuse → pick a servant not fully loyal */const v=rivals.find(x=>x&&x.alive&&!x.out&&bestSent(x)&&(bestSent(x).loyal||0)<100);const sv=v&&bestSent(v);
    o.npcHalf=sv&&typeof stf2Ord==="function"?stf2Ord(v,sv,t||v,"plant"):"none";Object.assign(K,K0);o.npcOpts=sv?cnvOrdOpts(sv,v,t||v,null).map(x=>x.id):null}catch(e){o.npcErr=String(e)}
   o.errs=PT.stat.errs.slice();return o});
  console.log(JSON.stringify(r2));
