@@ -1440,3 +1440,4 @@ ROOT-51 Lượt 586: owner: colours dịu = light/gentle, not heavy (B18 amended
 ROOT-51 Lượt 587: LV1 kc swap LIVE (f864419) sheet sent. FOR MAIN: dev/site/manifest-floor.json lower FIGURES-kc to {consort|kc 0, consort|ngheo 32, maid|kc 52, maid|ngheo 52, n 136} else main live-check FAILs. Owner asked which OLD live sets to replace next (LV1 list A–O).
 ROOT-51 Lượt 587b: owner: rooms = 2 approved layouts: 3-wall (HQP bedroom) OR 2-wall (HQP reception); not all 3-wall (L14 amended, PR8 told).
 ROOT-51 Lượt 590: owner: c palette now too pastel → raise tone to Quý nhân v2 B level (main #CBAAB0-level, secondary deep teal-level); B18 amended; NF1 redoing table.
+ROOT-51 Lượt 591: owner: live game hands-off (no piecemeal swaps; one push at the end of mass production); refs only from our store, never from game (K18). No grey colours (B19) → NF1 c02/c11/c29/c31/c32 + any grey. Lượt 589 proposal (remove old c live) WITHDRAWN.
