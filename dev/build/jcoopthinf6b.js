@@ -74,15 +74,18 @@ const coId=k=>k+":"+(Date.now()%1e9).toString(36)+Math.floor(Math.random()*1e4);
 const exPd=k=>{try{const e=k==="srv"?S&&S.srv&&S.srv.ex:S&&S.ex;return e&&e.pend&&e.pend.co?e.pend:null}catch(x){return null}};/* a plain read (exS / exSrvS write lazily) */
 const LSX=()=>"ctm-f6b-ex:"+((window.COOP&&COOP.state&&COOP.state.room)||"")+":"+(CW.seat||"");
 function exLocKeep(kind,t){clearInterval(EXT);const w=()=>{try{const pd=exPd(kind);if(t.pend&&pd)localStorage.setItem(LSX(),JSON.stringify({co:pd.co,raws:t.pend.raws,sk:t.pend.sk}))}catch(x){}};w();EXT=setInterval(w,400)}
-function exLocStop(kind){clearInterval(EXT);EXT=null;EXL=null;const pd=exPd(kind);if(pd)SENT[pd.co]=1;try{localStorage.removeItem(LSX())}catch(x){}}
+/* her end sent: the saved môn stay until the host's view drops the pending start (an end refused / dropped on a buổi change is sent again
+   by the gone-check below, the same môn: the start never stays paid with no result) */
+function exLocStop(kind,res){clearInterval(EXT);EXT=null;EXL=null;const pd=exPd(kind);try{if(pd&&res)localStorage.setItem(LSX(),JSON.stringify({co:pd.co,raws:res.raws||[],sk:res.sk||[]}))}catch(x){}}
 if(typeof exTick==="function"){const t0=exTick;exTick=function(){if(on()&&exPd("me"))return;return t0.apply(this,arguments)};window.exTick=exTick}
 if(typeof exSrvTick==="function"){const t0=exSrvTick;exSrvTick=function(){if(on()&&exPd("srv"))return;return t0.apply(this,arguments)};window.exSrvTick=exSrvTick}
 /* her phone: a pending start with no game of hers running, still so 3 s later (a game opened by an answer opens on the next tick) */
 const gone=()=>{if(host()||!on()||!CW.seat||CW.ctx||!TH.view||F.pend||!S||S.dead)return null;
  for(const k of ["me","srv"]){const pd=exPd(k);if(pd&&!SENT[pd.co]&&EXL!==k&&!document.getElementById("kg82"))return {k,co:pd.co}}
+ try{const sv=JSON.parse(localStorage.getItem(LSX())||"null");if(sv&&sv.co&&!exPd("me")&&!exPd("srv"))localStorage.removeItem(LSX())}catch(x){}/* her start ended on the host: its saved môn go */
  const v=S.vlPend;if(v&&v.co&&!SENT[v.co]&&VLL!==v.co&&!document.getElementById("kg82"))return {k:"veil",co:v.co,m:v.m};return null};
-function abortGone(now){const g=gone();if(!g)return false;const fire=()=>{const h=gone();if(!h||h.co!==g.co||!g12())return;SENT[g.co]=1;F.stat.coAbort=(F.stat.coAbort|0)+1;
-  if(g.k==="veil"){window.vlCraftEnd(g.m,5,true);return}let sv=null;try{sv=JSON.parse(localStorage.getItem(LSX())||"null")}catch(x){}try{localStorage.removeItem(LSX())}catch(x){}
+function abortGone(now){const g=gone();if(!g)return false;const fire=()=>{const h=gone();if(!h||h.co!==g.co||!g12())return;SENT[g.co]=1;setTimeout(()=>{delete SENT[g.co]},20000);F.stat.coAbort=(F.stat.coAbort|0)+1;
+  if(g.k==="veil"){window.vlCraftEnd(g.m,5,true);return}let sv=null;try{sv=JSON.parse(localStorage.getItem(LSX())||"null")}catch(x){}
   const ok=sv&&sv.co===g.co&&Array.isArray(sv.raws);window.exEnd(g.k,ok?sv.raws:[],ok&&Array.isArray(sv.sk)?sv.sk:[])};
  if(now)fire();else setTimeout(fire,3000);return true}
 let AGT=0;if(typeof render==="function"){const r0=render;render=function(){const r=r0.apply(this,arguments);try{if(!host()&&on()&&Date.now()-AGT>3500&&gone()){AGT=Date.now();abortGone(false)}}catch(e){console.error("thin F6b gone",e)}return r};window.render=render}
@@ -90,7 +93,7 @@ F.f6bExDrop=()=>{clearInterval(EXT);EXT=null;EXL=null;VLL=null};F.f6bGone=()=>ab
 if(typeof exRun==="function"){const x0=exRun;
  exRun=function(P,e,done){const kind=P&&P.srv?"srv":"me";
   if(hctx()){stSet("exam",kind);if(e&&typeof e==="object")e.pend={raws:[],sk:[],co:coId(kind)}/* review r1: her pending exam in HER state on the host, as solo exRun (survives her reload) */;return cap("exGame",[kind])}
-  if(g12()){const t={};let sk=null;EXL=kind;const r=x0.call(this,P,t,res=>{exLocStop(kind);exEnd(kind,res&&res.raws||[],sk||[])});sk=t.pend&&t.pend.sk;exLocKeep(kind,t);F.stat.exLocal=(F.stat.exLocal|0)+1;return r}
+  if(g12()){const t={};let sk=null;EXL=kind;const r=x0.call(this,P,t,res=>{exLocStop(kind,{raws:res&&res.raws||[],sk:sk||[]});exEnd(kind,res&&res.raws||[],sk||[])});sk=t.pend&&t.pend.sk;exLocKeep(kind,t);F.stat.exLocal=(F.stat.exLocal|0)+1;return r}
   return x0.apply(this,arguments)}}
 /* her phone: an opener replayed by an answer runs on the next tick (inside the view apply gOn is false: the game took the old road) */
 const nextTick=fn=>{if(host())return fn();setTimeout(()=>{try{fn()}catch(e){console.error("jcoopthinf6b opener",e)}},0)};
@@ -128,7 +131,7 @@ reg12("vlCraftEnd",["v","v","v"],{title:()=>"Tự tay kết mạng che mặt",
  dec:a=>{const x=X5.decA9(["v","v","v"],a);if(!x)return null;const [m,raw,sk]=x;if(![0,1,2].includes(m)||!raw0(raw,sk))return bad("vlCraftEnd");
   const vp=S.vlPend&&S.vlPend.m===m;if(!stTake("veil",m)&&!vp&&!vlHeld(m))return bad("vlCraftEnd");/* the start: run on the host (paid there), or her held solo cost */return [m,sk?5:raw,!!sk]},
  pre:A=>{try{delete S.vlPend}catch(e){}payAA(sc=>{sc.skip=!!A[2];sc.raw=A[2]?null:cl0(Math.round(A[1]||0),0,10);sc.ok=!A[2]&&sc.raw>=5})}});
-{const w=window.vlCraftEnd;window.vlCraftEnd=function(){if(!host()&&VLL){SENT[VLL]=1;VLL=null}return w.apply(this,arguments)}}
+{const w=window.vlCraftEnd;window.vlCraftEnd=function(){if(!host()&&VLL){const c=VLL;SENT[c]=1;setTimeout(()=>{delete SENT[c]},20000);VLL=null}return w.apply(this,arguments)}}
 
 /* ===== 10. Chải chuốt: the end = wdGroomEnd, its rows (wdGroomShow) on her phone ===== */
 /* her result rows replay into HER open game frame; the frame closed meanwhile (✕, a reload) = nothing to draw (the end is applied all the same) */
