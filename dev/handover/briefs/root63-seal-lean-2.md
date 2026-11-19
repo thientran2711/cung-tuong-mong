@@ -1,0 +1,11 @@
+PRIORITY #1 CHECK ('seal lean' / 'kemo-lean'): OD (19/11 ~02:15Z real) + OD (19/11 ~05:05Z real) | main dev/build/jemoseal.js KIT_EMOSEAL.lean {scale:[1.12,1.18],min:4,max:8,gap:1.2}, kesLean/kesLeanEnd, KIT.md §38.4 | review/* review/seal-lean (LIVE 1cf5e8bb) | claims seal-lean done (worker archived)
+WORKER «seal-lean-2» (sonnet; UI motion in ONE kit part; MAIN own item = owner correction). Read root63-common.md (same folder; MAIN is ROOT-64 session_01Rc5AsLZQkh3A3nV1PEQaVf) + dev/rules/START_WORKER.md and obey. ★ THE 18 LAWS first. Owner words VERBATIM: dev/OWNER_DECISIONS.md lines "- (19/11 ~02:15Z real)" and "- (19/11 ~05:05Z real)" (the second overwrites the timing).
+Branch review/seal-lean-2 from newest origin/main.
+DO (jemoseal.js only + KIT.md §38.4 canon overwrite in place; data in KIT_EMOSEAL, no per-place motion):
+1. Small state = still (keep the idle at most barely visible, or none — follow her words "hành tĩnh").
+2. Lean-in: grow MUCH bigger (pick a scale that makes the face clearly readable on Fold and iPad — e.g. 1.8–2.4× of the small seal, tune by looking), grow slowly over ~1.5 s (ease), the leaning seal on top (z-index) and clamped inside the screen (never cut off at an edge).
+3. Hold at big size for max(5 s, 2 full loops of the feeling motion / emo-anim loop); the feeling motions slowed down so each beat is readable (giận stronger but still readable, buồn slow droop, vui gentle bounce …).
+4. Shrink back slowly (~1.5 s) to the small still. Stagger: never two seals leaning at once; next lean only after the previous one fully ends + gap. Gates kept (on-screen only, Cảnh động, reduced-motion, Gọn).
+5. REAL VIDEO for the owner (mp4 H.264 via Playwright recordVideo + ffmpeg): per device (Fold 755x1000, iPad 1180x820) ONE full-screen take ≥ 25 s showing at least 2 different seals leaning one after the other, AND one CLOSE-UP take (ffmpeg crop/scale on the seal area, output ≥ 720 px wide) covering a full cycle (grow → hold → shrink) for giận, buồn, vui. Extract frames, LOOK at them yourself; upload to CDN img/_review/seal-lean-2/.
+6. Gates: quickcheck vs live, fig-seal test, old save loads, perf smoke no worse.
+Report dev/handover/reports/seal-lean-2.md (timings table, video URLs, frame check) + "SẴN SÀNG KIỂM <sha>" via send_message to ROOT-64 session_01Rc5AsLZQkh3A3nV1PEQaVf.
