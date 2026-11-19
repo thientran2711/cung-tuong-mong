@@ -97,8 +97,15 @@ function actLine(k,oddsWord,costHtml){const w=AOUT[k]||["",""];const rolled=!!od
 function optLine(a){const o=oddsOf(a),capd=oddsCapped(a);const rolled=o<100&&!a.lock;const gain=[fmt(a.w||{}),a.x].filter(Boolean).join(" · ");
  return [rolled?word(o):"",a.c&&fmt(a.c)?"tốn: "+fmt(a.c):"",gain?"thành: "+gain:"",rolled?"hỏng: "+(capd||agSoft(o)?kitSoftW(a.c):payWinFail(a,fmt(a.l||{}))||"không mất gì"):""].filter(Boolean).join(" · ")}
 /* a dilemma option {n, fx, x, go}: x usually already holds 'word · thành · hỏng'; fill what is missing */
-function dilLine(c){const fx=fmt(c.fx||{}),x=c.x||"";const src=String(c.go||"")+String(c.fail||"");let s=x;
- if(!ODDW.test(x)&&!CHW.test(x)){if(/roll\(/.test(src))s="Khó lường · "+x;else{if(!fx&&!x)return /^Thôi|^Im lặng|^Để /.test(c.n||"")?"không được mất gì":c.go||c.open?"chọn rồi xem kết quả ở bước sau":"không được mất gì";return [fx?"ngay: "+fx:"",x?(/^\s*(?:<[^>]+>)*\s*(tốn|thành|hỏng|ngay|kèm|được|mất)\s*:/i.test(x)?x:"thành: "+x):""].filter(Boolean)/* kit-option-rows s34: a sure option whose x already leads with a label keeps it (was "thành: thành: …" -> literal "thành:" under ĐƯỢC) */.join(" · ")}}
+/* the option's OWN code (review/odds-meter-back): a go that is a reference to a global scene / step function (go:nightScene) opens the next
+   step — the rolls inside that function belong to the next step's own options, not to this option */
+function dilSrc(c){const own=f=>typeof f==="function"&&!(f.name&&typeof window!=="undefined"&&window[f.name]===f)?String(f):f&&typeof f!=="function"?String(f):"";return own(c&&c.go)+own(c&&c.fail)}
+/* ONE ODDS RULE (review/odds-no-unknown, law 4 + law 7): a rolled option names the odds of its roll as `p` (the SAME number its go rolls);
+   a card line with no ladder word gets word(p) first, so the meter shows the real odds. No "unknown" odds word exists any more. */
+function oddsLead(c,s){s=String(s||"");if(!c||typeof c.p!=="number"||!isFinite(c.p)||ODDW.test(s))return s;
+ const body=s?(/^\s*(?:<[^>]+>)*\s*(tốn|thành|hỏng|ngay|kèm|được|mất)\s*:/i.test(s)?s:"thành: "+s):"";return [word(oddsCl(Math.round(c.p))),body].filter(Boolean).join(" · ")}
+function dilLine(c){const fx=fmt(c.fx||{}),x=oddsLead(c,c.x);const src=dilSrc(c);let s=x;
+ if(!ODDW.test(x)&&!CHW.test(x)){if(/roll\(/.test(src))s=x;/* a roll with no p and no word: j79 reads a literal / global roll(expr); the scan dev/test/odds-unknown-scan.js keeps this at zero */else{if(!fx&&!x)return /^Thôi|^Im lặng|^Để /.test(c.n||"")?"không được mất gì":c.go||c.open?"chọn rồi xem kết quả ở bước sau":"không được mất gì";return [fx?"ngay: "+fx:"",x?(/^\s*(?:<[^>]+>)*\s*(tốn|thành|hỏng|ngay|kèm|được|mất)\s*:/i.test(x)?x:"thành: "+x):""].filter(Boolean)/* kit-option-rows s34: a sure option whose x already leads with a label keeps it (was "thành: thành: …" -> literal "thành:" under ĐƯỢC) */.join(" · ")}}
  if(!/hỏng/.test(s))s+=" · hỏng: không mất gì";return [fx?"ngay: "+fx:"",s].filter(Boolean).join(" · ")}
 const dilLineRaw=dilLine;/* the raw kit line of a dialog option (before kitParse), read by the kit hint (jk2b kitHint) */
 /* the real speaker of an event: a named eunuch of that palace or of the court, a spy of hers; no speaker -> the place art */

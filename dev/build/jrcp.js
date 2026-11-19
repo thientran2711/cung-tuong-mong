@@ -281,17 +281,22 @@ function rcpTasteRows(){return [rcpMeRow()].concat(rcpPeople().map(r=>{const P=r
   return[rcpWho(r),L,F.length||al?"g":"n"]}))}
 /* her own allergy (owner 15/11 recipes "dị ứng", S4-allergy / D39): the same rcpProf allergen as everyone, learnt the same ways (thái y, or the first rash) */
 function rcpMeRow(){const P=rcpProf(S),kn=rcpKn(S,"a");return["Ta",[kn?(P.a?`kiêng ${RCP_ALN[P.a]}: nhận về dùng phải là nổi mẩn`:"không kiêng thứ gì"):"chưa rõ ta có kiêng thứ gì (hỏi thái y)"],kn?(P.a?"r":"g"):"n"]}
-function rcpAskQ(how){if(S.dead||Q.length)return;const ty=how==="ty",k=ty?1:2,fee=rcpPayTy();if(!can(k))return;if(ty&&S.bac<fee)return;if(!ty&&!S.maid)return;
+function rcpAskQ(how){if(S.dead||Q.length)return;const pk=!(how==="ty")&&typeof ptOn==="function"&&ptOn();const ty=how==="ty",k=ty?1:pk?ptRow("spy").o:2,fee=rcpPayTy();if(!can(k))return;if(ty&&S.bac<fee)return;if(!ty&&!S.maid)return;if(pk&&ptBusy("mm:me"))return;
  const O=(ty?[S].concat(rcpPeople()):rcpPeople()).filter(r=>ty?!rcpKn(r,"a"):rcpUnknown(r).length).map(r=>({n:rcpWho(r),fx:ty?{bac:-fee}:{},x:ty?(r===S?"thành: biết ta có kiêng thứ gì":"thành: biết người ấy kiêng gì"):`${word(rcpSpyO())} · thành: biết thêm một điều người ấy thích, chê hay kiêng · hỏng: Lòng ${S.maid.name} -${balAb(BAL.eff.jrcp.loyalGo_2)}`,
-  go:()=>{const o=ty?100:rcpSpyO();/* odds read before the spend (shown-odds r2) */spend(k);if(ty){log(rcpLearn(r,"a","thái y kể"))}else if(roll(o)){const u=rcpUnknown(r);log(rcpLearn(r,pick(u),`${S.maid.name} dò la`))}else{S.maid.loyal=cl((S.maid.loyal||0)-BAL.eff.jrcp.loyalGo_2,0,100);log(`${S.maid.name} dò la không ra gì, còn bị mắng.`)}}}));
+  go:()=>rcpAskGo(how,r)}));
  if(!O.length){log("Ta đã rõ hết những điều ấy.");return}O.push({n:"Thôi",fx:{}});
- Q.push({act:1,t:ty?"Hỏi thái y: ai kiêng thứ gì?":`Sai ${S.maid.name} dò la khẩu vị`,who:pMe(),h:ty?`<p>Thái y viện chép bệnh án cả cung: ai kiêng thứ gì, dùng phải là phát bệnh. Tốn 1 khắc, ${fee} bạc.</p>`:`<p>${S.maid.name} đi hỏi cung nhân hầu người ấy: thích lối nào, chê lối nào, kiêng thứ gì. Tốn 2 khắc.</p>`,opts:O});showModal();render()}
+ Q.push({act:1,t:ty?"Hỏi thái y: ai kiêng thứ gì?":`Sai ${S.maid.name} dò la khẩu vị`,who:pMe(),h:ty?`<p>Thái y viện chép bệnh án cả cung: ai kiêng thứ gì, dùng phải là phát bệnh. Tốn 1 khắc, ${fee} bạc.</p>`:`<p>${S.maid.name} đi hỏi cung nhân hầu người ấy: thích lối nào, chê lối nào, kiêng thứ gì. Tốn ${k} khắc${pk?", "+ptWaitTxt("spy"):""}.</p>`,opts:O});showModal();render()}
+/* the choice of rcpAskQ (one engine: co-op thin F4 registers it); r = her (S) or a person.
+   parallel time (jptime): the maid goes, what she learns comes at the due khắc (review parallel-time #4 merge: the send moved here with main's rcpAskGo) */
+function rcpAskGo(how,r){const pk=!(how==="ty")&&typeof ptOn==="function"&&ptOn();const ty=how==="ty",k=ty?1:pk?ptRow("spy").o:2;if(!r||(!ty&&!S.maid))return;if(pk&&ptBusy("mm:me"))return;const o=ty?100:rcpSpyO();/* odds read before the spend (shown-odds r2) */
+ if(pk){ptSend({who:"mm:me",nm:S.maid.name,kind:"spy",place:"cnh",a:{rid:ledgerId(r),o,run:"taste"},lbl:"đi dò la khẩu vị"});spend(k);return}
+ spend(k);if(ty){log(rcpLearn(r,"a","thái y kể"))}else if(roll(o)){const u=rcpUnknown(r);log(rcpLearn(r,pick(u),`${S.maid.name} dò la`))}else{S.maid.loyal=cl((S.maid.loyal||0)-BAL.eff.jrcp.loyalGo_2,0,100);log(`${S.maid.name} dò la không ra gì, còn bị mắng.`)}}
 function rcpSpyO(){return oddsCl(Math.round(BAL.rcp.spyO+((S.maid&&S.maid.loyal)||0)/5-20))}
 (function(){if(typeof ktWorksHTML!=="function")return;const w0=ktWorksHTML;ktWorksHTML=function(){let h=w0.apply(this,arguments);try{
   for(const a of ARTS){const ks=wkKindsOf(a.k).filter(x=>RCP_ST[x]);if(!ks.length)continue;const n=ks.reduce((t,x)=>t+rcpKnown()[x].length,0),m=ks.reduce((t,x)=>t+RCP_ST[x].length,0);
    h=h.replace(new RegExp(`(data-skill="wk-${a.k}"[\\s\\S]*?<div class="kskdo">)`),`$1<span class="kchip n">lối đã học ${n}/${m}</span> `)}
   const fee=rcpPayTy(),acts=[pbtn(`data-rcpq="ty"`,"Hỏi thái y kiêng kỵ",`tốn: 1 khắc, Bạc -${fee} · thành: biết một người kiêng thứ gì`,whyTime(1)||(S.bac<fee?`thiếu bạc (cần ${fee})`:"")),
-   pbtn(`data-rcpq="maid"`,"Sai cung nữ dò la khẩu vị",`${word(rcpSpyO())} · tốn: 2 khắc · thành: biết thêm một điều một người thích, chê hay kiêng · hỏng: Lòng cung nữ -3`,whyTime(2)||(!S.maid?"chưa có cung nữ thân tín":""))];
+   pbtn(`data-rcpq="maid"`,"Sai cung nữ dò la khẩu vị",`${word(rcpSpyO())} · tốn: ${typeof ptK==="function"?ptK("spy",2):2} khắc${typeof ptOn==="function"&&ptOn()?", "+ptWaitTxt("spy"):""} · thành: biết thêm một điều một người thích, chê hay kiêng · hỏng: Lòng cung nữ -3`,whyTime(typeof ptK==="function"?ptK("spy",2):2)||(!S.maid?"chưa có cung nữ thân tín":"")||(typeof ptLockWhy==="function"?ptLockWhy("mm:me"):""))];
   h+=kitSkillCard({kind:"wk",k:"taste",name:"Khẩu vị, kiêng kỵ",max:0,img:"",desc:`<div class="kinvrows">${kitRows(rcpTasteRows())}</div>`,acts,can:true})}catch(e){console.error("rcp works",e)}return h}})();
 /* ---------- learning tastes by the old roads ---------- */
 (function(){const d0=discover;discover=function(){const r=d0.apply(this,arguments);try{if(!r||roll(40)){const u=rcpUnknown("emp");if(u.length){log(rcpLearn("emp",pick(u)));return true}}}catch(e){}return r}})();

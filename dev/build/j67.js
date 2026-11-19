@@ -131,7 +131,7 @@ PEND.j67=p=>{if(!v267())return null;const A=th67(p.t);if(!A||A.a!==p.a||A.cur!==
   const fx=txt67(o.c);
   const cost=fmt(o.c||{});const line=sure?[cost?"tốn: "+cost:"",x?(/^kèm:/.test(x)?x:"thành: "+x):""].filter(Boolean).join(" · "):x.replace(/^([^·]+) · /,(m,w)=>`${w} · ${cost?"tốn: "+cost+" · ":""}`);
   return {n:fill67(o.n,A),fx,x,j67:line,go:()=>res67(p.t,p.b,i,od0)}})}};
-(function(){const d0=dilLine;dilLine=function(c){if(c&&c.j67)return kitParse(c.j67);return d0.apply(this,arguments)}})();
+(function(){const d0=dilLine;dilLine=function(c){if(c&&c.j67)return kitParse(oddsLead(c,c.j67))/* law 4: a rolled j67 line names its odds by p */;return d0.apply(this,arguments)}})();
 function res67(tk,bid,i,odds){const A=th67(tk);if(!A||A.cur!==bid)return;const a=ARC67[A.a],b=beatDef67(A,bid);const o=opts67(A,b)[i];if(!o)return;
  const sure=odds>=100,ok=sure||roll(odds);if(!sure){ap67(ok?o.w:o.l);if(ok&&o.sc)A.sc+=o.sc;if(!ok&&o.sf)A.sc=Math.max(0,A.sc+o.sf)}else{ap67(o.w);if(o.sc)A.sc+=o.sc}
  if(ok&&o.f)A.f[o.f]=1;if(!ok&&o.ff)A.f[o.ff]=1;let extra="";try{if(o.go)extra=o.go(A,ok)||""}catch(e){console.error(e)}
@@ -575,7 +575,7 @@ ARC67.muoi_doi=arcFx("muoi_doi",{o:"muoi",t:"Năm đói ở Giang Nam",w:"emp",s
   {n:"Lập lều cháo bằng bạc riêng",f:"good",wx:"tiếng nhân từ (Kho lúa +3)",go:(_A,_ok,G)=>e67kho(G[0]),rt:"Lều cháo mang tên ngươi."},
   {n:"Khuyên Hoàng thượng giảm thuế Giang Nam",need:["nsrv"],wx:"ngài nghe ngươi",rt:"Hoàng thượng hạ chỉ giảm thuế.",rf:"Hoàng thượng nói kho trống, không giảm được."},
   {n:"Đóng cửa cung, cầu kinh",wx:"không tốn bạc",rt:"Ngươi chép kinh cầu mưa thuận."}]},
- c1:{h:"Triều đình đòi trưng thu thóc",w:"emp",t:"Có đại thần dâng sớ: trưng thu thóc của các nhà buôn để cứu đói. Nhà ngươi đứng đầu danh sách.",o:[
+ c1:{h:"Triều đình đòi trưng thu thóc",w:"emp",t:"{hobo} dâng sớ: trưng thu thóc của các nhà buôn để cứu đói. Nhà ngươi đứng đầu danh sách.",o:[
   {n:"Tự nguyện dâng thóc",f:"good",wx:"cả triều khen (Kho lúa +6)",go:(_A,_ok,G)=>e67kho(G[0]),rt:"Nhà ngươi dâng một vạn thạch."},
   {n:"Lo lót để gạch tên",wx:"giữ được kho",lx:"bị lộ lo lót",f:"greed",rt:"Tên nhà ngươi bị gạch.",rf:"Việc lo lót bị Ngự sử hặc."}]},
  c2:{h:"Đầu cơ của nhà khác",w:"maid",t:"Nhà ngoại của {v} gom gạo đầu cơ, giá càng lên.",need:["v"],o:[
@@ -1226,7 +1226,7 @@ ARC67.thd_hoc=arcFx("thd_hoc",{o:"thd",t:"Thầy giáo trong cung",w:"emp",sj:"v
 /* ================= CUNG NỮ TUYỂN VÀO CUNG (đang là kẻ hầu: Chủ tin, Hoàng thượng để ý) ================= */
 /* owner 16/11 06:20Z (review/promo-skip): an arc ending that SAYS she is raised a bậc gives the servant rank at once, no Nội vụ phủ exam
    (cap srvMax, the mistress's palace; at the cap it falls back to Công lao) */
-function e67srvUp(n){try{if(S.srv&&!S.srv.risen&&typeof isSrv==="function"&&isSrv()){const mx=typeof srvMax==="function"?srvMax():2;
+function e67srvUp(n){try{if(S.srv&&!S.srv.risen&&typeof isSrv==="function"&&isSrv()){const mx=typeof srvMax==="function"?srvMax():BAL.srvRk.dai;
   if((S.srv.rk||0)<mx){S.srv.rk=(S.srv.rk||0)+1;S.srv.mp=0;S.srv.ex={};try{if(typeof exSrvDrop==="function")exSrvDrop()}catch(e){}
    log(`<b class="g">Được thăng ${SRK.maid[S.srv.rk]}</b> (không qua khảo hạch).`);return `Được thăng ${SRK.maid[S.srv.rk]}, không qua khảo hạch.`}}}catch(e){console.error(e)}return e67merit(n)}
 function e67merit(n){try{if(S.srv&&!S.srv.risen&&typeof srvMerit==="function"){srvMerit(n);return `Công lao +${n}.`}}catch(e){}return""}

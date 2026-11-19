@@ -172,7 +172,10 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
   if(!isSrv()){for(const f of ["pool","artActs","directActs","illCards"])try{for(const c of window[f]()||[])addP(role,c.n,"deck")}catch(e){}
    try{const q=qinCard(S);if(q)addP(role,q.n,"garden")}catch(e){}}
   if(!isSrv())try{for(const a of talkOpts({kind:"emp"})||[])addP(role,a.n,"talk:emp")}catch(e){}
-  for(const k of PLS()){richK(S);Q.length=0;try{S.place="home";goTo(k);Q.length=0}catch(e){E("goTo "+k,e)}
+  /* role-parity-drift (19/11): live-servants (j95s) puts a «Chọn người theo hầu» card before her FIRST departure of the day (goTo returns at the card;
+     the visit happens only after her tap). The probe = her tap «Đi một mình»: the card's own go([]) writes S.ent {d: today, ids: [], at: k} — the same
+     write here, so goTo walks the real path (gates, khắc, people) instead of stopping at the card. S.ent is restored after each place. */
+  for(const k of PLS()){richK(S);Q.length=0;const e0=S.ent;try{S.place="home";if(typeof j95sDay==="function")S.ent={d:j95sDay(),ids:[],at:k};goTo(k);Q.length=0}catch(e){E("goTo "+k,e)}finally{if(e0===undefined)delete S.ent;else S.ent=e0}
    for(const pp of (S.visit&&S.visit.people)||[]){try{for(const a of talkOpts(pp)||[])addP(role,a.n,"talk:"+pp.kind)}catch(e){E("talk "+pp.kind,e)}}}
   S.place="home";Q.length=0;
   if(!isSrv()){for(let i=0;i<rivals.length;i++){const v=rivals[i];if(v===S)continue;try{for(const n of lab(rvCard(v,i)))addP(role,n,"rv")}catch(e){E("rv",e)}try{for(const a of topicOpts(v)||[])addP(role,a.n,"topic")}catch(e){E("topic",e)}}
@@ -195,6 +198,15 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
  if(phase==="maid"){
   try{const L=[];for(const v of liveRivals(true))for(const s of (v.staff||[]))if(s&&s.role==="maid"&&g0(s)==="maid")L.push(s);for(const s of L.slice(0,16))npcOpts("maid",s,["maid"],VAR.concat(MVAR))}catch(e){E("npcMaid",e)}
   playerLabels("maid",VAR.concat(MVAR));
+  /* maid:pil (Lén giữ đồ Nội vụ phủ phát, parallel-time r5): ONE act, two timings — her card (j42 srvCards, jeitem eitPilMaidOk) and the NPC servant's
+     monthly pass when the goods come (jeitem eitPilfer → eitPilWho by ag2Ch → eitPilNpc: the same eitPilSee odds, the same four answers eitPilJudge).
+     The day options never hold the monthly pass, so both sides are judged by the RULE (as the target ladder): the same lòng states for both doers
+     (as she is, and low: 10), with her master holding a piece Nội vụ phủ gave this month (the pass runs only when goods came). */
+  try{const P=BAL.eit.pil;const m=srvM();const t0=S.tin;let tmp=null;
+   if(m&&typeof eitPilPick==="function"&&!eitPilPick(m)){const k=Object.keys(IT).find(x=>{try{return itm(x).pr>0}catch(e){return false}});if(k){tmp={k,from:"noivu",d:S.turn};m.inv=m.inv||[];m.inv.push(tmp)}}
+   for(const tin of [t0,10]){S.tin=tin;if(eitPilMaidOk())addP("maid","Lén giữ đồ Nội vụ phủ phát","pil-rule")}S.tin=t0;if(tmp)m.inv.splice(m.inv.indexOf(tmp),1);
+   const L=[];for(const v of liveRivals(true))for(const s of (v.staff||[]))if(s&&s.role==="maid"&&g0(s)==="maid")L.push([v,s]);
+   for(const [v,s] of L.slice(0,16)){const l0=s.loyal;for(const lo of [l0,10]){s.loyal=lo;if(eitPilWho(v).some(c=>c.s===s))addN("maid","maid:pil","eitPilWho")}s.loyal=l0}}catch(e){E("pil",e)}
   /* PROMOTION (player): srvRise, then the same S with the maid origin removed (= a born Đáp ứng in the same world): the act sets must be equal */
   try{S.age=Math.max(S.age||0,18);srvRise("role-parity scan");res.upMe={ok:!isSrv()&&S.rank===0,rank:S.rank};S.preg=0;S.hidden=false;playerLabels("up");
    const sv=S.srv;delete S.srv;playerLabels("t1me");S.srv=sv}catch(e){E("upMe",e)}

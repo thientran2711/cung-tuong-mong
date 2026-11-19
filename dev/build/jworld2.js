@@ -115,7 +115,7 @@ EVD.ret={place:()=>"home",
   return `Tuyết lớn phủ kín cung cấm; than sưởi chia theo phẩm, cung thấp và lãnh cung rét cóng.${Sh.length?` Chia than cho các cung thấp: ${nmList(Sh)}.`:""}${Su.length?` Chịu rét: ${nmList(Su)}.`:""}`},
  end(){phongAfter(B().ret.phongP,"Sau trận đại hàn, Hoàng thượng cho giảm bớt người trong cung");return "Tuyết đã tan; Nội vụ phủ phát than như thường."},
  card(w){const b=B().ret;if(!meCons())return info(w);if(rkOf(S)<=b.rank)return Object.assign(info(w),{opts:[{n:"Bỏ bạc mua thêm than",fx:{bac:-b.buy.bac},x:"thành: qua mùa rét yên ổn"},
-   {n:"Chịu rét cho qua",fx:{suc:-b.cold.suc},x:"kèm: có thể bị nhiễm phong hàn",go:()=>{if(roll(b.catch)){const r=catchIll(S,b.ill);if(r)log(r)}}}]});
+   {n:"Chịu rét cho qua",fx:{suc:-b.cold.suc},x:`kèm: nhiễm phong hàn: ${chanceW(b.catch)}`/* law 4: the side chance it rolls (b.catch) */,go:()=>{if(roll(b.catch)){const r=catchIll(S,b.ill);if(r)log(r)}}}]});
   return Object.assign(info(w),{opts:[{n:"Chia than cho các cung thấp",fx:{bac:-b.share.bac},x:`thành: Đức +${b.share.duc}, Danh +${b.share.danh}`,go:()=>apply({duc:b.share.duc,danh:b.share.danh})},{n:"Giữ than cho cung mình",fx:{},x:"không được mất gì"}]})},
  night(){return false}};
 /* ---------- 8 NẠN CHÂU CHẤU (row 8): a flood / drought whose relief failed (j55) left Kho lúa low but not yet famine (dis.kho..kho),
@@ -177,9 +177,9 @@ EVD.trom={place:()=>"home",
 /* ---------- 13 ĐẠI PHÓNG CUNG NHÂN (row 13): maids at BAL.srvAge.ask (j42 rule, ageing j17) leave every household at once (spring, or
    after a trộm / rét); rich NPCs pay Nội vụ phủ to keep a good one; Nội vụ phủ refills (fillStaff) at the end. Her: send them off with silver,
    keep one, or let them go. */
-/* mãn hạn = the j42 rule she meets as a maid: at BAL.srvAge.ask Nội vụ phủ asks her to leave; a chưởng sự (rk >= 3) may stay as ma ma.
-   (srvAge.out 30 was never reached in a live household: NPC maids turn over or rise to rk 3 first — world-ret-phong r1 bot, 0 in 2700 tuần.) */
-const aged=s=>s&&s.role==="maid"&&(s.age||0)>=BAL.srvAge.ask&&!s.eid&&!s.coop&&!((s.rk||0)>=3)&&s!==S.maid;
+/* mãn hạn = the j42 rule she meets as a maid: at BAL.srvAge.ask Nội vụ phủ asks her to leave; a chưởng sự (rk >= BAL.srvRk.cs) may stay as ma ma.
+   (srvAge.out 30 was never reached in a live household: NPC maids turn over or rise to chưởng sự first — world-ret-phong r1 bot, 0 in 2700 tuần.) */
+const aged=s=>s&&s.role==="maid"&&(s.age||0)>=BAL.srvAge.ask&&!s.eid&&!s.coop&&!((s.rk||0)>=BAL.srvRk.cs)&&s!==S.maid;
 /* ONE pool for every phóng cung opener and for the release itself: her household + the living NPC households not in lãnh cung
    (a dead or cold-palace household is never counted, so the gate never opens an empty release). */
 const phongHH=()=>liveR();/* liveRivals: alive and not in lãnh cung */

@@ -24,7 +24,7 @@ function renderStage(){const P=placeOf(S.place);try{if(S.visit&&typeof stageCapF
  $("popw").innerHTML=pw;kitFix($("popw"))}
 function rvButtons(v,i){const dis=!can(2)||!v.alive||v.out||S.dead;const b=(k,extra)=>{const a=ACT[k];if(!a||(a.kid&&!a.ok(S,v)))return"";const ok=a.ok(S,v),o=a.o?actOdds(S,v,k):null;
   return `<button data-r="${i}" data-a="${k}" ${dis||!ok?"disabled":""}>${k==="poison"||k==="kpoison"?ic("doc",14):""}${a.n}<small>${[o!=null&&ok?word(oddsCl(o))+lotTag(ACTDOM[k]):"",a.xw&&ok?a.xw(S,v):"",fmt(a.c),!ok&&a.x?a.x:ok&&a.x?a.x:""].filter(Boolean).join(" · ")||"không tốn"}</small></button>`};
- if(sameHouse(S,v))return `<p class="past">Cùng ${houseName(v)} với ngươi: không thể lấy lòng hay ra tay.</p>`;let h=`<p class="past" style="margin:2px 0">${together(S,v)?"Đang cùng chỗ với nàng":`Không cùng chỗ: phải sai người đi (khó hơn; việc hại: kẻ đi bị bắt, khai ra ngươi: ${chanceW(confessRisk(bestSent(S)))})`}</p><div class="rbtn">${["spy","ally","gift","rumor","bribe","block","frame","poison","accuse","vp","plant","musk","catswap","ksab","kpoison","pond","kframe","takeaway"].map(k=>b(k)).join("")}</div>`;
+ if(sameHouse(S,v))return `<p class="past">Cùng ${houseCung(v)} với ngươi: không thể lấy lòng hay ra tay.</p>`;let h=`<p class="past" style="margin:2px 0">${together(S,v)?"Đang cùng chỗ với nàng":`Không cùng chỗ: phải sai người đi (khó hơn; việc hại: kẻ đi bị bắt, khai ra ngươi: ${chanceW(confessRisk(bestSent(S)))})`}</p><div class="rbtn">${["spy","ally","gift","rumor","bribe","block","frame","poison","accuse","vp","plant","musk","catswap","ksab","kpoison","pond","kframe","takeaway"].map(k=>b(k)).join("")}</div>`;
  if(S.rank>=7)h+=`<div class="rbtn"><button data-e="${i}" data-k="judge" ${dis||evG(S,v)<BAL.ag.ev.judge?"disabled":""}>Xử tội<small>${evG(S,v)>=BAL.ag.ev.judge?"theo chứng cứ":`cần ${BAL.ag.ev.judge} chứng cứ`}</small></button><button data-e="${i}" data-k="conf" ${dis?"disabled":""}>Tịch thu trang sức<small>nàng thù -20</small></button><button data-e="${i}" data-k="reward" ${dis||S.bac<-BAL.tw.reward.bac?"disabled":""}>Ban thưởng<small>Bạc ${BAL.tw.reward.bac} · thiện cảm +20</small></button>${v.confined?`<button data-e="${i}" data-k="pardon" ${dis?"disabled":""}>Ân xá<small>hết cấm túc</small></button>`:""}</div>`;
  return h}
 /* KIT TAB MODE (design-scale p2): every .game class that depends on the open tab. Reset before EVERY panel render; the renderer of the open
@@ -72,7 +72,7 @@ function deser(d){trMigrate(d);rivals=d.R;rid=d.rid;S=d.S;S.origin=originByKey(d
  for(const k in S)if(k!=="kids")S[k]=fix(S[k]);
  tab=d.tab||"act";used=d.used||0;popIdx=null;popMsg="";
  const vk=S.visit&&S.visit.k;if(d.v<3||!vk||vk==="home"||placeOf(vk).k!==vk||!Array.isArray(S.visit.people)){S.visit={k:"home",people:homePeople(),talked:false};S.place="home"}else S.place=vk;
- if(d.v<3)S.mg=null;if(d.v<5){used=0;S.buoi=0}normAll();Q=deserQ(d.P||[])}
+ if(d.v<3)S.mg=null;if(d.v<5){used=0;S.buoi=0}try{srvLad6()}catch(e){console.error(e)}/* maid-ladder-6: 5-rung save → 6 rungs (j14) */normAll();Q=deserQ(d.P||[])}
 function save(){if(!S||quiet)return;try{if(S.dead)localStorage.removeItem(SK(SLOT));else localStorage.setItem(SK(SLOT),JSON.stringify(ser()));localStorage.setItem("hclh-slot",String(SLOT))}catch(e){}}
 function loadSlot(n){try{const d=JSON.parse(localStorage.getItem(SK(n))||"null");if(d&&d.v===2)d.P=[];/* v2: no pending choices; v2/v3 get items, stat blocks, records via normAll */
  return d&&d.v>=2&&d.v<=6?d:null}catch(e){return null}}

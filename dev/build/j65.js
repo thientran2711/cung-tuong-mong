@@ -242,7 +242,7 @@ const rp0=renderPanel;renderPanel=function(){const r=rp0.apply(this,arguments);t
  try{const p0=popCard;popCard=function(){return FACT(p0.apply(this,arguments))}}catch(e){}
  try{const l0=log;log=function(h){return l0.call(this,FACT(h))}}catch(e){}
  /* act buttons: the same note never twice in one button */
- function dedupeBtns(){document.querySelectorAll("button small").forEach(sm=>{const seen=new Set();sm.querySelectorAll(".ef").forEach(e=>{const t=T(e.textContent);if(!t)return;if(seen.has(t)){const p=e.previousElementSibling;if(p&&p.classList.contains("ksep"))p.remove();e.remove()}else seen.add(t)})})}
+ function dedupeBtns(){document.querySelectorAll("button small").forEach(sm=>{const seen=new Set();sm.querySelectorAll(".ef:not(.kdup)").forEach(e=>{if(e.closest(".kdup0"))return;const t=T(e.textContent);/* review/odds-meter-back: a kit option card's .kdup chips are its Tốn / Được copies of folded rows (kitOptFinal, KIT 6.2) — on purpose; removing the folded original emptied the Tốn row on the next pass */if(!t)return;if(seen.has(t)){const p=e.previousElementSibling;if(p&&p.classList.contains("ksep"))p.remove();e.remove()}else seen.add(t)})})}
  const W=o=>function(){const r=o.apply(this,arguments);try{dedupeBtns()}catch(e){}return r};
  try{renderPanel=W(renderPanel)}catch(e){}try{renderStage=W(renderStage)}catch(e){}try{showModal=W(showModal)}catch(e){}
 })();
