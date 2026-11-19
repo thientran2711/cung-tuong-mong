@@ -571,7 +571,9 @@ function kszLiveLay3(dlg,K){const X=dlg.__ksz3;if(!X)return;const V=KIT_SIZE.v3,
  let left="",ev=true;if(!X.who){left=kszPic3(X.src,pres==="one"?"k3main k3mpic":"k3main k3mpic k3fill");ev=false}/* KIT 84c person-less frame (place card): its picture is the left main picture; fills the column in fig sizes */else if(pres==="one"){if(foc==="event"){left=kszPic3(X.src,"k3main k3mpic");ev=false}else left=X.who?kszPor3(X.who):""}else left=X.who?kszFigHtml(X.who):"";
  if(left)body.insertAdjacentHTML("afterbegin",left);if(ev&&X.src)right.insertAdjacentHTML("afterbegin",kszPic3(X.src,"k3ev"));
  if(X.opts){if(pres==="one"||nar)X.mb.appendChild(X.opts);else right.appendChild(X.opts);/* narrow: option cards BELOW the figure row, full width; else kit-option-rows r2: stack label over value when the column is too narrow */const bs=[...X.opts.querySelectorAll(":scope>button")],w=X.opts.clientWidth;X.opts.classList.remove("kszstk")}
- body.querySelectorAll("img").forEach(im=>{if(!im.complete)im.addEventListener("load",()=>kszLiveRepick3(dlg),{once:true})});
+ /* KIT 56.19: an option card's picture sits in its fixed kit box (.kaart, KIT_OPT tier sizes), so its late (lazy) load changes no frame size and must not re-pick
+    the frame: scrolling the list revealed lazy card pictures, their load re-picked the frame in the middle of her wheel and the wheel was lost */
+ body.querySelectorAll("img").forEach(im=>{if(!im.complete&&!im.closest(".opts"))im.addEventListener("load",()=>kszLiveRepick3(dlg),{once:true})});
  right.querySelectorAll(":scope>.k3ev img").forEach(im=>{if(!im.complete)im.addEventListener("load",()=>kitFrameApplyLive3(dlg),{once:true})});
  kitFrameApplyLive3(dlg)}
 /* NARROW T3 (owner 17/11, 412x1058 Fold cover / 390x844 phone): at a frame width where even the smallest figure column (the M figure column) would leave the right column
