@@ -104,7 +104,7 @@ function errCss(){if(document.getElementById("kerr-css"))return;const s=document
 .kmerr-fig img{display:block;width:100%;height:100%;object-fit:contain;transform-origin:50% 100%;animation:kmerrbob .32s ease-in-out infinite}
 @keyframes kmerrbob{0%,100%{transform:translateY(0) rotate(-.8deg)}50%{transform:translateY(-6px) rotate(.8deg)}}
 .kmerr-lay .kmerr-slot{position:absolute;transform:translateX(-50%);white-space:nowrap;max-width:92%}
-.kmerr-lay i.kmerr-bang{position:absolute;margin:0;pointer-events:auto;cursor:pointer}/* the kit yellow round «!» (.khap, KIT §78.x) above her head */
+.kmerr-lay i.kmerr-bang{position:absolute;margin:0;pointer-events:auto;cursor:pointer}/* the kit head marker (.khead yellow speech bubble, KIT §78.z; fallback the .khap «!» disc) above her head */
 `;document.head.appendChild(s)}
 function errTok(p){const tk=document.getElementById("tokens");if(!tk||!p)return null;return[...tk.querySelectorAll(".tok.fig")].find(x=>{const g=x.querySelector(".tag");return g&&g.textContent.includes(p.name)&&x.offsetParent!==null})||null}
 /* KIT RULE «runner always drawn» (kitErrandSpot): where a person with no token in view walks from / to: the left slot of the stage on the kit floor line, at the kit figure height.
@@ -143,9 +143,9 @@ function errSync(){if(!S||S.dead||ER.syncing)return;ER.syncing=1;try{
   const img=tok.querySelector(".figimg")||tok.querySelector("img");const r=(img||tok).getBoundingClientRect();const cx=(r.left+r.width/2-sr.left)/sc;
   if(open){const c=document.createElement("span");c.className="kchip n kmerr-slot";c.textContent=errWord(t.k);c.style.left=cx+"px";c.style.top=((r.top+r.height*.45-sr.top)/sc)+"px";lay.appendChild(c)}
   else{/* the kit yellow round «!» (kitHapHtml = the Dư đồ mark) ABOVE HER HEAD, never on the emotion chip beside it (owner OD 18/11 ~22:10Z) */
-   const w=document.createElement("span");w.innerHTML=typeof kitHapHtml==="function"?kitHapHtml(`${t.nm} đã về: có tin báo`,"button"):"";const c=w.firstChild;if(!c)continue;c.classList.add("kmerr-bang");c.setAttribute("tabindex","0");
+   const w=document.createElement("span");w.innerHTML=typeof kitHeadMarkHtml==="function"?kitHeadMarkHtml(`${t.nm} đã về: có tin báo`,"button","on"):"";/* KIT §78.z: the yellow speech bubble head marker (owner OD 19/11 ~03:05Z) */const c=w.firstChild;if(!c)continue;c.classList.add("kmerr-bang");c.setAttribute("tabindex","0");
    /* KIT §78.y: ON the sex line of the stage (jmark kitBadgeAt: women = standard woman head top − gap, men = standard man head top − gap), on the figure's centre line — level with «ta ở đây» and with every other mark of that sex, never her own head / crown */
-   const hh=c.offsetHeight||19,ww=c.offsetWidth||19;const P=typeof kitBadgeAt==="function"&&img?kitBadgeAt(st,img,"hap",ww,hh):null;if(!P)continue;c.dataset.line=P.sex;
+   const hpx=c.classList.contains("kfb")?19:((window.KIT_HEADMK||{}).px||24);const hh=c.offsetHeight||hpx,ww=c.offsetWidth||hpx;const P=typeof kitBadgeAt==="function"&&img?kitBadgeAt(st,img,"hap",ww,hh):null;if(!P)continue;c.dataset.line=P.sex;
    c.style.left=((P.left-sr.left)/sc)+"px";c.style.top=((P.top-sr.top)/sc)+"px";
    const go=e=>{e.preventDefault();e.stopPropagation();errOpen();setTimeout(errSync,60)};c.addEventListener("click",go);c.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" ")go(e)});lay.appendChild(c)}}
  /* a person whose task is over and read: nobody keeps her hidden */
