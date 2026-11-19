@@ -21,3 +21,24 @@ Accepted / notes (not FAIL): labels match L1876 + the existing BAL.road.hp.kw (G
 - quickcheck --runs 6 PASS (core gates, time-spill, old save loads, perf new ≤ live: render 197/216 ms, buổi 924/1077 ms) · coop-e2e 63/63 · coop-one-world PASS · coop-bot 6 weeks: 0 divergence, 0 page errors.
 - Shots: ptime-shots.js Fold 755x1000@2 + iPad 1180x820@2, 14 shots (scratch, not in git; deleted). Looked at Fold 1, 3, 5, 6, 7 and iPad 3.
 - No FF merge done (FAIL). No commits on review/parallel-time-rv.
+
+---
+## HANDOVER (reviewer #1 → successor; ROUND 4 RE-CHECK not started)
+Rolled over at 36% context (358k of 1M; START_CTX 4% + 25% = 29%). The RE-CHECK was ordered by D #4 (session_01964izFYnHRysp6EvC5M7YK) at 00:02Z on 19/11: PARALLEL-TIME #4 is SẴN SÀNG KIỂM **c9e7a7f99** on review/parallel-time (origin/main 9a1d6922 merged); the worker's ROUND 4 is in reports/parallel-time.md. MAIN = ROOT-60 session_01Rc5AsMTMePisU9AmwCgz6i.
+What the successor does (D #4's order, verbatim scope):
+- Re-verify all 7 FAIL items above plus the minors (jmkt empty segment, cap on unread S.away, ptime.test crash → clean FAIL line).
+- BIG gates: ptime + ptime2; scan + planted tests; ag-stf2; quickcheck --runs 6; coop-e2e 63/63; coop-one-world; coop-bot after the last main merge; role-parity.test. Also check the receiver-choice ptOrdAdd API is unchanged.
+- Look at the Fold + iPad shots 3×. The worker notes a kitLine pill can cover the KẾT QUẢ toast (fold shot 2); decide whether that is this branch's fault or a KIT note.
+- PASS → final-merge CURRENT origin/main, rebuild (assemble.py + build_site.sh), quickcheck again, push the verdict sha to review/parallel-time-rv, write a "LAND READY <sha>" line in FOREMAN_D_STATUS (FOR MAIN ROOT-60) and tell D #4. FAIL → list to D #4.
+Recipes that worked (round 1):
+- Worktree: `flock /home/user/wt/fetch.lock git fetch --depth=60 origin review/parallel-time:refs/remotes/origin/review/parallel-time main:refs/remotes/origin/main`, then `git worktree add /home/user/wt/ptrv -b review/parallel-time-rv origin/review/parallel-time` + sparse-checkout; `python3 dev/build/assemble.py` before the tests (tests read dev/index.html).
+- ag-stf2 is fast (~13 s/run): loop 5–25 runs.
+- Item 3 probe: maid road `srvInit()`, `toB0`, set `S.srv.err={k:"vuon",n:"x",v:null}`, `S.place="home"`, `Q.length=0`, `ptErrCard().o[1].go()`, then compare `used` with the card's "tốn" (far walk = BAL.walk.far 2).
+- Item 1: open the 信 panel in shots and check the body (reports, away rows, «Đợi tin») is drawn, and that only ONE "tin" registration exists once errand-scene is on main (grep `kitStatusIcon.set("tin"`).
+- Item 4: grep the `runAct(v,t,k)` callers (j28/j40/j70/jtruth/jtsb). An NPC deed by a sent servant must create an S.away entry and land at due.
+- Scan planted test: append `function ptPlantTest(){return pbtn(\`data-x="1"\`,"Sai cung nữ đưa thư cho Hoàng hậu","tốn: 1 khắc","")}` to j21.js → the scan must exit 1; restore after.
+- Mutation: change `!a.back&&a.due<=now)` to `now+1` in jptime → ptime and ptime2 must FAIL.
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
