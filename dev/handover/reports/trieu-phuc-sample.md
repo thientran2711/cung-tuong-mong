@@ -320,3 +320,38 @@ OWNER LƯỢT 229 on triều phục (verbatim: FIGURE_GATE "OWNER LƯỢT 229", 
    - r14 used three different pose systems (spec5 lively t1–t5, HH B calm t6–t8, raw item tables): one common template is wanted.
 7. Hair (high updo, r14 TRIEU_HAIR) and the embroidery grouping for t1–t7: no owner comment in Lượt 229.
 POINTERS: approved forms FIGURE_GATE A0 table; HH B = `build.py c06 v0`; Nữ đế A = `build.py c06 v0 --state nude --spec5pose --nudeopt A`; live Nữ quan = img/hd/fig-maid-m37-tm4-a18.webp; r14 sheets https://ctm-img.victoria-tntt.workers.dev/img/_review/trieu-phuc/r14/; rule 0 tools (--log/--refs/--log-fill/--verify) as §20. LEDGER NOTE: full-file `--verify` crashes on ledger lines without "cmd" (kind/note lines, ~03:40Z); verify your own lines from a filtered copy. BRANCH NOTE: the remote branch was force-pushed ~03:5xZ (r14 content kept, commit hashes rewritten); fetch and reset before working, never rebase old local commits.
+
+## 22. F3c (successor of F3b, child of Foreman C ROOT-40, 19/11) — colour comparison + builder r15 text (NO gen; waiting for ROOT-40 GO)
+START_CTX ~5 % of 1M (estimate; get_session reads 0). Rollover at ~30 %, ceiling 60 %.
+PRIORITY #1 CHECK ('trieu phuc'): OD 0 | ledger 0 | claims 0 | main 0 | review/* 0 | archive 0
+### (1) COLOUR: live Nữ quan m37 tm4 vs r14 (no gen)
+Files: https://ctm-img.victoria-tntt.workers.dev/img/_review/trieu-phuc/r15/colour_tm4_vs_r14_t1t5t8.jpg (tm4 | t1 | t5 | t8) and .../r15/colour_patch_tm4_t1_t5_t8.jpg (plain-cloth close-ups).
+Measured (red pixels, same mask on every file):
+| file | median | hue | sat | value median | value p10–p90 (spread) | top light (lum p95) |
+|---|---|---|---|---|---|---|
+| live tm4 | #9A4640 | 4.1° | 0.58 | 0.60 | 0.47–0.78 (0.31) | 155 |
+| r14 t1 | #99463D | 5.9° | 0.60 | 0.60 | 0.49–0.66 (0.18) | 115 |
+| r14 t2 | #9E473F | 5.3° | 0.60 | 0.62 | 0.50–0.71 (0.21) | 123 |
+| r14 t5 | #A04741 | 3.7° | 0.60 | 0.63 | 0.49–0.73 (0.24) | 150 |
+| r14 t7 | #AE5143 | 7.8° | 0.61 | 0.68 | 0.54–0.88 (0.35) | 178 |
+| r14 t8 | red only on sleeves/stoles; 54 % of the figure is yellow | | | | | |
+What really differs (the hue and the median are the same, so the hex was never the problem):
+1. CLOTH, not colour. tm4's red has a woven self-pattern (a tone-on-tone damask/velvet look) with a soft pile sheen. Lit folds go much lighter and shadows much deeper (value spread 0.31). r14 t1/t2 are flat matte crepe (spread 0.18–0.21, no highlight), so the same hex reads duller, flatter and more brown.
+2. TRIMS change the overall colour. On tm4 the red covers 67 % of the figure, with only narrow dusty-rose flower bands, a cream underskirt and almost no gold (0 %). r14 puts big rank-colour panels on top (ivory stoles on t1, lilac stoles and a sheer lilac stole on t5, pink trims on t4/t5 = 8–16 %) and more gold. So the eye reads "red + ivory/lilac/gold", not "the Nữ quan red".
+3. The hue is a hair warmer: 5–6° on t1–t4 vs 4.1° on tm4. t6/t7 are lighter and more orange (#A64C3F / #AE5143). t8 is mostly yellow (from the HH yellow-dominant rule), so she cannot see "the triều phục red" on it.
+4. Embroidery motifs on tm4 are big, framed scenes (a crane square on the chest, a peony on the skirt). r14's are small groups. This is not about colour, but it changes how the red field looks.
+Proposal, needs a GO (no new colour words were added in r15): (a) add the live tm4 picture as a colour/cloth reference image for triều phục. This is a REFERENCES change, so it needs the owner's GO. Or (b) copy tm4's own cloth wording if its original prompt is found (it is not in the repo: no mjobs.py/m37-tm4 prompt stored). Or (c) make the court panels/trims the same red family (dusty-rose bands) instead of contrasting rank colours. That is a design change, so it is for her to decide.
+### (2)(3)(4) BUILDER r15 (build.py, --trieu only; md5 of c06 v0, c25 v0, --t7, --low 1/3/5/6, --low 3 --spec5pose, --age a51, --state nude A, --bdq 1, m09 mama, m37 tm4, c06 v0 --refs = byte-identical before/after)
+- ANGLE LAW (all 8): PRE "face clearly visible, body and face frontal, standing squarely facing the viewer, no turn." → "face clearly visible, 3/4 or frontal view." (the approved HH stored prompt, goldenC2/t8_v0_c06.txt). The hands clause ", body and face frontal, standing squarely facing the viewer, no turn" → per-rank angle:
+  t1 NF right · t2 TQ left · t3 MID right · t4 NF left · t5 TQ right · t6 MID left · t7 TQ left · t8 NF right
+  NF = "body turned slightly three-quarters to the right|left" (approved HH words); TQ = "three-quarter view, her body and face turned the same way toward the …, never sideways" ("three-quarter view" = old live prompts dev/figwork/spec.py; the "same way … never sideways" guard is NEW words); MID = "body turned a little more than slightly, halfway between frontal and three-quarter view, toward the …" (NEW words, no approved source).
+- ONE TEMPLATE for t1–t7: spec5pose (lively poses on t1–t5 + its frontal words) removed from --trieu. Every rank now uses the same HH B pose block (_pose + rank item + its approved hand clause: --low N table t1–t6, --t7 table t7). r14's t2 walking/vase-by-cheek and t4 hairpin-raise poses are gone. That was a side effect of the one-template rule, not a guess at her t2/t4 faults (still to ask her).
+- t8 = `build.py c06 v0` output, unchanged except: the 2 angle phrases (as above) + ONE added block before " Pose:":
+  "TRIỀU PHỤC (formal court uniform) details on this same outfit: BOTH SLEEVES (the arms of the robe, from the shoulder down to the cuff) and the collar band with its collar trims are the court red, <TRIEU_MAIN> like #99443F, clearly red, with <deeper> like #893A37 in the linings; <TRIEU_PANELS with 'each in that court red'>; the cloud collar sits on a STIFF, SHORT, structured shoulder piece (cầu vai cứng) of gold brocade edged with pearls over each shoulder, curving up and slightly pointed outward; from its edge hangs a LONG pearl fringe, several pearl strings deep, down to the elbow or longer, at least as long as the Hoàng quý phi's."
+  Sources: cầu vai = NUDE_OPT A (approved Nữ đế A) + SH_OLD5 "curving up". Fringe = TRIEU_EDGE[7] "LONG … to the elbow" + "or longer, at least as long as the HQP's" (new words). Embroidery density = v0's own "far denser and richer" (TRIEU_COVER is not used on t8).
+QUESTIONS FOR ROOT-40 (blocking a clean t8):
+- Q1 BASE. Today's `build.py c06 v0` output is NOT the approved HH picture's stored prompt. goldenC2/t8_v0_c06.txt (yellow-dominant, ruyi, slight 3/4 turn) matches the approved picture c06_a18_t8_v0 on the vsHH sheet. The v0 output differs from it in: frontal words (3d2), item = gold FLUTE held across both hands (approved = gold RUYI upright, other hand on the sash), "image 2 (her second reference)" vs "image 1", + the hands-interact clause + the image-3/background lines. Should t8 use goldenC2 as the base (ref number adjusted to today's order), which gives back the ruyi + the approved angle?
+- Q2. v0 keeps "golden yellow silk mixed with coral red … her ORIGINAL robe colour coral red #D5745E" while the added block says sleeves/collar in #99443F. It is the only way to add without editing, but the two reds may fight. OK?
+- Q3. The colour proposals (a)/(b)/(c) above.
+- Q4. Ask her what is wrong on t2/t4 (not guessed).
+Prompts: `python3 dev/art/t8-prompt-B/build.py c06 v0 --trieu N` (N=1..8). NO gen made; no ledger lines.

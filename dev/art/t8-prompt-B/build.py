@@ -1104,7 +1104,38 @@ def build_trieu(c,t,v="v0"):
     s+=" IGNORE the style reference image's background completely: the background is completely transparent with NOTHING behind or around her: no backdrop, no parchment, no painted flowers or branches, no smoke, no haze, no glow, no stain."
     s+=" The headdress is worn on the head as ONE WHOLE crown in a single piece with its tasselled hairpins on both sides, never loose casual hairpins or sticks."
     s+=END
-    return spec5pose(s,c,t,force=TRIEU_S5[t]) if t<=5 else s
+    return trieu_angle(s,t)   # ROUND 15 (F3c): no spec5pose on any rank (one pose template = HH B pose block for all 8); angle law instead of the frontal words
+# ---------- ROUND 15 (F3c, owner Lượt 229 + ROOT-40 rules A/E): ANGLE LAW + t8 = approved HH prompt + ONLY triều phục sentences (--trieu only; every other output byte-identical) ----------
+# Angle words come from approved / live prompts where they exist: PRE "face clearly visible, 3/4 or frontal view." and hands "body turned slightly three-quarters to the right" = goldenC2/t8_v0_c06.txt (the approved HH picture's stored prompt);
+# "three-quarter view" = the old live figure prompts (dev/figwork/spec.py). The MID wording and the "never sideways" guard are NEW words (no approved source).
+TRIEU_FRONT_PRE="face clearly visible, body and face frontal, standing squarely facing the viewer, no turn."
+TRIEU_FRONT_HAND=", body and face frontal, standing squarely facing the viewer, no turn"
+TRIEU_ANGLE_PRE="face clearly visible, 3/4 or frontal view."
+_TA_NF="body turned slightly three-quarters to the {s}"                      # near-frontal (approved HH words)
+_TA_TQ="three-quarter view, her body and face turned the same way toward the {s}, never sideways"   # her 3/4 = live tm0 angle
+_TA_MID="body turned a little more than slightly, halfway between frontal and three-quarter view, toward the {s}"   # in-between (NEW words)
+TRIEU_ANGLE={1:_TA_NF.format(s="right"),2:_TA_TQ.format(s="left"),3:_TA_MID.format(s="right"),4:_TA_NF.format(s="left"),5:_TA_TQ.format(s="right"),6:_TA_MID.format(s="left"),7:_TA_TQ.format(s="left"),8:_TA_NF.format(s="right")}
+def trieu_angle(s,t):
+    assert s.count(TRIEU_FRONT_PRE)==1, "PRE frontal words not found once"
+    s=s.replace(TRIEU_FRONT_PRE,TRIEU_ANGLE_PRE)   # first: the PRE phrase contains the hand phrase
+    assert s.count(TRIEU_FRONT_HAND)==1, "hand frontal words not found once"
+    s=s.replace(TRIEU_FRONT_HAND,", "+TRIEU_ANGLE[t])
+    assert "body and face frontal" not in s and "squarely" not in s, "frontal words left"
+    return s
+# t8 triều phục details, ADDED as one block before " Pose:" in the `build.py c06 v0` text; nothing in that text is edited except the two angle phrases above.
+# cầu vai = NUDE_OPT A wording (approved Nữ đế A) + SH_OLD5 "curving up"; fringe = TRIEU_EDGE[7] (t7 "LONG ... to the elbow") made at least as long; panels = TRIEU_PANELS with the court red.
+def trieu_t8_add():
+    mc,mh,dc,dh=TRIEU_MAIN
+    return (" TRIỀU PHỤC (formal court uniform) details on this same outfit: BOTH SLEEVES (the arms of the robe, from the shoulder down to the cuff) and the collar band with its collar trims are the court red, "
+            f"{mc} like {mh}, clearly red, with {dc} like {dh} in the linings; "
+            +TRIEU_PANELS.replace("each in the rank colour","each in that court red")
+            +"the cloud collar sits on a STIFF, SHORT, structured shoulder piece (cầu vai cứng) of gold brocade edged with pearls over each shoulder, curving up and slightly pointed outward; "
+            "from its edge hangs a LONG pearl fringe, several pearl strings deep, down to the elbow or longer, at least as long as the Hoàng quý phi's.")
+def build_trieu8(c,v="v0"):
+    s=build(c,v,False)
+    a=s.index(" Pose: calm standing pose;")
+    s=s[:a]+trieu_t8_add()+s[a:]
+    return trieu_angle(s,8)
 TRIEU_S5={1:5,2:0,3:1,4:3,5:4}   # spec5 index per rank (c06 'kieungao': 5 skirt-hem stair step, 0 walking + item by the cheek, 1 walking forward sleeves flowing, 3 adjusting a hairpin, 4 breeze lifts the stole); 2 = look back, never
 # ---------- SPEC5 POSES (owner 18/11 ~21:55Z, FIGURE_GATE D.3a): flag --spec5pose ----------
 # The ORIGINAL pose system that made the live 32 consorts = dev/figwork/spec5.py POSES[personality][(i+t-1)%6] (+ suffix ", poised" t5-t6, ", with stately grace" t7-t8),
@@ -1335,7 +1366,7 @@ if __name__=="__main__":
     TRIEUN=None
     if "--trieu" in sys.argv: i=sys.argv.index("--trieu"); TRIEUN=int(sys.argv[i+1]); sys.argv[i:i+2]=["--trieu"]
     a=[x for x in sys.argv[1:] if not x.startswith("--")]
-    _o=build_bdq(BDQ) if BDQ else build_state(a[0],STATE,a[1] if len(a)>1 else "v0") if STATE else build_trieu(a[0],TRIEUN,a[1] if len(a)>1 else "v0") if "--trieu" in sys.argv else build_low(a[0],LOWN,a[1] if len(a)>1 else "v0") if "--low" in sys.argv else build_t7(a[0],a[1] if len(a)>1 else "v0") if "--t7" in sys.argv else build(a[0],a[1] if len(a)>1 else "v0","--golden" in sys.argv)
+    _o=build_bdq(BDQ) if BDQ else build_state(a[0],STATE,a[1] if len(a)>1 else "v0") if STATE else (build_trieu8(a[0],a[1] if len(a)>1 else "v0") if TRIEUN==8 else build_trieu(a[0],TRIEUN,a[1] if len(a)>1 else "v0")) if "--trieu" in sys.argv else build_low(a[0],LOWN,a[1] if len(a)>1 else "v0") if "--low" in sys.argv else build_t7(a[0],a[1] if len(a)>1 else "v0") if "--t7" in sys.argv else build(a[0],a[1] if len(a)>1 else "v0","--golden" in sys.argv)
     if "--spec5pose" in sys.argv:
         _t=LOWN if "--low" in sys.argv else 7 if "--t7" in sys.argv else int(STATE[2:]) if STATE and STATE[:2]=="ty" else max(1,int(STATE[2])) if STATE and re.fullmatch(r"tm[0-4]",STATE) else 1 if STATE=="cold" else 8   # N5d item 4: trung y tN poses at rank N, cold at the lowest
         _o=spec5pose(_o,a[0],_t)
