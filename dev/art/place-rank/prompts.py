@@ -346,3 +346,54 @@ H7REF = {'truong-xuan-cung-hqp-ngu': 's7I0dD0l8e', 'truong-xuan-cung-hqp': 'rgXn
 assert all('{' not in v for v in out7.values())
 json.dump(out7, open(os.path.join(D, 'prompts_v7.json'), 'w'), ensure_ascii=False, indent=1)
 print('v7', {k: len(v) for k, v in out7.items()})
+
+# ---- v8 (owner Lượt 584 + 587 on sheet C v7, relayed by ROOT-51; rule L14): layouts KEEP (image 3 = each room's own v7/v6 picture), colours only,
+#      + Khôn Ninh reception: much higher ceiling so people look small in the hall.
+# HQP = ORANGE + yellow (bedsheet orange + yellow, never red + yellow), LESS yellow than v7; HH = yellow + more RED.
+COL8 = (" COLOURS (owner Lượt 584, rank colours: Hoàng quý phi = ORANGE + yellow): warm bright orange is the main colour of the silks, with golden yellow "
+        "as its partner: bright orange silk bedding and seat brocades with golden yellow borders and embroidery, orange silk curtains lined with golden "
+        "yellow, orange and gold tassels; yellow clearly LESS than in an Empress's room (only borders, linings, embroidery and gilt); no red silks, no "
+        "red bedding; the wood stays dark zitan with gold lacquer. Phoenixes allowed: a pair of phoenixes carved and gilded or embroidered among "
+        "magnolias on the bed, the screen and the cushions, and a pair of small gilded phoenix figures.")
+KEEP8 = (" Keep the same room, the same arrangement and the same distance as image 3 (this same room as drawn before): the same walls, windows, "
+         "furniture places and size; change only the colours as written here.")
+out8 = {}
+for k in ('truong-xuan-cung-hqp-ngu', 'truong-xuan-cung-hqp'):
+    q = out7[k].replace(COL7B, COL8).replace(KEEP7, KEEP8)
+    for a, b in [('golden yellow silk curtains lined with ruby red tied back inside', 'bright orange silk curtains lined with golden yellow tied back inside'),
+                 ('golden yellow brocade bedding embroidered with', 'bright orange silk brocade bedding with golden yellow borders, embroidered with'),
+                 ('golden yellow brocade cushions', 'bright orange brocade cushions with golden yellow borders'),
+                 ('golden yellow cushions', 'bright orange cushions with golden yellow borders'),
+                 ('golden yellow sheer curtains tied back with ruby red tassels', 'bright orange sheer curtains tied back with golden tassels'),
+                 ('lanterns with ruby red tassels', 'lanterns with orange tassels'), ('a ruby red robe', 'an orange silk robe')]:
+        q = q.replace(a, b)
+    assert COL8 in q and KEEP8 in q and 'ruby' not in q and 'golden yellow silk curtains' not in q, k
+    out8[k] = q
+# HH bedroom: more RED (red bedsheet). Base = v6 (the current picture YMlHuhtWeC), floor sentence -> keep same view.
+RED8 = (" MORE RED (owner Lượt 584): crimson red is as strong as the imperial yellow: the bedding is rich crimson red silk brocade embroidered with golden "
+        "phoenixes and peonies, with imperial yellow borders and yellow and red cushions; red silk linings, red cushions on the stools, red and gold tassels, "
+        "red lacquer pillars; the yellow stays in the gauze curtains, the gilt and the embroidery.")
+hb = out6['khon-ninh-cung-ngu']
+FS6 = hb[hb.index(' FLOOR SHARE (owner Lượt 520):'):hb.index(' FLOOR: ')]
+hb8 = hb.replace('imperial yellow silk brocade bedding embroidered with phoenixes and peonies with crimson red borders and red silk cushions',
+                 'rich crimson red silk brocade bedding embroidered with golden phoenixes and peonies, with imperial yellow borders and red and yellow silk cushions')
+assert hb8 != hb
+out8['khon-ninh-cung-ngu'] = hb8.replace(FS6, RED8 + KEEP8)
+# HH reception: same layout (aFGyB4ZfSh), more red, MUCH higher hall so people look small in it.
+kr = out7['khon-ninh-cung']
+LN7 = kr[kr.index(' LAYOUT NUMBERS (owner Lượt 477, 520):'):kr.index(' FLOOR: ')]
+HIGH8 = (" Keep the same hall and the same arrangement as image 3 (this same hall as drawn before: the plaque, the arch frame, the throne platform, the "
+         "screen, the fans and the two mirrored chair rows), but the hall is MUCH HIGHER and grander (owner Lượt 584: the ceiling was too low, people looked too "
+         "big for the room): seen from a little farther back, the red columns are very tall, the coffered ceiling is high above and fully visible at the top, "
+         "a large empty height of air between the top of the arch frame and the ceiling; everything in the hall is smaller in the picture than in image 3: the "
+         "armchair backs reach only about one fifth of the picture height, the throne platform is far back in the middle of the picture, so a standing woman "
+         "placed in front (about three quarters of the picture height tall) looks small in this vast hall. The open floor of the central aisle at the bottom "
+         "stays a strip of about one tenth of the picture height, nothing on it." +
+         " MORE RED (owner Lượt 584): crimson red as strong as the imperial yellow: crimson red silk cushions with yellow borders on the armchairs, crimson red "
+         "silk hangings and banners between the columns, red lacquer columns and beams, red and gold tassels; yellow stays on the throne, the screen, the fans, the curtains and the gilt.")
+out8['khon-ninh-cung'] = kr.replace(LN7, HIGH8).replace('carved gilded square-backed armchairs with imperial yellow cushions', 'carved gilded square-backed armchairs with crimson red cushions')
+assert HIGH8 in out8['khon-ninh-cung']
+H8REF = {'truong-xuan-cung-hqp-ngu': '9ZHI728NYZ', 'truong-xuan-cung-hqp': 'jUoWKaeLD0', 'khon-ninh-cung-ngu': 'YMlHuhtWeC', 'khon-ninh-cung': 'aFGyB4ZfSh'}
+assert all('{' not in v for v in out8.values())
+json.dump(out8, open(os.path.join(D, 'prompts_v8.json'), 'w'), ensure_ascii=False, indent=1)
+print('v8', {k: len(v) for k, v in out8.items()})
