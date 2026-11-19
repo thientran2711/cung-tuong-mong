@@ -22,7 +22,7 @@ agReg("consort","cx",(v,N,need)=>{const O=[];const X=BAL.ag.cx;
   const g=Object.assign({},D.need);const N2=k==="rest"?Object.assign({},N,{rest:N.rest||0}):N;const u=agcU(v,N2,D.o,g,D.c,A.tag);if(u>0)O.push({k:"cx:"+k,t:null,u,tag:A.tag,act:A.act,at:()=>A.at(v)})}
  return O});
 for(const k in AGCX)agRunReg("cx:"+k,(v,t,p)=>{const D=BAL.ag.cx[k];if(!agcCan(v,D.c))return"";agcPay(v,D.c);if(!agTry(odA(v,D.o)))return `${v.name} ${AGCX[k].act} nhưng chẳng được gì`;
- const w=Object.assign({},D.w);if(w.maid){if(v.maid&&v.maid.loyal!=null)v.maid.loyal=cl(v.maid.loyal+w.maid,0,100);delete w.maid}ap(v,w);return `${v.name} ${AGCX[k].act}`});
+ const w=Object.assign({},D.w);if(w.maid){if(v.maid&&v.maid.loyal!=null)v.maid.loyal=cl(v.maid.loyal+w.maid,0,100);delete w.maid}ap(v,w);/* candlelight study (jallot): the same rule as her deck */const L=typeof alLight==="function"?alLight(v,k):0;return `${v.name} ${AGCX[k].act}${L?" dưới ánh nến":""}`});
 /* study: Tự học / Học với thầy (the player's lesson; j85 npcStudyDo is the same rule for every NPC) */
 agReg("consort","study",(v,N,need)=>{if(need&&need!=="danh"&&need!=="duc")return[];if(typeof npcStudyDo!=="function")return[];const D=BAL.ag.cx.study;if((v.suc||0)<D.suc)return[];
  const u=agcU(v,N,100,need==="duc"?{duc:D.g}:{danh:D.g},{suc:-D.suc},"art");return u>0?[{k:"cx:study",t:null,u,tag:"art",act:"tự học cầm kỳ thi họa, tứ đức",at:()=>palaceOf(v)}]:[]});

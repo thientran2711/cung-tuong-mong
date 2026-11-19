@@ -1,6 +1,6 @@
 # Grand-ending catalogue (design data only). fields: id, name(<=4 words), group 1-10, variant T/H/A, dir O/Q/R/T, manner A/U/B, summit, lever
 G={1:"Quyền lực",2:"Chính trị",3:"Tình yêu",4:"Tình bạn",5:"Báo thù",6:"Con cái",7:"Gia tộc",8:"Tự do",9:"Tài nghệ",10:"Thiên hạ"}
-ID={"tt":"Con gái Tể tướng","dtq":"Con gái Đại tướng quân","muoi":"Con gái nhà buôn muối","cn":"Cung nữ được sủng hạnh","nc":"Công chúa hòa thân · Nam Chiếu","bd":"Công chúa hòa thân · Bắc Địch","td":"Con gái tội thần","ch":"Cháu gái Thái hậu","thd":"Con gái thầy đồ nghèo","cnv":"Cung nữ tuyển vào cung"}
+ID={"tt":"Con gái Tể tướng","dtq":"Con gái Đại tướng quân","muoi":"Con gái nhà buôn muối","cn":"Cung nữ được sủng hạnh","nc":"Công chúa hòa thân · Cao Ly","bd":"Công chúa hòa thân · Bắc Địch","td":"Con gái tội thần","ch":"Cháu gái Thái hậu","thd":"Con gái thầy đồ nghèo","cnv":"Cung nữ tuyển vào cung"}
 R=[
 ("tt_co","Quân cờ trong tay cha",[("Ngai vàng họ ngoại",1,"A","Q","U","NDE","clan"),("Hiền tướng hậu cung",2,"T","O","A","ADV","court"),("Buông cờ về núi",8,"T","R","B","FREE","father hills"),("Đại nghĩa diệt thân",7,"A","O","U","PURGE","clan")]),
 ("tt_oan","Phủ Tể tướng mắc oan",[("Thanh thiên hậu cung",5,"T","O","A","JUST","law"),("Máu trả máu",5,"A","Q","U","REV","clan"),("Nữ phán quan",9,"T","Q","B","OFFICE","law"),("Hoa nở ngoài cung",3,"T","T","B","FOLLOW","censor")]),
@@ -22,10 +22,10 @@ R=[
 ("nc_su","Sứ đoàn cố quốc",[("Cầu nối vạn dặm",10,"T","O","A","PEACE","envoys"),("Nữ sứ hai triều",9,"T","R","A","OFFICE","envoy"),("Sứ đoàn đẫm máu",5,"A","Q","U","REV","faction"),("Về nam theo sứ",3,"H","T","B","FOLLOW","envoy")]),
 ("nc_tuc","Người ngoại tộc",[("Vũ khúc truyền đời",9,"T","O","A","ART","dance"),("Thái hậu ngoại tộc",1,"T","Q","A","THH","son"),("Trả nhục ngàn lần",5,"A","Q","U","REV","scorn"),("Về với núi mây",8,"T","R","B","FREE","homeland")]),
 ("nc_vuong","Ngai vàng cố quốc",[("Nữ vương máu lạnh",1,"A","R","U","NV","army"),("Hai ngai một lòng",10,"T","O","A","PEACE","brother"),("Thôn tính cố quốc",2,"A","Q","U","ANNEX","court"),("Công chúa lưu vong",3,"H","T","B","FOLLOW","exiled prince")]),
-("bd_san","Mùa thu săn",[("Thống lĩnh ngự mã",9,"T","Q","A","OFFICE","horses"),("Tri kỷ lưng ngựa",3,"T","O","A","TK","riding"),("Mũi tên trường săn",5,"A","O","U","REV","hunt"),("Về với thảo nguyên",8,"T","R","B","FREE","horse")]),
-("bd_soi","Sói đầu đàn",[("Nữ Khả hãn",1,"H","R","U","NV","tribes"),("Lập em làm hãn",2,"T","O","A","KING","diplomacy"),("Sói già phải chết",5,"A","Q","U","REV","uncle"),("Con trai hai cõi",6,"H","Q","A","TM","son")]),
-("bd_tuyet","Năm tuyết trắng",[("Mẹ của thảo nguyên",10,"T","R","A","RELIEF","herds"),("Lương thảo đổi hòa",2,"T","O","A","PEACE","trade"),("Mở cửa ải bắc",10,"A","Q","U","BETRAY","border"),("Khúc ca tuyết trắng",9,"T","O","B","ART","song")]),
-("bd_hen","Lời thề bên đống đá",[("Lời thề trọn vẹn",3,"T","T","B","FOLLOW","betrothed"),("Chôn lời thề cũ",1,"A","Q","U","QP","oath"),("Nghĩa huynh biên ải",4,"T","O","A","SIS","betrothed"),("Đòi máu cho chàng",5,"A","R","U","WAR","tribes")]),
+("bd_san","Mã cầu và săn hổ",[("Thống lĩnh ngự mã",9,"T","Q","A","OFFICE","horses"),("Tri kỷ lưng ngựa",3,"T","O","A","TK","riding"),("Mũi tên trường săn",5,"A","O","U","REV","hunt"),("Theo đường tơ lụa",8,"T","R","B","FREE","horse")]),
+("bd_soi","Ngai vàng Tô Lận",[("Nữ vương Tô Lận",1,"H","R","U","NV","tribes"),("Lập em làm vua",2,"T","O","A","KING","diplomacy"),("Vương thúc phải chết",5,"A","Q","U","REV","uncle"),("Con trai hai cõi",6,"H","Q","A","TM","son")]),
+("bd_tuyet","Năm đoàn người chạy nạn",[("Mẹ người chạy nạn",10,"T","R","A","RELIEF","herds"),("Lương thảo đổi hòa",2,"T","O","A","PEACE","trade"),("Mở cửa Ngọc Môn",10,"A","Q","U","BETRAY","border"),("Khúc ca Nô Nhụ",9,"T","O","B","ART","song")]),
+("bd_hen","Lời thề trước lửa thánh",[("Lời thề trọn vẹn",3,"T","T","B","FOLLOW","betrothed"),("Dâng lửa lời thề",1,"A","Q","U","QP","oath"),("Nghĩa huynh đường xa",4,"T","O","A","SIS","betrothed"),("Đòi máu cho chàng",5,"A","R","U","WAR","tribes")]),
 ("td_an","Lật lại án cũ",[("Rửa oan chín họ",7,"T","O","A","CLAN","case"),("Chín họ đền tội",5,"A","Q","U","REV","case"),("Bút sử chép lại",9,"T","Q","A","OFFICE","history"),("Tro tàn trở về",8,"H","R","B","FREE","grave")]),
 ("td_ke","Kẻ đứng sau màn",[("Diệt tận gốc",5,"A","Q","U","REV","mastermind"),("Tha để thắng",5,"T","O","A","MERCY","mastermind"),("Mạng lưới bóng đêm",2,"A","O","U","SPY","network"),("Theo người cứu mạng",3,"H","T","B","FOLLOW","rescuer")]),
 ("td_song","Người em còn sống",[("Tướng môn trở lại",7,"T","O","A","CLAN","general house"),("Mở cổng thành đêm",1,"A","Q","U","KING","brother army"),("Chị em phiêu bạt",8,"T","R","B","FREE","brother"),("Thay em gánh tội",4,"H","O","B","SACRIFICE","brother")]),
@@ -66,10 +66,10 @@ OTHER={
 "Cầu nối vạn dặm":"Bán tin vạn dặm","Nữ sứ hai triều":"Nữ sứ hai lòng","Sứ đoàn đẫm máu":"Che chở sứ đoàn","Về nam theo sứ":"Trốn nam theo sứ",
 "Vũ khúc truyền đời":"Vũ khúc mê hồn","Thái hậu ngoại tộc":"Ngoại tộc chuyên quyền","Trả nhục ngàn lần":"Lấy đức rửa nhục","Về với núi mây":"Phóng hỏa về núi",
 "Nữ vương máu lạnh":"Nữ vương nhân từ","Hai ngai một lòng":"Hai ngai một chủ","Thôn tính cố quốc":"Hợp nhất hai cõi","Công chúa lưu vong":"Lưu vong phục thù",
-"Thống lĩnh ngự mã":"Ngự mã chuyên quyền","Tri kỷ lưng ngựa":"Lưng ngựa mưu sâu","Mũi tên trường săn":"Mũi tên cứu giá","Về với thảo nguyên":"Cướp ngựa về bắc",
-"Nữ Khả hãn":"Khả hãn sắt máu","Lập em làm hãn":"Dựng hãn bù nhìn","Sói già phải chết":"Bắt sói giao triều","Con trai hai cõi":"Con nắm hai cõi",
-"Mẹ của thảo nguyên":"Nữ chúa thảo nguyên","Lương thảo đổi hòa":"Lương thảo đổi đất","Mở cửa ải bắc":"Mở ải cứu người","Khúc ca tuyết trắng":"Khúc ca oán hận",
-"Lời thề trọn vẹn":"Đốt cầu theo chàng","Chôn lời thề cũ":"Gác lời thề cũ","Nghĩa huynh biên ải":"Lợi dụng nghĩa huynh","Đòi máu cho chàng":"Đòi công cho chàng",
+"Thống lĩnh ngự mã":"Ngự mã chuyên quyền","Tri kỷ lưng ngựa":"Lưng ngựa mưu sâu","Mũi tên trường săn":"Mũi tên cứu giá","Theo đường tơ lụa":"Cướp ngựa về tây",
+"Nữ vương Tô Lận":"Nữ vương sắt máu","Lập em làm vua":"Dựng vua bù nhìn","Vương thúc phải chết":"Bắt thúc giao triều","Con trai hai cõi":"Con nắm hai cõi",
+"Mẹ người chạy nạn":"Nữ chúa lưu vong","Lương thảo đổi hòa":"Lương thảo đổi đất","Mở cửa Ngọc Môn":"Mở ải cứu người","Khúc ca Nô Nhụ":"Khúc ca oán hận",
+"Lời thề trọn vẹn":"Đốt cầu theo chàng","Dâng lửa lời thề":"Gác lời thề cũ","Nghĩa huynh đường xa":"Lợi dụng nghĩa huynh","Đòi máu cho chàng":"Đòi công cho chàng",
 "Rửa oan chín họ":"Lật án đổ máu","Chín họ đền tội":"Xử án công minh","Bút sử chép lại":"Bút sử tùy tay","Tro tàn trở về":"Mang thù trở về",
 "Diệt tận gốc":"Nhổ gốc trả oan","Tha để thắng":"Tha để trói","Mạng lưới bóng đêm":"Mạng lưới che chở","Theo người cứu mạng":"Mượn người trốn án",
 "Tướng môn trở lại":"Tướng môn báo oán","Mở cổng thành đêm":"Mở cổng cứu giá","Chị em phiêu bạt":"Chị em lục lâm","Thay em gánh tội":"Đẩy tội cho người",

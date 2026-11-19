@@ -7,7 +7,7 @@
 usage: python3 dev/measure/bd-scan.py [files…]"""
 import re,sys
 FILES=sys.argv[1:] or ['dev/build/jrd_bd.js','dev/build/jrd_bd2.js']
-NAME={'lie':['Hô Diên Liệt'],'olac':['Ô Lặc'],'thatmoc':['Thát Mộc'],'bado':['Ba Đồ'],'tuyetcau':['Tuyết Câu'],'asnc':['A Sử Na Cát'],'phong':['Thác Bạt Phong','Phong'],'kd':[r'\{mh\}|(?<!là )Khả đôn(?! của kim trướng)']}
+NAME={'lie':['Hô Diên Liệt','Mi Hồ Lan'],'olac':['Ô Lặc','Nê Niết Sư'],'thatmoc':['Thát Mộc','Đạt Lỗ'],'bado':['Ba Đồ','Bạc Đồ'],'tuyetcau':['Tuyết Câu','Ngọc Câu'],'asnc':['A Sử Na Cát','A La Hám'],'phong':['Thác Bạt Phong','Mật Hồ Đạt','Phong'],'kd':[r'\{mh\}|(?<!là )Khả đôn(?! của kim trướng)|Vương hậu']}
 GUARD=re.compile(r'bdP\(|bdAlive\(|BDKD\(|bdWhere\(|badove|BDGATE\(|bdO\("nguatay"|RDQ\.bd|bd6b:|bdPh\(|RD_FL\("bd_\w+\.(?:badove|chua)')
 GIVE=re.compile(r'\{n:"((?:[^"]*?)(?:Gửi|Tặng|Trao|Nhường|Mua|Bỏ bạc mua|Bán|Đốt|Cho lấy|Nhận ngựa|Nhận cung|Nhận|Giữ|Đưa|Chôn|Chuộc|Cầm|Dâng|Trả|Để kho bán|Giấu|Khâu)[^"]*)"')
 USED=re.compile(r'bạc|lương|áo bông|quà|thuốc|thư|lời|người|tin|binh|quân|sứ|dũng sĩ|tay đua|tay cung')
@@ -58,3 +58,13 @@ nb=[g for g in gives if g[4]=='NO BOOK']
 print(f'6c give/buy/receive options: {len(gives)} · in bdO/BDP {sum(g[4]=="bdO" for g in gives)} · used up {sum(g[4]=="used up" for g in gives)} · NO BOOK {len(nb)}')
 for g in gives:
   if g[4]!='used up' or '-v' in sys.argv:print(f'  {g[4]:8} {g[0].split("/")[-1]}:{g[1]} {g[2][0]}.{g[2][1]} «{g[3]}»')
+# origin-level rows on the per-life switch (Foreman E 19/11 06:50Z): every bdTxt / bdTxtProp call outside the road files
+import glob
+hits=[]
+for f in sorted(glob.glob('dev/build/j*.js')):
+  if f.endswith(('all.js','jrd_bd.js','jrd_bd2.js')):continue
+  for i,l in enumerate(open(f,encoding='utf-8'),1):
+    for m in re.finditer(r'bdTxt(?:Prop)?\(',l):hits.append((f.split('/')[-1],i,re.sub(r'\s+',' ',l.strip())[:80]))
+print(f'origin-level rows on the per-life switch (bdTxt/bdTxtProp outside the road files): {len(hits)}')
+for h in hits:print(f'  {h[0]}:{h[1]} {h[2]}')
+

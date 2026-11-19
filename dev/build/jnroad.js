@@ -221,8 +221,10 @@ window.nrRoads=nrRoads;window.nrCh=nrCh;window.nrInit=nrInit;window.nrMonth=nrMo
   O("Góp công thay bạc: đi lo liệu giúp",{c:{suc:-B().suc},p:B().op.pS,sk:"tamco",l:{danh:-B().op.l2},lx:X=>`việc không xong, ${nrHe(X.A&&X.A.o)} mất lòng tin`,to:"ok"}),betray));
  /* Q1: a help hồi with its own ask (NRASK, see nrAskOf) speaks of the asker's chapter — the ask, the step title and the two option labels and
     loss lines; costs / odds / losses stay the stock ones of its kind. Every other card (no entry, old saves) reads the stock text unchanged. */
- const tx=(t,X)=>{const he=nrHe(X.A&&X.A.o),c=callR(X);return String(t||"").replace(/\{(me|Me|call|Call|he|B)\}/g,(m,k,i,src)=>{
-   const w=k==="me"?me(X):k==="Me"?Me(X):k==="Call"?cap(c):k==="call"?c:k==="he"?he:X.B?X.B.n:"kẻ kia";
+ /* {kha} = the go-between of the ASKER's homeland (NIT-1, caoly-road review): an NPC on an nc road is Cao Ly whatever the player's origin */
+ const nrKhaOf=X=>{try{const v=(X.A&&X.A.o)||X.p,o=v&&v.nr&&v.nr.o;return typeof NCL==="object"&&NCL&&NCL[o]&&o==="nc"?NCL[o].kha:""}catch(e){return""}};
+ const tx=(t,X)=>{const he=nrHe(X.A&&X.A.o),c=callR(X);return String(t||"").replace(/\{(me|Me|call|Call|he|B|kha)\}/g,(m,k,i,src)=>{
+   const w=k==="kha"?(nrKhaOf(X)||((typeof TOK67==="object"&&TOK67&&TOK67.kha)?TOK67.kha():"Kha")):k==="me"?me(X):k==="Me"?Me(X):k==="Call"?cap(c):k==="call"?c:k==="he"?he:X.B?X.B.n:"kẻ kia";
    return i===0||/[.!?:“]\s*$/.test(src.slice(0,i))?cap(w):w})};
  const val=(f,X)=>typeof f==="function"?f(X):f;
  /* the step title of an ask with no title of its own (a.c): true for every ask of that kind (the stock titles name one errand only) */
