@@ -63,3 +63,10 @@ BW3 done (push + report). Nothing open except the notes above. Successor not nee
 
 ## HANDOVER line
 BW3 rollover at context ≈28 % (START ≈4 % + 25 %). Successor: the coordinator (ROOT-51) opens it. Start: `git pull`, read this file, "NOT done" list above.
+
+## ROOT-51 adds that arrived at rollover (NOT started, for the successor)
+5. G16: nữ quan tm4 "round collar" (t8-prompt-B/build.py:1029) → a non-round collar (owner G16). Leave the static unused files alone.
+6. B18 tone, refined by owner Lượt 586 → corrected by Lượt 590: target = the Quý nhân v2 option-B picture (m13 lilac #CBAAB0 + deep teal). KEEP the people's existing hexes. Tone sentence = soft, gentle, medium-light, never rực and never pastel-washed. The secondary may stay deep (deep teal OK), never black/heavy. The a51/a65 'deeper' rule (J2) = calmer/less saturated, NOT darker/heavier: rework the elder clauses (build.py __main__ a51/a65 swap, AGE_TXT a51/a65 colour words "deep navy… deep burgundy", ma ma elder `step`). The t7/t8 LOW_TONE swap done here already says medium tone.
+7. K18 (owner Lượt 591): builders must NEVER use a live game file (img/fig-*, img/hd/*, any img/ live path) as a reference; refs only from the store (KC_REFS set-B / store ids). The gate must FAIL on any img/ live ref (check_store --refs + the prompt text; build.py MAMA_REF url still points to img/fig-mama-k01-a36.webp, unused in the one-ref path).
+8. B19 (owner Lượt 591): NO GREY as main or secondary (silvery grey, pale grey, grey-blue, ash). Flag them in the gate and list which people's data (build.py DATA/ORIG1, build_all secondary(), TM_FADED "grey-blue" for tm0!) contain grey, so ROOT-51 can get replacements.
+MMX4 ma ma resample flags (current builder): `python3 dev/art/t8-prompt-B/build.py <mNN|ncN> --state mama --age a36|a51|a65 --nostyle --twocol "<secondary>" --noflower`; gate `python3 dev/art/check_store.py <file> <same args>`; ref = her KC cut only (`--refs` prints it).
