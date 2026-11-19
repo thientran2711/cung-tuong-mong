@@ -1203,3 +1203,4 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - D: parallel-time, balance-final #5, npc-purpose, choice-value — all must final-merge edb2e724.
 - STANDBYS: MAIN session_01Rc5AsJ8S2aNYjotfjzaioU; B session_01N1tNP5jYfeoWoXsWr5eqKN; C session_01PEhRbvZwkVxhwPJEGU1KAh; D session_01964izFLpgp8aeBD8Y13gek.
 - ROOT-69 wake trig_01WMybvYCjdgS33fECF3BFTN DELETED at handover; ROOT-70 creates its own at minute 32. Brief template briefs/root69-common.md → copy to root70-common.md (replace ROOT-69 id, LIVE edb2e724).
+- (19/11 11:34Z) ROOT-70 opened = session_01Rc5AsKJHPE6qV9k9Ugyhj7 (opus, depth 8 = LIMIT). ROOT-69 wake trig_01WMybvYCjdgS33fECF3BFTN DELETED. ROOT-69 stops (relays any late message to ROOT-70).
