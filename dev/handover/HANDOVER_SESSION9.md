@@ -1141,3 +1141,6 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - STANDBYS: MAIN session_01Rc5AsJ8S2aNYjotfjzaioU; B session_01N1tNP5jYfeoWoXsWr5eqKN; D session_01964izFLpgp8aeBD8Y13gek; E/C-AG/C new ones pending.
 - ROOT-66 hourly wake trig_01Y7AnqjhjQhgRh2LS8Tz5sm DELETED at handover; ROOT-67 creates its own at minute 32.
 - (19/11 08:46Z) ROOT-67 opened = session_01Rc5AsM5xHa2zs9qd5o5eTU (opus, depth 5). ROOT-66 wake trig_01Y7AnqjhjQhgRh2LS8Tz5sm DELETED. ROOT-66 stops (relays any late message to ROOT-67).
+
+## MAIN = ROOT-67 session_01Rc5AsM5xHa2zs9qd5o5eTU; START_CTX ~8 % of 1M (get_session read 0; estimate; rollover at 33 %, ceiling 60 %); depth 5 (limit 8)
+- (19/11 08:55Z) LOAD: main running 1 (seal-lean-3 worker KzdGvNFd: event-dialog fix + giận in-game test; owner bugs/UI/go-live only) | B 9/12 free 3 (queue F6→G→H serial only) | C art: emo-anim MASS (105 seals) | C-AG #22: ev-pic-followups rv NSd2h1gh + opt-scroll-reset J7aS6giC | D choice-value-audit 4e78e63e re-check, npc-purpose remerging | E 9/12 | moved: none. LIVE 62055a31, ROLLBACK 950508fc. Owner ASLEEP since ~08:10Z. Brief template briefs/root67-common.md.
