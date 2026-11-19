@@ -145,3 +145,4 @@ Before/after (captured names missing from UICAP): before the worker's merge fix 
 | coop-one-world seeds 1–10 · one-core guard / text / text-rule / bind | 10 × PASS · PASS ×4 |
 | quickcheck d913db71 | PASS (old save ok; render 202/224, tab 404/419, buổi 1219/1033 ms new/live; core gates PASS) |
 FOR MAIN: 4G co-op tap → answer 1.07 s median (2.4 s worst on petDo) — network legs + host CPU; owner call already open (FOREMAN_B_STATUS).
+FAST PATH 09:10Z: + merge review/coop-thin-f3-r1 8dc849c2 (F3 final, carries F2 7627f79c; only index.html / sw.js conflicted, rebuilt) → **PASS d9b32074** (descends from origin/main 62055a31, re-fetched before READY): one-core ×4 PASS · coop-thin-f4 L9 20/20 · TRIP F4 entry 0. Land order F2 7627f79c → F3 8dc849c2 → F4 d9b32074 (each FF on the previous).
