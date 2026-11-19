@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"134ed175+","t":"2026-11-19T04:32Z","c":"odds-no-unknown: runtime test, KIT §25/§28.6/§53 canon overwrite, side chances in chanceW (jgift/jecon/jpetcare/jaudit/j71/j83), j7 «Tìm kẻ…","b":"d39b0685e042","h":[{"s":"42bda6a9+","t":"2026-11-19T03:34Z","c":"opt-loss-ton: also checks a worded gain never reads 'Được: không'; scans dialogs as the game shows them"},{"s":"cb5a7cb3+","t":"2026-11-19T03:03Z","c":"maid-ladder-6: NPC exam mini-game tier clamps at BAL.srvRk.nq (last typed rung); scan table counted"},{"s":"5f7aef61","t":"2026-11-19T02:22Z","c":"seal-lean: kitEmoSeal idle sway (rotate only) + staggered lean-in with per-feeling motion; test + KIT 38.4 canon overwrite"},{"s":"03df1c9d+","t":"2026-11-19T01:41Z","c":"role-parity.test: deterministic riseCore block (SEED FIX)"},{"s":"de1f6916+","t":"2026-11-19T01:29Z","c":"review live-servants r2: ag-know ONE RULE (NPC) case follows the live-servants rule like §3 (consort's close maid planted at the garden, re…"},{"s":"7d693c26+","t":"2026-11-19T01:22Z","c":"opt-card-short #10: samples = real events; LAW 3: a gain/loss worded only as Gợi ý now shows in Được/Tốn (was «không»)"},{"s":"2dd9cb23+","t":"2026-11-19T00:45Z","c":"review stage-here r4: buổi-turn visit refresh holds the queued cards aside so goTo (j2: returns on Q.length) keeps her where she is (OD 18/…"},{"s":"21904959+","t":"2026-11-18T23:40Z","c":"fullbody-frame s5: person dialog follows the figure standard: frame height follows the figure, figure column runs tag to frame bottom, butt…"},{"s":"cff7cf4d+","t":"2026-11-18T23:07Z","c":"questline-q2 r6 (reviewer): nhTip — a penalty (hb\u003c0) on the told rival's chapter is offset by the tip bonus, not taken as a bonus; rebuild"},{"s":"a837ad32+","t":"2026-11-18T23:30Z","c":"rel-picker r2: site rebuilt"}]};
+window.CTM_BI={"s":"58f43099+","t":"2026-11-19T04:37Z","c":"odds-no-unknown: vu oan hints no longer repeat the odds word the meter now shows","b":"c920f9508642","h":[{"s":"cbacdb55+","t":"2026-11-19T03:45Z","c":"art-wiring-1119 r2: fix review r1 FAIL 1+2"},{"s":"42bda6a9+","t":"2026-11-19T03:34Z","c":"opt-loss-ton: also checks a worded gain never reads 'Được: không'; scans dialogs as the game shows them"},{"s":"cb5a7cb3+","t":"2026-11-19T03:03Z","c":"maid-ladder-6: NPC exam mini-game tier clamps at BAL.srvRk.nq (last typed rung); scan table counted"},{"s":"5f7aef61","t":"2026-11-19T02:22Z","c":"seal-lean: kitEmoSeal idle sway (rotate only) + staggered lean-in with per-feeling motion; test + KIT 38.4 canon overwrite"},{"s":"03df1c9d+","t":"2026-11-19T01:41Z","c":"role-parity.test: deterministic riseCore block (SEED FIX)"},{"s":"de1f6916+","t":"2026-11-19T01:29Z","c":"review live-servants r2: ag-know ONE RULE (NPC) case follows the live-servants rule like §3 (consort's close maid planted at the garden, re…"},{"s":"7d693c26+","t":"2026-11-19T01:22Z","c":"opt-card-short #10: samples = real events; LAW 3: a gain/loss worded only as Gợi ý now shows in Được/Tốn (was «không»)"},{"s":"2dd9cb23+","t":"2026-11-19T00:45Z","c":"review stage-here r4: buổi-turn visit refresh holds the queued cards aside so goTo (j2: returns on Q.length) keeps her where she is (OD 18/…"},{"s":"21904959+","t":"2026-11-18T23:40Z","c":"fullbody-frame s5: person dialog follows the figure standard: frame height follows the figure, figure column runs tag to frame bottom, butt…"},{"s":"cff7cf4d+","t":"2026-11-18T23:07Z","c":"questline-q2 r6 (reviewer): nhTip — a penalty (hb\u003c0) on the told rival's chapter is offset by the tip bonus, not taken as a bonus; rebuild"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -5413,7 +5413,7 @@ function fillSeats(){let ev="";if(ct())return"";for(const r of [6,5,4,3]){if(!se
 /* the contest card stays reachable from the rank board */
 (function(){const r0=rankBoard;rankBoard=function(){const h=r0.apply(this,arguments);const c=ct();if(!c)return h;return h.replace('<div class="rboard">',`<div class="rboard"><h3>Tranh ghế ${c.r>=7?"Hoàng hậu":RANKS[c.r].n} · vòng ${Math.min(3,c.round+1)}/3</h3>${scoreTable()}`)}})();
 /* ================= ONE IDENTITY FOR LIFE, FOUR AGE BANDS FOR ALL, SMALL AGE EFFECTS ================= */
-/* bands for every group: 18-25 / 26-35 / 36-50 / 51+ */
+/* bands for every group: 18-25 / 26-35 / 36-50 / 51-64 / 65+ (BAL.ageBand; the labels below are refilled from it in jbal.js) */
 function band4(a){return ageBandIx(a)}
 const BAND4N=["18-25","26-35","36-50","51+"];
 function tagBand(x){const s=String(x==null?"":x).toLowerCase();const m=s.match(/\d+/);if(m)return band4(+m[0]);return /old|lao|51/.test(s)?3:/mid|trung|36/.test(s)?2:/adult|26/.test(s)?1:0}
@@ -6049,10 +6049,16 @@ function balAb(n){return String(Math.abs(n))}
 function balWord(n){try{return window.VP&&VP.num?VP.num(+n):String(n)}catch(e){return String(n)}}
 /* balOan(n,"hurt"|"doer"|"mend"): the oán a relAdd amount n makes (relAdd gives the hurt one |n|×hurt, the doer |n|×doer, a kind act takes |n|×mend off), as the texts show it */
 function balOan(n,m){return String(Math.round(Math.abs(n)*BAL.relOan[m]))}
-/* ONE CORE age bands (owner art rule OD:L567: 18–25 / 26–35 / 36–50 / 51+; review/one-core-dup): band i starts at ageBand[i-1].
-   Read by band4 (j35), pidBand (j66), kcBand (jkc) (before: 26/36/51 typed in each). */
-Object.assign(BAL,{ageBand:[26,36,51]});
+/* ONE CORE age bands (owner art rule OD:L567 + owner 19/11 ~00:50Z "nhân viên của mình bất kỳ ai cũng có 65 tuổi": 18–25 / 26–35 / 36–50 /
+   51–64 / 65+, for every woman of the pool at every rank/role; review/one-core-dup, art-wiring-1119): band i starts at ageBand[i-1].
+   Read by band4 + BAND4N labels (j35), pidBand (j66), kcBand (jkc), the elders' picture (jstaff) (before: 26/36/51 typed in each).
+   figxTry = failed reads of img/FIGURES-x.json after which the Thái hậu's face is drawn without it (jfigx r2).
+   figVar (art-wiring-1119) = how many colours of the t7/t8 dress a woman may wear (v0 + v1 + v2 painted); 1 = everyone in v0. */
+Object.assign(BAL,{ageBand:[26,36,51,65],figVar:3,figxTry:3});
 function ageBandIx(a){let i=0;for(const c of BAL.ageBand)if(a>=c)i++;return i}
+/* the band labels players see ("18-25" … "65+"), from the same numbers */
+function ageBandName(i){const B=BAL.ageBand,lo=i?B[i-1]:18;return i>=B.length?lo+"+":lo+"-"+(B[i]-1)}
+if(typeof BAND4N!=="undefined"){BAND4N.length=0;for(let i=0;i<=BAL.ageBand.length;i++)BAND4N.push(ageBandName(i))}
 /* ===== ONE CORE duplicate-rule hunt part 2 (review/one-core-dup2): one key per concept that had typed copies in several modules =====
    quyLv  = the "quý" word ladder (thiện cảm) of VANPHONG:69 / owner OD:L247 (Ghét ≤ q0 · Không ưa < q1 · Bình thường ≤ q2 · Có cảm tình
             < q3 · Quý mến < q4 · Thân thiết); quyIx(v) = word index 0…5, quyW (jhc) the word. Before: j21 affW (7 words incl. Thù /
@@ -8801,7 +8807,7 @@ window.j59lay=j59lay;
    c01..c32) for her as part of the stored roll in localStorage "ctm-nextlife" (d.pid): a reload shows the same one,
    "Đổi thân phận" rolls another. The identity is reserved for the whole game (S.pid sits in S.fidUsed), so no NPC
    consort, tuyển tú intake included, ever gets it or any of its tiers / ages. Her art then follows the consort picker:
-   dress tier = rank (Đáp ứng t1 ... Hoàng hậu t8), age band = her age (18–25, 26–35, 36–50, 51+), same identity for life.
+   dress tier = rank (Đáp ứng t1 ... Hoàng hậu t8), age band = her age (BAL.ageBand: 18–25, 26–35, 36–50, 51–64, 65+), same identity for life.
    While she is a palace maid (cnv) she wears the identity's tier 1. In lãnh cung she (and any NPC consort there) asks for
    the identity's tier "cold" (fig-consort-cNN-tcold-aAA.webp); while that art is missing the nearest file is tier 1. If a file is missing the nearest
    tier/age of the identity is used; with no art at all she keeps the old face. Old saves (no S.pid) are left as they are,
@@ -8817,7 +8823,7 @@ function pidRoll(d){const K=pidKeys();const r=nlRng((d.seed^0x2c1b3c6d)>>>0);r()
 (function(){const r0=nlReroll;nlReroll=function(){PID_AVOID=S&&S.pid||null;try{return r0.apply(this,arguments)}finally{PID_AVOID=null}}})();
 function pidOn(){return !!(S&&S.pid)}
 /* 8 ranks = 8 dress tiers; 4 age bands as the standing rule draws them */
-function pidBand(a){const B=BAL.ageBand;return a==null?null:a<B[0]?0:a<B[1]?1:a<B[2]?2:3}
+function pidBand(a){return a==null?null:ageBandIx(a)}/* every band of BAL.ageBand (a65 since art-wiring-1119) */
 (function(){const t0=figTierOf;figTierOf=function(who){try{
   if(who===S&&S){if(S.pid)return (typeof isSrv==="function"&&isSrv())?1:S.out?-1:Math.min(7,S.rank||0)+1;return t0.apply(this,arguments)}
   if((rivals||[]).includes(who))return who.out?-1:who.queen?8:Math.min(7,who.rank||0)+1}catch(e){}return t0.apply(this,arguments)}})();
@@ -61843,10 +61849,11 @@ function giveFace(st){if(!S||!st||isGuest())return;
 function elderInit(){if(!S||isGuest())return;thH();
  for(const post of B().posts){let st=elderBy(post.id);if(!st)st=mk(post,0,rint(post.age[0],post.age[1]));place(st);giveFace(st)}
  for(const st of elders()){st.elder=1;try{const K=typeof k61S==="function"?k61S():S.known;if(K&&typeof kOf61==="function"){const k=kOf61(st);if((+K[k]||0)<2)K[k]=2}}catch(e){}}}
-/* the identity's picture: the a51 art of her identity */
+/* the identity's picture: her elder art = the a51 band or older (a65 at 65+ when painted, art-wiring-1119: BAL.ageBand), nearest age of her identity */
 function figRec(st){try{if(!st||!st.fid||typeof FIGIX==="undefined")return null;const r=st.fid.split(":")[0];const L=(FIGIX[r]||{})[st.fid]||[];if(!L.length)return null;
- if(r==="maid")return L.find(f=>(f.tier==null||f.tier==="")&&f.ageBand==="a51")||null;
- return L.find(f=>f.ageBand==="a51"&&f.por)||L.find(f=>f.ageBand==="a51")||figBest(L,null,st.age||55)}catch(e){return null}}
+ const ag=Math.max(BAL.ageBand[2],st.age||55);
+ if(r==="maid"){const N=L.filter(f=>f.tier==null||f.tier==="");return N.length?figBest(N,null,ag):null}
+ const P=L.filter(f=>f.por);return figBest(P.length?P:L,null,ag)}catch(e){return null}}
 const porSrc=st=>{const f=figRec(st);return f?figPath(f.por||f.file||f.src):""};
 const figSrc=st=>{const f=figRec(st);return f?figPath(f.file||f.src):""};
 if(typeof figFor==="function"){const ff=figFor;figFor=function(p,kind){try{let w=p&&(p.ref||p);if(w&&w.kind==="elder"&&w.ref)w=w.ref;if(w&&w.eid&&postOf(w.eid)){giveFace(w);const s=kind==="por"?porSrc(w):figSrc(w);if(s)return s}}catch(e){}return ff.apply(this,arguments)}}
@@ -65027,7 +65034,7 @@ function kcFigLoad(){try{fetch("https://ctm-img.victoria-tntt.workers.dev/img/FI
  const n=Object.keys(X).length;const was=Object.keys(KCFX).length;KCFX=X;if(n!==was)try{if(isKc())render()}catch(e){}}).catch(()=>{})}catch(e){}}
 kcFigLoad();setInterval(kcFigLoad,300000);
 function kcDress(){return S&&S.origin&&(S.origin.k==="thd"||(S.origin.k==="td"&&!kcLore()))?"ngheo":"kc"}/* KC LORE: td is a Thị lang's daughter until the day she leaves home: khuê các dress; only thd is poor */
-const KC_AB=["a18","a26","a36","a51"];function kcBand(age){return ageBandIx(age)}
+const KC_AB=["a18","a26","a36","a51","a65"];function kcBand(age){return ageBandIx(age)}
 function kcDressRec(fid,tier,age){const X=fid&&KCFX[fid];const L=X&&X[tier];if(!L||!L.length)return null;const w=kcBand(age==null?18:age);/* the band of her age, else the nearest one */
  let b=null,bd=9;for(const f of L){const d=Math.abs(KC_AB.indexOf(f.ageBand||"a18")-w);if(d<bd){bd=d;b=f}}return b}
 function kcDressSrc(fid,kind,tier,age){const f=kcDressRec(fid,tier||kcDress(),age==null&&S?S.age:age);if(!f)return"";return figPath(kind==="por"?(f.por||f.file):f.file)}
@@ -76495,6 +76502,69 @@ if(typeof kpmParts==="function"){
 /* the room line in a side hall of Càn Ninh / Đức Thọ: what the record says the household does there (the stage draws no household servants of other palaces, j95vis) */
 (function(){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{const h=typeof kpmHall==="function"&&kpmHall();if(!h||h.place||(h.k!=="kn"&&h.k!=="tn"))return r;
   const m=document.querySelector("#sc-t .rmsg");if(!m)return r;const N=mapzStaffNow(h.k);const n=N?N.in[h.part].length:0;const t=` · ${hallRole(h.part)}. ${n?`${n} cung nhân đang ${h.part==="dong"?"quét dọn, sắp đồ":h.part==="tay"?"nghỉ ngơi":"đứng hầu"} ở đây.`:"Không có ai ở đây."}`;if(m.textContent!==t){m.textContent=t;m.title=t}}catch(e){}return r}})();
+/* ================= jfigx: ART WIRING 1119 — Thái hậu per face · a65 age step · outfit colours v1/v2 (owner 19/11) =================
+   Owner (verbatim, OD 19/11 ~00:45Z / ~00:49Z / ~00:50Z): "Hình Thái Hậu cũng vậy. Nói chung là hình nào mà hôm nay vẽ mà tao duyệt ok rồi
+   thì đẩy hết lên live đi." · "Ai cũng là Thái Hậu hết, 90 người Thái Hậu." · "Cái mốc 65 tuổi không phải là thêm cho mỗi phi tần mà là ở bất
+   kỳ một cái nhóm nào, như cung nữ cũng có 65 tuổi, tức là nhân viên của mình bất kỳ ai cũng có 65 tuổi."
+   The ONE selector stays j39 figPick/figFor + j66 figTierOf/figDist + j88 f88Best; this module only adds to it:
+   (1) img/FIGURES-x.json (dev/tools/figx_rows.py, built from what is on the CDN) holds the rows that have no slot in FIGURES.json:
+       consort Thái hậu robes (tier "th", a36/a51/a65), the a65 age step of t7/t8, the colour variants (v:1|2) of t7/t8.
+       a65 rows join FIGIX like every other row (nearest age is the normal rule). "th" and "v" rows are kept apart (FIGXT) so no other
+       reader of FIGIX (jht, jkc, jstaff, j86 …) can ever pick a Thái hậu robe for a rank or a random colour.
+   (2) THÁI HẬU = A FACE OF THE POOL: S.thO takes a free identity of the pool (consort c01–c32, maid m01–m52, ma ma k01–k08), preferring a
+       face whose Thái hậu robe is painted; one face for life, never reused (figUsed). The old shared fig-thaihau-h1/h2/h3 are retired (an old
+       save's S.thO.fid "thaihau:hN" is dropped and she draws a pool face). Co-op: the host draws (thO + fidUsed are world keys).
+       Whoever IS Thái hậu (S.thO; her, after the succession roads a / b) wears her own face's Thái hậu robe at her age band; a face without
+       that robe wears her own highest consort dress (t8) at her age, else any picture of the same person (law 6c: never blank).
+   (3) a65: BAL.ageBand gains the 65 step (jbal.js) for every woman, every rank/role; a missing a65 file = the nearest age of the same person.
+   (4) COLOUR: each woman wears one colour of her t7/t8 dress for the life (v0 / v1 / v2 = BAL.figVar colours, stable per face and per reign,
+       the same on both co-op seats); who.figV (0..n-1) overrides it. Where a colour is not painted she wears v0. */
+const FIG_TH=9;/* tier code of the Thái hậu robe (an art slot code, not a game number) */
+let FIGXR=[],FIGXT={};
+function figxKey(f){return norm(f.role)+":"+f.identity}
+/* r2 (review FAIL #1): figxLoad.ok = the rows are in. The Thái hậu's face is for life, so she is not drawn before they are (a draw before
+   would not see which faces have a painted Thái hậu robe). After BAL.figxTry failed reads (offline / missing file) she is drawn anyway. */
+function figxLoad(){try{fetch("https://ctm-img.victoria-tntt.workers.dev/img/FIGURES-x.json",{cache:"no-cache"}).then(r=>r.ok?r.json():[]).catch(()=>[]).then(j=>{const L=figList(j);if(!L.length)figxLoad.fail=(figxLoad.fail||0)+1;
+  const sig=L.length+"|"+L.map(f=>f.file).join(",").length;if(sig===figxLoad.sig)return;figxLoad.sig=sig;
+  const T={},A=[];for(const f of L){const t=String(f.tier);if(t==="th"||f.v){const k=figxKey(f);const X=T[k]=T[k]||{th:[],v:[]};(t==="th"?X.th:X.v).push(f)}else A.push(f)}
+  FIGXR=A;FIGXT=T;if(L.length)figxLoad.ok=1;if(typeof FIGS!=="undefined"&&FIGS.length){FIGIX=figIndex(FIGS);try{if(S&&!S.dead)kitRenderSoon(250)}catch(e){}}}).catch(()=>{})}catch(e){}}
+/* the a65 rows index like any other row (j39 loadFigs → figIndex) */
+(function(){const i0=figIndex;figIndex=function(all){return i0.call(this,(all||[]).concat(FIGXR))}})();
+(function(){const t0=figTier;figTier=function(t){if(/^th$/i.test(String(t==null?"":t).trim()))return FIG_TH;return t0.apply(this,arguments)}})();
+/* who is Thái hậu now: the Thái hậu; her once she chose road a (con làm vua) or b (buông rèm), or her life ended as Thái hậu */
+function figIsTh(who){try{if(!S||!who)return false;if(who===S.thO)return true;
+  if(who===S){const E=S.succ;if(E&&(E.p==="a"||E.p==="b"))return true;return !!(S.dead&&/thái hậu/i.test(String(S.fate||""))&&!/thái phi/i.test(String(S.fate||"")))}}catch(e){}return false}
+(function(){const t0=figTierOf;figTierOf=function(who){try{if(figIsTh(who))return FIG_TH}catch(e){}return t0.apply(this,arguments)}})();
+(function(){const w0=f88Wear;f88Wear=function(who){try{if(figIsTh(who))return true}catch(e){}return w0.apply(this,arguments)}})();
+/* the pool of women's faces (the "90"): consort + maid identities (j88 f88Keys) + the ma ma identities */
+function figxPool(){const M=(typeof FIGIX!=="undefined"&&FIGIX.mama)||{};return f88Keys("all").concat(Object.keys(M).filter(k=>M[k]&&M[k].length).sort())}
+function figxHas(k){return !!(k&&FIGIX[k.split(":")[0]]&&FIGIX[k.split(":")[0]][k]&&FIGIX[k.split(":")[0]][k].length)}
+function figxReady(){return !!figxLoad.ok||(figxLoad.fail||0)>=BAL.figxTry}
+function figThPick(){const T=S.thO;if(T.fid&&/^thaihau:/.test(T.fid)){const old=T.fid;T.fid=null;S.fidUsed=figUsed().filter(x=>x!==old)}
+ if(T.fid&&figxHas(T.fid))return T.fid;if(window.COOPW&&COOPW.on&&COOPW.seat==="b")return null;/* the guest waits for the host's face */
+ if(!figxReady())return null;/* until the rows are in she keeps her old portrait (faceFor "thaihau", j17): never blank, never a wrong face for life */
+ const U=new Set(figUsed().concat(S.fidDead||[]));const free=figxPool().filter(k=>!U.has(k));if(!free.length)return null;
+ const good=free.filter(k=>FIGXT[k]&&FIGXT[k].th.length);const k=pick(good.length?good:free);T.fid=k;figUsed().push(k);return k}
+(function(){const r0=figRoles;figRoles=function(who){try{if(S&&who&&who===S.thO)return["consort","maid","mama"]}catch(e){}return r0.apply(this,arguments)}})();
+(function(){const p0=figPick;figPick=function(who){try{if(S&&who&&who===S.thO&&typeof FIGS!=="undefined"&&FIGS.length)return figThPick()}catch(e){console.error("figx th",e)}return p0.apply(this,arguments)}})();
+/* r2 (review FAIL #2): a save made before this build keeps the dress colour she and everyone already wore (v0) for the reign running when
+   it is first loaded: S.emp.figV0 = that reign's era S.emp.era (a world key, written by the host / solo only, so both seats agree). A new life
+   (start) is stamped at once and is never pinned; the next reign (another Emperor) wears the colours. */
+function figVPin(){try{if(!S||!S.emp)return false;if(!S.figVStamp){if(!(window.COOPW&&COOPW.on&&COOPW.seat==="b")&&S.emp.figV0==null)S.emp.figV0=String(S.emp.era||"");S.figVStamp=1}
+  return S.emp.figV0!=null&&S.emp.figV0===String(S.emp.era||"")}catch(e){return false}}
+(function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S)S.figVStamp=1}catch(e){}return r}})();
+/* her colour of the t7/t8 dress */
+function figVOf(who){try{if(!who||!S)return 0;const n=Math.max(1,BAL.figVar|0);if(who.figV!=null)return Math.max(0,Math.min(n-1,who.figV|0));if(n<=1||figVPin())return 0;
+  const k=who===S?(S.pid||S.fid):who.fid;if(!k)return 0;return wdHash(k+"|"+(S.emp&&S.emp.era||""))%n}catch(e){return 0}}
+function figVSet(who,v){if(!who)return false;who.figV=v==null?null:Math.max(0,v|0);return true}
+window.figVOf=figVOf;window.figVPin=figVPin;window.figxReady=figxReady;window.figVSet=figVSet;window.figIsTh=figIsTh;
+(function(){const b0=f88Best;f88Best=function(L,who,kind){try{if(!L||!L.length)return b0.apply(this,arguments);const X=FIGXT[figKey(L[0])]||null;const age=figAgeOf(who);
+  if(figTierOf(who)===FIG_TH){const T=X?X.th:[];const Tp=kind==="por"?T.filter(f=>f.por):T;if(Tp.length)return figBest(Tp,null,age);
+   const Lp=kind==="por"&&L.some(f=>f.por)?L.filter(f=>f.por):L;return f88Pick(Lp,8,age,false,null)||figBest(Lp,null,age)}
+  const f=b0.apply(this,arguments);const w=figVOf(who);
+  if(f&&w&&X&&X.v.length){const alt=X.v.find(x=>x.v===w&&String(x.tier)===String(f.tier)&&x.ageBand===f.ageBand&&(kind!=="por"||x.por));if(alt)return alt}
+  return f}catch(e){console.error("figx best",e);return b0.apply(this,arguments)}}})();
+figxLoad();setInterval(figxLoad,300000);
 
 /* jcoopthin: CO-OP THIN GUEST, part A = foundations (review/coop-thin-a; audit dev/handover/reports/coop-thin-guest-audit.md §2-3;
    owner GO 17/11: host-authoritative thin guest, part by part, end state = the guest only displays the host's state).
@@ -77786,7 +77856,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="d39b0685e042";window.CTM_BUILD=BUILD;
+const BUILD="c920f9508642";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
