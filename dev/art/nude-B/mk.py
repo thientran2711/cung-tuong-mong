@@ -81,12 +81,33 @@ for age in ("a18","a26","a36","a51","a65"):
         _m=re.findall(r"STYLE LOCK \(same drawing as her 36-year-old picture, the second reference\):.*?no detailed wrinkles\.",_src); assert len(_m)==1
         STYLE=_m[0].replace("the second reference","the third reference",1)
         o=o[:i]+TA+" "+STYLE+" "+TC+o[j:]
-        assert o.count(STYLE)==1 and o.index(TA)<o.index(STYLE)<o.index(TC),"D15 gate"
+        assert o.count(STYLE)==1 and o.index(TA)<o.index(STYLE)<o.index(TC),"D15 gate"  # TC is removed below (Lượt 702); STYLE then follows TA directly
         assert o.count(TA)==1 and o.count(TC)==1
     assert not re.search(r"Pose:[^.]*\b(stole|ribbon|sash|shawl)\b",o)
     assert "style reference" not in o.lower() and "Image 3" not in o
     for s in HHS+HH2+[a_w]: assert o.count(s)==1,("NDX4 HH gate",s)   # GATE (Lượt 683+692)
     assert o.index(a_w)<o.index(HHS[0])<o.index(NOFL)<o.index(HB)<o.index(S07)<o.index(ANG)<o.index(HIC)<o.index(" Pose:"),"HH order"
     assert "three-quarters to the right" not in o   # GATE: every HH t8 sleeve/fabric sentence exactly once
+    # NDX4 r4 (owner Lượt 701 via ROOT-55): CROWN = the HH t8 crown sentence VERBATIM with only 3 swaps that make it the Nữ đế crown;
+    # the lưu clause is kept (owner F7, Lượt 397); the blueprint (dragon with pearl in claws + 2 phoenixes + gold hairpins + in-crown no-flower clause) is dropped; separate NO-flowers sentence stays.
+    _hc=re.findall(r"the GRANDEST headdress of all: .*?(?=; the most splendid outfit of all)",_hh); assert len(_hc)==1
+    CROWN=_hc[0]
+    for a_,b_ in (("nine-phoenix crown","dragon crown"),("a large central gold phoenix holding a pearl string in its beak","a large central gold dragon holding a pearl"),("taller and wider than a noble consort's crown","taller and wider than the Empress's crown")):
+        assert CROWN.count(a_)==1,a_; CROWN=CROWN.replace(a_,b_)
+    LUU=", and a row of bead tassels (lưu) hanging in front from the rim of the crown to the forehead, ending above the eyebrows, the bare forehead clean under them"
+    m_=re.findall(r"the GRANDEST headdress of all: .*?(?=; the most majestic outfit of all)",o); assert len(m_)==1 and m_[0].count(LUU)==1
+    o=o.replace(m_[0],CROWN+LUU,1)
+    assert o.count(CROWN+LUU+"; the most majestic outfit of all")==1 and "phoenix with raised wings" not in o and "pearl in its claws" not in o   # GATE crown
+    # NDX4 r4 (owner Lượt 702 via ROOT-55): Nữ đế a51/a65 keep the a36 colours: elder colour sentence removed, COLOUR RULE = the a36 one verbatim,
+    # and the swatch line = the a36 one (its 'deeper, subdued antique-gold elder shade' would contradict).
+    _cr=re.findall(r"COLOUR RULE: .*?(?=; the royal golden yellow is the DOMINANT)",o); assert len(_cr)==1
+    SW36=" Image 2 is only a colour reference for the royal yellow, never copy anything but its colour; the royal yellow in the robe is exactly that colour."
+    if age=="a36": CR36=_cr[0]; assert o.count(SW36)==1
+    if age in ("a51","a65"):
+        o=o.replace(" "+TC,"",1)
+        o=o.replace(_cr[0],CR36,1)
+        _sw=re.findall(r" Image 2 is only a colour reference for the royal yellow[^.]*\.",o); assert len(_sw)==1; o=o.replace(_sw[0],SW36,1)
+    if age in ("a36","a51","a65"): assert o.count(CR36)==1,"COLOUR RULE = a36"
+    assert not re.search(r"DEEPER|DARKER|darken|elder shade|antique gold|antique-gold",o),"GATE: no elder DEEPER/DARKER colour words in Nữ đế"   # (lower-case 'a little deeper or a soft ivory' is inside the approved a36 COLOUR RULE itself)
     open(os.path.join(R,"prompts",f"{p}_{age}.txt"),"w",encoding="utf-8").write(o)
     print(p,age,len(o),"chars")
