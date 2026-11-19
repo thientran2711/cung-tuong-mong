@@ -193,7 +193,7 @@ kc/ngheo NEW c13+c16 (4 gens) | handover | session_01PEhRbvGFP6YSgT5DTgo3yu (K4,
 | stage badges row + errand-scene finish (opus; successor of session_01Rc5AsLFZhaSRGU7o57KkKy) | review/errand-scene | MAIN ROOT-60 | session_01Rc5AsLTeVAfb7ZSU7mW53N | READY 88f3233a | 19/11 00:31Z |
 | MAIN ROOT-61 (opus; child of ROOT-60; depth 8) | handover HANDOVER_SESSION9 | ROOT-60 | session_01Rc5AsJBmT3vTTFe8sbCbUa | RUNNING | 19/11 00:35Z |
 | hist-mama-ladder (history expert, sonnet E15; MAIN ORDER 00:41Z) | handover report | E ROOT #7 | session_01DgYSWp57dyN9pFwnJw7znu | DONE 97c6164e | 19/11 00:54Z |
-| role-parity-seed (riseCore test seed fix; opus B3) | review/role-parity-seed | B | session_01N1tNP5LzLhxHn4SfWgKpNQ | RUNNING | 19/11 01:17Z |
+| role-parity-seed (riseCore test seed fix; opus B3) | review/role-parity-seed | B | session_01N1tNP5LzLhxHn4SfWgKpNQ | LAND READY 89aa1bd9 (with role-parity-3) | 19/11 01:17Z |
 | ge-writers-w2 remerge #5 main 96188526 (sonnet E11w2m3) | review/ge-writers-w2 | E ROOT #7 → #8 | session_01DgYSWq43v8g897s6AtupYe | RUNNING | 19/11 01:50Z |
 | FOREMAN E ROOT #8 (opus; child of E ROOT #7, depth 7) | handover FOREMAN_E_STATUS | E ROOT #7 | session_01DgYSWoyrPRWJPqSp4gfECg | RUNNING | 19/11 01:50Z |
 | MAIN ROOT-62 (opus; owner-opened ROOT, depth 0; successor of ROOT-61) | handover HANDOVER_SESSION9 | owner | session_01Rc5AsJvnKvJMiKUjEhRST1 | RUNNING | 19/11 02:20Z |
