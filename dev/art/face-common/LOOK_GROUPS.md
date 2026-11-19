@@ -71,3 +71,9 @@ File máy đọc: dev/art/face-common/OWNER_GROUPS_L686.json
 - Bản đồ ảnh mặt hiện hành (84 người, không tính Kho): dev/art/face-common/FACE_CUTS_L703.json (id → nhóm, cut id Magnific); ảnh mặt cắt sẵn 300×340: dev/art/face-common/face_page/faces/<id>.jpg (cho trang tick Lượt 703).
 - Lượt 712 (chủ): Kiêu kỳ + Lạnh lùng ĐẠT hết. Quyến rũ ĐẠT s17 s18 s34 s37. Sửa (ROOT-56 subagent): s16 = ảnh CŨ (s03.v4c, cut hu2ynp3vqL, 0 gen); s37 chỉ xoá vệt cạnh môi (cut Lw8V5SlswO, 0 gen); s33/s35/s36/s38 vẽ lại CHỈ biểu cảm (sNN.v5r2, make_quyenru_r2.py: "ALLURING… languid half-lidded gaze… one brow faintly raised… sly slight smile") → cut N2qvybP6D9 / 3zKC91UREY / MBJjcPjDCm / MBJjc4LDCm. Sheet: dev/handover/review-sheets/new-faces-v4/quyenru_r2_old_new.jpg.
 - Lượt 712b (chủ): Quyến rũ r2 ĐẠT trừ s35 "bị hở miệng" → chỉ khép môi bằng retouch vùng miệng (gen TdwrzDAVNR → Lw8VL8VswO, cut Cqniu4NEEy, 0 gen mới). Sheet: dev/handover/review-sheets/new-faces-v4/s35_r3_old_new.jpg.
+
+
+## Lượt 737 (owner, 19/11 ~22:22Z)
+- Groups Tinh nghịch and Tươi tắn DROPPED entirely → all 22 people moved to Kho (OWNER_GROUPS_L686.json value "Kho").
+- The 22 freed slots are filled with NEW faces in Sắc sảo (+7), Lạnh lùng (+7), Quyến rũ (+8) (same method as NF4 s19–s38; drawing must match s07).
+- Tick page picks: c06 and c19 (Sắc sảo) = redraw.
