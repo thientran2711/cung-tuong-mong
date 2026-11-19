@@ -110,3 +110,51 @@ LIVE main 2481c80d (ebb26851) → F5 7f74ce44 (4e95b5ea) → F5 9b46e1ad = LIVE 
 ### UI scan after (f1–f4 + hostnull, host side): kpmPlay captured in runAct rows; cfShow in D pick rows; krvFlip captured (goTo ×2, accEtqGo, D pick); no `kpmOn<kpmGo` / `want<flip` gate rows; lost-by-cap 0 everywhere; every run that wrote host DOM has its repaint.
 ### LOOK (scratch only, not uploaded): host Fold 755x1000@2 + guest iPad 1180x820@2 after her talk, and swapped: the host shows only his own screen (his Nhập cung card); her person card + her result only on her phone.
 ### For B (out of scope, report only): main 1a4df595 parallel time breaks the co-op F1/F2/F3/D suites on F5 tip itself (see table); her Tranh ghế rounds not driven in co-op (L6 = L7, pre-existing).
+
+## REVIEW r1 — PASS review/coop-thin-hostnull-r1 6facd67d (descends from origin/main 2bda29a1 + F5-r1 9b46e1ad)
+PRIORITY #1 CHECK ('review-coop-thin-hostnull'): OD 0 | ledger 0 | claims hostnull #1 4i9JQenz, #2 2tXKt5N4 | main 2bda29a1 (no hostnull; NEW there since the worker: receiver choice jrcv, seal-lean-3) | review/coop-thin-hostnull 1fc3b8a0 (reviewed), review/coop-thin-f5-r1 9b46e1ad (in it) | archive 0.
+Reviewer session_01N1tNP5FGJzDEEndPqePkcQ (opus), **depth 7**, START_CTX ≈ 3 % of 1M (used_tokens reads 0; estimate) → rollover ≈ 28 %, ceiling 60 %; finished below it.
+Branch = 1fc3b8a0 + 16f3ee33 + 588b553d + merge origin/main 2bda29a1 (05281054) + 2137358a + 6facd67d. Main re-fetched right before READY (2bda29a1, unchanged); F5-r1 head unchanged (9b46e1ad).
+
+### Fixed here
+| # | finding | before | after |
+|---|---|---|---|
+| R1 | **(a) family not whole**: the host repaint net sat only in TH.tapRun. A probe over EVERY her-context run (TH.withSeat) found her part B **life** intent writing the host's OPEN card (#modal: jload lDlgWait `klifewait` = his card hidden up to 3 s + his .dlg kit size attributes data-ksz / data-lay / data-pres / data-focus stripped; outer showModal wrappers run past the NOOP) and a part D **pick** writing #modal's class — never repainted (same on F5 tip) | WSCAN: life DOM NO REPAINT 1, pick 1 (F5 tip: + f ×10) | jcoopthin TH.withSeat: one MutationObserver per outer run of hers (part D on), rpAsk (same one repaint, his card rebuilt when #modal was written) when it wrote his DOM and no tap run inside already asked. WSCAN: every run that wrote his page repainted (life 1/1, pick 1/1, f 15/15), 0 misses — test **H10** (permanent) |
+| R2 | **(e) merge conflict with main's receiver choice**: main replaced the Kết giao roll by jrcv rcvAsk; on a player target (her entry, t !== S) the NPC receiver pick (rcvPick: yes / half / từ chối / mách) would answer AFTER the other player said «Nhận» → law 1 broken again | j8 conflict | j8 = main; jrcv rcvAsk: coopAccepted(t) → the yes road (full; half if her Sức is short; never mách / an AI refusal). H5 / H5b force the NPC pick to «no»: player target still «thành», NPC target refused |
+| R3 | law 1 tested one way only (host → her) | H5 | **H5b**: same staging in HER context (her gift / Kết giao to the host's entry): never refused, the gift left her chest once (law 6c), NPC still refuses and the gift stays |
+| R4 | law 4: uiPump typed a fallback `{batch:4,gapMs:900}` beside BAL.coopUi | typed numbers | reads BAL.coopUi only |
+| R5 | (d) jflip cfShow sent with NO plan: her phone re-read stoleFrom (per-seat state of her run, not on her phone) → wrong turned card after a stolen night; could replay a stale night | cfShow [] | plan taken in her run (cfPlan, JSON) and played as is; nothing sent when her run has no plan. Note: at E levels her flip in her context does not draw (jcoopworld E-fix → the host's held draw), so nothing is sent there — FOR B below |
+| R6 | (2) long-session cost unmeasured | — | **H7** LONG=<n>: repaint ms per run beside a plain host render |
+Test-tool adds: coop-thin-uiscan.js columns "runs that wrote host DOM / repaint / DOM run with no repaint"; H2 staging with parallel time off (it flaked 1 in 6: the stranger walked away in real time); H1 logs what the host learned by himself.
+
+### Checks (brief 1–6)
+1. Host shows only his own screen, both seats: H1 talk / scout / invite, H6 (his own open card kept, Q[0] same, no host sound, no loop), H2 reveal once on her phone none on host, H3 7 effects in order 4 + 900 ms none lost, H4 her slap on HER stage only. LOOK (scratch, deleted): host Fold 755x1000@2 = his own Nhập cung scene; guest iPad 1180x820@2 = her person card + her result (and her staged rank edict); swapped the same.
+2. Repaint cost: H7 20 talks, CPU ×1: median 48 / 48 ms (first / second half), = one host render (36–71 ms); CPU ×4 LAG 85: 316 / 334 ms (10 talks), 244 / 168 ms (6) — does not grow. Her run time (TH.lat) unchanged in shape; long tasks comparable (max 1.4–2.2 s at CPU ×4 come from her walk runs, present before).
+3. Family (UI scan f1–f4 + hostnull, host side): every tap run that wrote host DOM repainted — talk 4/4, scout 2/2, invite 1/1, goTo 42/42, visitPal 1/1, accEtqGo 3/3, E step 4/4, rcpAskGo 1/1, tdsRun 1/1, runAct 1/1; D pick 0 DOM (its #modal write is outside the tap run → R1); lost by cap 0; krvFlip captured (goTo, accEtqGo, talk).
+4. Law 1 two-way + 6c: H5 + H5b both directions; refused (NPC) gift stays in the chest; accepted gift left once; resend = DONE dedupe (unchanged). Law 6c note (pre-existing, not this branch): j8 giveTo tainted gift detected → `r.inv.pop()` the piece is not stored anywhere (evidence only) → FOR B.
+5. H1 flaky (host token "Phi ???" vs name after a fresh render): seen 1 in ~9 runs before R1 (CPU ×4 LAG 85), 0 in 8 runs after R1 (4 at CPU ×4 LAG 85). Not proven which; every run of hers is now repainted (H10) and H1 logs the host's own learning for any future red.
+6. f1 / f2 / f3 vs F5 tip 9b46e1ad (live Worker L9, same box): f1 18/23 vs 18/25 (swap 18/26 vs 18/24) — same classes: "F1 <act>" (varies per run: poison / musk / vp / laydol / plant …, lands at due), "every ACT kind", F2 gift ×2, page error `sv is not defined` (j9 runAct, main); f2 24/25 = 24/25 (P5 invite); f3 34/37 = 34/37 (X1 ×2, X2), swaps identical; on merged main: f1 20/22 (only F2 gift ×2), f3 35/38. coop-thin-d crashes at the giftin card on both. Not a FAIL (separate B job).
+Laws: 1 ✓ (R2, R3) · 4 ✓ (R4; one-core ×4 PASS) · 6c ✓ (H5b) · 7 no new player word · 9–12 no UI part changed (repaint uses the host's own render / showModal) · 2/3/5/6ab/8/13–18 not touched.
+
+### Gates (live Worker ctm-coop, L9 unless noted; final = 2137358a/6facd67d unless noted)
+| gate | result |
+|---|---|
+| coop-thin-hostnull / swap / CPU×4 LAG85 | 15/15 · 15/15 · 15/15 + 16/16 (+ LONG); with H10 |
+| coop-thin-a L1 / b L4 / c L4 / e L5 / e swap / e-net L6 | 24/24 · 136/136 · 17/17 · 33/33 · 33/33 · 20/20 |
+| coop-thin-f4 (+swap) | 18/18 · 18/18 |
+| coop-thin-f1 / f2 / f3 (+swap) | = F5 tip classes (item 6) |
+| coop-thin-d L4 | crash at giftin = F5 tip |
+| quiet scan | 41 reads / 32 reachable = F5 tip |
+| coop-cyc THIN=9 / swap | 72/73 · 73/74 (red: mixed = main); one 68/73 run (lui / giau night draw) and F5 tip 71/73 (lui) = known night-draw flake |
+| coop-e2e / swap · p2 · timer | 68/68 · 68/68 · 46/46 · 43/43 |
+| coop-night | 104/105 · 102/105 (F5 tip 104/105, different rows) = known flake |
+| coop-one-world seeds 1–10 · ptime / ptime2 | 10 × PASS · ALL OK · ALL OK |
+| receiver-choice.test (jrcv touched) | ALL PASS ×3 (one 1-FAIL run under load); main ALL PASS |
+| one-core ×4 | PASS (final) |
+| quickcheck | PASS (old save ok; render 186/191, tab 388/383, buổi 972/1095 ms new/live; core gates PASS) |
+
+### FOR B (out of scope, report only)
+- Receiver choice (main jrcv) × co-op: every rcvAsk kind other than Kết giao (facFound / facInvite / facJoin / invite / call / mediate / blockf / illAlly / rougeBorrow) with the OTHER PLAYER as target is answered by the NPC pick for her — she gets no card (law 1). Co-op needs her 4-answer card (G/H).
+- Her night card-flip scene at E levels: her flip in her context does not draw (host's held draw), so no plan exists to send; check that her phone shows the flip scene from the merged night at all.
+- j8 giveTo tainted gift caught: the piece is popped and stored nowhere (law 6c).
+- main 1a4df595+ parallel time: f1/f2/f3/d co-op reds (item 6), `sv is not defined` (j9 runAct).

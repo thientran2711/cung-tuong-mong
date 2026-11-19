@@ -1,5 +1,8 @@
 # 58 gương mặt nữ (trừ 32 phi tần đã lên game) — link + so tông da với M09 (ROOT-42, Lượt 273)
 
+> **REJECTED (owner Lượt 543/551, 19/11):** the kc2k / kc2k-mass pictures linked below are the OLD 18/11 khuê các — never use them as a reference. img/_review/kc2k/ and kc2k-mass/ were moved to img/_rejected/kc2k/ and img/_rejected/kc2k-mass/ (same file names) and are BANNED (dev/art/KC_BANNED_REFS.json). The ONE identity ref per person is in dev/art/KC_REFS.json (`python3 dev/art/kc_ref.py <id>`).
+
+
 Thước đo: trung vị màu da má, tỉ lệ Xanh/Đỏ (B/R; cao = trắng hồng, thấp = vàng). M09 eIyOFEidqL = 0.784. Quý phi trong game c20 t6 = 0.793. ĐÚNG ≥ 0.755; hơi vàng 0.73–0.755; VÀNG < 0.73.
 Lưu ý: tông da là số đo; NÉT VẼ (mặt kiểu M09: mắt to tròn, má hồng, da mịn) thì cả 52 thiếu nữ đều chưa giống M09 hẳn — xem ảnh.
 
