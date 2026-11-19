@@ -7,11 +7,12 @@
    rolls every quick button itself (kitQuickRoll in her context), pays every cost once (the card's runOpt inside act(i), jaudit's held cost
    = F5 payAA), then runs the end in her context. Her result rows / cards / sounds show on HER phone once (captured: TH.UICAP).
    Ends: exEnd (her exam + the servant exam), kcPhucEnd (Phúc tuyển), kc2ExamEnd (Ngày tuyển / Lễ ra mắt), kc2SelEnd (Tuyển chọn trước ngày
-   phong), vlCraftEnd (veil craft), wdGroomEnd (Chải chuốt), toilFinish (the mirror: Điểm trang, also inside Hội phối đồ), stealEnd (the
+   phong), vlCraftEnd (veil craft), wdGroomEnd (Chải chuốt), toilFinish (the mirror: Điểm trang, also inside Hội phối đồ), tsDressEnd (Hội phối
+   đồ theo đề: the board's end after the mirror), stealEnd (the
    Tranh sủng / Chặn ngự giá game before her deck card or her person-menu act), the Tự học deck card (jaudit aaMG: F5's wkLessonEnd + her
    card marked used on the host).
    A START that ran in her context on the host (a part-D card pick, an F intent such as F6a's act(i)) never opens a game there: the opener
-   is captured (exGame / kcPhucGame / kc2ExamGame / kc2SelGame / vlCraftGame / stealGame / toilGo) and plays on HER phone with the answer
+   is captured (exGame / kcPhucGame / kc2ExamGame / kc2SelGame / vlCraftGame / stealGame / toilGo / tsDressGo, + a contest podium kitPodiumP) and plays on HER phone with the answer
    (TH.uiPlay); its end is the intent above. */
 (function(){try{
 const CW=window.COOPW;if(!CW||!CW.thin||!CW.thin.F||!CW.thin.F.x5)return;
@@ -30,7 +31,15 @@ const CX12=CX10.concat([["toil",()=>{try{return typeof TOIL==="object"&&TOIL.st?
  ["card",()=>host()?null:CARD,v=>{HCARD=host()&&v&&typeof v==="object"?v:null}],
  /* the host's own running game (KG82.run) is never stopped by her end run in her context (toilFinish stops "the" running game) */
  ["kgrun",()=>host()&&typeof KG82==="object"?KG82.run:null,v=>{if(host()&&typeof KG82==="object")KG82.run=v||null}]]);
-const reg12=(name,K,o)=>reg10(name,K,Object.assign({lv:L12,ctx:CX12},o||{}));
+/* her rank set (jpromo prCheck: the rank's full set of real items + the chest) is given by the HOST in her context right after an end that
+   raised her rank (the exam, the entry selections): in the same patch as the rank, so her phone never sees the rank without the set
+   (and her exam record exS moved to the new rank there too, the same patch).
+   Her phone never runs prCheck at level 12 (it gave the set a second time on her phone: proven by coop-thin-f6b E1, law 6c) — every other
+   road that raises her rank in her context on the host gets it at her next step there (jpromo's nextBuoi wrapper, her context). */
+const prPost=name=>{const f=window[name];if(typeof f!=="function")return;window[name]=function(){const r=f.apply(this,arguments);if(hctx())try{if(typeof exS==="function")exS(S)/* her exam record moved to the next rank (exS resets it lazily: else her phone did it, a write there) */;if(typeof prCheck==="function"){prCheck();F.stat.prPost=(F.stat.prPost|0)+1}}catch(e){console.error("thin F6b prCheck",e)}return r}};
+if(typeof window.prCheck==="function"){const p0=window.prCheck;window.prCheck=function(){if(on()&&!host()&&!!CW.seat&&!!TH.view){F.stat.prSkip=(F.stat.prSkip|0)+1;return}return p0.apply(this,arguments)};prCheck=window.prCheck}
+capFn("kitPersonReveal");/* the new servant's reveal of that set (kmPush is silent in her context): on her phone */
+const reg12=(name,K,o)=>{prPost(name);return reg10(name,K,Object.assign({lv:L12,ctx:CX12},o||{}))};
 const raw0=(raw,sk)=>sk||inR(raw,MSC().raw);
 /* her own card in her host deck (the same rule F6a uses: index + name; else the first not-done card with that name) */
 function myCard(c){if(!c||!Array.isArray(deck))return -1;const i=c.i|0;if(deck[i]&&deck[i].n===c.n)return i;return deck.findIndex(a=>a&&a.n===c.n&&!a.done)}
@@ -113,6 +122,34 @@ reg12("stealEnd",["v","v","v"],{snap:"soft",noRes:true,title:A=>A[0]&&A[0].k==="
 /* ===== 12. the Tự học deck card (jaudit aaMG): the lesson's end is F5's wkLessonEnd; her card is marked used on the host too ===== */
 if(F.R.wkLessonEnd){const R=F.R.wkLessonEnd;R.ctx=CX12;const p0=R.pre;R.pre=function(A){if(on()&&HCARD){const i=myCard(HCARD);if(i>=0)deck[i].done=1;F.stat.cardMark=(F.stat.cardMark|0)+1}HCARD=null;return p0?p0.apply(this,arguments):undefined};
  const w=window.wkLessonEnd;window.wkLessonEnd=function(){try{return w.apply(this,arguments)}finally{if(!host())CARD=null}}}
+
+/* ===== 11. Hội phối đồ theo đề: the board + the mirror play on HER phone; the end = tsDressEnd (the host keeps the contest: the entrants
+   rolled at the hold, her option's cost already paid at her pick; it rolls her maid's pick itself and runs the same finish) ===== */
+const DH={};/* host: seat → {th, m, cb} (the contest closure of tsDressHold, in memory: a host reload drops it → her end is refused, nothing applied) */
+if(typeof window.tsDressGame==="function"){const g0=window.tsDressGame;window.tsDressGame=function(th,done){
+  if(hctx()){DH[CW.ctx]={th,m:S.month,cb:done};return cap("tsDressGo",[th,S.month])}return g0.apply(this,arguments)}}
+/* her phone: the board, then the mirror (its own end = toilFinish), then ONE end; her maid's pick is rolled on the host (sk) */
+window.tsDressGo=function(th,m){if(typeof window.tsDressGame!=="function"||!TS_THEME[th])return;
+ window.tsDressGame(th,(P,sk)=>tsMkSit(th,m,()=>{let n=0;const go=()=>{if(F.pend&&++n<200){setTimeout(go,300);return}/* the mirror's end first (one intent at a time) */
+   window.tsDressEnd(sk?{}:P,!!sk)};go()}))};
+TH.UICAP.add("tsDressGo");
+/* host, her context: the mirror was sat on her phone (its end already applied) or left → never opened here */
+if(typeof window.tsMkSit==="function"){const m0=window.tsMkSit;window.tsMkSit=function(th,m,done){if(hctx()){done();return}return m0.apply(this,arguments)};tsMkSit=window.tsMkSit}
+window.tsDressEnd=function(P,sk){const h=DH[CW.ctx];if(!h)return;delete DH[CW.ctx];const Q2=sk?tsMaidPick(h.th):P;h.cb(Q2,!!sk)};
+reg12("tsDressEnd",["v","v"],{snap:true,title:()=>"Hội phối đồ",
+ dec:a=>{const x=X5.decA9(["v","v"],a);if(!x)return null;const [P,sk]=x;const h=DH[CW.ctx];if(!h||h.m!==S.month||!P||typeof P!=="object"||Array.isArray(P))return bad("tsDressEnd");
+  const o={};if(!sk)for(const [k,v] of Object.entries(P)){const s=TS_SLOT.find(z=>z[0]===k);if(!s)return bad("tsDressEnd");if(v==null)continue;
+   if(typeof v!=="string"||!s[2](v)||!S.inv.some(e=>e&&e.k===v))return bad("tsDressEnd");o[k]=v}/* every piece is in her bag and fits its slot */
+  return [o,!!sk]}});
+/* the podium of a contest run in her context on the host: shown on HER phone (plain list: her = "me", an NPC by id); the host goes on at once */
+if(typeof window.kitPodiumShow==="function"){const k0=window.kitPodiumShow;window.kitPodiumShow=function(list,o){
+  if(hctx()){try{if(typeof cuMeet==="function")cuMeet((list||[]).map(x=>x&&x.who).filter(Boolean))}catch(e){}/* everyone on the dais is known: written here, in her context */
+   const L=(Array.isArray(list)?list:[]).map(x=>({who:x&&x.who===S?"me":x&&x.who&&x.who.id,score:x&&x.score,place:x&&x.place,sub:x&&x.sub}));
+   cap("kitPodiumP",[L,{title:o&&o.title,sub:o&&o.sub,next:o&&o.next}]);try{if(o&&typeof o.onNext==="function")o.onNext()}catch(e){console.error(e)}return null}
+  return k0.apply(this,arguments)};kitPodiumShow=window.kitPodiumShow}
+window.kitPodiumP=function(L,o){const W=x=>x==="me"?S:(rivals||[]).find(v=>v&&v.id===x);const list=(L||[]).map(x=>Object.assign({},x,{who:W(x.who)})).filter(x=>x.who);
+ if(list.length>=2)window.kitPodiumShow(list,o||{})};
+TH.UICAP.add("kitPodiumP");
 
 /* the deferred cost a game holds (F5): an F6b end that ran on her phone after all pays it there (reg10's own wrapper) — nothing more here */
 F.f6b={on,stat:()=>F.stat};

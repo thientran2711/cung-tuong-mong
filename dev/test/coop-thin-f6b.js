@@ -80,6 +80,12 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  const stage=async src=>{const r=await H.p.evaluate(src=>{try{return COOPW.thin.withSeat('b',()=>{const o=(0,eval)('(function(){'+src+'})')();/* every staged piece gets its ledger id now (the game gives it lazily): the same piece is traced by it after giveTo hands over a new entry */for(const e of S.inv||[])if(e&&e.tg3&&e.iu==null&&typeof ilUid==='function')ilUid(e);return o})}catch(e){return 'EXC '+e.message}},src);await H.p.evaluate(()=>{try{COOPW.thin.flush()}catch(e){}});await sync();await sleep(300);return r};
  await stage("S.bac=Math.max(S.bac||0,3000);S.suc=60;S.confined=0;S.out=0;if(S.maid){S.maid.loyal=80;delete S.maid.spyFor}");
  {const a=await G.p.evaluate(()=>__her()),b=await H.p.evaluate(()=>__her());console.log('setup (info): her bag on her phone',a.inv.length,'· the host\'s copy',b.inv.length,'(her own changes reach the host in her next intent / ready diff: E / F1)')}
+ /* harness staging (not game code): her phone's starting bag is copied into the host's store once, so every row starts with the
+    two copies equal (in play her bag reaches the host in her first intent / ready diff, contract E); proves the E1/E2 'same' reds of #1
+    were this staging gap, not a twin-state fault */
+ {const inv=await G.p.evaluate(()=>JSON.stringify(S.inv||[]));await stage('S.inv='+inv+';');await sync();await sleep(800);
+  /* the host's view now holds the same bag: her phone keeps its own copy (the view delta added the pieces a second time there) */await G.p.evaluate(inv=>{S.inv=JSON.parse(inv);render()},inv);
+  const a=await G.p.evaluate(()=>__her()),b=await H.p.evaluate(()=>__her());ok(JSON.stringify(a.inv)===JSON.stringify(b.inv),'setup: her bag staged on the host = her phone',{phone:a.inv.length,host:b.inv.length})}
  const table=[];const trip=()=>TRIPSRC?G.p.evaluate(()=>window.__trip&&__trip()).catch(()=>null):null;const tw0=await trip();
  const pick=src=>G.p.evaluate(src=>(0,eval)('(function(){'+src+'})')(),src);
  const ROWS=process.env.ROWS?process.env.ROWS.split(','):null;
@@ -98,10 +104,11 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
     of her person, old road (level 7, Math.random = o.r on her phone) → its delta must equal the real one. o.reject: the host refuses it. */
  const act=async(tag,src,o={})=>{if(ROWS&&!ROWS.some(x=>tag.startsWith(x)))return {skip:1};await until(G,()=>!COOPW.thin.F.pend,null,20000);await reset();if(o.stage)await stage(o.stage);await sync();
   await G.p.evaluate(r=>{window.__raw=r},o.raw==null?null:o.raw);
+  if(process.env.DBG)console.log('DBGEX',tag,JSON.stringify([await G.p.evaluate(()=>[S.ex,(()=>{try{return COOPW.thin.E.base(COOPW.thin.view).ex}catch(e){return 'nb '+e.message}})()]),await H.p.evaluate(()=>COOPW.thin.withSeat('b',()=>S.ex))]));
   if(o.pre){const e=await pick('Q.length=0;try{closeModal()}catch(e){}'+o.pre);if(e)console.log(tag,'pre:',JSON.stringify(e).slice(0,300))}await sleep(o.wait||400);
   const r0=o.r==null?0.5:o.r;await rnd(G,o.hr!=null?o.hr:r0)/* the twin rolls as the host will */;
-  const twin=o.twin&&ON?await G.p.evaluate(src=>{const TH=COOPW.thin;const S0=S,u0=used,lv=TH.lvl,lw=COOPW.lvWas,ap=window.__aaPend,q0=Q.slice(),fx=window.aaCardTo,tq=TDS.q;const C=JSON.parse(JSON.stringify(S0));let out=null,err=null;
-    S=C;TH.lvl=7;COOPW.lvWas=7;window.aaCardTo=()=>{};try{const b=__sum(S);(0,eval)('(function(){'+src+'})')();out={b,a:__sum(S),du:used-u0}}catch(e){err=e.message}finally{S=S0;used=u0;TH.lvl=lv;COOPW.lvWas=lw;window.__aaPend=ap;window.aaCardTo=fx;TDS.q=tq;Q.length=0;Q.push(...q0)}return out||{err}},o.twin):null;
+  const twin=o.twin&&ON&&!process.env.NOTWIN?await G.p.evaluate(src=>{const TH=COOPW.thin;const S0=S,u0=used,lv=TH.lvl,lw=COOPW.lvWas,ap=window.__aaPend,q0=Q.slice(),fx=window.aaCardTo,tq=TDS.q;const C=JSON.parse(JSON.stringify(S0));let out=null,err=null;
+    S=C;TH.lvl=7;COOPW.lvWas=7;window.aaCardTo=()=>{};/* the twin's deferred steps (setTimeout: the rank edict's gifts, the next exam target) run on the CLONE before it is dropped, never later on her real person */const st0=window.setTimeout,DQ=[];window.setTimeout=(f,ms,...x)=>{if(typeof f==='function'&&(ms|0)<=2000){DQ.push(()=>f(...x));return 0}return st0(f,ms,...x)};try{const b=__sum(S);(0,eval)('(function(){'+src+'})')();for(let k=0;k<200&&DQ.length;k++){try{DQ.shift()()}catch(e){}}out={b,a:__sum(S),du:used-u0}}catch(e){err=e.message}finally{window.setTimeout=st0;S=S0;used=u0;TH.lvl=lv;COOPW.lvWas=lw;window.__aaPend=ap;window.aaCardTo=fx;TDS.q=tq;Q.length=0;Q.push(...q0)}return out||{err}},o.twin):null;
   await rnd(H,o.hr!=null?o.hr:r0);await rnd(G,o.gr!=null?o.gr:r0)/* her phone: the other outcome (it must never roll) */;
   const g0=await G.p.evaluate(()=>__her()),h0=await H.p.evaluate(()=>__her());const st0=await H.p.evaluate(()=>Object.assign({},COOPW.thin.F.stat,{ms:0}));const gs0=await G.p.evaluate(()=>Object.assign({},COOPW.thin.F.stat,{ms:0},{aaN:window.__aaN}));
   const hc0=await H.p.evaluate(()=>{const t=document.getElementById('rtoast');return t?t.innerHTML:''});
@@ -111,6 +118,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   const got=r.id?await until(G,id=>!COOPW.thin.F.pend&&COOPW.thin.F.lastAns&&COOPW.thin.F.lastAns.id===id,r.id,20000):false;
   await sleep(1500);await sync();await rnd(G,null);await rnd(H,null);
   if(o.shot&&process.env.SHOTS){fs.mkdirSync(process.env.SHOTS,{recursive:true});for(const p of [H,G]){await tapText(p,/^Bỏ qua$/,1500)/* the Luân hồi intro overlay (never closed by this scripted run) */;await p.p.evaluate(()=>{for(const el of document.querySelectorAll('.nl-intro,#nlIntro,[data-nlintro]'))el.remove()}).catch(()=>{})}await sleep(1200);for(const p of [H,G]){const vp=p.p.viewportSize();await p.p.screenshot({path:path.join(process.env.SHOTS,`f6b-${o.shot}-L${LVL}-${p.name}-${vp.width}x${vp.height}.jpg`),type:'jpeg',quality:70})}}
+  if(process.env.DBG)console.log('DBGPOST',tag,JSON.stringify([await H.p.evaluate(()=>[COOPW.thin.F.stat.prPost,COOPW.thin.withSeat('b',()=>[S.rank,S.ex,S.prSeen])]),await G.p.evaluate(()=>[COOPW.thin.F.stat.prSkip,S.rank,S.ex,S.prSeen])]));
   const g1=await G.p.evaluate(()=>__her()),h1=await H.p.evaluate(()=>__her());const st1=await H.p.evaluate(()=>COOPW.thin.F.stat);const gs1=await G.p.evaluate(()=>Object.assign({},COOPW.thin.F.stat,{aaN:window.__aaN}));const ans=await G.p.evaluate(()=>COOPW.thin.F.lastAns);
   const hc1=await H.p.evaluate(()=>{const t=document.getElementById('rtoast');return t?t.innerHTML:''});
   const same=JSON.stringify(Object.assign({},g1,{log:0,nlog:0,used:0}))===JSON.stringify(Object.assign({},h1,{log:0,nlog:0,used:0}));
@@ -139,9 +147,9 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  const NR=await pick(`try{return exPlanFull().rounds.length}catch(e){return 0}`);
  if(process.env.DBG)console.log('E dbg NR',NR,await pick(`return {elig:exElig(S),e:exS(S),rank:S.rank}`));
  const align=async()=>{const hr=await H.p.evaluate(()=>COOPW.thin.withSeat('b',()=>S.rank));await G.p.evaluate(r=>{S.rank=r;render()},hr)};
- if(NR){await act('E1 exam played on her phone (every môn 9): same as solo',KOK,{stage:est,pre:`exStart();if(!document.getElementById('kg82go'))return 'no game';__clk()`,raw:9,wait:7000,twin:`exEnd('me',${RW(9)},[])`,noInv:1,chk:x=>x.g1.ex!==x.g0.ex&&x.g1.exw==null});
+ if(NR){await act('E1 exam played on her phone (every môn 9): same as solo',KOK,{stage:est,pre:`exStart();if(!document.getElementById('kg82go'))return 'no game';__clk()`,raw:9,wait:7000,twin:`exEnd('me',${RW(9)},[])`,noInv:1,chk:x=>(x.g1.ex!==x.g0.ex||x.g1.rank>x.g0.rank)/* passed with a free seat: the record moves to the next rank (exS) */&&x.g1.exw==null});
   await align();await act('E2 over-max (exEnd raw 11): refused, the window stays open',`exEnd('me',${RW(11)},[])`,{stage:est,reject:1,chk:x=>x.g1.ex===x.g0.ex&&x.g1.exw!=null});
-  await align();await act('E3 every môn «Để tài nghệ quyết định» (exSkipRaw on the host): same as solo',`exEnd('me',${RW(0)},${JSON.stringify(Array(NR).fill(true))})`,{stage:est,twin:`exEnd('me',${RW(0)},${JSON.stringify(Array(NR).fill(true))})`,noInv:1,chk:x=>x.g1.ex!==x.g0.ex});
+  await align();await act('E3 every môn «Để tài nghệ quyết định» (exSkipRaw on the host): same as solo',`exEnd('me',${RW(0)},${JSON.stringify(Array(NR).fill(true))})`,{stage:est,twin:`exEnd('me',${RW(0)},${JSON.stringify(Array(NR).fill(true))})`,noInv:1,chk:x=>x.g1.ex!==x.g0.ex||x.g1.rank>x.g0.rank});
   await align();await act('E4 no open window (a second end): refused',`exEnd('me',${RW(5)},[])`,{stage:`const e=exS(S);e.w0=e.w1=null;e.pend=null;`,reject:1})}
  else ok(true,'E no exam plan here (skipped)');
  await act('E5 servant exam without a window: refused',`exEnd('srv',[5],[])`,{reject:1});
@@ -193,6 +201,32 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
    await G.p.evaluate(()=>{const k=document.getElementById('kg82ok');if(k)k.click()});await until(G,()=>!COOPW.thin.F.pend,null,20000);await sleep(1500);await sync();
    const r2=await G.p.evaluate(([n0,s1])=>({dn:S.inv.length-n0,sent:COOPW.thin.F.stat.sent-s1,ans:COOPW.thin.F.lastAns&&COOPW.thin.F.lastAns.n,st:COOPW.thin.F.lastAns&&COOPW.thin.F.lastAns.r0&&COOPW.thin.F.lastAns.r0.st}),[n0,s1]);
    ok(r2.dn===1&&r2.sent===1&&r2.ans==='vlCraftEnd'&&r2.st==='ok','C2 … and its end (raw 6) is ONE intent: the veil made once, on her',r2)}}
+ /* ---- H: Hội phối đồ theo đề: the hold runs in her context on the HOST (the world month); her pick «Tự tay phối đồ» opens the board on
+    HER phone (captured tsDressGo); the mirror is already sat today (staged), so the board's end is the ONE intent tsDressEnd ---- */
+ const hst=`S.suc=80;S.out=0;S.confined=0;const th=Object.keys(TS_THEME)[0];tsS().dress={th,m:S.month,y:S.year};S.toilette={wk:wk(),day:wk()*10,score:40,makeup:false,F:2,occ:['fest'],parts:{}};`;
+ const hold=()=>H.p.evaluate(()=>{const TH=COOPW.thin;let o=null;TH.withSeat('b',()=>{const T=TH.tapRun(()=>{try{Q.length=0;tsDressHold();const i=Q.findIndex(q=>/^Hội phối đồ ·/.test(q.t||''));if(i<0){o='no panel';return}const m=Q.splice(i,1)[0];Q.length=0;Q.unshift(m);chooseM(0)}catch(e){o='EXC '+e.message}});o=o||T.ui});return o});
+ if(ON)for(const [tag,skip] of [['H1 Hội phối đồ: her set presented',0],['H2 Hội phối đồ «Bỏ qua»: her maid picks, rolled on the host',1]]){if(ROWS&&!ROWS.some(x=>tag.startsWith(x)))continue;
+  await reset();await stage(hst);const g0=await G.p.evaluate(()=>__her());const ho0=await HO();const r=await hold();
+  const capd=Array.isArray(r)&&r.some(x=>x[0]==='tsDressGo');await G.p.evaluate(ui=>{if(Array.isArray(ui))COOPW.thin.uiPlay(ui)},r);await sleep(800);
+  const open=await G.p.evaluate(()=>!!document.getElementById('tsdgo'));const hostOpen=await HO();
+  if(!(capd&&open)){ok(false,tag,{r:JSON.stringify(r).slice(0,300),open});continue}
+  const s1=await G.p.evaluate(()=>COOPW.thin.F.stat.sent);
+  await G.p.evaluate(sk=>{if(sk){document.getElementById('tsdskip').click();return}const b=document.querySelector('[data-tsi]');if(b){b.click();const o=document.querySelector('[data-tsact="on"]');if(o)o.click()}document.getElementById('tsdgo').click()},skip);
+  await until(G,()=>!COOPW.thin.F.pend&&COOPW.thin.F.lastAns&&COOPW.thin.F.lastAns.n==='tsDressEnd',null,20000);await sleep(1500);await sync();
+  const g1=await G.p.evaluate(()=>__her()),h1=await H.p.evaluate(()=>__her());
+  const x=await G.p.evaluate(s1=>{const F=COOPW.thin.F;return {sent:F.stat.sent-s1,ans:F.lastAns&&F.lastAns.n,st:F.lastAns&&F.lastAns.r0&&F.lastAns.r0.st,args:F.lastMsg&&JSON.stringify(F.lastMsg.a).slice(0,160),pod:!!document.getElementById('kpodov'),
+    logs:(S.logs||[]).slice(0,10).map(l=>String(l).replace(/<[^>]+>/g,'').slice(0,90))}},s1);
+  const hpod=await H.p.evaluate(()=>!!document.getElementById('kpodov'));
+  const same=JSON.stringify(Object.assign({},g1,{log:0,nlog:0,used:0}))===JSON.stringify(Object.assign({},h1,{log:0,nlog:0,used:0}));
+  const placed=x.logs.filter(l=>/Hội phối đồ .*ngươi đứng thứ/.test(l)).length===1;
+  ok(hostOpen===ho0&&!hpod&&x.sent===1&&x.ans==='tsDressEnd'&&x.st==='ok'&&placed&&same&&g1.suc-g0.suc===-5,tag+': the board + podium on HER phone only, ONE end, placed once, Sức -5 once',{x,same,dsuc:g1.suc-g0.suc,hostOpen,ho0,hpod});
+  if(skip)ok(/^\[\{"v":\{\}\},\{"v":true\}\]/.test(x.args||''),'H2b her phone sent no pick (the host rolled her maid\'s pick)',x.args);
+  await G.p.evaluate(()=>{try{kitPodiumClose(true)}catch(e){}})}
+ if(ON&&(!ROWS||ROWS.some(x=>'H3'.startsWith(x)))){await reset();await stage(hst);const r=await hold();await G.p.evaluate(ui=>{if(Array.isArray(ui))COOPW.thin.uiPlay(ui)},r);await sleep(500);
+  const g0=await G.p.evaluate(()=>__her());await G.p.evaluate(()=>{try{kg82Close()}catch(e){}window.tsDressEnd({hair:'zz_none'},false)});
+  await until(G,()=>!COOPW.thin.F.pend,null,20000);await sleep(1200);await sync();const g1=await G.p.evaluate(()=>__her());
+  const st=await G.p.evaluate(()=>COOPW.thin.F.lastAns&&COOPW.thin.F.lastAns.r0&&COOPW.thin.F.lastAns.r0.st);
+  ok(st==='gone'&&g1.log===g0.log,'H3 a piece she does not hold: refused, nothing applied',{st,log:[g0.log,g1.log]})}
  /* double end */
  if(ON){await reset();await stage(vst);const r=await G.p.evaluate(()=>{const F=COOPW.thin.F,b0=F.stat.busy,s0=F.stat.sent;wdGroomEnd('ok');wdGroomEnd('ok');return {busy:F.stat.busy-b0,sent:F.stat.sent-s0}});
   await until(G,()=>!COOPW.thin.F.pend,null,20000);ok(r.sent===1&&r.busy===1,'D1 double end: one intent, the second ignored',r)}
