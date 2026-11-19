@@ -17,6 +17,7 @@ if(process.argv[2]==='--table'){const J=JSON.parse(require('fs').readFileSync(pr
 const {chromium}=require('./lib/pw-roulette');const fs=require('fs');const [,,BASE,W0,H0,JOUT]=process.argv;const W=+W0||755,H=+H0||1000;const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+process.env.DPR||1,hasTouch:true,isMobile:W<900,reducedMotion:'reduce'});
  if(process.env.HH)await ctx.addInitScript(()=>{window.__HH=1});
+ if(process.env.DEMO)await ctx.addInitScript(()=>{window.__DEMO=1});
  if(process.env.CAST)await ctx.addInitScript(c=>{window.__CAST=c},process.env.CAST);
  await ctx.addInitScript(()=>{let a=0x2f6e2b1;Math.random=function(){a=(a+0x6D2B79F5)|0;let t=Math.imul(a^(a>>>15),1|a);t=(t+Math.imul(t^(t>>>7),61|t))^t;return((t^(t>>>14))>>>0)/4294967296}});
  const p=await ctx.newPage();p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message));
@@ -45,6 +46,9 @@ const {chromium}=require('./lib/pw-roulette');const fs=require('fs');const [,,BA
     ERR.base=S;ERR.seen={};for(const id of ids)ERR.seen["scan-"+id]={off:1,on:1};try{ERR.sync()}catch(e){}}
    await Promise.race([Promise.all([...document.querySelectorAll('#stage img')].map(i=>i.complete?1:new Promise(r=>{i.onload=i.onerror=r}))),Wt(9000)]);await Wt(1500);try{ERR.sync()}catch(e){}try{kitFigSealAll()}catch(e){}await Wt(400);
    const st=document.getElementById('stage');if(!st)return{k,err:'no stage'};const SR=st.getBoundingClientRect();
+   /* DEMO=1 (owner shot only): every figure in view carries the kit head marker (kitHeadMarkHtml "on") on its sex line, so a woman and a man show it together */
+   if(window.__DEMO&&typeof kitHeadMarkHtml==='function'){await new Promise(r=>{const i=new Image();i.onload=i.onerror=r;i.src=KIT_HEADMK.on});document.querySelectorAll('.kdemo-hm').forEach(e=>e.remove());const px=KIT_HEADMK.px||24;
+    for(const f of [...document.querySelectorAll('#tokens .tok.fig img.figimg')].filter(f=>f.offsetParent&&f.naturalWidth)){const P=kitBadgeAt(st,f,'hap',px,px);if(!P)continue;const w=document.createElement('span');w.innerHTML=kitHeadMarkHtml('demo','img','on');const c=w.firstChild;c.classList.add('kdemo-hm');c.style.cssText=`position:fixed;left:${P.left}px;top:${P.top}px;z-index:7;margin:0`;document.body.appendChild(c)}await Wt(600)}
    const L=typeof kitMarkLine==='function'?kitMarkLine(st):null;const vis=e=>e&&e.offsetParent!==null&&e.getClientRects().length&&getComputedStyle(e).visibility!=='hidden'&&!e.closest('.j59off');
    const box=f=>{const r=f.getBoundingClientRect();let bx=r.left,by=r.top,bw=r.width,bh=r.height;const nw=f.naturalWidth,nh=f.naturalHeight;if(nw&&nh){const ar=nw/nh;if(bw/bh>ar){const w=bh*ar;bx+=(bw-w)/2;bw=w}else{const h=bw/ar;by+=(bh-h)/2;bh=h}}return{bx,by,bw,bh}};
    const figs=[...document.querySelectorAll('#mefig,#tokens .tok.fig img.figimg')].filter(vis).filter(f=>f.naturalWidth);const out=[];
