@@ -273,7 +273,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | coop-thin hostnull fix #2 (opus; successor of 4i9JQenz at 20a1f54f) | review/coop-thin-hostnull | B | session_01N1tNP2tXKt5N4VcwMfYH8B | RUNNING | 19/11 09:44Z |
 | REVIEW coop-thin-f5 r1 (opus BIG) of e6ad9a29 | review/coop-thin-f5-r1 | B | session_01N1tNP45gZxR8HqWwB9auYE | RUNNING | 19/11 09:50Z |
 | coop-thin F6a (opus; deck runner one hand on host, act(i), j72 quests, L11; stacked on F5) | review/coop-thin-f6 | B | session_01N1tNP5ex6HrG5uFmnZYTqA | RUNNING | 19/11 09:51Z |
-| MAIN ROOT-68 (opus; child of ROOT-67, depth 6) | handover HANDOVER_SESSION9 | ROOT-67 | session_01Rc5AsHe8w1z2UgZJUycHEJ | RUNNING | 19/11 09:57Z |
+| MAIN ROOT-68 (opus; child of ROOT-67, depth 6) | handover HANDOVER_SESSION9 | ROOT-67 | session_01Rc5AsHe8w1z2UgZJUycHEJ | DONE → ROOT-69 | 19/11 09:57Z |
 | coop-thin F6b (opus; remaining mini-game ends as score intents, L12; parallel to F6a, stacked on F5) | review/coop-thin-f6b | B | session_01N1tNP4XtuMraUEmXvATwMg | ROLLOVER #1→#2 @ a4d77f3c (27/29; report reports/coop-thin-f6b.md) | 19/11 10:01Z |
 | kit-head-say SMALL REVIEW (sonnet) of 5d9cdd5d | review/kit-head-say; briefs/review-kit-head-say.md | MAIN ROOT-68 | session_01Rc5AsKGEciGWVZG7BD4KHc | DONE PASS 6b1ab390 — LIVE | 19/11 10:14Z |
 | FOREMAN E #11 (opus; child of FOREMAN E ex-standby, depth 1; PICKUP 10:20Z) | handover FOREMAN_E_STATUS | FOREMAN E | session_01DgYSWq1iGwKC5ebN2qhmFU | RUNNING | 19/11 10:14Z |
