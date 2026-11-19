@@ -268,6 +268,7 @@ Stage strangers: full-body grey silhouettes `img/kit/unknown-fig-f|m|k.webp` (90
 ---
 
 ## 6. ACT CARD (j63) — one frame for every act, option and priced button
+- PARALLEL TIME (jptime, OD 18/11 ~20:35Z): a button that SENDS another person shows its order khắc and "chờ N khắc" together in the ONE Tốn row (`KA_TIME` accepts `chờ N khắc`; talk options: `optLine` puts it after the order khắc). N = the khắc the person is away (BAL.ptime).
 
 Applies to: act cards (Hành động, servant road), person-card act groups (`.pcb`: consort, child, servant, court houses…),
 dialog options (`.opt` / `.opts`), priced buttons (`pbtn`, `.btn`, `.rbtn`: court, festival, shop…). Built ONLY through
@@ -4099,7 +4100,7 @@ rail button + (optional) activity animation + tap → a kit info panel with the 
   No @media (KIT §0). While no game is on screen the rail items with `onTitle` sit in a fixed bottom-left dock (`.krail.kstdock`; hidden behind dialogs / the book).
 - Panel: `kitPanel({kind:"info",look:1,…})`; the only options are real actions (e.g. "Tạm ngưng / Thỉnh tiếp"); closing = ✕ / tap outside / Esc, never "Đã hiểu".
 - PAINTED ICONS (K-ICO-3, review/kit-ico-rank): `dl` = `img/kit/ico-download.webp`, `upd` = `img/kit/ico-update.webp` via `icon:` (a text `glyph` is only the fallback for a status with no painted icon). busy = the painted icon bobs (same CSS-only motion), done = still with a green kit border, badge = the seal-red dot.
-- Users: `dl` (Thỉnh tranh nhân vật, jload; own info panel) · `upd` (Có bản mới, swreg; `onTap` opens its own card §35.2). NOT status icons: co-op buổi clock `#kctm` + friend chip `#kctmf`
+- Users: `dl` (Thỉnh tranh nhân vật, jload; own info panel) · `upd` (Có bản mới, swreg; `onTap` opens its own card §35.2). · `tin` (PARALLEL TIME, `dev/build/jptime.js`, owner OD 18/11 ~20:10Z/~20:20Z): busy = someone she sent is away, badge = a report came back; panel = the reports (kitFacts + kitChips) + the people still away ("về khắc K") + the one optional real action «Đợi tin» (jump her clock to the next return khắc, same day). Glyph `信` until the painted icon (KIT REQUEST K-PT-1) exists. NOT status icons: co-op buổi clock `#kctm` + friend chip `#kctmf`
   (jcooptimer; the countdown must stay readable — owner/coordinator ruling 16/11).
 - Sample: kit page §77.1. Test: `node dev/test/status-icon.js <url> <outdir> [WxH,...]` (idle → none; busy; paused dot; done ✓ then gone; panel ✕ / Esc / no "Đã hiểu";
   no old chip / dock band; game padding-bottom unchanged; icon 44 px inside the stage, over no face).

@@ -54,7 +54,9 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
  const RKN=(typeof RANKS!=="undefined"?RANKS.map(x=>x.n):[]).sort((a,b)=>b.length-a.length);
  const addP=(role,n,src)=>{if(!n)return;n=String(n).replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim();for(const r of RKN)if(n.startsWith(r)&&n.length>r.length&&n[r.length]!==" "){n=n.slice(r.length);break}if(!n)return;const R=res.P[role]=res.P[role]||{};(R[n]=R[n]||{})[src]=1};
  const addN=(role,k,src)=>{if(!k)return;const R=res.N[role]=res.N[role]||{};(R[k]=R[k]||{})[src]=1};
- const SKIPA=/data-(tab|pg|pv|sub|close|x|kinvpane|ksub|ktsv|kinvsub|kinvtab|mode|rail|lay|kitsample|kitx|maplist|v85tab|cl|coop|sl|new|kt53)=/;
+ /* role-parity-drift-2 (law 11, whole group): the kit info chips .kchipb «Chứng cứ N ›» (data-kev → kitEvidencePanel) and «Đã biết: N tin ›» / «Xem thêm N điều ›»
+    (data-kintel → kitIntelPanel) only OPEN an info panel (j79 click hook): navigation, not an act — they became a row when a drawn rival happened to hold proof */
+ const SKIPA=/data-(tab|pg|pv|sub|close|x|kinvpane|ksub|ktsv|kinvsub|kinvtab|mode|rail|lay|kitsample|kitx|maplist|v85tab|cl|coop|sl|new|kt53|kev|kintel)=/;
  /* B3: a real act button that also carries a navigation-like attribute (Tài nghệ «Tự học» data-learn + data-mode; kid card «Dạy chữ» data-kt53) is
     still an act: the probe used to drop it (cx:study / cx3:teachV / cx3:teachD were N-ONLY by probe only); sub-tab rows (data-ktsv) are navigation */
  const DOA=/data-(learn|vlearn)="|data-kt53="(?!none")/;
@@ -68,7 +70,12 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
  const VAR=[
   ["base",a=>{}],
   ["tired",a=>{a.suc=20;a.bac=30;if(a.st&&typeof a.st==="object")Object.assign(a.st,{suc:20,bac:30})}],
-  ["social",a=>{for(const t of others(a)){try{oanAdd(t,a,40);affAdd(a,t,50);relAdd(a,t,40);if(t!==S){t.suc=30;t.sung=15}}catch(e){}}}],
+  ["social",a=>{for(const t of others(a)){try{oanAdd(t,a,40);affAdd(a,t,50);relAdd(a,t,40);if(t!==S){t.suc=30;t.sung=15}}catch(e){}}
+   /* role-parity-drift-2: NPCs already know each other (k61 «Quen biết» 3, exempt «first meeting»); her Phe phái / person lists show only people she knows
+      (j61 k61Hide). In the social world she is acquainted (Quen biết) with them too, so «Lập phe cùng» is judged by its rule at her rank, never by whom
+      the drawn life had met (hh / up cx3:facFound were N-ONLY by draw only after 98f9f0f1 shifted the dice) */
+   if(a===S)try{const K=typeof k61S==="function"&&k61S();if(K){const K0=Object.assign({},K);UNDO.push(()=>{for(const z in K)delete K[z];Object.assign(K,K0)});
+    for(const t of others(a)){const kk=t&&t!==S&&kOf61(t);if(kk&&(+K[kk]||0)<3)K[kk]=3}}}catch(e){}}],
   ["proof",a=>{for(const t of others(a)){try{if(typeof evA==="function")evA(a,t,3,"scan");else t.ev=3}catch(e){}}}],
   ["body",a=>{a.preg=2;a.hidden=true;a.fake=0;a.pregWk=wk();try{const k={name:"Tiểu Bảo",sex:"m",age:5,hp:30,tal:20,fond:20,alive:true};a.kids=(a.kids||[]).concat([k])}catch(e){}}],
   ["chest",a=>{a.inv=a.inv||[];try{for(const k of Object.keys(IT).slice(0,6))a.inv.push({k})}catch(e){}}],
@@ -112,7 +119,10 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
     const L=(a.staff||[]).filter(s=>s&&!s.out&&s.loyal!=null);if(L[0]){const s=L[0],b={loyal:s.loyal,trouble:s.trouble};UNDO.push(()=>Object.assign(s,b));s.trouble=wk();s.loyal=60}}],
   ["faction-friend",a=>{try{const T=others(a).filter(t=>t&&t!==S&&!facOf(t)).slice(0,2);if(T.length<2)return;S.facs=(S.facs||[]).concat([{id:9090902,m:T.map(key),name:"Phe thân"}]);
     const l=facLeader(S.facs[S.facs.length-1]);const d=BAL.ag.par3.fac.clanAff+25-aff(a,l);if(d>0)affAdd(a,l,d)}catch(e){}}],
-  ["staff",a=>{const L=(a.staff||[]).filter(s=>s&&!s.out&&s.loyal!=null);const o=liveRivals(true).find(x=>x&&x!==a&&!x.out);
+  ["staff",a=>{const L=(a.staff||[]).filter(s=>s&&!s.out&&s.loyal!=null);
+    /* role-parity-drift-2: her confidant maid (a.maid, not in a.staff) in a «not yet fully close» state (lòng under BAL.ag.cx2.maidTalk.below), the same for
+       her and an NPC: «Trò chuyện với cung nữ» (cx2:maidTalk) is weighed by an NPC only below that lòng — up was P-ONLY by the drawn maid's lòng only */
+    const cm=a.maid&&!a.maid.out&&a.maid.loyal!=null&&!L.includes(a.maid)?a.maid:null;if(cm){const b0=cm.loyal;UNDO.push(()=>{cm.loyal=b0});cm.loyal=Math.min(cm.loyal,BAL.ag.cx2.maidTalk.below-25)}const o=liveRivals(true).find(x=>x&&x!==a&&!x.out);
     const ST=[s=>{s.loyal=10},s=>{s.loyal=25},s=>{s.loyal=45},s=>{s.trouble=wk();s.loyal=60},s=>{if(o)s.af=Object.assign({},s.af||{},{[o.id]:40});s.loyal=80}];
     L.forEach((s,i)=>{const b={loyal:s.loyal,trouble:s.trouble,af:s.af};UNDO.push(()=>Object.assign(s,b));ST[i%ST.length](s)})}]];
  const UNDO=[];
@@ -139,7 +149,10 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
      Xin chủ tiến cử) — the same lift for the player maid (S.tin) and an NPC maid (loyal); before, the seeded world held no such NPC maid on one draw */
   ["m-trust",a=>{const m=MST(a);if(!m)return;const g=Math.max(BAL.srvGate.rew,BAL.srvGate.rec)+10;if(a===S)S.tin=Math.max(S.tin||0,g);else a.loyal=Math.max(a.loyal||0,g);
     const k=palaceOf(m);S.where=S.where||{};S.where[m.id]=k;const e=S.roster&&S.roster.P&&S.roster.P["v"+m.id];if(e)for(const x of e)if(Array.isArray(x))x[0]=k}],
-  ["m-lonely",a=>{if(a===S)S.srv.af={};else a.af={}}]];
+  ["m-lonely",a=>{if(a===S)S.srv.af={};else a.af={}}],
+  /* role-parity-drift-2: a sour servant (her lòng with her master under BAL.eit.pil.loyal: S.tin for the player maid, loyal for an NPC maid) — the state
+     «Lén giữ đồ Nội vụ phủ phát» needs on both roads (j42 card eitPilMaidOk / jeitem eitPilWho); the player maid had it only by the drawn S.tin */
+  ["m-sour",a=>{const lo=BAL.eit.pil.loyal-15;if(a===S){const t0=S.tin;UNDO.push(()=>{S.tin=t0});S.tin=Math.min(S.tin|0,lo)}else{const l0=a.loyal;UNDO.push(()=>{a.loyal=l0});a.loyal=Math.min(a.loyal|0,lo)}}]];
  const mSnap=()=>JSON.stringify({where:S.where,roster:S.roster,srv:S.srv,S:{suc:S.suc,sac:S.sac,tai:S.tai,duc:S.duc,bac:S.bac,ro:S.ro,tin:S.tin},sv:allServ().map(x=>({sid:x.sid,af:x.af,loyal:x.loyal,rk:x.rk,sec:x.sec,intel:x.intel,suc:x.suc,bac:x.bac,sac:x.sac,tai:x.tai,duc:x.duc})),R:rivals.filter(v=>v!==S).map(v=>({id:v.id,ro:v.ro,oan:v.oan}))});
  const mRest=j=>{const o=JSON.parse(j);S.where=o.where;S.roster=o.roster;S.srv=o.srv;Object.assign(S,o.S);for(const x of o.sv){const s=servById(x.sid);if(s)Object.assign(s,x)}for(const x of o.R){const v=rivals.find(r=>r.id===x.id);if(v)Object.assign(v,x)}};
  const N0={};try{for(const k of Object.keys(agNeedsC(liveRivals(true)[0]||S)))N0[k]=100}catch(e){};["company","desire","tea","order","love","self","tin","mp"].forEach(k=>N0[k]=100);
@@ -161,6 +174,11 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
     if(g0(v)==="consort"&&typeof asHitPick==="function"){const T0=window.traitsOf;for(const cr of [0,1]){if(cr)window.traitsOf=p=>p===v?["Xảo quyệt"]:T0(p);
      try{for(let i=0;i<12;i++){const r=asHitPick(v);if(r&&r.k&&r.k!=="bribe")addN(role,"ml:"+r.k,"asHitPick")}}catch(e){E("asHitPick",e)}finally{window.traitsOf=T0}}}
     try{if(typeof agOpts==="function"&&g0(v)!=="maid")for(const need of [null,"sung","ally","spite","danh","safe","kid","rest","th","hh","bac"])for(const o of agOpts(v,Object.assign({},N0),need)||[])addN(role,o.k,"agOpts")}catch(e){}}
+   /* role-parity-drift-2: an NPC servant's «Lén giữ đồ Nội vụ phủ phát» is no agent option: jeitem eitPilfer runs on her master's monthly goods (stipGoods),
+       chosen by eitPilWho (lòng under BAL.eit.pil.loyal or a spy, not caught lately) — the same gate as her card (eitPilMaidOk: S.tin under the same loyal,
+       spyFor, pilDet) plus this month's Nội vụ phủ piece (eitPilPick). Read that gate for the NPC side (maid:pil was P-ONLY by probe only once 98f9f0f1
+       gave every master this month's goods) */
+    if(g0(v)==="maid"&&typeof eitPilWho==="function")try{const m=ownerOf(v);if(m&&!m.out&&eitPilPick(m)&&eitPilWho(m).some(c=>c.s===v&&c.ch>0))addN(role,"maid:pil","eitPilWho")}catch(e){E("eitPilWho",e)}
    if(g0(v)!=="maid"&&g0(v)!=="srv")gates(role,v);restoreW(W);if(W2)mRest(W2)}};
  /* shared gates: TW deeds and ACT deeds — the same req/ok function decides for her and an NPC */
  /* the NPC side counts a shared-gate deed only when its option set can offer it (haOpts: BANDS + HA_VAR − HA_NO; agOpts: AGSELF / AGSOC; hh: admon) */
@@ -224,6 +242,15 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
  if(phase==="maid"){
   try{const L=[];for(const v of liveRivals(true))for(const s of (v.staff||[]))if(s&&s.role==="maid"&&g0(s)==="maid")L.push(s);for(const s of L.slice(0,16))npcOpts("maid",s,["maid"],VAR.concat(MVAR))}catch(e){E("npcMaid",e)}
   playerLabels("maid",VAR.concat(MVAR));
+  /* maid:pil (Lén giữ đồ Nội vụ phủ phát, parallel-time r5): ONE act, two timings — her card (j42 srvCards, jeitem eitPilMaidOk) and the NPC servant's
+     monthly pass when the goods come (jeitem eitPilfer → eitPilWho by ag2Ch → eitPilNpc: the same eitPilSee odds, the same four answers eitPilJudge).
+     The day options never hold the monthly pass, so both sides are judged by the RULE (as the target ladder): the same lòng states for both doers
+     (as she is, and low: 10), with her master holding a piece Nội vụ phủ gave this month (the pass runs only when goods came). */
+  try{const P=BAL.eit.pil;const m=srvM();const t0=S.tin;let tmp=null;
+   if(m&&typeof eitPilPick==="function"&&!eitPilPick(m)){const k=Object.keys(IT).find(x=>{try{return itm(x).pr>0}catch(e){return false}});if(k){tmp={k,from:"noivu",d:S.turn};m.inv=m.inv||[];m.inv.push(tmp)}}
+   for(const tin of [t0,10]){S.tin=tin;if(eitPilMaidOk())addP("maid","Lén giữ đồ Nội vụ phủ phát","pil-rule")}S.tin=t0;if(tmp)m.inv.splice(m.inv.indexOf(tmp),1);
+   const L=[];for(const v of liveRivals(true))for(const s of (v.staff||[]))if(s&&s.role==="maid"&&g0(s)==="maid")L.push([v,s]);
+   for(const [v,s] of L.slice(0,16)){const l0=s.loyal;for(const lo of [l0,10]){s.loyal=lo;if(eitPilWho(v).some(c=>c.s===s))addN("maid","maid:pil","eitPilWho")}s.loyal=l0}}catch(e){E("pil",e)}
   /* PROMOTION (player): srvRise, then the same S with the maid origin removed (= a born Đáp ứng in the same world): the act sets must be equal */
   try{S.age=Math.max(S.age||0,18);srvRise("role-parity scan");res.upMe={ok:!isSrv()&&S.rank===0,rank:S.rank};S.preg=0;S.hidden=false;playerLabels("up");
    const sv=S.srv;delete S.srv;playerLabels("t1me");S.srv=sv}catch(e){E("upMe",e)}
