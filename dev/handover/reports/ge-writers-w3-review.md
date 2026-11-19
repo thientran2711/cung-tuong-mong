@@ -60,3 +60,23 @@ Agrees with the worker's table (small n). in-char above band = the shared odds-c
 ## Notes for Foreman E
 1. Landing: W2 first; W3 then re-merges assemble.py + jbalge.js exactly as copy B (guard 6/6, engine 1160/1160, one-core PASS).
 2. Still open FOR E: «{n1} alive son» term (fix 2), kid origin (W2), «followed / needed person alive», one HH seat rule, inChar vs odds cap; {v} bond gate for ch_ho_1 (lever only).
+
+---
+# ROUND 2 — review of c13b7748 (fix round E11d), order from Foreman E #12 session_01DgYSWoiPTxVs5xQni4RvZw
+PRIORITY #1 CHECK ('ge-writers-w3 r2'): review/ge-writers-w3 (FAIL r1 cb72b507) | W1 + W2 LIVE | claims E11d | reviewer = me. 18 LAWS re-read.
+Copy: c13b7748 as is — it already holds LIVE main 1a4df595 (= origin/main at review time, ancestor checked), so the final merge is a no-op; rebuilt with build_site.sh: only the CTM_BI line differs (kept the committed file).
+
+## VERDICT: **FAIL c13b7748** — ONE fix left (fix 1 family, one ha line). Everything else of r1 is done and PASSES; round 3 needs only this line + ge-guard.
+
+| r1 fix | result |
+|---|---|
+| 1 law 6c objects | Done in t / a / ft of all 9 endings (my rescan of t/a/ft/cw for lá thư cũ / tráp / ấn riêng / bã thuốc / bản thảo: left only ch_bi_2 (every lgone option + «Đốt ngay» are its Khóa), ch_bi_4 t «sóng gió quanh lá thư cũ» (history, true every life), ch_benh_2 (now fo ["e",7,"mid|lose"])). **Missed: `thd_sach_4` ha (jgedata_w3.js:231) «mang bản thảo của cha theo người ấy, in bán dưới tên khác»** — the a text was changed to «bộ ‘Trị quốc sách’ ngươi tự chép lại» because the draft can be given away (ch5), but the ha line (shown when she picks) still says the father's draft. → change ha to match a (e.g. «mang bộ sách tự chép theo người ấy, in bán dưới tên khác»), then rescan every ht / ha of the 9 changed endings against their new t / a. |
+| 2 law 6b thd_hoc | OK — no crown / seat text names {n1}; the heir is the ending's effect (Đông cung / «một hoàng tử»), like cnv_ma_4. Family: only these three (agree). FOR E «{n1} alive son» stays a wish, not a break. |
+| 3 re-measure | OK — see below; mirror rule (ác ≤ 2 × thiện) is a good family fix: my scan of all 44 Chuỗi = 0 outside ≥3/≥3 and 2 × both ways. |
+
+## Tests (c13b7748)
+ge-guard **6/6** (36 live branches, ERRORS 0) · one-core PASS · ge-engine `- all` 1148/1160 first run (12 = thd_hoc «the life runs the road thd_sach», the known cold-page road-wait flake) → rerun `thd_hoc,thd_sach` **72/72** · quickcheck first run FAIL on buổi 2962/1138 (run right after the engine) → rerun **ALONE PASS** (core gates PASS, open 1309 ms, old save ok, render 181/208, tab 423/429, buổi 996/955, tasks>200 17/21).
+Measure (`MODES=kind,cruel … - 2 1 <out> cnv_chu,ch_bi,thd_hoc sens`, alone): 12/12 lives ok, page errors 0, inChar .58 IN, open .11 1.91 IN, kind→thiện 1.00 / cruel→ác 1.00 on all three (the roads the r2 rebalance touched). Agrees with E11d's 132-life table.
+
+## 18 LAWS (round 2)
+2 / 3 / 4 OK (BAL rows unchanged except the W2 merge rows) · 6 (b) OK · 6 (c) one ha line → fix · 7 OK · 11 family done except the ht/ha pass · others n/a.
