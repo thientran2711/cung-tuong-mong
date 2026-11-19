@@ -76,3 +76,37 @@ ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 
 - The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
 - Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
 - Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+
+## F2 #2 — Done (worker session_01N1tNP54k39FoQxynYXS2Xp, depth 4; START_CTX ~6 %, ended ~25 %)
+**Branch review/coop-thin-f2 @ 4dabbd46** = #1's 6eaf01a + final merge origin/main **b1c3631e** (6d2de853) + reconnect fix (f73e136e) + test LOOK (e0f242f0) + generated files (4dabbd46).
+- **Merge**: one conflict, jk3.js k3Shell. Kept main's stage-here version (k3Full) and added the co-op ctx guard (`if(window.COOPW&&COOPW.ctx)return`). k3ShowPlace guard merged clean. Generated files rebuilt by build_site.sh.
+- **NEW FIX: lost tap on a reconnect (F1 + F2, jcoopthinf.js).** `COOP.on("room",()=>{F.pend=null})` (main F1) dropped her pending intent in silence when her socket died and COOP reconnected. The tap was lost, or worse: the host had run it and moved her, but her phone never heard. Found from a P7 walk-spill red (1 in 8 full runs): the host ran the walk, there was no answer and no resend, and the two phones disagreed on where she was. Fix: on "room", same room + same week → keep it pending and send it again at the next 1 s tick once the level is back (`F.stat.reNet`). The host dedupes by intent id (DONE is kept per room), so a run that already happened is answered from DONE and never runs twice. Another room or week → dropped with the existing words "Việc ấy chưa thành, xin thử lại." (never silent). New test **P10** (dead socket, the same method as coop-thin-e-net): (a) her walk frame lost, (b) the host's answer lost (delta/snap). **Before the fix: red 2/2** — (a) the tap is gone, the host never ran it; (b) the host has her at vuon, her phone has her at home. **After: green 2/2** — kept pending, sent again, host ran it ONCE, she arrives on both phones, khắc paid once (2 = travel()).
+- Test fixes: P1 waits for a gate card's late answer before resetting khắc (under 4G, clear() tapped "Bái kiến" on the card left over from the row before, and its late answer overwrote used=0; this was a test race, not a game bug). Tripwire prints all entries. LOOK shot taken right after the P6 real map tap.
+
+### Tripwire (TRIP=1 coop-thin-f2, guest writes outside fromCanon)
+| | L6 (old road: her walks run on her phone) | L7 (F2) |
+|---|---|---|
+| F2 `goTo` (place writers) | **3403** | **0** |
+| F1 `talk` | 71 | 0 |
+| place / visit / walk / talk / accEtq / scout / invite filter | 2 entries | **[] (0)** |
+| D·patch (the host's result applied to her person = the designed path) | 106 | 2448 |
+| F1 bucket (deck `act` + directActs render; F6/meter item, as noted in the F1 report) | 135 | 959 |
+L6 run 7/35 (red = expected: the old road runs locally). L7 17/17.
+
+### Latency (tap → arrival on her phone, live Worker)
+No throttle: median **560–613 ms** (n=30–36, min ~460). 4G profile (LAG 85 ms each way on both phones + host CPU ×4): median **1749–1925 ms** (n=35–36, min ~1.4 s). That is higher than #1's estimate of 0.8–1 s. The outliers (6–12 s under 4G, 2–2.7 s without throttle) all come in one window: right after P2, when the host has walked to her palace himself. A host probe showed the F2 work stays at ~100 ms withSeat + ~50 ms render per walk. The extra time is host long-tasks OUTSIDE the F2 path (1.2–2.3 s per walk, likely the art load/decode of his new place). It clears by itself after ~3 walks. While a walk is pending her screen shows the pending state (#next locked, buttons off); the walk is never lost or shown twice.
+
+### Gates (on the merged build; after the fix where marked ★)
+coop-thin-f2 L7 17/17 → ★19/19, ★20/20, ★19/19 (P10 incl.) + swap 17/17 → ★19/19 · 4G ★16/17 (P4 timed out at 15 s inside the host long-task window above; it arrived and its card showed afterwards) · coop-thin-f1 L6 23/23 + swap 22/22 → ★L6 22/22, ★L6 swap 22/22, ★L7 22/22 · coop-thin-e-net ★L6 20/20, ★L7 20/20 · coop-e2e 63/63 + COOP_SWAP 63/63 · coop-p2 46/46 · coop-b1 (level 0, F2 code off): branch 31/41, 40/43, 32/41 vs **main 43/43, 33/41** — the same flake classes on main (laydo, ksab, musk, plant, 7b; the two-seat pairing timing #1 noted). Branch-only reds in those runs (5 takeaway, 6 pond, 8, 9) are the same timing class (9 follows from 5/6). Not F2. · quickcheck PASS twice (old save ok; core gates incl. one-core-guard, rules-one-source, kit-conform, coop-one-world) · #1's a/b/c/d/e/cyc/night/timer/one-world gates are listed above (pre-merge; the merge touched only jk3 in F2 code).
+P7 (walk spill): 1 red in 8 full runs before the fix (the signature above); 0 in 11 runs since.
+
+### LOOK (owner devices, scratch only, not committed)
+Guest iPad 1180x820@2 after a real map tap: she stands in Ngự hoa viên on her Hành sự tab, clean. Host Fold 755x1000@2: his own Dư đồ tab is kept (the design: his tab stays his); the card on top is his own Lễ ra mắt card from the test setup, not from F2. Looked at 3×.
+
+### Moved / deleted paths
+As step 0 §0a/§0b + #1's handover list: goTo, visitPal, goSee, accEtqGo, accAsk, accSneak, talk, scout, invite, srvGoTo, kcGo run on the host at L7 (her phone never walks: P1/P8, tripwire 0). Decision cards stay local (Foreman B ruling, Q2). Old guest walk paths are bypassed behind TH.on(7) and stay until part H makes the level the default (same rule as C/E/F1).
+
+### FOR B / reviewer
+1. The reconnect fix changes F1's shared wrapper (all intents). F1 gates are green; the reviewer should rerun coop-thin-f1 L6 + swap and coop-thin-e-net.
+2. Host long-tasks after the host changes place: not F2, but they make the 4G walks slow (up to 12 s); worth a perf item (art preload / decode off the main thread).
+3. Known from #1: E's `do ready` / erd still carry ["-",["buoi"]] (F filters it); F1's log check is timing-sensitive under parallel load (main too).
