@@ -26,29 +26,29 @@ Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as 
 - picture: Cao Ly V2 t2 (Lượt 301-303) · gen Lw8y0mCswO · cut 79f3BGcJAL (ledger :288) · NO file on CDN/repo (sent in chat only) — ART_RULES B15 lists xSByOSyjfW/yiuGA83PW9/cpS8oJg0eP, but the ledger (:509/510/518) says those are the later Cao Ly t4/t5/t6 store pictures
 - vn: Cả bộ đồ đúng HAI màu: màu chính + màu phụ, màu phụ thấy rõ ở mảng lớn (váy trong, viền rộng, đai, cổ tay, lót); vàng/bạc chỉ viền mảnh.
 
-### S02 · COLOUR RULE tone (tông màu trầm vừa) t1-t6
-- text: `COLOUR RULE: all colours at ONE medium tone level, the same as the soft coral-red and brick-red robes of the game: medium saturation, medium lightness, neither too fresh nor too dark, never rực, never glaring, never neon, never pastel-washed, never dusty, grey, muddy or black;`
+### S02 · COLOUR RULE tone (B18: clear soft colours, model = foreign princesses nc1-nc3) t1-t6
+- text: `COLOUR RULE: all colours clear, soft and gentle at a medium-light tone, like fine silk in soft daylight: medium-soft saturation, pretty and clean, the secondary colour a real pretty colour (it may be a little deeper or a soft ivory, never heavy, never black, never grey), never rực, never glaring, never neon, never pastel-washed or faded, never dusty, grey, muddy or black;`
 - scope: tp1-6 pr1-6
 - confirm: -
 - ages: a18 a26 a36
 - store: yes
-- luot: 301-303, B14
-- source: dev/art/owner-copy/pr_cl_t2_V2.txt = store build.py --low
-- proof: dev/art/owner-copy/pr_cl_t2_V2.txt
+- luot: 301-303, B14; text B18 Lượt 586/590/592 (BW4)
+- source: ART_RULES B18 (owner Lượt 592) -> t8-prompt-B/build.py LOW_TONE (was owner-copy/pr_cl_t2_V2.txt)
+- proof: dev/art/approved/proof/bw4_b18_m13_t2_a26.txt
 - picture: Cao Ly V2 t2 (Lượt 301-303) · gen Lw8y0mCswO · cut 79f3BGcJAL (ledger :288) · NO file on CDN/repo (sent in chat only) — ART_RULES B15 lists xSByOSyjfW/yiuGA83PW9/cpS8oJg0eP, but the ledger (:509/510/518) says those are the later Cao Ly t4/t5/t6 store pictures · the same sentence is in the store prompts of the Lượt 395 store sheets, approved Lượt 397: https://ctm-img.victoria-tntt.workers.dev/img/_review/morning-1119/sheet_congchua.jpg
 - vn: Mọi màu cùng MỘT độ đậm vừa (như áo đỏ san hô/đỏ gạch của game): không rực, không neon, không nhạt bệch, không xám đục, không đen.
 
-### S03 · COLOUR RULE t7/t8/Nữ đế (prompt B)
-- text: `COLOUR RULE: all colours fresh, clear and luminous, never dusty or greyed;`
+### S03 · COLOUR RULE tone t7/t8/Nữ đế (B18, same words as S02; was prompt B "fresh, clear and luminous")
+- text: `COLOUR RULE: all colours clear, soft and gentle at a medium-light tone, like fine silk in soft daylight: medium-soft saturation, pretty and clean, the secondary colour a real pretty colour (it may be a little deeper or a soft ivory, never heavy, never black, never grey), never rực, never glaring, never neon, never pastel-washed or faded, never dusty, grey, muddy or black;`
 - scope: tp7-8 pr7-8 nude
 - confirm: -
 - ages: a18 a26 a36
 - store: yes
-- luot: 18/11 4c0 (t8 PROMPT B FROZEN)
+- luot: 18/11 4c0 (t8 PROMPT B FROZEN); B17/B18 Lượt 583/592 (BW3/BW4)
 - source: dev/art/t8-prompt-B/build.py (prompt B)
-- proof: dev/art/approved/proof/c06_t8_a18.txt
+- proof: dev/art/approved/proof/bw4_b18_m13_t8_a26.txt
 - picture: t8 Hoàng hậu prompt B (18/11 ~18:20Z 'Prompt này rất là ok') · c25 a18 t8 v0 · https://ctm-img.victoria-tntt.workers.dev/img/_review/t8-reprompt/c25_a18_t8_v0.png
-- vn: Hoàng quý phi / Hoàng hậu / Nữ đế: màu tươi, trong, sáng, không xám bụi (câu của prompt B đã duyệt).
+- vn: Hoàng quý phi / Hoàng hậu / Nữ đế: cùng câu tông màu B18 với t1-t6 (màu trong, mềm, dịu, không rực, không nhạt bệch, không xám).
 
 ### S04 · EMBROIDERY stitched into the cloth (thêu trực tiếp)
 - text: `All flowers, birds and {motif} are fine silk-thread embroidery stitched directly into the fabric, flat and integrated with the cloth, following its folds, not appliqué, not pasted patches, not raised.`
@@ -386,17 +386,17 @@ Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as 
 - picture: triều phục c06 r21 (Lượt 492: t4, t6, t7, t8 OK; t4 cut u5W4dPuQLD, t6 cut N2q8sOD6D9) · https://ctm-img.victoria-tntt.workers.dev/img/_review/trieu-phuc/r19/c06_sheet21.jpg
 - vn: Vai chỉ có cầu vai cứng: không áo choàng vai, không lưới ngọc, không khăn choàng.
 
-### S33 · COLOUR RULE a51/a65 (elder, deeper)
-- text: `COLOUR RULE: all colours in the DEEPER, DARKER mature shades described above (rich and dignified, never bright, never pastel, never dusty or washed-out); the colour names and hex values below are her young colours, darken them as described above;`
+### S33 · COLOUR RULE a51/a65 (elder: calmer, less saturated, never darker; J2)
+- text: `COLOUR RULE: all colours in calmer, softer mature shades of her own colours (the same hue at about the same lightness, only less saturated and quieter: elegant and dignified, never darker or heavier, never bright or rực, never pastel-washed, never grey, dusty, black or brown); the colour names and hex values below are her young colours, quieten them as described above;`
 - scope: tp1-8 pr1-8 nude
 - confirm: -
 - ages: a51 a65
 - store: yes
 - luot: J2; A0 a51/a65 age texts (c04 elder sheet)
 - source: dev/art/t8-prompt-B/build.py AGE_TXT
-- proof: dev/art/approved/proof/c06_t1_a51.txt
+- proof: dev/art/approved/proof/bw4_j2_m13_t2_a51.txt
 - picture: Lượt 395 store sheets, approved Lượt 397 'vẽ rất là đẹp' · https://ctm-img.victoria-tntt.workers.dev/img/_review/morning-1119/sheet_congchua.jpg
-- vn: Tuổi 51/65: mọi màu là sắc TRẦM, ĐẬM hơn của màu trẻ (sang, điềm đạm, không tươi, không nhạt, không xám bụi).
+- vn: Tuổi 51/65: mọi màu là sắc TRẦM = dịu hơn, bớt bão hoà của màu trẻ, độ sáng gần như cũ (không tối/đậm hơn, không rực, không xám, không đen/nâu).
 
 ### S34 · FOREHEAD: nothing on the forehead (D9)
 - text: `NOTHING on the forehead (no hoa điền, no dot, no mark, nothing).`

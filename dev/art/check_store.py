@@ -32,31 +32,32 @@ APPROVED = [{'id': 'S01',
   'vn': 'Cả bộ đồ đúng HAI màu: màu chính + màu phụ, màu phụ thấy rõ ở mảng lớn (váy trong, viền rộng, đai, cổ tay, lót); vàng/bạc chỉ viền mảnh.',
   'store': False},
  {'id': 'S02',
-  'title': 'COLOUR RULE tone (tông màu trầm vừa) t1-t6',
-  'text': 'COLOUR RULE: all colours at ONE medium tone level, the same as the soft coral-red and brick-red robes of the game: medium saturation, medium lightness, neither too fresh nor too dark, '
-          'never rực, never glaring, never neon, never pastel-washed, never dusty, grey, muddy or black;',
+  'title': 'COLOUR RULE tone (B18: clear soft colours, model = foreign princesses nc1-nc3) t1-t6',
+  'text': 'COLOUR RULE: all colours clear, soft and gentle at a medium-light tone, like fine silk in soft daylight: medium-soft saturation, pretty and clean, the secondary colour a real pretty colour '
+          '(it may be a little deeper or a soft ivory, never heavy, never black, never grey), never rực, never glaring, never neon, never pastel-washed or faded, never dusty, grey, muddy or black;',
   'scope': 'tp1-6 pr1-6',
   'confirm': '',
   'ages': 'a18 a26 a36',
-  'luot': '301-303, B14',
-  'source': 'dev/art/owner-copy/pr_cl_t2_V2.txt = store build.py --low',
-  'proof': 'dev/art/owner-copy/pr_cl_t2_V2.txt',
+  'luot': '301-303, B14; text B18 Lượt 586/590/592 (BW4)',
+  'source': 'ART_RULES B18 (owner Lượt 592) -> t8-prompt-B/build.py LOW_TONE (was owner-copy/pr_cl_t2_V2.txt)',
+  'proof': 'dev/art/approved/proof/bw4_b18_m13_t2_a26.txt',
   'picture': 'Cao Ly V2 t2 (Lượt 301-303) · gen Lw8y0mCswO · cut 79f3BGcJAL (ledger :288) · NO file on CDN/repo (sent in chat only) — ART_RULES B15 lists xSByOSyjfW/yiuGA83PW9/cpS8oJg0eP, but the '
              'ledger (:509/510/518) says those are the later Cao Ly t4/t5/t6 store pictures · the same sentence is in the store prompts of the Lượt 395 store sheets, approved Lượt 397: '
              'https://ctm-img.victoria-tntt.workers.dev/img/_review/morning-1119/sheet_congchua.jpg',
   'vn': 'Mọi màu cùng MỘT độ đậm vừa (như áo đỏ san hô/đỏ gạch của game): không rực, không neon, không nhạt bệch, không xám đục, không đen.',
   'store': True},
  {'id': 'S03',
-  'title': 'COLOUR RULE t7/t8/Nữ đế (prompt B)',
-  'text': 'COLOUR RULE: all colours fresh, clear and luminous, never dusty or greyed;',
+  'title': 'COLOUR RULE tone t7/t8/Nữ đế (B18, same words as S02; was prompt B "fresh, clear and luminous")',
+  'text': 'COLOUR RULE: all colours clear, soft and gentle at a medium-light tone, like fine silk in soft daylight: medium-soft saturation, pretty and clean, the secondary colour a real pretty colour '
+          '(it may be a little deeper or a soft ivory, never heavy, never black, never grey), never rực, never glaring, never neon, never pastel-washed or faded, never dusty, grey, muddy or black;',
   'scope': 'tp7-8 pr7-8 nude',
   'confirm': '',
   'ages': 'a18 a26 a36',
-  'luot': '18/11 4c0 (t8 PROMPT B FROZEN)',
+  'luot': '18/11 4c0 (t8 PROMPT B FROZEN); B17/B18 Lượt 583/592 (BW3/BW4)',
   'source': 'dev/art/t8-prompt-B/build.py (prompt B)',
-  'proof': 'dev/art/approved/proof/c06_t8_a18.txt',
+  'proof': 'dev/art/approved/proof/bw4_b18_m13_t8_a26.txt',
   'picture': "t8 Hoàng hậu prompt B (18/11 ~18:20Z 'Prompt này rất là ok') · c25 a18 t8 v0 · https://ctm-img.victoria-tntt.workers.dev/img/_review/t8-reprompt/c25_a18_t8_v0.png",
-  'vn': 'Hoàng quý phi / Hoàng hậu / Nữ đế: màu tươi, trong, sáng, không xám bụi (câu của prompt B đã duyệt).',
+  'vn': 'Hoàng quý phi / Hoàng hậu / Nữ đế: cùng câu tông màu B18 với t1-t6 (màu trong, mềm, dịu, không rực, không nhạt bệch, không xám).',
   'store': True},
  {'id': 'S04',
   'title': 'EMBROIDERY stitched into the cloth (thêu trực tiếp)',
@@ -421,17 +422,17 @@ APPROVED = [{'id': 'S01',
   'vn': 'Vai chỉ có cầu vai cứng: không áo choàng vai, không lưới ngọc, không khăn choàng.',
   'store': False},
  {'id': 'S33',
-  'title': 'COLOUR RULE a51/a65 (elder, deeper)',
-  'text': 'COLOUR RULE: all colours in the DEEPER, DARKER mature shades described above (rich and dignified, never bright, never pastel, never dusty or washed-out); the colour names and hex values '
-          'below are her young colours, darken them as described above;',
+  'title': 'COLOUR RULE a51/a65 (elder: calmer, less saturated, never darker; J2)',
+  'text': 'COLOUR RULE: all colours in calmer, softer mature shades of her own colours (the same hue at about the same lightness, only less saturated and quieter: elegant and dignified, never darker or heavier, '
+          'never bright or rực, never pastel-washed, never grey, dusty, black or brown); the colour names and hex values below are her young colours, quieten them as described above;',
   'scope': 'tp1-8 pr1-8 nude',
   'confirm': '',
   'ages': 'a51 a65',
   'luot': 'J2; A0 a51/a65 age texts (c04 elder sheet)',
   'source': 'dev/art/t8-prompt-B/build.py AGE_TXT',
-  'proof': 'dev/art/approved/proof/c06_t1_a51.txt',
+  'proof': 'dev/art/approved/proof/bw4_j2_m13_t2_a51.txt',
   'picture': "Lượt 395 store sheets, approved Lượt 397 'vẽ rất là đẹp' · https://ctm-img.victoria-tntt.workers.dev/img/_review/morning-1119/sheet_congchua.jpg",
-  'vn': 'Tuổi 51/65: mọi màu là sắc TRẦM, ĐẬM hơn của màu trẻ (sang, điềm đạm, không tươi, không nhạt, không xám bụi).',
+  'vn': 'Tuổi 51/65: mọi màu là sắc TRẦM = dịu hơn, bớt bão hoà của màu trẻ, độ sáng gần như cũ (không tối/đậm hơn, không rực, không xám, không đen/nâu).',
   'store': True},
  {'id': 'S34',
   'title': 'FOREHEAD: nothing on the forehead (D9)',
@@ -702,6 +703,21 @@ def _strip_kc_faces(text):
     for f in _KC_FACES:
         if f in text: text = text.replace(f, " ")
     return text
+# B19 NO GREY (owner Lượt 591, BW4): grey as an outfit colour (main/secondary/any colour slot). FLAG for now (listed for ROOT-51, who gets the
+# replacement colours from the owner); set B19_FAIL=True once the people's data has no grey left. Hair ("silver-grey streaks/strands") and negated clauses ("never grey") are not outfit colours.
+B19_FAIL = False
+GREY_RX = re.compile(r"\b(?:silvery[- ]grey|silver[- ]grey|pale[- ]grey|grey[- ](?:blue|sage|lilac|green|white|rose|pink)|(?:blue|pink|green|sage|lilac|rose)[- ]grey|grey(?:ish)?|gray(?:ish)?|ash(?:en)?|ash[- ]\w+)\b(?![- ]?(?:streaks|strands|hair|mixed|patch|at the temples))", re.I)
+def grey_hits(text):
+    """-> list of grey colour phrases in the text that are not negated and not about hair (B19)."""
+    out = []
+    for m in GREY_RX.finditer(text):
+        if negated(text, m.start(), m.end()): continue
+        ctx = text[max(0, m.start() - 40):m.end() + 20]
+        if re.search(r"hair|temples|eyebrow|brows", ctx, re.I): continue
+        out.append(ctx)
+    return out
+# K18 LIVE GAME HANDS-OFF (owner Lượt 591, BW4): a live game picture path (img/fig-*, img/hd/*, any img/ path outside img/_review and img/_keep) in the prompt or --refs = FAIL.
+K18_LIVE = re.compile(r"(?:^|[/\s\"'(,])(img/(?!_review/|_keep/)[\w./-]+|fig-[\w-]+\.(?:webp|png|jpg))")
 def check_text(text, scope, S=None, X=None, age=None, skip_store=False):
     """-> (fails, warns, slots) ; fails/warns = list of (id, kind, detail)."""
     if S is None: S, X = load_registry()
@@ -730,12 +746,14 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False):
             if x.get("negation", "yes") == "yes" and negated(text, m.start(), m.end()): continue
             ctx = text[max(0, m.start() - 50):m.end() + 30]
             fails.append((x["id"], "BANNED", f"{x['title']}: …{ctx}…")); break
+    for g in grey_hits(text)[:3]:   # B19 (BW4): flag (or FAIL when B19_FAIL)
+        (fails if B19_FAIL else warns).append(("B19", "GREY", f"grey outfit colour (owner Lượt 591, NO GREY): …{g}…"))
     return fails, warns, found
 
 
 def report(fn, scope, fails, warns, out=sys.stdout):
     for i, k, d in fails: print(f"  FAIL {i} {k}: {d}", file=out)
-    for i, k, d in warns: print(f"  WARN {i} {k} (owner to confirm scope): {d}", file=out)
+    for i, k, d in warns: print(f"  FLAG {i} {k}: {d}" if k == "GREY" else f"  WARN {i} {k} (owner to confirm scope): {d}", file=out)
     print(("APPROVED CHECK FAIL" if fails else "APPROVED CHECK PASS"), fn, "scope", scope, file=out)
 
 
@@ -869,6 +887,9 @@ def main():
     hits=kc_ref.banned_hits(prompt+" "+refs)
     if hits:
         print('STORE CHECK FAIL',pf,'— BANNED REF (old khuê các set A, KC_BANNED_REFS.json):',', '.join(sorted(set(hits)))); return 1
+    live=[m.group(1) for m in K18_LIVE.finditer(prompt+" "+refs.replace(","," "))]
+    if live:   # K18 (owner Lượt 591): references only from our store, never a live game file
+        print('STORE CHECK FAIL',pf,'— K18 LIVE GAME FILE used as reference (refs only from our store: KC_REFS cut ids / store ids):',', '.join(sorted(set(live)))); return 1
     if "--scope" in a:   # prompt without store args (triều phục, ma ma spec files, …): approved part only
         scope=a[a.index("--scope")+1]; age=a[a.index("--age")+1] if "--age" in a else None
         f,w,_=check_text(prompt,scope,age=age); report(pf,scope,f,w)
