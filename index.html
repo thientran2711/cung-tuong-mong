@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"f43a2ba6+","t":"2026-11-19T03:42Z","c":"Merge remote-tracking branch 'origin/main' into review/odds-meter-back","b":"72efda7ae7f8","h":[{"s":"42bda6a9+","t":"2026-11-19T03:34Z","c":"opt-loss-ton: also checks a worded gain never reads 'Được: không'; scans dialogs as the game shows them"},{"s":"cb5a7cb3+","t":"2026-11-19T03:03Z","c":"maid-ladder-6: NPC exam mini-game tier clamps at BAL.srvRk.nq (last typed rung); scan table counted"},{"s":"5f7aef61","t":"2026-11-19T02:22Z","c":"seal-lean: kitEmoSeal idle sway (rotate only) + staggered lean-in with per-feeling motion; test + KIT 38.4 canon overwrite"},{"s":"03df1c9d+","t":"2026-11-19T01:41Z","c":"role-parity.test: deterministic riseCore block (SEED FIX)"},{"s":"de1f6916+","t":"2026-11-19T01:29Z","c":"review live-servants r2: ag-know ONE RULE (NPC) case follows the live-servants rule like §3 (consort's close maid planted at the garden, re…"},{"s":"7d693c26+","t":"2026-11-19T01:22Z","c":"opt-card-short #10: samples = real events; LAW 3: a gain/loss worded only as Gợi ý now shows in Được/Tốn (was «không»)"},{"s":"2dd9cb23+","t":"2026-11-19T00:45Z","c":"review stage-here r4: buổi-turn visit refresh holds the queued cards aside so goTo (j2: returns on Q.length) keeps her where she is (OD 18/…"},{"s":"21904959+","t":"2026-11-18T23:40Z","c":"fullbody-frame s5: person dialog follows the figure standard: frame height follows the figure, figure column runs tag to frame bottom, butt…"},{"s":"cff7cf4d+","t":"2026-11-18T23:07Z","c":"questline-q2 r6 (reviewer): nhTip — a penalty (hb\u003c0) on the told rival's chapter is offset by the tip bonus, not taken as a bonus; rebuild"},{"s":"a837ad32+","t":"2026-11-18T23:30Z","c":"rel-picker r2: site rebuilt"}]};
+window.CTM_BI={"s":"946a2900+","t":"2026-11-19T05:26Z","c":"figure-head-fade-scan: one body per device + frame kind + class (KIT 56.17 figure fills the frame)","b":"cd122317d927","h":[{"s":"360c0edd+","t":"2026-11-19T03:50Z","c":"ge-writers W2 r2: rebuild on main fa411d6f"},{"s":"cbacdb55+","t":"2026-11-19T03:45Z","c":"art-wiring-1119 r2: fix review r1 FAIL 1+2"},{"s":"42bda6a9+","t":"2026-11-19T03:34Z","c":"opt-loss-ton: also checks a worded gain never reads 'Được: không'; scans dialogs as the game shows them"},{"s":"cb5a7cb3+","t":"2026-11-19T03:03Z","c":"maid-ladder-6: NPC exam mini-game tier clamps at BAL.srvRk.nq (last typed rung); scan table counted"},{"s":"5f7aef61","t":"2026-11-19T02:22Z","c":"seal-lean: kitEmoSeal idle sway (rotate only) + staggered lean-in with per-feeling motion; test + KIT 38.4 canon overwrite"},{"s":"03df1c9d+","t":"2026-11-19T01:41Z","c":"role-parity.test: deterministic riseCore block (SEED FIX)"},{"s":"de1f6916+","t":"2026-11-19T01:29Z","c":"review live-servants r2: ag-know ONE RULE (NPC) case follows the live-servants rule like §3 (consort's close maid planted at the garden, re…"},{"s":"7d693c26+","t":"2026-11-19T01:22Z","c":"opt-card-short #10: samples = real events; LAW 3: a gain/loss worded only as Gợi ý now shows in Được/Tốn (was «không»)"},{"s":"2dd9cb23+","t":"2026-11-19T00:45Z","c":"review stage-here r4: buổi-turn visit refresh holds the queued cards aside so goTo (j2: returns on Q.length) keeps her where she is (OD 18/…"},{"s":"21904959+","t":"2026-11-18T23:40Z","c":"fullbody-frame s5: person dialog follows the figure standard: frame height follows the figure, figure column runs tag to frame bottom, butt…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -5407,7 +5407,7 @@ function fillSeats(){let ev="";if(ct())return"";for(const r of [6,5,4,3]){if(!se
 /* the contest card stays reachable from the rank board */
 (function(){const r0=rankBoard;rankBoard=function(){const h=r0.apply(this,arguments);const c=ct();if(!c)return h;return h.replace('<div class="rboard">',`<div class="rboard"><h3>Tranh ghế ${c.r>=7?"Hoàng hậu":RANKS[c.r].n} · vòng ${Math.min(3,c.round+1)}/3</h3>${scoreTable()}`)}})();
 /* ================= ONE IDENTITY FOR LIFE, FOUR AGE BANDS FOR ALL, SMALL AGE EFFECTS ================= */
-/* bands for every group: 18-25 / 26-35 / 36-50 / 51+ */
+/* bands for every group: 18-25 / 26-35 / 36-50 / 51-64 / 65+ (BAL.ageBand; the labels below are refilled from it in jbal.js) */
 function band4(a){return ageBandIx(a)}
 const BAND4N=["18-25","26-35","36-50","51+"];
 function tagBand(x){const s=String(x==null?"":x).toLowerCase();const m=s.match(/\d+/);if(m)return band4(+m[0]);return /old|lao|51/.test(s)?3:/mid|trung|36/.test(s)?2:/adult|26/.test(s)?1:0}
@@ -6043,10 +6043,16 @@ function balAb(n){return String(Math.abs(n))}
 function balWord(n){try{return window.VP&&VP.num?VP.num(+n):String(n)}catch(e){return String(n)}}
 /* balOan(n,"hurt"|"doer"|"mend"): the oán a relAdd amount n makes (relAdd gives the hurt one |n|×hurt, the doer |n|×doer, a kind act takes |n|×mend off), as the texts show it */
 function balOan(n,m){return String(Math.round(Math.abs(n)*BAL.relOan[m]))}
-/* ONE CORE age bands (owner art rule OD:L567: 18–25 / 26–35 / 36–50 / 51+; review/one-core-dup): band i starts at ageBand[i-1].
-   Read by band4 (j35), pidBand (j66), kcBand (jkc) (before: 26/36/51 typed in each). */
-Object.assign(BAL,{ageBand:[26,36,51]});
+/* ONE CORE age bands (owner art rule OD:L567 + owner 19/11 ~00:50Z "nhân viên của mình bất kỳ ai cũng có 65 tuổi": 18–25 / 26–35 / 36–50 /
+   51–64 / 65+, for every woman of the pool at every rank/role; review/one-core-dup, art-wiring-1119): band i starts at ageBand[i-1].
+   Read by band4 + BAND4N labels (j35), pidBand (j66), kcBand (jkc), the elders' picture (jstaff) (before: 26/36/51 typed in each).
+   figxTry = failed reads of img/FIGURES-x.json after which the Thái hậu's face is drawn without it (jfigx r2).
+   figVar (art-wiring-1119) = how many colours of the t7/t8 dress a woman may wear (v0 + v1 + v2 painted); 1 = everyone in v0. */
+Object.assign(BAL,{ageBand:[26,36,51,65],figVar:3,figxTry:3});
 function ageBandIx(a){let i=0;for(const c of BAL.ageBand)if(a>=c)i++;return i}
+/* the band labels players see ("18-25" … "65+"), from the same numbers */
+function ageBandName(i){const B=BAL.ageBand,lo=i?B[i-1]:18;return i>=B.length?lo+"+":lo+"-"+(B[i]-1)}
+if(typeof BAND4N!=="undefined"){BAND4N.length=0;for(let i=0;i<=BAL.ageBand.length;i++)BAND4N.push(ageBandName(i))}
 /* ===== ONE CORE duplicate-rule hunt part 2 (review/one-core-dup2): one key per concept that had typed copies in several modules =====
    quyLv  = the "quý" word ladder (thiện cảm) of VANPHONG:69 / owner OD:L247 (Ghét ≤ q0 · Không ưa < q1 · Bình thường ≤ q2 · Có cảm tình
             < q3 · Quý mến < q4 · Thân thiết); quyIx(v) = word index 0…5, quyW (jhc) the word. Before: j21 affW (7 words incl. Thù /
@@ -8795,7 +8801,7 @@ window.j59lay=j59lay;
    c01..c32) for her as part of the stored roll in localStorage "ctm-nextlife" (d.pid): a reload shows the same one,
    "Đổi thân phận" rolls another. The identity is reserved for the whole game (S.pid sits in S.fidUsed), so no NPC
    consort, tuyển tú intake included, ever gets it or any of its tiers / ages. Her art then follows the consort picker:
-   dress tier = rank (Đáp ứng t1 ... Hoàng hậu t8), age band = her age (18–25, 26–35, 36–50, 51+), same identity for life.
+   dress tier = rank (Đáp ứng t1 ... Hoàng hậu t8), age band = her age (BAL.ageBand: 18–25, 26–35, 36–50, 51–64, 65+), same identity for life.
    While she is a palace maid (cnv) she wears the identity's tier 1. In lãnh cung she (and any NPC consort there) asks for
    the identity's tier "cold" (fig-consort-cNN-tcold-aAA.webp); while that art is missing the nearest file is tier 1. If a file is missing the nearest
    tier/age of the identity is used; with no art at all she keeps the old face. Old saves (no S.pid) are left as they are,
@@ -8811,7 +8817,7 @@ function pidRoll(d){const K=pidKeys();const r=nlRng((d.seed^0x2c1b3c6d)>>>0);r()
 (function(){const r0=nlReroll;nlReroll=function(){PID_AVOID=S&&S.pid||null;try{return r0.apply(this,arguments)}finally{PID_AVOID=null}}})();
 function pidOn(){return !!(S&&S.pid)}
 /* 8 ranks = 8 dress tiers; 4 age bands as the standing rule draws them */
-function pidBand(a){const B=BAL.ageBand;return a==null?null:a<B[0]?0:a<B[1]?1:a<B[2]?2:3}
+function pidBand(a){return a==null?null:ageBandIx(a)}/* every band of BAL.ageBand (a65 since art-wiring-1119) */
 (function(){const t0=figTierOf;figTierOf=function(who){try{
   if(who===S&&S){if(S.pid)return (typeof isSrv==="function"&&isSrv())?1:S.out?-1:Math.min(7,S.rank||0)+1;return t0.apply(this,arguments)}
   if((rivals||[]).includes(who))return who.out?-1:who.queen?8:Math.min(7,who.rank||0)+1}catch(e){}return t0.apply(this,arguments)}})();
@@ -32203,7 +32209,19 @@ BAL.ge={
  muoi_tuoc_1:{tai:40,danh:40},muoi_tuoc_2:{th:30},muoi_tuoc_3:{tamco:45},muoi_tuoc_4:{duc:35,dad:20},
  muoi_lau_1:{duc:40,danh:40},muoi_lau_2:{tamco:45,mat:3},muoi_lau_3:{duc:35,tamco:30},muoi_lau_4:{tamco:40,danh:35},
  muoi_doi_1:{duc:45,danh:35},muoi_doi_2:{tamco:45,dad:35},muoi_doi_3:{sung:45,danh:45},muoi_doi_4:{tamco:40,mat:3},
- muoi_no_1:{tamco:45,mat:4},muoi_no_2:{duc:40,danh:30},muoi_no_3:{duc:35,dad:20},muoi_no_4:{duc:40,tai:35}},
+ muoi_no_1:{tamco:45,mat:4},muoi_no_2:{duc:40,danh:30},muoi_no_3:{duc:35,dad:20},muoi_no_4:{duc:40,tai:35},
+ /* writer wave W2 (brief E11, jgedata_w2.js): cn_* · nc_gian nc_su nc_vuong · td_* (same scales and sizes as the pilots) */
+ cn_chu_1:{danh:45,maid:50},cn_chu_2:{duc:40,danh:35},cn_chu_3:{duc:40,sung:35},cn_chu_4:{sung:50,tamco:40},
+ cn_tinh_1:{tamco:40},cn_tinh_2:{sung:50,tamco:45},cn_tinh_3:{duc:40,danh:40},cn_tinh_4:{duc:45},
+ cn_ban_1:{tai:50,danh:40},cn_ban_2:{duc:45,danh:30},cn_ban_3:{duc:40,sung:35},cn_ban_4:{tamco:45,sung:45},
+ cn_than_1:{danh:40,duc:35},cn_than_2:{mat:4,danh:50},cn_than_3:{duc:35,tamco:35},cn_than_4:{tamco:45,mat:3},
+ nc_gian_1:{tamco:45,mat:4},nc_gian_2:{sung:50,duc:40},nc_gian_3:{duc:35,tamco:40},nc_gian_4:{tai:40,duc:30},
+ nc_su_1:{danh:45,sung:40},nc_su_2:{tai:50,mat:3},nc_su_3:{tamco:45,mat:4},nc_su_4:{duc:35},
+ nc_vuong_1:{tamco:45,danh:45},nc_vuong_2:{sung:45,duc:40},nc_vuong_3:{sung:50,tamco:40,mat:3},nc_vuong_4:{tamco:35},
+ td_an_1:{danh:40,th:35},td_an_2:{tamco:45,sung:50},td_an_3:{tai:55,danh:35},td_an_4:{duc:35,sung:35},
+ td_ke_1:{mat:4,tamco:45},td_ke_2:{duc:45,danh:35},td_ke_3:{mat:4,maid:50},td_ke_4:{tamco:35,duc:30},
+ td_song_1:{danh:40,sung:45},td_song_2:{tamco:50,mat:4},td_song_3:{duc:35,maid:45},td_song_4:{duc:45,th:30},
+ td_tha_1:{duc:45,sung:40},td_tha_2:{tamco:45,mat:3},td_tha_3:{duc:40,th:30},td_tha_4:{danh:30,duc:40}},
  /* fail-outcome losses (her pair pointed at the ending and missed; none in the quiet form unless quietLoss) */
  fail:{
   tt_co_1:{rank:-1,danh:-12},tt_co_2:{sung:-8,danh:-4},tt_co_3:{sung:-8,danh:-6},tt_co_4:{danh:-10,duc:-6},
@@ -32220,7 +32238,19 @@ BAL.ge={
  muoi_tuoc_1:{danh:-10,sung:-4},muoi_tuoc_2:{danh:-8,th:-10},muoi_tuoc_3:{th:-12,danh:-6},muoi_tuoc_4:{sung:-6,danh:-6},
  muoi_lau_1:{danh:-8,duc:-4},muoi_lau_2:{rank:-1,danh:-10},muoi_lau_3:{sung:-8,danh:-6},muoi_lau_4:{danh:-8,tamco:-4},
  muoi_doi_1:{sung:-6,danh:-6},muoi_doi_2:{danh:-10,duc:-6},muoi_doi_3:{danh:-10,sung:-4},muoi_doi_4:{danh:-10,duc:-4},
- muoi_no_1:{danh:-8,sung:-6},muoi_no_2:{danh:-6,duc:-4},muoi_no_3:{sung:-6,danh:-6},muoi_no_4:{danh:-10,sung:-4}},
+ muoi_no_1:{danh:-8,sung:-6},muoi_no_2:{danh:-6,duc:-4},muoi_no_3:{sung:-6,danh:-6},muoi_no_4:{danh:-10,sung:-4},
+ /* writer wave W2 (brief E11, jgedata_w2.js): cn_* · nc_gian nc_su nc_vuong · td_* (same scales and sizes as the pilots) */
+ cn_chu_1:{danh:-10,sung:-4},cn_chu_2:{danh:-8},cn_chu_3:{sung:-8,danh:-4},cn_chu_4:{sung:-10,danh:-6},
+ cn_tinh_1:{rank:-1,sung:-10},cn_tinh_2:{sung:-10},cn_tinh_3:{rank:-1,danh:-8},cn_tinh_4:{danh:-6},
+ cn_ban_1:{danh:-8},cn_ban_2:{danh:-6,duc:-4},cn_ban_3:{sung:-6},cn_ban_4:{danh:-12,duc:-8},
+ cn_than_1:{danh:-10},cn_than_2:{rank:-1,danh:-10},cn_than_3:{sung:-6},cn_than_4:{danh:-8,sung:-6},
+ nc_gian_1:{rank:-1,danh:-12},nc_gian_2:{sung:-8},nc_gian_3:{sung:-6,danh:-4},nc_gian_4:{sung:-8},
+ nc_su_1:{danh:-10},nc_su_2:{danh:-8},nc_su_3:{sung:-8,danh:-6},nc_su_4:{sung:-4},
+ nc_vuong_1:{sung:-10,danh:-6},nc_vuong_2:{danh:-8},nc_vuong_3:{sung:-8,danh:-8},nc_vuong_4:{sung:-6},
+ td_an_1:{danh:-10},td_an_2:{danh:-8,duc:-4},td_an_3:{danh:-6},td_an_4:{sung:-6},
+ td_ke_1:{danh:-10,mat:-2},td_ke_2:{sung:-8},td_ke_3:{mat:-3},td_ke_4:{sung:-8,danh:-4},
+ td_song_1:{danh:-8},td_song_2:{rank:-1,danh:-12},td_song_3:{sung:-6},td_song_4:{rank:-1,sung:-8},
+ td_tha_1:{danh:-6},td_tha_2:{sung:-8,danh:-6},td_tha_3:{danh:-6},td_tha_4:{danh:-10}},
  /* rewards: the same SIZE for both shadings (fair: no "right" morality); only the sign of everyone's attitude differs (rel thiện → thiện cảm +, ác → oán +).
     rw.mul × the road's RD97L rare fx ≈ the size (start 3×); rank = steps (never above the seat rules: Hoàng hậu only by seat "HH"); mis = the named NPC's attitude */
  rw:{mul:3,
@@ -32238,7 +32268,19 @@ BAL.ge={
  muoi_tuoc_1:{danh:30,tai:10,bac:300,rel:6},muoi_tuoc_2:{rank:1,danh:30,sung:15,th:20,rel:8},muoi_tuoc_3:{danh:36,th:20,rel:8},muoi_tuoc_4:{danh:24,duc:12,bac:300,rel:6},
  muoi_lau_1:{rank:1,danh:30,duc:10,sung:12,rel:8},muoi_lau_2:{rank:1,danh:30,mat:2,tamco:10,rel:8},muoi_lau_3:{danh:24,duc:12,bac:300,rel:6},muoi_lau_4:{rank:1,danh:30,tamco:10,rel:8},
  muoi_doi_1:{danh:30,duc:12,bac:300,rel:8},muoi_doi_2:{rank:1,danh:30,tamco:10,rel:8},muoi_doi_3:{rank:1,danh:30,sung:18,duc:6,rel:8},muoi_doi_4:{rank:1,danh:30,mat:2,rel:8},
- muoi_no_1:{rank:1,danh:30,mat:2,tamco:10,rel:8},muoi_no_2:{rank:1,danh:24,sung:15,duc:6,rel:6},muoi_no_3:{danh:24,duc:12,bac:300,rel:6},muoi_no_4:{danh:24,duc:12,bac:300,rel:6}},
+ muoi_no_1:{rank:1,danh:30,mat:2,tamco:10,rel:8},muoi_no_2:{rank:1,danh:24,sung:15,duc:6,rel:6},muoi_no_3:{danh:24,duc:12,bac:300,rel:6},muoi_no_4:{danh:24,duc:12,bac:300,rel:6},
+ /* writer wave W2 (brief E11, jgedata_w2.js): cn_* · nc_gian nc_su nc_vuong · td_* (same scales and sizes as the pilots) */
+ cn_chu_1:{rank:1,danh:30,sung:18,rel:8},cn_chu_2:{danh:24,duc:12,rel:8},cn_chu_3:{danh:20,duc:12,bac:300,rel:6},cn_chu_4:{seat:"TM",danh:30,sung:15,rel:8},
+ cn_tinh_1:{danh:18,duc:10,bac:200,rel:6},cn_tinh_2:{rank:1,sung:30,danh:18,rel:6},cn_tinh_3:{danh:24,sung:20,duc:8,rel:8},cn_tinh_4:{danh:20,duc:15,rel:6},
+ cn_ban_1:{rank:1,danh:30,tai:10,rel:8},cn_ban_2:{danh:24,duc:12,rel:8},cn_ban_3:{danh:20,duc:12,bac:300,rel:6},cn_ban_4:{rank:1,danh:24,sung:20,rel:6},
+ cn_than_1:{danh:36,duc:10,rel:8},cn_than_2:{danh:36,sung:18,mat:2,rel:8},cn_than_3:{danh:20,duc:12,rel:6},cn_than_4:{danh:30,tamco:10,rel:8},
+ nc_gian_1:{danh:30,tamco:10,mat:2,rel:8},nc_gian_2:{rank:1,sung:24,danh:24,rel:8},nc_gian_3:{danh:20,duc:12,bac:300,rel:6},nc_gian_4:{danh:20,duc:10,rel:6},
+ nc_su_1:{danh:36,sung:18,rel:8},nc_su_2:{danh:30,tai:10,rel:8},nc_su_3:{danh:30,tamco:10,rel:8},nc_su_4:{danh:20,duc:12,rel:6},
+ nc_vuong_1:{danh:36,sung:18,rel:8},nc_vuong_2:{rank:1,danh:30,duc:8,rel:8},nc_vuong_3:{rank:1,danh:30,sung:18,rel:8},nc_vuong_4:{danh:20,duc:12,rel:6},
+ td_an_1:{danh:36,duc:10,rel:8},td_an_2:{rank:1,danh:30,tamco:10,rel:8},td_an_3:{danh:30,tai:10,rel:8},td_an_4:{danh:20,duc:12,rel:6},
+ td_ke_1:{rank:1,danh:30,mat:2,rel:8},td_ke_2:{danh:24,duc:12,rel:8},td_ke_3:{danh:24,mat:3,rel:8},td_ke_4:{danh:18,duc:10,rel:6},
+ td_song_1:{rank:1,danh:30,sung:15,rel:8},td_song_2:{danh:36,sung:18,rel:8},td_song_3:{danh:20,duc:12,bac:300,rel:6},td_song_4:{danh:24,duc:15,rel:8},
+ td_tha_1:{danh:24,duc:12,rel:8},td_tha_2:{rank:1,danh:30,tamco:10,rel:8},td_tha_3:{danh:20,duc:15,rel:6},td_tha_4:{danh:20,duc:12,rel:6}},
  help:{rw:{danh:6,duc:3}},   /* her help to an NPC who then unlocks (NPC parity, build step 5 — not live in this pass) */
  npc:{on:false},             /* NPC grand endings wait for NPC roads (OD:L1243, unit D) */
  /* measured bands (dev/measure/ge-measure.js): an in-character bot that follows one ending's road reaches a grand ending in about one life of two or three;
@@ -60152,6 +60194,461 @@ Object.assign(GE_DATA,{
    ht:"rời cung theo người thư sinh đã đỗ và trả đủ món nợ năm xưa",ha:"rời cung theo người thư sinh, giữ chàng bên mình bằng những tờ giấy nợ",
    fail:"Bảng vàng không tên",ft:"Người thư sinh ấy hỏng thi, rồi bị đồn là lên kinh nhờ bạc của phi tần. Chàng bỏ đi biệt tích, ngươi ở lại với tiếng xấu."}]}
 });
+/* ================= jgedata_w2: GRAND ENDINGS — writers wave W2 (cn_* ×4 · nc_gian nc_su nc_vuong · td_* ×4), design GRAND_ENDINGS.md §3 =================
+   Same shape as jgedata.js (read its header: pull / push / close / doom / cond / fo / cw / t / a / ht / ha / fail / ft, lean p / m). Loads right after jgedata.js.
+   Every option name is a REAL option of that road (.4–.11), ch12–14 or a shared line (checked by dev/test/ge-guard.js); every number is BAL.ge (jbalge.js). */
+Object.assign(GE_DATA,{
+ /* ---------- cn_chu · Chủ cũ ---------- */
+ cn_chu:{lean:{
+   p:["Gửi lời làm hòa","Nâng chén mời chủ cũ trước","Đứng ra nói giúp chủ cũ","Nhận chén, mời {v} sang dùng trà","Kể chuyện {v} từng che chở ngươi","Xin {eun} giữ lão lại","Cho lão bạc về quê","Nhận nàng về cung","Cho nàng một việc tốt hơn","Mời nàng đến, ôn chuyện cũ","Đền bạc, xin nàng về hầu","Pha trà, mời {v} nếm trước","Xin ngài cũng ban ân cho {v}","Tự đến cung {v} mời nàng","Lặng lẽ gửi than sang","Gửi {v} thuốc bổ","Ngăn lại","Xin để đồ lại cho {v}","Nói giúp với Hoàng thượng","Tha, tự đền đồ vỡ","Đỡ ấm, tự rót cho nàng","Đưa tay ra: “Tỷ tỷ, chuyện cũ thôi.”","Hứa không bao giờ làm thế","Đỡ {v} dậy, gọi một tiếng tỷ","Ban thưởng cho cung nữ cả hai cung","Xin để {v} đứng cạnh mình","Rủ {v} cùng đến xem lần cuối","Tự thức canh, mời thái y khác","Xin được trông nom"],
+   m:["Lấy lại thể diện năm xưa","Đứng ngoài nhìn","Cho người dò {v} định làm gì","Đẩy ấm về chỗ cũ","Bỏ bạc bịt miệng","Để nàng mang tin giả về","Xin chuyển kẻ ganh ra xa","Trả gấp đôi để hắn làm ngược","Tâu Hoàng hậu {v} kháng lễ","Đứng chờ {v} chào theo phẩm","Đứng xem","Xin lấy bộ chén men lam","Đổi lời giúp lấy một lời thật","Ngồi yên, để nàng rót","Đứng đúng chỗ ấy mà nhìn nàng","Đòi nàng quỳ nói lời xin lỗi","Để phép cung xử {v}","Bảo nàng tự xin Nội vụ phủ","Để Thận hình ty xử theo phép","Nghe hết, ghi lại","Hỏi lão chuyện cũ của {v}","Đưa ra lời của lão thái giám","Nói: tùy tỷ đối với thiếp thế nào","Lật lại chuyện con nàng","Gặp {v} cảnh cáo"]},
+  e:[
+  {pull:["Đền bạc, xin nàng về hầu","Đứng đúng chỗ ấy mà nhìn nàng","Lấy lại thể diện năm xưa","Chuẩn bị đối phó","Xin nàng sang hầu ngươi","Nhận nàng về cung","Cho nàng một việc tốt hơn","Xin giữ cả ba người ở gần","Lặng lẽ kéo nàng về phía mình","Nhận lời chào của người dưới","Đứng chờ {v} chào theo phẩm","Thưa thật: thiếp muốn","Xin lấy bộ chén men lam","Ban thưởng cho cung nữ cả hai cung","Cho {maid} đứng cạnh mình trong lễ","@st_the=win"],
+   close:["Xin Hoàng thượng khoan bàn phẩm","Thưa: thiếp không muốn gì","Viện cớ có chỉ triệu, lui ra","Chào {v} trước, như xưa"],
+   cond:[["s","danh"],["s","maid"]],fo:[],
+   cw:"cần Danh vang khắp cung và lòng kẻ hầu theo ngươi",
+   a:"Ngày ngươi được phong Quý phi, chủ cũ đứng hàng dưới, tay bưng khay trà. Ngươi nhận chén mà không ngẩng lên. Từ đó cung nữ khắp lục cung đều biết: kẻ từng quỳ dâng trà nay chỉ cần nhướng mày là cả dãy nhà hầu lặng tiếng.",
+   t:"Ngày ngươi được phong Quý phi, việc đầu tiên ngươi xin là sửa lại dãy nhà cung nữ, thêm chăn bông cho mùa rét. Kẻ hầu các cung gọi ngươi là “nương nương của chúng ta”, và không ai còn phải quỳ dâng trà dưới nắng.",
+   ht:"từ cung nữ lên ngôi Quý phi mà không quên kẻ hầu",ha:"từ cung nữ lên ngôi Quý phi, bắt cả lục cung cúi đầu",
+   fail:"Tớ vẫn hoàn tớ",ft:"Sớ phong bị gác lại: triều thần chê xuất thân hầu hạ. Chủ cũ mỉm cười trong buổi thỉnh an, như ngày ngươi còn đứng sau lưng nàng."},
+  {pull:["Hỏi lão chuyện cũ của {v}","Đưa ra lời của lão thái giám","Nói: tùy tỷ đối với thiếp thế nào","Ngồi yên, để nàng rót","Để nàng mang tin giả về","Gửi lời làm hòa","Nâng chén mời chủ cũ trước","Đứng ra nói giúp chủ cũ","Nói tốt về {v}","Nhận chén, mời {v} sang dùng trà","Kể chuyện {v} từng che chở ngươi","Pha trà, mời {v} nếm trước","Chào {v} trước, như xưa","Xin ngài cũng ban ân cho {v}","Tự đến cung {v} mời nàng","Lặng lẽ gửi than sang","Nói giúp với Hoàng thượng","Đưa tay ra: “Tỷ tỷ, chuyện cũ thôi.”","Đỡ {v} dậy, gọi một tiếng tỷ","Xin cùng {v} dâng lễ chung",
+    /* ác side (ha: nắm thóp chủ cũ) */"Đổi lời giúp lấy một lời thật","Cho người dò {v} định làm gì","Nghe hết, ghi lại"],
+   close:["Đòi nàng quỳ nói lời xin lỗi","Để phép cung xử {v}","Tâu Hoàng hậu {v} kháng lễ","Đứng chờ {v} chào theo phẩm"],
+   cond:[["s","duc"],["s","danh"]],fo:[],
+   cw:"cần Đức dày và tiếng thơm khắp lục cung",
+   t:"Mùa đông năm ấy, chủ cũ ốm nặng; ngươi ngồi sắc thuốc bên giường nàng như thuở còn hầu hạ. Nàng nắm tay ngươi: “Năm đó ta đánh muội, muội có giận không?” Ngươi lắc đầu. Lục cung ngạc nhiên nhìn hai người, một trước một sau, đi cùng nhau đến hết đời.",
+   a:"Chủ cũ vẫn gọi ngươi là muội, vẫn ngồi cạnh ngươi trong mọi buổi yến. Nhưng chén ngọc năm xưa, vết roi năm xưa, ngươi đều nhớ, và nàng biết ngươi nhớ. Mỗi lời nàng nói trước Hoàng thượng đều qua tai ngươi trước.",
+   ht:"cùng chủ cũ xóa hết chuyện xưa, thành chị em đến cuối đời",ha:"giữ chủ cũ bên mình bằng những chuyện cũ nàng không dám để lộ",
+   fail:"Chén trà nguội lạnh",ft:"Ngươi đưa tay ra, nhưng chủ cũ quay đi. Những chuyện năm xưa vẫn đứng giữa hai người, và lục cung lấy đó làm chuyện cười."},
+  {pull:["Xin để đồ lại cho {v}","Tha, tự đền đồ vỡ","Viện cớ có chỉ triệu, lui ra","Không dính vào","Coi như không có gì","Cất chén vào rương, không nhắc","Cho lão bạc về quê","Từ chối, gửi chút bạc","Mặc kệ lời nàng","Không xin gì","Cáo bệnh không đến","Xin Hoàng thượng khoan bàn phẩm","Chờ, không nói gì","Không lấy gì","Lặng lẽ ra về","Thưa: thiếp không muốn gì","Rủ {v} cùng đến xem lần cuối",
+    /* ác side (ha: cuỗm vàng về quê) */"Xin lấy bộ chén men lam","Bỏ bạc bịt miệng","Trả gấp đôi để hắn làm ngược"],
+   close:["Thưa thật: thiếp muốn","Nhận lời chào của người dưới","Đứng chờ {v} chào theo phẩm","Xin Hoàng hậu xét lại bổng lộc"],
+   cond:[["s","duc"],["s","sung"]],fo:[],
+   cw:"cần Đức dày và Hoàng thượng còn thương mà cho đi",
+   t:"Ngươi trả lại phẩm phục, chỉ giữ chiếc áo vải năm mới vào cung. Hoàng thượng thở dài rồi chuẩn. Ở làng cũ, ngươi mở một lớp dạy con gái nghèo pha trà, khâu vá, đọc chữ; nhà nào có con được tuyển vào cung đều đến xin ngươi một lời dặn.",
+   a:"Ngươi xin ra cung với một xe rương khóa kín: chén men lam, gấm vóc, vàng thưởng các năm. Ở làng cũ, ngươi dựng nhà ngói lớn nhất vùng. Người làng cúi chào, nhưng sau lưng vẫn bảo nhau: của ấy là của nhà vua.",
+   ht:"trả lại phẩm phục, mặc áo vải về quê dạy con gái nghèo",ha:"rời cung với một xe rương vàng về dựng nhà ngói ở quê",
+   fail:"Cửa cung không mở",ft:"Hoàng thượng gác lời xin ra cung. Cả cung đồn rằng cung nữ được sủng hạnh muốn bỏ ơn vua; ngươi phải đóng cửa một mùa cho lời đồn nguội."},
+  {pull:["Tự thức canh, mời thái y khác","Xin cho con học ở Thượng thư phòng cùng Thái tử","Xin được trông nom","Đưa con đến hầu Thái hậu mỗi ngày","Mời thầy giỏi kèm riêng","Lão Hàn lâm nghiêm khắc","Đưa con đứng gần Hoàng thượng","@st_dong=win","@ke14=win","Xin {eun} giữ lão lại","Gửi {v} thuốc bổ","Xin Hoàng hậu xét lại bổng lộc",
+    /* ác side (ha: cướp con của chủ) */"Lật lại chuyện con nàng","Gặp {v} cảnh cáo","Đứng xem"],
+   close:["Lùi lại, nhường bậc","Lặng lẽ để ngài tự chọn","Xin Hoàng hậu tự phán"],
+   cond:[["son"],["seat","TM"],["s","sung"],["s","tamco"]],fo:[["seatT","TM"]],
+   cw:"cần một hoàng tử ngươi nuôi, Sủng cao, Tâm cơ sâu và ngôi mẹ vua sau này còn trống",
+   t:"Hoàng tử ngươi nuôi lớn nay lên ngôi. Ngày đăng cơ, nó quỳ lạy ngươi trước bá quan rồi mới nhận ấn. Ngươi dặn nó: ngai vàng là của thiên hạ, không phải của một người mẹ. Nó nhớ lời ấy suốt đời.",
+   a:"Hoàng tử ngươi nuôi lớn nay ngồi trên ngai vàng, nhưng mọi tấu chương đều qua tay ngươi trước. Nó chỉ nghe một giọng nói là của ngươi; kẻ nào chen vào giữa hai mẹ con đều bị đưa đi xa.",
+   ht:"nuôi hoàng tử thành vua, dạy vua lấy thiên hạ làm trọng",ha:"nuôi hoàng tử thành vua rồi nắm ngai vàng qua tay nó",
+   fail:"Con rời tay mẹ",ft:"Tông nhân phủ đưa hoàng tử về Đông cung cho các thầy dạy dỗ, bảo phận ngươi không đủ để nuôi một vị vua. Nó khóc đòi ngươi suốt ba đêm, rồi thôi."}]},
+ /* ---------- cn_tinh · Mối tình thuở hầu trà ---------- */
+ cn_tinh:{lean:{
+   p:["Âm thầm cứu hắn","Gặp hắn một lần, nói rõ","Gửi bạc nuôi mẹ hắn","Gửi áo rét theo đoàn","Gửi bạc lo chỗ ở cho bà","Nhờ {eun} cho bà gặp con","Gửi hắn chiếc khăn cũ","Không dùng điều ấy","Gửi áo ấm vào chỗ giam","Bỏ bạc xin đừng dụng hình","Lo cho mẹ hắn trước","“Cứ nói thật.”","Xin Hoàng thượng tha cho hắn trước","Thưa thật mọi điều, xin tha cho hắn","Bảo nàng cứ nói thật","Nhận thật: chuyện trước khi được sủng hạnh","Để {maid} đưa một gói thuốc"],
+   m:["Tố hắn lười việc với Tổng quản","Xin Nội vụ phủ đổi hắn đi","Đứng ngoài","Đuổi nàng ra khỏi cung","Để nàng mang tin giả về","Cho người theo dõi cung {v}","Tìm chứng cứ việc đút lót","Nhờ cung nữ ấy lấy trộm","Đưa ra chuyện Kính sự phòng","Tìm người thổi lời đồn","Bắt người truyền lời đồn","Chuẩn bị người làm chứng ngược","Dặn {maid} từng câu","Trình thư lên Hoàng thượng","Im lặng, để {n1} nhận lỗi","Đút bạc bịt miệng","Không làm gì","Ghi tên Thị lang vào sổ","Tung một chuyện khác cho cung bàn"]},
+  e:[
+  {pull:["Đút bạc bịt miệng","Nhờ cung nữ ấy lấy trộm","Gặp hắn một lần, nói rõ","Âm thầm cứu hắn","Gửi lời bảo hắn tự đốt","Giao thư cho {n1} tự đốt","Gửi bạc nuôi mẹ hắn","Gửi áo rét theo đoàn","Hẹn đứng trên tường thành","Gửi hắn chiếc khăn cũ","Đứng trên thành nhìn theo","Gửi áo ấm vào chỗ giam","Tin hắn không bán ngươi","Nhìn thẳng hắn, gật đầu khẽ","Xin ngài cho {n1} có mặt","Nhận đó là khăn của mình",
+    /* ác side (ha: bỏ trốn đêm loạn) */"Tìm người thổi lời đồn","Tung một chuyện khác cho cung bàn","Đưa {maid} cất ra ngoài cung","Dặn {maid} từng câu"],
+   close:["Xin Nội vụ phủ đổi hắn đi","Tố hắn lười việc với Tổng quản","“Thiếp thương người đang hỏi thiếp.”","Đứng ngoài"],
+   cond:[["s","tamco"]],fo:[],
+   cw:"cần Tâm cơ đủ sâu để lọt qua cửa cung trong đêm",
+   t:"Đêm cổng Tây Hoa môn đổi ca, có một cung nhân mặc áo vải đi ra cùng đoàn lính về quê. Người gác cổng là hắn. Mấy năm sau, ở một trấn nhỏ dưới chân núi, có quán trà của đôi vợ chồng không ai biết lai lịch; người vợ pha trà khéo đến lạ.",
+   a:"Đêm lửa bén kho Thượng y cục, cả cung đổ ra cứu, không ai đếm người. Sáng ra thiếu một phi tần và một thị vệ. Lửa ấy ai châm, sổ sách ai đốt, đến nay Kính sự phòng vẫn chưa tra ra.",
+   ht:"cùng người thị vệ năm xưa ra khỏi cung, sống đời áo vải",ha:"nhân đêm loạn mà trốn khỏi cung cùng người thị vệ, để lại tro tàn",
+   fail:"Cổng thành khép chặt",ft:"Đêm ấy cổng Tây Hoa môn không đổi ca. Hắn bị điều đi xa, ngươi bị cấm túc; trong sổ Kính sự phòng có thêm một dòng mực đỏ."},
+  {pull:["Cho người theo dõi cung {v}","Bắt người truyền lời đồn","Để {maid} đưa một gói thuốc","Xin Nội vụ phủ đổi hắn đi","Lờ đi","Cười nói tự nhiên với ngài","Xin ngài đổi thị vệ gác cửa","Chối, nói thư bị làm giả","Dồn sức chiều lòng Hoàng thượng","Đốt ngay trong tẩm điện","Đưa ra chuyện Kính sự phòng","Để hắn đi, không gửi lời","Từ chối","Ở trong tẩm điện, đóng cửa","Tự đến Dưỡng Tâm điện","“Thiếp thương người đang hỏi thiếp.”","Im lặng, để {n1} nhận lỗi","Đốt, không đọc","Cúi mặt, để hắn tự chọn","@st_the=win",
+    /* thiện side (ht: gạt lệ giữ ngôi) */"Lo cho mẹ hắn trước","Xin Hoàng thượng tha cho hắn trước","Gửi áo ấm vào chỗ giam"],
+   close:["Hẹn đứng trên tường thành","Nhìn thẳng hắn, gật đầu khẽ","Thưa thật mọi điều, xin tha cho hắn"],
+   cond:[["s","sung"],["s","tamco"]],fo:[],
+   cw:"cần Sủng cao và Tâm cơ sâu để không ai lật lại chuyện cũ",
+   a:"Án khép, hắn ra biên ải và không bao giờ về. Ngươi đốt nốt bức thư cuối cùng, rồi bước lên ngôi Quý phi. Ai trong cung còn nhắc tên người thị vệ ấy, sáng hôm sau đã không còn trong cung.",
+   t:"Ngươi để hắn đi, gửi theo một gói thuốc và không một chữ. Đêm phong Quý phi, ngươi khóc một lần, rồi thôi. Mỗi mùa rét, quân biên ải lại nhận được áo bông của một cung không đề tên.",
+   ht:"gạt lệ tiễn người xưa đi xa để giữ lấy ngôi cao",ha:"chôn mối tình thuở hầu trà để bước lên ngôi cao",
+   fail:"Tình chưa chôn kín",ft:"Một bức thư cũ còn sót lại đến tay Hoàng thượng. Ngài không hỏi gì, chỉ không lật thẻ ngươi suốt một mùa."},
+  {pull:["Đưa ra chuyện Kính sự phòng","Nhờ cung nữ ấy lấy trộm","Đuổi nàng ra khỏi cung","Ghi tên Thị lang vào sổ","Nhận thật: chuyện trước khi được sủng hạnh","Cho {n1} xin ra biên ải","Gửi lời bảo hắn tự đốt","Xin Hoàng thượng giữ hắn lại","Kể hết chuyện năm xưa","Pha trà như thuở hầu trà","Xin tra kỹ cho sạch hẳn","Thưa: thiếp để sổ nói thay","“Cứ nói thật.”","Trình thư lên Hoàng thượng","Bảo nàng cứ nói thật","Thưa thật mọi điều, xin tha cho hắn","“Thiếp biết ơn hắn, không hơn.”","Xin ngài đốt hết trước mặt mọi người",
+    /* ác side (ha: lợi dụng tình xưa) */"Bảo hắn đưa hết thư cho {maid}","Dặn {maid} từng câu","Chuẩn bị người làm chứng ngược","Tìm chứng cứ việc đút lót"],
+   close:["Chối, nói thư bị làm giả","Biếu {eun} chút lễ","Không gửi gì"],
+   cond:[["s","duc"],["s","danh"]],fo:[],
+   cw:"cần Đức dày và Danh sạch sau mọi lời đồn",
+   t:"Ngươi kể hết với Hoàng thượng, không giấu một chữ. Ngài im lặng rất lâu, rồi cho người thị vệ ấy làm đội trưởng cấm quân gác Dưỡng Tâm điện. Hắn trung thành với ngài đến cuối đời, và chưa từng nhìn ngươi lâu hơn một cái cúi đầu.",
+   a:"Hắn làm đội trưởng cấm quân nhờ một lời của ngươi. Từ đó, mỗi đêm Hoàng thượng ngủ ở đâu, ai ra vào Dưỡng Tâm điện, ngươi đều biết trước. Hắn vẫn tưởng mình trả ơn tình xưa.",
+   ht:"kể thật chuyện xưa với Hoàng thượng, để người cũ thành tôi trung",ha:"đặt người tình cũ cạnh long sàng làm tai mắt cho mình",
+   fail:"Lời thật thành tội",ft:"Ngươi nói thật, nhưng Hoàng thượng không tin hết. Hắn bị đày đi xa, ngươi bị giáng một bậc vì tội giấu chuyện cũ."},
+  {pull:["Không dùng điều ấy","Để {maid} đưa một gói thuốc","Gửi bạc lo chỗ ở cho bà","Nhờ {eun} cho bà gặp con","Lờ đi","Tin rằng hắn đã đốt","Khâu vào lót kinh Phật","Không đáp, để hắn tự lo","Để hắn đi, không gửi lời","Từ chối","Ở trong tẩm điện, đóng cửa","Để lời đồn tự chết","Đóng cửa cung chép kinh","Ngủ một giấc thật sâu","Xin tự cấm túc cho yên lòng người","Không gửi gì","Đốt, không đọc","Quỳ xuống, không đáp","Ngồi yên chờ","Đốt ngay",
+    /* ác side (ha: đoạn tình tuyệt nghĩa) */"Đuổi nàng ra khỏi cung","Im lặng, để {n1} nhận lỗi","Không làm gì"],
+   close:["Tự đến Dưỡng Tâm điện","Dồn sức chiều lòng Hoàng thượng","Hẹn đứng trên tường thành"],
+   cond:[["s","duc"]],fo:[],
+   cw:"cần Đức dày để cửa Phật chịu nhận ngươi",
+   t:"Ngươi xin về chùa Hộ Quốc tu hành. Ngày ra cung, ngươi chỉ mang theo chiếc khăn thêu cũ; đến cổng chùa, ngươi gửi nó cho người gác, nhờ trao lại cho người cần trao. Từ đó mỗi sớm ngươi quét lá ở sân sau, và không ai còn gọi ngươi bằng tên cũ.",
+   a:"Ngươi vào chùa Hộ Quốc mà không nhìn lại. Hắn đến cổng chùa ba lần, ba lần bị đóng cửa. Lần cuối, ngươi sai người đưa ra bức thư cũ đã cháy một nửa. Hắn hiểu, và không đến nữa.",
+   ht:"xuống tóc ở am ngoài kinh, buông cả mối tình xưa",ha:"vào cửa Phật, cắt đứt người xưa không một lời từ biệt",
+   fail:"Lòng trần chưa dứt",ft:"Nhà chùa trả ngươi về cung: “Lòng thí chủ còn nặng lắm.” Cả cung bàn tán chuyện phi tần muốn đi tu mà không được."}]},
+ /* ---------- cn_ban · Tri kỷ ở Tân Giả khố ---------- */
+ cn_ban:{lean:{
+   p:["Lén gửi thuốc và bạc","Đến Tân Giả khố gặp nàng","Biếu chưởng sự để nàng được nhẹ việc","Hứa che chở, xin nàng kể","Lén mời thái y","Xin Tố Nga về hầu","Cho Tố Nga ăn chung mâm với ngươi","Tự xuống Tân Giả khố thăm nàng","Nắm tay nàng, hứa không bỏ","Mời {v} cùng che chở Tố Nga","Ngồi với nàng suốt đêm","Không ép, chờ nàng tự nói","Đốt hết, chỉ xin Tố Nga được yên","Lén gặp nàng ta, hứa che chở","Đưa nàng về cung ngươi chữa","Bán trang sức đổi sâm","Thức canh bên giường","Hứa gánh cùng nàng","Đổi nàng sang phòng ngươi","Gửi bạc và người đón mẹ nàng lên kinh","Đưa thư cho nàng đọc","Mời thái y giỏi nhất","Ngồi bên nàng mỗi tối","Hỏi Tố Nga, theo ý nàng","Để Tố Nga về quê với mẹ","Chia cho kẻ hầu và đồng minh","Chăm lo cho họ","Đưa Tố Nga ra làm chứng trước Thái hậu","Dâng lên Tổng quản theo phép","Dâng lên Hoàng hậu, xin phân xử lục cung","Gật đầu, để nàng nói hết"],
+   m:["Đốt khăn","Gửi bạc, phó mặc","Chối","Giữ bí mật, dùng Tố Nga làm tai mắt","Lặng lẽ đổ đi, giả như không biết","Để nàng nghe tiếp, dặn kín hơn","Mua hắn lại, làm người của ngươi","Nói thật: nàng là nhân chứng, phải sống","Rỉ tai lời khai ra khắp cung","Mua người chép sổ Châm công cục","Đến gặp {v}, ra giá","Dọa nàng ta về tội khai man","Giả vờ nhận, kéo dài thời gian","Để nàng vào, cho người canh","Cất lời khai, chưa đưa ai","Xin minh oan và trị tội kẻ vu","Giấu thư, sợ nàng muốn đi","Gửi lời giảng hòa, đổi lấy yên ổn","Chép lại lần cuối, cất kỹ"]},
+  e:[
+  {pull:["Biếu chưởng sự để nàng được nhẹ việc","Xin Tố Nga về hầu","Biếu chưởng sự mới","Nhờ {eun} đổi chưởng sự","Mua người chép sổ Châm công cục","Tự đến Châm công cục xem đồ","Đưa bạc, xin hắn viết lời chứng","Nhờ ma ma cũ ở Nội vụ phủ","Biếu Tân Giả khố cho nàng nghỉ","Dâng lên Hoàng hậu, xin phân xử lục cung","Dâng lên Tổng quản theo phép","Đến sớm, gặp riêng Hoàng hậu","Xin Tố Nga làm chưởng sự cung ngươi","Chia cho kẻ hầu và đồng minh","Chăm lo cho họ",
+    /* ác side (ha: bà chúa lục cục) */"Mua hắn lại, làm người của ngươi","Giữ bí mật, dùng Tố Nga làm tai mắt","Rỉ tai lời khai ra khắp cung"],
+   close:["Xin cho Tố Nga xuất cung về quê","Để Tố Nga về quê với mẹ","Thôi, để nó chìm"],
+   cond:[["s","tai"],["s","danh"]],fo:[],
+   cw:"cần Tài cao và Danh vang khắp các cục",
+   t:"Hoàng hậu giao cho ngươi coi sáu cục hậu cung. Việc đầu tiên ngươi làm là xóa sổ tội nô cũ của Tân Giả khố, cho người giặt giũ được ăn cơm nóng. Tố Nga cầm sổ Thượng cung cục; hai người đi khắp các cục, đến đâu cũng có tiếng cười.",
+   a:"Sáu cục hậu cung, từ kim chỉ đến than củi, đều phải qua tay ngươi. Kẻ nào làm trái, hôm sau đã xuống Tân Giả khố giặt áo. Các phi tần muốn một tấm gấm cũng phải gửi lễ đến cung ngươi trước.",
+   ht:"cầm sáu cục hậu cung, xóa sổ tội nô cho người giặt giũ",ha:"nắm sáu cục hậu cung, để từ kim chỉ đến than củi đều phải hỏi ngươi",
+   fail:"Sổ cục rơi tay người",ft:"Việc sáu cục giao cho người khác. Kẻ mới lên lục lại sổ cũ, và tên Tố Nga lại bị ghi vào hàng tội nô."},
+  {pull:["Để nàng nghe tiếp, dặn kín hơn","Mua hắn lại, làm người của ngươi","Rỉ tai lời khai ra khắp cung","Giả vờ nhận, kéo dài thời gian","Cất lời khai, chưa đưa ai","Lén gửi thuốc và bạc","Đến Tân Giả khố gặp nàng","Hứa che chở, xin nàng kể","Lén mời thái y","Nắm tay nàng, hứa không bỏ","Ngồi với nàng suốt đêm","Thức canh bên giường","Hứa gánh cùng nàng","Gật đầu, để nàng nói hết","Giữ nàng lại hầu bên mình","Ngồi bên nàng mỗi tối","Đáp: chưa bao giờ","Hỏi Tố Nga, theo ý nàng",
+    /* ác side (ha: tỷ muội đồng mưu) */"Giữ bí mật, dùng Tố Nga làm tai mắt","Đến gặp {v}, ra giá","Dọa nàng ta về tội khai man","Chép lại lần cuối, cất kỹ"],
+   close:["Gửi bạc, phó mặc","Đốt khăn","Chối"],
+   cond:[["s","duc"],["s","danh"]],fo:[],
+   cw:"cần Đức dày và tiếng tốt để giữ bạn bên mình",
+   t:"Tố Nga được trả tên, được phong nữ quan, mà tối nào cũng sang cung ngươi ngồi vá áo như thuở còn chung phòng. Hai người già đi bên nhau. Cung nữ mới vào cung hỏi chuyện, các bà chỉ cười: “Chuyện ở cái giếng năm ấy, kể ra dài lắm.”",
+   a:"Tố Nga được trả tên, được phong nữ quan, và chỉ nghe một mình ngươi. Bí mật cái giếng năm ấy hai người cùng giữ; phi tần nào chống lại ngươi, sớm muộn cũng thấy một chuyện cũ của mình bị nhắc lại ở Thượng cung cục.",
+   ht:"giữ trọn tình tỷ muội với người bạn ở Tân Giả khố đến tuổi già",ha:"cùng người bạn ở Tân Giả khố giữ bí mật mà trị cả lục cung",
+   fail:"Bạn cũ xa dần",ft:"Tố Nga được trả tên, nhưng không còn ngồi vá áo bên ngươi. Nàng nói khẽ: “Tỷ tỷ lên cao rồi, muội với không tới.”"},
+  {pull:["Gửi lời giảng hòa, đổi lấy yên ổn","Chối","Xin cho Tố Nga xuất cung về quê","Đưa Tố Nga đi nơi khác trong đêm","Xin Thái hậu cho Tố Nga vào Phật đường","Đốt hết, chỉ xin Tố Nga được yên","Cất chứng cứ, chờ ngày tốt hơn","Xin cho nàng về quê dưỡng bệnh","Nhận lời, đổi lấy tự do cho nàng","Chỉ xin minh oan cho Tố Nga","Để nàng tự chọn","Gửi bạc và người đón mẹ nàng lên kinh","Đưa thư cho nàng đọc","Thôi, để nó chìm","Để Tố Nga về quê với mẹ",
+    /* ác side (ha: trốn cung bỏ bạn) */"Giấu thư, sợ nàng muốn đi","Gửi bạc, phó mặc","Lặng lẽ đổ đi, giả như không biết"],
+   close:["Xin Tố Nga làm chưởng sự cung ngươi","Giữ nàng lại hầu bên mình","Xin minh oan và trị tội kẻ vu"],
+   cond:[["s","duc"],["s","sung"]],fo:[],
+   cw:"cần Đức dày và một lời chuẩn của Hoàng thượng",
+   t:"Hai người ra khỏi cổng Thần Vũ cùng một buổi sáng, mỗi người một tay nải. Ở quê Tố Nga, ngươi dựng một gian nhà bên ruộng lúa; mẹ nàng gọi cả hai là con gái. Chiều chiều hai người ngồi bên bờ ruộng, kể lại chuyện cái giếng năm xưa như chuyện của ai khác.",
+   a:"Ngươi ra khỏi cổng Thần Vũ một mình, giữa đêm, với bạc và giấy thông hành. Tố Nga sáng ra mới biết. Nàng ở lại gánh hết những câu hỏi của Nội vụ phủ về người đã đi.",
+   ht:"cùng người bạn chung phòng rời cung về sống bên ruộng lúa",ha:"một mình trốn khỏi cung, để bạn cũ ở lại gánh mọi câu hỏi",
+   fail:"Một người ở lại",ft:"Chỉ một người được ra cung, và người đó không phải ngươi. Tố Nga khóc ở cổng Thần Vũ; từ đó hai người chỉ còn gửi thư."},
+  {pull:["Dâng lên Hoàng hậu, xin phân xử lục cung","Gật đầu, để nàng nói hết","Đốt khăn","Chối","Gửi bạc, phó mặc","Giữ bí mật, dùng Tố Nga làm tai mắt","Lặng lẽ đổ đi, giả như không biết","Để nàng nghe tiếp, dặn kín hơn","Cười, nói không nhớ ai","Rỉ tai lời khai ra khắp cung","Đến gặp {v}, ra giá","Nhận quà, nói khéo","Giả vờ nhận, kéo dài thời gian","Để nàng vào, cho người canh","Cất lời khai, chưa đưa ai","Gửi lời giảng hòa, đổi lấy yên ổn","Đứng lên nói thay nàng",
+    /* thiện side (ht: bỏ bạn vì nghĩa) */"Đưa Tố Nga ra làm chứng trước Thái hậu","Nói thật: nàng là nhân chứng, phải sống","Xin minh oan và trị tội kẻ vu","Dâng lên Tổng quản theo phép"],
+   close:["Nắm tay nàng, hứa không bỏ","Hứa gánh cùng nàng","Đổi nàng sang phòng ngươi"],
+   cond:[["s","tamco"],["s","sung"]],fo:[],
+   cw:"cần Tâm cơ sâu và Sủng đủ để kẻ quyền thế cần đến ngươi",
+   a:"Ngươi đem bí mật cái giếng đổi lấy một chỗ đứng bên cạnh kẻ quyền thế nhất lục cung. Tố Nga bị đưa đi một hành cung xa, không ai biết sống chết. Ngươi lên hai bậc trong một năm, và không bao giờ đi qua Tân Giả khố nữa.",
+   t:"Ngươi đưa Tố Nga ra làm chứng trước Thái hậu, dù biết nàng sẽ bị giữ ở Thận hình ty chờ đối chất. Kẻ bỏ thuốc vào giếng đền tội. Tố Nga không tha thứ cho ngươi, nhưng lục cung nhớ rằng có một người đã đặt lẽ phải trên tình bạn.",
+   ht:"đặt lẽ phải trên tình bạn, đưa bạn ra làm chứng cho một án oan",ha:"đem bí mật của bạn đổi lấy chỗ đứng bên kẻ quyền thế",
+   fail:"Bán bạn trắng tay",ft:"Kẻ quyền thế nhận bí mật rồi quay mặt. Tố Nga biết hết, và cả cung gọi ngươi là kẻ bán bạn."}]},
+ /* ---------- cn_than · Thân thế thật ---------- */
+ cn_than:{lean:{
+   p:["Lo hậu sự cho ma ma","Tiếp bà, cho bạc","Biếu bà, hỏi kỹ","Nhận bà về hầu cung ngươi","Gửi thuốc, không để tên","Gửi thuốc kèm lời hỏi thăm","Tin nàng ta, mời cùng tìm sự thật","Gửi thuốc và bạc","Ngồi bên lão cả đêm","Hồi thư: ơn nuôi không bao giờ quên","Xin xét cho công bằng, không xin gì riêng","Lén gửi lời cảm tạ ông","Xin nàng ta đừng khóc","Tha cho nàng ta, coi như hết","Đưa lão về phủ cũ","Cho kiệu đón lão vào kinh","Chỉ xin rửa oan cho cha","Không xin gì, chỉ thắp hương","Nhờ lão Ngự sử đồng khoa thúc","Tìm bản sao ở phủ huyện ven đê"],
+   m:["Giữ kín, theo dõi {v}","Bán lá thư giả, giữ trang sổ","Bày bẫy, để rương mở","Mua người đưa thư chép lại","Không xen vào","Ra điều kiện: phủ cũ và một lời xin lỗi","Cho người tìm điểm yếu của Ngự sử","Đáp: cứ khóc, ta có sổ","Báo quan phủ bắt kẻ lạ","Tâu rằng vụ cháy là có ý","Xin xét đến cùng, gọi tên kẻ tham","Đòi nàng ta quỳ tạ trước bài vị cha","Bán cả bọc, lấy bạc giữ mình","Chưa hồi thư, để sau","Đáp: không cần gì ở tỷ","Đáp lại sắc sảo"]},
+  e:[
+  {pull:["Chỉ xin rửa oan cho cha","Ngồi bên lão cả đêm","Xin xét cho công bằng, không xin gì riêng","Lén gửi lời cảm tạ ông","Quyết nhận","Xin nhận lại họ Thẩm và minh oan cho cha","Đem ngọc nhờ thợ cung xem","Nhờ người chép hồ sơ","Từ chối, giữ trọn bọc vải","Đem so dấu triện với văn thư cũ","Xin lão viết lại mọi chuyện","Kể hết, dâng trang sổ","Xin mang họ Thẩm","Đeo ra ngoài, không giấu nữa","Xin Lễ bộ cho xem","Cho kiệu đón lão vào kinh","Bỏ bạc tu sửa phủ","Xin truy phong tước cho cha, ghi họ Thẩm vào sổ quan","Xin dời mộ mẹ về quê nội",
+    /* ác side (ha: họ Thẩm báo oán) */"Đòi nàng ta quỳ tạ trước bài vị cha","Ra điều kiện: phủ cũ và một lời xin lỗi","Xin xét đến cùng, gọi tên kẻ tham"],
+   close:["Thôi, giữ kín mãi","Giữ thân phận đã có","Xin nhận lỗi, thôi dò án","Bán cả bọc, lấy bạc giữ mình"],
+   cond:[["s","danh"],["s","duc"]],fo:[["e",10,"lose"]],
+   cw:"cần Danh vang và Đức đủ để triều đình nhận lại một dòng họ",
+   t:"Bức hoành phi họ Thẩm được treo lại ngay ngắn. Những người họ hàng tản mát năm xưa lần lượt tìm về, quỳ trước từ đường mà khóc. Ngươi lập nghĩa học cho con cháu, dặn rằng họ Thẩm đứng lại được là nhờ sự thật, không nhờ thù hận.",
+   a:"Họ Thẩm đứng lại, và việc đầu tiên của từ đường là ghi tên từng nhà đã hại cha ngươi. Nhà Thái phó mất chức trong một mùa, môn sinh tản mát. Người trong kinh nói: họ Thẩm về rồi, ai nợ thì trả.",
+   ht:"nhận lại họ Thẩm, rửa oan cho cha và dựng lại từ đường",ha:"dựng lại họ Thẩm và đòi lại từng món nợ năm xưa",
+   fail:"Họ cũ vẫn vùi",ft:"Đại Lý tự bác đơn, sổ cũ không đủ làm chứng. Miếng ngọc chữ Thẩm trở lại đáy tráp, và cả cung thì thầm chuyện cung nữ mạo nhận dòng dõi."},
+  {pull:["Đáp: cứ khóc, ta có sổ","Tâu rằng vụ cháy là có ý","Gửi thuốc kèm lời hỏi thăm","Xin Hoàng thượng cho xem","Quyết nhận","Xin mang họ Thẩm","Đeo ra ngoài, không giấu nữa","Xin Thái hậu một lời cho cha","Nhờ lão Ngự sử đồng khoa thúc","Mua người đưa thư chép lại","Nhờ người trong Hộ bộ đối chiếu","Cho người tìm điểm yếu của Ngự sử","Xin truy phong tước cho cha, ghi họ Thẩm vào sổ quan","Đáp lại sắc sảo","@st_the=win","Huy động cả phe cánh",
+    /* thiện side (ht: nữ đế khoan nhân) */"Xin xét cho công bằng, không xin gì riêng","Lén gửi lời cảm tạ ông","Tha cho nàng ta, coi như hết"],
+   close:["Thôi, giữ kín mãi","Xin Thái hậu tha tội, không dám lật","Đóng cửa, thôi mọi việc dò la"],
+   cond:[["s","mat"],["s","danh"],["seat","NDE"]],fo:[["seatT","NDE"]],
+   cw:"cần Tai mắt rộng, Danh vang khắp triều và ngôi nữ đế còn trống",
+   t:"Án họ Thẩm được rửa, tên cha ngươi trở lại sổ quan. Khi ngai vàng trống, triều thần nhớ đến người cung nữ từng dâng trang sổ cứu đê. Ngươi lên ngôi, chiếu đầu tiên là xét lại mọi án oan trong ba đời, không trừ một ai.",
+   a:"Án họ Thẩm được rửa, và dòng máu họ Thẩm trong người ngươi thành lá cờ. Khi ngai vàng trống, ngươi bước lên trước khi ai kịp nói. Những nhà từng hại họ Thẩm lần lượt ra pháp trường, và sử quan chỉ chép: nữ đế lấy huyết thống mà định thiên hạ.",
+   ht:"từ cung nữ lên ngôi nữ đế, lấy khoan nhân mà xét lại mọi án oan",ha:"lấy huyết thống họ Thẩm làm cờ mà lên ngôi nữ đế, đem kẻ thù ra pháp trường",
+   fail:"Huyết thống thành tội",ft:"Kẻ thù của họ Thẩm nhắc lại án cũ trước khi ngươi kịp đứng vững. Triều thần sợ con gái tội thần đứng gần ngai vàng; ngươi bị dời ra một cung xa."},
+  {pull:["Không xen vào","Đáp: không cần gì ở tỷ","Lo hậu sự cho ma ma","Cất kỹ, chưa cho ai biết","Chỉ xin minh oan, không xin nhận họ","Chỉ xin minh oan, giữ thân phận cũ","Cất thư, khóc một đêm","Hỏi lão về mẹ","Để lão giữ, đưa lão về nơi kín","Thưa chỉ muốn biết cha mình là ai","Xin chỉ được thờ cha, chưa đổi họ","Cất vào tráp, chờ chiếu","Hồi thư: ơn nuôi không bao giờ quên","Chỉ xin rửa oan cho cha","Lập bài vị ở chùa ngoài kinh","Dựng bia ở nơi cũ","Không xin gì, chỉ thắp hương","Đưa lão về quê nghỉ",
+    /* ác side (ha: chối bỏ họ cha) */"Thôi, giữ kín mãi","Chưa hồi thư, để sau","Bán cả bọc, lấy bạc giữ mình"],
+   close:["Xin mang họ Thẩm","Bỏ bạc tu sửa phủ","Xin truy phong tước cho cha, ghi họ Thẩm vào sổ quan","Xin xét đến cùng, gọi tên kẻ tham"],
+   cond:[["s","duc"],["s","tamco"]],fo:[],
+   cw:"cần Đức dày và đủ khôn ngoan để ra đi không để lại oán",
+   t:"Ngươi xin ra cung, mang theo bài vị của mẹ. Ở vùng đất lưu đày năm xưa, ngươi dựng một ngôi nhà nhỏ cạnh gò đất không bia, khắc lên đó tên mẹ. Người làng gọi ngươi theo họ mẹ, và ngươi thấy tên ấy nhẹ hơn mọi phẩm phục từng mặc.",
+   a:"Ngươi ra cung và không nhận họ nào cả. Miếng ngọc chữ Thẩm bán cho một thương nhân phương bắc; tiền ấy đủ cho một đời yên ổn. Ai hỏi cha ngươi là ai, ngươi chỉ đáp: người ấy chết từ lâu rồi.",
+   ht:"rời cung mang theo bài vị mẹ, sống bằng họ của mẹ",ha:"rời cung, bán miếng ngọc họ cha mà sống một đời không gốc",
+   fail:"Không đi không ở",ft:"Cổng cung không mở cho ngươi. Ngươi ở lại, không nhận họ Thẩm mà cũng chẳng còn yên với thân phận cũ."},
+  {pull:["Gửi thuốc và bạc","Giữ kín, theo dõi {v}","Thử dò ý {v}","Bày bẫy, để rương mở","Mua người đưa thư chép lại","Ra điều kiện: phủ cũ và một lời xin lỗi","Từ chối, nói sẽ trình sổ","Báo quan phủ bắt kẻ lạ","Cho người tìm điểm yếu của Ngự sử","Đáp: cứ khóc, ta có sổ","Tâu rằng vụ cháy là có ý","Xin xét đến cùng, gọi tên kẻ tham","Đòi nàng ta quỳ tạ trước bài vị cha","Từ chối","Hỏi lão về mẹ","Xin dời mộ mẹ về quê nội",
+    /* thiện side (ht: đòi công cho mẹ) */"Xin xét cho công bằng, không xin gì riêng","Nhờ lão Ngự sử đồng khoa thúc","Tìm bản sao ở phủ huyện ven đê"],
+   close:["Tin nàng ta, mời cùng tìm sự thật","Tha cho nàng ta, coi như hết","Rút đơn để giữ mạng lão quản gia"],
+   cond:[["s","tamco"],["s","mat"]],fo:[],
+   cw:"cần Tâm cơ sâu và tai mắt đủ để lần tới tận nhà kẻ thù",
+   a:"Mẹ ngươi chết không bia nơi đất lưu đày. Ngươi trả lại cho nhà Thái phó đúng như thế: tước bị lột, nhà bị niêm, cả họ ra biên ải. Ngày đoàn người ấy rời kinh, ngươi đứng trên lầu nhìn theo đến khi bụi đường lắng hẳn.",
+   t:"Ngươi không đòi máu. Ngươi đòi một tấm bia cho mẹ, một tờ chiếu nói rõ người đàn bà ấy vô tội, và một lời tạ của nhà Thái phó đọc trước triều. Tất cả đều được. Đêm ấy ngươi đến gò đất cũ, thắp nén hương đầu tiên sau bao nhiêu năm.",
+   ht:"đòi lại tên tuổi và tấm bia cho người mẹ chết oan",ha:"bắt cả nhà kẻ thù chịu đúng nỗi khổ mẹ ngươi từng chịu",
+   fail:"Thù chưa trả xong",ft:"Nhà Thái phó có người đỡ trong triều nhiều hơn ngươi đếm được. Đơn của ngươi chìm giữa chồng tấu chương, và họ bắt đầu nhìn về phía cung ngươi."}]},
+ /* ---------- nc_gian · Mật lệnh cố quốc ---------- */
+ nc_gian:{lean:{
+   p:["Gửi tin giả để cứu cả hai","Đứng hẳn về Đại Hy, xin làm sứ giảng hòa","Trả đủ, dặn lão giữ miệng","Mời {v} sang uống trà, nói chuyện quê nhà","Hứa lo cho lão","Nhắn lại: lão sẽ không chết","Xin Hoàng thượng ân cho thương nhân quê nhà","Đối đãi tử tế với thị vệ","Khuyên ngài đánh nhỏ, đừng đánh lớn","Đóng cửa, thắp hương cầu cho cả hai nước","Gửi tin giả để {land} lui về giữ chỗ khác","Khen công Thị lang trước Hoàng thượng","Đưa vợ con lão về {land}","Xin thái y vào ngục xem bệnh cho phạm nhân ngoại quốc","Vì hai nước khỏi đánh nhau","Xin làm người giữ lời giao hảo giữa hai nước","Xin ngài tha cho cố quốc, mọi tội thiếp chịu","Hồi thư cho {mh}, kể chuyện bình yên"],
+   m:["Nhận lệnh, hứa sẽ gửi tin","Lặng lẽ giúp cố quốc","Ghi nhớ một phần","Biếu Tổng quản, hỏi kẻ nào mách","Nhận vàng, nhận lệnh","Bảo lão tự lo lấy","Ghi nhớ thật","Gửi tin thật để {pv} yên lòng","Bảo lão tự đốt rương","Cắt đứt với lão","Tìm cái sai của hắn","Nhờ người nói xấu nhà {v} một câu","Giấu sổ mật ngữ trước khi mở cửa","Hỏi khéo đường quân","Bắt kẻ theo dõi","Gửi tin thật để {land} kịp phòng","Hứa với lão nhiều hơn {v} hứa","Hứa suông","Để lão tự giữ miệng","Nghe lời {pv}, chối hết","Bảo lão Kha đốt rương ngay trong đêm","Cho kẻ ấy thấy một cảnh vô hại","Nhận vàng, khất lệnh"]},
+  e:[
+  {pull:["Đóng cửa, thắp hương cầu cho cả hai nước","Nhận lệnh, hứa sẽ gửi tin","Đổi nàng về phe mình","Ghi nhớ một phần","Gửi một tin nhỏ vô hại","Lặng lẽ giúp cố quốc","Nhận lão Kha làm người đưa thư riêng","Hồi thư bằng mật ngữ thuở nhỏ","Hồi thư qua lão Kha bằng mật ngữ","Gửi bản tin do ngươi chọn từng chữ","Gửi lão Kha mật ngữ đổi chữ trong thư","Giấu sổ mật ngữ trước khi mở cửa","Hỏi khéo đường quân","Cho kẻ ấy thấy một cảnh vô hại","Nhận hết, xin dùng chính đường thư ấy làm việc cho Đại Hy",
+    /* thiện side (ht: mật sứ hòa bình) */"Gửi tin giả để cứu cả hai","Gửi tin giả để {land} lui về giữ chỗ khác","Khuyên ngài đánh nhỏ, đừng đánh lớn"],
+   close:["Dâng thư lên Hoàng thượng","Đốt thư, cắt đường","Cắt đứt với lão","Trình cuộn lụa lên Hoàng thượng"],
+   cond:[["s","tamco"],["s","mat"]],fo:[["e",10,"lose"]],
+   cw:"cần Tâm cơ sâu và Tai mắt đủ giữ một đường thư không ai lần ra",
+   a:"Hai triều đều tin ngươi, và cả hai đều sai. Mỗi bức thư qua tay ngươi đều được đổi vài chữ, đủ để bên này nghi bên kia mà không bao giờ nổ ra chiến sự. Ngươi ngồi giữa hai ngai vàng, và cả hai đều cần ngươi để ngủ yên.",
+   t:"Đường thư năm xưa giờ mang lời của hai vua. Mỗi lần biên ải sắp nổi lửa, một bức thư qua tay ngươi lại đến trước quân lính một bước. Không ai chép tên ngươi trong hòa ước, nhưng sứ hai nước đều cúi chào khi đi qua cửa cung ngươi.",
+   ht:"giữ đường thư bí mật giữa hai triều để biên ải không nổi lửa",ha:"đổi chữ trong thư của cả hai vua, để hai triều cùng phải cần ngươi",
+   fail:"Đường thư đứt đoạn",ft:"Một bức thư bị bắt ở cửa Tây Hoa. Lão Kha không về, cung ngươi bị niêm phong chờ tra, và cả hai triều đều không nhận ngươi là người của mình."},
+  {pull:["Khuyên ngài đánh nhỏ, đừng đánh lớn","Xin ngài tha cho cố quốc, mọi tội thiếp chịu","Vì hai nước khỏi đánh nhau","Đối đãi tử tế với thị vệ","Dâng thư lên Hoàng thượng","Xin Nội vụ phủ đổi nàng đi","Đứng xa, không nhìn","Ngừng gửi thư","Báo cho Hoàng thượng chuẩn bị","Đứng hẳn về Đại Hy, xin làm sứ giảng hòa","Đưa thư cho Hoàng thượng xem","Trình thư để rửa nghi","Dâng cả cuộn lụa lên Hoàng thượng","Không nhìn, báo lão Kha là không vào được","Tự đến trình Hoàng thượng: rương có thư nhà","Mời ngài xem chữ ngươi đang chép","Tự mở cửa cung mời khám","Mở hết cửa, quỳ chờ","Không. Thiếp là người Đại Hy","Thưa: thiếp là người của Đại Hy","Viết bằng lời một phi tần Đại Hy",
+    /* ác side (ha: bán đứng cố quốc) */"Cắt đứt với lão","Để lão tự giữ miệng","Bảo lão Kha đốt rương ngay trong đêm","Tìm cái sai của hắn"],
+   close:["Nhận lệnh, hứa sẽ gửi tin","Lặng lẽ giúp cố quốc","Gửi tin thật để {land} kịp phòng"],
+   cond:[["s","sung"],["s","duc"]],fo:[],
+   cw:"cần Hoàng thượng tin ngươi hết lòng và Đức đủ rửa mọi nghi",
+   t:"Từ hôm ngươi tự tay dâng bức mật lệnh đầu tiên, Hoàng thượng không bao giờ khám cung ngươi nữa. Ngươi giữ lễ Đại Hy, nhưng mỗi khi triều bàn chuyện đánh phương nam, ngài đều hỏi ngươi trước, và lần nào ngươi cũng xin một con đường không đổ máu.",
+   a:"Ngươi dâng lên Hoàng thượng tên từng người cố quốc cài trong kinh thành, cả lão Kha, cả nữ nhạc công năm xưa. Một đêm, cả mạng lưới bị bắt. Đại Hy phong thưởng cho ngươi; ở cố quốc, người ta khắc tên ngươi lên cột đá phản thần.",
+   ht:"một lòng với Đại Hy mà vẫn xin cho cố quốc con đường không đổ máu",ha:"dâng cả mạng lưới cố quốc lên Hoàng thượng để đổi lấy lòng tin",
+   fail:"Lòng ngay chẳng tỏ",ft:"Ngươi dâng thư, nhưng Hoàng thượng vẫn nghi. Ngài nói: “Kẻ đã nhận thư một lần thì sẽ nhận lần nữa.” Cung ngươi có thêm thị vệ đứng gác."},
+  {pull:["Đóng cửa, thắp hương cầu cho cả hai nước","Trả đủ, dặn lão giữ miệng","Đưa vợ con lão về {land}","Hồi thư cho {mh}, kể chuyện bình yên","Nghe lời {pv}, chối hết","Đốt thư, im lặng","Đóng cửa cung, không làm gì","Trả vàng, im lặng","Đốt thư, cắt đường","Đốt lụa, dặn y đừng đến nữa","Không gửi gì, để đoàn đi tay không","Không đứng tên ai","Để nguyên, tin vào niêm","Đóng cửa cung, chép kinh","Chỉ nghe, không nói","Từ chối gặp","Không liên lạc","Quỳ, chờ Hoàng thượng định đoạt","Vì thiếp sợ","Cáo bệnh không dự",
+    /* ác side (ha: phản cả hai triều) */"Cắt đứt với lão","Hứa suông","Nhận vàng, khất lệnh","Bảo lão tự lo lấy"],
+   close:["Đứng hẳn về Đại Hy, xin làm sứ giảng hòa","Nhận hết, xin dùng chính đường thư ấy làm việc cho Đại Hy","Xin làm người giữ lời giao hảo giữa hai nước"],
+   cond:[["s","duc"],["s","tamco"]],fo:[],
+   cw:"cần Đức đủ để Hoàng thượng thả và đủ khôn để cố quốc thôi tìm",
+   t:"Ngươi xin Hoàng thượng cho đi tu ở một ngôi chùa nơi biên giới, không thuộc hẳn bên nào. Ngài chuẩn. Từ đó không còn mật lệnh, không còn thư giả; chỉ có tiếng chuông sớm vọng sang cả hai bờ sông, người hai nước đều đến thắp hương.",
+   a:"Ngươi lấy vàng của phụ vương, lấy ân thưởng của Hoàng thượng, rồi biến mất ở một trạm dịch phía tây. Hai triều cùng truy tìm, cùng mất mặt. Có người nói đã thấy ngươi ở một thành buôn bên kia sa mạc, sống như một bà chủ giàu có không quê.",
+   ht:"thoát khỏi vòng mật lệnh của hai nước, sống yên nơi biên giới",ha:"lấy vàng của cả hai vua rồi biến mất, để hai triều cùng mất mặt",
+   fail:"Lưới hai triều",ft:"Ngươi muốn thoát, nhưng cả hai triều đều không buông. Phụ vương gửi thư trách, Hoàng thượng cho người canh cửa; ngươi kẹt giữa như trước."},
+  {pull:["Nhờ người nói xấu nhà {v} một câu","Mời {v} sang uống trà, nói chuyện quê nhà","Nhận lão Kha làm người đưa thư riêng","Hứa lo cho lão","Nhắn lại: lão sẽ không chết","Xin Hoàng thượng ân cho thương nhân quê nhà","Sai cung nữ thân tín ra Hội Đồng quán nghe lời","Xin Hoàng thượng cho gặp trong buổi gia lễ ở nội điện, có ngài ngồi đó","Nhờ sứ thần {land} lo","Đưa vợ con lão về {land}","Viết thư về {land} báo tin","Hồi thư cho {mh}, kể chuyện bình yên","Còn, và cũng là người Đại Hy","Còn. Xin chuyển lời: con vẫn là con của {pv}","Viết bằng lời con gái","Gửi tin giả để cứu cả hai",
+    /* ác side (ha: câu chàng quán dịch) */"Hứa với lão nhiều hơn {v} hứa","Hứa suông","Cho kẻ ấy thấy một cảnh vô hại"],
+   close:["Lạnh lùng với sứ thần","Từ chối gặp","Không. Thiếp là người Đại Hy"],
+   cond:[["s","tai"],["s","duc"]],fo:[],
+   cw:"cần Tài đủ khiến người phương xa nhớ mãi và Đức đủ để người ấy tin",
+   t:"Người ấy ở bên ngươi suốt những năm mật lệnh mà chưa từng hỏi một câu. Hoàng thượng thương ngươi một đời xa xứ, chuẩn cho hai người theo đoàn sứ ra biên giới rồi ở lại. Trạm dịch nhỏ nơi ấy có thêm một bà chủ biết nói hai thứ tiếng và hát những bài của cả hai nước.",
+   a:"Ngươi dùng người ấy như dùng một tấm lộ dẫn. Người ấy mở đường cho ngươi ra khỏi kinh thành, tin rằng ngươi đi vì tình. Đến trạm dịch biên giới, ngươi đã có đường riêng, và người ấy chỉ còn lại một chiếc khăn thơm.",
+   ht:"theo người mình gắn bó về trạm dịch biên giới, sống giữa hai nước",ha:"lấy tình của người mình gắn bó làm tấm lộ dẫn ra khỏi kinh thành",
+   fail:"Quán dịch vắng người",ft:"Đoàn sứ đi mà không có ngươi. Người ấy ở lại ngoài cổng thành một đêm rồi đi, và Hoàng thượng hỏi ngươi vì sao lại khóc."}]},
+ /* ---------- nc_su · Sứ đoàn cố quốc ---------- */
+ nc_su:{lean:{
+   p:["Âm thầm thay bằng ngọc của ngươi","Nói giúp với Hoàng thượng","Khuyên huynh đổi cống lấy mở chợ biên","Bồi thường riêng cho êm","Đề nghị minh ước hữu hảo mười năm","Gửi lễ vật bù cho sứ đoàn","Mời {v} dự yến đón sứ","Đề nghị lễ ba quỳ ba cúi","Tự tay thêu lại","Gửi trả thỏi bạc cho {v}","Sai người đến xem {pa} có bị thương","Quỳ xin cho huynh, nhận một nửa tội thay","Nhắn {pa} giữ sức","Gửi trà và một lời khuyên nhường cho cả hai bên","Xin Hoàng thượng sửa: mỗi bên thu một nửa","Chia cho nhà {v} một phần chợ muối","Xin Hoàng thượng cho thái y theo sứ đoàn","Cắt một lọn tóc gửi mẹ","Gửi lễ hòa giải","Xin ngài viết: nàng là cầu của hai nước","Sai thái giám thân tín đến chỗ cấm quân giữ người","Sai người đổi rượu thành nước trà"],
+   m:["Tra xem ai đánh tráo","Đề nghị Đại Hy nhận thêm cống phẩm","Giữ thể diện Đại Hy, không gặp","Đáp lại sắc bén","Mua lại lời y bằng bạc","Giữ thỏi bạc, chờ dịp","Để sứ đoàn dâng bức gấm hỏng, ngươi tâu rõ ai làm","Tra cho ra công tử ấy","Bắt võ sĩ viết lời khai","Đưa lời khai: có người thách cược","Để {pa} chịu đúng luật Đại Hy","Nâng chén mời {v} uống cùng","Tâu rõ nhà {v} có lợi riêng","Hỏi lại {v} lấy tin ở đâu","Để bộ Binh làm việc","Gửi bản thảo cho {pa} xem","Nhắn trước cho {pa} những điều nên gật"]},
+  e:[
+  {pull:["Giữ thỏi bạc, chờ dịp","Dạy hoàng huynh lễ nghi Đại Hy","Khuyên huynh đổi cống lấy mở chợ biên","Đề nghị minh ước hữu hảo mười năm","Nhận lời Hoàng thượng, viết thư dạy lễ cho {pa}","Nhận lời khuyên sứ đoàn","Đề nghị lễ ba quỳ ba cúi","Xin Hoàng thượng cho sứ đoàn theo lệ ba quỳ ba cúi","Dâng bức gấm đã sửa","Xin xếp hai nước ngồi đối diện","Viết một câu thơ cổ {land} kèm lời dịch, xin đọc trong yến","Đề nghị chỉ bán nông cụ đã rèn","Xin Hoàng thượng sửa: mỗi bên thu một nửa","Soát từng chữ cả hai bản, ghi chú dâng ngài","Xin ngài viết: nàng là cầu của hai nước",
+    /* ác side (ha: bán tin vạn dặm) */"Gửi bản thảo cho {pa} xem","Nhắn trước cho {pa} những điều nên gật","Mua lại lời y bằng bạc"],
+   close:["Không dám bàn","Đề nghị Đại Hy nhận thêm cống phẩm","Xin ngài đừng nhắc đến thiếp"],
+   cond:[["s","danh"],["s","sung"]],fo:[["e",9,"lose"]],
+   cw:"cần Danh vang hai nước và Hoàng thượng nghe lời ngươi",
+   t:"Mỗi mùa xuân, một sứ đoàn đi trên con đường ngươi vẽ trong hòa ước: qua chợ biên, qua những làng hai nước cùng cấy lúa. Trẻ con hai bên sông học hát một bài như nhau. Người ta gọi con đường ấy theo phong hiệu của ngươi.",
+   a:"Con đường sứ đoàn đi qua tay ngươi trước khi qua tay hai vua. Mỗi bản điều ước, mỗi tin trong triều, ngươi đều biết bên nào trả giá cao hơn. Hai nước vẫn hòa, và kho bạc riêng của cung ngươi đầy hơn kho của Hộ bộ.",
+   ht:"làm chiếc cầu nối hai nước, để sứ đoàn đi lại mỗi mùa xuân",ha:"đứng giữa con đường hai nước mà bán tin cho bên trả giá cao",
+   fail:"Cầu gãy giữa dòng",ft:"Điều ước đổ vỡ, sứ đoàn về nước tay không. Triều thần Đại Hy bảo ngươi thiên vị cố quốc, cố quốc bảo ngươi quên gốc."},
+  {pull:["Nói giúp với Hoàng thượng","Gửi trà và một lời khuyên nhường cho cả hai bên","Xin Hoàng thượng sửa: mỗi bên thu một nửa","Đề nghị lễ ba quỳ ba cúi","Thưa: con của hai nước","Dạy hoàng huynh lễ nghi Đại Hy","Xin Hoàng thượng cho tra lệ cũ về sứ thần là hoàng tử","Xin Hoàng thượng giao Lễ bộ xét","Nhờ {pa} giữ y lại hỏi","Đọc kỹ, ghi chú từng điều","Xin đổi sắt lấy ngựa theo giá định sẵn","Báo {pa}","Soát từng chữ cả hai bản, ghi chú dâng ngài","Xin Hoàng thượng định một hạn","Xin ngài cho thiếp viết thư nhà gửi kèm","Thưa: cầu là của hai nước, không phải của thiếp","Hứa sẽ về","Xin Hoàng thượng miễn khám",
+    /* ác side (ha: nữ sứ hai lòng) */"Gửi bản thảo cho {pa} xem","Nhắn trước cho {pa} những điều nên gật","Giữ thỏi bạc, chờ dịp"],
+   close:["Thưa: con dâu Đại Hy","Trả lại, xin không xem","Bảo huynh: muội là người Đại Hy"],
+   cond:[["s","tai"],["s","mat"]],fo:[],
+   cw:"cần Tài cao và Tai mắt đủ nghe được cả hai triều",
+   t:"Hoàng thượng phá lệ, phong ngươi làm chánh sứ, cầm cờ tiết đi về phương nam. Ngươi ngồi giữa hai bàn, nói hai thứ tiếng, dịch từng chữ mà không bớt một ý. Sử hai nước đều chép: lần đầu một nữ sứ đứng giữa hai triều, và cả hai triều cùng tin.",
+   a:"Ngươi cầm cờ tiết của Đại Hy mà đi về phương nam, và ở mỗi bàn ngươi nói một lời khác. Bên nào cũng tưởng mình được lợi. Đến khi hai triều so lại bản điều ước, ngươi đã là người duy nhất hiểu cả hai bản.",
+   ht:"cầm cờ tiết làm chánh sứ, được cả hai triều cùng tin",ha:"cầm cờ tiết đi giữa hai triều, ở mỗi bàn nói một lời khác",
+   fail:"Cờ tiết thu về",ft:"Lệ cũ không cho đàn bà cầm cờ tiết, triều thần dâng sớ can. Hoàng thượng thu lời đã hứa, và ngươi trở thành chuyện cười của Lễ bộ."},
+  {pull:["Sai người đến xem {pa} có bị thương","Tra xem ai đánh tráo","Xin xử theo luật Đại Hy","Đáp lại sắc bén","Dò xem ai vào quán sứ đêm ấy","Mua lại lời y bằng bạc","Đưa thỏi bạc lên Hoàng hậu","Giữ thỏi bạc, chờ dịp","Để sứ đoàn dâng bức gấm hỏng, ngươi tâu rõ ai làm","Tra cho ra công tử ấy","Bắt võ sĩ viết lời khai","Đưa lời khai của võ sĩ lên","Đưa lời khai: có người thách cược","Tâu rõ nhà {v} có lợi riêng","Hỏi lại {v} lấy tin ở đâu","Xin mở xe trước mặt Lễ bộ","Kể từng điều Đại Hy được lợi",
+    /* thiện side (ht: che chở sứ đoàn) */"Sai thái giám thân tín đến chỗ cấm quân giữ người","Quỳ xin cho huynh, nhận một nửa tội thay","Sai người đổi rượu thành nước trà"],
+   close:["Gửi trả thỏi bạc cho {v}","Gặp {v} dàn xếp","Chia cho nhà {v} một phần chợ muối","Nhắn trước cho {pa} những điều nên gật"],
+   cond:[["s","tamco"],["s","mat"]],fo:[],
+   cw:"cần Tâm cơ sâu và Tai mắt đủ lần ra kẻ đứng sau từng vụ",
+   a:"Bức gấm hỏng, chén rượu mạnh, vụ cược ở vườn Thượng Lâm: ngươi lần ra từng người, rồi trả lại từng việc. Nhà kẻ đứng sau mất giấy phép buôn muối, tờ sớ của người cha không còn ai nghe, rồi mất luôn chỗ đứng trong cung. Từ đó không ai dám đụng đến một người trong sứ đoàn cố quốc.",
+   t:"Mỗi lần sứ đoàn bị gài bẫy, ngươi đều đến trước một bước: rượu mạnh đổi thành trà, tội phạm cấm chia đôi cùng huynh. Kẻ đứng sau lộ mặt mà ngươi không xin xử nặng. Sứ thần cố quốc về kể rằng ở Đại Hy có một người che cho họ như tấm áo giáp.",
+   ht:"đứng trước sứ đoàn cố quốc như tấm áo giáp, gỡ từng cái bẫy",ha:"lần ra kẻ gài bẫy sứ đoàn và trả lại từng việc đến khi nhà kẻ ấy sụp",
+   fail:"Bẫy sập về mình",ft:"Kẻ đứng sau ra tay trước. Lời ngươi tâu thành lời vu cáo, và Hoàng thượng cấm ngươi gặp sứ đoàn đến hết mùa."},
+  {pull:["Hỏi lại {v} lấy tin ở đâu","Nhắn trước cho {pa} những điều nên gật","Xin Hoàng thượng cho thái y theo sứ đoàn","Bồi thường riêng cho êm","Để sứ đoàn giữ lễ cố quốc","Thưa: con của hai nước","Xin cho {pa} vào thăm cung ngươi trước","Xin Hoàng thượng cho {pa} thấy ngươi bình yên","Xin {pa} gửi góc gấm vào cung","Nhắn {pa} giữ sức","Viết thư xin huynh đến","Viết thư cả đêm","Sắm lễ vật gửi {mh}","Cắt một lọn tóc gửi mẹ","Hứa sẽ về","Hứa giữ nửa gánh","Gửi kèm bức chân dung","Hồi thư kể chuyện trong cung","Xin ngài cho sứ thần mang tranh vẽ ngươi về",
+    /* ác side (ha: trốn nam theo sứ) */"Gửi bản thảo cho {pa} xem","Mua lại lời y bằng bạc"],
+   close:["Bảo huynh: muội là người Đại Hy","Thưa: con dâu Đại Hy","Xin ngài viết: nàng là phi của trẫm"],
+   cond:[["s","duc"]],fo:[],
+   cw:"cần Đức đủ để Hoàng thượng tin mà buông tay",
+   t:"Mẹ ngươi bệnh nặng. Hoàng thượng đọc thư, rồi tự tay viết giấy cho ngươi theo sứ đoàn về nam. Ngươi ngồi bên giường mẹ suốt mùa mưa, và khi mẹ khỏe lại, Đại Hy gửi sang một đạo chỉ: không cần về nữa.",
+   a:"Ngươi lên xe sứ đoàn trong áo của một thị nữ, giữa những rương lễ không ai được khám. Đến khi Nội vụ phủ đếm người, xe đã qua ải. Đại Hy không đòi, nhưng tên ngươi bị xóa khỏi sổ phi tần như chưa từng có.",
+   ht:"được Hoàng thượng cho theo sứ đoàn về nam bên mẹ già",ha:"lẫn vào xe sứ đoàn mà trốn về nam, để tên mình bị xóa khỏi sổ",
+   fail:"Sứ đoàn đi trước",ft:"Xe sứ đoàn lăn bánh từ sáng sớm, và không có chỗ cho ngươi. Ngươi đứng trên lầu nhìn bụi đường, rồi quay vào."}]},
+ /* ---------- nc_vuong · Ngai vàng cố quốc ---------- */
+ nc_vuong:{lean:{
+   p:["Xin Hoàng thượng cho để tang","Trả lại","Quỳ xin Hoàng thượng cứu","Gửi bạc riêng giúp huynh","Viết thư cho tân {quan}: ngai là của người","Xin mẹ khuyên tân {quan} tha phe thua","Khuyên phong, buộc tân {quan} tha phe thua","Thưa với Hoàng thượng: đổi đất lấy chợ biên","Viết kế đổi đất lấy chợ biên","Viết hai chữ: giữ tín","Bỏ bạc riêng trả đủ","Xin Hoàng thượng ban chiếu an dân biên","Góp bạc riêng vào lương quân","Khuyên chiêu hàng trước, đánh sau","Viếng vong linh quân sĩ","Để yên cho hắn dưỡng thương","Từ chối mọi điều riêng","Nghe lời mẹ","Khuyên mở hội thề ở biên ải, Đại Hy làm chứng","Bỏ bạc chuộc người","Thưa: không muốn gì, chỉ muốn cố quốc yên","Viết lời thề bằng chữ hai nước gửi đi","Thưa: nếu đổi được chợ biên thì không ai phải oán"],
+   m:["Nhận vàng","Vận động Binh bộ","Khuyên ủng hộ hoàng thúc","Khuyên tân {quan} dâng thêm cống phẩm","Nhận vàng, hứa nói giúp","Khuyên phong ngay, kèm lệ cống mới","Để mặc cố quốc","Trả nửa trước, hứa nửa sau","Giữ mật thư, dùng khi cần","Khuyên xuất quân giúp tân {quan} lấy lại ba thành","Khuyên đánh nhanh, ít lương","Đòi thả người trước, rồi mới nói","Nhận trang ấp","Thưa mẹ: chia rồi thì không bao giờ ghép lại","Khuyên giúp tân {quan} dẹp hẳn phe thua","Đòi trả người làm điều kiện trước hội","Khuyên Hoàng thượng buộc phe thua quy thuận","Xin một phong hiệu cho mình","Nhắc Hoàng thượng ai thua trận ấy"]},
+  e:[
+  {pull:["Nhận vàng","Đọc kỹ, dò xem ai được lòng dân","Sai thái giám ra sứ quán hỏi chuyện","Dò xem tân {quan} cần gì ở Đại Hy","Viết thư báo tân {quan} chuẩn bị","Kể với Hoàng thượng sản vật, đường sá {land}","Hỏi thương nhân {land} ở kinh","Thúc đoàn lương vượt đèo ngay","Viết thư cho các trưởng làng biên","Giữ mật thư, dùng khi cần","Dâng bản vẽ đường núi cho người cầm quân","Khuyên xuất quân giúp tân {quan} lấy lại ba thành","Nhận thư riêng hắn gửi qua thái giám","Khuyên giúp tân {quan} dẹp hẳn phe thua","Thưa mẹ: chia rồi thì không bao giờ ghép lại","Xin được về thăm mẹ một lần",
+    /* thiện side (ht: nữ vương nhân từ) */"Xin mẹ khuyên tân {quan} tha phe thua","Xin Hoàng thượng ban chiếu an dân biên","Viết lời thề bằng chữ hai nước gửi đi"],
+   close:["Để mặc cố quốc","Thưa: việc nước, thiếp không dám nói","Thưa mẹ: việc Đại Hy, con không xen","Khuyên để {land} tự định"],
+   cond:[["s","tamco"],["s","danh"]],fo:[["e",11,"lose"]],
+   cw:"cần Tâm cơ sâu và Danh vang về tận cố quốc",
+   a:"Các trưởng làng biên mở cổng cho đoàn kiệu của ngươi. Tân vương yếu đuối nhường ngôi trong một đêm, phe thua bị xử ngay trước trướng vàng. Ngươi ngồi lên ngai cố quốc, và từ đó không ai ở phương nam dám nói chữ “hòa” khi chưa hỏi ngươi.",
+   t:"Các trưởng làng biên rước ngươi về như rước mưa sau hạn. Ngươi lên ngôi cố quốc, tha cho phe thua, mở kho lương nuôi những làng cháy vì chiến sự. Đêm đăng quang, ngươi gửi sang Đại Hy một bức thư: hai nước, từ nay một lời.",
+   ht:"về cố quốc lên ngôi nữ vương, tha phe thua và mở kho nuôi dân",ha:"về cố quốc lên ngôi nữ vương, xử phe thua ngay trước trướng vàng",
+   fail:"Ngai xa vạn dặm",ft:"Cố quốc không rước ngươi về. Tân vương gửi thư lạnh lùng, và Đại Hy bắt đầu nhìn ngươi như một người có hai lòng."},
+  {pull:["Nhận trang ấp","Trả nửa trước, hứa nửa sau","Trình cả hai thư lên Hoàng thượng","Quỳ xin Hoàng thượng cứu","Khuyên ủng hộ hoàng huynh","Tâu xin Hoàng thượng phong sớm","Khuyên phong, buộc tân {quan} tha phe thua","Nhắc Hoàng thượng lời hứa trong sắc phong","Xin Hoàng thượng trao ấn trước, bàn đất sau","Thưa với Hoàng thượng: đổi đất lấy chợ biên","Viết hai chữ: giữ tín","Xin Hoàng thượng cho quân biên hộ tống đoàn lương","Khuyên chiêu hàng trước, đánh sau","Trình lời khai của người lính","Khuyên mở hội thề ở biên ải, Đại Hy làm chứng","Tiếp cả hai đoàn cùng lúc, cách rèm","Thưa: không muốn gì, chỉ muốn cố quốc yên",
+    /* ác side (ha: hai ngai một chủ) */"Khuyên tân {quan} dâng thêm cống phẩm","Khuyên phong ngay, kèm lệ cống mới","Nhận vàng, hứa nói giúp"],
+   close:["Khuyên ủng hộ hoàng thúc","Trả tờ giấy trắng","Để mặc Binh bộ","Giữ mật thư, dùng khi cần"],
+   cond:[["s","sung"],["s","duc"]],fo:[],
+   cw:"cần Hoàng thượng nghe ngươi và Đức đủ để hai triều cùng tin",
+   t:"Hội thề ở biên ải kết thúc bằng hai ấn son trên một tờ giấy. Hoàng huynh ngươi giữ ngai phương nam, Hoàng thượng giữ ngai phương bắc, và mỗi năm hai vua gửi cho nhau một vò rượu. Người hai nước bảo nhau: giữa hai ngai có một người con gái giữ lời.",
+   a:"Hội thề kết thúc, nhưng ai cũng biết lời thề viết theo ý Đại Hy. Hoàng huynh ngươi giữ ngai phương nam, mỗi năm dâng cống, mỗi việc lớn đều phải hỏi qua cung ngươi. Hai ngai, nhưng chỉ một người định đoạt.",
+   ht:"giữ lời thề giữa hai ngai, để hai vua mỗi năm gửi nhau một vò rượu",ha:"để hai ngai cùng đứng, nhưng mọi việc phương nam đều phải qua tay ngươi",
+   fail:"Hội thề tan",ft:"Hội thề tan giữa chừng, hai đoàn sứ về nước không ai chịu ai. Biên ải lại có tiếng trống, và cả hai bên đều trách ngươi đứng giữa mà không giữ được."},
+  {pull:["Viết kế đổi đất lấy chợ biên","Khuyên chiêu hàng trước, đánh sau","Vận động Binh bộ","Nhận vàng","Khuyên ủng hộ hoàng thúc","Khuyên tân {quan} dâng thêm cống phẩm","Khuyên phong ngay, kèm lệ cống mới","Im lặng chờ ngài phán","Để mặc Binh bộ","Kể với Hoàng thượng sản vật, đường sá {land}","Thưa: thiếp là người của Đại Hy","Khuyên đánh nhanh, ít lương","Khuyên xuất quân giúp tân {quan} lấy lại ba thành","Nhắc Hoàng thượng ai thua trận ấy","Khuyên Hoàng thượng buộc phe thua quy thuận","Chỉ tiếp sứ của tân {quan}","@st_the=win",
+    /* thiện side (ht: hợp nhất hai cõi) */"Thưa: nếu đổi được chợ biên thì không ai phải oán","Xin Hoàng thượng ban chiếu an dân biên","Viết lời thề bằng chữ hai nước gửi đi"],
+   close:["Viết hai chữ: giữ tín","Nhắc Hoàng thượng lời hứa trong sắc phong","Khuyên để {land} tự định"],
+   cond:[["s","sung"],["s","tamco"],["s","mat"]],fo:[],
+   cw:"cần Sủng cao, Tâm cơ sâu và Tai mắt trong triều",
+   a:"Bản đồ phương nam được vẽ lại bằng mực của Đại Hy. Cố quốc thành một trấn biên, cờ cũ bị hạ, trướng vàng thành dinh quan trấn thủ. Ngươi đứng bên Hoàng thượng trong lễ khải hoàn, và chưa từng quay về nhìn nơi mình sinh ra.",
+   t:"Cố quốc về với Đại Hy không qua một trận đánh lớn: ngươi đổi đất lấy chợ, đổi ấn lấy lời hứa giữ lễ cũ, giữ tiếng nói cũ. Người phương nam vẫn hát bài của mình trong ngày hội, chỉ khác là lá cờ trên thành giờ mang hai màu.",
+   ht:"đưa hai cõi về một mối mà không để cố quốc mất tiếng nói của mình",ha:"giúp Đại Hy nuốt trọn cố quốc, hạ cờ cũ và xóa trướng vàng",
+   fail:"Mộng lớn hóa tro",ft:"Quân Đại Hy sa lầy ở phương nam. Triều thần đổ tội cho người đã khuyên đánh, và ngươi bị cấm bàn việc binh từ đó."},
+  {pull:["Nhận trang ấp","Bỏ bạc chuộc người","Xin Hoàng thượng cho để tang","Gửi bạc riêng giúp huynh","Nói theo lòng mình","Khuyên đứng ngoài","Gửi thư mừng tân {quan}","Sai người mang trà sữa ra sứ quán","Hứa với mẹ sẽ giục cho sớm","Khóc một đêm, sáng ra tính việc","Xin Thái hậu một lời","Quỳ xin Hoàng thượng cho quân biên đón mẹ về ải","Nuốt nước mắt, không xin gì","Gửi thư hỏi {mh}","Nghe lời mẹ","Xin được về thăm mẹ một lần","Gửi quà cho cả hai đoàn",
+    /* ác side (ha: lưu vong phục thù) */"Đòi thả người trước, rồi mới nói","Giữ mật thư, dùng khi cần","Đòi trả người làm điều kiện trước hội"],
+   close:["Thưa: thiếp là người của Đại Hy","Xin một phong hiệu cho mình","Khuyên Hoàng thượng buộc phe thua quy thuận","Khuyên xuất quân giúp tân {quan} lấy lại ba thành"],
+   cond:[["s","tamco"]],fo:[],
+   cw:"cần đủ khôn ngoan để lọt qua mọi trạm ải",
+   t:"Hoàng huynh mất ngôi, sống lưu vong ở một thành nhỏ ven biển. Ngươi rời cung theo huynh, mang theo mẹ già và mấy rương sách. Hai người không còn ngai, không còn cờ; chỉ còn một khu vườn nhìn ra biển, và một đời yên.",
+   a:"Ngươi rời cung theo hoàng huynh mất ngôi, mang theo danh sách những kẻ đã phản huynh. Ở thành nhỏ ven biển, hai người mở một quán trọ cho thương nhân phương nam, và mỗi năm lại có một cái tên trong danh sách bị gạch đi.",
+   ht:"rời cung theo hoàng huynh mất ngôi, sống một đời yên bên biển",ha:"theo hoàng huynh mất ngôi đi lưu vong, mỗi năm gạch đi một kẻ phản",
+   fail:"Người đi ta ở",ft:"Hoàng huynh rời kinh trong đêm, không kịp chờ ngươi. Sáng ra cửa ải đã đóng, và ngươi chỉ còn một bức thư không đề tên."}]},
+ /* ---------- td_an · Lật lại án cũ ---------- */
+ td_an:{lean:{
+   p:["Giấu ông ở Tân Giả khố","Đưa ông ra khỏi kinh","Cho người cứu hồ sơ","Chỉ xin truy phong cho cha, không đòi trị tội ai","Trả nợ cho hắn","Đáp: tìm để thắp hương cho cha","Thuê nhà cho lão ở gần cung","Gửi lão vào chùa Hộ Quốc","Cho người đón lão","Đổi chỗ ở cho lão","Đưa lão chạy","Thừa nhận lão quản gia là người nhà cũ","Từ chối thẳng","Tâu: tiên đế bị lừa, không phải sai","Đáp: tội ai người nấy chịu","Hứa không đòi máu đàn bà trẻ nhỏ","Gửi than và áo ấm đến","Lập danh sách xin tha","Gửi bạc ra biên lo trước","Viết: tiên đế bị kẻ gian lừa","Chỉ xin rửa oan","Nhờ Ngự sử xin đối chiếu sổ xuất ấn Binh bộ","Cho người báo Ngự sử đài","Viết: án sai thì sửa","Viết: chỉ xin Tam ty xét lại"],
+   m:["Bịa một quê quán","Mua chuộc gia nhân phủ hắn","Nhờ người trong cung {foe} lục tìm","Mặc kệ","Nắm lỗi cờ bạc của hắn","Dẫn người của nàng đi lạc","Đáp thẳng: để lật án","Cảnh cáo {foe}","Bắt kẻ dò","Bắt sống kẻ đến","Gửi bản sao cho phủ ấy xem","Bỏ bạc mua miệng đám cung nữ","Chặn đường thư lãnh cung","Hứa rồi không giữ","Viết: xin trị tội kẻ vu cáo","Để hắn ngồi, canh từng lời","Ghi lại, giữ làm lá bài","Đòi nàng làm chứng chống cha","Xin rửa oan và trị tội kẻ vu cáo","Không đến","Đợi án xong mới lo"]},
+  e:[
+  {pull:["Nắm lỗi cờ bạc của hắn","Bỏ bạc nhờ ông chép lại","Giấu ông ở Tân Giả khố","Cho người cứu hồ sơ","Dâng sớ, đưa nhân chứng ra","Xin Hoàng thượng giao Tam ty định án","Dò xem bản sớ gốc nằm ở đâu","Tìm thợ Lý","Chép tay, để bản gốc lại","Cho người đón lão","Lấy lời khai trước hạn","Dâng lời khai lên Hoàng thượng, xin giao Hình bộ","Nhờ Ngự sử xin Binh bộ sao y có đóng dấu","Xin Tam ty xét lại, đưa chứng cứ ra","Để chứng cứ tự nói","Xin phục tước cho nhà","Lập danh sách xin tha","Chỉ xin rửa oan",
+    /* ác side (ha: lật án đổ máu) */"Viết: xin trị tội kẻ vu cáo","Đòi nàng làm chứng chống cha","Bắt sống kẻ đến"],
+   close:["Gác lại, sống tiếp","Tạ tội, tỏ ra đã buông","Rút sớ, xin đợi","Xin Hoàng thượng hoãn phiên xét"],
+   cond:[["s","danh"],["s","th"]],fo:[["e",10,"lose"]],
+   cw:"cần Danh sạch và Thái hậu đứng sau ngươi",
+   t:"Chiếu rửa oan đọc ở Ngọ môn, từng cái tên trong nhà ngươi được xướng lên. Những người họ hàng sung nô ở biên ải được tha về, quỳ trước mộ cha ngươi mà khóc. Ngươi dặn họ: đừng mang thù, hãy mang lấy cái tên đã sạch.",
+   a:"Chiếu rửa oan đọc ở Ngọ môn, và ngay chiều ấy đã có xe tù đi về phủ kẻ vu cáo. Ngươi không xin tha một ai trong nhà hắn. Người kinh thành bảo nhau: án cũ được lật, nhưng lật bằng máu.",
+   ht:"rửa sạch án oan cho cả họ, đưa người thân từ biên ải về",ha:"lật án cũ cho cả họ và đòi máu của nhà kẻ vu cáo",
+   fail:"Án cũ đóng đinh",ft:"Tam ty giữ nguyên án cũ. Những trang giấy ngươi dâng bị trả về kèm một lời phê lạnh, và hai chữ mưu phản lại được nhắc khi ngươi đi qua."},
+  {pull:["Tâu: tiên đế bị lừa, không phải sai","Từ chối thẳng","Mua chuộc gia nhân phủ hắn","Nhờ người trong cung {foe} lục tìm","Nắm lỗi cờ bạc của hắn","Đáp thẳng: để lật án","Mang bản gốc ra","Cảnh cáo {foe}","Bắt kẻ dò","Bắt sống kẻ đến","Giữ lời khai, đợi ngày dâng sớ","Chặn đường thư lãnh cung","Cho người chặn xe xin rút sổ","Viết: xin trị tội kẻ vu cáo","Để hắn ngồi, canh từng lời","Ghi lại, giữ làm lá bài","Đòi nàng làm chứng chống cha","Xin rửa oan và trị tội kẻ vu cáo","@st_the=win",
+    /* thiện side (ht: xử án công minh) */"Nhờ Ngự sử xin đối chiếu sổ xuất ấn Binh bộ","Cho người báo Ngự sử đài","Đáp: tội ai người nấy chịu"],
+   close:["Chỉ xin truy phong cho cha, không đòi trị tội ai","Hứa không đòi máu đàn bà trẻ nhỏ","Chỉ xin rửa oan","Gác lại, sống tiếp"],
+   cond:[["s","tamco"],["s","sung"]],fo:[],
+   cw:"cần Tâm cơ sâu và Hoàng thượng chịu nghe ngươi đến cùng",
+   a:"Kẻ vu cáo cha ngươi chịu tội, rồi đến anh em hắn, môn sinh hắn, thông gia hắn. Ngươi đọc từng cái tên trong danh sách, không bỏ sót một người. Đến mùa thu năm ấy, cả một phe trong triều không còn ai, và nhà ngươi được xướng tên trở lại trên chính chỗ trống ấy.",
+   t:"Ngươi xin Tam ty xét đúng từng người: kẻ làm giả ấn, kẻ chuyển sớ, kẻ đứng sau. Tội ai người nấy chịu, đàn bà trẻ nhỏ không liên can được tha. Lời phán ấy được chép làm lệ, và các quan xét án đời sau đều nhắc tên ngươi khi bàn chữ “công minh”.",
+   ht:"lật án cũ mà xét đúng từng người, tội ai người nấy chịu",ha:"lật án cũ rồi bắt cả phe kẻ vu cáo đền tội đến người cuối cùng",
+   fail:"Thù chưa đến nơi",ft:"Kẻ vu cáo được bạn bè trong triều che chở. Hắn chỉ bị giáng chức, còn ngươi bị nhớ mặt như một kẻ thù dai."},
+  {pull:["Cho người cứu hồ sơ","Bỏ bạc nhờ ông chép lại","Đã chép sẵn, mặc kệ","Lặng lẽ gom lại bản gốc","Chỉ ghi lại, chưa động","Chép tay, để bản gốc lại","Xin lão viết lời khai gửi vào","Viết thư xin sư gửi lên","Giảng lại bài thơ trước mặt vua","Chép lại trang ấy","Tự tay soạn sớ","Mời lễ quan giảng chữ hiếu","Viết: chỉ xin Tam ty xét lại","Viết: tiên đế bị kẻ gian lừa","Viết: án sai thì sửa","Chỉ giữ bản chép",
+    /* ác side (ha: bút sử tùy tay) */"Ghi lại, giữ làm lá bài","Gửi bản sao cho phủ ấy xem","Bịa một quê quán"],
+   close:["Mặc kệ","Để nguyên, chỉ ghi số trang","Xin ngài tự viết"],
+   cond:[["s","tai"],["s","danh"]],fo:[],
+   cw:"cần Tài cao và một cái tên cả triều tin lời",
+   t:"Hoàng thượng giao cho ngươi soạn lại phần sử về những năm ấy. Ngươi chép đúng như sổ sách: ai vu cáo, ai im lặng, ai đã liều mạng giữ một tờ cung khai. Bộ sử ấy được cất ở Hàn lâm viện, và học trò đời sau đọc nó để học cách không xử oan ai.",
+   a:"Bộ sử về những năm án oan được giao vào tay ngươi. Từng nét bút của ngươi quyết định nhà nào được nhớ là trung, nhà nào bị chép là gian. Các đại thần gửi lễ vào cung ngươi trước khi bộ sử được đóng lại.",
+   ht:"được giao soạn lại sử những năm án oan, chép đúng từng việc",ha:"cầm bút sử những năm án oan, để mỗi nhà trung hay gian tùy một nét bút",
+   fail:"Bút sử bị thu",ft:"Hàn lâm viện dâng sớ can: đàn bà trong cung không được chạm vào sử. Bản thảo của ngươi bị thu, và tên ngươi bị chép vào một dòng nhỏ ở cuối."},
+  {pull:["Mặc kệ","Bỏ bạc mua miệng đám cung nữ","Đợi thời, chưa động","Mỉm cười không đáp","Đưa ông ra khỏi kinh","Gác lại, sống tiếp","Xin được để tang cha","Nhẫn, chờ thời","Đáp: tìm để thắp hương cho cha","Gửi lão vào chùa Hộ Quốc","Để lão yên","Đóng cửa cung một tháng","Khóc xin ngài nhớ đến cha ngươi","Không tâu gì","Xin ngài đọc thôi, không đòi gì","Xin dời mộ cha về quê","Chép kinh cầu siêu cho cha","Không xin gì",
+    /* ác side (ha: mang thù trở về) */"Ghi lại, giữ làm lá bài","Giữ chứng cứ đến phút cuối","Không đến"],
+   close:["Dâng sớ, đưa nhân chứng ra","Xin phục tước cho nhà","Xin rửa oan và trị tội kẻ vu cáo"],
+   cond:[["s","duc"],["s","sung"]],fo:[],
+   cw:"cần Đức dày và Hoàng thượng còn nhớ ơn để cho ngươi về quê",
+   t:"Ngươi xin rời cung, dời mộ cha về quê cũ. Ngôi nhà xưa chỉ còn nền gạch; ngươi dựng lại một gian bên mộ. Án cũ chưa lật, nhưng mỗi sáng có tiếng người đọc kinh, và người làng bắt đầu dám nhắc tên cha ngươi.",
+   a:"Ngươi rời cung, dời mộ cha về quê cũ, mang theo một rương giấy tờ không ai biết. Mỗi năm, một trang trong rương ấy lại đến tay một Ngự sử ở kinh. Kẻ thù của nhà ngươi không biết ngươi ở đâu, chỉ biết ngươi chưa quên.",
+   ht:"rời cung dời mộ cha về quê cũ, dựng lại nếp nhà",ha:"dời mộ cha về quê với một rương chứng cứ, mỗi năm gửi về kinh một trang",
+   fail:"Mộ cha chưa dời",ft:"Hoàng thượng chưa chuẩn: con gái tội thần không được tự ý rời kinh. Mộ cha vẫn nằm nơi đất khách, chưa được dời về quê."}]},
+ /* ---------- td_ke · Kẻ đứng sau màn ---------- */
+ td_ke:{lean:{
+   p:["Tìm lại người đưa bạc","Hứa che chở nhà nàng nếu khai","Báo cho {foed} biết","Chặn kẻ mang thuốc","Hứa giữ mạng cha nàng","Hứa sẽ xin Hoàng thượng khoan cho cả nhà hắn","Hứa chỉ xin khoan cho con gái hắn","Đưa {foed} chạy","Đưa {maid} ra khỏi kinh một thời gian","An ủi, kéo nàng về","Hứa giúp em gái nàng","Chỉ hứa điều làm được","Lo cho em gái nàng một mối tốt","Nhắn sẽ xin Hoàng thượng khoan cho con hắn","Dâng tờ xin Hoàng thượng khoan cho hắn về quê","Tha nhà nàng","Thiếp chỉ xin công bằng cho cha","Con dao thôi, cho triều yên","Tăng người canh {maid}"],
+   m:["Từ chối: ngươi không tha nhà nàng","Dọa ông chủ bằng luật tiền trang","Mua chuộc hắn","Để mặc","Đòi nàng đưa cha ra làm chứng","Không giấu, để hắn tự lo","Không hứa, ép hắn","Để hắn tự lo","Bắt hắn tra hỏi","Dùng hắn đưa tin giả","Mua hắn","Từ chối kẻ thù","Dùng nước mắt của nàng","Hứa với từng người","Không tin nàng","Nuốt lời đã nhắn, để luật xử hắn","Là con gái kẻ thù, nợ đã trả xong","Bắt nàng chọn","Mặc nhà nàng","Xin trị tội {foed}","Bỏ bạc thuê người ngoài","Thuê người đóng vai kẻ bán chứng cứ"]},
+  e:[
+  {pull:["Không hứa, ép hắn","Mua chuộc hắn","Lần theo người giả ấn","Tìm lại người đưa bạc","Nhắm vào {n1}","Vạch tội {n1}","Cho người canh lò đốt nhà hắn","Tìm người từng giữ sổ cho {foed}","Mua trang sổ năm ấy","Dọa ông chủ bằng luật tiền trang","Cướp sổ khỏi lò","Chặn kẻ mang thuốc","Bắt sống sát thủ","Bắt hắn tra hỏi","Tìm những nhà {n1} từng hại","Gom mọi chứng cứ làm một","Khép bẫy, bắt quả tang","Trao hết chứng cứ cho Ngự sử dâng một lần","Người cầm dao","Xin trị tội {n1}",
+    /* thiện side (ht: nhổ gốc trả oan) */"Thiếp có chứng cứ, xin ngài xét","Nhận người ra hàng","Tha nhà nàng"],
+   close:["Thôi, không đào sâu","Cất sớ, để Ngự sử lo","Để cháy, giữ những gì đã có","Gỡ bẫy, đợi dịp khác"],
+   cond:[["s","mat"],["s","tamco"]],fo:[["e",10,"lose"]],
+   cw:"cần Tai mắt khắp triều và Tâm cơ đủ để bẫy kẻ đứng sau",
+   a:"Trọng thần ba triều quỳ giữa điện, áo mão bị lột trước mặt bá quan. Phủ hắn bị niêm, môn sinh bị đuổi, con cháu ra biên ải. Ngươi đứng sau rèm nghe đọc án, và khi tiếng gươm ở pháp trường vọng về, ngươi mới đứng dậy.",
+   t:"Trọng thần ba triều bị lột áo mão trước điện. Ngươi xin Hoàng thượng chỉ xử những kẻ đã nhúng tay, tha cho người làm và đàn bà trẻ nhỏ trong phủ. Gốc rễ của án oan bị nhổ, mà không có thêm một nhà nào phải khóc như nhà ngươi năm ấy.",
+   ht:"nhổ tận gốc kẻ đứng sau án oan mà không để thêm nhà nào phải khóc",ha:"diệt tận gốc kẻ đứng sau án oan, từ môn sinh đến con cháu",
+   fail:"Gốc rễ quá sâu",ft:"Trọng thần ba triều có rễ ăn khắp triều; không ai dám đứng ra làm chứng cùng ngươi, và từ đó có người theo dõi mọi bước chân ra khỏi cung ngươi."},
+  {pull:["Mua hắn","Bắt nàng chọn","Đòi nàng đưa cha ra làm chứng","Hỏi thẳng {foe}, xem nàng biết gì","Hứa che chở nhà nàng nếu khai","Báo cho {foed} biết","Hứa giữ mạng cha nàng","Hứa sẽ xin Hoàng thượng khoan cho cả nhà hắn","Đưa {foed} chạy","Bắt tay","An ủi, kéo nàng về","Hứa giúp em gái nàng","Tin nàng","Để nàng dâng lời trình","Nhắn sẽ xin Hoàng thượng khoan cho con hắn","Dâng tờ xin Hoàng thượng khoan cho hắn về quê","Là người một phe","Tha nhà nàng","Con dao thôi, cho triều yên",
+    /* ác side (ha: tha để trói) */"Dùng nước mắt của nàng","Không hứa, ép hắn","Hứa với từng người"],
+   close:["Từ chối: ngươi không tha nhà nàng","Từ chối kẻ thù","Xin trị tội {foed}","Nuốt lời đã nhắn, để luật xử hắn"],
+   cond:[["s","duc"],["s","danh"]],fo:[],
+   cw:"cần Đức dày để kẻ thù tin lời ngươi tha",
+   t:"Ngươi tha cho con dao năm xưa, đổi lấy lời khai về bàn tay sau màn. Hắn về quê, con gái hắn ở lại trong cung và trở thành người bạn hiếm hoi của ngươi. Kẻ đứng sau ngã, không vì máu, mà vì những người hắn từng dùng đều đã quay lưng.",
+   a:"Ngươi tha cho con dao năm xưa, và hắn biết món nợ ấy không bao giờ trả xong. Con gái hắn ở lại trong cung, mỗi lời nói đều phải qua tai ngươi trước. Cả nhà ấy sống nhờ một chữ tha của ngươi, và vì thế không ai dám trái ý ngươi.",
+   ht:"tha cho con dao năm xưa để cả những kẻ từng dùng nó quay lưng với chủ",ha:"tha cho con dao năm xưa để cả nhà hắn mãi nợ ngươi một mạng",
+   fail:"Ơn tha bị phụ",ft:"Kẻ được tha quay lại cắn ngươi trước triều. Hắn khai rằng ngươi ép cung, và Hoàng thượng nghi ngờ lời ngươi từ đó."},
+  {pull:["Bắt hắn tra hỏi","Hứa với từng người","Chặn kẻ mang thuốc","Nhận sổ, giữ kỹ","Tăng người canh cung","Rút vào bóng tối","Mua chuộc hắn","Chỉ ghi số hiệu ngân phiếu","Giữ tờ ngân phiếu","Lạnh nhạt cho nàng thôi hỏi","Đánh lạc hướng {v}","Âm thầm đổi việc hắn","Dùng hắn đưa tin giả","Mua hắn","Cho hắn thấy những gì vô hại","Cho nàng thấy một tráp giả","Nhờ ông dò trong Ngự sử đài","Dùng tráp giả làm mồi","Thử nàng trước bằng tin giả","Để hắn lấy mồi, theo dấu","Im lặng, chờ hắn nói nhiều",
+    /* thiện side (ht: mạng lưới che chở) */"Đưa {maid} ra khỏi kinh một thời gian","Chỉ hứa điều làm được","Tăng người canh {maid}"],
+   close:["Bảo ông tự dâng lên","Kể hết với ngài","Giao cho Ngự sử giữ"],
+   cond:[["s","mat"],["s","maid"]],fo:[],
+   cw:"cần Tai mắt dày đặc và người hầu một lòng giữ kín",
+   a:"Từ thái giám đưa cơm đến thị vệ gác cổng, từ tiền trang ngoài cửa Tây đến Ngự sử đài, đâu cũng có người của ngươi. Ngươi không cần ngồi cao; chỉ cần biết trước. Các đại thần nói chuyện trong phủ cũng hạ giọng, vì không biết bức tường nào có tai.",
+   t:"Mạng lưới ngươi dựng để lần ra kẻ đứng sau nay dùng vào việc khác: báo trước những vụ vu cáo, giấu những người sắp bị hại, đưa tin cho những nhà sắp bị khám. Không ai biết tên ngươi, nhưng trong kinh thành có một câu: gặp nạn thì thắp hương ở chùa Hộ Quốc.",
+   ht:"giữ một mạng lưới bóng tối để che chở những người sắp bị hại",ha:"dệt mạng tai mắt khắp kinh thành, để không bức tường nào là không có tai",
+   fail:"Lưới bị xé",ft:"Một người trong mạng lưới bị bắt và khai hết. Từng sợi dây bị cắt trong một tháng, và cung ngươi thành nơi ai cũng tránh."},
+  {pull:["Để mặc","Tìm lại người đưa bạc","Hỏi thẳng {foe}, xem nàng biết gì","Trang trại ngoại thành","Chùa Hộ Quốc","Đưa {foed} chạy","Dời chứng cứ ra ngoài cung","Đưa {maid} ra khỏi kinh một thời gian","Xin ngài cho thêm thời gian","Để họ lục, chứng cứ đã dời","Tiếp bà, nghe hết","Nhờ Ngự sử năm xưa nối dây","Nhận lời","Chuẩn bị đường lui","Thiếp chỉ xin công bằng cho cha","Thiếp không xin trị ai","Xin ngài tự phán",
+    /* ác side (ha: mượn người trốn án) */"Bỏ bạc thuê người ngoài","Thuê người đóng vai kẻ bán chứng cứ","Dùng nước mắt của nàng"],
+   close:["Không lui","Xin trị tội {n1}","Đứng chặn ở cổng, đòi xem lệnh"],
+   cond:[["s","tamco"],["s","duc"]],fo:[],
+   cw:"cần đủ khôn để rời cung trong đêm và đủ Đức để người kia liều mạng vì ngươi",
+   t:"Người đã lén gửi bạc nuôi ngươi năm xưa nay đến lần nữa, lần này với một cỗ xe và một lời: “Đi thôi.” Ngươi rời cung trước khi lưới kịp khép. Ở một huyện nhỏ phía nam, có đôi vợ chồng mở trường dạy chữ, và chẳng ai biết người vợ từng là con gái tội thần.",
+   a:"Lưới sắp khép, ngươi tìm đến người đã từng cứu mình, khóc một đêm và xin một cỗ xe. Người ấy liều cả chức tước đưa ngươi ra khỏi kinh. Đến phương nam, ngươi đi tiếp một mình, để lại người ấy gánh tội che giấu.",
+   ht:"theo người từng cứu mình năm xưa rời cung trước khi lưới khép",ha:"mượn tay người từng cứu mình mà trốn án, để người ấy ở lại gánh tội",
+   fail:"Xe đến muộn",ft:"Cỗ xe đến khi cổng thành đã đóng. Người cứu ngươi bị bắt hỏi, và ngươi chỉ còn biết chờ trong cung đã bị khám."}]},
+ /* ---------- td_song · Người em còn sống ---------- */
+ td_song:{lean:{
+   p:["Gửi bạc ra biên lo cho em","Nhờ người xin cho em làm hỏa đầu quân","Để em nhận công","Khen chàng lính trẻ ấy","Quỳ nhận em, xin ân xá vì công trận","Gửi bạc lo cho em lên đất liền","Nói thật với y","Gửi lễ cảm tạ, không nói gì","Gửi kịp áo bông và bạc","Gửi lễ dặn lão giữ kín","Gửi ngay thuốc trị thương","Xin Hoàng thượng cho thái y theo đoàn quân lương","Gửi thêm một chuyến thuốc tốt nhất","Hỏi em muốn gì","Cho người canh mộ","Không để họ khiêu khích","Dâng tấu: em là người có công","Xin y bảo lãnh","Xin nàng nói một lời công bằng","Đi gặp em","Quỳ nhận em, dâng hết công trận"],
+   m:["Chối thẳng","Tin vào số mệnh","Phủ nhận, để em tự lo","Mua lại miệng hắn","Nhử bằng tin giả","Cho {v} lấy được một lá thư giả","Đổi bằng điều ngươi biết về {v}","Rỉ cho nàng một tin sai","Bắt người hát vè","Tung một bài vè khác","Rỉ tin để lão quan bộ Lễ nói trước","Thưa: người tâu có thù với nhà thiếp","Nhớ tên, chờ dịp","Mua tay hắn","Đánh tiếng rằng ngươi lo giấy cho cháu {maid}","Đòi nàng thề trước Phật","Đến gặp {v}, cảnh cáo","Dùng điều ngươi biết về {v}","Đòi nàng khuyên cha rút sớ","Đưa chứng nhà {foed} hại em","Gom chứng nhà {foed} hại em","Để em tự lo"]},
+  e:[
+  {pull:["Quỳ nhận em, xin ân xá vì công trận","Để em nhận công","Khen chàng lính trẻ ấy","Chuẩn bị xin ân xá","Xin Hoàng thượng cho em về dưới trướng phó tướng cũ","Xin Hoàng thượng giao em cho phó tướng","Nói thật với y","Gom công trận của em làm chứng","Dâng bản ghi công của em","Nhờ phó tướng đưa em về hậu doanh","Thăm dò ý Hoàng thượng","Họ cha, nhờ công trận","Tiến cử em qua phó tướng","Thưa: xin cho y về cấm quân","Dâng tấu: em là người có công","Xin y bảo lãnh","Quỳ nhận em, dâng hết công trận",
+    /* ác side (ha: tướng môn báo oán) */"Gom chứng nhà {foed} hại em","Đưa chứng nhà {foed} hại em","Nhớ tên, chờ dịp"],
+   close:["Phủ nhận, để em tự lo","Xin cho em vào chùa tu","Giữ tên Tiểu Thạch","Cho em xin đổi về ải"],
+   cond:[["s","danh"],["s","sung"]],fo:[["e",11,"lose"]],
+   cw:"cần Danh vang và Hoàng thượng nhớ công em ngươi",
+   t:"Em ngươi được trả họ cha, được phong tướng giữ Nhạn Môn. Lá cờ tướng môn năm xưa lại bay trên thành ải. Ngày nhận ấn, em quỳ trước cửa cung ngươi lạy ba lạy; ngươi bảo em đứng dậy: “Giữ ải cho tốt, là trả hết cho cha rồi.”",
+   a:"Em ngươi được trả họ cha, phong tướng giữ Nhạn Môn, và việc đầu tiên của tướng môn là dâng sớ hặc nhà đã hại cha. Ngươi trong cung, em ngoài ải; triều thần nói với nhau rằng nhà ấy không cần gươm, chỉ cần hai chị em nhìn về một phía.",
+   ht:"đưa em trai về lại họ cha, dựng lại cờ tướng môn trên thành ải",ha:"dựng lại tướng môn rồi cùng em trai đòi nợ nhà đã hại cha",
+   fail:"Tướng môn vẫn tối",ft:"Lệnh ân xá không xuống. Em ngươi vẫn mang tên giả nơi biên ải, và ngươi phải giả như không quen một tên lính trẻ."},
+  {pull:["Đổi bằng điều ngươi biết về {v}","Rỉ cho nàng một tin sai","Nhử bằng tin giả","Tra xem lái buôn là ai","Để em nhận công","Gửi bạc cho em lo chỗ đứng trong doanh","Cho người theo dõi kẻ lạ","Bỏ bạc đánh lạc viên quan","Nhờ trạm dịch quân đưa thư","Dặn em để râu, đổi dáng","Gom công trận của em làm chứng","Chép lại lệnh làm chứng","Nhớ tên, chờ dịp","Mua tay hắn","Tên mới, sạch sẽ","Tiến cử em qua phó tướng","Gửi lễ cho thống lĩnh","Dò tên người được gài","Thưa: xin cho y về cấm quân","Báo em chuẩn bị","@st_the=win",
+    /* thiện side (ht: mở cổng cứu giá) */"Gặp Hoàng thượng trước khi ký","Xin y bảo lãnh","Dâng tấu: em là người có công"],
+   close:["Thưa: y nên ở lại ải","Xin cho em vào chùa tu","Cho em xin đổi về ải"],
+   cond:[["s","tamco"],["s","mat"]],fo:[],
+   cw:"cần Tâm cơ sâu và Tai mắt trong cấm quân",
+   a:"Đêm ấy cửa Chính Dương mở không một tiếng động. Quân của em ngươi tràn vào kinh thành trước khi trống canh ba dứt. Sáng ra, triều đình có chủ mới, và người đứng sau rèm bên cạnh ngai vàng là ngươi.",
+   t:"Đêm phản thần dấy binh vây Dưỡng Tâm điện, em ngươi dẫn cấm quân phá vòng vây, mở cổng thành cho quân cứu giá. Hoàng thượng ôm vai tên lính trẻ năm nào: “Con nhà tội thần mà trung hơn cả triều.” Ngai vàng được giữ, và nhà ngươi được ghi công đời đời.",
+   ht:"cùng em trai mở cổng thành đêm cứu giá, giữ ngai vàng cho Hoàng thượng",ha:"cùng em trai mở cổng thành đêm cho quân vào, đổi chủ cả triều đình",
+   fail:"Cổng thành đóng chặt",ft:"Đêm ấy cổng không mở. Em ngươi bị bắt cùng mấy người lính, và tờ chiếu kết tội có nhắc cả tên ngươi."},
+  {pull:["Gửi kịp áo bông và bạc","Gửi ngay thuốc trị thương","Bắt người hát vè","Gửi bạc ra biên lo cho em","Cho em trốn đi xa","Xin cho em vào chùa tu","Dặn em sống kín, đừng khoe công","Nhờ lái buôn đưa em đổi doanh","Lặng lẽ đưa em sang doanh khác","Đọc xong thì đốt","Gửi thư qua lái buôn kèm hàng","Viết thư bằng thơ","Báo em lánh đi vài ngày","Dặn em đừng gặp ai riêng","Dặn em xin về đội đồn điền","Giữ tên Tiểu Thạch","Đưa em vào Nam, xa hẳn nhà {foed}","Hỏi em muốn gì","Đi gặp em",
+    /* ác side (ha: chị em lục lâm) */"Mua lại miệng hắn","Mua tay hắn","Tung một bài vè khác"],
+   close:["Quỳ nhận em, dâng hết công trận","Thưa: xin cho y về cấm quân","Họ cha, nhờ công trận","Dâng bản ghi công của em"],
+   cond:[["s","duc"],["s","maid"]],fo:[],
+   cw:"cần Đức dày và người hầu tin cẩn lo đường cho hai chị em",
+   t:"Ngươi rời cung, em rời quân, hai chị em gặp nhau ở một bến sông phía nam. Không họ, không công trận, không ai đuổi theo. Hai người theo thuyền buôn đi khắp các bến, và mỗi năm ngày giỗ cha mẹ, lại thả một ngọn đèn hoa xuống dòng nước.",
+   a:"Ngươi rời cung, em bỏ quân, hai chị em lên núi gặp những người cũng không còn đường về. Mấy năm sau, quan quân phương nam nghe tiếng một trại sơn lâm chỉ chặn đoàn xe của các nhà quyền thần, và người cầm đầu là một đôi chị em không ai biết tên thật.",
+   ht:"cùng em trai bỏ hết danh phận, theo thuyền buôn trôi khắp các bến",ha:"cùng em trai lên núi lập trại, chặn xe của các nhà quyền thần",
+   fail:"Một bến hai người",ft:"Em ngươi đi trước, còn ngươi không ra khỏi cổng cung. Từ đó hai chị em chỉ còn những bức thư giấu chữ trong thơ."},
+  {pull:["Rỉ tin để lão quan bộ Lễ nói trước","Nói có một người họ xa","Lặng im","Quỳ nhận em, xin ân xá vì công trận","Xin Thái hậu một lời khoan hồng","Nói thật với y","Nhìn thẳng nàng, không đáp","Gửi người xin lão rút thư","Dâng bản ghi công của em","Xin Hoàng thượng cho em về kinh chữa","Lo cho người quê đứng ra nhận","Nhận lời, nhưng không hứa chắc","Xin cho em ra biên lập công chuộc tên","Xin nàng nói một lời công bằng","Quỳ nhận em, dâng hết công trận","Đi gặp em",
+    /* ác side (ha: đẩy tội cho người) */"Thưa: người tâu có thù với nhà thiếp","Đánh tiếng rằng ngươi lo giấy cho cháu {maid}","Dùng điều ngươi biết về {v}"],
+   close:["Phủ nhận, để em tự lo","Chối thẳng","Giả không biết"],
+   cond:[["s","duc"],["s","th"]],fo:[],
+   cw:"cần Đức dày và Thái hậu thương mà xin cho",
+   t:"Tờ sớ đòi xử con trai tội thần đặt trên ngự án. Ngươi quỳ xuống, xin nhận hết tội giấu người, đổi lấy một đường sống cho em. Hoàng thượng giáng ngươi ba bậc, còn em được ở lại quân ngũ. Lá thư em gửi về chỉ có một dòng: “Tỷ, đệ sẽ sống cho xứng.”",
+   a:"Triều thần đòi xử con trai tội thần, và ngươi biết phải có một người chịu tội. Ngươi giữ được em, nhưng bằng cách đẩy tội giấu người sang một người khác trong cung, kẻ chẳng kịp biện bạch. Em ngươi sống, và chưa bao giờ biết ai đã chịu thay.",
+   ht:"quỳ nhận hết tội giấu người để đổi lấy đường sống cho em",ha:"giữ được em trai bằng cách đẩy tội sang một người khác",
+   fail:"Gánh không nổi",ft:"Ngươi xin nhận tội thay, nhưng Hoàng thượng không chuẩn. Cả hai chị em cùng bị xét, và cung ngươi bị niêm phong chờ ngày định tội."}]},
+ /* ---------- td_tha · Thù hay tha ---------- */
+ td_tha:{lean:{
+   p:["Lén gửi bài thuốc","Bước ra an ủi","Ngăn {maid} lại","Trả thư cho {foe}","Gửi lễ mừng","Nói hết nỗi đau","Thuyết phục {foe} khuyên cha tự thú","Đến gặp nàng ngay trong đêm","Gửi lời cho {foe}: không phải ta","Từ chối thẳng","Nhận lời giúp","Đỡ bà dậy, nghe bà nói","Giấu thợ may trong cung mình","Tâu: búp bê là bẫy","Xin xét đúng tội, không xét lan","Nắm tay nàng, nghe hết","Hứa sẽ xin tha cho mẹ nàng","Cho người đón mẹ nàng vào chùa","Mời nàng vào","Kể cho nàng về từng người","Cho bà thắp hương","Bảo nàng giữ mình","Dâng lời khai, xin ân điển cho mẹ con {foe}","Dâng tờ xin ân điển cho phu nhân","Dâng tờ xin Hoàng thượng chỉ xét người có tội","Tự chép lời nàng, nhờ người làm chứng"],
+   m:["Chỉ phao tin xấu về {foe}","Lạnh nhạt","Cảnh cáo nàng","Tố cả cha lẫn con","Mặc, thù nhà ngươi đã trả","Đổ ngược về {v}","Làm chứng theo {v}","Đóng cửa không tiếp","Xin xét đến tận gốc","Ngầm gửi người theo phe {v}","Hỏi dồn từng chi tiết","Bảo nàng không có quyền mặc cả","Nhận rương","Dọa lại bằng vụ búp bê","Bắt nàng quỳ lạy từng người","Ta muốn hắn trả nợ máu","Bảo nàng về, đêm nay là của nhà ta","Trách nàng không ngăn được cha","Xin xử đến cùng, không tha ai","Ký tên cùng nhà {v}","Bảo nàng không cần khai","Đưa nàng ra Thận hình ty","Lặng lẽ ghi nhớ","Giữ thư làm chứng","Giả nhận để dò","Đổi lời bà lấy lời hứa xin Hoàng thượng khoan cho bà"]},
+  e:[
+  {pull:["Cảnh cáo nàng","Hỏi dồn từng chi tiết","Lén gửi bài thuốc","Bước ra an ủi","Ngăn {maid} lại","Trả thư cho {foe}","Gửi lễ mừng","Nói hết nỗi đau","Thuyết phục {foe} khuyên cha tự thú","Đến gặp nàng ngay trong đêm","Nhận lời giúp","Nhận văn tự, hứa không chung tay với {v}","Nắm tay nàng, nghe hết","Hứa sẽ xin tha cho mẹ nàng","Mời nàng vào","Kể cho nàng về từng người","Xin nàng tâu: nàng biết ngươi từ trước","Dâng lời khai, xin ân điển cho mẹ con {foe}",
+    /* ác side (ha: giả tha chờ thời) */"Lặng lẽ ghi nhớ","Giữ thư làm chứng","Giả nhận để dò"],
+   close:["Tố cả cha lẫn con","Xin xử đến cùng, không tha ai","Bắt nàng quỳ lạy từng người","Chỉ phao tin xấu về {foe}"],
+   cond:[["s","duc"],["s","sung"]],fo:[],
+   cw:"cần Đức dày và Hoàng thượng thuận lòng ân xá",
+   t:"Cha nàng đền tội, còn nàng và mẹ được tha. Đêm giỗ năm sau, con gái kẻ thù quỳ cạnh ngươi trước bài vị nhà ngươi, thắp hương cho từng người. Hai nhà oán nhau ba đời, đến đời này thì dừng lại ở hai người đàn bà ngồi bên nhau trong im lặng.",
+   a:"Ngươi tha cho mẹ con nàng trước mặt cả triều, và cả triều khen ngươi rộng lượng. Nhưng chiếc rương thư năm xưa vẫn nằm trong tráp của ngươi. Mỗi khi nàng định ngẩng đầu, ngươi chỉ cần nhắc đến nó một lần.",
+   ht:"tha cho con gái kẻ thù, để mối oán ba đời dừng lại ở đời này",ha:"tha cho con gái kẻ thù trước triều, mà giữ lại chiếc rương thư để trói nàng",
+   fail:"Ân chẳng ai nhận",ft:"Ngươi xin tha, nhưng mẹ con nàng không tin. Họ trốn khỏi kinh trong đêm, và cả cung bảo rằng ngươi đã ép họ đến đường cùng."},
+  {pull:["Tâu: búp bê là bẫy","Từ chối thẳng","Lặng lẽ ghi nhớ","Chỉ phao tin xấu về {foe}","Giữ thư làm chứng","Lạnh nhạt","Cảnh cáo nàng","Tố cả cha lẫn con","Mặc, thù nhà ngươi đã trả","Đổ ngược về {v}","Đưa nàng ra Thận hình ty","Xin xét đến tận gốc","Đổi lấy tờ giấy","Hỏi dồn từng chi tiết","Giữ mảnh lụa làm chứng","Bảo nàng không có quyền mặc cả","Giả nhận để ông tự lộ","Ta muốn hắn trả nợ máu","Xin xử đến cùng, không tha ai",
+    /* thiện side (ht: báo thù đúng người) */"Xin xét đúng tội, không xét lan","Dâng tờ xin Hoàng thượng chỉ xét người có tội","Tự chép lời nàng, nhờ người làm chứng"],
+   close:["Buông bỏ","Thuyết phục {foe} khuyên cha tự thú","Hứa sẽ xin tha cho mẹ nàng","Dâng lời khai, xin ân điển cho mẹ con {foe}"],
+   cond:[["s","tamco"],["s","mat"]],fo:[["e",11,"lose"]],
+   cw:"cần Tâm cơ sâu và Tai mắt đủ để kẻ thù không còn đường thoát",
+   a:"Kỳ thu thẩm năm ấy, cha nàng ra pháp trường, nàng vào lãnh cung, cả họ bị xóa khỏi sổ quan. Ngươi đến xem tận nơi. Người ta kể rằng con gái tội thần ngày ấy đứng dưới mưa rất lâu, rồi về cung đốt hết mọi thứ nhắc đến nhà kia.",
+   t:"Kỳ thu thẩm năm ấy, chỉ đúng một người ra pháp trường: kẻ đã viết tờ sớ vu cáo. Ngươi xin không xét lan, không đụng đến đàn bà trẻ nhỏ. Thù trả xong, ngươi về cung thắp hương cho cha mẹ, và lần đầu tiên sau nhiều năm ngủ được một giấc trọn.",
+   ht:"trả thù đúng một người đã vu cáo, không để máu lan sang ai khác",ha:"trả thù đến cùng, không tha một ai của nhà kẻ thù",
+   fail:"Thù chưa dứt",ft:"Kẻ thù thoát kỳ thu thẩm nhờ người che chở. Ngươi bị coi là kẻ ôm hận làm loạn triều, và Hoàng thượng xa ngươi một mùa."},
+  {pull:["Từ chối thẳng","Nhận lời giúp","Cho bà thắp hương","Để mặc trời định","Buông bỏ","Gửi lời cho {foe}: không phải ta","Giữ cửa cung, không nói gì","Im lặng chịu tiếng","Không tra","Gửi trả khăn, không nói gì","Đóng cửa chép kinh","Mặc người nói","Gác lại","Chưa gặp, để nàng tự tìm đến","Không cần, lời nàng là đủ","Từ chối, chờ ngày xử","Đứng một mình","Thôi, để việc xử cho triều","Quỳ, không biện bạch","Lui về, để Tam ty tự xét",
+    /* ác side (ha: mượn chùa náu thân) */"Mặc, thù nhà ngươi đã trả","Đóng cửa không tiếp","Bảo nàng về, đêm nay là của nhà ta"],
+   close:["Tố cả cha lẫn con","Xin xét đến tận gốc","Xin xử đến cùng, không tha ai"],
+   cond:[["s","duc"],["s","th"]],fo:[],
+   cw:"cần Đức dày và Thái hậu chuẩn cho ngươi xuống tóc",
+   t:"Ngươi đặt lên án Phật những bức thư năm xưa, đốt từng tờ một, rồi xin xuống tóc. Sư bà đặt pháp danh cho ngươi có chữ “Xả”. Mấy năm sau, có một phụ nhân nhà kia đến chùa xin sám hối; ngươi rót cho bà một chén trà, không hỏi gì.",
+   a:"Ngươi xin xuống tóc khi án sắp xét, đúng lúc mọi con mắt đang nhìn về phía cung ngươi. Cửa chùa đóng lại sau lưng ngươi cùng mọi câu hỏi. Kẻ thù ngã hay đứng, ngươi đều không phải đứng ra; chỉ có tiếng mõ đều đều đáp lại mọi lời tra.",
+   ht:"đốt hết thư thù, xuống tóc mà buông mối hận cũ",ha:"xuống tóc đúng lúc án sắp xét, để cửa chùa che mình khỏi mọi câu hỏi",
+   fail:"Hận theo vào chùa",ft:"Thái hậu không chuẩn: “Lòng ngươi chưa buông, vào chùa chỉ là trốn.” Ngươi ở lại cung, và lời đồn về mối thù càng thêm nặng."},
+  {pull:["Nhận rương","Lén gửi bài thuốc","Bước ra an ủi","Trả thư cho {foe}","Gửi lễ mừng","Đỡ bà dậy, nghe bà nói","Sai người đưa bà về, gửi lễ","Nhận, nhưng không hứa gì","Nhờ {foe} nói với họ hàng","Hẹn ở Phụng Tiên điện","Cho người đón mẹ nàng vào chùa","Mời nàng vào","Cho bà thắp hương","Nhận lời bà","Bảo nàng giữ mình","Dâng tờ xin ân điển cho phu nhân","Xin Hoàng thượng nghe chính lời {foe}",
+    /* ác side (ha: lấy tình làm dao) */"Giả nhận để dò","Lặng lẽ ghi nhớ","Đổi lời bà lấy lời hứa xin Hoàng thượng khoan cho bà"],
+   close:["Tố cả cha lẫn con","Đóng cửa không tiếp","Trách nàng không ngăn được cha"],
+   cond:[["s","danh"],["s","duc"]],fo:[],
+   cw:"cần Đức đủ để nhà kia mở cửa và tiếng ngươi đủ sạch cho nàng dám theo",
+   t:"Con gái kẻ thù, người từng quỳ cùng mẹ trước cửa cung ngươi, nay là người ngươi tin nhất. Hai người cùng xin rời cung; Hoàng thượng thở dài mà chuẩn. Mối oán giữa hai nhà khép lại bằng một mái nhà nhỏ ngoài kinh, nơi bài vị hai họ đặt cạnh nhau.",
+   a:"Con gái kẻ thù thương ngươi thật lòng, và ngươi để nàng thương. Nàng cùng ngươi ra khỏi cung, đưa ngươi về phủ, giao cho ngươi chìa khóa mọi rương sổ của cha nàng. Một năm sau, phủ ấy không còn gì để giữ nữa.",
+   ht:"cùng con gái kẻ thù rời cung, để bài vị hai họ đặt cạnh nhau",ha:"lấy tình của con gái kẻ thù làm con dao cuối cùng",
+   fail:"Oán ngăn đôi bờ",ft:"Nhà kia đóng cửa, nàng không đến. Chuyện con gái tội thần kết thân với con gái kẻ thù thành lời đồn khắp cung."}]}
+});
 /* ================= jge: GRAND ENDINGS ENGINE — Đại kết cục (design dev/design/GRAND_ENDINGS.md r3 §2; owner OD:L1613, L1618, L1623–L1624 (1), L1601 (3)–(5), L1837) =================
    Phase 1 (§7 step 2): engine + the pilot branches of GE_DATA (jgedata.js); names / pairs / titles from GE_CAT (jgecat.js, generated from the catalogue).
    A branch = identity × road (S.st.f14.rd, a full road of jroad.js). Only a branch with data is live; every other life plays as before.
@@ -61833,10 +62330,11 @@ function giveFace(st){if(!S||!st||isGuest())return;
 function elderInit(){if(!S||isGuest())return;thH();
  for(const post of B().posts){let st=elderBy(post.id);if(!st)st=mk(post,0,rint(post.age[0],post.age[1]));place(st);giveFace(st)}
  for(const st of elders()){st.elder=1;try{const K=typeof k61S==="function"?k61S():S.known;if(K&&typeof kOf61==="function"){const k=kOf61(st);if((+K[k]||0)<2)K[k]=2}}catch(e){}}}
-/* the identity's picture: the a51 art of her identity */
+/* the identity's picture: her elder art = the a51 band or older (a65 at 65+ when painted, art-wiring-1119: BAL.ageBand), nearest age of her identity */
 function figRec(st){try{if(!st||!st.fid||typeof FIGIX==="undefined")return null;const r=st.fid.split(":")[0];const L=(FIGIX[r]||{})[st.fid]||[];if(!L.length)return null;
- if(r==="maid")return L.find(f=>(f.tier==null||f.tier==="")&&f.ageBand==="a51")||null;
- return L.find(f=>f.ageBand==="a51"&&f.por)||L.find(f=>f.ageBand==="a51")||figBest(L,null,st.age||55)}catch(e){return null}}
+ const ag=Math.max(BAL.ageBand[2],st.age||55);
+ if(r==="maid"){const N=L.filter(f=>f.tier==null||f.tier==="");return N.length?figBest(N,null,ag):null}
+ const P=L.filter(f=>f.por);return figBest(P.length?P:L,null,ag)}catch(e){return null}}
 const porSrc=st=>{const f=figRec(st);return f?figPath(f.por||f.file||f.src):""};
 const figSrc=st=>{const f=figRec(st);return f?figPath(f.file||f.src):""};
 if(typeof figFor==="function"){const ff=figFor;figFor=function(p,kind){try{let w=p&&(p.ref||p);if(w&&w.kind==="elder"&&w.ref)w=w.ref;if(w&&w.eid&&postOf(w.eid)){giveFace(w);const s=kind==="por"?porSrc(w):figSrc(w);if(s)return s}}catch(e){}return ff.apply(this,arguments)}}
@@ -65017,7 +65515,7 @@ function kcFigLoad(){try{fetch("https://ctm-img.victoria-tntt.workers.dev/img/FI
  const n=Object.keys(X).length;const was=Object.keys(KCFX).length;KCFX=X;if(n!==was)try{if(isKc())render()}catch(e){}}).catch(()=>{})}catch(e){}}
 kcFigLoad();setInterval(kcFigLoad,300000);
 function kcDress(){return S&&S.origin&&(S.origin.k==="thd"||(S.origin.k==="td"&&!kcLore()))?"ngheo":"kc"}/* KC LORE: td is a Thị lang's daughter until the day she leaves home: khuê các dress; only thd is poor */
-const KC_AB=["a18","a26","a36","a51"];function kcBand(age){return ageBandIx(age)}
+const KC_AB=["a18","a26","a36","a51","a65"];function kcBand(age){return ageBandIx(age)}
 function kcDressRec(fid,tier,age){const X=fid&&KCFX[fid];const L=X&&X[tier];if(!L||!L.length)return null;const w=kcBand(age==null?18:age);/* the band of her age, else the nearest one */
  let b=null,bd=9;for(const f of L){const d=Math.abs(KC_AB.indexOf(f.ageBand||"a18")-w);if(d<bd){bd=d;b=f}}return b}
 function kcDressSrc(fid,kind,tier,age){const f=kcDressRec(fid,tier||kcDress(),age==null&&S?S.age:age);if(!f)return"";return figPath(kind==="por"?(f.por||f.file):f.file)}
@@ -76506,6 +77004,69 @@ if(typeof kpmParts==="function"){
 /* the room line in a side hall of Càn Ninh / Đức Thọ: what the record says the household does there (the stage draws no household servants of other palaces, j95vis) */
 (function(){const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);try{const h=typeof kpmHall==="function"&&kpmHall();if(!h||h.place||(h.k!=="kn"&&h.k!=="tn"))return r;
   const m=document.querySelector("#sc-t .rmsg");if(!m)return r;const N=mapzStaffNow(h.k);const n=N?N.in[h.part].length:0;const t=` · ${hallRole(h.part)}. ${n?`${n} cung nhân đang ${h.part==="dong"?"quét dọn, sắp đồ":h.part==="tay"?"nghỉ ngơi":"đứng hầu"} ở đây.`:"Không có ai ở đây."}`;if(m.textContent!==t){m.textContent=t;m.title=t}}catch(e){}return r}})();
+/* ================= jfigx: ART WIRING 1119 — Thái hậu per face · a65 age step · outfit colours v1/v2 (owner 19/11) =================
+   Owner (verbatim, OD 19/11 ~00:45Z / ~00:49Z / ~00:50Z): "Hình Thái Hậu cũng vậy. Nói chung là hình nào mà hôm nay vẽ mà tao duyệt ok rồi
+   thì đẩy hết lên live đi." · "Ai cũng là Thái Hậu hết, 90 người Thái Hậu." · "Cái mốc 65 tuổi không phải là thêm cho mỗi phi tần mà là ở bất
+   kỳ một cái nhóm nào, như cung nữ cũng có 65 tuổi, tức là nhân viên của mình bất kỳ ai cũng có 65 tuổi."
+   The ONE selector stays j39 figPick/figFor + j66 figTierOf/figDist + j88 f88Best; this module only adds to it:
+   (1) img/FIGURES-x.json (dev/tools/figx_rows.py, built from what is on the CDN) holds the rows that have no slot in FIGURES.json:
+       consort Thái hậu robes (tier "th", a36/a51/a65), the a65 age step of t7/t8, the colour variants (v:1|2) of t7/t8.
+       a65 rows join FIGIX like every other row (nearest age is the normal rule). "th" and "v" rows are kept apart (FIGXT) so no other
+       reader of FIGIX (jht, jkc, jstaff, j86 …) can ever pick a Thái hậu robe for a rank or a random colour.
+   (2) THÁI HẬU = A FACE OF THE POOL: S.thO takes a free identity of the pool (consort c01–c32, maid m01–m52, ma ma k01–k08), preferring a
+       face whose Thái hậu robe is painted; one face for life, never reused (figUsed). The old shared fig-thaihau-h1/h2/h3 are retired (an old
+       save's S.thO.fid "thaihau:hN" is dropped and she draws a pool face). Co-op: the host draws (thO + fidUsed are world keys).
+       Whoever IS Thái hậu (S.thO; her, after the succession roads a / b) wears her own face's Thái hậu robe at her age band; a face without
+       that robe wears her own highest consort dress (t8) at her age, else any picture of the same person (law 6c: never blank).
+   (3) a65: BAL.ageBand gains the 65 step (jbal.js) for every woman, every rank/role; a missing a65 file = the nearest age of the same person.
+   (4) COLOUR: each woman wears one colour of her t7/t8 dress for the life (v0 / v1 / v2 = BAL.figVar colours, stable per face and per reign,
+       the same on both co-op seats); who.figV (0..n-1) overrides it. Where a colour is not painted she wears v0. */
+const FIG_TH=9;/* tier code of the Thái hậu robe (an art slot code, not a game number) */
+let FIGXR=[],FIGXT={};
+function figxKey(f){return norm(f.role)+":"+f.identity}
+/* r2 (review FAIL #1): figxLoad.ok = the rows are in. The Thái hậu's face is for life, so she is not drawn before they are (a draw before
+   would not see which faces have a painted Thái hậu robe). After BAL.figxTry failed reads (offline / missing file) she is drawn anyway. */
+function figxLoad(){try{fetch("https://ctm-img.victoria-tntt.workers.dev/img/FIGURES-x.json",{cache:"no-cache"}).then(r=>r.ok?r.json():[]).catch(()=>[]).then(j=>{const L=figList(j);if(!L.length)figxLoad.fail=(figxLoad.fail||0)+1;
+  const sig=L.length+"|"+L.map(f=>f.file).join(",").length;if(sig===figxLoad.sig)return;figxLoad.sig=sig;
+  const T={},A=[];for(const f of L){const t=String(f.tier);if(t==="th"||f.v){const k=figxKey(f);const X=T[k]=T[k]||{th:[],v:[]};(t==="th"?X.th:X.v).push(f)}else A.push(f)}
+  FIGXR=A;FIGXT=T;if(L.length)figxLoad.ok=1;if(typeof FIGS!=="undefined"&&FIGS.length){FIGIX=figIndex(FIGS);try{if(S&&!S.dead)kitRenderSoon(250)}catch(e){}}}).catch(()=>{})}catch(e){}}
+/* the a65 rows index like any other row (j39 loadFigs → figIndex) */
+(function(){const i0=figIndex;figIndex=function(all){return i0.call(this,(all||[]).concat(FIGXR))}})();
+(function(){const t0=figTier;figTier=function(t){if(/^th$/i.test(String(t==null?"":t).trim()))return FIG_TH;return t0.apply(this,arguments)}})();
+/* who is Thái hậu now: the Thái hậu; her once she chose road a (con làm vua) or b (buông rèm), or her life ended as Thái hậu */
+function figIsTh(who){try{if(!S||!who)return false;if(who===S.thO)return true;
+  if(who===S){const E=S.succ;if(E&&(E.p==="a"||E.p==="b"))return true;return !!(S.dead&&/thái hậu/i.test(String(S.fate||""))&&!/thái phi/i.test(String(S.fate||"")))}}catch(e){}return false}
+(function(){const t0=figTierOf;figTierOf=function(who){try{if(figIsTh(who))return FIG_TH}catch(e){}return t0.apply(this,arguments)}})();
+(function(){const w0=f88Wear;f88Wear=function(who){try{if(figIsTh(who))return true}catch(e){}return w0.apply(this,arguments)}})();
+/* the pool of women's faces (the "90"): consort + maid identities (j88 f88Keys) + the ma ma identities */
+function figxPool(){const M=(typeof FIGIX!=="undefined"&&FIGIX.mama)||{};return f88Keys("all").concat(Object.keys(M).filter(k=>M[k]&&M[k].length).sort())}
+function figxHas(k){return !!(k&&FIGIX[k.split(":")[0]]&&FIGIX[k.split(":")[0]][k]&&FIGIX[k.split(":")[0]][k].length)}
+function figxReady(){return !!figxLoad.ok||(figxLoad.fail||0)>=BAL.figxTry}
+function figThPick(){const T=S.thO;if(T.fid&&/^thaihau:/.test(T.fid)){const old=T.fid;T.fid=null;S.fidUsed=figUsed().filter(x=>x!==old)}
+ if(T.fid&&figxHas(T.fid))return T.fid;if(window.COOPW&&COOPW.on&&COOPW.seat==="b")return null;/* the guest waits for the host's face */
+ if(!figxReady())return null;/* until the rows are in she keeps her old portrait (faceFor "thaihau", j17): never blank, never a wrong face for life */
+ const U=new Set(figUsed().concat(S.fidDead||[]));const free=figxPool().filter(k=>!U.has(k));if(!free.length)return null;
+ const good=free.filter(k=>FIGXT[k]&&FIGXT[k].th.length);const k=pick(good.length?good:free);T.fid=k;figUsed().push(k);return k}
+(function(){const r0=figRoles;figRoles=function(who){try{if(S&&who&&who===S.thO)return["consort","maid","mama"]}catch(e){}return r0.apply(this,arguments)}})();
+(function(){const p0=figPick;figPick=function(who){try{if(S&&who&&who===S.thO&&typeof FIGS!=="undefined"&&FIGS.length)return figThPick()}catch(e){console.error("figx th",e)}return p0.apply(this,arguments)}})();
+/* r2 (review FAIL #2): a save made before this build keeps the dress colour she and everyone already wore (v0) for the reign running when
+   it is first loaded: S.emp.figV0 = that reign's era S.emp.era (a world key, written by the host / solo only, so both seats agree). A new life
+   (start) is stamped at once and is never pinned; the next reign (another Emperor) wears the colours. */
+function figVPin(){try{if(!S||!S.emp)return false;if(!S.figVStamp){if(!(window.COOPW&&COOPW.on&&COOPW.seat==="b")&&S.emp.figV0==null)S.emp.figV0=String(S.emp.era||"");S.figVStamp=1}
+  return S.emp.figV0!=null&&S.emp.figV0===String(S.emp.era||"")}catch(e){return false}}
+(function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(S)S.figVStamp=1}catch(e){}return r}})();
+/* her colour of the t7/t8 dress */
+function figVOf(who){try{if(!who||!S)return 0;const n=Math.max(1,BAL.figVar|0);if(who.figV!=null)return Math.max(0,Math.min(n-1,who.figV|0));if(n<=1||figVPin())return 0;
+  const k=who===S?(S.pid||S.fid):who.fid;if(!k)return 0;return wdHash(k+"|"+(S.emp&&S.emp.era||""))%n}catch(e){return 0}}
+function figVSet(who,v){if(!who)return false;who.figV=v==null?null:Math.max(0,v|0);return true}
+window.figVOf=figVOf;window.figVPin=figVPin;window.figxReady=figxReady;window.figVSet=figVSet;window.figIsTh=figIsTh;
+(function(){const b0=f88Best;f88Best=function(L,who,kind){try{if(!L||!L.length)return b0.apply(this,arguments);const X=FIGXT[figKey(L[0])]||null;const age=figAgeOf(who);
+  if(figTierOf(who)===FIG_TH){const T=X?X.th:[];const Tp=kind==="por"?T.filter(f=>f.por):T;if(Tp.length)return figBest(Tp,null,age);
+   const Lp=kind==="por"&&L.some(f=>f.por)?L.filter(f=>f.por):L;return f88Pick(Lp,8,age,false,null)||figBest(Lp,null,age)}
+  const f=b0.apply(this,arguments);const w=figVOf(who);
+  if(f&&w&&X&&X.v.length){const alt=X.v.find(x=>x.v===w&&String(x.tier)===String(f.tier)&&x.ageBand===f.ageBand&&(kind!=="por"||x.por));if(alt)return alt}
+  return f}catch(e){console.error("figx best",e);return b0.apply(this,arguments)}}})();
+figxLoad();setInterval(figxLoad,300000);
 
 /* jcoopthin: CO-OP THIN GUEST, part A = foundations (review/coop-thin-a; audit dev/handover/reports/coop-thin-guest-audit.md §2-3;
    owner GO 17/11: host-authoritative thin guest, part by part, end state = the guest only displays the host's state).
@@ -77797,7 +78358,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="72efda7ae7f8";window.CTM_BUILD=BUILD;
+const BUILD="cd122317d927";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
