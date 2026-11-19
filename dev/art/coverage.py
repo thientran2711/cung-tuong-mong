@@ -40,7 +40,8 @@ C = ["c%02d" % n for n in range(1, 33)]
 M = ["m%02d" % n for n in range(1, 53)]
 W84 = C + M
 N4B = ("(dignified, not bright; the royal yellow becomes a deeper antique gold)", "(dignified, not bright; the royal yellow stays the SAME soft warm antique gold as at 51, a gentle honey-gold, never ochre, never mustard, never brownish)")  # build.py N4b, approved
-BGLINE = "IGNORE the style reference image's background"
+BGLINE = "IGNORE its background completely"  # N5d: K3_BG in build.py ("The second reference image is style only: IGNORE its background completely; ..."); --nostyle variant says "IGNORE the reference image's background"
+BGLINE_NPC = "IGNORE the style reference image's background"  # build_npc.py K3 wording (W107b)
 ROYAL3 = "Image 3 is only a colour reference"
 HAS_REFS = bool(re.search(r"--refs|--log|REFS\s*=", SRC))  # N5c adds --log (gen ledger with refs)
 HAS_REFS_E = bool(re.search(r"--refs|--log|REFS\s*=", ESRC))
@@ -142,7 +143,7 @@ def npc_check(ids, rank, ages):
             pz = npc_pose(p)
             if any(not isinstance(per.get((i, b)), (Exception, type(None))) and npc_pose(per[(i, b)]) == pz for b in ages if b != a): miss["POSE="] += 1
             miss["ITEM"] += 1   # no item_age.py rows for these groups: men item table HELD for the owner
-            if BGLINE not in p: miss["BG"] += 1
+            if BGLINE_NPC not in p: miss["BG"] += 1
         cells[a] = (miss, ex1)
     return cells
 def npc_section(out, red):

@@ -11,18 +11,18 @@ build.py refs emitter (--log/--refs): NO · emperor-B refs emitter: NO
 
 | tier | a18 | a26 | a36 | a51 | a65 |
 |---|---|---|---|---|---|
-| t1 | ❌ BG POSE=(26) REFS | ❌ BG POSE= REFS | ❌ BG POSE=(29) REFS | ❌ BG POSE=(29) REFS | ❌ BG POSE=(31) REFS |
-| t2 | ❌ BG POSE=(26) REFS* | ❌ BG POSE= REFS* | ❌ BG POSE=(29) REFS* | ❌ BG POSE=(29) REFS* | ❌ BG POSE= REFS* |
-| t3 | ❌ BG POSE=(26) REFS* | ❌ BG POSE= REFS* | ❌ BG POSE=(29) REFS* | ❌ BG POSE=(29) REFS* | ❌ BG POSE= REFS* |
-| t4 | ❌ BG POSE=(26) REFS | ❌ BG POSE= REFS | ❌ BG POSE=(29) REFS | ❌ BG POSE=(29) REFS | ❌ BG POSE= REFS |
-| t5 | ❌ BG POSE=(26) REFS | ❌ BG POSE= REFS | ❌ BG POSE=(29) REFS | ❌ BG POSE=(29) REFS | ❌ BG POSE=(31) REFS |
-| t6 | ❌ BG POSE=(26) REFS | ❌ BG POSE= REFS | ❌ BG POSE=(29) REFS | ❌ BG POSE=(29) REFS | ❌ BG POSE= REFS |
-| t7 | ❌ BG POSE=(29) REFS | ❌ BG POSE= REFS | ❌ BG POSE=(29) REFS | ❌ BG POSE= REFS | ❌ BG POSE= REFS |
-| t8 | ❌ BG POSE=(29) REFS | ❌ BG POSE= REFS | ❌ BG POSE=(29) REFS | ❌ BG POSE= REFS | ❌ BG POSE= REFS |
-| Thái hậu | — | — | ❌ BG POSE=(29) REFS | ❌ BG POSE=(29) REFS | ❌ BG POSE= REFS |
-| Nữ đế | ❌ BG POSE= REFS | ❌ BG POSE=(26) REFS | ❌ BG POSE= REFS | ❌ BG POSE= REFS | ❌ BG POSE= REFS |
-| khuê các | ❌ BG POSE=(26) REFS | ❌ BG POSE=(26) REFS | — | — | — |
-| nhà nghèo | ❌ BG POSE= REFS | ❌ BG POSE= REFS | — | — | — |
+| t1 | ❌ POSE=(26) REFS | ❌ POSE= REFS | ❌ POSE=(29) REFS | ❌ POSE=(29) REFS | ❌ POSE=(31) REFS |
+| t2 | ❌ POSE=(26) REFS* | ❌ POSE= REFS* | ❌ POSE=(29) REFS* | ❌ POSE=(29) REFS* | ❌ POSE= REFS* |
+| t3 | ❌ POSE=(26) REFS* | ❌ POSE= REFS* | ❌ POSE=(29) REFS* | ❌ POSE=(29) REFS* | ❌ POSE= REFS* |
+| t4 | ❌ POSE=(26) REFS | ❌ POSE= REFS | ❌ POSE=(29) REFS | ❌ POSE=(29) REFS | ❌ POSE= REFS |
+| t5 | ❌ POSE=(26) REFS | ❌ POSE= REFS | ❌ POSE=(29) REFS | ❌ POSE=(29) REFS | ❌ POSE=(31) REFS |
+| t6 | ❌ POSE=(26) REFS | ❌ POSE= REFS | ❌ POSE=(29) REFS | ❌ POSE=(29) REFS | ❌ POSE= REFS |
+| t7 | ❌ POSE=(29) REFS | ❌ POSE= REFS | ❌ POSE=(29) REFS | ❌ POSE= REFS | ❌ POSE= REFS |
+| t8 | ❌ POSE=(29) REFS | ❌ POSE= REFS | ❌ POSE=(29) REFS | ❌ POSE= REFS | ❌ POSE= REFS |
+| Thái hậu | — | — | ❌ POSE=(29) REFS | ❌ POSE=(29) REFS | ❌ POSE= REFS |
+| Nữ đế | ❌ POSE= REFS | ❌ POSE=(26) REFS | ❌ POSE= REFS | ❌ POSE= REFS | ❌ POSE= REFS |
+| khuê các | ❌ POSE=(26) REFS | ❌ POSE=(26) REFS | — | — | — |
+| nhà nghèo | ❌ POSE= REFS | ❌ POSE= REFS | — | — | — |
 | cung nữ tm0 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | — | — |
 | cung nữ tm1 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
 | cung nữ tm2 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
@@ -96,12 +96,12 @@ NOTE: build.py has ONE generic face per country (PDATA nc / bd), not the 3 + 3 p
 | tier | a18 | a26 | a36 | a51 | a65 |
 |---|---|---|---|---|---|
 | pre | ❌ NOCMD* | — | — | — | — |
-| t1 | ❌ BG POSE REFS* | ❌ BG POSE REFS* | ❌ BG POSE REFS* | ❌ BG POSE REFS* | ❌ BG POSE REFS* |
+| t1 | ❌ POSE REFS* | ❌ POSE REFS* | ❌ POSE REFS* | ❌ POSE REFS* | ❌ POSE REFS* |
 | t2 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
 | t3 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
 | t4 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
 | t5 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
-| t6 | ❌ BG ITEM(3) POSE POSE=(3) REFS ROYAL3 | ❌ BG ITEM(3) POSE POSE=(3) REFS ROYAL3 | ❌ BG ITEM(3) POSE POSE=(3) REFS ROYAL3 | ❌ BG ITEM(3) POSE POSE=(3) REFS ROYAL3 | ❌ BG ITEM(3) POSE POSE=(3) REFS ROYAL3 |
+| t6 | ❌ ITEM(3) POSE POSE=(3) REFS ROYAL3 | ❌ ITEM(3) POSE POSE=(3) REFS ROYAL3 | ❌ ITEM(3) POSE POSE=(3) REFS ROYAL3 | ❌ ITEM(3) POSE POSE=(3) REFS ROYAL3 | ❌ ITEM(3) POSE POSE=(3) REFS ROYAL3 |
 | t7 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
 | t8 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
 | Thái hậu | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
@@ -305,14 +305,14 @@ Codes as above, plus NOSRC = no old prompt exists (rule 6: never invented; owner
 
 ## RED LIST (grouped)
 
-- **Consorts c01–c32 (32)** — BG POSE= REFS: t1/a18, t1/a26, t1/a36, t1/a51, t1/a65, t2/a18, t2/a26, t2/a36, t2/a51, t2/a65, t3/a18, t3/a26, t3/a36, t3/a51 … (+38)
+- **Consorts c01–c32 (32)** — POSE= REFS: t1/a18, t1/a26, t1/a36, t1/a51, t1/a65, t2/a18, t2/a26, t2/a36, t2/a51, t2/a65, t3/a18, t3/a26, t3/a36, t3/a51 … (+38)
 - **Consorts c01–c32 (32)** — NOCMD (no builder mode): tm0/a18, tm0/a26, tm0/a36, tm1/a18, tm1/a26, tm1/a36, tm1/a51, tm1/a65, tm2/a18, tm2/a26, tm2/a36, tm2/a51, tm2/a65, tm3/a18 … (+54)
 - **Consorts c01–c32 (32)** — POSE POSE= REFS: tr1/a18, tr1/a26, tr1/a36, tr1/a51, tr1/a65, tr2/a18, tr2/a26, tr2/a36, tr2/a51, tr2/a65, tr3/a18, tr3/a26, tr3/a36, tr3/a51 … (+26)
 - **Maid faces m01–m52 (52) in every woman tier** — REFS RUN: t1/a18, t1/a26, t1/a36, t1/a51, t1/a65, t2/a18, t2/a26, t2/a36, t2/a51, t2/a65, t3/a18, t3/a26, t3/a36, t3/a51 … (+78)
 - **Maid faces m01–m52 (52) in every woman tier** — NOCMD (no builder mode): tm0/a18, tm0/a26, tm0/a36, tm1/a18, tm1/a26, tm1/a36, tm1/a51, tm1/a65, tm2/a18, tm2/a26, tm2/a36, tm2/a51, tm2/a65, tm3/a18 … (+54)
 - **Foreign princesses Nam Chiếu nc1–3 / Bắc Địch bd1–3 (6)** — NOCMD (no builder mode): pre/a18, t2/a18, t2/a26, t2/a36, t2/a51, t2/a65, t3/a18, t3/a26, t3/a36, t3/a51, t3/a65, t4/a18, t4/a26, t4/a36 … (+72)
-- **Foreign princesses Nam Chiếu nc1–3 / Bắc Địch bd1–3 (6)** — BG POSE REFS: t1/a18, t1/a26, t1/a36, t1/a51, t1/a65
-- **Foreign princesses Nam Chiếu nc1–3 / Bắc Địch bd1–3 (6)** — BG ITEM POSE POSE= REFS ROYAL3: t6/a18, t6/a26, t6/a36, t6/a51, t6/a65
+- **Foreign princesses Nam Chiếu nc1–3 / Bắc Địch bd1–3 (6)** — POSE REFS: t1/a18, t1/a26, t1/a36, t1/a51, t1/a65
+- **Foreign princesses Nam Chiếu nc1–3 / Bắc Địch bd1–3 (6)** — ITEM POSE POSE= REFS ROYAL3: t6/a18, t6/a26, t6/a36, t6/a51, t6/a65
 - **Emperor (emperor-B: live1, live2, e1–e4)** — BG ITEM POSE POSE= REFS: base/a18, base/a26, base/a36, base/a51
 - **Emperor (emperor-B: live1, live2, e1–e4)** — REFS RUN: base/a65
 - **NPC Thái hậu h1–h3** — ITEM POSE POSE=: base/a18, base/a26, base/a36, base/a51, base/a65
