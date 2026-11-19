@@ -45,7 +45,7 @@ function ptOpenTin(){try{if(typeof kitStatusIcon!=="undefined"&&typeof kitStatus
 function ptSend(o){if(!S||!o||!o.who)return null;const r=ptRow(o.kind);/* the tap's khắc: a button that already paid its order passes paid (t0 = before the pay) */const now=Math.max(0,ptNow()-(o.paid||0));
  const a={byNm:o.byNm||"",id:++PT.seq+"-"+now+"-"+ptZ().length/* no Math.random: a send never moves the game's random draws */,who:o.who,nm:o.nm||"",kind:o.kind,by:o.by||"me",t0:now,due:now+(o.n!=null?o.n:r.n),place:o.place||null,tgt:o.tgt||null,a:o.a||{},fz:o.fz==null?null:o.fz,lbl:o.lbl||"",back:0,rep:null,read:0};
  ptZ().push(a);PT.stat.sent++;try{ptLedger()}catch(e){ptErr("ledger",e)}
- if(a.by==="me"){ptNote({id:"pt:go:"+a.id,line:`${a.nm} đã đi ${a.lbl||"làm việc"}, về ${ptWhen(a.due)}.`});ptIcon()}
+ if(a.by==="me"){ptNote({id:"pt:go:"+a.id,line:`${a.nm} đã ${/^đi /.test(a.lbl||"")?a.lbl:"đi "+(a.lbl||"làm việc")}, về ${ptWhen(a.due)}.`/* no «đã đi đi …» when the label starts with «đi» (whole group of send labels) */});ptIcon()}
  return a}
 /* land every task whose khắc has come (her clock moved); results of HER sends wait as reports behind the status icon */
 let ptBusyTick=false;
