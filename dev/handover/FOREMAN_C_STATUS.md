@@ -1377,3 +1377,4 @@ ROOT-49: TP2 past threshold, no r22 (handover e51091a: t1 darkness = wide #6FA88
 ROOT-49 Lượt 497: MMX2 rolled over (17350b5; m05–m36 24 gens, 3,312 cr); m35-m36 sheet LOOKED + SENT (faults: one colour per outfit; m36 ivory-beige near gold, a65 dull; items repeat by age as m05/m15/m25). MMX2b session_01PEhRbv5dfMQoFystPMjovj (my child) continues m38 m39 m40 m45 m46 m52.
 ROOT-48 Lượt 495 (owner, in ROOT-48 chat): pose table 30 = 3 groups × 10 (lively t1–t3, medium t4–t5, calm t6–t8) → dev/art/POSES_30.md draft sent to owner; ROOT-49 wires after OK.
 ROOT-48 Lượt 498 (owner): STOP ALL MASS drawing (Nữ đế NDX1 told; ROOT-49 stops ma ma successors + any mass).
+ROOT-49 Lượt 499 (owner via ROOT-48 Lượt 498): STOP ALL MASS — MMX1b, MMX2b, NDX1 stop after the gen in flight + report; PR6 (rooms v5), TP3 (r22), TN2 (m13/m20) HOLD before any new gen until owner says. Pose groups table dev/art/POSE_GROUPS.md sent Lượt 498, waiting OK.
