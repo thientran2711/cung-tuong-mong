@@ -34,6 +34,22 @@ TM_TAY_NGU = ("Thừa Minh cung Tây phối điện bedroom, the cosy bedchamber
     "(curtains) and soft green (fabrics)." + NOPE + RECT + GUIDE_S)
 OUT['thua-minh-cung-tay-phoi-ngu'] = dict(prompt=room9(TM_TAY_NGU, GUIDE, 'warm polished wooden floorboards'), refs=[*G9, M3])
 
+# 2) Thừa Minh TÂY phối reception — same pair ĐT; TWO walls (back + LEFT window wall; alternates with room 1), own layout:
+#    approved Đông phối reception = daybed centred + mirrored chair rows; here the daybed in the RIGHT half of the back wall, a moon-gate
+#    opening in the left half, the armchair pair along the left window wall. Image 3 = 2-wall model mirrored (window left) 8aiwqQTIrU.
+TM_TAY_REC = ("Thừa Minh cung Tây phối điện reception room, the small sitting room where two lower-ranking imperial consorts (a Đáp ứng and a "
+    "Thường tại) living in the west side hall of a palace in ancient China receive their guests, a real room in daily use, no bed anywhere, " + WL2 + ": "
+    "wooden pillars, lattice windows in the LEFT side wall onto a sunny garden; against the back wall in its RIGHT half, square to it and seen straight on, "
+    "the host seat, the large clear main subject: a luohan daybed (a wide low carved, flower-painted lacquered wood daybed with a three-sided carved panel "
+    "back, a small low kang table with a tea set standing in its middle, flat silk cushions) with a painted folding screen with orchids behind it; in the "
+    "LEFT half of the back wall a round moon-gate opening onto a small inner room with a hanging lantern; along the left window wall, square to it, a pair "
+    "of small carved lacquered armchairs with a small tea table between them; shelves with porcelain vases, books and boxes, hanging paper lanterns with "
+    "tassels, vases of white orchids, a small incense burner, an embroidery frame against the wall, potted plants. COLOURS BY OBJECT TYPE (owner Lượt 491, "
+    "766): ALL the curtains of the room are cream-ivory like #EAE3D0 (the sheer window curtains tied back, the curtain of the moon gate, the lantern "
+    "tassels), and ALL the furniture fabrics are soft green like #7FB394 (the daybed cushions, the armchair cushions, the table runner). " + QN
+    + " Only the two colours cream-ivory (curtains) and soft green (fabrics)." + NOPE + P['NOSOFA'] + RECT + GUIDE_S)
+OUT['thua-minh-cung-tay-phoi'] = dict(prompt=room9(TM_TAY_REC, GUIDE, 'warm polished wooden floorboards'), refs=[*G9, M2X])
+
 # GATE (as v9): common block present, method refs, no drift words, no phoenix/yellow below t7.
 for k, v in OUT.items():
     p = v['prompt']
