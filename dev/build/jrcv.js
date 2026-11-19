@@ -168,9 +168,9 @@ const rcvIllE=(t,k)=>(t&&t.inv||[]).find(e=>e.k===k&&!e.h&&!e.t);
 function rcvIllGive(p,t,k){const e=rcvIllE(t,k);if(!e)return false;t.inv.splice(t.inv.indexOf(e),1);(p.inv=p.inv||[]).push({k,from:key(t)});/*evok: the asker has just asked for a forbidden item (illBuy deed)*/evA(t,p,BAL.eff.j83.evIllBuy);return true}
 RCVK.illAlly={t:"Xin đồ cấm",act:"xin một món đồ cấm của",kind:"help",ok:(p,t,k)=>!!rcvIllE(t,k),
  line:(p,k)=>`<p>${p.name} sai người lén sang: “Nương nương nhà ta cần ${itm(k).n}, xin người nhường lại.”</p><p class="past">${itm(k).n}: ${(WILL[k]||{}).eff||"đồ cấm"}. Ai đưa đồ cấm cũng nắm chứng cứ của người xin.</p>`,
- opts:(p,t,k)=>{const me=t===S,pn=p===S?"ngươi":p.name,nm=itm(k).n,ev=BAL.eff.j83.evIllBuy,pr=Math.round((itm(k).pr||0)*BAL.rcv.help.half),one=BAL.ag.ev.one;
-  const half=rcvYesO(p,t,1,{n:"Nhường lại, lấy chút bạc",g:`bạc +${pr}, nắm ${balAb(ev)} chứng cứ của ${pn}`,c:`mất ${nm}`,go:()=>{if(!rcvIllGive(p,t,k))return"";const n=Math.max(0,Math.min(pr,(p===S?S.bac:p.bac)||0));rcvAp(p,{bac:-n});rcvAp(t,{bac:n});return `${me?"Ngươi":t.name} nhường ${nm} lại cho ${NM(p)}, lấy ${n} lượng`}});
-  const lk0=half.lk;half.lk=()=>lk0()||(p===S?S.bac:p.bac||0)<pr;return[
+ opts:(p,t,k)=>{const me=t===S,pn=p===S?"ngươi":p.name,nm=itm(k).n,ev=BAL.eff.j83.evIllBuy,pr=Math.max(0,Math.min(Math.round((itm(k).pr||0)*BAL.rcv.help.half),(p===S?S.bac:p.bac)||0)),one=BAL.ag.ev.one;/* the bạc the asker can really pay (her card dropped the NPC lock: it promised bạc the asker did not have; reviewer #3) */
+  const half=rcvYesO(p,t,1,{n:"Nhường lại, lấy chút bạc",g:`${pr?`bạc +${pr}, `:""}nắm ${balAb(ev)} chứng cứ của ${pn}`,c:`mất ${nm}`,go:()=>{if(!rcvIllGive(p,t,k))return"";const n=Math.max(0,Math.min(pr,(p===S?S.bac:p.bac)||0));rcvAp(p,{bac:-n});rcvAp(t,{bac:n});return `${me?"Ngươi":t.name} nhường ${nm} lại cho ${NM(p)}, lấy ${n} lượng`}});
+  return[
   rcvYesO(p,t,0,{n:`Đưa ${nm} cho nàng`,g:`nắm ${balAb(ev)} chứng cứ của ${pn}`,c:`mất ${nm}`,go:()=>rcvIllGive(p,t,k)?`${me?"Ngươi":t.name} đưa ${nm} cho ${NM(p)}, nắm ${balAb(ev)} chứng cứ`:""}),
   half,
   rcvNoO(p,t,{g:`giữ ${nm}, không dính vào đồ cấm`,r:`${me?"Ngươi":t.name} khéo từ chối, không đưa đồ cấm cho ${NM(p)}`}),
