@@ -70,15 +70,31 @@ MAIN={"m01":(100,.66,.30),"m02":(85,.62,.32),"m03":(220,.64,.32),"m04":(25,.72,.
 "m49":(212,.72,.38),"m50":(350,.75,.42),"m51":(155,.75,.32),"m52":(320,.72,.32)}
 SEC={"crimson":(352,.55,.45),"deep rose":(350,.62,.45),"deep teal":(182,.42,.35),"jade green":(150,.52,.32),"blue-violet":(250,.55,.35),
 "deep sapphire blue":(222,.47,.38),"warm coral rose":(5,.64,.45),"celadon":(140,.58,.28),"blush pink":(355,.75,.45),"mint":(155,.70,.32)}
+
+# ---- Owner Lượt 599 (via ROOT-51): m table too blue/green, secondaries too uniform → spread look-alike greens/blues
+# (same name/hue family, different hue/lightness/saturation) and DIVERSIFY secondaries the c way (real pairings, contrast, ≤10 per hue).
+MAIN.update({"m01":(100,.66,.28),"m02":(82,.62,.38),"m07":(150,.74,.30),"m10":(108,.72,.30),"m17":(70,.62,.34),"m21":(172,.66,.34),
+"m24":(158,.62,.42),"m27":(118,.70,.40),"m29":(140,.76,.30),"m32":(162,.78,.40),"m35":(146,.70,.36),"m37":(186,.74,.38),"m41":(90,.68,.34),"m51":(152,.80,.30),
+"m03":(222,.62,.30),"m06":(210,.78,.40),"m11":(200,.68,.50),"m18":(214,.74,.32),"m20":(232,.66,.30),"m33":(245,.70,.36),"m39":(194,.72,.44),
+"m43":(232,.70,.46),"m45":(205,.80,.48),"m49":(212,.76,.36)})
+SEC.update({"rose-red":(352,.60,.45),"plum":(320,.45,.30),"coral rose":(8,.64,.48),"teal":(182,.44,.35),"indigo blue":(228,.45,.32),
+"warm ivory":None,"apricot":(24,.68,.50),"rose pink":(350,.72,.45)})
+SEC_NEW={"m01":"plum","m02":"coral rose","m03":"warm ivory","m04":"indigo blue","m05":"teal","m06":"apricot","m07":"rose-red","m08":"jade green",
+"m09":"teal","m10":"deep rose","m11":"coral rose","m12":"blue-violet","m13":"deep teal","m14":"jade green","m15":"indigo blue","m16":"jade green",
+"m17":"rose pink","m18":"deep rose","m19":"teal","m20":"apricot","m21":"coral rose","m22":"jade green","m23":"indigo blue","m24":"plum",
+"m25":"rose-red","m26":"teal","m27":"rose-red","m28":"indigo blue","m29":"deep rose","m30":"jade green","m31":"blue-violet","m32":"plum",
+"m33":"apricot","m34":"teal","m35":"coral rose","m36":"indigo blue","m37":"rose-red","m38":"jade green","m39":"warm ivory","m40":"teal",
+"m41":"rose pink","m42":"jade green","m43":"coral rose","m44":"deep rose","m45":"plum","m46":"teal","m47":"mint","m48":"jade green",
+"m49":"warm ivory","m50":"indigo blue","m51":"rose-red","m52":"jade green"}
 YELLOW=set()   # owner Lượt 598: renamed (m12 warm sand apricot, m23 soft peach sand, m31 pale sand apricot)   # yellow mains not allowed → apricot-family hex, NAME kept (flag)
 NEUTRAL={"m14","m36","m44","m48"}
 def hue(h): return colorsys.rgb_to_hls(*(int(h[i:i+2],16)/255 for i in (1,3,5)))
-out={"_note":"FINAL — owner Lượt 598 APPROVED (Lượt 594 proposal + fixes: m06 → pale blue, m12/m23/m31 yellow names → sand apricot/peach names, m52 secondary → jade green). BW4 wires it into build.py MAID_ROWS. Hex at foreign-princess level.","status":"FINAL","rows":{}}
+out={"_note":"REVISED Lượt 599 (greens/blues spread, secondaries diversified) after owner Lượt 598 approval (Lượt 594 proposal + fixes: m06 → pale blue, m12/m23/m31 yellow names → sand apricot/peach names, m52 secondary → jade green). BW4 wires it into build.py MAID_ROWS. Hex at foreign-princess level.","status":"REVISED Lượt 599 (pending owner side-by-side)","rows":{}}
 for line in CUR.splitlines():
-    m,name,old,sec=line.split('|')
-    v=MAIN[m]; mh=v if isinstance(v,str) else hx(*v); sh=hx(*SEC[sec])
+    m,name,old,sec=line.split('|'); sec=SEC_NEW[m]
+    v=MAIN[m]; mh=v if isinstance(v,str) else hx(*v); sh="#EAD7BF" if sec=="warm ivory" else hx(*SEC[sec])
     H1,L1,S1=hue(mh); H2,_,_=hue(sh); d=abs(H1-H2)*360; d=min(d,360-d)
-    contrast="neutral main" if m in NEUTRAL else ("OK" if d>=60 else f"WEAK ({d:.0f}°)")
+    contrast="neutral main" if m in NEUTRAL else ("neutral secondary" if sec=="warm ivory" else ("OK" if d>=60 else f"WEAK ({d:.0f}°)"))
     flag=[]
     if m in YELLOW: flag.append("yellow name → apricot-family hex proposed; owner to rename?")
     if "grey" in name and False: flag.append("name says grey; hex proposed as a clear soft blue")
@@ -86,3 +102,14 @@ for line in CUR.splitlines():
     out["rows"][m]={"main":name,"old_hex":old,"main_hex":mh,"secondary":sec,"secondary_hex":sh,"contrast":contrast,"flags":flag}
 json.dump(out,open(os.path.join(D,'m_colours_proposed.json'),'w'),ensure_ascii=False,indent=1)
 for m,r in out["rows"].items(): print(f"{m} {r['main']} {r['old_hex']}→{r['main_hex']} + {r['secondary']} {r['secondary_hex']} [{r['contrast']}] {'; '.join(r['flags'])}")
+
+from collections import Counter
+def fam(h):
+    H,L,S=hue(h); H*=360
+    if S<0.2 or (L>0.84): return "ivory/neutral"
+    return ("red/pink" if H>=335 or H<15 else "orange/peach" if H<45 else "yellow-green" if H<80 else "green" if H<165 else "teal/aqua" if H<195 else "blue" if H<240 else "violet/lilac" if H<290 else "purple/magenta")
+mc=Counter(fam(r["main_hex"]) if r["main"] not in ("ivory white","ivory cream","ivory","warm beige cream") else "ivory/neutral" for r in out["rows"].values())
+sc=Counter(r["secondary"] for r in out["rows"].values())
+print("MAIN families:",dict(mc)); print("SECONDARIES:",dict(sc))
+out["counts"]={"main_families":dict(mc),"secondaries":dict(sc)}
+json.dump(out,open(os.path.join(D,'m_colours_proposed.json'),'w'),ensure_ascii=False,indent=1)
