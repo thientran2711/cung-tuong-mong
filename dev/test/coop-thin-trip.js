@@ -13,7 +13,7 @@
 try{Error.stackTraceLimit=Math.max(Error.stackTraceLimit||10,120)}catch(e){}
 const ENTRY=[[/^(start|nlRun|nlBegin|nlReroll)$/,"B"],[/^(chooseM|onAct|onRes|famApply|petApply|showRes)$/,"D"],[/^(gSync|pApply)$/,"D·patch"],/* part D: the host's results copied onto her person (until G) */
  [/^(flip|resolveTonight|nightScene|rivalsBuoi)$/,"E"],[/^(runAct|act|cardH|talk|directActs)$/,"F1"],[/^(goTo|placeGo|enterPlace)$/,"F2"],
- [/^(buy|useItem|wear|sell|gift)$/,"F3"],[/^(startContest|kitGameResult|mgEnd)$/,"F5"],
+ [/^(buy|useItem|wear|sell|gift|sellItem|econSellUI|taintItem|itemTest|invAct|wkSell|wkShow|wkGive|wkPoison|wdWear|wdTakeOff|wd[A-Z]\w*UI|vl[A-Z]\w*UI|kitShopBuy|vlBuyNvp|vlBuyOut|vlAsk|giveTo|plantHereGo|tsGiftBacGo|tsGiftPieceGo|courtGive|tdGiftGo)$/,"F3"]/* the engines F3 moves; the UI routers (itemAct, toilAct, kitShop clicks) stay on her phone and their render writers stay in "?" (F6) */,[/^(startContest|kitGameResult|mgEnd)$/,"F5"],
  [/^(attach|sendMe|onBuoi|pullFriend|pushFriend|reshowQ|tryEnd)$/,"C/H"]];
 function part(st,root){let hit=null,wkEnd=false;part.n="";for(const l of st){const m=l.trim().match(/^at (?:Object\.|Proxy\.|Array\.|window\.)?([^ (]+)/);const n=m?m[1]:"";if(!n)continue;
   if(n==="endTurn"||n==="monthTick"){wkEnd=true;hit=/^S\./.test(root)?"G":"C";part.n=n}else if(n==="nextBuoi"){hit=/^S\./.test(root)?"E":"C";part.n=n}else for(const [rx,pt] of ENTRY)if(rx.test(n)){hit=pt;part.n=n;break}}

@@ -47,7 +47,7 @@ function btrVariant(){const o=window.__btrVar;if(o)return{sea:o.sea||"xuan",fest
 function btrArc(a,b,W,H){const K=[],n=14;for(let i=0;i<=n;i++){const u=i/n,e=u*u*(3-2*u),t=a.t+(b.t-a.t)*e,v=a.v+(b.v-a.v)*e;
   const x=t*W,y=H*.78-Math.sin(Math.max(0,Math.min(1,t))*Math.PI)*H*.62;K.push({transform:`translate(${x.toFixed(1)}px,${y.toFixed(1)}px)`,opacity:Math.max(0,Math.min(1,v*(t<0||t>1?Math.max(0,1-Math.abs(t<0?t:t-1)*8):1)))})}return K}
 function buoiShift(){
- try{if(!S||window.__bot||(typeof quiet!=="undefined"&&quiet))return;btrKill();
+ try{if(!S||screenOff())return;btrKill();
   try{if(typeof kitSfx==="function")kitSfx((typeof B4L!=="undefined"&&(S.buoi||0)===B4L)?"nightWatch":"buoi")}catch(e){}
   const b=((S.buoi||0)%4+4)%4,prev=btrPrev!=null?btrPrev:(b+3)%4;btrPrev=b;const C=BTR_C[b],V=btrVariant(),VS=BTR_SEA[V.sea]||BTR_SEA.xuan,VF=V.fest?BTR_FEST[V.fest.k]:null,VT=(VF||VS).tint;
   const d=document.createElement("div");d.id="buoitr";d.className="btr b"+b+" s-"+V.sea+(V.fest?" f-"+V.fest.k:"");d.setAttribute("aria-hidden","true");
