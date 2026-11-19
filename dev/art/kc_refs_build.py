@@ -38,6 +38,7 @@ for i in range(1, 33):
     OTHERS["c%02d" % i] = "consort: no v3 thiếu nữ picture (only img/_review/kc2k 18/11 = REJECTED)"
 for i in range(1, 4):
     OTHERS["p%02d" % i] = "player: no thiếu nữ picture of any kind"
+# owner Lượt 570: nc1–nc3 OK as refs — KC_REFS.json patched by ROOT-50; BW3 to move them into the OK list
 OTHERS["nc1"] = "princess Ba Tư: picture exists but made with COMMON_v2 princess prompt (cut 6Abnqu9iJO, nc1.v2.FULL.txt), not a v3 thiếu nữ"
 OTHERS["nc2"] = "princess Cao Ly: picture exists but COMMON_v2 princess prompt (cut p8ymOwOehw, nc2.v2.FULL.txt), not a v3 thiếu nữ"
 OTHERS["nc3"] = "princess Phù Tang: picture exists but COMMON_v2 princess prompt (cut ov6CN4g829, nc3.v2.FULL.txt), not a v3 thiếu nữ"

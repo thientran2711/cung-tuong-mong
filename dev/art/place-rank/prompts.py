@@ -264,3 +264,26 @@ kn = out6['khon-ninh-cung']
 assert KN_MID in kn and 'at most a small mat under the low tables in front of the dais' in kn
 outc = {'khon-ninh-cung': kn.replace(KN_MID, KN_MID6C).replace('at most a small mat under the low tables in front of the dais', 'at most a small mat at the foot of the dais').replace('Keep the same room and the same arrangement as image 3 (this same room as drawn before)', 'Keep the same room and the same arrangement as image 3 (this same room as drawn before), except that the low table and stools in the middle of its floor are removed')}
 json.dump(outc, open(os.path.join(D, 'prompts_v6c.json'), 'w'), ensure_ascii=False, indent=1)
+
+# ---- v6d (owner Lượt 563 via ROOT-50): Phi bedroom v6b aFGyN6afSh "vẫn cứ rộng rộng ở dưới" -> between v6 (too close) and v6b (too much floor):
+# whole bed inside, no crop, bottom empty strip ~8-10 %. image 3 = v6b aFGyN6afSh (own layout). Only the FLOOR SHARE sentence changes.
+FLOOR6D = (" FLOOR SHARE (owner Lượt 520, 548, 563): Keep the same room and the same arrangement as image 3 (this same room as drawn before), seen only "
+           "slightly closer than image 3, so the whole canopy bed with its top and its curtains still fits inside the picture, nothing cropped; the empty "
+           "floor strip at the bottom is clearly smaller than in image 3: the furniture comes down to about eleven twelfths of the picture height, and the "
+           "open floor at the bottom is only about one twelfth of the picture height at the centre.")
+outd = {'canh-phuc-cung-phi-ngu': outb['canh-phuc-cung-phi-ngu'].replace(FLOOR6B, FLOOR6D)}
+assert outd['canh-phuc-cung-phi-ngu'] != outb['canh-phuc-cung-phi-ngu']
+json.dump(outd, open(os.path.join(D, 'prompts_v6d.json'), 'w'), ensure_ascii=False, indent=1)
+
+# ---- v6f (owner Lượt 563 via ROOT-50): Khôn Ninh reception v6c 9ZHIFD7NYZ "nhỏ xíu" -> GRAND large main hall (wide, deep, high ceiling, more columns)
+# + chairs/tables follow the structure: two straight mirrored rows facing each other along the sides, on the central axis to the throne dais.
+knc = outc['khon-ninh-cung']
+A1_ = "ROOM: Khôn Ninh cung reception hall, where the Empress of an ancient Chinese imperial palace receives the consorts, a real room in daily use, no bed anywhere:"
+B1_ = "below the dais, rows of paired Chinese armchairs with small tea tables between them for the visiting consorts;"
+C1_ = "Keep the same room and the same arrangement as image 3 (this same room as drawn before), except that the low table and stools in the middle of its floor are removed, seen a little closer and lower so less floor shows:"
+assert A1_ in knc and B1_ in knc and C1_ in knc
+outf = {'khon-ninh-cung': knc
+  .replace(A1_, A1_ + " a GRAND, very large main hall (owner Lượt 563: never a small room), wide and deep with a high ceiling, many tall red lacquer columns standing in two straight rows along the length of the hall, seen straight on along its central axis;")
+  .replace(B1_, "below the dais, TWO straight rows of Chinese armchairs with small tea tables between them for the visiting consorts (owner Lượt 563), one row along each side of the hall, the two rows facing each other across the open central aisle, mirrored exactly on the central axis that leads to the throne dais, each chair lined up with the columns and square to the walls, nothing placed at random;")
+  .replace(C1_, "Keep the same throne, screen, colours and furnishings as image 3 (this same room as drawn before), but the hall is much larger and grander than in image 3, with the floor numbers here:")}
+json.dump(outf, open(os.path.join(D, 'prompts_v6f.json'), 'w'), ensure_ascii=False, indent=1)
