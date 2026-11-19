@@ -66,7 +66,7 @@ const [,,URL,NL,RO]=process.argv;const N=+NL||20;const ROADS=(RO||'pt_hai,pt_su,
        res67(thKey67(A),A.cur,i,o&&o.o!=null?oOf67(A,o,bd):100);if(A.done)ends[A.a]=A.end}}catch(e){err=err||e.message}
      if(S.st.ms)S.st.ms.force14=1;const t=S.turn;for(let g=0;g<40&&S.turn===t;g++){Q.length=0;used=0;try{nextBuoi()}catch(e){err=err||e.message;break}}Q.length=0;
      if(ends[road+'_11'])break}
-    return{e11:ends[road+'_11']||null,e4:ends[road]||null,n:Object.keys(ends).filter(a=>a===road||a.startsWith(road+'_')).length,err}}catch(e){return{err:e.message}}},r);
-   await c2.close();console.log(` life ${i+1} ${r}: .4=${x.e4} .11=${x.e11} ${x.err||''}`);if(x.err)bad.push(x.err);if(x.e11){ok++;tally[x.e11]=(tally[x.e11]||0)+1}}
+    return{e11:ends[road+'_11']||null,e4:ends[road]||null,n:Object.keys(ends).filter(a=>a===road||a.startsWith(road+'_')).length,err}}catch(e){return{err:e.message}}},r).catch(e=>({err:'renderer: '+String(e.message||e).slice(0,60)}));
+   await c2.close().catch(()=>{});console.log(` life ${i+1} ${r}: .4=${x.e4} .11=${x.e11} ${x.err||''}`);if(x.err)bad.push(x.err);if(x.e11){ok++;tally[x.e11]=(tally[x.e11]||0)+1}}
   console.log(`\n== bot ${r}: ${N} lives, reached .11 ${ok}; .11 results ${JSON.stringify(tally)}; errors ${bad.length} ${bad.slice(0,3).join(' / ')}`)}
  console.log('\npage errors:',errs.length,errs.slice(0,5).join(' / '));await b.close()})();
