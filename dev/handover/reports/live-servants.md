@@ -5,7 +5,7 @@ START_CTX ≈ 5 % of the window (get_session read 0 at start; estimate). Rollove
 
 Branch **review/live-servants** from main 94d11623. Commits: 22de1d1d (code, tests, tool, docs) + 560014be (build).
 
-## STATUS: SẴN SÀNG KIỂM 7a50021 — live main 884ce97c merged; all gates PASS except PERF (4x per-khắc +27 % mean vs live after an outcome-identical cut from +49 %; the rest is the feature's own cost → MAIN PERF RULING needed). See "LIVE-SERVANTS #3" at the end.
+## STATUS: SẴN SÀNG KIỂM 797f87e (LIVE-SERVANTS #4, review FAIL 1–8 fixed; see the end) — was: SẴN SÀNG KIỂM 7a50021 — live main 884ce97c merged; all gates PASS except PERF (4x per-khắc +27 % mean vs live after an outcome-identical cut from +49 %; the rest is the feature's own cost → MAIN PERF RULING needed). See "LIVE-SERVANTS #3" at the end.
 
 ## What changed (REUSE: S.roster/S.rlog + j95 plans + jagday/jagstaff deed slots + roster.js; nothing parallel)
 - **NEW dev/build/j95s.js** (after jagstaff.js in assemble.py), numbers in `BAL.slv` (one core; one-core-guard PASS):
@@ -200,3 +200,49 @@ tools/prof.js CDP profile with PRE, tools/lineprof.js line ticks, b-*.txt bench 
 ## REVIEW VERDICT 7a50021 (reviewer opus session_01Rc5AsKp5X8AnT5HJ7WoyXK, 18/11 ~23:20Z): FAIL — 8 items, full list in reports/review-live-servants.md
 1 raw deed keys on screen ("đang maid:sweep") — whole family incl. j95sWhy/j95here/roster ACT · 2 "Đi một mình" renders THÀNH "Không được gì thêm" (laws 2/3) · 3 person rows use "kèm:" (same status green ĐƯỢC vs red KÈM) · 4 big "Tư tình, ánh mắt" picture while the list scrolls (law 10) · 5 ag-carry red 3/6 on branch (live 0/5) · 6 typed numbers in j95sNpcPick (law 4) · 7 day-0 "ngủ bù" + "khắc 1–1" · 8 perf re-measure: buổi median +14 % (ruling ≤ +10 %).
 PASS: live-servants.test, quickcheck (old save ok), 13/14 ag-*, perf work outcome-identical (diff 0 ×3), deeds = worker numbers; coop-e2e BLOCKED sandbox 403 only (no co-op file touched).
+
+## LIVE-SERVANTS #4 (opus, session_01Rc5AsLdRc1YbZ1vrMvV1Ro, START_CTX ≈ 4 % (get_session reads 0; estimate), foreman C-AG #17) — review FAIL 1–8
+PRIORITY #1 CHECK ('live-servants'): OD 0 new | ledger 0 | claims C-AG LIVE-SERVANTS #1–#3 done + REVIEW FAIL | main 1130a49 → 40d05b7 → 9a1d692 merged | review/live-servants 7a50021 → 797f87e.
+### SẴN SÀNG KIỂM 797f87e (= fixes 4149d18 + KIT REQUEST + perf 3af2ad0 + merges of live main 1130a49 / 40d05b7 / 9a1d692 + j43 empty-bel fix 797f87e; index.html / sw.js rebuilt each time; assemble.py = main's list + j95s.js)
+| # | FAIL item | fix (whole family, law 11) | proof |
+|---|---|---|---|
+| 1 | raw deed keys on screen | ONE act word `j95sActW(a)` (j95s): ACT95 → `J95S_DW` servant deed words (every SRVA row × maid / srv + empTea; secret deeds — spy, betray, frame, poison, pil, love matters — read "lo việc riêng", law 6a: the viewer does not learn a secret for free) → AGACTW (ag_call "ghé chơi") → fallback "lo việc riêng", never the key. Used by j95sNotFree (picker grey reason + NPC pick reason), j95sWhy (guard), j95here / j95whereId (map read API), j95table (dev), S.rlog words (j95 log). roster.js reads the same words (J95S_DW, AGACTW, every literal ACT95 word + the consorts' deed tables AGSELF / AGCX / AGHH / AGC2 / AGC3ACT) and its acts list | scan `node dev/test/live-servants-words.js <index> [lives=3] [buổi=12]` (table below) |
+| 2 | "Đi một mình" loss-only | THÀNH "việc ngươi làm bên ngoài được giữ kín, mọi người ở lại trông cung" · BẠI "không ai thấy giùm ngươi" (Lên đường: THÀNH eyes · BẠI mouths) — equal value, both gain + loss | rendered cards both devices: THÀNH + BẠI rows on both options |
+| 3 | person rows "kèm:" | person status = one whole "(…)" value → kit Ghi chú (neutral, same for every person row); a not-free person's reason only in Cần (kitOff), not repeated; "Lên đường" empty hint also "(…)" (no kèm). Picker family: 0 "kèm:" left in j95s | rendered: every person row GHI CHÚ |
+| 4 | big picture "Tư tình, ánh mắt" while the list scrolls | kit options only: the picker has no `who` (a person pop-up always gets the event banner, KIT 50 / OD:L448) and is an act picker (`pid:"entpick"` registered in `KIT_ACT_PIDS`, as jpoison / jts do) → no event picture; the kit's evId guess that pulled the picture back on the re-render after a tap is dropped before each render of this card; **KIT REQUEST filed** (dev/kit/KIT_REQUESTS.md "kitEvArt evId tag on act pickers", whole group: every KIT_ACT_PIDS picker) | shots with the CDN on, before / after a tap: no banner, Fold 755x1000 + iPad 1180x820 |
+| 5 | ag-carry red | seeded lives: Math.random re-seeded right before start() (the boot timers drew a varying count), 3 lives (seeds 1,2,3) × 16 days, §5 = carried items in the sum (> 0) and in EVERY life every carried item ended, no caught error; §1–4 planted case in every life; reason in the test head. Assertion not weakened | branch 10/10 PASS (carry sums 6–13, lives e.g. [5,4,1] [1,3,1]); live 9a1d692 PASS |
+| 6 | typed numbers j95sNpcPick | `BAL.slv.ent.mood {v:40, lv:2}`, `BAL.slv.ent.lv {min:5, close:100, def:50, unit:50}` | one-core-guard PASS (quickcheck core gates) |
+| 7 | day-0 "ngủ bù" / "khắc 1–1" | slept needs d > 0 (no night before the first day); rest reason "khắc k" when 1 khắc long, "khắc a–b" when 2 | live-servants.test sample "đến lượt nghỉ của nàng (khắc 1, mỗi ngày một lượt)" |
+| 8 | perf | outcome-identical cuts (rhythm BAL key cached instead of 2 joins per call; guard skips a row with a real reason before the WeakSet): ag2perf-diff K=4 905de4f vs 3af2ad0 seeds 1–3 × 40 buổi diff 0, same final state, same Math.random count | table below |
+#### Family scan item 1 (live-servants-words, 3 seeded lives × 12 buổi × 4 khắc; same harness both builds)
+| view | before 7a50021 raw | after 797f87e raw |
+|---|---|---|
+| (A) act keys the game can write (ACT95 + AGRUN + SRVA×2 + AGACTW = 317) → act word | 105 | 0 |
+| j95sNotFree (picker / pick reason) | 1029 | 0 |
+| j95sWhy (guard reason) | 1418 | 0 |
+| j95whereId.act / j95here.act (map API) | 1049 / 1049 | 0 / 0 |
+| j95table.act (dev) | 1049 | 0 |
+| row reasons containing a key | 43 | 0 |
+| S.rlog saved words | 230 | 0 |
+| roster.js answers (table + --who ×2, ~200 runs) | raw lines (e.g. "ag_cx:tqGift", "ag_pray", "ag:see:join") | 0 |
+#### PERF (ag2perf-probe, 24 buổi × 4 khắc, CPU 4x, 20 interleaved pairs live 1130a49 / new 3af2ad0, seeds 1–5 × 4 rounds)
+| metric | live | new | Δ |
+|---|---|---|---|
+| buổi step median (avg of 20 run medians) | 68.1 ms | 73.6 ms | **+8.1 %** |
+| buổi step median (median of run medians) | 68.0 | 74.9 | +10.1 % |
+| buổi step mean | 136.4 | 140.0 | +2.7 % |
+| whole buổi (4 khắc + step, means) | 147.0 | 153.7 | +4.5 % |
+| khắc mean / median / p95 | 2.7 / 1.5 / 10.8 | 3.4 / 2.4 / 10.8 | +28.5 % / +63 % / −0.6 % |
+Noise is large: per-pair buổi-median ratios −28 % … +52 % (median of pair ratios +14 %); an earlier 10-pair run (before the perf cut) read +23 % on the same metric, the lives diverge (a death = `over` save ≈ 400 ms in some runs). By ruling (a) (per buổi ≤ +10 %) the main metric is +8.1 % / median-of-medians +10.1 % — on the line; MAIN re-rules if the reviewer reads it over. Long tasks: quickcheck tasks>200 ms 17/18, max 1612 / 1376 ms (one earlier quickcheck run: 3145 ms outlier, next runs normal).
+#### j43 fix (found by the final main merge)
+After merging 9a1d692 quickcheck G4 coop-one-world failed seed 3 (3/3 on the branch, live passed): `merged vs host: R[#9].bel b0 undefined · h1 {} · sent undefined · merged undefined` — j43's monthly belief decay deleted the last entry and left an EMPTY `bel {}` on the host, the co-op merge3 keeps no empty object. Fix: the decay drops the empty `bel` (belOf makes it again). No live-servants code touches `bel`; the UI-only main diff only shifted the seed's random path. After: seeds 3 + 7 PASS, quickcheck core gates PASS.
+#### GATES (797f87e unless said)
+| gate | result |
+|---|---|
+| live-servants.test.js (3 lives, roster self-check inside) | PASS |
+| live-servants-words.js (new family scan) | PASS (raw 0) |
+| quickcheck.sh (own build; core gates G1 one-core-guard · G2 · G3 kit-conform · G4 hooks incl coop-one-world; time-spill; open; old live save; perf smoke) | PASS · render 165/148 · tab 288/291 · buổi 903/902 · tasks>200ms 17/18 · 288 s |
+| ag-*.test.js (13, serial, on 73abc8b; ag-carry again on 797f87e) | 13/13 PASS · ag-carry 10/10 on the branch, PASS on live |
+| seeded diff of the perf cut | 0 (3 × 40 buổi, K=4) |
+| coop-e2e | BLOCKED = sandbox only (co-op Worker host, proxy 403); no jcoop* file touched; j95s / picker / S.knw off in co-op (j95on false) |
+Shots (scratch only, looked at; not in git): Fold 755x1000 + iPad 1180x820, picker with 6 people (CDN on, before / after taps): no picture, rows GHI CHÚ / CẦN / THÀNH / BẠI, "Thôi" = the kit ✕. Repro: /home/user/wt/ls4x/pickn.js (container only).
