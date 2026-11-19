@@ -26,6 +26,7 @@ const ok=[];const chk=(n,c,x)=>{ok.push([n,!!c]);if(!c)console.error('FAIL',n,JS
    const R=ROAD14[b]||{};if(typeof rdFull!=='function'||!rdFull(b))bad.push(b+': road not full');
    const own=[b].concat(Object.keys(R).map(n=>R[n]));const N=optNames(own.concat(shared));
    if(D.e.length!==4)bad.push(b+': '+D.e.length+' endings');
+   /* no name twice in one list (review E11r-w2 fix 3: a doubled name inflates the Chuỗi count) */for(const [k,a] of [['lean.p',D.lean.p||[]],['lean.m',D.lean.m||[]],...D.e.flatMap((e,i)=>['pull','push','close','doom'].map(L=>[`ge${i+1}.${L}`,e[L]||[]]))]){const d=a.filter((x,j)=>a.indexOf(x)!==j);if(d.length)bad.push(`${b} ${k}: name twice in one list: ${d.join(' | ')}`)}
    const names=[];D.e.forEach((e,i)=>{const id=b+'_'+(i+1);
     for(const L of ['pull','push','close','doom'])for(const n of (e[L]||[])){names.push(n);if(n[0]==='@'){const m=n.slice(1).split('=');if(!ARC67[m[0]]||!(ARC67[m[0]].E||{})[m[1]])bad.push(`${id} ${L}: no arc/ending ${n}`)}else if(!N.has(n))bad.push(`${id} ${L}: not an option of the road: ${n}`)}
     for(const t of (e.cond||[]).concat(e.fo||[])){if(!TERMS.has(t[0]))bad.push(`${id}: unknown term ${t[0]}`);if(t[0]==='s'&&!(BAL.ge.gate[id]||{})[t[1]])bad.push(`${id}: no BAL.ge.gate.${id}.${t[1]}`);if(t[0]==='mis'&&!(BAL.ge.gate[id]||{}).mis)bad.push(`${id}: no gate mis`)}
