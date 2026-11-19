@@ -157,6 +157,11 @@ TH.withSeat=function(seat,fn){
     runs without D's steps (never takeQ on the rolled life) and is logged ("held-run", the tests assert none) */
  const hd=TH.held(seat)&&TH.curDo!=="life";if(hd)D.log.push(["held-run",seat,TH.curDo||"later"]);
  const dW=dOn&&TH.curDo!=="life"&&!hd;
+ /* review r1 (hostnull a, the whole family beyond tap runs): ANY run in her context may write the host's page — her part B life intent wrote the
+    host's open card (#modal: jload lDlgWait klifewait + the kit size attributes of his .dlg, outer showModal wrappers run past the NOOP), a
+    part D pick its #modal class — with no repaint (TH.tapRun sees only tap runs). This net watches every outer run of hers (part D on: the
+    host's after-run exists) and asks the same one repaint (rpAsk) when it wrote his DOM and no tap run inside already asked. */
+ let wso=null;const wpn=TH.paintN;if(dOn&&typeof MutationObserver==="function"&&document.body)try{wso=WSO=WSO||new MutationObserver(()=>{});wso.takeRecords();wso.observe(document.body,{subtree:true,childList:true,attributes:true,characterData:true})}catch(e){wso=null}
  try{if(B.fresh){fixRefs(S);B.fresh=false}if(dW&&D.hold)D.hold(S);v=standIn(PA,S);if(v)v.__inv0=(v.inv||[]).slice();if(dW&&!D.noPatch)try{p0=pSnap()}catch(e){console.error("thin p0",e)}D.cur={p0,rv:dW&&!D.noPatch?D.rvIn(seat):null};return fn()}
  finally{const sN=S;
   if(dW)try{D.takeQ()}catch(e){console.error("thin takeQ",e)}
@@ -171,6 +176,7 @@ TH.withSeat=function(seat,fn){
    if(dOn&&Array.isArray(e.inv))for(const x of e.inv)if(x&&x.k&&!x.h&&!(e.__inv0||[]).includes(x))TH.bridgeItems.push(J(x));
    for(const k of X.STAT)if(k!=="hh"&&typeof e[k]==="number"&&e[k]!==b[k]){TH.bridge.push([k,b[k],e[k]]);A.S[k]=e[k]}
    for(const [f,m] of [["rel","rl"],["oan","ro"]])if(e[f]!==b[f]){A.S[m]=A.S[m]||{};A.S[m][PID[seat]]=e[f];TH.bridge.push([m,b[f],e[f]])}}
+  if(wso)try{const R=wso.takeRecords();wso.disconnect();if(R.length&&TH.paintN===wpn){const M=document.getElementById("modal");TH.paintN++;TH.wsPaintN=(TH.wsPaintN|0)+1;rpAsk(!!M&&R.some(x=>x.target===M||M.contains(x.target)))}}catch(e){}/* before the context closes: rpAsk queues in AFTER */
   B.pers=persTake(A.S);swapView(seat,CW.seat,mks,A.S);persPut(A.S,hp);X.pushFriend(L);
   CW.ctx=undefined;TH.outerS=null;S=A.S;for(const r of REG)try{r[2](A.g[r[0]])}catch(e){}quiet=A.quiet;
   if(dOn)D.afterRun(seat)}};
@@ -205,7 +211,7 @@ const uiArg=a=>{try{return JSON.parse(JSON.stringify(a,(k,v)=>typeof v==="functi
    wrote into the host's page is seen here (MutationObserver.takeRecords: synchronous, no list of painters to keep up to date) and the host
    repaints his own screen from his own state when her context closes (rpAsk below). Her screen gets her own result with the
    answer (her view → one render). (c) No cap here: every effect her run raised is kept (BAL.coopUi paces them on her phone). */
-let PMO=null;TH.paintN=0;
+let PMO=null,WSO=null;TH.paintN=0;
 TH.tapRun=function(fn){const q0=quiet,u0=TH.uiCap;quiet=false;TH.uiCap=[];let mo=null;
  if(!u0&&CW.ctx&&host()&&typeof MutationObserver==="function"&&document.body)try{mo=PMO=PMO||new MutationObserver(()=>{});mo.takeRecords();mo.observe(document.body,{subtree:true,childList:true,attributes:true,characterData:true})}catch(e){mo=null}
  let r,ui,dirty=false,dm=false;try{r=fn()}finally{quiet=q0;ui=TH.uiCap;TH.uiCap=u0;if(mo)try{const R=mo.takeRecords();mo.disconnect();dirty=R.length>0;

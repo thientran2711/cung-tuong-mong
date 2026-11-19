@@ -3,7 +3,9 @@
    usage: python3 dev/build/assemble.py && node dev/test/coop-thin-hostnull.js <workerURL> [level=9] [swap=0]   (UISCAN=<file>, LAG=<ms>, CPU=<rate>, SHOTS=<dir>)
    H1 (a) talk / scout / invite from the guest (the registrations with no walk repaint): run once, her result on her phone, the host's
    screen = a fresh render of HIS state · H6 the repaint: his own open card kept, no loop, its cost · H2 (b) her face reveal plays once on her phone, none on the host · H3 (c) more effects than the
-   old cap: none lost, in order, paced by BAL.coopUi · H4 (d) sounds / scenes her walk engines raise reach her phone, none on the host. */
+   old cap: none lost, in order, paced by BAL.coopUi · H4 (d) sounds / scenes her walk engines raise reach her phone, none on the host.
+   Review r1: H5b law 1 the other way (her context) · H7 (LONG=<n>) the repaint cost over a long session · H10 every run of hers (not only tap runs) that
+   wrote the host's page is followed by his repaint. */
 const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),path=require('path');
 const WURL=process.argv[2]||'https://ctm-coop.victoria-tntt.workers.dev';const LVL=+(process.argv[3]||9);const SWAP=+(process.argv[4]||0);
 const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,c?300:2500):''))};
@@ -13,6 +15,15 @@ async function mk(b,name,vp,want){const ctx=await b.newContext({viewport:{width:
   await ctx.addInitScript(([u,w])=>{window.COOP_URL=u;if(w)try{localStorage.setItem('ctm-thin',String(w))}catch(e){}
    window.__co=()=>{const c=window.COOP;if(!c)return{};return{code:c.code,seat:c.seat,world:typeof S!=='undefined'&&!!S&&!!(window.COOPW&&COOPW.on)}}},[WURL,want]);
   if(TRIPSRC&&name==='guest')await ctx.addInitScript(TRIPSRC);
+  /* H10 (review r1): EVERY run in her context on the host (TH.withSeat, not only tap runs): did it write the host's DOM, and was the host
+     repainted after it (paintN / rpN step, or a render outside her context before the next one)? window.__ws = rows [curDo, dom, painted, stack] */
+  if(name==='host')await ctx.addInitScript(()=>{const t=setInterval(()=>{const TH=window.COOPW&&COOPW.thin;if(!TH||!TH.withSeat||!document.body)return;clearInterval(t);
+    window.__ws=[];const mo=new MutationObserver(()=>{});const ws=TH.withSeat;let depth=0;
+    TH.withSeat=function(seat,fn){if(depth||seat===COOPW.seat)return ws.apply(this,arguments);depth++;const p0=(TH.rpN|0);mo.takeRecords();mo.observe(document.body,{subtree:true,childList:true,attributes:true,characterData:true,attributeOldValue:true});
+     let R;const ids={};let pre=null;const D=TH.D,ar=D&&D.afterRun;if(ar)D.afterRun=function(){if(!pre){pre=mo.takeRecords();mo.disconnect()}return ar.apply(this,arguments)}/* only what was written BEFORE the host's own after-run (his repaint) */;
+     try{R=ws.apply(this,arguments)}finally{depth--;if(ar)D.afterRun=ar;const L=pre||mo.takeRecords();mo.disconnect();for(const m of L){let e=m.target.nodeType===1?m.target:m.target.parentElement;while(e&&!e.id)e=e.parentElement;const k=e?e.id:'body';ids[k]=(ids[k]|0)+1}
+      const row={do:TH.curDo||'?',dom:L.length,ids,rec:L.slice(0,8).map(m=>[m.type,m.attributeName,m.target.nodeType===1?(m.target.tagName+'#'+m.target.id+'.'+String(m.target.className).slice(0,40)):'text',m.type==='attributes'?String(m.target.getAttribute&&m.target.getAttribute(m.attributeName)).slice(0,60):'',m.addedNodes?m.addedNodes.length:0,m.removedNodes?m.removedNodes.length:0]),rp:(TH.rpN|0)-p0,st:L.length?String(new Error().stack).split('\n').slice(2,7).map(x=>x.trim().split(' ')[1]).join('<'):''};window.__ws.push(row)}
+     return R}},50)});
   if(process.env.UISCAN&&name==='host')await ctx.addInitScript(fs.readFileSync(path.join(__dirname,'coop-thin-uiscan.js'),'utf8'));/* hostnull: the host-side UI scan of her runs */
   /* P10 a dead socket on her phone (as coop-thin-e-net): while __mute her `do` frames are dropped, while __deafThin the host's views
      ("t":"delta" / "snap") never reach her; __wss = her sockets (closed by the test → COOP reconnects, "room") */
@@ -205,16 +216,9 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
    o.allyNpc=n?String(ACT.ally.f(S,n)||'').replace(/<[^>]+>/g,''):'skip';S.inv=S.inv.filter(x=>!x.hn5b)})}finally{roll=r0;aRoll=a0;window.rcvPick=p0}return o});
   ok(r.f&&!!r.hit[0]&&!!r.hit[1]&&!/không nhận/.test(r.gift)&&r.left===1&&/không nhận/.test(r.npc)&&r.npcKept===1&&/thành/.test(r.ally)&&!/thành/.test(r.allyNpc),'H5b law 1 the other way (her context): the gift / Kết giao the host accepted is never refused after, the gift left her chest once (an NPC still can refuse, the gift stays)',r);
   for(let i=0;i<3;i++){await clear(H);await clear(G)}}
- /* H9 (review r1) her night card-flip scene (jflip, raised by her flip run on the host — part D pick): captured WITH its plan taken in her
-    context (the plan reads her per-seat stoleFrom there), played on HER phone from that plan, none on the host */
- {await reset();const h=await H.p.evaluate(()=>{const o={};const r0=roll,e0=window.empOn,es0=window.empSummon;const d0=(window.__cfdbg||[]).length;
-   try{roll=()=>false;window.empOn=()=>false;o.T=COOPW.thin.withSeat('b',()=>COOPW.thin.tapRun(()=>{S.nightWhy={wk:wk(),pick:'me',flip0:'me',cause:'custom'};flip();return 1}))}
-   catch(e){o.err=String(e&&e.message||e)}finally{roll=r0;window.empOn=e0;window.empSummon=es0}
-   const ui=(o.T&&o.T.ui)||[];o.cf=ui.filter(x=>x[0]==='cfShow');o.ui=ui;o.hostPush=(window.__cfdbg||[]).slice(d0).filter(x=>/^push/.test(x)).length;return o});
-  const plan=h.cf[0]&&h.cf[0][1]&&h.cf[0][1][0];
-  const g=plan?await G.p.evaluate(ui=>{const d0=(window.__cfdbg||[]).length;S.nightWhy={wk:ui[0][1][0].wk,pick:'me',flip0:'me',cause:'custom'};COOPW.thin.uiPlay(ui);return new Promise(r=>setTimeout(()=>r({push:(window.__cfdbg||[]).slice(d0).filter(x=>/^push/.test(x)).length}),400))},h.cf):null;
-  await G.p.evaluate(()=>{try{kmReset()}catch(e){}S.nightWhy=null});
-  ok(!h.err&&h.cf.length===1&&plan&&plan.turned==='me'&&plan.wk!=null&&h.hostPush===0&&g&&g.push===1,'H9 her night card-flip: captured once with its plan from her run, played once on HER phone, no scene on the host',{err:h.err,cf:h.cf,hostPush:h.hostPush,g})}
  if(process.env.UISCAN)try{fs.writeFileSync(process.env.UISCAN,JSON.stringify(await H.p.evaluate(()=>window.__uiscan)))}catch(e){console.error('uiscan',e.message)}
+ {const W=await H.p.evaluate(()=>window.__ws||[]);const by={};for(const r of W){const k=r.do+(r.dom?(r.rp?' dom+repaint':' DOM NO REPAINT'):' clean');by[k]=(by[k]||0)+1}
+  console.log('WSCAN '+JSON.stringify(by));const miss=W.filter(r=>r.dom&&!r.rp);for(const r of miss.slice(0,8))console.log('WSCAN miss '+JSON.stringify(r).slice(0,600));
+  ok(W.length>0&&miss.length===0,'H10 every run in her context on the host (tap runs, her life, her picks, E / D work) that wrote the host\'s page is followed by his repaint ('+W.filter(r=>r.dom).length+' of '+W.length+' runs wrote it)',miss.slice(0,3))}
  const pe=[...H.errs,...G.errs].filter(e=>!/ERR_|net::|WebSocket/.test(e));ok(pe.length===0,'H8 no page errors',pe.slice(0,6));
  const n=res.filter(x=>x[0]).length;console.log(`coop-thin-hostnull L${LVL}${SWAP?' swap':''}: ${n}/${res.length}`);await b.close();process.exit(n===res.length?0:1)})().catch(e=>{console.error(e);process.exit(2)});
