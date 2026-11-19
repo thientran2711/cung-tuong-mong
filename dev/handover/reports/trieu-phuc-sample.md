@@ -425,7 +425,7 @@ Every takeover prompt you write MUST copy these three lines verbatim. Workers ro
 ### OPEN ORDER for the successor (ROOT-47 relays owner Lượt 400/401/403; arrived after r17 was done)
 Redraw c06 t6 Quý phi (r16 prompt t6_c06.txt / r16/t6_c06_RAN.txt, refs style 6AbGv6EiJO, face gOm7wObSXO, swatch TdwDfOyVNR, NQ s7IO0AUl8e), plus t7 HQP and t8 Hoàng hậu (r15/*_RAN.txt, refs face TdU0vvvVNR, style eIyOFEidqL, NQ s7IO0AUl8e). Keep each EXACTLY as the approved picture: same prompt verbatim, same refs, same settings (seed 7172). ADD ONE sentence only: the TWO VERTICAL RANK-COLOUR BANDS (the triều phục emblem lines running down the front from top to bottom; each rank keeps its own band colour, e.g. t6 yellow) run down to her ANKLES, and their tassels also hang down to the ankles (Lượt 403: ankle, NOT floor). Do not write it as "front skirt panels". Run the store gate first, then log store_check as before. Then rebuild the sheet as img/_review/trieu-phuc/r17/c06_sheet17_8up.jpg with all of t1–t8 new (t1–t5 = r17 cuts above). Do NOT add this to t1–t5. Report to ROOT-48 if open, else ROOT-47.
 
-## §26 — r18 (successor of F3c, ROOT-47; owner Lượt 400/401/403 → 410 → 411 → 415 → 416 → 417–422) — 19/11, NOT FINISHED
+## §26 — r18 (successor of F3c, ROOT-47; owner Lượt 400/401/403 → 410 → 411 → 415 → 416 → 417–422) — 19/11 (final drawn: see §27)
 The order changed 6 times while drawing; every round below was drawn, then superseded by the next owner message.
 GENS: 21 × gpt-2-6 1024x2304 2k seed 7172 (2835 cr), 0 cuts. All 21 ledger lines (gen_ledger ts 16:30:00Z, "SUPERSEDED") carry store_check + the replaced sentences.
 - a (Lượt 400/403, one added sentence "bands + tassels to the ANKLES"): t6 rgX2d9Pxtc · t7 6Aboqd9iJO · t8 lJtYI09gv9. Prompts r18/a_l400/. store_check PASS. Not looked at (Lượt 410 came in first).
@@ -441,3 +441,41 @@ check_store --nostyle results:
 - t7/t8: FAIL only on "IGNORE the reference image's background completely". The goldenC2 base never had it; this was inherited from tN_c06.txt and was not added by me.
 FIX in build: N8b's no-style t6_c06.txt still calls the royal swatch "image 3", and image 3 is now the Nữ quan picture. build_r18 renames the swatch to image 2 (3 places).
 NEXT: 8 gens of the final prompts (1080 cr) + 8 remove_bg + sheet. This needs a new gen budget from ROOT-47/owner, because this worker stopped at 21 gens after the permission denial.
+
+## §27 — r18 FINAL drawn (helper of Foreman C ROOT-47, 19/11) — 8 gens + 8 cuts, 0 redos
+WHAT: the §26 final prompts r18/t1..t8_c06_RAN.txt (rebuilt with `python3 r18/build_r18.py`: md5 unchanged), each pasted unchanged. Stored Magnific prompts = the files byte for byte (only the file's trailing newline differs), checked from creations_get.
+REFS: image 1 own face TdU0vvvVNR, [t6: image 2 royal swatch TdwDfOyVNR], last Nữ quan s7IO0AUl8e. NO style image. Settings: gpt-2-6 1024x2304 2k seed 7172, folder ba4aecfe.
+STORE: same as §26. t1–t5 have the r17 FAIL list (ROOT-47 ruling a). t6 PASS. t7/t8 FAIL only on the inherited "IGNORE the reference image's background completely". Ledger: 8 lines at ts 16:05:00Z with store_check, store_args and store_replaced.
+GEN → CUT:
+- t1 DoOKXtspcl → YMlueqsWeC
+- t2 lJtWwizgv9 → 4RFXAmM9Aa
+- t3 iG5I2e23uK → YMluekUWeC
+- t4 kseZLiu16B → UPvTN8Dwny
+- t5 cpSFDHg0eP → 3zKtWqhREY
+- t6 p8ykIBnehw → TdwqoUdVNR
+- t7 mEZSuQdhJQ → 9ZHBGHqNYZ
+- t8 6Ab8GcBiJO → 79fMiEWJAL
+CREDITS: 1104 (8×135 + 8×3).
+CDN: img/_review/trieu-phuc/r18/c06_a18_trieu18_t1..t8.png and c06_sheet18_final.jpg (light background, rank names + hốt material on each label). Scratchpad copy: gui/12-trieu-phuc-r18-final.jpg.
+LOOK (full size + head/chest crops):
+- Hair: fully up on all 8. No fresh or silk flowers. t3 and t6 have small metal or pearl flower-shaped ornaments on the crown; these are jewellery, not flowers.
+- Hốt: held upright in both hands at the chest on every rank, and the ladder reads correctly:
+  - t1: plain ivory with a silver edge.
+  - t2: ivory carved with flowers.
+  - t3: carved ivory with a thin gold edge, faint.
+  - t4: pale green jade with a gold cap/edge.
+  - t5: deeper green jade with a gold border and a carved swirl.
+  - t6: white jade with a gold border, a pearl at the top and faint clouds.
+  - t7: white jade in an ornate gold frame with rubies and carved clouds.
+  - t8: jade in a gold frame with a carved phoenix and jewels.
+  - No wood anywhere.
+- Hà bí: the two bands join into one point with a gold openwork bí trụy on all 8. Band colours: t2 deep green, t3 sapphire, t4 rose, t5 violet, t6 vermilion, t7 amber, t8 crimson.
+- Fabric: t2/t3 now read the same as t4/t5 (soft sheer silk, sleeves to the knees).
+- Bộ diêu: t7/t8 have long pearl-and-gold strands on both sides of the head, clearly outside the crown and longer than t1–t6. t8's are the longest.
+- Faults:
+  - (1) The join and the pendant sit at the LOWER SHIN, not exactly at the ankle, on most ranks (t1/t4/t5 the highest). This is the same as round b.
+  - (2) t1 bands are a medium sage-celadon, not strongly deep (prompt #6FA88A). t4 rose is medium.
+  - (3) t7 hair has a faint violet tint.
+  - (4) t3 hốt gold edge is thin and hard to see.
+  - (5) There is a sash tassel/pendant at the waist on t1–t5 (part of the store sash).
+- No redos: with the same seed and prompt a redo returns the same picture, and the prompt text may not be changed (LAW #1).
