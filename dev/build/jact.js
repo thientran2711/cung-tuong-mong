@@ -119,8 +119,11 @@ function kitHapMark(k){const h=adHapAt(k);return h?kitHapHtml("Có chuyện bu�
    Shown above a person only when that person has a notice; same nudge motion as .khap; placed by the stage badge lines (jmark kitBadgeAt "hap", §78.y). Option-card «!», the top-bar
    notice box and the Dư đồ place labels keep the .khap «!». The file is probed once; until it loads (or if it fails) the marker falls back to today's yellow «!» disc (.khead.kfb). */
 window.KIT_HEADMK=window.KIT_HEADMK||{on:"img/kit/ico-talk-y.webp",off:"img/kit/ico-talk-w.webp",px:24};
+/* "say" state (K-HEAD-SAY): max bubble width + font per device tier (stage width: s < bp[0] = phone / Fold portrait, m < bp[1] = tablet portrait, l = iPad landscape and up), design px */
+Object.assign(KIT_HEADMK,{say:1,sayW:{s:150,m:188,l:230,bp:[480,760]},sayFs:{s:12.5,m:13.5,l:15},sayMinF:.62,sayGap:4,sayIn:200,sayOut:150,sayWait:1800});
 let khmOk=null;(function(){try{const i=new Image();i.onload=()=>{khmOk=true};i.onerror=()=>{khmOk=false};i.src=KIT_HEADMK.on}catch(e){khmOk=false}})();
-function kitHeadMarkHtml(title,role,state){const t=String(title||"Có tin báo").replace(/"/g,"&quot;"),off=state==="off",src=off?KIT_HEADMK.off:KIT_HEADMK.on;
+function kitHeadMarkHtml(title,role,state,text){const t=String(title||"Có tin báo").replace(/"/g,"&quot;"),off=state==="off",src=off?KIT_HEADMK.off:KIT_HEADMK.on;
+ if(state==="say"){const x=String(text==null?"":text).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");return `<i class="khead ksay" role="${role||"img"}" aria-label="${t}" title="${t}"><span class="ksay-t">${x}</span><b class="ksay-tail"></b></i>`}
  return `<i class="khead${off?" koff":""}${khmOk===false?" kfb":""}" role="${role||"img"}" aria-label="${t}" title="${t}">${khmOk===false?"":`<img alt="" draggable="false" src="${src}" onerror="this.parentNode.classList.add('kfb');this.remove()">`}</i>`}
 window.kitHeadMarkHtml=kitHeadMarkHtml;
 (function(){const m0=mapHTML;mapHTML=function(){let h=m0.apply(this,arguments);try{if(!S||adSrv())return h;
@@ -182,8 +185,21 @@ PEND.adStroll=()=>{const K=S.emp.known,L=S.emp.likes;const C=qinCard(S);/* 2e4: 
 .khead>img{display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 0 1px #2a1a12) drop-shadow(0 1px 2px #0006)}
 .khead:not(.koff):not(.kfb)>img{filter:drop-shadow(0 0 1px #2a1a12) drop-shadow(0 0 5px #ffe24a) drop-shadow(0 1px 2px #0005)}
 .khead.kfb{margin:0}.khead.kfb::after{content:"!"}
-@media (prefers-reduced-motion:no-preference){.khead{animation:khapNudge 5.2s ease-in-out infinite}}
+@media (prefers-reduced-motion:no-preference){.khead:not(.ksay){animation:khapNudge 5.2s ease-in-out infinite}}
+/* KIT §78.z "say" (K-HEAD-SAY): the SAME head-marker part grown to hold a spoken line — plain white bubble, black text, small tail down to the speaker; placed by kitSay (§78.y lines) on its OWN stage layer .ksay-lay */
+.ksay-lay{position:absolute;inset:0;width:100%;height:100%;overflow:hidden;pointer-events:none;z-index:41;filter:none}
+.khead.ksay{--ksay-w:${((window.KIT_HEADMK||{}).sayW||{}).m||188}px;--ksay-fs:13.5px;--ksay-tx:50%;display:inline-flex;flex-direction:column;width:auto;height:auto;max-width:var(--ksay-w);line-height:1.22;transform-origin:var(--ksay-tx) 100%;filter:drop-shadow(0 0 1px #2a1a12) drop-shadow(0 1px 2px #0006);font-style:normal;pointer-events:none}
+.ksay-lay>.khead.ksay{position:absolute;margin:0}
+.ksay-t{display:block;box-sizing:border-box;background:#fff;color:#14100a;font-family:inherit;font-weight:600;font-size:var(--ksay-fs);text-align:center;padding:.34em .7em .4em;border-radius:.95em;overflow-wrap:anywhere}
+.khead.ksay.k1{max-width:none}.ksay.k1 .ksay-t{white-space:nowrap}
+.ksay-tail{display:block;width:12px;height:8px;margin:-1px 0 0 calc(var(--ksay-tx) - 6px);background:#fff;clip-path:polygon(0 0,100% 0,50% 100%)}
+.khead.ksay.kin{animation:ksayIn var(--ksay-in,200ms) cubic-bezier(.2,.8,.3,1.2) both}
+.khead.ksay.kout{animation:ksayOut var(--ksay-out,150ms) ease-in both}
+@keyframes ksayIn{0%{opacity:0;transform:translateY(6px) scale(.55)}55%{opacity:1;transform:translateY(-3px) scale(1.07) rotate(-3deg)}78%{transform:translateY(0) scale(1) rotate(2deg)}100%{opacity:1;transform:none}}
+@keyframes ksayOut{0%{opacity:1;transform:none}100%{opacity:0;transform:translateY(-3px) scale(.7)}}
+@media (prefers-reduced-motion:reduce){.khead.ksay.kin,.khead.ksay.kout{animation:none}}
 /* .sm uses the same size: the old .mspot.sm .khap rule (13 px) never applied (lost to .mspot .mlab i.khap), so one size everywhere */`;document.head.appendChild(st)})();
 /* kit page samples */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§78.z say",title:"kitHeadMarkHtml(…,\"say\",text): bóng nói trắng chứa một câu thoại (đặt bởi kitSay trên đường huy hiệu §78.y)",html:()=>`<div style="display:flex;gap:18px;align-items:flex-end;padding:12px 8px;background:#7a4e3a;flex-wrap:wrap">${kitHeadMarkHtml("Cung nữ: chủ tử về rồi","img","say","Chủ tử về rồi!")}${kitHeadMarkHtml("Nương nương: gió thu hiu hắt","img","say","Gió thu hiu hắt, nương nương nhớ thêm áo ấm kẻo cảm lạnh.")}</div>`})}catch(e){}
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§78.z",title:"kitHeadMarkHtml: dấu trên đầu người có tin báo (bóng nói vàng) · trạng thái thường (bóng nói trắng)",html:()=>`<div style="display:flex;gap:18px;align-items:center;padding:8px;background:#7a4e3a">${kitHeadMarkHtml("Có tin báo","img","on")}${kitHeadMarkHtml("Thường","img","off")}</div>`})}catch(e){}
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§78",title:"kitPlaceIcon + kitHapMark: tên nơi chốn có biểu tượng công dụng, dấu ! có chuyện",html:()=>Object.keys(KIT_PLACE_IC).map(k=>`<span class="mspot" style="position:static;transform:none;display:inline-flex;margin:4px 8px"><span class="mlab">${kitPlaceIcon(k)}${PLNAME[k]?PLNAME[k][0]:({home:"Cung của ta"}[k]||k)}${k==="vuon"?`<i class="khap" role="img" aria-label="Có chuyện buổi này">!</i>`:""}</span></span>`).join("")})}catch(e){}
