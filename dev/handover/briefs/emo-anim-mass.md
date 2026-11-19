@@ -1,0 +1,22 @@
+# EMO-ANIM MASS — 105 mood seals, break-out animation (Foreman C, tonight)
+Ordered by MAIN ROOT-65 on owner OD "(19/11 ~08:05Z real)" (verbatim in dev/OWNER_DECISIONS.md). Style APPROVED by owner: OD 07:15Z + 07:20Z + 07:25Z + 07:45Z (read all four verbatim).
+PRIORITY #1 CHECK ('emo-anim|emo-fx|emo-act'): OD 07:05Z/07:15Z/07:20Z/07:25Z | main KIT_EMOSEAL (dev/build/jemoseal.js:13; review/seal-lean-3 has the 3-part player lean.parts {out:"-out",back:"-back"}) | CDN: 30 still seals img/kit/emo-*.webp (3 sets × 10), pilot giận set at img/_review/seal-lean-3/anim/ | your own open order 19/11 03:15Z (missing feelings + 17 act faces, never painted) — it is folded into THIS job.
+★ 18 LAWS (dev/rules/START_CORE.md top) + START_ART apply. Magnific only (gpt-2-6 for stills). LOOK at every keyframe and every clip (video_view_frames) before using it.
+
+## THE 105
+3 sets × 35 seals: women `emo-<k>`, young men `emo-m-<k>`, mature men `emo-mo-<k>`. Per set: the 10 existing feelings (an binh buon dau ghen gian lo muu so vui) + the missing feelings + the 17 act faces (list/meanings: dev/handover/research/feelings-18-model.md "ACT LIST + FACES"; order 03:15Z in FOREMAN_C_STATUS). Missing STILL seals: paint them first in the exact style of img/kit/emo-*.webp (round gold rim, coloured disc, chibi storybook face), then animate. Women set first.
+
+## RECIPE PER SEAL (copy the giận pilot exactly)
+Pilot to match: https://www.magnific.com/app/creation/Xm9fz3fBfo (full cycle). Keyframes: still 8aiu4N6IrU, burst DoOmUsIpcl; clips out KLpSVYAkqp, loop aFG5Z3YfSh, back Lw8yCA7swO (all in the owner's Magnific library).
+1. Upload the still seal (img/kit/emo-<set><k>.webp as PNG) as an image reference.
+2. KEYFRAME A — STILL (gpt-2-6, 1:1, 2k, reference = the seal): "Exactly the reference picture … everything kept INSIDE the round medallion … medallion a bit smaller and centred … flat pure chroma green (#00FF00) background outside the medallion, nothing else, no text."
+3. KEYFRAME B — BURST (gpt-2-6, 1:1, 2k, same reference): same person, same style/hair/ornaments/colours; she/he BURSTS OUT of the round medallion toward the viewer: head, shoulders and BOTH ARMS come forward over the gold rim, partly covering the ring; the HANDS act the feeling (giận: one hand grips the rim, a raised fist; khóc: hands wiping tears; vui: waving/clapping; sợ: hands up at the mouth; mưu: finger tapping chin…); the face shows the feeling strongly; small feeling marks (steam, tears, sparkles) only where they fit and small; medallion stays round and centred; flat pure #00FF00 background, no text.
+4. CLIPS — Seedance 2.0 Fast (`bytedance-seedance-fast-2.0`), 4 s, 1:1, 720p, withSoundEffects:false, static camera, prompt says "flat chroma green background stays perfectly flat green":
+   - OUT: start A → end B ("leans forward and bursts out of the round frame… arms come out… acts the feeling").
+   - LOOP: start B → end B ("keeps acting the feeling in a loop… then settles back to exactly the starting pose"; slow enough to read).
+   - BACK: start B → end A ("calms, lowers the hands, lets go of the rim, slides back inside the round medallion, shrinking back, until exactly the end frame").
+   ≈ 135 + 135 + 3 × 940 ≈ 3.1k credits per seal (~330k for 105; account ~1.07M). Check with simulate_cost before each batch.
+5. DOWNLOAD: call creations_register_download for the clip ids FIRST, then download the `url` (host pikaso.cdnpk.net must be allowed in your environment; without register_download the session classifier blocks it).
+6. FRAMES (ffmpeg): `-vf "chromakey=0x00FF00:0.28:0.08,despill=type=green,scale=288:288:flags=lanczos,fps=15" -loop 0 -q:v 50 -compression_level 6` → animated webp with alpha, 15 fps (owner OD 07:45Z: smooth, never 6-frame loops). OUT: trim to the burst (start where the motion starts, ~2.3 s on the pilot); LOOP: full 4 s; BACK: from where the slide-in starts (~1.3 s). Check: no green fringe, hands not cut, BACK's last frame = the still.
+7. NAMES (3-part player in review/seal-lean-3): img/kit/emo-anim/<set><k>-out.webp, <set><k>.webp (loop), <set><k>-back.webp; e.g. emo-anim/gian-out.webp, emo-anim/m-gian.webp. Upload to img/_review/emo-anim-mass/ first; promote to img/kit/emo-anim/ only after MAIN says the in-game giận test is OK'd by the owner (the giận test is running now).
+8. REPORT: every 10 finished seals → contact sheet (one frame of OUT/LOOP/BACK per seal) to img/_review/emo-anim-mass/sheet-NN.jpg + a STATUS line "EMO-ANIM READY <keys>" + send_message to MAIN. Never hold a finished batch to ask first.
