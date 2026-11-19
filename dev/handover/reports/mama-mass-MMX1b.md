@@ -32,3 +32,8 @@ NEXT (successor, in order): c12 c13, then c22 c23 c24 c25 c26, then p01 p02 p03 
 - Time/context saver: prompts of one age differ between persons only in slot words (face line, hair flower, colour name, ANGLE sentence, held item) — diff against the previous person's file of the same age to see them, but always paste the file text exactly.
 - Forehead: zoom the forehead of a51/a65 gens (the c11 dot was only ~6 px wide at full size).
 - Ledger line per gen in dev/art/gen_ledger.jsonl ("who": "mama-mass MMX1b ..." format), row in a table like the one above; sheet every ~8 persons to img/_review/mama-mass/ (dev/site/cdn_sync.py) + repo copy; commit + push + send_message ROOT-49 (session_01PEhRbwA8JoKHSVRhbvu9G3).
+
+## ORDER CHANGE after handover (ROOT-49, 19/11 17:42–17:43Z) — supersedes NEXT above
+- OWNER ORDER: STOP ALL MA MA MASS. Nothing was in flight at the stop (last = c11 a65, cut + pushed). Next undrawn would have been c12 a36.
+- Owner Lượt 499: ma ma stays STOPPED except ONE SAMPLE: add the ART_RULES B15 TWO-COLOUR sentence VERBATIM from dev/art/owner-copy/pr_cl_t2_V2.txt to the ma ma builder (only the two colour names change: main = her ma ma colour, secondary = clearly different, not gold/silver/ivory/cream/white, not the same family; no other change), draw ONE sample c06 a36 (same refs/seed as one-ref c06 a36: face u5WyedyQLD + 79fNlPEJAL, seed 7172), LOOK full size (two colours clearly visible in large areas?), cut, sheet OLD c06 a36 (cut WDgFRDucXe) | NEW side by side, push, send ROOT-49 paths + secondary chosen + prompt diff vs old c06-a36 + credits, then STOP. Old one-colour ma ma pictures are kept.
+- MMX1b did NOT start this sample (context ceiling) → for the successor.
