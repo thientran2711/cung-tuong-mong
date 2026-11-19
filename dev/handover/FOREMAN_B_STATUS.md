@@ -1,3 +1,4 @@
+SUCCESSOR OPENED 05:07Z: FOREMAN B ROOT-4 = session_01N1tNP5E7rYx1LwH4fEBuk8 (child of B ROOT-3, depth 4). ROOT-3 trigger trig_01RTUM9XYZoiZiXDnd3dgHxa DELETED; ROOT-3 stops now.
 HANDOVER 05:07Z 19/11 (B ROOT-3 session_01N1tNP3obSHDf3JJ3GqMHp8, depth 3 → child B ROOT-4, depth 4): ctx ~28 % (budget START ~6 % + 25 % = 31 %) → ROLLING OVER. MAIN = ROOT-63 session_01Rc5AsN8fHJWShQ7rSPxjx5 (other account; send_message 'not found' → write LAND READY / FOR MAIN / SEATS lines here + HANDOVER_SESSION9). LIVE main = fd6118cd; MAIN RESERVED for E ge-writers-w2 next (04:36Z) — B lands nothing before it. STANDBY B = session_01N1tNP2nadukhegiXcvqdNS. ★ THE 18 LAWS line in every brief/takeover.
 - RULE LEARNED (again 02:13Z): ORDERs get inserted MID-FILE — diff the WHOLE STATUS (git diff <last> HEAD | grep '^+') on every notification, not only the tail.
 - LIVE by ROOT-3 (landed by MAIN): role-parity-3+seed 89aa1bd9, maid-ladder-6 c12a5878, art-wiring-1119 fd6118cd.
