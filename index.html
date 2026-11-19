@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"bb59cda9+","t":"2026-11-19T10:47Z","c":"seal-lean-3 r7b: event take sets the mood BEFORE the recorded opening (no re-render inside the take), sampler fix","b":"3cee5c43f583","h":[{"s":"a5e2d8e7+","t":"2026-11-19T09:30Z","c":"opt-scroll-reset r2: an option card picture load (fixed .kaart box) no longer re-picks the frame (first wheel lost); merged origin/main 620…"},{"s":"3b3f7631+","t":"2026-11-19T10:24Z","c":"ev-pic-followups r2: scan SHOT/DSF/TAG env for review shots"},{"s":"5d9cdd5d+","t":"2026-11-19T10:03Z","c":"rebuild"},{"s":"f01df861","t":"2026-11-19T09:09Z","c":"review coop-thin-f3 r1: merge F2 LAND READY 7627f79c; generated files rebuilt"},{"s":"4ed2831d+","t":"2026-11-19T07:18Z","c":"law3-cost-only: index.html / sw.js regenerated"},{"s":"0da546e9","t":"2026-11-19T07:16Z","c":"role-parity-drift r1: build line"},{"s":"eff20119+","t":"2026-11-19T06:33Z","c":"ev-pic-coverage: picture required in M/L/XL frames only, S frames reported apart (owner OD 19/11 ~04:55Z)"},{"s":"a64f06c7+","t":"2026-11-19T06:29Z","c":"seal-lean-2 r2: rebuild site"},{"s":"38af6387","t":"2026-11-19T06:23Z","c":"minister-agents review r1: one core (gift regard + backs in BAL.tdCourt, j55 reads tuyen.pow / imp.deep / clanRel), censor name unique in e…"},{"s":"18a9b64c+","t":"2026-11-19T05:22Z","c":"monthly-allotment r6 (reviewer): stat names from the one NAMES table (drop private STAT_NM); candle note puts the burnt candle in the card'…"}]};
+window.CTM_BI={"s":"1bf7ac5d+","t":"2026-11-19T11:43Z","c":"seal-lean-3 r7b: event take sets the mood BEFORE the recorded opening (no re-render inside the take), sampler fix","b":"c96d6533f915","h":[{"s":"a5e2d8e7+","t":"2026-11-19T09:30Z","c":"opt-scroll-reset r2: an option card picture load (fixed .kaart box) no longer re-picks the frame (first wheel lost); merged origin/main 620…"},{"s":"3b3f7631+","t":"2026-11-19T10:24Z","c":"ev-pic-followups r2: scan SHOT/DSF/TAG env for review shots"},{"s":"5d9cdd5d+","t":"2026-11-19T10:03Z","c":"rebuild"},{"s":"f01df861","t":"2026-11-19T09:09Z","c":"review coop-thin-f3 r1: merge F2 LAND READY 7627f79c; generated files rebuilt"},{"s":"4ed2831d+","t":"2026-11-19T07:18Z","c":"law3-cost-only: index.html / sw.js regenerated"},{"s":"0da546e9","t":"2026-11-19T07:16Z","c":"role-parity-drift r1: build line"},{"s":"eff20119+","t":"2026-11-19T06:33Z","c":"ev-pic-coverage: picture required in M/L/XL frames only, S frames reported apart (owner OD 19/11 ~04:55Z)"},{"s":"a64f06c7+","t":"2026-11-19T06:29Z","c":"seal-lean-2 r2: rebuild site"},{"s":"38af6387","t":"2026-11-19T06:23Z","c":"minister-agents review r1: one core (gift regard + backs in BAL.tdCourt, j55 reads tuyen.pow / imp.deep / clanRel), censor name unique in e…"},{"s":"18a9b64c+","t":"2026-11-19T05:22Z","c":"monthly-allotment r6 (reviewer): stat names from the one NAMES table (drop private STAT_NM); candle note puts the burnt candle in the card'…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -46990,7 +46990,7 @@ function ksayPlace(rec,placed){const st=rec.st,fig=rec.fig,el=rec.el;if(!st.isCo
  rec.rect={left,right:left+w,top:bottom-h,bottom};return true}
 function kitSayAll(){try{window.__kitSayAllRan=1;const by=new Map();for(let i=KSAY.length-1;i>=0;i--){const q=KSAY[i];if(!q.el.isConnected||!q.fig.isConnected){q.el.remove();KSAY.splice(i,1)}}
  for(const q of KSAY){const k=q.st;if(!by.has(k))by.set(k,[]);const pl=by.get(k);const ok=ksayPlace(q,pl);
-  if(ok===true){q.el.style.visibility="";if(!q.shown){q.shown=1;if(!q.still)q.el.classList.add("kin")}pl.push(q.rect)}
+  if(ok===true){try{window.kitEmoSeal&&window.kitEmoSeal.yield(q.rect)}catch(e){}q.el.style.visibility="";if(!q.shown){q.shown=1;if(!q.still)q.el.classList.add("kin")}pl.push(q.rect)}
   else if(ok===false||Date.now()-q.t0>KIT_HEADMK.sayWait)q.close(true)}}catch(e){window.__kitSayWhy="EXCALL "+(e&&e.stack||e)}}
 window.kitSayAll=kitSayAll;
 function kitSay(st,fig,text,opts){try{opts=opts||{};st=st||document.getElementById("stage");if(!st||!fig||!st.isConnected||!fig.isConnected)return null;
@@ -47002,7 +47002,7 @@ function kitSay(st,fig,text,opts){try{opts=opts||{};st=st||document.getElementBy
   if(now||still||!q.shown){el.remove();return}el.classList.remove("kin");el.classList.add("kout");setTimeout(()=>el.remove(),K.sayOut)};
  KSAY.push(q);const ok=ksayPlace(q,KSAY.filter(x=>x!==q&&x.st===st&&x.rect&&x.el.isConnected&&!x.closed).map(x=>x.rect));
  if(ok===false){q.close(true);return null}
- if(ok===true){el.style.visibility="";q.shown=1;if(!still)el.classList.add("kin")}
+ if(ok===true){try{window.kitEmoSeal&&window.kitEmoSeal.yield(q.rect)}catch(e){}el.style.visibility="";q.shown=1;if(!still)el.classList.add("kin")}
  else{const poll=()=>{if(q.closed||q.shown)return;kitSayAll();if(!q.closed&&!q.shown)setTimeout(poll,150)};setTimeout(poll,150)}/* not measured yet (no kitMarkLine): retry until placed or KIT_HEADMK.sayWait */
  if(opts.ms)q.tm=setTimeout(()=>q.close(),opts.ms);return q}catch(e){window.__kitSayWhy="EXC "+(e&&e.stack||e);return null}}
 window.kitSay=kitSay;window.kitSayClear=function(st){for(const q of KSAY.slice())if(!st||q.st===st)q.close(true)};
@@ -75354,7 +75354,7 @@ img.kemo.kfseal.kfseal-old{pointer-events:none;z-index:6}/* the previous still, 
        pointer-events none, removed when the lean ends or the seal leaves the screen. No file = no layer. Nothing is drawn in code (no code-drawn tears / smoke).
    KEYS: the seal map holds khoc + hon too (names "Khóc", "Hờn"); the mood logic (jemo EMO) decides when a person is in one — until then they never appear. ===== */
 window.KIT_EMOSEAL=window.KIT_EMOSEAL||{keys:{vui:{m:"sway",d:2.8},binh:{m:"nod",d:3.0},buon:{m:"droop",d:3.6},gian:{m:"shake",d:2.0},so:{m:"tremble",d:2.4},ghen:{m:"flicker",d:3.0},lo:{m:"bob",d:2.8},dau:{m:"wince",d:2.8},muu:{m:"glint",d:3.0},an:{m:"nod",d:3.0},khoc:{m:"droop",d:3.6,name:"Khóc"},hon:{m:"flicker",d:3.0,name:"Hờn"},chanh:{m:"flicker",d:3.0},phanno:{m:"shake",d:2.0},runso:{m:"tremble",d:2.4},matngu:{m:"droop",d:3.6},tutin:{m:"nod",d:3.0},hanghai:{m:"bob",d:2.8},tinhtu:{m:"sway",d:2.8},chuyentam:{m:"nod",d:3.0},hungkhoi:{m:"glint",d:3.0},tinhnghich:{m:"bob",d:2.8},hothen:{m:"droop",d:3.6},chan:{m:"droop",d:3.6},khochiu:{m:"flicker",d:3.0},choang:{m:"wince",d:2.8}},
- defaultMotion:"nod",defaultDur:3.0,idle:{deg:.6,per:[8,11]},lean:{stage:"img.kfseal",panel:"#modal,.krbox,.kmov,.dlg",deny:"header.hud,.hud",head:{f:.2,panel:.1},margin:.16,marginPx:4,grow:.5,shrink:1.8,holdMin:3,loops:0,open:".ksz3",openKey:".kszfig",openDelay:.7,parts:{out:"-out",back:"-back"},partLead:.12,overlapMs:150,modalIn:'#modal,[role="dialog"],.ksz3,.krbox,.kmov,.dlg',min:4,max:8,gap:1.2,z:9990},animKey:{gian:"gian",phanno:"gian",khoc:"khoc",buon:"khoc"},three:{gian:{out:1.65,back:2.64,c0:.569,c1:.833}},anim:"https://ctm-img.victoria-tntt.workers.dev/img/kit/emo-anim/",fx:"https://ctm-img.victoria-tntt.workers.dev/img/kit/emo-fx/",fxSpec:{khoc:{w:.24,x:.14,y:.52,m:"fall"},gian:{w:.3,x:.7,y:.0,m:"rise"},def:{w:.26,x:.66,y:.5,m:"rise"}}};
+ defaultMotion:"nod",defaultDur:3.0,idle:{deg:.6,per:[8,11]},lean:{stage:"img.kfseal",panel:"#modal,.krbox,.kmov,.dlg",deny:"header.hud,.hud",head:{f:.2,panel:.1},margin:.16,marginPx:4,grow:.5,shrink:1.8,holdMin:3,loops:0,open:".ksz3",openKey:".kszfig",openDelay:.7,parts:{out:"-out",back:"-back"},partLead:.12,overlapMs:150,bubblePad:10,bubbleRetry:900,modalIn:'#modal,[role="dialog"],.ksz3,.krbox,.kmov,.dlg',min:4,max:8,gap:1.2,z:9990},animKey:{gian:"gian",phanno:"gian",khoc:"khoc",buon:"khoc"},three:{gian:{out:1.65,back:2.64,c0:.569,c1:.833}},anim:"https://ctm-img.victoria-tntt.workers.dev/img/kit/emo-anim/",fx:"https://ctm-img.victoria-tntt.workers.dev/img/kit/emo-fx/",fxSpec:{khoc:{w:.24,x:.14,y:.52,m:"fall"},gian:{w:.3,x:.7,y:.0,m:"rise"},def:{w:.26,x:.66,y:.5,m:"rise"}}};
 const KES_HAVE={};/* url -> true | false | "wait" (probe result) */
 function kesProbe(url,cb){const h=KES_HAVE[url];if(h===true||h===false){cb(h);return}
  if(h&&h.w){h.w.push(cb);return}const e={w:[cb]};KES_HAVE[url]=e;const im=new Image();const done=ok=>{KES_HAVE[url]=ok;e.w.forEach(f=>{try{f(ok)}catch(x){}})};im.onload=()=>done(true);im.onerror=()=>done(false);im.src=url}
@@ -75397,6 +75397,11 @@ function kesShow(c,src,el){const n=new Image();n.alt="";n.setAttribute("aria-hid
   if(old)setTimeout(()=>old.remove(),kesOver());/* never hide-then-show: the previous picture stays under the new one for ~3 recorded frames until the new one has surely been painted */
   if(el)setTimeout(()=>{if(el.__big===c)el.classList.add("kemo-hide")},kesOver())/* the real still is hidden only AFTER the first big picture is painted (still -> out never blinks) */};n.decode?n.decode().then(go,go):go()}
 function kesOver(){const v=KIT_EMOSEAL.lean.overlapMs;return v>0?v:150}
+/* SPEECH BUBBLES (K-HEAD-SAY, ROOT-69 / KIT_REQUESTS «K-HEAD-SAY x EMO-SEAL LEAN»): the big seal never covers a say bubble. (1) no lean starts while a say bubble is open on the speaker's figure or overlaps the planned big box (it waits, retries every lean.bubbleRetry ms);
+   (2) a bubble that is about to show while a lean overlaps it ENDS that lean at once (kitEmoSeal.yield, called by jmark kitSay / kitSayAll before the bubble is made visible); the bubble has priority, the seal leans again later. */
+function kesBubbleRects(){try{return[...document.querySelectorAll(".ksay-lay>.khead.ksay:not(.kout)")].filter(b=>b.style.visibility!=="hidden"&&b.getClientRects().length).map(b=>b.getBoundingClientRect())}catch(e){return[]}}
+function kesHit(a,b,pad){return a.left-pad<b.right&&a.right+pad>b.left&&a.top-pad<b.bottom&&a.bottom+pad>b.top}
+function kesYield(rect){const el=kesCur;if(!el||!el.__big||!el.classList.contains("kemo-lean"))return false;const cr=el.__big.getBoundingClientRect();if(rect&&!kesHit(cr,rect,KIT_EMOSEAL.lean.bubblePad))return false;kesLeanEnd(el);kesSchedule(el);return true}
 function kesPartsUrl(el,k){const L=KIT_EMOSEAL.lean,ak=KIT_EMOSEAL.animKey[k]||k,T=KIT_EMOSEAL.three[ak];if(!T)return null;const A=KIT_EMOSEAL.anim+kesSet(el,k)+ak,P=L.parts;return{T,ak,out:A+P.out+".webp",loop:A+".webp",back:A+P.back+".webp"}}
 function kesPartsState(U){if(!U)return"no";const h=[U.out,U.loop,U.back].map(u=>KES_HAVE[u]);if(h.some(x=>x===false))return"no";if(h.every(x=>x===true))return"yes";return"wait"}
 function kesLean(el,force){el.__ln=0;if(!el.isConnected||!el.classList.contains("kemo-live"))return;
@@ -75414,6 +75419,8 @@ function kesLean(el,force){el.__ln=0;if(!el.isConnected||!el.classList.contains(
  const sm=Math.max(r.width,r.height),S=P3?Math.max(1,hp/P3.c1/sm):Math.max(1,hp/sm);/* big size = THE HEAD of that person on the stage (owner 19/11 ~06:55Z), never bigger; a 3-part set: its gold circle in the loop (c1 of the clip box) = the head frame, the clip box (hands may leave the circle) is never clipped */
  const bw=r.width*S,bh=r.height*S,/* big box never past the head, nor the screen */m=Math.round(Math.max(bw,bh)*L.margin)+L.marginPx,/* margin = room for the feeling motion (shake / sway amplitude) */ cx=r.left+r.width/2,cy=r.top+r.height/2,s0=P3?Math.min(1,sm/(P3.c0*bw)):1/S;/* start / end scale: the clip's own small circle (c0) sits exactly on the still seal */
  const bl=Math.max(m,Math.min(cx-bw/2,innerWidth-bw-m)),bt=Math.max(m,Math.min(cy-bh/2,innerHeight-bh-m));/* clamped inside the screen */
+ {const bb=kesBubbleRects(),pad=L.bubblePad,box={left:bl-m,top:bt-m,right:bl+bw+m,bottom:bt+bh+m};let own=false;try{own=typeof KSAY!=="undefined"&&el.__fig&&KSAY.some(q=>q.fig===el.__fig&&!q.closed)}catch(e){}
+  if(own||bb.some(q=>kesHit(box,q,pad))){kesCur=null;{const rt=kesOpenRoot(el);if(rt)rt.__kl=0}el.__ln=setTimeout(()=>kesLean(el,force),L.bubbleRetry);return}}/* a say bubble is open there: wait */
  const c=document.createElement("span");c.className="kemo-big kemo-m-"+(spec?spec.m:KIT_EMOSEAL.defaultMotion)+(P3?" kemo-played kemo-3p":"");c.setAttribute("aria-hidden","true");
  c.style.cssText=`position:fixed;z-index:${L.z};left:${bl.toFixed(1)}px;top:${bt.toFixed(1)}px;width:${bw.toFixed(1)}px;height:${bh.toFixed(1)}px;pointer-events:none;display:block;`+
   `--kb-dx:${(cx-(bl+bw/2)).toFixed(1)}px;--kb-dy:${(cy-(bt+bh/2)).toFixed(1)}px;--kb-s:${s0.toFixed(4)};--kb-ss:${shr}s;--kb-sd:${(grow+hold).toFixed(2)}s;--kb-d:${d}s;--kb-n:${n};--kb-gs:${grow}s`;
@@ -75427,7 +75434,7 @@ function kesLean(el,force){el.__ln=0;if(!el.isConnected||!el.classList.contains(
   f.style.cssText=`position:fixed;z-index:${L.z+1};left:${fl.toFixed(1)}px;top:${ft.toFixed(1)}px;width:${fw.toFixed(1)}px;height:auto;--kb-s:${(1/S).toFixed(4)};--kb-dx:${(cx-(fl+fw/2)).toFixed(1)}px;--kb-dy:${(cy-(ft+fw/2)).toFixed(1)}px;`+c.style.cssText.split(";").filter(x=>/^\s*--kb-(ss|sd|gs)/.test(x)).join(";");
   document.body.appendChild(f);el.__fx=f});/* effect sprite grows / holds / shrinks with the seal (same envelope), centred on it */
  const ox=r.left,oy=r.top;/* the small seal left the screen / moved (scroll, re-render): end the lean at once */
- el.__lw=setInterval(()=>{if(!el.isConnected||!el.classList.contains("kemo-live")){kesLeanEnd(el);return}if(kesBlocked(el)){kesLeanEnd(el);kesSchedule(el);return}const q=el.getBoundingClientRect();if(Math.abs(q.left-ox)>10||Math.abs(q.top-oy)>10||q.bottom<=0||q.top>=innerHeight){kesLeanEnd(el);kesSchedule(el)}},250);
+ el.__lw=setInterval(()=>{if(!el.isConnected||!el.classList.contains("kemo-live")){kesLeanEnd(el);return}if(kesBlocked(el)){kesLeanEnd(el);kesSchedule(el);return}{const cr=el.__big&&el.__big.getBoundingClientRect();if(cr&&kesBubbleRects().some(q=>kesHit(cr,q,L.bubblePad))){kesLeanEnd(el);kesSchedule(el);return}}const q=el.getBoundingClientRect();if(Math.abs(q.left-ox)>10||Math.abs(q.top-oy)>10||q.bottom<=0||q.top>=innerHeight){kesLeanEnd(el);kesSchedule(el)}},250);
  el.__lt=setTimeout(()=>{kesLeanEnd(el);kesSchedule(el)},P3?(tot-L.partLead)*1000:tot*1000+80)}
 function kesLive(el,on){if(!el.isConnected)return;kesReal(el);
  if(!el.dataset.kemos){el.dataset.kemos=el.getAttribute("src")||""}
@@ -75448,7 +75455,7 @@ addEventListener("resize",()=>document.querySelectorAll("img.kemo.kemo-lean").fo
 kesScan();
 /* r2 reviewer fix: Cảnh động / Gọn switched in Settings applies to the seals already on screen at once (saveOpt does not re-render) */
 (function(){if(typeof saveOpt!=="function")return;const o=saveOpt;saveOpt=function(){const r=o.apply(this,arguments);try{document.querySelectorAll("img.kemo").forEach(el=>{if(!el.__kes)return;const b=el.getBoundingClientRect();kesLive(el,b.width>2&&b.bottom>0&&b.top<innerHeight&&b.right>0&&b.left<innerWidth)})}catch(e){}return r}})();
-window.kitEmoSeal={scan:kesScan,live:kesLive,probe:kesProbe,lean:kesLean,head:kesHead};/* no pop: owner 17/11 ~18:10Z (Sims model), the seal has ONE source (jemo emoSealKey) */
+window.kitEmoSeal={yield:kesYield,scan:kesScan,live:kesLive,probe:kesProbe,lean:kesLean,head:kesHead};/* no pop: owner 17/11 ~18:10Z (Sims model), the seal has ONE source (jemo emoSealKey) */
 (function(){const st=document.createElement("style");st.id="kemoseal-css";st.textContent=`
 img.kemo{transform-origin:50% 60%;will-change:auto}
 img.kemofx{pointer-events:none;object-fit:contain;max-width:none;max-height:none;margin:0;border-radius:0}
@@ -79321,7 +79328,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="3cee5c43f583";window.CTM_BUILD=BUILD;
+const BUILD="c96d6533f915";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
