@@ -76,12 +76,20 @@ const OI_TXT={
   d:["Một bọc áo, một lời mẹ dặn: “Vào cung thì cúi đầu mà sống, đừng tranh với ai.”",
    "Xe của Nội vụ phủ chở đầy những cô gái như ngươi. Ma ma đứng đợi ở cửa sau cung, tay cầm sổ."],
   h:"Thái giám Nội vụ phủ còn chưa về tới huyện. Ngươi ở làng thêm ít lâu, học thêu, học phép tắc, chờ ngày tuyển."}};
+/* Ba Tư for new bd lives (owner OD 19/11; THE one per-life switch bdTxt, jrd_bd.js): an old-premise life keeps the Bắc Địch lines above */
+if(typeof bdTxtProp==="function"){const B=OI_TXT.bd,N={a:["Ba Tư ở xa tận phía tây, cuối con đường tơ lụa; lửa thánh cháy trong đền ngày đêm không tắt. Ngươi chơi mã cầu trước khi biết đi hài thêu.",
+   "Quân Đại Thực đã lấy ba phần đất nước. Phụ vương gả ngươi sang Đại Hy, mong một nước lớn làm chỗ dựa."],
+  d:["Ngươi dâng gỗ thơm lên lửa thánh lần cuối. Các nữ quan Đại Hy đứng chờ, tay cầm bộ áo gấm và đôi hài thêu.",
+   "Đoàn lạc đà qua Kim Quang môn. Từ đây ngươi ngồi kiệu, và cả triều Đại Hy đang chờ xem công chúa Ba Tư."]};
+ for(const k in N)N[k].forEach((t,i)=>bdTxtProp(B[k],i,B[k][i],t));
+ bdTxtProp(B,"h",B.h,"Hòa ước còn đang bàn. Phụ vương cho ngươi ở lại cố quốc thêm ít năm, học tiếng Đại Hy bên ánh lửa thánh.")}
 /* picture captions (the frame's title / alt) — the ART LIST in the report describes each scene in full */
 const OI_CAP={tt:["Phủ Tể tướng","Triều cục","Chiếu chỉ","Rời phủ","Ở nhà chờ tuyển"],dtq:["Biên ải","Lòng trung","Thư cha","Lên kiệu","Khuê các"],
  muoi:["Bến muối","Con nhà buôn","Rương bạc","Tường đỏ","Ở nhà chờ tuyển"],cn:["Trà Càn Thanh","Đêm mưa","Khẩu dụ","Hành lang",""],
  nc:["Nhĩ Hải","Hòa ước","Sứ đoàn","Kinh thành","Cố quốc"],bd:["Thảo nguyên","Ngựa hồi môn","Tết tóc","Ngoài cửa thành","Lều nỉ"],
  td:["Phủ bị niêm phong","Bản sớ","Đổi tên","Cửa cung","Thị lang phủ","Bản sớ ngầm"],ch:["Từ Ninh cung","Người nhà Thái hậu","Trâm ngọc","Ngọ môn","Chờ tuyển"],
  thd:["Mái tranh","Sổ tuyển","Sách chép tay","Thuyền về kinh","Lớp chữ"],cnv:["Lệnh tuyển","Đêm ở làng","Lời mẹ dặn","Cửa sau cung","Làng quê"]};
+if(typeof bdTxtProp==="function")["Lửa thánh","Lời cầu viện","Dâng lửa","Kim Quang môn","Cố quốc"].forEach((t,i)=>bdTxtProp(OI_CAP.bd,i,OI_CAP.bd[i],t));/* Ba Tư (bdTxt) */
 function oiEmp(){try{return empName()}catch(e){return""}}
 function oiName(){return (S&&S.name)||""}
 function oiT(x){return typeof x==="function"?x():String(x||"")}
@@ -120,7 +128,7 @@ function oiBuild(home){const L=oiPanels(home);return L.map((P,i)=>{const m=oiPan
    oiNameSel();showModal();render()}}}catch(e){console.error("oiIntro",e)}return r}})();
 
 /* ---------- 3. the selection named for what it is (direct road card of jkc2 PEND.kc2Sel; jentry exam frame heading) ---------- */
-const OI_SELT={nc:()=>`<p>Điện Thái Hòa. Hoàng thượng ngồi trên, Thái hậu ngồi bên, bá quan hai hàng; sứ thần ${S.origin.k==="bd"?"Bắc Địch":"Nam Chiếu"} đứng chờ ngoài thềm. Công chúa dâng lễ ra mắt. Hòa ước cho ngươi được phong tới <b>${RANKS[S.origin.r||0].n}</b>; được hay không là ở lễ hôm nay.</p>`,
+const OI_SELT={nc:()=>`<p>Điện Thái Hòa. Hoàng thượng ngồi trên, Thái hậu ngồi bên, bá quan hai hàng; sứ thần ${S.origin.k==="bd"?bdTxt("Bắc Địch","Ba Tư"):"Nam Chiếu"} đứng chờ ngoài thềm. Công chúa dâng lễ ra mắt. Hòa ước cho ngươi được phong tới <b>${RANKS[S.origin.r||0].n}</b>; được hay không là ở lễ hôm nay.</p>`,
  cn:()=>`<p>Từ Ninh cung. Thái hậu cho gọi cung nữ được Hoàng thượng giữ lại${oiQueen()?"; Hoàng hậu ngồi bên":""}. Hoàng thượng muốn ban cho ngươi danh phận tới <b>${RANKS[S.origin.r||0].n}</b>; Thái hậu gật đầu hay không là ở buổi hôm nay.</p>`};
 OI_SELT.bd=OI_SELT.nc;
 function oiNameSel(){const k=oiK();const X=oiSel(false);const m=Q.find(x=>x.pid==="kc2Sel");if(!m)return;if(X.head&&k!=="cnv")m.t=X.head;if(OI_SELT[k])m.h=OI_SELT[k]()}

@@ -7,7 +7,7 @@
 usage: python3 dev/measure/bd-scan.py [files…]"""
 import re,sys
 FILES=sys.argv[1:] or ['dev/build/jrd_bd.js','dev/build/jrd_bd2.js']
-NAME={'lie':['Hô Diên Liệt'],'olac':['Ô Lặc'],'thatmoc':['Thát Mộc'],'bado':['Ba Đồ'],'tuyetcau':['Tuyết Câu'],'asnc':['A Sử Na Cát'],'phong':['Thác Bạt Phong','Phong'],'kd':[r'\{mh\}|(?<!là )Khả đôn(?! của kim trướng)']}
+NAME={'lie':['Hô Diên Liệt','Mi Hồ Lan'],'olac':['Ô Lặc','Nê Niết Sư'],'thatmoc':['Thát Mộc','Đạt Lỗ'],'bado':['Ba Đồ','Bạc Đồ'],'tuyetcau':['Tuyết Câu','Ngọc Câu'],'asnc':['A Sử Na Cát','A La Hám'],'phong':['Thác Bạt Phong','Mật Hồ Đạt','Phong'],'kd':[r'\{mh\}|(?<!là )Khả đôn(?! của kim trướng)|Vương hậu']}
 GUARD=re.compile(r'bdP\(|bdAlive\(|BDKD\(|bdWhere\(|badove|BDGATE\(|bdO\("nguatay"|RDQ\.bd|bd6b:|bdPh\(|RD_FL\("bd_\w+\.(?:badove|chua)')
 GIVE=re.compile(r'\{n:"((?:[^"]*?)(?:Gửi|Tặng|Trao|Nhường|Mua|Bỏ bạc mua|Bán|Đốt|Cho lấy|Nhận ngựa|Nhận cung|Nhận|Giữ|Đưa|Chôn|Chuộc|Cầm|Dâng|Trả|Để kho bán|Giấu|Khâu)[^"]*)"')
 USED=re.compile(r'bạc|lương|áo bông|quà|thuốc|thư|lời|người|tin|binh|quân|sứ|dũng sĩ|tay đua|tay cung')
