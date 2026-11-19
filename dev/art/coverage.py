@@ -63,7 +63,7 @@ def consort_cmd(i, t, a):
     if re.fullmatch(r"tr[1-8]", t): return [B, i, "--trieu", t[2], "v0"] + ag
     return None
 
-ITEMT = {**{"t%d" % n: "t%d" % n for n in range(1, 9)}, "th": "thaihau", "nude": "nude", "kc": "kc", "ngheo": "ngheo"}
+ITEMT = {**{"t%d" % n: "t%d" % n for n in range(1, 9)}, **{"tm%d" % n: "tm%d" % n for n in range(5)}, "th": "thaihau", "nude": "nude", "kc": "kc", "ngheo": "ngheo", "cold": "lanh"}
 A0_OK = {"t1", "t4", "t5", "t6", "t7", "t8", "th", "nude", "kc", "ngheo"}  # FIGURE_GATE A0 APPROVED FORMS rows (t5 = old Phi; redesign rejected)
 def a0_consort(t, a):
     if t == "th": return a in ("a36", "a51", "a65")
@@ -113,7 +113,7 @@ def run(argv):
     except Exception as e:
         return (False, repr(e))
 
-ALLITEMS = sorted({v for row in IA.KIND.values() for v in row.values() if v}, key=len, reverse=True)
+ALLITEMS = sorted({IA.fill(k, t) for t in IA.TIERS for a in IA.TIER_AGES[t] for k in IA.cell_kinds(a, t)}, key=len, reverse=True)
 def held(o):
     m = re.search(r" Pose: (.*?)(?: Every hairpin| Luminous|$)", o)
     seg = m.group(1) if m else o
