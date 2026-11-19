@@ -16,9 +16,9 @@ build.py refs emitter (--log/--refs): NO · emperor-B refs emitter: NO
 | t3 | ❌ BG POSE=(26) REFS* | ❌ BG POSE= REFS* | ❌ BG POSE=(29) REFS* | ❌ BG POSE=(29) REFS* | ❌ BG POSE= REFS* |
 | t4 | ❌ BG POSE=(26) REFS | ❌ BG POSE= REFS | ❌ BG POSE=(29) REFS | ❌ BG POSE=(29) REFS | ❌ BG POSE= REFS |
 | t5 | ❌ BG POSE=(26) REFS | ❌ BG POSE= REFS | ❌ BG POSE=(29) REFS | ❌ BG POSE=(29) REFS | ❌ BG POSE=(31) REFS |
-| t6 | ❌ BG POSE=(26) REFS ROYAL3 | ❌ BG POSE= REFS ROYAL3 | ❌ BG POSE=(29) REFS ROYAL3 | ❌ BG POSE=(29) REFS ROYAL3 | ❌ BG POSE= REFS ROYAL3 |
-| t7 | ❌ BG POSE=(29) REFS ROYAL3 | ❌ BG POSE= REFS ROYAL3 | ❌ BG POSE=(29) REFS ROYAL3 | ❌ BG POSE= REFS ROYAL3 | ❌ BG POSE= REFS ROYAL3 |
-| t8 | ❌ BG POSE=(29) REFS ROYAL3 | ❌ BG POSE= REFS ROYAL3 | ❌ BG POSE=(29) REFS ROYAL3 | ❌ BG POSE= REFS ROYAL3 | ❌ BG POSE= REFS ROYAL3 |
+| t6 | ❌ BG POSE=(26) REFS | ❌ BG POSE= REFS | ❌ BG POSE=(29) REFS | ❌ BG POSE=(29) REFS | ❌ BG POSE= REFS |
+| t7 | ❌ BG POSE=(29) REFS | ❌ BG POSE= REFS | ❌ BG POSE=(29) REFS | ❌ BG POSE= REFS | ❌ BG POSE= REFS |
+| t8 | ❌ BG POSE=(29) REFS | ❌ BG POSE= REFS | ❌ BG POSE=(29) REFS | ❌ BG POSE= REFS | ❌ BG POSE= REFS |
 | Thái hậu | — | — | ❌ BG POSE=(29) REFS | ❌ BG POSE=(29) REFS | ❌ BG POSE= REFS |
 | Nữ đế | ❌ BG POSE= REFS | ❌ BG POSE=(26) REFS | ❌ BG POSE= REFS | ❌ BG POSE= REFS | ❌ BG POSE= REFS |
 | khuê các | ❌ BG POSE=(26) REFS | ❌ BG POSE=(26) REFS | — | — | — |
@@ -152,8 +152,7 @@ Commands (example, a26): `dev/art/emperor-B/build.py live1 --age a26`
 
 ## RED LIST (grouped)
 
-- **Consorts c01–c32 (32)** — BG POSE= REFS: t1/a18, t1/a26, t1/a36, t1/a51, t1/a65, t2/a18, t2/a26, t2/a36, t2/a51, t2/a65, t3/a18, t3/a26, t3/a36, t3/a51 … (+23)
-- **Consorts c01–c32 (32)** — BG POSE= REFS ROYAL3: t6/a18, t6/a26, t6/a36, t6/a51, t6/a65, t7/a18, t7/a26, t7/a36, t7/a51, t7/a65, t8/a18, t8/a26, t8/a36, t8/a51 … (+1)
+- **Consorts c01–c32 (32)** — BG POSE= REFS: t1/a18, t1/a26, t1/a36, t1/a51, t1/a65, t2/a18, t2/a26, t2/a36, t2/a51, t2/a65, t3/a18, t3/a26, t3/a36, t3/a51 … (+38)
 - **Consorts c01–c32 (32)** — NOCMD (no builder mode): tm0/a18, tm0/a26, tm0/a36, tm1/a18, tm1/a26, tm1/a36, tm1/a51, tm1/a65, tm2/a18, tm2/a26, tm2/a36, tm2/a51, tm2/a65, tm3/a18 … (+54)
 - **Consorts c01–c32 (32)** — POSE POSE= REFS: tr1/a18, tr1/a26, tr1/a36, tr1/a51, tr1/a65, tr2/a18, tr2/a26, tr2/a36, tr2/a51, tr2/a65, tr3/a18, tr3/a26, tr3/a36, tr3/a51 … (+26)
 - **Maid faces m01–m52 (52) in every woman tier** — REFS RUN: t1/a18, t1/a26, t1/a36, t1/a51, t1/a65, t2/a18, t2/a26, t2/a36, t2/a51, t2/a65, t3/a18, t3/a26, t3/a36, t3/a51 … (+78)

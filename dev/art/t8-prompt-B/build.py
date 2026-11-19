@@ -1025,10 +1025,12 @@ if __name__=="__main__":
     if NUDE2: _o=nude2(_o,a[0],NUDE2)
     # owner 18/11 ~22:55Z (FIGURE_GATE A0 REFERENCES): ROYAL cases (--trieu N>=6, --state nude, --state bd6) = 3 images, image 3 = royal-yellow swatch. One flag-independent sentence; every other output byte-identical.
     # N2 r10b (ROOT-33): bd6 keeps swatch as image 3 but its robe is teal with no royal-yellow part (FIGURE_GATE C8 has no yellow rule for Bắc Địch Quý phi) -> no image-3 sentence for bd6
-    if (TRIEUN is not None and TRIEUN>=6) or STATE=="nude":
+    # W107 (ROOT-36, FIGURE_GATE A0 REFERENCES: ROYAL ranks Quý phi t6 and up = 3 images, image 3 = royal-yellow swatch): t6 (--low 6), t7 (--t7), t8 (default) get the SAME image-3 sentence, copied verbatim (elder variant at a51/a65 as for Nữ đế); --bdq (Bắc Địch, no royal yellow) excluded
+    _ROYRANK=(not STATE and TRIEUN is None and not BDQ and (LOWN==6 if "--low" in sys.argv else True))
+    if (TRIEUN is not None and TRIEUN>=6) or STATE=="nude" or _ROYRANK:
         _r=" Image 3 is only a colour reference for the royal yellow, never copy anything but its colour; the royal yellow in the robe is exactly that colour."
         assert _o.count(END)==1 and _o.endswith(END),"END not at end"
-        if STATE=="nude" and AGE in ("a51","a65"): _r=" Image 3 is only a colour reference for the royal yellow, never copy anything but its colour; her yellow is that royal yellow in its deeper, subdued antique-gold elder shade as the colour rule says."   # N4 1c
+        if (STATE=="nude" or _ROYRANK) and AGE in ("a51","a65"): _r=" Image 3 is only a colour reference for the royal yellow, never copy anything but its colour; her yellow is that royal yellow in its deeper, subdued antique-gold elder shade as the colour rule says."   # N4 1c
         _o=_o[:-len(END)]+_r+END
     # N4b (ROOT-35 / owner via brief UPDATE: "Keep the a65 yellow as soft as the a51 (no ochre/mustard)"): Nữ đế a65 only; every other output byte-identical
     if STATE=="nude" and AGE=="a65":
