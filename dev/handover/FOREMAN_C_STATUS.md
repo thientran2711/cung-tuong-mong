@@ -1379,3 +1379,4 @@ ROOT-48 Lượt 495 (owner, in ROOT-48 chat): pose table 30 = 3 groups × 10 (li
 ROOT-48 Lượt 498 (owner): STOP ALL MASS drawing (Nữ đế NDX1 told; ROOT-49 stops ma ma successors + any mass).
 ROOT-49 Lượt 499 (owner via ROOT-48 Lượt 498): STOP ALL MASS — MMX1b, MMX2b, NDX1 stop after the gen in flight + report; PR6 (rooms v5), TP3 (r22), TN2 (m13/m20) HOLD before any new gen until owner says. Pose groups table dev/art/POSE_GROUPS.md sent Lượt 498, waiting OK.
 ROOT-49 Lượt 500 (owner Lượt 499 via ROOT-48): Nữ đế mass RESUMES (NDX1); ma ma STOPPED until ONE two-colour sample (B15 extended to all outfits incl. ma ma) — MMX1b draws c06 a36 sample, STOP.
+ROOT-48 Lượt 499–500 (owner): Nữ đế mass CONTINUES; ma ma stopped → TWO-COLOUR sentence + ONE sample first. Lượt 500: approved-sentence registry + check_approved.py machine gate + audit + owner approves registry once + mass only on PASS → ROOT-49 opens AP1.
