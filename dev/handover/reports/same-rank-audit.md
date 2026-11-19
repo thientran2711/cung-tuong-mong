@@ -128,3 +128,113 @@ What changed:
 Gates on the BW6 commit: `build_all.py --check --age` a18/a26/a36/a51/a65 → 0 FAIL ×5 (incl. E6 + E12). `check_store.py --self` 0 problems; `item_age.check_age5()` []. Extra: all 16 Sắc sảo + Tinh nghịch people (B8 bypassed) × t1–t8 × 5 ages = 640 prompts through check_store → 0 FAIL; their Thái hậu prompts a36/a51/a65 → 0 FAIL (Thái hậu a18/a26 do not exist in the 18/11 elder file).
 Groups bigger than 8 (old 9-person groups Tươi tắn, Dịu dàng, Trong trẻo, Đoan trang, or a bigger group from the owner's regrouping page, Lượt 673–680): angles still fully different up to 14 people and ≤ 2 per class up to 10; items and grace repeat only the pigeonhole minimum ceil(n/8) (member i takes slot i % 8) — the gate uses these caps.
 E12: NEW gens only. Nothing redrawn, no gens made.
+
+## E12 on the OWNER'S GROUPS (Lượt 686, OWNER_GROUPS_L686.json, m + c ids) — BEFORE / AFTER (BW6, ROOT-54 21:13Z)
+
+The builders now read the groups from `dev/art/face-common/OWNER_GROUPS_L686.json` (store `look_groups()`), m AND c ids: Tươi tắn 30, Dịu dàng 17, Đoan trang 17, Sắc sảo 6, Tinh nghịch 14.
+Groups > 8 cannot be fully different (8 items per rank per age, 8 grace lines, 14 angles), so the caps are the pigeonhole minimum (`build_all.e12_caps`):
+
+| group (n) | item / grace cap = ceil(n/8) | angle sentence cap = ceil(n/14) | angle class cap |
+|---|---|---|---|
+| Tươi tắn (30) | 4 | 3 | 9 (≈ 4/14 of 30 for the 4 frontal angles) |
+| Dịu dàng (17), Đoan trang (17) | 3 | 2 | 5 |
+| Tinh nghịch (14) | 2 | 1 | 4 |
+| Sắc sảo (6) | 1 | 1 | 2 |
+
+Method change for angles: n ≤ 14 = the seeded backtracking (class ≤ 2 up to 10 people); n > 14 = a fixed cyclic order of the 14 angles (seeded search for the most class-spread order), person i at rank t = CYCLE[(i + t + shift) % 14] with members in a seeded order per group+age (full backtracking stalled on 20 and 30 people). Tested for every group size 1–40 × 5 ages: all caps met, every person 8 different angles.
+
+### BEFORE (owner groups read with the old code = old LOOK_GROUPS lists)
+#### Tươi tắn (30)
+
+| field | distinct per cell (avg / min) | largest same-value group | cells (of 40) with any repeat | cells over the pigeonhole cap (item/grace ceil(n/8), angle ceil(n/14), class e12_caps) | worst cell |
+|---|---|---|---|---|---|
+| held item (exact) | 8.0 / 8 | 10 | 40 | 40 | t6 a18: c01+c15+c21+c31+m01+m03+m05+m06+m49+m51 |
+| angle sentence (exact) | 12.9 / 11 | 6 | 40 | 39 | t6 a26: c01+c21+m05+m07+m21+m38 |
+| angle, visual class (5) | 5.0 / 5 | 11 | 40 | 40 | t4 a18: c01+c07+c13+c19+c31+m01+m05+m11+m13+m38+m51 |
+| grace line | 8.0 / 7 | 8 | 40 | 40 | t5 a36: c01+c21+c31+m06+m33+m37+m38+m47 |
+
+#### Dịu dàng (17)
+
+| field | distinct per cell (avg / min) | largest same-value group | cells (of 40) with any repeat | cells over the pigeonhole cap (item/grace ceil(n/8), angle ceil(n/14), class e12_caps) | worst cell |
+|---|---|---|---|---|---|
+| held item (exact) | 7.2 / 7 | 5 | 40 | 37 | t5 a51: c02+c08+c32+m02+m50 |
+| angle sentence (exact) | 11.2 / 9 | 5 | 40 | 32 | t2 a18: c02+c20+m08+m18+m23 |
+| angle, visual class (5) | 5.0 / 5 | 8 | 40 | 36 | t8 a18: c02+c08+c20+m18+m19+m23+m32+m44 |
+| grace line | 7.6 / 7 | 5 | 40 | 25 | t1 a26: c08+c26+m02+m19+m50 |
+
+#### Đoan trang (17)
+
+| field | distinct per cell (avg / min) | largest same-value group | cells (of 40) with any repeat | cells over the pigeonhole cap (item/grace ceil(n/8), angle ceil(n/14), class e12_caps) | worst cell |
+|---|---|---|---|---|---|
+| held item (exact) | 8.0 / 8 | 4 | 40 | 5 | t4 a51: c04+c10+m28+m29 |
+| angle sentence (exact) | 11.3 / 10 | 4 | 40 | 29 | t1 a18: c04+c16+c28+m16 |
+| angle, visual class (5) | 5.0 / 5 | 7 | 40 | 33 | t2 a65: c04+c10+c16+m22+m29+m36+m52 |
+| grace line | 8.0 / 8 | 6 | 40 | 28 | t2 a18: c04+c10+c28+m04+m43+m52 |
+
+#### Sắc sảo (6)
+
+| field | distinct per cell (avg / min) | largest same-value group | cells (of 40) with any repeat | cells over the pigeonhole cap (item/grace ceil(n/8), angle ceil(n/14), class e12_caps) | worst cell |
+|---|---|---|---|---|---|
+| held item (exact) | 4.9 / 3 | 3 | 34 | 34 | t7 a26: c11+c17+m09 |
+| angle sentence (exact) | 5.3 / 4 | 2 | 23 | 23 | t1 a26: c11+m09 |
+| angle, visual class (5) | 3.8 / 3 | 3 | 40 | 18 | t1 a18: c05+c23+c29 |
+| grace line | 4.3 / 3 | 4 | 35 | 35 | t1 a26: c05+c17+c23+c29 |
+
+#### Tinh nghịch (14)
+
+| field | distinct per cell (avg / min) | largest same-value group | cells (of 40) with any repeat | cells over the pigeonhole cap (item/grace ceil(n/8), angle ceil(n/14), class e12_caps) | worst cell |
+|---|---|---|---|---|---|
+| held item (exact) | 6.8 / 6 | 6 | 40 | 40 | t4 a51: c09+c24+c25+c30+m25+m30 |
+| angle sentence (exact) | 9.2 / 7 | 4 | 40 | 40 | t7 a26: c12+c18+m25+m42 |
+| angle, visual class (5) | 4.8 / 4 | 7 | 40 | 17 | t1 a51: c06+c09+c12+c24+m24+m25+m30 |
+| grace line | 7.1 / 5 | 4 | 40 | 40 | t1 a18: c18+c30+m25+m48 |
+
+### AFTER
+#### Tươi tắn (30)
+
+| field | distinct per cell (avg / min) | largest same-value group | cells (of 40) with any repeat | cells over the pigeonhole cap (item/grace ceil(n/8), angle ceil(n/14), class e12_caps) | worst cell |
+|---|---|---|---|---|---|
+| held item (exact) | 8.0 / 8 | 4 | 40 | 0 | t1 a18: c01+c07+c13+c15+c19+c21+m01+m03+m05+m06+m07+m11+m17+m21+m27+m31+m33+m35+m39+m41+m45+m47+m49+m51 |
+| angle sentence (exact) | 14.0 / 14 | 3 | 40 | 0 | t1 a18: c21+m13+m37+m41+m45+m51 |
+| angle, visual class (5) | 5.0 / 5 | 9 | 40 | 0 | t1 a18: c13+c19+c31+m07+m11+m33+m37+m45+m51 |
+| grace line | 8.0 / 8 | 4 | 40 | 0 | t1 a18: c01+c07+c13+c15+c19+c21+m01+m03+m05+m06+m07+m11+m17+m21+m27+m31+m33+m35+m39+m41+m45+m47+m49+m51 |
+
+#### Dịu dàng (17)
+
+| field | distinct per cell (avg / min) | largest same-value group | cells (of 40) with any repeat | cells over the pigeonhole cap (item/grace ceil(n/8), angle ceil(n/14), class e12_caps) | worst cell |
+|---|---|---|---|---|---|
+| held item (exact) | 8.0 / 8 | 3 | 40 | 0 | t1 a18: c02+m14+m50 |
+| angle sentence (exact) | 14.0 / 14 | 2 | 40 | 0 | t1 a18: c02+c20+c32+m02+m19+m32 |
+| angle, visual class (5) | 5.0 / 5 | 5 | 40 | 0 | t1 a18: c02+c08+c26+m19+m26 |
+| grace line | 8.0 / 8 | 3 | 40 | 0 | t1 a18: c02+m14+m50 |
+
+#### Đoan trang (17)
+
+| field | distinct per cell (avg / min) | largest same-value group | cells (of 40) with any repeat | cells over the pigeonhole cap (item/grace ceil(n/8), angle ceil(n/14), class e12_caps) | worst cell |
+|---|---|---|---|---|---|
+| held item (exact) | 8.0 / 8 | 3 | 40 | 0 | t1 a18: c04+m22+m52 |
+| angle sentence (exact) | 14.0 / 14 | 2 | 40 | 0 | t1 a18: c04+m10+m16+m40+m46+m52 |
+| angle, visual class (5) | 5.0 / 5 | 5 | 40 | 0 | t1 a18: c04+c16+c28+m29+m40 |
+| grace line | 8.0 / 8 | 3 | 40 | 0 | t1 a18: c04+m22+m52 |
+
+#### Sắc sảo (6)
+
+| field | distinct per cell (avg / min) | largest same-value group | cells (of 40) with any repeat | cells over the pigeonhole cap (item/grace ceil(n/8), angle ceil(n/14), class e12_caps) | worst cell |
+|---|---|---|---|---|---|
+| held item (exact) | 6.0 / 6 | 1 | 0 | 0 | - |
+| angle sentence (exact) | 6.0 / 6 | 1 | 0 | 0 | - |
+| angle, visual class (5) | 4.2 / 4 | 2 | 40 | 0 | t1 a18: c05+c11+c17+c23 |
+| grace line | 6.0 / 6 | 1 | 0 | 0 | - |
+
+#### Tinh nghịch (14)
+
+| field | distinct per cell (avg / min) | largest same-value group | cells (of 40) with any repeat | cells over the pigeonhole cap (item/grace ceil(n/8), angle ceil(n/14), class e12_caps) | worst cell |
+|---|---|---|---|---|---|
+| held item (exact) | 8.0 / 8 | 2 | 40 | 0 | t1 a18: c03+c06+c09+c12+c18+c24+m12+m24+m25+m30+m42+m48 |
+| angle sentence (exact) | 14.0 / 14 | 1 | 0 | 0 | - |
+| angle, visual class (5) | 5.0 / 5 | 4 | 40 | 0 | t1 a18: c12+c18+m12+m42 |
+| grace line | 8.0 / 8 | 2 | 40 | 0 | t1 a18: c03+c06+c09+c12+c18+c24+m12+m24+m25+m30+m42+m48 |
+
+("worst cell" lists everyone in the largest same-value groups of that cell, not one group.)
+
+Gates on this commit: build_all --check a18/a26/a36/a51/a65 → 0 FAIL ×5 (incl. E6, E12). All 52 m people (B8 bypassed) × t1–t8 × a18/a65 = 832 prompts through check_store → 0 FAIL. No gens.
