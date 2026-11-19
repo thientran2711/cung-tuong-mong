@@ -222,9 +222,9 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | CTM hall-names (opus; worker, MAIN ROOT-63 job via C-AG #20) | review/hall-names c294e1d; briefs/root63-cag20-jobs.md | C-AG #20 for ROOT-63 | session_01Rc5AsJqjDM27hysYd7E48b | DONE — LIVE 2c5dd554 (archived 19/11 05:55Z) | 19/11 05:20Z |
 | CTM monthly-allotment (opus; worker, MAIN ROOT-63 job via C-AG #20) | review/monthly-allotment; briefs/root63-cag20-jobs.md | C-AG #20 for ROOT-63 | session_01Rc5AsNLFYkPdJUDpjgwsaU | DONE — LIVE 98f9f0f1 (archived 19/11 06:17Z) | 19/11 04:09Z | · SẴN SÀNG KIỂM 9aceea6 (19/11)
 | CTM minister-agents (opus; worker, MAIN ROOT-63 job via C-AG #20) | review/minister-agents; briefs/root63-cag20-jobs.md | C-AG #20 for ROOT-63 | session_01Rc5AsHjti1YnXbSGeocwni | DONE — LIVE f3114755 (archived 19/11 06:35Z) | 19/11 04:09Z |
-| coop-thin F3 (opus; bag/shop/wear/gifts; stacked on F2) | review/coop-thin-f3 | B | session_01N1tNP4NVrwK67H3DPhD9Ld | SẴN SÀNG KIỂM 46ec7743 (f659cf7b + f2-r2 81ac2af8 + main f3114755; report reports/coop-thin-f3.md) | 19/11 06:30Z |
+| coop-thin F3 (opus; bag/shop/wear/gifts; stacked on F2) | review/coop-thin-f3 | B | session_01N1tNP4NVrwK67H3DPhD9Ld | SẴN SÀNG KIỂM abb9a6a6 (f659cf7b + f2-r2 083227d4 + main f3114755; report reports/coop-thin-f3.md) | 19/11 06:30Z |
 | REVIEW coop-thin-f2 r1 (opus BIG) of 4dabbd46 | review/coop-thin-f2-r1 | B | session_01N1tNP6D9LFcHNTVw1PfbmV | FAIL: her walk cards lost at L7 (withSeat quiet=true silences card emitters; fix for the intent family) + resend should check buổi; merge 3db28bd8 pushed; report reports/coop-thin-f2.md "
-| ev-pic-fig event scene picture + figure scale (opus; owner bug OD 04:15Z) | review/ev-pic-fig | MAIN ROOT-63 | session_01Rc5AsLHx5NBHb8tkZaoLUU | SẴN SÀNG KIỂM 739bfdf3 r1 (report reports/ev-pic-fig.md) | 19/11 05:38Z |
+| ev-pic-fig event scene picture + figure scale (opus; owner bug OD 04:15Z) | review/ev-pic-fig | MAIN ROOT-63 | session_01Rc5AsLHx5NBHb8tkZaoLUU | DONE — LIVE 5dc5d9e0 | 19/11 05:38Z |
 | hall-names SMALL REVIEW (sonnet) | review/hall-names c294e1d | C-AG #20 for ROOT-63 | session_01Rc5AsJrdYiTbKYwJ53EVEQ | DONE — LIVE 2c5dd554 (archived 19/11 05:55Z) | 19/11 04:31Z |
 | monthly-allotment BIG REVIEW (opus) | review/monthly-allotment 9aceea6 | C-AG #20 for ROOT-63 | session_01Rc5AsLJxqXyKq4keVP4fuk | DONE — LIVE 98f9f0f1 (archived 19/11 06:17Z) | 19/11 04:32Z |
 | minister-agents BIG REVIEW (opus) | review/minister-agents 822f17c4 | C-AG #20 for ROOT-63 | session_01Rc5AsHdFbiZELj46cV3rq8 | DONE — LIVE f3114755 (archived 19/11 06:35Z) | 19/11 04:46Z |
@@ -240,13 +240,13 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | odds-no-unknown BIG REVIEW (opus) | review/odds-no-unknown 7a56b2e | C-AG #20 for ROOT-64 | session_01Rc5AsLQg8htXCMAz8FnrmD | DONE — LIVE 4217568a (archived 19/11 06:05Z) | 19/11 05:12Z |
 | coop-thin F2 FIX r2 (opus BIG; reviewer FAIL r1: guest cards silenced by withSeat quiet, whole intent family + buổi resend check) | review/coop-thin-f2-r2 | B | session_01N1tNP4v5eCkat9E4cy6HXG | SẴN SÀNG KIỂM 083227d4 (report: reports/coop-thin-f2.md "## FIX r2" + addendum E step) | 19/11 |
 | seal-lean-2 SMALL REVIEW (sonnet) | review/seal-lean-2 db1762f1 | MAIN ROOT-64 | session_01Rc5AsMN2AumPZrBeDRpV5o | PASS fb76ed7b | 19/11 05:43Z |
-| ev-pic-fig BIG REVIEW (opus) | review/ev-pic-fig 946a2900 | MAIN ROOT-64 | session_01Rc5AsMDVid7pMws13KWPgr | RUNNING | 19/11 05:43Z |
+| ev-pic-fig BIG REVIEW (opus) | review/ev-pic-fig 946a2900 | MAIN ROOT-64 | session_01Rc5AsMDVid7pMws13KWPgr | DONE — LIVE 5dc5d9e0 | 19/11 05:43Z |
 | bd-roads r2 fixes (opus E14c, successor of E14) | review/bd-roads | E ROOT #8 | session_01DgYSWmKcwf5VUb22x4YGU3 | RUNNING | 19/11 05:53Z |
 | ge-writers-w3 r2 fixes (opus E11d, successor of E11c) | review/ge-writers-w3 | E ROOT #8 | session_01DgYSWogWMATZVoosS7SFEk | RUNNING | 19/11 05:56Z |
 | MAIN ROOT-65 (opus; child of ROOT-64, depth 3) | handover HANDOVER_SESSION9 | ROOT-64 | session_01Rc5AsMRSKCNFbYwLJhNeY7 | RUNNING | 19/11 06:24Z |
 | FOREMAN C-AG #22 (opus; ex-ROOT STANDBY, depth 0; took over from C-AG #21) | handover FOREMAN_C_STATUS | owner STANDBY | session_01Rc5AsM9pCcsWwjoC8PjjW7 | RUNNING | 19/11 06:30Z |
 | REVIEW coop-thin-f3 r1 (opus BIG) of f659cf7b | review/coop-thin-f3-r1 | B | session_01N1tNP5fWL4VXMTtqchmHQX | RUNNING | 19/11 06:30Z |
-| coop-thin F4 (opus; pets/garden/kitchen/study; same worker as F3, stacked on F3) | review/coop-thin-f4 | B | session_01N1tNP2DFfqtxibVd8wgyr6 | RUNNING | 19/11 06:33Z |
+| coop-thin F4 (opus; pets/garden/kitchen/study; same worker as F3, stacked on F3) | review/coop-thin-f4 | B | session_01N1tNP2DFfqtxibVd8wgyr6 | SẴN SÀNG KIỂM b4f2031c (report reports/coop-thin-f4.md) | 19/11 06:33Z |
 | ev-pic-followups (sonnet; MAIN ROOT-65 job via C-AG #22: iPad XL option frame scroll kit fix whole group + PEND:eunuch scene) | review/ev-pic-followups; briefs/cag22-ev-pic-followups.md | C-AG #22 for ROOT-65 | session_01Rc5AsMN9rc6gf4qRzmEoJF | RUNNING | 19/11 06:40Z |
 | seal-lean-2 r2 SMALL REVIEW (sonnet) | review/seal-lean-2 a64f06c7 | MAIN ROOT-65 | session_01Rc5AsK8sbYnJUkyP6AvmAw | DONE — LIVE 5400c87b | 19/11 06:37Z |
 | foreign-princess-3 history expert (sonnet E19; MAIN ORDER 06:23Z/06:35Z) | handover reports/foreign-princess-3-history.md | E ROOT #8 | session_01DgYSWkWBAJFRJzN3a7ix9a | RUNNING | 19/11 06:42Z |
