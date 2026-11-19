@@ -10,7 +10,7 @@
    letter (thu: "dly" held by Đại Lý tự · "dot" burnt · "vua" read before the Emperor), the poisoned cup of the wrestling (chen: 0 · "thaiy"
    with the thái y · "dly" in evidence).
    Harder as she climbs (law 5): every climax (x1) odds list ends with ["m","rank",k<0] (BAL.road.fx / BAL.arc.fx). No new UI: j67 kit cards only. */
-const bdO=(k,v)=>{const r=RD_FL("bd.o."+k,v);return v!=null?"":r};
+/* bdO (the road object book "bd.o.<thing>") is defined once in jrd_bd.js (loads first) */
 Object.assign(RTHEME67,{bd_tuyet:"emp",bd_hen:"emp"});
 
 /* ---------- bd_tuyet · Năm tuyết trắng (Thiên hạ; GE ge1 Mẹ của thảo nguyên · ge2 Lương thảo đổi hòa · ge3 Mở cửa ải bắc · ge4 Khúc ca tuyết trắng) ---------- */

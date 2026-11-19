@@ -13,8 +13,8 @@ Object.assign(BAL,{ad:{hapP:65,hap2:35,strollP:80,rareMinGrade:3,nightSneak:10,n
    high one 27-40 % (cooldown 3 months), so Quý phi -> Hoàng hậu took years; now mid ~75-93 %, high ~64-72 % (the odds the exam was designed
    for, PROGRESS_promo-exam). dev/tmp probe: exChance at ranks 0/3/5. */
 BAL.ex={win:2,cd:[1,1,1,1,2,2,3,3],bar:[22,25,28],wPlay:6,wVir:2,wArt:2,attDiv:10,attMax:6,k:2,suc:8,mc:240,
- /* servant / ma ma road (review/promo-rules): bar and wait by target, index 1..4 = SRK.maid rank, 5 = ma ma */
- srvBar:[0,18,20,22,24,24],srvCd:[1,1,1,2,2,3]};
+ /* servant / ma ma road (review/promo-rules; maid-ladder-6: six rungs): bar and wait by target, index 1..5 = SRK.maid rank, 6 = ma ma (BAL.srvRk.mama) */
+ srvBar:[0,18,19,20,22,24,24],srvCd:[1,1,1,1,2,2,3]};
 /* NO-WORD-GAMES family C (jnwq, owner 16/11 07:20Z): the four promotion-exam games (le lay · tc sort · xa clue · thq seat). tier = level tier 0..2 (+shift;
    review/mg-balance's mgTier overrides when present); free = first tier with free placement judged on «Xong» (below it a drop is checked at once);
    n = pieces per round by tier; rounds; lim = seconds per round by tier (rounds × lim stay under the 97 s game guard); idle = seconds before the quiet auto-hint
@@ -210,19 +210,19 @@ Object.assign(BAL,{visit:{minSung:20,base:.3,slope:.07,anK:.01,cap:8,datinh:1.5,
  show:{o:40,w:8,suc:5,sung:6,danh:2},tea:{minSung:60,p:50,sung:2,an:2}},
  night:{sung:3,an:2,ghen:8,bestow:10,bestowS:4,stealS:3,vO:[40,50,60,75,85] /* night score v ≤-1 / 0 / 1 / 2 / ≥3 → odds read by word() (Khó … Rất chắc) */,mood:[1,0,-1,-2] /* his mood 0..3 (vui, thường, buồn, giận) → night score add-on (j8 night1; jwhyn reads it) */}});
 /* ACTIVE MAID LINE (jmline.js, review/servant-system, owner 16/11): % per month unless named. eye[rank] = the Emperor's eye by servant rank
-   (thô sử, cung nữ, đại cung nữ, chưởng sự, nữ quan; was 0/0/1.2/1.2/1.2), eyeSung = ×(1 + master Sủng/100 × eyeSung), eyeAge = ages that can rise;
+   (thô sử, tam đẳng, nhị đẳng, nhất đẳng = đại cung nữ, chưởng sự, nữ quan; maid-ladder-6 inserted nhị đẳng .4; was 0/0/1.2/1.2/1.2), eyeSung = ×(1 + master Sủng/100 × eyeSung), eyeAge = ages that can rise;
    seekStart (× nết: tham 2, lanh 1.5, trung/nhát 0.3) for seekMonths months, maids up to seekAge, seekMul on the eye while seeking;
    seeNotice = master notices; harsh master: punish → lòng -punLoy, punOut = sent away; master Sủng ≥ useGap under the harem median (r2; was Sủng < 30): use → seekMul × useMul, lòng +useLoy;
    feud = a maid starts a quarrel with a maid of a palace her master's hostility ≥ feudHost (feudPoison of them poison, half the rest frame);
    frameLoy / frameOut (an NPC master throws the framed maid out), poisonDie, hitEv = proof of a beating to the victim's mistress (r2: feudEv replaced by the caught keys below);
    hit = a consort targets a maid of her target's palace; seeMat = Tai mắt that lets her hear of other palaces' maid affairs. */
-Object.assign(BAL,{mline:{eye:[.1,.25,.6,1,1.2],eyeSung:.5,eyeAge:[16,29],seekStart:4,seekMonths:3,seekAge:25,seekMul:3,seeNotice:50,punish:60,punLoy:20,punOut:25,useGap:20,use:50,useMul:1.5,useLoy:10,
+Object.assign(BAL,{mline:{eye:[.1,.25,.4,.6,1,1.2],eyeSung:.5,eyeAge:[16,29],seekStart:4,seekMonths:3,seekAge:25,seekMul:3,seeNotice:50,punish:60,punLoy:20,punOut:25,useGap:20,use:50,useMul:1.5,useLoy:10,
  feud:3,feudHost:25,feudPoison:10,frameLoy:15,frameOut:20,poisonDie:25,hit:4,hitEv:30,seeMat:3,
  /* review/servant-mline-r1 (ONE CORE): the literals that sat in jmline.js, same values: seekTr = seekStart × by nết; feudFrame = % of the
     non-poison feuds that are a frame (else a fight), fightLoy = lòng +N to both fighters; poisonLv = pzGive level; evN = chứng cứ per piece;
     hitBribeBac / hitBribe = a consort with Bạc ≥ N bribes (%), else a cruel one beats (hitBeat %), else frames; beatLoy = the beaten maid lòng +N;
     ageDef = age when unknown; offRank / offEye = the old rule behind the off switch (rank ≥ offRank at offEye %). */
- seekTr:{tham:2,lanh:1.5,chuyen:1,trung:.3,nhat:.3}/* servant-quality codes, read by qv() (BAL.net.qCode) */,feudFrame:50,fightLoy:2,poisonLv:1,evN:1,hitBribeBac:60,hitBribe:40,hitBeat:55,beatLoy:3,ageDef:20,offRank:2,offEye:1.2,
+ seekTr:{tham:2,lanh:1.5,chuyen:1,trung:.3,nhat:.3}/* servant-quality codes, read by qv() (BAL.net.qCode) */,feudFrame:50,fightLoy:2,poisonLv:1,evN:1,hitBribeBac:60,hitBribe:40,hitBeat:55,beatLoy:3,ageDef:20,offRank:3,offEye:1.2,
  /* review/servant-mline-r2 (gain and loss, measured: dev/measure/sim_maidline_r2.js): ONE caught key per harmful act, % per act:
     frameCatch = a maid's frame of another palace's maid is traced; poisonCatch = Thái y traces a maid's poison (the poisoner goes to
     Thận hình ti); hitCatch = a consort's frame of another palace's maid is traced (a beating is always seen: deed + hitEv % proof).
@@ -373,6 +373,18 @@ Object.assign(BAL,{nroad:{
  bacRk:[2,4,6],
  /* palace news lines a month (NPC chapter ends), at most */
  newsMo:2,
+ /* QUESTLINE Q2 (QUESTLINES_AUDIT §3 H-a/H-d, §4 Q2; engine jnroadhp.js): the side line as a process + two-way.
+    fin = the reward when an NPC wins her road FINALE (the chapter that closes the road) after the player's help on that road and no betrayal
+      (round 2, laws 1–2: a betrayal is help to the rival she told — that rival gets a «mách tin» record on her own road and her next chapter
+      gains `help` above, so the same fin reward can come from either option; review/questline-q2 §ROUND 2)
+      (nothing on a lost or drawn finale, OD:L1601 (4)): index = how many of fin.rk ranks HER rank reaches (as bacRk); danh = her Danh,
+      rel = the asker's bond to her (j72 q72Rel), owe = nợ ân the asker owes her (j72 ledger);
+    sb = strike-back of a betrayal: the fact reaches the betrayed NPC only through a real carrier (her own Tai mắt oSee × BAL.ag.know.eye, her
+      servants' Nghe ngóng + tell choice, a bought servant of the player who sells it, the rival who heard it and dislikes the player — the
+      jagknow rules, BAL.ag.know.tell); checked each month for mo months after the betrayal; when it lands: oán oan toward the player
+      (feeds hostility → the NPC's agent deeds aim at her, jagent agSpite; no flat roll), a servant / man loses oan of lòng instead;
+    hpMax = lines kept in the Mệnh truyện «Phụ tuyến» list (oldest dropped) */
+ fin:{rk:[2,4,6],danh:[2,3,4,6],rel:[4,6,8,10],owe:1},sb:{oan:15,mo:6},hpMax:12,
  /* fix (ONE CORE): the test stat of someone who lacks it, the loyalty a man starts from, how many of the coldest people a rival is
     drawn from (people / houses) */
  st0:40,loy0:50,rvTop:3,offTop:2,
@@ -385,7 +397,7 @@ Object.assign(BAL,{nroad:{
  /* U2 maids (cnv roads): her test stat = st + her trait (j10 STR keys) + rk per servant rank (srk); her chapter end on her own fields
     (mp = merit toward the next servant rank, j14; loyal = to her mistress: a maid who wins her own fight leans a little less on her
     mistress), her mistress's share (Danh), the grudge (af) between her and the rival maid, the loyalty her own maid needs to ask */
- m:{st:40,tr:{lanh:15,trung:8,tham:5,nhat:-5,chuyen:0},rk:5,
+ m:{st:40,tr:{lanh:15,trung:8,tham:5,nhat:-5,chuyen:0},rk:4/* per maid rung (maid-ladder-6: 6 rungs, was 5 per rung of 5 — the top stays 20) */,
   fx:{win:{mp:4,loyal:-2},mid:{mp:1,loyal:-1},lose:{mp:-2,loyal:-4}},mis:{win:{danh:1},lose:{danh:-1}},af:8,askLoy:60},
  /* U3 men (jnroadm.js; staff eunuchs use m above): st = test stat of a man with none (court men); kidAge = a son of an NPC consort gets
     his road from this age; S.men loyal (jmen bribe odds) and the rival man's share; court men lean (af) toward their patron consort
@@ -646,12 +658,13 @@ Object.assign(BAL,{ag:{on:1,
     ch      her weight in his night pool (the terms of a consort's nightCh: regard / sung + Sắc / sac, cap; bot-tuned so maid nights ≈ the old
             eye-roll rises); only maids he MET (S.emp.met)
     night   a maid's night: his regard + b + q / 2 (q = Sắc / 20 + luck, rivalNight's own formula); rise = her Sủng as a consort = b + regard / d
-            (srvRise's own conversion: was 15 + nt / 5)
+            (srvRise's own conversion: was 15 + nt / 5); ONE promotion rule riseCore (jagmaid) for her and an NPC maid: + Danh danh, Bạc bac
+            (were typed 5 / 20 in srvRise, NPC maids got none), old master's jealousy ghen = [loyal, turned] (were typed 5 / 25 in srvRise, NPC masters got none)
     send    the consort's "Tiến cử <maid> hầu thay" on her night: × on her need (tired / ill; × (1 + ally need) with a trusted maid) against
             keeping it (BAL.ag.routine). .05 (review ag3-r1, bot 2 yr × 2 seeds per life): .15 gave consort life ~1.5 and maid life ~3.5 maid rises / yr (Tiến cử on ill nights; a seat is always free, so every send rises) vs ~0.6 / yr on main; .05 → consort life 0.5, maid life 1.5 (her NPC consorts are ill on 15–18 % of their nights there vs ~5 %: a one-world gap left to Foreman C)
     decline the player maid begs off his summons: his regard lost */
  maid:{st:{sac:[20,60],tai:[0,30]},tea:{b:25,sac:2.5,tai:10,nt:5,g:8,gs:20,fail:1},jeal:{b:30,d:3},decay:2,ch:{sung:2,sac:8,cap:70},
-  night:{b:2},rise:{b:15,d:5},send:.05,decline:10}}});
+  night:{b:2},rise:{b:15,d:5,danh:5,bac:20,ghen:[5,25]},send:.05,decline:10}}});
 /* BAL.ag.staff — AG-ALL part B (jagstaff.js): maids and eunuchs as agents on the player maid's act table (j42 SRVA)
    st       a staff's Đức / Tâm cơ / Danh / Sức / Bạc drawn once (lazy; Sắc / Tài: BAL.ag.maid.st) [lo, hi]
    goal     what she aims at: Chủ tin, Sức, Bạc, Sắc, Tài, Đức, friends (thiện cảm ≥ SRVA.ask.af)
@@ -1113,7 +1126,7 @@ BAL.world={on:1,maxOpen:2,pull:18,pullMax:80,
     ret đại hàn (heavy snow in `run` of the last run+1 tuần) · trung châu chấu (a failed flood/drought relief that left Kho lúa between dis.kho and kho) ·
     vuco vu cổ (a real bùa frame found while someone of the Emperor's house is ill) · cam giới nghiêm (after a vu cổ / ngoại thích verdict,
     or Biên cương < bien after a lost battle) · trom trộm ngự khố (year-end audit + a real greedy servant) · phong phóng cung nhân (maids at
-    BAL.srvAge.ask (rk < 3), at least `min` in her + the living NPC households, spring at `p` odds) · hon công chúa xuất giá (a real daughter's wedding) · ngoai ngoại thích (a house >= pow
+    BAL.srvAge.ask (rk < BAL.srvRk.cs), at least `min` in her + the living NPC households, spring at `p` odds) · hon công chúa xuất giá (a real daughter's wedding) · ngoai ngoại thích (a house >= pow
     while the Emperor is young / ill or it is the queen's house) · phat Phật đản (yearly; big = đại trai đàn in a disaster) · benh long thể
     bất an (S.emp.ill stage >= st) · tinh tỉnh thân (yearly after Tết). Pair numbers [a,b] in odds = base + stat / b. */
  day:{npcW:{give:[1.2,.6],cold:[1.5,.3],skip:.4},coldOan:30,delay:3,len:1,kho:[3,1],mDanh:[3,1],mSung:[3,1],npcGift:.08,big:40,mid:15,bigAff:12,midAff:5,skipOan:8,coldGhen:60,feastBac:60,feastDanh:3,plainDuc:1,place:{tn:1.3},act:{social:1.3,greet:1.3,harm:1.2},force:[{b:1,pl:"$",deed:"gift",why:"Dự yến đầy tháng",g:["consort","queen"]}]},
@@ -1306,8 +1319,20 @@ Object.assign(BAL,{skip:{od:40,raw:5,care:.5}});
    win = how long after a face is learned every place that first draws it (frame, avatar, stage figure) still plays its one reveal */
 Object.assign(BAL,{faceReveal:{ms:Math.round(1000*BAL.pace),lite:350,win:8000}});
 /* BOOK FIGURE (owner 18/11 ~07:10Z + ~07:20Z, KIT §56.3): ONE body size for everybody = SKULL TOP to FEET = figure column width / bookFigW (her p.5 shot: Fold col 220 -> 641, iPad col 183 -> 534). Layout = live; nothing cut, nobody shrunk, the text is drawn on top.
-   cRef = the tallest Hoàng hậu crown above the skull top / body (catalog scan 18/11: thaihau-h3-a36 .072); gap = px the crown keeps under the running-head rule; footGap = px the feet keep above the page's bottom line when the feet line is moved down for her crown. */
-BAL.bookFigW=.343;Object.assign(BAL,{bookFrame:{cRef:.072,gap:8,footGap:10}});
+   cRef = the tallest Hoàng hậu crown above the skull top / body (catalog scan 18/11 over all 8570 fig-*.webp: tallest = consort-c09-t8-a26 / maid-m45-t8-a18 .131; the earlier .072 was measured on the thaihau-* files only; owner 18/11 ~18:40Z: the name tag covered the Hoang hau's phoenix crown); gap = px the crown keeps under the running-head rule; footGap = px the feet keep above the page's bottom line when the feet line is moved down for her crown. */
+BAL.bookFigW=.343;BAL.figWideRef=.65;/* painted width / body (skull top -> feet) a person column must hold so no robe / prop enters the text: 99.9th percentile of all 8570 fig-*.webp (p50 .347, p90 .446, p99 .596, max .838 = 3 outlier files) */BAL.bookFigBody={kv1:641,kv2:534};/* the Luan hoi book's ONE body (skull top -> feet) on the iPad spread (1180x820; = book column / bookFigW, her p.5 shot 534): the identity card (Than phan kiep nay) on the iPad stands her at this same size (owner 18/11 ~18:30Z) */Object.assign(BAL,{bookFrame:{cRef:.131,gap:8,footGap:10}});
 /* DOING AN ACT ON THE SPOT (review/shown-odds-one-path): "Cài đồ vào rương nàng" done in her own palace is easier than sending
    someone by actHere.plant (was a typed -15 pen in j8 plantpick + a typed +15 on the j2 chest card); both read it through actCtx (j9). */
 Object.assign(BAL,{actHere:{plant:15}});
+/* ERRAND SCENE (owner OD 18/11 ~20:05Z..~20:20Z, jerr): n = khắc the person she sends stays away (counted from the tap, the walk included) when the parallel-time core
+   (jptime BAL.ptime.kinds[k].n) is not in the build; the scene reads the ONE state through the jerr adapter either way. msWalk = one walk off / on stage (ms, x BAL.pace via kitPace). */
+Object.assign(BAL,{errand:{n:2,msWalk:650}});
+/* ROLE PARITY part 2 (owner OD 18/11 ~21:30Z; law 1 two-way + law 4 one core): the NPC side of her buttons that had none (jagacts4 cx4:*).
+   Costs / odds / gains are the player's own rows (BAL.btn.kidCare/kidGuard + BAL.bacFee, BAL.cyc, BAL.ration, IROUTE in j83, BAL.odb.j22);
+   here only the WORTH of each deed to an NPC (g = needs it serves, as BAL.ag.par3) and its gates.
+   kidGuard.host = hostility of some consort toward her before she pays for a guard; ill = Đồ cấm routes: malice = the character gate of the
+   old monthly road (now a choice), keep = bạc she keeps after paying, w = how much she wants each poison; rouge.g = worth of a missing box;
+   man = the forbidden road with a man: sungBelow = a neglected consort (the old affair start rule), cutRisk = lộRisk at which «Cắt đứt» serves her safety. */
+BAL.ag.par4={on:1,kidCare:{g:{"kid":3}},kidGuard:{host:40,g:{"safe":2,"kid":1}},cyc:{g:{"safe":3,"kid":2}},
+ rouge:{g:{"sung":1,"danh":1},steal:{g:{"sung":1,"spite":1}}},ill:{malice:60,keep:20,w:{hacdinh:6,xahuong:5,botngua:4},g:{"spite":4}},
+ man:{sungBelow:30,cutRisk:50,g:{hail:{"sung":.5},flirt:{"sung":1.5},token:{"sung":2},tryst:{"sung":3,"rest":1},cut:{"safe":3}}}};
