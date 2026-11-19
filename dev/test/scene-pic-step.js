@@ -1,0 +1,26 @@
+/* scene-pic-step.js — fullbody-frame s4 (owner OD 18/11 ~16:10Z): the scene picture is BIG only while the frame needs no scroll; otherwise it steps down KIT_SIZE.v3.picLadder (kszPicStep3).
+   Offline the pictures do not load, so every picture gets a fake natural size 1280x720 and a full-frame subject box (kitPicSubj -> [0,0,1,1]): the strip floor (kszEvMin3) is then as tall as it can be, the worst case for scrolling.
+   Every PEND frame is opened twice per device: step OFF (kszPicStep3 = no-op) = BEFORE, step ON = AFTER. Records ksz, picture height, kszOver3 (px the frame scrolls).
+   FAIL: AFTER scrolls more than BEFORE; AFTER keeps a picture above the smallest class while a class from the ladder would remove the scroll (checked by trying the ladder on the open frame).
+   usage: node dev/test/scene-pic-step.js <index.html> [out.json]   env SZ=[[W,H],..] MAXP=n */
+const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
+(async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});const html=fs.readFileSync(SRC);let bad=0;const ALL=[];
+ for(const [W,H] of SZ)for(const mode of ['before','after']){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',ignoreHTTPSErrors:true});await ctx.addInitScript(()=>{window.__bot=1;let s=12345;Math.random=()=>{s=(s*1664525+1013904223)%4294967296;return s/4294967296};
+   Object.defineProperty(HTMLImageElement.prototype,'naturalWidth',{get(){return 1280},configurable:true});Object.defineProperty(HTMLImageElement.prototype,'naturalHeight',{get(){return 720},configurable:true})});
+  await ctx.route('http://ctm.test/**',r=>r.fulfill({status:200,body:html,contentType:'text/html; charset=utf-8'}));
+  const p=await ctx.newPage();p.on('pageerror',()=>{});await p.goto('http://ctm.test/index.html',{waitUntil:'domcontentloaded',timeout:120000});
+  await p.waitForFunction(()=>typeof start==='function'&&typeof showModal==='function'&&typeof kszPicStep3==='function',null,{timeout:120000});
+  await p.evaluate(m=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;for(const e of [...document.body.querySelectorAll('*')]){const cs=getComputedStyle(e);if(cs.position==='fixed'&&/Luân hồi/.test(e.textContent||''))e.remove()}document.getElementById('modal').hidden=true;window.kitPicSubj=()=>[0,0,1,1];if(m==='before')window.kszPicStep3=()=>""},mode);await p.waitForTimeout(3000);
+  const ids=await p.evaluate(()=>Object.keys(PEND));let n=0;
+  for(const id of ids){if(+process.env.MAXP&&n>=+process.env.MAXP)break;const ok=await p.evaluate(id=>{const v=liveRivals(true)[0];const iix=S.inv.findIndex(e=>e&&e.k==="tramngoc");for(const pp of [{v:v&&v.id,ix:iix},{ix:iix},{v:v&&v.id},{}]){let d=null;try{d=PEND[id](Object.assign({},pp))}catch(e){d=null}if(!d)continue;try{Q.length=0;pushDil(mkP(id,pp),'Tuyến truyện');showModal();if(Q.length)return true}catch(e){}}return false},id);if(!ok)continue;n++;await p.waitForTimeout(900);
+   const o=await p.evaluate(()=>{const d=document.querySelector('#modal:not([hidden]) .dlg.ksz3');if(!d)return null;const ev=d.querySelector('.k3right>.k3ev');if(!ev)return {ksz:d.dataset.ksz,noev:1};const h=()=>Math.round(ev.getBoundingClientRect().height);const out={ksz:d.dataset.ksz,pic:h(),picc:d.dataset.picc||'',over:kszOver3(d)};
+    /* can a smaller class remove the scroll? try the ladder on the open frame, then put it back */
+    out.can='';if(out.over){const f=ev.style.flex,hh=ev.style.height,mm=ev.style.minHeight;for(const k of KIT_SIZE.v3.picLadder){const hk=kszPicH3(k);if(hk>=out.pic)continue;ev.style.flex='none';ev.style.minHeight='0';ev.style.height=hk+'px';if(!kszOver3(d)){out.can=k;break}}ev.style.flex=f;ev.style.height=hh;ev.style.minHeight=mm}return out});
+   if(o)ALL.push(Object.assign({id,dev:W+'x'+H,mode},o));await p.evaluate(()=>{Q.length=0;document.getElementById('modal').hidden=true})}
+  await ctx.close()}
+ await b.close();
+ const key=o=>o.dev+' '+o.id;const B={};ALL.filter(o=>o.mode==='before').forEach(o=>B[key(o)]=o);
+ console.log('device | frame | ksz | picture px before→after (class) | scroll px before→after');
+ ALL.filter(o=>o.mode==='after'&&!o.noev).forEach(a=>{const o=B[key(a)]||{};const flag=(a.over>(o.over||0))?' FAIL worse':(a.over&&a.can?' FAIL a smaller class would remove the scroll ('+a.can+')':'');if(flag)bad++;if(a.over||o.over||a.pic!==o.pic)console.log([a.dev,a.id,a.ksz,(o.pic||'-')+'→'+a.pic+(a.picc?' ('+a.picc+')':''),(o.over||0)+'→'+a.over].join(' | ')+flag)});
+ const tot=ALL.filter(o=>o.mode==='after'&&!o.noev);console.log('frames with a picture strip:',tot.length,' scrolling before:',ALL.filter(o=>o.mode==='before'&&o.over).length,' scrolling after:',tot.filter(o=>o.over).length,' stepped down:',tot.filter(o=>o.picc).length);
+ if(OUT)fs.writeFileSync(OUT,JSON.stringify(ALL));console.log(bad?'FAIL '+bad:'ALL OK');process.exit(bad?1:0)})().catch(e=>{console.error(e);process.exit(2)});

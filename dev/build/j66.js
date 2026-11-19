@@ -4,7 +4,7 @@
    c01..c32) for her as part of the stored roll in localStorage "ctm-nextlife" (d.pid): a reload shows the same one,
    "Đổi thân phận" rolls another. The identity is reserved for the whole game (S.pid sits in S.fidUsed), so no NPC
    consort, tuyển tú intake included, ever gets it or any of its tiers / ages. Her art then follows the consort picker:
-   dress tier = rank (Đáp ứng t1 ... Hoàng hậu t8), age band = her age (18–25, 26–35, 36–50, 51+), same identity for life.
+   dress tier = rank (Đáp ứng t1 ... Hoàng hậu t8), age band = her age (BAL.ageBand: 18–25, 26–35, 36–50, 51–64, 65+), same identity for life.
    While she is a palace maid (cnv) she wears the identity's tier 1. In lãnh cung she (and any NPC consort there) asks for
    the identity's tier "cold" (fig-consort-cNN-tcold-aAA.webp); while that art is missing the nearest file is tier 1. If a file is missing the nearest
    tier/age of the identity is used; with no art at all she keeps the old face. Old saves (no S.pid) are left as they are,
@@ -20,7 +20,7 @@ function pidRoll(d){const K=pidKeys();const r=nlRng((d.seed^0x2c1b3c6d)>>>0);r()
 (function(){const r0=nlReroll;nlReroll=function(){PID_AVOID=S&&S.pid||null;try{return r0.apply(this,arguments)}finally{PID_AVOID=null}}})();
 function pidOn(){return !!(S&&S.pid)}
 /* 8 ranks = 8 dress tiers; 4 age bands as the standing rule draws them */
-function pidBand(a){const B=BAL.ageBand;return a==null?null:a<B[0]?0:a<B[1]?1:a<B[2]?2:3}
+function pidBand(a){return a==null?null:ageBandIx(a)}/* every band of BAL.ageBand (a65 since art-wiring-1119) */
 (function(){const t0=figTierOf;figTierOf=function(who){try{
   if(who===S&&S){if(S.pid)return (typeof isSrv==="function"&&isSrv())?1:S.out?-1:Math.min(7,S.rank||0)+1;return t0.apply(this,arguments)}
   if((rivals||[]).includes(who))return who.out?-1:who.queen?8:Math.min(7,who.rank||0)+1}catch(e){}return t0.apply(this,arguments)}})();
@@ -46,7 +46,7 @@ function pidEnforce(){if(!S||!S.pid)return false;let ch=false;S.fid=S.pid;const 
 (function(){const c0=nlCard;nlCard=function(){const r=c0.apply(this,arguments);try{const src=figFor(S,"por");if(src&&PORK[src]!==1){const im=new Image();im.onload=()=>{PORK[src]=1;try{const m=Q[0];if(NLP&&m&&m.nl){m.faces=[[pMe(),S.name]];showModal()}}catch(e){}};im.src=src}}catch(e){}return r}})();
 /* review/player-dress: a life started past Luân hồi (window.__nlInner: test drivers, tools) used to get no identity and fell back to the
    old t1-only player looks (t1 dress on the cung nữ road and in lãnh cung). It now takes a free identity at once, before any picture
-   of her is kept, so every life is one of the 84 faces with all its dresses. Loaded saves are untouched (deser does not call start). */
+   of her is kept, so every life is one of the 84 painted women with all her dresses. Loaded saves are untouched (deser does not call start). */
 (function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{if(window.__nlInner&&S&&!S.pid&&!S.dead){
   const used=new Set((S.fidUsed||[]).filter(k=>!/^player:/.test(k)));let K=[];try{K=typeof f88Keys==="function"?f88Keys("consort"):pidKeys()}catch(e){K=pidKeys()}
   const free=K.filter(k=>!used.has(k));const L=free.length?free:K;if(L.length){S.pid=L[Math.floor(Math.random()*L.length)%L.length];

@@ -15,7 +15,7 @@ Every caller (stage #mefig, header portrait, person dialogs, Tuần lục, ident
 `figFor`, so the two fixes cover them all; the scan below reads each surface.
 
 ## Audit — her picture sets on the CDN (img/_index.json, 15/11 17:05Z), per identity, fig + por
-| Road / state | Dress tier | 32 consort faces c01–c32 | 52 maid faces m01–m52 | Ages | Manifest | toil-fit |
+| Road / state | Dress tier | faces c01–c32 | faces m01–m52 | Ages | Manifest | toil-fit |
 |---|---|---|---|---|---|---|
 | Consort Đáp ứng … Hoàng hậu | t1 … t8 | 32 × 8 | 52 × 8 (Part C) | a18 a26 a36 a51 | FIGURES.json / FIGURES-servants.json | consort all; maid **added here** |
 | Lãnh cung (plain, no jewellery, no huadian) | tcold / cold | 32 | 52 | 4 | same | n/a (makeup off in lãnh cung) |
@@ -26,10 +26,10 @@ Every caller (stage #mefig, header portrait, person dialogs, Tuần lục, ident
 | Ngoài cung: khuê các / nhà nghèo (thd, td) | kc / ngheo | 32 | 52 | a18 only (road is 18) | FIGURES-kc.json | all |
 | Old pre-11/14 saves: "player look" faces look1–4 | t1 (+ t3 a18) | — | — | 4 | FIGURES.json role player | all |
 
-Nothing is missing for the 84 faces (manifest ↔ CDN: 0 files missing). kc / ngheo: the outside road (jkc.js) lives on
+Nothing is missing for the 84 painted women (manifest ↔ CDN: 0 files missing). kc / ngheo: the outside road (jkc.js) lives on
 review/khuecac, not on main; jkc wraps figFor itself for isKc(), so no wiring here.
 Visual checks (sheets in the worktree, not committed): c05 and m05 × {t1, cold, m0..m4} × 4 ages — same face in every dress, ages read
-18 / mid-20s / late-30s / ~48; lãnh cung portraits of all 84 faces — plain robe, wooden pin, no huadian, no jewellery.
+18 / mid-20s / late-30s / ~48; lãnh cung portraits of all 84 painted women — plain robe, wooden pin, no huadian, no jewellery.
 
 ## Legacy "player look" saves (NOT fixed — needs a coordinator / owner decision)
 A life started before 11/14 (no S.pid, S.fid = player:look1..4) keeps its look face (j66 rule: old saves untouched). Those 4 faces only

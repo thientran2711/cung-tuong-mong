@@ -300,7 +300,7 @@
 - COLOUR at t5+: gold brocade washes pale palettes into cream/gold (c28 celadon, c30 moonlight blue redone). spec5 now adds "the robe itself
   is clearly <main> silk, gold only as embroidery accents, NOT a cream, beige or all-gold robe"; t6 = "HEAVY silk brocade" (not "gold brocade");
   pink+green palettes (c08, c20) get "NOT a green robe; <green> only as a small accent".
-- PLAYER LOOKS: owner decision — NOT drawn at all (the player takes one of the 32 consort identities). Removed from the plan.
+- PLAYER LOOKS: owner decision — NOT drawn at all (the player takes one of the painted women (90 nhân vật nữ pool)). Removed from the plan.
 - LÃNH CUNG: every consort identity gets a tier "cold" lineup (fig-consort-cNN-tcold-aAA.webp, FIGURES tier "cold"), ONE common outfit:
   plain undyed pale grey-white coarse linen robe, no embroidery, no jewellery, simple low bun with a plain wooden pin, clean, neat, beautiful,
   calm standing, simple hand variety (broom handle, bowl, lamp, hands folded...). Code: j39 figTier maps "cold" -> -1 and figTierOf already

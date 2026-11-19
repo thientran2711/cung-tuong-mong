@@ -31,22 +31,34 @@ function coldMonth(){let ev="";
  return ev}
 
 /* ================= SERVANT RANKS ================= */
-const SRK={maid:["Cung nữ thô sử","Cung nữ","Đại cung nữ","Chưởng sự cô cô","Nữ quan"],eunuch:["Tiểu thái giám","Thái giám","Thủ lĩnh thái giám","Tổng quản thái giám"]};
+const SRK={maid:["Cung nữ thô sử","Cung nữ tam đẳng","Cung nữ nhị đẳng","Cung nữ nhất đẳng","Chưởng sự cô cô","Nữ quan"],/* maid-ladder-6 (owner OD 19/11 ~01:26Z): six rungs, nhất đẳng = Đại cung nữ; named rungs BAL.srvRk */eunuch:["Tiểu thái giám","Thái giám","Thủ lĩnh thái giám","Tổng quản thái giám"]};
 function srk(s){return s.rk==null?(s.rk=1):s.rk}
 function srkName(s){return SRK[s.role][srk(s)]}
-function srkMax(o,s){const r=rkOf(o);if(s.role==="maid")return r>=7?4:r>=4?3:2;return r>=5?3:r>=3?2:1}
+/* the 5-step standing of a maid rung (art, frame, colour, leaderboard, bow order: BAL.srvRk.tier); eunuch ranks pass through */
+function srkTier(r,role){r=r|0;if(role==="eunuch")return r;const T=BAL.srvRk.tier;return T[Math.max(0,Math.min(T.length-1,r))]}
+/* maid-ladder-6 OLD SAVE: maid ranks of a 5-rung save move up one from Đại cung nữ (old 0→0, 1→1 tam đẳng, 2→3, 3→4, 4→5); once, flag S.lad6 */
+function srvLad6(){if(!S||S.lad6)return 0;const up=r=>typeof r==="number"&&r>=2?r+1:r;let n=0;const seen=new Set();
+ const walk=(o,d)=>{if(!o||typeof o!=="object"||seen.has(o)||d>12)return;seen.add(o);if(o!==S&&o.role==="maid"&&typeof o.rk==="number"){const r=up(o.rk);if(r!==o.rk){o.rk=r;n++}}
+  for(const k in o){const v=o[k];if(v&&typeof v==="object")walk(v,d+1)}};
+ try{if(S.srv){const v=S.srv;["rk","rk0"].forEach(k=>{const r=up(v[k]);if(r!==v[k]){v[k]=r;n++}});if(v.ex&&typeof v.ex.to==="number")v.ex.to=up(v.ex.to)}
+  if(S.rk&&typeof S.rk==="object"){if(typeof S.rk.sr==="number")S.rk.sr=up(S.rk.sr);(S.rk.t||[]).forEach(t=>{if(Array.isArray(t)&&t[2]==="s")t[3]=up(t[3])})}
+  /* the promo chest tracker (jpromo prSeen.s: rung seen, old ma ma 5 → 6): without it every old maid save got her rung chest again on load (review r1) */
+  if(S.prSeen&&typeof S.prSeen.s==="number")S.prSeen.s=up(S.prSeen.s);
+  walk(S,0);(typeof rivals!=="undefined"?rivals:[]).forEach(v=>walk(v,1))}catch(e){console.error(e)}
+ S.lad6=1;return n}
+function srkMax(o,s){const r=rkOf(o);const K=BAL.srvRk;if(s.role==="maid")return r>=7?K.nq:r>=4?K.cs:K.dai;return r>=5?3:r>=3?2:1}
 function servMerit(s,n){s.mp=(s.mp||0)+n}
 function servRanks(){let ev="";for(const p of consorts()){/* co-op guest: NPC staff merit / rises / sales roll on the host (review/servant-mline-r2) */if(p!==S&&typeof mlGuest==="function"&&mlGuest())continue;const L=p.staff||[];for(const s of L.slice()){const o=p;servMerit(s,1+Math.floor(rkOf(o)/3));
   if((s.mp||0)>=srvMpNeed(srk(s))&&srk(s)<srkMax(o,s)&&(typeof exSrvNpc!=="function"||exSrvNpc(s))){s.rk++;s.mp=0;s.loyal=cl(s.loyal+BAL.eff.j14.loyalServRanks,0,100);if(p===S)ev+=`${s.name} được thăng ${srkName(s)}. `}
-  if(srk(s)>=2)ap(p,{bac:-Math.floor(srk(s)/2)});
+  {const t=srkTier(srk(s),s.role);if(t>=2)ap(p,{bac:-Math.floor(t/2)})}
   /* the Emperor's eye: any maid rank, chance by rank / her seeking / the master's favour (jmline mlEye, BAL.mline; was srk>=2 at 1.2 %) */
-  if(s.role==="maid"&&(typeof mlEye==="function"?mlEye(p,s):srk(s)>=BAL.mline.offRank&&roll(BAL.mline.offEye))&&roomFor("consort")){if(typeof mlRose==="function")mlRose(p,s);p.staff.splice(p.staff.indexOf(s),1);const n=newRival(0);Object.assign(n,drawFace());relAdd(p,n,s.loyal>=BAL.mline.riseLoy?BAL.mline.riseRel:-BAL.mline.riseRel);rivals.push(n);ev+=`${s.name}, ${srkName(s).toLowerCase()} của ${NM(p)}, lọt mắt xanh Hoàng thượng, được phong ${RANKS[0].n} ${n.name}${s.loyal>=BAL.mline.riseLoy?", vẫn nhớ ơn chủ cũ":", quay lưng với chủ cũ"}. `;continue}
-  /* AG-ALL B: the sale dice go while staff are agents (fillStaff = the buyer's "Nội vụ phủ: thêm cung nữ") */if(srk(s)>=2&&!(typeof asOn==="function"&&asOn())&&roll(1.5)){const ci=s.role==="maid"?0:1;const big=consorts().find(x=>x!==p&&rkOf(x)>rkOf(p)+1&&(x.bac||0)>=60&&hhHas(x)[ci]<capOf(x)[ci]);if(big){p.staff.splice(p.staff.indexOf(s),1);big.staff.push(s);s.loyal=50;ap(big,{bac:-40});if(p===S||big===S)ev+=`${s.name} bị ${NM(big)} mua về cung mình. `}}}}
+  if(s.role==="maid"&&(typeof mlEye==="function"?mlEye(p,s):srk(s)>=BAL.mline.offRank&&roll(BAL.mline.offEye))&&roomFor("consort")){if(typeof mlRose==="function")mlRose(p,s);p.staff.splice(p.staff.indexOf(s),1);const n=newRival(0);Object.assign(n,drawFace());n.fromMaidOf=key(p);if(typeof riseCore==="function")riseCore(n,s,p);else relAdd(p,n,s.loyal>=BAL.mline.riseLoy?BAL.mline.riseRel:-BAL.mline.riseRel);rivals.push(n);ev+=`${s.name}, ${srkName(s).toLowerCase()} của ${NM(p)}, lọt mắt xanh Hoàng thượng, được phong ${RANKS[0].n} ${n.name}${s.loyal>=BAL.mline.riseLoy?", vẫn nhớ ơn chủ cũ":", quay lưng với chủ cũ"}. `;continue}
+  /* AG-ALL B: the sale dice go while staff are agents (fillStaff = the buyer's "Nội vụ phủ: thêm cung nữ") */if(srkTier(srk(s),s.role)>=2&&!(typeof asOn==="function"&&asOn())&&roll(1.5)){const ci=s.role==="maid"?0:1;const big=consorts().find(x=>x!==p&&rkOf(x)>rkOf(p)+1&&(x.bac||0)>=60&&hhHas(x)[ci]<capOf(x)[ci]);if(big){p.staff.splice(p.staff.indexOf(s),1);big.staff.push(s);s.loyal=50;ap(big,{bac:-40});if(p===S||big===S)ev+=`${s.name} bị ${NM(big)} mua về cung mình. `}}}}
  return ev}
 /* AG-ALL-2e2: m = the master (default her); an NPC master runs the same (cx3:staffUp) */
 function recommend(id,m){m=m||S;const H=BAL.house;const s=servById(id);if(!s||ownerOf(s)!==m||(m.bac||0)<H.upBac)return"";if(m===S)apply({bac:-H.upBac,danh:-H.upDanh});else ap(m,{bac:-H.upBac,danh:-H.upDanh});servMerit(s,BAL.ag.par3.house.merit);
  if(m!==S)return `${m.name} tiến cử ${s.name} lên Nội vụ phủ`;log(`Tiến cử ${s.name} lên Nội vụ phủ.`);render();return""}
-function searchMaids(m){m=m||S;const me=m===S;if(me&&!can(2))return"";const head=(m.staff||[]).find(s=>s.role==="maid"&&srk(s)>=3);if(!head)return"";if(me)spend(2);const spies=m.staff.filter(s=>s.spyFor&&s.spyFor!==key(m));
+function searchMaids(m){m=m||S;const me=m===S;if(me&&!can(2))return"";const head=(m.staff||[]).find(s=>s.role==="maid"&&srk(s)>=BAL.srvRk.cs);if(!head)return"";if(me)spend(2);const spies=m.staff.filter(s=>s.spyFor&&s.spyFor!==key(m));
  if(!me){/* AG-ALL-2e2 cx3:search: the same rule for an NPC master */let r;if(spies.length){const s=spies[0];const b=byKey(s.spyFor);m.staff.splice(m.staff.indexOf(s),1);if(b&&b!==m)evA(m,b,BAL.eff.j14.evSearchMaids);r=`${head.name} tra xét cung nữ của ${m.name}: lôi ra ${s.name} là tai mắt`}
   else{const dt=allServ().find(x=>x.lover&&!(m.knowDT||[]).includes(x.sid)&&ownerOf(x)!==m);if(dt){m.knowDT=(m.knowDT||[]).concat([dt.sid,dt.lover]);r=`${head.name} tra xét cung nữ của ${m.name}, nghe ra một chuyện đối thực`}else r=`${head.name} tra xét cung nữ của ${m.name}, không thấy gì lạ`}return r}
  let r=`${head.name} tra xét cung nữ: `;if(spies.length){const s=spies[0];const m=byKey(s.spyFor);typeof knSoldFound==="function"&&knSoldFound(s);S.staff.splice(S.staff.indexOf(s),1);if(m&&m!==S)/*evok: the spy servant was bought (bribeServ deed)*/evA(S,m,BAL.eff.j14.evSearchMaids);r+=`lôi ra ${s.name} là tai mắt của ${m?NM(m):"kẻ khác"} (chứng cứ ${balSg(BAL.eff.j14.evSearchMaids)}).`}else{const dt=allServ().find(x=>x.lover&&!(S.knowDT||[]).includes(x.sid)&&ownerOf(x)!==S);if(dt){S.knowDT=(S.knowDT||[]).concat([dt.sid,dt.lover]);r+=`nghe ra chuyện đối thực của ${dt.name}.`}else r+="không thấy gì lạ."}log(r);render()}

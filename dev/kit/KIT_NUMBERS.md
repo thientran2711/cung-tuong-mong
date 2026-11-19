@@ -18,7 +18,7 @@ Rule: a new kit part gets its number HERE first (ask the coordinator); a worker 
 | 50 | kitEventDp | main | done |
 | 51 | KIT TABLE (kitRows / kitReqRows) | main | done |
 | 52 | kitRelTable / kitRelRows / kitRelDelta (+ 52.1 kitImgSync) | main, jkrel.js | done |
-| 53 | event-choice parts (kitHint, kitRisk, kitHintRow, kitKemRow, kitResultSeal) | main | done |
+| 53 | event-choice parts (kitHint, kitOptOdds, kitHintRow, kitKemRow, kitResultSeal) | main | done |
 | 54 | item reveal · grade chip · kitLose | main, jkrev.js | done |
 | 55 | KHẢO HẠCH TẤN PHONG (promotion exam) | main, jexam.js | done |
 | 56 | SCENE LIGHT (KIT_LIGHT, .kown/.kwet) | main, jsl.js | done |
