@@ -67,7 +67,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   const got=r.id?await until(G,id=>!COOPW.thin.F.pend&&COOPW.thin.F.lastAns&&COOPW.thin.F.lastAns.id===id,r.id,15000):false;
   await sleep(300);await sync();const run1=await H.p.evaluate(()=>COOPW.thin.F.stat.run);
   const g1=await gPl(),h1=await herPl(),ans=await G.p.evaluate(()=>COOPW.thin.F.lastAns);
-  const row={tag,fn,arg,from:g0.place,tc:r.tc,r,got,ran:run1-run0,ms:ans&&ans.id===r.id?ans.ms:null,st:ans&&ans.r&&ans.r.st,g1,h1,used:[g0.used,g1.used]};table.push(row);return row};
+  const row={tag,fn,arg,from:g0.place,tc:r.tc,r,got,ran:run1-run0,ms:ans&&ans.id===r.id?ans.ms:null,st:ans&&ans.r0&&ans.r0.st,g1,h1,used:[g0.used,g1.used]};table.push(row);return row};
  /* P1: every place of the map table from the guest */
  await reset();await sync();
  const PL=await G.p.evaluate(()=>places().map(x=>x.k).filter(k=>typeof k==='string'&&k!=='home'));
