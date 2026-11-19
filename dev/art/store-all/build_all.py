@@ -76,12 +76,13 @@ def _inject(g):
     for pid,k in PR.items():
         d=PRS[k]; assert g["PRINCESS_ROWS"][pid]==(d["main"],d["sec"],d["hex1"],d["hex2"],d["motif"],d["flower"]),("store row differs",pid)
 
-STYLE_OVERRIDE=None   # None = default; True (CLI --style) = force the old 2/3-image refs with the style image
+STYLE_OVERRIDE=None   # None = default (own picture only, Lượt 482); True (CLI --style) = force the old 2/3-image refs with the style image, ONLY for a brand-new character
 def NOSTYLE_FOR(rank):
-    """Lượt 414/416 RULE: the style image (6AbGv6EiJO, the owner's "M09") is used ONLY for the t1 thiếu nữ itself; ranks t2..t8 (and t8o) use her OWN t1 picture as image 1 and drop the style sentences
-    (store --nostyle; swatch of the royal ranks = image 2). Nữ đế ('nude') keeps the style image (not named by the owner yet)."""
+    """Owner Lượt 482 (widens Lượt 414/416/479): the style image (6AbGv6EiJO, the owner's "M09") is ONLY for creating a brand-new character. All 90 characters exist,
+    so EVERY rank t1..t8 and Nữ đế ('nude') uses the person's OWN picture as image 1 and drops the style sentences (store --nostyle; swatch of the royal ranks = image 2).
+    CLI --style (STYLE_OVERRIDE) forces the old style-image refs, ONLY for a NEW character."""
     if STYLE_OVERRIDE: return False
-    return rank not in (1,"nude")
+    return True
 def store(person,rank,age="a18"):
     """EXACT stdout of the store CLI for this person/rank (princess rows injected into the store's own tables)."""
     if rank=="nude": argv=["build.py",person,"v0","--nude3"]+(["--age",age] if age!="a18" else [])   # Nữ đế = the store HH t8 + added Nữ đế sentences (build.py nude3); crown varies per person (NUDE_CROWNS)

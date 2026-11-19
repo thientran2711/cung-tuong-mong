@@ -24,6 +24,11 @@ Y_OLD = "plus a clearly visible amount of royal yellow: a yellow inner robe pane
 Y_NEW = ("plus only a LITTLE royal yellow: a thin yellow trim along the collar edge, NO yellow inner robe panel, NO yellow "
          "under-skirt, NO yellow sash,")
 TAIL = "the bands appear from under the shoulder piece."
+# TP2 (r21 t1 regen, after gen BhNLrpYoQR showed plain red sleeve hems): ADDED words only, nothing removed.
+CUFF_X = (" These cuff bands are a clearly visible wide border, about a hand wide, sewn all around the bottom opening edge of "
+          "EACH wide hanging sleeve, in that hà bí colour, so the sleeve hems are NOT plain red: the red sleeve ends in a "
+          "band of the hà bí colour.")
+STRONG = {1, 3}  # ranks whose FINAL gen used CUFF_X (t1 after BhNLrpYoQR, t3 after 5jDRX02Kxe)
 
 
 def rep(t, a, b):
@@ -36,7 +41,7 @@ def build(n):
     if n == 5: t = rep(t, B20.EMB5, '')
     if n == 6: t = rep(t, B20.EMB6, '')  # yellow kept as r20 (owner Lượt 470)
     t = rep(t, 'the collar band, the cuff bands and the sash in the rank colour', 'the collar band and the sash in the rank colour')
-    t = rep(t, TAIL, TAIL + CUFF.format(colour=B20.COLOUR[n], pattern=B20.PATTERN[n]) + BODY[n])
+    t = rep(t, TAIL, TAIL + CUFF.format(colour=B20.COLOUR[n], pattern=B20.PATTERN[n]) + (CUFF_X if n in STRONG else '') + BODY[n])
     assert 'WHOLE of both sleeves' not in t and 'whole sleeve' not in t and 'full sleeve' not in t and 'phoenix-shaped' not in t
     return t
 
