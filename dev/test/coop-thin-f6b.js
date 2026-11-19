@@ -54,6 +54,13 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  await H.p.goto(BASE);await H.p.waitForTimeout(3000);await tapText(H,/^(Chơi cùng bạn|Cùng hảo hữu)/);await H.p.waitForTimeout(500);await tapText(H,/^(Mời bạn|Mời hảo hữu)/);
  await until(H,()=>window.COOP&&COOP.code&&COOP.seat==='a');const code=await H.p.evaluate(()=>COOP.code);console.log('room',code,'level',LVL,'swap',SWAP);
  if(+process.env.CPU){const c=await H.ctx.newCDPSession(H.p);await c.send('Emulation.setCPUThrottlingRate',{rate:+process.env.CPU})}/* CPU=4: the host phone ×4 slower */
+ /* PROF=1: where the host's time goes in her intent (withSeat in/out, each ctxOut step, the F run, the view flush) */
+ if(process.env.PROF)await H.p.evaluate(()=>{const TH=COOPW.thin,P=window.__prof={};const add=(k,ms)=>{const e=P[k]||(P[k]={n:0,t:0,mx:0});e.n++;e.t+=ms;e.mx=Math.max(e.mx,ms)};
+  const w0=TH.withSeat;TH.withSeat=function(seat,fn){if(seat===COOPW.seat)return w0.apply(this,arguments);const t0=performance.now();let tin=null;
+   try{return w0.call(this,seat,function(){tin=performance.now();try{return fn.apply(this,arguments)}finally{add('ws.fn',performance.now()-tin);tin=performance.now()}})}finally{add('ws.total',performance.now()-t0);if(tin)add('ws.out',performance.now()-tin)}};
+  TH.ctxOut.forEach((f,i)=>{TH.ctxOut[i]=function(){const t0=performance.now();try{return f.apply(this,arguments)}finally{add('ctxOut'+i,performance.now()-t0)}}});
+  if(TH.flush){const f0=TH.flush;TH.flush=function(){const t0=performance.now();try{return f0.apply(this,arguments)}finally{add('flush',performance.now()-t0)}}}
+  if(TH.hostView){const h0=TH.hostView;TH.hostView=function(){const t0=performance.now();try{return h0.apply(this,arguments)}finally{add('hostView',performance.now()-t0)}}}});
  await G.p.goto(BASE+'?room='+code);await G.p.waitForTimeout(3000);await tapText(G,/^(Vào phòng|Tiếp tục)/,4000);
  ok(await until(G,()=>window.COOP&&COOP.seat==='b'&&!COOP.frozen,null,60000),'guest joined seat b');
  const inW=async()=>{const t0=Date.now();while(Date.now()-t0<150000){await clear(H);await clear(G);const a=await H.p.evaluate(()=>__co().world&&rivals.some(v=>v.coop)),c=await G.p.evaluate(()=>__co().world&&rivals.some(v=>v.coop));if(a&&c)return true;await sleep(500)}return false};
@@ -250,6 +257,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  {const ms=table.filter(x=>typeof x.ms==='number').map(x=>x.ms).sort((a,b)=>a-b),lo=table.map(x=>x.r&&x.r.ms).filter(x=>typeof x==='number').sort((a,b)=>a-b);
   if(ms.length)console.log('LATENCY end→answer ms (LAG '+(+process.env.LAG||0)+', host CPU ×'+(+process.env.CPU||1)+'): n='+ms.length+' median='+ms[ms.length>>1]+' min='+ms[0]+' max='+ms[ms.length-1]);
   if(lo.length)console.log('LOCAL end tap→render ms on her phone: n='+lo.length+' median='+lo[lo.length>>1]+' min='+lo[0]+' max='+lo[lo.length-1])}
+ if(process.env.PROF){const P=await H.p.evaluate(()=>{const o={};for(const [k,e] of Object.entries(window.__prof||{}))o[k]={n:e.n,avg:Math.round(e.t/e.n),mx:Math.round(e.mx),tot:Math.round(e.t)};return o});console.log('PROF host (ms):',JSON.stringify(P))}
  if(TRIPSRC){const t=await trip();const d=(a,b)=>{const o={};for(const k of new Set([...Object.keys(a||{}),...Object.keys(b||{})]))o[k]=((b||{})[k]||0)-((a||{})[k]||0);return o};
   const sp=d(tw0&&tw0.statePart,t&&t.statePart);
   console.log('TRIPWIRE F6b table (guest writes outside fromCanon during the end table): state',(t&&t.state)-(tw0&&tw0.state||0),'· by part',JSON.stringify(sp),'· F6b entries',JSON.stringify((t&&t.parts&&t.parts.F6b||[]).slice(0,12)),'· F6b·game (her game, reported)',JSON.stringify((t&&t.parts&&t.parts['F6b·game']||[]).slice(0,8)),'· ? top',JSON.stringify((t&&t.parts&&t.parts['?']||[]).slice(0,6)));
