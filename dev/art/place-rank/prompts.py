@@ -413,7 +413,8 @@ C9_CAM = (" CAMERA AND SCALE: eye level of a standing woman, the same camera dis
     "width (centres at about 15, 36, 56 and 76 % of the width). So the furniture stands BEHIND where they will stand: the bases of the beds, seats, tables "
     "and stands in that band sit no lower than seven eighths of the picture height; below that, the floor of the room simply continues to the bottom "
     "edge, open, nothing standing on it. The corners are furnished, never bare, and the left part of the room near the viewer holds only small, low "
-    "objects, never a large piece close up at the left edge.")
+    "objects, never a large piece close up at the left edge. The floor strip under the feet (the bottom tenth of the picture) is calm and evenly lit "
+    "plain floor, without busy pattern or strong reflections, so three short lines of small name text placed there later read clearly.")
 C9_END = (" FLOOR: {FLOOR}, no large rug or carpet covering it. LIGHT: soft warm morning daylight from the right, like the light on the girl in image 2. "
     "Natural and furnished, never an empty stage; people will be placed in it later. Empty of people, no text, no writing, no characters.")
 def room9(room, img3, floor):
@@ -456,8 +457,29 @@ KN9 += (" The grandeur comes from the throne, the screen, the columns, the gilt 
         "ordinary approved room, the columns simply run out of the top of the picture. The most splendid room of the palace, yet in the same soft painted "
         "style: phoenix motifs carved, embroidered and gilded, gilt on the red columns, fine treasures. " + RC9[8] + NOSOFA + RECT)
 G9 = 'gOmYI7iSXO', 'EbYJzsMuuO'
+# (d) HH bedroom (owner Lượt 613, L14): TWO samples, A = 2 walls (wider, her preference) and B = 3 walls; same everything else.
+#     Room line = the v3/v6 Khôn Ninh bedroom words with red bedding (Lượt 584) and option-B colours; image 3 = layout + camera guide only.
+HHBED9 = ("Khôn Ninh cung bedroom, the private bedchamber of the Empress in an ancient Chinese imperial palace, a real room in daily use, open, airy and wide, {WALLS}; "
+    "red lacquer pillars with gilded phoenix carving, golden lattice windows onto a sunny summer garden; against the back wall, centred, square to it and seen "
+    "straight on, the large clear main subject, one magnificent canopy bed of gilded carved wood with golden phoenixes on its crown, royal yellow gauze curtains "
+    "lined with brick-crimson silk, tied back with red and gold tassels, brick-crimson silk brocade bedding embroidered with golden phoenixes and peonies, with "
+    "royal yellow borders and red and yellow silk cushions; along the walls a grand dressing table with a tall gilt mirror and a jewellery cabinet with gold "
+    "phoenix hairpins and pearls, a gilded folding screen with a phoenix among peonies, stools with red and yellow brocade cushions, gilded palace lanterns, a "
+    "pair of golden phoenix figures on stands, cloisonné vases of peonies, a tea table with a gold tea set, a curio shelf of jade and gold treasures, a gold "
+    "incense burner, slippers on the bed step. The most splendid bedroom of the palace, yet in the same soft painted style: phoenix motifs carved, embroidered "
+    "and gilded, gilt on the red pillars, fine treasures. " + RC9[8].replace("on the throne cushions, the ceremonial fans and the curtains", "on the bed curtains, "
+    "the borders and the cushions").replace("on the armchair cushions, the silk hangings and the tassels", "on the bedding (a red bedsheet), the curtain linings, "
+    "the stool cushions and the tassels") + RECT + " Image 3 is a guide ONLY for the wall layout, the camera distance and the people scale, NOT for its colours, "
+    "furniture or arrangement.")
+assert 'throne' not in HHBED9 and 'armchair' not in HHBED9
+W2 = ("seen with TWO walls only (owner Lượt 613: two walls read wider): the back wall straight across the picture and the right side wall running towards "
+      "the viewer in clear perspective, meeting at a square corner, like the wall layout of image 3")
+W3 = ("seen with THREE walls: the back wall straight across the middle of the picture and the left and right side walls running towards the viewer in "
+      "clear perspective, meeting it at square corners, like the wall layout of image 3")
 out9 = {'canh-phuc-cung-phi-ngu': dict(prompt=room9(PHI9, "(this same room as drawn before)", "warm polished wooden floorboards"), refs=[*G9, 'aFGyN6afSh']),
         'truong-xuan-cung-hqp-ngu': dict(prompt=room9(HQP9, "(this same room as drawn before)", "warm polished wooden floorboards"), refs=[*G9, 's7I0dD0l8e']),
+        'khon-ninh-cung-ngu-A2': dict(prompt=room9(HHBED9.replace('{WALLS}', W2), "(another approved room, used only as the guide written above)", "polished stone tiles"), refs=[*G9, 'rgXnolAxtc']),
+        'khon-ninh-cung-ngu-B3': dict(prompt=room9(HHBED9.replace('{WALLS}', W3), "(another approved room, used only as the guide written above)", "polished stone tiles"), refs=[*G9, 's7I0dD0l8e']),
         'khon-ninh-cung': dict(prompt=room9(KN9, "(image 3 is another approved reception room, a guide ONLY for camera distance, eye level and people scale, NOT for its arrangement, colours or furniture: this hall has its own arrangement as written above)", "polished stone tiles"), refs=[*G9, 'rgXnolAxtc'])}
 # GATE v9: common block present, method refs kept, no drift words, no ceiling/height plan, image 3 never a re-gen chain picture (v7/v8 gens).
 DRIFT_IMG3 = {'9ZHI728NYZ', 'jUoWKaeLD0', 'P3Q8IIK42C', 'jUoc0VKLD0', 'EbYNiqeuuO', 'xSBW07fjfW', 'aFGyB4ZfSh'}
