@@ -1,0 +1,123 @@
+<title>Cung Tường Mộng Faces</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Noto+Serif:wght@600&display=swap">
+<style>
+/* layout: sticky tab strip (one pill per look group, red tick counter) over a dense grid of face cards; a ticked card turns red = "vẽ lại" */
+:root{
+  --bg:#f5f2f1; --panel:#ffffff; --fg:#2a2226; --muted:#75696e; --line:#e2d9db;
+  --accent:#7d2a44; --accent-fg:#ffffff; --tick:#c0392b; --tick-soft:#fbe4e0;
+  --f-head:"Noto Serif",Georgia,serif; --f-body:"Be Vietnam Pro","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#1b1618; --panel:#261f22; --fg:#efe6e9; --muted:#a8999f; --line:#3a3135;
+  --accent:#e08aa3; --accent-fg:#1b1618; --tick:#ff7a6b; --tick-soft:#43241f; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1b1618; --panel:#261f22; --fg:#efe6e9; --muted:#a8999f; --line:#3a3135;
+  --accent:#e08aa3; --accent-fg:#1b1618; --tick:#ff7a6b; --tick-soft:#43241f; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:16px 40px}
+h1{font-family:var(--f-head);font-weight:600;font-size:1.55rem;margin:0 0 4px;text-wrap:balance}
+.sub{color:var(--muted);margin:0 0 12px;max-width:68ch;line-height:1.5}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;flex-wrap:wrap;gap:6px;padding-block:8px;border-bottom:1px solid var(--line);margin-bottom:10px}
+.tab{font:inherit;font-size:.92rem;border:1px solid var(--line);background:var(--panel);color:var(--fg);border-radius:999px;padding:6px 12px;cursor:pointer;display:flex;gap:6px;align-items:center}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-fg)}
+.tab:focus-visible,.card label:focus-within{outline:2px solid var(--accent);outline-offset:2px}
+.n{font-variant-numeric:tabular-nums;font-size:.8em;opacity:.8}
+.t{font-variant-numeric:tabular-nums;font-size:.75em;font-weight:700;background:var(--tick);color:#fff;border-radius:999px;padding:1px 7px}
+.t[data-z="1"]{display:none}
+.bar{display:flex;flex-wrap:wrap;gap:4px 16px;align-items:baseline;margin:0 0 12px}
+.status{color:var(--muted);font-size:.85rem}
+.list{font-size:.88rem;min-width:0;overflow-wrap:anywhere}
+.list b{color:var(--tick)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
+.card.on{border-color:var(--tick);box-shadow:0 0 0 2px var(--tick) inset;background:var(--tick-soft)}
+.card img{display:block;width:100%;max-width:100%;aspect-ratio:300/340;object-fit:cover;background:var(--line)}
+.meta{padding:8px 10px 10px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.top{display:flex;justify-content:space-between;align-items:baseline;gap:6px}
+.id{font-weight:700;font-size:1.05rem;font-variant-numeric:tabular-nums}
+.ver{color:var(--muted);font-size:.75rem}
+.g{color:var(--accent);font-size:.85rem}
+.card label{display:flex;align-items:center;gap:8px;margin-top:6px;font-size:.9rem;font-weight:600;cursor:pointer;user-select:none;padding:4px 0}
+.card input{width:20px;height:20px;accent-color:var(--tick);margin:0}
+.card input:disabled+span{color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.card{transition:background .15s,border-color .15s}}
+@media (max-width:420px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}}
+</style>
+
+<h1>Mặt các cô — tick người cần vẽ lại</h1>
+<p class="sub">Tick vào ô <b>Vẽ lại</b> dưới mặt nào cần vẽ lại. Tick được lưu ngay cho quản đốc đọc; bỏ tick là thôi. Tab đầu là tất cả, mỗi tab sau là một nhóm mặt, để so trong nhóm ai bị lạc. Người trong Kho không hiện ở đây.</p>
+<nav class="tabs" id="tabs" role="tablist"></nav>
+<div class="bar"><span class="status" id="status">Đang nối kho lưu tick…</span><span class="list" id="list"></span></div>
+<main class="grid" id="grid"></main>
+
+<script>
+const FACES=[{"id": "c01", "group": "Tươi tắn", "ver": "v3", "cut": "WDgq62mcXe"}, {"id": "c07", "group": "Tươi tắn", "ver": "v3", "cut": "JNCBytcOq4"}, {"id": "c13", "group": "Tươi tắn", "ver": "v3", "cut": "gOmMrUsSXO"}, {"id": "c15", "group": "Tươi tắn", "ver": "v3", "cut": "xSBWKKMjfW"}, {"id": "c21", "group": "Tươi tắn", "ver": "v3", "cut": "bxM2qSV5Y2"}, {"id": "m01", "group": "Tươi tắn", "ver": "v3", "cut": "hu2qEwOvqL"}, {"id": "m03", "group": "Tươi tắn", "ver": "v3", "cut": "bxMlxKk5Y2"}, {"id": "m05", "group": "Tươi tắn", "ver": "v3", "cut": "KLpSlnEkqp"}, {"id": "m06", "group": "Tươi tắn", "ver": "v3", "cut": "gOm9JpLSXO"}, {"id": "m07", "group": "Tươi tắn", "ver": "v3", "cut": "3zKcnbDREY"}, {"id": "m11", "group": "Tươi tắn", "ver": "v3", "cut": "Syh9qs6Ub8"}, {"id": "c02", "group": "Dịu dàng", "ver": "v3", "cut": "KLpAf5Hkqp"}, {"id": "c08", "group": "Dịu dàng", "ver": "v3", "cut": "Lw80qQpswO"}, {"id": "c20", "group": "Dịu dàng", "ver": "v3", "cut": "jUocxySLD0"}, {"id": "c26", "group": "Dịu dàng", "ver": "v3", "cut": "ov6UI6L829"}, {"id": "c32", "group": "Dịu dàng", "ver": "v3", "cut": "lJtMJwTgv9"}, {"id": "m02", "group": "Dịu dàng", "ver": "v3", "cut": "BhNCmskoQR"}, {"id": "m08", "group": "Dịu dàng", "ver": "v3", "cut": "4RFGZQc9Aa"}, {"id": "m14", "group": "Dịu dàng", "ver": "v3c", "cut": "mEZHy3chJQ"}, {"id": "m18", "group": "Dịu dàng", "ver": "v3", "cut": "s7IPw0Ll8e"}, {"id": "m19", "group": "Dịu dàng", "ver": "v3", "cut": "tCRQ0thmZJ"}, {"id": "m20", "group": "Dịu dàng", "ver": "v3", "cut": "UPv6ye3wny"}, {"id": "c04", "group": "Đoan trang", "ver": "v3", "cut": "xSBYH1yjfW"}, {"id": "c10", "group": "Đoan trang", "ver": "v3", "cut": "jUocHFqLD0"}, {"id": "c16", "group": "Đoan trang", "ver": "v3", "cut": "1ldnbKlr4r"}, {"id": "c22", "group": "Đoan trang", "ver": "v3", "cut": "rgXY1yHxtc"}, {"id": "c28", "group": "Đoan trang", "ver": "v3", "cut": "JNCB9V9Oq4"}, {"id": "m04", "group": "Đoan trang", "ver": "v3b", "cut": "MBJtEqLDCm"}, {"id": "m10", "group": "Đoan trang", "ver": "v3", "cut": "O6ERgEUynm"}, {"id": "m16", "group": "Đoan trang", "ver": "v3", "cut": "5jDgLXuKxe"}, {"id": "m22", "group": "Đoan trang", "ver": "v3", "cut": "eIPv8g3dqL"}, {"id": "m28", "group": "Đoan trang", "ver": "v3", "cut": "9ZHzA2JNYZ"}, {"id": "m29", "group": "Đoan trang", "ver": "v3", "cut": "kseUgS216B"}, {"id": "c05", "group": "Sắc sảo", "ver": "v3b", "cut": "MBJxg6WDCm"}, {"id": "c06", "group": "Sắc sảo", "ver": "v5", "cut": "rgXcT8Jxtc"}, {"id": "c11", "group": "Sắc sảo", "ver": "v3", "cut": "Cqn9IfbEEy"}, {"id": "c14", "group": "Sắc sảo", "ver": "v5", "cut": "rgXcTIOxtc"}, {"id": "c19", "group": "Sắc sảo", "ver": "v5", "cut": "gOmpdCcSXO"}, {"id": "c27", "group": "Sắc sảo", "ver": "v4", "cut": "KLpnNqzkqp"}, {"id": "c31", "group": "Sắc sảo", "ver": "v5", "cut": "SyheXu8Ub8"}, {"id": "m09", "group": "Sắc sảo", "ver": "v3", "cut": "gOm4HrsSXO"}, {"id": "s07", "group": "Sắc sảo", "ver": "v5", "cut": "gOmpzsdSXO"}, {"id": "s08", "group": "Sắc sảo", "ver": "v5b", "cut": "4RFmfAq9Aa"}, {"id": "s09", "group": "Sắc sảo", "ver": "v5", "cut": "w4aXWwe7EI"}, {"id": "c03", "group": "Tinh nghịch", "ver": "v3", "cut": "EbY9IHJuuO"}, {"id": "c09", "group": "Tinh nghịch", "ver": "v3", "cut": "xSBWFuTjfW"}, {"id": "c12", "group": "Tinh nghịch", "ver": "v3", "cut": "aFG4C3ifSh"}, {"id": "c18", "group": "Tinh nghịch", "ver": "v3", "cut": "1ldnb1Sr4r"}, {"id": "c24", "group": "Tinh nghịch", "ver": "v3", "cut": "xSBcLXwjfW"}, {"id": "c25", "group": "Tinh nghịch", "ver": "v3", "cut": "EbY6qU4uuO"}, {"id": "c30", "group": "Tinh nghịch", "ver": "v3", "cut": "hu2yEUcvqL"}, {"id": "m12", "group": "Tinh nghịch", "ver": "v3", "cut": "xSB7FTWjfW"}, {"id": "m24", "group": "Tinh nghịch", "ver": "v3", "cut": "p8yhIrDehw"}, {"id": "m25", "group": "Tinh nghịch", "ver": "v3", "cut": "s7IPJ0xl8e"}, {"id": "m30", "group": "Tinh nghịch", "ver": "v3b", "cut": "xSBJ6nGjfW"}, {"id": "s10", "group": "Kiêu kỳ", "ver": "v5", "cut": "u5W3NLlQLD"}, {"id": "s11", "group": "Kiêu kỳ", "ver": "v5", "cut": "cpSkbto0eP"}, {"id": "s12", "group": "Kiêu kỳ", "ver": "v5b", "cut": "fHzN9OxCDY"}, {"id": "s13", "group": "Lạnh lùng", "ver": "v5", "cut": "bxMGZJJ5Y2"}, {"id": "s14", "group": "Lạnh lùng", "ver": "v5", "cut": "nVsbFtaYQD"}, {"id": "s15", "group": "Lạnh lùng", "ver": "v5", "cut": "YMl5HhtWeC"}, {"id": "s16", "group": "Quyến rũ", "ver": "v5", "cut": "s7IM02Wl8e"}, {"id": "s17", "group": "Quyến rũ", "ver": "v5", "cut": "WDgKqfpcXe"}, {"id": "s18", "group": "Quyến rũ", "ver": "v5", "cut": "SyheMY2Ub8"}];
+const IMG={"c01": "/_blob/f1f71149bce2e66606197fa74dc270c5", "c07": "/_blob/3db61037d8652d2c7c7ca9b20c8c7e07", "c13": "/_blob/2b0d10d77dfaeb72fb464a4cb3551676", "c15": "/_blob/70f08e4dc40f6f0489d84a6dd5566570", "c21": "/_blob/ac93eb1ea601d4606a6e43d6db2165ec", "m01": "/_blob/305f4ea24c841d7f3214f7afe23904b8", "m03": "/_blob/1fc1727ce67665c240d9ef78f4adc805", "m05": "/_blob/245c179955061c26307d89b079d545a8", "m06": "/_blob/50d732d22b525d65ef08f8eb5e6961aa", "m07": "/_blob/f1310a817dd841d454c646a1a00d8d00", "m11": "/_blob/4db8ad5a140ddfdad79fac31f9e47c06", "c02": "/_blob/4709b0854b23b4b4f1bbdc93ef0fb752", "c08": "/_blob/b0c241e15d34d570a8e777e5c3a8ec0c", "c20": "/_blob/c4df917dc85e50b215fe22a4e0ac2023", "c26": "/_blob/b32a28f3b78169033061ed5afa397091", "c32": "/_blob/7b09ba93d7e6ce1c19ee5b089e18a600", "m02": "/_blob/4274b0a4f4b7f8a0b61802c87fb96706", "m08": "/_blob/2a7d39a4c13f281b40e627156beb2734", "m14": "/_blob/46f316e35345b653794b9ae3bbe83ac0", "m18": "/_blob/3c202671ccdedeef3a523bba6a206cb6", "m19": "/_blob/bf2b950ac99753c4d40739741ce40f35", "m20": "/_blob/df8e0a5185827275b33828931e58aae6", "c04": "/_blob/68b21258951b0b940aea0d57bc3f9818", "c10": "/_blob/e60aff367a123eb12830305248634be4", "c16": "/_blob/04e3ab32b90cdda9d25466fe11925a44", "c22": "/_blob/dd384ba11ddab15fb63fcddbaa14ee0a", "c28": "/_blob/d1622c01ad8b754cd5aabf0b30355e2d", "m04": "/_blob/fb8db0c5cd2c79e02d8d00cac4048594", "m10": "/_blob/9e1f8e820639af0e8ef4ab68e2555e21", "m16": "/_blob/5263f054b9c074890ddfb8f5b0311a5f", "m22": "/_blob/1d64689c0c0b38abdbad0a2744d6bd18", "m28": "/_blob/1dd9fec5e240d424a0b6a4610857d911", "m29": "/_blob/111bf40b0c57171d9f44d5a9fe51d63a", "c05": "/_blob/33327342efbc123c5f0525c4cdf18a58", "c06": "/_blob/53ea3a9f616e2fbd23c2024761693789", "c11": "/_blob/7c9f16ec9472ef73d926bb59153173c4", "c14": "/_blob/61308c903d0eec6f4d97601696a5702e", "c19": "/_blob/19da132aa5f9a07691f03cc56666938b", "c27": "/_blob/26ea3d7469472e98f09b4551f405bf99", "c31": "/_blob/ad38fe2e9bd1bee1baad4eb31fd84300", "m09": "/_blob/bc80122b3d1d34b958e46cb0ed3ef0fe", "s07": "/_blob/1ecaed8768aefc169ac7f4498a347d3d", "s08": "/_blob/197a3662ee37252347e8db56bd19da9e", "s09": "/_blob/71a3d9a5f4b79f6aea1e9e01f3cea735", "c03": "/_blob/5df9f6bdb08433a2d66d7285f94a2916", "c09": "/_blob/78b6597a48c36493b3c0f6f14a4ce391", "c12": "/_blob/6677054ba64c7d491fc64e7a38a4b0ec", "c18": "/_blob/710cdf598e956b8fcf5f447c6b8ccdc0", "c24": "/_blob/6010193837ea8040ff81ce5831f2ad21", "c25": "/_blob/e8ff0f075c9624c22661403cbaa1e670", "c30": "/_blob/0fcf760cb180eae6dc0fd929b67acc1f", "m12": "/_blob/dedbb7a73541d8da67823c1772b1d58d", "m24": "/_blob/4d43f9c19adeddb4bc39de7c39df10b7", "m25": "/_blob/f380b3acefc2d210e599fe68e51e0e10", "m30": "/_blob/30266d419d291c3d44718a9f8b9df338", "s10": "/_blob/3ab8bb30467787b39bc77bd4bd496d8a", "s11": "/_blob/74dc7253e2b7bf19533fe1a3407a110f", "s12": "/_blob/fd89163e3ac201efb9d440544e1ef587", "s13": "/_blob/b2171a15fc04ec3cdb96d221d4efeb6a", "s14": "/_blob/a72ecdf42c39a24f9c1dedfa1493230d", "s15": "/_blob/91305343a8250428c9713ac25de95cdc", "s16": "/_blob/15e6f63dcb14447ecb81669889ef8034", "s17": "/_blob/c46cfd3e5ef4279e8d05effcf5a78bd2", "s18": "/_blob/362ffac6c21d6ecf39efcac0aa0ed4ec"};
+const GROUPS=["Tươi tắn","Dịu dàng","Đoan trang","Sắc sảo","Tinh nghịch","Kiêu kỳ","Lạnh lùng","Quyến rũ"];
+let picks={}, cur="ALL", db=null, canWrite=false;
+const $=s=>document.querySelector(s);
+const inTab=(f,g)=>g==="ALL"||f.group===g;
+const size=g=>FACES.filter(f=>inTab(f,g)).length;
+const ticked=g=>FACES.filter(f=>inTab(f,g)&&picks[f.id]).map(f=>f.id);
+function tabs(){
+  const nav=$("#tabs"); nav.textContent="";
+  for(const g of ["ALL",...GROUPS]){
+    if(g!=="ALL"&&!size(g)) continue;
+    const b=document.createElement("button"); b.className="tab"; b.id="tab-"+(g==="ALL"?"all":GROUPS.indexOf(g)); b.setAttribute("role","tab");
+    b.setAttribute("aria-selected",String(g===cur));
+    const name=document.createElement("span"); name.textContent=g==="ALL"?"Tất cả":g;
+    const n=document.createElement("span"); n.className="n"; n.textContent=size(g);
+    const t=document.createElement("span"); t.className="t"; const c=ticked(g).length; t.textContent=c+" vẽ lại"; t.dataset.z=c?"0":"1";
+    b.append(name,n,t); b.onclick=()=>{cur=g; try{localStorage.setItem("tab",g)}catch(e){} render()}; nav.append(b);
+  }
+}
+function list(){
+  const ids=ticked(cur), el=$("#list"); el.textContent="";
+  if(!ids.length){el.textContent=cur==="ALL"?"Chưa tick ai.":"Nhóm này chưa tick ai."; return}
+  const b=document.createElement("b"); b.textContent=ids.length+" cần vẽ lại: "; el.append(b, ids.join(", "));
+}
+function grid(){
+  const m=$("#grid"); m.textContent="";
+  for(const f of FACES.filter(f=>inTab(f,cur))){
+    const c=document.createElement("article"); c.className="card"+(picks[f.id]?" on":"");
+    const img=document.createElement("img"); if(IMG[f.id]) img.src=IMG[f.id]; img.alt="Mặt "+f.id+" ("+f.group+")"; img.loading="lazy";
+    const meta=document.createElement("div"); meta.className="meta";
+    const top=document.createElement("div"); top.className="top";
+    const a=document.createElement("span"); a.className="id"; a.textContent=f.id;
+    const v=document.createElement("span"); v.className="ver"; v.textContent=f.ver+" · "+f.cut;
+    top.append(a,v);
+    const g=document.createElement("div"); g.className="g"; g.textContent=f.group;
+    const lab=document.createElement("label"); const cb=document.createElement("input"); cb.type="checkbox"; cb.id="pick-"+f.id;
+    cb.checked=!!picks[f.id]; cb.disabled=!canWrite; const sp=document.createElement("span"); sp.textContent="Vẽ lại";
+    cb.onchange=()=>save(f,cb.checked); lab.append(cb,sp);
+    meta.append(top,g,lab); c.append(img,meta); m.append(c);
+  }
+}
+function render(){tabs(); list(); grid()}
+async function save(f,on){
+  const prev=!!picks[f.id]; if(prev===on) return;
+  picks[f.id]=on; render();
+  if(!db) return;
+  try{ await db.doc("picks/"+f.id).set({id:f.id,group:f.group,cut:f.cut,redraw:on,at:new Date().toISOString()}); }
+  catch(e){ picks[f.id]=prev; render(); $("#status").textContent="Không lưu được tick cho "+f.id+" ("+(e&&e.code||"lỗi")+"). Thử lại sau."; }
+}
+try{const t=localStorage.getItem("tab"); if(t&&(t==="ALL"||GROUPS.includes(t))) cur=t}catch(e){}
+render();
+(async()=>{
+  const timer=setTimeout(()=>{$("#status").textContent="Chưa nối được kho lưu tick: tick sẽ không được lưu."},10000);
+  try{
+    db=window.claude&&window.claude.use? await window.claude.use("db") : null;
+    if(!db){clearTimeout(timer); $("#status").textContent="Chỉ xem: hãy đăng nhập claude.ai để tick."; return;}
+    const user=await window.claude.use("user");
+    const w=user? user.can("data.write") : null; canWrite = w!==false;
+    db.collection("picks").onSnapshot(snap=>{
+      clearTimeout(timer); const p={};
+      for(const d of snap.docs){const v=d.data(); if(v&&v.redraw) p[d.id]=true}
+      picks=p; $("#status").textContent=canWrite?"Tick được lưu tự động.":"Chỉ xem: bạn không có quyền tick.";
+      render();
+    },err=>{clearTimeout(timer); $("#status").textContent="Lỗi đọc tick ("+(err&&err.code||"không rõ")+").";});
+  }catch(e){clearTimeout(timer); $("#status").textContent="Chưa nối được kho lưu tick.";}
+})();
+</script>

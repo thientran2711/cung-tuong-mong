@@ -1,0 +1,123 @@
+<title>Cung Tường Mộng Faces</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Noto+Serif:wght@600&display=swap">
+<style>
+/* layout: sticky tab strip (one pill per look group, red tick counter) over a dense grid of face cards; a ticked card turns red = "vẽ lại" */
+:root{
+  --bg:#f5f2f1; --panel:#ffffff; --fg:#2a2226; --muted:#75696e; --line:#e2d9db;
+  --accent:#7d2a44; --accent-fg:#ffffff; --tick:#c0392b; --tick-soft:#fbe4e0;
+  --f-head:"Noto Serif",Georgia,serif; --f-body:"Be Vietnam Pro","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#1b1618; --panel:#261f22; --fg:#efe6e9; --muted:#a8999f; --line:#3a3135;
+  --accent:#e08aa3; --accent-fg:#1b1618; --tick:#ff7a6b; --tick-soft:#43241f; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1b1618; --panel:#261f22; --fg:#efe6e9; --muted:#a8999f; --line:#3a3135;
+  --accent:#e08aa3; --accent-fg:#1b1618; --tick:#ff7a6b; --tick-soft:#43241f; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:16px 40px}
+h1{font-family:var(--f-head);font-weight:600;font-size:1.55rem;margin:0 0 4px;text-wrap:balance}
+.sub{color:var(--muted);margin:0 0 12px;max-width:68ch;line-height:1.5}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;flex-wrap:wrap;gap:6px;padding-block:8px;border-bottom:1px solid var(--line);margin-bottom:10px}
+.tab{font:inherit;font-size:.92rem;border:1px solid var(--line);background:var(--panel);color:var(--fg);border-radius:999px;padding:6px 12px;cursor:pointer;display:flex;gap:6px;align-items:center}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-fg)}
+.tab:focus-visible,.card label:focus-within{outline:2px solid var(--accent);outline-offset:2px}
+.n{font-variant-numeric:tabular-nums;font-size:.8em;opacity:.8}
+.t{font-variant-numeric:tabular-nums;font-size:.75em;font-weight:700;background:var(--tick);color:#fff;border-radius:999px;padding:1px 7px}
+.t[data-z="1"]{display:none}
+.bar{display:flex;flex-wrap:wrap;gap:4px 16px;align-items:baseline;margin:0 0 12px}
+.status{color:var(--muted);font-size:.85rem}
+.list{font-size:.88rem;min-width:0;overflow-wrap:anywhere}
+.list b{color:var(--tick)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
+.card.on{border-color:var(--tick);box-shadow:0 0 0 2px var(--tick) inset;background:var(--tick-soft)}
+.card img{display:block;width:100%;max-width:100%;aspect-ratio:300/340;object-fit:cover;background:var(--line)}
+.meta{padding:8px 10px 10px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.top{display:flex;justify-content:space-between;align-items:baseline;gap:6px}
+.id{font-weight:700;font-size:1.05rem;font-variant-numeric:tabular-nums}
+.ver{color:var(--muted);font-size:.75rem}
+.g{color:var(--accent);font-size:.85rem}
+.card label{display:flex;align-items:center;gap:8px;margin-top:6px;font-size:.9rem;font-weight:600;cursor:pointer;user-select:none;padding:4px 0}
+.card input{width:20px;height:20px;accent-color:var(--tick);margin:0}
+.card input:disabled+span{color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.card{transition:background .15s,border-color .15s}}
+@media (max-width:420px){.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}}
+</style>
+
+<h1>Mặt các cô — tick người cần vẽ lại</h1>
+<p class="sub">Tick vào ô <b>Vẽ lại</b> dưới mặt nào cần vẽ lại. Tick được lưu ngay cho quản đốc đọc; bỏ tick là thôi. Tab đầu là tất cả, mỗi tab sau là một nhóm mặt, để so trong nhóm ai bị lạc. Người trong Kho không hiện ở đây.</p>
+<nav class="tabs" id="tabs" role="tablist"></nav>
+<div class="bar"><span class="status" id="status">Đang nối kho lưu tick…</span><span class="list" id="list"></span></div>
+<main class="grid" id="grid"></main>
+
+<script>
+const FACES=/*FACES*/[];
+const IMG=/*IMG*/{};
+const GROUPS=["Tươi tắn","Dịu dàng","Đoan trang","Sắc sảo","Tinh nghịch","Kiêu kỳ","Lạnh lùng","Quyến rũ"];
+let picks={}, cur="ALL", db=null, canWrite=false;
+const $=s=>document.querySelector(s);
+const inTab=(f,g)=>g==="ALL"||f.group===g;
+const size=g=>FACES.filter(f=>inTab(f,g)).length;
+const ticked=g=>FACES.filter(f=>inTab(f,g)&&picks[f.id]).map(f=>f.id);
+function tabs(){
+  const nav=$("#tabs"); nav.textContent="";
+  for(const g of ["ALL",...GROUPS]){
+    if(g!=="ALL"&&!size(g)) continue;
+    const b=document.createElement("button"); b.className="tab"; b.id="tab-"+(g==="ALL"?"all":GROUPS.indexOf(g)); b.setAttribute("role","tab");
+    b.setAttribute("aria-selected",String(g===cur));
+    const name=document.createElement("span"); name.textContent=g==="ALL"?"Tất cả":g;
+    const n=document.createElement("span"); n.className="n"; n.textContent=size(g);
+    const t=document.createElement("span"); t.className="t"; const c=ticked(g).length; t.textContent=c+" vẽ lại"; t.dataset.z=c?"0":"1";
+    b.append(name,n,t); b.onclick=()=>{cur=g; try{localStorage.setItem("tab",g)}catch(e){} render()}; nav.append(b);
+  }
+}
+function list(){
+  const ids=ticked(cur), el=$("#list"); el.textContent="";
+  if(!ids.length){el.textContent=cur==="ALL"?"Chưa tick ai.":"Nhóm này chưa tick ai."; return}
+  const b=document.createElement("b"); b.textContent=ids.length+" cần vẽ lại: "; el.append(b, ids.join(", "));
+}
+function grid(){
+  const m=$("#grid"); m.textContent="";
+  for(const f of FACES.filter(f=>inTab(f,cur))){
+    const c=document.createElement("article"); c.className="card"+(picks[f.id]?" on":"");
+    const img=document.createElement("img"); if(IMG[f.id]) img.src=IMG[f.id]; img.alt="Mặt "+f.id+" ("+f.group+")"; img.loading="lazy";
+    const meta=document.createElement("div"); meta.className="meta";
+    const top=document.createElement("div"); top.className="top";
+    const a=document.createElement("span"); a.className="id"; a.textContent=f.id;
+    const v=document.createElement("span"); v.className="ver"; v.textContent=f.ver+" · "+f.cut;
+    top.append(a,v);
+    const g=document.createElement("div"); g.className="g"; g.textContent=f.group;
+    const lab=document.createElement("label"); const cb=document.createElement("input"); cb.type="checkbox"; cb.id="pick-"+f.id;
+    cb.checked=!!picks[f.id]; cb.disabled=!canWrite; const sp=document.createElement("span"); sp.textContent="Vẽ lại";
+    cb.onchange=()=>save(f,cb.checked); lab.append(cb,sp);
+    meta.append(top,g,lab); c.append(img,meta); m.append(c);
+  }
+}
+function render(){tabs(); list(); grid()}
+async function save(f,on){
+  const prev=!!picks[f.id]; if(prev===on) return;
+  picks[f.id]=on; render();
+  if(!db) return;
+  try{ await db.doc("picks/"+f.id).set({id:f.id,group:f.group,cut:f.cut,redraw:on,at:new Date().toISOString()}); }
+  catch(e){ picks[f.id]=prev; render(); $("#status").textContent="Không lưu được tick cho "+f.id+" ("+(e&&e.code||"lỗi")+"). Thử lại sau."; }
+}
+try{const t=localStorage.getItem("tab"); if(t&&(t==="ALL"||GROUPS.includes(t))) cur=t}catch(e){}
+render();
+(async()=>{
+  const timer=setTimeout(()=>{$("#status").textContent="Chưa nối được kho lưu tick: tick sẽ không được lưu."},10000);
+  try{
+    db=window.claude&&window.claude.use? await window.claude.use("db") : null;
+    if(!db){clearTimeout(timer); $("#status").textContent="Chỉ xem: hãy đăng nhập claude.ai để tick."; return;}
+    const user=await window.claude.use("user");
+    const w=user? user.can("data.write") : null; canWrite = w!==false;
+    db.collection("picks").onSnapshot(snap=>{
+      clearTimeout(timer); const p={};
+      for(const d of snap.docs){const v=d.data(); if(v&&v.redraw) p[d.id]=true}
+      picks=p; $("#status").textContent=canWrite?"Tick được lưu tự động.":"Chỉ xem: bạn không có quyền tick.";
+      render();
+    },err=>{clearTimeout(timer); $("#status").textContent="Lỗi đọc tick ("+(err&&err.code||"không rõ")+").";});
+  }catch(e){clearTimeout(timer); $("#status").textContent="Chưa nối được kho lưu tick.";}
+})();
+</script>
