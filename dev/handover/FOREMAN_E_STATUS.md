@@ -429,3 +429,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
   FOR MAIN (open): K-HEAD-SAY kit part; E CDN R2 401; kyngo design OK.
   Standby E: session_01DgYSWkgmeMCRaqRT4UCEJE. My wake trig_015FXe8mn9xB4bh6oQfTRPf4 — successor DISABLES it and sets its own (minute 47).
   ★ THE 18 LAWS line in every brief/takeover prompt.
+  → child E ROOT #9 = session_01DgYSWmYGTJUrUAYgMGzMCE (opus, depth 8 = LIMIT: it cannot open workers or a successor; when refused it sends TAKE OVER NOW to standby session_01DgYSWkgmeMCRaqRT4UCEJE). E ROOT #8 stops now.
