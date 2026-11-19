@@ -67,3 +67,5 @@ File máy đọc: dev/art/face-common/OWNER_GROUPS_L686.json
 - Lượt 696 (chủ, THAY Lượt 695): c06, c14, c19, c31 VẼ LẠI HẾT với mặt SẮC SẢO → nhóm Sắc sảo (quá nhiều Tươi tắn + Đoan trang rồi). → NF4.
 - Lượt 697 (chủ): cân bằng nhóm — mỗi nhóm 11 người (84 chỗ / 8 nhóm); dư thì cất vào KHO (dev/art/face-common/KHO_L697.md, json value "Kho"). 29 chỗ trống → người MỚI Kiêu kỳ 10 / Lạnh lùng 10 / Quyến rũ 9.
 - Lượt 700 (chủ): Kiêu kỳ s10–s12, Lạnh lùng s13–s15, Quyến rũ s16–s18 ĐẠT. GO đủ: thêm Kiêu kỳ 7, Lạnh lùng 7, Quyến rũ 6 (NF4).
+- Lượt 700 (NF4 xong): Kiêu kỳ s10–s12 + s19–s25 (10), Lạnh lùng s13–s15 + s26–s32 (10), Quyến rũ s16–s18 + s33–s38 (9). Đã ghi OWNER_GROUPS_L686.json. Prompt sNN.v5 (s35/s38: v5b). Mặt mới KHÔNG có chữ "phoenix". Sheet: dev/handover/review-sheets/new-faces-v4/nf4_full_{kieuky,lanhlung,quyenru}.jpg.
+- Bản đồ ảnh mặt hiện hành (84 người, không tính Kho): dev/art/face-common/FACE_CUTS_L703.json (id → nhóm, cut id Magnific); ảnh mặt cắt sẵn 300×340: dev/art/face-common/face_page/faces/<id>.jpg (cho trang tick Lượt 703).
