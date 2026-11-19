@@ -995,6 +995,7 @@ MAID_IDENT=IDENT.replace("and hairstyle colour","her own hairstyle (the same at 
 TM_FADED=["grey-blue","light indigo","earth brown"]
 TM_NAME={"tm0":"cung nữ thô sử","tm1":"tam đẳng cung nữ","tm2":"nhị đẳng cung nữ","tm3":"chưởng sự cô cô","tm4":"nữ quan"}
 TM_TONE=" COLOUR TONE: the main colour is at a medium tone level: medium saturation and medium lightness, clear and fresh, NOT pale, NOT washed-out, NOT pastel-faded, NOT dark, NOT glaring."
+# BW1 (owner Lượt 520, ART_RULES K15: only consorts wear hair flowers): tm1 'and a fresh flower' and tm2 'and small fresh flowers' removed from the hair clause (removal only, no new words); tm0/tm3/tm4 (nữ quan) had none. Ma ma: MMX3 --noflower.
 def build_maid(c,state):
     assert c[0]=="m" or c[0]=="c"; n=int(c[1:]); right=(n%2==1); pal,face=DATA[c]; main=pal.split(" and ")[0]; elder=AGE in ("a51","a65")
     fw=(f" Her face: {face}." if face else " Her face and facial features exactly as in the identity reference image.")
@@ -1006,10 +1007,10 @@ def build_maid(c,state):
         colr=f"the whole uniform is one plain faded {col}"
         tone=""
     elif k==1:
-        s+=f" Outfit (a palace maid's uniform): a fine fresh {main} silk palace maid's uniform with visible delicate embroidery (floral borders on the layered collar, sleeves and hem, small embroidered flower motifs), crisp fabric folds, a decorative sash with a small jade or tassel pendant; hair in neat double buns with one or two elegant silver hairpins with small pearls and a fresh flower; light makeup. Sleeves about one hand-span wide, a palace maid's sleeves (never a consort's long trailing wide sleeves)."
+        s+=f" Outfit (a palace maid's uniform): a fine fresh {main} silk palace maid's uniform with visible delicate embroidery (floral borders on the layered collar, sleeves and hem, small embroidered flower motifs), crisp fabric folds, a decorative sash with a small jade or tassel pendant; hair in neat double buns with one or two elegant silver hairpins with small pearls; light makeup. Sleeves about one hand-span wide, a palace maid's sleeves (never a consort's long trailing wide sleeves)."
         colr=f"her main colour {main}"; tone=TM_TONE
     elif k==2:
-        s+=f" Outfit (a senior palace maid, nhị đẳng): a fine silk ruqun in {main}, with woven brocade trim at collar, cuffs and hem, a layered half-sleeve brocade jacket (bijia) on top, an embroidered silk sash with a jade pendant on a silk cord; neat double-loop buns with several silver and pearl hairpins and small fresh flowers, pearl earrings; clearly finer than an ordinary maid. Sleeves about two hand-spans wide, a palace maid's sleeves (never a consort's long trailing wide sleeves)."
+        s+=f" Outfit (a senior palace maid, nhị đẳng): a fine silk ruqun in {main}, with woven brocade trim at collar, cuffs and hem, a layered half-sleeve brocade jacket (bijia) on top, an embroidered silk sash with a jade pendant on a silk cord; neat double-loop buns with several silver and pearl hairpins, pearl earrings; clearly finer than an ordinary maid. Sleeves about two hand-spans wide, a palace maid's sleeves (never a consort's long trailing wide sleeves)."
         colr=f"her main colour {main}"; tone=TM_TONE
     elif k==3:
         s+=" Outfit (the palace mistress of servants): a dignified long robe of rich silk in a LIGHTER, softer plum purple (still clearly the purple family, not dark, not deep), with subtle tone-on-tone woven pattern and neat embroidered borders, a brocade waist sash with a ring of brass keys and a small ledger pouch hanging at her waist; one gold hairpin and a small gold comb in her hair, small jade earrings; an air of calm authority, mature and respected, still beautiful. Sleeves about three hand-spans wide."
