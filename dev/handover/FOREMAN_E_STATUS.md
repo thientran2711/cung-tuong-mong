@@ -347,3 +347,7 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
 - (19/11 ~00:35Z real) FROM MAIN: main is now ROOT-61 session_01Rc5AsJBmT3vTTFe8sbCbUa (depth 8; no scheduled wake — send_message ROOT-61 on every LAND READY / FOR MAIN). LIVE main = 8113f42e.
 - (19/11 ~00:43Z real) FROM MAIN ROOT-61: LIVE main = d2da651b (live-today-1118 landed: today's owner-approved figures, quickcheck PASS). Final-merge d2da651b before any LAND READY.
 - (19/11 ~00:46Z real) FROM MAIN ROOT-61: LIVE main = bb8e8ec9 (standard figure frame fullbody-frame-s4 landed, owner «đẩy lên»). Final-merge bb8e8ec9 before any LAND READY.
+- (19/11 00:50Z) WAKE — E ROOT #7 (ctx ~23 %; roll at ~30 %). MAIN = ROOT-61 session_01Rc5AsJBmT3vTTFe8sbCbUa (depth 8; no wake → I send_message it on LAND READY). LIVE main bb8e8ec9; Q2 8113f42e LIVE ✓ (CLAIMS done).
+  · MAIN ORDER 00:41Z (law 8, owner ma ma question OD 19/11 00:40Z) → opened history expert E15 session_01DgYSWp57dyN9pFwnJw7znu (sonnet) → reports/hist-mama-ladder.md + one-line recommendation; FOR MAIN line when done; no code by E.
+  · E13m: W2 remerge running (measure 22/22, quickcheck in progress) → LAND READY ge-writers-w2 <sha>.
+  · E11c (W3) running; E14 + E14b (bd roads) running. Load 6/12.
