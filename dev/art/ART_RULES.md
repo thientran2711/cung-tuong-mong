@@ -83,7 +83,7 @@ E7 | Item comes from the rank list (3f, 10 per rank t1–t8) × age cell; inside
 E8 | Non-consort statuses use their own 10-item lists (nhà nghèo, khuê các, Thái hậu, Nữ đế, princesses); never an item above her status. | 18/11 22:05Z | FG 260-268
 E9 | Men need their own pose table + item table (age × rank), owner approval before use. | Lượt 170 | FG 529
 E10 | Same-rank poses across people: KEEP as is until the owner says otherwise. (The old 'new-character style sentence' part is RETIRED by Lượt 555: new character = NEW_CHARACTER_TEMPLATE.md, B11.) | Lượt 555 (19/11) | FG - | over: Lượt 529 (owner via ROOT-49 chat Lượt 521) (19/11)
-E11 | ITEM LIST (owner): for EVERY rank of EVERY person-type (Nữ đế, consorts t1–t8, maids, ma ma, …) a list of 5 different held items PER AGE (a18/a26/a36/a51/a65) = 25 items per rank, so rising in rank or age never repeats an item; no two ages of one person hold the same-looking item. | Lượt 583 (19/11) | FG -
+E11 | ITEM LIST (owner; Lượt 585: EXTEND the EXISTING per-rank item lists in place, split by age — NEVER a new separate list): for EVERY rank of EVERY person-type (Nữ đế, consorts t1–t8, maids, ma ma, …) a list of 5 different held items PER AGE (a18/a26/a36/a51/a65) = 25 items per rank, so rising in rank or age never repeats an item; no two ages of one person hold the same-looking item. | Lượt 583 (19/11) | FG -
 
 ## F. Hair, hairpins, crowns per rank
 F1 | HAIR LAW: thiếu nữ + princesses before the palace = loose or half-up; t1–t3 = loose/flowing (half-up with most hair down OK); t4 Tần–t8 HH = hair UP in a bun/chignon, nothing loose down the back; cung nữ = always a bun. | Lượt 337, 331, 273 | FG 876, 870, 702 | over: 18/11 "hair same at every rank" (FG 248), Lượt 268
