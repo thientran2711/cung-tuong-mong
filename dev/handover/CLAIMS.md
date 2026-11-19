@@ -261,3 +261,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | MAIN ROOT-66 (opus; child of ROOT-65, depth 4) | handover HANDOVER_SESSION9 | ROOT-65 | session_01Rc5AsNSzMY2cT8dMMPe7xW | RUNNING | 19/11 07:33Z |
 | opt-scroll-reset (opus; MAIN ROOT-65 follow-up via C-AG #22: 22 option frames re-render loop resets scroll, root cause + whole group) | review/opt-scroll-reset; briefs/cag22-opt-scroll-reset.md | C-AG #22 for ROOT-65 | session_01Rc5AsJ7aS6giCFsrSaRM6d | RUNNING | 19/11 07:40Z |
 | caoly-road BIG review (sonnet E20r; 30d7cca8) | review/caoly-road; briefs/E20r-review-caoly-road.md | FOREMAN E | session_01DgYSWq4WTWY2p7LTCaMp3M | RUNNING | 19/11 07:45Z |
+| REVIEW coop-thin-f4 r1 (opus BIG) of ac66808f | review/coop-thin-f4-r1 | B | session_01N1tNP32iT6Kmupog2YrxpC | RUNNING | 19/11 07:47Z |
