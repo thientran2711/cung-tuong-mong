@@ -56,3 +56,7 @@ File máy đọc: dev/art/face-common/OWNER_GROUPS_L686.json
 - Câu mặt + biểu cảm MẠNH HƠN cho 8 nhóm: TYPES_v5.md (nguồn: make_nf4.py TYPES5). Sắc sảo mẫu: c27.v4, s07.v5, s08.v5, s09.v5.
 - c27 chuyển Tươi tắn → Sắc sảo (người mới, mặt mới; màu/đồ/vật theo hạng giữ nguyên).
 - Hở răng c06 c14 c19 c31: vẽ lại bằng câu miệng khép mạnh hơn (cNN.v3t). Sheet: dev/handover/review-sheets/new-faces-v4/nf4_teeth_c27_sacsao.jpg
+## Lượt 689 (chủ, qua ROOT-54) — CHỈ 4 NHÓM CHO NGƯỜI MỚI
+- Sản xuất người MỚI chỉ thuộc 4 nhóm: Sắc sảo, Kiêu kỳ, Lạnh lùng, Quyến rũ. KHÔNG vẽ thêm người mới cho Tươi tắn / Dịu dàng / Đoan trang / Tinh nghịch.
+- Viết lại prompt 4 nhóm này (tả mặt + tính cách thật mạnh), gửi chủ mẫu 3 người mỗi nhóm (12 người) → NF4.
+- Vẫn giữ: sửa răng c06 c14 c19 c31 (môi khép), c27 người mới.

@@ -23,3 +23,9 @@ depth 7 · START_CTX ≈ 4 % (get_session used_tokens read 0; own estimate) · c
 
 ## HANDOVER line
 BW6 TASK 1 done + reported to ROOT-54 (commits 0ee0570, 04df4ae; head e439ed0). Context ≈ 20 %. TASK 2 waits for ROOT-54 GO (flag: upstream c626007 "owner stop on Sắc sảo").
+
+## Flower-name fix (ROOT-54 20:47Z / 21:09Z; A21 small fix, F13) — DONE, no gens
+- build.py MAID_FLOWER (flower NAME slot of every m person): "a small pink silk flower / a small plum blossom / a little orchid / a small peach blossom / a tiny camellia" → "a pink silk flower / a plum blossom / an orchid / a peach blossom / a camellia" ("a white jasmine sprig" unchanged). Consort rows c04/c12/c20/c28 "a small lotus" → "a lotus". Only the F13 SZ ladder sets the size now.
+- Gate: check_store.py new banned rule X16 (scope tp1-6 pr1-6): `fresh flower \((a|an) (tiny|small|little|large|big|huge)\b` → FAIL. Tested: the old "a fresh flower (a tiny camellia)" → FAIL X16. Scan of all 87 people × t1–t6 (B8 bypassed): 0 size words left in the slot.
+- Gates: build_all --check ×5 ages 0 FAIL; check_store --self 0 problems (16 banned); 16 Sắc sảo + Tinh nghịch × t1–t8 × 5 ages 0 FAIL.
+- Task 2 CANCELLED by owner stop (ROOT-54 20:56Z): no gens. Next expected from ROOT-54: the owner's new face groups → LOOK_GROUPS.md.
