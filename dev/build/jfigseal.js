@@ -7,6 +7,7 @@
      · room / place / Dư đồ place view / lãnh cung / home visits (j59 stage): #tokens .tok.fig img.figimg and her own #mefig
      · event / person dialogs, person pages of the book, pet-care dialog (kitStageFig → img.kesimg; person registered by the wrapper below)
    NOT: silhouettes ("Người lạ"), the game figure of a mini-game (.kgfig), the new-life identity card (.kpfig), any crowd / shadow.
+   STAGE (owner OD 19/11 ~02:05Z + ~03:50Z): on #stage the chip stands ON the sex line, beside «ta ở đây» / the speech bubble, a clear gap above the highest REAL head top of that sex (jmark kitBadgeAt "emo", KIT §78.y) — the rule below is for dialogs / book pages.
    PLACEMENT RULE (the same fraction for every figure, size and screen): the seal sits at HEAD height, on the side of the head with room (right first, left when the right
    would leave the stage / dialog), its inner edge KIT_FIGSEAL.gap × body from the painted head-and-hair edge (kitFigBody wl/wr of the top 15 % of the painting).
    SIZE: KIT_FIGSEAL.k × the figure's body height (kitFigBody head top → feet), between min and max px — it grows and shrinks with the figure.
@@ -46,6 +47,15 @@ function kitFigSeal(fig){try{
  const s=Math.round(Math.max(K.min,Math.min(K.max,body*K.k)));
  /* KIT 34.6 r5 (owner 18/11 ~03:35Z "figure runs under the ? chip"): on a BOOK person page the seal sits in ONE fixed slot, the right end of the name row of the text column (padding reserved by .kbk-phead), never on any figure, the same slot on every page */
  if(host.matches&&host.matches(".kbk-person.kbk-full")){const ph=host.querySelector(":scope>.kbk-phead");if(ph){const q=Math.min(s,46),css=`left:${ph.offsetLeft+ph.offsetWidth-q}px;top:${ph.offsetTop+2}px;width:${q}px;height:${q}px`;if(el.style.cssText!==css)el.style.cssText=css;el.dataset.kfsb="book";return}}
+ /* KIT §78.y STAGE BADGE LINES (owner OD 19/11 ~02:05Z + ~03:50Z): on a stage the chip stands ON the line of the figure's sex (bottom = the highest real head top of that sex − G, jmark kitMarkLine),
+    beside the primary mark column (jmark kitBadgeAt(…,"emo"): centre line ± (mw/2 + sp) × H + chip/2), ONE size per stage (kitBadgeEmoSize). The plaque columns #kshR / #kshL stay a no-go zone:
+    a chip that would cross one goes to the mirror side (same distance, other side); it never leaves its line. */
+ {const st=fig.closest("#stage");if(st&&typeof kitBadgeAt==="function"){let s2=kitBadgeEmoSize(st);{const L0=kitMarkLine(st,kitBadgeSex(fig));if(L0){const rm=Math.floor(L0.bottom-st.getBoundingClientRect().top-2);if(s2>rm)s2=Math.max(14,rm)}}/* a line lifted by a tall hat / crown: the chip shrinks to stay inside the frame, never sinks onto the head */const P=s2?kitBadgeAt(st,fig,"emo",s2,s2):null;if(!P){el.style.display="none";return}
+  const pad=K.pad!=null?K.pad:10,Z=[...st.querySelectorAll("#kshR,#kshL")].filter(e=>!e.hidden&&e.offsetHeight&&e.getClientRects().length).map(e=>e.getBoundingClientRect());
+  const hit=l=>Z.some(q=>l<q.right+pad&&l+s2>q.left-pad&&P.top<q.bottom+pad&&P.top+s2>q.top-pad);const off=P.off;let L=P.left,side=P.side;
+  if(hit(L)){const l2=P.cx-side*off-s2/2;if(!hit(l2)){L=l2;side=-side;el.dataset.kfscol="1"}else el.dataset.kfscol="x"}else delete el.dataset.kfscol;
+  const hr2=host.getBoundingClientRect(),css=`left:${(L-hr2.left+host.scrollLeft).toFixed(1)}px;top:${(P.top-hr2.top+host.scrollTop).toFixed(1)}px;width:${s2}px;height:${s2}px`;if(el.style.cssText!==css)el.style.cssText=css;
+  el.dataset.kfsb=P.line.Hs.toFixed(0);el.dataset.kfsa=P.cx.toFixed(1);el.dataset.kfsf=P.line.floor.toFixed(1);el.dataset.kfsr=P.sex;el.dataset.kfss=side;return}}
  const k=Math.min(20,Math.max(1,K.rows|0)),rr=b.wr&&b.wr[k]!=null?b.wr[k]:null,ll=b.wl&&b.wl[k]!=null?b.wl[k]:null;
  /* owner 18/11 ~06:20Z: ONE fixed offset from the figure's standing anchor (ax = slot centre, feet = floor line), in body heights, so it scales with the figure and sits at the same spot for everyone: centre = ax ± dx x body, feet − dy x body (right first; left when the right would leave the frame) */
  const ax=B.bx+B.bw/2,feet=B.by+B.bh*b.b;/* standing anchor: picture centre = slot centre, painted feet = floor line */

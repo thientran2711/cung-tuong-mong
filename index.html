@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"7a56b2ef+","t":"2026-11-19T04:57Z","c":"odds-no-unknown: vu oan hints no longer repeat the odds word the meter now shows","b":"50f116c4bb64","h":[{"s":"360c0edd+","t":"2026-11-19T03:50Z","c":"ge-writers W2 r2: rebuild on main fa411d6f"},{"s":"cbacdb55+","t":"2026-11-19T03:45Z","c":"art-wiring-1119 r2: fix review r1 FAIL 1+2"},{"s":"42bda6a9+","t":"2026-11-19T03:34Z","c":"opt-loss-ton: also checks a worded gain never reads 'Được: không'; scans dialogs as the game shows them"},{"s":"cb5a7cb3+","t":"2026-11-19T03:03Z","c":"maid-ladder-6: NPC exam mini-game tier clamps at BAL.srvRk.nq (last typed rung); scan table counted"},{"s":"5f7aef61","t":"2026-11-19T02:22Z","c":"seal-lean: kitEmoSeal idle sway (rotate only) + staggered lean-in with per-feeling motion; test + KIT 38.4 canon overwrite"},{"s":"03df1c9d+","t":"2026-11-19T01:41Z","c":"role-parity.test: deterministic riseCore block (SEED FIX)"},{"s":"de1f6916+","t":"2026-11-19T01:29Z","c":"review live-servants r2: ag-know ONE RULE (NPC) case follows the live-servants rule like §3 (consort's close maid planted at the garden, re…"},{"s":"7d693c26+","t":"2026-11-19T01:22Z","c":"opt-card-short #10: samples = real events; LAW 3: a gain/loss worded only as Gợi ý now shows in Được/Tốn (was «không»)"},{"s":"2dd9cb23+","t":"2026-11-19T00:45Z","c":"review stage-here r4: buổi-turn visit refresh holds the queued cards aside so goTo (j2: returns on Q.length) keeps her where she is (OD 18/…"},{"s":"21904959+","t":"2026-11-18T23:40Z","c":"fullbody-frame s5: person dialog follows the figure standard: frame height follows the figure, figure column runs tag to frame bottom, butt…"}]};
+window.CTM_BI={"s":"6b041ea7+","t":"2026-11-19T05:21Z","c":"odds-no-unknown: vu oan hints no longer repeat the odds word the meter now shows","b":"5afd2be2e9e2","h":[{"s":"6eb0ab3d+","t":"2026-11-19T05:37Z","c":"hall-names r2: runtime test hall-names-lines.js (houseName plaque, palace list line, visit line, 'cùng cung' note; Fold + iPad)"},{"s":"c4c25bbd+","t":"2026-11-19T04:41Z","c":"head-marker-video: viewport-size recording, opening dialog cleared, maid notice kept unread, white plain state swapped at half time on the …"},{"s":"360c0edd+","t":"2026-11-19T03:50Z","c":"ge-writers W2 r2: rebuild on main fa411d6f"},{"s":"cbacdb55+","t":"2026-11-19T03:45Z","c":"art-wiring-1119 r2: fix review r1 FAIL 1+2"},{"s":"42bda6a9+","t":"2026-11-19T03:34Z","c":"opt-loss-ton: also checks a worded gain never reads 'Được: không'; scans dialogs as the game shows them"},{"s":"cb5a7cb3+","t":"2026-11-19T03:03Z","c":"maid-ladder-6: NPC exam mini-game tier clamps at BAL.srvRk.nq (last typed rung); scan table counted"},{"s":"5f7aef61","t":"2026-11-19T02:22Z","c":"seal-lean: kitEmoSeal idle sway (rotate only) + staggered lean-in with per-feeling motion; test + KIT 38.4 canon overwrite"},{"s":"03df1c9d+","t":"2026-11-19T01:41Z","c":"role-parity.test: deterministic riseCore block (SEED FIX)"},{"s":"de1f6916+","t":"2026-11-19T01:29Z","c":"review live-servants r2: ag-know ONE RULE (NPC) case follows the live-servants rule like §3 (consort's close maid planted at the garden, re…"},{"s":"7d693c26+","t":"2026-11-19T01:22Z","c":"opt-card-short #10: samples = real events; LAW 3: a gain/loss worded only as Gợi ý now shows in Được/Tốn (was «không»)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -3758,7 +3758,7 @@ function renderStage(){const P=placeOf(S.place);try{if(S.visit&&typeof stageCapF
  $("popw").innerHTML=pw;kitFix($("popw"))}
 function rvButtons(v,i){const dis=!can(2)||!v.alive||v.out||S.dead;const b=(k,extra)=>{const a=ACT[k];if(!a||(a.kid&&!a.ok(S,v)))return"";const ok=a.ok(S,v),o=a.o?actOdds(S,v,k):null;
   return `<button data-r="${i}" data-a="${k}" ${dis||!ok?"disabled":""}>${k==="poison"||k==="kpoison"?ic("doc",14):""}${a.n}<small>${[o!=null&&ok?word(oddsCl(o))+lotTag(ACTDOM[k]):"",fmt(a.c),!ok&&a.x?a.x:ok&&a.x?a.x:""].filter(Boolean).join(" · ")||"không tốn"}</small></button>`};
- if(sameHouse(S,v))return `<p class="past">Cùng ${houseName(v)} với ngươi: không thể lấy lòng hay ra tay.</p>`;let h=`<p class="past" style="margin:2px 0">${together(S,v)?"Đang cùng chỗ với nàng":`Không cùng chỗ: phải sai người đi (khó hơn; việc hại: kẻ đi bị bắt, khai ra ngươi: ${chanceW(confessRisk(bestSent(S)))})`}</p><div class="rbtn">${["spy","ally","gift","rumor","bribe","block","frame","poison","accuse","vp","plant","musk","catswap","ksab","kpoison","pond","kframe","takeaway"].map(k=>b(k)).join("")}</div>`;
+ if(sameHouse(S,v))return `<p class="past">Cùng ${houseCung(v)} với ngươi: không thể lấy lòng hay ra tay.</p>`;let h=`<p class="past" style="margin:2px 0">${together(S,v)?"Đang cùng chỗ với nàng":`Không cùng chỗ: phải sai người đi (khó hơn; việc hại: kẻ đi bị bắt, khai ra ngươi: ${chanceW(confessRisk(bestSent(S)))})`}</p><div class="rbtn">${["spy","ally","gift","rumor","bribe","block","frame","poison","accuse","vp","plant","musk","catswap","ksab","kpoison","pond","kframe","takeaway"].map(k=>b(k)).join("")}</div>`;
  if(S.rank>=7)h+=`<div class="rbtn"><button data-e="${i}" data-k="judge" ${dis||evG(S,v)<BAL.ag.ev.judge?"disabled":""}>Xử tội<small>${evG(S,v)>=BAL.ag.ev.judge?"theo chứng cứ":`cần ${BAL.ag.ev.judge} chứng cứ`}</small></button><button data-e="${i}" data-k="conf" ${dis?"disabled":""}>Tịch thu trang sức<small>nàng thù -20</small></button><button data-e="${i}" data-k="reward" ${dis||S.bac<-BAL.tw.reward.bac?"disabled":""}>Ban thưởng<small>Bạc ${BAL.tw.reward.bac} · thiện cảm +20</small></button>${v.confined?`<button data-e="${i}" data-k="pardon" ${dis?"disabled":""}>Ân xá<small>hết cấm túc</small></button>`:""}</div>`;
  return h}
 /* KIT TAB MODE (design-scale p2): every .game class that depends on the open tab. Reset before EVERY panel render; the renderer of the open
@@ -4200,7 +4200,7 @@ function rvCard(v,i){const st=!v.alive?"Đã chết":v.out?"Ở lãnh cung":"";c
  const chips=[st?"":chip(together(S,v)?`Đang cùng chỗ với ngươi`:locKnown(v)?`Thấy ở ${placeName(locKnown(v))} (buổi này) · cách ${travel(S.place,locKnown(v))} khắc`:"Nơi ở: không rõ","loc"),"",chip(host?"Thù ngươi":v.rel>20?"Thân với ngươi":"Bình thường",host?"hot":v.rel>20?"ok":""),v.pg>=20?chip(`Ngươi ghen ${v.pg}`,"hot"):"",v.ev?chip(`${ic("chung-cu",14)}Chứng cứ ${v.ev}`,"hot"):"",illKnown(v)?chip(illName(v),"hot"):"",evG(v,S)?chip(`Nắm ${evG(v,S)} chứng cứ của ngươi`,"hot"):"",v.preg&&!v.hidden?chip(`${ic("thai",14)}Có thai tháng ${v.preg}`):"",v.confined?chip(`Cấm túc ${v.confined}`):"",v.hieu?chip(`Hiệu ${v.hieu}`,"ok"):"",vpItems(v).length?chip(`Vượt phẩm: ${vpItems(v).map(e=>itm(e.k).n).join(", ")}`,"hot"):"",v.enemy?chip("Kẻ thù nhà ngươi","hot"):"",v.oldmis?chip("Chủ cũ của ngươi","hot"):"",facOf(v)?chip(`Phe ${facOf(v).name}`):""].concat(v.kids.filter(k=>k.alive).map(k=>chip(`${ic("con",14)}${k.name} · ${k.age} tuổi${k.heir?" · Thái tử":""}`,k.heir?"ok":"")));
  let note="",groups=[],empty="";
  if(st){if(v.alive&&S.rank>=7)groups=[["",[pbtn(`data-e="${i}" data-k="pardon"`,"Ân xá","đưa nàng về cung",whyTime(2)||(roomFor("consort")?"":"hậu cung đã đủ người"))]]];else empty=v.alive?"Nàng ở lãnh cung. Chỉ Hoàng hậu mới ân xá được.":"Nàng đã mất."}
- else{note=sameHouse(S,v)?`Cùng ${houseName(v)} với ngươi: không thể lấy lòng hay ra tay.`:together(S,v)?"Cùng chỗ: làm tại chỗ.":"Không gặp mặt: phải sai người (khó hơn).";groups=rvGroups(v,i);groups.unshift(["Gặp mặt",[seeBtn(v),visitBtn(v),scoutBtn(v),inviteBtn(v)]])}
+ else{note=sameHouse(S,v)?`Cùng ${houseCung(v)} với ngươi: không thể lấy lòng hay ra tay.`:together(S,v)?"Cùng chỗ: làm tại chỗ.":"Không gặp mặt: phải sai người (khó hơn).";groups=rvGroups(v,i);groups.unshift(["Gặp mặt",[seeBtn(v),visitBtn(v),scoutBtn(v),inviteBtn(v)]])}
  return pcard({tabKey:"rival",f:pv(v),col:RCOL[v.queen?7:v.rank],name:v.name,rank:`${ic(RIMG[v.queen?7:v.rank],16)}${v.queen?"Hoàng hậu":RANKS[v.rank].n}`,status:st,out:!!st,ghen:st?null:v.ghen,lines,chips,note,groups,empty})}
 function rvTabHTML(){return `<div class="pgwrap">`+pager("rv",rivals.map(v=>({f:pv(v),name:shortN(v.name),dim:!v.alive||v.out})),i=>rvCard(rivals[i],i))+`</div>`}
 
@@ -5016,11 +5016,14 @@ function residents(k){const L=[];if(k==="kn"){const q=rivals.find(v=>v.queen&&v.
 /* palaceOf: a lower consort living under the queen is in Càn Ninh */
 /* (owner 11/14: nobody lives under the queen any more — palSolo; a stale link from an old save is cut in houseOf below until palFix runs) */
 (function(){const h0=houseOf;houseOf=function(p){const k=h0.apply(this,arguments);try{if(p&&k!==key(p)&&rkOf(p)<PAL_HEAD){const h=byKey(k);if(h&&palSolo(h))return key(p)}}catch(e){}return k}})();
-function houseName(p){const k=palaceOf(p);const hd=byKey(houseOf(p));return k==="home"?(p===S?palName("home"):`thiên điện ${palName("home")} (cung ngươi)`):hd===p?palName(k):`thiên điện ${palName(k)}`}
+function houseName(p){const k=palaceOf(p);const hd=byKey(houseOf(p));const hl=p!==S&&hd!==p&&typeof resHallOf==="function"?resHallOf(p):null;/* hall-names r2: her side hall's plaque, role word only when unknown */
+ const side=n=>hl?`${hl} · ${n}`:`thiên điện ${n}`;return k==="home"?(p===S?palName("home"):`${side(palName("home"))} (cung ngươi)`):hd===p?palName(k):side(palName(k))}
+/* houseCung(p): the palace two housemates share — "cùng cung" (同宮) is the court phrase for consorts of one palace in different halls (history check, hall-names r2) */
+function houseCung(p){return palName(palaceOf(p))}
 /* places carry the plan names; one entry per house */
 (function(){const p0=places;places=function(){const L=p0.apply(this,arguments).filter(x=>!(x.k[0]==="r"));for(const x of L)if(PLNAME[x.k]){x.n=PLNAME[x.k][0];x.fn=PLNAME[x.k][1]}
  const seen={};for(const v of rivals){if(!v.alive||v.out||v.queen)continue;const k=palaceOf(v);if(k==="home"||k==="kn"||seen[k])continue;seen[k]=1;const hd=RV(+k.slice(1));const R2=residents(k);
-  L.splice(L.length-3,0,{k,n:palName(k),fn:palFn(k),d:`${hd&&rkOf(hd)>=PAL_HEAD?"Chủ vị "+j78who(hd):"Ở thiên điện"}${R2.length>1?" · thiên điện: "+kitNameList(R2.filter(x=>x!==hd)):""}.`,sc:"rv",v:hd}) }
+  L.splice(L.length-3,0,{k,n:palName(k),fn:palFn(k),d:`${hd&&rkOf(hd)>=PAL_HEAD?"Chủ vị "+j78who(hd):"Ở thiên điện"}${R2.length>1?" · "+R2.filter(x=>x!==hd).map(x=>`${(typeof resHallOf==="function"&&resHallOf(x))||"thiên điện"}: ${kitNameList([x])}`).join(" · "):""}.`,sc:"rv",v:hd}) }
  return L}})();
 (function(){const p0=placeOf;placeOf=function(k){if(k==="home"){const R2=residents("home").filter(x=>x!==S);return{k,n:palName("home"),fn:"tẩm cung của ngươi",d:`Cung nữ và các con ở đây.${R2.length?" Thiên điện: "+kitNameList(R2)+".":""}`,sc:"home"}}return p0.apply(this,arguments)}})();
 /* the ceremony card when she first heads a palace: the Emperor grants the best empty one; she may ask for another */
@@ -5055,7 +5058,7 @@ function mapHTML(){const W=S.where||{};const disR=k=>S.out?"đang ở lãnh cung
 /* the palace screen: residents present stand in the scene; absent ones named 'đi vắng' only if known */
 (function(){const g=goTo;goTo=function(k){const r=g.apply(this,arguments);try{if(S.place===k&&S.visit&&(k==="home"||k==="kn"||k[0]==="r")){const R2=residents(k).filter(p=>p!==S);const here=R2.filter(p=>whereOf(p)===k);const away=R2.filter(p=>whereOf(p)!==k);
    const aw=away.map(p=>{const l=locKnown&&locKnown(p);return l?`${p.name} (đi vắng, ở ${palName(l)})`:null}).filter(Boolean);
-   S.visit.res={here:here.map(p=>p.id),away:aw};const line=`${palName(k)}: ${R2.length?R2.map(p=>`${p.name} (${p.queen?"Hoàng hậu":RANKS[p.rank].n}${byKey(houseOf(p))===p?", chủ vị":", thiên điện"})`).join(", "):"không ai ở"}.${aw.length?" "+aw.join("; ")+".":""}`;
+   S.visit.res={here:here.map(p=>p.id),away:aw};const line=`${palName(k)}: ${R2.length?R2.map(p=>`${p.name} (${p.queen?"Hoàng hậu":RANKS[p.rank].n}${byKey(houseOf(p))===p?", chủ vị":`, ${(typeof resHallOf==="function"&&resHallOf(p))||"thiên điện"}`})`).join(", "):"không ai ở"}.${aw.length?" "+aw.join("; ")+".":""}`;
    if(k!=="home")S.visit.msg=(S.visit.msg?S.visit.msg+" ":"")+line}}catch(e){}return r}})();
 (function(){const s0=start;start=function(){const r=s0.apply(this,arguments);try{palFix()}catch(e){}return r}})();
 /* on a narrow screen the zoomed map opens centred on where she stands */
@@ -8588,8 +8591,9 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  const KA=st.__kfa;/* KIT_FLOOR anchor (jk2b kitFloorFit): feet on the painted floor line while the figure keeps its kit height */
  let capOn=(()=>{try{return kitView().pages===2}catch(e){return true}})();/* KIT §33 (canon): the maxPx cap applies to iPad-wide layouts only; Fold / phones keep the full .79 of their taller stage *//* KIT §0: the left page in the spread and the one-page room are the same page */
  let FOX=0;/* fig-tag-chip: floor band the wrapped name tags need (phones: a long rank/plate/name wraps to 4-5 lines) */
- /* owner 18/11 ~03:5xZ: her marker's whole bounce range stays INSIDE the stage frame: her picture top (the marker stands on it) keeps kitMeMarkRoom px under the frame top; every figure shares the ONE H, so a tall stage shrinks all just enough */
- const meCap=fo=>{try{if(!me||!mb||!window.kitMeMarkRoom)return 1e9;return (sH-fo-kitMeMarkRoom(KF.h*sH*1.07))*(mb.b-j59bt(mb))}catch(e){return 1e9}};
+ /* owner 18/11 ~03:5xZ: the marker's whole bounce range stays INSIDE the stage frame; every figure shares the ONE H, so a tall stage shrinks all just enough */
+ /* KIT §78.y (owner OD 19/11 ~02:05Z): the higher badge line is the MEN's (standard man head top = H × KIT_FIG.man, no crown / hat) + the marks' room (jmark kitMarkRoom), so the ONE H is capped so that line stays inside the frame, for every stage (badges are for everyone, not only her) */
+ const meCap=fo=>{try{if(!window.kitMarkRoom)return 1e9;return (sH-fo-kitMarkRoom(KF.h*sH))/Math.max(1,KF.man||1)}catch(e){return 1e9}};
  const size=()=>{const fo=Math.max(kitSlotFloor(sH),FOX);/* KIT 33.12 fixed slot table: ONE floor line per stage height (no name-chip or painted-floor shift), so a person snaps to the same x AND y on every stage / place / room */CAP=sH-fo-topR;return{fo,H:Math.max(sH*.2,Math.min(KF.h*sH,CAP,meCap(fo),(KF.maxPx&&capOn)?KF.maxPx:1e9))}};
  const maxF=Math.max(1,...F.map(x=>x.f));
  const widthFor=(z)=>{let rr=rightR;try{const kR=document.getElementById("kshR");const head=sH-z.fo-Math.min(z.H*maxF,sH-z.fo-topR);/* the right plaque column (court chips, maid, Ân sủng) is reserved when it reaches down to the heads: no face or name is ever under it
@@ -8635,7 +8639,7 @@ function j59lay(){const st=document.getElementById("stage");if(!st||!S)return;co
  const persons=E.filter(x=>j59person(x.p)).length,after=E.slice(s1).filter(x=>j59person(x.p)).length,before=E.slice(0,s0).filter(x=>j59person(x.p)).length;
  if(pages>1)st.dataset.j59pg=[pg,pages,s0,s1,M].join(",");else delete st.dataset.j59pg;
  /* fixed slots (owner 16/11): 1 → centre, 2 → 1/3 · 2/3, 3 → 1/4 · 2/4 · 3/4 of the free width (stage minus the side column) */
- const kOn=(showMe?1:0)+vis.length;const cxOf=i=>kitSlotCxE(i,N,G.x0,G.avail);st.dataset.j59free=G.x0.toFixed(1)+","+G.avail.toFixed(1);const floorY=st.clientHeight-fo;
+ const kOn=(showMe?1:0)+vis.length;const cxOf=i=>kitSlotCxE(i,N,G.x0,G.avail);st.dataset.j59free=G.x0.toFixed(1)+","+G.avail.toFixed(1);const floorY=st.clientHeight-fo;st.dataset.kmlH=H.toFixed(1);st.dataset.kmlM=Math.min(H*(KF.man||1),CAP).toFixed(1);st.dataset.kmlF=floorY.toFixed(1);/* KIT §78.y: the one woman body H, the one man body (×KIT_FIG.man, capped under the ribbon like every man) + the floor line (stage px) = what kitMarkLine (jmark) builds the two badge lines from */
  if(tk){tk.style.setProperty("left","0px","important");tk.style.setProperty("right","0px","important");tk.style.setProperty("top","0px","important");tk.style.setProperty("bottom","0px","important");
   ["paddingLeft","paddingRight","paddingBottom","columnGap","justifyContent"].forEach(k=>tk.style[k]="")}
  const centres=[];let slot=0;const usedPets=[];
@@ -25140,7 +25144,7 @@ function evidenceActs(p){if(!S||!p||p===S)return[];const n=evG(S,p);const i=riva
  const odds=k=>{let o=null;try{o=actOdds(S,p,k)}catch(e){}return o==null?"":word(oddsCl(o))};/* actOdds (j9): the odds evidenceDo's roll uses (one path) */
  const add=(k,o)=>{const a=ACT[k];if(!a)return;let ok=false;try{ok=a.ok(S,p)}catch(e){}R0.push(Object.assign({k,n:a.n,odds:"",why:"",cost:[],gain:[],fail:[],risk:[],go:()=>evidenceDo(p.id,k)},o(ok)))};
  const nf=(need)=>`cần ${need} chứng cứ, đang có ${n}`;
- const busy=()=>!p.alive?"nàng đã mất":p.out?"nàng ở lãnh cung":sameHouse(S,p)?`cùng ${houseName(p)} với ngươi`:t2||"";
+ const busy=()=>!p.alive?"nàng đã mất":p.out?"nàng ở lãnh cung":sameHouse(S,p)?`cùng ${houseCung(p)} với ngươi`:t2||"";
  add("accuse",ok=>{const need=accNeed(p);const tr=rkOf(p);const fall=p.queen||tr>=5?`${W} bị phế vào lãnh cung`:`${W} bị đày lãnh cung hoặc giáng xuống ${RANKS[Math.max(0,tr-2)].n}`;
   return{odds:odds("accuse"),why:busy()||(n<need?nf(need):rkOf(p)>=7&&S.rank<3?"tố Hoàng hậu cần phẩm Tần trở lên":""),cost:["2 khắc",`Chứng cứ -${n} (dùng hết)`],gain:[fall,"Danh +6"],fail:["Danh -8",`${W} quý ngươi ${balSg(BAL.eff.j8.f_6)}`,`${W} oán ngươi +${balOan(BAL.eff.j8.f_6,"hurt")}`].concat(tr>=7?["phạm thượng: bị giáng một bậc hoặc cấm túc"]:[]),risk:tr>=7?["thắng: 12 tháng không được tranh ghế Hoàng hậu"]:[]}});
  add("tocao",ok=>{const cr=realCrime(p);return{odds:odds("tocao"),why:busy()||(n<1?nf(1):!cr?"nàng không có tội thật nào (vượt phẩm, đồ cấm, từng bày mưu)":""),cost:["2 khắc",`Chứng cứ ${balSg(BAL.eff.j30.evF)}`],gain:[`${W} bị giáng xuống ${RANKS[Math.max(0,rkOf(p)-1)].n} vì ${cr||"tội thật"}`,"Danh +3"],fail:["Danh -5"]}});
@@ -32159,6 +32163,9 @@ BAL.bookFigW=.343;BAL.figWideRef=.65;/* painted width / body (skull top -> feet)
 /* DOING AN ACT ON THE SPOT (review/shown-odds-one-path): "Cài đồ vào rương nàng" done in her own palace is easier than sending
    someone by actHere.plant (was a typed -15 pen in j8 plantpick + a typed +15 on the j2 chest card); both read it through actCtx (j9). */
 Object.assign(BAL,{actHere:{plant:15}});
+/* ERRAND SCENE (owner OD 18/11 ~20:05Z..~20:20Z, jerr): n = khắc the person she sends stays away (counted from the tap, the walk included) when the parallel-time core
+   (jptime BAL.ptime.kinds[k].n) is not in the build; the scene reads the ONE state through the jerr adapter either way. msWalk = one walk off / on stage (ms, x BAL.pace via kitPace). */
+Object.assign(BAL,{errand:{n:2,msWalk:650}});
 /* ROLE PARITY part 2 (owner OD 18/11 ~21:30Z; law 1 two-way + law 4 one core): the NPC side of her buttons that had none (jagacts4 cx4:*).
    Costs / odds / gains are the player's own rows (BAL.btn.kidCare/kidGuard + BAL.bacFee, BAL.cyc, BAL.ration, IROUTE in j83, BAL.odb.j22);
    here only the WORTH of each deed to an NPC (g = needs it serves, as BAL.ag.par3) and its gates.
@@ -40371,6 +40378,8 @@ function residenceOf(p){const R=(o)=>Object.assign({pal:null,head:null},o);if(!p
  if(h===S)return S.pal!=null?R({part:resSidePart(p,S),pal:S.pal,head:S}):R({part:"ngocthanh",head:S});
  if(h.queen)return R({part:"kn",head:h});
  return h.pal!=null?R({part:resSidePart(p,h),pal:h.pal,head:h}):R({part:"ngocthanh",head:h})}
+/* resHallOf(p) → the plaque of the side hall p lives in ("Dưỡng Xuân hiên"), or null (head, Càn Ninh, Ngọc Thanh, servants…) — hall-names r2, OD:L1474 residence lines */
+function resHallOf(p){try{const r=residenceOf(p);if((r.part==="dong"||r.part==="tay")&&r.pal!=null&&typeof PALN!=="undefined")return hallName(PALN[r.pal],r.part)}catch(e){}return null}
 function resRoomName(r){if(!r)return"";if(r.part==="ngocthanh")return typeof HOMEN!=="undefined"?HOMEN:"Ngọc Thanh các";
  if(r.part==="kn")return hallName("Càn Ninh cung","chinh")+" · Càn Ninh cung";if(r.part==="lc")return"Trường Môn viện";
  const pn=r.pal!=null&&typeof PALN!=="undefined"?PALN[r.pal]:"";return hallName(pn,r.part)+(pn?` · ${pn}`:"")}
@@ -43456,7 +43465,7 @@ function relRows(X,Y){const a=X.p,b=Y.p;const met=p=>p===S||(p!=="emp"&&p!=="th"
 /* "Đã biết về X" = facts about X only (each with its source); X = Ta → the box is hidden (her own facts are in her Tư chất / Mệnh truyện) */
 function relPair(X,Y){const p=X.p,o=Y.p;const strangers=[X,Y].filter(q=>q.met===false);
  const note=strangers.map(q=>`<p class="kr3note">Ta chưa gặp ${q.name}, chưa rõ nàng ta đối với người khác ra sao. Gặp nàng ta, dò la, hoặc có thêm tai mắt.</p>`).join("")+
-  (p!==S&&o===S&&p!=="emp"&&p!=="th"&&sameHouse(S,p)?`<p class="kr3note">Cùng ${houseName(p)} với ta.</p>`:"");
+  (p!==S&&o===S&&p!=="emp"&&p!=="th"&&sameHouse(S,p)?`<p class="kr3note">Cùng ${houseCung(p)} với ta.</p>`:"");
  const btn=p!==S&&p!=="emp"&&p!=="th"&&X.met!==false?seeBtn(p):"";
  const known=p!==S&&p!=="emp"&&p!=="th"&&X.met!==false?knownCol(p):"";
  return `<div class="krelpair"><h4 class="krelh">Quan hệ giữa ${X.k==="me"?"ta":X.name} và ${Y.k==="me"?"ta":Y.name}</h4>`+
@@ -43753,13 +43762,14 @@ function htAct(a,b){if(!S||S.dead||Q.length)return;const r0=rsnap();
  if(a==="ask"){const x=b.dataset.hk==="q"?qnById(+b.dataset.hid):h54Son(+b.dataset.hid);if(!x||htKn(x)||!can(BAL.btn.htAsk.k)||S.bac<BAL.bacFee.htAsk)return;spend(BAL.btn.htAsk.k);apply({bac:-BAL.bacFee.htAsk});htKnow(x);
   const n=bestSent&&bestSent(S);log(`${n?n.name+" dò hỏi":"Ngươi dò hỏi"} gia thế: ${b.dataset.hk==="q"?qLine(x):h54SonLine(x)}.`);resultShow("Dò hỏi gia thế",r0,"sure");render();return}
  if(a==="go"){tab=b.dataset.t;if(b.dataset.pi!=null)PG[tab]=+b.dataset.pi;render()}}
-document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-ht]");if(b&&!b.disabled){e.preventDefault();e.stopPropagation();htAct(b.dataset.ht,b)}},true);
+document.addEventListener("click",e=>{const b=e.target.closest&&e.target.closest("[data-ht]");if(b&&!b.disabled){e.preventDefault();e.stopPropagation();(window.htAct||htAct)(b.dataset.ht,b)}},true);
 /* the son's own card (Con của ngươi) gets the marriage button + state, like the daughters' */
 (function(){const kc=kidCard;kidCard=function(k){let h=kc.apply(this,arguments);try{if(k&&k.alive&&k.sex==="m"&&(k.age>=BAL.age.matchShow||k.pB||k.pW)){
   h=h.replace('<div class="pcinfo">',`<div class="pcinfo"><span>Hôn sự: ${pkState(k)}</span>`);const bt=pkBtn(k);if(bt)h=h.replace('<div class="pcr">',`<div class="pcr"><h5>Hôn sự</h5><div class="pcb">${bt}</div>`)}}catch(e){}return h}})();
 function pkState(k){if(k.pW){const W=k.pW;return `chính phi ${W.chinh.name}, con gái ${W.chinh.off}${W.trac.length?` · trắc phi ${W.trac.map(x=>x.name).join(", ")}`:""}`}
  if(k.pB){const q=qnById(k.pB.q);return `đã hứa hôn với ${q?q.name+", con gái "+q.off:"quý nữ"}${k.age<BAL.age.wed?", cưới khi tròn "+(BAL.age.wed)+"":""}`}return k.age>=BAL.age.betroth?"chưa bàn hôn sự":"chưa đến tuổi bàn hôn sự (16)"}
 window.pkState=pkState;
+window.htAct=htAct;/* jerr (errand scene) wraps the "ask" errand: Dò hỏi gia thế */
 
 /* ---------- STRANGER RULE for children (owner 11/15): a child she has never met shows the grey child silhouette everywhere (strip, card,
    Kế vị, stage); the name is public (announced at birth, j61 k61Pub). Met = her own children (from birth), a palace visit to the mother,
@@ -46772,7 +46782,8 @@ if(typeof j76sucWhy==="function"){j76sucWhy=function(c){if(!S||S.dead||c<=1||win
    EIGHT markers, one per rank 0→7 (owner 11/15): img/kit/me-mark-<r>.webp (gpt-2-6, transparent, no tassel), growing in grandeur:
    0 ivory plum blossom · 1 silver orchid + green jade · 2 silver flower + aquamarine · 3 jade lotus bud (Tần) · 4 amethyst chrysanthemum + luan ·
    5 ruby peony · 6 gold phoenix on a jade cloud · 7 amber-gold phoenix with spread wings (Hoàng hậu; owner 11/15 swap). Size factor KIT_MEMARK.sc[r].
-   ONE PLACEMENT RULE: marker bottom = TOP OF HER HEAD (first opaque row of the figure art, hair ornaments included) − gap, gap = KIT_MEMARK.gap ×
+   STAGE: the marker stands ON the sex line of the stage (kitMarkLine / kitBadgeAt below, KIT §78.y: line = the highest REAL head top (hair / crown included) of the visible figures of that sex − a clear gap), never touching any head.
+   DIALOG PLACEMENT RULE: marker bottom = TOP OF HER HEAD (first opaque row of the figure art, hair ornaments included) − gap, gap = KIT_MEMARK.gap ×
    her drawn figure height (same fraction for every figure, size and screen). Never covers the head; when there is not enough room above the head
    (dialogs, the scene title) the marker SHRINKS instead (down to KIT_MEMARK.tiny px).
    Motion: squash-and-bounce loop (17/11), only with Cảnh động on and no reduced motion. A very faint soft shadow keeps it readable on busy paintings.
@@ -46791,8 +46802,6 @@ function kmmOwned(){try{if(!S)return[];const r=kmmRankNow();if(!Array.isArray(S.
  else if(r!=null&&!S.meMarks.includes(r)){for(let i=0;i<=r;i++)if(!S.meMarks.includes(i))S.meMarks.push(i)}S.meMarks.sort((a,b)=>a-b);return S.meMarks}catch(e){return[]}}
 function kmmCur(){const L=kmmOwned();if(!L.length)return null;const c=S.meMark;return c!=null&&L.includes(c)?c:L[L.length-1]}
 function kmmSrc(r){return `https://ctm-img.victoria-tntt.workers.dev/img/kit/me-mark-${r}.webp`}
-/* room the stage must keep above her head for the marker's whole bounce (j59 floors topR with it; a taller figure shrinks just enough) */
-window.kitMeMarkRoom=function(bh){try{const r=kmmCur();if(r==null)return 0;const K=KIT_MEMARK,sc=K.sc[r]||1;const H=Math.round(Math.max(K.min*sc,Math.min(K.max*sc,bh*K.h*sc))*(K.big||1));return Math.ceil(H*1.03+bh*K.gap+K.bob+(K.edge||0))}catch(e){return 0}};
 window.kitMeMarkUse=function(r){const L=kmmOwned();if(!L.includes(r))return false;S.meMark=r;kmmSched();return true};
 /* ---------- head measurement (once per picture) ---------- */
 const KMM_HEAD={};
@@ -46822,6 +46831,11 @@ function kitMeMark(fig){try{
  const B=kmmBox(fig),hr=host.getBoundingClientRect();if(B.bh<20){mk.style.visibility="hidden";return mk}
  const K=KIT_MEMARK,sc=K.sc[r]||1;let H=Math.round(Math.max(K.min*sc,Math.min(K.max*sc,B.bh*K.h*sc))*(K.big||1)); /* owner 17/11 07:15Z: +5 % (K.big, one kit value; 2–8 % allowed) */
  const ar=im.naturalWidth&&im.naturalHeight?im.naturalWidth/im.naturalHeight:1;
+ /* KIT §78.y: on a stage her marker stands ON her sex line (the highest REAL head top of that sex − G), on her centre line; dialogs keep the head rule below */
+ if(fig.id==="mefig"){const st=fig.closest("#stage");const L1=st&&kitMarkLine(st,kitBadgeSex(fig));if(!L1){mk.style.visibility="hidden";return mk}
+  const sc=L1.sc||1;let Hm=Math.round(Math.max(K.min*sc,Math.min(K.max*sc,L1.H/sc*K.h*(K.sc[r]||1)))*(K.big||1))*sc;if(L1.room<Hm)Hm=Math.max(K.tiny*sc,Math.floor(L1.room));/* never out of the frame top: shrinks, never sinks onto a head */const ar0=im.naturalWidth&&im.naturalHeight?im.naturalWidth/im.naturalHeight:1;const Wm=Math.round(Hm*ar0);
+  const P=kitBadgeAt(st,fig,"me",Wm,Hm);if(!P){mk.style.visibility="hidden";return mk}const L0=P.left;mk.style.cssText=`left:${(L0-hr.left+host.scrollLeft).toFixed(1)}px;top:${(P.top-hr.top+host.scrollTop).toFixed(1)}px;width:${Wm}px;height:${Hm}px`;
+  mk.dataset.r=r;mk.dataset.at="row";mk.dataset.gap=(B.by+B.bh*hd.t-(P.top+Hm)).toFixed(1);mk.classList.toggle("kmmove",kmmMotion());return mk}
  const cx=B.bx+B.bw*hd.x,headTop=B.by+B.bh*hd.t,gap=Math.max(1,B.bh*K.gap),bottom=headTop-gap;
  /* room above the head: the host's top edge, and anything the marker must not cover (scene title, plaques, chips) */
  /* dialogs: the room above the figure is the figure column (the free space over the head inside the dialog), not just the figure box */
@@ -46830,6 +46844,56 @@ function kitMeMark(fig){try{
  const W=Math.round(H*ar),top=bottom-H;
  mk.style.cssText=`left:${(cx-hr.left-W/2+host.scrollLeft).toFixed(1)}px;top:${(top-hr.top+host.scrollTop).toFixed(1)}px;width:${W}px;height:${H}px`;
  mk.dataset.r=r;mk.dataset.gap=(headTop-(top+H)).toFixed(1);mk.classList.toggle("kmmove",kmmMotion());return mk}catch(e){console.error("kitMeMark",e);return null}}
+/* KIT §78.y STAGE BADGE LINES (owner OD 19/11 ~02:05Z two lines per sex; OD 19/11 ~03:50Z FAIL of r5: "nó đang che trực tiếp ngay trên đầu của cái người đó" → canon overwrite):
+   every head marker on a stage — the player's «ta ở đây» (.kmemark), the speech bubble (.khead white / whole-bubble yellow, §78.z) and the mood seal at the head (.kfseal, §28.8d) —
+   is anchored from the REAL HEAD TOP of the figures on screen: the first opaque row of each figure picture (hair, hair ornaments, crown, hat included; kitFigBody t = alpha bbox
+   of the art, measured once per picture and cached), never a fixed fraction of the figure box or a "standard" head.
+     line of a sex = min(real head top of every VISIBLE figure of that sex on the stage) − G        (fallback when no figure of that sex shows: floor − standard body of that sex − G)
+     G = max(KIT_BADGE.gapMin px, KIT_BADGE.gap × H) + KIT_BADGE.reach × seal size              (a clear gap; the seal's lean-in / droop reach is inside G, so even mid-motion nothing touches a head)
+   (1) every mark's BOTTOM sits ON the line of its figure's sex → all women's marks level, all men's marks level (two lines, OD ~02:05Z), «ta ở đây» level with the bubble;
+   (2) «ta ở đây» / the bubble stand on the figure's centre line; the mood seal stands BESIDE them on the same line: centre = centre line ± (KIT_BADGE.mw × H / 2 + KIT_BADGE.sp × H + seal / 2)
+       (mw = the widest primary mark of the line, so seal and mark never overlap when both show); right first, mirrored left when the right would leave the stage, cross a plaque
+       or touch a neighbour's mark column;
+   (3) a mark never covers hair, headdress, face or another figure's mark (dev/test/head-marker-gap.js scans the real alpha of every figure under every mark).
+   Sizes scale with H only (one size per stage). kitMarkLine(st,sex) → {top,bottom,head,h,H,Hs,floor,sc,sex,real,room} in viewport px (null before j59 has laid the stage out or
+   before the figures are measured — they re-run on measure); kitBadgeAt(st,fig,kind,w,h) → {left,top,cx,side,sex,off,line} (top-left of the mark box). */
+window.KIT_BADGE=window.KIT_BADGE||{emo:.105,emoMin:22,emoMax:50,gap:.024,gapMin:7,reach:.2,mw:.1,sp:.012};/* gap / gapMin = the clear air between the highest real head top of a line and every mark bottom (fraction of the stage body H, px floor); reach = the seal's lean-in + droop reach below its box (scale 1.18 about 60 % + translateY 9 %), in seal sizes; mw = the widest primary mark («ta ở đây» rank-7 width), sp = side gap seal ↔ mark, both in H */
+/* the standard marker height for a body H (the Hoàng hậu rank-7 marker: the tallest mark a line ever holds) */
+function kbMarkH(H){const K=KIT_MEMARK,sc=K.sc[7]||1;return Math.round(Math.max(K.min*sc,Math.min(K.max*sc,H*K.h*sc))*(K.big||1))}
+/* room the stage keeps above the men's head line for the marks' whole bounce (j59 caps the one body H with it: H × KIT_FIG.man + room ≤ stage − floor band) */
+window.kitMarkRoom=function(H){try{const K=KIT_MEMARK;return Math.ceil(kbMarkH(H)*1.03+kbGap(H)+K.bob+(K.edge||0))}catch(e){return 0}};
+/* a figure's sex for the badge lines = the kit figure rule (KIT_FIG.fac: emperor / eunuch / official / physician / man / unknown-man silhouette are men) */
+function kitBadgeSex(fig){try{const src=fig&&(fig.currentSrc||fig.getAttribute("src"))||"";return KIT_FIG.fac(src)>1?"m":"f"}catch(e){return"f"}}
+window.kitBadgeSex=kitBadgeSex;
+/* one seal size per stage (design px of the standard woman body H0) */
+function kbEmoS(H0){const K=KIT_BADGE;return Math.round(Math.max(K.emoMin,Math.min(K.emoMax,H0*K.emo)))}
+/* G in design px for a stage body H0: clear gap + the seal's motion reach */
+function kbGap(H0){const K=KIT_BADGE;return Math.max(K.gapMin,H0*K.gap)+K.reach*kbEmoS(H0)}
+/* the figures standing on the stage now (on screen, not paged away, picture loaded) */
+function kbFigs(st){const R=st.getBoundingClientRect();return[...st.querySelectorAll("#mefig,#tokens .tok.fig img.figimg")].filter(f=>{if(!f.isConnected||!f.complete||!f.naturalWidth||!f.getClientRects().length)return false;
+ if(f.classList.contains("j59off")||f.closest(".j59off"))return false;const c=getComputedStyle(f);if(c.visibility==="hidden"||c.display==="none"||+c.opacity<.2)return false;const r=f.getBoundingClientRect();return r.right>R.left+4&&r.left<R.right-4&&r.width>4})}
+let kbReQ=0;function kbRe(){if(kbReQ)return;kbReQ=requestAnimationFrame(()=>{kbReQ=0;try{kmmSched()}catch(e){}try{window.kitFigSealAll&&window.kitFigSealAll()}catch(e){}try{window.errSync&&window.errSync()}catch(e){}})}
+/* the REAL head top of a figure on screen (viewport px): first opaque row of its picture (kitFigBody t); null until measured */
+function kitHeadTop(fig){try{const src=fig.currentSrc||fig.getAttribute("src")||"";if(!src||typeof kitFigBody!=="function")return null;const b=kitFigBody(src,kbRe);if(!b)return null;const B=kmmBox(fig);return B.by+B.bh*b.t}catch(e){return null}}
+window.kitHeadTop=kitHeadTop;
+function kitMarkLine(st,sex){try{st=st||document.getElementById("stage");if(!st||!st.isConnected)return null;const H0=+st.dataset.kmlH,F0=+st.dataset.kmlF;if(!(H0>20)||!(F0>0))return null;
+ const M0=+st.dataset.kmlM>20?+st.dataset.kmlM:H0*(KIT_FIG.man||1);const m=sex==="m";
+ const R=st.getBoundingClientRect();const sc=st.offsetHeight?R.height/st.offsetHeight:1;const H=H0*sc,Hs=(m?M0:H0)*sc,floor=R.top+(st.clientTop+F0)*sc;
+ let head=null,wait=false;for(const f of kbFigs(st)){if(kitBadgeSex(f)!==(m?"m":"f"))continue;const t=kitHeadTop(f);if(t==null){wait=true;continue}if(head==null||t<head)head=t}
+ if(wait&&head==null)return null;const real=head!=null;if(!real)head=floor-Hs;
+ const bottom=head-kbGap(H0)*sc,h=kbMarkH(H0)*sc,room=bottom-(R.top+(KIT_MEMARK.bob+(KIT_MEMARK.edge||0))*sc);return{top:bottom-h,bottom,head,h,H,Hs,floor,sc,sex:m?"m":"f",real,room}}catch(e){return null}}
+window.kitMarkLine=kitMarkLine;
+/* the figure's centre line = the centre of its body core column (j59 stands that column on the slot centre) */
+function kbCentre(fig){const B=kmmBox(fig);let c=.5;try{const src=fig.currentSrc||fig.getAttribute("src")||"";const b=src&&typeof kitFigBody==="function"?kitFigBody(src):null;if(b)c=b.cl!=null&&b.cr>b.cl?(b.cl+b.cr)/2:(b.l+b.r)/2}catch(e){}return B.bx+B.bw*c}
+function kitBadgeAt(st,fig,kind,w,h){if(!fig)return null;const sex=kitBadgeSex(fig);const L=kitMarkLine(st,sex);if(!L)return null;const cx=kbCentre(fig);const R=st.getBoundingClientRect();
+ if(h==null)h=L.h;const K=KIT_BADGE;
+ if(kind==="emo"){const off=K.mw*L.H/2+K.sp*L.H+w/2;const others=kbFigs(st).filter(f=>f!==fig).map(kbCentre),mwh=K.mw*L.H/2;
+  const bad=l=>l<R.left+2||l+w>R.right-2||others.some(c=>l<c+mwh+2&&l+w>c-mwh-2);let side=1,left=cx+off-w/2;if(bad(left)&&!bad(cx-off-w/2)){side=-1;left=cx-off-w/2}
+  left=Math.max(R.left+2,Math.min(left,R.right-2-w));return{left,top:L.bottom-h,cx,side,sex,off,line:L}}
+ const left=Math.max(R.left+2,Math.min(cx-w/2,R.right-2-w));return{left,top:L.bottom-h,cx,side:1,sex,off:0,line:L}}
+window.kitBadgeAt=kitBadgeAt;
+/* the mood chip size on a stage: one size per stage (the standard woman body), never per figure */
+window.kitBadgeEmoSize=function(st){const H0=+(st&&st.dataset.kmlH);if(!(H0>20))return 0;const sc=st.offsetHeight?st.getBoundingClientRect().height/st.offsetHeight:1;return Math.round(kbEmoS(H0)*sc)};
 /* drop markers whose figure is gone (scene change, dialog closed) */
 function kmmSweep(){document.querySelectorAll(".kmemark").forEach(m=>{const h=m.parentElement;if(!h||!(h.querySelector(":scope>#mefig")||h.querySelector(":scope>img.kesimg")&&h.closest(".kesme")))m.remove()})}
 function kmmAll(){kmmSweep();const me=document.getElementById("mefig");if(me)kitMeMark(me);document.querySelectorAll(".kesme img.kesimg").forEach(kitMeMark)}
@@ -57796,7 +57860,7 @@ function remove(id){M.delete(id);if(window.kitStageRail)kitStageRail.remove("st-
 function open(id){const o=M.get(id);if(o&&typeof o.onTap==="function"){o.onTap();return}if(!o||typeof o.panel!=="function")return;let sp=null;try{sp=o.panel()}catch(e){console.error("kitStatusIcon panel",e)}if(!sp)return;
  sp=Object.assign({kind:"info"},sp);sp.opts=(sp.opts||[]).concat([{n:"Đóng",fx:{},go:()=>{}}]);/* "Đóng" = the close option → kit ✕ + tap outside + Esc (32.10); never "Đã hiểu" */
  try{kitPanel(sp,true);showModal()}catch(e){console.error("kitStatusIcon open",e)}}
-window.kitStatusIcon={set,refresh,remove,open,items:()=>[...M.keys()]};
+window.kitStatusIcon={set,refresh,remove,open,has:id=>M.has(id),items:()=>[...M.keys()]};/* has(id): a module that must not overwrite another owner of the same id asks first (jerr owns «tin») */
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§77.1",title:"kitStatusIcon · icon trạng thái (đang chạy · xong · cần chú ý), chạm → bảng thông tin",
  html:()=>`<div class="kitpg-row" style="position:relative;height:70px"><nav class="krail" style="position:static;flex-direction:row">${[["Đang thỉnh tranh (nhấp nhô)"," kbusy","ico-download"],["Đã thỉnh đủ (viền xanh)"," kdone","ico-download"],["Tạm ngưng (có chấm đỏ)"," kbadge","ico-download"],["Có bản mới (chấm đỏ)"," kbadge","ico-update"]].map(([t,c,g])=>`<button type="button" class="krailb${c}" title="${t}"><img src="https://ctm-img.victoria-tntt.workers.dev/img/kit/${g}.webp" alt=""></button>`).join("")}</nav></div>`})}catch(e){}
 }catch(e){console.error("jstatus",e)}})();
@@ -64570,7 +64634,19 @@ const KIT_PLACE_IC={nvp:"bac",tyv:"y-thuat",vuon:"place-vuon",thu:"sung",dtd:"su
  ksp:"place-ksp",lc:"place-lc",home:"place-cung",cnh:"place-cnh",tgk:"place-tgk",ttp:"place-ttp",acs:"place-acs",dc:"place-dc"};
 /* every place has a glyph (D56): the consort palaces r<N> (and her own home) share the palace-roof glyph */
 function kitPlaceIcon(k,s){const n=KIT_PLACE_IC[k]||(/^r\d+$/.test(k||"")?"place-cung":"");return n&&typeof ic==="function"?ic(n,s||14).replace('class="ic"','class="ic kplic"'):""}
-function kitHapMark(k){const h=adHapAt(k);return h?`<i class="khap" role="img" aria-label="Có chuyện buổi này" title="Có chuyện buổi này">!</i>`:""}
+/* the ONE yellow round «!» markup (KIT §78.x); kitHapMark = a place with business this buổi, kitHapHtml(title) = any other «!» (a returned errand person, §90): same element, same class .khap */
+function kitHapHtml(title,role){const t=String(title||"Có chuyện buổi này").replace(/"/g,"&quot;");return `<i class="khap" role="${role||"img"}" aria-label="${t}" title="${t}">!</i>`}
+window.kitHapHtml=kitHapHtml;
+function kitHapMark(k){const h=adHapAt(k);return h?kitHapHtml("Có chuyện buổi này"):""}
+/* KIT §78.z HEAD MARKER (owner OD 19/11 ~02:40Z + ~03:05Z, canon overwrite of the yellow «!» disc ABOVE A PERSON'S HEAD): the speech bubble ITSELF is the marker, no round disc behind it —
+   on = the WHOLE bubble bright yellow, black dots (https://ctm-img.victoria-tntt.workers.dev/img/kit/ico-talk-y.webp: someone brought a notice), off = the plain state, white bubble, black dots (https://ctm-img.victoria-tntt.workers.dev/img/kit/ico-talk-w.webp).
+   Shown above a person only when that person has a notice; same nudge motion as .khap; placed by the stage badge lines (jmark kitBadgeAt "hap", §78.y). Option-card «!», the top-bar
+   notice box and the Dư đồ place labels keep the .khap «!». The file is probed once; until it loads (or if it fails) the marker falls back to today's yellow «!» disc (.khead.kfb). */
+window.KIT_HEADMK=window.KIT_HEADMK||{on:"https://ctm-img.victoria-tntt.workers.dev/img/kit/ico-talk-y.webp",off:"https://ctm-img.victoria-tntt.workers.dev/img/kit/ico-talk-w.webp",px:24};
+let khmOk=null;(function(){try{const i=new Image();i.onload=()=>{khmOk=true};i.onerror=()=>{khmOk=false};i.src=KIT_HEADMK.on}catch(e){khmOk=false}})();
+function kitHeadMarkHtml(title,role,state){const t=String(title||"Có tin báo").replace(/"/g,"&quot;"),off=state==="off",src=off?KIT_HEADMK.off:KIT_HEADMK.on;
+ return `<i class="khead${off?" koff":""}${khmOk===false?" kfb":""}" role="${role||"img"}" aria-label="${t}" title="${t}">${khmOk===false?"":`<img alt="" draggable="false" src="${src}" onerror="this.parentNode.classList.add('kfb');this.remove()">`}</i>`}
+window.kitHeadMarkHtml=kitHeadMarkHtml;
 (function(){const m0=mapHTML;mapHTML=function(){let h=m0.apply(this,arguments);try{if(!S||adSrv())return h;
   h=h.replace(/(<(?:button|div) class="mspot[^"]*" data-(?:go|ak)="([^"]+)"[^>]*>(?:(?!class="mspot)[\s\S])*?<span class="mlab">)([\s\S]*?)(<\/span>)/g,(all,open,k,lab,end)=>open+kitPlaceIcon(k)+lab+kitHapMark(k)+end)}catch(e){console.error("jact map",e)}return h}})();
 (function(){const g0=mapHTMLgrid;mapHTMLgrid=function(){let h=g0.apply(this,arguments);try{if(!S||adSrv())return h;
@@ -64621,12 +64697,19 @@ PEND.adStroll=()=>{const K=S.emp.known,L=S.emp.likes;const C=qinCard(S);/* 2e4: 
 #sc-t h2:has(>.kplic){align-items:flex-start;text-align:left}#sc-t h2>.kplic{margin:0 0 1px}
 /* the 4.4em floor of a map chip counts the glyph (14 px + 3 px gap): a narrow chip (Trường Môn viện) must not push its text out of the border (OD:L1033) */
 .mspot .mlab:has(>.kplic){max-width:max(100%,4.4em)}
-.khap,.mspot .mlab i.khap{--khy:#ffd91a;display:inline-block;font-style:normal;font-weight:900;font-size:.82rem;line-height:19px;color:#3a2200;background:radial-gradient(circle at 35% 30%,#fff27a,var(--khy) 62%,#f2b800);border-radius:50%;width:19px;height:19px;text-align:center;margin-left:4px;vertical-align:1px;box-shadow:0 0 0 1.5px #fffbe0,0 0 5px 1px #ffe24a,0 0 11px 2px #ffd40099;transform-origin:50% 80%}
+.khap,.mspot .mlab i.khap,.khead.kfb{--khy:#ffd91a;display:inline-block;font-style:normal;font-weight:900;font-size:.82rem;line-height:19px;color:#3a2200;background:radial-gradient(circle at 35% 30%,#fff27a,var(--khy) 62%,#f2b800);border-radius:50%;width:19px;height:19px;text-align:center;margin-left:4px;vertical-align:1px;box-shadow:0 0 0 1.5px #fffbe0,0 0 5px 1px #ffe24a,0 0 11px 2px #ffd40099;transform-origin:50% 80%}
 /* KIT §78 (owner 17/11 ~13:32Z): the "!" is a BRIGHT FRESH YELLOW badge (--khy) with a soft glow; every ~5 s it gives a little shake + hop (transform only, 3 phases so the marks do not move together); reduced motion = the static glow */
 @keyframes khapNudge{0%,72%,100%{transform:none}76%{transform:translateY(-3px) rotate(-14deg)}80%{transform:translateY(0) rotate(12deg)}84%{transform:translateY(-2px) rotate(-9deg)}88%{transform:rotate(6deg)}92%{transform:none}}
 @media (prefers-reduced-motion:no-preference){.khap{animation:khapNudge 5.2s ease-in-out infinite}.mspot:nth-child(3n+1) .khap{animation-delay:-1.7s}.mspot:nth-child(3n+2) .khap{animation-delay:-3.4s}}
+/* KIT §78.z head marker: the bubble picture alone (no disc), a thin dark rim for contrast on any background; fallback .kfb = the .khap disc with «!» */
+.khead{display:inline-block;width:${(window.KIT_HEADMK||{}).px||24}px;height:${(window.KIT_HEADMK||{}).px||24}px;font-style:normal;line-height:0;transform-origin:50% 80%}
+.khead>img{display:block;width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 0 1px #2a1a12) drop-shadow(0 1px 2px #0006)}
+.khead:not(.koff):not(.kfb)>img{filter:drop-shadow(0 0 1px #2a1a12) drop-shadow(0 0 5px #ffe24a) drop-shadow(0 1px 2px #0005)}
+.khead.kfb{margin:0}.khead.kfb::after{content:"!"}
+@media (prefers-reduced-motion:no-preference){.khead{animation:khapNudge 5.2s ease-in-out infinite}}
 /* .sm uses the same size: the old .mspot.sm .khap rule (13 px) never applied (lost to .mspot .mlab i.khap), so one size everywhere */`;document.head.appendChild(st)})();
 /* kit page samples */
+try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§78.z",title:"kitHeadMarkHtml: dấu trên đầu người có tin báo (bóng nói vàng) · trạng thái thường (bóng nói trắng)",html:()=>`<div style="display:flex;gap:18px;align-items:center;padding:8px;background:#7a4e3a">${kitHeadMarkHtml("Có tin báo","img","on")}${kitHeadMarkHtml("Thường","img","off")}</div>`})}catch(e){}
 try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§78",title:"kitPlaceIcon + kitHapMark: tên nơi chốn có biểu tượng công dụng, dấu ! có chuyện",html:()=>Object.keys(KIT_PLACE_IC).map(k=>`<span class="mspot" style="position:static;transform:none;display:inline-flex;margin:4px 8px"><span class="mlab">${kitPlaceIcon(k)}${PLNAME[k]?PLNAME[k][0]:({home:"Cung của ta"}[k]||k)}${k==="vuon"?`<i class="khap" role="img" aria-label="Có chuyện buổi này">!</i>`:""}</span></span>`).join("")})}catch(e){}
 /* ================= jtq14: TUTORIAL QUESTS of chapters 1–3 (14-chapter frame, phase 2 of dev/STORY_ROADS_PLAN.md; ROAD_MAP Part 1) =================
    Owner rules: OD:L1233 (each tutorial quest makes her DO the task; the reward comes only when it is done), OD:L1242 (chapters 1–3 = tutorial,
@@ -74786,6 +74869,7 @@ document.addEventListener("click",ev=>{const t=ev.target.closest&&ev.target.clos
      · room / place / Dư đồ place view / lãnh cung / home visits (j59 stage): #tokens .tok.fig img.figimg and her own #mefig
      · event / person dialogs, person pages of the book, pet-care dialog (kitStageFig → img.kesimg; person registered by the wrapper below)
    NOT: silhouettes ("Người lạ"), the game figure of a mini-game (.kgfig), the new-life identity card (.kpfig), any crowd / shadow.
+   STAGE (owner OD 19/11 ~02:05Z + ~03:50Z): on #stage the chip stands ON the sex line, beside «ta ở đây» / the speech bubble, a clear gap above the highest REAL head top of that sex (jmark kitBadgeAt "emo", KIT §78.y) — the rule below is for dialogs / book pages.
    PLACEMENT RULE (the same fraction for every figure, size and screen): the seal sits at HEAD height, on the side of the head with room (right first, left when the right
    would leave the stage / dialog), its inner edge KIT_FIGSEAL.gap × body from the painted head-and-hair edge (kitFigBody wl/wr of the top 15 % of the painting).
    SIZE: KIT_FIGSEAL.k × the figure's body height (kitFigBody head top → feet), between min and max px — it grows and shrinks with the figure.
@@ -74825,6 +74909,15 @@ function kitFigSeal(fig){try{
  const s=Math.round(Math.max(K.min,Math.min(K.max,body*K.k)));
  /* KIT 34.6 r5 (owner 18/11 ~03:35Z "figure runs under the ? chip"): on a BOOK person page the seal sits in ONE fixed slot, the right end of the name row of the text column (padding reserved by .kbk-phead), never on any figure, the same slot on every page */
  if(host.matches&&host.matches(".kbk-person.kbk-full")){const ph=host.querySelector(":scope>.kbk-phead");if(ph){const q=Math.min(s,46),css=`left:${ph.offsetLeft+ph.offsetWidth-q}px;top:${ph.offsetTop+2}px;width:${q}px;height:${q}px`;if(el.style.cssText!==css)el.style.cssText=css;el.dataset.kfsb="book";return}}
+ /* KIT §78.y STAGE BADGE LINES (owner OD 19/11 ~02:05Z + ~03:50Z): on a stage the chip stands ON the line of the figure's sex (bottom = the highest real head top of that sex − G, jmark kitMarkLine),
+    beside the primary mark column (jmark kitBadgeAt(…,"emo"): centre line ± (mw/2 + sp) × H + chip/2), ONE size per stage (kitBadgeEmoSize). The plaque columns #kshR / #kshL stay a no-go zone:
+    a chip that would cross one goes to the mirror side (same distance, other side); it never leaves its line. */
+ {const st=fig.closest("#stage");if(st&&typeof kitBadgeAt==="function"){let s2=kitBadgeEmoSize(st);{const L0=kitMarkLine(st,kitBadgeSex(fig));if(L0){const rm=Math.floor(L0.bottom-st.getBoundingClientRect().top-2);if(s2>rm)s2=Math.max(14,rm)}}/* a line lifted by a tall hat / crown: the chip shrinks to stay inside the frame, never sinks onto the head */const P=s2?kitBadgeAt(st,fig,"emo",s2,s2):null;if(!P){el.style.display="none";return}
+  const pad=K.pad!=null?K.pad:10,Z=[...st.querySelectorAll("#kshR,#kshL")].filter(e=>!e.hidden&&e.offsetHeight&&e.getClientRects().length).map(e=>e.getBoundingClientRect());
+  const hit=l=>Z.some(q=>l<q.right+pad&&l+s2>q.left-pad&&P.top<q.bottom+pad&&P.top+s2>q.top-pad);const off=P.off;let L=P.left,side=P.side;
+  if(hit(L)){const l2=P.cx-side*off-s2/2;if(!hit(l2)){L=l2;side=-side;el.dataset.kfscol="1"}else el.dataset.kfscol="x"}else delete el.dataset.kfscol;
+  const hr2=host.getBoundingClientRect(),css=`left:${(L-hr2.left+host.scrollLeft).toFixed(1)}px;top:${(P.top-hr2.top+host.scrollTop).toFixed(1)}px;width:${s2}px;height:${s2}px`;if(el.style.cssText!==css)el.style.cssText=css;
+  el.dataset.kfsb=P.line.Hs.toFixed(0);el.dataset.kfsa=P.cx.toFixed(1);el.dataset.kfsf=P.line.floor.toFixed(1);el.dataset.kfsr=P.sex;el.dataset.kfss=side;return}}
  const k=Math.min(20,Math.max(1,K.rows|0)),rr=b.wr&&b.wr[k]!=null?b.wr[k]:null,ll=b.wl&&b.wl[k]!=null?b.wl[k]:null;
  /* owner 18/11 ~06:20Z: ONE fixed offset from the figure's standing anchor (ax = slot centre, feet = floor line), in body heights, so it scales with the figure and sits at the same spot for everyone: centre = ax ± dx x body, feet − dy x body (right first; left when the right would leave the frame) */
  const ax=B.bx+B.bw/2,feet=B.by+B.bh*b.b;/* standing anchor: picture centre = slot centre, painted feet = floor line */
@@ -76942,6 +77035,180 @@ let NFON=0;function nfInstall(){if(NFON||typeof window.nfStep!=="function"||type
 nfInstall();if(!NFON)try{window.addEventListener("load",nfInstall)}catch(e){}
 window.stealMgDebug=()=>({tok:[...TOK.entries()].map(([a,t])=>[a===S?"me":a&&a.id,t]),nfup:NFUP,frup:FRUP,frw:FRW,ghold:GHOLD,held:!!HELD,busy:BUSY,st:ST.slice(-20)});
 })();
+/* jerr.js — ERRAND SCENE r2, NON-BLOCKING (owner OD 18/11 ~20:05Z "tôi muốn thấy con nhỏ đi ra khỏi sân khấu … rồi nó về", ~20:10Z CANON OVERWRITE "KHÔNG BAO GIỜ chặn chơi",
+   ~20:15Z + ~20:20Z parallel time, EVERY button where she asks / sends another person; review/errand-scene; MOTION.md "Sai người đi").
+   The scene is a PICTURE OF ONE STATE: "person P is away until khắc K" (task {who, nm, k, lbl, t0, due, back, read, rep}).
+   - tap = time moves AT ONCE as always (no hold, no deferred result, no shield, no wait): the person walks off the stage in the background, her slot shows
+     the kit chip «đang đi dò la…» (errWord) while she is away;
+   - at khắc K (her clock moved: spend / nextBuoi) she walks back ON in the background and a small kit «!» chip stands on her; tap the chip = read the report
+     (the kit status icon panel «tin», §77.1 — never a forced modal);
+   - runner ALWAYS drawn: she walks with her own painted figure (kitFigOf) from / to the kit errand spot (kitErrandSpot) when her token is not on the page
+     in view (crowded stage, swipe pages "+N", resting elsewhere) — one kit rule, no private variant.
+   ONE ADAPTER (errTasks / errAwayOf / errNews / errNow / errWhen): when the parallel-time core is in the build (window.PTIME, jptime S.away, BAL.ptime) the adapter
+   READS ITS state (ptSend creates the task, ptTick lands it, its status icon owns the panel); without it the adapter keeps the same shape in S.erra (created here at the
+   gates, landed here at the due khắc, panel registered here). Nothing is computed twice; numbers from BAL (BAL.errand / BAL.ptime). Old saves: S.erra is created lazily.
+   Gates (fallback only; the scan table lists every act): runAct (every ACT sent to someone elsewhere, 46 acts) + scout, invite, h54Act thu, tdAct gift, htAct ask.
+   KIT: motion layer `.kmfly.kmerr` (cleaned by kmReset), notice = kitLine (§42.2), chips = the kit chip (kchip n / r), icon = kitStatusIcon; no private frame / chip. */
+(function(){
+const ER=window.ERR={n:0,live:0,seen:{},base:null,walk:{},skips:0};
+/* wording per errand (VANPHONG: cổ trang, no %, no odds numbers). Key = ACT key or a named flow. Harm acts all read as a quiet errand. */
+const ERRV={spy:"dò la",ally:"đưa lời kết giao",bribe:"mua chuộc người",bribel:"đưa quà lót tay",block:"lo việc thẻ bài",blockf:"nhờ ơn người quen",rumor:"rỉ tai tin đồn",lygian:"gieo lời ly gián",
+ tocao:"đưa chứng cứ tố tội",expose:"đưa tin tư tình",xinhh:"dâng lời lên Hoàng hậu",laydo:"lấy đồ",laydol:"lấy đồ",plant:"cài đồ",petcare:"chăm thú nuôi",
+ scout:"dò nơi ở",invite:"đưa lời mời",letter:"gửi thư, quà",tdgift:"biếu quà, đưa thư",kin:"dò hỏi gia thế",listen:"nghe ngóng"};
+const ERRV_DEFAULT="làm việc kín";
+/* acts where she goes HERSELF (no servant leaves): jecon spyk "Tự đi dò la" */
+ER.self=["spyk"];
+function errWord(k){return "đang đi "+(ERRV[k]||ERRV_DEFAULT)+"…"}
+window.errWord=errWord;
+/* ---------------------------------------------------------------- the ONE ADAPTER ---------------------------------------------------------------- */
+function errOn(){try{return !!(window.PTIME&&PTIME.on&&PTIME.on())}catch(e){return false}}
+function errKH(){try{return BAL.time.khac||4}catch(e){return 4}}
+function errNow(){try{if(errOn())return PTIME.now();return bid()*errKH()+Math.max(0,Math.min(errKH(),typeof used==="number"?used:0))}catch(e){return 0}}
+function errN(k){try{if(BAL.ptime&&BAL.ptime.kinds){const r=BAL.ptime.kinds[k]||BAL.ptime.kinds.def;if(r&&r.n!=null)return r.n}}catch(e){}return(BAL.errand&&BAL.errand.n)||2}
+function errWhen(K){if(errOn()&&PTIME.when)try{return PTIME.when(K)}catch(e){}
+ const kh=errKH(),b=Math.floor(K/kh),i=K-b*kh,nb=bid();let B4=4;try{B4=B4N}catch(e){}
+ if(b===nb)return`khắc ${i+1}`;if(Math.floor(b/B4)===Math.floor(nb/B4)){let n="";try{n=BUOI[b%B4].toLowerCase()}catch(e){}return`${n}, khắc ${i+1}`}return"ngày mai"}
+function errZ(){if(!S)return[];if(!Array.isArray(S.erra))S.erra=[];return S.erra}
+/* every send of HERS, normalised: the parallel-time core's S.away rows (by "me") or the fallback rows */
+function errTasks(){try{if(!S)return[];if(errOn())return(Array.isArray(S.away)?S.away:[]).filter(a=>a&&a.by==="me").map(a=>({id:a.id,who:a.who,nm:a.nm,lbl:a.lbl,k:a.kind,t0:a.t0,due:a.due,back:!!a.back,read:!!a.read,rep:a.rep}));return errZ()}catch(e){return[]}}
+function errAwayOf(id){for(const t of errTasks())if(t.who===id&&!t.back)return t;return null}
+function errNews(){return errTasks().filter(t=>t.back&&t.rep&&!t.read)}
+function errMine(){return errTasks().filter(t=>!t.back)}
+/* ledger id of one of her people ↔ the person */
+function errId(sv){if(!sv)return null;return sv.sid!=null?"s"+sv.sid:"mm:me"}
+function errPerson(id){if(!S||!id)return null;if(id==="mm:me")return S.maid||null;if(id[0]==="s"){const sid=+id.slice(1);for(const s of S.staff||[])if(s&&s.sid===sid)return s}return null}
+/* the runner = the servant the game sends (bestSent), else her maid; a person already away is never sent again (law 6b) */
+function errRunner(){let sv=null;try{sv=typeof bestSent==="function"?bestSent(S):null}catch(e){}if(sv&&!errAwayOf(errId(sv)))return sv;
+ for(const s of(S.staff||[]).slice().sort((a,b)=>(b.loyal||0)-(a.loyal||0)))if(s&&s!==sv&&!s.spyFor&&!errAwayOf(errId(s)))return s;
+ return S.maid&&S.maid.name&&!errAwayOf("mm:me")?S.maid:null}
+function errReduced(){try{return typeof kmReduced==="function"?kmReduced():false}catch(e){return false}}
+function errCan(){try{return !!(typeof S!=="undefined"&&S&&!S.dead&&!window.__bot&&!(typeof quiet!=="undefined"&&quiet)&&!(window.COOPW&&COOPW.on)&&!(typeof isSrv==="function"&&isSrv()))}catch(e){return false}}
+/* fallback ledger (law 6b): a person away is away on the roster; same rows as jptime ptLedger */
+function errLedger(){if(errOn()||!S||typeof j95on!=="function"||!j95on())return;const R=S.roster;if(!R||!R.P)return;const kh=errKH(),b0=bid()*kh;let ch=false;
+ for(const a of errZ()){if(a.back||!R.P[a.who])continue;const e=R.P[a.who];for(let i=0;i<e.length;i++){const K=b0+i;if(K>=a.t0&&K<a.due&&(!e[i]||e[i][1]!=="errand")){e[i]=[(e[i]&&e[i][0])||"ngoai","errand",null,"đi việc cho chủ"];ch=true}}}
+ if(ch)try{const k=j95kh();S.where=j95view(R,k);R.m[k]=j95counts(R,k);if(typeof j95stage==="function")j95stage(R,k)}catch(e){}}
+/* fallback landing: her clock reached khắc K */
+function errTick(){if(errOn()||!S||S.dead)return;const now=errNow();let ch=false;
+ for(const t of errZ())if(!t.back&&t.due<=now){t.back=1;ch=true;try{if(errCan())errNotify(t.id,`${t.nm} đã về báo tin`,`${t.nm} đã về từ việc ${t.lbl||"được sai"}: có tin báo.`)}catch(e){}}
+ if(ch){try{const day=errKH()*3;S.erra=errZ().filter(t=>!t.back||(!t.read&&t.rep)||now-t.due<day)}catch(e){}errLedger();errIcon()}}
+/* the report panel: ONE implementation for both adapters. kitPanel info spec: subject = the person who REALLY went and came back (law 6b), facts = what she learned
+   (the act's own log lines), sections = the gain / loss chips (kit chips), «Đợi tin» only with the parallel-time core */
+function errRead(t){try{t.read=1;if(errOn()&&Array.isArray(S.away)){const a=S.away.find(x=>x&&x.id===t.id);if(a)a.read=1}}catch(e){}}
+/* RECEIVER SIDE (OD 18/11 ~21:15Z): orders / requests that wait for HER as notices (jptime S.ordQ) are read through the parallel-time reader API
+   (PTIME.orders / ordWhen / answer) — this file owns the ONE «tin» panel, so their badge + rows + «Nghe lệnh / Xem lời nhờ» buttons live here too. No PTIME = none. */
+function errOrders(){try{return window.PTIME&&typeof PTIME.orders==="function"?(PTIME.orders()||[]):[]}catch(e){return[]}}
+function errOrdIs(o){return !!o&&(o.pid==="cnvOrd"||o.pid==="err")}
+function errOrdWhen(o){try{return PTIME.ordWhen(o)}catch(e){return o&&o.due!=null?"trả lời trước "+errWhen(o.due):""}}
+function errPanel(){const N=errNews(),W=errMine(),OQ=errOrders();const facts=[],sec=[];let subj=null;
+ for(const o of OQ)facts.push(`${o.byNm} ${errOrdIs(o)?"có lệnh cho ngươi":"có lời nhờ"} · ${errOrdWhen(o)} (quá hạn: coi như từ chối).`);
+ for(const t of N){const r=t.rep||{},p=errPerson(t.who);if(!subj&&p)subj=p;
+  facts.push(r.t||`${t.nm} đã về.`);
+  /* gain / loss chips right under the title line (kit chips, visible without scrolling); the lines below are only what she learned */
+  if((r.d||[]).length&&typeof kitChips==="function")facts.push({text:"Được · mất: "+kitChips(r.d),kind:"me"});
+  (r.L||[]).forEach(l=>facts.push(l));errRead(t)}
+ for(const t of W){const p=errPerson(t.who);if(!subj&&p)subj=p;facts.push(`${t.nm} đang ${t.lbl||"đi việc"} · về ${errWhen(t.due)}.`)}
+ if(!facts.length)facts.push("Không có ai đang đi việc.");
+ const opts=OQ.map(o=>({n:errOrdIs(o)?"Nghe lệnh":"Xem lời nhờ",x:`${o.title||("Lệnh của "+o.byNm)} · ${errOrdWhen(o)}, quá hạn coi như từ chối`,fx:{},go:()=>{setTimeout(()=>{try{PTIME.answer(o.id)}catch(e){console.error(e)}},0)}}));
+ try{if(errOn()&&PTIME.waitOk&&PTIME.waitOk()){const K=PTIME.next();opts.push({n:"Đợi tin",x:`ngồi chờ đến ${errWhen(K)}, khi người được sai trở về`,fx:{},go:()=>{setTimeout(()=>PTIME.wait(),0)}})}}catch(e){}
+ setTimeout(()=>errSync(),0);const sp={title:"Tin chờ người sai đi",facts,sections:sec,opts};if(subj)try{const f=kitFace(subj);if(f)sp.subject=Object.assign({},f,{rk:typeof f.rk==='string'?f.rk:undefined})}catch(e){}return sp}
+function errIcon(){try{if(typeof kitStatusIcon==="undefined")return;kitStatusIcon.set("tin",{title:"Người được sai đi",glyph:"信",order:30,
+ show:()=>!!(S&&!S.dead&&(errMine().length||errNews().length||errOrders().length)),busy:()=>!!(S&&errMine().length&&!errNews().length&&!errOrders().length),badge:()=>!!(S&&(errNews().length||errOrders().length)),panel:errPanel});kitStatusIcon.refresh()}catch(e){console.error("jerr icon",e)}}
+/* ONE call for the notice of an errand = the game's ONE notice entry point (stage-here r4, dev/build/jnotice.js): kitNotice({id,line,text,pic,go,goLabel}) lights the top-bar «!» box + one short top chip,
+   tap → small kit panel «Tin báo». No toast / chip / bar of my own (jnotice.js is in the build before this module). Call sites: errAdd (sent), errTick (back); jptime lands call errNotify too. */
+function errNotify(id,line,text){try{kitNotice({id:"errand:"+id,line,text:text||line,go:()=>errOpen(),goLabel:"Để ta xem"})}catch(e){console.error("errNotify",e)}}
+function errOpen(){try{if(typeof kitStatusIcon!=="undefined")kitStatusIcon.open("tin")}catch(e){console.error(e)}}
+/* the gate: run an errand action; in the fallback the action runs ONCE as before (no double charge, no deferred report), then the task is recorded */
+function errAdd(sv,spec,L,dl){const t0=errNow();/* fallback: away n khắc counted from the END of her order (the act's own khắc already paid); jptime counts from the tap with its own o/n rows */const w=ERRV[spec.k]||ERRV_DEFAULT;const t={id:"e"+(++ER.n)+"-"+t0,who:errId(sv),nm:sv.name,k:spec.k,lbl:"đi "+w,t0,due:t0+errN(spec.k),back:0,read:0,rep:{t:`${sv.name} ${w} trở về`,ok:null,L:L.length?L:[`${sv.name} đã về.`],d:dl||[]}};
+ errZ().push(t);ER.seen[t.id]={fresh:1};try{errNotify(t.id,`${t.nm} đã đi ${w}, về ${errWhen(t.due)}`)}catch(e){}errIcon();return t}
+function errRun(fn,ctx,args,spec){
+ if(!errCan()||errOn())return fn.apply(ctx,args);/* jptime builds its own task at the button (ptSend); this file only draws it */
+ const sv=errRunner();if(!sv)return fn.apply(ctx,args);
+ const u0=used,l0=S.logSeq||0,b0=typeof rsnap==="function"?rsnap():null;const r=fn.apply(ctx,args);
+ if(!spec.always&&used===u0&&(S.logSeq||0)===l0&&!(typeof Q!=="undefined"&&Q.length))return r;
+ const t=errAdd(sv,{k:spec.k},[],[]);
+ /* the act finishes its own log lines and result card AFTER runAct returns (doAct): read them at the end of this tick = this act's report, nothing else can run in between */
+ setTimeout(()=>{try{const n=Math.max(0,Math.min((S.logs||[]).length,(S.logSeq||0)-l0));
+  const L=(S.logs||[]).slice(0,n).map(x=>String(x).split(/ — (?=<span class="[gr]">)/)[0]).map(x=>typeof plain==="function"?plain(x):String(x).replace(/<[^>]*>/g,"")).map(x=>x.replace(/^T\d+\/\d+\s+\S+\s+tuần\s*/,"").replace(/\s*\(sai [^)]*đi\)\s*/,' ').replace(/\s+—\s+/g,' · ').trim()).filter(Boolean).reverse();
+  const dl=[];if(b0)for(const [k,nm] of RKEYS){const x=(S[k]||0)-(b0[k]||0);if(x)dl.push([nm,x])}
+  if(t.rep){if(L.length)t.rep.L=L;t.rep.d=dl}}catch(e){console.error(e)}},0);
+ errLedger();try{errSync()}catch(e){console.error(e)}return r}
+ER.run=errRun;ER.tasks=errTasks;ER.awayOf=errAwayOf;ER.news=errNews;ER.now=errNow;ER.when=errWhen;ER.tick=errTick;ER.open=errOpen;ER.adapter=()=>errOn()?"ptime":"fallback";
+/* ---------------------------------------------------------------- the PICTURE of that state ---------------------------------------------------------------- */
+function errCss(){if(document.getElementById("kerr-css"))return;const s=document.createElement("style");s.id="kerr-css";s.textContent=`
+.kmerr-lay{position:absolute;inset:0;width:100%;height:100%;overflow:hidden;pointer-events:none;z-index:40;filter:none}/* beats .kmfly (fixed, 56x56) */
+.kmerr-fig{position:absolute;will-change:transform;pointer-events:none;transition:transform var(--kme-t,650ms) cubic-bezier(.5,0,.8,.6)}
+.kmerr-fig.on{transition-timing-function:cubic-bezier(.2,.5,.4,1)}
+.kmerr-fig img{display:block;width:100%;height:100%;object-fit:contain;transform-origin:50% 100%;animation:kmerrbob .32s ease-in-out infinite}
+@keyframes kmerrbob{0%,100%{transform:translateY(0) rotate(-.8deg)}50%{transform:translateY(-6px) rotate(.8deg)}}
+.kmerr-lay .kmerr-slot{position:absolute;transform:translateX(-50%);white-space:nowrap;max-width:92%}
+.kmerr-lay i.kmerr-bang{position:absolute;margin:0;pointer-events:auto;cursor:pointer}/* the kit head marker (.khead yellow speech bubble, KIT §78.z; fallback the .khap «!» disc) above her head */
+`;document.head.appendChild(s)}
+function errTok(p){const tk=document.getElementById("tokens");if(!tk||!p)return null;return[...tk.querySelectorAll(".tok.fig")].find(x=>{const g=x.querySelector(".tag");return g&&g.textContent.includes(p.name)&&x.offsetParent!==null})||null}
+/* KIT RULE «runner always drawn» (kitErrandSpot): where a person with no token in view walks from / to: the left slot of the stage on the kit floor line, at the kit figure height.
+   Used by every walk (off / on) when her token is not on the page in view; stage-here / j59 keep their own slot logic untouched. */
+function kitErrandSpot(st){const H=st.clientHeight||st.getBoundingClientRect().height,W=st.clientWidth||st.getBoundingClientRect().width;let fl=0;try{fl=kitSlotFloor(H)}catch(e){fl=H*.03}
+ const h=Math.round(H*(window.KIT_FIG&&KIT_FIG.h||.79));return{h,top:Math.max(0,H-fl-h),left:Math.round(W*.14)}}
+window.kitErrandSpot=kitErrandSpot;
+function errLay(st){let l=st.querySelector(":scope>.kmerr-lay");if(!l){l=document.createElement("div");l.className="kmfly kmerr kmerr-lay";st.appendChild(l)}return l}
+function errMs(){let m=(BAL.errand&&BAL.errand.msWalk)||650;try{if(typeof kitPace==="function")m=kitPace(m)}catch(e){}return m*(ER.slow||1)}
+/* one walk of one person: dir "off" (toward the left edge) or "on" (back from it); the real token stays hidden meanwhile */
+function errWalk(t,dir){
+ const st=document.getElementById("stage");const p=errPerson(t.who);if(!st||!p||errReduced()||!errCan()||(typeof kmOn==="function"&&!kmOn()))return;
+ errCss();const lay=errLay(st),tok=errTok(p);let src="",l,tp,w,h;const sr=st.getBoundingClientRect(),sc=st.offsetWidth?sr.width/st.offsetWidth:1;
+ const img=tok&&(tok.querySelector(".figimg")||tok.querySelector("img"));
+ if(img){const r=img.getBoundingClientRect();src=img.currentSrc||img.src;l=(r.left-sr.left)/sc;tp=(r.top-sr.top)/sc;w=r.width/sc;h=r.height/sc}
+ else{try{src=kitFigOf(p)||""}catch(e){}if(!src)return;const k=kitErrandSpot(st);l=k.left;tp=k.top;h=k.h;w=0}
+ const fig=document.createElement("div");fig.className="kmerr-fig"+(dir==="on"?" on":"");const ms=errMs();
+ fig.style.cssText=`--kme-t:${ms}ms;left:${l}px;top:${tp}px;height:${h}px;width:${w?w+"px":"auto"};${dir==="on"?"transition:none;":""}`;
+ const c=document.createElement("img");c.src=src;c.alt="";c.draggable=false;if(!w){c.style.width="auto";c.style.maxWidth="none"}fig.appendChild(c);lay.appendChild(fig);ER.walk[t.id]=dir;
+ const out=-(l+(w||fig.offsetWidth||h*.45)+24);ER.live++;let d=0;
+ const fin=()=>{if(d)return;d=1;ER.live=Math.max(0,ER.live-1);try{fig.remove()}catch(e){}delete ER.walk[t.id];try{errSync()}catch(e){}};
+ if(dir==="off"){requestAnimationFrame(()=>requestAnimationFrame(()=>{fig.style.transform=`translateX(${out}px)`}))}
+ else{fig.style.transform=`translateX(${out}px)`;requestAnimationFrame(()=>requestAnimationFrame(()=>{fig.style.transition=`transform ${ms}ms cubic-bezier(.2,.5,.4,1)`;fig.style.transform="translateX(0)"}))}
+ setTimeout(fin,ms+120);try{kmOnReset(fin)}catch(e){}}
+/* the state → the screen, idempotent: called after every render / layout / clock move */
+function errSync(){if(!S||S.dead||ER.syncing)return;ER.syncing=1;try{
+ if(ER.base!==S){ER.base=S;ER.seen={};for(const t of errTasks())ER.seen[t.id]={off:1,on:t.back?1:0}}/* a loaded life never replays an old walk */
+ const st=document.getElementById("stage");const T=errTasks();
+ for(const t of T){const q=ER.seen[t.id]||(ER.seen[t.id]={fresh:1});
+  if(!t.back&&!q.off){q.off=1;q.fresh=0;errWalk(t,"off")}
+  if(t.back&&!q.on){q.on=1;q.off=1;errWalk(t,"on")}}
+ if(!st||!errCan())return;const lay=errLay(st);errCss();lay.querySelectorAll(".kmerr-slot,.kmerr-bang").forEach(e=>e.remove());
+ const sr=st.getBoundingClientRect(),sc=st.offsetWidth?sr.width/st.offsetWidth:1;
+ for(const t of T){const p=errPerson(t.who);const tok=errTok(p);if(!tok)continue;const open=!t.back,walking=!!ER.walk[t.id],news=t.back&&t.rep&&!t.read;
+  tok.style.visibility=(open||walking)?"hidden":"";if(walking||(!open&&!news))continue;
+  const img=tok.querySelector(".figimg")||tok.querySelector("img");const r=(img||tok).getBoundingClientRect();const cx=(r.left+r.width/2-sr.left)/sc;
+  if(open){const c=document.createElement("span");c.className="kchip n kmerr-slot";c.textContent=errWord(t.k);c.style.left=cx+"px";c.style.top=((r.top+r.height*.45-sr.top)/sc)+"px";lay.appendChild(c)}
+  else{/* the kit yellow round «!» (kitHapHtml = the Dư đồ mark) ABOVE HER HEAD, never on the emotion chip beside it (owner OD 18/11 ~22:10Z) */
+   const w=document.createElement("span");w.innerHTML=typeof kitHeadMarkHtml==="function"?kitHeadMarkHtml(`${t.nm} đã về: có tin báo`,"button","on"):"";/* KIT §78.z: the yellow speech bubble head marker (owner OD 19/11 ~03:05Z) */const c=w.firstChild;if(!c)continue;c.classList.add("kmerr-bang");c.setAttribute("tabindex","0");
+   /* KIT §78.y: ON the sex line of the stage (jmark kitBadgeAt: the highest REAL head top of that sex − a clear gap, owner OD 19/11 ~03:50Z), on the figure's centre line — level with «ta ở đây» and with every other mark of that sex, never touching hair / crown */
+   const hpx=c.classList.contains("kfb")?19:((window.KIT_HEADMK||{}).px||24);const hh=c.offsetHeight||hpx,ww=c.offsetWidth||hpx;const P=typeof kitBadgeAt==="function"&&img?kitBadgeAt(st,img,"hap",ww,hh):null;if(!P)continue;c.dataset.line=P.sex;
+   c.style.left=((P.left-sr.left)/sc)+"px";c.style.top=((P.top-sr.top)/sc)+"px";
+   const go=e=>{e.preventDefault();e.stopPropagation();errOpen();setTimeout(errSync,60)};c.addEventListener("click",go);c.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" ")go(e)});lay.appendChild(c)}}
+ /* a person whose task is over and read: nobody keeps her hidden */
+ for(const x of document.querySelectorAll("#tokens .tok.fig")){const g=x.querySelector(".tag");if(!g||x.style.visibility!=="hidden")continue;const nm=g.textContent;
+  const hold=T.some(t=>{const p=errPerson(t.who);return p&&nm.includes(p.name)&&(!t.back||ER.walk[t.id])});if(!hold)x.style.visibility=""}
+ }finally{ER.syncing=0}}
+ER.sync=errSync;
+/* ---- wiring: the clock and the stage ---- */
+try{kmOnReset(()=>{for(const l of document.querySelectorAll(".kmerr-lay .kmerr-fig"))l.remove();ER.walk={};ER.live=0})}catch(e){}
+{const sp=spend;spend=function(){const r=sp.apply(this,arguments);try{errTick();errLedger();errSync()}catch(e){console.error(e)}return r}}
+if(typeof nextBuoi==="function"){const nb=nextBuoi;nextBuoi=function(){const r=nb.apply(this,arguments);try{errTick();errLedger();errSync()}catch(e){console.error(e)}return r}}
+{const r0=render;render=function(){const r=r0.apply(this,arguments);try{errIcon();errSync()}catch(e){console.error(e)}return r}}
+if(typeof j59lay==="function"){const j0=j59lay;j59lay=function(){const r=j0.apply(this,arguments);try{errSync()}catch(e){}return r}}
+/* ---- entry points (the scan table in dev/handover/reports/errand-scene.md lists every one) ---- */
+{/* every ACT sent to someone elsewhere: runAct, the one gate for player acts (doAct, the card game, the picked plant / gift flows) */
+ const r0=runAct;runAct=function(a,t,k,extra){if(a!==S||typeof together!=="function"||together(a,t)||ACT_NOSEND.includes(k)||ER.self.includes(k)||(typeof sameHouse==="function"&&sameHouse(a,t)))return r0.apply(this,arguments);
+  /* doAct already spent the khắc before runAct: this call IS the errand (always) */
+  return errRun(r0,this,arguments,{k,n:(typeof BAL==="object"&&BAL.time&&BAL.time.cost&&BAL.time.cost.harm)||1,always:1})}}
+{const f0=scout;scout=function(){return errRun(f0,this,arguments,{k:"scout"})}}
+{const f0=invite;invite=function(){return errRun(f0,this,arguments,{k:"invite"})}}
+/* her child far away: letter + gift (j54 h54Act "thu") and the in-law house gift (j55 tdAct "gift") */
+{const f0=h54Act;h54Act=function(a){return a==="thu"?errRun(f0,this,arguments,{k:"letter"}):f0.apply(this,arguments)}}
+{const f0=tdAct;tdAct=function(a){return a==="gift"?errRun(f0,this,arguments,{k:"tdgift"}):f0.apply(this,arguments)}}
+/* jht "Dò hỏi gia thế" (htAct is exposed on window by jht.js) */
+if(typeof window.htAct==="function"){const f0=window.htAct;window.htAct=function(a,b){return a==="ask"?errRun(f0,this,arguments,{k:"kin"}):f0.apply(this,arguments)}}
+})();
 /* ================= jmapz: SECOND LEVEL OF CÀN NINH / ĐỨC THỌ + HER PEOPLE WHERE THEY REALLY ARE (KIT §85.10) =================
    Owner OD 18/11 ~19:25Z (4)(5) + ~19:45Z (verbatim in dev/OWNER_DECISIONS.md). The Dư đồ ZONES of 19:25Z (1)(2) were CANCELLED by the owner
    at ~19:45Z ("Thêm một tầng nữa mất công một lần bấm nó rối"): consort palaces keep their own tags; the zone/zoom/fog code is in git history
@@ -78347,7 +78614,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="50f116c4bb64";window.CTM_BUILD=BUILD;
+const BUILD="5afd2be2e9e2";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
