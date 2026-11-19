@@ -70,6 +70,10 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
    for(const v of rivals||[])if(v&&!v.coop)scan('npc'+v.id,v.inv);for(const s of [S,B&&B.S])try{for(const x of (s&&s.il&&s.il.box)||[])if(x&&hit(x.e))L.push('il:'+x.at)}catch(e){}
    for(const s of [S,B&&B.S])try{for(const sl of ['tram','y'])if(s&&s.wd&&hit(s.wd[sl]))L.push('wd:'+sl);for(const x of (s&&s.wdPawn)||[])if(x&&hit(x.e))L.push('pawn')}catch(e){}return L}};
  await H.p.evaluate(HELP);await G.p.evaluate(HELP);
+ /* F2 r2 (quiet off for her taps): the task card «Xong việc: …» (jtq14 doneCard) her act earns must reach HER phone, once, and never the host's */
+ const DONEW=()=>{window.__done3=new Set();const seen=()=>{const m=document.getElementById('modal');if(!m||m.hidden)return;const t=(m.textContent||'').match(/Xong việc: ([^\n]{2,60}?)(Chương|$)/);if(t)window.__done3.add(t[1].trim())};
+  new MutationObserver(seen).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['hidden']})};
+ await H.p.evaluate(DONEW);await G.p.evaluate(DONEW);
  /* stage her person in the HOST's store (her context) → the patch reaches her phone (never written on her phone) */
  const stage=async src=>{const r=await H.p.evaluate(src=>{try{return COOPW.thin.withSeat('b',()=>{const o=(0,eval)('(function(){'+src+'})')();/* every staged piece gets its ledger id now (the game gives it lazily): the same piece is traced by it after giveTo hands over a new entry */for(const e of S.inv||[])if(e&&e.tg3&&e.iu==null&&typeof ilUid==='function')ilUid(e);return o})}catch(e){return 'EXC '+e.message}},src);await H.p.evaluate(()=>{try{COOPW.thin.flush()}catch(e){}});await sync();await sleep(300);return r};
  await stage("S.bac=Math.max(S.bac||0,3000);S.suc=60;S.confined=0;S.out=0;if(S.maid){S.maid.loyal=80;delete S.maid.spyFor}");
@@ -140,6 +144,8 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  if(fab)await act('W5 May áo (useItem on a fabric, jwdinv)',`itemAct('use',${ixOf('w4')})`,{twin:true});
  await act('W6 Tự chọn đồ (wdAutoUI)',`wdAutoUI()`,{});
  if(wdY){await act('W7 Bán lén (wdSellUI)',`wdSellUI(${ixOf('w5')})`,{});}
+ {const lines=await G.p.evaluate(()=>(S.logs||[]).map(x=>String(x).replace(/<[^>]+>/g,'')).filter(x=>/Xong việc «/.test(x)).length);const gs=await G.p.evaluate(()=>[...window.__done3]),hs=await H.p.evaluate(()=>[...window.__done3]);
+  if(ON)ok(lines===0||(gs.length>=1&&hs.length===0),'W done card: a task her bag / wear acts finished shows its «Xong việc» card on HER phone (quiet off, F2 r2), none on the host',{lines,guest:gs,host:hs})}
  /* ---- S: the shop (Nhờ thái giám mua đồ, kit shop nvp) ---- */
  {await reset();const it=await pick(`S.shop=S.shop&&S.shop.length?S.shop:['yensao','tuithom'];kitShopNvp();const o=KSHOP.reg.nvp;const x=o.items.find(y=>y&&IT[y.k]&&y.price>0&&y.price<=S.bac&&!y.mark);closeModal();return x?{k:x.k,pr:x.price}:null`);
   if(it){const q=2;await act(`S1 Mua ×${q} in the kit shop (kitShopBuy nvp): bạc −price×${q}, +${q} items, the open panel refreshes`,
