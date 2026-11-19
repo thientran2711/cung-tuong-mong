@@ -110,7 +110,8 @@ function asRun(s,o){const m=ownerOf(s);if(!m)return"";const A=SRVA[o.sk];asC(s,o
   return r}
 function asOut(s,why){const o=ownerOf(s);if(o&&o.staff){const i=o.staff.indexOf(s);if(i>=0)o.staff.splice(i,1)}s.out=why||1;ASN.out=(ASN.out||0)+1}
 const AS_DO={
- nvp(s){if(roll(SRVA.nvp.bully)){asAp(s,SRVA.nvp.bullyC);return""}const L=allServ().filter(x=>x!==s&&ownerOf(x)!==ownerOf(s));if(L.length){const x=L[R(L.length)];s.af=s.af||{};s.af[x.sid]=cl((s.af[x.sid]||0)+BAL.ag.staff.nvpAf,-100,100)}return""},
+ nvp(s){/* NPC-PURPOSE G3: a bully is a servant there who bears her a grudge (her own af < 0), the worst first; none → no bullying. A friend = the one she already likes best */
+  const L=allServ().filter(x=>x!==s&&ownerOf(x)!==ownerOf(s));const by=npwPick(L,x=>-(((x.af||{})[s.sid])||0));if(by&&roll(SRVA.nvp.bully)){asAp(s,SRVA.nvp.bullyC);s.bullyBy=by.sid;return""}if(L.length){const x=npwPick(L,y=>1+Math.max(0,((s.af||{})[y.sid])||0));s.af=s.af||{};s.af[x.sid]=cl((s.af[x.sid]||0)+BAL.ag.staff.nvpAf,-100,100)}return""},
  spy(s,m,o,ok){const v=o.t;if(ok){/*evok: capped (the player's own "Lén báo tin")*/evA(v,m,SRVA.spy.ev);return v===S?`Tai mắt ${s.name} trong cung ${m.name} lén báo tin: chứng cứ +${SRVA.spy.ev}. `:""}
   if(roll(SRVA.spy.out)){asOut(s,"tgk");return asSee(m,v)?`${m===S?"Ngươi":m.name} bắt gặp ${s.name} lén lút với người của ${NM(v)}, đày xuống Tân Giả khố. `:""}return""},
  tellMis(s,m){const iv=(s.intel||[]).map(RV).filter(v=>v&&v.alive&&v!==m)[0];s.intel=(s.intel||[]).slice(1);if(iv){/*evok: servant intel, capped*/evA(m,iv,SRVA.tellMis.ev);if(m===S)return `${s.name} bẩm tin dò được về ${iv.name}: chứng cứ +${SRVA.tellMis.ev}. `}return""},
@@ -122,7 +123,7 @@ const AS_DO={
   /* the friend tell (was j10 servMonth roll): what she says of her palace's schemes this week reaches her friend's master */
   if(ok&&(m.schemes||0)>(m.schLast||0)&&(s.af[x.sid]||0)>=20){const o2=ownerOf(x);if(o2&&o2!==m&&evA(o2,m,BAL.eff.j10.evServMonth_2)&&o2===S)return `${x.name} nghe bạn là ${s.name} kể chuyện cung ${NM(m)}: chứng cứ ${balSg(BAL.eff.j10.evServMonth_2)}. `}/* one number with j10 servMonth (the old path) */return""},
  gift(s,m,o){const x=o.t;s.af=s.af||{};s.af[x.sid]=cl((s.af[x.sid]||0)+SRVA.gift.af/2,-100,100);x.af=x.af||{};x.af[s.sid]=cl((x.af[s.sid]||0)+SRVA.gift.af,-100,100);return""},
- ask(s,m,o){const L=liveRivals(true).filter(x=>x!==m);if(L.length){s.intel=(s.intel||[]).concat([L[R(L.length)].id]).slice(-3)}return""},
+ ask(s,m,o){/* G3: she asks after the one her master has a grudge against */const L=liveRivals(true).filter(x=>x!==m);const t=npwPick(L,x=>1+Math.max(0,hostility(m,x)||0));if(t){s.intel=(s.intel||[]).concat([t.id]).slice(-3)}return""},
  frame(s,m,o,ok){const x=o.t;s.af=s.af||{};x.af=x.af||{};if(ok){x.af[s.sid]=cl((x.af[s.sid]||0)+SRVA.frame.af,-100,100);
    /* AG-ALL-2 G10: the framed colleague answers with the maid player's own "Bị vu oan" options (j42 cnvFrameOpts) by her needs (jagstf2) */
    const R=typeof stf2Framed==="function"?stf2Framed(x,s,m):null;if(R&&!R.stands)return m===S&&R.r?R.r+" ":"";if(!R)x.loyal=cl((x.loyal||0)+SRVA.frame.loy,0,100);x.trouble=wk();
