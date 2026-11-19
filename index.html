@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"826c89a1+","t":"2026-11-18T23:25Z","c":"stage-here r3d (ROOT-58 BACK): Fold no-stage dock moves into a free slot of the fixed top bar (.krail.khud, compact, kit §77), never over s…","b":"2a5e49c6c575","h":[{"s":"ca661db3+","t":"2026-11-18T13:38Z","c":"coop-c4-stuck S5a: hold showModal so the room's own armed reshow cannot race the negative check"},{"s":"0dc8f187+","t":"2026-11-18T22:28Z","c":"review coop-thin-f1 r1 #3: site build (index.html / sw.js rebuilt)"},{"s":"6e9277d8+","t":"2026-11-18T21:47Z","c":"entry-blank-r3 r2 (review item 6, whole group): a portrait on its way shows the kit portrait silhouette (§59.1 pf/pm, unknown-f|m); the lin…"},{"s":"3270145f+","t":"2026-11-18T21:25Z","c":"doc-90-women r1: rebuild generated index.html/sw.js (build hash, build line) after comment edits"},{"s":"668e0bf4+","t":"2026-11-18T21:26Z","c":"map-zones r6 (reviewer fix on r3 5a83694): a head in a dropped palace with a stale resHead to another dropped house got a second migration …"},{"s":"b02879db+","t":"2026-11-18T20:49Z","c":"ge-writers-w1: carry jrd_muoi ch8 c3 «Thư sinh Giang Nam» (forced from s1/s2 every life) + BAL muoi_no_8.c3, by MAIN ORDER 18:45Z; muoi_no_…"},{"s":"fcff501a+","t":"2026-11-18T20:41Z","c":"map-labels-missing r2c: tag touches its own building or keeps a short leader (\u003c=90px) ending on the real slip/info rect, dot >=40px from ot…"},{"s":"c67d248d+","t":"2026-11-18T19:53Z","c":"ag-deed-perf: site build (index.html, sw.js)"},{"s":"6aab33ad","t":"2026-11-18T20:05Z","c":"KIT_REQUESTS: K-Q2-1 DONE 048f3c7"},{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"}]};
+window.CTM_BI={"s":"89b2f676+","t":"2026-11-19T00:02Z","c":"stage-here r4: KIT §42.2 ONE NOTICE SYSTEM (rewritten in place), §77/§77.2 updated; tests: stage-here (box / top chip / float-toast), stage…","b":"4bf1c021f350","h":[{"s":"ca661db3+","t":"2026-11-18T13:38Z","c":"coop-c4-stuck S5a: hold showModal so the room's own armed reshow cannot race the negative check"},{"s":"0dc8f187+","t":"2026-11-18T22:28Z","c":"review coop-thin-f1 r1 #3: site build (index.html / sw.js rebuilt)"},{"s":"6e9277d8+","t":"2026-11-18T21:47Z","c":"entry-blank-r3 r2 (review item 6, whole group): a portrait on its way shows the kit portrait silhouette (§59.1 pf/pm, unknown-f|m); the lin…"},{"s":"3270145f+","t":"2026-11-18T21:25Z","c":"doc-90-women r1: rebuild generated index.html/sw.js (build hash, build line) after comment edits"},{"s":"668e0bf4+","t":"2026-11-18T21:26Z","c":"map-zones r6 (reviewer fix on r3 5a83694): a head in a dropped palace with a stale resHead to another dropped house got a second migration …"},{"s":"b02879db+","t":"2026-11-18T20:49Z","c":"ge-writers-w1: carry jrd_muoi ch8 c3 «Thư sinh Giang Nam» (forced from s1/s2 every life) + BAL muoi_no_8.c3, by MAIN ORDER 18:45Z; muoi_no_…"},{"s":"fcff501a+","t":"2026-11-18T20:41Z","c":"map-labels-missing r2c: tag touches its own building or keeps a short leader (\u003c=90px) ending on the real slip/info rect, dot >=40px from ot…"},{"s":"c67d248d+","t":"2026-11-18T19:53Z","c":"ag-deed-perf: site build (index.html, sw.js)"},{"s":"6aab33ad","t":"2026-11-18T20:05Z","c":"KIT_REQUESTS: K-Q2-1 DONE 048f3c7"},{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -75345,12 +75345,13 @@ function boxPaint(){try{const hud=hudEl();let b=$("kntbox");const L=NT.list,U=un
  if(!b){b=document.createElement("button");b.type="button";b.id="kntbox";b.className="krailb kglyph kntb";b.innerHTML=`<i class="khap" aria-hidden="true">!</i>`}
  const lit=U.length>0||L.some(x=>x.sticky);b.classList.toggle("kbusy",lit&&!calm());b.classList.toggle("kbadge",U.length>0);b.classList.toggle("kntcalm",!lit);b.dataset.n=String(U.length);
  const lab=U.length?`Tin báo: ${U.length} tin mới`:"Tin báo";b.setAttribute("aria-label",lab);b.title=lab;
- if(b.parentNode!==hud){hud.appendChild(b);b.__k=""}
+ if(b.parentNode!==hud){hud.appendChild(b);b.__ok=0}
  /* keep the spot while it is still free (no jumping on every render); else the first free spot from the top-right corner of the bar */
- const H=hud.getBoundingClientRect(),key=[Math.round(H.width),Math.round(H.height),hud.textContent.length].join("|");
- if(b.__k!==key||!b.__ok){const c=cal(b);const R=hudRects(hud,b);const p=scan({left:H.left+4,right:H.right-4,top:H.top+3,bottom:H.bottom-3},c.w,c.h,R,3,"right");
+ const H=hud.getBoundingClientRect(),R=hudRects(hud,b),cur=b.getBoundingClientRect();
+ /* re-checked on every paint: the spot must still be free of every word / picture / button of the bar (a render can change the bar's text) */
+ if(!b.__ok||hits(R,cur.left,cur.top,cur.width,cur.height,2)){const c=cal(b);const p=scan({left:H.left+4,right:H.right-4,top:H.top+3,bottom:H.bottom-3},c.w,c.h,R,3,"right");
   if(p){setAt(b,c,p.x,p.y);b.__ok=1}else{const sl=hud.querySelector(".kseal-hud,#emp,.kseal")||null;const r=sl&&sl.getClientRects().length?sl.getBoundingClientRect():null;
-   setAt(b,c,r?r.left+(r.width-c.w)/2:H.right-c.w-6,r?r.bottom-c.h:H.top+4);b.__ok=0}b.__k=key}
+   setAt(b,c,r?r.left+(r.width-c.w)/2:H.right-c.w-6,r?r.bottom-c.h:H.top+4);b.__ok=0}}
  return b}catch(e){console.error("kntbox",e);return null}}
 /* ---------- the CHIP ---------- */
 function chipEl(it){let el=$("kntchip");if(!el){el=document.createElement("div");el.id="kntchip";el.className="ktbt kntc";el.setAttribute("role","status");document.body.appendChild(el)}
@@ -75385,9 +75386,10 @@ function watch(){if(NT.w)return;NT.w=setInterval(()=>{try{const el=$("kntchip");
 function picOf(it){return it&&it.pic||""}
 function kitNoticeOpen(id){try{if(typeof kitPanel!=="function")return null;const one=id!=null?NT.list.find(x=>x.id===id):null;
  const U=unread();const L=one?[one]:(U.length?U:NT.list.slice(0,6));if(!L.length)return null;
- const lead=L[0];const facts=L.map(x=>`${esc(x.text)}${!one&&x.seen?" <small>(đã xem)</small>":""}`);
+ const lead=L[0];/* plain kit text rows (kpsec html), not kitFacts: no person figure is guessed from the words — the panel stays SMALL */
+ const html=L.map(x=>`<p class="kntp">${esc(x.text)}${!one&&x.seen?" <small>(đã xem)</small>":""}</p>`).join("");
  const go=L.find(x=>typeof x.go==="function");const opts=go?[{n:go.goLabel||"Để ta xem",fx:{},go:()=>{try{go.go()}catch(e){}boxPaint()}}]:undefined;
- const m=kitPanel({kind:"notice",title:"Tin báo",sub:one?"":(U.length?`${U.length} tin mới`:"Đã xem hết"),facts,opts,onClose:()=>boxPaint()},true);m.__ntc=lead;showModal();picSwap(document,lead);for(const t of [0,150,400,800,1500])setTimeout(()=>{if(NT.open===m)picSwap(document,lead)},t);NT.open=m;
+ const m=kitPanel({kind:"notice",title:"Tin báo",sub:one?"":(U.length?`${U.length} tin mới`:"Đã xem hết"),sections:[{html}],opts,onClose:()=>boxPaint()},true);m.__ntc=lead;showModal();picSwap(document,lead);for(const t of [0,150,400,800,1500])setTimeout(()=>{if(NT.open===m)picSwap(document,lead)},t);NT.open=m;
  for(const x of L)x.seen=true;const c=$("kntchip");if(c)chipHide(c);setTimeout(boxPaint,0);return m}catch(e){console.error("kitNoticeOpen",e);return null}}
 /* the panel's picture = the notice's own (the kit info panel puts kitInfoArt("Tin báo") there; a notice with a picture swaps it in the same kit frame) */
 function picSwap(M,it){try{const src=picOf(it);if(!src)return;const im=M.querySelector("#mb figure.ksart img, #mb .ksart img");if(im&&im.getAttribute("src")!==src)im.setAttribute("src",src)}catch(e){}}
@@ -75414,7 +75416,7 @@ let tbSub=null;function tbHook(){if(tbSub||typeof tinBaoOn!=="function")return;t
 /* ---------- repaint ---------- */
 const paintR=()=>(window.renderAfter||((k,g)=>g()))("knotice",()=>{tbHook();boxPaint()});
 try{const r1=render;render=function(){const r=r1.apply(this,arguments);try{paintR()}catch(e){}return r};window.render=render}catch(e){}
-let rt=0;addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(()=>{const b=$("kntbox");if(b)b.__k="";boxPaint();const c=$("kntchip");if(c)chipPlace(c)},80)});
+let rt=0;addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(()=>{const b=$("kntbox");if(b)b.__ok=0;boxPaint();const c=$("kntchip");if(c)chipPlace(c)},80)});
 const st=document.createElement("style");st.id="kit-notice";st.textContent=`
 #kntbox.kntb{position:absolute;z-index:8;width:32px;height:32px;min-width:0;min-height:0;padding:0;display:flex;align-items:center;justify-content:center}
 #kntbox.kntb .khap{margin:0;width:20px;height:20px;line-height:20px;font-size:.86rem;vertical-align:0;animation:none}
@@ -76909,7 +76911,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="2a5e49c6c575";window.CTM_BUILD=BUILD;
+const BUILD="4bf1c021f350";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

@@ -70,12 +70,13 @@ function boxPaint(){try{const hud=hudEl();let b=$("kntbox");const L=NT.list,U=un
  if(!b){b=document.createElement("button");b.type="button";b.id="kntbox";b.className="krailb kglyph kntb";b.innerHTML=`<i class="khap" aria-hidden="true">!</i>`}
  const lit=U.length>0||L.some(x=>x.sticky);b.classList.toggle("kbusy",lit&&!calm());b.classList.toggle("kbadge",U.length>0);b.classList.toggle("kntcalm",!lit);b.dataset.n=String(U.length);
  const lab=U.length?`Tin báo: ${U.length} tin mới`:"Tin báo";b.setAttribute("aria-label",lab);b.title=lab;
- if(b.parentNode!==hud){hud.appendChild(b);b.__k=""}
+ if(b.parentNode!==hud){hud.appendChild(b);b.__ok=0}
  /* keep the spot while it is still free (no jumping on every render); else the first free spot from the top-right corner of the bar */
- const H=hud.getBoundingClientRect(),key=[Math.round(H.width),Math.round(H.height),hud.textContent.length].join("|");
- if(b.__k!==key||!b.__ok){const c=cal(b);const R=hudRects(hud,b);const p=scan({left:H.left+4,right:H.right-4,top:H.top+3,bottom:H.bottom-3},c.w,c.h,R,3,"right");
+ const H=hud.getBoundingClientRect(),R=hudRects(hud,b),cur=b.getBoundingClientRect();
+ /* re-checked on every paint: the spot must still be free of every word / picture / button of the bar (a render can change the bar's text) */
+ if(!b.__ok||hits(R,cur.left,cur.top,cur.width,cur.height,2)){const c=cal(b);const p=scan({left:H.left+4,right:H.right-4,top:H.top+3,bottom:H.bottom-3},c.w,c.h,R,3,"right");
   if(p){setAt(b,c,p.x,p.y);b.__ok=1}else{const sl=hud.querySelector(".kseal-hud,#emp,.kseal")||null;const r=sl&&sl.getClientRects().length?sl.getBoundingClientRect():null;
-   setAt(b,c,r?r.left+(r.width-c.w)/2:H.right-c.w-6,r?r.bottom-c.h:H.top+4);b.__ok=0}b.__k=key}
+   setAt(b,c,r?r.left+(r.width-c.w)/2:H.right-c.w-6,r?r.bottom-c.h:H.top+4);b.__ok=0}}
  return b}catch(e){console.error("kntbox",e);return null}}
 /* ---------- the CHIP ---------- */
 function chipEl(it){let el=$("kntchip");if(!el){el=document.createElement("div");el.id="kntchip";el.className="ktbt kntc";el.setAttribute("role","status");document.body.appendChild(el)}
@@ -110,9 +111,10 @@ function watch(){if(NT.w)return;NT.w=setInterval(()=>{try{const el=$("kntchip");
 function picOf(it){return it&&it.pic||""}
 function kitNoticeOpen(id){try{if(typeof kitPanel!=="function")return null;const one=id!=null?NT.list.find(x=>x.id===id):null;
  const U=unread();const L=one?[one]:(U.length?U:NT.list.slice(0,6));if(!L.length)return null;
- const lead=L[0];const facts=L.map(x=>`${esc(x.text)}${!one&&x.seen?" <small>(đã xem)</small>":""}`);
+ const lead=L[0];/* plain kit text rows (kpsec html), not kitFacts: no person figure is guessed from the words — the panel stays SMALL */
+ const html=L.map(x=>`<p class="kntp">${esc(x.text)}${!one&&x.seen?" <small>(đã xem)</small>":""}</p>`).join("");
  const go=L.find(x=>typeof x.go==="function");const opts=go?[{n:go.goLabel||"Để ta xem",fx:{},go:()=>{try{go.go()}catch(e){}boxPaint()}}]:undefined;
- const m=kitPanel({kind:"notice",title:"Tin báo",sub:one?"":(U.length?`${U.length} tin mới`:"Đã xem hết"),facts,opts,onClose:()=>boxPaint()},true);m.__ntc=lead;showModal();picSwap(document,lead);for(const t of [0,150,400,800,1500])setTimeout(()=>{if(NT.open===m)picSwap(document,lead)},t);NT.open=m;
+ const m=kitPanel({kind:"notice",title:"Tin báo",sub:one?"":(U.length?`${U.length} tin mới`:"Đã xem hết"),sections:[{html}],opts,onClose:()=>boxPaint()},true);m.__ntc=lead;showModal();picSwap(document,lead);for(const t of [0,150,400,800,1500])setTimeout(()=>{if(NT.open===m)picSwap(document,lead)},t);NT.open=m;
  for(const x of L)x.seen=true;const c=$("kntchip");if(c)chipHide(c);setTimeout(boxPaint,0);return m}catch(e){console.error("kitNoticeOpen",e);return null}}
 /* the panel's picture = the notice's own (the kit info panel puts kitInfoArt("Tin báo") there; a notice with a picture swaps it in the same kit frame) */
 function picSwap(M,it){try{const src=picOf(it);if(!src)return;const im=M.querySelector("#mb figure.ksart img, #mb .ksart img");if(im&&im.getAttribute("src")!==src)im.setAttribute("src",src)}catch(e){}}
@@ -139,7 +141,7 @@ let tbSub=null;function tbHook(){if(tbSub||typeof tinBaoOn!=="function")return;t
 /* ---------- repaint ---------- */
 const paintR=()=>(window.renderAfter||((k,g)=>g()))("knotice",()=>{tbHook();boxPaint()});
 try{const r1=render;render=function(){const r=r1.apply(this,arguments);try{paintR()}catch(e){}return r};window.render=render}catch(e){}
-let rt=0;addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(()=>{const b=$("kntbox");if(b)b.__k="";boxPaint();const c=$("kntchip");if(c)chipPlace(c)},80)});
+let rt=0;addEventListener("resize",()=>{clearTimeout(rt);rt=setTimeout(()=>{const b=$("kntbox");if(b)b.__ok=0;boxPaint();const c=$("kntchip");if(c)chipPlace(c)},80)});
 const st=document.createElement("style");st.id="kit-notice";st.textContent=`
 #kntbox.kntb{position:absolute;z-index:8;width:32px;height:32px;min-width:0;min-height:0;padding:0;display:flex;align-items:center;justify-content:center}
 #kntbox.kntb .khap{margin:0;width:20px;height:20px;line-height:20px;font-size:.86rem;vertical-align:0;animation:none}
