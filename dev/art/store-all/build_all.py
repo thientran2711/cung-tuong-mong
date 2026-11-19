@@ -147,7 +147,9 @@ def _hexhs(h):
     r,g,b=(int(h[i:i+2],16)/255 for i in (1,3,5)); hh,ss,vv=_cs.rgb_to_hsv(r,g,b); return hh*360,ss
 def secondary(person):
     """(colour words, source) of her outfit SECONDARY colour."""
-    g=LAST_G; pal=g["DATA"][person][0]; main=pal.split(" and ")[0]; sec=pal.split(" and ")[-1] if " and " in pal else ""
+    g=LAST_G
+    if person in g.get("M_COLS",{}): _m=g["M_COLS"][person]; return f"{_m[2]} like {_m[3]}","owner table (m_colours_proposed.json / nc princess colours, Lượt 603/592)"   # BW4
+    pal=g["DATA"][person][0]; main=pal.split(" and ")[0]; sec=pal.split(" and ")[-1] if " and " in pal else ""
     fm=family(main); fs=family(sec) if sec else "neutral"
     if sec and fs not in ("neutral",fm,"other","yellow"): return sec,"listed secondary"
     o=g["ORIG1"].get(person)
@@ -158,10 +160,14 @@ def secondary(person):
             w=re.sub(r"^(a|an) ","",m.group(1).strip())
             if s2>=0.15 and d>=40 and not (40<=h2<=70) and family(w) not in ("neutral","yellow",fm): return w+" like "+m.group(2).upper(),"live original (ORIG1 measured)"
     c=FAMILY_CONTRAST[fm]; return c[_pn(person)%len(c)],"contrast (listed %s is neutral/metal/same family)"%(sec or "none")
+def main_words(person):
+    """MAIN colour words of the TWO/THREE-COLOUR sentence: owner-table people = name like #HEX (BW4, Lượt 603), others = DATA name."""
+    m=LAST_G.get("M_COLS",{}).get(person)
+    return f"{m[0]} like {m[1]}" if m else LAST_G["DATA"][person][0].split(" and ")[0]
 def outfit_colours(person):
     """Lượt 489: the owner-APPROVED two-colour sentence (Cao Ly princess V2, Lượt 301-303, dev/art/owner-copy/pr_cl_t2_V2.txt) copied VERBATIM; only the two colour slots swapped.
     It lived only in the owner-copy generators (mk_ranks_v3.py / mk_princess_ranks.py), never in the store t8-prompt-B/build.py that build_all copies, so the store path never had it."""
-    main=LAST_G["DATA"][person][0].split(" and ")[0]; sec,_=secondary(person)
+    main=main_words(person); sec,_=secondary(person)
     return f"TWO-COLOUR RULE: the whole outfit uses EXACTLY TWO colours that clearly interact: the MAIN colour {main} and the SECONDARY colour {sec}, the secondary clearly visible in large areas (inner robe or skirt, wide borders, sash, cuffs, linings), never a single flat colour all over; gold or silver only as thin accents, never a third colour."
 def phibach_colour(person,pal=None):
     """(main, own secondary, family main, phi bạch colour, note)"""
@@ -200,7 +206,7 @@ def item_colour(person,rank,F):
 def outfit_colours3(person):
     """B17 (owner Lượt 583): t7/t8 = THREE colours: royal yellow #EFBD69 + her MAIN and SECONDARY colour with exactly the words of her t1-t6 TWO-COLOUR sentence
     (same data: DATA main + secondary()); the B15 sentence adapted so it never says 'never a third colour'."""
-    main=LAST_G["DATA"][person][0].split(" and ")[0]; sec,_=secondary(person)
+    main=main_words(person); sec,_=secondary(person)
     return (f"THREE-COLOUR RULE (t7/t8): the whole outfit uses EXACTLY THREE colours that clearly interact: the royal golden yellow (honey-gold like #EFBD69), the MAIN colour {main} and the SECONDARY colour {sec}, "
             "the secondary clearly visible in large areas (inner robe or skirt, wide borders, sash, cuffs, linings), never a single flat colour all over; gold or silver only as thin accents, no other colour.")
 def extras(S0,person,rank):

@@ -704,7 +704,7 @@ def _strip_kc_faces(text):
     return text
 # B19 NO GREY (owner Lượt 591, BW4): grey as an outfit colour (main/secondary/any colour slot). FLAG for now (listed for ROOT-51, who gets the
 # replacement colours from the owner); set B19_FAIL=True once the people's data has no grey left. Hair ("silver-grey streaks/strands") and negated clauses ("never grey") are not outfit colours.
-B19_FAIL = False
+B19_FAIL = True   # BW4: owner table wired (Lượt 603), grey data gone -> grey = FAIL
 GREY_RX = re.compile(r"\b(?:silvery[- ]grey|silver[- ]grey|pale[- ]grey|grey[- ](?:blue|sage|lilac|green|white|rose|pink)|(?:blue|pink|green|sage|lilac|rose)[- ]grey|grey(?:ish)?|gray(?:ish)?|ash(?:en)?|ash[- ]\w+)\b(?![- ]?(?:streaks|strands|hair|mixed|patch|at the temples))", re.I)
 def grey_hits(text):
     """-> list of grey colour phrases in the text that are not negated and not about hair (B19)."""

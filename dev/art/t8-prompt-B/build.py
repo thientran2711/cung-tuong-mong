@@ -614,6 +614,11 @@ MAID_ROWS=[["m01", "sage green and cream", "#E8CDB5", "#CAB295"],
   ["m52", "pink lilac and gold", "#CEA6A9", "#B4898E"]]
 MAID_MOT=["peonies", "plum blossoms", "lotus flowers", "orchids", "chrysanthemums", "butterflies", "cranes", "auspicious clouds", "magnolias", "begonias", "camellias", "osmanthus", "wisteria"]
 MAID_FLOWER=["a small pink silk flower","a white jasmine sprig","a small plum blossom","a little orchid","a small peach blossom","a tiny camellia"]   # mjobs.py (maid) FLW
+# OWNER Lượt 603 (ROOT-51 -> BW4): m01-m52 colours = dev/art/face-common/m_colours_proposed.json (NF1, FINAL, Lượt 599 revision): main name + main hex
+# (col 3) and the outfit SECONDARY name + hex (col 4; palette = "<main> and <secondary>"). M_COLS also feeds store-all/build_all.py secondary() (name like #HEX).
+import json as _json
+M_COLS={_k:(_v["main"],_v["main_hex"],_v["secondary"],_v["secondary_hex"]) for _k,_v in _json.load(open(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)),"..","face-common","m_colours_proposed.json"),encoding="utf-8"))["rows"].items()}
+MAID_ROWS=[[_c,f"{M_COLS[_c][0]} and {M_COLS[_c][2]}",M_COLS[_c][1],M_COLS[_c][3]] if _c in M_COLS else [_c,_p,_a,_b] for _c,_p,_a,_b in MAID_ROWS]
 for _c,_pal,_h1,_h2 in MAID_ROWS:
     _n=int(_c[1:]); _main,_sec=_pal.split(" and ")[0],_pal.split(" and ")[-1]
     DATA[_c]=(_pal,"")
@@ -822,7 +827,7 @@ for _k in ("bd","nc"):   # 19/11 Lượt 407: the 6 princess faces bd1-3 / nc1-3
     for _j in (1,2,3): DATA[f"{_k}{_j}"]=(PDATA[_k][0].replace(" fur",""),PDATA[_k][1])
 # OWNER-approved princess colours (ART_RULES B18 Lượt 592, ROOT-51 -> BW4 GO): nc1-nc3 replace the placeholder "dusty teal-blue and silver" (name in DATA, name + hex in ORIG1)
 for _id,_m,_mh,_s,_sh in (("nc1","indigo","#5E6694","warm ivory","#EAD7BF"),("nc2","soft jade green","#9EB28F","deep rose","#CF7E83"),("nc3","wisteria lilac","#CCA7C8","rose-red","#D18A92")):
-    DATA[_id]=(f"{_m} and {_s}",DATA[_id][1]); ORIG1[_id]=(f"{_m} silk like {_mh}",f"{_s} like {_sh}")
+    DATA[_id]=(f"{_m} and {_s}",DATA[_id][1]); ORIG1[_id]=(f"{_m} silk like {_mh}",f"{_s} like {_sh}"); M_COLS[_id]=(_m,_mh,_s,_sh)
 IDENT=" From the identity reference keep ONLY her face, facial features and hairstyle colour; do NOT copy the outfit, hair ornaments or accessories of the reference, dress her in the NEW outfit below. The style reference image is only for skin, drawing style, fabric and embroidery: never copy its face, body or pose."
 TH_ITEMS=[("a string of sandalwood prayer beads","one"),("a jade-headed dragon-head staff","one"),("a thread-bound sutra book with a gold-brocade cover","two"),("a small gilded bronze hand censer","two"),("a scroll of calligraphy on yellow silk","two"),("an ivory-handled silk fan","one"),("a small white-jade ruyi","two"),("an embroidered silk prayer-bead pouch","one"),("a carved sandalwood box","two"),("a hand mirror in a bronze-and-jade frame","one")]
 # owner 18/11 ~22:55Z (FIGURE_GATE A0 REFERENCES): royal ranks incl. Thai hau = 3 images; image 3 = royal-yellow swatch TdwDfOyVNR
@@ -892,7 +897,7 @@ def build_nude_own(c,face,right):
 # Cold = the OLD lãnh cung outfit sentence copied verbatim from main dev/figwork/jobs.json N-cNN-tcold (+ gp.py B: robe hanging straight and calm, opaque). Held item: ty N -> the tN rank cell of item_age.py, cold -> "lanh" cell.
 TY_COLOUR={1:"ivory",2:"pale sage-green",3:"pale blue",4:"pale powder-pink",5:"pale lavender-purple",6:"pale rose-red",7:"pale amber-orange",8:"pale yellow"}
 TY_HAIR=" HAIR: neat bun with soft strands; ONE small gold hairpin set close against the side of the bun with a short pearl bead tassel hanging down along the hair; the hairpin must lie within the hair outline: NO stick or rod sticking out sideways beyond the hair, no flower."
-COLD_OUTFIT="Outfit (the cold palace, ONE plain outfit identical for everyone): a plain UNDYED pale grey-white coarse linen robe with a simple cross collar and a plain linen sash, NO embroidery, NO pattern, NO colour, NO jewellery, NO gold; hair in a simple neat low bun held by ONE plain wooden hairpin, no flowers, no ornaments; clean, neat and tidy, never ragged, torn, dirty or poor-looking; she is still very beautiful, graceful and dignified."
+COLD_OUTFIT="Outfit (the cold palace, ONE plain outfit identical for everyone): a plain UNDYED pale natural white coarse linen robe with a simple cross collar and a plain linen sash, NO embroidery, NO pattern, NO colour, NO jewellery, NO gold; hair in a simple neat low bun held by ONE plain wooden hairpin, no flowers, no ornaments; clean, neat and tidy, never ragged, torn, dirty or poor-looking; she is still very beautiful, graceful and dignified."
 COLD_FAB=" The linen robe hangs straight and calm, the sleeves and sash fall naturally with NO swirling and NO flying fabric; all fabrics opaque."
 # TY0 fixes (ROOT-39 order 19/11, 2K sample faults 3-6): face sentence = FIGURE_GATE D.1 "Face = the person's OWN face ... never m09's face" + l.518 "face and hair only — do NOT copy its outfit or sleeves";
 # colour negatives = the approved yellow wording "not pale cream, beige or khaki" / "not beige/tan/ochre" (b10 prompts); a65 one step deeper than a51 (AGE_TXT a65 "clearly older than her 51-year-old self" + "DEEPER, DARKER").
@@ -919,7 +924,7 @@ def build_ty_cold(c,state):
     s=PRE+f" {who}."+TYC_REMAKE+" "+AGE_TXT[AGE]   # TY0 fix2 (ROOT-40 GO 03:52Z): kc2k K3 re-make sentence; NO consort face words, NO new hairstyle. AGE_TXT verbatim (rule 0); its generic a51/a65 colour examples are overridden by this state's own COLOUR RULE below (same hue family, no switch)
     if state=="cold":
         item,hk=age_item(c,"lanh","a plain wooden bowl","two")
-        s+=" "+COLD_OUTFIT.replace(TYC_COLD_HAIR_OLD,TYC_COLD_HAIR,1)+" COLOUR RULE: the linen stays the same undyed pale grey-white at every age (not beige, tan, khaki or cream), never dyed, never deeper, no other colour anywhere; this replaces the colour examples above."+COLD_FAB
+        s+=" "+COLD_OUTFIT.replace(TYC_COLD_HAIR_OLD,TYC_COLD_HAIR,1)+" COLOUR RULE: the linen stays the same undyed pale natural white at every age (not beige, tan, khaki or cream), never dyed, never deeper, no other colour anywhere; this replaces the colour examples above."+COLD_FAB
     else:
         N=int(state[2:]); col=TY_COLOUR[N]
         item,hk=age_item(c,"t%d"%N,"an embroidered handkerchief","one")
@@ -986,6 +991,9 @@ def build_mama(c):
         s+=(f" COLOUR RULE: take ONLY the cut from image 3; RECOLOUR the whole costume to her colour {main}, a soft, gentle, held-back medium tone (clear but quiet, never fresh or bright, never pale or pastel-washed, never dark, never grey, never brown), with the embroidery in a lighter tone of the same colour and one soft gold accent; do not copy the brown of image 3.")
     if "--twocol" in sys.argv:   # owner Lượt 499 / ART_RULES B15 (ONE ma ma sample first): APPROVED two-colour sentence copied VERBATIM from dev/art/owner-copy/pr_cl_t2_V2.txt; only the two colour names are slot words. Opt-in flag -> every other output byte-identical.
         sec=sys.argv[sys.argv.index("--twocol")+1]
+        if c in globals().get("M_COLS",{}):   # BW4 (owner Lượt 603): owner-table people: the same names + hexes as every other mode
+            _mc=M_COLS[c]; main=f"{_mc[0]} like {_mc[1]}"
+            if sec in (_mc[2],"auto"): sec=f"{_mc[2]} like {_mc[3]}"
         s+=f" TWO-COLOUR RULE: the whole outfit uses EXACTLY TWO colours that clearly interact: the MAIN colour {main} and the SECONDARY colour {sec}, the secondary clearly visible in large areas (inner robe or skirt, wide borders, sash, cuffs, linings), never a single flat colour all over; gold or silver only as thin accents, never a third colour."
     s+=" Any flower or pattern on the fabric is fine silk-thread embroidery stitched directly into the fabric, flat, following the folds, never printed or pasted-on."
     item,hk=age_item(c,"mama","an embroidered handkerchief","one")
