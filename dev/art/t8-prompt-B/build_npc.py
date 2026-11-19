@@ -72,6 +72,7 @@ def _th_sleeves():
 TH_SLEEVES = _th_sleeves()
 def thaihau(n, age):
     return (PRE + " A dignified, gentle Chinese empress dowager." + IDENT_F + " " + W_AGE[age]
+            + (B.ELDER_M05_SENT if age in ("a51", "a65") else "")   # C5 (owner Lượt 779, MG2): her elder colours win over master M05 at a51/a65
             + f" Outfit: a {THC[n - 1]}." + TH_SLEEVES + " Pose: calm standing pose; hands folded at her waist." + K3["f"] + END)
 
 # ---------------------------------------------------------------------------------------------------------------
@@ -314,7 +315,7 @@ def main(argv):
             try: p = prompt(o["id"], o["age"], o["rank"])
             except Held as e: p = "HELD " + str(e)
             import master_common   # a gen made before the B25 master block (MG1) passes when only the block differs
-            if (p != r["prompt"] and master_common.apply(r["prompt"]) != p) or refs(o["id"], o["age"]) != r.get("refs"): bad += 1; print("FAIL", r.get("gen_id"), r["cmd"])
+            if (p != r["prompt"] and master_common.apply(master_common.legacy(r["prompt"])) != p.replace(B.ELDER_M05_SENT, "")) or refs(o["id"], o["age"]) != r.get("refs"): bad += 1; print("FAIL", r.get("gen_id"), r["cmd"])
         print(f"verify: {n} build_npc gens, {bad} FAIL"); return 1 if bad else 0
     o = _argv_parse(argv)
     try: p = prompt(o["id"], o["age"], o["rank"])

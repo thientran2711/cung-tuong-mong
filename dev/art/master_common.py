@@ -38,6 +38,19 @@ def apply(text):
     return t[:lead] + block + " " + t[lead:]
 
 
+# C1 (owner Lượt 779, MG2): the drawing style is the approved thiếu nữ style ONLY (M01/M02). The old store style clause below was removed from every builder;
+# legacy(text) maps a prompt written before Lượt 779 to today's wording so ledger/verify compares still recognise old gens (it is NEVER used to make a prompt).
+STYLE_OLD = ("Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, "
+             "exactly matching the rendering of the reference portraits; full-body standing figure")
+STYLE_OLD_TY = STYLE_OLD.replace("the reference portraits;", "the style reference image;")
+
+
+def legacy(text):
+    t = text.replace(STYLE_OLD, "Full-body standing figure").replace(STYLE_OLD_TY, "Full-body standing figure")
+    t = t.replace("skin rendering, painterly near-3D drawing style, fabric", "skin rendering, drawing style, fabric")
+    return t
+
+
 def _overlap(s, text):
     w = set(re.findall(r"[a-zA-Z']+", s.lower())); best = 0.0
     for p in re.split(r"(?<=[.;])\s+", text):
