@@ -73,3 +73,66 @@ GE reach (§3 rows) — options carry both shadings on every Chuỗi (raw names 
 
 ### FOR C (pictures, via MAIN; draw nothing): .4 + .11 scenes and the 4 rares — snow at Nhạn Môn with grain carts; the oath ovoo stone on a steppe hill; Phong at the Ngọ môn; the stone stele «Bia đá bên ải Nhạn Môn»; the Emperor on the west gate tower with her.
 ### FOR E14: merge review/bd-roads-w2 (only jrd_bd2.js + the writer-2 block of jbalbd.js).
+
+## §BUILT (E14 lead: bd_san + bd_soi; writer 2 E14b: bd_tuyet + bd_hen on review/bd-roads-w2)
+Files on review/bd-roads: `dev/build/jrd_bd.js` (BDP people book + bdMan world hook, BD_OLD filter, legacy alias loop moved verbatim from jrd_nc.js, bd_san, bd_soi), `dev/build/jrd_bd2.js` (writer 2), `dev/build/jbalbd.js` (ONE CORE numbers, lead block + writer-2 block), `dev/build/j97.js` (+1 line: appends BD97 .4 rare rows), `dev/build/jrd_nc.js` (alias block removed, header comment updated — FOR B), `dev/build/assemble.py` (jbalbd after jbalroad; jrd_bd, jrd_bd2 after jrd_nc), `dev/story/ROAD_MAP.md` §4.5b + §5.4, `dev/test/bd-legacy-save.js`, `dev/measure/bd-roads-bal.js`.
+
+### Per-chapter table — bd_san · Mùa thu săn (GE: ge1 Thống lĩnh ngự mã · ge2 Tri kỷ lưng ngựa · ge3 Mũi tên trường săn · ge4 Về với thảo nguyên)
+| Ch | Title | Cast | Results | Raw options carrying GE intents (thiện + / ác −) |
+|---|---|---|---|---|
+| .4 | Mùa thu săn | emp, v, Ba Đồ, Tuyết Câu | Một tên trước ngự giá / Người hiểu ngựa / Một ngày săn như mọi ngày / Tên bay gần ngự mã; ✦ j97 «Một tên hai nhạn» | ge2 «Xin ngự giá cho cưỡi Tuyết Câu theo đoàn», «Lùa nai về phía ngự giá»; ge1 «Bắn chặn đường hươu…», «Thúc Tuyết Câu chắn trước ngự mã»; + «Nhờ Ba Đồ thắng yên cho các phi tần…», «Tặng em gái {v} một con ngựa khác»; − «Khéo từ: ngựa chỉ quen tay chủ» |
+| .5 | Chuồng ngựa Thượng tứ viện | emp, v, maid, Ba Đồ, Tổng quản | Chuồng ngựa nghe lời ngươi / Ngựa của Đại Hy / Tổng quản ghi hận | ge1 «Tâu xin cho Ba Đồ giữ chìa khóa», «Tâu xin hai người cùng trông»; ge3 «Giữ bản chép sổ, chờ lúc cần» (−); ge4 «Xin ngài cho Ba Đồ dắt ngựa ra»; + «Nhường con ngựa ô cho {v}»; − «Tâu rằng ngựa ô chưa thuần…» |
+| .6 | Đai yên bị cắt | v, maid, emp, phu ngựa nhỏ | Kẻ cắt đai bị bắt / Đai mới, lòng không yên / Bị nói là tự vu (evidence can fail, law 6a) | ge3 «Đặt bẫy: để lộ tin còn sợi đai thứ hai» (−), «Cho người hỏi thẳng thái giám ấy» (−); ge2 «Thưa thật: có kẻ cắt đai»; + «Rút đơn, chỉ xin đổi người giữ yên», «Sang cung {v} hỏi khéo» |
+| .7 | Cưỡi ngựa cùng vua | emp, v | Người cùng ngài phi ngựa / Áo cưỡi cất vào rương / Lời sớ thắng | ge2 «Nhận lời, cưỡi Tuyết Câu đi trước dẫn đường», «Xin ngài xuống ngựa hỏi dân» (+); ge1 «Xin dạy các công chúa nhỏ cưỡi ngựa…»; + «Dạy {v} cưỡi cho vững», «Lấy túi bạc bên yên chia cho dân»; − «Tâu rằng đường ngoài thành không hợp người mới học» |
+| .8 | Dịch ngựa | emp, maid, v, thú y | Chuồng ngựa khỏi bệnh / Mất nửa đàn / Ngựa {land} bị đổ tội | ge1 «Dùng cách chữa thảo nguyên…», «Cùng thú y chữa theo cả hai phép»; + «Gửi {v} một gói thuốc phòng dịch», «Xin tự bỏ bạc chuộc đàn ngựa…»; − «Để thú y làm theo sách», «Mời {v} xuống chuồng xem tận mắt» |
+| .9 | Hội bắn mùa xuân | emp, v, em trai nhà {v} | Cung thần của hậu cung / Tên trúng, người không nhớ / Tên trượt trước cả triều | ge1 «Nhận dạy các hoàng tử», «Đưa cây cung cho hoàng tử ngươi đã dạy»; ge3 «Giữ cách bắn cho riêng mình» (−), «Đáp: mũi tên không biết nhà ai» (−); + «Hạ cung, chúc em trai {v} thắng», «Chỉ cho các hoàng tử cách nghiêng tên» |
+| .10 | Tiếng gọi thảo nguyên | maid, emp, v, Ba Đồ, {mh} | Gió bắc trong tay áo / Ngựa về chuồng / Bị bắt ở cửa Tây (cấm túc BAL.road.bd.conf.san10) | ge4 «Lên ngựa ra cửa Tây…», «Bảo Ba Đồ cứ để ngựa đó», «Cho Ba Đồ cưỡi con ngựa ấy về thăm nhà» (Ba Đồ really leaves: BDP w=tn); ge2 «Thưa: thiếp quay lại, vì ngài ở đây»; − «Hỏi lại {v} sao biết rõ thế» |
+| .11 | Vi trường năm sau | emp, v, maid, Ba Đồ | Nữ kỵ bên ngự giá / Ngựa về chuồng, người về cung / Mũi tên lạc; ✦ RD97L «Hoàng thượng trao cương ngựa ngự» | ge2/ge1 «Thúc Tuyết Câu chắn mũi tên» (Tuyết Câu can be hurt: BDP), ge3 «Bắn trả về phía rừng, bắt sống kẻ bắn»; + «Nhắc {v} chỗ ấy không yên»; − «Xin Thái bộc giữ mọi xe ở sau» |
+
+### Per-chapter table — bd_soi · Sói đầu đàn (GE §4.2: ge1 Nữ Khả hãn · ge2 Lập em làm hãn · ge3 Sói già phải chết · ge4 Con trai hai cõi)
+| Ch | Title | Cast | Results | Raw options carrying GE intents |
+|---|---|---|---|---|
+| .4 | Sói đầu đàn | emp, v, {pv}, Hô Diên Liệt (envoy), Ô Lặc (letter) | Kim trướng chờ {pv} / Ấn của Đại Hy cho Ô Lặc / Kim trướng chưa có chủ / Thúc phụ ghi nhớ ngươi; ✦ j97 «Phụ hãn tỉnh lại» | ge2 «Tâu: Ô Lặc là con trưởng…», «Đưa lời nhắn lên Hoàng thượng»; ge1 «Tâu: chờ {pv} tỉnh…», «Giữ lời nhắn, chưa đáp»; + «Xin Hoàng thượng cho thái y theo sứ…», «Gửi ngay vòng ngọc của mẹ…»; − «Nhận ngựa thay Hoàng thượng…» |
+| .5 | Hai phong thư | emp, maid, v, lão thư lại Binh bộ | Bản đồ trong tay ngươi / Không còn bản đồ / Dấu mực mới | ge2 «Trình cả hai phong thư lên Hoàng thượng», «Đốt bản chép, trình lão thư lại…»; ge1 «Giữ bản đồ, không trao ai»; ge3 «Đưa thúc phụ bản đồ giả» (−), «Nhờ lão chép một bản sai các đồn» (−); map object tracked fb bd_soi.map |
+| .6 | Sứ giả mang dao | emp, maid, v, Thát Mộc (in S.men while in the capital) | Dao không tới được em / Dao trả về chủ / Thù chồng thêm thù | ge1 «Bắt sống Thát Mộc, đổi lòng y»; ge2 «Tha Thát Mộc, gửi về kèm lời nhắn» (+); ge3 «Chém Thát Mộc, gửi đầu về trướng» (−, BDP alive −1) |
+| .7 | Chợ ngựa đóng cửa | emp, v | Chợ ngựa theo ý ngươi / Chợ ngựa vẫn đóng / Biên ải giằng co | ge1 «Khước từ giao kèo chợ ngựa của thúc phụ»; ge2 «Xin mở lại chợ ngựa bằng một hòa ước nhỏ», «Gửi lời: mở chợ ngựa ở ải tây…»; ge3 «Khuyên triều đình xuất binh» (−), «Gửi lời: xin xuất binh ra ải» (−) |
+| .8 | Khả đôn vào kinh | emp, v, maid, {mh} (BDP kd: where moves) | Mẹ ở bên ngươi / Mẹ ở xa / Mẹ bị thương | ge2/ge4 «Đón {mh} vào cung, công khai», «Xin Hoàng thượng mở ải đón {mh}» (+); ge1 «Xin cho đội vệ của {mh} mang gươm»; ge3 «Dùng {mh} làm mồi nhử» (−); Khóa ge1 «Đưa {mh} về ải tây trong đêm», «Gửi bạc, xin bà về ải tây» |
+| .9 | Hội đua ngựa mùa hạ | emp, maid, v, Ô Lặc, trưởng lão | Hồ Bạch Thủy hô tên nhà ngươi / Hội đua chia đôi / Con trai thúc phụ thắng | ge1 «Tự mình ra đua, cưỡi ngựa của em»; ge2 «Chọn một dũng sĩ đua thay em», «Nhắn dũng sĩ đua thay em…»; ge3 «Mua chuộc người chấm của thúc phụ» (−); ge4 «Cho tay đua mang cờ của hoàng tử» (beat only with a living son) |
+| .10 | Đêm tuyết Âm Sơn | emp, v, Tổng binh Âm Sơn, Ô Lặc | Âm Sơn theo ý ngươi / Tuyết phủ Âm Sơn / Tuyết chôn quân | ge2 «Chỉ xin sứ thần, không xin binh»; ge1 «Đổi binh lấy lời thề của các bộ»; ge3 «Xin cả đạo quân ra ải» (−); ge4 «Nhận lời thề cho con trai» (son only) |
+| .11 | Chủ nhân kim trướng | emp, v, trưởng lão | Em trai lên ngôi hãn / Thảo nguyên chia đôi / Thúc phụ thắng, mối hòa lung lay (Ô Lặc can die: BDP); ✦ RD97L «Kim trướng gọi ngươi là Khả đôn» | ge2 «Viết tên Ô Lặc»; ge1 «Thưa: thiếp» (t1); ge3 «Viết tên thúc phụ, đổi lời thề…» (−); + «Phản đối: lấy thành của người đang tang»; − «Đồng ý một tòa thành, đổi lấy chợ ngựa» |
+
+### Old saves (law 6c)
+- `BD_OLD` = bd_hoa/bd_ngua/bd_tuc/bd_hoang: still registered (premises in jorigins.js + alias chapters, the loop moved unchanged); `arcIds67("bd")` drops them for NEW lives only (and keeps them while no new road exists, so the pool is never empty). A save already on one of them keeps `S.st.f14.road` + plan ids and plays on. Test `dev/test/bd-legacy-save.js` (result below).
+- NPC consorts never have origin nc/bd (BAL.nroad org lists), so jnroad's road list is untouched; FOR B if that ever changes: jnroad.js nrRoads reads `o===` directly and would need the BD_OLD filter.
+
+### People (law 6b)
+`BDP` book (jrd_bd.js): lie Hô Diên Liệt, olac Ô Lặc, thatmoc Thát Mộc, bado Ba Đồ, tuyetcau Tuyết Câu (mare), asnc A Sử Na Cát, phong Thác Bạt Phong, kd Khả đôn — each with role, goal (`want`), where (`w`: thảo nguyên / biên ải / kinh thành / ngục) and alive, kept per life in S.st.f14.fb `bd.p.<id>.*` and moved by chapter options (bdMove / bdKill / bdMeet). A steppe MAN in the capital (`man:1`, e.g. Thát Mộc during .6, Phong in bd_hen) is pushed into `S.men` as an embassy member (role Sứ thần, the envoy's schedule and lawful places, jmen) and marked away/dead when he leaves/dies — so he stands where the world shows present people.
+
+### Tests and measures (merged branch review/bd-roads @23278b63, all 4 roads)
+| Check | Result |
+|---|---|
+| dev/tools/quickcheck.sh (core gates one-core-guard · rules-one-source · kit-conform · coop one-world · hooks; time-spill guard; open; old LIVE save loads + plays; perf vs live) | PASS (161 s; render 180/183 ms, buổi 877/1061 ms new/live) — first run FAILED one-core-guard (rare tables keyed like fx tables; shape defaults typed in helpers) → fixed 888becec (rare tables set key by key, defaults in BAL.road.bd.def) |
+| dev/test/road-full.js bd_san,bd_soi (1 life each, full frame) | 16/16 PASS (chapters 1–14 in order, .4 = premise, .5–.11 = road, rival constant, finale tells the origin end) |
+| dev/test/bd-legacy-save.js (new) | 4/4 PASS: old bd_hoa life saved at .6 loads in a fresh page, keeps road bd_hoa, plays to bd_hoa_11; 8 new bd lives → only new roads {bd_san 3, bd_soi 2, bd_hen 2, bd_tuyet 1}; 0 page errors |
+| dev/test/kc-roads/direct.js ORIGINS=bd,nc (bd added; new bd life must roll a new road) | PASS (bd rank 2 road bd_tuyet; nc rank 3 road nc_gian) |
+| dev/test/kc-roads/coop-together.js --a=cnv --b=bd | 26/26 PASS (B = bd enters the palace, A at home, same world/date; no overflow; 0 page errors) |
+| dev/measure/bd-roads-bal.js static (4 roads, 202 beats, 608 options) | no-loss options 0 · beats with value spread > 6: 0 · rolled options not harder at higher rank 0 · digits/% 0 · unknown tokens none |
+| bot 20 lives / road (bd-roads-bal.js, fresh page per life) | bd_san 20/20 reach .11 (win 8 · mid 5 · lose 7) · bd_soi 20/20 (win 6 · mid 7 · lose 7, after c47c282e raised «Viết tên Ô Lặc» base 35→45; before: 1 win in 17) · bd_tuyet 20/20 (4 · 10 · 6) · bd_hen 20/20 (11 · 3 · 6) (writer 2); 0 page errors |
+| npc-roads bd | not applicable: NPC consort origins (BAL.nroad org) never include nc/bd, so no NPC plays a bd road (FOR B below) |
+| dev/measure/road-option-scan.js | broken on main for every jrd file (BAL fails to load stand-alone: «setting 'hp'»); replaced for bd by bd-roads-bal.js (same checks in the real build + value levels) |
+| Shots | none (no UI touched; chapter cards are the j67 kit cards) |
+
+### FOR B (Foreman B — jrd_* owner)
+- jrd_nc.js: ONLY the bd alias loop left the file (moved verbatim into jrd_bd.js, legacy block) + header comment line; NCW/BDW openings and NCL.bd tokens stay (legacy bd chapters use them).
+- jnroad.js nrRoads(o) reads `ARC67[id].o===o` directly; if NPC origins ever include bd, add `!BD_OLD.includes(id)` there.
+- dev/measure/road-option-scan.js cannot load BAL stand-alone on main (all jrd files) — fix or retire.
+### FOR C (pictures via MAIN; nothing drawn)
+- bd_san: .4 autumn hunt at Bắc Uyển (she on the white mare Tuyết Câu, bow drawn, the Emperor's party), .11 the arrow from the maple wood; rares «Một tên hai nhạn» (two geese falling before the royal horse), «Hoàng thượng trao cương ngựa ngự» (she holding the imperial horse's reins).
+- bd_soi: .4 the golden tent in snow, Phụ hãn lying inside; .11 the investiture edict before two kneeling envoys; rares «Phụ hãn tỉnh lại» (Phụ hãn waking, the silver wolf seal), «Kim trướng gọi ngươi là Khả đôn» (nine elders turning to her).
+- writer 2's list above (bd_tuyet, bd_hen). Chapter .5–.10 cards use the road theme pictures (RTHEME67 emp/maid) unless C wants per-chapter art.
+### FOR E
+- Law 6b people: steppe men in the capital are in S.men (embassy role, jmen schedule; away = off schedule). NOT yet in the world: women guests (Khả đôn living in the capital/her palace at bd_soi .8+) and the stable groom Ba Đồ (a servant, BDP only) — they have a living state (where/alive/goal) in BDP and every chapter reads it, but they do not stand on a map stage. If the BIG review wants them on stage, that needs a jworld guest/servant hook (not roads).
+- The 16 grand endings (jgedata_bd.js) = next wave; Chuỗi/Khóa raw names are in the tables above + writer 2's GE reach list.
+
+## READY
+«SẴN SÀNG KIỂM bd-roads 23278b63» sent to Foreman E ROOT #8 (session_01DgYSWoyrPRWJPqSp4gfECg). Worktree /home/user/wt/bdr kept until the review verdict.
