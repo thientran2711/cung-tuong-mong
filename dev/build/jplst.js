@@ -16,6 +16,9 @@ function kitLineToast(text){try{if(!text)return null;try{const md=document.getEl
  const hud=document.querySelector("header.hud");let el=document.getElementById("ktbtoast");if(el)el.remove();
  el=document.createElement("div");el.id="ktbtoast";el.className="ktbt";el.setAttribute("role","status");el.innerHTML=`<span>${esc(text)}</span>`;
  const r=hud&&hud.getClientRects().length?hud.getBoundingClientRect():null;el.style.top=(r?Math.round(r.bottom+6):6)+"px";document.body.appendChild(el);
+ /* keep-clear (jclose kitToastClear): below the tab rows / place name; no room left → the bottom spot above the tab bar, sliding up */
+ try{if(typeof kitToastPlace==="function")kitToastPlace(el,"down")}catch(e){}
+ try{if(typeof kitToastWatch==="function")kitToastWatch()}catch(e){}
  el.addEventListener("click",()=>el.remove());clearTimeout(kitLineToast.t);kitLineToast.t=setTimeout(()=>{el.classList.add("out");setTimeout(()=>{if(el.classList.contains("out"))el.remove()},500)},window.__toastKeep?60000:BAL.entryToastMs);return el}catch(e){return null}}
 window.kitLineToast=window.kitLineToast||kitLineToast;
 function lay(){try{const st=$("stage");if(!st)return;let nm=$("kpname"),en=$("kpent");
@@ -26,7 +29,7 @@ function lay(){try{const st=$("stage");if(!st)return;let nm=$("kpname"),en=$("kp
   if(raw&&!/^Không gặp ai\.?$/.test(raw.replace(/<[^>]+>/g,"").trim()))line=raw}
  let toast="";if(line&&!/<button/i.test(line)){toast=line.replace(/<[^>]+>/g,"").replace(/\s+/g," ").trim();line=""}
  /* once per visit + line (renders repeat; a new visit, even to the same place with the same text, toasts again) */
- const tk=S&&S.visit?S.visit:null;if(toast&&live){if(lay.v!==tk||lay.t!==toast){lay.v=tk;lay.t=toast;(window.kitLineToast||kitLineToast)(toast)}}else if(!toast){lay.v=tk;lay.t=""}
+ const tk=S&&S.visit?S.visit:null;if(toast&&live){if(lay.v!==tk||lay.t!==toast){lay.v=tk;lay.t=toast;(window.kitLineToast||kitLineToast)(toast)}}else if(!toast&&live){lay.v=tk;lay.t=""}/* stage-here: a hidden stage (map tab, Fold panel tab) is not a new visit line: coming back never re-toasts it */
  /* (2) place name, top of the right column */
  if(name){if(!nm){nm=document.createElement("div");nm.id="kpname";nm.className="kpname";st.appendChild(nm)}
   /* owner 18/11 ~20:55Z: plain TEXT on the scene picture, no plaque / frame, not fixed-width; hall on line 1, palace on line 2 */
@@ -47,6 +50,7 @@ function lay2(){lay();placeEnt();clearTimeout(lay2.a);clearTimeout(lay2.b);lay2.
    getBoundingClientRect + the toast/name/chip DOM; nothing in S) with the other stage fits for the next frame (jlag2 renderAfter, coalesced;
    a render() before then flushes it); every other redraw runs it at once, as before */
 const r0=renderStage;renderStage=function(){const r=r0.apply(this,arguments);if(window.__rdefer>0&&typeof window.renderAfter==="function")renderAfter("plst-lay",lay2);else lay2();return r};
+if(typeof render==="function"){const rr=render;render=function(){const r=rr.apply(this,arguments);try{requestAnimationFrame(()=>{try{kitToastRefit()}catch(e){}})}catch(e){}return r}}/* toasts keep clear after every screen change */
 try{addEventListener("resize",()=>{clearTimeout(lay.__t);lay.__t=setTimeout(lay2,90)})}catch(e){}
 /* (1) the count chip: the kit rail's first slot */
 try{if(window.kitStageRail)kitStageRail.add({id:"here",order:0,chip:()=>{const n=hereN();return n&&typeof j59ico==="function"?`<span class="kchip n j59hchip" role="img" aria-label="Ở đây còn ${n} người">${j59ico()}<span class="j59n">${n}</span></span>`:""},when:()=>hereN()>0&&onStage()})}catch(e){}
@@ -62,8 +66,8 @@ html body .stage .kmnote.kmslot[hidden]{display:none!important}
 .kmnote.kmslot .kchip{font-size:.74rem;line-height:1.25;padding:3px 10px;white-space:normal;text-align:center;max-width:100%;pointer-events:auto}
 .kmnote.kmslot .kchip .btn,.kmnote.kmslot .kchip button{pointer-events:auto;margin-left:6px}
 .krailc{pointer-events:none;display:flex}
-.ktbt{position:fixed;left:50%;transform:translateX(-50%);z-index:9760;max-width:calc(100vw - 24px);box-sizing:border-box;display:flex;align-items:center;gap:8px;padding:6px 14px 6px 8px;border-radius:14px;border:2px solid var(--trim,#e6c25a);
- background:#fffaf0f4;color:var(--ink,#3a2418);font:600 .84rem/1.3 var(--body,inherit);box-shadow:0 4px 14px #0004,0 0 0 1px var(--gold,#b8892b);cursor:pointer;transition:opacity .5s}
+.ktbt{position:fixed;left:50%;transform:translateX(-50%);z-index:9760;max-width:calc(100vw - 24px);box-sizing:border-box;display:flex;align-items:center;gap:6px;padding:2px 12px 2px 4px;border-radius:13px;border:1.5px solid var(--trim,#e6c25a);
+ background:#fffaf0f4;color:var(--ink,#3a2418);font:600 .8rem/1.25 var(--body,inherit);box-shadow:0 4px 14px #0004,0 0 0 1px var(--gold,#b8892b);cursor:pointer;transition:opacity .5s}
 .ktbt.out{opacity:0}
 `;document.head.appendChild(css);
 }catch(e){console.error("jplst init",e)}})();
