@@ -612,3 +612,4 @@ FAULTS:
 CREDITS r22: 828 (6 gens × 135 + 4 cuts × 3; the 2 first tries were not cut).
 CDN: img/_review/trieu-phuc/r19/c06_a18_trieu22_t1/t2/t3/t5.png + c06_sheet22.jpg. The sheet is 10 cells: r20 t1 | r21 t1 | r22 t1 | r21 t2 | r22 t2 | r21 t3 | r22 t3 | r21 t4 (kept, density ref) | r21 t5 | r22 t5. Repo copy: dev/handover/review-sheets/trieu-phuc/c06_sheet22.jpg. Ledger: 6 lines.
 STOP after this round (ROOT-49). No handover needed: TP3 finished inside its context budget.
+TIMING NOTE (TP3): ROOT-49's "owner paused drawing — HOLD" message was queued at 17:42:45Z but only reached TP3 after the push. The first 4 gens (17:40:45Z) were made before it. The 2 regens (t1 lJt0Vrvgv9, t2 9ZH8t41NYZ, 17:44:25Z) and the cuts were made AFTER the pause was queued, without TP3 knowing (270 + 18 credits). TP3 is now on HOLD. Ledger times have been corrected to the real creation times.
