@@ -855,6 +855,15 @@ def bd_opt(t,o):
     return t
 # N3 r11 (owner ~23:33Z): ONE splendid imperial phoenix-and-dragon crown (dragon in the centre, a phoenix at each side), NO flowers on the crown or hairpins (the old crown came from the HEAD table, which has flowers); bead fringe (tas) stays per option
 NUDE_CROWN="one splendid imperial gold phoenix-and-dragon crown: a large gold dragon with a pearl in its claws rising from the centre of a tall gold crown band, a gold phoenix with raised wings on each side of the dragon, set with rubies, pearls and kingfisher-blue inlay, pure gold metalwork with no flowers and no flower ornaments anywhere on the crown or the hairpins, and a few gold hairpins with slim gold-and-pearl dangles at the sides"
+# Lượt 397 (owner: c17 and c06 have the SAME dragon-phoenix crown): the Nữ đế crown is NOT pinned to one design. NUDE_CROWNS = 6 described variants (variant 0 = the approved NUDE_CROWN, unchanged);
+# nude3 picks one per person by index (person number mod 6), so neighbours and any two people differ. Common tail (no flowers, gold hairpins with dangles) kept in every variant.
+_CT=", pure gold metalwork with no flowers and no flower ornaments anywhere on the crown or the hairpins, and a few gold hairpins with slim gold-and-pearl dangles at the sides"
+NUDE_CROWNS=[NUDE_CROWN,
+ "one splendid imperial gold crown of TWO coiled gold dragons facing each other over a large central pearl on a tall gold crown band, gold cloud scrolls rising behind them, set with rubies, pearls and kingfisher-blue inlay"+_CT,
+ "one splendid tall imperial gold crown topped by a single large gold dragon head with its body curling down both sides of the crown band, a pearl in its jaws, set with jade, pearls and kingfisher-blue inlay"+_CT,
+ "one splendid imperial gold crown with a great gold phoenix rising from the centre of a tall crown band, its wings spread high, flanked by two small gold dragons, set with rubies, pearls and jade inlay"+_CT,
+ "one splendid tall imperial gold crown of three rising tiers of gold filigree clouds with a gold dragon holding a pearl at the summit, pearls hanging along every tier, set with rubies and kingfisher-blue inlay"+_CT,
+ "one splendid broad imperial gold crown band set all around with small gold dragons and a very large pearl at the front, tall gold phoenix plumes rising at the back and sides, set with rubies, pearls and jade inlay"+_CT]
 def build_nude_own(c,face,right):
     o=NUDE_OPT[NUDE_OPTSEL]; item,hk=age_item(c,"nude",*NUDE_ITEM[c]); pal,_=DATA[c]; m,m2=ORIG1[c]
     sec=o["sec"] or m.split(" silk")[0]; secrule=o["secrule"] or None
@@ -1286,7 +1295,7 @@ def nude2(o,c,opt):
     if opt in "BC":                                                      # (e)
         a=o.index("her ORIGINAL robe colour is kept exactly"); b=o.index("the royal golden yellow is the DOMINANT")
         o=o[:a]+o[b:]
-        import re as _re; _m=_re.search(r"golden yellow silk mixed with ([a-z ]+?),",o); assert _m  # outfit sentence names her colour too: colour slot (e)
+        import re as _re; _m=_re.search(r"golden yellow silk mixed with ([a-z\- ]+?),",o); assert _m  # outfit sentence names her colour too: colour slot (e)
         o=o.replace(_m.group(0),"golden yellow silk mixed with "+("deep wine-crimson" if opt=="B" else "black")+",",1)
         assert o.count("her colour is the second colour")==1
         o=o.replace("her colour is the second colour",NUDE2_COL[opt]+" is the second colour",1)
@@ -1310,7 +1319,7 @@ def nude3(o,c):
     def rep(a,b):
         nonlocal o; assert o.count(a)==1,("nude3 anchor",a[:60]); o=o.replace(a,b,1)
     if O["sec"]:                                                                                                   # colour slot
-        m=_re.search(r"golden yellow silk mixed with ([a-z ]+?),",o); assert m; rep(m.group(0),f"golden yellow silk mixed with {O['sec']},")
+        m=_re.search(r"golden yellow silk mixed with ([a-z\- ]+?),",o); assert m; rep(m.group(0),f"golden yellow silk mixed with {O['sec']},")
         i=o.index("her ORIGINAL robe colour is kept exactly"); j=o.index("the royal golden yellow is the DOMINANT"); o=o[:i]+o[j:]
         rep("her colour is the second colour",O["secrule"]+" is the second colour")
     t8item,t8hk=age_item(c,"t8",*ITEMS[item_for(c)]); nitem,nhk=age_item(c,"nude",*NUDE_ITEM[c])                  # item slot + hand clause
@@ -1319,7 +1328,7 @@ def nude3(o,c):
     o=o[:i]+_hh(hand,nhk,right)+o[j:]
     o=o.replace("phoenixes","dragons").replace("phoenix","dragon")                                                  # motif slot word
     add=(" NỮ ĐẾ: she is the Female Emperor (Nữ đế), the highest rank of all, equal to the Empress in colour but clearly more majestic, and different in design from the Empress's robe: a woman's imperial ceremonial dragon robe, with "
-         +O["sh"]+"; her crown is "+NUDE_CROWN+", and "+O["tas"]+", the bare forehead clean under them; the most majestic outfit of all.")
+         +O["sh"]+"; her crown is "+NUDE_CROWNS[int(c[1:])%len(NUDE_CROWNS)]+", and "+O["tas"]+", the bare forehead clean under them; the most majestic outfit of all.")
     rep(" COLOUR RULE:",add+" "+NUDE3_HHSENT+" COLOUR RULE:")                                                       # added sentences
     return o
 # ---- N5d item 2: gen ledger (--log) + verifier (--verify) -------------------------------------------------

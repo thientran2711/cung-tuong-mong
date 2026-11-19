@@ -62,12 +62,14 @@ def _inject(g):
 
 def store(person,rank,age="a18"):
     """EXACT stdout of the store CLI for this person/rank (princess rows injected into the store's own tables)."""
-    argv=["build.py",person]+(["--low",str(rank)] if rank<=6 else ["--t7"] if rank==7 else [])+["--spec5pose"]+(["--age",age] if age!="a18" else [])
+    if rank=="nude": argv=["build.py",person,"v0","--nude3"]+(["--age",age] if age!="a18" else [])   # Nữ đế = the store HH t8 + added Nữ đế sentences (build.py nude3); crown varies per person (NUDE_CROWNS)
+    else: argv=["build.py",person]+(["--low",str(rank)] if rank<=6 else ["--t7"] if rank==7 else [])+["--spec5pose"]+(["--age",age] if age!="a18" else [])
     old=sys.argv; sys.argv=argv; g={"__name__":"build_store","__file__":STORE}
     try:
         exec(_PART1,g); _inject(g); buf=io.StringIO()
         with contextlib.redirect_stdout(buf): exec(_MAIN,g)
     finally: sys.argv=old
+    global LAST_G; LAST_G=g
     return buf.getvalue()
 
 # ---------------- owner laws, added as extra sentences ----------------
@@ -90,6 +92,25 @@ def laws(t):
     L.append(HEADBODY)
     if t>=7: L.append(FABRIC_B)
     return L
+# Lượt 397 item 4 (PHI BẠCH): the draped sheer shawl behind the back / over the arms stays on every thường phục rank that HAS it in the store text (word "shawl"); NOT on t7 HQP, t8 Hoàng hậu, Nữ đế.
+# Its colour = the outfit's SECONDARY colour (second word group of her palette), explicit per person, so it does not melt into the dress.
+def phi_bach(person):
+    pal=LAST_G["DATA"][person][0]; main,sec=pal.split(" and ")[0],pal.split(" and ")[-1]
+    if sec in ("gold","silver") or " " in sec and sec.split()[-1] in ("gold","silver"): sec_w="a pale soft "+sec.split()[-1]+"-tinted tone of her secondary colour, clearly lighter than the robe"
+    else: sec_w=sec
+    return f"PHI BẠCH: the sheer shawl draped behind her back and over her arms is in her SECONDARY colour ({sec_w}), clearly different from her main robe colour {main}, so it does not melt into the dress; it keeps its soft graceful drape."
+# Lượt 397 item 5 (Tần-style capelet / collar): CURVED cut lines, front opens gradually (no closed, buttoned top-to-bottom front); flowing (uyển chuyển).
+CURVED_CAPELET=("CAPELET CUT (flowing): the lower edge of the capelet and the collar lines are soft CURVES that sweep and scoop gracefully (a little deeper at the centre front), never flat horizontal edges; "
+ "the front is NOT closed or buttoned from top to bottom: the robe is closed only at the throat clasp and its front opens gradually from the collar downward in a long soft V, the two front panels parting more and more toward the hem, flowing and graceful (uyển chuyển), never cramped or boxy.")
+CURVED_COLLAR=("COLLAR CUT (flowing): the collar's lower edge follows soft CURVES that sweep and scoop gracefully, never flat horizontal edges; "
+ "the front is NOT closed or buttoned from top to bottom: it opens gradually from the collar downward in a long soft V, flowing and graceful (uyển chuyển), never cramped or boxy.")
+def extras(S0,person,rank):
+    L=[]
+    if isinstance(rank,int) and rank<=6:
+        if "shawl" in S0: L.append(phi_bach(person))
+        if "capelet" in S0: L.append(CURVED_CAPELET)
+        elif "cloud collar" in S0: L.append(CURVED_COLLAR)
+    return L
 def princess_sentences(k,t):
     d=PRS[k]; L=[f"She is a foreign princess from {d['country']} who has entered the imperial palace."]
     L.append(d["low"][t] if t<=3 else d["touch"])
@@ -98,10 +119,11 @@ def princess_sentences(k,t):
 
 def build(person,rank,age="a18"):
     person=ALIAS.get(person,person); S0=store(person,rank,age); S=S0
+    if rank=="nude": return S0,S0,[]
     if "Her face: . " in S:
         face=FACE_M.get(person,FACE_REF); S=S.replace("Her face: . ","Her face: "+face+(". " if not face.endswith(".") else " "),1)
     anchor=" Pose:"; assert S.count(anchor)==1,("pose anchor",person,rank)
-    add=laws(rank)+(princess_sentences(PR[person],rank) if person in PR else [])
+    add=laws(rank)+extras(S0,person,rank)+(princess_sentences(PR[person],rank) if person in PR else [])
     return S0,S.replace(anchor," "+" ".join(add)+anchor,1),add
 
 # ---------------- CHECK ----------------
@@ -134,7 +156,7 @@ def gate(person,rank,age,text):
     sp=ALIAS.get(person,person)
     with tempfile.NamedTemporaryFile("w",suffix=".txt",delete=False,encoding="utf-8") as f: f.write(text); fn=f.name
     try:
-        args=[sp,"v0"]+(["--low",str(rank)] if rank<=6 else ["--t7"] if rank==7 else [])+(["--age",age] if age!="a18" else [])
+        args=[sp,"v0"]+([] if rank=="nude" else ["--low",str(rank)] if rank<=6 else ["--t7"] if rank==7 else [])+(["--age",age] if age!="a18" else [])
         p=subprocess.run([sys.executable,os.path.join(ART,"check_store.py"),fn]+args,capture_output=True,text=True)
         return p.returncode==0 and "STORE CHECK PASS" in p.stdout, p.stdout.strip()
     finally: os.unlink(fn)
@@ -146,7 +168,10 @@ def check_all(age="a18"):
             e=check(p,t,age,ref); ok,msg=gate(p,t,age,build(p,t,age)[1])
             if not ok: e=e+["check_store: "+msg[:200]]
             if e: bad+=1; print("FAIL",p,"t%d"%t,age,"|",e[:3])
-    n=len(PEOPLE)*8; print(f"checked {n} prompts ({len(PEOPLE)} people x 8 ranks, age {age}): {bad} FAIL"); return 1 if bad else 0
+    for p in [f"c{i:02d}" for i in range(1,33)]:   # Nữ đế (nude3) of every consort: gate only
+        ok,msg=gate(p,"nude",age,build(p,"nude",age)[1])
+        if not ok: bad+=1; print("FAIL",p,"nude",age,"|",msg[:200])
+    n=len(PEOPLE)*8+32; print(f"checked {n} prompts ({len(PEOPLE)} people x 8 ranks, age {age}): {bad} FAIL"); return 1 if bad else 0
 if __name__=="__main__":
     a=sys.argv[1:]; age=a[a.index("--age")+1] if "--age" in a else "a18"
     if "--check" in a: sys.exit(check_all(age))
@@ -154,7 +179,7 @@ if __name__=="__main__":
         for p,t in (("m19",1),("m19",3),("c06",7),("p01",2),("p03",8)):
             print(f"\n===== {p} t{t} {age} =====\n"+build(p,t,age)[1])
         sys.exit(0)
-    pos=[x for x in a if not x.startswith("--") and x!=age]; out=build(pos[0],int(pos[1]),age)[1]
-    ok,msg=gate(pos[0],int(pos[1]),age,out)
+    pos=[x for x in a if not x.startswith("--") and x!=age]; out=build(pos[0],(pos[1] if pos[1]=="nude" else int(pos[1])),age)[1]
+    ok,msg=gate(pos[0],(pos[1] if pos[1]=="nude" else int(pos[1])),age,out)
     if not ok: print(msg,file=sys.stderr); sys.exit(1)
     print(out,end="")
