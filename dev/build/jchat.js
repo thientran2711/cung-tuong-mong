@@ -165,12 +165,13 @@ function align(){try{const V=S.visit,st=stage();if(!V||!st||V.__chg2)return fals
  const slot=new Array(M).fill(null);let k=first;for(const pr of pairs){if(k%N!==first%N)k+=N-((k-first)%N);if(k+1>=M)break;slot[k]=pr[0];slot[k+1]=pr[1];k+=2}
  const rest=P.filter(p=>!slot.includes(p));for(let i=0;i<M;i++)if(!slot[i])slot[i]=rest.shift();if(slot.every((p,i)=>p===P[i]))return false;P.length=0;slot.forEach(p=>P.push(p));return true}catch(e){err("align",e);return false}}
 function group(){try{const V=S.visit;if(!V||!Array.isArray(V.people)||V.__chg)return;V.__chg=1;const P=V.people;
- /* at home her maid stands next to her (first, in her frame): she is the one who greets her (owner OD:L1627 (5)) */
- if(V.k==="home"){const i=P.findIndex(p=>p&&p.kind==="maid");if(i>0){const m=P.splice(i,1)[0];P.unshift(m);try{if(typeof popIdx!=="undefined")popIdx=null}catch(e){}}}
  const pairs=hapPeople(P);
  if(!pairs.length)return;const out=[];const put=p=>{if(!out.includes(p))out.push(p)};
  for(const p of P){if(out.includes(p))continue;const pr=pairs.find(q=>q[0]===p||q[1]===p);if(pr){put(pr[0]);put(pr[1])}else put(p)}
  if(out.length===P.length&&out.some((p,i)=>p!==P[i])){P.length=0;out.forEach(p=>P.push(p));try{if(typeof popIdx!=="undefined")popIdx=null}catch(e){}}}catch(e){err("group",e)}}
+/* at home her maid stands next to her (first in the stage order, so in her frame on every device): she is the one who greets her (owner OD:L1627 (5)).
+   curPeople is the ONE stage list (the home staff are added by its wrappers), so the order is set there — every index user reads the same list. */
+if(typeof curPeople==="function"){const c0=curPeople;curPeople=function(){const L=c0.apply(this,arguments);try{if(on()&&S.place==="home"&&Array.isArray(L)){const i=L.findIndex(p=>p&&p.kind==="maid");if(i>0){const M=L.slice();M.unshift(M.splice(i,1)[0]);return M}}}catch(e){err("cp",e)}return L}}
 /* renderStage wrapper: arrival detection + grouping; never changes what it draws */
 if(typeof renderStage==="function"){const r0=renderStage;renderStage=function(){try{if(on()&&S.visit&&S.visit!==CH.visit){group()}}catch(e){err("rs0",e)}let r=r0.apply(this,arguments);
  try{if(on()&&S.visit&&S.visit!==CH.visit&&align())r=r0.apply(this,arguments)}catch(e){err("al",e)}
