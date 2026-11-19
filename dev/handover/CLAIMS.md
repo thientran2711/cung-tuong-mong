@@ -236,7 +236,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | kyngo-daily (Kỳ ngộ thường ngày design + build, opus E18) | review/kyngo-daily | E ROOT #8 | session_01DgYSWnqwrFPkcU8D76tS79 | RUNNING | 19/11 04:53Z |
 | palace-chatter line banks (sonnet E17b, under E17) | review/palace-chatter-lines | E ROOT #8 | session_01DgYSWnyBgE1MomXSwtCiXz | DONE a171292 | 19/11 04:58Z |
 | seal-lean-2 big slow lean-in + real video (sonnet; OD 05:05Z) | review/seal-lean-2 | ROOT-63 → ROOT-64 | session_01Rc5AsHrbnHixrk74QyLYuV | RUNNING | 19/11 04:58Z |
-| REVIEW role-parity-drift r1 (opus BIG) of 127fe1ea | review/role-parity-drift-r1 | B | session_01N1tNP522pSWxVAQMo8r88Z | RUNNING | 19/11 05:06Z |
+| REVIEW role-parity-drift r1 (opus BIG) of 127fe1ea | review/role-parity-drift-r1 | B | session_01N1tNP522pSWxVAQMo8r88Z | PASS — READY FF 1ed688ef | 19/11 06:10Z |
 | odds-no-unknown BIG REVIEW (opus) | review/odds-no-unknown 7a56b2e | C-AG #20 for ROOT-64 | session_01Rc5AsLQg8htXCMAz8FnrmD | PASS 6b041ea (LAND READY) | 19/11 05:12Z |
 | coop-thin F2 FIX r2 (opus BIG; reviewer FAIL r1: guest cards silenced by withSeat quiet, whole intent family + buổi resend check) | review/coop-thin-f2-r2 | B | session_01N1tNP4v5eCkat9E4cy6HXG | RUNNING | 19/11 05:37Z |
 | seal-lean-2 SMALL REVIEW (sonnet) | review/seal-lean-2 db1762f1 | MAIN ROOT-64 | session_01Rc5AsMN2AumPZrBeDRpV5o | RUNNING | 19/11 05:43Z |
