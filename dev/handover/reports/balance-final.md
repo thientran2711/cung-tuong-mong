@@ -79,3 +79,6 @@ Targets: HH 40 % vs 39 % (target ≥ live − 3: ✓). Deaths 2.63 vs 2.29 and e
 - Birth deaths 1.11 vs 0.48 /100 y = 8 vs 4 deaths. This follows from 1.5× her births. The per-birth risk is unchanged.
 - Measurement caveat: "her nights /y" and "conceive %/night" (inbf.js) are NOT comparable between the arms. inbf wraps night(), which the live AG path rarely calls for her (0.7 nights/y counted live). Conceptions, births and losses are counted from S.preg/kids and ARE comparable.
 - Confirmation arms on the merged sha (cL = live 9a1d6922 vs cB = 778537e7, shards 20–23 × 13 lives) started 00:00Z.
+- 00:17Z: a container restart killed the confirmation arms. They were restarted on shards 21, 23, 24 and 25; the partial lives of shards 20 and 22 are kept. Interim at 59 vs 48 lives (01:50Z): HH 46 vs 50 %, ended < 3 y 8 vs 4 %, Phi 95 vs 92 %, QP 88 vs 79 %, Danh m24 99 vs 97. This matches the final arms.
+- 01:00Z–01:55Z: merged live main bb8e8ec9 → **02171abd** (jnroadhp added to the assemble list), then 96188526 (jstagehere and jnotice added, 355 modules; jbal line 1 keeps main's noticeMax and entryToastMs note and the branch's outQ 30). Static guards are running.
+- STATE / ETA (01:55Z): confirmation arms end ≈ 02:45Z, then browser gates on the final sha, then SẴN SÀNG KIỂM ≈ 03:45Z.
