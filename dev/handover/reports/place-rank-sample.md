@@ -194,3 +194,12 @@ v5 copies: img/_review/place-rank/v5/ (disk + CDN).
 | Quý phi reception | 9ZHIVwlNYZ | ~25 % → ~11 % |
 Sheet: dev/handover/review-sheets/place-rank/place-rank-A-canh-phuc.jpg · CDN https://ctm-img.victoria-tntt.workers.dev/img/_review/place-rank/place-rank-A-canh-phuc.jpg
 Notes (ours, NOT prompt changes — LAW #0): Tần reception left armchair pair now larger close to the left edge; Phi bedroom bed curtains now reach the bottom ~90 % (figures stand in front of the bed bench).
+### Sheet B — phối 2 + Khôn Ninh 2 (4 gens, 540 cr, 0 redos)
+| room | gen | open centre floor before → v6 |
+|---|---|---|
+| phối bedroom | s7I0GAVl8e | ~22 % → ~10 % |
+| phối reception | jUoWAEyLD0 | ~28 % → ~12 % |
+| Khôn Ninh bedroom | YMlHuhtWeC | ~25 % → ~9 % |
+| Khôn Ninh reception | rgXnGrDxtc | ~15 % → ~4 % |
+Sheet: dev/handover/review-sheets/place-rank/place-rank-B-phoi-khon-ninh.jpg · CDN https://ctm-img.victoria-tntt.workers.dev/img/_review/place-rank/place-rank-B-phoi-khon-ninh.jpg
+Notes (ours, not changed): Khôn Ninh reception — the front low table + stools now reach the bottom edge, so on the people sheet figures 3–4 stand among/over the stools (feet not on clear floor).
