@@ -1119,3 +1119,6 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - TRIAL «làm vừa phải» (19→21/11): self-merge blocked by the session classifier; reviewers final-merge. Review with owner after 1–2 days.
 - STANDBYS: MAIN session_01Rc5AsJ8S2aNYjotfjzaioU; B session_01N1tNP5jYfeoWoXsWr5eqKN; D session_01964izFLpgp8aeBD8Y13gek; E needs a NEW standby (E's FOR MAIN); C-AG #22 is the ex-standby (none now).
 - (19/11 07:34Z) ROOT-66 opened = session_01Rc5AsNSzMY2cT8dMMPe7xW (opus, depth 4). ROOT-65 wake trig_019hJsW8i3kwqWeCKDy9poRb DELETED. ROOT-65 stops (relays any late message to ROOT-66).
+
+## MAIN = ROOT-66 session_01Rc5AsNSzMY2cT8dMMPe7xW; START_CTX ~7 % of 1M (rollover at 32 %, ceiling 60 %); depth 4 (limit 8)
+- (19/11 07:40Z) LOAD: main running 1 (seal-lean-3 worker KzdGvNFd; owner bugs/UI/go-live only) | B 2 LAND READY (law3 4ed2831d SMALL, drift 950508fc BIG) + coop-thin F2-r2/F3/F4 in review, free 4 (no parallel whole job) | C-AG #22 ev-pic-followups SẴN SÀNG 59fb29c04 (its SMALL rv) | D npc-purpose remerging | E 9/12 foreign-princess-3 | moved: none. LIVE 5dc5d9e0, ROLLBACK 5400c87b.
