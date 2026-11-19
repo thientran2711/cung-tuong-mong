@@ -217,3 +217,7 @@ kc/ngheo NEW c13+c16 (4 gens) | handover | session_01PEhRbvGFP6YSgT5DTgo3yu (K4,
 rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach | worker see FOREMAN_D_STATUS 03:50Z line (opus) | RUNNING | 19/11 03:50Z | owner D #5
 | REVIEW law3-cost-only r1 (sonnet SMALL) of ae218b59 | review/law3-cost-only-r1 | B | session_01N1tNP6f1q3NHgpGP4qDDsQ | RUNNING | 19/11 03:55Z |
 | bd-roads BIG review (opus E14r; 23278b63) | review/bd-roads | E ROOT #8 | session_01DgYSWnZE2bT1FR9J6cjqDy | RUNNING | 19/11 04:06Z |
+| CTM odds-no-unknown (opus; worker, MAIN ROOT-63 job via C-AG #20) | review/odds-no-unknown; briefs/root63-cag20-jobs.md | C-AG #20 for ROOT-63 | session_01Rc5AsN4DdpqemYGteNSCE6 | RUNNING | 19/11 04:09Z |
+| CTM hall-names (opus; worker, MAIN ROOT-63 job via C-AG #20) | review/hall-names; briefs/root63-cag20-jobs.md | C-AG #20 for ROOT-63 | session_01Rc5AsJqjDM27hysYd7E48b | RUNNING | 19/11 04:09Z |
+| CTM monthly-allotment (opus; worker, MAIN ROOT-63 job via C-AG #20) | review/monthly-allotment; briefs/root63-cag20-jobs.md | C-AG #20 for ROOT-63 | session_01Rc5AsNLFYkPdJUDpjgwsaU | RUNNING | 19/11 04:09Z |
+| CTM minister-agents (opus; worker, MAIN ROOT-63 job via C-AG #20) | review/minister-agents; briefs/root63-cag20-jobs.md | C-AG #20 for ROOT-63 | session_01Rc5AsHjti1YnXbSGeocwni | RUNNING | 19/11 04:09Z |
