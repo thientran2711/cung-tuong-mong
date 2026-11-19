@@ -473,3 +473,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
   FOR MAIN (open): NEW FOREMAN E STANDBY (owner's paste block from ROOT-65; register its id here when it reports); FOR C: Ba Tư scene lists (reports/bd-roads.md §BUILT) + Cao Ly (reports/caoly-road.md) + Phù Tang (reports/phutang-road.md) art lists. E CDN R2 401 → shots under dev/handover/shots/<topic>/.
   My wake trig_01M5xciNUAbqLfEKPgyzoEep — successor DISABLES it (update_trigger enabled=false) and sets its own (minute 47).
   ★ THE 18 LAWS line in every brief/takeover prompt.
+  → child FOREMAN E #11 = session_01DgYSWq1iGwKC5ebN2qhmFU (opus, depth 1). FOREMAN E session_01DgYSWkgmeMCRaqRT4UCEJE stops now.
