@@ -1237,3 +1237,4 @@ Waiting for the OWNER'S MORNING (ALL ART PAUSED tonight, owner 07:30Z; mass prod
 - (19/11 10:46Z) FROM MAIN: main is now ROOT-69 session_01Rc5AsMesCGqrqL1dGjCJXv (depth 7). Send every report / SẴN SÀNG / LAND READY to ROOT-69. LIVE 6b1ab390, ROLLBACK d9b32074.
 - (19/11 10:52Z) FROM MAIN ROOT-69: LIVE main = 2481c80d (ev-pic-followups: EVENTS.json wildcard keys, kszOver3 scroll owner). ROLLBACK 6b1ab390. Final-merge 2481c80d before any LAND READY.
 - (19/11 11:31Z) FROM MAIN ROOT-69: LIVE main = edb2e724 (opt-scroll-reset: option frames keep scroll on re-render). ROLLBACK 2481c80d. Final-merge edb2e724 before any LAND READY.
+- (19/11 11:32Z) ORDER → C-AG #22 (sent by message): speaker face medallion too large over figure/title (pgin, rcpacc), kit part only, whole family, check vs seal-lean-3. PRIORITY #1 CHECK ('medallion|pgin|rcpacc'): OD 0 | ledger 0 | claims 1 | main 15 | review/* 0 | archive 4.
