@@ -127,7 +127,7 @@ if(F.R.wkLessonEnd){const R=F.R.wkLessonEnd;R.ctx=CX12;const p0=R.pre;R.pre=func
    rolled at the hold, her option's cost already paid at her pick; it rolls her maid's pick itself and runs the same finish) ===== */
 const DH={};/* host: seat → {th, m, cb} (the contest closure of tsDressHold, in memory: a host reload drops it → her end is refused, nothing applied) */
 if(typeof window.tsDressGame==="function"){const g0=window.tsDressGame;window.tsDressGame=function(th,done){
-  if(hctx()){DH[CW.ctx]={th,m:S.month,cb:done};return cap("tsDressGo",[th,S.month])}return g0.apply(this,arguments)}}
+  if(hctx()){DH[CW.ctx]={th,m:S.month,cb:done};try{if(typeof mktKnow==="function")mktKnow()}catch(e){}/* her make-up notes record (lazy) made here, not by the board on her phone */return cap("tsDressGo",[th,S.month])}return g0.apply(this,arguments)}}
 /* her phone: the board, then the mirror (its own end = toilFinish), then ONE end; her maid's pick is rolled on the host (sk) */
 window.tsDressGo=function(th,m){if(typeof window.tsDressGame!=="function"||!TS_THEME[th])return;
  window.tsDressGame(th,(P,sk)=>tsMkSit(th,m,()=>{let n=0;const go=()=>{if(F.pend&&++n<200){setTimeout(go,300);return}/* the mirror's end first (one intent at a time) */

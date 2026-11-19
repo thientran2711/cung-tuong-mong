@@ -126,7 +126,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
    aaPaid:(st1.aaPaid|0)-(st0.aaPaid|0),aaCard:(st1.aaCard|0)-(st0.aaCard|0),aaN:(gs1.aaN|0)-(gs0.aaN|0),skip:(gs1.skip|0)-(gs0.skip|0),bad:(st1.mgBad|0)-(st0.mgBad|0),hlog:await H.p.evaluate(()=>COOPW.thin.F.log.slice(-3))};
   if(twin&&twin.a){row.solo=D(twin.b,twin.a);row.solo.used=twin.du;row.real=D(g0,g1);row.real.used=g1.used-g0.used;if(o.noInv){delete row.solo.inv;delete row.real.inv}row.twinOk=JSON.stringify(row.solo)===JSON.stringify(row.real)}else if(twin)row.twinErr=twin.err;
   row.good=ON?(!r.err&&r.pend&&r.next&&r.sent===1&&r.local===0&&got&&same&&!row.hostCard&&(o.reject?(row.st==='gone'&&row.bad===1&&row.aaPaid===0):(row.st==='ok'&&row.ran===1&&(o.twin?row.twinOk===true:true)))&&(o.chk?o.chk(row):true))
-   :(r.sent===0)/* the old road: her phone runs it (a staged over-max / bad-kind end may throw there: solo never calls it so) */;
+   :(o.f5&&LVL>=10?r.sent===1&&row.st==='ok':r.sent===0)/* A1: the lesson end is already F5's intent at level 10; the old road: her phone runs it (a staged over-max / bad-kind end may throw there: solo never calls it so) */;
   const kd=(x,y)=>{const o={};for(const k of new Set([...Object.keys(x||{}),...Object.keys(y||{})]))if(JSON.stringify((x||{})[k])!==JSON.stringify((y||{})[k]))o[k]=[(x||{})[k],(y||{})[k]];return o};
   row.diff=row.solo?kd(row.solo,row.real):null;row.sameDiff=same?null:kd(Object.assign({},g1,{log:0,nlog:0,used:0}),Object.assign({},h1,{log:0,nlog:0,used:0}));
   if(process.env.DBG&&!row.good)console.log('DBG',tag,JSON.stringify(await G.p.evaluate(()=>({flog:COOPW.thin.F.log.slice(-6),st:COOPW.thin.F.stat,kg:!!document.getElementById('kg82'),ok:(document.getElementById('kg82ok')||{}).textContent,go:!!document.getElementById('kg82go'),ex:exS(S)}))).slice(0,1500));
@@ -187,7 +187,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  /* ---- A: the Tự học deck card (aaMG) ---- */
  {await rnd(H,0.1);await rnd(G,0.1);const ac=`const c=wkDeckCard();if(!c)return 'no card';deck=deck.filter(x=>x&&!x.aaMG);deck.unshift(c);return c.n`;
   const hn=await H.p.evaluate(src=>COOPW.thin.withSeat('b',()=>(0,eval)('(function(){'+src+'})')()),ac);const gn=await pick(ac);await rnd(H,null);await rnd(G,null);
-  if(hn&&hn===gn){await act('A1 Tự học deck card (raw 7): cost once, her host-deck card used',KOK,{stage:`S.suc=80;S.bac=Math.max(S.bac,3000);S.mg=null;`,pre:`act(0);const t=document.querySelector('#modal [data-kwrgo]:not([disabled])');if(t){t.click()}if(Q.length&&!document.getElementById('kg82go'))chooseM(0);if(!document.getElementById('kg82go'))return 'no game: '+JSON.stringify({mg:S.mg,Q:Q.map(q=>q.t)});`+KGO,raw:7,wait:900,chk:x=>x.aaPaid===1});
+  if(hn&&hn===gn){await act('A1 Tự học deck card (raw 7): cost once, her host-deck card used',KOK,{stage:`S.suc=80;S.bac=Math.max(S.bac,3000);S.mg=null;`,pre:`act(0);const t=document.querySelector('#modal [data-kwrgo]:not([disabled])');if(t){t.click()}if(Q.length&&!document.getElementById('kg82go'))chooseM(0);if(!document.getElementById('kg82go'))return 'no game: '+JSON.stringify({mg:S.mg,Q:Q.map(q=>q.t)});`+KGO,raw:7,wait:900,f5:1,chk:x=>x.aaPaid===1});
    const hd=await H.p.evaluate(()=>__hdeck(d=>d[0]&&{n:d[0].n,done:d[0].done}));if(!table.length||!table[table.length-1].tag.startsWith('A1'))ok(true,'A1b (row skipped)');else ok(ON?!!(hd&&hd.done):true,'A1b her host-deck Tự học card used',hd)}
   else ok(true,'A no matching Tự học card (skipped)',{hn,gn})}
  /* ---- C: a start in her context on the HOST (part-D card) opens the game on HER phone ---- */
@@ -215,7 +215,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   await until(G,()=>!COOPW.thin.F.pend&&COOPW.thin.F.lastAns&&COOPW.thin.F.lastAns.n==='tsDressEnd',null,20000);await sleep(1500);await sync();
   const g1=await G.p.evaluate(()=>__her()),h1=await H.p.evaluate(()=>__her());
   const x=await G.p.evaluate(s1=>{const F=COOPW.thin.F;return {sent:F.stat.sent-s1,ans:F.lastAns&&F.lastAns.n,st:F.lastAns&&F.lastAns.r0&&F.lastAns.r0.st,args:F.lastMsg&&JSON.stringify(F.lastMsg.a).slice(0,160),pod:!!document.getElementById('kpodov'),
-    logs:(S.logs||[]).slice(0,10).map(l=>String(l).replace(/<[^>]+>/g,'').slice(0,90))}},s1);
+    logs:(S.logs||[]).slice(0,30).map(l=>String(l).replace(/<[^>]+>/g,'').slice(0,90))}},s1);
   const hpod=await H.p.evaluate(()=>!!document.getElementById('kpodov'));
   const same=JSON.stringify(Object.assign({},g1,{log:0,nlog:0,used:0}))===JSON.stringify(Object.assign({},h1,{log:0,nlog:0,used:0}));
   const placed=x.logs.filter(l=>/Hội phối đồ .*ngươi đứng thứ/.test(l)).length===1;
@@ -223,6 +223,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   if(skip)ok(/^\[\{"v":\{\}\},\{"v":true\}\]/.test(x.args||''),'H2b her phone sent no pick (the host rolled her maid\'s pick)',x.args);
   await G.p.evaluate(()=>{try{kitPodiumClose(true)}catch(e){}})}
  if(ON&&(!ROWS||ROWS.some(x=>'H3'.startsWith(x)))){await reset();await stage(hst);const r=await hold();await G.p.evaluate(ui=>{if(Array.isArray(ui))COOPW.thin.uiPlay(ui)},r);await sleep(500);
+  await sync();await sleep(1000);
   const g0=await G.p.evaluate(()=>__her());await G.p.evaluate(()=>{try{kg82Close()}catch(e){}window.tsDressEnd({hair:'zz_none'},false)});
   await until(G,()=>!COOPW.thin.F.pend,null,20000);await sleep(1200);await sync();const g1=await G.p.evaluate(()=>__her());
   const st=await G.p.evaluate(()=>COOPW.thin.F.lastAns&&COOPW.thin.F.lastAns.r0&&COOPW.thin.F.lastAns.r0.st);
@@ -236,7 +237,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   if(lo.length)console.log('LOCAL end tap→render ms on her phone: n='+lo.length+' median='+lo[lo.length>>1]+' min='+lo[0]+' max='+lo[lo.length-1])}
  if(TRIPSRC){const t=await trip();const d=(a,b)=>{const o={};for(const k of new Set([...Object.keys(a||{}),...Object.keys(b||{})]))o[k]=((b||{})[k]||0)-((a||{})[k]||0);return o};
   const sp=d(tw0&&tw0.statePart,t&&t.statePart);
-  console.log('TRIPWIRE F6b table (guest writes outside fromCanon during the end table): state',(t&&t.state)-(tw0&&tw0.state||0),'· by part',JSON.stringify(sp),'· F5 entries',JSON.stringify((t&&t.parts&&t.parts.F6b||[]).slice(0,12)),'· ? top',JSON.stringify((t&&t.parts&&t.parts['?']||[]).slice(0,6)));
+  console.log('TRIPWIRE F6b table (guest writes outside fromCanon during the end table): state',(t&&t.state)-(tw0&&tw0.state||0),'· by part',JSON.stringify(sp),'· F6b entries',JSON.stringify((t&&t.parts&&t.parts.F6b||[]).slice(0,12)),'· F6b·game (her game, reported)',JSON.stringify((t&&t.parts&&t.parts['F6b·game']||[]).slice(0,8)),'· ? top',JSON.stringify((t&&t.parts&&t.parts['?']||[]).slice(0,6)));
   if(ON)ok(!(sp.F6b>0),'TRIP F6b end writes on her phone = 0',sp)}
  console.log('F6b table:');for(const x of table)console.log(' ',JSON.stringify({tag:x.tag,good:x.good,ms:x.ms,local:x.r&&x.r.ms,ran:x.ran,solo:x.solo,real:x.real}).slice(0,500));
  if(process.env.OUT){fs.mkdirSync(process.env.OUT,{recursive:true});fs.writeFileSync(path.join(process.env.OUT,`f6b-L${LVL}-s${SWAP}.json`),JSON.stringify(table,null,1))}
