@@ -669,7 +669,12 @@ NUDE_VAR=[("only five short bead tassels hanging at the front of the crown to th
 ("one full row of bead tassels across the front of the crown, the outer ones short and the middle ones longer, all ending at the forehead","not pointed, squared and short"),
 ("seven bead tassels at the front of the crown, graduated in length, ending at the forehead","slightly pointed outward")]
 # ---------- NỮ ĐẾ OWN PROMPT (N1 round 10, owner ~22:40Z, brief nude-r10 JOB 1): same sentence structure / length / wording style as the approved Hoàng hậu t8 prompt, her OWN marks: dragons only, STIFF SHORT shoulder piece, more majestic, woman's robe. Options via --nudeopt A|B|C|D (default A). Replaces the old (longer, NEVER/hex-heavy) --state nude text. ----------
-NUDE_ITEM={"c06":("a gold dragon-framed round fan","two"),"c25":("a gold-and-jade ruyi with a dragon","one")}   # FIGURE_GATE H NỮ ĐẾ #5 / #4; never her t8 item
+# N4 nude-mass PHASE 1a: FIGURE_GATE H NỮ ĐẾ list (1..10), one item per person, neighbours (+-8) differ, never her own t8 item/kind (c06 #5 fan, c25 #4 ruyi unchanged)
+NUDE_LIST=[('an imperial jade seal (ngọc tỷ) on a yellow silk cord', 'one'), ('a gold dragon-headed sceptre', 'one'), ('an imperial edict scroll on yellow silk with gold rollers', 'scroll'), ('a gold-and-jade ruyi with a dragon', 'one'), ('a gold dragon-framed round fan', 'two'), ('a gold dragon-handled hand mirror', 'mirror'), ('a jade tablet (hốt) edged in gold', 'two'), ('a yellow-silk folding fan with gold dragon ribs', 'ffan'), ('a small gilded dragon censer', 'one'), ('a gold-mounted jade dragon-ring pendant on a yellow cord', 'dangle')]
+NUDE_PICK={'c01': 1, 'c02': 2, 'c03': 3, 'c04': 4, 'c05': 6, 'c06': 5, 'c07': 7, 'c08': 8, 'c09': 9, 'c10': 10, 'c11': 1, 'c12': 2, 'c13': 3, 'c14': 4, 'c15': 6, 'c16': 7, 'c17': 5, 'c18': 8, 'c19': 9, 'c20': 10, 'c21': 1, 'c22': 2, 'c23': 3, 'c24': 6, 'c25': 4, 'c26': 5, 'c27': 7, 'c28': 9, 'c29': 8, 'c30': 10, 'c31': 1, 'c32': 2}
+NUDE_ITEM={c:NUDE_LIST[k-1] for c,k in NUDE_PICK.items()}
+# N4 PHASE 1b: option per person spread evenly A,B,C,D,A,... (c01 A, c02 B, ...); `--nudeopt auto` uses it; explicit A|B|C|D still works
+NUDE_OPTMAP={"c%02d"%n:"ABCD"[(n-1)%4] for n in range(1,33)}
 NUDE_OPT={
 "A":dict(sec="deep wine-crimson",secrule="a deep, quiet wine-crimson like #7E2A33",sh="a STIFF, SHORT, structured shoulder piece (cầu vai cứng) of gold brocade edged with pearls over each shoulder, slightly pointed outward",tas="a row of bead tassels (lưu) hanging in front from the rim of the crown to the forehead, ending above the eyebrows",crown=None),
 "B":dict(sec="black",secrule="black silk richly embroidered with gold thread (the yellow clearly more than the black)",sh="a STIFF, SHORT, squared structured shoulder piece (cầu vai cứng) of gold brocade edged with pearls over each shoulder, set firmly across the shoulder line",tas="a row of bead tassels (lưu) hanging in front from the rim of the crown to the forehead, ending above the eyebrows",crown=None),
@@ -693,6 +698,7 @@ NUDE_CROWN="one splendid imperial gold phoenix-and-dragon crown: a large gold dr
 def build_nude_own(c,face,right):
     o=NUDE_OPT[NUDE_OPTSEL]; item,hk=NUDE_ITEM[c]; pal,_=DATA[c]; m,m2=ORIG1[c]
     sec=o["sec"] or m.split(" silk")[0]; secrule=o["secrule"] or None
+    if AGE in ("a51","a65") and sec=="black": sec="deep midnight-navy"; secrule="black silk richly embroidered with gold thread (the yellow clearly more than the black)".replace("black silk","deep midnight-navy silk").replace("the black","the navy")   # N4 1c: ELDER COLOURS never black/brown
     crown=o["crown"] or NUDE_CROWN
     s=PRE+f" An imperial consort, the Female Emperor (Nữ đế), the highest rank of all. Her face: {face}."+IDENT+" "+AGE_TXT[AGE]
     s+=(f" Outfit (the Female Emperor (Nữ đế), equal to the Empress in colour but clearly more majestic, and different in design from the Empress's robe): a woman's imperial ceremonial dragon robe of golden yellow silk mixed with {sec}, richly embroidered on the chest, shoulders and wide sleeves with large dragons, peonies and clouds in gold and kingfisher-blue silk thread (far denser and richer embroidery than any other rank), over it a long ceremonial silk mantle falling from the shoulders to the floor, edged with a broad band of gold brocade and pearls, {o['sh']}, many long strands of pearls and jade across the chest, a jade-and-gold belt with long tassels and jade pendants, floor-length robe with slippers visible, slim tall silhouette; the GRANDEST headdress of all: a FULL tall imperial dragon crown, clearly taller and wider than the Empress's crown, {crown}, and {o['tas']}, the bare forehead clean under them; the most majestic outfit of all, clearly grander than every other rank.")
@@ -914,6 +920,7 @@ def nude2(o,c,opt):
 if __name__=="__main__":
     NUDE2=None
     if "--nudeopt" in sys.argv: i=sys.argv.index("--nudeopt"); NUDE_OPTSEL=sys.argv[i+1]; sys.argv[i:i+2]=[]
+    if NUDE_OPTSEL=="auto": NUDE_OPTSEL=NUDE_OPTMAP[[x for x in sys.argv[1:] if not x.startswith("--")][0]]
     if "--bdopt" in sys.argv: i=sys.argv.index("--bdopt"); BDOPT=sys.argv[i+1]; sys.argv[i:i+2]=[]
     if "--nude2" in sys.argv: i=sys.argv.index("--nude2"); NUDE2=sys.argv[i+1]; sys.argv[i:i+2]=[]
     if "--age" in sys.argv: AGE=sys.argv[sys.argv.index("--age")+1]; sys.argv[sys.argv.index("--age"):sys.argv.index("--age")+2]=[]
@@ -949,5 +956,6 @@ if __name__=="__main__":
     if (TRIEUN is not None and TRIEUN>=6) or STATE=="nude":
         _r=" Image 3 is only a colour reference for the royal yellow, never copy anything but its colour; the royal yellow in the robe is exactly that colour."
         assert _o.count(END)==1 and _o.endswith(END),"END not at end"
+        if STATE=="nude" and AGE in ("a51","a65"): _r=" Image 3 is only a colour reference for the royal yellow, never copy anything but its colour; her yellow is that royal yellow in its deeper, subdued antique-gold elder shade as the colour rule says."   # N4 1c
         _o=_o[:-len(END)]+_r+END
     print(_o,end="")
