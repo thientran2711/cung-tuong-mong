@@ -292,3 +292,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | kyngo-daily FIX r2 (opus E18b; 9 fixes from E18r) | review/kyngo-daily; briefs/E18b-kyngo-fix-r2.md | FOREMAN E #11 | session_01DgYSWose5CuxgwKoCBMKGm | RUNNING | 19/11 11:37Z |
 | kyngo-daily FIX r2 (opus E18b; 9 review fixes) | review/kyngo-daily; briefs/E18b-kyngo-fix-r2.md | FOREMAN E #11 | session_01DgYSWose5CuxgwKoCBMKGm | RUNNING (depth 2) | 19/11 11:40Z |
 | REVIEW seal-lean-3 r8 (sonnet SMALL; ROOT-70 ORDER via C-AG #23) of 2111eb10 | review/seal-lean-3; reports/seal-lean-3.md | C-AG #23 for ROOT-70 | session_01Rc5AsMYavicZ6i6he17EQf | RUNNING | 19/11 12:01Z |
+| coop-thin F6b #3 (opus; successor of 3uQwFDZB at 5e49d73d) | review/coop-thin-f6b | B | session_01N1tNP3ZKhXs5gAeKLeNMoh | RUNNING | 19/11 12:11Z |
