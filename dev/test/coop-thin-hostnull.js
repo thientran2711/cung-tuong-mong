@@ -99,6 +99,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  {await G.p.evaluate(i=>{popIdx=i;popMsg='';used=0;S.visit.tk={};S.visit.talked=false;render()},PI);await H.p.evaluate(()=>{render()});
   const oi=await G.p.evaluate(()=>{const p=curPeople()[popIdx];return talkOpts(p).findIndex(a=>!a.open&&!a.lock&&canPay(a))});
   const r=await herRun('talk',oi);const hs=await hostSame();H1.push(['talk',r,hs]);
+  if(process.env.SHOTS){fs.mkdirSync(process.env.SHOTS,{recursive:true});for(const p of [H,G]){await tapText(p,/^Bỏ qua$/,1500)/* the Luân hồi intro overlay (as coop-thin-f5 shots) */;await p.p.evaluate(()=>{for(const el of document.querySelectorAll('.nl-intro,#nlIntro,[data-nlintro]'))el.remove()}).catch(()=>{})}await sleep(900);for(const [p,nm] of [[H,'host'],[G,'guest']]){const vp=p.p.viewportSize();await p.p.screenshot({path:path.join(process.env.SHOTS,`hn-talk-s${SWAP}-${nm}-${vp.width}x${vp.height}.jpg`),type:'jpeg',quality:70})}}/* LOOK: after her talk, host screen = his own place, her pop-up only on her phone */
   ok(r.sent===1&&r.got&&r.ran===1&&!!r.after.msg&&r.after.used>0&&hs.same,'H1 talk from the guest: run once on the host, her pop-up shows her result, the host\'s screen = his own state (repainted)',{r,hs})}
  for(const [fn,src] of [['scout',"(S.seenLoc={},0)||rivals.find(v=>v&&!v.coop&&v.alive&&!v.out&&!locKnown(v)&&!together(S,v))"],['invite',"rivals.find(v=>v&&!v.coop&&v.alive&&!v.out&&!sameHouse(S,v))"]]){
   await reset();await G.p.evaluate(()=>{used=0;render()});await H.p.evaluate(()=>{render()});await sync();
@@ -129,24 +130,26 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
    await G.p.evaluate(()=>{});
    await H.p.evaluate(()=>{window.__hk=[];const kf=window.krvFlip;window.__kf0=kf;window.krvFlip=function(k){if(!COOPW.ctx){__hk.push(k);(window.__hks=window.__hks||[]).push(String(new Error().stack).split("\n").slice(1,9).join(" < "))}return kf.apply(this,arguments)};window.__hev=Object.keys(kitReveal.KRV.ev)});
    await G.p.evaluate(()=>{window.__gk=[];const kf=window.krvFlip;window.__gkf0=kf;window.krvFlip=function(k){__gk.push(k);return kf.apply(this,arguments)}});
-   const row=await walk('goTo',pk.k,'H2');await sleep(800);
+   const row=await walk('goTo',pk.k,'H2');await sleep(800);await until(G,id=>(S.visit&&S.visit.people||[]).some(p=>p.ref&&p.ref.id===id),pk.id,8000)/* 4G / slow host: her scene's people arrive with the view */;
    /* she talks to the stranger (face to face = met: k61Meet, j21 talk) */
    const oi=await G.p.evaluate(id=>{const i=(S.visit&&S.visit.people||[]).findIndex(p=>p.ref&&p.ref.id===id);if(i<0)return -1;popIdx=i;popMsg='';S.visit.tk={};S.visit.talked=false;used=0;render();const L=talkOpts(curPeople()[popIdx]);return L.findIndex(a=>!a.open&&!a.lock&&canPay(a))},pk.id);
    const tr=oi>=0?await herRun('talk',oi):null;row.got=row.got&&!!tr&&tr.got;row.ran=tr?tr.ran:0;await sleep(2500);
    const g=await G.p.evaluate(k=>({flips:__gk.filter(x=>x===k).length,all:__gk,met:met61(rivals.find(v=>kOf61(v)===k)||{}),ev:!!kitReveal.KRV.ev[k]}),pk.key);
    const h=await H.p.evaluate(()=>({st:window.__hks,flips:__hk.length,ev:Object.keys(kitReveal.KRV.ev).filter(x=>!__hev.includes(x))}));
    await H.p.evaluate(()=>{window.krvFlip=__kf0});await G.p.evaluate(()=>{window.krvFlip=__gkf0});
-   ok(row.got&&row.ran===1&&g.met&&g.flips===1&&g.ev&&h.flips===0&&h.ev.length===0,'H2 her face reveal (she meets a stranger: walk there, talk face to face): played once on HER phone, none on the host',{pk,place:row.g1.place,g,h})}}
+   ok(row.got&&row.ran===1&&g.met&&g.flips===1&&g.ev&&h.flips===0&&h.ev.length===0,'H2 her face reveal (she meets a stranger: walk there, talk face to face): played once on HER phone, none on the host',{pk,place:row.g1.place,oi,tr,g,h,ppl:await G.p.evaluate(id=>{const v=rivals.find(x=>x.id===id);return{ids:(S.visit&&S.visit.people||[]).map(p=>p.ref&&p.ref.id),where:v?whereOf(v):null,hw:null,away:typeof ptAwayOf==='function'&&v?!!ptAwayOf('mm:'+id):null}},pk.id),hp:await H.p.evaluate(id=>{const v=rivals.find(x=>x.id===id);return v?whereOf(v):null},pk.id)})}}
  /* H3 (c) more effects than the old cap: the host-side staging adds 7 lines to her scout run (seeLoc wrapped on the host only): all of them
     play on HER phone, in order, batch by batch (BAL.coopUi), none lost; none on the host */
  {await reset();await G.p.evaluate(()=>{used=0;render()});await sync();
   const id=await G.p.evaluate(()=>{S.seenLoc={};const v=rivals.find(v=>v&&!v.coop&&v.alive&&!v.out&&!together(S,v)&&!locKnown(v));return v?v.id:null});
   if(id==null)ok(true,'H3 no one to scout (skipped)');else{
+   await both(()=>{window.__pt=BAL.ptime?BAL.ptime.on:undefined;if(BAL.ptime)BAL.ptime.on=0})/* parallel time (jptime) would send a runner and land later: the staging needs her scout run itself */;
    await H.p.evaluate(()=>{window.__r0=roll;roll=()=>true;window.__sl0=seeLoc;seeLoc=function(){const r=__sl0.apply(this,arguments);for(let i=0;i<7;i++)kitLine('hn-cap '+i);return r};
     window.__hl=[];const kl=window.kitLine;window.__kl0=kl;window.kitLine=function(t){if(!COOPW.ctx)__hl.push(String(t));return kl.apply(this,arguments)}});
    await G.p.evaluate(()=>{window.__gl=[];const kl=window.kitLine;window.__gkl0=kl;window.kitLine=function(t){__gl.push([String(t),Date.now()]);return kl.apply(this,arguments)}});
    const r=await herRun('scout',id);await sleep(4500);
    await H.p.evaluate(()=>{roll=__r0;seeLoc=__sl0;window.kitLine=__kl0});
+   await both(()=>{if(BAL.ptime&&window.__pt!==undefined)BAL.ptime.on=window.__pt});
    const g=await G.p.evaluate(()=>({lines:__gl.filter(x=>/^hn-cap /.test(x[0])),B:BAL.coopUi}));await G.p.evaluate(()=>{window.kitLine=__gkl0});
    const h=await H.p.evaluate(()=>__hl.filter(x=>/^hn-cap /.test(x)).length);
    const L=g.lines.map(x=>x[0]),T=g.lines.map(x=>x[1]);const B=g.B||{batch:4,gapMs:900};
@@ -158,12 +161,14 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  {await reset();await G.p.evaluate(()=>{used=0;render()});await sync();
   const id=await G.p.evaluate(()=>{S.seenLoc={};const v=rivals.find(v=>v&&!v.coop&&v.alive&&!v.out&&!together(S,v)&&!locKnown(v));return v?v.id:null});
   if(id==null||!await H.p.evaluate(()=>!!(ACT.tat&&ACT.tat.f)))ok(true,'H4 no one to scout / no Tát act (skipped)');else{
+   await both(()=>{window.__pt=BAL.ptime?BAL.ptime.on:undefined;if(BAL.ptime)BAL.ptime.on=0})/* parallel time (jptime) would send a runner and land later: the staging needs her scout run itself */;
    /* solo reference: the same act body on the host's own screen (his context), its moves counted (the act wrapper's timer included) */
    const solo=await H.p.evaluate(async id=>{const v=rivals.find(x=>x.id===id);const c=[];const f=window.kpmGo;window.kpmGo=function(m){if(!COOPW.ctx)c.push(m);return f.apply(this,arguments)};try{const s0=JSON.stringify(v.slap||null);ACT.tat.f(S,v);await new Promise(r=>setTimeout(r,1200));v.slap=JSON.parse(s0)}finally{window.kpmGo=f}return c.filter(m=>m==='slap').length},id);
    await H.p.evaluate(()=>{window.__r0=roll;roll=()=>true;window.__sl0=seeLoc;seeLoc=function(v){const r=__sl0.apply(this,arguments);try{ACT.tat.f(S,v)}catch(e){console.error(e)}return r};window.__kl=KPM_LOG.length});await sleep(300);await H.p.evaluate(()=>{window.__kl=KPM_LOG.length});
    await G.p.evaluate(()=>{window.__kp=[];const f=window.kpmPlay;window.__kp0=f;window.kpmPlay=function(m,a){__kp.push([m,a]);return f?f.apply(this,arguments):false}});
    const r=await herRun('scout',id);await sleep(2500);
    await H.p.evaluate(()=>{roll=__r0;seeLoc=__sl0});
+   await both(()=>{if(BAL.ptime&&window.__pt!==undefined)BAL.ptime.on=window.__pt});
    const g=await G.p.evaluate(()=>{const o=__kp.slice();window.kpmPlay=__kp0;return o});const h=await H.p.evaluate(()=>KPM_LOG.length-__kl);
    ok(r.got&&r.ran===1&&solo>0&&g.length===solo&&g.every(x=>x[0]==='slap')&&h===0,'H4 her act\'s figure move: played on HER stage as often as solo, none on the host\'s stage (not even after the act wrapper\'s timer)',{g,solo,hostMoves:h})}}
  /* H5 (e) law 1 two-way: an ASK act the OTHER PLAYER accepted (CW.inv set, the target = her entry) is never refused by an NPC roll after:
