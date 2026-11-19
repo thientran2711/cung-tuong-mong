@@ -318,3 +318,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | MAIN ROOT-72 (opus; child of ROOT-71, depth 1) | handover HANDOVER_SESSION9 | ROOT-71 | session_01Rc5AsK1W5sm4JWNWeSDH2k | RUNNING | 19/11 22:36Z | PICKUP 22:38Z START_CTX ~6 % |
 | coop-thin G #1 (opus; week end + her personal month on host, C.thin 13; stacked on F6b-r1 6194dd6a) | review/coop-thin-g | B | session_01N1tNP4tAZPWV3hUSqy8aiQ | RUNNING | 19/11 23:20Z |
 | REVIEW phutang-road (opus BIG E21r) of 30d8ee51 (stacked on bd-roads 0308cbcc) | review/phutang-road; briefs/E21r-review-phutang-road.md | FOREMAN E #13 | session_01DgYSWnvWgySKFx7y6JDi4D | RUNNING | 19/11 23:28Z |
+| person-minigame-acts lead (PARKING_LOT #8, OD 19/11 ~23:55Z; opus E22) | review/person-minigame-acts; briefs/E22-person-minigame-acts.md | FOREMAN E #13 | (opening) | CLAIMED | 19/11 23:59Z |
