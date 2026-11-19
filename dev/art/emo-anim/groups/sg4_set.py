@@ -2,7 +2,7 @@
 """SEAL4 sets (owner Lượt 812 via ROOT-58): ht- htg- tg- tv- get the Thái hậu-APPROVED seals
 vui buon so an binh ghen lo muu tutin hanghai. Each prompt = th_prompts.prompts(k) WORD FOR WORD with ONLY the person block changed
 (WHO / SAME / short name, sleeves, headgear words, old-face words, she/her -> he/his) — person data from sg4_prompts.G (the OK'd giận samples).
-Extra (foreman 23:52Z): hanghai disc 'bright spring green' -> 'bright cobalt blue' (= SEAL3, ROOT-58 23:55Z) (disc never near chroma green);
+Extra (foreman 23:52Z): hanghai disc 'bright spring green' -> 'bright coral' (FINAL all groups, ROOT-58 23:56Z) (disc never near chroma green);
 htg clips get one skin sentence (the giận sample's BACK turned his face purple) — not for so (its pale purple fear tint is the feeling).
 A ref = that group's giận A (sample); B ref = that seal's own A.
 usage: python3 sg4_set.py ht [vui buon ...]  -> JSON {key: {A,B,out,loop,back}}   |  --check  (all 40, asserts no woman words left)"""
@@ -32,7 +32,7 @@ def person(g, k):
         s = s.replace("by her crown", f"by her {top}").replace("above her crown", f"above her {top}")
         s = s.replace("her wrinkled cheek", "her cheek" if g != "htg" else "her wrinkled cheek")
         s = s.replace("the old face", "his face").replace("old face", oface)
-        if k == "hanghai": s = s.replace("bright spring green", "bright cobalt blue")
+        if k == "hanghai": s = s.replace("bright spring green", "bright coral")
         s = re.sub(r"\bshe\b", "he", s); s = re.sub(r"\bShe\b", "He", s); s = re.sub(r"\bherself\b", "himself", s)
         s = re.sub(r"\bher\b", "his", s); s = re.sub(r"\bHer\b", "His", s)
         s = re.sub(r"\bhis(?=\s*[.,;:)]|\s*$)", "him", s)          # object: "around her;" -> "around him;"
