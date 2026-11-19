@@ -1278,5 +1278,55 @@
   "ver": "v5",
   "prompt_file": "dev/art/face-common/s50.v5.FULL.txt",
   "kind": "NEWFACE-761"
+ },
+ "s51": {
+  "group": "Kiêu kỳ",
+  "hidden": false,
+  "ts": "2026-11-19T23:30:00Z",
+  "cut": "dt4SA3PXSL",
+  "gen": "UPvXH68wny",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s51.v5.FULL.txt",
+  "kind": "NEWFACE-761"
+ },
+ "s52": {
+  "group": "Kiêu kỳ",
+  "hidden": false,
+  "ts": "2026-11-19T23:30:00Z",
+  "cut": "lJtpQC3gv9",
+  "gen": "1ldchRar4r",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s52.v5.FULL.txt",
+  "kind": "NEWFACE-761"
+ },
+ "s53": {
+  "group": "Kiêu kỳ",
+  "hidden": false,
+  "ts": "2026-11-19T23:30:00Z",
+  "cut": "w4aBbFH7EI",
+  "gen": "tCRyW98mZJ",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s53.v5.FULL.txt",
+  "kind": "NEWFACE-761"
+ },
+ "s54": {
+  "group": "Kiêu kỳ",
+  "hidden": false,
+  "ts": "2026-11-19T23:30:00Z",
+  "cut": "s7IDuCpl8e",
+  "gen": "6AbfLL8iJO",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s54.v5.FULL.txt",
+  "kind": "NEWFACE-761"
+ },
+ "s55": {
+  "group": "Kiêu kỳ",
+  "hidden": false,
+  "ts": "2026-11-19T23:30:00Z",
+  "cut": "WDgk4PIcXe",
+  "gen": "Xm9UADGBfo",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s55.v5.FULL.txt",
+  "kind": "NEWFACE-761"
  }
 }

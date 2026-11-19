@@ -61,3 +61,11 @@ I wait for your message.
 - make_kieuky_L761.py + make_quyenru_L761.py: ROOTS read from s_root_colours.json (P1 NEW16), last step face_gate.final (MASTER + D9 + check_store face) on every .FULL output, like make_lanhlung_L761.
 - s51–s61.v5.FULL.txt written; `check_store.py <file> --scope face` → STORE CHECK PASS all 11.
 - HELD before gens: P1 roots s51 (orchid pink + deep sea blue #4F809A), s52 (soft lavender + madder red #AE6163), s54 (cool lilac + deep sapphire #566D9F), s55 (pink lilac + deep sea blue #547F97) have a secondary at OKLCH L 0.54–0.58 = the level the owner called "không nhẹ nhàng" in Lượt 767 (#A55D7A 0.57, #388581 ~0.55); s47/s48 are 0.71–0.80. s51 and s55 are near-twin pairs (pink-lilac + the same deep sea blue). Quyến rũ s56 also has "deep lavender" #8C77B0 (0.61). Asked the foreman.
+
+## Update — Kiêu kỳ +5 DONE (P1 NEW11 SOFT 234e4d5)
+- Prompts rebuilt from s_root_colours.json; s51 item changed before any gen (gold wine cup → openwork gold incense ball: the common block forbids cups); check_store --scope face PASS all.
+- 5 gens, 1 try each, no retries: s51 UPvXH68wny→cut dt4SA3PXSL · s52 1ldchRar4r→lJtpQC3gv9 · s53 tCRyW98mZJ→w4aBbFH7EI · s54 6AbfLL8iJO→s7IDuCpl8e · s55 Xm9UADGBfo→WDgk4PIcXe. Cost 5×135 + 5×3 = 690 credits. Ledger lines added.
+- Looked at full size: eyes level, lips closed, no teeth, item held, both root colours clearly visible, hair as written.
+- Faults to show the owner (NOT fixed, foreman Lượt 777): s51 has an extra lilac silk-flower hair ornament at the side (not in prompt; flower sticks out a little sideways); s51 and s53 both have a lilac/lavender main colour (P1 roots) so they read alike from far; s52 and s53 faces are fairly close (oval, similar eyes) — hair/outfit differ.
+- Sheet dev/handover/review-sheets/new-faces-v4/kieuky_L761.jpg (5 new + s10 s11 s12, swatches) by make_sheet_kieuky_L761.py; face crops face_page/faces/s51–s55.jpg; FACE_CUTS / FACE_MAP / LOOK_GROUPS updated (OWNER_GROUPS already had them from P1).
+- Note: P1 root seasons on the sheet: s51 Hạ, s52 Đông, s53 Hạ, s54 Xuân, s55 Thu.

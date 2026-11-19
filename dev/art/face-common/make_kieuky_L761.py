@@ -28,6 +28,7 @@ PH = ("{ROOT_MAIN}", "{ROOT_MAIN_HEX}", "{ROOT_SEC}", "{ROOT_SEC_HEX}")
 # DIFF vs approved Kiêu kỳ (make_nf4 S4 + FACEV/HAIR/ITEMS/ANGS):
 #  face swaps used: DIAMOND-OVAL (s11,s20) · crisp lip line (s12,s21) · pointed chin (s22) · thin brows (s23) · slender oval (s24) · high fine bridge (s25)
 #  hair used: crown section + gold pin · tall bun · centre part + ribbon · flat knot · over right shoulder · two thin braids · soft waves
+#  (s51 item changed from a gold wine cup: the common block says 'no cup')
 #  items used: round fan (s10,s19,s25) · white peony (s20,s24) · purple orchid · hand mirror (s12,s21) · black folding fan · jade seal
 #  angles used: SR×2 TL×2 FF×2 SL×2 TR ST
 S761K = [
@@ -35,7 +36,7 @@ S761K = [
              ("long slender brows rising", "thick dark slender brows rising")],
  "fully up: all the hair lifted into two tall symmetric loops at the crown held by one gold hairpin pointing upward, two long thin locks falling straight behind the shoulders",
  "a cross-collar ruqun of {m} silk satin with a soft sheen and a {s} floor-length skirt of plain silk, small embroidered gold peony scrolls at the collar and hem, a wide {s} silk sash with a small gold buckle, a long sheer {s} silk shawl draped over both forearms, long sleeves",
- "standing tall and upright with her weight on one leg, a small gold wine cup held at chest height by its rim between her fingertips as if offered and not yet drunk, the other hand resting at her sash", "TR"),
+ "standing tall and upright with her weight on one leg, a small round openwork gold incense ball on a red silk cord held up at chest height between her fingertips, the other hand resting at her sash", "TR"),
 ("s52", 17, [("long refined OVAL face", "refined HEART-OVAL face, a wide smooth forehead,"),
              ("THIN well-defined lips held firm", "small, slightly full, well-defined lips held firm")],
  "half-up: the top hair in one tall bun tilted to one side at the crown held by one long gold hairpin with a small dangling pearl, the rest long and straight behind",
