@@ -992,6 +992,13 @@ def build_mama(c):
     if "--noflower" in sys.argv:   # owner Lượt 520 / ART_RULES K15: ma ma wear NO hair flowers (only consorts). Opt-in flag: removes the flower wording + adds ONE negative sentence (ROOT-50 ruling A); every other output byte-identical.
         _fl=", and one small fresh "+fk+" in "+fc+" tucked beside the bun"; assert s.count(_fl)==1,"mama hair flower clause"; s=s.replace(_fl,"",1)
         assert s.count(MAMA_HAIR)==1,"MAMA_HAIR"; s=s.replace(MAMA_HAIR," Her hair and hairpins come ONLY from the identity reference and this text; the style reference image must not influence her hair. NO flowers in the hair (no fresh or silk flowers), only her hairpins.",1)   # + ROOT-50 ruling (A) 19/11: removal alone failed (gen copied the face ref's orchid, MMX3 c06) -> ONE added negative sentence
+    if "--noflower" in sys.argv or "--oneref" in sys.argv:   # owner Lượt 543 ONE reference only (ROOT-50 19/11 18:34Z, same flags MMX3 uses): no costume image -> every "image 3" (= image 2 after --nostyle) costume pointer removed; the garment description words stay
+        for _a,_b in ((" Outfit (the ma ma costume, exactly the cut of image 3, never poor):"," Outfit (the ma ma costume, never poor):"),
+                      ("COLOUR RULE: take ONLY the cut from image 3; RECOLOUR the whole costume","COLOUR RULE: RECOLOUR the whole costume"),
+                      ("; do not copy the brown of image 3.",".")):
+            assert s.count(_a)==1,("mama one-ref slot",_a); s=s.replace(_a,_b,1)
+        assert "image 3" not in s,"mama one-ref: image 3 left"
+        return s+END   # MAMA_IMG3 (the costume-image sentence; its "ONE panel" describes the old image, the text says TWO panels) dropped
     return s+MAMA_IMG3+END
 MAID_IDENT=IDENT.replace("and hairstyle colour","her own hairstyle (the same at every rank) and hair colour",1)
 TM_FADED=["grey-blue","light indigo","earth brown"]
