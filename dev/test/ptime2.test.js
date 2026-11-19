@@ -48,8 +48,12 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   E("plantsv",()=>{toB0();Q.length=0;if(!(S.staff||[]).length)return null;S.bac=Math.max(S.bac||0,BAL.house.plantBac+50);const d=PEND.plantsv({});const op=d&&d.o.find(x=>x.kgt);if(!op||op.lock)return null;/* no free servant: nothing to send */
    const u0=used,t0=ptNow();op.go();const a=S.away.filter(z=>z.kind==="bribe").pop();const x={x:op.x,u:used-u0,away:!!a,due:a?a.due-t0:null};spend(BAL.ptime.kinds.bribe.n);x.back=!!(a&&a.back);return x});
   /* FAIL 7 item 1: jptime never re-registers «tin» on render, and stays off it when MAIN's jerr errIcon is in the build */
-  E("icon",()=>{const x={};let n=0;const s0=kitStatusIcon.set;kitStatusIcon.set=function(id){if(id==="tin")n++;return s0.apply(this,arguments)};try{render();render();x.onRender=n;
-    window.errIcon=function(){x.err=(x.err||0)+1};ptIcon();x.setWithErr=n;delete window.errIcon}finally{kitStatusIcon.set=s0}
+  E("icon",()=>{const x={};let n=0,rf=0;const s0=kitStatusIcon.set,r0=kitStatusIcon.refresh;
+    /* count only jptime's OWN «tin» registration (ptIconReg); MAIN's jerr (IIFE, window.ERR) sets «tin» from its own render wrapper */
+    kitStatusIcon.set=function(id){if(id==="tin"&&/ptIconReg/.test(String(new Error().stack)))n++;return s0.apply(this,arguments)};kitStatusIcon.refresh=function(){rf++;return r0.apply(this,arguments)};
+    const had=Object.prototype.hasOwnProperty.call(window,"errIcon"),e0=window.errIcon;x.jerr=!!window.ERR;
+    try{render();render();x.onRender=n;if(!x.jerr)window.errIcon=function(){x.err=(x.err||0)+1};const n0=n,f0=rf;ptIcon();x.setWithErr=n-n0;x.refresh=rf-f0;x.own=ptErrOwn()}
+    finally{kitStatusIcon.set=s0;kitStatusIcon.refresh=r0;if(had)window.errIcon=e0;else delete window.errIcon}
    const sp=ptPanel();x.facts=Array.isArray(sp.facts);x.noH=!sp.h;return x});
   o.errs=PT.stat.errs.slice();return o});
  console.log(JSON.stringify(r));const BAL_HN=2;
@@ -63,6 +67,6 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
  const H=r.shop;ok(H&&H.q0===0&&H.away&&H.back&&H.q.includes("Nhờ thái giám mua đồ"),"17 shop: the tray comes at due",H);
  const N=r.npcDeed;ok(N&&(!N.tog&&(N.r===""&&N.sent&&N.who===N.svId&&N.due===BAL_HN&&N.busy&&N.notSame&&N.r2===""&&N.sent2&&N.back&&N.maidLock)),"18 two-way: NPC deed by a sent servant = away + due khắc, servant locked, lands; NPC maid away locked for other deeds",N);
  const P=r.plantsv;ok(P===null||(P&&P.u===1&&P.away&&P.due===2&&P.back&&/chờ 2 khắc/.test(P.x)),"19 Cài người hầu vào cung: servant away 2, placed at due",P);
- const IC=r.icon;ok(IC&&IC.onRender===0&&IC.setWithErr===0&&IC.err===1&&IC.facts&&IC.noH,"FAIL7-1 «tin»: never registered on render; MAIN's errIcon owns it when present; fallback panel = kit facts spec",IC);
+ const IC=r.icon;ok(IC&&IC.onRender===0&&IC.setWithErr===0&&IC.own&&(IC.jerr?IC.refresh>=1:IC.err===1)&&IC.facts&&IC.noH,"FAIL7-1 «tin»: never registered on render; MAIN's errIcon owns it when present; fallback panel = kit facts spec",IC);
  ok(!(r.errs||[]).length,"no jptime errors",r.errs);ok(!errs.length,"no page errors",errs.slice(0,3));
  await b.close();console.log(res.every(Boolean)?"ALL OK":"FAILED");process.exit(res.every(Boolean)?0:1)})().catch(e=>{/* a crash inside the page is a clean FAIL line (reviewer note) */console.log("FAIL crash: "+(e&&e.message||e).toString().slice(0,300));process.exit(1)});

@@ -84,7 +84,8 @@ function ptMine(){return ptZ().filter(a=>a.by==="me"&&!a.back)}
    ONLY when MAIN's jerr (errIcon) is not in the build, ONCE at boot (never on render), so it can never overwrite MAIN's panel. The fallback panel
    is a kit info panel spec (kitPanel facts + opts, §77.1 / §9), the same shape as jerr's errPanel. */
 function ptOrdN(){return S&&Array.isArray(S.ordQ)?S.ordQ.length:0}
-function ptErrOwn(){try{return typeof errIcon==="function"||(!ptIconSet&&typeof kitStatusIcon!=="undefined"&&typeof kitStatusIcon.has==="function"&&kitStatusIcon.has("tin"))}catch(e){return false}}
+/* jerr runs inside an IIFE (errIcon is private): its exported state window.ERR marks it in the build */
+function ptErrOwn(){try{return typeof errIcon==="function"||!!(window.ERR&&typeof window.ERR==="object")||(!ptIconSet&&typeof kitStatusIcon!=="undefined"&&typeof kitStatusIcon.has==="function"&&kitStatusIcon.has("tin"))}catch(e){return false}}
 function ptPanel(){const N=ptNews(),W=ptMine();const facts=[];const OQ=S&&Array.isArray(S.ordQ)?S.ordQ.slice():[];let subj=null;
  for(const o of OQ)facts.push(`${o.byNm} ${ptOrdIs(o)?"có lệnh cho ngươi":"có lời nhờ"}${o.title&&!/^Lệnh của /.test(o.title)?": "+o.title:""}, trả lời trước ${ptWhen(o.due)}; quá hạn coi như từ chối.`);
  for(const a of N){const r=a.rep||{};if(!subj)subj=ptPerson(a.a||{});facts.push(`${r.t||a.nm+" đã về"}${r.ok===true?" · thành":r.ok===false?" · hỏng":""}.`);
