@@ -87,3 +87,33 @@ Setup for #3: worktree /home/user/wt/f6 does not survive a new container: make a
 
 ## ROLLOVER HANDOVER #2 → #3 (11/19/2026 ~13:25Z; context ≈ 25 %, rollover ≈ 29 %) — Foreman B opens the successor
 Continue on review/coop-thin-f6 @ f080a27a with OPEN 1–4 above. F6b worker #4 merged ea367ecb; it rides `TH.gLift` (above).
+
+## #3 progress (worker session_01N1tNP62bajsTWCCpnFwQkF, depth 7, START_CTX ≈ 3 % of 1M) — review/coop-thin-f6
+PRIORITY #1 CHECK: OD 0 new | main LIVE 1a4df595 (via F5-r1 9b46e1ad) | review/*: coop-thin-f5-r1 9b46e1ad (merged), coop-thin-f6b (F6b #4, merges this sha) | claims: CLAIMS row 'coop-thin F6a #3'.
+Commits on top of f080a27a:
+- **df27e4bc — two real faults fixed**
+  1. OPEN 1 (`used` drift) = a REAL law-4 fault, not only a test artefact. jcoopthinb `COOP.on("state",drop)` (and the week / accept drops) call TH.seatDrop on every room state; TH.seatOf rebuilt her store from the room's person with `g.used=0` (her khắc clock lives outside S, the room's P does not carry it). Every host run in her context that is NOT one of her intents (TH.ctxOut mkSync, part-D work, the hand refresh) then saw 0 khắc spent → her S.mood.log `left` (and any khắc check there) drifted from her phone. Her intents were safe (ctx carries her phone's `used`). Fix (jcoopthin.js seatOf / seatDrop): the dropped store's `used` is kept and restored when the rebuilt person is the same life + week + buổi (a buổi step / new week / new life still starts at 0, as her phone's gView does). Family (LUẬT SỬA CẢ NHÓM): the per-seat REG list = used · deck · Q · popIdx · popMsg · ACTX · DEED85 · DT85 · EIT_PIL · EVB_ART · EVHOLD · EVLAST · K61PASS · KMS · KMSNAP · NLP · NLR · SUCC_NPC · TR_DEED · jointScheme0 · wkPend · __adPend: only `used` is a rule counter that the room's person does not carry AND that a non-intent run reads; deck = F6a's B.hd (kept apart, by key); Q / popIdx / popMsg = her cards / pop-up (part D holds her cards in S.thq; the pop-up comes back with the intent's answer); the module states (ACTX…__adPend) are rebuilt from defaults since part A (reviewed design: "the store follows the room") and are re-sent by her intents' ctx where they matter. The test's reset() also zeroed `used` on her phone only (a second, test-side cause): now on both copies.
+  2. **coop-cyc THIN=11 was 26/66 (THIN=10 66/66)**: F6a's render-diff step (TH.ctxOut RDIFF: alInitAll / lxInitAll) also gave the HOST's stand-in entry its allotment boxes; the withSeat bridge turned each new piece in the stand-in's bag into "her gift" → a stack of «Quà tặng» cards on the host (Q held 10+) that stopped the week draw. Fix (jcoopthinf.js RDIFF): the stand-in entry leaves the step exactly as it came in (bag + X.STAT restored; F.stat.siFix counts); the host's own render gives him his own boxes (law 6c: no piece out of nothing). → coop-cyc THIN=11 66/66.
+- 0b951921: f6 test: a locked / shared-door card (jact: one act, one lock — Thỉnh an Thái hậu/Hoàng hậu, Hối lộ Kính sự phòng, …) is not tapped (solo greys it; was 3 false reds).
+- eec5b1c8: merge review/coop-thin-f5-r1 9b46e1ad (LIVE 1a4df595; only index.html / sw.js conflicted = generated, rebuilt; no j*.js change).
+- 54793545: coop-timer / coop-night get coop-cyc's local-Worker launch flags (without them no room on wrangler dev, at any level: harness, not game); f6 test: host probe of her stored khắc clock (`uP`: every change by a withSeat run / store drop) printed on a red row.
+
+## Done — SẴN SÀNG KIỂM d8d8447f (review/coop-thin-f6; local Worker THINMAX 11 — FOR MAIN: Worker deploy before level 11 can be switched on)
+| gate | result |
+|---|---|
+| coop-thin-f6 L11 | 39/39 |
+| coop-thin-f6 L11 swap | 39/39 |
+| coop-thin-f6 L11 4G (LAG 85, CPU ×4) | 39/39 + ROWS=A,H ×2 29/29, 30/30 (one earlier 4G run before the uP probe: 38/39, the known `used` row 'Múa trong yến tiệc', host 0 / phone 4; not reproduced in 3 runs since; the probe names the writer if it comes back) |
+| coop-thin-f6 L10 (BEFORE column) | info only: acts with a place (jstagehere ACT_PLACE, main r2/r3) go by the F2 walk intent at L10 (sent 1), so the row's 'local' expectation does not hold there |
+| tripwire L10 → L11 (state) | 8439 → 3637 · F1/act 1766 → **0** · F1/cardH 1055 → **0** · F1/directActs 111 → 108 (leAttire net-zero probe) · D/chooseM 284 → 0 · F2/goTo 139 → 0 · "?" 2599 → 255 (kitHereMsg / stageCapFix S.visit = display, UI-only; evdSync / refreshHere = H; stClose = net-zero) · D·patch 2480 → 3274 (designed: the host's answers) · wdOf S.__wdmig = private marker |
+| latency L11 (tap → answer) | median 498 ms (swap 312), 4G 822–873 ms; local tap → render 65–93 ms |
+| coop-thin-f5 L10 / swap | 31/31 / 30/30 |
+| coop-cyc THIN=11 / THIN=10 | 66/66 / 66/66 |
+| coop-timer THIN=11 · coop-night THIN=11 | 43/43 · 105/105 |
+| coop-e2e / COOP_SWAP=1 | 68/68 / 68/68 |
+| one-core guard / text / text-rule / bind | PASS ×4 |
+| quiet scan | 41 global-quiet reads, 32 reachable (= F6b's count), no new one |
+| Worker npm test | thin ALL OK |
+| quickcheck (old save) | PASS (core gates PASS, old save ok; perf new/live render 235/259 ms, buổi 1225/1229 ms) — needs dev/art in the worktree (mk-layer-scan) |
+| LOOK Fold 755x1000@2 host + iPad 1180x820@2 guest (after a deck card + a quest step; scratch, not uploaded) | kit frames only (Nhập cung intro, Tuyển chọn exam card on the host; Rương đồ / Rương Nội vụ phủ allotment boxes on her phone, once each); no overflow, no cut text |
+| coop-thin-d L4 | 6 kit reds (IMG data-kfsp) also on baseline 7f74ce44 = pre-existing, not F6a (FOR B: owner of kfsp) |
