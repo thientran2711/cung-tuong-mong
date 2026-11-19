@@ -210,12 +210,12 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   const capd=Array.isArray(r)&&r.some(x=>x[0]==='tsDressGo');await G.p.evaluate(ui=>{if(Array.isArray(ui))COOPW.thin.uiPlay(ui)},r);await sleep(800);
   const open=await G.p.evaluate(()=>!!document.getElementById('tsdgo'));const hostOpen=await HO();
   if(!(capd&&open)){ok(false,tag,{r:JSON.stringify(r).slice(0,300),open});continue}
-  const s1=await G.p.evaluate(()=>COOPW.thin.F.stat.sent);
+  const s1=await G.p.evaluate(()=>COOPW.thin.F.stat.sent),L0=await G.p.evaluate(()=>S.logSeq||0);
   await G.p.evaluate(sk=>{if(sk){document.getElementById('tsdskip').click();return}const b=document.querySelector('[data-tsi]');if(b){b.click();const o=document.querySelector('[data-tsact="on"]');if(o)o.click()}document.getElementById('tsdgo').click()},skip);
   await until(G,()=>!COOPW.thin.F.pend&&COOPW.thin.F.lastAns&&COOPW.thin.F.lastAns.n==='tsDressEnd',null,20000);await sleep(1500);await sync();
   const g1=await G.p.evaluate(()=>__her()),h1=await H.p.evaluate(()=>__her());
-  const x=await G.p.evaluate(s1=>{const F=COOPW.thin.F;return {sent:F.stat.sent-s1,ans:F.lastAns&&F.lastAns.n,st:F.lastAns&&F.lastAns.r0&&F.lastAns.r0.st,args:F.lastMsg&&JSON.stringify(F.lastMsg.a).slice(0,160),pod:!!document.getElementById('kpodov'),
-    logs:(S.logs||[]).slice(0,30).map(l=>String(l).replace(/<[^>]+>/g,'').slice(0,90))}},s1);
+  const x=await G.p.evaluate(([s1,L0])=>{const F=COOPW.thin.F;return {sent:F.stat.sent-s1,ans:F.lastAns&&F.lastAns.n,st:F.lastAns&&F.lastAns.r0&&F.lastAns.r0.st,args:F.lastMsg&&JSON.stringify(F.lastMsg.a).slice(0,160),pod:!!document.getElementById('kpodov'),
+    logs:(S.logs||[]).slice(0,Math.max(0,Math.min(30,(S.logSeq||0)-L0))).map(l=>String(l).replace(/<[^>]+>/g,'').slice(0,90))}},[s1,L0]);
   const hpod=await H.p.evaluate(()=>!!document.getElementById('kpodov'));
   const same=JSON.stringify(Object.assign({},g1,{log:0,nlog:0,used:0}))===JSON.stringify(Object.assign({},h1,{log:0,nlog:0,used:0}));
   const placed=x.logs.filter(l=>/Hội phối đồ .*ngươi đứng thứ/.test(l)).length===1;
