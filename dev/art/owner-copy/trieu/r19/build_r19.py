@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """triều phục r19 t1-t6 (owner Lượt 437 on r18 final): build r19/t1..t6_c06_RAN.txt.
 Base = r18/tN_c06_RAN.txt (r18 FINAL as drawn). t7/t8 are KEPT (not rebuilt).
-REPLACE only the owner-named items: (1) SLEEVES sentence: t1-t3 KNEE, t4-t6 ANKLE;
+REPLACE only the owner-named items: (1) SLEEVES = builder sentence verbatim (mk_ranks_v3): t1-t3 KNEE, t4-t6 ANKLE;
 (2) t1 fabric: ADD one BROCADE (gấm) sentence; (3) hà bí: own style per rank;
 (4) bí trụy: own pendant per rank, rising in luxury. Everything else byte-identical to r18."""
 import os, sys
@@ -43,16 +43,17 @@ BROCADE = ("FABRIC OF THIS COURT ROBE: the robe and sleeves are rich silk BROCAD
 
 
 def build(n):
+    # ROOT-47 / owner Lượt 443: sleeves = the builder sentences VERBATIM (mk_ranks_v3.py l.122-123, FIGURE_GATE OWNER LƯỢT 351):
+    # t1-t3 = B.OLD_SLV (knees, Lượt 321 wide thướt tha), t4-t6 = OLD_ANK (ankles). No own sleeve wording (KNEE/ANKLE unused).
     t = open(os.path.join(R18, 't%d_c06_RAN.txt' % n), encoding='utf-8').read()
     t = B.rep(t, B.HABI.format(deep=B.DEEP[n]), HABI.format(deep=B.DEEP[n], style=STYLE[n], pend=PEND[n]))
     if n == 1:
-        t = B.rep(t, B.OLD_SLV, BROCADE + ' ' + KNEE.format(of=', of the same brocade,'))
+        t = B.rep(t, B.OLD_SLV, BROCADE + ' ' + B.OLD_SLV)
     elif n <= 3:
-        t = B.rep(t, B.NEW_SLV, KNEE.format(of=''))
+        t = B.rep(t, B.NEW_SLV, B.OLD_SLV)
     else:
-        t = B.rep(t, OLD_ANK, ANKLE)
+        assert t.count(OLD_ANK) == 1
     return t
-
 
 if __name__ == '__main__':
     for n in range(1, 7):
