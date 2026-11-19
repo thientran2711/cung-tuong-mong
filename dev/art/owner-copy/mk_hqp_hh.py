@@ -6,6 +6,7 @@ B='/home/user/cung-tuong-mong/dev/art/owner-copy/'
 M19=dict(MAIN='caramel apricot',HEX1='#DFBBA1',SEC='soft teal blue',HEX2='#6E9CA8',AGE='about 22')
 ITEM19={7:'a closed parasol of gold silk inlaid with kingfisher feathers, handle of gold filigree set with gems, with gem tassels',
         8:'a closed parasol of imperial silk embroidered with phoenixes, handle of gold carved with phoenixes and set with pearls, with pearl phoenix tassels'}
+LOW_TONE="all colours clear, soft and gentle at a medium-light tone, like fine silk in soft daylight: medium-soft saturation, pretty and clean, the secondary colour a real pretty colour (it may be a little deeper or a soft ivory, never heavy, never black, never grey), never rực, never glaring, never neon, never pastel-washed or faded, never dusty, grey, muddy or black; "   # = t8-prompt-B/build.py LOW_TONE (B18)
 FL2='FABRIC: thick gold-embroidered brocade with a graceful, flowing drape. '  # owner Lượt 364: prompt B
 def templ(t,src):
     s=open(B+src).read()
@@ -17,6 +18,10 @@ def templ(t,src):
     s=s.replace('HAIR UP: ALL of her hair is swept UP','HAIR UP: ALL of her glossy pure BLACK hair (never brown) is swept UP')
     s=s.replace('very long, very wide, flowing sleeves that fall well past her hands down toward her knees, at least as long and wide as the sleeves of the lowest consort ranks','very long, very wide, flowing sleeves that fall well past her hands and hang PAST her ankles all the way down until they TOUCH THE FLOOR')
     s=s.replace('COLOUR RULE',FL2+'COLOUR RULE',1)
+    # BW4 (owner B8 Lượt 543/551 + K18 Lượt 591): ONE reference = her KC_REFS set-B cut; the retired style image sentence is dropped (refs only from our store, never a live img/ file)
+    _st=' The style reference image is only for skin, drawing style, fabric and embroidery: never copy its face, body or pose.'; assert s.count(_st)==1,'style sentence'; s=s.replace(_st,'',1)
+    # BW4 (owner B18 Lượt 586/590/592): the same tone sentence as t8-prompt-B/build.py LOW_TONE (copied verbatim)
+    _fr='all colours fresh, clear and luminous, never dusty or greyed; '; assert s.count(_fr)==1,'tone clause'; s=s.replace(_fr,LOW_TONE,1)
     for k,v in M19.items(): s=s.replace(v,'{'+k+'}')
     assert 'caramel' not in s and 'parasol' not in s and '{ITEM}' in s
     return s
