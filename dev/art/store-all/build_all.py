@@ -92,13 +92,14 @@ def laws(t):
     L.append(HEADBODY)
     if t>=7: L.append(FABRIC_B)
     return L
-# Lượt 397 item 4 (PHI BẠCH): the draped sheer shawl behind the back / over the arms stays on every thường phục rank that HAS it in the store text (word "shawl"); NOT on t7 HQP, t8 Hoàng hậu, Nữ đế.
+# Lượt 397 item 4 (PHI BẠCH): the draped sheer shawl behind the back / over the arms goes on EVERY thường phục rank t1-t6 (ROOT-47 ruling; wording differs where the store text has no shawl); NOT on t7 HQP, t8 Hoàng hậu, Nữ đế.
 # Its colour = the outfit's SECONDARY colour (second word group of her palette), explicit per person, so it does not melt into the dress.
-def phi_bach(person):
+def phi_bach(person,has_shawl=True):
     pal=LAST_G["DATA"][person][0]; main,sec=pal.split(" and ")[0],pal.split(" and ")[-1]
     if sec in ("gold","silver") or " " in sec and sec.split()[-1] in ("gold","silver"): sec_w="a pale soft "+sec.split()[-1]+"-tinted tone of her secondary colour, clearly lighter than the robe"
     else: sec_w=sec
-    return f"PHI BẠCH: the sheer shawl draped behind her back and over her arms is in her SECONDARY colour ({sec_w}), clearly different from her main robe colour {main}, so it does not melt into the dress; it keeps its soft graceful drape."
+    intro="the sheer shawl draped behind her back and over her arms" if has_shawl else "over her outfit she wears a sheer silk shawl (phi bạch) draped behind her back and over her arms; the shawl"
+    return f"PHI BẠCH: {intro} is in her SECONDARY colour ({sec_w}), clearly different from her main robe colour {main}, so it does not melt into the dress; it keeps its soft graceful drape."
 # Lượt 397 item 5 (Tần-style capelet / collar): CURVED cut lines, front opens gradually (no closed, buttoned top-to-bottom front); flowing (uyển chuyển).
 CURVED_CAPELET=("CAPELET CUT (flowing): the lower edge of the capelet and the collar lines are soft CURVES that sweep and scoop gracefully (a little deeper at the centre front), never flat horizontal edges; "
  "the front is NOT closed or buttoned from top to bottom: the robe is closed only at the throat clasp and its front opens gradually from the collar downward in a long soft V, the two front panels parting more and more toward the hem, flowing and graceful (uyển chuyển), never cramped or boxy.")
@@ -107,7 +108,7 @@ CURVED_COLLAR=("COLLAR CUT (flowing): the collar's lower edge follows soft CURVE
 def extras(S0,person,rank):
     L=[]
     if isinstance(rank,int) and rank<=6:
-        if "shawl" in S0: L.append(phi_bach(person))
+        L.append(phi_bach(person,"shawl" in S0))   # owner Lượt 397 via ROOT-47: phi bạch on EVERY thường phục rank t1-t6 (consorts and princesses), also where the store text has no shawl; never t7/t8/Nữ đế/triều phục
         if "capelet" in S0: L.append(CURVED_CAPELET)
         elif "cloud collar" in S0: L.append(CURVED_COLLAR)
     return L
