@@ -34,3 +34,34 @@ Looked at every frame (sheets) + key moments with video_view_frames:
 - Sleeves stay inside the frame in all three; eyes aligned in A/B.
 Files: dev/art/emo-anim/groups/sg2_prompts.py (new). Tools reused: th_cut.py, th_sheet.py, th_preview.py.
 NEXT: nothing until ROOT-57 forwards the owner's answer per group (no other seals, no redo gens without OK).
+
+## OWNER Lượt 800 (via ROOT-57 23:39Z): hh «giận» OK → GO whole Hoàng hậu set (37 left, units of ~4, report per unit, no redo gens);
+## pt + ptl REJECTED ("không có cái đầu đó": no two-wing headdress board, no 'Qing' word) → redraw once each.
+### pt / ptl v2 — SENT 00:05Z (same file names pt-gian*, ptl-gian* on CDN, v1 overwritten; v1 ids above)
+| seal | A | B | OUT | LOOP | BACK |
+|---|---|---|---|---|---|
+| pt-gian v2 | u5WRfpSQLD | ov67X9S829 | CqnifXtEEy (start 1.8 s) | KLpY5fokqp | rgX01Qpxtc |
+| ptl-gian v2 | dt4SD2gXSL | gOmestXSXO | cpS1WZa0eP (start 1.0 s) | UPvXSxJwny | s7IDLK5l8e |
+Look: own high bun, gold + jade pins, pearl drops, silk flowers (ptl denser: 2 phoenix pins, purple jewels). 2 × 3 090 = 6 180 cr.
+### Hoàng hậu UNIT 1 (vui buon so an) — SENT ~00:15Z
+| seal | A (used) | B | OUT | LOOP | BACK | notes |
+|---|---|---|---|---|---|---|
+| hh-vui | s7IDLYnl8e (= UPvXgv5wny flattened) | nVs5zZHYQD | 6Abf6yeiJO (1.2 s) | gOmegj4SXO | JNC8JSKOq4 | ok |
+| hh-buon | Syhdg0KUb8 (= fHz6vnaCDY flattened) | w4aBUlH7EI | P3QmPJK42C (0.6 s) | 79fo7UjJAL | rgX0r1Ixtc | FAULT: BACK ~1 s her sleeve stretches into a long red/yellow ribbon swoosh |
+| hh-so | iG5C6t83uK (= Lw8MxmAswO flattened) | P3QmyJk42C | eIPgee4dqL (auto 0.33 s) | BhN7881oQR | 3zKuZ2YREY | NOTE: OUT she jumps far out, hands spread wide + big shiver lines, then settles hands-to-mouth |
+| hh-an | ov67XZy829 | EbY3CCLuuO | gOmdUwxSXO (0.6 s) | 79f8OPSJAL | ksecrLB16B | ok |
+CDN: hh-<k>-out.webp / hh-<k>.webp / hh-<k>-back.webp / still/hh-<k>.webp / hh-<k>-frames.jpg, hh-u1-preview.mp4 (Vietnamese captions).
+Unit 1 = 8 × 135 + 12 × 940 = 12 360 cr. Session total so far: 9 270 + 6 180 + 12 360 = 27 810 cr. Ledger: 15 + 18 + 12 = 45 lines.
+
+## HANDOVER (context ≈ 30 % = roll line; START_CTX ≈ 5 %) — successor continues the Hoàng hậu set from UNIT 2
+- State: dev/art/emo-anim/groups/sg2_state.json (all ids). Prompts: `python3 dev/art/emo-anim/groups/hh_prompts.py <keys>` (th_prompts.py method,
+  her look swapped in; asserts no Thái hậu words / no 'Qing'). Order = hh_prompts.ORDER: vui buon so an DONE → next units:
+  [binh dau ghen lo] [muu tutin hanghai tinhtu] [chuyentam hungkhoi tinhnghich hothen] [chan khochiu choang hon] then the 17 act-* (4-5 per unit).
+- «đau» = NEW heart-ache wording in hh_prompts.DAU (no wailing, one tear, hand on heart); SEAL5 has its own version — if SEAL5's is on the
+  branch by then, compare and use the owner-approved one.
+- Per unit: A (gpt-2-6 1:1 2k, ref hh-gian A gOmeqH6SXO) ×4 parallel → `kf.py` (download, flatten transparent → green, one contact sheet) →
+  upload flattened ones → B (ref = own A) ×4 → look → 12 clips Seedance fast 2.0 4 s 1:1 720p no sound keyframes only → `cutset.py hh-<k>
+  out=URL loop=URL back=URL A=<flattened A png>` → look at sheets, re-cut OUT start with `out@<s>=x` where she sits still → `preview_vi.py
+  img/_review/emo-anim-groups/hh-uN-preview.mp4 "hh-<k>:Hoàng hậu · <VI caption>" …` (captions: hh_prompts.caption(k)) → cdn_sync →
+  ledger lines (append; git add --sparse dev/art/gen_ledger.jsonl) → report here + send ROOT-57. Helper scripts in dev/art/emo-anim/groups
+  (kf.py, cutset.py, preview_vi.py; work dir $SG2_G default /tmp/sg2/g). One try per gen, no redo without foreman OK.

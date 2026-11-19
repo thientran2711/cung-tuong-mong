@@ -1,0 +1,44 @@
+{
+ "pt": {
+  "A": "u5WRfpSQLD",
+  "B": "ov67X9S829",
+  "out": "CqnifXtEEy",
+  "loop": "KLpY5fokqp",
+  "back": "rgX01Qpxtc"
+ },
+ "ptl": {
+  "A": "dt4SD2gXSL",
+  "B": "gOmestXSXO",
+  "out": "cpS1WZa0eP",
+  "loop": "UPvXSxJwny",
+  "back": "s7IDLK5l8e"
+ },
+ "hh-vui": {
+  "A": "s7IDLYnl8e",
+  "B": "nVs5zZHYQD",
+  "out": "6Abf6yeiJO",
+  "loop": "gOmegj4SXO",
+  "back": "JNC8JSKOq4"
+ },
+ "hh-buon": {
+  "A": "Syhdg0KUb8",
+  "B": "w4aBUlH7EI",
+  "out": "P3QmPJK42C",
+  "loop": "79fo7UjJAL",
+  "back": "rgX0r1Ixtc"
+ },
+ "hh-so": {
+  "A": "iG5C6t83uK",
+  "B": "P3QmyJk42C",
+  "out": "eIPgee4dqL",
+  "loop": "BhN7881oQR",
+  "back": "3zKuZ2YREY"
+ },
+ "hh-an": {
+  "A": "ov67XZy829",
+  "B": "EbY3CCLuuO",
+  "out": "gOmdUwxSXO",
+  "loop": "79f8OPSJAL",
+  "back": "ksecrLB16B"
+ }
+}
