@@ -45,13 +45,13 @@ const [,,URL,PIDS,SIZE,SHOT]=process.argv;const sleep=t=>new Promise(r=>setTimeo
     S.rank=2;S.out=1;S.place="lc";look(`lanh cung`,"tcold");S.out=0;S.place="home";
     try{const w=wdOf(S);const y=w.y;w.y=null;S.rank=3;look(`trung y r3`,"ty4");w.y=y}catch(e){R.push({label:"ty err "+e.message,want:"",got:{},wrong:["err"]})}
     mk("srv");S.age=age;
-    for(let rk=0;rk<5;rk++){S.srv.rk=rk;S.srv.lau=0;look(`cung nu rk${rk}`,"tm"+rk)}
+    for(let rk=0;rk<SRK.maid.length;rk++){S.srv.rk=rk;S.srv.lau=0;look(`cung nu rk${rk}`,"tm"+srkTier(rk))}/* maid-ladder-6: 6 rungs, dress by tier */
     S.srv.rk=2;S.srv.mama=1;look(`ma ma`,"tm4");S.srv.mama=0;
     S.srv.lau=2;S.srv.rk=0;look(`tan gia kho`,"tm0");S.srv.lau=0;
    }
    /* NPC maids: rank dress */
    const nm=[];try{const L=(typeof allServ==="function"?allServ():[]).filter(s=>s&&s.role==="maid"&&(s.age||18)<36);
-     for(const s of L.slice(0,12)){const rk=srk(s);const f=figFor({ref:s});const t=tierOf(f);if(f&&!t.startsWith("tm"+rk))nm.push(s.name+" rk"+rk+" "+t)}}catch(e){nm.push("err "+e.message)}
+     for(const s of L.slice(0,12)){const rk=srk(s);const f=figFor({ref:s});const t=tierOf(f);if(f&&!t.startsWith("tm"+srkTier(rk)))nm.push(s.name+" rk"+rk+" "+t)}}catch(e){nm.push("err "+e.message)}
    R.push({label:"NPC maids (rank dress)",want:"tm<rk>",got:{},wrong:nm});
    return R},pid);
   for(const x of r){n++;if(x.wrong.length){bad++;console.log(pid,x.label.padEnd(16),"want",x.want,"WRONG",x.wrong.join(" | "))}

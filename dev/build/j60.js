@@ -19,7 +19,7 @@ const KIT_ROLES={player:{n:"Ngươi",sex:"f",metal:null},consort:{n:"Phi tần",
  guard:{n:"Thị vệ",sex:"m",metal:"#9aa2a8"},unknown:{n:"Người lạ",sex:"f",metal:"#b8bcc2"},other:{n:"",sex:"f",metal:"#c9a24a"}};
 /* servant rank palettes (owner 11/14): maids thô sử..nữ quan, eunuchs tiểu thái giám..tổng quản; a global MRCOL/ERCOL wins when defined */
 window.KIT_MRCOL=window.MRCOL;window.KIT_ERCOL=window.ERCOL;/* aliases of the j1 palette, never copies of values */
-function kitServCol(role,r){const M=typeof MRCOL!=="undefined"?MRCOL:window.KIT_MRCOL,E=typeof ERCOL!=="undefined"?ERCOL:window.KIT_ERCOL;const L=role==="eunuch"?E:M;return L[Math.max(0,Math.min(L.length-1,+r||0))]}
+function kitServCol(role,r){const M=typeof MRCOL!=="undefined"?MRCOL:window.KIT_MRCOL,E=typeof ERCOL!=="undefined"?ERCOL:window.KIT_ERCOL;const L=role==="eunuch"?E:M;/* a maid RUNG reads its colour tier (BAL.srvRk.tier, maid-ladder-6) */if(role!=="eunuch"&&typeof srkTier==="function")r=srkTier(+r||0);return L[Math.max(0,Math.min(L.length-1,+r||0))]}
 const KIT_ORIGINS=["tt","dtq","muoi","cn","nc","td","ch","thd"];
 /* the hook another worker implements; keep the name; override by assigning window.kitKnown */
 if(typeof window.kitKnown!=="function")window.kitKnown=function(p){return true};
@@ -37,7 +37,7 @@ function personRoleRank(p,hint){const out=(role,rank,extra)=>Object.assign({role
   if(typeof rivals!=="undefined"&&rivals.includes(p)){if(p.out)return out("cold","cold");return out("consort",p.queen?7:cl(p.rank||0,0,7))}
   if(typeof allKids==="function"&&allKids().some(([k])=>k===p)||(p.sex&&p.hp!=null&&/^(Hoàng tử|Công chúa)/.test(p.name||""))){const kid=(p.age||0)<13;
    return out(p.heir?"heir":p.sex==="m"?"prince":"princess",null,{kid,sex:kid?"k":p.sex==="m"?"m":"f"})}
-  if(S&&p===S.maid)return out((p.age||18)>=36||p.old?"mama":"maid",p.rk!=null?p.rk:2);
+  if(S&&p===S.maid)return out((p.age||18)>=36||p.old?"mama":"maid",p.rk!=null?p.rk:BAL.srvRk.dai);
   if(p.role==="maid")return out((p.age||18)>=36||p.old?"mama":"maid",p.rk==null?1:p.rk);
   if(p.role==="eunuch")return out("eunuch",p.rk==null?1:p.rk);
   if(S&&S.court){const k=Object.keys(S.court).find(x=>S.court[x]===p);if(k)return k==="ty"?out("physician"):out("eunuch",k==="tq"?3:2)}
@@ -60,7 +60,7 @@ function kitDecor(f){f=f||{};let r=f.__kr||(f.__kp?personRoleRank(f.__kp):null);
  const rank=r.rank;
  if(role==="player"||role==="consort"){frame=`frame-consort-${rank}`;/* her frame = the consort frame of her rank (owner 11/14); the stage marks her */bg=`bg-consort-${rank}`;badge=`gem-${rank}`;col=kitRankCol(rank);if(role==="player"&&r.origin)emb=`origin-${r.origin}`}
  else if(role==="eunuch"){const r=cl(rank||0,0,3);frame=`frame-eunuch-${r}`;bg=r>=3?"bg-eunuch-3":"bg-eunuch";badge=`tok-e${r}`;col=tint=kitServCol("eunuch",r)}
- else if(role==="maid"||role==="mama"){const r=cl(rank||0,0,4);frame=`frame-${role}-${r}`;bg=`bg-${role}`;badge=`tok-m${r}`;col=tint=kitServCol("maid",r)}
+ else if(role==="maid"||role==="mama"){/* rank = the maid RUNG; art / frame / badge by its tier (BAL.srvRk.tier, maid-ladder-6) */const r=cl(typeof srkTier==="function"?srkTier(rank||0):rank||0,0,4);frame=`frame-${role}-${r}`;bg=`bg-${role}`;badge=`tok-m${r}`;col=tint=kitServCol("maid",rank||0)}
  else if(role==="cold"){frame="frame-cold";bg="bg-cold";col=KIT_COLD_COL}
  else if(role==="unknown"){frame="frame-unknown";bg="bg-unknown";badge="tok-unknown";col="#9aa0a6"}
  else if(role==="other"){frame="frame-man";bg="bg-default";col=f.col||"#c9a24a"}
