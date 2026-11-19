@@ -1145,11 +1145,16 @@ import os
 LEDGER=os.path.join(os.path.dirname(os.path.abspath(__file__)),"..","gen_ledger.jsonl")
 REF_STYLE={"name":"style3_girls (the three approved girls m09 + c06 + c25, one image) = STYLE only","magnific_id":"Xm9tPkMBfo","url":"https://ctm-img.victoria-tntt.workers.dev/img/_review/style-refs/style3_girls.png"}
 REF_SWATCH={"name":"royal-yellow swatch = colour only","magnific_id":"TdwDfOyVNR (OLD account: re-upload the CDN file on the current one)","url":"https://ctm-img.victoria-tntt.workers.dev/img/_review/swatch/royal_yellow_C2.png"}
+def _reorder_refs(o):
+    o=o.replace("The second reference image is style only","The FIRST_REF_TMP reference image is style only")
+    o=o.replace("image 1 (her first reference)","image 2 (her second reference)")
+    o=o.replace("first reference","second reference").replace("First reference","Second reference")
+    return o.replace("FIRST_REF_TMP","first")
 def gen_refs(argv,prompt):
-    """A0 reference list in the order the prompt text uses: image 1 = her own live picture (face only; re-make states: her live tier+age picture), image 2 = style3_girls, image 3 = royal swatch (only when the prompt carries the ROYAL3 sentence)."""
+    """A0 reference list (owner order): image 1 = style image, image 2 = her own live picture (face only; re-make states: her live tier+age picture), image 3 = royal swatch (only when the prompt carries the ROYAL3 sentence)."""
     a=[x for x in argv if not x.startswith("--")]; age=argv[argv.index("--age")+1] if "--age" in argv else "a18"
-    r=[{"image":1,"name":"own live t1 of %s at %s (a65 = her a65 t1 / live picture) = FACE only; re-make states: her live tier+age picture"%(a[0] if a else "?",age)}]
-    if "--nostyle" not in argv: r.append({"image":2,**REF_STYLE})
+    own={"name":"own live t1 of %s at %s (a65 = her a65 t1 / live picture) = FACE only; re-make states: her live tier+age picture"%(a[0] if a else "?",age)}
+    r=[{"image":1,**own}] if "--nostyle" in argv else [{"image":1,**REF_STYLE},{"image":2,**own}]   # ROOT-38: owner order 1 style, 2 own, 3 swatch
     if "Image 3 is only a colour reference" in prompt: r.append({"image":3,**REF_SWATCH})
     return r
 def _run_cmd(argv):
@@ -1248,6 +1253,9 @@ if __name__=="__main__":
     if K3_BG_OLD in _o: assert _o.count(K3_BG_OLD)==1; _o=_o.replace(K3_BG_OLD,"",1)
     assert _o.count("IGNORE")==0 or "--golden" in sys.argv,"K3 already present"
     if "--golden" not in sys.argv: _o=_o[:-len(END)]+_k3+END if _o.endswith(END) else _o+_k3   # --golden = frozen A/B reproduction (golden/pB_*.txt), never a gen mode
+    # ROOT-38 REF ORDER (owner A0 REFERENCES l.16): image 1 = style image, image 2 = her own face/live picture, image 3 = royal swatch.
+    # Approved texts keep their old numbering in source; only the ordinal words are renumbered here (style first <-> identity second). --nostyle / --golden: unchanged.
+    if "--nostyle" not in sys.argv and "--golden" not in sys.argv: _o=_reorder_refs(_o)
     print(_o,end="")
     _lg=[x for x in _RAW if x not in ("--log","--refs")]
     if "--gen-id" in _lg: _i=_lg.index("--gen-id"); _gid=_lg[_i+1]; _lg[_i:_i+2]=[]
