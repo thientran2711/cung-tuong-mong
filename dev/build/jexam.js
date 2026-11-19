@@ -269,7 +269,7 @@ function exSrvTick(){if(!exOn()||!isSrv()||S.dead)return;const e=exSrvS();if(e.p
 function exSrvMama(){if(!exOn()){S.srv.mama=1;log("Ngươi ở lại cung làm ma ma.");return}S.srv.ex={to:"mama"};exSrvOpen("mama")}
 /* NPC servants: one seeded roll per month at their rank as level; true = the rise is given */
 function exSrvNpc(s){try{if(!exOn())return true;if(s.coop)return true;if(s.exCd>S.turn)return false;const lv=srk(s);
- const rnd=exRng(((s.sid||1)*7919+(S.turn||0)*104729)|0);const raws=[0,1].map(()=>exRaw(lv,rnd,null,s,Math.max(1,Math.min(4,lv+1))));/* mg2: their rank as level (servants keep no art levels), the target rank as the stake */const avg=(raws[0]+raws[1])/2;const B=BAL.ex;
+ const rnd=exRng(((s.sid||1)*7919+(S.turn||0)*104729)|0);const raws=[0,1].map(()=>exRaw(lv,rnd,null,s,Math.max(1,Math.min(BAL.srvRk.nq,lv+1))));/* mg2: their rank as level (servants keep no art levels), the target rank as the stake */const avg=(raws[0]+raws[1])/2;const B=BAL.ex;
  const tot=Math.round(avg*B.wPlay)+Math.round((s.loyal||50)/25);const pass=tot>=B.srvBar[Math.max(1,Math.min(BAL.srvRk.nq,lv+1))];
  const N=window.__exN;N.npcSrvSit=(N.npcSrvSit||0)+1;if(pass){N.npcSrvPass=(N.npcSrvPass||0)+1;s.exCd=0;return true}
  s.exCd=S.turn+B.srvCd[Math.max(1,Math.min(BAL.srvRk.nq,lv+1))];return false}catch(e){return true}}

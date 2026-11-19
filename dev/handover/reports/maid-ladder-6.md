@@ -69,7 +69,7 @@ Load order: BAL.srvRk + BAL.srvWage live in jbal.js (loads before j42, which rea
 Scan: `grep -rnoE "SRK\.maid\[[0-9]\]|srv\.rk\s*[<>=]=?\s*[0-9]|srk\([a-z]+\)\s*[<>=]=?\s*[0-9]|\.rk\|\|0\)\s*[<>=]=?\s*[0-9]|\"sv[0-9]\"" dev/build` (maid context).
 | | before | after |
 |---|---|---|
-| typed maid-rung numbers in gates (rk>=2 / >=3 / min(4) / sv2 / mama 5) | 27 | 0 (left: rk>=1 «not thô sử», rk 0/1 starts, eunuch srk>=3 in j8 — eunuch ladder unchanged) |
+| typed maid-rung numbers (rk>=2 / >=3 / min(4) / sv2 / mama 5 / private fallback arrays) in maid code | 32 sites (rows 1–29 + jexam:272 NPC exam tier clamp) | 0 — the broad scan now lists only unrelated clamps (item grades, pips, timers) + rk>=1 «not thô sử» + rk 0/1 starts; eunuch srk>=3 in j8 kept (eunuch ladder unchanged) |
 | rung tables in BAL with one entry per rung | 5 entries (srvBar/srvCd 6 incl. ma ma) | 6 (+ ma ma = 7): srvBar, srvCd, srvWage, mline.eye, dbCost, promo.srv |
 | private fallback arrays (jexam NPC `B.srvBar||[...]`) | 2 | 0 |
 
