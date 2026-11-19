@@ -24,3 +24,26 @@ TOTAL to push: 258 figures (G1 64 + G2 62 + G3 62 + G4 6 + G5 32 + G6 32), each 
 Flag for Foreman C: c03 a18 t7/t8 live today = the owner-approved original-design v1 recolour (W54, 16:16Z). The brief says push all t7/t8 prompt-B, so c03 a18 t7/t8 get prompt-B v0 too (old twins backed up, revert = copy back). Say STOP c03 if wrong.
 Backup path (CDN): img/_backup/1118-live/<same path as the live file> (fig, hd, por, tn) before every overwrite.
 Order: G1 → G2 → G3 → G4 → G5 → G6.
+
+## 2. LIVE — DONE (all 6 groups, 258 figures), 19/11 ~00:45Z real
+| group | figures | files pushed (fig/hd/por) | backup |
+|---|---|---|---|
+| G1+G2+G3 t7/t8 prompt-B v0 a18/a26/a36 | 188 | 561 | 561 |
+| G4 a51 dark v0 c04/c05/c13 t7/t8 | 6 | 18 | 18 |
+| G5 kc a18 (c09 c11 c13 c16 = _new) | 32 | 93 (no hd on 3) | 93 |
+| G6 ngheo a18 (13 = _new) | 32 | 93 (no hd on 3) | 93 |
+No tn twins exist for these names (t7/t8/kc/ngheo). FIGURES*.json unchanged (same names).
+- BACKUP: every overwritten live file first copied to CDN img/_backup/1118-live/<same path> (765 files, cdn_sync --check same 561 + 204). Revert = copy back.
+- METHOD (c03 procedure): finish_fig.py (fig 900 = old figure height, hd 1800, same names). Bust: finish_fig's template crop was off on the new tall crowns, so every por is re-seated by face mesh (scratch porface.py: lm10/152 + cheeks) to the old por's face size and position; face height kept within ~±8 %.
+- LOOKED: all 258 on 11 contact sheets (full figure + new|old bust): whole body inside, nothing cut, faces in place. Notes: c13 kc/ngheo, c16 ngheo, c30 ngheo have a faint floor shadow under the feet (as painted in the approved files); c09 kc holds flute + a small songbird on the hand (K5 kept her spec5 songbird pose).
+- ANCHORS: mk-fit verify.py --fix re-seated 296 (G1) + 76 (G2) sets; second pass 376/376 + 140/140 ok. fixtoil re-seated 188 + 34 mouths (only ours), after: 0 off > .10. fig-ht.json 258 rows re-measured (8893 rows, none lost). mk-fit md5.json 516 rows.
+- GUARD: manifest_guard --live-check PASS (after each group); cdn_sync held 0.
+- SPOT-CHECK (live md5 = ours, looked): fig c06-t8-a18, hd c19-t7-a26, por c29-t8-a36, fig c13-t8-a51, hd c09-kc-a18, por c31-ngheo-a18.
+- NOT done: in-game stage shots (fullbody-frame-scan) — only file checks; heights equal the old live figures, so frames are unchanged.
+- REPO COPIES: review/live-today-1118 a8f0d55 (= origin/main 9a1d692 + 2 commits: dev/art/headtop/fig-ht.json, dev/art/mkfit/consort-*.json + md5.json, dev/art/toil-fit2.json). Main untouched.
+- c03 a18 t7/t8: the W54 original-design files were replaced by prompt-B v0 per the brief (old files in the backup).
+
+FOR MAIN (LIVE-1 via Foreman C ROOT-34, 19/11 ~00:45Z): today's owner-approved figures are LIVE on the CDN — t7 Hoàng quý phi + t8 Hoàng hậu prompt-B v0 for a18/a26/a36 (188), a51 dark c04/c05/c13 (6), khuê các + nhà nghèo a18 2K re-makes/new/poor-fix for all 32 (64). Land review/live-today-1118 a8f0d55 (fig-ht, mk-fit, md5, toil-fit2 repo copies). Still NO live slot (needs MAIN wiring): t7/t8 v1/v2 outfit colours, a65 ages, Thái hậu 32 × a36/a51/a65 (img/_review/thaihau/), a51 dark for the other 29 people (never painted).
+
+## HANDOVER: none needed — job complete. Context ~25 % (START_CTX ~3 %).
+~100% xong / ~100% chơi được (258 figures live; repo rows wait MAIN landing).
