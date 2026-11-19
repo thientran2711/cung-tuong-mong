@@ -29,6 +29,19 @@ Sheet: dev/handover/review-sheets/live/kc_swap.jpg (m13, m01, c01 before | after
 2. Repo copies on main are now stale for these names: dev/art/mkfit/{consort-*,maid-*}.json + md5.json, dev/art/headtop/fig-ht.json, dev/art/toil-fit*.json — pull from CDN (img/mk-fit/*, img/fig-ht.json, img/toil-fit2.json) when next landing.
 3. Comment in the kc home-dress block ("r2: the CDN list now also has a26/a36/a51 khuê các dresses") is out of date; consort kc art is gone → t1 fallback (owner may want a new home dress later = new gens, not LV1).
 
+
+## CORRECTION 19/11 ~20:05Z — consort kc RESTORED (ROOT-50 msg 18:45Z Lượt 562 + ROOT-51 18:52Z reached LV1 only at 19:13Z, after the removal)
+Order: "c01–c32 kc keys — do NOT remove yet; list them as 'archive when new faces land'". Done:
+- 291 consort kc files (128 fig + 35 hd + 128 por) copied back from img/_rejected/live-old/ to their live paths, md5 = the backed-up originals (restore.py). The copies in _rejected/live-old/ stay.
+- FIGURES-kc.json 136 → 264: 128 consort kc rows rebuilt (role/identity/tier/ageBand/palette/file/por; the old magnificUrl/bg ids were lost with the edit; sheet = "restored … archive when the new c01–c32 faces land"). FIGURES-hd.json +35 consort kc hd entries (4180). Guard PASS, URLs 200.
+- Fit rows of the 256 consort kc fig/por re-measured on the restored files: POR_FACE2, fig-ht, mk-fit + md5, veil/scar/keep (256 keep rows, 0 implausible); toil-fit/toil-fit2 64 rows restored from main's repo copy, fixtoil = 0 changes.
+- LOST (no tool, no backup): FIGLIGHT rows of 127 consort kc names and face-fit (outliers only) rows of 21 → the game uses its default skin light / face polygon on those until re-measured.
+- Fixed my own earlier mistake: the 104 maid keep-fit rows had been measured against the OLD veil rows; re-measured against the new ones (104 rows, 0 implausible, was 92 + 12 missing).
+- Still REMOVED (per the order "m01–m52 old kc → set-B swap"): maid kc a26/a36/a51 (156 rows; files in _rejected/live-old/). Maid age 26+ at home shows her a18 v3 picture.
+- ARCHIVE WHEN NEW FACES LAND: consort c01–c32 kc a18/a26/a36/a51 = 128 rows / 291 files (and every other c01–c32 picture, owner Lượt 562).
+- FOR MAIN floor (replaces item 1 above): FIGURES-kc floor → {"consort|kc":128,"consort|ngheo":32,"maid|kc":52,"maid|ngheo":52}, n 264.
+- What the game shows now: consorts at home = their 18/11 khuê các as before; maids = thiếu nữ v3.
+
 ## STEP 2 — REPORT ONLY: other live figure sets older than the current approved recipes (nothing changed)
 Counts = manifest rows (each row = fig + por [+ hd]); "ids" = people.
 | # | live set (manifest) | rows | status vs approved recipe |
