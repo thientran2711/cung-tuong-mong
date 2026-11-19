@@ -23,3 +23,11 @@ Vietnamese names: a-ca-so A ca sở · canh-phuc-cung Cảnh Phúc cung (chính 
 - CHÍNH ĐIỆN bedrooms = the palace head (Tần/Phi/Quý phi level): one grand bed, rank colour accents, no phoenix, no yellow.
 - ADD: khon-ninh-cung-ngu = the Hoàng hậu's bedroom (the most splendid, yellow + phoenix allowed).
 - REDO the sample thua-minh-cung-dong-phoi-ngu (it had a phoenix and yellow): two beds, rank colours; keep the old one as a skin.
+
+## ROUND 3 — ROOMS PER RANK, SAMPLE FIRST (owner Lượt 447, 19/11 ~16:26Z, in ROOT-47 chat; overrides ROUND 2 scope; RANK RULES of Lượt 446 still apply)
+- STOP all other room drawing (R2A/R2B stopped; what they drew is KEPT, skins/reference).
+- (1) LOW ranks (Đáp ứng / Thường tại / Quý nhân) living in the phối: do NOT draw a shared mixed-rank room. ONE reception picture + ONE bedroom picture per phối place, at QUÝ NHÂN level of prettiness (highest low rank; accent = Quý nhân pale blue). One bed (not two — Lượt 447 replaces the two-bed rule).
+- (2) From TẦN up each consort lives alone: every palace chính điện is drawn in THREE rank versions = TẦN (pink accent), PHI (purple accent), QUÝ PHI (rose red accent); luxury Tần < Phi < Quý phi, never reaching the Empress. Each version = BEDROOM + RECEPTION. 10 palaces × 3 ranks × 2 rooms.
+- (3) HOÀNG HẬU: ONE set at Khôn Ninh (bedroom + reception), the most dazzling; phoenix + imperial yellow ONLY here.
+- Names: <palace>-<tan|phi|quyphi>-ha-sang.webp (reception) and <palace>-<tan|phi|quyphi>-ngu-ha-sang.webp (bedroom); phối: <phoi-key>-ha-sang / -ngu-ha-sang; khon-ninh-cung-ha-sang / khon-ninh-cung-ngu-ha-sang. All in img/_review/place-rank/.
+- SAMPLE FIRST ("vẽ mẫu"): ONE palace (Cảnh Phúc cung) × Tần/Phi/Quý phi × bedroom + reception = 6, plus one phối pair (thua-minh-cung-dong-phoi) + the Khôn Ninh pair = 10 pictures → owner verdict before any mass.
