@@ -661,3 +661,39 @@ p = out11b['truong-xuan-cung-hqp-ngu-A']['prompt']
 out11c = {'truong-xuan-cung-hqp-ngu-A-r1': dict(prompt=p.replace(ANG11.replace('{SUBJ}', 'canopy bed'), ANG11C.replace('{SUBJ}', 'canopy bed')), refs=out11b['truong-xuan-cung-hqp-ngu-A']['refs'])}
 assert out11c['truong-xuan-cung-hqp-ngu-A-r1']['prompt'] != p
 json.dump(out11c, open(os.path.join(D, 'prompts_v11c.json'), 'w'), ensure_ascii=False, indent=1)
+# ---- v11d (ROOT-53 20:41Z, L14 + A9/A21 auto-regen): 4 angled rooms turned too little → ONLY the angle sentence = ANG11C (the strong turn of yiu8HmwPW9);
+#      for receptions the bed-only words of ANG11C are generalised; HH reception + one sentence: chair rows whole inside the picture (ROOT-53 edge fix).
+ANG11R = ANG11C.replace("so its long side and its foot end both show clearly and the bed runs diagonally", "so its front and its side both show clearly and it runs diagonally")
+EDGE = " The chair rows stay whole inside the picture, never cut by the picture edges."
+out11d = {}
+for k, src, subj, A in [('khon-ninh-cung-ngu-A-r1', out11['khon-ninh-cung-ngu-A'], 'canopy bed', ANG11C),
+                        ('canh-phuc-cung-quyphi-ngu-A-r1', out11b['canh-phuc-cung-quyphi-ngu-A'], 'canopy bed', ANG11C),
+                        ('truong-xuan-cung-hqp-A-r1', out11['truong-xuan-cung-hqp-A'], 'host daybed on its platform with the arch frame', ANG11R),
+                        ('khon-ninh-cung-A-r1', out11['khon-ninh-cung-A'], 'throne platform with its arch frame', ANG11R)]:
+    old = ANG11.replace('{SUBJ}', subj); assert old in src['prompt'], k
+    new = A.replace('{SUBJ}', subj) + (EDGE if k == 'khon-ninh-cung-A-r1' else '')
+    out11d[k] = dict(prompt=src['prompt'].replace(old, new), refs=src['refs'])
+json.dump(out11d, open(os.path.join(D, 'prompts_v11d.json'), 'w'), ensure_ascii=False, indent=1)
+print('v11d', list(out11d))
+# ---- v11e (owner Lượt 658 via ROOT-53: angled bedrooms look like a bed dumped into a hall; keep a LOGICAL bedroom layout = the frontal arrangement
+#      seen from another angle). Changes vs v11d bedroom prompts: BIG11 "standing free with open floor around it" (our words) → bed in its place;
+#      angle sentence: bed stays against the back wall; + LOGIC11 sentence (her point).
+BIG11L = (" BED SIZE (owner Lượt 635): the canopy bed is big and takes real space in the room: about one third of the picture width, its crown near the "
+          "top edge, never squeezed between shelves, screens or other furniture.")
+LOGIC11 = (" LOGICAL BEDROOM LAYOUT (owner Lượt 658): even from this new angle the room keeps a real bedroom arrangement: the bed stays in its proper "
+           "place, its head against the back wall under its canopy, with its footstool and curtains, and the dressing table, the screen, the shelves "
+           "and the stools arranged around it exactly as in image 3; the same arrangement as image 3, only seen from another angle; never a bed "
+           "standing alone in the middle of a hall.")
+ANGB = ANG11C.replace("so its long side and its foot end both show clearly and the bed runs diagonally across the picture, exactly like the slanting bed in image 4;",
+                      "so its front and its side both show clearly while it stays against the back wall, like the slanting view of the bed in image 4;")
+assert ANGB != ANG11C
+out11e = {}
+for k, src in [('truong-xuan-cung-hqp-ngu-A-r2', out11c['truong-xuan-cung-hqp-ngu-A-r1']), ('khon-ninh-cung-ngu-A-r2', out11d['khon-ninh-cung-ngu-A-r1']),
+               ('canh-phuc-cung-quyphi-ngu-A-r2', out11d['canh-phuc-cung-quyphi-ngu-A-r1'])]:
+    p = src['prompt']; old = ANG11C.replace('{SUBJ}', 'canopy bed'); assert old in p, k
+    p = p.replace(old, ANGB.replace('{SUBJ}', 'canopy bed') + LOGIC11)
+    if BIG11 in p: p = p.replace(BIG11, BIG11L)
+    assert 'standing free' not in p
+    out11e[k] = dict(prompt=p, refs=src['refs'])
+json.dump(out11e, open(os.path.join(D, 'prompts_v11e.json'), 'w'), ensure_ascii=False, indent=1)
+print('v11e', list(out11e))
