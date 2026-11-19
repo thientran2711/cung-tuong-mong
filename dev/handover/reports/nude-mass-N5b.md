@@ -19,3 +19,15 @@ build.py spec5pose: `--state nude` → ONE calm Pose sentence for every person/a
 - Gens 9, regens 0, credits 9×135 + 9×3 = 1,242.
 Sheet: https://ctm-img.victoria-tntt.workers.dev/img/_review/nude-mass/sheet_c09-c11.jpg
 TODO: c12–c16 × 5 ages (25 gens).
+
+## STOP ORDER (ROOT-36, ~01:00Z): no more gens. Owner rules FIGURE_GATE 3f (item per AGE × RANK) + 3d2 (FRONTAL only) change every Nữ đế image; c09–c11 will be redone. c12 a18 call errored (nothing queued). Face refs uploaded for c12: a18 xSBSVuljfW, a26 gOmOd5PSXO, a36 p8y8gzTehw, a51 Tdwdj2OVNR; c11: a18 bxMxARb5Y2, a26 yiui8BqPW9, a36 vQAQPyRa47, a51 If3f771tvE; c10: a26 gOmORMfSXO, a36 rgXg4WVxtc, a51 bxMx7Gy5Y2; c09 a51 VX7XajhMMU.
+
+## ITEM TABLE — DONE (b6b8233)
+- dev/art/t8-prompt-B/item_age.py = single source: KIND (20 kinds × 14 statuses, luxury rising), AGE_KINDS (per-age pools), cell(age,status) → 10 items, pick_item(cNN, age, status) (rotates by person, never the same KIND at two of her ages), `python3 item_age.py check` (0 short cells, 0 repeats), `python3 item_age.py md > ../item-rank-age.md`.
+- dev/art/item-rank-age.md = generated table (edit the .py, never the .md). Summary sent to ROOT-36. Assumption: khuê các / nhà nghèo only a18/a26, Thái hậu a36/a51/a65.
+
+## HANDOVER N5b → successor (rolling over at ~25 % context, line ~30 %)
+TODO (wait for ROOT-36 / owner OK on the table first):
+1. build.py frontal rewrite (3d2): every pose sentence with "three-quarter" / "slight turn" → frontal (body and face facing the viewer); the nude calm sentence in spec5pose (my 79e60ff block, `if globals().get("STATE")=="nude"`) says "frontal or a slight three-quarter turn" → change to "standing frontal, body and face facing the viewer". Also the header "face clearly visible, 3/4 or frontal view" is in the shared preamble → frontal. Guard every other output; check what N3b/7d49028 (--bdq) and 0376bfc (trieu) already changed so you don't double-edit.
+2. Wire pick_item into build.py: Nữ đế item = item_age.pick_item(c, AGE, "nude") replacing NUDE_ITEM[c]; same for other statuses when ROOT says (kc/ngheo/thaihau/low ranks/t7/t8). Add a "Nữ đế item ≠ her own t8 item" check.
+3. Then regen c09–c16 Nữ đế (all 5 ages) with the new builder. Method = section DONE above (refs own t1 face [a65 → a51] + style3 Xm9tPkMBfo + swatch TdwDfOyVNR; gpt-2-6 1024x2304 2k transparentBackground; images_remove_background; nude_mass_sheet.py fetch/sheet; cdn_sync). CHECK FOREHEADS AT FULL SIZE: c11 a51 t1 ref has a red dot → use tools/dedot.py (`dedot.py in out x0 y0 x1 y1 6`, box around the dot, verify the crop).
