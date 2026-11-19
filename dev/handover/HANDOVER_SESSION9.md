@@ -1001,3 +1001,4 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - ROOT-62 hourly wake = trig_01C2S2p4bs1sLp6uM4FdqS6h (minute 32). role-parity-3 bc79de0a stale → B reviewer remerge ordered.
 - (19/11 ~02:31Z real) Owner (via ROOT-61 relay) seal animation idle-sway + lean-in → OD + worker seal-lean session_01Rc5AsKsNitSW71UKQUtLKJ (sonnet); 8-frame khóc/giận loops never painted (C order 17/11 17:46Z unhandled, CDN 404) → re-ordered to Foreman C as TOP art item.
 - (19/11 ~02:42Z real) Owner: head «!» → bubble-talk glyph in the same yellow disc (OD 02:40Z) → C glyph ico-talk + wiring to errand worker L23c5v2N.
+- (19/11 ~02:50Z real) odds-meter-back SSK 3216fd90 (via ROOT-61 relay): meter part OK; «Khó lường» grey meter confirmed (exists live); law-3 «Tốn: không» filler NOT done → sent back to worker JJ8qdidm to fix in kit part (whole group), then SMALL reviewer. ROOT-61 stopped.
