@@ -621,6 +621,8 @@ PHI_VAR={
 "C":"a silk brocade court robe richly embroidered in gold with peonies and small birds, the wide sleeves falling in three stacked tiers of different tones of her colour, each tier edged with a band of gold embroidery, a gold-embroidered waistband with hanging jade belt pendants and tassels",
 "D":"a fitted gold-brocade bodice with a stiff embroidered waist panel over a long brocade over-skirt with a wide front panel of large peony medallions and side pleats, long wide brocade sleeves, a long silk apron falling from the waist with two hanging jade pendants",
 }
+# LOW_TONE (W103c, owner 19/11 ~00:10Z real, FIGURE_GATE rule 3 GAME COLOUR BENCHMARK = SHEET5 TONE LEVEL): the low-rank t1-t6 COLOUR RULE clause for young ages; same words as the triều rule (build_trieu); no trầm/subdued.
+LOW_TONE="all colours at ONE medium tone level, the same as the soft coral-red and brick-red robes of the game: medium saturation, medium lightness, neither too fresh nor too dark, never rực, never glaring, never neon, never pastel-washed, never dusty, grey, muddy or black; "
 def build_low(c,t,v="v0"):
     pal,face=DATA[c]; m,m2=ORIG1[c]; item,hk=ITEMS_LOW[c][t]; right=(int(c[1:])%2==1)
     main0,orig=LOWNAME[c]
@@ -643,8 +645,9 @@ def build_low(c,t,v="v0"):
     if LV is not None: o=o.replace("NOT yellow, ","")   # v1/v2: no yellow words outside the t6 small-touch clause
     assert "phoenix" not in o,(c,t)
     s=PRE+f" An imperial consort. Her face: {face}. From the identity reference keep ONLY her face, facial features, hairstyle colour and signature colour family; do NOT copy the outfit, hair ornaments or accessories of the reference, dress her in the NEW outfit below. The style reference image is only for skin, drawing style, fabric and embroidery: never copy its face, body or pose. {AGE_TXT[AGE]} "+o+"."
-    if v=="v0": s+=f" COLOUR RULE: all colours fresh, clear and luminous, never dusty or greyed; her ORIGINAL robe colour is kept exactly as in image 1 (her first reference): {m} is the main colour of the robe, sleeves and any cape, with {m2} in the inner robe and linings; gold only as thin accents."
-    else: s+=f" COLOUR RULE: all colours fresh, clear and luminous, never dusty or greyed; this version's robe colour is {LV[0]} silk like {LV[1]} (a different colour family from her first reference), the main colour of the robe, sleeves and any cape, with {(LV[2]+' like '+LV[3]) if LV[3]!=LV[1] else 'a slightly deeper tone of the same colour'} in the inner robe and linings; gold only as thin accents."
+    _fr="all colours fresh, clear and luminous, never dusty or greyed; " if AGE in ("a51","a65") else LOW_TONE   # a51/a65: old clause kept, the elder swap below replaces it
+    if v=="v0": s+=f" COLOUR RULE: {_fr}her ORIGINAL robe colour is kept exactly as in image 1 (her first reference): {m} is the main colour of the robe, sleeves and any cape, with {m2} in the inner robe and linings; gold only as thin accents."
+    else: s+=f" COLOUR RULE: {_fr}this version's robe colour is {LV[0]} silk like {LV[1]} (a different colour family from her first reference), the main colour of the robe, sleeves and any cape, with {(LV[2]+' like '+LV[3]) if LV[3]!=LV[1] else 'a slightly deeper tone of the same colour'} in the inner robe and linings; gold only as thin accents."
     hairs={1:" Hair: her own hairstyle exactly as in her first reference, with pretty silver hairpins and a fresh flower, little gold. ",2:" Hair: her own hairstyle exactly as in her first reference, with silver and pearl hairpins and a fresh flower, little gold. ",3:" Hair: her own hairstyle exactly as in her first reference, with silver, pearl and fresh flowers, little gold. "}[t] if t<=3 else " Hair: her own hairstyle decorated with several gold hairpins (trâm) with dangles, rich like her rank. "
     s+=hairs+"No phoenix anywhere on the robe or in the hair: only flowers, birds, butterflies or other motifs. All flowers, birds and butterflies are fine silk-thread embroidery stitched directly into the fabric, flat and integrated with the cloth, following its folds, not appliqué, not pasted patches, not raised. "+(FAB_LOW if t<=3 else FAB)
     s+=f" Pose: calm standing pose; she holds {item} in a contrasting colour, not the robe colour, the item held below the chin, the hand really gripping it, the whole face fully visible. Her hands interact naturally with the item (gently presenting, turning or touching it), lively and natural, while her head stays up facing the viewer, eyes open, lips closed, never looking down. Her hands and body: {low_hand(hk,right)}."
@@ -663,7 +666,7 @@ def build_bdq(o="1"):
     sw("in coral red and gold thread along the borders","in "+th+" with a few stitches of ivory and gold along the borders")
     sw("an embroidered coral red pearl-edged cape/stole over the shoulders",cape+" over the shoulders, with "+BD_FURSLEEVE)
     sw("many gold tassels;","many gold tassels and a few soft turquoise and pale coral bead strands in the hair, and a small metal plaque on the belt as the only marks of her homeland;")
-    i=t.index(" COLOUR RULE: robe, skirt, sleeves"); j=t.index(" COLOUR RULE: all colours fresh, clear"); k=t.index(" Hair: ")
+    i=t.index(" COLOUR RULE: robe, skirt, sleeves"); j=t.index(" COLOUR RULE: all colours"); k=t.index(" Hair: ")
     t=t[:i]+f" COLOUR RULE: all colours fresh, clear and luminous, never dusty or greyed; {sig} is the main colour of the robe, sleeves, sleeve linings and cape, rendered as {rend}; the fur is ivory-white; gold as thin accents on the borders."+t[k:]
     sw(" Hair: her own hairstyle decorated"," Hair: her own hairstyle, NO braids and NO side braid, decorated")
     return t
