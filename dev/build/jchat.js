@@ -171,9 +171,9 @@ if(typeof renderStage==="function"){const r0=renderStage;renderStage=function(){
 /* the exchange the target and her confidant really said, from the TRUE facts j78 just learnt (S.intel newest first) */
 function eavLines(v,n){try{const E=(window.CHAT_L&&CHAT_L.eav)||{};const I=(S.intel&&S.intel[v.id])||[];const now=typeof bkey==="function"?bkey():null;const F=I.filter(x=>x.bk===now).slice(0,n||1);if(!F.length)return"";
  const A={e:v,p:{name:v.name},sp:v,k:v.queen?"hh":"con"};
- /* her confidant = HER REAL servant (law 6b): watcher(v) (j22, the one picker: her most loyal close servant of v.staff, else her own maid), by name.
-    No such servant → nobody to talk to → no quoted exchange for this fact (the j78 fact itself is unchanged). */
- let B=null;try{const w=typeof watcher==="function"?watcher(v):null;if(w&&w.name){const eun=!!(w.s&&w.s.role==="eunuch");B={e:null,p:{name:w.name},sp:{srv:eun?"m":"f",name:w.name},k:eun?"eun":"srv",real:w.s||v.maid||null}}}catch(e){err("eavB",e)}
+ /* her confidant = HER REAL servant (law 6b): by name — watcher(v) first (j22/jtin: her trusted door-keeper), else (a confidant who only TALKS needs no Chủ tin
+    bar; E17r r2: at a new game 0/10 consorts pass it, so no quote at all) her most loyal living servant of v.staff at lòng BAL.loy.close+ (j22's own bar), else her maid at that bar. No real servant → nobody to talk to → no quoted exchange for this fact (the j78 fact itself is unchanged). */
+ let B=null;try{let w=typeof watcher==="function"?watcher(v):null;if(!w||!w.name){const st=(v.staff||[]).filter(x=>x&&x.name&&!x.dead&&x.alive!==false&&(x.loyal||0)>=BAL.loy.close).sort((a,b)=>(b.loyal||0)-(a.loyal||0))[0]||(v.maid&&v.maid.name&&!v.maid.dead&&(v.maid.loyal||0)>=BAL.loy.close?v.maid:null);w=st?{name:st.name,s:st}:null}if(w&&w.name){const eun=!!(w.s&&w.s.role==="eunuch");B={e:null,p:{name:w.name},sp:{srv:eun?"m":"f",name:w.name},k:eun?"eun":"srv",real:w.s||v.maid||null}}}catch(e){err("eavB",e)}
  if(!B){CH.stat.eavNoSrv=(CH.stat.eavNoSrv|0)+1;return""}
  const out=[];for(const f of F){const kind=String(f.k||f.kind||"").split(":")[0];const pool=E[kind]||E[f.kind]||E.any||[];if(!pool.length)continue;
   const X={c:ctx(A,B),v:eavSlots(v,f,kind)};const cand=pool.filter(x=>{const tg=tagOf(Array.isArray(x)?x[0]:x);return !tg||tagOk(tg,X.c)}).map(x=>[x,1]);
