@@ -77,6 +77,7 @@ balance-final #2 (opus; balance chain + AG arms) | review/balance-final | sessio
 | FOREMAN C-AG #16 (opus; child of #15, depth 3) | handover FOREMAN_C_STATUS | MAIN ROOT-56 | session_01Rc5AsMn7GAZ9LZWzQ2SdFb | DONE (→ #17 22:35Z) | 18/11 21:05Z |
 | FOREMAN C-AG #17 (opus; child of #16, depth 4) | handover FOREMAN_C_STATUS | MAIN ROOT-57 | session_01Rc5AsHvrGcAHBVm2GZfixz | DONE (→ #18 00:40Z) | 18/11 22:35Z |
 | FOREMAN C-AG #17 (opus; child of #16, depth 4) | handover FOREMAN_C_STATUS | MAIN ROOT-57 | session_01Rc5AsHvrGcAHBVm2GZfixz | DONE (→ #18 00:40Z) | 18/11 22:35Z |
+| FOREMAN C-AG #18 (opus; child of #17, depth 5) | handover FOREMAN_C_STATUS | MAIN ROOT-61 | session_01Rc5AsLo1KXQFDUGVweKun8 | RUNNING | 19/11 00:40Z |
 | opt-card-short #3 (sonnet SMALL UI; OD L1877 as corrected 16:05Z/16:15Z, 09:30Z «!») | review/opt-card-short | MAIN ROOT-53 | session_01Rc5AsHxLKCb415DxYbpiHP | CODE DONE ce8706b7 no CDN (archived) → #4 | 18/11 18:00Z |
 | fullbody-frame-s4 (sonnet SMALL UI; 16:10Z picture size + phone Luân hồi revert) | review/fullbody-frame-s4 | MAIN ROOT-53 | session_01Rc5AsJUiBBwT9LH4J89i4E | READY (no shots: CDN blocked in this env) | 18/11 18:50Z |
 | land-m (sonnet LANDER: shown-odds-r2-rv cf1fc746 + monthly-ration-r6 287a0b79) | review/land-m | MAIN ROOT-53 | session_01Rc5AsJwMJVJdiZUsCPNM9T | LAND READY 3fdfb437 | 18/11 18:00Z |
@@ -103,7 +104,7 @@ style-ref test A/B/C c06 t1–t3 | CDN _review only | W79 session_011xDdVSouZw85
 | LIVE-SERVANTS #2 (opus; entourage picker + NPC picks + witnesses/gossip + rest/sleep; OD 19:30Z/19:45Z) | review/live-servants | C-AG #15 | session_01Rc5AsNDF76PpGFKUZeU6aW | DONE (rolled → #3) | 18/11 20:19Z |
 | LIVE-SERVANTS #3 (opus; perf fix outcome-identical ≤ +10 %, final SẴN SÀNG) | review/live-servants | C-AG #15 | session_01Rc5AsKjmZakFtxrVGvMvW9 | DONE (SẴN SÀNG 7a50021) | 18/11 20:55Z |
 | REVIEW live-servants (opus reviewer) | review/live-servants 7a50021 | C-AG #16 | session_01Rc5AsKp5X8AnT5HJ7WoyXK | RUNNING | 18/11 22:30Z |
-| LIVE-SERVANTS #4 (opus; fix review FAIL 8 items) | review/live-servants | C-AG #17 | session_01Rc5AsLdRc1YbZ1vrMvV1Ro | RUNNING | 18/11 22:59Z |
+| LIVE-SERVANTS #4 (opus; fix review FAIL 8 items) | review/live-servants | C-AG #18 | session_01Rc5AsLdRc1YbZ1vrMvV1Ro | RUNNING | 18/11 22:59Z |
 | AG-DEED-PERF #2 (opus; merge live + re-measure 514143ec; #1 silent) | review/ag-deed-perf | C-AG #14 | session_01Rc5AsMrVSjApNAcLbKd49p | DONE (LANDED fa411d6f) | 18/11 19:40Z |
 | review shop-panel-r3 (sonnet SMALL REVIEWER) | review/shop-panel-r3 | MAIN ROOT-54 | session_01Rc5AsK7Vjz8vR2ZXexdh7h | LIVE 13bb8c88 | 18/11 19:33Z |
 | stage-here (opus UI: stage = where she is, every tab + closing alert; OD 19:45Z (5)) | review/stage-here | MAIN ROOT-55 | session_01Rc5AsK9y5NbRATifWtFqG7 | SẴN SÀNG KIỂM e8e5afe | 18/11 20:15Z |
