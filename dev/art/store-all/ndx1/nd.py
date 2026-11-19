@@ -56,3 +56,20 @@ elif sys.argv[1]=="sheet":  # nd.py sheet NAME cAA cBB ... -> $S/out/sheet_NAME.
             im=Image.open(fn).convert("RGBA"); bg=Image.new("RGBA",im.size,(200,200,200,255)); bg.alpha_composite(im)
             sh.paste(bg.convert("RGB").resize((W,H)),(L+j*W,T+i*H))
     out=os.path.join(S,"out",f"sheet_{name}.jpg"); sh.save(out,quality=82); print(out,sh.size)
+elif sys.argv[1]=="rows":  # nd.py rows OUTDIR cAA cBB ... -> OUTDIR/nude_row_cNN.jpg per person + OUTDIR/nude_all_<first>-<last>.jpg (owner sheet: cut figures on #efe9df, ~1400 px per row)
+    from PIL import Image,ImageDraw,ImageFont
+    od=sys.argv[2]; ppl=sys.argv[3:]; os.makedirs(od,exist_ok=True); W=280; H=630; T=44; BG=(0xef,0xe9,0xdf)
+    try: F=ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",24)
+    except Exception: F=ImageFont.load_default()
+    rows=[]
+    for c in ppl:
+        r=Image.new("RGB",(W*5,T+H),BG); d=ImageDraw.Draw(r)
+        for j,a in enumerate(AGES):
+            d.text((j*W+10,10),f"{c} {a} Nữ đế",fill=(60,40,20),font=F)
+            fn=os.path.join(S,"out",f"{c}_{a}_nude.png")
+            if os.path.exists(fn):
+                im=Image.open(fn).convert("RGBA").resize((W,H),Image.LANCZOS); t=Image.new("RGBA",(W,H),BG+(255,)); t.alpha_composite(im); r.paste(t.convert("RGB"),(j*W,T))
+        r.save(os.path.join(od,f"nude_row_{c}.jpg"),quality=88); rows.append(r)
+    al=Image.new("RGB",(W*5,(T+H)*len(rows)),BG)
+    for i,r in enumerate(rows): al.paste(r,(0,i*(T+H)))
+    fn=os.path.join(od,f"nude_all_{ppl[0]}-{ppl[-1]}.jpg"); al.save(fn,quality=85); print(fn,al.size)
