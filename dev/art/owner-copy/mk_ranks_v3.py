@@ -1,12 +1,13 @@
 # Lượt 306-308 builder: princesses V3 + m19 V5, base = m19_tN_V4.txt (approved prompt), only parts swapped.
 import re
 B='/home/user/cung-tuong-mong/dev/art/owner-copy/'
-FL={1:['white jasmine sprigs','pink peach blossoms','tiny golden osmanthus clusters','white pear blossoms','small pink climbing roses'],
-    2:['pale apricot blossoms','white gardenias','red plum blossoms','pink begonias','lilac sprays'],
+FL={1:['jasmine sprigs','peach blossoms','osmanthus clusters','pear blossoms','small climbing roses'],
+    2:['apricot blossoms','gardenias','plum blossoms','begonias','lilac sprays'],
     3:['crabapple blossoms','small camellias','magnolia buds','small hydrangea clusters','azaleas'],
-    4:['orchids','white michelia blossoms','small pink lotus flowers','white lilies','red camellias'],
+    4:['orchids','michelia blossoms','small lotus flowers','lilies','camellias'],
     5:['herbaceous peonies','full lotus blooms','China roses','narcissus flowers','double camellias'],
-    6:['deep red tree peonies','soft pink tree peonies','ivory white tree peonies','purple tree peonies','pale gold tree peonies']}
+    6:['tree peonies','cotton-rose hibiscus flowers','queen-of-the-night (epiphyllum) flowers','large chrysanthemums','double magnolias']}
+FLCOL=" in a soft colour that suits her outfit (never her main robe colour)"
 ANG=[("FULLY FRONTAL, her body, shoulders and face squarely facing the viewer, no turn","a light graceful step, {item}","feet close together, one foot a little forward and lightly on its toes, toes peeking from under the hem"),
  ("a SLIGHT shoulder turn to the LEFT (about 15 degrees), body almost frontal, face toward the viewer","{item}, head tilted very slightly","weight on her back foot, the front foot turned slightly the same way as her shoulders, toes peeking under the hem"),
  ("a clear THREE-QUARTER view, NOT frontal: her whole body, shoulders, hips and face turned about 45 degrees toward the viewer's RIGHT, her left shoulder nearer the viewer, face fully visible","swaying gently in a light turn, {item}, skirt swirling","her feet pointing the same way as her hips, one knee softly bent so the skirt swings"),
@@ -55,7 +56,7 @@ def rep(s,a,b,need=True):
     return s.replace(a,b)
 def build(k,t,hh_orig=False):
     d=P[k]; pr=k!='m19'; s=open(B+f'm19_t{t}_V4.txt').read()
-    fl=FL[t][(d['n']-1)%5] if t<=6 else None
+    fl=(FL[t][(d['n']-1)%5]+FLCOL) if t<=6 else None
     if pr:
         s=rep(s,'An imperial consort.',f'An imperial consort, a foreign princess from {d["country"]} who has entered the imperial palace.')
         s=rep(s,'about 22, youthful adult.','about 20, youthful adult.')
