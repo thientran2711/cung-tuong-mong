@@ -293,3 +293,301 @@ RD97L.push(rdRare({a:"pt_tang_11",tag:"Giới đàn bên kia bể",w:"emp",n:"Xi
  bad:["Giao thầy cho chùa","Thưa: thầy đã mù","Sai người tráo đan"],x:[()=>S.duc>=RR("pt_tang_11").bar,"Đức từ "+RR("pt_tang_11").bar],
  t:"Ngươi xin theo xa giá ra bến Minh Châu, tự tay dắt thầy Trí Viễn lên ván thuyền. Thầy dừng ở đầu ván, quay về phía ngươi mà chắp tay. Hoàng thượng đứng trên bến, sai Từ bộ ghi vào sử: cao tăng Đại Hy sang bể truyền giới, có công chúa {land} tiễn chân. Bên kia bể, giới đàn đầu tiên khắc tên hai nước.",
  go:(_A,G)=>{PTSAIL();return e67bien(G[0])},rw:"ngocboi",ti:"Người tiễn thầy qua bể"}));
+
+/* =====================================================================================================================================
+   pt_dang · Hải tặc và thương nhân (Mưu sinh · Quyền mưu). People: {emp}, {v}, {maid}; Kim Hựu Thành (PTP.huuthanh, Tân La merchant: bến Minh Châu →
+   kinh → bến), Ô Cửu (PTP.ocuu, chief of the giặc biển Đông Hải: trên biển → ngục / bến / dead at .10), unnamed: Minh Châu thứ sử, Thị bạc sứ, quan Binh bộ.
+   Objects (PTO): ruongbac (the silver of her dowry ship, taken by Ô Cửu), hangdao (the sword crates Kim Hựu Thành saved), thugiac (Ô Cửu's letter),
+   ngoctrai (her pearls, the ransom), sothibac (the Thị bạc ty ledger), daochem (the iron-cutting sword in the crates), haido (the pirates' sea chart).
+   Chapter flags: bien (the sea's way: deal with merchant and pirate) · phep (the court's law) · muu (a scheme, leverage).
+   GE intents: ge1 Chủ bến Minh Châu, ge2 Lời hứa với kẻ biển (mercy, the pirate pardoned), ge3 Mượn dao giặc (pirates / ledgers used as a knife), ge4 Luật biển.
+   ===================================================================================================================================== */
+const PTHT=()=>ptAlive("huuthanh")&&ptP("huuthanh","w")==="kinh";/* the merchant is in the capital and can act there */
+const PTOC=()=>ptAlive("ocuu")?ptP("ocuu","w"):"chet";/* where Ô Cửu is: hb at sea · nguc · cang (pardoned, guarding the port) · chet */
+const PTBAC=()=>({ocuu:"Rương bạc hồi môn vẫn nằm trong tay Ô Cửu.",ta:"Rương bạc hồi môn đã về đến cung ngươi.",kho:"Rương bạc hồi môn đã nộp kho Hộ bộ.",huuthanh:"Rương bạc hồi môn đang trong khoang thuyền Kim Hựu Thành."})[ptO("ruongbac")]||"";
+RTHEME67.pt_dang="court";
+ARC67.pt_dang=ptArc("pt_dang",{o:"pf",t:"Thuyền hồi môn",w:"emp",sj:"chiếc thuyền chở của hồi môn",cast(A){if(ptP("huuthanh","w")==="cang")ptMove("huuthanh","kinh");ptMeet("huuthanh");
+  if(!ptO("ruongbac"))ptO("ruongbac","ocuu");if(!ptO("hangdao"))ptO("hangdao","huuthanh");if(!ptO("thugiac"))ptO("thugiac","huuthanh");return rdCast(A,["v"])},
+ g:"Chiếc thuyền thứ hai chở của hồi môn của ngươi bị giặc biển Đông Hải chặn ngoài quần đảo Chu San. Thuyền buôn của thương chủ Tân La Kim Hựu Thành cứu được người và mấy hòm đao {land}; rương bạc thì nằm trong tay đầu lĩnh Ô Cửu. Kim Hựu Thành vào kinh, mang theo một lá thư của giặc.",
+ p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
+ B:{s1:{h:"Thương chủ Tân La",w:"maid",t:"Kim Hựu Thành chờ ở Hồng Lư tự, xin được gặp ngươi. Y nói tiếng Đại Hy lơ lớ, tay đeo nhẫn ngọc, và nói ngay: “Cứu người là việc nghĩa. Cứu hàng là việc buôn.”",o:[
+  {n:"Mời Kim Hựu Thành vào cung, hỏi y muốn gì",f:"bien",wx:"biết giá của y",lx:"người ta nói ngươi tiếp lái buôn",rt:"Y muốn một tờ giấy cho thuyền Tân La được buôn ở Minh Châu mà khỏi thuế hai lần.",rf:"Y chỉ cười, nói chuyện gió mùa."},
+  {n:"Cảm tạ y qua Hồng Lư tự, theo lễ",f:"phep",wx:"việc đúng phép",lx:"y thấy ngươi giữ khoảng cách",rt:"Hồng Lư tự ghi công y vào sổ."},
+  {n:"Sai {maid} xem sổ hàng trên thuyền y",f:"muu",wx:"biết y cứu được những gì",lx:"y biết ngươi dò",rt:"Sổ hàng ghi: sáu hòm đao, không có rương bạc."}]},
+ s2:{h:"Tin từ bến",w:"maid",t:"{maid} nghe người nhà sứ đoàn kể: thuyền hồi môn chở bạc, đao và một trăm người. Chỉ sáu mươi người về được bến.",o:[
+  {n:"Gửi bạc lo cho người sống sót",f:"bien",wx:"người {land} biết ngươi lo cho họ",lx:"bạc ra",rt:"Người sống sót có cơm ăn, áo mặc ở bến Minh Châu."},
+  {n:"Xin Hồng Lư tự lập danh sách người mất",f:"phep",wx:"mọi người được ghi tên",lx:"việc chậm",rt:"Danh sách người mất được dán ở cửa Hồng Lư tự."},
+  {n:"Hỏi kỹ người sống sót: giặc đi về hướng nào",f:"muu",wx:"biết sào huyệt giặc",lx:"người sống sót sợ hãi, nói lẫn",rt:"Họ nói thuyền giặc chạy về phía các đảo đá ở đông nam.",rf:"Không ai nhớ rõ."}]},
+ c1:{h:"{v} nói chuyện đao",w:"v",need:["v"],t:"{v} nói trong buổi thỉnh an: “Của hồi môn gì mà chở đao cả hòm? Phi tần buôn binh khí, chẳng phải chuyện nhỏ.”",o:[
+  {n:"Đáp: đao là quà {pv} gửi Hoàng thượng",wx:"lời đồn mất cớ",lx:"đao thành quà phải dâng",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1]);return""},rt:"Cả điện gật gù. {v} im lặng.",rf:"{v} hỏi: “Quà sao không có trong quốc thư?”"},
+  {n:"Mời {v} xem sổ hàng của thuyền",wx:"{v} thấy không có gì giấu",lx:"việc của ngươi ra trước mắt {v}",go:(A,_ok,G)=>{rdRel(A,"v",G[0]);return""},rt:"{v} xem xong, nói nhạt: “Thì ra chỉ là đao.”"},
+  {n:"Hỏi lại: nhà {v} chở muối lậu qua sông thì gọi là gì?",wx:"trả đúng miếng",lx:"{v} thêm oán",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"{v} đỏ mặt, cáo lui sớm."}]},
+ c2:{h:"Thị bạc sứ đòi thuế",w:"emp",t:"Thị bạc sứ ở Minh Châu gửi công văn: hòm đao vào bến phải nộp thuế một phần mười như hàng buôn, không thì giữ lại.",o:[
+  {n:"Bỏ bạc nộp thuế cho xong",wx:"hòm đao được thả",lx:"bạc ra",rt:"Hòm đao được đóng dấu Thị bạc ty."},
+  {n:"Tâu rằng đó là của hồi môn, không phải hàng buôn",wx:"giữ được lệ của hòa thân",lx:"Thị bạc sứ ghi nhớ ngươi",rt:"Hộ bộ phê: hồi môn không đánh thuế.",rf:"Hộ bộ chưa phê, hòm đao còn nằm ở bến."},
+  {n:"Để Kim Hựu Thành tự lo với Thị bạc sứ",wx:"ngươi khỏi dính vào",lx:"Kim Hựu Thành nợ thêm một lần",rt:"Kim Hựu Thành lo xong, không nói giá."}]},
+ t1:{h:"Thư của Ô Cửu",w:"emp",t:"Kim Hựu Thành trình lá thư Ô Cửu nhờ y mang vào: “Bạc của công chúa, ta giữ. Muốn lấy, đem chuộc. Ta không cần ân, chỉ cần một bến không ai đuổi.”",o:[
+  {n:"Đưa thư lên Hoàng thượng",f:"phep",wx:"ngài thấy ngươi không giấu",lx:"việc thành việc của triều",rt:"Ngài đọc thư, sầm mặt: “Giặc mà đòi bến.”",go:()=>ptO("thugiac","vua")},
+  {n:"Giữ thư, nhờ Kim Hựu Thành dò ý Ô Cửu",f:"bien",wx:"có một đường nói chuyện với giặc",lx:"nếu lộ thì là thông giặc",rt:"Kim Hựu Thành nhận lời, nói sẽ nhắn qua thuyền cá.",go:()=>ptO("thugiac","ta")},
+  {n:"Giữ thư làm chứng, chưa trả lời",f:"muu",wx:"có chứng giặc đòi gì",lx:"giặc chờ",rt:"Lá thư nằm trong hộp gỗ của ngươi.",go:()=>ptO("thugiac","ta")}]},
+ x1:{h:"Trước ngự tọa",w:"emp",t:"Hoàng thượng cho bàn việc thuyền hồi môn. Binh bộ muốn đánh, Hộ bộ muốn bỏ, Hồng Lư tự sợ mất lòng {land}. Ngài quay sang ngươi.",o:[
+  {n:"Xin ngài sai thủy quân Minh Châu ra bể đánh giặc",e:["win","lose"],rt:"Ngài phán: thủy quân Minh Châu ra bể trước tháng Chạp. Cả triều biết của hồi môn của ngươi là việc của Đại Hy.",rf:"Binh bộ tâu thuyền thủy quân chưa sửa. Ngài nói: “Đợi.”"},
+  {n:"Xin ngài cho Kim Hựu Thành đứng ra chuộc bạc",e:["win2","mid"],rt:"Ngài chuẩn, cho Kim Hựu Thành một tờ giấy đi lại giữa các đảo.",rf:"Ngài nói: “Lái buôn mà làm việc của triều?”",go:(A,ok)=>{if(ok)ptO("giaythonghanh","huuthanh");return""}},
+  {n:"Thưa: rương bạc mất thì thôi, không đáng phiền triều",e:"mid",lx:"bạc vẫn trong tay giặc",rt:"Ngài gật đầu. Hộ bộ thở ra."}]}},
+ E:{win:{tag:"Thủy quân ra bể",w:"emp",t:"Lệnh ban xuống Minh Châu. Bến cảng rộn tiếng búa sửa thuyền; ai cũng biết vì sao."},
+  win2:{tag:"Giấy của thương nhân",w:"emp",t:"Kim Hựu Thành cầm giấy của triều đi lại giữa các đảo. Y nói với ngươi: “Giờ thì ta làm ăn với công chúa.”"},
+  mid:{tag:"Bạc ở lại bể",t:"Rương bạc ở lại trong tay giặc. Người ta quên dần, trừ Ô Cửu."},
+  lose:{tag:"Phi tần và hòm đao",w:"v",t:"{v} kể khắp hậu cung: công chúa {land} chở đao vào kinh, còn qua lại với lái buôn và giặc biển."}}});
+PT97.push({a:"pt_dang",tag:"Chén rượu gửi giặc",w:"emp",n:"Gửi Ô Cửu một vò rượu {land} kèm một lời hẹn: trả bạc thì có bến",
+ path:["Mời Kim Hựu Thành vào","Hỏi kỹ người sống sót","Hỏi lại: nhà","Giữ thư, nhờ Kim Hựu Thành","Xin ngài cho Kim Hựu Thành"],bad:["Thưa: rương bạc mất thì thôi","Bỏ bạc nộp thuế"],x:[()=>S.tamco>=BAL.arc.rare.pt_dang.bar,`Tâm cơ từ ${BAL.arc.rare.pt_dang.bar}`],
+ t:"Ngươi không xin quân, không xin bạc, chỉ gửi theo thuyền cá một vò rượu {land} và một lời: “Trả bạc thì có bến.” Mười ngày sau, rương bạc được đặt trước cửa Thị bạc ty Minh Châu, niêm phong còn nguyên, kèm một tờ giấy viết vụng: “Ô Cửu chờ bến.” Hoàng thượng nghe chuyện, cười rất lâu.",
+ go:(_A,_ok,G)=>{ptO("ruongbac","ta");return e67bien(G[0])},rw:"nt_dongchau",ti:"Chén rượu gửi giặc"});
+
+rdDef("pt_dang",5,{t:"Hàng đao và bạc",w:"emp",sj:"sáu hòm đao {land} ở bến",cast(A){if(PTHT())ptMeet("huuthanh");return rdCast(A,["v"])},
+ g:()=>"Sáu hòm đao {land} đã lên bờ. Binh bộ nói: đao tư không được vào kinh, phải nộp kho. Hộ bộ đòi thuế. Kim Hựu Thành đòi công cứu hàng. "+PTBAC()+" Ai giữ sáu hòm đao ấy, người đó có tiếng nói ở bến Minh Châu.",
+ p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
+ B:{s1:{h:"Quan Binh bộ đến",w:"emp",if:RDW(1),t:"Một viên quan Binh bộ đến tận cung ngươi, rút một thanh trong hòm ra xem, rồi nói: “Đao thế này, cấm quân còn chưa có.”",o:[
+  {n:"Mời quan Binh bộ thử đao trước mặt ngươi",f:"phep",wx:"Binh bộ thấy đao là quà, không phải hàng lậu",lx:"Binh bộ thèm đao",rt:"Lưỡi đao chém đứt một cây giáo gỗ như chém cỏ."},
+  {n:"Tặng y một thanh, xin y bớt lời",f:"muu",wx:"Binh bộ nợ ngươi",lx:"một thanh đao rời hòm",rt:"Viên quan nhận đao, cười: “Hòm này của hồi môn, không ai bàn.”",go:()=>ptO("dao_bb","binhbo")},
+  {n:"Thưa: đao chờ Hoàng thượng phân xử",f:"bien",wx:"không ai lấy được đao trước ngài",lx:"Binh bộ không vui",rt:"Viên quan lui ra, mặt lạnh."}]},
+ s2:{h:"Hòm đao bị giữ ở bến",w:"maid",if:RDW(0),t:"Thị bạc ty giữ sáu hòm đao ở kho bến, nói chờ chỉ. Mỗi ngày nằm kho là một ngày tiền canh.",o:[
+  {n:"Bỏ bạc trả tiền canh kho",f:"bien",wx:"hòm đao được canh cẩn thận",lx:"bạc ra",rt:"Kho bến cử hai người canh riêng."},
+  {n:"Xin Hộ bộ một tờ phê thả hòm",f:"phep",wx:"giấy tờ đàng hoàng",lx:"chậm",rt:"Hộ bộ phê thả sau mười ngày.",rf:"Hộ bộ nói: “Chờ Binh bộ.”"},
+  {n:"Nhờ Kim Hựu Thành chở lén hòm đao lên kinh",f:"muu",if:()=>PTHT(),wx:"hòm đao về nhanh",lx:"nếu lộ là chở đao lậu",rt:"Sáu hòm đao nằm dưới khoang muối của thuyền Tân La.",rf:"Lính bến khám thuyền, thấy hòm đao."},
+  {n:"Sai {maid} xuống bến trông hòm đao",f:"muu",if:()=>!PTHT(),wx:"có người của ngươi ở kho",lx:"cung thiếu người",rt:"{maid} ngồi trong kho bến đếm từng hòm."}]},
+ c1:{h:"Kim Hựu Thành đòi công",w:"maid",if:()=>PTHT(),t:"Kim Hựu Thành xin gặp: “Cứu sáu hòm đao, thuyền ta mất một cánh buồm và ba người. Công chúa trả công bằng gì?”",o:[
+  {n:"Trả công y bằng bạc",wx:"không nợ ai",lx:"bạc ra nhiều",rt:"Kim Hựu Thành nhận bạc, cúi đầu cảm tạ."},
+  {n:"Hứa xin cho y một tờ giấy buôn ở Minh Châu",wx:"y nợ ngươi một lần",lx:"một lời hứa với lái buôn",rt:"Y cười: “Lời công chúa, ta ghi vào sổ.”",rf:"Y lắc đầu: “Lời hứa không trả được tiền buồm.”"},
+  {n:"Cho y chọn một thanh đao đẹp nhất làm công",wx:"y được thứ y thích",lx:"đao vào tay lái buôn",rt:"Kim Hựu Thành lật từng thanh, chọn thanh có vân như sóng.",go:()=>ptO("dao_ht","huuthanh")}]},
+ c2:{h:"{v} mua đao",w:"v",need:["v"],t:"Người nhà {v} đến hỏi mua một hòm đao cho anh trai nàng ta đang làm phó tướng ở biên ải.",o:[
+  {n:"Tặng nhà {v} một thanh, không bán",wx:"{v} nợ ngươi",lx:"đao rời hòm",go:(A,_ok,G)=>{rdRel(A,"v",G[0]);return ptO("dao_v","v")},rt:"{v} gửi lời cảm ơn, giọng khác hẳn mọi khi."},
+  {n:"Từ chối: đao là hồi môn, không bán",wx:"giữ đủ hòm",lx:"{v} phật lòng",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Người nhà {v} ra về không chào."},
+  {n:"Bán cho họ một thanh, ghi vào sổ, có người làm chứng",wx:"được bạc mà không ai bắt lỗi",lx:"{v} có đao của ngươi trong tay",go:(A,ok,G)=>{rdRel(A,"v",ok?G[0]:G[1]);return ptO("dao_v","v")},rt:"Giấy bán có ấn của ngươi và của nhà {v}.",rf:"Nhà {v} trả giá thấp, rồi kể là ngươi bán đao."}]},
+ t1:{h:"Hoàng thượng hỏi đao",w:"emp",t:"Hoàng thượng hỏi: “Sáu hòm đao của cha nàng, nàng định làm gì?”",o:[
+  {n:"Thưa: xin dâng cả lên ngài",f:"phep",wx:"ngài vui",lx:"đao rời tay ngươi",rt:"Ngài cười: “Trẫm nhận một thanh, còn lại nàng giữ.”",go:()=>ptO("dao_vua","vua")},
+  {n:"Thưa: thiếp muốn dùng đao đổi lấy bạc bị giặc giữ",f:"bien",wx:"ngài thấy ngươi tính xa",lx:"ngài nghi ngươi thương lượng với giặc",rt:"Ngài nhìn ngươi lâu: “Nàng nghĩ giặc thích đao hơn bạc?”",rf:"Ngài nói: “Đem đao cho giặc là nuôi giặc.”"},
+  {n:"Thưa: thiếp chưa nghĩ, xin ngài dạy",f:"muu",wx:"ngài vui vì được hỏi",lx:"việc theo ý ngài",rt:"Ngài nói: “Cứ giữ. Đao trong tay mình thì người khác phải hỏi mình.”"}]},
+ x1:{h:"Sáu hòm đao về đâu",w:"emp",t:"Cuối tháng, Binh bộ, Hộ bộ và Kim Hựu Thành đều chờ một lời của ngươi trước khi Hoàng thượng phê.",o:[
+  {n:"Dâng cả sáu hòm lên Hoàng thượng làm quà của {pv}",e:["win","lose"],rt:"Ngài nhận, sai Binh bộ cất vào kho ngự, ghi tên {pv} trên sổ.",rf:"Binh bộ tâu đao lạ chưa thử, ngài cho cất vào kho Binh bộ.",go:(A,ok)=>ptO("hangdao",ok?"vua":"kho")},
+  {n:"Bán sáu hòm cho Kim Hựu Thành, lấy bạc nộp thuế và trả công",if:()=>PTHT(),e:["win2","mid"],rt:"Kim Hựu Thành mua cả, trả bằng bạc Tân La. Thuế đóng đủ, công trả xong.",rf:"Hộ bộ nói: bán đao cho lái buôn ngoại quốc, phải xét.",go:(A,ok)=>{if(ok)ptO("hangdao","huuthanh");return""}},
+  {n:"Gửi sáu hòm vào kho Nội vụ phủ dưới tên ngươi",if:()=>!PTHT(),e:["win2","mid"],rt:"Nội vụ phủ ghi sổ: hồi môn của công chúa {land}, sáu hòm đao.",rf:"Nội vụ phủ nhận mà không ghi tên ngươi.",go:()=>ptO("hangdao","kho")},
+  {n:"Để Binh bộ giữ, chờ chỉ",e:"mid",lx:"đao không còn là của ngươi",rt:"Sáu hòm đao nằm trong kho Binh bộ.",go:()=>ptO("hangdao","kho")}]}},
+ E:{win:{tag:"Quà của {pv}",w:"emp",t:"Sáu hòm đao {land} nằm trong kho ngự. Binh bộ nhắc đến chúng, là nhắc đến ngươi."},
+  win2:{tag:"Bạc Tân La",w:"emp",t:"Kim Hựu Thành mang đao đi, để lại bạc và một lời: “Bến Minh Châu nhớ công chúa.”"},
+  mid:{tag:"Đao vào kho",t:"Sáu hòm đao vào kho. Ngươi còn tên trên sổ, nhưng chìa khóa không ở trong tay ngươi."},
+  lose:{tag:"Đao lạ trong kho Binh bộ",w:"v",t:"{v} nói: đao của công chúa {land} sắc hơn đao Đại Hy, chẳng biết bên ấy gửi sang để làm gì."}}});
+
+rdDef("pt_dang",6,{t:"Thuyền giặc",w:"emp",sj:"thuyền giặc ngoài cửa bến Minh Châu",cast(A){return rdCast(A,["v"])},
+ g:"Ba chiếc thuyền buồm đen thả neo ngoài cửa bến Minh Châu, cờ không có chữ. Ô Cửu cho người chèo xuồng vào bến, nhắn: y giữ cả người Tân La lẫn người {land}, muốn nói chuyện với người có quyền. Minh Châu thứ sử muốn đánh để lập công; Kim Hựu Thành xin đừng đánh khi người còn trên thuyền giặc.",
+ p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
+ B:{s1:{h:"Thủy quân đã sẵn",w:"emp",if:RDW(1),t:"Thủy quân Minh Châu đã sửa xong thuyền theo lệnh tháng trước. Thứ sử tâu về: chỉ chờ một chữ là ra bể.",o:[
+  {n:"Xin ngài cho thủy quân vây mà chưa đánh",f:"phep",wx:"giặc biết triều có quân",lx:"tốn lương thủy quân",rt:"Mười chiến thuyền dàn ngang cửa bến."},
+  {n:"Nhắn thứ sử chờ ngươi nói chuyện với giặc trước",f:"bien",wx:"người trên thuyền giặc còn sống",lx:"thứ sử thấy ngươi giành công",rt:"Thứ sử trả lời: chờ mười ngày."},
+  {n:"Cho thủy quân đánh úp ban đêm",f:"muu",wx:"giặc bị bất ngờ",lx:"người trên thuyền giặc có thể chết",rt:"Một chiếc thuyền giặc bị đốt; hai chiếc kia chạy ra xa.",rf:"Giặc đã biết trước, thủy quân đánh vào khoảng không."}]},
+ s2:{h:"Thủy quân chưa có",w:"maid",if:RDW(0),t:"Thủy quân Minh Châu chưa sửa xong thuyền. Thứ sử gửi thư về kinh xin thêm bạc, còn dân bến thì đóng cửa không dám ra bể.",o:[
+  {n:"Bỏ bạc giúp thủy quân sửa thuyền",f:"phep",wx:"thủy quân có thuyền",lx:"bạc ra nhiều",rt:"Thợ đóng thuyền làm cả đêm."},
+  {n:"Nhờ Kim Hựu Thành cho mượn thuyền Tân La",f:"bien",if:()=>PTHT(),wx:"có thuyền ngay",lx:"thêm một món nợ với y",rt:"Ba thuyền Tân La treo cờ Đại Hy, đậu cạnh thủy quân."},
+  {n:"Cho thuê thuyền cá của dân bến làm thuyền canh",f:"bien",if:()=>!PTHT(),wx:"có thuyền ngay",lx:"dân bến sợ giặc trả thù",rt:"Hai mươi thuyền cá canh quanh cửa bến."},
+  {n:"Tung tin thủy quân đã sẵn để dọa giặc",f:"muu",wx:"giặc dè chừng",lx:"nếu giặc biết là tin giả",rt:"Thuyền giặc lùi ra xa một dặm.",rf:"Giặc cho xuồng vào dò, thấy bến trống."}]},
+ c1:{h:"Người của Ô Cửu",w:"maid",t:"Người chèo xuồng của Ô Cửu được dẫn đến trước thứ sử. Hắn nói Ô Cửu cho người trên thuyền ăn đủ, không đánh ai, nhưng chỉ chờ đến rằm.",o:[
+  {n:"Cho người mang gạo và thuốc ra thuyền giặc cho người bị giữ",wx:"người bị giữ không đói",lx:"giặc cũng ăn gạo của ngươi",rt:"Xuồng giặc chở gạo về thuyền. Ô Cửu gửi lại một lời cảm ơn."},
+  {n:"Giữ người chèo xuồng lại làm tin",wx:"có một người của giặc trong tay",lx:"giặc giận",rt:"Thứ sử giam hắn trong kho bến.",rf:"Hắn nhảy xuống nước trốn mất."},
+  {n:"Dò hắn xem sào huyệt giặc ở đâu",wx:"biết đường đến hang giặc",lx:"hắn nói dối được",rt:"Hắn vẽ ra một tấm hải đồ các đảo đá, có đánh dấu một vịnh kín.",rf:"Hắn vẽ bừa một tấm hải đồ, không ai tin.",go:(A,ok)=>{if(ok)ptO("haido","ta");return""}}]},
+ c2:{h:"{v} nói chuyện giặc",w:"v",need:["v"],t:"{v} tâu với Hoàng hậu: giặc biển đến tận cửa bến là vì bạc của công chúa {land}; người {land} mang họa theo thuyền.",o:[
+  {n:"Đáp: giặc đến vì bến giàu, không vì một người",wx:"bá quan thấy lý",lx:"{v} ghi hận",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1]);return""},rt:"Hoàng hậu gật đầu.",rf:"Hoàng hậu nói: “Giặc đến khi bạc đến, thì cũng là vì bạc.”"},
+  {n:"Im lặng, xin Hoàng hậu cho lo việc bến",wx:"không cãi nhau",lx:"{v} nói được nhiều hơn",rt:"Hoàng hậu không xét thêm."},
+  {n:"Nhắc trước điện: anh trai {v} vừa mua đao của giặc ở chợ biên",wx:"{v} phải lo cho nhà mình",lx:"phải có chứng",go:(A,ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"Hoàng hậu cho người hỏi nhà {v}.",rf:"Nhà {v} đưa ra giấy mua đao của ngươi."}]},
+ t1:{h:"Hoàng thượng hỏi",w:"emp",t:"Hoàng thượng hỏi: “Giặc muốn nói chuyện với người có quyền. Trẫm sai ai?”",o:[
+  {n:"Thưa: xin ngài sai thứ sử, có chỉ trong tay",f:"phep",wx:"việc đúng phép",lx:"thứ sử muốn đánh hơn muốn nói",rt:"Ngài viết chỉ cho thứ sử."},
+  {n:"Thưa: xin cho thiếp viết thư, nhờ Kim Hựu Thành mang ra",f:"bien",if:()=>PTHT(),wx:"giặc nghe lời người họ cần",lx:"ngài thấy ngươi dính vào giặc",rt:"Ngài gật: “Thư của nàng, chỉ của trẫm.”",rf:"Ngài nói: “Phi tần viết thư cho giặc?”"},
+  {n:"Thưa: xin cho thiếp viết thư, gửi theo xuồng của giặc",f:"bien",if:()=>!PTHT(),wx:"giặc nghe lời người họ cần",lx:"ngài thấy ngươi dính vào giặc",rt:"Ngài gật: “Thư của nàng, chỉ của trẫm.”",rf:"Ngài nói: “Phi tần viết thư cho giặc?”"},
+  {n:"Thưa: không nói, cứ để giặc chờ đến rằm",f:"muu",wx:"giặc nóng ruột trước",lx:"người trên thuyền giặc chờ thêm",rt:"Ngài cười: “Nàng muốn giặc tự lộ.”"}]},
+ x1:{h:"Đêm rằm ở cửa bến",w:"emp",t:()=>"Đêm rằm, ba ngọn đuốc sáng trên thuyền giặc. "+(ptO("haido")==="ta"?"Tấm hải đồ vịnh kín nằm trên án của thứ sử. ":"")+"Ô Cửu chờ câu trả lời.",o:[
+  {n:"Xin chỉ cho thủy quân vây chặt, buộc giặc thả người",e:["win","lose"],rt:"Thủy quân khép vòng. Ô Cửu thả người Tân La xuống xuồng, rồi giương buồm chạy ra khơi.",rf:"Giặc phá vòng vây, bắt thêm một thuyền cá chạy theo."},
+  {n:"Hẹn Ô Cửu: thả người trước, rồi bàn chuyện bạc",e:["win2","mid"],rt:"Ô Cửu thả người {land} trước. Y nhắn: “Bạc thì chờ người có quyền.”",rf:"Ô Cửu không thả ai, chỉ nhắn: “Chờ.”"},
+  {n:"Để thủy quân giữ cửa bến, không ra bể",e:"mid",lx:"người vẫn trên thuyền giặc",rt:"Thuyền giặc chờ đến sáng, rồi chạy về phía các đảo đá."}]}},
+ E:{win:{tag:"Giặc thả người",w:"emp",t:"Người Tân La về đến bến, quỳ trước Thị bạc ty mà khóc. Kim Hựu Thành nói: “Ơn này, thuyền Tân La nhớ.”",go:()=>{RD_FL("pt_dang.tanla",1);return""}},
+  win2:{tag:"Người {land} về bến",w:"emp",t:"Người {land} về bến. Ô Cửu giữ lại người Tân La và rương bạc, chờ một cuộc nói chuyện.",go:()=>{RD_FL("pt_dang.phutang",1);return""}},
+  mid:{tag:"Thuyền giặc đi",t:"Thuyền giặc chạy về các đảo đá, mang theo người và bạc."},
+  lose:{tag:"Giặc phá vòng vây",w:"v",t:"Giặc phá vòng vây, bắt thêm một thuyền cá. Cả bến Minh Châu nói: việc của công chúa {land} làm khổ dân bến.",go:()=>{RD_FL("pt_dang.thuyenca",1);return""}}}});
+
+rdDef("pt_dang",7,{t:"Tiền chuộc",w:"maid",sj:"tiền chuộc người trên thuyền giặc",cast(A){if(!ptO("ngoctrai"))ptO("ngoctrai","ta");return rdCast(A,["v"])},
+ g:()=>"Thư Ô Cửu đến lần thứ hai: "+(RD_FL("pt_dang.tanla")?"người Tân La đã về, nhưng y còn giữ người {land} và rương bạc":RD_FL("pt_dang.phutang")?"người {land} đã về, nhưng y còn giữ người Tân La, có cả cháu trai Kim Hựu Thành":"y còn giữ cả người {land} lẫn người Tân La")+(RD_FL("pt_dang.thuyenca")?", thêm mười dân chài":"")+". Y đòi chuộc bằng ngọc trai, không lấy bạc: “Bạc thì ta đã có.”",
+ p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
+ B:{s1:{h:"Hộp ngọc trai của {mh}",w:"maid",if:RDW(1),t:"Trong rương hồi môn của ngươi có một hộp ngọc trai {mh} trao lúc ra bến. {maid} mở hộp, ngọc sáng như trăng.",o:[
+  {n:"Quyết đem ngọc chuộc người",f:"bien",wx:"người bị giữ có đường về",lx:"mất vật của {mh}",rt:"Ngươi đếm ngọc, đủ chuộc bốn mươi người."},
+  {n:"Giữ ngọc, xin Hộ bộ một khoản chuộc",f:"phep",wx:"của triều chuộc dân triều",lx:"Hộ bộ chậm",rt:"Hộ bộ nhận đơn, hứa xét trong tháng.",rf:"Hộ bộ nói: “Triều không chuộc người với giặc.”"},
+  {n:"Cho thợ làm ngọc giả trộn vào hộp",f:"muu",wx:"giữ được ngọc của {mh}",lx:"nếu giặc biết là ngọc giả",rt:"Thợ ngọc làm hai mươi hạt giả, giống như thật.",go:()=>{RD_FL("pt_dang.ngocgia",1);return""}}]},
+ s2:{h:"Dân chài kêu",w:"maid",if:RDW(0),t:"Vợ con những người bị giữ kéo đến cửa Thị bạc ty kêu khóc. Có người nói: “Công chúa có ngọc, sao không chuộc?”",o:[
+  {n:"Gửi gạo và bạc cho nhà người bị giữ",f:"bien",wx:"dân bến bớt oán",lx:"bạc ra",rt:"Nhà nào cũng có gạo qua tháng."},
+  {n:"Xin thứ sử dán cáo thị: triều đang lo",f:"phep",wx:"dân bến yên lòng",lx:"cáo thị không chuộc được người",rt:"Cáo thị dán ở cửa bến."},
+  {n:"Cho người tung tin giặc sắp bị đánh, dân đừng kêu",f:"muu",wx:"dân bến im",lx:"tin giả",rt:"Dân bến im, chờ.",rf:"Giặc nghe tin, dọa giết người."}]},
+ c1:{h:"Kim Hựu Thành xin ứng tiền",w:"maid",if:()=>PTHT(),t:"Kim Hựu Thành nói: thuyền Tân La năm nay nợ Thị bạc ty một khoản thuế lớn. Nếu triều cho y lấy khoản ấy chuộc người, y chuộc cả hai bên.",o:[
+  {n:"Xin ngài cho Kim Hựu Thành lấy thuế thuyền chuộc người",wx:"chuộc người mà không mất ngọc",lx:"Hộ bộ mất một khoản thuế",rt:"Ngài phê: “Lấy thuế chuộc dân, được.”",rf:"Hộ bộ cãi: thuế là của triều."},
+  {n:"Từ chối: thuế là thuế, chuộc là chuộc",wx:"không ai nói ngươi bán thuế",lx:"Kim Hựu Thành phật lòng",rt:"Kim Hựu Thành cúi đầu, không nói thêm."},
+  {n:"Bỏ bạc riêng góp với y",wx:"chuộc nhanh",lx:"bạc ra",rt:"Bạc của ngươi và bạc Tân La gói chung một bọc."}]},
+ c2:{h:"{v} hỏi chuyện ngọc",w:"v",need:["v"],t:"{v} hỏi khéo: “Nghe nói công chúa có hộp ngọc của mẫu hậu. Chuộc giặc bằng ngọc của hoàng gia bên kia, không biết có phải phép không?”",o:[
+  {n:"Đáp: ngọc là của {mh}, chuộc người là ý của {mh}",wx:"{v} hết cớ",lx:"việc ngọc thành chuyện cả cung",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1]);return""},rt:"{v} cười nhạt, không hỏi thêm.",rf:"{v} nói: “Thì ra bên ấy chuộc giặc quen rồi.”"},
+  {n:"Mời {v} góp một phần chuộc dân chài",wx:"{v} được tiếng nhân từ",lx:"{v} chia công",go:(A,_ok,G)=>{rdRel(A,"v",G[0]);return""},rt:"{v} gửi sang một túi bạc, sai người kể khắp cung."},
+  {n:"Để {v} nói, không đáp",wx:"không thêm chuyện",lx:"lời của {v} đi xa",rt:"Ngươi uống trà, nhìn ra hiên."}]},
+ t1:{h:"Hoàng thượng hỏi",w:"emp",t:"Hoàng thượng hỏi: “Chuộc giặc là nuôi giặc. Không chuộc thì dân chết. Nàng chọn gì?”",o:[
+  {n:"Thưa: chuộc người trước, đánh giặc sau",f:"bien",wx:"ngài thấy ngươi thương dân",lx:"ngài lo giặc được thể",rt:"Ngài gật: “Người sống mới đánh được giặc.”"},
+  {n:"Thưa: theo phép, triều không chuộc",f:"phep",wx:"ngài thấy ngươi giữ phép",lx:"người bị giữ chờ thêm",rt:"Ngài nói: “Thế thì phải đánh cho nhanh.”",rf:"Ngài im lặng: “Nàng nói như quan Hộ bộ.”"},
+  {n:"Thưa: chuộc mà gài người theo dò hang giặc",f:"muu",wx:"chuộc người mà biết đường đánh",lx:"người đi dò có thể chết",rt:"Ngài cười: “Nàng giống người bên kia bể hơn trẫm nghĩ.”"}]},
+ x1:{h:"Ngày trao chuộc",w:"emp",t:()=>"Ngày trao chuộc, xuồng của Ô Cửu đậu ở bãi cát ngoài bến. "+(ptO("ngoctrai")==="ta"?"Hộp ngọc của {mh} nằm trong tay ngươi.":"")+" Người bị giữ đứng trên mạn thuyền giặc nhìn vào bờ.",o:[
+  {n:"Trao hộp ngọc của {mh}, đổi lấy người",if:()=>ptO("ngoctrai")==="ta",e:["win","lose"],rt:"Ô Cửu đếm ngọc, rồi thả người xuống xuồng. Y nhìn vào bờ, lần đầu cúi đầu.",rf:()=>RD_FL("pt_dang.ngocgia")?"Ô Cửu đếm ra ngọc giả, giữ lại một nửa số người.":"Ô Cửu chê ngọc ít, giữ lại một nửa số người.",go:()=>ptO("ngoctrai","ocuu")},
+  {n:"Trao bạc chuộc, đổi lấy người",if:()=>ptO("ngoctrai")!=="ta",e:["win","lose"],rt:"Ô Cửu cân bạc, rồi thả người xuống xuồng.",rf:"Ô Cửu chê bạc, giữ lại một nửa số người."},
+  {n:"Cho người bơi lén ra cắt dây thuyền giặc trong lúc trao chuộc",e:["win2","mid"],rt:"Thuyền giặc trôi dạt vào bãi. Người bị giữ nhảy xuống nước bơi vào bờ; Ô Cửu giương buồm chạy.",rf:"Người bơi bị phát hiện. Ô Cửu chạy ra khơi, không ai bị giết, không ai được thả."},
+  {n:"Hoãn trao chuộc, chờ chỉ của triều",e:"mid",lx:"người vẫn bị giữ",rt:"Xuồng giặc chờ đến chiều, rồi quay ra khơi."}]}},
+ E:{win:{tag:"Người về bờ",w:"emp",t:"Người bị giữ về bờ. Dân bến Minh Châu gọi ngươi là “công chúa chuộc người”.",go:()=>{RD_FL("pt_dang.chuoc",1);return""}},
+  win2:{tag:"Thuyền giặc trôi vào bãi",w:"emp",t:"Người bị giữ tự bơi vào bờ. Ô Cửu mất người mà không mất bạc; y biết ai đã cho người cắt dây.",go:()=>{RD_FL("pt_dang.chuoc",1);RD_FL("pt_dang.oclua",1);return""}},
+  mid:{tag:"Người còn trên thuyền giặc",t:"Người vẫn trên thuyền giặc. Ô Cửu chờ; giặc biển không vội."},
+  lose:{tag:"Chuộc hỏng",w:"v",t:"Một nửa số người bị giữ lại. {v} nói: công chúa {land} chuộc giặc mà giặc còn chê."}}});
+
+rdDef("pt_dang",8,{t:"Thị bạc ty",w:"emp",sj:"sổ thu của Thị bạc ty Minh Châu",cast(A){if(!ptO("sothibac"))ptO("sothibac","tbs");return rdCast(A,["v"])},
+ g:()=>(PTHT()?"Kim Hựu Thành tìm đến ngươi, mặt tái: ":"Thư Kim Hựu Thành từ bến gửi lên: ")+"Thị bạc sứ ở Minh Châu bắt thuyền Tân La nộp thuế hai lần, lần sau vào túi riêng. Người trong ty còn kể: Thị bạc sứ bán giấy thông hành cho cả thuyền giặc. Cuốn sổ thu thật nằm trong rương của y.",
+ p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
+ B:{s1:{h:"Một thư lại trong ty",w:"maid",if:RDW(1),t:"Một thư lại của Thị bạc ty, vợ con từng bị giặc bắt mà được ngươi chuộc, lén nhắn: y chép được mấy trang sổ thu thật.",o:[
+  {n:"Bảo y chép tiếp, giấu kỹ",f:"muu",wx:"có bản chép trong tay",lx:"y có thể bị phát hiện",rt:"Mỗi tuần một trang chép về đến cung ngươi.",rf:"Thị bạc sứ đổi rương khóa, y không chép được nữa."},
+  {n:"Đưa y vào kinh làm người chứng",f:"phep",wx:"người chứng an toàn",lx:"Thị bạc sứ biết mất người",rt:"Thư lại về kinh, ở nhà khách Hồng Lư tự."},
+  {n:"Cho y bạc, bảo y đừng dính vào",f:"bien",wx:"y không gặp nạn",lx:"mất một người chứng",rt:"Thư lại cúi lạy, về quê."}]},
+ s2:{h:"Thị bạc sứ gửi quà",w:"maid",if:RDW(0),t:"Thị bạc sứ gửi vào cung ngươi một hộp trầm hương, kèm lời: “Việc bến cảng, công chúa đừng bận lòng.”",o:[
+  {n:"Nhận quà, gửi lời cảm tạ",f:"muu",wx:"y yên tâm, lơi tay",lx:"có của của y trong tay",rt:"Hộp trầm hương đặt trên án.",go:()=>ptO("tramhuong","ta")},
+  {n:"Trả quà, nói rõ không nhận",f:"phep",wx:"không ai nói ngươi ăn của y",lx:"y biết ngươi không phải người của y",rt:"Hộp trầm hương về lại Minh Châu.",go:()=>ptO("tramhuong","tbs")},
+  {n:"Nhận quà, đưa ngay sang Hộ bộ làm chứng",f:"bien",wx:"có chứng y đút lót",lx:"y biết ngươi không đùa",rt:"Hộ bộ ghi: quà của Thị bạc sứ gửi phi tần.",go:()=>ptO("tramhuong","kho")}]},
+ c1:{h:"Kim Hựu Thành xin che",w:"maid",t:()=>PTHT()?"Kim Hựu Thành xin ngươi một lời với Hộ bộ: thuyền Tân La chỉ nộp thuế một lần như mọi thuyền.":"Thư Kim Hựu Thành xin ngươi một lời với Hộ bộ: thuyền Tân La chỉ nộp thuế một lần như mọi thuyền.",o:[
+  {n:"Viết thư cho Hộ bộ xin xét",wx:"Hộ bộ biết có chuyện",lx:"Thị bạc sứ biết ngươi đứng sau",rt:"Hộ bộ cho người xuống Minh Châu.",rf:"Thư nằm ở Hộ bộ, chưa ai mở."},
+  {n:"Bảo y chịu thêm một mùa, chờ chứng",wx:"không đánh động",lx:"thuyền Tân La thiệt",rt:"Kim Hựu Thành thở dài, nhận lời."},
+  {n:"Bỏ bạc trả bớt phần thuế thứ hai cho y",wx:"y đỡ thiệt",lx:"bạc ra",rt:"Kim Hựu Thành cảm tạ, ghi ơn vào sổ Tân La."}]},
+ c2:{h:"Nhà {v} và Thị bạc sứ",w:"v",need:["v"],t:"{maid} nghe được: Thị bạc sứ là anh họ bên ngoại của {v}. Mỗi năm nhà {v} nhận một rương quà từ bến.",o:[
+  {n:"Cho người dò rương quà nhà {v}",wx:"biết của từ đâu",lx:"{v} biết bị dò",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1]);return""},rt:"Rương quà năm nay có cả bạc Tân La.",rf:"Người dò bị bắt gặp ở cửa nhà {v}."},
+  {n:"Gặp {v}, khuyên nàng tránh xa việc bến",wx:"{v} có đường lui",lx:"{v} biết ngươi biết",go:(A,_ok,G)=>{rdRel(A,"v",G[0]);return""},rt:"{v} im lặng rất lâu, rồi gật đầu."},
+  {n:"Giữ chuyện này, chờ lúc cần",wx:"có một con bài",lx:"việc bến chưa xong",rt:"Ngươi ghi một dòng vào sổ riêng."}]},
+ t1:{h:"Cuốn sổ thật",w:"maid",t:"Đêm ấy, người của ngươi lấy được cuốn sổ thu thật từ rương Thị bạc sứ, thay vào một cuốn sổ trắng. Trang cuối ghi: ba giấy thông hành bán cho thuyền buồm đen.",o:[
+  {n:"Giữ sổ trong cung, chưa nói với ai",f:"muu",wx:"sổ an toàn",lx:"giữ sổ ăn cắp là tội",rt:"Cuốn sổ nằm dưới đáy rương áo.",go:()=>ptO("sothibac","ta")},
+  {n:"Đưa sổ cho Hộ bộ ngay",f:"phep",wx:"việc theo phép",lx:"Hộ bộ có người của Thị bạc sứ",rt:"Hộ bộ nhận sổ, niêm phong.",rf:"Hộ bộ nhận sổ, rồi nói sổ bị nước làm nhòe.",go:()=>ptO("sothibac","kho")},
+  {n:"Gửi Kim Hựu Thành giữ bản chép, ngươi giữ bản thật",f:"bien",if:()=>PTHT(),wx:"hai nơi giữ, khó mất",lx:"Kim Hựu Thành biết hết",rt:"Kim Hựu Thành cất bản chép trong khoang thuyền.",go:()=>ptO("sothibac","ta")},
+  {n:"Cho {maid} chép một bản, ngươi giữ bản thật",f:"bien",if:()=>!PTHT(),wx:"hai bản, khó mất",lx:"{maid} biết hết",rt:"{maid} chép suốt đêm.",go:()=>ptO("sothibac","ta")}]},
+ x1:{h:"Thị bạc sứ vào kinh",w:"emp",t:()=>"Thị bạc sứ được gọi vào kinh trình sổ. Y mang theo cuốn sổ đẹp đẽ, mặt không đổi sắc. "+(ptO("sothibac")==="ta"?"Cuốn sổ thật nằm trong tay ngươi.":ptO("sothibac")==="kho"?"Cuốn sổ thật nằm trong kho Hộ bộ.":"Cuốn sổ thật vẫn ở trong rương của y."),o:[
+  {n:"Dâng sổ thật lên Hoàng thượng, xin xét Thị bạc sứ",e:["win","lose"],rt:"Ngài so hai cuốn sổ, ném cuốn đẹp xuống đất. Thị bạc sứ bị lột mũ, giải đi.",rf:"Thị bạc sứ nói sổ của ngươi là sổ giả. Ngài cho Hộ bộ xét lại, việc kéo dài.",go:(A,ok)=>{if(ptO("sothibac")==="ta")ptO("sothibac","vua");return""}},
+  {n:"Gặp riêng Thị bạc sứ, buộc y nghe lời ngươi từ nay",e:["win2","mid"],rt:"Thị bạc sứ quỳ xuống: từ nay thuyền nào vào bến Minh Châu, ngươi nói một câu là xong.",rf:"Thị bạc sứ không sợ, nói: “Công chúa cũng ăn trộm sổ.”"},
+  {n:"Trả sổ lại, chỉ xin bớt thuế cho thuyền Tân La",e:"mid",lx:"Thị bạc sứ vẫn ngồi ghế",rt:"Thuyền Tân La được nộp một lần. Thị bạc sứ cúi đầu cảm ơn ngươi.",go:()=>{if(ptO("sothibac")==="ta")ptO("sothibac","tbs");return""}}]}},
+ E:{win:{tag:"Thị bạc sứ bị giải",w:"emp",t:"Thị bạc sứ bị giải về Hình bộ. Bến Minh Châu có người mới ngồi ghế, và người ấy chào ngươi trước."},
+  win2:{tag:"Thị bạc sứ nghe lời",w:"emp",t:()=>ptO("sothibac")==="ta"?"Thị bạc sứ vẫn ngồi ghế, nhưng cuốn sổ thật nằm trong tay ngươi. Bến Minh Châu nghe lời ngươi mà không ai biết vì sao.":"Thị bạc sứ vẫn ngồi ghế, nhưng biết ngươi nắm được việc của y. Bến Minh Châu nghe lời ngươi mà không ai biết vì sao."},
+  mid:{tag:"Thuế một lần",t:"Thuyền Tân La nộp thuế một lần. Những giấy thông hành cho thuyền buồm đen thì không ai hỏi đến."},
+  lose:{tag:"Sổ bị nói là giả",w:"v",t:"Thị bạc sứ còn ngồi ghế. Người nhà {v} kể khắp kinh: công chúa {land} sai người trộm sổ của quan."}}});
+
+const PTDC=()=>ptO("daochem");/* the iron-cutting sword: it lies in the six crates (holder = hangdao's holder) until .9 takes it out */
+rdDef("pt_dang",9,{t:"Thanh đao chém sắt",w:"emp",sj:"thanh đao chém sắt trong sáu hòm đao",cast(A){if(!ptO("daochem"))ptO("daochem",ptO("hangdao")||"kho");return rdCast(A,["v"])},
+ g:()=>"Binh bộ mở hội thử binh khí. Trong sáu hòm đao {land} có một thanh khắc dấu thợ rèn bên kia bể, chém đứt một lưỡi đao Đại Hy làm hai. "+({vua:"Thanh đao ấy nằm trong kho ngự.",kho:"Thanh đao ấy nằm trong kho.",huuthanh:"Thanh đao ấy Kim Hựu Thành mang theo, chưa bán."})[PTDC()]+" Ngay hôm sau, {v} tâu: thanh đao ấy vốn được rèn để bán cho giặc.",
+ p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
+ B:{s1:{h:"Binh bộ hỏi thợ rèn",w:"emp",if:RDW(1),t:"Quan Binh bộ hỏi ngươi: thợ rèn thanh đao ấy là ai, có thể mời sang Đại Hy dạy nghề không.",o:[
+  {n:"Viết thư cho {pv} xin gửi thợ rèn sang",f:"phep",wx:"hai nước có thêm một mối",lx:"bên kia có thể không muốn lộ nghề",rt:"Thư đi theo thuyền Tân La.",rf:"Thư đi mà không có hồi âm."},
+  {n:"Thưa: thợ rèn là người của {pv}, không thể cho",f:"bien",wx:"giữ được bí quyết của {land}",lx:"Binh bộ không vui",rt:"Quan Binh bộ cười nhạt: “Thì ra bên ấy giữ nghề.”"},
+  {n:"Hứa với Binh bộ, đổi lấy một lời bênh trước triều",f:"muu",wx:"Binh bộ đứng về phía ngươi",lx:"một lời hứa chưa chắc giữ được",rt:"Quan Binh bộ gật đầu: “Đao tốt thì không phải đao giặc.”"}]},
+ s2:{h:"Đao bị nghi",w:"maid",if:RDW(0),t:"Cấm quân đến xem thanh đao, lắc đầu: đao tốt quá, giặc mà có thì thủy quân khó đánh.",o:[
+  {n:"Mời cấm quân thử đao với giáp Đại Hy",f:"phep",wx:"thấy rõ đao chém được gì",lx:"đao càng bị sợ",rt:"Lưỡi đao rạch qua giáp, không mẻ."},
+  {n:"Nói rõ đao đến từ thuyền hồi môn, có sổ",f:"bien",wx:"đao có gốc",lx:"phải đưa sổ ra",rt:"Cấm quân xem sổ hàng, gật đầu."},
+  {n:"Cho người nói khẽ: đao giặc có là do Thị bạc ty bán giấy",f:"muu",wx:"mũi dùi quay sang chỗ khác",lx:"phải có chứng",rt:"Cấm quân bàn tán về Thị bạc ty.",rf:"Không ai tin."}]},
+ c1:{h:"{v} tâu chuyện đao",w:"v",need:["v"],t:"{v} tâu với Hoàng hậu: có người thấy thuyền buồm đen chở đao {land} ở các đảo đá. Đao của công chúa, sao lại ở trong tay giặc?",o:[
+  {n:"Xin Hoàng hậu cho đếm lại sáu hòm đao",wx:"đếm là biết thiếu hay đủ",lx:"phải mở hòm trước mọi người",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1]);return""},rt:()=>"Hòm đếm đủ, chỉ thiếu những thanh có giấy: "+(ptO("dao_vua")?"một thanh dâng Hoàng thượng, ":"")+(ptO("dao_v")?"một thanh ở nhà {v}, ":"")+(ptO("dao_ht")?"một thanh ở chỗ Kim Hựu Thành, ":"")+(ptO("dao_bb")?"một thanh ở Binh bộ, ":"")+"còn lại không sót thanh nào.",rf:"Hòm đếm đủ, nhưng {v} nói: “Đếm đủ thì đao giặc ở đâu ra?”"},
+  {n:"Hỏi lại: đao ở nhà {v} có giấy, còn đao giặc thì giấy ở đâu?",if:()=>ptO("dao_v")==="v",wx:"{v} câm lời",lx:"thù hai nhà sâu thêm",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"{v} tái mặt. Thanh đao nhà nàng có ấn của ngươi."},
+  {n:"Hỏi lại: người thấy thuyền giặc là ai, sao không báo thủy quân?",if:()=>ptO("dao_v")!=="v",wx:"{v} lúng túng",lx:"{v} thêm oán",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"{v} không nói được tên người ấy."},
+  {n:"Im lặng, xin Hoàng thượng xét",wx:"không cãi nhau",lx:"{v} nói trước",rt:"Hoàng hậu cho đợi ý ngài."}]},
+ c2:{h:"Thư của giặc làm chứng",w:"maid",t:()=>({ta:"Lá thư của Ô Cửu vẫn trong hộp gỗ của ngươi.",vua:"Lá thư của Ô Cửu nằm trong Ngự thư phòng.",huuthanh:"Lá thư của Ô Cửu vẫn ở chỗ Kim Hựu Thành."})[ptO("thugiac")]+" Trong thư, giặc đòi bạc, không đòi đao.",o:[
+  {n:"Đem thư ra làm chứng",wx:"có chứng giặc không cần đao",lx:"phải nói rõ vì sao có thư giặc",rt:"Lá thư được đặt cạnh sổ hàng.",rf:"Người ta hỏi: sao công chúa giữ thư giặc lâu thế?"},
+  {n:"Giữ thư, không đem ra",wx:"không ai hỏi chuyện thư",lx:"mất một chứng",rt:"Lá thư nằm yên."},
+  {n:"Bỏ bạc mời thầy đồ đọc chữ giặc trước triều",wx:"người đọc là người ngoài",lx:"bạc ra",rt:"Thầy đồ đọc từng chữ: bạc, bến, không đao."}]},
+ t1:{h:"Hoàng thượng cầm đao",w:"emp",t:"Hoàng thượng cầm thanh đao lên, nhìn lưỡi rất lâu: “Đao này nàng muốn ai giữ?”",o:[
+  {n:"Thưa: xin ngài giữ",f:"phep",wx:"đao trong tay ngài thì không ai nói",lx:"đao rời tay ngươi",rt:"Ngài treo đao trong Ngự thư phòng.",go:()=>ptO("daochem","vua")},
+  {n:"Thưa: xin trả đao về cho thợ rèn bên kia bể",f:"bien",wx:"bí quyết ở lại bên ấy",lx:"Binh bộ tiếc",rt:"Ngài gật: “Đao về nhà, thì không ai nói nó là đao giặc.”",go:()=>ptO("daochem","tn")},
+  {n:"Thưa: xin tặng Thống lĩnh thủy quân Minh Châu để đánh giặc",f:"muu",wx:"thủy quân nợ ngươi",lx:"đao vào tay người khác",rt:"Ngài cười: “Lấy đao người ta sợ đi đánh người ta.”",go:()=>ptO("daochem","thuyquan")}]},
+ x1:{h:"Phiên xét thanh đao",w:"emp",t:"Binh bộ mở phiên xét. Thanh đao đặt trên án, {v} đứng một bên, ngươi đứng một bên.",o:[
+  {n:"Trình thư của giặc và sổ hàng: giặc đòi bạc, không đòi đao",if:()=>["ta","vua","huuthanh"].includes(ptO("thugiac")),e:["win","lose"],rt:"Binh bộ đọc thư, so sổ, rồi phán: đao không phải đao giặc. {v} lui ra trước.",rf:"Binh bộ nói thư giặc ai cũng viết được.",go:()=>{if(ptO("thugiac")==="huuthanh")ptO("thugiac","vua");return""}},
+  {n:"Xin Binh bộ mở sổ hàng của thuyền hồi môn ra đối chứng",if:()=>!["ta","vua","huuthanh"].includes(ptO("thugiac")),e:["win","lose"],rt:"Sổ hàng ghi đủ sáu hòm. Binh bộ phán: đao không phải đao giặc.",rf:"Binh bộ nói sổ hàng do người nhà công chúa ghi."},
+  {n:"Xin Hoàng thượng phán, thiếp không cãi",e:["win2","mid"],rt:"Ngài phán: đao của {pv}, không phải đao giặc. Ai nói nữa thì xét người nói.",rf:"Ngài nói: “Để Binh bộ xét.”"},
+  {n:"Nhận lỗi giữ đao trái phép, xin nộp cả sáu hòm vào kho",e:"mid",lx:"đao không còn là của ngươi",rt:"Sáu hòm đao vào kho Binh bộ. Không ai nói thêm.",go:()=>{if(["ta","vua"].includes(ptO("hangdao")))ptO("hangdao","kho");return""}}]}},
+ E:{win:{tag:"Đao không phải đao giặc",w:"emp",t:"Phiên xét khép lại. Thanh đao chém sắt được gọi là “đao hồi môn”, và kẻ nói nó là đao giặc phải im.",go:(A,G)=>{rdOan(A,"v",G[0]);return""}},
+  win2:{tag:"Lời của Hoàng thượng",w:"emp",t:"Ngài nói một lời, cả triều thôi bàn. Nhưng ai cũng biết: lời ấy là ngài che cho ngươi."},
+  mid:{tag:"Đao vào kho",t:"Đao vào kho, chuyện đao thôi bàn. Ngươi mất đao mà giữ được yên."},
+  lose:{tag:"Đao giặc",w:"v",t:"Phiên xét không kết. {v} kể khắp nơi: đao của công chúa {land} và đao của giặc rèn cùng một lò."}}});
+
+rdDef("pt_dang",10,{t:"Bến cảng",w:"emp",sj:"số phận Ô Cửu ở bến Minh Châu",cast(A){if(ptAlive("ocuu")&&ptP("ocuu","w")==="hb"){ptMove("ocuu","nguc");RD_FL("pt_dang.bat",ptO("haido")==="ta"?"hd":"hang")}
+  if(ptO("ruongbac")==="ocuu")ptO("ruongbac","thusu");return rdCast(A,["v"])},
+ g:()=>(RD_FL("pt_dang.bat")==="hd"?"Thủy quân Minh Châu theo tấm hải đồ vây vịnh kín, bắt sống Ô Cửu. ":"Sau một trận bão, thuyền buồm đen vỡ mạn; Ô Cửu tự chèo xuồng vào bến xin hàng. ")+"Y bị giam trong ngục Minh Châu, rương bạc hồi môn nằm trong kho của thứ sử. Thứ sử muốn chém để răn, Kim Hựu Thành xin một phường cho thuyền Tân La, còn dân bến thì chờ xem triều xử kẻ biển ra sao.",
+ p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
+ B:{s1:{h:"Ô Cửu xin gặp",w:"maid",if:()=>RDW(1)()&&PTOC()==="nguc",t:"Ngục tốt Minh Châu gửi thư lên: Ô Cửu xin được nói với công chúa một lời, qua người của nàng.",o:[
+  {n:"Sai {maid} xuống ngục nghe y nói",f:"bien",wx:"biết y muốn gì",lx:"người ta nói ngươi qua lại với giặc",rt:"Ô Cửu nói: “Ta cướp vì không có bến. Cho ta một bến, ta giữ bến cho các người.”"},
+  {n:"Để thứ sử hỏi cung theo phép",f:"phep",wx:"việc đúng phép",lx:"thứ sử hỏi theo ý thứ sử",rt:"Bản cung của Ô Cửu được gửi lên kinh."},
+  {n:"Cho người dọa y: khai nhà {v} mua đồ cướp thì được sống",f:"muu",wx:"có lời khai đánh vào nhà {v}",lx:"lời khai ép là lời khai dễ lật",rt:"Ô Cửu cười, rồi khai đúng như người ta muốn nghe.",rf:"Ô Cửu nhổ xuống đất: “Ta là giặc, không phải chó săn.”",go:(A,ok)=>{if(ok)RD_FL("pt_dang.khaiv",1);return""}}]},
+ s2:{h:"Thứ sử muốn chém",w:"emp",if:RDW(0),t:"Minh Châu thứ sử dâng sớ xin chém Ô Cửu ngay ở cửa bến cho dân xem. Sớ viết: chém một tên, bể yên mười năm.",o:[
+  {n:"Xin ngài hoãn chém, cho xét kỹ",f:"phep",wx:"việc không vội",lx:"thứ sử phật lòng",rt:"Ngài phê: hoãn một tháng."},
+  {n:"Gửi thư hỏi dân bến muốn gì",f:"bien",wx:"nghe tiếng dân",lx:"dân bến có người muốn chém, có người không",rt:"Dân chài nói: giặc có tội, nhưng giặc cũng là người bến cũ."},
+  {n:"Để mặc thứ sử",f:"muu",wx:"không dính vào",lx:"Ô Cửu có thể chết trước khi ngươi kịp nói",rt:"Ngươi không gửi thư nào."}]},
+ c1:{h:"Phường Tân La",w:"maid",if:()=>PTHT(),t:"Kim Hựu Thành xin ngươi tâu giúp: cho thuyền Tân La một phường riêng ở bến Minh Châu, có người Tân La tự xử việc trong phường.",o:[
+  {n:"Hứa tâu giúp y",wx:"Kim Hựu Thành thành người của ngươi ở bến",lx:"thứ sử không vui",rt:"Kim Hựu Thành cúi lạy: “Phường Tân La sẽ mang ơn công chúa.”"},
+  {n:"Khuyên y xin qua Hồng Lư tự",wx:"việc đúng đường",lx:"y thấy ngươi không giúp hết lòng",rt:"Kim Hựu Thành viết đơn gửi Hồng Lư tự."},
+  {n:"Đòi y một phần lời của phường mỗi năm",wx:"có một nguồn bạc ở bến",lx:"người ta nói ngươi ăn chia với lái buôn",rt:"Kim Hựu Thành nhìn ngươi lâu, rồi gật đầu."}]},
+ c2:{h:"{v} và lời khai",w:"v",need:["v"],t:()=>RD_FL("pt_dang.khaiv")?"Lời khai của Ô Cửu về nhà {v} đã đến tai {v}. Nàng ta đến cung ngươi, mặt trắng bệch.":"{v} nói với Hoàng hậu: chém ngay tên giặc ấy đi, kẻo y khai bừa hại người trong cung.",o:[
+  {n:"Đốt lời khai trước mặt {v}, đổi lấy một lời hứa",if:()=>RD_FL("pt_dang.khaiv"),wx:"{v} nợ ngươi cả nhà",lx:"mất một chứng",go:(A,_ok,G)=>{rdRel(A,"v",G[0]);return""},rt:"{v} nhìn tờ giấy cháy, gật đầu: từ nay không động đến ngươi."},
+  {n:"Dâng lời khai lên Hoàng hậu",if:()=>RD_FL("pt_dang.khaiv"),wx:"nhà {v} bị xét",lx:"lời khai ép có thể bị lật",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1]);return""},rt:"Hoàng hậu cho xét nhà {v}.",rf:"Ô Cửu bị hỏi lại, khai rằng bị ép."},
+  {n:"Đáp: y khai gì thì cứ để triều nghe",if:()=>!RD_FL("pt_dang.khaiv"),wx:"không ai nói ngươi che giặc",lx:"{v} lo",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"{v} im lặng."},
+  {n:"Đồng ý với {v}: việc giặc nên xong nhanh",if:()=>!RD_FL("pt_dang.khaiv"),wx:"{v} thấy ngươi cùng ý",lx:"Ô Cửu gần cái chết hơn",go:(A,_ok,G)=>{rdRel(A,"v",G[0]);return""},rt:"{v} cười, lần đầu cười thật với ngươi."},
+  {n:"Không đáp",wx:"không thêm chuyện",lx:"{v} nói nhiều hơn",rt:"Ngươi uống trà."}]},
+ t1:{h:"Hoàng thượng hỏi",w:"emp",t:"Hoàng thượng hỏi: “Tên giặc ấy cướp của nàng. Nàng muốn trẫm xử y thế nào?”",o:[
+  {n:"Thưa: tha y, cho y giữ bến",f:"bien",wx:"ngài thấy ngươi rộng lòng",lx:"ngài lo thả hổ về rừng",rt:"Ngài nói: “Nàng không sợ y trở mặt?”",rf:"Ngài lắc đầu: “Giặc mà giữ bến?”"},
+  {n:"Thưa: theo luật mà xử",f:"phep",wx:"ngài thấy ngươi không thiên vị",lx:"Ô Cửu gần cái chết",rt:"Ngài gật: “Luật là luật.”"},
+  {n:"Thưa: giữ y sống, để y khai hết bọn mua đồ cướp",f:"muu",wx:"ngài thấy một mối lợi",lx:"y sống thì còn chuyện",rt:"Ngài cười: “Nàng muốn dùng giặc bắt kẻ mua của giặc.”"}]},
+ x1:{h:"Tờ phán ở cửa bến",w:"emp",t:()=>"Tờ phán sắp gửi xuống Minh Châu. "+PTBAC()+" Hoàng thượng chờ lời cuối của ngươi.",o:[
+  {n:"Xin tha Ô Cửu, cho y và người của y giữ bến làm thủy binh",e:["win","lose"],rt:"Ô Cửu ra khỏi ngục, quỳ ở cửa bến nhận cờ thủy binh. Rương bạc được trả về cho ngươi.",rf:"Thứ sử can, ngài cho giam Ô Cửu thêm một năm.",go:(A,ok)=>{if(ok){ptMove("ocuu","cang");if(ptO("ruongbac")==="thusu")ptO("ruongbac","ta")}return""}},
+  {n:"Xin giam Ô Cửu chờ xét, trả bạc về cho chủ",e:["win2","mid"],rt:"Ô Cửu ở lại ngục. Rương bạc hồi môn về đến cung ngươi, niêm phong còn nguyên.",rf:"Ô Cửu ở lại ngục. Rương bạc nộp kho Hộ bộ.",go:(A,ok)=>{if(ptO("ruongbac")==="thusu")ptO("ruongbac",ok?"ta":"kho");return""}},
+  {n:"Để thứ sử chém theo luật",e:"mid",lx:"bể mất một người biết đường",rt:"Ô Cửu bị chém ở cửa bến. Rương bạc nộp kho Hộ bộ.",go:()=>{ptKill("ocuu");if(ptO("ruongbac")==="thusu")ptO("ruongbac","kho");return""}}]}},
+ E:{win:{tag:"Giặc giữ bến",w:"emp",t:"Ô Cửu đứng ở cửa bến Minh Châu với lá cờ thủy binh. Dân bến nói: từ nay giặc biết mặt nhau, không ai dám vào."},
+  win2:{tag:"Bạc về chủ",w:"emp",t:"Rương bạc hồi môn về đến cung ngươi. Ô Cửu ngồi trong ngục, chờ một ngày xét."},
+  mid:{tag:"Một tờ phán",t:()=>ptAlive("ocuu")?"Ô Cửu ngồi trong ngục. Bến Minh Châu yên, nhưng chưa ai biết yên được bao lâu.":"Đầu Ô Cửu treo ở cửa bến ba ngày. Bến Minh Châu yên, nhưng người của y còn trên các đảo đá."},
+  lose:{tag:"Tha mà không được",w:"v",t:"Lời xin tha giặc của ngươi bị bác. {v} kể khắp nơi: công chúa {land} xin tha cho kẻ đã cướp chính mình, chắc có chuyện gì."}}});
+
+rdDef("pt_dang",11,{t:"Luật biển",w:"emp",sj:"luật biển cho bến Minh Châu",cast(A){return rdCast(A,["v"])},
+ g:()=>"Hoàng thượng sai soạn luật biển cho bến Minh Châu: thuyền nào được vào, thuế thu mấy lần, giặc ra hàng thì xử sao. "+({cang:"Ô Cửu đang giữ cửa bến dưới cờ thủy binh.",nguc:"Ô Cửu vẫn ngồi trong ngục Minh Châu.",chet:"Ô Cửu đã chết; người của y còn trên các đảo đá."})[PTOC()]+" Bản thảo đầu tiên đặt trên án của ngươi, vì ai cũng biết bến ấy đã thay đổi từ ngày thuyền hồi môn của ngươi gặp nạn.",
+ p:[["s1","s2"],["c1","c2","c3","c4"],["t1"],["x1"]],
+ B:{s1:{h:"Bản thảo của Hộ bộ",w:"emp",if:RDW(1),t:"Hộ bộ gửi bản thảo luật: thuyền ngoại quốc nộp thuế một lần ở Thị bạc ty, có giấy thì được buôn, không giấy thì giữ thuyền.",o:[
+  {n:"Thêm một điều: thuyền gặp nạn được cứu, không bị coi là hàng buôn",f:"bien",wx:"người đi bể được che",lx:"Hộ bộ mất một khoản",rt:"Hộ bộ ghi thêm điều ấy, đặt tên là “điều thuyền hồi môn”."},
+  {n:"Giữ nguyên bản của Hộ bộ",f:"phep",wx:"Hộ bộ nể ngươi",lx:"luật chẳng có gì mới",rt:"Hộ bộ cảm tạ."},
+  {n:"Thêm một điều: Thị bạc sứ phải nộp sổ thật mỗi mùa lên kinh",f:"muu",wx:"Thị bạc ty khó ăn bớt",lx:"Thị bạc ty ghét ngươi",rt:"Điều ấy được viết thêm bằng mực son."}]},
+ s2:{h:"Luật chưa có ai soạn",w:"maid",if:RDW(0),t:"Hộ bộ đùn cho Hồng Lư tự, Hồng Lư tự đùn cho Binh bộ. Bản thảo luật biển ba tháng vẫn trắng.",o:[
+  {n:"Tự viết một bản, dâng lên Hoàng thượng",f:"bien",wx:"luật có hình hài",lx:"người ta nói phi tần soạn luật",rt:"Ngươi viết mười điều, mỗi điều một dòng."},
+  {n:"Xin ngài giao hẳn cho Hộ bộ",f:"phep",wx:"việc có người lo",lx:"luật theo ý Hộ bộ",rt:"Ngài giao Hộ bộ, hạn một tháng."},
+  {n:"Bỏ bạc mời một lão thư lại bến cũ lên kinh soạn giúp",f:"muu",wx:"người hiểu bến soạn luật bến",lx:"bạc ra",rt:"Lão thư lại kể cả đêm chuyện bến xưa, sáng ra có ba điều luật."}]},
+ c1:{h:"Ô Cửu giữ bến",w:"maid",if:()=>PTOC()==="cang",t:"Từ cửa bến Minh Châu, Ô Cửu gửi lên một tờ giấy viết vụng: thủy binh của y bắt được hai thuyền buồm đen mới, xin triều xử theo luật mới.",o:[
+  {n:"Xin luật mới cho giặc ra hàng được sống",wx:"giặc có đường về",lx:"dân bến có người không bằng lòng",rt:"Hai thuyền giặc ra hàng, nhập vào thủy binh của Ô Cửu."},
+  {n:"Xin luật mới xử giặc như cũ",wx:"luật nghiêm",lx:"Ô Cửu thấy bị phản",rt:"Ô Cửu nhận lệnh, không nói gì."},
+  {n:"Thưởng Ô Cửu bạc, bảo y giữ chặt bến",wx:"Ô Cửu càng trung",lx:"bạc ra",rt:"Ô Cửu treo thêm một ngọn đèn ở cửa bến."}]},
+ c2:{h:"Ô Cửu trong ngục",w:"maid",if:()=>PTOC()==="nguc",t:"Vợ con những người theo Ô Cửu kéo đến cửa ngục Minh Châu, hỏi luật mới có cho người cũ của giặc ra hàng không.",o:[
+  {n:"Xin luật mới cho người theo giặc được ra hàng",wx:"các đảo đá bớt người",lx:"người ta nói ngươi nương tay với giặc",rt:"Mười thuyền nhỏ từ các đảo đá vào bến nộp giáo."},
+  {n:"Xin luật mới không tha người theo giặc",wx:"luật nghiêm",lx:"các đảo đá còn người",rt:"Cửa ngục đóng. Vợ con người theo giặc về đảo."},
+  {n:"Gửi gạo cho vợ con họ",wx:"dân bến thấy ngươi thương người",lx:"bạc ra",rt:"Gạo phát ở cửa ngục ba ngày."}]},
+ c3:{h:"Người của Ô Cửu",w:"maid",if:()=>PTOC()==="chet",t:"Người của Ô Cửu còn trên các đảo đá, không đầu lĩnh, cướp cả thuyền cá. Thứ sử xin thêm quân.",o:[
+  {n:"Xin luật mới cho kẻ ra hàng được sống",wx:"các đảo đá có đường ra",lx:"dân bến có người không bằng lòng",rt:"Ba thuyền nhỏ ra hàng."},
+  {n:"Xin thêm quân cho thứ sử",wx:"các đảo đá bị quét",lx:"quân phí",rt:"Thủy quân đi ba tháng, đảo đá vắng."},
+  {n:"Bỏ bạc treo thưởng cho ai bắt được đầu lĩnh mới",wx:"giặc cắn nhau",lx:"bạc ra",rt:"Hai đầu lĩnh mới bị chính người của chúng trói nộp."}]},
+ c4:{h:"{v} nước cờ cuối",w:"v",need:["v"],t:"{v} tâu: luật biển do phi tần ngoại quốc soạn, chẳng khác gì mở cửa bể cho người nước ngoài.",o:[
+  {n:"Đáp: luật để thuyền Đại Hy cũng được che khi gặp nạn ở bể người",wx:"bá quan thấy lý",lx:"{v} ghi hận",go:(A,ok,G)=>{rdOan(A,"v",ok?G[0]:G[1]);return""},rt:"Hoàng thượng gật đầu.",rf:"Có quan tán thành {v}."},
+  {n:"Mời nhà {v} góp một điều vào luật",wx:"{v} có phần, thôi cản",lx:"luật có một điều của nhà {v}",go:(A,_ok,G)=>{rdRel(A,"v",G[0]);return""},rt:"Nhà {v} góp điều thuế muối, {v} thôi tâu."},
+  {n:"Nhắc chuyện anh họ {v} từng làm Thị bạc sứ",wx:"{v} câm lời",lx:"thù hai nhà sâu thêm",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return""},rt:"{v} tái mặt, lui ra."}]},
+ t1:{h:"Hoàng thượng hỏi",w:"emp",t:"Đêm ấy Hoàng thượng hỏi: “Luật biển này, nàng muốn nó che ai?”",o:[
+  {n:"Thưa: che người đi bể, của nước nào cũng vậy",f:"bien",wx:"ngài thấy lòng ngươi rộng",lx:"ngài lo Đại Hy thiệt",rt:"Ngài nói: “Bể không có biên giới, luật cũng thế.”",rf:"Ngài nói: “Che người nước khác, ai che người nước mình?”"},
+  {n:"Thưa: che bến của Đại Hy",f:"phep",wx:"ngài yên lòng",lx:"người {land} thấy ngươi đứng hẳn về một bên",rt:"Ngài gật: “Bến của trẫm.”"},
+  {n:"Thưa: che những người giữ lời",f:"muu",wx:"ngài thấy một cách nhìn mới",lx:"khó viết thành luật",rt:"Ngài cười: “Người giữ lời thì luật nào cũng che.”"}]},
+ x1:{h:"Ngày ban luật",w:"emp",t:"Ngày ban luật, tờ chiếu đặt trên án. Hộ bộ, Binh bộ và Hồng Lư tự đứng chờ. Hoàng thượng hỏi lời cuối của ngươi.",o:[
+  {n:"Xin ngài ban luật: bến mở cho mọi thuyền buôn, giặc ra hàng được tha",e:["win","lose"],rt:"Chiếu ban xuống. Cửa bến Minh Châu dựng bia đá khắc luật biển, có cả chữ Tân La và chữ {land}.",rf:"Binh bộ can: tha giặc là nuôi giặc. Ngài bỏ điều tha."},
+  {n:"Xin ngài giao phường Tân La cho Kim Hựu Thành giữ, dưới Thị bạc ty",if:()=>ptAlive("huuthanh"),e:["win2","mid"],rt:"Ngài chuẩn. Kim Hựu Thành về bến Minh Châu giữ phường Tân La, sổ thu mỗi mùa gửi lên kinh.",rf:"Ngài nói: “Lái buôn giữ phường thì phải xét thêm.”"},
+  {n:"Để Hộ bộ soạn luật theo lệ cũ",e:"mid",lx:"bến Minh Châu như cũ",rt:"Luật biển ra đời, giống hệt lệ cũ, thêm vài chữ."}]}},
+ E:{win:{tag:"Bia luật biển",w:"emp",t:"Bia đá ở cửa bến Minh Châu khắc luật biển. Thuyền Tân La, thuyền {land}, thuyền Đại Hy cùng neo một bến; người đi bể gọi đó là “luật của công chúa”.",go:(_A,G)=>{if(PTHT())ptMove("huuthanh","cang");return e67bien(G[0])}},
+  win2:{tag:"Phường Tân La",w:"emp",t:"Kim Hựu Thành giữ phường Tân La ở bến Minh Châu. Mỗi mùa gió, sổ của phường đến kinh trước sổ của Thị bạc ty.",go:()=>ptMove("huuthanh","cang")},
+  mid:{tag:"Lệ cũ",t:"Bến Minh Châu theo lệ cũ. Ngươi vẫn có tên trên bản thảo đầu tiên, dù không ai đọc."},
+  lose:{tag:"Luật bị bỏ dở",w:"v",t:"Luật biển bị gác lại. {v} nói: phi tần ngoại quốc thì đừng mong soạn luật Đại Hy.",go:(_A,G)=>e67bien(G[0])}}});
+RD97L.push(rdRare({a:"pt_dang_11",tag:"Ngọn đèn ba nước",w:"emp",n:"Xin dựng ở cửa bến Minh Châu một ngọn đèn biển, ba nước cùng giữ",
+ path:["Mời Kim Hựu Thành vào","Giữ thư, nhờ Kim Hựu Thành","Thưa: thiếp muốn dùng đao","Hẹn Ô Cửu","Quyết đem ngọc chuộc người","Dâng sổ thật","Trình thư của giặc","Xin tha Ô Cửu","Thêm một điều"],
+ bad:["Để thứ sử chém","Để Hộ bộ soạn luật","Thưa: rương bạc mất thì thôi"],x:[()=>S.tamco>=RR("pt_dang_11").bar,"Tâm cơ từ "+RR("pt_dang_11").bar],
+ t:"Ngươi không xin thêm một điều luật nào, chỉ xin dựng ở cửa bến Minh Châu một ngọn đèn biển: dầu do thuyền Tân La góp, bấc do thuyền {land} góp, tháp do Đại Hy xây. Đêm đầu tiên đèn sáng, thuyền ba nước đều kéo buồm chào. Hoàng thượng đặt tên tháp là “Đăng Hải”, và cho khắc tên ngươi dưới chân tháp.",
+ go:(_A,G)=>{if(PTHT())ptMove("huuthanh","cang");return e67bien(G[0])},rw:"nt_dongchau",ti:"Người thắp đèn biển"}));
