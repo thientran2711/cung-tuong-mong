@@ -102,9 +102,11 @@ function tdBackW(p){const T=S&&S.trieu;if(!T||!T.H)return 0;let w=0;for(const c 
 (function(){if(typeof backers!=="function")return;const b0=backers;backers=function(p){const L=b0.apply(this,arguments);try{const T=S&&S.trieu;if(T&&T.H)for(const c in T.H){const h=T.H[c];if(c!==tdHouse(p)&&tdBacks(h,p))L.push(`${TDOFF[c]} ${h.name}`)}}catch(e){}return L}})();
 
 /* ---------- memorials on harem matters (at most one a month) ---------- */
+/* a plea to name the legitimate heir is open: the heir is not the queen's son while a grown legitimate son lives (one gate: j55 + jagmin) */
+function tdDichOpen(){return typeof kvDebate==="function"&&S.heir&&S.heir.k&&S.heir.k.alive&&typeof kvOrder==="function"&&typeof kvQueenMom==="function"&&!kvQueenMom(S.heir.v)&&kvOrder().some(x=>x.dich&&!x.k.heir&&x.k.age>=6)}
 function tdSoMonth(force){const T=trS();if(!force&&(S.turn-T.soT<TD.soGap||!roll(TD.so)))return"";const opts=[];
  if(T.praise)opts.push(["praise",6]);
- if(typeof kvDebate==="function"&&S.heir&&S.heir.k&&S.heir.k.alive&&typeof kvOrder==="function"&&typeof kvQueenMom==="function"&&!kvQueenMom(S.heir.v)&&kvOrder().some(x=>x.dich&&!x.k.heir&&x.k.age>=6))opts.push(["dich",3]);
+ if(tdDichOpen())opts.push(["dich",3]);
  const imp=tdImpPick();if(imp)opts.push(["imp",4]);
  const ty=CLANS.filter(c=>T.H[c].pow>=65);if(ty.length&&T.tyY!==S.year&&liveRivals(true).length+1<BAL.harem.cap-1&&roomFor("consort"))opts.push(["tuyen",2]);
  const cc=consorts().filter(p=>(p.cc||0)>=2);if(cc.length)opts.push(["cc",2]);
@@ -165,7 +167,9 @@ function tdMonth(){if(!tdOn())return"";const T=trS();let ev="";
 /* ---------- the court view inside the Phe phái tab ---------- */
 window.__tdV=window.__tdV||"hc";
 function tdActBtn(at,n,line,why){return pbtn(at,n,line,why)}
-function tdHTML(){const T=trS();const myC=tdHouse(S),myH=tdHead(myC);const busy=S.out?"đang ở lãnh cung":S.confined?"đang bị cấm túc":!can(2)?(whyTime(2)||"Sức dưới "+(BAL.time.sucMin)+", cần nghỉ"):"";
+/* why she cannot do a court act now ("" = she can): one reason for every card of the Triều đình view */
+function tdBusy(){return S.out?"đang ở lãnh cung":S.confined?"đang bị cấm túc":!can(2)?(whyTime(2)||"Sức dưới "+(BAL.time.sucMin)+", cần nghỉ"):""}
+function tdHTML(){const T=trS();const myC=tdHouse(S),myH=tdHead(myC);const busy=tdBusy();
  let h=`<div class="ph"><span>Quốc sự</span><span>Tâm trạng Hoàng thượng: <b>${MOODS[S.emp.mood][0]}</b></span></div>`;
  h+=`<div class="tdq">${sbar("Biên cương",T.bien,"tdbc")}${sbar("Kho lúa",T.kho,"tdkl")}</div><p class="past tdp">Biên cương, kho lúa càng thấp ngài càng phiền; dưới 30 ngài ít vào hậu cung. Giặc cướp, lũ hạn làm tụt; thắng trận, được mùa làm tăng. Thắng bại của Đại tướng quân, Hộ bộ đổi thế lực nhà họ.</p>`;
  h+=`<div class="ph"><span>${myC?`Ngươi là người nhà <b>${myC}</b>${myH&&myH.dadOf==="me"?" (cha ngươi đứng đầu)":""}`:"Nhà mẹ đẻ ngươi không thuộc năm nhà quyền thần"}</span><span>Can chính: ${S.cc||0} lần gần đây · nguy cơ bị hặc ${ccWord(S)}</span></div>`;

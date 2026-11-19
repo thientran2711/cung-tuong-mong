@@ -39,7 +39,7 @@ function minSpare(h,p){return Math.max(0,1-Math.max(0,minAf(h,p))/100)}
 /* the memorials the court state allows, each with its speaker, target and stake (j55 gates, unchanged) */
 function minCands(){const T=trS(),M=BAL.ag.min,ns=minNs();const L=[];if(!T)return L;const add=(k,h,s,x)=>{if(h&&s>0){const w=(M.fit[minGoal(h)]||{})[k]*s;if(w>0)L.push(Object.assign({k,h,s,w},x||{}))}};
  if(T.praise&&T.H[T.praise])for(const h of minAll()){if(h.c===T.praise)continue;const rel=h.ns?0:tdRel(h.c,T.praise);if(rel>=0)add("praise",h,(M.praise+rel)/M.praise,{c:T.praise})}
- if(typeof kvDebate==="function"&&S.heir&&S.heir.k&&S.heir.k.alive&&typeof kvOrder==="function"&&typeof kvQueenMom==="function"&&!kvQueenMom(S.heir.v)&&kvOrder().some(x=>x.dich&&!x.k.heir&&x.k.age>=6)){
+ if(tdDichOpen()){
   const q=queenP();const c=q&&q!==S?tdHouse(q):S.rank>=7?tdHouse(S):null;const h=T.H[c||"Lễ bộ"];if(h)add("dich",h,h.pow/M.dich)}
  for(const t of consorts()){const cT=tdHouse(t);if(!cT)continue;for(const cA of CLANS){if(cA===cT)continue;const h=T.H[cA];if(!h)continue;const rel=tdRel(cA,cT);
   const f=(rel<=-BAL.cut.clanRel?M.imp.deep:rel<0?1:0)*nv(h,"feudW");if(f<=0)continue;const evd=Math.max(0,...tdMembers(cA).map(m=>deG(m,t)));
@@ -73,7 +73,7 @@ window.minForceSo=function(){const T=trS();const g=T.soT,r0=roll;T.soT=-99;let r
 (function(){const f0=facesPresent;facesPresent=function(){const U=f0.apply(this,arguments);try{const T=S&&S.trieu;if(T&&T.ns&&T.ns.fc)U.add(T.ns.fc)}catch(e){}return U}})();
 /* his card in the Triều đình view: the same card as a house head (j55 tdHTML), gift button = the same deed */
 function minNsCard(){const h=minNs();if(!h)return"";const f=pMin(h);const af=minAf(h,S);
- const busy=S.out?"đang ở lãnh cung":S.confined?"đang bị cấm túc":!can(2)?(whyTime(2)||"Sức dưới "+(BAL.time.sucMin)+", cần nghỉ"):"";
+ const busy=tdBusy();
  const gw=busy||(S.bac<BAL.bacFee.tdGift?"thiếu bạc (cần "+BAL.bacFee.tdGift+")":"");
  const line=`${word(giftO(S,h))} · tốn: Bạc -${BAL.bacFee.tdGift} · thành: người ấy quý ngươi +20; càng quý, ngươi càng khó bị hặc can chính · hỏng: mất bạc${hasT(h,"Cương trực")?", ông tố ra ngoài: can chính nặng thêm":""} · kèm: ${ccLine(S)}`;
  return `<div class="rival tdh"><div class="top tdtop">${mdH(f,"sm")}<div class="tdn"><b>${MINC}</b><em>${TDOFF[MINC]} ${h.name} · ${h.age} tuổi · ${netTxt(h)}</em></div></div>
