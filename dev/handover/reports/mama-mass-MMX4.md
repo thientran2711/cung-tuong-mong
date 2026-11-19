@@ -61,3 +61,5 @@ Only faces of groups SẮC SẢO / TINH NGHỊCH may be produced (dev/art/face-c
 
 ## 21:15Z GO (ROOT-54, repeated by ROOT-55 session_01PEhRbuVvNzbWughTNoFwoa) — GENS PERMISSION-BLOCKED
 The 3 m05 gens from the r54 prompts were refused by the auto-mode permission check: a36 and a51 denied; a65 approval prompt closed unanswered; then the session restarted. 0 gens, 0 credits. Not retried. Told ROOT-55 with the prompt paths. Needs owner approval of images_generate in this session, or another worker.
+
+## 21:17Z ROOT-55 made the 3 m05 gens itself from my r54 prompts (gpt-2-6 1024x2304 seed 7172, one ref KLpSlnEkqp): a36 BhNUblSoQR, a51 KLpnPqWkqp, a65 fHzNsafCDY. ROOT-55 does the sheet and the look. MMX4 makes NO gens; waiting.
