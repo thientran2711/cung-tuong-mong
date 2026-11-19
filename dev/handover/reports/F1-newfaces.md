@@ -34,3 +34,16 @@ I wait for your message.
   s54 18 ST: TEARDROP-OVAL, very high cheekbones · low chignon, crossed silver pins · chest-high skirt + wide-sleeved short top · pearl strand on fingers
   s55 17 SR: deep-set eyes, rounded chin, lifted nose tip · crown braid, ruby pin · sleeveless overvest over ruqun · red silk parasol
 - Gens wait for: (1) owner OK on Lạnh lùng, (2) P1 NEW16 READY (s51–s55 roots), (3) MG1 FACE READY.
+
+## Update — Quyến rũ +6 prompts (no gens)
+- dev/art/face-common/make_quyenru_L761.py → s56–s61.v5.PH.txt (same placeholders/ROOTS rule as Kiêu kỳ).
+- Words = T7 Quyến rũ block + the approved round-2 words (make_quyenru_r2.py: r2 expression, NEW_COMMON, NEW_FACE, read from that file) + v5b safe face words ("magnetic, enchanting young lady", no "sensual"); EYES_STRAIGHT, NEW_MOUTH.
+- Beauty mark copied unchanged from the approved s33–s38 ("her own LEFT eye (the eye on the RIGHT side of the picture)"), asserted; open owner question, nothing added.
+- Word diff vs approved s36.v5r2: 91 % same; only age, face swaps, hair, outfit, colours, item, pose, angle differ.
+- 6 people (unlike the 9 approved QR and each other; DIFF list in script), 6 different angles:
+  s56 18 FF: round-cheeked oval, pointed chin · tilted loose bun, tassel pin · ruqun + sheer shawl · red silk lantern
+  s57 17 TL (walking): longer narrower eyes, high thin brows · loose right part, pink silk flower pin · beizi · wisteria sprig
+  s58 18 SR: diamond-oval, fine nose bridge · low loose chignon, jade pin · chest-high skirt + short top · fragrant sachet with tassel
+  s59 18 TR (walking): wider full lips, wide forehead · big loose waves, gold chain with ruby · half-sleeve jacket · gauze butterfly fan
+  s60 17 SL: lean cheeks, longer chin · large crown loop, over left shoulder · sleeveless overvest over ruqun · pink lotus in both hands
+  s61 18 ST (walking): very long thick lashes, fuller brows · centre part, crossed gold pins · ruqun (swallows/willow) · red silk ribbon
