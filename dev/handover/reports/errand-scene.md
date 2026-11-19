@@ -110,3 +110,10 @@ SCAN dev/test/bang-line-scan.js rewritten per sex (Δ to sex line ≤2, level sp
 TESTS: QUICKCHECK PASS on the final merge (219 s, old save ok); errand-scene 53/53 Fold + iPad; bang-line-scan 4/4 PASS; 0 page errors.
 SHOTS (LOOKED): montage Fold | iPad pairs (home Nhã Vận hiên with «!», Ngự hoa viên Quý nhân + Hoàng thượng, Đức Thọ cung, she = crowned Hoàng hậu): https://ctm-img.victoria-tntt.workers.dev/img/_review/errand-scene/montage-badge-lines.jpg . Wipe after verdict: python3 dev/site/cdn_sync.py --wipe-review errand-scene.
 NOTE: children (KIT_FIG.kid) use their sex line (none on any scanned stage).
+
+## r5 — HEAD MARKER = SPEECH BUBBLE (same worker; MAIN ROOT-62 order, owner OD 19/11 ~02:40Z + ~03:05Z verbatim)
+PRIORITY #1 CHECK ('bubble talk head marker'): OD L1943 + L1945 | main: none (ico-chat = co-op chat, other icon) | review/*: none | reused: .khap nudge + yellow, kitBadgeAt "hap" line, CDN img/kit/ico-talk-y.webp / ico-talk-w.webp (main painted; brown ico-talk.webp NOT used).
+SHA: review/errand-scene @ 1489362f (pushed; origin/main 1cf5e8bb merged).
+WHAT: kit part kitHeadMarkHtml(title,role,state) in jact.js → <i class="khead"> with the bubble picture itself, NO disc: on = ico-talk-y (whole bubble yellow, black dots), off = ico-talk-w (white, black dots); KIT_HEADMK.px 24, khapNudge motion, glow on «on»; probe once, fallback .khead.kfb = the yellow «!» disc. jerr.js errSync uses it (.kmerr-bang), still bottom on the sex line (level with «ta ở đây»). Option-card «!», top-bar #kntbox, Dư đồ labels keep .khap. KIT.md §78.z (new) + §78.y/§90 lines updated in place; kit sample §78.z. Only one head-marker user exists in the game today (errand return); any future one must call kitHeadMarkHtml.
+TESTS: QUICKCHECK PASS (195 s, old save ok); errand-scene 53/53 Fold + iPad (on-stage check now asserts .khead + ico-talk-y + no background disc); bang-line-scan PASS Fold 19/35, iPad 19/56, HH=1 iPad PASS.
+SHOT (LOOKED): Fold | iPad on-stage return: https://ctm-img.victoria-tntt.workers.dev/img/_review/errand-scene/montage-head-bubble.jpg
