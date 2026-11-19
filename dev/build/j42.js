@@ -88,7 +88,7 @@ function srvColleagues(){const m=srvM();const L=(m&&m.staff||[]).slice();const a
  for(const sid of S.srv.met||[]){const s=servById(sid);if(s&&!L.includes(s)&&!M.includes(s))M.push(s)}
  /* review r1 (law 6a): a plain liking sort put every ill-wisher (af<0) last, so past 10 rows srvFramedEvent («Bị vu oan», picks from af<0 here) never fired.
     Groups: friends (from BAL.srvx.friendAf) → ill-wishers → the rest; inside a group the stronger tie first; ties keep meeting order (stable sort). */
- const gr=s=>{const v=af[s.sid]||0;return v>=BAL.srvx.friendAf?0:v<0?1:2};M.sort((a,b)=>gr(a)-gr(b)||Math.abs(af[b.sid]||0)-Math.abs(af[a.sid]||0));return L.concat(M).slice(0,10)}
+ const gr=s=>{const v=af[s.sid]||0;return v>=BAL.srvx.friendAf?0:v<0?1:2};M.sort((a,b)=>gr(a)-gr(b)||Math.abs(af[b.sid]||0)-Math.abs(af[a.sid]||0));return L.concat(M).slice(0,BAL.srvx.colN)}
 function srvFriendList(){return srvColleagues().filter(s=>(S.srv.af[s.sid]||0)>=BAL.srvx.friendAf)}
 function srvMax(){const m=srvM();return m?srkMax(m,{role:"maid"}):BAL.srvRk.dai}/* no master: the lowest cap (nhất đẳng), maid-ladder-6 r1 */
 function srvToast(msg){if(window.__bot)return;let t=$("rtoast");if(!t){t=document.createElement("div");t.id="rtoast";document.body.appendChild(t)}t.onclick=()=>t.classList.remove("on");
