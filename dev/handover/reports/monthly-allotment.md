@@ -29,7 +29,7 @@ Laws: 1 two-way (NPC consorts + NPC staff same rules, NPC agents same candle rul
 - `bash dev/tools/quickcheck.sh` on 9aceea6: **QUICKCHECK PASS** · core gates PASS · old save ok · perf new/live render 183/177, tab 353/330, buổi 969/1193 ms.
 - `dev/test/monthly-ration.js` on 9aceea6: all logic checks PASS; its mirror step FAILs ("Son môi" row still shown + no #lxrush) — **the SAME failure on live main f43a2ba6** (run on /home/user/cung-tuong-mong), so pre-existing, not this branch → FOR MAIN: monthly-ration mirror step broken on main (test or the lx mirror filter after a later main change).
 
-## 4. Shots (LOOKED; CDN not tried — local only at /home/user/wt/allot-shots/, shared box)
+## 4. Shots (LOOKED; CDN img/_review/monthly-allotment/: mirror-nooil-{755x1000,1180x820}.jpg, mirror-oil-{755x1000,1180x820}.jpg — wipe after verdict)
 - mirror-nooil-1180x820.jpg: red row "Dầu chải tóc: hết: không vấn được Kiểu cầu kỳ …" under "Son phấn 4 trong 4", no Kiểu cầu kỳ preset row, kit rows only. mirror-nooil-755x1000.jpg same.
 - mirror-oil-*.jpg: line "Dầu chải tóc · Nước bào hoa, còn 6 lần dùng"; on Fold the kit item-gain reveal of the test's bag push covers the centre (same as E4's note; test-only, the reveal is the normal gain popup) — reviewer may retake.
 
