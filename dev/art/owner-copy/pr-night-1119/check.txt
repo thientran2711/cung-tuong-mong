@@ -1,33 +1,25 @@
-STORE CHECK PASS bt-t1.txt
-STORE CHECK PASS bt-t2.txt
-STORE CHECK PASS bt-t3.txt
-STORE CHECK FAIL bt-t4.txt — 1 store sentence(s) missing or rewritten:
-  [0.79] celadon only as a small accent), gold only as embroidery accents, NOT a cream or all-gold robe.
-STORE CHECK FAIL bt-t5.txt — 1 store sentence(s) missing or rewritten:
-  [0.79] celadon only as a small accent), gold only as embroidery accents, NOT a cream or all-gold robe.
-STORE CHECK FAIL bt-t6.txt — 2 store sentence(s) missing or rewritten:
-  [0.84] COLOUR RULE: robe, skirt, sleeves, cape and train are all clearly soft rose pink silk (her signature colour family soft rose pink and celadon), with large areas
-  [0.83] celadon only as a small accent;
-STORE CHECK PASS bt-t7.txt
-STORE CHECK PASS bt-t8.txt
-STORE CHECK PASS bt-t8o.txt
-STORE CHECK FAIL cl-t4.txt — 1 store sentence(s) missing or rewritten:
-  [0.79] celadon only as a small accent), gold only as embroidery accents, NOT a cream or all-gold robe.
-STORE CHECK FAIL cl-t5.txt — 1 store sentence(s) missing or rewritten:
-  [0.79] celadon only as a small accent), gold only as embroidery accents, NOT a cream or all-gold robe.
+STORE CHECK PASS bt-t1.txt [args: c20 v0 --low 1 --spec5pose]
+STORE CHECK PASS bt-t2.txt [args: c20 v0 --low 2 --spec5pose]
+STORE CHECK PASS bt-t3.txt [args: c20 v0 --low 3 --spec5pose]
+STORE CHECK PASS bt-t4.txt [args: c06 v0 --low 4 --spec5pose]
+STORE CHECK PASS bt-t5.txt [args: c06 v0 --low 5 --spec5pose]
+STORE CHECK PASS bt-t6.txt [args: c06 v0 --low 6 --spec5pose]
+STORE CHECK PASS bt-t7.txt [args: c20 v0 --t7 --spec5pose]
+STORE CHECK PASS bt-t8.txt [args: c20 v0 --spec5pose]
+STORE CHECK PASS bt-t8o.txt [args: c20 v0 --spec5pose]
+STORE CHECK PASS cl-t4.txt [args: c06 v0 --low 4 --spec5pose]
+STORE CHECK PASS cl-t5.txt [args: c06 v0 --low 5 --spec5pose]
 STORE CHECK FAIL cl-t6.txt — 3 store sentence(s) missing or rewritten:
-  [0.88] COLOUR RULE: robe, skirt, sleeves, cape and train are all clearly soft rose pink silk (her signature colour family soft rose pink and celadon), with large areas
-  [0.83] celadon only as a small accent;
-  [0.8] NOT cream, NOT beige, NOT ivory, NOT an all-gold robe, NOT a green robe.
-STORE CHECK PASS cl-t7.txt
-STORE CHECK PASS cl-t8.txt
-STORE CHECK PASS cl-t8o.txt
-STORE CHECK PASS pt-t1.txt
-STORE CHECK PASS pt-t2.txt
-STORE CHECK FAIL pt-t4.txt — 1 store sentence(s) missing or rewritten:
-  [0.79] celadon only as a small accent), gold only as embroidery accents, NOT a cream or all-gold robe.
-STORE CHECK FAIL pt-t5.txt — 1 store sentence(s) missing or rewritten:
-  [0.79] celadon only as a small accent), gold only as embroidery accents, NOT a cream or all-gold robe.
+  [0.88] COLOUR RULE: robe, skirt, sleeves, cape and train are all clearly coral red silk (her signature colour family coral red and ivory), with large areas of plain co
+  [0.83] ivory only as a small accent;
+  [0.89] NOT cream, NOT beige, NOT ivory, NOT an all-gold robe, NOT green. [args: c06 v0 --low 6 --spec5pose]
+STORE CHECK PASS cl-t7.txt [args: c20 v0 --t7 --spec5pose]
+STORE CHECK PASS cl-t8.txt [args: c20 v0 --spec5pose]
+STORE CHECK PASS cl-t8o.txt [args: c20 v0 --spec5pose]
+STORE CHECK PASS pt-t1.txt [args: c20 v0 --low 1 --spec5pose]
+STORE CHECK PASS pt-t2.txt [args: c20 v0 --low 2 --spec5pose]
+STORE CHECK PASS pt-t4.txt [args: c06 v0 --low 4 --spec5pose]
+STORE CHECK PASS pt-t5.txt [args: c06 v0 --low 5 --spec5pose]
 STORE CHECK FAIL pt-t6.txt — 2 store sentence(s) missing or rewritten:
-  [0.88] COLOUR RULE: robe, skirt, sleeves, cape and train are all clearly soft rose pink silk (her signature colour family soft rose pink and celadon), with large areas
-  [0.83] celadon only as a small accent;
+  [0.88] COLOUR RULE: robe, skirt, sleeves, cape and train are all clearly coral red silk (her signature colour family coral red and ivory), with large areas of plain co
+  [0.83] ivory only as a small accent; [args: c06 v0 --low 6 --spec5pose]
