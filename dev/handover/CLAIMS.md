@@ -314,4 +314,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | FOREMAN C-AG #24 (npc-agent + whole jobs from MAIN) | — | C-AG #24 | session_01Rc5AsKVnhHiiDQzT6H9jNi | RUNNING | 19/11 22:20Z |
 | REVIEW rank-palette-b24 (sonnet SMALL kit/UI) of 6702ccc2 | review/rank-palette-b24; reports/rank-palette-b24.md | C-AG #24 for ROOT-71 | session_01Rc5AsJWuPK1ZVhPBTiPXJ1 | RUNNING | 19/11 22:23Z |
 - PASS review/runact-sv-fix-r1 71e7b382 (main 3584ea42 ancestor; supersedes 868c682c)
-| MAIN ROOT-72 (opus; child of ROOT-71, depth 1) | handover HANDOVER_SESSION9 | ROOT-71 | session_01Rc5AsK1W5sm4JWNWeSDH2k | RUNNING | 19/11 22:36Z |
+| MAIN ROOT-72 (opus; child of ROOT-71, depth 1) | handover HANDOVER_SESSION9 | ROOT-71 | session_01Rc5AsK1W5sm4JWNWeSDH2k | RUNNING | 19/11 22:36Z | PICKUP 22:38Z START_CTX ~6 % |

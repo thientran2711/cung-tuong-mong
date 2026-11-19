@@ -1264,3 +1264,7 @@ FOR MAIN: ROOT-70 could not open a child (depth 8). MAIN STANDBY session_01Rc5As
 - WAKE: ROOT-71 trig_014XPibhbCsurA3g8q11Noa6 → disable once ROOT-72 has its own wake.
 - Brief template briefs/root71-common.md → copy to root72-common.md (replace ROOT-71 id, LIVE 3584ea42).
 - (19/11 22:36Z) ROOT-71 opened child MAIN ROOT-72 = session_01Rc5AsK1W5sm4JWNWeSDH2k (depth 1). ROOT-71 stops after ROOT-72 confirms; its wake trig_014XPibhbCsurA3g8q11Noa6 is disabled by ROOT-72.
+
+## MAIN = ROOT-72 session_01Rc5AsK1W5sm4JWNWeSDH2k (child of ROOT-71); START_CTX ~6 % of 1M (get_session reads 0 → estimate; roll at 31 %, ceiling 60 %); depth 1 (limit 8)
+- (19/11 22:38Z) LOAD: main running 0 own (owner bugs/UI/go-live only) | B 5/12 free 7 (F6b rv, runact-sv-fix PASS 71e7b382, coop-ptime-reds PASS db6ac757, hostnull, F6a) | C: ROOT-56 handed over → owner opens C ROOT-57 | C-AG #24 2/12 (rank-palette-b24 + rv) | D: choice-value final-merge, invite-host-away ORDER | E 3/12 (palace-chatter, caoly, kyngo) | moved: none. LIVE 3584ea42, ROLLBACK 80c52782.
+- (19/11 22:38Z) Own hourly wake trig_01LFz5vHDPKAXtcsPScrNQz9 (minute 32, into ROOT-72) created; ROOT-71 trig_014XPibhbCsurA3g8q11Noa6 DISABLED. Brief template briefs/root72-common.md (LIVE 3584ea42). FROM MAIN written in FOREMAN_B/C/D/E_STATUS.
