@@ -1465,3 +1465,5 @@ ROOT-52 Lượt 607 (owner): (a) re-sample sheet + 2nd person at other age: m13 
 ROOT-52 ~19:47Z: NF1 rolled over (38 %) before starting c07–c32 → NF2 session_01PEhRbta5PCzrA8PwyuNVnu opened (NF1-handover.md 07ffcd7).
 ROOT-52 Lượt 610: owner: keep the room method WITH the room refs (as v6–v8); L17 rewritten; PR8 told. Lượt 609 Phi iPad measure sheet sent.
 ROOT-52 ~19:51Z: PR8 rolled (26 %) → PR9 session_01PEhRbvhfbBuszMGmues6Si (keep ref method per Lượt 610, image 3 from approved non-drifted room, no over-luxury words, colour level sentence; samples Phi fit / HH reception / 1 HQP). Lượt 611 layout guide sent.
+ROOT-52 Lượt 612: owner: every room check sheet = people + 3-line name tags (danh hiệu / rank / name) under the feet at game positions → ipad_tags.py, L13 updated; Phi sheet redone (place-rank-ipad-phi-ngu-tags3.jpg) + PR9 told.
+ROOT-52 Lượt 613: HH bedroom = 2-wall preferred; PR9 draws HH bedroom 2-wall + 3-wall samples (L14).
