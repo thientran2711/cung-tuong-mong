@@ -2,7 +2,7 @@
 PRIORITY #1 CHECK ('minister memorial'): OD 4 (PL#7 only) | main: j55 five house heads S.trieu.H (named, nết via jnet) + tdSoMonth weighted pick; anonymous "ngự sử" in ccStep / tdLeak / cc memorial; j7 ev("minister") "Thượng thư Hộ bộ" unnamed | review/*: review/npc-purpose (NOT live) rewrites tdSoMonth selection to stake picks (jagwhyg2b; C-AG answer (c) parked the minister agent → PL#7) | claims: this row only. Reused: agOn/agCap/agErr (jagent), mindPick (jmind), jnet nết, j55 acts (tdGift, ccRisk, tdImpeach…), j61 people registry. No second agent system.
 depth 8 · START_CTX ≈ 4 % (estimate; context_usage read 0).
 
-## What (branch review/minister-agents @ 822f17c4, contains LIVE f43a2ba6)
+## What (branch review/minister-agents @ 0d3f2b0b, contains LIVE fd6118cd (merged 19/11 ~04:50Z: assemble.py union jfigx + jagmin, site rebuilt; minister-agents 11/11 ×2, one-core PASS, QUICKCHECK PASS render 214/235 tab 436/431 buổi 1216/1101 ms))
 - Law 8 history expert first: head of the censorate = **Tả đô ngự sử, Đô sát viện** (Ming 1382 / Qing, rank of a thượng thư; Nguyễn court too). Not Ngự sử đại phu / trung thừa (Han–Song). Phong văn tấu sự (memorial on hearsay) is historical → a memorial may prove false. Junior giám sát ngự sử stay unnamed in authored story roads.
 - New dev/build/jagmin.js (after jagemp): **one new living official**, the censor S.trieu.ns (lazy, old saves get him; unique name vs every person of k61All; ages yearly; regard fades; in the j61 people registry kind "off"; faces in use).
 - **Goals from nết** (BAL.ag.min.gT): Tham vọng→quyen, Vì gia tộc→nha, Vì mình→loi, Trọng nghĩa/Thật thà/Cương trực→liem, else le (censor default liem). Goal chip "Chí: …" on every official's Triều đình card.
