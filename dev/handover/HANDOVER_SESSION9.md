@@ -1014,3 +1014,4 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - (19/11 ~03:00Z) errand badge-lines r4 babb5b36 pushed (intermediate); worker adds bubble marker next → one verdict on the bubble sha; rv pre-checks babb5b36.
 - (19/11 ~03:15Z real) Owner asked to see each seal animation + whether the 100+ face seals are painted. FACT: 35 faces × 3 sets (18 feelings + 17 acts, OD 17/11 19:25Z/20:45Z) NEVER painted (C orders 17/11 19:26Z/20:45Z unhandled); CDN has only 10×3. → C TOP ART #2 re-ordered; worker seal-anim-sheet opened (show-only).
 - (19/11 ~03:26Z real) Owner: rare chance double gate (conditions + 9–13 % roll) → OD 03:25Z; ORDER «rare-reach» to Foreman D (measure eligibility, set roll from it).
+- (19/11 ~03:31Z real) Owner ordered daily random kỳ ngộ (OD 03:30Z, freeze override) → ORDER to Foreman E (expert first, design FOR MAIN, then build).
