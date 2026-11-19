@@ -38,3 +38,9 @@ Magnific picks: m02 kc 6AbA8CGiJO (KC v2; v1 3zKzo8jREY rejected pastel), ngheo 
 Looked at all: same face/hair/outfit cut, item = ledger, bare forehead, closed lips, no cup, still sleeves; ngheo reads poor (plain jacket+apron, one wooden pin, no jewellery). Honest notes: m04/m05 kc were made with KC v1 sentence but already sit at medium tone (apricot / coral); m02 kc v2 skirt went greige-grey rather than cream (design kept); m03 ngheo comb is small.
 Live-image uploads (refs): see scratch ledger; m02 kc kses6zz16B ngheo DoOoHyxpcl, m03 lJtJGhTgv9/p8y8q9Mehw, m04 jUoUZm5LD0/5jDj9BpKxe, m05 5jDj9oeKxe/ov6v1G0829, m06 9ZHZpjpNYZ/YMlMa45WeC, m07 Xm9mkJjBfo/u5W5JGwQLD, m08 SyhyYIAUb8/hu2ulRsvqL, m09 cpSpEgv0eP/DoOoqO1pcl, m10 EbYb7WKuuO/0eUeu7vTfW, m11 SyhyWoNUb8/SyhyW86Ub8, m12 tCRCsNImZJ/EbYbJzHuuO, m13 w4a40vf7EI/rgXgZXqxtc, m14 vQAQSGBa47/p8y8540ehw, m15 TdwdFOJVNR/bxMxNdi5Y2, m16 VX7XHZKMMU/hu2ugp6vqL, m17 Lw8wGqaswO/rgXgZFExtc, m18 TdwdFGAVNR/MBJBqYYDCm, m19 MBJBqWWDCm/kses3qF16B.
 STATE: nothing live changed; only CDN img/_review/kc2k-mass/ (wipe: python3 dev/site/cdn_sync.py --wipe-review kc2k-mass). ~28 % of 36 (10/36) / ~0 % chơi được.
+
+## SHEET 2 — m07–m11
+https://ctm-img.victoria-tntt.workers.dev/img/_review/kc2k-mass/sheet_K6a_2.jpg
+Magnific picks: m07 kc Syhy0dOUb8 (KC v2; v1 xSBSATqjfW rejected pastel), ngheo UPvP0Bxwny; m08 kc vQAQ7L4a47, ngheo If3fgxqtvE; m09 kc aFGFJSZfSh, ngheo yiuiX4MPW9; m10 kc EbYb4FNuuO, ngheo eIPIxocdqL; m11 kc jUoUYU4LD0, ngheo lJtJT6Kgv9. All first try with KC v2 except m07 (redo). All margins 0.00 %.
+Looked at all: items = ledger; bare forehead; closed lips; no cup. Honest notes: m07 kc skirt stays cream (her design; vest/sash now medium jade); m11 ngheo blue-grey stays on the light side of medium (faded-cloth rule).
+~56 % of 36 (20/36: m02–m11 + m12 kc/ngheo, m13 kc looked at, sheet 3 next) / ~0 % chơi được.
