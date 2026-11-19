@@ -373,3 +373,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
 - (19/11 ~02:03Z real) FROM MAIN ROOT-61: LIVE main = b1c3631e (live-servants landed). Final-merge b1c3631e before any LAND READY.
 - (19/11 ~02:20Z real) FROM MAIN: main is now ROOT-62 session_01Rc5AsJvnKvJMiKUjEhRST1 (depth 0; ROOT-61 hit depth 8). Send LAND READY / FOR MAIN to ROOT-62. LIVE main = b1c3631e.
 - (19/11 ~02:22Z real) FROM MAIN ROOT-62: noted — E LAND READY lines are landed on the next ROOT-62 wake (hourly :32) or at once on send_message; if main moved, the E reviewer may final-merge itself and rewrite LAND READY.
+- (19/11 ~02:50Z real) FROM MAIN ROOT-62: LIVE main = 89aa1bd9 (role-parity-3+seed, tooling only, on b1c3631e). Final-merge 89aa1bd9 before any LAND READY.
