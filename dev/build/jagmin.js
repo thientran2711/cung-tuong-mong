@@ -26,8 +26,10 @@ window.MINP=null;
 function minOn(){try{return !!(typeof agOn==="function"&&agOn()&&BAL.ag.min&&BAL.ag.min.on&&tdOn())}catch(e){return false}}
 /* the censor: one living official, drawn once */
 function minNs(){const T=trS();if(!T)return null;if(T.ns&&T.ns.name)return T.ns;const N=BAL.ag.min.ns;
- const P=[S].concat(rivals||[]).concat(CLANS.map(c=>T.H[c]).filter(Boolean));const us=new Set(P.map(p=>tdSur(p.name))),ug=new Set(P.map(p=>{const n=String(p.name||"");return n.slice(tdSur(n).length+1)}));
- const sur=SURN.filter(x=>!us.has(x)),giv=MALEN.filter(x=>!ug.has(x));
+ /* a name no living person shares (surname, given name, last word): the name mask (j61) reads names word by word */
+ let P=[S].concat(rivals||[]).concat(CLANS.map(c=>T.H[c]).filter(Boolean));try{if(typeof k61All==="function")P=P.concat(k61All())}catch(e){}P=P.filter(p=>p&&p.name);
+ const us=new Set(P.map(p=>tdSur(p.name))),ug=new Set(P.map(p=>{const n=String(p.name);return n.slice(tdSur(n).length+1)})),ul=new Set(P.map(p=>String(p.name).split(" ").pop()));
+ const sur=SURN.filter(x=>!us.has(x)),giv=MALEN.filter(x=>!ug.has(x)&&!ul.has(String(x).split(" ").pop()));
  const h={c:MINC,ns:1,isMin:1,name:pick(sur.length?sur:SURN)+" "+pick(giv.length?giv:MALEN),age:N.age[0]+R(N.age[1]),sex:"m",pow:N.pow[0]+R(N.pow[1]),sk:N.sk[0]+R(N.sk[1]),af:{}};
  T.ns=h;return h}
 /* every official of the court (the five heads + the censor) */
@@ -85,3 +87,5 @@ function minNsCard(){const h=minNs();if(!h)return"";const f=pMin(h);const af=min
 function minOff(c,d){try{if(!tdOn())return d;const h=trS().H[c];return h&&h.name?`${TDOFF[c]} ${h.name}`:d}catch(e){return d}}
 /* the road card's grain levy memorial (j67 «Triều đình đòi trưng thu thóc») is spoken by the living Hộ bộ thượng thư: token {hobo} */
 try{if(typeof TOK67==="object"&&TOK67)TOK67.hobo=()=>minOff("Hộ bộ","Có đại thần")}catch(e){}
+/* he is one of the people of the world (j61 registry: knowledge level, name mask, kind "off" by isMin), like the five heads */
+(function(){if(typeof k61All!=="function")return;const f0=k61All;k61All=function(){const L=f0.apply(this,arguments);try{const T=S&&S.trieu;if(T&&T.ns&&T.ns.name&&!L.includes(T.ns))L.push(T.ns)}catch(e){}return L}})();

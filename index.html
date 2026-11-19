@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"ca36bec0+","t":"2026-11-19T04:18Z","c":"minister-agents: court officials as agents with goals (PL#7)","b":"34d39095bd26","h":[{"s":"42bda6a9+","t":"2026-11-19T03:34Z","c":"opt-loss-ton: also checks a worded gain never reads 'Được: không'; scans dialogs as the game shows them"},{"s":"cb5a7cb3+","t":"2026-11-19T03:03Z","c":"maid-ladder-6: NPC exam mini-game tier clamps at BAL.srvRk.nq (last typed rung); scan table counted"},{"s":"5f7aef61","t":"2026-11-19T02:22Z","c":"seal-lean: kitEmoSeal idle sway (rotate only) + staggered lean-in with per-feeling motion; test + KIT 38.4 canon overwrite"},{"s":"03df1c9d+","t":"2026-11-19T01:41Z","c":"role-parity.test: deterministic riseCore block (SEED FIX)"},{"s":"de1f6916+","t":"2026-11-19T01:29Z","c":"review live-servants r2: ag-know ONE RULE (NPC) case follows the live-servants rule like §3 (consort's close maid planted at the garden, re…"},{"s":"7d693c26+","t":"2026-11-19T01:22Z","c":"opt-card-short #10: samples = real events; LAW 3: a gain/loss worded only as Gợi ý now shows in Được/Tốn (was «không»)"},{"s":"2dd9cb23+","t":"2026-11-19T00:45Z","c":"review stage-here r4: buổi-turn visit refresh holds the queued cards aside so goTo (j2: returns on Q.length) keeps her where she is (OD 18/…"},{"s":"21904959+","t":"2026-11-18T23:40Z","c":"fullbody-frame s5: person dialog follows the figure standard: frame height follows the figure, figure column runs tag to frame bottom, butt…"},{"s":"cff7cf4d+","t":"2026-11-18T23:07Z","c":"questline-q2 r6 (reviewer): nhTip — a penalty (hb\u003c0) on the told rival's chapter is offset by the tip bonus, not taken as a bonus; rebuild"},{"s":"a837ad32+","t":"2026-11-18T23:30Z","c":"rel-picker r2: site rebuilt"}]};
+window.CTM_BI={"s":"9fe28702+","t":"2026-11-19T04:29Z","c":"minister-agents test: steady gift check","b":"0dd95889b4d0","h":[{"s":"42bda6a9+","t":"2026-11-19T03:34Z","c":"opt-loss-ton: also checks a worded gain never reads 'Được: không'; scans dialogs as the game shows them"},{"s":"cb5a7cb3+","t":"2026-11-19T03:03Z","c":"maid-ladder-6: NPC exam mini-game tier clamps at BAL.srvRk.nq (last typed rung); scan table counted"},{"s":"5f7aef61","t":"2026-11-19T02:22Z","c":"seal-lean: kitEmoSeal idle sway (rotate only) + staggered lean-in with per-feeling motion; test + KIT 38.4 canon overwrite"},{"s":"03df1c9d+","t":"2026-11-19T01:41Z","c":"role-parity.test: deterministic riseCore block (SEED FIX)"},{"s":"de1f6916+","t":"2026-11-19T01:29Z","c":"review live-servants r2: ag-know ONE RULE (NPC) case follows the live-servants rule like §3 (consort's close maid planted at the garden, re…"},{"s":"7d693c26+","t":"2026-11-19T01:22Z","c":"opt-card-short #10: samples = real events; LAW 3: a gain/loss worded only as Gợi ý now shows in Được/Tốn (was «không»)"},{"s":"2dd9cb23+","t":"2026-11-19T00:45Z","c":"review stage-here r4: buổi-turn visit refresh holds the queued cards aside so goTo (j2: returns on Q.length) keeps her where she is (OD 18/…"},{"s":"21904959+","t":"2026-11-18T23:40Z","c":"fullbody-frame s5: person dialog follows the figure standard: frame height follows the figure, figure column runs tag to frame bottom, butt…"},{"s":"cff7cf4d+","t":"2026-11-18T23:07Z","c":"questline-q2 r6 (reviewer): nhTip — a penalty (hb\u003c0) on the told rival's chapter is offset by the tip bonus, not taken as a bonus; rebuild"},{"s":"a837ad32+","t":"2026-11-18T23:30Z","c":"rel-picker r2: site rebuilt"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -8152,8 +8152,8 @@ function tdSoMonth(force){const T=trS();if(!force&&(S.turn-T.soT<TD.soGap||!roll
  else if(k==="imp"){const [cA,t]=imp;ev=tdImpeach(cA,t)}
  else if(k==="tuyen"){const c=(window.MINP&&MINP.k==="tuyen"&&ty.includes(MINP.c))?MINP.c:pick(ty);const h=T.H[c];T.tyY=S.year;const o=cl(30+(h.pow-60)+(S.emp.mood<=1?10:-10),10,85);
   if(roll(o)&&roomFor("consort")){const n=newRival(roll(70)?0:1);Object.assign(n,drawFace());n.age=18+R(4);n.clan=c;n.dad=h.pow;rivals.push(n);try{palFix()}catch(e){}tdPowAdd(c,BAL.eff.j55.tdSoMonth_3);
-   ev=`<b>Sớ xin tuyển tú:</b> ${TDOFF[c]} ${h.name}${typeof minWhy==="function"?minWhy(h):""} xin đưa con gái trong họ vào cung; Hoàng thượng chuẩn (khả năng: ${chanceLo(o)}). ${n.name} vào cung, phong ${RANKS[n.rank].n}, người nhà ${c}. `;tdNews(`Nhà ${c} đưa ${n.name} vào cung.`)}
-  else{tdPowAdd(c,BAL.eff.j55.tdSoMonth_4);ev=`<b>Sớ xin tuyển tú:</b> ${TDOFF[c]} ${h.name}${typeof minWhy==="function"?minWhy(h):""} xin đưa con gái trong họ vào cung; Hoàng thượng gác lại (khả năng: ${chanceLo(o)}). Nhà ${c} thế lực ${balSg(BAL.eff.j55.tdSoMonth_4)}. `;tdNews(`Nhà ${c} xin đưa người vào cung, bị gác lại.`)}}
+   ev=`<b>Sớ xin tuyển tú:</b> ${TDOFF[c]} ${h.name}${typeof minWhy==="function"?minWhy(h):""} xin đưa con gái trong họ vào cung; Hoàng thượng chuẩn (khả năng: ${chanceLo(o)}). ${n.name} vào cung, phong ${RANKS[n.rank].n}, người nhà ${c}. `;tdNews(`${TDOFF[c]} ${h.name} đưa ${n.name}, người nhà ${c}, vào cung.`)}
+  else{tdPowAdd(c,BAL.eff.j55.tdSoMonth_4);ev=`<b>Sớ xin tuyển tú:</b> ${TDOFF[c]} ${h.name}${typeof minWhy==="function"?minWhy(h):""} xin đưa con gái trong họ vào cung; Hoàng thượng gác lại (khả năng: ${chanceLo(o)}). Nhà ${c} thế lực ${balSg(BAL.eff.j55.tdSoMonth_4)}. `;tdNews(`${TDOFF[c]} ${h.name} xin đưa người nhà ${c} vào cung, bị gác lại.`)}}
  else if(k==="cc"){const p=(window.MINP&&MINP.k==="cc"&&cc.includes(MINP.t))?MINP.t:pick(cc);const by=typeof minBy==="function"?minBy("ngự sử"):"ngự sử",byN=typeof minNsName==="function"?minNsName("Ngự sử"):"Ngự sử";const o=cl(25+(p.cc||0)*10-(p.tamco||0)/5,10,80);
   if(roll(o)){p.cc=0;const q=queenP();if(p===S){apply({th:-8});if(q&&q!==S)apply({hh:BAL.eff.j55.tdSoMonth_5})}else{p.th=(p.th||0)-8;if(q&&q!==p&&q!==S)affAdd(q,p,BAL.eff.j55.tdSoMonth_5);if(q===S)affAdd(S,p,BAL.eff.j55.tdSoMonth_6)}punish(p,"hậu cung can chính",1);
    ev=`<span class="r"><b>Sớ hặc can chính:</b> ${by} tâu ${tdName(p)} nhiều lần nhờ cậy ngoại triều. ${p===S?"Ngươi":p.name} bị cấm túc; Thái hậu -8, Hoàng hậu ${balSg(BAL.eff.j55.tdSoMonth_5)} với ${p===S?"ngươi":"nàng"}.</span> `;tdNews(`${byN} hặc ${tdName(p)} can chính.`)}
@@ -8165,8 +8165,8 @@ function tdImpPick(){if(window.MINP&&MINP.k==="imp"&&MINP.imp)return MINP.imp;co
 function tdImpeach(cA,t){const T=trS();const hA=T.H[cA],cT=tdHouse(t),hT=T.H[cT];const evd=Math.max(0,...tdMembers(cA).map(m=>deG(m,t)));
  const o=cl(Math.round(40+evd*15+(hA.pow-hT.pow)/3+(S.emp.mood>=2?10:0)),10,90);const pre=`<b>Sớ hặc tội:</b> ${TDOFF[cA]} ${hA.name}${typeof minWhy==="function"?minWhy(hA):""} hặc cha của ${tdName(t)} (nhà ${cT}) tham ô. `;let ev;
  if(tdDadT(t)&&roll(o)){tdPowAdd(cT,BAL.eff.j55.tdImpeach);t.dad=cl((t.dad||40)-15,0,100);ap(t,{danh:-4});tdDadClear(t);tdMembers(cA).forEach(m=>deA(m,t,-9));tdRelAdd(cA,cT,-15);tdPowAdd(cA,BAL.eff.j55.tdImpeach_2);
-  ev=pre+`Tra xét có thật, cha ${t===S?"ngươi":"nàng"} bị cách chức (khả năng: ${chanceLo(o)}). Nhà ${cT} thế lực ${balSg(BAL.eff.j55.tdImpeach)}; ${t===S?"ngươi mất chỗ dựa: nhà mẹ đẻ -15, Danh -4":`${t.name} mất chỗ dựa (nhà mẹ đẻ -15, Danh -4)`}. `;tdNews(`${TDOFF[cA]} hặc cha của ${tdName(t)}: có thật, bị cách chức.`)}
- else{tdPowAdd(cA,BAL.eff.j55.tdImpeach_3);tdRelAdd(cA,cT,-15);ev=pre+`Tra xét ${tdDadT(t)?"chưa đủ chứng":`không thấy gì: cha ${t===S?"ngươi":"nàng"} thanh liêm`}; Hoàng thượng trách kẻ dâng sớ. Nhà ${cA} thế lực ${balSg(BAL.eff.j55.tdImpeach_3)}. `;tdNews(`${TDOFF[cA]} hặc cha của ${tdName(t)}: không thành.`)}
+  ev=pre+`Tra xét có thật, cha ${t===S?"ngươi":"nàng"} bị cách chức (khả năng: ${chanceLo(o)}). Nhà ${cT} thế lực ${balSg(BAL.eff.j55.tdImpeach)}; ${t===S?"ngươi mất chỗ dựa: nhà mẹ đẻ -15, Danh -4":`${t.name} mất chỗ dựa (nhà mẹ đẻ -15, Danh -4)`}. `;tdNews(`${TDOFF[cA]} ${hA.name} hặc cha của ${tdName(t)}: có thật, bị cách chức.`)}
+ else{tdPowAdd(cA,BAL.eff.j55.tdImpeach_3);tdRelAdd(cA,cT,-15);ev=pre+`Tra xét ${tdDadT(t)?"chưa đủ chứng":`không thấy gì: cha ${t===S?"ngươi":"nàng"} thanh liêm`}; Hoàng thượng trách kẻ dâng sớ. Nhà ${cA} thế lực ${balSg(BAL.eff.j55.tdImpeach_3)}. `;tdNews(`${TDOFF[cA]} ${hA.name} hặc cha của ${tdName(t)}: không thành.`)}
  if(t===S)tdPop("Sớ hặc cha ngươi",hA,`<p>${ev}</p>`);return ev}
 function tdPop(t,h,html){if(quiet||window.__bot)return;Q.push({t,who:pMin(h),h:html})}
 
@@ -24549,7 +24549,7 @@ function k61MaskT(e){const k=k61Kind(e);if(k==="consort")return e.out?"Phế phi
 function k61Mask(e,before,plain){if(k61Coop(e))return K61FR;const t=k61MaskT(e);if(plain)return `một vị ${t} chưa quen biết`;/* plain = prose/log wording (no literal ???; name-mask) */const b=String(before||"").replace(/\s+$/,"").toLowerCase();return b.endsWith(t.toLowerCase())?"???":`${t} ???`}
 /* public announcements (thẻ bài lật, sớ hặc tội at court, thánh chỉ, tấn phong / giáng / phế, births): everyone named in them
    becomes known by name and title (stage 2) the moment it is announced */
-const K61ANN=/thẻ bài của|sớ hặc tội|thánh chỉ|sắc phong|tấn phong|được phong|phong (?:Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng) |lập .{1,60}? làm (Hoàng hậu|Thái tử|Hoàng quý phi)|bị giáng|giáng xuống|bị phế|xướng tên|hạ sinh|băng hà/i;
+const K61ANN=/thẻ bài của|sớ (?:hặc|khen|xin)|thánh chỉ|sắc phong|tấn phong|được phong|phong (?:Hoàng quý phi|Quý phi|Phi|Tần|Quý nhân|Thường tại|Đáp ứng) |lập .{1,60}? làm (Hoàng hậu|Thái tử|Hoàng quý phi)|bị giáng|giáng xuống|bị phế|xướng tên|hạ sinh|băng hà/i;
 function k61Announce(text){try{if(!S||!S.known||!text)return false;const t=String(text).replace(/<[^>]+>/g," ");if(!K61ANN.test(t))return false;const L=[];
  for(const e of k61All()){if(k61Named(e))continue;if(k61Vars(e).some(v=>t.includes(v)))L.push(e)}if(L.length){k61Know(L,"",true,2);K61RX=null}return L.length>0}catch(e){return false}}
 /* name-mask (LUẬT SỬA CẢ NHÓM): EVERY log line (= Nhật ký, result sentences, toasts) passes the one kit mask once: a person she has not met by name
@@ -67174,8 +67174,10 @@ window.MINP=null;
 function minOn(){try{return !!(typeof agOn==="function"&&agOn()&&BAL.ag.min&&BAL.ag.min.on&&tdOn())}catch(e){return false}}
 /* the censor: one living official, drawn once */
 function minNs(){const T=trS();if(!T)return null;if(T.ns&&T.ns.name)return T.ns;const N=BAL.ag.min.ns;
- const P=[S].concat(rivals||[]).concat(CLANS.map(c=>T.H[c]).filter(Boolean));const us=new Set(P.map(p=>tdSur(p.name))),ug=new Set(P.map(p=>{const n=String(p.name||"");return n.slice(tdSur(n).length+1)}));
- const sur=SURN.filter(x=>!us.has(x)),giv=MALEN.filter(x=>!ug.has(x));
+ /* a name no living person shares (surname, given name, last word): the name mask (j61) reads names word by word */
+ let P=[S].concat(rivals||[]).concat(CLANS.map(c=>T.H[c]).filter(Boolean));try{if(typeof k61All==="function")P=P.concat(k61All())}catch(e){}P=P.filter(p=>p&&p.name);
+ const us=new Set(P.map(p=>tdSur(p.name))),ug=new Set(P.map(p=>{const n=String(p.name);return n.slice(tdSur(n).length+1)})),ul=new Set(P.map(p=>String(p.name).split(" ").pop()));
+ const sur=SURN.filter(x=>!us.has(x)),giv=MALEN.filter(x=>!ug.has(x)&&!ul.has(String(x).split(" ").pop()));
  const h={c:MINC,ns:1,isMin:1,name:pick(sur.length?sur:SURN)+" "+pick(giv.length?giv:MALEN),age:N.age[0]+R(N.age[1]),sex:"m",pow:N.pow[0]+R(N.pow[1]),sk:N.sk[0]+R(N.sk[1]),af:{}};
  T.ns=h;return h}
 /* every official of the court (the five heads + the censor) */
@@ -67233,6 +67235,8 @@ function minNsCard(){const h=minNs();if(!h)return"";const f=pMin(h);const af=min
 function minOff(c,d){try{if(!tdOn())return d;const h=trS().H[c];return h&&h.name?`${TDOFF[c]} ${h.name}`:d}catch(e){return d}}
 /* the road card's grain levy memorial (j67 «Triều đình đòi trưng thu thóc») is spoken by the living Hộ bộ thượng thư: token {hobo} */
 try{if(typeof TOK67==="object"&&TOK67)TOK67.hobo=()=>minOff("Hộ bộ","Có đại thần")}catch(e){}
+/* he is one of the people of the world (j61 registry: knowledge level, name mask, kind "off" by isMin), like the five heads */
+(function(){if(typeof k61All!=="function")return;const f0=k61All;k61All=function(){const L=f0.apply(this,arguments);try{const T=S&&S.trieu;if(T&&T.ns&&T.ns.name&&!L.includes(T.ns))L.push(T.ns)}catch(e){}return L}})();
 /* ================= jagmaid: AG3 — MAIDS REACH THE EMPEROR BY THEIR OWN DEEDS (npc-agent §3.3 / §3.4, §5 AG3) =================
    Owner OD:L1386 (every NPC plays like a player: same deeds, same odds, choices by her own needs; no invented bar, gate or flat roll for an
    NPC outcome) + OD 16/11 17:15Z (a maid must DO things so he notices her; maid nights) + OD 15:05Z (3) (seats full → an unranked favoured
@@ -77879,7 +77883,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="34d39095bd26";window.CTM_BUILD=BUILD;
+const BUILD="0dd95889b4d0";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
