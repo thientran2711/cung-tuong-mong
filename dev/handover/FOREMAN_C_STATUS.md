@@ -1367,3 +1367,4 @@ ROOT-48 Lượt 486 (owner on m13/m20): item colour ≠ outfit; no drape on t7/t
 ROOT-48 Lượt 487 (owner): m13/m20 16 figures → SKINS; redraw all 16 after builder fixes → TN1 GO (~2,200 cr).
 
 ROOT-49 19/11 ~17:30Z: took over (depth 1, START_CTX ~4 %). RB1 rule book present (ART_RULES.md 174 lines + rule.py). Workers told to report to ROOT-49 directly.ROOT-49 Lượt 489 (owner in ROOT-48 chat): two-colour = approved Cao Ly V2 sentence verbatim (pr_cl_t2_V2.txt) → ART_RULES B15 set + FIGURE_GATE 12c; TN1 copies it into build_all. Lượt numbering: 488 and 489 each used twice (ROOT-48 + ROOT-49); next = 490.
+ROOT-49 Lượt 491: MMX1 rolled over (27125f1; c06–c08 × 3 ages, 1,377 cr) → sheet LOOKED + SENT; faults: each outfit one colour family only, poses near-frontal and alike. MMX1b session_01PEhRbxPaidk3ih4xgEcVeX (my child) continues c09–c13, c22–c26, p01–p03, bd1–bd3.
