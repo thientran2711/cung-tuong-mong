@@ -26,8 +26,8 @@
 },
 "c06": {
 "group": "Sắc sảo",
-"cut": "rgXcT8Jxtc",
-"src": "c06.v5.FULL.txt"
+"cut": "hu24KgZvqL",
+"src": "c06.v5.FULL.txt (L737 redraw)"
 },
 "c07": {
 "group": "Tươi tắn",
@@ -86,8 +86,8 @@
 },
 "c19": {
 "group": "Sắc sảo",
-"cut": "gOmpdCcSXO",
-"src": "c19.v5.FULL.txt"
+"cut": "hu24KS2vqL",
+"src": "c19.v5.FULL.txt (L737 redraw)"
 },
 "c20": {
 "group": "Dịu dàng",
@@ -418,5 +418,40 @@
 "group": "Quyến rũ",
 "cut": "MBJjc4LDCm",
 "src": "Quyến rũ r2, s38.v5r2"
+},
+"s39": {
+"group": "Sắc sảo",
+"cut": "eIPgu6IdqL",
+"src": "s39.v5.FULL.txt (L737 new)"
+},
+"s40": {
+"group": "Sắc sảo",
+"cut": "kseWy8L16B",
+"src": "s40.v5.FULL.txt (L737 new)"
+},
+"s41": {
+"group": "Sắc sảo",
+"cut": "u5WRlMfQLD",
+"src": "s41.v5.FULL.txt (L737 new)"
+},
+"s42": {
+"group": "Sắc sảo",
+"cut": "tCRyKn2mZJ",
+"src": "s42.v5.FULL.txt (L737 new)"
+},
+"s43": {
+"group": "Sắc sảo",
+"cut": "79foGqDJAL",
+"src": "s43.v5.FULL.txt (L737 new)"
+},
+"s44": {
+"group": "Sắc sảo",
+"cut": "79foGbpJAL",
+"src": "s44.v5.FULL.txt (L737 new)"
+},
+"s45": {
+"group": "Sắc sảo",
+"cut": "kseWyhP16B",
+"src": "s45.v5.FULL.txt (L737 new)"
 }
 }
