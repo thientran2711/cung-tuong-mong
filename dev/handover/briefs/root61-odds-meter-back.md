@@ -1,0 +1,10 @@
+PRIORITY #1 CHECK: OD L477 (14/11 15:05Z labels an toàn/có rủi ro/liều) + OD (19/11 ~01:48Z real) (owner, overwrite) | main jk2b.js:303-317 kitRisk/kitHideOut, j79.js:190-197 kitOdds (segmented meter), jkitpage §53 | review/* none | claims none
+# odds-meter-back (owner bug, MAIN ROOT-61) — opus worker, branch review/odds-meter-back from LIVE main 96188526
+Read first: dev/rules/START_CORE.md (18 LAWS) + START_WORKER.md; dev/handover/briefs/root61-common.md; dev/kit/KIT.md §28.6 §53 + odds meter; dev/kit/VANPHONG.md (odds ladder).
+OWNER (verbatim, read it in full in dev/OWNER_DECISIONS.md, line starting "(19/11 ~01:48Z real)"): "...trong cái mức của tao đâu có cái mức gì mà an toàn đâu ... cái dấu mà thể hiện cái mức độ ... từng cái nấc ... 8 cái ô vuông hay 8 hình chữ nhật ... màu đỏ màu xanh. Tao đã rất là ưng rồi, ai kêu mày sửa lại vậy? ... Để lại cái thể hiện cái đó như cũ cho tao đi."
+DO (KIT FIRST, FIX THE WHOLE GROUP, law 9/11):
+1. Retire kitRisk («an toàn / có rủi ro / liều» chip) in every place it shows (kitHideOut on event options, jcycle H list, any other caller: scan + before/after table). Canon overwrite in KIT.md (delete the kitRisk rule in place) + kit page §53.
+2. Every option card (hidden-outcome events included) shows the kit odds meter kitOdds(lv) from the option's REAL odds (law 4: the same number the roll uses; never a private calc). kitHideOut must keep .kodds (do not remove it). An option with no roll (certain outcome) shows the meter at «Nắm chắc». Hint row (Gợi ý) and Tốn/Được rows stay as now.
+3. No % anywhere (law 7). Meter look = the existing kitOdds (7 segments red→green + word); do not redesign it.
+4. Tests: scan every PEND event option on Fold 755x1000 + iPad 1180x820: count krisk = 0, kodm present on every option with a roll; shot montage (small) of 3 events × 2 devices → CDN img/_review/odds-meter-back/; quickcheck PASS.
+REPORT: dev/handover/reports/odds-meter-back.md + CLAIMS row; send_message MAIN ROOT-61 session_01Rc5AsJBmT3vTTFe8sbCbUa "SẴN SÀNG KIỂM odds-meter-back <sha>". Rollover per root61-common.
