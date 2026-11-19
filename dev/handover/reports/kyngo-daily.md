@@ -35,3 +35,41 @@ Ledger: ilAudit net per 6 lives 1–4 with kỳ ngộ ON vs 2 with it OFF (run1-
 ## Known limits (v1, documented in KYNGO.md §16): NPC finders = consorts only (maids not finders); NPC lối/intel → art / evidence step; co-op guest skips world-piece encounters.
 
 ## HANDOVER (context ≈ 30 %, rollover point): if BIG review asks for changes, a successor reads this file + dev/design/KYNGO.md §16; bot: run one band per process (memory), `node dev/measure/kyngo-bot.js <url> 6 18 <rank> mix`.
+
+## ROUND 2 (E18b, opus) — SẴN SÀNG KIỂM kyngo-daily a2ae3ac2 r2
+depth 2 · START_CTX ~0 % (window 1M) · now ~22 %.
+PRIORITY #1 CHECK ('kyngo|kỳ ngộ'): OD 5 | ledger 0 | claims 8 (+ this row) | main 3 (j97 / jroad RD97L / j96, reused) | review/* 1 (review/kyngo-daily @ 8cb39e38 = start) | archive 0. Reused: worldOn() (jcoopworld), BAL.ageBand, kit classes g/r, j3 bạc disable rule, j95 placeOfId.
+★ THE 18 LAWS read first. Branch review/kyngo-daily, merged LIVE origin/main edb2e724 (clean), rebuilt with build_site.sh; commits 7540a03b (9 fixes) · bc277bb7 (H bar, option words) · a2ae3ac2 (docs + KIT REQUEST).
+
+### The 9 fixes (law 11: whole family each)
+| # | fix | family covered |
+|---|---|---|
+| 1 | bar 3–5: ma_giao / th_chi → M, sv_tuyet → M+H; H also needed: vat_ngu / ma_nhac / th_chi → H and cd[H] 2 → 1 (BAL only); bot re-pins S.rank every buổi | all 3 bands measured (table below) |
+| 2 | NPC pass runs at the END of her buổi (before nextBuoi advances) → meHere sees her walk; her staff + kids (≤ kidAge) join her as WHO | every NPC encounter (vat_thu, th_sao, sv_den, sv_tre …) |
+| 3 | npcPass skips `v.coop`; guard = worldOn() (private coop()&&guest() removed from npcPass) | same rule as jagacts4 / jcmaid / jallot |
+| 4 | option gains wrapped in kit class g, costs in class r; FOUND: the kit reads MEANING before class (j63 kaSent → kcls), so classes alone do not fix «Son phần giáng» → option line names no piece («món đồ / di vật / món quý», name stays in card text + kitItemTag). KIT REQUEST filed (dev/kit/KIT_REQUESTS.md, kaSent class precedence, game-wide family) | all specW item lines (lc / box / rr) |
+| 5 | elig drops any choice encounter whose EVERY option asks more Bạc than the finder holds (optBac = cost × V + buy price, j3's disable rule); NPCs same | scan (unit 15): only vat_ngu has every option costing Bạc |
+| 6 | BAL.kyngo loiK/loiArt, kidAge, relSung, relLoyal/relLoyK; 51+ = BAL.ageBand[2] | numscan: game values typed in jky.js 9 → 0 (left: queen rank index 7, band labels 1–3, ageBand index, pick-weight floor .01, error-buffer 30 — structure, not game numbers) |
+| 7 | ma_giao opt 2 = «Xin ma ma chỉ dạy tận tay»: g.art 28 Thêu now (+ rel), value 17.4 vs 14.5 (eq ok); kyTeach removed | eq test: every special in use has a SPEC reader; every field a special writes is read elsewhere in dev/build (10 fields ok) |
+| 8 | Thái hậu in kyPpl only where her j95 plan puts her (placeOfId("th","tn")); th_kinh opt 2 «Xin người dạy lễ nghi» | — |
+| 9 | unit 12 (she as WHO, + household, + via nextBuoi), 13 (co-op friend never rolls), 14 (vat_ngu poor/rich), 15 (family scan); eq F7 reader check; shots: «giáng» piece card | — |
+
+### Tests on bc277bb7 build (a2ae3ac2 = docs only)
+| test | result |
+|---|---|
+| kyngo-eq.js | PASS (all encounters × bands + special readers) |
+| one-core-guard.js | PASS (inline 3986 < baseline 4212) |
+| kyngo-unit.js | PASS 22/22 |
+| kyngo-shots.js Fold 755x1000@2 + iPad 1180x820@2 | PASS 12/12; LOOKED 3× at the «giáng» card (TỐN 1 khắc only, ĐƯỢC on both), th_kinh card, result card, Sổ luân hồi |
+| quickcheck.sh --cpu 4 (MAIN pattern) | PASS: open 1543 ms, old save from live loads + plays a buổi, core gates PASS (incl. coop-one-world), TIME-SPILL PASS, perf new/live render 228/215, tab 460/440, buổi 1005/1073 ms |
+| co-op | unit 13 + coop-one-world gate |
+
+### Bot (1 life per process, 18 tuần, mix walker, rank held)
+| band | lives | e | hits/life | gap (tuần) | zero | ilAudit net/life | jky / page errors |
+|---|---|---|---|---|---|---|---|
+| L (rank 1) | 6 | .069 | 4.50 | 4.0 ✓ | 0 | 0–2 | 0 / 0 |
+| M (rank 3) | 12 | .067 | 4.33 | 4.2 ✓ | 0 | 0–2 | 0 / 0 |
+| H (rank 6) | 18 | .062 | 3.78 | 4.8 ✓ | 0 | 0–2 | 0 / 0 |
+H before its lever: 6.4 (6 lives, cd 2), 8.5 (9 lives, + 3 encounters, cd 2) → cd 1: 4.8. L/M numbers are from before the H-only changes (they touch band 3 only). net = same noise as E18's OFF baseline.
+NOTE for reviewer: Fold «Mang trả tận tay» ĐƯỢC shows main's word layer («thêm thể diện, được lòng người»); the «món đồ về lại tay chủ» phrase is folded in by the kit, not dropped by jky.
+Shots: scratch only (/home/user/wt/ky2-shots), regenerate with `node dev/test/kyngo-shots.js <url> <dir>`.
