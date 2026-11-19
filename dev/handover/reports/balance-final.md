@@ -229,3 +229,34 @@ Result (fixed scan, branch vs live, same seed): **branch-only gaps = none**. Liv
 | Fold 755x1000@2 + iPad 1180x820@2 | 0 page errors, no h-overflow; origin picker looked at (scratch only) |
 Game-code changes in #5: none beyond the main merges (j8 ksp: main's wording + BAL.rk.maidRise). Test-only: dev/tools/role-parity-scan.js, role-parity-exempt.json. Laws: no number, choice, cost or trial changed.
 **SẴN SÀNG KIỂM 822cd8bd** — arms table = § FINAL ARMS (unchanged since #3). OWNER FLAGS (for MAIN, not decided here): QP −7 pooled (87 vs 80 %); ended before HH/cap 19 vs 25 %; kids/y 1.45× live; seat vacancy blocks promotions; NPC Sủng lower (m12 38 vs 46).
+
+## REVIEW balance-final BIG (opus, session_01964izFbpbTVNPJ6Ed7SNgj, depth 7, START_CTX ≈ 4 % est.) — VERDICT: **PASS → LAND READY review/balance-final 40775131** (FF of LIVE 2bda29a1)
+PRIORITY #1 CHECK ('balance-final'): report «#1–#5» + briefs D5-balance-final-3 / DROOT-balance-final | main: role-parity-scan/test (role-parity-drift-2 landed 1a4df595) | review/choice-value-audit (BAL.rk.loanBack guard), review/parallel-time-rv (landed) | claims: this review.
+Reviewed SSK 822cd8bd, then final-merged LIVE twice (main moved during the review): 1a4df595 (parallel-time 801b86b7 + role-parity-drift-2) → e094165a, 2bda29a1 (receiver-choice jrcv + seal-lean-3) → **40775131** (pushed).
+Merges: assemble list = main's + jbalcore/jledger/jnf after jgrey (363 modules, no duplicates); j42 srvDoOrder = branch's BAL.eff.j8.hit + main's srvOrdMerit(); role-parity-scan = both sides' worlds (branch favour/grudge/threat/faction-friend/m-trust + per-world relation restore; main's confidant-maid staff world + m-sour); index/sw rebuilt.
+Reviewer test-only fixes (no game code): 471f74b6 + 288078e7 — night-multi case 7 and night-final cases 3/4 missed ~1 in 40 because the drawn attacker B was on her cycle this tuần (jcycle cycOn: off the tray, cannot press a steal → npc [] / tries 0); T.fresh now orders rivals on their cycle last, case 7 readies an eligible attacker. Proven with a repeat harness: cases 3/4 60/60 after (1 fail in 50 before).
+
+### Laws
+| law | result |
+|---|---|
+| 1 two-way | PASS. Role-parity test changes are honest: every new world (favour, grudge, threat, faction-friend, m-trust) is applied by the SAME function to her and to an NPC doer; relation restore only removes cross-world stacking; the emotion-card exemption adds the 6th card of the same jemoact table. Cross-check: the branch scan on the LIVE build still reports live's own gaps (maidTalk, Chứng cứ 2, maid:pil) → it hides nothing live has. On 40775131 role-parity.test = **ALL PASS** (branch-only gaps 0). riseCore: same Sủng/Danh/Bạc/ghen for her and an NPC maid; srvRise's Danh carry-over (BAL.danhG.srvRise .2) narrows the old asymmetry (she kept 100 % before; an NPC maid starts a fresh Danh). |
+| 2 equal value | PASS. Tranh sủng vs Chặn ngự giá from BAL.steal.m, measured best-choice share 24–64 % each (jbal2 note, bc-night-opt); Giữ chân = gain-only. |
+| 3 gain-and-loss | PASS. No cost-only option added; Giữ chân «hỏng: không mất gì» is gain-only (allowed). |
+| 4 one core | PASS. one-core-guard / bind / text / text-rule PASS; typed odds moved to BAL (rk.riseKill/abortDieSrv/maidRise/vpTake, eff.j8.hit, steal.m, art.flipX, punishMonths). **BAL.rk.loanBack = 40 = choice-value's guard value** (jbal.js `if(!BAL.rk)BAL.rk={loanBack:40}`). |
+| 5 harder as she climbs | not touched (mini-game tiers unchanged; night steal odds have no rank term on live either). |
+| 6 real world | not weakened (night records true, «Sổ ghi» lines tested by night-final 3 / ledger). |
+
+### Gates on 40775131 (one at a time, idle box)
+static guards ×5 PASS · role-parity.test ALL PASS · night-final 3/3 (+6/6 and 3/3 on e094165a; cases 3/4 60/60) · night-multi 3/3 (+4/4, 8/8 on e094165a) · balance-core PASS · ledger ALL PASS · night-steal-unit PASS · night-coop-park 6/6 · coop-night 105/105 · coop-e2e 68/68 · quickcheck --runs 6 PASS (old save ok; render 264/253, tab 527/493, buổi 1752/1457 ms (+20 %, inside the gate), tasks>200ms 24/22) · Fold 755x1000@2 + iPad 1180x820@2: 0 page errors, no h-overflow, start screen looked at (scratch only).
+Note: on 822cd8bd one coop-e2e run gave 66/70 (seat A stuck behind a random «Ngự giá lâm cung» visit at tối, same jvisit code as live); not reproduced (68/68 ×2 after).
+Own arm sample (seed 1020, 6 lives each, YRSTOP 8, live 1a4df595 vs branch e094165a, 0 crashes): Phi 83 % m42 vs 100 % m34.5; QP 83 % m54 vs 83 % m36; Danh m24 86.5 vs 99.5; kids/y 0.048 vs 0.083; NPC Sủng m24 45 vs 36. Small n — same direction as § FINAL ARMS (136/124 lives), no new outlier.
+
+### OWNER FLAGS (for MAIN → the owner; not decided here)
+| flag | branch vs live | note |
+|---|---|---|
+| Quý phi reached | 87 vs 80 % pooled (−7 per worker's sign convention: worker listed QP −7) | confirm direction with § FINAL ARMS + confirmation arms |
+| ended before HH / cap | 19 vs 25 % | fewer lives cut short on the branch |
+| kids / year | ≈ 1.45× live (0.108 vs 0.074) | her births 1.5×, so birth deaths 8 vs 4 (per-birth risk unchanged) |
+| seat vacancy | promotions blocked when no seat is free (BAL.seat unchanged per brief) | design question |
+| NPC Sủng | lower on the branch (m12 38 vs 46; my sample m24 36 vs 45) | NPC favour curve |
+LANDING: choice-value-audit 1a7ab77c (LAND READY, HOLD for coopBribe review) conflicts with this branch in assemble.py, j24, j42, j8, jecon → whichever lands second final-merges first; if choice-value lands first, delete its jbal.js `BAL.rk` guard line in that merge (jbal2 holds BAL.rk.loanBack 40).
