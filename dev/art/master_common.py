@@ -33,6 +33,22 @@ BROCADE = "FABRIC: thick gold-embroidered brocade with a graceful, flowing drape
 HIGH_SCOPES = {"tp6", "tp7", "tp8", "pr7", "pr8", "trieu6", "trieu7", "trieu8", "nude", "thaihau", "state:thaihau", "emperor"}
 
 
+# C5 (owner Lượt 779/784, MG2): at a51/a65 every lady prompt except Nữ đế carries this clause (build.py ELDER_M05_BRIDGE / ELDER_M05_SENT) AFTER master M05.
+ELDER_KEY = "elder colour rule wins over the first COLOUR RULE (medium-light tone)"
+
+
+def check_elder(text, scope, age):
+    """-> list of (id, kind, detail). Nữ đế (B23) must NOT have it; faces / men have no elder colour rule (not checked)."""
+    if age not in ("a51", "a65") or scope in ("face", "emperor"): return []
+    t = _norm(text); n = t.count(ELDER_KEY)
+    if scope == "nude":
+        return [("C5", "NỮ ĐẾ B23", "Nữ đế keeps her bright a36 colours: no elder-colour clause")] if n else []
+    if n != 1: return [("C5", "MISSING" if n == 0 else "NOT ONCE", f"a51/a65: elder colours must win over M05: '{ELDER_KEY}' {n} times (must be 1)")]
+    m05 = _norm(sentences()[ids().index("M05")])
+    if m05 in t and t.index(m05) > t.index(ELDER_KEY): return [("C5", "ORDER", "the elder-colour clause must come AFTER master M05")]
+    return []
+
+
 def high_scope(scope): return scope in HIGH_SCOPES
 
 
