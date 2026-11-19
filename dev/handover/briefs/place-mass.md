@@ -15,3 +15,11 @@ Vietnamese names: a-ca-so A ca sở · canh-phuc-cung Cảnh Phúc cung (chính 
 - RECEPTION for phối <key>-ha-sang.webp (REDRAW, no bed visible at all): a sitting/receiving room where she receives guests: low couch or chairs, tea table, screen, shelves, flowers; LEFT foreground open. The old 35 pictures stay (skins).
 - Unmarked 6 rooms redrawn in the new style for one set: kinh-su-phong, lanh-cung, ngu-hoa-vien, nvp-v4 (Nội vụ phủ), tam-cung-dem (player's bedroom — keep it a bedroom, bed central), thuong-thu-phong. Old ones stay as skins.
 - Save to img/_review/place-mass/ (never overwrite live img/). Full-res composite per room with the 4 figures EVENLY spaced (dev/art/place-redraw/composite_spread.py at 2688x1386), sheets of 4 rooms to scratchpad gui/place2-<first>-<last>.jpg + CDN. Report file dev/handover/reports/place-mass2-<helper>.md.
+
+## ROUND 2 — RANK RULES (owner Lượt 446, overrides anything above; sample layout OK)
+- Bed and room follow the occupant's RANK. NO phoenix motif and NO imperial yellow anywhere except the Hoàng hậu (Khôn Ninh cung). Red is fine; the accent colour woven into the bedding/curtains = the RANK colour of that occupant (never yellow below Hoàng hậu).
+- Luxury rises with rank and NEVER reaches the Empress: low ranks still pretty and noble (carved, lacquered, embroidered — never a bare plain wooden poor room), higher ranks richer, Hoàng hậu bedroom = the MOST dazzling room of all (gold, phoenixes, imperial yellow).
+- PHỐI bedrooms (Đông/Tây phối) are SHARED by two low consorts (Thường tại / Quý nhân): show TWO beds in the room (two canopy beds or two curtained bed alcoves), each with her own small dressing corner; modest but pretty.
+- CHÍNH ĐIỆN bedrooms = the palace head (Tần/Phi/Quý phi level): one grand bed, rank colour accents, no phoenix, no yellow.
+- ADD: khon-ninh-cung-ngu = the Hoàng hậu's bedroom (the most splendid, yellow + phoenix allowed).
+- REDO the sample thua-minh-cung-dong-phoi-ngu (it had a phoenix and yellow): two beds, rank colours; keep the old one as a skin.
