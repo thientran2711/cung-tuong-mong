@@ -1,0 +1,6 @@
+m29 (Lượt 414 test, owner: drop the M09 style image after t1; image 1 = her own t1 thiếu nữ picture carries face + style)
+t1  (unchanged, 2 images): image 1 = style 6AbGv6EiJO (style2_portraits_c01_c12), image 2 = her face https://ctm-img.victoria-tntt.workers.dev/img/hd/fig-maid-m29-t1-a18.webp
+t2..t5 (1 image):          image 1 = her own t1 picture https://ctm-img.victoria-tntt.workers.dev/img/hd/fig-maid-m29-t1-a18.webp   (face + drawing style; NO style image)
+t6..t8 (2 images):         image 1 = her own t1 picture https://ctm-img.victoria-tntt.workers.dev/img/hd/fig-maid-m29-t1-a18.webp, image 2 = royal-yellow swatch TdwDfOyVNR (https://ctm-img.victoria-tntt.workers.dev/img/_review/swatch/royal_yellow_C2.png)
+Prompt wording renumbered to match: swatch sentences say "image 2"; the style-image sentence is removed by build.py --nostyle; K3 background line = "IGNORE the reference image's background completely ...".
+Generate: gpt-2-6 1024x2304 2k transparentBackground, as before.

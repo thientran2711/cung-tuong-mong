@@ -60,17 +60,21 @@ def _inject(g):
     for pid,k in PR.items():
         d=PRS[k]; assert g["PRINCESS_ROWS"][pid]==(d["main"],d["sec"],d["hex1"],d["hex2"],d["motif"],d["flower"]),("store row differs",pid)
 
+NOSTYLE=False   # Lượt 414: --nostyle = the style (M09-style) image is dropped from the refs; image 1 = her own t1 picture, swatch (royal ranks) = image 2
 def store(person,rank,age="a18"):
     """EXACT stdout of the store CLI for this person/rank (princess rows injected into the store's own tables)."""
     if rank=="nude": argv=["build.py",person,"v0","--nude3"]+(["--age",age] if age!="a18" else [])   # Nữ đế = the store HH t8 + added Nữ đế sentences (build.py nude3); crown varies per person (NUDE_CROWNS)
     else: argv=["build.py",person]+(["--low",str(rank)] if rank<=6 else ["--t7"] if rank==7 else [])+["--spec5pose"]+(["--age",age] if age!="a18" else [])
+    if NOSTYLE: argv=argv+["--nostyle"]
     old=sys.argv; sys.argv=argv; g={"__name__":"build_store","__file__":STORE}
     try:
         exec(_PART1,g); _inject(g); buf=io.StringIO()
         with contextlib.redirect_stdout(buf): exec(_MAIN,g)
     finally: sys.argv=old
     global LAST_G; LAST_G=g
-    return buf.getvalue()
+    out=buf.getvalue()
+    if NOSTYLE: out=re.sub(r"\b([Ii])mage 3\b",r"\1mage 2",out)   # renumber: with the style image gone the swatch is image 2
+    return out
 
 # ---------------- owner laws, added as extra sentences ----------------
 def _fl():
@@ -169,7 +173,7 @@ def gate(person,rank,age,text):
     sp=ALIAS.get(person,person)
     with tempfile.NamedTemporaryFile("w",suffix=".txt",delete=False,encoding="utf-8") as f: f.write(text); fn=f.name
     try:
-        args=[sp,"v0"]+([] if rank=="nude" else ["--low",str(rank)] if rank<=6 else ["--t7"] if rank==7 else [])+(["--age",age] if age!="a18" else [])
+        args=[sp,"v0"]+(["--nostyle"] if NOSTYLE else [])+([] if rank=="nude" else ["--low",str(rank)] if rank<=6 else ["--t7"] if rank==7 else [])+(["--age",age] if age!="a18" else [])
         p=subprocess.run([sys.executable,os.path.join(ART,"check_store.py"),fn]+args,capture_output=True,text=True)
         return p.returncode==0 and "STORE CHECK PASS" in p.stdout, p.stdout.strip()
     finally: os.unlink(fn)
@@ -187,6 +191,7 @@ def check_all(age="a18"):
     n=len(PEOPLE)*8+32; print(f"checked {n} prompts ({len(PEOPLE)} people x 8 ranks, age {age}): {bad} FAIL"); return 1 if bad else 0
 if __name__=="__main__":
     a=sys.argv[1:]; age=a[a.index("--age")+1] if "--age" in a else "a18"
+    if "--nostyle" in a: NOSTYLE=True
     if "--check" in a: sys.exit(check_all(age))
     if "--samples" in a:
         for p,t in (("m19",1),("m19",3),("c06",7),("p01",2),("p03",8)):
