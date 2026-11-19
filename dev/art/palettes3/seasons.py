@@ -1,29 +1,28 @@
-"""Season rules for B20 (owner Lượt 616): xuân / hạ / thu / đông.
-Measured on OKLCH (colourlib):  w = temperature = 0.8 x main warmth + 0.2 x secondary warmth (the main colour
-  covers most of the outfit; warmth = 10*C*cos(hue-55°): + warm / - cool; ivory/cream/white = neutral 0),
-Lmin = lightness of the darker of the two colours, dE = main-vs-secondary difference (OKLab).
-CLASSIFY (root palettes):
-  warm (w > 0)  -> XUÂN (spring)  if both colours light (Lmin >= 0.66) and no olive/yellow-green colour (clear + light)
-                   THU  (autumn)  otherwise (a deep / rich / muted colour)
-  cool (w <= 0) -> ĐÔNG (winter)  if a deep colour or strong contrast (Lmin <= 0.58 or dE >= 0.30)
-                   HẠ   (summer)  otherwise (soft, light, gentle contrast)
-TARGET (generated palettes: same rule plus margins so each reads clearly as its season):
-  XUÂN: w >= +0.30, Lmin >= 0.68, no olive, max chroma >= 0.07 (clear), secondary not a strong cool (warmth >= -0.45)
-  HẠ  : w <= -0.15, Lmin >= 0.62, both chroma <= 0.10, dE <= 0.24 (soft), secondary not peach/coral (warmth <= 0.50)
-        or (owner Lượt 752, "Hạ a little yellow") SUMMER-WARM: a light fresh yellow / orange main (hue 40–110°,
-        L >= 0.76, so lighter and fresher than Thu) with a clearly cool secondary (warmth <= -0.45: blue / aqua /
-        teal / violet, so it never passes the Xuân target, whose secondary must be >= -0.45), Lmin >= 0.65 (Thu
-        needs <= 0.64), both chroma <= 0.10, dE <= 0.26. Root classification (classify) is unchanged.
-  THU : w >= +0.30, Lmin <= 0.64 (a deep/rich colour), main lightness <= 0.80, secondary no colder than teal (warmth >= -0.62)
-  ĐÔNG: w <= -0.15, Lmin <= 0.58 or a white/ivory with dE >= 0.30; dE >= 0.25 (clear, strong)
-"""
+"""Season rules for B20 (owner Lượt 616; rewritten for owner Lượt 769): xuân / hạ / thu / đông.
+Owner Lượt 769: "cho dù qua mùa thu hay mùa đông thì vẫn là màu nhẹ nhàng, tươi tắn như xuân với hạ; thu với đông chỉ là
+mình gom những nhóm màu thu/đông vào mùa đó" -> ALL FOUR seasons use ONE tone (the Xuân/Hạ tone: light, fresh, soft);
+a season = a group of colour FAMILIES, never a depth. The old "Thu / Đông need a deep colour" rule (Lmin <= 0.64 / 0.58)
+is gone. Measured on OKLCH (colourlib).
+TONE (all seasons, main and secondary, owner Lượt 742/744/769; = the Xuân/Hạ generated colours, tone_unify.py numbers):
+  main: L 0.70–0.90, chroma 0.045–0.095 · secondary: L 0.64–0.90 (a touch deeper, like Xuân/Hạ), chroma 0.045–0.100
+  ivory / cream / white (L >= 0.86, C <= 0.06) allowed as either colour. No grey (B19), no gold / royal yellow (B21).
+FAMILIES (affinity 0..1 of one colour to each season, see aff()):
+  Xuân: pinks / rose / coral-pink (hue 345–30°, clear), light peach-blossom, clear spring greens (128–152°)
+  Thu : coral-red / terracotta / apricot / persimmon / honey (28–82°), olive / sage / moss / bamboo (95–128°), soft brick /
+        rust / madder reds, muted rose-mauve, soft teal, soft plum-violet
+  Hạ  : soft blue / aqua / turquoise (186–262°), periwinkle / lavender (262–310°), jade / sea green; plus the
+        SUMMER-WARM pairs (owner Lượt 752): a light fresh yellow / orange main with a clearly cool secondary
+  Đông: icy blue (light, low chroma), lilac / orchid (305–336°), silver-rose, jade / mint / celadon (pine -> soft jade),
+        soft sapphire / indigo / violet, soft raspberry / plum, white
+CLASSIFY: temperature w = 0.8 x main warmth + 0.2 x secondary warmth (ivory = 0); warm (w > 0) -> Xuân or Thu, cool -> Hạ or
+  Đông, by the higher score 0.6 x aff(main) + 0.4 x aff(secondary) (main covers most of the outfit). Summer-warm -> Hạ.
+TARGET (generated palettes): both colours in TONE, classify() gives the season with a score margin >= 0.10 over the
+  other season of that side (summer-warm pairs: Hạ directly), Xuân clear (max chroma >= 0.07), Hạ soft (dE <= 0.26)."""
 from colourlib import *
 
 SEASONS = ('xuan', 'ha', 'thu', 'dong')
 VN = {'xuan': 'Xuân', 'ha': 'Hạ', 'thu': 'Thu', 'dong': 'Đông'}
-
-def _olive(h):
-    H = oklch(h)[2]; return 95 <= H < 128 and not is_white(h)
+TONE = {'m': dict(L=(0.70, 0.90), C=(0.045, 0.095)), 's': dict(L=(0.64, 0.90), C=(0.045, 0.100))}
 
 def temp(h):
     return 0.0 if is_white(h) else warmth(h)     # ivory / cream / white count as neutral
@@ -32,11 +31,59 @@ def metrics(m, s):
     return dict(w=0.8 * temp(m) + 0.2 * temp(s), Lmin=min(oklch(m)[0], oklch(s)[0]), dE=dE(m, s),
                 Cmax=max(oklch(m)[1], oklch(s)[1]), Lmain=oklch(m)[0])
 
-def classify(m, s):
-    x = metrics(m, s)
-    if x['w'] > 0:
-        return 'xuan' if x['Lmin'] >= 0.66 and not (_olive(m) or _olive(s)) else 'thu'
-    return 'dong' if (x['Lmin'] <= 0.58 or x['dE'] >= 0.30) else 'ha'
+def in_tone(h, role):
+    """role 'm' (main) / 's' (secondary): inside the one tone of all four seasons"""
+    L, C, H = oklch(h)
+    if is_white(h): return L <= 0.93
+    t = TONE[role]
+    return t['L'][0] - 1e-9 <= L <= t['L'][1] and t['C'][0] <= C <= t['C'][1] + 1e-9 and \
+        not ((80 <= H < 100 and C > 0.06) or dE(h, '#EFBD69') < 0.045)
+
+def tone_lift(h, role):
+    """same hue, brought into the tone box (lighter if darker, chroma capped, a grey given a little colour)"""
+    from xuan_pink import lch2hex
+    L, C, H = oklch(h)
+    if is_white(h): return h
+    t = TONE[role]
+    L2 = min(max(L, t['L'][0]), t['L'][1]); C2 = min(max(C, t['C'][0] + 0.005), t['C'][1])
+    for _ in range(12):                         # sRGB gamut / rounding: nudge until it reads inside
+        h2 = lch2hex(L2, C2, H)
+        if in_tone(h2, role): return h2
+        L2r, C2r, _h = oklch(h2)
+        L2 += 0.004 if L2r < t['L'][0] + 0.002 else (-0.004 if L2r > t['L'][1] else 0)
+        C2 += 0.003 if C2r < t['C'][0] + 0.002 else (-0.003 if C2r > t['C'][1] else 0)
+    return lch2hex(L2, C2, H)
+
+def _in(H, a, b): return (a <= H < b) if a < b else (H >= a or H < b)
+
+def aff(h):
+    L, C, H = oklch(h); A = dict(xuan=0.0, ha=0.0, thu=0.0, dong=0.0)
+    if is_white(h): A.update(xuan=0.5, thu=0.3, ha=0.3, dong=0.6); return A
+    def up(k, v): A[k] = max(A[k], v)
+    if _in(H, 345, 30) and C >= 0.065: up('xuan', 1)
+    if _in(H, 20, 50) and L >= 0.78: up('xuan', 0.8)
+    if _in(H, 128, 152) and C >= 0.085: up('xuan', 0.9)
+    if _in(H, 155, 186) and L >= 0.76: up('xuan', 0.4)
+    if _in(H, 28, 82): up('thu', 1 if L < 0.78 else 0.75)
+    if _in(H, 95, 128): up('thu', 1)
+    if _in(H, 10, 40) and C >= 0.085: up('thu', 0.85)
+    if _in(H, 330, 20) and C < 0.072: up('thu', 0.6)
+    if _in(H, 186, 212) and L < 0.72: up('thu', 0.7)
+    if _in(H, 295, 345) and L < 0.70: up('thu', 0.6)
+    if _in(H, 186, 262): up('ha', 1 if L < 0.80 else 0.7)
+    if _in(H, 262, 310): up('ha', 0.8)
+    if _in(H, 155, 186): up('ha', 0.6)
+    if _in(H, 330, 360) and C < 0.09: up('ha', 0.4)
+    if _in(H, 212, 265) and L >= 0.80 and C <= 0.07: up('dong', 1)
+    if _in(H, 305, 336): up('dong', 1)
+    if _in(H, 345, 15) and C <= 0.06 and L >= 0.78: up('dong', 0.9)
+    if _in(H, 155, 186): up('dong', 0.9)
+    if _in(H, 262, 300) and L < 0.72: up('dong', 0.9)
+    if _in(H, 335, 360) and L < 0.72: up('dong', 0.8)
+    return A
+
+def scores(m, s):
+    a, b = aff(m), aff(s); return {k: 0.6 * a[k] + 0.4 * b[k] for k in a}
 
 def summer_warm(m, s):
     """Hạ with a light yellow / orange main and a cool secondary (owner Lượt 752)"""
@@ -45,15 +92,19 @@ def summer_warm(m, s):
     return (40 <= H <= 110 and x['Lmain'] >= 0.76 and x['Lmin'] >= 0.65 and x['Cmax'] <= 0.10 and x['dE'] <= 0.26
             and temp(s) <= -0.45)
 
+def side(m, s): return ('xuan', 'thu') if metrics(m, s)['w'] > 0 else ('ha', 'dong')
+
+def classify(m, s):
+    if summer_warm(m, s): return 'ha'
+    sc = scores(m, s); return max(side(m, s), key=lambda k: sc[k])
+
 def target_ok(season, m, s):
+    if not (in_tone(m, 'm') and in_tone(s, 's')): return False
     x = metrics(m, s)
     if season == 'ha' and summer_warm(m, s): return True
     if classify(m, s) != season: return False
-    if season == 'xuan':
-        return x['w'] >= 0.30 and x['Lmin'] >= 0.68 and x['Cmax'] >= 0.07 and temp(s) >= -0.45
-    if season == 'ha':
-        return x['w'] <= -0.15 and x['Lmin'] >= 0.62 and x['Cmax'] <= 0.10 and x['dE'] <= 0.24 and temp(s) <= 0.50
-    if season == 'thu':
-        return x['w'] >= 0.30 and x['Lmin'] <= 0.64 and x['Lmain'] <= 0.80 and temp(s) >= -0.62
-    if season == 'dong':
-        return x['w'] <= -0.15 and x['dE'] >= 0.25 and (x['Lmin'] <= 0.58 or is_white(m) or is_white(s))
+    sc = scores(m, s); a, b = side(m, s)
+    if abs(sc[a] - sc[b]) < 0.10: return False
+    if season == 'xuan': return x['Cmax'] >= 0.07
+    if season == 'ha': return x['dE'] <= 0.26
+    return True

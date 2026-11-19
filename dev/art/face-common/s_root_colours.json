@@ -374,91 +374,157 @@
   "src": "drawn colours of the approved s45.v5.FULL.txt (owner Lượt 763: root = her current drawn colours)"
  },
  "s51": {
-  "main": "orchid pink",
-  "main_hex": "#D49CC6",
-  "sec": "deep sea blue",
-  "sec_hex": "#4F809A",
-  "root_season": "dong",
-  "src": "Lượt 763 new Kiêu kỳ root, picked by palette86.py from approved palette colours"
+  "main": "cool lilac",
+  "main_hex": "#CCB0E5",
+  "sec": "soft sea blue",
+  "sec_hex": "#6294AE",
+  "root_season": "ha",
+  "src": "Lượt 763 new Kiêu kỳ root, picked by palette86.py from approved palette colours; re-picked in the one Xuân/Hạ tone (owner Lượt 769)",
+  "root_prev_L763": {
+   "main": "orchid pink",
+   "main_hex": "#D49CC6",
+   "sec": "deep sea blue",
+   "sec_hex": "#4F809A"
+  }
  },
  "s52": {
-  "main": "soft lavender",
-  "main_hex": "#B8A0D2",
-  "sec": "madder red",
-  "sec_hex": "#AE6163",
-  "root_season": "ha",
-  "src": "Lượt 763 new Kiêu kỳ root, picked by palette86.py from approved palette colours"
+  "main": "sky blue",
+  "main_hex": "#98C8D7",
+  "sec": "soft madder red",
+  "sec_hex": "#C37475",
+  "root_season": "dong",
+  "src": "Lượt 763 new Kiêu kỳ root, picked by palette86.py from approved palette colours; re-picked in the one Xuân/Hạ tone (owner Lượt 769)",
+  "root_prev_L763": {
+   "main": "soft lavender",
+   "main_hex": "#B8A0D2",
+   "sec": "madder red",
+   "sec_hex": "#AE6163"
+  }
  },
  "s53": {
-  "main": "soft blue-violet",
-  "main_hex": "#8E88C8",
-  "sec": "aqua blue",
-  "sec_hex": "#94D0E1",
+  "main": "soft lavender",
+  "main_hex": "#A893CE",
+  "sec": "pale mint green",
+  "sec_hex": "#B0DDD0",
   "root_season": "ha",
-  "src": "Lượt 763 new Kiêu kỳ root, picked by palette86.py from approved palette colours"
+  "src": "Lượt 763 new Kiêu kỳ root, picked by palette86.py from approved palette colours; re-picked in the one Xuân/Hạ tone (owner Lượt 769)",
+  "root_prev_L763": {
+   "main": "soft blue-violet",
+   "main_hex": "#8E88C8",
+   "sec": "aqua blue",
+   "sec_hex": "#94D0E1"
+  }
  },
  "s54": {
-  "main": "cool lilac",
-  "main_hex": "#BFA3D8",
-  "sec": "deep sapphire",
-  "sec_hex": "#566D9F",
+  "main": "pale orchid",
+  "main_hex": "#DAB4DD",
+  "sec": "soft sapphire",
+  "sec_hex": "#748DC1",
   "root_season": "dong",
-  "src": "Lượt 763 new Kiêu kỳ root, picked by palette86.py from approved palette colours"
+  "src": "Lượt 763 new Kiêu kỳ root, picked by palette86.py from approved palette colours; re-picked in the one Xuân/Hạ tone (owner Lượt 769)",
+  "root_prev_L763": {
+   "main": "cool lilac",
+   "main_hex": "#BFA3D8",
+   "sec": "deep sapphire",
+   "sec_hex": "#566D9F"
+  }
  },
  "s55": {
   "main": "pink lilac",
   "main_hex": "#CEA1BF",
-  "sec": "deep sea blue",
-  "sec_hex": "#547F97",
+  "sec": "soft peacock blue",
+  "sec_hex": "#6495AA",
   "root_season": "thu",
-  "src": "Lượt 763 new Kiêu kỳ root, picked by palette86.py from approved palette colours"
+  "src": "Lượt 763 new Kiêu kỳ root, picked by palette86.py from approved palette colours; re-picked in the one Xuân/Hạ tone (owner Lượt 769)",
+  "root_prev_L763": {
+   "main": "pink lilac",
+   "main_hex": "#CEA1BF",
+   "sec": "deep sea blue",
+   "sec_hex": "#547F97"
+  }
  },
  "s56": {
-  "main": "warm blush",
-  "main_hex": "#E2A9A0",
-  "sec": "deep lavender",
-  "sec_hex": "#8C77B0",
-  "root_season": "thu",
-  "src": "Lượt 763 new Quyến rũ root, picked by palette86.py from approved palette colours"
+  "main": "silk rose pink",
+  "main_hex": "#E9A7A6",
+  "sec": "soft lavender",
+  "sec_hex": "#9580B9",
+  "root_season": "xuan",
+  "src": "Lượt 763 new Quyến rũ root, picked by palette86.py from approved palette colours; re-picked in the one Xuân/Hạ tone (owner Lượt 769)",
+  "root_prev_L763": {
+   "main": "warm blush",
+   "main_hex": "#E2A9A0",
+   "sec": "deep lavender",
+   "sec_hex": "#8C77B0"
+  }
  },
  "s57": {
-  "main": "mauve pink",
-  "main_hex": "#CD90A8",
+  "main": "soft orchid purple",
+  "main_hex": "#BA8CC4",
   "sec": "warm beige cream",
   "sec_hex": "#E8D3B8",
-  "root_season": "xuan",
-  "src": "Lượt 763 new Quyến rũ root, picked by palette86.py from approved palette colours"
+  "root_season": "dong",
+  "src": "Lượt 763 new Quyến rũ root, picked by palette86.py from approved palette colours; re-picked in the one Xuân/Hạ tone (owner Lượt 769)",
+  "root_prev_L763": {
+   "main": "mauve pink",
+   "main_hex": "#CD90A8",
+   "sec": "warm beige cream",
+   "sec_hex": "#E8D3B8"
+  }
  },
  "s58": {
-  "main": "soft crimson red",
-  "main_hex": "#CC7370",
+  "main": "soft coral",
+  "main_hex": "#D38A7B",
   "sec": "pale mint green",
   "sec_hex": "#B0DDD0",
   "root_season": "thu",
-  "src": "Lượt 763 new Quyến rũ root, picked by palette86.py from approved palette colours"
+  "src": "Lượt 763 new Quyến rũ root, picked by palette86.py from approved palette colours; re-picked in the one Xuân/Hạ tone (owner Lượt 769)",
+  "root_prev_L763": {
+   "main": "soft crimson red",
+   "main_hex": "#CC7370",
+   "sec": "pale mint green",
+   "sec_hex": "#B0DDD0"
+  }
  },
  "s59": {
-  "main": "peach pink",
-  "main_hex": "#DFAC9F",
+  "main": "soft apricot",
+  "main_hex": "#DEAF9B",
   "sec": "blue hyacinth",
   "sec_hex": "#8C93CC",
-  "root_season": "xuan",
-  "src": "Lượt 763 new Quyến rũ root, picked by palette86.py from approved palette colours"
+  "root_season": "ha",
+  "src": "Lượt 763 new Quyến rũ root, picked by palette86.py from approved palette colours; re-picked in the one Xuân/Hạ tone (owner Lượt 769)",
+  "root_prev_L763": {
+   "main": "peach pink",
+   "main_hex": "#DFAC9F",
+   "sec": "blue hyacinth",
+   "sec_hex": "#8C93CC"
+  }
  },
  "s60": {
-  "main": "soft orchid purple",
-  "main_hex": "#B27FBD",
+  "main": "pink lilac",
+  "main_hex": "#CEA1BF",
   "sec": "ivory cream",
   "sec_hex": "#EAD7BF",
-  "root_season": "ha",
-  "src": "Lượt 763 new Quyến rũ root, picked by palette86.py from approved palette colours"
+  "root_season": "thu",
+  "src": "Lượt 763 new Quyến rũ root, picked by palette86.py from approved palette colours; re-picked in the one Xuân/Hạ tone (owner Lượt 769)",
+  "root_prev_L763": {
+   "main": "soft orchid purple",
+   "main_hex": "#B27FBD",
+   "sec": "ivory cream",
+   "sec_hex": "#EAD7BF"
+  }
  },
  "s61": {
-  "main": "soft rose red",
-  "main_hex": "#CF6E76",
+  "main": "soft rust red",
+  "main_hex": "#D28977",
   "sec": "lake blue",
   "sec_hex": "#85B5DA",
   "root_season": "thu",
-  "src": "Lượt 763 new Quyến rũ root, picked by palette86.py from approved palette colours"
+  "src": "Lượt 763 new Quyến rũ root, picked by palette86.py from approved palette colours; re-picked in the one Xuân/Hạ tone (owner Lượt 769)",
+  "root_prev_L763": {
+   "main": "soft rose red",
+   "main_hex": "#CF6E76",
+   "sec": "lake blue",
+   "sec_hex": "#85B5DA"
+  }
  }
 }

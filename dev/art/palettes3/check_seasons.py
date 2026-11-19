@@ -1,5 +1,6 @@
 """Check dev/art/face-common/palettes_season.json (B20 seasons, owner Lượt 616). Prints FAIL lines; exit 1 on any FAIL.
- - ROOT: each woman's root palette = her approved palette, unchanged, placed in the season classify() gives it (seasons.py).
+ - ROOT: each woman's root palette = her approved palette (or, owner Lượt 770, a changed CODE with the drawn one kept in
+   root_drawn), in the season classify() gives it (seasons.py), inside the one Xuân/Hạ tone (owner Lượt 769).
  - FOUR: every woman has xuân, hạ, thu, đông.
  - SEASON: every generated palette passes target_ok() for its season (season rule + margins, see seasons.py).
  - CONTRAST: main vs secondary as in gen_palettes3.contrast_ok (other hue family, hue or lightness gap, dE floor tied to her root)
@@ -12,7 +13,7 @@
 import json, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from colourlib import *
-from seasons import SEASONS, classify, target_ok, VN
+from seasons import SEASONS, classify, target_ok, VN, in_tone
 from gen_palettes3 import load_p1, contrast_ok, lookalike
 from gen_seasons import season_contrast
 
@@ -24,11 +25,17 @@ fails = []
 def bad(m): fails.append('FAIL ' + m)
 pairs = {}
 for i, k in enumerate(ids):
-    r = d[k]; root = roots[k]; rs = classify(root['main_hex'], root['sec_hex'])
-    if r['root_season'] != rs: bad(f'{k}: root season {r["root_season"]} but classifies as {rs}')
+    r = d[k]; root = roots[k]; rs = r['root_season']; rp0 = r.get(rs, {})
+    if classify(rp0.get('main_hex', root['main_hex']), rp0.get('sec_hex', root['sec_hex'])) != rs:
+        bad(f'{k}: root season {rs} but its root pair classifies as {classify(rp0["main_hex"], rp0["sec_hex"])}')
     rp = r.get(rs, {})
-    if not rp.get('root') or any(rp.get(x) != root[x] for x in ('main', 'main_hex', 'sec', 'sec_hex')):
+    # owner Lượt 770: pictures never redrawn, but root CODES may change; the drawn codes stay in root_drawn.
+    # m / c roots: root_drawn (or the root itself) = approved palette; s roots: root = s_root_colours.json (current code)
+    drawn = rp.get('root_drawn', rp) if not k.startswith('s') else rp
+    if not rp.get('root') or any(drawn.get(x) != root[x] for x in ('main', 'main_hex', 'sec', 'sec_hex')):
         bad(f'{k}: root palette changed or missing in {VN[rs]}')
+    if rp.get('root') and not (in_tone(rp['main_hex'], 'm') and in_tone(rp['sec_hex'], 's')):
+        bad(f'{k}: root {rp["main_hex"]}/{rp["sec_hex"]} outside the one Xuân/Hạ tone (owner Lượt 769)')
     for se in SEASONS:
         if se not in r: bad(f'{k}: missing {VN[se]}'); continue
         p = r[se]; mh, sh = p['main_hex'], p['sec_hex']
@@ -36,7 +43,7 @@ for i, k in enumerate(ids):
         if p.get('root'): continue
         tag = f'{k} {VN[se]} ({p["main"]} {mh} + {p["sec"]} {sh})'
         if not target_ok(se, mh, sh): bad(f'{tag}: does not read as {VN[se]} (classifies {VN[classify(mh, sh)]})')
-        if not contrast_ok(mh, sh, dE(root['main_hex'], root['sec_hex'])) or not season_contrast(mh, sh):
+        if not contrast_ok(mh, sh, dE(rp0['main_hex'], rp0['sec_hex'])) or not season_contrast(mh, sh):
             bad(f'{tag}: weak main/secondary contrast (hue {hue_dist(mh, sh):.0f}°, dE {dE(mh, sh):.2f})')
         for h in (mh, sh):
             L, C, H = oklch(h)
