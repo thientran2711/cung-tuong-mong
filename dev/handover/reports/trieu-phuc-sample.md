@@ -377,3 +377,17 @@ HONEST FAULTS:
 - t5: the original's "sheer silk shawl" appears as a peach sheer layer (original text, not added).
 - t8: yellow body still dominant (original HH text); red only on sleeves/collar/panels as specified.
 - Poses repeat across t1/t3/t4/t5 (original texts).
+
+## 24. ROUND 16 (F3c, ROOT-46 GO ~08:20Z) — t1–t6 regenerated on the STORE prompts (owner Lượt 371/375); t7/t8 = r15; 6 gens + 6 cuts, 0 regens
+WHY: the r15 t1–t6 prompts were built on the 18/11 W72 golden texts → check_store FAIL (the gate messages reached F3c after the r15 run). r15 t7/t8 PASS and stay.
+PROMPTS: dev/art/owner-copy/trieu/t1..t6_c06.txt (commit 35fa48d61, `make.py --store`) = `build.py c06 v0 --low N` verbatim + ADDED sentences only (triều phục block, Nữ quan ref sentence, Lượt 355 sleeves, Lượt 337 hair). check_store: PASS before every gen (t1–t6 --low N). Stored prompts read back: 6/6 byte-EQUAL. Ledger: 6 lines ts 08:40:00Z with "store_check":"PASS".
+REFS (store order): t1–t5 style 6AbGv6EiJO [style] · face gOm7wObSXO · Nữ quan s7IO0AUl8e; t6 style · face · royal swatch TdwDfOyVNR · Nữ quan (the text names image 4).
+GEN → CUT: t1 ov6uo3E829→3zKTGQDREY · t2 YMlBcSOWeC→dt4CI7YXSL · t3 O6EAPqUynm→EbYxqz9uuO · t4 ov6QmqZ829→vQAKuAra47 · t5 gOm67AqSXO→p8yaoNqehw · t6 mEZbfgthJQ→lJtN7fIgv9.
+FILES: CDN img/_review/trieu-phuc/r16/c06_a18_trieu16_t1..t6.png + c06_sheet16_8up.jpg (t1–t6 r16 + t7/t8 r15); sheet also in git dev/art/owner-copy/trieu/r16/.
+LOOK: all 6 faces at full size = same c06 face, lips closed, eyes even. Sleeves: t1–t3 ≈ knees, t4–t6 long. Hair: t1–t3 half-up loose, t4–t6 up. Crowns grow by rank; no phoenix t1–t6. Velvet sheen as tm4.
+ADD-ONLY CONFLICTS (kept as ordered):
+- t4: the store says "no cloud collar, no vest, no stiff shoulder pieces" + round capelet with pearl net, vs the added cầu vai. Result: capelet + pearl net, shoulder pieces barely separate.
+- t1–t3: the store says "Hair: her own hairstyle exactly as in her second reference" vs the added half-up sentence. Result: half-up.
+- All: the store "coral red #D5745E" vs the court red → red t1–t5 median #AA4A44–#B3514A, t6 #C35D4C (lighter than tm4 #9A4640).
+- t6: the store royal-yellow panel/sash shows (yellow inner panel), in addition to the triều phục trims.
+OTHER FAULTS: the store item for c06 at a18 is a flute on ALL t1–t6 → the same "flute held horizontally at chest" pose on 6 ranks (store text, known age_item issue §20). t1 skirt in a light ivory tone (store "skirt in a lighter tone").
