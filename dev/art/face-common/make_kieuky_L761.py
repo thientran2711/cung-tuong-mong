@@ -18,7 +18,16 @@ def _ro_open(p, mode='r', *a, **k):
 NS = {'__file__': os.path.join(D, 'make_nf4.py'), 'open': _ro_open, 'print': lambda *a, **k: None, '__name__': 'nf4'}
 exec(_open(os.path.join(D, 'make_nf4.py')).read(), NS)
 line, T7, EYES_STRAIGHT, OLD_MOUTH, NEW_MOUTH = (NS[k] for k in "line T7 EYES_STRAIGHT OLD_MOUTH NEW_MOUTH".split())
-KK = T7["Kiêu kỳ"]
+KK = dict(T7["Kiêu kỳ"])
+# owner Lượt 786 ("con mắt nó xếch quá", s51/s54): the slant words come from the Lượt 701 no-phoenix swap of the Kiêu kỳ block
+# ("long narrow PHOENIX eyes with sharply UP-SWEPT outer corners" -> "long narrow almond eyes with sharply UP-SWEPT ...").
+# New eye words for every face built from now on (foreman ROOT-57: natural, gently lifted, not slanted):
+EYE_OLD, EYE_NEW = "long narrow almond eyes with sharply UP-SWEPT outer corners", "long almond eyes with gently lifted outer corners (natural, never slanted)"
+assert KK["face"].count(EYE_OLD) == 1; KK["face"] = KK["face"].replace(EYE_OLD, EYE_NEW)
+# s52, s53, s55 were drawn (Lượt 786) with the OLD eye words: their sNN.v5.FULL.txt stay as drawn, not rewritten here.
+# s51, s54 redrawn (Lượt 786) -> sNN.v5b.FULL.txt. A new face gets VER[sid] = "v5" as usual.
+KEEP_AS_DRAWN = {"s52", "s53", "s55"}
+VER = {"s51": "v5b", "s54": "v5b"}
 
 # root pairs — EMPTY until P1 NEW16 READY. sid: (root season, main, main_hex, sec, sec_hex), words + hex exactly as palettes_season.json
 _SR = _j.load(_open(os.path.join(D, 's_root_colours.json')))   # P1 NEW16 (Lượt 763) roots, words + hex as stored
@@ -42,7 +51,7 @@ S761K = [
  "half-up: the top hair in one tall bun tilted to one side at the crown held by one long gold hairpin with a small dangling pearl, the rest long and straight behind",
  "a half-sleeved short jacket of {s} silk over a cross-collar {m} silk satin top with a soft sheen and a {m} high-waisted floor-length skirt of plain silk, small gold-embroidered lotus scrolls at the jacket edges and hem, a {s} silk sash with a small red jade pendant, long inner sleeves",
  "standing tall and upright with her weight on one leg, a long iridescent peacock tail feather held upright beside her shoulder in one hand, the other hand resting at her sash", "FF"),
-("s53", 18, [("long narrow almond eyes with sharply UP-SWEPT outer corners", "large almond eyes with sharply UP-SWEPT outer corners"),
+("s53", 18, [("long almond eyes with gently lifted outer corners", "large almond eyes with gently lifted outer corners"),
              ("a straight slim high-bridged nose", "a high-bridged nose with a slightly arched bridge")],
  "fully loose and very long, sleek, parted deeply on the left side, the right side swept back and fastened behind the ear with one small gold comb, a thin gold chain with one tiny pearl across the parting",
  "a light open beizi of {m} silk satin with a soft sheen over a cross-collar {s} inner top and a {s} floor-length skirt of plain silk, small embroidered magnolias along the front edges, a {s} silk sash with a small white jade pendant, long sleeves",
@@ -52,7 +61,7 @@ S761K = [
  "low chignon: all the hair gathered into a neat low coiled bun at the nape held by two crossed silver hairpins, one long thin lock falling in front of each ear",
  "a high-waisted {m} silk satin skirt with a soft sheen tied above the chest, a {s} wide-sleeved short top of plain silk, small embroidered gold orchids along the skirt hem and cuffs, a long {s} silk ribbon sash with a small green jade pendant",
  "standing tall and upright with her weight on one leg, a strand of white pearls draped over the fingers of one raised hand at chest height as if judging their worth, the other hand resting at her sash", "ST"),
-("s55", 17, [("long narrow almond eyes", "long narrow, slightly deep-set almond eyes"),
+("s55", 17, [("long almond eyes", "long, slightly deep-set almond eyes"),
              ("a small firm chin", "a small, softly rounded firm chin"),
              ("a straight slim high-bridged nose", "a straight slim high-bridged nose with a small lifted tip")],
  "half-up: the top hair woven into one thick braid wound around the back of the head like a crown, one small ruby hairpin pointing upward, the rest long and loose",
@@ -62,6 +71,7 @@ S761K = [
 assert len({x[0] for x in S761K}) == 5 and len({x[5] for x in S761K}) == 5   # 5 different angles
 out = {}
 for sid, age, sw, hair, outfit, pose, ak in S761K:
+    if sid in KEEP_AS_DRAWN: continue
     if sid in ROOTS: _rs, mn, mh, sn, sh = ROOTS[sid]; ext = "FULL"
     else: mn, mh, sn, sh = PH; ext = "PH"
     face = KK["face"]
@@ -70,7 +80,7 @@ for sid, age, sw, hair, outfit, pose, ak in S761K:
     v = line(age, face, KK["expr"], hair, outfit.replace("{m}", mn).replace("{s}", sn), mn, mh, sn, sh, pose, ak)
     assert "phoenix" not in v.lower(), sid
     assert v.count(OLD_MOUTH) == 1 and "(thướt tha)" in v, sid
-    out[f"{sid}.v5.{ext}"] = v.replace(OLD_MOUTH, NEW_MOUTH)
+    out[f"{sid}.{VER.get(sid, 'v5')}.{ext}"] = v.replace(OLD_MOUTH, NEW_MOUTH)
 for k, v in out.items():
     if k.endswith('.FULL'): v = FG.final(v, k)
     _open(os.path.join(D, f'{k}.txt'), 'w').write(v)

@@ -672,7 +672,16 @@ BANNED = [{'id': 'X01',
   'unless': '',
   'negation': '',
   'luot': '483, 486 (G4)',
-  'why': 'phi bạch never gold/yellow below t6'}]
+  'why': 'phi bạch never gold/yellow below t6'},
+ {'id': 'X18',
+  'title': "old store drawing style 'semi-realistic / near-3D / realistic rendering'",
+  'regex': 'semi-realistic|near-3D|realistic rendering',
+  'slot': '',
+  'scope': 'any',
+  'unless': '',
+  'negation': 'no',
+  'luot': '779 (C1, via ROOT-57; MG2)',
+  'why': "the drawing style is the approved thiếu nữ style ONLY (master M01/M02); the old store style clause is gone from every builder. Scope 'any' = every prompt of every scope, faces and states included"}]
 
 # G15 (owner Lượt 559): QUÝ NHÂN t3 DESIGN = option B v2. The t3 outfit-design words of the store (TIER_LOW[3] robe in t8-prompt-B/build.py) are REPLACED
 # by the Outfit words of dev/handover/reports/quy-nhan/m13_a26_t3_v2_optB.prompt.txt, copied verbatim; slots only: lilac -> {main}, deep teal -> {sec}
@@ -793,12 +802,19 @@ def grey_hits(text):
     return out
 # K18 LIVE GAME HANDS-OFF (owner Lượt 591, BW4): a live game picture path (img/fig-*, img/hd/*, any img/ path outside img/_review and img/_keep) in the prompt or --refs = FAIL.
 K18_LIVE = re.compile(r"(?:^|[/\s\"'(,])(img/(?!_review/|_keep/)[\w./-]+|fig-[\w-]+\.(?:webp|png|jpg))")
+FLOOR_SLEEVE_RX = re.compile(r"(?:SLEEVE LENGTH|SLEEVES:)[^.]*(?:touch(?:es|ing)? the floor|sweep(?:s|ing)? the floor|reach(?:es|ing)? the floor|to the floor)", re.I)   # SL1: floor-length sleeve sentence (any wording)
+
+
 def check_text(text, scope, S=None, X=None, age=None, skip_store=False):
     """-> (fails, warns, slots) ; fails/warns = list of (id, kind, detail)."""
     if S is None: S, X = load_registry()
     text = norm(text); fails, warns, found = [], [], {}
     for k, kind, d in master_common.check(text):   # B25 MASTER BLOCK (owner Lượt 745/766, MG1): EVERY scope, faces included -> missing / edited / doubled = FAIL
         fails.append((k, "MASTER " + kind, d))
+    # SL1 (owner Lượt 773/778): ANY prompt (every scope) whose sleeve sentence sends the sleeves to the floor must carry S37 (sleeve-hold sentence) exactly once
+    if FLOOR_SLEEVE_RX.search(text):
+        _s37 = next(e["text"] for e in S if e["id"] == "S37"); _n = text.count(norm(_s37))
+        if _n != 1: fails.append(("S37", "FLOOR SLEEVE", f"a floor-length sleeve sentence is present but the sleeve-hold sentence S37 appears {_n} times (must be exactly once)"))
     for e in S:
         req = e["scope"] == "any" or (e["scope"] == "any-but-nude" and scope != "nude") or scope in parse_scope(e["scope"]); conf = scope in parse_scope(e.get("confirm", ""))   # 'any' = every prompt of every scope (D9)
         if not (req or conf): continue
@@ -817,7 +833,7 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False):
         (fails if req else warns).append(item)
     text = _strip_kc_faces(text)   # B8 (BW3): the owner's verbatim KC face words are approved as a whole: never scanned for banned phrases (m13 "PHOENIX eyes" = eye shape, not the X08 motif; m43 "covering the teeth completely")
     for x in X:
-        if scope not in parse_scope(x["scope"]): continue
+        if x["scope"] != "any" and scope not in parse_scope(x["scope"]): continue   # 'any' = every scope incl. face/states (X18, Lượt 779), as for S entries
         xa = (x.get("ages") or "all").split()   # B23 (BW6): X rules may be age-limited like S rules
         if age and "all" not in xa and age not in xa: continue
         if x.get("unless") and x["unless"] in found: continue

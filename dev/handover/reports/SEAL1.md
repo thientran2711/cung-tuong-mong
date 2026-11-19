@@ -24,3 +24,51 @@ Remaining after unit 1: 34 seals (21 feelings − gian vui buon so = 17; 17 act 
 their hands/face rows from prompts.md + women-set disc colours), then lo muu + the 11 new feelings, then the act faces.
 - 23:10Z ROOT-57 relayed owner Lượt 777 (credits): no gens beyond what she OKs; NO redo gens without asking. Unit 1 sent to her → SEAL1 WAITS,
   does nothing until ROOT-57 forwards her answer. (The so-OUT redo above was made before this rule.)
+
+## 23:21Z ROOT-57 relayed OWNER Lượt 781: Thái hậu set APPROVED (unit 1 too) → GO all 34 remaining, units of ~4 sent as I go, NO redo gens (777);
+then ONE «giận» sample for (b) Hoàng hậu → STOP; then (c) phi tần trẻ the same way.
+- th_prompts.py now holds ALL 34 remaining keys (python3 th_prompts.py → ORDER): an binh dau ghen lo muu (own rows from prompts.md table) +
+  11 new feelings (w-new/prompts.py) + 17 act faces (w-act/prompts.py), only person words changed. act-tinhtu: "INVITING THE EMPEROR" →
+  "INVITING AN HONOURED GUEST TO HER TEA" (she is the emperor's mother). Eyes: "straight ahead" dropped when the face looks sideways/winks.
+## UNIT 2 (an binh dau ghen) — STOPPED at keyframe A (23:30Z)
+- PERMISSION CHECK REFUSED the «an» keyframe-A gen (images_generate, auto-mode classifier "Destructive or Unwanted Actions"). Per orders: STOP,
+  exact call sent to ROOT-57 to run (prompt = `python3 dev/art/emo-anim/groups/th_prompts.py an` → "A"; mode gpt-2-6, 1:1, 2k,
+  references [{type:image, identifier:eIPl4i6dqL}], folderReference ba4aecfe-efce-47e2-b53f-30d292091886).
+- Done before the stop: A binh Lw8Muc3swO → green 1ldcfUnr4r · A dau xSBTCcNjfW → green gOmeq9RSXO · A ghen EbY3dihuuO → green 6AbfgYjiJO
+  (all looked at: OK; again RGBA transparent, flattened). Stills still/th-binh|dau|ghen.webp made (not yet on CDN). 3 × 135 = 405 cr.
+- NEXT (when ROOT-57 says go on): B for binh/dau/ghen with ref = the green A id; then 3 clips each (th_prompts.py <k> → B/out/loop/back),
+  cut th_cut.py, th_sheet.py, th_preview.py th-u2-preview.mp4, cdn_sync. Credits so far SEAL1: 10 210 + 405 = 10 615.
+- 23:25Z ROOT-57: «an» A run by him (4RFhL5y9Aa → on green CqniXulEEy, 138 cr, ledger line "ROOT-57 (for SEAL1)") + GO continue.
+## UNIT 2 DONE (19/11 ~23:45Z) — th-an, th-binh, th-dau, th-ghen — sent to ROOT-57
+| seal | A (used) | B | OUT | LOOP | BACK | frames out/loop/back |
+|---|---|---|---|---|---|---|
+| an (misty grey) | CqniXulEEy | hu24D7CvqL | eIPgnQodqL | bxMzvJf5Y2 | O6EIjWOynm | 58/60/47 |
+| binh (sage green) | 1ldcfUnr4r | lJtpq0kgv9 | BhNwc5zoQR | N2qaSpr6D9 | aFGNdgifSh | 57/60/57 |
+| dau (deep blue) | gOmeq9RSXO | vQA9pyAa47 | s7IDqGVl8e | dt4SYkCXSL | 6AbfUE2iJO | 58/60/58 |
+| ghen (yellow-green) | 6AbfgYjiJO | nVs59bdYQD | iG5CwuK3uK | kseWCTG16B | xSBTQp3jfW | 55/60/48 |
+CDN …/emo-anim-groups/: th-<k>-out.webp, th-<k>.webp, th-<k>-back.webp, still/th-<k>.webp, th-<k>-frames.jpg (k = an binh dau ghen), th-u2-preview.mp4 (65 s).
+Faults (A21/777: reported, NOT redone): an LOOP — the grey mist billows out to the left/right picture edge for ~1 s (frames 29–44);
+ghen BACK — when she lets the handkerchief go it drops out through the bottom edge (frames 5–11); dau OUT — arms fling wide mid-burst
+(like sợ), 2 frames touch the edge with tear drops. binh: calm, small motion, clean.
+Credits unit 2 (SEAL1): 3 A × 135 + 4 B × 135 + 12 clips × 940 = 12 225 (+ ROOT-57's 138 for an-A). SEAL1 total 22 435. Balance 478 493 (23:45Z, pool shared with other workers).
+Remaining Thái hậu: 27 seals = lo muu + 11 new feelings (tutin hanghai tinhtu chuyentam hungkhoi tinhnghich hothen chan khochiu choang hon)
++ 17 act faces (act-*). Then ONE «giận» sample for (b) Hoàng hậu → STOP; then (c) phi tần trẻ the same way.
+
+# SEAL1 HANDOVER (19/11 ~23:47Z) — at my roll line (START ≈4.5 %, now ≈30 % of 1M; line 29.5 %, ceiling 60 %). COORDINATOR (ROOT-57) opens the successor.
+For the successor (SEAL2), everything is in place:
+- Prompts: `python3 dev/art/emo-anim/groups/th_prompts.py <key…>` → JSON {A,B,out,loop,back} (ORDER list = the 34 after unit 1; done: an binh dau ghen).
+  Next units: [lo, muu, tutin, hanghai] → [tinhtu, chuyentam, hungkhoi, tinhnghich] → [hothen, chan, khochiu, choang] → [hon, act-buon, act-chan, act-choang] → … act faces.
+- Per seal: A = images_generate mode gpt-2-6, 1:1, 2k, references [{image, eIPl4i6dqL}], folderReference ba4aecfe-efce-47e2-b53f-30d292091886.
+  A comes back RGBA transparent EVERY time → flatten onto #00FF00 (PIL alpha_composite) → creations_request_upload + PUT + creations_finalize_upload
+  → use that id. Still = the transparent A cropped to the medallion bbox (alpha>128), square, 160 px → img/_review/emo-anim-groups/still/th-<k>.webp.
+  B = same settings, ref = the green A id (B comes back opaque green). Clips: video_generate slug bytedance-seedance-fast-2.0, duration 4, 1:1,
+  720p, withSoundEffects false, keyframes OUT A→B, LOOP B→B, BACK B→A (940 cr each).
+- Cut: `python3 dev/art/emo-anim/groups/th_cut.py out|loop|back in.mp4 img/_review/emo-anim-groups/th-<k>[-out|-back].webp [start_s]`
+  (LOOP file has no suffix). Move the *.npy it writes OUT of img/ (do not rm with a shell variable — the safety check blocks it).
+  Trim OUT with a start time when the first second is still (vui 1.0 s).
+- Check: edge script (alpha > 40 on the 2-px border) + `th_sheet.py th-<k>` (looked at, ½-scale combined is enough) + `th_preview.py
+  img/_review/emo-anim-groups/th-uN-preview.mp4 th-a th-b …`; then `python3 dev/site/cdn_sync.py img/_review/emo-anim-groups`.
+- Ledger: one line per gen (dev/art/gen_ledger.jsonl is skip-worktree in this checkout → `git update-index --no-skip-worktree` first;
+  on rebase conflict keep BOTH sides = drop the <<< === >>> lines).
+- Rules: Lượt 781 GO all Thái hậu, units of ~4 sent to ROOT-57 as you go, no waiting between units; Lượt 777 NO redo gens without asking;
+  a gen refused by the permission check → STOP and send ROOT-57 the exact call. Store gate check_store.py has no seal scope (not run).

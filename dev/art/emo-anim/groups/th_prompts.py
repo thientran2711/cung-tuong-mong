@@ -35,12 +35,84 @@ S = {  # key: (disc, A face sentence, B feeling caps, B hands+face+mark, OUT act
 def prompts(k):
     col, aface, caps, b, out, loop, back, endface = S[k]
     return {
-     "A": f"Same soft hand-painted storybook style, same round gold-rimmed medallion and same chibi proportions as the reference, but the person is now {WHO}. The medallion disc is now {col} instead of red. {aface}. Both eyes looking together straight ahead. Everything kept INSIDE the round medallion, the medallion drawn a bit smaller and centred so there is empty space around it. Whole picture on a flat pure chroma green (#00FF00) background outside the medallion, nothing else, no text.",
+     "A": f"Same soft hand-painted storybook style, same round gold-rimmed medallion and same chibi proportions as the reference, but the person is now {WHO}. The medallion disc is now {col} instead of red. {aface}. Both eyes looking together{"" if ("sideways" in aface or "wink" in aface) else " straight ahead"}. Everything kept INSIDE the round medallion, the medallion drawn a bit smaller and centred so there is empty space around it. Whole picture on a flat pure chroma green (#00FF00) background outside the medallion, nothing else, no text.",
      "B": f"{SAME}, same round gold-rimmed {col} medallion as the reference. NEW: she is {caps} and bursts OUT of the round medallion toward the viewer: her head, shoulders and both arms come forward through and over the gold rim, her head and hands overlap and cover parts of the gold ring; {b}. Both eyes looking together. The medallion stays round and centred, a bit smaller, with her popping out of it. Whole picture on a flat pure chroma green (#00FF00) background, nothing else, no text.",
      "out": f"Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green the whole time. The {OLD} inside the round gold medallion {out}. Smooth, cartoon-like, same painted style, no camera move, no new objects.",
      "loop": f"Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green. The {OLD} leaning out of the round gold medallion {loop}; then she settles back to exactly the starting pose. Slow enough to read, cartoon-like, same painted style, no camera move, no new objects.",
      "back": f"Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green the whole time. The {OLD} leaning out of the round gold medallion {back}, pulls her arms back and slowly slides back inside the round medallion, shrinking back into it, until she is again only {endface} inside the round frame, exactly like the end frame. Smooth, slow, cartoon-like, same painted style, no camera move, no new objects.",
     }
+
+# ---- the other originals (prompts.md hands/face/mark table), same tuple shape as above ----
+S.update({
+ "binh": ("soft sage green",
+   "Her face is CALM and serene: a soft gentle closed-mouth smile, relaxed eyes, head slightly tilted",
+   "CALM and content",
+   "one hand resting relaxed on the gold rim, the other giving a small friendly wave, wide royal yellow sleeves with plum cuffs visible; serene soft smile, slight head tilt; no effects",
+   "feels at peace: she leans forward gently and comes out of the round frame toward the viewer, her head and shoulders push past the gold rim, her arms come out, one hand rests on the rim, the other gives a small friendly wave, a serene smile",
+   "stays calm in a slow loop: she waves gently, nods slowly with a serene smile, breathes calmly, the pearl strings of her crown sway softly",
+   "gives one last gentle wave, lowers her hand, lifts the other off the rim", "a calm gently smiling old face with the large phoenix crown"),
+ "an": ("misty grey",
+   "Her face is SECRETIVE: a sly secret smile, one eye winking, one fingertip at her lips 'shh', soft grey mist wisps drifting across the medallion and one small grey question mark",
+   "SECRETIVE and hiding something",
+   "one hand parts a soft grey mist, the other holds one finger at her lips 'shh', wide royal yellow sleeves with plum cuffs visible; sly secret smile, one eye winking; grey mist wisps and one small grey question mark",
+   "turns secretive: she leans forward and comes out of the round frame toward the viewer through soft grey mist, her head and shoulders push past the gold rim, her arms come out, one hand parts the mist, the other raises a finger to her lips 'shh', she winks, a small question mark appears",
+   "keeps her secret in a loop: she holds her finger to her lips, winks with a sly smile, parts the drifting mist with her hand, the grey mist wisps swirl, the small question mark bobs",
+   "gives one last 'shh', the mist and the question mark fade away, she lowers her hands", "a sly secretive old face with a finger at her lips and the large phoenix crown"),
+ "dau": ("deep blue",
+   "Her face is WAILING in grief: eyes squeezed shut, mouth open in a sob, brows up, streams of tears down her cheeks",
+   "HEARTBROKEN and wailing",
+   "both fists rubbing her eyes, wiping tears, wide royal yellow sleeves with plum cuffs visible; wailing sobbing old face, brows up; streaming tears and a few small flying tear drops",
+   "breaks into tears: she leans forward and comes out of the round frame toward the viewer, her head and shoulders push past the gold rim, her arms come out and both fists rub her eyes, she wails, tears stream and a few drops fly",
+   "keeps sobbing in a loop: she rubs her eyes with both fists, her shoulders shake with sobs, she wails with her mouth open, tears stream and small drops fly",
+   "gives one last sniffle, the flying tears stop, she lowers her fists", "a crying old face with tears and the large phoenix crown"),
+ "ghen": ("yellow-green",
+   "Her face is JEALOUS: narrowed eyes glancing sideways (both eyes looking the same way), one cheek puffed, a sour pout",
+   "JEALOUS",
+   "both hands tug at a pink silk handkerchief, biting its corner, wide royal yellow sleeves with plum cuffs visible; narrowed side-glance (both eyes looking the same way), puffed cheek; one tiny dark-green swirl",
+   "turns jealous: she leans forward and comes out of the round frame toward the viewer, her head and shoulders push past the gold rim, her arms come out and both hands tug a pink silk handkerchief, she bites its corner and glares sideways, a tiny dark-green swirl appears",
+   "keeps sulking jealously in a loop: she tugs and twists the handkerchief, bites its corner, glares sideways and puffs her cheek, the tiny dark-green swirl turns",
+   "gives one last jealous glare, the swirl fades away, she lets the handkerchief go, lowers her hands", "a jealous side-glancing old face with the large phoenix crown"),
+ "lo": ("orange",
+   "Her face is WORRIED: anxious raised brows, eyes looking up, a wavy uneasy mouth, one sweat drop",
+   "WORRIED and anxious",
+   "hands clasped and wringing at her chin, one fingertip nibbled, wide royal yellow sleeves with plum cuffs visible; anxious brows, eyes looking up, wavy mouth, a sweat drop; two tiny worry swirls",
+   "starts to worry: she leans forward and comes out of the round frame toward the viewer, her head and shoulders push past the gold rim, her arms come out, her hands clasp and wring at her chin, she nibbles a fingertip, a sweat drop and tiny worry swirls appear",
+   "keeps fretting in a loop: she wrings her hands, nibbles a fingertip, glances up anxiously, the sweat drop slides, the worry swirls turn",
+   "gives one last anxious sigh, the swirls fade away, she unclasps her hands", "a worried old face with a sweat drop and the large phoenix crown"),
+ "muu": ("teal",
+   "Her face is SCHEMING: a sly side-glance (both eyes looking the same way), one brow raised, a knowing smirk, one fingertip at her chin",
+   "SCHEMING slyly",
+   "one fingertip tapping her chin, the other hand drumming on the gold rim, wide royal yellow sleeves with plum cuffs visible; sly side-glance (both eyes the same way), one brow up, smirk; a tiny gold glint by her eye",
+   "hatches a plan: she leans forward and comes out of the round frame toward the viewer, her head and shoulders push past the gold rim, her arms come out, a fingertip taps her chin, the other hand drums on the rim, a sly smirk, a tiny glint flashes by her eye",
+   "keeps scheming in a loop: she taps her chin, drums her fingers on the rim, narrows her eyes with a sly smirk, the tiny glint twinkles",
+   "gives one last sly smirk, the glint fades away, she lifts her fingers off the rim and lowers her hand from her chin", "a sly scheming old face with the large phoenix crown"),
+})
+# ---- women-set families reused as-is (11 new feelings: w-new; 17 act faces: w-act), tuple (col, face, B, out, loop, back, endface) ----
+import importlib.util as _u, os as _os
+def _load(rel):
+    sp = _u.spec_from_file_location(rel.replace("/", "_"), _os.path.join(_os.path.dirname(_os.path.abspath(__file__)), "..", rel, "prompts.py"))
+    m = _u.module_from_spec(sp); sp.loader.exec_module(m); return m.S
+W = {}
+for _k, _v in _load("w-new").items(): W[_k] = _v
+for _k, _v in _load("w-act").items(): W["act-" + _k] = _v
+# Thái hậu is the emperor's mother: her act-tinhtu invites an honoured guest to tea, not the emperor
+W["act-tinhtu"] = tuple(x.replace("INVITING THE EMPEROR", "INVITING AN HONOURED GUEST TO HER TEA") for x in W["act-tinhtu"])
+def _strip(face): return face[5:] if face.startswith("same ") else face
+def wprompts(k):
+    col, face, B, out, loop, back, endface = W[k]
+    return {
+     "A": f"Same soft hand-painted storybook style, same round gold-rimmed medallion and same chibi proportions as the reference, but the person is now {WHO}. The medallion disc is now {col} instead of red. Her face and pose: {_strip(face)}. Both eyes looking together. Everything kept INSIDE the round medallion, the medallion drawn a bit smaller and centred so there is empty space around it. Whole picture on a flat pure chroma green (#00FF00) background outside the medallion, nothing else, no text.",
+     "B": f"{SAME}, same round gold-rimmed {col} medallion as the reference. NEW: she bursts OUT of the round medallion toward the viewer: her head, shoulders and both arms come forward through and over the gold rim, her head and hands overlap and cover parts of the gold ring; {B}; wide royal yellow sleeves with plum cuffs visible; the old face shows the feeling strongly. Both eyes looking together. The medallion stays round and centred, a bit smaller, with her popping out of it. Whole picture on a flat pure chroma green (#00FF00) background, nothing else, no text.",
+     "out": f"Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green the whole time. The {OLD} inside the round gold medallion: {out}. Smooth, cartoon-like, same painted style, no camera move, no new objects.",
+     "loop": f"Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green. The {OLD} leaning out of the round gold medallion {loop}; then she settles back to exactly the starting pose. Slow enough to read, cartoon-like, same painted style, no camera move, no new objects.",
+     "back": f"Hand-painted storybook animation, static camera, flat chroma green background stays perfectly flat green the whole time. The {OLD} leaning out of the round gold medallion calms: {back}, pulls her arms back and slowly slides back inside the round medallion, shrinking back into it, until she is again only {endface} with the large phoenix crown inside the round frame, exactly like the end frame. Smooth, slow, cartoon-like, same painted style, no camera move, no new objects.",
+    }
+_prompts_s = prompts
+def prompts(k): return _prompts_s(k) if k in S else wprompts(k)
+ORDER = ["an", "binh", "dau", "ghen", "lo", "muu", "tutin", "hanghai", "tinhtu", "chuyentam", "hungkhoi", "tinhnghich", "hothen", "chan",
+         "khochiu", "choang", "hon"] + ["act-" + k for k in ["buon", "chan", "choang", "chuyentam", "ghen", "gian", "hanghai", "hon", "hothen",
+         "hungkhoi", "khochiu", "lo", "so", "tinhnghich", "tinhtu", "tutin", "vui"]]
+
 if __name__ == "__main__":
-    ks = sys.argv[1:] or list(S)
+    ks = sys.argv[1:] or ORDER
     print(json.dumps({k: prompts(k) for k in ks}, ensure_ascii=False, indent=1))

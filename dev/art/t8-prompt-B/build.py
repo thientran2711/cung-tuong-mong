@@ -285,7 +285,14 @@ AGE_TXT={"a18":"about 22, youthful adult.","a26":"about 30, mature and poised.",
 D15_STYLE="STYLE LOCK (same drawing as her 36-year-old picture, the second reference): exactly the same soft painterly guofeng illustration rendering, the same smooth luminous painted skin, soft stylised features and gentle painted shading as the 36-year-old picture; her age shows ONLY through the silver in her hair and a few soft painted lines, NEVER photographic, NEVER photo-realistic, no realistic skin texture, no pores, no detailed wrinkles."
 assert all(AGE_TXT[_a].count(D15_STYLE)==1 for _a in ("a51","a65")) and not any(D15_STYLE in AGE_TXT[_a] for _a in ("a18","a26","a36"))
 D15_STYLE3=D15_STYLE.replace("the second reference):","the third reference):",1)
-PRE=("Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference portraits; full-body standing figure head to feet, centered, plain light parchment background, soft even light; fair porcelain skin; gentle expression with soft eyes and a bright closed-lip smile, lips closed, no teeth, mouth never open; elegant, slim, clearly adult; beautiful/handsome romantic-lead looks for everyone; face clearly visible, body and face frontal, standing squarely facing the viewer, no turn.")
+# C5/G4 (owner Lượt 779 via ROOT-57, MG2): at a51/a65 her elder colours (her own root colours, DEEPER, DARKER, muted like an older lady) WIN over master M05 (the medium-light
+# young COLOUR RULE that master_common puts near the top). ONE bridging clause, words copied from S33 / AGE_TXT ("DEEPER, DARKER mature shades described above", "never bright, never pastel"),
+# placed right after the S33 elder COLOUR RULE (i.e. after M05). Nữ đế keeps B23 (nude-B/mk.py forces the a36 rule; no S33 there -> no bridge). build_npc.py Thái hậu uses ELDER_M05_SENT.
+ELDER_M05_BRIDGE="this elder colour rule wins over the first COLOUR RULE (medium-light tone): her own colours in the DEEPER, DARKER mature shades described above, never bright, never pastel; "
+ELDER_M05_SENT=" At this age "+ELDER_M05_BRIDGE.rstrip("; ")+"."
+# C1 (owner Lượt 779 via ROOT-57, MG2): the drawing style = the approved thiếu nữ style ONLY (master M01/M02, dev/art/MASTER_COMMON.txt). The old store style clause
+# "Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference portraits; " is REMOVED (master_common.STYLE_OLD keeps it for legacy compares).
+PRE=("Full-body standing figure head to feet, centered, plain light parchment background, soft even light; fair porcelain skin; gentle expression with soft eyes and a bright closed-lip smile, lips closed, no teeth, mouth never open; elegant, slim, clearly adult; beautiful/handsome romantic-lead looks for everyone; face clearly visible, body and face frontal, standing squarely facing the viewer, no turn.")
 END=" Eyes soft, warm and round-almond, never slanted or upturned, never teary. Everyone beautiful at every age. No text, no labels."
 # N5d item 1 (ROOT-36 order, FIGURE_GATE K3): ONE no-background sentence on EVERY figure prompt (all states), default ON. Import it: `from build import K3_BG` (W107b). Text verbatim from the order.
 K3_BG=" The second reference image is style only: IGNORE its background completely; the background is completely transparent with NOTHING behind or around her: no backdrop, no parchment, no painted flowers/branches, no smoke, no haze, no glow, no stain."
@@ -1329,7 +1336,7 @@ def _tyhue(col): return "pearl ivory (never yellowed)" if col=="ivory" else col.
 # Fix = the owner-approved kc2k K3 re-make sentence (reports/kc2k-K3.md l.44, "young" dropped for all ages); hair = "her own hairstyle exactly as in her first reference" (build.py t1-t3 hair wording).
 # Source numbering is pre-_reorder_refs: "first reference" here = image 2 (her picture) in the output. Style image goes as Magnific type "style" (as kc2k).
 TYC_REMAKE=(" Redraw this exact figure as a sharp, high-detail 2K full-body standing figure: the SAME woman as in the first reference image, same face and facial features, same hairstyle and hair colour, same proportions, whole figure from top of head to feet centered with margin around it."
- " Use the style reference image ONLY as a style reference for skin rendering, painterly near-3D drawing style, fabric texture and embroidery; do not copy any of its people, faces, clothes or colours."
+ " Use the style reference image ONLY as a style reference for skin rendering, drawing style, fabric texture and embroidery; do not copy any of its people, faces, clothes or colours."
  " Her face and her hairstyle come ONLY from her first reference image; change only her outfit, her held item, her pose and her age as described below.")
 TYC_COLD_HAIR_OLD="hair in a simple neat low bun held by ONE plain wooden hairpin"
 TYC_COLD_HAIR="her own hairstyle exactly as in her first reference, held by ONE plain wooden hairpin"
@@ -1354,7 +1361,7 @@ def build_ty_cold(c,state):
         s+=" Any flower or pattern on the fabric would be real silk embroidery, never printed or pasted-on."
     s=s+_pose(item,hk,right)+CLOSE+END   # TYC_PIN_RULE is dropped in __main__ AFTER spec5pose (it anchors on that sentence)
     assert s.count(TYC_PRE_FR)>=1   # F4b-4 (ROOT-40): angle words now come ONLY from the final __main__ pass (Nữ đế A header + HH B 3/4), same as every path; was MAMA_ANGLE (invented)   # ANGLE LAW (owner Lượt 229 A), same sentence as build_mama
-    assert s.count(TYC_PRE_RENDER)==1; s=s.replace(TYC_PRE_RENDER,"exactly matching the rendering of the style reference image",1)   # PRE's "reference portraits" = the style faces -> name it style only
+    assert s.count(TYC_PRE_RENDER)==0   # C1 (Lượt 779): PRE has no rendering clause any more (style = master M01/M02 only); was renamed here to "...of the style reference image"   # PRE's "reference portraits" = the style faces -> name it style only
     return s
 # ---------- N5d item 5: MAID ladder --state tm0..tm4 (+ nhat / mama PENDING). Names (FIGURE_GATE CUNG NỮ LADDER, Lượt 174, owner "174 đúng rồi"):
 #   tm0 = cung nữ thô sử | tm1 = tam đẳng (the CURRENT 'Cung nữ') | tm2 = nhị đẳng (the CURRENT 'Đại cung nữ', never say đại cung nữ) | nhất đẳng = NEW outfit, NO tm id, PENDING (owner has not picked the sheet) |
@@ -1800,7 +1807,7 @@ def nude2(o,c,opt):
 #  (3) HH cloud collar -> the Nữ đế shoulder piece of her option (NUDE_OPT, approved A-D); (4) second colour = her option (NUDE_OPTMAP auto); (5) item = her Nữ đế item (FIGURE_GATE H list, NUDE_ITEM) + matching hand clause;
 #  (6) + HAIR UP / SLEEVES / FABRIC sentences copied verbatim from dev/art/owner-copy/tpl_hh.txt (prompt B, Lượt 331/355/364/369: hair up, one sleeve layer to the floor, "FABRIC: thick gold-embroidered brocade with a graceful, flowing drape.").
 NUDE3_HHSENT=("HAIR UP: ALL of her glossy pure BLACK hair (never brown) is swept UP and gathered into the tall high chignon on top of her head under the crown, smooth at the nape; NO hair hanging loose down her back or over her shoulders. "
- "SLEEVES: very long, very wide, flowing sleeves that fall well past her hands and hang PAST her ankles all the way down until they TOUCH THE FLOOR, ONE single sleeve layer (no shorter outer sleeve on top); the brocade flows and drapes softly like heavy silk, never stiff. "
+ "SLEEVES: very long, very wide, flowing sleeves that fall well past her hands and hang PAST her ankles all the way down until they TOUCH THE FLOOR, ONE single sleeve layer (no shorter outer sleeve on top); the brocade flows and drapes softly like heavy silk, never stiff. Even while her hands are raised to hold her item at chest height, each wide sleeve still hangs straight down from her forearm and its hem lies on the floor beside her feet; the sleeve hem is NEVER at knee or shin height. "
  "FABRIC: thick gold-embroidered brocade with a graceful, flowing drape.")
 def nude3(o,c):
     # F4b-6 (owner Lượt 371/373/375 STORE GATE): the HH t8 store text stays WORD FOR WORD; only slot words swap (motif phoenix->dragon, colour slot, item + hand clause);
@@ -1878,7 +1885,7 @@ def _run_cmd(argv):
 def _legacy_master(out,mp):
     """a gen made BEFORE the B25 master block (MG1): PASS when master_common.apply(its prompt) == today's builder output (only the block differs)."""
     sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); import master_common as _MC
-    return _MC.apply(mp.strip())==out.strip()
+    return _MC.apply(_MC.legacy(mp.strip()))==out.strip().replace(ELDER_M05_BRIDGE,"").replace(ELDER_M05_SENT,"")   # + C1/C5 (Lượt 779): old style clause / no elder bridge
 def verify_ledger(path,since=None):
     import json
     bad=0; n=0
@@ -1959,7 +1966,7 @@ if __name__=="__main__":
     # OWNER 18/11 ~21:06Z real (verbatim): "51 tuổi và 65 tuổi là phải dùng của những cái màu của những người già xài á, không có dùng cái màu tươi rói nha ... mặc dù già nhưng không có nghĩa là màu đen hay màu nâu ... Mà nó là một cái màu nó sang, mà cái kiểu mình nhìn vô mình thấy nó là một cái người đã lớn tuổi, trầm tĩnh lớn tuổi" → a51 AND a65 use the elder clause (a51 text = the approved a51d2 sample)
     if AGE not in ("a51","a65") and not STATE or STATE in ("nude","thaihau"):   # TH1 (Lượt 607 I4): Thái hậu a36 gets the same B18 LOW_TONE   # B18 (owner Lượt 583): neutral tone: t7/t8/Nữ đế 'fresh, clear and luminous' -> the SAME medium-tone sentence t1-t6 use (LOW_TONE); a51/a65 keep their elder clause below
         if AGE not in ("a51","a65") and TRIEUN is None and not BDQ and "--low" not in sys.argv: _o=_o.replace("all colours fresh, clear and luminous, never dusty or greyed; ",LOW_TONE,1)
-    if AGE in ("a51","a65"): _o=_o.replace("all colours fresh, clear and luminous, never dusty or greyed; ","all colours in the DEEPER, DARKER mature shades described above (rich and dignified, never bright, never pastel, never dusty or washed-out); the colour names and hex values below are her young colours, darken them as described above; "+("elegant, luxurious elder colours that read as a calm, dignified older lady, never vivid or fresh bright colours, yet never black or brown; " if AGE=="a65" else "")).replace("one fresh accent","one accent").replace("a fresh ","a ")
+    if AGE in ("a51","a65"): _o=_o.replace("all colours fresh, clear and luminous, never dusty or greyed; ","all colours in the DEEPER, DARKER mature shades described above (rich and dignified, never bright, never pastel, never dusty or washed-out); the colour names and hex values below are her young colours, darken them as described above; "+("elegant, luxurious elder colours that read as a calm, dignified older lady, never vivid or fresh bright colours, yet never black or brown; " if AGE=="a65" else "")+ELDER_M05_BRIDGE).replace("one fresh accent","one accent").replace("a fresh ","a ")
     # --head (ROOT-31 order, owner 18/11 ~21:36Z "ai cũng có trâm cài y chang nhau"): per-person headdress = the motif/shape of HER OWN live a18 hairpins, scaled up for the rank. Off by default (goldens unchanged).
     if "--head" in sys.argv:
         _k=a[0]+("-t7" if "--t7" in sys.argv else "-t8")
