@@ -93,7 +93,7 @@ function ptPanel(){const N=ptNews(),W=ptMine();const facts=[];const OQ=S&&Array.
  if(!facts.length)facts.push("Không có ai đang đi việc.");
  if(!subj&&OQ.length)try{subj=typeof isSrv==="function"&&isSrv()?srvM():null}catch(e){}
  const opts=OQ.map(o=>({n:ptOrdIs(o)?"Nghe lệnh":"Xem lời nhờ",x:`kèm: trả lời trước ${ptWhen(o.due)}, quá hạn coi như từ chối`,fx:{},go:()=>{setTimeout(()=>ptOrdOpen(o),0)}}));
- if(ptWaitOk()){const K=ptNext();opts.push({n:"Đợi tin",x:`tốn: ngồi chờ đến ${ptWhen(K)} · thành: biết tin khi người được sai trở về`,fx:{},go:()=>{setTimeout(()=>ptWait(),0)}})}
+ if(ptWaitOk()){const K=ptNext();opts.push({n:"Đợi tin",x:`tốn: ${Math.max(1,K-ptNow())} khắc (ngồi chờ đến ${ptWhen(K)}) · thành: biết tin khi người được sai trở về`,fx:{},go:()=>{setTimeout(()=>ptWait(),0)}})}
  const sp={title:OQ.length?"Lệnh và tin chờ":"Tin chờ người sai đi",facts,opts};
  /* the subject = the person the panel is about (away / back / the master who gave the order), never an unrelated figure */
  try{if(subj&&typeof kitFace==="function"){const fc=kitFace(subj);if(fc)sp.subject=fc}}catch(e){}return sp}
