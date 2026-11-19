@@ -1,0 +1,322 @@
+{
+"c01": {
+"group": "Tươi tắn",
+"cut": "WDgq62mcXe",
+"src": "c01.v3.FULL.txt"
+},
+"c02": {
+"group": "Dịu dàng",
+"cut": "KLpAf5Hkqp",
+"src": "c02.v3.FULL.txt"
+},
+"c03": {
+"group": "Tinh nghịch",
+"cut": "EbY9IHJuuO",
+"src": "c03.v3.FULL.txt"
+},
+"c04": {
+"group": "Đoan trang",
+"cut": "xSBYH1yjfW",
+"src": "c04.v3.FULL.txt"
+},
+"c05": {
+"group": "Sắc sảo",
+"cut": "MBJxg6WDCm",
+"src": "c05.v3b.FULL.txt"
+},
+"c06": {
+"group": "Sắc sảo",
+"cut": "rgXcT8Jxtc",
+"src": "c06.v5.FULL.txt"
+},
+"c07": {
+"group": "Tươi tắn",
+"cut": "JNCBytcOq4",
+"src": "c07.v3.FULL.txt"
+},
+"c08": {
+"group": "Dịu dàng",
+"cut": "Lw80qQpswO",
+"src": "c08.v3.FULL.txt"
+},
+"c09": {
+"group": "Tinh nghịch",
+"cut": "xSBWFuTjfW",
+"src": "c09.v3.FULL.txt"
+},
+"c10": {
+"group": "Đoan trang",
+"cut": "jUocHFqLD0",
+"src": "c10.v3.FULL.txt"
+},
+"c11": {
+"group": "Sắc sảo",
+"cut": "Cqn9IfbEEy",
+"src": "c11.v3.FULL.txt"
+},
+"c12": {
+"group": "Tinh nghịch",
+"cut": "aFG4C3ifSh",
+"src": "c12.v3.FULL.txt"
+},
+"c13": {
+"group": "Tươi tắn",
+"cut": "gOmMrUsSXO",
+"src": "c13.v3.FULL.txt"
+},
+"c14": {
+"group": "Sắc sảo",
+"cut": "rgXcTIOxtc",
+"src": "c14.v5.FULL.txt"
+},
+"c15": {
+"group": "Tươi tắn",
+"cut": "xSBWKKMjfW",
+"src": "c15.v3.FULL.txt"
+},
+"c16": {
+"group": "Đoan trang",
+"cut": "1ldnbKlr4r",
+"src": "c16.v3.FULL.txt"
+},
+"c18": {
+"group": "Tinh nghịch",
+"cut": "1ldnb1Sr4r",
+"src": "c18.v3.FULL.txt"
+},
+"c19": {
+"group": "Sắc sảo",
+"cut": "gOmpdCcSXO",
+"src": "c19.v5.FULL.txt"
+},
+"c20": {
+"group": "Dịu dàng",
+"cut": "jUocxySLD0",
+"src": "c20.v3.FULL.txt"
+},
+"c21": {
+"group": "Tươi tắn",
+"cut": "bxM2qSV5Y2",
+"src": "c21.v3.FULL.txt"
+},
+"c22": {
+"group": "Đoan trang",
+"cut": "rgXY1yHxtc",
+"src": "c22.v3.FULL.txt"
+},
+"c24": {
+"group": "Tinh nghịch",
+"cut": "xSBcLXwjfW",
+"src": "c24.v3.FULL.txt"
+},
+"c25": {
+"group": "Tinh nghịch",
+"cut": "EbY6qU4uuO",
+"src": "c25.v3.FULL.txt"
+},
+"c26": {
+"group": "Dịu dàng",
+"cut": "ov6UI6L829",
+"src": "c26.v3.FULL.txt"
+},
+"c27": {
+"group": "Sắc sảo",
+"cut": "KLpnNqzkqp",
+"src": "c27.v4.FULL.txt"
+},
+"c28": {
+"group": "Đoan trang",
+"cut": "JNCB9V9Oq4",
+"src": "c28.v3.FULL.txt"
+},
+"c30": {
+"group": "Tinh nghịch",
+"cut": "hu2yEUcvqL",
+"src": "c30.v3.FULL.txt"
+},
+"c31": {
+"group": "Sắc sảo",
+"cut": "SyheXu8Ub8",
+"src": "c31.v5.FULL.txt"
+},
+"c32": {
+"group": "Dịu dàng",
+"cut": "lJtMJwTgv9",
+"src": "c32.v3.FULL.txt"
+},
+"m01": {
+"group": "Tươi tắn",
+"cut": "hu2qEwOvqL",
+"src": "KC_REFS ref_id"
+},
+"m02": {
+"group": "Dịu dàng",
+"cut": "BhNCmskoQR",
+"src": "KC_REFS ref_id"
+},
+"m03": {
+"group": "Tươi tắn",
+"cut": "bxMlxKk5Y2",
+"src": "KC_REFS ref_id"
+},
+"m04": {
+"group": "Đoan trang",
+"cut": "MBJtEqLDCm",
+"src": "KC_REFS ref_id"
+},
+"m05": {
+"group": "Tươi tắn",
+"cut": "KLpSlnEkqp",
+"src": "KC_REFS ref_id"
+},
+"m06": {
+"group": "Tươi tắn",
+"cut": "gOm9JpLSXO",
+"src": "KC_REFS ref_id"
+},
+"m07": {
+"group": "Tươi tắn",
+"cut": "3zKcnbDREY",
+"src": "KC_REFS ref_id"
+},
+"m08": {
+"group": "Dịu dàng",
+"cut": "4RFGZQc9Aa",
+"src": "KC_REFS ref_id"
+},
+"m09": {
+"group": "Sắc sảo",
+"cut": "gOm4HrsSXO",
+"src": "KC_REFS ref_id"
+},
+"m10": {
+"group": "Đoan trang",
+"cut": "O6ERgEUynm",
+"src": "KC_REFS ref_id"
+},
+"m11": {
+"group": "Tươi tắn",
+"cut": "Syh9qs6Ub8",
+"src": "KC_REFS ref_id"
+},
+"m12": {
+"group": "Tinh nghịch",
+"cut": "xSB7FTWjfW",
+"src": "KC_REFS ref_id"
+},
+"m14": {
+"group": "Dịu dàng",
+"cut": "mEZHy3chJQ",
+"src": "KC_REFS ref_id"
+},
+"m16": {
+"group": "Đoan trang",
+"cut": "5jDgLXuKxe",
+"src": "KC_REFS ref_id"
+},
+"m18": {
+"group": "Dịu dàng",
+"cut": "s7IPw0Ll8e",
+"src": "KC_REFS ref_id"
+},
+"m19": {
+"group": "Dịu dàng",
+"cut": "tCRQ0thmZJ",
+"src": "KC_REFS ref_id"
+},
+"m20": {
+"group": "Dịu dàng",
+"cut": "UPv6ye3wny",
+"src": "KC_REFS ref_id"
+},
+"m22": {
+"group": "Đoan trang",
+"cut": "eIPv8g3dqL",
+"src": "KC_REFS ref_id"
+},
+"m24": {
+"group": "Tinh nghịch",
+"cut": "p8yhIrDehw",
+"src": "KC_REFS ref_id"
+},
+"m25": {
+"group": "Tinh nghịch",
+"cut": "s7IPJ0xl8e",
+"src": "KC_REFS ref_id"
+},
+"m28": {
+"group": "Đoan trang",
+"cut": "9ZHzA2JNYZ",
+"src": "KC_REFS ref_id"
+},
+"m29": {
+"group": "Đoan trang",
+"cut": "kseUgS216B",
+"src": "KC_REFS ref_id"
+},
+"m30": {
+"group": "Tinh nghịch",
+"cut": "xSBJ6nGjfW",
+"src": "KC_REFS ref_id"
+},
+"s07": {
+"group": "Sắc sảo",
+"cut": "gOmpzsdSXO",
+"src": "NF4 cut"
+},
+"s08": {
+"group": "Sắc sảo",
+"cut": "4RFmfAq9Aa",
+"src": "NF4 cut"
+},
+"s09": {
+"group": "Sắc sảo",
+"cut": "w4aXWwe7EI",
+"src": "NF4 cut"
+},
+"s10": {
+"group": "Kiêu kỳ",
+"cut": "u5W3NLlQLD",
+"src": "NF4 cut"
+},
+"s11": {
+"group": "Kiêu kỳ",
+"cut": "cpSkbto0eP",
+"src": "NF4 cut"
+},
+"s12": {
+"group": "Kiêu kỳ",
+"cut": "fHzN9OxCDY",
+"src": "NF4 cut"
+},
+"s13": {
+"group": "Lạnh lùng",
+"cut": "bxMGZJJ5Y2",
+"src": "NF4 cut"
+},
+"s14": {
+"group": "Lạnh lùng",
+"cut": "nVsbFtaYQD",
+"src": "NF4 cut"
+},
+"s15": {
+"group": "Lạnh lùng",
+"cut": "YMl5HhtWeC",
+"src": "NF4 cut"
+},
+"s16": {
+"group": "Quyến rũ",
+"cut": "s7IM02Wl8e",
+"src": "NF4 cut"
+},
+"s17": {
+"group": "Quyến rũ",
+"cut": "WDgKqfpcXe",
+"src": "NF4 cut"
+},
+"s18": {
+"group": "Quyến rũ",
+"cut": "SyheMY2Ub8",
+"src": "NF4 cut"
+}
+}
