@@ -14,7 +14,7 @@ Guard per item: snapshot of 8350 builder commands (c01–c32 × 5 ages × 19 mod
 
 ## Item 2 — --log / --refs / --verify
 - Usage + exact painter steps: dev/art/t8-prompt-B/README.md § "Gen ledger". Ledger file dev/art/gen_ledger.jsonl (created on first --log). `--log-fill TS GEN_ID FILE` fills a line after the gen.
-- Refs order = the order the prompt text uses (1 own face, 2 style3_girls, 3 swatch if "Image 3" in the prompt). NOTE: FIGURE_GATE A0 REFERENCES lists style as (1) and face (2); the K3 order text ("second reference image is style") and ROYAL3 ("Image 3") agree with the order used here — ROOT-37 please confirm or correct the A0 wording.
+- Refs order = the OWNER's order (FIGURE_GATE REFERENCES): 1 style3_girls, 2 her own face/live picture, 3 swatch if "Image 3" is in the prompt. (First version emitted face first; corrected upstream in 96d84e9 by ROOT-38, ordinal words only.)
 - Tested: PASS on a matching line, FAIL (with the first differing char) on a mismatch, exit 1. Snapshot diff vs item 1: 0 of 8350 changed (flags off = identical output).
 - W107b (session_01PEhRbv2Jj3dTLMsN1f9GGg) is inactive: the API is documented in the README instead.
 
@@ -73,5 +73,11 @@ NOT DONE, waiting for a decision/source:
 3. POSE= at t6+/elder/ty/cold: needs MORE calm poses in SPEC5_POSES (new wording = owner decision) or relax the stole/hairpin skips.
 4. `build.py --golden` != golden/pB_*.txt since the 3d2 frontal rewrite (pre-existing; regenerate goldens or drop the golden check).
 5. W107b (session_01PEhRbv2Jj3dTLMsN1f9GGg) was inactive: it must import `K3_BG` and use `--log/--verify` (README § Gen ledger); emperor-B still lacks K3/refs.
-6. A0 REFERENCES lists style as image 1; K3/ROYAL3 text and my refs emitter use 1=face, 2=style, 3=swatch → owner/ROOT-37 to confirm the wording.
+6. Ref order settled: 1 style, 2 face, 3 swatch (96d84e9).
 Snapshot method: scratchpad snap.py (8350 cmds) is NOT committed; recreate: c01–c32 × a18–a65 × modes (v0/v1/v2/--golden/--head/--low 1–6/--t7/--state thaihau|nude|kc|ngheo|--trieu 1–8) × ±--spec5pose + emperor-B 6×5, json of stdout, diff before/after.
+
+## Update after ROOT-38 (19/11 ~02:25Z)
+- Maid t4/t5/t6 rows DONE: `OUTFIT_JOBS[mNN-t4|t5|t6]` generated from the verbatim old main maidC/lad3.py ladder (embedded `_LAD3_SRC`), the same way the consorts' rows were made (checked: c01 t4/t5/t6 rows reproduce byte-equal, rank-name diacritics aside).
+- `--golden` is FROZEN pre-3d2 (differs from golden/pB_*.txt since the frontal rewrite); goldens are NOT regenerated, by order.
+- Style image will change to two square face portraits (pink + green); waiting for ROOT-38's ids, then REF_STYLE (build.py + build_npc.py STYLE_REF) + the "three approved girls" wording switch.
+- Guard for the maid t4-t6 rows: snapshot 8350 vs previous = only 320 --golden cells changed (ROOT-38 ordinal renumber 96d84e9, not this change); coverage 446 red cells (457 before); maids t4/t5/t6 now run.

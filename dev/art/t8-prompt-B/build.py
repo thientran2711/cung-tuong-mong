@@ -617,6 +617,37 @@ for _c,_pal,_h1,_h2 in MAID_ROWS:
     DATA[_c]=(_pal,"")
     ORIG1[_c]=(f"{_main} silk like {_h1}",f"{_sec} like {_h2}")
     MOTIF_LOW[_c]=(MAID_MOT[(_n-1)%13],MAID_FLOWER[_n%6])
+# N5d: maids at consort ranks t4-t6 = the OLD main dev/figwork/maidC/lad3.py ladder (verbatim source below), exactly how the consorts' OUTFIT_JOBS rows were made (verified: equal to c01/c02/c03/c07 rows apart from the diacritics of the rank names).
+_LAD3_SRC=r'''import re
+GREEN=("green","celadon","jade","teal","mint","sage","aqua")
+RANK={4:"rank-4 consort (Tan)",5:"rank-5 consort (Phi)",6:"rank-6 noble consort (Quy phi)",7:"rank-7 imperial noble consort (Hoang quy phi)",8:"the Empress (Hoang hau)"}
+ACC={}
+LAD={4:"a layered silk robe of two or three visible layers with WIDE gold-thread embroidered borders of {mot} at collar, sleeves and hem, an embroidered cloud collar (yunjian) over the shoulders and an embroidered silk sash; elegant high chignon with gold and jade hairpins and small dangling gold bu yao tassel hairpins",
+5:"a silk brocade robe richly embroidered in gold with phoenixes and peonies, long trailing wide sleeves, a gold-embroidered waistband with hanging jade belt pendants and tassels, a sheer silk shawl; high ornate chignon with a LARGER gold headdress with dangling gold tassels and jade pins, gold earrings",
+6:"a HEAVY silk brocade robe in SATURATED {main} silk, embroidered with phoenixes and {mot} in {main} and gold thread along the borders, an embroidered {main} pearl-edged cape/stole over the shoulders, gold-and-jade necklace, earrings and bracelets; tall chignon crowned by a BIG ornate gold headdress with pearls, gold flowers and many gold tassels",
+7:"a near-empress ceremonial robe of SATURATED {main} silk, embroidered with phoenixes and auspicious clouds in gold thread on the chest and along the borders, a jewelled cloud-collar cape edged with pearls and gold over the shoulders, strands of pearls across the chest, a jade-and-gold belt with long tassels, a long flowing {main} train behind her; tall grand chignon crowned by a LARGE ornate gold phoenix crown (grander and taller than a noble consort's headdress, only a little smaller than the Empress's) with spreading gold phoenix wings, pearl strands, kingfisher-blue inlay and many dangling gold tassels",
+8:"the Empress's imperial phoenix ceremonial robe of SATURATED {main} silk with large phoenixes and clouds embroidered in gold thread, a jewelled layered gold-and-pearl cloud-collar cape over the shoulders, many pearl strands, a jade-and-gold belt with long tassels, a VERY long {main} trailing train; the GRANDEST headdress of all: a FULL tall gold phoenix crown with nine gold phoenixes, pearls, kingfisher-blue inlay, and long pearl strands hanging at the sides; the most splendid outfit of all, clearly grander than every other rank"}
+ACC={"cherry-blossom pink and pale green":"pale green","lotus pink and celadon":"celadon"}
+WHITE=("ivory","white","moonlight")
+def outfit(t,pal,mot):
+    main=pal.split(" and ")[0]; acc=pal.split(" and ")[1] if " and " in pal else "gold"
+    neg="" if any(g in pal for g in GREEN) else ", NOT green"
+    col=f"her signature colour family {pal} stays the MAIN robe colour ({main}{neg}); the robe itself is clearly {main} silk, gold only as embroidery accents, NOT a cream, beige or all-gold robe"
+    if pal in ACC: col=f"her signature colour family {pal}: {main} is the MAIN robe colour (the robe is clearly {main}, NOT a green robe; {ACC[pal]} only as a small accent), gold only as embroidery accents, NOT a cream or all-gold robe"
+    if t>=6:  # art4: strong colour rule (t6 first tries washed pale palettes into cream/gold; this wording fixed c17 c20 c28 c30 c31 c32)
+        m=main if not any(w in main for w in ("ivory","white")) else "luminous cool "+main+"-white"
+        notiv="" if any(w in main for w in ("ivory","white")) else ", NOT ivory"
+        if pal in ACC: neg=", NOT a green robe"
+        col=(f"COLOUR RULE: robe, skirt, sleeves, cape and train are all clearly {m} silk (her signature colour family {pal}), with large areas of plain {main} silk visible; "+
+             ("" if "gold" in acc and pal not in ACC else f"{acc if pal not in ACC else ACC[pal]} only as a small accent; ")+f"gold only as thin accents on the borders; NOT cream, NOT beige{notiv}, NOT an all-gold robe{neg}")
+        if any(w in main for w in ("ivory","white")): col=col.replace("NOT cream, NOT beige","NOT yellow, NOT beige")
+    m2=("luminous cool "+main) if any(w in main for w in ("ivory","white")) else main
+    return f"Outfit for all four ({RANK[t]}, clearly much richer and more splendid than the lower ranks): a NEW outfit, {LAD[t].format(mot=mot,main=m2).replace("SATURATED luminous","luminous")}; {col}"
+'''
+_g3={}; exec(_LAD3_SRC,_g3)
+for _c,_pal,_h1,_h2 in MAID_ROWS:
+    for _t in (4,5,6):
+        OUTFIT_JOBS[f"{_c}-t{_t}"]=_g3["outfit"](_t,_pal,MAID_MOT[(int(_c[1:])-1)%13]).replace("Outfit for all four (","Outfit (",1).replace("(Tan)","(Tần)").replace("(Quy phi)","(Quý phi)")
 for _c in DATA:
     if _c not in LOWNAME and _c in ORIG1: LOWNAME[_c]=(DATA[_c][0].split(" and ")[0],ORIG1[_c][0].split(" silk")[0])
 YEL_T6="; more luxury than the rank below: rich gold-thread embroidery covering much of the robe, a pearl-edged collar and cape trim, a few strands of pearls across the chest, and a grander gold headdress with more gold ornaments, elegant, NOT a pile of jewels, still clearly less grand than the imperial noble consort; plus a clearly visible amount of royal yellow: a yellow inner robe panel, a yellow sash and narrow yellow borders, the royal yellow is exactly the colour of the flat colour swatch image (image 3, a honey-gold close to hex #F2BC61, 18K gold tone, not pale cream, not beige, not mustard); image 3 is only a colour reference, never copy anything but its colour; her own colour stays clearly the main robe colour, much less yellow than an imperial noble consort's robe; COLOUR RULE:"
