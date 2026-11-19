@@ -126,5 +126,5 @@ What changed:
 (AFTER "worst cell" for angle class lists the pairs that share a class; 2 per class is the E12 maximum.)
 
 Gates on the BW6 commit: `build_all.py --check --age` a18/a26/a36/a51/a65 → 0 FAIL ×5 (incl. E6 + E12). `check_store.py --self` 0 problems; `item_age.check_age5()` []. Extra: all 16 Sắc sảo + Tinh nghịch people (B8 bypassed) × t1–t8 × 5 ages = 640 prompts through check_store → 0 FAIL; their Thái hậu prompts a36/a51/a65 → 0 FAIL (Thái hậu a18/a26 do not exist in the 18/11 elder file).
-Old look groups with 9 m people (Tươi tắn, Dịu dàng, Trong trẻo, Đoan trang): angles fully different; items and grace allow exactly the pigeonhole repeat (8 options for 9 people) — the gate cap is 2 there.
+Groups bigger than 8 (old 9-person groups Tươi tắn, Dịu dàng, Trong trẻo, Đoan trang, or a bigger group from the owner's regrouping page, Lượt 673–680): angles still fully different up to 14 people and ≤ 2 per class up to 10; items and grace repeat only the pigeonhole minimum ceil(n/8) (member i takes slot i % 8) — the gate uses these caps.
 E12: NEW gens only. Nothing redrawn, no gens made.

@@ -193,10 +193,10 @@ def _e6_picks(c,age):
     if key in _E6_CACHE: return _E6_CACHE[key]
     n=int(c[1:]) if c[1:].isdigit() else sum(map(ord,c)); j=(n-1)%5; L=_E11_LISTS(); used=set(); out={}
     gs=group_slot(c)
-    if gs and gs[1]<8:   # E12: look-group member -> her slot's colour class (8 different items per rank inside the group, 8 different kinds per person)
+    if gs:   # E12: look-group member -> her slot's colour class (8 different items per rank inside the group, 8 different kinds per person)
         GI=_group_items(gs[0],age)
         if GI:
-            for t in _E6_TIERS: out[t]=L[t][0][GI[(gs[1],t)]]
+            for t in _E6_TIERS: out[t]=L[t][0][GI[(gs[1]%8,t)]]
             lst,d=L["nude"]; k8=e6_kind(out["t8"][0])
             out["nude"]=lst[next((d[age][(j+k)%5] for k in range(5) if e6_kind(lst[d[age][(j+k)%5]][0])!=k8),d[age][j])]
             _E6_CACHE[key]=out; return out
@@ -219,7 +219,7 @@ def _e6_picks(c,age):
 # c*/nc* there are proposals only) at one rank + age every person holds a DIFFERENT item. E11 lists hold 8 items per rank per age, so 8 people x 8 ranks:
 # the items of one age form a bipartite multigraph rank -- item kind (every rank 8 items, every kind <= 8 items at one age); a proper 8-edge-colouring (Kőnig,
 # alternating-path method, deterministic edge order t1..t8 x list order) gives 8 colour classes, each = one item per rank with 8 different kinds (E6).
-# Group member number i (members sorted) takes colour class i. A 9th member (old 9-person groups) keeps the per-person pick (pigeonhole: one repeat unavoidable).
+# Group member number i (members sorted) takes colour class i % 8 (groups bigger than 8: each item at most ceil(members/8) times, the pigeonhole minimum).
 _LG=None
 def look_groups():
     global _LG
@@ -228,7 +228,7 @@ def look_groups():
         for ln in open(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)),"..","face-common","LOOK_GROUPS.md"),encoding="utf-8"):
             m=re.match(r"## (.+?)( \(|$)",ln.strip())
             if m: cur=m.group(1).strip(); continue
-            ids=re.findall(r"\bm\d\d\b",ln) if cur else []
+            ids=re.findall(r"\bm\d\d\b",ln) if cur and re.match(r"m\d\d\s*(,|$)",ln.strip()) else []   # member lines only (a line that STARTS with an m id), never a note such as "m01–m52"
             if ids: _LG.setdefault(cur,[]).extend(ids)
         _LG={k:sorted(v) for k,v in _LG.items()}
     return _LG
@@ -544,14 +544,14 @@ MOTIF_LOW.update({
 "c01":["peonies", "a pink peony"],
 "c02":["plum blossoms", "a white jasmine sprig"],
 "c03":["lotus flowers", "a red camellia"],
-"c04":["orchids", "a small lotus"],
+"c04":["orchids", "a lotus"],
 "c05":["chrysanthemums", "a plum blossom"],
 "c07":["cranes", "a pale magnolia"],
 "c08":["auspicious clouds", "a begonia"],
 "c09":["bamboo leaves", "a pink peony"],
 "c10":["magnolias", "a white jasmine sprig"],
 "c11":["begonias", "a red camellia"],
-"c12":["pomegranates", "a small lotus"],
+"c12":["pomegranates", "a lotus"],
 "c13":["camellias", "a plum blossom"],
 "c14":["wisteria", "an orchid"],
 "c15":["swallows", "a pale magnolia"],
@@ -559,14 +559,14 @@ MOTIF_LOW.update({
 "c17":["peonies", "a pink peony"],
 "c18":["plum blossoms", "a white jasmine sprig"],
 "c19":["lotus flowers", "a red camellia"],
-"c20":["orchids", "a small lotus"],
+"c20":["orchids", "a lotus"],
 "c21":["chrysanthemums", "a plum blossom"],
 "c22":["butterflies", "an orchid"],
 "c23":["cranes", "a pale magnolia"],
 "c24":["auspicious clouds", "a begonia"],
 "c26":["magnolias", "a white jasmine sprig"],
 "c27":["begonias", "a red camellia"],
-"c28":["pomegranates", "a small lotus"],
+"c28":["pomegranates", "a lotus"],
 "c29":["camellias", "a plum blossom"],
 "c30":["wisteria", "an orchid"],
 "c31":["swallows", "a pale magnolia"],
@@ -977,7 +977,7 @@ MAID_ROWS=[["m01", "sage green and cream", "#E8CDB5", "#CAB295"],
   ["m51", "pale mint and silver", "#C0BDAB", "#D8D0BF"],
   ["m52", "pink lilac and gold", "#CEA6A9", "#B4898E"]]
 MAID_MOT=["peonies", "plum blossoms", "lotus flowers", "orchids", "chrysanthemums", "butterflies", "cranes", "auspicious clouds", "magnolias", "begonias", "camellias", "osmanthus", "wisteria"]
-MAID_FLOWER=["a small pink silk flower","a white jasmine sprig","a small plum blossom","a little orchid","a small peach blossom","a tiny camellia"]   # mjobs.py (maid) FLW
+MAID_FLOWER=["a pink silk flower","a white jasmine sprig","a plum blossom","an orchid","a peach blossom","a camellia"]   # ROOT-54 (A21, BW6 19/11): size words dropped from the NAME ("small", "little", "tiny") -> only the F13 SZ ladder sets the size   # mjobs.py (maid) FLW
 # OWNER Lượt 603 (ROOT-51 -> BW4): m01-m52 colours = dev/art/face-common/m_colours_proposed.json (NF1, FINAL, Lượt 599 revision): main name + main hex
 # (col 3) and the outfit SECONDARY name + hex (col 4; palette = "<main> and <secondary>"). M_COLS also feeds store-all/build_all.py secondary() (name like #HEX).
 import json as _json
