@@ -171,7 +171,7 @@ agReg("consort","par3house",(v,N,need)=>{const O=[];if(!p3On()||v===S||v.out||!v
   const st=(v.staff||[]).filter(s=>s&&!s.out);
   if(nd(H.gTam)&&st.some(s=>(s.loyal||0)<H.tamBelow))P(p3O(v,"staffTam",{n:"Tâm sự",c:{},o:100},N,H.gTam,"staff"));
   if(nd(H.gUp)&&(v.bac||0)>=BAL.house.upBac&&st.some(s=>(s.loyal||0)>=H.upLoyal))P(p3O(v,"staffUp",{n:"Tiến cử",c:{bac:-BAL.house.upBac,danh:-BAL.house.upDanh},o:100},N,H.gUp,"staff"));
-  if(nd(H.gSearch)&&v.p3SearchM!==S.turn&&st.some(s=>s.role==="maid"&&srk(s)>=3))P(p3O(v,"search",{n:"Tra xét",c:{},o:100,k:2},N,H.gSearch,"staff"));
+  if(nd(H.gSearch)&&v.p3SearchM!==S.turn&&st.some(s=>s.role==="maid"&&srk(s)>=BAL.srvRk.cs))P(p3O(v,"search",{n:"Tra xét",c:{},o:100,k:2},N,H.gSearch,"staff"));
   if(nd(H.gThreat)){const s=p3ThreatT(v);if(s)P(p3O(v,"threat",{n:"Dọa tố",c:{},o:100},N,H.gThreat,"scheme",(kh)=>agAt(ownerOf(s),kh),ownerOf(s)))}
  }catch(e){agdErr("par3house",e)}return O});
 agRunReg("cx3:test",v=>{const i=p3TestIx(v);return i<0?"":p3Res("test",itemTest(v,i))});

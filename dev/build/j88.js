@@ -42,10 +42,10 @@ function figBestRank(T,tier,age){try{if(!T||!T.length)return null;const C=T.filt
 /* who wears consort dress */
 function f88Wear(who){try{if(who===S)return !(typeof isSrv==="function"&&isSrv());return (rivals||[]).includes(who)}catch(e){return false}}
 /* her maid dress rank on the cung nữ road (review/player-dress): Tân Giả khố = m0, Ma ma = m4 (the highest maid dress; the mama
-   pictures are other women), else her rank 0..4 (Cung nữ thô sử m0 · Cung nữ m1 · Đại cung nữ m2 · Chưởng sự cô cô m3 · Nữ quan m4) */
-function f88SrvRk(){try{const v=S&&S.srv;if(!v)return 1;if(v.lau>0)return 0;if(v.mama)return 4;return Math.max(0,Math.min(4,v.rk==null?1:v.rk|0))}catch(e){return 1}}
+   pictures are other women), else the dress tier of her rung (BAL.srvRk.tier, maid-ladder-6: thô sử m0 · tam/nhị đẳng m1 · nhất đẳng = Đại cung nữ m2 · Chưởng sự cô cô m3 · Nữ quan m4) */
+function f88SrvRk(){try{const v=S&&S.srv;if(!v)return 1;if(v.lau>0)return 0;if(v.mama)return 4;return Math.max(0,Math.min(4,srkTier(v.rk==null?1:v.rk|0)))}catch(e){return 1}}
 function f88Best(L,who,kind){const Lp=kind==="por"?L.filter(f=>f.por):L;const W=f88Wear(who);
- const mr=(!W&&who===S)?f88SrvRk():(!W&&who&&who!==S&&who.role==="maid"&&typeof srk==="function")?(()=>{try{return srk(who)}catch(e){return null}})():null;
+ const mr=(!W&&who===S)?f88SrvRk():(!W&&who&&who!==S&&who.role==="maid"&&typeof srk==="function")?(()=>{try{return srkTier(srk(who))}catch(e){return null}})():null;
  return f88Pick(Lp.length?Lp:L,figTierOf(who),figAgeOf(who),!W,mr)}
 /* j39 figFor with the tier-aware choice */
 figFor=function(p,kind){try{if(!FIGS.length||!p||!S)return"";const who=figWho(p);if(!who)return"";const k=figPick(who);if(!k)return"";

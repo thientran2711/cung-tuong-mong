@@ -26,7 +26,7 @@ function r97art(k){return (S.arts&&S.arts[k])||0}
 function r97srv(){return typeof isSrv==="function"&&isSrv()}
 function r97son(){try{return son67()}catch(e){return null}}
 function r97give(k,giver){if(!IT[k])return"";S.inv=S.inv||[];S.inv.push({k,from:"rare",own:"me",giver:giver||"Hoàng thượng",d:S.turn,nt:1});return itm(k).n}
-function r97srvRk(n){try{if(S.srv&&!S.srv.risen){const old=S.srv.rk||0;S.srv.rk=Math.max(old,Math.min(4,n));if(S.srv.rk>old)return `Ngươi được thăng ${SRK.maid[S.srv.rk]}.`}}catch(e){}return""}
+function r97srvRk(n){try{if(S.srv&&!S.srv.risen){const old=S.srv.rk||0;S.srv.rk=Math.max(old,Math.min(BAL.srvRk.nq,n));if(S.srv.rk>old)return `Ngươi được thăng ${SRK.maid[S.srv.rk]}.`}}catch(e){}return""}
 function r97rise(why){try{if(S.srv&&!S.srv.risen&&typeof srvRise==="function"){srvRise(why);return "Ngươi được phong Đáp ứng."}}catch(e){console.error(e)}return""}
 /* ---------- the catalogue: one rare ending per arc ----------
    a: arc · tag: tên kết · t: lời kể · w: ai hiện mặt · p: xác suất khi đủ điều kiện · n: lựa chọn ở hồi cuối · c: chi phí (chỉ chi phí được hiện)
@@ -175,11 +175,11 @@ const R97L=[
 {a:"cnv_chu",tag:"Chủ nhân nhận làm nghĩa muội",w:"mis",n:"Quỳ xin chủ nhân để nô tỳ gánh cùng",
  path:["Hỏi chủ có cần giúp","Quỳ xuống: nô tỳ không thấy gì","Lén lấy một ít đem hỏi","Từ chối, báo chủ","Lén đổ thuốc đi","Quỳ xin chủ đừng làm","Thưa khéo cho chủ","Một mình nhận hết"],bad:["Bán một tin vặt","Khai thật với Nội vụ phủ"],x:[()=>(S.tin||0)>=AR("cnv_chu").bar,`Chủ tin từ ${AR("cnv_chu").bar}`],
  t:"{mis} ôm lấy ngươi mà khóc: gói thuốc ấy là để tự hại mình, vì một nỗi oan không ai biết. Ngươi ở bên chủ suốt mùa đông, đến khi nàng đứng dậy được. Ngày xuân, nàng nhận ngươi làm nghĩa muội và tự mình tiến cử ngươi lên Hoàng thượng.",
- go:()=>r97rise("Chủ nhân nhận làm nghĩa muội và tiến cử")||r97srvRk(3),rw:"nt_nhuy",ti:"Nghĩa muội của chủ nhân"},
+ go:()=>r97rise("Chủ nhân nhận làm nghĩa muội và tiến cử")||r97srvRk(BAL.srvRk.cs),rw:"nt_nhuy",ti:"Nghĩa muội của chủ nhân"},
 {a:"cnv_ban",tag:"Hai chị em vào Thượng cung cục",w:"maid",n:"Đưa chiếc khăn có thêu tên Thu Cúc ra trước chưởng sự",
  path:["Đến xin cho nàng","Lặng lẽ dò xem ai lấy vòng","Rình bắt Thu Cúc","Nói thẳng với Thu Cúc","Lén mang thuốc","Bênh bạn","Lấy lại khăn","Báo trước với chưởng sự","Tìm người làm chứng"],bad:["Không dám","Thưa không rõ"],x:[()=>S.tai>=AR("cnv_ban").bar[0]||S.mat>=AR("cnv_ban").bar[1],`Tài từ ${AR("cnv_ban").bar[0]} hoặc Tai mắt từ ${AR("cnv_ban").bar[1]}`],
  t:"Chiếc khăn lật ngược cả phiên xử. Xuân Đào được minh oan, và chưởng sự Thượng cung cục, người ngồi nghe từ đầu, xin cả hai chị em về làm việc dưới trướng bà: một người coi kim chỉ, một người coi sổ sách. Từ cô gái giặt áo, ngươi thành người được cả lục cục kính nể.",
- go:()=>r97srvRk(4)||"",rw:"nt_nhuy",ti:"Nữ quan Thượng cung cục"},
+ go:()=>r97srvRk(BAL.srvRk.nq)||"",rw:"nt_nhuy",ti:"Nữ quan Thượng cung cục"},
 {a:"cnv_mat",tag:"Phá lệ phong Quý nhân",w:"emp",n:"Hát lại khúc hát nơi hậu viện, chỉ cho một người nghe",
  path:["nhìn ngài một khoảnh khắc","Xin chủ tiến cử","Pha trà ngài thích","Hát tiếp","Nhờ người báo cho Hoàng thượng","Thưa: nô tỳ chỉ làm phận sự"],bad:["Ngầm nhận lời","Tránh mặt"],x:[()=>(S.nt||0)>=AR("cnv_mat").bar,`Hoàng thượng để ý từ ${AR("cnv_mat").bar}`],
  t:"Khúc hát vừa dứt, Hoàng thượng đứng sau rặng trúc bước ra. Sáng hôm sau, thánh chỉ phá lệ: cung nữ {me} không qua Đáp ứng, Thường tại, phong thẳng Quý nhân, ban hiệu theo khúc hát. Cả Nội vụ phủ lật sổ ba đời cũng không tìm ra tiền lệ.",
@@ -187,7 +187,7 @@ const R97L=[
 {a:"cnv_ma",tag:"Kế nhiệm Lưu ma ma",w:"maid",n:"Xin ma ma cho học nốt bài cuối: cách giữ chìa khóa kho",
  path:["Tập đến khi được","Báo ma ma","Chăm bà","Gửi thuốc rồi về","Tìm người làm chứng","Không động đến","Giữ kín cho ma ma","Khuyên ma ma tự nhận"],bad:["Lén đổ bớt trà","Cất giùm vào tủ"],x:[()=>(S.tin||0)>=AR("cnv_ma").bar[0]||S.duc>=AR("cnv_ma").bar[1],`Chủ tin từ ${AR("cnv_ma").bar[0]} hoặc Đức từ ${AR("cnv_ma").bar[1]}`],
  t:"Lưu ma ma trao cho ngươi chùm chìa khóa đã đeo bên hông bà bốn mươi năm: “Kho này, sổ này, người này, từ nay là của con.” Ngươi thành chưởng sự cô cô trẻ nhất Nội vụ phủ từ trước đến nay; những kẻ từng ghen ngươi nay phải xin ngươi phân việc.",
- go:()=>r97srvRk(3)||"",rw:"nt_nhuy",ti:"Chưởng sự trẻ nhất Nội vụ phủ"},
+ go:()=>r97srvRk(BAL.srvRk.cs)||"",rw:"nt_nhuy",ti:"Chưởng sự trẻ nhất Nội vụ phủ"},
 /* ===== Tuyến chung ===== */
 {a:"s_than",tag:"Mẹ còn sống",w:"emp",n:"Hỏi hắn câu cuối: mẹ ta có hát ru bài gì",
  path:["Hỏi những chuyện chỉ người nhà biết","Đề phòng, theo dõi","Nhận","Phản đòn: hỏi ai đưa hắn vào","Đứng ra bảo lãnh","Tha thứ, cho hắn làm tai mắt"],bad:["Cho là trùng hợp"],x:[()=>S.mat>=AR("s_than").bar[0]||S.duc>=AR("s_than").bar[1],`Tai mắt từ ${AR("s_than").bar[0]} hoặc Đức từ ${AR("s_than").bar[1]}`],
