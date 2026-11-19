@@ -1059,21 +1059,51 @@
   },
   "nc1": {
    "id": "nc1",
-   "m09_ok": "NO",
-   "ref_id": null,
-   "note": "princess Ba Tư: picture exists but made with COMMON_v2 princess prompt (cut 6Abnqu9iJO, nc1.v2.FULL.txt), not a v3 thiếu nữ"
+   "m09_ok": "yes",
+   "ref_id": "6Abnqu9iJO",
+   "note": "owner Lượt 570: foreign princess pictures OK as reference, no redraw",
+   "prompt_file": "dev/art/face-common/nc1.v2.FULL.txt",
+   "set": "foreign princess (M09, COMMON_v2 princess prompt)",
+   "gen_id": null,
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "face_words": "(see prompt_file {PERSON} line)",
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "pick_why": "owner Lượt 570"
   },
   "nc2": {
    "id": "nc2",
-   "m09_ok": "NO",
-   "ref_id": null,
-   "note": "princess Cao Ly: picture exists but COMMON_v2 princess prompt (cut p8ymOwOehw, nc2.v2.FULL.txt), not a v3 thiếu nữ"
+   "m09_ok": "yes",
+   "ref_id": "p8ymOwOehw",
+   "note": "owner Lượt 570: foreign princess pictures OK as reference, no redraw",
+   "prompt_file": "dev/art/face-common/nc2.v2.FULL.txt",
+   "set": "foreign princess (M09, COMMON_v2 princess prompt)",
+   "gen_id": null,
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "face_words": "(see prompt_file {PERSON} line)",
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "pick_why": "owner Lượt 570"
   },
   "nc3": {
    "id": "nc3",
-   "m09_ok": "NO",
-   "ref_id": null,
-   "note": "princess Phù Tang: picture exists but COMMON_v2 princess prompt (cut ov6CN4g829, nc3.v2.FULL.txt), not a v3 thiếu nữ"
+   "m09_ok": "yes",
+   "ref_id": "ov6CN4g829",
+   "note": "owner Lượt 570: foreign princess pictures OK as reference, no redraw",
+   "prompt_file": "dev/art/face-common/nc3.v2.FULL.txt",
+   "set": "foreign princess (M09, COMMON_v2 princess prompt)",
+   "gen_id": null,
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "face_words": "(see prompt_file {PERSON} line)",
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "pick_why": "owner Lượt 570"
   },
   "bd1": {
    "id": "bd1",
