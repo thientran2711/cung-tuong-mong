@@ -1002,17 +1002,16 @@ def build_mama(c):
         s=s.replace(_h,"her own hair colour, ALL her hair pinned UP in a neat bun (chignon) with her hairpins",1)   # F11 (owner Lượt 583): ma ma = neat bun; the thiếu-nữ ref has long loose hair + ribbon
         _mh=" Her hair and hairpins come ONLY from the identity reference and this text; the style reference image must not influence her hair."; assert s.count(_mh)==1,"mama hair sentence"
         s=s.replace(_mh," HAIR: ALL her hair is pinned UP in a neat bun: NO long loose hair down her back or over her shoulders, NO ribbons in the hair.",1)
-        assert s.count(MAID_HAIR_IDENT_OLD)==1,"mama ident hair"; s=s.replace(MAID_HAIR_IDENT_OLD,MAID_HAIR_IDENT_UP,1)   # F11 (BW4): ma ma is always a36+
         assert "image 3" not in s,"mama one-ref: image 3 left"
         return s+END   # MAMA_IMG3 (the costume-image sentence; its "ONE panel" describes the old image, the text says TWO panels) dropped
     return s+MAMA_IMG3+END
+IDENT_LAW="From the identity reference keep ONLY her face, facial features, hair COLOUR and signature colour family; do NOT copy poses, outfit, HAIRSTYLE, hair ornaments or accessories of the reference, dress her in the NEW outfit below."
+IDENT_RX=re.compile(r"From the identity reference keep ONLY her face, facial features[^;]*; do NOT copy [^.;]*?hair ornaments or accessories(?: of the reference)?, dress her in the NEW outfit below\.")
 MAID_IDENT=IDENT.replace("and hairstyle colour","her own hairstyle (the same at every rank) and hair colour",1)
 TM_FADED=["grey-blue","light indigo","earth brown"]
 TM_NAME={"tm0":"cung nữ thô sử","tm1":"tam đẳng cung nữ","tm2":"nhị đẳng cung nữ","tm3":"chưởng sự cô cô","tm4":"nữ quan"}
 TM_TONE=" COLOUR TONE: the main colour is a soft, held-back medium tone: medium-soft saturation and medium lightness, clear but quiet, NOT fresh or bright, NOT pale, NOT washed-out, NOT pastel-faded, NOT dark, NOT grey, NOT glaring."   # BW4 B18: maids held back
 # BW1 (owner Lượt 520, ART_RULES K15: only consorts wear hair flowers): tm1 'and a fresh flower' and tm2 'and small fresh flowers' removed from the hair clause (removal only, no new words); tm0/tm3/tm4 (nữ quan) had none. Ma ma: MMX3 --noflower.
-# F11 (owner Lượt 583, BW4): a36/a51/a65 = hair UP in a bun for every maid and ma ma; the identity line no longer says "her own hairstyle (the same at every rank)" there
-MAID_HAIR_IDENT_OLD="her own hairstyle (the same at every rank) and hair colour"; MAID_HAIR_IDENT_UP="her own hair colour (her hair ALL pinned UP in a neat bun, as described below)"
 TM_NOFLOWER=" NO flowers in the hair (no fresh or silk flowers), only her hairpins."   # verbatim = build_mama --noflower sentence (asserted below)
 def build_maid(c,state):
     assert c[0]=="m" or c[0]=="c"; n=int(c[1:]); right=(n%2==1); pal,face=DATA[c]; main=pal.split(" and ")[0]; elder=AGE in ("a51","a65")
@@ -1037,7 +1036,6 @@ def build_maid(c,state):
         s+=" Outfit (a female court official, nữ quan): a formal court lady official's robe in the court-dress red (a medium-saturation, medium-lightness brick-crimson, close to hex #99443F), with a square embroidered rank badge (buzi) of a crane and clouds on the chest, a crossed collar (jiaoling) closing to the right, neat embroidered borders, a narrow jewelled belt; a clearly visible formal black gauze court official's headdress (small winged cap) with a gold ornament worn over her hair, jade earrings; refined and dignified, with much less gold and no phoenix crown, clearly below an imperial consort."
         colr="the robe is the court-dress red #99443F at every age"; tone=""
     if AGE in ("a36","a51","a65"):   # F11 (BW4): explicit bun at a36+; tm0-tm2 already say bun/buns, tm3/tm4 get it here
-        assert s.count(MAID_HAIR_IDENT_OLD)==1,"maid ident hair"; s=s.replace(MAID_HAIR_IDENT_OLD,MAID_HAIR_IDENT_UP,1)
         if k==3: _h="one gold hairpin and a small gold comb in her hair"; assert s.count(_h)==1,"tm3 hair"; s=s.replace(_h,"ALL her hair swept UP into a neat bun (chignon), nothing loose down her back, with one gold hairpin and a small gold comb in the bun",1)
         if k==4: _h="with a gold ornament worn over her hair,"; assert s.count(_h)==1,"tm4 hair"; s=s.replace(_h,"with a gold ornament worn over her hair, which is ALL pinned UP in a neat bun under the cap (nothing loose down her back),",1)
     if k in (1,2,4): s+=TM_NOFLOWER   # K15 (owner Lượt 520; ROOT-50 19/11 18:24Z): cung nữ tm1/tm2 + nữ quan tm4, the ma ma --noflower sentence copied VERBATIM (removal alone fails: the gen copies the face ref's flower)
@@ -1556,6 +1554,11 @@ if __name__=="__main__":
         _t34=", body turned slightly three-quarters to the right" if globals().get("SP5_ODD") else ""
         for _ph in (", body and face frontal, standing squarely facing the viewer, no turn",", body and face frontal, facing the viewer squarely, no turn"):
             while _ph in _o: _o=_o.replace(_ph,_t34,1); _t34=""
+    # OWNER REFERENCE LAW (ROOT-51 -> BW4, from MMX4): the identity sentence keeps ONLY face, facial features, hair COLOUR and signature colour family; the HAIRSTYLE comes
+    # from the rank/age hair line (F11), never from the thiếu-nữ ref (loose hair). Every mode (consort t1-t8, Nữ đế, triều, states, maids, ma ma); --golden (frozen A/B) exempt.
+    if "--golden" not in sys.argv:
+        _o,_n=IDENT_RX.subn(IDENT_LAW,_o)
+        assert "hairstyle colour" not in _o and "her own hairstyle (the same" not in _o,"identity sentence variant not covered: "+_o[max(0,_o.find("hairstyle")-200):_o.find("hairstyle")+80]
     print(_o,end="")
     _lg=[x for x in _RAW if x not in ("--log","--refs")]
     if "--gen-id" in _lg: _i=_lg.index("--gen-id"); _gid=_lg[_i+1]; _lg[_i:_i+2]=[]
