@@ -165,6 +165,7 @@ def age_item(c,tier,item,hk):
     n=int(c[1:]) if c[1:].isdigit() else sum(map(ord,c)); j=(n-1)%5
     if tier in _E6_TIERS or tier=="nude":
         it,k=_e6_picks(c,AGE)[tier]; return (it,"L:"+k) if tier in ("t1","t2","t3","t4","t5","t6") else (it,k)   # L3F kind -> low_hand (same as the build_all ladder)
+    if tier=="thaihau": return TH_ITEMS[th_index(c,AGE)]   # E12: different inside a look group
     L=_E11_LISTS().get(tier)
     if L: lst,d=L; return lst[d[AGE][j]]
     if tier in _IA.AGE5:
@@ -180,7 +181,7 @@ _E6_KINDS=[("box",r"\bbox\b|casket"),("censer",r"censer|incense"),("healthballs"
  ("warmer",r"hand warmer|\bwarmer\b"),("seal",r"\bseal\b"),("staff",r"\bstaff\b"),("peach",r"\bpeach\b"),("cage",r"\bcage\b|birdcage"),
  ("drum",r"\bdrum\b"),("kite",r"\bkite\b"),("letter",r"\bletter\b"),("brush",r"\bbrush\b"),("whisk",r"whisk"),("screen",r"\bscreen\b"),
  ("flask",r"flask"),("ruyi",r"\bruyi\b"),("sceptre",r"sceptre"),("tablet",r"tablet"),("coral",r"coral branch"),("figurine",r"statuette|jade mountain|jade crane|lingzhi|mandarin ducks"),
- ("plant",r"potted|\bpot with\b"),("flowers",r"sprig|chrysanthemums|blossoms\b"),("fish",r"wooden fish"),("bell",r"\bbell\b")]
+ ("plant",r"potted|\bpot with\b"),("flowers",r"sprig|chrysanthemums|blossoms\b"),("fish",r"wooden fish"),("bell",r"\bbell\b"),("whistle",r"whistle"),("needle",r"needle case"),("pouch",r"\bpouch\b")]   # +3 kinds for the E12 items (BW6)
 def e6_kind(item):
     import re as _re
     for k,rx in _E6_KINDS:
@@ -191,7 +192,15 @@ def _e6_picks(c,age):
     key=(c,age)
     if key in _E6_CACHE: return _E6_CACHE[key]
     n=int(c[1:]) if c[1:].isdigit() else sum(map(ord,c)); j=(n-1)%5; L=_E11_LISTS(); used=set(); out={}
-    opts=[[L[t][1][age][(j+k)%5] for k in range(5)] for t in _E6_TIERS]   # each rank: its 5 age items, preferred (n-1)%5 first
+    gs=group_slot(c)
+    if gs:   # E12: look-group member -> her slot's colour class (8 different items per rank inside the group, 8 different kinds per person)
+        GI=_group_items(gs[0],age)
+        if GI:
+            for t in _E6_TIERS: out[t]=L[t][0][GI[(gs[1]%8,t)]]
+            lst,d=L["nude"]; k8=e6_kind(out["t8"][0])
+            out["nude"]=lst[next((d[age][(j+k)%5] for k in range(5) if e6_kind(lst[d[age][(j+k)%5]][0])!=k8),d[age][j])]
+            _E6_CACHE[key]=out; return out
+    opts=[[L[t][1][age][(j+k)%5] for k in range(5)]+L[t][1][age][5:] for t in _E6_TIERS]   # each rank: its 5 first age items, preferred (n-1)%5 first (unchanged order), then the 3 E12 items
     def dfs(i,used):
         if i==len(_E6_TIERS): return []
         lst=L[_E6_TIERS[i]][0]
@@ -206,6 +215,56 @@ def _e6_picks(c,age):
     lst,d=L["nude"]; k8=e6_kind(out["t8"][0])
     out["nude"]=lst[next((d[age][(j+k)%5] for k in range(5) if e6_kind(lst[d[age][(j+k)%5]][0])!=k8),d[age][j])]
     _E6_CACHE[key]=out; return out
+# E12 SAME RANK, DIFFERENT PEOPLE (owner Lượt 650/656; ROOT-54 ruling (b), BW6 19/11): inside one LOOK GROUP (dev/art/face-common/LOOK_GROUPS.md; members = the m people,
+# c*/nc* there are proposals only) at one rank + age every person holds a DIFFERENT item. E11 lists hold 8 items per rank per age, so 8 people x 8 ranks:
+# the items of one age form a bipartite multigraph rank -- item kind (every rank 8 items, every kind <= 8 items at one age); a proper 8-edge-colouring (Kőnig,
+# alternating-path method, deterministic edge order t1..t8 x list order) gives 8 colour classes, each = one item per rank with 8 different kinds (E6).
+# Group member number i (members sorted) takes colour class i % 8 (groups bigger than 8: each item at most ceil(members/8) times, the pigeonhole minimum).
+_LG=None
+def look_groups():
+    global _LG
+    if _LG is None:
+        _LG={}; cur=None
+        for ln in open(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)),"..","face-common","LOOK_GROUPS.md"),encoding="utf-8"):
+            m=re.match(r"## (.+?)( \(|$)",ln.strip())
+            if m: cur=m.group(1).strip(); continue
+            ids=re.findall(r"\bm\d\d\b",ln) if cur and re.match(r"m\d\d\s*(,|$)",ln.strip()) else []   # member lines only (a line that STARTS with an m id), never a note such as "m01–m52"
+            if ids: _LG.setdefault(cur,[]).extend(ids)
+        _LG={k:sorted(v) for k,v in _LG.items()}
+    return _LG
+def group_slot(c):
+    """(group name, index of c among the sorted members) or None."""
+    for k,v in look_groups().items():
+        if c in v: return k,v.index(c)
+    return None
+_GRP_CACHE={}
+def _group_items(name,age,K=8):
+    key=(name,age)
+    if key in _GRP_CACHE: return _GRP_CACHE[key]
+    L=_E11_LISTS(); edges=[(t,idx,e6_kind(L[t][0][idx][0])) for t in _E6_TIERS for idx in L[t][1][age]]
+    if any(len(L[t][1][age])!=K for t in _E6_TIERS) or max(__import__("collections").Counter(k for _,_,k in edges).values())>K:
+        _GRP_CACHE[key]=None; return None   # not colourable -> per-person picks (the E12 gate then FAILS)
+    atR={t:{} for t in _E6_TIERS}; atK={}; col=[None]*len(edges)
+    for e,(t,idx,k) in enumerate(edges):
+        atK.setdefault(k,{})
+        a=next(x for x in range(K) if x not in atR[t]); b=next(x for x in range(K) if x not in atK[k])
+        if a in atK[k]:   # flip the a/b alternating path that starts at kind k (it never reaches rank t)
+            path=[]; side,v,cc=("K",k,a)
+            while True:
+                D=atK[v] if side=="K" else atR[v]
+                if cc not in D: break
+                f=D[cc]; path.append(f); ft,_,fk=edges[f]
+                side,v=("R",ft) if side=="K" else ("K",fk); cc=b if cc==a else a
+            for f in path: ft,_,fk=edges[f]; del atR[ft][col[f]]; del atK[fk][col[f]]
+            for f in path: ft,_,fk=edges[f]; col[f]=b if col[f]==a else a; atR[ft][col[f]]=f; atK[fk][col[f]]=f
+        col[e]=a; atR[t][a]=e; atK[k][a]=e
+    out={(col[e],t):idx for e,(t,idx,_) in enumerate(edges)}
+    _GRP_CACHE[key]=out; return out
+def th_index(c,age):
+    """Thái hậu item index: look-group member i -> TH_AGE[age][i % 8] (different inside the group); others (n-1)%5 (unchanged)."""
+    gs=group_slot(c); d=TH_AGE[age]
+    if gs: return d[gs[1]%len(d)]
+    n=int(c[1:]) if c[1:].isdigit() else sum(map(ord,c)); return d[(n-1)%5]
 def e6_check(people,ages=("a18","a26","a36","a51","a65")):
     """E6 gate: list of (person, age, kind, ranks) where a kind repeats in t1-t8, or Nữ đế = t8 kind."""
     bad=[]
@@ -290,9 +349,24 @@ ITEMS=[("a gold ruyi set with gems","one"),("an imperial phoenix-embroidered rou
 ("a sutra book bound in phoenix-embroidered imperial silk","two"),
 ("a small white-jade statuette of Guanyin on a gold stand","two"),
 ("a carved imperial-jade longevity peach on a gold stand","two"),
-("a pair of imperial-jade health balls","two")]
+("a pair of imperial-jade health balls","two"),
+("an imperial phoenix-embroidered silk ball (tú cầu) with pearl tassels","one"),
+("a folded letter on gold-flecked imperial paper tied with a pearl cord","two"),
+("a gold phoenix pellet drum (trống lắc) with pearl strings","one"),
+("an embroidery hoop in a gold phoenix frame with an imperial-silk scene","two"),
+("a phoenix-embroidered imperial-silk sachet with pearl tassels","one"),
+("a gold phoenix pendant set with pearls on a silk cord","one"),
+("a gold phoenix hand bell with pearl tassels","one"),
+("a gold phoenix basket of pearl-and-jade flowers","box"),
+("a calligraphy brush with a gold phoenix shaft and a white-jade cap","one"),
+("a gold phoenix fly-whisk with a white-jade handle","one"),
+("a string of pearl prayer beads with a gold phoenix tassel","one"),
+("a white-jade vase with gold phoenix mounts and peonies","two"),
+("a phoenix-headed gold walking staff with pearl tassels","one"),
+("a small potted orchid in a gold phoenix pot","two"),
+("a carved imperial-jade lingzhi fungus on a gold stand","two")]
 # E11 (owner Lượt 583/585, IT1): +15 items appended (the first 10 unchanged, same order) -> 25; {age: 5 indices}, 25 different items per rank, adjacent ranks (t1..t8, Nữ đế, Thái hậu) never share an item kind at one age. Pick: LIST[AGE_DICT[age][(n-1)%5]].
-ITEMS_AGE={"a18": [14, 10, 15, 7, 3], "a26": [12, 16, 17, 4, 11], "a36": [13, 18, 2, 1, 20], "a51": [8, 19, 22, 21, 5], "a65": [24, 6, 0, 23, 9]}
+ITEMS_AGE={"a18": [14, 10, 15, 7, 3, 25, 26, 27], "a26": [12, 16, 17, 4, 11, 28, 29, 30], "a36": [13, 18, 2, 1, 20, 31, 32, 33], "a51": [8, 19, 22, 21, 5, 34, 35, 36], "a65": [24, 6, 0, 23, 9, 37, 38, 39]}
 GOLDEN_ITEM={"c06":0,"c16":1,"c20":2,"c25":3}   # as run in the A/B test
 EXTRA_ITEM={"c24":5}   # c24 would repeat neighbour c25
 def hand(key,right):
@@ -413,9 +487,24 @@ ITEMS7=[("a gilded hand censer","c"),("an imperial round fan with a gold filigre
 ("an imperial-jade ruyi with gold-filigree mounts","two"),
 ("a sutra book bound in kingfisher silk","two"),
 ("a jade walking staff with a gold-filigree head","one"),
-("a carved imperial-jade crane on a gold stand","two")]
+("a carved imperial-jade crane on a gold stand","two"),
+("a folded letter on gold-flecked kingfisher-blue paper tied with a silk cord","two"),
+("a gold-filigree pellet drum (trống lắc) with gem tassels","one"),
+("an embroidery hoop in a gold-filigree frame with a kingfisher-silk scene","two"),
+("a gold-filigree sachet set with gems","one"),
+("a name seal of imperial jade with a gold-filigree knob","one"),
+("a kingfisher-silk handkerchief embroidered with gold","two"),
+("a gold-filigree pendant set with gems on a silk cord","one"),
+("an imperial-jade hand bell with gold-filigree mounts","one"),
+("a calligraphy brush with a gold-filigree shaft","one"),
+("a pair of gold-filigree health balls set with gems","two"),
+("a gold-filigree fly-whisk with an imperial-jade handle","one"),
+("a hanging scroll on kingfisher silk with gold-filigree rollers","two"),
+("a small potted orchid in a gold-filigree pot set with gems","two"),
+("a string of imperial-jade prayer beads with a gold tassel","one"),
+("a gold-filigree longevity peach set with gems","two")]
 # E11 (owner Lượt 583/585, IT1): +15 items appended (the first 10 unchanged, same order) -> 25; {age: 5 indices}, 25 different items per rank, adjacent ranks (t1..t8, Nữ đế, Thái hậu) never share an item kind at one age. Pick: LIST[AGE_DICT[age][(n-1)%5]].
-ITEMS7_AGE={"a18": [1, 12, 6, 8, 11], "a26": [10, 16, 13, 19, 21], "a36": [14, 9, 2, 18, 7], "a51": [0, 3, 4, 5, 17], "a65": [22, 24, 23, 20, 15]}
+ITEMS7_AGE={"a18": [1, 12, 6, 8, 11, 25, 26, 27], "a26": [10, 16, 13, 19, 21, 28, 29, 30], "a36": [14, 9, 2, 18, 7, 31, 32, 33], "a51": [0, 3, 4, 5, 17, 34, 35, 36], "a65": [22, 24, 23, 20, 15, 37, 38, 39]}
 GOLDEN7={"c06":0,"c25":2}
 def hand7(key,right):
     d="right" if right else "left"
@@ -455,14 +544,14 @@ MOTIF_LOW.update({
 "c01":["peonies", "a pink peony"],
 "c02":["plum blossoms", "a white jasmine sprig"],
 "c03":["lotus flowers", "a red camellia"],
-"c04":["orchids", "a small lotus"],
+"c04":["orchids", "a lotus"],
 "c05":["chrysanthemums", "a plum blossom"],
 "c07":["cranes", "a pale magnolia"],
 "c08":["auspicious clouds", "a begonia"],
 "c09":["bamboo leaves", "a pink peony"],
 "c10":["magnolias", "a white jasmine sprig"],
 "c11":["begonias", "a red camellia"],
-"c12":["pomegranates", "a small lotus"],
+"c12":["pomegranates", "a lotus"],
 "c13":["camellias", "a plum blossom"],
 "c14":["wisteria", "an orchid"],
 "c15":["swallows", "a pale magnolia"],
@@ -470,14 +559,14 @@ MOTIF_LOW.update({
 "c17":["peonies", "a pink peony"],
 "c18":["plum blossoms", "a white jasmine sprig"],
 "c19":["lotus flowers", "a red camellia"],
-"c20":["orchids", "a small lotus"],
+"c20":["orchids", "a lotus"],
 "c21":["chrysanthemums", "a plum blossom"],
 "c22":["butterflies", "an orchid"],
 "c23":["cranes", "a pale magnolia"],
 "c24":["auspicious clouds", "a begonia"],
 "c26":["magnolias", "a white jasmine sprig"],
 "c27":["begonias", "a red camellia"],
-"c28":["pomegranates", "a small lotus"],
+"c28":["pomegranates", "a lotus"],
 "c29":["camellias", "a plum blossom"],
 "c30":["wisteria", "an orchid"],
 "c31":["swallows", "a pale magnolia"],
@@ -628,7 +717,22 @@ L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered 
 ("a bamboo walking staff with a silk cord","one"),
 ("a bundle of white chrysanthemums tied with a silk ribbon","sprig"),
 ("a small wooden fish (mõ) with its striker","one"),
-("a pair of walnut health balls","two")],
+("a pair of walnut health balls","two"),
+("a small woven-grass cricket cage with a cotton tassel","dangle"),
+("a plain wooden hair comb, held in the hand","one"),
+("a small painted clay whistle shaped like a bird","one"),
+("a plain wooden hairpin carved with a flower, held in the hand","dangle"),
+("a small painted scroll on plain paper with wooden rollers","scroll"),
+("a small cloth pouch embroidered with a single flower","dangle"),
+("a small plain clay vase with a flower sprig","vase"),
+("a plain wooden name seal with a cotton tassel","one"),
+("a carved bamboo needle case with a cotton tassel","dangle"),
+("a small plain bronze hand bell with a cotton tassel","dangle"),
+("a small plain bamboo box with a woven lid","box"),
+("a small bronze hand censer with a plain wooden handle","one"),
+("a fly-whisk of horsehair with a plain bamboo handle","one"),
+("a small plain bamboo birdcage with its cloth cover drawn back","lantern"),
+("a thread-bound almanac in a plain cloth cover","book")],
 2:[("a silk round fan with a lacquered handle and a small tassel","rfan"),("an embroidered silk sachet with a tassel","dangle"),("a painted paper folding fan","ffan"),("a poetry book with a silk cover","book"),("a small porcelain vase with a flower sprig","vase"),("an embroidery hoop with a fine silk scene","hoop"),("a jade-bead tassel ornament","dangle"),("a silk-covered lantern with a tassel","lantern"),("a small lacquered comb box","box"),("a bamboo flute with a silk tassel","flute"),
 ("a small pellet drum (trống lắc) with a lacquered handle","one"),
 ("a small cricket cage of lacquered bamboo with a silk tassel","dangle"),
@@ -644,7 +748,22 @@ L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered 
 ("a thread-bound almanac in an embroidered silk cover","book"),
 ("a carved wooden longevity peach","two"),
 ("a string of agate prayer beads","dangle"),
-("a fly-whisk of white horsehair with a lacquered handle","one")],
+("a fly-whisk of white horsehair with a lacquered handle","one"),
+("a small paper kite painted like a butterfly, its string on a lacquered reel","two"),
+("a sprig of red plum blossoms tied with a silk ribbon","sprig"),
+("a folded letter on painted red-and-gold paper tied with a silk cord","two"),
+("a red-lacquered hair comb, held in the hand","one"),
+("a lacquered name seal with a silk tassel","one"),
+("a small painted lacquer flower basket","basket"),
+("an embroidered silk ball (tú cầu) with a long silk tassel","dangle"),
+("a small painted porcelain perfume flask with a silk tassel","one"),
+("a calligraphy brush with a painted porcelain shaft","one"),
+("a small lacquered hand bell with a silk tassel","dangle"),
+("a pair of painted lacquer health balls","two"),
+("a lacquered wooden fish (mõ) with its striker","one"),
+("a lacquered walking staff with a silk cord","one"),
+("a small potted pine in a painted porcelain pot","two"),
+("an agate pendant on a silk cord","dangle")],
 3:[("an embroidered silk round fan with a silk tassel","rfan"),("a small red-lacquered box","box"),("a painted scroll with wooden rollers","scroll"),("a painted silk folding fan with bone ribs","ffan"),("a small celadon vase with a flower sprig","vase"),("a silver hand mirror","mirror"),("an embroidered silk palace lantern","lantern"),("a silver-mounted thread-bound book","book"),("a carved peach-wood comb in a silk case","box"),("a small silver-wire flower basket","basket"),
 ("an embroidered silk ball (tú cầu) with small silver bells","dangle"),
 ("a silver butterfly hairpin, held in the hand","dangle"),
@@ -660,7 +779,22 @@ L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered 
 ("a small potted orchid in a celadon pot","two"),
 ("a red-lacquer walking staff with a silver head","one"),
 ("a pair of agate health balls","two"),
-("a small silver hand bell with a silk tassel","dangle")],
+("a small silver hand bell with a silk tassel","dangle"),
+("a small paper kite painted like a crane, its string on a silver-trimmed reel","two"),
+("a small pellet drum (trống lắc) with a silver-banded handle","one"),
+("a sprig of fresh pear blossoms","sprig"),
+("a small silver cricket cage with a silk tassel","dangle"),
+("a silver needle case with a silk tassel","dangle"),
+("a closed silver-trimmed silk parasol with a red-lacquer handle","one"),
+("a silver perfume flask with a silk tassel","one"),
+("an embroidery hoop in a silver-banded frame with a silk scene","hoop"),
+("a silver-mounted red-agate pendant on a silk cord","dangle"),
+("a red-lacquer box with silver corners","box"),
+("a small silver hand censer with a silk tassel","one"),
+("a fly-whisk of white horsehair with a silver handle","one"),
+("a string of red-agate prayer beads with a silver tassel","dangle"),
+("a carved red-agate longevity peach","two"),
+("a thread-bound almanac in a silver-thread cover","book")],
 4:[("a round fan with a carved jade handle and jade tassel","rfan"),("a sandalwood folding fan with carved ribs","ffan"),("a lacquered jewel box","box"),("a scroll with jade rollers","scroll"),("a jade disc pendant on a silk cord","dangle"),("a silver-and-enamel hand mirror","mirror"),("a small cloisonné vase with flowers","vase"),("a gauze palace lantern with a jade pendant","lantern"),("a silver-mounted book box","box"),("a small white-jade vase with blossoms","vase"),
 ("a jade butterfly hairpin, held in the hand","dangle"),
 ("a small cricket cage of jade-trimmed bamboo","dangle"),
@@ -676,7 +810,22 @@ L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered 
 ("a small carved jade mountain on a rosewood stand","stand"),
 ("a carved jade crane on a rosewood stand","stand"),
 ("a carved jade longevity peach","two"),
-("a small jade statuette of Guanyin on a stand","stand")],
+("a small jade statuette of Guanyin on a stand","stand"),
+("an embroidered silk ball (tú cầu) with small jade tassels","dangle"),
+("a folded letter on jade-green flower paper tied with a silk cord","two"),
+("a sprig of white magnolia blossoms tied with a silk cord","sprig"),
+("an embroidered silk handkerchief with small jade corner weights","kerchief"),
+("a jade-mounted embroidered silk sachet with a tassel","dangle"),
+("an embroidery hoop in a jade-banded frame with a silk scene","hoop"),
+("a jade-handled flower basket of woven bamboo","basket"),
+("a calligraphy brush with a carved jade shaft","one"),
+("a small jade hand bell with a silk tassel","dangle"),
+("a jade-handled fly-whisk of white horsehair","one"),
+("a small jade hand censer with a silk tassel","one"),
+("a pair of jade health balls","two"),
+("a sandalwood walking staff with a jade head","one"),
+("a small potted orchid in a jade-green glazed pot","two"),
+("a string of jade prayer beads","dangle")],
 5:[("a round fan with a gold-inlaid handle and gem tassel","rfan"),("a gilded lacquer box","box"),("a painted scroll with gold fittings","scroll"),("an ivory folding fan with gold leaf","ffan"),("a cloisonné enamel vase with flowers","vase"),("a gold-and-jade hand mirror","mirror"),("a gilded silver flower basket","basket"),("a silver-gilt palace lantern with pearl tassels","lantern"),("a coral-and-pearl bead tassel ornament","dangle"),("a gold-mounted embroidered silk book","book"),
 ("a gold butterfly hairpin with gem wings, held in the hand","dangle"),
 ("a gold-thread embroidered ball (tú cầu) with a gem tassel","dangle"),
@@ -692,7 +841,22 @@ L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered 
 ("a sutra book bound in gold-thread brocade","book"),
 ("a gilded walking staff with a jade head","one"),
 ("a pair of fine-jade health balls","two"),
-("a carved fine-jade lingzhi fungus on a gilded stand","stand")],
+("a carved fine-jade lingzhi fungus on a gilded stand","stand"),
+("a folded letter on gold-flecked paper tied with a silk cord","two"),
+("a small gilded pellet drum (trống lắc) with gem tassels","one"),
+("a silk kite painted like a crane, its string on a gilded reel","two"),
+("a gold-thread embroidered sachet with a gem tassel","dangle"),
+("a gilded perfume flask set with small gems","one"),
+("a small cloisonné hand bell with a gem tassel","dangle"),
+("an embroidery hoop in a gold-banded frame with a fine silk scene","hoop"),
+("a cloisonné pendant on a gold cord","dangle"),
+("a calligraphy brush with a gilded sandalwood shaft","one"),
+("a gilded hand censer inlaid with mother-of-pearl","one"),
+("a gold-mounted fly-whisk with a fine-jade handle","one"),
+("a fine-jade longevity peach on a gilded stand","two"),
+("a small potted orchid in a cloisonné pot","two"),
+("a thread-bound almanac with gold clasps","book"),
+("a string of gold-and-jade prayer beads","dangle")],
 6:[("a white-jade ruyi","ruyi"),("a jewelled box","box"),("a round fan with a carved jade-and-gold handle and pearls","rfan"),("a gold-and-pearl hand mirror","mirror"),("a white-jade vase with gold mounts and flowers","vase"),("a pearl-embroidered silk folding fan with jade ribs","ffan"),("a carved jade incense box","box"),("a small coral branch on a gold stand","stand"),("a pearl-tasselled silk lantern with a jade top","lantern"),("a gold-mounted jade pendant on a silk cord","dangle"),
 ("a pearl-and-gold butterfly hairpin, held in the hand","dangle"),
 ("a small cricket cage of white jade and gold with a pearl tassel","dangle"),
@@ -708,9 +872,24 @@ L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered 
 ("an openwork gold incense ball with pearl tassels","dangle"),
 ("a hanging scroll of pine and cranes on pearl-embroidered silk with white-jade rollers","scroll"),
 ("a carved white-jade longevity peach on a gold stand","two"),
-("a pair of white-jade health balls","two")]}
+("a pair of white-jade health balls","two"),
+("a pearl-embroidered silk ball (tú cầu) with jade tassels","dangle"),
+("a folded letter on gold-flecked paper sealed with white jade","two"),
+("a small white-jade pellet drum (trống lắc) with pearl strings","one"),
+("an embroidery hoop in a gold-and-pearl frame with a fine silk scene","hoop"),
+("a white-jade name seal with a pearl tassel","one"),
+("a pearl-embroidered silk sachet with a jade tassel","dangle"),
+("a white-jade flower basket with gold handles","basket"),
+("a calligraphy brush with a white-jade shaft and a gold cap","one"),
+("a string of pearls and white-jade beads held as a hand ornament","dangle"),
+("a sutra book bound in pearl-embroidered silk","book"),
+("a white-jade hand bell with a pearl tassel","dangle"),
+("a fly-whisk of white horsehair with a white-jade-and-gold handle","one"),
+("a white-jade walking staff with a gold head","one"),
+("a small potted orchid in a white-jade pot","two"),
+("a carved white-jade lingzhi fungus on a gold stand","stand")]}
 # E11 (owner Lượt 583/585, IT1): +15 items appended (the first 10 unchanged, same order) -> 25; {age: 5 indices}, 25 different items per rank, adjacent ranks (t1..t8, Nữ đế, Thái hậu) never share an item kind at one age. Pick: LIST[AGE_DICT[age][(n-1)%5]].
-L3F_AGE={1:{"a18": [7, 12, 11, 5, 10], "a26": [0, 2, 4, 13, 8], "a36": [6, 16, 9, 1, 3], "a51": [19, 15, 23, 20, 17], "a65": [22, 24, 14, 18, 21]},2:{"a18": [15, 1, 10, 12, 13], "a26": [11, 16, 5, 14, 9], "a36": [0, 18, 2, 3, 19], "a51": [8, 6, 17, 4, 23], "a65": [22, 24, 20, 7, 21]},3:{"a18": [15, 10, 7, 13, 2], "a26": [11, 16, 1, 12, 17], "a36": [14, 4, 9, 5, 6], "a51": [3, 19, 23, 24, 8], "a65": [21, 20, 0, 22, 18]},4:{"a18": [13, 8, 1, 9, 10], "a26": [12, 15, 17, 14, 11], "a36": [3, 16, 20, 18, 0], "a51": [4, 19, 23, 6, 2], "a65": [7, 5, 22, 21, 24]},5:{"a18": [4, 13, 12, 11, 6], "a26": [1, 9, 10, 2, 5], "a36": [20, 15, 7, 14, 18], "a51": [17, 21, 24, 0, 16], "a65": [22, 19, 8, 3, 23]},6:{"a18": [16, 8, 5, 15, 10], "a26": [17, 11, 14, 12, 9], "a36": [1, 4, 19, 13, 20], "a51": [0, 18, 21, 24, 23], "a65": [22, 2, 7, 6, 3]}}
+L3F_AGE={1:{"a18": [7, 12, 11, 5, 10, 25, 26, 27], "a26": [0, 2, 4, 13, 8, 28, 29, 30], "a36": [6, 16, 9, 1, 3, 31, 32, 33], "a51": [19, 15, 23, 20, 17, 34, 35, 36], "a65": [22, 24, 14, 18, 21, 37, 38, 39]},2:{"a18": [15, 1, 10, 12, 13, 25, 26, 27], "a26": [11, 16, 5, 14, 9, 28, 29, 30], "a36": [0, 18, 2, 3, 19, 31, 32, 33], "a51": [8, 6, 17, 4, 23, 34, 35, 36], "a65": [22, 24, 20, 7, 21, 37, 38, 39]},3:{"a18": [15, 10, 7, 13, 2, 25, 26, 27], "a26": [11, 16, 1, 12, 17, 28, 29, 30], "a36": [14, 4, 9, 5, 6, 31, 32, 33], "a51": [3, 19, 23, 24, 8, 34, 35, 36], "a65": [21, 20, 0, 22, 18, 37, 38, 39]},4:{"a18": [13, 8, 1, 9, 10, 25, 26, 27], "a26": [12, 15, 17, 14, 11, 28, 29, 30], "a36": [3, 16, 20, 18, 0, 31, 32, 33], "a51": [4, 19, 23, 6, 2, 34, 35, 36], "a65": [7, 5, 22, 21, 24, 37, 38, 39]},5:{"a18": [4, 13, 12, 11, 6, 25, 26, 27], "a26": [1, 9, 10, 2, 5, 28, 29, 30], "a36": [20, 15, 7, 14, 18, 31, 32, 33], "a51": [17, 21, 24, 0, 16, 34, 35, 36], "a65": [22, 19, 8, 3, 23, 37, 38, 39]},6:{"a18": [16, 8, 5, 15, 10, 25, 26, 27], "a26": [17, 11, 14, 12, 9, 28, 29, 30], "a36": [1, 4, 19, 13, 20, 31, 32, 33], "a51": [0, 18, 21, 24, 23, 34, 35, 36], "a65": [22, 2, 7, 6, 3, 37, 38, 39]}}
 HAND_LOW={"rfan":"the round fan held up in one hand at chest height, gently turned to show its painting, the other hand lightly touching its tassel, body and face frontal, standing squarely facing the viewer, no turn",
 "ffan":"the folding fan half-open in one hand at waist height, her fingers spreading its ribs, the other hand resting on her sash, body and face frontal, standing squarely facing the viewer, no turn",
 "kerchief":"the handkerchief draped over the fingers of one hand, lifted gently at waist height, the other hand smoothing its edge, body and face frontal, standing squarely facing the viewer, no turn",
@@ -798,7 +977,7 @@ MAID_ROWS=[["m01", "sage green and cream", "#E8CDB5", "#CAB295"],
   ["m51", "pale mint and silver", "#C0BDAB", "#D8D0BF"],
   ["m52", "pink lilac and gold", "#CEA6A9", "#B4898E"]]
 MAID_MOT=["peonies", "plum blossoms", "lotus flowers", "orchids", "chrysanthemums", "butterflies", "cranes", "auspicious clouds", "magnolias", "begonias", "camellias", "osmanthus", "wisteria"]
-MAID_FLOWER=["a small pink silk flower","a white jasmine sprig","a small plum blossom","a little orchid","a small peach blossom","a tiny camellia"]   # mjobs.py (maid) FLW
+MAID_FLOWER=["a pink silk flower","a white jasmine sprig","a plum blossom","an orchid","a peach blossom","a camellia"]   # ROOT-54 (A21, BW6 19/11): size words dropped from the NAME ("small", "little", "tiny") -> only the F13 SZ ladder sets the size   # mjobs.py (maid) FLW
 # OWNER Lượt 603 (ROOT-51 -> BW4): m01-m52 colours = dev/art/face-common/m_colours_proposed.json (NF1, FINAL, Lượt 599 revision): main name + main hex
 # (col 3) and the outfit SECONDARY name + hex (col 4; palette = "<main> and <secondary>"). M_COLS also feeds store-all/build_all.py secondary() (name like #HEX).
 import json as _json
@@ -1031,9 +1210,24 @@ TH_ITEMS=[("a string of sandalwood prayer beads","one"),("a jade-headed dragon-h
 ("a small potted orchid in a dark glazed pot","two"),
 ("a carved old-jade lingzhi fungus on a sandalwood stand","two"),
 ("a small gilt-bronze hand bell with a silk tassel","one"),
-("a thread-bound almanac in a brocade cover","two")]
+("a thread-bound almanac in a brocade cover","two"),
+("a calligraphy brush with a sandalwood shaft","one"),
+("an old-jade name seal with a silk tassel","one"),
+("a small sachet of longevity-pattern brocade","one"),
+("a carved sandalwood comb, held in the hand","one"),
+("an embroidered silk handkerchief with longevity characters","one"),
+("a small sandalwood birdcage with its brocade cover drawn back","two"),
+("a sprig of winter plum blossoms","one"),
+("a small sandalwood wooden fish (mõ) with its striker","one"),
+("a small hand-held table screen of longevity-pattern brocade in a sandalwood frame","two"),
+("a small old-jade perfume flask with a silk tassel","one"),
+("a small woven-rattan flower basket with orchids","two"),
+("a small potted pine in an old celadon pot","two"),
+("a carved sandalwood ruyi inlaid with old jade","two"),
+("a string of old-jade prayer beads","one"),
+("a hanging scroll of pine and cranes on old silk","two")]
 # E11 (owner Lượt 583/585, IT1): +15 items appended (the first 10 unchanged, same order) -> 25; {age: 5 indices}, 25 different items per rank, adjacent ranks (t1..t8, Nữ đế, Thái hậu) never share an item kind at one age. Pick: LIST[AGE_DICT[age][(n-1)%5]].
-TH_AGE={"a18": [9, 8, 11, 21, 4], "a26": [5, 7, 13, 6, 12], "a36": [2, 14, 0, 15, 10], "a51": [20, 18, 23, 22, 1], "a65": [16, 19, 17, 24, 3]}
+TH_AGE={"a18": [9, 8, 11, 21, 4, 25, 26, 27], "a26": [5, 7, 13, 6, 12, 28, 29, 30], "a36": [2, 14, 0, 15, 10, 31, 32, 33], "a51": [20, 18, 23, 22, 1, 34, 35, 36], "a65": [16, 19, 17, 24, 3, 37, 38, 39]}
 # owner 18/11 ~22:55Z (FIGURE_GATE A0 REFERENCES): royal ranks incl. Thai hau = 3 images; image 3 = royal-yellow swatch TdwDfOyVNR
 TH_SWATCH=" Image 3 is only a colour reference for the royal yellow, never copy anything but its colour; the Empress Dowager's yellow is that royal yellow in its deep antique-gold, subdued shade as the colour rule says."
 def _pose(item,hk,right):
@@ -1177,6 +1371,7 @@ MAMA_IMG3=" Image 3 is only a costume reference for the cut, layers, embroidery 
 # Lượt 440 (owner: she sees almost everybody facing RIGHT, nobody LEFT; Lượt 321 point 4 "ANGLES: 7 + 7 mirrored = 14, rotated per person ANG[(t-1+(n-1))%14]"): the 14 STANDING ANGLES = the 7 angle sentences of dev/art/owner-copy/mk_ranks_v3.py ANG (angle part only) + their 7 mirrored versions (its _mir).
 # Only change vs that file: the two "walking STRAIGHT TOWARD the viewer" angles (3 and 10) are written as a frontal stance with the weight on one foot (the pose text of the rank already carries the action, and ranks t6+/a51+ never walk or swirl).
 # Head turns WITH the body (HEAD-BODY law); every angle is frontal or three-quarter, never back-turned, never profile.
+# E12 (BW6): entries 8 and 12 were word-identical to 5 and 1 -> rewritten with approved words: 'body turned slightly three-quarters to the {s}' (_TA_NF, approved HH words) + 'the whole face clearly visible and towards the viewer' (MAMA_ANGLE, approved Nữ đế A picture).
 ANG14=["FULLY FRONTAL, her body, shoulders and face squarely facing the viewer, no turn",
 "a SLIGHT shoulder turn to the LEFT (about 15 degrees), body almost frontal, face toward the viewer",
 "a clear THREE-QUARTER view, NOT frontal: her whole body, shoulders, hips and face turned about 45 degrees toward the viewer's RIGHT, her left shoulder nearer the viewer, face fully visible",
@@ -1185,11 +1380,11 @@ ANG14=["FULLY FRONTAL, her body, shoulders and face squarely facing the viewer, 
 "a SLIGHT shoulder turn to the RIGHT (about 15 degrees), body almost frontal, face toward the viewer",
 "a SLIGHT turn to the LEFT (about 15 degrees), body almost frontal, face toward the viewer",
 "FULLY FRONTAL, her body, shoulders and face squarely facing the viewer, no turn, mirrored: her weight and the item on her LEFT side",
-"a SLIGHT shoulder turn to the RIGHT (about 15 degrees), body almost frontal, face toward the viewer",
+"a SLIGHT turn: her body turned slightly three-quarters to the RIGHT, the whole face clearly visible and towards the viewer",
 "a clear THREE-QUARTER view, NOT frontal: her whole body, shoulders, hips and face turned about 45 degrees toward the viewer's LEFT, her right shoulder nearer the viewer, face fully visible",
 "FULLY FRONTAL, her body, shoulders and face squarely facing the viewer, her weight resting on her LEFT foot",
 "a clear THREE-QUARTER view toward the RIGHT, NOT frontal: her whole body, hips and face turned about 45 degrees to the right, her left shoulder nearer the viewer, face fully visible (never side view)",
-"a SLIGHT shoulder turn to the LEFT (about 15 degrees), body almost frontal, face toward the viewer",
+"a SLIGHT turn: her body turned slightly three-quarters to the LEFT, the whole face clearly visible and towards the viewer",
 "a SLIGHT turn to the RIGHT (about 15 degrees), body almost frontal, face toward the viewer"]
 def ang_for(c,t):
     n=int(re.sub(r"\D","",c) or 0); return ANG14[(t-1+(n-1))%14]

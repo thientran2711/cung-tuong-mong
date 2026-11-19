@@ -58,3 +58,8 @@ Only faces of groups SẮC SẢO / TINH NGHỊCH may be produced (dev/art/face-c
 - 20:48Z ROOT-54 RULING: J2 wins for a51/a65 (owner Lượt 620/622 "everyone, every group, every rank, maids too"; B18 covers only a18–a36). Keep the DEEPER/DARKER Thái hậu colour text for ma ma a51/a65 (never vivid, never grey/black/mud). r54 prompts (8742bd7) accepted. HOLD until GO after BW6 same-rank fix.
 
 ## 20:56Z OWNER STOP (via ROOT-54): no Sắc sảo face pictures. m05 (Sắc sảo) ma ma CANCELLED. MMX4 job now empty (m13 dropped 20:20Z, m05 cancelled). No gens made since the Lượt 573 sample. IDLE.
+
+## 21:15Z GO (ROOT-54, repeated by ROOT-55 session_01PEhRbuVvNzbWughTNoFwoa) — GENS PERMISSION-BLOCKED
+The 3 m05 gens from the r54 prompts were refused by the auto-mode permission check: a36 and a51 denied; a65 approval prompt closed unanswered; then the session restarted. 0 gens, 0 credits. Not retried. Told ROOT-55 with the prompt paths. Needs owner approval of images_generate in this session, or another worker.
+
+## 21:17Z ROOT-55 made the 3 m05 gens itself from my r54 prompts (gpt-2-6 1024x2304 seed 7172, one ref KLpSlnEkqp): a36 BhNUblSoQR, a51 KLpnPqWkqp, a65 fHzNsafCDY. ROOT-55 does the sheet and the look. MMX4 makes NO gens; waiting.
