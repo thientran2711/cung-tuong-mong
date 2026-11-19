@@ -17,7 +17,7 @@ STORE CHECK PASS cl-t7.txt [args: c20 v0 --t7 --spec5pose]
 STORE CHECK PASS cl-t8.txt [args: c20 v0 --spec5pose]
 STORE CHECK PASS cl-t8o.txt [args: c20 v0 --spec5pose]
 STORE CHECK PASS pt-t1.txt [args: c20 v0 --low 1 --spec5pose]
-STORE CHECK PASS pt-t2.txt [args: c20 v0 --low 2 --spec5pose]
+STORE CHECK PASS pt-t2.txt [args: c20 v0 --low 2 --spec5pose] (pose slot changed: t1 had the same pose)
 STORE CHECK PASS pt-t4.txt [args: c06 v0 --low 4 --spec5pose]
 STORE CHECK PASS pt-t5.txt [args: c06 v0 --low 5 --spec5pose]
 STORE CHECK FAIL pt-t6.txt — 2 store sentence(s) missing or rewritten:
