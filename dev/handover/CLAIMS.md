@@ -219,13 +219,13 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | REVIEW law3-cost-only r1 (sonnet SMALL) of ae218b59 | review/law3-cost-only-r1 | B | session_01N1tNP6f1q3NHgpGP4qDDsQ | LAND READY 6abe9a6f (on 7fb7c104) | 19/11 03:55Z |
 | bd-roads BIG review (opus E14r; 23278b63) | review/bd-roads | E ROOT #8 | session_01DgYSWnZE2bT1FR9J6cjqDy | RUNNING | 19/11 04:06Z |
 | CTM odds-no-unknown (opus; worker, MAIN ROOT-63 job via C-AG #20) | review/odds-no-unknown; briefs/root63-cag20-jobs.md | C-AG #20 for ROOT-63 | session_01Rc5AsN4DdpqemYGteNSCE6 | SẴN SÀNG KIỂM 7a56b2e (report reports/odds-no-unknown.md) | 19/11 05:35Z |
-| CTM hall-names (opus; worker, MAIN ROOT-63 job via C-AG #20) | review/hall-names c294e1d; briefs/root63-cag20-jobs.md | C-AG #20 for ROOT-63 | session_01Rc5AsJqjDM27hysYd7E48b | READY FOR CHECK (job was already built by E3, jhall.js on main; gaps fixed) | 19/11 05:20Z |
+| CTM hall-names (opus; worker, MAIN ROOT-63 job via C-AG #20) | review/hall-names c294e1d; briefs/root63-cag20-jobs.md | C-AG #20 for ROOT-63 | session_01Rc5AsJqjDM27hysYd7E48b | DONE — LIVE 2c5dd554 (archived 19/11 05:55Z) | 19/11 05:20Z |
 | CTM monthly-allotment (opus; worker, MAIN ROOT-63 job via C-AG #20) | review/monthly-allotment; briefs/root63-cag20-jobs.md | C-AG #20 for ROOT-63 | session_01Rc5AsNLFYkPdJUDpjgwsaU | SẴN SÀNG KIỂM 9aceea6 | 19/11 04:09Z | · SẴN SÀNG KIỂM 9aceea6 (19/11)
 | CTM minister-agents (opus; worker, MAIN ROOT-63 job via C-AG #20) | review/minister-agents; briefs/root63-cag20-jobs.md | C-AG #20 for ROOT-63 | session_01Rc5AsHjti1YnXbSGeocwni | SẴN SÀNG KIỂM 0d3f2b0b | 19/11 04:09Z |
 | coop-thin F3 (opus; bag/shop/wear/gifts; stacked on F2) | review/coop-thin-f3 | B | session_01N1tNP4NVrwK67H3DPhD9Ld | RUNNING | 19/11 04:18Z |
 | REVIEW coop-thin-f2 r1 (opus BIG) of 4dabbd46 | review/coop-thin-f2-r1 | B | session_01N1tNP6D9LFcHNTVw1PfbmV | FAIL: her walk cards lost at L7 (withSeat quiet=true silences card emitters; fix for the intent family) + resend should check buổi; merge 3db28bd8 pushed; report reports/coop-thin-f2.md "
 | ev-pic-fig event scene picture + figure scale (opus; owner bug OD 04:15Z) | review/ev-pic-fig | MAIN ROOT-63 | session_01Rc5AsLHx5NBHb8tkZaoLUU | SẴN SÀNG KIỂM 946a2900 (report reports/ev-pic-fig.md) | 19/11 05:38Z |
-| hall-names SMALL REVIEW (sonnet) | review/hall-names c294e1d | C-AG #20 for ROOT-63 | session_01Rc5AsJrdYiTbKYwJ53EVEQ | PASS aed411f | 19/11 04:31Z |
+| hall-names SMALL REVIEW (sonnet) | review/hall-names c294e1d | C-AG #20 for ROOT-63 | session_01Rc5AsJrdYiTbKYwJ53EVEQ | DONE — LIVE 2c5dd554 (archived 19/11 05:55Z) | 19/11 04:31Z |
 | monthly-allotment BIG REVIEW (opus) | review/monthly-allotment 9aceea6 | C-AG #20 for ROOT-63 | session_01Rc5AsLJxqXyKq4keVP4fuk | PASS 18a9b64c (LAND READY) | 19/11 04:32Z |
 | minister-agents BIG REVIEW (opus) | review/minister-agents 822f17c4 | C-AG #20 for ROOT-63 | session_01Rc5AsHdFbiZELj46cV3rq8 | PASS a2c6ce4e | 19/11 04:46Z |
 | MAIN ROOT-64 (opus; child of ROOT-63, depth 2) | handover HANDOVER_SESSION9 | ROOT-63 | session_01Rc5AsLZQkh3A3nV1PEQaVf | RUNNING | 19/11 04:50Z |
