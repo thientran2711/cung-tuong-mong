@@ -14,29 +14,61 @@ Colours: main + secondary = the game palette row (t8-prompt-B/build.py DATA cNN[
 | c04 | Đoan trang | 18 | long oval, high forehead, straight jaw | medium almond, clear double lids | medium, crisp even outline | three-quarter left | painting scroll (jade-green ends) | royal purple + lavender | royal purple and lavender |
 | c05 | Sắc sảo | 18 | slim diamond, sculpted cheekbones | large long almond, crisp lifted corners | full, sharp cupid's bow | three-quarter right | crane-feather fan (white) | peacock teal + dusty rose | peacock teal and gold * |
 | c06 | Tinh nghịch | 16 | short heart, apple cheeks | big round, slightly upturned | small wide, plump lower lip | straight toward viewer | clay bird whistle (sky blue) | vermilion + ivory | vermilion and ivory |
-| c07 | Tươi tắn | 17 | square-oval, smooth cheeks | large clear almond, slight lift | medium, even full | slight left (15°) | magnolia bud sprig (white) | lavender + pale pink | lavender and pale pink |
-| c08 | Dịu dàng | 16 | small round-heart | large gentle round, lowered corners | small rosy, plump lower lip, left dimple | slight right (15°) | silk drawstring pouch (sky blue) | cherry-blossom pink + pale green | cherry-blossom pink and pale green |
-| c09 | Trong trẻo | 15 | round-oval baby face, broad forehead | very large wide-set doe | small full bow | three-quarter left | fish paper lantern (coral red) | powder blue + white | powder blue and white |
-| c10 | Đoan trang | 18 | long heart, high forehead | medium-large almond, straight lower lids | small, thin even | three-quarter right | poetry album (indigo cover) | peach + cream | peach and cream |
-| c11 | Sắc sảo | 17 | elegant oval, angular jaw | large bright almond, sharp clean corners | wide medium, defined edges | straight toward viewer | round fan (deep green) | lilac + silvery grey | lilac and silver * |
-| c12 | Tinh nghịch | 15 | plump short round, tiny pointed chin | wide bright round, lifted corners | small, curled upper lip | fully frontal | paper butterfly on stick (coral red) | mint green + white | mint green and white |
-| c13 | Tươi tắn | 17 | rounded oval, full cheeks | large sparkling almond, upward tilt | wide soft, full even | slight right (15°) | cornflower bunch (blue) | apricot + cream | apricot and cream |
-| c14 | Dịu dàng | 17 | soft long oval, long rounded chin | large tender almond, drooping corners | small soft, gentle cupid's bow | three-quarter left | nandina berry sprig (red) | warm ivory cream + blue-violet | soft butter yellow and white * |
-| c15 | Trong trẻo | 16 | small oval, short chin | very large round, high clear lids | small rosy, round lower lip | three-quarter right | lotus leaf parasol (green) | coral pink + ivory | coral pink and ivory |
-| c16 | Đoan trang | 18 | wide oval, softly squared chin | calm wide-set almond | medium, defined upper lip | straight toward viewer | brush case (rose-red lacquer) | sage green + cream | sage green and cream |
-| c17 | Sắc sảo | 18 | striking heart, high cheekbones | large upturned almond | full, deep cupid's bow | fully frontal | folding fan (white, ink bamboo) | blush pink + deep teal | blush pink and pale gold * |
-| c18 | Tinh nghịch | 16 | cute oval, round full cheeks | large bright round, lifted corners | small, corners up | slight left (15°) | bamboo-dragonfly toy (jade green) | magenta rose + lilac | magenta rose and lilac |
-| c19 | Tươi tắn | 17 | soft diamond, full cheeks | large almond, lifted corners | medium full, upturned corners | three-quarter left | bamboo flute (pale green) | plum + pink | plum and pink |
-| c20 | Dịu dàng | 17 | soft round-oval, right dimple | large tender almond-round, lowered corners | small heart-shaped | three-quarter right | morning glory sprig (deep blue) | lotus pink + celadon | lotus pink and celadon |
-| c21 | Trong trẻo | 15 | small heart-round, broad forehead | large clear almond, slight down-tilt | small full, soft bow | straight toward viewer | jasmine sprig (white) | ruby + blush pink | ruby and blush pink |
-| c22 | Đoan trang | 18 | slender diamond-oval | medium almond, calm level lids | small, soft full lower lip | fully frontal | closed folding fan (pale jade) | orchid purple + pink | orchid purple and pink |
-| c23 | Sắc sảo | 18 | refined long, firm narrow jaw | large phoenix-almond, sweeping lashes | full, crisp edges | slight left (15°) | round fan (white, ink orchid) | crimson + jade green | crimson and gold * |
-| c24 | Tinh nghịch | 16 | soft-angular, squared jaw | large almond, lifted corners | wide, thin soft | slight right (15°) | spinning top (pale green) | scarlet + ivory | scarlet and ivory |
-| c25 | Tươi tắn | 16 | short oval, plump cheeks | large round-almond, upward lift | medium, full upper lip | three-quarter right | camellia twig (white) | deep cherry red + deep teal | deep cherry red and black-gold * |
-| c26 | Dịu dàng | 17 | long round, soft long chin | large dreamy round, drooping corners | small, plump rosy lower lip | straight toward viewer | lotus bud (white) | burgundy + celadon | burgundy and gold * |
-| c27 | Trong trẻo | 15 | small long-oval | large bright round, clear double lids | small, full rosy lower lip | fully frontal | forget-me-not bunch (sky blue) | cinnabar + cream | cinnabar and cream |
-| c28 | Đoan trang | 18 | rounded square, short chin | calm large almond, straight upper lids | small, neat thin | slight left (15°) | pomegranate blossom sprig (rose red) | celadon + white | celadon and white |
-| c29 | Sắc sảo | 18 | bold oval, angular cheekbones | large bright almond, crisp lids | wide full, sharp edges | slight right (15°) | folding fan (coral red) | ink blue + pale grey | ink blue and pale grey |
-| c30 | Tinh nghịch | 16 | pert round-diamond | large almond-round, upward flick | small, plump upper lip | three-quarter left | paper fox mask on stick (orange-red), held low | moonlight blue + white | moonlight blue and white |
-| c31 | Tươi tắn | 17 | soft oval, high round cheeks | large clear, lively lift | medium full soft, lifted corners | straight toward viewer | cherry blossom sprig (pink) | pale jade + silvery grey | pale jade and silver * |
-| c32 | Dịu dàng | 17 | gentle wide oval, rounded chin | large warm round, lowered corners | small full, soft bow | fully frontal | China rose (pink) | ivory + soft grey-blue | ivory and soft grey-blue |
+| c07 | Tươi tắn | 17 | square-oval, smooth cheeks | large clear almond, slight lift | medium, even full | slight left (15°) | magnolia bud sprig (white) | soft lavender like #B8A6CC + soft pale pink like #E6C4C4 | lavender and pale pink |
+| c08 | Dịu dàng | 16 | small round-heart | large gentle round, lowered corners | small rosy, plump lower lip, left dimple | slight right (15°) | silk drawstring pouch (sky blue) | soft cherry-blossom pink like #F0B9BB + pale sage green like #A9B596 | cherry-blossom pink and pale green |
+| c09 | Trong trẻo | 15 | round-oval baby face, broad forehead | very large wide-set doe | small full bow | three-quarter left | fish paper lantern (coral red) | soft powder blue like #9DB4CC + soft white like #EEEAE4 | powder blue and white |
+| c10 | Đoan trang | 18 | long heart, high forehead | medium-large almond, straight lower lids | small, thin even | three-quarter right | poetry album (indigo cover) | soft peach like #F2C6A5 + cream like #F3E2CC | peach and cream |
+| c11 | Sắc sảo | 17 | elegant oval, angular jaw | large bright almond, sharp clean corners | wide medium, defined edges | straight toward viewer | round fan (deep green) | soft lilac like #BBA5C8 + silvery grey like #B3ADB4 | lilac and silver * |
+| c12 | Tinh nghịch | 15 | plump short round, tiny pointed chin | wide bright round, lifted corners | small, curled upper lip | fully frontal | paper butterfly on stick (coral red) | soft mint green like #A8C8B4 + soft white like #EEEAE4 | mint green and white |
+| c13 | Tươi tắn | 17 | rounded oval, full cheeks | large sparkling almond, upward tilt | wide soft, full even | slight right (15°) | cornflower bunch (blue) | apricot peach like #EBA98E + cream like #F0E2CC | apricot and cream |
+| c14 | Dịu dàng | 17 | soft long oval, long rounded chin | large tender almond, drooping corners | small soft, gentle cupid's bow | three-quarter left | nandina berry sprig (red) | warm ivory cream like #EEDFC8 + muted blue-violet like #8A86B8 | soft butter yellow and white * |
+| c15 | Trong trẻo | 16 | small oval, short chin | very large round, high clear lids | small rosy, round lower lip | three-quarter right | lotus leaf parasol (green) | soft coral pink like #E0A398 + ivory like #F0E8DA | coral pink and ivory |
+| c16 | Đoan trang | 18 | wide oval, softly squared chin | calm wide-set almond | medium, defined upper lip | straight toward viewer | brush case (rose-red lacquer) | muted sage green like #9CA283 + cream like #E6DCC0 | sage green and cream |
+| c17 | Sắc sảo | 18 | striking heart, high cheekbones | large upturned almond | full, deep cupid's bow | fully frontal | folding fan (white, ink bamboo) | blush pink like #E5B3AA + muted deep teal like #4F7F7C | blush pink and pale gold * |
+| c18 | Tinh nghịch | 16 | cute oval, round full cheeks | large bright round, lifted corners | small, corners up | slight left (15°) | bamboo-dragonfly toy (jade green) | soft mauve rose like #BF868F + soft lilac-pink like #D9B5C5 | magenta rose and lilac |
+| c19 | Tươi tắn | 17 | soft diamond, full cheeks | large almond, lifted corners | medium full, upturned corners | three-quarter left | bamboo flute (pale green) | soft plum like #8E5D78 + soft pink like #E3B9B0 | plum and pink |
+| c20 | Dịu dàng | 17 | soft round-oval, right dimple | large tender almond-round, lowered corners | small heart-shaped | three-quarter right | morning glory sprig (deep blue) | soft lotus pink like #E9B5AE + soft celadon like #A9C2AE | lotus pink and celadon |
+| c21 | Trong trẻo | 15 | small heart-round, broad forehead | large clear almond, slight down-tilt | small full, soft bow | straight toward viewer | jasmine sprig (white) | soft rose red like #C9746C + blush pink like #E8B5AC | ruby and blush pink |
+| c22 | Đoan trang | 18 | slender diamond-oval | medium almond, calm level lids | small, soft full lower lip | fully frontal | closed folding fan (pale jade) | soft orchid purple like #A98AB0 + soft pink like #EBC7D0 | orchid purple and pink |
+| c23 | Sắc sảo | 18 | refined long, firm narrow jaw | large phoenix-almond, sweeping lashes | full, crisp edges | slight left (15°) | round fan (white, ink orchid) | muted crimson red like #B04F4C + soft jade green like #7FA88F | crimson and gold * |
+| c24 | Tinh nghịch | 16 | soft-angular, squared jaw | large almond, lifted corners | wide, thin soft | slight right (15°) | spinning top (pale green) | soft coral red like #D97B60 + pale blush cream like #F3D1B1 | scarlet and ivory |
+| c25 | Tươi tắn | 16 | short oval, plump cheeks | large round-almond, upward lift | medium, full upper lip | three-quarter right | camellia twig (white) | muted cherry red like #A84A52 + muted deep teal like #4C7A80 | deep cherry red and black-gold * |
+| c26 | Dịu dàng | 17 | long round, soft long chin | large dreamy round, drooping corners | small, plump rosy lower lip | straight toward viewer | lotus bud (white) | soft burgundy like #8A4A55 + soft celadon like #A9C2AE | burgundy and gold * |
+| c27 | Trong trẻo | 15 | small long-oval | large bright round, clear double lids | small, full rosy lower lip | fully frontal | forget-me-not bunch (sky blue) | terracotta coral red like #C27362 + pale cream blush like #EBCFBE | cinnabar and cream |
+| c28 | Đoan trang | 18 | rounded square, short chin | calm large almond, straight upper lids | small, neat thin | slight left (15°) | pomegranate blossom sprig (rose red) | soft celadon like #A3BFAA + soft white like #EEEAE4 | celadon and white |
+| c29 | Sắc sảo | 18 | bold oval, angular cheekbones | large bright almond, crisp lids | wide full, sharp edges | slight right (15°) | folding fan (coral red) | soft ink blue like #4E5F7E + pale grey like #C8C8CA | ink blue and pale grey |
+| c30 | Tinh nghịch | 16 | pert round-diamond | large almond-round, upward flick | small, plump upper lip | three-quarter left | paper fox mask on stick (orange-red), held low | soft moonlight blue like #A9BCD3 + soft white like #EEEAE4 | moonlight blue and white |
+| c31 | Tươi tắn | 17 | soft oval, high round cheeks | large clear, lively lift | medium full soft, lifted corners | straight toward viewer | cherry blossom sprig (pink) | pale jade like #B4CDBE + silvery grey like #B3ADB4 | pale jade and silver * |
+| c32 | Dịu dàng | 17 | gentle wide oval, rounded chin | large warm round, lowered corners | small full, soft bow | fully frontal | China rose (pink) | ivory like #EEDCCE + soft grey-blue like #A9B5C4 | ivory and soft grey-blue |
+
+## B18 neutral-tone colours c07–c32 (owner Lượt 583; c01–c06 drawn samples kept as they are)
+Every colour = name + hex + the store medium-tone sentence (build.py LOW_TONE). (o) = hex measured from her game t1 robe (build.py ORIG1).
+
+| id | old (Lượt 562) | new (B18, Lượt 583) |
+|---|---|---|
+| c07 | lavender + pale pink | soft lavender #B8A6CC + soft pale pink #E6C4C4 |
+| c08 | cherry-blossom pink + pale green | soft cherry-blossom pink #F0B9BB (o) + pale sage green #A9B596 |
+| c09 | powder blue + white | soft powder blue #9DB4CC + soft white #EEEAE4 |
+| c10 | peach + cream | soft peach #F2C6A5 (o) + cream #F3E2CC |
+| c11 | lilac + silvery grey | soft lilac #BBA5C8 + silvery grey #B3ADB4 |
+| c12 | mint green + white | soft mint green #A8C8B4 + soft white #EEEAE4 |
+| c13 | apricot + cream | apricot peach #EBA98E (o) + cream #F0E2CC |
+| c14 | warm ivory cream + blue-violet | warm ivory cream #EEDFC8 + muted blue-violet #8A86B8 |
+| c15 | coral pink + ivory | soft coral pink #E0A398 (o) + ivory #F0E8DA |
+| c16 | sage green + cream | muted sage green #9CA283 (o) + cream #E6DCC0 |
+| c17 | blush pink + deep teal | blush pink #E5B3AA + muted deep teal #4F7F7C |
+| c18 | magenta rose + lilac | soft mauve rose #BF868F (o) + soft lilac-pink #D9B5C5 |
+| c19 | plum + pink | soft plum #8E5D78 + soft pink #E3B9B0 |
+| c20 | lotus pink + celadon | soft lotus pink #E9B5AE (o) + soft celadon #A9C2AE |
+| c21 | ruby + blush pink | soft rose red #C9746C (o) + blush pink #E8B5AC |
+| c22 | orchid purple + pink | soft orchid purple #A98AB0 + soft pink #EBC7D0 |
+| c23 | crimson + jade green | muted crimson red #B04F4C + soft jade green #7FA88F |
+| c24 | scarlet + ivory | soft coral red #D97B60 (o) + pale blush cream #F3D1B1 |
+| c25 | deep cherry red + deep teal | muted cherry red #A84A52 + muted deep teal #4C7A80 |
+| c26 | burgundy + celadon | soft burgundy #8A4A55 + soft celadon #A9C2AE |
+| c27 | cinnabar + cream | terracotta coral red #C27362 (o) + pale cream blush #EBCFBE |
+| c28 | celadon + white | soft celadon #A3BFAA + soft white #EEEAE4 |
+| c29 | ink blue + pale grey | soft ink blue #4E5F7E + pale grey #C8C8CA |
+| c30 | moonlight blue + white | soft moonlight blue #A9BCD3 + soft white #EEEAE4 |
+| c31 | pale jade + silvery grey | pale jade #B4CDBE + silvery grey #B3ADB4 |
+| c32 | ivory + soft grey-blue | ivory #EEDCCE (o) + soft grey-blue #A9B5C4 |

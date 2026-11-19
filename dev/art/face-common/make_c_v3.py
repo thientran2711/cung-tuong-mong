@@ -151,18 +151,64 @@ R=[
  "mid-step, holding a pink China rose with a short stem in both hands at her chest, head tilted gently","a pink China rose","China rose (pink)"),
 ]
 
+# B18 (owner Lượt 583 via ROOT-51): c07–c32 colours = softer name + hex + the store medium-tone sentence (t8-prompt-B/build.py LOW_TONE, verbatim
+# except its trailing "; " → "."). c01–c06 = the 6 drawn samples, KEPT unchanged (owner). hex: (o) = ORIG1 measured robe hex of her game t1 figure, else chosen medium tone.
+LOW_TONE="all colours at ONE medium tone level, the same as the soft coral-red and brick-red robes of the game: medium saturation, medium lightness, neither too fresh nor too dark, never rực, never glaring, never neon, never pastel-washed, never dusty, grey, muddy or black."
+NEW={"c07":(("soft lavender","#B8A6CC"),("soft pale pink","#E6C4C4")),
+"c08":(("soft cherry-blossom pink","#F0B9BB"),("pale sage green","#A9B596")),
+"c09":(("soft powder blue","#9DB4CC"),("soft white","#EEEAE4")),
+"c10":(("soft peach","#F2C6A5"),("cream","#F3E2CC")),
+"c11":(("soft lilac","#BBA5C8"),("silvery grey","#B3ADB4")),
+"c12":(("soft mint green","#A8C8B4"),("soft white","#EEEAE4")),
+"c13":(("apricot peach","#EBA98E"),("cream","#F0E2CC")),
+"c14":(("warm ivory cream","#EEDFC8"),("muted blue-violet","#8A86B8")),
+"c15":(("soft coral pink","#E0A398"),("ivory","#F0E8DA")),
+"c16":(("muted sage green","#9CA283"),("cream","#E6DCC0")),
+"c17":(("blush pink","#E5B3AA"),("muted deep teal","#4F7F7C")),
+"c18":(("soft mauve rose","#BF868F"),("soft lilac-pink","#D9B5C5")),
+"c19":(("soft plum","#8E5D78"),("soft pink","#E3B9B0")),
+"c20":(("soft lotus pink","#E9B5AE"),("soft celadon","#A9C2AE")),
+"c21":(("soft rose red","#C9746C"),("blush pink","#E8B5AC")),
+"c22":(("soft orchid purple","#A98AB0"),("soft pink","#EBC7D0")),
+"c23":(("muted crimson red","#B04F4C"),("soft jade green","#7FA88F")),
+"c24":(("soft coral red","#D97B60"),("pale blush cream","#F3D1B1")),
+"c25":(("muted cherry red","#A84A52"),("muted deep teal","#4C7A80")),
+"c26":(("soft burgundy","#8A4A55"),("soft celadon","#A9C2AE")),
+"c27":(("terracotta coral red","#C27362"),("pale cream blush","#EBCFBE")),
+"c28":(("soft celadon","#A3BFAA"),("soft white","#EEEAE4")),
+"c29":(("soft ink blue","#4E5F7E"),("pale grey","#C8C8CA")),
+"c30":(("soft moonlight blue","#A9BCD3"),("soft white","#EEEAE4")),
+"c31":(("pale jade","#B4CDBE"),("silvery grey","#B3ADB4")),
+"c32":(("ivory","#EEDCCE"),("soft grey-blue","#A9B5C4"))}
+ORIGHEX={"c08","c10","c13","c15","c16","c18","c20","c21","c24","c27","c32"}
+OLDCOL={}
+
 CHANGED={"c01","c02","c05","c11","c14","c17","c23","c25","c26","c31"}
 pre,post=COMMON.split('{PERSON}')
 out=[]
 for i,(cid,age,face,shape,eyes,lips,hair,outfit,m,s,game,pose,item,itemshort) in enumerate(R):
     n=i+1; look=LOOKS[(n-1)%6]; ak=["FF","SL","SR","TL","TR","ST"][(n-1+(n-1)//6)%6]
+    OLDCOL[cid]=(m,s)
+    mw,sw=m,s
+    if cid in NEW:
+        (mn,mh),(sn,sh)=NEW[cid]
+        o2=outfit
+        for old,new in ((m,mn),(s,sn)):
+            if old==new: continue
+            w=old.split(' '); cands=[old.replace(' ','-'),' '.join(w[:-1])+'-'+w[-1] if len(w)>1 else old,old]
+            hit=next((c for c in cands if c in o2),None)
+            if not hit: raise SystemExit(f"colour word not found {cid} {old}")
+            nw=new.split(' ')
+            o2=o2.replace(hit,(' '.join(nw[:-1])+'-'+nw[-1] if len(nw)>1 else new) if '-' in hit else new)
+        outfit=o2; m,s=mn,sn; mw,sw=f"{mn} like {mh}",f"{sn} like {sh}"
+    tone=(" Colour tone: "+LOW_TONE) if cid in NEW else ""
     person=(f"A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about {age}. Her face: {face}. Expression: {EXPR[look]} "
-            f"Hair: glossy pure BLACK (never brown), {hair}. Outfit: {outfit}; her signature colour family {m} and {s}. {B15.format(m=m,s=s)} "
+            f"Hair: glossy pure BLACK (never brown), {hair}. Outfit: {outfit}; her signature colour family {m} and {s}. {B15.format(m=mw,s=sw)}{tone} "
             f"Pose: {pose}, {ANG[ak]}")
     if item not in pose: print('WARN item text not in pose',cid)
     full=pre+person+post
     open(os.path.join(D,f'{cid}.v3.FULL.txt'),'w').write(full)
-    out.append(f"| {cid} | {look} | {age} | {shape} | {eyes} | {lips} | {ANGN[ak]} | {itemshort} | {m} + {s} | {game}{' *' if cid in CHANGED else ''} |")
+    out.append(f"| {cid} | {look} | {age} | {shape} | {eyes} | {lips} | {ANGN[ak]} | {itemshort} | {mw} + {sw} | {game}{' *' if cid in CHANGED else ''} |")
 hdr=("# c01–c32 NEW consort thiếu nữ v3 {PERSON} lines — index (NF1, owner Lượt 562, rule K17)\n\n"
 "Old c01–c32 pictures = ARCHIVED, never a reference. Recipe = set B: COMMON_v3.txt VERBATIM with {PERSON} replaced (cNN.v3.FULL.txt), gpt-2-6 1024x2304 2k seed 7172, ONE ref M09 eIyOFEidqL, no transparentBackground, parchment bg → images_remove_background.\n"
 "Look = LOOKS[(n-1)%6] (LOOK_GROUPS.md); expression sentence copied from the m lines of that group. Angle = 6 angles rotated (no near-profile, E2). Hair = loose or half-up (F1), glossy black (D3). Outfit cross-collar/beizi (G16 no round neck) + B15 two-colour sentence verbatim (only colour names are slots). Held item colour differs from both outfit colours (B16).\n"
@@ -171,3 +217,5 @@ hdr=("# c01–c32 NEW consort thiếu nữ v3 {PERSON} lines — index (NF1, own
 "| id | look | age | face shape | eyes | lips | angle | item | outfit colours (main + secondary) | game palette row |\n|---|---|---|---|---|---|---|---|---|---|\n")
 open(os.path.join(D,'INDEX_c_v3.md'),'w').write(hdr+"\n".join(out)+"\n")
 print("wrote",len(out))
+tab=["| id | old (Lượt 562) | new (B18, Lượt 583) |","|---|---|---|"]+[f"| {c} | {OLDCOL[c][0]} + {OLDCOL[c][1]} | {NEW[c][0][0]} {NEW[c][0][1]}{' (o)' if c in ORIGHEX else ''} + {NEW[c][1][0]} {NEW[c][1][1]} |" for c in NEW]
+open(os.path.join(D,'INDEX_c_v3.md'),'a').write("\n## B18 neutral-tone colours c07–c32 (owner Lượt 583; c01–c06 drawn samples kept as they are)\nEvery colour = name + hex + the store medium-tone sentence (build.py LOW_TONE). (o) = hex measured from her game t1 robe (build.py ORIG1).\n\n"+"\n".join(tab)+"\n")
