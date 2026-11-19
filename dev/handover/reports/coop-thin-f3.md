@@ -115,3 +115,6 @@ Plan: merge review/coop-thin-f2-r2 (+ main 7fb7c104) when B says SẴN SÀNG KI�
 Conflicts: jcoopthinf host run (kept r2's TH.tapRun + F3 noRes around it), j55 tdAct gift (tdGiftGo now reads main's minister house MINC/minNs), j8 plantpick (main's `p: oddsCl(fz)` kept + plantHereGo), generated files (rebuilt by build_site.sh).
 New check "W done card": the «Xong việc: Thay y phục hay trang sức trong Tư trang» card her wear act earns shows on HER phone once, none on the host — PASS L8 and swap (was silenced by quiet before r2).
 coop-thin-f3 L8 37/37 · swap 37/38 in a 2-lane run (B1 her copy at the first act, the known first-act timing) → B1 swap alone 2/2 green.
+
+## Re-merge 2 (B ROOT-4 07:15Z): SẴN SÀNG KIỂM abb9a6a6 = 46ec7743 + review/coop-thin-f2-r2 083227d4 (E buổi step fix; only generated files conflicted, rebuilt)
+coop-thin-f3 L8 37/37 · swap 37/37 · W done card PASS both (her «Xong việc» card on her phone once, none on the host).
