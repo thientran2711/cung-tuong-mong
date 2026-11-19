@@ -815,6 +815,8 @@ def build_bdq(o="1"):
 PDATA={"nc":("dusty teal-blue and silver","oval face with soft cheeks, gentle almond eyes, softly curved brows, a small rosy mouth"),
 "bd":("deep teal-green and ivory fur","oval face with gently high cheekbones, warm round-almond eyes, softly arched brows, a small rosy mouth")}
 PTALL={"nc":"Nam Chiếu (Nanzhao, Yunnan) princess","bd":"Bắc Địch (northern steppe) princess"}
+for _k in ("bd","nc"):   # 19/11 Lượt 407: the 6 princess faces bd1-3 / nc1-3 as DATA rows (palette + face words of PDATA) so that `--state mama` works for them
+    for _j in (1,2,3): DATA[f"{_k}{_j}"]=(PDATA[_k][0].replace(" fur",""),PDATA[_k][1])
 IDENT=" From the identity reference keep ONLY her face, facial features and hairstyle colour; do NOT copy the outfit, hair ornaments or accessories of the reference, dress her in the NEW outfit below. The style reference image is only for skin, drawing style, fabric and embroidery: never copy its face, body or pose."
 TH_ITEMS=[("a string of sandalwood prayer beads","one"),("a jade-headed dragon-head staff","one"),("a thread-bound sutra book with a gold-brocade cover","two"),("a small gilded bronze hand censer","two"),("a scroll of calligraphy on yellow silk","two"),("an ivory-handled silk fan","one"),("a small white-jade ruyi","two"),("an embroidered silk prayer-bead pouch","one"),("a carved sandalwood box","two"),("a hand mirror in a bronze-and-jade frame","one")]
 # owner 18/11 ~22:55Z (FIGURE_GATE A0 REFERENCES): royal ranks incl. Thai hau = 3 images; image 3 = royal-yellow swatch TdwDfOyVNR
@@ -941,7 +943,7 @@ MAMA_HAIR=" Her hair, hairpins and hair flower come ONLY from the identity refer
 MAMA_ANGLE="her body stands with the shoulders slightly turned (between frontal and three-quarter, as in the approved Nu de A picture), the whole face clearly visible and towards the viewer; never a dead-frontal ID-photo stance, never the body sideways."   # owner Luot 229 ANGLE LAW
 MAMA_IMG3=" Image 3 is only a costume reference for the cut, layers, embroidery and accessories of the outfit; never copy its face, hair, pose or background; its front layer has ONE panel, but the text above says TWO front panels (hai tà): follow the text for the front layer."
 def build_mama(c):
-    assert c[0]=="m"; n=int(c[1:]); right=(n%2==1); pal,face=DATA[c]; main=pal.split(" and ")[0]; elder=AGE in ("a51","a65")
+    n=int(re.sub(r"\D","",c) or 0); right=(n%2==1); pal,face=DATA[c]; main=pal.split(" and ")[0]; elder=AGE in ("a51","a65")   # 19/11 Lượt 407 (ROOT-47): ma ma for EVERY person id (c01-c32, m01-m52, p01-p03, bd1-3, nc1-3), not only m*
     fw=(f" Her face: {face}." if face else " Her face and facial features exactly as in the identity reference image.")
     s=PRE+" A palace ma ma (ma ma, a senior woman of the palace staff), dignified, gracious and still beautiful."+fw+MAID_IDENT+" "+AGE_TXT[AGE]
     fk,fc=MAMA_FLOWERS[(n-1)%len(MAMA_FLOWERS)]
@@ -957,7 +959,7 @@ def build_mama(c):
     item,hk=age_item(c,"mama","an embroidered handkerchief","one")
     s+=MAMA_HAIR+_pose(item,hk,right)+CLOSE
     _fr=" body and face frontal, standing squarely facing the viewer, no turn."
-    assert s.count(_fr)==1,"PRE frontal sentence"   # F4b-4 (ROOT-40): MAMA_ANGLE (invented) dropped -> the final __main__ angle pass gives the copied Nữ đế A / HH B wording, same as every path
+    assert s.count(_fr)>=1,"PRE frontal sentence"   # >=1: some item hand clauses (basket, vase...) end with the same phrase   # F4b-4 (ROOT-40): MAMA_ANGLE (invented) dropped -> the final __main__ angle pass gives the copied Nữ đế A / HH B wording, same as every path
     return s+MAMA_IMG3+END
 MAID_IDENT=IDENT.replace("and hairstyle colour","her own hairstyle (the same at every rank) and hair colour",1)
 TM_FADED=["grey-blue","light indigo","earth brown"]
