@@ -11,7 +11,7 @@
        pointer-events none, removed when the lean ends or the seal leaves the screen. No file = no layer. Nothing is drawn in code (no code-drawn tears / smoke).
    KEYS: the seal map holds khoc + hon too (names "Khóc", "Hờn"); the mood logic (jemo EMO) decides when a person is in one — until then they never appear. ===== */
 window.KIT_EMOSEAL=window.KIT_EMOSEAL||{keys:{vui:{m:"sway",d:2.8},binh:{m:"nod",d:3.0},buon:{m:"droop",d:3.6},gian:{m:"shake",d:2.0},so:{m:"tremble",d:2.4},ghen:{m:"flicker",d:3.0},lo:{m:"bob",d:2.8},dau:{m:"wince",d:2.8},muu:{m:"glint",d:3.0},an:{m:"nod",d:3.0},khoc:{m:"droop",d:3.6,name:"Khóc"},hon:{m:"flicker",d:3.0,name:"Hờn"},chanh:{m:"flicker",d:3.0},phanno:{m:"shake",d:2.0},runso:{m:"tremble",d:2.4},matngu:{m:"droop",d:3.6},tutin:{m:"nod",d:3.0},hanghai:{m:"bob",d:2.8},tinhtu:{m:"sway",d:2.8},chuyentam:{m:"nod",d:3.0},hungkhoi:{m:"glint",d:3.0},tinhnghich:{m:"bob",d:2.8},hothen:{m:"droop",d:3.6},chan:{m:"droop",d:3.6},khochiu:{m:"flicker",d:3.0},choang:{m:"wince",d:2.8}},
- defaultMotion:"nod",defaultDur:3.0,idle:{deg:.6,per:[8,11]},lean:{stage:"img.kfseal",panel:"#modal,.krbox,.kmov,.dlg",deny:"header.hud,.hud",head:{f:.2,panel:.1},margin:.16,marginPx:4,grow:.5,shrink:1.8,holdMin:5,loops:2,min:4,max:8,gap:1.2,z:9990},animKey:{gian:"gian",phanno:"gian",khoc:"khoc",buon:"khoc"},anim:"img/kit/emo-anim/",fx:"img/kit/emo-fx/",fxSpec:{khoc:{w:.24,x:.14,y:.52,m:"fall"},gian:{w:.3,x:.7,y:.0,m:"rise"},def:{w:.26,x:.66,y:.5,m:"rise"}}};
+ defaultMotion:"nod",defaultDur:3.0,idle:{deg:.6,per:[8,11]},lean:{stage:"img.kfseal",panel:"#modal,.krbox,.kmov,.dlg",deny:"header.hud,.hud",head:{f:.2,panel:.1},margin:.16,marginPx:4,grow:.5,shrink:1.8,holdMin:3,loops:0,open:".ksz3",openDelay:.7,parts:{out:"-out",back:"-back"},min:4,max:8,gap:1.2,z:9990},animKey:{gian:"gian",phanno:"gian",khoc:"khoc",buon:"khoc"},anim:"img/kit/emo-anim/",fx:"img/kit/emo-fx/",fxSpec:{khoc:{w:.24,x:.14,y:.52,m:"fall"},gian:{w:.3,x:.7,y:.0,m:"rise"},def:{w:.26,x:.66,y:.5,m:"rise"}}};
 const KES_HAVE={};/* url -> true | false | "wait" (probe result) */
 function kesProbe(url,cb){const h=KES_HAVE[url];if(h===true||h===false){cb(h);return}
  if(h&&h.w){h.w.push(cb);return}const e={w:[cb]};KES_HAVE[url]=e;const im=new Image();const done=ok=>{KES_HAVE[url]=ok;e.w.forEach(f=>{try{f(ok)}catch(x){}})};im.onload=()=>done(true);im.onerror=()=>done(false);im.src=url}
@@ -26,15 +26,17 @@ function kesR(a,b){return a+Math.random()*(b-a)}
 function kesSpec(k){return KIT_EMOSEAL.keys[k]||KIT_EMOSEAL.keys[k.replace(/^act-/,"")]}
 /* LEAN-IN (owner 19/11 ~06:55Z): the seal is still while small. Every few seconds ONE seal (global stagger) is lifted onto a fixed overlay clone `img.kemo-big` (above every UI, never clipped by a frame,
    clamped inside the screen), POPS OUT FAST (lean.grow = .5 s) to the size of that person's HEAD on the stage (never bigger, kesHead = ONE relative frame), HOLDS while the feeling's motion / painted loop plays n times (n x keys[k].d s,
-   at least lean.holdMin s AND lean.loops loops), SHRINKS back SLOWLY (lean.shrink = 1.8 s) onto the still seal. Envelope = CSS `scale`/`translate` (keyframes kemoGrow, kemoShrink), feeling motion = `transform`
+   lean.holdMin = 3 s), SHRINKS back SLOWLY (lean.shrink = 1.8 s) onto the still seal. Envelope = CSS `scale`/`translate` (keyframes kemoGrow, kemoShrink), feeling motion = `transform`
    (kemoL-<m>, one loop = keys[k].d). Numbers all in KIT_EMOSEAL. */
 let kesCur=null,kesLastEnd=0;
-function kesLeanEnd(el){if(el.__lt){clearTimeout(el.__lt);el.__lt=0}if(el.__lw){clearInterval(el.__lw);el.__lw=0}el.classList.remove("kemo-lean");const c=el.__big;if(c){c.remove();el.__big=null}
+function kesLeanEnd(el){if(el.__lt){clearTimeout(el.__lt);el.__lt=0}if(el.__lw){clearInterval(el.__lw);el.__lw=0}el.classList.remove("kemo-lean");const c=el.__big;if(c){(c.__w||[]).forEach(clearTimeout);c.remove();el.__big=null}
  const still=el.dataset.kemos;if(still&&el.getAttribute("src")!==still)el.setAttribute("src",still);kesFxOff(el);if(kesCur===el){kesCur=null;kesLastEnd=performance.now()}}
 /* SCOPE (owner 19/11 ~06:25Z): only a seal beside a figure ON THE STAGE (lean.stage = jfigseal head seals: room / Dư đồ / place stages) leans, plus a seal inside a tab / panel she has opened (lean.panel);
    every avatar / portrait frame (top-bar pcPort, lists, cards) is ALWAYS STILL: no lean, no idle sway. Never inside the top bar (lean.deny). */
 function kesCan(el){const L=KIT_EMOSEAL.lean;try{if(el.closest(L.deny))return false;return el.matches(L.stage)||!!el.closest(L.panel)}catch(e){return false}}
-function kesSchedule(el){if(el.__ln)clearTimeout(el.__ln);const L=KIT_EMOSEAL.lean;el.__ln=setTimeout(()=>kesLean(el),kesR(L.min,L.max)*1000)}
+/* EVENT DIALOG (owner 19/11 ~07:25Z): a seal inside lean.open (the event / person dialog .ksz3) leans ONCE each time the dialog opens (lean.openDelay s after the seal shows, then still); stage / panel seals keep the random lean every min..max s. */
+function kesOpenRoot(el){try{return el.closest(KIT_EMOSEAL.lean.open)}catch(e){return null}}
+function kesSchedule(el){if(el.__ln)clearTimeout(el.__ln);const L=KIT_EMOSEAL.lean,root=kesOpenRoot(el);if(root){if(root.__kl)return;el.__ln=setTimeout(()=>kesLean(el,true),L.openDelay*1000);return}/* a dialog opening takes the stage at once (ends a running stage lean) */el.__ln=setTimeout(()=>kesLean(el),kesR(L.min,L.max)*1000)}
 /* HEAD FRAME (owner 19/11 ~07:10Z, canon overwrite: NO per-figure measuring): ONE relative frame = lean.head.f x the stage's standard figure height (stage dataset kmlH = the one body height of the stage, the same value the
    head markers use; one typical figure's head as a fraction of its body, measured once, stored as data). The same for every seal; a seal outside a stage (panel / dialog) = lean.head.f x the dialog figure height, else lean.head.panel x the short screen side. */
 function kesHead(el,r){const L=KIT_EMOSEAL.lean.head;let H=0;try{const st=(el.__fig&&el.__fig.closest("#stage"))||(el.closest&&el.closest("#stage"));if(st){const h0=+st.dataset.kmlH,sc=st.offsetHeight?st.getBoundingClientRect().height/st.offsetHeight:1;if(h0>20)H=h0*sc}
@@ -44,10 +46,10 @@ function kesLean(el,force){el.__ln=0;if(!el.isConnected||!el.classList.contains(
  const L=KIT_EMOSEAL.lean,now=performance.now();
  if(!force&&((kesCur&&kesCur!==el&&kesCur.isConnected&&kesCur.classList.contains("kemo-lean"))||kesLastEnd+L.gap*1000>now)){/* stagger: never two seals leaning together, next only after the previous one fully ended + gap */
   el.__ln=setTimeout(()=>kesLean(el),Math.max(300,kesLastEnd+L.gap*1000-now)+kesR(100,900));return}
- if(kesCur&&kesCur!==el)kesLeanEnd(kesCur);
+ if(kesCur&&kesCur!==el){const pv=kesCur;kesLeanEnd(pv);kesSchedule(pv)}/* forced (dialog opening): the cut stage seal is scheduled again */
  const r=el.getBoundingClientRect();if(r.width<2||r.bottom<=0||r.top>=innerHeight||r.right<=0||r.left>=innerWidth){kesSchedule(el);return}
- kesCur=el;const k=kesKey(el),spec=kesSpec(k),d=(spec&&spec.d)||KIT_EMOSEAL.defaultDur,still=el.dataset.kemos;
- const n=Math.max(L.loops,Math.ceil(L.holdMin/d)),hold=n*d,tot=L.grow+hold+L.shrink;
+ kesCur=el;{const rt=kesOpenRoot(el);if(rt)rt.__kl=1}const k=kesKey(el),spec=kesSpec(k),d=(spec&&spec.d)||KIT_EMOSEAL.defaultDur,still=el.dataset.kemos;
+ const n=+Math.max(L.loops,L.holdMin/d).toFixed(3),hold=n*d,/* hold = holdMin s exactly (n may be a fraction of a loop) */tot=L.grow+hold+L.shrink;
  const hp=kesHead(el,r),S=Math.max(1,hp/Math.max(r.width,r.height));/* big size = THE HEAD of that person on the stage (owner 19/11 ~06:55Z), never bigger */
  const bw=r.width*S,bh=r.height*S,/* big box never past the head, nor the screen */m=Math.round(Math.max(bw,bh)*L.margin)+L.marginPx,/* margin = room for the feeling motion (shake / sway amplitude) */ cx=r.left+r.width/2,cy=r.top+r.height/2;
  const bl=Math.max(m,Math.min(cx-bw/2,innerWidth-bw-m)),bt=Math.max(m,Math.min(cy-bh/2,innerHeight-bh-m));/* clamped inside the screen */
@@ -56,7 +58,9 @@ function kesLean(el,force){el.__ln=0;if(!el.isConnected||!el.classList.contains(
   `--kb-dx:${(cx-(bl+bw/2)).toFixed(1)}px;--kb-dy:${(cy-(bt+bh/2)).toFixed(1)}px;--kb-s:${(1/S).toFixed(4)};--kb-ss:${L.shrink}s;--kb-sd:${(L.grow+hold).toFixed(2)}s;--kb-d:${d}s;--kb-n:${n};--kb-gs:${L.grow}s`;
  document.body.appendChild(c);el.__big=c;el.classList.add("kemo-lean");
  const set=kesSet(el,k),ak=KIT_EMOSEAL.animKey[k]||k;
- kesProbe(KIT_EMOSEAL.anim+set+ak+".webp",ok=>{if(ok&&el.isConnected&&el.__big===c){c.src=KIT_EMOSEAL.anim+set+ak+".webp";c.classList.add("kemo-played")}});/* the painted loop (Foreman C) plays on the big seal; no loop file for this feeling = the still + its CSS motion */
+ kesProbe(KIT_EMOSEAL.anim+set+ak+".webp",ok=>{if(ok&&el.isConnected&&el.__big===c){const A=KIT_EMOSEAL.anim+set+ak,P=L.parts,u=x=>A+(P[x]||"")+".webp";c.src=A+".webp";c.classList.add("kemo-played");
+  /* 3-part set (Foreman C later): <k>-out.webp (burst out, plays while it pops out) -> <k>.webp (loop, the hold) -> <k>-back.webp (return to still, plays while it shrinks); parts that do not exist = the single loop */
+  kesProbe(u("out"),o=>kesProbe(u("back"),b=>{if(!o||!b||!c.isConnected||el.__big!==c)return;c.src=u("out");c.__w=[setTimeout(()=>{if(c.isConnected)c.src=A+".webp"},L.grow*1000),setTimeout(()=>{if(c.isConnected)c.src=u("back")},(L.grow+hold)*1000)]}))}});/* the painted loop (Foreman C) plays on the big seal; no loop file for this feeling = the still + its CSS motion */
  kesProbe(KIT_EMOSEAL.fx+ak+".webp",ok=>{if(!ok||!el.isConnected||el.__big!==c||el.__fx)return;
   const f=document.createElement("img");f.className="kemofx kemofx-"+ak;f.alt="";f.setAttribute("aria-hidden","true");f.src=KIT_EMOSEAL.fx+ak+".webp";f.onerror=()=>f.remove();
   const X=KIT_EMOSEAL.fxSpec[ak]||KIT_EMOSEAL.fxSpec.def,fw=bw*X.w,fl=bl+bw*X.x,ft=bt+bh*X.y;f.classList.add("kemofx-"+X.m);/* small effect sprite on the big seal (cheek / head corner), grows + shrinks with it (own envelope origin) */

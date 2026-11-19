@@ -31,6 +31,11 @@ async function open(b,dpr,rec){const ctx=await b.newContext({viewport:{width:W,h
   /* the recording starts when the page opens; trim the load part (page open -> game drawn) with ffmpeg: keep the last SECS+1 s */
   cp.execFileSync('ffprobe',['-v','error','-show_entries','format=duration','-of','csv=p=0',`${OUT}/raw-${SZ}.webm`]);const dur=+cp.execFileSync('ffprobe',['-v','error','-show_entries','format=duration','-of','csv=p=0',`${OUT}/raw-${SZ}.webm`]).toString();
   cp.execFileSync('ffmpeg',['-y','-loglevel','error','-ss',String(Math.max(0,dur-SECS-1.5)),'-i',`${OUT}/raw-${SZ}.webm`,'-an','-c:v','libx264','-pix_fmt','yuv420p','-crf','23','-preset','fast',`${OUT}/full-${SZ}.mp4`])}
+ /* seal-lean-3 (owner 19/11 ~07:25Z): the EVENT DIALOG take: every opening of the event dialog (.ksz3) plays the seal lean once; recorded full screen, dialog opened at the START of the kept part */
+ {const {ctx,p,errs}=await open(b,1,true);await p.evaluate(()=>{window.__T0=performance.now()});await p.waitForTimeout(1500);const t0=Date.now();await p.evaluate(()=>{try{kitPopSample('event')}catch(e){console.error(e)}});await p.waitForTimeout(11000);
+  log.event=await p.evaluate(()=>window.__L.filter(l=>l.end).map(l=>({secs:+((l.end-l.t)/1e3).toFixed(1),bigPx:Math.round(l.maxW)})));log.errsE=errs;const v=p.video();await ctx.close();await v.saveAs(`${OUT}/rawe-${SZ}.webm`);
+  const dur=+cp.execFileSync('ffprobe',['-v','error','-show_entries','format=duration','-of','csv=p=0',`${OUT}/rawe-${SZ}.webm`]).toString();
+  cp.execFileSync('ffmpeg',['-y','-loglevel','error','-ss',String(Math.max(0,dur-13.5)),'-i',`${OUT}/rawe-${SZ}.webm`,'-an','-c:v','libx264','-pix_fmt','yuv420p','-crf','23','-preset','fast',`${OUT}/event-${SZ}.mp4`])}
  {const {ctx,p,errs}=await open(b,2,false);log.forced=[];
   for(const key of (process.env.KEYS||'gian,buon,vui,binh').split(',')){
    const info=await p.evaluate(key=>{const vis=[...document.querySelectorAll('img.kfseal.kemo-live')].filter(e=>{const r=e.getBoundingClientRect();return r.width>2&&r.top>0&&r.bottom<innerHeight});if(!vis.length)return null;
