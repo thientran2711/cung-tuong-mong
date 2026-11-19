@@ -25,7 +25,7 @@ NOTGIFT=[(r"nến đỏ cháy đến canh tư","NIGHTS: dead data, never shown")
  (r"bát chè tổ yến|canh hạt sen","food eaten on the spot"),(r"Bức họa Thái hậu ban","an old gift being damaged"),(r"Phát áo bông cho cung nhân|Áo cờ hậu cung gửi ra ải","she gives to others"),
  (r"Sứ thần tặng một cây đàn lạ, ngài muốn","the Emperor's (only option 'Xin giữ' gives it: TABLE)"),(r"Ngươi có được hộp Ngọc dung cao","bought and used at once (scar cured)"),(r"chim họa mi|con vẹt|con công|đầu bếp","a live animal / a person, not a chest item"),
  (r"xin gửi cho ta tấm áo bông","a request from someone else"),(r"vải sa ra","craft output (real item, jveil)"),(r"Hai chị em thỉnh thoảng gửi nhau","story narration between others"),
- (r"Ngươi gửi thư và quà|h54GainTxt|y phục Nam Chiếu|gửi ít quà về cho mẹ|Không nhận túi thơm|mượn danh ngươi gửi|Mẹ gửi vào rương sách","not a gift to her (wording)"),(r"gửi quà: ‘Nghe nói cha","the gift is silver (option: Bạc +60)"),(r"Đồ phát là vật phẩm thật|Hàng kém Nội vụ phủ phát","item / rule descriptions (jstip)")]
+ (r"Ngươi gửi thư và quà|h54GainTxt|y phục Cao Ly|gửi ít quà về cho mẹ|Không nhận túi thơm|mượn danh ngươi gửi|Mẹ gửi vào rương sách","not a gift to her (wording)"),(r"gửi quà: ‘Nghe nói cha","the gift is silver (option: Bạc +60)"),(r"Đồ phát là vật phẩm thật|Hàng kém Nội vụ phủ phát","item / rule descriptions (jstip)")]
 TABLE=[]
 try:
   J=open(D+'jstip.js',encoding='utf-8').read()

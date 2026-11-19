@@ -1,5 +1,7 @@
 /* bd-batu-switch (review/bd-roads, Ba Tư rewrite; Foreman E 19/11 06:50Z): ONE per-life switch (bdTxt / bdCountry in jrd_bd.js).
    (1) an OLD bd life (road bd_hoa/ngua/tuc/hoang) reads Bắc Địch everywhere: origin card, story, quest, lore, home phase, tokens, its chapters;
+   (4) Cao Ly (review/caoly-road, nc renamed in place) and Ba Tư hold together in one build: an nc life reads Cao Ly ({land}, {kha}, KC2LAND.nc, OI_SELT envoy),
+       no Ba Tư / Nam Chiếu word; the selection line names the envoy by country for old bd (Bắc Địch) / new bd (Ba Tư) / nc (Cao Ly);
    (2) a NEW bd life (a real start(), road one of bd_san/bd_soi/bd_tuyet/bd_hen) reads Ba Tư everywhere, and no steppe word is left in any
        text of its road (.4–.11 + rares, every text function evaluated); (3) 0 page errors.
    usage: node dev/test/bd-batu-switch.js <url of dev/index.html> */
@@ -31,6 +33,10 @@ const {chromium}=require('playwright');const URL=process.argv[2];
     if(typeof x==='object'&&x.B)for(const bk in x.B)walk(x.B[bk],where+'.'+bk,d+1)};
    for(const id of ids)if(ARC67[id])walk(ARC67[id],id,0);
    for(const d of (typeof RD97L!=='undefined'?RD97L:[]).concat(typeof BD97!=='undefined'?BD97:[]))if(String(d.a).indexOf(r)===0)walk({t:d.t,n:d.n,tag:d.tag,ti:d.ti},'rare '+d.a,0)}
+  /* (4) Cao Ly beside Ba Tư */
+  const sel=()=>typeof OI_SELT==='object'&&OI_SELT.nc?OI_SELT.nc():'';
+  S.st.f14.road='bd_san';out.selNew=sel();S.st.f14.road='bd_hoa';out.selOld=sel();
+  S.origin.k='nc';S.st.f14.road='nc_su';out.nc={land:fill67('{land}',A),kha:fill67('{kha}',A),kc:typeof KC2LAND==='object'?JSON.stringify(KC2LAND.nc):'',sel:sel()};
   return out});
  const bad=[];const has=(o,re)=>Object.entries(o).filter(([k,v])=>!re.test(v)).map(([k])=>k);
  const oldNo=has(R.old,/Bắc Địch|Khả hãn|Khả đôn|Phụ hãn|thảo nguyên|hãn/);const oldBt=Object.entries(R.old).filter(([k,v])=>/Ba Tư|Tô Lận|lửa thánh/.test(v)).map(([k])=>k);
@@ -39,6 +45,10 @@ const {chromium}=require('playwright');const URL=process.argv[2];
  console.log('(1) OLD life rows:',Object.keys(R.old).length,'· with Ba Tư words',oldBt.length,oldBt.join(',')||'', '· old chapter text:',R.oldCh.slice(0,60));
  console.log('(2) NEW life rows:',Object.keys(R.neu).length,'· with Bắc Địch words',neuBd.length,neuBd.join(',')||'','· {land}={pv}/{mh}:',R.neu['{land}'],R.neu['{pv}'],R.neu['{mh}']);
  console.log('    road texts checked',R.nTxt,'· steppe words left',R.left.length);R.left.slice(0,+process.env.SHOW||20).forEach(s=>console.log('     '+s));
+ const nc=R.nc;const ncBad=[];if(nc.land!=='Cao Ly')ncBad.push('{land}='+nc.land);if(!nc.kha||/\{kha\}/.test(nc.kha))ncBad.push('{kha}='+nc.kha);
+ for(const [k,v] of Object.entries(nc))if(/Ba Tư|Tô Lận|Nam Chiếu|Bắc Địch/.test(v))ncBad.push(k+': '+v.match(/Ba Tư|Tô Lận|Nam Chiếu|Bắc Địch/)[0]);
+ if(!/Cao Ly/.test(nc.sel))ncBad.push('sel nc no Cao Ly');if(!/Ba Tư/.test(R.selNew))ncBad.push('sel new bd no Ba Tư');if(!/Bắc Địch/.test(R.selOld))ncBad.push('sel old bd no Bắc Địch');
+ console.log('(4) Cao Ly + Ba Tư: nc {land}',nc.land,'{kha}',nc.kha,'· faults',ncBad.length,ncBad.join(' / '));
  console.log('(3) page errors',errs.length,errs.slice(0,3).join(' / '));
- const ok=!oldBt.length&&!neuBd.length&&!R.left.length&&!errs.length&&R.old['{land}']==='Bắc Địch'&&R.neu['{land}']==='Ba Tư';
+ const ok=!ncBad.length&&!oldBt.length&&!neuBd.length&&!R.left.length&&!errs.length&&R.old['{land}']==='Bắc Địch'&&R.neu['{land}']==='Ba Tư';
  console.log(ok?'PASS':'FAIL');await b.close();process.exit(ok?0:1)})();
