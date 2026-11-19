@@ -71,3 +71,63 @@ Rebalance round (family fix, 20059020): run 1 showed cruel lives aimed at ch_ho_
 | **all** | 66 | 66 | 2.99 | **2.07 IN** | **1.00 IN** | **0.98 IN** | 87/132 |
 cnv_chu won 1/12 on 20059020: blocked by the Tai mắt gate 3 (cung nữ lives reach 0–2) → gate 2 on cnv_chu_1/4; on cb72b507 3/12 (the rest blocked by {mis} → ngươi, a road-driven relation, same rule as pilot cnv_mat_4). inChar / rand bots not run (same as W1 / W2; the odds-cap note stays FOR E).
 Machine note: chromium pages grow to ~6 GB over a few lives; with 3 pages the container ran out of memory and restarted twice — run the measure with 1 page per road process (≈2.5 min per life).
+
+## §ROUND 2 — E11d (opus, successor of E11c; worker under Foreman E, now E #12 session_01DgYSWoiPTxVs5xQni4RvZw)
+PRIORITY #1 CHECK ('ge-writers-w3 r2'): review/ge-writers-w3 @ cb72b507 (FAIL r1, review handover 4ffa6e8) | W1 + W2 LIVE on main | claims E11c → E11d | reviewer E11r-w3 session_01DgYSWn2u8M4jdAipxwpiJf. Reused: the r1 review's object list, E11c's family scan, the existing fo term ["e",n,tag] (no new engine term).
+LINEAGE: E11d · session_01DgYSWogWMATZVoosS7SFEk · START_CTX ~3 % (get_session reads 0; own estimate, window 1M). 18 LAWS read first.
+
+### Merge
+- origin/main 2c5dd55 (W2 live) merged into the branch: assemble.py = main's list + `jgedata_w3.js` right after `jgedata_w2.js` (order …w1, w2, w3, jge.js); jbalge.js gate / fail / rw = W2 rows then W3 rows (gate 144 / fail 144 / rw 144 + mul); ge-engine.js keeps the W3 shading-check line; index.html / sw.js rebuilt. FINAL merge of the newest LIVE main: see the end of this section.
+
+### Fix 1 — law 6c, objects the road can take away (whole family: every object / possession / held secret in t / a / ht / ha / ft of all 44 W3 endings, checked against A.f.* flags, chapter end tags and option rt / rf that move or burn a thing)
+| ending | object | road source that takes it | before | after |
+|---|---|---|---|---|
+| ch_bi_1 | lá thư cũ | .4 «Đốt ngay», ch11 «Đốt trước mặt bà / Đốt trước bài vị cô mẫu / Trả về / Gửi về cho họ Lâm» (lgone=1) | t «Ngươi không đốt lá thư cũ…», a «đem lá thư cũ ra trước triều, từng chữ, từng nhân chứng» | t «Ngươi không đem chuyện năm xưa ra làm nhục ai…», a «đem chuyện năm xưa ra trước triều, từng lời, từng tên người đã nhúng tay» (her knowledge, true in every life) |
+| ch_bi_2 | lá thư cũ (in a locked tráp) | same | all five burn / return options are Khóa | unchanged (already right) |
+| ch_bi_3 | lá thư cũ | same; its pull held «Đốt trước mặt bà» | t «Ngươi đặt lá thư cũ trước mặt hai mẹ con», ft «Lá thư cũ đến tay Hoàng thượng» | t «Ngươi kể trọn chuyện năm xưa trước mặt hai mẹ con», ft «Chuyện năm xưa đến tai Hoàng thượng» — «Đốt trước mặt bà» now fits (she burns it before the Thái hậu and tells the son) |
+| ch_bi_4 | lá thư cũ / tráp | same | a «ngươi mở chiếc tráp giữ lá thư cũ», ft «người cầm trong tay bí mật» | a «ngươi chỉ khẽ nhắc rằng mình biết chuyện năm xưa của Đức Thọ cung», ft «người biết bí mật» |
+| ch_benh_2 | bã thuốc | ch7 mid «Nghi mà chưa có chứng» / lose «Bị vu là kẻ đổi thuốc» | fo [] | fo [["e",7,"mid|lose"]] (existing term; the ending is about holding the residue) |
+| ch_ho_3 | ấn riêng Đức Thọ cung | ch10 lose: the other niece takes the seal | t «…ấn riêng Đức Thọ cung, cả những lá thư nhà» | t «…việc lớn nhỏ của nhà ngoại, cả những lá thư nhà» |
+| thd_sach_4 | bản thảo cha gửi vào cung | ch5 «Dâng quyển hạ cho Hàn lâm viện khắc» (given away), ch5 lose / rf (draft held by others) | a «mang theo bản thảo cha gửi vào cung», t «những quyển ‘Trị quốc sách’ cha chép tay» | a «mang theo bộ ‘Trị quốc sách’ ngươi tự chép lại», t «những quyển ‘Trị quốc sách’ chép tay» (a copy exists in every life: ch11 lose keeps «một bản chép tay», mid «học trò vẫn chép tay») |
+| cnv_ban_4 | chiếc vòng ngọc | ch5: the real bracelet went through Phúc An / a pawn shop | t «một chiếc vòng ngọc chưa ai lấy» (false: someone did) | t «một chiếc vòng ngọc nàng chưa từng lấy» |
+| cnv_ban_3 | (person) Xuân Đào in the palace | ch11 mid: she goes home | t «…được người trong cung gọi bằng nghề» | «…được nhớ đến bằng nghề» |
+Checked and left (true in every life or the ending's own effect): ch_co (chuỗi tràng hạt of ch_co_4 = her own, tai mắt, bàn cờ), ch_benh_1/3/4 (tủ thuốc, ấn hiệp lý = effect, thang thuốc), ch_ho_1/2/4, ch_bi_2, thd_tho (tập Ngự tuyển ch11 both, tập thơ của ch_tho_3 = effect), thd_sach_1/2/3 (‘Trị quốc sách’: some copy survives every outcome), thd_tro (dấu son = evidence, kho Lễ bộ), thd_hoc_3 (rương sách = effect, sách bị xin cấm ch9 x1), cnv_chu (gói xạ hương = knowledge, ch5 x1 every life), cnv_ma (sổ Nội vụ phủ = effect, hộp ấn of cnv_ma_4 = effect, rương đồ cũ = effect). 9 endings changed, 35 checked unchanged.
+
+### Fix 2 — law 6b, thd_hoc_1 / 2 / 4 crowned {n1} (who can be a daughter or dead)
+No new engine term (as briefed). The heir is now the ending's own effect (like cnv_ma_4, which r1 accepted); {n1} «người học trò nhỏ» is no longer named in any crown text or fail text:
+| ending | before | after |
+|---|---|---|
+| thd_hoc_1 | t/a «Người học trò nhỏ năm nào… nay ngồi trên ngai»; ft «Người học trò năm xưa lớn lên» | t «Tiếng dạy chữ của ngươi… khi Đông cung cần thầy, Hoàng thượng chọn ngươi. Người học trò ấy về sau lên ngôi…»; a «Hoàng thượng giao ngươi dạy chữ cho Đông cung…»; ht/ha «dạy chữ cho Đông cung…»; ft «Đông cung có thầy mới, triều đình có người mới» |
+| thd_hoc_2 | t/a «tâu tên người học trò nhỏ (từng ôm chân ngươi)» lên ngôi | t «tâu tên vị hoàng tử mà ngươi tin sẽ biết thương dân», a «tâu tên một hoàng tử còn nhỏ, đủ nhỏ để ngoảnh lại tìm thầy»; ht/ha «một hoàng tử» |
+| thd_hoc_4 | t/a «lập người học trò nhỏ làm Thái tử»; ft «Đứa trẻ năm nào từng ôm chân ngươi nay đi ngang…» (false if dead) | t «Hoàng thượng lập Thái tử, rồi giao Đông cung cho ngươi… vì cả Thượng thư phòng nhớ cách ngươi dạy trẻ»; a «Thái tử được lập…»; ft «Việc trông nom Đông cung được giao cho người khác. Thái tử đi ngang cung ngươi…» |
+Family scan for crowning / seating a cast person in all 44: only these three (r1 agrees); ch_bi_4 / ch_co_1 crown her own son (cond son). FOR E (wanted term, not built): «{n1} alive son» — with it the three could name the pupil again.
+
+### Fix 3 (found by the re-measure) — shading of ác-heavy / thiện-heavy Chuỗi (whole family)
+Run 1 of the re-measure: cnv_chu kind→thiện .67 (kind lives aimed at cnv_chu_1, Chuỗi +5 thiện / −18 ác, read ác). E11c's rule was one-way (thiện ≤ 2 × ác). Mirror rule applied to all 44 (ác ≤ 2 × thiện): 7 endings fixed with fitting thiện options of their own road — ch_benh_2 +4/−12 → +6/−12, ch_bi_2 +4/−15 → +8/−15, thd_sach_1 +3/−8 → +5/−8, thd_tro_2 +5/−11 → +7/−11, thd_hoc_2 +4/−13 → +7/−13, cnv_chu_1 +5/−18 → +10/−18, cnv_ma_2 +4/−14 → +7/−14. Then ch_bi cruel→ác .67 (cruel lives aimed at ch_bi_1 at the 2 × edge, +14/−7, and ch_bi_3 +6/−3 read thiện) → ch_bi_1 +10/−9 (2 fitting ác names added, 4 minor thiện names dropped), ch_bi_3 +6/−6. Scan after: every Chuỗi ≥ 3 / ≥ 3 and within 2 × both ways.
+
+### Measure — ALL 11 ROADS on the final data (132 lives, page errors 0)
+`MODES=kind,cruel node dev/measure/ge-measure.js - 6 1 <out> <road> sens` — one road per process, 1 page, 2 processes at a time (cnv_ban / ch_co / ch_ho / thd_tho on 516eb28 — their data did not change after; ch_benh / thd_sach / thd_tro / thd_hoc / cnv_chu / cnv_ma on 6e40999; ch_bi on 926a356). The final-merge c13b774 touches no GE file (jge / jgecat / jbalge / jgedata* / ge tests / ge-measure unchanged by main).
+| road | kind | cruel | inChar | open .8 | open .11 [1,2.6] | kind→thiện ≥.70 | cruel→ác ≥.70 | won per ending | won |
+|---|---|---|---|---|---|---|---|---|---|
+| ch_co | 6 | 6 | 0.75 | 3.92 | 2.08 IN | 1.00 IN | 1.00 IN | 1/3 3/3 2/3 3/3 | 9/12 |
+| ch_benh | 6 | 6 | 0.50 | 2.00 | 1.25 IN | 1.00 IN | 1.00 IN | 1/3 0/3 3/3 2/3 | 6/12 |
+| ch_ho | 6 | 6 | 0.58 | 2.17 | 1.75 IN | 1.00 IN | 1.00 IN | 2/3 1/3 2/3 2/3 | 7/12 |
+| ch_bi | 6 | 6 | 0.75 | 3.58 | 2.33 IN | 1.00 IN | 1.00 IN | 3/3 0/3 3/3 3/3 | 9/12 |
+| thd_tho | 6 | 6 | 0.75 | 3.17 | 2.08 IN | 1.00 IN | 1.00 IN | 2/3 2/3 2/3 3/3 | 9/12 |
+| thd_sach | 6 | 6 | 0.50 | 2.25 | 2.08 IN | 1.00 IN | 0.83 IN | 0/3 3/3 1/3 2/3 | 6/12 |
+| thd_tro | 6 | 6 | 0.67 | 2.92 | 2.25 IN | 1.00 IN | 1.00 IN | 1/3 1/3 3/3 3/3 | 8/12 |
+| thd_hoc | 6 | 6 | 0.67 | 3.50 | 2.55 IN | 1.00 IN | 0.83 IN | 3/3 1/3 2/3 2/3 | 8/12 |
+| cnv_chu | 6 | 6 | 0.25 | 3.09 | 2.22 IN | 1.00 IN | 0.83 IN | 0/3 1/3 2/3 0/3 | 3/12 |
+| cnv_ban | 6 | 6 | 0.92 | 3.33 | 1.67 IN | 1.00 IN | 1.00 IN | 2/3 3/3 3/3 3/3 | 11/12 |
+| cnv_ma | 6 | 6 | 0.75 | 2.67 | 1.83 IN | 1.00 IN | 1.00 IN | 3/3 1/3 2/3 3/3 | 9/12 |
+| **all** | 66 | 66 | | | **all IN** | **1.00** | **.83–1.00** | | 85/132 |
+Before (round-2 runs replaced by the fixes): cnv_chu kind→thiện .67 (516eb28) → 1.00; ch_bi cruel→ác .67 (6e40999) → 1.00. ch_benh open .11 2.00 (r1) → 1.25 after the new fo (still IN). inChar above band on 8 roads (.67–.92) and cnv_chu .25 = the shared odds-cap note (W1 note 1, r1 said not a W3 fix). cnv_chu won 3/12: blocked by {mis} → ngươi and Tâm cơ gates, as in r1. Machine note: pages still crash now and then ("Target crashed", the measure retries the life); 2 processes × 1 page fit in 15 GB.
+
+### Tests (c13b774 = branch + LIVE main 1a4df59)
+build_site OK · ge-guard **6/6** (36 live branches, ERRORS 0) · ge-engine `- all` **1160/1160** · one-core-guard **PASS** (fails 0, inline 3980 ≤ 4212) · **quickcheck PASS** (core gates PASS, time-spill PASS, open 1512 ms, old save ok, render 219/223, tab 391/406, buổi 1134/1120, tasks>200 17/20).
+
+### Commits (r2)
+55478e6 merge main 2c5dd55 (W2 live) · 516eb28 fixes 1 + 2 (objects, thd_hoc crown, ch_benh_2 fo, cnv_ban facts) · 6e40999 mirror shading rule (7 endings) · 926a356 ch_bi_1/3 rebalance · **c13b774 (READY r2)** final-merge LIVE main 1a4df59.
+
+### FOR E
+1. Engine term «{n1} alive son» (thd_hoc_1/2/4 could name the pupil again). 2. Still open from r1: «followed / needed person alive», kid origin, one HH seat rule, inChar vs odds cap, {v} bond gate for ch_ho_1. 3. Shading-balance rule for future waves: thiện and ác names in each Chuỗi within 2 × of each other, both ways (W3 needed both directions).
