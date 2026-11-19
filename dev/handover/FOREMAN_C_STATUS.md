@@ -1337,3 +1337,4 @@ ROOT-48 Lượt 457: PR3 place-rank SAMPLE 10 (5a428d6, 1,755 cr) LOOKED + SENT 
 ROOT-48 Lượt 458 (owner): equal-sleeve rule is TRIỀU PHỤC ONLY; thường phục unchanged (Lượt 351) → FIGURE_GATE 8b note.
 ROOT-48 Lượt 459 (owner, upset): triều phục = SHARED block (hà bí base, cầu vai over hà bí, tassel, ankle sleeves) + OWN slots (hà bí colour/embroidery, bí trụy ladder, own cầu vai) → FIGURE_GATE 8c rewritten; r20 helper told.
 ROOT-48 Lượt 460: PR3 v2 Cảnh Phúc 6 rooms (a64f408, +945 cr, total 2,700) with style card (crabapple, rosewood + jade inlay, bats in clouds, moon gate) LOOKED + SENT; v1 kept in CDN v1/. Rank step now clear. Fault: winged 'bat' in Phi/Quý phi reception friezes may read as a bird.
+ROOT-48 Lượt 461 (owner on place-rank v2): bedrooms OK; receptions Western sofa → la hán sàng; right-corner rule; phối two beds + 3 low-rank colours; richness shift up (v2 Tần = lowest); KN reception floor fuller, KN bedroom tea set back → FIGURE_GATE 14b; PR3 v3.
