@@ -1,4 +1,25 @@
-# place-redraw: measure + 2 samples (helper of Foreman C ROOT-47; owner Lượt 389-392)
+# place-redraw: measure + 2 samples (helper of Foreman C ROOT-47; owner Lượt 389-397)
+
+## v2 (owner Lượt 397) — CURRENT. The v1 samples and the v1 recipe below are SUPERSEDED.
+Sheet v2: https://ctm-img.victoria-tntt.workers.dev/img/_review/place-redraw/sample-sheet-2.jpg (local copy: scratchpad gui/7-noi-chon-mau2.jpg)
+Rows: tẩm cung (TARGET) + c06 c30 m19 m39 at game size | alone; NEW Khôn Ninh + 4 | alone; NEW Cảnh Phúc chính điện + 4 | alone.
+NEW masters v2: img/_review/place-redraw/khon-ninh-cung-ha-sang-new2.webp, img/_review/place-redraw/canh-phuc-cung-ha-sang-new2.webp (2688x1386).
+Owner faults with v1: rooms too EMPTY (a stage left free for people), colours pale/forced by the grade. Fixed in v2: lived-in, furnished through the whole room with foreground pieces and depth like tẩm cung; natural colour, NO grade.
+Gens: Lw8zAZvswO Khôn Ninh, gOmWnWySXO Cảnh Phúc (2 x 135 = 270 cr; total so far 6 gens = 810 cr). Looked full size: furnished, deep, same hand and colour as the bedroom, real floor (stone tiles / wood boards), no big rug (small mat under the tea table in Cảnh Phúc), throne / moon gate in the centre half. Figures read lit by the room on both, like on the bedroom.
+Light numbers v2 (same method as below): NEW Khôn Ninh L 54.0, Lsd 20.3, C 18.1, a +9.6, b +12.1, L-R -4.5 · NEW Cảnh Phúc L 55.0, Lsd 19.9, C 20.9, a +10.3, b +16.3, L-R -7.3 · bedroom L 56.5, Lsd 18.6, C 14.4, a +7.3, b +8.7, L-R -2.1. So v2 sits on the bedroom's own light and contrast (figures L ~75 stand out of it as on the bedroom).
+
+### RECIPE v2 for the 35 rooms (run exactly like this)
+1. Refs (type image, this order): image 1 = tam-cung-dem-ha-sang (Magnific upload gOmYI7iSXO), image 2 = M09 hd figure img/hd/fig-maid-m09-a18.webp (upload EbYJzsMuuO). NEVER the old room picture (not as ref, not as edit).
+2. gpt-2-6, resolution 2k, width 2688, height 1386, folder ba4aecfe-efce-47e2-b53f-30d292091886, 1 gen per room (135 cr).
+3. Prompt = dev/art/place-redraw/prompt_template.txt (v2). Fields: {SEASON_TIME} "summer morning", {TIME_LIGHT} "morning daylight", {ROOM_LINE} = the room described from scratch as "a real room in daily use" + a LONG list of furniture and everyday objects through the room + "foreground pieces at the left and right edges (a carved table with objects, a vase, a curtain fold) give depth", {FLOOR} "polished stone tiles" / "warm polished wooden floorboards", {MAT_UNDER}, {KEY_PIECE}.
+   - khon-ninh-cung ROOM: "Khôn Ninh cung, the Empress's main hall in an ancient Chinese imperial palace, a real room in daily use: towards the back a carved rosewood throne couch with red silk cushions on a low dais, behind it a folding screen painted with a phoenix among peonies; red lacquer pillars; hanging red and gold palace lanterns; sheer embroidered curtains tied back; a pair of golden phoenix figures on tall stands; side tables with celadon vases of lotus, a tea set, an incense burner, a small writing desk with scrolls, a fan on a stand, potted peony; lattice windows open onto a sunny summer garden; foreground pieces at the left and right edges (a carved table with objects, a vase of flowers, a curtain fold) give depth." FLOOR stone tiles, MAT "the dais", KEY "the throne area".
+   - canh-phuc-cung ROOM: "Cảnh Phúc cung chính điện, the main hall of a high-ranking imperial consort's palace in ancient China, a real room in daily use: at the back a large carved round moon-gate doorway with gilded lattice, opening onto a sunny courtyard garden with a tree and a lotus pond; pale green sheer embroidered curtains tied back; hanging palace lanterns; a folding screen painted with bamboo and cranes; a carved rosewood settee with celadon cushions and a small low table with a tea set; side tables with porcelain vases of pink flowers, an incense burner, a guqin on a stand, a bookshelf with scrolls and boxes, a round embroidered fan on a stand, potted plants; foreground pieces at the left and right edges (a carved table with objects, a vase, a curtain fold) give depth." FLOOR wood boards, MAT "the settee", KEY "the moon gate".
+4. Look at each result full size: reject an empty stage-like room, a big rug, people, text, plastic look, key piece outside the centre half; redo once.
+5. NO colour grade (owner Lượt 397). Save the render as webp q88, 2688x1386 -> img/<room>-<season>-<time>.webp. (dev/art/place-redraw/grade.py is kept only as the light-measure tool; do not apply it.)
+6. Check sheet per room: the 4 figures c06 c30 m19 m39 t1 a18 at 0.73 H, feet ~0.92 H, next to tẩm cung + 4.
+
+---
+## v1 (superseded)
 Sheet: https://ctm-img.victoria-tntt.workers.dev/img/_review/place-redraw/sample-sheet.jpg
 NEW masters: https://ctm-img.victoria-tntt.workers.dev/img/_review/place-redraw/khon-ninh-cung-ha-sang-new.webp · https://ctm-img.victoria-tntt.workers.dev/img/_review/place-redraw/canh-phuc-cung-ha-sang-new.webp
 Delete after verdict: `python3 dev/site/cdn_sync.py --wipe-review place-redraw`.
@@ -33,7 +54,7 @@ Figures on the iPad stage: about 0.73 x stage height tall (≈ 436 of 599), feet
 - Gens 1-2 (s7IzHDDl8e, s7IzHXXl8e) used the OLD room as image 3: DISCARDED per owner Lượt 392 (brand-new paintings only), never downloaded.
 - Gens 3-4 KEPT: ov6xTEB829 Khôn Ninh cung, s7IzbiNl8e Cảnh Phúc cung chính điện (summer morning). Both: no big rug (only a small mat under the dais / settee), real floor (stone tiles / wood boards) in the lower third, key furniture in the centre half, soft painterly finish close to the bedroom. Looked full size: not plastic; Cảnh Phúc is the closest to the bedroom hand; Khôn Ninh is a bit pale/lavender but calm.
 
-### Recipe for the 35 rooms (run exactly like this)
+### Recipe v1 (SUPERSEDED by v2 above)
 1. Refs (type image, this order): image 1 = tam-cung-dem-ha-sang (Magnific upload gOmYI7iSXO), image 2 = M09 hd figure img/hd/fig-maid-m09-a18.webp (upload EbYJzsMuuO). NEVER the old room picture.
 2. Model gpt-2-6, resolution 2k, width 2688, height 1386 (custom size), folder ba4aecfe-efce-47e2-b53f-30d292091886, 1 gen per room, 135 cr.
 3. Prompt = dev/art/place-redraw/prompt_template.txt with the per-room fields: {SEASON_TIME} (e.g. "summer morning"), {ROOM_LINE} (what the room is + its furniture, described from scratch), {FLOOR} ("large smooth polished pale stone tiles" / "warm polished wooden floorboards"), {MAT_UNDER}, {KEY_PIECE}.
