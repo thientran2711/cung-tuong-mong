@@ -243,7 +243,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | ev-pic-fig BIG REVIEW (opus) | review/ev-pic-fig 946a2900 | MAIN ROOT-64 | session_01Rc5AsMDVid7pMws13KWPgr | DONE — LIVE 5dc5d9e0 | 19/11 05:43Z |
 | bd-roads r2 fixes (opus E14c, successor of E14) | review/bd-roads | E ROOT #8 | session_01DgYSWmKcwf5VUb22x4YGU3 | RUNNING | 19/11 05:53Z |
 | ge-writers-w3 r2 fixes (opus E11d, successor of E11c) | review/ge-writers-w3 | E ROOT #8 | session_01DgYSWogWMATZVoosS7SFEk | RUNNING | 19/11 05:56Z |
-| MAIN ROOT-65 (opus; child of ROOT-64, depth 3) | handover HANDOVER_SESSION9 | ROOT-64 | session_01Rc5AsMRSKCNFbYwLJhNeY7 | RUNNING | 19/11 06:24Z |
+| MAIN ROOT-65 (opus; child of ROOT-64, depth 3) | handover HANDOVER_SESSION9 | ROOT-64 | session_01Rc5AsMRSKCNFbYwLJhNeY7 | DONE → ROOT-66 | 19/11 06:24Z |
 | FOREMAN C-AG #22 (opus; ex-ROOT STANDBY, depth 0; took over from C-AG #21) | handover FOREMAN_C_STATUS | owner STANDBY | session_01Rc5AsM9pCcsWwjoC8PjjW7 | RUNNING | 19/11 06:30Z |
 | REVIEW coop-thin-f3 r1 (opus BIG) of f659cf7b | review/coop-thin-f3-r1 | B | session_01N1tNP5fWL4VXMTtqchmHQX | RUNNING | 19/11 06:30Z |
 | coop-thin F4 (opus; pets/garden/kitchen/study; same worker as F3, stacked on F3) | review/coop-thin-f4 | B | session_01N1tNP2DFfqtxibVd8wgyr6 | SẴN SÀNG KIỂM b4f2031c (report reports/coop-thin-f4.md) | 19/11 06:33Z |
@@ -258,3 +258,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | phutang-road writer 2 (pt_tang + pt_dang, opus E21b, under E21) | review/phutang-road-w2; briefs/E21b-phutang-road-w2.md | FOREMAN E | session_01DgYSWkdwE7LuxhVqAQnJah | RUNNING | 19/11 07:03Z |
 | bd-roads r2 + Ba Tư lead (opus E14d, successor of E14c) | review/bd-roads | FOREMAN E | session_01DgYSWqB4qyr7uRTdKD8895 | RUNNING | 19/11 07:06Z |
 | role-parity-drift-2 (opus; 12 new red rows from landings 7fb7c104..98f9f0f1; law 1 + law 11) | review/role-parity-drift-2 | B | session_01N1tNP6PEK9T9BWXhYLZvAd | RUNNING | 19/11 07:30Z |
+| MAIN ROOT-66 (opus; child of ROOT-65, depth 4) | handover HANDOVER_SESSION9 | ROOT-65 | (opening) | RUNNING | 19/11 07:33Z |
