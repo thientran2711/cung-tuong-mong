@@ -1441,3 +1441,5 @@ ROOT-51 Lượt 587: LV1 kc swap LIVE (f864419) sheet sent. FOR MAIN: dev/site/m
 ROOT-51 Lượt 587b: owner: rooms = 2 approved layouts: 3-wall (HQP bedroom) OR 2-wall (HQP reception); not all 3-wall (L14 amended, PR8 told).
 ROOT-51 Lượt 590: owner: c palette now too pastel → raise tone to Quý nhân v2 B level (main #CBAAB0-level, secondary deep teal-level); B18 amended; NF1 redoing table.
 ROOT-51 Lượt 591: owner: live game hands-off (no piecemeal swaps; one push at the end of mass production); refs only from our store, never from game (K18). No grey colours (B19) → NF1 c02/c11/c29/c31/c32 + any grey. Lượt 589 proposal (remove old c live) WITHDRAWN.
+ROOT-51 Lượt 592: owner loves nc1–nc3 colours → measured, set as colour model in B18; NF1 retargets c table.
+ROOT-51 ~19:20Z: BW3 rolled over (d3f4f70: face words verbatim, positional age, old refs off, QN B, F11, B17, B18 t7/t8 LOW_TONE, D13) → BW4 session_01PEhRbtpkvCdD1U9HDcQcpU (BW3-root50.md Part 2 items 1–8 + B18 princess model, K18 gate, B19 grey, G16 tm4, J2 calmer-not-darker). NF1 e22df92 no-grey table; now retargeting to princess model. MMX4 HOLD (prompts + gate only).

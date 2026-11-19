@@ -33,3 +33,9 @@ depth 4 (limit 8). START_CTX ~3 % (get_session reads 0; estimate). Parent ROOT-5
 2. Hair UP in a neat bun at every age: no long loose fall, no ribbon (F11).
 3. Faces may look younger than their age but must clearly BE that age; a51 must never read 18–26 (D13).
 BW3 is fixing the builder. MMX4 on HOLD: NO gens until ROOT-51 says so.
+
+## 19:22Z PREP ONLY (ROOT-51: builder has F11 bun + one ref; colour tone still being reworked by BW4; HOLD, no gens)
+- Rebuilt with `build.py mNN --state mama --age aXX --nostyle --twocol "deep teal" --noflower` → mama-specs/mNN-aXX.oneref.twocol.noflower.f11.prompt.txt (6 files); check_store same args PASS 6/6 (approved_check PASS).
+- Diff vs my sample prompts: face words now copied from v3.FULL (note 1 solved); "never slanted or upturned" removed (note 2 solved); D13 line "looks younger than her age but still clearly about fifty, never 18–26"; hair = ALL pinned UP in a neat bun, NO loose hair, NO ribbons (F11). Colour sentences unchanged (waiting for BW4 B18 tone).
+- Remaining text (note only): the identity sentence still says "keep ONLY her face, facial features her own hairstyle ... and hair colour" (hairstyle from ref vs F11 bun line).
+- Next on GO: pull, rebuild with BW4's colour change, gate, gen m05+m13 ×3 (seed 7172, one kc_ref), sheet, send, STOP.
