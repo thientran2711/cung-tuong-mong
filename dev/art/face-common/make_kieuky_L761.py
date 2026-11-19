@@ -10,6 +10,7 @@ MG1 MASTER block: when "MG1 FACE READY" lands, add it the way MG1 adds it to the
 make_nf4.py is loaded read-only (its file writes are swallowed). Run: python3 dev/art/face-common/make_kieuky_L761.py"""
 import os, io, builtins
 D = os.path.dirname(os.path.abspath(__file__))
+import sys as _s, json as _j; _s.path.insert(0, D); import face_gate as FG   # MG1 B25: master block + D9 + face gate on every output
 _open = builtins.open
 def _ro_open(p, mode='r', *a, **k):
     if 'w' in mode or 'a' in mode: return io.StringIO()
@@ -20,7 +21,8 @@ line, T7, EYES_STRAIGHT, OLD_MOUTH, NEW_MOUTH = (NS[k] for k in "line T7 EYES_ST
 KK = T7["Kiêu kỳ"]
 
 # root pairs — EMPTY until P1 NEW16 READY. sid: (root season, main, main_hex, sec, sec_hex), words + hex exactly as palettes_season.json
-ROOTS = {}
+_SR = _j.load(_open(os.path.join(D, 's_root_colours.json')))   # P1 NEW16 (Lượt 763) roots, words + hex as stored
+ROOTS = {k: (_SR[k]['root_season'], _SR[k]['main'], _SR[k]['main_hex'], _SR[k]['sec'], _SR[k]['sec_hex']) for k in "s51 s52 s53 s54 s55".split() if k in _SR}
 PH = ("{ROOT_MAIN}", "{ROOT_MAIN_HEX}", "{ROOT_SEC}", "{ROOT_SEC_HEX}")
 
 # DIFF vs approved Kiêu kỳ (make_nf4 S4 + FACEV/HAIR/ITEMS/ANGS):
@@ -69,5 +71,6 @@ for sid, age, sw, hair, outfit, pose, ak in S761K:
     assert v.count(OLD_MOUTH) == 1 and "(thướt tha)" in v, sid
     out[f"{sid}.v5.{ext}"] = v.replace(OLD_MOUTH, NEW_MOUTH)
 for k, v in out.items():
+    if k.endswith('.FULL'): v = FG.final(v, k)
     _open(os.path.join(D, f'{k}.txt'), 'w').write(v)
     print(f"== {k}\n{v}\n")

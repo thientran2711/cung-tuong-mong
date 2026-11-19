@@ -56,3 +56,8 @@ I wait for your message.
   s50 clear ice blue #A6C9E4 + soft raspberry pink #D498B0 (was deep raspberry #A55D7A)
 - Gens spent: 1 (s46, 135 credits, gen VX7jST6MMU, unused, ledger NEWFACE-767-STOPPED). s49 call errored, s50 not sent.
 - FLAG for P1: palettes_season.json still holds the old root pairs for these 3, and by seasons.classify the new pairs are s46 → Hạ (was Đông), s49 → Xuân (was Thu), s50 → Hạ (was Đông); s_root_colours.json still says the old root_season. check_seasons may FAIL until P1 re-seats them. make_lanhlung_L761.py ROOTS still has the old pairs (its asserts need palette names); do not re-run it without P1.
+
+## Update — GO Kiêu kỳ (P1 56c196c, MG1 32ec4d9): prompts built, gate PASS, gens HELD (colour question)
+- make_kieuky_L761.py + make_quyenru_L761.py: ROOTS read from s_root_colours.json (P1 NEW16), last step face_gate.final (MASTER + D9 + check_store face) on every .FULL output, like make_lanhlung_L761.
+- s51–s61.v5.FULL.txt written; `check_store.py <file> --scope face` → STORE CHECK PASS all 11.
+- HELD before gens: P1 roots s51 (orchid pink + deep sea blue #4F809A), s52 (soft lavender + madder red #AE6163), s54 (cool lilac + deep sapphire #566D9F), s55 (pink lilac + deep sea blue #547F97) have a secondary at OKLCH L 0.54–0.58 = the level the owner called "không nhẹ nhàng" in Lượt 767 (#A55D7A 0.57, #388581 ~0.55); s47/s48 are 0.71–0.80. s51 and s55 are near-twin pairs (pink-lilac + the same deep sea blue). Quyến rũ s56 also has "deep lavender" #8C77B0 (0.61). Asked the foreman.
