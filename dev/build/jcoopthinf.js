@@ -398,7 +398,11 @@ const RDIFF=["prCheck","lxInitAll","alInitAll","kmmCheck","pdCheck","kpCheck","e
 /* a card that opens a picker keeps itself in window.__adPend until the pick (jact): per player, swapped with her context */
 try{TH.reg("__adPend",()=>window.__adPend||null,v=>{window.__adPend=v||null})}catch(e){}
 const isSteal=a=>{try{return typeof isStealCard==="function"&&isStealCard(a)}catch(e){return false}};
-const uiFirst=a=>!!a&&(!!a.exam||!!a.toil||!!a.aaMG||isSteal(a));
+/* F6b HOOK (one deck runner): the game-first kinds, ONE table. A kind stays on the old road until F6b lifts it: TH.gLift[kind] = the level
+   its game end became an intent at (e.g. TH.gLift.exam = 12); from that level the card is a plain host card and its tap rides act(i). */
+TH.gKinds=TH.gKinds||{exam:a=>!!a.exam,toil:a=>!!a.toil,aaMG:a=>!!a.aaMG,steal:isSteal};TH.gLift=TH.gLift||{};
+TH.gKind=a=>{if(!a)return null;for(const k of Object.keys(TH.gKinds))try{if(TH.gKinds[k](a))return k}catch(e){}return null};
+const uiFirst=a=>{const k=TH.gKind(a);return !!k&&!(TH.gLift[k]&&on(TH.gLift[k]))};
 const plainCard=a=>{if(!a||typeof a!=="object")return null;const o={};for(const k of Object.keys(a)){const v=a[k];
   if(typeof v==="function"){if(k==="why")try{o.whyT=String(v()||"")}catch(e){}continue}
   if(v===undefined)continue;try{o[k]=J(v)}catch(e){}}if(uiFirst(a))o.__g=1;return o};
@@ -412,6 +416,8 @@ if(typeof deal==="function"){const d0=deal;deal=function(){
 TH.ctxOut.push((seat,B)=>{if(!on(L11)||!host()||seat===CW.seat||!S||TH.held(seat))return;
  try{if(!S.dead&&!S.mg&&typeof deal==="function"&&(B.hk!==HKEY()||!Array.isArray(deck)||!deck.length)){deal();F.stat.hDeal=(F.stat.hDeal|0)+1}}catch(e){console.error("thin F6 deal",e)}
  for(const f of ["j76Std","eaSync","feelDeck"])try{if(typeof window[f]==="function")window[f]()}catch(e){}
+ /* her feeling machine's derived cache (S.mood.log `left` = khắc left at the last sync; solo: every render) is brought up to date as her render would */
+ try{if(typeof mkSync==="function")mkSync(S)}catch(e){console.error("thin F6 mkSync",e)}
  /* the render-diff engines of her person (render is a no-op in her context; ONE list RDIFF, below): run here, once, as her render would */
  {const q0=quiet,t0=performance.now();quiet=false/* as her own render: its card shows (her Q → her phone) */;try{for(const f of RDIFF)try{if(typeof window[f]==="function")window[f]()}catch(e){console.error("thin F6 "+f,e)}}finally{quiet=q0;const ms=performance.now()-t0;F.stat.rdN=(F.stat.rdN|0)+1;F.stat.rdMs=Math.round(((F.stat.rdMs||0)*9+ms)/10*10)/10}}
  B.hd=S.dead?[]:(Array.isArray(deck)?deck:[]).map(plainCard).filter(Boolean)});

@@ -153,8 +153,8 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  {const i=await G.p.evaluate(()=>rivals.findIndex(v=>v&&v.alive&&!v.coop&&v!==S&&!v.out));
   await act('E1 Hoàng hậu power: khất bổng (empAct cutpay)',`empAct(${i},'cutpay')`,{stage:'S.rank=7;',chk:x=>x.g1.log!==x.g0.log});await stage('S.rank=3;');await sync()}
  {const s=await G.p.evaluate(()=>{try{const L=allServ().filter(s=>{const o=ownerOf(s);return o&&o!==S&&!o.coop&&!s.spyFor});return L.length>1?[L[0].sid,L[1].sid]:null}catch(e){return null}});
-  if(s!=null){await act('S1 servant card Mua chuộc (servAct mua)',`servAct('mua',${JSON.stringify(s[0])})`,{chk:x=>x.g1.nlog!==x.g0.nlog||x.g1.bac!==x.g0.bac});
-   await act('O2 person-card job Mua chuộc, the game step (sgServ, step 1)',`sgServ(${JSON.stringify(s[1])},{step:1})`,{chk:x=>x.g1.nlog!==x.g0.nlog||x.g1.bac!==x.g0.bac});
+  if(s!=null){await act('S1 servant card Mua chuộc (servAct mua)',`servAct('mua',${JSON.stringify(s[0])})`,{chk:x=>x.g1.nlog!==x.g0.nlog||x.g1.bac!==x.g0.bac||x.g1.used!==x.g0.used/* a lost roll: 2 khắc spent, no bạc; the log list may sit at its cap */});
+   await act('O2 person-card job Mua chuộc, the game step (sgServ, step 1)',`sgServ(${JSON.stringify(s[1])},{step:1})`,{chk:x=>x.g1.nlog!==x.g0.nlog||x.g1.bac!==x.g0.bac||x.g1.used!==x.g0.used});
    await act('O3 a step sgStep never gives (sgServ step 9): refused',`sgServ(${JSON.stringify(s[1])},{step:9})`,{reject:1})}else ok(false,'S staging: no servant of another palace',null)}
  await act('O1 person-card job Nghe lén (sgOver, step 0)',`sgOver({step:0})`,{stage:'const L=liveRivals(true).filter(v=>!v.coop).slice(0,2);S.where=S.where||{};for(const v of L)S.where[v.id]=S.place;',chk:x=>x.g1.log!==x.g0.log||x.g1.nlog!==x.g0.nlog});
  {const e=await G.p.evaluate(()=>{try{const b=document.querySelector('[data-elder]');if(b)return [b.dataset.elder,b.dataset.eid];return null}catch(e){return null}});
