@@ -41,3 +41,25 @@ None of the t1–t8 thường phục outfits (store + build_all) say round neckl
 
 ## HANDOVER line
 BW3 done (push + report). Nothing open except the notes above. Successor not needed.
+
+---
+# Part 2: ROOT-51 adds (owner Lượt 583 + TN4 findings)
+
+## Done (gate: check_store --self 0 problems; build_all --check a18/a26/a36/a51/a65 = 0 FAIL ×5, 416 drawn each)
+- **TN4 eye contradiction**: KC people no longer get the generic END clause "Eyes soft, warm and round-almond, never slanted or upturned, never teary." Their face words name their own eyes (m13 "long PHOENIX eyes clearly upturned"). Not-drawn/golden keep it.
+- **Positional age**: `build_all.py m13 3 a26` now builds a26. It used to build a18 silently, so the TN4 / optB "a26" files were really a18 ("about 22"). Bad args → usage, exit 2.
+- **Old refs**: build.py `--refs` for a KC person = ONE ref, her KC cut id (e.g. m05 → KLpSlnEkqp); without `--nostyle` it stops with "B8 … style image retired". build_all `--style` is retired (exit 2). kc_refs_build no longer writes `style_new_character_only 6AbGv6EiJO` (KC_REFS rebuilt, 1 line removed). nc paths → `_retired/face-common` (part 1).
+- **F11 hair by age**: build_all laws: t1–t3 at a36/a51/a65 = HAIR_HIGH (hair UP), and the t1–t3 `Hair:` line becomes "her own hair colour, ALL her hair swept UP into a bun / chignon (nothing hanging loose down her back), with …". S20 (loose hair t1–t3) is now ages a18 a26 only. Ma ma (one-ref path): "her own hair colour, ALL her hair pinned UP in a neat bun (chignon) with her hairpins" + "HAIR: ALL her hair is pinned UP in a neat bun: NO long loose hair down her back or over her shoulders, NO ribbons in the hair." This replaces the "hair from the identity reference / style reference" sentence, which also fixes the BW2 leftover. Nữ đế already had HAIR UP at every age (checked).
+- **B17 t7/t8**: (1) the stale linings clause ("with silver like #E2C3C5 in the linings") → "with <her t1–t6 secondary> in the inner robe and linings", the same slot words as t1–t6; (2) TWO-COLOUR → THREE-COLOUR at t7/t8 (build_all `outfit_colours3`): "…EXACTLY THREE colours … the royal golden yellow (honey-gold like #EFBD69), the MAIN colour <main> and the SECONDARY colour <sec> … gold or silver only as thin accents, no other colour." Main/secondary are the same data and words as t1–t6. S01 scope is now tp1-6 pr1-6 mama. The main hex stays as in the existing t7/t8 COLOUR RULE (ORIG1, e.g. "lilac silk like #CBAAB0"), the same as t1–t6.
+- **B18**: t7/t8 (and the Nữ đế built on t8) at a18/a26/a36: "all colours fresh, clear and luminous, never dusty or greyed;" → the t1–t6 LOW_TONE medium-tone sentence. a51/a65 keep the elder clause.
+- **D13**: one sentence added to a51 AGE_TXT: "She looks younger than her age but still clearly about fifty at first glance, never like an 18-26-year-old." The a51 text already had fine lines + silver at the temples.
+- Samples: bw3-samples/m13_t2_a36, m13_t7_a51, m13_t8_a26, m05_mama_a51 (+ part-1 samples rebuilt).
+
+## NOT done (successor; opened by the coordinator)
+1. F11 maids: tm3 (chưởng sự) and tm4 (nữ quan) hair is not stated explicitly (tm0/tm1/tm2 have buns). Add an explicit bun at a36+. MAID_IDENT still says "her own hairstyle (the same at every rank)".
+2. Old refs not touched: build_npc.py STYLE_REF 6AbGv6EiJO (lines 52/280: men/eunuch/official/physician/Thái hậu NPCs have no KC set-B ref, so ROOT must say what replaces it); dev/handover/reports/ty-cold-mass/make_batches.py (header says image1 = style 6AbGv6EiJO; a report script); owner-copy/mk_hqp_hh.py templates; nude-B/mk.py not checked against B17/B18/F11.
+3. B18 for maids/ma ma colour (held back, old m05/m13 = target): not changed.
+4. ma ma at a36 has no age text change; trieu (triều phục) colour tone unchanged.
+
+## HANDOVER line
+BW3 rollover at context ≈28 % (START ≈4 % + 25 %). Successor: the coordinator (ROOT-51) opens it. Start: `git pull`, read this file, "NOT done" list above.
