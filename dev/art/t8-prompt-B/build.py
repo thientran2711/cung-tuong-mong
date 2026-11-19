@@ -553,8 +553,70 @@ def items3f(c):
             if kind not in used: break
         used.add(kind); out[t]=(it,kind)
     return out
-for _c in [f"c{i:02d}" for i in range(1,33)]: ITEMS_LOW[_c]=items3f(_c)
+for _c in [f"c{i:02d}" for i in range(1,33)]+[f"m{i:02d}" for i in range(1,53)]: ITEMS_LOW[_c]=items3f(_c)   # N5d item 5: maids too (t1-t6 default pick; age_item overrides)
 LOWNAME={"c06":("vermilion","coral red"),"c25":("deep cherry red","brick rust red")}
+# ---------- N5d item 5: MAID rows m01–m52 (data only; each maid keeps her own face = image 1, no face words exist for maids) ----------
+# PAL = signature palette (main dev/figwork/maidC/mjobs.py PAL, :22 and :31); MOT = motif list (mjobs.py MOT, index (n-1)%13); ORIG1 hex = the two dominant robe tones MEASURED from the live fig-maid-mNN-t1-a18.webp
+# (k-means on rows 32-93 percent of the figure, no hue filter: the maids' pale robes sit in the skin/gold hue band); the colour NAMES come from PAL (name()-style naming gave "silver grey" for pale sage). LOWNAME is auto-filled below from DATA+ORIG1.
+MAID_ROWS=[["m01", "sage green and cream", "#E8CDB5", "#CAB295"],
+  ["m02", "moss green and silver", "#D0C1A1", "#B8AA89"],
+  ["m03", "slate blue and silver", "#B7AFAB", "#D7C7BF"],
+  ["m04", "warm apricot and gold", "#ECBA9C", "#D39C7B"],
+  ["m05", "coral red and gold", "#DF9A84", "#EDC2AA"],
+  ["m06", "pale blue-grey and silver", "#DDCFC8", "#BFB3AE"],
+  ["m07", "pale jade green and white", "#C7B9A1", "#E8D2BF"],
+  ["m08", "peach-salmon and gold", "#E4AC94", "#F6CFBC"],
+  ["m09", "rose pink and gold", "#DCA79D", "#E9C7BA"],
+  ["m10", "sage green and gold", "#D0C0A4", "#EBD8C4"],
+  ["m11", "sky blue and silver", "#B6B6B8", "#DDD1C9"],
+  ["m12", "pale golden yellow and ivory", "#EBCDAC", "#D5B48C"],
+  ["m13", "lilac and silver", "#CBAAB0", "#E2C3C5"],
+  ["m14", "ivory white and celadon", "#B2AA97", "#D8C8B4"],
+  ["m15", "blush pink and pearl white", "#DEC3B5", "#C8A89B"],
+  ["m16", "lavender purple and gold", "#CDABAF", "#B39197"],
+  ["m17", "olive green and gold", "#B19B7A", "#D1B89A"],
+  ["m18", "powder blue and pearl white", "#BFB5AE", "#D8CABF"],
+  ["m19", "caramel apricot and gold", "#DFBBA1", "#C7A085"],
+  ["m20", "slate blue and gold", "#A79E9C", "#7E7877"],
+  ["m21", "aqua celadon and silver", "#C4BFB2", "#ACAA9D"],
+  ["m22", "dusty rose and taupe", "#C1A294", "#D8BFB1"],
+  ["m23", "butter yellow and gold", "#DDC1A0", "#BFA17C"],
+  ["m24", "jade green and gold", "#B8AB93", "#D9C5AD"],
+  ["m25", "lavender violet and silver", "#B49EAD", "#D2BBC0"],
+  ["m26", "blush pink and gold", "#E1BDAE", "#CAA393"],
+  ["m27", "soft spring green and gold", "#CAB99A", "#E6CFBA"],
+  ["m28", "coral pink and ivory", "#DB947A", "#E9C6B2"],
+  ["m29", "pale celadon and silver", "#E9D8C7", "#C7B8A2"],
+  ["m30", "soft lilac and silver", "#D1B9BA", "#E6D0CC"],
+  ["m31", "pale buttercup yellow and gold", "#DEBF9D", "#EFD3B7"],
+  ["m32", "pale mint green and ivory", "#D4C1AE", "#EAD5C6"],
+  ["m33", "lavender blue and silver", "#AC9CAE", "#C9B7BD"],
+  ["m34", "peach pink and gold", "#DFB49F", "#EFD3BF"],
+  ["m35", "pale jade green and pearl white", "#DCCCBA", "#C2B49D"],
+  ["m36", "ivory cream and gold", "#ECD5C4", "#D8BAA1"],
+  ["m37", "pale aqua and silver", "#C6BBB0", "#E9D5C9"],
+  ["m38", "warm apricot and gold", "#E4BF9F", "#EFD6C1"],
+  ["m39", "sky blue and silver", "#BDB6BD", "#D7CCCE"],
+  ["m40", "dusty rose and gold", "#D2A396", "#B78279"],
+  ["m41", "soft willow green and gold", "#C4AE8F", "#DBC3A7"],
+  ["m42", "peach coral and gold", "#E3C3AD", "#D0A288"],
+  ["m43", "periwinkle and silver", "#ACA0A5", "#C9B9BA"],
+  ["m44", "ivory and blush pink", "#E4C3B1", "#CEA492"],
+  ["m45", "pale sky blue and pearl white", "#C7C2C1", "#E8DBD5"],
+  ["m46", "rust red and gold", "#9F6353", "#BD8874"],
+  ["m47", "pale lilac and mint", "#DECCC3", "#C8B3AF"],
+  ["m48", "warm beige cream and gold", "#D8B79C", "#EBCEB6"],
+  ["m49", "powder blue and silver", "#CBC1C2", "#B3ABAB"],
+  ["m50", "soft pink and pearl white", "#D8B4A7", "#BA9386"],
+  ["m51", "pale mint and silver", "#C0BDAB", "#D8D0BF"],
+  ["m52", "pink lilac and gold", "#CEA6A9", "#B4898E"]]
+MAID_MOT=["peonies", "plum blossoms", "lotus flowers", "orchids", "chrysanthemums", "butterflies", "cranes", "auspicious clouds", "magnolias", "begonias", "camellias", "osmanthus", "wisteria"]
+MAID_FLOWER=["a small pink silk flower","a white jasmine sprig","a small plum blossom","a little orchid","a small peach blossom","a tiny camellia"]   # mjobs.py (maid) FLW
+for _c,_pal,_h1,_h2 in MAID_ROWS:
+    _n=int(_c[1:]); _main,_sec=_pal.split(" and ")[0],_pal.split(" and ")[-1]
+    DATA[_c]=(_pal,"")
+    ORIG1[_c]=(f"{_main} silk like {_h1}",f"{_sec} like {_h2}")
+    MOTIF_LOW[_c]=(MAID_MOT[(_n-1)%13],MAID_FLOWER[_n%6])
 for _c in DATA:
     if _c not in LOWNAME and _c in ORIG1: LOWNAME[_c]=(DATA[_c][0].split(" and ")[0],ORIG1[_c][0].split(" silk")[0])
 YEL_T6="; more luxury than the rank below: rich gold-thread embroidery covering much of the robe, a pearl-edged collar and cape trim, a few strands of pearls across the chest, and a grander gold headdress with more gold ornaments, elegant, NOT a pile of jewels, still clearly less grand than the imperial noble consort; plus a clearly visible amount of royal yellow: a yellow inner robe panel, a yellow sash and narrow yellow borders, the royal yellow is exactly the colour of the flat colour swatch image (image 3, a honey-gold close to hex #F2BC61, 18K gold tone, not pale cream, not beige, not mustard); image 3 is only a colour reference, never copy anything but its colour; her own colour stays clearly the main robe colour, much less yellow than an imperial noble consort's robe; COLOUR RULE:"
@@ -740,6 +802,7 @@ NUDE_PICK={'c01': 1, 'c02': 2, 'c03': 3, 'c04': 4, 'c05': 6, 'c06': 5, 'c07': 7,
 NUDE_ITEM={c:NUDE_LIST[k-1] for c,k in NUDE_PICK.items()}
 # N4 PHASE 1b: option per person spread evenly A,B,C,D,A,... (c01 A, c02 B, ...); `--nudeopt auto` uses it; explicit A|B|C|D still works
 NUDE_OPTMAP={"c%02d"%n:"ABCD"[(n-1)%4] for n in range(1,33)}
+NUDE_PICK.update({"m%02d"%n:(n-1)%10+1 for n in range(1,53)}); NUDE_ITEM.update({"m%02d"%n:NUDE_LIST[(n-1)%10] for n in range(1,53)}); NUDE_OPTMAP.update({"m%02d"%n:"ABCD"[(n-1)%4] for n in range(1,53)})   # N5d item 5: maids (fallback item only; age_item picks)
 NUDE_OPT={
 "A":dict(sec="deep wine-crimson",secrule="a deep, quiet wine-crimson like #7E2A33",sh="a STIFF, SHORT, structured shoulder piece (cầu vai cứng) of gold brocade edged with pearls over each shoulder, slightly pointed outward",tas="a row of bead tassels (lưu) hanging in front from the rim of the crown to the forehead, ending above the eyebrows",crown=None),
 "B":dict(sec="black",secrule="black silk richly embroidered with gold thread (the yellow clearly more than the black)",sh="a STIFF, SHORT, squared structured shoulder piece (cầu vai cứng) of gold brocade edged with pearls over each shoulder, set firmly across the shoulder line",tas="a row of bead tassels (lưu) hanging in front from the rim of the crown to the forehead, ending above the eyebrows",crown=None),
@@ -785,7 +848,7 @@ COLD_FAB=" The linen robe hangs straight and calm, the sleeves and sash fall nat
 def build_ty_cold(c,state):
     n=int(c[1:]); right=(n%2==1); pal,face=DATA[c]
     who="A palace maid" if c[0]=="m" else "An imperial consort"
-    s=PRE+f" {who}. Her face: {face}."+IDENT+" "+AGE_TXT[AGE]   # AGE_TXT verbatim (rule 0); its generic a51/a65 colour examples are overridden by this state's own COLOUR RULE below (same hue family, no switch)
+    s=PRE+f" {who}."+(f" Her face: {face}." if face else " Her face and facial features exactly as in the identity reference image.")+IDENT+" "+AGE_TXT[AGE]   # AGE_TXT verbatim (rule 0); its generic a51/a65 colour examples are overridden by this state's own COLOUR RULE below (same hue family, no switch)
     if state=="cold":
         item,hk=age_item(c,"lanh","a plain wooden bowl","two")
         s+=" "+COLD_OUTFIT+" COLOUR RULE: the linen stays the same undyed pale grey-white at every age, never dyed, never deeper, no other colour anywhere; this replaces the colour examples above."+COLD_FAB
@@ -797,7 +860,49 @@ def build_ty_cold(c,state):
         else: s+=f" COLOUR RULE: the whole trung y, collar and sash are one plain {col}, as soft and pale as the rank-colour portrait frame; no other colour anywhere."
         s+=" Any flower or pattern on the fabric would be real silk embroidery, never printed or pasted-on."
     return s+_pose(item,hk,right)+CLOSE+END
+# ---------- N5d item 5: MAID ladder --state tm0..tm4 (+ nhat / mama PENDING). Names (FIGURE_GATE CUNG NỮ LADDER, Lượt 174, owner "174 đúng rồi"):
+#   tm0 = cung nữ thô sử | tm1 = tam đẳng (the CURRENT 'Cung nữ') | tm2 = nhị đẳng (the CURRENT 'Đại cung nữ', never say đại cung nữ) | nhất đẳng = NEW outfit, NO tm id, PENDING (owner has not picked the sheet) |
+#   tm3 = chưởng sự cô cô | tm4 = nữ quan (always red #99443F) | ma ma = PENDING (the NPC outfit wording exists nowhere in the repo, only the live picture fig-mama-k01).
+# Wording is COPIED, never invented: tm1 = the m01 tam đẳng re-make prompt (maids-M1.md); tm2/tm3/tm4 = main dev/figwork/maid/mjobs.py mout() k=2/3/4 (tm3 colour = LIGHTER purple, owner "đỡ đậm hơn"; tm4 colour = the live Nữ quan red);
+# tm0 = THÔ SỬ design 842754fa (FIGURE_GATE Lượt 172). Sleeves: tm0/tm1 ~1 hand-span, tm2 ~2, tm3 ~3 (owner ladder); tm4 as live. Each maid keeps HER OWN hairstyle at every rank (owner ~01:55Z); the ranks differ by hairpins.
+# Re-make mode: image 1 = her live maid picture, image 2 = style3_girls. Items: item_age.py tmK cell.
+NHAT_DANG_PENDING=None   # PENDING: nhất đẳng outfit wording. The owner has NOT chosen the reference sheet from her Phượng Lệnh art yet; do not write wording here until she does.
+MAMA_PENDING=None        # PENDING: ma ma = the Ma ma NPC outfit (fig-mama-k01); no wording exists in the repo -> ROOT-37 asked.
+MAID_IDENT=IDENT.replace("and hairstyle colour","her own hairstyle (the same at every rank) and hair colour",1)
+TM_FADED=["grey-blue","light indigo","earth brown"]
+TM_NAME={"tm0":"cung nữ thô sử","tm1":"tam đẳng cung nữ","tm2":"nhị đẳng cung nữ","tm3":"chưởng sự cô cô","tm4":"nữ quan"}
+TM_TONE=" COLOUR TONE: the main colour is at a medium tone level: medium saturation and medium lightness, clear and fresh, NOT pale, NOT washed-out, NOT pastel-faded, NOT dark, NOT glaring."
+def build_maid(c,state):
+    assert c[0]=="m" or c[0]=="c"; n=int(c[1:]); right=(n%2==1); pal,face=DATA[c]; main=pal.split(" and ")[0]; elder=AGE in ("a51","a65")
+    fw=(f" Her face: {face}." if face else " Her face and facial features exactly as in the identity reference image.")
+    k=int(state[2]); who={0:"A palace maid of the lowest rank (cung nu tho su)",1:"A palace maid (cung nu, tam dang)",2:"A senior palace maid (cung nu, nhi dang), clearly finer than an ordinary maid",3:"The palace mistress of servants (chuong su co co), a dignified senior lady with authority",4:"A female court official (nu quan), the most refined of all palace servants but still simpler than any imperial consort"}[k]
+    s=PRE+f" {who}."+fw+MAID_IDENT+" "+AGE_TXT[AGE]
+    if k==0:
+        col=TM_FADED[n%3]
+        s+=f" Outfit (cung nữ thô sử, the lowest palace maid rank, a palace uniform, clean and neat, never ragged): plain coarse cotton/hemp in one plain faded colour ({col}), a single-layer short crossed-collar jacket and a plain skirt to the ankle, a same-colour cloth sash, NO embroidery, no pattern, no jade, no tassel, no apron; sleeves about one hand-span wide, loose, never tight on the arm; hair in a simple bun with one wooden pin or a cloth tie, no flowers, no jewels."
+        colr=f"the whole uniform is one plain faded {col}"
+        tone=""
+    elif k==1:
+        s+=f" Outfit (a palace maid's uniform): a fine fresh {main} silk palace maid's uniform with visible delicate embroidery (floral borders on the layered collar, sleeves and hem, small embroidered flower motifs), crisp fabric folds, a decorative sash with a small jade or tassel pendant; hair in neat double buns with one or two elegant silver hairpins with small pearls and a fresh flower; light makeup. Sleeves about one hand-span wide, a palace maid's sleeves (never a consort's long trailing wide sleeves)."
+        colr=f"her main colour {main}"; tone=TM_TONE
+    elif k==2:
+        s+=f" Outfit (a senior palace maid, nhị đẳng): a fine silk ruqun in {main}, with woven brocade trim at collar, cuffs and hem, a layered half-sleeve brocade jacket (bijia) on top, an embroidered silk sash with a jade pendant on a silk cord; neat double-loop buns with several silver and pearl hairpins and small fresh flowers, pearl earrings; clearly finer than an ordinary maid. Sleeves about two hand-spans wide, a palace maid's sleeves (never a consort's long trailing wide sleeves)."
+        colr=f"her main colour {main}"; tone=TM_TONE
+    elif k==3:
+        s+=" Outfit (the palace mistress of servants): a dignified long robe of rich silk in a LIGHTER, softer plum purple (still clearly the purple family, not dark, not deep), with subtle tone-on-tone woven pattern and neat embroidered borders, a brocade waist sash with a ring of brass keys and a small ledger pouch hanging at her waist; one gold hairpin and a small gold comb in her hair, small jade earrings; an air of calm authority, mature and respected, still beautiful. Sleeves about three hand-spans wide."
+        colr="the robe is a lighter, softer plum purple"; tone=""
+    else:
+        s+=" Outfit (a female court official, nữ quan): a formal court lady official's robe in the court-dress red (a medium-saturation, medium-lightness brick-crimson, close to hex #99443F), with a square embroidered rank badge (buzi) of a crane and clouds on the chest, round collar, neat embroidered borders, a narrow jewelled belt; a clearly visible formal black gauze court official's headdress (small winged cap) with a gold ornament worn over her hair, jade earrings; refined and dignified, with much less gold and no phoenix crown, clearly below an imperial consort."
+        colr="the robe is the court-dress red #99443F at every age"; tone=""
+    if k in (0,4): s+=f" COLOUR RULE: {colr}, the same at every age, never deeper, never another colour; this replaces the colour examples above."
+    elif elder: s+=f" COLOUR RULE: {colr} in a deeper, more muted shade of the SAME colour, same hue family (rich and dignified, never bright, never black or brown), no other main colour; this replaces the colour examples above."
+    else: s+=f" COLOUR RULE: all colours fresh, clear and luminous, never dusty or greyed; {colr}."+tone
+    s+=" Any flower or pattern on the fabric is fine silk-thread embroidery stitched directly into the fabric, flat, following the folds, never printed or pasted-on."
+    item,hk=age_item(c,state,"an embroidered handkerchief","one")
+    return s+_pose(item,hk,right)+CLOSE+END
 def build_state(c,state,v="v0"):
+    if state=="nhat" or state=="mama": raise SystemExit("PENDING: "+("nhat dang (the owner has not chosen the reference sheet for the new outfit)" if state=="nhat" else "ma ma (the Ma ma NPC outfit wording does not exist in the repo)"))
+    if re.fullmatch(r"tm[0-4]",state): return build_maid(c,state)
     if state=="cold" or re.fullmatch(r"ty[1-8]",state): return build_ty_cold(c,state)
     n=int(c[1:]) if c[0]=="c" else 0
     right=(n%2==1) if c[0]=="c" else (c=="nc")
@@ -962,6 +1067,9 @@ SPEC5_ADAPT={
 SPEC5_FRONTAL=[("turning mid-step while adjusting","mid-step while adjusting"),("gazing sideways at","gazing at"),("swaying in a light turn,","swaying gently,"),
 ("turning mid-step with","mid-step with"),("turning lightly with {prop} in both hands","lightly holding {prop} in both hands"),("body in three-quarter view, ","")]
 SPEC5_IDS={"c%02d"%n:(t,m) for t,rng in (("kieungao",range(1,7)),("numi",range(7,13)),("hienlanh",range(13,18)),("dangi",range(18,23)),("thamvong",range(23,28)),("thanhnha",range(28,33))) for m,n in enumerate(rng,1)}
+# N5d item 5: maid m01-m52 -> SPEC5 pose list BY INDEX (the game gives each maid a random trait, no fixed one): the six lists in the consorts' order, maid n takes list (n-1)%6 and slot (n-1)//6+1.
+_SP5_ORDER=["kieungao","numi","hienlanh","dangi","thamvong","thanhnha"]
+SPEC5_IDS.update({"m%02d"%n:(_SP5_ORDER[(n-1)%6],(n-1)//6+1) for n in range(1,53)})
 def spec5pose(o,c,t):
     m=re.search(r" Pose: calm standing pose; she holds (.+?) in a contrasting colour",o); assert m,"pose paragraph not found"
     prop=m.group(1); tr,mi=SPEC5_IDS[c]; i=mi-1
@@ -971,7 +1079,8 @@ def spec5pose(o,c,t):
         b=[r"look(?:ing)? back"]+([r"twirl",r"skipping",r"dance",r"swirl",r"light turn"] if (t>=6 or ag in ("a51","a65")) else [])
         # N2 r10b (ROOT-33, owner A0 rule 3): Nữ đế (--state nude) = top rank -> also skip walking / mid-step / turning / skirt-lifting / hairpin-adjusting frames (only affects --state nude)
         if globals().get("STATE")=="nude": b+=[r"walking",r"mid-step",r"turning",r"lifting her skirt",r"adjusting"]
-        if re.fullmatch(r"ty[1-8]|cold",str(globals().get("STATE"))): b+=[r"stole"]   # N5d item 4: trung y / cold linen robe has no stole
+        if re.fullmatch(r"ty[1-8]|cold",str(globals().get("STATE"))): b+=[r"stole"]
+        if str(globals().get("STATE")) in ("tm0","tm4"): b+=[r"adjusting",r"hairpin"]   # N5d item 5: tm0 wears one wooden pin, tm4 a winged court cap: no hairpin-touching pose   # N5d item 4: trung y / cold linen robe has no stole
         return b
     def _raw(j):
         r_=SPEC5_POSES[tr][j]
@@ -1101,7 +1210,7 @@ if __name__=="__main__":
     a=[x for x in sys.argv[1:] if not x.startswith("--")]
     _o=build_bdq(BDQ) if BDQ else build_state(a[0],STATE,a[1] if len(a)>1 else "v0") if STATE else build_trieu(a[0],TRIEUN,a[1] if len(a)>1 else "v0") if "--trieu" in sys.argv else build_low(a[0],LOWN,a[1] if len(a)>1 else "v0") if "--low" in sys.argv else build_t7(a[0],a[1] if len(a)>1 else "v0") if "--t7" in sys.argv else build(a[0],a[1] if len(a)>1 else "v0","--golden" in sys.argv)
     if "--spec5pose" in sys.argv:
-        _t=LOWN if "--low" in sys.argv else 7 if "--t7" in sys.argv else int(STATE[2:]) if STATE and STATE[:2]=="ty" else 1 if STATE=="cold" else 8   # N5d item 4: trung y tN poses at rank N, cold at the lowest
+        _t=LOWN if "--low" in sys.argv else 7 if "--t7" in sys.argv else int(STATE[2:]) if STATE and STATE[:2]=="ty" else max(1,int(STATE[2])) if STATE and re.fullmatch(r"tm[0-4]",STATE) else 1 if STATE=="cold" else 8   # N5d item 4: trung y tN poses at rank N, cold at the lowest
         _o=spec5pose(_o,a[0],_t)
     if "--nostyle" in sys.argv:   # owner 18/11 ~22:30Z: only her own identity image is a reference, no style image -> drop ONLY the style-reference sentence
         _st=" The style reference image is only for skin, drawing style, fabric and embroidery: never copy its face, body or pose."

@@ -33,3 +33,23 @@ Guard per item: snapshot of 8350 builder commands (c01–c32 × 5 ages × 19 mod
 - Items: ty N holds the tN rank cell of item_age.py (coverage ITEMT maps tyN→tN), cold holds the "lanh" cell. Pose: spec5pose at rank N for ty (calm from t6), rank 1 for cold; poses mentioning a "stole" are skipped for ty/cold (a trung y / linen robe has no stole).
 - Guard: snapshot of the 8350 existing commands 0 changed (new states only); test_low_all OK. Coverage consorts ty1–ty8 + cold: AGE, FRONT, ITEM, BG, REFS all pass; only POSE= is red at a26–a65 (and ty2–ty8 a18): same cause as item 3 (6 poses minus calm/stole skips < 5 ages).
 - Maids (m01–m52): RUN (no DATA rows yet) → fixed in item 5; Foreign princesses (NOCMD): not in my items.
+
+## Item 5 — maid ladder (tm0–tm4) + m01–m52 rows
+### Id → name table (FIGURE_GATE CUNG NỮ LADDER, Lượt 174, owner "174 đúng rồi")
+| builder id | name | design source (copied, nothing invented) | sleeve | status |
+|---|---|---|---|---|
+| `--state tm0` | cung nữ thô sử | THÔ SỬ design 842754fa / Lượt 172: plain coarse cotton/hemp, one faded colour (grey-blue / light indigo / earth brown by index), single-layer short crossed-collar jacket + ankle skirt, same-colour sash, no embroidery/jade/tassel/apron, simple bun + wooden pin | ≈1 span | built |
+| `--state tm1` | tam đẳng cung nữ (= current "Cung nữ") | the m01 tam-đẳng re-make prompt (maids-M1.md): fine silk uniform, floral borders, sash with jade/tassel pendant, double buns, silver pearl pins + flower | ≈1 span | built |
+| `--state tm2` | nhị đẳng cung nữ (= current "Đại cung nữ"; never say đại cung nữ) | main dev/figwork/maid/mjobs.py mout() k=2: brocade trim, bijia half-sleeve jacket, jade pendant, several silver/pearl pins | ≈2 spans | built |
+| (none) | nhất đẳng cung nữ | NEW outfit, reference from the owner's Phượng Lệnh art: sheet not chosen yet | ≈3 spans | **PENDING slot** `NHAT_DANG_PENDING=None` + `--state nhat` prints "PENDING" (no wording written) |
+| `--state tm3` | chưởng sự cô cô | mout() k=3, colour = LIGHTER plum purple (owner "đỡ đậm hơn") | ≈3 spans | built |
+| `--state tm4` | nữ quan | mout() k=4, red = court-dress red #99443F at EVERY age | as live | built |
+| `--state mama` | ma ma | = the Ma ma NPC outfit (fig-mama-k01) | — | **PENDING** `MAMA_PENDING=None`: the NPC outfit wording is not in the repo (only the live picture + face landmarks) → ROOT-37 asked how to proceed |
+- Common: PRE + "her face exactly as in the identity reference image" (no face words exist for maids) + MAID_IDENT (keep HER OWN hairstyle at every rank; ranks differ by hairpins, owner ~01:55Z) + AGE_TXT verbatim + outfit + COLOUR RULE (a51/a65 = deeper shade of the SAME colour; tm0 and tm4 do not change with age) + spec5pose + item_age tmK cell + K3_BG. Poses of tm0/tm4 skip "adjusting a hairpin".
+### Rows m01–m52 (data)
+- `DATA[mNN]=(PAL,"")`, `ORIG1[mNN]` = (PAL main name + hex, PAL second name + hex) with the two dominant robe tones MEASURED from live `fig-maid-mNN-t1-a18.webp` (k-means rows 32–93 %, no hue filter: first attempt with the consorts' skin/gold filter deleted the pale robes), `LOWNAME` auto-filled, `MOTIF_LOW` = (MOT[(n−1)%13] from mjobs.py, FLW[n%6]); PAL/MOT from main dev/figwork/maidC/mjobs.py:22,:31.
+- Maid personality → SPEC5 list: the game gives each maid a random trait, so by INDEX: maid n takes list [kieungao, numi, hienlanh, dangi, thamvong, thanhnha][(n−1)%6], slot (n−1)//6+1 (`SPEC5_IDS`).
+### Guard + coverage after item 5
+- Snapshot of the 8350 existing commands: 0 changed (maid rows and tm states only add cells); test_low_all OK.
+- Coverage, maids m01–m52: t1/t2/t3, kc, ngheo, tm1, tm2, tm3 = green at all ages; tm0 a26 green; Nữ đế/Thái hậu/t7/t8 only POSE= (same limit as item 3).
+- STILL RED, not done (needs source wording, not invented): (a) maids at consort ranks t4, t5, t6 = RUN: `OUTFIT_JOBS`/`OUTFIT_LOW` have per-person rows only for c01–c32; the maids' version is the old main dev/figwork/maidC/lad3.py ladder (`outfit(t,pal,mot)` + CT[1..3]) — to be ported as rows; (b) ma ma = PENDING (no NPC outfit wording); nhất đẳng = PENDING (owner sheet); (c) tm0/tm4 POSE= (their pose lists skip "adjusting a hairpin"); (d) ty/cold for maids: AGE/ITEM/FRONT/BG/REFS pass, POSE= as for consorts.
