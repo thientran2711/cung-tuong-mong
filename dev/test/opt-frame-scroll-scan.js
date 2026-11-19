@@ -13,15 +13,18 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=
   await p.evaluate(()=>{try{localStorage.clear()}catch(e){}document.getElementById('title').hidden=true;window.__nlInner=1;start();window.__nlInner=0;Q.length=0;for(const e of [...document.body.querySelectorAll('*')]){const cs=getComputedStyle(e);if(cs.position==='fixed'&&/Luân hồi/.test(e.textContent||''))e.remove()}document.getElementById('modal').hidden=true});
   await p.waitForFunction(()=>typeof EVART!=='undefined'&&EVART&&EVART.categories,null,{timeout:60000}).catch(()=>{});await p.waitForTimeout(2500);
   if(!ST)ST=await p.evaluate(()=>Object.keys(PEND).map(id=>{let a=null;try{a=kitEvArt({pid:id,pp:{},kind:'choice',opts:[1]})}catch(e){}const src=a&&a.src?String(a.src).replace(/^.*\/img\//,''):'';return {id,cat:typeof evArtCat==='function'?(evArtCat(id)||evArtCat(id+':x')||''):'',src,kind:!src?'none':/^(ev|st|act|info)-/.test(src)&&!/^act-cat-/.test(src)?'own':/^act-cat-/.test(src)?'generic':'room'}}));
-  const probe=async()=>{const r=await p.evaluate(async()=>{const sleep=t=>new Promise(r=>setTimeout(r,t));const d=document.querySelector('#modal:not([hidden]) .dlg');if(!d||!d.classList.contains('ksz3'))return null;const mb=document.getElementById('mb');
+  const probe=async()=>{await p.waitForTimeout(700);const a=await p.evaluate(()=>{const d=document.querySelector('#modal:not([hidden]) .dlg');if(!d||!d.classList.contains('ksz3'))return null;const mb=document.getElementById('mb');
    const o=d.querySelector('.opts');const cards=o?[...o.children].filter(c=>!c.classList.contains('kscue')&&c.getClientRects().length):[];if(!cards.length)return {ksz:d.dataset.ksz||'',nopt:0};
-   const sc=e=>e&&/auto|scroll/.test(getComputedStyle(e).overflowY)&&e.scrollHeight>e.clientHeight+2;const mbS=sc(mb)||(mb.scrollHeight>mb.clientHeight+2&&getComputedStyle(mb).overflowY!=='visible'&&getComputedStyle(mb).overflowY!=='clip'&&getComputedStyle(mb).overflowY!=='hidden');
-   const oS=sc(o);const owner=mbS?'#mb':oS?'opts':'none';const ov=mbS?mb:o;
+   const sc=e=>e&&/auto|scroll/.test(getComputedStyle(e).overflowY)&&e.scrollHeight>e.clientHeight+2;const cm=getComputedStyle(mb).overflowY;const mbS=sc(mb)||(mb.scrollHeight>mb.clientHeight+2&&cm==='visible');
+   const oS=sc(o);const owner=mbS?'#mb':oS?'opts':'none';const ov=mbS?mb:o;const r=ov.getBoundingClientRect();
    const hint0=!!d.querySelector('.kscue.on')||!!(o.nextElementSibling&&o.nextElementSibling.classList.contains('kscue')&&o.nextElementSibling.classList.contains('on'));
-   ov.scrollTop=ov.scrollHeight;ov.dispatchEvent(new Event('scroll'));await sleep(350);const last=cards[cards.length-1].getBoundingClientRect(),vr=ov.getBoundingClientRect();
-   const frame=d.getBoundingClientRect(),mr=mb.getBoundingClientRect();const vis=last.bottom<=Math.min(vr.bottom,frame.bottom)+1&&last.top>=vr.top-1&&last.top>=0&&last.bottom<=innerHeight+1;
-   const first=cards[0].getBoundingClientRect();ov.scrollTop=0;
-   return {ksz:d.dataset.ksz||'',nopt:cards.length,owner,lastVis:vis,hint:oS||mbS?hint0:null,mbSc:mb.scrollHeight-mb.clientHeight,optSc:o.scrollHeight-o.clientHeight,picc:d.dataset.picc||'',title:((d.querySelector('.kph h2,.kph .kt,h2,h3,.kptitle')||{}).textContent||'').trim().slice(0,30)}});return r};
+   return {ksz:d.dataset.ksz||'',nopt:cards.length,owner,hint:oS||mbS?hint0:null,mbSc:mb.scrollHeight-mb.clientHeight,optSc:o.scrollHeight-o.clientHeight,picc:d.dataset.picc||'',cx:r.left+r.width/2,cy:r.top+Math.min(r.height,innerHeight-r.top)/2}});
+  if(!a||!a.nopt)return a;/* a REAL wheel over the scroll owner, to its end (the way she scrolls) */
+  for(let i=0;i<4&&a.owner!=='none';i++){await p.mouse.move(a.cx,a.cy);await p.mouse.wheel(0,1500);await p.waitForTimeout(250)}
+  const z=await p.evaluate(()=>{const d=document.querySelector('#modal:not([hidden]) .dlg'),mb=document.getElementById('mb'),o=d.querySelector('.opts');const cards=[...o.children].filter(c=>!c.classList.contains('kscue')&&c.getClientRects().length);const last=cards[cards.length-1].getBoundingClientRect(),fr=d.getBoundingClientRect();
+   const mbOv=mb.scrollHeight>mb.clientHeight+2&&getComputedStyle(mb).overflowY!=='clip'&&getComputedStyle(mb).overflowY!=='hidden';const vr=(mbOv?mb:o).getBoundingClientRect();
+   return {lastVis:last.bottom<=Math.min(vr.bottom,fr.bottom)+1&&last.top>=vr.top-1&&last.bottom<=innerHeight+1,hintEnd:!!d.querySelector('.kscue.on')||!!(o.nextElementSibling&&o.nextElementSibling.classList.contains('on'))}});
+  return Object.assign(a,z)};
   const close=()=>p.evaluate(()=>{try{while(Q.length&&typeof closeModal==='function'){const n=Q.length;closeModal();if(Q.length>=n)break}}catch(e){}Q.length=0;document.getElementById('modal').hidden=true;try{kitCoachOff&&kitCoachOff();kitTipOff&&kitTipOff()}catch(e){}});
   const rec=async(name)=>{await p.waitForTimeout(900);let o=await probe();if(!o||!o.nopt){await close();return}o.name=name;o.dev=W+'x'+H;ALL.push(o);await close()};
   const ids=await p.evaluate(()=>Object.keys(PEND));let n=0;const seen=new Set();
