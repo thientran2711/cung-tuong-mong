@@ -1,0 +1,20 @@
+bt-t1: store sentences 45, missing 0 []; refs image identity + style M09
+bt-t2: store sentences 44, missing 0 []; refs image identity + style M09
+bt-t3: store sentences 44, missing 0 []; refs image identity + style M09
+bt-t4: store sentences 47, missing 0 []; refs image identity + style M09
+bt-t5: store sentences 44, missing 0 []; refs image identity + style M09
+bt-t6: store sentences 53, missing 0 []; refs image identity + style M09 + image swatch
+bt-t7: store sentences 39, missing 0 []; refs image identity + style M09
+bt-t8: store sentences 44, missing 0 []; refs image identity + style M09
+bt-t8o: store sentences 44, missing 0 []; refs image identity + style M09
+cl-t4: store sentences 47, missing 0 []; refs image identity + style M09
+cl-t5: store sentences 44, missing 0 []; refs image identity + style M09
+cl-t6: store sentences 53, missing 0 []; refs image identity + style M09 + image swatch
+cl-t7: store sentences 39, missing 0 []; refs image identity + style M09
+cl-t8: store sentences 44, missing 0 []; refs image identity + style M09
+cl-t8o: store sentences 44, missing 0 []; refs image identity + style M09
+pt-t1: store sentences 45, missing 0 []; refs image identity + style M09
+pt-t2: store sentences 44, missing 0 []; refs image identity + style M09
+pt-t4: store sentences 47, missing 0 []; refs image identity + style M09
+pt-t5: store sentences 44, missing 0 []; refs image identity + style M09
+pt-t6: store sentences 53, missing 0 []; refs image identity + style M09 + image swatch
