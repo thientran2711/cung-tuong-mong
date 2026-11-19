@@ -30,3 +30,9 @@ quickcheck (HEAD db1762f1): PASS · open 1385 ms · old save ok · perf new/live
 - Big seal covers the top header while leaning (it is above all UI by the owner's word); pointer-events none.
 - emo-anim/emo-fx art still absent on CDN (Foreman C), so the loop is the still + CSS motion.
 - No rollover needed (context low).
+
+## r2 (owner FAIL ~06:25Z) — branch review/seal-lean-2 @ a64f06c7 (on main 98f9f0f1)
+- Scope: lean only from STAGE seals (img.kfseal) + seals inside opened panels (#modal,.krbox,.kmov,.dlg); avatars/top bar ALWAYS still (no lean, no idle). Test: stillAvatars {avatarOrOtherLive 0, topBarLive 0}.
+- Painted loops play on the big seal: promoted img/kit/emo-anim/{gian,khoc}.webp + img/kit/emo-fx/{gian,khoc}.webp to CDN; animKey gian/phanno→gian, khoc/buon→khoc; no extra CSS shake while the loop plays; other feelings keep CSS motion. fx sprites were huge at 1.7× (covered the face) → small, placed by fxSpec (tear on cheek falling, smoke at head corner rising).
+- Gates: quickcheck PASS (166 s), fig-seal Fold+iPad: grow 1.2–1.4 s, hold 5.7–6.6 s, shrink 1.5 s, 0 overlaps, inside, 0 errors.
+- Videos: CDN img/_review/seal-lean-2/ fold-full3, ipad-full3 (+ fold|ipad-close3-{gian,buon,vui}); earlier files superseded.
