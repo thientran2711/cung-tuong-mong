@@ -7,9 +7,9 @@ import os
 H = os.path.dirname(os.path.abspath(__file__))
 T = os.path.dirname(H)
 
-BASE = {1: 'r17/t1_c06_RAN.txt', 2: 'r17/t2_c06_RAN.txt', 3: 'r17/t3_c06_RAN.txt',
-        4: 'r17/t4_c06_RAN.txt', 5: 'r17/t5_c06_RAN.txt', 6: 'r16/t6_c06_RAN.txt',
-        7: 'r15/t7_c06_RAN.txt', 8: 'r15/t8_c06_RAN.txt'}
+# Lượt 416 (N8b ebd14d1): base = the no-style tN_c06.txt (= r17 t1-t5 / r16 t6 / r15 t7-t8 minus the style sentence, renumbered).
+# Refs: 1 own face TdU0vvvVNR, [t6: 2 royal swatch TdwDfOyVNR], last Nữ quan s7IO0AUl8e.
+BASE = {n: 't%d_c06.txt' % n for n in range(1, 9)}
 DEEP = {1: 'a deep lustrous jade-celadon green like #6FA88A (the white-jade hue made much stronger, clearly jade, never white or pale)',
         2: 'a deep rich jade green like #2E7D57',
         3: 'a deep rich sapphire blue like #2B55A3',
@@ -39,9 +39,11 @@ OLD_HL = ("Hair (HAIR LAW, ranks 1-3): her hair in a HALF-UP style: the top half
           "the court crown, the rest of her long hair hanging loose down her back.")
 
 
-HOT = {1: 'plain polished wood', 2: 'fine lacquered wood', 3: 'bamboo-ivory', 4: 'ivory',
-       5: 'carved ivory with a thin gold edge', 6: 'white jade', 7: 'white jade with gold mounts and small gems',
-       8: 'the finest imperial jade, framed in gold, with a carved phoenix and jewels'}
+HOT = {1: 'ivory with a thin silver edge', 2: 'finely carved ivory', 3: 'carved ivory with a gold edge',
+       4: 'pale green jade with a gold edge', 5: 'deeper green jade with a wider gold border and a carved pattern',
+       6: 'white jade with a wide engraved gold border, carved clouds and a pearl at the top',
+       7: 'white jade fully framed in ornate gold, set with gems',
+       8: 'the finest imperial jade, framed in gold, with a carved phoenix and jewels, clearly the richest of all'}  # Lượt 422 final
 POSE = ("Pose: calm, solemn standing pose facing the viewer; she holds the court tablet, the hốt (笏), of {mat}: a long, "
         "narrow, flat tablet, slightly curved at the top, held upright in both hands in front of her chest, the whole face "
         "fully visible.")
@@ -68,8 +70,12 @@ def build(n):
             t = rep(t, OLD_SLV, NEW_SLV)
     else:
         add = habi + ' ' + HAIR + ((' ' + BODIEU) if n >= 7 else '')
-        anc = ' Image 4 is the Nữ quan' if n == 6 else ' Image 3 is the Nữ quan'
+        anc = ' Image 3 is the Nữ quan' if n == 6 else ' Image 2 is the Nữ quan'
         t = rep(t, anc, ' ' + add + anc)
+    if n == 6:  # no-style refs: the royal swatch is image 2 (tN_c06.txt still says image 3, which is now the Nữ quan)
+        t = rep(t, '(image 3, a honey-gold', '(image 2, a honey-gold')
+        t = rep(t, 'image 3 is only a colour reference, never copy', 'image 2 is only a colour reference, never copy')
+        t = rep(t, 'Image 3 is only a colour reference for the royal yellow', 'Image 2 is only a colour reference for the royal yellow')
     # Lượt 415: the hốt replaces the everyday item and its pose (owner-named swap)
     import re
     m = re.findall(r'Pose: calm standing pose; [^.]*\.', t); assert len(m) == 1
