@@ -951,7 +951,10 @@ def build_mama(c):
     if elder:
         # owner Lượt 397 item 3 (FIGURE_GATE LAW #1): a51/a65 keep the person's OWN a36 colour, each age a deeper step of the same family ("darker does not mean the same shade"); the old brown a51/a65 stay as skins
         if AGE=="a51": step=f"a DEEPER, more muted, mature shade of her {main}: a deeper muted {main}, clearly darker and less fresh than at 36 but still clearly {main}"
-        else: step=f"an even DEEPER, dusky, greyed shade of her {main}: a dusky deep {main} turning grey-toned (for green: a dusky green-grey), clearly deeper and greyer than at 51 (each age its own deeper step, never the same shade), still in her {main} family"
+        elif any(_w in main for _w in ("green","celadon","jade","teal","mint","sage","aqua")): step=f"an even DEEPER, dusky, greyed shade of her {main}: a dusky deep {main} turning grey-toned (for green: a dusky green-grey), clearly deeper and greyer than at 51 (each age its own deeper step, never the same shade), still in her {main} family"   # green people: EXACT old text (m01 approved, byte-identical)
+        else:   # Lượt 407-fix (ROOT-47): a non-green person names ONLY her own colour family, deeper and older; no green example text (it drifted ivory/olive people to grey-green)
+            _wh=(" (for ivory, cream or white: a deeper warm ivory-beige)" if any(_w in main for _w in ("ivory","cream","white","pearl")) else "")
+            step=f"an even DEEPER, dusky, older shade of her {main}{_wh}: a deeper dusty {main}, clearly deeper and more muted than at 51 (each age its own deeper step, never the same shade), staying strictly in the same hue family as her {main}, never shifting to any other hue"
         s+=(f" COLOUR RULE: take ONLY the cut from image 3; RECOLOUR the whole costume to her own colour {main} (the same colour family as her 36-year-old self) at "+step+", never brown, never black; with the embroidery in a lighter tone of the same colour and one soft gold accent; do not copy the brown of image 3.")
     else:
         s+=(f" COLOUR RULE: take ONLY the cut from image 3; RECOLOUR the whole costume to her colour {main}, a medium-saturation, medium-lightness clear tone (fresh, never pale, never dark, never brown), with the embroidery in a lighter tone of the same colour and one soft gold accent; do not copy the brown of image 3.")
