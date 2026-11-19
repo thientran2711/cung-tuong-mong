@@ -110,3 +110,29 @@ As step 0 §0a/§0b + #1's handover list: goTo, visitPal, goSee, accEtqGo, accAs
 1. The reconnect fix changes F1's shared wrapper (all intents). F1 gates are green; the reviewer should rerun coop-thin-f1 L6 + swap and coop-thin-e-net.
 2. Host long-tasks after the host changes place: not F2, but they make the 4G walks slow (up to 12 s); worth a perf item (art preload / decode off the main thread).
 3. Known from #1: E's `do ready` / erd still carry ["-",["buoi"]] (F filters it); F1's log check is timing-sensitive under parallel load (main too).
+
+## REVIEW r1 (reviewer session_01N1tNP6D9LFcHNTVw1PfbmV, opus, depth 4; START_CTX ~5 %, ended ~15 %) — VERDICT: FAIL (1 blocking item)
+PRIORITY #1 CHECK ('coop-thin F2 review'): OD 17/11 thin guest + L1487/L1489/L1493/L1494 (via the brief) | main f43a2ba6 (F1 LIVE, no goTo registration) | review/coop-thin-f2 4dabbd46 (this), review/coop-thin-f2-r1 3db28bd8 (my merge) | claims: REVIEW row (this session); F3 worker 4NVrwK67 stacked on F2.
+Merge: review/coop-thin-f2-r1 @ **3db28bd8** = 4dabbd46 + origin/main f43a2ba6 (only index.html / sw.js conflicted, generated: rebuilt by assemble + build_site). Pushed. Main is now 7fb7c104: the next round merges that.
+
+### Blocking
+1. **Her walk's own cards are lost at L7 (solo ≠ guest).** Repro (two-seat script, host Fold + guest iPad, fresh tutorial chapter, both seats quest "Đi một nơi trong cung" open, one map tap `j77Tap('vuon')`):
+   | | quest `di` | Bạc | card «Xong việc: Đi một nơi trong cung» |
+   |---|---|---|---|
+   | host (= solo path) | 0 → 1 | +15 | shown |
+   | guest **L6** (old road) | 0 → 1 | +15 | **shown** |
+   | guest **L7** (F2) | 0 → 1 | +15 | **never shown** (not in her Q, not in S.thq, no dialog) |
+   Cause: `TH.withSeat` (jcoopthin.js:152) sets `quiet=true` inside her context; F2 now runs her walks there, so every card emitter that gates on `quiet` is silenced for her: jtq14 `doneCard` / `introCard`, j67 `card67` (10 callers), j55 `tdPop`, j72 «Lỡ hẹn», j42 «Tin về chủ nhân» / «Đổi chủ», j27, j34 / j90 (contest: quiet also switches it to auto-score), j93 `kmOn` (scenes), j1 `popNum` / j11 coin feedback (floaters). Part D's `takeQ` would carry plain cards (no handlers) to her phone, but they are never queued. LUẬT SỬA CẢ NHÓM: fix for the whole intent family (F2 walks; check F1 acts too — same context, same gate), with a scan of every `quiet`-gated emitter reachable from a registered engine and a before/after table (L6 vs L7, solo vs guest). Floaters / sounds that would draw on the HOST screen once quiet is off must go on the no-op / uiCap list, not on his phone. A card with handlers and no pid cannot travel (D.bad) — list any such emitter and make it a pid card or file it for F3–F6.
+
+### Should fix (same round, small)
+2. Reconnect resend (f73e136e): the stale check compares room + week only. If the room stepped the buổi while her socket was dead (time-out forceBend), the intent is sent again with the old buổi's ctx (`used` khắc) and runs in the new buổi. Also compare her buổi (`p.b0`) after the reconnect view; different → drop with the existing «Việc ấy chưa thành, xin thử lại.». No double run is possible: the host dedupes by intent id (DONE in localStorage per room) — confirmed by P10 a/b green and code read.
+
+### Checks
+- (1) place / goTo / visit = solo: coop-thin-f2 L7 19/19 and 20/20 (TRIP), swap 19/19 (P1 every place, P2 visits both directions, P7 walk spill khắc = travel()/BAL, P10 net loss). Screen after a walk: guest = host (`.game k3ph k3home`, painting page, tab act) on iPad and on Fold (swap). Only gap found = item 1.
+- (2) level gate: CAP 7; room level = the server's min of both caps (unchanged code); old levels green: a L1 + swap 24/24, b L4 136/136 (one load red 135/136 in a parallel run, 136/136 alone), c L4 16/16, d L4 47/53 = main (kit sameDom), e L5 + swap 33/33, e-net L6 / L7 / L7 swap 20/20, f1 L6 23/23 + swap 22/22, f1 L7 22/22 + swap 22/22.
+- (3) tripwire (TRIP=1): L6 goTo **3136**, talk 81 → L7 **0 / 0** (place/visit/walk/talk filter empty). New at L7: G|nextBuoi 315 (part G bucket, not F2).
+- (4) latency: no throttle median 625–803 ms (n=34–37, max 4.5–9 s); 4G (LAG 85 + host CPU ×4) median **2118 ms** (n=33, min 1.8 s, max 16.9 s), 19/19. Cause as #2 said: host long tasks outside F2 (quickcheck perf: longTaskMax 1925 ms branch vs 1915 ms live main, same count 19/19) — not a FAIL by itself.
+  **FOR MAIN: co-op 4G walks of the guest take ~2.1 s median and up to ~17 s right after the host changes place; the cause is host long tasks (art load/decode, also on main), not F2 — perf item: preload / decode off the main thread.**
+- (5) LOOK (scratch, not committed, no CDN upload): guest iPad 1180x820@2 after a map tap: Ngự hoa viên painting page, clean; guest visit to the friend's palace (Kính Ninh điện): clean; guest Fold 755x1000@2 (swap) at Ngự hoa viên with Hoàng thượng: clean; host Fold: his own walk shows his «Xong việc» card — the card the guest never gets (item 1). Looked at 3×.
+- Gates on the merge: coop-e2e 63/63 + swap 63/63 · coop-p2 45/45 · coop-night THIN=5 / 7 105/105 · coop-timer 43/43 · coop-cyc THIN=6 / THIN=7 swap 72/73 alone; the red «mixed (old guest in her cycle tuần)» is on **main f43a2ba6 too (72/73)** — not F2 · coop-one-world seeds 1–10 PASS · quickcheck PASS (core gates one-core-guard / rules-one-source / kit-conform / coop-one-world, old save ok) · coop-b1 not rerun (F2 code off at level 0; #2's comparison with main stands).
+- Laws: 4 ONE CORE ok (khắc from travel()/BAL), 7 wording ok (only existing words), 9 KIT ok (no new UI part), 11 FIX THE GROUP → item 1 must be fixed for the family. Images: none uploaded; CDN img/_review/coop-thin-f2/ untouched.
