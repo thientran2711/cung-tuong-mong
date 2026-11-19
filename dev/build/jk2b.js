@@ -302,7 +302,7 @@ function kitHintRow(text){if(!text)return"";try{if(typeof VP==="object"&&VP&&VP.
 /* the odds meter of an option card: the card's own .kodds (kaNorm → kaOdds → oddsChip → kitOdds, read from the option's line = the odds the
    roll uses, law 4) stays; a card with no odds (a certain outcome, nothing rolled) gets the same meter at «Nắm chắc» (owner 19/11 ~01:48Z). */
 function kitOptOdds(b){try{const kat=b.querySelector(":scope > .kat, :scope > .kabody > .kat");if(!kat||kat.querySelector(".kodds"))return;
- kat.insertAdjacentHTML("beforeend",`<span class="kodds">${oddsChip(KIT_ODDS[KIT_ODDS.length-1])}</span>`)}catch(e){console.error("kitOptOdds",e)}}
+ kat.insertAdjacentHTML("beforeend",`<span class="kodds" data-ksure="1">${oddsChip(KIT_ODDS[KIT_ODDS.length-1])}</span>`)}catch(e){console.error("kitOptOdds",e)}}
 function kitHideOut(b){try{if(!b||!b.classList.contains("ka")||b.dataset.khid==="1")return;b.dataset.khid="1";b.classList.add("khideout");
  /* the hint, read from the option's data before its outcome rows go */
  let H=null;try{const M=b.closest("#modal");const o=M&&typeof Q!=="undefined"&&Q[0]&&Q[0].opts&&b.dataset.m!=null?Q[0].opts[+b.dataset.m]:null;H=kitHintOf(b,o)}catch(e){console.error("kitHint",e)}
@@ -312,7 +312,9 @@ function kitHideOut(b){try{if(!b||!b.classList.contains("ka")||b.dataset.khid===
   if(!v.querySelector(".ef"))ton.remove()}/* owner 13:25Z: no cost → no Tốn row at all (never "Tốn: không") */
  let kb=b.querySelector(".kb");if(!kb){b.insertAdjacentHTML("beforeend",`<small class="kb"></small>`);kb=b.querySelector(".kb")}
  if(H&&H.hint)kb.insertAdjacentHTML("beforeend",kitHintRow(H.hint));
- kitOptOdds(b)/* review/opt-pics: an option card with its picture holds .kat inside .kabody (KIT 6.2) */}catch(e){console.error("kitHideOut",e)}}
+ kitOptOdds(b)/* review/opt-pics: an option card with its picture holds .kat inside .kabody (KIT 6.2) */
+ /* the KIT 6.2 final card form is computed AFTER hiding (it may have run first, from kpOptArt): the hint's «nhưng …» = the sure loss stands in Tốn (law 3) */
+ if(typeof kitOptFinal==="function"&&b.dataset.kofin==="1")kitOptFinal(b)}catch(e){console.error("kitHideOut",e)}}
 (function(){const n0=kaNorm1;kaNorm1=function(b){const r=n0.apply(this,arguments);try{if(b&&b.dataset&&(b.dataset.khide==="1"||b.closest("[data-khide-all]")))kitHideOut(b)}catch(e){}return r}})();
 /* the kit sample page for this section (kit odds meter, kitHintRow, an event option in cost mode, kitResultSeal, kitKemRow) is ONE page: jkitpage.js
    (#kit, KIT §47), samples "§53" (reviewer opt-render r7 dropped the duplicate ?kit / kitSample() page). */
