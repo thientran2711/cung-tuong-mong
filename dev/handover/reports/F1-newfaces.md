@@ -47,3 +47,12 @@ I wait for your message.
   s59 18 TR (walking): wider full lips, wide forehead · big loose waves, gold chain with ruby · half-sleeve jacket · gauze butterfly fan
   s60 17 SL: lean cheeks, longer chin · large crown loop, over left shoulder · sleeveless overvest over ruqun · pink lotus in both hands
   s61 18 ST (walking): very long thick lashes, fuller brows · centre part, crossed gold pins · ruqun (swallows/willow) · red silk ribbon
+
+## Update — Lượt 767 colour fix → Lượt 770 CODES ONLY
+- Owner L767 asked softer colours for s46/s49/s50; foreman ordered a redraw; owner L770 stopped it: keep the approved pictures, change only the codes.
+- dev/art/face-common/make_lanhlung_L767.py rewrites colour words + hex in place in s46/s49/s50.v5.FULL.txt and s_root_colours.json (root_old kept, note "Lượt 770: codes only, picture not redrawn"):
+  s46 cool aquamarine #86CDB9 + soft lilac violet #A898CC (was deep blue-violet #5D5894)
+  s49 soft dusty rose #C98A97 + soft sage jade #A3C4A0 (was soft burgundy rose #C37986 + pine teal #388581)
+  s50 clear ice blue #A6C9E4 + soft raspberry pink #D498B0 (was deep raspberry #A55D7A)
+- Gens spent: 1 (s46, 135 credits, gen VX7jST6MMU, unused, ledger NEWFACE-767-STOPPED). s49 call errored, s50 not sent.
+- FLAG for P1: palettes_season.json still holds the old root pairs for these 3, and by seasons.classify the new pairs are s46 → Hạ (was Đông), s49 → Xuân (was Thu), s50 → Hạ (was Đông); s_root_colours.json still says the old root_season. check_seasons may FAIL until P1 re-seats them. make_lanhlung_L761.py ROOTS still has the old pairs (its asserts need palette names); do not re-run it without P1.

@@ -3,10 +3,17 @@
  "s46": {
   "main": "cool aquamarine",
   "main_hex": "#86CDB9",
-  "sec": "deep blue-violet",
-  "sec_hex": "#5D5894",
+  "sec": "soft lilac violet",
+  "sec_hex": "#A898CC",
   "root_season": "dong",
-  "src": "Lượt 761 Lạnh lùng"
+  "src": "Lượt 761 Lạnh lùng",
+  "root_old": {
+   "main": "cool aquamarine",
+   "main_hex": "#86CDB9",
+   "sec": "deep blue-violet",
+   "sec_hex": "#5D5894"
+  },
+  "note": "Lượt 770: codes only, picture not redrawn"
  },
  "s47": {
   "main": "periwinkle",
@@ -25,20 +32,34 @@
   "src": "Lượt 761 Lạnh lùng"
  },
  "s49": {
-  "main": "soft burgundy rose",
-  "main_hex": "#C37986",
-  "sec": "pine teal",
-  "sec_hex": "#388581",
+  "main": "soft dusty rose",
+  "main_hex": "#C98A97",
+  "sec": "soft sage jade",
+  "sec_hex": "#A3C4A0",
   "root_season": "thu",
-  "src": "Lượt 761 Lạnh lùng"
+  "src": "Lượt 761 Lạnh lùng",
+  "root_old": {
+   "main": "soft burgundy rose",
+   "main_hex": "#C37986",
+   "sec": "pine teal",
+   "sec_hex": "#388581"
+  },
+  "note": "Lượt 770: codes only, picture not redrawn"
  },
  "s50": {
   "main": "clear ice blue",
   "main_hex": "#A6C9E4",
-  "sec": "deep raspberry",
-  "sec_hex": "#A55D7A",
+  "sec": "soft raspberry pink",
+  "sec_hex": "#D498B0",
   "root_season": "dong",
-  "src": "Lượt 761 Lạnh lùng"
+  "src": "Lượt 761 Lạnh lùng",
+  "root_old": {
+   "main": "clear ice blue",
+   "main_hex": "#A6C9E4",
+   "sec": "deep raspberry",
+   "sec_hex": "#A55D7A"
+  },
+  "note": "Lượt 770: codes only, picture not redrawn"
  },
  "s07": {
   "main": "soft wine red",
