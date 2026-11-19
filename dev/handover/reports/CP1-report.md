@@ -28,3 +28,49 @@ depth 5 · START_CTX ≈ 3 % of the 1M window (context_usage read 0 at start; ow
 
 ## Handover (if a successor continues)
 Nothing pending beyond owner verdict. After her OK: wire P2/P3 into build.py (separate job), re-run checker after any override.
+
+---
+
+# CP1 part 2 — 4 SEASONS (B20 rewritten, owner Lượt 616; supersedes the cool/warm palettes3 above)
+
+depth 5 · foreman now ROOT-53 (session_01PEhRbuf8GDz77QZRdK2XXP).
+
+## Files
+- `dev/art/face-common/palettes_season.json` — per woman: `root_season`, and `xuan`, `ha`, `thu`, `dong` each `{main, main_hex, sec, sec_hex}`;
+  the approved root palette is copied unchanged into its own season with `"root": true` (★). Top-level `root_season_counts`. PROPOSAL, not wired.
+- `dev/art/palettes3/seasons.py` (season criteria, classify + target), `gen_seasons.py` (generator, extra colours list EXTRA),
+  `check_seasons.py` (checker), `make_season_sheets.py` (sheets). Hand fixes: `dev/art/palettes3/overrides_season.json`
+  as `{"m05": {"ha": ["cool lilac", "teal"]}}` (names from library.py or EXTRA). Re-run gen → check → sheets.
+- Sheets "Xuân | Hạ | Thu | Đông", ★ = root, root count under each season header:
+  `dev/handover/review-sheets/palettes-season/season_sheet1.png` (m01–m29), `season_sheet2.png` (m30–c06), `season_sheet3.png` (c07–nc3). All looked at full size.
+
+## Season criteria (OKLCH)
+temperature t = 0.8 × main warmth + 0.2 × secondary warmth (warmth = 10·C·cos(hue−55°); ivory/cream/white = 0);
+Lmin = lightness of the darker colour; dE = main-vs-secondary difference.
+- Root classification: t > 0 → **Xuân** if both colours light (Lmin ≥ 0.66) and no olive/yellow-green, else **Thu**;
+  t ≤ 0 → **Đông** if a deep colour or strong contrast (Lmin ≤ 0.58 or dE ≥ 0.30), else **Hạ**.
+- Generated palettes use the same rule plus margins: Xuân t ≥ +0.30, Lmin ≥ 0.68, clear, secondary not a strong cool;
+  Hạ t ≤ −0.15, Lmin ≥ 0.62, chroma ≤ 0.10, dE ≤ 0.24, secondary not peach/coral; Thu t ≥ +0.30, a deep colour (Lmin ≤ 0.64),
+  secondary no colder than teal; Đông t ≤ −0.15, dE ≥ 0.25, a deep colour (Lmin ≤ 0.58) or ivory.
+
+## Root counts (87 women)
+- Xuân 19: m08 m22 m35 m38 m41 m42 m52 c06 c08 c10 c13 c17 c18 c19 c20 c22 c31 nc2 nc3
+- Hạ 25: m03 m06 m11 m13 m14 m16 m18 m20 m21 m25 m30 m33 m37 m39 m43 m47 m48 m49 c02 c04 c05 c07 c09 c29 c30
+- Thu 37: m01 m02 m04 m05 m07 m09 m10 m12 m15 m17 m19 m23 m26 m27 m28 m29 m31 m32 m34 m40 m44 m46 m50 m51 c01 c03 c11 c12 c15 c16 c21 c23 c24 c25 c26 c27 c28
+- Đông 6: m24 m36 m45 c14 c32 nc1
+
+## Checker: `python3 dev/art/palettes3/check_seasons.py` → 0 FAIL
+Root unchanged and in its classified season; all 4 seasons present; each generated palette passes its season target;
+contrast (other hue family, hue/lightness gap, close hues need lightness gap ≥ 0.15); no grey; tone (chroma ≤ 0.127, lightness band);
+no gold / nothing near royal yellow #EFBD69; next rows never share a season's main, no look-alikes 1–2 rows apart,
+a pair at most twice ≥ 10 rows apart; a woman's own 4 palettes never look alike.
+
+## Royal yellow (B21, Lượt 619)
+No palette here contains royal yellow. m01–m52 / c01–c32 are maids/consorts (consort palettes stay yellow-free; the rank t6–t8 adds yellow),
+nc1–nc3 are FOREIGN princesses → no yellow. None of the 87 is a royal-family member, so nothing to flag.
+
+## Notes for the owner (A18 — notes only)
+1. Many roots are Thu (37) and few Đông (6): most approved palettes pair a warm-ish main with a deep rose/teal/indigo secondary.
+2. "Recognisably hers" = generated main stays near her main hue where the season allows; a blue-main woman's Xuân/Thu must change main (peach/coral etc.), a coral-main woman's Hạ/Đông likewise.
+3. Hạ palettes are soft on purpose (gentle contrast); 3 use "ice pink" (#E2B6CB) as a very light secondary (c12, c24, c31) — the softest pairs on the sheet.
+4. "pale orchid" is the most used Đông main (light cool colour with a deep secondary).
