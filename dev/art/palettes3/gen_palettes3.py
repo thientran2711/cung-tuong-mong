@@ -24,6 +24,12 @@ def load_p1():
                               ("nc2", "soft jade green", "#9EB28F", "deep rose", "#CF7E83"),
                               ("nc3", "wisteria lilac", "#CCA7C8", "rose-red", "#D18A92")):
         rows[k] = dict(main=mn, main_hex=mh, sec=sn, sec_hex=sh)
+    # new s-ids drawn from the season palette (owner Lượt 750/760/761): root pair chosen from the approved season colours
+    sp = os.path.join(FC, 's_root_colours.json')
+    if os.path.exists(sp):
+        for k, v in json.load(open(sp)).items():
+            if not k.startswith('_'):
+                rows[k] = dict(main=v['main'], main_hex=v['main_hex'], sec=v['sec'], sec_hex=v['sec_hex'])
     return rows
 
 # ---- rules (shared with the checker) ----

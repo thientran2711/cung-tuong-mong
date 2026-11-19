@@ -1,0 +1,43 @@
+{
+ "_note": "root (★) pairs of new s-ids, chosen from the approved season palette colours (owner Lượt 750/760); read by palettes3/gen_palettes3.load_p1",
+ "s46": {
+  "main": "cool aquamarine",
+  "main_hex": "#86CDB9",
+  "sec": "deep blue-violet",
+  "sec_hex": "#5D5894",
+  "root_season": "dong",
+  "src": "Lượt 761 Lạnh lùng"
+ },
+ "s47": {
+  "main": "periwinkle",
+  "main_hex": "#949BD8",
+  "sec": "mint",
+  "sec_hex": "#9ACBB7",
+  "root_season": "ha",
+  "src": "Lượt 761 Lạnh lùng"
+ },
+ "s48": {
+  "main": "soft blush pink",
+  "main_hex": "#DF9FA8",
+  "sec": "aqua celadon",
+  "sec_hex": "#8BC6BE",
+  "root_season": "xuan",
+  "src": "Lượt 761 Lạnh lùng"
+ },
+ "s49": {
+  "main": "soft burgundy rose",
+  "main_hex": "#C37986",
+  "sec": "pine teal",
+  "sec_hex": "#388581",
+  "root_season": "thu",
+  "src": "Lượt 761 Lạnh lùng"
+ },
+ "s50": {
+  "main": "clear ice blue",
+  "main_hex": "#A6C9E4",
+  "sec": "deep raspberry",
+  "sec_hex": "#A55D7A",
+  "root_season": "dong",
+  "src": "Lượt 761 Lạnh lùng"
+ }
+}

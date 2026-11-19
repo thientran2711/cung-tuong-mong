@@ -1228,5 +1228,55 @@
   "ver": "v5",
   "prompt_file": "dev/art/face-common/s45.v5.FULL.txt",
   "kind": "NEWFACE-737"
+ },
+ "s46": {
+  "group": "Lạnh lùng",
+  "hidden": false,
+  "ts": "2026-11-19T23:40:00Z",
+  "cut": "cpS1KEv0eP",
+  "gen": "w4aBpaU7EI",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s46.v5.FULL.txt",
+  "kind": "NEWFACE-761"
+ },
+ "s47": {
+  "group": "Lạnh lùng",
+  "hidden": false,
+  "ts": "2026-11-19T23:40:00Z",
+  "cut": "1ldcY3kr4r",
+  "gen": "hu24OP4vqL",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s47.v5.FULL.txt",
+  "kind": "NEWFACE-761"
+ },
+ "s48": {
+  "group": "Lạnh lùng",
+  "hidden": false,
+  "ts": "2026-11-19T23:40:00Z",
+  "cut": "jUoV0AQLD0",
+  "gen": "YMlKqk5WeC",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s48.v5.FULL.txt",
+  "kind": "NEWFACE-761"
+ },
+ "s49": {
+  "group": "Lạnh lùng",
+  "hidden": false,
+  "ts": "2026-11-19T23:40:00Z",
+  "cut": "Tdwx1H7VNR",
+  "gen": "DoOsxgJpcl",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s49.v5.FULL.txt",
+  "kind": "NEWFACE-761"
+ },
+ "s50": {
+  "group": "Lạnh lùng",
+  "hidden": false,
+  "ts": "2026-11-19T23:40:00Z",
+  "cut": "u5WRiP4QLD",
+  "gen": "jUoVcelLD0",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s50.v5.FULL.txt",
+  "kind": "NEWFACE-761"
  }
 }
