@@ -48,3 +48,54 @@ Also (not counted, fix with the above):
 - Shots (receiver-choice-shots.js on the merge, Fold 755x1000@2 + iPad 1180x820@2: help / ally / call), looked at: kit VIỆC dialog, Fold long rows, iPad 2 columns, no cut text. The Fold ally card shows #1: «Nhận lễ, giữ khoảng cách» has GỢI Ý "lễ ba mươi lượng, người ấy có thiện cảm hơn" and no TỐN row. Shots kept in scratch, not in git or on the CDN.
 - Not run (FAIL already decided): coop-e2e (the worker ran it: 63/63) and the paired bot run (draw counts from the test are listed above).
 - Branch review/receiver-choice-rv 1465d150d pushed (merge only, no fixes). The successor can start from it.
+
+---
+# RE-CHECK #2 — REVIEW receiver-choice #2 (BIG, opus, session_01964izDhYprGzHx3vd2qwk7) of SẴN SÀNG KIỂM 28ebffad8
+START_CTX ≈ 3 % of 1M (get_session read 0; own estimate) → rollover ≈ 28 %, ceiling 60 %.
+PRIORITY #1 CHECK ('receiver choice'): OD L1876 / ~20:35Z / ~21:15Z / ~21:30Z read verbatim | main 9a1d6922 (merged in 28ebffad8; live now 8113f42e) — jrcv not on main; j83 IROUTE/illBuy + jagacts4 cx4:ill* + jration lxAskHer (role-parity r2/r3, live) | review/*: review/receiver-choice 28ebffad8 (under review), review/parallel-time (re-check running, lands first), review/stage-here r4 (kitNotice, ONE NOTICE SYSTEM) | claims: D row (this job).
+
+## W22 commits 132d878 / dec2593 / e8750d7 — ruling
+They are Foreman C art-report commits (W22 «nam mẫu» v2/v3/v4, author w22@x) on the shared handover branch, flagged by a stop hook as Unverified. They are not on review/receiver-choice and touch no game code. Reviewer #1 was right not to rewrite them: rewriting pushed shared history is forbidden. Ruling: out of scope for this job and not a FAIL. If anyone wants them re-signed, that is C / MAIN's call.
+
+## VERDICT: FAIL 6 @28ebffad8 (no fixes made; nothing pushed to review/receiver-choice-rv)
+
+### The 6 old items, re-checked
+- #1 qua loa: FIXED. Every slot 1 now has a weaker result, Sức − prop.suc×half, and the seen-through risk in words (chanceW, VANPHONG L67). It is applied for an NPC too (test: NPC qua loa pays Sức 102/102, seen 20).
+- #2 bribel / invite2: FIXED. Both are SAME in the scan. The bribel maid picks through rcvMaidBribe; invite has the 4 answers both ways.
+- #3 judge: FIXED. She as the Hoàng hậu gets the card for xinhh / trinhhh / rougeBeg, and it survives an old save. An NPC queen picks yes / no at the shown odds.
+- #4 scan: PARTLY fixed. All 267 keys are classified (NEW = gap), and there are judge and own-servant probes. Still blind, see new #5.
+- #5 one core: FIXED. stf2BribeW is shared (with stf2Tr). BAL.rcv.kw is gone. Halves / ghen / chkSee are in BAL. The maid take / tell use the cnvBribeOpts numbers.
+- #6 role-parity: FIXED. `git diff origin/main HEAD` has no role-parity code, and role-parity.test is ALL PASS.
+
+### FAIL list
+1. **Gate not green: receiver-choice.test FAILS 2 of 3 runs on this box.** The failing check is «Mượn son phấn (cx4 rougeBorrow): the NPC lender answers…», with result {"?":80}; the one good run had yes 8 / no 1 / ? 71. The test seeds a lender `ln`, but the deed (AGRUN cx4:rougeBorrow) picks its own lender, so the rcvOddsPick branch is mostly never reached. Fix: drive the lender the deed really uses (for example, call lxBorrowCard(a,ln).run() with a seeded box), and prove 5 runs green.
+2. **Law 11 + 1, in-group: «Sai cung nữ thân tín mua lén ngoài cung» (cx4:illMaid / j83 IROUTE.maid).** The trusted maid is ordered with no obey / refuse / tell answer. On a fail she just loses Lòng. This is the same shape as bribel / laydo / laydol, which this round put through j29 DIRTY + DIRTY_SENT → stf2Ord. Route illBuy "maid" through the same stf2Ord pick, for her maid and an NPC's maid alike.
+3. **Law 11 + 1, in-group: «Xin đồng minh» (cx4:illAlly / j83 illBuy "ally").** Probe: the ally's item is spliced out (`v.inv.splice`) with no answer. Her own card says «có ngay» and the NPC ally never chooses; NPC↔NPC is the same. She is also never asked, because illAllies filters `v.alive` and S has no alive flag, so the act is one-way. This is a REQ, so it needs the 4 answers via RCVK / rcvAsk (give / give grudgingly / refuse / mách) and her card when an NPC asks her.
+4. **Law 11 + 13, in-group: her lender card for «Mượn son phấn» (jration lxAskHer).** It is a private `Q.push`, not rcvCard / PEND, which causes three problems. (a) After parallel-time lands it interrupts her act instead of going to the notice path. (b) It is not saveable, so it is lost on reload. (c) It has only 2 answers, not the L1876 4 that a peer request needs (OD ~21:15Z: "khi mà tôi nhờ vả người khác thì người đó sẽ có những cái option này"). Make it an RCVK entry; the NPC lender then picks from the same list.
+5. **Scan still blind (old #4).** A key classified REQ / PROP / ORDER / ORDER_SRV / JUDGE that the probe never reaches passes silently. That is why illAlly (REQ) and illMaid (ORDER_SRV) do not show, and the table says "gaps 0" while the worker's own report lists them as forced. Make an unreached key of those kinds a gap (or give each one a probe), so the test fails until it is either fixed or listed in role-parity-open.json with its owner.
+6. **Law 2: Kết giao slot 0 is clearly better than «Từ chối».** The worker's own value table: «Nhận lời kết giao» = +30 lượng, thiện cảm +25, quý +8 for Sức −4. «Từ chối» = lễ returned, both likings −3, Danh +1. Accepting has no real cost to match, so it is not equal value. Give the yes a real BAL cost of equal weight, or the refusal a matching gain. Numbers from BAL, shown on the card, the same for an NPC.
+
+Also, with the fix (not counted):
+- **ONE NOTICE SYSTEM** (MAIN order 19/11 ~00:30Z, owner OD 18/11 ~22:10Z): rcvCard's fallback (no parallel-time) is a queued dialog. Send her receiver notices to window.kitNotice when it is present (guard with typeof; review/stage-here r4). Keep ptOrdAdd when parallel-time is on, with no double notice.
+- **Shot staging:** receiver-choice-shots.js «judge» sets S.rank=7 while the NPC Hoàng hậu still exists, so both judge shots show her judging evidence against «Hoàng hậu …». Pick a t who is not the queen, or take the queen seat properly.
+- Live main is now 8113f42e: final-merge it before SẴN SÀNG KIỂM.
+
+### Ruling asked by D #4: the 3 cx4 gaps (illAlly, illMaid, lxAskHer)
+They belong to THIS job's whole group (law 11), not to a separate C-AG item. Each is exactly a shape this round already fixed elsewhere:
+- illMaid is an ordered own servant, like bribel / laydo / laydol.
+- illAlly is a request to a third-person holder, like the rougeBorrow lender.
+- lxAskHer is her answer card to a peer request, like rcvAsk.
+
+The scan is this job's deliverable, and it currently hides two of them. They arrived on main through role-parity r2 (C-AG) after the brief, so C-AG should be told, but the fix goes on review/receiver-choice. Fixing them touches only j83 / jration wiring plus jrcv entries.
+
+## Gates (28ebffad8; dev/index.html assembled; site build restored after)
+- receiver-choice.test: 1 FAIL in 2 of 3 runs (#1); every other check ok.
+- role-parity.test: ALL PASS.
+- quickcheck --runs 6: QUICKCHECK PASS · open 1233 ms · old save ok · perf new/live render 156/176, tab 288/279, buổi 930/1045 ms · core gates PASS (one-core-guard, rules-one-source, kit-conform, co-op one-world probe).
+- coop-e2e: 63/63 PASS.
+- Probes: illAlly (S as holder, explicit `from`) loses the item with no card (Q empty); illAllies never lists S; DIRTY has no illMaid.
+- Law 7: «khả năng vừa / thấp» follows VANPHONG L67 (chance of an attached thing); no %.
+- Law 9: kit VIỆC dialog and kit option cards; «có rủi ro» chip uses the kit risk field.
+- Shots (receiver-choice-shots.js, Fold 755x1000@2 + iPad 1180x820@2: help / ally / call / judge / invite), looked at 3×: kit dialog, Fold long rows, iPad 2 columns, no cut text, «có rủi ro» on qua loa, TỐN Sức shown. Judge staging issue noted above. Shots are kept in scratch outside git, not uploaded.
+- Landing: parallel-time lands first. After it is on main, receiver-choice MUST re-merge, because it expects conflicts in assemble.py / j21 / j29 / jbal2 and the jptime ptReg("invite") → rcvInviteGo swap, then re-run all gates.
+Context at verdict ≈ 15 %.
