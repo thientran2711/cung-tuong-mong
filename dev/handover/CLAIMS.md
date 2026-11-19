@@ -260,3 +260,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | role-parity-drift-2 (opus; 12 new red rows from landings 7fb7c104..98f9f0f1; law 1 + law 11) | review/role-parity-drift-2 | B | session_01N1tNP6PEK9T9BWXhYLZvAd | RUNNING | 19/11 07:30Z |
 | MAIN ROOT-66 (opus; child of ROOT-65, depth 4) | handover HANDOVER_SESSION9 | ROOT-65 | session_01Rc5AsNSzMY2cT8dMMPe7xW | RUNNING | 19/11 07:33Z |
 | opt-scroll-reset (opus; MAIN ROOT-65 follow-up via C-AG #22: 22 option frames re-render loop resets scroll, root cause + whole group) | review/opt-scroll-reset; briefs/cag22-opt-scroll-reset.md | C-AG #22 for ROOT-65 | session_01Rc5AsJ7aS6giCFsrSaRM6d | RUNNING | 19/11 07:40Z |
+| caoly-road BIG review (sonnet E20r; 30d7cca8) | review/caoly-road; briefs/E20r-review-caoly-road.md | FOREMAN E | (opening) | RUNNING | 19/11 07:46Z |
