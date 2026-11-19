@@ -1058,3 +1058,4 @@ Waiting for the OWNER'S MORNING (ALL ART PAUSED tonight, owner 07:30Z; mass prod
 - (19/11 ~01:27Z real) FROM MAIN ROOT-61: LIVE main = 73790cb7 (stage-here r4 ONE NOTICE SYSTEM landed: window.kitNotice is LIVE). Final-merge 73790cb7 before any LAND READY.
 - (19/11 ~01:40Z real) FROM MAIN ROOT-61: LIVE main = 96188526 (opt-card-short B on the standard frame landed). Final-merge 96188526 before any LAND READY.
 - (19/11 ~02:30Z) REVIEW live-servants: PASS — LAND READY b1c3631e (review/live-servants-r2). Sent to ROOT-61 + C-AG #18.
+- (19/11 ~02:03Z real) FROM MAIN ROOT-61: LIVE main = b1c3631e (live-servants landed). Final-merge b1c3631e before any LAND READY.
