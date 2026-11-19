@@ -1,0 +1,62 @@
+# maid-ladder-6 — six-rung maid ladder + «Ma ma» stay-on chip (worker report)
+
+PRIORITY #1 CHECK ('tam đẳng','nhất đẳng','SRK.maid','srvBar'): OD 1 (OD 19/11 ~01:26Z, L1939) + L1935 (ma ma question) | ledger 0 | claims 0 | main j14.js:34 SRK.maid (5 rungs), jbal2.js:17 srvBar/srvCd, jexam exSrv*, j42 cnv road | review/* 0 | reused: reports/hist-mama-ladder.md (expert, law 8), kit part kitTiers (j79:78) for the ladder display.
+START_CTX ~10 %. Branch review/maid-ladder-6 from origin/main b1c3631e.
+
+## Owner words (verbatim, OD 19/11 ~01:26Z)
+"Cung nữ chia là thô sử, tam đẳng, nhị đẳng, nhất đẳng, nhất đẳng là đại cung nữ như giờ"
+
+## New ladder (SRK.maid, j14)
+| idx | old (5 rungs) | new (6 rungs) |
+|---|---|---|
+| 0 | Cung nữ thô sử | Cung nữ thô sử |
+| 1 | Cung nữ | Cung nữ tam đẳng |
+| 2 | Đại cung nữ | Cung nữ nhị đẳng (NEW rung) |
+| 3 | Chưởng sự cô cô | Cung nữ nhất đẳng (= Đại cung nữ, shown as «Cung nữ nhất đẳng · Đại cung nữ» on the ladder) |
+| 4 | Nữ quan | Chưởng sự cô cô |
+| 5 | — | Nữ quan |
+| (6) | ma ma = exam index 5 | ma ma = exam index 6 (BAL.srvRk.mama), shown as the 7th tier «Ma ma» stay-on chip |
+
+Named rung indices live in BAL (one core, law 4): `BAL.srvRk = {tam:1, nhi:2, dai:3, cs:4, nq:5, mama:6, tier:[0,1,1,2,3,4]}`.
+`tier` = the old 5-step standing used ONLY for art / frame / colour / leaderboard / greeting order (tam + nhị share the present «Cung nữ» robe, frame and colour — art default from the brief); helper `srkTier(rung)`.
+
+## OLD SAVE MIGRATION (exact mapping)
+Run once on load when the save lacks `S.lad6` (new games are born with `S.lad6=1`):
+- every maid rank in the save (S.srv.rk, S.srv.rk0, S.srv.ex.to when numeric, S.rk.sr + the "s" trail of the leaderboard tracker, and every object with role "maid" and a numeric rk anywhere in S / rivals — staff, S.maid, rivals' maids, named posts): **old 0 → 0, old 1 → 1, old 2 → 3, old 3 → 4, old 4 → 5** (rk ≥ 2 → +1). Old «Cung nữ» (1) becomes tam đẳng; nobody lands on nhị đẳng by migration.
+- eunuch ranks untouched; ma ma flag (S.srv.mama) untouched.
+
+## STEP 0 — touch points (file:line on b1c3631e) and the change
+| # | file:line | what | change |
+|---|---|---|---|
+| 1 | j14:34-36 | SRK.maid, srk() | 6 names; srkTier() helper; migration fn srvLad6() |
+| 2 | j14:37 srkMax | maid cap by master rank 2/3/4 | BAL.srvRk.dai/cs/nq (3/4/5) |
+| 3 | j14:41,44 | upkeep + sale roll at srk ≥ 2 (both roles) | maids read the tier (same money as today) |
+| 4 | j14:49, j10:117, j15:70, jagacts3:174 | «Chưởng sự tra xét» needs maid srk ≥ 3 | ≥ BAL.srvRk.cs |
+| 5 | jbal2:16-17 | BAL.ex.srvBar/srvCd idx 1..4 + 5 ma ma | +1 rung: [0,18,19,20,22,24,24] / [1,1,1,1,2,2,3] |
+| 6 | jexam:233,273,275 | exSrvIx (mama 5, clamp 4), NPC exam clamp 4 + fallback arrays | BAL.srvRk.mama / .nq; no private fallback arrays |
+| 7 | j42:18 CNV_WAGE | wage by rung [1,3,5,8,12] | moved to BAL.srvWage [1,3,4,5,8,12] |
+| 8 | j42:48 SRVA.books.rk 3 | books chore from chưởng sự | BAL.srvRk.cs |
+| 9 | j42:121,206,270,271,276,462 | Đại cung nữ gates (rk ≥ 2) + texts «chỉ/cần Đại cung nữ» | ≥ BAL.srvRk.dai, text from SRK |
+| 10 | j42:409,463 | ma ma choice hi = rk ≥ 3; exit row text | ≥ BAL.srvRk.cs; expert wording «từ Chưởng sự cô cô trở lên, đỗ khảo hạch, được ở lại làm ma ma» |
+| 11 | j42:466 srvRoadHTML | Thân phận cung nữ tab | + kitTiers ladder: 6 rungs + «Ma ma» stay-on tier (law 9 kit part) |
+| 12 | jagstaff:172 | NPC maid ma ma option srk ≥ 3 | ≥ BAL.srvRk.cs (law 1: same rule as hers) |
+| 13 | jworld2:182 (+comments 180-181, jbal2:1129) | đại phóng cung nhân spares rk ≥ 3 | ≥ BAL.srvRk.cs |
+| 14 | jkiep:14,53 | kiếp milestone «lên Chưởng sự cô cô» rk ≥ 3 | ≥ BAL.srvRk.cs |
+| 15 | jst14:41 | goal «Được thăng Đại cung nữ» rk ≥ 2 | ≥ BAL.srvRk.dai, name from SRK |
+| 16 | j97:29,178,182,190 | r97srvRk clamp 4, calls 3/4 (Chưởng sự / Nữ quan) | BAL.srvRk.nq / .cs |
+| 17 | jrd_cnv:894 / jbalroad | BAL.road.cnvMaRk 3 (chưởng sự seat) | 4 |
+| 18 | jpromo:41-43,97,101 | promo chest by rung, ma ma 5 | +1 row for nhị đẳng, ma ma = BAL.srvRk.mama |
+| 19 | jpromsv:14 BAL.sp.head.maid 3 | head servant = chưởng sự | 4 |
+| 20 | jaudit:43 BAL.dbCost (by srk+1) + text 58-59 | cost to raise / effect text | +1 rung [0,20,30,40,80,120]; texts by srvRk / tier |
+| 21 | jbal2:219,225 BAL.mline eye[rk], offRank 2 | Emperor's eye by rung | eye [.1,.25,.4,.6,1,1.2], offRank 3 |
+| 22 | jbal2:400 U2 m.rk 5 per rung | maid test stat | 4 (top stays 20) |
+| 23 | jagknow:339 tm.post 3 | "wants a post" below chưởng sự | maids: BAL.srvRk.cs |
+| 24 | jbal:245-251 BAL.staff.posts rk 4/3/4 | named ma ma / cô cô | 5/4/5 (comment) |
+| 25 | j60:40,63 / j3:11 pMaid sv2 / j59:20,42 / jhouse:17 / j92:20 / jk2b:354 / j88:46,48 | art, frames, colours, silk, portrait pick by rank | read srkTier (tam + nhị share the «Cung nữ» art); S.maid default rk 2 → BAL.srvRk.dai |
+| 26 | jgreet:19,22 | bow order by rank | R.srv + tier |
+| 27 | jrank:37,40 (+ server rank/worker/src/score.js servant 0..4) | leaderboard sr | client sends the tier (server unchanged, no deploy) |
+| 28 | jk4:709, jkitpage:44-53 | title colour regex, kit sample page names | + «nhất đẳng / nhị đẳng / tam đẳng» names |
+| 29 | j6:75 load | old save | srvLad6() before normAll; j2 new game S.lad6=1 |
+
+## FOR C (Foreman B relays)
+FOR C: maid-ladder-6 splits the old «Cung nữ» rung into «Cung nữ tam đẳng» + «Cung nữ nhị đẳng» (and Đại cung nữ is now «Cung nữ nhất đẳng»). Default shipped: tam + nhị đẳng share the present «Cung nữ» robe / frame-maid-1 / colour (BAL.srvRk.tier). Do tam đẳng and nhị đẳng need their own robe (or only a colour step)? If yes, list the pictures and B wires them by changing BAL.srvRk.tier only.
