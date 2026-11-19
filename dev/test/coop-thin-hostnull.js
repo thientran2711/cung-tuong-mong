@@ -142,12 +142,14 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  {await reset();await G.p.evaluate(()=>{used=0;render()});await sync();
   const id=await G.p.evaluate(()=>{S.seenLoc={};const v=rivals.find(v=>v&&!v.coop&&v.alive&&!v.out&&!together(S,v)&&!locKnown(v));return v?v.id:null});
   if(id==null||!await H.p.evaluate(()=>!!(ACT.tat&&ACT.tat.f)))ok(true,'H4 no one to scout / no Tát act (skipped)');else{
-   await H.p.evaluate(()=>{window.__r0=roll;roll=()=>true;window.__sl0=seeLoc;seeLoc=function(v){const r=__sl0.apply(this,arguments);try{ACT.tat.f(S,v)}catch(e){console.error(e)}return r};window.__kl=KPM_LOG.length});
+   /* solo reference: the same act body on the host's own screen (his context), its moves counted (the act wrapper's timer included) */
+   const solo=await H.p.evaluate(async id=>{const v=rivals.find(x=>x.id===id);const c=[];const f=window.kpmGo;window.kpmGo=function(m){if(!COOPW.ctx)c.push(m);return f.apply(this,arguments)};try{const s0=JSON.stringify(v.slap||null);ACT.tat.f(S,v);await new Promise(r=>setTimeout(r,1200));v.slap=JSON.parse(s0)}finally{window.kpmGo=f}return c.filter(m=>m==='slap').length},id);
+   await H.p.evaluate(()=>{window.__r0=roll;roll=()=>true;window.__sl0=seeLoc;seeLoc=function(v){const r=__sl0.apply(this,arguments);try{ACT.tat.f(S,v)}catch(e){console.error(e)}return r};window.__kl=KPM_LOG.length});await sleep(300);await H.p.evaluate(()=>{window.__kl=KPM_LOG.length});
    await G.p.evaluate(()=>{window.__kp=[];const f=window.kpmPlay;window.__kp0=f;window.kpmPlay=function(m,a){__kp.push([m,a]);return f?f.apply(this,arguments):false}});
    const r=await herRun('scout',id);await sleep(2500);
    await H.p.evaluate(()=>{roll=__r0;seeLoc=__sl0});
    const g=await G.p.evaluate(()=>{const o=__kp.slice();window.kpmPlay=__kp0;return o});const h=await H.p.evaluate(()=>KPM_LOG.length-__kl);
-   ok(r.got&&r.ran===1&&g.length===1&&g[0][0]==='slap'&&h===0,'H4 her act\'s figure move: played once on HER stage, none on the host\'s stage (not even after the act wrapper\'s timer)',{g,hostMoves:h})}}
+   ok(r.got&&r.ran===1&&solo>0&&g.length===solo&&g.every(x=>x[0]==='slap')&&h===0,'H4 her act\'s figure move: played on HER stage as often as solo, none on the host\'s stage (not even after the act wrapper\'s timer)',{g,solo,hostMoves:h})}}
  /* H5 (e) law 1 two-way: an ASK act the OTHER PLAYER accepted (CW.inv set, the target = her entry) is never refused by an NPC roll after:
     the gift a dislike would refuse (jdis, its roll forced on) is given; Kết giao (its roll forced to fail) succeeds. Control: the same gift to
     an NPC with the same staging is still refused (the NPC rule unchanged). */
