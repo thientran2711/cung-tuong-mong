@@ -131,7 +131,7 @@ PEND.j67=p=>{if(!v267())return null;const A=th67(p.t);if(!A||A.a!==p.a||A.cur!==
   const fx=txt67(o.c);
   const cost=fmt(o.c||{});const line=sure?[cost?"tốn: "+cost:"",x?(/^kèm:/.test(x)?x:"thành: "+x):""].filter(Boolean).join(" · "):x.replace(/^([^·]+) · /,(m,w)=>`${w} · ${cost?"tốn: "+cost+" · ":""}`);
   return {n:fill67(o.n,A),fx,x,j67:line,go:()=>res67(p.t,p.b,i,od0)}})}};
-(function(){const d0=dilLine;dilLine=function(c){if(c&&c.j67)return kitParse(c.j67);return d0.apply(this,arguments)}})();
+(function(){const d0=dilLine;dilLine=function(c){if(c&&c.j67)return kitParse(oddsLead(c,c.j67))/* law 4: a rolled j67 line names its odds by p */;return d0.apply(this,arguments)}})();
 function res67(tk,bid,i,odds){const A=th67(tk);if(!A||A.cur!==bid)return;const a=ARC67[A.a],b=beatDef67(A,bid);const o=opts67(A,b)[i];if(!o)return;
  const sure=odds>=100,ok=sure||roll(odds);if(!sure){ap67(ok?o.w:o.l);if(ok&&o.sc)A.sc+=o.sc;if(!ok&&o.sf)A.sc=Math.max(0,A.sc+o.sf)}else{ap67(o.w);if(o.sc)A.sc+=o.sc}
  if(ok&&o.f)A.f[o.f]=1;if(!ok&&o.ff)A.f[o.ff]=1;let extra="";try{if(o.go)extra=o.go(A,ok)||""}catch(e){console.error(e)}
