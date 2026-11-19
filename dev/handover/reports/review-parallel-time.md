@@ -76,3 +76,36 @@ Minors ✔: jmkt empty segment gone (ptX); BAL.ptime.repMax 8; ptime.test prints
 - receiver-choice API unchanged: jrcv @28ebffad8 uses only `ptOrdAdd(pid,pp,title,p)` + `ptOn()`, both present with the same signature.
 - Shots (ptime-shots.js after build_site; scratch only, deleted): Fold 755x1000@2 + iPad 1180x820@2. Looked at fold 1/2/3/5/6/7 and ipad 3/6. Shot note: on fold-2 the kitLine pill («Cung nữ Nhã Thanh đã đi nghe ngóng, về khắc 4») covers the KẾT QUẢ toast. Both are kit notices fired by this branch's send at the same moment. The overlap itself is a kit stacking issue (KIT note), and item 4 (kitNotice) removes this branch's pill.
 - No FF merge, no commit on review/parallel-time-rv (FAIL).
+
+---
+# ROUND 5 RE-CHECK — REVIEW parallel-time #2 (session_01964izGNmoHXia5rt1oB2wk) · coordinator Foreman D #6 session_01964izFp9G3AD7T7VsRFoFn
+SSK 7e654611a (fixer #5). Verdict so far: ALL 4 FAIL items FIXED; every gate green on the merged build. NOT yet LAND READY, because origin/main moved again (fd6118cd) after my last final merge and I hit the rollover line (43% context; START_CTX 5% + 25% = 30%).
+
+## Work branch review/parallel-time-rv @712c6415 (pushed)
+= 7e654611a + final merges of origin/main 1cf5e8bb (28184038), c12a5878 (e243a26a), f43a2ba6 (cef906ee); only the generated index.html/sw.js conflicted each time (rebuilt with assemble.py + build_site.sh) + 2 reviewer commits:
+- 61990be5 ptime.test de-flake: test 3 counted ANY queued modal (a random world event can queue while time passes) → now counts only a modal naming this send's person; test 11 failed when the target had moved into her master's palace (the walk then correctly reads "home") → accepts that. Before: 2 FAIL in 5 runs; after: 6/6 OK; mutation `a.due<=now+1` still FAILs.
+- 712c6415 small fix (law 3, owner "never Tốn: không"): the «Đợi tin» option text «tốn: ngồi chờ đến khắc K» was read by the kit as «Tốn: không» (seen on fold-3; also on e243a26a, so this branch's text, not main) → «tốn: N khắc (ngồi chờ đến khắc K)», N = K − now, the exact jump ptWait makes. Checked rendered: «TỐN 2 khắc (ngồi chờ đến khắc 3)».
+
+## FAIL 4 re-check (all fixed)
+1 cnvOrd to another palace ✔: the order is her pass (accGrant before srvGoTo), so she walks there. Real-flow probe, 3 targets × spy/plant/poison × hết lòng/qua loa: used = shown each time (kn 3/2, r2 2/1, r23 2/1), deed ran, order gone. A refused walk keeps the order (ptime.test 11, used 0, same deadline, no pass left).
+2 no 0-khắc ✔: BAL.ptime.taskMin 1. Same-palace dò la/plant 2/1, errand home 2/1, vuon/nvp 3/2, all shown = charged.
+3 role-parity ✔: maid:pil mapped BY RULE in role-parity-scan (probes the real paths eitPilMaidOk / eitPilWho with the same lòng states, as she is and 10). Exempt/open json unchanged vs main. I accept the mapping over an exempt row. Uncapped compare (my rpfull script, all fresh gaps): main 100 = branch 100, branch-only 0, pageErr 0, maid:pil SAME. Re-run on 1cf5e8bb, c12a5878 and f43a2ba6: identical each time.
+4 kitNotice ✔: every jptime notice goes through `ptNote` → window.kitNotice (guarded; the only kitLine is the fallback). Fold-2 shot: the pill is in the top chip and no longer covers KẾT QUẢ.
+
+## Gates (on the merged builds; last full set on cef906ee + 712c6415)
+- quickcheck --runs 6 PASS on 28184038, e243a26a, cef906ee, 712c6415 (core gates incl. one-core-guard / kit-conform / coop-one-world, time-spill, old save, perf ≈ live).
+- ptime.test: 8/8 OK on 712c6415 after a single FAIL of test 4 (1 of 11 runs: wait loop stopped 1 khắc short, {"wb":[0,1,0],"due":20,"now":19}). The test's own comment: a modal popping on the way stops the jump. Rare harness flake from a random event. ptime2 ALL OK. Scan exit 0; planted pbtn (j21) and new bestSent( site (j28) → exit 1.
+- ag-stf2 5×23/23 + 23/23 on cef906ee · coop-e2e 63/63 (28184038, e243a26a, cef906ee).
+- coop-bot 6 weeks, branch vs main (main fails on its own, D #5): 0 diverged weeks both; friend-position mismatches branch 9 / 16 vs main 27; page errors 0.
+- main's new opt-loss-ton + odds-meter-back on cef906ee: PASS at 755x1000 + 1180x820 (pass a file:// URL; a bare path crashes them).
+- Shots Fold 755x1000@2 + iPad 1180x820@2 (ptime-shots, scratch only, deleted). Looked at fold 2/3/6/7, ipad 1/3/6. Note FOR MAIN (not this branch: jroad/kit unchanged here): the low-Tâm-cơ hint layer now labels its row ĐƯỢC and repeats the cost there («ĐƯỢC ba khắc (cả đường đi), nắm thêm…»), and «Từ chối» reads «TỐN bị phạt quỳ… · ĐƯỢC chẳng được gì».
+
+## HANDOVER (successor = REVIEW parallel-time #3; only the final step is left)
+1. Worktree: `flock /home/user/wt/fetch.lock git fetch --depth=60 origin review/parallel-time-rv main` → `git worktree add /home/user/wt/ptrv -B review/parallel-time-rv origin/review/parallel-time-rv` (sparse, as in recipes above).
+2. Merge CURRENT origin/main (was fd6118cd at 04:56Z). If only index.html/sw.js conflict: `git checkout --theirs index.html sw.js && python3 dev/build/assemble.py && bash dev/site/build_site.sh`, add, commit.
+3. Gates on the commit, ONE AT A TIME. Never run tests while quickcheck runs: its coregates writes `_aa.html` + index.html in the worktree. quickcheck --runs 6; ptime.test ×3 + ptime2; ptime-scan; ag-stf2; coop-e2e; role-parity uncapped compare vs main (no branch-only gap); if main touched UI options, opt-loss-ton + odds-meter-back with file:// URLs; shots fold-3 + fold-6 3×.
+4. All green → push review/parallel-time-rv, write «LAND READY review/parallel-time-rv <sha>» (FOR MAIN ROOT-63 session_01Rc5AsN8fHJWShQ7rSPxjx5) in FOREMAN_D_STATUS + verdict here, send_message Foreman D (latest PICKUP line). Mention the 2 reviewer commits (61990be5 test de-flake, 712c6415 «Đợi tin» Tốn).
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+- The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+- Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+- Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
