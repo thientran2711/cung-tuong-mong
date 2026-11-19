@@ -31,3 +31,9 @@ Frame check: seal pops to about head size above the figure, giận shows the pai
 - quickcheck PASS 186 s (open 1462 ms, perf 195/207 render, tab 399/349, buoi 1067/927).
 - Videos (CDN  base above, replaced): full-*, close-{gian,buon,vui,binh}-*, NEW event-755x1000.mp4 + event-1180x820.mp4 (full-screen: dialog opens, seal pops to head size beside the figure, holds, shrinks; LOOKED on frame sheets).
 Note: Fold event take = seal pops beside the figure at the dialog's left; stays inside the dialog/screen.
+
+## r3 @ b66869d6 (merged LIVE main 950508fc)
+- Fix: the once-per-opening flag sits on the figure column (lean.openKey .kszfig), because the .ksz3 shell persists between openings (a stale flag made the dialog lean fail ~1 in 4 runs). fig-seal Fold/iPad/1366 x2 each: pass, leansInDialog 1 every time, 0 errors.
+- Fix: a seal already bigger than the head frame (box not laid out / mid-transition: one video take showed a 435 px pop) never leans (kesLean skips + reschedules); kesHead no longer max()es with the seal's own width.
+- quickcheck PASS 193 s (open 1538 ms; render 247/185, tab 442/454, buoi 1185/1379, tasks>200ms 21/20; core gates PASS).
+- Videos re-recorded on b66869d6 (same CDN names, folder img/_review/seal-lean-3/): full-*, event-*, close-{gian,buon,vui,binh}-* for 755x1000 + 1180x820. Note: a stage seal may still lean over an open dialog (above UI by the owner's word); the dialog's own seal leans once on open.
