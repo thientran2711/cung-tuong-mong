@@ -16,10 +16,10 @@
    State: S.gmeet {key, pend:[{vid,kh,pl,key}]} (lazy; old saves load without it). Perf: one pass over the consorts per buổi (window.__gmMs). */
 const GM={stat:{tick:0,stay:0,meet:0,her:0,npc:0,shown:0,drop:0,byPl:{},byOpt:{}},ms:[]};
 function grRank(p){const R=BAL.greet.rank;if(!p||!S)return 0;if(p===S.emp)return R.top;if(S.thO&&p===S.thO)return R.th;
- if(p===S){try{if(typeof isSrv==="function"&&isSrv())return R.srv+(S.srv.mama?R.mama:(+S.srv.rk||0))}catch(e){}return S.out?R.out:R.cons+(rkOf(S)||0)}
+ if(p===S){try{if(typeof isSrv==="function"&&isSrv())return R.srv+(S.srv.mama?R.mama:srkTier(+S.srv.rk||0))}catch(e){}return S.out?R.out:R.cons+(rkOf(S)||0)}
  if((rivals||[]).includes(p))return p.out?R.out:R.cons+(rkOf(p)||0);
  let k="";try{k=k61Kind(p)}catch(e){}if(k==="man"||k==="off"||k==="phys")return R.man;if(k==="tq")return R.srv+R.tq;if(k==="mama")return R.srv+R.mama;if(k==="kid")return R.cons+R.kid;
- return R.srv+(+p.rk||0)}
+ return R.srv+srkTier(+p.rk||0,p.role)}/* maid rung → tier (maid-ladder-6) */
 /* one seat / chí tôn: everyone knows who holds it */
 function grUniq(p){if(!p||!S)return false;if(p===S.emp||(S.thO&&p===S.thO))return true;const cons=p===S?!(typeof isSrv==="function"&&isSrv()):(rivals||[]).includes(p);
  if(!cons||p.out)return false;try{return BAL.seatCap[rkOf(p)]===1}catch(e){return false}}
