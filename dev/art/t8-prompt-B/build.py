@@ -1875,6 +1875,10 @@ def _run_cmd(argv):
     import subprocess
     r=subprocess.run([sys.executable,os.path.abspath(__file__)]+argv,capture_output=True,text=True,env={**os.environ,"PYTHONDONTWRITEBYTECODE":"1"})
     return r.returncode,r.stdout,r.stderr.strip()
+def _legacy_master(out,mp):
+    """a gen made BEFORE the B25 master block (MG1): PASS when master_common.apply(its prompt) == today's builder output (only the block differs)."""
+    sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); import master_common as _MC
+    return _MC.apply(mp.strip())==out.strip()
 def verify_ledger(path,since=None):
     import json
     bad=0; n=0
@@ -1886,7 +1890,7 @@ def verify_ledger(path,since=None):
         if not e.get("magnific_prompt"): print("FAIL",tag,"| magnific_prompt missing (painter: creations_get gen_id, then --log-fill)"); bad+=1; continue
         rc,out,err=_run_cmd(e["argv"])
         if rc: print("FAIL",tag,"| builder error:",err[-120:]); bad+=1
-        elif out.strip()!=e["magnific_prompt"].strip():
+        elif out.strip()!=e["magnific_prompt"].strip() and not _legacy_master(out,e["magnific_prompt"]):
             k=next((j for j,(x,y) in enumerate(zip(out.strip(),e["magnific_prompt"].strip())) if x!=y),min(len(out.strip()),len(e["magnific_prompt"].strip())))
             print("FAIL",tag,"| Magnific prompt differs from the builder at char",k,": builder ...%r / magnific ...%r"%(out.strip()[max(0,k-30):k+40],e["magnific_prompt"].strip()[max(0,k-30):k+40])); bad+=1
         else: print("PASS",tag)
@@ -2005,6 +2009,8 @@ if __name__=="__main__":
     if "--golden" not in sys.argv:
         _o,_n=IDENT_RX.subn(IDENT_LAW,_o)
         assert "hairstyle colour" not in _o and "her own hairstyle (the same" not in _o,"identity sentence variant not covered: "+_o[max(0,_o.find("hairstyle")-200):_o.find("hairstyle")+80]
+    if "--golden" not in sys.argv and os.environ.get("CTM_MASTER_LATER")!="1":   # B25 ONE MASTER COMMON BLOCK (owner Lượt 745/766, MG1): dev/art/MASTER_COMMON.txt verbatim, every output (golden = frozen reproduction, exempt; CTM_MASTER_LATER=1 = a post-editing caller (nude-B/mk.py) applies it as ITS last step; check_store FAILs any prompt without it)
+        sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); import master_common as _MC; _o=_MC.apply(_o)
     print(_o,end="")
     _lg=[x for x in _RAW if x not in ("--log","--refs")]
     if "--gen-id" in _lg: _i=_lg.index("--gen-id"); _gid=_lg[_i+1]; _lg[_i:_i+2]=[]

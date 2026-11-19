@@ -260,7 +260,9 @@ def prompt(i, age, rank=None):
         raise Held(f"HELD for the owner: no approved men age text for {age}")
     out = _prompt(i, age)
     assert out.endswith(END) and D9 not in out
-    return out[:-len(END)] + D9 + END   # D9 (Lượt 529)
+    out = out[:-len(END)] + D9 + END   # D9 (Lượt 529)
+    sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); import master_common
+    return master_common.apply(out)   # B25 ONE MASTER COMMON BLOCK (owner Lượt 745/766, MG1), last step
 
 def _prompt(i, age):
     pre, _, n = i.rpartition("-")
@@ -300,7 +302,8 @@ def main(argv):
             n += 1; o = _argv_parse(r["cmd"].split()[2:])
             try: p = prompt(o["id"], o["age"], o["rank"])
             except Held as e: p = "HELD " + str(e)
-            if p != r["prompt"] or refs(o["id"], o["age"]) != r.get("refs"): bad += 1; print("FAIL", r.get("gen_id"), r["cmd"])
+            import master_common   # a gen made before the B25 master block (MG1) passes when only the block differs
+            if (p != r["prompt"] and master_common.apply(r["prompt"]) != p) or refs(o["id"], o["age"]) != r.get("refs"): bad += 1; print("FAIL", r.get("gen_id"), r["cmd"])
         print(f"verify: {n} build_npc gens, {bad} FAIL"); return 1 if bad else 0
     o = _argv_parse(argv)
     try: p = prompt(o["id"], o["age"], o["rank"])

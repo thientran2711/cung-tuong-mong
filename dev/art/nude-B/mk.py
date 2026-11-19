@@ -26,7 +26,7 @@ WRAP=os.path.join(R,"_build_item.py")   # runs build.py unchanged except age_ite
 for age in ("a18","a26","a36","a51","a65"):
     argv=[sys.executable,WRAP,p,"v0","--state","nude","--spec5pose","--nudeopt","auto","--nostyle"]+(["--age",age] if age!="a18" else [])
     it=_NL[_NA[age][(int(p[1:])-1)%5]]   # IT1 438794d (E11): build.NUDE_LIST[NUDE_AGE[age][(n-1)%5]]
-    o=subprocess.run(argv,capture_output=True,text=True,check=True,env={**os.environ,"PYTHONDONTWRITEBYTECODE":"1","NDX_ITEM":it[0],"NDX_HK":it[1]}).stdout
+    o=subprocess.run(argv,capture_output=True,text=True,check=True,env={**os.environ,"PYTHONDONTWRITEBYTECODE":"1","NDX_ITEM":it[0],"NDX_HK":it[1],"CTM_MASTER_LATER":"1"}).stdout
     if "Her face: ." in o: o=o.replace("Her face: .",face,1)   # older builder: empty slot
     assert o.count(face)==1,"face words (BW3 builder fills them from KC_REFS)"
     o=re.sub(r"\b([Ii])mage 3\b",r"\1mage 2",o)
@@ -112,5 +112,6 @@ for age in ("a18","a26","a36","a51","a65"):
     # NDX4 r4 (ROOT-56, owner Lượt 702 item colour): the item word "hand warmer of gold" fights HELD ITEM COLOUR (came out gold in r3) -> only the colour word changes
     if "a hand warmer of gold carved with dragons" in o: o=o.replace("a hand warmer of gold carved with dragons","a hand warmer of green jade carved with dragons")
     assert "hand warmer of gold" not in o
+    sys.path.insert(0,os.path.join(ROOT,"dev/art")); import master_common; o=master_common.apply(o)   # B25 MASTER block (MG1), last step after the edits above
     open(os.path.join(R,"prompts",f"{p}_{age}.txt"),"w",encoding="utf-8").write(o)
     print(p,age,len(o),"chars")

@@ -3,7 +3,7 @@
 Usage: python3 build.py live1|live2|e1|e2|e3|e4 [--age a18|a26|a36|a51|a65]  -> prints the exact prompt.
 ONLY the FACE line, the OUTFIT slot and the ITEM/hand slot differ between the six emperors; PRE, identity/style lines, AGE_TXT, COLOUR rule, FAB, pose sentence and END are byte-identical.
 """
-import sys
+import sys,os
 # PRE / END / FAB / YEL_NEW copied byte-for-byte from the consort builder (dev/art/t8-prompt-B/build.py)
 PRE=("Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference portraits; full-body standing figure head to feet, centered, plain light parchment background, soft even light; fair porcelain skin; gentle expression with soft eyes and a bright closed-lip smile, lips closed, no teeth, mouth never open; elegant, slim, clearly adult; beautiful/handsome romantic-lead looks for everyone; face clearly visible, body and face frontal, standing squarely facing the viewer, no turn.")
 END=" Eyes soft, warm and round-almond, never slanted or upturned, never teary. Everyone beautiful at every age. No text, no labels."
@@ -60,7 +60,8 @@ def build(k,age="a26"):
     s+=f" Pose: calm standing pose; he holds {item} in a contrasting colour, not the robe colour, the item held below the chin or before the waist, the hand really gripping it, the whole face fully visible. His hands interact naturally with the item (gently presenting, turning or touching it), lively and natural, while his head stays up facing the viewer, eyes open, lips closed, never looking down. His hands and body: {hand}."
     if REF2: s+=" "+REF2
     s+=" Luminous smooth porcelain skin, bare clean forehead, eyes open, floor-length robe with shoes visible, no train, no cup, nothing covering the face."
-    return s+D9_FOREHEAD+END
+    sys.path.insert(0,os.path.dirname(os.path.dirname(os.path.abspath(__file__)))); import master_common
+    return master_common.apply(s+D9_FOREHEAD+END)   # B25 ONE MASTER COMMON BLOCK (owner Lượt 745/766, MG1), last step
 if __name__=="__main__":
     age="a26"
     if "--age" in sys.argv: age=sys.argv[sys.argv.index("--age")+1]
