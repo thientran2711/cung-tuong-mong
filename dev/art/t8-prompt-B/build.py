@@ -193,10 +193,10 @@ def _e6_picks(c,age):
     if key in _E6_CACHE: return _E6_CACHE[key]
     n=int(c[1:]) if c[1:].isdigit() else sum(map(ord,c)); j=(n-1)%5; L=_E11_LISTS(); used=set(); out={}
     gs=group_slot(c)
-    if gs and gs[1]<8:   # E12: look-group member -> her slot's colour class (8 different items per rank inside the group, 8 different kinds per person)
+    if gs:   # E12: look-group member -> her slot's colour class (8 different items per rank inside the group, 8 different kinds per person)
         GI=_group_items(gs[0],age)
         if GI:
-            for t in _E6_TIERS: out[t]=L[t][0][GI[(gs[1],t)]]
+            for t in _E6_TIERS: out[t]=L[t][0][GI[(gs[1]%8,t)]]
             lst,d=L["nude"]; k8=e6_kind(out["t8"][0])
             out["nude"]=lst[next((d[age][(j+k)%5] for k in range(5) if e6_kind(lst[d[age][(j+k)%5]][0])!=k8),d[age][j])]
             _E6_CACHE[key]=out; return out
@@ -219,7 +219,7 @@ def _e6_picks(c,age):
 # c*/nc* there are proposals only) at one rank + age every person holds a DIFFERENT item. E11 lists hold 8 items per rank per age, so 8 people x 8 ranks:
 # the items of one age form a bipartite multigraph rank -- item kind (every rank 8 items, every kind <= 8 items at one age); a proper 8-edge-colouring (Kőnig,
 # alternating-path method, deterministic edge order t1..t8 x list order) gives 8 colour classes, each = one item per rank with 8 different kinds (E6).
-# Group member number i (members sorted) takes colour class i. A 9th member (old 9-person groups) keeps the per-person pick (pigeonhole: one repeat unavoidable).
+# Group member number i (members sorted) takes colour class i % 8 (groups bigger than 8: each item at most ceil(members/8) times, the pigeonhole minimum).
 _LG=None
 def look_groups():
     global _LG
@@ -228,7 +228,7 @@ def look_groups():
         for ln in open(_os.path.join(_os.path.dirname(_os.path.abspath(__file__)),"..","face-common","LOOK_GROUPS.md"),encoding="utf-8"):
             m=re.match(r"## (.+?)( \(|$)",ln.strip())
             if m: cur=m.group(1).strip(); continue
-            ids=re.findall(r"\bm\d\d\b",ln) if cur else []
+            ids=re.findall(r"\bm\d\d\b",ln) if cur and re.match(r"m\d\d\s*(,|$)",ln.strip()) else []   # member lines only (a line that STARTS with an m id), never a note such as "m01–m52"
             if ids: _LG.setdefault(cur,[]).extend(ids)
         _LG={k:sorted(v) for k,v in _LG.items()}
     return _LG

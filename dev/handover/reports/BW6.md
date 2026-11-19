@@ -13,7 +13,8 @@ depth 7 · START_CTX ≈ 4 % (get_session used_tokens read 0; own estimate) · c
 - Numbers + gates: `dev/handover/reports/same-rank-audit.md` section "E12 SAME-RANK FIX — BEFORE / AFTER". Sắc sảo and Tinh nghịch: item / angle / grace now 8 different in 40/40 cells (before: items avg 4.6 distinct, up to 4 people sharing one item; angle sentence up to 3; grace up to 3; angle class up to 3–5 per class).
 - Notes / not done:
   - Nữ đế list (NUDE_LIST) and maid / ma ma AGE5 lists are still 5 per age (no m look-group member has a Nữ đế rank; E11 line says so).
-  - 9-person old groups (Tươi tắn, Dịu dàng, Trong trẻo, Đoan trang): 8 items / 8 grace lines for 9 people → one unavoidable repeat; gate cap 2 there.
+  - Groups bigger than 8 (old 9-person groups, or a bigger group from the owner's regrouping tick page, LOOK_GROUPS.md 'Chia lại nhóm' Lượt 673–680): member i takes slot i % 8 → items/grace repeat only ceil(n/8); angles all different up to 14, class ≤ 2 up to 10 (e12_caps). Tested with fake groups of 8/9/10/14/16.
+  - LOOK_GROUPS parser reads only lines that START with an m id (the new 'Chia lại nhóm' note says 'm01–m52' and was first read as 2 members). When the owner's tick-page result is written into LOOK_GROUPS.md, the plans follow it automatically (prompts of moved people change).
   - The prompts of every look-group person changed (items/angle/grace). E12 = new gens only; already-drawn pictures stay.
   - BW5 handover order "flower-name size words" (A21 small fix) was not in my brief; NOT done (e.g. build.py MAID_FLOWER still has "a tiny camellia").
   - Partial clone: many files carry git skip-worktree ("S"); before editing a file run `git update-index --no-skip-worktree <file>` or git will not see the change.

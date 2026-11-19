@@ -351,13 +351,20 @@ def ang_class(s):
     if "THREE-QUARTER" in s: return "3/4 "+side
     if "FRONTAL" in s and "SLIGHT" not in s: return "frontal"
     return "slight "+side
-def group_angles(name,mem,age,cls,cap=2):
-    """E12: people x ranks grid of ANG14 indices; each rank: all different, <= cap per visual class; each person: 8 different (E1). Deterministic seeded backtracking."""
-    cells=[(c,t) for t in range(1,9) for c in mem]; A={}
+def e12_caps(n,cls):
+    """E12 caps inside a group of n at one rank + age: (item/grace, angle sentence, angle class) = the pigeonhole minimum; class cap 2 while n <= 10
+    (cls = visual class of every ANG14 sentence; bigger groups: the smallest cap the class sizes allow)."""
+    import math,collections
+    ca=math.ceil(n/len(cls)); sz=collections.Counter(cls).values(); cc=2
+    while sum(min(k*ca,cc) for k in sz)<n: cc+=1
+    return math.ceil(n/8),ca,cc
+def group_angles(name,mem,age,cls):
+    """E12: people x ranks grid of ANG14 indices; each rank: all different (<= ceil(n/14)), <= 2 per visual class (more only if the group has > 10); each person: 8 different (E1). Deterministic seeded backtracking."""
+    cells=[(c,t) for t in range(1,9) for c in mem]; A={}; _,ca,cc=e12_caps(len(mem),cls)
     def ok(c,t,v):
         if any(A.get((c,u))==v for u in range(1,9)): return False
         col=[A[(d,t)] for d in mem if (d,t) in A]
-        return v not in col and sum(cls[x]==cls[v] for x in col)<cap
+        return col.count(v)<ca and sum(cls[x]==cls[v] for x in col)<cc
     def go(i):
         if i==len(cells): return True
         c,t=cells[i]; vals=list(range(len(cls))); _random.Random(f"E12-angle-{name}-{age}-{c}-{t}").shuffle(vals)
@@ -370,9 +377,9 @@ def group_angles(name,mem,age,cls,cap=2):
     assert go(0),("E12 angle plan impossible",name,age)
     return A
 def group_grace(name,mem,age,K=8):
-    """E12: Latin square over the first 8 members (sorted) x 8 ranks: every rank 8 different lines, every person 8 different lines; a 9th member keeps her plan line."""
+    """E12: Latin square over members (sorted) x 8 ranks: every person 8 different lines; member i uses row i % 8 -> every rank each line at most ceil(n/8) times."""
     R=_random.Random(f"E12-grace-{name}-{age}"); rp=list(range(K)); cp=list(range(K)); sp=list(range(K)); R.shuffle(rp); R.shuffle(cp); R.shuffle(sp)
-    return {(c,t):sp[(rp[i]+cp[t-1])%K] for i,c in enumerate(mem[:K]) for t in range(1,9)}
+    return {(c,t):sp[(rp[i%K]+cp[t-1])%K] for i,c in enumerate(mem) for t in range(1,9)}
 def apply_dedupe(person,rank,age,S):
     pick,prop,sp,body=dedupe_pick(person,rank,age)
     store(person,rank,age)   # LAST_G back to this rank
@@ -542,10 +549,10 @@ def _E12_GATE(age):
     import math,collections
     store("c06",1,age); g=LAST_G; P=plan(age); bad=[]
     for name,mem in g["look_groups"]().items():
-        mem=[c for c in mem if c in PEOPLE]; ci=math.ceil(len(mem)/8); ca=math.ceil(len(mem)/14)
+        mem=[c for c in mem if c in PEOPLE]; ci,ca,cc=e12_caps(len(mem),[ang_class(x) for x in g["ANG14"]])
         for t in range(1,9):
             for f,vals,cap in (("item",[g["_e6_picks"](c,age)["t%d"%t][0] for c in mem],ci),("angle",[P[(c,t)][0] for c in mem],ca),
-                               ("angle class",[ang_class(g["ANG14"][P[(c,t)][0]]) for c in mem],2),("grace",[P[(c,t)][2] for c in mem],ci)):
+                               ("angle class",[ang_class(g["ANG14"][P[(c,t)][0]]) for c in mem],cc),("grace",[P[(c,t)][2] for c in mem],ci)):
                 m=max(collections.Counter(vals).values())
                 if m>cap: bad.append((name,"t%d"%t,f,m))
         m=max(collections.Counter(g["th_index"](c,age) for c in mem).values())
