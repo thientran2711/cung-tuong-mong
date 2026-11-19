@@ -541,4 +541,8 @@ LINEAGE (owner 17/11, canon overwrite owner OD 18/11 ~07:30Z/~07:33Z): your firs
 
 ## G1 #13 integrator (session_01964izCVSXwrPa8QDuYLmCB, 19/11 ~03:55Z–) — depth 7, START_CTX ≈ 4 % (estimate; context_usage read 0 of 1 M); rollover at ≈ 29 %
 PRIORITY #1 CHECK: OD npc-purpose brief | main c12a5878 (LIVE, maid-ladder-6) | review/npc-purpose 7f7ea503 (contains c12a5878: no merge needed) | claims G1 rows (C-AG #18).
-1. Worktrees npcp (7f7ea503) + base (c12a5878) built. Rates rK1 running.
+1. Worktrees npcp (7f7ea503) + base (c12a5878) built. Static gates on 7f7ea503: npc-purpose-scan --strict PASS (419), one-core-guard PASS, sonphan-scan PASS, typed-ladder 16 = base 16.
+2. RATES rK1 (7f7ea503 vs c12a5878): 2 rows OUT, both probed (scratch det.js, seeds 1–12, head + base), neither a lost event → json why with numbers (44ea405a / 2e86a08a):
+   'l:vì ghen ghét bạn hầu' 0 → 10 = the same servant-on-servant strike reworded (LIVE 'vì ghen ghét trong cung' 3); every servant-on-servant harm 105 vs 87 (1.21).
+   'l:phủ khất bổng lộc của' 2.7 → 30 = NPC Empress pay cut aimed at her: all NPC-Empress cuts 137 vs 145 (equal), per valid-target tuần 6.2 % vs 5.7 % (NPC targets 4.3 vs 4.2 %); the gap = tuần she is a valid target 258 vs 35 (Empress mean rel to her −33 vs −10, lower on 9 of 12 seeds). Source: weekly lie-rumour seeds (j95b lieMe + listener = who likes her least, PHASE A design) 600 vs 396 aff points, 50 vs 30 rumours planted in the Empress, then her own acts on her (36 vs 4) widen it.
+3. LIVE moved to f43a2ba6 (odds-meter-back r2, D #6) → merged e5d92efa (only index.html / sw.js conflicted, rebuilt). Head now 2e86a08a; base rebuilt at f43a2ba6. Rates rL1 / rL2 running.
