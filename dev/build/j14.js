@@ -42,6 +42,8 @@ function srvLad6(){if(!S||S.lad6)return 0;const up=r=>typeof r==="number"&&r>=2?
   for(const k in o){const v=o[k];if(v&&typeof v==="object")walk(v,d+1)}};
  try{if(S.srv){const v=S.srv;["rk","rk0"].forEach(k=>{const r=up(v[k]);if(r!==v[k]){v[k]=r;n++}});if(v.ex&&typeof v.ex.to==="number")v.ex.to=up(v.ex.to)}
   if(S.rk&&typeof S.rk==="object"){if(typeof S.rk.sr==="number")S.rk.sr=up(S.rk.sr);(S.rk.t||[]).forEach(t=>{if(Array.isArray(t)&&t[2]==="s")t[3]=up(t[3])})}
+  /* the promo chest tracker (jpromo prSeen.s: rung seen, old ma ma 5 → 6): without it every old maid save got her rung chest again on load (review r1) */
+  if(S.prSeen&&typeof S.prSeen.s==="number")S.prSeen.s=up(S.prSeen.s);
   walk(S,0);(typeof rivals!=="undefined"?rivals:[]).forEach(v=>walk(v,1))}catch(e){console.error(e)}
  S.lad6=1;return n}
 function srkMax(o,s){const r=rkOf(o);const K=BAL.srvRk;if(s.role==="maid")return r>=7?K.nq:r>=4?K.cs:K.dai;return r>=5?3:r>=3?2:1}

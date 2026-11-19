@@ -41,11 +41,11 @@ const boot=async(p,u)=>{await p.goto(u,{waitUntil:'domcontentloaded',timeout:0})
    const ne=await p.evaluate(()=>{const B=BAL.ex,b0=B.srvBar.slice();B.srvBar=[0,0,0,0,0,0,0];let a=0;const s={sid:4243,role:'maid',rk:4,loyal:60,exCd:0};try{a=exSrvNpc(s)?1:0}catch(e){a=e.message}B.srvBar=b0;return a});
    ok(ne===1,'NPC exam to Nữ quan reads srvBar[5]',ne);
    /* 5. migration on a 5-rung state (same build): rk 0..4 → 0,1,3,4,5; eunuch kept; second load does not shift again */
-   const mg=await p.evaluate(()=>{const d=JSON.parse(JSON.stringify(ser()));delete d.S.lad6;d.S.srv.rk=2;d.S.srv.rk0=3;d.S.srv.mama=0;
+   const mg=await p.evaluate(()=>{const d=JSON.parse(JSON.stringify(ser()));delete d.S.lad6;d.S.srv.rk=2;d.S.srv.rk0=3;d.S.srv.mama=0;d.S.srv.lau=0;d.S.prSeen={r:null,s:2};/* r1: the old build saw her rung → no second chest */
     const m=d.R.find(v=>v.id===S.srv.mid)||d.R[0];m.staff=[0,1,2,3,4].map(r=>({sid:9000+r,role:"maid",rk:r,name:"T"+r,loyal:50,age:20})).concat([{sid:9100,role:"eunuch",rk:2,name:"E",loyal:50,age:20}]);
-    deser(d);const st=(rivals.find(v=>v.id===S.srv.mid)||rivals[0]).staff;const one={rk:S.srv.rk,rk0:S.srv.rk0,m:st.filter(s=>s.sid>=9000&&s.sid<9100).map(s=>s.rk),e:st.find(s=>s.sid===9100).rk,lad:S.lad6};
+    deser(d);const st=(rivals.find(v=>v.id===S.srv.mid)||rivals[0]).staff;const one={rk:S.srv.rk,rk0:S.srv.rk0,m:st.filter(s=>s.sid>=9000&&s.sid<9100).map(s=>s.rk),e:st.find(s=>s.sid===9100).rk,lad:S.lad6,seen:S.prSeen&&S.prSeen.s};Q.length=0;const n0=window.__prN||0;render();Q.length=0;one.chest=(window.__prN||0)-n0;
     const d2=JSON.parse(JSON.stringify(ser()));deser(d2);return Object.assign(one,{again:S.srv.rk})});
-   ok(mg.rk===3&&mg.rk0===4&&mg.m.join()==="0,1,3,4,5"&&mg.e===2&&mg.lad===1&&mg.again===3,'old-save migration 0→0 1→1 2→3 3→4 4→5, eunuch kept, once',mg);
+   ok(mg.rk===3&&mg.rk0===4&&mg.m.join()==="0,1,3,4,5"&&mg.e===2&&mg.lad===1&&mg.again===3&&mg.seen===3&&mg.chest===0,'old-save migration 0→0 1→1 2→3 3→4 4→5, eunuch kept, once, promo chest tracker moved (no second chest)',mg);
    /* 6. OLD SAVE from the live build */
    if(oldSave){const o=await p.evaluate(raw=>{localStorage.setItem(SK(3),raw);const d=loadSlot(3);/* loadSlot = the title-screen path (JSON from the live build) */if(!d)return{err:"loadSlot null"};deser(d);const m=srvM();const L=((m&&m.staff)||[]).filter(s=>s.tag6);
      const r={rk:S.srv.rk,rk0:S.srv.rk0,t:srvTitle(),tags:L.map(s=>s.tag6+">"+s.rk),lad:S.lad6};try{Q.length=0;S.tuan=2;srvMonth();render();r.month=1}catch(e){r.err=e.message}return r},oldSave);
