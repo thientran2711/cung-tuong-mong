@@ -52,3 +52,8 @@ New diff (on top of ruling (b)), mk.py + _build_item.py:
 - BW4 b4b796a: identity sentence now "keep ONLY her face, facial features, hair COLOUR and signature colour family; do NOT copy poses, outfit, HAIRSTYLE, …".
 - E11: items = IT1 build.py NUDE_LIST (25) / NUDE_AGE (5 per age), pick NUDE_LIST[NUDE_AGE[age][(n-1)%5]] (commit 438794d); interim 9-item list removed.
   m01: a18 dragon tú cầu · a26 pipa · a36 jade mountain carving · a51 table screen · a65 edict scroll. check_store --scope nude PASS 5/5.
+
+## UPDATE 4 — person switched m01 → m05 (Sắc sảo; owner: only Sắc sảo/Tinh nghịch faces), rebuilt on 98fa7a3 (BW5 elder-copy, E6) + 877944c (F13). No gens.
+m05: ref KLpSlnEkqp + swatch TdwDfOyVNR, outfit A. Items a18 white-jade flute · a26 dragon parasol · a36 jade calligraphy brush · a51 jade tiger tally · a65 gold dragon hand warmer.
+a51/a65 colour rule now builder "DEEPER, DARKER" (no "never darker"); bun sentence 1/age; D14 wide grep 0 (face has "double lids" = shape only). check_store --scope nude PASS 5/5; kc_ref --check PASS.
+m01 is STOPPED (Tươi tắn); its prompt files are left as they were, not rebuilt.
