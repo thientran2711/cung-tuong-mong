@@ -99,3 +99,41 @@ The scan is this job's deliverable, and it currently hides two of them. They arr
 - Shots (receiver-choice-shots.js, Fold 755x1000@2 + iPad 1180x820@2: help / ally / call / judge / invite), looked at 3×: kit dialog, Fold long rows, iPad 2 columns, no cut text, «có rủi ro» on qua loa, TỐN Sức shown. Judge staging issue noted above. Shots are kept in scratch outside git, not uploaded.
 - Landing: parallel-time lands first. After it is on main, receiver-choice MUST re-merge, because it expects conflicts in assemble.py / j21 / j29 / jbal2 and the jptime ptReg("invite") → rcvInviteGo swap, then re-run all gates.
 Context at verdict ≈ 15 %.
+
+---
+# RE-CHECK #3 — REVIEW receiver-choice #3 (BIG, opus, session_01964izDotKMFVE41pGQZvU2) of SẴN SÀNG KIỂM 6be968a2
+START_CTX ≈ 3 % of 1M (get_session read 0; own estimate) · depth 6 → rollover ≈ 28 %, ceiling 60 %.
+PRIORITY #1 CHECK ('receiver choice'): OD 0 | ledger 0 | claims 1 (this job) | main 0 (jrcv not on main) | review/*: review/receiver-choice 6be968a2 (under review), review/parallel-time 807a4913 (not live, lands first), review/stage-here (kitNotice, LIVE since 73790cb7) | archive 0.
+
+## VERDICT: PASS review/receiver-choice-rv **ac3ef2652** — LAND AFTER parallel-time (re-merge + gates)
+ac3ef2652 = 6be968a2 + reviewer fixes + final merge of LIVE main **89aa1bd9** (main is 1cf5e8bb since then, seal-lean, UI only). parallel-time is NOT live, so this branch must re-merge after it lands (assemble.py / j21 / j29 / jbal2 + jptime invite → rcvInviteGo) and re-run every gate.
+
+### The 6 RE-CHECK #2 items: all fixed (whole group)
+1. Deterministic test: receiver-choice.test ×5 ALL PASS on each of 6be968a2, 0fa1689c, c2f356c9, 70142bdc, 6e9b7a42 and bf0d0994. Mutations: illMaid route off → 2 FAIL · illAlly rcvAsk off → 4 · rougeBorrow rcvAsk off → 3 · kitNotice path off → 1 · Kết giao foe off → 1 · Kết giao Danh off → 2 · scan UNREACHED off → 1. Every mutation bites.
+2. illMaid → stf2Ord (the j42 cnvOrdOpts pick) for her maid and an NPC's. My probe: she pays, then refuse / tell → bạc 1000 → 1000 (refunded), no Đức loss; obey → bạc −165, Đức −3. An NPC who is refused spends nothing.
+3. illAlly: RCVK.illAlly has the 4 answers. She is now in illAllies, so an NPC asking her gets her saveable card. An NPC holder draws all 4 answers.
+4. rougeBorrow replaces lxAskHer: PEND.rcvAsk, 4 answers, saveable. An NPC lender picks from the same list.
+5. Scan: an unreached REQ / ORDER_SRV key is UNREACHED (a gap). 267/267 classified, gaps 0 (rows 111 · SAME 56 · OK 55 on bf0d0994).
+6. Kết giao law 2: yes = +30 lượng, thiện cảm +25, quý +8 against Sức −4, Danh −3, the foe −25. No = Danh +3, the foe +13 against −3 / −3. That is a real trade and no answer is clearly better. The NPC receiver gets the same numbers (the test checks Danh and foe exactly).
+
+### Rulings
+- **cx2:doctor → GIFT: accepted.** The thái y is a flag on the court seat (S.doctor / v.doctor), not a person, so she can never sit in the receiver seat. The deed is the same sure deed for her (j2 o:100) and for NPCs. If he should answer, that needs a real thái y person (law 6b) = PARKING_LOT item (feature freeze, OD:L1402). Not a FAIL.
+- **tw:visit «Thăm lúc ốm mệt» → GIFT: accepted.** It has the same shape as tw:help «Giúp đỡ nàng», which two earlier reviewers accepted as GIFT. It is gain-only for the sick one, symmetric both ways (law 1 holds), and the scan checks GIFT keys for symmetry. Note for the parking lot: the visit family (call / invite) lets the host say no; a «cáo bệnh, không tiếp» answer for a sick visit would be the same idea. Not a FAIL.
+- **ONE NOTICE: OK, tested against the REAL jnotice kitNotice** (it went live in 73790cb7 during this review). One «rcv» notice, no dialog. «Trả lời» opens the 4-answer card, empties S.rcvPend and drops the notice. After a load (S replaced, then render) the 2 pending notices come back. With ptOrdAdd on there is only that notice (kitNotice 0, dialog 0), so no double notice.
+
+### Reviewer fixes (on review/receiver-choice-rv)
+- 0fa1689c **illAlly «Nhường lại, lấy chút bạc»**: her card (PEND.rcvAsk drops `lk`) promised "bạc +75" when the asking NPC had 0 bạc. She lost the item and got 0. Now the card shows and pays only the bạc the asker can really pay (min of price × half and the asker's bạc), and the NPC lock is gone, so both sides follow one rule.
+- c2f356c9 **the gate went red once kitNotice was live on main.** Her cards now wait as notices, and the scan read them from Q only. On some runs every N→P card showed AUTO (14 ASYM); on others only the round-4 test checks failed. Fix: the scan's run() also collects new S.rcvPend items as her card, so it measures the real path. The test's card checks run the dialog path, and one new check tests the REAL kitNotice (not a stub). The test had also left stubs behind: `delete window.kitNotice` silently fails, so the stub stayed. Now restored.
+- ac3ef265 **shots**: the script opens her card from the notice. The judge card is opened while she still holds the queen seat (before, the rank was restored first, so PEND.rcvJudge rightly refused).
+
+### Laws
+1 two-way ok · 2 ok (Kết giao; illAlly qua loa now pays what it shows) · 3 ok (every answer has a gain and a cost, test checks) · 4 / 13 ok (one-core-guard PASS; stf2BribeW shared; BAL.rcv) · 6b ok (thái y = parking lot) · 7 ok (no %, chanceW words) · 9 ok (kit VIỆC dialog, kit option cards in the new opt-card-short look, kit notice) · 11 ok (the cx4 group closed; scan has no silent pass).
+
+## Gates (bf0d0994 = merge of LIVE 89aa1bd9; shots on ac3ef265)
+- receiver-choice.test ×5: ALL PASS ×5. Scan: rows 111 · SAME 56 · OK 55 · gaps 0 · 267 keys, unclassified 0.
+- **role-parity.test: FAIL, and it comes from main, not this branch.** The same FAIL appears on LIVE main 89aa1bd9 alone (separate worktree): N-ONLY cx2:chest ×7, cx2:doctor ×9, cx2:fert ×9. It first showed after b1c3631e (live-servants r2). On the 70142bdc merge (main 96188526) role-parity was ALL PASS. → FOR MAIN / C-AG.
+- quickcheck --runs 6: QUICKCHECK PASS · CORE GATES PASS (one-core-guard, rules-one-source, kit-conform, coop-one-world) · TIME-SPILL PASS · old save ok · open 1876 ms · perf new/live render 264/267, tab 550/519, buổi 1371/1442 ms.
+- coop-e2e: 63/63 PASS. stage-here.js (after merging 73790cb7): faults 0, old save ok.
+- Shots Fold 755x1000@2 + iPad 1180x820@2 (help / notice / ally / call / judge / invite / illally / lend), looked at 3×: the notice chip «! Lời nhờ» in the HUD, the kit VIỆC dialog with the new kit option cards, Fold long rows, iPad 2 columns, no cut text, «có rủi ro» on qua loa, TỐN / ĐƯỢC rows. Shots are kept in scratch outside git and were not uploaded.
+- Not counted (wording note): the Kết giao GỢI Ý says "người ấy mất thiện cảm (nhiều)" for the foe and "người ấy" for the asker too, so it is unclear who means whom. Optional polish.
+Context at verdict ≈ 20 %.
