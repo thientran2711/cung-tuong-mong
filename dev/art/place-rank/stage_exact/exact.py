@@ -5,7 +5,7 @@ every figure gets the same visible-body height as the game's figure (j59: one he
 import sys, json
 from PIL import Image
 room, mj, out = sys.argv[1:4]; gf = float(sys.argv[4]) if len(sys.argv) > 4 else 1.0
-FD = '/tmp/claude-0/-home-user-cung-tuong-mong/0ef03b79-403b-55bb-822a-d89b1a6ebe9f/scratchpad/figs/'
+FD = sys.argv[5] if len(sys.argv) > 5 else 'figs/'  # folder with the 4 test figure webps
 FIG = ['fig-consort-c06-t1-a18', 'fig-consort-c30-t1-a18', 'fig-maid-m19-t1-a18', 'fig-maid-m39-t1-a18']
 m = json.load(open(mj)); W, H = m['stage']['w'], m['stage']['h']; fo = float(m['fo'].rstrip('px'))
 im = Image.open(room).convert('RGB'); s = max(W / im.width, H / im.height); w, h = im.width * s, im.height * s
