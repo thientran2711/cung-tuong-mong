@@ -1,0 +1,11 @@
+STORE CHECK PASS dev/art/owner-copy/new-person-1119/m39_t1.txt
+STORE CHECK PASS dev/art/owner-copy/new-person-1119/m39_t2.txt
+STORE CHECK PASS dev/art/owner-copy/new-person-1119/m39_t3.txt
+STORE CHECK PASS dev/art/owner-copy/new-person-1119/m39_t4.txt
+STORE CHECK PASS dev/art/owner-copy/new-person-1119/m39_t5.txt
+STORE CHECK FAIL dev/art/owner-copy/new-person-1119/m39_t6.txt — 2 store sentence(s) missing or rewritten:
+  [0.88] COLOUR RULE: robe, skirt, sleeves, cape and train are all clearly sky blue silk (her signature colour family sky blue and silver), with large areas of plain sky
+  [0.83] silver only as a small accent;
+STORE CHECK PASS dev/art/owner-copy/new-person-1119/m39_t7.txt
+STORE CHECK PASS dev/art/owner-copy/new-person-1119/m39_t8.txt
+STORE CHECK PASS dev/art/owner-copy/new-person-1119/m39_t8o.txt
