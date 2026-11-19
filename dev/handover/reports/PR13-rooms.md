@@ -1,0 +1,57 @@
+START_CTX ~5% of 1M window (estimate; get_session context_usage reads 0) | depth 1 (child of ROOT-57 session_01PEhRbuFkLEFvsv8jdPo9vC) | rollover at ~30% (ceiling 60%)
+# PR13 — missing rooms (Foreman C ROOT-57, owner Lượt 793)
+
+PRIORITY #1 CHECK: OD L41/L134/L136 (housing: HH + HQP alone, Tần/Phi/Quý phi = palace heads, low ranks in phối) | game data = dev/build/j26.js MAPH (8 palaces in rivalSlots + places vuon kn dtd thu tn tyv ksp lc home), j94.js scene keys | CDN img/_index.json (live old-round scenes per palace main/đông phối/tây phối; img/_review/place-rank/ v1–v12) | approved list = place-rank-sample.md PR7–PR12 + brief | prompts.py has style cards ONLY for Cảnh Phúc (CARD_CP) and Trường Xuân (CARD_TX) | claims: none other on rooms.
+
+## Step 1 — INVENTORY (0 gens)
+Room = frontal, rank-method picture (ART_RULES L1–L20). "live old" = the game has an older round-1/2 scene there (not the rank method) — kept as skins.
+
+### A. Chính điện, palace heads Tần (t4) / Phi (t5) / Quý phi (t6) — bedroom (-ngu) + reception (L2: each palace × 3 ranks)
+| palace | Tần bed | Tần rec | Phi bed | Phi rec | QP bed | QP rec |
+|---|---|---|---|---|---|---|
+| Cảnh Phúc | EbY494KuuO | iG5hVwC3uK | SyhTG51Ub8 / 3w UPve2vXwny | If3UKjGtvE | eIPlheldqL | 9ZHIVwlNYZ |
+| Khải Tường | none | none | none | none | none | none |
+| Chung Tú(y) | none | none | none | none | none | none |
+| Hàm An | none | none | none | none | none | none |
+| Thừa Minh | none | none | none | none | none | none |
+| Diên Huy | none | none | none | none | none | none |
+| Vĩnh Hòa | none | none | none | none | none | none |
+| Trường Xuân | none | none | none | none | none | none |
+Missing 42 (7 palaces × 6). Each of the 7 palaces has NO style card yet (only CP/TX exist) → the first room of each palace also fixes its card.
+(Brief place-mass Round 3 says "10 palaces"; the game data has 8 rival palaces + Khôn Ninh → 8 used here. Trường Xuân is also the HQP palace: question below.)
+
+### B. Hoàng quý phi (t7) — Trường Xuân, alone
+| bedroom | reception |
+|---|---|
+| ov6w4kO829 (v12 frontal) | O6EoWbJynm (frontal) |
+Missing 0.
+
+### C. Hoàng hậu (t8) — Khôn Ninh
+| bedroom | reception |
+|---|---|
+| cpS5YIl0eP (B 3-wall) | bxMA4ov5Y2 (frontal 3w) |
+Missing 0.
+
+### D. Phối (t1 Đáp ứng / t2 Thường tại / t3 Quý nhân, shared, L7: 2 beds, colours split by object type by the pair)
+| palace | đông phối bed | đông phối rec | tây phối bed | tây phối rec |
+|---|---|---|---|---|
+| Thừa Minh | s7I0GAVl8e (TQ pair) | jUoWAEyLD0 | none | none |
+| Cảnh Phúc, Khải Tường, Chung Tú, Hàm An, Diên Huy, Vĩnh Hòa, Trường Xuân | none ×7 | none ×7 | none ×7 | none ×7 |
+Missing 30 (base rooms). L7 pairs (ĐĐ ĐT ĐQ TT TQ QQ) are COLOURS by the occupants: question below.
+
+### E. Thái hậu — Từ Ninh cung (map 'tn')
+bedroom none · reception none (live old tu-ninh-cung). Missing 2.
+
+### F. Emperor + other places opened from the dư đồ (live old scene exists, no rank-method room)
+Dưỡng Tâm điện (dtd), Ngự thư phòng, Kính sự phòng (ksp), Thái y viện (tyv), Lãnh cung (lc, L-rule: plain), tẩm cung đêm (night bedchamber), Nội vụ phủ, Thượng thư phòng, phòng cung nữ, cung nhân, Tân giả khố, A ca sở, Đông cung. Ngự hoa viên (vuon) = garden, L9 (Phượng Lệnh, not ours). → 13 places, listed as "not in scope unless the foreman says so" (they are not consort rank quarters; L9: we paint rooms only).
+
+### TOTAL missing (A + D + E): 42 + 30 + 2 = 74 rooms ≈ 74 × 135 = 9,990 cr (F not counted).
+
+### QUESTIONS for the foreman (not blocking; I proceed with the order below)
+Q1 Trường Xuân = HQP palace: does it also need Tần/Phi/Quý phi versions (another head may live there)? I draw it LAST.
+Q2 L7 pair colours: one phối room per place with ONE pair (varied across places), or 6 pair colour versions per phối room (×6 = 180 more)? I draw one pair per room, a different pair for each.
+Q3 Section F places in scope?
+
+### DRAW ORDER (lowest missing ranks first, L2/L7/L19)
+1. Phối rooms (t1–t3): Thừa Minh tây phối bed → rec; then the other palaces' phối (đông then tây), alternating 3-wall / 2-wall, own layout, a different pair each.
+2. Tần (t4) bed + rec of the 7 palaces → 3. Phi (t5) → 4. Quý phi (t6) → 5. Từ Ninh (Thái hậu) → 6. Trường Xuân ranks (Q1).

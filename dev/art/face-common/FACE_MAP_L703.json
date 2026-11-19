@@ -1328,5 +1328,55 @@
   "ver": "v5",
   "prompt_file": "dev/art/face-common/s55.v5.FULL.txt",
   "kind": "NEWFACE-761"
+ },
+ "s56": {
+  "group": "Quyến rũ",
+  "hidden": false,
+  "ts": "2026-11-19T23:40:00Z",
+  "cut": "rgX0qMZxtc",
+  "gen": "3zKEOiVREY",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s56.v5.FULL.txt",
+  "kind": "NEWFACE-761"
+ },
+ "s57": {
+  "group": "Quyến rũ",
+  "hidden": false,
+  "ts": "2026-11-19T23:40:00Z",
+  "cut": "VX7jnlVMMU",
+  "gen": "kseWQNS16B",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s57.v5.FULL.txt",
+  "kind": "NEWFACE-761"
+ },
+ "s58": {
+  "group": "Quyến rũ",
+  "hidden": false,
+  "ts": "2026-11-19T23:40:00Z",
+  "cut": "yiutSarPW9",
+  "gen": "9ZHvwpkNYZ",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s58.v5.FULL.txt",
+  "kind": "NEWFACE-761"
+ },
+ "s59": {
+  "group": "Quyến rũ",
+  "hidden": false,
+  "ts": "2026-11-19T23:40:00Z",
+  "cut": "JNC8lvIOq4",
+  "gen": "dt4S0zyXSL",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s59.v5.FULL.txt",
+  "kind": "NEWFACE-761"
+ },
+ "s61": {
+  "group": "Quyến rũ",
+  "hidden": false,
+  "ts": "2026-11-19T23:40:00Z",
+  "cut": "SyhdxtJUb8",
+  "gen": "gOme1k6SXO",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s61.v5.FULL.txt",
+  "kind": "NEWFACE-761"
  }
 }
