@@ -1,0 +1,6 @@
+m13 + m20 (TN1, owner Lượt 469: two NEW people x 8 ranks covering the 14 standing angles; one-ref method Lượt 434, FIGURE_GATE item 11/12). Same recipe as the m29 v3 test (ledger 1422-1429).
+t1  (2 images): image 1 = style 6AbGv6EiJO (style2_portraits_c01_c12), image 2 = her v3 thiếu nữ picture (Lượt 293): m13 VX7IB7sMMU, m20 UPv6ye3wny
+t2..t5 (1 image, --nostyle): image 1 = her own v3 thiếu nữ (t1) picture (m13 VX7IB7sMMU, m20 UPv6ye3wny)
+t6..t8 (2 images, --nostyle): image 1 = her own v3 thiếu nữ picture, image 2 = royal-yellow swatch TdwDfOyVNR
+Generate: Magnific gpt-2-6, 1024x2304, 2k, seed 7172, folder ba4aecfe-efce-47e2-b53f-30d292091886; cut with images_remove_background.
+Angles: m13 (n=13) = ANG14 #12,13,0,1,2,3,4,5 ; m20 (n=20) = #5,6,7,8,9,10,11,12 -> together all 14 (#5 and #12 twice).

@@ -180,6 +180,76 @@ def princess_sentences(k,t):
     if k=="bt" and t>=4: L.append(("From rank 4 the veil keeps its length to her knees; " if t<=6 else "At this rank ")+d["veil_hi"]+"." if t>=7 else "From rank 4 the sheer ivory head veil keeps its length down to her knees.")
     return L
 
+# Lượt 469 (owner: "trong các prompt 8 bậc là góc đứng khác nhau, tay cầm đồ khác nhau, và dáng tạo hình cũng khác nhau"): audit (dev/handover/reports/two-new-8rank.md) found the
+# spec5 pose repeating inside one person's 8 ranks (6 poses per personality list + skips -> e.g. c06 t4=t5, m07 t2=t3=t8, m29 t4=t5, t1=t7). Fix = ADD only, store text untouched:
+# (1) POSE DEDUPE: rank tN keeps the store's own spec5 pick unless a lower rank of the same person/age already used that pose; then it takes the next allowed pose of the SAME spec5
+#     table (her own list from (i+t-1), then the other five lists) -- every pose text is still a verbatim spec5 entry (+ SPEC5_ADAPT / SPEC5_FRONTAL, same skips as the store). Pose = slot (check_store SLOT 'Pose:').
+# (2) GRACE sentence: one of 8 head/shoulder/arm nuances, rotated per rank AND person like the angles: GRACE[(t-1+3*(n-1))%8] -> 8 different per person, neighbours differ.
+GRACE=["her head tilted very slightly to one side, a soft graceful line from her neck to her shoulder",
+ "her chin lifted just a little, her neck long and elegant",
+ "her head inclined gently toward the hand that holds the item, her face still toward the viewer",
+ "her shoulders soft and relaxed, one shoulder a touch lower than the other",
+ "a gentle S-curve through her body, her hips softly shifted to one side",
+ "her fingers softly and gracefully curved around the item, wrists relaxed",
+ "her elbows held softly away from her body, her arms forming soft rounded lines",
+ "her head tilted very slightly against the turn of her body, a lively graceful counter-line"]
+def grace_sentence(person,rank):
+    return "GRACE (pose variety, every rank its own): "+GRACE[(rank-1+3*(_pn(person)-1))%8]+"."
+_POSE_MEMO={}
+def _pose_tpl(g,tr,j,adapt=True):
+    """spec5 entry verbatim; adapt=True -> SPEC5_ADAPT whenever the entry is listed there (also the lantern+item entry, which carries {prop}: one held item only, FIGURE_GATE D3)."""
+    r_=g["SPEC5_POSES"][tr][j]
+    if adapt and r_ in g["SPEC5_ADAPT"]: return g["SPEC5_ADAPT"][r_]
+    return r_ if "{prop}" in r_ else g["SPEC5_ADAPT"][r_]
+def _banned(t,age,prop=""):
+    """store skips (look back; t6+/a51+ no twirl/skip/dance/swirl) + CALM WITH RANK (A0 rule 3) for re-picks: t6+ no butterfly/songbird/stair-step, t7-t8 no walking/mid-step;
+    'reading {prop}' only when the item is a book or scroll."""
+    b=[r"look(?:ing)? back"]+([r"twirl",r"skipping",r"dance",r"swirl",r"light turn"] if (t>=6 or age in ("a51","a65")) else [])
+    if t>=6 or age in ("a51","a65"): b+=[r"butterfly",r"songbird",r"stair"]
+    if t>=7: b+=[r"walking",r"mid-step"]
+    if not re.search(r"book|scroll",prop): b+=[r"reading"]
+    if not re.search(r"fan|book|scroll",prop): b+=[r" open "]
+    b+=[r"looking down"]   # FIGURE_GATE D3d / store pose tail: never looking down
+    return b
+# same GESTURE inside one person = a repeat even if the spec5 entry differs (e.g. two hairpin-adjusting entries)
+GESTURE_KEYS=[r"hairpin",r"stole",r"stair|skirt hem",r"cheek",r"offer",r"butterfly",r"songbird",r"twirl|dance",r"reading",r"both hands"]
+def _keys(txt): return {k for k in GESTURE_KEYS if re.search(k,txt)}
+def _frontal(g,raw):
+    for o,n in g["SPEC5_FRONTAL"]: raw=raw.replace(o,n)
+    return raw
+def _store_pose(g,S):
+    """which spec5 template the store picked + its prop (regex match of every template on the store's pose slot)."""
+    m=re.search(r" Pose: (.+?)\. The item is in a contrasting colour",S); assert m,"pose slot"
+    body=re.sub(r"(, poised|, with stately grace)$","",m.group(1))
+    for tr in g["_SP5_ORDER"]:
+        for j in range(6):
+            f=_frontal(g,_pose_tpl(g,tr,j,adapt=False)); rx="^"+re.escape(f).replace(re.escape("{prop}"),"(.+?)")+"$"
+            mm=re.match(rx,body)
+            if mm: return (tr,j),(mm.group(1) if mm.groups() else None),body
+    raise AssertionError(("store pose not in spec5 table",body))
+def dedupe_pick(person,rank,age):
+    """(template,prop,store template,store body) for this rank: the store pick unless a lower rank (same person, same age) used it."""
+    key=(person,rank,age)
+    if key in _POSE_MEMO: return _POSE_MEMO[key]
+    used=[dedupe_pick(person,t,age)[0] for t in range(1,rank)]
+    S=_clean_pose(store(person,rank,age)); g=LAST_G
+    sp,prop,body=_store_pose(g,S); tr,mi=g["SPEC5_IDS"][person]; i=mi-1
+    ukeys=set().union(*[_keys(_pose_tpl(g,*u)) for u in used]) if used else set()
+    bad=lambda c:any(re.search(q,_pose_tpl(g,*c)) for q in _banned(rank,age,prop)) or bool(_keys(_pose_tpl(g,*c))&ukeys)
+    if sp not in used and not (_keys(_pose_tpl(g,*sp))&ukeys): pick=sp
+    else:
+        # fallback order: her own list from (i+t-1), then the other five lists starting at a per-person offset (n mod 5) and a per-person slot (n+t) -> same-rank neighbours differ
+        n=_pn(person); O=g["_SP5_ORDER"]; k0=O.index(tr); rest=O[k0+1:]+O[:k0]; rest=rest[n%5:]+rest[:n%5]
+        cand=[(tr,(i+rank-1+k)%6) for k in range(6)]+[(L,(n+rank+k)%6) for L in rest for k in range(6)]
+        bad0=lambda c:any(re.search(q,_pose_tpl(g,*c)) for q in _banned(rank,age,prop))
+        pick=next((c for c in cand if c not in used and not bad(c)),None) or next(c for c in cand if c not in used and not bad0(c))   # relax the gesture-key rule only if nothing else is left
+    _POSE_MEMO[key]=(pick,prop,sp,body); return _POSE_MEMO[key]
+def apply_dedupe(person,rank,age,S):
+    pick,prop,sp,body=dedupe_pick(person,rank,age)
+    if pick==sp and _pose_tpl(LAST_G,*pick)==_pose_tpl(LAST_G,*pick,adapt=False): return S
+    g=LAST_G; new=_frontal(g,_pose_tpl(g,*pick)).format(prop=prop)
+    a=" Pose: "+body; assert S.count(a)==1,("pose slot",person,rank)
+    return S.replace(a," Pose: "+new,1)
 TQ_RIGHT=", body turned slightly three-quarters to the right"
 def _clean_pose(S):
     """Lượt 440: the store's pose pass appends 'body turned slightly three-quarters to the right' at every odd pose slot (why almost everybody faced right); the ANGLE sentence (14 standing angles, left AND right) replaces it."""
@@ -190,8 +260,9 @@ def build(person,rank,age="a18"):
     if "Her face: . " in S:
         face=FACE_M.get(person,FACE_REF); S=S.replace("Her face: . ","Her face: "+face+(". " if not face.endswith(".") else " "),1)
     S=_clean_pose(S)
+    S=apply_dedupe(person,rank,age,S); store(person,rank,age)   # Lượt 469 pose dedupe (slot); re-run store so LAST_G is this rank's
     anchor=" Pose:"; assert S.count(anchor)==1,("pose anchor",person,rank)
-    add=laws(rank)+[angle_sentence(person,rank)]+extras(S0,person,rank)+(princess_sentences(PR[person],rank) if person in PR else [])
+    add=laws(rank)+[angle_sentence(person,rank),grace_sentence(person,rank)]+extras(S0,person,rank)+(princess_sentences(PR[person],rank) if person in PR else [])
     return S0,S.replace(anchor," "+" ".join(add)+anchor,1),add
 
 # ---------------- CHECK ----------------
@@ -209,8 +280,8 @@ def check(person,rank,age="a18",ref=None):
     S=S0
     if "Her face: . " in S:
         face=FACE_M.get(ALIAS.get(person,person),FACE_REF); S=S.replace("Her face: . ","Her face: "+face+(". " if not face.endswith(".") else " "),1)
-    S=_clean_pose(S)
-    if stripped!=S: errs.append("F minus added sentences != store output")
+    S=_clean_pose(S); S=apply_dedupe(ALIAS.get(person,person),rank,age,S); store(ALIAS.get(person,person),rank,age)   # Lượt 469: the pose slot may be re-picked (spec5 verbatim)
+    if stripped!=S: errs.append("F minus added sentences != store output (pose slot dedupe applied)")
     for x in add:
         if x not in F: errs.append("law sentence missing: "+x[:50])
     if ref is None:
