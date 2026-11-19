@@ -1,0 +1,21 @@
+# place-mass helper A (Foreman C ROOT-47)
+Recipe v2 + prompt_template.txt (LEFT SIDE), gpt-2-6 2k 2688x1386, refs image gOmYI7iSXO + EbYJzsMuuO, summer morning, no grade. Review files: CDN img/_review/place-mass/<room>-ha-sang.webp (live img/ not touched).
+
+## Sheet place-khon-ninh-cung-canh-phuc-cung-tay-phoi.jpg
+https://ctm-img.victoria-tntt.workers.dev/img/_review/place-mass/place-khon-ninh-cung-canh-phuc-cung-tay-phoi.jpg
+
+### khon-ninh-cung — gen xSBAoOrjfW
+ROOM: Khôn Ninh cung, the Empress's main hall in an ancient Chinese imperial palace, a real room in daily use: towards the back a carved rosewood throne couch with red silk cushions on a low dais, behind it a large folding screen painted with a phoenix among peonies; red lacquer pillars; hanging red and gold palace lanterns; sheer embroidered curtains tied back; a pair of golden phoenix figures on tall stands beside the dais; side tables with celadon vases of lotus, a tea set on a tray, a bronze incense burner with a thin curl of smoke, a small writing desk with scrolls and a brush stand, a round fan on a stand, potted peonies, a jewellery chest with brass fittings, a stack of embroidered cushions; lattice windows open onto a sunny summer garden; depth comes from furniture placed through the middle and the back of the room, and the near left floor stays open with at most a small low footstool.
+FLOOR: polished stone tiles · MAT: the dais · KEY: the throne area
+
+### canh-phuc-cung — gen 6Abo5SmiJO
+ROOM: Cảnh Phúc cung chính điện, the main hall of a high-ranking imperial consort's palace in ancient China, a real room in daily use: at the back a large carved round moon-gate doorway with gilded lattice opening onto a sunny courtyard garden with a tree and a lotus pond; pale green sheer embroidered curtains tied back; hanging palace lanterns; a folding screen painted with bamboo and cranes; a carved rosewood settee with celadon cushions and a small low table with a tea set; side tables with porcelain vases of pink flowers, a bronze incense burner, a guqin on a stand, a bookshelf with scrolls and lacquer boxes, a round embroidered fan on a stand, potted orchids, a fruit plate, a sewing basket with silk threads; depth comes from furniture placed through the middle and the back of the room, and the near left floor stays open with at most a small low potted plant.
+FLOOR: warm polished wooden floorboards · MAT: the settee · KEY: the moon gate
+
+### canh-phuc-cung-dong-phoi — gen dt419cAXSL
+ROOM: Đông phối điện of Cảnh Phúc cung, the east side hall where a lower-ranking consort lives in an ancient Chinese palace, a real room in daily use: a cosy sitting room with, towards the back, a bed alcove behind a carved wooden arch with pale peach gauze curtains tied back and folded quilts on the bed; a round table with two stools and a tea set; a dressing table with a bronze mirror, a comb box and powder jars; a tall wardrobe with brass locks; a small bookshelf with scrolls; an embroidery frame with half-finished work and a basket of threads; a vase of pink camellias, a small incense burner, a hanging lantern, a birdcage by the window; lattice windows with morning sun and green leaves outside; depth comes from furniture placed through the middle and the back of the room, and the near left floor stays open with at most a small low basket.
+FLOOR: warm polished wooden floorboards · MAT: the round table · KEY: the bed alcove arch
+
+### canh-phuc-cung-tay-phoi — gen P3QeFyy42C
+ROOM: Tây phối điện of Cảnh Phúc cung, the west side hall where a lower-ranking consort lives in an ancient Chinese palace, a real room in daily use, quieter and more scholarly: towards the back a low carved daybed with blue-grey cushions and a small kang table with a go board, beyond it a bed alcove with misty blue curtains tied back; a writing desk with paper, inkstone, brush rack and a small potted pine; tall shelves with books, scroll boxes and a blue-and-white porcelain jar; a hanging calligraphy scroll; a lute leaning in a stand; a plum branch in a slender vase; a tea brazier with a small kettle; a lattice window with bamboo outside in summer sun; depth comes from furniture placed through the middle and the back of the room, and the near left floor stays open with at most a small low stool.
+FLOOR: polished stone tiles · MAT: the daybed · KEY: the daybed and alcove
