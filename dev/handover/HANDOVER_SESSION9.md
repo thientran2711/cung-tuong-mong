@@ -1118,3 +1118,4 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - foreign-princess-3 → E (OD 06:2x/06:40/06:42/06:50Z): Nam Chiếu road → CAO LY, Bắc Địch road → BA TƯ (per-life switch), PHÙ TANG new road (review/phutang-road stacked on bd-roads); Nam Chiếu / Bắc Địch stay as neighbour countries in events.
 - TRIAL «làm vừa phải» (19→21/11): self-merge blocked by the session classifier; reviewers final-merge. Review with owner after 1–2 days.
 - STANDBYS: MAIN session_01Rc5AsJ8S2aNYjotfjzaioU; B session_01N1tNP5jYfeoWoXsWr5eqKN; D session_01964izFLpgp8aeBD8Y13gek; E needs a NEW standby (E's FOR MAIN); C-AG #22 is the ex-standby (none now).
+- (19/11 07:34Z) ROOT-66 opened = session_01Rc5AsNSzMY2cT8dMMPe7xW (opus, depth 4). ROOT-65 wake trig_019hJsW8i3kwqWeCKDy9poRb DELETED. ROOT-65 stops (relays any late message to ROOT-66).

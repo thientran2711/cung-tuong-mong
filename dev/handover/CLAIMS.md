@@ -258,4 +258,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | phutang-road writer 2 (pt_tang + pt_dang, opus E21b, under E21) | review/phutang-road-w2; briefs/E21b-phutang-road-w2.md | FOREMAN E | session_01DgYSWkdwE7LuxhVqAQnJah | RUNNING | 19/11 07:03Z |
 | bd-roads r2 + Ba Tư lead (opus E14d, successor of E14c) | review/bd-roads | FOREMAN E | session_01DgYSWqB4qyr7uRTdKD8895 | RUNNING | 19/11 07:06Z |
 | role-parity-drift-2 (opus; 12 new red rows from landings 7fb7c104..98f9f0f1; law 1 + law 11) | review/role-parity-drift-2 | B | session_01N1tNP6PEK9T9BWXhYLZvAd | RUNNING | 19/11 07:30Z |
-| MAIN ROOT-66 (opus; child of ROOT-65, depth 4) | handover HANDOVER_SESSION9 | ROOT-65 | (opening) | RUNNING | 19/11 07:33Z |
+| MAIN ROOT-66 (opus; child of ROOT-65, depth 4) | handover HANDOVER_SESSION9 | ROOT-65 | session_01Rc5AsNSzMY2cT8dMMPe7xW | RUNNING | 19/11 07:33Z |
