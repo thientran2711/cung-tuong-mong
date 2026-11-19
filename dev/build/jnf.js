@@ -174,12 +174,14 @@ let WT=null;
 function wake(){step();if(!WT&&!window.__bot)WT=setInterval(step,250)}
 function sleep(){if(WT){clearInterval(WT);WT=null}}
 function step(){try{if(!S||S.dead||!nfOn()){sleep();return}const x=X();if(!x||x.st==="done"){sleep();return}
- if(x.st==="wait"){if(Q.some(m=>m&&m.pid!=="ksp"&&m.pid!=="prep"&&m.pid!=="nfch"))return;openChoice()}
+ /* a news card (kind "news": jmoodknow's "Tin trong cung" runs after every endTurn, also the held one of the flip) never holds the choice back */if(x.st==="wait"){if(Q.some(m=>m&&m.pid!=="ksp"&&m.pid!=="prep"&&m.pid!=="nfch"&&m.kind!=="news")){pullKsp(x);return}openChoice()}
  if(x.st!=="open")return;
  if(x.me===undefined&&!x.dlg){if(scene()&&Date.now()-(x.at||0)<B().choice.waitMs*2)return;showChoice()}
  if(guest())return;
  if(x.me!==undefined&&x.fr===undefined&&x.myAt&&Date.now()-x.myAt>B().choice.waitMs)x.fr=null;   /* the friend never answered: Thôi */
  if(x.me!==undefined&&x.fr!==undefined)resolveAll()}catch(e){console.error(e)}}
+/* while other dialogs go first, the flip's own summons (ksp / prep) may not be answered before the choice: it leaves the queue now and comes back after the choice (x.ksp), as openChoice does */
+function pullKsp(x){let n=0;for(let i=Q.length-1;i>=0;i--)if(Q[i]&&(Q[i].pid==="ksp"||Q[i].pid==="prep")){Q.splice(i,1);n++;if(S.tonight==="me")x.ksp=1}if(n&&!window.__bot)try{if(!$("modal").hidden)showModal()}catch(e){}}
 /* the tablet's result is out and no other dialog waits: the choices open (host / single player) */
 function openChoice(){const x=X();if(!x)return;x.st="open";x.at=Date.now();
  for(let i=Q.length-1;i>=0;i--)if(Q[i].pid==="ksp"||Q[i].pid==="prep"){Q.splice(i,1);if(S.tonight==="me")x.ksp=1}
@@ -215,7 +217,7 @@ function showChoice(){const x=X();if(!x||x.dlg)return;x.dlg=1;const t=entOf(x.t)
   o=[{n:"Tranh sủng",fx:{},showOdds:true,hint:nfHint("feign"),x:`${word(o1)} · thành: ${gx(0)||"Hoàng thượng sang cung ngươi"} · hỏng: ${fmt(stealLose("feign"))}`,go:()=>mine("feign")},
      {n:"Chặn ngự giá",fx:{},showOdds:true,hint:nfHint("road"),x:`${word(o2)} · thành: ${gx(1)||"Hoàng thượng sang cung ngươi"} · hỏng: ${fmt(stealLose("road"))}`,go:()=>mine("road")},
      {n:"Thôi",fx:{},go:()=>mine(null)}]}
- Q.push({t:"Kính sự phòng",h,opts:o,who:typeof pEunCourt==="function"?pEunCourt("ksp"):undefined,pid:"nfch",pp:{d:day()}});
+ /* no dialog may cover the flip choice (night-final #4): anything queued after the choices opened (a news card…) waits behind it */Q.unshift({t:"Kính sự phòng",h,opts:o,who:typeof pEunCourt==="function"?pEunCourt("ksp"):undefined,pid:"nfch",pp:{d:day()}});
  try{render()}catch(e){}if(!window.__bot&&Q[0]&&Q[0].pid==="nfch")try{showModal()}catch(e){}else showSoon()}
 function mine(v){const x=X();if(!x||x.me!==undefined)return;x.me=VALID(v);x.myAt=Date.now();TM.stop();
  if(guest())send("ch");step()}

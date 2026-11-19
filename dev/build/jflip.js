@@ -238,7 +238,7 @@ function busy(){if(typeof NLP!=="undefined"&&NLP)return true;/* the Luân hồi 
  if([...document.querySelectorAll(".kbk")].some(e=>e.offsetParent||e.getClientRects().length))return true;const ti=document.getElementById("title");return !!(ti&&!ti.hidden)}
 const DBG=window.__cfdbg=[];const dbg=x=>{DBG.push(x);if(DBG.length>30)DBG.shift()};
 /* cfBusy(): a card-flip scene is queued or on screen (jnf opens the flip choice only after it, owner OD 16/11 22:45Z) */
-let CFN=0;window.cfBusy=()=>CFN>0;
+let CFN=0;window.cfBusy=()=>CFN>0;/* kmReset (new life, load) drops the queued scenes, whose done() then never runs: the count goes with them */try{if(typeof kmOnReset==="function")kmOnReset(()=>{CFN=0})}catch(e){}
 function cfPlay(plan){dbg('push '+plan.wk);const gen=life;CFN++;let out=0;kmPush(done0=>{const done=()=>{if(!out){out=1;CFN=Math.max(0,CFN-1)}done0()};dbg('run');const go=()=>{try{
    if(gen!==life){dbg('life');done();return}
    const cw=window.COOPW;if((cw&&cw.on&&cw.pend)||busy()){setTimeout(go,300);return}   /* co-op: wait for the merged week, both players see it together */

@@ -13,7 +13,7 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
   /* his own visit (jvisit, from main) is not what these cases test: off (cap 0); night-final case 8 tests its order */T.vcap=BAL.visit.cap;BAL.visit.cap=0;
   /* the 10-night ledger (jledger) adds the tuần's other nights at the commit: these cases count the PLAYED tối only, so the ledger is off here; its own cases: dev/test/ledger.js */BAL.nt.on=false;
   T.fresh=()=>{for(const id of ['kload','kroul']){const x=document.getElementById(id);if(x)x.remove()}try{localStorage.clear()}catch(e){}SLOT=3;window.__nlInner=1;window.__bot=1;document.getElementById('title').hidden=true;
-   for(let i=0;i<60;i++){start();if(!isSrv()&&!(typeof isKc==="function"&&isKc())&&!(window.cycOn&&cycOn(S)))break}Q.length=0;S.preg=0;S.pregUnk=0;S.cyc=null;
+   for(let i=0;i<60;i++){start();if(!isSrv()&&!(typeof isKc==="function"&&isKc())&&!(window.cycOn&&cycOn(S))&&liveRivals(false).filter(v=>nightCh(v)>0).length>=3/* the cases need an A, a B and a spare on the tray */)break}Q.length=0;S.preg=0;S.pregUnk=0;S.cyc=null;
    const L=liveRivals(false).filter(v=>nightCh(v)>0);L.forEach(v=>{v.preg=0});return L};
   /* answer every open dialog with its first option that is not a way out (Cáo bệnh / Tiến cử) */
   T.ch="Thôi";T.opts=null;
@@ -24,7 +24,7 @@ const {chromium}=require('playwright');const [,,URL]=process.argv;
   T.toEvening=()=>{let g=0;T.noCyc();while((S.buoi||0)<B4L&&g++<8){T.drain();used=4;nextBuoi()}T.drain()};
   T.endDay=()=>{const d=wk();T.noCyc();for(let g=0;g<12&&wk()===d;g++){T.drain();S.toMorning=0;used=4;S.buoi=B4L;nextBuoi()}T.drain()};
   T.recs=L=>{const o={me:S.nights||0};L.forEach((v,i)=>o["r"+i]=v.nights||0);return o};
-  T.only=who=>{if(who===S)S.cyb=Object.assign(S.cyb||{},{lie:wk()});/* not her cycle tuần (her card would be locked: jcycle) */const nc=nightCh;nightCh=function(p){p=p||S;return p===who?100:(nc(p)>0?1e-9:0)};/* the others keep a tiny weight: still on the tray, so they may attack */const rr=roll;roll=function(x){return x===90||x===65?true:rr.apply(this,arguments)};return()=>{nightCh=nc;roll=rr}};
+  T.only=who=>{if(who===S)S.cyb=Object.assign(S.cyb||{},{lie:wk()});/* not her cycle tuần (her card would be locked: jcycle) */const nc=nightCh;nightCh=function(p){p=p||S;return p===who?100:(nc(p)>0?1e-9:0)};/* the others keep a tiny weight: still on the tray, so they may attack */const rr=roll;roll=function(x){return x===90||x===65?true:rr.apply(this,arguments)};/* his mood of the week may skip the flip (jemoact eaQ «noFlip»): off while the flip is forced */const ea=window.__eaOff;window.__eaOff=1;/* his AG3 maid pool (jagmaid empPick: a maid instead of a tray card) is off while the flip is forced */const MC=BAL.ag&&BAL.ag.maid&&BAL.ag.maid.ch,mcap=MC&&MC.cap;if(MC)MC.cap=0;/* the Emperor agent's mindPick slip (jmind: a random candidate, weight ignored) would hand the forced flip to a tiny-weight tray card */const sl=BAL.mind&&BAL.mind.slip;if(BAL.mind)BAL.mind.slip=0;return()=>{nightCh=nc;roll=rr;if(BAL.mind)BAL.mind.slip=sl;window.__eaOff=ea;if(MC)MC.cap=mcap}};
  });
 
 
