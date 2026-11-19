@@ -131,3 +131,10 @@ Not used from the foreman's idea list: the long pearl-edged shoulder stole (t6 Q
 - SHEET6: https://ctm-img.victoria-tntt.workers.dev/img/_review/low-B/t2t3-new/sheet6.jpg — rows c06, c25; columns t4 Tần (existing t8-reprompt/t1t6) | Phi E | F | G | H | t6 Quý phi (existing t8-reprompt/t1t6/<cNN>_a18_t6_v0.png). Singles (transparent): .../t2t3-new/v6/<cNN>_phiE..H.png.
 - Honest notes: (a) H is the quietest at sheet size (small collar + jade plaque); (b) F's round capelet is the most "shoulder" option, so it sits closest in outline to the t4 cloud collar / t6 cape — clearly round and pearl-edged, but compare; (c) E and G read strongest as a neck/shoulder signature. (d) t4/t6 columns are older images (built with the old "fresh, clear" clause). She picks one → that flag becomes default t5 (canon overwrite: delete A–D, the unpicked E–H and the cloud-collar default).
 ~100% xong sample / chờ sếp chọn Phi E–H. START_CTX ~4 %, now ~15 % of window.
+
+---
+# ROUND 10 (W103c, ROOT-35 quick job, no gens): live cung nữ → ma ma ladder sheets
+PRIORITY #1 CHECK: live CDN img/_index.json + FIGURES-servants.json + FIGURES-hd.json | main dev/test/player-dress.js L6/L24/L48-49 (tm0..tm4 = cung nữ rk0..4; "a maid face's rank-1 dress is the plain maid art"; ma ma = `S.srv.mama=1` → look "tm4") + jrank.js L100 (Ma ma → one frame-mama) | claims 0.
+- https://ctm-img.victoria-tntt.workers.dev/img/_review/ladder/ladder_m01.jpg and .../ladder_m37.jpg (a18).
+- Columns (file, from CDN img/hd/ when it exists, else img/): Cung nữ bậc 0 = fig-maid-<m>-tm0-a18 (m01: SD only, no hd) | bậc 1 = fig-maid-<m>-a18 (plain maid art) | bậc 2/3/4 = fig-maid-<m>-tm2/tm3/tm4-a18 | Ma ma = the same tm4 image (live game dresses a ma ma in the tm4 art) | Mama bậc 1–4 = grey "chưa có hình" (no mama tier art exists; the fig-mama-k01.. figures are separate mama identities without tiers, not these faces).
+- Note: no veils are painted on these figures; the OD:L12 veil (m0–m1 ivory, m2–m4 pink) is not in the figure art (presumably an in-game overlay, veil-fit.json) — not shown on the sheet.
