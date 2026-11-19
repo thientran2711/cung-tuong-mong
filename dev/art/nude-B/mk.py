@@ -48,6 +48,21 @@ for age in ("a18","a26","a36","a51","a65"):
     for s in (S07," The silk has real weight: the wide sleeves and robe hang and fold naturally under their own weight, with natural creases, never stiff, flat or board-like."): assert s in _hh,("HH fabric sentence missing in HH",s)
     a_w=" The silk has real weight: the wide sleeves and robe hang and fold naturally under their own weight, with natural creases, never stiff, flat or board-like."
     assert o.count(a_w)==1; o=o.replace(a_w,a_w+"".join(HHS),1)
+    # NDX4 round 2 (owner Lượt 692 via ROOT-55: full sentence diff vs HH t8): add HH's NO-flowers, HEAD AND BODY, ANGLE (HH t8 of this age, verbatim)
+    # and HELD ITEM COLOUR (HH template, only the colour names = Nữ đế colours); FABRIC moved to the HH position (after HEAD AND BODY, before ANGLE).
+    def _hhs(pref):
+        m=re.findall(r" "+re.escape(pref)+r"[^.]*\.",_hh); assert len(m)==1,(pref,m); return m[0]
+    NOFL=" NO flowers in the hair or on the crown at this rank (flowers only at ranks 1 to 6)."
+    HB=" HEAD AND BODY: her head turns together with her shoulders and body in the same direction with natural anatomy, never a frontal head on a turned body."
+    ANG=_hhs("ANGLE: ")
+    HIC=" HELD ITEM COLOUR: the held item and any embroidery, painting or tassel on it are in a colour family clearly different from BOTH her robe colour royal golden yellow and her secondary colour wine-crimson like #7E2A33."
+    for x in (NOFL,HB): assert _hh.count(x)==1,("not verbatim in HH t8",x)
+    _hic_hh=_hhs("HELD ITEM COLOUR: "); assert re.sub(r"her robe colour .*$","",_hic_hh)==re.sub(r"her robe colour .*$","",HIC),"HELD ITEM COLOUR template differs from HH"
+    assert o.count(S07)==1; o=o.replace(S07,"",1)   # move FABRIC out of its old place
+    HH2=[NOFL,HB,S07,ANG,HIC]
+    tail="".join(HHS); assert o.count(tail)==1; o=o.replace(tail,tail+"".join(HH2),1)
+    # the ANGLE sentence now gives the turn (as in HH, whose pose has no turn words): drop the spec5 turn phrase that would contradict it
+    o=o.replace(", body turned slightly three-quarters to the right,",",")
     S17=" Her hands interact naturally with the item (gently presenting, turning or touching it), lively and natural, while her head stays up facing the viewer, eyes open, lips closed, never looking down."
     a="no flying, floating or windblown cloth."; assert o.count(a)==1; o=o.replace(a,a+S17,1)
     # F11 (owner Lượt 583): Nữ đế hair UP in a bun at EVERY age, stated explicitly
@@ -64,6 +79,8 @@ for age in ("a18","a26","a36","a51","a65"):
         assert o.count(TA)==1 and o.count(TC)==1
     assert not re.search(r"Pose:[^.]*\b(stole|ribbon|sash|shawl)\b",o)
     assert "style reference" not in o.lower() and "Image 3" not in o
-    for s in HHS+[S07,a_w]: assert o.count(s)==1,("NDX4 HH sleeve/fabric gate",s)   # GATE: every HH t8 sleeve/fabric sentence exactly once
+    for s in HHS+HH2+[a_w]: assert o.count(s)==1,("NDX4 HH gate",s)   # GATE (Lượt 683+692)
+    assert o.index(a_w)<o.index(HHS[0])<o.index(NOFL)<o.index(HB)<o.index(S07)<o.index(ANG)<o.index(HIC)<o.index(" Pose:"),"HH order"
+    assert "three-quarters to the right" not in o   # GATE: every HH t8 sleeve/fabric sentence exactly once
     open(os.path.join(R,"prompts",f"{p}_{age}.txt"),"w",encoding="utf-8").write(o)
     print(p,age,len(o),"chars")
