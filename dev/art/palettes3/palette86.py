@@ -273,6 +273,15 @@ def variants(n, h, role, dls=(-0.03, 0, 0.03), dhs=(-7, 0, 7)):
             if in_tone(h2, role) and family(h2) == family(h) and is_white(h2) == is_white(h): out.add((n, h2))
     return out
 
+def cvariants(n, h, role):
+    """P2: same name, chroma -.015 / -.03 (with lightness 0 / +.03 / +.06): room for roots sitting on the tone-box edges"""
+    L, C, H = oklch(h); out = set()
+    for dc in (-0.015, -0.03):
+        for dl in (0, 0.03, 0.06):
+            h2 = lch2hex(L + dl, C + dc, H)
+            if in_tone(h2, role) and family(h2) == family(h) and is_white(h2) == is_white(h): out.add((n, h2))
+    return out
+
 def dedupe(cols):
     seen, out = set(), []
     for c in sorted(cols):
@@ -331,8 +340,8 @@ def cmd_solve(seed=1, iters=int(os.environ.get('P86_ITERS', 20000))):
         cand = [dict(b)]; cost = [0.0]
         if k not in FINAL_ROOTS:      # a root code may move a little (same names, same season) to break a ROOT-ROOT clash
             RDL, RDH = (-0.06, -0.03, 0, 0.03, 0.06), (-20, -12, -6, 0, 6, 12, 20)   # P2: widened (ROOT-ROOT clashes are FAILs now)
-            for m in variants(b['main'], b['main_hex'], 'm', RDL, RDH):
-                for s_ in variants(b['sec'], b['sec_hex'], 's', RDL, RDH):
+            for m in variants(b['main'], b['main_hex'], 'm', RDL, RDH) | cvariants(b['main'], b['main_hex'], 'm'):
+                for s_ in variants(b['sec'], b['sec_hex'], 's', RDL, RDH) | cvariants(b['sec'], b['sec_hex'], 's'):
                     if (m[1], s_[1]) == (b['main_hex'], b['sec_hex']): continue
                     if not pair_tone_ok(m[1], s_[1]) or classify(m[1], s_[1]) != rs or not contrast_ok(m[1], s_[1], 0.0) or not season_contrast(m[1], s_[1]): continue
                     cand.append(pd(m, s_)); cost.append(25 + 100 * (dE(m[1], b['main_hex']) + dE(s_[1], b['sec_hex'])))
@@ -377,15 +386,18 @@ def cmd_solve(seed=1, iters=int(os.environ.get('P86_ITERS', 20000))):
     def assign(k, se, p):
         if se in cur[k]: np_add(k, se, cur[k][se], -1)
         cur[k][se] = p; np_add(k, se, p, 1)
-    def conf(k, se, cands):
+    def conf(k, se, cands, weighted=False):
         """hard / soft conflict counts for candidate pair dicts of variable (k, se)"""
         i = pos[k]; others = [q for q in order if q != k and se in cur[q]]
         oM = lab_arr([cur[q][se]['main_hex'] for q in others]); oS = lab_arr([cur[q][se]['sec_hex'] for q in others])
         dm = de2000_np(lab_arr([c['main_hex'] for c in cands]), oM); ds = de2000_np(lab_arr([c['sec_hex'] for c in cands]), oS)
-        hard = (np.maximum(dm, ds) < FAIL_DE).sum(1).astype(float); soft = ((dm < WARN_MAIN) & (ds < WARN_SEC)).sum(1).astype(float)
+        clash = np.maximum(dm, ds) < FAIL_DE
+        hard = clash.sum(1).astype(float); soft = ((dm < WARN_MAIN) & (ds < WARN_SEC)).sum(1).astype(float)
         names = {}
         for q in others: names[(cur[q][se]['main'], cur[q][se]['sec'])] = 1
         isroot = cands[0].get('root', False) or se == RS[k]
+        if isroot and weighted:                          # P2: a ROOT-ROOT clash weighs 3 (only roots can fix it; non-roots move freely)
+            rmask = np.array([RS[q] == se for q in others]); hard = hard + 2 * clash[:, rmask].sum(1)
         for t, c in enumerate(cands):
             nm = (c['main'], c['sec'])
             if nm in names: hard[t] += 1
@@ -414,7 +426,7 @@ def cmd_solve(seed=1, iters=int(os.environ.get('P86_ITERS', 20000))):
     while bad and it < iters:
         it += 1
         k, se = rnd.choice(bad); cands, cost = vc[(k, se)]
-        h, so = conf(k, se, cands)
+        h, so = conf(k, se, cands, weighted=True)
         score = h * 100 + so * 2 + cost + np.array([rnd.random() * 0.5 for _ in cands])
         for t, c in enumerate(cands):
             if tabu.get((k, se, c['main_hex'], c['sec_hex']), -1) > it: score[t] += 50
