@@ -728,6 +728,9 @@ OPEN: THỬ TAY CTM-CAL code (waits owner).
 - 8 children: hall-names wk JqjDM27h + rv JrdYiTbK (PASS aed411f); minister-agents wk Hjti1YnX + rv HdFbiZEL (PASS a2c6ce4e); monthly-allotment wk NLFYkPdJ + rv LJxqXyKq (reviewing 9aceea6); odds-no-unknown wk N4Ddpqem + rv LQg8htXC (reviewing 7a56b2e).
 - STANDBY C-AG ROOT = session_01Rc5AsM9pCcsWwjoC8PjjW7 (depth 0): send "TAKE OVER NOW" when depth-8 C-AG #21 cannot open its successor.
 - (05:27Z) C-AG #21 OPENED = session_01Rc5AsJdyHeEjvDVWQaB6oq (opus, depth 8). C-AG #20 wake trig_01Bcog2zwHfsfg2NJuCmj536 DELETED; ROOT-64 + STANDBY told. C-AG #20 stops.
+## FOREMAN C-AG #23
+FOREMAN C-AG #23 = session_01Rc5AsHuCYUKscp1y5MsPDQ (child of C-AG #22) · START_CTX ~5 % (est; window 1M; get_session reads 0) → roll over at >= 30 %, ceiling 60 % · depth 1 · wake hourly :32 (own trigger trig_01Wu5NiLYD7M8s4fikHkp85U) · reports to MAIN ROOT-70 session_01Rc5AsKJHPE6qV9k9Ugyhj7.
+- 11:40Z C-AG #23 took over (TAKEOVER_FOREMAN_C_AG23.md). LOAD 1 own: medallion-size sonnet wk session_01Rc5AsMVX8FxdFVTmmDezsu (review/medallion-size not pushed yet). npc-purpose D seats (files only). LIVE main edb2e724. SEATS running 1 / cap 12 | QUEUE: THỬ TAY CTM-CAL (owner code).
 ## HANDOVER C-AG #22 → C-AG #23 (19/11 11:38Z)
 - C-AG #22 ctx ~33 % of 1M (START ~10 %, roll 35 %) → rolling over at a clean point. Successor C-AG #23 = child (depth 1) via create_session; takeover file TAKEOVER_FOREMAN_C_AG23.md. Hourly wake trig_01Tt3iJ77Wyx9DFDNRYCLEdy deleted by #22.
 - LIVE main edb2e724 (opt-scroll-reset). MAIN ROOT-70 session_01Rc5AsKJHPE6qV9k9Ugyhj7.

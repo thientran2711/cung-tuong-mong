@@ -245,7 +245,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | bd-roads r2 fixes (opus E14c, successor of E14) | review/bd-roads | E ROOT #8 | session_01DgYSWmKcwf5VUb22x4YGU3 | RUNNING | 19/11 05:53Z |
 | ge-writers-w3 r2 fixes (opus E11d, successor of E11c) | review/ge-writers-w3 | E ROOT #8 | session_01DgYSWogWMATZVoosS7SFEk | RUNNING | 19/11 05:56Z |
 | MAIN ROOT-65 (opus; child of ROOT-64, depth 3) | handover HANDOVER_SESSION9 | ROOT-64 | session_01Rc5AsMRSKCNFbYwLJhNeY7 | DONE → ROOT-66 | 19/11 06:24Z |
-| FOREMAN C-AG #22 (opus; ex-ROOT STANDBY, depth 0; took over from C-AG #21) | handover FOREMAN_C_STATUS | owner STANDBY | session_01Rc5AsM9pCcsWwjoC8PjjW7 | RUNNING | 19/11 06:30Z |
+| FOREMAN C-AG #22 (opus; ex-ROOT STANDBY, depth 0; took over from C-AG #21) | handover FOREMAN_C_STATUS | owner STANDBY | session_01Rc5AsM9pCcsWwjoC8PjjW7 | DONE → C-AG #23 | 19/11 06:30Z |
 | REVIEW coop-thin-f3 r1 (opus BIG) of f659cf7b→abb9a6a6 | review/coop-thin-f3-r1 | B | session_01N1tNP5fWL4VXMTtqchmHQX | PASS review/coop-thin-f3-r1 e5c42937 (READY FF; lands with/after F2-r2; FOR B: jdis refusal on accepted player gifts) | 19/11 09:10Z |
 | coop-thin F4 (opus; pets/garden/kitchen/study; same worker as F3, stacked on F3) | review/coop-thin-f4 | B | session_01N1tNP2DFfqtxibVd8wgyr6 | SẴN SÀNG KIỂM 8d48cc57 (merged f3 abb9a6a6 + main 950508fc; report reports/coop-thin-f4.md) | 19/11 06:33Z |
 | ev-pic-followups (sonnet; MAIN ROOT-65 job via C-AG #22: iPad XL option frame scroll kit fix whole group + PEND:eunuch scene) | review/ev-pic-followups; briefs/cag22-ev-pic-followups.md | C-AG #22 for ROOT-65 | session_01Rc5AsJJWkjfCMMzTar86tr (r2; was session_01Rc5AsMN9rc6gf4qRzmEoJF) | DONE — LIVE 2481c80d (archived 19/11 10:53Z) | 19/11 09:44Z |
@@ -286,3 +286,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | palace-chatter BIG REVIEW (opus E17r) of 115717a8 | review/palace-chatter; briefs/E17r-review-palace-chatter.md | FOREMAN E #11 | session_01DgYSWpBsw8KySsaQyoredH | RUNNING | 19/11 11:31Z |
 | medallion-size (sonnet; MAIN ROOT-69 order via C-AG #22: speaker face medallion too large over figure/title in event dialogs, kit part, whole group) | review/medallion-size; briefs/cag22-medallion-size.md | C-AG #22 for ROOT-69 | session_01Rc5AsMVX8FxdFVTmmDezsu | RUNNING | 19/11 11:35Z |
 | MAIN ROOT-70 (opus; child of ROOT-69, depth 8 = LIMIT) | handover HANDOVER_SESSION9 | ROOT-69 | session_01Rc5AsKJHPE6qV9k9Ugyhj7 | RUNNING | 19/11 11:34Z |
+| FOREMAN C-AG #23 (opus; child of C-AG #22, depth 1) | handover FOREMAN_C_STATUS | C-AG #22 | session_01Rc5AsHuCYUKscp1y5MsPDQ | RUNNING | 19/11 11:40Z |
