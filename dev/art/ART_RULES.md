@@ -121,6 +121,7 @@ H7 | Every rank holds the court tablet HỐT upright in both hands (never flute/
 H8 | All ranks: hair FULLY UP, NO flowers (solemn); t7/t8 two long bộ diêu clearly visible and grander. | Lượt 411 | FG 16
 H9 | Triều phục t2/t3 fabric = the t4/t5 r17 fabric; soft draping, never stiff/tube. | Lượt 411, 229 | FG 16, 577
 H10 | Thường phục rules (sleeve law, phi bạch) are NEVER changed by triều phục rules. | Lượt 458 | FG 21
+H11 | TƯƠI (fresh) = vivid, bright, clear, SATURATED colour — never lighter/paler, pastel, faded, washed or muted (owner Lượt 540 on triều phục r23: 'Tao kêu tươi mà mày làm cho nó bạc đi... cái màu cũ nó còn tươi hơn'). To freshen a colour raise chroma, not lightness. | Lượt 540 (19/11) | FG -
 
 ## I. Yellow / phoenix gradient (robes AND rooms)
 I1 | HH = almost all imperial yellow + phoenix, the most dazzling; HQP = clearly less yellow, phoenix allowed; Quý phi = a LITTLE royal-yellow accent, NO phoenix; t1–t5 = NO DEEP/ROYAL yellow (the imperial C2 kind), NO phoenix. PALE yellows (pale yellow, beige-yellow, butter, cream-yellow) are ALLOWED for anyone at any rank (Lượt 518); nobody s yellow or phoenix ever outshines the ranks above. | Lượt 518 (19/11) | FG - | over: Lượt 446, 450; 18/11 23:30Z t6 note
