@@ -144,8 +144,26 @@ V2={"c01": "jade green", "c02": "coral pink", "c03": "crimson red", "c04": "jade
 # OWNER 18/11 ~22:45Z: a65 = the exact b7228a02 text the owner APPROVED 22:55Z ("65 tuổi ok, duyệt 65 tuổi, tiến hành làm 65 tuổi"); a51 colours DARKER like Thái hậu/Ma ma wear (owner 23:05Z) (trầm = lower saturation, slightly deeper; owner 22:50Z: "màu này nó giống như là nó hạ sắc"), a65 more muted; overrides the 19:55Z "a51 same colours" rule
 # --age a18|a26|a36|a51 (owner 19:55Z): ONLY the age phrase changes (original spec3/jobs.json wording); colours/yellow identical at every age
 AGE="a18"
+# N5c (FIGURE_GATE 3f, owner 19/11 ~00:45Z): the held item comes from item_age.py, cell (AGE x RANK/STATUS), pick_item(cNN, age, status):
+# every age of one person a different KIND, Nữ đế kind != her t8 kind. --olditem = the old per-rank pick (reproduces earlier outputs).
+import os as _os
+sys.path.insert(0,_os.path.dirname(_os.path.abspath(__file__))); import item_age as _IA
+OLDITEM="--olditem" in sys.argv
+# item kind -> hand interaction key (HAND_LOW key, or one/two/box for hand7 via low_hand)
+_HK={"rfan":"rfan","ffan":"ffan","mirror":"mirror","ball":"dangle","slant":"lantern","flute":"flute","bfly":"dangle","fbask":"basket","sachet":"dangle",
+"hoop":"hoop","speony":"sprig","pipa":"two","parasol":"one","sceptre":"one","sealbox":"box","edict":"scroll","vase":"vase","pbook":"book","pscroll":"scroll",
+"combbox":"box","plant":"lantern","gobox":"box","pend":"dangle","ruyi":"ruyi","hot":"two","incbox":"box","casket":"box","hanky":"kerchief","orchid":"two",
+"powder":"box","hcomb":"one","beads":"dangle","censer":"one","jseal":"two","sutra":"book","warmer":"two","brush":"one","iball":"dangle","whisk":"one",
+"album":"book","pouch":"dangle","coral":"stand","staff":"one","peach":"two","almanac":"book","pastebox":"box","pine":"scroll","hballs":"two","chrys":"sprig","bell":"dangle",
+"p_sprig":"sprig","p_wbask":"basket","p_flute":"flute","p_lant":"lantern","p_hsach":"dangle","p_mulb":"basket","p_sutra":"book","p_beads":"dangle",
+"m_lant":"lantern","m_fbask":"basket","m_beads":"dangle","m_sutra":"book","m_ledger":"book"}
+def age_item(c,tier,item,hk):
+    if OLDITEM: return item,hk
+    ages=_IA.TIER_AGES[tier]; a=AGE if AGE in ages else min(ages,key=lambda x:abs(int(x[1:])-int(AGE[1:])))   # status not drawn at this age -> nearest age of that status
+    k=_IA.pick_kind(c,a,tier); return _art(_IA.fill(k,tier)),"L:"+_HK.get(k,"two")
+def _hh(fn,hk,right): return low_hand(hk,right) if hk.startswith("L:") else fn(hk,right)
 AGE_TXT={"a18":"about 22, youthful adult.","a26":"about 30, mature and poised.","a36":"about 36 but looking young for her age (trẻ trước tuổi): still youthful and very beautiful, only a touch more mature and poised than her young self, smooth skin, no visible lines, never an older face.","a65":"about 65, a truly elderly lady who ages beautifully (đẹp lão): clearly older than her 51-year-old self, with gentle visible wrinkles at the eyes, mouth and forehead, softer cheeks and jawline, a calm wise dignified look; her hair is largely silver-grey mixed with some dark strands (much more silver than at 51, but NOT pure white); still graceful, elegant and beautiful, never haggard. Her robe keeps exactly the same colours as described below, but every colour is a DEEPER, DARKER, more subdued shade suited to an elderly lady (dignified, not bright; the royal yellow becomes a deeper antique gold).","a51":"about 51, a graceful beautiful older lady who ages beautifully (đẹp lão): a slightly fuller mature face, soft fine lines at the eyes and gentle smile lines, dignified and elegant, still lovely and refined; clearly VISIBLE silver-grey streaks at the temples and in the front of her warm dark-brown hair (a visible silver patch that is easy to see at game size, hair still mostly dark, never white hair); never a 20-30-year-old face, never haggard or plain. Her robe keeps the same colour families as described below, but every colour is a DEEPER, DARKER, rich mature shade, the dark dignified tones an empress dowager or senior palace matron wears (e.g. pink becomes deep rose-plum, blue becomes deep navy blue, green becomes deep dark jade, purple becomes deep aubergine, red becomes deep burgundy; the royal yellow becomes a deep antique gold); dignified and rich, never bright."}
-PRE=("Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference portraits; full-body standing figure head to feet, centered, plain light parchment background, soft even light; fair porcelain skin; gentle expression with soft eyes and a bright closed-lip smile, lips closed, no teeth, mouth never open; elegant, slim, clearly adult; beautiful/handsome romantic-lead looks for everyone; face clearly visible, 3/4 or frontal view.")
+PRE=("Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference portraits; full-body standing figure head to feet, centered, plain light parchment background, soft even light; fair porcelain skin; gentle expression with soft eyes and a bright closed-lip smile, lips closed, no teeth, mouth never open; elegant, slim, clearly adult; beautiful/handsome romantic-lead looks for everyone; face clearly visible, body and face frontal, standing squarely facing the viewer, no turn.")
 END=" Eyes soft, warm and round-almond, never slanted or upturned, never teary. Everyone beautiful at every age. No text, no labels."
 FAB="The silk has real weight: the wide sleeves and robe hang and fold naturally under their own weight, with natural creases, never stiff, flat or board-like."
 YEL_GOLDEN="fresh royal golden yellow, lighter depth, 18K gold tone, not pale cream, not beige/tan/ochre, not heavy mustard, not lemon"
@@ -198,10 +216,10 @@ GOLDEN_ITEM={"c06":0,"c16":1,"c20":2,"c25":3}   # as run in the A/B test
 EXTRA_ITEM={"c24":5}   # c24 would repeat neighbour c25
 def hand(key,right):
     d="right" if right else "left"; o="left" if right else "right"
-    if key=="one": return f"the item upright in one hand at chest height below the chin, the other hand resting over her sash, body turned slightly three-quarters to the {d}"
-    if key=="two": return "the item in both hands lowered before her at waist height, a slight turn of the body, head tilted gently toward the viewer"
-    if key=="scroll": return f"the rolled scroll in one hand lowered at her side, the other hand lifting her sleeve slightly, body turned slightly three-quarters to the {d}"
-    return f"the box in both hands at waist height before her, body turned slightly three-quarters to the {d}"
+    if key=="one": return f"the item upright in one hand at chest height below the chin, the other hand resting over her sash, body and face frontal, standing squarely facing the viewer, no turn"
+    if key=="two": return "the item in both hands lowered before her at waist height, body and face frontal, standing squarely facing the viewer, no turn, head tilted gently toward the viewer"
+    if key=="scroll": return f"the rolled scroll in one hand lowered at her side, the other hand lifting her sleeve slightly, body and face frontal, standing squarely facing the viewer, no turn"
+    return f"the box in both hands at waist height before her, body and face frontal, standing squarely facing the viewer, no turn"
 # per-person headdress text (her OWN live a18 headdress motif, copied from the live fig-consort-cNN-t8-a18 image, scaled up to the rank). Only used with --head.
 HEAD={
 "c04-t8":"her OWN headdress design from her first reference, enlarged to imperial grandeur: one large gold phoenix with spread wings perched on top of a wide gold crown band set with small pink flowers, pearls and a single blue sapphire at the centre, gold blossom-branch sprigs curving out to both sides of the head with a large pink peony at each temple, and long gold-and-pearl strand dangles hanging from the sides",
@@ -284,14 +302,14 @@ def colour(c,v,golden):
     if v=="v1": return (f"{fresh}the royal golden yellow is the MAIN colour of the robe, mantle and sleeves, with one fresh accent of her colour {main} (inner robe, collar and a few borders); the yellow is {YEL_NEW}; the crown, hairpin and jewellery gold in the same 18K tone; NOT dusty, NOT pale.",main)
     f=V2[c]; return (f"{fresh}a fresh {f} (a different colour family from her first reference) is the second colour (collar, inner robe, wide borders and a few panels); the royal golden yellow is the DOMINANT colour of the robe, mantle, sleeves and skirt (more than half of everything visible); the yellow is {YEL_NEW}; the crown, hairpin and jewellery gold in the same 18K tone; gold only as thin accents on the borders; NOT an all-yellow robe.",f)
 def build(c,v="v0",golden=False):
-    pal,face=DATA[c]; rule,main=colour(c,v,golden); item,hk=ITEMS[item_for(c)]; right=(int(c[1:])%2==1) if c not in GOLDEN_ITEM else {"c06":True,"c25":True,"c16":True,"c20":False}[c]
+    pal,face=DATA[c]; rule,main=colour(c,v,golden); item,hk=age_item(c,"t8",*ITEMS[item_for(c)]); right=(int(c[1:])%2==1) if c not in GOLDEN_ITEM else {"c06":True,"c25":True,"c16":True,"c20":False}[c]
     robe=main if golden else "golden yellow"
     s=PRE+f" An imperial consort, the Empress. Her face: {face}. From the identity reference keep ONLY her face, facial features, hairstyle colour and signature colour family; do NOT copy the outfit, hair ornaments or accessories of the reference, dress her in the NEW outfit below. The style reference image is only for skin, drawing style, fabric and embroidery: never copy its face, body or pose. {AGE_TXT[AGE]}"
     s+=f" Outfit (the Empress (Hoàng hậu), clearly much richer and more splendid than the lower ranks): the Empress's imperial phoenix ceremonial robe of {robe} silk{(" mixed with "+main) if (not golden and v!="v1") else " mixed with golden yellow" if golden else ""}, richly embroidered on the chest, shoulders and wide sleeves with large phoenixes, peonies and clouds in gold and kingfisher-blue silk thread (far denser and richer embroidery than any other rank), over it a long ceremonial silk mantle falling from the shoulders to the floor, edged with a broad band of gold brocade and pearls, a wide jewelled gold-and-pearl cloud collar with layered pearl fringes over the shoulders, many long strands of pearls and jade across the chest, a jade-and-gold belt with long tassels and jade pendants, floor-length robe with slippers visible, slim tall silhouette; the GRANDEST headdress of all: a FULL tall imperial nine-phoenix crown, clearly taller and wider than a noble consort's crown, with a large central gold phoenix holding a pearl string in its beak, jewelled wings spreading wide on both sides, kingfisher-blue inlay, rubies and pearls, and a few clean pearl tassels at the sides; the most splendid outfit of all, clearly grander than every other rank."
     s+=" COLOUR RULE: "+rule
     s+=" The phoenix is the main embroidered motif, larger and more prominent than the flowers."
     s+=" All flowers, birds and the phoenix are fine silk-thread embroidery stitched directly into the fabric, flat and integrated with the cloth, following its folds, not appliqué, not pasted patches, not raised. "+FAB
-    s+=f" Pose: calm standing pose; she holds {item} in a contrasting colour, not the robe colour, the item held below the chin, the hand really gripping it, the whole face fully visible. Her hands interact naturally with the item (gently presenting, turning or touching it), lively and natural, while her head stays up facing the viewer, eyes open, lips closed, never looking down. Her hands and body: {hand(hk,right)}."
+    s+=f" Pose: calm standing pose; she holds {item} in a contrasting colour, not the robe colour, the item held below the chin, the hand really gripping it, the whole face fully visible. Her hands interact naturally with the item (gently presenting, turning or touching it), lively and natural, while her head stays up facing the viewer, eyes open, lips closed, never looking down. Her hands and body: {_hh(hand,hk,right)}."
     s+=" Every hairpin is inserted into the hair pointing upward or backward with dangles hanging down, no hairpin horizontal or sticking out to the side. Luminous smooth porcelain skin, bare clean forehead with no forehead mark and no flower mark, eyes open, floor-length robe with slippers visible, no train, no cup, nothing covering the face."
     return s+END
 
@@ -303,14 +321,14 @@ ITEMS7=[("a gilded hand censer","c"),("an imperial round fan with a gold filigre
 GOLDEN7={"c06":0,"c25":2}
 def hand7(key,right):
     d="right" if right else "left"
-    if key=="c": return f"the censer held in one hand at chest height below the chin, the other hand resting lightly on her sash, body turned slightly three-quarters to the {d}"
-    if key=="one": return f"the item held in one hand at chest height below the chin, the other hand resting lightly on her sash, body turned slightly three-quarters to the {d}"
-    if key=="two": return "the item held in both hands lowered before her at waist height, a slight turn of the body, head tilted gently toward the viewer"
-    return f"the item held in both hands at waist height before her, body turned slightly three-quarters to the {d}"
+    if key=="c": return f"the censer held in one hand at chest height below the chin, the other hand resting lightly on her sash, body and face frontal, standing squarely facing the viewer, no turn"
+    if key=="one": return f"the item held in one hand at chest height below the chin, the other hand resting lightly on her sash, body and face frontal, standing squarely facing the viewer, no turn"
+    if key=="two": return "the item held in both hands lowered before her at waist height, body and face frontal, standing squarely facing the viewer, no turn, head tilted gently toward the viewer"
+    return f"the item held in both hands at waist height before her, body and face frontal, standing squarely facing the viewer, no turn"
 # T7V2 (W77 18/11): third fresh colour family per person for t7 v2 (not her t1 family, not her V2 family, never dusty/rực). t7 v1 = V2[c] as MAIN.
 T7V2={'c01': 'azure blue', 'c02': 'turquoise', 'c03': 'sky blue', 'c04': 'rose pink', 'c05': 'jade green', 'c06': 'leaf green', 'c07': 'orchid purple', 'c08': 'lavender violet', 'c09': 'turquoise', 'c10': 'azure blue', 'c11': 'sky blue', 'c12': 'orchid purple', 'c13': 'jade green', 'c14': 'coral pink', 'c15': 'lavender violet', 'c16': 'azure blue', 'c17': 'leaf green', 'c18': 'turquoise', 'c19': 'sky blue', 'c20': 'jade green', 'c21': 'leaf green', 'c22': 'peach orange', 'c23': 'orchid purple', 'c24': 'azure blue', 'c25': 'lavender violet', 'c26': 'turquoise', 'c27': 'sky blue', 'c28': 'orchid purple', 'c29': 'jade green', 'c30': 'leaf green', 'c31': 'lavender violet', 'c32': 'rose pink'}
 def build_t7(c,v="v0"):
-    pal,face=DATA[c]; n=int(c[1:]); i=GOLDEN7.get(c,(n*3+5)%10); item,hk=ITEMS7[i]; right=(c=="c25") if c in GOLDEN7 else n%2==1
+    pal,face=DATA[c]; n=int(c[1:]); i=GOLDEN7.get(c,(n*3+5)%10); item,hk=age_item(c,"t7",*ITEMS7[i]); right=(c=="c25") if c in GOLDEN7 else n%2==1
     m,m2=ORIG1[c] if c in ORIG1 else (pal.split(" and ")[0]+" silk",pal.split(" and ")[-1])
     main=m.split(" silk")[0]
     nf=V2[c] if v=="v1" else T7V2[c] if v=="v2" else None
@@ -319,7 +337,7 @@ def build_t7(c,v="v0"):
     s+=f" Outfit (rank-7 imperial noble consort (Hoàng quý phi), clearly much richer and more splendid than the lower ranks): a near-empress ceremonial robe of {main} silk, embroidered with phoenixes, peonies and auspicious clouds in gold thread on the chest and along the borders, a jewelled cloud-collar cape edged with pearls and gold over the shoulders, strands of pearls across the chest, a jade-and-gold belt with long tassels, floor-length robe with slippers visible; tall grand chignon crowned by a LARGE ornate gold phoenix crown (one large gold phoenix with spreading wings, grander and taller than a noble consort's headdress, but clearly simpler than the Empress's nine-phoenix crown) with pearl strands, kingfisher-blue inlay and a few gold tassels."
     s+=f" COLOUR RULE: all colours fresh, clear and luminous, never dusty or greyed; "+(f"her ORIGINAL robe colour is kept exactly as in image 1 (her first reference): {m} is the MAIN colour of the robe, cape and sleeves, with {m2} in the linings" if not nf else f"a fresh {nf} (a different colour family from her first reference) is the MAIN colour of the robe, cape and sleeves, with a paler tint of the same {nf} in the linings")+f"; yellow as clearly larger visible parts (wide yellow borders along the front opening, sleeves and hem, a wide yellow sash, a broad yellow collar and a wide inner panel of the robe, well visible at game size) in {YEL_NEW}; the crown, hairpin and jewellery gold in the same 18K tone; NOT an all-yellow robe."
     s+=" All flowers, birds and the phoenix are fine silk-thread embroidery stitched directly into the fabric, flat and integrated with the cloth, following its folds, not appliqué, not pasted patches, not raised. "+FAB
-    s+=f" Pose: calm standing pose; she holds {item} in a contrasting colour, not the robe colour, the item held below the chin, the hand really gripping it, the whole face fully visible. Her hands interact naturally with the item (gently presenting, turning or touching it), lively and natural, while her head stays up facing the viewer, eyes open, lips closed, never looking down. Her hands and body: {hand7(hk,right)}."
+    s+=f" Pose: calm standing pose; she holds {item} in a contrasting colour, not the robe colour, the item held below the chin, the hand really gripping it, the whole face fully visible. Her hands interact naturally with the item (gently presenting, turning or touching it), lively and natural, while her head stays up facing the viewer, eyes open, lips closed, never looking down. Her hands and body: {_hh(hand7,hk,right)}."
     s+=" Every hairpin is inserted into the hair pointing upward or backward with dangles hanging down, no hairpin horizontal or sticking out to the side. Luminous smooth porcelain skin, bare clean forehead with no forehead mark and no flower mark, eyes open, floor-length robe with slippers visible, no train, no cup, nothing covering the face."
     return s+END
 
@@ -503,25 +521,26 @@ L3F={1:[("a plain silk round fan with a bamboo handle","rfan"),("an embroidered 
 4:[("a round fan with a carved jade handle and jade tassel","rfan"),("a sandalwood folding fan with carved ribs","ffan"),("a lacquered jewel box","box"),("a scroll with jade rollers","scroll"),("a jade disc pendant on a silk cord","dangle"),("a silver-and-enamel hand mirror","mirror"),("a small cloisonné vase with flowers","vase"),("a gauze palace lantern with a jade pendant","lantern"),("a silver-mounted book box","box"),("a small white-jade vase with blossoms","vase")],
 5:[("a round fan with a gold-inlaid handle and gem tassel","rfan"),("a gilded lacquer box","box"),("a painted scroll with gold fittings","scroll"),("an ivory folding fan with gold leaf","ffan"),("a cloisonné enamel vase with flowers","vase"),("a gold-and-jade hand mirror","mirror"),("a gilded silver flower basket","basket"),("a silver-gilt palace lantern with pearl tassels","lantern"),("a coral-and-pearl bead tassel ornament","dangle"),("a gold-mounted embroidered silk book","book")],
 6:[("a white-jade ruyi","ruyi"),("a jewelled box","box"),("a round fan with a carved jade-and-gold handle and pearls","rfan"),("a gold-and-pearl hand mirror","mirror"),("a white-jade vase with gold mounts and flowers","vase"),("a pearl-embroidered silk folding fan with jade ribs","ffan"),("a carved jade incense box","box"),("a small coral branch on a gold stand","stand"),("a pearl-tasselled silk lantern with a jade top","lantern"),("a gold-mounted jade pendant on a silk cord","dangle")]}
-HAND_LOW={"rfan":"the round fan held up in one hand at chest height, gently turned to show its painting, the other hand lightly touching its tassel, body turned slightly three-quarters to the {d}",
-"ffan":"the folding fan half-open in one hand at waist height, her fingers spreading its ribs, the other hand resting on her sash, body turned slightly three-quarters to the {d}",
-"kerchief":"the handkerchief draped over the fingers of one hand, lifted gently at waist height, the other hand smoothing its edge, body turned slightly three-quarters to the {d}",
-"basket":"the basket hanging from the crook of one arm, the other hand arranging a flower in it, body turned slightly three-quarters to the {d}",
-"sprig":"the sprig held up in one hand at chest height below the chin, the other hand touching a blossom, body turned slightly three-quarters to the {d}",
-"book":"the book open in both hands at waist height as if she was just reading it, head up toward the viewer, a slight turn of the body",
-"hoop":"the hoop held in one hand at waist height, the other hand drawing a silk thread from it, body turned slightly three-quarters to the {d}",
-"flute":"the flute held horizontally in both hands at chest height (not at the lips), fingers resting on its holes, a slight turn of the body",
-"lantern":"the lantern hanging from its handle in one hand beside her at hip height, the other hand steadying its tassel, body turned slightly three-quarters to the {d}",
-"dangle":"the ornament dangling from the fingers of one hand at chest height, the other hand cupped beneath it, body turned slightly three-quarters to the {d}",
-"vase":"the vase cradled in both hands at waist height, one hand under its base, a slight turn of the body, head tilted gently toward the viewer",
-"box":"the box in both hands at waist height, one hand lifting its lid slightly, body turned slightly three-quarters to the {d}",
-"scroll":"the rolled scroll in one hand lowered at her side, the other hand lifting her sleeve slightly, body turned slightly three-quarters to the {d}",
-"mirror":"the hand mirror held in one hand at waist height with its back turned outward, the other hand touching a hairpin, body turned slightly three-quarters to the {d}",
-"ruyi":"the ruyi held across both palms at waist height, presenting it, a slight turn of the body, head tilted gently toward the viewer",
-"stand":"the stand presented in both hands at waist height, a slight turn of the body, head tilted gently toward the viewer"}
+HAND_LOW={"rfan":"the round fan held up in one hand at chest height, gently turned to show its painting, the other hand lightly touching its tassel, body and face frontal, standing squarely facing the viewer, no turn",
+"ffan":"the folding fan half-open in one hand at waist height, her fingers spreading its ribs, the other hand resting on her sash, body and face frontal, standing squarely facing the viewer, no turn",
+"kerchief":"the handkerchief draped over the fingers of one hand, lifted gently at waist height, the other hand smoothing its edge, body and face frontal, standing squarely facing the viewer, no turn",
+"basket":"the basket hanging from the crook of one arm, the other hand arranging a flower in it, body and face frontal, standing squarely facing the viewer, no turn",
+"sprig":"the sprig held up in one hand at chest height below the chin, the other hand touching a blossom, body and face frontal, standing squarely facing the viewer, no turn",
+"book":"the book open in both hands at waist height as if she was just reading it, head up toward the viewer, body and face frontal, standing squarely facing the viewer, no turn",
+"hoop":"the hoop held in one hand at waist height, the other hand drawing a silk thread from it, body and face frontal, standing squarely facing the viewer, no turn",
+"flute":"the flute held horizontally in both hands at chest height (not at the lips), fingers resting on its holes, body and face frontal, standing squarely facing the viewer, no turn",
+"lantern":"the lantern hanging from its handle in one hand beside her at hip height, the other hand steadying its tassel, body and face frontal, standing squarely facing the viewer, no turn",
+"dangle":"the ornament dangling from the fingers of one hand at chest height, the other hand cupped beneath it, body and face frontal, standing squarely facing the viewer, no turn",
+"vase":"the vase cradled in both hands at waist height, one hand under its base, body and face frontal, standing squarely facing the viewer, no turn, head tilted gently toward the viewer",
+"box":"the box in both hands at waist height, one hand lifting its lid slightly, body and face frontal, standing squarely facing the viewer, no turn",
+"scroll":"the rolled scroll in one hand lowered at her side, the other hand lifting her sleeve slightly, body and face frontal, standing squarely facing the viewer, no turn",
+"mirror":"the hand mirror held in one hand at waist height with its back turned outward, the other hand touching a hairpin, body and face frontal, standing squarely facing the viewer, no turn",
+"ruyi":"the ruyi held across both palms at waist height, presenting it, body and face frontal, standing squarely facing the viewer, no turn, head tilted gently toward the viewer",
+"stand":"the stand presented in both hands at waist height, body and face frontal, standing squarely facing the viewer, no turn, head tilted gently toward the viewer"}
 def low_hand(hk,right):
+    if hk.startswith("L:"): hk=hk[2:]
     if hk in HAND_LOW: return HAND_LOW[hk].format(d="right" if right else "left")
-    return hand7(hk if hk in ('one','two','box') else 'one',right) if hk!='scroll' else 'the scroll in one hand lowered at her side, the other hand lifting her sleeve slightly, body turned slightly three-quarters to the right'
+    return hand7(hk if hk in ('one','two','box') else 'one',right) if hk!='scroll' else 'the scroll in one hand lowered at her side, the other hand lifting her sleeve slightly, body and face frontal, standing squarely facing the viewer, no turn'
 def items3f(c):
     n=int(c[1:]); used=set(); out={}
     for t in range(1,7):
@@ -632,7 +651,7 @@ LOW_TONE="all colours at ONE medium tone level, the same as the soft coral-red a
 # Words copied from PHI_VAR["G"] ("pearls", "lying flat over the robe" -> "over it", "not ... a dense net" from the owner reading) + sparseness qualifiers "a few", "thin", "sparse", "airy". ONE switchable phrase: set to "" to remove.
 TAN_CAPE_PEARLS=", with a light overlay of a few thin, sparse strands of pearls lying flat over it, airy, not a dense pearl net"
 def build_low(c,t,v="v0"):
-    pal,face=DATA[c]; m,m2=ORIG1[c]; item,hk=ITEMS_LOW[c][t]; right=(int(c[1:])%2==1)
+    pal,face=DATA[c]; m,m2=ORIG1[c]; item,hk=age_item(c,f"t{t}",*ITEMS_LOW[c][t]); right=(int(c[1:])%2==1)
     main0,orig=LOWNAME[c]
     LV=None if v=="v0" else (LOWV1 if v=="v1" else LOWV2)[c][t]
     o=(outfit_low123(c,t,pal if LV is None else LV[0],main0 if LV is None else LV[0]) if t<=3 else low_outfit(c,t,v))
@@ -671,7 +690,8 @@ BDITEM="10"
 BD_ITEMS={"1":("a turquoise-and-coral bead string","bead"),"2":("a small fur-trimmed leather pouch","pouch"),"3":("a silver-mounted horn-handled whisk-fan of horsehair","fan"),"4":("a carved bone hand mirror with a turquoise rim","mirror"),"5":("a small felt-bound book","book"),"6":("a painted leather folding fan","fan"),"7":("a branch of dried steppe flowers tied with red cord","branch"),"8":("an embroidered silk bag with coral beads","pouch"),"9":("a small ornamented silver whistle-flute on a cord","flute"),"10":("a white-jade ruyi with a turquoise bead","ruyi")}
 HAND_BD={"bead":"the bead string draped over the fingers of one hand at chest height below the chin, the other hand resting lightly on her sash","pouch":"the pouch held in one hand at waist height, the other hand resting lightly on its cord","fan":"the fan held up in one hand at chest height below the chin, the other hand resting lightly on her sash","mirror":"the hand mirror held in one hand at chest height with its back turned outward, the other hand touching a hairpin","book":"the book held open in both hands at waist height","branch":"the branch held up in one hand at chest height below the chin, the other hand touching a blossom","flute":"the flute held in both hands at chest height below the chin","ruyi":"the ruyi held upright in one hand at chest height below the chin, the other hand resting lightly on her sash"}
 def build_bdq(o="1"):
-    t=build_low("c06",6,"v0"); c,th,cape,rend,sig=BD_OPT[o]
+    global OLDITEM; _oi=OLDITEM; OLDITEM=True; t=build_low("c06",6,"v0"); OLDITEM=_oi   # N3b output kept: its own --bditem list (FIGURE_GATE H BD), not the age table
+    c,th,cape,rend,sig=BD_OPT[o]
     pal,face=DATA["c06"]; bpal,bface=PDATA["bd"]
     def sw(a,b):
         nonlocal t
@@ -688,8 +708,8 @@ def build_bdq(o="1"):
     # owner 19/11 ~00:45-00:50Z (FIGURE_GATE 3d2 + 3f): FRONTAL ONLY; item from the BD princess list (H), never a t6 consort item. --bditem N picks the list entry (default 10).
     item,hk=BD_ITEMS[BDITEM]
     sw("she holds a round fan with a carved jade-and-gold handle and pearls in a contrasting colour","she holds "+item+" in a contrasting colour")
-    sw("the round fan held up in one hand at chest height, gently turned to show its painting, the other hand lightly touching its tassel, body turned slightly three-quarters to the left",HAND_BD[hk]+", body facing the viewer squarely (frontal), shoulders level, not turned")
-    sw("3/4 or frontal view","frontal view")
+    sw("the round fan held up in one hand at chest height, gently turned to show its painting, the other hand lightly touching its tassel, body and face frontal, standing squarely facing the viewer, no turn",HAND_BD[hk]+", body facing the viewer squarely (frontal), shoulders level, not turned")
+    sw("body and face frontal, standing squarely facing the viewer, no turn","frontal view")
     return t
 # ---------- STATES (SAMPLES ONLY, owner 18/11 ~21:00Z real; brief dev/handover/briefs/states-sample.md): --state nude|thaihau|kc|ngheo|nc1|nc6|bd1|bd6 ----------
 # Same sentence structure as the 8 ranks (PRE, identity sentence, AGE_TXT, outfit, COLOUR RULE, embroidery+drape, item pose, closing hairpin rule, END). Existing outputs untouched: all code below is only reached with --state.
@@ -737,7 +757,7 @@ def bd_opt(t,o):
 # N3 r11 (owner ~23:33Z): ONE splendid imperial phoenix-and-dragon crown (dragon in the centre, a phoenix at each side), NO flowers on the crown or hairpins (the old crown came from the HEAD table, which has flowers); bead fringe (tas) stays per option
 NUDE_CROWN="one splendid imperial gold phoenix-and-dragon crown: a large gold dragon with a pearl in its claws rising from the centre of a tall gold crown band, a gold phoenix with raised wings on each side of the dragon, set with rubies, pearls and kingfisher-blue inlay, pure gold metalwork with no flowers and no flower ornaments anywhere on the crown or the hairpins, and a few gold hairpins with slim gold-and-pearl dangles at the sides"
 def build_nude_own(c,face,right):
-    o=NUDE_OPT[NUDE_OPTSEL]; item,hk=NUDE_ITEM[c]; pal,_=DATA[c]; m,m2=ORIG1[c]
+    o=NUDE_OPT[NUDE_OPTSEL]; item,hk=age_item(c,"nude",*NUDE_ITEM[c]); pal,_=DATA[c]; m,m2=ORIG1[c]
     sec=o["sec"] or m.split(" silk")[0]; secrule=o["secrule"] or None
     if AGE in ("a51","a65") and sec=="black": sec="deep midnight-navy"; secrule="black silk richly embroidered with gold thread (the yellow clearly more than the black)".replace("black silk","deep midnight-navy silk").replace("the black","the navy")   # N4 1c: ELDER COLOURS never black/brown
     crown=o["crown"] or NUDE_CROWN
@@ -766,14 +786,14 @@ def build_state(c,state,v="v0"):
         hair=" Hair: her own hairstyle as described in the outfit, with hairpins, "+("silver, pearls and fresh flowers, little gold. " if t==1 else "gold hairpins with dangles, rich like her rank. ")
         s+=hair+EMB_NOPH+(FAB_LOW if t==1 else FAB)
         if state=="bd6" and BDOPT: s=bd_opt(s,BDOPT)
-        it={("nc",1):("a folded ivory-gold silk fan","two"),("nc",6):("a round fan with a gold-inlaid handle and gem tassel","two"),("bd",1):("a small bouquet of coral-red flowers","one"),("bd",6):("a white-jade ruyi","one")}[(k,t)]
+        it={("nc",1):("a folded ivory-gold silk fan","two"),("nc",6):("a round fan with a gold-inlaid handle and gem tassel","two"),("bd",1):("a small bouquet of coral-red flowers","one"),("bd",6):("a white-jade ruyi","one")}[(k,t)]; it=age_item(c,k,*it)
         return s+_pose(it[0],it[1],right)+CLOSE+END
     pal,face=DATA[c]; m,m2=ORIG1[c]; main0,orig=LOWNAME[c]; mo,fl=MOTIF_LOW[c]
     if state=="nude":
         return build_nude_own(c,face,right)
     if state=="thaihau":
         # owner 18/11 ~22:05Z + FIGURE_GATE H: Thai hau holds ONLY an item of the H THAI HAU list (never a t8 consort item)
-        item,hk=TH_ITEMS[(item_for(c)+2)%10]
+        item,hk=age_item(c,"thaihau",*TH_ITEMS[(item_for(c)+2)%10])
         s=PRE+f" An imperial consort, the Empress Dowager (Thái hậu), dignified and gracious. Her face: {face}."+IDENT+" "+AGE_TXT[AGE]
         s+=f" Outfit (the Empress Dowager (Thái hậu), as splendid as the Empress but dignified and restrained): a ceremonial robe of deep antique-gold yellow silk mixed with a muted deep {main0} (a trầm, subdued shade), richly embroidered on the chest, shoulders and wide sleeves with phoenixes, peonies and clouds in antique-gold and deep kingfisher-blue silk thread, over it a long ceremonial silk mantle falling from the shoulders to the floor, edged with a band of antique-gold brocade and pearls, a STIFF, STRUCTURED, squared shoulder piece (cầu vai cứng) of embroidered antique-gold brocade with a pearl edge, standing firm and horizontal over both shoulders to show her authority, and her own collar: a high upright round standing collar of deep brocade fastened at the throat with a small jade button (not a crossed collar, not a cloud collar), strands of pearls and jade across the chest, a jade-and-gold belt with tassels, floor-length robe with slippers visible, slim tall silhouette; a full imperial phoenix crown of the Empress's rank, a large central gold phoenix holding a pearl string in its beak, jewelled wings spreading to both sides, kingfisher-blue inlay, rubies and pearls, and a few clean pearl tassels at the sides."
         s+=f" COLOUR RULE: all colours MUTED and deep, rich and dignified, never bright, never pastel; the robe is deep antique-gold yellow mixed with muted deep {main0} (collar, inner robe, wide borders and a few panels), the yellow is a deep antique gold, not pale cream, not lemon, not bright; the crown, hairpin and jewellery in an old antique gold; gold only as thin accents on the borders; NOT an all-yellow robe."
@@ -783,11 +803,11 @@ def build_state(c,state,v="v0"):
         return s+_pose(item,hk,right)+CLOSE+END
     # kc / ngheo: stepped-down versions of the --low t1 structure (outfit sentence = TIER_LOW[1] pattern)
     if state=="kc":
-        item,hk={"c06":("a thread-bound book","two"),"c25":("a painted silk round fan","two")}.get(c,("an embroidery hoop with a half-finished flower","two"))
+        item,hk=age_item(c,"kc",*{"c06":("a thread-bound book","two"),"c25":("a painted silk round fan","two")}.get(c,("an embroidery hoop with a half-finished flower","two")))
         o=f"Outfit (a young lady of a noble family (khuê các tiểu thư) before she enters the palace, simple refined daywear of a good house, never poor, NOT a consort, NOT a palace robe): a NEW outfit, a long-sleeved crossed-collar inner blouse in a lighter tone, over it a SLEEVELESS EMBROIDERED VEST (a waistcoat-like bối tâm) with fine delicate embroidered {mo} on the front panels and a narrow embroidered edge, a long softly pleated skirt to the floor with a little embroidery at the hem, and a long ribbon sash tied at the waist with long hanging ribbon ends; hair in a neat bun with a silk hair ribbon and a few pretty jade and pearl hairpins (trâm) with small dangles and a fresh flower ({fl}), the rest of her long hair falling down her back, modest jewellery (a jade bracelet, small pearl earrings), no crown, no gold headdress, nothing of royal rank; her signature colour family {pal} stays the MAIN colour of the vest and sash ({main0}, NOT green); the vest is clearly {orig}, the blouse and skirt in a softer lighter tone of it or cream, NOT yellow, NOT an all-gold outfit"
         fab=FAB_LOW; who="A young lady of a noble family before entering the palace"
     else:
-        item,hk={"c06":("a small bamboo basket with a few fresh flowers","two"),"c25":("a sprig of fresh plum blossoms","one")}.get(c,("an embroidered handkerchief","one"))
+        item,hk=age_item(c,"ngheo",*{"c06":("a small bamboo basket with a few fresh flowers","two"),"c25":("a sprig of fresh plum blossoms","one")}.get(c,("an embroidered handkerchief","one")))
         o=f"Outfit (a young woman of a poor but respectable family (nhà nghèo), neat, clean and pretty, never ragged, never torn, not plain: normal good clothes fitting her modest standing, a working girl's daywear, not a consort): a NEW outfit, a plain matte cotton-silk crossed-collar jacket with simple long sleeves, over one plain long pleated cotton skirt, with a plain linen APRON (a long wrap apron) tied at the waist over the skirt by a cloth sash with a bow, one or two layers only, no sheer gauze, no layered overskirt, no flowing scarves; a little embroidery ONLY on the collar edge, the cuffs and a few small {mo} sprigs on the apron and the skirt hem; hair tidy with a plain cloth ribbon and one or two simple wooden or silver hairpins (trâm) and a small fresh flower ({fl}), no gold jewellery, no crown; her signature colour family {pal} stays the MAIN colour of the jacket ({main0}, NOT green), in a softer, simpler cotton-silk, the apron in natural linen beige, the skirt a plain muted tone; the jacket is clearly {orig}, NOT yellow, no patches, no stains"
         fab="Plain cotton-silk with simple soft folds, matte and slightly stiff, not sheer, not airy, not drifting, hanging simply and naturally."; who="A young woman of a modest family before entering the palace"
     s=PRE+f" {who}. Her face: {face}."+IDENT+" "+AGE_TXT[AGE]+" "+o+"."
@@ -910,6 +930,8 @@ SPEC5_ADAPT={
 "walking with a pipa held upright, plucking it, skirt swirling":"walking with {prop} held upright in one hand, skirt swirling",
 "turning mid-step with a raised writing brush in one hand and a sheet of paper in the other, sleeves flowing":"turning mid-step with {prop} raised in one hand, sleeves flowing",
 "turning lightly with a small teacup in both hands, sash fluttering":"turning lightly with {prop} in both hands, sash fluttering"}
+SPEC5_FRONTAL=[("turning mid-step while adjusting","mid-step while adjusting"),("gazing sideways at","gazing at"),("swaying in a light turn,","swaying gently,"),
+("turning mid-step with","mid-step with"),("turning lightly with {prop} in both hands","lightly holding {prop} in both hands"),("body in three-quarter view, ","")]
 SPEC5_IDS={"c%02d"%n:(t,m) for t,rng in (("kieungao",range(1,7)),("numi",range(7,13)),("hienlanh",range(13,18)),("dangi",range(18,23)),("thamvong",range(23,28)),("thanhnha",range(28,33))) for m,n in enumerate(rng,1)}
 def spec5pose(o,c,t):
     m=re.search(r" Pose: calm standing pose; she holds (.+?) in a contrasting colour",o); assert m,"pose paragraph not found"
@@ -924,9 +946,12 @@ def spec5pose(o,c,t):
         if "{prop}" not in raw: raw=SPEC5_ADAPT[raw]
         if not any(re.search(p,raw) for p in _bad): break
     else: raise AssertionError(("no allowed spec5 pose",c,t))
-    pose=raw.format(prop=prop)+(", with stately grace" if t>=7 else ", poised" if t>=5 else "")
+    # N5c (owner 19/11 ~00:50Z, FIGURE_GATE 3d2 "từ đây về sau là không có vẽ góc 3 phần tư nữa"): FRONTAL ONLY. Applied AFTER the pose choice (skip lists above see the verbatim spec5 text, so every person keeps the same pose);
+    # only the turn/side words change, the hand/item action stays; every spec5 pose then states the frontal body.
+    for _o,_n in SPEC5_FRONTAL: raw=raw.replace(_o,_n)
+    pose=raw.format(prop=prop)+", body and face frontal, facing the viewer squarely, no turn"+(", with stately grace" if t>=7 else ", poised" if t>=5 else "")
     # N5b (ROOT-36 order; FIGURE_GATE A0 rule 3 + canon 19/11 (e) "Nữ đế mass pose = CALM at all ages (item below the chin, no flying cloth)"): --state nude only -> one calm sentence for every person and age; every other output byte-identical
-    if globals().get("STATE")=="nude": pose=f"a calm, composed, dignified standing pose, frontal or a slight three-quarter turn, standing still and upright; she holds {prop} at chest height in one or both hands, the item held below the chin and clear of the face, elbows close to her body, a small restrained gesture only; the sleeves, mantle, sashes, ribbons and tassels all hang straight down, still, under their own weight: no flying, floating or windblown cloth, no movement"
+    if globals().get("STATE")=="nude": pose=f"a calm, composed, dignified standing pose, body and face frontal, standing squarely facing the viewer, no turn, standing still and upright; she holds {prop} at chest height in one or both hands, the item held below the chin and clear of the face, elbows close to her body, a small restrained gesture only; the sleeves, mantle, sashes, ribbons and tassels all hang straight down, still, under their own weight: no flying, floating or windblown cloth, no movement"
     a=o.index(" Pose: calm standing pose;"); b=o.index(" Every hairpin is inserted")
     new=f" Pose: {pose}. The item is in a contrasting colour, not the robe colour, and the hand really grips it; the whole face fully visible with the head up toward the viewer, eyes open, lips closed, never looking down, nothing covering the face."
     o=o[:a]+new+o[b:]

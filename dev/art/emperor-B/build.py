@@ -5,7 +5,7 @@ ONLY the FACE line, the OUTFIT slot and the ITEM/hand slot differ between the si
 """
 import sys
 # PRE / END / FAB / YEL_NEW copied byte-for-byte from the consort builder (dev/art/t8-prompt-B/build.py)
-PRE=("Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference portraits; full-body standing figure head to feet, centered, plain light parchment background, soft even light; fair porcelain skin; gentle expression with soft eyes and a bright closed-lip smile, lips closed, no teeth, mouth never open; elegant, slim, clearly adult; beautiful/handsome romantic-lead looks for everyone; face clearly visible, 3/4 or frontal view.")
+PRE=("Semi-realistic painterly guofeng portrait style, near-3D realistic rendering with soft natural light and fine detail, exactly matching the rendering of the reference portraits; full-body standing figure head to feet, centered, plain light parchment background, soft even light; fair porcelain skin; gentle expression with soft eyes and a bright closed-lip smile, lips closed, no teeth, mouth never open; elegant, slim, clearly adult; beautiful/handsome romantic-lead looks for everyone; face clearly visible, body and face frontal, standing squarely facing the viewer, no turn.")
 END=" Eyes soft, warm and round-almond, never slanted or upturned, never teary. Everyone beautiful at every age. No text, no labels."
 FAB="The silk has real weight: the wide sleeves and robe hang and fold naturally under their own weight, with natural creases, never stiff, flat or board-like."
 # OWNER 18/11 ~23:00Z: v7 still too rực, not like live-1/2 -> target the live-1/2 v7 yellow (#EEB464); wide sleeves; lishui wave hem. (earlier ~22:35Z: v5 read too rực (saturated) in game -> LIGHTER, softer: target the approved e1 yellow (median ~#F6BC5E). Consort builder keeps its own #EFBD69 words; the emperor builder is the only one with this lighter wording.
@@ -32,12 +32,12 @@ OUTFIT={
 "e3":ROBE_E.format(crown="a flat Ming-style miện crown with short bead strings reaching only the brow, never covering the face")+", narrow crimson trim along the collar and sleeve edges",
 "e4":ROBE_E.format(crown="a Ming-style gold dragon-head guan crown")+", narrow dark-jade trim along the collar and sleeve edges"}
 ITEM={
-"live1":("a gold-mounted imperial scroll","the rolled scroll in one hand lowered at his side, the other hand resting lightly at his belt, body turned slightly three-quarters"),
-"live2":("an imperial folding fan with carved ribs","the closed fan held in both hands lowered before him at waist height, a slight turn of the body, head up toward the viewer"),
-"e1":("a jade ruyi scepter","the ruyi upright in one hand at chest height below the chin, the other hand resting at his belt, body turned slightly three-quarters"),
-"e2":("a gold-mounted imperial scroll","the rolled scroll in one hand lowered at his side, the other hand resting lightly at his belt, body turned slightly three-quarters"),
-"e3":("an imperial closed folding fan","the closed fan held in both hands lowered before him at waist height, a slight turn of the body, head up toward the viewer"),
-"e4":("a jade ceremonial tablet","the tablet held in both hands at waist height before him, body turned slightly three-quarters")}
+"live1":("a gold-mounted imperial scroll","the rolled scroll in one hand lowered at his side, the other hand resting lightly at his belt, body and face frontal, standing squarely facing the viewer, no turn"),
+"live2":("an imperial folding fan with carved ribs","the closed fan held in both hands lowered before him at waist height, body and face frontal, standing squarely facing the viewer, no turn, head up toward the viewer"),
+"e1":("a jade ruyi scepter","the ruyi upright in one hand at chest height below the chin, the other hand resting at his belt, body and face frontal, standing squarely facing the viewer, no turn"),
+"e2":("a gold-mounted imperial scroll","the rolled scroll in one hand lowered at his side, the other hand resting lightly at his belt, body and face frontal, standing squarely facing the viewer, no turn"),
+"e3":("an imperial closed folding fan","the closed fan held in both hands lowered before him at waist height, body and face frontal, standing squarely facing the viewer, no turn, head up toward the viewer"),
+"e4":("a jade ceremonial tablet","the tablet held in both hands at waist height before him, body and face frontal, standing squarely facing the viewer, no turn")}
 # OWNER 18/11 ~22:35Z (via Foreman C): no train; shoulder pieces STIFF; slim-but-imperial silhouette like the approved e1
 SHAPE="SILHOUETTE: a man's robe that falls straight to the ankles, no train, nothing trailing behind; if shoulder pieces are worn they are STIFF, structured, firm armour-like shoulder caps that hold their shape, never soft, never drooping or draped over the shoulders; an imperial silhouette: the robe fitted at the waist, the sleeves WIDE and full, hanging in long clear folds (an emperor's sleeves are never narrow), neither bulky and puffed nor thin and starved. HEM: the lower skirt ends in a lively deep sea-wave-and-cliff (lishui) border embroidered with white-capped waves and cliffs in blue-green, white and gold, so the robe is not plain yellow from top to bottom."
 def colour():
