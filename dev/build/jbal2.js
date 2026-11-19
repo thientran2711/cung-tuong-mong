@@ -1336,3 +1336,10 @@ Object.assign(BAL,{errand:{n:2,msWalk:650}});
 BAL.ag.par4={on:1,kidCare:{g:{"kid":3}},kidGuard:{host:40,g:{"safe":2,"kid":1}},cyc:{g:{"safe":3,"kid":2}},
  rouge:{g:{"sung":1,"danh":1},steal:{g:{"sung":1,"spite":1}}},ill:{malice:60,keep:20,w:{hacdinh:6,xahuong:5,botngua:4},g:{"spite":4}},
  man:{sungBelow:30,cutRisk:50,g:{hail:{"sung":.5},flirt:{"sung":1.5},token:{"sung":2},tryst:{"sung":3,"rest":1},cut:{"safe":3}}}};
+/* PALACE CHATTER (PL#6 bubble talk, jchat.js; owner OD:L1627 (5) "every 1–2 min NPCs chat"): gap = seconds between two chatter ticks (real time),
+   retry = seconds to look again when the stage is busy (dialog / hidden page), maxBub = bubbles on one stage at once, turnGap = ms between two lines of
+   one exchange, say = how long a line stays (ms: base + ch per letter, clamped min..max), noRepeat = exchanges / greetings said before one may come back,
+   mem = remembered keys (ring), greet = arrival greeting (delay ms, wait ms per retry while a dialog is open, tries), w = pick weights (hap = chance a
+   happening pair talks first; srv / friend / rival / base pair weights; solo = one person speaking to her). on:0 turns the whole feature off. */
+BAL.chat={on:1,gap:{min:60,max:120},retry:20,maxBub:2,turnGap:500,say:{base:1400,ch:55,min:2600,max:6000},noRepeat:60,mem:400,
+ greet:{delay:900,wait:1500,tries:6},w:{hap:.8,srv:1.2,friend:1.5,rival:1.3,base:1,solo:.6}};
