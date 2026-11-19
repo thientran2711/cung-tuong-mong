@@ -271,3 +271,5 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | coop-thin hostnull fix (opus; host:null repaint + reveal flips + toast cap + walk sfx, whole family; stacked on F4-r1) | review/coop-thin-hostnull | B | session_01N1tNP4i9JQenzqhXnbDaGx | ROLLOVER #1→#2 @ 20a1f54f (a/b/c/d/e built, hostnull 12/12 + swap 11/11; gates left; report reports/coop-thin-hostnull.md) | 19/11 09:00Z |
 | opt-scroll-reset BIG REVIEW (opus) | review/opt-scroll-reset a5e2d8e7 (stacked on ev-pic-followups) | C-AG #22 for ROOT-67 | session_01Rc5AsJNiFwrW3QTurwWfyi | RUNNING | 19/11 09:34Z |
 | coop-thin hostnull fix #2 (opus; successor of 4i9JQenz at 20a1f54f) | review/coop-thin-hostnull | B | session_01N1tNP2tXKt5N4VcwMfYH8B | RUNNING | 19/11 09:44Z |
+| REVIEW coop-thin-f5 r1 (opus BIG) of e6ad9a29 | review/coop-thin-f5-r1 | B | session_01N1tNP45gZxR8HqWwB9auYE | RUNNING | 19/11 09:50Z |
+| coop-thin F6 (opus; deck act(i), j72 quests, remaining game ends, tripwire → 0; stacked on F5) | review/coop-thin-f6 | B | session_01N1tNP5ex6HrG5uFmnZYTqA | RUNNING | 19/11 09:51Z |
