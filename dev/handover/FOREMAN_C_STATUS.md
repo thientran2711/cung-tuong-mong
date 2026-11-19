@@ -1341,3 +1341,4 @@ ROOT-48 Lượt 460: PR3 v2 Cảnh Phúc 6 rooms (a64f408, +945 cr, total 2,700)
 ROOT-48 Lượt 461 (owner on place-rank v2): bedrooms OK; receptions Western sofa → la hán sàng; right-corner rule; phối two beds + 3 low-rank colours; richness shift up (v2 Tần = lowest); KN reception floor fuller, KN bedroom tea set back → FIGURE_GATE 14b; PR3 v3.
 ROOT-48 Lượt 464 (owner, angry): 'chưa chốt gì mà đã sản xuất hàng loạt' — fault: PR3 redrew 6 Cảnh Phúc rooms v2 (945 cr) after v1 was sent, before her verdict; R2A/R2B earlier. Rule FIGURE_GATE item 0 (sample first, one GO per round). Owner on v2: Tần bedroom too plain = her Thường tại/Quý nhân level (matches 14b richness shift).
 ROOT-48 Lượt 465 (owner): phối Quý nhân bedroom luxury (v1, Lượt 457) OK, not raised to Tần → FIGURE_GATE 14b fixed, PR4 told.
+ROOT-48 Lượt 466 (owner): Khôn Ninh bedroom yellow + red mixed → FIGURE_GATE 14b, PR4.
