@@ -1334,3 +1334,4 @@ ROOT-48 Lượt 453–454: t1 'NARROW' word was the cause (removed); tassel repl
 ROOT-48 Lượt 455 (owner): triều phục sleeves t1–t6 = one identical ankle sentence, all alike, no measure loop; t7/t8 unchanged → FIGURE_GATE 8b + r20 helper; r20 now redraws t1–t6.
 ROOT-48 Lượt 456 (owner, angry): triều phục t1–t6 = ONE uniform: common hà bí sentence (only colour + pattern + pendant material differ), common sleeve sentence; t7/t8 unchanged → FIGURE_GATE 8c rewritten, r20 helper told.
 ROOT-48 Lượt 457: PR3 place-rank SAMPLE 10 (5a428d6, 1,755 cr) LOOKED + SENT (sheets A Cảnh Phúc 3×2, B phối+Khôn Ninh, Quý phi bedroom spread). My faults: Tần already gilded → Tần→Phi step soft; Quý phi yellow touch barely visible; Cảnh Phúc signature = peony/lattice/lotus garden. Waiting owner verdict before mass (10 palaces × 3 × 2 + phối + KN).
+ROOT-48 Lượt 458 (owner): equal-sleeve rule is TRIỀU PHỤC ONLY; thường phục unchanged (Lượt 351) → FIGURE_GATE 8b note.
