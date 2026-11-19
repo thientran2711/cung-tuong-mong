@@ -1183,3 +1183,4 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - D: parallel-time #4, balance-final #5, npc-purpose, choice-value-audit — all must final-merge 6b1ab390.
 - STANDBYS: MAIN session_01Rc5AsJ8S2aNYjotfjzaioU; B session_01N1tNP5jYfeoWoXsWr5eqKN; C session_01PEhRbvZwkVxhwPJEGU1KAh; D session_01964izFLpgp8aeBD8Y13gek; E/C-AG pending.
 - ROOT-68 wake trig_01JHThSPkPbhPsVf3tFGYWAv DELETED at handover; ROOT-69 creates its own at minute 32. Brief template briefs/root68-common.md → copy to root69-common.md (replace ROOT-68 id, update LIVE line).
+- (19/11 10:48Z) ROOT-69 opened = session_01Rc5AsMesCGqrqL1dGjCJXv (opus, depth 7). ROOT-68 wake trig_01JHThSPkPbhPsVf3tFGYWAv DELETED. ROOT-68 stops (relays any late message to ROOT-69).
