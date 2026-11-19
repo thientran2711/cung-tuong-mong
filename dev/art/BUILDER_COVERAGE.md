@@ -126,29 +126,182 @@ Commands (example, a26): `dev/art/t8-prompt-B/build.py nc --state nc1 --age a26`
 
 Commands (example, a26): `dev/art/emperor-B/build.py live1 --age a26`
 
+## build_npc.py groups (W107b: NPC Thái hậu, men, children) — `dev/art/t8-prompt-B/build_npc.py <id> --age aNN [--rank rN]`
+
+Codes as above, plus NOSRC = no old prompt exists (rule 6: never invented; owner/ROOT-36), HELD = owner decision pending (men a65 age text, purple robes vs 'men never purple'). POSE / ITEM are red for every person here: the men pose table and men item table are HELD for the owner. Refs emitter: `--refs` / `--log` YES.
+
+
+### NPC Thái hậu h1–h3
+
+| a18 | a26 | a36 | a51 | a65 |
+|---|---|---|---|---|
+| ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= |
+
+### Thái giám u01–u30 (base robe)
+
+| a18 | a26 | a36 | a51 | a65 |
+|---|---|---|---|---|
+| ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ HELD |
+
+### Thái giám u01–u30 rank r0
+
+| a18 | a26 | a36 | a51 | a65 |
+|---|---|---|---|---|
+| ❌ NOSRC | ❌ NOSRC | ❌ NOSRC | ❌ NOSRC | ❌ NOSRC |
+
+### Thái giám u01–u30 rank r1
+
+| a18 | a26 | a36 | a51 | a65 |
+|---|---|---|---|---|
+| ❌ NOSRC | ❌ NOSRC | ❌ NOSRC | ❌ NOSRC | ❌ NOSRC |
+
+### Thái giám u01–u30 rank r2
+
+| a18 | a26 | a36 | a51 | a65 |
+|---|---|---|---|---|
+| ❌ NOSRC | ❌ NOSRC | ❌ NOSRC | ❌ NOSRC | ❌ NOSRC |
+
+### Thái giám u01–u30 rank r3
+
+| a18 | a26 | a36 | a51 | a65 |
+|---|---|---|---|---|
+| ❌ NOSRC | ❌ NOSRC | ❌ NOSRC | ❌ NOSRC | ❌ NOSRC |
+
+### Quan official-o1–o6
+
+| a18 | a26 | a36 | a51 | a65 |
+|---|---|---|---|---|
+| ❌ HELD(1) ITEM(5) POSE(5) POSE=(5) | ❌ HELD(1) ITEM(5) POSE(5) POSE=(5) | ❌ HELD(1) ITEM(5) POSE(5) POSE=(5) | ❌ HELD(1) ITEM(5) POSE(5) POSE=(5) | ❌ HELD |
+
+### Thái y physician-p1–p3
+
+| a18 | a26 | a36 | a51 | a65 |
+|---|---|---|---|---|
+| ❌ ITEM(2) NOSRC(1) POSE(2) POSE=(2) | ❌ ITEM(2) NOSRC(1) POSE(2) POSE=(2) | ❌ ITEM(2) NOSRC(1) POSE(2) POSE=(2) | ❌ ITEM(2) NOSRC(1) POSE(2) POSE=(2) | ❌ HELD(2) NOSRC(1) |
+
+### Thị vệ man-thive-1–4
+
+| a18 | a26 | a36 | a51 | a65 |
+|---|---|---|---|---|
+| ❌ ITEM(2) NOSRC(2) POSE(2) POSE=(2) | ❌ ITEM(2) NOSRC(2) POSE(2) POSE=(2) | ❌ ITEM(2) NOSRC(2) POSE(2) POSE=(2) | ❌ ITEM(2) NOSRC(2) POSE(2) POSE=(2) | ❌ HELD(2) NOSRC(2) |
+
+### Thái y (romance) man-thaiy-1
+
+| a18 | a26 | a36 | a51 | a65 |
+|---|---|---|---|---|
+| ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ HELD |
+
+### Vương gia man-vuonggia-1–2
+
+| a18 | a26 | a36 | a51 | a65 |
+|---|---|---|---|---|
+| ❌ HELD(1) ITEM(1) POSE(1) POSE=(1) | ❌ HELD(1) ITEM(1) POSE(1) POSE=(1) | ❌ HELD(1) ITEM(1) POSE(1) POSE=(1) | ❌ HELD(1) ITEM(1) POSE(1) POSE=(1) | ❌ HELD |
+
+### Nhạc sư / Họa sư man-nhacsu-1, man-hoasu-1
+
+| a18 | a26 | a36 | a51 | a65 |
+|---|---|---|---|---|
+| ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ HELD |
+
+### Sứ thần man-suthan-1–2
+
+| a18 | a26 | a36 | a51 | a65 |
+|---|---|---|---|---|
+| ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ HELD |
+
+### Quý tử man-quytu-1–9 + Bắc Địch prince man-bacdich-1
+
+| a18 | a26 | a36 | a51 | a65 |
+|---|---|---|---|---|
+| ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ ITEM POSE POSE= | ❌ HELD |
+
+### Công tử man-congtu-1–10
+
+| a18 | a26 | a36 | a51 | a65 |
+|---|---|---|---|---|
+| ❌ ITEM POSE POSE=(5) | ❌ ITEM POSE POSE=(5) | ❌ ITEM POSE POSE=(7) | ❌ ITEM POSE POSE=(3) | ❌ HELD |
+
+### Huynh man-huynh-1–2
+
+| a18 | a26 | a36 | a51 | a65 |
+|---|---|---|---|---|
+| ❌ NOSRC | ❌ NOSRC | ❌ NOSRC | ❌ NOSRC | ❌ NOSRC |
+
+### Người thương thuở nhỏ (tm96 lover)
+
+| a18 | a26 | a36 | a51 | a65 |
+|---|---|---|---|---|
+| ❌ NOSRC | ❌ NOSRC | ❌ NOSRC | ❌ NOSRC | ❌ NOSRC |
+
+### Steward / tutor
+
+| a18 | a26 | a36 | a51 | a65 |
+|---|---|---|---|---|
+| ❌ NOSRC | ❌ NOSRC | ❌ NOSRC | ❌ NOSRC | ❌ NOSRC |
+
+### Phế phi Lý
+
+| a18 | a26 | a36 | a51 | a65 |
+|---|---|---|---|---|
+| ❌ NOSRC | ❌ NOSRC | ❌ NOSRC | ❌ NOSRC | ❌ NOSRC |
+
+### Mama k01–k08 (owner: = older cung nữ, build.py tm3/tm4 a36+)
+
+| a18 | a26 | a36 | a51 | a65 |
+|---|---|---|---|---|
+| ❌ NOSRC | ❌ NOSRC | ❌ NOSRC | ❌ NOSRC | ❌ NOSRC |
+
+### Hoàng tử kid-p01–p24
+
+| a4 | a9 | a14 | a20 | a26 | a36 | a51 |
+|---|---|---|---|---|---|---|
+| ❌ ITEM POSE | ❌ ITEM POSE | ❌ ITEM POSE | ❌ ITEM POSE | ❌ NOSRC | ❌ NOSRC | ❌ NOSRC |
+
+### Công chúa kid-f01–f24
+
+| a4 | a9 | a14 | a20 | a26 | a36 | a51 |
+|---|---|---|---|---|---|---|
+| ❌ ITEM POSE | ❌ ITEM POSE | ❌ ITEM POSE | ❌ ITEM POSE | ❌ NOSRC | ❌ NOSRC | ❌ NOSRC |
+
 ## Groups with NO builder at all (every cell RED: NOCMD)
 
 | group | people | tiers | ages | note |
 |---|---|---|---|---|
-| Thái hậu NPC (mother of the Emperor) fig-thaihau-h1..h3 | 3 | base | a18, a26, a36, a51, a65 | build.py --state thaihau needs a cNN DATA row; h1-h3 have none |
-| Mama fig-mama-k01..k08 | 8 | base | a18, a26, a36, a51, a65 | owner: no mama art, mama = an older cung nữ (tm3/tm4 a36+) -> covered only when the maid uniform mode exists |
-| Phế phi Lý fig-fallen-ly1.. | 1 | base | a18, a26, a36, a51, a65 | no builder |
-| Thái giám fig-eunuch-u## (+ rank r0-r3) | 30 | r0, r1, r2, r3 | a18, a26, a36, a51, a65 | no builder for men except the Emperor |
-| Quan fig-official-o## | 6 | base | a18, a26, a36, a51, a65 | no builder |
-| Thái y fig-physician-p## + man-thaiy | 4 | base | a18, a26, a36, a51, a65 | no builder |
-| Thị vệ fig-man-thive | 4 | base | a18, a26, a36, a51, a65 | no builder |
-| Vương gia fig-man-vuonggia | 2 | base | a18, a26, a36, a51, a65 | no builder |
-| Nhạc sư / Họa sư / Sứ thần fig-man-nhacsu|hoasu|suthan | 4 | base | a18, a26, a36, a51, a65 | no builder |
-| Công tử / Quý tử / Huynh / Bắc Địch prince fig-man-congtu|quytu|huynh|bacdich | 23 | base | a18, a26, a36, a51, a65 | no builder |
-| Người thương thuở nhỏ (tm96 lover, pre/up robes) | 4 | pre, up | a18, a26, a36, a51, a65 | no builder |
-| Steward / tutor fig-steward-tgk, fig-tutor-ttp | 2 | base | a18, a26, a36, a51, a65 | no builder |
-| Children fig-kid-f## / fig-kid-p## (ages 4/9/14/20/26/36/51) | 48 | base | a4, a9, a14, a20, a26, a36, a51 | no builder (owner: children drawn 'như bình thường', no proportion gate, but rule 0 still needs a builder) |
 | Player look1-4 (legacy, superseded by the 84-face picker OD:L1448) | 4 | t1 | a18, a26, a36, a51, a65 | legacy, no new art planned -- listed for completeness |
 
-## RUN errors (first failing person per cell, deduplicated)
+## RUN / NOSRC / HELD reasons (first failing person per cell, deduplicated)
 
+- Công chúa kid-f01–f24: `NO SOURCE: kids/kspec.py has ages 4/9/14/20 only; no old prompt for kid a26 (owner/ROOT-36)`
+- Công chúa kid-f01–f24: `NO SOURCE: kids/kspec.py has ages 4/9/14/20 only; no old prompt for kid a36 (owner/ROOT-36)`
+- Công chúa kid-f01–f24: `NO SOURCE: kids/kspec.py has ages 4/9/14/20 only; no old prompt for kid a51 (owner/ROOT-36)`
+- Công tử man-congtu-1–10: `HELD for the owner: no approved men age text for a65 (emperor-B AGE_TXT has a18-a51; a65 held)`
 - Emperor (emperor-B: live1, live2, e1–e4): `KeyError: 'a65'`
+- Hoàng tử kid-p01–p24: `NO SOURCE: kids/kspec.py has ages 4/9/14/20 only; no old prompt for kid a26 (owner/ROOT-36)`
+- Hoàng tử kid-p01–p24: `NO SOURCE: kids/kspec.py has ages 4/9/14/20 only; no old prompt for kid a36 (owner/ROOT-36)`
+- Hoàng tử kid-p01–p24: `NO SOURCE: kids/kspec.py has ages 4/9/14/20 only; no old prompt for kid a51 (owner/ROOT-36)`
+- Huynh man-huynh-1–2: `NO SOURCE: outsideart/huynh_jobs.json has no prompt text`
 - Maid faces m01–m52 (52) in every woman tier: `KeyError: 'm01'`
+- Mama k01–k08 (owner: = older cung nữ, build.py tm3/tm4 a36+): `NOT HERE: owner (FIGURE_GATE WHO): mama = an older cung nữ -> maid uniform tm3/tm4 a36+ in build.py (N5c)`
+- Người thương thuở nhỏ (tm96 lover): `NO SOURCE: no old prompt for the tm96 childhood lover`
+- Nhạc sư / Họa sư man-nhacsu-1, man-hoasu-1: `HELD for the owner: no approved men age text for a65 (emperor-B AGE_TXT has a18-a51; a65 held)`
+- Phế phi Lý: `NO SOURCE: no old prompt for Phế phi Lý`
+- Quan official-o1–o6: `HELD for the owner: no approved men age text for a65 (emperor-B AGE_TXT has a18-a51; a65 held)`
+- Quan official-o1–o6: `HELD: the old prompt dresses him in purple; owner rule 'men never pink/purple' -> ROOT-36/owner decide the colour (no invented colour)`
+- Quý tử man-quytu-1–9 + Bắc Địch prince man-bacdich-1: `HELD for the owner: no approved men age text for a65 (emperor-B AGE_TXT has a18-a51; a65 held)`
+- Steward / tutor: `NO SOURCE: no old prompt for the steward`
+- Sứ thần man-suthan-1–2: `HELD for the owner: no approved men age text for a65 (emperor-B AGE_TXT has a18-a51; a65 held)`
+- Thái giám u01–u30 (base robe): `HELD for the owner: no approved men age text for a65 (emperor-B AGE_TXT has a18-a51; a65 held)`
+- Thái giám u01–u30 rank r0: `NO SOURCE: no old prompt for eunuch ranks r0-r3 (fig-eunuch-uNN-rN) on main/handover; owner/ROOT-36`
+- Thái giám u01–u30 rank r1: `NO SOURCE: no old prompt for eunuch ranks r0-r3 (fig-eunuch-uNN-rN) on main/handover; owner/ROOT-36`
+- Thái giám u01–u30 rank r2: `NO SOURCE: no old prompt for eunuch ranks r0-r3 (fig-eunuch-uNN-rN) on main/handover; owner/ROOT-36`
+- Thái giám u01–u30 rank r3: `NO SOURCE: no old prompt for eunuch ranks r0-r3 (fig-eunuch-uNN-rN) on main/handover; owner/ROOT-36`
+- Thái y (romance) man-thaiy-1: `HELD for the owner: no approved men age text for a65 (emperor-B AGE_TXT has a18-a51; a65 held)`
+- Thái y physician-p1–p3: `HELD for the owner: no approved men age text for a65 (emperor-B AGE_TXT has a18-a51; a65 held)`
+- Thái y physician-p1–p3: `NO SOURCE: jobs.json S-physician-1 has 2 men (p1, p2) only`
+- Thị vệ man-thive-1–4: `HELD for the owner: no approved men age text for a65 (emperor-B AGE_TXT has a18-a51; a65 held)`
+- Thị vệ man-thive-1–4: `NO SOURCE: old men pool has 2 guards only`
+- Vương gia man-vuonggia-1–2: `HELD for the owner: no approved men age text for a65 (emperor-B AGE_TXT has a18-a51; a65 held)`
+- Vương gia man-vuonggia-1–2: `HELD: the old prompt dresses him in purple; owner rule 'men never pink/purple' -> ROOT-36/owner decide the colour (no invented colour)`
 
 ## RED LIST (grouped)
 
@@ -162,17 +315,38 @@ Commands (example, a26): `dev/art/emperor-B/build.py live1 --age a26`
 - **Foreign princesses Nam Chiếu nc1–3 / Bắc Địch bd1–3 (6)** — BG ITEM POSE POSE= REFS ROYAL3: t6/a18, t6/a26, t6/a36, t6/a51, t6/a65
 - **Emperor (emperor-B: live1, live2, e1–e4)** — BG ITEM POSE POSE= REFS: base/a18, base/a26, base/a36, base/a51
 - **Emperor (emperor-B: live1, live2, e1–e4)** — REFS RUN: base/a65
-- **Thái hậu NPC (mother of the Emperor) fig-thaihau-h1..h3** — NOCMD: base/a18, base/a26, base/a36, base/a51, base/a65
-- **Mama fig-mama-k01..k08** — NOCMD: base/a18, base/a26, base/a36, base/a51, base/a65
-- **Phế phi Lý fig-fallen-ly1..** — NOCMD: base/a18, base/a26, base/a36, base/a51, base/a65
-- **Thái giám fig-eunuch-u## (+ rank r0-r3)** — NOCMD: r0/a18, r0/a26, r0/a36, r0/a51, r0/a65, r1/a18, r1/a26, r1/a36, r1/a51, r1/a65, r2/a18, r2/a26, r2/a36, r2/a51 … (+6)
-- **Quan fig-official-o##** — NOCMD: base/a18, base/a26, base/a36, base/a51, base/a65
-- **Thái y fig-physician-p## + man-thaiy** — NOCMD: base/a18, base/a26, base/a36, base/a51, base/a65
-- **Thị vệ fig-man-thive** — NOCMD: base/a18, base/a26, base/a36, base/a51, base/a65
-- **Vương gia fig-man-vuonggia** — NOCMD: base/a18, base/a26, base/a36, base/a51, base/a65
-- **Nhạc sư / Họa sư / Sứ thần fig-man-nhacsu|hoasu|suthan** — NOCMD: base/a18, base/a26, base/a36, base/a51, base/a65
-- **Công tử / Quý tử / Huynh / Bắc Địch prince fig-man-congtu|quytu|huynh|bacdich** — NOCMD: base/a18, base/a26, base/a36, base/a51, base/a65
-- **Người thương thuở nhỏ (tm96 lover, pre/up robes)** — NOCMD: pre/a18, pre/a26, pre/a36, pre/a51, pre/a65, up/a18, up/a26, up/a36, up/a51, up/a65
-- **Steward / tutor fig-steward-tgk, fig-tutor-ttp** — NOCMD: base/a18, base/a26, base/a36, base/a51, base/a65
-- **Children fig-kid-f## / fig-kid-p## (ages 4/9/14/20/26/36/51)** — NOCMD: base/a4, base/a9, base/a14, base/a20, base/a26, base/a36, base/a51
+- **NPC Thái hậu h1–h3** — ITEM POSE POSE=: base/a18, base/a26, base/a36, base/a51, base/a65
+- **Thái giám u01–u30 (base robe)** — ITEM POSE POSE=: base/a18, base/a26, base/a36, base/a51
+- **Thái giám u01–u30 (base robe)** — HELD: base/a65
+- **Thái giám u01–u30 rank r0** — NOSRC: r0/a18, r0/a26, r0/a36, r0/a51, r0/a65
+- **Thái giám u01–u30 rank r1** — NOSRC: r1/a18, r1/a26, r1/a36, r1/a51, r1/a65
+- **Thái giám u01–u30 rank r2** — NOSRC: r2/a18, r2/a26, r2/a36, r2/a51, r2/a65
+- **Thái giám u01–u30 rank r3** — NOSRC: r3/a18, r3/a26, r3/a36, r3/a51, r3/a65
+- **Quan official-o1–o6** — HELD ITEM POSE POSE=: base/a18, base/a26, base/a36, base/a51
+- **Quan official-o1–o6** — HELD: base/a65
+- **Thái y physician-p1–p3** — ITEM NOSRC POSE POSE=: base/a18, base/a26, base/a36, base/a51
+- **Thái y physician-p1–p3** — HELD NOSRC: base/a65
+- **Thị vệ man-thive-1–4** — ITEM NOSRC POSE POSE=: base/a18, base/a26, base/a36, base/a51
+- **Thị vệ man-thive-1–4** — HELD NOSRC: base/a65
+- **Thái y (romance) man-thaiy-1** — ITEM POSE POSE=: base/a18, base/a26, base/a36, base/a51
+- **Thái y (romance) man-thaiy-1** — HELD: base/a65
+- **Vương gia man-vuonggia-1–2** — HELD ITEM POSE POSE=: base/a18, base/a26, base/a36, base/a51
+- **Vương gia man-vuonggia-1–2** — HELD: base/a65
+- **Nhạc sư / Họa sư man-nhacsu-1, man-hoasu-1** — ITEM POSE POSE=: base/a18, base/a26, base/a36, base/a51
+- **Nhạc sư / Họa sư man-nhacsu-1, man-hoasu-1** — HELD: base/a65
+- **Sứ thần man-suthan-1–2** — ITEM POSE POSE=: base/a18, base/a26, base/a36, base/a51
+- **Sứ thần man-suthan-1–2** — HELD: base/a65
+- **Quý tử man-quytu-1–9 + Bắc Địch prince man-bacdich-1** — ITEM POSE POSE=: base/a18, base/a26, base/a36, base/a51
+- **Quý tử man-quytu-1–9 + Bắc Địch prince man-bacdich-1** — HELD: base/a65
+- **Công tử man-congtu-1–10** — ITEM POSE POSE=: base/a18, base/a26, base/a36, base/a51
+- **Công tử man-congtu-1–10** — HELD: base/a65
+- **Huynh man-huynh-1–2** — NOSRC: base/a18, base/a26, base/a36, base/a51, base/a65
+- **Người thương thuở nhỏ (tm96 lover)** — NOSRC: base/a18, base/a26, base/a36, base/a51, base/a65
+- **Steward / tutor** — NOSRC: base/a18, base/a26, base/a36, base/a51, base/a65
+- **Phế phi Lý** — NOSRC: base/a18, base/a26, base/a36, base/a51, base/a65
+- **Mama k01–k08 (owner: = older cung nữ, build.py tm3/tm4 a36+)** — NOSRC: base/a18, base/a26, base/a36, base/a51, base/a65
+- **Hoàng tử kid-p01–p24** — ITEM POSE: base/a4, base/a9, base/a14, base/a20
+- **Hoàng tử kid-p01–p24** — NOSRC: base/a26, base/a36, base/a51
+- **Công chúa kid-f01–f24** — ITEM POSE: base/a4, base/a9, base/a14, base/a20
+- **Công chúa kid-f01–f24** — NOSRC: base/a26, base/a36, base/a51
 - **Player look1-4 (legacy, superseded by the 84-face picker OD:L1448)** — NOCMD: t1/a18, t1/a26, t1/a36, t1/a51, t1/a65

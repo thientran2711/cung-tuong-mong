@@ -89,22 +89,81 @@ FP_TIERS = ["pre"] + ["t%d" % n for n in range(1, 9)] + ["th", "nude"] + ["ty%d"
 def emp_cmd(i, t, a): return [E, i, "--age", a]
 EMP_IDS = ["live1", "live2", "e1", "e2", "e3", "e4"]
 
-NOBUILDER = [  # (group, ids-label, n people, tiers, ages, note) -- no builder at all today
-    ("Thái hậu NPC (mother of the Emperor) fig-thaihau-h1..h3", 3, ["base"], AGES, "build.py --state thaihau needs a cNN DATA row; h1-h3 have none"),
-    ("Mama fig-mama-k01..k08", 8, ["base"], AGES, "owner: no mama art, mama = an older cung nữ (tm3/tm4 a36+) -> covered only when the maid uniform mode exists"),
-    ("Phế phi Lý fig-fallen-ly1..", 1, ["base"], AGES, "no builder"),
-    ("Thái giám fig-eunuch-u## (+ rank r0-r3)", 30, ["r0", "r1", "r2", "r3"], AGES, "no builder for men except the Emperor"),
-    ("Quan fig-official-o##", 6, ["base"], AGES, "no builder"),
-    ("Thái y fig-physician-p## + man-thaiy", 4, ["base"], AGES, "no builder"),
-    ("Thị vệ fig-man-thive", 4, ["base"], AGES, "no builder"),
-    ("Vương gia fig-man-vuonggia", 2, ["base"], AGES, "no builder"),
-    ("Nhạc sư / Họa sư / Sứ thần fig-man-nhacsu|hoasu|suthan", 4, ["base"], AGES, "no builder"),
-    ("Công tử / Quý tử / Huynh / Bắc Địch prince fig-man-congtu|quytu|huynh|bacdich", 23, ["base"], AGES, "no builder"),
-    ("Người thương thuở nhỏ (tm96 lover, pre/up robes)", 4, ["pre", "up"], AGES, "no builder"),
-    ("Steward / tutor fig-steward-tgk, fig-tutor-ttp", 2, ["base"], AGES, "no builder"),
-    ("Children fig-kid-f## / fig-kid-p## (ages 4/9/14/20/26/36/51)", 48, ["base"], ["a4", "a9", "a14", "a20", "a26", "a36", "a51"], "no builder (owner: children drawn 'như bình thường', no proportion gate, but rule 0 still needs a builder)"),
+NOBUILDER = [  # (group, n people, tiers, ages, note) -- no builder at all today (build_npc.py NOSRC ids are listed by npc_groups())
     ("Player look1-4 (legacy, superseded by the 84-face picker OD:L1448)", 4, ["t1"], AGES, "legacy, no new art planned -- listed for completeness"),
 ]
+
+# ---- build_npc.py (W107b): NPC Thái hậu, eunuchs, officials, physicians, men, công tử, quý tử, children ----
+import importlib.util as _ilu  # noqa: E402
+_sp = _ilu.spec_from_file_location("ctm_build_npc", os.path.join(HERE, "t8-prompt-B", "build_npc.py"))
+NPC = _ilu.module_from_spec(_sp); _sp.loader.exec_module(NPC)
+NPC_GROUPS = [  # (group label, ids, rank or None)
+    ("NPC Thái hậu h1–h3", [f"thaihau-h{n}" for n in range(1, 4)], None),
+    ("Thái giám u01–u30 (base robe)", [f"eunuch-u{n:02d}" for n in range(1, 31)], None),
+    *[(f"Thái giám u01–u30 rank {r}", [f"eunuch-u{n:02d}" for n in range(1, 31)], r) for r in ("r0", "r1", "r2", "r3")],
+    ("Quan official-o1–o6", [f"official-o{n}" for n in range(1, 7)], None),
+    ("Thái y physician-p1–p3", [f"physician-p{n}" for n in range(1, 4)], None),
+    ("Thị vệ man-thive-1–4", [f"man-thive-{n}" for n in range(1, 5)], None),
+    ("Thái y (romance) man-thaiy-1", ["man-thaiy-1"], None),
+    ("Vương gia man-vuonggia-1–2", ["man-vuonggia-1", "man-vuonggia-2"], None),
+    ("Nhạc sư / Họa sư man-nhacsu-1, man-hoasu-1", ["man-nhacsu-1", "man-hoasu-1"], None),
+    ("Sứ thần man-suthan-1–2", ["man-suthan-1", "man-suthan-2"], None),
+    ("Quý tử man-quytu-1–9 + Bắc Địch prince man-bacdich-1", [f"man-quytu-{n}" for n in range(1, 10)] + ["man-bacdich-1"], None),
+    ("Công tử man-congtu-1–10", [f"man-congtu-{n}" for n in range(1, 11)], None),
+    ("Huynh man-huynh-1–2", ["man-huynh-1", "man-huynh-2"], None),
+    ("Người thương thuở nhỏ (tm96 lover)", ["lover-tm96"], None),
+    ("Steward / tutor", ["steward-tgk1", "tutor-ttp1"], None),
+    ("Phế phi Lý", ["fallen-ly1"], None),
+    ("Mama k01–k08 (owner: = older cung nữ, build.py tm3/tm4 a36+)", [f"mama-k{n:02d}" for n in range(1, 9)], None),
+    ("Hoàng tử kid-p01–p24", [f"kid-p{n:02d}" for n in range(1, 25)], None),
+    ("Công chúa kid-f01–f24", [f"kid-f{n:02d}" for n in range(1, 25)], None),
+]
+KAGES_ALL = ["a4", "a9", "a14", "a20", "a26", "a36", "a51"]
+def npc_pose(p):
+    m = re.search(r" Pose: calm standing pose; (.*?)\. ", p) or re.search(r", ((?:holding|hugging|hands|with hands|one hand)[^.]*)\. Calm", p)
+    return m.group(1) if m else None
+def npc_check(ids, rank, ages):
+    cells = {}; per = {}
+    for a in ages:
+        for i in ids:
+            try: per[(i, a)] = NPC.prompt(i, a, rank)
+            except NPC.Held as e: per[(i, a)] = e
+    for a in ages:
+        miss = collections.Counter(); ex1 = {}
+        for i in ids:
+            p = per[(i, a)]
+            if isinstance(p, Exception):
+                k = "NOSRC" if str(p).startswith(("NO SOURCE", "NOT HERE")) else "HELD"
+                miss[k] += 1; ex1.setdefault(k, f"{i}: {p}"); continue
+            agetxt = (NPC.W_AGE if NPC.gender(i) == "f" else NPC.M_AGE).get(a) if not i.startswith("kid-") else "about %s years old" % a[1:]
+            if not agetxt or agetxt not in p: miss["AGE"] += 1
+            if re.search(r"three-quarter|3/4", p): miss["FRONT"] += 1
+            miss["POSE"] += 1   # no spec5 pose for men / NPC / kids: men pose table HELD for the owner
+            pz = npc_pose(p)
+            if any(not isinstance(per.get((i, b)), (Exception, type(None))) and npc_pose(per[(i, b)]) == pz for b in ages if b != a): miss["POSE="] += 1
+            miss["ITEM"] += 1   # no item_age.py rows for these groups: men item table HELD for the owner
+            if BGLINE not in p: miss["BG"] += 1
+        cells[a] = (miss, ex1)
+    return cells
+def npc_section(out, red):
+    out.append("\n## build_npc.py groups (W107b: NPC Thái hậu, men, children) — `dev/art/t8-prompt-B/build_npc.py <id> --age aNN [--rank rN]`\n")
+    out.append("Codes as above, plus NOSRC = no old prompt exists (rule 6: never invented; owner/ROOT-36), HELD = owner decision pending "
+               "(men a65 age text, purple robes vs 'men never purple'). POSE / ITEM are red for every person here: the men pose table and men item table are HELD for the owner. "
+               "Refs emitter: `--refs` / `--log` YES.\n")
+    for name, ids, rank in NPC_GROUPS:
+        ages = KAGES_ALL if ids[0].startswith("kid-") else AGES
+        cells = npc_check(ids, rank, ages)
+        out.append(f"\n### {name}\n")
+        out.append("| " + " | ".join(ages) + " |"); out.append("|" + "---|" * len(ages))
+        row = []
+        for a in ages:
+            miss, ex1 = cells[a]
+            if not miss: row.append("✅"); continue
+            s = " ".join(f"{k}{'' if v == len(ids) else '(%d)' % v}" for k, v in sorted(miss.items()))
+            row.append("❌ " + s); red.append((name, rank or "base", a, s))
+            for k in ("NOSRC", "HELD"):
+                if ex1.get(k): RUNERR.append((name, re.sub(r"^[a-z0-9-]+: ", "", ex1[k])))
+        out.append("| " + " | ".join(row) + " |")
 
 def run(argv):
     try:
@@ -213,6 +272,7 @@ def main():
             out.append(f"| {TNAME.get(t, t)} | " + " | ".join(row) + " |")
         cmdx = [c for c in (cmdf(people[0], t, "a26") for t in tiers) if c]
         if cmdx: out.append("\nCommands (example, a26): " + " · ".join("`" + " ".join([os.path.relpath(c[0], os.path.dirname(HERE) + '/..')] + c[1:]) + "`" for c in cmdx[:4]) + (" …" if len(cmdx) > 4 else ""))
+    npc_section(out, red)
     out.append("\n## Groups with NO builder at all (every cell RED: NOCMD)\n")
     out.append("| group | people | tiers | ages | note |\n|---|---|---|---|---|")
     for g, n, ts, ags, note in NOBUILDER:
@@ -220,7 +280,7 @@ def main():
         for t in ts:
             for a in ags: red.append((g, t, a, "NOCMD"))
     if RUNERR:
-        out.append("\n## RUN errors (first failing person per cell, deduplicated)\n")
+        out.append("\n## RUN / NOSRC / HELD reasons (first failing person per cell, deduplicated)\n")
         for g, e in sorted(set(RUNERR)): out.append(f"- {g}: `{e}`")
     # compact RED summary grouped by (group, missing pieces)
     out.append("\n## RED LIST (grouped)\n")
