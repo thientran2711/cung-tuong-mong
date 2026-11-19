@@ -62,7 +62,7 @@ function answered(dr){const p=F.pend;if(!p||!dr||dr.id!==p.id)return;F.pend=null
    did not arrive, exactly where solo shows it) */
 function back(p,r){const R=F.R[p.n];if(!R||!r||r.st!=="ok")return;
  try{if(r.c&&(S.buoi||0)===p.b0&&(COOP.state.week||0)===p.w0)for(const [n,,s] of R.ctx||[])if((R.back||[]).includes(n)&&n in r.c&&JSON.stringify(r.c[n])!==JSON.stringify((p.msg.c||{})[n]===undefined?null:p.msg.c[n]))s(r.c[n])/* only what her run changed */}catch(e){console.error("thin F back",e)}
- try{for(const [f,m] of r.ui||[])if(typeof window[f]==="function"&&m)window[f](m)}catch(e){}
+ try{if(r.ui)TH.uiPlay(r.ui)}catch(e){}
  try{if(R.done)R.done(p.args,r,p)}catch(e){console.error("thin F done",e)}}
 COOP.on("thinview",V=>{try{if(!host()&&V&&V.o)answered(V.o.dr)}catch(e){console.error("thin F view",e)}});
 COOP.on("error",m=>{try{const p=F.pend;if(!p||!m||m.id!==p.id||host())return;if(m.code==="nohost"||m.code==="nothin")p.at=0/* resend at the next tick */}catch(e){}});
@@ -74,8 +74,16 @@ setInterval(()=>{const p=F.pend;if(!p||host())return;if(!on()||COOP.frozen)retur
    walk, her phone never heard, no resend, no word). Same room + same week: keep it and send it again as soon as the room level is back
    (the 1 s tick below; the host dedupes by intent id, DONE kept per room, so a walk the host already ran is answered from DONE, never run
    twice). Another room / another week: the intent is stale, dropped with the "not done" word (her tap is never silently lost). */
-COOP.on("room",()=>{const p=F.pend;if(!p)return;if(p.room!==(COOP.state.room||"")||(COOP.state.week||0)!==p.w0){F.pend=null;lg(["drop",p.n,p.id]);line("Việc ấy chưa thành, xin thử lại.");try{CW.lockNext();render()}catch(e){}return}
- p.at=0;F.stat.reNet=(F.stat.reNet|0)+1;lg(["reNet",p.n,p.id])});
+/* r2 (review r1 item 2): the room may have stepped the buổi while her socket was dead (a time-out forceBend): the intent's ctx (her khắc
+   `used`) belongs to the old buổi, so it is resent only once her reconnect view shows the SAME buổi (p.b0); another buổi → dropped with the
+   same words. The check waits for her first view after the reconnect (p.rv), then the 1 s tick sends it (DONE dedupe on the host unchanged). */
+const stale=p=>p.room!==(COOP.state.room||"")||(COOP.state.week||0)!==p.w0;
+function dropP(p,why){F.pend=null;lg(["drop",p.n,p.id,why]);F.stat.drop=(F.stat.drop|0)+1;line("Việc ấy chưa thành, xin thử lại.");try{CW.lockNext();render()}catch(e){}}
+COOP.on("room",()=>{const p=F.pend;if(!p)return;if(stale(p))return dropP(p,"room");
+ p.rv=Date.now();p.at=Infinity/* held until her view after the reconnect (or 8 s: the check runs on what she has) */;F.stat.reNet=(F.stat.reNet|0)+1;lg(["reNet",p.n,p.id])});
+function reCheck(p){if(stale(p))return dropP(p,"room");if((S.buoi||0)!==p.b0)return dropP(p,"buoi");p.rv=0;p.at=0/* same buổi: sent again at the next tick */}
+COOP.on("thinview",V=>{const p=F.pend;if(!p||!p.rv||host())return;try{if(V&&V.o&&V.o.dr&&V.o.dr.id===p.id)return/* answered: handled above */;reCheck(p)}catch(e){console.error("thin F reNet",e)}});
+setInterval(()=>{const p=F.pend;if(p&&p.rv&&!host()&&Date.now()-p.rv>8000)try{reCheck(p)}catch(e){}},1000);
 /* pending = busy: #next waits (existing lockNext words through CW.eWait), act buttons off (can) */
 {const w=CW.eWait;CW.eWait=()=>!!(w&&w())||!!(F.pend&&on()&&!host())}
 if(typeof can==="function"){const f=can;can=function(){if(F.pend&&on()&&!host()&&!CW.ctx)return false;return f.apply(this,arguments)}}
@@ -93,7 +101,9 @@ TH.onDo("f",(a,m)=>{a=a||{};const id=m&&m.id;if(loaded!==LSK()){DONE.clear();don
  let out={st:"ok"};const keep=[];
  try{for(const [n,g,s] of R.ctx||[]){keep.push([s,g()]);s(n in (a.c||{})?a.c[n]:null)}
   const args=R.dec(a.a);if(!args){out={st:"gone"}}
-  else{const ui=TH.uiCap=R.lv?[]:null/* F2 registrations: her toasts play on her phone (F1 unchanged) */;let r;try{r=PRE[a.n].apply(null,args)}finally{TH.uiCap=null}F.stat.run++;if(R.log&&r)log(r);out={st:"ok",r:typeof r==="string"?r.replace(/<[^>]+>/g,"").slice(0,200):null};
+  else{/* F2 r2 (review r1 item 1, every registration, F1 too): her tap runs as solo (TH.tapRun: quiet off → her cards into her Q = part D
+      cards on her phone; her toasts / floaters / coin and item effects captured, played on HER phone with the answer; nothing on the host's screen) */
+   const T=TH.tapRun(()=>PRE[a.n].apply(null,args)),r=T.r,ui=T.ui;F.stat.run++;if(R.log&&r)log(r);out={st:"ok",r:typeof r==="string"?r.replace(/<[^>]+>/g,"").slice(0,200):null};
    if(typeof r==="boolean")out.rv=r;if(ui&&ui.length)out.ui=ui.slice(0,4);
    if(R.back){const c={};for(const [n,g] of R.ctx||[])if(R.back.includes(n))try{const v=g();c[n]=v===undefined?null:J(v)}catch(e){}out.c=c}
    if(R.host)try{R.host(args,out)}catch(e){console.error("thin F host",e)}}}
