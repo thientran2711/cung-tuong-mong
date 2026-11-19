@@ -68,9 +68,11 @@ window.entExam=entExam;window.entScore=entScore;window.entTier=entTier;
 /* tiểu thư road (jkc): Phúc tuyển offers her best NON-word art and plays it in the same exam frame */
 kcBestArt=function(){return entBest()};
 kcPhucPlay=function(k,skip){if(!isKc()||!S.kc.tt||S.kc.tt.done)return;S.kc.tt.play=1;
- const fin=raw=>{if(S.kc.tt.done)return;S.kc.tt.done=1;S.kc.tt.raw=raw;S.kc.tt.art=k;pushDil(mkP("kcE",{e:"dien"}),"Điện tuyển");try{showModal()}catch(e){}};
- if(skip||window.__bot||typeof kg82Open!=="function"){fin(skip?entSkipRaw():cl(3+R(6),0,10));return}/* reviewer r1: one "not playing" value (entSkipRaw) on every road */
- try{window.kcEntryExam("kc",raw=>fin(raw),{art:k,origin:S.origin&&S.origin.k,title:"Phúc tuyển",note:"điểm màn chơi cộng vào Điện tuyển",phuc:1})}catch(e){console.error(e);fin(5)}};
+ if(skip||window.__bot||typeof kg82Open!=="function"){kcPhucEnd(k,skip?entSkipRaw():cl(3+R(6),0,10),!!skip);return}/* reviewer r1: one "not playing" value (entSkipRaw) on every road */
+ kcPhucGame(k)};
+/* the game part alone (co-op thin F6b: opened on HER phone when the start ran in her context on the host) */
+function kcPhucGame(k){try{window.kcEntryExam("kc",raw=>kcPhucEnd(k,raw),{art:k,origin:S.origin&&S.origin.k,title:"Phúc tuyển",note:"điểm màn chơi cộng vào Điện tuyển",phuc:1})}catch(e){console.error(e);kcPhucEnd(k,5)}}
+window.kcPhucGame=kcPhucGame;
 /* the result's own gain / loss on every road (rank is set by jkc2), and no "demotion" scene for a rank set at entry */
 function entSnap(){try{if(typeof kmSnap==="function"){KMS=S;KMSNAP=kmSnap()}}catch(e){}}
 (function(){const d0=kc2SelDo;kc2SelDo=function(raw){const r=d0.apply(this,arguments);try{if(S&&S.selx&&S.selx.tier!=null&&!S.selx.fx){S.selx.fx=1;entFx(S.selx.tier)}}catch(e){console.error(e)}entSnap();return r}})();

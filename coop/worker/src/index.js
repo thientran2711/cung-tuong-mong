@@ -12,7 +12,7 @@ const BIG = 200000;             // send gzip binary above this many chars
 const STALE = 45000;            // ms of silence before a socket counts as gone
 const IDLE_DAYS = 30;
 const SEATMAX = 3000000;        // chars of one seat's week copy
-const SNAPMAX = 6000000, DOMAX = 20000, THINMAX = 10;   // thin guest (review/coop-thin-a): host snapshot cap, one intent cap, highest part level
+const SNAPMAX = 6000000, DOMAX = 20000, THINMAX = 12;   // thin guest (review/coop-thin-a): host snapshot cap, one intent cap, highest part level
 
 const CORS = { "Access-Control-Allow-Origin": "*", "Access-Control-Allow-Methods": "GET,POST,OPTIONS", "Access-Control-Allow-Headers": "content-type" };
 const json = (o, s = 200) => new Response(JSON.stringify(o), { status: s, headers: { "content-type": "application/json", ...CORS } });

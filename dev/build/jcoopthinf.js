@@ -378,4 +378,6 @@ reg10("tsSummonEnd",["v","v"],{snap:"soft",noRes:true,enc:tsEnc,title:A=>`Hoàng
 reg10("tsDenEnd",["v","v"],{snap:"soft",noRes:true,enc:tsEnc,title:()=>"Thả đèn hoa đăng",okHint:()=>true,
  dec:a=>{const x=decA9(["v","v"],a);if(!x)return null;if(![0,1,2].includes(x[0]))return bad("tsDenEnd");const r=tsRes0(x[1],false);return r?[x[0],r,null]:bad("tsDenEnd")},
  pre:A=>{if(A[1].skipped)A[1]=tsSkipRes(oddsCl(Math.round(tsDenOdds(S)||50)),0)}});
+/* F6b (jcoopthinf6b, level 12) builds on the F5 helpers: its own registrations go through reg10 with lv 12 + its ctx */
+F.x5={reg10,CX10,payAA,inR,MSC,bad,lg,gOn,host,live,isMe,encA9,decA9,mgOk,get MGC(){return MGC},set MGC(v){MGC=v},get SKH(){return SKH}};
 }catch(e){console.error("jcoopthinf",e)}})();
