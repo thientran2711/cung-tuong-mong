@@ -782,6 +782,11 @@ OPEN: THỬ TAY CTM-CAL code (waits owner).
 - 8 children: hall-names wk JqjDM27h + rv JrdYiTbK (PASS aed411f); minister-agents wk Hjti1YnX + rv HdFbiZEL (PASS a2c6ce4e); monthly-allotment wk NLFYkPdJ + rv LJxqXyKq (reviewing 9aceea6); odds-no-unknown wk N4Ddpqem + rv LQg8htXC (reviewing 7a56b2e).
 - STANDBY C-AG ROOT = session_01Rc5AsM9pCcsWwjoC8PjjW7 (depth 0): send "TAKE OVER NOW" when depth-8 C-AG #21 cannot open its successor.
 - (05:27Z) C-AG #21 OPENED = session_01Rc5AsJdyHeEjvDVWQaB6oq (opus, depth 8). C-AG #20 wake trig_01Bcog2zwHfsfg2NJuCmj536 DELETED; ROOT-64 + STANDBY told. C-AG #20 stops.
+## HANDOVER C-AG #24 → C-AG #25 (19/11 23:43Z)
+- C-AG #24 ctx ~31 % of 1M (START ~6 %, roll 31 %) → rolling over at a clean point (LOAD 0). Successor C-AG #25 = session_01Rc5AsLvodEu25Uni5aNHei (child, depth 3) via create_session; takeover file TAKEOVER_FOREMAN_C_AG25.md. Hourly wake trig_01Q6drjQnk9ytJyxEtKb7Krr deleted by #24.
+- LIVE main 2f328213 (coop-ptime-reds, B), ROLLBACK 7bc73251. MAIN ROOT-72 session_01Rc5AsK1W5sm4JWNWeSDH2k.
+- DONE this shift: rank-palette-b24 LIVE 7bc73251 (wk + rv archived, CLAIMS DONE). Buổi perf gap = noise (ROOT-72).
+- RUNNING: none. OPEN: THỬ TAY CTM-CAL (owner code). No C-AG STANDBY registered.
 ## FOREMAN C-AG #24
 FOREMAN C-AG #24 = session_01Rc5AsKVnhHiiDQzT6H9jNi (child of C-AG #23) · START_CTX ~6 % (est; window 1M; get_session reads 0) → roll over at >= 31 %, ceiling 60 % · depth 2 · wake hourly :32 · reports to MAIN ROOT-71 session_01Rc5AsJ8S2aNYjotfjzaioU.
 - 22:20Z C-AG #24 took over (TAKEOVER_FOREMAN_C_AG24.md). LIVE 3584ea42, ROLLBACK 80c52782. LOAD 0 own; SEATS running 0 / cap 12 | QUEUE: THỬ TAY CTM-CAL (owner code). No C-AG STANDBY registered.
@@ -1578,3 +1583,5 @@ CANCELLED (Lượt 800, ROOT-57 misread the owner): FOR MAIN (owner Lượt 796,
 
 ROOT-57 Lượt 797–800: 4 men seal samples sent; Quyến rũ +6 sheet sent (s60 NSFW-blocked, 1 retry); Lượt 798 «an»=«Ẩn – chưa rõ», «đau» prompt → heart-ache (no wailing), Thái hậu đau not regenned; PR13 inventory 74 missing rooms. Lượt 800 OWNER: hh giận OK → SEAL2 Hoàng hậu full set; pt/ptl REJECTED (Qing two-wing headdress) → redraw samples, rule F13 no Qing headdress anywhere + gate (MG2); mm/bg/bt OK (full sets wait on credit budget); Lượt 796 correction: she meant the ~35 live PLACE pictures → all dropped and redrawn (PR13), NOT the seal sets (her 15:35Z keep stands); SEAL3 cn/nt/nl samples cancelled.
 FOR MAIN (owner Lượt 800, Foreman C ROOT-57): the ~35 PLACE pictures live in the game now (Dưỡng Tâm điện, Ngự thư phòng, Thái y viện, Lãnh cung, Nội vụ phủ, … every live place scene) are ALL dropped ('tất cả bỏ hết'); PR13 redraws them in the new style; swap each when its new picture is approved. The old mood-seal sets stay as her 19/11 15:35Z words (Lượt 796 line above is CANCELLED).
+- (19/11 23:50Z) FROM MAIN ROOT-72: LIVE 2f328213 coop-ptime-reds (on 7bc73251). ROLLBACK 7bc73251. Final-merge 2f328213 before LAND READY.
+ROOT-57 Lượt 801–803: Quyến rũ +6 complete (s60 retry OK) → owner Lượt 803 Quyến rũ OK; seals ht (childish face but KEEP), htg, tg, tv OK; Ẩn OK; đau lòng must not look like khóc → SEAL5 redraws th-dau + de-duplicates look-alike seals; rooms: batches of 5 (PR13); beauty mark only around the eye (new D rule). OPEN to owner: 'vẽ bớt lạnh lùng … bỏ qua hết cái nhóm quyến rũ' meaning asked.
