@@ -3,7 +3,7 @@
    STATIC: every PEND id -> the ONE event->picture table (img/EVENTS.json evArtCat) / story art; LIVE: opens every PEND event (all families: night j8/j75, j68*, Mệnh truyện tt*,
    cnv, roads, GE, errands, buổi, festivals … whatever registers a PEND builder) + the Q-pushed kinds (news / notice / result / night / contest) at each viewport and records
    the picture source, its kind (own = ev-/st- painting of that event or its meaning group; generic = act-cat kind banner; room = the place painting; none) and the shown height.
-   Exit 1 when a frame with a scene-picture slot shows NO picture (hidden / 0 px / no src). A "generic" or "room" source is listed (map it in EVENTS.json or order art from Foreman C).
+   Exit 1 when an M / L / XL frame (owner OD 19/11 ~04:55Z: required from M up; S frames listed apart) shows NO picture (hidden / 0 px / no src). A "generic" or "room" source is listed (map it in EVENTS.json or order art from Foreman C).
    usage: node dev/test/ev-pic-coverage.js <index.html> [out.json]   env SZ=[[W,H],..] MAXP=n */
 const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820]];
 (async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});const html=fs.readFileSync(SRC);const ALL=[];let ST=null;
@@ -31,10 +31,10 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=
    {try{await p.evaluate(fn)}catch(e){continue}await rec(nm)}
   await ctx.close()}
  await b.close();
- const slot=ALL.filter(o=>o.live);const bad=slot.filter(o=>!o.vis);
+ const live=ALL.filter(o=>o.live),slot=live.filter(o=>/^(M|L|XL)$/.test(o.ksz)),sS=live.filter(o=>!/^(M|L|XL)$/.test(o.ksz));const bad=slot.filter(o=>!o.vis);/* owner OD 19/11 ~04:55Z: the scene picture is REQUIRED in M / L / XL frames; S frames are reported apart (an S frame may show the event picture alone on the left, no figure) */
  console.log('STATIC: PEND ids',ST.length,'· with an EVENTS.json group',ST.filter(s=>s.cat).length,'· kitEvArt by id: own',ST.filter(s=>s.kind==='own').length,'room',ST.filter(s=>s.kind==='room').length,'generic',ST.filter(s=>s.kind==='generic').length,'none',ST.filter(s=>s.kind==='none').length,'(no id picture = the frame takes the meaning-group picture by its title (jevfit) or the kind banner)');
  const opened=new Set(ALL.filter(o=>/^PEND:/.test(o.name)).map(o=>o.name.slice(5)));console.log('LIVE opened PEND ids',opened.size,'of',ST.length,'(the rest need game state to build; the picture slot is the same kit code for every family)');
- console.log('LIVE frames',ALL.length,'· kit frames (.ksz3)',slot.length,'· picture shown',slot.filter(o=>o.vis).length,'· NOT shown',bad.length);
+ console.log('S / narrow frames (not required, OD 04:55Z):',sS.length,'· picture shown',sS.filter(o=>o.vis).length,'· sizes',[...new Set(sS.map(o=>o.ksz))].join(','));console.log('LIVE frames',ALL.length,'· M/L/XL kit frames',slot.length,'· picture shown',slot.filter(o=>o.vis).length,'· NOT shown',bad.length);
  const by={};slot.forEach(o=>{const k=o.dev+' '+o.kind+(o.vis?'':' HIDDEN');(by[k]=by[k]||[]).push(o.name)});Object.entries(by).sort().forEach(([k,v])=>console.log(k.padEnd(28),String(v.length).padStart(4),v.slice(0,6).join(' ')));
  bad.forEach(o=>console.log('NO PICTURE',o.dev,o.name,o.ksz,'src',o.src||'-','h',o.h,'evfit',o.evfit));
  const gen=[...new Set(slot.filter(o=>o.kind!=='own').map(o=>o.name+' → '+o.kind+' '+o.src))];gen.forEach(g=>console.log('NOT OWN',g));
