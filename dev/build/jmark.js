@@ -6,7 +6,7 @@
    EIGHT markers, one per rank 0→7 (owner 11/15): img/kit/me-mark-<r>.webp (gpt-2-6, transparent, no tassel), growing in grandeur:
    0 ivory plum blossom · 1 silver orchid + green jade · 2 silver flower + aquamarine · 3 jade lotus bud (Tần) · 4 amethyst chrysanthemum + luan ·
    5 ruby peony · 6 gold phoenix on a jade cloud · 7 amber-gold phoenix with spread wings (Hoàng hậu; owner 11/15 swap). Size factor KIT_MEMARK.sc[r].
-   STAGE: the marker stands on the ONE stage badge row (kitMarkLine / kitBadgeAt below, KIT §78.y: the crowned Hoàng hậu standard), never on her own head.
+   STAGE: the marker stands ON the sex line of the stage (kitMarkLine / kitBadgeAt below, KIT §78.y: women = the standard woman head top − gap; men higher), never on her own head or crown.
    DIALOG PLACEMENT RULE: marker bottom = TOP OF HER HEAD (first opaque row of the figure art, hair ornaments included) − gap, gap = KIT_MEMARK.gap ×
    her drawn figure height (same fraction for every figure, size and screen). Never covers the head; when there is not enough room above the head
    (dialogs, the scene title) the marker SHRINKS instead (down to KIT_MEMARK.tiny px).
@@ -55,10 +55,10 @@ function kitMeMark(fig){try{
  const B=kmmBox(fig),hr=host.getBoundingClientRect();if(B.bh<20){mk.style.visibility="hidden";return mk}
  const K=KIT_MEMARK,sc=K.sc[r]||1;let H=Math.round(Math.max(K.min*sc,Math.min(K.max*sc,B.bh*K.h*sc))*(K.big||1)); /* owner 17/11 07:15Z: +5 % (K.big, one kit value; 2–8 % allowed) */
  const ar=im.naturalWidth&&im.naturalHeight?im.naturalWidth/im.naturalHeight:1;
- /* KIT §78.y: on a stage her marker stands on the ONE badge row (standard crowned Hoàng hậu), on her centre line; dialogs keep the head rule below */
- if(fig.id==="mefig"){const st=fig.closest("#stage");const P=st&&kitBadgeAt(st,fig,"me",0);if(!P){mk.style.visibility="hidden";return mk}
-  const sc=P.line.sc||1;const Hm=Math.round(Math.max(K.min*sc,Math.min(K.max*sc,P.line.H/sc*K.h*(K.sc[r]||1)))*(K.big||1))*sc;const ar0=im.naturalWidth&&im.naturalHeight?im.naturalWidth/im.naturalHeight:1;const Wm=Math.round(Hm*ar0);
-  const L0=P.cx-Wm/2;mk.style.cssText=`left:${(L0-hr.left+host.scrollLeft).toFixed(1)}px;top:${(P.top-hr.top+host.scrollTop).toFixed(1)}px;width:${Wm}px;height:${Hm}px`;
+ /* KIT §78.y: on a stage her marker stands ON her sex line (women: standard woman head top − gap), on her centre line; dialogs keep the head rule below */
+ if(fig.id==="mefig"){const st=fig.closest("#stage");const L1=st&&kitMarkLine(st,kitBadgeSex(fig));if(!L1){mk.style.visibility="hidden";return mk}
+  const sc=L1.sc||1;const Hm=Math.round(Math.max(K.min*sc,Math.min(K.max*sc,L1.H/sc*K.h*(K.sc[r]||1)))*(K.big||1))*sc;const ar0=im.naturalWidth&&im.naturalHeight?im.naturalWidth/im.naturalHeight:1;const Wm=Math.round(Hm*ar0);
+  const P=kitBadgeAt(st,fig,"me",Wm,Hm);if(!P){mk.style.visibility="hidden";return mk}const L0=P.left;mk.style.cssText=`left:${(L0-hr.left+host.scrollLeft).toFixed(1)}px;top:${(P.top-hr.top+host.scrollTop).toFixed(1)}px;width:${Wm}px;height:${Hm}px`;
   mk.dataset.r=r;mk.dataset.at="row";mk.dataset.gap=(B.by+B.bh*hd.t-(P.top+Hm)).toFixed(1);mk.classList.toggle("kmmove",kmmMotion());return mk}
  const cx=B.bx+B.bw*hd.x,headTop=B.by+B.bh*hd.t,gap=Math.max(1,B.bh*K.gap),bottom=headTop-gap;
  /* room above the head: the host's top edge, and anything the marker must not cover (scene title, plaques, chips) */
@@ -68,30 +68,38 @@ function kitMeMark(fig){try{
  const W=Math.round(H*ar),top=bottom-H;
  mk.style.cssText=`left:${(cx-hr.left-W/2+host.scrollLeft).toFixed(1)}px;top:${(top-hr.top+host.scrollTop).toFixed(1)}px;width:${W}px;height:${H}px`;
  mk.dataset.r=r;mk.dataset.gap=(headTop-(top+H)).toFixed(1);mk.classList.toggle("kmmove",kmmMotion());return mk}catch(e){console.error("kitMeMark",e);return null}}
-/* KIT §78.y STAGE BADGE ROW (owner OD 18/11 ~23:45Z + 19/11 ~00:06Z + ~00:25Z): ONE row for every per-figure badge on a stage — the player's «ta ở đây» marker (.kmemark),
-   every yellow round «!» (.khap, §90) and every mood face chip (.kfseal, §28.8d). The row is computed from the STANDARD figure = the crowned Hoàng hậu (body = the stage's one
-   woman body height H that j59 lays out, + the tallest Hoàng hậu phoenix crown BAL.bookFrame.cRef above the skull top), never from a figure's own head:
-     bottom = floor line − H × (1 + cRef) − KIT_MEMARK.gap × H ;  h = the standard marker height (rank 7 size) ;  top = bottom − h.
-   Every badge's TOP sits on row.top (ngang hàng); each badge KIND keeps ONE column offset from its figure's centre line (cùng cột): KIT_BADGE.col[kind] × H
-   (me / hap = 0, on the centre line; emo = right of it). Sizes scale with H only, so every figure on one stage gets the same badge size.
-   kitMarkLine(st) → {top,bottom,h,H,floor,sc} in viewport px (null when the stage has not been laid out); kitBadgeAt(st,fig,kind,w) → {left,top,cx,side} in viewport px. */
-window.KIT_BADGE=window.KIT_BADGE||{col:{me:0,hap:0,emo:.12},emo:.105,emoMin:22,emoMax:50};
-function kbCrown(){return(typeof BAL==="object"&&BAL.bookFrame&&BAL.bookFrame.cRef)||0}
-/* the standard marker height for a body H (the Hoàng hậu rank-7 marker: the tallest the row ever holds) */
+/* KIT §78.y STAGE BADGE LINES (owner OD 19/11 ~02:05Z, canon overwrite of the one-row rule of 19/11 ~00:25Z): TWO lines per stage, one per sex, built from the STANDARD
+   head height of that sex (fig-ht.json head top, never a crown / hat / hair ornament, never a figure's own head):
+     women: head = floor − H            (H = the stage's one woman body, head top → feet, that j59 lays out)
+     men:   head = floor − Hm           (Hm = the one man body, H × KIT_FIG.man capped under the ribbon, written by j59 as data-kml-m)
+   (1) the player's «ta ở đây» marker (.kmemark) and every yellow round «!» (.khap, §90) stand ON the line of their figure's sex: badge bottom = head − KIT_MEMARK.gap × H,
+       on the figure's centre line — so every woman's marks are level with each other, every man's marks level with each other (men higher);
+   (2) the mood face chip (.kfseal, §28.8d) sits AT the head, close to the person: centre = (centre line ± KIT_BADGE.dx × Hs, floor − KIT_BADGE.dy × Hs), Hs = that sex's
+       standard body — the same spot beside the head for every figure of one sex (level), never up on the mark line, never over a face (dx clears the face column).
+   Sizes scale with H only (one size per stage). kitMarkLine(st,sex) → {top,bottom,head,h,H,Hs,floor,sc,sex} in viewport px (null before j59 has laid the stage out);
+   kitBadgeAt(st,fig,kind,w,h) → {left,top,cx,side,sex,line} in viewport px (top = bottom − h for me/hap; the chip's top-left for emo). */
+window.KIT_BADGE=window.KIT_BADGE||{emo:.105,emoMin:22,emoMax:50,dx:.12,dy:.916};/* dx / dy = the mood chip centre beside the head, in standard bodies of that sex: dx .12 clears the face column (±.05) by the chip half (.0525) and keeps two neighbours' chips apart when one mirrors at a plaque; dy = KIT_FIGSEAL.dy (head height) */
+/* the standard marker height for a body H (the Hoàng hậu rank-7 marker: the tallest mark a line ever holds) */
 function kbMarkH(H){const K=KIT_MEMARK,sc=K.sc[7]||1;return Math.round(Math.max(K.min*sc,Math.min(K.max*sc,H*K.h*sc))*(K.big||1))}
-/* room the stage keeps above the standard crown for the row's whole bounce (j59 caps the one body H with it: H × (1+cRef) + room ≤ stage − floor band) */
+/* room the stage keeps above the men's head line for the marks' whole bounce (j59 caps the one body H with it: H × KIT_FIG.man + room ≤ stage − floor band) */
 window.kitMarkRoom=function(H){try{const K=KIT_MEMARK;return Math.ceil(kbMarkH(H)*1.03+H*K.gap+K.bob+(K.edge||0))}catch(e){return 0}};
-function kitMarkLine(st){try{st=st||document.getElementById("stage");if(!st||!st.isConnected)return null;const H0=+st.dataset.kmlH,F0=+st.dataset.kmlF;if(!(H0>20)||!(F0>0))return null;
- const R=st.getBoundingClientRect();const sc=st.offsetHeight?R.height/st.offsetHeight:1;const H=H0*sc,floor=R.top+(st.clientTop+F0)*sc;
- const bottom=floor-H*(1+kbCrown())-Math.max(1,H*KIT_MEMARK.gap),h=kbMarkH(H0)*sc;return{top:bottom-h,bottom,h,H,floor,sc}}catch(e){return null}}
+/* a figure's sex for the badge lines = the kit figure rule (KIT_FIG.fac: emperor / eunuch / official / physician / man / unknown-man silhouette are men) */
+function kitBadgeSex(fig){try{const src=fig&&(fig.currentSrc||fig.getAttribute("src"))||"";return KIT_FIG.fac(src)>1?"m":"f"}catch(e){return"f"}}
+window.kitBadgeSex=kitBadgeSex;
+function kitMarkLine(st,sex){try{st=st||document.getElementById("stage");if(!st||!st.isConnected)return null;const H0=+st.dataset.kmlH,F0=+st.dataset.kmlF;if(!(H0>20)||!(F0>0))return null;
+ const M0=+st.dataset.kmlM>20?+st.dataset.kmlM:H0*(KIT_FIG.man||1);const m=sex==="m";
+ const R=st.getBoundingClientRect();const sc=st.offsetHeight?R.height/st.offsetHeight:1;const H=H0*sc,Hs=(m?M0:H0)*sc,floor=R.top+(st.clientTop+F0)*sc;
+ const head=floor-Hs,bottom=head-Math.max(1,H*KIT_MEMARK.gap),h=kbMarkH(H0)*sc;return{top:bottom-h,bottom,head,h,H,Hs,floor,sc,sex:m?"m":"f"}}catch(e){return null}}
 window.kitMarkLine=kitMarkLine;
 /* the figure's centre line = the centre of its body core column (j59 stands that column on the slot centre) */
 function kbCentre(fig){const B=kmmBox(fig);let c=.5;try{const src=fig.currentSrc||fig.getAttribute("src")||"";const b=src&&typeof kitFigBody==="function"?kitFigBody(src):null;if(b)c=b.cl!=null&&b.cr>b.cl?(b.cl+b.cr)/2:(b.l+b.r)/2}catch(e){}return B.bx+B.bw*c}
-function kitBadgeAt(st,fig,kind,w){const L=kitMarkLine(st);if(!L||!fig)return null;const cx=kbCentre(fig),off=((KIT_BADGE.col[kind])||0)*L.H;const R=st.getBoundingClientRect();
- let side=1,left=cx+off-w/2;if(off&&left+w>R.right-2){side=-1;left=cx-off-w/2}left=Math.max(R.left+2,Math.min(left,R.right-2-w));return{left,top:L.top,cx,side,line:L}}
+function kitBadgeAt(st,fig,kind,w,h){if(!fig)return null;const sex=kitBadgeSex(fig);const L=kitMarkLine(st,sex);if(!L)return null;const cx=kbCentre(fig);const R=st.getBoundingClientRect();
+ if(kind==="emo"){const K=KIT_BADGE,off=K.dx*L.Hs,s=h||w;let side=1,left=cx+off-w/2;if(left+w>R.right-2){side=-1;left=cx-off-w/2}
+  left=Math.max(R.left+2,Math.min(left,R.right-2-w));return{left,top:L.floor-K.dy*L.Hs-s/2,cx,side,sex,off,line:L}}
+ const left=Math.max(R.left+2,Math.min(cx-w/2,R.right-2-w));return{left,top:L.bottom-(h!=null?h:L.h),cx,side:1,sex,off:0,line:L}}
 window.kitBadgeAt=kitBadgeAt;
-/* the mood chip size on a stage: one size per stage (the standard body), never per figure */
-window.kitBadgeEmoSize=function(st){const L=kitMarkLine(st);if(!L)return 0;const K=KIT_BADGE;return Math.round(Math.max(K.emoMin,Math.min(K.emoMax,L.H*K.emo)))};
+/* the mood chip size on a stage: one size per stage (the standard woman body), never per figure */
+window.kitBadgeEmoSize=function(st){const L=kitMarkLine(st,"f");if(!L)return 0;const K=KIT_BADGE;return Math.round(Math.max(K.emoMin,Math.min(K.emoMax,L.H*K.emo)))};
 /* drop markers whose figure is gone (scene change, dialog closed) */
 function kmmSweep(){document.querySelectorAll(".kmemark").forEach(m=>{const h=m.parentElement;if(!h||!(h.querySelector(":scope>#mefig")||h.querySelector(":scope>img.kesimg")&&h.closest(".kesme")))m.remove()})}
 function kmmAll(){kmmSweep();const me=document.getElementById("mefig");if(me)kitMeMark(me);document.querySelectorAll(".kesme img.kesimg").forEach(kitMeMark)}

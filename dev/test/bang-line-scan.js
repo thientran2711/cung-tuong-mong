@@ -1,13 +1,20 @@
-/* KIT §78.y STAGE BADGE ROW scan (owner OD 18/11 ~23:45Z, 19/11 ~00:06Z, ~00:25Z; review/errand-scene r3).
+/* KIT §78.y STAGE BADGE LINES scan (owner OD 19/11 ~02:05Z, canon overwrite of the one-row rule; review/errand-scene r4).
    Every stage background (home + every place of places()) × every figure in view × badge kind × device:
      me  = her «ta ở đây» marker (.kmemark, real element)
      emo = the mood face chip (img.kfseal, real element)
      hap = the yellow round «!» (.khap): REAL element on her own servants (errand task injected), the kit function kitBadgeAt(st,fig,"hap") for everyone else
-   Checks per stage × kind: badge top − row top (kitMarkLine) ≤ 2 px; column offset (badge centre − figure centre line) equal for every figure ± 2 px;
-   badge bottom never below the figure's PAINTED top (crown / hair included) — gap ≥ 0 → no overlap with head/crown; whole badge inside the stage.
+   Two groups per stage: women (f) and men (m) (KIT_FIG.fac rule: emperor / eunuch / official / physician / man / unknown-man = men).
+   Checks per stage × kind × sex:
+     me / hap: badge BOTTOM − that sex's line (kitMarkLine(st,sex).bottom) ≤ 2 px; bottom spread ≤ 2 (level); column offset equal ± 2; bottom ≤ the figure's head top (never over a face);
+               and «ta ở đây» level with the women's «!» (same line).
+     emo: centre on that sex's head spot (floor − KIT_FIGSEAL.dy × Hs) ± 2; top spread ≤ 2 (level); |column offset| equal ± 2; the chip never overlaps the FACE box
+          (head top .. + .13 body, centre line ± .05 body); "at the head": chip centre within the figure's head band (head top − .06 .. + .16 body); two mood chips never overlap.
+     every badge inside the stage. Men's marks must sit higher than women's (line m < line f).
    Each stage gets ≥ 3 figures (her + up to 2 rivals + Hoàng thượng added to the visit when fewer are there) so men and crowded rows are covered.
-   BEFORE mode (old build without kitMarkLine row): the same table from the real elements only (spread of tops / offsets between figures).
-   usage: node dev/test/bang-line-scan.js <baseURL> [W H] [jsonOut]  → markdown table + PASS/FAIL line, exit 1 on FAIL. Env PLACES=k1,k2 limits the stages; SHOTS=dir [TAG, DPR] = one shot per stage; CAST=qn = only Hoàng thượng + a Quý nhân; HH=1 = the player is the crowned Hoàng hậu (consort c09, tier 8: the tallest phoenix crown). */
+   BEFORE mode (a build without the sex lines): the same table from the real elements only (spreads per sex group, face overlap).
+   usage: node dev/test/bang-line-scan.js <baseURL> [W H] [jsonOut]  → markdown table + PASS/FAIL line, exit 1 on FAIL. Env PLACES=k1,k2 limits the stages; SHOTS=dir [TAG, DPR] = one shot per stage; CAST=qn = only Hoàng thượng + a Quý nhân; HH=1 = the player is the crowned Hoàng hậu (consort c09, tier 8: the tallest phoenix crown).
+   node dev/test/bang-line-scan.js --table <json> re-prints the table of a saved run (used for the BEFORE column). */
+if(process.argv[2]==='--table'){const J=JSON.parse(require('fs').readFileSync(process.argv[3],'utf8'));setTimeout(()=>{const T=table(J.ALL,J.errs||[]);console.log(T.text);process.exit(0)});return}
 const {chromium}=require('./lib/pw-roulette');const fs=require('fs');const [,,BASE,W0,H0,JOUT]=process.argv;const W=+W0||755,H=+H0||1000;const sleep=t=>new Promise(r=>setTimeout(r,t));
 (async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+process.env.DPR||1,hasTouch:true,isMobile:W<900,reducedMotion:'reduce'});
  if(process.env.HH)await ctx.addInitScript(()=>{window.__HH=1});
@@ -44,27 +51,44 @@ const {chromium}=require('./lib/pw-roulette');const fs=require('fs');const [,,BA
    const figs=[...document.querySelectorAll('#mefig,#tokens .tok.fig img.figimg')].filter(vis).filter(f=>f.naturalWidth);const out=[];
    for(const f of figs){const src=f.currentSrc||f.getAttribute('src');const bb=kitFigBody(src)||{t:0,b:1,l:0,r:1};const B=box(f);const c=bb.cl!=null&&bb.cr>bb.cl?(bb.cl+bb.cr)/2:(bb.l+bb.r)/2;
     const cx=B.bx+B.bw*c,paintTop=B.by+B.bh*bb.t,headTop=B.by+B.bh*kitFigTop(bb);const tok=f.closest('.tok');const nm=f.id==='mefig'?'(ta) '+S.name:(tok&&tok.querySelector('.tag')?tok.querySelector('.tag').textContent.replace(/\s+/g,' ').trim().slice(-26):'?');
-    const man=/fig-(emperor|eunuch|official|physician|man)-/.test(src);const row={nm,src:src.split('/').pop(),man,cx:+cx.toFixed(1),paintTop:+paintTop.toFixed(1),headTop:+headTop.toFixed(1),b:{}};
-    const put=(kind,q,how)=>{row.b[kind]={top:+q.top.toFixed(1),bottom:+q.bottom.toFixed(1),off:+(((q.left+q.right)/2)-cx).toFixed(1),w:+q.width.toFixed(1),gap:+(paintTop-q.bottom).toFixed(1),inStage:q.left>=SR.left-.5&&q.right<=SR.right+.5&&q.top>=SR.top-.5,how}};
+    const man=typeof kitBadgeSex==='function'?kitBadgeSex(f)==='m':(KIT_FIG.fac(src)>1);const body=B.bh*(bb.b-kitFigTop(bb));const row={nm,src:src.split('/').pop(),man,cx:+cx.toFixed(1),paintTop:+paintTop.toFixed(1),headTop:+headTop.toFixed(1),body:+body.toFixed(1),b:{}};
+    const put=(kind,q,how)=>{row.b[kind]={top:+q.top.toFixed(1),bottom:+q.bottom.toFixed(1),left:+q.left.toFixed(1),right:+q.right.toFixed(1),off:+(((q.left+q.right)/2)-cx).toFixed(1),w:+q.width.toFixed(1),gap:+(paintTop-q.bottom).toFixed(1),inStage:q.left>=SR.left-.5&&q.right<=SR.right+.5&&q.top>=SR.top-.5,how}};
     if(f.id==='mefig'){const m=document.querySelector('#stage .kmemark');if(m&&vis(m))put('me',m.getBoundingClientRect(),'real')}
     const sl=[...document.querySelectorAll('img.kfseal')].find(s=>s.__fig===f);if(sl&&vis(sl))put('emo',sl.getBoundingClientRect(),'real');
     const bang=tok&&[...document.querySelectorAll('i.kmerr-bang')].find(c=>{const q=c.getBoundingClientRect(),fr=f.getBoundingClientRect();return Math.abs((q.left+q.right)/2-cx)<fr.width*.5});
-    if(bang)put('hap',bang.getBoundingClientRect(),'real');else if(tok&&typeof kitBadgeAt==='function'){const P=kitBadgeAt(st,f,'hap',19);if(P)put('hap',{left:P.left,right:P.left+19,top:P.top,bottom:P.top+19,width:19},'fn')}
+    if(bang)put('hap',bang.getBoundingClientRect(),'real');else if(tok&&typeof kitBadgeAt==='function'){const P=kitBadgeAt(st,f,'hap',19,19);if(P)put('hap',{left:P.left,right:P.left+19,top:P.top,bottom:P.top+19,width:19},'fn')}/* kitBadgeAt(…,w) with no h: bottom = line for a 19 px «!» only when the build passes h; new build: top = bottom − line h → use h */
     out.push(row)}
-   window.__shotWait=1;return{cast:window.__CAST,ppl:(S.visit&&S.visit.people||[]).map(x=>x.kind+':'+(x.ref?x.ref.rank:'')).join(','),k,name:(placeOf(k)||{}).n||k,line:L&&L.H!=null?{top:+L.top.toFixed(1),H:+L.H.toFixed(1),floor:+L.floor.toFixed(1)}:null/* BEFORE build: the old kitMarkLine was her marker box, not a row → spread only */,stageTop:+SR.top.toFixed(1),cRef:(BAL.bookFrame||{}).cRef,figs:out,pg:st.dataset.j59pg||''}},k);
+   window.__shotWait=1;return{cast:window.__CAST,ppl:(S.visit&&S.visit.people||[]).map(x=>x.kind+':'+(x.ref?x.ref.rank:'')).join(','),k,name:(placeOf(k)||{}).n||k,line:L&&L.H!=null?{top:+L.top.toFixed(1),H:+L.H.toFixed(1),floor:+L.floor.toFixed(1)}:null,lines:(()=>{const o={};for(const s of ['f','m']){const q=typeof kitMarkLine==='function'?kitMarkLine(st,s):null;if(q&&q.sex===s)o[s]={bottom:+q.bottom.toFixed(1),head:+q.head.toFixed(1),Hs:+q.Hs.toFixed(1),floor:+q.floor.toFixed(1)}}return Object.keys(o).length?o:null})(),dy:(window.KIT_BADGE||{}).dy||(window.KIT_FIGSEAL||{}).dy/* BEFORE build: the old kitMarkLine was her marker box, not a row → spread only */,stageTop:+SR.top.toFixed(1),cRef:(BAL.bookFrame||{}).cRef,figs:out,pg:st.dataset.j59pg||''}},k);
   if(process.env.SHOTS){fs.mkdirSync(process.env.SHOTS,{recursive:true});await p.screenshot({path:`${process.env.SHOTS}/${process.env.TAG||''}${W}x${H}-${k}.jpg`,type:'jpeg',quality:80})}
   await p.evaluate(()=>{S.erra=[];try{ERR.sync()}catch(e){}});ALL.push(R)}
  /* table */
- let bad=0;const lines=[];const P2=v=>v==null?'–':(+v).toFixed(1);
- lines.push(`### ${W}x${H}  (row = kitMarkLine: standard crowned Hoàng hậu, cRef ${ALL[0]&&ALL[0].cRef})`);
- lines.push(`| stage | figures | kind | n | Δtop to row max | top spread | col offset spread | min gap to crown | in stage | result |`);lines.push('|---|---|---|---|---|---|---|---|---|---|');
- const fails=[];
- for(const R of ALL){if(R.err){lines.push(`| ${R.k} | ERR ${R.err} |||||||||`);bad++;continue}
-  for(const kind of ['me','hap','emo']){const L=R.figs.filter(f=>f.b[kind]).map(f=>Object.assign({nm:f.nm,man:f.man},f.b[kind]));if(!L.length)continue;
-   const tops=L.map(x=>x.top),offs=L.map(x=>x.off),gaps=L.map(x=>x.gap);const dRow=R.line?Math.max(...L.map(x=>Math.abs(x.top-R.line.top))):null;
-   const tsp=Math.max(...tops)-Math.min(...tops),osp=Math.max(...offs)-Math.min(...offs),g=Math.min(...gaps),ins=L.every(x=>x.inStage);
-   const ok=(dRow==null?tsp<=2:dRow<=2)&&tsp<=2&&osp<=2&&g>=0&&ins;if(!ok){bad++;fails.push({k:R.k,kind,L:L.filter(x=>x.gap<0||!x.inStage||(R.line&&Math.abs(x.top-R.line.top)>2)).map(x=>`${x.nm}${x.man?' (man)':''} gap ${x.gap} off ${x.off}`)})}
-   lines.push(`| ${R.name} | ${R.figs.length}${R.pg?' (paged)':''} | ${kind} | ${L.length} | ${P2(dRow)} | ${P2(tsp)} | ${P2(osp)} | ${P2(g)} | ${ins?'yes':'NO'} | ${ok?'PASS':'FAIL'} |`)}}
+ const T=table(ALL,errs);console.log(T.text);if(JOUT)fs.writeFileSync(JOUT,JSON.stringify({W,H,ALL,errs},null,1));await b.close();process.exit(T.bad||errs.length?1:0)})();
+function table(ALL,errs){let bad=0;const lines=[];const P2=v=>v==null||!isFinite(v)?'–':(+v).toFixed(1);const W=ALL.W,H=ALL.H;
+ lines.push(`| stage | sex | kind | n | Δ to line max | level spread | col spread | min gap to head (me/hap) · face overlap (emo) | chip centre in head band | in stage | result |`);lines.push('|---|---|---|---|---|---|---|---|---|---|---|');
+ const fails=[];const sum={};
+ for(const R of ALL){if(R.err){lines.push(`| ${R.k} | ERR ${R.err} ||||||||||`);bad++;continue}
+  const fb={};
+  for(const kind of ['me','hap','emo'])for(const sx of ['f','m']){const L=R.figs.filter(f=>f.b[kind]&&(f.man?'m':'f')===sx).map(f=>Object.assign({nm:f.nm,man:f.man,headTop:f.headTop,cx:f.cx,body:f.body||(R.line?R.line.H*(f.man?1.07:1):100)},f.b[kind]));if(!L.length)continue;
+   const ln=R.lines&&R.lines[sx];let dl=null,lev,osp,gapv,band='–',bandOk=true;
+   if(kind==='emo'){const cy=L.map(x=>(x.top+x.bottom)/2);lev=Math.max(...L.map(x=>x.top))-Math.min(...L.map(x=>x.top));const ao=L.map(x=>Math.abs(x.off));osp=Math.max(...ao)-Math.min(...ao);
+     if(ln&&R.dy)dl=Math.max(...cy.map(c=>Math.abs(c-(ln.floor-R.dy*ln.Hs))));
+     /* face box: head top .. + .13 body, centre ± .05 body */
+     const ov=L.map(x=>{const fx0=x.cx-.05*x.body,fx1=x.cx+.05*x.body,fy0=x.headTop,fy1=x.headTop+.13*x.body;const w=Math.max(0,Math.min(fx1,x.right)-Math.max(fx0,x.left)),h=Math.max(0,Math.min(fy1,x.bottom)-Math.max(fy0,x.top));return w*h});
+     gapv=Math.max(...ov);const bd=L.map((x,i)=>(cy[i]-x.headTop)/x.body);band=`${Math.min(...bd).toFixed(2)}…${Math.max(...bd).toFixed(2)}`;bandOk=bd.every(v=>v>=-.06&&v<=.16);
+     L.forEach((x,i)=>{x.bad=ov[i]>0||bd[i]<-.06||bd[i]>.16})}
+   else{lev=Math.max(...L.map(x=>x.bottom))-Math.min(...L.map(x=>x.bottom));const of=L.map(x=>x.off);osp=Math.max(...of)-Math.min(...of);if(ln)dl=Math.max(...L.map(x=>Math.abs(x.bottom-ln.bottom)));
+     const g=L.map(x=>x.headTop-x.bottom);gapv=Math.min(...g);L.forEach((x,i)=>{x.bad=g[i]<0});if(kind!=='emo'&&sx==='f')fb[kind]=L.map(x=>x.bottom)}
+   const ins=L.every(x=>x.inStage);const okFace=kind==='emo'?gapv<=0:gapv>=0;
+   const ok=(dl==null||dl<=2)&&lev<=2&&osp<=2&&okFace&&bandOk&&ins;
+   const key=kind+'/'+sx;const S=sum[key]=sum[key]||{n:0,dl:0,lev:0,osp:0,gap:kind==='emo'?0:1e9,fail:0};S.n+=L.length;S.dl=Math.max(S.dl,dl||0);S.lev=Math.max(S.lev,lev);S.osp=Math.max(S.osp,osp);S.gap=kind==='emo'?Math.max(S.gap,gapv):Math.min(S.gap,gapv);if(!ok)S.fail++;
+   if(!ok){bad++;fails.push({k:R.k,kind,sx,L:L.filter(x=>x.bad||!x.inStage).map(x=>`${x.nm} off ${x.off} top ${x.top} head ${x.headTop}`)})}
+   lines.push(`| ${R.name} | ${sx==='m'?'men':'women'} | ${kind} | ${L.length} | ${P2(dl)} | ${P2(lev)} | ${P2(osp)} | ${P2(gapv)} | ${band} | ${ins?'yes':'NO'} | ${ok?'PASS':'FAIL'} |`)}
+  /* two mood chips never overlap (which chip is whose must stay clear) */
+  {const C=R.figs.filter(f=>f.b.emo).map(f=>f.b.emo);for(let i=0;i<C.length;i++)for(let j=i+1;j<C.length;j++){const a=C[i],c=C[j];if(a.left<c.right-1&&c.left<a.right-1&&a.top<c.bottom-1&&c.top<a.bottom-1){bad++;fails.push({k:R.k,kind:'emo overlap'})}}}
+  /* «ta ở đây» level with the women's «!» */
+  if(fb.me&&fb.hap){const d=Math.max(...fb.hap.map(v=>Math.abs(v-fb.me[0])));if(d>2){bad++;fails.push({k:R.k,kind:'me~hap',d})}const S=sum['me~hap']=sum['me~hap']||{n:0,d:0};S.n++;S.d=Math.max(S.d,d)}
+  if(R.lines&&R.lines.f&&R.lines.m&&!(R.lines.m.bottom<R.lines.f.bottom)){bad++;fails.push({k:R.k,kind:'men line not higher'})}}
  lines.push(`\n${bad?'FAIL':'PASS'} · ${ALL.length} stages · ${ALL.reduce((a,r)=>a+(r.figs||[]).length,0)} figures · page errors ${errs.length}`);
- if(fails.length)lines.push('FAILS: '+JSON.stringify(fails));
- console.log(lines.join('\n'));if(JOUT)fs.writeFileSync(JOUT,JSON.stringify({W,H,ALL,errs},null,1));await b.close();process.exit(bad||errs.length?1:0)})();
+ lines.push('SUMMARY '+JSON.stringify(sum));
+ if(fails.length)lines.push('FAILS: '+JSON.stringify(fails).slice(0,4000));
+ return{text:lines.join('\n'),bad,sum}}

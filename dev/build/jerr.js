@@ -144,8 +144,8 @@ function errSync(){if(!S||S.dead||ER.syncing)return;ER.syncing=1;try{
   if(open){const c=document.createElement("span");c.className="kchip n kmerr-slot";c.textContent=errWord(t.k);c.style.left=cx+"px";c.style.top=((r.top+r.height*.45-sr.top)/sc)+"px";lay.appendChild(c)}
   else{/* the kit yellow round «!» (kitHapHtml = the Dư đồ mark) ABOVE HER HEAD, never on the emotion chip beside it (owner OD 18/11 ~22:10Z) */
    const w=document.createElement("span");w.innerHTML=typeof kitHapHtml==="function"?kitHapHtml(`${t.nm} đã về: có tin báo`,"button"):"";const c=w.firstChild;if(!c)continue;c.classList.add("kmerr-bang");c.setAttribute("tabindex","0");
-   /* KIT §78.y: the ONE stage badge row (jmark kitBadgeAt: standard crowned Hoàng hậu top + gap), on her centre line — the same row and column rule as «ta ở đây» and the mood chip, never her own head */
-   const hh=c.offsetHeight||19,ww=c.offsetWidth||19;const P=typeof kitBadgeAt==="function"&&img?kitBadgeAt(st,img,"hap",ww):null;if(!P)continue;c.dataset.line="row";
+   /* KIT §78.y: ON the sex line of the stage (jmark kitBadgeAt: women = standard woman head top − gap, men = standard man head top − gap), on the figure's centre line — level with «ta ở đây» and with every other mark of that sex, never her own head / crown */
+   const hh=c.offsetHeight||19,ww=c.offsetWidth||19;const P=typeof kitBadgeAt==="function"&&img?kitBadgeAt(st,img,"hap",ww,hh):null;if(!P)continue;c.dataset.line=P.sex;
    c.style.left=((P.left-sr.left)/sc)+"px";c.style.top=((P.top-sr.top)/sc)+"px";
    const go=e=>{e.preventDefault();e.stopPropagation();errOpen();setTimeout(errSync,60)};c.addEventListener("click",go);c.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" ")go(e)});lay.appendChild(c)}}
  /* a person whose task is over and read: nobody keeps her hidden */
