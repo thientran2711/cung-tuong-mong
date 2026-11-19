@@ -42,3 +42,37 @@ ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 
 - The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
 - Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
 - Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+
+---
+# ROUND 4 RE-CHECK — REVIEW parallel-time #2 BIG (opus, session_01964izGNmoHXia5rt1oB2wk) · coordinator Foreman D #4
+START_CTX ≈ 5% of 1M (get_session reads 0; own estimate) → rollover line 30%; finished below it, no handover.
+PRIORITY #1 CHECK ('parallel time'): OD 1 | ledger 0 | claims 3 (= this job) | main 0 | review/* review/parallel-time c9e7a7f99 (under review), review/receiver-choice 28ebffad8 (jrcv → ptOrdAdd/ptOn), review/errand-scene f6d1f3f4 (MAIN jerr "tin").
+18 LAWS checked: 1 ok (NPC sent-servant deeds now go through S.away, §18) · 2/3 FAIL (new item 1: an order answer that costs nothing and does nothing; item 2: a 0-khắc «Giúp qua loa») · 4 ok (one qua-loa key BAL.road.hp.half, no typed fallbacks; jagstf2 `K.half||0` is a missing-weight default, not a number) · 6b ok · 7 ok · 9 ok (no own panel when errIcon exists; kit facts spec) · 11 ok (scan with proofs) · 15 ok.
+
+## VERDICT: FAIL 4 @c9e7a7f99
+
+1. **Master's order to another palace is a free escape (laws 2/3; the core receiver path).** The cnvOrd wire (jptime ~L266) runs «Giúp hết lòng» / «Giúp qua loa» through `ptRecvGo(pl,…)` → `srvGoTo(pl)`. j42 `placeEnterHook` refuses a maid at another consort's palace unless `S.srv.sent` (or accHas) says the master sent her, and the cnvOrd path never sets it. Probe (real flow: `pushDil(mkP("cnvOrd",{k:"spy",…}))` → notice → `ptOrdOpen` → option 0): 3/3 targets (kn, r392, r393) → toast «Càn Ninh cung: chỉ khi chủ sai» / «…: cung khác: chỉ khi chủ sai», `S.ordQ` 1→0 (order used up), used +0, Chủ tin ±0, no deed. With the walk refused, «Giúp hết lòng» costs nothing and does nothing, so it beats «Từ chối» (which costs Chủ tin). The same holds for plant / poison (spy and plant probed: charged 0 at kn, r53). Fix: before the walk, mark the trip as the master's errand (the way ptErrGo sets `S.srv.sent={k:pl,…}`). If the walk still fails, keep the order in S.ordQ (as ptErrGo does with `er.acc=0`) instead of consuming it. Test gap: ptime.test 10 only reads the card text (`cnN`/`cnx`) and never clicks a cnvOrd answer. Add a click test: answer to another palace → used == shown, deed ran (log / evidence), order gone only after.
+2. **«Giúp qua loa» can cost 0 khắc (law 3: time is the cost).** `ptRecvTask = n − BAL.walk.near − 1` with walk 0 (the master's own palace, or where she already stands) gives the card «tốn: 0 khắc (cả đường đi)». The charge is also 0. Probed: errand at home 1/0; dò la / plant on a consort in the master's own palace (r52) 1/0. The round-4 report's "near: 2 / 1" is not true at walk 0. Fix: floor the task at a BAL minimum (1 khắc) so every answer that does the deed costs time (shown = charged still).
+3. **role-parity.test FAILS on this branch (3/3 runs) and PASSES on origin/main 9a1d6922:** new gap `maid:P-ONLY:maid:pil`. In the scan the player's «Lén giữ đồ Nội vụ phủ phát» now shows (j42 L220, `eitPilMaidOk`: needs Chủ tin < BAL.eit.pil.loyal 45). Likely cause: this branch's order expiry (unanswered order past ansK = «Từ chối» with its Chủ tin cost) or the receiver walk changes her state during the scan. Please verify the cause. The NPC side of pilfering exists (eitPilNpc, monthly), so close it the right way: map the NPC side in role-parity-scan, or add an exempt row with its reason, approved by a reviewer. The gate must be green on the branch.
+4. **MAIN ROOT-60 order (STATUS ~00:30Z, ONE NOTICE SYSTEM, owner OD 18/11 ~22:10Z):** jptime's own landing kitLine («đã về: có tin báo» etc.) → `window.kitNotice({id,line,text,go,goLabel})` (review/stage-here r4; guard typeof, fallback kitLine). This also settles the shot note below.
+
+## Re-check of the 7 FAIL items @f4eb517a5 → all fixed
+1 «tin» panel ✔: `ptIconReg` registers once at boot, never when `errIcon` exists, no render hook. One `kitStatusIcon.set("tin"` in jptime. The fallback panel draws its body (fold-3 / ipad-3: reports, away rows, oán rows, subject = the maid). FAIL7-1 test ok.
+2 one core ✔: BAL.ptime.half gone. j9 / j42 / jptime / jagstf2 / jroad read BAL.road.hp.half. No `||15` / `||2`.
+3 shown = charged ✔ for «Việc chủ sai» (probe vuon/nvp 3/3 and 2/2, home 1/1 and 0/0). Paid via srvGoTo + spend. But see new items 1 and 2.
+4 two-way ✔ (code read): runAct / mindRun / exec70 wrapped (`ptNpcSent`: NPC actor, not together, not ACT_NOSEND, PT.landing guard). Same servant at due (PT.sv). An NPC maid who is away is locked for AGRUN maid deeds / sendMaid / amSendQ. ptime2 18 ok.
+5 scan ✔: exit 0 clean. Planted: new pbtn in j21 → exit 1 («?» row); new send label in jroute (a story file) → exit 1; new `bestSent(` site in j28 → exit 1.
+6 receiver gain ✔: `srvOrdMerit()` is the one reader of BAL.eff.j42.srvDoOrder_2, printed «ngươi công lao +1» on the dò la / plant rows.
+7 shots ✔: clean() works (no stray notice on fold-1).
+Minors ✔: jmkt empty segment gone (ptX); BAL.ptime.repMax 8; ptime.test prints FAIL lines on mutation.
+
+## Gates @c9e7a7f99
+- ptime.test ALL OK · ptime2.test ALL OK. Mutation `a.due<=now+1` → ptime FAIL, ptime2 FAIL 13 + 15 (exit 1). Restored.
+- ptime-scan exit 0 + 3 planted exits 1 (above).
+- ag-stf2 5/5 runs, 23/23 PASS each.
+- quickcheck --runs 6 PASS (core gates incl. one-core-guard / rules-one-source / kit-conform / coop-one-world, time-spill, old save loads, perf median new/live: render 178/174, tab 331/347, buổi 1038/1124 ms).
+- coop-e2e 63/63 · coop-one-world PASS · coop-bot 6 weeks: 0 divergence, 0 friend-position mismatches, 0 page errors.
+- role-parity.test **FAIL** (item 3); main PASS.
+- receiver-choice API unchanged: jrcv @28ebffad8 uses only `ptOrdAdd(pid,pp,title,p)` + `ptOn()`, both present with the same signature.
+- Shots (ptime-shots.js after build_site; scratch only, deleted): Fold 755x1000@2 + iPad 1180x820@2. Looked at fold 1/2/3/5/6/7 and ipad 3/6. Shot note: on fold-2 the kitLine pill («Cung nữ Nhã Thanh đã đi nghe ngóng, về khắc 4») covers the KẾT QUẢ toast. Both are kit notices fired by this branch's send at the same moment. The overlap itself is a kit stacking issue (KIT note), and item 4 (kitNotice) removes this branch's pill.
+- No FF merge, no commit on review/parallel-time-rv (FAIL).
