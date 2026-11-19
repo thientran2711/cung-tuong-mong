@@ -7,10 +7,11 @@
    badge bottom never below the figure's PAINTED top (crown / hair included) — gap ≥ 0 → no overlap with head/crown; whole badge inside the stage.
    Each stage gets ≥ 3 figures (her + up to 2 rivals + Hoàng thượng added to the visit when fewer are there) so men and crowded rows are covered.
    BEFORE mode (old build without kitMarkLine row): the same table from the real elements only (spread of tops / offsets between figures).
-   usage: node dev/test/bang-line-scan.js <baseURL> [W H] [jsonOut]  → markdown table + PASS/FAIL line, exit 1 on FAIL. Env PLACES=k1,k2 limits the stages; HH=1 = the player is the crowned Hoàng hậu (consort c09, tier 8: the tallest phoenix crown). */
+   usage: node dev/test/bang-line-scan.js <baseURL> [W H] [jsonOut]  → markdown table + PASS/FAIL line, exit 1 on FAIL. Env PLACES=k1,k2 limits the stages; SHOTS=dir [TAG, DPR] = one shot per stage; CAST=qn = only Hoàng thượng + a Quý nhân; HH=1 = the player is the crowned Hoàng hậu (consort c09, tier 8: the tallest phoenix crown). */
 const {chromium}=require('./lib/pw-roulette');const fs=require('fs');const [,,BASE,W0,H0,JOUT]=process.argv;const W=+W0||755,H=+H0||1000;const sleep=t=>new Promise(r=>setTimeout(r,t));
-(async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<900,reducedMotion:'reduce'});
+(async()=>{const b=await chromium.launch();const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:+process.env.DPR||1,hasTouch:true,isMobile:W<900,reducedMotion:'reduce'});
  if(process.env.HH)await ctx.addInitScript(()=>{window.__HH=1});
+ if(process.env.CAST)await ctx.addInitScript(c=>{window.__CAST=c},process.env.CAST);
  await ctx.addInitScript(()=>{let a=0x2f6e2b1;Math.random=function(){a=(a+0x6D2B79F5)|0;let t=Math.imul(a^(a>>>15),1|a);t=(t+Math.imul(t^(t>>>7),61|t))^t;return((t^(t>>>14))>>>0)/4294967296}});
  const p=await ctx.newPage();p.setDefaultTimeout(240000);const errs=[];p.on('pageerror',e=>errs.push(e.message));
  await p.goto(BASE+'index.html',{waitUntil:'domcontentloaded'});
@@ -30,7 +31,8 @@ const {chromium}=require('./lib/pw-roulette');const fs=require('fs');const [,,BA
    try{S.met=S.met||{};const K=typeof k61S==='function'?k61S():null;for(const v of rivals){S.met[v.id]=0;if(K&&typeof kOf61==='function')K[kOf61(v)]=3}}catch(e){}
    if(S.visit&&k!=='home'){const P=S.visit.people;if(!P.some(x=>x.kind==='emp'))P.unshift({kind:'emp',name:'Hoàng thượng',ini:'Đế',col:'#f0d070',info:''});
     const q=liveRivals(true).find(v=>v.queen);if(q&&!P.some(x=>x.ref===q))P.splice(1,0,{...rp(q),kind:'hh',name:'Hoàng hậu '+q.name,ini:'Phượng'});
-    const L=liveRivals(true).filter(v=>!P.some(x=>x.ref===v)&&!sameHouse(S,v));let i=0;while(P.filter(x=>x.kind!=='chest').length<4&&L[i])P.push(rp(L[i++]));}
+    const L=liveRivals(true).filter(v=>!P.some(x=>x.ref===v)&&!sameHouse(S,v));let i=0;while(P.filter(x=>x.kind!=='chest').length<4&&L[i])P.push(rp(L[i++]));
+    if(window.__CAST==='qn'){const qn=liveRivals(true).find(v=>!v.queen&&v.rank===2&&!sameHouse(S,v))||L[0];const cast=[P.find(x=>x.kind==='emp'),rp(qn)];window.curPeople=curPeople=function(){return cast}}}/* the place record (j95) rebuilds S.visit.people on render: the cast is fixed through curPeople */
    render();await Wt(1500);
    /* real «!» on her servants in view (home) */
    const ids=[];if(typeof ERR!=="undefined"){for(const [id,pp] of [["mm:me",S.maid],...(S.staff||[]).map(s=>["s"+s.sid,s])]){if(!pp)continue;ids.push(id);S.erra.push({id:"scan-"+id,who:id,nm:pp.name,k:"spy",lbl:"đi dò la",t0:0,due:0,back:1,read:0,rep:{t:"x",L:["x"],d:[]}})}
@@ -49,9 +51,9 @@ const {chromium}=require('./lib/pw-roulette');const fs=require('fs');const [,,BA
     const bang=tok&&[...document.querySelectorAll('i.kmerr-bang')].find(c=>{const q=c.getBoundingClientRect(),fr=f.getBoundingClientRect();return Math.abs((q.left+q.right)/2-cx)<fr.width*.5});
     if(bang)put('hap',bang.getBoundingClientRect(),'real');else if(tok&&typeof kitBadgeAt==='function'){const P=kitBadgeAt(st,f,'hap',19);if(P)put('hap',{left:P.left,right:P.left+19,top:P.top,bottom:P.top+19,width:19},'fn')}
     out.push(row)}
-   S.erra=[];try{ERR.sync()}catch(e){}
-   return{k,name:(placeOf(k)||{}).n||k,line:L?{top:+L.top.toFixed(1),H:+L.H.toFixed(1),floor:+L.floor.toFixed(1)}:null,stageTop:+SR.top.toFixed(1),cRef:(BAL.bookFrame||{}).cRef,figs:out,pg:st.dataset.j59pg||''}},k);
-  ALL.push(R)}
+   window.__shotWait=1;return{cast:window.__CAST,ppl:(S.visit&&S.visit.people||[]).map(x=>x.kind+':'+(x.ref?x.ref.rank:'')).join(','),k,name:(placeOf(k)||{}).n||k,line:L&&L.H!=null?{top:+L.top.toFixed(1),H:+L.H.toFixed(1),floor:+L.floor.toFixed(1)}:null/* BEFORE build: the old kitMarkLine was her marker box, not a row → spread only */,stageTop:+SR.top.toFixed(1),cRef:(BAL.bookFrame||{}).cRef,figs:out,pg:st.dataset.j59pg||''}},k);
+  if(process.env.SHOTS){fs.mkdirSync(process.env.SHOTS,{recursive:true});await p.screenshot({path:`${process.env.SHOTS}/${process.env.TAG||''}${W}x${H}-${k}.jpg`,type:'jpeg',quality:80})}
+  await p.evaluate(()=>{S.erra=[];try{ERR.sync()}catch(e){}});ALL.push(R)}
  /* table */
  let bad=0;const lines=[];const P2=v=>v==null?'–':(+v).toFixed(1);
  lines.push(`### ${W}x${H}  (row = kitMarkLine: standard crowned Hoàng hậu, cRef ${ALL[0]&&ALL[0].cRef})`);
