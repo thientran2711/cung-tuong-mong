@@ -227,6 +227,7 @@ def TONE(d):
         else: main=(nm,_hex(H,_cl(L,0.62,0.72),_cl(S,0.30,0.40)))
         H2,L2,S2=_hls(sh)
         if k in SEC_REAL: ns,h2=SEC_REAL[k]; H2,S2,L2=h2/360,0.35,0.42+(i%4)*0.03   # B19 no grey: a real colour
+        if k in ("c07","c19","c21"): H2=350/360   # owner via ROOT-51: brick-ish dusky pinks pulled to rose
         S2=max(S2,0.30)
         if k=="c10": main=(nm,_hex(28/360,0.70,0.40))   # keep peach apart from ivory mains
         sec=(ns,_hex(H2,_cl(L2,0.38,0.52),_cl(S2,0.20,0.35)))

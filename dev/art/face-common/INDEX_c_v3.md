@@ -14,7 +14,7 @@ Colours: main + secondary = the game palette row (t8-prompt-B/build.py DATA cNN[
 | c04 | Đoan trang | 18 | long oval, high forehead, straight jaw | medium almond, clear double lids | medium, crisp even outline | three-quarter left | painting scroll (jade-green ends) | royal purple + lavender | royal purple and lavender |
 | c05 | Sắc sảo | 18 | slim diamond, sculpted cheekbones | large long almond, crisp lifted corners | full, sharp cupid's bow | three-quarter right | crane-feather fan (white) | peacock teal + dusty rose | peacock teal and gold * |
 | c06 | Tinh nghịch | 16 | short heart, apple cheeks | big round, slightly upturned | small wide, plump lower lip | straight toward viewer | clay bird whistle (sky blue) | vermilion + ivory | vermilion and ivory |
-| c07 | Tươi tắn | 17 | square-oval, smooth cheeks | large clear almond, slight lift | medium, even full | slight left (15°) | magnolia bud sprig (white) | soft lavender like #B6A2CD + dusky rose pink like #AF5A5A | lavender and pale pink |
+| c07 | Tươi tắn | 17 | square-oval, smooth cheeks | large clear almond, slight lift | medium, even full | slight left (15°) | magnolia bud sprig (white) | soft lavender like #B6A2CD + dusky rose pink like #AF5A68 | lavender and pale pink |
 | c08 | Dịu dàng | 16 | small round-heart | large gentle round, lowered corners | small rosy, plump lower lip, left dimple | slight right (15°) | silk drawstring pouch (sky blue) | soft cherry-blossom pink like #D49B9D + sage green like #8DA960 | cherry-blossom pink and pale green |
 | c09 | Trong trẻo | 15 | round-oval baby face, broad forehead | very large wide-set doe | small full bow | three-quarter left | fish paper lantern (coral red) | soft powder blue like #9DB4CC + dusky rose like #9B4B51 | powder blue and white |
 | c10 | Đoan trang | 18 | long heart, high forehead | medium-large almond, straight lower lids | small, thin even | three-quarter right | poetry album (indigo cover) | soft peach like #D1B094 + deep teal like #50A5A5 | peach and cream |
@@ -26,9 +26,9 @@ Colours: main + secondary = the game palette row (t8-prompt-B/build.py DATA cNN[
 | c16 | Đoan trang | 18 | wide oval, softly squared chin | calm wide-set almond | medium, defined upper lip | straight toward viewer | brush case (rose-red lacquer) | soft sage green like #B0BB81 + deep plum like #914678 | sage green and cream |
 | c17 | Sắc sảo | 18 | striking heart, high cheekbones | large upturned almond | full, deep cupid's bow | fully frontal | folding fan (white, ink bamboo) | soft blush pink like #D49BA3 + teal like #488682 | blush pink and pale gold * |
 | c18 | Tinh nghịch | 16 | cute oval, round full cheeks | large bright round, lifted corners | small, corners up | slight left (15°) | bamboo-dragonfly toy (jade green) | soft mauve rose like #BF868F + lilac-plum like #AC5D80 | magenta rose and lilac |
-| c19 | Tươi tắn | 17 | soft diamond, full cheeks | large almond, lifted corners | medium full, upturned corners | three-quarter left | bamboo flute (pale green) | soft plum like #BB81A1 + dusky pink like #AF695A | plum and pink |
+| c19 | Tươi tắn | 17 | soft diamond, full cheeks | large almond, lifted corners | medium full, upturned corners | three-quarter left | bamboo flute (pale green) | soft plum like #BB81A1 + dusky pink like #AF5A68 | plum and pink |
 | c20 | Dịu dàng | 17 | soft round-oval, right dimple | large tender almond-round, lowered corners | small heart-shaped | three-quarter right | morning glory sprig (deep blue) | soft lotus pink like #D4A29B + celadon green like #60A96F | lotus pink and celadon |
-| c21 | Trong trẻo | 15 | small heart-round, broad forehead | large clear almond, slight down-tilt | small full, soft bow | straight toward viewer | jasmine sprig (white) | soft raspberry rose like #C5778F + dusky pink like #AF675A | ruby and blush pink |
+| c21 | Trong trẻo | 15 | small heart-round, broad forehead | large clear almond, slight down-tilt | small full, soft bow | straight toward viewer | jasmine sprig (white) | soft raspberry rose like #C5778F + dusky pink like #AF5A68 | ruby and blush pink |
 | c22 | Đoan trang | 18 | slender diamond-oval | medium almond, calm level lids | small, soft full lower lip | fully frontal | closed folding fan (pale jade) | soft orchid purple like #B081BB + dusky pink like #AF5A6F | orchid purple and pink |
 | c23 | Sắc sảo | 18 | refined long, firm narrow jaw | large phoenix-almond, sweeping lashes | full, crisp edges | slight left (15°) | round fan (white, ink orchid) | soft crimson red like #C57A78 + jade green like #60A97D | crimson and gold * |
 | c24 | Tinh nghịch | 16 | soft-angular, squared jaw | large almond, lifted corners | wide, thin soft | slight right (15°) | spinning top (pale green) | soft persimmon like #C59477 + indigo blue like #465891 | scarlet and ivory |
@@ -46,7 +46,7 @@ Every colour = name + hex + the store medium-tone sentence (build.py LOW_TONE). 
 
 | id | old (Lượt 562) | new (B18, Lượt 583) |
 |---|---|---|
-| c07 | lavender + pale pink | soft lavender #B6A2CD + dusky rose pink #AF5A5A |
+| c07 | lavender + pale pink | soft lavender #B6A2CD + dusky rose pink #AF5A68 |
 | c08 | cherry-blossom pink + pale green | soft cherry-blossom pink #D49B9D + sage green #8DA960 |
 | c09 | powder blue + white | soft powder blue #9DB4CC + dusky rose #9B4B51 |
 | c10 | peach + cream | soft peach #D1B094 + deep teal #50A5A5 |
@@ -58,9 +58,9 @@ Every colour = name + hex + the store medium-tone sentence (build.py LOW_TONE). 
 | c16 | sage green + cream | soft sage green #B0BB81 + deep plum #914678 |
 | c17 | blush pink + deep teal | soft blush pink #D49BA3 + teal #488682 |
 | c18 | magenta rose + lilac | soft mauve rose #BF868F (o) + lilac-plum #AC5D80 |
-| c19 | plum + pink | soft plum #BB81A1 + dusky pink #AF695A |
+| c19 | plum + pink | soft plum #BB81A1 + dusky pink #AF5A68 |
 | c20 | lotus pink + celadon | soft lotus pink #D4A29B + celadon green #60A96F |
-| c21 | ruby + blush pink | soft raspberry rose #C5778F + dusky pink #AF675A |
+| c21 | ruby + blush pink | soft raspberry rose #C5778F + dusky pink #AF5A68 |
 | c22 | orchid purple + pink | soft orchid purple #B081BB + dusky pink #AF5A6F |
 | c23 | crimson + jade green | soft crimson red #C57A78 + jade green #60A97D |
 | c24 | scarlet + ivory | soft persimmon #C59477 + indigo blue #465891 |

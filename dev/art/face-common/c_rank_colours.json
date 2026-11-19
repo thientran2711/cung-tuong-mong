@@ -41,7 +41,7 @@
   "main": "soft lavender",
   "main_hex": "#B6A2CD",
   "secondary": "dusky rose pink",
-  "secondary_hex": "#AF5A5A"
+  "secondary_hex": "#AF5A68"
  },
  "c08": {
   "main": "soft cherry-blossom pink",
@@ -113,7 +113,7 @@
   "main": "soft plum",
   "main_hex": "#BB81A1",
   "secondary": "dusky pink",
-  "secondary_hex": "#AF695A"
+  "secondary_hex": "#AF5A68"
  },
  "c20": {
   "main": "soft lotus pink",
@@ -125,7 +125,7 @@
   "main": "soft raspberry rose",
   "main_hex": "#C5778F",
   "secondary": "dusky pink",
-  "secondary_hex": "#AF675A"
+  "secondary_hex": "#AF5A68"
  },
  "c22": {
   "main": "soft orchid purple",
