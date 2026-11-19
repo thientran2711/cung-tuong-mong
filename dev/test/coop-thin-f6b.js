@@ -192,9 +192,11 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  const tcard=`const v=liveRivals(true).find(x=>x&&!x.coop);if(!v)return 'no rival';const a={n:'Tranh sủng',t:'t',c:stealCost('feign'),o:oSteal(S),w:{},l:{sung:-BAL.steal.failSung},x:'',__steal:1,go:()=>{log(stealWin(S,v,'feign'))}};deck=deck.filter(x=>x&&x.n!=='Tranh sủng');deck.unshift(a);return a.o;`;
  {const ho=await H.p.evaluate(src=>COOPW.thin.withSeat('b',()=>(0,eval)('(function(){'+src+'})')()),tcard);const go=await pick(tcard);const smOn=await pick(`return !!(BAL.steal&&BAL.steal.mg&&BAL.steal.mg.on)`);
   if(typeof ho==='number'&&typeof go==='number'&&smOn){
+   const hd0=await H.p.evaluate(()=>COOPW.thin.F.stat.hDeal|0);
    await act('T1 Tranh sủng: the game on her phone (raw 9), the card run on the host once',KOK,{pre:`act(0)`,pre2:`if(!document.getElementById('kg82go'))return 'no game: '+JSON.stringify({d:deck.slice(0,2).map(a=>a&&[a.n,a.__g]),uiN:COOPW.thin.uiN,la:COOPW.thin.F.lastAns&&{n:COOPW.thin.F.lastAns.n,r0:COOPW.thin.F.lastAns.r0},flog:COOPW.thin.F.log.slice(-5),Q:Q.map(q=>q.t),modal:!!document.querySelector('#modal:not([hidden])')}).slice(0,900);`+KGO,raw:9,wait:900,
     chk:x=>x.ran===1});
-   const hd=await H.p.evaluate(()=>__hdeck(d=>d[0]&&{n:d[0].n,done:d[0].done}));if(!table.length||!table[table.length-1].tag.startsWith('T1'))ok(true,'T1b (row skipped)');else ok(ON?!!(hd&&hd.done):true,'T1b her host-deck card used once',hd);
+   /* the card's own khắc can end her buổi: the host then deals her a new hand as her context closes (F6a, solo rule) → the used card is gone */
+   const hd=await H.p.evaluate(h0=>__hdeck(d=>({n:d[0]&&d[0].n,done:d[0]&&d[0].done,steal:d.filter(a=>a&&a.n==='Tranh sủng'&&!a.done).length,redeal:(COOPW.thin.F.stat.hDeal|0)>h0})),hd0);if(!table.length||!table[table.length-1].tag.startsWith('T1'))ok(true,'T1b (row skipped)');else ok(ON?!!(hd&&(hd.done&&hd.n==='Tranh sủng'||hd.redeal&&!hd.steal)):true,'T1b her host-deck card used once (or a new hand dealt by its khắc)',hd);
    await act('T2 over-max (stealEnd raw 11): refused',`stealEnd({c:1,i:0,n:'Tranh sủng'},11,false)`,{reject:1})}
   else ok(true,'T steal game not on / no Tranh sủng card here (skipped)',{ho,go,smOn})}
  /* ---- A: the Tự học deck card (aaMG) ---- */
