@@ -62,3 +62,29 @@ C. thua-minh-cung-dong-phoi-ngu (liked): redo ONLY to show TWO beds (shared room
 D. RICHNESS shift: current v2 Tần bedroom (nVsEG05YQD) = the LOWEST level → phối ≈ that level; Tần one step richer, Phi richer, Quý phi richest, all below Khôn Ninh. Adjust the 'lux' lines in dev/art/place-rank/prompts.py.
 Tools: prompts.py builds prompts.json (style cards CARD_CP etc. inside); sheets.py FIGDIR OUTDIR rebuilds sheets A/B + spread (figs from CDN img/fig-consort-c06/c30-t1-a18, fig-maid-m19/m39-t1-a18). Recipe unchanged (refs gOmYI7iSXO + EbYJzsMuuO, gpt-2-6 2k 2688x1386, folder ba4aecfe-efce-47e2-b53f-30d292091886, no grade, LOOK at each, max 1 redo). The tẩm cung ref carries a phoenix — keep the explicit no-phoenix sentence. Expected ≈ 10 gens + redos ≈ 1,350–2,000 cr. Report v3 here, relay to ROOT-48 session_01PEhRbwqKFPv13Sx5yfxDSx.
 E. (owner Lượt 462, ROOT-48 16:45Z) Quý phi yellow touch too faint → a bit MORE visible in BOTH Quý phi rooms: gold-yellow brocade throw + yellow cushion trims + yellow tassels on the bed / seat; still clearly less than Hoàng quý phi / Empress; no phoenix. Edit NOPE_QF + the quyphi 'bed'/'rec' lines in prompts.py.
+
+## v3 — DONE by PR4 (owner Lượt 461 A–D + 462, corrections 465 + 466 relayed by ROOT-48)
+Prompts: dev/art/place-rank/prompts.py → prompts.json (all 10 rebuilt). Changes:
+- A: every reception = LUOHAN() helper: luohan daybed (three-sided carved back, small kang table with tea set in its middle, flat cushions) flanked by pairs of Chinese armchairs with small tea tables; + "No Western sofa, no upholstered couch." Khôn Ninh: throne seat kept, consort armchair rows, mid-ground in front of the dais furnished (small rugs, low tables with fruit/tea, gilt incense stand, potted peonies).
+- B: RIGHT sentence (ROOT-48 wording) in all 10: "The bottom-right corner nearest the viewer stays almost clear, holding at most one small object; tea tables and stools stand further back in the room." (assert: it is the only 'right' in a room line).
+- C: phối bedroom = TWO beds (ivory + pale green bedding/curtains, pale blue cushions), orchid / painted lacquer kept, "Exactly two beds."
+- D: Tần/Phi lux lines one step richer (Tần now fine carving + jade inlay + a little gilt; Phi deeper carving + gilt edging). Phối richness = UNCHANGED v1 level (owner Lượt 465 overrides D for the phối).
+- E (Lượt 462): Quý phi bed + daybed get a gold-yellow brocade throw, gold-yellow cushion trims and tassels; NOPE_QF says clearly visible but far less than an Empress, no yellow curtains/bedding/walls, no phoenix.
+- Lượt 466: Khôn Ninh bedroom mixes imperial yellow with rich crimson red (red-lined yellow curtains, red borders/cushions/tassels), "never all yellow".
+Redo sentences (placement only) are in the gen_ledger notes; prompts.json holds the base prompts. For a mass run, add the bed/daybed placement sentence from the start (the model likes to push the bed to the left edge and a dressing table/stool group to the right edge).
+
+| picture v3 | gen id | verdict |
+|---|---|---|
+| canh-phuc-cung-tan | WDgFohIcXe | kept |
+| canh-phuc-cung-phi | nVsuoWoYQD | kept |
+| canh-phuc-cung-quyphi | KLpZJjDkqp | kept; gold-yellow throw + tassels clearly visible, one small jar bottom-right |
+| canh-phuc-cung-tan-ngu | kse24Rp16B (redo of vQA710Ja47: bed at the left edge) | kept; FAULT: dressing table + stool at the right edge mid-foreground (corner itself open floor) |
+| canh-phuc-cung-phi-ngu | SyhTG51Ub8 (redo of s7IW33Tl8e: dressing group at the right edge) | kept; tea table + stools right of centre, corner open |
+| canh-phuc-cung-quyphi-ngu | 0eUqf23TfW (redo of u5W4gwNQLD: cut-off table bottom-right) | kept; gold-yellow throw on the bed |
+| thua-minh-cung-dong-phoi | If3gkSntvE (redo of DoOkfzXpcl: armchair close up at the left edge) | kept; FAULT: embroidery-frame stand at the right edge |
+| thua-minh-cung-dong-phoi-ngu | BhNL5dMoQR (redo of JNCpnMjOq4: bed at the left edge, stool + basket bottom-right) | kept; two beds ivory / pale green, pale blue cushions; one small jar bottom-right |
+| khon-ninh-cung | kse24n816B (redo of kse2OF716B: armchair rows at both front edges) | kept; mid-ground furnished, one small jar bottom-right |
+| khon-ninh-cung-ngu | jUonRSTLD0 (redo of p8y1ux8ehw: dressing group at the right edge) | kept; yellow + crimson mix, phoenixes |
+Other faults to watch: all Cảnh Phúc receptions keep a small low table cut off at the bottom-left corner holding a vase/incense burner (small low objects, as the LEFT rule allows); gilt frieze "bats" still read a little bird-like (no phoenix tail); the Tần bed has a pale beige-gold throw.
+v2 files (10 rooms + sheets) → img/_review/place-rank/v2/ (CDN). Sheets A, B and the Quý phi bedroom spread rebuilt at the same paths (repo copies dev/handover/review-sheets/place-rank/).
+Credits v3: 17 gens × 135 = 2,295 (10 kept + 7 rejected first gens). TOTAL place-rank = 37 gens = 4,995 credits.
