@@ -207,18 +207,18 @@ const KIT_COSTRE=/khắc|\bSức\b|\bBạc\b|\bbạc\b/i;
    ODDS (owner 19/11 ~01:48Z, canon overwrite of the 14/11 15:05Z «an toàn / có rủi ro / liều» risk chip, kitRisk RETIRED): the card shows the
    kit odds meter kitOdds (7 segments red → green + the ladder word) of the option's REAL odds; a certain option (no roll) shows «Nắm chắc».
    An option may carry its own `hint` (string or fn(lv)); hints may never lie (an override must match the data). */
-const KIT_HINT_LADDER=/(Liều|Khó lường|Khó|Năm ăn năm thua|Khá chắc|Rất chắc|Nắm chắc|Chắc)/;
+const KIT_HINT_LADDER=/(Liều|Khó|Năm ăn năm thua|Khá chắc|Rất chắc|Nắm chắc|Chắc)/;
 function kitHintLevel(){try{const t=S.tamco||0,m=eyes(S);const B=typeof BAL==="object"?BAL:{};if(t>=(B.hintSharp)||m>=(B.hintMat))return 2;if(t>=(B.hintMid))return 1}catch(e){}return 0}
 /* a count inside a story phrase in words (1..999): "20 trượng" → "hai mươi trượng" */
 function kitNumVi(n){const D=["không","một","hai","ba","bốn","năm","sáu","bảy","tám","chín"];n=Math.round(+n);if(!(n>=0&&n<1000))return String(n);
  const two=x=>{if(x<10)return D[x];const t=Math.floor(x/10),u=x%10;const a=t===1?"mười":D[t]+" mươi";return u===0?a:a+" "+(u===1&&t>1?"mốt":u===5?"lăm":u===4&&t>1?"tư":D[u])};
  if(n<100)return two(n);const h=Math.floor(n/100),r=n%100;return D[h]+" trăm"+(r===0?"":r<10?" lẻ "+D[r]:" "+two(r))}
 /* the option's raw kit line (the same text its act card would read), split into labelled items */
-function kitOptModel(o){let raw="";try{raw=o&&o.j67?String(o.j67):typeof dilLineRaw==="function"?dilLineRaw(o):String(o&&o.x||"")}catch(e){raw=String(o&&o.x||"")}
+function kitOptModel(o){let raw="";try{raw=o&&o.j67?oddsLead(o,o.j67):typeof dilLineRaw==="function"?dilLineRaw(o):String(o&&o.x||"")}catch(e){raw=String(o&&o.x||"")}
  raw=raw.replace(/(nàng |hắn )?thù -(\d+)/g,(m,p,n)=>`${p||""}oán ta +${n}`);
  const M={odds:"",items:[],notes:[]};let lab="";
  for(const s0 of raw.split(/ · (?![^<]*>)/)){const s=kaPlain(s0);if(!s)continue;
-  const od=s.match(/^(Nắm chắc|Rất chắc|Khá chắc|Năm ăn năm thua|Chắc|Khó lường|Khó|Liều)$/);if(od&&!M.odds){M.odds=od[1];continue}
+  const od=s.match(/^(Nắm chắc|Rất chắc|Khá chắc|Năm ăn năm thua|Chắc|Khó|Liều)$/);if(od&&!M.odds){M.odds=od[1];continue}
   if(/^Quẻ: /.test(s))continue;
   const ml=s.match(/^(được ngay|ngay|tốn|thành|thắng|được|hỏng|mất|kèm)\s*:\s*/i);let body=s,cont=true;
   if(ml){lab=ml[1].toLowerCase();if(lab==="thắng"||lab==="được")lab="thành";if(lab==="mất")lab="hỏng";if(lab==="được ngay")lab="ngay";body=s.slice(ml[0].length);cont=false}
