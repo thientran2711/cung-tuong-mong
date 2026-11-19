@@ -155,8 +155,10 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  {const xl=await G.p.evaluate(()=>(S.logs||[]).filter(x=>/Xong việc «/.test(String(x))).length)-xl0;const gs=await G.p.evaluate(()=>window.__done4),hs=await H.p.evaluate(()=>window.__done4);
   if(ON)ok(xl<=0||(gs.length===xl&&hs.length===0),'C1 task cards: every «Xong việc» line her F4 acts earned shows its card on HER phone once, none on the host',{lines:xl,guest:gs,host:hs})}
  /* double tap */
- if(ON){await reset();const r=await G.p.evaluate(()=>{const F=COOPW.thin.F,b0=F.stat.busy,s0=F.stat.sent;petcMaid(0);petcMaid(0);return {busy:F.stat.busy-b0,sent:F.stat.sent-s0,id:F.pend&&F.pend.id}});
-  await until(G,id=>!COOPW.thin.F.pend,r.id,20000);ok(r.sent===1&&r.busy===1,'D1 double tap: one intent, the second tap ignored',r)}
+ if(ON){await reset();const r=await G.p.evaluate(()=>{const F=COOPW.thin.F,b0=F.stat.busy,s0=F.stat.sent,h0=F.stat.held|0;const pre=F.pend&&F.pend.n||null;petcMaid(0);petcMaid(0);return {pre,busy:F.stat.busy-b0,sent:F.stat.sent-s0,held:(F.stat.held|0)-h0,id:F.pend&&F.pend.id}});
+  /* review r1: her due-task tick (ptTickHer) may be pending at the tap: the first tap is then HELD and sent after its answer, never lost */
+  await until(G,()=>!COOPW.thin.F.pend&&!COOPW.thin.F.next,null,20000);const s2=await G.p.evaluate(()=>COOPW.thin.F.lastAns&&COOPW.thin.F.lastAns.n);
+  ok(r.sent+r.held===1&&r.busy===1&&(!r.held||s2==='petcMaid'),'D1 double tap: one intent (held behind a pending due-task tick when there is one, then sent), the second tap ignored',Object.assign(r,{last:s2}))}
  /* latency */
  {const ms=table.filter(x=>typeof x.ms==='number').map(x=>x.ms).sort((a,b)=>a-b),lo=table.map(x=>x.r&&x.r.ms).filter(x=>typeof x==='number').sort((a,b)=>a-b);
   if(ms.length)console.log('LATENCY tap→answer ms (LAG '+(+process.env.LAG||0)+', host CPU ×'+(+process.env.CPU||1)+'): n='+ms.length+' median='+ms[ms.length>>1]+' min='+ms[0]+' max='+ms[ms.length-1]);

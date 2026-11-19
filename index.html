@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"6c76cbcc+","t":"2026-11-19T22:51Z","c":"palace-chatter r2 review fix (E17r): eavesdrop confidant = watcher(v) else her most loyal real servant (lòng BAL.loy.close+, no Chủ tin bar…","b":"cf3971e0c1f6","h":[{"s":"868c682c+","t":"2026-11-19T17:43Z","c":"runact-sv-fix: j29 hoist textually identical to review/coop-thin-f6-r1 (merges clean)"},{"s":"c8af1135+","t":"2026-11-19T14:36Z","c":"npc-purpose G1 #14: build line"},{"s":"69bd0766+","t":"2026-11-19T14:33Z","c":"seal-lean-3 r8 (ROOT-69, K-HEAD-SAY x EMO-SEAL LEAN): the big seal never covers a say bubble: no lean starts under an open bubble, a bubble…"},{"s":"d5821e86","t":"2026-11-19T12:13Z","c":"receiver-choice rv4: scan + card checks on the instant path (BAL.ptime.on=0); new check: with parallel time on her card waits only in S.ord…"},{"s":"9aad0c66+","t":"2026-11-19T12:03Z","c":"role-parity-drift-2: build line"},{"s":"43548e0e+","t":"2026-11-19T11:46Z","c":"coop-thin-f4 K2 (review parallel-time #4): accept the parallel-time road of rcpAskGo maid"},{"s":"a5e2d8e7+","t":"2026-11-19T09:30Z","c":"opt-scroll-reset r2: an option card picture load (fixed .kaart box) no longer re-picks the frame (first wheel lost); merged origin/main 620…"},{"s":"3b3f7631+","t":"2026-11-19T10:24Z","c":"ev-pic-followups r2: scan SHOT/DSF/TAG env for review shots"},{"s":"5d9cdd5d+","t":"2026-11-19T10:03Z","c":"rebuild"},{"s":"f01df861","t":"2026-11-19T09:09Z","c":"review coop-thin-f3 r1: merge F2 LAND READY 7627f79c; generated files rebuilt"}]};
+window.CTM_BI={"s":"21bbebdd+","t":"2026-11-19T23:45Z","c":"palace-chatter: CHAT_L topic hh-me (12 lines, Hoàng hậu to her; warm/cool/cold + season tags) — the only -me pair kind with no bank, so a H…","b":"07d12042fd3a","h":[{"s":"66a26121+","t":"2026-11-19T22:49Z","c":"coop-ptime-reds r1 (review): her tap while her due-task tick (ptTickHer) is pending is HELD and sent after its answer (was refused busy = l…"},{"s":"2dd36abf+","t":"2026-11-19T22:36Z","c":"B24 fix: rank text on paintings / night panels uses the RCOL base (one accessor kitRankTone ground), paper keeps derived tone; rebuilt inde…"},{"s":"868c682c+","t":"2026-11-19T17:43Z","c":"runact-sv-fix: j29 hoist textually identical to review/coop-thin-f6-r1 (merges clean)"},{"s":"c8af1135+","t":"2026-11-19T14:36Z","c":"npc-purpose G1 #14: build line"},{"s":"69bd0766+","t":"2026-11-19T14:33Z","c":"seal-lean-3 r8 (ROOT-69, K-HEAD-SAY x EMO-SEAL LEAN): the big seal never covers a say bubble: no lean starts under an open bubble, a bubble…"},{"s":"d5821e86","t":"2026-11-19T12:13Z","c":"receiver-choice rv4: scan + card checks on the instant path (BAL.ptime.on=0); new check: with parallel time on her card waits only in S.ord…"},{"s":"9aad0c66+","t":"2026-11-19T12:03Z","c":"role-parity-drift-2: build line"},{"s":"43548e0e+","t":"2026-11-19T11:46Z","c":"coop-thin-f4 K2 (review parallel-time #4): accept the parallel-time road of rcpAskGo maid"},{"s":"a5e2d8e7+","t":"2026-11-19T09:30Z","c":"opt-scroll-reset r2: an option card picture load (fixed .kaart box) no longer re-picks the frame (first wheel lost); merged origin/main 620…"},{"s":"3b3f7631+","t":"2026-11-19T10:24Z","c":"ev-pic-followups r2: scan SHOT/DSF/TAG env for review shots"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -976,7 +976,7 @@ const RANKS=[
 const PAL_HEAD=3;
 /* KIT 1.3 · THE ONE RANK PALETTE (owner 11/16 13:00Z "nhạt nhòa quá → tươi hơn"; jewel tones): every rank colour in the game is read from here (ring, halo, chips, card colour, portrait ground
    .rk-cN, text tone via kitToneOf in jk4). Vivid bases, same colour family per rank; text on paper is DERIVED (kitToneOf), never typed again. Nobody keeps a copy. */
-const RCOL=["#c4861a","#12b84a","#1f6cff","#ff3d8f","#a23cff","#ff1f3d","#ff6a00","#ffc400"];/* Đáp ứng champagne-bronze, Thường tại green, Quý nhân blue, Tần pink, Phi purple, Quý phi red, Hoàng quý phi orange, Hoàng hậu gold */
+const RCOL=["#eae3d0","#7fb394","#7e9ccb","#e3a3b8","#a88bcb","#e3a25b","#d46a64","#efbd69"];/* B24 ONE rank colour system (owner Lượt 726/728): t1 Đáp ứng cream-ivory, t2 Thường tại green, t3 Quý nhân blue, t4 Tần hồng phấn, t5 Phi purple, t6 Quý phi orange, t7 Hoàng quý phi red, t8 Hoàng hậu gold */
 const RCOL_COLD="#8fa3b8";/* Lãnh cung / Phế phi: cool steel grey */
 window.MRCOL=["#3aa38f","#00bf94","#2f6fff","#ff4a1c","#9b4dff"];/* maids: thô sử grey-jade, cung nữ jade, đại cung nữ blue, chưởng sự cô cô terracotta, nữ quan violet */
 window.ERCOL=["#6fb03a","#12b35a","#1f8fe0","#d9601a"];/* eunuchs: tiểu thái giám sage, thái giám green, thủ lĩnh steel blue, tổng quản bronze */
@@ -40244,7 +40244,7 @@ function kitToneOf(base,paper){const key=base+"|"+(paper||"");if(KIT_TONE_CACHE[
  if(typeof KIT_IMP==="string"&&base.toLowerCase()===KIT_IMP)return KIT_TONE_CACHE[key]=KIT_IMP;/* imperial yellow stays bright (owner 16:10Z) */
  let[r,g,b]=rgb(base).map(x=>x/255);const M=Math.max(r,g,b),m=Math.min(r,g,b);let l=(M+m)/2,s=0,H=0;
  if(M!==m){const d=M-m;s=l>.5?d/(2-M-m):d/(M+m);H=M===r?(g-b)/d+(g<b?6:0):M===g?(b-r)/d+2:(r-g)/d+4;H*=60}
- if(s>=.4)s=Math.max(s,.9);/* vivid families stay vivid; steel-grey stays grey */
+ if(s>=.4&&!(typeof RCOL!=="undefined"&&RCOL.some(c=>c.toLowerCase()===base.toLowerCase())))s=Math.max(s,.9);/* vivid families stay vivid; steel-grey stays grey; B24 rank colours keep their own soft saturation (same colour per rank, lightness-only darkening) */
  const hx=(H,s,l)=>{const f=n=>{const k=(n+H/30)%12,a=s*Math.min(l,1-l);return Math.round((l-a*Math.max(-1,Math.min(k-3,9-k,1)))*255).toString(16).padStart(2,"0")};return"#"+f(0)+f(8)+f(4)};
  let x=hx(H,s,l);while(cr(x)<3.6&&l>.04){l-=.005;x=hx(H,s,l)}return KIT_TONE_CACHE[key]=x}
 window.kitToneOf=kitToneOf;
@@ -40255,8 +40255,14 @@ const KIT_RT=[[/hoàng quý phi/,()=>RCOL[6]],[/phế phi|lãnh cung/,()=>RCOL_C
  [/ma ma|nhũ mẫu|vú/,()=>KIT_ROLE.mama],[/tổng quản/,()=>ERCOL[3]],[/thủ lĩnh/,()=>ERCOL[2]],[/tiểu thái giám/,()=>ERCOL[0]],[/thái giám|nội giám/,()=>ERCOL[1]],
  [/thái y|ngự y/,()=>KIT_ROLE.ty],[/hoàng tử|thái tử|vương/,()=>KIT_ROLE.prince],[/công chúa/,()=>KIT_ROLE.princess],[/người lạ/,()=>KIT_ROLE.stranger],
  [/tể tướng|tướng quân|thượng thư|học sĩ|quan|thị lang|đại nhân/,()=>KIT_ROLE.official],[/thị vệ|vệ|lính|tướng/,()=>KIT_ROLE.guard]];
-function kitRankTone(t,col){const s=String(t==null?"":t).replace(/<[^>]*>/g,"").replace(/\s+/g," ").trim().toLowerCase();
- for(const [re,c] of KIT_RT)if(re.test(s))return kitToneOf(c());return /^#[0-9a-f]{6}$/i.test(col||"")?kitToneOf(col):KIT_ROLE.slate}
+/* B24 ONE accessor for rank text colour by GROUND (review rank-palette-b24): kitRankTone(title,col,ground) — ground "paper" (default, cream paper) = the DERIVED, paper-darkened tone (kitToneOf);
+   ground "stage" (painting / dark panel) = the RCOL base itself. Called without ground it returns the paper tone for --rt AND, for the 8 harem ranks, a trailing ";--rb:<RCOL base>" so every
+   existing builder (style="--rt:${kitRankTone(..)}") also carries the raw base; the CSS below picks --rt on paper and --rb on paintings / night panels. No per-place colour. */
+const kitRankBaseOf=c=>RCOL.some(x=>x.toLowerCase()===String(c).toLowerCase());
+function kitRankTone(t,col,ground){const s=String(t==null?"":t).replace(/<[^>]*>/g,"").replace(/\s+/g," ").trim().toLowerCase();
+ const fin=c=>ground==="stage"?c:ground==="paper"?kitToneOf(c):kitToneOf(c)+(kitRankBaseOf(c)?";--rb:"+c:"");
+ for(const [re,c] of KIT_RT)if(re.test(s))return fin(c());
+ return /^#[0-9a-f]{6}$/i.test(col||"")?fin(col):KIT_ROLE.slate}
 /* KIT 48.1g PORTRAIT GROUND .rk-c0..c7 (the round avatar / portrait ground by rank): generated from RCOL (was typed in p1.html + j59, two stale copies) */
 (function(){const m=(c,p)=>`color-mix(in srgb,${c} ${p}%,#fff)`;let css="";
  RCOL.forEach((c,i)=>{const bg=i===3||i===4?`repeating-linear-gradient(45deg,${m(c,22)} 0 6px,${m(c,38)} 6px 12px)`:i>=5?`radial-gradient(circle at 30% 20%,${m(c,28)},${m(c,66)})`:`linear-gradient(160deg,${m(c,20)},${m(c,52)})`;
@@ -40288,6 +40294,9 @@ ${N}{color:var(--krt-ink)!important;font-weight:700;text-shadow:none!important}
 ${PT}{color:color-mix(in srgb,var(--rt,var(--rc,var(--tc,#7a5a30))) 72%,#000)!important;/* place-stage r4 (owner OD:L532/L702/L866): the stage tag's RANK line keeps its RANK hue (a deeper, saturated shade of the rank tone for contrast) and gets the SAME light-paper halo as the NAME line (no coloured glow: it was faded on a light floor) */
  text-shadow:0 0 1px #fff8ee,0 0 3px #ffe9a8,0 0 7px #f3cf6a,0 0 11px #e8bd4a99!important}
 ${HT}{text-shadow:0 0 1px #fff8ee,0 0 3px #ffe9a8,0 0 7px #f3cf6a,0 0 11px #e8bd4a99!important}
+/* B24: on a painting the harem RANK line is the RCOL base itself (soft, light) with a dark ink edge, not the paper-darkened tone */
+${PT.split(",").map(x=>x+'[style*="--rb:"]').join(",")}{color:var(--rb)!important;text-shadow:0 0 1px #1c100a,0 0 2px #1c100a,0 1px 2px #000c,0 0 6px #0008!important}
+${HT.split(",").map(x=>x+'[style*="--rb:"]').join(",")}{text-shadow:0 0 1px #1c100a,0 0 2px #1c100a,0 1px 2px #000c,0 0 8px #000a!important}
 ${PN}{text-shadow:0 0 1px #fff8ee,0 0 3px #ffe9a8,0 0 7px #f3cf6a,0 0 11px #e8bd4a99!important}
 html body .kpsn .kname .kti{display:block;font-size:.84rem!important}
 /* stage side cards (.ksh .k3c, review/pick-hint-r1): a person's title + name (kitRankNamePaint / kitName) stack as rank line over name,
@@ -40310,6 +40319,7 @@ html body .modal.night .kname .kti{color:color-mix(in oklch,var(--rt,#7a5a30) 64
 /* dark panels (.modal.night): name in parchment, title in its lightened tone (plain, no glow) */
 html body .modal.night .kpsn .kname,html body .modal.night .knr>.knr-n,html body .modal.night .krn,html body .modal.night .kbk-pname .kname{color:#f3e6cf!important}
 html body .modal.night .krt,html body .modal.night .knr>.knr-r,html body .modal.night .kpsn .kname .kti,html body .modal.night .kbk-pname .kname .kti{color:color-mix(in oklch,var(--rt,#7a5a30) 64%,#fff)!important}
+html body .modal.night .krt[style*="--rb:"],html body .modal.night .knr>.knr-r[style*="--rb:"],html body .modal.night .kpsn .kname .kti[style*="--rb:"],html body .modal.night .kbk-pname .kname .kti[style*="--rb:"],html body .modal.night .kname .kti[style*="--rb:"]{color:var(--rb)!important}
 /* 48.1b her own name: black; on a painting + a soft light-gold glow, in framed UI plain black bold */
 html body .kmy,html body .modal.night .kmy{color:#1a0f08!important;font-weight:700!important;text-shadow:none!important}
 html body .stage .tok .tag .j59n.kmy,html body .stage #j59metag .tag .j59n.kmy,html body #mb .kesov>.kpsn .kname.kmy,html body .krs .krn.kmy,html body .krs .knr>.knr-n.kmy{color:#1a0f08!important;
@@ -47243,7 +47253,7 @@ if(typeof j76sucWhy==="function"){j76sucWhy=function(c){if(!S||S.dead||c<=1||win
    up to the current one on load. Tư trang has a "Dấu ấn" tab; tapping a marker → "Dùng" switches to it (any owned one, older ones too). ===== */
 window.KIT_MEMARK=window.KIT_MEMARK||{h:.085,gap:.012,min:26,max:72,tiny:12,big:1.05,bob:11,edge:4,/* bob = the bounce height of kmmBob (px up from rest, +3 % squash); edge = air kept under the frame's top edge (owner 18/11 ~03:5xZ: the marker's whole bounce range stays INSIDE the stage frame) */sc:[.78,.84,.9,.95,1,1.06,1.14,1.22]};
 /* glow gold = the Hoàng hậu title pill's token (jtitle kdh tier 8 = RCOL[7]); owner 18/11 ~06:05Z "rực giống Phượng minh thiên hạ" */
-const KMM_GOLD=(typeof RCOL!=="undefined"&&RCOL[7])||"#ffc400";
+const KMM_GOLD=(typeof RCOL!=="undefined"&&RCOL[7])||"#efbd69";
 const KMM_NAMES=["Mai ngà","Lan bạc ngọc bích","Hoa bạc ngọc lam","Búp sen ngọc","Cúc tím chim loan","Mẫu đơn hồng ngọc","Phượng vàng mây ngọc","Cánh phượng hổ phách"];
 /* ---------- owned markers (save data) ---------- */
 /* owner 18/11 ~21:50Z: the marker's light = HER CURRENT RANK colour (RCOL, vivid), as a RIM glow on an UNDER-layer (.kmglw: the picture's own silhouette, blurred, behind the picture) - light never paints over the picture */
@@ -74494,7 +74504,9 @@ function rcvSabO(p,t,o){const H=BAL.road.hp,R=BAL.rcv.help,me=t===S,tq=rcvQ(p,t)
 const RCVK={};
 function rcvAsk(k,p,t,x){const D=RCVK[k];if(!D||!p||!t||p===t)return"";if(D.ok&&!D.ok(p,t,x))return"";
  if(t===S){rcvCard("rcvAsk",{k,a:key(p),x:x||null},D.t,p);return `${p.name} sai người sang ${D.act} ngươi. `}
- const c=rcvPick(t,p,D.opts(p,t,x),D.kind||"help");if(!c)return"";const r=c.go();const s=r&&typeof r==="object"?r.r:r;return s?String(s).replace(/([^.!?])$/,"$1. "):""}
+ /* the co-op friend is a PLAYER (law 1): inside her accepted offer (jcoopworld invHer: he already tapped «Nhận» on his own card, COOPW.inv) his
+    answer is that «Nhận» = the first (yes) option, never a roll for him (coop-ptime-reds: coop-thin-d «Kết giao» came back as «mách lẻo») */
+ const O=D.opts(p,t,x);const c=t.coop&&window.COOPW&&COOPW.inv?O[0]:rcvPick(t,p,O,D.kind||"help");if(!c)return"";const r=c.go();const s=r&&typeof r==="object"?r.r:r;return s?String(s).replace(/([^.!?])$/,"$1. "):""}
 PEND.rcvAsk=pp=>{const D=RCVK[pp.k],p=byKey(pp.a);if(!D||!p||p===S||!p.alive||p.out||(D.ok&&!D.ok(p,S,pp.x)))return null;
  return{who:pv(p),t:D.line(p,pp.x),o:D.opts(p,S,pp.x).map(o=>({n:o.n,fx:o.fx,x:o.x,risk:o.risk,go:()=>{const r=o.go();const s=r&&typeof r==="object"?r.r:r;if(s)log(s)}}))}};
 const rcvSg=(p,me,a,b)=>p===S?a:me?b:null;
@@ -74827,7 +74839,7 @@ ptReg("invite",a=>{const v=RV(a.a.v);const m=ptPerson(a.a);const nm=m?m.name:"Ng
    the deed lands at the due khắc with the same function, odds and news as before) ---- */
 const PT_NPC={"cx2:maidSpy":{kind:"spy",who:v=>v&&v.maid&&v.maid.name?{id:"mm:"+v.id,nm:v.maid.name}:null,lbl:t=>`đi dò la ${t&&t.name?t.name:""}`.trim()}};
 function ptNpcWire(){if(typeof AGRUN==="undefined")return;for(const k in PT_NPC){const f0=AGRUN[k];if(!f0||f0.__pt)continue;const D=PT_NPC[k];
- const f=function(v,t,pd){if(!ptOn()||PT.landing||!v||v===S)return f0.apply(this,arguments);const w=D.who(v);if(!w)return f0.apply(this,arguments);
+ const f=function(v,t,pd){if(!ptOn()||PT.landing||!v||v===S||v.coop)return f0.apply(this,arguments);const w=D.who(v);if(!w)return f0.apply(this,arguments);
   if(ptBusy(w.id))return"";/* her person is still out on the last errand: no second order (the deed is dropped, as an NPC with no maid) */
   let tid=null;try{tid=ledgerId(t)}catch(e){tid=t===S?"me":t&&t.id!=null?"v"+t.id:null}
   ptSend({who:w.id,nm:w.nm,kind:D.kind,by:"v"+v.id,byNm:v.name,place:t&&t!==S?palaceOf(t):t===S?(S.out?"lc":"home"):null,tgt:tid,a:{npc:k,v:v.id,t:tid},lbl:D.lbl(t)});PT.stat.npc++;return""};
@@ -74856,7 +74868,7 @@ ptReg("plant",a=>{const v=RV(a.a.v);const s=ptPerson(a.a);const nm=s?s.name:"Ng�
  if(!e)return{ok:null};if(!v||!v.alive||v.out){log(`${nm} trở về, mang ${iname(e)} về lại rương.`);return{ok:null}}
  const i=S.inv.indexOf(e);let r="";fzRun(a.a.fz,"plant",()=>{r=runAct(S,v,"plant",i)});if(r)log(r);return{t:`${nm} lẻn vào cung ${v.name} trở về`}});
 /* ---- 8. Tặng quà by hand (PEND.giftpick from her card, not together): a servant carries the gift ---- */
-(function(){try{const b0=PEND.giftpick;if(!b0)return;PEND.giftpick=function(p){const d=b0.apply(this,arguments);try{if(!d||!ptOn()||p.v==null)return d;const v=RV(p.v);if(!v||together(S,v))return d;const s=bestSent(S);
+(function(){try{const b0=PEND.giftpick;if(!b0)return;PEND.giftpick=function(p){const d=b0.apply(this,arguments);try{if(!d||!ptOn()||p.v==null)return d;const v=RV(p.v);if(!v||v.coop/* the co-op friend: ONE path for gifts between the two players = the ASK act (she answers first, no servant), as the co-op giftin above (coop-ptime-reds) */||together(S,v))return d;const s=bestSent(S);
   if(!s){d.o=(d.o||[]).map(o=>o.ik!=null?Object.assign({},o,{lock:true,x:ptNoRunner()}):o);return d}
   d.t=(d.t||"")+`<p class="past">${s.name} mang quà đi · tốn ${ptRow("gift").o} khắc, ${ptWaitTxt("gift")}</p>`;
   d.o=(d.o||[]).map(o=>o.ik==null?o:Object.assign({},o,{go:()=>{const e=S.inv[o.ik];if(!e)return;S.inv.splice(o.ik,1);
@@ -75013,7 +75025,7 @@ ptReg("rtOrd",a=>{const g=PT.cl&&PT.cl[a.id];if(g){delete PT.cl[a.id];try{g()}ca
 /* ---- 16. TWO-WAY (ruling (c)): NPC senders — a gift carried by her servant (PEND.giftin), an NPC host's invitation (AG cx3:invite2) ---- */
 function ptNpcCarrier(v){if(!v)return null;if(v.maid&&v.maid.name&&!ptBusy("mm:"+v.id))return{id:"mm:"+v.id,nm:v.maid.name};try{const s=bestSent(v);if(s)return{id:ptPid(s,v),nm:s.name}}catch(e){}return null}
 (function(){try{const p0=pushDil;pushDil=function(d,title){try{if(ptOn()&&!PT.landing&&d&&d.pid==="giftin"&&d.pp&&d.pp.f!=null){const f=byKey(d.pp.f);
-   if(f&&f!==S&&f.id!=null&&typeof RV==="function"&&RV(f.id)===f){const w=ptNpcCarrier(f);if(w){ptSend({who:w.id,nm:w.nm,kind:"giftin",by:"v"+f.id,byNm:f.name,place:S.out?"lc":"home",tgt:"me",a:{run:"giftin",pp:d.pp,title:title||"Quà tặng"},lbl:"mang quà sang cung ngươi"});PT.stat.npc++;return""}}}}catch(e){ptErr("giftin",e)}return p0.apply(this,arguments)};window.pushDil=pushDil}catch(e){ptErr("pushDil wire",e)}})();
+   if(f&&f!==S&&f.id!=null&&!f.coop/* a co-op friend is a player seat, not an NPC: her gift is NOT delayed (design, reports/parallel-time.md §16; was missing → the co-op gift card waited 2 khắc on the receiver's clock) */&&typeof RV==="function"&&RV(f.id)===f){const w=ptNpcCarrier(f);if(w){ptSend({who:w.id,nm:w.nm,kind:"giftin",by:"v"+f.id,byNm:f.name,place:S.out?"lc":"home",tgt:"me",a:{run:"giftin",pp:d.pp,title:title||"Quà tặng"},lbl:"mang quà sang cung ngươi"});PT.stat.npc++;return""}}}}catch(e){ptErr("giftin",e)}return p0.apply(this,arguments)};window.pushDil=pushDil}catch(e){ptErr("pushDil wire",e)}})();
 ptReg("giftin",a=>{PT.landing=1;try{const d=mkP("giftin",a.a.pp);if(d)pushDil(d,a.a.title);else log(`${a.nm} mang quà đến, nhưng người tặng không còn.`)}finally{PT.landing=0}return null});
 PT_NPC["cx3:invite2"]={kind:"npcinv",who:v=>{/* one invitation out at a time per host: the runner still out = busy (the deed is dropped) */const p=ptZ().find(a=>!a.back&&a.a&&a.a.npc==="cx3:invite2"&&a.a.v===v.id);return p?{id:p.who,nm:p.nm}:ptNpcCarrier(v)},lbl:t=>`đi mời ${t===S?"ngươi":t&&t.name?t.name:"khách"}`,land:1};
 try{ptNpcWire()}catch(e){ptErr("npcWire2",e)}
@@ -75029,7 +75041,7 @@ ptReg("shop",a=>{PT.landing=1;try{pushDil(mkP("shop"),"Nhờ thái giám mua đ�
    goes through the SAME S.away / due-khắc path as hers (kind "harm": her deed on a consort when not together = order o, servant away n,
    lands at due). Callers: j28 npcAct, j40 mindRun (incl. j70 exec70), j70 plant, jtruth npcFrame, jtsb planned harm. The deed's own
    function, odds and news run at the due khắc; the servant sent is away (ledger, bestSent skips her) and cannot be sent again. ---- */
-function ptNpcSent(a,t,k){try{return ptOn()&&!PT.landing&&!!a&&a!==S&&!!t&&a.id!=null&&typeof RV==="function"&&RV(a.id)===a&&!!ACT[k]&&!ACT_NOSEND.includes(k)&&!together(a,t)&&!sameHouse(a,t)}catch(e){return false}}
+function ptNpcSent(a,t,k){try{return ptOn()&&!PT.landing&&!!a&&a!==S&&!a.coop/* a co-op friend is a player seat (her own sends ride HER S.away) */&&!!t&&a.id!=null&&typeof RV==="function"&&RV(a.id)===a&&!!ACT[k]&&!ACT_NOSEND.includes(k)&&!together(a,t)&&!sameHouse(a,t)}catch(e){return false}}
 function ptTid(t){try{return ledgerId(t)}catch(e){return t===S?"me":t&&t.id!=null?"v"+t.id:null}}
 function ptNpcDeed(a,t,k,run,x){const sv=bestSent(a);if(!sv)return"";/* no free servant (all away): the deed is dropped, as an NPC with no one to send */
  ptSend({who:ptPid(sv,a),nm:sv.name,kind:"harm",by:"v"+a.id,byNm:a.name,place:t===S?(S.out?"lc":"home"):palaceOf(t),tgt:ptTid(t),
@@ -75051,7 +75063,7 @@ ptReg("npcMind",a=>ptNpcBack(a,(v,t)=>mindRun(v,t,a.a.k,a.a.err)));
 ptReg("npcAct",a=>ptNpcBack(a,(v,t)=>{let ix;if(a.a.item){v.inv=v.inv||[];v.inv.push(a.a.item);ix=v.inv.indexOf(a.a.item)}
  const T0=typeof TSB!=="undefined"?TSB.now:0;if(a.a.tsb&&typeof TSB!=="undefined")TSB.now=1;try{return runAct(v,t,a.a.k,ix)}finally{if(typeof TSB!=="undefined")TSB.now=T0}}));
 /* an NPC's trusted maid away on an errand (mm:<vid>) is away for EVERY deed of her mistress, not only the same deed sent again */
-function ptMaidOut(v){return !!v&&v!==S&&v.id!=null&&ptOn()&&ptBusy("mm:"+v.id)}
+function ptMaidOut(v){return !!v&&v!==S&&!v.coop&&v.id!=null&&ptOn()&&ptBusy("mm:"+v.id)}
 (function(){try{if(typeof AGRUN==="undefined")return;for(const k of Object.keys(AGRUN)){if(!/^cx\d*:maid/.test(k)||k==="cx2:maidSpy")continue;/* a MISTRESS's deed that uses her maid (cx2:maidTalk …); never the maid's own deeds ("maid:<key>", jagstaff) */const f0=AGRUN[k];if(!f0||f0.__ptm)continue;
   const f=function(v){if(ptMaidOut(v))return"";return f0.apply(this,arguments)};f.__ptm=1;AGRUN[k]=f}}catch(e){ptErr("maid lock",e)}})();
 (function(){try{if(typeof sendMaid==="function"){const s0=sendMaid;sendMaid=function(a){if(ptMaidOut(a))return"";return s0.apply(this,arguments)}}
@@ -75077,7 +75089,7 @@ PT_NPC["cx2:plantSrv"]={kind:"bribe",who:v=>{let s=null;try{s=bestSent(v)}catch(
 try{ptNpcWire()}catch(e){ptErr("npcWire3",e)}
 /* ---- 20. TWO-WAY of §9 (role-parity cx4 ill route, jagacts4 p4IllCard → illBuy(v,"maid",k)): an NPC's trusted maid sent out by the Thần Vũ gate is
    away n khắc like hers (ledger, locked); caught or not is known at the due khắc with illBuy's own odds and bạc. ---- */
-(function(){try{if(typeof illBuy!=="function")return;const ib1=illBuy;illBuy=function(p,r,k){if(!p||p===S||r!=="maid"||!ptOn()||PT.landing||!p.maid||p.id==null)return ib1.apply(this,arguments);
+(function(){try{if(typeof illBuy!=="function")return;const ib1=illBuy;illBuy=function(p,r,k){if(!p||p===S||p.coop||r!=="maid"||!ptOn()||PT.landing||!p.maid||p.id==null)return ib1.apply(this,arguments);
   if(ptMaidOut(p))return"";ptSend({who:"mm:"+p.id,nm:p.maid.name,kind:"buy",by:"v"+p.id,byNm:p.name,place:typeof J95OUT_!=="undefined"?J95OUT_:null,a:{run:"npcBuy",v:p.id,k},lbl:`lén ra cửa Thần Vũ mua ${itm(k).n}`});PT.stat.npc++;return""}}catch(e){ptErr("npc illBuy wire",e)}})();
 ptReg("npcBuy",a=>{const v=RV(a.a.v);if(!v||!v.alive||v.out)return null;PT.landing=1;let r="";try{r=illBuy(v,"maid",a.a.k)||""}catch(e){ptErr("npcBuy",e)}finally{PT.landing=0}
  try{if(r)newsAdd(v,"ill",r,false)}catch(e){}return null});
@@ -78392,7 +78404,7 @@ if(typeof KIT_FACEFX!=="undefined"&&typeof lkItem==="function"){
  function clothXocLayer(file,fx){if(!/^fig-/.test(file))return"";if(typeof fx==="number")fx={xoc:fx};const on={};if(BAL.looks.xoc.on&&fx.xoc)on.xoc=fx.xoc;for(const k of["tra","uot","bun"])if(BAL.looks.stain.on[k]&&fx[k])on[k]=fx[k];if(!Object.keys(on).length)return"";
   const key=file+"|"+JSON.stringify(on);let e=CLO[key];if(!e){e=CLO[key]={src:"",t:0,id:++CLID};CLQ.push(key);if(CLQ.length>8)delete CLO[CLQ.shift()]/* HD layers are ~4 MB decoded each: keep 8 */;clothPaint(file,on,e)}
   return `<img class="${e.src?"kclo":"kclo kclo-wait"}"${e.src?"":' data-kclo="'+e.id+'"'} src="${e.src||BLANK}" alt="" aria-hidden="true" style="--fleft:0%;--ftop:0%;--fwidth:100%;--fheight:100%">`}
- const ent=KIT_FACEFX.get("lkcloth");if(ent){const h0=ent.html;ent.html=(p,file,z)=>{const fx={};for(const a of z.L)if(a[0]==="xoc"||a[0]==="tra"||a[0]==="uot"||a[0]==="bun")fx[a[0]]=a[1].lv;return Object.keys(fx).length?clothXocLayer(kitFile(file),fx):h0.apply(this,arguments)}}
+ const ent=KIT_FACEFX.get("lkcloth");if(ent){const h0=ent.html;ent.html=(p,file,z)=>{const fx={};for(const a of z.L)if(a[0]==="xoc"||a[0]==="tra"||a[0]==="uot"||a[0]==="bun")fx[a[0]]=a[1].lv;return Object.keys(fx).length?clothXocLayer(kitFile(file),fx):h0(p,file,z)/* was h0.apply(this,arguments) in a top-level arrow: ReferenceError "arguments is not defined" (coop-ptime-reds scan) */}}
  /* the cloth layer goes UNDER every face mark and the makeup (it repaints only the robe; the head is the picture's own) */
  (function(){if(typeof kitFxLayers!=="function")return;const f0=kitFxLayers;kitFxLayers=function(p,file){const h=f0.apply(this,arguments);if(!h||h.indexOf("kclo")<0)return h;const M=[];const rest=h.replace(/<img class="kclo[ "][^>]*>/g,m=>{M.push(m);return""});return M.join("")+rest}})();
  /* hide the plain picture under a finished cloth layer; toggled on every put so a cleared effect shows the picture again */
@@ -79982,13 +79994,19 @@ TH.NOOP.push("resultShow");
    gates read screenOff() (j1: true inside COOPW.ctx), so nothing of hers draws on the host's screen; her floaters / numbers / item and coin
    effects called in her run are captured here (UICAP, plain arguments only) and play on HER phone once, with the answer (TH.uiPlay).
    E's buổi step, B's life, C's world frame and D's deferred work stay quiet (turns that are not her tap). */
-const UICAP=new Set(["srvToast","kitLine","kitStatFx","feedback","kitCoins","kitGain","kitLose","kitReward","kitLearn","stipReveal","kitItemFx","kitSfx"/* F3 r1 review: her act sounds (jsfx W buy / sellItem / wkSell / giveTo → kitSfx) were silenced on the host and never played on her phone */]);
+const UICAP=new Set(["srvToast","kitLine","kitStatFx","feedback","kitCoins","kitGain","kitLose","kitReward","kitLearn","stipReveal","kitItemFx","kitNotice"/* review coop-ptime-reds r1 (whole family: her notices raised by her run on the host — jptime pt:go / pt:back / pt:ord, jrcv rcv:, jerr errand:, jstagehere close: — showed on the HOST's screen, her report text included, and never on hers): captured, shown on HER phone (uiPlay gives the «go» back) */,"kitSfx"/* F3 r1 review: her act sounds (jsfx W buy / sellItem / wkSell / giveTo → kitSfx) were silenced on the host and never played on her phone */]);
 for(const n of UICAP)if(!TH.NOOP.includes(n))TH.NOOP.push(n);
 TH.UICAP=UICAP;/* F4: a part adds the screen redraws it captures itself (its own wrappers push them to TH.uiCap); TH.uiPlay plays only names in this set */
 const uiArg=a=>{try{return JSON.parse(JSON.stringify(a,(k,v)=>typeof v==="function"||(typeof Node!=="undefined"&&v instanceof Node)?undefined:v))}catch(e){return null}};
 TH.tapRun=function(fn){const q0=quiet,u0=TH.uiCap;quiet=false;TH.uiCap=[];let r,ui;try{r=fn()}finally{quiet=q0;ui=TH.uiCap;TH.uiCap=u0}return {r,ui:ui&&ui.length?ui.slice(0,12):null}};
+/* a captured notice loses its «go» (a function never travels): given back by its id on her phone, the same go its maker set (a notice had a go iff it has a goLabel) */
+function noteGo(sp){try{if(!sp||typeof sp!=="object"||!sp.goLabel)return sp;const id=String(sp.id||"");let go=null;
+ if(/^pt:ord:/.test(id)&&typeof ptOrdQ==="function"&&typeof ptOrdOpen==="function"){const k=id.slice(7);go=()=>{const o=ptOrdQ().find(z=>String(z.id)===k);if(o)setTimeout(()=>ptOrdOpen(o),0)}}
+ else if(/^pt:/.test(id)&&typeof ptOpenTin==="function")go=ptOpenTin;else if(/^errand:/.test(id)&&typeof errOpen==="function")go=errOpen;
+ else if(/^rcv:/.test(id)&&typeof rcvOpen==="function")go=()=>rcvOpen(id);
+ return go?Object.assign({},sp,{go}):Object.assign({},sp,{goLabel:""})}catch(e){return sp}}
 /* guest: what her run on the host captured, played once on her own screen */
-TH.uiPlay=function(L){let n=0;for(const x of L||[]){if(!Array.isArray(x))continue;const [f,a]=x;if(!UICAP.has(f)||typeof window[f]!=="function")continue;
+TH.uiPlay=function(L){let n=0;for(const x of L||[]){if(!Array.isArray(x))continue;const [f,a]=x;if(!UICAP.has(f)||typeof window[f]!=="function")continue;if(f==="kitNotice"&&Array.isArray(a))a[0]=noteGo(a[0]);
  try{window[f].apply(null,Array.isArray(a)?a:[a]);n++}catch(e){console.error("thin uiPlay",f,e)}}TH.uiN=(TH.uiN|0)+n;return n};
 for(const n of TH.NOOP)if(typeof window[n]==="function"){const f=window[n];window[n]=function(){if(CW.ctx&&n!=="resultShow"){if(TH.uiCap&&UICAP.has(n)&&TH.uiCap.length<12)try{const a=[...arguments].map(uiArg);if(n==="kitLine"||n==="srvToast")a[0]=String(a[0]==null?"":a[0]).slice(0,300);TH.uiCap.push([n,a])}catch(e){}return}
   /* a result card whose snapshot was taken in another seat's context (her greeting's card at +30 ms, accEtqGo) is hers, never the host's */
@@ -81030,7 +81048,10 @@ function gOn(lv){return on(lv)&&!host()&&!!CW.seat&&!CW.ctx&&!!S&&!S.dead&&!CW.i
 function line(t){try{if(typeof kitLine==="function")kitLine(t);else log(t)}catch(e){}}
 function sendF(p){COOP.send({t:"do",op:"f",args:p.msg,base:TH.view?TH.view.v:0,id:p.id});E.last=p.id;p.at=Date.now()}
 function intent(name,args){const R=F.R[name],t00=performance.now();
- if(F.pend){F.stat.busy++;return "busy"}
+ if(F.pend){/* review coop-ptime-reds r1: the pending one is her due-task tick (ptTickHer, asked by the game, not by her): her tap is HELD and sent
+    right after its answer (it was refused as busy = her tap lost, f4 swap D1); one held tap at most, a second tap is the ordinary double tap */
+  if(F.pend.n==="ptTickHer"&&name!=="ptTickHer"&&!F.next){F.next={name,args,snap:snapV};F.stat.held=(F.stat.held|0)+1;lg(["held",name]);return true}
+  F.stat.busy++;return "busy"}
  let a=null;try{a=R.enc(args)}catch(e){console.error("thin F enc",name,e)}if(a==null){F.stat.bad++;lg(["bad",name]);return "bad"}
  const V=TH.view;if(!V||!V.o){F.stat.bad++;return "bad"}
  if(R.snap&&typeof rsnap==="function")try{rsnap()}catch(e){}
@@ -81044,7 +81065,9 @@ function intent(name,args){const R=F.R[name],t00=performance.now();
  const t1=performance.now();try{CW.lockNext();render()}catch(e){}p.pr=Math.round(performance.now()-t1);return true}
 function answered(dr){const p=F.pend;if(!p||!dr||dr.id!==p.id)return;F.pend=null;F.stat.ans++;const ms=Date.now()-p.t0;F.stat.ms.push(ms);if(F.stat.ms.length>40)F.stat.ms.shift();
  lg(["ans",p.n,ms,dr.r&&dr.r.st]);F.lastAns={id:p.id,n:p.n,ms,r:dr.r/* the view's own object (main behaviour; the guest's name lens edits it in place) */,r0:dr.r?J(dr.r):null/* F2: the answer as sent */,pre:p.pre,pr:p.pr,tries:p.tries};
- back(p,dr.r);try{CW.lockNext();render()}catch(e){}cardLater(p,dr);}
+ back(p,dr.r);try{CW.lockNext();render()}catch(e){}cardLater(p,dr);nextGo();}
+/* the tap held behind her due-task tick: sent now (its own snapshot for the result card) */
+function nextGo(drop){const n=F.next;if(!n)return;F.next=null;if(drop||!on()||host())return;try{snapV=n.snap;intent(n.name,n.args)}catch(e){console.error("thin F held",e)}finally{snapV=null}}
 /* F2 (gap 2/3): what the host's run wrote OUTSIDE her person (her khắc `used`, the pop-up popIdx/popMsg, tab / __fromMap) comes back with
    the answer and is set here (only while she is still on the buổi the intent was made in: a buổi step resets them anyway); toasts her run
    raised on the host (srvToast / kitLine, no-ops there) play here; then the registration's after-hook (e.g. the place card of a walk that
@@ -81056,7 +81079,7 @@ function back(p,r){const R=F.R[p.n];if(!R||!r||r.st!=="ok")return;
 COOP.on("thinview",V=>{try{if(!host()&&V&&V.o)answered(V.o.dr)}catch(e){console.error("thin F view",e)}});
 COOP.on("error",m=>{try{const p=F.pend;if(!p||!m||m.id!==p.id||host())return;if(m.code==="nohost"||m.code==="nothin")p.at=0/* resend at the next tick */}catch(e){}});
 setInterval(()=>{const p=F.pend;if(!p||host())return;if(!on()||COOP.frozen)return;if(Date.now()-p.at<8000)return;
- if(p.tries>=3){F.pend=null;F.stat.give++;lg(["give",p.n,p.id]);line("Việc ấy chưa thành, xin thử lại.");try{CW.lockNext();render()}catch(e){}return}
+ if(p.tries>=3){F.pend=null;F.stat.give++;lg(["give",p.n,p.id]);line("Việc ấy chưa thành, xin thử lại.");try{CW.lockNext();render()}catch(e){}nextGo();return}
  p.tries++;F.stat.resend++;lg(["resend",p.n,p.id,p.tries]);sendF(p)},1000);
 /* F2 net loss (the whole intent family, F1 too): her socket can look open while dead (4G, sleep): the intent frame, or the host's answer,
    is lost, then COOP reconnects ("room"). Dropping the pending intent there lost her tap in silence (a P7 walk-spill red: the host ran the
@@ -81067,7 +81090,7 @@ setInterval(()=>{const p=F.pend;if(!p||host())return;if(!on()||COOP.frozen)retur
    `used`) belongs to the old buổi, so it is resent only once her reconnect view shows the SAME buổi (p.b0); another buổi → dropped with the
    same words. The check waits for her first view after the reconnect (p.rv), then the 1 s tick sends it (DONE dedupe on the host unchanged). */
 const stale=p=>p.room!==(COOP.state.room||"")||(COOP.state.week||0)!==p.w0;
-function dropP(p,why){F.pend=null;lg(["drop",p.n,p.id,why]);F.stat.drop=(F.stat.drop|0)+1;line("Việc ấy chưa thành, xin thử lại.");try{CW.lockNext();render()}catch(e){}}
+function dropP(p,why){F.pend=null;nextGo(1)/* stale room / buổi: the held tap goes with it (the same «not done» words below) */;lg(["drop",p.n,p.id,why]);F.stat.drop=(F.stat.drop|0)+1;line("Việc ấy chưa thành, xin thử lại.");try{CW.lockNext();render()}catch(e){}}
 COOP.on("room",()=>{const p=F.pend;if(!p)return;if(stale(p))return dropP(p,"room");
  p.rv=Date.now();p.at=Infinity/* held until her view after the reconnect (or 8 s: the check runs on what she has) */;F.stat.reNet=(F.stat.reNet|0)+1;lg(["reNet",p.n,p.id])});
 function reCheck(p){if(stale(p))return dropP(p,"room");if((S.buoi||0)!==p.b0)return dropP(p,"buoi");p.rv=0;p.at=0/* same buổi: sent again at the next tick */}
@@ -81097,7 +81120,7 @@ TH.onDo("f",(a,m)=>{a=a||{};const id=m&&m.id;if(loaded!==LSK()){DONE.clear();don
   else{/* F2 r2 (review r1 item 1, every registration, F1 too): her tap runs as solo (TH.tapRun: quiet off → her cards into her Q = part D
       cards on her phone; her toasts / floaters / coin and item effects captured, played on HER phone with the answer; nothing on the host's screen) */
    if(R.noRes)NORES++;let T;try{T=TH.tapRun(()=>PRE[a.n].apply(null,args))}finally{if(R.noRes)NORES--}/* F3: a registered UI function's own wrapR card shows on her phone (cardLater), never here */
-   const r=T.r,ui=T.ui;F.stat.run++;if(R.log&&r)log(r);out={st:"ok",r:typeof r==="string"?r.replace(/<[^>]+>/g,"").slice(0,200):null};
+   const r=T.r,ui=T.ui;if(a.n==="ptTickHer")F.stat.ptRun=(F.stat.ptRun|0)+1;else F.stat.run++;/* her due tasks landing (coop-ptime-reds) is not one of her acts: counted apart */if(R.log&&r)log(r);out={st:"ok",r:typeof r==="string"?r.replace(/<[^>]+>/g,"").slice(0,200):null};
    if(typeof r==="boolean")out.rv=r;if(ui&&ui.length)out.ui=ui.slice(0,4);
    if(R.back){const c={};for(const [n,g] of R.ctx||[])if(R.back.includes(n))try{const v=g();c[n]=v===undefined?null:J(v)}catch(e){}out.c=c}
    if(R.host)try{R.host(args,out)}catch(e){console.error("thin F host",e)}}}
@@ -81180,6 +81203,31 @@ for(const n of ["scout","invite"])F.reg(n,Object.assign({},W7,{host:null,mine:A=
 F.reg("srvGoTo",Object.assign({},W7,{ret:false,mine:A=>typeof A[0]==="string"&&!!S&&!S.dead&&!Q.length,enc:A=>({k:A[0]}),dec:a=>a&&typeof a.k==="string"?[a.k]:null}));
 F.reg("kcGo",Object.assign({},W7,{ret:false,mine:A=>typeof A[0]==="string"&&!!S&&!S.dead&&!Q.length,enc:A=>({k:A[0]}),dec:a=>a&&typeof a.k==="string"?[a.k]:null,
  done:(A,r)=>{if(r&&r.rv&&S&&S.place===A[0]){tab="act";try{render()}catch(e){}}}/* its tap handler switches to the act tab when it went (jkc :626) */}));
+/* PARALLEL TIME on the guest (coop-ptime-reds; jptime S.away): her sends created on the host (runAct gift / harm / plant …, scout, invite) or on
+   her phone land at their due khắc. The landing runs the act's own runner (roll, NPC answer, giveTo, runAct, ordered servant, late order =
+   Từ chối with its cost) = her act's effects, so it runs ONCE on the HOST in her context (her khắc clock `used` rides in ctx), never on her
+   phone (before: her phone landed it alone → NPC rolls / world writes made on her phone, then lost under the host's next view). Her phone only
+   decides that something is due (her clock is hers: spend stays on her phone) and asks; ptTick / «Đợi tin» (ptWait → spend → ptTick) both
+   end here (asked right after the tap, after the tap's own intent). A tick while another of her intents is pending is asked again by the 1 s check below (lands right after, never twice:
+   the host lands only what is still due in her stored person). Level 6 (F1: her runAct sends are host-made from there). */
+if(typeof ptTick==="function"&&typeof ptNow==="function"&&typeof ptZ==="function"){
+ const ptDue=()=>{try{if(!S||S.dead||typeof ptOn!=="function"||!ptOn())return false;const n=ptNow();
+  return ptZ().some(a=>a&&!a.back&&a.due<=n)||(Array.isArray(S.ordQ)&&S.ordQ.some(o=>o&&n>=o.due))}catch(e){return false}};
+ const t0=ptTick;let PTIN=0;
+ /* the ONE road her landings take: an intent run on the host in her context with HER clock (ctx used) */
+ window.ptTickHer=function(){PTIN++;try{return t0.apply(this,arguments)}finally{PTIN--}};
+ F.reg("ptTickHer",{lv:LV,ctx:[CX[0]],back:["used"],mine:()=>ptDue(),enc:()=>({}),dec:()=>[],ret:undefined});
+ ptTick=function(){
+  /* guest: her phone never lands; something due at her own tap moment → asked as the intent (a world step on her phone waits for the 1 s ask) */
+  /* asked AFTER the tap that moved her clock (setTimeout): sent in the same tick it would take the one pending slot and her act's own intent
+     (doAct: spend → runAct) would be refused as busy = her tap lost */
+  if(on()&&!host()){if(gOn()&&ptDue())setTimeout(ptAsk,0);return}
+  /* host inside her context but not her tick intent (her act run with the HOST's khắc clock, e.g. a spend inside runAct): her landings wait for her intent */
+  if(host()&&CW.ctx&&on()&&!PTIN)return;
+  return t0.apply(this,arguments)};
+ function ptAsk(){try{if(F.pend||host()||!on()||COOP.frozen||!gOn()||!ptDue())return;F.stat.ptAsk=(F.stat.ptAsk|0)+1;window.ptTickHer()}catch(e){}}
+ setInterval(ptAsk,1000);
+}
 /* gap 4: the "did she arrive?" callers (j77Tap, walkSpillTick) open the place card right after goTo; while her walk there is pending the
    card waits for the answer (placeCard) — never a card before the host has said, never a lost tap */
 if(typeof j77Card==="function"){const jc=j77Card;j77Card=function(k){const p=F.pend;if(p&&p.walk&&p.walk===k&&!host()&&on(L7)){p.card=1;return}return jc.apply(this,arguments)}}
@@ -81328,7 +81376,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="cf3971e0c1f6";window.CTM_BUILD=BUILD;
+const BUILD="07d12042fd3a";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
