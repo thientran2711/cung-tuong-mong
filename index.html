@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"b08d3375+","t":"2026-11-19T13:12Z","c":"coop-thin F6b: her phone opens a game replayed by an answer on the next tick (inside the view apply gOn is false and exRun / the steal game…","b":"494e72fa7e70","h":[{"s":"43548e0e+","t":"2026-11-19T11:46Z","c":"coop-thin-f4 K2 (review parallel-time #4): accept the parallel-time road of rcpAskGo maid"},{"s":"a5e2d8e7+","t":"2026-11-19T09:30Z","c":"opt-scroll-reset r2: an option card picture load (fixed .kaart box) no longer re-picks the frame (first wheel lost); merged origin/main 620…"},{"s":"3b3f7631+","t":"2026-11-19T10:24Z","c":"ev-pic-followups r2: scan SHOT/DSF/TAG env for review shots"},{"s":"5d9cdd5d+","t":"2026-11-19T10:03Z","c":"rebuild"},{"s":"f01df861","t":"2026-11-19T09:09Z","c":"review coop-thin-f3 r1: merge F2 LAND READY 7627f79c; generated files rebuilt"},{"s":"4ed2831d+","t":"2026-11-19T07:18Z","c":"law3-cost-only: index.html / sw.js regenerated"},{"s":"0da546e9","t":"2026-11-19T07:16Z","c":"role-parity-drift r1: build line"},{"s":"eff20119+","t":"2026-11-19T06:33Z","c":"ev-pic-coverage: picture required in M/L/XL frames only, S frames reported apart (owner OD 19/11 ~04:55Z)"},{"s":"a64f06c7+","t":"2026-11-19T06:29Z","c":"seal-lean-2 r2: rebuild site"},{"s":"38af6387","t":"2026-11-19T06:23Z","c":"minister-agents review r1: one core (gift regard + backs in BAL.tdCourt, j55 reads tuyen.pow / imp.deep / clanRel), censor name unique in e…"}]};
+window.CTM_BI={"s":"5b2cb906","t":"2026-11-19T13:43Z","c":"coop-thin F6b: her Tự học card is marked used on the host by its slot (F6a gHand shows HER own aaMG card, another subject, in the host's sl…","b":"9a2e380cc7e2","h":[{"s":"9aad0c66+","t":"2026-11-19T12:03Z","c":"role-parity-drift-2: build line"},{"s":"43548e0e+","t":"2026-11-19T11:46Z","c":"coop-thin-f4 K2 (review parallel-time #4): accept the parallel-time road of rcpAskGo maid"},{"s":"a5e2d8e7+","t":"2026-11-19T09:30Z","c":"opt-scroll-reset r2: an option card picture load (fixed .kaart box) no longer re-picks the frame (first wheel lost); merged origin/main 620…"},{"s":"3b3f7631+","t":"2026-11-19T10:24Z","c":"ev-pic-followups r2: scan SHOT/DSF/TAG env for review shots"},{"s":"5d9cdd5d+","t":"2026-11-19T10:03Z","c":"rebuild"},{"s":"f01df861","t":"2026-11-19T09:09Z","c":"review coop-thin-f3 r1: merge F2 LAND READY 7627f79c; generated files rebuilt"},{"s":"4ed2831d+","t":"2026-11-19T07:18Z","c":"law3-cost-only: index.html / sw.js regenerated"},{"s":"0da546e9","t":"2026-11-19T07:16Z","c":"role-parity-drift r1: build line"},{"s":"eff20119+","t":"2026-11-19T06:33Z","c":"ev-pic-coverage: picture required in M/L/XL frames only, S frames reported apart (owner OD 19/11 ~04:55Z)"},{"s":"a64f06c7+","t":"2026-11-19T06:29Z","c":"seal-lean-2 r2: rebuild site"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -80053,7 +80053,10 @@ capFn("kitPersonReveal");/* the new servant's reveal of that set (kmPush is sile
 const reg12=(name,K,o)=>{prPost(name);return reg10(name,K,Object.assign({lv:L12,ctx:CX12},o||{}))};
 const raw0=(raw,sk)=>sk||inR(raw,MSC().raw);
 /* her own card in her host deck (the same rule F6a uses: index + name; else the first not-done card with that name) */
-function myCard(c){if(!c||!Array.isArray(deck))return -1;const i=c.i|0;if(deck[i]&&deck[i].n===c.n)return i;return deck.findIndex(a=>a&&a.n===c.n&&!a.done)}
+function myCard(c){if(!c||!Array.isArray(deck))return -1;const i=c.i|0;if(deck[i]&&deck[i].n===c.n)return i;const j=deck.findIndex(a=>a&&a.n===c.n&&!a.done);if(j>=0||!c.aa)return j;
+ /* her Tự học card (aaMG, still F6a's old road: __g): her phone shows ITS OWN Tự học card in the host's slot (F6a gHand: by name, else any
+    aaMG card of hers — another subject, another name) → the host's card is the one in that slot (her hand = the host's, slot for slot) */
+ if(deck[i]&&deck[i].aaMG&&!deck[i].done)return i;return deck.findIndex(a=>a&&a.aaMG&&!a.done)}
 
 /* her phone: a game opened by the answer of a card run on the host (F6a's act(i): the exam, the mirror, a steal card) is the card's own
    screen — the half result card that answer brings (cardLater → resultShow, next tick) is not shown over it (solo shows none before the
@@ -80150,7 +80153,7 @@ window.stealEnd=function(src,raw,sk){const f0=window.__smgFake;window.__smgFake=
    PRE.act on the host, below every window wrapper — without this the host ran her steal card with no capture: the game opened nowhere) */
 const wAct=a0=>function(i){const a=Array.isArray(deck)?deck[i]:null;
   if(a&&typeof window.stealIsCard==="function"&&window.stealIsCard(a)&&(g12()||hctx())&&!window.__smgFake){const self=this,args=arguments;return withSrc({c:1,i,n:a.n},()=>a0.apply(self,args))}
-  if(a&&a.aaMG&&g12())CARD={i,n:a.n};/* her Tự học card: marked used on the host with her lesson's end */
+  if(a&&a.aaMG&&g12())CARD={i,n:a.n,aa:1};/* her Tự học card: marked used on the host with her lesson's end */
   return a0.apply(this,arguments)};
 const wDo=d0=>function(i,k){if((k==="steal"||k==="road")&&(g12()||hctx())&&!window.__smgFake){const v=rivals[i];
    if(v&&v.id!=null){const self=this,args=arguments;return withSrc({v:v.id,k},()=>d0.apply(self,args))}}return d0.apply(this,arguments)};
@@ -80227,7 +80230,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="494e72fa7e70";window.CTM_BUILD=BUILD;
+const BUILD="9a2e380cc7e2";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
