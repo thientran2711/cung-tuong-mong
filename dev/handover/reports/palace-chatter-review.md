@@ -1,0 +1,36 @@
+# palace-chatter — BIG REVIEW (E17r, opus; session_01DgYSWpBsw8KySsaQyoredH; opened by Foreman E #11)
+depth 2 (lineage limit 8). START_CTX ~1 % of 1M (get_session reads 0; own estimate). Rollover at ~26 %, ceiling 60 %.
+★ THE 18 LAWS: read the block at the very top of dev/rules/START_CORE.md FIRST (all 18; laws 1–6 top priority); put this line in every brief/takeover prompt; reviewers FAIL any break.
+PRIORITY #1 CHECK ('palace-chatter|jchat|K-HEAD-SAY|kitSay|watcher|staff'): OD L1627 (5) + L1943/L1945/L1949 read verbatim | ledger 0 | claims: E17/E17c rows | main: jmark.js kitSay (K-HEAD-SAY LIVE), j22.js:20 watcher(p) (a consort's most trusted REAL servant), j10 consort staff | review/*: review/palace-chatter 115717a8 (under review) | reuse: as listed.
+
+## VERDICT: FAIL palace-chatter 115717a8 — 2 jchat fixes + 1 BLOCKING kit item (MAIN)
+Reviewed on review/palace-chatter-rv @ 612a1b43 = 115717a8 + merge of LIVE origin/main edb2e724 (only index.html / sw.js conflicted; rebuilt by build_site.sh). Pushed for the fixer.
+
+### BLOCKING for landing (KIT, MAIN = kit keeper — NOT a jchat fix; jchat must not work around it)
+B1. K-HEAD-SAY × EMO-SEAL LEAN (KIT_REQUESTS row 19/11, OPEN): user-visible in NORMAL play on BOTH devices. Seen in my own video: Fold 755x1000 t≈10–14 s and iPad 1180x820 t≈8–14 s — the speaking maid's OWN seal leans in (img.kemo-big, ~2.3×) right over her bubble; Fold hides the first words ("…sương lạnh, tiểu chủ khoác thêm áo."), iPad hides almost the whole line ("…tiểu chủ … áo."); the lean also returns at Ngự hoa viên during the gift exchange (iPad t≈23–29 s). Every arrival home hits it (the greeting / first maid line is exactly when the seal leans). Ask stays as filed: no lean-in while that person has an open kitSay bubble, no new bubble under a leaning clone.
+
+### FIX (jchat, fixer E17c session_01DgYSWnKfwZsB2F92BggLCq)
+F1. LAW 6b REAL PEOPLE — dev/build/jchat.js:173–175 (eavLines): the overheard partner is a made-up person "cung nữ thân cận của <name>" (no entity, no name) while every consort has a REAL household (`v.staff`, j10) and the game already has the one picker `watcher(v)` (j22.js:20: her most loyal real servant, or her maid). Use that real servant (her name via nameOf, sp {srv:"f"|"m",name}); no real servant → quote only the consort's own lines or skip that fact. Remove the dead `mate` code (line 173, `void mate`). Re-run palace-chatter.js eavesdrop check + add: the partner's name ∈ v.staff names.
+F2. HAPPENING TALKS FIRST — the E17c Fold note, decided: NOT a placement bug (in my Fold run the gift pair DID say the gift lines first: "Mời muội muội nhận lấy món này…" → "Vậy tần thiếp không khách sáo nữa, đa tạ."), but two real causes make it flaky: (a) jchat.js:134 + BAL.chat.w.hap .8 = one tick in five a happening pair that is on screen talks idle topics instead (owner OD:L1627 (5): "people in one happening stand together in one frame and talk back and forth") → BAL.chat.w.hap 1 (always first while the deed is on; idle only after its pool is spent); (b) jchat.js:140 `play(T,"idle")` logs happening lines as "idle", so the video log / CHAT.log cannot prove it (E17c's video read "idle") → tag "hap" for happening exchanges; video + unit test assert the first exchange at the place has tag "hap".
+
+### CHECKS (all on 612a1b43)
+(1) LAW 9/10 KIT FIRST — PASS. jchat shows every line only through kitSay / kitSayClear (jchat.js:105–109); no createElement / style / class / layer / CSS of its own (scan: grep createElement|style.|innerHTML|classList.add|insertAdjacent|<style in jchat.js + jchatl.js = 0 writes; diff has no CSS). Consistency: the only say-bubble users are jchat (kitSay) and the kit sample; .khead/.ksay appear only in jact.js / jmark.js. Same bubble look in greeting, idle, happening, both devices.
+(2) OWNER WORDS, real run, both devices (node dev/test/palace-chatter-video.js, Fold 38.6 s / iPad 35.9 s, 0 page errors; 1 frame/s, every frame LOOKED 3× + full-size pairs):
+- maid greets on arrival — PASS ("Hôm nay là Tiết Thanh minh, tiểu chủ về là vui nhất." Fold / "Mời tiểu chủ vào, trà sớm vừa pha." iPad), said by HER maid Ngọc Bích standing beside her.
+- text inside the bubble, above the head with a clear gap, tail on the speaker, never on any head, inside the stage — PASS on every frame where no seal leans (see B1).
+- happening pair side by side on one page and talking back and forth — PASS (Fold: the 2 people of page 2; iPad: silhouettes 2+3 adjacent, bubble over each in turn).
+- SPEECH only — PASS (no thought element, no thought words in banks).
+- NPCs chat every 1–2 min — BAL.chat.gap 60..120 s PASS. Note (not a fail): on Fold page 0 holds her + one person (j59), so NPC↔NPC talk shows only on later pages; on page 0 the one person speaks to her (unit run Fold: kinds srv-me / con-me / th-me only; iPad adds con-con / con-hh).
+(3) see B1.
+(4) LAW 6b speakers: present() = tokens really on the stage, in view, alive, maid not away — unit check "every speaker stands on that stage" PASS both; third people only through live-world needs; strangers "vị <rank>" — PASS, except F1. LAW 7: 853 distinct strings (≥ 300), my own scan: no digit / % (only {pl2} slot names), no bạn/tôi/em/anh/chị/mình/modern words (one hit "điểm tâm" = breakfast, OK); address only via jvoice tokens — PASS. LAW 4: every timing/weight in BAL.chat; code fallbacks (`||2600` etc.) only when BAL.chat is missing; one-core-guard PASS (core gates PASS). No-repeat: unit "no line repeated" PASS both.
+PERF: unit tick p90 ≤ 15 ms PASS both. Quickcheck run 1 (3 runs) FAIL buổi 3875/1468; run 2 (5 runs) PASS 1667/1566 (render 301/288, tab 540/590, tasks>200 24/22). The slow buổi runs come from random event load, not jchat: same build, 12 buổi each, BAL.chat.on 1 vs 0 → median 855 vs 900 ms (off also had 2951 / 1923 / 1765 outliers); render with chatter on/off 52 vs 55 ms (min of 12). → PERF PASS.
+CO-OP + SERVANT ROAD: palace-chatter-host.js Fold 9/9, iPad 9/9 PASS (lines in the kit's .ksay-lay with no jerr layer; guest seat writes no S.pcx).
+OLD SAVE: quickcheck old save from live loads + plays a buổi — PASS (both runs). (Nit: palace-chatter.js "old save" check is always true — replace with a real deser of a save without pcx, or drop it; quickcheck already covers.)
+TESTS: palace-chatter.js Fold 24/24, iPad 24/24 PASS · chatl-bank PASS (853 distinct) · core gates PASS · img-allowlist OK.
+
+### NITS (fixer may take with F1/F2, not blocking)
+N1. greet [#fest] lines are one mood for every festival ("vui nhất", "thật là phúc" also on Tiết Thanh minh, a day of grave visits) — give fest lines a festival-mood tag or keep them neutral.
+N2. CHAT_L.hap pools (51 exchanges) never name the real object of the deed (gift {it}); fine for now.
+
+SHOTS / VIDEO: not in git (owner OD 16/11 18:50Z). Scratch on the E17r container: /home/user/wt/e17r-out/v-fold.mp4, v-ipad.mp4, sheet-fold.jpg, sheet-ipad.jpg, pair-fold-a.jpg (greeting OK | seal over bubble), pair-fold-b.jpg (gift pair), pair-ipad.jpg (seal over bubble | gift pair). CDN R2 is 401 for E → FOR MAIN: re-shoot with node dev/test/palace-chatter-video.js file:///<wt>/ W H out.mp4.
+ROUND 2: I stay open; after F1+F2 (and MAIN's B1) I re-run the unit + video on both devices and give PASS with the final merge.
