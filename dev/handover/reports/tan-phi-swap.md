@@ -62,3 +62,15 @@ Semi-realistic painterly guofeng portrait style, near-3D realistic rendering wit
 
 ## JOB 2 (waiting for ROOT-36 GO + N5c --log/--verify + item table)
 4 gens: c06 + c25 a18 v0, new t4 + new t5, `--spec5pose`, frontal; sheet old t4 | new t4 | old t5 | new t5 → img/_review/tan-phi/sheet1.jpg. No mass.
+
+---
+# HANDOVER W106 → sample painter (JOB 2, after ROOT-36 GO + N5c --log/--verify + item table)
+State: JOB 1 done. Builder commits fcba546 (swap: t4 = Phi F design at t4 luxury, t5 = old t4 design at t5 luxury) + e7522ad (TAN_CAPE_PEARLS sparse pearl overlay on the t4 capelet, one switchable phrase). Nothing is running; 0 gens made by W106.
+JOB 2 recipe (4 gens, no mass):
+- Prompts = exact stdout, never edited (rule 0): `python3 dev/art/t8-prompt-B/build.py c06 v0 --low 4 --spec5pose`, `... c06 v0 --low 5 --spec5pose`, same for c25 (a18 = default age). Add N5c's `--log` when it lands; run `--verify` on the ledger before building the sheet.
+- Held item = whatever build.py prints (3f list / N5c item table). Frontal only (3d2): reject any three-quarter turn or look-back and regen fresh.
+- Refs per A0 (2 images, no royal swatch for t4/t5): style3_girls Xm9tPkMBfo + her own a18 t1 v0 face (c06 rgXsjcmxtc, c25 u5WqFZ2QLD; if the Magnific account changed, re-upload img/_review/consort-tiers/<cNN>/b10/<cNN>_a18_t1_v0.png). Never --nostyle.
+- Settings: Magnific gpt-2-6, 1024x2304, 2k, count 1, folder ba4aecfe-efce-47e2-b53f-30d292091886; then images_remove_background. Look at every image: bare forehead, closed lips, pins upward, no phoenix; t4 = round capelet + sparse pearls + NO cloud collar; t5 = layered robe + cloud collar.
+- Sheet: rows c06, c25; columns old t4 (img/_review/t8-reprompt/t1t6/<cNN>_a18_t4_v0.png) | new t4 | old t5 (current live/sample t5 image of that person) | new t5 → CDN img/_review/tan-phi/sheet1.jpg (cdn_sync.py, CLOUDFLARE_API_TOKEN=proxy-injected) → ROOT-36. Mass for everyone only after the owner says so.
+- Honest notes to carry: Phi F capelet lost its brocade, all-over gold flowers and dense pearl edge (Phi luxury); the sparse pearl overlay wording is ROOT-36's reading, still being confirmed by the owner.
+W106 stops here (rollover line reached).
