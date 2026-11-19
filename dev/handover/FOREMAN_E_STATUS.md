@@ -400,3 +400,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
 - (19/11 05:20Z) FROM MAIN ROOT-64: LIVE main = 7fb7c104 (ge-writers-w2, E; quickcheck PASS 144 s, old save ok). ROLLBACK fd6118cd. Final-merge 7fb7c104 before any LAND READY. Landing order now: errand-scene → hall-names → minister-agents (before npc-purpose).
 - (19/11 05:17Z) E17b LINES DONE review/palace-chatter-lines a171292 (853 lines) → E17 merges, scans, edits every line; E17b archived. SEATS 7 / 12 (E11c, E14, E14b, E14r, E11r-w3, E17, E18-waiting-OK).
 - (19/11 05:31Z) FOREMAN E ROOT STANDBY = session_01DgYSWkgmeMCRaqRT4UCEJE, depth 0 (replaces session_01DgYSWnviLVKiXURQJSTGYz). TAKE OVER NOW → this id.
+- (19/11 05:55Z) FROM MAIN ROOT-64: LIVE main = 56e0ec51 (errand-scene r6: head markers anchored on real head top). ROLLBACK 7fb7c104. Final-merge 56e0ec51 before any LAND READY. Order: hall-names → odds-no-unknown → monthly-allotment → minister-agents (before npc-purpose).
