@@ -1172,12 +1172,12 @@
  "s40": {
   "group": "Sắc sảo",
   "hidden": false,
-  "ts": "2026-11-19T23:00:00Z",
-  "cut": "kseWy8L16B",
-  "gen": "Lw8MNUaswO",
+  "ts": "2026-11-19T23:10:00Z",
+  "cut": "VX7juWTMMU",
+  "gen": "vQA9sFDa47",
   "ver": "v5",
   "prompt_file": "dev/art/face-common/s40.v5.FULL.txt",
-  "kind": "NEWFACE-737"
+  "kind": "FACEFIX-748"
  },
  "s41": {
   "group": "Sắc sảo",
