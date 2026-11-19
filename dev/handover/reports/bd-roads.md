@@ -222,3 +222,89 @@ Successor steps:
 5. Append §ROUND 2 results (tables above + writer 2's tables) here; push review/bd-roads; send ONE «SẴN SÀNG KIỂM bd-roads <sha> r2» to Foreman E (session_01DgYSWkgmeMCRaqRT4UCEJE) → E14r session_01DgYSWnZE2bT1FR9J6cjqDy.
 FOR E19 / Foreman E: (a) «Tô Lận» (蘇藺城) as the capital — confirm; (b) GRAND_ENDINGS.md (review/grand-endings-design) still names bd roads/GE in steppe words — the GE design doc must follow cat.py (law 14); (c) art FOR C lists in §BUILT are Bắc Địch scenes — must be redone for Ba Tư (Foreman C, via MAIN).
 Gotchas: text functions (t/g/rt/E.t/rare t as ()=>…) go through fill67 — fine; option `if:` variants need their own BAL fx row at the same index (rdFx maps by index of the full list); bdO(k,v) returns "" (safe inside go); rdFb treats 0 as unset.
+
+## §WRITER 2 r2 — fixes for review r1 (bd_tuyet + bd_hen; E14b, review/bd-roads-w2, base review/bd-roads @d51b86b0)
+PRIORITY #1 CHECK ('bd-roads r2'): review r1 dev/handover/reports/bd-roads-review.md (FAIL: law 2 climaxes, 6b moved people, 6c objects) | review/bd-roads @d51b86b0 (main merged, bdO moved into jrd_bd.js — reused, my copy gone) | claims: E14c lead, me bd_tuyet + bd_hen. Touched only jrd_bd2.js + the writer-2 block of jbalbd.js.
+
+### (1) Law 2 — climaxes (all 16 x1 of bd_tuyet + bd_hen), lead rule: soft-fail option base ≥ 15 below every hard-fail option, never cheaper-and-likelier
+| chapter | hard fail [win, lose] before → after | soft fail [win/win2, mid] before → after | sure mid |
+|---|---|---|---|
+| bd_tuyet .4 | 35 · suc −3 → 45 · suc −3 | 45 · suc −2 → 30 · suc −2 | danh −2 → duc +1 |
+| bd_tuyet .5 | 35 → 45 | 45 · bac −80 → 30 · bac −40 | same |
+| bd_tuyet .6 .7 .8 .11 | 35 → 45 | 45 (.11: 40) · suc −2 → 30 · suc −2 | same |
+| bd_tuyet .9 | 35 → 45 | 45 · duc −2 → 30 · duc −2 | same |
+| bd_tuyet .10 | 35 → 45 | 45 · duc −3 → 30 · duc −2 | same |
+| bd_hen .4 .5 .6 .7 .9 .11 | 35 → 45 | 45 · suc −2 → 30 · suc −2 | same |
+| bd_hen .8 | 35 → 45 | 45 · bac −80 → 30 · bac −40 (text: «phạt bổng lộc», was «cấm túc» with no confinement) | same |
+| bd_hen .10 | 35 → 45 | 40 · duc −3 → 30 · duc −2 | same |
+The ác-leaning soft options («xử nặng cả toán», «giá có lợi…», «đốt lều sốt», «đổi lương lấy ngựa chiến» …) are no longer dominant: lower odds by 15, a fail that still costs.
+
+### (2) Law 6b — scan of every BDP id in jrd_bd2.js after a move / kill
+| id | moved / killed at | later mentions | fixed how |
+|---|---|---|---|
+| asnc | .4 met; .8 w "ai"; .9 lose bdKill; .11 w "tn" | .10 x1 «Tự trao lệnh bài cho A Sử Na Cát» · .11 s1/s2/s3 | already guarded (.10 option `if` bdAlive, .11 openings by bdAlive); no change |
+| phong | .4 w "kinh" (was in s1 only) · .9 "nguc" · .10 win "kinh" / fled "tn" · mid "tn" · lose bdKill | .5–.8 Hội Đồng quán · .11 s1 «Chàng đi cùng sứ đoàn» | .4 s2 options now move him to the capital too (s1/s2 are one slot); .11 s1 only while w "kinh"; NEW .11 s4 «Chàng đã đi trước» when he fled by the west gate (w "tn"); s2 exile, s3 coffin unchanged |
+| lie, olac, thatmoc, bado, tuyetcau, kd | not used by bd_tuyet / bd_hen (lie only as «quân của thúc phụ» on the steppe, never moved in these roads) | — | — |
+
+### (3) Law 6c — objects through the bdO ledger (one helper, jrd_bd.js)
+| object (bd.o.*) | holder before → after | chapter / option |
+|---|---|---|
+| trangsuc (her jewel box) | her → ban (sold for grain) | bd_tuyet .4 s1 |
+| day (chief's leather cord) | asnc → vua / ta / asnc | bd_tuyet .4 s2 (3 options) |
+| hoimon (dowry chest) | ta → kho → ve / ban | .5 t1, .11 c1 (c1 only if "kho") |
+| sokho (granary ledger copy) | thư lại → vua / ta / tra | .5 c1 |
+| baouot (wet grain sack) | trạm → dsv (Đô sát viện) / tram | .6 c1 |
+| nguatrang (white mare) | asnc → vua / asnc / ta (Thượng tứ viện stall) | .6 t1 |
+| de (the tribe's goats) | asnc → thon / asnc / ta | .7 t1 |
+| aobong (cotton coats) | cung → ai | .8 s1/s2 |
+| baithuoc (her mother's recipe) | ta → thaiy / ta | .9 t1 |
+| lenhbai (gate tally) | lão tướng → ta / tra / asnc | .10 s1, x1 (option `if` reads it) |
+| thuthuc (uncle's arrow letter) | ta → dot / ta / giu | .10 t1 |
+| khuc (winter song) | — → thien / oan | .11 t1, rare |
+| day2 (new cord) | sứ → ta | .11 s1 |
+| damo (grave stone) | — → ai / tn | .11 s3 |
+| co / chi (grass sprig / green thread) | phong → ta / dot · ta → phong | bd_hen .4 s2 |
+| cung (horn bow) | vua → phong | .4 c1 (on success) |
+| nguaban (reward horse) | vua → phong | .4 x1 |
+| da (oath stone) | phong → ta / tra / vua / chon; coat lining flag → phong with the coat | .5, .11 c1/s3/s4, rare |
+| dao / tram / khan (knife / hairpin / kerchief) | swapped at the oath | .6 t1 |
+| daingoc (jade belt) | vua → phong | .6 x1 (on success) |
+| chen (poisoned cup) | ta → thaiy → dly on .7 win | .7 s1, c1, E.win |
+| thu / thuhoi / thuv (seized letter / her reply / {v}'s letter) | dly / dot / vua · dot / phong / dly / vua · ta | .8 |
+| aolong (her mother's fur coat) | ta → phong | .11 s2 |
+
+### Tests (build of dbc8a5c6)
+- structure probe: both roads full, numbers = options everywhere (bd_hen_11 s4 added), 0 page errors.
+- bd-roads-bal 20 lives per road (one road per process): static both roads: no-loss 0, spread>6 0, dominated climaxes 0, not-harder-with-rank 0, digits/% 0, unknown tokens none. Bots: the 20-life process crashes the browser target after ~12 lives (memory), so run in 10-life batches; before the crash every life reached .11 (bd_tuyet 12/12: win 6 · mid 4 · lose 2; bd_hen 5/5). Batch results follow in a later line.
+- bd-scan.py: 0 UNGUARDED, 0 NO BOOK. bd-batu-switch.js: PASS (0 steppe words). Token probe: new bd life → land «Ba Tư», pb «Vương thúc», bdCountry "bt".
+- cat.py: not touched (not in my two files); no bd_tuyet/bd_hen row of mine there.
+
+### (4) Ba Tư rewrite (owner OD 19/11 ~06:40Z; E19 mapping foreign-princess-3-history.md §A.2 / §C.2 / §E) — text only, in place (law 14)
+Ids, beat keys, flags, bdO / BDP keys, option ORDER and every number unchanged; country words through the tokens of NCL.bt ({land} Ba Tư, {mh} Vương hậu, {pb} Vương thúc, {quan} Vương trung vương), never typed. Probe: a new bd life on bd_hen resolves land «Ba Tư», pb «Vương thúc», mh «Vương hậu», bdCountry "bt"; static measure «unknown tokens: none».
+| before (Bắc Địch) | after (Ba Tư) | where |
+|---|---|---|
+| bd_tuyet «Năm tuyết trắng» — snow famine on the steppe | «Năm đoàn người chạy nạn» — refugees of the Đại Thực advance on the silk road | .4 title, g, E |
+| A Sử Na Cát, trưởng lão bộ lạc biên | A La Hám, lão tướng trấn Tật Lăng (BDP n/r/want → E14c) | all chapters |
+| cửa ải Nhạn Môn · lão tướng trấn thủ Nhạn Môn | Ngọc Môn quan · quan trấn thủ Ngọc Môn | .4–.11 |
+| sợi dây da tết (the chief's token) | dấu ấn bạc khắc ngựa có cánh (bdO "day", "day2") | .4 s2, .11 s1 |
+| «người của ta đành tự lấy» (threat) | «Thần không dám đòi, chỉ dám xin…» (plea) | .4 s2 |
+| đổi lương lấy ngựa / ngựa cái chửa / đồng cỏ phía nam sông | đổi lương lấy bạc Ba Tư và lạc đà / lạc đà cái / hòm bạc giữ lửa | .4 x1, .5 s2, .6 |
+| thư lại Binh bộ bớt ngựa | thư lại Hộ bộ nấu bớt bạc | .6 c2 |
+| cướp biên — kho thóc thôn biên, lão nông | hồ thương bị cướp trên đường Lương Châu, lão phu xe | .7 |
+| đàn dê cuối cùng | đàn lạc đà cuối cùng (bdO "de") | .7 t1, .11 c1 |
+| thầy thuốc thảo nguyên · sữa ngựa, khói lá ngải | thầy thuốc Ba Tư · nước lựu, khói nhũ hương | .9 |
+| chôn trưởng lão bên chân ải · hòn đá trên mộ | tháp đá cho chim trời (không chôn) · lửa thánh bên tháp (bdO "damo") | .9 E.lose, .11 s3 |
+| quân thúc phụ · thư thúc phụ «làm Khả đôn cả thảo nguyên» | quân {pb} đã hàng Đại Thực · «làm {mh} cả {land} dưới cờ Đại Thực» | .8 c1, .10 |
+| «Khúc ca mùa xuân» / khúc ca tuyết trắng / «Bia đá bên ải Nhạn Môn» | «Khúc ca Nô Nhụ» (tết xuân phân) / «Bia đá bên Ngọc Môn quan» | .11, RD97L |
+| .4 rare «Tuyết tan giữa đông», áo lông của mẹ, «Công chúa tan tuyết» | «Lửa thánh qua cửa ải», khăn gấm của {mh}, «Công chúa giữ lửa» | BD97 |
+| bd_hen «Lời thề bên đống đá» | «Lời thề trước lửa thánh» (thần giữ lời thề, đền lửa) | .4–.11 |
+| Thác Bạt Phong | Mật Hồ Đạt (Mihrdād; BDP n/r/want → E14c) | all |
+| hòn đá thề khắc tên | nhẫn ấn khắc cánh chim (bdO key "da" kept) | .4–.11 |
+| «Chôn hòn đá dưới gốc tùng» | «Dâng nhẫn vào lửa thánh ở Hỏa Tiên từ» (da "chon" kept) | .5, .11 |
+| cành cỏ quanh đống đá · «Đốt cành cỏ» | nhúm tro lò lửa thánh gói lụa đỏ · «Rải gói tro xuống hồ» | .4 s2 |
+| tục kết nghĩa thảo nguyên, rượu sữa ngựa | tục kết nghĩa thề trước lửa, rượu nho bát bạc | .6 |
+| thư chữ {land} | thư chữ Bát La Bà (Pahlavi) | .8 |
+| tiếng tù và · tuyết cuối mùa · về bắc · cửa Tây (ngựa) | tiếng chiêng · gió cuối đông · về tây · Kim Quang môn | .4, .10, .11 |
+| Trấn biên tướng quân | Hữu vũ vệ tướng quân (Peroz's real Tang title) | .11 s1 |
+Left as is (GE design names, comments only): ge1–ge4 titles in the road header comments (the GE wave renames them).
+Rare path/bad lists re-checked: every entry matches a raw option name of its road.
