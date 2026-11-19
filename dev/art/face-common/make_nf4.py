@@ -165,3 +165,23 @@ assert out3["s12.v5b"]!=out3["s12.v5"]
 for k,v in out3.items():
     open(os.path.join(D,f'{k}.FULL.txt'),'w').write(v)
     print(f"== {k}\n{v}\n")
+
+# ---------------- (6) owner Lượt 696: c06 c14 c19 c31 become SẮC SẢO — new sharp face from the approved v5 block (s07/s09 recipe) ----------------
+# Base = their teeth-fix prompts (cNN.v3t: strong closed-mouth sentence kept). Only age (16→17 for c06), face and expression change;
+# rank colours, outfit, hair, item, pose, angle stay. No "phoenix" eye words (owner Lượt 695 on s08).
+SS6={"c06":[("clearly DEFINED OVAL face","clearly DEFINED, slightly SHORT OVAL face")],
+     "c14":[("clearly DEFINED OVAL face","clearly DEFINED LONG OVAL face")],
+     "c19":[("clearly DEFINED OVAL face","clearly DEFINED HEART-OVAL face")],
+     "c31":[("STRAIGHT, sharp, clearly defined brows","long STRAIGHT, sharp, clearly defined brows")]}
+out4={}
+for cid,sw in SS6.items():
+    t=open(os.path.join(D,f'{cid}.v3t.FULL.txt')).read()
+    of=t[t.index("Her face: ")+10:t.index(". Expression: ")]
+    oe=t[t.index("Expression: ")+12:t.index(" Hair: ")]
+    f=ss_face(sw)+". "+EYES_STRAIGHT[:-1]
+    assert "phoenix" not in f.lower()
+    t=t.replace(of,f).replace(oe,SS["expr"]).replace("about 16.","about 17.")
+    out4[f"{cid}.v5"]=t
+for k,v in out4.items():
+    open(os.path.join(D,f'{k}.FULL.txt'),'w').write(v)
+    print(f"== {k}\n{v}\n")
