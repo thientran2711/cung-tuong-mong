@@ -905,7 +905,7 @@ def build_ty_cold(c,state):
         else: s+=f" COLOUR RULE: the whole trung y, collar and sash are one plain {col}, as soft and pale as the rank-colour portrait frame; no other colour anywhere."
         s+=" Any flower or pattern on the fabric would be real silk embroidery, never printed or pasted-on."
     s=s+_pose(item,hk,right)+CLOSE+END   # TYC_PIN_RULE is dropped in __main__ AFTER spec5pose (it anchors on that sentence)
-    assert s.count(TYC_PRE_FR)>=1; s=s.replace(TYC_PRE_FR," "+MAMA_ANGLE,1).replace(TYC_PRE_FR," the body with the shoulders slightly turned (not dead-frontal, not sideways), the face towards the viewer.")   # ANGLE LAW (owner Lượt 229 A), same sentence as build_mama
+    assert s.count(TYC_PRE_FR)>=1   # F4b-4 (ROOT-40): angle words now come ONLY from the final __main__ pass (Nữ đế A header + HH B 3/4), same as every path; was MAMA_ANGLE (invented)   # ANGLE LAW (owner Lượt 229 A), same sentence as build_mama
     assert s.count(TYC_PRE_RENDER)==1; s=s.replace(TYC_PRE_RENDER,"exactly matching the rendering of the style reference image",1)   # PRE's "reference portraits" = the style faces -> name it style only
     return s
 # ---------- N5d item 5: MAID ladder --state tm0..tm4 (+ nhat / mama PENDING). Names (FIGURE_GATE CUNG NỮ LADDER, Lượt 174, owner "174 đúng rồi"):
@@ -938,11 +938,7 @@ def build_mama(c):
     item,hk=age_item(c,"mama","an embroidered handkerchief","one")
     s+=MAMA_HAIR+_pose(item,hk,right)+CLOSE
     _fr=" body and face frontal, standing squarely facing the viewer, no turn."
-    assert s.count(_fr)==1,"PRE frontal sentence"
-    s=s.replace(_fr," "+MAMA_ANGLE)
-    _fr2="body and face frontal, standing squarely facing the viewer, no turn, head tilted gently toward the viewer."
-    assert s.count(_fr2)==1,"pose frontal sentence"
-    s=s.replace(_fr2,"the body with the shoulders slightly turned (not dead-frontal, not sideways), the face towards the viewer, head tilted gently toward the viewer.")
+    assert s.count(_fr)==1,"PRE frontal sentence"   # F4b-4 (ROOT-40): MAMA_ANGLE (invented) dropped -> the final __main__ angle pass gives the copied Nữ đế A / HH B wording, same as every path
     return s+MAMA_IMG3+END
 MAID_IDENT=IDENT.replace("and hairstyle colour","her own hairstyle (the same at every rank) and hair colour",1)
 TM_FADED=["grey-blue","light indigo","earth brown"]
@@ -1228,7 +1224,8 @@ def spec5pose(o,c,t,force=None):
     # only the turn/side words change, the hand/item action stays; every spec5 pose then states the frontal body.
     for _o,_n in SPEC5_FRONTAL: raw=raw.replace(_o,_n)
     if globals().get("STATE")=="cold": raw=raw.replace("a gold hairpin","her one plain wooden hairpin")   # TY0 fix2: COLD_OUTFIT "ONE plain wooden hairpin ... NO gold"; the pose keeps her wooden pin (same pose choice, no skip)
-    pose=raw.format(prop=prop)+(", the body with the shoulders slightly turned (not dead-frontal, not sideways), the face towards the viewer" if re.fullmatch(r"ty[1-8]|cold",str(globals().get("STATE"))) else ", body and face frontal, facing the viewer squarely, no turn")+(", with stately grace" if t>=7 else ", poised" if t>=5 else "")
+    pose=raw.format(prop=prop)+", body and face frontal, facing the viewer squarely, no turn"+(", with stately grace" if t>=7 else ", poised" if t>=5 else "")   # F4b-4: ty/cold too -> final __main__ angle pass
+    global SP5_ODD; SP5_ODD=bool(_pick%2)   # F4b-3 angle (ROOT-40): odd spec5 slots get the HH B slight 3/4 turn in the final pass (__main__)
     # N5b (ROOT-36 order; FIGURE_GATE A0 rule 3 + canon 19/11 (e) "Nữ đế mass pose = CALM at all ages (item below the chin, no flying cloth)"): --state nude only -> one calm sentence for every person and age; every other output byte-identical
     # F4 fix1 (ROOT-39, owner verdict 19/11 ~03:05Z item 5 "bộ trang phục nó lại thuần luộc, đi xuống dưới chân"): the N5b sentence ("standing still and upright ... elbows close to her body ... all hang straight down, still ... no movement") was the ONLY difference from the approved Hoàng hậu prompt B / Nữ đế A outfit+fabric text and made the robe a stiff tube.
     # Now = approved HH prompt B pose wording copied ("calm standing pose; she holds ... at chest height below the chin") + 3d2 frontal words + Nữ đế A "with stately grace"; only the canon (e) clause "no flying, floating or windblown cloth" kept. The fabric sentence (HH B: "hang and fold naturally ... natural creases, never stiff") is untouched and no longer contradicted.
@@ -1410,6 +1407,15 @@ if __name__=="__main__":
     # ROOT-38 REF ORDER (owner A0 REFERENCES l.16): image 1 = style image, image 2 = her own face/live picture, image 3 = royal swatch.
     # Approved texts keep their old numbering in source; only the ordinal words are renumbered here (style first <-> identity second). --nostyle / --golden: unchanged.
     if "--nostyle" not in sys.argv and "--golden" not in sys.argv: _o=_reorder_refs(_o)
+    # F4b-3/4 ANGLE, EVERY path (ROOT-40 19/11 ~03:55Z; owner Lượt 225/229/236-237 "đứng thẳng trực diện luôn, nhìn không có duyên dáng ... cái prompt tư thế của mày rất là cứng"; FIGURE_GATE ANGLE LAW (A)):
+    # dead-frontal words removed from every output (low t1-t6, t7, t8, kc/ngheo, ty/cold, tm*, mama, trieu, bdq, nude). ONE wording, COPIED from approved prompts only:
+    # header = Nữ đế A "face clearly visible, 3/4 or frontal view."; odd spec5 slots = HH B "body turned slightly three-quarters to the right"; else nothing (A's pose has no angle words).
+    # --golden (frozen reproduction) untouched. build_npc.py (imports PRE) untouched.
+    if "--golden" not in sys.argv:
+        _o=_o.replace("face clearly visible, body and face frontal, standing squarely facing the viewer, no turn.","face clearly visible, 3/4 or frontal view.")
+        _t34=", body turned slightly three-quarters to the right" if globals().get("SP5_ODD") else ""
+        for _ph in (", body and face frontal, standing squarely facing the viewer, no turn",", body and face frontal, facing the viewer squarely, no turn"):
+            while _ph in _o: _o=_o.replace(_ph,_t34,1); _t34=""
     print(_o,end="")
     _lg=[x for x in _RAW if x not in ("--log","--refs")]
     if "--gen-id" in _lg: _i=_lg.index("--gen-id"); _gid=_lg[_i+1]; _lg[_i:_i+2]=[]
