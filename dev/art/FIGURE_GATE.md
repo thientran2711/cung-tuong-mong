@@ -565,3 +565,7 @@ RULES FROM IT (ROOT-40 reading): (A) ANGLE LAW, overrides 3d2 FRONTAL ONLY for N
 "Tiếp đến nè, hình C06 ở lượt 228, lãnh cung 36 tuổi, cùng là 36 tuổi, nhưng mà cái gương mặt hoàn toàn khác. Đang không biết lấy cái prompt kiểu gì đây, không biết lấy cái hình mẫu nào làm prompt này, không thể nào hiểu nổi. Rồi ở bên Trung Y 65 tuổi cũng vậy. ... Trung Y lãnh cung mới mày sửa nè, cái tóc khác hoàn toàn, không hiểu nổi luôn."
 "Bây giờ mày không được vẽ một cái hình gì nữa hết, tao cần mày phải confirm lại với tao một lần nữa. Bây giờ mày vẽ một người mới hoàn toàn, từ cái bậc thiếu nữ lên tới bậc hoàng hậu. Mày vẽ ổn rồi mày mới được vẽ tiếp."
 → ALL GENS STOPPED (every worker told 03:50Z). ty/cold fix1 REJECTED (face + hair drift from live). Next: ONE brand-new person, thiếu nữ → Hoàng hậu, confirmed with the owner BEFORE any gen; nothing else is drawn until she approves it.
+
+### OWNER LƯỢT 232 (19/11 ~03:55Z, VERBATIM) — no invented face
+"Ủa mày nói mày vẽ một gương mặt vuông mới là sao? Tao nói mày lấy M09 vẽ lại để lấy cái áo, lấy cái kiểu áo, kiểu vải, kiểu thêu của hai cái hình mà tao đang có, hai cái hình mẫu. Mày lại đi vẽ hình mới là làm sao?"
+→ Do NOT generate a new face portrait. First: REDRAW the M09 picture with the outfit cut + fabric + embroidery of her two approved squares (pink c01 / green c12 = 6AbGv6EiJO), same M09 face — the Lượt 229 test.
