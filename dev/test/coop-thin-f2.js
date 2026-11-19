@@ -52,6 +52,10 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  for(const o of [H,G])await o.p.evaluate(()=>{try{if(BAL.coopTm)BAL.coopTm.buoiMs=600000}catch(e){}if(S.srv)S.srv.risen=1;if(S.kc)S.kc.inPal=1;S.rank=3;S.sung=Math.max(S.sung||0,40);S.kpWarn=1;render()});
  if(!(await until(H,()=>!!COOPW.friend(),null,20000)&&await until(G,()=>!!COOPW.friend(),null,20000)))await week(H,G,'setup');
  const both=async f=>[await H.p.evaluate(f),await G.p.evaluate(f)];
+ /* scan rows reached only through the buổi / week steps (nextBuoi, endTurn, monthTick, contestWeek): those steps never run INSIDE her intent
+    run (E / G run them, quiet unchanged there); counted on the host for the whole suite, plus any card with handlers and no pid (D.bad) */
+ await H.p.evaluate(()=>{window.__inTap={};for(const n of ['nextBuoi','endTurn','monthTick','contestWeek','rivalsTurn']){const f=window[n];if(typeof f!=='function')continue;window[n]=function(){if(COOPW.ctx&&COOPW.thin.uiCap)__inTap[n]=(__inTap[n]|0)+1;return f.apply(this,arguments)}}
+  const tr=COOPW.thin.tapRun;COOPW.thin.tapRun=function(fn){const b=COOPW.thin.D.bad.length;try{return tr.apply(this,arguments)}finally{const d=COOPW.thin.D.bad.length-b;if(d)__inTap.bad=(__inTap.bad||[]).concat(COOPW.thin.D.bad.slice(-d))}}});
  ok(await until(G,lv=>COOPW.thin.lvl>=lv&&!!COOPW.thin.view&&COOPW.thin.C.isLens(rivals),LVL,40000),'F0 level on, the guest NPC list is the lens',await both(()=>[COOPW.thin.lvl,COOPW.thin.C.isLens(rivals)]));
  for(let i=0;i<3;i++){await clear(H);await clear(G);await sleep(300)}
  /* settle: the host's view of this moment has arrived */
@@ -235,6 +239,8 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   const bacUp=g.bac-g0.bac;
   ok(!!k&&st.q&&got&&g.place===k&&g.q&&g.q.ok===1&&bacUp>0&&seen&&g.cards.length===1&&hostClean,'P11 her walk\'s own card: quest «Đi một nơi trong cung» done + Bạc, the «Xong việc» card on HER phone once, none on the host',{k,st,got,g,bacUp,h0,h});
   ok(g.ans.includes('kitStatFx')&&g.ui>g0.ui,'P11 her Bạc floater (kitStatFx, captured on the host) plays on her phone',{ans:g.ans,ui:[g0.ui,g.ui]});
+  if(process.env.SHOTS&&seen){fs.mkdirSync(process.env.SHOTS,{recursive:true});await G.p.evaluate(()=>{const i=Q.findIndex(m=>/^Xong việc/.test(String(m.t||'')));if(i>0)Q.unshift(Q.splice(i,1)[0]);try{showModal()}catch(e){}});await sleep(1500);
+   const vp=G.p.viewportSize();await G.p.screenshot({path:path.join(process.env.SHOTS,`f2r2-guest-xongviec-${vp.width}x${vp.height}.png`)});const hv=H.p.viewportSize();await H.p.screenshot({path:path.join(process.env.SHOTS,`f2r2-host-${hv.width}x${hv.height}.png`)})}
   table.push({P11:{k,g,h}});await G.p.evaluate(()=>{Q.length=0;try{closeModal()}catch(e){}render()})}
  /* P12 (LUẬT SỬA CẢ NHÓM): the emitter family. A test-only probe registered on both seats (the same TH.F.reg road every intent takes) runs
     each emitter in HER context on the host; table: shown on her seat / on the host. Rows = dev/test/coop-thin-quiet-scan.js kinds. */
@@ -271,6 +277,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  console.log('PLACE table:');for(const x of table)console.log(' ',JSON.stringify(x).slice(0,360));
  if(process.env.OUT){fs.mkdirSync(process.env.OUT,{recursive:true});fs.writeFileSync(path.join(process.env.OUT,`f2-places-L${LVL}-s${SWAP}.json`),JSON.stringify(table,null,1))}
  {const [ho,go]=await both(()=>COOPW.oldRun||{});const n=o=>Object.values(o).reduce((a,b)=>a+b,0);ok(n(ho)+n(go)===0,'P8 no old guest state guard ran (COOPW.oldRun, both seats)',{host:ho,guest:go})}
+ {const t=await H.p.evaluate(()=>window.__inTap);ok(t&&!Object.keys(t).length,'P12b no buổi / week step and no un-sendable card (D.bad) inside any intent run of hers on the host (whole suite)',t)}
  ok(!H.errs.length&&!G.errs.length,'no page errors',{h:H.errs.slice(0,4),g:G.errs.slice(0,4)});
  if(process.env.SHOTS){fs.mkdirSync(process.env.SHOTS,{recursive:true});for(const o of [H,G]){await o.p.evaluate(()=>{try{render()}catch(e){}});await sleep(800);const vp=o.p.viewportSize();await o.p.screenshot({path:path.join(process.env.SHOTS,`f2-L${LVL}-${o.name}-${vp.width}x${vp.height}.jpg`),type:'jpeg',quality:70})}}
  const n=res.filter(x=>x[0]).length;console.log(`coop-thin-f2 L${LVL}${SWAP?' swap':''}: ${n}/${res.length}`);await b.close();process.exit(n===res.length?0:1)})().catch(e=>{console.error(e);process.exit(2)});

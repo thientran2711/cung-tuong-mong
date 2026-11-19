@@ -50,15 +50,20 @@ for(const f of files){const src=fs.readFileSync(path.join(DIR,f),'utf8');let ast
 const thf=fs.readFileSync(path.join(DIR,'jcoopthinf.js'),'utf8');
 const roots=new Set();for(const m of thf.matchAll(/F\.reg\("(\w+)"/g))roots.add(m[1]);for(const m of thf.matchAll(/for\(const n of \[([^\]]+)\]\)F\.reg/g))for(const x of m[1].matchAll(/"(\w+)"/g))roots.add(x[1]);
 roots.add('chooseM');
+/* cut: the names that do nothing inside her context on the host (TH.NOOP + the UICAP list in jcoopthin.js; resultShow runs) */
+const thn=fs.readFileSync(path.join(DIR,'jcoopthin.js'),'utf8');const CUT=new Set();
+for(const m of thn.matchAll(/TH\.NOOP=\[([^\]]+)\]/g))for(const x of m[1].matchAll(/"(\w+)"/g))CUT.add(x[1]);
+for(const m of thn.matchAll(/const UICAP=new Set\(\[([^\]]+)\]/g))for(const x of m[1].matchAll(/"(\w+)"/g))CUT.add(x[1]);
+CUT.delete('resultShow');
 const seen=new Map();const q=[...roots].map(r=>[r,null]);for(const [r] of q)seen.set(r,null);
-while(q.length){const [n]=q.shift();for(const c of G.get(n)||[])if(!seen.has(c)){seen.set(c,n);q.push([c,n])}}
+while(q.length){const [n]=q.shift();if(CUT.has(n))continue;for(const c of G.get(n)||[])if(!seen.has(c)){seen.set(c,n);q.push([c,n])}}
 const via=n=>{const p=[];let x=n;while(x!=null&&p.length<8){p.unshift(x);x=seen.get(x)}return p.join(' > ')};
 const kind=t=>/Q\.(push|unshift|splice)|kitPanel\(|kitModal\(|card67\(|tdPop\(/.test(t)?'card (Q)':/\blog\(|agSoftTxt|logs/.test(t)?'Sổ ghi line':
  /popNum|feedback\(|kitStatFx|kitStatGlow|kitReward|kmPush|resultShow|document\.|kitFx|kitCoins|kitGain|kitLose|kitItemFx|kitSfx|sfx\(|btrKill|kitNewDay/.test(t)?'screen':/save\(|localStorage/.test(t)?'save':'gate / behaviour';
-const rows=reads.map(r=>({...r,k:kind(r.txt),reach:seen.has(r.o),path:seen.has(r.o)?via(r.o):''}));
+const dd=new Set();const rows=reads.filter(r=>{const k=r.f+':'+r.line;if(dd.has(k))return false;dd.add(k);return true}).map(r=>({...r,k:kind(r.txt),reach:seen.has(r.o)&&!CUT.has(r.o),cut:CUT.has(r.o),path:seen.has(r.o)?via(r.o):''}));
 const md=process.argv.includes('--md');
 if(md){console.log('| # | file:line | function | gates | reachable from an intent (path) |');console.log('|---|---|---|---|---|')}
-rows.forEach((r,i)=>{if(md)console.log(`| ${i+1} | ${r.f}:${r.line} | ${r.o} | ${r.k} | ${r.reach?'yes: '+r.path:'no'} |`);
+rows.forEach((r,i)=>{if(md)console.log(`| ${i+1} | ${r.f}:${r.line} | ${r.o} | ${r.k} | ${r.reach?'yes: '+r.path:r.cut?'no (a no-op in her context)':'no'} |`);
  else console.log(`${String(i+1).padStart(3)} ${(r.f+':'+r.line).padEnd(16)} ${r.o.padEnd(18)} ${r.k.padEnd(16)} ${r.reach?'REACH '+r.path:'-'}`)});
 console.log(`\n${rows.length} global-quiet reads in ${new Set(rows.map(r=>r.o)).size} functions; reachable from an intent: ${rows.filter(r=>r.reach).length}; roots: ${[...roots].join(' ')}`);
 module.exports={rows};
