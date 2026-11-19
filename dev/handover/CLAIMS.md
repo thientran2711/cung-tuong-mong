@@ -288,5 +288,5 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | medallion-size (sonnet; MAIN ROOT-69 order via C-AG #22: speaker face medallion too large over figure/title in event dialogs, kit part, whole group) | review/medallion-size; briefs/cag22-medallion-size.md | C-AG #22 for ROOT-69 | session_01Rc5AsMVX8FxdFVTmmDezsu | BLOCKED (waits seal-lean-3 LIVE; wk archived 19/11 11:40Z by C-AG #23) | 19/11 11:35Z |
 | MAIN ROOT-70 (opus; child of ROOT-69, depth 8 = LIMIT) | handover HANDOVER_SESSION9 | ROOT-69 | session_01Rc5AsKJHPE6qV9k9Ugyhj7 | RUNNING | 19/11 11:34Z |
 | FOREMAN C-AG #23 (opus; child of C-AG #22, depth 1) | handover FOREMAN_C_STATUS | C-AG #22 | session_01Rc5AsHuCYUKscp1y5MsPDQ | RUNNING | 19/11 11:40Z |
-| FOREMAN E #12 (opus; child of E #11, depth 2) | handover FOREMAN_E_STATUS | FOREMAN E #11 | session_01DgYSWoiPTxVs5xQni4RvZw | RUNNING | 19/11 11:38Z |
+| FOREMAN E #12 (opus; child of E #11, depth 2) | handover FOREMAN_E_STATUS | FOREMAN E #11 | session_01DgYSWoiPTxVs5xQni4RvZw | RUNNING | 19/11 11:38Z | PICKUP 11:42Z START_CTX ~5 %
 | kyngo-daily FIX r2 (opus E18b; 9 fixes from E18r) | review/kyngo-daily; briefs/E18b-kyngo-fix-r2.md | FOREMAN E #11 | session_01DgYSWose5CuxgwKoCBMKGm | RUNNING | 19/11 11:37Z |
