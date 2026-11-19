@@ -89,3 +89,23 @@ nc1–nc3 are FOREIGN princesses → no yellow. None of the 87 is a royal-family
   1. Thái hậu has no colour in RCOL. Royal yellow #EFBD69 follows B21; the deep plum trim #6E3A5E is my pick.
   2. In BACK a steam puff covers the hands for ~1 s, then fades, leaving a few tiny dots.
 - A1: no more groups until the owner OKs this sample.
+
+---
+
+# CP1 HANDOVER (19/11 ~22:05Z) — over my roll line (context 54.5 % of 1M; START ≈3 %, line 28 %, ceiling 60 %)
+- 22:01Z ROOT-56 relayed OWNER GO Lượt 719 for the MASS of mood-seal group sets and asked CP1 to coordinate it with child workers.
+  I did NOT start it: at 54 % I must hand over (rule: a worker rolls at START+25 %, and its COORDINATOR opens the successor).
+- Ready brief for the mass job: dev/handover/briefs/seal-groups-mass.md (recipe, the 38 keys, groups + prefixes, credit math).
+  CREDITS: 538 731 available; all 11 groups ≈ 1.29 M → does NOT fit. (a)+(b)+(c) ≈ 348 k fit; tell the owner before going past (j).
+- Open items: none of mine besides this. Season palettes (palettes_season.json + season_sheet1–3.jpg) not yet shown to the owner (per ROOT-56 handover).
+- FOR the coordinator (ROOT-57 or whoever opens the successor), takeover prompt for a "SEAL MASS" coordinator session:
+  "You are SEAL-MASS coordinator for Cung Tường Mộng (repo thientran2711/cung-tuong-mong, branch claude/cung-tuong-mong-handover-hj0h8w),
+  successor of CP1 session_01PEhRbvNebkpZ54ojbmG2mh. Report ONLY to Foreman C (current one in dev/handover/FOREMAN_C_STATUS.md). READ
+  dev/handover/briefs/seal-groups-mass.md + dev/art/emo-anim/groups/th-gian.md + dev/handover/reports/CP1-report.md (part 3 + handover).
+  Owner GO Lượt 719 (mass). Open one worker per group as your children (create_session, clone_depth 1, blob_limit_kb 300), order
+  (a) th- remaining 37 → (b) hh- → (c) pt- → (j) bg- → stop and report credits before (k) and the rest. LOOK at every sheet.
+  ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+  - The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+  - Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+  - Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
+  LINEAGE (owner 17/11; threshold overwritten by owner 18/11, verbatim: "Ủa ai ra cái luật là tầng 6 trở lên là bị cấm mở quảng đốc. Tầng 8 của mày là maximum thì cùng lắm là đâu đó tầng 7 là mới không mở quảng đốc thôi chứ."): your first STATUS/HANDOVER line states "depth <get_session lineage.depth>"; open workers as your children; ALWAYS roll over by opening your own child (create_session) at EVERY depth the system allows, up to the limit (8) — never stop early; ONLY when create_session is refused (limit reached or any error) write the handover — write the handover + a FOR MAIN line so the owner opens a ROOT from claude.ai. Every takeover prompt copies this line."
