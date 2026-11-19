@@ -52,6 +52,10 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  for(const o of [H,G])await o.p.evaluate(()=>{try{if(BAL.coopTm)BAL.coopTm.buoiMs=600000}catch(e){}if(S.srv)S.srv.risen=1;if(S.kc)S.kc.inPal=1;S.rank=3;S.sung=Math.max(S.sung||0,40);S.kpWarn=1;render()});
  if(!(await until(H,()=>!!COOPW.friend(),null,20000)&&await until(G,()=>!!COOPW.friend(),null,20000)))await week(H,G,'setup');
  const both=async f=>[await H.p.evaluate(f),await G.p.evaluate(f)];
+ /* scan rows reached only through the buổi / week steps (nextBuoi, endTurn, monthTick, contestWeek): those steps never run INSIDE her intent
+    run (E / G run them, quiet unchanged there); counted on the host for the whole suite, plus any card with handlers and no pid (D.bad) */
+ await H.p.evaluate(()=>{window.__inTap={};for(const n of ['nextBuoi','endTurn','monthTick','contestWeek','rivalsTurn']){const f=window[n];if(typeof f!=='function')continue;window[n]=function(){if(COOPW.ctx&&COOPW.thin.uiCap)__inTap[n]=(__inTap[n]|0)+1;return f.apply(this,arguments)}}
+  const tr=COOPW.thin.tapRun;COOPW.thin.tapRun=function(fn){const b=COOPW.thin.D.bad.length;try{return tr.apply(this,arguments)}finally{const d=COOPW.thin.D.bad.length-b;if(d)__inTap.bad=(__inTap.bad||[]).concat(COOPW.thin.D.bad.slice(-d))}}});
  ok(await until(G,lv=>COOPW.thin.lvl>=lv&&!!COOPW.thin.view&&COOPW.thin.C.isLens(rivals),LVL,40000),'F0 level on, the guest NPC list is the lens',await both(()=>[COOPW.thin.lvl,COOPW.thin.C.isLens(rivals)]));
  for(let i=0;i<3;i++){await clear(H);await clear(G);await sleep(300)}
  /* settle: the host's view of this moment has arrived */
@@ -201,6 +205,71 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   ok(lossReal&&g1.pend&&g1.place==='home'&&got&&g2.reNet===r.rn0+1&&run2-run0===1&&g2.place===k&&h2.place===k&&g2.used===r.tc,
    `P10 net loss (${mode==='send'?'her walk frame lost':'the host\'s answer lost'}): kept pending through the reconnect, sent again, the host ran it ONCE${mode==='answer'?' (resend answered from DONE)':''}, she arrives on both phones, khắc paid once`,
    {k,mode,r,g1,lossReal,got,g2,h2:{place:h2.place},runs:run2-run0,dup:dup2-dup0})}
+ /* P10c (review r1 item 2): the room stepped the buổi while her socket was dead (a time-out forceBend; simulated on her phone: her buổi moves
+    on before the reconnect view) → the intent made in the old buổi is NOT sent again: dropped with the "not done" words, never run */
+ {await reset();await until(G,()=>!COOPW.thin.F.pend,null,20000);if(await G.p.evaluate(()=>S.place!=='home'))await walk('goTo','home','home');
+  await reset();await G.p.evaluate(()=>{used=0;render()});await sync();
+  const k=await G.p.evaluate(()=>places().map(x=>x.k).find(k=>{try{return typeof k==='string'&&k!==S.place&&k!=='home'&&accessOf(S,k).ok&&!accEtq(S,k)&&!(typeof tyOn==='function'&&tyOn(S))&&walkOk(travel(S.place,k))}catch(e){return false}}));
+  if(!k)ok(true,'P10c: no open place to walk to (skipped)');
+  else{const run0=await H.p.evaluate(()=>COOPW.thin.F.stat.run);
+   const r=await G.p.evaluate(k=>{const F=COOPW.thin.F;window.__mute=1;goTo(k);return {id:F.pend&&F.pend.id,b0:S.buoi||0,d0:F.stat.drop|0}},k);
+   await sleep(1500);
+   await G.p.evaluate(()=>{S.buoi=(S.buoi||0)+1/* the room's step reached her while the frame was lost */;window.__mute=0;for(const s of window.__wss)try{if(s.readyState<=1)s.close()}catch(e){}});
+   const gone=await until(G,()=>!COOPW.thin.F.pend,null,30000);await sleep(2500);
+   const g=await G.p.evaluate(()=>({place:S.place,drop:COOPW.thin.F.stat.drop|0,last:COOPW.thin.F.log.slice(-3)}));const run1=await H.p.evaluate(()=>COOPW.thin.F.stat.run);
+   await G.p.evaluate(b=>{S.buoi=b},r.b0);await sync();
+   ok(!!r.id&&gone&&g.drop===r.d0+1&&run1===run0&&g.place==='home','P10c buổi stepped while her socket was dead: the old buổi\'s walk is dropped with the "not done" words, never sent again, never run',{k,r,gone,g,runs:run1-run0})}}
+ /* P11 (review r1 item 1, the repro): her own walk's cards. Tutorial quest «Đi một nơi trong cung» open, ONE real map tap (j77Tap) → the
+    quest is done + Bạc on her person AND the «Xong việc» card shows on HER phone, once; the host's screen shows none of it (no card, no
+    floater); her Bạc floater (kitStatFx, captured on the host) plays on her phone */
+ await reset();await until(G,()=>!COOPW.thin.F.pend,null,20000);if(await G.p.evaluate(()=>S.place!=='home'))await walk('goTo','home','home');
+ {const st=await G.p.evaluate(()=>{try{/* the chapter opens now (its variant = who she is NOW: the setup raised a maid, so a life-start maid chapter would have lapsed) */S.st=S.st||{};S.st.ms=null;msStart67('nhap14')}catch(e){return {err:String(e)}}
+    const m=S.st&&S.st.ms;const q=m&&m.q14&&m.q14.L.find(x=>x.id==='di');if(q){q.n=0;delete q.ok;delete q.x}Q.length=0;try{closeModal()}catch(e){}used=0;render();return {ms:m&&m.id,q:!!q,v:m&&m.q14&&m.q14.v}});
+  await sync();await H.p.evaluate(()=>{Q.length=0;try{closeModal()}catch(e){}window.__hq=[];window.__hk=0;const f=kitStatFx;window.__hkF=f})/* the host's own screen, watched below */;
+  const k=await G.p.evaluate(()=>{for(const x of places()){try{if(x.k!=='home'&&!accState(x.k).why&&!accEtq(S,x.k)&&walkOk(travel(S.place,x.k)))return x.k}catch(e){}}return null});
+  const h0=await H.p.evaluate(()=>({Q:Q.map(m=>m.t),lab:document.querySelectorAll('.ksfl').length,modal:!document.getElementById('modal').hidden&&document.getElementById('modal').textContent.slice(0,60)}));
+  const g0=await G.p.evaluate(()=>({bac:S.bac,ui:COOPW.thin.uiN|0}));
+  const r=await G.p.evaluate(k=>{const F=COOPW.thin.F;Q.length=0;j77Tap(k,'');return {id:F.pend&&F.pend.id}},k);
+  const got=r.id?await until(G,id=>!COOPW.thin.F.pend&&COOPW.thin.F.lastAns&&COOPW.thin.F.lastAns.id===id,r.id,15000):false;
+  const seen=await until(G,()=>Q.some(m=>/^Xong việc/.test(String(m.t||''))),null,8000);await sleep(800);await sync();
+  const g=await G.p.evaluate(()=>{const q=S.st&&S.st.ms&&S.st.ms.q14&&S.st.ms.q14.L.find(x=>x.id==='di');return {place:S.place,q:q&&{n:q.n,ok:q.ok},bac:S.bac,cards:Q.filter(m=>/^Xong việc/.test(String(m.t||''))).map(m=>m.t),ui:COOPW.thin.uiN|0,
+   ans:(COOPW.thin.F.lastAns&&COOPW.thin.F.lastAns.r0&&COOPW.thin.F.lastAns.r0.ui||[]).map(x=>x[0])}});
+  const h=await H.p.evaluate(()=>({Q:Q.map(m=>m.t),lab:document.querySelectorAll('.ksfl').length,modal:!document.getElementById('modal').hidden&&document.getElementById('modal').textContent.slice(0,60)}));
+  const hostClean=!h.Q.some(t=>/^Xong việc/.test(String(t)))&&!/Xong việc/.test(String(h.modal||''));
+  const bacUp=g.bac-g0.bac;
+  ok(!!k&&st.q&&got&&g.place===k&&g.q&&g.q.ok===1&&bacUp>0&&seen&&g.cards.length===1&&hostClean,'P11 her walk\'s own card: quest «Đi một nơi trong cung» done + Bạc, the «Xong việc» card on HER phone once, none on the host',{k,st,got,g,bacUp,h0,h});
+  ok(g.ans.includes('kitStatFx')&&g.ui>g0.ui,'P11 her Bạc floater (kitStatFx, captured on the host) plays on her phone',{ans:g.ans,ui:[g0.ui,g.ui]});
+  if(process.env.SHOTS&&seen){fs.mkdirSync(process.env.SHOTS,{recursive:true});await G.p.evaluate(()=>{const i=Q.findIndex(m=>/^Xong việc/.test(String(m.t||'')));if(i>0)Q.unshift(Q.splice(i,1)[0]);try{showModal()}catch(e){}});await sleep(1500);
+   const vp=G.p.viewportSize();await G.p.screenshot({path:path.join(process.env.SHOTS,`f2r2-guest-xongviec-${vp.width}x${vp.height}.png`)});const hv=H.p.viewportSize();await H.p.screenshot({path:path.join(process.env.SHOTS,`f2r2-host-${hv.width}x${hv.height}.png`)})}
+  table.push({P11:{k,g,h}});await G.p.evaluate(()=>{Q.length=0;try{closeModal()}catch(e){}render()})}
+ /* P12 (LUẬT SỬA CẢ NHÓM): the emitter family. A test-only probe registered on both seats (the same TH.F.reg road every intent takes) runs
+    each emitter in HER context on the host; table: shown on her seat / on the host. Rows = dev/test/coop-thin-quiet-scan.js kinds. */
+ {const reg=o=>o.p.evaluate(()=>{window.__thProbe=function(c){return (0,eval)(c)};return COOPW.thin.F.reg('__thProbe',{lv:7,ctx:[],back:[],mine:()=>true,enc:A=>({c:A[0]}),dec:a=>a&&typeof a.c==='string'?[a.c]:null})});
+  await reg(H);await reg(G);
+  const probe=async(code)=>{await reset();await until(G,()=>!COOPW.thin.F.pend,null,20000);await sync();
+   await H.p.evaluate(()=>{window.__hq0=Q.length;window.__hl0=document.querySelectorAll('.ksfl').length});const ui0=await G.p.evaluate(()=>COOPW.thin.uiN|0);
+   const id=await G.p.evaluate(c=>{Q.length=0;try{closeModal()}catch(e){}const F=COOPW.thin.F;__thProbe(c);return F.pend&&F.pend.id},code);
+   const got=id?await until(G,id=>!COOPW.thin.F.pend&&COOPW.thin.F.lastAns&&COOPW.thin.F.lastAns.id===id,id,15000):false;await sleep(700);await sync();await sleep(300);
+   const g=await G.p.evaluate(()=>({Q:Q.map(m=>String(m.t||'')),ui:COOPW.thin.uiN|0,r:COOPW.thin.F.lastAns&&COOPW.thin.F.lastAns.r0}));
+   const h=await H.p.evaluate(()=>({Q:Q.map(m=>String(m.t||'')).slice(window.__hq0||0),lab:document.querySelectorAll('.ksfl').length-(window.__hl0||0),toast:(document.getElementById('rtoast')||{}).className||''}));
+   return {got,g,h,ui:g.ui-ui0}};
+  const rows=[];
+  /* (a) inside her intent run on the host: quiet is off (cards / Sổ ghi lines as solo), every screen gate is off (nothing draws on the host) */
+  {const p=await probe("String(JSON.stringify({q:quiet,so:screenOff(),kf:kfOn(),iv:ievOn(),kr:!!krOn(),km:!!kmOn(),ctx:COOPW.ctx}))");const v=p.g.r&&p.g.r.r?JSON.parse(p.g.r.r):{};
+   rows.push(['gates in her run','quiet / screenOff / kfOn / ievOn / krOn / kmOn',JSON.stringify(v),v.q===false&&v.so===true&&!v.kf&&!v.iv&&!v.kr&&!v.km&&v.ctx==='b'])}
+  const CARD=[['card67 (j67: 10 callers)',"card67('result','Thử card67',[['Dòng','một']])",'Thử card67'],
+   ['tdPop (j55)',"tdPop('Thử tdPop',rivals.find(v=>v&&!v.coop&&v.alive),'<p>x</p>')",'Thử tdPop'],
+   ['kitPanel (jtq14 doneCard / introCard, the kit card)',"kitPanel({kind:'result',title:'Thử kitPanel',sections:[{h:'',rows:[['a','b','']]}],btn:'Đã hiểu'})",'Thử kitPanel'],
+   ['pushModal (plain card)',"pushModal({t:'Thử pushModal',btn:'Đã hiểu',h:'<p>x</p>'})",'Thử pushModal']];
+  for(const [n,code,t] of CARD){const p=await probe(code+";''");const her=p.g.Q.filter(x=>x===t).length,hs=p.h.Q.filter(x=>x===t).length;rows.push([n,'card (Q)',`her seat ${her} · host ${hs}`,p.got&&her===1&&hs===0])}
+  /* numbers / floaters: apply → popNum → kitStatFx (j1), the coin feedback (j11), toasts */
+  {const p=await probe("apply({bac:7});''");const ks=((p.g.r&&p.g.r.ui)||[]).map(x=>x[0]);rows.push(['apply → popNum / kitStatFx + coin feedback (j1, j11)','number / floater',`captured ${ks.join('+')||'-'} · played on her phone ${p.ui} · host labels ${p.h.lab}`,p.got&&ks.includes('kitStatFx')&&ks.includes('feedback')&&p.ui>=2&&p.h.lab===0])}
+  {const p=await probe("kitLine('Thử kitLine');''");const ks=((p.g.r&&p.g.r.ui)||[]).map(x=>x[0]);rows.push(['kitLine / srvToast (toast)','toast',`captured ${ks.join('+')||'-'} · played ${p.ui}`,p.got&&ks.includes('kitLine')&&p.ui>=1])}
+  /* a Sổ ghi line gated on quiet (j85 deed line through apply, jagknow tai mắt lines): quiet off in her run → the line is in her patch */
+  {const p=await probe("String(quiet===false)");rows.push(['Sổ ghi lines gated on quiet (j85 deed, jagknow tmTry / tmTake / tmNo / tmFear, jlogsync)','Sổ ghi line','quiet off in her run: '+(p.g.r&&p.g.r.r),p.got&&p.g.r&&p.g.r.r==='true'])}
+  for(const r of rows){console.log('  EMITTER',r[3]?'green':'RED  ',r[0],'|',r[1],'|',r[2])}
+  ok(rows.every(r=>r[3]),`P12 the emitter family in her intent run: every card on HER seat once and none on the host, numbers / toasts captured and played on her phone, the screen gates off on the host (${rows.filter(r=>r[3]).length}/${rows.length})`,rows.filter(r=>!r[3]));
+  table.push({P12:rows})}
  /* latency */
  {const ms=table.filter(x=>x&&typeof x.ms==='number').map(x=>x.ms).sort((a,b)=>a-b);if(ms.length)console.log('LATENCY tap→arrival ms (LAG '+(+process.env.LAG||0)+', host CPU ×'+(+process.env.CPU||1)+'): n='+ms.length+' median='+ms[ms.length>>1]+' min='+ms[0]+' max='+ms[ms.length-1])}
  if(TRIPSRC){const t=await G.p.evaluate(()=>window.__trip&&__trip()).catch(e=>({err:e.message}));
@@ -208,6 +277,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  console.log('PLACE table:');for(const x of table)console.log(' ',JSON.stringify(x).slice(0,360));
  if(process.env.OUT){fs.mkdirSync(process.env.OUT,{recursive:true});fs.writeFileSync(path.join(process.env.OUT,`f2-places-L${LVL}-s${SWAP}.json`),JSON.stringify(table,null,1))}
  {const [ho,go]=await both(()=>COOPW.oldRun||{});const n=o=>Object.values(o).reduce((a,b)=>a+b,0);ok(n(ho)+n(go)===0,'P8 no old guest state guard ran (COOPW.oldRun, both seats)',{host:ho,guest:go})}
+ {const t=await H.p.evaluate(()=>window.__inTap);ok(t&&!Object.keys(t).length,'P12b no buổi / week step and no un-sendable card (D.bad) inside any intent run of hers on the host (whole suite)',t)}
  ok(!H.errs.length&&!G.errs.length,'no page errors',{h:H.errs.slice(0,4),g:G.errs.slice(0,4)});
  if(process.env.SHOTS){fs.mkdirSync(process.env.SHOTS,{recursive:true});for(const o of [H,G]){await o.p.evaluate(()=>{try{render()}catch(e){}});await sleep(800);const vp=o.p.viewportSize();await o.p.screenshot({path:path.join(process.env.SHOTS,`f2-L${LVL}-${o.name}-${vp.width}x${vp.height}.jpg`),type:'jpeg',quality:70})}}
  const n=res.filter(x=>x[0]).length;console.log(`coop-thin-f2 L${LVL}${SWAP?' swap':''}: ${n}/${res.length}`);await b.close();process.exit(n===res.length?0:1)})().catch(e=>{console.error(e);process.exit(2)});

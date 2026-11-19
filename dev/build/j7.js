@@ -55,7 +55,7 @@ ev("empnight",()=>!S.preg&&S.sung>=BAL.visit.minSung,()=>({o:od(BAL.visit.show.o
  {n:`Phô tài: ${bestArt().n}`,fx:{suc:-BAL.visit.show.suc},x:`${word(p.o)} · thành: Sủng +${BAL.visit.show.sung}, Danh +${BAL.visit.show.danh}`,go:()=>{if(roll(p.o))apply({sung:BAL.visit.show.sung,danh:BAL.visit.show.danh})}},
  {n:"Khuyên ngài giữ long thể",fx:{duc:3,sung:-1}}]}));
 ev("minister",()=>S.rank>=2,()=>({o:od(BAL.odb.j7.odO_5+S.tai/3+(has("chamchinh")?15:0))}),p=>({who:pEmp(),
- t:"Hoàng thượng đặt bản tấu xuống: “Thượng thư Hộ bộ xin tăng thuế muối. "+kSay("emp",S,"{Goi}")+" nghĩ sao?”",o:[
+ t:"Hoàng thượng đặt bản tấu xuống: “"+(typeof minOff==="function"?minOff("Hộ bộ","Thượng thư Hộ bộ"):"Thượng thư Hộ bộ")+" xin tăng thuế muối. "+kSay("emp",S,"{Goi}")+" nghĩ sao?”",o:[
  {n:"Can gián thẳng thắn",fx:{},x:`${word(p.o)} · thành: Danh ${balSg(BAL.eff.j7.danhGo_3)}, Sủng ${balSg(BAL.eff.j7.sungGo_4)} · hỏng: Sủng ${balSg(BAL.eff.j7.sungGo_5)}`,go:()=>{if(roll(p.o))apply({danh:BAL.eff.j7.danhGo_3,sung:BAL.eff.j7.sungGo_4});else apply({sung:BAL.eff.j7.sungGo_5})}},
  {n:"“Hậu cung không bàn chính sự”",fx:{duc:3,sung:-1}},
  {n:"Nói đỡ cho viên quan",fx:{bac:60,duc:-4},x:"đã nhận bạc của Thượng thư"}]}));

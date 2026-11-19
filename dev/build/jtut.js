@@ -28,7 +28,7 @@ const T={rec:REC,on:false,step:-1,ask:false,tip:null,tipQ:[],replay:false,fresh:
 window.KTUT=T;
 function optOn(){try{return typeof OPT==="undefined"||OPT.tut!==false}catch(e){return true}}
 function testFlag(){try{return localStorage.getItem("hclh-tut-test")==="1"||/[?&]tut=1\b/.test(location.search)}catch(e){return false}}
-function botOff(){try{return !!window.__bot||(typeof quiet!=="undefined"&&quiet)}catch(e){return false}}
+function botOff(){try{return screenOff()}catch(e){return false}}
 function autoOk(){return !botOff()&&optOn()&&(!navigator.webdriver||testFlag())}
 function rm(){try{return typeof kmReduced==="function"?kmReduced():matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){return false}}
 function vis(e){return !!e&&!e.hidden&&e.getClientRects().length>0&&getComputedStyle(e).visibility!=="hidden"&&getComputedStyle(e).display!=="none"}
