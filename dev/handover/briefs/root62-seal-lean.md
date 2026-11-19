@@ -1,0 +1,10 @@
+PRIORITY #1 CHECK: OD 2 ('seal anim': 17/11 ~18:00Z + ~18:30Z (D)) + new OD (19/11 ~02:15Z real) | main dev/build/jemoseal.js (KIT_EMOSEAL, kemo-m-* keyframes lines ~50-70), KIT.md §38.4 | review/* none | claims none
+TASK «seal-lean» (UI, kit part only; sonnet). Read root62-common.md first (same folder) and obey it.
+OWNER WORDS: dev/OWNER_DECISIONS.md line starting "- (19/11 ~02:15Z real)" VERBATIM (and OD 17/11 ~18:00Z MOOD SEAL ANIMATION for context).
+DO (in the ONE kit part jemoseal.js + KIT.md §38.4, canon overwrite of the motion lines; every img.kemo everywhere follows):
+1. IDLE: every live seal sways extremely slightly and extremely slowly side to side (about ±1–1.5deg, period ~6–8 s). Not a shake.
+2. LEAN-IN every few seconds (random 4–8 s per seal, staggered so seals on one screen never pulse together): scale up a little (~1.12–1.18, ease-out, as if leaning forward to talk), play the feeling's OWN stronger motion for ~1–1.6 s, scale back and return to idle. Per feeling (data in KIT_EMOSEAL.keys, not inline lists): giận = strong fast shake + heat glow; buồn/khóc = slow sad droop up-down; vui = bright sway + glow; sợ = quick tremble; lo = nervous bob; ghen/hờn = flicker side glance; mưu = glint; đau = wince; bình/an = soft nod. Unknown key = defaultMotion. Act-* keys use their feeling.
+3. The painted frame loop (img/kit/emo-anim/<set><k>.webp, Foreman C is painting khoc+gian now) and effect sprite (emo-fx) play during the lean-in when present (keep the existing probe; still image + CSS when absent).
+4. Keep every existing gate: only on screen (kemo-live), Cảnh động on, no reduced-motion, not Gọn; no per-place motion; Fold perf gate (no frame drops: measure with the existing perf smoke).
+TEST: extend dev/test/fig-seal.js (MOTION=1) to prove idle + lean-in timing + stagger; Fold 755x1000@2 + iPad 1180x820@2 short frame strips (idle frame + lean-in peak) for gian, buon, vui, LOOKED; quickcheck.
+Branch review/seal-lean from origin/main. Report reports/seal-lean.md; SẴN SÀNG KIỂM to ROOT-62.
