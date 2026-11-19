@@ -118,7 +118,7 @@ Plan change vs §PLAN (d): no `jkc2_pf.js` — jrd_pt.js loads after j4/j67/j1 s
 | dev/measure/pt-scan.py (6b + 6c family scan, all 4 roads; stops at a told return) | 6b: 0 unguarded · 6c: 103 give/buy/receive options, 58 booked (ptO / PTP), 45 used up, 0 NO BOOK |
 | dev/measure/pt-roads-bal.js STATIC pt_hai / pt_su (copy of bd-roads-bal r2: values incl. climaxes, dominance) | no-loss 0 · spread > 6: 0 (after re-levelling pt_hai_7.c1 + pt_hai_9.c1; before 2 at 6.3) · climax dominance 0 · not harder at rank 0 · digits/% 0 · unknown tokens none |
 | dev/test/road-full.js pt_hai (1 life, full frame; test now reads the origin from the premise arc, pt_* → pf) | PASS: 1:nhap14 2:sung14 3:tap14 4:pt_hai 5–11 pt_hai_5…11 12–14 endgame, fin = the .11 ending |
-| bot ≥20 lives / road | RUNNING (2 parallel processes; 4+ chromiums crashed the 15 GB box: «Target crashed» = renderer memory under load, not the roads — a single pt_su life alone plays to ch.14, heap < 400 MB, 0 errors) |
+| bot ≥20 lives / road | DONE, see §FINAL (was: RUNNING, 2 parallel processes; 4+ chromiums crashed the 15 GB box: «Target crashed» = renderer memory under load, not the roads — a single pt_su life alone plays to ch.14, heap < 400 MB, 0 errors) |
 ### FOR C (pictures via MAIN; nothing drawn) — lead part
 - Branch: `img/origin-wide-pf.webp` (16:9) + `img/bg-origin-pf.webp` (3:4) — home phase places np* use neutral palace pictures until then (SCIMG npTam…npHo; n_send shows ev-hoa-than). Emblem img/kit/origin-pf.webp = KIT REQUEST (like bd).
 - Home places (KC2LAND.pf): Phòng của ngươi (bình phong giấy dó, gương đồng), Chính điện của Thiên hoàng (rèm trúc), Vườn rêu, Đền Thần bên bờ biển (cổng gỗ son giữa nước triều), Khách quán sứ Đại Hy, Chợ Tây kinh đô, Bến Nan Ba (bốn thuyền sứ chờ gió). Tang-era dress only (áo kiểu Đường + váy xếp; no thập nhị đơn).
@@ -129,3 +129,45 @@ Plan change vs §PLAN (d): no `jkc2_pf.js` — jrd_pt.js loads after j4/j67/j1 s
 - Shared files touched (jkc2 / joi / j72 / j97 / jgecat / assemble): small edits listed above; E20 (caoly-road, from main) edits the nc text on some of the same jkc2 lines — whoever lands second resolves; my edits there are `kc2Br()==="pf"?…:` prefixes and `${L.land}`/`${L.dad}` in place of the literal «Nam Chiếu»/«phụ vương» (same output for nc).
 - BAL.kcv.pf = BAL.kcv.nc (home-phase carry row) until a kc2val pass re-measures pf.
 - Women of the roads (Tiểu Ngọc, the mother) live in the PTP book only — same filed jworld item as bd's women guests.
+
+## §FINAL (E21 lead, 19/11) — tests on the FINAL build (branch review/phutang-road @ 30d8ee51; bd-roads head 0308cbcc merged, newest)
+### A fault found by the tests, fixed as a family (LUẬT SỬA CẢ NHÓM)
+coop-together cnv+pf FAILed «B card: both roads open» (card never shown, 25/26). Cause: `KC2K` (jkc2.js:12) had no pf → a Phù Tang life skipped the whole jkc2 home phase (KC2LAND.pf, «Con đường» card, hòa ước hồi 1–3 were dead code; direct entry still worked, so direct.js passed).
+Scan: every `bd:` / `"bd"` key in dev/build/j*.js outside the bd/pt files, each checked for a pf row:
+
+| map (file) | what it does | before (pf) | after |
+|---|---|---|---|
+| KC2K (jkc2.js:12) | turns on the jkc2 home phase | **missing** → no home phase, no «Con đường» card, KC2LAND.pf dead | pf:"nc" (same hòa thân home frame) |
+| CM_SRC (jcmaid.js:24) | where her maid comes from | missing → "noi" (Nội vụ maid) | pf:"land" (maid from Phù Tang, like nc/bd) |
+| BAL.home (jecon.js:18) | home allowance every 3 months | missing → 0 bạc | pf:22 (between nc 25 and bd 20) |
+| ENT_INTRO (jentry.js) | «Tiền truyện» card, direct entry | missing → no card | 2 lines Phù Tang (Nại Lương, bể Đông) |
+| ENT_LINE (jentry.js) | «Nhập cung» reveal line | missing → empty line | «Thuyền sứ Phù Tang neo lại ở bến; …» |
+| kitOriginWide (jentry.js wrap) | origin picture | img/origin-wide-pf.webp does not exist | ev-hoa-than.webp until art makes origin-wide-pf (FOR E) |
+| KC2DART (jkc2.js) | arts at «Lễ ra mắt» | missing → entArts() of ORIGIN_BR.pf (art vu) | kept: the fallback gives Dâng Múa, right for pf |
+| GE_ID (jgecat.js) | identity name | present | — |
+| BAL.kcv (jkc2.js) | home-phase values | present (=nc) | — |
+| BAL.orig.ow2 / j69 ow 1–2 | FROZEN pre-roll tables of old saves | no pf (correct: pf did not exist then) | — |
+After the fix: coop-together cnv+pf 26/26 · kc-roads route.js --origin=pf: card cung/nha, home kd nc, title «Công chúa Phù Tang», place np_tam, family Phụ hoàng · Mẫu hậu · Hoàng huynh · Hoàng thúc · Vương muội · Sứ thần Đại Hy, fail [] (the one «???» in the text check = j61 mask of an unknown maid's name, every origin, by design).
+### Measure table (final build)
+| Check | Result |
+|---|---|
+| kc-roads direct.js ORIGINS=pf,nc,bd (before fix) and ORIGINS=pf (after) | PASS: fail [] errs [] (pf road pt_dang, nc nc_gian, bd bd_soi) |
+| kc-roads coop-together.js --a=cnv --b=pf | 26/26 (was 25/26 before KC2K) |
+| kc-roads route.js --origin=pf (home phase walk) | fail [] |
+| road-full.js, 1 life each, full frame | pt_hai 9/9 «Người đếm tên kẻ chết đuối» · pt_su 9/9 «Sứ giả của hai trời» · pt_tang 9/9 «Thầy sang bể» · pt_dang 9/9 «Luật bị bỏ dở» — chapters 1–3 tutorial, 4 premise, 5–11 road, 12–14 endgame |
+| pt-scan.py (6b + 6c, 4 roads) | 6b 0 unguarded · 6c 103 options, 58 booked, 45 used up, 0 NO BOOK |
+| pt-roads-bal.js STATIC (4 roads) | no-loss 0 · spread > 6: 0 · climax dominance 0 · not harder at rank 0 · digits/% 0 · unknown tokens none |
+| pt-vp.py (NEW: VANPHONG scan of jrd_pt/jrd_pt2 + pf rows of jkc2/joi/j72/jgecat/jentry; bans %, digits, {x}, =>, undefined/NaN/null, game words, …, Wokou/Oa khấu/thập nhị đơn/kimono/samurai…) | PASS 3555 strings |
+| one-core-guard · one-core-text · one-core-bind · one-core-text-rule | PASS ×4 |
+| time-spill-guard | PASS static + runtime |
+| bot lives (pt-roads-bal.js, a fresh page per life, random options) | FINAL build (home phase on), 20 valid lives each, every one reaches .11, 0 game errors · pt_hai lose 2 · mid 10 · win 5 · win2 3 · pt_su lose 8 · mid 8 · win 2 · win2 2 · pt_tang lose 7 · mid 6 · win 5 · win2 2 · pt_dang lose 6 · mid 8 · win 1 · win2 5. Lives lost to the box, not counted: 3 renderer «Target crashed / closed» (memory with 2 Chromium + the 2 h task limit / a container restart), each re-run. (The 4×20 run on the build BEFORE the KC2K fix also gave 20/20 per road, 0 errors.) |
+| quickcheck.sh | QUICKCHECK PASS on the sha (build same, open 1455 ms, old save ok, perf new/live render 162/172 ms · tab 332/302 · buổi 866/986 · tasks>200ms 16/16) · core gates: G1 one-core ×4 PASS, G4 hook 70-manifest-guard FAIL = the LIVE CDN manifest FIGURES-kc.json (52 maid/kc, floor 208; total 264, floor 420) — CDN state, not this sha (no manifest in the diff) → FOR E |
+| npc-roads ORG=pf | 2 lives × 240 months, pf player (roads pt_tang, pt_su): NPC roads 14 / 13, help hồi ok; the one FAIL «no page errors» = only «Fetch API cannot load file:///…/audio/VOICES.json» (file:// URL of the test box, every origin; over http it is not there) |
+
+### FOR C (pictures; nothing drawn) — add to the lead part above
+- `img/origin-wide-pf.webp` (16:9) is now SHOWN by the pf «Tiền truyện» card (ENT_INTRO.pf) and the «Khuê các» card; until it exists the wrap in jentry.js shows ev-hoa-than.webp. Remove the wrap when the picture lands.
+### FOR E
+- READY: review/phutang-road @ 30d8ee51 = bd-roads 0308cbcc (newest, merged) + Phù Tang. Lands AFTER bd-roads PASS+LAND (main moved since, 7bc73251: the coordinator's trial merge resolves).
+- NEW since §BUILT: KC2K pf (the home phase really runs for pf now) + family rows in shared files jcmaid.js (CM_SRC), jecon.js (BAL.home.pf 22), jentry.js (ENT_INTRO/ENT_LINE pf + origin-wide wrap). Tests touched: dev/test/pt-vp.py (new), dev/test/npc-roads.js (ORG env), dev/test/road-full.js, dev/test/kc-roads/direct.js.
+- quickcheck G4 70-manifest-guard FAILs on the LIVE CDN manifest FIGURES-kc.json (below its floor) — not this branch; please check the CDN manifest (same on any sha today).
+- BAL.home.pf = 22 is a first pick (between nc 25 and bd 20); a kc2val / econ pass may re-measure it.
