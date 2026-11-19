@@ -223,7 +223,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
     quest is done + Bạc on her person AND the «Xong việc» card shows on HER phone, once; the host's screen shows none of it (no card, no
     floater); her Bạc floater (kitStatFx, captured on the host) plays on her phone */
  await reset();await until(G,()=>!COOPW.thin.F.pend,null,20000);if(await G.p.evaluate(()=>S.place!=='home'))await walk('goTo','home','home');
- {const st=await G.p.evaluate(()=>{try{if(!S.st||!S.st.ms||!S.st.ms.q14||!S.st.ms.q14.L.some(q=>q.id==='di')){S.st=S.st||{};if(S.st.ms)S.st.ms=null;msStart67('nhap14')}}catch(e){return {err:String(e)}}
+ {const st=await G.p.evaluate(()=>{try{/* the chapter opens now (its variant = who she is NOW: the setup raised a maid, so a life-start maid chapter would have lapsed) */S.st=S.st||{};S.st.ms=null;msStart67('nhap14')}catch(e){return {err:String(e)}}
     const m=S.st&&S.st.ms;const q=m&&m.q14&&m.q14.L.find(x=>x.id==='di');if(q){q.n=0;delete q.ok;delete q.x}Q.length=0;try{closeModal()}catch(e){}used=0;render();return {ms:m&&m.id,q:!!q,v:m&&m.q14&&m.q14.v}});
   await sync();await H.p.evaluate(()=>{Q.length=0;try{closeModal()}catch(e){}window.__hq=[];window.__hk=0;const f=kitStatFx;window.__hkF=f})/* the host's own screen, watched below */;
   const k=await G.p.evaluate(()=>{for(const x of places()){try{if(x.k!=='home'&&!accState(x.k).why&&!accEtq(S,x.k)&&walkOk(travel(S.place,x.k)))return x.k}catch(e){}}return null});
