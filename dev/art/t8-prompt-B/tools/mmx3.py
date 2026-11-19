@@ -59,3 +59,13 @@ elif cmd == "ledger":   # ledger <id>-<age> <face> <gen> <cut|-> <secondary> <no
          "settings": "gpt-2-6 1024x2304 2k seed 7172 (no transparentBackground)", "credits": 138 if cut != "-" else 135,
          "who": "mama-mass MMX3 two-colour", "store_check": "PASS"}
     open(os.path.join(R, "dev/art/gen_ledger.jsonl"), "a").write(json.dumps(d, ensure_ascii=False) + "\n"); print("ledger ok")
+elif cmd == "look3":   # look3 <id> <url36> <url51> <url65> -> L_<id>.jpg (3 full views) + faces strip below
+    ims, fs = [], []
+    for age, u in zip(("a36", "a51", "a65"), sys.argv[3:6]):
+        p = f"{T}/gen_{a}-{age}.png"; get(u, p); im = Image.open(p).convert("RGB"); w, h = im.size
+        v = im.copy(); v.thumbnail((10000, 1100)); ims.append(v); fs.append(im.crop((int(w * .22), 0, int(w * .78), int(h * .22))))
+    W = sum(i.width for i in ims); fh = int(fs[0].height * (W / 3) / fs[0].width)
+    s = Image.new("RGB", (W, 1100 + fh), "white"); x = 0
+    for v, f in zip(ims, fs):
+        s.paste(v, (x, 0)); s.paste(f.resize((v.width, int(f.height * v.width / f.width))), (x, 1100)); x += v.width
+    s.save(f"{T}/L_{a}.jpg", quality=85); print(f"{T}/L_{a}.jpg")
