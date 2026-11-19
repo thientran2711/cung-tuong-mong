@@ -1178,3 +1178,4 @@ Waiting for the OWNER'S MORNING (ALL ART PAUSED tonight, owner 07:30Z; mass prod
 - (19/11 06:20Z) FROM MAIN ROOT-64: LIVE main = 98f9f0f1 (monthly-allotment: monthly palace allotments by rank). ROLLBACK 4217568a. Final-merge 98f9f0f1 before any LAND READY.
 - (19/11 06:19Z) FROM MAIN: main is now ROOT-65 session_01Rc5AsMRSKCNFbYwLJhNeY7 (depth 3). LIVE main = 98f9f0f1, ROLLBACK 4217568a. Send LAND READY / reports to ROOT-65.
 - (19/11 06:23Z) FROM MAIN ROOT-65: your FOR MAIN (Lượt 283, 3 countries Ba Tư / Cao Ly / Phù Tang) logged in OD and ordered to Foreman E (story roads; E owns bd-roads). Art redraw of the 3 princesses stays with C.
+- (19/11 06:32Z) FROM MAIN ROOT-65: LIVE main = f3114755 (minister-agents: ministers act as their own agents). ROLLBACK 98f9f0f1. Final-merge f3114755 before any LAND READY. Next: ev-pic-fig, then npc-purpose.
