@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"3db28bd8+","t":"2026-11-19T04:24Z","c":"coop-thin F2: generated files rebuilt (build_site.sh) after the reconnect fix","b":"48267fd342da","h":[{"s":"360c0edd+","t":"2026-11-19T03:50Z","c":"ge-writers W2 r2: rebuild on main fa411d6f"},{"s":"cbacdb55+","t":"2026-11-19T03:45Z","c":"art-wiring-1119 r2: fix review r1 FAIL 1+2"},{"s":"42bda6a9+","t":"2026-11-19T03:34Z","c":"opt-loss-ton: also checks a worded gain never reads 'Được: không'; scans dialogs as the game shows them"},{"s":"cb5a7cb3+","t":"2026-11-19T03:03Z","c":"maid-ladder-6: NPC exam mini-game tier clamps at BAL.srvRk.nq (last typed rung); scan table counted"},{"s":"5f7aef61","t":"2026-11-19T02:22Z","c":"seal-lean: kitEmoSeal idle sway (rotate only) + staggered lean-in with per-feeling motion; test + KIT 38.4 canon overwrite"},{"s":"03df1c9d+","t":"2026-11-19T01:41Z","c":"role-parity.test: deterministic riseCore block (SEED FIX)"},{"s":"de1f6916+","t":"2026-11-19T01:29Z","c":"review live-servants r2: ag-know ONE RULE (NPC) case follows the live-servants rule like §3 (consort's close maid planted at the garden, re…"},{"s":"7d693c26+","t":"2026-11-19T01:22Z","c":"opt-card-short #10: samples = real events; LAW 3: a gain/loss worded only as Gợi ý now shows in Được/Tốn (was «không»)"},{"s":"2dd9cb23+","t":"2026-11-19T00:45Z","c":"review stage-here r4: buổi-turn visit refresh holds the queued cards aside so goTo (j2: returns on Q.length) keeps her where she is (OD 18/…"},{"s":"21904959+","t":"2026-11-18T23:40Z","c":"fullbody-frame s5: person dialog follows the figure standard: frame height follows the figure, figure column runs tag to frame bottom, butt…"}]};
+window.CTM_BI={"s":"81ac2af8+","t":"2026-11-19T06:47Z","c":"coop-thin F2 r2 test: P11 opens the chapter for who she is now (a raised maid's life-start chapter lapses)","b":"630471e8d44b","h":[{"s":"360c0edd+","t":"2026-11-19T03:50Z","c":"ge-writers W2 r2: rebuild on main fa411d6f"},{"s":"cbacdb55+","t":"2026-11-19T03:45Z","c":"art-wiring-1119 r2: fix review r1 FAIL 1+2"},{"s":"42bda6a9+","t":"2026-11-19T03:34Z","c":"opt-loss-ton: also checks a worded gain never reads 'Được: không'; scans dialogs as the game shows them"},{"s":"cb5a7cb3+","t":"2026-11-19T03:03Z","c":"maid-ladder-6: NPC exam mini-game tier clamps at BAL.srvRk.nq (last typed rung); scan table counted"},{"s":"5f7aef61","t":"2026-11-19T02:22Z","c":"seal-lean: kitEmoSeal idle sway (rotate only) + staggered lean-in with per-feeling motion; test + KIT 38.4 canon overwrite"},{"s":"03df1c9d+","t":"2026-11-19T01:41Z","c":"role-parity.test: deterministic riseCore block (SEED FIX)"},{"s":"de1f6916+","t":"2026-11-19T01:29Z","c":"review live-servants r2: ag-know ONE RULE (NPC) case follows the live-servants rule like §3 (consort's close maid planted at the garden, re…"},{"s":"7d693c26+","t":"2026-11-19T01:22Z","c":"opt-card-short #10: samples = real events; LAW 3: a gain/loss worded only as Gợi ý now shows in Được/Tốn (was «không»)"},{"s":"2dd9cb23+","t":"2026-11-19T00:45Z","c":"review stage-here r4: buổi-turn visit refresh holds the queued cards aside so goTo (j2: returns on Q.length) keeps her where she is (OD 18/…"},{"s":"21904959+","t":"2026-11-18T23:40Z","c":"fullbody-frame s5: person dialog follows the figure standard: frame height follows the figure, figure column runs tag to frame bottom, butt…"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -1103,6 +1103,10 @@ function apply(o){const pops=[];
   for(const k of ["sung","danh","suc","sac","tai","tamco","duc"])S[k]=cl(S[k],0,100);S.suc=Math.min(S.suc,sucCap(S));
   S.th=cl(S.th,-100,100);S.hh=cl(S.hh,-100,100);S.bac=Math.max(0,S.bac);/* 2f2: mat = the real list (jagknow tmInstall), no clamp */
   if(!quiet)pops.forEach(([k,v],i)=>popNum(k,v,i))}
+/* the screen of THIS phone (effects, scenes, sounds, floaters): off for bots, quiet code paths, and while a co-op host runs the other seat's
+   turn (COOPW.ctx). coop-thin F2 r2: her intents run on the host with quiet off (her cards reach her through her Q, her floaters / effects are
+   captured and play on HER phone, jcoopthin uiCap); every screen gate reads this ONE rule, so nothing of hers draws on the host's screen */
+function screenOff(){return !!window.__bot||(typeof quiet!=="undefined"&&quiet)||!!(window.COOPW&&COOPW.ctx)}
 function popNum(k,v,i){if(typeof kitStatFx==="function")return kitStatFx([{k,dv:v}],{src:"apply"});/* fallback before jstatfx is loaded */
   const el=$("hud-"+k)||$("stage");if(!el)return;const r=el.getBoundingClientRect();
   const s=document.createElement("span");s.className="fly "+(v>0?"g":"r");s.textContent=`${NAMES[k]} ${v>0?"+":""}${v}`;s.style.left=Math.max(4,r.left)+"px";s.style.top=(r.bottom+4)+"px";document.body.appendChild(s);setTimeout(()=>s.remove(),1900)}
@@ -34108,7 +34112,7 @@ window.__tm96={jump(ch){const c=S.st&&S.st.ch;if(!c)return false;const j=c.plan.
 */
 const KM_DIR="https://ctm-img.victoria-tntt.workers.dev/img/kit/";
 function kmReduced(){try{return matchMedia("(prefers-reduced-motion: reduce)").matches||(typeof OPT!=="undefined"&&OPT.fxon===false)}catch(e){return false}}
-function kmOn(){return typeof S!=="undefined"&&S&&!window.__bot&&!(typeof quiet!=="undefined"&&quiet)}
+function kmOn(){return typeof S!=="undefined"&&S&&!screenOff()}
 function kmEsc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
 
 /* ---------- queue: one big moment at a time, after blocking screens ---------- */
@@ -38889,7 +38893,7 @@ function stipGoodsTxt(G){return (G||[]).map(g=>g.lost?`thiếu ${stipNm(g.k0,g.n
 /* ---------- one way to give goods + the reveal (kitReward of j93; game-feel's kitGain/kitReward keep the same call) ---------- */
 function stipRevItem(k){const it=IT[k]||{};let tier=0;try{const a=itemArt(k);tier=a?a.grade|0:(typeof kmTierOf==="function"?kmTierOf(k):0)}catch(e){}
  return{k,n:itm(k).n,d:it.d||"",img:typeof kmItemImg==="function"?kmItemImg(k):"",tier}}
-function stipReveal(entries,o){try{if(window.__bot||(typeof quiet!=="undefined"&&quiet)||typeof kitReward!=="function")return;
+function stipReveal(entries,o){try{if(screenOff()||typeof kitReward!=="function")return;
  try{if(typeof KMSNAP!=="undefined"&&KMSNAP&&KMSNAP.inv)entries.forEach(e=>KMSNAP.inv.push(e))}catch(e){}
  if(typeof kmOn==="function"&&!kmOn())return;kitReward({kind:o.kind||"gift",title:o.title||"Hộp gấm",from:o.sub||"",items:entries.map(e=>stipRevItem(e.k)),bac:o.bac||0})}catch(e){console.error("stipReveal",e)}}
 const STIP_FROM={emp:["royal","Ngự tứ","Hoàng thượng ban"],th:["tray","Mâm thưởng","Thái hậu ban"],hh:["tray","Mâm thưởng","Hoàng hậu ban"],noivu:["chest","Rương bảo vật","Nội vụ phủ phát"],story:["gift","Hộp gấm",""]};
@@ -48235,7 +48239,7 @@ function kitRevealHTML(I,o){o=o||{};const R=(typeof BAL==="object"&&BAL.reveal)|
 window.kitItemInfo=kitItemInfo;window.kitGradeChip=kitGradeChip;window.kitRevealHTML=kitRevealHTML;
 
 /* ---------- §54.2 kitLose ---------- */
-function krOn(){return typeof S!=="undefined"&&S&&!window.__bot&&!(typeof quiet!=="undefined"&&quiet)}
+function krOn(){return typeof S!=="undefined"&&S&&!screenOff()}
 function krStill(){try{return matchMedia("(prefers-reduced-motion: reduce)").matches||(typeof OPT!=="undefined"&&OPT.fxon===false)}catch(e){return false}}
 function krVis(el){if(!el)return null;const r=el.getBoundingClientRect();return r.width&&r.height&&r.bottom>0&&r.top<innerHeight&&r.right>0&&r.left<innerWidth?r:null}
 function krBagPt(){const tb=[...document.querySelectorAll('#tabs [data-tab="inv"],[data-tab="inv"]')].map(krVis).find(Boolean);
@@ -48367,7 +48371,7 @@ const FESTFX={
  fly:{fest:["thattich","trungthu"],buoi:[B4L]}};                     /* fireflies (j33 pxKind) */
 function kfFestFx(e){try{if(typeof S==="undefined"||!S||S.dead||typeof festToday!=="function")return false;const T=FESTFX[e],f=festToday();return !!(T&&f&&T.fest.includes(f.k)&&(!T.buoi||T.buoi.includes(S.buoi||0)))}catch(x){return false}}
 window.FESTFX=FESTFX;window.kfFestFx=kfFestFx;
-function kfOn(){return !window.__bot&&!(typeof quiet!=="undefined"&&quiet)}
+function kfOn(){return !screenOff()}
 function kfStill(){try{return matchMedia("(prefers-reduced-motion: reduce)").matches||(typeof OPT!=="undefined"&&OPT.fxon===false)}catch(e){return false}}
 function kfPt(o){o=o||{};if(o.x!=null)return{x:o.x,y:o.y};const el=o.el&&o.el.getBoundingClientRect?o.el:null;if(el){const r=el.getBoundingClientRect();if(r.width)return{x:r.left+r.width/2,y:r.top+r.height/2,r}}
  return{x:innerWidth/2,y:innerHeight*.42}}
@@ -49151,7 +49155,7 @@ function ksfRun(it){const dv=it.dv,k=it.k,cell=ksfCell(k),txt=`${ksfCellName(cel
  let x,y;if(cr){x=cl(cr.left+cr.width/2-w/2);y=cr.bottom+6;kitStatGlow(cell,dv)}else{const st=document.getElementById("stage"),sr=st&&st.getBoundingClientRect();x=cl(sr?sr.left+sr.width/2-w/2:vw/2-w/2);y=sr?sr.top+sr.height*.35:innerHeight*.35}
  const an=sp.animate([{transform:`translate(${x}px,${y+8}px) scale(.7)`,opacity:0},{transform:`translate(${x}px,${y}px) scale(1.14)`,opacity:1,offset:.14},{transform:`translate(${x}px,${y}px) scale(1)`,opacity:1,offset:.8},{transform:`translate(${x}px,${y-10}px) scale(1)`,opacity:0}],{duration:KSF.HOLD+300,easing:"ease-out",fill:"both"});an.onfinish=()=>ksfDone(sp)}
 function ksfPump(){if(KSF.t)return;const it=KSF.q.shift();if(!it){KSF.busy=0;return}KSF.busy=1;try{ksfRun(it)}catch(e){console.error(e)}KSF.t=setTimeout(()=>{KSF.t=0;ksfPump()},ksfStill()?250:it.src==="card"?950:KSF.GAP)}
-function kitStatFx(list,o){o=o||{};const src=o.src||"x",now=Date.now();if(typeof quiet!=="undefined"&&quiet)return;if(window.__bot)return;
+function kitStatFx(list,o){o=o||{};const src=o.src||"x",now=Date.now();if(screenOff())return;
  for(const it of list||[]){if(!it||!it.dv||!it.k)continue;const key=it.k+":"+it.dv,s=KSF.seen[key];
   if(s&&now-s.t<2200&&s.src!==src)continue;  /* the same change announced by two paths (apply + result card / coin) shows once */
   KSF.seen[key]={t:now,src};it.src=src;KSF.q.push(it)}
@@ -49283,7 +49287,7 @@ function ievPlace(R){const mb=document.getElementById("mb");if(!mb)return null;m
  const col=mb.querySelector(".kpmain")||mb.querySelector(".spkt")||mb.querySelector(".kpb")||mb;col.insertAdjacentHTML("afterbegin",h);const t=col.firstElementChild;t.classList.add("kiev-txt");return t}
 /* ---------- §64.2 kitItemFx: the animations ---------- */
 function ievStill(){try{return matchMedia("(prefers-reduced-motion: reduce)").matches||(typeof OPT!=="undefined"&&OPT.fxon===false)}catch(e){return false}}
-function ievOn(){return !window.__bot&&!(typeof quiet!=="undefined"&&quiet)}
+function ievOn(){return !screenOff()}
 function ievBag(){const t=[...document.querySelectorAll('#tabs [data-tab="inv"],[data-tab="inv"]')].find(x=>{const r=x.getBoundingClientRect();return r.width&&r.bottom>0&&r.top<innerHeight});return t||null}
 function ievClone(I,r){const w=document.createElement("div");w.className="kievfx";w.style.cssText=`left:${r.left}px;top:${r.top}px;width:${r.width}px;height:${r.height}px`;
  w.innerHTML=I.src?`<img src="${I.src}" alt="">`:"";document.body.appendChild(w);return w}
@@ -54496,7 +54500,7 @@ function kitNewDay(o){const host=o.host;const beats=[];const sea=o.sea||seaNow()
  host.onclick=e=>{e.stopPropagation();if(host.querySelector(":scope > .kmend"))return;T.forEach(clearTimeout);T.length=0;if(i<beats.length-1){i=beats.length-1;show(i)}showEnd()};
  Promise.all(beats.map(b=>preload(b.src,NE.wait))).then(()=>{if(end)return;show(0);T.push(setTimeout(next,beats[0].ms))});return{finish}}
 const dw0=dawn;dawn=function(){const p=PREV;PREV=null;const args=arguments,self=this;
- try{if(S&&!S.dead&&p&&!p.bedded&&!window.__bot&&!(typeof quiet!=="undefined"&&quiet)){let w=$("dawn");if(!w){w=document.createElement("div");w.id="dawn";w.className="dawn";document.body.appendChild(w)}
+ try{if(S&&!S.dead&&p&&!p.bedded&&!screenOff()){let w=$("dawn");if(!w){w=document.createElement("div");w.id="dawn";w.className="dawn";document.body.appendChild(w)}
   const night=lonelyOf(p),day=dawnOf();window.kneLastDay={night:night&&night.k,day:day.k};
   kitNewDay({host:w,night,day,wx:S.wx,then:()=>{w.classList.remove("on");dw0.apply(self,args)}});return}}catch(e){console.error(e)}
  return dw0.apply(this,arguments)};
@@ -55748,7 +55752,7 @@ for(const k of Object.keys(SFXN))if(/^sfx-pet-/.test(SFXN[k]))SFXL[SFXN[k]]={g:.
 /* ---- the mixer (replaces j11 sfx; same name, every caller keeps working) ---- */
 function ksfxBusy(){const now=performance.now();KSFX.live=KSFX.live.filter(v=>!v.a.ended&&!v.a.paused&&now<v.until);let n=KSFX.live.length;
  try{if(typeof VO!=="undefined"&&VO.cur&&!VO.cur.paused&&!VO.cur.ended)n++}catch(e){}return n}
-sfx=function(n,o){o=o||{};if(!n)return false;n=ksfxFile(n);if(!auOk())return ksfxDrop(n,"off");if(ksfxMgOnce()&&!o.m&&(n==="sfx-learn-good"||n==="sfx-learn-bad"))return ksfxDrop(n,"result-once");if(window.__bot||(typeof quiet!=="undefined"&&quiet))return ksfxDrop(n,"quiet");
+sfx=function(n,o){o=o||{};if(!n)return false;n=ksfxFile(n);if(!auOk())return ksfxDrop(n,"off");if(ksfxMgOnce()&&!o.m&&(n==="sfx-learn-good"||n==="sfx-learn-bad"))return ksfxDrop(n,"result-once");if(screenOff())return ksfxDrop(n,"quiet");
  const L=SFXL[n]||{},ui=!!L.ui,now=performance.now();if(now-(KSFX.last[n]||-1e9)<90)return ksfxDrop(n,"twice");
  if(ksfxBusy()>=3){if(ui)return ksfxDrop(n,"full");const v=KSFX.live.find(x=>x.ui)||KSFX.live.find(x=>now-x.t0>500);if(!v)return ksfxDrop(n,"full");try{v.a.pause()}catch(e){}KSFX.live.splice(KSFX.live.indexOf(v),1)}
  try{const vol=Math.max(0,Math.min(1,OPT.sfx*(ui?.5:1)*(L.g||1)*(o.g||1)));let b=null,dur=0,web=0;
@@ -56325,7 +56329,7 @@ try{if(typeof lifeStore==="function")lifeStore("flip scene",()=>{life++;try{cur&
 if(typeof stealNight==="function"){const s0=stealNight;stealNight=function(v,t){if(inFlip&&stoleFrom==null&&t)stoleFrom=t===S?"me":t.id;return s0.apply(this,arguments)}}
 if(typeof kitFlipTablet==="function"){const a0=kitFlipTablet;kitFlipTablet=function(){if(inFlip)return;return a0.apply(this,arguments)}}
 if(typeof kitFlipNote==="function"){const b0=kitFlipNote;kitFlipNote=function(){if(inFlip)return;return b0.apply(this,arguments)};window.kitFlipNote=kitFlipNote}
-function want(){return typeof S!=="undefined"&&S&&!S.dead&&!window.__bot&&!(typeof quiet!=="undefined"&&quiet)&&!(typeof isSrv==="function"&&isSrv())&&typeof kmPush==="function"}
+function want(){return typeof S!=="undefined"&&S&&!S.dead&&!screenOff()&&!(typeof isSrv==="function"&&isSrv())&&typeof kmPush==="function"}
 function cfPlan(){const d=S.nightWhy;if(!d||(typeof wk==="function"&&d.wk!==wk()))return null;
  const was=S.tonight;const pick=d.pick||null;const turned=stoleFrom||d.flip0||pick;
  if(!turned&&CF.skipNoPick)return null;return{wk:d.wk,pick,turned,cause:d.cause}}
@@ -56882,7 +56886,7 @@ const T={rec:REC,on:false,step:-1,ask:false,tip:null,tipQ:[],replay:false,fresh:
 window.KTUT=T;
 function optOn(){try{return typeof OPT==="undefined"||OPT.tut!==false}catch(e){return true}}
 function testFlag(){try{return localStorage.getItem("hclh-tut-test")==="1"||/[?&]tut=1\b/.test(location.search)}catch(e){return false}}
-function botOff(){try{return !!window.__bot||(typeof quiet!=="undefined"&&quiet)}catch(e){return false}}
+function botOff(){try{return screenOff()}catch(e){return false}}
 function autoOk(){return !botOff()&&optOn()&&(!navigator.webdriver||testFlag())}
 function rm(){try{return typeof kmReduced==="function"?kmReduced():matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){return false}}
 function vis(e){return !!e&&!e.hidden&&e.getClientRects().length>0&&getComputedStyle(e).visibility!=="hidden"&&getComputedStyle(e).display!=="none"}
@@ -57274,7 +57278,7 @@ document.getElementById("modal").addEventListener("click",e=>{const b=e.target.c
      này" in the event frame — main road + chapter goal + next steps + where to tap. Never for an old save, never for bots. */
 (function(){try{
 const isS=()=>{try{return typeof isSrv==="function"&&isSrv()}catch(e){return false}};
-const bot=()=>{try{return !!window.__bot||(typeof quiet!=="undefined"&&quiet)}catch(e){return false}};
+const bot=()=>{try{return screenOff()}catch(e){return false}};
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const plain=s=>String(s==null?"":s).replace(/<[^>]+>/g,"");
 /* where a tab lives in today's bottom bar (Hành sự / Dư đồ / Hậu cung / Giao tình / Hoàng tự / Tư trang / Tài nghệ / Mệnh truyện) */
@@ -61630,7 +61634,7 @@ function btrVariant(){const o=window.__btrVar;if(o)return{sea:o.sea||"xuan",fest
 function btrArc(a,b,W,H){const K=[],n=14;for(let i=0;i<=n;i++){const u=i/n,e=u*u*(3-2*u),t=a.t+(b.t-a.t)*e,v=a.v+(b.v-a.v)*e;
   const x=t*W,y=H*.78-Math.sin(Math.max(0,Math.min(1,t))*Math.PI)*H*.62;K.push({transform:`translate(${x.toFixed(1)}px,${y.toFixed(1)}px)`,opacity:Math.max(0,Math.min(1,v*(t<0||t>1?Math.max(0,1-Math.abs(t<0?t:t-1)*8):1)))})}return K}
 function buoiShift(){
- try{if(!S||window.__bot||(typeof quiet!=="undefined"&&quiet))return;btrKill();
+ try{if(!S||screenOff())return;btrKill();
   try{if(typeof kitSfx==="function")kitSfx((typeof B4L!=="undefined"&&(S.buoi||0)===B4L)?"nightWatch":"buoi")}catch(e){}
   const b=((S.buoi||0)%4+4)%4,prev=btrPrev!=null?btrPrev:(b+3)%4;btrPrev=b;const C=BTR_C[b],V=btrVariant(),VS=BTR_SEA[V.sea]||BTR_SEA.xuan,VF=V.fest?BTR_FEST[V.fest.k]:null,VT=(VF||VS).tint;
   const d=document.createElement("div");d.id="buoitr";d.className="btr b"+b+" s-"+V.sea+(V.fest?" f-"+V.fest.k:"");d.setAttribute("aria-hidden","true");
@@ -76461,7 +76465,7 @@ function krvPlay(el,kind,elapsed){const t=krvTarget(el,kind);if(!t||!t.parentNod
  const done=()=>{try{g.remove()}catch(x){}};g.addEventListener("animationend",done);setTimeout(done,ms+(t.complete?900:3500)+Math.max(0,-elapsed));return true}
 /* run in the mutation microtask, before the next paint: the real picture is never seen unveiled for a frame */
 function krvSoon(){krvTick()}
-function krvTick(){try{if(!S||KRV.off||window.__bot||(typeof quiet!=="undefined"&&quiet))return;const L=document.querySelectorAll("[data-krv]");if(!L.length)return;const n=Date.now(),grey={},shown={};let retry=false;
+function krvTick(){try{if(!S||KRV.off||screenOff())return;const L=document.querySelectorAll("[data-krv]");if(!L.length)return;const n=Date.now(),grey={},shown={};let retry=false;
  L.forEach(el=>{const k=el.dataset.krv;if(el.dataset.krvs==="1")shown[k]=1;else{grey[k]=1;try{const t=krvTarget(el,el.dataset.krvk),r=t&&t.getBoundingClientRect();if(r&&r.width>4&&r.height>4)KRV.rect[k+el.dataset.krvk]=[r.left,r.top,r.width,r.height]}catch(x){}}});
  for(const k in grey)if(!shown[k])KRV.last[k]=0;
  for(const k in shown)if(!grey[k]&&KRV.last[k]===0)krvFlip(k);else if(!grey[k]&&KRV.last[k]==null)KRV.last[k]=1;
@@ -77243,8 +77247,20 @@ TH.NOOP=["render","showModal","save","kmPush","kmReset","kitLine","sfx","kitSfx"
 /* resultShow is not a no-op inside her context either (it writes her Sổ ghi line's stat suffix, F1 relies on it); a result card a run in her
    context leaves for LATER (a timer: accEtqGo's +30 ms) carries a snapshot marked with her seat and never shows on the host (below) */
 TH.NOOP.push("resultShow");
-const UICAP=new Set(["srvToast","kitLine"]);
-for(const n of TH.NOOP)if(typeof window[n]==="function"){const f=window[n];window[n]=function(){if(CW.ctx&&n!=="resultShow"){if(TH.uiCap&&UICAP.has(n)&&TH.uiCap.length<8)try{TH.uiCap.push([n,String(arguments[0]==null?"":arguments[0]).slice(0,300)])}catch(e){}return}
+/* F2 r2 (review r1 item 1, the whole family): HER TAP RUN ON THE HOST (part F intents, part D card picks) runs as solo: quiet OFF (j1 quiet
+   silences every card / Sổ ghi line / number of a turn that is not played: in her context that silenced her own walk's «Xong việc» card,
+   card67, tdPop, Lỡ hẹn, Tin về chủ nhân / Đổi chủ, deed lines …). Her cards go into HER Q → part D cards on her phone (takeQ); the screen
+   gates read screenOff() (j1: true inside COOPW.ctx), so nothing of hers draws on the host's screen; her floaters / numbers / item and coin
+   effects called in her run are captured here (UICAP, plain arguments only) and play on HER phone once, with the answer (TH.uiPlay).
+   E's buổi step, B's life, C's world frame and D's deferred work stay quiet (turns that are not her tap). */
+const UICAP=new Set(["srvToast","kitLine","kitStatFx","feedback","kitCoins","kitGain","kitLose","kitReward","kitLearn","stipReveal","kitItemFx"]);
+for(const n of UICAP)if(!TH.NOOP.includes(n))TH.NOOP.push(n);
+const uiArg=a=>{try{return JSON.parse(JSON.stringify(a,(k,v)=>typeof v==="function"||(typeof Node!=="undefined"&&v instanceof Node)?undefined:v))}catch(e){return null}};
+TH.tapRun=function(fn){const q0=quiet,u0=TH.uiCap;quiet=false;TH.uiCap=[];let r,ui;try{r=fn()}finally{quiet=q0;ui=TH.uiCap;TH.uiCap=u0}return {r,ui:ui&&ui.length?ui.slice(0,12):null}};
+/* guest: what her run on the host captured, played once on her own screen */
+TH.uiPlay=function(L){let n=0;for(const x of L||[]){if(!Array.isArray(x))continue;const [f,a]=x;if(!UICAP.has(f)||typeof window[f]!=="function")continue;
+ try{window[f].apply(null,Array.isArray(a)?a:[a]);n++}catch(e){console.error("thin uiPlay",f,e)}}TH.uiN=(TH.uiN|0)+n;return n};
+for(const n of TH.NOOP)if(typeof window[n]==="function"){const f=window[n];window[n]=function(){if(CW.ctx&&n!=="resultShow"){if(TH.uiCap&&UICAP.has(n)&&TH.uiCap.length<12)try{const a=[...arguments].map(uiArg);if(n==="kitLine"||n==="srvToast")a[0]=String(a[0]==null?"":a[0]).slice(0,300);TH.uiCap.push([n,a])}catch(e){}return}
   /* a result card whose snapshot was taken in another seat's context (her greeting's card at +30 ms, accEtqGo) is hers, never the host's */
   if(n==="resultShow"&&arguments[1]&&arguments[1].__ctx&&CW.seat!==arguments[1].__ctx)return;return f.apply(this,arguments)};TH.NOOPED.push(n)}
 
@@ -77300,9 +77316,9 @@ COOP.on("delta",m=>{if(host()||!m)return;const V=TH.view;if(!V||V.v!==(m.base|0)
  for(const p in m.set||{}){if(p.split(".").some(k=>BADK.test(k)))continue;put(V.o,p,m.set[p],false)}for(const p of m.del||[])put(V.o,String(p),null,true);
  V.v=m.v|0;const t=performance.now();COOP.emit("thinview",V);TH.gAp=Math.round(performance.now()-t);const A=TH.F&&TH.F.lastAns;if(A&&A.ap==null&&V.o&&V.o.dr&&V.o.dr.id===A.id)A.ap=TH.gAp});
 /* intents */
-const DO={};let doN=0;
+const DO={};let doN=0;TH.myPick=new Set();/* F2 r2: her own picks (their answer's screen effects play once) */
 TH.onDo=(op,fn)=>{DO[op]=fn};TH.doFn=op=>DO[op];/* part C wraps part B's "life" */
-TH.doSend=function(op,args){if(host()||!TH.on(1))return false;const id="d"+Date.now().toString(36)+"-"+(doN++);COOP.send({t:"do",op,args:args===undefined?null:args,base:TH.view?TH.view.v:0,id});return id};
+TH.doSend=function(op,args){if(host()||!TH.on(1))return false;const id="d"+Date.now().toString(36)+"-"+(doN++);if(op==="pick"){TH.myPick.add(id);if(TH.myPick.size>40)TH.myPick.delete(TH.myPick.values().next().value)}COOP.send({t:"do",op,args:args===undefined?null:args,base:TH.view?TH.view.v:0,id});return id};
 function runDo(m){const fn=DO[m.op];let r=null;TH.curDo=m.op;
  try{if(fn)r=TH.withSeat(m.from||"b",()=>fn(m.args,m))}catch(e){console.error("thin do",m.op,e);r={err:String(e&&e.message||e)}}
  TH.curDo=null;/* D r1: call-scoped (a later D.later must not see a stale op) */return r}
@@ -77477,9 +77493,12 @@ TH.onDo("pick",a=>{a=a||{};D.hold(S);const L=S.thq,i=L.findIndex(c=>c&&c.id===a.
  let m=null;if(c.pid){const d=mkP(c.pid,c.pp||{});if(d)m={t:c.t||"Việc khó xử",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,cls:d.cls}}else m={t:c.t,h:c.h,cls:c.cls,btn:c.btn};
  if(!m){D.log.push(["pick-stale",c.pid]);const g=D.GONE[c.pid];if(g)D.after(()=>g(c.pp||{}));return {stale:1}}
  Q.unshift(m);const k=+a.i;const nw=window.__kpNoWarn;window.__kpNoWarn=true;/* asked on her phone already (kpGate) */
- try{if(m.opts){if(k>=0&&m.opts[k])chooseM(k);if(Q[0]===m){Q.shift();if(k>=0){L.splice(i,0,c);return {refused:1}}}}
+ /* F2 r2: her pick is her tap: run as solo (TH.tapRun: quiet off, her follow-up cards / numbers reach HER phone) */
+ let ui=null;try{if(m.opts){if(k>=0&&m.opts[k])ui=TH.tapRun(()=>chooseM(k)).ui;if(Q[0]===m){Q.shift();if(k>=0){L.splice(i,0,c);return {refused:1}}}}
  else closeModal()}finally{window.__kpNoWarn=nw}
- D.log.push(["pick",c.pid||c.t,k]);return {ok:1,i:k}});
+ D.log.push(["pick",c.pid||c.t,k]);const o={ok:1,i:k};if(ui)o.ui=ui;return o});
+/* guest: the screen effects of her pick (captured on the host) play once, when its answer lands (dr = that pick's id) */
+COOP.on("thinview",V=>{try{const r=!host()&&V&&V.o&&V.o.dr;if(!r||r.op!=="pick"||!TH.myPick.has(r.id))return;TH.myPick.delete(r.id);if(r.r&&r.r.ui)TH.uiPlay(r.r.ui)}catch(e){console.error("thin pick ui",e)}});
 /* her ack of the patches she applied */
 TH.onDo("pack",a=>{const n=+(a&&a.n)||0;const seat=CW.ctx;const L=D.PQ[seat]||[];
  for(const x of L)if(x.n<=n&&CW.rpend){delete CW.rpend["pq"+seat+x.n];if(x.rid)delete CW.rpend[x.rid]}D.PQ[seat]=L.filter(x=>x.n>n);
@@ -78120,12 +78139,21 @@ function check(){if(!on()||!host()||busy||!S||S.dead)return;const w=COOP.state.w
 function whereOut(){if(!S||!S.where)return null;const W=X.mapMe(J(S.where),true,901);delete W["902"];return {W,menW:S.menW?J(S.menW):null}}
 function whereIn(o){if(!o||!o.W)return;const W=X.mapMe(J(o.W),false,902);const keep=S.where&&S.where[901];S.where=W;if(keep)S.where[901]=keep;if(o.menW)S.menW=J(o.menW)}
 let her=null;
+/* F2 r2: her buổi step's screen effects travel in the host's view (o.eui = {n, ui}); her phone plays a NEW n once (the first view it sees
+   only sets the mark: a reload / reconnect never replays an old step) */
+E.eui=null;
+{const hv=TH.hostView;TH.hostView=function(){const o=hv.apply(this,arguments);if(o&&E.eui)o.eui=E.eui;return o}}
+{let seen=null;COOP.on("thinview",V=>{try{if(host()||!V||!V.o)return;const u=V.o.eui;if(seen==null){seen=u?u.n:0;return}if(!u)return;if(u.n<seen){seen=u.n;return}if(u.n===seen)return;seen=u.n;TH.uiPlay(u.ui)}catch(e){console.error("thin E ui",e)}})}
 function herStep(Wh){const seat=other();let st=null;try{st=TH.seatOf(seat)}catch(e){}if(!st||!CW.on){E.stat.herSkip++;return}
  if(TH.held&&TH.held(seat)){E.stat.herSkip++;lg(["held",seat]);return}
  TH.withSeat(seat,()=>{if(!S||S.dead||S.mg){E.stat.herSkip++;return}const target=(TH.outerS&&TH.outerS.buoi)||0;
   her={W:Wh};const snap=wSnap();let n=0;
-  try{while(((S.buoi||0)!==target)&&n<4&&!S.dead){const b0=S.buoi||0;CW.allow=true;try{nextBuoi()}finally{CW.allow=false}n++;if((S.buoi||0)===b0)break}}
+  /* F2 r2 (same family as her intents, Foreman B): her buổi step is played as solo (TH.tapRun: quiet off) — her buổi-event cards
+     (card67, tdPop, Lỡ hẹn, Tin về chủ nhân …) go into HER Q → part-D cards on her phone, once; her floaters / toasts are captured and
+     ride the view (E.eui, played once on her phone); nothing draws on the host (screenOff) */
+  let T=null;try{T=TH.tapRun(()=>{while(((S.buoi||0)!==target)&&n<4&&!S.dead){const b0=S.buoi||0;CW.allow=true;try{nextBuoi()}finally{CW.allow=false}n++;if((S.buoi||0)===b0)break}})}
   catch(e){console.error("thin E her step",e)}finally{her=null;try{wRestore(snap)}catch(e){console.error("thin E restore",e)}}
+  if(T&&T.ui){E.eui={n:((E.eui&&E.eui.n)|0)+1,ui:T.ui}}
   E.stat.her+=n;lg(["her-step",target,S.buoi,n])})}
 /* in her step: no NPC acts again (his step rolled them, with her entry in the harem), her places = his, no host screen work */
 if(typeof rivalsBuoi==="function"){const f=rivalsBuoi;rivalsBuoi=function(){if(her&&CW.ctx)return "";return f.apply(this,arguments)}}
@@ -78292,7 +78320,7 @@ function answered(dr){const p=F.pend;if(!p||!dr||dr.id!==p.id)return;F.pend=null
    did not arrive, exactly where solo shows it) */
 function back(p,r){const R=F.R[p.n];if(!R||!r||r.st!=="ok")return;
  try{if(r.c&&(S.buoi||0)===p.b0&&(COOP.state.week||0)===p.w0)for(const [n,,s] of R.ctx||[])if((R.back||[]).includes(n)&&n in r.c&&JSON.stringify(r.c[n])!==JSON.stringify((p.msg.c||{})[n]===undefined?null:p.msg.c[n]))s(r.c[n])/* only what her run changed */}catch(e){console.error("thin F back",e)}
- try{for(const [f,m] of r.ui||[])if(typeof window[f]==="function"&&m)window[f](m)}catch(e){}
+ try{if(r.ui)TH.uiPlay(r.ui)}catch(e){}
  try{if(R.done)R.done(p.args,r,p)}catch(e){console.error("thin F done",e)}}
 COOP.on("thinview",V=>{try{if(!host()&&V&&V.o)answered(V.o.dr)}catch(e){console.error("thin F view",e)}});
 COOP.on("error",m=>{try{const p=F.pend;if(!p||!m||m.id!==p.id||host())return;if(m.code==="nohost"||m.code==="nothin")p.at=0/* resend at the next tick */}catch(e){}});
@@ -78304,8 +78332,16 @@ setInterval(()=>{const p=F.pend;if(!p||host())return;if(!on()||COOP.frozen)retur
    walk, her phone never heard, no resend, no word). Same room + same week: keep it and send it again as soon as the room level is back
    (the 1 s tick below; the host dedupes by intent id, DONE kept per room, so a walk the host already ran is answered from DONE, never run
    twice). Another room / another week: the intent is stale, dropped with the "not done" word (her tap is never silently lost). */
-COOP.on("room",()=>{const p=F.pend;if(!p)return;if(p.room!==(COOP.state.room||"")||(COOP.state.week||0)!==p.w0){F.pend=null;lg(["drop",p.n,p.id]);line("Việc ấy chưa thành, xin thử lại.");try{CW.lockNext();render()}catch(e){}return}
- p.at=0;F.stat.reNet=(F.stat.reNet|0)+1;lg(["reNet",p.n,p.id])});
+/* r2 (review r1 item 2): the room may have stepped the buổi while her socket was dead (a time-out forceBend): the intent's ctx (her khắc
+   `used`) belongs to the old buổi, so it is resent only once her reconnect view shows the SAME buổi (p.b0); another buổi → dropped with the
+   same words. The check waits for her first view after the reconnect (p.rv), then the 1 s tick sends it (DONE dedupe on the host unchanged). */
+const stale=p=>p.room!==(COOP.state.room||"")||(COOP.state.week||0)!==p.w0;
+function dropP(p,why){F.pend=null;lg(["drop",p.n,p.id,why]);F.stat.drop=(F.stat.drop|0)+1;line("Việc ấy chưa thành, xin thử lại.");try{CW.lockNext();render()}catch(e){}}
+COOP.on("room",()=>{const p=F.pend;if(!p)return;if(stale(p))return dropP(p,"room");
+ p.rv=Date.now();p.at=Infinity/* held until her view after the reconnect (or 8 s: the check runs on what she has) */;F.stat.reNet=(F.stat.reNet|0)+1;lg(["reNet",p.n,p.id])});
+function reCheck(p){if(stale(p))return dropP(p,"room");if((S.buoi||0)!==p.b0)return dropP(p,"buoi");p.rv=0;p.at=0/* same buổi: sent again at the next tick */}
+COOP.on("thinview",V=>{const p=F.pend;if(!p||!p.rv||host())return;try{if(V&&V.o&&V.o.dr&&V.o.dr.id===p.id)return/* answered: handled above */;reCheck(p)}catch(e){console.error("thin F reNet",e)}});
+setInterval(()=>{const p=F.pend;if(p&&p.rv&&!host()&&Date.now()-p.rv>8000)try{reCheck(p)}catch(e){}},1000);
 /* pending = busy: #next waits (existing lockNext words through CW.eWait), act buttons off (can) */
 {const w=CW.eWait;CW.eWait=()=>!!(w&&w())||!!(F.pend&&on()&&!host())}
 if(typeof can==="function"){const f=can;can=function(){if(F.pend&&on()&&!host()&&!CW.ctx)return false;return f.apply(this,arguments)}}
@@ -78323,7 +78359,9 @@ TH.onDo("f",(a,m)=>{a=a||{};const id=m&&m.id;if(loaded!==LSK()){DONE.clear();don
  let out={st:"ok"};const keep=[];
  try{for(const [n,g,s] of R.ctx||[]){keep.push([s,g()]);s(n in (a.c||{})?a.c[n]:null)}
   const args=R.dec(a.a);if(!args){out={st:"gone"}}
-  else{const ui=TH.uiCap=R.lv?[]:null/* F2 registrations: her toasts play on her phone (F1 unchanged) */;let r;try{r=PRE[a.n].apply(null,args)}finally{TH.uiCap=null}F.stat.run++;if(R.log&&r)log(r);out={st:"ok",r:typeof r==="string"?r.replace(/<[^>]+>/g,"").slice(0,200):null};
+  else{/* F2 r2 (review r1 item 1, every registration, F1 too): her tap runs as solo (TH.tapRun: quiet off → her cards into her Q = part D
+      cards on her phone; her toasts / floaters / coin and item effects captured, played on HER phone with the answer; nothing on the host's screen) */
+   const T=TH.tapRun(()=>PRE[a.n].apply(null,args)),r=T.r,ui=T.ui;F.stat.run++;if(R.log&&r)log(r);out={st:"ok",r:typeof r==="string"?r.replace(/<[^>]+>/g,"").slice(0,200):null};
    if(typeof r==="boolean")out.rv=r;if(ui&&ui.length)out.ui=ui.slice(0,4);
    if(R.back){const c={};for(const [n,g] of R.ctx||[])if(R.back.includes(n))try{const v=g();c[n]=v===undefined?null:J(v)}catch(e){}out.c=c}
    if(R.host)try{R.host(args,out)}catch(e){console.error("thin F host",e)}}}
@@ -78433,7 +78471,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="48267fd342da";window.CTM_BUILD=BUILD;
+const BUILD="630471e8d44b";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

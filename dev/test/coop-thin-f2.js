@@ -54,7 +54,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  const both=async f=>[await H.p.evaluate(f),await G.p.evaluate(f)];
  /* scan rows reached only through the buổi / week steps (nextBuoi, endTurn, monthTick, contestWeek): those steps never run INSIDE her intent
     run (E / G run them, quiet unchanged there); counted on the host for the whole suite, plus any card with handlers and no pid (D.bad) */
- await H.p.evaluate(()=>{window.__inTap={};for(const n of ['nextBuoi','endTurn','monthTick','contestWeek','rivalsTurn']){const f=window[n];if(typeof f!=='function')continue;window[n]=function(){if(COOPW.ctx&&COOPW.thin.uiCap)__inTap[n]=(__inTap[n]|0)+1;return f.apply(this,arguments)}}
+ await H.p.evaluate(()=>{window.__inTap={};for(const n of ['nextBuoi','endTurn','monthTick','contestWeek','rivalsTurn']){const f=window[n];if(typeof f!=='function')continue;window[n]=function(){if(COOPW.ctx&&COOPW.thin.uiCap&&(COOPW.thin.curDo==='f'||COOPW.thin.curDo==='pick'))__inTap[n]=(__inTap[n]|0)+1;/* her E step runs nextBuoi on purpose (P13) */return f.apply(this,arguments)}}
   const tr=COOPW.thin.tapRun;COOPW.thin.tapRun=function(fn){const b=COOPW.thin.D.bad.length;try{return tr.apply(this,arguments)}finally{const d=COOPW.thin.D.bad.length-b;if(d)__inTap.bad=(__inTap.bad||[]).concat(COOPW.thin.D.bad.slice(-d))}}});
  ok(await until(G,lv=>COOPW.thin.lvl>=lv&&!!COOPW.thin.view&&COOPW.thin.C.isLens(rivals),LVL,40000),'F0 level on, the guest NPC list is the lens',await both(()=>[COOPW.thin.lvl,COOPW.thin.C.isLens(rivals)]));
  for(let i=0;i<3;i++){await clear(H);await clear(G);await sleep(300)}
@@ -270,6 +270,17 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   for(const r of rows){console.log('  EMITTER',r[3]?'green':'RED  ',r[0],'|',r[1],'|',r[2])}
   ok(rows.every(r=>r[3]),`P12 the emitter family in her intent run: every card on HER seat once and none on the host, numbers / toasts captured and played on her phone, the screen gates off on the host (${rows.filter(r=>r[3]).length}/${rows.length})`,rows.filter(r=>!r[3]));
   table.push({P12:rows})}
+ /* P13 (Foreman B: same family): her BUỔI STEP on the host (part E, her context b) plays as solo: a buổi-event card made inside her step
+    (a test hook after her nextBuoi emits card67 + a Bạc floater, as pl67Lapse / tdPop / q72 do) shows on HER phone once, none on the host */
+ {await reset();await until(G,()=>!COOPW.thin.F.pend,null,20000);await sync();
+  await H.p.evaluate(()=>{window.__p13=0;const f=nextBuoi;nextBuoi=function(){const r=f.apply(this,arguments);try{if(COOPW.ctx==='b'&&!window.__p13){window.__p13=1;card67('result','Thử buổi mới',[['Dòng','buổi']]);apply({bac:3})}}catch(e){console.error(e)}return r}});
+  const ui0=await G.p.evaluate(()=>COOPW.thin.uiN|0),b0=await G.p.evaluate(()=>S.buoi||0);
+  const t0=Date.now();while(Date.now()-t0<40000){await press1(H);await press1(G);await sleep(700);if(await G.p.evaluate(b=>(S.buoi||0)!==b,b0))break}
+  const seen=await until(G,()=>Q.some(m=>String(m.t||'')==='Thử buổi mới'),null,15000);await sleep(800);
+  const g=await G.p.evaluate(()=>({n:Q.filter(m=>String(m.t||'')==='Thử buổi mới').length,ui:COOPW.thin.uiN|0,b:S.buoi||0}));
+  const h=await H.p.evaluate(()=>({hook:window.__p13,n:Q.filter(m=>String(m.t||'')==='Thử buổi mới').length,lab:document.querySelectorAll('.ksfl').length}));
+  ok(seen&&h.hook===1&&g.n===1&&h.n===0&&g.ui>ui0,'P13 her buổi step (E, on the host): a buổi-event card on HER phone once + her floater played there; none on the host',{g,h,ui0,b0});
+  await G.p.evaluate(()=>{const i=Q.findIndex(m=>String(m.t||'')==='Thử buổi mới');if(i>=0){Q.splice(i,1)}render()})}
  /* latency */
  {const ms=table.filter(x=>x&&typeof x.ms==='number').map(x=>x.ms).sort((a,b)=>a-b);if(ms.length)console.log('LATENCY tap→arrival ms (LAG '+(+process.env.LAG||0)+', host CPU ×'+(+process.env.CPU||1)+'): n='+ms.length+' median='+ms[ms.length>>1]+' min='+ms[0]+' max='+ms[ms.length-1])}
  if(TRIPSRC){const t=await G.p.evaluate(()=>window.__trip&&__trip()).catch(e=>({err:e.message}));
