@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"93fbc9ea+","t":"2026-11-19T08:47Z","c":"ev-pic-followups r2: EVENTS.json wildcard keys thInv:*/thBribe:*/giftto:*/eunuch:* (pp.id/pp.k suffix made the plain keys miss), ev-pic-cov…","b":"d950b30df888","h":[{"s":"4ed2831d+","t":"2026-11-19T07:18Z","c":"law3-cost-only: index.html / sw.js regenerated"},{"s":"0da546e9","t":"2026-11-19T07:16Z","c":"role-parity-drift r1: build line"},{"s":"eff20119+","t":"2026-11-19T06:33Z","c":"ev-pic-coverage: picture required in M/L/XL frames only, S frames reported apart (owner OD 19/11 ~04:55Z)"},{"s":"a64f06c7+","t":"2026-11-19T06:29Z","c":"seal-lean-2 r2: rebuild site"},{"s":"38af6387","t":"2026-11-19T06:23Z","c":"minister-agents review r1: one core (gift regard + backs in BAL.tdCourt, j55 reads tuyen.pow / imp.deep / clanRel), censor name unique in e…"},{"s":"18a9b64c+","t":"2026-11-19T05:22Z","c":"monthly-allotment r6 (reviewer): stat names from the one NAMES table (drop private STAT_NM); candle note puts the burnt candle in the card'…"},{"s":"6b041ea7+","t":"2026-11-19T05:21Z","c":"odds-no-unknown: vu oan hints no longer repeat the odds word the meter now shows"},{"s":"6eb0ab3d+","t":"2026-11-19T05:37Z","c":"hall-names r2: runtime test hall-names-lines.js (houseName plaque, palace list line, visit line, 'cùng cung' note; Fold + iPad)"},{"s":"c4c25bbd+","t":"2026-11-19T04:41Z","c":"head-marker-video: viewport-size recording, opening dialog cleared, maid notice kept unread, white plain state swapped at half time on the …"},{"s":"360c0edd+","t":"2026-11-19T03:50Z","c":"ge-writers W2 r2: rebuild on main fa411d6f"}]};
+window.CTM_BI={"s":"34d4b3c7+","t":"2026-11-19T09:44Z","c":"ev-pic-followups r2: scan SHOT/DSF/TAG env for review shots","b":"057913cef75a","h":[{"s":"80cc47ea+","t":"2026-11-19T08:16Z","c":"coop-thin F2 r2: her buoi step (part E) plays as solo too (TH.tapRun: her buoi-event cards on her phone once, floaters via the view eui); P…"},{"s":"4ed2831d+","t":"2026-11-19T07:18Z","c":"law3-cost-only: index.html / sw.js regenerated"},{"s":"0da546e9","t":"2026-11-19T07:16Z","c":"role-parity-drift r1: build line"},{"s":"eff20119+","t":"2026-11-19T06:33Z","c":"ev-pic-coverage: picture required in M/L/XL frames only, S frames reported apart (owner OD 19/11 ~04:55Z)"},{"s":"a64f06c7+","t":"2026-11-19T06:29Z","c":"seal-lean-2 r2: rebuild site"},{"s":"38af6387","t":"2026-11-19T06:23Z","c":"minister-agents review r1: one core (gift regard + backs in BAL.tdCourt, j55 reads tuyen.pow / imp.deep / clanRel), censor name unique in e…"},{"s":"18a9b64c+","t":"2026-11-19T05:22Z","c":"monthly-allotment r6 (reviewer): stat names from the one NAMES table (drop private STAT_NM); candle note puts the burnt candle in the card'…"},{"s":"6b041ea7+","t":"2026-11-19T05:21Z","c":"odds-no-unknown: vu oan hints no longer repeat the odds word the meter now shows"},{"s":"6eb0ab3d+","t":"2026-11-19T05:37Z","c":"hall-names r2: runtime test hall-names-lines.js (houseName plaque, palace list line, visit line, 'cùng cung' note; Fold + iPad)"},{"s":"c4c25bbd+","t":"2026-11-19T04:41Z","c":"head-marker-video: viewport-size recording, opening dialog cleared, maid notice kept unread, white plain state swapped at half time on the …"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -1103,6 +1103,10 @@ function apply(o){const pops=[];
   for(const k of ["sung","danh","suc","sac","tai","tamco","duc"])S[k]=cl(S[k],0,100);S.suc=Math.min(S.suc,sucCap(S));
   S.th=cl(S.th,-100,100);S.hh=cl(S.hh,-100,100);S.bac=Math.max(0,S.bac);/* 2f2: mat = the real list (jagknow tmInstall), no clamp */
   if(!quiet)pops.forEach(([k,v],i)=>popNum(k,v,i))}
+/* the screen of THIS phone (effects, scenes, sounds, floaters): off for bots, quiet code paths, and while a co-op host runs the other seat's
+   turn (COOPW.ctx). coop-thin F2 r2: her intents run on the host with quiet off (her cards reach her through her Q, her floaters / effects are
+   captured and play on HER phone, jcoopthin uiCap); every screen gate reads this ONE rule, so nothing of hers draws on the host's screen */
+function screenOff(){return !!window.__bot||(typeof quiet!=="undefined"&&quiet)||!!(window.COOPW&&COOPW.ctx)}
 function popNum(k,v,i){if(typeof kitStatFx==="function")return kitStatFx([{k,dv:v}],{src:"apply"});/* fallback before jstatfx is loaded */
   const el=$("hud-"+k)||$("stage");if(!el)return;const r=el.getBoundingClientRect();
   const s=document.createElement("span");s.className="fly "+(v>0?"g":"r");s.textContent=`${NAMES[k]} ${v>0?"+":""}${v}`;s.style.left=Math.max(4,r.left)+"px";s.style.top=(r.bottom+4)+"px";document.body.appendChild(s);setTimeout(()=>s.remove(),1900)}
@@ -24006,15 +24010,17 @@ function accEtqGo(k,h,greet,then){if(!S||S.dead||Q.length)return;const sh=h.name
 /* the gate: every way in (map, person card, follow) passes the greeting first */
 (function(){const g0=goTo;goTo=function(k){if(!S||!k||k===S.place||k==="home"||window.__accSilent||window.__j77etq)return g0.apply(this,arguments);
  const h=accEtq(S,k);if(!h||S.dead||Q.length||S.out||S.confined||!accessOf(S,k).ok)return g0.apply(this,arguments);
- accEtqCard(k,()=>{window.__j77etq=1;try{goTo(k)}finally{window.__j77etq=0}});return}})();
+ accEtqCard(k,accThen({f:"goTo",a:[k],etq:1},()=>{window.__j77etq=1;try{goTo(k)}finally{window.__j77etq=0}}));return}})();
+/* what the greeting leads on to, as data beside the closure (co-op thin F2: the greeting runs on the host, the road after it is named, not captured) */
+function accThen(d,fn){try{fn.__f=d}catch(e){}return fn}
 /* person-card acts: the visit and 'Đến gặp' carry the greeting in their price, and run it before opening her card */
 (function(){const v0=visitPal;visitPal=function(id){const v=rivals.find(x=>x.id===id);if(!v||!S||S.dead||Q.length)return;const k=palaceOf(v);
   if(S.place!==k&&!S.confined&&!S.out&&!accessOf(S,k).ok)return j77Card(k);
   if(S.place!==k&&!j77Kh(travel(S.place,k))){if(accGuestSpill(k,travel(S.place,k)))walkSpillGo(k);return} /* arrives next buổi; the greeting (if owed) is asked on arrival */
-  if(S.place!==k&&accEtq(S,k)&&!S.confined&&!S.out)return accEtqCard(k,()=>visitPal(id));const c0=can,tc=travel(S.place,k);can=function(c){return c===tc+1?j77Kh(tc):c0(c)};try{return v0.apply(this,arguments)}finally{can=c0}};
+  if(S.place!==k&&accEtq(S,k)&&!S.confined&&!S.out)return accEtqCard(k,accThen({f:"visitPal",a:[id]},()=>visitPal(id)));const c0=can,tc=travel(S.place,k);can=function(c){return c===tc+1?j77Kh(tc):c0(c)};try{return v0.apply(this,arguments)}finally{can=c0}};
  const s0=goSee;goSee=function(id){const v=rivals.find(x=>x.id===id);if(!v||!S||S.dead||Q.length)return;const k=whereOf(v);
   if(S.place!==k&&!S.confined&&!S.out&&!accessOf(S,k).ok)return j77Card(k);
-  if(S.place!==k&&accEtq(S,k)&&!S.confined&&!S.out)return accEtqCard(k,()=>goSee(id));
+  if(S.place!==k&&accEtq(S,k)&&!S.confined&&!S.out)return accEtqCard(k,accThen({f:"goSee",a:[id]},()=>goSee(id)));
   if(S.place===k)return s0.apply(this,arguments);if(!j77Kh(travel(S.place,k))){if(accGuestSpill(k,travel(S.place,k)))walkSpillGo(k);return} /* arrives next buổi and sees who is there then */const c0=can,tc=travel(S.place,k);can=function(c){return c===tc+1?j77Kh(tc):c0(c)};try{return s0.apply(this,arguments)}finally{can=c0}}})();
 /* the two person-card buttons, one rule: a lock is not a dead button: tapping opens the card with its reason and ways in */
 function accGuestLine(k,tc,tail){const who=accEtq(S,k);return `tốn: ${tc+(who?ACC_ETQ.khac:0)} khắc · thành: ${tail}${who?` · (gồm ${ACC_ETQ.khac} khắc bái kiến ${accRkName(who)} ${who.name.split(" ").pop()})`:""}`}
@@ -34145,7 +34151,7 @@ window.__tm96={jump(ch){const c=S.st&&S.st.ch;if(!c)return false;const j=c.plan.
 */
 const KM_DIR="https://ctm-img.victoria-tntt.workers.dev/img/kit/";
 function kmReduced(){try{return matchMedia("(prefers-reduced-motion: reduce)").matches||(typeof OPT!=="undefined"&&OPT.fxon===false)}catch(e){return false}}
-function kmOn(){return typeof S!=="undefined"&&S&&!window.__bot&&!(typeof quiet!=="undefined"&&quiet)}
+function kmOn(){return typeof S!=="undefined"&&S&&!screenOff()}
 function kmEsc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]))}
 
 /* ---------- queue: one big moment at a time, after blocking screens ---------- */
@@ -37566,7 +37572,7 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§75",title:"kitBa
 function k3Full(){try{return typeof window.kplAway==="function"&&window.kplAway()&&(kitView().pages===1||K3SH.home)}catch(e){return false}}
 window.k3Full=k3Full;
 function k3Phone(){try{return kitView().pages===1||k3Full()}catch(e){return false}}
-function k3Shell(){try{const gm=document.querySelector(".game");if(!gm)return;try{const hd0=document.querySelector("header.hud");if(hd0)document.documentElement.style.setProperty("--k3hb",Math.round(hd0.getBoundingClientRect().bottom)+"px");const nb0=document.querySelector("nav.bar");if(nb0)document.documentElement.style.setProperty("--k3nb",Math.round(innerHeight-nb0.getBoundingClientRect().top)+"px")}catch(e){}const on=k3Phone()&&!!S&&!S.dead;const alive=!!S&&!S.dead;gm.classList.toggle("k3ph",on);
+function k3Shell(){try{if(window.COOPW&&COOPW.ctx)return;/* co-op thin: the other seat's run on the host never drives the host's phone shell */const gm=document.querySelector(".game");if(!gm)return;try{const hd0=document.querySelector("header.hud");if(hd0)document.documentElement.style.setProperty("--k3hb",Math.round(hd0.getBoundingClientRect().bottom)+"px");const nb0=document.querySelector("nav.bar");if(nb0)document.documentElement.style.setProperty("--k3nb",Math.round(innerHeight-nb0.getBoundingClientRect().top)+"px")}catch(e){}const on=k3Phone()&&!!S&&!S.dead;const alive=!!S&&!S.dead;gm.classList.toggle("k3ph",on);
  const pw=$$("popw");const pop=!!(pw&&pw.children.length&&pw.textContent.trim());
  const wasPop=gm.classList.contains("k3pop");gm.classList.toggle("k3home",on&&K3SH.home&&!pop);gm.classList.toggle("k3pop",on&&pop);
  /* reviewer stage-pets-r1: the left rail (KIT 33.11) is re-drawn by renderStage while the card page still hides the stage, so closing a person card left the painting WITHOUT the rail (no way back to the map): re-draw it when the card page opens / closes */
@@ -37582,7 +37588,7 @@ window.k3Home=k3Home;
 /* owner 11/15 06:38Z: tapping the place she is AT on Dư đồ opens that place's stage (scene + the people there), like arriving — on the
    phone shell that is the room view, not the Hành sự panel; arriving from the map lands on the stage too. "‹ Phòng" says where she is
    ("‹ Kính sự phòng") and returns to that stage (her current place, not home). */
-function k3ShowPlace(){window.__k3quiet=1;clearTimeout(window.__k3qt);window.__k3qt=setTimeout(()=>{window.__k3quiet=0},450);K3SH.home=true;k3Home()}
+function k3ShowPlace(){if(window.COOPW&&COOPW.ctx)return;/* co-op thin: the other seat's run on the host never drives the host's phone shell */window.__k3quiet=1;clearTimeout(window.__k3qt);window.__k3qt=setTimeout(()=>{window.__k3quiet=0},450);K3SH.home=true;k3Home()}
 function k3PlaceName(){try{if(!S||!S.place||S.place==="home")return"Phòng";return typeof accName==="function"?accName(S.place):(placeOf(S.place).n||"Phòng")}catch(e){return"Phòng"}}
 (function(){if(typeof j77Tap==="function"){const t0=j77Tap;j77Tap=function(k){const here=!!(S&&!S.dead&&!Q.length&&k&&S.place===k);const r=t0.apply(this,arguments);
   if(here&&k3Phone())k3ShowPlace();return r}}
@@ -38926,7 +38932,7 @@ function stipGoodsTxt(G){return (G||[]).map(g=>g.lost?`thiếu ${stipNm(g.k0,g.n
 /* ---------- one way to give goods + the reveal (kitReward of j93; game-feel's kitGain/kitReward keep the same call) ---------- */
 function stipRevItem(k){const it=IT[k]||{};let tier=0;try{const a=itemArt(k);tier=a?a.grade|0:(typeof kmTierOf==="function"?kmTierOf(k):0)}catch(e){}
  return{k,n:itm(k).n,d:it.d||"",img:typeof kmItemImg==="function"?kmItemImg(k):"",tier}}
-function stipReveal(entries,o){try{if(window.__bot||(typeof quiet!=="undefined"&&quiet)||typeof kitReward!=="function")return;
+function stipReveal(entries,o){try{if(screenOff()||typeof kitReward!=="function")return;
  try{if(typeof KMSNAP!=="undefined"&&KMSNAP&&KMSNAP.inv)entries.forEach(e=>KMSNAP.inv.push(e))}catch(e){}
  if(typeof kmOn==="function"&&!kmOn())return;kitReward({kind:o.kind||"gift",title:o.title||"Hộp gấm",from:o.sub||"",items:entries.map(e=>stipRevItem(e.k)),bac:o.bac||0})}catch(e){console.error("stipReveal",e)}}
 const STIP_FROM={emp:["royal","Ngự tứ","Hoàng thượng ban"],th:["tray","Mâm thưởng","Thái hậu ban"],hh:["tray","Mâm thưởng","Hoàng hậu ban"],noivu:["chest","Rương bảo vật","Nội vụ phủ phát"],story:["gift","Hộp gấm",""]};
@@ -42309,9 +42315,14 @@ function famAsk(h){const t=Date.now();if(CW.famAsk&&CW.famAsk.h===h&&t-CW.famAsk
 COOP.on("act",m=>{if(!m||m.k!==FK||!CW.on||m.from===CW.seat||!S)return;
  if(m.mode==="ask"){if(!S.dead)sendFam();return}
  if(m.mode!=="fam"||typeof m.h!=="string")return;CW.famLast=m;if(famTake()){refreshHere();if(!Q.length)render()}});
-function onPos(m){if(!CW.on||m.from===CW.seat||!S)return;CW.fpos=m;const pl=mapPlace(m.place);const f=friendEntry();if(!f)return;
+/* thin F2 (level 7): on the host her place comes from ONE source, her stored person (her walks run there as intents, her buổi step too);
+   the place in her pos relay is not read (pos stays for her live stats / look until part H) */
+function herPl7(){try{if(!host()||!(CW.thin&&CW.thin.on&&CW.thin.on(7)))return null;const B=CW.thin.seatOf(CW.seat==="a"?"b":"a");return B&&B.S&&B.S.place||null}catch(e){return null}}
+CW.herPl7=herPl7;
+function onPos(m){if(!CW.on||m.from===CW.seat||!S)return;CW.fpos=m;const pl=mapPlace(herPl7()||m.place);const f=friendEntry();if(!f)return;
  let sc=liveStats(m);if(typeof m.fh==="string"){if(famTake())sc=true;if(CW.famGotH!==m.fh)famAsk(m.fh)}S.where=S.where||{};const was=S.where[f.id];S.where[f.id]=pl||palaceOf(f);if(was!==S.where[f.id]||sc){refreshHere();if(!Q.length)render()}}
-function keepFriendPos(){if(!CW.on||!S||!S.where)return;const f=friendEntry();if(!f)return;if(CW.ctx){/* part E: her step on the host: the host's own place */const o=CW.thin&&CW.thin.outerS;S.where[f.id]=o&&o.place&&o.place!=="home"?mapPlace(o.place):palaceOf(f);return}const pl=CW.fpos&&CW.fpos.week===wk()&&CW.fpos.buoi===(S.buoi||0)?mapPlace(CW.fpos.place):null;S.where[f.id]=pl||palaceOf(f)}
+function keepFriendPos(){if(!CW.on||!S||!S.where)return;const f=friendEntry();if(!f)return;if(CW.ctx){/* part E: her step on the host: the host's own place */const o=CW.thin&&CW.thin.outerS;S.where[f.id]=o&&o.place&&o.place!=="home"?mapPlace(o.place):palaceOf(f);return}const h7=herPl7();const pl=h7?mapPlace(h7):CW.fpos&&CW.fpos.week===wk()&&CW.fpos.buoi===(S.buoi||0)?mapPlace(CW.fpos.place):null;S.where[f.id]=pl||palaceOf(f)}
+CW.keepFriendPos=keepFriendPos;CW.refreshHere=()=>refreshHere();
 function onBuoi(m){T("onBuoi "+m.week+"."+m.buoi+" me "+wk()+"."+(S&&S.buoi)+" Q"+Q.length+(S&&S.mg?" mg":""));if(!CW.on||!S||eW())return;CW.bend=false;CW.wantB=null;drainAg();
  /* the room moved on: if a dialog is still open, step as soon as it is closed */
  if((Q.length||S.mg)&&m.week===wk()&&(S.buoi||0)===m.buoi-1){CW.pendBuoi=m;lockNext();return}CW.pendBuoi=null;
@@ -48328,7 +48339,7 @@ function kitRevealHTML(I,o){o=o||{};const R=(typeof BAL==="object"&&BAL.reveal)|
 window.kitItemInfo=kitItemInfo;window.kitGradeChip=kitGradeChip;window.kitRevealHTML=kitRevealHTML;
 
 /* ---------- §54.2 kitLose ---------- */
-function krOn(){return typeof S!=="undefined"&&S&&!window.__bot&&!(typeof quiet!=="undefined"&&quiet)}
+function krOn(){return typeof S!=="undefined"&&S&&!screenOff()}
 function krStill(){try{return matchMedia("(prefers-reduced-motion: reduce)").matches||(typeof OPT!=="undefined"&&OPT.fxon===false)}catch(e){return false}}
 function krVis(el){if(!el)return null;const r=el.getBoundingClientRect();return r.width&&r.height&&r.bottom>0&&r.top<innerHeight&&r.right>0&&r.left<innerWidth?r:null}
 function krBagPt(){const tb=[...document.querySelectorAll('#tabs [data-tab="inv"],[data-tab="inv"]')].map(krVis).find(Boolean);
@@ -48460,7 +48471,7 @@ const FESTFX={
  fly:{fest:["thattich","trungthu"],buoi:[B4L]}};                     /* fireflies (j33 pxKind) */
 function kfFestFx(e){try{if(typeof S==="undefined"||!S||S.dead||typeof festToday!=="function")return false;const T=FESTFX[e],f=festToday();return !!(T&&f&&T.fest.includes(f.k)&&(!T.buoi||T.buoi.includes(S.buoi||0)))}catch(x){return false}}
 window.FESTFX=FESTFX;window.kfFestFx=kfFestFx;
-function kfOn(){return !window.__bot&&!(typeof quiet!=="undefined"&&quiet)}
+function kfOn(){return !screenOff()}
 function kfStill(){try{return matchMedia("(prefers-reduced-motion: reduce)").matches||(typeof OPT!=="undefined"&&OPT.fxon===false)}catch(e){return false}}
 function kfPt(o){o=o||{};if(o.x!=null)return{x:o.x,y:o.y};const el=o.el&&o.el.getBoundingClientRect?o.el:null;if(el){const r=el.getBoundingClientRect();if(r.width)return{x:r.left+r.width/2,y:r.top+r.height/2,r}}
  return{x:innerWidth/2,y:innerHeight*.42}}
@@ -49244,7 +49255,7 @@ function ksfRun(it){const dv=it.dv,k=it.k,cell=ksfCell(k),txt=`${ksfCellName(cel
  let x,y;if(cr){x=cl(cr.left+cr.width/2-w/2);y=cr.bottom+6;kitStatGlow(cell,dv)}else{const st=document.getElementById("stage"),sr=st&&st.getBoundingClientRect();x=cl(sr?sr.left+sr.width/2-w/2:vw/2-w/2);y=sr?sr.top+sr.height*.35:innerHeight*.35}
  const an=sp.animate([{transform:`translate(${x}px,${y+8}px) scale(.7)`,opacity:0},{transform:`translate(${x}px,${y}px) scale(1.14)`,opacity:1,offset:.14},{transform:`translate(${x}px,${y}px) scale(1)`,opacity:1,offset:.8},{transform:`translate(${x}px,${y-10}px) scale(1)`,opacity:0}],{duration:KSF.HOLD+300,easing:"ease-out",fill:"both"});an.onfinish=()=>ksfDone(sp)}
 function ksfPump(){if(KSF.t)return;const it=KSF.q.shift();if(!it){KSF.busy=0;return}KSF.busy=1;try{ksfRun(it)}catch(e){console.error(e)}KSF.t=setTimeout(()=>{KSF.t=0;ksfPump()},ksfStill()?250:it.src==="card"?950:KSF.GAP)}
-function kitStatFx(list,o){o=o||{};const src=o.src||"x",now=Date.now();if(typeof quiet!=="undefined"&&quiet)return;if(window.__bot)return;
+function kitStatFx(list,o){o=o||{};const src=o.src||"x",now=Date.now();if(screenOff())return;
  for(const it of list||[]){if(!it||!it.dv||!it.k)continue;const key=it.k+":"+it.dv,s=KSF.seen[key];
   if(s&&now-s.t<2200&&s.src!==src)continue;  /* the same change announced by two paths (apply + result card / coin) shows once */
   KSF.seen[key]={t:now,src};it.src=src;KSF.q.push(it)}
@@ -49376,7 +49387,7 @@ function ievPlace(R){const mb=document.getElementById("mb");if(!mb)return null;m
  const col=mb.querySelector(".kpmain")||mb.querySelector(".spkt")||mb.querySelector(".kpb")||mb;col.insertAdjacentHTML("afterbegin",h);const t=col.firstElementChild;t.classList.add("kiev-txt");return t}
 /* ---------- §64.2 kitItemFx: the animations ---------- */
 function ievStill(){try{return matchMedia("(prefers-reduced-motion: reduce)").matches||(typeof OPT!=="undefined"&&OPT.fxon===false)}catch(e){return false}}
-function ievOn(){return !window.__bot&&!(typeof quiet!=="undefined"&&quiet)}
+function ievOn(){return !screenOff()}
 function ievBag(){const t=[...document.querySelectorAll('#tabs [data-tab="inv"],[data-tab="inv"]')].find(x=>{const r=x.getBoundingClientRect();return r.width&&r.bottom>0&&r.top<innerHeight});return t||null}
 function ievClone(I,r){const w=document.createElement("div");w.className="kievfx";w.style.cssText=`left:${r.left}px;top:${r.top}px;width:${r.width}px;height:${r.height}px`;
  w.innerHTML=I.src?`<img src="${I.src}" alt="">`:"";document.body.appendChild(w);return w}
@@ -54707,7 +54718,7 @@ function kitNewDay(o){const host=o.host;const beats=[];const sea=o.sea||seaNow()
  host.onclick=e=>{e.stopPropagation();if(host.querySelector(":scope > .kmend"))return;T.forEach(clearTimeout);T.length=0;if(i<beats.length-1){i=beats.length-1;show(i)}showEnd()};
  Promise.all(beats.map(b=>preload(b.src,NE.wait))).then(()=>{if(end)return;show(0);T.push(setTimeout(next,beats[0].ms))});return{finish}}
 const dw0=dawn;dawn=function(){const p=PREV;PREV=null;const args=arguments,self=this;
- try{if(S&&!S.dead&&p&&!p.bedded&&!window.__bot&&!(typeof quiet!=="undefined"&&quiet)){let w=$("dawn");if(!w){w=document.createElement("div");w.id="dawn";w.className="dawn";document.body.appendChild(w)}
+ try{if(S&&!S.dead&&p&&!p.bedded&&!screenOff()){let w=$("dawn");if(!w){w=document.createElement("div");w.id="dawn";w.className="dawn";document.body.appendChild(w)}
   const night=lonelyOf(p),day=dawnOf();window.kneLastDay={night:night&&night.k,day:day.k};
   kitNewDay({host:w,night,day,wx:S.wx,then:()=>{w.classList.remove("on");dw0.apply(self,args)}});return}}catch(e){console.error(e)}
  return dw0.apply(this,arguments)};
@@ -55959,7 +55970,7 @@ for(const k of Object.keys(SFXN))if(/^sfx-pet-/.test(SFXN[k]))SFXL[SFXN[k]]={g:.
 /* ---- the mixer (replaces j11 sfx; same name, every caller keeps working) ---- */
 function ksfxBusy(){const now=performance.now();KSFX.live=KSFX.live.filter(v=>!v.a.ended&&!v.a.paused&&now<v.until);let n=KSFX.live.length;
  try{if(typeof VO!=="undefined"&&VO.cur&&!VO.cur.paused&&!VO.cur.ended)n++}catch(e){}return n}
-sfx=function(n,o){o=o||{};if(!n)return false;n=ksfxFile(n);if(!auOk())return ksfxDrop(n,"off");if(ksfxMgOnce()&&!o.m&&(n==="sfx-learn-good"||n==="sfx-learn-bad"))return ksfxDrop(n,"result-once");if(window.__bot||(typeof quiet!=="undefined"&&quiet))return ksfxDrop(n,"quiet");
+sfx=function(n,o){o=o||{};if(!n)return false;n=ksfxFile(n);if(!auOk())return ksfxDrop(n,"off");if(ksfxMgOnce()&&!o.m&&(n==="sfx-learn-good"||n==="sfx-learn-bad"))return ksfxDrop(n,"result-once");if(screenOff())return ksfxDrop(n,"quiet");
  const L=SFXL[n]||{},ui=!!L.ui,now=performance.now();if(now-(KSFX.last[n]||-1e9)<90)return ksfxDrop(n,"twice");
  if(ksfxBusy()>=3){if(ui)return ksfxDrop(n,"full");const v=KSFX.live.find(x=>x.ui)||KSFX.live.find(x=>now-x.t0>500);if(!v)return ksfxDrop(n,"full");try{v.a.pause()}catch(e){}KSFX.live.splice(KSFX.live.indexOf(v),1)}
  try{const vol=Math.max(0,Math.min(1,OPT.sfx*(ui?.5:1)*(L.g||1)*(o.g||1)));let b=null,dur=0,web=0;
@@ -56536,7 +56547,7 @@ try{if(typeof lifeStore==="function")lifeStore("flip scene",()=>{life++;try{cur&
 if(typeof stealNight==="function"){const s0=stealNight;stealNight=function(v,t){if(inFlip&&stoleFrom==null&&t)stoleFrom=t===S?"me":t.id;return s0.apply(this,arguments)}}
 if(typeof kitFlipTablet==="function"){const a0=kitFlipTablet;kitFlipTablet=function(){if(inFlip)return;return a0.apply(this,arguments)}}
 if(typeof kitFlipNote==="function"){const b0=kitFlipNote;kitFlipNote=function(){if(inFlip)return;return b0.apply(this,arguments)};window.kitFlipNote=kitFlipNote}
-function want(){return typeof S!=="undefined"&&S&&!S.dead&&!window.__bot&&!(typeof quiet!=="undefined"&&quiet)&&!(typeof isSrv==="function"&&isSrv())&&typeof kmPush==="function"}
+function want(){return typeof S!=="undefined"&&S&&!S.dead&&!screenOff()&&!(typeof isSrv==="function"&&isSrv())&&typeof kmPush==="function"}
 function cfPlan(){const d=S.nightWhy;if(!d||(typeof wk==="function"&&d.wk!==wk()))return null;
  const was=S.tonight;const pick=d.pick||null;const turned=stoleFrom||d.flip0||pick;
  if(!turned&&CF.skipNoPick)return null;return{wk:d.wk,pick,turned,cause:d.cause}}
@@ -57093,7 +57104,7 @@ const T={rec:REC,on:false,step:-1,ask:false,tip:null,tipQ:[],replay:false,fresh:
 window.KTUT=T;
 function optOn(){try{return typeof OPT==="undefined"||OPT.tut!==false}catch(e){return true}}
 function testFlag(){try{return localStorage.getItem("hclh-tut-test")==="1"||/[?&]tut=1\b/.test(location.search)}catch(e){return false}}
-function botOff(){try{return !!window.__bot||(typeof quiet!=="undefined"&&quiet)}catch(e){return false}}
+function botOff(){try{return screenOff()}catch(e){return false}}
 function autoOk(){return !botOff()&&optOn()&&(!navigator.webdriver||testFlag())}
 function rm(){try{return typeof kmReduced==="function"?kmReduced():matchMedia("(prefers-reduced-motion: reduce)").matches}catch(e){return false}}
 function vis(e){return !!e&&!e.hidden&&e.getClientRects().length>0&&getComputedStyle(e).visibility!=="hidden"&&getComputedStyle(e).display!=="none"}
@@ -57485,7 +57496,7 @@ document.getElementById("modal").addEventListener("click",e=>{const b=e.target.c
      này" in the event frame — main road + chapter goal + next steps + where to tap. Never for an old save, never for bots. */
 (function(){try{
 const isS=()=>{try{return typeof isSrv==="function"&&isSrv()}catch(e){return false}};
-const bot=()=>{try{return !!window.__bot||(typeof quiet!=="undefined"&&quiet)}catch(e){return false}};
+const bot=()=>{try{return screenOff()}catch(e){return false}};
 const esc=s=>String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const plain=s=>String(s==null?"":s).replace(/<[^>]+>/g,"");
 /* where a tab lives in today's bottom bar (Hành sự / Dư đồ / Hậu cung / Giao tình / Hoàng tự / Tư trang / Tài nghệ / Mệnh truyện) */
@@ -61841,7 +61852,7 @@ function btrVariant(){const o=window.__btrVar;if(o)return{sea:o.sea||"xuan",fest
 function btrArc(a,b,W,H){const K=[],n=14;for(let i=0;i<=n;i++){const u=i/n,e=u*u*(3-2*u),t=a.t+(b.t-a.t)*e,v=a.v+(b.v-a.v)*e;
   const x=t*W,y=H*.78-Math.sin(Math.max(0,Math.min(1,t))*Math.PI)*H*.62;K.push({transform:`translate(${x.toFixed(1)}px,${y.toFixed(1)}px)`,opacity:Math.max(0,Math.min(1,v*(t<0||t>1?Math.max(0,1-Math.abs(t<0?t:t-1)*8):1)))})}return K}
 function buoiShift(){
- try{if(!S||window.__bot||(typeof quiet!=="undefined"&&quiet))return;btrKill();
+ try{if(!S||screenOff())return;btrKill();
   try{if(typeof kitSfx==="function")kitSfx((typeof B4L!=="undefined"&&(S.buoi||0)===B4L)?"nightWatch":"buoi")}catch(e){}
   const b=((S.buoi||0)%4+4)%4,prev=btrPrev!=null?btrPrev:(b+3)%4;btrPrev=b;const C=BTR_C[b],V=btrVariant(),VS=BTR_SEA[V.sea]||BTR_SEA.xuan,VF=V.fest?BTR_FEST[V.fest.k]:null,VT=(VF||VS).tint;
   const d=document.createElement("div");d.id="buoitr";d.className="btr b"+b+" s-"+V.sea+(V.fest?" f-"+V.fest.k:"");d.setAttribute("aria-hidden","true");
@@ -76846,7 +76857,7 @@ function krvPlay(el,kind,elapsed){const t=krvTarget(el,kind);if(!t||!t.parentNod
  const done=()=>{try{g.remove()}catch(x){}};g.addEventListener("animationend",done);setTimeout(done,ms+(t.complete?900:3500)+Math.max(0,-elapsed));return true}
 /* run in the mutation microtask, before the next paint: the real picture is never seen unveiled for a frame */
 function krvSoon(){krvTick()}
-function krvTick(){try{if(!S||KRV.off||window.__bot||(typeof quiet!=="undefined"&&quiet))return;const L=document.querySelectorAll("[data-krv]");if(!L.length)return;const n=Date.now(),grey={},shown={};let retry=false;
+function krvTick(){try{if(!S||KRV.off||screenOff())return;const L=document.querySelectorAll("[data-krv]");if(!L.length)return;const n=Date.now(),grey={},shown={};let retry=false;
  L.forEach(el=>{const k=el.dataset.krv;if(el.dataset.krvs==="1")shown[k]=1;else{grey[k]=1;try{const t=krvTarget(el,el.dataset.krvk),r=t&&t.getBoundingClientRect();if(r&&r.width>4&&r.height>4)KRV.rect[k+el.dataset.krvk]=[r.left,r.top,r.width,r.height]}catch(x){}}});
  for(const k in grey)if(!shown[k])KRV.last[k]=0;
  for(const k in shown)if(!grey[k]&&KRV.last[k]===0)krvFlip(k);else if(!grey[k]&&KRV.last[k]==null)KRV.last[k]=1;
@@ -77637,7 +77648,7 @@ figxLoad();setInterval(figxLoad,300000);
 (function(){try{
 const CW=window.COOPW;if(!CW||!CW.X||typeof COOP!=="object")return;
 const X=CW.X,J=X.J,LS={get(k){try{return localStorage.getItem(k)}catch(e){return null}}};
-const TH=CW.thin={CAP:6/* F1 her acts as intents (jcoopthinf.js),  E buổi + night gate on the host (jcoopthine.js), B life + rebirth on the host (jcoopthinb.js), C world read-only on the guest (jcoopthinc.js), D remote dialogs (section 6) */,lvl:0,REG:[],bridge:[],rlog:[],view:null,hv:0,dn:0,dr:null,ctxN:0};
+const TH=CW.thin={CAP:7/* F2 her places / goTo / visits as intents (jcoopthinf.js), F1 her acts as intents (jcoopthinf.js),  E buổi + night gate on the host (jcoopthine.js), B life + rebirth on the host (jcoopthinb.js), C world read-only on the guest (jcoopthinc.js), D remote dialogs (section 6) */,lvl:0,REG:[],bridge:[],rlog:[],view:null,hv:0,dn:0,dr:null,ctxN:0};
 const host=()=>CW.seat==="a";
 const D={};   /* part D (remote dialogs), filled in section 6 */
 TH.on=n=>!!(CW.on&&!CW.hold&&TH.lvl>=(n||1));
@@ -77793,8 +77804,31 @@ TH.withSeat=function(seat,fn){
 /* parts B + D (contract C3 "UI side effects"): her events must not play on the host's phone: scene queue (kmPush / kmReset), toasts (kitLine),
    sounds (sfx / kitSfx / kitResultSfx), stat floaters (kitStatFx / kitStatGlow / kitStatDelta), overlays (kitEdict / kitGloom / kitReward /
    kitResultFx). ONE list (TH.NOOP); coop-thin-b.js checks each name is wrapped. */
-TH.NOOP=["render","showModal","save","kmPush","kmReset","kitLine","sfx","kitSfx","kitResultSfx","kitStatFx","kitStatGlow","kitStatDelta","kitEdict","kitGloom","kitReward","kitResultFx"];TH.NOOPED=[];
-for(const n of TH.NOOP)if(typeof window[n]==="function"){const f=window[n];window[n]=function(){if(CW.ctx)return;return f.apply(this,arguments)};TH.NOOPED.push(n)}
+TH.NOOP=["render","showModal","save","kmPush","kmReset","kitLine","sfx","kitSfx","kitResultSfx","kitStatFx","kitStatGlow","kitStatDelta","kitEdict","kitGloom","kitReward","kitResultFx",
+ /* F2 (her walks / visits on the host): her arrival must not toast on his
+    phone; a toast her run raises (srvToast / kitLine) is captured (TH.uiCap, set by part F's run) and plays on HER phone with the answer.
+    renderStage is NOT here: its wrappers also write her person (name reveals, residence, roster: guest-side writers, F6/G) and F1/E rely on
+    them running once in her context; the host's stage is repainted right after her run instead (part F: D.after → render) */
+ "srvToast"];/* k3ShowPlace / k3Shell live inside jk3's IIFE (its own calls never see a window wrapper): they return at once there when COOPW.ctx is set */TH.NOOPED=[];TH.uiCap=null;
+/* resultShow is not a no-op inside her context either (it writes her Sổ ghi line's stat suffix, F1 relies on it); a result card a run in her
+   context leaves for LATER (a timer: accEtqGo's +30 ms) carries a snapshot marked with her seat and never shows on the host (below) */
+TH.NOOP.push("resultShow");
+/* F2 r2 (review r1 item 1, the whole family): HER TAP RUN ON THE HOST (part F intents, part D card picks) runs as solo: quiet OFF (j1 quiet
+   silences every card / Sổ ghi line / number of a turn that is not played: in her context that silenced her own walk's «Xong việc» card,
+   card67, tdPop, Lỡ hẹn, Tin về chủ nhân / Đổi chủ, deed lines …). Her cards go into HER Q → part D cards on her phone (takeQ); the screen
+   gates read screenOff() (j1: true inside COOPW.ctx), so nothing of hers draws on the host's screen; her floaters / numbers / item and coin
+   effects called in her run are captured here (UICAP, plain arguments only) and play on HER phone once, with the answer (TH.uiPlay).
+   E's buổi step, B's life, C's world frame and D's deferred work stay quiet (turns that are not her tap). */
+const UICAP=new Set(["srvToast","kitLine","kitStatFx","feedback","kitCoins","kitGain","kitLose","kitReward","kitLearn","stipReveal","kitItemFx"]);
+for(const n of UICAP)if(!TH.NOOP.includes(n))TH.NOOP.push(n);
+const uiArg=a=>{try{return JSON.parse(JSON.stringify(a,(k,v)=>typeof v==="function"||(typeof Node!=="undefined"&&v instanceof Node)?undefined:v))}catch(e){return null}};
+TH.tapRun=function(fn){const q0=quiet,u0=TH.uiCap;quiet=false;TH.uiCap=[];let r,ui;try{r=fn()}finally{quiet=q0;ui=TH.uiCap;TH.uiCap=u0}return {r,ui:ui&&ui.length?ui.slice(0,12):null}};
+/* guest: what her run on the host captured, played once on her own screen */
+TH.uiPlay=function(L){let n=0;for(const x of L||[]){if(!Array.isArray(x))continue;const [f,a]=x;if(!UICAP.has(f)||typeof window[f]!=="function")continue;
+ try{window[f].apply(null,Array.isArray(a)?a:[a]);n++}catch(e){console.error("thin uiPlay",f,e)}}TH.uiN=(TH.uiN|0)+n;return n};
+for(const n of TH.NOOP)if(typeof window[n]==="function"){const f=window[n];window[n]=function(){if(CW.ctx&&n!=="resultShow"){if(TH.uiCap&&UICAP.has(n)&&TH.uiCap.length<12)try{const a=[...arguments].map(uiArg);if(n==="kitLine"||n==="srvToast")a[0]=String(a[0]==null?"":a[0]).slice(0,300);TH.uiCap.push([n,a])}catch(e){}return}
+  /* a result card whose snapshot was taken in another seat's context (her greeting's card at +30 ms, accEtqGo) is hers, never the host's */
+  if(n==="resultShow"&&arguments[1]&&arguments[1].__ctx&&CW.seat!==arguments[1].__ctx)return;return f.apply(this,arguments)};TH.NOOPED.push(n)}
 
 /* stable text of the host's whole state (the round-trip check) */
 function stable(o){const seen=new WeakSet();return JSON.stringify(o,function(k,v){if(typeof v==="function")return undefined;
@@ -77848,9 +77882,9 @@ COOP.on("delta",m=>{if(host()||!m)return;const V=TH.view;if(!V||V.v!==(m.base|0)
  for(const p in m.set||{}){if(p.split(".").some(k=>BADK.test(k)))continue;put(V.o,p,m.set[p],false)}for(const p of m.del||[])put(V.o,String(p),null,true);
  V.v=m.v|0;const t=performance.now();COOP.emit("thinview",V);TH.gAp=Math.round(performance.now()-t);const A=TH.F&&TH.F.lastAns;if(A&&A.ap==null&&V.o&&V.o.dr&&V.o.dr.id===A.id)A.ap=TH.gAp});
 /* intents */
-const DO={};let doN=0;
+const DO={};let doN=0;TH.myPick=new Set();/* F2 r2: her own picks (their answer's screen effects play once) */
 TH.onDo=(op,fn)=>{DO[op]=fn};TH.doFn=op=>DO[op];/* part C wraps part B's "life" */
-TH.doSend=function(op,args){if(host()||!TH.on(1))return false;const id="d"+Date.now().toString(36)+"-"+(doN++);COOP.send({t:"do",op,args:args===undefined?null:args,base:TH.view?TH.view.v:0,id});return id};
+TH.doSend=function(op,args){if(host()||!TH.on(1))return false;const id="d"+Date.now().toString(36)+"-"+(doN++);if(op==="pick"){TH.myPick.add(id);if(TH.myPick.size>40)TH.myPick.delete(TH.myPick.values().next().value)}COOP.send({t:"do",op,args:args===undefined?null:args,base:TH.view?TH.view.v:0,id});return id};
 function runDo(m){const fn=DO[m.op];let r=null;TH.curDo=m.op;
  try{if(fn)r=TH.withSeat(m.from||"b",()=>fn(m.args,m))}catch(e){console.error("thin do",m.op,e);r={err:String(e&&e.message||e)}}
  TH.curDo=null;/* D r1: call-scoped (a later D.later must not see a stale op) */return r}
@@ -78025,9 +78059,12 @@ TH.onDo("pick",a=>{a=a||{};D.hold(S);const L=S.thq,i=L.findIndex(c=>c&&c.id===a.
  let m=null;if(c.pid){const d=mkP(c.pid,c.pp||{});if(d)m={t:c.t||"Việc khó xử",h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,cls:d.cls}}else m={t:c.t,h:c.h,cls:c.cls,btn:c.btn};
  if(!m){D.log.push(["pick-stale",c.pid]);const g=D.GONE[c.pid];if(g)D.after(()=>g(c.pp||{}));return {stale:1}}
  Q.unshift(m);const k=+a.i;const nw=window.__kpNoWarn;window.__kpNoWarn=true;/* asked on her phone already (kpGate) */
- try{if(m.opts){if(k>=0&&m.opts[k])chooseM(k);if(Q[0]===m){Q.shift();if(k>=0){L.splice(i,0,c);return {refused:1}}}}
+ /* F2 r2: her pick is her tap: run as solo (TH.tapRun: quiet off, her follow-up cards / numbers reach HER phone) */
+ let ui=null;try{if(m.opts){if(k>=0&&m.opts[k])ui=TH.tapRun(()=>chooseM(k)).ui;if(Q[0]===m){Q.shift();if(k>=0){L.splice(i,0,c);return {refused:1}}}}
  else closeModal()}finally{window.__kpNoWarn=nw}
- D.log.push(["pick",c.pid||c.t,k]);return {ok:1,i:k}});
+ D.log.push(["pick",c.pid||c.t,k]);const o={ok:1,i:k};if(ui)o.ui=ui;return o});
+/* guest: the screen effects of her pick (captured on the host) play once, when its answer lands (dr = that pick's id) */
+COOP.on("thinview",V=>{try{const r=!host()&&V&&V.o&&V.o.dr;if(!r||r.op!=="pick"||!TH.myPick.has(r.id))return;TH.myPick.delete(r.id);if(r.r&&r.r.ui)TH.uiPlay(r.r.ui)}catch(e){console.error("thin pick ui",e)}});
 /* her ack of the patches she applied */
 TH.onDo("pack",a=>{const n=+(a&&a.n)||0;const seat=CW.ctx;const L=D.PQ[seat]||[];
  for(const x of L)if(x.n<=n&&CW.rpend){delete CW.rpend["pq"+seat+x.n];if(x.rid)delete CW.rpend[x.rid]}D.PQ[seat]=L.filter(x=>x.n>n);
@@ -78594,6 +78631,9 @@ E.base=function(V){const o=V&&V.o;const mx=o?Math.max(0,...(o.pq||[]).map(x=>x.n
  return E.bs||{}};
 E.sent=function(cur){E.bs=J(cur);E.pn=(S&&S.thpn)||0};
 COOP.on("thinview",V=>{try{if(!on()||host()||!E.bs||!V||!V.o)return;const top=(S&&S.thpn)||0;for(const x of V.o.pq||[])if(x.n>E.pn&&x.n<=top){TH.pApply(E.bs,x.p);E.pn=x.n}}catch(e){console.error("thin E base",e)}});
+/* F2: the keys her diff never writes on the host (part F filters them out of an intent's ops: a patch's buổi kept in her base made her diff say
+   ["-",["buoi"]] and the host deleted her stored buổi before her walk ran — walk spill paid full price; found by coop-thin-f2 P7) */
+E.BAD=BAD;
 {const ds=TH.doSend;TH.doSend=function(op){const id=ds.apply(this,arguments);if(id&&!host()){E.last=id;if(op==="erd"||op==="ready"){EID.push(id);if(EID.length>20)EID.shift()}}return id}}
 /* review coop-thin-f1 r1 #2 (net): her ready on a socket that died. A phone's socket can look open while it is dead (4G, sleep): her erd +
    ready sent on it are lost, the socket then closes and COOP reconnects, and nobody sent them again: the host waited for her, her #next
@@ -78665,12 +78705,21 @@ function check(){if(!on()||!host()||busy||!S||S.dead)return;const w=COOP.state.w
 function whereOut(){if(!S||!S.where)return null;const W=X.mapMe(J(S.where),true,901);delete W["902"];return {W,menW:S.menW?J(S.menW):null}}
 function whereIn(o){if(!o||!o.W)return;const W=X.mapMe(J(o.W),false,902);const keep=S.where&&S.where[901];S.where=W;if(keep)S.where[901]=keep;if(o.menW)S.menW=J(o.menW)}
 let her=null;
+/* F2 r2: her buổi step's screen effects travel in the host's view (o.eui = {n, ui}); her phone plays a NEW n once (the first view it sees
+   only sets the mark: a reload / reconnect never replays an old step) */
+E.eui=null;
+{const hv=TH.hostView;TH.hostView=function(){const o=hv.apply(this,arguments);if(o&&E.eui)o.eui=E.eui;return o}}
+{let seen=null;COOP.on("thinview",V=>{try{if(host()||!V||!V.o)return;const u=V.o.eui;if(seen==null){seen=u?u.n:0;return}if(!u)return;if(u.n<seen){seen=u.n;return}if(u.n===seen)return;seen=u.n;TH.uiPlay(u.ui)}catch(e){console.error("thin E ui",e)}})}
 function herStep(Wh){const seat=other();let st=null;try{st=TH.seatOf(seat)}catch(e){}if(!st||!CW.on){E.stat.herSkip++;return}
  if(TH.held&&TH.held(seat)){E.stat.herSkip++;lg(["held",seat]);return}
  TH.withSeat(seat,()=>{if(!S||S.dead||S.mg){E.stat.herSkip++;return}const target=(TH.outerS&&TH.outerS.buoi)||0;
   her={W:Wh};const snap=wSnap();let n=0;
-  try{while(((S.buoi||0)!==target)&&n<4&&!S.dead){const b0=S.buoi||0;CW.allow=true;try{nextBuoi()}finally{CW.allow=false}n++;if((S.buoi||0)===b0)break}}
+  /* F2 r2 (same family as her intents, Foreman B): her buổi step is played as solo (TH.tapRun: quiet off) — her buổi-event cards
+     (card67, tdPop, Lỡ hẹn, Tin về chủ nhân …) go into HER Q → part-D cards on her phone, once; her floaters / toasts are captured and
+     ride the view (E.eui, played once on her phone); nothing draws on the host (screenOff) */
+  let T=null;try{T=TH.tapRun(()=>{while(((S.buoi||0)!==target)&&n<4&&!S.dead){const b0=S.buoi||0;CW.allow=true;try{nextBuoi()}finally{CW.allow=false}n++;if((S.buoi||0)===b0)break}})}
   catch(e){console.error("thin E her step",e)}finally{her=null;try{wRestore(snap)}catch(e){console.error("thin E restore",e)}}
+  if(T&&T.ui){E.eui={n:((E.eui&&E.eui.n)|0)+1,ui:T.ui}}
   E.stat.her+=n;lg(["her-step",target,S.buoi,n])})}
 /* in her step: no NPC acts again (his step rolled them, with her entry in the harem), her places = his, no host screen work */
 if(typeof rivalsBuoi==="function"){const f=rivalsBuoi;rivalsBuoi=function(){if(her&&CW.ctx)return "";return f.apply(this,arguments)}}
@@ -78794,7 +78843,7 @@ if(typeof render==="function"){const f=render;render=function(){const r=f.apply(
 (function(){try{
 const CW=window.COOPW;if(!CW||!CW.thin||!CW.X||typeof COOP!=="object")return;
 const TH=CW.thin,X=CW.X,J=X.J,D=TH.D,E=TH.E,LV=6;
-const host=()=>CW.seat==="a",on=()=>TH.on(LV);
+const host=()=>CW.seat==="a",on=lv=>TH.on(lv||LV);
 const F=TH.F={on,R:{},stat:{sent:0,ans:0,resend:0,give:0,run:0,dup:0,busy:0,local:0,bad:0,ms:[]},pend:null,log:[]};
 const lg=x=>{F.log.push(x);if(F.log.length>60)F.log.shift()};
 const RAW=Symbol.for("ctm.lens.raw");
@@ -78809,32 +78858,56 @@ const PRE={};/* name → the function below the wrapper (the host runs it) */
    caller took in the same tick rides with the pending intent; the card is shown once, when the answer (with her patch) has landed: the
    same kit card, title and rows as solo. A caller that took no snapshot never had a card (solo neither): none here. */
 let snapV=null;
-if(typeof rsnap==="function"){const r0=rsnap;rsnap=function(){const o=r0.apply(this,arguments);snapV=o;Promise.resolve().then(()=>{if(snapV===o)snapV=null});return o}}
+if(typeof rsnap==="function"){const r0=rsnap;rsnap=function(){const o=r0.apply(this,arguments);if(CW.ctx&&o&&typeof o==="object")try{Object.defineProperty(o,"__ctx",{value:CW.ctx})}catch(e){}snapV=o;Promise.resolve().then(()=>{if(snapV===o)snapV=null});return o}}
 function cardLater(p,dr){const b=p.bf;if(!b||!dr||!dr.r||dr.r.st!=="ok"||typeof resultShow!=="function")return;
- setTimeout(()=>{try{if(!S||S.dead)return;if((S.logSeq||0)!==b.seq||RKEYS.some(([k])=>(S[k]||0)!==b[k])){F.stat.card=(F.stat.card|0)+1;resultShow(p.ttl||"",b,null)}}catch(e){console.error("thin F card",e)}},0)}
-function gOn(){return on()&&!host()&&!!CW.seat&&!CW.ctx&&!!S&&!S.dead&&!CW.inLife&&!CW.inFC&&!CW.allow&&!CW.allowN&&!(TH.C&&TH.C.inWorld&&TH.C.inWorld())}
+ setTimeout(()=>{try{if(!S||S.dead)return;if(p.force||(S.logSeq||0)!==b.seq||RKEYS.some(([k])=>(S[k]||0)!==b[k])){F.stat.card=(F.stat.card|0)+1;resultShow(p.ttl||"",b,p.force?true:null)}}catch(e){console.error("thin F card",e)}},0)}
+function gOn(lv){return on(lv)&&!host()&&!!CW.seat&&!CW.ctx&&!!S&&!S.dead&&!CW.inLife&&!CW.inFC&&!CW.allow&&!CW.allowN&&!(TH.C&&TH.C.inWorld&&TH.C.inWorld())}
 function line(t){try{if(typeof kitLine==="function")kitLine(t);else log(t)}catch(e){}}
 function sendF(p){COOP.send({t:"do",op:"f",args:p.msg,base:TH.view?TH.view.v:0,id:p.id});E.last=p.id;p.at=Date.now()}
 function intent(name,args){const R=F.R[name],t00=performance.now();
- if(F.pend){F.stat.busy++;return false}
- let a=null;try{a=R.enc(args)}catch(e){console.error("thin F enc",name,e)}if(a==null){F.stat.bad++;lg(["bad",name]);return false}
- const V=TH.view;if(!V||!V.o){F.stat.bad++;return false}
+ if(F.pend){F.stat.busy++;return "busy"}
+ let a=null;try{a=R.enc(args)}catch(e){console.error("thin F enc",name,e)}if(a==null){F.stat.bad++;lg(["bad",name]);return "bad"}
+ const V=TH.view;if(!V||!V.o){F.stat.bad++;return "bad"}
+ if(R.snap&&typeof rsnap==="function")try{rsnap()}catch(e){}
  try{TH.gSync(V)}catch(e){}
  const c={};for(const [n,g] of R.ctx||[])try{const v=g();if(v!=null)c[n]=J(v)}catch(e){}
  let ops=[],cur=null;try{cur=E.curP();ops=TH.pDiff(E.base(V),cur)}catch(e){console.error("thin F diff",e)}
  const L=E.packs(ops);const last=L.pop()||[];const rid="f"+Date.now().toString(36)+Math.random().toString(36).slice(2,5);
  L.forEach((o,i)=>TH.doSend("erd",{id:rid,i,ops:o}));if(cur)E.sent(cur);
- const p=F.pend={id:"d"+rid,n:name,msg:{n:name,a,c,ops:last},t0:Date.now(),tries:0,pre:Math.round(performance.now()-t00)};p.bf=snapV;try{if(p.bf&&R.title)p.ttl=R.title(args)}catch(e){}sendF(p);F.stat.sent++;lg(["sent",name,p.id,ops.length]);
+ const p=F.pend={id:"d"+rid,n:name,msg:{n:name,a,c,ops:last},t0:Date.now(),tries:0,pre:Math.round(performance.now()-t00)};p.bf=snapV;try{if(p.bf&&R.title)p.ttl=R.title(args)}catch(e){}p.force=!!R.snap;p.args=args;p.b0=S.buoi||0;p.w0=COOP.state.week||0;p.room=COOP.state.room||"";try{p.walk=R.walk?R.walk(args):null}catch(e){p.walk=null}sendF(p);F.stat.sent++;lg(["sent",name,p.id,ops.length]);
  /* the pending state shows at once: #next locked + her act buttons off, in this same tick (no lost tap: the tap is held as the intent) */
  const t1=performance.now();try{CW.lockNext();render()}catch(e){}p.pr=Math.round(performance.now()-t1);return true}
 function answered(dr){const p=F.pend;if(!p||!dr||dr.id!==p.id)return;F.pend=null;F.stat.ans++;const ms=Date.now()-p.t0;F.stat.ms.push(ms);if(F.stat.ms.length>40)F.stat.ms.shift();
- lg(["ans",p.n,ms,dr.r&&dr.r.st]);F.lastAns={id:p.id,n:p.n,ms,r:dr.r,pre:p.pre,pr:p.pr,tries:p.tries};try{CW.lockNext();render()}catch(e){}cardLater(p,dr);}
+ lg(["ans",p.n,ms,dr.r&&dr.r.st]);F.lastAns={id:p.id,n:p.n,ms,r:dr.r/* the view's own object (main behaviour; the guest's name lens edits it in place) */,r0:dr.r?J(dr.r):null/* F2: the answer as sent */,pre:p.pre,pr:p.pr,tries:p.tries};
+ back(p,dr.r);try{CW.lockNext();render()}catch(e){}cardLater(p,dr);}
+/* F2 (gap 2/3): what the host's run wrote OUTSIDE her person (her khắc `used`, the pop-up popIdx/popMsg, tab / __fromMap) comes back with
+   the answer and is set here (only while she is still on the buổi the intent was made in: a buổi step resets them anyway); toasts her run
+   raised on the host (srvToast / kitLine, no-ops there) play here; then the registration's after-hook (e.g. the place card of a walk that
+   did not arrive, exactly where solo shows it) */
+function back(p,r){const R=F.R[p.n];if(!R||!r||r.st!=="ok")return;
+ try{if(r.c&&(S.buoi||0)===p.b0&&(COOP.state.week||0)===p.w0)for(const [n,,s] of R.ctx||[])if((R.back||[]).includes(n)&&n in r.c&&JSON.stringify(r.c[n])!==JSON.stringify((p.msg.c||{})[n]===undefined?null:p.msg.c[n]))s(r.c[n])/* only what her run changed */}catch(e){console.error("thin F back",e)}
+ try{if(r.ui)TH.uiPlay(r.ui)}catch(e){}
+ try{if(R.done)R.done(p.args,r,p)}catch(e){console.error("thin F done",e)}}
 COOP.on("thinview",V=>{try{if(!host()&&V&&V.o)answered(V.o.dr)}catch(e){console.error("thin F view",e)}});
 COOP.on("error",m=>{try{const p=F.pend;if(!p||!m||m.id!==p.id||host())return;if(m.code==="nohost"||m.code==="nothin")p.at=0/* resend at the next tick */}catch(e){}});
 setInterval(()=>{const p=F.pend;if(!p||host())return;if(!on()||COOP.frozen)return;if(Date.now()-p.at<8000)return;
  if(p.tries>=3){F.pend=null;F.stat.give++;lg(["give",p.n,p.id]);line("Việc ấy chưa thành, xin thử lại.");try{CW.lockNext();render()}catch(e){}return}
  p.tries++;F.stat.resend++;lg(["resend",p.n,p.id,p.tries]);sendF(p)},1000);
-COOP.on("room",()=>{F.pend=null});
+/* F2 net loss (the whole intent family, F1 too): her socket can look open while dead (4G, sleep): the intent frame, or the host's answer,
+   is lost, then COOP reconnects ("room"). Dropping the pending intent there lost her tap in silence (a P7 walk-spill red: the host ran the
+   walk, her phone never heard, no resend, no word). Same room + same week: keep it and send it again as soon as the room level is back
+   (the 1 s tick below; the host dedupes by intent id, DONE kept per room, so a walk the host already ran is answered from DONE, never run
+   twice). Another room / another week: the intent is stale, dropped with the "not done" word (her tap is never silently lost). */
+/* r2 (review r1 item 2): the room may have stepped the buổi while her socket was dead (a time-out forceBend): the intent's ctx (her khắc
+   `used`) belongs to the old buổi, so it is resent only once her reconnect view shows the SAME buổi (p.b0); another buổi → dropped with the
+   same words. The check waits for her first view after the reconnect (p.rv), then the 1 s tick sends it (DONE dedupe on the host unchanged). */
+const stale=p=>p.room!==(COOP.state.room||"")||(COOP.state.week||0)!==p.w0;
+function dropP(p,why){F.pend=null;lg(["drop",p.n,p.id,why]);F.stat.drop=(F.stat.drop|0)+1;line("Việc ấy chưa thành, xin thử lại.");try{CW.lockNext();render()}catch(e){}}
+COOP.on("room",()=>{const p=F.pend;if(!p)return;if(stale(p))return dropP(p,"room");
+ p.rv=Date.now();p.at=Infinity/* held until her view after the reconnect (or 8 s: the check runs on what she has) */;F.stat.reNet=(F.stat.reNet|0)+1;lg(["reNet",p.n,p.id])});
+function reCheck(p){if(stale(p))return dropP(p,"room");if((S.buoi||0)!==p.b0)return dropP(p,"buoi");p.rv=0;p.at=0/* same buổi: sent again at the next tick */}
+COOP.on("thinview",V=>{const p=F.pend;if(!p||!p.rv||host())return;try{if(V&&V.o&&V.o.dr&&V.o.dr.id===p.id)return/* answered: handled above */;reCheck(p)}catch(e){console.error("thin F reNet",e)}});
+setInterval(()=>{const p=F.pend;if(p&&p.rv&&!host()&&Date.now()-p.rv>8000)try{reCheck(p)}catch(e){}},1000);
 /* pending = busy: #next waits (existing lockNext words through CW.eWait), act buttons off (can) */
 {const w=CW.eWait;CW.eWait=()=>!!(w&&w())||!!(F.pend&&on()&&!host())}
 if(typeof can==="function"){const f=can;can=function(){if(F.pend&&on()&&!host()&&!CW.ctx)return false;return f.apply(this,arguments)}}
@@ -78846,21 +78919,35 @@ function doneSave(){try{while(DONE.size>60)DONE.delete(DONE.keys().next().value)
 let loaded="";
 TH.onDo("f",(a,m)=>{a=a||{};const id=m&&m.id;if(loaded!==LSK()){DONE.clear();doneLoad();loaded=LSK()}
  if(id&&DONE.has(id)){F.stat.dup++;lg(["dup",a.n,id]);return DONE.get(id)}
- const R=F.R[a.n];if(!R||!on()){return {st:"off"}}
- if(Array.isArray(a.ops)&&a.ops.length){TH.pApply(S,a.ops);try{D.rebase()}catch(e){}}
+ const R=F.R[a.n];if(!R||!on(R.lv)){return {st:"off"}}
+ if(Array.isArray(a.ops))a.ops=a.ops.filter(o=>!(Array.isArray(o[1])&&E.BAD&&E.BAD.has(o[1][0])));/* belt: her diff never writes a host-owned key (buoi, origin, thq …) */
+ if(Array.isArray(a.ops)&&a.ops.length){lg(["ops",a.n,a.ops.slice(0,16).map(o=>String(o[0])+(Array.isArray(o[1])?o[1].map(x=>typeof x==="object"?"#":x).join("."):"")+(typeof o[2]==="number"||typeof o[2]==="string"?"="+String(o[2]).slice(0,12):""))]);TH.pApply(S,a.ops);try{D.rebase()}catch(e){}}
  let out={st:"ok"};const keep=[];
  try{for(const [n,g,s] of R.ctx||[]){keep.push([s,g()]);s(n in (a.c||{})?a.c[n]:null)}
   const args=R.dec(a.a);if(!args){out={st:"gone"}}
-  else{const r=PRE[a.n].apply(null,args);F.stat.run++;if(R.log&&r)log(r);out={st:"ok",r:typeof r==="string"?r.replace(/<[^>]+>/g,"").slice(0,200):null}}}
+  else{/* F2 r2 (review r1 item 1, every registration, F1 too): her tap runs as solo (TH.tapRun: quiet off → her cards into her Q = part D
+      cards on her phone; her toasts / floaters / coin and item effects captured, played on HER phone with the answer; nothing on the host's screen) */
+   const T=TH.tapRun(()=>PRE[a.n].apply(null,args)),r=T.r,ui=T.ui;F.stat.run++;if(R.log&&r)log(r);out={st:"ok",r:typeof r==="string"?r.replace(/<[^>]+>/g,"").slice(0,200):null};
+   if(typeof r==="boolean")out.rv=r;if(ui&&ui.length)out.ui=ui.slice(0,4);
+   if(R.back){const c={};for(const [n,g] of R.ctx||[])if(R.back.includes(n))try{const v=g();c[n]=v===undefined?null:J(v)}catch(e){}out.c=c}
+   if(R.host)try{R.host(args,out)}catch(e){console.error("thin F host",e)}}}
  catch(e){console.error("thin F run",a.n,e);out={st:"err",e:String(e&&e.message||e).slice(0,200)}}
  finally{for(const [s,v] of keep)try{s(v)}catch(e){}}
  lg(["run",a.n,out.st]);if(id){DONE.set(id,out);doneSave()}return out});
 
 /* ---------- the wrapper ---------- */
+/* F2 (whole family, F1 too): her phone reconnected and the room's level is not back yet (TH.lvl 0 until the server's "thin" answer): a tap
+   in that gap must not take the old road (her walk / act run on her phone, then thrown away by the host's next view = a lost or doubled
+   tap). It is refused with the existing linking words (the same gap #next is locked in, jcoopworld lockNext). */
+const gap=lv=>!host()&&!!CW.on&&(CW.lvWas|0)>=(lv||LV)&&!on(lv);
+const gapWord=()=>{try{return (typeof CTM_WAIT==="object"&&CTM_WAIT.coopLinking)||"Đang nối…"}catch(e){return "Đang nối…"}};
 F.reg=function(name,R){const f=window[name];if(typeof f!=="function"||F.R[name])return false;F.R[name]=R;PRE[name]=f;
- window[name]=function(){if(!on()||host()||!R.mine(arguments))return f.apply(this,arguments);
-  if(!gOn()){F.stat.local++;return f.apply(this,arguments)}
-  intent(name,[...arguments]);return R.ret!==undefined?R.ret:""};return true};
+ window[name]=function(){if(gap(R.lv)&&(!R.lv||R.mine(arguments))){F.stat.gap=(F.stat.gap|0)+1;lg(["gap",name]);line(gapWord());return R.ret!==undefined?R.ret:""}
+  if(!on(R.lv)||host())return f.apply(this,arguments);
+  if(!R.lv&&!R.mine(arguments))return f.apply(this,arguments);/* F1 order kept */
+  if(!gOn(R.lv)){F.stat.local++;return f.apply(this,arguments)}
+  if(R.lv&&!R.mine(arguments)){F.stat.gate=(F.stat.gate|0)+1;return f.apply(this,arguments)}/* F2: a decision card first (local, read-only) */
+  const st=intent(name,[...arguments]);if(st==="bad"&&R.lv){F.stat.local++;return f.apply(this,arguments)}return R.ret!==undefined?R.ret:""};return true};
 
 /* ---------- F1: runAct (her Hành động acts) ---------- */
 F.reg("runAct",{log:true,title:A=>ACT[A[2]]?ACT[A[2]].n:"",
@@ -78872,6 +78959,53 @@ F.reg("runAct",{log:true,title:A=>ACT[A[2]]?ACT[A[2]].n:"",
   else if(typeof a.x==="number")x=a.x;return [S,t,a.k,x]},
  ctx:[["sg",()=>typeof SG==="object"&&SG.mod?SG.mod:null,v=>{if(typeof SG==="object")SG.mod=v}],["err",()=>S.__err||null,v=>{S.__err=v||0}]]});
 function C0(e){const o=Object.assign({},e);delete o.ci;return o}
+
+/* ---------- F2: her places / goTo / visits (level 7; report dev/handover/reports/coop-thin-f2.md step 0) ----------
+   Registered: goTo, visitPal, goSee, accEtqGo, accAsk, accSneak, talk, scout, invite, srvGoTo, kcGo (the engine functions every walk /
+   visit / greeting / talk tap ends in; routers and decision cards stay on her phone). A call whose FIRST step is a decision card (the
+   trung y card jty, the access gate j41, the greeting gate j77, a walk that spills into the next buổi) runs here exactly as solo and only
+   shows that card (read-only); its choice calls a registered engine = an intent. Persons travel as ids, places as keys, the road after a
+   greeting as data (j77 accThen). Her khắc clock (used), the pop-up (popIdx / popMsg), tab / __fromMap and the call-scoped walk flags ride
+   in ctx and the written ones come back with the answer (gap 2). */
+const L7=7;
+const WF=(n,z)=>[n,()=>window[n]===undefined?null:window[n],v=>{window[n]=v==null?z:v}];
+const CX=[["used",()=>used,v=>{if(typeof v==="number")used=v}],["tab",()=>typeof tab==="undefined"?null:tab,v=>{if(v)tab=v}],WF("__fromMap",0),WF("__walkSpill",null),
+ WF("__tyGo",0),WF("__tyCardK",null),WF("__j77etq",0),WF("__accSilent",0),WF("__accStay",0),["popIdx",()=>popIdx,v=>{popIdx=v===undefined?null:v}],["popMsg",()=>popMsg,v=>{popMsg=v==null?"":v}]];
+const BACK=["used","tab","__fromMap","popIdx","popMsg"];
+/* the decision cards before a walk (each = the condition its own wrapper tests; true → the walk runs here and stops at that card) */
+const tyG=k=>{try{return typeof tyOn==="function"&&tyOn(S)&&!!k&&k!=="home"&&k!==S.place&&!window.__tyGo&&window.__tyCardK!==k&&!S.out}catch(e){return false}};
+const accG=k=>{try{return !!k&&k!=="home"&&k!==S.place&&!window.__accStay&&typeof accessOf==="function"&&!accessOf(S,k).ok}catch(e){return false}};
+const etqG=k=>{try{return !!k&&k!=="home"&&k!==S.place&&!window.__accSilent&&!window.__j77etq&&typeof accEtq==="function"&&!!accEtq(S,k)&&!S.confined&&!S.out}catch(e){return false}};
+const idle=()=>!!S&&!S.dead&&!Q.length;/* solo refuses a walk under an open card: so does her phone (nothing sent) */
+const gateGo=k=>tyG(k)||accG(k)||etqG(k);
+const gatePerson=k=>{if(!k||S.place===k)return false;if(S.confined||S.out||accG(k)||etqG(k)||tyG(k))return true;let tc=1;try{tc=travel(S.place,k)}catch(e){}return !walkOk(tc)/* spill / no khắc: walkGo's own road */};
+const vOf=id=>(rivals||[]).find(v=>v&&v.id===id)||null;
+const idEnc=A=>{const v=vOf(A[0]);return v&&v!==S?{id:v.id}:null};
+const idDec=a=>a&&vOf(a.id)?[a.id]:null;
+/* host: her place moved → the host's world where + his stage follow her stored person at once (jcoopworld herPl7) */
+/* (and one render of the host's own screen: a stage her walk repainted inside her context shows her place until then). Only walks do this:
+   an extra host render in every run moves her Sổ ghi sync (jlogsync) out of step with the host's copy (bisected on F1, kept as main) */
+const herMoved=()=>{try{D.after(()=>{try{if(CW.keepFriendPos)CW.keepFriendPos();if(CW.refreshHere)CW.refreshHere()}catch(e){}})}catch(e){}};
+const placeCard=(A,r,p)=>{if(p&&p.card&&p.walk&&S&&S.place!==p.walk&&!Q.length&&typeof j77Card==="function")j77Card(p.walk)};
+const W7={lv:L7,ctx:CX,back:BACK,host:herMoved};
+F.reg("goTo",Object.assign({},W7,{mine:A=>typeof A[0]==="string"&&!!A[0]&&idle()&&!gateGo(A[0]),enc:A=>({k:A[0]}),dec:a=>a&&typeof a.k==="string"?[a.k]:null,walk:A=>A[0],done:placeCard}));
+F.reg("visitPal",Object.assign({},W7,{mine:A=>{const v=vOf(A[0]);return !!v&&idle()&&!gatePerson(palaceOf(v))},enc:idEnc,dec:idDec,walk:A=>{const v=vOf(A[0]);return v?palaceOf(v):null}}));
+F.reg("goSee",Object.assign({},W7,{mine:A=>{const v=vOf(A[0]);return !!v&&idle()&&!gatePerson(whereOf(v))},enc:idEnc,dec:idDec,walk:A=>{const v=vOf(A[0]);return v?whereOf(v):null}}));
+const THEN=new Set(["goTo","visitPal","goSee"]);
+F.reg("accEtqGo",Object.assign({},W7,{snap:true,mine:()=>idle(),
+ title:A=>{const h=A[1];try{return A[2]?`Bái kiến ${accRkName(h)} ${h.name}`:`Vào ${accName(A[0])} không bái kiến`}catch(e){return ""}},
+ enc:A=>{const t=A[3]&&A[3].__f;const h=A[1];if(!t||!THEN.has(t.f)||!h||h.id==null)return null;return {k:A[0],h:h.id,g:A[2]?1:0,t:{f:t.f,a:J(t.a||[]),etq:t.etq?1:0}}},
+ dec:a=>{if(!a||!a.t||!THEN.has(a.t.f))return null;const h=vOf(a.h);if(!h)return null;const t=a.t;
+  const then=()=>{const fn=window[t.f];if(typeof fn!=="function")return;if(t.etq){window.__j77etq=1;try{fn.apply(null,t.a)}finally{window.__j77etq=0}}else fn.apply(null,t.a)};return [a.k,h,a.g,then]},walk:A=>A[0]}));
+for(const n of ["accAsk","accSneak"])F.reg(n,Object.assign({},W7,{mine:A=>typeof A[0]==="string"&&idle(),enc:A=>({k:A[0]}),dec:a=>a&&typeof a.k==="string"?[a.k]:null}));
+F.reg("talk",Object.assign({},W7,{host:null,mine:A=>typeof A[0]==="number"&&popIdx!=null&&!!S&&!!S.visit&&idle(),enc:A=>({oi:A[0]}),dec:a=>a&&typeof a.oi==="number"?[a.oi]:null}));
+for(const n of ["scout","invite"])F.reg(n,Object.assign({},W7,{host:null,mine:A=>typeof A[0]==="number"&&idle(),enc:idEnc,dec:idDec}));
+F.reg("srvGoTo",Object.assign({},W7,{ret:false,mine:A=>typeof A[0]==="string"&&!!S&&!S.dead&&!Q.length,enc:A=>({k:A[0]}),dec:a=>a&&typeof a.k==="string"?[a.k]:null}));
+F.reg("kcGo",Object.assign({},W7,{ret:false,mine:A=>typeof A[0]==="string"&&!!S&&!S.dead&&!Q.length,enc:A=>({k:A[0]}),dec:a=>a&&typeof a.k==="string"?[a.k]:null,
+ done:(A,r)=>{if(r&&r.rv&&S&&S.place===A[0]){tab="act";try{render()}catch(e){}}}/* its tap handler switches to the act tab when it went (jkc :626) */}));
+/* gap 4: the "did she arrive?" callers (j77Tap, walkSpillTick) open the place card right after goTo; while her walk there is pending the
+   card waits for the answer (placeCard) — never a card before the host has said, never a lost tap */
+if(typeof j77Card==="function"){const jc=j77Card;j77Card=function(k){const p=F.pend;if(p&&p.walk&&p.walk===k&&!host()&&on(L7)){p.card=1;return}return jc.apply(this,arguments)}}
 }catch(e){console.error("jcoopthinf",e)}})();
 
 try{regSweep();setTimeout(regSweep,0)}catch(e){console.error(e)}
@@ -78903,7 +79037,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="d950b30df888";window.CTM_BUILD=BUILD;
+const BUILD="057913cef75a";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
