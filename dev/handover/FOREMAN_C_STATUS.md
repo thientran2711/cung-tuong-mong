@@ -686,7 +686,14 @@ RUNNING (my children, this account, env cung-tuong-mong; #19 adopts):
 - CTM errand-scene badge lines successor (for MAIN) opus session_01Rc5AsL23c5v2Nwya3bgsRc: reviewer MAIN's 01Rc5AsMQH6saABuVfGgPzYi.
 - npc-purpose (D, files only): no new G1 SẴN SÀNG.
 OPEN: THỬ TAY CTM-CAL code (waits owner).
-## FOREMAN C-AG #19
+## HANDOVER C-AG #19 (session_01Rc5AsNCvGfZTt5nTmWjtcZ) → C-AG #20, 04:05Z 19/11
+Why: context 31 % (get_session 305k/1M; START ~6 %) = roll line 31 %. Depth 6 → #20 depth 7 (my child, prompt TAKEOVER_FOREMAN_C_AG20.md). My wake trig_01Fq6DNoH5PVXSwZg8coevVv DISABLED (#20 makes its own at :32).
+MAIN = ROOT-63 session_01Rc5AsN8fHJWShQ7rSPxjx5. LIVE main = c12a5878 (maid-ladder-6).
+RUNNING: odds-meter-back worker 01Rc5AsJj8qdidmEiDujymyR SSK 42bda6a9 (stopped; MAIN SMALL reviewer 01Rc5AsJ4JEEMogtiNCfMZ6x final-merges c12a5878) → on FAIL #20 opens successor; after LAND archive worker. npc-purpose D seats: files only, no new G1 SSK.
+DONE: errand r5 owner FAIL → ROOT-63 runs r6 itself; my r5 worker archived.
+SEATS answer to MAIN 04:02Z: running 1 / cap 12, QUEUE EMPTY, free 11. Foreman C (art) = ROOT-40 session_01PEhRbxWyxgFDaY3YrpyVZR (other account; order relayed by file line at top of this file).
+OPEN: THỬ TAY CTM-CAL code (waits owner).
+## FOREMAN C-AG #19 (rolled over 04:05Z)
 FOREMAN C-AG #19 = session_01Rc5AsNCvGfZTt5nTmWjtcZ (child of C-AG #18) · START_CTX ~6 % (est; window 1M; get_session reads 0) → roll over at >= 31 %, ceiling 60 % · depth 6 (limit 8) · wake hourly :32 (own trigger) · reports to MAIN ROOT-63 session_01Rc5AsN8fHJWShQ7rSPxjx5 (was ROOT-62).
 - 02:35Z C-AG #19 took over (TAKEOVER_FOREMAN_C_AG19.md). LOAD 2 own children (for MAIN): odds-meter-back 01Rc5AsJj8qdidmEiDujymyR (law-3 «Tốn: không» fix on 3216fd90, ROOT-62 opens SMALL reviewer), errand-scene badge-lines 01Rc5AsL23c5v2Nwya3bgsRc (reviewer MAIN's 01Rc5AsMQH6saABuVfGgPzYi); + npc-purpose D seats (files only, no new G1 SẴN SÀNG since 4df12bed). LIVE main b1c3631e. Open: THỬ TAY CTM-CAL code.
 - 02:38Z C-AG #19: wake trig_01Fq6DNoH5PVXSwZg8coevVv (:32). MAIN ROOT-62: LIVE main = 89aa1bd9 (role-parity-3+seed, tooling) → relayed to odds-meter-back + errand-scene: final-merge current main at SẴN SÀNG.
