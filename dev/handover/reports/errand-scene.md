@@ -81,3 +81,32 @@ WHERE THE CODE IS (all one kit part): dev/build/jmark.js `kitMarkLine(st)` / `ki
 SUGGESTED SHAPE (my read, check against her verbatim words): line(st, sex) = floor − H_sex − gap, H_sex = the stage body for that sex (woman H; man H×KIT_FIG.man — j59 caps men under the ribbon, so read the real man body or KIT_FIG.man), measured at the HEAD TOP (kitFigTop / fig-ht.json), not the crown; marker / «!» bottom on that line (a crown may then rise behind/through the badge? owner says "never cover a face" — the face is below the head top, so the line at head top − gap is safe; check crowns visually, report if a tall crown is covered). Mood chip: back to beside the head at a fixed offset from the SAME sex line (top = line top or head height ±, one column offset from the centre line, same for every figure of that sex) — not on the high row. kitBadgeAt needs a sex argument from the figure (fig file prefix: KIT_FIG.fac / /fig-(emperor|eunuch|official|physician|man)-/ or unknown-fig-m). j59 meCap may then go back to the head-top room (no crown room).
 SCAN: dev/test/bang-line-scan.js (env PLACES, HH=1, CAST=qn, SHOTS/TAG/DPR) — change its check to "level per sex group" (top spread per kind within women / within men ≤ 2, Δ to that sex line ≤ 2, column equal ±2, gap to face ≥ 0); BEFORE = 88f3233a. Montage: see the PIL snippet idea in r3b (Fold | iPad pairs).
 HOW TO RUN: main checkout /home/user/cung-tuong-mong (this container; a successor gets a fresh clone at review/errand-scene); bash dev/site/build_site.sh; node dev/test/errand-scene.js file:///<wt>/ <out> 755 1000 | 1180 820; node dev/test/bang-line-scan.js file:///<wt>/ W H [json]; gate bash dev/tools/quickcheck.sh (fails NOT BUILT until index.html/sw.js/assets.json are committed). Merges: checkout --theirs index.html sw.js, rebuild; assemble.py keeps jerr.js after jnotice.js/jstagehere.js (before jmapz.js).
+
+## r4 — TWO BADGE LINES + MOOD CHIP AT THE HEAD (worker session_01Rc5AsL23c5v2Nwya3bgsRc, successor opened by C-AG #18 for ROOT-61; START_CTX ~3 %, depth 6)
+PRIORITY #1 CHECK ('kitMarkLine badge line sex'): OD L1941 (19/11 ~02:05Z, verbatim, done) | main: none (only my r3 kitMarkLine on review/errand-scene) | review/*: none | claims: this session | reused: kitMarkLine/kitBadgeAt (r3), KIT_FIG.fac (sex), fig-ht head top (kitFigTop), KIT_FIGSEAL.dy (owner-approved head height .916).
+SHA: review/errand-scene @ babb5b36 (pushed) = r4 06b74eca + merges of LIVE main b1c3631e (assemble.py: jerr.js kept after jnotice/jsmg, before jmapz) and 89aa1bd9 (newest origin/main at report time).
+WHAT (one kit part, KIT §78.y canon overwrite in place; §28.8d, §41, §90 lines updated):
+- jmark.js kitMarkLine(st,sex): women line = floor − H (standard woman head top), men line = floor − Hm (H×KIT_FIG.man capped under the ribbon; j59 writes data-kml-m); bottom = head − KIT_MEMARK.gap×H. No crown/hat room any more (the old "sky").
+- «ta ở đây» + yellow «!»: badge BOTTOM on the line of the figure's sex, centre line → level with each other; men's marks higher. kitBadgeSex(fig) = KIT_FIG.fac rule.
+- Mood chip (jfigseal stage branch): AT the head, beside it: centre = centre line ± KIT_BADGE.dx .12×Hs, floor − KIT_BADGE.dy .916×Hs (same spot for every figure of one sex); mirrored at #kshR/#kshL as before. dx .12 (not the dialog .194): with .194 a mirrored chip landed on the neighbour's chip (iPad Chiêu Huy điện); .12 clears the face column and keeps chips apart.
+- j59 meCap: H×KIT_FIG.man + kitMarkRoom ≤ stage − floor band (was ×(1+cRef)).
+- A tall crown (crowned Hoàng hậu) now rises behind her marker; no mark covers a face (scan).
+SCAN dev/test/bang-line-scan.js rewritten per sex (Δ to sex line ≤2, level spread ≤2, column ≤2, mark bottom ≤ head top, chip never on the face box, chip centre in the head band, chips never overlap each other, men's line higher, «ta ở đây» level with women's «!»). AFTER: PASS Fold 19 stages/35 figures, iPad 19/56; HH=1 PASS Fold 35, iPad 57. BEFORE = 88f3233a build (same new checks):
+| device | kind/sex | BEFORE 88f3233a | AFTER babb5b36 | n |
+|---|---|---|---|---|
+| Fold 755x1000 | me/f | lev 0.0 · col 0.0 · min gap to head 92.1 · stages FAIL 0 | Δline 0.9 · lev 0.0 · col 0.0 · min gap to head 6.0 · FAIL 0 | 19 badges |
+| Fold 755x1000 | hap/f | lev 0.0 · col 0.0 · min gap to head 76.4 · stages FAIL 0 | Δline 1.0 · lev 0.0 · col 0.0 · min gap to head 6.0 · FAIL 0 | 12 badges |
+| Fold 755x1000 | hap/m | lev 0.0 · col 0.0 · min gap to head 76.6 · stages FAIL 0 | Δline 0.0 · lev 0.0 · col 0.0 · min gap to head 7.0 · FAIL 0 | 4 badges |
+| Fold 755x1000 | emo/f | lev 0.0 · col 0.1 · face overlap px² – · stages FAIL 19 | Δline 0.1 · lev 0.0 · col 0.1 · face overlap px² 0.0 · FAIL 0 | 28 badges |
+| Fold 755x1000 | emo/m | lev 0.0 · col 0.0 · face overlap px² – · stages FAIL 1 | Δline 0.0 · lev 0.0 · col 0.0 · face overlap px² 0.0 · FAIL 0 | 1 badges |
+| Fold 755x1000 | «ta ở đây» vs women's «!» | Δ bottom 21.0 | Δ bottom 0.9 | 12 stages |
+| iPad 1180x820 | me/f | lev 0.0 · col 0.0 · min gap to head 71.0 · stages FAIL 0 | Δline 0.9 · lev 0.0 · col 0.0 · min gap to head 4.7 · FAIL 0 | 19 badges |
+| iPad 1180x820 | hap/f | lev 0.0 · col 0.0 · min gap to head 82.0 · stages FAIL 0 | Δline 1.0 · lev 0.0 · col 0.0 · min gap to head 4.5 · FAIL 0 | 28 badges |
+| iPad 1180x820 | hap/m | lev 0.0 · col 0.0 · min gap to head 54.7 · stages FAIL 0 | Δline 0.0 · lev 0.0 · col 0.0 · min gap to head 5.4 · FAIL 0 | 9 badges |
+| iPad 1180x820 | emo/f | lev 0.1 · col 0.1 · face overlap px² 0.0 · stages FAIL 19 | Δline 0.0 · lev 0.0 · col 0.1 · face overlap px² 0.0 · FAIL 0 | 34 badges |
+| iPad 1180x820 | emo/m | lev 0.0 · col 0.0 · face overlap px² 0.0 · stages FAIL 1 | Δline 0.0 · lev 0.0 · col 0.0 · face overlap px² 0.0 · FAIL 0 | 1 badges |
+| iPad 1180x820 | «ta ở đây» vs women's «!» | Δ bottom 11.9 | Δ bottom 0.9 | 12 stages |
+(BEFORE emo FAIL = chip on the high row, centre far above the head band; «ta ở đây» vs «!» 12–21 px apart because tops aligned with different heights.)
+TESTS: QUICKCHECK PASS on the final merge (219 s, old save ok); errand-scene 53/53 Fold + iPad; bang-line-scan 4/4 PASS; 0 page errors.
+SHOTS (LOOKED): montage Fold | iPad pairs (home Nhã Vận hiên with «!», Ngự hoa viên Quý nhân + Hoàng thượng, Đức Thọ cung, she = crowned Hoàng hậu): https://ctm-img.victoria-tntt.workers.dev/img/_review/errand-scene/montage-badge-lines.jpg . Wipe after verdict: python3 dev/site/cdn_sync.py --wipe-review errand-scene.
+NOTE: children (KIT_FIG.kid) use their sex line (none on any scanned stage).
