@@ -1281,6 +1281,43 @@ def nude2(o,c,opt):
         o=o.replace("her colour is the second colour",NUDE2_COL[opt]+" is the second colour",1)
     assert "phoenix" not in o.lower()
     return o
+# ---------- --nude3 (F4b, owner Lượt 364 + 369, ROOT-46 order 19/11 ~08:09Z): NỮ ĐẾ REBUILT on the approved Hoàng hậu prompt B (store `build.py cNN v0`).
+# Base = the HH t8 store output for the same person (keeps face, colour rule, image-3 royal swatch sentence + ref order: Lượt 359). Swapped, each piece COPIED from approved text:
+#  (1) title + outfit header + dragon motif = approved Nữ đế A builder (build_nude_own); (2) headdress segment (dragon crown + bead fringe lưu) = build_nude_own output verbatim;
+#  (3) HH cloud collar -> the Nữ đế shoulder piece of her option (NUDE_OPT, approved A-D); (4) second colour = her option (NUDE_OPTMAP auto); (5) item = her Nữ đế item (FIGURE_GATE H list, NUDE_ITEM) + matching hand clause;
+#  (6) + HAIR UP / SLEEVES / FABRIC sentences copied verbatim from dev/art/owner-copy/tpl_hh.txt (prompt B, Lượt 331/355/364/369: hair up, one sleeve layer to the floor, "FABRIC: thick gold-embroidered brocade with a graceful, flowing drape.").
+NUDE3_HHSENT=("HAIR UP: ALL of her glossy pure BLACK hair (never brown) is swept UP and gathered into the tall high chignon on top of her head under the crown, smooth at the nape; NO hair hanging loose down her back or over her shoulders. "
+ "SLEEVES: very long, very wide, flowing sleeves that fall well past her hands and hang PAST her ankles all the way down until they TOUCH THE FLOOR, ONE single sleeve layer (no shorter outer sleeve on top); the brocade flows and drapes softly like heavy silk, never stiff. "
+ "FABRIC: thick gold-embroidered brocade with a graceful, flowing drape.")
+def nude3(o,c):
+    import re as _re
+    _tpl=open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"..","owner-copy","tpl_hh.txt"),encoding="utf-8").read()
+    assert NUDE3_HHSENT in _tpl,"HH prompt-B sentences drifted from tpl_hh.txt"
+    opt=NUDE_OPTMAP[c]; O=NUDE_OPT[opt]
+    global NUDE_OPTSEL; _sv=NUDE_OPTSEL; NUDE_OPTSEL=opt
+    pal,face=DATA[c]; right=(int(c[1:])%2==1)
+    own=build_nude_own(c,face,right); NUDE_OPTSEL=_sv
+    def rep(a,b):
+        nonlocal o; assert o.count(a)==1,("nude3 anchor",a[:60]); o=o.replace(a,b,1)
+    rep("An imperial consort, the Empress.","An imperial consort, the Female Emperor (Nữ đế), the highest rank of all.")                                   # (1)
+    rep("Outfit (the Empress (Hoàng hậu), clearly much richer and more splendid than the lower ranks): the Empress's imperial phoenix ceremonial robe",
+        "Outfit (the Female Emperor (Nữ đế), equal to the Empress in colour but clearly more majestic, and different in design from the Empress's robe): a woman's imperial ceremonial dragon robe")
+    a=o.index("the GRANDEST headdress of all:"); b=o.index("clearly grander than every other rank.")+len("clearly grander than every other rank.")   # (2)
+    a2=own.index("the GRANDEST headdress of all:"); b2=own.index("clearly grander than every other rank.")+len("clearly grander than every other rank.")
+    o=o[:a]+own[a2:b2]+o[b:]
+    rep("a wide jewelled gold-and-pearl cloud collar with layered pearl fringes over the shoulders",O["sh"])                                          # (3)
+    if O["sec"]:                                                                                                                                       # (4)
+        m=_re.search(r"golden yellow silk mixed with ([a-z ]+?),",o); assert m; rep(m.group(0),f"golden yellow silk mixed with {O['sec']},")
+        i=o.index("her ORIGINAL robe colour is kept exactly"); j=o.index("the royal golden yellow is the DOMINANT"); o=o[:i]+o[j:]
+        rep("her colour is the second colour",O["secrule"]+" is the second colour")
+    t8item,t8hk=age_item(c,"t8",*ITEMS[item_for(c)]); nitem,nhk=age_item(c,"nude",*NUDE_ITEM[c])                                                     # (5)
+    rep(f"she holds {t8item} in a contrasting colour",f"she holds {nitem} in a contrasting colour")
+    i=o.index(" Her hands and body: ")+len(" Her hands and body: "); j=o.index(". Every hairpin is inserted")
+    o=o[:i]+_hh(hand,nhk,right)+o[j:]
+    o=o.replace("phoenixes","dragons").replace("The phoenix is the main","The dragon is the main").replace("All flowers, birds and the phoenix","All flowers, clouds and dragons")
+    assert "phoenix" not in o.replace("phoenix-and-dragon","").replace("gold phoenix with raised wings",""),"stray phoenix"
+    rep(" COLOUR RULE:"," "+NUDE3_HHSENT+" COLOUR RULE:")                                                                                            # (6)
+    return o
 # ---- N5d item 2: gen ledger (--log) + verifier (--verify) -------------------------------------------------
 # --log   appends {ts, cmd, argv, prompt, refs, gen_id, magnific_prompt} to dev/art/gen_ledger.jsonl (gen_id / magnific_prompt null until filled)
 # --refs  prints the A0 reference list (JSON) to stderr; the prompt on stdout stays byte-identical
@@ -1384,6 +1421,7 @@ if __name__=="__main__":
             _n=_o.count(_old8)+_o.count(_old7); assert _n==1,("head slot not found",_n)
             _o=_o.replace(_old8,"a FULL tall imperial crown, clearly taller and wider than a noble consort's crown, "+HEAD[_k]+";").replace(_old7,HEAD[_k]+".")
     if NUDE2: _o=nude2(_o,a[0],NUDE2)
+    if "--nude3" in _RAW: _o=nude3(_o,a[0])
     # owner 18/11 ~22:55Z (FIGURE_GATE A0 REFERENCES): ROYAL cases (--trieu N>=6, --state nude, --state bd6) = 3 images, image 3 = royal-yellow swatch. One flag-independent sentence; every other output byte-identical.
     # N2 r10b (ROOT-33): bd6 keeps swatch as image 3 but its robe is teal with no royal-yellow part (FIGURE_GATE C8 has no yellow rule for Bắc Địch Quý phi) -> no image-3 sentence for bd6
     # W107 (ROOT-36, FIGURE_GATE A0 REFERENCES: ROYAL ranks Quý phi t6 and up = 3 images, image 3 = royal-yellow swatch): t6 (--low 6), t7 (--t7), t8 (default) get the SAME image-3 sentence, copied verbatim (elder variant at a51/a65 as for Nữ đế); --bdq (Bắc Địch, no royal yellow) excluded
