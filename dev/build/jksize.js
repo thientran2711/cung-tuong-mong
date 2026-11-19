@@ -579,7 +579,11 @@ function kszLiveLay3(dlg,K){const X=dlg.__ksz3;if(!X)return;const V=KIT_SIZE.v3,
    the option cards BELOW it full width, 1 column (kszBtnGridLive3), cards = ONE size per dialog (kitOptFill, tall 3:4 for person dialogs). The figure ladder
    NL > NM > NS (NS = the small-portrait "one" presentation) takes the biggest that keeps the frame inside the screen. Wider frames: untouched. */
 function kszNarrow3(dlg){const V=KIT_SIZE.v3,M=document.getElementById("modal"),a=M?M.clientWidth-16:0;/* a = the width the screen leaves a frame; the M frame (the smallest figure + right column layout) needs 24 + 12 + its figure column + minRight */return a>0&&a-24-12-KIT_SIZE.fig3.M.cw<V.narrow.minRight}
-function kszLivePick3(dlg){dlg.__kszFill=0;if(kszNarrow3(dlg)){for(const K of["NL","NM","NS"]){kszLiveLay3(dlg,K);if(K==="NS"||kitFrameFitsLive3(dlg))return K}}
+/* KIT §56.19 (opt-scroll-reset): a re-pick (a picture loaded late, a resize) tries the smaller frames first, which shortens the option list for a moment and clamps its
+   scrollTop — the player's scroll (or her first wheel) was lost. The re-pick keeps the scroll position of every scroller in the frame (option list, info column, #mb). */
+function kszLivePick3(dlg){const SC=[];try{const mb=document.getElementById("mb");[...dlg.querySelectorAll(".opts,.k3right,.k3body"),mb].forEach(e=>{if(e&&e.scrollTop>0)SC.push([e,e.scrollTop])})}catch(e){}
+ const P=kszLivePick3_0(dlg);SC.forEach(([e,t])=>{if(e.isConnected&&e.scrollTop!==t)e.scrollTop=t});return P}
+function kszLivePick3_0(dlg){dlg.__kszFill=0;if(kszNarrow3(dlg)){for(const K of["NL","NM","NS"]){kszLiveLay3(dlg,K);if(K==="NS"||kitFrameFitsLive3(dlg))return K}}
  let P="XL";for(const K of ["S","M","L","XL"]){kszLiveLay3(dlg,K);if(kitFrameFitsLive3(dlg)){P=K;break}}
  /* KIT 56.17: the size is picked; now the figure fills the frame body (every later re-apply keeps it) */dlg.__kszFill=1;kitFrameApplyLive3(dlg);return P}
 let kszRepT=0;function kszLiveRepick3(dlg){clearTimeout(kszRepT);kszRepT=setTimeout(()=>{try{if(dlg.isConnected&&dlg.__ksz3)kszLivePick3(dlg)}catch(e){console.error("kszLiveRepick3",e)}},30)}
