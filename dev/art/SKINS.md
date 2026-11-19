@@ -6,3 +6,4 @@ Never delete, trash or overwrite these. One line each: who | rank/age | cut id |
 - triều phục c06 | t6 r16, t7 r15, t8 r15 | see dev/handover/reports/trieu-phuc-sample.md | img/_review/trieu-phuc/r16, r15 | r18 (Lượt 400–411 hà bí, bộ diêu)
 - công chúa Phù Tang | t4 old | mEZbq2FhJQ | img/_review/morning-1119/sheet_congchua.jpg | curved Tần EbYOArVuuO (Lượt 412)
 - triều phục c06 | t1–t6 r18 FINAL | YMlueqsWeC 4RFXAmM9Aa YMluekUWeC UPvTN8Dwny 3zKtWqhREY TdwqoUdVNR | img/_review/trieu-phuc/r18/c06_a18_trieu18_t1..t6.png | r19 (Lượt 437/443/444: sleeve length by rank, brocade gấm on all ranks, own hà bí + bí trụy per rank); t7/t8 r18 KEPT, not skins
+- triều phục c06 | t1–t6 r19 | kseZd6916B hu2UAgCvqL KLpRe3zkqp xSBGozEjfW w4aVfpd7EI kseZdn616B | img/_review/trieu-phuc/r19/c06_a18_trieu19_t1..t6.png | r20 (ROOT-48 look: hà bí join + bí trụy at the ANKLES; t4–t6 sleeves to the ANKLES; t6 no phoenix pendant, no yellow under-skirt)
