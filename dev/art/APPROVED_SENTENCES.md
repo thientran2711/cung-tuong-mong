@@ -460,8 +460,8 @@ Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as 
 - luot: 18/11 4d, I1, I3
 - why: phoenix only at t7/t8 (negated 'no phoenix' is fine)
 
-### X09 · royal / imperial yellow at t1-t5
-- regex: `(?:royal yellow|imperial yellow|golden yellow)(?! becomes)`
+### X09 · royal / imperial (deep) yellow at t1-t5 — pale yellow allowed (Lượt 518)
+- regex: `(?<!pale )(?:royal yellow|imperial yellow|golden yellow)(?! becomes)`
 - scope: tp1-5 pr1-5 trieu1-5
 - unless: -
 - negation: yes
