@@ -57,3 +57,7 @@ review/law3-cost-only-r1 = prior + merge origin/main 7fb7c104 (only index.html/s
 
 ## REVIEW r1 re-merge 3 (live main 2c5dd554) — READY FF 0da8d4164fe514930cf98cc0e466f100014a8d80
 review/law3-cost-only-r1 = prior + merge origin/main 2c5dd554 (only index.html/sw.js conflicted, rebuilt). Diff vs main unchanged (j8.js:303 + opt-card-scan.js:25 + index/sw). one-core PASS · coop-e2e 68/68 · quickcheck PASS.
+
+## REVIEW r1 re-merge 4 (live main 4217568a, odds-no-unknown touches j8.js) — READY FF 8dfb81440e09c997d06903a5bc788ab6a2ad7116
+review/law3-cost-only-r1 = prior + merge origin/main 4217568a (only index.html/sw.js conflicted, rebuilt; j8.js merged clean, j8:303 «thành: được thị tẩm, gần Hoàng thượng đêm nay» still present). Diff vs main unchanged. one-core PASS · coop-e2e 68/68 · quickcheck PASS (buoi 948/1212 ms) · opt-card-scan ran (report-only, no gate exit; its «man» case prints a FIG FAIL gap line, not touched by this branch).
+Shot ksp Fold 755x1000 + iPad 1180x820 (dimmed by loading overlay, readable): «Tắm gội chờ giá» = odds rung «Nắm chắc» + meter, TỐN «không», ĐƯỢC «được thị tẩm, gần Hoàng thượng đêm nay»; Tiến cử and Cáo bệnh show their rung + Tốn/Được. Scratch only, no CDN.
