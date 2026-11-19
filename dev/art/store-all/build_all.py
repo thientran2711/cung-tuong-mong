@@ -366,7 +366,7 @@ def _frame(rank,age):
     r=None
     for p in ("c03","c06","c25"):
         x=set(re.split(r"(?<=[.;]) ",store(p,rank,age))); r=x if r is None else r&x
-    return r
+    return {s for s in r if not s.lstrip().startswith("Eyes soft, warm and round-almond")}   # B8: KC people drop this END clause (their own face words name the eyes)
 def check(person,rank,age="a18",ref=None):
     S0,F,add=build(person,rank,age); errs=[]
     blk=" "+" ".join(add)
@@ -411,13 +411,15 @@ def check_all(age="a18"):
     n=len(PEOPLE)*8+32; print(f"checked {n-held} prompts ({len(PEOPLE)} people x 8 ranks + 32 Nữ đế, age {age}; {held} HELD = not drawn, B8): {bad} FAIL"); return 1 if bad else 0
 if __name__=="__main__":
     a=sys.argv[1:]; age=a[a.index("--age")+1] if "--age" in a else "a18"
-    if "--style" in a: STYLE_OVERRIDE=True
+    if "--style" in a: print("--style is retired (B8, owner Lượt 543/551/555): every person uses ONE set-B reference; new characters = dev/art/NEW_CHARACTER_TEMPLATE.md",file=sys.stderr); sys.exit(2)
     if "--check" in a: sys.exit(check_all(age))
     if "--samples" in a:
         for p,t in (("m19",1),("m19",3),("c06",7),("p01",2),("p03",8)):
             print(f"\n===== {p} t{t} {age} =====\n"+build(p,t,age)[1])
         sys.exit(0)
     pos=[x for x in a if not x.startswith("--") and x!=age]
+    if len(pos)==3 and "--age" not in a and re.fullmatch(r"a(18|26|36|51|65)",pos[2]): age=pos.pop()   # ROOT-51: positional age (build_all.py m13 3 a26) used to build a18 silently
+    if len(pos)!=2: print("usage: build_all.py <person> <rank 1-8|nude> [aNN | --age aNN]",file=sys.stderr); sys.exit(2)
     if not _kc_drawn(ALIAS.get(pos[0],pos[0])): print(f"REFUSED {pos[0]}: NOT drawn (ART_RULES B8, dev/art/KC_REFS.json)",file=sys.stderr); sys.exit(2)
     out=build(pos[0],(pos[1] if pos[1]=="nude" else int(pos[1])),age)[1]
     ok,msg=gate(pos[0],(pos[1] if pos[1]=="nude" else int(pos[1])),age,out)
