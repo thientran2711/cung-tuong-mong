@@ -36,7 +36,7 @@ const PRE={};/* name → the function below the wrapper (the host runs it) */
 let snapV=null;
 if(typeof rsnap==="function"){const r0=rsnap;rsnap=function(){const o=r0.apply(this,arguments);if(CW.ctx&&o&&typeof o==="object")try{Object.defineProperty(o,"__ctx",{value:CW.ctx})}catch(e){}snapV=o;Promise.resolve().then(()=>{if(snapV===o)snapV=null});return o}}
 function cardLater(p,dr){const b=p.bf;if(!b||!dr||!dr.r||dr.r.st!=="ok"||typeof resultShow!=="function")return;
- setTimeout(()=>{try{if(!S||S.dead)return;if(p.force||(S.logSeq||0)!==b.seq||RKEYS.some(([k])=>(S[k]||0)!==b[k])){F.stat.card=(F.stat.card|0)+1;const R=F.R[p.n];resultShow(p.ttl||"",b,p.force?true:(R&&R.okHint?R.okHint():null))}}catch(e){console.error("thin F card",e)}},0)}
+ setTimeout(()=>{try{if(!S||S.dead)return;if(p.force||(S.logSeq||0)!==b.seq||RKEYS.some(([k])=>(S[k]||0)!==b[k])){F.stat.card=(F.stat.card|0)+1;const R=F.R[p.n];resultShow(p.ttl||"",b,p.force?true:(R&&R.okHint?R.okHint(dr):null))/* F5: the hint may read the host's answer */}}catch(e){console.error("thin F card",e)}},0)}
 function gOn(lv){return on(lv)&&!host()&&!!CW.seat&&!CW.ctx&&!!S&&!S.dead&&!CW.inLife&&!CW.inFC&&!CW.allow&&!CW.allowN&&!(TH.C&&TH.C.inWorld&&TH.C.inWorld())}
 function line(t){try{if(typeof kitLine==="function")kitLine(t);else log(t)}catch(e){}}
 function sendF(p){COOP.send({t:"do",op:"f",args:p.msg,base:TH.view?TH.view.v:0,id:p.id});E.last=p.id;p.at=Date.now()}
@@ -107,7 +107,7 @@ TH.onDo("f",(a,m)=>{a=a||{};const id=m&&m.id;if(loaded!==LSK()){DONE.clear();don
   const args=R.dec(a.a);if(!args){out={st:"gone"}}
   else{/* F2 r2 (review r1 item 1, every registration, F1 too): her tap runs as solo (TH.tapRun: quiet off → her cards into her Q = part D
       cards on her phone; her toasts / floaters / coin and item effects captured, played on HER phone with the answer; nothing on the host's screen) */
-   if(R.noRes)NORES++;let T;try{T=TH.tapRun(()=>PRE[a.n].apply(null,args))}finally{if(R.noRes)NORES--}/* F3: a registered UI function's own wrapR card shows on her phone (cardLater), never here */
+   if(R.noRes)NORES++;let T;try{T=TH.tapRun(()=>{if(R.pre)R.pre(args)/* F5: what the host does first in her run (the deferred cost, the host's own rolls) */;return PRE[a.n].apply(null,args)})}finally{if(R.noRes)NORES--}/* F3: a registered UI function's own wrapR card shows on her phone (cardLater), never here */
    const r=T.r,ui=T.ui;F.stat.run++;if(R.log&&r)log(r);out={st:"ok",r:typeof r==="string"?r.replace(/<[^>]+>/g,"").slice(0,200):null};
    if(typeof r==="boolean")out.rv=r;if(ui&&ui.length)out.ui=ui/* hostnull (c): all of them; BAL.coopUi paces them on her phone (was slice(0,4): a 5th effect was lost) */;
    if(R.back){const c={};for(const [n,g] of R.ctx||[])if(R.back.includes(n))try{const v=g();c[n]=v===undefined?null:J(v)}catch(e){}out.c=c}
@@ -308,4 +308,75 @@ reg9("shelfPlantQuick",[],{mine:()=>true});
 reg9("rcpRead",["ix"],{mine:()=>true});
 reg9("rcpAskGo",["v","pm"],{mine:()=>true});
 reg9("tdsRun",["v","v","v"],{mine:A=>A[1]==="prac"});
+/* ---------- F5: her mini-game SCORE ends (level 10; report dev/handover/reports/coop-thin-f5.md step 0) ----------
+   The game itself plays on HER phone (same game, same parameters as solo: law 5); only its end (the score + what she chose before) is ONE
+   intent. Ends = named engines: petcGain / shelfPlantGain (care games), wkLessonEnd (Tài nghệ lessons, Tự học làm tác phẩm, Học lối mới),
+   tdFinish (Tứ đức), tsSummonEnd / tsDenEnd (tsGame: the summons, the lantern). The host checks the score (BAL.mgSc ranges, its tables;
+   outside → refused, nothing applied), rolls every "Để trời định" / "Học nhanh" / "Bỏ qua" itself (her phone never rolls), pays the
+   game's deferred cost (jaudit aaPayMG) ONCE before the gain (solo order), then runs the engine in her context. Her result card: the
+   engine's own (cardLater) or jaudit's one card after the game (aaShowLast, captured) — on her phone only. */
+const L10=10;
+const inR=(x,r)=>typeof x==="number"&&isFinite(x)&&!!r&&x>=r[0]&&x<=r[1];
+const MSC=()=>BAL.mgSc;
+/* guest: an F5 game is open (MGC): the kg82 opening it made (KGN) — a later game, closed or not, never takes its place */
+let KGN=0,MGC=null,AA=null,HAA=null,SKH=0;
+/* Tứ đức (tdPlay: called by name from j85 / jtds pickers that keep their own copy) is known by its own busy flag at its opening */
+if(typeof kg82Open==="function"){const k0=kg82Open;kg82Open=function(){KGN++;try{if(!host()&&!(MGC&&MGC.n===-1)&&typeof TDS==="object"&&TDS.busy&&gOn(L10))MGC={k:"td",o:null,n:KGN}}catch(e){}return k0.apply(this,arguments)}}
+const mgOk=()=>!!MGC&&MGC.n===KGN&&!host()&&gOn(L10);
+const mgOpen=(k,o,fn)=>{const M={k,o,n:-1};MGC=M;const r=fn();if(MGC===M)M.n=KGN;return r};
+if(typeof playArt==="function"){const p0=playArt;playArt=function(o){if(host()||!gOn(L10)||!o||!o.mgEnd){if(!host())MGC=null;return p0.apply(this,arguments)}return mgOpen("pa",o,()=>p0.apply(this,arguments))};window.playArt=playArt}
+if(typeof tsGame==="function"){const t0=tsGame;tsGame=function(o){if(host()||!gOn(L10)||!o){if(!host())MGC=null;return t0.apply(this,arguments)}return mgOpen("ts",o,()=>t0.apply(this,arguments))};window.tsGame=tsGame}
+/* guest: the deferred cost is never paid here: jaudit's call is held with its score (the first one of this end), the cost rides in ctx */
+if(typeof window.aaPayMG==="function"){const a0=window.aaPayMG;window.aaPayMG=function(sc){if(mgOk()){if(!AA){const m=S&&S.mg;AA={c:J((m&&m.cost)||window.__aaPend||null),sc:J(sc||{}),t:window.__aaTitle||null}}F.stat.aaHeld=(F.stat.aaHeld|0)+1;return}return a0.apply(this,arguments)};
+ F.aaLocal=a0}
+/* guest: the quick button of an F5 game: the game's own quick path runs (its words, its onDone chain: the end intent) with the roll left
+   to the host (null), and its result rows are closed at once — the result comes from the host's answer */
+if(typeof kitQuickRoll==="function"){const q0=kitQuickRoll;kitQuickRoll=function(){if(SKH&&!host())return null;return q0.apply(this,arguments)};window.kitQuickRoll=kitQuickRoll}
+if(typeof tsSkipRes==="function"){const r0=tsSkipRes;tsSkipRes=function(odds,risk){if(SKH&&!host())return {raw:0,skipped:true,ok:null,guard:null,risk:risk?1:0};return r0.apply(this,arguments)};window.tsSkipRes=tsSkipRes}
+for(const n of ["sfx","kitSfx","kitResultSfx"])if(typeof window[n]==="function"){const f=window[n];window[n]=function(){if(SKH&&!host())return;return f.apply(this,arguments)}}
+document.addEventListener("click",e=>{const b=e.target&&e.target.closest&&e.target.closest("#kg82skip");if(!b||!mgOk()||typeof b.onclick!=="function")return;
+ e.stopImmediatePropagation();e.preventDefault();F.stat.skip=(F.stat.skip|0)+1;SKH=1;try{b.onclick.call(b,e)}finally{SKH=0}
+ const ok=document.getElementById("kg82ok");if(ok&&typeof ok.onclick==="function")ok.onclick.call(ok)},true);
+/* host: her held score + cost (ctx "aa"); the host's own pending cost / title are kept and put back after her run */
+const CXAA=["aa",()=>host()?{h:1,c:window.__aaPend||null,t:window.__aaTitle||null}:AA,v=>{if(!host())return;window.__aaPend=v&&v.c||null;window.__aaTitle=v&&v.t||null;HAA=v&&!v.h&&v.sc?v:null}];
+const CX10=CX9.concat([CXAA,OBJ("tds",()=>({q:TDS.q}))]);
+function payAA(fix){if(!HAA)return;const sc=Object.assign({},HAA.sc);if(fix)fix(sc);const t0=window.aaCardTo;
+ window.aaCardTo=(t,b,ok)=>{F.stat.aaCard=(F.stat.aaCard|0)+1;if(TH.uiCap&&TH.uiCap.length<12)TH.uiCap.push(["aaShowLast",[t,J(b||null),ok]])};
+ try{window.aaPayMG(sc);F.stat.aaPaid=(F.stat.aaPaid|0)+1}finally{window.aaCardTo=t0;HAA=null}}
+try{TH.UICAP.add("aaShowLast")}catch(e){}
+function reg10(name,K,o){o=o||{};const R=Object.assign({lv:L10,ctx:CX10,back:BACK8,enc:A=>encA9(K,A),dec:a=>decA9(K,a),done:reDraw,title:()=>""},o);
+ R.mine=A=>live()&&(o.mine?o.mine(A):true);const r=F.reg(name,R);if(!r)return r;
+ /* guest, after the end is sent: the held cost now travels with it (cleared here); an end that ran here after all (refused before sending)
+    pays its held cost here, never lost */
+ const w=window[name];window[name]=function(){const p0=F.pend,a=AA;const r=w.apply(this,arguments);if(!host()){const sent=!!F.pend&&F.pend!==p0;
+  if(a){if(sent){window.__aaPend=null;F.stat.aaSent=(F.stat.aaSent|0)+1}else try{F.aaLocal(a.sc)}catch(e){}AA=null}if(sent||a)MGC=null}return r};return true}
+/* a refused end applies nothing; a lesson's game is over all the same (her S.mg closed, as a game closed unplayed: no cost, no gain) */
+const bad=n=>{F.stat.mgBad=(F.stat.mgBad|0)+1;lg(["mgBad",n]);try{if(n==="wkLessonEnd"&&CW.ctx&&S)S.mg=null}catch(e){}return null};
+/* care games (her open care / plant screen rides in ctx: PETC.i / SHPC.g) */
+reg10("petcGain",["v","v"],{dec:a=>{const x=decA9(["v","v"],a);if(!x)return null;return ["feed","bath","play"].includes(x[0])&&inR(x[1],MSC().unit)?x:bad("petcGain")}});
+reg10("shelfPlantGain",["v"],{dec:a=>{const x=decA9(["v"],a);if(!x)return null;return inR(x[0],MSC().unit)?x:bad("shelfPlantGain")}});
+/* Tài nghệ lessons / practice / Học lối mới: k, the lesson (S.mg as it was), the play, {skipped}; the host rolls a quick lesson (o.ok null) */
+reg10("wkLessonEnd",["v","v","v","v"],{enc:A=>{const m=A[1];if(!m||typeof m!=="object")return null;const c=Object.assign({},m);delete c.cost;return encA9(["v","v","v","v"],[A[0],c,A[2]==null?0:A[2],{skipped:!!(A[3]&&A[3].skipped)}])},
+ dec:a=>{const x=decA9(["v","v","v","v"],a);if(!x)return null;const [k,m,raw,o]=x;const sk=!!(o&&o.skipped);
+  if(!ARTS.some(y=>y.k===k)||!m||m.k!==k||!["self","teacher","th","prac"].includes(m.mode)||(m.wk&&(!WK[m.wk.kind]||![0,1,2].includes(m.wk.mat||0)||!wkSubjOK(m.wk.kind,m.wk.subj)))||(m.hw!=null&&!(m.hw in WK_HOW)))return bad("wkLessonEnd");
+  /* r1: no word of hers travels (her work's subject = one of wkSubj's, her practice's words = WK_HOW by key) */
+  if(!sk&&!inR(raw,MSC().raw))return bad("wkLessonEnd");return [k,m,sk?0:raw,{skipped:sk}]},
+ pre:A=>payAA(sc=>{const sk=!!A[3].skipped;sc.skip=sk;sc.raw=sk?null:cl(Math.round(A[2]||0),0,10);sc.ok=!sk&&sc.raw>=5})});
+/* Tứ đức: tdFinish pays its own cost; a quick play is rolled here (TDS.q, as the game's own quick button) */
+reg10("tdFinish",["v","v","v","v"],{snap:"soft",noRes:true,title:A=>{try{const V=VIR.find(x=>x.k===A[0]);return `${A[1]==="self"?"Tự học":"Học"} ${V?V.n:""}`}catch(e){return ""}},
+ dec:a=>{const x=decA9(["v","v","v","v"],a);if(!x)return null;const [k,mode,raw,sk]=x;if(!VIR.some(y=>y.k===k)||!(mode in TD_MODE))return bad("tdFinish");
+  if(!sk&&!inR(raw,MSC().raw))return bad("tdFinish");return [k,mode,sk?0:raw,!!sk]},
+ pre:A=>{if(A[3]){const ok=!!kitQuickRoll();A[2]=ok?BAL.skip.raw:0;TDS.q=ok}else TDS.q=null}});
+/* tsGame ends: res {raw, skipped, guard}; the snapshot of her card (b) stays on her phone (her result card = cardLater); a skipped play
+   is rolled here by the ONE rule (tsSkipRes) with her odds of now; hộ giá only when the road has it (tsRebel) */
+const tsRes0=(res,risk)=>{if(!res||typeof res!=="object")return null;if(res.skipped)return {skipped:true,risk:risk&&res.risk?1:0};
+ if(!inR(res.raw,MSC().raw))return null;const g=res.guard==null?null:res.guard;if(g!=null&&(!risk||(g!==0&&g!==1)))return null;return {raw:res.raw,skipped:false,guard:g}};
+const tsEnc=A=>encA9(["v","v"],[A[0],A[1]&&typeof A[1]==="object"?{raw:A[1].raw,skipped:!!A[1].skipped,guard:A[1].guard==null?null:A[1].guard,risk:A[1].risk?1:0}:null]);
+reg10("tsSummonEnd",["v","v"],{snap:"soft",noRes:true,enc:tsEnc,title:A=>`Hoàng thượng triệu ${({dan:"đánh đàn",co:"đánh cờ",duho:"du hồ"})[A[0]]||""}`,okHint:dr=>!!(dr&&dr.r&&dr.r.ok),
+ dec:a=>{const x=decA9(["v","v"],a);if(!x)return null;const k=x[0];if(!["dan","co","duho"].includes(k))return bad("tsSummonEnd");let rb=0;try{rb=k==="duho"?tsRebel():0}catch(e){}
+  const r=tsRes0(x[1],!!rb);return r?[k,r,null]:bad("tsSummonEnd")},
+ pre:A=>{if(A[1].skipped)A[1]=tsSkipRes(oddsCl(Math.round(tsSummonOdds(S,A[0])||50)),A[1].risk)},host:(A,out)=>{out.ok=A[1].raw>=5||A[1].guard===1}});
+reg10("tsDenEnd",["v","v"],{snap:"soft",noRes:true,enc:tsEnc,title:()=>"Thả đèn hoa đăng",okHint:()=>true,
+ dec:a=>{const x=decA9(["v","v"],a);if(!x)return null;if(![0,1,2].includes(x[0]))return bad("tsDenEnd");const r=tsRes0(x[1],false);return r?[x[0],r,null]:bad("tsDenEnd")},
+ pre:A=>{if(A[1].skipped)A[1]=tsSkipRes(oddsCl(Math.round(tsDenOdds(S)||50)),0)}});
 }catch(e){console.error("jcoopthinf",e)}})();
