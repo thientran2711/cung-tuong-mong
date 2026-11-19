@@ -1364,3 +1364,4 @@ ROOT-48 Lượt 483 (owner): outfit secondary colour lost (m13 secondary silver 
 ROOT-48 Lượt 484: place-rank v4 (PR5 5091f57, 1,080 cr; LAYOUT NUMBERS Phi bedroom floor 32/22/13 %, right group x67–100 y47–87) LOOKED + SENT with people. Faults: armchairs at left edge (Phi/Quý phi rec), guqin table cut at right (Quý phi rec), phối bottom-left table ~14 %, kept Tần + KN receptions show more floor than 477.
 ROOT-48 Lượt 485: triều phục r21 (TP2 dfe567d, 1,098 cr) LOOKED + SENT. Faults: cuff sentence added on t1/t3 only (shared block differs); cuff band drawn along the whole sleeve opening; t6 vermilion cuff low contrast; pendant above ankle as r20.
 ROOT-48 Lượt 486 (owner on m13/m20): item colour ≠ outfit; no drape on t7/t8; HQP more jewels; lively poses low ranks, calm t6–t8 → FIGURE_GATE 12d; TN1.
+ROOT-48 Lượt 487 (owner): m13/m20 16 figures → SKINS; redraw all 16 after builder fixes → TN1 GO (~2,200 cr).
