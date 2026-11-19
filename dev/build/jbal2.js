@@ -373,6 +373,18 @@ Object.assign(BAL,{nroad:{
  bacRk:[2,4,6],
  /* palace news lines a month (NPC chapter ends), at most */
  newsMo:2,
+ /* QUESTLINE Q2 (QUESTLINES_AUDIT §3 H-a/H-d, §4 Q2; engine jnroadhp.js): the side line as a process + two-way.
+    fin = the reward when an NPC wins her road FINALE (the chapter that closes the road) after the player's help on that road and no betrayal
+      (round 2, laws 1–2: a betrayal is help to the rival she told — that rival gets a «mách tin» record on her own road and her next chapter
+      gains `help` above, so the same fin reward can come from either option; review/questline-q2 §ROUND 2)
+      (nothing on a lost or drawn finale, OD:L1601 (4)): index = how many of fin.rk ranks HER rank reaches (as bacRk); danh = her Danh,
+      rel = the asker's bond to her (j72 q72Rel), owe = nợ ân the asker owes her (j72 ledger);
+    sb = strike-back of a betrayal: the fact reaches the betrayed NPC only through a real carrier (her own Tai mắt oSee × BAL.ag.know.eye, her
+      servants' Nghe ngóng + tell choice, a bought servant of the player who sells it, the rival who heard it and dislikes the player — the
+      jagknow rules, BAL.ag.know.tell); checked each month for mo months after the betrayal; when it lands: oán oan toward the player
+      (feeds hostility → the NPC's agent deeds aim at her, jagent agSpite; no flat roll), a servant / man loses oan of lòng instead;
+    hpMax = lines kept in the Mệnh truyện «Phụ tuyến» list (oldest dropped) */
+ fin:{rk:[2,4,6],danh:[2,3,4,6],rel:[4,6,8,10],owe:1},sb:{oan:15,mo:6},hpMax:12,
  /* fix (ONE CORE): the test stat of someone who lacks it, the loyalty a man starts from, how many of the coldest people a rival is
     drawn from (people / houses) */
  st0:40,loy0:50,rvTop:3,offTop:2,
@@ -1502,8 +1514,8 @@ Object.assign(BAL,{skip:{od:40,raw:5,care:.5}});
    win = how long after a face is learned every place that first draws it (frame, avatar, stage figure) still plays its one reveal */
 Object.assign(BAL,{faceReveal:{ms:Math.round(1000*BAL.pace),lite:350,win:8000}});
 /* BOOK FIGURE (owner 18/11 ~07:10Z + ~07:20Z, KIT §56.3): ONE body size for everybody = SKULL TOP to FEET = figure column width / bookFigW (her p.5 shot: Fold col 220 -> 641, iPad col 183 -> 534). Layout = live; nothing cut, nobody shrunk, the text is drawn on top.
-   cRef = the tallest Hoàng hậu crown above the skull top / body (catalog scan 18/11: thaihau-h3-a36 .072); gap = px the crown keeps under the running-head rule; footGap = px the feet keep above the page's bottom line when the feet line is moved down for her crown. */
-BAL.bookFigW=.343;Object.assign(BAL,{bookFrame:{cRef:.072,gap:8,footGap:10}});
+   cRef = the tallest Hoàng hậu crown above the skull top / body (catalog scan 18/11 over all 8570 fig-*.webp: tallest = consort-c09-t8-a26 / maid-m45-t8-a18 .131; the earlier .072 was measured on the thaihau-* files only; owner 18/11 ~18:40Z: the name tag covered the Hoang hau's phoenix crown); gap = px the crown keeps under the running-head rule; footGap = px the feet keep above the page's bottom line when the feet line is moved down for her crown. */
+BAL.bookFigW=.343;BAL.figWideRef=.65;/* painted width / body (skull top -> feet) a person column must hold so no robe / prop enters the text: 99.9th percentile of all 8570 fig-*.webp (p50 .347, p90 .446, p99 .596, max .838 = 3 outlier files) */BAL.bookFigBody={kv1:641,kv2:534};/* the Luan hoi book's ONE body (skull top -> feet) on the iPad spread (1180x820; = book column / bookFigW, her p.5 shot 534): the identity card (Than phan kiep nay) on the iPad stands her at this same size (owner 18/11 ~18:30Z) */Object.assign(BAL,{bookFrame:{cRef:.131,gap:8,footGap:10}});
 /* DOING AN ACT ON THE SPOT (review/shown-odds-one-path): "Cài đồ vào rương nàng" done in her own palace is easier than sending
    someone by actHere.plant (was a typed -15 pen in j8 plantpick + a typed +15 on the j2 chest card); both read it through actCtx (j9). */
 Object.assign(BAL,{actHere:{plant:15}});
