@@ -35,7 +35,7 @@ mindBelief=function(t,v,k){if(!t||t===S||!t.alive||t.out||!v)return;const kv=key
  const s=w[i][0];oanAdd(t,s,n);belOf(t,s).w+=n;mindLog(t,"_wrongBelief");t.blamed=t.blamed||{};t.blamed[key(s)]=(t.blamed[key(s)]||0)+1;
  if(s===S&&roll(BAL.odb.j43.rbTop+eyes(S)*8))noteAdd(t.id,`Nghe nói ${t.name} ngờ ngươi đứng sau chuyện ${ACT[k]?ACT[k].n.toLowerCase():"vừa rồi"}, dù không phải ngươi`)};
 /* the belief book fades with the grudges, month by month */
-(function(){const o0=oanMonth;oanMonth=function(){const r=o0.apply(this,arguments);try{for(const v of rivals){if(!v.bel)continue;for(const k in v.bel){const b=v.bel[k];b.r=Math.floor(b.r*.8);b.w=Math.floor(b.w*.8);if(!b.r&&!b.w)delete v.bel[k]}}}catch(e){}return r}})();
+(function(){const o0=oanMonth;oanMonth=function(){const r=o0.apply(this,arguments);try{for(const v of rivals){if(!v.bel)continue;for(const k in v.bel){const b=v.bel[k];b.r=Math.floor(b.r*.8);b.w=Math.floor(b.w*.8);if(!b.r&&!b.w)delete v.bel[k]}let e=true;for(const k in v.bel){e=false;break}if(e)delete v.bel/* no empty {} left behind (co-op merge3 keeps no empty object: merged ≠ host, quickcheck G4 coop-one-world seed 3); belOf makes it again */}}catch(e){}return r}})();
 /* her own hidden blows are guessed by the victim the same way */
 const M43HARM=new Set(BANDS.slice(1).flatMap(x=>x[2]).concat(PUSHK));
 (function(){const r0=runAct;runAct=function(a,t,k){const r=r0.apply(this,arguments);try{if(a===S&&t&&t!==S&&t.alive&&M43HARM.has(k)&&k!=="accuse"&&k!=="vp"&&k!=="xx"&&k!=="tocao"&&r&&!FAILRX.test(r))mindBelief(t,S,k)}catch(e){}return r}})();

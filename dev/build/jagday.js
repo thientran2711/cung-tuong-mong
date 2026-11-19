@@ -374,7 +374,7 @@ function agWalk(a,b){try{const B=BAL.ag.kh2.rd;if(!agRdOn()||!((B.see||0)+(B.go|
 /* a servant who stands at pl in khắc kh tells her master (not the player — her own servants are part 2c's TIN BÁO) by her own choice */
 function agTell(R,pl,kh,why0,who,interest){const B=BAL.ag.kh2.rd;let n=0;let why=null;const wy=()=>why!=null?why:(why=typeof why0==="function"?why0():why0);/* ag-deed-perf: the line (a place name: places() through every wrapper) is built only when a servant tells */
  for(const id in R.P){if(!/^s\d+$/.test(id))continue;const e=R.P[id][kh];if(!e||e[0]!==pl)continue;const s=servById(+id.slice(1));if(!s||s.out)continue;const m=ownerOf(s);
-  if(!m||m===S||m===who||!m.alive||m.out)continue;const it=interest?interest(m):1;if(!(it>0))continue;
+  if(!m||m===S||m===who||!m.alive||m.out)continue;/* live servants (j95s): walking with her master, who stands right here and sees it herself — no news to carry */{const mr=R.P["v"+m.id];if(mr&&mr[kh]&&mr[kh][0]===pl)continue}const it=interest?interest(m):1;if(!(it>0))continue;
   const c=mindPick([["tell",B.tell*cl((s.loyal||0)/100,0,1)*it],["quiet",B.quiet]],s);if(c!=="tell")continue;
   const busy=q=>R.P[id][q]&&(/^ag_(?!tell$)/.test(R.P[id][q][1]||"")||AG_NOTFREE.has(R.P[id][q][1]));
   let ks=kh;while(ks+1<J95.KH&&busy(ks+1))ks++;/* busy with her own deed (or not hers): she sets off when it ends, never over a deed row (ag-kh2 G9) */

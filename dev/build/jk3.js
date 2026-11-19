@@ -143,7 +143,7 @@ function k3Stage(){try{const st=$$("stage");if(!st)return;{const pk=S?(S.place||
  let L=$$("kshL"),R=$$("kshR");/* KIT 33.11 SIDE COLUMNS EVERYWHERE (owner 16/11 ~19:20Z via s22: "bất kỳ cái nào … dư đồ, màn hình cảnh phòng, nơi chốn … đều sẽ có những
     cái thông tin cột trái và cột phải y chang giống như cái phòng ngủ"): the SAME right column (#kshR) and left rail (#krail, jrail) as her room
     stand on every Dư đồ level too — kitSideHost() = the map leather (.mapv: plan + courtyard) on the Dư đồ tab, else the stage. */
- const mvh=kitSideHost(),mv=mvh!==st?mvh:null;st.classList.toggle("kplfs",!!(typeof window.kplAway==="function"&&window.kplAway()));
+ const mvh=kitSideHost(),mv=mvh!==st?mvh:null;st.classList.toggle("kplfs",!!(typeof window.k3Full==="function"&&window.k3Full()));
  const off=!S||S.dead||!stop||(gm&&gm.classList.contains("maptab")&&!mv);
  if(off){if(L)L.hidden=true;if(R)R.hidden=true;st.classList.remove("k3g");return}
  if(mv){if(L)L.hidden=true}else{if(!L){L=document.createElement("div");L.id="kshL";L.className="ksh kshL"}if(L.parentNode!==stop)stop.appendChild(L)}
@@ -341,7 +341,11 @@ try{if(typeof KIT_SAMPLES!=="undefined")KIT_SAMPLES.push({id:"§75",title:"kitBa
  html:()=>`<div class="kitpg-row" style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><span class="kbackb">${kitBackBtnHtml("room","Về phòng")}</span><span class="kbackb">${kitBackBtnHtml("room","Về Kính sự phòng")}</span><span class="kbackb">${kitBackBtnHtml("map","Dư đồ")}</span></div>`})}catch(e){}
 /* one-page view (KIT §0 kv1): the room home and the open tab are the two pages of the spread, shown one at a time */
 /* KIT 33.10 (jplfs): away from her own residence the place painting is the whole page on EVERY screen = the one-page shell */
-function k3Phone(){try{return kitView().pages===1||(typeof window.kplAway==="function"&&window.kplAway())}catch(e){return false}}
+/* stage-here (owner OD 18/11 ~19:45Z (5)): the STAGE on Hành sự and EVERY tab = the place where she IS (S.place); the one-page full-screen
+   painting (KIT 33.10) is only the place PAGE itself (K3SH.home); any tab on a two-page screen = the normal spread, stage (her place) | panel */
+function k3Full(){try{return typeof window.kplAway==="function"&&window.kplAway()&&(kitView().pages===1||K3SH.home)}catch(e){return false}}
+window.k3Full=k3Full;
+function k3Phone(){try{return kitView().pages===1||k3Full()}catch(e){return false}}
 function k3Shell(){try{const gm=document.querySelector(".game");if(!gm)return;try{const hd0=document.querySelector("header.hud");if(hd0)document.documentElement.style.setProperty("--k3hb",Math.round(hd0.getBoundingClientRect().bottom)+"px");const nb0=document.querySelector("nav.bar");if(nb0)document.documentElement.style.setProperty("--k3nb",Math.round(innerHeight-nb0.getBoundingClientRect().top)+"px")}catch(e){}const on=k3Phone()&&!!S&&!S.dead;const alive=!!S&&!S.dead;gm.classList.toggle("k3ph",on);
  const pw=$$("popw");const pop=!!(pw&&pw.children.length&&pw.textContent.trim());
  const wasPop=gm.classList.contains("k3pop");gm.classList.toggle("k3home",on&&K3SH.home&&!pop);gm.classList.toggle("k3pop",on&&pop);
