@@ -526,6 +526,14 @@ Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as 
 - luot: 520 (K15; ROOT-50 ruling A, MMX3); 529 scope widened to cung nữ/nữ quan tm0-tm4 (ROOT-50)
 - why: ma ma, cung nữ, nữ quan wear NO hair flowers; only consorts
 
+### X15 · two / several hair flowers (F13 one flower only)
+- regex: `fresh flowers\b|hair flowers (?:are|plus)|two or three BIG full blooms|lush cluster of the LARGEST blooms|small silk flowers and a fresh flower|one big bloom plus smaller blooms|pair of (?:fresh )?flowers`
+- scope: tp1-6 pr1-6
+- unless: -
+- negation: no
+- luot: 639 (F13)
+- why: owner Lượt 639: exactly ONE hair flower at t1-t6, size grows with rank
+
 ### X13 · style image sentence (style image retired)
 - regex: `drawing style of image \d|Image \d is only for the drawing style`
 - scope: all

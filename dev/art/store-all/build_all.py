@@ -104,6 +104,13 @@ def store(person,rank,age="a18"):
 def _fl():
     s=open(os.path.join(ART,"owner-copy","mk_ranks_v3.py"),encoding="utf-8").read(); g={}; exec(s[s.index("FL="):s.index("FLCOL=")],g); return g["SZ"]
 SZ=_fl()
+# F13 (owner Lượt 639, ROOT-53 -> BW5): exactly ONE hair flower at t1-t6 (never two or a pair), its SIZE grows with rank (t1 small ... t6 large); replaces the Lượt 323 size ladder (t3 'flowers', t4 'plus smaller blooms', t5 'two or three', t6 'cluster').
+_F13="HAIR FLOWER SIZE: exactly ONE fresh flower in her hair (never two, never a pair, no cluster), "
+SZ={1:_F13+"SMALL but clearly visible at game size.",2:_F13+"small-to-medium, a little bigger than at the lowest rank, clearly visible at game size.",
+    3:_F13+"MEDIUM, a full bloom about the size of her palm.",4:_F13+"LARGE, a full bloom larger than her palm, clearly bigger than the lower ranks.",
+    5:_F13+"BIG, a full bloom clearly bigger than at the Tần rank.",6:_F13+"the LARGEST single bloom of all ranks, the grandest hair flower in the palace."}
+F13_SWAP=[("with silver, pearl and fresh flowers,","with silver, pearl and ONE fresh flower,"),("decorated with fresh flowers and several","decorated with ONE fresh flower and several"),
+          ("small silk flowers and a fresh flower","a fresh flower")]   # F13: hair-ornament words that asked for several flowers -> one
 HAIR_LOW="HAIR (rank law): her hair stays LOOSE and flowing like her young-lady picture: at most the top half gathered up, most of her hair hanging loose down her back."
 HAIR_HIGH="HAIR (rank law): ALL her hair is swept UP into a high bun / chignon, nothing loose hanging down her back."
 def sleeve(t):
@@ -362,6 +369,7 @@ def _sec_slot(person,rank,S):
         _h="Hair: her own hairstyle decorated with"; assert S.count(_h)==1,("t4-6 hair slot",person,rank)
         S=S.replace(_h,"Hair: her own hair colour, ALL her hair swept UP into a high bun / chignon, decorated with",1)
     S=re.sub(r"with [^;]+? in the inner robe and linings",f"with {sec} in the inner robe and linings",S,count=1)   # colour slot swap only (no new wording, Lượt 489)
+    for _a,_b in F13_SWAP: S=S.replace(_a,_b)   # F13 one hair flower
     return _t3_slot(person,rank,S)
 # G15 (owner Lượt 559): QUÝ NHÂN t3 DESIGN = option B v2 -> dev/art/check_store.py g15_t3 (one copy of the wording, shared with the gate).
 def _t3_slot(person,rank,S):
