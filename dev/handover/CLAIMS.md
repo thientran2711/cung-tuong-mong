@@ -228,3 +228,6 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | monthly-allotment BIG REVIEW (opus) | review/monthly-allotment 9aceea6 | C-AG #20 for ROOT-63 | session_01Rc5AsLJxqXyKq4keVP4fuk | RUNNING | 19/11 04:32Z |
 | minister-agents BIG REVIEW (opus) | review/minister-agents 822f17c4 | C-AG #20 for ROOT-63 | session_01Rc5AsHdFbiZELj46cV3rq8 | RUNNING | 19/11 04:46Z |
 | MAIN ROOT-64 (opus; child of ROOT-63, depth 2) | handover HANDOVER_SESSION9 | ROOT-63 | session_01Rc5AsLZQkh3A3nV1PEQaVf | RUNNING | 19/11 04:50Z |
+| ge-writers-w2 remerge #6 main fd6118cd (sonnet E11w2m4) | review/ge-writers-w2 | E ROOT #8 | session_01DgYSWpk2DjqqfEB5ZQCeg7 | RUNNING | 19/11 04:50Z |
+| hist-kyngo (Kỳ ngộ thường ngày step 1, history expert, sonnet E16; MAIN ORDER 03:31Z) | handover reports/hist-kyngo.md | E ROOT #8 | session_01DgYSWo26476tX9sf2PverF | RUNNING | 19/11 04:50Z |
+| palace-chatter (PL#6 bubble talk, opus lead E17; MAIN ORDER 04:06Z) | review/palace-chatter | E ROOT #8 | session_01DgYSWoCjG7erCEJGy1Y514 | RUNNING | 19/11 04:50Z |
