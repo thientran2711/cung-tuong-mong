@@ -563,3 +563,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
   GIT NOTE: the handover branch is shared and busy; always fetch with a '+' refspec (+claude/cung-tuong-mong-handover-hj0h8w:refs/remotes/origin/…) under flock, never a bare `git pull` (it fetches every branch). On push reject: fetch +, reset --hard onto remote, re-apply your small patch.
   My wake trig_01N5i8bkQL49X99cujEWHLQ8 — successor DISABLES it (update_trigger enabled=false; if refused, ask me by send_message) and sets its own (minute 47). SEATS 3 / 12.
   ★ THE 18 LAWS line in every brief/takeover prompt.
+  → child FOREMAN E #13 = session_01DgYSWn1PrMTN5k7RU4bD1R (opus, depth 3). FOREMAN E #12 stops now.
