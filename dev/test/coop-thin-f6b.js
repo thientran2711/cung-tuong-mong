@@ -164,6 +164,7 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  await act('V1 Kết bằng vải sa, played (raw 8): the veil made, cost once, same as solo',KOK,{stage:vst,pre:vpre+KGO,raw:8,wait:900,twin:vtw(8),chk:x=>x.aaPaid===1&&x.g1.inv.length===x.g0.inv.length+1,shot:'veil'});
  await act('V2 Kết nhanh: no veil, the material back, cost once',KSK,{stage:vst,pre:vpre,twin:vtw(5,1),chk:x=>x.aaPaid===1&&x.g1.inv.length===x.g0.inv.length});
  await act('V3 over-max (vlCraftEnd raw 11): refused',`vlCraftEnd(0,11,false)`,{stage:vst,reject:1});
+ await act('V4 forged end (no start ran, no held cost): refused, nothing made or paid',`window.__aaPend=null;vlCraftEnd(1,8,false)`,{stage:vst,reject:1});
  /* ---- R: Chải chuốt ---- */
  const rst=`S.suc=80;`;
  await act('R1 Chải chuốt «vùng giữa» (wdGroomEnd ok): same as solo',`wdGroomEnd('ok')`,{stage:rst,pre:`wdGroomUI();if(!document.getElementById('kg92go'))return 'no game'`,twin:`wdGroomEnd('ok')`,chk:x=>x.g1.used-x.g0.used===1});

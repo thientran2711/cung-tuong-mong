@@ -44,16 +44,24 @@ const raw0=(raw,sk)=>sk||inR(raw,MSC().raw);
 /* her own card in her host deck (the same rule F6a uses: index + name; else the first not-done card with that name) */
 function myCard(c){if(!c||!Array.isArray(deck))return -1;const i=c.i|0;if(deck[i]&&deck[i].n===c.n)return i;return deck.findIndex(a=>a&&a.n===c.n&&!a.done)}
 
+/* the game START as an intent (F5 reviewer: the forged start / cost / score-in-range family): once a game-first deck kind is lifted
+   (TH.gLift[kind] = 12: F6a's act(i) runs her card on the host, its cost paid there once), the host keeps that start per seat and the
+   end is accepted only after it, once. A kind not lifted keeps its old start road (no check). */
+const ST={};const lifted=k=>!!(TH.gLift&&TH.gLift[k]===L12&&on());
+const stSet=(k,v)=>{const s=CW.ctx;(ST[s]=ST[s]||{})[k]=v==null?1:v;F.stat.start=(F.stat.start|0)+1};
+const stTake=(k,v)=>{const o=ST[CW.ctx];if(!o||o[k]==null||(v!=null&&o[k]!==v))return false;delete o[k];return true};
+F.f6bStart=ST;
 /* ===== 1-2. the exams (her exam, the servant exam): exRun plays on her phone with a throw-away state; the end = exEnd ===== */
 if(typeof exRun==="function"){const x0=exRun;
  exRun=function(P,e,done){const kind=P&&P.srv?"srv":"me";
-  if(hctx())return cap("exGame",[kind]);
+  if(hctx()){stSet("exam",kind);return cap("exGame",[kind])}
   if(g12()){const t={};let sk=null;const r=x0.call(this,P,t,res=>exEnd(kind,res&&res.raws||[],sk||[]));sk=t.pend&&t.pend.sk;F.stat.exLocal=(F.stat.exLocal|0)+1;return r}
   return x0.apply(this,arguments)}}
 window.exGame=function(kind){const P=kind==="srv"?exSrvPlan(exSrvS().to):exPlanFull();return exRun(P,{},null)};
 TH.UICAP.add("exGame");
 reg12("exEnd",["v","v","v"],{title:A=>A[0]==="srv"?"Khảo hạch Nội vụ phủ":"Khảo hạch",
  dec:a=>{const x=X5.decA9(["v","v","v"],a);if(!x)return null;const [kind,raws,sk0]=x;if(kind!=="me"&&kind!=="srv")return bad("exEnd");
+  if(lifted("exam")&&!stTake("exam",kind))return bad("exEnd");/* lifted: only after her card ran on the host */
   const e=kind==="srv"?exSrvS():exS(S);if(!e||(e.w1==null&&!e.pend))return bad("exEnd");/* her window is open (one end per exam) */
   const P=kind==="srv"?exSrvPlan(e.to):exPlanFull();const sk=Array.isArray(sk0)?sk0.map(Boolean):[];
   if(!Array.isArray(raws)||raws.length>P.rounds.length)return bad("exEnd");for(let j=0;j<raws.length;j++)if(!raw0(raws[j],sk[j]))return bad("exEnd");
@@ -72,10 +80,14 @@ reg12("kc2SelEnd",["v"],{title:()=>"Tuyển chọn",
 
 /* ===== 8. the veil craft: vlCraftGame (mgEnd 12 = F5's held cost machinery), the end = vlCraftEnd ===== */
 capFn("vlCraftGame");
+{const v0=window.vlCraftGame;if(typeof v0==="function")window.vlCraftGame=function(m){if(hctx())stSet("veil",m);return v0.apply(this,arguments)};vlCraftGame=window.vlCraftGame}
+/* her start ran on her phone: its cost travels held (F5 aa ctx); the host takes it only when it is at least the solo khắc + Sức (VL; the material is paid by vlCraft in the end) */
+const vlHeld=m=>{const c=window.__aaPend;return !!c&&typeof c==="object"&&(c.khac|0)>=VL.craftK&&(+c.suc||0)<=-VL.craftSuc};
 /* mgEnd 12 means "an F6b end": below level 12 (or not her own tap) the game runs exactly as before (F5's wrapper sees no mgEnd) */
 if(typeof playArt==="function"){const p0=playArt;playArt=function(o){if(o&&o.mgEnd===12&&!g12())o=Object.assign({},o,{mgEnd:0});return p0.call(this,o)};window.playArt=playArt}
 reg12("vlCraftEnd",["v","v","v"],{title:()=>"Tự tay kết mạng che mặt",
- dec:a=>{const x=X5.decA9(["v","v","v"],a);if(!x)return null;const [m,raw,sk]=x;if(![0,1,2].includes(m)||!raw0(raw,sk))return bad("vlCraftEnd");return [m,sk?5:raw,!!sk]},
+ dec:a=>{const x=X5.decA9(["v","v","v"],a);if(!x)return null;const [m,raw,sk]=x;if(![0,1,2].includes(m)||!raw0(raw,sk))return bad("vlCraftEnd");
+  if(!stTake("veil",m)&&!vlHeld(m))return bad("vlCraftEnd");/* the start: run on the host (paid there), or her held solo cost */return [m,sk?5:raw,!!sk]},
  pre:A=>payAA(sc=>{sc.skip=!!A[2];sc.raw=A[2]?null:cl0(Math.round(A[1]||0),0,10);sc.ok=!A[2]&&sc.raw>=5})});
 
 /* ===== 10. Chải chuốt: the end = wdGroomEnd, its rows (wdGroomShow) on her phone ===== */
@@ -87,12 +99,15 @@ reg12("wdGroomEnd",["v"],{title:()=>"Chải chuốt",dec:a=>{const x=X5.decA9(["
 
 /* ===== 9. the mirror (Điểm trang; also the face of Hội phối đồ): the end = toilFinish (TOIL.st rides in ctx "toil"), its rows = toilFinShow ===== */
 capFn("toilFinShow");capFn("toilGo");
+{const t0=window.toilGo;if(typeof t0==="function")window.toilGo=function(){if(hctx())stSet("toil");return t0.apply(this,arguments)};toilGo=window.toilGo}
 const unit=x=>x==null||inR(x,MSC().unit);
 reg12("toilFinish",["v"],{title:()=>"Điểm trang",
  dec:a=>{const x=X5.decA9(["v"],a);if(!x)return null;const made=x[0];const st=typeof TOIL==="object"?TOIL.st:null;
   if(!(made===true||made===false||made==="quick")||!st||typeof st!=="object"||!Array.isArray(st.occ)||!st.occ.length||!st.parts||typeof st.parts!=="object")return bad("toilFinish");
   const P=st.parts;if(!unit(P.brow)||!unit(P.powder)||!unit(P.son)||!unit(P.hd))return bad("toilFinish");
-  if(st.F!=null&&!(typeof st.F==="number"&&st.F>=0&&st.F<=9))return bad("toilFinish");return [made]}});
+  if(st.F!=null&&!(typeof st.F==="number"&&st.F>=0&&st.F<=9))return bad("toilFinish");
+  if(lifted("toil")&&!DH[CW.ctx]&&!stTake("toil"))return bad("toilFinish");/* lifted: her mirror card ran on the host, or the contest's face */
+  return [made]}});
 /* the mirror's quick button ("Điểm trang nhanh") rolls on the host: her phone never calls toilFinish (the intent) — nothing to hold here */
 
 /* ===== 6-7. Tranh sủng / Chặn ngự giá: the game before her deck card or her person-menu act; the end = stealEnd (the host runs the card /
