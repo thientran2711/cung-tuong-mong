@@ -11,18 +11,18 @@ build.py refs emitter (--log/--refs): YES · emperor-B refs emitter: NO
 
 | tier | a18 | a26 | a36 | a51 | a65 |
 |---|---|---|---|---|---|
-| t1 | ❌ POSE=(26) | ❌ POSE= | ❌ POSE=(29) | ❌ POSE=(29) | ❌ POSE=(31) |
-| t2 | ❌ POSE=(26)* | ❌ POSE=* | ❌ POSE=(29)* | ❌ POSE=(29)* | ❌ POSE=* |
-| t3 | ❌ POSE=(26)* | ❌ POSE=* | ❌ POSE=(29)* | ❌ POSE=(29)* | ❌ POSE=* |
-| t4 | ❌ POSE=(26) | ❌ POSE= | ❌ POSE=(29) | ❌ POSE=(29) | ❌ POSE= |
-| t5 | ❌ POSE=(26) | ❌ POSE= | ❌ POSE=(29) | ❌ POSE=(29) | ❌ POSE=(31) |
-| t6 | ❌ POSE=(26) | ❌ POSE= | ❌ POSE=(29) | ❌ POSE=(29) | ❌ POSE= |
-| t7 | ❌ POSE=(29) | ❌ POSE= | ❌ POSE=(29) | ❌ POSE= | ❌ POSE= |
-| t8 | ❌ POSE=(29) | ❌ POSE= | ❌ POSE=(29) | ❌ POSE= | ❌ POSE= |
-| Thái hậu | — | — | ❌ POSE=(29) | ❌ POSE=(29) | ❌ POSE= |
+| t1 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| t2 | ✅* | ✅* | ✅* | ✅* | ✅* |
+| t3 | ✅* | ✅* | ✅* | ✅* | ✅* |
+| t4 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| t5 | ✅ | ✅ | ✅ | ✅ | ✅ |
+| t6 | ❌ POSE=(1) | ❌ POSE=(3) | ❌ POSE=(5) | ❌ POSE=(6) | ❌ POSE=(7) |
+| t7 | ❌ POSE=(2) | ❌ POSE=(1) | ❌ POSE=(6) | ❌ POSE=(5) | ❌ POSE=(9) |
+| t8 | ❌ POSE=(2) | ❌ POSE=(1) | ❌ POSE=(5) | ❌ POSE=(5) | ❌ POSE=(10) |
+| Thái hậu | — | — | ❌ POSE=(5) | ❌ POSE=(5) | ❌ POSE=(8) |
 | Nữ đế | ❌ POSE= | ❌ POSE=(26) | ❌ POSE= | ❌ POSE= | ❌ POSE= |
-| khuê các | ❌ POSE=(26) | ❌ POSE=(26) | — | — | — |
-| nhà nghèo | ❌ POSE= | ❌ POSE= | — | — | — |
+| khuê các | ✅ | ✅ | — | — | — |
+| nhà nghèo | ✅ | ✅ | — | — | — |
 | cung nữ tm0 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | — | — |
 | cung nữ tm1 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
 | cung nữ tm2 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
@@ -305,7 +305,7 @@ Codes as above, plus NOSRC = no old prompt exists (rule 6: never invented; owner
 
 ## RED LIST (grouped)
 
-- **Consorts c01–c32 (32)** — POSE=: t1/a18, t1/a26, t1/a36, t1/a51, t1/a65, t2/a18, t2/a26, t2/a36, t2/a51, t2/a65, t3/a18, t3/a26, t3/a36, t3/a51 … (+38)
+- **Consorts c01–c32 (32)** — POSE=: t6/a18, t6/a26, t6/a36, t6/a51, t6/a65, t7/a18, t7/a26, t7/a36, t7/a51, t7/a65, t8/a18, t8/a26, t8/a36, t8/a51 … (+9)
 - **Consorts c01–c32 (32)** — NOCMD (no builder mode): tm0/a18, tm0/a26, tm0/a36, tm1/a18, tm1/a26, tm1/a36, tm1/a51, tm1/a65, tm2/a18, tm2/a26, tm2/a36, tm2/a51, tm2/a65, tm3/a18 … (+54)
 - **Consorts c01–c32 (32)** — POSE POSE=: tr1/a18, tr1/a26, tr1/a36, tr1/a51, tr1/a65, tr2/a18, tr2/a26, tr2/a36, tr2/a51, tr2/a65, tr3/a18, tr3/a26, tr3/a36, tr3/a51 … (+26)
 - **Maid faces m01–m52 (52) in every woman tier** — RUN: t1/a18, t1/a26, t1/a36, t1/a51, t1/a65, t2/a18, t2/a26, t2/a36, t2/a51, t2/a65, t3/a18, t3/a26, t3/a36, t3/a51 … (+78)

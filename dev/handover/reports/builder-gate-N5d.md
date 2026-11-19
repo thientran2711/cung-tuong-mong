@@ -19,3 +19,8 @@ Guard per item: snapshot of 8350 builder commands (c01–c32 × 5 ages × 19 mod
 - W107b (session_01PEhRbv2Jj3dTLMsN1f9GGg) is inactive: the API is documented in the README instead.
 
 - coverage after item 2: REFS column cleared for every build.py group (emitter YES); only the Emperor (emperor-B) still red on REFS/BG.
+
+## Item 3 — spec5pose AGE offset
+- spec5pose now picks per (person, tier, age): each age starts one step further along her 6-pose list (a18 at the old start), takes the first pose that passes that age's own skip lists (facing; calm for t6+ and a51/a65) and is not taken by another age; ages with the fewest allowed poses choose first. If every allowed pose is taken the age falls back to its first allowed pose (this is the POSE= left in coverage). Ages outside the five (kids) keep the old pick.
+- Snapshot diff vs item 2: 2022 of 8350 changed, ALL spec5pose outputs (0 outside spec5pose; 19 of them at a18 because a scarce age may take a pose a18 used to hold); 0 new errors. test_low_all OK.
+- coverage POSE=: green for t1–t5, khuê các, nhà nghèo (were red everywhere). Still red: t6, t7, t8, Thái hậu (+ Nữ đế): with the calm skip (no twirl/skipping/dance/swirl/turn) only ~3–4 of the 6 poses stay allowed, so 5 ages cannot all differ. Nữ đế is one fixed calm sentence by the owner's rule (canon 19/11 e), so POSE= is by design there. Making t6+ fully green needs more calm poses in SPEC5_POSES = new pose wording = owner decision, not invented here.

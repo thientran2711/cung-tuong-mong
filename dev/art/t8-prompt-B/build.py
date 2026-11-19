@@ -942,14 +942,27 @@ def spec5pose(o,c,t):
     prop=m.group(1); tr,mi=SPEC5_IDS[c]; i=mi-1
     # FACING (FIGURE_GATE D.3a, owner 18/11 ~22:10Z): never back turned / looking back over the shoulder -> skip to the next pose of the same list ((i+t)%6, (i+t+1)%6 ...)
     # CALM WITH RANK AND AGE (APPROVED_PROMPTS rule 3): t6-t8 and a51/a65 never dance / twirl / skip / swirl -> same skip
-    _bad=[r"look(?:ing)? back"]+([r"twirl",r"skipping",r"dance",r"swirl",r"light turn"] if (t>=6 or AGE in ("a51","a65")) else [])
-    # N2 r10b (ROOT-33, owner A0 rule 3): Nữ đế (--state nude) = top rank -> also skip walking / mid-step / turning / skirt-lifting / hairpin-adjusting frames (only affects --state nude)
-    if globals().get("STATE")=="nude": _bad+=[r"walking",r"mid-step",r"turning",r"lifting her skirt",r"adjusting"]
-    for _k in range(6):
-        raw=SPEC5_POSES[tr][(i+t-1+_k)%6]
-        if "{prop}" not in raw: raw=SPEC5_ADAPT[raw]
-        if not any(re.search(p,raw) for p in _bad): break
-    else: raise AssertionError(("no allowed spec5 pose",c,t))
+    def _badf(ag):
+        b=[r"look(?:ing)? back"]+([r"twirl",r"skipping",r"dance",r"swirl",r"light turn"] if (t>=6 or ag in ("a51","a65")) else [])
+        # N2 r10b (ROOT-33, owner A0 rule 3): Nữ đế (--state nude) = top rank -> also skip walking / mid-step / turning / skirt-lifting / hairpin-adjusting frames (only affects --state nude)
+        if globals().get("STATE")=="nude": b+=[r"walking",r"mid-step",r"turning",r"lifting her skirt",r"adjusting"]
+        return b
+    def _raw(j):
+        r_=SPEC5_POSES[tr][j]
+        return r_ if "{prop}" in r_ else SPEC5_ADAPT[r_]
+    # N5d item 3 (AGE offset): the 5 ages of ONE person get DIFFERENT poses. each age starts one step further (a18 at (i+t-1)) and takes the first pose that passes ITS OWN skip lists and is not taken by another age; ages with the fewest allowed poses choose first; if every allowed pose is taken it falls back to its first allowed one. Ages outside the 5 (kids) keep the old pick.
+    _AO=["a18","a26","a36","a51","a65"]; _used=[]; _pick=None
+    if AGE not in _AO: _AO=[AGE]
+    _oks={}
+    for _ag in _AO:
+        _off=_AO.index(_ag); _cand=[(i+t-1+_off+_k)%6 for _k in range(6)]
+        _oks[_ag]=[j for j in _cand if not any(re.search(q,_raw(j)) for q in _badf(_ag))]
+        if not _oks[_ag]: raise AssertionError(("no allowed spec5 pose",c,t))
+    _pk={}
+    for _ag in sorted(_AO,key=lambda g:(len(_oks[g]),_AO.index(g))):   # the age with the fewest allowed poses (a51/a65, t6+) chooses first
+        _pk[_ag]=next((j for j in _oks[_ag] if j not in _pk.values()),_oks[_ag][0])
+    _pick=_pk[AGE]
+    raw=_raw(_pick)
     # N5c (owner 19/11 ~00:50Z, FIGURE_GATE 3d2 "từ đây về sau là không có vẽ góc 3 phần tư nữa"): FRONTAL ONLY. Applied AFTER the pose choice (skip lists above see the verbatim spec5 text, so every person keeps the same pose);
     # only the turn/side words change, the hand/item action stays; every spec5 pose then states the frontal body.
     for _o,_n in SPEC5_FRONTAL: raw=raw.replace(_o,_n)
