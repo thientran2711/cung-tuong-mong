@@ -212,3 +212,4 @@ kc/ngheo NEW c13+c16 (4 gens) | handover | session_01PEhRbvGFP6YSgT5DTgo3yu (K4,
 | seal-anim-sheet (sonnet; show-only, owner asked to see each seal animation) | handover report | MAIN ROOT-62 | session_01Rc5AsLhf6D4pDFssmG94et | SHEET READY | 19/11 03:15Z |
 | MAIN ROOT-63 (opus; child of ROOT-62, depth 1) | handover HANDOVER_SESSION9 | ROOT-62 | session_01Rc5AsN8fHJWShQ7rSPxjx5 | RUNNING | 19/11 03:37Z |
 | odds-meter-back r2 SMALL REVIEW (sonnet) | review/odds-meter-back 42bda6a9 | MAIN ROOT-63 | session_01Rc5AsJ4JEEMogtiNCfMZ6x | RUNNING | 19/11 03:43Z |
+| errand-scene r6 head markers + real video (opus; successor of L23c5v2N) | review/errand-scene | MAIN ROOT-63 | session_01Rc5AsJBScJTqmWZxTCvmtQ | RUNNING | 19/11 03:48Z |

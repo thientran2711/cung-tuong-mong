@@ -52,3 +52,4 @@ Format: [source:Lnn] = line in the source file (OD = dev/OWNER_DECISIONS.md on t
 ### HANDOVER.md
 [HANDOVER.md:L89] - Think WITH the owner: for every idea she gives, weigh it and propose how (or whether) to do it; don't just obey blindly.
 [HANDOVER.md:L15] Owner: Victoria ("sếp"). Reply to her in Vietnamese only, as "em", short, no questions unless truly needed; she reads on a Samsung Galaxy Z Fold (inner ~1510x2000 portrait, cover ~904x2316). This is her standalone game, NOT Đại Hy (Đại Hy has its own main session; send any Đại Hy word of hers to MAIN 495 session_01Rc5AsLpa5TYV5oV2gBycQy via send_message).
+[OD:19/11 ~03:50Z] - Whenever the owner asks to SEE an animation, the main chat sends a REAL VIDEO (mp4 screen recording, Fold 755x1000 + iPad 1180x820), never still pictures, sheets or strips; main extracts and LOOKS at its frames first.
