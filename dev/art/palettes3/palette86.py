@@ -23,7 +23,7 @@ colourlib.oklab = functools.lru_cache(maxsize=None)(colourlib.oklab)
 _ok = colourlib.oklch
 colourlib.oklch = functools.lru_cache(maxsize=None)(lambda h: _ok(h))
 from colourlib import *
-from seasons import SEASONS, classify, target_ok, VN, summer_warm, temp, in_tone, tone_lift, scores
+from seasons import SEASONS, classify, target_ok, VN, summer_warm, temp, in_tone, tone_lift, scores, pair_tone_ok
 from gen_palettes3 import contrast_ok, lookalike, COOL_ONLY, WARM_ONLY
 from gen_seasons import season_contrast, COOL_X, SEASON_SIDE
 from xuan_pink import lch2hex, tone_ok
@@ -181,6 +181,8 @@ def current_roots():
         out[k] = dict(drawn=dr, cur=cur, base=lifted_pair(cur))
     return out
 
+BANNED_WORDS = ('deep', 'dark', 'madder', 'sapphire', 'yellow', 'gold')
+
 def cmd_roots2():
     """Lượt 769/770: the 11 new roots must be in the one tone; re-pick from tone-lifted approved colours, unique vs the
     lifted roots of everybody else (gate margin +2)."""
@@ -205,7 +207,11 @@ def cmd_roots2():
             if not in_tone(m[1], 'm'): continue
             for s_ in cols:
                 if s_[0] == m[0] or (m[0], s_[0]) in taken or not in_tone(s_[1], 's'): continue
+                if any(w in m[0] + ' ' + s_[0] for w in BANNED_WORDS): continue
                 mh, sh = m[1], s_[1]
+                if not pair_tone_ok(mh, sh): continue
+                if any(max(de2000(mh, q['main_hex']), de2000(sh, q['sec_hex'])) < 14 or (de2000(mh, q['main_hex']) < 22 and de2000(sh, q['sec_hex']) < 9)
+                       for q in chosen.values()): continue          # no colour twins among the 11 new people (any season)
                 if not (contrast_ok(mh, sh, None) and season_contrast(mh, sh)): continue
                 rs = classify(mh, sh)
                 if SEASON_SIDE[rs] == 'warm' and (m[0] in COOL_ONLY or s_[0] in COOL_ONLY or m[0] in COOL_X or s_[0] in COOL_X): continue

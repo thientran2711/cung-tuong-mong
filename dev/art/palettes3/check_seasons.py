@@ -13,7 +13,7 @@
 import json, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from colourlib import *
-from seasons import SEASONS, classify, target_ok, VN, in_tone
+from seasons import SEASONS, classify, target_ok, VN, in_tone, pair_tone_ok
 from gen_palettes3 import load_p1, contrast_ok, lookalike
 from gen_seasons import season_contrast
 
@@ -34,7 +34,7 @@ for i, k in enumerate(ids):
     drawn = rp.get('root_drawn', rp) if not k.startswith('s') else rp
     if not rp.get('root') or any(drawn.get(x) != root[x] for x in ('main', 'main_hex', 'sec', 'sec_hex')):
         bad(f'{k}: root palette changed or missing in {VN[rs]}')
-    if rp.get('root') and not (in_tone(rp['main_hex'], 'm') and in_tone(rp['sec_hex'], 's')):
+    if rp.get('root') and not pair_tone_ok(rp['main_hex'], rp['sec_hex']):
         bad(f'{k}: root {rp["main_hex"]}/{rp["sec_hex"]} outside the one Xuân/Hạ tone (owner Lượt 769)')
     for se in SEASONS:
         if se not in r: bad(f'{k}: missing {VN[se]}'); continue

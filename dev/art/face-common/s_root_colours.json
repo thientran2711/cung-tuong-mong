@@ -376,29 +376,29 @@
  "s51": {
   "main": "cool lilac",
   "main_hex": "#CCB0E5",
-  "sec": "soft sea blue",
-  "sec_hex": "#6294AE",
+  "sec": "soft pine teal",
+  "sec_hex": "#62AEA9",
   "root_season": "ha",
   "src": "Lượt 763 new Kiêu kỳ root, picked by palette86.py from approved palette colours; re-picked in the one Xuân/Hạ tone (owner Lượt 769)",
   "root_prev_L763": {
-   "main": "orchid pink",
-   "main_hex": "#D49CC6",
-   "sec": "deep sea blue",
-   "sec_hex": "#4F809A"
+   "main": "cool lilac",
+   "main_hex": "#CCB0E5",
+   "sec": "soft sea blue",
+   "sec_hex": "#6294AE"
   }
  },
  "s52": {
   "main": "sky blue",
   "main_hex": "#98C8D7",
-  "sec": "soft madder red",
-  "sec_hex": "#C37475",
+  "sec": "soft coral",
+  "sec_hex": "#D38A7B",
   "root_season": "dong",
   "src": "Lượt 763 new Kiêu kỳ root, picked by palette86.py from approved palette colours; re-picked in the one Xuân/Hạ tone (owner Lượt 769)",
   "root_prev_L763": {
-   "main": "soft lavender",
-   "main_hex": "#B8A0D2",
-   "sec": "madder red",
-   "sec_hex": "#AE6163"
+   "main": "sky blue",
+   "main_hex": "#98C8D7",
+   "sec": "soft madder red",
+   "sec_hex": "#C37475"
   }
  },
  "s53": {
@@ -416,45 +416,45 @@
   }
  },
  "s54": {
-  "main": "pale orchid",
-  "main_hex": "#DAB4DD",
-  "sec": "soft sapphire",
-  "sec_hex": "#748DC1",
-  "root_season": "dong",
+  "main": "carnation pink",
+  "main_hex": "#E4A1B7",
+  "sec": "soft sea blue",
+  "sec_hex": "#75A7C3",
+  "root_season": "xuan",
   "src": "Lượt 763 new Kiêu kỳ root, picked by palette86.py from approved palette colours; re-picked in the one Xuân/Hạ tone (owner Lượt 769)",
   "root_prev_L763": {
-   "main": "cool lilac",
-   "main_hex": "#BFA3D8",
-   "sec": "deep sapphire",
-   "sec_hex": "#566D9F"
+   "main": "pale orchid",
+   "main_hex": "#DAB4DD",
+   "sec": "soft sapphire",
+   "sec_hex": "#748DC1"
   }
  },
  "s55": {
   "main": "pink lilac",
   "main_hex": "#CEA1BF",
-  "sec": "soft peacock blue",
-  "sec_hex": "#6495AA",
+  "sec": "soft jade green",
+  "sec_hex": "#9EB28F",
   "root_season": "thu",
   "src": "Lượt 763 new Kiêu kỳ root, picked by palette86.py from approved palette colours; re-picked in the one Xuân/Hạ tone (owner Lượt 769)",
   "root_prev_L763": {
    "main": "pink lilac",
    "main_hex": "#CEA1BF",
-   "sec": "deep sea blue",
-   "sec_hex": "#547F97"
+   "sec": "soft peacock blue",
+   "sec_hex": "#6495AA"
   }
  },
  "s56": {
-  "main": "silk rose pink",
-  "main_hex": "#E9A7A6",
-  "sec": "soft lavender",
-  "sec_hex": "#9580B9",
-  "root_season": "xuan",
+  "main": "apricot",
+  "main_hex": "#D6A585",
+  "sec": "lavender violet",
+  "sec_hex": "#A991CA",
+  "root_season": "thu",
   "src": "Lượt 763 new Quyến rũ root, picked by palette86.py from approved palette colours; re-picked in the one Xuân/Hạ tone (owner Lượt 769)",
   "root_prev_L763": {
-   "main": "warm blush",
-   "main_hex": "#E2A9A0",
-   "sec": "deep lavender",
-   "sec_hex": "#8C77B0"
+   "main": "silk rose pink",
+   "main_hex": "#E9A7A6",
+   "sec": "soft lavender",
+   "sec_hex": "#9580B9"
   }
  },
  "s57": {
@@ -472,15 +472,15 @@
   }
  },
  "s58": {
-  "main": "soft coral",
-  "main_hex": "#D38A7B",
+  "main": "soft rust red",
+  "main_hex": "#D28B79",
   "sec": "pale mint green",
   "sec_hex": "#B0DDD0",
   "root_season": "thu",
   "src": "Lượt 763 new Quyến rũ root, picked by palette86.py from approved palette colours; re-picked in the one Xuân/Hạ tone (owner Lượt 769)",
   "root_prev_L763": {
-   "main": "soft crimson red",
-   "main_hex": "#CC7370",
+   "main": "soft coral",
+   "main_hex": "#D38A7B",
    "sec": "pale mint green",
    "sec_hex": "#B0DDD0"
   }
@@ -488,41 +488,41 @@
  "s59": {
   "main": "soft apricot",
   "main_hex": "#DEAF9B",
-  "sec": "blue hyacinth",
-  "sec_hex": "#8C93CC",
+  "sec": "soft moonlight blue",
+  "sec_hex": "#A4BCD8",
   "root_season": "ha",
   "src": "Lượt 763 new Quyến rũ root, picked by palette86.py from approved palette colours; re-picked in the one Xuân/Hạ tone (owner Lượt 769)",
   "root_prev_L763": {
-   "main": "peach pink",
-   "main_hex": "#DFAC9F",
+   "main": "soft apricot",
+   "main_hex": "#DEAF9B",
    "sec": "blue hyacinth",
    "sec_hex": "#8C93CC"
   }
  },
  "s60": {
-  "main": "pink lilac",
-  "main_hex": "#CEA1BF",
-  "sec": "ivory cream",
-  "sec_hex": "#EAD7BF",
+  "main": "coral pink",
+  "main_hex": "#D9998C",
+  "sec": "soft sea blue",
+  "sec_hex": "#649AB8",
   "root_season": "thu",
   "src": "Lượt 763 new Quyến rũ root, picked by palette86.py from approved palette colours; re-picked in the one Xuân/Hạ tone (owner Lượt 769)",
   "root_prev_L763": {
-   "main": "soft orchid purple",
-   "main_hex": "#B27FBD",
+   "main": "pink lilac",
+   "main_hex": "#CEA1BF",
    "sec": "ivory cream",
    "sec_hex": "#EAD7BF"
   }
  },
  "s61": {
-  "main": "soft rust red",
-  "main_hex": "#D28977",
-  "sec": "lake blue",
-  "sec_hex": "#85B5DA",
+  "main": "persimmon",
+  "main_hex": "#D2906C",
+  "sec": "ivory",
+  "sec_hex": "#EDDCC6",
   "root_season": "thu",
   "src": "Lượt 763 new Quyến rũ root, picked by palette86.py from approved palette colours; re-picked in the one Xuân/Hạ tone (owner Lượt 769)",
   "root_prev_L763": {
-   "main": "soft rose red",
-   "main_hex": "#CF6E76",
+   "main": "soft rust red",
+   "main_hex": "#D28977",
    "sec": "lake blue",
    "sec_hex": "#85B5DA"
   }

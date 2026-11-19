@@ -4,7 +4,8 @@ mình gom những nhóm màu thu/đông vào mùa đó" -> ALL FOUR seasons use 
 a season = a group of colour FAMILIES, never a depth. The old "Thu / Đông need a deep colour" rule (Lmin <= 0.64 / 0.58)
 is gone. Measured on OKLCH (colourlib).
 TONE (all seasons, main and secondary, owner Lượt 742/744/769; = the Xuân/Hạ generated colours, tone_unify.py numbers):
-  main: L 0.70–0.90, chroma 0.045–0.095 · secondary: L 0.64–0.90 (a touch deeper, like Xuân/Hạ), chroma 0.045–0.100
+  main: L 0.70–0.90, chroma 0.045–0.095 · secondary: L 0.66–0.90 and at most 0.10 darker than the main (only a touch
+  deeper; owner Lượt 767 rejected secondaries at L .55–.58), chroma 0.045–0.100
   ivory / cream / white (L >= 0.86, C <= 0.06) allowed as either colour. No grey (B19), no gold / royal yellow (B21).
 FAMILIES (affinity 0..1 of one colour to each season, see aff()):
   Xuân: pinks / rose / coral-pink (hue 345–30°, clear), light peach-blossom, clear spring greens (128–152°)
@@ -22,7 +23,8 @@ from colourlib import *
 
 SEASONS = ('xuan', 'ha', 'thu', 'dong')
 VN = {'xuan': 'Xuân', 'ha': 'Hạ', 'thu': 'Thu', 'dong': 'Đông'}
-TONE = {'m': dict(L=(0.70, 0.90), C=(0.045, 0.095)), 's': dict(L=(0.64, 0.90), C=(0.045, 0.100))}
+TONE = {'m': dict(L=(0.70, 0.90), C=(0.045, 0.095)), 's': dict(L=(0.66, 0.90), C=(0.045, 0.100))}
+SEC_DEEPER_MAX = 0.10   # secondary at most this much darker than the main (foreman/owner Lượt 767/769)
 
 def temp(h):
     return 0.0 if is_white(h) else warmth(h)     # ivory / cream / white count as neutral
@@ -98,8 +100,11 @@ def classify(m, s):
     if summer_warm(m, s): return 'ha'
     sc = scores(m, s); return max(side(m, s), key=lambda k: sc[k])
 
+def pair_tone_ok(m, s):
+    return in_tone(m, 'm') and in_tone(s, 's') and oklch(s)[0] >= oklch(m)[0] - SEC_DEEPER_MAX - 1e-9
+
 def target_ok(season, m, s):
-    if not (in_tone(m, 'm') and in_tone(s, 's')): return False
+    if not pair_tone_ok(m, s): return False
     x = metrics(m, s)
     if season == 'ha' and summer_warm(m, s): return True
     if classify(m, s) != season: return False
