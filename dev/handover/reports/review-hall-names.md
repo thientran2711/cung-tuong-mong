@@ -1,6 +1,6 @@
 # Review hall-names — review/hall-names @ c294e1d (small reviewer)
 PRIORITY #1 CHECK ('tên điện'): OD 0 | ledger 0 | claims 0 | main jhall.js (E3, already landed) | review/* only this branch.
-VERDICT: **PASS c294e1d** — FF over live origin/main f43a2ba6 (re-verified, main had not moved).
+VERDICT: **PASS aed411f** (review/hall-names-r6 = c294e1d + final-merge of origin/main fd6118c, only index.html/sw.js conflicted, rebuilt by build_site.sh; scan, lines Fold+iPad, quickcheck re-run green on the merged head).
 
 ## Checks
 - hall-names-scan: OK (10 palaces, 38 plaques unique, 0 leaks).
