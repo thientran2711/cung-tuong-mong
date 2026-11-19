@@ -1,10 +1,14 @@
-# APPROVED SENTENCES — the owner's approved words, one entry per sentence (AP1, owner Lượt 500)
+# APPROVED SENTENCES — the owner's approved words (GENERATED from dev/art/check_store.py APPROVED/BANNED tables; do not edit by hand)
 
-**LAW:** every prompt carries the sentences of its scope VERBATIM; only the `{slot}` words may differ (colour names, motif, item, pendant…). Nobody rewrites a sentence here: each is COPIED (by script, `check_approved.py --self` proves it) from the prompt of a picture the owner approved. A new owner approval is ADDED here by the foreman the same turn, copied from the approved prompt, never retyped. Gate: `python3 dev/art/check_approved.py <prompt> --scope tpN|prN|trieuN|mama|nude` must print APPROVED CHECK PASS; FAIL = no gen; ledger line carries `"approved_check": "PASS"`. `check_store.py` runs this gate too. Audit of all current prompts: dev/art/APPROVED_AUDIT.md. Owner sheet: dev/handover/review-sheets/approved/.
+**Source of truth = the APPROVED and BANNED tables in `dev/art/check_store.py`** (the one STORE GATE, owner Lượt 371/373/375, extended Lượt 500/504). Regenerate this file: `python3 dev/art/check_store.py --registry-md`.
 
-Scopes: `tp1-8` thường phục rank (consorts c01–c32, maid-persons m01–m52) · `pr1-8` princesses p01–p03 · `trieu1-8` triều phục · `mama` · `nude` Nữ đế · `all`. `scope` = REQUIRED (missing → FAIL). `confirm` = the rule's wording reaches there but the owner has not said so for that outfit yet → WARN only, owner to decide.
+**LAW #0 (Lượt 505):** only sentences/bans the OWNER herself approved or raised are listed; our own remarks are notes to her, never entries. Each sentence is COPIED from the prompt of a picture she approved (`--self` proves it against its proof prompt); only `{slot}` words may differ. A new owner approval is ADDED to the tables by the foreman the same turn, copied, never retyped.
 
-Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl_t2_V2 Cao Ly V2, trieu r21/r18, store build.py, build_all.py). **The owner has NOT yet approved this registry as a whole** — sheet sent for her one-time OK.
+Gate: `python3 dev/art/check_store.py <prompt> <store args>` (store sentences + approved sentences + banned phrases) or, for prompts without store args (triều phục, ma ma spec files…), `python3 dev/art/check_store.py <prompt> --scope tpN|prN|trieuN|mama|nude [--age aNN]`. Must print STORE CHECK PASS; FAIL = no gen; ledger line carries "store_check":"PASS" and "approved_check":"PASS". Audit: dev/art/APPROVED_AUDIT.md. Owner sheet: dev/handover/review-sheets/approved/.
+
+Scopes: `tp1-8` thường phục rank (consorts c01–c32, m01–m52) · `pr1-8` princesses p01–p03 · `trieu1-8` triều phục · `mama` · `nude` Nữ đế · `all`. `scope` = REQUIRED (missing → FAIL); `confirm` = owner still to confirm there → WARN only. `store: yes` = a store sentence, already demanded by the store part when the prompt is checked with store args.
+
+Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as a whole** — sheet sent for her one-time OK.
 
 ## Sentences (S)
 
@@ -13,6 +17,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 - scope: tp1-6 pr1-6 mama
 - confirm: tp7-8 pr7-8 nude trieu1-8
 - ages: all
+- store: no
 - luot: 489, 499 (ART_RULES B15)
 - source: dev/art/owner-copy/pr_cl_t2_V2.txt (Cao Ly V2, owner Lượt 301-303)
 - proof: dev/art/owner-copy/pr_cl_t2_V2.txt
@@ -24,6 +29,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 - scope: tp1-6 pr1-6
 - confirm: -
 - ages: a18 a26 a36
+- store: yes
 - luot: 301-303, B14
 - source: dev/art/owner-copy/pr_cl_t2_V2.txt = store build.py --low
 - proof: dev/art/owner-copy/pr_cl_t2_V2.txt
@@ -35,6 +41,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 - scope: tp7-8 pr7-8 nude
 - confirm: -
 - ages: a18 a26 a36
+- store: yes
 - luot: 18/11 4c0 (t8 PROMPT B FROZEN)
 - source: dev/art/t8-prompt-B/build.py (prompt B)
 - proof: dev/art/approved/proof/c06_t8_a18.txt
@@ -46,6 +53,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 - scope: tp1-8 pr1-8 nude trieu1-8
 - confirm: -
 - ages: all
+- store: yes
 - luot: 18/11 07:45Z (G9)
 - source: dev/art/owner-copy/pr_cl_t2_V2.txt = store
 - proof: dev/art/owner-copy/pr_cl_t2_V2.txt
@@ -57,6 +65,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 - scope: tp1-6 pr1-6 trieu1-6
 - confirm: -
 - ages: all
+- store: yes
 - luot: 18/11 4d, I3
 - source: dev/art/owner-copy/pr_cl_t2_V2.txt = store
 - proof: dev/art/owner-copy/pr_cl_t2_V2.txt
@@ -68,6 +77,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 - scope: tp1-3 pr1-3
 - confirm: -
 - ages: all
+- store: yes
 - luot: LAW #1 Lượt 397 (store gate Lượt 375)
 - source: dev/art/t8-prompt-B/build.py --low 1..3 (store)
 - proof: dev/art/approved/proof/c06_t1_a18.txt
@@ -79,6 +89,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 - scope: tp7-8 pr7-8 nude
 - confirm: -
 - ages: all
+- store: no
 - luot: 364 (B12)
 - source: dev/art/store-all/build_all.py FABRIC_B = prompt B
 - proof: dev/art/approved/proof/c06_t8_a18.txt
@@ -90,6 +101,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 - scope: tp1-3 pr1-3
 - confirm: -
 - ages: all
+- store: no
 - luot: 351, 355 (G5)
 - source: dev/art/store-all/build_all.py sleeve()
 - proof: dev/art/approved/proof/c06_t1_a18.txt
@@ -101,6 +113,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 - scope: tp4-6 pr4-6
 - confirm: -
 - ages: all
+- store: no
 - luot: 351, 355 (G5)
 - source: dev/art/store-all/build_all.py sleeve()
 - proof: dev/art/approved/proof/c06_t4_a18.txt
@@ -112,6 +125,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 - scope: tp7-8 pr7-8
 - confirm: -
 - ages: all
+- store: no
 - luot: 351, 355 (G5)
 - source: dev/art/store-all/build_all.py sleeve()
 - proof: dev/art/approved/proof/c06_t8_a18.txt
@@ -123,6 +137,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 - scope: tp1-8 pr1-8
 - confirm: -
 - ages: all
+- store: no
 - luot: 331, 353 (G6)
 - source: dev/art/store-all/build_all.py ONE_LAYER
 - proof: dev/art/approved/proof/c06_t1_a18.txt
@@ -134,6 +149,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 - scope: tp1-6 pr1-6
 - confirm: -
 - ages: all
+- store: no
 - luot: 397, 412, 434, 469, 483, 486 (G4)
 - source: dev/art/store-all/build_all.py phi_bach()
 - proof: dev/art/approved/proof/c06_t1_a18.txt
@@ -145,6 +161,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 - scope: tp4 pr4
 - confirm: -
 - ages: all
+- store: no
 - luot: 397 item 5, 412 (G1)
 - source: dev/art/store-all/build_all.py capelet_cut()
 - proof: dev/art/approved/proof/c06_t4_a18.txt
@@ -156,6 +173,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 - scope: tp7 pr7
 - confirm: -
 - ages: all
+- store: no
 - luot: 486 (G12)
 - source: dev/art/store-all/build_all.py HQP_LUX
 - proof: dev/art/approved/proof/c06_t7_a18.txt
@@ -167,6 +185,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 - scope: tp1-8 pr1-8
 - confirm: -
 - ages: all
+- store: no
 - luot: 486 (B16)
 - source: dev/art/store-all/build_all.py item_colour()
 - proof: dev/art/approved/proof/c06_t1_a18.txt
@@ -178,6 +197,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 - scope: tp1-8 pr1-8
 - confirm: -
 - ages: all
+- store: yes
 - luot: D3d, 18/11
 - source: dev/art/t8-prompt-B/build.py (store pose tail)
 - proof: dev/art/approved/proof/c06_t1_a18.txt
@@ -189,6 +209,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 - scope: mama nude trieu1-8
 - confirm: -
 - ages: all
+- store: no
 - luot: D3d, 18/11
 - source: dev/art/t8-prompt-B/build.py (state/court pose tail)
 - proof: dev/handover/reports/mama-specs/c06-a36.oneref.prompt.txt
@@ -200,6 +221,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 - scope: all
 - confirm: -
 - ages: all
+- store: yes
 - luot: 18/11 16:37Z (D4)
 - source: dev/art/owner-copy/pr_cl_t2_V2.txt = store style line
 - proof: dev/art/owner-copy/pr_cl_t2_V2.txt
@@ -211,6 +233,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 - scope: all
 - confirm: -
 - ages: all
+- store: yes
 - luot: 18/11 23:25Z (D9, D10)
 - source: dev/art/owner-copy/pr_cl_t2_V2.txt = store
 - proof: dev/art/owner-copy/pr_cl_t2_V2.txt
@@ -222,6 +245,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 - scope: tp1-3 pr1-3
 - confirm: -
 - ages: all
+- store: no
 - luot: 337 (F1)
 - source: dev/art/store-all/build_all.py HAIR_LOW
 - proof: dev/art/approved/proof/c06_t1_a18.txt
@@ -233,6 +257,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 - scope: tp4-8 pr4-8
 - confirm: -
 - ages: all
+- store: no
 - luot: 337 (F1)
 - source: dev/art/store-all/build_all.py HAIR_HIGH
 - proof: dev/art/approved/proof/c06_t4_a18.txt
@@ -244,6 +269,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 - scope: tp7-8 pr7-8
 - confirm: -
 - ages: all
+- store: no
 - luot: 323, 331 (F2)
 - source: dev/art/store-all/build_all.py NOFLOWER
 - proof: dev/art/approved/proof/c06_t8_a18.txt
@@ -255,6 +281,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 - scope: tp1-8 pr1-8
 - confirm: -
 - ages: all
+- store: no
 - luot: 326 (D7)
 - source: dev/art/store-all/build_all.py HEADBODY
 - proof: dev/art/approved/proof/c06_t1_a18.txt
@@ -266,6 +293,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 - scope: tp1-8 pr1-2 pr4-8 mama nude trieu1-8
 - confirm: -
 - ages: all
+- store: yes
 - luot: B 18/11 (F5)
 - source: dev/art/t8-prompt-B/build.py (store)
 - proof: dev/art/approved/proof/c06_t1_a18.txt
@@ -277,6 +305,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 - scope: trieu1-6
 - confirm: -
 - ages: all
+- store: no
 - luot: 400-410, 452, 459 (H3)
 - source: dev/art/owner-copy/trieu/r21 (build_r21.py)
 - proof: dev/art/owner-copy/trieu/r21/t3_c06_RAN.txt
@@ -288,6 +317,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 - scope: trieu1-6
 - confirm: -
 - ages: all
+- store: no
 - luot: 452 (H3)
 - source: dev/art/owner-copy/trieu/r21
 - proof: dev/art/owner-copy/trieu/r21/t3_c06_RAN.txt
@@ -299,6 +329,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 - scope: trieu1-6
 - confirm: -
 - ages: all
+- store: no
 - luot: 468 (H6)
 - source: dev/art/owner-copy/trieu/r21/build_r21.py CUFF
 - proof: dev/art/owner-copy/trieu/r21/t3_c06_RAN.txt
@@ -310,6 +341,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 - scope: trieu1-8
 - confirm: -
 - ages: all
+- store: no
 - luot: 444 (H2)
 - source: dev/art/owner-copy/trieu (r17+)
 - proof: dev/art/owner-copy/trieu/r21/t3_c06_RAN.txt
@@ -321,6 +353,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 - scope: trieu1-6
 - confirm: -
 - ages: all
+- store: no
 - luot: 455 (H3)
 - source: dev/art/owner-copy/trieu
 - proof: dev/art/owner-copy/trieu/r21/t3_c06_RAN.txt
@@ -332,6 +365,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 - scope: trieu1-8
 - confirm: -
 - ages: all
+- store: no
 - luot: 411 (H8)
 - source: dev/art/owner-copy/trieu
 - proof: dev/art/owner-copy/trieu/r21/t3_c06_RAN.txt
@@ -343,6 +377,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 - scope: trieu1-6
 - confirm: -
 - ages: all
+- store: no
 - luot: 397 item 2, 400 (H2)
 - source: dev/art/owner-copy/trieu
 - proof: dev/art/owner-copy/trieu/r21/t3_c06_RAN.txt
@@ -354,6 +389,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 - scope: tp1-8 pr1-8 nude
 - confirm: -
 - ages: a51 a65
+- store: yes
 - luot: J2; A0 a51/a65 age texts (c04 elder sheet)
 - source: dev/art/t8-prompt-B/build.py AGE_TXT
 - proof: dev/art/approved/proof/c06_t1_a51.txt
@@ -365,6 +401,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 - scope: mama
 - confirm: -
 - ages: all
+- store: no
 - luot: 229, 397 (K1)
 - source: dev/art/t8-prompt-B/build.py --state mama
 - proof: dev/handover/reports/mama-specs/c06-a36.oneref.prompt.txt
@@ -378,7 +415,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 ### X01 · secondary colour 'only in the inner robe'
 - regex: `only in the inner robe`
 - scope: all
-- unless:
+- unless: -
 - negation: yes
 - luot: 483
 - why: 12c: the secondary colour must show in LARGE areas, never only inside
@@ -394,7 +431,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 ### X05 · shawl / stole / sash / ribbon in the POSE at t7, t8, Nữ đế
 - regex: `Pose:[^.]*\b(stole|ribbon|sash|shawl)\b`
 - scope: tp7-8 pr7-8 nude
-- unless:
+- unless: -
 - negation: no
 - luot: 486
 - why: no shawl-like drape on t7/t8 (m13 t8 'a breeze lifts her long stole')
@@ -402,15 +439,15 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 ### X06 · phi bạch / draped shawl on t7, t8, Nữ đế, triều phục
 - regex: `phi bạch|PHI BẠCH|sheer silk shawl|shawl draped|draped shawl|long silk stole`
 - scope: tp7-8 pr7-8 nude trieu1-8
-- unless:
+- unless: -
 - negation: yes
 - luot: 397, 412, 486 (G4)
 - why: phi bạch only on thường phục t1-t6
 
-### X07 · 'looking down' / downcast eyes
-- regex: `looking down|looks down|gazing down|eyes downcast|downcast`
+### X07 · 'looking down'
+- regex: `looking down|looks down|gazing down`
 - scope: all
-- unless:
+- unless: -
 - negation: yes
 - luot: D3d
 - why: head up, never looking down (negated 'never looking down' is fine)
@@ -418,23 +455,23 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 ### X08 · phoenix at t1-t6
 - regex: `phoenix(?!-like)`
 - scope: tp1-6 pr1-6 trieu1-6
-- unless:
+- unless: -
 - negation: yes
 - luot: 18/11 4d, I1, I3
 - why: phoenix only at t7/t8 (negated 'no phoenix' is fine)
 
-### X09 · royal / imperial yellow at t1-t5
-- regex: `(?:royal yellow|imperial yellow|golden yellow)(?! becomes)`
+### X09 · royal / imperial (deep) yellow at t1-t5 — pale yellow allowed (Lượt 518)
+- regex: `(?<!pale )(?:royal yellow|imperial yellow|golden yellow)(?! becomes)`
 - scope: tp1-5 pr1-5 trieu1-5
-- unless:
+- unless: -
 - negation: yes
-- luot: 446, 450 (I1)
+- luot: 446, 450, 518 (I1)
 - why: t1-t5 no yellow
 
 ### X10 · 'short jacket' (maid look)
 - regex: `short jacket`
 - scope: tp1-8 pr1-8
-- unless:
+- unless: -
 - negation: yes
 - luot: 344, 271, 280 (G7)
 - why: length lock: never a hip-short jacket
@@ -442,7 +479,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 ### X11 · teeth / open mouth
 - regex: `\bteeth\b|open[- ]mouth|mouth open|\bgrin`
 - scope: all
-- unless:
+- unless: -
 - negation: yes
 - luot: 18/11 16:37Z (D4)
 - why: closed-lip smile only
@@ -450,7 +487,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 ### X12 · flowers in the hair at t7, t8, Nữ đế, triều phục
 - regex: `fresh flower|hair flower|flower in (?:her|the) hair|flowers in (?:her|the) hair`
 - scope: tp7-8 pr7-8 nude trieu1-8
-- unless:
+- unless: -
 - negation: yes
 - luot: 323, 331, 411 (F2, H8)
 - why: flowers only t1-t6 thường phục
@@ -458,7 +495,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 ### X13 · style image sentence (style image retired)
 - regex: `drawing style of image \d|Image \d is only for the drawing style`
 - scope: all
-- unless:
+- unless: -
 - negation: no
 - luot: 482 (B8)
 - why: existing people: own picture only, no style image
@@ -466,7 +503,7 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 ### X14 · princess 'eight heads tall' / 'long legs'
 - regex: `eight heads|long legs`
 - scope: pr1-8
-- unless:
+- unless: -
 - negation: no
 - luot: 273 (C7)
 - why: princesses never reed-thin
@@ -477,10 +514,3 @@ Status: SEEDED Lượt 500 from FIGURE_GATE LAW #1, ART_RULES, owner-copy (pr_cl
 - scope: tp1-5 pr1-5
 - luot: 483, 486 (G4)
 - why: phi bạch never gold/yellow below t6
-
-### X04 · secondary colour is a neutral/metal
-- slot: S01.secondary
-- regex: `\b(silver|ivory|cream|white|gold|golden|beige|pearl)\b`
-- scope: tp1-6 pr1-6 mama
-- luot: 483 (12c)
-- why: a neutral/metal secondary is replaced by the second colour of her live original
