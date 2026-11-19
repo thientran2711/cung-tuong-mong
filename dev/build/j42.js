@@ -361,8 +361,10 @@ PEND.cnvBribe=pp=>{const m=srvM(),v=RV(pp.r);if(!isSrv()||!m||!v||!v.alive)retur
  return{t:`<p>Một thái giám của ${v.name} chặn ngươi ở hành lang, dúi vào tay ngươi một túi bạc: “Chủ tử nhà ta muốn biết chuyện trong cung ${m.name}.”</p>`,who:pv(v),o:cnvPend(S,cnvBribeOpts(S,v,m,BAL.coopBribe.pay))}};
 function cnvBribeOpts(a,v,m,pay){return [
   {id:"take",n:"Nhận bạc, làm tai mắt",tag:"bribe",fx:{bac:pay},x:a===S?cnvSpyX(m):"",go:()=>{if(a===S){ap(v,{bac:-pay});deedAdd(v,"sbribe",null,1,`mua chuộc người hầu của ${m.name}`);S.srv.spyFor=v.id}else a.spyFor=key(v);return""}},
-  {id:"tell",n:"Từ chối, bẩm chủ",tag:"help",fx:{tin:BAL.coopBribe.tin},x:`${m.name} nắm ${balAb(BAL.ag.ev.one)} chứng cứ của ${v.name}`,go:()=>{if(a===S)deedAdd(v,"sbribe",null,1,`mua chuộc người hầu của ${m.name}`);/*evok: bribe deed written just before (bribeServ: jtruth)*/evA(m,v,BAL.ag.ev.one);relAdd(m,v,-BAL.ag.ev.rel);return""}},
-  {id:"quiet",n:"Từ chối, im lặng",tag:"work",fx:{},x:""}]}
+  {id:"tell",n:"Từ chối, bẩm chủ",tag:"help",fx:{tin:BAL.coopBribe.tin},x:`${m.name} nắm ${balAb(BAL.ag.ev.one)} chứng cứ của ${v.name} · kèm: ${v.name} ghi hận ngươi, thiện cảm ${balSg(-BAL.coopBribe.grudge)}`,go:()=>{cnvBribeAff(v,a,-1);if(a===S)deedAdd(v,"sbribe",null,1,`mua chuộc người hầu của ${m.name}`);/*evok: bribe deed written just before (bribeServ: jtruth)*/evA(m,v,BAL.ag.ev.one);relAdd(m,v,-BAL.ag.ev.rel);return""}},
+  {id:"quiet",n:"Từ chối, im lặng",tag:"work",fx:{},x:`thành: trả lại bạc, giữ hòa khí với ${v.name}, thiện cảm ${balSg(BAL.coopBribe.grudge)}`,go:()=>{cnvBribeAff(v,a,1);return""}}]}
+/* law 2 «Bạc lạ» (D #7 19/11): the briber's thiện cảm for the servant who refused — ONE constant BAL.coopBribe.grudge, sign by the answer (an NPC servant without an id: no regard row) */
+function cnvBribeAff(v,a,sg){try{if(v&&a&&(a===S||a.id!=null))affAdd(v,a,sg*BAL.coopBribe.grudge)}catch(e){}}
 PEND.cnvFrame=pp=>{const s=servById(pp.sid),m=srvM();if(!isSrv()||!s||!m)return null;const fr=srvFriendList().length;const item=pick(["cây trâm vàng","chiếc vòng ngọc","hộp phấn ngự ban","túi hương thêu chỉ vàng"]);
  return{t:`<p>${s.name} (${srkName(s)}) tố với ${m.name} rằng ngươi lấy trộm ${item}.</p>${fr?`<p class="past">${fr} người bạn sẽ làm chứng cho ngươi.</p>`:""}`,who:pServ(s),o:cnvPend(S,cnvFrameOpts(S,s,m))}};
 /* a = the framed one, s = the accuser (S when the maid player framed an NPC colleague), m = their master */

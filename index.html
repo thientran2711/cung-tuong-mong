@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"ef373140+","t":"2026-11-19T13:53Z","c":"choice-value-audit #4: jreign «Chỉ lặng lẽ mài mực hầu ngài» names its gain (near the Sủng cap its +2 clamps to +1 and the card read as dom…","b":"d8ff4eba785d","h":[{"s":"d5821e86","t":"2026-11-19T12:13Z","c":"receiver-choice rv4: scan + card checks on the instant path (BAL.ptime.on=0); new check: with parallel time on her card waits only in S.ord…"},{"s":"9aad0c66+","t":"2026-11-19T12:03Z","c":"role-parity-drift-2: build line"},{"s":"43548e0e+","t":"2026-11-19T11:46Z","c":"coop-thin-f4 K2 (review parallel-time #4): accept the parallel-time road of rcpAskGo maid"},{"s":"a5e2d8e7+","t":"2026-11-19T09:30Z","c":"opt-scroll-reset r2: an option card picture load (fixed .kaart box) no longer re-picks the frame (first wheel lost); merged origin/main 620…"},{"s":"3b3f7631+","t":"2026-11-19T10:24Z","c":"ev-pic-followups r2: scan SHOT/DSF/TAG env for review shots"},{"s":"5d9cdd5d+","t":"2026-11-19T10:03Z","c":"rebuild"},{"s":"f01df861","t":"2026-11-19T09:09Z","c":"review coop-thin-f3 r1: merge F2 LAND READY 7627f79c; generated files rebuilt"},{"s":"4ed2831d+","t":"2026-11-19T07:18Z","c":"law3-cost-only: index.html / sw.js regenerated"},{"s":"0da546e9","t":"2026-11-19T07:16Z","c":"role-parity-drift r1: build line"},{"s":"eff20119+","t":"2026-11-19T06:33Z","c":"ev-pic-coverage: picture required in M/L/XL frames only, S frames reported apart (owner OD 19/11 ~04:55Z)"}]};
+window.CTM_BI={"s":"a7828dcd+","t":"2026-11-19T14:51Z","c":"choice-value-audit #4: jreign «Chỉ lặng lẽ mài mực hầu ngài» names its gain (near the Sủng cap its +2 clamps to +1 and the card read as dom…","b":"ee0100e6b418","h":[{"s":"d5821e86","t":"2026-11-19T12:13Z","c":"receiver-choice rv4: scan + card checks on the instant path (BAL.ptime.on=0); new check: with parallel time on her card waits only in S.ord…"},{"s":"9aad0c66+","t":"2026-11-19T12:03Z","c":"role-parity-drift-2: build line"},{"s":"43548e0e+","t":"2026-11-19T11:46Z","c":"coop-thin-f4 K2 (review parallel-time #4): accept the parallel-time road of rcpAskGo maid"},{"s":"a5e2d8e7+","t":"2026-11-19T09:30Z","c":"opt-scroll-reset r2: an option card picture load (fixed .kaart box) no longer re-picks the frame (first wheel lost); merged origin/main 620…"},{"s":"3b3f7631+","t":"2026-11-19T10:24Z","c":"ev-pic-followups r2: scan SHOT/DSF/TAG env for review shots"},{"s":"5d9cdd5d+","t":"2026-11-19T10:03Z","c":"rebuild"},{"s":"f01df861","t":"2026-11-19T09:09Z","c":"review coop-thin-f3 r1: merge F2 LAND READY 7627f79c; generated files rebuilt"},{"s":"4ed2831d+","t":"2026-11-19T07:18Z","c":"law3-cost-only: index.html / sw.js regenerated"},{"s":"0da546e9","t":"2026-11-19T07:16Z","c":"role-parity-drift r1: build line"},{"s":"eff20119+","t":"2026-11-19T06:33Z","c":"ev-pic-coverage: picture required in M/L/XL frames only, S frames reported apart (owner OD 19/11 ~04:55Z)"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -7179,8 +7179,10 @@ PEND.cnvBribe=pp=>{const m=srvM(),v=RV(pp.r);if(!isSrv()||!m||!v||!v.alive)retur
  return{t:`<p>Một thái giám của ${v.name} chặn ngươi ở hành lang, dúi vào tay ngươi một túi bạc: “Chủ tử nhà ta muốn biết chuyện trong cung ${m.name}.”</p>`,who:pv(v),o:cnvPend(S,cnvBribeOpts(S,v,m,BAL.coopBribe.pay))}};
 function cnvBribeOpts(a,v,m,pay){return [
   {id:"take",n:"Nhận bạc, làm tai mắt",tag:"bribe",fx:{bac:pay},x:a===S?cnvSpyX(m):"",go:()=>{if(a===S){ap(v,{bac:-pay});deedAdd(v,"sbribe",null,1,`mua chuộc người hầu của ${m.name}`);S.srv.spyFor=v.id}else a.spyFor=key(v);return""}},
-  {id:"tell",n:"Từ chối, bẩm chủ",tag:"help",fx:{tin:BAL.coopBribe.tin},x:`${m.name} nắm ${balAb(BAL.ag.ev.one)} chứng cứ của ${v.name}`,go:()=>{if(a===S)deedAdd(v,"sbribe",null,1,`mua chuộc người hầu của ${m.name}`);/*evok: bribe deed written just before (bribeServ: jtruth)*/evA(m,v,BAL.ag.ev.one);relAdd(m,v,-BAL.ag.ev.rel);return""}},
-  {id:"quiet",n:"Từ chối, im lặng",tag:"work",fx:{},x:""}]}
+  {id:"tell",n:"Từ chối, bẩm chủ",tag:"help",fx:{tin:BAL.coopBribe.tin},x:`${m.name} nắm ${balAb(BAL.ag.ev.one)} chứng cứ của ${v.name} · kèm: ${v.name} ghi hận ngươi, thiện cảm ${balSg(-BAL.coopBribe.grudge)}`,go:()=>{cnvBribeAff(v,a,-1);if(a===S)deedAdd(v,"sbribe",null,1,`mua chuộc người hầu của ${m.name}`);/*evok: bribe deed written just before (bribeServ: jtruth)*/evA(m,v,BAL.ag.ev.one);relAdd(m,v,-BAL.ag.ev.rel);return""}},
+  {id:"quiet",n:"Từ chối, im lặng",tag:"work",fx:{},x:`thành: trả lại bạc, giữ hòa khí với ${v.name}, thiện cảm ${balSg(BAL.coopBribe.grudge)}`,go:()=>{cnvBribeAff(v,a,1);return""}}]}
+/* law 2 «Bạc lạ» (D #7 19/11): the briber's thiện cảm for the servant who refused — ONE constant BAL.coopBribe.grudge, sign by the answer (an NPC servant without an id: no regard row) */
+function cnvBribeAff(v,a,sg){try{if(v&&a&&(a===S||a.id!=null))affAdd(v,a,sg*BAL.coopBribe.grudge)}catch(e){}}
 PEND.cnvFrame=pp=>{const s=servById(pp.sid),m=srvM();if(!isSrv()||!s||!m)return null;const fr=srvFriendList().length;const item=pick(["cây trâm vàng","chiếc vòng ngọc","hộp phấn ngự ban","túi hương thêu chỉ vàng"]);
  return{t:`<p>${s.name} (${srkName(s)}) tố với ${m.name} rằng ngươi lấy trộm ${item}.</p>${fr?`<p class="past">${fr} người bạn sẽ làm chứng cho ngươi.</p>`:""}`,who:pServ(s),o:cnvPend(S,cnvFrameOpts(S,s,m))}};
 /* a = the framed one, s = the accuser (S when the maid player framed an NPC colleague), m = their master */
@@ -31104,7 +31106,7 @@ Object.assign(BAL,{rg:{at:[1,5,10,18,27,37],decideAfter:2,decideWait:3,catchUp:2
 Object.assign(BAL,{coopEmpY:12});
 /* co-op part 2 (review/coop-b1b5-p2): a player buys the friend who serves as a cung nữ (the same pay as an NPC's bribe card, j42 cnvBribe);
    tin = her Chủ tin gain when she refuses and tells her mistress */
-Object.assign(BAL,{coopBribe:{pay:20,tin:5}});
+Object.assign(BAL,{coopBribe:{pay:20,tin:5,grudge:5}});/* grudge: the briber's thiện cảm for the servant, −grudge when she tells her mistress, +grudge when she refuses quietly (law 2 «Bạc lạ», j42 + jcoopworld twins) */
 /* review/emperor-visit (owner OD:L603): the Emperor comes to HER palace and stays the night (event "empnight", j7 + jvisit).
    visit: a daily roll after the tablet flip, % = base + slope × (Sủng − minSung) + anK × Ân tình, × the Emperor's nature (datinh / lanhlung),
    capped; none within gap days of the last visit, none while she is pregnant, in lãnh cung, or he is gravely ill. On top of the night
@@ -43032,16 +43034,16 @@ const isSrvMe=()=>typeof isSrv==="function"&&isSrv();
 P2H.bribe=m=>{if(S.dead||!isSrvMe())return p2say("briber",{rid:m.rid,no:1});const mis=srvM(),B=BAL.coopBribe,nm=esc(m.who||friendName()),mn=esc(mis?mis.name:"chủ nhân");
  pushModal({act:1,t:"Bạc lạ",h:`<p>Một thái giám của <b>${nm}</b> chặn ngươi ở hành lang, dúi vào tay ngươi một túi bạc: “Chủ tử nhà ta muốn biết chuyện trong cung ${mn}.”</p>`,opts:[
   {n:"Nhận bạc, làm tai mắt",fx:{bac:+m.pay||B.pay},x:cnvSpyX(mis),go:()=>{S.srv.spyFor=fp();p2say("briber",{rid:m.rid,ok:1})}},
-  {n:"Từ chối, bẩm chủ",fx:{tin:B.tin},/* previews: briber (P2H.briber, told) */x:`${mn} nắm ${balAb(BAL.eff.jcoopworld.evBriber)} chứng cứ của ${nm}`,go:()=>p2say("briber",{rid:m.rid,told:1})},
-  {n:"Từ chối, im lặng",fx:{},x:"trả lại bạc",go:()=>p2say("briber",{rid:m.rid})}]});showModal();render()};
+  {n:"Từ chối, bẩm chủ",fx:{tin:B.tin},/* previews: briber (P2H.briber, told) */x:`${mn} nắm ${balAb(BAL.eff.jcoopworld.evBriber)} chứng cứ của ${nm} · kèm: ${nm} ghi hận ngươi, thiện cảm ${balSg(-B.grudge)}`,go:()=>p2say("briber",{rid:m.rid,told:1})},
+  {n:"Từ chối, im lặng",fx:{},x:`thành: trả lại bạc, giữ hòa khí với ${nm}, thiện cảm ${balSg(B.grudge)}`,go:()=>p2say("briber",{rid:m.rid})}]});showModal();render()};
 P2H.briber=m=>briberRes(m);
 /* the briber's side of her answer (old relay: P2H.briber; part D: the host runs it in the briber's context, m.o = the mistress) */
 function briberRes(m){const a=m.o!=null?{o:m.o}:(CW.brb||{})[m.rid];if(!a)return;if(CW.brb)delete CW.brb[m.rid];if(S.dead)return;const s=fSrvE(),o=RV(a.o),B=BAL.coopBribe,nm=esc(friendName()),on=esc(o?o.name:"cung khác");let h="";
  if(m.no)h=`<p><b>${nm}</b> nay không còn hầu ở cung ${on}.</p>`;
  else{try{deedAdd(S,"sbribe",null,1,`mua chuộc người hầu của ${o?o.name:"cung khác"}`)}catch(e){}
   if(m.ok){apply({bac:-B.pay});if(s)s.spyFor="me";h=`<p><b>${nm}</b> nhận bạc, thành tai mắt của ngươi trong cung ${on}.</p><p>${fmt({bac:-B.pay})}</p>`}
-  else if(m.told){let d=0;if(o&&o.alive){d=evA(o,S,BAL.eff.jcoopworld.evBriber);relAdd(S,o,BAL.eff.jcoopworld.briber)}h=`<p><span class="r"><b>${nm}</b> từ chối bạc, bẩm với ${on}.</span></p>${d?`<p class="r">${on} nắm thêm ${d} chứng cứ của ngươi.</p>`:""}`}
-  else h=`<p><b>${nm}</b> từ chối, trả lại bạc.</p>`}
+  else if(m.told){let d=0;if(o&&o.alive){d=evA(o,S,BAL.eff.jcoopworld.evBriber);relAdd(S,o,BAL.eff.jcoopworld.briber)}if(s)affAdd(S,s,-B.grudge);h=`<p><span class="r"><b>${nm}</b> từ chối bạc, bẩm với ${on}.</span></p>${d?`<p class="r">${on} nắm thêm ${d} chứng cứ của ngươi.</p>`:""}`}
+  else{if(s)affAdd(S,s,B.grudge);h=`<p><b>${nm}</b> từ chối, trả lại bạc.</p>`}}
  pushModal({t:"Mua chuộc",h});showModal();render()}
 P2H.nbribe=m=>nbribeIn(m.r);
 function nbribeIn(r){if(S.dead||!isSrvMe())return;const v=RV(r);if(!v||!v.alive)return;try{pushDil(mkP("cnvBribe",{r:v.id}),"Bạc lạ")}catch(e){console.error(e)}showModal();render()}
@@ -43207,8 +43209,8 @@ PEND.thBribe=pp=>{if(!pp||!isSrvMe())return null;const mis=srvM(),B=BAL.coopBrib
  const ans=r=>{const m=Object.assign({rid:pp.rid,o:pp.o},r);otherSide(()=>briberRes(m),"briber",m,pp.lf)};
  return {t:`<p>Một thái giám của <b>${nm}</b> chặn ngươi ở hành lang, dúi vào tay ngươi một túi bạc: “Chủ tử nhà ta muốn biết chuyện trong cung ${mn}.”</p>`,o:[
   {n:"Nhận bạc, làm tai mắt",fx:{bac:pay},x:cnvSpyX(mis),go:()=>{S.srv.spyFor=fp();ans({ok:1})}},
-  {n:"Từ chối, bẩm chủ",fx:{tin:B.tin},x:`${mn} nắm ${balAb(BAL.eff.jcoopworld.evBriber)} chứng cứ của ${nm}`,go:()=>ans({told:1})},
-  {n:"Từ chối, im lặng",fx:{},x:"trả lại bạc",go:()=>ans({})}]}};
+  {n:"Từ chối, bẩm chủ",fx:{tin:B.tin},x:`${mn} nắm ${balAb(BAL.eff.jcoopworld.evBriber)} chứng cứ của ${nm} · kèm: ${nm} ghi hận ngươi, thiện cảm ${balSg(-B.grudge)}`,go:()=>ans({told:1})},
+  {n:"Từ chối, im lặng",fx:{},x:`thành: trả lại bạc, giữ hòa khí với ${nm}, thiện cảm ${balSg(B.grudge)}`,go:()=>ans({})}]}};
 CW.dInit=function(T){
  /* B r2: every D work into the other player's context, as data (jcoopthin D.kind): the card kinds and their answers */
  Object.assign(T.D.K,{inv:a=>pushDil(mkP("thInv",a),"Hảo hữu tìm đến"),
@@ -80136,7 +80138,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="d8ff4eba785d";window.CTM_BUILD=BUILD;
+const BUILD="ee0100e6b418";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
