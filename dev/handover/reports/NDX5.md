@@ -20,4 +20,7 @@ Files (dev/art/face-common/face_page/): page.src.html (source), build_page.py (F
 2. For the new/changed people: creations_get their cut ids → download `url` → crop with crop_faces.py logic → Artifact publish asset:true, url above, file_paths (≤25/call).
 3. Add {cut: "/_blob/<id>"} to ASSETS_L703.json; python3 build_page.py (must print "missing picture: []").
 4. Artifact publish file_path …/face_tick.html (same path keeps the URL; ticks stay in the db). A redrawn face = new cut id = needs a new upload.
-As of 22:00Z, OWNER_GROUPS_L686.json has no s19–s38 yet.
+## Update: s19–s38 ADDED (version 3 of the page)
+NF4's s19–s38 arrived in the merge; I re-ran face_map_L703.py (116 people, 84 shown, the old 64 unchanged) and uploaded the 20 new crops.
+Tabs now: Tất cả 84 · Tươi tắn 11 · Dịu dàng 11 · Đoan trang 11 · Sắc sảo 11 · Tinh nghịch 11 · Kiêu kỳ 10 (s10–s12, s19–s25) · Lạnh lùng 10 (s13–s15, s26–s32) · Quyến rũ 9 (s16–s18, s33–s38). Kho 32 hidden.
+I looked at all 9 tabs again: all 84 pictures show, no errors.

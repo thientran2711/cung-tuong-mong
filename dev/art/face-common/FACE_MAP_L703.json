@@ -958,5 +958,205 @@
   "ver": "v5",
   "prompt_file": "dev/art/face-common/s18.v5.FULL.txt",
   "kind": "SAMPLE-689"
+ },
+ "s19": {
+  "group": "Kiêu kỳ",
+  "hidden": false,
+  "ts": "2026-11-19T21:55:00Z",
+  "cut": "gOmphLeSXO",
+  "gen": "VX7xgIWMMU",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s19.v5.FULL.txt",
+  "kind": "FULLSET-700"
+ },
+ "s20": {
+  "group": "Kiêu kỳ",
+  "hidden": false,
+  "ts": "2026-11-19T21:55:00Z",
+  "cut": "VX7xJ0OMMU",
+  "gen": "xSB0pPPjfW",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s20.v5.FULL.txt",
+  "kind": "FULLSET-700"
+ },
+ "s21": {
+  "group": "Kiêu kỳ",
+  "hidden": false,
+  "ts": "2026-11-19T21:55:00Z",
+  "cut": "lJtDmsIgv9",
+  "gen": "JNCohz8Oq4",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s21.v5.FULL.txt",
+  "kind": "FULLSET-700"
+ },
+ "s22": {
+  "group": "Kiêu kỳ",
+  "hidden": false,
+  "ts": "2026-11-19T21:55:00Z",
+  "cut": "9ZHhq9FNYZ",
+  "gen": "DoOLUufpcl",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s22.v5.FULL.txt",
+  "kind": "FULLSET-700"
+ },
+ "s23": {
+  "group": "Kiêu kỳ",
+  "hidden": false,
+  "ts": "2026-11-19T21:55:00Z",
+  "cut": "0eU17VOTfW",
+  "gen": "kseYMxw16B",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s23.v5.FULL.txt",
+  "kind": "FULLSET-700"
+ },
+ "s24": {
+  "group": "Kiêu kỳ",
+  "hidden": false,
+  "ts": "2026-11-19T21:55:00Z",
+  "cut": "xSB08sMjfW",
+  "gen": "s7IMBwgl8e",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s24.v5.FULL.txt",
+  "kind": "FULLSET-700"
+ },
+ "s25": {
+  "group": "Kiêu kỳ",
+  "hidden": false,
+  "ts": "2026-11-19T21:55:00Z",
+  "cut": "jUoTIJnLD0",
+  "gen": "UPvdtPawny",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s25.v5.FULL.txt",
+  "kind": "FULLSET-700"
+ },
+ "s26": {
+  "group": "Lạnh lùng",
+  "hidden": false,
+  "ts": "2026-11-19T21:55:00Z",
+  "cut": "8ai7RulIrU",
+  "gen": "u5W3zKuQLD",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s26.v5.FULL.txt",
+  "kind": "FULLSET-700"
+ },
+ "s27": {
+  "group": "Lạnh lùng",
+  "hidden": false,
+  "ts": "2026-11-19T21:55:00Z",
+  "cut": "MBJjymCDCm",
+  "gen": "N2qvQ7E6D9",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s27.v5.FULL.txt",
+  "kind": "FULLSET-700"
+ },
+ "s28": {
+  "group": "Lạnh lùng",
+  "hidden": false,
+  "ts": "2026-11-19T21:55:00Z",
+  "cut": "kseYX7y16B",
+  "gen": "s7IMBr2l8e",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s28.v5.FULL.txt",
+  "kind": "FULLSET-700"
+ },
+ "s29": {
+  "group": "Lạnh lùng",
+  "hidden": false,
+  "ts": "2026-11-19T21:55:00Z",
+  "cut": "WDgKUoPcXe",
+  "gen": "DoOLwTYpcl",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s29.v5.FULL.txt",
+  "kind": "FULLSET-700"
+ },
+ "s30": {
+  "group": "Lạnh lùng",
+  "hidden": false,
+  "ts": "2026-11-19T21:55:00Z",
+  "cut": "p8ys4fUehw",
+  "gen": "6AbaFNsiJO",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s30.v5.FULL.txt",
+  "kind": "FULLSET-700"
+ },
+ "s31": {
+  "group": "Lạnh lùng",
+  "hidden": false,
+  "ts": "2026-11-19T21:55:00Z",
+  "cut": "cpSkwvc0eP",
+  "gen": "SyhetFIUb8",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s31.v5.FULL.txt",
+  "kind": "FULLSET-700"
+ },
+ "s32": {
+  "group": "Lạnh lùng",
+  "hidden": false,
+  "ts": "2026-11-19T21:55:00Z",
+  "cut": "jUoTI3pLD0",
+  "gen": "6AbaHlQiJO",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s32.v5.FULL.txt",
+  "kind": "FULLSET-700"
+ },
+ "s33": {
+  "group": "Quyến rũ",
+  "hidden": false,
+  "ts": "2026-11-19T21:55:00Z",
+  "cut": "ov6w3kS829",
+  "gen": "eIPlOzYdqL",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s33.v5.FULL.txt",
+  "kind": "FULLSET-700"
+ },
+ "s34": {
+  "group": "Quyến rũ",
+  "hidden": false,
+  "ts": "2026-11-19T21:55:00Z",
+  "cut": "cpSkwCV0eP",
+  "gen": "mEZy3ekhJQ",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s34.v5.FULL.txt",
+  "kind": "FULLSET-700"
+ },
+ "s35": {
+  "group": "Quyến rũ",
+  "hidden": false,
+  "ts": "2026-11-19T21:55:00Z",
+  "cut": "kseYXeB16B",
+  "gen": "WDgKS2KcXe",
+  "ver": "v5b",
+  "prompt_file": "dev/art/face-common/s35.v5b.FULL.txt",
+  "kind": "FULLSET-700"
+ },
+ "s36": {
+  "group": "Quyến rũ",
+  "hidden": false,
+  "ts": "2026-11-19T21:55:00Z",
+  "cut": "BhNUikdoQR",
+  "gen": "lJtDIfYgv9",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s36.v5.FULL.txt",
+  "kind": "FULLSET-700"
+ },
+ "s37": {
+  "group": "Quyến rũ",
+  "hidden": false,
+  "ts": "2026-11-19T21:55:00Z",
+  "cut": "WDgKUC2cXe",
+  "gen": "gOmptElSXO",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s37.v5.FULL.txt",
+  "kind": "FULLSET-700"
+ },
+ "s38": {
+  "group": "Quyến rũ",
+  "hidden": false,
+  "ts": "2026-11-19T21:55:00Z",
+  "cut": "lJtDhmMgv9",
+  "gen": "0eU1wnSTfW",
+  "ver": "v5b",
+  "prompt_file": "dev/art/face-common/s38.v5b.FULL.txt",
+  "kind": "FULLSET-700"
  }
 }
