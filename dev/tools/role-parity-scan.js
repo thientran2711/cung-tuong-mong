@@ -60,9 +60,13 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
   ["base",a=>{}],
   ["tired",a=>{a.suc=20;a.bac=30;if(a.st&&typeof a.st==="object")Object.assign(a.st,{suc:20,bac:30})}],
   ["social",a=>{for(const t of others(a)){try{oanAdd(t,a,40);affAdd(a,t,50);relAdd(a,t,40);if(t!==S){t.suc=30;t.sung=15}}catch(e){}}}],
-  ["proof",a=>{for(const t of others(a)){try{if(typeof evA==="function")evA(a,t,3,"scan");else t.ev=3}catch(e){}}}],
+  ["proof",a=>{for(const t of others(a)){try{if(typeof evA==="function")evA(a,t,3,"scan");else t.ev=3}catch(e){}}/* npc-purpose G1 #12: and a Hoàng hậu seated (not the doer) to bring that proof to: «Trình Hoàng hậu» for her and an NPC alike (the scan un-seats its own test queen before the promoted-maid check) */try{const q=queenP();if(!a.queen&&!(a===S&&S.rank>=7)&&(!q||q===a)){const t=liveRivals(true).find(x=>x&&x!==a&&x!==S&&!x.out&&x.alive!==false);if(t){if(q)q.queen=false;t.queen=true}}}catch(e){}}],
   ["body",a=>{a.preg=2;a.hidden=true;a.fake=0;a.pregWk=wk();try{const k={name:"Tiểu Bảo",sex:"m",age:5,hp:30,tal:20,fond:20,alive:true};a.kids=(a.kids||[]).concat([k])}catch(e){}}],
-  ["chest",a=>{a.inv=a.inv||[];try{for(const k of Object.keys(IT).slice(0,6))a.inv.push({k})}catch(e){}}],
+  ["chest",a=>{a.inv=a.inv||[];try{for(const k of Object.keys(IT).slice(0,6))a.inv.push({k});/* npc-purpose G1 #12: a piece the Tẩm deed works on (TAINT .on), for her and an NPC alike */if(typeof TAINT==="object"){const tk=Object.values(TAINT).flatMap(T=>T.on||[]).find(k=>IT[k]);if(tk)a.inv.push({k:tk})}}catch(e){}}],
+  /* npc-purpose G1 #12: WORLD facts the same for both doers (the consort-phase and the maid-phase worlds are two different seeded lives, so a world
+     fact one of them happens to lack made a one-sided row): the Emperor's chamchinh
+     trait (Bàn chuyện triều chính, AGC2.court ok = has("chamchinh")) */
+  ["world",a=>{try{const T=S.emp.traits;if(!T.includes("chamchinh")){T.push("chamchinh");UNDO.push(()=>{const i=T.indexOf("chamchinh");if(i>=0)T.splice(i,1)})}}catch(e){}}],
   ["rival-down",a=>{for(const t of others(a))if(t!==S){t.confined=2}}],
   /* part 2: her rouge boxes ran out (jration): both doers miss every part, so the borrow / beg / steal roads open for her and for an NPC */
   ["rouge",a=>{try{for(const part of BAL.ration.parts)for(const e of lxBoxes(a,part))a.inv.splice(a.inv.indexOf(e),1)}catch(e){}}],
@@ -123,7 +127,8 @@ function inPage(arg){const {phase,TRIES}=arg;const res={P:{},N:{},err:[],cov:{}}
   S.place="home";Q.length=0;
   if(!isSrv()){for(let i=0;i<rivals.length;i++){const v=rivals[i];if(v===S)continue;try{for(const n of lab(rvCard(v,i)))addP(role,n,"rv")}catch(e){E("rv",e)}try{for(const a of topicOpts(v)||[])addP(role,a.n,"topic")}catch(e){E("topic",e)}}
    for(const f of ["staffTabHTML","staffHTML","facHTML","artTabHTML","invHTML","wkTabHTML","petPanelHTML","kidTabHTML"])try{for(const n of lab(window[f]()||""))addP(role,n,f)}catch(e){E(f,e)}}
-  else{try{for(const c of srvCards()||[])addP(role,c.n,"srvCards")}catch(e){E("srvCards",e)}try{for(const n of lab(srvStaffHTML()))addP(role,n,"srvStaff")}catch(e){E("srvStaff",e)}}
+  else{try{for(const c of srvCards()||[])addP(role,c.n,"srvCards")}catch(e){E("srvCards",e)}
+   /* npc-purpose G1 #12: her talk with her OWN mistress, wherever the mistress walked this buổi (the place walk above met her only where she stood) */try{const m=srvM();if(m)for(const a of srvTalk({kind:"srv",sk:"mis",ref:m,name:m.name})||[])addP(role,a.n,"talk:mis")}catch(e){E("talk mis",e)}try{for(const n of lab(srvStaffHTML()))addP(role,n,"srvStaff")}catch(e){E("srvStaff",e)}}
   if(!isSrv())gates(role,S)};
  const playerLabels=role=>{for(const [vn,f] of VAR){const W=snapW();SEED(7);try{rich(S);f(S)}catch(e){E("pvar "+vn,e)}playerOnce(role);restoreW(W)}};
  if(phase==="consort"){
@@ -194,7 +199,7 @@ function build(o){const LT=Object.assign({},o.LT);for(const k in KEYLAB)LT[k]=(L
    if(/ONLY|RANK/.test(c)&&isEx(role,k))c="EXEMPT";row.cells[role]=c;if(/ONLY|RANK/.test(c))gaps.push({role,key:k,label:row.label,side:c,src:k.startsWith("label:")?(UNM[k.slice(6)]||{})[role]:""})}
   rows.push(row)}
  /* promotion: the risen maid's act set equals her clone born as Đáp ứng (NPC: amRise; player: srvRise) */
- const setEq=(A,B)=>{A=A||{};B=B||{};return{onlyRisen:Object.keys(A).filter(x=>!(x in B)),onlyBorn:Object.keys(B).filter(x=>!(x in A))}};
+ const setEq=(A,B)=>{A=A||{};B=B||{};const hd=x=>/^label:.*\d+\/\d+$/.test(x);/* npc-purpose G1 #12: a group header with its count ("Hại nặng 12/18", EXEMPT in the rows) is not an act: the act keys under it are compared */return{onlyRisen:Object.keys(A).filter(x=>!(x in B)&&!hd(x)),onlyBorn:Object.keys(B).filter(x=>!(x in A)&&!hd(x))}};
  const promo={npc:Object.assign({},o.upNpc,setEq(NKA.up,NKA.t1born)),me:Object.assign({},o.upMe,setEq(PKL.up,PKL.t1me))};
  for(const w of ["npc","me"])for(const side of ["onlyRisen","onlyBorn"])for(const k of promo[w][side])gaps.push({role:"up",key:k,label:lbl(k),side:"PROMO-"+w+"-"+side});
  return{roles:ROLES,roleN:ROLE_N,rows,gaps,promo,err:o.err,pageErr:o.pageErr}}

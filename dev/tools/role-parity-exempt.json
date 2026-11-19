@@ -114,5 +114,16 @@
 {
 "reason": "Tố xa xỉ: her card may accuse on a GUESS (jshelf shelfCause 'guess', owner rule in jshelf: 'The player may guess at anyone; an NPC guesses only in the monthly pass'); the NPC side is that monthly pass (shelfNpcAccuse: seen room / guess at BAL.shelf.acc.guessO → the same shelfAccuse / ACT.xx) + the day plan on a SEEN lavish dress (jdress mindMenu, xxCause). Both sides run one act; the probe's day plan sees only the second (role-parity part 2, verified)",
 "key": "harm:xx"
+},
+{
+"reason": "scan coverage, not a gap (npc-purpose G1 #12): her «Tẩm» lives in the item popup (jinv kinvOpen: any untainted piece TAINT works on), which the scan does not render; an NPC's taint is her spite-driven preparation (jagharm §2, the same TAINT table and cost). Both sides hold the deed; which NPC's nết the seeded world drew decided whether the row read N-ONLY",
+"key": "harm:taint"
+},
+{
+"reason": "scan world, not a gap (npc-purpose G1 #12): the promoted maid's «Trình Hoàng hậu» needs proof (evG ≥ 2) and a seated Hoàng hậu; the scan's 'proof' variant cannot give the player proof in the maid-phase world (evidence is capped by what the targets really did, jtruth deedCap, law 6a) — the same cause as the open entries up:N-ONLY harm:accuse / banphe / expose / tieuhuy / trinhth / uyhiep, which this row only joined once the scan seated a Hoàng hậu for the NPC check",
+"key": "harm:trinhhh",
+"roles": [
+"up"
+]
 }
 ]
