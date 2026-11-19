@@ -1063,7 +1063,15 @@
    "ref_id": "6Abnqu9iJO",
    "note": "owner Lượt 570: foreign princess pictures OK as reference, no redraw",
    "prompt_file": "dev/art/face-common/nc1.v2.FULL.txt",
-   "set": "foreign princess (M09, COMMON_v2 princess prompt)"
+   "set": "foreign princess (M09, COMMON_v2 princess prompt)",
+   "gen_id": null,
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "face_words": "(see prompt_file {PERSON} line)",
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "pick_why": "owner Lượt 570"
   },
   "nc2": {
    "id": "nc2",
@@ -1071,7 +1079,15 @@
    "ref_id": "p8ymOwOehw",
    "note": "owner Lượt 570: foreign princess pictures OK as reference, no redraw",
    "prompt_file": "dev/art/face-common/nc2.v2.FULL.txt",
-   "set": "foreign princess (M09, COMMON_v2 princess prompt)"
+   "set": "foreign princess (M09, COMMON_v2 princess prompt)",
+   "gen_id": null,
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "face_words": "(see prompt_file {PERSON} line)",
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "pick_why": "owner Lượt 570"
   },
   "nc3": {
    "id": "nc3",
@@ -1079,7 +1095,15 @@
    "ref_id": "ov6CN4g829",
    "note": "owner Lượt 570: foreign princess pictures OK as reference, no redraw",
    "prompt_file": "dev/art/face-common/nc3.v2.FULL.txt",
-   "set": "foreign princess (M09, COMMON_v2 princess prompt)"
+   "set": "foreign princess (M09, COMMON_v2 princess prompt)",
+   "gen_id": null,
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "face_words": "(see prompt_file {PERSON} line)",
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "pick_why": "owner Lượt 570"
   },
   "bd1": {
    "id": "bd1",
