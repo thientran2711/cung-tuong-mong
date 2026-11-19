@@ -24,7 +24,7 @@ const {chromium}=require('playwright');const path=require('path');
   ok("Tranh sủng rides on Sủng, Chặn ngự giá on Sắc",f>r&&r2>f2,[f,r,f2,r2]);ok("oKeep is a number 5..95",oKeep(S)>=5&&oKeep(S)<=95,oKeep(S));
   ok("rungDown drops one word rung",oddsLv(rungDown(60,1))===oddsLv(60)-1&&rungDown(20,1)>=5,[rungDown(60,1),rungDown(20,1)]);
   S.emp.ea=null;empArtMonth();const ea=empArt();ok("Emperor's month art: one favoured, one disfavoured, different",ea&&ea.f!==ea.d&&ARTS.some(a=>a.k===ea.f),ea);
-  S.mat=BAL.steal.ea.mat;S.eaK=-1;eaLearn(true);ok("Tai mắt ≥ ea.mat knows it at the month start",eaKnows(S));
+  /* Tai mắt is the knowledge net's matN (jagknow getter; a plain set is dropped): __tmOff lets the test fix it */window.__tmOff=1;S.mat=BAL.steal.ea.mat;S.eaK=-1;eaLearn(true);ok("Tai mắt ≥ ea.mat knows it at the month start",eaKnows(S));window.__tmOff=0;
   for(const k of ARTS.map(a=>a.k)){S.arts[k]=0;S.artp[k]=0}S.arts[ea.f]=3;const fav=oSteal(S,"road");S.arts[ea.f]=0;S.arts[ea.d]=3;const dis=oSteal(S,"road");S.arts[ea.d]=0;const none=oSteal(S,"road");
   ok("favoured art up, disfavoured art down",fav>none&&dis<none,[fav,none,dis,ea,empArt(),S.turn]);
   /* r1 note 6: the shown word leaves out the month art she does not know */{for(const k of ARTS.map(a=>a.k)){S.arts[k]=0;S.artp[k]=0}S.arts[ea.f]=3;S.eaK=-1;const tr=oSteal(S,"road"),sh=stealShown(S,"road");S.eaK=S.turn;const sh2=stealShown(S,"road");S.arts[ea.f]=0;
