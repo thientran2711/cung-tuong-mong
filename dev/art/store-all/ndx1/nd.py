@@ -24,3 +24,35 @@ elif sys.argv[1]=="log":
                {"image":2,"name":"royal-yellow swatch = colour only","magnific_id":"TdwDfOyVNR"}],
        "gen_id":gen,"magnific_prompt":p,"store_check":"PASS","credits":cr,"settings":"gpt-2-6 1024x2304 2k transparentBackground","out":f"img/_review/nude-mass/ndx1/{c}_{a}_nude.png","who":"ROOT-48 art worker NDX1"}
     open(os.path.join(R,"dev/art/gen_ledger.jsonl"),"a").write(json.dumps(d,ensure_ascii=False)+"\n"); print("logged",c,a,gen)
+elif sys.argv[1]=="dl":   # nd.py dl cNN aNN URL
+    c,a,u=sys.argv[2:5]; os.makedirs(os.path.join(S,"out"),exist_ok=True); fn=os.path.join(S,"out",f"{c}_{a}_nude.png")
+    subprocess.run(["curl","-s","-o",fn,u],check=True)
+    from PIL import Image; im=Image.open(fn); print(c,a,im.size,im.mode,"corner",im.getpixel((3,3)))
+elif sys.argv[1]=="look":  # nd.py look cNN [ages...] -> $S/out/look_cNN.jpg (bodies on grey) + head_cNN.jpg (heads + her t1 face)
+    from PIL import Image; import urllib.request,io
+    c=sys.argv[2]; ages=sys.argv[3:] or AGES; ims=[]
+    for a in ages:
+        im=Image.open(os.path.join(S,"out",f"{c}_{a}_nude.png")).convert("RGBA"); bg=Image.new("RGBA",im.size,(190,190,190,255)); bg.alpha_composite(im); ims.append(bg.convert("RGB"))
+    W=300; H=int(W*2304/1024); sh=Image.new("RGB",(W*len(ims),H),"white")
+    for i,im in enumerate(ims): sh.paste(im.resize((W,H)),(i*W,0))
+    sh.save(os.path.join(S,"out",f"look_{c}.jpg"),quality=85)
+    hs=Image.new("RGB",(260*(len(ims)+1),300),"white")
+    f=Image.open(io.BytesIO(subprocess.run(["curl","-s",f"https://ctm-img.victoria-tntt.workers.dev/img/hd/fig-consort-{c}-t1-a18.webp"],capture_output=True).stdout)).convert("RGB"); fw,fh=f.size
+    hs.paste(f.crop((fw//5,0,4*fw//5,int(fw*0.6*300/260))).resize((260,300)),(0,0))
+    for i,im in enumerate(ims): w,h=im.size; hs.paste(im.crop((w//5,0,4*w//5,int(w*0.6*300/260))).resize((260,300)),(260*(i+1),0))
+    hs.save(os.path.join(S,"out",f"head_{c}.jpg"),quality=85); print("ok")
+elif sys.argv[1]=="sheet":  # nd.py sheet NAME cAA cBB ... -> $S/out/sheet_NAME.jpg (rows people, cols ages, labelled)
+    from PIL import Image,ImageDraw,ImageFont
+    name=sys.argv[2]; ppl=sys.argv[3:]; W=220; H=int(W*2304/1024); L=70; T=40
+    sh=Image.new("RGB",(L+W*5,T+H*len(ppl)),(235,235,235)); d=ImageDraw.Draw(sh)
+    try: F=ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans-Bold.ttf",22)
+    except Exception: F=None
+    for j,a in enumerate(AGES): d.text((L+j*W+80,8),a,fill=(0,0,0),font=F)
+    for i,c in enumerate(ppl):
+        d.text((8,T+i*H+H//2),c,fill=(0,0,0),font=F)
+        for j,a in enumerate(AGES):
+            fn=os.path.join(S,"out",f"{c}_{a}_nude.png")
+            if not os.path.exists(fn): continue
+            im=Image.open(fn).convert("RGBA"); bg=Image.new("RGBA",im.size,(200,200,200,255)); bg.alpha_composite(im)
+            sh.paste(bg.convert("RGB").resize((W,H)),(L+j*W,T+i*H))
+    out=os.path.join(S,"out",f"sheet_{name}.jpg"); sh.save(out,quality=82); print(out,sh.size)
