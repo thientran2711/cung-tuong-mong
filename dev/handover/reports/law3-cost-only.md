@@ -51,3 +51,6 @@ Shots were scratch only (/tmp), none on CDN, nothing committed.
 review/law3-cost-only-r1 = ae218b59 + merge origin/main fd6118cd (only index.html/sw.js conflicted, rebuilt by build_site.sh); diff vs main = j8.js:303 + opt-card-scan.js:25 + index/sw.
 Gates: one-core-guard PASS (fails 0) · coop-e2e 68/68 · quickcheck PASS run alone (old save ok, buổi 1453/1292 ms). A first quickcheck run in parallel with coop-e2e + shots FAILED perf (buổi 4306 ms) = CPU contention, reran alone PASS.
 Shot ksp (Fold 755x1000, clean): «Tắm gội chờ giá» = Nắm chắc meter, TỐN «không», ĐƯỢC «được thị tẩm, gần Hoàng thượng đêm nay» (green frame) — the real gain now shows. Tiến cử / Cáo bệnh cards also show Tốn red + Được. iPad 1180x820: same rows, shot dimmed by the loading overlay but readable. Display fault gone with odds-meter-back. Shots scratch only, none on CDN.
+
+## REVIEW r1 re-merge 2 (live main 7fb7c104, E ge-writers-w2) — READY FF 6abe9a6f68aa54689b83dc7dcbb4afeb732dd138
+review/law3-cost-only-r1 = prior + merge origin/main 7fb7c104 (only index.html/sw.js conflicted, rebuilt). Diff vs main unchanged (j8.js:303 + opt-card-scan.js:25 + index/sw). one-core PASS · coop-e2e 68/68 · quickcheck PASS (buoi 1118/1067 ms). No shot rerun (j8/kit output unchanged by the merge).
