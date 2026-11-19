@@ -43,6 +43,7 @@ depth 5 · foreman now ROOT-53 (session_01PEhRbuf8GDz77QZRdK2XXP).
   as `{"m05": {"ha": ["cool lilac", "teal"]}}` (names from library.py or EXTRA). Re-run gen → check → sheets.
 - Sheets "Xuân | Hạ | Thu | Đông", ★ (gốc) = root, root count under each season header:
   `dev/handover/review-sheets/palettes-season/season_sheet1.jpg` (m01–m29), `season_sheet2.jpg` (m30–c06), `season_sheet3.jpg` (c07–nc3). All looked at full size.
+  One sheet per season (owner request, all 87 people each, ★ gốc marked): `season_xuan.jpg`, `season_ha.jpg`, `season_thu.jpg`, `season_dong.jpg` in the same folder, made by `dev/art/palettes3/make_season_sheets_by_season.py`. All looked at full size.
 
 ## Season criteria (OKLCH)
 temperature t = 0.8 × main warmth + 0.2 × secondary warmth (warmth = 10·C·cos(hue−55°); ivory/cream/white = 0);
