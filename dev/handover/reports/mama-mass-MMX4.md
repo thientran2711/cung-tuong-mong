@@ -45,3 +45,6 @@ BW3 is fixing the builder. MMX4 on HOLD: NO gens until ROOT-51 says so.
 - Colours: m05 coral red #D4897D + teal #499597; m13 lilac #C3A1CE + deep teal #468E91. a51/a65 = calmer, softer, less saturated, same lightness, "never darker or heavier" (B18).
 - Identity: "keep ONLY her face, facial features, hair COLOUR and signature colour family" (no hairstyle). F11 bun + D13 lines kept.
 - Note: no phi bạch / sheer-stole sentence appears in the ma ma prompts (F12 seems not to apply to ma ma, which wear no phi bạch).
+
+## 20:20Z ROOT-53 OWNER ORDER
+Only faces of groups SẮC SẢO / TINH NGHỊCH may be produced (dev/art/face-common/LOOK_GROUPS.md). m13 (Tươi tắn) is STOPPED and dropped from this job; m05 (Sắc sảo) stays. HOLD for J2 rebuild + owner GO. Foreman now ROOT-53 session_01PEhRbuf8GDz77QZRdK2XXP.

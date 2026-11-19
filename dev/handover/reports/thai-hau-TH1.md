@@ -94,3 +94,24 @@ How the redraw avoids it:
 - `build_all.py thaihau()` at a51/a65 replaces the shared AGE_TXT block (age + "clearly about fifty" + calmer-colour sentence) with the 18/11 age + colour sentences. They are READ from `dev/art/elder-copy/THAIHAU_1811_AGE_COLOUR.md` (function `th1811`, never retyped). a36 is unchanged.
 - Gate: check_store --scope tp8 PASS 30/30. v618/m13_thaihau_a51/a65.prompt.txt are rebuilt.
 - **CONTRADICTION (flag; foreman/table job, not changed by me):** the HH elder COLOUR RULE = approved S33 ("…only less saturated and quieter … never darker or heavier …") and the elder swatch line ("calmer, muted antique-gold elder shade") are still in the prompt, next to the 18/11 "DEEPER, DARKER" text. J2 (Lượt 620/622) says deeper. To clean it, the foreman updates S33 in check_store APPROVED + the build.py `__main__` a51/a65 swap (+ the swatch elder line); Thái hậu follows automatically.
+
+## Part 2c — ROOT-53 owner order: BASE = the 18/11 Thái hậu prompt VERBATIM (the 82bb073 HH-based builder was WRONG and is replaced)
+- Base: `dev/art/elder-copy/THAIHAU_1811_c04_a36_BASE.txt` = the Magnific prompt of c04 a36 gen CqnHqn1EEy (18/11 22:28Z). The a51 bxMrxpT5Y2 / a65 cpSDpJs0eP prompts are the same text plus the elder-copy age+colour block (checked).
+- Builder: `python3 dev/art/store-all/build_all.py mNN thaihau --age aNN` (function `thaihau()`, every change asserted, the list is kept in TH_DIFF).
+  - Slots: face line (her KC v3 face words), colour name ('royal purple' becomes her main), item + hands (IT1 TH_ITEMS[TH_AGE]), age+colour block at a51/a65 (elder-copy file).
+  - B8: owner identity law; style sentence removed; generic eye clause removed (KC).
+  - ADDED, copied from THIS person's HH t8 build: HAIR up, SLEEVE to the floor, ONE SLEEVE LAYER, NO hair flowers, HEAD AND BODY, FABRIC brocade, ANGLE, GRACE, THREE-COLOUR (#EFBD69 + main/secondary hexes), HELD ITEM COLOUR, the pose tail; also the 18/11 swatch sentence (image 2) and D9.
+  - The OUTFIT and COLOUR RULE sentences = 18/11 words.
+- Gate `gate_th`: check_store --scope tp8 --age, with ONE named exemption: S03 (a36) / S33 (a51/a65), the HH tone sentence, because the owner keeps the 18/11 COLOUR RULE. Any other FAIL = FAIL. PASS 30/30 (10 m-people × 3 ages).
+- Files: `dev/handover/review-sheets/thai-hau-sample/v624/` m13_thaihau_a36/a51/a65.prompt.txt + DIFF_vs_1811_c04.md (line by line). v618/ = superseded.
+- Flags (not changed, LAW #0):
+  - (a) The base says "deep antique-gold yellow" while the added THREE-COLOUR rule says "royal golden yellow (honey-gold like #EFBD69)". Two yellow wordings; the owner should pick.
+  - (b) HH-only words INSIDE the HH outfit sentence were NOT added, because the outfit is kept word for word: "far denser and richer embroidery than any other rank", "broad band", "many long strands", "long tassels and jade pendants", "nine-phoenix … clearly taller and wider". Add on request.
+  - (c) a36 keeps the 18/11 "all colours MUTED and deep" rule (not B18 soft).
+  - (d) No K3 "transparent background" sentence (the base has parchment; B9 = parchment + remove_bg).
+  - (e) The 18/11 angle words "body turned slightly three-quarters to the left" were replaced by her per-person HH ANGLE sentence.
+- **Update (ROOT-53 owner order):** only faces of the SẮC SẢO group (m05 m11 m17 m23 m29 m35 m41 m47) and the TINH NGHỊCH group (m06 m12 m18 m24 m30 m36 m42 m48) may be used (LOOK_GROUPS.md). m13 is Tươi tắn, so it is stopped.
+  - The v624 sample person is now **m05** (coral red #D4897D + teal #499597 + yellow #EFBD69). Items: a36 sandalwood folding fan, a51 jade-headed dragon staff, a65 gilded bronze hand censer.
+  - The m13 v624 files are removed and DIFF_vs_1811_c04.md is regenerated for m05.
+  - Gate PASS 48/48 (all 16 allowed people × a36/a51/a65).
+  - The builder does NOT block the other groups; ask if a guard is wanted.
