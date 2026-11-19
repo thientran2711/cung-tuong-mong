@@ -30,3 +30,5 @@ Method: `build.py cNN v0 --state nude --spec5pose --nudeopt auto --age aNN` outp
 ## HOLD (ROOT-36 ~00:50Z): STOP, c19 not started. Owner: same item at all 5 ages = fault (FIGURE_GATE 3f); frontal-only is new (3d2). c18 to be redone after N5b's item table + builder fix. Waiting for ROOT-36 GO.
 - One c19 a18 images_generate call returned an empty tool error just before the STOP; it may or may not have queued a gen (not seen; ignore any stray c19 a18 in the Magnific folder).
 - Ready for the redo: face refs c18–c24 (above); prompt helper = build.py output unchanged + no-background line; per-person cut/sheet/check flow works (c17, c18).
+- RULE 0 (FIGURE_GATE @5244e5a, ~00:56Z): builder-only prompts, logged with --log, Foreman --verify. My c17 a51/a65 + c18 prompts had N6's appended no-background line → would FAIL verify (self-reported to ROOT-36; asked whether the line goes into build.py or is dropped). From now on: exact build.py stdout only.
+- Forehead check (ROOT-36): c17/c18 a51/a65 at full size = clean, no red dot.
