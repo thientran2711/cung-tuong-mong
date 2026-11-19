@@ -232,7 +232,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | ge-writers-w2 remerge #6 main fd6118cd (sonnet E11w2m4) | review/ge-writers-w2 | E ROOT #8 | session_01DgYSWpk2DjqqfEB5ZQCeg7 | DONE 7fb7c104 | 19/11 04:50Z |
 | hist-kyngo (Kỳ ngộ thường ngày step 1, history expert, sonnet E16; MAIN ORDER 03:31Z) | handover reports/hist-kyngo.md | E ROOT #8 | session_01DgYSWo26476tX9sf2PverF | DONE 018d29b8 | 19/11 04:50Z |
 | palace-chatter (PL#6 bubble talk, opus lead E17; MAIN ORDER 04:06Z) | review/palace-chatter | E ROOT #8 | session_01DgYSWoCjG7erCEJGy1Y514 | RUNNING | 19/11 04:50Z |
-| ge-writers-w3 BIG review (opus E11r-w3; cb72b507) | review/ge-writers-w3 | E ROOT #8 | session_01DgYSWn2u8M4jdAipxwpiJf | RUNNING | 19/11 04:52Z |
+| ge-writers-w3 BIG review (opus E11r-w3; cb72b507) | review/ge-writers-w3 | E ROOT #8 | session_01DgYSWn2u8M4jdAipxwpiJf | DONE FAIL cb72b507 (reports/ge-writers-w3-review.md: 3 fixes, law 6 b/c) | 19/11 |
 | kyngo-daily (Kỳ ngộ thường ngày design + build, opus E18) | review/kyngo-daily | E ROOT #8 | session_01DgYSWnqwrFPkcU8D76tS79 | RUNNING | 19/11 04:53Z |
 | palace-chatter line banks (sonnet E17b, under E17) | review/palace-chatter-lines | E ROOT #8 | session_01DgYSWnyBgE1MomXSwtCiXz | DONE a171292 | 19/11 04:58Z |
 | seal-lean-2 big slow lean-in + real video (sonnet; OD 05:05Z) | review/seal-lean-2 | ROOT-63 → ROOT-64 | session_01Rc5AsHrbnHixrk74QyLYuV | RUNNING | 19/11 04:58Z |
@@ -242,3 +242,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | seal-lean-2 SMALL REVIEW (sonnet) | review/seal-lean-2 db1762f1 | MAIN ROOT-64 | session_01Rc5AsMN2AumPZrBeDRpV5o | RUNNING | 19/11 05:43Z |
 | ev-pic-fig BIG REVIEW (opus) | review/ev-pic-fig 946a2900 | MAIN ROOT-64 | session_01Rc5AsMDVid7pMws13KWPgr | RUNNING | 19/11 05:43Z |
 | bd-roads r2 fixes (opus E14c, successor of E14) | review/bd-roads | E ROOT #8 | session_01DgYSWmKcwf5VUb22x4YGU3 | RUNNING | 19/11 05:53Z |
+| ge-writers-w3 r2 fixes (opus E11d, successor of E11c) | review/ge-writers-w3 | E ROOT #8 | session_01DgYSWogWMATZVoosS7SFEk | RUNNING | 19/11 05:56Z |
