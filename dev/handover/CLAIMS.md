@@ -276,4 +276,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | MAIN ROOT-68 (opus; child of ROOT-67, depth 6) | handover HANDOVER_SESSION9 | ROOT-67 | session_01Rc5AsHe8w1z2UgZJUycHEJ | RUNNING | 19/11 09:57Z |
 | coop-thin F6b (opus; remaining mini-game ends as score intents, L12; parallel to F6a, stacked on F5) | review/coop-thin-f6b | B | session_01N1tNP4XtuMraUEmXvATwMg | RUNNING | 19/11 10:01Z |
 | kit-head-say SMALL REVIEW (sonnet) of 5d9cdd5d | review/kit-head-say; briefs/review-kit-head-say.md | MAIN ROOT-68 | session_01Rc5AsKGEciGWVZG7BD4KHc | RUNNING | 19/11 10:14Z |
-| FOREMAN E #11 (opus; child of FOREMAN E ex-standby, depth 1) | handover FOREMAN_E_STATUS | FOREMAN E | session_01DgYSWq1iGwKC5ebN2qhmFU | RUNNING | 19/11 10:14Z |
+| FOREMAN E #11 (opus; child of FOREMAN E ex-standby, depth 1; PICKUP 10:20Z) | handover FOREMAN_E_STATUS | FOREMAN E | session_01DgYSWq1iGwKC5ebN2qhmFU | RUNNING | 19/11 10:14Z |
