@@ -1290,33 +1290,26 @@ NUDE3_HHSENT=("HAIR UP: ALL of her glossy pure BLACK hair (never brown) is swept
  "SLEEVES: very long, very wide, flowing sleeves that fall well past her hands and hang PAST her ankles all the way down until they TOUCH THE FLOOR, ONE single sleeve layer (no shorter outer sleeve on top); the brocade flows and drapes softly like heavy silk, never stiff. "
  "FABRIC: thick gold-embroidered brocade with a graceful, flowing drape.")
 def nude3(o,c):
+    # F4b-6 (owner Lượt 371/373/375 STORE GATE): the HH t8 store text stays WORD FOR WORD; only slot words swap (motif phoenix->dragon, colour slot, item + hand clause);
+    # every Nữ đế difference is ADDED as extra sentences after the store outfit sentence. dev/art/check_store.py <file> cNN v0 must PASS before any gen.
     import re as _re
     _tpl=open(os.path.join(os.path.dirname(os.path.abspath(__file__)),"..","owner-copy","tpl_hh.txt"),encoding="utf-8").read()
     assert NUDE3_HHSENT in _tpl,"HH prompt-B sentences drifted from tpl_hh.txt"
-    opt=NUDE_OPTMAP[c]; O=NUDE_OPT[opt]
-    global NUDE_OPTSEL; _sv=NUDE_OPTSEL; NUDE_OPTSEL=opt
-    pal,face=DATA[c]; right=(int(c[1:])%2==1)
-    own=build_nude_own(c,face,right); NUDE_OPTSEL=_sv
+    opt=NUDE_OPTMAP[c]; O=NUDE_OPT[opt]; right=(int(c[1:])%2==1)
     def rep(a,b):
         nonlocal o; assert o.count(a)==1,("nude3 anchor",a[:60]); o=o.replace(a,b,1)
-    rep("An imperial consort, the Empress.","An imperial consort, the Female Emperor (Nữ đế), the highest rank of all.")                                   # (1)
-    rep("Outfit (the Empress (Hoàng hậu), clearly much richer and more splendid than the lower ranks): the Empress's imperial phoenix ceremonial robe",
-        "Outfit (the Female Emperor (Nữ đế), equal to the Empress in colour but clearly more majestic, and different in design from the Empress's robe): a woman's imperial ceremonial dragon robe")
-    a=o.index("the GRANDEST headdress of all:"); b=o.index("clearly grander than every other rank.")+len("clearly grander than every other rank.")   # (2)
-    a2=own.index("the GRANDEST headdress of all:"); b2=own.index("clearly grander than every other rank.")+len("clearly grander than every other rank.")
-    o=o[:a]+own[a2:b2]+o[b:]
-    rep("a wide jewelled gold-and-pearl cloud collar with layered pearl fringes over the shoulders",O["sh"])                                          # (3)
-    if O["sec"]:                                                                                                                                       # (4)
+    if O["sec"]:                                                                                                   # colour slot
         m=_re.search(r"golden yellow silk mixed with ([a-z ]+?),",o); assert m; rep(m.group(0),f"golden yellow silk mixed with {O['sec']},")
         i=o.index("her ORIGINAL robe colour is kept exactly"); j=o.index("the royal golden yellow is the DOMINANT"); o=o[:i]+o[j:]
         rep("her colour is the second colour",O["secrule"]+" is the second colour")
-    t8item,t8hk=age_item(c,"t8",*ITEMS[item_for(c)]); nitem,nhk=age_item(c,"nude",*NUDE_ITEM[c])                                                     # (5)
+    t8item,t8hk=age_item(c,"t8",*ITEMS[item_for(c)]); nitem,nhk=age_item(c,"nude",*NUDE_ITEM[c])                  # item slot + hand clause
     rep(f"she holds {t8item} in a contrasting colour",f"she holds {nitem} in a contrasting colour")
     i=o.index(" Her hands and body: ")+len(" Her hands and body: "); j=o.index(". Every hairpin is inserted")
     o=o[:i]+_hh(hand,nhk,right)+o[j:]
-    o=o.replace("phoenixes","dragons").replace("The phoenix is the main","The dragon is the main").replace("All flowers, birds and the phoenix","All flowers, clouds and dragons")
-    assert "phoenix" not in o.replace("phoenix-and-dragon","").replace("gold phoenix with raised wings",""),"stray phoenix"
-    rep(" COLOUR RULE:"," "+NUDE3_HHSENT+" COLOUR RULE:")                                                                                            # (6)
+    o=o.replace("phoenixes","dragons").replace("phoenix","dragon")                                                  # motif slot word
+    add=(" NỮ ĐẾ: she is the Female Emperor (Nữ đế), the highest rank of all, equal to the Empress in colour but clearly more majestic, and different in design from the Empress's robe: a woman's imperial ceremonial dragon robe, with "
+         +O["sh"]+"; her crown is "+NUDE_CROWN+", and "+O["tas"]+", the bare forehead clean under them; the most majestic outfit of all.")
+    rep(" COLOUR RULE:",add+" "+NUDE3_HHSENT+" COLOUR RULE:")                                                       # added sentences
     return o
 # ---- N5d item 2: gen ledger (--log) + verifier (--verify) -------------------------------------------------
 # --log   appends {ts, cmd, argv, prompt, refs, gen_id, magnific_prompt} to dev/art/gen_ledger.jsonl (gen_id / magnific_prompt null until filled)
