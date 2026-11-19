@@ -55,3 +55,11 @@ Q3 Section F places in scope?
 ### DRAW ORDER (lowest missing ranks first, L2/L7/L19)
 1. Phối rooms (t1–t3): Thừa Minh tây phối bed → rec; then the other palaces' phối (đông then tây), alternating 3-wall / 2-wall, own layout, a different pair each.
 2. Tần (t4) bed + rec of the 7 palaces → 3. Phi (t5) → 4. Quý phi (t6) → 5. Từ Ninh (Thái hậu) → 6. Trường Xuân ranks (Q1).
+
+## Step 2 — rooms drawn (one try each; faults reported, not re-gened — A20)
+Builder: dev/art/place-rank/prompts_pr13.py → prompts_pr13.json (C9 common block via prompts.py room9 verbatim + room part; refs gOmYI7iSXO + EbYJzsMuuO + image 3 model GUIDE). Files: img/_review/place-rank/pr13/ (CDN). Sheet = stage_exact/ipad_tags.py (4 figs c06/c30/m19/m39 t1 a18).
+| # | room | gen | walls / layout | colours | floor_c (bedroom pass 8.7–15.6) | eye check | sheet | cr |
+|---|---|---|---|---|---|---|---|---|
+| 1 | Thừa Minh tây phối bedroom | KLpYH26kqp | 3-wall, windows LEFT, 2 beds in left/right halves of the back wall, shelf + round window between (own; đông phối = beds side by side + screen, back wall only) | pair ĐT: curtains cream-ivory #EAE3D0, fabrics green #7FB394 (L7) | 23.4 FAULT (bed bases ~73 % H) | 2 beds, colours split right, no phoenix/yellow/text; with people the beds stand well behind them; small incense stand bottom-left beside tag 1 | img/_review/place-rank/pr13/pr13-ipad-tags-thua-minh-cung-tay-phoi-ngu.jpg | 135 |
+A17 DIFF vs last approved phối bedroom prompt (prompts_v6.json thua-minh-cung-dong-phoi-ngu, s7I0GAVl8e): common block → C9 (approved common block, as for all v9+ rooms); Đông/east → Tây/west; occupants (Thường tại + Quý nhân) → (Đáp ứng + Thường tại); colours pale blue/pale green → B24 #EAE3D0 curtains / #7FB394 fabrics; room arrangement rewritten (own layout L11/L19, 3 walls WL3, windows left); old LAYOUT NUMBERS / "same arrangement as image 3" → GUIDE_S + C9_CAM; image 3 own picture → cpS5YIl0eP (3-wall model, guide only).
+Credits PR13 so far: 1 gen = 135.
