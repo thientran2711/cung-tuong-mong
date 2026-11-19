@@ -22,7 +22,7 @@ elif sys.argv[1]=="log":
     d={"ts":datetime.datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ"),"kind":"NUDE-MASS","cmd":f"python3 dev/art/store-all/build_all.py {c} nude --age {a}","prompt":p,
        "refs":[{"image":1,"name":f"own t1 of {c} at {a if a!='a65' else 'a51 (no a65 t1)'} = face (one-ref, Lượt 479/482)","magnific_id":face,"url":f"https://ctm-img.victoria-tntt.workers.dev/img/hd/fig-consort-{c}-t1-{a if a!='a65' else 'a51'}.webp"},
                {"image":2,"name":"royal-yellow swatch = colour only","magnific_id":"TdwDfOyVNR"}],
-       "gen_id":gen,"magnific_prompt":p,"store_check":"PASS","credits":cr,"settings":"gpt-2-6 1024x2304 2k transparentBackground","out":f"img/_review/nude-mass/ndx1/{c}_{a}_nude.png","who":"ROOT-48 art worker NDX1"}
+       "gen_id":gen,"magnific_prompt":p,"store_check":"PASS","approved_check":"PASS","credits":cr,"settings":"gpt-2-6 1024x2304 2k transparentBackground","out":f"img/_review/nude-mass/ndx1/{c}_{a}_nude.png","who":"ROOT-48 art worker NDX1"}
     open(os.path.join(R,"dev/art/gen_ledger.jsonl"),"a").write(json.dumps(d,ensure_ascii=False)+"\n"); print("logged",c,a,gen)
 elif sys.argv[1]=="dl":   # nd.py dl cNN aNN URL
     c,a,u=sys.argv[2:5]; os.makedirs(os.path.join(S,"out"),exist_ok=True); fn=os.path.join(S,"out",f"{c}_{a}_nude.png")
