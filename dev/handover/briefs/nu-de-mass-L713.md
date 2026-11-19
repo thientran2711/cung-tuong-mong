@@ -1,4 +1,5 @@
 # NỮ ĐẾ MASS — owner Lượt 713 (19/11 ~21:58Z), GO
+⚠ OWNER Lượt 724 OVERRIDES the split below: ONE PERSON AT A TIME (all 5 ages) → owner OK → next person. No parallel groups.
 Owner (verbatim gist): "Nữ đế là tiến hành vẽ hàng loạt nữ đế, những gương mặt tôi đã duyệt. Làm ơn đưa đúng form nữ đế này cho tất cả các thợ, vẽ cho đúng."
 FORM = Nữ đế m05 ROUND 4 (NDX4, commit d7a41e3be, sheet dev/handover/review-sheets/nu-de-B/nudeB_m05_r3_vs_r4_crown_colour.jpg, sent as Lượt 711):
 - prompt maker dev/art/nude-B/mk.py exactly as in d7a41e3be (HH t8 crown sentence with dragon swaps + lưu F7; HH SLEEVE LENGTH + ONE SINGLE SLEEVE LAYER; a51/a65 = a36 COLOUR RULE + swatch line (B23, gate S35/X17); D15 style lock at a51/a65 with the person's OWN a36 Nữ đế cut as image 3; a65 hand warmer "of green jade").
