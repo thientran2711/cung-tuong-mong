@@ -108,7 +108,8 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
    const oq=give(k,t);if(!oq){o.rows.push({k,t:t.id,none:1});continue}const N=ptRecvN(pl,kind,0),H=ptRecvN(pl,kind,1);const c=click(oq,0);
    o.rows.push({k,pl,N,H,used:c&&c.used,shown:c&&/tốn: (\d+) khắc/.exec(c.x||"")?+/tốn: (\d+) khắc/.exec(c.x)[1]:null,at:S.place,exp:(srvM()&&pl===palaceOf(srvM()))?"home":pl,left:S.ordQ.length,logs:c&&c.logs})}
   /* refused walk (Tân Giả khố): the order stays, nothing paid */
-  {toB0();S.place="home";const t=far[0];const oq=t&&give("spy",t);if(oq){S.srv.lau=1;const c=click(oq,0);o.refused={used:c&&c.used,left:S.ordQ.length,same:!!(S.ordQ[0]&&S.ordQ[0].id===oq.id),pass:!!(S.acPass&&S.acPass[palaceOf(t)]&&accHas(S,palaceOf(t)))};S.srv.lau=0}}
+  /* first rival who can take an order (mkP may refuse one in this random world: its rows above then read none:1) */
+  {let t=null,oq=null;for(const v of far){toB0();S.place="home";oq=give("spy",v);if(oq){t=v;break}}if(oq){S.srv.lau=1;const c=click(oq,0);o.refused={used:c&&c.used,left:S.ordQ.length,same:!!(S.ordQ[0]&&S.ordQ[0].id===oq.id),pass:!!(S.acPass&&S.acPass[palaceOf(t)]&&accHas(S,palaceOf(t)))};S.srv.lau=0}}
   /* walk 0 (a consort in the master's own palace, or the errand at home): never 0 khắc, qua loa = hết lòng − 1, charged = shown */
   for(const [kind,pl] of [["spy",mk],["plant",mk],["errand","home"],["errand",S.place]]){const F=ptRecvN(pl,kind,0),Hh=ptRecvN(pl,kind,1);o.zero.push({kind,pl,F,Hh})}
   {toB0();S.place="home";const t=liveRivals(true).find(v=>v!==m&&v!==S&&v.alive&&!v.out&&palaceOf(v)===mk);if(t){const oq=give("spy",t);if(oq){const H=ptRecvN(mk,"spy",1);const c=click(oq,1);o.half0={H,used:c&&c.used,left:S.ordQ.length}}}}
