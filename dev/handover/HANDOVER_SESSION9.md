@@ -948,3 +948,4 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - (18/11 ~23:42Z real) ROOT-60: OWNER OD 23:50Z (ROOT-56 chat) → review/residence-qp-alone f7cf2ad6 VOID, never land (QP shares her palace, live rule OD L1540; no residence change). Lesson logged: anything changing a live rule is NOT a small call (law 16).
 - (18/11 ~23:46Z real) ROOT-60: OWNER BUG OD 23:45Z — person «!» must sit level with the «ta ở đây» marker (one top line), not on the head → sent to errand-scene worker session_01Rc5AsLFZhaSRGU7o57KkKy + rv (whole group: every stage figure marker).
 - (18/11 ~23:47Z real) ROOT-60: LANDED rel-picker r2 9a1d6922 (SMALL rv PASS, FF from 40d05b76) → LIVE 9a1d6922, ROLLBACK 40d05b76. Worker archived; rv wiping CDN img/_review/rel-picker-r2 then archived.
+- (19/11 ~00:07Z real) ROOT-60: OWNER OD 23:45Z refined in place (00:06Z): one MARKER LINE from the crowned Hoàng hậu figure top for «ta ở đây» + every «!» → errand-scene worker + rv.
