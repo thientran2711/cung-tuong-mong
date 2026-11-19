@@ -891,7 +891,7 @@ CNV_QFIX("cnv_mat");
 
 /* ---------- cnv_ma · Ma ma dạy việc ---------- */
 /* BAL.road keys needed:
-     cnvMaRk: 3   // cnv_ma .11 win (still a maid): the servant rank she is given, printed as SRK.maid[BAL.road.cnvMaRk] (index 3 today)
+     cnvMaRk: 4   // cnv_ma .11 win (still a maid): the servant rank she is given, printed as SRK.maid[BAL.road.cnvMaRk] (index 4 = Chưởng sự cô cô since maid-ladder-6)
    Two states (ROAD_MAP §8.4): still a maid (isSrv) or already raised (S.srv.risen). Texts are functions of the state; options split with
    need:["srv"] / need:["nsrv"]; maid-only effects (tin, nt, e67merit, e67srvUp, the servant rank) only through lmmSrv / lmmRk.
    The road: Lưu ma ma's first real task (.5) → a missing sum in the Nội vụ phủ books (.6) → Phùng cô cô accuses ma ma of it (.7) →
