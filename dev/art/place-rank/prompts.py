@@ -287,3 +287,62 @@ outf = {'khon-ninh-cung': knc
   .replace(B1_, "below the dais, TWO straight rows of Chinese armchairs with small tea tables between them for the visiting consorts (owner Lượt 563), one row along each side of the hall, the two rows facing each other across the open central aisle, mirrored exactly on the central axis that leads to the throne dais, each chair lined up with the columns and square to the walls, nothing placed at random;")
   .replace(C1_, "Keep the same throne, screen, colours and furnishings as image 3 (this same room as drawn before), but the hall is much larger and grander than in image 3, with the floor numbers here:")}
 json.dump(outf, open(os.path.join(D, 'prompts_v6f.json'), 'w'), ensure_ascii=False, indent=1)
+
+# ---- v7 (owner Lượt 572 on sheet C, relayed by ROOT-50/PR7 handover; worker PR8)
+# (2) KHÔN NINH RECEPTION: NEW LAYOUT of the quality of the HQP reception (image 3 = HQP reception rgXnolAxtc as QUALITY/closeness guide only),
+#     its OWN arrangement (L11): grand hall, throne on a platform under a gilt plaque (no writing), carved full-width arch frame, seat rows aligned
+#     with the structure, mirrored (Lượt 563), no table in the middle (Lượt 554), full Empress yellow + phoenix (EMP).
+KN7 = ("Khôn Ninh cung main reception hall, where the Empress of an ancient Chinese imperial palace receives the consorts, a real room in daily use, no bed anywhere: "
+    "a GRAND, very large and high hall (owner Lượt 563: never a small room), seen straight on along its central axis, with the back wall straight across the picture "
+    "and both side walls running towards the viewer in correct perspective, meeting the back wall at square corners; red lacquer columns wrapped with gilded "
+    "phoenix carving stand in two straight rows along the hall; a high coffered ceiling painted gold and red; a large horizontal gilt plaque carved with phoenixes and "
+    "clouds (no writing, no characters) high on the back wall, centred; a carved gilded openwork floor-to-ceiling arch frame (a luozhao) spans the whole width of the "
+    "hall from wall to wall, square to the back wall, carved with phoenixes among peonies, framing the raised throne area behind it; inside it, on a wide platform "
+    "of three steps with a gilded balustrade, against the back wall, exactly centred and seen straight on, the Empress's throne: a wide gilded carved throne seat "
+    "with a tall carved panel back crowned by a golden phoenix, imperial yellow silk cushions embroidered with phoenixes, a small low table with a gold tea set "
+    "beside it on the platform; behind the throne a large five-panel gilded screen with a phoenix among peonies; on each side of the throne a tall ceremonial fan of "
+    "imperial yellow silk with a phoenix on a long gilded pole, and a pair of golden phoenix figures on tall stands; in front of the arch frame, at the foot of "
+    "the platform, a gold crane-shaped incense burner on each side; TWO straight rows of carved gilded square-backed armchairs with imperial yellow cushions and "
+    "small tea tables between them (owner Lượt 563), one row along each side wall, mirrored exactly on the central axis, the two rows facing each other across the "
+    "open central aisle that leads to the throne platform, each chair lined up with the columns and square to the walls, the rows starting from the arch frame and "
+    "ending half way towards the viewer; NO table and NO stools in the middle of the floor (owner Lượt 554): the central aisle in front of the platform stays open "
+    "for people to stand; imperial yellow silk curtains tied back with gold tassels at the windows of the side walls, golden lattice windows onto a sunny summer "
+    "garden, ornate gilded palace lanterns with yellow tassels hanging in pairs, cloisonné vases of peonies, gilded curio shelves of jade and gold treasures against "
+    "the side walls behind the chairs." + EMP + NOSOFA + RECT +
+    " LAYOUT NUMBERS (owner Lượt 477, 520): seen as close and as low as in image 3 (image 3 is only a guide for how close, how rich and how finely made the room is, "
+    "NOT for its arrangement, colours or furniture: this hall has its own different, grander arrangement as written above); the main throne platform is large and "
+    "clear, its base at about two thirds of the picture height; the chair rows come down to about seven eighths of the picture height; the open floor of the "
+    "central aisle in front is only a strip of about one tenth of the picture height at the bottom, and nothing stands on it, because people will stand there.")
+HHREC7REF = 'rgXnolAxtc'  # image 3 = HQP reception (quality/closeness guide only)
+out7 = {'khon-ninh-cung': T.replace('{SEASON_TIME}', 'summer morning').replace('{TIME_LIGHT}', 'morning daylight').replace('{ROOM_LINE}', KN7)
+        .replace('{FLOOR}', 'polished stone tiles').replace('{MAT_UNDER}', 'the platform steps').replace('{KEY_PIECE}', 'the throne platform')}
+
+# (1) HQP = PHÓ HẬU: keep both layouts (image 3 = its own picture), change ONLY colour + luxury: yellow about HALF of Khôn Ninh's amount
+#     (curtains may now be yellow/golden), imperial near-Empress furniture (richer gilt, throne-like seats); still one step below the Empress.
+LUX7B = ("HOÀNG QUÝ PHI level, the Vice-Empress (phó hậu, owner Lượt 572): nearly as splendid as the Empress, only one small step below her: rich gilt carving "
+         "everywhere on the furniture, gold lacquer, mother-of-pearl, pearls, jade, coral, cloisonné and kingfisher-blue inlay, many treasures; the main seats "
+         "and the bed look imperial and throne-like, with tall carved gilded backs and gilded frames, close to the Empress's own. ")
+COL7B = (" COLOURS (owner Lượt 572): golden yellow is strong and clearly visible, about HALF as much yellow as in the Empress's room: golden yellow silk curtains and "
+         "bed curtains, golden yellow brocade bedding, seat brocades and cushions, mixed with deep ruby red silks, lanterns and tassels and with dark zitan and "
+         "red lacquer wood, so the room reads golden and imperial, only a little less yellow than the Empress's room. Phoenixes allowed: a pair of phoenixes "
+         "carved and gilded or embroidered among magnolias on the bed, the screen and the cushions, and a pair of small gilded phoenix figures.")
+KEEP7 = (" Keep the same room and the same arrangement as image 3 (this same room as drawn before): the same walls, windows, furniture places and the same "
+         "distance; change only the colours and the richness as written here.")
+outh7 = {}
+for k, p in outh.items():
+    q = p.replace(LUX7, LUX7B).replace(COL7, COL7B)
+    i = q.index(' LAYOUT NUMBERS'); q = q[:i] + KEEP7 + q[i:]
+    q = q.replace('seen as close and as low as in image 3 (image 3 is only a guide for how close and how full the room is, NOT for its arrangement, colours or furniture: this room has its own different arrangement as written above), ', 'seen as in image 3, ')
+    # colour words inside the room lines follow her colour point (only colours, layout words untouched)
+    for a, b in [('golden apricot brocade', 'golden yellow brocade'), ('golden apricot cushions', 'golden yellow cushions'),
+                 ('ruby red silk curtains tied back inside', 'golden yellow silk curtains lined with ruby red tied back inside'),
+                 ('deep ruby red sheer curtains tied back with tassels', 'golden yellow sheer curtains tied back with ruby red tassels')]:
+        q = q.replace(a, b)
+    assert 'apricot' not in q, k
+    assert q != p and LUX7B in q and COL7B in q and 'NOT for its arrangement' not in q, k
+    outh7[k] = q
+out7.update(outh7)
+H7REF = {'truong-xuan-cung-hqp-ngu': 's7I0dD0l8e', 'truong-xuan-cung-hqp': 'rgXnolAxtc', 'khon-ninh-cung': HHREC7REF}
+assert all('{' not in v for v in out7.values())
+json.dump(out7, open(os.path.join(D, 'prompts_v7.json'), 'w'), ensure_ascii=False, indent=1)
+print('v7', {k: len(v) for k, v in out7.items()})

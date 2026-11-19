@@ -1433,6 +1433,18 @@ def log_fill(ts,gen_id,mprompt):
     assert hit,"no unfilled ledger line with ts "+ts
     hit[0]["gen_id"]=gen_id; hit[0]["magnific_prompt"]=mprompt
     open(LEDGER,"w",encoding="utf-8").write("".join(json.dumps(e,ensure_ascii=False)+"\n" for e in L))
+# B8 FACE WORDS (owner Lượt 543/551, ART_RULES B8; BW3): every person in dev/art/KC_REFS.json with m09_ok yes (m01-m52 thiếu nữ v3, nc1-nc3 Lượt 570)
+# gets her KC_REFS face_words VERBATIM as the face line: every builder writes "Her face: {face}." -> face = face_words without "Her face: " and the final ".".
+# People NOT drawn (m09_ok NO: c01-c32, p01-p03, bd1-bd3) are refused by the CLI below (exit 2), so nobody paints them on old refs. --golden (frozen A/B reproduction) exempt.
+import json as _json
+KC_PEOPLE=_json.load(open(_os.path.join(_os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))),"KC_REFS.json"),encoding="utf-8"))["people"]
+def kc_drawn(c):
+    p=KC_PEOPLE.get(c); return bool(p and p.get("m09_ok")=="yes" and (p.get("face_words") or "").startswith("Her face: "))
+for _c in list(DATA):
+    if kc_drawn(_c):
+        _fw=KC_PEOPLE[_c]["face_words"]; assert _fw.endswith("."),_c
+        DATA[_c]=(DATA[_c][0],_fw[len("Her face: "):-1])
+KC_ID=re.compile(r"(?:c|m|p)\d\d|nc\d|bd\d")
 if __name__=="__main__":
     if "--verify" in sys.argv:
         i=sys.argv.index("--verify"); _since=sys.argv[sys.argv.index("--since")+1] if "--since" in sys.argv else None
@@ -1458,6 +1470,8 @@ if __name__=="__main__":
     TRIEUN=None
     if "--trieu" in sys.argv: i=sys.argv.index("--trieu"); TRIEUN=int(sys.argv[i+1]); sys.argv[i:i+2]=["--trieu"]
     a=[x for x in sys.argv[1:] if not x.startswith("--")]
+    if __name__=="__main__" and not BDQ and a and KC_ID.fullmatch(a[0]) and not kc_drawn(a[0]) and "--golden" not in sys.argv:   # B8 (BW3): NOT drawn -> refuse (real CLI only; store-all/build_all.py execs this block in-process for frame sentences and refuses on its own)
+        sys.stderr.write(f"REFUSED {a[0]}: NOT drawn (ART_RULES B8: no approved thiếu nữ reference in dev/art/KC_REFS.json; python3 dev/art/kc_ref.py {a[0]})\n"); sys.exit(2)
     _o=build_bdq(BDQ) if BDQ else build_state(a[0],STATE,a[1] if len(a)>1 else "v0") if STATE else (build_trieu8(a[0],a[1] if len(a)>1 else "v0") if TRIEUN==8 else build_trieu(a[0],TRIEUN,a[1] if len(a)>1 else "v0")) if "--trieu" in sys.argv else build_low(a[0],LOWN,a[1] if len(a)>1 else "v0") if "--low" in sys.argv else build_t7(a[0],a[1] if len(a)>1 else "v0") if "--t7" in sys.argv else build(a[0],a[1] if len(a)>1 else "v0","--golden" in sys.argv)
     if "--spec5pose" in sys.argv:
         _t=LOWN if "--low" in sys.argv else 7 if "--t7" in sys.argv else int(STATE[2:]) if STATE and STATE[:2]=="ty" else max(1,int(STATE[2])) if STATE and re.fullmatch(r"tm[0-4]",STATE) else 1 if STATE=="cold" else 8   # N5d item 4: trung y tN poses at rank N, cold at the lowest

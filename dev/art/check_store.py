@@ -598,10 +598,29 @@ BANNED = [{'id': 'X01',
   'luot': '483, 486 (G4)',
   'why': 'phi bạch never gold/yellow below t6'}]
 
+# G15 (owner Lượt 559): QUÝ NHÂN t3 DESIGN = option B v2. The t3 outfit-design words of the store (TIER_LOW[3] robe in t8-prompt-B/build.py) are REPLACED
+# by the Outfit words of dev/handover/reports/quy-nhan/m13_a26_t3_v2_optB.prompt.txt, copied verbatim; slots only: lilac -> {main}, deep teal -> {sec}
+# (her secondary, as in the TWO-COLOUR sentence), wisteria -> {motif} (her own t3 motif, the one the store already used). Used by store-all/build_all.py
+# (_t3_slot) and by store_check below: the gate then DEMANDS the option-B words (slots = any words) instead of the old t3 design.
+G15_T3_OLD=re.compile(r"a fine silk robe with wide embroidered (.+?) bands at the collar, sleeves and hem, long trailing wide sleeves, a silk waistband with hanging jade belt pendants and tassels, a sheer silk shawl")
+G15_T3_OPTB=("a structured, rich COURTLY palace consort dress (cung đình), never plain, never a simple wrap robe, NO crossed wrap collar, NO high-waisted chest-wrap skirt: "
+ "an ankle-length {main} silk court robe with a straight SQUARE NECKLINE framed by a wide stiff {sec} embroidered {motif} band; a wide stiff {sec} brocade girdle at the natural waist, "
+ "from which hangs down the centre front an embroidered {sec} APRON PANEL (a long narrow ceremonial front panel, {motif} embroidery, gold-braid edge) reaching to the ankles; "
+ "on each side of the apron hangs a long ceremonial jade pendant set down to the knees: small carved jade plaques linked by strings of pearls, ending in silk tassels; "
+ "wide embroidered {motif} bands at the sleeve ends and the hem; a sheer silk shawl")
+def g15_t3(text,main,sec):
+    """old t3 design -> option B (exactly one occurrence required)."""
+    m=G15_T3_OLD.search(text); assert m and len(G15_T3_OLD.findall(text))==1,"G15 t3 outfit slot"
+    return text[:m.start()]+G15_T3_OPTB.format(main=main,sec=sec,motif=m.group(1))+text[m.end():]
 def store_check(pf, prompt, args):
     """STORE GATE (owner Lượt 371/373/375), unchanged logic: -> list of (best, sentence) missing/rewritten."""
     B=os.path.join(ART,'t8-prompt-B')
     store=subprocess.run(['python3','build.py']+args,cwd=B,capture_output=True,text=True).stdout
+    m=G15_T3_OLD.search(store)
+    if m:   # G15: the t3 design words must be option B (main/secondary = any words, motif = the store's motif), never the old t3 design
+        rx=re.escape(G15_T3_OPTB).replace(re.escape('{main}'),'(.+?)').replace(re.escape('{sec}'),'(.+?)').replace(re.escape('{motif}'),re.escape(m.group(1)))
+        store=store[:m.start()]+store[m.end():]
+        if not re.search(rx,prompt): return [(0,'G15 Quý nhân t3 option-B outfit words missing (dev/handover/reports/quy-nhan/m13_a26_t3_v2_optB.prompt.txt)')]
     sp=lambda s:[x.strip() for x in re.split(r'(?<=[.;])\s+',s) if len(x.strip())>12]
     P=sp(prompt); bad=[]
     for s in sp(store):
@@ -672,6 +691,17 @@ def best_overlap(sentence, text):
     return best
 
 
+_KC_FACES = None
+def _strip_kc_faces(text):
+    """remove every exact KC_REFS face_words string (owner-approved identity words, ART_RULES B8) from the text used for the BANNED scan only."""
+    global _KC_FACES
+    if _KC_FACES is None:
+        import json
+        P = json.load(open(os.path.join(ART, "KC_REFS.json"), encoding="utf-8"))["people"]
+        _KC_FACES = [norm(p["face_words"]) for p in P.values() if p.get("m09_ok") == "yes" and (p.get("face_words") or "").startswith("Her face: ")]
+    for f in _KC_FACES:
+        if f in text: text = text.replace(f, " ")
+    return text
 def check_text(text, scope, S=None, X=None, age=None, skip_store=False):
     """-> (fails, warns, slots) ; fails/warns = list of (id, kind, detail)."""
     if S is None: S, X = load_registry()
@@ -687,6 +717,7 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False):
         ov = best_overlap(e["text"], text)
         item = (e["id"], "REWRITTEN" if ov >= 0.6 else "MISSING", f"{e['title']} (best overlap {ov:.0%})")
         (fails if req else warns).append(item)
+    text = _strip_kc_faces(text)   # B8 (BW3): the owner's verbatim KC face words are approved as a whole: never scanned for banned phrases (m13 "PHOENIX eyes" = eye shape, not the X08 motif; m43 "covering the teeth completely")
     for x in X:
         if scope not in parse_scope(x["scope"]): continue
         if x.get("unless") and x["unless"] in found: continue

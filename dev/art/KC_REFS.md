@@ -5,7 +5,7 @@ Ref = her NEW thiếu nữ picture approved 19/11 (COMMON_v3 + face-common/mNN.v
 Face words: copy VERBATIM from `face_words` (full {PERSON} line in `person_line` of KC_REFS.json).
 OLD 18/11 khuê các (set A: kc2k, kc2k-mass, now in img/_rejected/) = REJECTED and BANNED (dev/art/KC_BANNED_REFS.json; gate `python3 dev/art/kc_ref.py --check <prompt/ids>` and check_store.py --refs) — owner Lượt 554/555 “đừng bao giờ lôi nó ra nữa”.
 
-Counts: ok 52 · NOT drawn 41 · total 93
+Counts: ok 55 · NOT drawn 38 · total 93
 
 | id | ok | ref (cut) | gen | prompt file | pick | face words |
 |---|---|---|---|---|---|---|
@@ -61,6 +61,9 @@ Counts: ok 52 · NOT drawn 41 · total 93
 | m50 | yes | Tdw8XtrVNR | rgX7gg2xtc | m50.v3.FULL.txt | Lượt 293 mass (v3), not re-asked | Her face: a ROUND face with wide soft cheeks, large almond eyes with slightly downturned outer corners, fully open and bright, gently curved brows, a small button nose, a tiny rosebud mouth. Expression: Soft warm eyes, a tender small closed-lip smile, lips softly together, eyes fully open, never a stretched grin. |
 | m51 | yes | VX7IBvoMMU | DoOmoIfpcl | m51.v3.FULL.txt | Lượt 293 mass (v3), not re-asked | Her face: a LONG OVAL face with smooth cheeks and a gently rounded chin, large round-almond eyes, fully open and warm, straight soft brows, a slim straight nose, small full lips with gently upturned corners. Expression: Wide clear innocent eyes, a pure sweet faint smile with lips closed, very youthful, eyes fully open, never a stretched grin. |
 | m52 | yes | MBJtofgDCm | eIPvIvkdqL | m52.v3.FULL.txt | Lượt 293 mass (v3), not re-asked | Her face: a petite V-SHAPED face with soft cheeks tapering to a little pointed chin, wide-set large round eyes, fully open and alert, gently arched brows, a small straight nose, small thin lips. Expression: A calm composed gaze, a refined faint closed-lip smile, upright graceful bearing, eyes fully open, never a stretched grin. |
+| nc1 | yes | 6Abnqu9iJO | None | nc1.v2.FULL.txt | owner Lượt 570 | Her face: softly oval face with a gently pointed chin, large deep-set dark eyes with long lashes, elegantly arched full brows, a small full rosy mouth. |
+| nc2 | yes | p8ymOwOehw | None | nc2.v2.FULL.txt | owner Lượt 570 | Her face: diamond-shaped face with delicate high cheekbones and a slim softly pointed chin, elongated gentle almond eyes, slim willow-leaf brows, a full soft mouth. |
+| nc3 | yes | ov6CN4g829 | None | nc3.v2.FULL.txt | owner Lượt 570 | Her face: softly heart-shaped face with a gently rounded jaw and small dimples, wide-set bright eyes, straight soft brows, a small cupid's-bow mouth. |
 
 ## NOT drawn (no v3 thiếu nữ picture)
 
@@ -101,9 +104,6 @@ Counts: ok 52 · NOT drawn 41 · total 93
 | p01 | player: no thiếu nữ picture of any kind |
 | p02 | player: no thiếu nữ picture of any kind |
 | p03 | player: no thiếu nữ picture of any kind |
-| nc1 | princess Ba Tư: picture exists but made with COMMON_v2 princess prompt (cut 6Abnqu9iJO, nc1.v2.FULL.txt), not a v3 thiếu nữ |
-| nc2 | princess Cao Ly: picture exists but COMMON_v2 princess prompt (cut p8ymOwOehw, nc2.v2.FULL.txt), not a v3 thiếu nữ |
-| nc3 | princess Phù Tang: picture exists but COMMON_v2 princess prompt (cut ov6CN4g829, nc3.v2.FULL.txt), not a v3 thiếu nữ |
 | bd1 | princess Bắc Địch: COMMON_v2 samples only; Bắc Địch styles DROPPED by owner Lượt 283 |
 | bd2 | princess Bắc Địch: COMMON_v2 samples only; Bắc Địch styles DROPPED by owner Lượt 283 |
 | bd3 | princess Bắc Địch: COMMON_v2 samples only; Bắc Địch styles DROPPED by owner Lượt 283 |

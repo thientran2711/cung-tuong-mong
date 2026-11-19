@@ -847,6 +847,54 @@
    "face_words": "Her face: a petite V-SHAPED face with soft cheeks tapering to a little pointed chin, wide-set large round eyes, fully open and alert, gently arched brows, a small straight nose, small thin lips. Expression: A calm composed gaze, a refined faint closed-lip smile, upright graceful bearing, eyes fully open, never a stretched grin.",
    "person_line": "A young unmarried noble girl from a scholar's family (thiếu nữ khuê các), about 16. Her face: a petite V-SHAPED face with soft cheeks tapering to a little pointed chin, wide-set large round eyes, fully open and alert, gently arched brows, a small straight nose, small thin lips. Expression: A calm composed gaze, a refined faint closed-lip smile, upright graceful bearing, eyes fully open, never a stretched grin. Hair: glossy pure BLACK (never brown), half-up: a soft pink-lilac ribbon tied in a big bow at the back of the crown, two small flower hairpins, the rest loose. Outfit: a cross-collar ruqun of pink-lilac plain silk with a long pale lilac pleated floor-length skirt of silk satin with a soft sheen, small embroidered wisteria and butterflies at the collar and hem, a soft silk sash with a small gold-rimmed amethyst pendant, long sleeves; her signature colour family pink lilac and gold, gold only as thin accents. Pose: a graceful dance step, twirling one long sleeve, a hydrangea bloom held in the other hand, body turned three-quarters to the right, face toward the viewer."
   },
+  "nc1": {
+   "id": "nc1",
+   "m09_ok": "yes",
+   "ref_id": "6Abnqu9iJO",
+   "note": "owner Lượt 570: foreign princess pictures OK as reference, no redraw",
+   "prompt_file": "dev/art/_retired/face-common/nc1.v2.FULL.txt",
+   "set": "foreign princess (M09, COMMON_v2 princess prompt)",
+   "gen_id": null,
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "face_words": "Her face: softly oval face with a gently pointed chin, large deep-set dark eyes with long lashes, elegantly arched full brows, a small full rosy mouth.",
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "pick_why": "owner Lượt 570"
+  },
+  "nc2": {
+   "id": "nc2",
+   "m09_ok": "yes",
+   "ref_id": "p8ymOwOehw",
+   "note": "owner Lượt 570: foreign princess pictures OK as reference, no redraw",
+   "prompt_file": "dev/art/_retired/face-common/nc2.v2.FULL.txt",
+   "set": "foreign princess (M09, COMMON_v2 princess prompt)",
+   "gen_id": null,
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "face_words": "Her face: diamond-shaped face with delicate high cheekbones and a slim softly pointed chin, elongated gentle almond eyes, slim willow-leaf brows, a full soft mouth.",
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "pick_why": "owner Lượt 570"
+  },
+  "nc3": {
+   "id": "nc3",
+   "m09_ok": "yes",
+   "ref_id": "ov6CN4g829",
+   "note": "owner Lượt 570: foreign princess pictures OK as reference, no redraw",
+   "prompt_file": "dev/art/_retired/face-common/nc3.v2.FULL.txt",
+   "set": "foreign princess (M09, COMMON_v2 princess prompt)",
+   "gen_id": null,
+   "refs_used": [
+    "eIyOFEidqL"
+   ],
+   "face_words": "Her face: softly heart-shaped face with a gently rounded jaw and small dimples, wide-set bright eyes, straight soft brows, a small cupid's-bow mouth.",
+   "magnific_ref_ok": true,
+   "cdn_url": null,
+   "pick_why": "owner Lượt 570"
+  },
   "c01": {
    "id": "c01",
    "m09_ok": "NO",
@@ -1056,54 +1104,6 @@
    "m09_ok": "NO",
    "ref_id": null,
    "note": "player: no thiếu nữ picture of any kind"
-  },
-  "nc1": {
-   "id": "nc1",
-   "m09_ok": "yes",
-   "ref_id": "6Abnqu9iJO",
-   "note": "owner Lượt 570: foreign princess pictures OK as reference, no redraw",
-   "prompt_file": "dev/art/face-common/nc1.v2.FULL.txt",
-   "set": "foreign princess (M09, COMMON_v2 princess prompt)",
-   "gen_id": null,
-   "refs_used": [
-    "eIyOFEidqL"
-   ],
-   "face_words": "(see prompt_file {PERSON} line)",
-   "magnific_ref_ok": true,
-   "cdn_url": null,
-   "pick_why": "owner Lượt 570"
-  },
-  "nc2": {
-   "id": "nc2",
-   "m09_ok": "yes",
-   "ref_id": "p8ymOwOehw",
-   "note": "owner Lượt 570: foreign princess pictures OK as reference, no redraw",
-   "prompt_file": "dev/art/face-common/nc2.v2.FULL.txt",
-   "set": "foreign princess (M09, COMMON_v2 princess prompt)",
-   "gen_id": null,
-   "refs_used": [
-    "eIyOFEidqL"
-   ],
-   "face_words": "(see prompt_file {PERSON} line)",
-   "magnific_ref_ok": true,
-   "cdn_url": null,
-   "pick_why": "owner Lượt 570"
-  },
-  "nc3": {
-   "id": "nc3",
-   "m09_ok": "yes",
-   "ref_id": "ov6CN4g829",
-   "note": "owner Lượt 570: foreign princess pictures OK as reference, no redraw",
-   "prompt_file": "dev/art/face-common/nc3.v2.FULL.txt",
-   "set": "foreign princess (M09, COMMON_v2 princess prompt)",
-   "gen_id": null,
-   "refs_used": [
-    "eIyOFEidqL"
-   ],
-   "face_words": "(see prompt_file {PERSON} line)",
-   "magnific_ref_ok": true,
-   "cdn_url": null,
-   "pick_why": "owner Lượt 570"
   },
   "bd1": {
    "id": "bd1",
