@@ -117,6 +117,8 @@ def sleeve(t):
     if t<=3: return "SLEEVE LENGTH (rank law): very long, wide, flowing sleeves that fall well past her hands and hang down to her KNEES."
     if t<=6: return "SLEEVE LENGTH (rank law): very long, wide, flowing sleeves that hang down to her ANKLES."
     return "SLEEVE LENGTH (rank law): very long, very wide sleeves that hang down past her ankles until they touch the floor."
+# SL1 (owner Lượt 773/774: Nữ đế a36/a51/a65 + Thái hậu a36 sleeves ended at the knees while the hands hold the item at chest height): added right after the t7/t8 floor sentence
+SLEEVE_FLOOR_HOLD="Even while her hands are raised to hold her item at chest height, each wide sleeve still hangs straight down from her forearm and its hem lies on the floor beside her feet; the sleeve hem is NEVER at knee or shin height."
 ONE_LAYER="ONE SINGLE SLEEVE LAYER: each sleeve begins at the shoulder and falls in one piece; NO shorter outer sleeve, NO half-sleeve or elbow-length layer, NO short jacket sleeve or cuff layer visible on top of it."
 HEADBODY="HEAD AND BODY: her head turns together with her shoulders and body in the same direction with natural anatomy, never a frontal head on a turned body."
 FABRIC_B="FABRIC: thick gold-embroidered brocade with a graceful, flowing drape."
@@ -125,7 +127,7 @@ def angle_sentence(person,rank,age="a18"):
     """Lượt 440: one of the 14 standing angles (7 + 7 mirrored, build.py ANG14); E12 (BW6): the plan of THIS age (was always the a18 plan); the head turns WITH the body; frontal or three-quarter only."""
     return "ANGLE: "+LAST_G["ANG14"][plan(age)[(ALIAS.get(person,person),rank)][0]]+"; her head turns together with her shoulders and body, never back-turned, never in profile."
 def laws(t,age="a18"):
-    L=[HAIR_LOW if t<=3 and age in ("a18","a26") else HAIR_HIGH,sleeve(t),ONE_LAYER]   # F11 (owner Lượt 583): a36/a51/a65 = hair UP for everyone (t1-t3 too); loose only a18/a26
+    L=[HAIR_LOW if t<=3 and age in ("a18","a26") else HAIR_HIGH,sleeve(t)]+([SLEEVE_FLOOR_HOLD] if t>=7 else [])+[ONE_LAYER]   # F11 (owner Lượt 583): a36/a51/a65 = hair UP for everyone (t1-t3 too); loose only a18/a26
     L.append(SZ[t] if t<=6 else NOFLOWER)
     L.append(HEADBODY)
     if t>=7: L.append(FABRIC_B)
