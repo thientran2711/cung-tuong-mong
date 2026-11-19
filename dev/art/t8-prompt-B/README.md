@@ -11,3 +11,12 @@ Owner 18/11 ~18:15Z: "lấy cái prompt B đi, B cho đẹp"; ~18:20Z: draw ALL 
 - t6 text (`--low 6`, all 32 people, YEL_T6 in build.py) says the royal yellow is exactly the colour of a flat swatch = image 3. t6 refs = THREE images: (1) own t1 of that age [image], (2) style B kspkwKx16B [style], (3) swatch [image]. t1-t5 stay two refs.
 - Swatch: 1024x1024 flat PNG #F2BC61 (median robe-yellow of yellow-deeper/c03_a18_t8_C2.png). CDN https://ctm-img.victoria-tntt.workers.dev/img/_review/swatch/royal_yellow_C2.png . Magnific id TdwDfOyVNR belongs to the OLD account: re-upload the CDN file on the new account (creations_upload_image) and use the new id.
 - Sample (c06/c25, 1 gen each): img/_review/new-faces/style-test/b-t6-swatch.jpg. c06 got yellow inner panel + sash; c25 only the sash. If stronger is wanted: write "the whole inner robe front panel is royal yellow".
+
+## Gen ledger: --log / --refs / --verify (N5d item 2)
+Painter steps for EVERY figure gen (copy into briefs):
+1. `python3 dev/art/t8-prompt-B/build.py <ARGS> --log --refs > prompt.txt` — prints the prompt (stdout, byte-identical to without the flags), the A0 reference list as JSON on stderr (image 1 = her own live t1 / live tier+age picture, face only; image 2 = style3_girls Xm9tPkMBfo; image 3 = royal swatch only when the prompt says "Image 3 …"), and appends a line to dev/art/gen_ledger.jsonl: {ts, cmd, argv, prompt, refs, gen_id:null, magnific_prompt:null}.
+2. Generate with EXACTLY prompt.txt and exactly the listed refs.
+3. `creations_get <gen_id>` → save the prompt Magnific stored to mp.txt, then `python3 dev/art/t8-prompt-B/build.py --log-fill <ts of the ledger line> <gen_id> mp.txt` (fills gen_id + magnific_prompt).
+   (Shortcut when the gen id is already known: add `--gen-id ID --mprompt mp.txt` to step 1 instead.)
+4. Reviewer / foreman: `python3 dev/art/t8-prompt-B/build.py --verify dev/art/gen_ledger.jsonl [--since 2026-11-19T00:00:00Z]` re-runs each logged cmd and compares the fresh prompt with magnific_prompt: PASS/FAIL per line, exit 1 on any FAIL (a line with no magnific_prompt is a FAIL).
+Python API (W107b): `import build; build.K3_BG; build.gen_refs(argv, prompt); build.log_gen(argv, prompt, gen_id, mprompt); build.verify_ledger(path, since)`.

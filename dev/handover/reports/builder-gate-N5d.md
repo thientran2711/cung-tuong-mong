@@ -11,3 +11,11 @@ Guard per item: snapshot of 8350 builder commands (c01–c32 × 5 ages × 19 mod
 - Snapshot diff before/after: 8350 commands, 1606 error cells identical (same keys, same errors), every other output = old output with exactly K3_BG inserted before END (trieu: old K3 removed) → 0 other changes.
 - Pre-existing (not mine): `build.py cXX v0 --golden` no longer equals golden/pB_*.txt (differs at char 510, since the 3d2 frontal rewrite).
 - coverage: BG column no longer red for any build.py group (was red everywhere); only the Emperor (emperor-B, W107b's file) still shows BG. 540 red cells remain (POSE=, REFS, ...).
+
+## Item 2 — --log / --refs / --verify
+- Usage + exact painter steps: dev/art/t8-prompt-B/README.md § "Gen ledger". Ledger file dev/art/gen_ledger.jsonl (created on first --log). `--log-fill TS GEN_ID FILE` fills a line after the gen.
+- Refs order = the order the prompt text uses (1 own face, 2 style3_girls, 3 swatch if "Image 3" in the prompt). NOTE: FIGURE_GATE A0 REFERENCES lists style as (1) and face (2); the K3 order text ("second reference image is style") and ROYAL3 ("Image 3") agree with the order used here — ROOT-37 please confirm or correct the A0 wording.
+- Tested: PASS on a matching line, FAIL (with the first differing char) on a mismatch, exit 1. Snapshot diff vs item 1: 0 of 8350 changed (flags off = identical output).
+- W107b (session_01PEhRbv2Jj3dTLMsN1f9GGg) is inactive: the API is documented in the README instead.
+
+- coverage after item 2: REFS column cleared for every build.py group (emitter YES); only the Emperor (emperor-B) still red on REFS/BG.

@@ -989,7 +989,61 @@ def nude2(o,c,opt):
         o=o.replace("her colour is the second colour",NUDE2_COL[opt]+" is the second colour",1)
     assert "phoenix" not in o.lower()
     return o
+# ---- N5d item 2: gen ledger (--log) + verifier (--verify) -------------------------------------------------
+# --log   appends {ts, cmd, argv, prompt, refs, gen_id, magnific_prompt} to dev/art/gen_ledger.jsonl (gen_id / magnific_prompt null until filled)
+# --refs  prints the A0 reference list (JSON) to stderr; the prompt on stdout stays byte-identical
+# --verify LEDGER [--since TS]  re-runs every logged cmd, compares the fresh prompt with magnific_prompt (what Magnific really received), PASS/FAIL per line, exit 1 on any FAIL
+import os
+LEDGER=os.path.join(os.path.dirname(os.path.abspath(__file__)),"..","gen_ledger.jsonl")
+REF_STYLE={"name":"style3_girls (the three approved girls m09 + c06 + c25, one image) = STYLE only","magnific_id":"Xm9tPkMBfo","url":"https://ctm-img.victoria-tntt.workers.dev/img/_review/style-refs/style3_girls.png"}
+REF_SWATCH={"name":"royal-yellow swatch = colour only","magnific_id":"TdwDfOyVNR (OLD account: re-upload the CDN file on the current one)","url":"https://ctm-img.victoria-tntt.workers.dev/img/_review/swatch/royal_yellow_C2.png"}
+def gen_refs(argv,prompt):
+    """A0 reference list in the order the prompt text uses: image 1 = her own live picture (face only; re-make states: her live tier+age picture), image 2 = style3_girls, image 3 = royal swatch (only when the prompt carries the ROYAL3 sentence)."""
+    a=[x for x in argv if not x.startswith("--")]; age=argv[argv.index("--age")+1] if "--age" in argv else "a18"
+    r=[{"image":1,"name":"own live t1 of %s at %s (a65 = her a65 t1 / live picture) = FACE only; re-make states: her live tier+age picture"%(a[0] if a else "?",age)}]
+    if "--nostyle" not in argv: r.append({"image":2,**REF_STYLE})
+    if "Image 3 is only a colour reference" in prompt: r.append({"image":3,**REF_SWATCH})
+    return r
+def _run_cmd(argv):
+    import subprocess
+    r=subprocess.run([sys.executable,os.path.abspath(__file__)]+argv,capture_output=True,text=True,env={**os.environ,"PYTHONDONTWRITEBYTECODE":"1"})
+    return r.returncode,r.stdout,r.stderr.strip()
+def verify_ledger(path,since=None):
+    import json
+    bad=0; n=0
+    for i,l in enumerate(open(path,encoding="utf-8"),1):
+        if not l.strip(): continue
+        e=json.loads(l)
+        if since and e["ts"]<since: continue
+        n+=1; tag="line %d %s %s"%(i,e["ts"],e["cmd"].split("build.py",1)[-1].strip())
+        if not e.get("magnific_prompt"): print("FAIL",tag,"| magnific_prompt missing (painter: creations_get gen_id, then --log-fill)"); bad+=1; continue
+        rc,out,err=_run_cmd(e["argv"])
+        if rc: print("FAIL",tag,"| builder error:",err[-120:]); bad+=1
+        elif out.strip()!=e["magnific_prompt"].strip():
+            k=next((j for j,(x,y) in enumerate(zip(out.strip(),e["magnific_prompt"].strip())) if x!=y),min(len(out.strip()),len(e["magnific_prompt"].strip())))
+            print("FAIL",tag,"| Magnific prompt differs from the builder at char",k,": builder ...%r / magnific ...%r"%(out.strip()[max(0,k-30):k+40],e["magnific_prompt"].strip()[max(0,k-30):k+40])); bad+=1
+        else: print("PASS",tag)
+    print("%d lines, %d FAIL"%(n,bad)); return 1 if bad else 0
+def log_gen(argv,prompt,gen_id=None,mprompt=None):
+    import json,datetime
+    e={"ts":datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),"cmd":"python3 dev/art/t8-prompt-B/build.py "+" ".join(argv),"argv":argv,"prompt":prompt,"refs":gen_refs(argv,prompt),"gen_id":gen_id,"magnific_prompt":mprompt}
+    with open(LEDGER,"a",encoding="utf-8") as f: f.write(json.dumps(e,ensure_ascii=False)+"\n")
+    return e
+def log_fill(ts,gen_id,mprompt):
+    import json
+    L=[json.loads(l) for l in open(LEDGER,encoding="utf-8") if l.strip()]; hit=[e for e in L if e["ts"]==ts and not e.get("gen_id")]
+    assert hit,"no unfilled ledger line with ts "+ts
+    hit[0]["gen_id"]=gen_id; hit[0]["magnific_prompt"]=mprompt
+    open(LEDGER,"w",encoding="utf-8").write("".join(json.dumps(e,ensure_ascii=False)+"\n" for e in L))
 if __name__=="__main__":
+    if "--verify" in sys.argv:
+        i=sys.argv.index("--verify"); _since=sys.argv[sys.argv.index("--since")+1] if "--since" in sys.argv else None
+        sys.exit(verify_ledger(sys.argv[i+1],_since))
+    if "--log-fill" in sys.argv:   # --log-fill TS GEN_ID MAGNIFIC_PROMPT_FILE
+        i=sys.argv.index("--log-fill"); log_fill(sys.argv[i+1],sys.argv[i+2],open(sys.argv[i+3],encoding="utf-8").read().strip()); sys.exit(0)
+    _RAW=[x for x in sys.argv[1:]]
+    for _f in ('--gen-id','--mprompt'):   # value flags of --log: strip so the value is not read as a person id
+        if _f in sys.argv: _i=sys.argv.index(_f); sys.argv[_i:_i+2]=[]
     NUDE2=None
     if "--nudeopt" in sys.argv: i=sys.argv.index("--nudeopt"); NUDE_OPTSEL=sys.argv[i+1]; sys.argv[i:i+2]=[]
     if NUDE_OPTSEL=="auto": NUDE_OPTSEL=NUDE_OPTMAP[[x for x in sys.argv[1:] if not x.startswith("--")][0]]
@@ -1047,3 +1101,11 @@ if __name__=="__main__":
     assert _o.count("IGNORE")==0 or "--golden" in sys.argv,"K3 already present"
     if "--golden" not in sys.argv: _o=_o[:-len(END)]+_k3+END if _o.endswith(END) else _o+_k3   # --golden = frozen A/B reproduction (golden/pB_*.txt), never a gen mode
     print(_o,end="")
+    _lg=[x for x in _RAW if x not in ("--log","--refs")]
+    if "--gen-id" in _lg: _i=_lg.index("--gen-id"); _gid=_lg[_i+1]; _lg[_i:_i+2]=[]
+    else: _gid=None
+    if "--mprompt" in _lg: _i=_lg.index("--mprompt"); _mp=open(_lg[_i+1],encoding="utf-8").read().strip(); _lg[_i:_i+2]=[]
+    else: _mp=None
+    if "--refs" in _RAW:
+        import json; print(json.dumps(gen_refs(_lg,_o),ensure_ascii=False,indent=1),file=sys.stderr)
+    if "--log" in _RAW: log_gen(_lg,_o,_gid,_mp)

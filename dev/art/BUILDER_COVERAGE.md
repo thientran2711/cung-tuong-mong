@@ -4,25 +4,25 @@ Owner (verbatim): "Cái vấn đề á, là ở lượt 154 mày nói á, là th
 
 Each cell RUNS the builder for every person of the group. ✅ = every person passes every check; ❌ = missing pieces (count of people failing). `*` after a cell = form not in FIGURE_GATE A0 APPROVED FORMS (sample only). Codes: see the docstring of coverage.py (NOCMD no builder mode · RUN crash · AGE no approved age text · FRONT three-quarter (3d2) · POSE no spec5 pose · POSE= same pose as another age · ITEM item not from item_age.py 3f cell · ITEM= same item kind as another age · BG no K3 background line · ROYAL3 no royal-swatch sentence · REFS builder emits no A0 refs).
 
-build.py refs emitter (--log/--refs): NO · emperor-B refs emitter: NO
+build.py refs emitter (--log/--refs): YES · emperor-B refs emitter: NO
 
 
 ## Consorts c01–c32 (32)
 
 | tier | a18 | a26 | a36 | a51 | a65 |
 |---|---|---|---|---|---|
-| t1 | ❌ POSE=(26) REFS | ❌ POSE= REFS | ❌ POSE=(29) REFS | ❌ POSE=(29) REFS | ❌ POSE=(31) REFS |
-| t2 | ❌ POSE=(26) REFS* | ❌ POSE= REFS* | ❌ POSE=(29) REFS* | ❌ POSE=(29) REFS* | ❌ POSE= REFS* |
-| t3 | ❌ POSE=(26) REFS* | ❌ POSE= REFS* | ❌ POSE=(29) REFS* | ❌ POSE=(29) REFS* | ❌ POSE= REFS* |
-| t4 | ❌ POSE=(26) REFS | ❌ POSE= REFS | ❌ POSE=(29) REFS | ❌ POSE=(29) REFS | ❌ POSE= REFS |
-| t5 | ❌ POSE=(26) REFS | ❌ POSE= REFS | ❌ POSE=(29) REFS | ❌ POSE=(29) REFS | ❌ POSE=(31) REFS |
-| t6 | ❌ POSE=(26) REFS | ❌ POSE= REFS | ❌ POSE=(29) REFS | ❌ POSE=(29) REFS | ❌ POSE= REFS |
-| t7 | ❌ POSE=(29) REFS | ❌ POSE= REFS | ❌ POSE=(29) REFS | ❌ POSE= REFS | ❌ POSE= REFS |
-| t8 | ❌ POSE=(29) REFS | ❌ POSE= REFS | ❌ POSE=(29) REFS | ❌ POSE= REFS | ❌ POSE= REFS |
-| Thái hậu | — | — | ❌ POSE=(29) REFS | ❌ POSE=(29) REFS | ❌ POSE= REFS |
-| Nữ đế | ❌ POSE= REFS | ❌ POSE=(26) REFS | ❌ POSE= REFS | ❌ POSE= REFS | ❌ POSE= REFS |
-| khuê các | ❌ POSE=(26) REFS | ❌ POSE=(26) REFS | — | — | — |
-| nhà nghèo | ❌ POSE= REFS | ❌ POSE= REFS | — | — | — |
+| t1 | ❌ POSE=(26) | ❌ POSE= | ❌ POSE=(29) | ❌ POSE=(29) | ❌ POSE=(31) |
+| t2 | ❌ POSE=(26)* | ❌ POSE=* | ❌ POSE=(29)* | ❌ POSE=(29)* | ❌ POSE=* |
+| t3 | ❌ POSE=(26)* | ❌ POSE=* | ❌ POSE=(29)* | ❌ POSE=(29)* | ❌ POSE=* |
+| t4 | ❌ POSE=(26) | ❌ POSE= | ❌ POSE=(29) | ❌ POSE=(29) | ❌ POSE= |
+| t5 | ❌ POSE=(26) | ❌ POSE= | ❌ POSE=(29) | ❌ POSE=(29) | ❌ POSE=(31) |
+| t6 | ❌ POSE=(26) | ❌ POSE= | ❌ POSE=(29) | ❌ POSE=(29) | ❌ POSE= |
+| t7 | ❌ POSE=(29) | ❌ POSE= | ❌ POSE=(29) | ❌ POSE= | ❌ POSE= |
+| t8 | ❌ POSE=(29) | ❌ POSE= | ❌ POSE=(29) | ❌ POSE= | ❌ POSE= |
+| Thái hậu | — | — | ❌ POSE=(29) | ❌ POSE=(29) | ❌ POSE= |
+| Nữ đế | ❌ POSE= | ❌ POSE=(26) | ❌ POSE= | ❌ POSE= | ❌ POSE= |
+| khuê các | ❌ POSE=(26) | ❌ POSE=(26) | — | — | — |
+| nhà nghèo | ❌ POSE= | ❌ POSE= | — | — | — |
 | cung nữ tm0 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | — | — |
 | cung nữ tm1 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
 | cung nữ tm2 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
@@ -37,14 +37,14 @@ build.py refs emitter (--log/--refs): NO · emperor-B refs emitter: NO
 | trung y ty7 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
 | trung y ty8 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
 | lãnh cung | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
-| triều phục 1 | ❌ POSE POSE= REFS* | ❌ POSE POSE= REFS* | ❌ POSE POSE= REFS* | ❌ POSE POSE= REFS* | ❌ POSE POSE= REFS* |
-| triều phục 2 | ❌ POSE POSE= REFS* | ❌ POSE POSE= REFS* | ❌ POSE POSE= REFS* | ❌ POSE POSE= REFS* | ❌ POSE POSE= REFS* |
-| triều phục 3 | ❌ POSE POSE= REFS* | ❌ POSE POSE= REFS* | ❌ POSE POSE= REFS* | ❌ POSE POSE= REFS* | ❌ POSE POSE= REFS* |
-| triều phục 4 | ❌ POSE POSE= REFS* | ❌ POSE POSE= REFS* | ❌ POSE POSE= REFS* | ❌ POSE POSE= REFS* | ❌ POSE POSE= REFS* |
-| triều phục 5 | ❌ POSE POSE= REFS* | ❌ POSE POSE= REFS* | ❌ POSE POSE= REFS* | ❌ POSE POSE= REFS* | ❌ POSE POSE= REFS* |
-| triều phục 6 | ❌ POSE POSE= REFS* | ❌ POSE POSE= REFS* | ❌ POSE POSE= REFS* | ❌ POSE POSE= REFS* | ❌ POSE POSE= REFS* |
-| triều phục 7 | ❌ POSE POSE= REFS* | ❌ POSE POSE= REFS* | ❌ POSE POSE= REFS* | ❌ POSE POSE= REFS* | ❌ POSE POSE= REFS* |
-| triều phục 8 | ❌ POSE POSE= REFS* | ❌ POSE POSE= REFS* | ❌ POSE POSE= REFS* | ❌ POSE POSE= REFS* | ❌ POSE POSE= REFS* |
+| triều phục 1 | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* |
+| triều phục 2 | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* |
+| triều phục 3 | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* |
+| triều phục 4 | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* |
+| triều phục 5 | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* |
+| triều phục 6 | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* |
+| triều phục 7 | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* |
+| triều phục 8 | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* | ❌ POSE POSE=* |
 
 Commands (example, a26): `dev/art/t8-prompt-B/build.py c01 --low 1 v0 --spec5pose --age a26` · `dev/art/t8-prompt-B/build.py c01 --low 2 v0 --spec5pose --age a26` · `dev/art/t8-prompt-B/build.py c01 --low 3 v0 --spec5pose --age a26` · `dev/art/t8-prompt-B/build.py c01 --low 4 v0 --spec5pose --age a26` …
 
@@ -52,18 +52,18 @@ Commands (example, a26): `dev/art/t8-prompt-B/build.py c01 --low 1 v0 --spec5pos
 
 | tier | a18 | a26 | a36 | a51 | a65 |
 |---|---|---|---|---|---|
-| t1 | ❌ REFS RUN | ❌ REFS RUN | ❌ REFS RUN | ❌ REFS RUN | ❌ REFS RUN |
-| t2 | ❌ REFS RUN* | ❌ REFS RUN* | ❌ REFS RUN* | ❌ REFS RUN* | ❌ REFS RUN* |
-| t3 | ❌ REFS RUN* | ❌ REFS RUN* | ❌ REFS RUN* | ❌ REFS RUN* | ❌ REFS RUN* |
-| t4 | ❌ REFS RUN | ❌ REFS RUN | ❌ REFS RUN | ❌ REFS RUN | ❌ REFS RUN |
-| t5 | ❌ REFS RUN | ❌ REFS RUN | ❌ REFS RUN | ❌ REFS RUN | ❌ REFS RUN |
-| t6 | ❌ REFS RUN | ❌ REFS RUN | ❌ REFS RUN | ❌ REFS RUN | ❌ REFS RUN |
-| t7 | ❌ REFS RUN | ❌ REFS RUN | ❌ REFS RUN | ❌ REFS RUN | ❌ REFS RUN |
-| t8 | ❌ REFS RUN | ❌ REFS RUN | ❌ REFS RUN | ❌ REFS RUN | ❌ REFS RUN |
-| Thái hậu | — | — | ❌ REFS RUN | ❌ REFS RUN | ❌ REFS RUN |
-| Nữ đế | ❌ REFS RUN | ❌ REFS RUN | ❌ REFS RUN | ❌ REFS RUN | ❌ REFS RUN |
-| khuê các | ❌ REFS RUN | ❌ REFS RUN | — | — | — |
-| nhà nghèo | ❌ REFS RUN | ❌ REFS RUN | — | — | — |
+| t1 | ❌ RUN | ❌ RUN | ❌ RUN | ❌ RUN | ❌ RUN |
+| t2 | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* |
+| t3 | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* |
+| t4 | ❌ RUN | ❌ RUN | ❌ RUN | ❌ RUN | ❌ RUN |
+| t5 | ❌ RUN | ❌ RUN | ❌ RUN | ❌ RUN | ❌ RUN |
+| t6 | ❌ RUN | ❌ RUN | ❌ RUN | ❌ RUN | ❌ RUN |
+| t7 | ❌ RUN | ❌ RUN | ❌ RUN | ❌ RUN | ❌ RUN |
+| t8 | ❌ RUN | ❌ RUN | ❌ RUN | ❌ RUN | ❌ RUN |
+| Thái hậu | — | — | ❌ RUN | ❌ RUN | ❌ RUN |
+| Nữ đế | ❌ RUN | ❌ RUN | ❌ RUN | ❌ RUN | ❌ RUN |
+| khuê các | ❌ RUN | ❌ RUN | — | — | — |
+| nhà nghèo | ❌ RUN | ❌ RUN | — | — | — |
 | cung nữ tm0 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | — | — |
 | cung nữ tm1 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
 | cung nữ tm2 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
@@ -78,14 +78,14 @@ Commands (example, a26): `dev/art/t8-prompt-B/build.py c01 --low 1 v0 --spec5pos
 | trung y ty7 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
 | trung y ty8 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
 | lãnh cung | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
-| triều phục 1 | ❌ REFS RUN* | ❌ REFS RUN* | ❌ REFS RUN* | ❌ REFS RUN* | ❌ REFS RUN* |
-| triều phục 2 | ❌ REFS RUN* | ❌ REFS RUN* | ❌ REFS RUN* | ❌ REFS RUN* | ❌ REFS RUN* |
-| triều phục 3 | ❌ REFS RUN* | ❌ REFS RUN* | ❌ REFS RUN* | ❌ REFS RUN* | ❌ REFS RUN* |
-| triều phục 4 | ❌ REFS RUN* | ❌ REFS RUN* | ❌ REFS RUN* | ❌ REFS RUN* | ❌ REFS RUN* |
-| triều phục 5 | ❌ REFS RUN* | ❌ REFS RUN* | ❌ REFS RUN* | ❌ REFS RUN* | ❌ REFS RUN* |
-| triều phục 6 | ❌ REFS RUN* | ❌ REFS RUN* | ❌ REFS RUN* | ❌ REFS RUN* | ❌ REFS RUN* |
-| triều phục 7 | ❌ REFS RUN* | ❌ REFS RUN* | ❌ REFS RUN* | ❌ REFS RUN* | ❌ REFS RUN* |
-| triều phục 8 | ❌ REFS RUN* | ❌ REFS RUN* | ❌ REFS RUN* | ❌ REFS RUN* | ❌ REFS RUN* |
+| triều phục 1 | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* |
+| triều phục 2 | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* |
+| triều phục 3 | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* |
+| triều phục 4 | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* |
+| triều phục 5 | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* |
+| triều phục 6 | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* |
+| triều phục 7 | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* |
+| triều phục 8 | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* | ❌ RUN* |
 
 Commands (example, a26): `dev/art/t8-prompt-B/build.py m01 --low 1 v0 --spec5pose --age a26` · `dev/art/t8-prompt-B/build.py m01 --low 2 v0 --spec5pose --age a26` · `dev/art/t8-prompt-B/build.py m01 --low 3 v0 --spec5pose --age a26` · `dev/art/t8-prompt-B/build.py m01 --low 4 v0 --spec5pose --age a26` …
 
@@ -96,12 +96,12 @@ NOTE: build.py has ONE generic face per country (PDATA nc / bd), not the 3 + 3 p
 | tier | a18 | a26 | a36 | a51 | a65 |
 |---|---|---|---|---|---|
 | pre | ❌ NOCMD* | — | — | — | — |
-| t1 | ❌ POSE REFS* | ❌ POSE REFS* | ❌ POSE REFS* | ❌ POSE REFS* | ❌ POSE REFS* |
+| t1 | ❌ POSE* | ❌ POSE* | ❌ POSE* | ❌ POSE* | ❌ POSE* |
 | t2 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
 | t3 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
 | t4 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
 | t5 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
-| t6 | ❌ ITEM(3) POSE POSE=(3) REFS ROYAL3 | ❌ ITEM(3) POSE POSE=(3) REFS ROYAL3 | ❌ ITEM(3) POSE POSE=(3) REFS ROYAL3 | ❌ ITEM(3) POSE POSE=(3) REFS ROYAL3 | ❌ ITEM(3) POSE POSE=(3) REFS ROYAL3 |
+| t6 | ❌ ITEM(3) POSE POSE=(3) ROYAL3 | ❌ ITEM(3) POSE POSE=(3) ROYAL3 | ❌ ITEM(3) POSE POSE=(3) ROYAL3 | ❌ ITEM(3) POSE POSE=(3) ROYAL3 | ❌ ITEM(3) POSE POSE=(3) ROYAL3 |
 | t7 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
 | t8 | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
 | Thái hậu | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* | ❌ NOCMD* |
@@ -305,14 +305,14 @@ Codes as above, plus NOSRC = no old prompt exists (rule 6: never invented; owner
 
 ## RED LIST (grouped)
 
-- **Consorts c01–c32 (32)** — POSE= REFS: t1/a18, t1/a26, t1/a36, t1/a51, t1/a65, t2/a18, t2/a26, t2/a36, t2/a51, t2/a65, t3/a18, t3/a26, t3/a36, t3/a51 … (+38)
+- **Consorts c01–c32 (32)** — POSE=: t1/a18, t1/a26, t1/a36, t1/a51, t1/a65, t2/a18, t2/a26, t2/a36, t2/a51, t2/a65, t3/a18, t3/a26, t3/a36, t3/a51 … (+38)
 - **Consorts c01–c32 (32)** — NOCMD (no builder mode): tm0/a18, tm0/a26, tm0/a36, tm1/a18, tm1/a26, tm1/a36, tm1/a51, tm1/a65, tm2/a18, tm2/a26, tm2/a36, tm2/a51, tm2/a65, tm3/a18 … (+54)
-- **Consorts c01–c32 (32)** — POSE POSE= REFS: tr1/a18, tr1/a26, tr1/a36, tr1/a51, tr1/a65, tr2/a18, tr2/a26, tr2/a36, tr2/a51, tr2/a65, tr3/a18, tr3/a26, tr3/a36, tr3/a51 … (+26)
-- **Maid faces m01–m52 (52) in every woman tier** — REFS RUN: t1/a18, t1/a26, t1/a36, t1/a51, t1/a65, t2/a18, t2/a26, t2/a36, t2/a51, t2/a65, t3/a18, t3/a26, t3/a36, t3/a51 … (+78)
+- **Consorts c01–c32 (32)** — POSE POSE=: tr1/a18, tr1/a26, tr1/a36, tr1/a51, tr1/a65, tr2/a18, tr2/a26, tr2/a36, tr2/a51, tr2/a65, tr3/a18, tr3/a26, tr3/a36, tr3/a51 … (+26)
+- **Maid faces m01–m52 (52) in every woman tier** — RUN: t1/a18, t1/a26, t1/a36, t1/a51, t1/a65, t2/a18, t2/a26, t2/a36, t2/a51, t2/a65, t3/a18, t3/a26, t3/a36, t3/a51 … (+78)
 - **Maid faces m01–m52 (52) in every woman tier** — NOCMD (no builder mode): tm0/a18, tm0/a26, tm0/a36, tm1/a18, tm1/a26, tm1/a36, tm1/a51, tm1/a65, tm2/a18, tm2/a26, tm2/a36, tm2/a51, tm2/a65, tm3/a18 … (+54)
 - **Foreign princesses Nam Chiếu nc1–3 / Bắc Địch bd1–3 (6)** — NOCMD (no builder mode): pre/a18, t2/a18, t2/a26, t2/a36, t2/a51, t2/a65, t3/a18, t3/a26, t3/a36, t3/a51, t3/a65, t4/a18, t4/a26, t4/a36 … (+72)
-- **Foreign princesses Nam Chiếu nc1–3 / Bắc Địch bd1–3 (6)** — POSE REFS: t1/a18, t1/a26, t1/a36, t1/a51, t1/a65
-- **Foreign princesses Nam Chiếu nc1–3 / Bắc Địch bd1–3 (6)** — ITEM POSE POSE= REFS ROYAL3: t6/a18, t6/a26, t6/a36, t6/a51, t6/a65
+- **Foreign princesses Nam Chiếu nc1–3 / Bắc Địch bd1–3 (6)** — POSE: t1/a18, t1/a26, t1/a36, t1/a51, t1/a65
+- **Foreign princesses Nam Chiếu nc1–3 / Bắc Địch bd1–3 (6)** — ITEM POSE POSE= ROYAL3: t6/a18, t6/a26, t6/a36, t6/a51, t6/a65
 - **Emperor (emperor-B: live1, live2, e1–e4)** — BG ITEM POSE POSE= REFS: base/a18, base/a26, base/a36, base/a51
 - **Emperor (emperor-B: live1, live2, e1–e4)** — REFS RUN: base/a65
 - **NPC Thái hậu h1–h3** — ITEM POSE POSE=: base/a18, base/a26, base/a36, base/a51, base/a65
