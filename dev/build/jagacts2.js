@@ -108,7 +108,7 @@ function ag2VisC(){const L=[];if(typeof visOk!=="function"||typeof visCh!=="func
 agReg("emp","visit",(E,N,need)=>{if(need&&need!=="desire")return[];if(S.dead||!(N.desire>0))return[];const b=AG.cB!=null?AG.cB:agDayB();if(!BAL.ag.emp3.visB.includes(j95c(b)))return[];
  const C=ag2VisC();if(!C.length)return[];const t=mindPickBy(C,x=>visCh(x)*empMemF(x),E);if(!t)return[];
  return[{k:"emp:visit",t,u:N.desire,tag:"social",act:"ngự giá lâm cung",at:()=>{try{return palaceOf(t)}catch(e){return"dtd"}}}]});
-agRunReg("emp:visit",(E,t)=>{if(!t||S.dead||typeof visOk!=="function"||!visOk(t))return"";AG2.stat.visit++;visGo(t);return""});
+agRunReg("emp:visit",(E,t)=>{if(!t||S.dead||typeof visOk!=="function"||!visOk(t))return"";AG2.stat.visit++;/* RECEIVER CHOICE (jrcv rcvVisit): an NPC answers with her card's roads */if(t!==S&&!t.coop&&typeof rcvVisit==="function"){const c=rcvVisit(t);if(c!=="go")return c==="adv"?`${t.name} khuyên Hoàng thượng giữ long thể, ngài về Dưỡng Hòa điện`:`${t.name} phô tài cho Hoàng thượng xem rồi tiễn ngài về`}visGo(t);return""});
 agReg("emp","tea",(E,N,need)=>{if(need&&need!=="tea")return[];if(S.dead||!(N.tea>0))return[];const b=AG.cB!=null?AG.cB:agDayB();if(!BAL.ag.emp3.teaB.includes(j95c(b)))return[];const VT=BAL.visit.tea,g=BAL.ag.emp3.teaGap;
  const C=consorts().filter(p=>(p===S?!S.out&&!S.confined&&!S.mg:p.alive!==false&&!p.out&&!p.confined)&&(p.sung||0)>=VT.minSung&&!(p.teaW!=null&&wk()-p.teaW<g));if(!C.length)return[];
  const t=mindPickBy(C,x=>(x.sung||0)*empMemF(x),E);if(!t)return[];return[{k:"emp:tea",t,u:N.tea,tag:"social",act:"ghé uống chén trà",at:()=>palaceOf(t)}]});
