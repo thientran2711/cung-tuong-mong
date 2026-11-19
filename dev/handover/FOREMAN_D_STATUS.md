@@ -399,3 +399,4 @@ LESSONS: (1) grep the WHOLE STATUS on each wake — FROM MAIN lines land mid-fil
   - by style: sens 0 → 5 %, mix 5 → 10 %, bold 5 → 15 %
   - Home-road (nhà) rares: per door, so «vi hành» stays about 4–5 % of home lives (not 1 in 5).
   - **QUESTION FOR HER (not decided by us):** «Hạ mức Lợi thế cần cho kết hiếm tuyến truyện xuống 1?» → arc eligibility 8.8 % → 14 %. The roll is re-set by the same rule, so each road's chance stays the same; only the wait gets shorter.
+- (19/11 14:12Z, D #7) rare-reach REVIEW PASS → **LAND READY review/rare-reach 29b25146** FOR MAIN (table + owner QUESTION above); worker + reviewer archived; CLAIMS row → LAND READY. LAND READY waiting for MAIN now: rare-reach 29b25146. In flight: choice-value final-merge, receiver-choice RV4, balance-final BIG review, npc-purpose (C-AG seats). SEATS 6/12.
