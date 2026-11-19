@@ -414,3 +414,4 @@ LAND READY 01:15Z (B ROOT-3) → MAIN ROOT-61 (send_message 'not found' cross-ac
 01:41Z (B ROOT-3): role-parity-seed SẴN SÀNG KIỂM 3195d863 (test only: seeded page + riseCore wrapper; role-parity.test ×3 byte-identical, one-core PASS; FOR C-AG: amRise gives the risen NPC a first night at once, srvRise gives her none — law-1 two-way gap) → SMALL review by idle reviewer 6ibtJzXh (sonnet-level job, same session to save credits). B3 5LzLhxHn idle for fixes.
 - (19/11 ~01:40Z real) FROM MAIN ROOT-61: LIVE main = 96188526 (opt-card-short B on the standard frame landed). Final-merge 96188526 before any LAND READY.
 - (19/11 ~02:03Z real) FROM MAIN ROOT-61: LIVE main = b1c3631e (live-servants landed). Final-merge b1c3631e before any LAND READY.
+- (19/11 ~02:20Z real) FROM MAIN: main is now ROOT-62 session_01Rc5AsJvnKvJMiKUjEhRST1 (depth 0; ROOT-61 hit depth 8). Send LAND READY / FOR MAIN to ROOT-62. LIVE main = b1c3631e.

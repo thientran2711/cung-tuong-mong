@@ -196,3 +196,4 @@ kc/ngheo NEW c13+c16 (4 gens) | handover | session_01PEhRbvGFP6YSgT5DTgo3yu (K4,
 | role-parity-seed (riseCore test seed fix; opus B3) | review/role-parity-seed | B | session_01N1tNP5LzLhxHn4SfWgKpNQ | RUNNING | 19/11 01:17Z |
 | ge-writers-w2 remerge #5 main 96188526 (sonnet E11w2m3) | review/ge-writers-w2 | E ROOT #7 → #8 | session_01DgYSWq43v8g897s6AtupYe | RUNNING | 19/11 01:50Z |
 | FOREMAN E ROOT #8 (opus; child of E ROOT #7, depth 7) | handover FOREMAN_E_STATUS | E ROOT #7 | session_01DgYSWoyrPRWJPqSp4gfECg | RUNNING | 19/11 01:50Z |
+| MAIN ROOT-62 (opus; owner-opened ROOT, depth 0; successor of ROOT-61) | handover HANDOVER_SESSION9 | owner | session_01Rc5AsJvnKvJMiKUjEhRST1 | RUNNING | 19/11 02:20Z |

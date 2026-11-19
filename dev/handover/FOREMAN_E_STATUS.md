@@ -371,3 +371,4 @@ FOR MAIN (game bug found by E12, not E's slice): person-menu «Tranh sủng» / 
   ★ THE 18 LAWS line in every brief/takeover prompt.
 - (19/11 01:52Z) PICKUP — E ROOT #8 session_01DgYSWoyrPRWJPqSp4gfECg (opus), depth 7 of 8, START_CTX ~4 % (rollover at ~29 %, ceiling 60 %). Wake trig_015FXe8mn9xB4bh6oQfTRPf4 (minute 47) set; #7's trig_01YGCeWLn6X59QaJbBMxeu9B DISABLED. New foreman id sent to E11c, E14, E14b, E11w2m3 (all delivered). CLAIMS row present. My child ROOT #9 is the LAST the system allows → ROOT #9 sends TAKE OVER NOW to standby session_01DgYSWnviLVKiXURQJSTGYz when it cannot open a child.
 - (19/11 ~02:03Z real) FROM MAIN ROOT-61: LIVE main = b1c3631e (live-servants landed). Final-merge b1c3631e before any LAND READY.
+- (19/11 ~02:20Z real) FROM MAIN: main is now ROOT-62 session_01Rc5AsJvnKvJMiKUjEhRST1 (depth 0; ROOT-61 hit depth 8). Send LAND READY / FOR MAIN to ROOT-62. LIVE main = b1c3631e.

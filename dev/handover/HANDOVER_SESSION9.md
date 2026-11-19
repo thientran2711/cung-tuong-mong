@@ -994,3 +994,7 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - Foreman depths 19/11 ~00:45Z: B ROOT-3 d3, C ROOT-36 d6, C-AG #18 d5 (session_01Rc5AsLo1KXQFDUGVweKun8, opens workers for main on request), D #4 d4, E ROOT #7 d6 (maybe a child at d7).
 - FOR MAIN: ROOT-61 hit depth 8 → the OWNER opens MAIN ROOT-62 from claude.ai with the paste block in dev/handover/TAKEOVER_MAIN_ROOT62.md.
 - (19/11 ~02:08Z real) errand-scene badge-lines successor = session_01Rc5AsL23c5v2Nwya3bgsRc (opus, C-AG child) — it reports to ROOT-61; ROOT-62 must tell it 'main is now ROOT-62'.
+
+## MAIN = ROOT-62 session_01Rc5AsJvnKvJMiKUjEhRST1; START_CTX ~6 % of 1M; depth 0 (limit 8)
+- (19/11 ~02:20Z real) LOAD: main running 2 (odds-meter-back worker JJ8qdidm + errand badge-lines successor L23c5v2N / rv MQH6saAB) | B running 3 (role-parity-seed SSK, maid-ladder-6, law-3 cost-only, art-wiring-1119 waits C) | C art batches (Thái hậu / a65) | D 3 (choice-value fix4, parallel-time #5, receiver-choice rv #3) | E 4 (bd-roads, ge-writers-w2 remerge) | moved: none.
+- Hourly wake minute 32 set (see next line). FROM MAIN lines written in FOREMAN_B/C/D/E_STATUS; send_message to C-AG #18, JJ8qdidm, MQH6saAB, L23c5v2N, ROOT-61.
