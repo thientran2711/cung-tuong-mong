@@ -114,6 +114,10 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  const HELP4=()=>{const s0=window.__sum;window.__sum=s=>Object.assign(s0(s),{pets:(s.pets||[]).map(P=>P.t+':'+Math.round(P.full||0)+'/'+Math.round(P.clean||0)+'/'+Math.round(P.joy||0)+'/'+Math.round(P.aff||0)+'/'+(P.maidW||0)).join(','),petOn:s.petOn==null?null:s.petOn,
    shelf:Object.entries((s.shelf&&s.shelf.g)||{}).filter(([g,e])=>e&&e.pc!=null).map(([g,e])=>g+':'+e.pc).sort().join(','),rcpK:JSON.stringify(s.rcpK||{}),rcpL:JSON.stringify(s.rcpL||{}),ml:s.maid?s.maid.loyal:null,vir:JSON.stringify(s.vir||{})})};
  await H.p.evaluate(HELP4);await G.p.evaluate(HELP4);
+ /* F2 r2 (quiet off for her taps): a task card «Xong việc: …» (jtq14 doneCard) her F4 act earns (pet shop note "buy") reaches HER phone, once, never the host's (as F3 'W') */
+ const DONEW=()=>{window.__done4=[];const seen=()=>{const m=document.getElementById('modal');if(!m||m.hidden)return;const t=(m.textContent||'').match(/Xong việc: ([^\n]{2,60}?)(Chương|$)/);if(t&&window.__done4[window.__done4.length-1]!==t[1].trim())window.__done4.push(t[1].trim())};
+  new MutationObserver(seen).observe(document.body,{subtree:true,childList:true,attributes:true,attributeFilter:['hidden']})};
+ await H.p.evaluate(DONEW);await G.p.evaluate(DONEW);const xl0=await G.p.evaluate(()=>(S.logs||[]).filter(x=>/Xong việc «/.test(String(x))).length);
  const herDo=async src=>{await stage(src)};
  /* ---- P: pets ---- */
  const PK=await pick(`return Object.keys(PET).filter(k=>PET[k].pr&&PET[k].tr===0).slice(0,3)`);
@@ -148,6 +152,8 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  {const k='cong',kind=await pick(`return TDS_KIND.cong`);const rid=await pick(`return (WKR[TDS_KIND.cong]||[])[0]?WKR[TDS_KIND.cong][0].id:null`);
   await stage(`S.vir=S.vir||{};S.vir.cong=5;S.suc=80;S.mg=null`);
   await act('T1 Tứ đức Tự học at bậc 5 (tdsRun prac): the work made, in ONE place (her bag, both phones)',`tdsRun('cong','prac',{kind:${JSON.stringify(kind)},mat:0,r:${JSON.stringify(rid)},subj:''})`,{chk:x=>x.g1.inv.length===x.g0.inv.length+1&&x.h1.inv.length===x.g0.inv.length+1})}
+ {const xl=await G.p.evaluate(()=>(S.logs||[]).filter(x=>/Xong việc «/.test(String(x))).length)-xl0;const gs=await G.p.evaluate(()=>window.__done4),hs=await H.p.evaluate(()=>window.__done4);
+  if(ON)ok(xl<=0||(gs.length===xl&&hs.length===0),'C1 task cards: every «Xong việc» line her F4 acts earned shows its card on HER phone once, none on the host',{lines:xl,guest:gs,host:hs})}
  /* double tap */
  if(ON){await reset();const r=await G.p.evaluate(()=>{const F=COOPW.thin.F,b0=F.stat.busy,s0=F.stat.sent;petcMaid(0);petcMaid(0);return {busy:F.stat.busy-b0,sent:F.stat.sent-s0,id:F.pend&&F.pend.id}});
   await until(G,id=>!COOPW.thin.F.pend,r.id,20000);ok(r.sent===1&&r.busy===1,'D1 double tap: one intent, the second tap ignored',r)}
