@@ -22,3 +22,5 @@ Looked at every frame (sheets) + edge check by script:
 - buon: calm, small motion (sad = slow); raincloud stays small above the crown.
 Remaining after unit 1: 34 seals (21 feelings − gian vui buon so = 17; 17 act faces). Next unit proposal: an binh dau ghen (needs
 their hands/face rows from prompts.md + women-set disc colours), then lo muu + the 11 new feelings, then the act faces.
+- 23:10Z ROOT-57 relayed owner Lượt 777 (credits): no gens beyond what she OKs; NO redo gens without asking. Unit 1 sent to her → SEAL1 WAITS,
+  does nothing until ROOT-57 forwards her answer. (The so-OUT redo above was made before this rule.)
