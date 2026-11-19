@@ -56,3 +56,5 @@ Only faces of groups SẮC SẢO / TINH NGHỊCH may be produced (dev/art/face-c
 - NOTE for the owner (LAW #0, nothing changed): a51/a65 colour text is back to "DEEPER, DARKER ... deep burgundy / deeper dusty coral red" (the 18/11 Thái hậu wording). That contradicts B18 (Lượt 583: ma ma tone soft and held back, never darker) which the b4 build had. Which one should win for ma ma?
 
 - 20:48Z ROOT-54 RULING: J2 wins for a51/a65 (owner Lượt 620/622 "everyone, every group, every rank, maids too"; B18 covers only a18–a36). Keep the DEEPER/DARKER Thái hậu colour text for ma ma a51/a65 (never vivid, never grey/black/mud). r54 prompts (8742bd7) accepted. HOLD until GO after BW6 same-rank fix.
+
+## 20:56Z OWNER STOP (via ROOT-54): no Sắc sảo face pictures. m05 (Sắc sảo) ma ma CANCELLED. MMX4 job now empty (m13 dropped 20:20Z, m05 cancelled). No gens made since the Lượt 573 sample. IDLE.

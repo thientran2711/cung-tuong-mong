@@ -441,6 +441,8 @@ def thaihau(person,age):
     sw(TH_OLD["eyes"],"",why="B8: KC face words name her own eyes -> generic eye clause removed (same as every KC prompt)")
     sw(" Pose:"," "+" ".join(add)+" Pose:",why="ADDED (Lượt 618) the Hoàng hậu t8 law block, copied from her HH prompt")
     sw(TH_OLD["tailpos"]," nothing covering the face."+swatch+g["D9_FOREHEAD"]+" Everyone beautiful at every age.",why="ADDED royal-yellow swatch sentence (18/11 TH_SWATCH, image 2) + D9 forehead")
+    sw("the royal golden yellow (honey-gold like #EFBD69)","the deep antique-gold royal yellow #CE9C48",why="B22 (owner Lượt 670): Thái hậu yellow = deep antique-gold royal yellow #CE9C48 (measured on the v624 m05 a36 robe), not #EFBD69")
+    assert "#EFBD69" not in F,"B22: #EFBD69 left in a Thái hậu prompt"
     globals()["TH_DIFF"]=D
     return None,F,add
 TH_EXEMPT={"a18":"S03","a26":"S03","a36":"S03","a51":"S33","a65":"S33"}
