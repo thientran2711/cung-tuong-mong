@@ -872,7 +872,9 @@ COLD_FAB=" The linen robe hangs straight and calm, the sleeves and sash fall nat
 # TY0 fixes (ROOT-39 order 19/11, 2K sample faults 3-6): face sentence = FIGURE_GATE D.1 "Face = the person's OWN face ... never m09's face" + l.518 "face and hair only — do NOT copy its outfit or sleeves";
 # colour negatives = the approved yellow wording "not pale cream, beige or khaki" / "not beige/tan/ochre" (b10 prompts); a65 one step deeper than a51 (AGE_TXT a65 "clearly older than her 51-year-old self" + "DEEPER, DARKER").
 TYC_FACE=" Her face is HER OWN face from her first reference image (face and hair only — do NOT copy its outfit or sleeves), never a face from the style reference image."
-TYC_HUE=", still clearly {col} at a glance, never khaki, sand, beige or tan"
+TYC_HUE=", still clearly {col} at a glance, never khaki, sand, beige or tan"   # {col} = the hue WITHOUT "pale" (fix1 round 2: "pale" pulled a65 back to pastel)
+_A51EX=AGE_TXT["a51"][AGE_TXT["a51"].index("(e.g. pink"):AGE_TXT["a51"].index("; the royal yellow")]+")"   # verbatim a51 example list: a65 at least this deep
+def _tyhue(col): return "pearl ivory (never yellowed)" if col=="ivory" else col.replace("pale ","",1)   # ty1: pearl ivory = approved palette word (b10 v2 lists)
 def build_ty_cold(c,state):
     n=int(c[1:]); right=(n%2==1); pal,face=DATA[c]
     who="A palace maid" if c[0]=="m" else "An imperial consort"
@@ -884,8 +886,8 @@ def build_ty_cold(c,state):
         N=int(state[2:]); col=TY_COLOUR[N]
         item,hk=age_item(c,"t%d"%N,"an embroidered handkerchief","one")
         s+=f" Outfit (her trung y, the plain inner robe worn alone, no outer garment): a plain {col} silk trung y inner robe (simple crossed collar, tied sash, long skirt, no embroidery, no outer layer), {col}, matte soft silk with gentle folds, no gloss."+TY_HAIR
-        if AGE=="a51": s+=f" COLOUR RULE: the whole trung y is a deeper, more muted shade of the same {col}, same hue family (rich and dignified, never bright, never pastel, never black or brown)"+TYC_HUE.format(col=col)+"; no other colour anywhere; this replaces the colour examples above."
-        elif AGE=="a65": s+=f" COLOUR RULE: the whole trung y is an even deeper, more muted shade of the same {col} than at 51 (DEEPER than her 51-year-old trung y, never lighter or paler), same hue family (rich and dignified, never bright, never pastel, never black or brown)"+TYC_HUE.format(col=col)+"; no other colour anywhere; this replaces the colour examples above."
+        if AGE=="a51": s+=f" COLOUR RULE: the whole trung y is a deeper, more muted shade of the same {col}, same hue family (rich and dignified, never bright, never pastel, never black or brown)"+TYC_HUE.format(col=_tyhue(col))+"; no other colour anywhere; this replaces the colour examples above."
+        elif AGE=="a65": s+=f" COLOUR RULE: the whole trung y is an even deeper, more muted shade of the same {col} than at 51 (DEEPER than her 51-year-old trung y, never lighter or paler, at least as deep as at 51 {_A51EX}), same hue family (rich and dignified, never bright, never pastel, never black or brown)"+TYC_HUE.format(col=_tyhue(col))+"; no other colour anywhere; this replaces the colour examples above."
         else: s+=f" COLOUR RULE: the whole trung y, collar and sash are one plain {col}, as soft and pale as the rank-colour portrait frame; no other colour anywhere."
         s+=" Any flower or pattern on the fabric would be real silk embroidery, never printed or pasted-on."
     return s+_pose(item,hk,right)+CLOSE+END
