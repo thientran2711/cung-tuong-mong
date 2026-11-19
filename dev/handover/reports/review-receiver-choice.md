@@ -137,3 +137,31 @@ ac3ef2652 = 6be968a2 + reviewer fixes + final merge of LIVE main **89aa1bd9** (m
 - Shots Fold 755x1000@2 + iPad 1180x820@2 (help / notice / ally / call / judge / invite / illally / lend), looked at 3×: the notice chip «! Lời nhờ» in the HUD, the kit VIỆC dialog with the new kit option cards, Fold long rows, iPad 2 columns, no cut text, «có rủi ro» on qua loa, TỐN / ĐƯỢC rows. Shots are kept in scratch outside git and were not uploaded.
 - Not counted (wording note): the Kết giao GỢI Ý says "người ấy mất thiện cảm (nhiều)" for the foe and "người ấy" for the asker too, so it is unclear who means whom. Optional polish.
 Context at verdict ≈ 20 %.
+
+## RE-CHECK #3 — addendum: merge with parallel-time + HANDOVER (reviewer #3 rolled over at its context line, ≈ 28 %)
+- d5821e869 = ac3ef2652 + review/parallel-time-rv 801b86b7 (LIVE edb2e724). Conflicts resolved:
+  - assemble.py: parallel-time list + jrcv.js.
+  - jbal2: both blocks (BAL.rcv + BAL.ptime / errand).
+  - j6: a.xw + houseCung.
+  - j29: parallel-time body (let oc / «half» / ordHalf) + DIRTY_SENT.
+  - j21: the parallel-time inviteBtn (k khắc, runner, wait text) with the receiver-choice words (rcvWord, 4 answers).
+  - **j83 illMaid**: stf2Ord now returns «half»; it used to be read as a refusal (refund). Now she goes at odds − BAL.road.hp.half. Probe: the bạc is spent, successes 115 vs 153 of 200.
+- Harness: the scan and the card checks run on the instant path (BAL.ptime.on = 0; parallel time only delays the same deed / card). New test check (8b) with parallel time ON:
+  - her card waits ONLY in S.ordQ (no rcv notice, no dialog), and opening it gives 4 answers;
+  - unanswered past the deadline (ptOrdTick) = «Từ chối» with its cost (Danh + prop.danh, likings −3; checked in the page too).
+- Gates on d5821e869: receiver-choice ×5 ALL PASS · ptime.test + ptime2.test ALL OK · scan 0 gaps, 267 / 267 · quickcheck --runs 6 PASS + core gates · coop-e2e 68 / 68 · shots without page errors.
+  - role-parity FAILED there, but the same FAIL list was on edb2e724 alone and on 801b86b7 alone (not ours). MAIN says role-parity is ALL PASS on 1a4df595.
+- **0247fadf9** (pushed, review/receiver-choice-rv) = d5821e869 + final merge of **LIVE 1a4df595** (parallel-time 801b86b7 is LIVE). Only the generated index.html conflicted (rebuilt by assemble.py + build_site.sh). **Its gates are NOT run yet.**
+
+### HANDOVER → successor (the coordinator opens it; report to Foreman D #7 session_01964izGYFZgrWY14rTQMsUt)
+1. Read START_CORE / START_WORKER / START_REVIEWER, then this whole report (all rounds) and dev/handover/briefs/D5-receiver-choice-recheck3.md.
+2. Make a worktree of review/receiver-choice-rv @0247fadf9 (sparse; install hooks). If origin/main has moved past 1a4df595, merge it first; usually only generated files conflict: `git checkout --theirs index.html sw.js assets.json`, then assemble.py + build_site.sh.
+3. Gates: `python3 dev/build/assemble.py`, then:
+   - receiver-choice.test ×5
+   - ptime.test + ptime2.test
+   - role-parity.test (MAIN: ALL PASS on 1a4df595; report only rows that stay red AND are not red on main alone)
+   - `node dev/tools/receiver-choice-scan.js dev/index.html` (gaps 0)
+   - `bash dev/tools/quickcheck.sh --runs 6`
+   - `node dev/test/coop-e2e.js <scratch>`
+   - `node dev/test/receiver-choice-shots.js <scratch>`: Fold + iPad; look at them 3× (the cards open from the notice; the notice shot is fold/ipad-rcv-notice).
+4. All green → STATUS line "LAND READY review/receiver-choice-rv <sha>" + send_message to D #7 + add a short «LAND READY» line here. Red → numbered list.
