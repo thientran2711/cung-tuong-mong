@@ -569,3 +569,7 @@ RULES FROM IT (ROOT-40 reading): (A) ANGLE LAW, overrides 3d2 FRONTAL ONLY for N
 ### OWNER LƯỢT 232 (19/11 ~03:55Z, VERBATIM) — no invented face
 "Ủa mày nói mày vẽ một gương mặt vuông mới là sao? Tao nói mày lấy M09 vẽ lại để lấy cái áo, lấy cái kiểu áo, kiểu vải, kiểu thêu của hai cái hình mà tao đang có, hai cái hình mẫu. Mày lại đi vẽ hình mới là làm sao?"
 → Do NOT generate a new face portrait. First: REDRAW the M09 picture with the outfit cut + fabric + embroidery of her two approved squares (pink c01 / green c12 = 6AbGv6EiJO), same M09 face — the Lượt 229 test.
+
+### OWNER LƯỢT 234 (19/11 ~04:00Z, Foreman C chat, VERBATIM) — STOP = MASS ONLY; SAMPLES CONTINUE (narrows 229b)
+"Tức là vẫn chưa có vẽ được tầng, và Phi thì mày phải tiến hành làm tiếp đi chứ. Tao chỉ dùm những cái việc mà vẽ hàng loạt thôi, còn những cái việc nào đang vẽ ảnh duyệt là vẫn phải làm chứ."
+→ 229b HARD STOP applies to MASS drawing only. Approval SAMPLES (Tần/Phi, ma ma, BĐ, Nữ đế, triều phục, trung y/lãnh cung test, M09 test, new person) CONTINUE, one gen at a time, each looked at by the painter and ROOT-40 before the next.
