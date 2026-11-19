@@ -710,8 +710,14 @@ const KIT_RT=[[/hoàng quý phi/,()=>RCOL[6]],[/phế phi|lãnh cung/,()=>RCOL_C
  [/ma ma|nhũ mẫu|vú/,()=>KIT_ROLE.mama],[/tổng quản/,()=>ERCOL[3]],[/thủ lĩnh/,()=>ERCOL[2]],[/tiểu thái giám/,()=>ERCOL[0]],[/thái giám|nội giám/,()=>ERCOL[1]],
  [/thái y|ngự y/,()=>KIT_ROLE.ty],[/hoàng tử|thái tử|vương/,()=>KIT_ROLE.prince],[/công chúa/,()=>KIT_ROLE.princess],[/người lạ/,()=>KIT_ROLE.stranger],
  [/tể tướng|tướng quân|thượng thư|học sĩ|quan|thị lang|đại nhân/,()=>KIT_ROLE.official],[/thị vệ|vệ|lính|tướng/,()=>KIT_ROLE.guard]];
-function kitRankTone(t,col){const s=String(t==null?"":t).replace(/<[^>]*>/g,"").replace(/\s+/g," ").trim().toLowerCase();
- for(const [re,c] of KIT_RT)if(re.test(s))return kitToneOf(c());return /^#[0-9a-f]{6}$/i.test(col||"")?kitToneOf(col):KIT_ROLE.slate}
+/* B24 ONE accessor for rank text colour by GROUND (review rank-palette-b24): kitRankTone(title,col,ground) — ground "paper" (default, cream paper) = the DERIVED, paper-darkened tone (kitToneOf);
+   ground "stage" (painting / dark panel) = the RCOL base itself. Called without ground it returns the paper tone for --rt AND, for the 8 harem ranks, a trailing ";--rb:<RCOL base>" so every
+   existing builder (style="--rt:${kitRankTone(..)}") also carries the raw base; the CSS below picks --rt on paper and --rb on paintings / night panels. No per-place colour. */
+const kitRankBaseOf=c=>RCOL.some(x=>x.toLowerCase()===String(c).toLowerCase());
+function kitRankTone(t,col,ground){const s=String(t==null?"":t).replace(/<[^>]*>/g,"").replace(/\s+/g," ").trim().toLowerCase();
+ const fin=c=>ground==="stage"?c:ground==="paper"?kitToneOf(c):kitToneOf(c)+(kitRankBaseOf(c)?";--rb:"+c:"");
+ for(const [re,c] of KIT_RT)if(re.test(s))return fin(c());
+ return /^#[0-9a-f]{6}$/i.test(col||"")?fin(col):KIT_ROLE.slate}
 /* KIT 48.1g PORTRAIT GROUND .rk-c0..c7 (the round avatar / portrait ground by rank): generated from RCOL (was typed in p1.html + j59, two stale copies) */
 (function(){const m=(c,p)=>`color-mix(in srgb,${c} ${p}%,#fff)`;let css="";
  RCOL.forEach((c,i)=>{const bg=i===3||i===4?`repeating-linear-gradient(45deg,${m(c,22)} 0 6px,${m(c,38)} 6px 12px)`:i>=5?`radial-gradient(circle at 30% 20%,${m(c,28)},${m(c,66)})`:`linear-gradient(160deg,${m(c,20)},${m(c,52)})`;
@@ -743,6 +749,9 @@ ${N}{color:var(--krt-ink)!important;font-weight:700;text-shadow:none!important}
 ${PT}{color:color-mix(in srgb,var(--rt,var(--rc,var(--tc,#7a5a30))) 72%,#000)!important;/* place-stage r4 (owner OD:L532/L702/L866): the stage tag's RANK line keeps its RANK hue (a deeper, saturated shade of the rank tone for contrast) and gets the SAME light-paper halo as the NAME line (no coloured glow: it was faded on a light floor) */
  text-shadow:0 0 1px #fff8ee,0 0 3px #ffe9a8,0 0 7px #f3cf6a,0 0 11px #e8bd4a99!important}
 ${HT}{text-shadow:0 0 1px #fff8ee,0 0 3px #ffe9a8,0 0 7px #f3cf6a,0 0 11px #e8bd4a99!important}
+/* B24: on a painting the harem RANK line is the RCOL base itself (soft, light) with a dark ink edge, not the paper-darkened tone */
+${PT.split(",").map(x=>x+'[style*="--rb:"]').join(",")}{color:var(--rb)!important;text-shadow:0 0 1px #1c100a,0 0 2px #1c100a,0 1px 2px #000c,0 0 6px #0008!important}
+${HT.split(",").map(x=>x+'[style*="--rb:"]').join(",")}{text-shadow:0 0 1px #1c100a,0 0 2px #1c100a,0 1px 2px #000c,0 0 8px #000a!important}
 ${PN}{text-shadow:0 0 1px #fff8ee,0 0 3px #ffe9a8,0 0 7px #f3cf6a,0 0 11px #e8bd4a99!important}
 html body .kpsn .kname .kti{display:block;font-size:.84rem!important}
 /* stage side cards (.ksh .k3c, review/pick-hint-r1): a person's title + name (kitRankNamePaint / kitName) stack as rank line over name,
@@ -765,6 +774,7 @@ html body .modal.night .kname .kti{color:color-mix(in oklch,var(--rt,#7a5a30) 64
 /* dark panels (.modal.night): name in parchment, title in its lightened tone (plain, no glow) */
 html body .modal.night .kpsn .kname,html body .modal.night .knr>.knr-n,html body .modal.night .krn,html body .modal.night .kbk-pname .kname{color:#f3e6cf!important}
 html body .modal.night .krt,html body .modal.night .knr>.knr-r,html body .modal.night .kpsn .kname .kti,html body .modal.night .kbk-pname .kname .kti{color:color-mix(in oklch,var(--rt,#7a5a30) 64%,#fff)!important}
+html body .modal.night .krt[style*="--rb:"],html body .modal.night .knr>.knr-r[style*="--rb:"],html body .modal.night .kpsn .kname .kti[style*="--rb:"],html body .modal.night .kbk-pname .kname .kti[style*="--rb:"],html body .modal.night .kname .kti[style*="--rb:"]{color:var(--rb)!important}
 /* 48.1b her own name: black; on a painting + a soft light-gold glow, in framed UI plain black bold */
 html body .kmy,html body .modal.night .kmy{color:#1a0f08!important;font-weight:700!important;text-shadow:none!important}
 html body .stage .tok .tag .j59n.kmy,html body .stage #j59metag .tag .j59n.kmy,html body #mb .kesov>.kpsn .kname.kmy,html body .krs .krn.kmy,html body .krs .knr>.knr-n.kmy{color:#1a0f08!important;

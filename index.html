@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"c8af1135+","t":"2026-11-19T14:36Z","c":"npc-purpose G1 #14: build line","b":"4ec5106e67c0","h":[{"s":"69bd0766+","t":"2026-11-19T14:33Z","c":"seal-lean-3 r8 (ROOT-69, K-HEAD-SAY x EMO-SEAL LEAN): the big seal never covers a say bubble: no lean starts under an open bubble, a bubble…"},{"s":"d5821e86","t":"2026-11-19T12:13Z","c":"receiver-choice rv4: scan + card checks on the instant path (BAL.ptime.on=0); new check: with parallel time on her card waits only in S.ord…"},{"s":"9aad0c66+","t":"2026-11-19T12:03Z","c":"role-parity-drift-2: build line"},{"s":"43548e0e+","t":"2026-11-19T11:46Z","c":"coop-thin-f4 K2 (review parallel-time #4): accept the parallel-time road of rcpAskGo maid"},{"s":"a5e2d8e7+","t":"2026-11-19T09:30Z","c":"opt-scroll-reset r2: an option card picture load (fixed .kaart box) no longer re-picks the frame (first wheel lost); merged origin/main 620…"},{"s":"3b3f7631+","t":"2026-11-19T10:24Z","c":"ev-pic-followups r2: scan SHOT/DSF/TAG env for review shots"},{"s":"5d9cdd5d+","t":"2026-11-19T10:03Z","c":"rebuild"},{"s":"f01df861","t":"2026-11-19T09:09Z","c":"review coop-thin-f3 r1: merge F2 LAND READY 7627f79c; generated files rebuilt"},{"s":"4ed2831d+","t":"2026-11-19T07:18Z","c":"law3-cost-only: index.html / sw.js regenerated"},{"s":"0da546e9","t":"2026-11-19T07:16Z","c":"role-parity-drift r1: build line"}]};
+window.CTM_BI={"s":"6702ccc2+","t":"2026-11-19T22:21Z","c":"B24: one rank colour system — RCOL (j1) t1..t8 = cream/green/blue/hong phan/purple/orange/red/gold; rank text tone keeps soft saturation; K…","b":"7ce372132cf4","h":[{"s":"c8af1135+","t":"2026-11-19T14:36Z","c":"npc-purpose G1 #14: build line"},{"s":"69bd0766+","t":"2026-11-19T14:33Z","c":"seal-lean-3 r8 (ROOT-69, K-HEAD-SAY x EMO-SEAL LEAN): the big seal never covers a say bubble: no lean starts under an open bubble, a bubble…"},{"s":"d5821e86","t":"2026-11-19T12:13Z","c":"receiver-choice rv4: scan + card checks on the instant path (BAL.ptime.on=0); new check: with parallel time on her card waits only in S.ord…"},{"s":"9aad0c66+","t":"2026-11-19T12:03Z","c":"role-parity-drift-2: build line"},{"s":"43548e0e+","t":"2026-11-19T11:46Z","c":"coop-thin-f4 K2 (review parallel-time #4): accept the parallel-time road of rcpAskGo maid"},{"s":"a5e2d8e7+","t":"2026-11-19T09:30Z","c":"opt-scroll-reset r2: an option card picture load (fixed .kaart box) no longer re-picks the frame (first wheel lost); merged origin/main 620…"},{"s":"3b3f7631+","t":"2026-11-19T10:24Z","c":"ev-pic-followups r2: scan SHOT/DSF/TAG env for review shots"},{"s":"5d9cdd5d+","t":"2026-11-19T10:03Z","c":"rebuild"},{"s":"f01df861","t":"2026-11-19T09:09Z","c":"review coop-thin-f3 r1: merge F2 LAND READY 7627f79c; generated files rebuilt"},{"s":"4ed2831d+","t":"2026-11-19T07:18Z","c":"law3-cost-only: index.html / sw.js regenerated"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -976,7 +976,7 @@ const RANKS=[
 const PAL_HEAD=3;
 /* KIT 1.3 · THE ONE RANK PALETTE (owner 11/16 13:00Z "nhạt nhòa quá → tươi hơn"; jewel tones): every rank colour in the game is read from here (ring, halo, chips, card colour, portrait ground
    .rk-cN, text tone via kitToneOf in jk4). Vivid bases, same colour family per rank; text on paper is DERIVED (kitToneOf), never typed again. Nobody keeps a copy. */
-const RCOL=["#c4861a","#12b84a","#1f6cff","#ff3d8f","#a23cff","#ff1f3d","#ff6a00","#ffc400"];/* Đáp ứng champagne-bronze, Thường tại green, Quý nhân blue, Tần pink, Phi purple, Quý phi red, Hoàng quý phi orange, Hoàng hậu gold */
+const RCOL=["#eae3d0","#7fb394","#7e9ccb","#e3a3b8","#a88bcb","#e3a25b","#d46a64","#efbd69"];/* B24 ONE rank colour system (owner Lượt 726/728): t1 Đáp ứng cream-ivory, t2 Thường tại green, t3 Quý nhân blue, t4 Tần hồng phấn, t5 Phi purple, t6 Quý phi orange, t7 Hoàng quý phi red, t8 Hoàng hậu gold */
 const RCOL_COLD="#8fa3b8";/* Lãnh cung / Phế phi: cool steel grey */
 window.MRCOL=["#3aa38f","#00bf94","#2f6fff","#ff4a1c","#9b4dff"];/* maids: thô sử grey-jade, cung nữ jade, đại cung nữ blue, chưởng sự cô cô terracotta, nữ quan violet */
 window.ERCOL=["#6fb03a","#12b35a","#1f8fe0","#d9601a"];/* eunuchs: tiểu thái giám sage, thái giám green, thủ lĩnh steel blue, tổng quản bronze */
@@ -40236,7 +40236,7 @@ function kitToneOf(base,paper){const key=base+"|"+(paper||"");if(KIT_TONE_CACHE[
  if(typeof KIT_IMP==="string"&&base.toLowerCase()===KIT_IMP)return KIT_TONE_CACHE[key]=KIT_IMP;/* imperial yellow stays bright (owner 16:10Z) */
  let[r,g,b]=rgb(base).map(x=>x/255);const M=Math.max(r,g,b),m=Math.min(r,g,b);let l=(M+m)/2,s=0,H=0;
  if(M!==m){const d=M-m;s=l>.5?d/(2-M-m):d/(M+m);H=M===r?(g-b)/d+(g<b?6:0):M===g?(b-r)/d+2:(r-g)/d+4;H*=60}
- if(s>=.4)s=Math.max(s,.9);/* vivid families stay vivid; steel-grey stays grey */
+ if(s>=.4&&!(typeof RCOL!=="undefined"&&RCOL.some(c=>c.toLowerCase()===base.toLowerCase())))s=Math.max(s,.9);/* vivid families stay vivid; steel-grey stays grey; B24 rank colours keep their own soft saturation (same colour per rank, lightness-only darkening) */
  const hx=(H,s,l)=>{const f=n=>{const k=(n+H/30)%12,a=s*Math.min(l,1-l);return Math.round((l-a*Math.max(-1,Math.min(k-3,9-k,1)))*255).toString(16).padStart(2,"0")};return"#"+f(0)+f(8)+f(4)};
  let x=hx(H,s,l);while(cr(x)<3.6&&l>.04){l-=.005;x=hx(H,s,l)}return KIT_TONE_CACHE[key]=x}
 window.kitToneOf=kitToneOf;
@@ -40247,8 +40247,14 @@ const KIT_RT=[[/hoàng quý phi/,()=>RCOL[6]],[/phế phi|lãnh cung/,()=>RCOL_C
  [/ma ma|nhũ mẫu|vú/,()=>KIT_ROLE.mama],[/tổng quản/,()=>ERCOL[3]],[/thủ lĩnh/,()=>ERCOL[2]],[/tiểu thái giám/,()=>ERCOL[0]],[/thái giám|nội giám/,()=>ERCOL[1]],
  [/thái y|ngự y/,()=>KIT_ROLE.ty],[/hoàng tử|thái tử|vương/,()=>KIT_ROLE.prince],[/công chúa/,()=>KIT_ROLE.princess],[/người lạ/,()=>KIT_ROLE.stranger],
  [/tể tướng|tướng quân|thượng thư|học sĩ|quan|thị lang|đại nhân/,()=>KIT_ROLE.official],[/thị vệ|vệ|lính|tướng/,()=>KIT_ROLE.guard]];
-function kitRankTone(t,col){const s=String(t==null?"":t).replace(/<[^>]*>/g,"").replace(/\s+/g," ").trim().toLowerCase();
- for(const [re,c] of KIT_RT)if(re.test(s))return kitToneOf(c());return /^#[0-9a-f]{6}$/i.test(col||"")?kitToneOf(col):KIT_ROLE.slate}
+/* B24 ONE accessor for rank text colour by GROUND (review rank-palette-b24): kitRankTone(title,col,ground) — ground "paper" (default, cream paper) = the DERIVED, paper-darkened tone (kitToneOf);
+   ground "stage" (painting / dark panel) = the RCOL base itself. Called without ground it returns the paper tone for --rt AND, for the 8 harem ranks, a trailing ";--rb:<RCOL base>" so every
+   existing builder (style="--rt:${kitRankTone(..)}") also carries the raw base; the CSS below picks --rt on paper and --rb on paintings / night panels. No per-place colour. */
+const kitRankBaseOf=c=>RCOL.some(x=>x.toLowerCase()===String(c).toLowerCase());
+function kitRankTone(t,col,ground){const s=String(t==null?"":t).replace(/<[^>]*>/g,"").replace(/\s+/g," ").trim().toLowerCase();
+ const fin=c=>ground==="stage"?c:ground==="paper"?kitToneOf(c):kitToneOf(c)+(kitRankBaseOf(c)?";--rb:"+c:"");
+ for(const [re,c] of KIT_RT)if(re.test(s))return fin(c());
+ return /^#[0-9a-f]{6}$/i.test(col||"")?fin(col):KIT_ROLE.slate}
 /* KIT 48.1g PORTRAIT GROUND .rk-c0..c7 (the round avatar / portrait ground by rank): generated from RCOL (was typed in p1.html + j59, two stale copies) */
 (function(){const m=(c,p)=>`color-mix(in srgb,${c} ${p}%,#fff)`;let css="";
  RCOL.forEach((c,i)=>{const bg=i===3||i===4?`repeating-linear-gradient(45deg,${m(c,22)} 0 6px,${m(c,38)} 6px 12px)`:i>=5?`radial-gradient(circle at 30% 20%,${m(c,28)},${m(c,66)})`:`linear-gradient(160deg,${m(c,20)},${m(c,52)})`;
@@ -40280,6 +40286,9 @@ ${N}{color:var(--krt-ink)!important;font-weight:700;text-shadow:none!important}
 ${PT}{color:color-mix(in srgb,var(--rt,var(--rc,var(--tc,#7a5a30))) 72%,#000)!important;/* place-stage r4 (owner OD:L532/L702/L866): the stage tag's RANK line keeps its RANK hue (a deeper, saturated shade of the rank tone for contrast) and gets the SAME light-paper halo as the NAME line (no coloured glow: it was faded on a light floor) */
  text-shadow:0 0 1px #fff8ee,0 0 3px #ffe9a8,0 0 7px #f3cf6a,0 0 11px #e8bd4a99!important}
 ${HT}{text-shadow:0 0 1px #fff8ee,0 0 3px #ffe9a8,0 0 7px #f3cf6a,0 0 11px #e8bd4a99!important}
+/* B24: on a painting the harem RANK line is the RCOL base itself (soft, light) with a dark ink edge, not the paper-darkened tone */
+${PT.split(",").map(x=>x+'[style*="--rb:"]').join(",")}{color:var(--rb)!important;text-shadow:0 0 1px #1c100a,0 0 2px #1c100a,0 1px 2px #000c,0 0 6px #0008!important}
+${HT.split(",").map(x=>x+'[style*="--rb:"]').join(",")}{text-shadow:0 0 1px #1c100a,0 0 2px #1c100a,0 1px 2px #000c,0 0 8px #000a!important}
 ${PN}{text-shadow:0 0 1px #fff8ee,0 0 3px #ffe9a8,0 0 7px #f3cf6a,0 0 11px #e8bd4a99!important}
 html body .kpsn .kname .kti{display:block;font-size:.84rem!important}
 /* stage side cards (.ksh .k3c, review/pick-hint-r1): a person's title + name (kitRankNamePaint / kitName) stack as rank line over name,
@@ -40302,6 +40311,7 @@ html body .modal.night .kname .kti{color:color-mix(in oklch,var(--rt,#7a5a30) 64
 /* dark panels (.modal.night): name in parchment, title in its lightened tone (plain, no glow) */
 html body .modal.night .kpsn .kname,html body .modal.night .knr>.knr-n,html body .modal.night .krn,html body .modal.night .kbk-pname .kname{color:#f3e6cf!important}
 html body .modal.night .krt,html body .modal.night .knr>.knr-r,html body .modal.night .kpsn .kname .kti,html body .modal.night .kbk-pname .kname .kti{color:color-mix(in oklch,var(--rt,#7a5a30) 64%,#fff)!important}
+html body .modal.night .krt[style*="--rb:"],html body .modal.night .knr>.knr-r[style*="--rb:"],html body .modal.night .kpsn .kname .kti[style*="--rb:"],html body .modal.night .kbk-pname .kname .kti[style*="--rb:"],html body .modal.night .kname .kti[style*="--rb:"]{color:var(--rb)!important}
 /* 48.1b her own name: black; on a painting + a soft light-gold glow, in framed UI plain black bold */
 html body .kmy,html body .modal.night .kmy{color:#1a0f08!important;font-weight:700!important;text-shadow:none!important}
 html body .stage .tok .tag .j59n.kmy,html body .stage #j59metag .tag .j59n.kmy,html body #mb .kesov>.kpsn .kname.kmy,html body .krs .krn.kmy,html body .krs .knr>.knr-n.kmy{color:#1a0f08!important;
@@ -47235,7 +47245,7 @@ if(typeof j76sucWhy==="function"){j76sucWhy=function(c){if(!S||S.dead||c<=1||win
    up to the current one on load. Tư trang has a "Dấu ấn" tab; tapping a marker → "Dùng" switches to it (any owned one, older ones too). ===== */
 window.KIT_MEMARK=window.KIT_MEMARK||{h:.085,gap:.012,min:26,max:72,tiny:12,big:1.05,bob:11,edge:4,/* bob = the bounce height of kmmBob (px up from rest, +3 % squash); edge = air kept under the frame's top edge (owner 18/11 ~03:5xZ: the marker's whole bounce range stays INSIDE the stage frame) */sc:[.78,.84,.9,.95,1,1.06,1.14,1.22]};
 /* glow gold = the Hoàng hậu title pill's token (jtitle kdh tier 8 = RCOL[7]); owner 18/11 ~06:05Z "rực giống Phượng minh thiên hạ" */
-const KMM_GOLD=(typeof RCOL!=="undefined"&&RCOL[7])||"#ffc400";
+const KMM_GOLD=(typeof RCOL!=="undefined"&&RCOL[7])||"#efbd69";
 const KMM_NAMES=["Mai ngà","Lan bạc ngọc bích","Hoa bạc ngọc lam","Búp sen ngọc","Cúc tím chim loan","Mẫu đơn hồng ngọc","Phượng vàng mây ngọc","Cánh phượng hổ phách"];
 /* ---------- owned markers (save data) ---------- */
 /* owner 18/11 ~21:50Z: the marker's light = HER CURRENT RANK colour (RCOL, vivid), as a RIM glow on an UNDER-layer (.kmglw: the picture's own silhouette, blurred, behind the picture) - light never paints over the picture */
@@ -80982,7 +80992,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="4ec5106e67c0";window.CTM_BUILD=BUILD;
+const BUILD="7ce372132cf4";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
