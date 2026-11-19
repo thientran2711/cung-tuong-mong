@@ -12,12 +12,14 @@ def frames_gray(src):
     raw = subprocess.run(["ffmpeg", "-loglevel", "error", "-i", src, "-vf", "fps=15,scale=96:96,format=gray", "-f", "rawvideo", "-"],
                          capture_output=True, check=True).stdout
     return np.frombuffer(raw, np.uint8).reshape(-1, 96, 96).astype(np.float32)
-def span(part, src, T=4.0):
+def span(part, src, T=5.0):
     f = frames_gray(src); n = len(f); dur = n / 15.0
-    if part == "loop": return 0.0, None
-    d0 = np.abs(f - f[0]).mean(axis=(1, 2))
-    moving = np.nonzero(d0 > T)[0]
-    s = max(0, (moving[0] if len(moving) else 0) - 2) / 15.0
+    # frame 0 is the exact keyframe picture and the video jumps away from it on frame 1: never start on frame 0,
+    # and measure motion against frame 2
+    if part == "loop": return 1 / 15.0, None
+    d0 = np.abs(f - f[2]).mean(axis=(1, 2))
+    moving = np.nonzero(d0[2:] > T)[0] + 2
+    s = max(1, (moving[0] if len(moving) else 1) - 2) / 15.0
     if part == "back": return s, None
     dl = np.abs(f - f[-1]).mean(axis=(1, 2))
     still = np.nonzero(dl > T)[0]

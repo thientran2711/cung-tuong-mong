@@ -10,13 +10,14 @@
 #             (last frame = keyframe A = the still).
 #     start_s/end_s override the auto trim (seconds in the source clip; end_s optional).
 #   Prints the trim used, frame count and size. Needs ffmpeg + python3 with numpy.
-#   Filter = exactly the brief: chromakey=0x00FF00:0.28:0.08, despill=type=green, 288x288 lanczos, 15 fps,
+#   Filter = the brief's chromakey=0x00FF00:0.28:0.08, 288x288 lanczos, 15 fps; despill (G <= max(R,B)) ONLY within 3 px of
+#   the cut-out edge (NOT full-frame despill=type=green, which shifts yellow/green/teal discs), alpha < 8 -> 0,
 #   animated webp, loop 0, -q:v 50 -compression_level 6, alpha kept (yuva420p).
 #   Batch example (Seedance clips saved as mp4/<k>-out.mp4, <k>-loop.mp4, <k>-back.mp4; female set = no prefix):
 #     for k in vui binh; do for p in out loop back; do o=$k-$p.webp; [ $p = loop ] && o=$k.webp; cut.sh $p mp4/$k-$p.mp4 webp/$o; done; done
 set -euo pipefail
 part=${1:?part out|loop|back}; in=${2:?in.mp4}; out=${3:?out.webp}; ss=${4:-}; to=${5:-}
-FILT="chromakey=0x00FF00:0.28:0.08,despill=type=green,scale=288:288:flags=lanczos,fps=15"
+KEY="chromakey=0x00FF00:0.28:0.08,scale=288:288:flags=lanczos,fps=15,format=rgba"
 
 auto_start() { # prints start seconds
   ffmpeg -loglevel error -i "$in" -vf "fps=15,scale=96:96" -f rawvideo -pix_fmt rgb24 - | python3 -I -c '
@@ -41,9 +42,27 @@ if [ -z "$ss" ]; then
 fi
 args=(-ss "$ss"); [ -n "$to" ] && args+=(-to "$to")
 mkdir -p "$(dirname "$out")"
-ffmpeg -loglevel error -y "${args[@]}" -i "$in" -vf "$FILT" -an -c:v libwebp_anim -pix_fmt yuva420p \
-  -loop 0 -q:v 50 -compression_level 6 "$out" 2>/dev/null || \
-ffmpeg -loglevel error -y "${args[@]}" -i "$in" -vf "$FILT" -an -c:v libwebp -pix_fmt yuva420p \
+# key + scale + fps in ffmpeg, then despill ONLY on the cut-out edge (within 3 px of the keyed area) in numpy:
+# a full-frame despill=type=green turns yellow/green/teal discs (vui, binh, ghen, muu) orange/grey (Foreman fix 19/11).
+ffmpeg -loglevel error "${args[@]}" -i "$in" -vf "$KEY" -f rawvideo - | python3 -I -c '
+import sys, numpy as np
+S = 288
+fr = np.frombuffer(sys.stdin.buffer.read(), np.uint8).reshape(-1, S, S, 4).copy()
+def dilate(m, r):
+    o = m.copy()
+    for dy in range(-r, r + 1):
+        for dx in range(-r, r + 1):
+            o |= np.roll(np.roll(m, dy, 0), dx, 1)
+    return o
+for f in fr:
+    a = f[..., 3]
+    edge = dilate(a < 250, 3)
+    r, g, b = (f[..., i].astype(np.int16) for i in range(3))
+    lim = np.maximum(r, b)
+    f[..., 1] = np.where(edge & (g > lim), lim, g).astype(np.uint8)
+    f[..., 3] = np.where(a < 8, 0, a)
+sys.stdout.buffer.write(fr.tobytes())
+' | ffmpeg -loglevel error -y -f rawvideo -pix_fmt rgba -s 288x288 -r 15 -i - -c:v libwebp_anim -pix_fmt yuva420p \
   -loop 0 -q:v 50 -compression_level 6 "$out"
 python3 -I -c '
 import sys
