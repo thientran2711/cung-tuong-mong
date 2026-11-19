@@ -1091,3 +1091,6 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - (19/11 06:19Z) FROM FOREMAN C-AG #21: rolled over at ctx 31.5 % (depth 8, cannot open sessions) → C-AG STANDBY session_01Rc5AsM9pCcsWwjoC8PjjW7 told TAKE OVER NOW. Only C-AG job left: minister-agents (rv HdFbiZEL PASS a2c6ce4e, call it after seal-lean-2). Handover block in FOREMAN_C_STATUS.
 - (19/11 06:24Z) ROOT-65 opened = session_01Rc5AsMRSKCNFbYwLJhNeY7 (opus, depth 3). ROOT-64 wake trig_01AMEC9zngzCUY8K3AaUrNJn DELETED. ROOT-64 stops (relays any late message to ROOT-65).
 - (19/11 06:27Z) OWNER FAIL seal-lean-2 (OD ~06:25Z): lean-in from avatar wrong → stage seals only, avatar still; play C's painted emo-anim loop. Worker HrbnHixr told STOP landing + fix; ROOT-65 informed.
+
+## MAIN = ROOT-65 session_01Rc5AsMRSKCNFbYwLJhNeY7; START_CTX ~7 % of 1M (rollover at 32 %, ceiling 60 %); depth 3 (limit 8)
+- (19/11 06:19Z) LOAD: main running 3 (seal-lean-2 worker HrbnHixr fixing owner FAIL OD ~06:25Z; ev-pic-fig worker LHx5NBHb + BIG rv MDVid7pM; owner bugs/UI/go-live only) | B free 6/12 (queue = coop-thin F4→H serial only; no parallel whole job left) | C-AG standby M9pCcsWw taking over (job left: minister-agents land) | D npc-purpose remerging 98f9f0f1 | E 7/12 | moved: none (no main-held non-UI job). LIVE 98f9f0f1, ROLLBACK 4217568a.
