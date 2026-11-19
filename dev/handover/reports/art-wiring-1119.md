@@ -49,3 +49,30 @@ Laws: 4 — every number from BAL (ageBand, figVar); tier 9 / dress 8 are slot c
 
 ## SẴN SÀNG KIỂM 69a26198cb04771a1b7266b17f5a7de8ceee8bcf
 Final merge of origin/main 89aa1bd9 (only index.html conflicted: rebuilt). On 69a26198: quickcheck PASS (core gates PASS; old save ok; render 235/210 ms new/live), fig-wiring picker 15,064 cells 0 blank 0 bad. coop-e2e 68/68 ran on b037bd44 (same code; the merge brought only role-parity tooling).
+
+## REVIEW r1 (independent opus reviewer, session_01N1tNP6nQ6XCj5Xu1dFX9af, 19/11 ~03:40Z) — FAIL (2 items, both small)
+PRIORITY #1 CHECK ('thaihau a65 v1v2 figVar FIGURES-x'): OD 3 (19/11 ~00:45Z/~00:49Z/~00:50Z, L1937–1938) | main 0 (no th / a65 / v slot on 1cf5e8bb) | review/* only review/art-wiring-1119 | claims: worker session_01N1tNP59FAL2oqUhk7AUxRa. Reviewer START_CTX ~6 % (own estimate).
+Merge branch: review/art-wiring-1119-r1 @ 1853c22e = 69a26198 + origin/main 1cf5e8bb (only index.html / sw.js conflicted, rebuilt by build_site.sh).
+
+### Gates (run by the reviewer on 1853c22e)
+| gate | result |
+|---|---|
+| fig-wiring.js (own run) | PASS — 15,064 cells, 0 blank, 0 bad; bands [26,36,51,65], labels 18-25…65+; old save "thaihau:h2" → consort:c32, h2 freed |
+| quickcheck (core gates incl. one-core-guard, time-spill, old save from LIVE loads + plays a buổi, perf) | PASS — render 211/227 ms new/live, 0 page errors |
+| coop-e2e | PASS 68/68 (incl. the new "same Thái hậu picture" check at start / each week / rejoin) |
+| coop-e2e COOP_SWAP=1 | PASS 68/68 |
+| old save with S.thO.fid "thaihau:h1" saved + reloaded (own probe) | PASS — no crash, redraws consort:c29 (own th robe a51), h1 freed |
+| BAL.ageBand scan (every reader) | PASS — band4/BAND4N (j35), pidBand (j66), kcBand + KC_AB (jkc), jstaff figRec, j28 ageBandOf (uses B[0],B[1] only), tagBand numeric path → all follow BAL; no typed 26/36/51 left. Nits (not FAIL): ageBandName lo=18 typed (min age); jtut:63 tutorial ma ma fixed "a51" portrait (fixed picture, not age-driven); jstaff giveFace still requires an a51 maid file to choose an elder face (selection, not band). |
+| ONE selector (law 4/9) | PASS — jfigx only wraps figIndex / figTier / figTierOf / f88Wear / figRoles / figPick / f88Best; th + v rows kept out of FIGIX (FIGXT); no second private picture list |
+| figVOf determinism / two seats | PASS — wdHash(fid + Emperor name) % BAL.figVar; fid = pid for her (j66), LOOK carries fid/pid to the friend's record, so both seats compute the same colour |
+| LOOK Fold 755x1000@2 + iPad 1180x820@2, both together, looked 3× (fig-wiring-shots.js, 5 looks: th51, th65, her65, herV1, herTH) | PASS — own th robe a51 → a65 on the same face; her Hoàng hậu at 70 = t8 a65; colour v1 at 26; her after road a = own th robe; no cut text, no overflow, kit frames unchanged. Shots kept in reviewer scratch only (not in git, not on CDN). |
+| FOR C missing-art list | PASS — present (a65 t1–t6+cold ×32, t7/t8 a65 ×11, maid/ma ma a65, th robe for 60 maid/ma ma faces) |
+
+### FAIL items (worker fixes on review/art-wiring-1119-r1 or remerges it)
+1. **Thái hậu face drawn before FIGURES-x.json has loaded (race → the approved Thái hậu robes are skipped for that whole life).** figThPick runs on the first render after start(); FIGURES.json is in, FIGURES-x.json (figxLoad, separate fetch) often is not yet, so `good` (faces with a th robe) is empty and she draws from all 92 faces. Own probe, 8 fresh games: **3/8 drew a maid face** (maid:m25 / m07 / m40 → fig-maid-mNN-t8-a51 = a maid face in the Hoàng hậu t8 dress) while 20–30 consort faces with a painted th robe were free; the face is for life, so she never shows the approved robe. Fix: do not draw the Thái hậu face until FIGXT is loaded (figxLoad done, also when the CDN answers 404/empty), and re-check on the first FIGXT load (a face drawn before the load and not yet painted-preferred may be redrawn once, before any reload has shown it — or simply never draw early). Add the race to fig-wiring.js (fresh start() → read S.thO.fid after FIGXT loads; must be a th-painted face while one is free; run ≥ 8 fresh games).
+2. **Old save mid-reign: the t7/t8 dress colour changes on the first reload under this build.** figVOf = hash(face + Emperor) has no memory, so in an old save every t7/t8 woman (her included) whose hash ≠ 0 switches from the v0 dress she already wore to v1/v2 mid-reign (≈ 2/3 of them) — brief check (3) asks that a picture already seen mid-reign does not change on reload. Fix (small): pin v0 for the reign running when the save is first loaded under this build (e.g. a stamp S.figVR = S.emp.name set once for old saves; figVOf returns 0 while S.emp.name === S.figVR); new games and the next reign use the hash. Prove with an old-save probe (save from origin/main with a t8 queen + her at t8 → load on the branch → same file names).
+
+Not FAIL (notes for the worker while fixing #1): on the co-op GUEST, before the host's Thái hậu face arrives, figFor({kind:'th'}) returns "" (stage keeps its default token) — transient (coop-e2e sees the same picture within its 20 s wait); if the #1 fix changes the "not drawn yet" state, keep it non-blank (law 6c).
+
+Laws touched: 1 (her + NPC same rule) PASS · 4 (BAL.ageBand / BAL.figVar, all readers follow) PASS · 6c (never blank) PASS in the 15,064-cell gate, see #1 note · 9 (no UI change, kit figure frame) PASS · 12 (Fold + iPad together, 3×) PASS · 13 PASS · 18 (no colour picker built; FOR MAIN KIT REQUEST noted) PASS.
+VERDICT: **FAIL r1** (items 1–2). Re-review = SMALL (code in jfigx.js + fig-wiring.js only), rerun fig-wiring + quickcheck + coop-e2e.
