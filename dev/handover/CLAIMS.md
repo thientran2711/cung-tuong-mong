@@ -224,6 +224,6 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | coop-thin F3 (opus; bag/shop/wear/gifts; stacked on F2) | review/coop-thin-f3 | B | session_01N1tNP4NVrwK67H3DPhD9Ld | RUNNING | 19/11 04:18Z |
 | REVIEW coop-thin-f2 r1 (opus BIG) of 4dabbd46 | review/coop-thin-f2-r1 | B | session_01N1tNP6D9LFcHNTVw1PfbmV | RUNNING | 19/11 04:23Z |
 | ev-pic-fig event scene picture + figure scale (opus; owner bug OD 04:15Z) | review/ev-pic-fig | MAIN ROOT-63 | session_01Rc5AsLHx5NBHb8tkZaoLUU | RUNNING | 19/11 04:26Z |
-| hall-names SMALL REVIEW (sonnet) | review/hall-names c294e1d | C-AG #20 for ROOT-63 | session_01Rc5AsJrdYiTbKYwJ53EVEQ | RUNNING | 19/11 04:31Z |
+| hall-names SMALL REVIEW (sonnet) | review/hall-names c294e1d | C-AG #20 for ROOT-63 | session_01Rc5AsJrdYiTbKYwJ53EVEQ | PASS aed411f | 19/11 04:31Z |
 | monthly-allotment BIG REVIEW (opus) | review/monthly-allotment 9aceea6 | C-AG #20 for ROOT-63 | session_01Rc5AsLJxqXyKq4keVP4fuk | RUNNING | 19/11 04:32Z |
 | minister-agents BIG REVIEW (opus) | review/minister-agents 822f17c4 | C-AG #20 for ROOT-63 | session_01Rc5AsHdFbiZELj46cV3rq8 | RUNNING | 19/11 04:46Z |
