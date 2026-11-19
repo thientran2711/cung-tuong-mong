@@ -121,9 +121,9 @@ ONE_LAYER="ONE SINGLE SLEEVE LAYER: each sleeve begins at the shoulder and falls
 HEADBODY="HEAD AND BODY: her head turns together with her shoulders and body in the same direction with natural anatomy, never a frontal head on a turned body."
 FABRIC_B="FABRIC: thick gold-embroidered brocade with a graceful, flowing drape."
 NOFLOWER="NO flowers in the hair or on the crown at this rank (flowers only at ranks 1 to 6)."
-def angle_sentence(person,rank):
-    """Lượt 440: one of the 14 standing angles (7 + 7 mirrored, build.py ANG14), rotated per person: ANG[(t-1+(n-1))%14]; the head turns WITH the body; frontal or three-quarter only."""
-    return "ANGLE: "+LAST_G["ANG14"][plan("a18")[(ALIAS.get(person,person),rank)][0]]+"; her head turns together with her shoulders and body, never back-turned, never in profile."
+def angle_sentence(person,rank,age="a18"):
+    """Lượt 440: one of the 14 standing angles (7 + 7 mirrored, build.py ANG14); E12 (BW6): the plan of THIS age (was always the a18 plan); the head turns WITH the body; frontal or three-quarter only."""
+    return "ANGLE: "+LAST_G["ANG14"][plan(age)[(ALIAS.get(person,person),rank)][0]]+"; her head turns together with her shoulders and body, never back-turned, never in profile."
 def laws(t,age="a18"):
     L=[HAIR_LOW if t<=3 and age in ("a18","a26") else HAIR_HIGH,sleeve(t),ONE_LAYER]   # F11 (owner Lượt 583): a36/a51/a65 = hair UP for everyone (t1-t3 too); loose only a18/a26
     L.append(SZ[t] if t<=6 else NOFLOWER)
@@ -248,8 +248,8 @@ GRACE=["her head tilted very slightly to one side, a soft graceful line from her
  "her fingers softly and gracefully curved around the item, wrists relaxed",
  "her elbows held softly away from her body, her arms forming soft rounded lines",
  "her head tilted very slightly against the turn of her body, a lively graceful counter-line"]
-def grace_sentence(person,rank):
-    return "GRACE (pose variety, every rank its own): "+GRACE[plan("a18")[(ALIAS.get(person,person),rank)][2]]+"."
+def grace_sentence(person,rank,age="a18"):
+    return "GRACE (pose variety, every rank its own): "+GRACE[plan(age)[(ALIAS.get(person,person),rank)][2]]+"."   # E12 (BW6): this age's plan
 _POSE_MEMO={}
 def _pose_tpl(g,tr,j,adapt=True):
     """spec5 entry verbatim; adapt=True -> SPEC5_ADAPT whenever the entry is listed there (also the lantern+item entry, which carries {prop}: one held item only, FIGURE_GATE D3)."""
@@ -337,7 +337,42 @@ def plan(age="a18"):
             pz=best(ok,cp); up.append(pz); cp[t][pz]+=1
             gr=best([k for k in range(8) if k not in ug],cg); ug.add(gr); cg[t][gr]+=1
             P[(c,t)]=(a,pz,gr)
+    # E12 (owner Lượt 650/656, ROOT-54 ruling (b), BW6): inside each LOOK GROUP the angle and grace of THIS age are replaced by the group plan
+    # (different angle sentence per person at one rank, <=2 per visual class, different grace line; E1 no repeat inside one person). Poses: untouched.
+    for name,mem in g["look_groups"]().items():
+        mem=[c for c in mem if c in PEOPLE]; A=group_angles(name,mem,age,[ang_class(x) for x in g["ANG14"]]); Gr=group_grace(name,mem,age)
+        for c in mem:
+            for t in range(1,9):
+                a,pz,gr=P[(c,t)]; P[(c,t)]=(A[(c,t)],pz,Gr.get((c,t),gr))
     _PLAN[age]=P; return P
+def ang_class(s):
+    """visual class of an ANG14 sentence: frontal / slight left|right / 3/4 left|right (E12: at most 2 per class inside a group at one rank)."""
+    side=re.search(r"\b(RIGHT|LEFT)\b",s); side=side.group(1).lower() if side else ""
+    if "THREE-QUARTER" in s: return "3/4 "+side
+    if "FRONTAL" in s and "SLIGHT" not in s: return "frontal"
+    return "slight "+side
+def group_angles(name,mem,age,cls,cap=2):
+    """E12: people x ranks grid of ANG14 indices; each rank: all different, <= cap per visual class; each person: 8 different (E1). Deterministic seeded backtracking."""
+    cells=[(c,t) for t in range(1,9) for c in mem]; A={}
+    def ok(c,t,v):
+        if any(A.get((c,u))==v for u in range(1,9)): return False
+        col=[A[(d,t)] for d in mem if (d,t) in A]
+        return v not in col and sum(cls[x]==cls[v] for x in col)<cap
+    def go(i):
+        if i==len(cells): return True
+        c,t=cells[i]; vals=list(range(len(cls))); _random.Random(f"E12-angle-{name}-{age}-{c}-{t}").shuffle(vals)
+        for v in vals:
+            if ok(c,t,v):
+                A[(c,t)]=v
+                if go(i+1): return True
+                del A[(c,t)]
+        return False
+    assert go(0),("E12 angle plan impossible",name,age)
+    return A
+def group_grace(name,mem,age,K=8):
+    """E12: Latin square over the first 8 members (sorted) x 8 ranks: every rank 8 different lines, every person 8 different lines; a 9th member keeps her plan line."""
+    R=_random.Random(f"E12-grace-{name}-{age}"); rp=list(range(K)); cp=list(range(K)); sp=list(range(K)); R.shuffle(rp); R.shuffle(cp); R.shuffle(sp)
+    return {(c,t):sp[(rp[i]+cp[t-1])%K] for i,c in enumerate(mem[:K]) for t in range(1,9)}
 def apply_dedupe(person,rank,age,S):
     pick,prop,sp,body=dedupe_pick(person,rank,age)
     store(person,rank,age)   # LAST_G back to this rank
@@ -392,7 +427,7 @@ def build(person,rank,age="a18"):
     S=_clean_pose(S)
     S=apply_dedupe(person,rank,age,S); store(person,rank,age); S=_sec_slot(person,rank,S)   # Lượt 469 pose dedupe (slot); re-run store so LAST_G is this rank's
     anchor=" Pose:"; assert S.count(anchor)==1,("pose anchor",person,rank)
-    add=(laws(rank,age) if isinstance(rank,int) else laws(rank))+[angle_sentence(person,rank),grace_sentence(person,rank)]+extras(S0,person,rank)+(princess_sentences(PR[person],rank) if person in PR else [])
+    add=(laws(rank,age) if isinstance(rank,int) else laws(rank))+[angle_sentence(person,rank,age),grace_sentence(person,rank,age)]+extras(S0,person,rank)+(princess_sentences(PR[person],rank) if person in PR else [])
     return S0,S.replace(anchor," "+" ".join(add)+anchor,1),add
 
 # ---------------- THÁI HẬU (owner Lượt 618 + 624, ROOT-53 order: BASE = the 18/11 Thái hậu prompt the owner liked, VERBATIM) ----------------
@@ -423,7 +458,7 @@ def thaihau(person,age):
     import json as _j
     face=_j.load(open(os.path.join(ART,"KC_REFS.json"),encoding="utf-8"))["people"][person]["face_words"].strip()
     main=g["DATA"][person][0].split(" and ")[0]
-    item,hk=g["TH_ITEMS"][g["TH_AGE"][age][(n-1)%5]]
+    item,hk=g["TH_ITEMS"][g["th_index"](person,age)]   # E12 (BW6): different inside a look group (store th_index); others (n-1)%5 as before
     hands=g["low_hand"](hk,n%2==1)
     for ph in (", body and face frontal, standing squarely facing the viewer, no turn",", body and face frontal, facing the viewer squarely, no turn"): hands=hands.replace(ph,"")
     tail=re.search(r" The item is in a contrasting colour, not the robe colour, and the hand really grips it;[^.]*\.",Fhh).group(0)
@@ -499,6 +534,21 @@ def _E6_GATE(age):
     try: exec(_PART1,g)
     finally: sys.argv=old
     return g["e6_check"]([p for p in PEOPLE if re.fullmatch(r"[cm]\d\d",p)],(age,))
+def _E12_GATE(age):
+    """E12 (owner Lượt 650/656): inside one look group at one rank + age: held item, angle sentence and grace line all different (cap = ceil(members/options):
+    items/grace 8 options, angles 14), at most 2 per visual angle class; Thái hậu item different too. Same sources build() uses (store picks + plan)."""
+    import math,collections
+    store("c06",1,age); g=LAST_G; P=plan(age); bad=[]
+    for name,mem in g["look_groups"]().items():
+        mem=[c for c in mem if c in PEOPLE]; ci=math.ceil(len(mem)/8); ca=math.ceil(len(mem)/14)
+        for t in range(1,9):
+            for f,vals,cap in (("item",[g["_e6_picks"](c,age)["t%d"%t][0] for c in mem],ci),("angle",[P[(c,t)][0] for c in mem],ca),
+                               ("angle class",[ang_class(g["ANG14"][P[(c,t)][0]]) for c in mem],2),("grace",[P[(c,t)][2] for c in mem],ci)):
+                m=max(collections.Counter(vals).values())
+                if m>cap: bad.append((name,"t%d"%t,f,m))
+        m=max(collections.Counter(g["th_index"](c,age) for c in mem).values())
+        if m>ci: bad.append((name,"thaihau","item",m))
+    return bad
 def check_all(age="a18"):
     bad=0; held=0
     for t in range(1,9):
@@ -514,6 +564,8 @@ def check_all(age="a18"):
         if not ok: bad+=1; print("FAIL",p,"nude",age,"|",msg[:200])
     e6=_E6_GATE(age)
     if e6: bad+=len(e6); print("FAIL E6 item kind repeated (person, age, kind, ranks):",e6[:20])
+    e12=_E12_GATE(age)
+    if e12: bad+=len(e12); print("FAIL E12 same rank, same look group (group, rank, field, count):",e12[:20])
     n=len(PEOPLE)*8+32; print(f"checked {n-held} prompts ({len(PEOPLE)} people x 8 ranks + 32 Nữ đế, age {age}; {held} HELD = not drawn, B8): {bad} FAIL"); return 1 if bad else 0
 if __name__=="__main__":
     a=sys.argv[1:]; age=a[a.index("--age")+1] if "--age" in a else "a18"

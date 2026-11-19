@@ -73,3 +73,58 @@ A "cell" = one (rank, age); 40 cells. "Distinct" = number of different values am
 3. **Grace:** only 8 lines → among 52 people every line is used ~6–7 times per rank; within an 8-person group 4–6 distinct, up to 3 share.
 4. **Angle and grace ignore age** (`plan("a18")` is used for both), so a pair that shares angle/grace at a rank shares it at all 5 ages; only the pose plan and item change with age. Combined with (1) this makes item+angle pairs persist across all ages (m05/m35 t1, m11/m41 t2, m18/m48 t2).
 5. **Poses** are the only really spread field (66 poses, 0–3 per template per cell); the pose is what keeps every Sắc sảo/Tinh nghịch full combo (item+angle+pose) unique, while across all 52 there are still 7 cells with an identical item+angle+pose pair and 2 with an identical item+angle+pose+grace pair.
+
+## E12 SAME-RANK FIX — BEFORE / AFTER (BW6, 19/11; owner Lượt 650/656, ROOT-54 ruling (b))
+
+Script: `dev/art/store-all/same_rank_audit.py` (same method as above: `build_all.build(person, rank, age)` in-process, B8 bypassed, fields read from the final prompt; angle class = `build_all.ang_class`). 8 ranks × 5 ages = 40 cells per group.
+BEFORE = commit a8dbfcd (E6 picks already wired, so the item numbers differ a little from the first table above, which was made at de5b1612c). AFTER = the BW6 commit.
+
+What changed:
+- **Items:** every per-rank list (L3F t1–t6, ITEMS7 t7, ITEMS t8) and TH_ITEMS (Thái hậu) extended IN PLACE from 25 to 40 items (3 new per age → 8 per age; the first 25 untouched, same order). Inside one look group, member i (sorted) takes colour class i of a proper 8-edge-colouring of the rank × item-kind graph of that age → 8 different items per rank, and still 8 different kinds per person over t1–t8 (E6, e6_check = []). Thái hậu: member i → TH_AGE[age][i]. People outside the m look groups keep the old pick.
+- **Angle / grace:** per-age plan (was the a18 plan at every age). Inside each look group, per age: angles = seeded backtracking grid (each rank: 8 different sentences, ≤ 2 per visual class; each person: 8 different over her ranks, E1); grace = seeded Latin square (each rank 8 different lines, each person 8 different). Poses untouched.
+- **ANG14:** entries 8 and 12 were word-identical to 5 and 1; rewritten with approved words ("body turned slightly three-quarters to the RIGHT/LEFT" = _TA_NF approved HH words, "the whole face clearly visible and towards the viewer" = MAMA_ANGLE). 14 different sentences now.
+- **Gate:** `build_all --check` runs `_E12_GATE`: FAIL on any repeat of item / angle / grace (cap = ceil(members/options)), > 2 per angle class, or a repeated Thái hậu item inside a group at one rank + age.
+
+### BEFORE
+#### Sắc sảo (8)
+
+| field | distinct per cell (avg / min) | largest same-value group | cells (of 40) with any repeat | cells over the E12 cap (item/angle/grace 1, class 2) | worst cell |
+|---|---|---|---|---|---|
+| held item (exact) | 4.6 / 3 | 4 | 40 | 40 | t4 a65: m05+m11+m35+m41 |
+| angle sentence (exact) | 5.8 / 5 | 3 | 40 | 40 | t1 a18: m05+m11+m35 |
+| angle, visual class (5) | 4.5 / 4 | 3 | 40 | 30 | t1 a18: m05+m11+m23+m29+m35+m47 |
+| grace line | 5.2 / 4 | 3 | 40 | 40 | t3 a18: m17+m35+m41 |
+
+#### Tinh nghịch (8)
+
+| field | distinct per cell (avg / min) | largest same-value group | cells (of 40) with any repeat | cells over the E12 cap (item/angle/grace 1, class 2) | worst cell |
+|---|---|---|---|---|---|
+| held item (exact) | 4.6 / 3 | 4 | 40 | 40 | t5 a51: m12+m18+m42+m48 |
+| angle sentence (exact) | 6.1 / 5 | 3 | 35 | 35 | t7 a18: m18+m24+m36 |
+| angle, visual class (5) | 4.0 / 3 | 5 | 40 | 35 | t3 a18: m12+m18+m24+m30+m36 |
+| grace line | 5.9 / 5 | 3 | 40 | 40 | t4 a18: m06+m12+m48 |
+
+### AFTER
+#### Sắc sảo (8)
+
+| field | distinct per cell (avg / min) | largest same-value group | cells (of 40) with any repeat | cells over the E12 cap (item/angle/grace 1, class 2) | worst cell |
+|---|---|---|---|---|---|
+| held item (exact) | 8.0 / 8 | 1 | 0 | 0 | - |
+| angle sentence (exact) | 8.0 / 8 | 1 | 0 | 0 | - |
+| angle, visual class (5) | 4.8 / 4 | 2 | 40 | 0 | t1 a18: m05+m17+m23+m35+m41+m47 |
+| grace line | 8.0 / 8 | 1 | 0 | 0 | - |
+
+#### Tinh nghịch (8)
+
+| field | distinct per cell (avg / min) | largest same-value group | cells (of 40) with any repeat | cells over the E12 cap (item/angle/grace 1, class 2) | worst cell |
+|---|---|---|---|---|---|
+| held item (exact) | 8.0 / 8 | 1 | 0 | 0 | - |
+| angle sentence (exact) | 8.0 / 8 | 1 | 0 | 0 | - |
+| angle, visual class (5) | 4.8 / 4 | 2 | 40 | 0 | t1 a18: m06+m12+m30+m36+m42+m48 |
+| grace line | 8.0 / 8 | 1 | 0 | 0 | - |
+
+(AFTER "worst cell" for angle class lists the pairs that share a class; 2 per class is the E12 maximum.)
+
+Gates on the BW6 commit: `build_all.py --check --age` a18/a26/a36/a51/a65 → 0 FAIL ×5 (incl. E6 + E12). `check_store.py --self` 0 problems; `item_age.check_age5()` []. Extra: all 16 Sắc sảo + Tinh nghịch people (B8 bypassed) × t1–t8 × 5 ages = 640 prompts through check_store → 0 FAIL; their Thái hậu prompts a36/a51/a65 → 0 FAIL (Thái hậu a18/a26 do not exist in the 18/11 elder file).
+Old look groups with 9 m people (Tươi tắn, Dịu dàng, Trong trẻo, Đoan trang): angles fully different; items and grace allow exactly the pigeonhole repeat (8 options for 9 people) — the gate cap is 2 there.
+E12: NEW gens only. Nothing redrawn, no gens made.
