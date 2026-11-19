@@ -1387,3 +1387,4 @@ ROOT-49 Lượt 505: triều phục r22 (TP3 e89e094, 828 cr) LOOKED + SENT. t1 
 ROOT-49 Lượt 508: ma ma two-colour sample c06 a36 (MMX1c ce0edda, 138 cr; vermilion + jade green; one sentence added, --twocol flag) LOOKED + SENT. Waiting verdict + ruling secondary for a51/a65. MMX1c STOPPED.
 ROOT-48 Lượt 505 (owner): LAW #0 top of FIGURE_GATE — only owner's words change prompts; own remarks = notes + ask; no answer = no change.
 ROOT-49 Lượt 510: LAW #0 = ART_RULES first line (A18, Lượt 505). OWNER: Nữ đế pictures to be shown AS PRODUCED → NDX1 sends a sheet per finished person (dev/handover/review-sheets/nu-de/).
+ROOT-49 Lượt 511: Nữ đế c01–c07 × 5 ages (NDX1 6bdd500, ~5.4k cr) LOOKED + SENT as 7 row sheets. Notes (no change, LAW #0): c03 + c05 crowns read as phoenix (conflict #12); c01/c02/c04/c07 crowns alike; held items repeat across people (fan, incense burner); poses near-frontal; c03 secondary olive.
