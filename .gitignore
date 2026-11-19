@@ -7,3 +7,4 @@
 /dev/handover/refs/*.png
 img/*.json
 dev/site/.cdn-state.json
+__pycache__/

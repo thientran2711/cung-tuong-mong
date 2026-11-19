@@ -14,3 +14,10 @@ gen Cqn5sH3EEy, 135 cr, gpt-2-6 1520x2688, refs [image 1 6AbGv6EiJO, image 2 eIy
 CDN: https://ctm-img.victoria-tntt.workers.dev/img/_review/new-person/m09-fabric-test.png
 My look: face/hair/hairpin/pink colour/book/pose = M09 kept. Embroidery changed toward the squares (gold-outlined peony bands on collar, cuffs, hem; large peony sprays on the skirt). Fabric STILL reads textured/woven like the old M09 (fine weave grain visible), not clearly the smooth thin silk of the squares; outfit cut stays M09's (outer jacket with wide sleeves), not the squares' cut. Body still near-frontal (shoulders barely turned) despite the angle line. Eyes open, lips closed smile, forehead clean, one item, feet in frame.
 Budget: 1 / 14 gens used.
+
+## HANDOVER NP1 (19/11 ~08:12Z, context 37 % of 1M, START_CTX ~15 % → roll-over line 40 %)
+Foremen since: ROOT-40 → 41 → 42 → 43 → 44 → 45 → 46 (session_01PEhRby6KRVns9B5ujP6G2s), every one said HOLD, no gens.
+Done: 1 gen (M09 fabric test Cqn5sH3EEy, 135 cr, CDN img/_review/new-person/m09-fabric-test.png), ledger + report pushed. Budget left: 13 of 14.
+Not started: step 1 n01 builder row (ROOT-40: do NOT start); no owner verdict on the M09 test seen.
+Next (successor, only on foreman order): wait for the owner verdict on m09-fabric-test; if it's a redo, the faults to fix are listed under GEN 1.
+Local note: work branch np1-work tracks origin/claude/cung-tuong-mong-handover-hj0h8w. The old local handover branch had 30 unpushed commits that were not mine; left untouched.
