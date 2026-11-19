@@ -84,7 +84,7 @@ BAL.ge={
  thd_sach_1:{rank:-1,danh:-12},thd_sach_2:{danh:-10,duc:-6},thd_sach_3:{danh:-8,sung:-4},thd_sach_4:{sung:-8,danh:-6},
  thd_tro_1:{danh:-8,sung:-4},thd_tro_2:{danh:-10,sung:-8},thd_tro_3:{sung:-8,danh:-6},thd_tro_4:{danh:-10,sung:-4},
  thd_hoc_1:{danh:-8,sung:-6},thd_hoc_2:{rank:-1,danh:-10},thd_hoc_3:{sung:-6,danh:-6},thd_hoc_4:{sung:-8,danh:-6},
- cnv_chu_1:{danh:-8,mis:-15},cnv_chu_2:{mis:-15},cnv_chu_3:{sung:-6,danh:-6},cnv_chu_4:{danh:-10,duc:-4},
+ cnv_chu_1:{danh:-8,mis:-15},cnv_chu_2:{mis:-15,danh:-6},cnv_chu_3:{sung:-6,danh:-6},cnv_chu_4:{danh:-10,duc:-4},
  cnv_ban_1:{sung:-6,danh:-6},cnv_ban_2:{danh:-10,duc:-6},cnv_ban_3:{danh:-8,tai:-4},cnv_ban_4:{sung:-8,danh:-4},
  cnv_ma_1:{danh:-8,sung:-6},cnv_ma_2:{danh:-10,duc:-6},cnv_ma_3:{sung:-6,danh:-6},cnv_ma_4:{danh:-8,sung:-6}},
  /* rewards: the same SIZE for both shadings (fair: no "right" morality); only the sign of everyone's attitude differs (rel thiện → thiện cảm +, ác → oán +).
