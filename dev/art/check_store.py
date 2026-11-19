@@ -484,6 +484,23 @@ APPROVED = [{'id': 'S01',
   'proof': 'dev/handover/reports/mama-specs/c06-a36.oneref.prompt.txt',
   'picture': 'ma ma m01 a36 (Lượt 395/397 OK) · gen s7I4kzhl8e · cut O6E2U81ynm · https://ctm-img.victoria-tntt.workers.dev/img/_review/morning-1119/sheet_mama_m01.jpg',
   'vn': 'Ma ma: phía trước có HAI tà dài riêng (không phải một tà), viền vàng, lộ giữa váy.',
+  'store': False},
+ {'id': 'S36',
+  'title': 'D15 ELDER STYLE LOCK a51/a65 (ma ma r55 sentence, verbatim, exactly once)',
+  'text': 'STYLE LOCK (same drawing as her 36-year-old picture, the {ordinal} reference): exactly the same soft painterly guofeng illustration rendering, the same smooth luminous painted skin'
+          ', soft stylised features and gentle painted shading as the 36-year-old picture; her age shows ONLY through the silver in her hair and a few soft painted lines, NEVER photographic, '
+          'NEVER photo-realistic, no realistic skin texture, no pores, no detailed wrinkles.',
+  'scope': 'any-but-nude',
+  'confirm': '',
+  'ages': 'a51 a65',
+  'strict_ages': True,
+  'once': 'STYLE LOCK (',
+  'slot_values': {'ordinal': ['second', 'third']},
+  'luot': 'D15 (owner Lượt 692 + 694, via ROOT-55/ROOT-56): copy the ma ma a51/a65 STYLE LOCK to everyone; Nữ đế excluded here (nude-B/mk.py owns it)',
+  'source': 'dev/handover/reports/mama-specs/m05-a51.styleref.r55.prompt.txt -> t8-prompt-B/build.py AGE_TXT a51/a65 (D15_STYLE); store-all/build_all.py thaihau()',
+  'proof': 'dev/handover/reports/mama-specs/m05-a51.styleref.r55.prompt.txt',
+  'picture': 'ma ma m05 a51 gOmpWytSXO / a65 eIPlkhrdqL (owner Lượt 694 OK, MMX4)',
+  'vn': 'Tuổi 51/65: câu KHÓA NÉT VẼ của ma ma (giống hệt nét vẽ ảnh 36 tuổi, không ảnh thật), đúng một lần; ảnh 36 tuổi là ảnh tham chiếu thứ hai (thứ ba khi ảnh 2 là mẫu màu vàng).',
   'store': False}]
 
 BANNED = [{'id': 'X01',
@@ -765,12 +782,17 @@ def check_text(text, scope, S=None, X=None, age=None, skip_store=False):
     if S is None: S, X = load_registry()
     text = norm(text); fails, warns, found = [], [], {}
     for e in S:
-        req = e["scope"] == "any" or scope in parse_scope(e["scope"]); conf = scope in parse_scope(e.get("confirm", ""))   # 'any' = every prompt of every scope (D9)
+        req = e["scope"] == "any" or (e["scope"] == "any-but-nude" and scope != "nude") or scope in parse_scope(e["scope"]); conf = scope in parse_scope(e.get("confirm", ""))   # 'any' = every prompt of every scope (D9)
         if not (req or conf): continue
         if skip_store and e.get("store"): continue   # already enforced by the STORE part (same prompt, store args)
         ages = (e.get("ages") or "all").split()
         if age and "all" not in ages and age not in ages: continue
+        if e.get("strict_ages") and not age: continue   # D15 (S36): age-only sentence -> needs a known age
         m = slot_rx(e["text"]).search(text)
+        if m and e.get("once") and (len(list(slot_rx(e["text"]).finditer(text))) != 1 or text.count(e["once"]) != 1):   # D15 (S36): exactly once
+            (fails if req else warns).append((e["id"], "NOT ONCE", f"{e['title']} ({text.count(e['once'])} times)")); continue
+        bad_v = [f"{k}='{m.group(k)}'" for k, v in (e.get("slot_values") or {}).items() if m and m.group(k) not in v]
+        if bad_v: (fails if req else warns).append((e["id"], "SLOT", f"{e['title']}: " + ", ".join(bad_v))); continue
         if m: found[e["id"]] = m.groupdict(); continue
         ov = best_overlap(e["text"], text)
         item = (e["id"], "REWRITTEN" if ov >= 0.6 else "MISSING", f"{e['title']} (best overlap {ov:.0%})")

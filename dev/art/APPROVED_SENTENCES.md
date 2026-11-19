@@ -388,15 +388,27 @@ Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as 
 
 ### S33 · COLOUR RULE a51/a65 (elder: DEEPER, DARKER, rich and dignified = 18/11 Thái hậu copy; J2 Lượt 624)
 - text: `COLOUR RULE: all colours in the DEEPER, DARKER mature shades described above (rich and dignified, never bright, never pastel, never dusty or washed-out); the colour names and hex values below are her young colours, darken them as described above;`
-- scope: tp1-8 pr1-8 nude
+- scope: tp1-8 pr1-8
 - confirm: -
 - ages: a51 a65
 - store: yes
-- luot: J2 (owner Lượt 620/622/624: copy the 18/11 Thái hậu elder text verbatim, dev/art/elder-copy/THAIHAU_1811_AGE_COLOUR.md); A0 a51/a65 age texts (c04 elder sheet)
+- luot: B23 (owner Lượt 702): NOT for nude (Nữ đế keeps her bright a36 colours, see S35 + X17). J2 (owner Lượt 620/622/624: copy the 18/11 Thái hậu elder text verbatim, dev/art/elder-copy/THAIHAU_1811_AGE_COLOUR.md); A0 a51/a65 age texts (c04 elder sheet)
 - source: dev/art/t8-prompt-B/build.py AGE_TXT
 - proof: dev/art/approved/proof/bw5_elder_m05_t2_a51.txt
 - picture: Lượt 395 store sheets, approved Lượt 397 'vẽ rất là đẹp' · https://ctm-img.victoria-tntt.workers.dev/img/_review/morning-1119/sheet_congchua.jpg
 - vn: Tuổi 51/65: mọi màu là sắc ĐẬM HƠN, TỐI HƠN, sang trọng điềm tĩnh như Thái hậu 18/11 (không rực, không pastel, không bạc màu); tên màu + mã hex là màu trẻ, làm đậm như câu tuổi.
+
+### S35 · Nữ đế a51/a65 COLOUR RULE = the a36 one verbatim (B23: never darkens with age)
+- text: `COLOUR RULE: all colours clear, soft and gentle at a medium-light tone, like fine silk in soft daylight: medium-soft saturation, pretty and clean, the secondary colour a real pretty colour (it may be a little deeper or a soft ivory, never heavy, never black, never grey), never rực, never glaring, never neon, never pastel-washed or faded, never dusty, grey, muddy or black; the royal golden yellow is the DOMINANT colour of the robe, mantle, sleeves and skirt (more than half of everything visible), a deep, quiet wine-crimson like #7E2A33 is the second colour (collar, inner robe, wide borders and a few panels);`
+- scope: nude
+- confirm: -
+- ages: a51 a65
+- store: no
+- luot: B23 (owner Lượt 702)
+- source: dev/art/nude-B/prompts/m05_a36.txt (COLOUR RULE)
+- proof: dev/art/nude-B/prompts/m05_a36.txt
+- picture: 
+- vn: Nữ đế 51/65 tuổi giữ màu sáng như ảnh 36 tuổi: câu COLOUR RULE y hệt bản 36 tuổi.
 
 ### S34 · FOREHEAD: nothing on the forehead (D9)
 - text: `NOTHING on the forehead (no hoa điền, no dot, no mark, nothing).`
@@ -433,6 +445,18 @@ Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as 
 - proof: dev/handover/reports/mama-specs/c06-a36.oneref.prompt.txt
 - picture: ma ma m01 a36 (Lượt 395/397 OK) · gen s7I4kzhl8e · cut O6E2U81ynm · https://ctm-img.victoria-tntt.workers.dev/img/_review/morning-1119/sheet_mama_m01.jpg
 - vn: Ma ma: phía trước có HAI tà dài riêng (không phải một tà), viền vàng, lộ giữa váy.
+
+### S36 · D15 ELDER STYLE LOCK a51/a65 (ma ma r55 sentence, verbatim, exactly once)
+- text: `STYLE LOCK (same drawing as her 36-year-old picture, the {ordinal} reference): exactly the same soft painterly guofeng illustration rendering, the same smooth luminous painted skin, soft stylised features and gentle painted shading as the 36-year-old picture; her age shows ONLY through the silver in her hair and a few soft painted lines, NEVER photographic, NEVER photo-realistic, no realistic skin texture, no pores, no detailed wrinkles.`
+- scope: any-but-nude
+- confirm: -
+- ages: a51 a65
+- store: no
+- luot: D15 (owner Lượt 692 + 694, via ROOT-55/ROOT-56): copy the ma ma a51/a65 STYLE LOCK to everyone; Nữ đế excluded here (nude-B/mk.py owns it)
+- source: dev/handover/reports/mama-specs/m05-a51.styleref.r55.prompt.txt -> t8-prompt-B/build.py AGE_TXT a51/a65 (D15_STYLE); store-all/build_all.py thaihau()
+- proof: dev/handover/reports/mama-specs/m05-a51.styleref.r55.prompt.txt
+- picture: ma ma m05 a51 gOmpWytSXO / a65 eIPlkhrdqL (owner Lượt 694 OK, MMX4)
+- vn: Tuổi 51/65: câu KHÓA NÉT VẼ của ma ma (giống hệt nét vẽ ảnh 36 tuổi, không ảnh thật), đúng một lần; ảnh 36 tuổi là ảnh tham chiếu thứ hai (thứ ba khi ảnh 2 là mẫu màu vàng).
 
 ## BANNED phrases (X)
 
@@ -533,6 +557,22 @@ Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as 
 - negation: no
 - luot: 639 (F13)
 - why: owner Lượt 639: exactly ONE hair flower at t1-t6, size grows with rank
+
+### X16 · size word inside the hair-flower NAME (F13 ladder sets the size)
+- regex: `fresh flower \((?:a|an) (?:tiny|small|little|large|big|huge)\b`
+- scope: tp1-6 pr1-6
+- unless: -
+- negation: no
+- luot: ROOT-54 19/11 (A21 small fix, F13)
+- why: the flower name slot must not carry a size ("a tiny camellia" at t3 MEDIUM contradicted the F13 size sentence); only the F13 SZ ladder sets the size
+
+### X17 · Nữ đế a51/a65 elder darkening (B23: keeps the bright a36 colours)
+- regex: `DEEPER, DARKER|darken them as described`
+- scope: nude
+- unless: -
+- negation: no
+- luot: B23 (owner Lượt 702)
+- why: the Nữ đế never darkens with age: no DEEPER/DARKER elder colour sentence at a51/a65
 
 ### X13 · style image sentence (style image retired)
 - regex: `drawing style of image \d|Image \d is only for the drawing style`

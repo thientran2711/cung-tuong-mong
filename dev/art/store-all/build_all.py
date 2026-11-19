@@ -509,7 +509,9 @@ def thaihau(person,age):
     sw(TH_OLD["face"],face,why="SLOT face (B8: her KC v3 face words)")
     sw(TH_OLD["ident"],g["IDENT_LAW"],why="B8 identity law (owner words)")
     sw(TH_OLD["style"],"",why="B8: no style image -> style sentence removed")
-    if age!="a36": sw(g["AGE_TXT"]["a36"],th1811(age),why="AGE+COLOUR a51/a65 = 18/11 verbatim (elder-copy file)")
+    if age!="a36":
+        _ta,_tc=th1811(age).split(" Her robe keeps",1); assert _ta+" Her robe keeps"+_tc==th1811(age)   # 18/11 AGE TEXT | COLOUR TEXT
+        sw(g["AGE_TXT"]["a36"],_ta+" "+g["D15_STYLE3"]+" Her robe keeps"+_tc,why="AGE+COLOUR a51/a65 = 18/11 verbatim (elder-copy file); D15 STYLE LOCK between AGE and COLOUR TEXT (image 2 = swatch -> her a36 picture = third reference, ROOT-56)")
     sw(TH_OLD["colour"],main,cnt=2,why="SLOT colour name (her main)")
     sw(TH_OLD["item"],item,why="SLOT item (IT1 TH_ITEMS[TH_AGE])")
     sw(TH_OLD["hands"],"Her hands and body: "+hands+"."+tail,why="SLOT hands for her item (+ ADDED HH pose tail)")

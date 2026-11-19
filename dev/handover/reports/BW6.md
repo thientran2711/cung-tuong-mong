@@ -55,3 +55,17 @@ Findings for the next builder worker (all read-only):
 - REF ORDER CONFLICT: the sentence says the a36 picture is "the second reference". t6–t8, Thái hậu and Nữ đế prompts already use image 2 = royal swatch (store renumbers Image 3→Image 2 under --nostyle; TH_SWATCH "Image 2"). Putting the a36 picture second means swatch → image 3 and every swatch sentence renumbered (check_store APPROVED sentences contain those words → gate tables must change too). OPEN QUESTION: keep the sentence verbatim ("second reference") and renumber the swatch to 3, or not.
 - Ref lists: build.py gen_refs() (line ~1999, printed to stderr) is where the a36 ref must be added for a51/a65; build_all only wraps store stdout.
 - Gate: add a check_store S rule (ages a51 a65, scopes tp1-8 pr1-8 mama + others, NOT nude) = the sentence verbatim, exactly once; then build_all.py --check --age a18/a26/a36/a51/a65 and check_store --self.
+
+## D15 done (builder worker, ROOT-56 decisions 1-6; no gens)
+Diff (text/code only; every other byte unchanged, checked by before/after snapshots: a36 and all non-a51/a65 outputs identical, a51/a65 outputs differ ONLY by the one inserted sentence):
+- t8-prompt-B/build.py: AGE_TXT a51/a65 = + the r55 STYLE LOCK sentence verbatim, at the ma ma spot (after "never haggard (or plain).", before "Her robe keeps"); new constants D15_STYLE / D15_STYLE3 (+ assert). __main__: (a) --state nude / --nude3 / --golden strip it (Nữ đế excluded, nude-B/mk.py owns it; golden = frozen); (b) where the royal swatch sentence is added (t6/t7/t8, triều t6-t8) under --nostyle: ONLY "the second reference" -> "the third reference". gen_refs(): a51/a65 = + "her OWN a36 picture of this same rank/state" (image 2, or image 3 with the swatch listed as image 2 = the one-ref renumber); id via new value flag --a36ref ID (else "TO FILL").
+- emperor-B/build.py: AGE_TXT a51/a65 = the same sentence gender-swapped (his), so build_npc.py's J6 assert passes.
+- store-all/build_all.py thaihau(): a51/a65 = 18/11 AGE TEXT + STYLE LOCK ("third reference", image 2 = swatch) + 18/11 COLOUR TEXT.
+- check_store.py: new S36 (scope any-but-nude, ages a51 a65 strict, exactly once, ordinal slot second|third only); APPROVED_SENTENCES.md regenerated.
+Proofs: build.py m05 --state mama --oneref --twocol auto --noflower --nostyle --age a51/a65 == mama-specs/m05-aNN.styleref.r55.prompt.txt byte for byte; nude-B/mk.py m05 output unchanged; emperor-B check.py OK.
+Gate output:
+- check_store.py --self: registry self-test: 37 sentences, 17 banned, 0 problem(s)
+- build_all.py --check a18/a26/a36/a51/a65: each "checked 416 prompts (... 312 HELD = not drawn, B8): 0 FAIL"
+- build_npc.py --list: import + J6 gender-swap assert OK; build_npc.py --verify gen_ledger.jsonl: 0 build_npc gens, 0 FAIL
+- HELD people too (_kc_drawn bypass, t1-t8 + Thái hậu, 748 prompts/age): a51 30 FAIL, a65 30 FAIL = the SAME 30 as before the change (pre-existing B19 GREY on c09/c11/c29/c32, all HELD); 0 S36 fails.
+Open / not done: build_npc.refs() (NPCs, men) and emperor-B have no a36-picture ref (their image 2 = own a18 figure / --ref2 look ref) -> the "second reference" words do not match their ref lists; ma ma 3-ref costume mode (not --oneref) has image 2 = costume; retired style-image mode (no --nostyle) appends the a36 ref last. build.py --verify on gen_ledger.jsonl crashes before and after (pre-existing); logged a51/a65 prompts no longer reproduce (expected with D15).
