@@ -101,16 +101,28 @@ def phi_bach(person,has_shawl=True):
     intro="the sheer shawl draped behind her back and over her arms" if has_shawl else "over her outfit she wears a sheer silk shawl (phi bạch) draped behind her back and over her arms; the shawl"
     return f"PHI BẠCH: {intro} is in her SECONDARY colour ({sec_w}), clearly different from her main robe colour {main}, so it does not melt into the dress; it keeps its soft graceful drape."
 # Lượt 397 item 5 (Tần-style capelet / collar): CURVED cut lines, front opens gradually (no closed, buttoned top-to-bottom front); flowing (uyển chuyển).
-CURVED_CAPELET=("CAPELET CUT (flowing): the lower edge of the capelet and the collar lines are soft CURVES that sweep and scoop gracefully (a little deeper at the centre front), never flat horizontal edges; "
- "the front is NOT closed or buttoned from top to bottom: the robe is closed only at the throat clasp and its front opens gradually from the collar downward in a long soft V, the two front panels parting more and more toward the hem, flowing and graceful (uyển chuyển), never cramped or boxy.")
-CURVED_COLLAR=("COLLAR CUT (flowing): the collar's lower edge follows soft CURVES that sweep and scoop gracefully, never flat horizontal edges; "
- "the front is NOT closed or buttoned from top to bottom: it opens gradually from the collar downward in a long soft V, flowing and graceful (uyển chuyển), never cramped or boxy.")
+# Lượt 412 (owner approved the Phù Tang t4 test): this Tần cut is the Tần outfit for EVERYONE. Lower-edge SHAPE varies per person (index = person number mod 6, like the Nữ đế crowns),
+# every variant still reads as the same short round shoulder capelet overall. (The store sentence says the outline is smooth and round; the variants only shape the LOWER EDGE; owner approved the result.)
+CURVE_SHAPES=[
+ "a plain soft scalloped curve: gentle rounded scallops all along the lower edge",
+ "a cloud-shaped edge: soft ruyi-cloud scallops (vân kiên) along the lower edge",
+ "rounded petal-like lobes along the lower edge, like the soft petals of a flower",
+ "one deep sweeping arc: the lower edge dips lower at the centre front and rises in a long curve toward the shoulders",
+ "a gentle wave of long soft curves along the lower edge, like flowing water ripples",
+ "a double curve: a soft scooped line under the collar and a second soft curved line below it with a short curved fringe of fine silk"]
+def _pn(person): return int(re.sub(r"\D","",person) or 0)
+def capelet_cut(person):
+    return ("CAPELET CUT (flowing): the capelet stays the same short round shoulder capelet, but its lower edge and the collar lines are soft CURVES, never flat horizontal edges; the lower edge is "+CURVE_SHAPES[_pn(person)%len(CURVE_SHAPES)]+"; "
+     "the front is NOT closed or buttoned from top to bottom: the robe is closed only at the throat clasp and its front opens gradually from the collar downward in a long soft V, the two front panels parting more and more toward the hem, flowing and graceful (uyển chuyển), never cramped or boxy.")
+def collar_cut(person):
+    return ("COLLAR CUT (flowing): the collar's lower edge follows soft CURVES, never flat horizontal edges: "+CURVE_SHAPES[_pn(person)%len(CURVE_SHAPES)]+"; "
+     "the front is NOT closed or buttoned from top to bottom: it opens gradually from the collar downward in a long soft V, flowing and graceful (uyển chuyển), never cramped or boxy.")
 def extras(S0,person,rank):
     L=[]
     if isinstance(rank,int) and rank<=6:
         L.append(phi_bach(person,"shawl" in S0))   # owner Lượt 397 via ROOT-47: phi bạch on EVERY thường phục rank t1-t6 (consorts and princesses), also where the store text has no shawl; never t7/t8/Nữ đế/triều phục
-        if "capelet" in S0: L.append(CURVED_CAPELET)
-        elif "cloud collar" in S0: L.append(CURVED_COLLAR)
+        if "capelet" in S0: L.append(capelet_cut(person))
+        elif "cloud collar" in S0: L.append(collar_cut(person))
     return L
 def princess_sentences(k,t):
     d=PRS[k]; L=[f"She is a foreign princess from {d['country']} who has entered the imperial palace."]
