@@ -26,19 +26,23 @@ const MEAS=`(()=>{const M=document.getElementById('modal');if(!M||M.hidden)retur
     const many=[1,2,3,4,5].map(i=>({n:'Cách thứ '+i+' để đối đáp cho phải lẽ',fx:{suc:-i},hint:'thành bại khó đoán, hỏng thì càng phật ý người trên',risk:'có rủi ro',go:()=>{}}));
     const j24=re=>{for(let i=0;i<400;i++){let m=null;try{m=approachOne()}catch(e){}if(m&&re.test(String(m.t||''))&&kitStagePeople(m).length)return m}return null};
     const pv=x=>x;const mR=j24(/Có người đến/),realH=(mR&&mR.h)||'<p>Nàng đến thỉnh an, dáng vẻ ngập ngừng như có điều muốn nói.</p>';
+    /* OD 21:20Z: samples = REAL events (real title, description and options with their real costs / gains), never placeholder lines */
+    const POOL=window.__POOL||(window.__POOL=(()=>{const o={};for(let i=0;i<700;i++){let m=null;try{m=approachOne()}catch(e){}if(!m||!m.opts||!m.opts.length)continue;let st=[];try{st=kitStagePeople(m)||[]}catch(e){}if(!st.length)continue;const k=String(m.t||'');(o[k]=o[k]||m)}return Object.values(o)})());
+    const realEv=(n,skip)=>{const l=POOL.filter(m=>!(skip||[]).includes(m)).sort((a,b)=>Math.abs(a.opts.length-n)-Math.abs(b.opts.length-n));return l[0]||mR};
+    const realOpts=m=>m.opts.map(o=>Object.assign({},o,{go:o.go||(()=>{})}));
     if(k==='mat'||k==='mat2'){const arts=ARTS.filter(a=>wkKindsOf(a.k).some(x=>WKR[x]));const a=arts[k==='mat'?0:Math.min(2,arts.length-1)];if(!a)return'none';S.arts[a.k]=S.arts[a.k]||1;const kind=wkKindsOf(a.k).find(x=>WKR[x]);Object.assign(KWR,{k:a.k,mode:'self',run:()=>{},kind});wkrMat(kind,WKR[kind][0].id)}
     else if(k==='dress'){tsDressAnnounce()}
     else if(k==='info'){kitModal({kind:'info',title:'Thông tin ngắn',sub:'',sections:[{h:'',html:'<p>Nội dung ngắn.</p>'}],btn:'Đã rõ'});return document.getElementById('modal').hidden?'hidden':true}
     else if(k==='result'){kitModal({kind:'result',title:'Kết quả',sub:'',sections:[{h:'',html:'<p>Đã xong.</p>'}],btn:'Tiếp'});return document.getElementById('modal').hidden?'hidden':true}
-    else if(k==='choice')Q.push({t:(mR&&mR.t)||'Có người đến',kit:{kind:'choice'},who:pv(v),h:realH,opts:o});
-    else if(k==='short')Q.push({t:(mR&&mR.t)||'Có người đến',kit:{kind:'choice'},who:v,h:realH,opts:[{n:'Vâng',fx:{suc:-1},go:()=>{}},{n:'Thôi',fx:{},go:()=>{}},{n:'Lui',fx:{suc:-2},go:()=>{}},{n:'Chờ',fx:{},go:()=>{}}]});
-    else if(k==='many')Q.push({t:(mR&&mR.t)||'Có người đến',who:v,h:realH,opts:many});
-    else if(k==='night')Q.push({t:(mR&&mR.t)||'Có người đến',kit:{kind:'night'},who:pEmp(),h:realH,opts:o});
+    else if(k==='choice'){const m=realEv(2);Q.push(Object.assign({},m,{kit:{kind:'choice'}}))}
+    else if(k==='short'){const m=realEv(3);Q.push(Object.assign({},m,{kit:{kind:'choice'}}))}
+    else if(k==='many'){const m=realEv(9);Q.push(m)}
+    else if(k==='night'){const m=realEv(2);Q.push(Object.assign({},m,{kit:{kind:'night'}}))}
     else if(k==='fest'){Q.push(Object.assign({who:pEmp(),ev:'fest',evId:'fest:thanhminh',headArt:{src:'img/ev-fest-thanhminh-b.webp',label:'Tiết Thanh minh'}},AS_LIGHT.thanhminh()))}
     else if(k==='thtrieu'||k==='visit'){const m=j24(k==='thtrieu'?/Thái hậu triệu/:/Có người đến/);if(!m)return'none';Q.push(m)}
-    else if(k==='two')Q.push({t:'Có người đến',stage:[v,v2],who:v,h:realH,opts:o});
-    else if(k==='man')Q.push({t:'Có người đến',stage:[{__fig:'img/fig-eunuch-ndp-tray.webp',__cap:'Tiểu Lý Tử',__role:'Thái giám Nội vụ phủ',age:28,sex:'m'}],h:realH,opts:o});
-    else if(k==='child')Q.push({t:'Hoàng tử đến thỉnh an',stage:[{__fig:'img/fig-eunuch-ndp-tray.webp',__cap:'Tiểu hoàng tử',__role:'Hoàng tử',age:7,sex:'m'}],h:realH,opts:o});
+    else if(k==='two'){const m=realEv(2);Q.push(Object.assign({},m,{stage:[v,v2],who:v}))}
+    else if(k==='man'){const m=realEv(3);Q.push(Object.assign({},m,{stage:[{__fig:'img/fig-eunuch-ndp-tray.webp',__cap:'Tiểu Lý Tử',__role:'Thái giám Nội vụ phủ',age:28,sex:'m'}]}))}
+    else if(k==='child'){const m=realEv(2);Q.push(Object.assign({},m,{stage:[{__fig:'img/fig-eunuch-ndp-tray.webp',__cap:'Tiểu hoàng tử',__role:'Hoàng tử',age:7,sex:'m'}]}))}
     Q.forEach(m=>m.must=1);showModal();await W(900);return document.getElementById('modal').hidden?'hidden':true},k).catch(e=>'ERR '+e.message.slice(0,160));
    if(ok!==true){rows.push({k,skip:String(ok)});continue}
    await p.evaluate(()=>Promise.all([...document.querySelectorAll('#modal img')].map(i=>i.complete?0:new Promise(r=>{i.onload=i.onerror=r;setTimeout(r,15000)}))));await sleep(1800);
