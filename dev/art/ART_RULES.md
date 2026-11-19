@@ -44,6 +44,8 @@ B13 | Every rank flows like t1–t3 (silk flows as silk, brocade as brocade), ne
 B14 | COLOUR TONE: "tươi kiểu trầm" = the sheet5 tone level (medium saturation/lightness); never vivid/saturated/neon/rực, never dusty/greyed at young ages, never faded or silvery; neutral white daylight (no warm cast). | 19/11 00:10Z; Lượt 344, 272 | FG 103, 885, 695
 B15 | EVERY outfit of EVERY person (thường phục, ma ma and all others) = the APPROVED two-colour sentence copied VERBATIM from dev/art/owner-copy/pr_cl_t2_V2.txt (princess Cao Ly V2 deep rose + jade green, cuts xSByOSyjfW/yiuGA83PW9/cpS8oJg0eP): "TWO-COLOUR RULE: the whole outfit uses EXACTLY TWO colours that clearly interact: the MAIN colour <main> and the SECONDARY colour <secondary>, the secondary clearly visible in large areas (inner robe or skirt, wide borders, sash, cuffs, linings), never a single flat colour all over; gold or silver only as thin accents, never a third colour." Only the two colour names are slot words; never write a new colour sentence. Ma ma: main = her ma ma colour, secondary = a clearly different second colour; ONE ma ma sample first (Lượt 499), one-colour ma ma already drawn = kept pending verdict. | Lượt 499 (19/11) | FG - | over: Lượt 489 (19/11); Lượt 483 (19/11); Lượt 303; Lượt 301 "2–3 colours"
 B16 | The held item AND its decoration are in a colour family different from BOTH outfit colours; the item colour is written explicitly in every prompt. | Lượt 486 (19/11) | FG 26, 818, 143 | over: Lượt 306; 18/11 08:00Z
+B17 | t7/t8 COLOURS (owner): THREE colours = royal yellow (own hex #EFBD69 + swatch) + the person's MAIN and SECONDARY colours copied with EXACTLY the same hex codes and words as her lower-rank prompts (verbatim, never new words/hexes); the TWO-COLOUR sentence is adapted so it never says 'no third colour' at t7/t8; no stale silver-lining line. | Lượt 583 (19/11) | FG -
+B18 | TONE NEUTRAL (owner): the game is NEUTRAL-toned; current colours come out too fresh/rực (NF1 new faces, young ages too). Women's clothes soft/dịu; cung nữ and ma ma held back (old ma ma m05/m13 colours = OK target; a36 slightly too fresh); consorts may now and then be a little brighter, never rực. Every colour = name + hex + the medium-tone sentence. | Lượt 583 (19/11) | FG -
 
 ## C. Proportions / row
 C1 | Women: keep the old live figure's own body, height and head size (variety wanted); no proportion reference image, no m09 overlay; fix only a figure clearly too short/odd. | 18/11 07:05Z, 07:08Z | FG 74, 81
@@ -68,6 +70,7 @@ D9 | Clean bare forehead: every prompt says clearly NOTHING on the forehead (no 
 D10 | Nothing ever covers any part of the face (held item below the chin). | 18/11 16:25Z | FG 137
 D11 | STYLE: semi-realistic painterly guofeng, near-3D, soft light, fair un-rosied skin (choice B); everyone beautiful at every age; never tanned, sly, glare, smirk, pout, hand at mouth, caricature. | 11/14; OD:L1305 | FG 145-152, 173
 D12 | a36 = young for her age (no lines); a51 = visibly older but beautiful, soft fine lines, clear silver-grey streaks at temples, never white hair, never haggard. | 18/11 16:30Z, 21:35Z, 22:58Z | FG 201, 217, 236
+D13 | AGE LOOK (owner): everyone looks younger than her age but still clearly THAT age; a51 never looks like 18–26 (soft fine lines, silver at temples); adjust a51 when needed. | Lượt 583 (19/11) | FG -
 
 ## E. Standing angles, poses, held items
 E1 | ANGLE: 14 angles (7 + 7 mirrored); angle AND pose are a SEEDED RANDOM draw per (person, rank): 8 distinct values inside one person; across people the same rank must not share one angle (roughly even counts); never "rank X = angle Y for everyone". | Lượt 469, 476 | FG 28 | over: Lượt 229, 289, 295, 308, 321, 3d2 frontal-only (FG 138)
@@ -80,6 +83,7 @@ E7 | Item comes from the rank list (3f, 10 per rank t1–t8) × age cell; inside
 E8 | Non-consort statuses use their own 10-item lists (nhà nghèo, khuê các, Thái hậu, Nữ đế, princesses); never an item above her status. | 18/11 22:05Z | FG 260-268
 E9 | Men need their own pose table + item table (age × rank), owner approval before use. | Lượt 170 | FG 529
 E10 | Same-rank poses across people: KEEP as is until the owner says otherwise. (The old 'new-character style sentence' part is RETIRED by Lượt 555: new character = NEW_CHARACTER_TEMPLATE.md, B11.) | Lượt 555 (19/11) | FG - | over: Lượt 529 (owner via ROOT-49 chat Lượt 521) (19/11)
+E11 | ITEM LIST (owner): for EVERY rank of EVERY person-type (Nữ đế, consorts t1–t8, maids, ma ma, …) a list of 5 different held items PER AGE (a18/a26/a36/a51/a65) = 25 items per rank, so rising in rank or age never repeats an item; no two ages of one person hold the same-looking item. | Lượt 583 (19/11) | FG -
 
 ## F. Hair, hairpins, crowns per rank
 F1 | HAIR LAW: thiếu nữ + princesses before the palace = loose or half-up; t1–t3 = loose/flowing (half-up with most hair down OK); t4 Tần–t8 HH = hair UP in a bun/chignon, nothing loose down the back; cung nữ = always a bun. | Lượt 337, 331, 273 | FG 876, 870, 702 | over: 18/11 "hair same at every rank" (FG 248), Lượt 268
@@ -92,6 +96,7 @@ F7 | Nữ đế crown = phoenix-and-dragon crown, design differs per person; fro
 F8 | Maids: each maid keeps her own hairstyle at every rank; rank variety comes from the hairpins (each maid rank its own set, all with flower pins). | 19/11 01:55Z, 02:05Z | FG 536, 541
 F9 | Cao Ly: the binyeo goes HORIZONTALLY through the low bun. | Lượt 277 | FG 733
 F10 | Nữ đế crowns: OK as they are (incl. only 6 designs) — no change. Everything Nữ đế OK. | Lượt 529 (owner via ROOT-49 chat Lượt 521) (19/11) | FG -
+F11 | HAIR BY AGE (owner): a36, a51, a65 = hair UP in a bun/chignon for EVERYONE (consorts t1–t3 too, ma ma, maids, princesses); loose/flowing hair ONLY at a18/a26 (t1–t3 and thiếu nữ). Nữ đế = hair UP in a bun at EVERY age. Every prompt must state the hair explicitly; check hair in every picture. | Lượt 583 (19/11) | FG -
 
 ## G. Thường phục (everyday rank robes)
 G1 | Rank DESIGNS (after the shifts): t4 Tần = the approved short round shoulder CAPELET with CURVED cut (Phù Tang test EbYOArVuuO), front opens gradually, curve shape varies per person; t5 Phi = the old Quý phi design; t6 Quý phi = the "thêu nhiều" design with cloud collar + TWO layered shoulder capes (Phi has one); t7 HQP = the old/store prompt with jewelled cloud-collar cape; t8 = store. | Lượt 412, 397, 253, 254, 306, 321, 329, 344 | FG 17, 13, 636, 640, 818, 855, 867, 885 | over: Lượt 257, 259 Tần collar A, 19/11 01:20Z Tần⇄Phi swap

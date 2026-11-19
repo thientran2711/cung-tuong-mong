@@ -53,11 +53,11 @@ elif cmd == "ledger":   # ledger <id>-<age> <face> <gen> <cut|-> <secondary> <no
     pid, age = a.split("-"); face, gen, cut, sec = sys.argv[3:7]; note = " ".join(sys.argv[7:])
     d = {"ts": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "kind": "OWNER-DESIGN",
          "note": f"owner Lượt 520 MA MA TWO-COLOUR NO-FLOWER {pid} {age} (approved MMX1c recipe; --noflower = flower words removed + ROOT-50 ruling A NO-flowers sentence); secondary {sec}" + (f"; remove_bg {cut}" if cut != "-" else "") + f"; {note}",
-         "cmd": f"python3 dev/art/t8-prompt-B/build.py {pid} --state mama --age {age} --nostyle --twocol \"{sec}\" --noflower",
-         "refs": [{"type": "image", "id": face}, {"type": "image", "id": "79fNlPEJAL"}], "gen_id": gen, "cut_id": cut,
+         "cmd": f"python3 dev/art/t8-prompt-B/build.py {pid} v0 --state mama --age {age} --nostyle --twocol \"{sec}\" --noflower",
+         "refs": [{"type": "image", "id": face}], "gen_id": gen, "cut_id": cut,
          "prompt_file": f"dev/handover/reports/mama-specs/{pid}-{age}.oneref.twocol.noflower.prompt.txt",
          "settings": "gpt-2-6 1024x2304 2k seed 7172 (no transparentBackground)", "credits": 138 if cut != "-" else 135,
-         "who": "mama-mass MMX3 two-colour", "store_check": "PASS"}
+         "who": os.environ.get("MMX_WHO", "mama-mass MMX3 two-colour"), "store_check": "PASS"}
     open(os.path.join(R, "dev/art/gen_ledger.jsonl"), "a").write(json.dumps(d, ensure_ascii=False) + "\n"); print("ledger ok")
 elif cmd == "look3":   # look3 <id> <url36> <url51> <url65> -> L_<id>.jpg (3 full views) + faces strip below
     ims, fs = [], []
