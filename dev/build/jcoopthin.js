@@ -193,17 +193,40 @@ TH.NOOP.push("resultShow");
    gates read screenOff() (j1: true inside COOPW.ctx), so nothing of hers draws on the host's screen; her floaters / numbers / item and coin
    effects called in her run are captured here (UICAP, plain arguments only) and play on HER phone once, with the answer (TH.uiPlay).
    E's buổi step, B's life, C's world frame and D's deferred work stay quiet (turns that are not her tap). */
-const UICAP=new Set(["srvToast","kitLine","kitStatFx","feedback","kitCoins","kitGain","kitLose","kitReward","kitLearn","stipReveal","kitItemFx","kitSfx"/* F3 r1 review: her act sounds (jsfx W buy / sellItem / wkSell / giveTo → kitSfx) were silenced on the host and never played on her phone */]);
+const UICAP=new Set(["srvToast","kitLine","kitStatFx","feedback","kitCoins","kitGain","kitLose","kitReward","kitLearn","stipReveal","kitItemFx","kitSfx"/* F3 r1 review: her act sounds (jsfx W buy / sellItem / wkSell / giveTo → kitSfx) were silenced on the host and never played on her phone */,
+ "krvFlip"/* hostnull (b): her face reveal (jreveal krvFlip, raised by k61Know / k61Meet in her run) plays on HER phone, never on the host (below) */]);
 for(const n of UICAP)if(!TH.NOOP.includes(n))TH.NOOP.push(n);
 TH.UICAP=UICAP;/* F4: a part adds the screen redraws it captures itself (its own wrappers push them to TH.uiCap); TH.uiPlay plays only names in this set */
 const uiArg=a=>{try{return JSON.parse(JSON.stringify(a,(k,v)=>typeof v==="function"||(typeof Node!=="undefined"&&v instanceof Node)?undefined:v))}catch(e){return null}};
-TH.tapRun=function(fn){const q0=quiet,u0=TH.uiCap;quiet=false;TH.uiCap=[];let r,ui;try{r=fn()}finally{quiet=q0;ui=TH.uiCap;TH.uiCap=u0}return {r,ui:ui&&ui.length?ui.slice(0,12):null}};
+/* hostnull (a), the whole family (every part F registration — walks, talk, scout, invite, bag, pets … —, every part D pick, every part E
+   step: all of them run through here): an engine her run calls may paint the HOST's own screen with HER state (renderStage / k3Stage / the
+   act cards / the stage figures are not no-ops in her context: their wrappers also write her person, F1/E rely on that). Whatever her run
+   wrote into the host's page is seen here (MutationObserver.takeRecords: synchronous, no list of painters to keep up to date) and the host
+   repaints his own screen from his own state once her context closes (D.after → afterRun → render). Her screen gets her own result with the
+   answer (her view → one render). (c) No cap here: every effect her run raised is kept (BAL.coopUi paces them on her phone). */
+let PMO=null;TH.paintN=0;
+TH.tapRun=function(fn){const q0=quiet,u0=TH.uiCap;quiet=false;TH.uiCap=[];let mo=null;
+ if(!u0&&CW.ctx&&host()&&typeof MutationObserver==="function"&&document.body)try{mo=PMO=PMO||new MutationObserver(()=>{});mo.takeRecords();mo.observe(document.body,{subtree:true,childList:true,attributes:true,characterData:true})}catch(e){mo=null}
+ let r,ui,dirty=false;try{r=fn()}finally{quiet=q0;ui=TH.uiCap;TH.uiCap=u0;if(mo)try{dirty=mo.takeRecords().length>0;mo.disconnect()}catch(e){}}
+ if(dirty){TH.paintN++;try{TH.D.after(()=>{})/* afterRun renders the host's screen when anything waited */}catch(e){}}
+ return {r,ui:ui&&ui.length?ui:null,dirty}};
 /* guest: what her run on the host captured, played once on her own screen */
-TH.uiPlay=function(L){let n=0;for(const x of L||[]){if(!Array.isArray(x))continue;const [f,a]=x;if(!UICAP.has(f)||typeof window[f]!=="function")continue;
- try{window[f].apply(null,Array.isArray(a)?a:[a]);n++}catch(e){console.error("thin uiPlay",f,e)}}TH.uiN=(TH.uiN|0)+n;return n};
-for(const n of TH.NOOP)if(typeof window[n]==="function"){const f=window[n];window[n]=function(){if(CW.ctx&&n!=="resultShow"){if(TH.uiCap&&UICAP.has(n)&&TH.uiCap.length<12)try{const a=[...arguments].map(uiArg);if(n==="kitLine"||n==="srvToast")a[0]=String(a[0]==null?"":a[0]).slice(0,300);TH.uiCap.push([n,a])}catch(e){}return}
+/* hostnull (c): ONE cap rule (BAL.coopUi, one core): at most BAL.coopUi.batch effects play at once; the rest wait in order and play
+   BAL.coopUi.gapMs later, batch by batch — an effect is never dropped (the old answer kept only 4, the run 12). Returns the number queued. */
+const UIQ=[];let uiT=0;
+function uiPump(){uiT=0;const B=(typeof BAL==="object"&&BAL.coopUi)||{batch:4,gapMs:900};let n=0;
+ while(UIQ.length&&n<Math.max(1,B.batch|0)){const [f,a]=UIQ.shift();try{window[f].apply(null,Array.isArray(a)?a:[a]);n++}catch(e){console.error("thin uiPlay",f,e)}}
+ TH.uiN=(TH.uiN|0)+n;if(UIQ.length)uiT=setTimeout(uiPump,Math.max(0,B.gapMs|0))}
+TH.uiPlay=function(L){let n=0;for(const x of L||[]){if(!Array.isArray(x))continue;const [f,a]=x;if(!UICAP.has(f)||typeof window[f]!=="function")continue;UIQ.push([f,a]);n++}
+ if(n&&!uiT)uiPump();return n};
+TH.uiQ=()=>UIQ.length;
+for(const n of TH.NOOP)if(typeof window[n]==="function"){const f=window[n];window[n]=function(){if(CW.ctx&&n!=="resultShow"){if(TH.uiCap&&UICAP.has(n))try{const a=[...arguments].map(uiArg);if(n==="kitLine"||n==="srvToast")a[0]=String(a[0]==null?"":a[0]).slice(0,300);TH.uiCap.push([n,a])}catch(e){}return}
   /* a result card whose snapshot was taken in another seat's context (her greeting's card at +30 ms, accEtqGo) is hers, never the host's */
   if(n==="resultShow"&&arguments[1]&&arguments[1].__ctx&&CW.seat!==arguments[1].__ctx)return;return f.apply(this,arguments)};TH.NOOPED.push(n)}
+/* hostnull (b): a face reveal her run raises (k61Know / k61Meet → jreveal krvFlip) belongs to HER screen: inside any other seat's context it
+   never touches the host's reveal state (KRV: the host would replay her reveal on a face he already knew, at his next paint); inside her tap
+   run it is captured and plays on her phone with the answer (her own krvFlip: once, the reveal window dedupes the flip her render also finds) */
+if(typeof krvFlip==="function"){const kf=krvFlip;krvFlip=function(k){if(CW.ctx){if(TH.uiCap&&typeof k==="string"&&k)TH.uiCap.push(["krvFlip",[k]]);return}return kf.apply(this,arguments)}}
 
 /* stable text of the host's whole state (the round-trip check) */
 function stable(o){const seen=new WeakSet();return JSON.stringify(o,function(k,v){if(typeof v==="function")return undefined;

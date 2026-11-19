@@ -1,0 +1,152 @@
+/* Co-op thin guest, review/coop-thin-hostnull: the three gaps of her runs on the host, each as a whole family (report
+   dev/handover/reports/coop-thin-hostnull.md). Two Playwright clients, host Fold 686x880 + guest iPad 1180x820 (swap=1: iPad hosts).
+   usage: python3 dev/build/assemble.py && node dev/test/coop-thin-hostnull.js <workerURL> [level=9] [swap=0]   (UISCAN=<file>, LAG=<ms>, CPU=<rate>, SHOTS=<dir>)
+   H1 (a) talk / scout / invite from the guest (the registrations with no walk repaint): run once, her result on her phone, the host's
+   screen = a fresh render of HIS state · H2 (b) her face reveal plays once on her phone, none on the host · H3 (c) more effects than the
+   old cap: none lost, in order, paced by BAL.coopUi · H4 (d) sounds / scenes her walk engines raise reach her phone, none on the host. */
+const {chromium}=require('playwright');const {serve,BASE}=require('./coop-serve.js');const fs=require('fs'),path=require('path');
+const WURL=process.argv[2]||'https://ctm-coop.victoria-tntt.workers.dev';const LVL=+(process.argv[3]||9);const SWAP=+(process.argv[4]||0);
+const res=[];const ok=(c,m,x)=>{res.push([!!c,m]);console.log((c?'ok  ':'FAIL')+' '+m+(x!==undefined?' '+JSON.stringify(x).slice(0,c?300:2500):''))};
+const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+const TRIPSRC=process.env.TRIP?fs.readFileSync(path.join(__dirname,'coop-thin-trip.js'),'utf8'):null;
+async function mk(b,name,vp,want){const ctx=await b.newContext({viewport:{width:vp[0],height:vp[1]},deviceScaleFactor:process.env.SHOTS?2:1,reducedMotion:'reduce'});await serve(ctx);
+  await ctx.addInitScript(([u,w])=>{window.COOP_URL=u;if(w)try{localStorage.setItem('ctm-thin',String(w))}catch(e){}
+   window.__co=()=>{const c=window.COOP;if(!c)return{};return{code:c.code,seat:c.seat,world:typeof S!=='undefined'&&!!S&&!!(window.COOPW&&COOPW.on)}}},[WURL,want]);
+  if(TRIPSRC&&name==='guest')await ctx.addInitScript(TRIPSRC);
+  if(process.env.UISCAN&&name==='host')await ctx.addInitScript(fs.readFileSync(path.join(__dirname,'coop-thin-uiscan.js'),'utf8'));/* hostnull: the host-side UI scan of her runs */
+  /* P10 a dead socket on her phone (as coop-thin-e-net): while __mute her `do` frames are dropped, while __deafThin the host's views
+     ("t":"delta" / "snap") never reach her; __wss = her sockets (closed by the test → COOP reconnects, "room") */
+  if(name==='guest')await ctx.addInitScript(()=>{const W0=window.WebSocket,s0=W0.prototype.send;window.__wss=[];window.__drop=[];window.__lostV=0;
+   W0.prototype.send=function(d){if(window.__mute&&typeof d==='string'&&d.indexOf('"t":"do"')>=0){window.__drop.push(d.slice(0,120));return}return s0.apply(this,arguments)};
+   window.WebSocket=function(u,p){const s=p===undefined?new W0(u):new W0(u,p);window.__wss.push(s);s.addEventListener('message',ev=>{if(window.__deafThin&&typeof ev.data==='string'&&/"t":"(delta|snap)"/.test(ev.data)){window.__lostV++;ev.stopImmediatePropagation()}});return s};
+   window.WebSocket.prototype=W0.prototype;Object.assign(window.WebSocket,{CONNECTING:0,OPEN:1,CLOSING:2,CLOSED:3})});
+  /* LAG=<ms>: a 4G profile on this phone: every socket message out and in waits LAG ms (order kept) */
+  if(+process.env.LAG)await ctx.addInitScript(L=>{const W=window.WebSocket;const P=function(u,p){const s=p===undefined?new W(u):new W(u,p);const snd=s.send.bind(s);
+    s.send=d=>setTimeout(()=>{try{if(s.readyState===1)snd(d)}catch(e){}},L);let h=null;Object.defineProperty(s,'onmessage',{configurable:true,get(){return h},set(f){h=f}});
+    W.prototype.addEventListener.call(s,'message',e=>setTimeout(()=>{try{h&&h.call(s,e)}catch(x){console.error(x)}},L));return s};
+   P.prototype=W.prototype;for(const k of ['CONNECTING','OPEN','CLOSING','CLOSED'])P[k]=W[k];window.WebSocket=P},+process.env.LAG);
+  const p=await ctx.newPage();p.setDefaultTimeout(90000);const o={name,ctx,p,errs:[]};
+  p.on('pageerror',e=>o.errs.push(e.message));p.on('console',m=>{if(m.type()==='error'&&!/Failed to load resource|favicon|fonts\.gstatic|CORS/.test(m.text()))o.errs.push('console: '+m.text().slice(0,300))});return o}
+const tapText=async(o,re,ms=8000)=>{const t0=Date.now();while(Date.now()-t0<ms){const r=await o.p.evaluate(src=>{const R=new RegExp(src);
+  const b=[...document.querySelectorAll('button')].find(b=>b.offsetParent!==null&&!b.disabled&&R.test(b.textContent.trim()));if(b){b.click();return true}return false},re.source);if(r)return true;await sleep(250)}return false};
+const clear=(()=>{const t=fs.readFileSync(path.join(__dirname,'coop-e2e.js'),'utf8');const i=t.indexOf('async function clear(');const j=t.indexOf("return'many'}",i)+13;return eval('('+t.slice(i,j)+')')})();
+const until=async(o,fn,arg,ms=40000)=>{try{await o.p.waitForFunction(fn,arg,{timeout:ms});return true}catch(e){return false}};
+const press1=o=>o.p.evaluate(()=>{const b=document.getElementById('next');if(!b||b.disabled)return false;b.click();return true});
+async function press(o,ms=20000){const t0=Date.now();while(Date.now()-t0<ms){if(await press1(o))return true;await clear(o);await sleep(300)}return false}
+async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}const w0=await A.p.evaluate(()=>COOP.state.week);
+ for(let g=0;g<12;g++){const a=await A.p.evaluate(()=>S.buoi||0),c=await B.p.evaluate(()=>S.buoi||0);await press(A);await press(B);
+  const t0=Date.now();while(Date.now()-t0<30000){await clear(A);await clear(B);if(await A.p.evaluate(w=>COOP.state.week>w,w0)&&await B.p.evaluate(w=>COOP.state.week>w,w0))break;if(await A.p.evaluate(x=>(S.buoi||0)!==x,a)&&await B.p.evaluate(x=>(S.buoi||0)!==x,c))break;await sleep(400)}
+  if(await A.p.evaluate(w=>COOP.state.week>w&&!COOPW.pend,w0)&&await B.p.evaluate(w=>COOP.state.week>w&&!COOPW.pend,w0))break}
+ const okw=await A.p.evaluate(w=>COOP.state.week===w+1,w0)&&await B.p.evaluate(w=>COOP.state.week===w+1,w0);ok(okw,tag+': week merged once',okw?undefined:[await A.p.evaluate(()=>({w:COOP.state.week,b:S.buoi,pend:COOPW.pend,sent:COOPW.sent,Q:Q.map(q=>q.t).slice(0,3),dis:document.getElementById('next').disabled,nt:document.getElementById('next').textContent})),await B.p.evaluate(()=>({w:COOP.state.week,b:S.buoi,pend:COOPW.pend,sent:COOPW.sent,Q:Q.map(q=>q.t).slice(0,3),dis:document.getElementById('next').disabled,nt:document.getElementById('next').textContent,log:COOPW.thin.C.log.slice(-5),modal:(document.getElementById('modal')||{}).hidden,q0:Q[0]&&Object.keys(Q[0]).join(','),q0p:Q[0]&&(Q[0].pid||Q[0].ev||''),mg:!!S.mg,km:document.querySelectorAll('.kmov').length,fr:COOP.frozen,cy:COOPW.cyHold,dead:S.dead}))]);await sleep(1500);return okw}
+(async()=>{const b=await chromium.launch(/127\.0\.0\.1|localhost/.test(WURL)?{args:['--disable-features=BlockInsecurePrivateNetworkRequests,PrivateNetworkAccessSendPreflights,PrivateNetworkAccessRespectPreflightResults,LocalNetworkAccessChecks']}:{});
+ const FOLD=process.env.SHOTS?[755,1000]:[686,880],IPAD=[1180,820];/* SHOTS=<dir outside git>: the owner's devices Fold 755x1000@2 + iPad 1180x820@2 */
+ const H=await mk(b,'host',SWAP?IPAD:FOLD,LVL),G=await mk(b,'guest',SWAP?FOLD:IPAD,0);
+ await H.p.goto(BASE);await H.p.waitForTimeout(3000);await tapText(H,/^(Chơi cùng bạn|Cùng hảo hữu)/);await H.p.waitForTimeout(500);await tapText(H,/^(Mời bạn|Mời hảo hữu)/);
+ await until(H,()=>window.COOP&&COOP.code&&COOP.seat==='a');const code=await H.p.evaluate(()=>COOP.code);console.log('room',code,'level',LVL,'swap',SWAP);
+ if(+process.env.CPU){const c=await H.ctx.newCDPSession(H.p);await c.send('Emulation.setCPUThrottlingRate',{rate:+process.env.CPU})}/* CPU=4: the host phone ×4 slower */
+ await G.p.goto(BASE+'?room='+code);await G.p.waitForTimeout(3000);await tapText(G,/^(Vào phòng|Tiếp tục)/,4000);
+ ok(await until(G,()=>window.COOP&&COOP.seat==='b'&&!COOP.frozen,null,60000),'guest joined seat b');
+ const inW=async()=>{const t0=Date.now();while(Date.now()-t0<150000){await clear(H);await clear(G);const a=await H.p.evaluate(()=>__co().world&&rivals.some(v=>v.coop)),c=await G.p.evaluate(()=>__co().world&&rivals.some(v=>v.coop));if(a&&c)return true;await sleep(500)}return false};
+ await inW();
+ for(const o of [H,G])await o.p.evaluate(()=>{try{if(BAL.coopTm)BAL.coopTm.buoiMs=600000}catch(e){}if(S.srv)S.srv.risen=1;if(S.kc)S.kc.inPal=1;S.rank=3;S.sung=Math.max(S.sung||0,40);S.kpWarn=1;render()});
+ if(!(await until(H,()=>!!COOPW.friend(),null,20000)&&await until(G,()=>!!COOPW.friend(),null,20000)))await week(H,G,'setup');
+ const both=async f=>[await H.p.evaluate(f),await G.p.evaluate(f)];
+ /* scan rows reached only through the buổi / week steps (nextBuoi, endTurn, monthTick, contestWeek): those steps never run INSIDE her intent
+    run (E / G run them, quiet unchanged there); counted on the host for the whole suite, plus any card with handlers and no pid (D.bad) */
+ await H.p.evaluate(()=>{window.__inTap={};for(const n of ['nextBuoi','endTurn','monthTick','contestWeek','rivalsTurn']){const f=window[n];if(typeof f!=='function')continue;window[n]=function(){if(COOPW.ctx&&COOPW.thin.uiCap&&(COOPW.thin.curDo==='f'||COOPW.thin.curDo==='pick'))__inTap[n]=(__inTap[n]|0)+1;/* her E step runs nextBuoi on purpose (P13) */return f.apply(this,arguments)}}
+  const tr=COOPW.thin.tapRun;COOPW.thin.tapRun=function(fn){const b=COOPW.thin.D.bad.length;try{return tr.apply(this,arguments)}finally{const d=COOPW.thin.D.bad.length-b;if(d)__inTap.bad=(__inTap.bad||[]).concat(COOPW.thin.D.bad.slice(-d))}}});
+ ok(await until(G,lv=>COOPW.thin.lvl>=lv&&!!COOPW.thin.view&&COOPW.thin.C.isLens(rivals),LVL,40000),'F0 level on, the guest NPC list is the lens',await both(()=>[COOPW.thin.lvl,COOPW.thin.C.isLens(rivals)]));
+ for(let i=0;i<3;i++){await clear(H);await clear(G);await sleep(300)}
+ /* settle: the host's view of this moment has arrived */
+ const sync=async(ms=15000)=>{const t0=Date.now();while(Date.now()-t0<ms){await H.p.evaluate(()=>{try{COOPW.thin.flush()}catch(e){}});await sleep(500);
+   const [hv,gv]=[await H.p.evaluate(()=>COOPW.thin.hv),await G.p.evaluate(()=>COOPW.thin.view&&COOPW.thin.view.v)];if(hv===gv)return true}return false};
+ const table=[];
+ const reset=async()=>{for(let i=0;i<3;i++){await clear(H);await clear(G)}await G.p.evaluate(()=>{Q.length=0;S.mg=null;S.confined=0;S.dead=false;try{closeModal()}catch(e){}});await H.p.evaluate(()=>{Q.length=0;S.mg=null;try{closeModal()}catch(e){}})};
+ const herPl=()=>H.p.evaluate(()=>{const B=COOPW.thin.seatOf('b');const s=B&&B.S||{};const f=COOPW.friend();const m=f&&COOPW.herPl7&&COOPW.herPl7();/* her key → the host's key (jcoopworld mapPlace): her 'home' = her palace, the host's palace r901 = his 'home' */const exp=!m?null:m==='home'?palaceOf(f):m==='r901'?'home':m;return {place:s.place,n:s.visit&&(s.visit.people||[]).length,vk:s.visit&&s.visit.k,where:f&&S.where&&S.where[f.id],mapped:exp}});
+ const gPl=()=>G.p.evaluate(()=>({place:S.place,n:S.visit&&(S.visit.people||[]).length,vk:S.visit&&S.visit.k,used,pop:popIdx,tab}));
+ /* one walk from her phone: returns the row (pending at once, no local change, one host run, answer) */
+ const walk=async(fn,arg,tag)=>{await until(G,()=>!COOPW.thin.F.pend,null,15000);await G.p.evaluate(()=>{Q.length=0;try{closeModal()}catch(e){}});/* a player taps with no card open */
+  const run0=await H.p.evaluate(()=>COOPW.thin.F.stat.run);const g0=await gPl();
+  const r=await G.p.evaluate(([fn,arg])=>{const F=COOPW.thin.F;const l0=F.stat.local,b0=F.stat.busy,s0=F.stat.sent,gt0=F.stat.gate|0;const p0=S.place,v0=JSON.stringify(S.visit),u0=used;let err=null;
+   const tc=typeof arg==='string'&&arg!==S.place?travel(S.place,arg):null;
+   try{window[fn](arg)}catch(e){err=String(e&&e.stack||e).slice(0,300)}
+   const nx=document.getElementById('next');const now={pend:!!F.pend,next:!!(nx&&nx.disabled),place:S.place===p0,visit:JSON.stringify(S.visit)===v0,used:used===u0};
+   try{window[fn](arg)}catch(e){}now.dbl=F.stat.busy-b0;
+   return {err,now,tc,local:F.stat.local-l0,sent:F.stat.sent-s0,gate:(F.stat.gate|0)-gt0,id:F.pend&&F.pend.id}},[fn,arg]);
+  const got=r.id?await until(G,id=>!COOPW.thin.F.pend&&COOPW.thin.F.lastAns&&COOPW.thin.F.lastAns.id===id,r.id,15000):false;
+  await sleep(300);await sync();const run1=await H.p.evaluate(()=>COOPW.thin.F.stat.run);
+  const g1=await gPl(),h1=await herPl(),ans=await G.p.evaluate(()=>COOPW.thin.F.lastAns);
+  const row={tag,fn,arg,from:g0.place,tc:r.tc,r,got,ran:run1-run0,ms:ans&&ans.id===r.id?ans.ms:null,st:ans&&ans.r0&&ans.r0.st,g1,h1,used:[g0.used,g1.used]};table.push(row);return row};
+ await reset();await sync();
+ const PL=await G.p.evaluate(()=>places().map(x=>x.k).filter(k=>typeof k==='string'&&k!=='home'));
+ /* ---------------- hostnull tests ---------------- */
+ const SCR=()=>H.p.evaluate(()=>{const tx=e=>e?String(e.textContent||'').replace(/\s+/g,' ').trim():'';const pw=document.getElementById('popw');
+  return {place:S.place,toks:[...document.querySelectorAll('#tokens .tok')].map(b=>(b.dataset.p||'')+':'+tx(b).slice(0,30)).join('|'),want:(typeof curPeople==='function'?curPeople():[]).length,
+   pop:pw&&!pw.hidden&&pw.offsetParent!==null?tx(pw).slice(0,120):'',popIdx:popIdx,acts:tx(document.getElementById('acts')).slice(0,400)}});
+ const hostSame=async()=>{await sleep(1200);const a=await SCR();await H.p.evaluate(()=>{try{render()}catch(e){}});await sleep(400);const b=await SCR();return {same:a.toks===b.toks&&a.pop===b.pop&&a.acts===b.acts&&(a.popIdx!=null||!a.pop),a,b}};
+ const herRun=async(fn,arg)=>{await until(G,()=>!COOPW.thin.F.pend,null,15000);const p0=await H.p.evaluate(()=>COOPW.thin.paintN|0),run0=await H.p.evaluate(()=>COOPW.thin.F.stat.run);
+  const r=await G.p.evaluate(([fn,arg])=>{Q.length=0;try{closeModal()}catch(e){}const F=COOPW.thin.F,s0=F.stat.sent,u0=used;window[fn](arg);return {sent:F.stat.sent-s0,pend:!!F.pend,id:F.pend&&F.pend.id,u0}},[fn,arg]);
+  const got=r.id?await until(G,id=>!COOPW.thin.F.pend&&COOPW.thin.F.lastAns&&COOPW.thin.F.lastAns.id===id,r.id,15000):false;await sleep(500);await sync();
+  const after=await G.p.evaluate(()=>({used,msg:String(popMsg||'').replace(/<[^>]+>/g,'').slice(0,80)}));
+  return Object.assign(r,{got,ran:(await H.p.evaluate(()=>COOPW.thin.F.stat.run))-run0,paint:(await H.p.evaluate(()=>COOPW.thin.paintN|0))-p0,after})};
+ /* her place with a person to talk to (the host stays home: his own stage differs from hers) */
+ await reset();await H.p.evaluate(()=>{if(S.place!=='home')goTo('home');used=0;tab='act';render()});
+ let K=null,PI=-1;for(const k of PL){if(!await G.p.evaluate(k=>{try{return accessOf(S,k).ok&&!accEtq(S,k)}catch(e){return false}},k))continue;await G.p.evaluate(()=>{used=0});await walk('goTo',k,'H walk');
+  PI=await G.p.evaluate(()=>(S.visit&&S.visit.people||[]).findIndex(p=>p.kind==='rival'&&p.ref&&!p.ref.coop));if(PI>=0){K=k;break}}
+ ok(!!K,'H0 she stands at a place with a person, the host at home',{K,PI});
+ /* H1 (a) the registrations with no walk repaint (talk, scout, invite): the host's screen is HIS after her run (repainted from host state) */
+ const H1=[];
+ {await G.p.evaluate(i=>{popIdx=i;popMsg='';used=0;S.visit.tk={};S.visit.talked=false;render()},PI);await H.p.evaluate(()=>{render()});
+  const oi=await G.p.evaluate(()=>{const p=curPeople()[popIdx];return talkOpts(p).findIndex(a=>!a.open&&!a.lock&&canPay(a))});
+  const r=await herRun('talk',oi);const hs=await hostSame();H1.push(['talk',r,hs]);
+  ok(r.sent===1&&r.got&&r.ran===1&&!!r.after.msg&&r.after.used>0&&hs.same,'H1 talk from the guest: run once on the host, her pop-up shows her result, the host\'s screen = his own state (repainted)',{r,hs})}
+ for(const [fn,src] of [['scout',"(S.seenLoc={},0)||rivals.find(v=>v&&!v.coop&&v.alive&&!v.out&&!locKnown(v)&&!together(S,v))"],['invite',"rivals.find(v=>v&&!v.coop&&v.alive&&!v.out&&!sameHouse(S,v))"]]){
+  await reset();await G.p.evaluate(()=>{used=0;render()});await H.p.evaluate(()=>{render()});await sync();
+  const id=await G.p.evaluate(s=>{const v=(0,eval)(s);return v?v.id:null},src);if(id==null){ok(true,'H1 '+fn+': no target (skipped)');continue}
+  const r=await herRun(fn,id);const hs=await hostSame();H1.push([fn,r,hs]);
+  ok(r.sent===1&&r.got&&r.ran===1&&r.after.used===r.u0+1&&hs.same,'H1 '+fn+' from the guest: run once, her khắc +1 (as solo), the host\'s screen = his own state',{r,hs})}
+ /* H2 (b) her face reveal: she walks to a place where a consort she never met stands (arrival = k61Meet → krvFlip): the reveal plays once on HER
+    phone, none on the host (no host reveal state, no host flip) */
+ {await reset();if(await G.p.evaluate(()=>S.place!=='home'))await walk('goTo','home','home');await G.p.evaluate(()=>{used=0;render()});await sync();
+  const pk=await G.p.evaluate(()=>{for(const v of rivals){try{if(!v||v.coop||!v.alive||v.out||met61(v))continue;const k=whereOf(v);if(k&&k!=='home'&&k!==S.place&&accessOf(S,k).ok&&!accEtq(S,k)&&!(typeof tyOn==='function'&&tyOn(S))&&walkOk(travel(S.place,k)))return {k,id:v.id,key:kOf61(v)}}catch(e){}}return null});
+  if(!pk)ok(true,'H2 no unmet consort at an open place (skipped)');else{
+   await G.p.evaluate(()=>{});
+   await H.p.evaluate(()=>{window.__hk=[];const kf=window.krvFlip;window.__kf0=kf;window.krvFlip=function(k){if(!COOPW.ctx)__hk.push(k);return kf.apply(this,arguments)};window.__hev=Object.keys(kitReveal.KRV.ev)});
+   await G.p.evaluate(()=>{window.__gk=[];const kf=window.krvFlip;window.__gkf0=kf;window.krvFlip=function(k){__gk.push(k);return kf.apply(this,arguments)}});
+   const row=await walk('goTo',pk.k,'H2');await sleep(800);
+   /* she talks to the stranger (face to face = met: k61Meet, j21 talk) */
+   const oi=await G.p.evaluate(id=>{const i=(S.visit&&S.visit.people||[]).findIndex(p=>p.ref&&p.ref.id===id);if(i<0)return -1;popIdx=i;popMsg='';S.visit.tk={};S.visit.talked=false;used=0;render();const L=talkOpts(curPeople()[popIdx]);return L.findIndex(a=>!a.open&&!a.lock&&canPay(a))},pk.id);
+   const tr=oi>=0?await herRun('talk',oi):null;row.got=row.got&&!!tr&&tr.got;row.ran=tr?tr.ran:0;await sleep(2500);
+   const g=await G.p.evaluate(k=>({flips:__gk.filter(x=>x===k).length,all:__gk,met:met61(rivals.find(v=>kOf61(v)===k)||{}),ev:!!kitReveal.KRV.ev[k]}),pk.key);
+   const h=await H.p.evaluate(()=>({flips:__hk.length,ev:Object.keys(kitReveal.KRV.ev).filter(x=>!__hev.includes(x))}));
+   await H.p.evaluate(()=>{window.krvFlip=__kf0});await G.p.evaluate(()=>{window.krvFlip=__gkf0});
+   ok(row.got&&row.ran===1&&g.met&&g.flips===1&&g.ev&&h.flips===0&&h.ev.length===0,'H2 her face reveal (she meets a stranger: walk there, talk face to face): played once on HER phone, none on the host',{pk,place:row.g1.place,g,h})}}
+ /* H3 (c) more effects than the old cap: the host-side staging adds 7 lines to her scout run (seeLoc wrapped on the host only): all of them
+    play on HER phone, in order, batch by batch (BAL.coopUi), none lost; none on the host */
+ {await reset();await G.p.evaluate(()=>{used=0;render()});await sync();
+  const id=await G.p.evaluate(()=>{S.seenLoc={};const v=rivals.find(v=>v&&!v.coop&&v.alive&&!v.out&&!together(S,v)&&!locKnown(v));return v?v.id:null});
+  if(id==null)ok(true,'H3 no one to scout (skipped)');else{
+   await H.p.evaluate(()=>{window.__r0=roll;roll=()=>true;window.__sl0=seeLoc;seeLoc=function(){const r=__sl0.apply(this,arguments);for(let i=0;i<7;i++)kitLine('hn-cap '+i);return r};
+    window.__hl=[];const kl=window.kitLine;window.__kl0=kl;window.kitLine=function(t){if(!COOPW.ctx)__hl.push(String(t));return kl.apply(this,arguments)}});
+   await G.p.evaluate(()=>{window.__gl=[];const kl=window.kitLine;window.__gkl0=kl;window.kitLine=function(t){__gl.push([String(t),Date.now()]);return kl.apply(this,arguments)}});
+   const r=await herRun('scout',id);await sleep(4500);
+   await H.p.evaluate(()=>{roll=__r0;seeLoc=__sl0;window.kitLine=__kl0});
+   const g=await G.p.evaluate(()=>({lines:__gl.filter(x=>/^hn-cap /.test(x[0])),B:BAL.coopUi}));await G.p.evaluate(()=>{window.kitLine=__gkl0});
+   const h=await H.p.evaluate(()=>__hl.filter(x=>/^hn-cap /.test(x)).length);
+   const L=g.lines.map(x=>x[0]),T=g.lines.map(x=>x[1]);const B=g.B||{batch:4,gapMs:900};
+   const inOrder=L.length===7&&L.every((x,i)=>x==='hn-cap '+i);const paced=L.length===7&&T[B.batch]-T[0]>=B.gapMs*0.8;
+   ok(r.got&&inOrder&&paced&&h===0,'H3 more effects than the old cap (7 lines in one run): all 7 on her phone, in order, '+B.batch+' at once then the rest '+B.gapMs+' ms later (BAL.coopUi), none lost; none on the host',{L,dt:T.map(t=>t-T[0]),host:h})}}
+ /* H5 (e) law 1 two-way: an ASK act the OTHER PLAYER accepted (CW.inv set, the target = her entry) is never refused by an NPC roll after:
+    the gift a dislike would refuse (jdis, its roll forced on) is given; Kết giao (its roll forced to fail) succeeds. Control: the same gift to
+    an NPC with the same staging is still refused (the NPC rule unchanged). */
+ {await reset();const r=await H.p.evaluate(()=>{const f=COOPW.friend();const o={};const r0=roll,a0=aRoll;try{
+   const ik=Object.keys(IT).find(k=>{try{const i=itm(k);return i&&i.kd&&!(i.tg||[]).length&&!i.wk}catch(e){return false}});S.inv=S.inv||[];S.inv.push({k:ik},{k:ik});const e=S.inv[S.inv.length-1];
+   const n=rivals.find(v=>v&&!v.coop&&v.alive&&!v.out);for(const v of [f,n])if(v)v.dis=['kd:'+itm(ik).kd];o.hit=[disHit(f,e),n&&disHit(n,e)];roll=()=>true;
+   COOPW.inv='hn-test';try{o.gift=String(giveTo(S,f,S.inv.length-1)||'').replace(/<[^>]+>/g,'')}finally{COOPW.inv=false}
+   o.npc=n?String(giveTo(S,n,S.inv.length-1)||'').replace(/<[^>]+>/g,''):'skip';
+   aRoll=()=>false;COOPW.inv='hn-test';try{o.ally=String(ACT.ally.f(S,f)||'').replace(/<[^>]+>/g,'')}finally{COOPW.inv=false}
+   o.allyNpc=n?String(ACT.ally.f(S,n)||'').replace(/<[^>]+>/g,''):'skip'}finally{roll=r0;aRoll=a0}return o});
+  ok(!!r.hit[0]&&!!r.hit[1]&&!/không nhận/.test(r.gift)&&/không nhận/.test(r.npc)&&/thành/.test(r.ally)&&!/thành/.test(r.allyNpc),'H5 law 1: the gift / Kết giao the other player accepted is never refused by a roll after (an NPC still can)',r)}
+ if(process.env.UISCAN)try{fs.writeFileSync(process.env.UISCAN,JSON.stringify(await H.p.evaluate(()=>window.__uiscan)))}catch(e){console.error('uiscan',e.message)}
+ const pe=[...H.errs,...G.errs].filter(e=>!/ERR_|net::|WebSocket/.test(e));ok(pe.length===0,'H8 no page errors',pe.slice(0,6));
+ const n=res.filter(x=>x[0]).length;console.log(`coop-thin-hostnull L${LVL}${SWAP?' swap':''}: ${n}/${res.length}`);await b.close();process.exit(n===res.length?0:1)})().catch(e=>{console.error(e);process.exit(2)});

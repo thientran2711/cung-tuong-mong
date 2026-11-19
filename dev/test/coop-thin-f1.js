@@ -13,6 +13,7 @@ async function mk(b,name,vp,want){const ctx=await b.newContext({viewport:{width:
   await ctx.addInitScript(([u,w])=>{window.COOP_URL=u;if(w)try{localStorage.setItem('ctm-thin',String(w))}catch(e){}
    window.__co=()=>{const c=window.COOP;if(!c)return{};return{code:c.code,seat:c.seat,world:typeof S!=='undefined'&&!!S&&!!(window.COOPW&&COOPW.on)}}},[WURL,want]);
   if(TRIPSRC&&name==='guest')await ctx.addInitScript(TRIPSRC);
+  if(process.env.UISCAN&&name==='host')await ctx.addInitScript(fs.readFileSync(path.join(__dirname,'coop-thin-uiscan.js'),'utf8'));/* hostnull: the host-side UI scan of her runs */
   /* LAG=<ms>: a 4G profile on this phone: every socket message out and in waits LAG ms (order kept) */
   if(+process.env.LAG)await ctx.addInitScript(L=>{const W=window.WebSocket;const P=function(u,p){const s=p===undefined?new W(u):new W(u,p);const snd=s.send.bind(s);
     s.send=d=>setTimeout(()=>{try{if(s.readyState===1)snd(d)}catch(e){}},L);let h=null;Object.defineProperty(s,'onmessage',{configurable:true,get(){return h},set(f){h=f}});
@@ -168,4 +169,5 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  ok(!H.errs.length&&!G.errs.length,'no page errors',{h:H.errs.slice(0,4),g:G.errs.slice(0,4)});
  if(process.env.SHOTS){fs.mkdirSync(process.env.SHOTS,{recursive:true});for(const o of [H,G]){await clear(o);for(let i=0;i<8;i++){if(!await tapText(o,/^(Bỏ qua|Đóng|Lui|Đã hiểu)$/,800))break;await sleep(400)}await o.p.evaluate(()=>{try{closeModal()}catch(e){}try{render()}catch(e){}});await sleep(800);
    const vp=o.p.viewportSize();await o.p.screenshot({path:path.join(process.env.SHOTS,`L${LVL}-${o.name}-${vp.width}x${vp.height}.jpg`),type:'jpeg',quality:70})}}
+ if(process.env.UISCAN)try{fs.writeFileSync(process.env.UISCAN,JSON.stringify(await H.p.evaluate(()=>window.__uiscan)))}catch(e){console.error('uiscan',e.message)}
  const n=res.filter(x=>x[0]).length;console.log(`coop-thin-f1 L${LVL}${SWAP?' swap':''}: ${n}/${res.length}`);await b.close();process.exit(n===res.length?0:1)})().catch(e=>{console.error(e);process.exit(2)});
