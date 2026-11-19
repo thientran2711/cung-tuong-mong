@@ -218,7 +218,7 @@ kc/ngheo NEW c13+c16 (4 gens) | handover | session_01PEhRbvGFP6YSgT5DTgo3yu (K4,
 rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach | worker see FOREMAN_D_STATUS 03:50Z line (opus) | RUNNING | 19/11 03:50Z | owner D #5
 | REVIEW law3-cost-only r1 (sonnet SMALL) of ae218b59 | review/law3-cost-only-r1 | B | session_01N1tNP6f1q3NHgpGP4qDDsQ | LAND READY 6abe9a6f (on 7fb7c104) | 19/11 03:55Z |
 | bd-roads BIG review (opus E14r; 23278b63) | review/bd-roads | E ROOT #8 | session_01DgYSWnZE2bT1FR9J6cjqDy | RUNNING | 19/11 04:06Z |
-| CTM odds-no-unknown (opus; worker, MAIN ROOT-63 job via C-AG #20) | review/odds-no-unknown; briefs/root63-cag20-jobs.md | C-AG #20 for ROOT-63 | session_01Rc5AsN4DdpqemYGteNSCE6 | SẴN SÀNG KIỂM 7a56b2e (report reports/odds-no-unknown.md) | 19/11 05:35Z |
+| CTM odds-no-unknown (opus; worker, MAIN ROOT-63 job via C-AG #20) | review/odds-no-unknown; briefs/root63-cag20-jobs.md | C-AG #20 for ROOT-63 | session_01Rc5AsN4DdpqemYGteNSCE6 | DONE — LIVE 4217568a (archived 19/11 06:05Z) | 19/11 05:35Z |
 | CTM hall-names (opus; worker, MAIN ROOT-63 job via C-AG #20) | review/hall-names c294e1d; briefs/root63-cag20-jobs.md | C-AG #20 for ROOT-63 | session_01Rc5AsJqjDM27hysYd7E48b | DONE — LIVE 2c5dd554 (archived 19/11 05:55Z) | 19/11 05:20Z |
 | CTM monthly-allotment (opus; worker, MAIN ROOT-63 job via C-AG #20) | review/monthly-allotment; briefs/root63-cag20-jobs.md | C-AG #20 for ROOT-63 | session_01Rc5AsNLFYkPdJUDpjgwsaU | SẴN SÀNG KIỂM 9aceea6 | 19/11 04:09Z | · SẴN SÀNG KIỂM 9aceea6 (19/11)
 | CTM minister-agents (opus; worker, MAIN ROOT-63 job via C-AG #20) | review/minister-agents; briefs/root63-cag20-jobs.md | C-AG #20 for ROOT-63 | session_01Rc5AsHjti1YnXbSGeocwni | SẴN SÀNG KIỂM 0d3f2b0b | 19/11 04:09Z |
@@ -237,7 +237,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | palace-chatter line banks (sonnet E17b, under E17) | review/palace-chatter-lines | E ROOT #8 | session_01DgYSWnyBgE1MomXSwtCiXz | DONE a171292 | 19/11 04:58Z |
 | seal-lean-2 big slow lean-in + real video (sonnet; OD 05:05Z) | review/seal-lean-2 | ROOT-63 → ROOT-64 | session_01Rc5AsHrbnHixrk74QyLYuV | RUNNING | 19/11 04:58Z |
 | REVIEW role-parity-drift r1 (opus BIG) of 127fe1ea | review/role-parity-drift-r1 | B | session_01N1tNP522pSWxVAQMo8r88Z | PASS — READY FF 1ed688ef | 19/11 06:10Z |
-| odds-no-unknown BIG REVIEW (opus) | review/odds-no-unknown 7a56b2e | C-AG #20 for ROOT-64 | session_01Rc5AsLQg8htXCMAz8FnrmD | PASS 6b041ea (LAND READY) | 19/11 05:12Z |
+| odds-no-unknown BIG REVIEW (opus) | review/odds-no-unknown 7a56b2e | C-AG #20 for ROOT-64 | session_01Rc5AsLQg8htXCMAz8FnrmD | DONE — LIVE 4217568a (archived 19/11 06:05Z) | 19/11 05:12Z |
 | coop-thin F2 FIX r2 (opus BIG; reviewer FAIL r1: guest cards silenced by withSeat quiet, whole intent family + buổi resend check) | review/coop-thin-f2-r2 | B | session_01N1tNP4v5eCkat9E4cy6HXG | RUNNING | 19/11 05:37Z |
 | seal-lean-2 SMALL REVIEW (sonnet) | review/seal-lean-2 db1762f1 | MAIN ROOT-64 | session_01Rc5AsMN2AumPZrBeDRpV5o | RUNNING | 19/11 05:43Z |
 | ev-pic-fig BIG REVIEW (opus) | review/ev-pic-fig 946a2900 | MAIN ROOT-64 | session_01Rc5AsMDVid7pMws13KWPgr | RUNNING | 19/11 05:43Z |
