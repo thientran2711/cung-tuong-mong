@@ -147,14 +147,14 @@ Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as 
 - vn: Chỉ MỘT lớp tay áo, rủ một mảnh từ vai; không tay ngắn chồng lên tay dài.
 
 ### S12 · PHI BẠCH (khăn choàng) t1-t6
-- text: `PHI BẠCH: {intro} is in a clearly DIFFERENT colour from her robe: {colour} (another colour family and tone than her main robe colour {main}), so it never melts into the dress; it keeps its soft graceful drape.`
+- text: `PHI BẠCH: {intro} is a very sheer, highly translucent gauze shawl in {colour} (her secondary colour, clearly different from her main robe colour {main}) — the robe, sleeves and arms are clearly visible through it, so it reads as a light airy veil of that hue, never an opaque solid band of colour; it keeps its soft graceful drape.`
 - scope: tp1-6 pr1-6
 - confirm: -
 - ages: all
 - store: no
-- luot: 397, 412, 434, 469, 483, 486 (G4)
+- luot: 397, 412, 434, 469, 483, 486 (G4); F12 Lượt 601 (BW4: very sheer, translucent)
 - source: dev/art/store-all/build_all.py phi_bach()
-- proof: dev/art/approved/proof/c06_t1_a18.txt
+- proof: dev/art/approved/proof/bw4_f12_m13_t2_a26.txt
 - picture: Phù Tang t4 curved test (Lượt 412) · gen 5jDiW44Kxe · cut EbYOArVuuO · https://ctm-img.victoria-tntt.workers.dev/img/_review/princess/phutang_t4_curved_vs_old.jpg (right half)
 - vn: Khăn phi bạch choàng sau lưng, qua tay, màu KHÁC hẳn màu áo (màu phụ), không lẫn vào áo; chỉ bậc 1-6.
 
@@ -386,17 +386,17 @@ Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as 
 - picture: triều phục c06 r21 (Lượt 492: t4, t6, t7, t8 OK; t4 cut u5W4dPuQLD, t6 cut N2q8sOD6D9) · https://ctm-img.victoria-tntt.workers.dev/img/_review/trieu-phuc/r19/c06_sheet21.jpg
 - vn: Vai chỉ có cầu vai cứng: không áo choàng vai, không lưới ngọc, không khăn choàng.
 
-### S33 · COLOUR RULE a51/a65 (elder: calmer, less saturated, never darker; J2)
-- text: `COLOUR RULE: all colours in calmer, softer mature shades of her own colours (the same hue at about the same lightness, only less saturated and quieter: elegant and dignified, never darker or heavier, never bright or rực, never pastel-washed, never grey, dusty, black or brown); the colour names and hex values below are her young colours, quieten them as described above;`
+### S33 · COLOUR RULE a51/a65 (elder: DEEPER, DARKER, rich and dignified = 18/11 Thái hậu copy; J2 Lượt 624)
+- text: `COLOUR RULE: all colours in the DEEPER, DARKER mature shades described above (rich and dignified, never bright, never pastel, never dusty or washed-out); the colour names and hex values below are her young colours, darken them as described above;`
 - scope: tp1-8 pr1-8 nude
 - confirm: -
 - ages: a51 a65
 - store: yes
-- luot: J2; A0 a51/a65 age texts (c04 elder sheet)
+- luot: J2 (owner Lượt 620/622/624: copy the 18/11 Thái hậu elder text verbatim, dev/art/elder-copy/THAIHAU_1811_AGE_COLOUR.md); A0 a51/a65 age texts (c04 elder sheet)
 - source: dev/art/t8-prompt-B/build.py AGE_TXT
-- proof: dev/art/approved/proof/bw4_j2_m13_t2_a51.txt
+- proof: dev/art/approved/proof/bw5_elder_m05_t2_a51.txt
 - picture: Lượt 395 store sheets, approved Lượt 397 'vẽ rất là đẹp' · https://ctm-img.victoria-tntt.workers.dev/img/_review/morning-1119/sheet_congchua.jpg
-- vn: Tuổi 51/65: mọi màu là sắc TRẦM = dịu hơn, bớt bão hoà của màu trẻ, độ sáng gần như cũ (không tối/đậm hơn, không rực, không xám, không đen/nâu).
+- vn: Tuổi 51/65: mọi màu là sắc ĐẬM HƠN, TỐI HƠN, sang trọng điềm tĩnh như Thái hậu 18/11 (không rực, không pastel, không bạc màu); tên màu + mã hex là màu trẻ, làm đậm như câu tuổi.
 
 ### S34 · FOREHEAD: nothing on the forehead (D9)
 - text: `NOTHING on the forehead (no hoa điền, no dot, no mark, nothing).`

@@ -62,6 +62,9 @@ LADDER_TIERS=["t%d"%i for i in range(1,9)]
 def _install_ladder(g):
     IA=g["_IA"]; orig=g["age_item"]
     def pick(c,tier,age):
+        # E11 + E6 (BW5, ROOT-52/53 19/11): the 25-item age-split lists (IT1) via the store's own pick _e6_picks (5 items per age, t1-t8 never repeat a kind); --olditem = old 10-list rotation
+        if "--olditem" not in sys.argv:
+            it,kind=g["_e6_picks"](c,age)[tier]; return (it,"L:"+kind) if int(tier[1:])<=6 else (it,kind)
         n=int(re.sub(r"\D","",c) or 0) or sum(map(ord,c)); ai=IA.AGES.index(age); idx=(n-1+3*ai)%10; N=int(tier[1:])
         if N<=6: it,kind=g["L3F"][N][idx]; return it,"L:"+kind
         return (g["ITEMS7"][idx] if N==7 else g["ITEMS"][idx])
@@ -482,6 +485,12 @@ def gate(person,rank,age,text):
         p=subprocess.run([sys.executable,os.path.join(ART,"check_store.py"),fn]+args,capture_output=True,text=True)
         return p.returncode==0 and "STORE CHECK PASS" in p.stdout, p.stdout.strip()
     finally: os.unlink(fn)
+def _E6_GATE(age):
+    """E6 (owner): one person, one age: t1-t8 never the same item kind; Nữ đế never her t8 kind. Uses the store's e6_check."""
+    old=sys.argv; sys.argv=["build.py"]; g={"__name__":"build_store","__file__":STORE}
+    try: exec(_PART1,g)
+    finally: sys.argv=old
+    return g["e6_check"]([p for p in PEOPLE if re.fullmatch(r"[cm]\d\d",p)],(age,))
 def check_all(age="a18"):
     bad=0; held=0
     for t in range(1,9):
@@ -495,6 +504,8 @@ def check_all(age="a18"):
         if not _kc_drawn(p): held+=1; continue
         ok,msg=gate(p,"nude",age,build(p,"nude",age)[1])
         if not ok: bad+=1; print("FAIL",p,"nude",age,"|",msg[:200])
+    e6=_E6_GATE(age)
+    if e6: bad+=len(e6); print("FAIL E6 item kind repeated (person, age, kind, ranks):",e6[:20])
     n=len(PEOPLE)*8+32; print(f"checked {n-held} prompts ({len(PEOPLE)} people x 8 ranks + 32 Nữ đế, age {age}; {held} HELD = not drawn, B8): {bad} FAIL"); return 1 if bad else 0
 if __name__=="__main__":
     a=sys.argv[1:]; age=a[a.index("--age")+1] if "--age" in a else "a18"
