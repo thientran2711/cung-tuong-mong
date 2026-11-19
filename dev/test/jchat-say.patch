@@ -1,0 +1,28 @@
+--- jchat.old.js	2026-11-19 09:23:28.874319384 +0000
++++ jchat.new.js	2026-11-19 09:23:28.896099936 +0000
+@@ -103,20 +103,12 @@
+ function noticeOn(P){try{const st=stage();for(const b of st.querySelectorAll(".kmerr-bang")){const r=b.getBoundingClientRect(),q=P.img.getBoundingClientRect();if(r.left+r.width/2>=q.left&&r.left+r.width/2<=q.right)return true}}catch(e){}return false}
+ /* ---------- the bubble (KIT §78.z + §78.y; "say" = K-HEAD-SAY when the kit has it) ---------- */
+ function sayKit(){try{return !!(window.KIT_HEADMK&&KIT_HEADMK.say&&typeof kitHeadMarkHtml==="function")}catch(e){return false}}
+-/* the ONE stage head-marker layer (jerr errLay, .kmerr-lay: absolute, inset 0, no pointer) — no layer or CSS of our own */
+-function lay(st){try{let l=st.querySelector(":scope>.kmerr-lay");if(l)return l;if(window.ERR&&typeof ERR.sync==="function"){try{ERR.sync()}catch(e){}l=st.querySelector(":scope>.kmerr-lay");if(l)return l}
+- if(document.getElementById("kerr-css")){l=document.createElement("div");l.className="kmfly kmerr kmerr-lay";st.appendChild(l);return l}}catch(e){err("lay",e)}return null}
+-function clearB(){try{document.querySelectorAll(".kchat-b").forEach(e=>e.remove())}catch(e){}}
++function clearB(){try{kitSayClear(stage())}catch(e){}}
++/* the bubble = the kit part kitSay (KIT §78.z "say" + §78.y, K-HEAD-SAY): its own stage layer, placement, pop in/out; no layer / CSS / placement of ours */
+ function show(P,txt,ms,tag){const st=stage();if(!st||!P.img.isConnected)return false;if(noticeOn(P))return false;const c=C();
+- const lim=Math.max(1,c.maxBub|0||2);const cur=[...st.querySelectorAll(".kchat-b")];while(cur.length>=lim)cur.shift().remove();
+- const w=document.createElement("span");const kit=sayKit();const title=`${nameOf(P.e,P.p)}: ${txt}`;
+- w.innerHTML=kit?kitHeadMarkHtml(title,"img","say",txt):typeof kitHeadMarkHtml==="function"?kitHeadMarkHtml(title,"img","off"):"";const b=w.firstChild;if(!b)return false;
+- const L=lay(st);if(!L)return false;b.classList.add("kchat-b");b.dataset.chat=CH.seq;L.appendChild(b);
+- const sr=st.getBoundingClientRect(),sc=st.offsetWidth?sr.width/st.offsetWidth:1;const px=(window.KIT_HEADMK||{}).px||24;const hh=b.offsetHeight||px,ww=b.offsetWidth||px;
+- const Pz=typeof kitBadgeAt==="function"?kitBadgeAt(st,P.img,kit?"say":"hap",ww,hh):null;if(!Pz){b.remove();return false}
+- b.style.position="absolute";b.style.left=((Pz.left-sr.left)/sc)+"px";b.style.top=((Pz.top-sr.top)/sc)+"px";b.dataset.line=Pz.sex;
+- if(!kit&&typeof kitLine==="function")try{kitLine(`${nameOf(P.e,P.p)}: “${txt}”`,ms)}catch(e){}
+- setTimeout(()=>{try{b.remove()}catch(e){}},ms);CH.stat.lines++;CH.log.push({t:Date.now(),who:P.p.name,txt,kit,tag:tag||""});if(CH.log.length>60)CH.log.shift();return true}
++ const lim=Math.max(1,c.maxBub|0||2);CH.bub=(CH.bub||[]).filter(h=>h&&!h.closed&&h.el.isConnected);while(CH.bub.length>=lim)CH.bub.shift().close();
++ const h=typeof kitSay==="function"?kitSay(st,P.img,txt,{ms,title:`${nameOf(P.e,P.p)}: ${txt}`}):null;if(!h)return false;CH.bub.push(h);
++ CH.stat.lines++;CH.log.push({t:Date.now(),who:P.p.name,txt,kit:true,tag:tag||""});if(CH.log.length>60)CH.log.shift();return true}
+ function dur(t){const c=C().say||{};return Math.round(Math.max(c.min||2600,Math.min(c.max||6000,(c.base||1400)+String(t).length*(c.ch||55))))}
+ /* play the turns one after another; a turn whose speaker left the stage ends the exchange */
+ function play(T,tag){if(!T||!T.length)return false;CH.run=++CH.seq;const id=CH.run;let i=0;CH.stat.said++;
