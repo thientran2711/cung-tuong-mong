@@ -909,6 +909,8 @@ def spec5pose(o,c,t):
         if not any(re.search(p,raw) for p in _bad): break
     else: raise AssertionError(("no allowed spec5 pose",c,t))
     pose=raw.format(prop=prop)+(", with stately grace" if t>=7 else ", poised" if t>=5 else "")
+    # N5b (ROOT-36 order; FIGURE_GATE A0 rule 3 + canon 19/11 (e) "Nữ đế mass pose = CALM at all ages (item below the chin, no flying cloth)"): --state nude only -> one calm sentence for every person and age; every other output byte-identical
+    if globals().get("STATE")=="nude": pose=f"a calm, composed, dignified standing pose, frontal or a slight three-quarter turn, standing still and upright; she holds {prop} at chest height in one or both hands, the item held below the chin and clear of the face, elbows close to her body, a small restrained gesture only; the sleeves, mantle, sashes, ribbons and tassels all hang straight down, still, under their own weight: no flying, floating or windblown cloth, no movement"
     a=o.index(" Pose: calm standing pose;"); b=o.index(" Every hairpin is inserted")
     new=f" Pose: {pose}. The item is in a contrasting colour, not the robe colour, and the hand really grips it; the whole face fully visible with the head up toward the viewer, eyes open, lips closed, never looking down, nothing covering the face."
     o=o[:a]+new+o[b:]
