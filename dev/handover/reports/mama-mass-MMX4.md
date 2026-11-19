@@ -64,3 +64,5 @@ The 3 m05 gens from the r54 prompts were refused by the auto-mode permission che
 
 ## 21:17Z ROOT-55 made the 3 m05 gens itself from my r54 prompts (gpt-2-6 1024x2304 seed 7172, one ref KLpSlnEkqp): a36 BhNUblSoQR, a51 KLpnPqWkqp, a65 fHzNsafCDY. ROOT-55 does the sheet and the look. MMX4 makes NO gens; waiting.
 ROOT-55 19/11 ~21:30Z: ROOT-55 gen'd the 3 r54 prompts itself (gpt-2-6 1024x2304 2k seed 7172, ref KLpSlnEkqp): a36 BhNUblSoQR, a51 KLpnPqWkqp, a65 fHzNsafCDY. Sheet dev/handover/review-sheets/mama-m05/m05_mama_r55.jpg sent to owner (Lượt 689).
+
+## 21:25Z OWNER Lượt 694 (via ROOT-55): ma ma OK, "do NOT change anything any more". Recipe FROZEN (ART_RULES D16): a36 = m05-a36.oneref.twocol.noflower.r54.prompt.txt; a51/a65 = m05-aNN.styleref.r55.prompt.txt (style lock + her a36 picture as 2nd ref); gpt-2-6 1024x2304 2k seed 7172. FINAL m05: a36 BhNUblSoQR, a51 gOmpWytSXO, a65 eIPlkhrdqL. No prompt edits; no gens until ROOT-55 GO.

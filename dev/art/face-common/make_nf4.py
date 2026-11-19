@@ -101,3 +101,67 @@ for k in out2: assert out2[k].count(OLD_MOUTH)==1,k; out2[k]=out2[k].replace(OLD
 for k,v in out2.items():
     open(os.path.join(D,f'{k}.FULL.txt'),'w').write(v)
     print(f"== {k}\n{v}\n")
+
+# ---------------- (5) owner Lượt 689: new people ONLY in Sắc sảo / Kiêu kỳ / Lạnh lùng / Quyến rũ; 3 samples each ----------------
+# Sắc sảo = s07–s09 above (+ c27). Here: Kiêu kỳ s10–s12, Lạnh lùng s13–s15, Quyến rũ s16–s18, from the TYPES5 blocks.
+def t_face(ty,swaps):
+    f=TYPES5[ty]["face"]
+    for a,b in swaps: assert a in f,(ty,a); f=f.replace(a,b)
+    return f
+S4=[
+("s10","Kiêu kỳ",18,[],
+ "fully loose and very long, the top section drawn back high and fastened at the crown with one upright gold phoenix hairpin",
+ "a light open beizi of soft crimson silk satin with a soft sheen over a cross-collar pale-gold-beige inner top and a pale-gold-beige floor-length skirt of plain silk, small embroidered peonies along the front edges, a pale-gold-beige silk sash with a small red jade pendant, long sleeves",
+ C("soft crimson",352,.50,.50),C("pale gold beige",38,.80,.30),
+ "standing tall and upright with her weight on one leg, a closed round fan of crimson silk with a carved ivory handle held lightly at her waist in one hand, the other hand resting at her sash","SR"),
+("s11","Kiêu kỳ",18,[("long refined OVAL face","long refined DIAMOND-OVAL face")],
+ "half-up: the top hair coiled into a tall elegant bun at the crown held by two slim silver hairpins pointing upward, the rest long and straight behind",
+ "a cross-collar ruqun of soft royal-purple silk satin with a soft sheen and a silver-grey floor-length skirt of plain silk, small embroidered phoenix feathers at the collar and hem, a silver-grey silk sash with a small amethyst pendant, long sleeves",
+ C("soft royal purple",280,.42,.40),C("silver grey",220,.74,.08),
+ "walking slowly with poise mid-step, a single long-stemmed purple orchid held upright at chest height in one hand, the other sleeve trailing","TL"),
+("s12","Kiêu kỳ",17,[("THIN well-defined lips held firm","THIN well-defined lips with a crisp upper lip line, held firm")],
+ "fully loose and very long, sleek, parted exactly in the centre, a thin gold-thread ribbon tied at the back of the head, one small gold hairpin pointing backward",
+ "a cross-collar ruqun of soft peacock-blue silk satin with a soft sheen and an ivory floor-length skirt of plain silk, small embroidered peacock feathers at the collar and hem, an ivory silk sash with a small blue jade pendant, long sleeves",
+ C("soft peacock blue",195,.42,.50),("warm ivory","#EAD7BF"),
+ "standing upright with her weight on one leg, a small gold-edged hand mirror held at her waist in one hand, its back toward the viewer, the other hand at her sash","FF"),
+("s13","Lạnh lùng",18,[],
+ "fully loose and very long, straight and sleek, parted in the centre, a thin silver-white ribbon tied at the back of the head, one small silver hairpin pointing upward",
+ "a cross-collar ruqun of soft frost-white silk satin with a soft sheen and a slate-blue floor-length skirt of plain silk, small embroidered snowflake plum blossoms at the collar and cuffs, a slate-blue silk sash with a small white jade pendant, long sleeves",
+ C("soft frost white",210,.90,.15),C("slate blue",215,.45,.28),
+ "standing still and upright with her weight on one leg, a slim closed white paper umbrella with a bamboo handle held upright at her side in one hand, the other hand at her waist","SL"),
+("s14","Lạnh lùng",18,[("LONG narrow OVAL face","LONG narrow OVAL face with a high smooth forehead")],
+ "half-up: the top hair twisted into a small flat knot at the back held by one plain white jade hairpin pointing backward, the rest long and straight to the waist",
+ "a light open beizi of soft ink-blue silk satin with a soft sheen over a cross-collar pale silver-grey inner top and a pale silver-grey floor-length skirt of plain silk, small embroidered pine needles along the front edges, a pale silver-grey silk sash with a small black jade pendant, long sleeves",
+ C("soft ink blue",222,.36,.32),C("pale silver grey",220,.80,.06),
+ "standing calmly with her weight on one leg, a slim white jade flute held horizontally in both hands at her waist","TR"),
+("s15","Lạnh lùng",17,[("a slim straight nose","a slim straight nose with a narrow bridge")],
+ "fully loose and very long, straight, the front locks falling beside the face, a thin pale-celadon ribbon at the back, one small pearl hairpin pointing upward",
+ "a cross-collar ruqun of soft pale-celadon silk satin with a soft sheen and a deep-teal floor-length skirt of plain silk, small embroidered water ripples and reeds at the collar and hem, a deep-teal silk sash with a small white jade pendant, long sleeves",
+ C("soft pale celadon",150,.78,.28),C("deep teal",185,.32,.40),
+ "walking slowly mid-step, a single white lotus bud on a long stem held upright beside her shoulder in one hand, the other sleeve hanging still","ST"),
+("s16","Quyến rũ",18,[],
+ "loose and long, swept forward over one shoulder in soft waves, the other side tucked behind the ear with one small pearl hairpin pointing backward",
+ "a cross-collar ruqun of soft rose-red silk satin with a soft sheen and a plum-wine floor-length skirt of plain silk, small embroidered peach blossoms at the collar and hem, a plum-wine silk sash with a small rose quartz pendant, long sleeves",
+ C("soft rose red",350,.58,.50),C("plum wine",330,.35,.35),
+ "walking slowly mid-step, a small round fan of ivory silk with a red tassel held lightly near her chin in one hand, never covering her face, the other sleeve trailing","TL"),
+("s17","Quyến rũ",18,[("soft HEART-OVAL face","soft slightly LONG OVAL face"),("just below the outer corner of her LEFT eye","just below the outer corner of her RIGHT eye")],
+ "half-up: the top hair in a loose low twist at the back held by one gold hairpin with a small dangling pearl pointing backward, the rest long and wavy",
+ "a light open beizi of soft coral-pink silk satin with a soft sheen over a cross-collar champagne-ivory inner top and a champagne-ivory floor-length skirt of plain silk, small embroidered camellias along the front edges, a champagne-ivory silk sash with a small coral bead, long sleeves",
+ C("soft coral pink",8,.66,.55),C("champagne ivory",35,.86,.30),
+ "standing with her weight on one leg and her hips softly turned, a single red camellia held lightly at her collarbone in one hand, the other hand resting at her waist","SR"),
+("s18","Quyến rũ",17,[("FULL plump lips with a soft curved bow","FULL plump lips with a deep curved bow on the upper lip")],
+ "fully loose and very long, glossy soft waves, a thin dark-red ribbon tied at the back of the head, one small gold hairpin pointing upward",
+ "a cross-collar ruqun of soft violet-mauve silk satin with a soft sheen and a deep-rose floor-length skirt of plain silk, small embroidered wisteria at the collar and hem, a deep-rose silk sash with a small amethyst pendant, long sleeves",
+ C("soft violet mauve",290,.58,.35),C("deep rose",345,.45,.45),
+ "walking slowly toward the viewer, a slim red lacquer folding fan held half-open at her shoulder in one hand, the other hand lifting her sleeve a little","FF"),
+]
+out3={}
+for sid,ty,age,sw,hair,outfit,(mn,mh),(sn,sh),pose,ak in S4:
+    v=line(age,t_face(ty,sw)+". "+EYES_STRAIGHT[:-1],TYPES5[ty]["expr"],hair,outfit,mn,mh,sn,sh,pose,ak)
+    assert v.count(OLD_MOUTH)==1; out3[f"{sid}.v5"]=v.replace(OLD_MOUTH,NEW_MOUTH)
+# s12 A21: frontal view drew the "backward" pin sideways twice (7172, 7173) -> pin upright at the crown
+out3["s12.v5b"]=out3["s12.v5"].replace("one small gold hairpin pointing backward","one small gold hairpin set upright at the crown, pointing straight upward")
+assert out3["s12.v5b"]!=out3["s12.v5"]
+for k,v in out3.items():
+    open(os.path.join(D,f'{k}.FULL.txt'),'w').write(v)
+    print(f"== {k}\n{v}\n")

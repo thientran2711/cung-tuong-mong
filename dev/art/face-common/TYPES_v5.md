@@ -3,7 +3,7 @@
 Chủ: mặt Sắc sảo chưa đủ sắc; câu tả mọi kiểu quá yếu. v5 viết lại MẠNH cả dáng mặt lẫn tính cách trong ánh mắt/biểu cảm; mỗi khối kết thúc bằng 'never …' để các kiểu không lẫn nhau ở cỡ game.
 Nguồn duy nhất: `make_nf4.py` TYPES5 (file này chép lại). Không có chữ trang điểm / màu môi, má, mắt (D14). Câu chung COMMON_v3 không đổi; người mới dùng thêm câu miệng khép mạnh (NEW_MOUTH) và câu mắt thẳng (EYES_STRAIGHT).
 Dùng: dòng `Her face: <face>. Expression: <expr>` trong {PERSON}; mỗi người đổi chi tiết nhỏ (dáng oval dài / kim cương / tim-oval; mắt hạnh / phượng-hạnh) — xem S3 trong make_nf4.py.
-Mẫu Sắc sảo v5: c27.v4 (người mới), s07.v5, s08.v5, s09.v5 — sheet dev/handover/review-sheets/new-faces-v4/nf4_teeth_c27_sacsao.jpg. Các kiểu khác: CHƯA vẽ mẫu v5 (chờ chủ).
+Mẫu v5 (owner Lượt 689: chỉ 4 nhóm cho người mới): Sắc sảo c27.v4, s07–s09; Kiêu kỳ s10, s11, s12 (s12.v5b); Lạnh lùng s13–s15; Quyến rũ s16–s18. Sheet: dev/handover/review-sheets/new-faces-v4/nf4_4groups_12.jpg. Tươi tắn / Dịu dàng / Đoan trang / Tinh nghịch: không vẽ người mới (Lượt 689).
 
 ## SẮC SẢO — sắc, thông minh, nhìn xuyên thấu; oval rõ nét, gò má cao, mắt hạnh xếch, mày thẳng sắc; người lớn, không baby
 

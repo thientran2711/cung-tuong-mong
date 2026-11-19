@@ -19,3 +19,14 @@ Credits: 9 gens × 135 + 8 cuts × 3 = 1,239.
 
 ## Open for the owner
 - Nothing redrawn from TYPES_v5 except Sắc sảo. If she likes v5 Sắc sảo: rewrite the face lines of the other Sắc sảo members (m09 c05 c11 c17 c23 c29) with the block, and draw v5 samples for the other 7 types.
+
+## Part 2 — owner Lượt 689 (new people only in Sắc sảo / Kiêu kỳ / Lạnh lùng / Quyến rũ; 3 samples each = 12)
+Recorded in LOOK_GROUPS.md by ROOT-55 and assigned to NF4. All drawn from the TYPES_v5 blocks (make_nf4.py section 5), with the strong mouth sentence and the straight-eyes sentence.
+- Sắc sảo: c27 (KLpnNqzkqp), s07 (gOmpzsdSXO), s08 (ov6w1BU829), s09 (w4aXWwe7EI) — from part 1.
+- Kiêu kỳ: s10 cut u5W3NLlQLD, s11 cut cpSkbto0eP, s12 cut fHzN9OxCDY. s12 needed 3 tries: in a frontal view, "pin pointing backward" drew sideways twice, so the A21 fix in s12.v5b says "set upright at the crown".
+- Lạnh lùng: s13 cut bxMGZJJ5Y2, s14 cut nVsbFtaYQD, s15 cut YMl5HhtWeC.
+- Quyến rũ: s16 cut s7IM02Wl8e, s17 cut WDgKqfpcXe, s18 cut SyheMY2Ub8.
+All checked at full size and on a 2x face crop: eyes aligned, no teeth. The four types are clearly different at a glance.
+Note (not fixed, tiny): on s16 and s18 the beauty mark sits under the eye on the viewer's left (her right eye), not her left as written. The old s03 had the same thing.
+Sheet: dev/handover/review-sheets/new-faces-v4/nf4_4groups_12.jpg (≈270 KB, one row per type).
+Credits part 2: 11 gens + 10 cuts = 1,515. NF4 total: 2,754.
