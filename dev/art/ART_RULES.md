@@ -108,7 +108,8 @@ G11 | No round chest badge/second "fan" stuck on the chest. | Lượt 306 | FG 8
 G12 | HQP/HH: all hair up, prompt-B brocade fabric, sleeves per G5; HQP t7 = more jewels/pearls/jade/gold than t6, still below HH; two HH colour sets: yellow set (t8) + original-colour set (t8o: her own main colour dominant, royal-yellow touches). | Lượt 486 (19/11) | FG 26, 870, 909, 636, 804 | over: Lượt 331, 364, 253, 301
 G13 | Colours across a person's ranks: her own MAIN + SECONDARY pair (rule B15) — see conflicts for "each rank its own colour". | Lượt 293, 306 | FG 786, 818
 G14 | t7 HQP and t8 HH MUST show the SECONDARY colour too (two-colour sentence B15 present in t7/t8 prompts; Lượt 512/519 secondary disappeared). | Lượt 529 (owner via ROOT-49 chat Lượt 521) (19/11) | FG -
-G15 | QUÝ NHÂN t3 REDESIGN: Quý nhân and Thường tại look too alike → 4 DIFFERENT Quý nhân outfit options side by side (A3), owner picks and rewrites the Quý nhân prompt. | Lượt 529 (owner via ROOT-49 chat Lượt 521) (19/11) | FG -
+G15 | QUÝ NHÂN t3 DESIGN = option B v2 (owner Lượt 559): SQUARE NECKLINE framed by a wide stiff embroidered band in the secondary colour + wide stiff brocade girdle + embroidered ceremonial APRON PANEL down the centre front to the ankles + a long jade-plaque/pearl pendant set on each side; wording = dev/handover/reports/quy-nhan/m13_a26_t3_v2_optB.prompt.txt Outfit sentence (colour words per person). Rejected: A (curved lapel, 'hiện đại'), C (lotus-petal overskirt, front too short), D (round neck). | Lượt 559 (19/11) | FG - | over: Lượt 529 (owner via ROOT-49 chat Lượt 521) (19/11)
+G16 | NO ROUND NECKLINE on any outfit ('cứ cổ tròn là bỏ hết', owner Lượt 559). | Lượt 559 (19/11) | FG -
 
 ## H. Triều phục (court robes)
 H1 | t7 HQP and t8 HH triều phục = approved r18, unchanged; t6 Quý phi yellow as in r20 approved (do not reduce). | Lượt 459, 467, 470 | FG 22-23
