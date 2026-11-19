@@ -272,5 +272,6 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | opt-scroll-reset BIG REVIEW (opus) | review/opt-scroll-reset a5e2d8e7 (stacked on ev-pic-followups) | C-AG #22 for ROOT-67 | session_01Rc5AsJNiFwrW3QTurwWfyi | RUNNING | 19/11 09:34Z |
 | coop-thin hostnull fix #2 (opus; successor of 4i9JQenz at 20a1f54f) | review/coop-thin-hostnull | B | session_01N1tNP2tXKt5N4VcwMfYH8B | RUNNING | 19/11 09:44Z |
 | REVIEW coop-thin-f5 r1 (opus BIG) of e6ad9a29 | review/coop-thin-f5-r1 | B | session_01N1tNP45gZxR8HqWwB9auYE | RUNNING | 19/11 09:50Z |
-| coop-thin F6 (opus; deck act(i), j72 quests, remaining game ends, tripwire → 0; stacked on F5) | review/coop-thin-f6 | B | session_01N1tNP5ex6HrG5uFmnZYTqA | RUNNING | 19/11 09:51Z |
+| coop-thin F6a (opus; deck runner one hand on host, act(i), j72 quests, L11; stacked on F5) | review/coop-thin-f6 | B | session_01N1tNP5ex6HrG5uFmnZYTqA | RUNNING | 19/11 09:51Z |
 | MAIN ROOT-68 (opus; child of ROOT-67, depth 6) | handover HANDOVER_SESSION9 | ROOT-67 | session_01Rc5AsHe8w1z2UgZJUycHEJ | RUNNING | 19/11 09:57Z |
+| coop-thin F6b (opus; remaining mini-game ends as score intents, L12; parallel to F6a, stacked on F5) | review/coop-thin-f6b | B | session_01N1tNP4XtuMraUEmXvATwMg | RUNNING | 19/11 10:01Z |
