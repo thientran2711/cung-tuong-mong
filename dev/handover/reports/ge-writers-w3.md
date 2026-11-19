@@ -42,16 +42,32 @@ Before → after (self-scan while writing): 7 facts dropped because they hold in
 3. **Catalogue levers the road does not carry** (route (b), as W2 cn_chu_4): ch_bi_3 «real mother» → written as the Thái hậu – Hoàng thượng reconciliation (road ch11 s2); ch_bi_4 «lost prince» → her own son whom the court had forgotten; cnv_ma_4 «wet nurse» → a prince entrusted to her as the ending's effect. If the owner wants the literal lever, a road beat (FOR B) or a kid-origin term is needed — not written now.
 4. HH rule: ch_ho_2 follows tt_tranh_4 / tt_mat_1 (cond seat, no fo) — same open decision «one HH seat rule».
 
-## Tests
-- ge-guard **6/6** (25 live branches: pilots + W1 + W3, incl. the no-name-twice line).
-- Measure / ge-engine / one-core / build_site / quickcheck: see below (filled as runs finish).
+## Commits on review/ge-writers-w3 (all pushed)
+aca2c46b data + BAL rows + assemble + guard line · 20059020 rebalance of 14 thiện-heavy Chuỗi · b9265e2b cnv_chu_1/4 Tai mắt gate 3 → 2 · **cb72b507 (READY)** cnv_chu_1 rewritten true without the mistress (fo misD dropped), cnv_chu_2 fail row + danh, ge-engine shading-check pick.
 
-## Measure (MODES=kind,cruel, 6 kind + 6 cruel lives per road, `sens` play; data 20059020 for ch_ho/ch_bi/thd/cnv, aca2c46b = same data for ch_co/ch_benh — the rebalance did not touch them)
-Rebalance round (family fix, commit 20059020): run 1 showed cruel lives aimed at ch_ho_1 / ch_bi_1 (Chuỗi +20 thiện / −5 ác) ending thiện (ch_ho cruel .83, ch_bi .75). Rule applied to all 44: thiện names in a Chuỗi ≤ 2 × ác names, fitting ác names added — 14 endings changed (ch_ho_1 +20/−4 → +12/−6, ch_bi_1 +20/−5 → +14/−7, thd_tho_3, thd_sach_3, thd_tro_1, thd_hoc_1/3/4, cnv_chu_2/4, cnv_ban_1, cnv_ma_1/3/4). After it: ch_ho cruel 1.00, ch_bi .83.
+## Tests (at cb72b507, on main e16e1d66)
+- ge-guard **6/6** (25 live branches: pilots + W1 + W3, incl. W2's no-name-twice line).
+- ge-engine `- all` **808/808** (first run 779/808: thd_hoc «the life runs the road thd_tro» = the known cold-page road-wait flake, passed on rerun; cnv_chu fails were real → fixed, see below).
+- one-core-guard **PASS** (fails 0, inline 4001 ≤ 4212) · build_site OK · **quickcheck PASS** (core gates PASS, open 1504 ms, old save ok, render 243/235, tab 406/399, buổi 1144/1193, tasks>200 19/19).
+- **ge-engine.js test change (FOR E, shared block):** the shading check took the FIRST thiện ending; in cnv_chu that is cnv_chu_2 «Nghĩa chủ tình sâu» (cond mis + fo misD), which is correctly fail-only in a fresh test life ({mis} is cast at .4). The check now takes the first thiện ending that is still open after geLive in that life (one line, comment «W3»). Pilots / W1 / W3 all pass; W2's copy of ge-engine.js should take the same line when W2 and W3 meet (whoever lands second).
+- The same run showed the fail check needs a stat row: cnv_chu_2 fail `{mis:-15}` gave empty fx (mis is applied apart from STATK) → `{mis:-15,danh:-6}`.
+
+## Measure — ALL 11 ROADS IN (132 lives, page errors 0)
+`MODES=kind,cruel node dev/measure/ge-measure.js - 6 <1–3 pages> <out> <roads> sens` — 6 kind + 6 cruel lives per road. Data: ch_co / ch_benh measured on aca2c46b (no later change touches them); the 9 other roads on 20059020 (+ cnv_chu re-measured on cb72b507; the mat gate change b9265e2b moves no open state or shading).
+Rebalance round (family fix, 20059020): run 1 showed cruel lives aimed at ch_ho_1 / ch_bi_1 (Chuỗi +20 thiện / −5 ác) ending thiện (ch_ho cruel .83, ch_bi .75). Rule applied to all 44: thiện names in a Chuỗi ≤ 2 × ác names, fitting ác names added — 14 endings changed (ch_ho_1 +20/−4 → +12/−6, ch_bi_1 +20/−5 → +14/−7, thd_tho_3, thd_sach_3, thd_tro_1, thd_hoc_1/3/4, cnv_chu_2/4, cnv_ban_1, cnv_ma_1/3/4). After it: ch_ho cruel 1.00, ch_bi .83.
 | road | kind | cruel | open .8 | open .11 [1,2.6] | kind→thiện ≥.70 | cruel→ác ≥.70 | won |
 |---|---|---|---|---|---|---|---|
 | ch_co | 6 | 6 | 3.92 | 2.50 IN | 1.00 IN | 1.00 IN | 9/12 |
 | ch_benh | 6 | 6 | 2.92 | 2.00 IN | 1.00 IN | 1.00 IN | 5/12 |
 | ch_ho | 6 | 6 | 2.50 | 1.92 IN | 1.00 IN | 1.00 IN | 7/12 |
 | ch_bi | 6 | 6 | 3.67 | 2.33 IN | 1.00 IN | 0.83 IN | 8/12 |
-(table grows as runs finish; ~4 min per life, 2–3 pages; the container ran out of memory once — chromium pages grow to ~6 GB over a few lives)
+| thd_tho | 6 | 6 | 3.25 | 2.42 IN | 1.00 IN | 1.00 IN | 11/12 |
+| thd_sach | 6 | 6 | 2.08 | 1.75 IN | 1.00 IN | 1.00 IN | 9/12 |
+| cnv_ban | 6 | 6 | 3.17 | 1.83 IN | 1.00 IN | 1.00 IN | 11/12 |
+| cnv_chu | 6 | 6 | 3.00 | 1.88 IN | 1.00 IN | 1.00 IN | 3/12 |
+| cnv_ma | 6 | 6 | 2.58 | 1.92 IN | 1.00 IN | 1.00 IN | 8/12 |
+| thd_hoc | 6 | 6 | 2.75 | 2.00 IN | 1.00 IN | 1.00 IN | 8/12 |
+| thd_tro | 6 | 6 | 3.08 | 2.25 IN | 1.00 IN | 1.00 IN | 8/12 |
+| **all** | 66 | 66 | 2.99 | **2.07 IN** | **1.00 IN** | **0.98 IN** | 87/132 |
+cnv_chu won 1/12 on 20059020: blocked by the Tai mắt gate 3 (cung nữ lives reach 0–2) → gate 2 on cnv_chu_1/4; on cb72b507 3/12 (the rest blocked by {mis} → ngươi, a road-driven relation, same rule as pilot cnv_mat_4). inChar / rand bots not run (same as W1 / W2; the odds-cap note stays FOR E).
+Machine note: chromium pages grow to ~6 GB over a few lives; with 3 pages the container ran out of memory and restarted twice — run the measure with 1 page per road process (≈2.5 min per life).

@@ -167,7 +167,7 @@ receiver-choice (ORDER ~21:16Z audit) | review/receiver-choice | RUNNING fix rou
 | stage-here r3 (opus; toast never on people, collapse to rail «!»; merge 790cda59 + stage-rightcol) | review/stage-here | MAIN ROOT-58 | session_01Rc5AsMY7PgErES6LptdBUE | SẴN SÀNG KIỂM 26483512 (r3d) | 18/11 23:30Z |
 | MAIN ROOT-57 (opus; child of ROOT-56; trig_01Ja7zaN36ChYwfwpjXs1Riu) | handover HANDOVER_SESSION9 | ROOT-56 | session_01Rc5AsKYmXLRoL6C62yZq4r | RUNNING | 18/11 21:37Z |
 | ge-writers-w2 remerge after W1 (sonnet E11w2m) | review/ge-writers-w2 | E ROOT #7 | session_01DgYSWpbQHujHaQRWp5BQX1 | DONE c1e39605 | 18/11 22:47Z |
-| GE writers W3 (ch, thd, cnv_chu/ban/ma; opus E11c) | review/ge-writers-w3 | E ROOT #7 | session_01DgYSWpWugHTejVTtLoKV8s | RUNNING | 18/11 21:50Z |
+| GE writers W3 (ch, thd, cnv_chu/ban/ma; opus E11c) | review/ge-writers-w3 | E ROOT #7 | session_01DgYSWpWugHTejVTtLoKV8s | READY cb72b507 (reports/ge-writers-w3.md; base main e16e1d66, re-merge at landing) | 19/11 04:50Z |
 | stage-rightcol r7 (opus; successor of session_01Rc5AsMuwoEKePMdcju7qZi; WIP 9ace584c + Fold tag-cover fix) | review/stage-rightcol | MAIN ROOT-59 | session_01Rc5AsMCSTNrRWBqRtSxRnR | SẴN SÀNG KIỂM 9f00e40 | 18/11 23:20Z |
 | questline-q2 BIG REVIEW round 2 (opus E13r) | review/questline-q2 451b4d1e → r6 cb0c97b7 | Foreman E ROOT #7 | session_01DgYSWmBrrumpeuqy7XfMzM | DONE: PASS cb0c97b7 | 18/11 22:11Z |
 | Nữ đế r10 (copy HH form, dragon) + BD Quý phi 2-ref (sonnet N1) | handover: dev/art/t8-prompt-B + img/_review/states-r10 | Foreman C ROOT-32 | session_01PEhRbvKvsx8JgQUBCgh9jr | RUNNING | 18/11 22:29Z |
