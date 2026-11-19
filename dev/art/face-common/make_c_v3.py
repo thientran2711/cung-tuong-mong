@@ -134,7 +134,7 @@ R=[
  "a light open beizi of celadon silk crepe over a cross-collar white inner top and a white floor-length skirt of plain silk, small embroidered water ripples and carp along the front edges, a white silk sash with a small celadon jade pendant, long sleeves","celadon","white","celadon and white",
  "standing upright with her weight on one leg, a rose-red pomegranate blossom sprig held at her chest in one hand, the other hand resting at her sash","a rose-red pomegranate blossom sprig","pomegranate blossom sprig (rose red)"),
 ("c29",18,"a bold OVAL face with defined angular cheekbones, a firm straight jaw and a defined chin, large bright almond eyes with crisp clear lids and lifted corners, fully open, strong straight brows with a clean arch near the tail, a straight high nose, wide full lips with sharp edges","bold oval, angular cheekbones","large bright almond, crisp lids","wide full, sharp edges",
- "loose and very straight to the waist, parted at the side, a pale grey silk ribbon and one small silver crescent hairpin above the left temple",
+ "loose and very straight to the waist, parted at the side, a dusky plum-rose silk ribbon and one small silver crescent hairpin above the left temple",
  "a cross-collar ruqun of ink-blue silk satin with a soft sheen and a pale grey floor-length skirt of plain silk, small embroidered plum blossoms in snow at the collar and hem, a pale grey silk sash with a small white jade pendant, long sleeves","ink blue","pale grey","ink blue and pale grey",
  "walking with poise mid-step, a closed coral-red folding fan held in one hand and tapped against her other palm at waist height","a closed coral-red folding fan","folding fan (coral red)"),
 ("c30",16,"a pert ROUND-DIAMOND face with soft cheeks and a small pointed chin, large bright almond-round eyes with a playful upward flick at the outer corners, fully open, short slightly arched brows, a small turned-up nose, a small mouth with a plump upper lip","pert round-diamond","large almond-round, upward flick","small, plump upper lip",
@@ -142,11 +142,11 @@ R=[
  "a short cross-collar jacket of moonlight-blue silk satin over a long white pleated floor-length skirt of plain silk, small embroidered kittens at the cuffs and jacket hem, a white silk sash with a small blue glass bead, long sleeves","moonlight blue","white","moonlight blue and white",
  "turning lightly mid-step, a little orange-red paper fox mask on a short stick swinging low at her side in one hand, the other hand raised in a little wave","a little orange-red paper fox mask on a short stick","paper fox mask on stick (orange-red), held low"),
 ("c31",17,"a bright SOFT OVAL face with high round cheeks and a gently pointed chin, large clear eyes with a lively lift at the outer corners and a slight natural double lid, fully open, gently arched medium brows, a straight small nose, a medium mouth with full soft lips and lifted corners","soft oval, high round cheeks","large clear, lively lift","medium full soft, lifted corners",
- "half-up: the top hair gathered in a small twist on the right side of the crown held by a small silvery-grey silk flower, the rest long and loose over the left shoulder",
+ "half-up: the top hair gathered in a small twist on the right side of the crown held by a small deep rose silk flower, the rest long and loose over the left shoulder",
  "a cross-collar ruqun of pale jade silk satin with a soft sheen and a silvery-grey floor-length skirt of plain silk, small embroidered willow leaves and orioles at the collar and hem, a silvery-grey silk sash with a small white jade pendant, long sleeves","pale jade","silvery grey","pale jade and silver",
  "walking forward mid-step, a sprig of pink cherry blossom held up at shoulder height in one hand, the other sleeve swinging","a sprig of pink cherry blossom","cherry blossom sprig (pink)"),
 ("c32",17,"a gentle WIDE OVAL face with soft full cheeks and a rounded chin, large warm round eyes with softly lowered outer corners and long lashes, fully open, soft low curved brows, a small rounded nose, a small full mouth with a soft bow","gentle wide oval, rounded chin","large warm round, lowered corners","small full, soft bow",
- "fully loose and long, a soft grey-blue ribbon tied in a low loose bow at the nape, one small pearl comb above the right ear",
+ "fully loose and long, an indigo-blue ribbon tied in a low loose bow at the nape, one small pearl comb above the right ear",
  "a cross-collar ruqun of ivory silk satin with a soft sheen and a soft grey-blue floor-length skirt of plain silk, small embroidered narcissus at the collar and cuffs, a soft grey-blue silk sash with a small pearl pendant, long sleeves","ivory","soft grey-blue","ivory and soft grey-blue",
  "mid-step, holding a pink China rose with a short stem in both hands at her chest, head tilted gently","a pink China rose","China rose (pink)"),
 ]
@@ -209,6 +209,11 @@ TONE_NAMES={"c01":("soft rose red","jade green"),"c02":("soft sapphire blue","sl
 "c30":("soft moonlight blue","slate grey"),"c31":("soft pale jade","slate grey"),"c32":("soft ivory","grey-blue")}
 HUE_SET={"c01":355,"c06":12,"c21":342,"c24":22,"c27":6,"c15":10,"c17":352}
 NEUTRAL_HUE={"soft taupe":30,"slate grey":215}
+# B19 (owner Lượt 591): NO GREY at all — every grey / slate / grey-blue / taupe secondary becomes a real colour in a contrasting hue (deeper level, S 0.35).
+SEC_REAL={"c02":("dusky rose",350),"c03":("deep rose",345),"c06":("deep teal-green",170),"c09":("dusky rose",355),"c10":("deep teal",180),
+"c11":("deep jade green",155),"c12":("deep rose",340),"c13":("deep teal-blue",195),"c15":("deep jade green",160),"c16":("deep plum",320),
+"c24":("indigo blue",225),"c27":("deep teal",180),"c28":("dusky rose",350),"c29":("dusky plum rose",335),"c30":("deep coral rose",5),
+"c31":("deep rose",345),"c32":("indigo blue",215)}
 def _hls(h): return colorsys.rgb_to_hls(*(int(h[i:i+2],16)/255 for i in (1,3,5)))
 def _hex(H,L,S): return "#%02X%02X%02X"%tuple(round(x*255) for x in colorsys.hls_to_rgb(H,L,S))
 def _cl(x,a,b): return min(max(x,a),b)
@@ -218,10 +223,11 @@ def TONE(d):
         nm,ns=TONE_NAMES[k]
         H,L,S=_hls(mh); H=HUE_SET.get(k,H*360)/360
         i=int(k[1:])
-        Smax=0.25 if "ivory" in nm else 0.40   # ivory/cream mains stay ivory-beige, not peach
-        main=(nm,_hex(H,_cl(L,0.62,0.72),_cl(S,0.25,Smax)))
+        if "ivory" in nm: main=(nm,_hex(40/360,0.80,0.45))   # B19: ivory must not read grey-beige → light warm ivory
+        else: main=(nm,_hex(H,_cl(L,0.62,0.72),_cl(S,0.30,0.40)))
         H2,L2,S2=_hls(sh)
-        if ns in NEUTRAL_HUE: H2,S2,L2=(NEUTRAL_HUE[ns]+(i%5-2)*5)/360,0.20,0.42+(i%4)*0.03   # small per-person spread
+        if k in SEC_REAL: ns,h2=SEC_REAL[k]; H2,S2,L2=h2/360,0.35,0.42+(i%4)*0.03   # B19 no grey: a real colour
+        S2=max(S2,0.30)
         if k=="c10": main=(nm,_hex(28/360,0.70,0.40))   # keep peach apart from ivory mains
         sec=(ns,_hex(H2,_cl(L2,0.38,0.52),_cl(S2,0.20,0.35)))
         out[k]=(main,sec)
