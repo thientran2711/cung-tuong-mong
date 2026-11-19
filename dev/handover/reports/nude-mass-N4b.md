@@ -1,0 +1,9 @@
+# nude-mass — painter N4b (Foreman C ROOT-35 session_01PEhRbwGPqHkqe1BAxK4nA2; brief briefs/nude-mass.md + UPDATE; method = N4 handover in reports/nude-mass-N4.md)
+START_CTX ~5 % of 1M window (get_session reads 0; own estimate) → rollover line ~30 %, ceiling 60 %.
+PRIORITY #1 CHECK: OD/ledger/claims "nude-mass" → brief nude-mass.md (+UPDATE), report nude-mass-N4.md, FOREMAN_C_STATUS ROOT-35 log (N4b scope + "first: builder patch a65 nude = same soft yellow as a51"); builder build.py 421fee3 reused; nothing invented. Read: START_CORE/WORKER/ART, FIGURE_GATE A0 + REFERENCES + rule 3 + Nữ đế/AGE 51/ELDER COLOURS lines, consort-B10 (re-read before each person).
+
+## Builder patch 8f34cb5 (a65 yellow)
+`--state nude --age a65` only: age clause "the royal yellow becomes a deeper antique gold" → "stays the SAME soft warm antique gold as at 51, a gentle honey-gold, never ochre, never mustard, never brownish"; image-3 sentence likewise. Guard: c01/c06/c10/c25 a18/a26/a36/a51 byte-identical; Thái hậu a65 + t8 a65 identical; c01–c32 a65 all build.
+
+## Per person (refs: own live t1 of that age, a65 → her a51 t1; style3_girls Xm9tPkMBfo; swatch TdwDfOyVNR; gpt-2-6 1024x2304 2k transparentBackground → images_remove_background, corners alpha 0)
+- c01 (opt A, jade seal): a51 + a65 new (2 gens, 0 regens) + a18/a26/a36 from N4. Looked: closed-lip smile, whole face clear, one seal held at chest below the chin, crown dragon-phoenix no flowers, beads end above brows, calm stance (stole held low), a51 silver streaks + fine lines, a65 silver hair + wrinkles, a65 yellow soft gold like a51 (no mustard). Sheet: https://ctm-img.victoria-tntt.workers.dev/img/_review/nude-mass/sheet_c01-c01.jpg
