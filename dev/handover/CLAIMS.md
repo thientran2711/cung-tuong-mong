@@ -281,7 +281,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | coop-thin F6b #2 (opus; successor of 4XtuMraU at a4d77f3c) | review/coop-thin-f6b | B | session_01N1tNP3uQwFDZBPxqqP6ZN8 | ROLLOVER #2→#3 @ 5e49d73d (f6b L12 33/33, 4G 33/33, TRIP F6b 0; report reports/coop-thin-f6b.md) | 19/11 12:05Z |
 | MAIN ROOT-69 (opus; child of ROOT-68, depth 7) | handover HANDOVER_SESSION9 | ROOT-68 | session_01Rc5AsMesCGqrqL1dGjCJXv | DONE → ROOT-70 | 19/11 10:48Z | START_CTX ~4 %
 | palace-chatter successor: apply K-HEAD-SAY jchat-say.patch + end-to-end run (opus E17c) | review/palace-chatter; briefs/E17c-palace-chatter-say.md | FOREMAN E #11 | session_01DgYSWnKfwZsB2F92BggLCq | DONE — SẴN SÀNG KIỂM 115717a8 (KIT REQUEST K-HEAD-SAY × EMO-SEAL LEAN open) | 19/11 11:30Z |
-| kyngo-daily BIG REVIEW (opus E18r) of 8cb39e38 | review/kyngo-daily; briefs/E18r-review-kyngo-daily.md | FOREMAN E #11 | session_01DgYSWnzDSXLeyEPaWuBrQQ | RUNNING | 19/11 11:00Z |
+| kyngo-daily BIG REVIEW (opus E18r) of 8cb39e38 | review/kyngo-daily; briefs/E18r-review-kyngo-daily.md | FOREMAN E #11 | session_01DgYSWnzDSXLeyEPaWuBrQQ | DONE PASS r2 → READY face71dd (review/kyngo-daily-rv); archived | 19/11 11:00Z |
 | REVIEW role-parity-drift-2 r1 (sonnet SMALL, tooling only) of 6ffe38a4 | review/role-parity-drift-2-r1 | B | session_01N1tNP6yFh7EgvwXvnX7ku3 | PASS 6ffe38a4f5c0d879050eef5b725550a641eb130e | 19/11 11:06Z |
 | coop-thin F6a #2 (opus; successor of 5ex6HrG5 at 594fe744) | review/coop-thin-f6 | B | session_01N1tNP5kNmqN7AE6fHZAd5u | RUNNING | 19/11 11:07Z |
 | palace-chatter BIG REVIEW (opus E17r) of 115717a8 | review/palace-chatter; briefs/E17r-review-palace-chatter.md | FOREMAN E #11 | session_01DgYSWpBsw8KySsaQyoredH | RUNNING | 19/11 11:31Z |
@@ -289,7 +289,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | MAIN ROOT-70 (opus; child of ROOT-69, depth 8 = LIMIT) | handover HANDOVER_SESSION9 | ROOT-69 | session_01Rc5AsKJHPE6qV9k9Ugyhj7 | RUNNING | 19/11 11:34Z |
 | FOREMAN C-AG #23 (opus; child of C-AG #22, depth 1) | handover FOREMAN_C_STATUS | C-AG #22 | session_01Rc5AsHuCYUKscp1y5MsPDQ | RUNNING | 19/11 11:40Z |
 | FOREMAN E #12 (opus; child of E #11, depth 2) | handover FOREMAN_E_STATUS | FOREMAN E #11 | session_01DgYSWoiPTxVs5xQni4RvZw | RUNNING | 19/11 11:38Z | PICKUP 11:42Z START_CTX ~5 %
-| kyngo-daily FIX r2 (opus E18b; 9 fixes from E18r) | review/kyngo-daily; briefs/E18b-kyngo-fix-r2.md | FOREMAN E #11 | session_01DgYSWose5CuxgwKoCBMKGm | RUNNING | 19/11 11:37Z |
+| kyngo-daily FIX r2 (opus E18b; 9 fixes from E18r) | review/kyngo-daily; briefs/E18b-kyngo-fix-r2.md | FOREMAN E #11 | session_01DgYSWose5CuxgwKoCBMKGm | DONE a2ae3ac2 → PASS → LAND READY face71dd FOR MAIN; archived | 19/11 11:37Z |
 | kyngo-daily FIX r2 (opus E18b; 9 review fixes) | review/kyngo-daily; briefs/E18b-kyngo-fix-r2.md | FOREMAN E #11→#12 | session_01DgYSWose5CuxgwKoCBMKGm | SẴN SÀNG KIỂM a2ae3ac2 r2 (depth 2) | 19/11 11:40Z |
 | REVIEW seal-lean-3 r8 (sonnet SMALL; ROOT-70 ORDER via C-AG #23) of 2111eb10 | review/seal-lean-3; reports/seal-lean-3.md | C-AG #23 for ROOT-70 | session_01Rc5AsMYavicZ6i6he17EQf | PASS 2111eb10 (LAND READY sent; waits owner OK) | 19/11 12:01Z |
 | coop-thin F6b #3 (opus; successor of 3uQwFDZB at 5e49d73d) | review/coop-thin-f6b | B | session_01N1tNP3ZKhXs5gAeKLeNMoh | RUNNING | 19/11 12:11Z |
