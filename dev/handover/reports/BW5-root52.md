@@ -36,3 +36,8 @@ BW5 done: (1)(2)(3) pushed. Open for ROOT-52: the flags above. Context ≈ 20 %.
 
 ## HANDOVER line (BW5 rollover)
 Context ≈ 25 % (START 4 % + ~21 %). Pushed: everything above. Open for successor: SAME-RANK FIX (ruling on items first), then Sắc sảo mass (only after ROOT-54 GO).
+
+## ROOT-54 orders received at rollover (20:46Z) — for the successor, no gens
+1. Flower-name clash (A21 small fix): where the hair-flower NAME slot carries a size word ("a tiny camellia", "small …", e.g. build.py LOW flower table / build_all slot "(a tiny camellia)", "(a small pink silk flower)"), drop the size adjective so only the F13 SZ ladder sets size.
+2. SAME-RANK (Lượt 650 + E12: NEW gens only, no redraws): inside one look group at one rank+age: 8 different items (ROOT-54 wants 8 distinct — note the 5-items-per-age E11 limit above; needs IT1 lists widened or a ruling), different angle sentence (≤2 per visual angle class), different grace line; deterministic; keep E6.
+3. Rerun the same-rank audit (dev/handover/reports/same-rank-audit.md method) on the new commit for Sắc sảo + Tinh nghịch; write before/after numbers there. Gates 0 FAIL. Push, send ROOT-54 commit + numbers. Mass NOT GO.
