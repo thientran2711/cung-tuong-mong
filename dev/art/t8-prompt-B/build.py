@@ -1382,6 +1382,7 @@ def gen_refs(argv,prompt):
     if "Image 3 is only a colour reference" in prompt: r.append({"image":3,**REF_SWATCH})
     if "--bdq" in argv: r.append({"image":3,**REF_QP})   # F2: costume source = the approved old Quý phi picture
     if "Image 3 is only a costume reference" in prompt: r.append({"image":3,**MAMA_REF})
+    if "Image 2 is only a costume reference" in prompt: r.append({"image":2,**MAMA_REF})   # ma ma one-ref (--nostyle): face = image 1, costume = image 2
     return r
 def _run_cmd(argv):
     import subprocess
@@ -1448,6 +1449,7 @@ if __name__=="__main__":
         _st=" The style reference image is only for skin, drawing style, fabric and embroidery: never copy its face, body or pose."
         assert _st in _o,"style sentence not found"
         _o=_o.replace(_st,"",1)
+        if STATE=="mama": _o=re.sub(r"\b([Ii])mage 3\b",r"\1mage 2",_o)   # MMX1 (owner Lượt 479 ONE-REF for ma ma, FIGURE_GATE 11-12): no style image -> image 1 = her own face picture, the costume picture becomes image 2 (same renumber as consorts t2-t8 in store-all/build_all.py)
     # a51 DARK (Foreman C ROOT-30, owner 23:05Z "màu tối giống như là ma hoặc là Thái hậu"): W90 found the shared "fresh, clear and luminous" clause kept c13 a51 bright; a51 only swaps it, every other age byte-identical
     # OWNER 18/11 ~21:06Z real (verbatim): "51 tuổi và 65 tuổi là phải dùng của những cái màu của những người già xài á, không có dùng cái màu tươi rói nha ... mặc dù già nhưng không có nghĩa là màu đen hay màu nâu ... Mà nó là một cái màu nó sang, mà cái kiểu mình nhìn vô mình thấy nó là một cái người đã lớn tuổi, trầm tĩnh lớn tuổi" → a51 AND a65 use the elder clause (a51 text = the approved a51d2 sample)
     if AGE in ("a51","a65"): _o=_o.replace("all colours fresh, clear and luminous, never dusty or greyed; ","all colours in the DEEPER, DARKER mature shades described above (rich and dignified, never bright, never pastel, never dusty or washed-out); the colour names and hex values below are her young colours, darken them as described above; "+("elegant, luxurious elder colours that read as a calm, dignified older lady, never vivid or fresh bright colours, yet never black or brown; " if AGE=="a65" else "")).replace("one fresh accent","one accent").replace("a fresh ","a ")
