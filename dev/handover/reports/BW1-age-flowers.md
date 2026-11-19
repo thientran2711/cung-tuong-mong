@@ -92,3 +92,9 @@ BW1 is at its rollover budget. ROOT-50 (coordinator) opens the successor. Builde
 | 5 | E4: 66-pose pool | 36 old = spec5 POSES (build.py spec5pose); the 30 new are in POSES_30.md / POSE_GROUPS.md (dev/art). t4+ = any of 66 + rank restraint ending; t1–t3 = lively/airy only + LIVELY ending. Keep "no walking/stepping legs". | build.py spec5pose, dev/art/POSES_30.md, POSE_GROUPS.md |
 
 Order suggestion: 4 and 2 first (small, gate-able), then 3, then 5; ask about 1 (men) first. Always diff builder output before/after for a sample of every family (BW1 script idea: run each family at a18–a65, compare sentence sets; only the intended sentences may differ). Read messages between steps.
+
+### ROOT-50 answers (18:24Z / 18:25Z), for the successor
+- **Flowers (Q): YES.** Copy "NO flowers in the hair (no fresh or silk flowers), only her hairpins." verbatim into cung nữ tm1/tm2 (and nữ quan tm4 if her face refs have flowers). Widen the check_store X14 scope to tm*. The tm1/tm2 hair clauses are in build.py build_maid (k==1 / k==2 outfit strings); BW1's removal is already there.
+- **MEN (J6): YES, owner order Lượt 529.** Copy the Nữ đế AGE_TXT of all five ages to men, changing only gender words (she→he, her→his, woman/lady→man), and ADD a65 for men. Targets: emperor-B/build.py AGE_TXT and build_npc.py M_AGE.
+- **E4 correction:** walking/stepping-leg poses are NOT banned. Keep them in the 66-pose pool, t1–t3 lively draws included (E4 updated in ART_RULES; pull).
+- Items 2–5 as in the table above.
