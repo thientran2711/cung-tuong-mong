@@ -55,7 +55,7 @@ BAL.ge={
  thd_sach_1:{tai:50,mat:4},thd_sach_2:{tamco:45,sung:45},thd_sach_3:{duc:40,danh:35},thd_sach_4:{tai:40,dad:25},
  thd_tro_1:{duc:40},thd_tro_2:{tamco:45,danh:40},thd_tro_3:{duc:35,dad:25},thd_tro_4:{duc:40,tamco:40},
  thd_hoc_1:{tai:50,sung:40},thd_hoc_2:{tamco:50,mat:3},thd_hoc_3:{duc:40,tai:35},thd_hoc_4:{duc:40,sung:40},
- cnv_chu_1:{tamco:45,mat:3},cnv_chu_2:{mis:20},cnv_chu_3:{duc:35,tamco:35},cnv_chu_4:{duc:40,mat:3},
+ cnv_chu_1:{tamco:45,mat:2},cnv_chu_2:{mis:20},cnv_chu_3:{duc:35,tamco:35},cnv_chu_4:{duc:40,mat:2},
  cnv_ban_1:{duc:40},cnv_ban_2:{tamco:45,danh:30},cnv_ban_3:{tai:45,danh:30},cnv_ban_4:{duc:30,sac:40},
  cnv_ma_1:{tai:45,danh:35},cnv_ma_2:{tamco:45,mat:3},cnv_ma_3:{duc:40,danh:30},cnv_ma_4:{duc:40,sung:35}},
  /* fail-outcome losses (her pair pointed at the ending and missed; none in the quiet form unless quietLoss) */
