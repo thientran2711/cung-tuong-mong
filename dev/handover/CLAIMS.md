@@ -201,7 +201,7 @@ kc/ngheo NEW c13+c16 (4 gens) | handover | session_01PEhRbvGFP6YSgT5DTgo3yu (K4,
 | MAIN ROOT-62 (opus; owner-opened ROOT, depth 0; successor of ROOT-61) | handover HANDOVER_SESSION9 | owner | session_01Rc5AsJvnKvJMiKUjEhRST1 | RUNNING | 19/11 02:20Z |
 | maid-ladder-6 (opus; BIG) | review/maid-ladder-6 | B | session_01N1tNP6uwmf4WjfcYZ2eBKe | SẴN SÀNG KIỂM cb5a7cb3 (on LIVE 1cf5e8bb; quickcheck PASS, coop-e2e 63/63, maid-ladder-6 13/13; report reports/maid-ladder-6.md; shots img/_review/maid-ladder-6/) | 19/11 ~03:45Z |
 | law3-cost-only (opus; SMALL) | review/law3-cost-only | B | session_01N1tNP6PHnsEVwUKbZMrXkQ | RUNNING | 19/11 02:30Z |
-| art-wiring-1119 (opus; SMALL) | review/art-wiring-1119 | B | session_01N1tNP59FAL2oqUhk7AUxRa | SẴN SÀNG KIỂM 69a26198 | 19/11 03:00Z |
+| art-wiring-1119 (opus; SMALL) | review/art-wiring-1119-r2 | B | session_01N1tNP59FAL2oqUhk7AUxRa | SẴN SÀNG KIỂM r2 84530d06 | 19/11 04:20Z |
 | coop-thin F2 #2 (opus; successor of 3eu44fWy at 6eaf01a) | review/coop-thin-f2 | B | session_01N1tNP54k39FoQxynYXS2Xp | RUNNING | 19/11 02:30Z |
 | seal-lean (sonnet; owner OD 19/11 ~02:15Z, kit §38.4 idle sway + lean-in) | review/seal-lean | MAIN ROOT-62 | session_01Rc5AsKsNitSW71UKQUtLKJ | SẴN SÀNG KIỂM 5f7aef61 | 19/11 03:05Z |
 | seal-lean SMALL REVIEW (sonnet) | review/seal-lean 5f7aef61 | MAIN ROOT-62 | session_01Rc5AsM8PddSPcKEW1WCkRV | PASS 1cf5e8bb8 | 19/11 02:35Z |
