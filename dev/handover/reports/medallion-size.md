@@ -18,3 +18,17 @@ My probe on main did not catch the big clone in 35 s (the clone is not a `.kemo`
 Nothing was committed to review/medallion-size (branch exists only locally at edb2e724).
 
 ~0% xong / chờ quyết định.
+
+## RESCAN r2 (C-AG #23) — RESCAN CLEAN, no fix needed
+Worker for C-AG #23 / ROOT-70. START_CTX ~4 %.
+PRIORITY #1 CHECK ('medallion|kfseal|seal-lean-3'): OD 3 | main jemoseal.js/jfigseal.js (seal-lean-3 LIVE 2bda29a1) | review/* medallion-size empty | claims BLOCKED -> this rescan.
+Build: LIVE origin/main 2bda29a1 (assembled dev/index.html). Script: dev/handover/reports/medallion-rescan-scan.js (forces kitEmoSeal.lean on the dialog seal of EVERY PEND id via mkP, rAF-samples the .kemo-big clone, records peak px vs kesHead frame, figure rect, title rect).
+Scope: all 228 PEND ids x 3 devices; 36 ids show the seal in the event dialog (vase/embezzle, tt1-3, nc1, td1, ch1-2, phoenix, doanngo, trungcuo, vulan, dongchi, thbirthday, ksp, prep, night1-2, giu, shop, wdframe, vlget/craft/nvp/out, runner, pgin, rcpacc, ge1, adStroll, cmTt/Land/Td/Sec, vnight, rcvHelp); 2 ids (cn2, rtAn) cannot be built with generic params (mkP error, not a seal issue); 0 page errors.
+| device | dialogs with seal | max seal px at lean peak (still px) | overlaps title | out of screen | overlaps face (head-core box) |
+|---|---|---|---|---|---|
+| Fold 755x1000 | 36 | 116 (still 50) pgin/rcpacc/night | 0 | 0 | 0 real; 5 edge touches <=3 px vs the generous head box (ksp, night1, night2, vnight, shop) |
+| iPad 1180x820 | 36 | 78 (still 43) | 0 | 0 | 0 real; 1 edge touch 2 px (shop) |
+| iPad Pro 1366x1024 | 36 | 78 | 0 | 0 | 1 edge touch (shop) |
+Peak never exceeds the head frame (kesHead x .833 for the 3-part gian clip) in any row. LOOKED at pgin + rcpacc on Fold and iPad at the lean peak (dpr 2): the seal sits at the figure's side (left of the head on Fold, right on iPad), clear of the face and of the title/name; big seal is head-sized, not "very large". Shots are scratch only (not uploaded, nothing needed: no code change).
+Verdict: seal-lean-3 closed the medallion-size complaint. No branch pushed, no code change. Not covered: place/stage seals (small, head-sized by the same kesHead; stage dialog seals are the same kit part); gian painted 3-part clip not forced (peak measured on still clone).
+~100% xong / chơi được (no change needed).
