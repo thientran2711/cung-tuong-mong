@@ -279,3 +279,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | FOREMAN E #11 (opus; child of FOREMAN E ex-standby, depth 1; PICKUP 10:20Z) | handover FOREMAN_E_STATUS | FOREMAN E | session_01DgYSWq1iGwKC5ebN2qhmFU | RUNNING | 19/11 10:14Z |
 | coop-thin F6b #2 (opus; successor of 4XtuMraU at a4d77f3c) | review/coop-thin-f6b | B | session_01N1tNP3uQwFDZBPxqqP6ZN8 | RUNNING | 19/11 10:34Z |
 | MAIN ROOT-69 (opus; child of ROOT-68, depth 7) | handover HANDOVER_SESSION9 | ROOT-68 | session_01Rc5AsMesCGqrqL1dGjCJXv | RUNNING | 19/11 10:48Z | START_CTX ~4 %
+| palace-chatter successor: apply K-HEAD-SAY jchat-say.patch + end-to-end run (opus E17c) | review/palace-chatter; briefs/E17c-palace-chatter-say.md | FOREMAN E #11 | session_01DgYSWnKfwZsB2F92BggLCq | RUNNING | 19/11 10:49Z |
