@@ -22,7 +22,7 @@
 (function(){try{
 const CW=window.COOPW;if(!CW||!CW.X||typeof COOP!=="object")return;
 const X=CW.X,J=X.J,LS={get(k){try{return localStorage.getItem(k)}catch(e){return null}}};
-const TH=CW.thin={CAP:10/* F5 her mini-game score ends as intents (jcoopthinf.js), F4 her pets / garden / kitchen / study as intents (jcoopthinf.js), F3 her bag / shop / wear / gifts as intents (jcoopthinf.js), F2 her places / goTo / visits as intents (jcoopthinf.js), F1 her acts as intents (jcoopthinf.js),  E buổi + night gate on the host (jcoopthine.js), B life + rebirth on the host (jcoopthinb.js), C world read-only on the guest (jcoopthinc.js), D remote dialogs (section 6) */,lvl:0,REG:[],bridge:[],rlog:[],view:null,hv:0,dn:0,dr:null,ctxN:0};
+const TH=CW.thin={CAP:11/* F6a her deck cards (one hand, dealt on the host), quest steps and other acts as intents (jcoopthinf.js), F5 her mini-game score ends as intents (jcoopthinf.js), F4 her pets / garden / kitchen / study as intents (jcoopthinf.js), F3 her bag / shop / wear / gifts as intents (jcoopthinf.js), F2 her places / goTo / visits as intents (jcoopthinf.js), F1 her acts as intents (jcoopthinf.js),  E buổi + night gate on the host (jcoopthine.js), B life + rebirth on the host (jcoopthinb.js), C world read-only on the guest (jcoopthinc.js), D remote dialogs (section 6) */,lvl:0,REG:[],bridge:[],rlog:[],view:null,hv:0,dn:0,dr:null,ctxN:0};
 const host=()=>CW.seat==="a";
 const D={};   /* part D (remote dialogs), filled in section 6 */
 TH.on=n=>!!(CW.on&&!CW.hold&&TH.lvl>=(n||1));
@@ -138,6 +138,7 @@ function standIn(PA,mine){if(!PA)return null;try{
  /* the bridge baseline is taken AFTER rstats (its derived numbers are not her acts; S.hh etc. are setters on the host's S) */
  if(v.__b){for(const k of X.STAT)v.__b[k]=v[k];v.__b.rel=v.rel;v.__b.oan=v.oan}
  if(v.queen&&typeof qOn==="function"&&!qOn())rivals.unshift(v);else{if(v.queen){v.queen=false;v.rank=Math.min(v.rank,6)}rivals.push(v)}return v}catch(e){console.error("thin standIn",e);return null}}
+TH.ctxOut=[];
 TH.withSeat=function(seat,fn){
  if(!CW.on||!host())throw new Error("withSeat: host only");
  if(CW.ctx){if(CW.ctx===seat)return fn();throw new Error("withSeat: nested "+CW.ctx+"→"+seat)}
@@ -159,6 +160,8 @@ TH.withSeat=function(seat,fn){
  const dW=dOn&&TH.curDo!=="life"&&!hd;
  try{if(B.fresh){fixRefs(S);B.fresh=false}if(dW&&D.hold)D.hold(S);v=standIn(PA,S);if(v)v.__inv0=(v.inv||[]).slice();if(dW&&!D.noPatch)try{p0=pSnap()}catch(e){console.error("thin p0",e)}D.cur={p0,rv:dW&&!D.noPatch?D.rvIn(seat):null};return fn()}
  finally{const sN=S;
+  /* F6a: what a part does in her context as it closes (her hand of cards brought up to date, her render-diff engines; before takeQ: a card they raise goes out now) */
+  for(const f of TH.ctxOut)try{f(seat,B)}catch(e){console.error("thin ctxOut",e)}
   if(dW)try{D.takeQ()}catch(e){console.error("thin takeQ",e)}
   let rvOps=[];if(dOn&&D.cur&&D.cur.rv)try{rvOps=D.rvOut(seat,D.cur.rv)}catch(e){console.error("thin rows",e)}
   try{for(const r of REG)B.g[r[0]]=r[1]()}catch(e){}
