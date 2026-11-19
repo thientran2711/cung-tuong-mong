@@ -8,7 +8,7 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "NPC consort starts an affair",
-"done": " {const A=npcWhy(\"affair\");if(A&&A.tgt)A.who.affair=A.tgt.id}/"
+"out": "moved by role-parity part 2 (LIVE 9a1d6922, canon overwrite): an NPC affair begins only by her own steps in the day plan (jagacts4 cx4:man*, manCards) and is exposed only through proof (trystKnow / book check / caught in the act) — no monthly roll left to replace"
 },
 {
 "f": "j22.js",
@@ -16,7 +16,7 @@
 "status": "DICE-ONLY",
 "group": "G1",
 "event": "affair exposed",
-"done": " {const A=npcWhy(\"affair\");if(A&&A.tgt)A.who.affair=A.tgt.id}/"
+"out": "moved by role-parity part 2 (LIVE 9a1d6922, canon overwrite): an NPC affair begins only by her own steps in the day plan (jagacts4 cx4:man*, manCards) and is exposed only through proof (trystKnow / book check / caught in the act) — no monthly roll left to replace"
 },
 {
 "f": "j22.js",
@@ -34,7 +34,7 @@
 "group": "G1",
 "event": "flirt witness",
 "fp": "t đưa tình với ${m.name}`);if(roll(risk/3)){const v=pick(liveRivals(tr",
-"done": "const W=npcWit(whereOf(S),null,{vs:S,not:[S],pool:liveRivals(true)});const v=W.length?W[0].p:null;"
+"done": "const W=npcWit(whereOf(p),null,{vs:p,not:[p],pool:L});return W.length?W[0].p:null"
 },
 {
 "f": "j22.js",
@@ -1275,7 +1275,7 @@
 "status": "PARTIAL",
 "group": "G2",
 "event": "NPC uses her handmade work (gift/poison/sell); seeks poison",
-"done": "npcWhy(\"illSeek\",{p:v}"
+"out": "moved by role-parity part 2 (LIVE 9a1d6922, canon overwrite): an NPC consort seeks đồ cấm only as a choice in her day plan (jagacts4 cx4:ill<route>, need × odds, IROUTE + illBuy) — the monthly roll is gone"
 },
 {
 "f": "j92.js",
