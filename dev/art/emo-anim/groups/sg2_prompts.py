@@ -6,23 +6,23 @@ usage: python3 sg2_prompts.py hh|pt|ptl  → JSON {A,B,out,loop,back}"""
 import json, sys
 G = {
  "hh": dict(  # B21/B24 t8: royal yellow #EFBD69 + her red (crimson #A8323A = SEAL2 pick, A18)
-  who="an EMPRESS (the Hoàng hậu, first lady of the palace) of the Qing-style inner palace: a dignified woman about thirty, graceful oval face, glossy black hair swept up into a high formal bun under a LARGE ornate gold phoenix crown with spread phoenix wings, pearl strings and red jewels (clearly grander than any consort's hairpins, nothing like a maid's single hairpin and flower), small pearl earrings, a royal yellow (#EFBD69) brocade robe with a deep crimson red (#A8323A) collar and gold embroidery at the shoulders",
+  who="an EMPRESS (the Hoàng hậu, first lady of the palace) of the inner palace: a dignified woman about thirty, graceful oval face, glossy black hair swept up into a high formal bun under a LARGE ornate gold phoenix crown with spread phoenix wings, pearl strings and red jewels (clearly grander than any consort's hairpins, nothing like a maid's single hairpin and flower), small pearl earrings, a royal yellow (#EFBD69) brocade robe with a deep crimson red (#A8323A) collar and gold embroidery at the shoulders",
   same="Same empress, same soft hand-painted storybook style, same large gold phoenix crown with pearl strings, same glossy black hair, same royal yellow (#EFBD69) brocade robe with deep crimson red (#A8323A) collar",
   sleeves="wide royal yellow sleeves with crimson red cuffs", face="angry shouting face", jewels="crown jewels swinging",
   short="empress in the large gold phoenix crown", above="above her crown", swing="the pearl strings of her crown swing",
   endface="an angry face with the large phoenix crown"),
- "pt": dict(  # young consort; B24 t4 Tần pink #E3A3B8 (SEAL2 pick of rank)
-  who="a YOUNG IMPERIAL CONSORT of the Qing-style inner palace: a pretty young woman about eighteen, soft round youthful face, glossy black hair dressed in a formal flat-topped two-wing court headdress decorated with several gold phoenix hairpins, pearl tassels and pink silk flowers (clearly a consort's rich hair ornaments, nothing like a maid's single hairpin and flower, smaller than an empress's crown), small pearl earrings, a soft pink (#E3A3B8) brocade robe with a gold-embroidered collar and gold embroidery at the shoulders",
-  same="Same young consort, same soft hand-painted storybook style, same flat-topped court headdress with gold phoenix hairpins and pearl tassels, same glossy black hair, same soft pink (#E3A3B8) brocade robe with gold-embroidered collar",
-  sleeves="wide soft pink sleeves with gold-embroidered cuffs", face="angry shouting young face", jewels="pearl tassels swinging",
-  short="young consort with the gold phoenix hairpins", above="above her head", swing="the pearl tassels of her headdress swing",
-  endface="an angry young face with the gold-pinned court headdress"),
- "ptl": dict(  # senior consort ~50; B24 t5 Phi purple #A88BCB (SEAL2 pick of rank)
-  who="a MIDDLE-AGED SENIOR IMPERIAL CONSORT of the Qing-style inner palace: a stately woman about fifty, fuller face with a few fine lines at the eyes and mouth, black hair with a few grey strands at the temples, dressed in a formal flat-topped two-wing court headdress decorated with gold phoenix hairpins, pearl tassels and purple jewels (clearly a high-ranking consort's rich hair ornaments, nothing like a maid's single hairpin and flower, smaller than an empress's crown), small pearl earrings, a soft purple (#A88BCB) brocade robe with a gold-embroidered collar and gold embroidery at the shoulders",
-  same="Same middle-aged consort, same soft hand-painted storybook style, same flat-topped court headdress with gold phoenix hairpins and pearl tassels, same black hair with grey strands at the temples, same soft purple (#A88BCB) brocade robe with gold-embroidered collar",
-  sleeves="wide soft purple sleeves with gold-embroidered cuffs", face="angry shouting middle-aged face", jewels="pearl tassels swinging",
-  short="middle-aged consort in the gold-pinned court headdress", above="above her head", swing="the pearl tassels of her headdress swing",
-  endface="an angry middle-aged face with the gold-pinned court headdress"),
+ "pt": dict(  # young consort (v2 Lượt 800: own hair bun, no board/hat, no "Qing"); B24 t4 Tần pink #E3A3B8 (SEAL2 pick of rank)
+  who="a YOUNG IMPERIAL CONSORT of the inner palace: a pretty young woman about eighteen, soft round youthful face, glossy black hair swept up into an elegant high bun (her own hair, no hat, no headdress board) decorated with several gold and jade hairpins, one small gold phoenix hairpin, short pearl drops and pink silk flowers (clearly a consort's rich hair ornaments, nothing like a maid's single hairpin and flower, far smaller than an empress's crown), small pearl earrings, a soft pink (#E3A3B8) brocade robe with a gold-embroidered collar and gold embroidery at the shoulders",
+  same="Same young consort, same soft hand-painted storybook style, same high hair bun with gold and jade hairpins, pearl drops and pink silk flowers, same glossy black hair, same soft pink (#E3A3B8) brocade robe with gold-embroidered collar",
+  sleeves="wide soft pink sleeves with gold-embroidered cuffs", face="angry shouting young face", jewels="pearl drops swinging",
+  short="young consort with the jeweled hair bun", above="above her head", swing="the pearl drops of her hairpins swing",
+  endface="an angry young face with the jeweled hair bun"),
+ "ptl": dict(  # senior consort ~50 (v2 Lượt 800, denser pins for t5); B24 t5 Phi purple #A88BCB (SEAL2 pick of rank)
+  who="a MIDDLE-AGED SENIOR IMPERIAL CONSORT of the inner palace: a stately woman about fifty, fuller face with a few fine lines at the eyes and mouth, black hair with a few grey strands at the temples swept up into a full high bun (her own hair, no hat, no headdress board) richly decorated with many gold and jade hairpins, two gold phoenix hairpins, pearl drops, purple jewels and purple silk flowers (a high-ranking consort's dense rich hair ornaments, nothing like a maid's single hairpin and flower, smaller than an empress's crown), small pearl earrings, a soft purple (#A88BCB) brocade robe with a gold-embroidered collar and gold embroidery at the shoulders",
+  same="Same middle-aged consort, same soft hand-painted storybook style, same high hair bun with gold and jade hairpins, gold phoenix hairpins, pearl drops and purple silk flowers, same black hair with grey strands at the temples, same soft purple (#A88BCB) brocade robe with gold-embroidered collar",
+  sleeves="wide soft purple sleeves with gold-embroidered cuffs", face="angry shouting middle-aged face", jewels="pearl drops swinging",
+  short="middle-aged consort with the jeweled hair bun", above="above her head", swing="the pearl drops of her hairpins swing",
+  endface="an angry middle-aged face with the jeweled hair bun"),
 }
 def prompts(k):
     g = G[k]
