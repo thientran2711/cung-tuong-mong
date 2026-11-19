@@ -13,7 +13,7 @@
 /* bdO (the road object book "bd.o.<thing>") is defined once in jrd_bd.js (loads first) */
 Object.assign(RTHEME67,{bd_tuyet:"emp",bd_hen:"emp"});
 
-/* ---------- bd_tuyet · Năm đoàn người chạy nạn (Ba Tư; Thiên hạ; GE ge1 Mẹ của thảo nguyên · ge2 Lương thảo đổi hòa · ge3 Mở cửa ải bắc · ge4 Khúc ca tuyết trắng) ---------- */
+/* ---------- bd_tuyet · Năm đoàn người chạy nạn (Ba Tư; Thiên hạ; GE ge1 Mẹ người chạy nạn · ge2 Lương thảo đổi hòa · ge3 Mở cửa Ngọc Môn · ge4 Khúc ca Nô Nhụ) ---------- */
 ARC67.bd_tuyet=bdArc("bd_tuyet",{o:"bd",t:"Năm đoàn người chạy nạn",w:"emp",sj:"đoàn người {land} chạy nạn",g:"Quân Đại Thực lấy thêm ba thành của {land}. Người {land} bỏ nhà, theo con đường tơ lụa chạy về phía đông. A La Hám, lão tướng trấn Tật Lăng, dẫn họ đến quỳ trước Ngọc Môn quan xin lương và xin một chỗ ở. Biên thư về đến kinh, và Hoàng thượng hỏi ngươi.",
  p:[["s1","s2"],["c1","c2","G.rumor","G.hh"],["t1"],["x1"]],
  B:{
@@ -155,7 +155,7 @@ rdDef("bd_tuyet",7,{t:"Hồ thương bị cướp",w:"emp",sj:"vụ cướp trê
   mid:{tag:"Án xong, oán chưa xong",t:"Án đã xử. Đoàn hồ thương có người để oán, người chạy nạn có người để thương. Ngươi đứng giữa."},
   lose:{tag:"Đường tơ lụa dậy oán",w:"emp",t:"Án xử nặng, người {land} oán. Lại có đoàn buôn bị chặn, lại có trại bị đốt, và người ta nhắc tên ngươi ở cả hai bên.",go:(_A,G)=>e67bien(G[0])}}});
 
-/* .8 Người lánh nạn ở Nhạn Môn — refugees at the gate; the old border general asks the court [emp, maid] */
+/* .8 Người lánh nạn ở Ngọc Môn quan — refugees at the gate; the old border general asks the court [emp, maid] */
 rdDef("bd_tuyet",8,{t:"Người lánh nạn ở Ngọc Môn quan",w:"emp",sj:"người lánh nạn dưới chân ải",cast(A){return rdCast(A,["v"])},
  g:"Cuối đông, đàn bà và trẻ con {land} kéo đến dưới chân Ngọc Môn quan, ngủ ngoài gió cát. Quan trấn thủ Ngọc Môn dâng sớ: mở cửa thì sợ gian tế, đóng cửa thì người chết ngay dưới chân thành.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
@@ -292,7 +292,7 @@ RD97L.push(rdRare({a:"bd_tuyet_11",tag:"Bia đá bên Ngọc Môn quan",w:"emp",
  t:"Tấm bia đá dựng bên Ngọc Môn quan, một mặt chữ Đại Hy, một mặt chữ {land}, khắc khúc ca Nô Nhụ của ngươi. Lính ải học thuộc, người dắt lạc đà học thuộc. Hoàng thượng ban biển ngự bút treo trước cung ngươi, và mỗi mùa đông sau đó, xe lương đầu tiên ra ải đều dừng lại trước tấm bia.",
  go:(_A,G)=>{bdO("khuc","thien");return e67bien(G[0])},rw:"bienngu",ti:"Người hát khúc ca Nô Nhụ"}));
 
-/* ---------- bd_hen · Lời thề trước lửa thánh (Ba Tư; Tình yêu · Tự do; GE ge1 Lời thề trọn vẹn · ge2 Chôn lời thề cũ · ge3 Nghĩa huynh biên ải · ge4 Đòi máu cho chàng) ---------- */
+/* ---------- bd_hen · Lời thề trước lửa thánh (Ba Tư; Tình yêu · Tự do; GE ge1 Lời thề trọn vẹn · ge2 Dâng lửa lời thề · ge3 Nghĩa huynh đường xa · ge4 Đòi máu cho chàng) ---------- */
 /* Mật Hồ Đạt (BDP phong): .4 rides into the capital with the embassy guard (w "kinh"), lodges at Hội Đồng quán; .9 jailed in Đại Lý tự (w "nguc");
    .10 freed (kinh) · exiled (tn) · dies (alive −1, the road's revenge branch); .11 leaves with the embassy (tn) or his coffin does. */
 const bdPh=()=>bdAlive("phong");
@@ -569,7 +569,7 @@ rdDef("bd_hen",11,{t:"Lời thề sau cùng",w:"emp",sj:"lời thề trước l�
   {n:"Không nhắc đến chàng",f:"phan",wx:"thư nhà sạch",lx:"chuyện của chàng không ai kể",rt:"Thư nhà chỉ kể chuyện trong cung."}]},
  x1:{h:"Cổng thành lúc bình minh",w:"emp",t:"Bình minh. Sứ đoàn {land} qua cổng Tây. Hoàng thượng đứng cạnh ngươi trên lầu cổng, không nói gì, chờ xem ngươi làm gì.",o:[
   {n:"Hát khúc ca lửa thánh trên lầu cổng",e:["win","lose"],rt:"Giọng ngươi vang xuống cổng thành; cả sứ đoàn dừng ngựa, hát theo. Hoàng thượng đặt tay lên vai ngươi.",rf:"Giọng ngươi vỡ giữa chừng; triều thần nhìn nhau."},
-  {n:"Xin Hoàng thượng cho tự tiễn sứ đoàn đến Nhạn Môn",e:["win","mid"],rt:"Hoàng thượng chuẩn, cho cấm quân theo hầu. Ngươi tiễn đến chân ải, rồi quay về.",rf:"Hoàng thượng bảo: “Tiễn đến cổng là đủ.”"},
+  {n:"Xin Hoàng thượng cho tự tiễn sứ đoàn đến Ngọc Môn quan",e:["win","mid"],rt:"Hoàng thượng chuẩn, cho cấm quân theo hầu. Ngươi tiễn đến chân ải, rồi quay về.",rf:"Hoàng thượng bảo: “Tiễn đến cổng là đủ.”"},
   {n:"Quay vào trong trước khi sứ đoàn khuất",e:"mid",lx:"ngươi không nhìn theo",rt:"Ngươi xuống lầu, không quay lại."}]}},
  E:{win:{tag:"Lời thề giữ trọn",w:"emp",t:"Lời thề trước lửa thánh được giữ trọn theo cách của ngươi. Ở {land} người ta kể chuyện công chúa và người hộ vệ, ở Đại Hy người ta kể chuyện một phi tần không nói dối Hoàng thượng.",go:(_A,G)=>e67bien(G[0])},
   mid:{tag:"Người đi, lời ở lại",t:"Sứ đoàn đi rồi. Lời thề ở lại, không ai nhắc, như một đốm lửa giữ trong lò."},
