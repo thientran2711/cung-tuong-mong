@@ -127,12 +127,12 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
   else ok(false,'P3 nothing to buy in the pet shop')}
  await stage(`if(!S.maid)S.maid={name:'Tiểu Thúy',loyal:90};S.maid.loyal=90;(S.pets[0]||{}).maidW=0`);
  await act('P4 Giao kẻ hầu chăm (petcMaid): same as solo',`PETC.i=0;petcMaid(0)`,{twin:true,chk:x=>/\/[1-9]\d*$/.test(x.g1.pets.split(',')[0])});
- {const r=await act('P5 Để trời định in the care game (petcQuick): her care screen redrawn on HER phone, nothing on the host',`petcQuick('feed')`,{pre:`petcOpen(0);PETC.game=null`,shot:'care'});
+ {const r=await act('P5 Để trời định in the care game (petcQuick): her care screen redrawn on HER phone, nothing on the host',`petcQuick('feed')`,{pre:`petcOpen(0);PETC.game=null`,chk:x=>{const f=y=>+((y.pets||'').split(',')[0]||'').split(':')[1]?.split('/')[0];/* review r1: the roll ran on HER pet 0 */return f(x.g1)>f(x.g0)||/chưa thành/.test(x.g1.log+x.h1.log)||f(x.g0)>=100},shot:'care'});
   const ui=await both(()=>{const b=document.getElementById('kpcare');return b?/Vừa rồi|Để trời định/.test(b.textContent):false});if(!r.skip)ok(ON?(ui[1]&&!ui[0]):true,'P5 her care screen REDRAWN with the result on her phone after the answer (replayed petcDraw), none on the host',ui);await G.p.evaluate(()=>{try{petcClose()}catch(e){}})}
  /* ---- G: her shelf plant ---- */
  {const pk=await pick(`return Object.keys(BAL.shelf.it).find(k=>BAL.shelf.it[k].care)||null`);
   if(pk){await stage(`shelfOf(S).g.f4p={k:${JSON.stringify(pk)},pc:40}`);
-   const r=await act('G1 Để trời định on her shelf plant (shelfPlantQuick)',`shelfPlantQuick()`,{pre:`shelfPlantOpen('f4p')`,chk:x=>true,shot:'plant'});
+   const r=await act('G1 Để trời định on her shelf plant (shelfPlantQuick)',`shelfPlantQuick()`,{pre:`shelfPlantOpen('f4p')`,chk:x=>{const a=/f4p:(\d+)/.exec(x.g0.shelf||''),b=/f4p:(\d+)/.exec(x.g1.shelf||'');/* review r1: the roll really ran on HER plant: won = pc up, lost = the 'chưa thành' log line */return !!a&&!!b&&(+b[1]>+a[1]||/chưa thành/.test(x.g1.log+x.h1.log))},shot:'plant'});
    const ui=await both(()=>!!document.getElementById('kshp'));if(!r.skip)ok(ON?(ui[1]&&!ui[0]):true,'G1 her plant screen on her phone only',ui);await G.p.evaluate(()=>{try{closeModal()}catch(e){}})}
   else ok(false,'G1 no shelf plant kind in BAL.shelf.it')}
  /* ---- K: taste questions ---- */
