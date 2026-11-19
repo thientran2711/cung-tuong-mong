@@ -1,7 +1,7 @@
 PRIORITY #1 CHECK ('phân phát|allotment|lệ tháng|dầu tóc|nến'): OD 0 | ledger 0 | claims monthly-allotment (worker session_01Rc5AsNLFYkPdJUDpjgwsaU) | main: jstip.js (BAL.stip goods), jration.js (monthly-ration-r6 LIVE 3fdfb437), j42 srvMonth, jagacts cx | review/* monthly-allotment only. Worker EXTENDS jstip/jration through wrappers, no duplicate table. Nothing rebuilt by the reviewer.
 
-# review monthly-allotment — PASS 2639a8d (READY FF)
-Reviewer: BIG REVIEWER (opus) session_01Rc5AsLJxqXyKq4keVP4fuk, child of C-AG #20. Reviewed review/monthly-allotment @ 9aceea6 (FF over f43a2ba6). origin/main moved to fd6118c (art-wiring-1119) during review -> final-merged on review/monthly-allotment-r6: assemble.py conflict = main's list (+ jfigx.js) with jallot.js after jration.js; index.html/sw.js taken from main and rebuilt by dev/site/build_site.sh. Result **review/monthly-allotment-r6 @ 2639a8d**, ancestor = origin/main fd6118c, diff vs main = the worker's 7 files (+329/-11).
+# review monthly-allotment — PASS 18a9b64 (READY FF)
+Reviewer: BIG REVIEWER (opus) session_01Rc5AsLJxqXyKq4keVP4fuk, child of C-AG #20. Reviewed review/monthly-allotment @ 9aceea6 (FF over f43a2ba6). origin/main moved to fd6118c (art-wiring-1119) during review -> final-merged on review/monthly-allotment-r6: assemble.py conflict = main's list (+ jfigx.js) with jallot.js after jration.js; index.html/sw.js taken from main and rebuilt by dev/site/build_site.sh. Then main moved again to 7fb7c10 (ge-writers-w2) -> merged the same way. Result **review/monthly-allotment-r6 @ 18a9b64**, ancestor = origin/main 7fb7c10, diff vs main = the worker's 7 files (+329/-11).
 
 ## Reviewer fixes (r6, commit 657a340)
 1. jallot.js had a private `STAT_NM` stat-name table duplicating j1 `NAMES` (law 4 one source / reuse) -> removed, uses `NAMES`.
@@ -20,9 +20,9 @@ Reviewer: BIG REVIEWER (opus) session_01Rc5AsLJxqXyKq4keVP4fuk, child of C-AG #2
 - Save compat: PASS. alInit first sight on render (old save gets one month), alFix fills bottle uses; quickcheck "old save ok"; BAL.allot.on=false = old behaviour (test).
 
 ## Tests
-- `node dev/test/monthly-allotment.js` Fold 755x1000@2 + iPad 1180x820@2: ALL PASS on 9aceea6, on 657a340 and on 2639a8d (post-merge). One run on 657a340 failed 4 rank checks (lawC/goods/evening/old save) because the test's start() loop landed a servant life (floor price, no stip) — reran: ALL PASS. Test flake, not game; worker may make the test assert !isSrv() after start.
+- `node dev/test/monthly-allotment.js` Fold 755x1000@2 + iPad 1180x820@2: ALL PASS on 9aceea6, 657a340, 2639a8d and 18a9b64 (post-merge). One run on 657a340 failed 4 rank checks (lawC/goods/evening/old save) because the test's start() loop landed a servant life (floor price, no stip) — reran: ALL PASS. Test flake, not game; worker may make the test assert !isSrv() after start.
 - `node dev/test/monthly-ration.js`: branch PASS x2. On live main: 1st run FAIL mirror step ("Son môi" row + no #lxrush), 2nd run PASS -> **pre-existing FLAKY step on main**, not a hard failure and not from this branch (worker said "fails identically"; it is intermittent).
-- `bash dev/tools/quickcheck.sh --cpu 4`: PASS on 9aceea6, 657a340 and 2639a8d (core gates PASS, old save ok; perf medians within the gate on a noisy box).
+- `bash dev/tools/quickcheck.sh --cpu 4`: PASS on 9aceea6, 657a340, 2639a8d and 18a9b64 (core gates PASS, old save ok; perf medians within the gate on a noisy box).
 - Probes: B4L = 3 = Buổi tối (alEvening correct); real deck card "Đọc binh thư, sử sách" at Buổi tối, o 100: candle 3 -> 2, gain applied; no page errors.
 
 ## Notes (non-blocking)
