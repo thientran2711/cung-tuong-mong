@@ -241,3 +241,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | coop-thin F2 FIX r2 (opus BIG; reviewer FAIL r1: guest cards silenced by withSeat quiet, whole intent family + buổi resend check) | review/coop-thin-f2-r2 | B | session_01N1tNP4v5eCkat9E4cy6HXG | RUNNING | 19/11 05:37Z |
 | seal-lean-2 SMALL REVIEW (sonnet) | review/seal-lean-2 db1762f1 | MAIN ROOT-64 | session_01Rc5AsMN2AumPZrBeDRpV5o | RUNNING | 19/11 05:43Z |
 | ev-pic-fig BIG REVIEW (opus) | review/ev-pic-fig 946a2900 | MAIN ROOT-64 | session_01Rc5AsMDVid7pMws13KWPgr | RUNNING | 19/11 05:43Z |
+| bd-roads r2 fixes (opus E14c, successor of E14) | review/bd-roads | E ROOT #8 | session_01DgYSWmKcwf5VUb22x4YGU3 | RUNNING | 19/11 05:53Z |
