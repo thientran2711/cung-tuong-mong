@@ -51,3 +51,14 @@ Gens (same settings and refs):
 Credits round 2: 690 (5 × 138), no redraws. NDX4 total 1380.
 Sheet: dev/handover/review-sheets/nu-de-B/nudeB_m05_r1_vs_r2_HHfull.jpg (round-1 row above the round-2 row, 3-line tags, 574 KB).
 Note: the Nữ đế angle now equals her own HH t8 angle at each age (copied verbatim, as ordered), so her Nữ đế and Hoàng hậu pictures face the same way at each age.
+
+## ROUND 3 — owner Lượt 694, rule D15 (via ROOT-55): elder STYLE LOCK at a51/a65
+Prompt (mk.py, commit 2dc5b1001): at a51/a65 only, right after the age text and before the elder colour text (the ma ma place), the STYLE LOCK sentence is copied VERBATIM from dev/handover/reports/mama-specs/m05-a51.styleref.r55.prompt.txt (read from the file, not retyped). The only change is "the second reference" → "the third reference", because the ref order here is image 1 identity, image 2 royal swatch, image 3 her own Nữ đế a36 picture (ROOT-55 allowed this). Gate: found exactly once in the source file; exactly once in the prompt; placed between the age text and the colour text. The a51/a65 prompt = the round-2 prompt + that one sentence (cmp-checked); a18–a36 are unchanged. check_store PASS.
+Refs a51/a65: KLpSlnEkqp + TdwDfOyVNR + gOmpVvOSXO (her round-2 Nữ đế a36 cut). log.py records the 3rd ref (NDX_REF3).
+| age | gen | cut | result |
+|---|---|---|---|
+| a51 | w4aXB0a7EI | fHzNi9jCDY | PASS: painterly face, same drawing as a36, silver streaks, sleeves to the floor |
+| a65 | 8ai7O7MIrU | jUoTDPcLD0 | PASS: painterly face, frontal, sleeves to the floor. NOTE: gold again, because the item list says "a hand warmer of gold" |
+Credits round 3: 276. NDX4 total 1656.
+Sheet: dev/handover/review-sheets/nu-de-B/nudeB_m05_r2_vs_r3_stylelock.jpg (round-2 row above; new row = a18–a36 "same (r2)" + new a51/a65; 575 KB).
+FINAL m05 Nữ đế set: a18 eIPlrOzdqL · a26 EbYi4eAuuO · a36 gOmpVvOSXO · a51 fHzNi9jCDY · a65 jUoTDPcLD0.
