@@ -3,7 +3,8 @@
    the option list is the ONE scroll owner, scrolled to its end the LAST option card is fully visible, and while there is more a «Kéo xuống» hint is on.
    Per frame x device: ksz, option count, scroll owner (#mb | opts | none), last card fully visible after scrolling to the end (y/n), hint on while more (y/n/-).
    Exit 1 when #mb scrolls, the last card is clipped, or the owner scrolls and the hint is off.
-   usage: node dev/test/opt-frame-scroll-scan.js <index.html> [out.json]   env SZ=[[W,H],..] MAXP=n ONLY=regex */
+   usage: node dev/test/opt-frame-scroll-scan.js <index.html> [out.json]   env SZ=[[W,H],..] MAXP=n ONLY=regex
+   r2: run ONE device per process (SZ=[[1180,820]]), LIVE and branch builds each; compare with dev/test/opt-frame-scroll-diff.js live.json branch.json (regression column). Column 'stay' = scrollTop read back after settle (n = a re-render reset it). */
 const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=process.argv;const SZ=process.env.SZ?JSON.parse(process.env.SZ):[[755,1000],[1180,820],[1366,1024]];
 (async()=>{const px=process.env.HTTPS_PROXY;const b=await chromium.launch(px?{proxy:{server:px,bypass:'127.0.0.1,localhost'}}:{});const html=fs.readFileSync(SRC);const ALL=[];let ST=null;
  for(const [W,H] of SZ){const ctx=await b.newContext({viewport:{width:W,height:H},deviceScaleFactor:1,hasTouch:true,isMobile:W<1100,serviceWorkers:'block',ignoreHTTPSErrors:true});await ctx.addInitScript(()=>{window.__bot=1;let s=12345;Math.random=()=>{s=(s*1664525+1013904223)%4294967296;return s/4294967296}});
@@ -19,11 +20,12 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=
    const oS=sc(o);const owner=mbS?'#mb':oS?'opts':'none';const ov=mbS?mb:o;const r=ov.getBoundingClientRect();
    const hint0=!!d.querySelector('.kscue.on')||!!(o.nextElementSibling&&o.nextElementSibling.classList.contains('kscue')&&o.nextElementSibling.classList.contains('on'));
    return {ksz:d.dataset.ksz||'',nopt:cards.length,owner,hint:oS||mbS?hint0:null,mbSc:mb.scrollHeight-mb.clientHeight,optSc:o.scrollHeight-o.clientHeight,picc:d.dataset.picc||'',cx:r.left+r.width/2,cy:r.top+Math.min(r.height,innerHeight-r.top)/2}});
-  if(!a||!a.nopt)return a;/* a REAL wheel over the scroll owner, to its end (the way she scrolls) */
-  for(let i=0;i<4&&a.owner!=='none';i++){await p.mouse.move(a.cx,a.cy);await p.mouse.wheel(0,1500);await p.waitForTimeout(250)}
-  const z=await p.evaluate(()=>{const d=document.querySelector('#modal:not([hidden]) .dlg'),mb=document.getElementById('mb'),o=d.querySelector('.opts');const cards=[...o.children].filter(c=>!c.classList.contains('kscue')&&c.getClientRects().length);const last=cards[cards.length-1].getBoundingClientRect(),fr=d.getBoundingClientRect();
+  if(!a||!a.nopt)return a;/* r2 (review FAIL 2): deterministic — set scrollTop of the scroll owner to its end after settle, wait, then READ scrollTop back (stay = it stayed at the end; n = a re-render reset it) */
+  const st=await p.evaluate(own=>{const d=document.querySelector('#modal:not([hidden]) .dlg'),e=own==='#mb'?document.getElementById('mb'):d&&d.querySelector('.opts');if(!e||own==='none')return null;e.scrollTop=e.scrollHeight;e.dispatchEvent(new Event('scroll'));return e.scrollHeight-e.clientHeight},a.owner);
+  if(st!==null)await p.waitForTimeout(600);
+  const z=await p.evaluate(own=>{const d=document.querySelector('#modal:not([hidden]) .dlg'),mb=document.getElementById('mb'),o=d.querySelector('.opts');const so=own==='#mb'?mb:own==='opts'?o:null;const stay=so?so.scrollTop>=so.scrollHeight-so.clientHeight-2:null;const cards=[...o.children].filter(c=>!c.classList.contains('kscue')&&c.getClientRects().length);const last=cards[cards.length-1].getBoundingClientRect(),fr=d.getBoundingClientRect();
    const mbOv=mb.scrollHeight>mb.clientHeight+2&&getComputedStyle(mb).overflowY!=='clip'&&getComputedStyle(mb).overflowY!=='hidden';const vr=(mbOv?mb:o).getBoundingClientRect();
-   return {lastVis:last.bottom<=Math.min(vr.bottom,fr.bottom)+1&&last.top>=vr.top-1&&last.bottom<=innerHeight+1,hintEnd:!!d.querySelector('.kscue.on')||!!(o.nextElementSibling&&o.nextElementSibling.classList.contains('on'))}});
+   return {stay,lastVis:last.bottom<=Math.min(vr.bottom,fr.bottom)+1&&last.top>=vr.top-1&&last.bottom<=innerHeight+1,hintEnd:!!d.querySelector('.kscue.on')||!!(o.nextElementSibling&&o.nextElementSibling.classList.contains('on'))}},a.owner);
   return Object.assign(a,z)};
   const close=()=>p.evaluate(()=>{try{while(Q.length&&typeof closeModal==='function'){const n=Q.length;closeModal();if(Q.length>=n)break}}catch(e){}Q.length=0;document.getElementById('modal').hidden=true;try{kitCoachOff&&kitCoachOff();kitTipOff&&kitTipOff()}catch(e){}});
   const rec=async(name)=>{await p.waitForTimeout(900);let o=await probe();if(!o||!o.nopt){await close();return}o.name=name;o.dev=W+'x'+H;ALL.push(o);await close()};
@@ -38,7 +40,7 @@ const {chromium}=require('playwright');const fs=require('fs');const [,,SRC,OUT]=
   await ctx.close()}
  await b.close();
  const bad=ALL.filter(o=>o.owner==='#mb'||!o.lastVis||(o.owner!=='none'&&!o.hint));
- console.log('dev'.padEnd(10),'frame'.padEnd(26),'ksz'.padEnd(4),'opts'.padStart(4),'owner'.padEnd(6),'last card'.padEnd(10),'hint'.padEnd(5),'mb-over opt-over picc');
- for(const o of ALL.sort((a,b)=>a.dev.localeCompare(b.dev)||a.name.localeCompare(b.name))){const f=o.owner==='#mb'||!o.lastVis||(o.owner!=='none'&&!o.hint);console.log(o.dev.padEnd(10),o.name.padEnd(26),String(o.ksz).padEnd(4),String(o.nopt).padStart(4),o.owner.padEnd(6),(o.lastVis?'fully y':'CLIPPED n').padEnd(10),(o.hint===null?'-':o.hint?'y':'n').padEnd(5),String(o.mbSc).padStart(5),String(o.optSc).padStart(7),o.picc,f?' FAIL':'')}
+ console.log('dev'.padEnd(10),'frame'.padEnd(26),'ksz'.padEnd(4),'opts'.padStart(4),'owner'.padEnd(6),'last card'.padEnd(10),'hint'.padEnd(5),'mb-over opt-over picc stay');
+ for(const o of ALL.sort((a,b)=>a.dev.localeCompare(b.dev)||a.name.localeCompare(b.name))){const f=o.owner==='#mb'||!o.lastVis||(o.owner!=='none'&&!o.hint);console.log(o.dev.padEnd(10),o.name.padEnd(26),String(o.ksz).padEnd(4),String(o.nopt).padStart(4),o.owner.padEnd(6),(o.lastVis?'fully y':'CLIPPED n').padEnd(10),(o.hint===null?'-':o.hint?'y':'n').padEnd(5),String(o.mbSc).padStart(5),String(o.optSc).padStart(7),(o.picc||'-').padEnd(6),o.stay===null||o.stay===undefined?'-':o.stay?'y':'n',f?' FAIL':'')}
  const by={};ALL.forEach(o=>{const k=o.dev+' '+o.ksz+' owner='+o.owner;by[k]=(by[k]||0)+1});Object.entries(by).sort().forEach(([k,v])=>console.log(k.padEnd(34),v));
  console.log('option frames',ALL.length,'FAIL',bad.length);if(OUT)fs.writeFileSync(OUT,JSON.stringify(ALL));process.exit(bad.length?1:0)})().catch(e=>{console.error(e);process.exit(2)});
