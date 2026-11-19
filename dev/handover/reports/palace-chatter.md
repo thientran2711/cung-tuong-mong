@@ -131,3 +131,9 @@ B1 K-HEAD-SAY × EMO-SEAL LEAN: MAIN kit item (review/seal-lean-3 2111eb10, not 
 READY = 92b81489 = 03841087 + reviewer fix 12e3170b + final-merge LIVE origin/main 1a4df595 (only index.html conflicted, rebuilt by build_site.sh); FF-able onto 1a4df595.
 TESTS on 92b81489: palace-chatter.js Fold 28/28 · iPad 28/28 PASS · palace-chatter-host.js Fold 9/9 · iPad 9/9 PASS · chatl-bank PASS (853 distinct) · QUICKCHECK PASS 371 s (5 runs; old save from live loads + plays; core gates PASS; render 266/290, tab 524/544, buổi 1584/1572 ms, tasks>200 22/21) · videos Fold 755x1000 + iPad 1180x820, 0 page errors, LOOKED 3× (1 frame/s): text inside the bubble, above the head with a gap, tail on the speaker, inside the stage, pair side by side, one bubble per turn; only fault = B1.
 SHOTS: scratch on the E17r container only (CDN 401): /home/user/wt/e17r-out/r3-v-fold.mp4, r3-v-ipad.mp4, r3-sheet-*.jpg.
+
+## FINAL MERGE (E17r, 19/11 ~16:40Z) — READY 5ca76650 (review/palace-chatter-rv2), B1 CLOSED
+depth 2. ★ THE 18 LAWS: read the block at the very top of dev/rules/START_CORE.md FIRST (all 18; laws 1–6 top priority); put this line in every brief/takeover prompt; reviewers FAIL any break.
+Final-merge of LIVE origin/main 2bda29a1 (seal-lean-3 live) into 92b81489: conflicts assemble.py (main's module list + jchatl/jchat after jerr, jrcv kept — merged by script), index.html / sw.js (rebuilt by build_site.sh). FF-able onto 2bda29a1.
+TESTS on 5ca76650: palace-chatter.js Fold 28/28 · iPad 28/28 PASS · chatl-bank PASS (853) · one-core-guard PASS · QUICKCHECK PASS 345 s (5 runs; old save OK; core gates PASS; render 233/255, tab 458/466, buổi 1094/1347 ms, tasks>200 20/20) · videos Fold + iPad: happening first PASS, 0 page errors.
+B1 (K-HEAD-SAY × EMO-SEAL LEAN): LOOKED at every frame (1/s) on both devices — the seal leans in only while no bubble is open; no frame has a leaning clone over a say bubble; text whole in every bubble → CLOSED.
