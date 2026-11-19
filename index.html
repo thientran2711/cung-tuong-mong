@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"d467fe70+","t":"2026-11-19T09:59Z","c":"seal-lean-3 r5: big seal = span box with one \u003cimg> per picture, decoded before shown (no swap inside a displayed img: fixes the beige-squar…","b":"1923c6b6a9b2","h":[{"s":"f01df861","t":"2026-11-19T09:09Z","c":"review coop-thin-f3 r1: merge F2 LAND READY 7627f79c; generated files rebuilt"},{"s":"4ed2831d+","t":"2026-11-19T07:18Z","c":"law3-cost-only: index.html / sw.js regenerated"},{"s":"0da546e9","t":"2026-11-19T07:16Z","c":"role-parity-drift r1: build line"},{"s":"eff20119+","t":"2026-11-19T06:33Z","c":"ev-pic-coverage: picture required in M/L/XL frames only, S frames reported apart (owner OD 19/11 ~04:55Z)"},{"s":"a64f06c7+","t":"2026-11-19T06:29Z","c":"seal-lean-2 r2: rebuild site"},{"s":"38af6387","t":"2026-11-19T06:23Z","c":"minister-agents review r1: one core (gift regard + backs in BAL.tdCourt, j55 reads tuyen.pow / imp.deep / clanRel), censor name unique in e…"},{"s":"18a9b64c+","t":"2026-11-19T05:22Z","c":"monthly-allotment r6 (reviewer): stat names from the one NAMES table (drop private STAT_NM); candle note puts the burnt candle in the card'…"},{"s":"6b041ea7+","t":"2026-11-19T05:21Z","c":"odds-no-unknown: vu oan hints no longer repeat the odds word the meter now shows"},{"s":"6eb0ab3d+","t":"2026-11-19T05:37Z","c":"hall-names r2: runtime test hall-names-lines.js (houseName plaque, palace list line, visit line, 'cùng cung' note; Fold + iPad)"},{"s":"c4c25bbd+","t":"2026-11-19T04:41Z","c":"head-marker-video: viewport-size recording, opening dialog cleared, maid notice kept unread, white plain state swapped at half time on the …"}]};
+window.CTM_BI={"s":"1b933c7c+","t":"2026-11-19T10:14Z","c":"seal-lean-3 r6: real still stays visible until the first big picture is painted (kemo-hide), previous picture stays under the next one ~150…","b":"05be5f9a1632","h":[{"s":"f01df861","t":"2026-11-19T09:09Z","c":"review coop-thin-f3 r1: merge F2 LAND READY 7627f79c; generated files rebuilt"},{"s":"4ed2831d+","t":"2026-11-19T07:18Z","c":"law3-cost-only: index.html / sw.js regenerated"},{"s":"0da546e9","t":"2026-11-19T07:16Z","c":"role-parity-drift r1: build line"},{"s":"eff20119+","t":"2026-11-19T06:33Z","c":"ev-pic-coverage: picture required in M/L/XL frames only, S frames reported apart (owner OD 19/11 ~04:55Z)"},{"s":"a64f06c7+","t":"2026-11-19T06:29Z","c":"seal-lean-2 r2: rebuild site"},{"s":"38af6387","t":"2026-11-19T06:23Z","c":"minister-agents review r1: one core (gift regard + backs in BAL.tdCourt, j55 reads tuyen.pow / imp.deep / clanRel), censor name unique in e…"},{"s":"18a9b64c+","t":"2026-11-19T05:22Z","c":"monthly-allotment r6 (reviewer): stat names from the one NAMES table (drop private STAT_NM); candle note puts the burnt candle in the card'…"},{"s":"6b041ea7+","t":"2026-11-19T05:21Z","c":"odds-no-unknown: vu oan hints no longer repeat the odds word the meter now shows"},{"s":"6eb0ab3d+","t":"2026-11-19T05:37Z","c":"hall-names r2: runtime test hall-names-lines.js (houseName plaque, palace list line, visit line, 'cùng cung' note; Fold + iPad)"},{"s":"c4c25bbd+","t":"2026-11-19T04:41Z","c":"head-marker-video: viewport-size recording, opening dialog cleared, maid notice kept unread, white plain state swapped at half time on the …"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -75195,7 +75195,7 @@ function kitFigSeal(fig){try{
  const p=kfsPerson(fig);if(!p)return kfsDrop(fig);const html=emoBadge(p);if(!html)return kfsDrop(fig);
  const host=kfsHost(fig);if(!host)return kfsDrop(fig);
  let el=KFS_SEAL.get(fig);
- if(!el||el.parentNode!==host||el.__h!==html){if(el)el.remove();const t=document.createElement("template");t.innerHTML=html.trim();el=t.content.firstChild;if(!el)return;
+ if(!el||el.parentNode!==host||el.__h!==html){const prev=el&&el.parentNode===host&&el.complete&&el.naturalWidth&&el.style.display!=="none"?el:null;/* mood changed: the OLD still stays on screen until the NEW one is decoded (jemoseal kesWatch removes it), never a blank gap */if(el&&el!==prev)el.remove();if(prev&&prev.__prev){prev.__prev.remove();prev.__prev=null}const t=document.createElement("template");t.innerHTML=html.trim();el=t.content.firstChild;if(!el)return;if(prev){el.__prev=prev;prev.__t=performance.now();prev.classList.add("kfseal-old")}
   el.classList.add("kfseal");el.style.display="none";el.__h=html;el.__fig=fig;host.appendChild(el);KFS_SEAL.set(fig,el)}
  const b=kitFigBody(src,()=>kfsSched());if(!b){el.style.display="none";return}
  const B=kfsBox(fig);if(B.bh<60){el.style.display="none";return}
@@ -75230,7 +75230,7 @@ function kitFigSeal(fig){try{
  const css=`left:${(L-hr.left+host.scrollLeft).toFixed(1)}px;top:${(T-hr.top+host.scrollTop).toFixed(1)}px;width:${s}px;height:${s}px`;
  if(el.style.cssText!==css){el.style.cssText=css}
  el.dataset.kfsb=body.toFixed(0);el.dataset.kfsa=ax.toFixed(1);el.dataset.kfsf=feet.toFixed(1)}catch(e){console.error("kitFigSeal",e)}}
-function kfsSweep(){document.querySelectorAll("img.kfseal").forEach(s=>{const f=s.__fig;if(!f||!f.isConnected)s.remove()})}
+function kfsSweep(){document.querySelectorAll("img.kfseal").forEach(s=>{const f=s.__fig;if(!f||!f.isConnected||(s.classList.contains("kfseal-old")&&performance.now()-(s.__t||0)>3000))s.remove()})}
 function kfsAll(){kfsSweep();kfsFigs().forEach(kitFigSeal)}
 let kfsT=0,kfsT2=0,kfsQ=0;function kfsSched(){clearTimeout(kfsT);clearTimeout(kfsT2);if(!kfsQ)kfsQ=requestAnimationFrame(()=>{kfsQ=0;kfsAll()});kfsT=setTimeout(()=>{kfsAll();kfsT2=setTimeout(kfsAll,700)},250)}
 window.kitFigSeal=kitFigSeal;window.kitFigSealAll=kfsAll;
@@ -75244,6 +75244,7 @@ try{new MutationObserver(ms=>{if(ms.every(m=>m.target.closest&&m.target.closest(
 .kfshost{position:relative}
 img.kemo.kfseal{position:absolute!important;z-index:7;display:block;box-sizing:border-box;object-fit:contain;border-radius:50%;pointer-events:auto;cursor:pointer;-webkit-tap-highlight-color:transparent;filter:drop-shadow(0 1px 2px #000a);transform:none;margin:0;max-width:none;max-height:none;animation:none}
 img.kemo.kfseal.kemo-an{opacity:.85}
+img.kemo.kfseal.kfseal-old{pointer-events:none;z-index:6}/* the previous still, kept under the new one until it is decoded */
 `;document.head.appendChild(st)})();
 /* ================= jemoseal: kitEmoSeal — EVERY mood seal moves, everywhere it shows (KIT 38.4; owner 17/11 ~18:00Z + ~18:30Z (D)) =================
    ONE kit part for every img.kemo (pcPort frames, person cards, lists, mood box, the figure-head seal of jfigseal): no seal draws its own motion.
@@ -75339,7 +75340,11 @@ function kesLive(el,on){if(!el.isConnected)return;kesReal(el);
  if(live){if(!was){const I=KIT_EMOSEAL.idle;el.style.setProperty("--kemo-id",I.deg+"deg");el.style.setProperty("--kemo-ip",kesR(I.per[0],I.per[1]).toFixed(2)+"s");el.style.setProperty("--kemo-i0","-"+kesR(0,I.per[1]).toFixed(2)+"s");if(!el.__ln)kesSchedule(el)}}
  else{if(el.__ln){clearTimeout(el.__ln);el.__ln=0}kesLeanEnd(el)}}
 const KES_IO=typeof IntersectionObserver==="function"?new IntersectionObserver(es=>{for(const e of es)kesLive(e.target,e.isIntersecting)},{threshold:.01}):null;
-function kesWatch(el){if(!el||el.__kes)return;el.__kes=1;if(!el.complete||!el.naturalWidth){el.classList.add("kemo-wait");const ok=()=>el.classList.remove("kemo-wait");el.addEventListener("load",ok,{once:true});el.addEventListener("error",ok,{once:true})}/* no empty disc while the still is loading */if(KES_IO)KES_IO.observe(el);else kesLive(el,true)}
+function kesWatch(el){if(!el||el.__kes)return;el.__kes=1;
+ /* a seal re-created for a new mood (jfigseal keeps the OLD still as el.__prev): the new still waits hidden (kemo-wait) until it is LOADED AND DECODED, then the old one goes two frames later - never an empty disc, never a blank gap */
+ const ready=()=>{el.classList.remove("kemo-wait");const p=el.__prev;if(p){el.__prev=null;requestAnimationFrame(()=>requestAnimationFrame(()=>p.remove()))}};
+ if(!el.complete||!el.naturalWidth){el.classList.add("kemo-wait");const ok=()=>{if(el.decode)el.decode().then(ready,ready);else ready()};el.addEventListener("load",ok,{once:true});el.addEventListener("error",ready,{once:true})}else ready();
+ if(KES_IO)KES_IO.observe(el);else kesLive(el,true)}
 function kesScan(){document.querySelectorAll("img.kemo").forEach(kesWatch)}
 function kesSweep(){/* effect layers + big clones whose seal is gone */const L=[...document.querySelectorAll("img.kemo")];document.querySelectorAll("img.kemofx").forEach(f=>{if(!L.some(c=>c.__fx===f))f.remove()});document.querySelectorAll(".kemo-big").forEach(f=>{if(!L.some(c=>c.__big===f))f.remove()})}
 let kesQ=0;function kesSched(){if(kesQ)return;kesQ=requestAnimationFrame(()=>{kesQ=0;kesScan();kesSweep()})}
@@ -79221,7 +79226,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="1923c6b6a9b2";window.CTM_BUILD=BUILD;
+const BUILD="05be5f9a1632";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};

@@ -92,7 +92,11 @@ function kesLive(el,on){if(!el.isConnected)return;kesReal(el);
  if(live){if(!was){const I=KIT_EMOSEAL.idle;el.style.setProperty("--kemo-id",I.deg+"deg");el.style.setProperty("--kemo-ip",kesR(I.per[0],I.per[1]).toFixed(2)+"s");el.style.setProperty("--kemo-i0","-"+kesR(0,I.per[1]).toFixed(2)+"s");if(!el.__ln)kesSchedule(el)}}
  else{if(el.__ln){clearTimeout(el.__ln);el.__ln=0}kesLeanEnd(el)}}
 const KES_IO=typeof IntersectionObserver==="function"?new IntersectionObserver(es=>{for(const e of es)kesLive(e.target,e.isIntersecting)},{threshold:.01}):null;
-function kesWatch(el){if(!el||el.__kes)return;el.__kes=1;if(!el.complete||!el.naturalWidth){el.classList.add("kemo-wait");const ok=()=>el.classList.remove("kemo-wait");el.addEventListener("load",ok,{once:true});el.addEventListener("error",ok,{once:true})}/* no empty disc while the still is loading */if(KES_IO)KES_IO.observe(el);else kesLive(el,true)}
+function kesWatch(el){if(!el||el.__kes)return;el.__kes=1;
+ /* a seal re-created for a new mood (jfigseal keeps the OLD still as el.__prev): the new still waits hidden (kemo-wait) until it is LOADED AND DECODED, then the old one goes two frames later - never an empty disc, never a blank gap */
+ const ready=()=>{el.classList.remove("kemo-wait");const p=el.__prev;if(p){el.__prev=null;requestAnimationFrame(()=>requestAnimationFrame(()=>p.remove()))}};
+ if(!el.complete||!el.naturalWidth){el.classList.add("kemo-wait");const ok=()=>{if(el.decode)el.decode().then(ready,ready);else ready()};el.addEventListener("load",ok,{once:true});el.addEventListener("error",ready,{once:true})}else ready();
+ if(KES_IO)KES_IO.observe(el);else kesLive(el,true)}
 function kesScan(){document.querySelectorAll("img.kemo").forEach(kesWatch)}
 function kesSweep(){/* effect layers + big clones whose seal is gone */const L=[...document.querySelectorAll("img.kemo")];document.querySelectorAll("img.kemofx").forEach(f=>{if(!L.some(c=>c.__fx===f))f.remove()});document.querySelectorAll(".kemo-big").forEach(f=>{if(!L.some(c=>c.__big===f))f.remove()})}
 let kesQ=0;function kesSched(){if(kesQ)return;kesQ=requestAnimationFrame(()=>{kesQ=0;kesScan();kesSweep()})}
