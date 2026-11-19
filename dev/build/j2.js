@@ -45,8 +45,8 @@ function pool(){const L=S.emp.likes,K=S.emp.known,tt=has("trongtai")?2:1;
   {n:"Cầu tự ở Phụng Tiên điện",t:"Thắp hương xin một hoàng tử.",c:BAL.tw.pray,o:od(BAL.tw.g.prayO),w:{},l:{},lock:S.fert>0||S.pray>0,t:"đang có hiệu lực",x:`2 tháng dễ có thai hơn (nay ${chanceW(conceiveCh())})`,go:()=>S.pray=BAL.tw.g.pray},
   {n:"Phát chẩn cho cung nhân",t:"Ban bạc cho kẻ hầu nghèo.",c:{...BAL.ag.cx.alms.c},o:od(BAL.ag.cx.alms.o),w:{...BAL.ag.cx.alms.w},l:{}},
   {n:"Dưỡng nhan",t:"Ngọc trai nghiền, sữa dê tắm, ngủ đủ giấc.",c:{...BAL.ag.cx.face.c},o:od(BAL.ag.cx.face.o),w:{...BAL.ag.cx.face.w},l:{}},
-  {n:"Luyện cầm kỳ thi họa",t:"Ngày đêm khổ luyện bên án thư.",c:{...BAL.ag.cx.arts.c},o:BAL.ag.cx.arts.o,w:{...BAL.ag.cx.arts.w}},
-  {n:"Đọc binh thư, sử sách",t:"Học mưu kế người xưa, xem lòng người.",c:{...BAL.ag.cx.book.c},o:BAL.ag.cx.book.o,w:{...BAL.ag.cx.book.w}},
+  {n:"Luyện cầm kỳ thi họa",t:"Ngày đêm khổ luyện bên án thư.",c:{...BAL.ag.cx.arts.c},o:BAL.ag.cx.arts.o,w:{...BAL.ag.cx.arts.w},cx:"arts",x:typeof alLightNote==="function"?alLightNote("arts"):""},
+  {n:"Đọc binh thư, sử sách",t:"Học mưu kế người xưa, xem lòng người.",c:{...BAL.ag.cx.book.c},o:BAL.ag.cx.book.o,w:{...BAL.ag.cx.book.w},cx:"book",x:typeof alLightNote==="function"?alLightNote("book"):""},
   {n:"Tụng kinh, làm việc thiện",t:"Thắp hương ở Bảo Hoa điện, bố thí kẻ nghèo.",c:{...BAL.ag.cx.sutra.c},o:BAL.ag.cx.sutra.o,w:{...BAL.ag.cx.sutra.w}},
   {n:"Thưởng cung nữ",t:`Ban cho ${S.maid.name} vòng bạc, giữ lòng nàng.`,c:{...BAL.ag.cx.maidR.c},o:BAL.ag.cx.maidR.o,w:{...BAL.ag.cx.maidR.w}}];
  if(!S.preg&&S.tamco>=50)A.push({n:"Giả mang thai",t:"Mua chuộc thái y, độn bụng, chờ tháng thứ chín tráo con.",c:BAL.tw.fakePreg,o:od(S.tamco),w:{sung:BAL.tw.g.preg[0],th:BAL.tw.g.preg[1]},l:{danh:BAL.tw.g.preg[2]},x:"có 'thai'; tháng 9 phải tráo con, lộ là bị ban chết",go:()=>{S.preg=1;S.fake=1;S.hidden=false;S.pregWk=wk()}});
