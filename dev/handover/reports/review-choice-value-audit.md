@@ -159,3 +159,15 @@ Only real conflict: `dev/build/jration.js` lxAskHer — this branch gave «Khéo
 
 ### VERDICT: LAND READY review/choice-value-audit ef373140 (FF of 1a4df595)
 LANDER: (1) delete `jbal.js` BAL.rk guard (`if(!BAL.rk)BAL.rk={loanBack:40};` + its comment) when balance-final lands; (2) jration.js vs receiver-choice-rv: take receiver-choice's lxAskHer (above).
+
+## FINAL-MERGE c02748c2 (same session, D #7 ask 14:51Z) — HOLD, 1 red
+Merge LIVE c02748c2 (receiver-choice) into ef373140 → **a7828dcd** (pushed, FF of c02748c2). Conflict jration.js lxAskHer → receiver-choice's jrcv card (as trial-tested); index.html / sw.js rebuilt.
+| gate (delta) | result |
+|---|---|
+| one-core ×4, odds-cap | PASS |
+| receiver-choice.test | ALL PASS |
+| choice-value-scan seed 7 | **FAIL** 301 modals · COST-ONLY 0 · HINT-NO-GAIN 0 · **DOMINATED 1** |
+| quickcheck / coop-e2e | not run (wait for the fix below) |
+### Red (numbered)
+1. **Law 2 — j42 `cnvBribeOpts` «Bạc lạ» (she is a servant, a rival's eunuch offers bạc)**: «Từ chối, im lặng» `fx:{}` `x:""` has no gain, no cost, no effect; «Từ chối, bẩm chủ» gives Chủ tin +BAL.coopBribe.tin and costs her nothing → strictly dominated. NOT new code: the line is byte-identical on 1a4df595 / ef373140 / c02748c2; the PEND pass skips it (needs isSrv), only a servant life in the turn pass reaches it, and receiver-choice changed the seed-7 path so the scan now lands there. Same group: co-op twins `jcoopworld.js:922–923` and `:1097–1098` («im lặng» says «trả lại bạc», «bẩm chủ» also no cost to the servant — the −5 is briber↔mistress); NPC weights `jagstf2 stf2BribeW` + `jrcv rcvMaidBribe` read the same list.
+   **Fix proposal (not done; needs one new BAL number):** `BAL.coopBribe.grudge` (= 5, same size as BAL.eff.jcoopworld.briber) — «bẩm chủ» kèm: «${briber} ghi hận ngươi», briber's thiện cảm toward the servant −grudge (real affAdd); «im lặng» thành: «trả lại bạc, giữ hòa khí với ${briber}». Apply to j42 + both jcoopworld cards; NPC weights unchanged (they already split tell/quiet by lòng). Then re-run scan seeds 7/11/23/31, one-core ×4, quickcheck, coop-e2e.
