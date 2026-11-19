@@ -14,7 +14,7 @@ depth 5 · START_CTX ≈ 3 % of the 1M window (context_usage read 0 at start; ow
   9 "info" lines = P1 (approved) items the same checks would flag (m06/m18/m45/m49 pale blues chroma ~0.040; c04/c22/nc3 lilac+rose and m39/m49 blue+ivory low contrast) — not judged, P1 is approved.
 - Warmth: P1 −0.29…+0.56 (mean +0.14) · P2 −0.72…−0.20 (mean −0.44) · P3 +0.46…+0.90 (mean +0.64).
 - Sheets (Vietnamese headers "Màu gốc | Thiên lạnh | Thiên ấm", main big + secondary swatch, names + hex, 1110 px wide for phone):
-  `dev/handover/review-sheets/palettes3/palettes3_sheet1.png` (m01–m29), `…sheet2.png` (m30–c06), `…sheet3.png` (c07–nc3). All looked at full size.
+  `dev/handover/review-sheets/palettes3/palettes3_sheet1.jpg` (m01–m29), `…sheet2.jpg` (m30–c06), `…sheet3.jpg` (c07–nc3). All looked at full size.
 
 ## How it reads
 - Cool palette: her colour moved toward blue/green/violet (pinks → orchid/lilac, apricots → lilac/aqua, greens → jade/celadon/aquamarine, blues stay blue) + a deep cool secondary (indigo, teal, peacock/sea blue, violet, plum).
@@ -41,8 +41,8 @@ depth 5 · foreman now ROOT-53 (session_01PEhRbuf8GDz77QZRdK2XXP).
 - `dev/art/palettes3/seasons.py` (season criteria, classify + target), `gen_seasons.py` (generator, extra colours list EXTRA),
   `check_seasons.py` (checker), `make_season_sheets.py` (sheets). Hand fixes: `dev/art/palettes3/overrides_season.json`
   as `{"m05": {"ha": ["cool lilac", "teal"]}}` (names from library.py or EXTRA). Re-run gen → check → sheets.
-- Sheets "Xuân | Hạ | Thu | Đông", ★ = root, root count under each season header:
-  `dev/handover/review-sheets/palettes-season/season_sheet1.png` (m01–m29), `season_sheet2.png` (m30–c06), `season_sheet3.png` (c07–nc3). All looked at full size.
+- Sheets "Xuân | Hạ | Thu | Đông", ★ (gốc) = root, root count under each season header:
+  `dev/handover/review-sheets/palettes-season/season_sheet1.jpg` (m01–m29), `season_sheet2.jpg` (m30–c06), `season_sheet3.jpg` (c07–nc3). All looked at full size.
 
 ## Season criteria (OKLCH)
 temperature t = 0.8 × main warmth + 0.2 × secondary warmth (warmth = 10·C·cos(hue−55°); ivory/cream/white = 0);

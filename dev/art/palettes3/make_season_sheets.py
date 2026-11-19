@@ -1,4 +1,4 @@
-"""Season sheets for palettes_season.json -> dev/handover/review-sheets/palettes-season/season_sheetN.png
+"""Season sheets for palettes_season.json -> dev/handover/review-sheets/palettes-season/season_sheetN.jpg (<= 600 KB)
 Columns Xuân | Hạ | Thu | Đông; ★ = her approved root palette (in the season it classifies into)."""
 import json, os
 from PIL import Image, ImageDraw, ImageFont
@@ -24,7 +24,7 @@ for n, chunk in enumerate(CHUNKS, 1):
     H = HEAD + ROWH * len(chunk) + 44
     im = Image.new('RGB', (W, H), BG); dr = ImageDraw.Draw(im)
     dr.text((12, 10), f'Bảng màu 4 mùa (B20, Lượt 616) — tờ {n}/3: {chunk[0]}–{chunk[-1]}', font=f_name, fill=SUB)
-    dr.text((12, 36), '★ = màu gốc đã duyệt (nằm ở mùa của nó) · số = bao nhiêu màu gốc thuộc mùa đó (cả 87 người)', font=f_small, fill=SUB)
+    dr.text((12, 36), '★ (gốc) = màu gốc đã duyệt (nằm ở mùa của nó) · số = bao nhiêu màu gốc thuộc mùa đó (cả 87 người)', font=f_small, fill=SUB)
     for i, se in enumerate(SEASONS):
         x = IDW + i * COLW
         dr.text((x + 8, 70), VN[se], font=f_head, fill=INK)
@@ -41,6 +41,7 @@ for n, chunk in enumerate(CHUNKS, 1):
             if p.get('root'):
                 dr.rectangle([x - 3, y + 5, x + 271, y + 91], outline=STAR, width=4)
                 dr.text((x + 6, y + 10), '★', font=f_head, fill=(255, 255, 255), stroke_width=2, stroke_fill=STAR)
+                dr.text((x + 40, y + 14), '(gốc)', font=f_name, fill=(255, 255, 255), stroke_width=2, stroke_fill=STAR)
             else:
                 dr.rectangle([x, y + 8, x + 268, y + 88], outline=(150, 142, 134), width=1)
             dr.text((x, y + 94), fit(dr, 'C: ' + p['main'], f_name, 272), font=f_name, fill=INK)
@@ -50,4 +51,10 @@ for n, chunk in enumerate(CHUNKS, 1):
     for i in range(1, 4):
         x = IDW + i * COLW; dr.line([(x, HEAD - 6), (x, H - 40)], fill=(200, 192, 184), width=2)
     dr.text((12, H - 30), 'C = màu chính · P = màu phụ', font=f_hex, fill=SUB)
-    path = os.path.join(OUT, f'season_sheet{n}.png'); im.save(path, optimize=True); print(path, im.size)
+    path = os.path.join(OUT, f'season_sheet{n}.jpg')
+    q = 82
+    while True:   # CLONE_RULE: review sheets = JPG <= 600 KB
+        im.save(path, quality=q, optimize=True)
+        if os.path.getsize(path) <= 600 * 1024 or q <= 50: break
+        q -= 6
+    print(path, im.size, q, os.path.getsize(path) // 1024, 'KB')
