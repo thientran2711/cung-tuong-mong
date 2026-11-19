@@ -962,3 +962,4 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 - ORDER to D: jptime landing notice → kitNotice (written in FOREMAN_D_STATUS).
 - VOID: review/residence-qp-alone f7cf2ad6 (owner OD 23:50Z: QP shares; never land).
 - Images eat context: one small montage per LOOK.
+- (19/11 ~00:35Z real) ROOT-60 opened ROOT-61 = session_01Rc5AsJBmT3vTTFe8sbCbUa (opus, child, depth 8 = LIMIT) and STOPS coordinating; ROOT-60 hourly wake trig_01QG43edpKskKnyDFSeDEX6j DISABLED. Owner: talk to ROOT-61 (session title "Cung Tường Mộng 61 (MAIN)").
