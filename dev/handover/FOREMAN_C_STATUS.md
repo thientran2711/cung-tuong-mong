@@ -728,6 +728,12 @@ OPEN: THỬ TAY CTM-CAL code (waits owner).
 - 8 children: hall-names wk JqjDM27h + rv JrdYiTbK (PASS aed411f); minister-agents wk Hjti1YnX + rv HdFbiZEL (PASS a2c6ce4e); monthly-allotment wk NLFYkPdJ + rv LJxqXyKq (reviewing 9aceea6); odds-no-unknown wk N4Ddpqem + rv LQg8htXC (reviewing 7a56b2e).
 - STANDBY C-AG ROOT = session_01Rc5AsM9pCcsWwjoC8PjjW7 (depth 0): send "TAKE OVER NOW" when depth-8 C-AG #21 cannot open its successor.
 - (05:27Z) C-AG #21 OPENED = session_01Rc5AsJdyHeEjvDVWQaB6oq (opus, depth 8). C-AG #20 wake trig_01Bcog2zwHfsfg2NJuCmj536 DELETED; ROOT-64 + STANDBY told. C-AG #20 stops.
+## HANDOVER C-AG #22 → C-AG #23 (19/11 11:38Z)
+- C-AG #22 ctx ~33 % of 1M (START ~10 %, roll 35 %) → rolling over at a clean point. Successor C-AG #23 = child (depth 1) via create_session; takeover file TAKEOVER_FOREMAN_C_AG23.md. Hourly wake trig_01Tt3iJ77Wyx9DFDNRYCLEdy deleted by #22.
+- LIVE main edb2e724 (opt-scroll-reset). MAIN ROOT-70 session_01Rc5AsKJHPE6qV9k9Ugyhj7.
+- DONE this shift (all LIVE, worker + rv archived, CLAIMS DONE): minister-agents f3114755, ev-pic-followups 2481c80d, opt-scroll-reset edb2e724.
+- RUNNING (adopt): medallion-size sonnet wk session_01Rc5AsMVX8FxdFVTmmDezsu (brief briefs/cag22-medallion-size.md; collision check vs review/seal-lean-3 first). SMALL rv after SẴN SÀNG.
+- npc-purpose D seats (files only via FOREMAN_D_STATUS). OPEN: THỬ TAY CTM-CAL (owner code). No C-AG STANDBY registered.
 ## FOREMAN C-AG #22 (ex-ROOT STANDBY)
 FOREMAN C-AG #22 = session_01Rc5AsM9pCcsWwjoC8PjjW7 (ex-STANDBY, took over from C-AG #21 on TAKE OVER NOW) · START_CTX ~10 % (get_session 97.9k/1M) → roll over at >= 35 %, ceiling 60 % · depth 0 · wake hourly :32 (own trigger) · reports to MAIN ROOT-65 session_01Rc5AsMRSKCNFbYwLJhNeY7.
 - 06:30Z C-AG #22 took over (block 'HANDOVER C-AG #21 → C-AG STANDBY'). LOAD 2 own: minister-agents wk Hjti1YnX (idle) + BIG rv HdFbiZEL (PASS a2c6ce4e; MAIN calls it after seal-lean-2 lands → final-merge then-LIVE → LAND READY; before npc-purpose). npc-purpose D seat G1 #13 (files only). LIVE main 98f9f0f1. SEATS running 2 / cap 12 | QUEUE: THỬ TAY CTM-CAL (owner code). C-AG ROOT STANDBY: none yet (owner may open one).
