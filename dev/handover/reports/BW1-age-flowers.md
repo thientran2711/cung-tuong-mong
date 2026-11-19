@@ -72,3 +72,9 @@ J6 and K15 (added by ROOT-49 in ad8950c) already say what the owner said. No `ru
 
 1. **Men:** "everyone in the game" could include the Emperor and other men. Their a51 text is the separate men's text, and a65 is held (J5: "consort a65 text adapted"). The women's text ("older lady", robe colours) cannot be copied word for word onto a man. Only the owner can approve an adapted version, so I did not invent one.
 2. **Older families look older:** re-draw at a51/a65 with the current builder (one-ref)? This needs image generation, so it is not BW1's job.
+
+## Addendum (after merging ROOT-50 c89ce6f / Lượt 529)
+
+- **J6 widened** (Lượt 529): all five ages, men AND women. Checked a18 and a26 too (nude, t1, t8, princess, ma ma, tm1, tm4, kc, ty1, triều 3), and a36 in all 33 samples: **every women's family already uses `AGE_TXT` verbatim at all five ages**. The only family that is not verbatim is the **men** (`emperor-B` AGE_TXT a18–a51, no a65; `build_npc.py M_AGE`). Copying the women's sentences ("older lady", robe colours, "her") onto men needs at least her→his/lady→man swaps, and J5 already says "adapted". That is a coordinator or owner wording call; BW1 changed no men's text.
+- **K15 note (ROOT-50 ruling A, ma ma only):** removing the flower words was not enough; the generation copied the face reference's flower, so ma ma `--noflower` now adds "NO flowers in the hair (no fresh or silk flowers), only her hairpins." **The same risk applies to cung nữ tm1/tm2** (image 1 = her live maid picture, which has flowers). BW1 did only the removal, per LAW #0. **Suggestion:** if the ruling is extended to tm0–tm4, append that same sentence verbatim to the tm1/tm2 hair clause, and extend X14 scope to tm*.
+- Pushed: 9135a20, merged as baa3e96.
