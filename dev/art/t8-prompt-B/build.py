@@ -155,7 +155,7 @@ _HK={"rfan":"rfan","ffan":"ffan","mirror":"mirror","ball":"dangle","slant":"lant
 "combbox":"box","plant":"lantern","gobox":"box","pend":"dangle","ruyi":"ruyi","hot":"two","incbox":"box","casket":"box","hanky":"kerchief","orchid":"two",
 "powder":"box","hcomb":"one","beads":"dangle","censer":"one","jseal":"two","sutra":"book","warmer":"two","brush":"one","iball":"dangle","whisk":"one",
 "album":"book","pouch":"dangle","coral":"stand","staff":"one","peach":"two","almanac":"book","pastebox":"box","pine":"scroll","hballs":"two","chrys":"sprig","bell":"dangle",
-"p_sprig":"sprig","p_wbask":"basket","p_flute":"flute","p_lant":"lantern","p_hsach":"dangle","p_mulb":"basket","p_sutra":"book","p_beads":"dangle",
+"p_sprig":"sprig","p_plum":"sprig","p_wbask":"basket","p_flute":"flute","p_lant":"lantern","p_hsach":"dangle","p_mulb":"basket","p_sutra":"book","p_beads":"dangle",
 "m_lant":"lantern","m_fbask":"basket","m_beads":"dangle","m_sutra":"book","m_ledger":"book"}
 def age_item(c,tier,item,hk):
     if OLDITEM: return item,hk

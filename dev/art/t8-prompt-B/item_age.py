@@ -165,7 +165,7 @@ k("p_laundry","{A} folded washed cloth","xấp vải giặt {A} gấp gọn")
 k("p_sewb","{A} sewing basket with needle and thread","giỏ kim chỉ {A}")
 k("p_sheets","hand-copied sutra sheets tied with a {A} cord","xấp kinh chép tay buộc dây {A}")
 k("p_umb","{A} closed oiled-paper umbrella","dù giấy dầu {A} xếp lại")
-k("p_lamp","small {A} clay oil lamp, unlit","đèn dầu đất nhỏ {A}")
+k("p_plum","branch of plum blossoms picked from the roadside","cành hoa mơ hái ven đường")   # TY0 fix1: replaces p_lamp (drawn as a teapot, 2K sample); wording = FIGURE_GATE H NHÀ NGHÈO #8 verbatim
 k("p_twigs","bundle of dry twigs tied with {A} rope","bó củi nhỏ buộc dây {A}")
 k("p_greens","small {A} basket of fresh greens","rổ rau nhỏ {A}")
 k("p_paddle","{A} wooden laundry paddle","chày đập áo gỗ {A}")
@@ -202,7 +202,7 @@ POOL={"lady":{
 "poor":{
  "a18":_PS+["p_sprig","p_wbask","p_hemp","p_flute","p_lant","p_orchid","p_hsach"],
  "a26":_PS+["p_spindle","p_mulb","p_fherbs","p_hoop","p_broom","p_laundry","p_sewb"],
- "a36":_PS+["p_sheets","p_umb","p_lamp","p_twigs","p_greens","p_paddle","p_sandals"],
+ "a36":_PS+["p_sheets","p_umb","p_plum","p_twigs","p_greens","p_paddle","p_sandals"],
  "a51":_PS+["p_beads","p_stick","p_roots","p_sutra","p_seeds","p_inc","p_whisk"],
  "a65":_PS+["p_cane","p_fish","p_chrys","p_warm","p_keep","p_yarn","p_hanky"]}}
 def allowed(kind,tier):
