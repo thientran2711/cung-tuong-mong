@@ -18,15 +18,15 @@ if(typeof NCL==="object"){NCL.bt={land:"Ba Tư",pv:"Phụ vương",mh:"Vương h
 /* a new life's premise pool (j67 arcIds67 → jst14 roll, j67 phase-1 frame): old bd premises out; saves keep the ids already written in their plan */
 (function(){if(typeof arcIds67!=="function")return;const a0=arcIds67;arcIds67=function(o){const r=a0.apply(this,arguments);if(o!=="bd")return r;const n=r.filter(id=>!BD_OLD.includes(id));return n.length?n:r}/* until a new road exists the old ones stay dealt (no empty pool) */})();
 /* ---------- BDP: the steppe people of bd's roads (law 6b, ROAD_MAP §5.4) — one living state per life, kept in the road flag book ----------
-   where: "tn" thảo nguyên · "ai" biên ải · "kinh" kinh thành · "nguc" ngục; alive 1/0; met 1 once she has dealt with them. Chapters move them. */
-const BDP={lie:{n:"Hô Diên Liệt",r:"thúc phụ",w:"tn",want:"ngồi vào kim trướng, được Đại Hy công nhận",man:1},
- olac:{n:"Ô Lặc",r:"em trai",w:"tn",want:"giữ lều cha, sống sót qua tay thúc phụ",man:1},
- thatmoc:{n:"Thát Mộc",r:"vệ sĩ sứ đoàn",w:"tn",want:"một bộ lạc của riêng mình",man:1},
- bado:{n:"Ba Đồ",r:"phu ngựa Thượng tứ viện",w:"kinh",want:"được ghi tên chính ngạch, một ngày về lại thảo nguyên"},
- tuyetcau:{n:"Tuyết Câu",r:"ngựa của ngươi",w:"kinh",want:"cỏ và gió"},
- asnc:{n:"A Sử Na Cát",r:"trưởng lão bộ lạc biên",w:"ai",want:"cứu bộ lạc qua mùa đông",man:1},
- phong:{n:"Thác Bạt Phong",r:"người đã đính ước",w:"tn",want:"giữ lời thề bên đống đá",man:1},
- kd:{n:"Khả đôn",r:"mẹ",w:"tn",want:"giữ con trai mình sống, gặp lại con gái"}};
+   where: "tn" home (Ba Tư) · "ai" biên ải · "kinh" kinh thành · "nguc" ngục; alive 1/0; met 1 once she has dealt with them. Chapters move them. */
+const BDP={lie:{n:"Mi Hồ Lan",r:"vương thúc",w:"tn",want:"ngồi lên ngai vàng Ba Tư, được Đại Hy công nhận",man:1},
+ olac:{n:"Nê Niết Sư",r:"em trai",w:"tn",want:"giữ ngai của cha, sống sót qua tay vương thúc",man:1},
+ thatmoc:{n:"Đạt Lỗ",r:"vệ sĩ sứ đoàn",w:"tn",want:"một thái ấp của riêng mình",man:1},
+ bado:{n:"Bạc Đồ",r:"mã phu Thượng tứ viện",w:"kinh",want:"được ghi tên chính ngạch, một ngày về lại quê nhà"},
+ tuyetcau:{n:"Ngọc Câu",r:"ngựa của ngươi",w:"kinh",want:"cỏ và gió"},
+ asnc:{n:"A La Hám",r:"lão tướng trấn Tật Lăng",w:"ai",want:"cứu đoàn người chạy nạn qua mùa đông",man:1},
+ phong:{n:"Mi Hồ Phong",r:"người đã đính ước",w:"tn",want:"giữ lời thề trước lửa thánh",man:1},
+ kd:{n:"Vương hậu",r:"mẹ",w:"tn",want:"giữ con trai mình sống, gặp lại con gái"}};
 const bdP=(id,k,v)=>{const key="bd.p."+id+"."+k;if(v!=null)RD_FL(key,v);const x=RD_FL(key);
  if(x)return x;if(k==="alive")return 1;if(k==="w")return BDP[id].w;return 0};
 const bdAlive=id=>bdP(id,"alive")!==-1;/* dead = -1 (0 is the book's "unset") */
@@ -42,7 +42,7 @@ const bdMeet=id=>{bdP(id,"met",1);return ""};
    holder here, fb "bd.o.<thing>" = where/who holds it now (0 = never in play). bdO(k) reads, bdO(k,v) sets (returns "" for text use). */
 const bdO=(k,v)=>{const r=RD_FL("bd.o."+k,v);return v!=null?"":r};
 /* the book, as the chapter text and the later grand-ending wave read it */
-const bdWhere=id=>({tn:"thảo nguyên",ai:"biên ải",kinh:"kinh thành",nguc:"ngục"})[bdP(id,"w")]||"";
+const bdWhere=id=>({tn:bdCountry()==="bd"?"thảo nguyên":"quê nhà",ai:"biên ải",kinh:"kinh thành",nguc:"ngục"})[bdP(id,"w")]||"";
 /* the .4 rare rows of the bd premises (j97 R97L shape; j97 appends them; numbers BAL.arc.rare.<road>) */
 const BD97=[];
 RDQ.bdOlac=()=>bdAlive("olac");RDQ.bdLie=()=>bdAlive("lie");
