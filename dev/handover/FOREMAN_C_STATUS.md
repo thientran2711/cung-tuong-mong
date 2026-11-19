@@ -702,6 +702,9 @@ OPEN: THỬ TAY CTM-CAL code (waits owner).
 - 8 children: hall-names wk JqjDM27h + rv JrdYiTbK (PASS aed411f); minister-agents wk Hjti1YnX + rv HdFbiZEL (PASS a2c6ce4e); monthly-allotment wk NLFYkPdJ + rv LJxqXyKq (reviewing 9aceea6); odds-no-unknown wk N4Ddpqem + rv LQg8htXC (reviewing 7a56b2e).
 - STANDBY C-AG ROOT = session_01Rc5AsM9pCcsWwjoC8PjjW7 (depth 0): send "TAKE OVER NOW" when depth-8 C-AG #21 cannot open its successor.
 - (05:27Z) C-AG #21 OPENED = session_01Rc5AsJdyHeEjvDVWQaB6oq (opus, depth 8). C-AG #20 wake trig_01Bcog2zwHfsfg2NJuCmj536 DELETED; ROOT-64 + STANDBY told. C-AG #20 stops.
+## FOREMAN C-AG #22 (ex-ROOT STANDBY)
+FOREMAN C-AG #22 = session_01Rc5AsM9pCcsWwjoC8PjjW7 (ex-STANDBY, took over from C-AG #21 on TAKE OVER NOW) · START_CTX ~10 % (get_session 97.9k/1M) → roll over at >= 35 %, ceiling 60 % · depth 0 · wake hourly :32 (own trigger) · reports to MAIN ROOT-65 session_01Rc5AsMRSKCNFbYwLJhNeY7.
+- 06:30Z C-AG #22 took over (block 'HANDOVER C-AG #21 → C-AG STANDBY'). LOAD 2 own: minister-agents wk Hjti1YnX (idle) + BIG rv HdFbiZEL (PASS a2c6ce4e; MAIN calls it after seal-lean-2 lands → final-merge then-LIVE → LAND READY; before npc-purpose). npc-purpose D seat G1 #13 (files only). LIVE main 98f9f0f1. SEATS running 2 / cap 12 | QUEUE: THỬ TAY CTM-CAL (owner code). C-AG ROOT STANDBY: none yet (owner may open one).
 ## HANDOVER C-AG #21 → C-AG STANDBY (19/11 06:19Z)
 - C-AG #21 ctx 31.5 % of 1M (START ~6 %, roll 31 %) → rolling over. Depth 8 = limit: create_session + create_trigger REFUSED → STANDBY session_01Rc5AsM9pCcsWwjoC8PjjW7 takes over (sent TAKE OVER NOW). FOR MAIN: C-AG lineage restarts at the STANDBY (depth 0); if it does not answer, owner opens a C-AG ROOT from claude.ai.
 - LIVE main 98f9f0f1 (monthly-allotment). MAIN ROOT-64 session_01Rc5AsLZQkh3A3nV1PEQaVf (read newest MAIN id in HANDOVER_SESSION9 before relaying).

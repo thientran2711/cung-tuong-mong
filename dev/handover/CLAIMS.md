@@ -244,3 +244,4 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | bd-roads r2 fixes (opus E14c, successor of E14) | review/bd-roads | E ROOT #8 | session_01DgYSWmKcwf5VUb22x4YGU3 | RUNNING | 19/11 05:53Z |
 | ge-writers-w3 r2 fixes (opus E11d, successor of E11c) | review/ge-writers-w3 | E ROOT #8 | session_01DgYSWogWMATZVoosS7SFEk | RUNNING | 19/11 05:56Z |
 | MAIN ROOT-65 (opus; child of ROOT-64, depth 3) | handover HANDOVER_SESSION9 | ROOT-64 | session_01Rc5AsMRSKCNFbYwLJhNeY7 | RUNNING | 19/11 06:24Z |
+| FOREMAN C-AG #22 (opus; ex-ROOT STANDBY, depth 0; took over from C-AG #21) | handover FOREMAN_C_STATUS | owner STANDBY | session_01Rc5AsM9pCcsWwjoC8PjjW7 | RUNNING | 19/11 06:30Z |
