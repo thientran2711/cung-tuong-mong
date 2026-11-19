@@ -176,7 +176,7 @@ function sleep(){if(WT){clearInterval(WT);WT=null}}
 function step(){try{if(!S||S.dead||!nfOn()){sleep();return}const x=X();if(!x||x.st==="done"){sleep();return}
  /* a news card (kind "news": jmoodknow's "Tin trong cung" runs after every endTurn, also the held one of the flip) never holds the choice back */if(x.st==="wait"){if(Q.some(m=>m&&m.pid!=="ksp"&&m.pid!=="prep"&&m.pid!=="nfch"&&m.kind!=="news")){pullKsp(x);return}openChoice()}
  if(x.st!=="open")return;
- if(x.me===undefined&&!x.dlg){if(scene()&&Date.now()-(x.at||0)<B().choice.waitMs*2)return;showChoice()}
+ if(x.me===undefined&&!x.dlg){/* the scene goes first, bounded by waitMs×2 — re-checked by the 250 ms step timer; bot mode (headless tests / sims) has no timer, so a scene still up would hold the choice forever: no wait there */if(!window.__bot&&scene()&&Date.now()-(x.at||0)<B().choice.waitMs*2)return;showChoice()}
  if(guest())return;
  if(x.me!==undefined&&x.fr===undefined&&x.myAt&&Date.now()-x.myAt>B().choice.waitMs)x.fr=null;   /* the friend never answered: Thôi */
  if(x.me!==undefined&&x.fr!==undefined)resolveAll()}catch(e){console.error(e)}}
