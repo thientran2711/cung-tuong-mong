@@ -170,7 +170,7 @@ rdDef("bd_tuyet",8,{t:"Người lánh nạn ở Ngọc Môn quan",w:"emp",sj:"ng
  c1:{h:"Gian tế trong lều",w:"maid",t:"Thám tử của quan trấn thủ báo: trong lều người lánh nạn có một kẻ đếm cung nỏ trên tường thành. Có người nói hắn là người của {pb} ngươi, kẻ đã hàng Đại Thực.",o:[
   {n:"Xin quan trấn thủ bắt riêng kẻ ấy, không động đến lều",f:"le",wx:"gian tế bị bắt, người lánh nạn yên",lx:"nếu bắt nhầm, cả lều sợ",rt:"Quan trấn thủ bắt được kẻ đếm nỏ; trong người hắn có bản vẽ tường thành.",rf:"Bắt nhầm một người dắt lạc đà; cả lều hoảng."},
   {n:"Xin đuổi cả lều ấy đi",f:"uy",wx:"ải không còn mối lo",lx:"đàn bà trẻ con trong lều cũng bị đuổi",rt:"Cả lều bị đuổi ra khỏi tầm ải trong đêm."},
-  {n:"Nhắn lão tướng tự tìm kẻ ấy",f:"an",wx:"người {land} tự giữ mình",lx:"chậm",rt:"Người của A La Hám trói kẻ đếm nỏ giao cho lính ải."}]},
+  {n:"Nhắn lão tướng tự tìm kẻ ấy",f:"an",wx:"người {land} tự giữ mình",lx:"chậm",rt:"Người của A La Hám trói kẻ đếm nỏ giao cho lính ải."}]},/*bd6b: he camps under the wall at Ngọc Môn quan (w "ai"), where this line has him*/
  c2:{h:"Cung nữ xin ra ải",w:"maid",t:"Cung nữ thân tín của ngươi quê ở Lương Châu, xin về giúp nấu cháo cho người lánh nạn. Rời cung lúc này là trái lệ.",o:[
   {n:"Xin Thượng cung cục cho nàng về một tháng",f:"le",wx:"có người của ngươi ở ải",lx:"Thượng cung cục ghi ngươi nợ một lệ",rt:"Thượng cung cục cho về. Cung nữ của ngươi nấu cháo dưới chân thành.",rf:"Thượng cung cục không cho."},
   {n:"Gửi bạc theo người khác, giữ nàng ở lại",wx:"bạc đến ải",lx:"cung nữ buồn",rt:"Bạc của ngươi đến tay quan trấn thủ, ghi vào sổ cháo."},
@@ -183,7 +183,7 @@ rdDef("bd_tuyet",8,{t:"Người lánh nạn ở Ngọc Môn quan",w:"emp",sj:"ng
   {n:"Tâu: cho họ ở dưới chân thành qua đông, xuân về thì về",e:["win","lose"],rt:"Hoàng thượng chuẩn. Dưới chân Ngọc Môn quan, khói bếp bốc lên suốt tháng hai.",rf:"Triều thần sợ gian tế, sớ bị bác; lều bị dỡ."},
   {n:"Tâu: cho họ vào trong ải làm dân Đại Hy",e:["win","mid"],rt:"Hoàng thượng chuẩn; người lánh nạn có tên trong sổ hộ tịch.",rf:"Chỉ một phần được vào; số còn lại phải về."},
   {n:"Thưa: việc ải xin để quan trấn thủ định",e:"mid",lx:"ngươi không để lại dấu gì",rt:"Quan trấn thủ định theo lệ cũ."}]}},
- E:{win:{tag:"Khói bếp dưới chân ải",w:"emp",t:"Người lánh nạn qua được mùa đông dưới chân Ngọc Môn quan. A La Hám viết thư cảm ơn ngươi bằng nét chữ run.",go:(_A,G)=>e67bien(G[0])},
+ E:{win:{tag:"Khói bếp dưới chân ải",w:"emp",t:"Người lánh nạn qua được mùa đông dưới chân Ngọc Môn quan. A La Hám viết thư cảm ơn ngươi bằng nét chữ run.",go:(_A,G)=>e67bien(G[0])},/*bd6b: he camps under the wall at Ngọc Môn quan (w "ai"), where this line has him*/
   mid:{tag:"Qua đông mà chưa qua lo",t:"Người lánh nạn qua được mùa đông, nhưng chẳng ai biết xuân này họ sẽ đi đâu."},
   lose:{tag:"Lều dỡ trong gió cát",w:"emp",t:"Lều bị dỡ. Người lánh nạn tản vào gió cát, và có những người không bao giờ về đến lều.",go:(_A,G)=>e67bien(G[0])}}});
 
