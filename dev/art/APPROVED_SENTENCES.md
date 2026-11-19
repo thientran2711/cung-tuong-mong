@@ -16,11 +16,11 @@ Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as 
 
 ### S01 · TWO-COLOUR RULE (hai màu)
 - text: `TWO-COLOUR RULE: the whole outfit uses EXACTLY TWO colours that clearly interact: the MAIN colour {main} and the SECONDARY colour {secondary}, the secondary clearly visible in large areas (inner robe or skirt, wide borders, sash, cuffs, linings), never a single flat colour all over; gold or silver only as thin accents, never a third colour.`
-- scope: tp1-6 pr1-6 mama
-- confirm: tp7-8 pr7-8 nude trieu1-8
+- scope: tp1-8 pr1-8 mama
+- confirm: nude trieu1-8
 - ages: all
 - store: no
-- luot: 489, 499 (ART_RULES B15)
+- luot: 489, 499 (ART_RULES B15); 529 (G14: t7/t8 blocking)
 - source: dev/art/owner-copy/pr_cl_t2_V2.txt (Cao Ly V2, owner Lượt 301-303)
 - proof: dev/art/owner-copy/pr_cl_t2_V2.txt
 - picture: Cao Ly V2 t2 (Lượt 301-303) · gen Lw8y0mCswO · cut 79f3BGcJAL (ledger :288) · NO file on CDN/repo (sent in chat only) — ART_RULES B15 lists xSByOSyjfW/yiuGA83PW9/cpS8oJg0eP, but the ledger (:509/510/518) says those are the later Cao Ly t4/t5/t6 store pictures
@@ -398,6 +398,30 @@ Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as 
 - picture: Lượt 395 store sheets, approved Lượt 397 'vẽ rất là đẹp' · https://ctm-img.victoria-tntt.workers.dev/img/_review/morning-1119/sheet_congchua.jpg
 - vn: Tuổi 51/65: mọi màu là sắc TRẦM, ĐẬM hơn của màu trẻ (sang, điềm đạm, không tươi, không nhạt, không xám bụi).
 
+### S34 · FOREHEAD: nothing on the forehead (D9)
+- text: `NOTHING on the forehead (no hoa điền, no dot, no mark, nothing).`
+- scope: any
+- confirm: -
+- ages: all
+- store: yes
+- luot: 529 (ART_RULES D9, owner via ROOT-49 chat Lượt 521)
+- source: owner words, ART_RULES D9 (dev/art/ART_RULES.md); builders: t8-prompt-B/build.py D9_FOREHEAD, build_npc.py, emperor-B/build.py
+- proof: dev/art/t8-prompt-B/build.py
+- picture: - (owner order, not a picture verdict)
+- vn: Trán KHÔNG có gì (không hoa điền, không chấm, không dấu, không gì cả).
+
+### S35 · NO hair flowers on cung nữ / nữ quan (K15)
+- text: `NO flowers in the hair (no fresh or silk flowers), only her hairpins.`
+- scope: tm1-2 tm4
+- confirm: -
+- ages: all
+- store: yes
+- luot: 520 (K15; ROOT-50 19/11 18:24Z: copy into tm1/tm2 + nữ quan)
+- source: dev/art/t8-prompt-B/build.py build_mama --noflower (MMX3, ROOT-50 ruling A)
+- proof: dev/art/t8-prompt-B/build.py
+- picture: - (owner order Lượt 520)
+- vn: Cung nữ, nữ quan: KHÔNG cài hoa trên tóc (không hoa tươi, không hoa lụa), chỉ trâm.
+
 ### S32 · MA MA two front panels (hai tà)
 - text: `a short front layer made of TWO separate long embroidered front panels (hai tà, never one single panel), one hanging down each side of the front from the waist, each with a gold-edged border, the centre front of the skirt showing between them`
 - scope: mama
@@ -496,10 +520,10 @@ Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as 
 
 ### X14 · hair flowers on a ma ma (K15)
 - regex: `tucked beside the bun|hair flower|fresh flower|flowers? in (?:her|the) hair`
-- scope: mama
+- scope: mama tm0-4
 - unless: -
 - negation: yes
-- luot: 520 (K15; ROOT-50 ruling A, MMX3)
+- luot: 520 (K15; ROOT-50 ruling A, MMX3); 529 scope widened to cung nữ/nữ quan tm0-tm4 (ROOT-50)
 - why: ma ma, cung nữ, nữ quan wear NO hair flowers; only consorts
 
 ### X13 · style image sentence (style image retired)
