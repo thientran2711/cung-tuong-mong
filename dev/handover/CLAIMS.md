@@ -258,7 +258,7 @@ rare-reach (ORDER ROOT-62 ~03:26Z; owner OD 19/11 ~03:25Z) | review/rare-reach |
 | seal-lean-3 fast pop / slow shrink / head-size max (sonnet; OD 06:55Z) | review/seal-lean-3 | MAIN ROOT-65 | session_01Rc5AsKzdGvNFdCvLo4rm8G | READY (bb59cda9) | 19/11 07:03Z |
 | phutang-road writer 2 (pt_tang + pt_dang, opus E21b, under E21) | review/phutang-road-w2; briefs/E21b-phutang-road-w2.md | FOREMAN E | session_01DgYSWkdwE7LuxhVqAQnJah | DONE 1d49cfc9 (archived 08:01Z) | 19/11 07:03Z |
 | bd-roads r2 + Ba Tư lead (opus E14d, successor of E14c) | review/bd-roads | FOREMAN E | session_01DgYSWqB4qyr7uRTdKD8895 | RUNNING | 19/11 07:06Z |
-| role-parity-drift-2 (opus; 12 new red rows from landings 7fb7c104..98f9f0f1; law 1 + law 11) | review/role-parity-drift-2 | B | session_01N1tNP6PEK9T9BWXhYLZvAd | RUNNING | 19/11 07:30Z |
+| role-parity-drift-2 (opus; 12 new red rows from landings 7fb7c104..98f9f0f1; law 1 + law 11) | review/role-parity-drift-2 | B | session_01N1tNP6PEK9T9BWXhYLZvAd | SẴN SÀNG KIỂM 6ffe38a4 | 19/11 11:04Z |
 | MAIN ROOT-66 (opus; child of ROOT-65, depth 4) | handover HANDOVER_SESSION9 | ROOT-65 | session_01Rc5AsNSzMY2cT8dMMPe7xW | DONE → ROOT-67 | 19/11 07:33Z |
 | opt-scroll-reset (opus; MAIN ROOT-65 follow-up via C-AG #22: 22 option frames re-render loop resets scroll, root cause + whole group) | review/opt-scroll-reset; briefs/cag22-opt-scroll-reset.md | C-AG #22 for ROOT-65 | session_01Rc5AsJ7aS6giCFsrSaRM6d | READY a5e2d8e7 (SẴN SÀNG KIỂM) | 19/11 10:05Z |
 | caoly-road BIG review (sonnet E20r; 30d7cca8) | review/caoly-road; briefs/E20r-review-caoly-road.md | FOREMAN E | session_01DgYSWq4WTWY2p7LTCaMp3M | DONE PASS e5241e4a; archived 10:53Z | 19/11 07:45Z |
