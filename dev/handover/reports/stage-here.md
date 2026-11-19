@@ -168,3 +168,49 @@ CODE MAP: jclose (kitToastPlace / kitToastKeepRects / KIT_TOAST_PEOPLE whole box
 TESTS: `DEV=fold|ipadAir node dev/test/stage-here.js` (faults toast-cover kept/outside/person/card, collapse-no-rail, rail-cover scroll-through), stage-stay.js, act-place-audit.js, stage-rightcol.js; quickcheck `bash dev/tools/quickcheck.sh` (~6 min; run with timeout ≥ 600 s, it rebuilds index.html — restore with `git checkout index.html` if it leaves a build-line diff). Shot script was container-local (scratchpad shots.js: away in vườn, buổi 2, used 3 → closing alert; tabs act/rel/go + KGF open list + TAP + MID scroll).
 CDN review shots: img/_review/stage-here/r3-* (wipe after verdict: `python3 dev/site/cdn_sync.py --wipe-review stage-here`).
 NEXT if MAIN sends BACK: build on 26483512, merge newest origin/main first (conflicts are usually only index.html/sw.js → take main's, rebuild; assemble.py module list must keep 'jstagehere.js' after 'jplst.js').
+
+## r4 — ONE NOTICE SYSTEM (MAIN ROOT-59, worker session_01Rc5AsL5rJqVVXyTRsQXXPL, depth 7, START_CTX ~4 %)
+PRIORITY #1 CHECK ('tin ?báo|tinbao|notice|toast'): OD 34 | ledger 0 | claims 8 | main 15 | review/* 10 (tinbao-ui … r7r PASS, never landed) | archive 116 → REUSED: review/tinbao-ui-r7r's Tai mắt line «<người> báo: <nơi> có chuyện» + «Để ta xem» → Dư đồ, the `.ktbt` chip look (jplst), the §78 `.khap` «!» disc, the §77 square button, `kitToastKeepRects`, `kitPanel` kind notice, `kitArtFrame` picture slot. Owner words: OD "(18/11 ~22:10Z UTC, ROOT-56 chat, ANGRY" RULES (1)–(4).
+Head **8e29c099** (review/stage-here; includes LIVE main 1130a49e merge 826c89a1).
+WHAT (kit part only, `dev/build/jnotice.js`, after jstagehere; KIT §42.2 rewritten in place, §77 / §77.2 updated, kit page sample §42.2):
+- ONE entry point `kitNotice({id, line, text, pic, kind, sticky, go, goLabel, again})` (+ `kitNoticeDrop/Seen/List/Open/Box`). Errand worker session_01Rc5AsLFZhaSRGU7o57KkKy got the signature (send_message, 8a3019ee).
+- BOX `#kntbox` in the fixed top bar (child of header.hud; §77 square kit button + yellow round `.khap` «!»; unread = blink + red dot; sticky closing = blink; read = calm; none = no box). Spot = first free spot of the bar (top-right first), re-checked every paint, never over a bar word/picture/button. Tap → «Tin báo» panel listing unread.
+- CHIP `#kntchip.ktbt` one line + «!», `BAL.entryToastMs` (5 s, the owner's existing number; one core), TOP ONLY: (a) free slot of the top bar (iPad: the empty middle of the bar); (b) a quiet part of the bar = over no word/number/picture/button, only bar tracks (Fold: over the mood slider track, the bar has no fully free slot); (c) band just under the bar over nothing kept; (d) straddling the bar edge; none → no chip, the box alone. NEVER at the bottom. Hidden while a dialog/book is open, shown after.
+- PANEL «Tin báo» = kitPanel kind notice (seal BÁO, ✕): the notice's own picture (closing = the place painting) + full text (closing: «… (đóng cửa tối). Ở lại = như lẻn vào: Khá chắc.»); action row only when real (Tai mắt «Để ta xem»). Plain kit rows (no guessed person figure) so it stays small.
+- ROUTED: kitLine (all callers, bottom pill #kupdline gone), kitLineToast (place-entry lines), closing alert (jstagehere: sticky notice, dropped when she leaves / it opens, no rail item), Tai mắt news (tinBaoOn), flip note (kitFlipNote, was a floating .kmnote moved to the bottom by jk3), «CẤM» srvToast. Stage-rail `closing` + `tnote` items removed.
+- FOR MAIN (decisions taken, say if wrong): (1) the act result card #rtoast (THÀNH/BẠI) is NOT routed — owner ruling jksize 17:25Z "routine actions keep the small result toast"; law 16 → not changed without her. (2) Fold chip sits over the mood slider track inside the top bar (5 s; the bar has no other free slot and under it are tab chips / map tools). (3) tinbao-ui-r7r should NOT land separately now: its badge/toast are replaced by this box/chip; its Tai mắt list card (§87.1 kitTaiMatCard) was not ported (separate feature). (4) Closing picture = the place painting; C's art request «notice-closing» can replace it via `pic` later.
+SCAN (law 11, `python3 dev/test/notice-scan.py [ref]`) — before = r3d 26483512:
+| group (26483512) | sites | state | where |
+|---|---|---|---|
+| kitLine (bottom pill #kupdline) callers | 8 | NOT ROUTED (floating toast) | jcoopchat.js:90, jcoopchat.js:96, jcoopchat.js:110, jcooplobby.js:107, jcooptimer.js:120, jcooptimer.js:130, jcooptimer.js:164, jdisp.js:125 |
+| kitLineToast (#ktbtoast) callers | 2 | NOT ROUTED (floating toast) | jclose.js:149, jstagehere.js:28 |
+| closing alert (stage rail «!» item) | 1 | FLOATING / RAIL (old) | jstagehere.js:32 |
+| tin báo collapse rail item «tnote» | 1 | FLOATING / RAIL (old) | jclose.js:147 |
+| flip note (.kmnote floating line) | 1 | NOT ROUTED (floating toast) | j93.js:262 |
+| «CẤM» place line (srvToast → #rtoast) | 4 | NOT ROUTED (floating toast) | j42.js:150, j42.js:152, j42.js:153, j77.js:91 |
+| Tai mắt news (tinBaoOn) — UI subscriber | 1 | NOT ROUTED (floating toast) | jagknow.js:160 |
+| closing notice via kitNotice | 0 | — |  |
+| act result card #rtoast (THÀNH/BẠI) | 4 | EXEMPT: act result card, owner ruling jksize 17:25Z "routine actions keep the small result toast" | j19.js:57, j25.js:32, j42.js:87, j63.js:303 |
+| tutorial tip kitTip | 1 | EXEMPT: tutorial coach (KIT §50.2), not a notice | jtut.js:162 |
+| co-op clock #kctmf | 1 | EXEMPT: co-op status clock (16/11 ruling) | jcooptimer.js:289 |
+
+after = work tree 8e29c099:
+| group (work tree) | sites | state | where |
+|---|---|---|---|
+| kitLine (bottom pill #kupdline) callers | 9 | ROUTED → kitNotice | jcoopchat.js:90, jcoopchat.js:96, jcoopchat.js:110, jcooplobby.js:107, jcoopthinf.js:41, jcooptimer.js:120, jcooptimer.js:130, jcooptimer.js:164 … |
+| kitLineToast (#ktbtoast) callers | 1 | ROUTED → kitNotice | jclose.js:147 |
+| closing alert (stage rail «!» item) | 0 | GONE |  |
+| tin báo collapse rail item «tnote» | 0 | GONE |  |
+| flip note (.kmnote floating line) | 1 | ROUTED → kitNotice | j93.js:262 |
+| «CẤM» place line (srvToast → #rtoast) | 4 | ROUTED → kitNotice | j42.js:150, j42.js:152, j42.js:153, j77.js:91 |
+| Tai mắt news (tinBaoOn) — UI subscriber | 1 | ROUTED → kitNotice | jagknow.js:160 |
+| closing notice via kitNotice | 1 | ROUTED (kitNotice) | jstagehere.js:31 |
+| act result card #rtoast (THÀNH/BẠI) | 4 | EXEMPT: act result card, owner ruling jksize 17:25Z "routine actions keep the small result toast" | j19.js:57, j25.js:32, j42.js:87, j63.js:303 |
+| tutorial tip kitTip | 1 | EXEMPT: tutorial coach (KIT §50.2), not a notice | jtut.js:162 |
+| co-op clock #kctmf | 1 | EXEMPT: co-op status clock (16/11 ruling) | jcooptimer.js:289 |
+
+TESTS on 8e29c099 (code) / 89b2f676: stage-here.js **Fold 0/114, iPad 0/114** (new faults: chip-low, hud-word, kept, person, card, collapse-no-box, float-toast) · stage-stay ok both (notice text names the odds) · act-place-audit 0 bad both · stage-rightcol bad 0 · stage-rail PASS 755x1000 + 1180x820 · status-icon: FAILS ALSO ON BASE 826c89a1 (getComputedStyle null in its geo(), pre-existing, not this work) · **QUICKCHECK PASS** (89b2f676, 388 s, core gates PASS, old save ok, perf new/live render 206/238, tab 384/396, buổi 972/967 ms). Last commit 8e29c099 = box re-check + panel rows only (stage-here/stage-stay re-run 0 faults).
+SHOTS (LOOKED; away in Ngự hoa viên, buổi chiều, last khắc → closing notice; act/rel = chip, -tap = chip → panel; go = Dư đồ no bottom toast, go-tap = box → list panel):
+Fold: https://ctm-img.victoria-tntt.workers.dev/img/_review/stage-here/r4-fold-act.jpg · https://ctm-img.victoria-tntt.workers.dev/img/_review/stage-here/r4-fold-act-tap.jpg · https://ctm-img.victoria-tntt.workers.dev/img/_review/stage-here/r4-fold-rel.jpg · https://ctm-img.victoria-tntt.workers.dev/img/_review/stage-here/r4-fold-rel-tap.jpg · https://ctm-img.victoria-tntt.workers.dev/img/_review/stage-here/r4-fold-go.jpg · https://ctm-img.victoria-tntt.workers.dev/img/_review/stage-here/r4-fold-go-tap.jpg
+iPad: https://ctm-img.victoria-tntt.workers.dev/img/_review/stage-here/r4-ipadAir-act.jpg · https://ctm-img.victoria-tntt.workers.dev/img/_review/stage-here/r4-ipadAir-act-tap.jpg · https://ctm-img.victoria-tntt.workers.dev/img/_review/stage-here/r4-ipadAir-rel.jpg · https://ctm-img.victoria-tntt.workers.dev/img/_review/stage-here/r4-ipadAir-rel-tap.jpg · https://ctm-img.victoria-tntt.workers.dev/img/_review/stage-here/r4-ipadAir-go.jpg · https://ctm-img.victoria-tntt.workers.dev/img/_review/stage-here/r4-ipadAir-go-tap.jpg
+Wipe after verdict: `python3 dev/site/cdn_sync.py --wipe-review stage-here` (r3-* and r4-*).

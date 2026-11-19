@@ -182,5 +182,5 @@ Nữ đế r10b + BD Quý phi (3 images) | handover | session_01PEhRbutG3NMnejgY
 | rel-picker r2 (sonnet worker) | review/rel-picker-r2 | ROOT-58 worker | SẴN SÀNG KIỂM 38079d9f | 18/11 |
 kc/ngheo NEW c13+c16 (4 gens) | handover | session_01PEhRbvGFP6YSgT5DTgo3yu (K4, Foreman C ROOT-33) | RUNNING | 2026-11-18T23:05Z
 | rel-picker r2 SMALL REVIEW (sonnet) | review/rel-picker-r2 | MAIN ROOT-59 | session_01Rc5AsJERhFud7eEWxD1toF | DONE 9a1d6922 landed, CDN wiped | 18/11 23:21Z |
-| stage-here r4 ONE NOTICE SYSTEM (opus; successor of session_01Rc5AsMY7PgErES6LptdBUE) | review/stage-here | MAIN ROOT-59 | session_01Rc5AsL5rJqVVXyTRsQXXPL | RUNNING | 18/11 23:24Z |
+| stage-here r4 ONE NOTICE SYSTEM (opus; successor of session_01Rc5AsMY7PgErES6LptdBUE) | review/stage-here | MAIN ROOT-59 | session_01Rc5AsL5rJqVVXyTRsQXXPL | SẴN SÀNG KIỂM 8e29c099 (r4) | 19/11 |
 | MAIN ROOT-60 (opus; child of ROOT-59) | handover HANDOVER_SESSION9 | ROOT-59 | session_01Rc5AsMTMePisU9AmwCgz6i | RUNNING | 18/11 23:34Z |
