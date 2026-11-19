@@ -52,3 +52,5 @@ Note: Fold event take = seal pops beside the figure at the dialog's left; stays 
 - Frame-stepped at 25 fps (cropped on the dialog seal, whole lean, both devices; DOMLOG=1 also logs the DOM every 20 ms): 0 beige squares (before: 2-3 frames at each swap). The one blurry frame at ~6.4 s is the screencast encoder (the figure next to it is blocky too), not the seal.
 - NOTE for Foreman C / ROOT-65 (optional hardening): export gian-out/-back with loop count 1 and ANIM background 00000000 (I patched the bytes into img/_review/seal-lean-3/anim2/ to test; it did not change the glitch, the decode fix did).
 - fig-seal Fold/iPad (default + GIAN3) pass; quickcheck PASS 203 s (open 1534, render 235/219, tab 470/501, buoi 1409/1121). Videos re-recorded (same CDN names): full-*, event-*, close-{gian,buon,vui,binh}-* for 755x1000 + 1180x820 (GIAN3 base .../anim/).
+
+- r5b: d467fe70 = bd012c4e merged with LIVE main d9b32074 (index/sw rebuilt); only the merge changed, fig-seal Fold/iPad GIAN3 re-run pass; r5 videos stay valid.
