@@ -391,3 +391,33 @@ ADD-ONLY CONFLICTS (kept as ordered):
 - All: the store "coral red #D5745E" vs the court red → red t1–t5 median #AA4A44–#B3514A, t6 #C35D4C (lighter than tm4 #9A4640).
 - t6: the store royal-yellow panel/sash shows (yellow inner panel), in addition to the triều phục trims.
 OTHER FAULTS: the store item for c06 at a18 is a flute on ALL t1–t6 → the same "flute held horizontally at chest" pose on 6 ranks (store text, known age_item issue §20). t1 skirt in a light ivory tone (store "skirt in a lighter tone").
+
+## §25 — r17 (owner Lượt 397 item 2 / ROOT-47 ruling a) — F3c, 19/11
+
+ORDER: redo triều phục c06 t1–t5 = the t4 Tần outfit WITHOUT the shoulder piece, each rank in its own colours; fabric like t1–t3 (light, soft, flowing); stiff cầu vai for everyone, no rank thường phục feature (no capelet, no pearl net). t6 r16, t7/t8 r15 kept unchanged.
+BUILD: `python3 make.py --store --r17` (dev/art/owner-copy/trieu/make.py). Prompts as run: r17/t1..t5_c06_RAN.txt. Refs: style 6AbGv6EiJO, face gOm7wObSXO, Nữ quan s7IO0AUl8e (colour only). Settings: gpt-2-6 1024x2304 2k seed 7172. Each stored prompt is byte-EQUAL to its file.
+STORE: FAIL-owner-397 (capelet/fabric removal), allowed by ROOT-47 ruling (a). The FAIL sentence lists are in the gen_ledger, per gen:
+- t1–t3: Outfit only
+- t4: Outfit + pearl-net + "no cloud collar…" + "real weight"
+- t5: Outfit + LARGER headdress clause + "real weight"
+No other deviation.
+GEN → CUT: t1 Xm9rj6ZBfo→w4aTeIq7EI · t2 hu2SwWGvqL→DoO5xwgpcl · t3 DoO5kZZpcl→5jDiAMXKxe · t4 Lw8zWHyswO→CqnJ9WKEEy · t5 tCRlUePmZJ→3zKIaxVREY. 690 cr (5×135 + 5×3).
+CDN: img/_review/trieu-phuc/r17/c06_a18_trieu17_t1..t5.png and c06_sheet17_8up.jpg (copy in r17/).
+LOOK (full size + faces):
+- All five have NO capelet, no pearl net and no stole, and a stiff jewelled cầu vai. The cầu vai grows by rank: t1–t3 pearl edge; t4–t5 bigger, with a short pearl fringe.
+- Fabric: soft, sheer and flowing on all five. Sleeves and outer robe read as light organza-like silk, not stiff or limp.
+- Rank colours on the collar, panels and sash: t1 ivory, t2 sage, t3 periwinkle, t4 peony-pink, t5 lilac.
+- Hair: t1–t3 half-up loose, t4–t5 up. Faces clean, lips closed, no forehead mark.
+- Faults:
+  - (1) The flute pose is identical on t1–t5 (store item for c06 a18).
+  - (2) The red is lighter and coral-leaning, median #B35A50–#BE6558 against the #99443F target. The cause is the store coral colour words plus the soft-sheer fabric (the r16 velvet-ish cloth read darker).
+  - (3) The t4/t5 sleeves reach the calf, not quite the ankle.
+  - (4) The rank names on the sheet labels are only on t4/t5.
+
+### HANDOVER (F3c, rollover line reached)
+START_CTX ≈ 5 % (1M); rollover at about 30 %, now past it. The coordinator (Foreman C) opens the successor; the worker does not.
+State: r17 is done, pushed and reported, so nothing is pending. Next steps depend on the owner's verdict on sheet17. If the red must be darker, the lever is the fabric/colour sentence (owner-named only, per LAW #1).
+ROLLOVER = CONTEXT, NEVER 30 TURNS (owner OD:L1217; repeated by the owner 16/11 09:20Z — she is tired of reminding)
+The "Lượt n/30" counter from the owner's global chat preferences is ONLY a display counter here. It is NOT the rollover trigger for the Cung Tường Mộng main chat or any foreman. Never hand over because n reached 30.
+Trigger = context (owner OD:L1217 + ceiling 16/11 08:15Z s13): at session start note your starting context as a % of the window (START_CTX; get_session context_usage.used_tokens, or your own estimate when it reads 0) in your first handover line. Roll over when context >= START_CTX % + 25 % of the window, and NEVER above 60 % of the window (hard ceiling). Then write the handover, open the next session yourself (create_session), and stop.
+Every takeover prompt you write MUST copy these three lines verbatim. Workers roll over too (owner 16/11 08:22Z s14, option 1): at START_CTX % + 25 % of the window, ceiling 60 %; a worker may finish if only push + report remain; it writes its handover in its report file and tells its coordinator, and the COORDINATOR opens the successor (never the worker).
