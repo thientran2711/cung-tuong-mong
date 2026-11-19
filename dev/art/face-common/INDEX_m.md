@@ -29,7 +29,7 @@ m08 = approved sample (not regenerated). Garment type in brackets after colour.
 | m24 | 19 | soft-square oval, steady eyes, thicker brows | loose low nape tie | jade green and gold (high-waisted ruqun) | jade ruyi |
 | m25 | 17 | rounded heart, small dimples, lively eyes | two side plaits crossed | lavender violet and silver (ruqun) | round fan, butterflies |
 | m26 | 18 | soft oval, lidded knowing eyes, long brows | loose, front strands tied | blush pink and gold (short jacket + skirt) | folded letter |
-| m27 | 16 | round-oval, rosy cheeks, short brows | one front braid (left) | soft spring green and gold (ruqun) | willow branch |
+| m27 | 16 | round-oval, soft cheeks, short brows | one front braid (left) | soft spring green and gold (ruqun) | willow branch |
 | m28 | 16 | small heart, button chin, large round eyes | half-up two loops + bows | coral pink and ivory (short jacket + skirt) | paper pinwheel |
 | m29 | 19 | long symmetrical oval, wide-set calm eyes | loose + two combs | pale celadon and silver (beizi + skirt) | xiao flute |
 | m30 | 18 | soft oval, drooping gentle eyes | half-up knot + bow | soft lilac and silver (ruqun) | handkerchief |
@@ -40,7 +40,7 @@ m08 = approved sample (not regenerated). Garment type in brackets after colour.
 | m35 | 18 | oval defined jaw, smiling almond eyes, wide smile | half-up braided knot | pale jade green and pearl white (ruqun) | sachet |
 | m36 | 18 | heart, lifted eyes, confident smile | loose + gold comb | ivory cream and gold (high-waisted ruqun) | sandalwood folding fan |
 | m37 | 17 | oval, pointed chin, clear calm eyes | half-up small knot | pale aqua and silver (short jacket + skirt) | lotus seed pod |
-| m38 | 17 | soft oval, big bright eyes, rosy cheeks | half-up single loop | warm apricot and gold (beizi + skirt) | peony bloom |
+| m38 | 17 | soft oval, big bright eyes, soft cheeks | half-up single loop | warm apricot and gold (beizi + skirt) | peony bloom |
 | m39 | 19 | long slender, downcast eyes | loose, low ribbon | sky blue and silver (ruqun) | bamboo-slip book |
 | m40 | 17 | rounded heart, laughing eyes, wide smile | half-up knot + front locks | dusty rose and gold (short jacket + skirt) | camellia branch |
 | m41 | 16 | round, wide-set round eyes, straight brows | loose + headband ribbon | soft willow green and gold (ruqun) | round lantern |

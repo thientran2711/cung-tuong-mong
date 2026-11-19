@@ -15,13 +15,13 @@ pre,post=COMMON.split('{PERSON}')
 # ---- the 4 type sentences (TYPES_v4.md copies these) ----
 TYPES={
 "Kiêu kỳ":dict(
- face="a long refined OVAL face with high defined cheekbones, a narrow elegant jaw and a small firm chin, the chin LIFTED slightly so she looks a little down along her nose (the whole face still clearly visible), long narrow PHOENIX eyes (đan phượng nhãn) with sharply up-swept outer corners and a crisp dark upper lash line, fully open and bright, long slender brows rising in a high clean arch toward the temples, a straight slim high-bridged nose, THIN well-defined lips firmly closed",
+ face="a long refined OVAL face with high defined cheekbones, a narrow elegant jaw and a small firm chin, the chin LIFTED slightly so she looks a little down along her nose (the whole face still clearly visible), long narrow PHOENIX eyes (đan phượng nhãn) with sharply up-swept outer corners, fully open and bright, long slender brows rising in a high clean arch toward the temples, a straight slim high-bridged nose, THIN well-defined lips firmly closed",
  expr="A proud, haughty, self-assured gaze looking slightly down at the viewer, chin lifted, only the faintest cool closed-lip smile at the corners, eyes fully open, never a stretched grin."),
 "Lạnh lùng":dict(
- face="a LONG narrow OVAL face with smooth flat cheeks, a straight slender jaw and a long tapered chin, narrow CLEAR almond eyes that are long and perfectly level (neither up- nor down-turned) with clear light-catching irises, fully open and bright, STRAIGHT thin brows lying low, long and level with no arch, a slim straight nose, a small mouth with thin even pale-rose lips",
+ face="a LONG narrow OVAL face with smooth flat cheeks, a straight slender jaw and a long tapered chin, narrow CLEAR almond eyes that are long and perfectly level (neither up- nor down-turned) with clear light-catching irises, fully open and bright, STRAIGHT thin brows lying low, long and level with no arch, a slim straight nose, a small mouth with thin even lips",
  expr="A cool, icy, distant composure, a calm level gaze straight at the viewer, the face almost still, only a very faint barely-there closed-lip smile, eyes fully open, never a stretched grin."),
 "Quyến rũ":dict(
- face="a soft HEART-OVAL face with smooth full cheeks and a delicate rounded chin, PEACH-BLOSSOM eyes (đào hoa nhãn): large glossy almond eyes whose outer corners curve softly UP, a soft pink flush along the lower lids and outer corners, long curled lashes, fully open and bright, slender softly curved brows, a small fine nose, FULL plump lips with a rich rose tint, closed, ONE tiny beauty mark (a single small dark dot) just below the outer corner of her LEFT eye, the only mark on her face",
+ face="a soft HEART-OVAL face with smooth full cheeks and a delicate rounded chin, PEACH-BLOSSOM eyes (đào hoa nhãn): large glossy almond eyes whose outer corners curve softly UP, long curled lashes, fully open and bright, slender softly curved brows, a small fine nose, FULL plump lips, closed, ONE tiny beauty mark (a single small dark dot) just below the outer corner of her LEFT eye, the only mark on her face",
  expr="An alluring warm half-smile with the full lips closed, one corner lifted a little more than the other, a soft lingering inviting gaze toward the viewer, eyes fully open, never a stretched grin."),
 "Anh khí":dict(
  face="a clean OVAL face with a clearly DEFINED straight jawline and a firm small chin, smooth taut cheeks, THICK dark SHARP straight brows angled upward toward the temples like sword blades (kiếm mi), large bright almond eyes with a strong clear DIRECT gaze, fully open, a HIGH straight nose bridge, medium lips with a firm even closed line; still clearly a beautiful young woman, feminine and graceful, never mannish",
@@ -81,7 +81,7 @@ TYPES_B=copy.deepcopy(TYPES)
 TYPES_B["Kiêu kỳ"]["face"]=TYPES["Kiêu kỳ"]["face"].replace("the chin LIFTED slightly so she looks a little down along her nose (the whole face still clearly visible)","the chin raised only a little (moderately, the head almost level) so she looks just slightly down along her nose (the whole face clearly visible)")
 TYPES_B["Kiêu kỳ"]["expr"]=TYPES["Kiêu kỳ"]["expr"].replace("chin lifted,","chin raised only a little,")
 # s03: not alluring enough → stronger allure in eyes, gaze, lips, slight head tilt (lips closed, no teeth)
-TYPES_B["Quyến rũ"]["face"]=TYPES["Quyến rũ"]["face"].replace("large glossy almond eyes whose outer corners curve softly UP","large glossy, liquid-bright almond eyes with long sweeping upper lashes whose outer corners curve softly UP").replace("FULL plump lips with a rich rose tint, closed","FULL plump glossy lips with a rich rose tint and a soft curved bow, closed")
+TYPES_B["Quyến rũ"]["face"]=TYPES["Quyến rũ"]["face"].replace("large glossy almond eyes whose outer corners curve softly UP","large glossy, liquid-bright almond eyes with long sweeping upper lashes whose outer corners curve softly UP").replace("FULL plump lips, closed","FULL plump lips with a soft curved bow, closed")
 TYPES_B["Quyến rũ"]["expr"]="A seductive, alluring look: the head tilted slightly to one side, a slow lingering sidelong gaze from the fully open eyes straight to the viewer, a knowing half-smile with the full lips closed, one corner lifted more than the other, eyes fully open, never a stretched grin."
 # s04: too masculine + harder line style → same heroic spirit, clearly feminine, soft; no weapon-like item
 TYPES_B["Anh khí"]=dict(
@@ -104,8 +104,8 @@ for i,(cid,age,face,shape,eyes,lips,hair,outfit,m,s,game,pose,item,itemshort) in
 
 # ---- Lượt 646/647/648 (owner via ROOT-53): v4c ----
 TYPES_C=copy.deepcopy(TYPES_B)
-# 648 s03: face looked flushed → drop the pink flush words, lips soft rose tint; COMMON untouched
-TYPES_C["Quyến rũ"]["face"]=TYPES_B["Quyến rũ"]["face"].replace(", a soft pink flush along the lower lids and outer corners","").replace("rich rose tint","soft rose tint")
+# 648 s03 + D14 (Lượt 651/652): no face-colour words (lid colour, lip tint removed in the sources by d14_clean.py); COMMON untouched by 648
+TYPES_C["Quyến rũ"]["face"]=TYPES_B["Quyến rũ"]["face"]
 # 647 s04: back to the FIRST (v4) heroic face + expression; only the rendering softened; no weapon (plum sprig as v4b)
 SOFT="; the heroic features are drawn softly, rendered in exactly the same soft painterly style, soft fine line work and soft shading as the reference, no harsh outlines, no heavy dark contour lines"
 TYPES_C["Anh khí"]=dict(face=TYPES["Anh khí"]["face"]+SOFT, expr=TYPES["Anh khí"]["expr"])
@@ -114,7 +114,7 @@ TYPES_C["Thư hương"]=dict(
  face="a refined gentle OVAL face with a smooth high forehead and a softly rounded chin, calm clear almond eyes of medium size with a THOUGHTFUL, intelligent gaze as if still turning over a line of poetry, fully open and bright, gentle STRAIGHT brows of even medium thickness, a straight slim nose, a small mouth with neat soft lips; a quiet scholarly air of a girl from a family of letters",
  expr="A quiet, thoughtful, intelligent look, a calm knowing faint closed-lip smile, as if she has just understood something in her book, eyes fully open, never a stretched grin.")
 TYPES_C["Yêu kiều"]=dict(
- face="a SMALL slender delicate OVAL face narrowing to a FINE pointed chin, a long slender graceful neck, soft thin WILLOW-LEAF brows (liễu mi) that curve gently down at the ends, large soft tender almond eyes with a slightly misty dreamy softness (never teary, never red-rimmed), the outer corners very slightly lowered, fully open and bright, a tiny delicate nose, a small cherry-blossom mouth with soft pale-pink lips",
+ face="a SMALL slender delicate OVAL face narrowing to a FINE pointed chin, a long slender graceful neck, soft thin WILLOW-LEAF brows (liễu mi) that curve gently down at the ends, large soft tender almond eyes with a slightly misty dreamy softness (never teary, never red-rimmed), the outer corners very slightly lowered, fully open and bright, a tiny delicate nose, a small cherry-blossom mouth with soft lips",
  expr="A tender, gentle, delicate look, a shy faint closed-lip smile, the head inclined gently on her slender neck, eyes fully open, never a stretched grin.")
 S2=[
 ("s05","Thư hương",17,"half-up: the top hair coiled into a low simple bun held by one plain dark wooden hairpin pointing upward, the rest long and loose",
