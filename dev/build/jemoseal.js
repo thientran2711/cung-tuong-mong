@@ -11,7 +11,7 @@
        pointer-events none, removed when the lean ends or the seal leaves the screen. No file = no layer. Nothing is drawn in code (no code-drawn tears / smoke).
    KEYS: the seal map holds khoc + hon too (names "Khóc", "Hờn"); the mood logic (jemo EMO) decides when a person is in one — until then they never appear. ===== */
 window.KIT_EMOSEAL=window.KIT_EMOSEAL||{keys:{vui:{m:"sway",d:2.8},binh:{m:"nod",d:3.0},buon:{m:"droop",d:3.6},gian:{m:"shake",d:2.0},so:{m:"tremble",d:2.4},ghen:{m:"flicker",d:3.0},lo:{m:"bob",d:2.8},dau:{m:"wince",d:2.8},muu:{m:"glint",d:3.0},an:{m:"nod",d:3.0},khoc:{m:"droop",d:3.6,name:"Khóc"},hon:{m:"flicker",d:3.0,name:"Hờn"},chanh:{m:"flicker",d:3.0},phanno:{m:"shake",d:2.0},runso:{m:"tremble",d:2.4},matngu:{m:"droop",d:3.6},tutin:{m:"nod",d:3.0},hanghai:{m:"bob",d:2.8},tinhtu:{m:"sway",d:2.8},chuyentam:{m:"nod",d:3.0},hungkhoi:{m:"glint",d:3.0},tinhnghich:{m:"bob",d:2.8},hothen:{m:"droop",d:3.6},chan:{m:"droop",d:3.6},khochiu:{m:"flicker",d:3.0},choang:{m:"wince",d:2.8}},
- defaultMotion:"nod",defaultDur:3.0,idle:{deg:.6,per:[8,11]},lean:{stage:"img.kfseal",panel:"#modal,.krbox,.kmov,.dlg",deny:"header.hud,.hud",head:{f:.2,panel:.1},margin:.16,marginPx:4,grow:.5,shrink:1.8,holdMin:3,loops:0,open:".ksz3",openKey:".kszfig",openDelay:.7,parts:{out:"-out",back:"-back"},modalIn:'#modal,[role="dialog"],.ksz3,.krbox,.kmov,.dlg',min:4,max:8,gap:1.2,z:9990},animKey:{gian:"gian",phanno:"gian",khoc:"khoc",buon:"khoc"},three:{gian:{out:1.65,back:2.64,c0:.569,c1:.833}},anim:"img/kit/emo-anim/",fx:"img/kit/emo-fx/",fxSpec:{khoc:{w:.24,x:.14,y:.52,m:"fall"},gian:{w:.3,x:.7,y:.0,m:"rise"},def:{w:.26,x:.66,y:.5,m:"rise"}}};
+ defaultMotion:"nod",defaultDur:3.0,idle:{deg:.6,per:[8,11]},lean:{stage:"img.kfseal",panel:"#modal,.krbox,.kmov,.dlg",deny:"header.hud,.hud",head:{f:.2,panel:.1},margin:.16,marginPx:4,grow:.5,shrink:1.8,holdMin:3,loops:0,open:".ksz3",openKey:".kszfig",openDelay:.7,parts:{out:"-out",back:"-back"},partLead:.12,modalIn:'#modal,[role="dialog"],.ksz3,.krbox,.kmov,.dlg',min:4,max:8,gap:1.2,z:9990},animKey:{gian:"gian",phanno:"gian",khoc:"khoc",buon:"khoc"},three:{gian:{out:1.65,back:2.64,c0:.569,c1:.833}},anim:"img/kit/emo-anim/",fx:"img/kit/emo-fx/",fxSpec:{khoc:{w:.24,x:.14,y:.52,m:"fall"},gian:{w:.3,x:.7,y:.0,m:"rise"},def:{w:.26,x:.66,y:.5,m:"rise"}}};
 const KES_HAVE={};/* url -> true | false | "wait" (probe result) */
 function kesProbe(url,cb){const h=KES_HAVE[url];if(h===true||h===false){cb(h);return}
  if(h&&h.w){h.w.push(cb);return}const e={w:[cb]};KES_HAVE[url]=e;const im=new Image();const done=ok=>{KES_HAVE[url]=ok;e.w.forEach(f=>{try{f(ok)}catch(x){}})};im.onload=()=>done(true);im.onerror=()=>done(false);im.src=url}
@@ -24,7 +24,7 @@ function kesReal(el){/* a key whose own still is not on screen (feelArt / feelFb
  kesProbe(real,ok=>{if(!ok)return;if(el.isConnected){el.dataset.kemos=real;if(!/emo-anim/.test(el.getAttribute("src")||""))el.setAttribute("src",real)}})}
 function kesR(a,b){return a+Math.random()*(b-a)}
 function kesSpec(k){return KIT_EMOSEAL.keys[k]||KIT_EMOSEAL.keys[k.replace(/^act-/,"")]}
-/* LEAN-IN (owner 19/11 ~06:55Z): the seal is still while small. Every few seconds ONE seal (global stagger) is lifted onto a fixed overlay clone `img.kemo-big` (above every UI, never clipped by a frame,
+/* LEAN-IN (owner 19/11 ~06:55Z): the seal is still while small. Every few seconds ONE seal (global stagger) is lifted onto a fixed overlay clone `span.kemo-big` (above every UI, never clipped by a frame,
    clamped inside the screen), POPS OUT FAST (lean.grow = .5 s) to the size of that person's HEAD on the stage (never bigger, kesHead = ONE relative frame), HOLDS while the feeling's motion / painted loop plays n times (n x keys[k].d s,
    lean.holdMin = 3 s), SHRINKS back SLOWLY (lean.shrink = 1.8 s) onto the still seal. Envelope = CSS `scale`/`translate` (keyframes kemoGrow, kemoShrink), feeling motion = `transform`
    (kemoL-<m>, one loop = keys[k].d). Numbers all in KIT_EMOSEAL. */
@@ -47,6 +47,10 @@ function kesHead(el,r){const L=KIT_EMOSEAL.lean.head;let H=0;try{const st=(el.__
 function kesBlocked(el){try{if(el.closest(KIT_EMOSEAL.lean.modalIn))return false;return(typeof kitDialogOpen==="function"&&kitDialogOpen())||document.body.classList.contains("kbk-open")}catch(e){return false}}
 /* 3-PART SET (KIT_EMOSEAL.three[ak] = {out,back} clip seconds, c0/c1 = the gold circle as a share of the clip frame at the clip's start / end vs in the loop): files <set><ak>-out.webp / <set><ak>.webp / <set><ak>-back.webp.
    "yes" = all three probed present, "no" = a part is missing (single loop / CSS motion), "wait" = still probing (the lean waits, it never starts with the wrong set). */
+/* A seal picture is NEVER swapped inside a displayed <img> (the owner-visible "beige square" for a frame at every part change): each picture is its own <img> inside the big seal's box (span.kemo-big),
+   decoded BEFORE it is shown (img.decode()), put on top, and the previous one is removed two frames later; a webp clip starts at frame 0 the moment its img is attached. */
+function kesShow(c,src){const n=new Image();n.alt="";n.setAttribute("aria-hidden","true");n.draggable=false;n.style.cssText="position:absolute;left:0;top:0;width:100%;height:100%;object-fit:contain;display:block;max-width:none;max-height:none;margin:0;border-radius:0;background:none";n.src=src;
+ const go=()=>{if(!c.isConnected)return;const old=c.__img;c.appendChild(n);c.__img=n;if(old)requestAnimationFrame(()=>requestAnimationFrame(()=>old.remove()))};n.decode?n.decode().then(go,go):go()}
 function kesPartsUrl(el,k){const L=KIT_EMOSEAL.lean,ak=KIT_EMOSEAL.animKey[k]||k,T=KIT_EMOSEAL.three[ak];if(!T)return null;const A=KIT_EMOSEAL.anim+kesSet(el,k)+ak,P=L.parts;return{T,ak,out:A+P.out+".webp",loop:A+".webp",back:A+P.back+".webp"}}
 function kesPartsState(U){if(!U)return"no";const h=[U.out,U.loop,U.back].map(u=>KES_HAVE[u]);if(h.some(x=>x===false))return"no";if(h.every(x=>x===true))return"yes";return"wait"}
 function kesLean(el,force){el.__ln=0;if(!el.isConnected||!el.classList.contains("kemo-live"))return;
@@ -64,13 +68,13 @@ function kesLean(el,force){el.__ln=0;if(!el.isConnected||!el.classList.contains(
  const sm=Math.max(r.width,r.height),S=P3?Math.max(1,hp/P3.c1/sm):Math.max(1,hp/sm);/* big size = THE HEAD of that person on the stage (owner 19/11 ~06:55Z), never bigger; a 3-part set: its gold circle in the loop (c1 of the clip box) = the head frame, the clip box (hands may leave the circle) is never clipped */
  const bw=r.width*S,bh=r.height*S,/* big box never past the head, nor the screen */m=Math.round(Math.max(bw,bh)*L.margin)+L.marginPx,/* margin = room for the feeling motion (shake / sway amplitude) */ cx=r.left+r.width/2,cy=r.top+r.height/2,s0=P3?Math.min(1,sm/(P3.c0*bw)):1/S;/* start / end scale: the clip's own small circle (c0) sits exactly on the still seal */
  const bl=Math.max(m,Math.min(cx-bw/2,innerWidth-bw-m)),bt=Math.max(m,Math.min(cy-bh/2,innerHeight-bh-m));/* clamped inside the screen */
- const c=document.createElement("img");c.className="kemo-big kemo-m-"+(spec?spec.m:KIT_EMOSEAL.defaultMotion)+(P3?" kemo-played kemo-3p":"");c.alt="";c.setAttribute("aria-hidden","true");c.src=P3?U.out:el.getAttribute("src");
- c.style.cssText=`position:fixed;z-index:${L.z};left:${bl.toFixed(1)}px;top:${bt.toFixed(1)}px;width:${bw.toFixed(1)}px;height:${bh.toFixed(1)}px;pointer-events:none;object-fit:${getComputedStyle(el).objectFit||"contain"};`+
+ const c=document.createElement("span");c.className="kemo-big kemo-m-"+(spec?spec.m:KIT_EMOSEAL.defaultMotion)+(P3?" kemo-played kemo-3p":"");c.setAttribute("aria-hidden","true");
+ c.style.cssText=`position:fixed;z-index:${L.z};left:${bl.toFixed(1)}px;top:${bt.toFixed(1)}px;width:${bw.toFixed(1)}px;height:${bh.toFixed(1)}px;pointer-events:none;display:block;`+
   `--kb-dx:${(cx-(bl+bw/2)).toFixed(1)}px;--kb-dy:${(cy-(bt+bh/2)).toFixed(1)}px;--kb-s:${s0.toFixed(4)};--kb-ss:${shr}s;--kb-sd:${(grow+hold).toFixed(2)}s;--kb-d:${d}s;--kb-n:${n};--kb-gs:${grow}s`;
- document.body.appendChild(c);el.__big=c;el.classList.add("kemo-lean");
+ document.body.appendChild(c);el.__big=c;el.classList.add("kemo-lean");kesShow(c,P3?U.out:el.getAttribute("src"),el);
  const set=kesSet(el,k),ak=KIT_EMOSEAL.animKey[k]||k;
- if(P3){c.__w=[setTimeout(()=>{if(c.isConnected)c.src=U.loop},grow*1000),setTimeout(()=>{if(c.isConnected)c.src=U.back},(grow+hold)*1000)]}
- else kesProbe(KIT_EMOSEAL.anim+set+ak+".webp",ok=>{if(ok&&el.isConnected&&el.__big===c){c.src=KIT_EMOSEAL.anim+set+ak+".webp";c.classList.add("kemo-played")}});/* the painted loop (Foreman C) plays on the big seal; no loop file for this feeling = the still + its CSS motion */
+ if(P3){c.__w=[setTimeout(()=>{kesShow(c,U.loop)},(grow-L.partLead)*1000),setTimeout(()=>{kesShow(c,U.back)},(grow+hold)*1000)]/* the swap is a little BEFORE the clip's last frame: a webp clip loops forever and a wrap shows the file's opaque white ANIM background for a frame (an off-white square), so a clip is never left on screen past its end */}
+ else kesProbe(KIT_EMOSEAL.anim+set+ak+".webp",ok=>{if(ok&&el.isConnected&&el.__big===c){kesShow(c,KIT_EMOSEAL.anim+set+ak+".webp");c.classList.add("kemo-played")}});/* the painted loop (Foreman C) plays on the big seal; no loop file for this feeling = the still + its CSS motion */
  if(!P3)kesProbe(KIT_EMOSEAL.fx+ak+".webp",ok=>{if(!ok||!el.isConnected||el.__big!==c||el.__fx)return;
   const f=document.createElement("img");f.className="kemofx kemofx-"+ak;f.alt="";f.setAttribute("aria-hidden","true");f.src=KIT_EMOSEAL.fx+ak+".webp";f.onerror=()=>f.remove();
   const X=KIT_EMOSEAL.fxSpec[ak]||KIT_EMOSEAL.fxSpec.def,fw=bw*X.w,fl=bl+bw*X.x,ft=bt+bh*X.y;f.classList.add("kemofx-"+X.m);/* small effect sprite on the big seal (cheek / head corner), grows + shrinks with it (own envelope origin) */
@@ -78,7 +82,7 @@ function kesLean(el,force){el.__ln=0;if(!el.isConnected||!el.classList.contains(
   document.body.appendChild(f);el.__fx=f});/* effect sprite grows / holds / shrinks with the seal (same envelope), centred on it */
  const ox=r.left,oy=r.top;/* the small seal left the screen / moved (scroll, re-render): end the lean at once */
  el.__lw=setInterval(()=>{if(!el.isConnected||!el.classList.contains("kemo-live")){kesLeanEnd(el);return}if(kesBlocked(el)){kesLeanEnd(el);kesSchedule(el);return}const q=el.getBoundingClientRect();if(Math.abs(q.left-ox)>10||Math.abs(q.top-oy)>10||q.bottom<=0||q.top>=innerHeight){kesLeanEnd(el);kesSchedule(el)}},250);
- el.__lt=setTimeout(()=>{kesLeanEnd(el);kesSchedule(el)},tot*1000+80)}
+ el.__lt=setTimeout(()=>{kesLeanEnd(el);kesSchedule(el)},P3?(tot-L.partLead)*1000:tot*1000+80)}
 function kesLive(el,on){if(!el.isConnected)return;kesReal(el);
  if(!el.dataset.kemos){el.dataset.kemos=el.getAttribute("src")||""}
  const was=el.classList.contains("kemo-live"),live=on&&kesMotionOK()&&kesCan(el);el.classList.toggle("kemo-live",live);const k=kesKey(el),spec=kesSpec(k);if(!/kemo-m-/.test(el.className))el.classList.add("kemo-m-"+(spec?spec.m:KIT_EMOSEAL.defaultMotion));
@@ -87,7 +91,7 @@ function kesLive(el,on){if(!el.isConnected)return;kesReal(el);
 const KES_IO=typeof IntersectionObserver==="function"?new IntersectionObserver(es=>{for(const e of es)kesLive(e.target,e.isIntersecting)},{threshold:.01}):null;
 function kesWatch(el){if(!el||el.__kes)return;el.__kes=1;if(!el.complete||!el.naturalWidth){el.classList.add("kemo-wait");const ok=()=>el.classList.remove("kemo-wait");el.addEventListener("load",ok,{once:true});el.addEventListener("error",ok,{once:true})}/* no empty disc while the still is loading */if(KES_IO)KES_IO.observe(el);else kesLive(el,true)}
 function kesScan(){document.querySelectorAll("img.kemo").forEach(kesWatch)}
-function kesSweep(){/* effect layers + big clones whose seal is gone */const L=[...document.querySelectorAll("img.kemo")];document.querySelectorAll("img.kemofx").forEach(f=>{if(!L.some(c=>c.__fx===f))f.remove()});document.querySelectorAll("img.kemo-big").forEach(f=>{if(!L.some(c=>c.__big===f))f.remove()})}
+function kesSweep(){/* effect layers + big clones whose seal is gone */const L=[...document.querySelectorAll("img.kemo")];document.querySelectorAll("img.kemofx").forEach(f=>{if(!L.some(c=>c.__fx===f))f.remove()});document.querySelectorAll(".kemo-big").forEach(f=>{if(!L.some(c=>c.__big===f))f.remove()})}
 let kesQ=0;function kesSched(){if(kesQ)return;kesQ=requestAnimationFrame(()=>{kesQ=0;kesScan();kesSweep()})}
 try{new MutationObserver(ms=>{if(ms.some(m=>[...m.addedNodes].some(n=>n.nodeType===1&&(n.matches&&n.matches("img.kemo")||n.querySelector&&n.querySelector("img.kemo")))||[...m.removedNodes].some(n=>n.nodeType===1)))kesSched()}).observe(document.body,{childList:true,subtree:true})}catch(e){}
 addEventListener("resize",()=>document.querySelectorAll("img.kemo.kemo-lean").forEach(el=>{kesLeanEnd(el);kesSchedule(el)}));
@@ -100,21 +104,21 @@ img.kemo{transform-origin:50% 60%;will-change:auto}
 img.kemofx{pointer-events:none;object-fit:contain;max-width:none;max-height:none;margin:0;border-radius:0}
 img.kemo.kemo-lean{visibility:hidden}
 img.kemo.kemo-wait{visibility:hidden}
-img.kemo-big{transform-origin:50% 58%;will-change:transform,scale;filter:drop-shadow(0 4px 10px #000a)}
+span.kemo-big{transform-origin:50% 58%;will-change:transform,scale;filter:drop-shadow(0 4px 10px #000a)}
 @media (prefers-reduced-motion:no-preference){
 img.kemo.kemo-live{animation:kemoIdle var(--kemo-ip,9s) ease-in-out var(--kemo-i0,0s) infinite}
-img.kemo-big{animation:kemoGrow var(--kb-gs,.5s) cubic-bezier(.1,.7,.25,1) 0s 1 both,kemoShrink var(--kb-ss,1.8s) cubic-bezier(.4,0,.25,1) var(--kb-sd,8s) 1 forwards,var(--kb-k,kemoL-nod) var(--kb-d,3s) ease-in-out var(--kb-gs,1.6s) var(--kb-n,2) both}
-img.kemo-big.kemo-m-nod{--kb-k:kemoL-nod}
-img.kemo-big.kemo-m-sway{--kb-k:kemoL-sway}
-img.kemo-big.kemo-m-droop{--kb-k:kemoL-droop}
-img.kemo-big.kemo-m-shake{--kb-k:kemoL-shake}
-img.kemo-big.kemo-m-tremble{--kb-k:kemoL-tremble}
-img.kemo-big.kemo-m-flicker{--kb-k:kemoL-flicker}
-img.kemo-big.kemo-m-bob{--kb-k:kemoL-bob}
-img.kemo-big.kemo-m-wince{--kb-k:kemoL-wince}
-img.kemo-big.kemo-m-glint{--kb-k:kemoL-glint}
-img.kemo-big.kemo-3p{animation:kemoGrow var(--kb-gs,1.65s) ease-in-out 0s 1 both,kemoShrink var(--kb-ss,2.6s) ease-in-out var(--kb-sd,4.6s) 1 forwards}/* 3-part set: the clips carry their own pose change, the CSS envelope only adds the rest of the scale, same length */
-img.kemo-big.kemo-played{animation:kemoGrow var(--kb-gs,.5s) cubic-bezier(.1,.7,.25,1) 0s 1 both,kemoShrink var(--kb-ss,1.8s) cubic-bezier(.4,0,.25,1) var(--kb-sd,8s) 1 forwards}/* painted loop plays: its own animation, no extra CSS shake */
+span.kemo-big{animation:kemoGrow var(--kb-gs,.5s) cubic-bezier(.1,.7,.25,1) 0s 1 both,kemoShrink var(--kb-ss,1.8s) cubic-bezier(.4,0,.25,1) var(--kb-sd,8s) 1 forwards,var(--kb-k,kemoL-nod) var(--kb-d,3s) ease-in-out var(--kb-gs,1.6s) var(--kb-n,2) both}
+span.kemo-big.kemo-m-nod{--kb-k:kemoL-nod}
+span.kemo-big.kemo-m-sway{--kb-k:kemoL-sway}
+span.kemo-big.kemo-m-droop{--kb-k:kemoL-droop}
+span.kemo-big.kemo-m-shake{--kb-k:kemoL-shake}
+span.kemo-big.kemo-m-tremble{--kb-k:kemoL-tremble}
+span.kemo-big.kemo-m-flicker{--kb-k:kemoL-flicker}
+span.kemo-big.kemo-m-bob{--kb-k:kemoL-bob}
+span.kemo-big.kemo-m-wince{--kb-k:kemoL-wince}
+span.kemo-big.kemo-m-glint{--kb-k:kemoL-glint}
+span.kemo-big.kemo-3p{animation:kemoGrow var(--kb-gs,1.65s) ease-in-out 0s 1 both,kemoShrink var(--kb-ss,2.6s) ease-in-out var(--kb-sd,4.6s) 1 forwards}/* 3-part set: the clips carry their own pose change, the CSS envelope only adds the rest of the scale, same length */
+span.kemo-big.kemo-played{animation:kemoGrow var(--kb-gs,.5s) cubic-bezier(.1,.7,.25,1) 0s 1 both,kemoShrink var(--kb-ss,1.8s) cubic-bezier(.4,0,.25,1) var(--kb-sd,8s) 1 forwards}/* painted loop plays: its own animation, no extra CSS shake */
 img.kemofx{animation:kemoGrow var(--kb-gs,.5s) cubic-bezier(.1,.7,.25,1) 0s 1 both,kemoShrink var(--kb-ss,1.8s) cubic-bezier(.4,0,.25,1) var(--kb-sd,8s) 1 forwards,kemoFx 2.4s ease-in-out infinite}
 img.kemofx.kemofx-fall{--fxk:kemoFxFall}img.kemofx.kemofx-rise{--fxk:kemoFxRise}
 img.kemofx.kemofx-fall,img.kemofx.kemofx-rise{animation:kemoGrow var(--kb-gs,.5s) cubic-bezier(.1,.7,.25,1) 0s 1 both,kemoShrink var(--kb-ss,1.8s) cubic-bezier(.4,0,.25,1) var(--kb-sd,8s) 1 forwards,var(--fxk) 1.6s ease-in infinite}
