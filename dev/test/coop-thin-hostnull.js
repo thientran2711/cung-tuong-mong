@@ -186,23 +186,23 @@ async function week(A,B,tag){for(let i=0;i<3;i++){await clear(A);await clear(B)}
  /* H5 (e) law 1 two-way: an ASK act the OTHER PLAYER accepted (CW.inv set, the target = her entry) is never refused by an NPC roll after:
     the gift a dislike would refuse (jdis, its roll forced on) is given; Kết giao (its roll forced to fail) succeeds. Control: the same gift to
     an NPC with the same staging is still refused (the NPC rule unchanged). */
- {await reset();const r=await H.p.evaluate(()=>{const f=COOPW.friend();const o={};const r0=roll,a0=aRoll;try{
+ {await reset();const r=await H.p.evaluate(()=>{const f=COOPW.friend();const o={};const r0=roll,a0=aRoll,p0=window.rcvPick;try{
    const ik=Object.keys(IT).find(k=>{try{const i=itm(k);return i&&i.kd&&!(i.tg||[]).length&&!i.wk}catch(e){return false}});S.inv=S.inv||[];S.inv.push({k:ik},{k:ik});const e=S.inv[S.inv.length-1];
    const n=rivals.find(v=>v&&!v.coop&&v.alive&&!v.out);for(const v of [f,n])if(v)v.dis=['kd:'+itm(ik).kd];o.hit=[disHit(f,e),n&&disHit(n,e)];roll=()=>true;
    COOPW.inv='hn-test';try{o.gift=String(giveTo(S,f,S.inv.length-1)||'').replace(/<[^>]+>/g,'')}finally{COOPW.inv=false}
    o.npc=n?String(giveTo(S,n,S.inv.length-1)||'').replace(/<[^>]+>/g,''):'skip';
-   aRoll=()=>false;COOPW.inv='hn-test';try{o.ally=String(ACT.ally.f(S,f)||'').replace(/<[^>]+>/g,'')}finally{COOPW.inv=false}
-   o.allyNpc=n?String(ACT.ally.f(S,n)||'').replace(/<[^>]+>/g,''):'skip'}finally{roll=r0;aRoll=a0}return o});
+   aRoll=()=>false;window.rcvPick=(t,a,O)=>(O||[]).find(o=>o&&o.id==='no')||null/* receiver choice (jrcv): the NPC pick forced to refuse */;COOPW.inv='hn-test';try{o.ally=String(ACT.ally.f(S,f)||'').replace(/<[^>]+>/g,'')}finally{COOPW.inv=false}
+   o.allyNpc=n?String(ACT.ally.f(S,n)||'').replace(/<[^>]+>/g,''):'skip'}finally{roll=r0;aRoll=a0;window.rcvPick=p0}return o});
   ok(!!r.hit[0]&&!!r.hit[1]&&!/không nhận/.test(r.gift)&&/không nhận/.test(r.npc)&&/thành/.test(r.ally)&&!/thành/.test(r.allyNpc),'H5 law 1: the gift / Kết giao the other player accepted is never refused by a roll after (an NPC still can)',r)}
  /* H5b (review r1) law 1 the OTHER way: the same staging in HER context on the host (she gives / asks Kết giao, the HOST's entry accepted:
     CW.inv set, target = his entry in her world): never refused after; an NPC still can. Item count (law 6c): the accepted gift left her chest once. */
- {await reset();const r=await H.p.evaluate(()=>{const o={};const r0=roll,a0=aRoll;try{COOPW.thin.withSeat('b',()=>{const f=rivals.find(v=>v&&v.coop);o.f=!!f;if(!f)return;
+ {await reset();const r=await H.p.evaluate(()=>{const o={};const r0=roll,a0=aRoll,p0=window.rcvPick;try{COOPW.thin.withSeat('b',()=>{const f=rivals.find(v=>v&&v.coop);o.f=!!f;if(!f)return;
    const ik=Object.keys(IT).find(k=>{try{const i=itm(k);return i&&i.kd&&!(i.tg||[]).length&&!i.wk}catch(e){return false}});S.inv=S.inv||[];S.inv.push({k:ik,hn5b:1},{k:ik,hn5b:1});const e=S.inv[S.inv.length-1];
    const n=rivals.find(v=>v&&!v.coop&&v.alive&&!v.out);for(const v of [f,n])if(v)v.dis=['kd:'+itm(ik).kd];o.hit=[disHit(f,e),n&&disHit(n,e)];roll=()=>true;
    const c0=S.inv.filter(x=>x.hn5b).length;COOPW.inv='hn-test-b';try{o.gift=String(giveTo(S,f,S.inv.length-1)||'').replace(/<[^>]+>/g,'')}finally{COOPW.inv=false}o.left=c0-S.inv.filter(x=>x.hn5b).length;
    o.npc=n?String(giveTo(S,n,S.inv.length-1)||'').replace(/<[^>]+>/g,''):'skip';o.npcKept=S.inv.filter(x=>x.hn5b).length;
-   aRoll=()=>false;COOPW.inv='hn-test-b';try{o.ally=String(ACT.ally.f(S,f)||'').replace(/<[^>]+>/g,'')}finally{COOPW.inv=false}
-   o.allyNpc=n?String(ACT.ally.f(S,n)||'').replace(/<[^>]+>/g,''):'skip';S.inv=S.inv.filter(x=>!x.hn5b)})}finally{roll=r0;aRoll=a0}return o});
+   aRoll=()=>false;window.rcvPick=(t,a,O)=>(O||[]).find(o=>o&&o.id==='no')||null/* receiver choice (jrcv): the NPC pick forced to refuse */;COOPW.inv='hn-test-b';try{o.ally=String(ACT.ally.f(S,f)||'').replace(/<[^>]+>/g,'')}finally{COOPW.inv=false}
+   o.allyNpc=n?String(ACT.ally.f(S,n)||'').replace(/<[^>]+>/g,''):'skip';S.inv=S.inv.filter(x=>!x.hn5b)})}finally{roll=r0;aRoll=a0;window.rcvPick=p0}return o});
   ok(r.f&&!!r.hit[0]&&!!r.hit[1]&&!/không nhận/.test(r.gift)&&r.left===1&&/không nhận/.test(r.npc)&&r.npcKept===1&&/thành/.test(r.ally)&&!/thành/.test(r.allyNpc),'H5b law 1 the other way (her context): the gift / Kết giao the host accepted is never refused after, the gift left her chest once (an NPC still can refuse, the gift stays)',r);
   for(let i=0;i<3;i++){await clear(H);await clear(G)}}
  /* H9 (review r1) her night card-flip scene (jflip, raised by her flip run on the host — part D pick): captured WITH its plan taken in her

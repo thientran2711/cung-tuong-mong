@@ -58,7 +58,7 @@ const me=()=>(CW.ctx||CW.seat)==="a"?901:902, fp=()=>(CW.ctx||CW.seat)==="a"?902
 const T=x=>{try{CW.tr.push(x+" f="+(rivals||[]).some(v=>v&&v.coop));if(CW.tr.length>80)CW.tr.shift()}catch(e){}};
 const isF=v=>!!(v&&v.coop);CW.isF=isF;
 /* hostnull (e), law 1 two-way: an ASK act between the two players (Tặng quà / Kết giao) runs only after the OTHER PLAYER said yes (CW.inv =
-   the accepted invite); that player decided — no NPC roll may refuse it afterwards (jdis dislike refusal, j8 Kết giao "lạnh nhạt"). */
+   the accepted invite); that player decided — no NPC roll may refuse it afterwards (jdis dislike refusal; Kết giao: jrcv rcvAsk takes the yes road, never the NPC receiver pick). */
 window.coopAccepted=t=>!!(CW.inv&&isF(t));
 /* the same item, keys in any order (a patch / ilUid can add a key in another order on one phone): coop-thin F3, whole family */
 const SJ=o=>JSON.stringify(o,(k,v)=>v&&typeof v==="object"&&!Array.isArray(v)?Object.keys(v).sort().reduce((r,x)=>(r[x]=v[x],r),{}):v);

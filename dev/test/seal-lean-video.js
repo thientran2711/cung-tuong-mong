@@ -20,6 +20,7 @@ async function open(b,dpr,rec){const ctx=await b.newContext({viewport:{width:W,h
   S.emo={k:'gian',v:70,why:'thử',t:null,w:0};S.emp.emo={k:'gian',v:70,why:'bị quần thần can gián',t:null,w:0};(S.nightLog=S.nightLog||[]).push(typeof emoW==='function'?emoW():0);
   S.met=S.met||{};const ks=['ghen','vui','buon','so','muu'];rivals.slice(0,5).forEach((v,i)=>{S.met[v.id]=1;try{k61Meet(v,'gặp',3)}catch(e){}v.emo={k:ks[i%5],v:60,why:'thử',w:0}});
   for(const m of (S.men||[]).slice(0,3)){try{k61Meet(m,'gặp',3)}catch(e){}m.emo={k:'so',v:60,why:'thử',w:0}}try{k61Meet(S.emp,'gặp',3)}catch(e){}render()});
+ if(process.env.GIAN3)await p.evaluate(b=>{KIT_EMOSEAL.anim=b},process.env.GIAN3);/* seal-lean-3 giận 3-part set: test-only base (the _review CDN folder), live img/kit/emo-anim untouched */
  await p.waitForTimeout(3000);
  await p.evaluate(()=>{window.__L=[];const ob=new MutationObserver(ms=>{for(const m of ms){for(const n of m.addedNodes)if(n.nodeType===1&&n.classList&&n.classList.contains('kemo-big')){const l={t:performance.now(),maxW:0,inside:true};window.__L.push(l);n.__l=l;
    (function tick(){if(!n.isConnected){l.end=performance.now();return}const r=n.getBoundingClientRect();if(r.width>l.maxW)l.maxW=r.width;l.inside=l.inside&&r.left>=-1&&r.top>=-1&&r.right<=innerWidth+1&&r.bottom<=innerHeight+1;requestAnimationFrame(tick)})()}
@@ -31,17 +32,29 @@ async function open(b,dpr,rec){const ctx=await b.newContext({viewport:{width:W,h
   /* the recording starts when the page opens; trim the load part (page open -> game drawn) with ffmpeg: keep the last SECS+1 s */
   cp.execFileSync('ffprobe',['-v','error','-show_entries','format=duration','-of','csv=p=0',`${OUT}/raw-${SZ}.webm`]);const dur=+cp.execFileSync('ffprobe',['-v','error','-show_entries','format=duration','-of','csv=p=0',`${OUT}/raw-${SZ}.webm`]).toString();
   cp.execFileSync('ffmpeg',['-y','-loglevel','error','-ss',String(Math.max(0,dur-SECS-1.5)),'-i',`${OUT}/raw-${SZ}.webm`,'-an','-c:v','libx264','-pix_fmt','yuv420p','-crf','23','-preset','fast',`${OUT}/full-${SZ}.mp4`])}
+ /* seal-lean-3 (owner 19/11 ~07:25Z): the EVENT DIALOG take: every opening of the event dialog (.ksz3) plays the seal lean once; recorded full screen, dialog opened at the START of the kept part */
+ {const {ctx,p,errs}=await open(b,1,true);await p.evaluate(()=>{window.__T0=performance.now()});if(process.env.DOMLOG)await p.evaluate(()=>{window.__D=[];setInterval(()=>{const t=Math.round(performance.now());window.__D.push([t,[...document.querySelectorAll('img.kemo,.kemo-big')].filter(e=>e.closest('.ksz3')||e.classList.contains('kemo-big')).map(e=>{const r=e.getBoundingClientRect(),c=getComputedStyle(e);return [e.className.slice(0,40),Math.round(r.left),Math.round(r.top),Math.round(r.width),c.visibility,e.complete,(e.currentSrc||e.src||'').slice(-18)]})])},20)});/* DOMLOG: frame-step the DOM around the part swaps */
+/* PRE-ANGER (no re-render during the take): open the sample dialog once, read WHO is in it, close it, make her angry (a real mood) and warm the giận stills, then record the real opening with her giận seal already in place */
+ if(process.env.GIANEV){await p.evaluate(()=>{try{kitPopSample('event')}catch(e){console.error(e)}});await p.waitForTimeout(3500);
+  await p.evaluate(async()=>{const e=document.querySelector('.ksz3 img.kemo.kfseal');const q=e&&e.__fig?kfsPerson(e.__fig):null;window.__angry=q;if(q){S.met=S.met||{};if(q.id)S.met[q.id]=1;try{k61Meet(q,'gặp',3)}catch(x){}q.emo={k:'gian',v:70,why:'thử',t:null,w:0}}
+   const e0=document.querySelector('img.kemo');const b0=e0?e0.src.replace(/emo-[^/]*$/,''):'';await Promise.all(['','m-','mo-'].map(x=>new Promise(r=>{const i=new Image();i.onload=i.onerror=r;i.src=b0+'emo-'+x+'gian.webp'})));
+   document.querySelectorAll('.krbox').forEach(e=>{const w=e.parentElement;if(w&&w!==document.body)w.remove()});for(let i=0;i<4;i++)document.querySelectorAll('[data-km-close]').forEach(b=>b.click());Q.length=0;const m=document.getElementById('modal');if(m)m.hidden=true;window.__L.length=0;if(window.__D)window.__D.length=0});await p.waitForTimeout(2500)}
+ await p.waitForTimeout(1500);const t0=Date.now();await p.evaluate(()=>{try{kitPopSample('event')}catch(e){console.error(e)}});
+  await p.waitForTimeout(11000);
+  log.event=await p.evaluate(()=>window.__L.filter(l=>l.end).map(l=>({secs:+((l.end-l.t)/1e3).toFixed(1),bigPx:Math.round(l.maxW)})));log.errsE=errs;if(process.env.DOMLOG)fs.writeFileSync(`${OUT}/dom-${SZ}.json`,JSON.stringify(await p.evaluate(()=>window.__D)));const v=p.video();await ctx.close();await v.saveAs(`${OUT}/rawe-${SZ}.webm`);
+  const dur=+cp.execFileSync('ffprobe',['-v','error','-show_entries','format=duration','-of','csv=p=0',`${OUT}/rawe-${SZ}.webm`]).toString();
+  cp.execFileSync('ffmpeg',['-y','-loglevel','error','-ss',String(Math.max(0,dur-13.5)),'-i',`${OUT}/rawe-${SZ}.webm`,'-an','-c:v','libx264','-pix_fmt','yuv420p','-crf','23','-preset','fast',`${OUT}/event-${SZ}.mp4`])}
  {const {ctx,p,errs}=await open(b,2,false);log.forced=[];
-  for(const key of ['gian','buon','vui']){
+  for(const key of (process.env.KEYS||'gian,buon,vui,binh').split(',')){
    const info=await p.evaluate(key=>{const vis=[...document.querySelectorAll('img.kfseal.kemo-live')].filter(e=>{const r=e.getBoundingClientRect();return r.width>2&&r.top>0&&r.bottom<innerHeight});if(!vis.length)return null;
     const e=vis[0],set=(/emo-((?:m-|mo-)?)[a-z-]+\.webp/.exec(e.dataset.kemos||e.getAttribute('src'))||[0,''])[1];
     if(!new RegExp('kemo-'+key+'(\\s|$)').test(e.className+' ')){e.className=e.className.replace(/kemo-(?!live|lean|m-)[a-z0-9_-]+/,'kemo-'+key).replace(/kemo-m-\w+/,'').trim();e.dataset.kemos='img/kit/emo-'+set+key+'.webp';e.setAttribute('src',e.dataset.kemos);window.kitEmoSeal.live(e,true)}
-    e.__ln&&clearTimeout(e.__ln);window.kitEmoSeal.lean(e,true);const c=document.querySelector('img.kemo-big');return c?{l:parseFloat(c.style.left),t:parseFloat(c.style.top),w:parseFloat(c.style.width),h:parseFloat(c.style.height)}:null},key);
+    e.__ln&&clearTimeout(e.__ln);window.kitEmoSeal.lean(e,true);const c=document.querySelector('.kemo-big');return c?{l:parseFloat(c.style.left),t:parseFloat(c.style.top),w:parseFloat(c.style.width),h:parseFloat(c.style.height)}:null},key);
    if(!info){log.forced.push({key,err:'no seal'});continue}
    const pad=Math.max(info.w,info.h)*.22,side=Math.max(info.w,info.h)+2*pad,cx=info.l+info.w/2,cy=info.t+info.h/2;
    const clip={x:Math.max(0,Math.min(W-side,cx-side/2)),y:Math.max(0,Math.min(H-side,cy-side/2)),width:side,height:side};
    const dir=`${OUT}/cl-${key}-${SZ}`;fs.mkdirSync(dir,{recursive:true});const fr=[];const t0=Date.now();
-   while(await p.evaluate(()=>!!document.querySelector('img.kemo-big'))&&Date.now()-t0<30000){const t=Date.now()-t0,f=`${dir}/${String(fr.length).padStart(4,'0')}.jpg`;await p.screenshot({path:f,type:'jpeg',quality:92,clip});fr.push([f,t])}
+   while(await p.evaluate(()=>!!document.querySelector('.kemo-big'))&&Date.now()-t0<30000){const t=Date.now()-t0,f=`${dir}/${String(fr.length).padStart(4,'0')}.jpg`;await p.screenshot({path:f,type:'jpeg',quality:92,clip});fr.push([f,t])}
    fs.writeFileSync(`${dir}/list.txt`,fr.map((x,i)=>`file '${x[0]}'\nduration ${((i+1<fr.length?fr[i+1][1]:x[1]+120)-x[1])/1000}`).join('\n')+`\nfile '${fr[fr.length-1][0]}'\n`);
    cp.execFileSync('ffmpeg',['-y','-loglevel','error','-f','concat','-safe','0','-i',`${dir}/list.txt`,'-vf','scale=720:720:flags=lanczos,fps=25','-c:v','libx264','-pix_fmt','yuv420p','-crf','20',`${OUT}/close-${key}-${SZ}.mp4`]);
    log.forced.push({key,secs:+((Date.now()-t0)/1000).toFixed(1),frames:fr.length,box:info});await p.waitForTimeout(1000)}
