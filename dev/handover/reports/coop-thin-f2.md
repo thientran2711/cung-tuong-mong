@@ -136,3 +136,88 @@ Merge: review/coop-thin-f2-r1 @ **3db28bd8** = 4dabbd46 + origin/main f43a2ba6 (
 - (5) LOOK (scratch, not committed, no CDN upload): guest iPad 1180x820@2 after a map tap: Ngự hoa viên painting page, clean; guest visit to the friend's palace (Kính Ninh điện): clean; guest Fold 755x1000@2 (swap) at Ngự hoa viên with Hoàng thượng: clean; host Fold: his own walk shows his «Xong việc» card — the card the guest never gets (item 1). Looked at 3×.
 - Gates on the merge: coop-e2e 63/63 + swap 63/63 · coop-p2 45/45 · coop-night THIN=5 / 7 105/105 · coop-timer 43/43 · coop-cyc THIN=6 / THIN=7 swap 72/73 alone; the red «mixed (old guest in her cycle tuần)» is on **main f43a2ba6 too (72/73)** — not F2 · coop-one-world seeds 1–10 PASS · quickcheck PASS (core gates one-core-guard / rules-one-source / kit-conform / coop-one-world, old save ok) · coop-b1 not rerun (F2 code off at level 0; #2's comparison with main stands).
 - Laws: 4 ONE CORE ok (khắc from travel()/BAL), 7 wording ok (only existing words), 9 KIT ok (no new UI part), 11 FIX THE GROUP → item 1 must be fixed for the family. Images: none uploaded; CDN img/_review/coop-thin-f2/ untouched.
+
+## FIX r2 (worker session_01N1tNP4v5eCkat9E4cy6HXG, opus, child of Foreman B ROOT-4; START_CTX ~4 % of 1M, ended ~30 %) — SẴN SÀNG KIỂM 81ac2af8
+PRIORITY #1 CHECK ('withSeat quiet'): OD 0 | ledger 0 | claims 1 (coop-thin chain, B) | main 0 (no quiet handling in her context on main 7fb7c104) | review/* review/coop-thin-f2-r1 3db28bd8 (reviewer FAIL), F3 review/coop-thin-f3 stacks on it | archive 0 — fixed on the reviewed branch, reused the F1 wrapper (TH.F.reg) and the existing NOOP / uiCap list.
+**Branch review/coop-thin-f2-r2 @ 81ac2af8** = origin/review/coop-thin-f2-r1 3db28bd8 + merge origin/main **7fb7c104** (31ceb64b; only index.html / sw.js conflicted = generated, rebuilt) + fix 90c9b83f + tests (P12b, LOOK, P11 staging) up to 81ac2af8. Generated files rebuilt (assemble + build_site).
+
+### Fix 1 (BLOCKING): her tap runs as solo on the host — the whole intent family
+Cause (reviewer): TH.withSeat sets quiet=true in her context; every card / number / Sổ ghi line gated on quiet was silenced for her F intents.
+- **TH.tapRun(fn)** (jcoopthin): her TAP run on the host = quiet OFF for that call + a UI capture list. Used by EVERY TH.F.reg run (jcoopthinf: F1 runAct, all F2 engines, and anything F3+ registers — the wrapper is shared) and by part D's **do pick** (her card choice: a follow-up card of a choice was silenced the same way). E's buổi step, B's life, C's world frame, D's deferred work keep quiet (not her tap).
+- **Cards**: with quiet off they go into HER Q → takeQ → part-D cards on her phone (once; her Q only, never the host's).
+- **Screen = one rule** `screenOff()` (j1: bots, quiet, or COOPW.ctx). Every screen gate reads it: kfOn (jfx), ievOn (jitev), krOn (jkrev), kmOn (j93), jflip want, jgoal bot, jtut botOff, buoiShift (jbuoi), dawn (jne), krvTick (jreveal), kitStatFx (jstatfx), stipReveal (jstip), sfx (jsfx). Nothing of hers draws / sounds / advances a tutorial on the host.
+- **Numbers / floaters / toasts for her**: kitStatFx (popNum), feedback (coin), kitCoins, kitGain, kitLose, kitReward, kitLearn, stipReveal, kitItemFx, kitLine, srvToast are on the ONE NOOP list with capture (UICAP, plain args only) during her tap run; replayed once on HER phone with the answer (TH.uiPlay: F answer in back(); pick answer only for her own pick ids TH.myPick, so a stale view never replays). F1 now gets them too (before: F2 regs only).
+- No new kit part, no new words (VANPHONG), no BAL number.
+
+### Scan (dev/test/coop-thin-quiet-scan.js; NODE_PATH=<acorn + acorn-walk> node … --md): every global-quiet read after the fix
+Static call graph from the roots (every TH.F.reg engine + chooseM), cut at the names that are no-ops in her context. The screen gates no longer read quiet (row 2 = screenOff, the one rule).
+| # | file:line | function | gates | reachable from an intent (path) |
+|---|---|---|---|---|
+| 1 | j1.js:139 | apply | screen | yes: goTo > apply |
+| 2 | j1.js:143 | screenOff | gate / behaviour | yes: chooseM > ievOn > screenOff |
+| 3 | j11.js:78 | apply | screen | yes: goTo > apply |
+| 4 | j27.js:44 | tuyenTu | card (Q) | yes: goTo > nextBuoi > endTurn > tuyenTu |
+| 5 | j34.js:11 | contestOpen | card (Q) | yes: goTo > nextBuoi > endTurn > rivalsTurn > contestOpen |
+| 6 | j34.js:30 | myBetween | gate / behaviour | yes: goTo > nextBuoi > endTurn > rivalsTurn > contestWeek > myBetween |
+| 7 | j34.js:38 | runRound | card (Q) | yes: goTo > nextBuoi > endTurn > rivalsTurn > contestWeek > runRound |
+| 8 | j34.js:40 | runRound | card (Q) | yes: goTo > nextBuoi > endTurn > rivalsTurn > contestWeek > runRound |
+| 9 | j34.js:47 | contestEnd | card (Q) | yes: goTo > nextBuoi > endTurn > rivalsTurn > contestWeek > contestEnd |
+| 10 | j42.js:259 | srvEndTurn | card (Q) | yes: goTo > nextBuoi > endTurn > srvEndTurn |
+| 11 | j42.js:293 | srvReassign | card (Q) | yes: talk > talkOpts > srvTalk > srvReassign |
+| 12 | j42.js:296 | srvLaundry | card (Q) | yes: kcGo > deal > srvCards > srvLaundry |
+| 13 | j55.js:138 | tdPop | card (Q) | yes: goTo > nextBuoi > endTurn > monthTick > tdMonth > tdSoMonth > tdPop |
+| 14 | j6.js:76 | save | save | no (a no-op in her context) |
+| 15 | j67.js:151 | card67 | card (Q) | yes: goTo > nextBuoi > pl67Lapse > card67 |
+| 16 | j72.js:168 | q72End | card (Q) | yes: goTo > nextBuoi > endTurn > q72Tick > q72End |
+| 17 | j85.js:70 | apply | Sổ ghi line | yes: goTo > apply |
+| 18 | j90.js:115 | contestEnd | gate / behaviour | yes: goTo > nextBuoi > endTurn > rivalsTurn > contestWeek > contestEnd |
+| 19 | jagknow.js:364 | tmFear | Sổ ghi line | yes: goTo > g > go > sgJob > bribeServ > tmFear |
+| 20 | jagknow.js:372 | tmTry | Sổ ghi line | yes: goTo > apply > tmSync > tmTry |
+| 21 | jagknow.js:373 | tmTry | Sổ ghi line | yes: goTo > apply > tmSync > tmTry |
+| 22 | jagknow.js:374 | tmTry | Sổ ghi line | yes: goTo > apply > tmSync > tmTry |
+| 23 | jagknow.js:380 | apply | screen | yes: goTo > apply |
+| 24 | jagknow.js:406 | tmTake | Sổ ghi line | no |
+| 25 | jagknow.js:407 | tmNo | Sổ ghi line | no |
+| 26 | jagknow.js:409 | tmAsk | Sổ ghi line | no |
+| 27 | jkc.js:298 | kcEndTurn | gate / behaviour | yes: goTo > nextBuoi > endTurn > kcEndTurn |
+| 28 | jlogsync.js:77 | tickFlush | gate / behaviour | yes: goTo > nextBuoi > endTurn > lsSync > tickFlush |
+| 29 | jlogsync.js:88 | lsSync | gate / behaviour | yes: goTo > nextBuoi > endTurn > lsSync |
+| 30 | jlogsync.js:112 | lsNote | gate / behaviour | yes: goTo > nextBuoi > endTurn > lsNote |
+| 31 | jne.js:200 | morningAfter | gate / behaviour | yes: goTo > nextBuoi > endTurn > morningAfter |
+| 32 | jqsave.js:21 | save | gate / behaviour | no (a no-op in her context) |
+| 33 | jqsave.js:23 | render | save | no (a no-op in her context) |
+| 34 | jreign.js:222 | rgRes | screen | no |
+| 35 | jspread.js:111 | save | gate / behaviour | no (a no-op in her context) |
+| 36 | jspread.js:114 | render | save | no (a no-op in her context) |
+| 37 | jst14.js:121 | f67Mig | gate / behaviour | yes: talk > runOpt > lsRest > lsFix > start > normAll > f67Mig |
+| 38 | jtq14.js:117 | introCard | gate / behaviour | yes: nextBuoi > pl67Lapse > res67 > end67 > chEnd67 > chAdvance67 > msStart67 > introCard |
+| 39 | jtq14.js:128 | doneCard | gate / behaviour | yes: runAct > note > doneCard |
+| 40 | jts.js:249 | promoteP | gate / behaviour | yes: goTo > nextBuoi > endTurn > rivalsTurn > contestOpen > promoteP |
+
+40 global-quiet reads in 30 functions; reachable from an intent: 31; roots: runAct goTo visitPal goSee accEtqGo talk srvGoTo kcGo accAsk accSneak scout invite chooseM
+
+Rows reached only through **nextBuoi / endTurn / monthTick / contestWeek** (contest rounds = closure cards, tuyển tú, srvEndTurn, q72End, morningAfter, kcEndTurn, jlogsync ticks, promoteP) are an over-approximation: those steps never run INSIDE her intent run — **P12b** counts them on the host for the whole f2 suite: **0**, and **0 un-sendable cards (D.bad)** from her runs. They stay E / G (quiet unchanged there). FOR B: E's buổi step still runs her buổi in context b with quiet=true — her buổi-event cards gated on quiet (card67 pl67Lapse, tdPop, q72 «Lỡ hẹn», srvEndTurn «Tin về chủ nhân», tuyển tú, contest) are silenced there the same way; not in this brief (E/G scope), worth its own item.
+
+### Before / after (shown on HER seat), coop-thin-f2 L7 P11 + P12 (test probe registered on TH.F.reg, runs in her context on the host)
+| emitter | kind | before (r1 3db28bd8) | after (81ac2af8) | host screen after |
+|---|---|---|---|---|
+| repro: map tap j77Tap('vuon'), quest «Đi một nơi trong cung» (jtq14 doneCard) | card | quest done + Bạc +15, **no card** | quest done + Bạc +15, **«Xong việc» once** | none |
+| her Bạc floater (apply → popNum → kitStatFx) + coin feedback | number | none | played on her phone (captured kitStatFx + feedback) | 0 labels |
+| card67 (j67, 10 callers) | card | 0 | 1 | 0 |
+| tdPop (j55) | card | 0 | 1 | 0 |
+| kitPanel (jtq14 doneCard / introCard) | card | 1 (not gated itself) | 1 | 0 |
+| pushModal (plain) | card | 1 | 1 | 0 |
+| kitLine / srvToast | toast | captured, not played (F1) / played (F2) | captured + played | none |
+| Sổ ghi lines gated on quiet (j85 deed, jagknow tm*, jlogsync) | log | quiet on → no line | quiet off → line in her patch | — |
+| screen gates in her run (screenOff / kfOn / ievOn / krOn / kmOn) | gate | (quiet on) | all off on the host | — |
+Before 18/22 (P11 ×2, P12 2/8, probe error), after 24/24.
+
+### Fix 2 (SHOULD-FIX): reconnect resend checks the buổi
+On "room" (same room + week) the pending intent is held (p.rv) until her first view after the reconnect (or 8 s): same buổi as when it was made (p.b0) → sent again (DONE dedupe unchanged); another buổi → dropped with the existing «Việc ấy chưa thành, xin thử lại.». New test **P10c** (her buổi moves on while the frame is lost): dropped, never sent, never run (host runs +0). P10 a/b still green.
+
+### Tests (this branch, live Worker; host Fold 686x880 / guest iPad 1180x820, swap = roles swapped)
+coop-thin-f2 L7 22/22 → 24/24 ×3 (P10c, P11, P12, P12b incl.), swap 23/23, 24/24 · TRIP=1 L7 24/24: place / visit / walk / talk filter **[] (0)** (goTo stays 0) · coop-thin-f1 L6 22/22 + swap 22/22, L7 22/22 + swap 22/22 · a L1 24/24 (one run 23/24 «host sees the friend» = pairing flake, alone 24/24) + swap 24/24 · b L4 136/136 · c L4 16/16 · d L4 46/52 = **main 7fb7c104 46/52** (same 6 kit sameDom IMG-attribute reds) · e L5 33/33 + swap 33/33 · e-net L6 / L7 / L7 swap 20/20 · coop-e2e 68/68 + COOP_SWAP 68/68 · coop-p2 45/45 · coop-night THIN=5 / 7 105/105 · coop-timer 43/43 · coop-cyc THIN=7 73/73 · coop-one-world seeds 1–3 PASS · quickcheck PASS (core gates one-core-guard / rules-one-source / kit-conform / coop-one-world; old save ok) · latency no throttle median 657 / 698 ms (n=41 / 34).
+### LOOK (scratch only, nothing committed, no CDN upload)
+Guest iPad 1180x820@2 and guest Fold 755x1000@2 (swap): her «Xong việc: Đi một nơi trong cung» kit result card (Giáo tập ma ma, Bạc +15, quest list ticked) over Ngự hoa viên: clean, no overflow, no cut text. Host screens: only his own cards (his Tuyển chọn card from the setup), nothing of hers. Looked at 3×.
+### Laws
+4 ONE CORE ok (no number), 7 wording ok (existing words only), 9 KIT ok (no new part; one NOOP list, one screen rule), 11 FIX THE GROUP: scan + table above, F1 + F2 + D pick + every future TH.F.reg.
