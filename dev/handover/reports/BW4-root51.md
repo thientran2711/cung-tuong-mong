@@ -48,3 +48,35 @@ People whose data has grey (drawn = KC ok):
 
 ## HANDOVER line
 BW4 done (push + report). Open questions for ROOT-51: grey replacements (B19 list), nc1–nc3 DATA colours, build_npc refs, ty-cold J2.
+
+---
+# Part 2: ROOT-51 add (from MMX4) — identity sentence = owner reference law
+- `build.py` `__main__` (every mode: t1–t8, Nữ đế, triều, maids tm0–tm4, ma ma, states; `--golden` exempt) rewrites every identity-sentence variant (the "hairstyle colour" ones, maid "her own hairstyle (the same at every rank)", Nữ đế "the reference's poses, outfit…") to the owner's words:
+  "From the identity reference keep ONLY her face, facial features, hair COLOUR and signature colour family; do NOT copy poses, outfit, HAIRSTYLE, hair ornaments or accessories of the reference, dress her in the NEW outfit below."
+  An assert stops the build if any old variant is left. My Part-1 maid/ma ma ident swap was removed (this replaces it).
+- The rank hair lines no longer say "her own hairstyle (exactly as in her first reference)", which would contradict "do NOT copy HAIRSTYLE". `store-all/build_all.py` (Hair: is a gate SLOT):
+  - t1–t3 at a18/a26: "Hair: her own hair colour, LOOSE and flowing (at most the top half gathered up, most of her hair hanging down her back), with …" (F11 + HAIR_LOW).
+  - t1–t3 at a36+: unchanged (bun).
+  - t4–t6: "Hair: her own hair colour, ALL her hair swept UP into a high bun / chignon, decorated with …" (HAIR_HIGH).
+- Not touched (men, flagged): emperor-B and build_npc IDENT_M still say "his face, facial features and hairstyle colour".
+- Flag: `build.py mNN --state ty1..ty8|cold --nostyle` crashes ("style sentence not found"). It crashed the same way before my edits.
+- Gates after Part 2: check_store --self 0 problems; build_all --check --age a18..a65 **0 FAIL ×5**; maid tm0–tm4 + ma ma samples STORE CHECK PASS.
+
+---
+# Part 3: owner Lượt 598 / 601 / 603 (ROOT-51)
+- **m01–m52 colours (Lượt 603, NF1 m_colours_proposed.json FINAL 007fcd05)**:
+  - `build.py` loads the json into `M_COLS`, and MAID_ROWS becomes "<main> and <secondary>" + main_hex + secondary_hex. That gives DATA, ORIG1 ("lilac silk like #C3A1CE" / "deep teal like #468E91"), LOWNAME and the t4–t6 lad3 rows.
+  - `build_all.secondary()` returns "<secondary> like #HEX" from M_COLS, so the TWO-COLOUR, THREE-COLOUR, phi bạch, linings and HELD ITEM sentences carry it. The TWO-/THREE-COLOUR MAIN is also "<main> like #HEX".
+  - Ma ma `--twocol`: for M_COLS people, main = "name like #HEX". The secondary gets its hex when the given name equals the table secondary, or with **`--twocol auto`** (recommended to MMX). m05's table secondary is "teal" (not "deep teal").
+- **nc1–nc3**: owner princess colours in DATA/ORIG1/M_COLS (nc1 indigo #5E6694 + warm ivory #EAD7BF; nc2 soft jade green #9EB28F + deep rose #CF7E83; nc3 wisteria lilac #CCA7C8 + rose-red #D18A92).
+- **Triều phục option B (Lượt 598)**: the build.py TRIEU table secondaries/hexes are as ordered (t4 "jade-teal, a soft medium jade-teal" #5FA8A6, t6 "kingfisher blue, a soft medium kingfisher blue (with a thin gold edge on every trim)" #4F86A8, …; main + TRIEU_GOLD kept), plus owner-copy/trieu/make.py t7 "honey-amber like #E3A25B".
+  - FLAG: raw `build.py --trieu N` output already failed the approved gate (S04/S05/S25–S31) before this change. The approved triều texts are the owner-copy/trieu round files (r15…r25, colours hard-coded per round; r25 = "tươi hơn nữa" vivid words). Those were NOT changed. ROOT: which triều builder is live?
+- **F12 phi bạch (Lượt 601)**: "…is a very sheer, highly translucent gauze shawl in <secondary like #HEX> (her secondary colour, clearly different from her main robe colour <main>) — the robe, sleeves and arms are clearly visible through it, so it reads as a light airy veil of that hue, never an opaque solid band of colour; …". Gate S12 is updated (proof bw4_f12_m13_t2_a26.txt).
+- **B19**: tm0 TM_FADED "grey-blue" → "faded indigo-blue"; the cold-palace linen "pale grey-white" → "pale natural white" (owner: greyish white banned, white allowed). **`B19_FAIL=True`** (grey is now a gate FAIL; whites never match).
+- **J2 ty-cold**: the trung y a51/a65 clauses are now calmer / less saturated / never darker.
+- Not changed: held c-people (NF1 c_rank_colours not wired: they are not drawn, B8). Nữ đế has its own palette (royal yellow + NUDE_OPT colour, e.g. m01 "quiet wine-crimson #7E2A33"), not the m table.
+- Gates: check_store --self 0 problems; build_all --check --age a18…a65 **0 FAIL ×5** with B19_FAIL=True; tm0–tm4 (m06 m11 m13 m45) and ma ma (m01 m05 m06 m13 m45 nc1–3) STORE CHECK PASS.
+- Samples refreshed: bw4-samples/m13_t2_a36, m13_t7_a51, m05_mama_a51 (`--twocol auto`), m01_nude_a51, m13_tm3/tm4_a36.
+
+## HANDOVER line (BW4 rollover)
+Context at about the START+25 % threshold. Only push + report remained, so I finished them. Nothing open on my side. Open for ROOT-51: the triều builder question, the c-people table (when drawn), the NPC men refs (owner).

@@ -39,3 +39,9 @@ BW3 is fixing the builder. MMX4 on HOLD: NO gens until ROOT-51 says so.
 - Diff vs my sample prompts: face words now copied from v3.FULL (note 1 solved); "never slanted or upturned" removed (note 2 solved); D13 line "looks younger than her age but still clearly about fifty, never 18–26"; hair = ALL pinned UP in a neat bun, NO loose hair, NO ribbons (F11). Colour sentences unchanged (waiting for BW4 B18 tone).
 - Remaining text (note only): the identity sentence still says "keep ONLY her face, facial features her own hairstyle ... and hair colour" (hairstyle from ref vs F11 bun line).
 - Next on GO: pull, rebuild with BW4's colour change, gate, gen m05+m13 ×3 (seed 7172, one kc_ref), sheet, send, STOP.
+
+## 19:45Z BW4 REBUILD (ROOT-52; builder 043d1c6) — prompts + gate ONLY, no gens, HOLD
+- `build.py mNN --state mama --age aXX --nostyle --twocol auto --noflower` → mama-specs/mNN-aXX.oneref.twocol.noflower.b4.prompt.txt (6); check_store same args PASS 6/6 (approved_check PASS).
+- Colours: m05 coral red #D4897D + teal #499597; m13 lilac #C3A1CE + deep teal #468E91. a51/a65 = calmer, softer, less saturated, same lightness, "never darker or heavier" (B18).
+- Identity: "keep ONLY her face, facial features, hair COLOUR and signature colour family" (no hairstyle). F11 bun + D13 lines kept.
+- Note: no phi bạch / sheer-stole sentence appears in the ma ma prompts (F12 seems not to apply to ma ma, which wear no phi bạch).

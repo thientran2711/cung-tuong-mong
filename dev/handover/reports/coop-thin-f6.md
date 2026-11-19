@@ -151,3 +151,17 @@ Branch = d8d8447f + merge main c02748c2 (6f3eb405) + reviewer fix e132fdb0 + FAS
 | one-world seeds 1–10 · one-core ×4 · Worker npm test · quiet scan | 10 × PASS · PASS ×4 (final head too) · thin ALL OK · 41 reads / 32 reachable, no new |
 | quickcheck | PASS (old save ok; render 176/191, tab 382/392, buổi 1113/1104 ms new/live; core gates PASS) |
 FOR MAIN: deploy the Worker with THINMAX 11 at landing (all L11 tests ran on a local wrangler dev); R1 (j29 sv) also fixes a LIVE solo crash. FOR B: main's receiver-choice broke coop-thin-d (giftin crash) + f1/f2/f3 gift / invite rows (tests stale vs the new 4-answer gift); jcloth.js:309 latent `arguments`; the f3/f4/f5 twin rank-up staging at L11.
+
+### REVIEW r1 — addendum: hostnull merged (Foreman B ROOT-7 ask, one FF for F5 + hostnull + F6a) — PASS review/coop-thin-f6-r1 389da198
+- Merge of review/coop-thin-hostnull-r1 6facd67d into be2a8fcc. One conflict, jcoopthinf.js F-run answer: kept BOTH sides — F6a's `out.rs` (noRes result, RSL) and hostnull (c)'s uncapped `out.ui` (no slice(0,4)). index.html / sw.js: theirs, then rebuilt by build_site.sh. main still 2bda29a1 (re-fetched right before READY).
+
+| gate | result |
+|---|---|
+| one-core guard / text / text-rule / bind | PASS ×4 |
+| coop-thin-f6 L11 (TRIP) / 4G / swap 4G | 40/41 → rerun 39/39 (H1 one extra hand card on her phone, not again: flake) · 38/38 · 38/38 |
+| coop-thin-f5 L10 | 30/30 |
+| coop-cyc THIN=11 / swap | 65/66 → rerun 66/66 (lui flake) · 63/66 (giau 'host drew her' ×3 = the known load flake class, see r1) |
+| coop-e2e / swap | 68/68 · 68/68 |
+| coop-thin-d L4 | crash at the «Quà tặng» giftin card (cls) = the coop-ptime-reds class, same as main |
+| coop-thin-f1 L6 / f2 L7 / f3 L8 (swap) | f1 18/23 → 20/23 · f2 24/25 · f3 34/38 — reds = coop-ptime-reds classes only (gift ×2, P5 invite, X1/X2, G5); f1 F2 laydo + one F1 kind row also red on hostnull-r1 6facd67d alone (18/23 there): not F6a |
+| quickcheck | PASS (G4 mk-layer-scan first failed on my sparse checkout without dev/art: 12960 pictures, 0 bad once checked out) |
