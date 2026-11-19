@@ -12,6 +12,11 @@ const BD_OLD=["bd_hoa","bd_ngua","bd_tuc","bd_hoang"];
    "bd" (saves). A life already on an OLD premise (BD_OLD) keeps every Bắc Địch word (law 6c: its text never changes under it); every other
    bd life reads the Ba Tư row. Bắc Địch itself stays a neighbour country in court events (owner ~06:50Z) — those strings are not touched. */
 const bdLegacy=()=>{try{return BD_OLD.includes(S.st.f14.road)}catch(e){return false}};
+/* THE ONE per-life switch for every bd princess-origin text in any file (origin card, story, quest, home phase, GE rows…):
+   bdTxt(bacDich, baTu) = the Bắc Địch words for a life on an old premise, else the Ba Tư words (law 4/11: one function decides) */
+const bdTxt=(oldW,newW)=>bdLegacy()?oldW:newW;
+/* a text property that follows the switch (getter: every reader of o[k] gets the right words, nothing copied per screen) */
+const bdTxtProp=(o,k,oldW,newW)=>{try{Object.defineProperty(o,k,{get:()=>bdTxt(oldW,newW),enumerable:true,configurable:true})}catch(e){}return o};
 const bdCountry=()=>{try{return S.origin.k==="bd"?(bdLegacy()?"bd":"bt"):"nc"}catch(e){return"nc"}};
 if(typeof NCL==="object"){NCL.bt={land:"Ba Tư",pv:"Phụ vương",mh:"Vương hậu",quan:"Vương trung vương",pa:"Thế tử huynh",pb:"Vương thúc",canh:"cơm nấu thịt cừu, hạt dẻ và lựu",laq:"bụi gai sa mạc",nden:"giữ lửa thánh trong lò"};
  if(typeof TOK67==="object")for(const k of Object.keys(NCL.bt))TOK67[k]=()=>NCL[bdCountry()][k]}
