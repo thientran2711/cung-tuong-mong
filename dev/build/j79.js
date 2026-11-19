@@ -1220,7 +1220,7 @@ addEventListener("resize",()=>{clearTimeout(window.__ksfT);window.__ksfT=setTime
 .pstrip.kpall>.parr,.pstrip.kpall>.pcount{display:none!important}
 `;document.head.appendChild(st)})();
 /* ---- dilemma options without risk data: the rows come from the option's own outcome branches (go/fail source): every `roll(N)`-guarded
-   apply/ap/die becomes "<effect>: <ladder word>" (gain → Được, loss → Kèm), unguarded apply → certain; never "Khó lường" or "xem ở bước sau" ---- */
+   apply/ap/die becomes "<effect>: <ladder word>" (gain → Được, loss → Kèm), unguarded apply → certain; never an unknown word or "xem ở bước sau" ---- */
 function kitBranchFx(src){const out={sure:[],gain:[],risk:[]};const fxOf=t=>{const o={};String(t).replace(/(\w+):(-?\d+)/g,(m,k,v)=>{o[k]=+v;return m});return fmt(o)};
  const re=/if\s*\(\s*roll\(\s*(\d+)\s*\)\s*\)\s*\{?\s*([^;{}]*?)(apply\(\{([^}]*)\}\)|ap\(S,\{([^}]*)\}\)|die\()/g;let m;const seen=new Set();
  while((m=re.exec(src))){const n=+m[1];if(m[3]==="die("){out.risk.push(`chết: ${chanceW(n)}`);continue}const t=fxOf(m[4]||m[5]);if(!t||seen.has(t+n))continue;seen.add(t+n);
