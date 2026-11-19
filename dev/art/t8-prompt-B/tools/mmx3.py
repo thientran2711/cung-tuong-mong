@@ -6,7 +6,7 @@
                                          -> img/_review/mama-mass/twocol/mama-twocol-<id>.jpg + dev/handover/review-sheets/mama-mass/twocol/
 """
 import sys, os, subprocess, shutil
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 R = os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))))
 T = os.environ.get("MMX3_DIR", "/tmp/mmx3"); os.makedirs(T, exist_ok=True)
 CDN = "https://ctm-img.victoria-tntt.workers.dev/img/_review/mama-mass/cuts/"
@@ -38,11 +38,34 @@ elif cmd == "sheet":
     pairs = any(o for _, o, _ in cols); cw = int(H * 0.48)
     W = len(cols) * cw * (2 if pairs else 1) + 20 * (len(cols) - 1)
     sh = Image.new("RGB", (W, H + 40), (255, 255, 255)); d = ImageDraw.Draw(sh); x = 0
+    try: fnt = ImageFont.truetype("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf", 20)
+    except Exception: fnt = None
     for age, o, n in cols:
         for lab, p in ([("OLD 1 màu", o)] if pairs else []) + [("NEW 2 màu", n)]:
             if p: sh.paste(onbg(p, H), (x, 40))
-            d.text((x + 8, 10), f"{a} {age} {lab}", fill=(0, 0, 0)); x += cw
+            d.text((x + 8, 10), f"{a} {age} {lab}", fill=(0, 0, 0), font=fnt); x += cw
         x += 20
     out = os.path.join(R, f"img/_review/mama-mass/twocol/mama-twocol-{a}.jpg"); sh.save(out, quality=85)
     rd = os.path.join(R, "dev/handover/review-sheets/mama-mass/twocol"); os.makedirs(rd, exist_ok=True); shutil.copy(out, rd)
     print(out)
+elif cmd == "ledger":   # ledger <id>-<age> <face> <gen> <cut|-> <secondary> <note...>
+    import json, datetime
+    pid, age = a.split("-"); face, gen, cut, sec = sys.argv[3:7]; note = " ".join(sys.argv[7:])
+    d = {"ts": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"), "kind": "OWNER-DESIGN",
+         "note": f"owner Lượt 520 MA MA TWO-COLOUR NO-FLOWER {pid} {age} (approved MMX1c recipe; --noflower = flower words removed + ROOT-50 ruling A NO-flowers sentence); secondary {sec}" + (f"; remove_bg {cut}" if cut != "-" else "") + f"; {note}",
+         "cmd": f"python3 dev/art/t8-prompt-B/build.py {pid} --state mama --age {age} --nostyle --twocol \"{sec}\" --noflower",
+         "refs": [{"type": "image", "id": face}, {"type": "image", "id": "79fNlPEJAL"}], "gen_id": gen, "cut_id": cut,
+         "prompt_file": f"dev/handover/reports/mama-specs/{pid}-{age}.oneref.twocol.noflower.prompt.txt",
+         "settings": "gpt-2-6 1024x2304 2k seed 7172 (no transparentBackground)", "credits": 138 if cut != "-" else 135,
+         "who": "mama-mass MMX3 two-colour", "store_check": "PASS"}
+    open(os.path.join(R, "dev/art/gen_ledger.jsonl"), "a").write(json.dumps(d, ensure_ascii=False) + "\n"); print("ledger ok")
+elif cmd == "look3":   # look3 <id> <url36> <url51> <url65> -> L_<id>.jpg (3 full views) + faces strip below
+    ims, fs = [], []
+    for age, u in zip(("a36", "a51", "a65"), sys.argv[3:6]):
+        p = f"{T}/gen_{a}-{age}.png"; get(u, p); im = Image.open(p).convert("RGB"); w, h = im.size
+        v = im.copy(); v.thumbnail((10000, 1100)); ims.append(v); fs.append(im.crop((int(w * .22), 0, int(w * .78), int(h * .22))))
+    W = sum(i.width for i in ims); fh = int(fs[0].height * (W / 3) / fs[0].width)
+    s = Image.new("RGB", (W, 1100 + fh), "white"); x = 0
+    for v, f in zip(ims, fs):
+        s.paste(v, (x, 0)); s.paste(f.resize((v.width, int(f.height * v.width / f.width))), (x, 1100)); x += v.width
+    s.save(f"{T}/L_{a}.jpg", quality=85); print(f"{T}/L_{a}.jpg")
