@@ -53,3 +53,25 @@ Guard per item: snapshot of 8350 builder commands (c01–c32 × 5 ages × 19 mod
 - Snapshot of the 8350 existing commands: 0 changed (maid rows and tm states only add cells); test_low_all OK.
 - Coverage, maids m01–m52: t1/t2/t3, kc, ngheo, tm1, tm2, tm3 = green at all ages; tm0 a26 green; Nữ đế/Thái hậu/t7/t8 only POSE= (same limit as item 3).
 - STILL RED, not done (needs source wording, not invented): (a) maids at consort ranks t4, t5, t6 = RUN: `OUTFIT_JOBS`/`OUTFIT_LOW` have per-person rows only for c01–c32; the maids' version is the old main dev/figwork/maidC/lad3.py ladder (`outfit(t,pal,mot)` + CT[1..3]) — to be ported as rows; (b) ma ma = PENDING (no NPC outfit wording); nhất đẳng = PENDING (owner sheet); (c) tm0/tm4 POSE= (their pose lists skip "adjusting a hairpin"); (d) ty/cold for maids: AGE/ITEM/FRONT/BG/REFS pass, POSE= as for consorts.
+
+## Item 6 — coverage before/after (red cells of dev/art/coverage.py)
+| step | commit | red cells | main effect |
+|---|---|---|---|
+| start (N5c end) | ff5a74b | (not counted; BG + REFS red in every cell) | — |
+| item 1 K3_BG | e0f4fef | 540 | BG green for build.py groups |
+| item 2 --log/--refs | 6392d58 | ~540 | REFS green for build.py groups |
+| item 3 spec5 age offset | 5ce724f | 511 | POSE= green t1–t5, kc, ngheo |
+| item 4 ty/cold | 5396477 | 508 | ty1–8 + cold run (consorts) |
+| item 5 maids | 706808f | 457 | maid tm1–tm3, t1–t3, kc, ngheo green |
+a65 green for every women group: NOT reached. Red now = POSE= (t6+/Thái hậu/Nữ đế/ty/cold/tm0/tm4: fewer than 5 allowed calm poses), maids t4–t6 RUN, foreign princesses NOCMD, Emperor/NPC groups (W107b).
+
+## HANDOVER N5d → successor (ROOT-37 opens it; I am depth 8 and cannot). START_CTX ~0 %, stopped at ~20 % because only blocked items remain.
+DONE + pushed: e0f4fef (1), 6392d58 (2), 5ce724f (3), 5396477 (4), 706808f (5) on claude/cung-tuong-mong-handover-hj0h8w.
+NOT DONE, waiting for a decision/source:
+1. nhất đẳng (owner has not chosen the reference sheet) and ma ma (NPC outfit wording not in the repo): `NHAT_DANG_PENDING`, `MAMA_PENDING` in build.py; `--state nhat|mama` print PENDING.
+2. Maids at consort ranks t4/t5/t6 (+ Nữ đế via NUDE rows already added): port `maidC/lad3.py outfit(t,pal,mot)` / mjobs CT[1..3] into OUTFIT_JOBS rows `mNN-tT` (copy wording, never invent).
+3. POSE= at t6+/elder/ty/cold: needs MORE calm poses in SPEC5_POSES (new wording = owner decision) or relax the stole/hairpin skips.
+4. `build.py --golden` != golden/pB_*.txt since the 3d2 frontal rewrite (pre-existing; regenerate goldens or drop the golden check).
+5. W107b (session_01PEhRbv2Jj3dTLMsN1f9GGg) was inactive: it must import `K3_BG` and use `--log/--verify` (README § Gen ledger); emperor-B still lacks K3/refs.
+6. A0 REFERENCES lists style as image 1; K3/ROYAL3 text and my refs emitter use 1=face, 2=style, 3=swatch → owner/ROOT-37 to confirm the wording.
+Snapshot method: scratchpad snap.py (8350 cmds) is NOT committed; recreate: c01–c32 × a18–a65 × modes (v0/v1/v2/--golden/--head/--low 1–6/--t7/--state thaihau|nude|kc|ngheo|--trieu 1–8) × ±--spec5pose + emperor-B 6×5, json of stdout, diff before/after.
