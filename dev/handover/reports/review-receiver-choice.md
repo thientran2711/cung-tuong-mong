@@ -165,3 +165,5 @@ Context at verdict ≈ 20 %.
    - `node dev/test/coop-e2e.js <scratch>`
    - `node dev/test/receiver-choice-shots.js <scratch>`: Fold + iPad; look at them 3× (the cards open from the notice; the notice shot is fold/ipad-rcv-notice).
 4. All green → STATUS line "LAND READY review/receiver-choice-rv <sha>" + send_message to D #7 + add a short «LAND READY» line here. Red → numbered list.
+
+- **LAND READY** (RE-CHECK #4, 19/11): review/receiver-choice-rv c02748c2b = 0247fadf9 + shots-harness fix (S.ordQ). FF of LIVE 1a4df595. All gates green (rc x5, ptime/ptime2, scan 0 gaps, role-parity PASS, quickcheck x6, coop-e2e 68/68, shots Fold+iPad looked 3x). Note: judge/lend shots show a Thanh chi queen-promotion animation from the harness staging over the cards; cards intact.
