@@ -58,7 +58,7 @@ function c6(n,s){s=s||{};if(s.pw&&s.c&&s.c.bac<0){/* review ag-all-2 r2 A5: pw =
  const p=s.p==null?null:oddsCl(Math.round(s.p));let x;
  if(p!=null)x=`${word(p)} · thành: ${wt.join(", ")||G6("êm chuyện")} · hỏng: ${lt.join(", ")||"không mất gì"}`;else x=wt.join(", ");
  if(s.k&&s.k.length)x+=(x?" · ":"")+"kèm: "+s.k.join(", ");
- /* review/odds-meter-back: a certain option (no p) carries no roll in its own code, so the kit reads it as certain («Nắm chắc»), not "Khó lường" */
+ /* review/odds-meter-back: a certain option (no p) carries no roll in its own code, so the kit reads it as certain («Nắm chắc»), never an unknown odds word */
  const fin=ok=>{
    if(ok){ap6(s.w);(s.r||[]).forEach(([a,v])=>relDo(a,v));let t="";try{t=s.ok?s.ok():""}catch(e){}log(t||s.wl||"Mọi việc êm xuôi.")}
    else{ap6(s.l);(s.lr||[]).forEach(([a,v])=>relDo(a,v));let t="";try{t=s.no?s.no():""}catch(e){}log(`<span class="r">Không thành:</span> ${t||s.ll||n+"."}`)}};

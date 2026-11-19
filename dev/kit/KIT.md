@@ -491,7 +491,7 @@ Rất thấp < Thấp < Vừa < Cao < Rất cao (0 → "Không có"), the same s
   `có thai: khả năng thấp · được ban thưởng: khả năng vừa`; 0 → "không có khả năng"). Thresholds 8/18/35/60. All in `j1.js` next to `word()`.
 - Never write `label: ${word(n)}` in a gain/risk/kèm string — write `label: ${chanceW(n)}`. Sổ ghi after the fact: `(khả năng: vừa)`.
 - `kitBranchFx` (dilemma options read from `roll(N)` branches) writes its side rows with `chanceW`; the option's main roll keeps the ladder.
-- `CHW` (j1) recognises a chance phrase so `dilLine` treats a line with side chances like before (no "Khó lường").
+- `CHW` (j1) recognises a chance phrase so `dilLine` treats a line with side chances like before (a side chance never becomes the card's odds).
 - Death risks on scheme buttons come from the real formula (poison / kpoison / pond): "nàng chết: khả năng thấp" (`kpDeathWord`).
 - Check: `node dev/test/sub-odds.js <site> index.html <out> after` (word detector: no ladder word after ':' or '(').
 Never %, never "Chắc chắn" (bookkeeping / decisions show nothing; a formerly-sure chance act shows Nắm chắc + the soft "hỏng", ODDS CAP §odds chip).
@@ -899,8 +899,13 @@ img/veil*.png is rejected). Status chips such as "Hủy dung (vừa) · còn N t
 `dilLine` derives the rows from the option's own outcome code: each `roll(N)`-guarded `apply/ap(S,…)/die` → "<effect>: <ladder word>"
 (gain → Được, loss → Kèm), unguarded `apply` → certain; a `roll(expr)` that can be evaluated gives the main odds word. Only the option's OWN
 code counts (`dilSrc`, j17): a `go` that is a global scene / step function (`go:nightScene`) opens the next step and is certain here; a certain
-`c6` option (no `p`) has no roll in its code (review/odds-meter-back). A truly unknown chance ("Khó lường", e.g. a gift that may hide poison)
-shows the kit meter with no step lit.
+`c6` option (no `p`) has no roll in its code (review/odds-meter-back).
+ONE ODDS RULE (review/odds-no-unknown, law 4 + law 7): a rolled option whose line has no ladder word names the odds of its roll as `p` (the
+SAME number its go rolls, also when the roll sits in a helper: toilAns, cnvRun, loDo, fzRun); `oddsLead(c,s)` (j17) puts `word(p)` first in its
+line — used by `dilLine`, the j67 line (`c.j67`) and `kitOptModel`. There is NO "unknown" odds word: only the 7 ladder words exist; a chance
+the player must not see (a poisoned dish) shows her real guard against it, the same for a clean dish (jpoison «Nhận ngay» =
+100 − pgOdds(giver → her)), so the card is never a tell. Side chances keep `chanceW` (§ odds words). Gate: `node dev/test/odds-unknown-scan.js`
+(static, every rolled dialog option, exemptions with reasons) + `node dev/test/odds-no-unknown.js <url>` (runtime, Fold + iPad).
 
 ## 26. HONOUR PODIUM · BỤC VINH DANH (j90, kit owner, owner 11/14) — screen 1 of every ranking result
 Applies to EVERY ranking board of the game ("một lời phàn nàn là cả nhóm"): every contest that plays the j82 mini-game (`startContest`: j71 hội thi,
@@ -1102,8 +1107,8 @@ so stage blocks may stand beside a head or between figures, never over the paint
 - KIT PART `kitOptOdds(b)` (jk2b, owner 19/11 ~01:48Z: «để lại cái thể hiện cái đó như cũ») → the option head shows the kit ODDS METER `kitOdds`
   (§ odds meter, j79: 7 segments red → green + the VANPHONG ladder word Liều / Khó / Năm ăn năm thua / Khá chắc / Chắc / Rất chắc / Nắm chắc;
   tap = the ladder). The meter is the card's own `.kat > .kodds` (kaNorm → kaOdds → oddsChip from the option's line = the odds the roll uses,
-  law 4); kitHideOut never removes it. An option with no roll (a certain outcome) gets the same meter at «Nắm chắc»; a truly unknown chance
-  ("Khó lường", kaOdds j63) = the same meter, no step lit. Never a percentage.
+  law 4; a rolled option names its odds by `p`, §25 ONE ODDS RULE); kitHideOut never removes it. An option with no roll (a certain outcome)
+  gets the same meter at «Nắm chắc». Only the 7 ladder words exist (no unknown word, no unlit meter). Never a percentage.
   The «an toàn / có rủi ro / liều» risk chip (kitRisk, `.krisk`) is RETIRED everywhere.
 - After the choice the result card (section 7) shows the full Được / Mất + why, and the Tuần lục logs the truth.
 - Balance of the hidden outcomes: audited by bots on review/event-balance (owner 14:30Z / 15:10Z), which builds on `kitHint`.
@@ -3270,7 +3275,7 @@ the start, or skips the turn if it is still not ready. A turning sheet never sho
 Index of the shared parts review/opt-render added (number from the coordinator's registry; the rules live where they apply):
 - `kitIsEventChoice(m)` + `KIT_ACT_PIDS` + data flags `ev` / `act` / `shop` — which dialogs are events (cost mode): §28.6.
 - `kitHint(o, m, lv)` → `{hint}` (pure, bots too), `kitHintLevel()` (Tâm cơ / Tai mắt → vague / plain / sharp): §28.6.
-- `kitHintRow(text)` (`.kr-hint`, `.ef.i` in j63 kit CSS), `kitOptOdds(b)` (the kit odds meter on every option, certain = «Nắm chắc»): §28.6.
+- `kitHintRow(text)` (`.kr-hint`, `.ef.i` in j63 kit CSS), `kitOptOdds(b)` (the kit odds meter on every option, certain = «Nắm chắc»; a rolled option's `p` → `oddsLead`, §25): §28.6.
 - `kitResultSeal(ok)` (THÀNH / BẠI / grey KẾT QUẢ, j63; not `kitSeal`, which is the Trân nữ seal §39), `kitKemRow(K)` (`.kb .kkem`): §7.
 - Samples on the kit page (§47): ids "§53" (chip tones + the 7 odds-meter steps; an event option in cost mode through the real modal markup → kaNorm →
   kitHideOut; kitResultSeal ×3; kitKemRow). Tests: `dev/test/opt-render.js`, `dev/test/opt-scan.py --fail`.

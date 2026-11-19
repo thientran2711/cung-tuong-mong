@@ -339,7 +339,7 @@ function stfAp(a,fx){if(!a||!fx)return;if(a===S)apply(fx);else if(typeof asAp===
 function stfLike(x,y,n){if(!x||!y||x===y||x===S)return;if(y===S){if(isSrv())srvAf(x,n);return}x.af=x.af||{};x.af[y.sid]=cl((x.af[y.sid]||0)+n,-100,100)}
 function stfNm(a){return a===S?"ngươi":a.name}
 function cnvRun(a,op,fxDone){if(!op)return"";if(!fxDone)stfAp(a,op.fx);let ok=true;if(op.o!=null){ok=roll(op.o);stfAp(a,ok?op.w:op.l)}return op.go?op.go(ok)||"":""}
-function cnvPend(a,O){return O.map(op=>({n:op.n,fx:op.fx||{},x:op.x||"",go:()=>{const r=cnvRun(a,op,true);if(r)log(r)}}))}
+function cnvPend(a,O){return O.map(op=>({n:op.n,fx:op.fx||{},x:op.x||"",p:op.o!=null?op.o:undefined/* law 4: cnvRun rolls op.o */,go:()=>{const r=cnvRun(a,op,true);if(r)log(r)}}))}
 function cnvOrdOpts(a,m,t,obey){const mal=m.malice||40;const q=queenP();const who=q&&q!==m&&q!==t&&q!==S?q:t;
  return [{id:"obey",n:"Giúp hết lòng",tag:"work",fx:{},x:"",go:obey},
   /* the 4 answers of OD L1876 for every order (owner 18/11 ~21:15Z): «Giúp qua loa» = the same deed, odds − BAL.road.hp.half (ordHalf, the ONE qua-loa number of OD L1876) */
