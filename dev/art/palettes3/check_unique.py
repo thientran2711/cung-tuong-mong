@@ -4,8 +4,8 @@ For each season (xuân / hạ / thu / đông), for every two consorts a, b:
   FAIL  max(ΔE2000(main_a, main_b), ΔE2000(sec_a, sec_b)) < 10      (the two pairs read as the same pair)
   FAIL  the colour NAME pair (main, sec) is identical
   WARN  ΔE2000(main) < 6 and ΔE2000(sec) < 14                        (close mains, only the secondary tells them apart)
-  ROOT  both pairs are ★ roots (approved / already drawn, never changed — owner Lượt 757/763): listed as ROOT-ROOT,
-        not counted as FAIL (same exemption as check_seasons.py); they can only be fixed by the owner (redraw / new root).
+  NO exemptions (owner Lượt 770): two ★ roots that clash are a FAIL like any other pair — root colour CODES may change
+        (pictures are never redrawn; the drawn colours are kept as root_drawn).
 Also FAIL: a consort missing from palettes_season.json, a non-consort id in it, or a missing season.
 Prints a table per season; exit 1 on any FAIL.  Run: python3 dev/art/palettes3/check_unique.py [--quiet]"""
 import json, math, os, sys
@@ -76,7 +76,7 @@ def run(d=None, quiet=False):
     ids, groups = consort_ids()
     if d is None: d = json.load(open(os.path.join(FC, 'palettes_season.json')))
     have = [k for k in d if not k.startswith('_') and k not in ('status', 'root_season_counts')]
-    fails, warns, rootrt = [], [], []
+    fails, warns = [], []
     for k in ids:
         if k not in d: fails.append(f'{k}: consort missing from palettes_season.json')
         else:
@@ -87,7 +87,7 @@ def run(d=None, quiet=False):
     pres = [k for k in ids if k in d]
     per = {}
     for se in SEASONS:
-        nf = nw = nr = 0
+        nf = nw = 0
         for a, b in combinations(pres, 2):
             if se not in d[a] or se not in d[b]: continue
             v, dm, ds, why = pair_verdict(d[a][se], d[b][se])
@@ -96,19 +96,17 @@ def run(d=None, quiet=False):
             line = (f'{v} {VN[se]:5} {a}{"★" if pa.get("root") else " "} {pa["main"]}+{pa["sec"]} {pa["main_hex"]}/{pa["sec_hex"]}'
                     f'  vs  {b}{"★" if pb.get("root") else " "} {pb["main"]}+{pb["sec"]} {pb["main_hex"]}/{pb["sec_hex"]}'
                     f'  dE main {dm:.1f} sec {ds:.1f} ({why})')
-            if v == 'FAIL' and pa.get('root') and pb.get('root'): rootrt.append('ROOT-ROOT' + line[4:]); nr += 1
-            elif v == 'FAIL': fails.append(line); nf += 1
+            if v == 'FAIL': fails.append(line); nf += 1
             else: warns.append(line); nw += 1
-        per[se] = (nf, nw, nr)
+        per[se] = (nf, nw)
     if not quiet:
         for x in warns: print(x)
-        for x in rootrt: print(x)
         for x in fails: print(x)
     print(f'consorts: {len(ids)} expected, {len(pres)} present in palettes_season.json')
-    print('season | pairs checked | FAIL | WARN | ROOT-ROOT (both ★, exempt)')
+    print('season | pairs checked | FAIL | WARN')
     n = len(pres) * (len(pres) - 1) // 2
-    for se in SEASONS: print(f'{VN[se]:6} | {n} | {per[se][0]} | {per[se][1]} | {per[se][2]}')
-    print(f'TOTAL {len(fails)} FAIL, {len(warns)} WARN, {len(rootrt)} ROOT-ROOT (exempt)')
+    for se in SEASONS: print(f'{VN[se]:6} | {n} | {per[se][0]} | {per[se][1]}')
+    print(f'TOTAL {len(fails)} FAIL, {len(warns)} WARN')
     return fails, warns
 
 

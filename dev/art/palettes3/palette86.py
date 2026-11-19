@@ -36,6 +36,7 @@ PS_OLD = os.path.join(os.path.dirname(__file__), 'palettes_season_L761.json')   
 NONC = os.path.join(FC, 'palettes_season_nonconsort.json')
 SROOT = os.path.join(FC, 's_root_colours.json')
 GROUPS = os.path.join(FC, 'OWNER_GROUPS_L686.json')
+FINAL_ROOTS = {f's{i}' for i in range(46, 62)}   # owner: s46–s61 roots in s_root_colours.json are FINAL (faces drawn with them)
 NEW11 = {**{f's{i}': 'Kiêu kỳ' for i in range(51, 56)}, **{f's{i}': 'Quyến rũ' for i in range(56, 62)}}
 LOG = []
 
@@ -299,7 +300,7 @@ def cmd_solve(seed=1, iters=20000):
     order = [k for k in pid(d0) if k in cons and not k.startswith('s')] + sorted(k for k in cons if k.startswith('s'))
     assert len(order) == 86
     existing = {k for k in pid(d0) if k in cons}
-    base = {k: (R[k]['cur'] if k in NEW11 else R[k]['base']) for k in order}
+    base = {k: (R[k]['cur'] if k in FINAL_ROOTS else R[k]['base']) for k in order}
     RS = {k: classify(base[k]['main_hex'], base[k]['sec_hex']) for k in order}
     for k in order: assert in_tone(base[k]['main_hex'], 'm') and in_tone(base[k]['sec_hex'], 's'), (k, base[k])
     # ---- pools: approved colours lifted into the tone (main / secondary role) + small variants
@@ -324,7 +325,7 @@ def cmd_solve(seed=1, iters=20000):
     for k in order:
         rs = RS[k]; b = base[k]
         cand = [dict(b)]; cost = [0.0]
-        if k not in NEW11:            # a root code may move a little (same names, same season) to break a ROOT-ROOT clash
+        if k not in FINAL_ROOTS:      # a root code may move a little (same names, same season) to break a ROOT-ROOT clash
             for m in variants(b['main'], b['main_hex'], 'm', (-0.03, 0, 0.03), (-10, -5, 0, 5, 10)):
                 for s_ in variants(b['sec'], b['sec_hex'], 's', (-0.03, 0, 0.03), (-10, -5, 0, 5, 10)):
                     if (m[1], s_[1]) == (b['main_hex'], b['sec_hex']): continue

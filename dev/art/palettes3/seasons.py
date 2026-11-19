@@ -24,6 +24,7 @@ from colourlib import *
 SEASONS = ('xuan', 'ha', 'thu', 'dong')
 VN = {'xuan': 'Xuân', 'ha': 'Hạ', 'thu': 'Thu', 'dong': 'Đông'}
 TONE = {'m': dict(L=(0.70, 0.90), C=(0.045, 0.095)), 's': dict(L=(0.66, 0.90), C=(0.045, 0.100))}
+L_ROUND = 0.0025      # < one sRGB step of OKLCH L: hex rounding tolerance on the tone floor (s49 FINAL root #C98A97 = L .6998)
 SEC_DEEPER_MAX = 0.10   # secondary at most this much darker than the main (foreman/owner Lượt 767/769)
 
 def temp(h):
@@ -38,7 +39,7 @@ def in_tone(h, role):
     L, C, H = oklch(h)
     if is_white(h): return L <= 0.95
     t = TONE[role]
-    return t['L'][0] - 1e-9 <= L <= t['L'][1] and t['C'][0] <= C <= t['C'][1] + 1e-9 and \
+    return t['L'][0] - L_ROUND <= L <= t['L'][1] and t['C'][0] <= C <= t['C'][1] + 1e-9 and \
         not ((80 <= H < 100 and C > 0.06) or dE(h, '#EFBD69') < 0.045)
 
 def tone_lift(h, role):
