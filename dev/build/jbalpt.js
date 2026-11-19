@@ -4,7 +4,7 @@
    BAL.road.fx / BAL.road.rare (shape of jbalroad.js), chapter constants in BAL.road.pt. One block per writer. */
 /* the third country branch of hòa thân: start stats o, rank r (Quý nhân, like Ba Tư), Thái hậu favour th (a ruler who writes as an equal: cool, not hostile) */
 BAL.orig.pf={r:2,o:{danh:20,suc:80,bac:110},th:-15};
-BAL.orig.br.nc.pf=0;/* SCAFFOLD: 0 until the four pt roads exist (no empty premise pool); set to 1 with the roads */
+BAL.orig.br.nc.pf=1;
 BAL.m72.pfOk={danh:3};/* family letter fam_pf (the Phù Tang father asks for the ship of the next embassy): Danh on success */
 BAL.road.pt=BAL.road.pt||{};
 /* ---- shared (lead E21): the option shapes (law 2 / 3: every option of a beat has a cost and a level gain; odds harder with rank, law 5: −rk per rank step) ---- */
@@ -50,7 +50,7 @@ Object.assign(BAL.road.fx,{
   E:{win:{fx:{duc:5,danh:3},k:1},win2:{fx:{duc:3,tamco:3},k:1},mid:{fx:P_.mid,k:0},lose:{fx:{danh:-4,duc:-1},k:-1}}},
  pt_hai_7:{s1:[ptS({tamco:-1},{mat:1,danh:1}),ptS({danh:-1},{mat:2}),ptS({sung:-1},{mat:1,tamco:1})],
   s2:[ptS({tamco:-1},{mat:1,tamco:1}),ptS({danh:-1},{mat:1,tamco:1}),ptS({suc:-1},{mat:1,duc:1})],
-  c1:[ptS({bac:-60},{mat:2}),ptS({danh:-1},{mat:2}),ptR("tamco",{mat:1,tamco:1},{danh:-2},{suc:-1})],
+  c1:[ptS({bac:-50},{mat:2}),ptS({danh:-1,tamco:-1},{mat:2}),ptR("tamco",{mat:2,danh:1},{danh:-2},{suc:-1})],
   c2:[ptG(ptR("tamco",{tamco:2},{danh:-2},{suc:-1}),[3,-2]),ptG(ptS({tamco:-1},{danh:2}),[2]),ptS({bac:-40},{duc:2})],
   t1:[ptS({tamco:-1},{sung:3}),ptS({sung:-1},{duc:2,mat:1}),ptS({suc:-1},{tamco:3})],
   x1:[ptX(45,"danh","tra"),ptX(30,"tamco","mua",{bac:-50}),{c:{danh:-2},w:{duc:1}}],
@@ -64,7 +64,7 @@ Object.assign(BAL.road.fx,{
   E:{win:{fx:{danh:6,sung:3},k:1},win2:{fx:{duc:5,danh:2},k:1},mid:{fx:P_.mid,k:0},lose:{fx:{danh:-4,duc:-2},k:-1}}},
  pt_hai_9:{s1:[ptR("sung",{tamco:2,duc:1},{sung:-2},{suc:-1}),ptS({bac:-40},{duc:3}),ptS({tamco:-1},{duc:2})],
   s2:[ptS({suc:-1},{mat:1,duc:1}),ptS({th:-1},{duc:3}),ptS({danh:-1},{duc:2})],
-  c1:[ptS({tamco:-1},{mat:2}),ptR("tamco",{mat:1,danh:1},{danh:-2},{suc:-1}),ptS({danh:-1},{duc:1,tamco:1})],
+  c1:[ptS({tamco:-1},{mat:1,tamco:1}),ptR("tamco",{mat:2,danh:1},{danh:-2},{suc:-1}),ptS({danh:-1},{duc:2,tamco:1})],
   c2:[ptG(ptR("tamco",{tamco:2},{danh:-2},{suc:-1}),[3,-2]),ptG(ptS({sung:-1},{tamco:2}),[2]),ptS({bac:-40},{duc:2})],
   t1:[ptS({tamco:-1},{duc:2,mat:1}),ptS({danh:-1},{duc:2}),ptS({suc:-1},{mat:1,duc:1})],
   x1:[ptX(45,"duc","dua"),ptX(30,"tamco","giu",{suc:-2}),{c:{danh:-2},w:{duc:1}}],

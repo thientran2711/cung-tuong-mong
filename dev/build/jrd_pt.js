@@ -89,7 +89,7 @@ ARC67.pt_hai=ptArc("pt_hai",{o:"pf",t:"Thuyền thứ tư chưa tới",w:"emp",s
   {n:"Thưa: thiếp không biết, chỉ biết người trên thuyền còn cần gạo nước",f:"le",wx:"ngài thấy ngươi thật thà",lx:"không ai cho là ngươi hy vọng",rt:"Hoàng thượng im lặng rất lâu."}]},
  x1:{h:"Triều nghị về nửa phần cống",w:"emp",t:"Sáng hôm sau, Hộ bộ tâu: {land} còn nợ nửa phần cống. Có người xin bắt sứ đoàn ở lại đến khi cống đủ. Hoàng thượng nhìn về phía rèm, nơi ngươi đứng.",o:[
   {n:"Tâu: biển lấy cống, không lấy lòng {land}; xin chờ đến gió mùa",e:["win","lose"],rt:"Hoàng thượng phán: chờ đến gió mùa. Hộ bộ cúi đầu.",rf:"Hộ bộ tâu tiếp: lòng mà không có cống thì là lòng suông. Cả triều cười."},
-  {n:"Dâng hồi môn của mình bù phần cống",e:["win2","mid"],rt:"Mười tấm gấm và đôi bình sứ trong hồi môn của ngươi được ghi vào sổ cống. Hộ bộ không còn gì để nói.",rf:"Hộ bộ nhận hồi môn, nhưng vẫn ghi: {land} cống chưa đủ."},
+  {n:"Dâng hồi môn của mình bù phần cống",e:["win2","mid"],rt:"Mười tấm gấm và đôi bình sứ trong hồi môn của ngươi được ghi vào sổ cống. Hộ bộ không còn gì để nói.",rf:"Hộ bộ nhận hồi môn, nhưng vẫn ghi: {land} cống chưa đủ.",go:()=>ptO("hoimon","kho")},
   {n:"Xin viết thư về {land} đòi cống bù",e:"mid",lx:"{land} mang nợ với Đại Hy",rt:"Thư đi theo thuyền buôn Tân La. Triều nghị khép lại."}]}},
  E:{win:{tag:"Chờ gió mùa",w:"emp",t:"Hoàng thượng cho sứ đoàn ở lại chờ gió mùa, không bắt ai. Người {land} trong kinh cúi chào ngươi mỗi khi gặp."},
   win2:{tag:"Hồi môn thay cống",w:"emp",t:"Hồi môn của ngươi nằm trong kho Đại Hy với tên {land}. Hoàng thượng nói với Thái hậu: “Nàng ấy trả nợ cho cả một nước.”"},
@@ -169,7 +169,7 @@ rdDef("pt_hai",6,{t:"Người giữ kiêng",w:"emp",sj:"Thân Lão, người gi�
 rdDef("pt_hai",7,{t:"Thương thuyền Tân La",w:"emp",sj:"thương chủ Tân La Kim Hựu Thành",cast(A){if(ptO("nhatky")==="namlao")ptO("nhatky","huuthanh");return rdCast(A,["v"])},
  g:"Thương chủ Tân La Kim Hựu Thành cập bến Minh Châu, xin gặp người của ngươi. Thuyền ông đi qua hòn đảo trong thư Nham Lão: đảo trống, chỉ còn xác thuyền và dấu lửa. Ông nhặt được cuốn nhật ký hải trình của thuyền thứ tư, và biết ai đã đến đảo trước ông.",
  p:[["s1","s2"],["c1","c2"],["t1"],["x1"]],
- B:{s1:{h:"Thương chủ vào kinh",w:"emp",if:RDW(1),t:"Vì chuyện Thân Lão, cả bến Minh Châu biết công chúa {land} giữ lời. Kim Hựu Thành tự mình lên kinh, xin vào Hồng Lư tự gặp ngươi.",o:[
+ B:{s1:{h:"Thương chủ vào kinh",w:"emp",if:RDW(1),t:()=>(ptAlive("thanlao")&&ptP("thanlao","w")==="cang"?"Thân Lão còn sửa buồm ở bến, nên cả bến Minh Châu biết":"Cả bến Minh Châu biết")+" công chúa {land} giữ lời. Kim Hựu Thành tự mình lên kinh, xin vào Hồng Lư tự gặp ngươi.",o:[
   {n:"Gặp ông ở Hồng Lư tự, có quan làm chứng",f:"tra",wx:"việc gặp thương nhân có người chứng",lx:"ông nói ít trước mặt quan",rt:"Kim Hựu Thành cúi chào kiểu Tân La, đặt cuốn nhật ký lên án nhưng tay vẫn giữ.",go:()=>{ptMove("huuthanh","kinh");return ptMeet("huuthanh")}},
   {n:"Cho {maid} ra gặp riêng",f:"mua",wx:"ông nói thật hơn",lx:"phi tần gặp riêng thương nhân, dễ thành chuyện",rt:"{maid} về kể: ông muốn một giấy phép buôn ở Minh Châu.",go:()=>{ptMove("huuthanh","kinh");return ptMeet("huuthanh")}},
   {n:"Mời đại sứ cùng gặp",f:"tra",wx:"có người {land} nhận đồ của {land}",lx:"đại sứ và thương nhân có thù cũ",rt:"Đại sứ nhận ra chữ của Nham Lão trên bìa nhật ký.",go:()=>{ptMove("huuthanh","kinh");ptMeet("kimthanh");return ptMeet("huuthanh")}}]},
@@ -188,14 +188,14 @@ rdDef("pt_hai",7,{t:"Thương thuyền Tân La",w:"emp",sj:"thương chủ Tân 
  t1:{h:"Ai đến đảo trước",w:"emp",t:"Trang cuối nhật ký ghi bằng nét run: “Thuyền buồm đen. Họ hỏi rương nào có ngọc.” Kim Hựu Thành nói: đó là thuyền giặc biển Đông Hải của Ô Cửu.",o:[
   {n:"Tâu ngay lên Hoàng thượng",f:"tra",wx:"triều đình biết kẻ bắt người",lx:"triều đình biết rương có ngọc",rt:"Hoàng thượng sai thủy sư dò tìm thuyền buồm đen."},
   {n:"Báo đại sứ, bàn riêng việc chuộc người",f:"mua",wx:"người {land} lo người {land}",lx:"Đại Hy chưa biết",rt:"Đại sứ nắm tay lại: “Ngọc thì chuộc được, người thì không thể thay.”",go:()=>ptMeet("kimthanh")},
-  {n:"Giữ trang ấy, chưa nói với ai",f:"mua",wx:"có một con bài trong tay",lx:"người trên đảo phải chờ",rt:"Trang nhật ký được ép trong sách kinh của ngươi."}]},
+  {n:"Giữ trang ấy, chưa nói với ai",f:"mua",wx:"có một con bài trong tay",lx:"người trên đảo phải chờ",rt:"Trang nhật ký được ép trong sách kinh của ngươi.",go:()=>ptO("trang","ta")}]},
  x1:{h:"Lời của thương nhân",w:"emp",t:"Kim Hựu Thành biết bến của Ô Cửu. Ông xin dẫn đường, đổi lấy một điều: thương thuyền Tân La được lập thương quán ở Minh Châu.",o:[
   {n:"Tâu xin cho Tân La lập thương quán ở Minh Châu",e:["win","lose"],rt:"Hoàng thượng chuẩn: thương quán Tân La mở ở bến Minh Châu. Kim Hựu Thành quỳ lạy, hẹn ngày dẫn đường.",rf:"Hộ bộ tâu: một phi tần đi xin quyền buôn cho thương nhân ngoại bang. Hoàng thượng gạt đi.",go:(_A,ok)=>ok?ptO("giaythue","huuthanh"):""},
   {n:"Hứa trả bạc khi người về đến bờ",e:["win","mid"],rt:"Kim Hựu Thành nhận lời: người về thì bạc về.",rf:"Ông nhận lời, nhưng không vội."},
   {n:"Cảm ơn ông, để thủy sư tự tìm",e:"mid",lx:"thủy sư không biết đường",rt:"Kim Hựu Thành cúi chào, về thuyền.",go:()=>ptMove("huuthanh","cang")}]}},
- E:{win:{tag:"Người dẫn đường",w:"emp",t:"Thương thuyền Tân La và thuyền thủy sư Đại Hy cùng chờ một con nước. Kim Hựu Thành đứng ở mũi thuyền, chỉ về phía đảo đá."},
+ E:{win:{tag:"Người dẫn đường",w:"emp",t:()=>"Thương thuyền Tân La và thuyền thủy sư Đại Hy cùng chờ một con nước."+(ptAlive("huuthanh")?" Kim Hựu Thành đứng ở mũi thuyền, chỉ về phía đảo đá.":"")},
   mid:{tag:"Biết tên kẻ bắt người",t:"Ngươi biết tên Ô Cửu. Biết tên thì chưa đủ; biển còn rộng."},
-  lose:{tag:"Thương nhân ngoại bang",w:"v",t:"{v} kể: công chúa {land} cấu kết với thương nhân Tân La, đòi quyền buôn cho người ngoài. Kim Hựu Thành về Minh Châu, không ai tiễn.",go:()=>ptMove("huuthanh","cang")}}});
+  lose:{tag:"Thương nhân ngoại bang",w:"v",t:()=>"{v} kể: công chúa {land} cấu kết với thương nhân Tân La, đòi quyền buôn cho người ngoài."+(ptAlive("huuthanh")?" Kim Hựu Thành về bến Minh Châu, không ai tiễn.":""),go:()=>ptMove("huuthanh","cang")}}});
 const PTFREE=()=>{for(const id of ["tieungoc","namlao"])if(ptAlive(id)&&ptP(id,"w")==="hb")ptMove(id,"cang");return""};/* .8: the held people come ashore */
 rdDef("pt_hai",8,{t:"Giặc biển Đông Hải",w:"emp",sj:"thuyền buồm đen của Ô Cửu",cast(A){if(ptO("ruong")==="namlao")ptO("ruong","ocuu");if(ptO("nhatky")==="namlao")ptO("nhatky","ocuu");return rdCast(A,["v"])},
  g:"Thuyền buồm đen của Ô Cửu neo sau một dãy đảo đá ngoài cửa Minh Châu. Hắn gửi vào bờ một mảnh áo của Tiểu Ngọc và một lời: rương cống và mười bảy mạng người, đổi bằng ngọc trai và một bến không ai đuổi.",
@@ -224,10 +224,10 @@ rdDef("pt_hai",8,{t:"Giặc biển Đông Hải",w:"emp",sj:"thuyền buồm đe
   {n:"Xin thủy sư đánh đêm, cứu người",e:["win","lose"],rt:"Thủy sư áp mạn thuyền buồm đen lúc canh ba. Ô Cửu bị bắt sống, rương cống được khiêng về, người {land} lên thuyền Đại Hy, còn đủ.",rf:"Thủy sư áp mạn, giặc phóng lửa. Rương cống chìm theo thuyền buồm đen. Người ta vớt được Nham Lão; Tiểu Ngọc thì không.",go:(_A,ok)=>{if(ok){ptMove("ocuu","nguc");ptO("ruong","kho");if(ptO("nhatky")==="ocuu")ptO("nhatky","ta");return PTFREE()}ptMove("ocuu","hb");ptO("ruong","bien");if(ptO("nhatky")==="ocuu")ptO("nhatky","bien");ptKill("tieungoc");return PTFREE()}},
   {n:"Mang ngọc đến chuộc, thương thuyền Tân La làm trung gian",e:["win2","mid"],rt:"Hộp ngọc đổi lấy người và rương. Ô Cửu giữ lời, nhổ neo đi về phía đông.",rf:"Hộp ngọc đổi được người. Ô Cửu giữ lại rương cống, cười: “Lần sau.”",go:(_A,ok)=>{ptO("ngoctrai","ocuu");ptMove("ocuu","hb");if(ok){ptO("ruong","kho");if(ptO("nhatky")==="ocuu")ptO("nhatky","ta")}return PTFREE()}},
   {n:"Hứa cho Ô Cửu một bến ở Minh Châu, đổi lấy tất cả",e:"mid",lx:"giặc biển có bến trên đất Đại Hy",rt:"Ô Cửu trả người, trả rương, đổi cờ đen lấy cờ thương thuyền. Từ nay hắn neo ở bến Minh Châu như một thương nhân.",go:()=>{ptMove("ocuu","cang");ptO("ruong","kho");if(ptO("nhatky")==="ocuu")ptO("nhatky","ta");return PTFREE()}}]}},
- E:{win:{tag:"Lửa trên đảo đá",w:"emp",t:"Ô Cửu nằm trong ngục Minh Châu. Người {land} về bờ, đủ tên. Thủy sư Đại Hy kể chuyện đêm ấy khắp các bến."},
+ E:{win:{tag:"Lửa trên đảo đá",w:"emp",t:()=>(ptP("ocuu","w")==="nguc"?"Ô Cửu nằm trong ngục Minh Châu. ":"")+"Người {land} về bờ, đủ tên. Thủy sư Đại Hy kể chuyện đêm ấy khắp các bến."},
   win2:{tag:"Ngọc đổi người",w:"emp",t:"Người về, rương về, hộp ngọc của mẫu hậu đi theo thuyền buồm đen. Ngươi không tiếc."},
   mid:{tag:"Người về, biển còn giữ một phần",t:()=>ptP("ocuu","w")==="cang"?"Ô Cửu neo thuyền ở bến Minh Châu. Người ta không biết nên gọi hắn là giặc hay là khách.":"Người về bờ. Rương cống còn nằm trong khoang thuyền buồm đen, ở đâu đó phía đông."},
-  lose:{tag:"Mảnh áo trên sóng",w:"v",t:"Thuyền buồm đen cháy, Ô Cửu thoát. Tiểu Ngọc không về. {v} nói: công chúa {land} gọi binh mà không cứu nổi người của mình."}}});
+  lose:{tag:"Mảnh áo trên sóng",w:"v",t:()=>"Thuyền buồm đen cháy, Ô Cửu thoát."+(ptAlive("tieungoc")?"":" Tiểu Ngọc không về.")+" {v} nói: công chúa {land} gọi binh mà không cứu nổi người của mình."}}});
 
 rdDef("pt_hai",9,{t:"Bến Minh Châu",w:"emp",sj:"những người sống sót của thuyền thứ tư",cast(A){return rdCast(A,["v"])},
  g:"Người của thuyền thứ tư lên bờ Minh Châu, ít hơn tên trong danh sách. Rương cống được khiêng vào nha môn; nhìn kỹ, dải niêm phong đỏ có một chỗ bị cắt rồi dán lại.",
@@ -269,7 +269,7 @@ rdDef("pt_hai",10,{t:"Kiểm cống",w:"emp",sj:"rương cống của {land}",ca
  s2:{h:"Không có nhật ký",w:"emp",if:()=>!PTLOG(),t:"Cuốn nhật ký không ở trong tay ngươi. Ngươi chỉ còn lời người.",o:[
   {n:"Xin gọi Kim Hựu Thành làm chứng",f:"chung",wx:"một người ngoài nói giúp",lx:"thương nhân nói thì kém tin",rt:()=>ptAlive("huuthanh")&&["kinh","cang"].includes(ptP("huuthanh","w"))?"Kim Hựu Thành kể: ông thấy rương còn niêm khi trên đảo.":"Kim Hựu Thành đã đi biển, chỉ gửi được một tờ khai.",go:()=>ptAlive("huuthanh")?ptMeet("huuthanh"):""},
   {n:"Xin gọi Nham Lão làm chứng",f:"chung",wx:"người lái thuyền nói",lx:"lão là người {land}",rt:()=>ptAlive("namlao")?"Nham Lão kể từng ngày nước vào khoang.":"Nham Lão không còn. Chỉ có tên lão trong danh sách.",go:()=>ptAlive("namlao")?ptMeet("namlao"):""},
-  {n:"Nhận: thiếp không có chứng, xin xét theo danh sách",f:"nhuong",wx:"thật thà",lx:"không có gì đỡ",rt:"Tự khanh gật đầu, đọc tiếp danh sách."}]},
+  {n:"Nhận: thiếp không có chứng, xin xét theo danh sách",f:"nhuong",/* pt6c: "nhận" = she admits, no object changes hands */wx:"thật thà",lx:"không có gì đỡ",rt:"Tự khanh gật đầu, đọc tiếp danh sách."}]},
  c1:{h:"Chiếc trâm ngọc trai",w:"v",need:["v"],t:"{v} dâng một chiếc trâm ngọc trai, nói cung nữ tìm thấy dưới gối trong cung ngươi: ngọc đúng loại trong rương cống.",o:[
   {n:"Xin gọi thợ bạc xem ngọc từ đâu",wx:"ngọc có nguồn gốc của nó",lx:"thợ bạc có thể nói sai",go:(A,ok,G)=>{if(!ok)rdOan(A,"v",G[0]);return ok?ptO("tram","kho"):ptO("tram","v")},rt:"Thợ bạc nói: ngọc này mài kiểu Đại Hy, không phải ngọc {land}.",rf:"Thợ bạc ngập ngừng: ngọc giống ngọc {land}."},
   {n:"Hỏi lại: cung nữ nào tìm thấy, vào cung thiếp lúc nào",wx:"lật lại câu hỏi về phía {v}",lx:"{v} giận",go:(A,_ok,G)=>{rdOan(A,"v",G[0]);return ptO("tram","kho")},rt:"Cung nữ ấy lắp bắp, không nhớ giờ."},
@@ -284,7 +284,7 @@ rdDef("pt_hai",10,{t:"Kiểm cống",w:"emp",sj:"rương cống của {land}",ca
   {n:"Không đụng đến nhà {v}",f:"nhuong",wx:"không thêm thù",lx:"kẻ cắt niêm thoát",rt:"Tên biểu huynh {v} không được ai nhắc."}]},
  x1:{h:"Trước án Hồng Lư tự",w:"emp",t:"Tự khanh hỏi lời cuối: phần thiếu là do biển, do người {land}, hay do người Đại Hy.",o:[
   {n:"Trình đủ chứng, xin tra người cắt niêm",e:["win","lose"],rt:"Biểu huynh {v} bị đánh hai mươi trượng, phải trả ngọc. Sổ cống ghi: {land} cống đủ.",rf:"Chứng không đủ. Tự khanh phán: người giữ danh sách phải chịu. Ngươi bị cấm túc.",go:(_A,ok)=>ok?"":ptConfine("hai10")},
-  {n:"Nhận phần thiếu, xin bù bằng hồi môn, không truy ai",e:["win2","mid"],rt:"Hồi môn của ngươi bù đủ. Hoàng thượng khen ngươi biết giữ hòa khí.",rf:"Hồi môn bù được nửa. Sổ còn ghi nợ."},
+  {n:"Nhận phần thiếu, xin bù bằng hồi môn, không truy ai",e:["win2","mid"],rt:"Hồi môn của ngươi bù đủ. Hoàng thượng khen ngươi biết giữ hòa khí.",rf:"Hồi môn bù được nửa. Sổ còn ghi nợ.",go:()=>ptO("hoimon","kho")},
   {n:"Xin Hoàng thượng tự xét",e:"mid",lx:"không ai được rửa tiếng",rt:"Hoàng thượng phê: việc cống phẩm khép lại, không truy."}]}},
  E:{win:{tag:"Niêm phong biết nói",w:"emp",t:"Cả triều biết rương cống đã bị mở ở đâu. {v} không dự yến ba tháng."},
   win2:{tag:"Bù cống, giữ hòa khí",w:"emp",t:"Sổ cống sạch. Không ai mất mặt, trừ hồi môn của ngươi."},
@@ -388,7 +388,7 @@ rdDef("pt_su",5,{t:"Hồi thư",w:"emp",sj:"hồi thư của Đại Hy gửi {la
   {n:"Khen bản thảo, không đổi gì",f:"thang",wx:"Lễ bộ nhớ ơn",lx:"{land} sẽ đọc chữ ‘Vương’",rt:"Lễ bộ thượng thư nghe tin, gửi lời cảm tạ."},
   {n:"Xin thêm một câu thăm sức khỏe {quan}",f:"giu",wx:"thư có hơi người",lx:"thêm câu là thêm chuyện",rt:"Hoàng thượng tự tay thêm câu thăm hỏi."}]},
  s2:{h:"Hồng Lư tự viết thay",w:"emp",if:RDW(0),t:"Hồng Lư tự khanh được giao viết hồi thư một mình. Ông gửi người sang hỏi ngươi: chữ gì thì {land} chịu nhận?",o:[
-  {n:"Gửi lại một tờ giảng các chữ {land} chịu được",f:"giu",wx:"Tự khanh có cái để dựa",lx:"Lễ bộ biết ngươi nhúng tay",rt:"Tự khanh viết theo tờ giảng của ngươi."},
+  {n:"Gửi lại một tờ giảng các chữ {land} chịu được",f:"giu",wx:"Tự khanh có cái để dựa",lx:"Lễ bộ biết ngươi nhúng tay",rt:"Tự khanh viết theo tờ giảng của ngươi.",go:()=>ptO("togiang","hl")},
   {n:"Đáp: Đại Hy viết gì, {land} nhận nấy",f:"thang",wx:"Đại Hy thấy ngươi một lòng",lx:"đại sứ đau lòng",rt:"Tự khanh viết chữ ‘Vương’."},
   {n:"Mời đại sứ đến bàn với Tự khanh",f:"giu",wx:"hai bên tự nói với nhau",lx:"chậm",rt:"Đại sứ và Tự khanh ngồi đến canh hai.",go:()=>ptMeet("kimthanh")}]},
  c1:{h:"Phụ thân {v} muốn thêm một câu",w:"v",need:["v"],t:"Phụ thân {v} ở Lễ bộ xin thêm vào hồi thư một câu: ‘{land} mỗi năm phải sang triều cống.’ Câu ấy biến minh ước thành lệ cống.",o:[
