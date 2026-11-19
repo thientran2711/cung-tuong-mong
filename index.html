@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"f69d1931","t":"2026-11-19T09:30Z","c":"coop-cyc: a local Worker URL (wrangler dev) gets the same browser flags as the coop-thin-f* tests","b":"811b9e544633","h":[{"s":"fcff501a+","t":"2026-11-18T20:41Z","c":"map-labels-missing r2c: tag touches its own building or keeps a short leader (\u003c=90px) ending on the real slip/info rect, dot >=40px from ot…"},{"s":"c67d248d+","t":"2026-11-18T19:53Z","c":"ag-deed-perf: site build (index.html, sw.js)"},{"s":"6aab33ad","t":"2026-11-18T20:05Z","c":"KIT_REQUESTS: K-Q2-1 DONE 048f3c7"},{"s":"343d4557","t":"2026-11-18T19:03Z","c":"shop-panel r3: kind sub-tabs under Mua|Bán (kit tab row, chest groups), test + KIT.md"},{"s":"a5013222+","t":"2026-11-18T18:03Z","c":"shown-odds r2 review: site build (index.html / sw.js / assets.json rebuilt)"},{"s":"08774c0e+","t":"2026-11-18T17:38Z","c":"ag-stf2 (test only): bribe histogram picks a servant whose lòng moves her bribe odds. Root of the 'disloyal one takes more' red (npc ~3/20,…"},{"s":"0351e140","t":"2026-11-18T16:48Z","c":"shop-panel: «Để ta xem» outside option, 3-column Mua/Bán grid, smallest picture strip, test"},{"s":"ebf25660+","t":"2026-11-18T15:29Z","c":"Phi tần, Hoàng thượng, Thái hậu và cung nhân nay tự lo việc mình mỗi ngày theo cùng một luật, cùng một giá và cùng một cơ may như ngươi; ta…"},{"s":"9f9c6c2b+","t":"2026-11-18T14:26Z","c":"shown-odds-one-path r1: plant on the spot is done in person (actCtx x.here, no sent-servant pen); Vì sao names spy knowledge (whyKnow); tes…"},{"s":"aa997f3c+","t":"2026-11-18T13:46Z","c":"look-fx r13: index.html / sw.js rebuilt from merged sources"}]};
+window.CTM_BI={"s":"e6ad9a29+","t":"2026-11-19T09:30Z","c":"coop-thin F5: generated files rebuilt after the f4-r1 merge","b":"e334648caa1c","h":[{"s":"7e1fa10f","t":"2026-11-19T09:03Z","c":"review coop-thin-f3 r1 fix: her F3 act sounds play on her phone (kitSfx in TH UICAP)"},{"s":"4ed2831d+","t":"2026-11-19T07:18Z","c":"law3-cost-only: index.html / sw.js regenerated"},{"s":"0da546e9","t":"2026-11-19T07:16Z","c":"role-parity-drift r1: build line"},{"s":"eff20119+","t":"2026-11-19T06:33Z","c":"ev-pic-coverage: picture required in M/L/XL frames only, S frames reported apart (owner OD 19/11 ~04:55Z)"},{"s":"a64f06c7+","t":"2026-11-19T06:29Z","c":"seal-lean-2 r2: rebuild site"},{"s":"38af6387","t":"2026-11-19T06:23Z","c":"minister-agents review r1: one core (gift regard + backs in BAL.tdCourt, j55 reads tuyen.pow / imp.deep / clanRel), censor name unique in e…"},{"s":"18a9b64c+","t":"2026-11-19T05:22Z","c":"monthly-allotment r6 (reviewer): stat names from the one NAMES table (drop private STAT_NM); candle note puts the burnt candle in the card'…"},{"s":"6b041ea7+","t":"2026-11-19T05:21Z","c":"odds-no-unknown: vu oan hints no longer repeat the odds word the meter now shows"},{"s":"6eb0ab3d+","t":"2026-11-19T05:37Z","c":"hall-names r2: runtime test hall-names-lines.js (houseName plaque, palace list line, visit line, 'cùng cung' note; Fold + iPad)"},{"s":"c4c25bbd+","t":"2026-11-19T04:41Z","c":"head-marker-video: viewport-size recording, opening dialog cleared, maid notice kept unread, white plain state swapped at half time on the …"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -29548,6 +29548,8 @@ function wkRawOfPts(p){return [0,4,7,10][p]||0}
 const WDEF={cam:"khuc",ky:"the",thi:"tho",hoa:"tranh",vu:"mua",y:"huong",theu:"theu",nau:"mon"};
 function wkKindsOf(a){return Object.keys(WK).filter(k=>WK[k].a===a)}
 function wkSubj(kind){const K=WK[kind],E=S.emp;if(kind==="mon")return E.known.dish?E.likes.dish:pick(LIKES.dish);if(kind==="bhoa")return E.known.flower?E.likes.flower:pick(LIKES.flower);if(kind==="khuc"&&E.known.music)return "theo "+E.likes.music;return pick(K.sub)}
+/* a subject wkSubj or a recipe (jwkr wkrSubj) can give (co-op thin F5 r1: the host checks the subject of her work end against it; a word never comes from the wire) */
+function wkSubjOK(kind,s){const K=WK[kind];if(s==null)return true;if(typeof s!=="string"||!K)return false;const L=typeof LIKES==="object"&&LIKES||{};const R=typeof WKR==="object"&&WKR[kind]||[];/* + a recipe's (jwkr wkrSubj) */return (K.sub||[]).concat(L.dish||[],L.flower||[],(L.music||[]).map(x=>"theo "+x),R.map(r=>r.n),R.filter(r=>r.like).map(r=>r.like),R.filter(r=>r.like).map(r=>"theo "+r.like)).includes(s)}
 function wkName(kind,subj){const K=WK[kind];return kind==="mon"?`Bát ${subj}`:kind==="bhoa"?`Bình ${subj}`:kind==="theu"?`Khăn thêu ${subj}`:kind==="huong"?`Túi hương ${subj}`:`${K.w} «${subj}»`}
 const WMON=["","giêng","hai","ba","tư","năm","sáu","bảy","tám","chín","mười","mười một","chạp"],WYR=["","nhất","hai","ba","tư","năm","sáu","bảy","tám","chín","mười"];
 function wkDate(){return `tháng ${WMON[S.month]||S.month}, năm thứ ${WYR[S.year]||S.year}`}
@@ -29628,10 +29630,11 @@ function wkFinTxt(K){return !K||!K.fin?"":wkFinLeft()>0?`${plain(fmt(K.fin))}, m
 /* lesson progress points of one play (0..3 by BAL.mgTier.lessonPts): ONE rule for her lesson (openMG below) and an NPC's (j85 npcStudyDo, mg2) */
 function wkLessonPts(raw){const P=BAL.mgTier.lessonPts;return raw>=P[2]?3:raw>=P[1]?2:raw>=P[0]?1:0}
 /* the end of every lesson / practice game (one function: the game's onDone ends here; co-op thin F5 runs it on the host with her score).
-   m = the lesson (S.mg: k, mode, wk = the work picked, pa = a practice / Học lối mới / resumed practice: how / qx = its own words);
+   m = the lesson (S.mg: k, mode, wk = the work picked, pa = a practice / Học lối mới / resumed practice: hw = the key of its own words in WK_HOW);
    cb = the lesson-progress callback of openMG (absent: the lesson's gain itself, artLessonGain) */
-function wkLessonEnd(k,m,raw,o,cb){const sk2=!!(o&&o.skipped);
- if(m.pa){S.mg=null;if(sk2)log(m.qx||"Tự học nhanh: không ra thành phẩm.");else wkFinishLesson(k,m.wk||{kind:WDEF[k],mat:0},cl(Math.round(raw),0,10),m.how||"tự học");render();return}
+const WK_HOW={rcp:{how:"học với thầy",qx:"Học nhanh: không ra thành phẩm."}};/* m.hw: the practice's own words (Học lối mới) */
+function wkLessonEnd(k,m,raw,o,cb){const sk2=!!(o&&o.skipped);const H=WK_HOW[m.hw]||{};
+ if(m.pa){S.mg=null;if(sk2)log(H.qx||"Tự học nhanh: không ra thành phẩm.");else wkFinishLesson(k,m.wk||{kind:WDEF[k],mat:0},cl(Math.round(raw),0,10),H.how||"tự học");render();return}
  const pick=m.wk||{kind:WDEF[k],mat:0},ms=S.master?2:1;raw=cl(Math.round(raw||0),0,10);const pts=sk2?(o.ok!=null?(o.ok?1:0):(kitQuickRoll()?1:0)):wkLessonPts(raw)/* ONE tier rule (ag) */;
  if(m.mode==="prac"){S.mg=null;if(sk2)log("Tự học nhanh: không ra thành phẩm.");else wkFinishLesson(k,pick,raw,"tự học");render();return}
  (cb||(g=>artLessonGain(m,g)))(pts*ms);if(sk2)return;try{wkFinishLesson(k,pick,raw,m.mode==="self"?"tự học":m.mode==="th"?"học với Thái hậu":"học");render()}catch(x){}}
@@ -59348,7 +59351,7 @@ function rcpTchAsk(k,then){const a=ARTS.find(x=>x.k===k),fee=rcpFeeNq(),O=[];con
 function rcpNewSt(k){return wkKindsOf(k).filter(x=>RCP_ST[x]).some(x=>RCP_ST[x].some(s=>!rcpKnows(S,x,s[0])))}
 function rcpMaster(k){if(!S||S.dead||Q.length||S.mg||(S.arts[k]||0)<5||!can(2)||S.suc<BAL.sucNeed.rcp)return;
  rcpTchAsk(k,()=>{wkAsk(k,"teacher",()=>{if(!can(2)||S.suc<BAL.sucNeed.rcp)return;const fee=tchFee(k);if(S.bac<fee)return;apply({suc:-10,bac:-fee});tchPaid(k);spend(2);
-  const pick=wkPend||{kind:WDEF[k],mat:0};wkPend=null;const an=ARTS.find(x=>x.k===k).n;const m=S.mg={k,l:5,mode:"prac",wk:pick,pa:1,how:"học với thầy",qx:"Học nhanh: không ra thành phẩm."};
+  const pick=wkPend||{kind:WDEF[k],mat:0};wkPend=null;const an=ARTS.find(x=>x.k===k).n;const m=S.mg={k,l:5,mode:"prac",wk:pick,pa:1,hw:"rcp"};
   try{playArt({art:k,title:`Học ${an} với thầy`,quick:{n:"Học nhanh",sure:1,win:"không ra thành phẩm"},mgEnd:1,onDone:(raw,o)=>wkLessonEnd(k,m,raw,o)})}catch(x){S.mg=null}})})}
 document.addEventListener("click",ev=>{const b=ev.target.closest&&ev.target.closest("[data-rcpmt],[data-rcpls],[data-rcpq]");if(!b||b.disabled)return;ev.stopPropagation();
  if(b.dataset.rcpmt)rcpMaster(b.dataset.rcpmt);else if(b.dataset.rcpls)rcpListOpen(b.dataset.rcpls);else rcpAskQ(b.dataset.rcpq)},true);
@@ -79239,7 +79242,8 @@ reg10("shelfPlantGain",["v"],{dec:a=>{const x=decA9(["v"],a);if(!x)return null;r
 /* Tài nghệ lessons / practice / Học lối mới: k, the lesson (S.mg as it was), the play, {skipped}; the host rolls a quick lesson (o.ok null) */
 reg10("wkLessonEnd",["v","v","v","v"],{enc:A=>{const m=A[1];if(!m||typeof m!=="object")return null;const c=Object.assign({},m);delete c.cost;return encA9(["v","v","v","v"],[A[0],c,A[2]==null?0:A[2],{skipped:!!(A[3]&&A[3].skipped)}])},
  dec:a=>{const x=decA9(["v","v","v","v"],a);if(!x)return null;const [k,m,raw,o]=x;const sk=!!(o&&o.skipped);
-  if(!ARTS.some(y=>y.k===k)||!m||m.k!==k||!["self","teacher","th","prac"].includes(m.mode)||(m.wk&&(!WK[m.wk.kind]||![0,1,2].includes(m.wk.mat||0))))return bad("wkLessonEnd");
+  if(!ARTS.some(y=>y.k===k)||!m||m.k!==k||!["self","teacher","th","prac"].includes(m.mode)||(m.wk&&(!WK[m.wk.kind]||![0,1,2].includes(m.wk.mat||0)||!wkSubjOK(m.wk.kind,m.wk.subj)))||(m.hw!=null&&!(m.hw in WK_HOW)))return bad("wkLessonEnd");
+  /* r1: no word of hers travels (her work's subject = one of wkSubj's, her practice's words = WK_HOW by key) */
   if(!sk&&!inR(raw,MSC().raw))return bad("wkLessonEnd");return [k,m,sk?0:raw,{skipped:sk}]},
  pre:A=>payAA(sc=>{const sk=!!A[3].skipped;sc.skip=sk;sc.raw=sk?null:cl(Math.round(A[2]||0),0,10);sc.ok=!sk&&sc.raw>=5})});
 /* Tứ đức: tdFinish pays its own cost; a quick play is rolled here (TDS.q, as the game's own quick button) */
@@ -79290,7 +79294,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="811b9e544633";window.CTM_BUILD=BUILD;
+const BUILD="e334648caa1c";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
