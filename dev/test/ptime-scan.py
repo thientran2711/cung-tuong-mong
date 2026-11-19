@@ -122,7 +122,7 @@ KNOWN_BS = {'j10.js': 'bestSent itself + plantServ (Cài người: §19 / cx2:pl
  'j8.js': 'act previews / doAct (§6)', 'jptime.js': 'the mechanism', 'jagacts2.js': 'cx2:plantSrv weight (PT_NPC)', 'j15.js': 'card text (runner line)',
  'jagstf2.js': 'stf2Ord: the sent servant answers inside runAct (lands at due)', 'j29.js': 'runAct wrapper: the sent servant answers (inside runAct)',
  'j6.js': 'card text («phải sai người»)', 'j78.js': 'preview of runAct (confess risk)', 'jagknow.js': 'tmFear: effect inside runAct', 'jaudit.js': 'display (odds why / runner bar)',
- 'jhc.js': 'runner pick (who runs her errands)', 'jerr.js': 'MAIN errand-scene errRunner: fallback ledger ONLY when the parallel-time core is off (errRun passes straight through when errOn() = PTIME.on())', 'jwhy.js': 'spyAgent / why rows: her spy = §1, NPC spy via runAct §18',
+ 'jhc.js': 'runner pick (who runs her errands)', 'jerr.js': 'MAIN errand-scene: errRunner = fallback ledger when the core is off; with the core on, errPtRun picks HER runner (bestSent, the same pick as ptHarmSend; jptime ptRunner for named flows) for gates the core does not adapt and writes the task into the core S.away via PTIME.send (fixer #6)', 'jwhy.js': 'spyAgent / why rows: her spy = §1, NPC spy via runAct §18',
  'jht.js': 'Dò hỏi gia thế: people OUTSIDE the palace (quý nữ / sons\' families) = OPEN, parked by Foreman D with j54 / j55 (week clock)'}
 for bn, why in sorted(KNOWN_BS.items()): print(f'| {bn} bestSent( | {why} | known |')
 for f in sorted(glob.glob(os.path.join(B, 'j*.js'))):

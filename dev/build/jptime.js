@@ -108,7 +108,11 @@ setTimeout(()=>{try{ptIconReg()}catch(e){ptErr("iconReg",e)}},0);
 /* ---------- the ledger: a person away is away (law 6b) ---------- */
 function ptLedger(){if(!S||typeof j95on!=="function"||!j95on())return false;const R=S.roster;if(!R||!R.P)return false;const kh=ptKH(),b0=bid()*kh;let ch=false;
  for(const a of ptZ()){if(a.back||!R.P[a.who])continue;const e=R.P[a.who];
-  for(let i=0;i<e.length;i++){const K=b0+i;if(K>=a.t0&&K<a.due){const why=`${a.by==="me"?"ngươi":a.byNm||"chủ"} sai ${a.lbl||"đi việc"}`;const x=[a.place||e[i][0],"errand",a.tgt||null,why];
+  /* ONE ROW SHAPE with MAIN's errand scene (jerr errLedger, fixer #6): a person of HERS keeps her slot (the place her day put her) with the activity
+     "errand" — the stage keeps her token (hidden + the kit chip «đang đi …») so she is SEEN walking off and back (OD 18/11 ~20:05Z); she is still busy
+     (j95sBusy "errand"), never followed nor sent again, and the target stays in the row. NPC senders keep the target place (their stage is not hers). */
+  const mine=a.by==="me";
+  for(let i=0;i<e.length;i++){const K=b0+i;if(K>=a.t0&&K<a.due){const why=`${mine?"ngươi":a.byNm||"chủ"} sai ${a.lbl||"đi việc"}`;const x=[mine?((e[i]&&e[i][0])||J95OUT_):(a.place||e[i][0]),"errand",a.tgt||null,why];
     if(!e[i]||e[i][0]!==x[0]||e[i][1]!=="errand"){e[i]=x;ch=true}}}}
  if(ch)try{const k=j95kh();S.where=j95view(R,k);R.m[k]=j95counts(R,k);if(typeof j95stage==="function")j95stage(R,k)}catch(e){ptErr("view",e)}
  return ch}
@@ -118,7 +122,7 @@ function ptLedger(){if(!S||typeof j95on!=="function"||!j95on())return false;cons
  if(typeof nextBuoi==="function"){const nb0=nextBuoi;nextBuoi=function(){const r=nb0.apply(this,arguments);try{if(ptOn()){ptTick();ptLedger()}}catch(e){ptErr("buoi",e)}return r}}
  if(typeof j95sync==="function"){const js0=j95sync;j95sync=function(){const r=js0.apply(this,arguments);try{if(ptOn()&&ptZ().length)ptLedger()}catch(e){ptErr("j95sync",e)}return r}}
 }catch(e){ptErr("wire",e)}})();
-window.PTIME={on:ptOn,now:ptNow,row:ptRow,away:ptAwayOf,busy:ptBusy,lockWhy:ptLockWhy,send:ptSend,tick:ptTick,wait:ptWait,waitOk:ptWaitOk,next:ptNext,news:ptNews,mine:ptMine,when:ptWhen,reg:ptReg,x:ptX,stat:PT.stat,
+window.PTIME={on:ptOn,now:ptNow,/* true while the core lands tasks (its runners call the game's own acts: no new send from them) */landing:()=>ptBusyTick||!!PT.landing,row:ptRow,away:ptAwayOf,busy:ptBusy,lockWhy:ptLockWhy,send:ptSend,tick:ptTick,wait:ptWait,waitOk:ptWaitOk,next:ptNext,news:ptNews,mine:ptMine,when:ptWhen,reg:ptReg,x:ptX,stat:PT.stat,
  /* receiver side (OD 18/11 ~21:15Z): orders to her waiting as notices — for the ONE «tin» panel (MAIN errand-scene r2 lists them; no second panel):
     orders() = [{id, pid, byNm, title, due}], ordWhen(o) = "trả lời trước …", answer(id) = open its answer card (4 answers; Việc chủ sai 3) */
  orders:()=>(S&&Array.isArray(S.ordQ)?S.ordQ.map(o=>({id:o.id,pid:o.pid,byNm:o.byNm,title:o.title,due:o.due})):[]),ordWhen:o=>`trả lời trước ${ptWhen(o.due)}`,
