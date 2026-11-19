@@ -27,7 +27,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   try{j95sync(false,true)}catch(e){}const RP=S.roster&&S.roster.P["mm:me"];o.led=RP?RP.map(e=>e[1]):null;
   o.landEarly=!!(aw&&aw.back);
   /* 3 lands at due */
-  const s0=S.logSeq;spend(R.spy.n-R.spy.o);o.used3=used;o.back=!!(aw&&aw.back);o.rep=aw&&aw.rep?{t:aw.rep.t,L:aw.rep.L.length}:null;o.news=PTIME.news().length;o.q=Q.length;
+  const s0=S.logSeq;spend(R.spy.n-R.spy.o);o.used3=used;o.back=!!(aw&&aw.back);o.rep=aw&&aw.rep?{t:aw.rep.t,L:aw.rep.L.length}:null;o.news=PTIME.news().length;/* only a modal about this send counts (a random world event may queue on its own while time passes) */o.q=Q.filter(x=>aw&&String(x.t||"").includes(aw.nm||"\u0000")).length;
   o.ledAfter=S.roster&&S.roster.P["mm:me"]?S.roster.P["mm:me"].map(e=>e[1]):null;
   /* panel reads the news */
   const pn=ptPanel();o.panel=!!(pn&&Array.isArray(pn.facts)&&pn.facts.join(" ").length>20&&!pn.h);o.news2=PTIME.news().length;
@@ -106,7 +106,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   const far=liveRivals(true).filter(v=>v!==m&&v!==S&&v.alive&&!v.out&&palaceOf(v)&&palaceOf(v)!==mk);
   for(const k of ["spy","plant","poison"])for(const t of far.slice(0,2)){toB0();S.place="home";S.srv.lau=0;const pl=palaceOf(t);const kind=k==="spy"?"spy":k==="plant"?"plant":"harm";
    const oq=give(k,t);if(!oq){o.rows.push({k,t:t.id,none:1});continue}const N=ptRecvN(pl,kind,0),H=ptRecvN(pl,kind,1);const c=click(oq,0);
-   o.rows.push({k,pl,N,H,used:c&&c.used,shown:c&&/tốn: (\d+) khắc/.exec(c.x||"")?+/tốn: (\d+) khắc/.exec(c.x)[1]:null,at:S.place,left:S.ordQ.length,logs:c&&c.logs})}
+   o.rows.push({k,pl,N,H,used:c&&c.used,shown:c&&/tốn: (\d+) khắc/.exec(c.x||"")?+/tốn: (\d+) khắc/.exec(c.x)[1]:null,at:S.place,exp:(srvM()&&pl===palaceOf(srvM()))?"home":pl,left:S.ordQ.length,logs:c&&c.logs})}
   /* refused walk (Tân Giả khố): the order stays, nothing paid */
   {toB0();S.place="home";const t=far[0];const oq=t&&give("spy",t);if(oq){S.srv.lau=1;const c=click(oq,0);o.refused={used:c&&c.used,left:S.ordQ.length,same:!!(S.ordQ[0]&&S.ordQ[0].id===oq.id),pass:!!(S.acPass&&S.acPass[palaceOf(t)]&&accHas(S,palaceOf(t)))};S.srv.lau=0}}
   /* walk 0 (a consort in the master's own palace, or the errand at home): never 0 khắc, qua loa = hết lòng − 1, charged = shown */
@@ -121,7 +121,7 @@ const res=[];const ok=(c,m,x)=>{res.push(!!c);console.log((c?'ok  ':'FAIL')+' '+
   o.errs=PT.stat.errs.slice();return o});
  if(r3)console.log(JSON.stringify(r3));
  const R3=r3?r3.rows.filter(x=>!x.none):[];
- ok(!r3||(R3.length>=3&&R3.every(x=>x.used===x.N&&x.shown===x.N&&x.at===x.pl&&x.left===0&&x.logs>0&&x.N-x.H===1)),"11 cnvOrd answer to ANOTHER palace (spy/plant/poison): the order is her pass; used == shown, she is there, the deed ran, the order gone only after",R3);
+ ok(!r3||(R3.length>=3&&R3.every(x=>x.used===x.N&&x.shown===x.N&&(x.at===x.pl||x.at===x.exp)&&x.left===0&&x.logs>0&&x.N-x.H===1)),"11 cnvOrd answer to ANOTHER palace (spy/plant/poison): the order is her pass; used == shown, she is there, the deed ran, the order gone only after",R3);
  ok(!r3||(r3.refused&&r3.refused.used===0&&r3.refused.left===1&&r3.refused.same&&!r3.refused.pass),"11 a refused walk keeps the order (same deadline), nothing paid, no pass left",r3&&r3.refused);
  ok(!r3||(r3.zero.every(z=>z.Hh>=r3.min&&z.F-z.Hh===1)&&(!r3.half0||(r3.half0.used===r3.half0.H&&r3.half0.H>=r3.min&&r3.half0.left===0))),"11 «Giúp qua loa» never 0 khắc (≥ BAL.ptime.taskMin), always one khắc under hết lòng; walk-0 click charged = shown",{z:r3&&r3.zero,h:r3&&r3.half0});
  ok(!r3||!r3.errs.length,"11 no jptime errors",r3&&r3.errs);
