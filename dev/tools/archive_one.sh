@@ -5,7 +5,7 @@ for try in 1 2 3 4 5 6; do
   git fetch -q origin $B && git reset -q --hard origin/$B && git clean -fdq dev/archive
   F=dev/handover/$N.md; cp $F /tmp/_before_$N.md
   python3 dev/tools/archive_move.py $F "$@" || exit 1
-  A=$(ls dev/archive/$N-*.md | head -1)
+  A=$(ls -t dev/archive/$N-*.md | head -1)  # newest = the file archive_move.py just appended to
   # nothing lost: every line before is in live or archive (multiset check)
   cat $F $A | sort > /tmp/_a.txt; sort /tmp/_before_$N.md > /tmp/_b.txt
   [ "$(comm -23 /tmp/_b.txt /tmp/_a.txt | wc -l)" = 0 ] || { echo LOST LINES; exit 1; }
