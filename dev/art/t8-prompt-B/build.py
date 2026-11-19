@@ -1394,6 +1394,10 @@ def gen_refs(argv,prompt):
     """A0 reference list (owner order): image 1 = style image, image 2 = her own live picture (face only; re-make states: her live tier+age picture), image 3 = royal swatch (only when the prompt carries the ROYAL3 sentence)."""
     a=[x for x in argv if not x.startswith("--")]; age=argv[argv.index("--age")+1] if "--age" in argv else "a18"
     own={"name":"own live t1 of %s at %s (a65 = her a65 t1 / live picture) = FACE only; re-make states: her live tier+age picture"%(a[0] if a else "?",age)}
+    _id=a[0] if a else ""
+    if kc_drawn(_id):   # B8 (owner Lượt 543/551; ROOT-51 old-ref clean-up): ONE identity ref = her set-B KC_REFS cut; never the style image 6AbGv6EiJO, never img/fig-*/hd t1
+        if "--nostyle" not in argv: raise SystemExit(f"B8: {_id} uses ONE reference (her KC_REFS cut) -> build with --nostyle (the style image 6AbGv6EiJO is retired)")
+        own={"name":f"her ONE identity reference = KC_REFS cut of {_id} (set B, python3 dev/art/kc_ref.py {_id})","magnific_id":KC_PEOPLE[_id]["ref_id"]}
     r=[{"image":1,**own}] if "--nostyle" in argv else [{"image":1,**REF_STYLE},{"image":2,**own}]   # ROOT-38: owner order 1 style, 2 own, 3 swatch
     if "--state" in argv and re.fullmatch(r"ty[1-8]|cold",argv[argv.index("--state")+1]) and "--nostyle" not in argv: r[0]={**r[0],"magnific_type":"style"}; r[1]={**r[1],"magnific_type":"image","name":"her live picture of this state+age (a65: her NEW 2K a51 re-make) = face + hairstyle"}   # TY0 fix2
     if "--bdq" in argv: r[1]={"image":2,**REF_BDID}   # F2: BD princess identity = face only
@@ -1515,6 +1519,8 @@ if __name__=="__main__":
     if K3_BG_OLD in _o: assert _o.count(K3_BG_OLD)==1; _o=_o.replace(K3_BG_OLD,"",1)
     assert _o.count("IGNORE")==0 or "--golden" in sys.argv,"K3 already present"
     if "--golden" not in sys.argv: _o=_o[:-len(END)]+_k3+END if _o.endswith(END) else _o+_k3   # --golden
+    if "--golden" not in sys.argv and a and kc_drawn(a[0]):   # B8 (ROOT-51, TN4 m13): her KC face words name her own eyes (e.g. m13 "long PHOENIX eyes clearly upturned") -> the generic END eye clause contradicts them: dropped for KC people only
+        _eye=" Eyes soft, warm and round-almond, never slanted or upturned, never teary."; assert _o.count(_eye)==1,"END eye clause"; _o=_o.replace(_eye,"",1); END=END.replace(_eye,"",1)
     if "--golden" not in sys.argv: assert _o.endswith(END) and D9_FOREHEAD not in _o,"D9"; _o=_o[:-len(END)]+D9_FOREHEAD+END   # D9 (Lượt 529): owner words verbatim, every output, right before END = frozen A/B reproduction (golden/pB_*.txt), never a gen mode
     # ROOT-38 REF ORDER (owner A0 REFERENCES l.16): image 1 = style image, image 2 = her own face/live picture, image 3 = royal swatch.
     # Approved texts keep their old numbering in source; only the ordinal words are renumbered here (style first <-> identity second). --nostyle / --golden: unchanged.

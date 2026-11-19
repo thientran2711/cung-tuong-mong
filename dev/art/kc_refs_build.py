@@ -122,7 +122,7 @@ def main():
         rows[pid] = {"id": pid, "m09_ok": "NO", "ref_id": None, "note": why}
     data = {
         "rule": "ART_RULES B8 (owner Lượt 543/551): ONE identity ref = ref_id (Magnific remove_bg cut, pass directly as type image). Face words copied VERBATIM from face_words/person_line. m09_ok NO -> NOT drawn. NEVER img/_review/kc2k (REJECTED) or img/fig-*/hd t1.",
-        "m09": M09, "style_new_character_only": "6AbGv6EiJO", "royal_swatch_t6plus": "TdwDfOyVNR",
+        "m09": M09, "royal_swatch_t6plus": "TdwDfOyVNR",
         "rejected_sets": ["img/_review/kc2k/ -> moved to img/_rejected/kc2k/", "img/_review/kc2k-mass/ -> moved to img/_rejected/kc2k-mass/"], "banned_refs": "dev/art/KC_BANNED_REFS.json (check: python3 dev/art/kc_ref.py --check ...; check_store.py --refs)",
         "people": rows,
     }
