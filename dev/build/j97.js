@@ -239,6 +239,7 @@ const R97L=[
 function arcRare(d){const R=AR(d.a);if(!R)return d;for(const k of ["p","np","sc","c","fx"])if(R[k]!=null)d[k]=R[k];if(R.g&&d.go){const f=d.go,G=R.g;d.go=function(A,ok){return f(A,ok,G)}}return d}
 /* Bắc Địch own roads (jrd_bd.js / jrd_bd2.js, earlier in the script) add their .4 rare rows to BD97, same shape */
 if(typeof BD97!=="undefined")R97L.push(...BD97);
+if(typeof PT97!=="undefined")R97L.push(...PT97);
 R97L.forEach(d=>{R97[arcRare(d).a]=d});
 /* the rare ending becomes a real ending of the arc (k:1, a win for the chapter chain and the origin finale) */
 /* jreg: rare endings registered later (jroad RD97L via RARE97.defs) get their E.r97 the same way */
