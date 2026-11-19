@@ -1003,7 +1003,7 @@ def build_state(c,state,v="v0"):
 # ROUND 9 (owner 18/11 ~23:28Z): default cut = B (--tcut A keeps the round-8 cut); pearl fringe per rank t1-t3 none / t4-t6 short / t7-t8 long; t7/t8 sleeves + t8 crown as the everyday Hoang hau; colour = FIGURE_GATE rule 3 (fresh but restrained, deep toned-down); K3 background line. REFS per gen (FIGURE_GATE A0): style3_girls Xm9tPkMBfo [style] + her own t1 face gOm7wObSXO; t6+ also royal swatch TdwDfOyVNR; never m09 alone, never pink kspkwKx16B.
 # Triều phục (court uniform) builder, cut B only (owner 18/11 ~23:28Z: two long narrow stole panels). Round 11 (19/11): HH-style prompt; --trieu N prints the t-N prompt.
 # Same sentence structure as the 8 ranks (PRE, identity sentence, AGE_TXT, outfit, COLOUR RULE, embroidery+drape, pose, closing). Existing outputs untouched: only reached with --trieu.
-TRIEU_MAIN=("brick-crimson silk, the exact red of the court robe of the Nữ quan (the palace women officials), a medium-saturation, medium-lightness rose-brick red","#99443F","a slightly deeper brick-crimson","#893A37")   # owner 19/11 ~01:40Z: triều phục red = live Nữ quan (tm4 m37 a18) red; measured median of its red robe pixels = #99443F (p25 #893A37, p75 #A65D4F)
+TRIEU_MAIN=("brick-crimson silk, the exact red of the court robe of the Nữ quan (the palace women officials), a medium-saturation, medium-lightness true brick red with no coral, orange or pink cast","#99443F","a slightly deeper brick-crimson","#893A37")   # owner 19/11 ~01:40Z: triều phục red = live Nữ quan (tm4 m37 a18) red; measured median of its red robe pixels = #99443F (p25 #893A37, p75 #A65D4F)
 TRIEU_GOLD=(YEL_NEW,"#EFBD69")
 # ROUND 11 (W104i, owner 19/11 ~00:10Z): written like the approved Hoàng hậu prompt (`build.py c06 v0`): ONE flowing outfit sentence, soft silk with weight, no pile of stiff construction rules.
 # t8 only: the Hoàng hậu mantle (HH sentence verbatim); t1-t7 no mantle. Embroidery density rises per rank (TRIEU field 5); every rank covers chest, shoulders, WHOLE sleeves, skirt and every red area.
@@ -1013,6 +1013,12 @@ TRIEU_COVER="the embroidery is placed with purpose, not scattered: the rank moti
 TRIEU_PANELS="two long narrow court panels of soft silk hang and fold naturally like stoles from the collar down both sides of the front to the hem, each in the rank colour with a gold-edged border and a tassel at its tip, the centre front of the robe showing between them; "
 TRIEU_SLV="wide sleeves of soft silk, each hanging on its own at the side with a broad cuff band in the rank colour, falling in soft folds and clearly separate from the court panels; "
 TRIEU_SLV_HI="very wide, very long layered sleeves of soft flowing silk in two layers, each hanging on its own at the side, falling in soft folds to about the knee, as long and voluminous as the sleeves of the Empress's everyday robe, with a very broad embroidered gold-and-pearl cuff band and a lining in the second colour showing at the opening; "
+# ROUND 14 (F3b, owner 19/11 ~03:15Z "cái vải ... ống tay áo nó không có đúng. Bên nữ đế ... rất là mềm mại"): t8 sleeves = Nữ đế A / HH B wording (only "wide sleeves" + FAB), long and flowing, no layered/cuff-band construction words.
+TRIEU_SLV_HH="the wide sleeves long and flowing, of soft silk; "
+# ROUND 14: t8 shoulders = HH prompt B cloud collar (verbatim) instead of the rigid scalloped cầu vai (r13 fault "big and rigid-looking next to HH's draped cloud collar").
+TRIEU_COLLAR_HH="a wide jewelled gold-and-pearl cloud collar with layered pearl fringes over the shoulders, "
+# ROUND 14: HAIR for every rank (owner 19/11 ~03:15Z: "búi hai tóc hai chùm ở phía dưới" = maid hair, never on t8/empresses). HH B / Nữ đế A carry no hair sentence of their own (crown + hairpin sentence only), so this is the HH B hairpin sentence + one high-updo clause.
+TRIEU_HAIR=" Hair: her own hair colour, all of it swept up and gathered HIGH on the top of the head into one tall, smooth, neat court updo beneath the crown, smooth at the temples; never low buns, never two buns or double buns, never braids, never hair loops or coils beside the face or at the nape."
 _CR="ONE WHOLE court crown worn on the head as a single solid headpiece sitting on top of the hair like a hat (the same family of crown as the Empress's phoenix crown, but with no phoenix), the hair gathered up beneath it; "
 _HP=lambda n:f"from BOTH sides of the crown a matching pair of symmetric gold tassel hairpins, one on each side, {n}, hanging beside the face without covering it (the same kind of tasselled hairpins as the Empress's), the whole headdress symmetric and orderly"
 # rank: (rank words, secondary colour words, hex, shoulder-piece size, embroidery motif + density, headdress, luxury)
@@ -1042,24 +1048,35 @@ def build_trieu(c,t,v="v0"):
         sp=SH_OLD5
         edge=TRIEU_EDGE[t]+" (the exact shoulder-piece design of the rank-5 consort)" if t==7 else TRIEU_EDGE[t]+"; "+SH_OLD5_VAR
     s=PRE+f" An imperial consort{', the Empress' if t==8 else ''}. Her face: {face}. From the identity reference keep ONLY her face, facial features and hairstyle colour; do NOT copy the outfit, hair ornaments or accessories of the reference, dress her in the NEW outfit below. The style reference image is only for skin, drawing style, fabric and embroidery: never copy its face, body or pose. {AGE_TXT[AGE]}"
-    robe="golden yellow silk mixed with coral red" if t==8 else mc   # t8 colour words as in the HH prompt; exact yellow in COLOUR RULE
+    robe="golden yellow silk mixed with brick-crimson court red" if t==8 else mc   # ROUND 14 (F3b): "coral red" (HH word) pulled t8 to coral; court brick red instead (exact hexes in COLOUR RULE)
     if t>=7: head=head.replace(" (the same family of crown as the Empress's phoenix crown, but with no phoenix)","")
-    slv=TRIEU_SLV_HI if t>=7 else TRIEU_SLV
+    slv=TRIEU_SLV_HH if t==8 else TRIEU_SLV_HI if t==7 else TRIEU_SLV
+    shoulder=TRIEU_COLLAR_HH if t==8 else f"a jewelled shoulder piece (cầu vai) over each shoulder, {sp}, its edge: {edge}; "
     mantle=TRIEU_MANTLE if t==8 else ""
     if t<=3: lux=lux.replace('pearl-fringed ','pearl-studded ')
-    s+=f" Outfit ({rk}): the formal court robe (triều phục) of {robe}, a floor-length Han-style robe with a crossed collar edged with a thin gold line, richly embroidered on the chest, shoulders and wide sleeves with {emb}{', ' if mantle else '; '}{mantle}{TRIEU_PANELS}{TRIEU_COVER}a jewelled shoulder piece (cầu vai) over each shoulder, {sp}, its edge: {edge}; {slv}{lux.replace('LUXURY: ','')}; floor-length robe with slippers visible, slim tall silhouette; {head}."
+    s+=f" Outfit ({rk}): the formal court robe (triều phục) of {robe}, a floor-length Han-style robe with a crossed collar edged with a thin gold line, richly embroidered on the chest, shoulders and wide sleeves with {emb}{', ' if mantle else '; '}{mantle}{TRIEU_PANELS}{TRIEU_COVER}{shoulder}{slv}{lux.replace('LUXURY: ','')}; floor-length robe with slippers visible, slim tall silhouette; {head}."
     s+=" COLOUR RULE: all colours at ONE medium tone level, the same as the soft coral-red and brick-red robes of the game: medium saturation, medium lightness, neither too fresh nor too dark, never rực, never glaring, never neon, never pastel-washed, never dusty, grey, muddy or black; "
-    if t==8: s+=f"the MAIN colour of the Empress's robe body, skirt and mantle is {gc}; BOTH SLEEVES (the arms of the robe, from the shoulder down to the cuff) and the collar band with its collar trims are the court red, {mc} like {mh}, clearly red, with {dc} like {dh} in the linings and belt; the sash and the shoulder-piece trim also in that red; "
+    if t==8: s+=f"the MAIN colour of the Empress's robe body, skirt and mantle is {gc}; BOTH SLEEVES (the arms of the robe, from the shoulder down to the cuff) and the collar band with its collar trims are the court red, {mc} like {mh}, clearly red, with {dc} like {dh} in the linings and belt; the sash and the cloud-collar trim also in that red; "
     else:
         s+=f"the COMMON main colour of the court robe is {mc} like {mh}, the main colour of the robe and sleeves, with {dc} like {dh} in the linings and belt; the secondary colour {sc} like {sh} is the colour of the shoulder pieces, the collar band, the cuff bands, the sash and the court panels, and it shows her rank; "
         if t==7: s+=f"the royal golden yellow is clearly and generously visible as the court panels, the sash and the wide cuff bands, in {gc}; "
     s+="the crown and jewellery in real shining gold; gold thread on the borders, hem band and embroidery; this robe colour belongs to the court, it is NOT her own signature colour."
-    if t<7: s+=" Hair: her own hairstyle kept, gathered up under the crown. No phoenix anywhere on the robe or in the hair: only flowers, birds, butterflies, clouds or other motifs. No mantle and no cape: the sleeves and the court panels hang free. All embroidery is fine silk-thread embroidery stitched directly into the fabric, flat and integrated with the cloth, following its folds, not appliqué, not pasted patches, not raised. "+FAB
+    s+=TRIEU_HAIR
+    if t<7: s+=" No phoenix anywhere on the robe or in the hair: only flowers, birds, butterflies, clouds or other motifs. No mantle and no cape: the sleeves and the court panels hang free. All embroidery is fine silk-thread embroidery stitched directly into the fabric, flat and integrated with the cloth, following its folds, not appliqué, not pasted patches, not raised. "+FAB
     else: s+=(" No mantle and no cape: the sleeves and the court panels hang free." if t==7 else "")+" The phoenix is the main embroidered motif, larger and more prominent than the flowers. All flowers, birds and the phoenix are fine silk-thread embroidery stitched directly into the fabric, flat and integrated with the cloth, following its folds, not appliqué, not pasted patches, not raised. "+FAB
-    s+=" Pose: calm formal court standing pose, no held item; her hands folded formally in front of her at waist height, the wide sleeves hanging down at her sides, upright dignified posture, body and face frontal, standing squarely facing the viewer, no turn and no lean, the whole face fully visible, head up facing the viewer, eyes open, lips closed, never looking down, never looking back over the shoulder, never in profile."
+    # ROUND 14 (F3b, owner 19/11 ~03:15Z "tướng rất là đơ, không cầm gì trong tay" + "ai cũng đứng ở một cái kiểu một mà tao cực kỳ ghét"): the hard-coded folded-hands pose is gone. Pose = HH prompt B pose block (_pose, as `build.py c06 v0` emits) with ONE item
+    # of that rank (t1-t6: 3f table ITEMS_LOW as --low N; t7: ITEMS7 as --t7; t8: ITEMS as v0), then spec5pose(t) = a different spec5 pose per rank, frontal (3d2), calm skips for t6+ (A0 rule 3). Do not pass --spec5pose with --trieu.
+    # Items = the raw rank tables (no age_item: at a18 it turns every rank of c06 into a flute -> 8 identical props). Poses: t1-t5 = spec5 list, one DIFFERENT pose each (TRIEU_S5 index into her spec5 list, look-back pose never);
+    # t6-t8 = calm with rank (A0 rule 3: serene, small restrained gestures; the spec5 list has no calm pose left for them): the HH B pose block itself with the rank's own hand clause (t6 3f fan, t7 censer as --t7, t8 as v0).
+    if t==8: item,hk=ITEMS[item_for(c)]; right={"c06":True,"c25":True,"c16":True,"c20":False}.get(c,int(c[1:])%2==1); hc=_hh(hand,hk,right)
+    elif t==7: _n=int(c[1:]); item,hk=ITEMS7[GOLDEN7.get(c,(_n*3+5)%10)]; right=(c=="c25") if c in GOLDEN7 else _n%2==1; hc=hand7(hk,right)
+    else: item,hk=ITEMS_LOW[c][t]; right=(int(c[1:])%2==1); hc=low_hand(hk,right)
+    s+=_pose(item,hk,right).replace(f"Her hands and body: {low_hand(hk,right)}.",f"Her hands and body: {hc}.")+CLOSE
     s+=" IGNORE the style reference image's background completely: the background is completely transparent with NOTHING behind or around her: no backdrop, no parchment, no painted flowers or branches, no smoke, no haze, no glow, no stain."
-    s+=" The headdress is worn on the head as ONE WHOLE crown in a single piece with its tasselled hairpins on both sides, never loose casual hairpins or sticks. Luminous smooth porcelain skin, bare clean forehead with no forehead mark and no flower mark, eyes open, floor-length robe with slippers visible, no train, no cup, nothing covering the face."
-    return s+END
+    s+=" The headdress is worn on the head as ONE WHOLE crown in a single piece with its tasselled hairpins on both sides, never loose casual hairpins or sticks."
+    s+=END
+    return spec5pose(s,c,t,force=TRIEU_S5[t]) if t<=5 else s
+TRIEU_S5={1:5,2:0,3:1,4:3,5:4}   # spec5 index per rank (c06 'kieungao': 5 skirt-hem stair step, 0 walking + item by the cheek, 1 walking forward sleeves flowing, 3 adjusting a hairpin, 4 breeze lifts the stole); 2 = look back, never
 # ---------- SPEC5 POSES (owner 18/11 ~21:55Z, FIGURE_GATE D.3a): flag --spec5pose ----------
 # The ORIGINAL pose system that made the live 32 consorts = dev/figwork/spec5.py POSES[personality][(i+t-1)%6] (+ suffix ", poised" t5-t6, ", with stately grace" t7-t8),
 # COPIED WORD FOR WORD (POSES below is a verbatim copy; i = index-1 from dev/figwork/consorts_ids.json; a18 = ps[0] = this entry). Only changes: {prop} = the rank's 3f item,
@@ -1119,7 +1136,7 @@ SPEC5_IDS={"c%02d"%n:(t,m) for t,rng in (("kieungao",range(1,7)),("numi",range(7
 # N5d item 5: maid m01-m52 -> SPEC5 pose list BY INDEX (the game gives each maid a random trait, no fixed one): the six lists in the consorts' order, maid n takes list (n-1)%6 and slot (n-1)//6+1.
 _SP5_ORDER=["kieungao","numi","hienlanh","dangi","thamvong","thanhnha"]
 SPEC5_IDS.update({"m%02d"%n:(_SP5_ORDER[(n-1)%6],(n-1)//6+1) for n in range(1,53)})
-def spec5pose(o,c,t):
+def spec5pose(o,c,t,force=None):
     m=re.search(r" Pose: calm standing pose; she holds (.+?) in a contrasting colour",o); assert m,"pose paragraph not found"
     prop=m.group(1); tr,mi=SPEC5_IDS[c]; i=mi-1
     # FACING (FIGURE_GATE D.3a, owner 18/11 ~22:10Z): never back turned / looking back over the shoulder -> skip to the next pose of the same list ((i+t)%6, (i+t+1)%6 ...)
@@ -1145,7 +1162,7 @@ def spec5pose(o,c,t):
     _pk={}
     for _ag in sorted(_AO,key=lambda g:(len(_oks[g]),_AO.index(g))):   # the age with the fewest allowed poses (a51/a65, t6+) chooses first
         _pk[_ag]=next((j for j in _oks[_ag] if j not in _pk.values()),_oks[_ag][0])
-    _pick=_pk[AGE]
+    _pick=_pk[AGE] if force is None else force   # force: --trieu only (ROUND 14), every other caller unchanged
     raw=_raw(_pick)
     # N5c (owner 19/11 ~00:50Z, FIGURE_GATE 3d2 "từ đây về sau là không có vẽ góc 3 phần tư nữa"): FRONTAL ONLY. Applied AFTER the pose choice (skip lists above see the verbatim spec5 text, so every person keeps the same pose);
     # only the turn/side words change, the hand/item action stays; every spec5 pose then states the frontal body.
