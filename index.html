@@ -9,7 +9,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <script>
-window.CTM_BI={"s":"7e1fa10f","t":"2026-11-19T09:03Z","c":"review coop-thin-f3 r1 fix: her F3 act sounds play on her phone (kitSfx in TH UICAP)","b":"34e191e12a12","h":[{"s":"4ed2831d+","t":"2026-11-19T07:18Z","c":"law3-cost-only: index.html / sw.js regenerated"},{"s":"0da546e9","t":"2026-11-19T07:16Z","c":"role-parity-drift r1: build line"},{"s":"eff20119+","t":"2026-11-19T06:33Z","c":"ev-pic-coverage: picture required in M/L/XL frames only, S frames reported apart (owner OD 19/11 ~04:55Z)"},{"s":"a64f06c7+","t":"2026-11-19T06:29Z","c":"seal-lean-2 r2: rebuild site"},{"s":"38af6387","t":"2026-11-19T06:23Z","c":"minister-agents review r1: one core (gift regard + backs in BAL.tdCourt, j55 reads tuyen.pow / imp.deep / clanRel), censor name unique in e…"},{"s":"18a9b64c+","t":"2026-11-19T05:22Z","c":"monthly-allotment r6 (reviewer): stat names from the one NAMES table (drop private STAT_NM); candle note puts the burnt candle in the card'…"},{"s":"6b041ea7+","t":"2026-11-19T05:21Z","c":"odds-no-unknown: vu oan hints no longer repeat the odds word the meter now shows"},{"s":"6eb0ab3d+","t":"2026-11-19T05:37Z","c":"hall-names r2: runtime test hall-names-lines.js (houseName plaque, palace list line, visit line, 'cùng cung' note; Fold + iPad)"},{"s":"c4c25bbd+","t":"2026-11-19T04:41Z","c":"head-marker-video: viewport-size recording, opening dialog cleared, maid notice kept unread, white plain state swapped at half time on the …"},{"s":"360c0edd+","t":"2026-11-19T03:50Z","c":"ge-writers W2 r2: rebuild on main fa411d6f"}]};
+window.CTM_BI={"s":"1dc23ae3","t":"2026-11-19T09:50Z","c":"rare-reach: BAL.arc.r97.elig from the before-measure (arc .13, kc .04; road/succ provisional .13)","b":"06268edb4bc8","h":[{"s":"7e1fa10f","t":"2026-11-19T09:03Z","c":"review coop-thin-f3 r1 fix: her F3 act sounds play on her phone (kitSfx in TH UICAP)"},{"s":"4ed2831d+","t":"2026-11-19T07:18Z","c":"law3-cost-only: index.html / sw.js regenerated"},{"s":"0da546e9","t":"2026-11-19T07:16Z","c":"role-parity-drift r1: build line"},{"s":"eff20119+","t":"2026-11-19T06:33Z","c":"ev-pic-coverage: picture required in M/L/XL frames only, S frames reported apart (owner OD 19/11 ~04:55Z)"},{"s":"a64f06c7+","t":"2026-11-19T06:29Z","c":"seal-lean-2 r2: rebuild site"},{"s":"38af6387","t":"2026-11-19T06:23Z","c":"minister-agents review r1: one core (gift regard + backs in BAL.tdCourt, j55 reads tuyen.pow / imp.deep / clanRel), censor name unique in e…"},{"s":"18a9b64c+","t":"2026-11-19T05:22Z","c":"monthly-allotment r6 (reviewer): stat names from the one NAMES table (drop private STAT_NM); candle note puts the burnt candle in the card'…"},{"s":"6b041ea7+","t":"2026-11-19T05:21Z","c":"odds-no-unknown: vu oan hints no longer repeat the odds word the meter now shows"},{"s":"6eb0ab3d+","t":"2026-11-19T05:37Z","c":"hall-names r2: runtime test hall-names-lines.js (houseName plaque, palace list line, visit line, 'cùng cung' note; Fold + iPad)"},{"s":"c4c25bbd+","t":"2026-11-19T04:41Z","c":"head-marker-video: viewport-size recording, opening dialog cleared, maid notice kept unread, white plain state swapped at half time on the …"}]};
 /* KWAIT — ONE TABLE for every loading / waiting / progress / reconnect line the player sees (owner 17/11 "tranh luân hồi đang bày các thân phận,
    mình đổi cách nói ... văn chương hơn ... hơi hướng cổ trang"; task review/loading-words). Wording per dev/kit/VANPHONG.md: short, literary,
    no %, no English, no tech words (tải, kết nối, mạng, server, build, MB, tệp, bộ nhớ đệm, trình duyệt). The long road to the server is "đường xa".
@@ -6311,8 +6311,22 @@ Object.assign(BAL,{arc:{
  /* t96 = the tư tình man's month (j96 tm96Month): fade = his heart cools (her heat h < h, his tình > tinh: p in 100 to lose d); amb = an ambitious
     man cools (tình > tinh: p, −d); note = a man deep in love sends a note (tình ≥ tinh, h ≥ h: p); cool = suspicion settles (p, −d);
     wed = she marries him off (c_wed): his tình becomes tinh, the Thái hậu's favour fx */
- t96:{fade:{h:35,tinh:20,p:30,d:1},amb:{tinh:30,p:8,d:2},note:{tinh:72,h:50,p:4},cool:{p:25,d:1},wed:{tinh:15,fx:{th:4}}},
- r97:{stay:{sung:5}},
+ /* t96.rare = the «Giả chết, theo chàng rời cung» rare of the Thanh mai arc (j96 rare96): her heat h, his tình, at most sus suspicion
+    (loyal watcher BAL.loy.trust, not pregnant); its try odds = base + Lợi thế × sc + (tú nữ road) td + Tâm cơ ÷ tam − suspicion ÷ sus2. Was typed in j96; values unchanged. */
+ t96:{rare:{h:80,tinh:80,sus:40,o:{base:20,sc:7,td:15,tam:6,sus2:3}},fade:{h:35,tinh:20,p:30,d:1},amb:{tinh:30,p:8,d:2},note:{tinh:72,h:50,p:4},cool:{p:25,d:1},wed:{tinh:15,fx:{th:4}}},
+ /* r97 = the rare-ending roll (owner 19/11 ~03:25Z: «Ví dụ như họ lúc nào cũng 100% đủ điều kiện thì lúc đó hãy gieo 9 hay 13%»): k = the share of a
+    rare's own p a player gets on a road at full eligibility (p × k = 9–13.5 %); elig = the measured share of climaxes where every hidden condition
+    holds (dev/measure/rarereach.js + rr-sum.js, report dev/handover/reports/rare-reach.md), per source: arc = the j97 arcs, road = the jroad .11
+    finales, kc = the jkc outside-palace rares, succ = the j99 succession rares. Set 19/11 from the rare-reach before-measure (61 lives,
+    3 styles, all 9 origins: arc 12.7 % of 55 climaxes; road: the after-measure with the road's Lợi thế carried (rdSc97); kc: mean of the 6 doors
+    over the jkc home-road probe (rr-kc.js); succ: no bot reaches the succession's second chapter, so it takes the arc value). The roll once eligible = min(1, p × k / elig[src]) (r97Roll, j97),
+    so the chance a road ends rare ≈ p × k, as if she were always eligible; never above sure. stay = the gain of choosing to stay in the palace
+    after a rare ending that lets her leave. */
+ r97:{stay:{sung:5},k:.9,elig:{arc:.13,road:.13,kc:.04,succ:.13},
+  /* jkc outside-palace rares: base chance at full eligibility = p × kcF × k (kcR3: pFest at the festival door, kcR2: pTrave on the late door);
+     the rest are each rare's condition floors (tm96 heart h, maid loyalty loy, gossip kld below, father af, Sức suc, outings oc at most,
+     Tâm cơ tamco, Đức duc, Sắc sac). Was typed in jkc.js; values unchanged. */
+  kcF:.12,kc:{kcR1:{p:.6,h:80,loy:60,kld:55},kcR2:{p:.8,af:60,h:75,pTrave:.6,hTrave:80},kcR3:{p:.5,pFest:.4,sac:80},kcR4:{p:.6,suc:90,oc:1},kcR5:{p:.6,duc:70},kcR6:{p:.8,tamco:60}}},
  /* the Ngự tứ hairpins a rare ending can grant (j97; the wardrobe j92 may rename them): the wear gain */
  ntItem:{nt_nhuy:{sac:5,danh:3},nt_haiduong:{sac:6,danh:4},nt_dongchau:{sac:7,danh:5}},
  rare:{
@@ -11707,16 +11721,22 @@ function rdR97(){try{if(!window.RARE97)return;for(const d of RD97L){if(!RARE97.d
  if(a&&a.E&&!a.E.r97)a.E.r97={k:BAL.road.rareK,tag:"✦ "+d.tag,w:d.w,t:d.t,fx:d.fx,go:A=>r97After(A,d)}}}catch(e){console.error(e)}}
 /* the road's rare-ending definition (its .11) when this life runs a full road, else null */
 function rdQdef(){try{if(!rdOn())return null;const R=ROAD14[S.st.f14.rd];const id=R&&R[BAL.road.last];return id&&window.RARE97&&RARE97.defs[id]||null}catch(e){return null}}
+/* rare-reach (owner 19/11 ~03:25Z; same family as item (b) above): the finale's Lợi thế condition read only the .11 thread's own Lợi thế, which
+   the bot measure found at 0 on almost every road finale while the road's path was met → the road keeps the best Lợi thế she held in any
+   chapter .4–.10 (S.st.f14.q97.sc) and the .11 thread starts with it as A.q97.sc; j97 r97Cond reads max(A.sc, A.q97.sc). Climax odds and
+   the .11 ending tier still use the .11 thread's own A.sc. */
+function rdSc97(A){const d=rdQdef();if(!d||!A)return;const a=ARC67[A.a],rd=S.st.f14.rd;if(!a||!(A.a===rd||a.road===rd)||a.rn===BAL.road.last)return;
+ const q=S.st.f14.q97||(S.st.f14.q97={p:0,b:0});q.sc=Math.max(q.sc||0,A.sc||0)}
 /* a choice made in any chapter of this road (the .4 premise and .5–.10) counts for the road's rare finale; the .11 itself is counted by j97 */
 function rdQ97(A,o){const d=rdQdef();if(!d||!A||!o)return;const a=ARC67[A.a],rd=S.st.f14.rd;if(!a||!(A.a===rd||a.road===rd)||a.rn===BAL.road.last)return;
  const q=S.st.f14.q97||(S.st.f14.q97={p:0,b:0});const s=String(o.n||"");if((d.bad||[]).some(x=>s.includes(x)))q.b=1;else if((d.path||[]).some(x=>s.includes(x)))q.p++}
 setTimeout(()=>{rdR97();
  /* res67 is wrapped after j97 (outer): read the option before the original clears A.cur */
  try{const r0=res67;res67=function(tk,bid,i,odds){let A=null,o=null;try{A=th67(tk);if(A&&A.cur===bid&&rdOn())o=opts67(A,beatDef67(A,bid))[i]}catch(e){}
-  const r=r0.apply(this,arguments);try{if(o)rdQ97(A,o)}catch(e){console.error(e)}return r}}catch(e){console.error(e)}
+  const r=r0.apply(this,arguments);try{if(o)rdQ97(A,o);if(o)rdSc97(A)}catch(e){console.error(e)}return r}}catch(e){console.error(e)}
  /* the .11 thread starts with the road's tally (j97 r97Cond reads A.q97 at the climax) */
  try{const n0=newThread67;newThread67=function(id){const A=n0.apply(this,arguments);try{const a=ARC67[id];
-  if(A&&rdOn()&&a&&a.o==="rd"&&a.road===S.st.f14.rd&&a.rn===BAL.road.last){const q=S.st.f14.q97||{p:0,b:0};A.q97={p:q.p||0,b:q.b||0}}}catch(e){console.error(e)}return A}}catch(e){console.error(e)}},0);
+  if(A&&rdOn()&&a&&a.o==="rd"&&a.road===S.st.f14.rd&&a.rn===BAL.road.last){const q=S.st.f14.q97||{p:0,b:0};A.q97={p:q.p||0,b:q.b||0,sc:q.sc||0}}}catch(e){console.error(e)}return A}}catch(e){console.error(e)}},0);
 window.rdR97=rdR97;
 /* Thanh mai trúc mã (j96 tm96a/b/c) in a full-road life: the 14 numbered chapters are the tutorial, the road and the endgame, so the three
    love chapters run as a SIDE story (phụ tuyến, j67 S.st.X thread, kind "tm": no reward pool, no random shared arcs reopened), opened one at
@@ -31123,7 +31143,11 @@ Object.assign(BAL,{mgTier:{occ:{hoc:[0,.5],hoi:[1,.5],trieu:[1.5,.5],exam:[1,.5]
    support / opposition, npc* = an NPC dowager's claim, rareCDanh: the rare end check of succRareOK. */
 Object.assign(BAL,{danhG:{forget:5,fatherBook:40,thdBook:40,srvWed:20,kcVihanh:60,kcR5:50},
  charity:{khac:1,bac:35,duc:3,danh:5},/* "Phát bạc cứu giúp cung nhân nghèo" (j85 charity, once a month; two doors: Tài nghệ · Tứ đức button + Hành sự card jact adCharityCard, one lock S.charM). danh-p1 (owner P1 16/11 12:55Z): bac 20→35, danh 1→5 */
- succN:{bAge:BAL.age.reign/* one-core: same concept as age.reign */,bDanh:50,bTam:35,bBac:100,cRank:4,cDanh:70,cTam:60,cTh:60,cBac:300,thB:50,thOpp:20,npcDanh:50,npcTam:35,rareCDanh:80}});
+ succN:{bAge:BAL.age.reign/* one-core: same concept as age.reign */,bDanh:50,bTam:35,bBac:100,cRank:4,cDanh:70,cTam:60,cTh:60,cBac:300,thB:50,thOpp:20,npcDanh:50,npcTam:35,rareCDanh:80,
+  /* rare-reach (owner 19/11 ~03:25Z): the rare end of each path (a Hoàng thái hậu, b buông rèm, c nữ đế): p = its chance at full eligibility
+     (was typed 12/10/8 in j99succ), then the eligibility rule (j97 r97Roll, BAL.arc.r97.elig.succ); floors of succRareOK (an/hoa/tam = the
+     path's choice counts, an at most; duc / tamco stats), values unchanged */
+  rare:{a:{p:.12,duc:60,hoa:3,an:1},b:{p:.1,hoa:3,tam:3,duc:50,tamco:55},c:{p:.08,tam:4,an:2,duc:50}}}});
 /* CLOSE MAID BY ORIGIN (jcmaid.js, D58 review/close-maid, owner approved table v2 16/11). % per month unless named; loy = loyalty range at
    arrival by source; pickN candidates, the picked one's talent works after pickAlone months, pickKeep % a month her decay is undone;
    kinSave % a "kín miệng" maid refuses a buyer; talents: talBac bạc, talSuc Sức, talSpy % a true fact, while her loyalty ≥ talLoy;
@@ -33593,7 +33617,7 @@ Object.defineProperty(window,"kitCourtMood",{configurable:true,get(){try{if(!S)r
  const q=typeof queenP==="function"?queenP():null;return{th:S.thDead?null:one("th"),hh:q&&q!==S?one("hh"):null}}catch(e){return null}}});
 /* ================= j97 KẾT HIẾM · CƠ DUYÊN HIẾM (owner 11/14) =================
    Mỗi tuyến Mệnh truyện của ARC67 (36 xuất thân + 8 chung + 3 giữa đời) có một KẾT HIẾM. Bọc j67, không sửa j67.
-   Mở thế nào: khi hồi cao trào (ô "x" của tuyến) được ra, nếu đủ ĐIỀU KIỆN ẨN thì gieo MỘT lần xác suất nhỏ (R97CFG.p × def.p, 5–15 %).
+   Mở thế nào: khi hồi cao trào (ô "x" của tuyến) được ra, nếu đủ ĐIỀU KIỆN ẨN thì gieo MỘT lần r97Roll = min(1, def.p × BAL.arc.r97.k / tỉ lệ đủ điều kiện đo được) — để cơ hội mỗi tuyến ra kết hiếm ≈ def.p × k (9–13,5 %) như thể luôn đủ điều kiện (chủ 19/11).
      Điều kiện ẩn = chuỗi lựa chọn trong các hồi trước (path: chọn đúng hướng ít nhất np lần; bad: chọn ngược hướng một lần là mất)
                     + Lợi thế (A.sc) + một điều kiện về số đo / quan hệ / vật phẩm / con cái (x).
      Gieo trúng: hồi cao trào có thêm một lựa chọn "✦ … · Cơ duyên hiếm" viền sáng (kit .ksel); chỉ hiện chi phí, không hiện kết quả.
@@ -33602,7 +33626,12 @@ Object.defineProperty(window,"kitCourtMood",{configurable:true,get(){try{if(!S)r
    Sổ luân hồi: localStorage "ctm-rare97" ghi các kết hiếm đã gặp qua các kiếp, hiện "x/y kết hiếm đã gặp". Chỉ để nhớ: không mang lợi thế gì sang kiếp sau.
    Móc cho mô-đun khác (j96 tuyến tình): RARE97.add(id,{t:tuyến,tag:kết}) đăng ký thêm một kết hiếm vào sổ; RARE97.meet(id,tag) ghi đã gặp.
    Danh mục đầy đủ (tuyến, điều kiện, xác suất, kết quả): dev/RARE_ENDINGS.md. */
-const R97CFG={p:.9};            /* núm chung nhân vào xác suất của từng kết hiếm (đo bằng bot: dev/PROGRESS_story_rare.md) */
+/* ONE CORE (OD:L1267): the shared knob lives in BAL.arc.r97.k; the roll once eligible is r97Roll (owner 19/11 ~03:25Z, BAL.arc.r97) */
+const R97CFG={get p(){return BAL.arc.r97.k}};
+/* the roll once every hidden condition holds: min(1, base / measured eligibility of its source), base = the chance at full eligibility
+   (j97/jroad: p × k) — the chance a road ends rare is then what base would be if she were always eligible (BAL.arc.r97.elig); src arc | road | kc | succ */
+function r97Roll(base,src){const e=(BAL.arc.r97.elig||{})[src]||1;return Math.min(1,base/e)}
+function r97Src(a){return (window.RD97L||[]).some(d=>d.a===a)?"road":"arc"}
 const R97={};                  /* arc id → định nghĩa kết hiếm */
 const R97X={};                 /* kết hiếm của mô-đun khác (j96…): id → {t,tag} */
 /* phần thưởng Ngự tứ: cùng khóa với kho trang phục j92 (review/wardrobe); ở đây đăng ký nếu chưa có, j92 về sau ghi đè tên/ô mặc */
@@ -33836,7 +33865,7 @@ R97L.forEach(d=>{R97[arcRare(d).a]=d});
 regEach(R97,id=>{const a=ARC67[id],d=R97[id];if(!a||!a.E||a.E.r97)return;
  a.E.r97={k:BAL.arc.tier.win,tag:"✦ "+d.tag,w:d.w,t:d.t,fx:d.fx,go:A=>r97After(A,d)}},"R97 ending");
 /* ---------- condition, roll, offer ---------- */
-function r97Cond(A,d){const q=A.q97||{p:0,b:0};if(q.b)return false;if((q.p||0)<(d.np||2))return false;if((A.sc||0)<(d.sc||0))return false;
+function r97Cond(A,d){const q=A.q97||{p:0,b:0};if(q.b)return false;if((q.p||0)<(d.np||2))return false;if(Math.max(A.sc||0,(A.q97&&A.q97.sc)||0)<(d.sc||0))return false;/* road finales: the road's best Lợi thế (jroad rdSc97) */
  if(d.need==="kid"&&!r97son())return false;if(d.need==="hh"&&!qOn())return false;if(d.need==="th"&&S.thDead)return false;
  try{if(d.x&&!d.x[0](A))return false}catch(e){return false}return true}
 function r97Hit(s,list){s=String(s||"");return (list||[]).some(x=>s.includes(x))}
@@ -33844,7 +33873,7 @@ function r97Note(A,o){const d=R97[A.a];if(!d||!o)return;const q=A.q97||(A.q97={p
  if(r97Hit(o.n,d.bad))q.b=1;else if(r97Hit(o.n,d.path))q.p++}
 function r97IsX(A,bid){const a=ARC67[A.a];return !!(a&&bid&&(a.p[3]||[]).includes(bid))}
 function r97Gate(A){if(!A||A.r97||!A.nb||!R97[A.a]||!r97IsX(A,A.nb))return;const d=R97[A.a];const c=r97Cond(A,d);
- const p=(d.p||.1)*(R97CFG.p||1);A.r97={c:c?1:0,ok:c&&roll(p*100)?1:0};
+ const p=r97Roll((d.p||.1)*R97CFG.p,r97Src(A.a));A.r97={c:c?1:0,ok:c&&roll(p*100)?1:0};
  try{const st=S.r97s||(S.r97s={c:0,n:0,ok:0});st.n++;if(c)st.c++;if(A.r97.ok)st.ok++}catch(e){}}
 (function(){const f0=fireBeat67;fireBeat67=function(A){try{r97Gate(A)}catch(e){console.error(e)}return f0.apply(this,arguments)}})();
 /* record every choice of the arc against its rare path */
@@ -33883,7 +33912,7 @@ if(typeof lifeSave==="function")(function(){const l0=lifeSave;lifeSave=function(
 /* Mệnh truyện panel: this life's rare endings and titles */
 (function(){const p0=panel67;panel67=function(){const h=p0.apply(this,arguments);try{const L=(S&&S.r97)||[];if(L.length)return h+`<h3>Cơ duyên hiếm kiếp này</h3>`+rows67(L.map(x=>[`✦ ${ARC67[x.a]?ARC67[x.a].t:x.a}`,x.ti&&x.ti!==x.tag?`${x.tag} · danh hiệu «${x.ti}»`:`danh hiệu «${x.ti||x.tag}»`,"g"]))}catch(e){}return h}})();
 /* hook for other modules (j96 love arc): register / record a rare ending outside ARC67 */
-window.RARE97={defs:R97,cfg:R97CFG,add:(id,o)=>{if(id&&!R97[id])R97X[id]={t:(o&&o.t)||id,tag:(o&&o.tag)||""}},meet:(id,tag)=>r97Meet(id,tag),total:r97Total,book:r97Book,
+window.RARE97={defs:R97,cfg:R97CFG,roll:r97Roll,add:(id,o)=>{if(id&&!R97[id])R97X[id]={t:(o&&o.t)||id,tag:(o&&o.tag)||""}},meet:(id,tag)=>r97Meet(id,tag),total:r97Total,book:r97Book,
  cond:A=>{const d=A&&R97[A.a];return d?r97Cond(A,d):false},
  force:(on)=>{const A=S&&S.st&&S.st.M;if(!A)return null;if(on===false){delete A.r97;return A}A.r97={c:1,ok:1};return A}};
 /* ================= j96 THANH MAI TRÚC MÃ (owner 11/14): mạch tình kéo dài cả đời, ba chương trong chính tuyến j67 =================
@@ -34066,7 +34095,7 @@ ARC67.tm96b=arcFx("tm96b",{o:"tm",ok:ok96,t:"Thanh mai trúc mã: Lửa thử v�
   b_ton:{tag:"Chàng gánh tội thay",w:"lv",t:"{lvn} bị giáng chức, phạt bổng, suýt bị đuổi khỏi kinh. Ngươi giữ được thanh danh; chàng giữ được lời hẹn theo cách của chàng.",go:()=>{T96().hurt=(T96().hurt||0)+1;T96().rise=Math.max(0,(T96().rise||0)-1);adj96(BAL.arc.h96.tm96b.E.b_ton);T96().endB="b_ton";return `${(man96()||{}).name||"Chàng"} bị giáng chức.`}},
   b_tin:{tag:"Qua được lửa thử",w:"emp",t:"Hoàng thượng tin ngươi. Kẻ đứng sau bị phạt, và chẳng ai dám nhắc lại chuyện cũ nữa.",go:(A,_ok,G)=>{adj96(BAL.arc.h96.tm96b.E.b_tin);T96().endB="b_tin";const v=rv67(A,"v");return v?e67pun(v,G[0]):""}}}});
 /* ================= CHƯƠNG CUỐI ĐỜI: LỰA CHỌN CUỐI ================= */
-function rare96(){const t=T96(),m=man96(),w=watcher();return !!(t&&m&&m.alive&&(t.h||0)>=80&&(m.tinh||0)>=80&&w&&w.loyal>=BAL.loy.trust&&!S.preg&&(t.sus||0)<40&&!S.out)}
+function rare96(){const t=T96(),m=man96(),w=watcher(),R=BAL.arc.t96.rare;return !!(t&&m&&m.alive&&(t.h||0)>=R.h&&(m.tinh||0)>=R.tinh&&w&&w.loyal>=BAL.loy.trust&&!S.preg&&(t.sus||0)<R.sus&&!S.out)}
 ARC67.tm96c=arcFx("tm96c",{o:"tm",ok:ok96,t:"Thanh mai trúc mã: Lựa chọn cuối",w:"lv",sj:"mối tình cũ của ngươi",tslot:1,p:[[],[],[],[]],
  g:"Bao năm đã qua, mối tình ấy chưa bao giờ thật sự tắt. Nay triều đình định hôn sự cho {lvn}, kẻ thù sắp ra đòn cuối, và chàng đến xin ngươi một lời. Lần này, ngươi phải chọn hẳn.",
  ord:[["c1n","c1o","c1t"],["c2"],["c3a","c3b"],["c4a","c4b"],["c5"],["c6"]],
@@ -34106,7 +34135,7 @@ ARC67.tm96c=arcFx("tm96c",{o:"tm",ok:ok96,t:"Thanh mai trúc mã: Lựa chọn c
   {n:"Chôn chặt tình cũ, nâng chàng lên trên triều",o:()=>45+S.tamco/6+S.danh/8+(T96().rise||0)*6-(T96().sus||0)/4+(A96has("cut")?10:0),e:["c_ally","c_dead"],rt:"Từ đêm ấy, ngươi chỉ còn là một phi tần, và chàng là một vị quan ngươi tin cậy.",rf:"Kẻ thù không buông tha. Để cắt đứt mọi lời đồn về ngươi, chàng nhận hết tội về mình."},
   {n:"Xin Hoàng thượng ban hôn, tác thành cho chàng",if:()=>!(man96()||{}).wed,e:"c_wed",rt:"Ngươi tự tay chọn sính lễ."},
   {n:"Gặp chàng một đêm cuối rồi dứt",if:()=>(T96().h||0)>=55&&tinh96()>=55,o:()=>cl(100-lộRisk(loc96())-(T96().sus||0)/4,8,90),e:["c_bimat","c_lo"],rt:"Đêm ấy, đèn tắt sớm.",rf:"Đêm ấy, có kẻ đã chờ sẵn ngoài cửa."},
-  {n:"✦ Giả chết, theo chàng rời cung",rare:1,if:()=>rare96()&&A96has("thuoc"),o:A=>20+(A.sc||0)*7+(T96().k==="td"?15:0)+S.tamco/6-(T96().sus||0)/3,e:["c_tron","c_lo"],rt:"Thuốc ngấm. Ngươi nghe tiếng {maid} khóc như từ rất xa.",rf:"Thái y bắt mạch lần thứ hai và nhận ra mạch vẫn còn."}]}},
+  {n:"✦ Giả chết, theo chàng rời cung",rare:1,if:()=>rare96()&&A96has("thuoc"),o:A=>{const O=BAL.arc.t96.rare.o;return O.base+(A.sc||0)*O.sc+(T96().k==="td"?O.td:0)+S.tamco/O.tam-(T96().sus||0)/O.sus2},e:["c_tron","c_lo"],rt:"Thuốc ngấm. Ngươi nghe tiếng {maid} khóc như từ rất xa.",rf:"Thái y bắt mạch lần thứ hai và nhận ra mạch vẫn còn."}]}},
  E:{c_lang:{tag:"Lỡ làng",w:"lv",t:"Ngươi để năm tháng trôi qua mà không chọn. {lvn} cuối cùng cũng thôi chờ, xin đi trấn nhậm xa, chỉ còn là một cái tên trong sổ triều.",go:()=>{const m=man96();if(m){m.tinh=10;m.haunts=["thu"]}T96().endC="c_lang";return ""}},
   c_ally:{tag:"Tình cũ thành đồng minh trên triều",w:"lv",t:"Ngươi chôn chặt tình cũ. {lvn} lên cao, thành {lvup}; mỗi lời chàng nói trên triều đều nghiêng về phía ngươi. Không ai biết vì sao, ngoài hai người.",go:()=>{const m=man96(),V=V96();if(m&&V){m.role=V.up;m.tinh=Math.min(m.tinh,35);m.ally96=1}T96().endC="c_ally";T96().ally=1;return m?`${m.name} nay là ${V.up}, đồng minh của ngươi trên triều.`:""}},
   c_wed:{tag:"Tác thành cho người xưa",w:"lv",t:"{lvn} cưới {lvbride}. Ngày ấy ngươi gửi một đôi gối thêu uyên ương. Chàng hướng về hậu cung vái ba vái, rồi bước vào kiệu hoa của người khác.",go:()=>{const m=man96(),V=V96();if(m&&V){m.wed=V.bride;m.tinh=BAL.arc.t96.wed.tinh}try{if(!S.thDead)apply(BAL.arc.t96.wed.fx)}catch(e){}T96().endC="c_wed";return ""}},
@@ -36001,11 +36030,11 @@ function succBegin(p,failB){const E=S.succ;const U=succSup();E.p=p;E.st=1;E.ch=0
  const en=succEnemy();E.foe=en?en.id:null;succNext()}
 function succNext(){const E=S.succ;Q=Q.filter(m=>!/^succ/.test(m.pid||""));const d=mkP("succC",{});if(d)Q.unshift({t:d.title,h:d.t,opts:d.o,who:d.who,pid:d.pid,pp:d.pp,cls:d.cls});try{save()}catch(e){}}/* chooseM shows and renders after go() */
 function succAge(){const son=succSon();const co=!!(window.COOPW&&COOPW.on);S.age=(S.age||30)+SUCC.yrs;/* co-op: the year is the shared world's date (her epilogue is her own ending; the world goes on) */if(!co)S.year=(S.year||1)+SUCC.yrs;if(son&&(!co||(S.kids||[]).includes(son)))son.age=(son.age||0)+SUCC.yrs}
-function succRareOK(){const E=S.succ;if(E.p==="a")return (S.duc||0)>=60&&E.hoa>=3&&E.an<=1;if(E.p==="b")return E.hoa>=3&&E.tam>=3&&(S.duc||0)>=50&&(S.tamco||0)>=55;return E.tam>=4&&E.an<=2&&(S.danh||0)>=BAL.succN.rareCDanh&&(S.duc||0)>=50}
+function succRareOK(){const E=S.succ,R=BAL.succN.rare;if(E.p==="a")return (S.duc||0)>=R.a.duc&&E.hoa>=R.a.hoa&&E.an<=R.a.an;if(E.p==="b")return E.hoa>=R.b.hoa&&E.tam>=R.b.tam&&(S.duc||0)>=R.b.duc&&(S.tamco||0)>=R.b.tamco;return E.tam>=R.c.tam&&E.an<=R.c.an&&(S.danh||0)>=BAL.succN.rareCDanh&&(S.duc||0)>=R.c.duc}
 function succPick(c){const E=S.succ;if(!E||!c)return;if(c.c)apply(c.c);if(c.s)apply(c.s);for(const k of ["q","an","tam","hoa"])if(c.e&&c.e[k])E[k]=(E[k]||0)+c.e[k];
  if(c.txt)log(c.txt);if(c.do)try{c.do()}catch(e){console.error(e)}
  if(c.end)return succEnd(typeof c.end==="function"?c.end():c.end);
- E.ch++;succAge();if(E.ch===2&&E.r==null)E.r=succRareOK()&&roll(E.p==="a"?12:E.p==="b"?10:8)?1:0;succNext()}
+ E.ch++;succAge();if(E.ch===2&&E.r==null)E.r=succRareOK()&&roll(100*r97Roll(BAL.succN.rare[E.p==='a'||E.p==='b'?E.p:'c'].p,"succ"))?1:0;succNext()}
 function succCH(){const E=S.succ,son=succSon(),sn=succSN(son),foe=E.foe!=null?rivals.find(v=>v.id===E.foe&&v.alive):null,U=succSup();
  const vgN=U.vg?succMN(U.vg):"Thân vương Dụ";const fN=foe?foe.name:"một phi tần cũ";
  const A=[
@@ -65514,7 +65543,7 @@ const KCE={
  tmcam:{t:"Cha cấm cửa",b:()=>{const tm=kcTmMan(),c=kcR("cha");S.kc.ev.tmcam=1;return{who:kcFace(c),t:`<p>Cha biết chuyện ngươi với ${tm.name}, cấm hắn bước qua cửa phủ: "Con gái nhà này là để đưa vào cung."</p>`,o:[
   kcO("Cúi đầu vâng lời",{},()=>kcDo("Cấm cửa",()=>{kcAf(c,BAL.eff.jkc.o_22);S.tm96.h-=10;S.kld=Math.max(0,S.kld-5);return""})),
   kcO("Cãi lại cha",{},()=>kcDo("Cấm cửa",()=>{kcAf(c,BAL.eff.jkc.o_23);S.tm96.h=Math.min(100,S.tm96.h+8);S.kap+=BAL.eff.jkc.kapO_4;return"Cha đập bàn. Bà mối được gọi đến ngay tuần sau."}))]}}},
- tmtron:{t:"Lời rủ trốn đi",b:()=>{const tm=kcTmMan();S.kc.ev.tmtron=1;const ok=S.tm96.h>=80&&(S.maid?S.maid.loyal:0)>=60&&S.kld<55;const r=ok&&kcRare("kcR1",.6);
+ tmtron:{t:"Lời rủ trốn đi",b:()=>{const tm=kcTmMan();S.kc.ev.tmtron=1;const W=BAL.arc.r97.kc.kcR1;const ok=S.tm96.h>=W.h&&(S.maid?S.maid.loyal:0)>=W.loy&&S.kld<W.kld;const r=ok&&kcRare("kcR1",W.p);
   return{who:pMan(tm),t:`<p>${tm.name} gửi thư: đêm mười lăm, thuyền đợi ở bến sông. Nếu nàng đến, hai người đi về phương Nam, không bao giờ trở lại.</p>`,o:[
   kcO("Đốt thư, ở lại",{},()=>kcDo("Lời rủ trốn đi",()=>{S.tm96.h-=15;return"Ngươi đốt thư trước đèn."})),
   kcO("Đến bến sông",{suc:-20},()=>kcElope(false))].concat(r?[kcO("✦ Theo chàng đi, có tỳ nữ lo liệu đường đi",{suc:BAL.eff.jkc.sucO},()=>kcElope(true),{r97:1,j67:`tốn: Sức ${balSg(BAL.eff.jkc.sucO)} · (Cơ duyên hiếm)`})]:[])}}},
@@ -65524,7 +65553,7 @@ const KCE={
  meet:{t:"Gặp lại người xưa",b:()=>{const tm=kcTmMan();return{who:pMan(tm),t:`<p>${TM96V[S.tm96.k]?"Ngươi gặp lại "+TM96V[S.tm96.k].bg:"Ngươi gặp lại người xưa"}: ${tm.name}. Chàng trao cho ngươi ${TM96V[S.tm96.k]?TM96V[S.tm96.k].tok:"một tín vật"}.</p>`,o:[
   kcO("Nhận tín vật",{},()=>kcDo("Tín vật",()=>{S.tm96.tok=1;S.tm96.h=Math.min(100,S.tm96.h+10);return"Ngươi giấu tín vật trong tay áo."})),
   kcO("Trả lại, giữ lễ",{},()=>kcDo("Tín vật",()=>{S.tm96.h-=8;apply({duc:2});return"Chàng cúi đầu, cất tín vật đi."}))]}}},
- vihanh:{t:"Khách lạ ở chùa",b:()=>{const r=kcRare("kcR3",.5);return{who:pEmp(),t:`<p>Trong sân chùa, một nam nhân áo xanh, theo sau mấy người hầu im lặng, hỏi ngươi về câu đối trên cột. Người ta thì thầm: Hoàng thượng vi hành.</p>`,o:[
+ vihanh:{t:"Khách lạ ở chùa",b:()=>{const r=kcRare("kcR3",BAL.arc.r97.kc.kcR3.p);return{who:pEmp(),t:`<p>Trong sân chùa, một nam nhân áo xanh, theo sau mấy người hầu im lặng, hỏi ngươi về câu đối trên cột. Người ta thì thầm: Hoàng thượng vi hành.</p>`,o:[
   kcO("Đối lại câu đối",{},()=>kcDo("Khách lạ",()=>{if(roll(BAL.kc2.kcCard.doiLaiCauDoi_rb+S.tai/3)){S.kc.vh=1;return"Người ấy cười, hỏi tên ngươi rồi đi."}return"Người ấy gật đầu rồi đi."})),
   kcO("Cúi đầu tránh đi",{},()=>kcDo("Khách lạ",()=>{apply({duc:1});return""}))].concat(r?[kcO("✦ Đối đáp, rồi dâng một khúc đàn",{suc:BAL.eff.jkc.sucO_2},()=>kcEnd("kcR3"),{r97:1,j67:`tốn: Sức ${balSg(BAL.eff.jkc.sucO_2)} · (Cơ duyên hiếm)`})]:[])}}},
  dich:{t:"Dịch trong kinh thành",b:()=>{S.kc.ev.dich=1;return{who:pMe(),t:`<p>Kinh thành có dịch sốt. Phố xá vắng tanh, nhà nào cũng đóng cửa.</p>`,o:[
@@ -65535,7 +65564,7 @@ const KCE={
   kcO("Xin cha cho xem mặt trước",{},()=>kcDo("Bà mối",()=>{S.kap+=BAL.eff.jkc.kapO_6;return"Nhà trai hẹn ngày đến."})),
   kcO("Thưa: con đợi kỳ tuyển tú",{},()=>kcDo("Bà mối",()=>{if(roll(BAL.kc2.kcCard.thuaConDoiKy_rb+(c?c.af/3:0))){S.kap-=BAL.eff.jkc.kapO_7;return"Cha gật đầu: cũng được."}if(c)kcAf(c,BAL.eff.jkc.o_28);return"Cha nhíu mày."})),
   kcO(`Nhận lời nhà ${s.n}`,{},()=>kcMarry(s),{dis:S.kap<BAL.kc2.st.kc.nhan})]}}},
- dinhhon:{t:"Cha định hôn",b:()=>{const s=S.kc.suit[0];const c=kcR("cha");const r=S.tm96&&S.tm96.rise&&c&&c.af>=60&&S.tm96.h>=75&&kcRare("kcR2",.8);
+ dinhhon:{t:"Cha định hôn",b:()=>{const s=S.kc.suit[0];const c=kcR("cha");const W=BAL.arc.r97.kc.kcR2;const r=S.tm96&&S.tm96.rise&&c&&c.af>=W.af&&S.tm96.h>=W.h&&kcRare("kcR2",W.p);
   return{who:kcFace(c),t:`<p>Cha đã nhận sính lễ của ${s.n}. Ngày cưới định vào tháng sau.</p>`,o:[
   kcO("Vâng lời cha",{},()=>kcMarry(s)),
   kcO("Quỳ xin cha cho đi tuyển tú",{suc:-10},()=>kcDo("Định hôn",()=>{if(roll(BAL.kc2.kcCard.quyXinChaCho_rb+(c?c.af/2:0)+(S.kc.want?15:0))){S.kc.suit=[];S.kap=BAL.kc2.st.kc.chaYes;S.kc.forced=0;return"Cha trả sính lễ, nói: vậy thì vào cung cho xứng."}S.kc.forced=2;pushDil(mkP("kcE",{e:"dinhhon2"}),"Cha định hôn");return"Cha không đổi ý."})),
@@ -65549,11 +65578,11 @@ const KCE={
 PEND.kcE=pp=>{if(!S||!S.kc||S.dead)return null;if(!isKc()&&!/^(dien)$/.test(pp.e))return null;const E=KCE[pp.e];if(!E)return null;const d=E.b(pp);if(!d)return null;
  d.o=(d.o||[]).filter(o=>!o.dis);return d};
 function kcFest(t,art,extra){const b=rsnap();const l=(S.arts&&S.arts[art])||0;const sc=l*12+S.tai/3+S.sac/6+R(30);let txt;
- if(sc>=60){S.danh+=4;S.kap+=BAL.eff.jkc.kapKcFest;txt=`${t}: ngươi đứng đầu, cả kinh thành nhắc tên.`;if(!S.kc.ev.vp&&S.danh>=BAL.danhG.kcVihanh&&S.sac>=80&&kcRare("kcR3",.4)){S.kc.ev.vp=1;pushDil(mkP("kcE",{e:"vihanh"}),"Khách lạ ở chùa")}}
+ if(sc>=60){S.danh+=4;S.kap+=BAL.eff.jkc.kapKcFest;txt=`${t}: ngươi đứng đầu, cả kinh thành nhắc tên.`;if(!S.kc.ev.vp&&S.danh>=BAL.danhG.kcVihanh&&S.sac>=BAL.arc.r97.kc.kcR3.sac&&kcRare("kcR3",BAL.arc.r97.kc.kcR3.pFest)){S.kc.ev.vp=1;pushDil(mkP("kcE",{e:"vihanh"}),"Khách lạ ở chùa")}}
  else if(sc>=40){S.danh+=2;txt=`${t}: ngươi được khen.`}else{S.danh=Math.max(0,S.danh-1);txt=`${t}: ngươi không nổi bật.`}
  const mu=kcR("muoi");if(mu&&roll(50))mu.danh+=sc<40?3:1;const x=extra?extra():"";kcRes(t,b,txt+(x?" "+x:""))}
 function kcIll(p,extra){const b=rsnap();let txt="";if(roll(p)){apply({suc:-35});txt="Ngươi lên cơn sốt.";if(S.suc<=0||roll(S.suc<20?40:8)){kcRes("Dịch",b,txt);kcDie("Chết vì dịch sốt trước kỳ tuyển tú");return}}else txt="Ngươi qua được mùa dịch.";if(extra)txt+=" "+extra();kcRes("Dịch",b,txt)}
-function kcRare(id,p){S.kc.r97=S.kc.r97||{};if(S.kc.r97[id]!=null)return S.kc.r97[id];const ok=roll(100*p*(typeof R97CFG==="object"?R97CFG.p:1)*.12);S.kc.r97[id]=ok?1:0;return ok}
+function kcRare(id,p){S.kc.r97=S.kc.r97||{};if(S.kc.r97[id]!=null)return S.kc.r97[id];const ok=roll(100*r97Roll(p*BAL.arc.r97.kcF*R97CFG.p,"kc"));/* rare-reach (owner 19/11): base × k, then the eligibility rule (j97 r97Roll) */S.kc.r97[id]=ok?1:0;return ok}
 /* origin chapter: three beats per origin; the choices seed the palace arcs (S.kc.oc counts the "loyal to the house" path) */
 const KCOB={
  tt:[["Cha gọi ngươi vào thư phòng, chỉ lên bàn cờ: \"Một quân cờ tốt phải biết mình đứng ở đâu.\" Ông muốn ngươi học cách nhìn người trên triều.","Học cách nhìn người","Thưa cha, con không muốn làm quân cờ"],
@@ -65577,8 +65606,8 @@ const KCOB={
   ["Cha gọi ngươi vào thư phòng dặn khẽ: dù ngày nào nhà có biến, ngươi cứ đi con đường của mình. Còn kịp làm một việc.","Đốt thư từ của cha","Gửi sổ sao sang nhà thế giao"]]};
 function kcOrigin(i){const k=S.origin.k;const B=KCOB[k]&&KCOB[k][i];if(!B)return null;const c=kcR("cha");
  const opts=[kcO(B[1],{suc:-5},()=>kcDo(KCO[k].t,()=>kcOriginFx(k,i,1))),kcO(B[2],{suc:-5},()=>kcDo(KCO[k].t,()=>kcOriginFx(k,i,0)))];
- if(i===2&&k==="dtq"&&S.suc>=90&&(S.kc.oc||0)<=1&&kcRare("kcR4",.6))opts.push(kcO("✦ Cải trang nam nhi, theo quân ra Nhạn Môn",{suc:BAL.eff.jkc.sucKcOrigin},()=>kcEnd("kcR4"),{r97:1,j67:`tốn: Sức ${balSg(BAL.eff.jkc.sucKcOrigin)} · (Cơ duyên hiếm)`}));
- if(i===2&&k==="muoi"&&S.tamco>=60&&S.kgtu>=BAL.kc2.st.kc.gtuRich&&kcRare("kcR6",.8))opts.push(kcO("✦ Xin cha giao cho ngươi giữ cả sổ muối",{},()=>kcEnd("kcR6"),{r97:1,j67:"tốn: không · (Cơ duyên hiếm)"}));
+ if(i===2&&k==="dtq"&&S.suc>=BAL.arc.r97.kc.kcR4.suc&&(S.kc.oc||0)<=BAL.arc.r97.kc.kcR4.oc&&kcRare("kcR4",BAL.arc.r97.kc.kcR4.p))opts.push(kcO("✦ Cải trang nam nhi, theo quân ra Nhạn Môn",{suc:BAL.eff.jkc.sucKcOrigin},()=>kcEnd("kcR4"),{r97:1,j67:`tốn: Sức ${balSg(BAL.eff.jkc.sucKcOrigin)} · (Cơ duyên hiếm)`}));
+ if(i===2&&k==="muoi"&&S.tamco>=BAL.arc.r97.kc.kcR6.tamco&&S.kgtu>=BAL.kc2.st.kc.gtuRich&&kcRare("kcR6",BAL.arc.r97.kc.kcR6.p))opts.push(kcO("✦ Xin cha giao cho ngươi giữ cả sổ muối",{},()=>kcEnd("kcR6"),{r97:1,j67:"tốn: không · (Cơ duyên hiếm)"}));
  return{who:c?kcFace(c):pMe(),t:`<p class="past">${KCO[k].t} · hồi ${i+1}/3</p><p>${B[0]}</p>`,o:opts}}
 function kcOriginFx(k,i,a){S.kc.oc=(S.kc.oc||0)+a;const c=kcR("cha");let t="";const cl0=KCCLAN[k];
  if(a){if(c)kcAf(c,BAL.eff.jkc.kcOriginFx);try{if(cl0)tdPowAdd(cl0,BAL.eff.jkc.kcOriginFx_2)}catch(e){}apply({tamco:1});t="Cha gật đầu hài lòng."}else{if(c)kcAf(c,BAL.eff.jkc.kcOriginFx_3);apply({duc:2});t="Cha nhìn ngươi rất lâu."}
@@ -65646,7 +65675,7 @@ function kcDien(way){const sc=kcMyScore(way);const C=KC.cut;S.kc.tt.sc=Math.roun
  const pSel=cl(45+(sc-C[0])*1.2,20,KC.selMax);S.kc.tt.p=Math.round(pSel);
  if(sc<C[0]-15||!(window.__kcKeep||roll(pSel))){/* __kcKeep: test hook (dev/test/outside/route.js), never set by the game */pushDil(mkP("kcE",{e:"trave"}),"Trả thẻ bài");log("Điện tuyển: Hoàng thượng trả thẻ bài.");return}
  const rank=sc>=C[2]?2:sc>=C[1]?1:0;kcEnter(rank)}
-function kcTraveD(){const tm=kcTmMan();const r=!!(S.tm96&&S.tm96.h>=80&&S.tm96.rise&&kcRare("kcR2",.6));const r5=S.duc>=70&&S.danh>=BAL.danhG.kcR5&&kcRare("kcR5",.6);
+function kcTraveD(){const tm=kcTmMan();const W=BAL.arc.r97.kc;const r=!!(S.tm96&&S.tm96.h>=W.kcR2.hTrave&&S.tm96.rise&&kcRare("kcR2",W.kcR2.pTrave));const r5=S.duc>=W.kcR5.duc&&S.danh>=BAL.danhG.kcR5&&kcRare("kcR5",W.kcR5.p);
  if(!S.kc.suit.length)S.kc.suit.push(kcSuitor());const s=S.kc.suit[0];
  return{who:kcFace(kcR("cha")||S.kc.fam[0]),t:`<p>Ngươi bị trả thẻ bài, về nhà. Cha thở dài: "Thôi thì gả cho nhà tử tế." Nhà ${s.n} đã đợi sẵn.</p>`,o:[
  kcO(`Gả cho ${s.n}`,{},()=>kcMarry(s)),kcO("Xin ở vậy, mở lớp dạy chữ cho con gái",{},()=>{if(S.tai>=60||S.origin.k==="thd")kcEndDo("Nữ phu tử",`Nàng không lấy chồng. Lớp học của nàng ở ngõ Tây có ba mươi đứa con gái nhà nghèo.`,"Nữ phu tử");else kcMarry(s)},{j67:"tốn: không"}),
@@ -79145,7 +79174,7 @@ window.__ctmBuilt=1;
      (COOPW.hold freezes Sang buổi) and the older one walks through the same save → reload → rejoin at once.
    Test hook: window.KSW {build, had, pending, chip, checks, why, peer, hidAt, away, applied, resumed, awayMs}. */
 (function(){
-const BUILD="34e191e12a12";window.CTM_BUILD=BUILD;
+const BUILD="06268edb4bc8";window.CTM_BUILD=BUILD;
 const LSK="ctm-upd-resume",AWAY=10*60e3;
 const hasSW="serviceWorker" in navigator&&/^https?:$/.test(location.protocol),SW=hasSW?navigator.serviceWorker:null;
 const K=window.KSW={calm:0,build:BUILD,had:!!(SW&&SW.controller),pending:false,chip:false,checks:0,why:"",peer:null,hidAt:0,away:null,applied:null,resumed:null,awayMs:AWAY};
