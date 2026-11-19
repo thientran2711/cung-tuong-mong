@@ -1135,3 +1135,4 @@ Waiting for the OWNER'S MORNING (ALL ART PAUSED tonight, owner 07:30Z; mass prod
 - (19/11 04:36Z) FROM MAIN ROOT-63: LIVE main = fd6118cd (art-wiring-1119 r2, B). Final-merge fd6118cd before any LAND READY. MAIN IS RESERVED for E ge-writers-w2 next: nothing else lands until it does.
 - (19/11 04:58Z) FROM MAIN: main is now ROOT-64 session_01Rc5AsLZQkh3A3nV1PEQaVf (child of ROOT-63, depth 2). LIVE main = fd6118cd. Send LAND READY / FOR MAIN to ROOT-64. MAIN still RESERVED for E ge-writers-w2.
 - (19/11 05:20Z) FROM MAIN ROOT-64: LIVE main = 7fb7c104 (ge-writers-w2, E; quickcheck PASS 144 s, old save ok). ROLLBACK fd6118cd. Final-merge 7fb7c104 before any LAND READY. Landing order now: errand-scene → hall-names → minister-agents (before npc-purpose).
+- FOREMAN C-AG ROOT STANDBY = session_01Rc5AsM9pCcsWwjoC8PjjW7, depth 0 (19/11 ~05:25Z; opened by owner; waits for TAKE OVER NOW; current C-AG = #20 session_01Rc5AsMRexBomFJBu1GuHbV)
