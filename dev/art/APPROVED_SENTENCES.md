@@ -465,7 +465,7 @@ Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as 
 - scope: tp1-5 pr1-5 trieu1-5
 - unless: -
 - negation: yes
-- luot: 446, 450 (I1)
+- luot: 446, 450, 518 (I1)
 - why: t1-t5 no yellow
 
 ### X10 · 'short jacket' (maid look)
