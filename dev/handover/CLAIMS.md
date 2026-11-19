@@ -82,7 +82,7 @@ balance-final #2 (opus; balance chain + AG arms) | review/balance-final | sessio
 | FOREMAN C-AG #19 (opus; child of #18, depth 6) | handover FOREMAN_C_STATUS | MAIN ROOT-62 | session_01Rc5AsNCvGfZTt5nTmWjtcZ | RUNNING | 19/11 02:33Z |
 | REVIEW opt-card-short 04f09798 (sonnet; for MAIN ROOT-61) | review/opt-card-short | C-AG #18 | session_01Rc5AsN8cog61d64VwoXU4G | DONE (LIVE 96188526) | 19/11 01:14Z |
 | CTM odds-meter-back (opus; owner bug, for MAIN ROOT-61) | see briefs/root61-odds-meter-back.md | C-AG #18 for ROOT-61 | session_01Rc5AsJj8qdidmEiDujymyR | SẴN SÀNG KIỂM 42bda6a9 (review/odds-meter-back; r2 law-3 fix) | 19/11 01:49Z |
-| CTM errand-scene badge lines (opus; successor, for MAIN ROOT-61) | review/errand-scene | C-AG #18 for ROOT-61 | session_01Rc5AsL23c5v2Nwya3bgsRc | SẴN SÀNG KIỂM 1489362f (reports/errand-scene.md ## r5) | 19/11 ~03:55Z |
+| CTM errand-scene badge lines (opus; successor, for MAIN ROOT-61) | review/errand-scene | C-AG #18 for ROOT-61 | session_01Rc5AsL23c5v2Nwya3bgsRc | DONE (r5 owner FAIL; r6 = ROOT-63 worker; archived 03:49Z) | 19/11 ~03:55Z |
 | opt-card-short #3 (sonnet SMALL UI; OD L1877 as corrected 16:05Z/16:15Z, 09:30Z «!») | review/opt-card-short | MAIN ROOT-53 | session_01Rc5AsHxLKCb415DxYbpiHP | CODE DONE ce8706b7 no CDN (archived) → #4 | 18/11 18:00Z |
 | fullbody-frame-s4 (sonnet SMALL UI; 16:10Z picture size + phone Luân hồi revert) | review/fullbody-frame-s4 | MAIN ROOT-53 | session_01Rc5AsJUiBBwT9LH4J89i4E | READY (no shots: CDN blocked in this env) | 18/11 18:50Z |
 | land-m (sonnet LANDER: shown-odds-r2-rv cf1fc746 + monthly-ration-r6 287a0b79) | review/land-m | MAIN ROOT-53 | session_01Rc5AsJwMJVJdiZUsCPNM9T | LAND READY 3fdfb437 | 18/11 18:00Z |
