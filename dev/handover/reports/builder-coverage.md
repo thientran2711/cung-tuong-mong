@@ -38,3 +38,10 @@ PRIORITY #1 CHECK: OD rule 0(g) f0ac2bd (owner verbatim in FIGURE_GATE) | main: 
 | Công tử / quý tử older bands | origin/main dev/figwork/congtu/spec.py, artcomplete/ct_spec.py | copyable |
 | Children | origin/main dev/figwork/kids/kspec.py + kjobs.json | copyable |
 | Foreign princesses per person, t2–t5/t7/t8/TH/Nữ đế | build.py PDATA = one face per country; samples on review/foreign-princess-samples | no per-person old prompt on this branch → owner |
+
+## HANDOVER (W107 rollover, context ceiling)
+Done: c051869/4a0d065/b838d6b coverage.py + matrix · b99b134 t4 Tần yoke · 8e348e3 ROYAL3 on t6/t7/t8 (guard: only l6/t7/t8 outputs changed; --bdq untouched).
+SPLIT (ROOT-36 01:11Z): N5c = K3 line, FRONT, spec5 age offset, pick_item, refs/--log/--verify, ty/cold, tm0–tm4, m01–m52 DATA rows (ORIG1 measured from live fig-maid-mNN-t1-a18, PAL/MOT from main dev/figwork/maidC/mjobs.py:22,:31 — ROOT-36 rule). SUCCESSOR owns: foreign princesses (all states, 3+3 faces), NPC Thái hậu h1–h3, mama, Phế phi Lý, all men, steward/tutor, children, emperor-B (a65 HELD for owner; BG her→him OK'd by ROOT-36; FRONT already done by N5c 793227c — ask N5c whether they still edit emperor-B; asked, no reply yet).
+ROOT-36 decisions: men/kids/NPC-TH = NEW builder file(s) made ONLY from the mapped old prompts (table above, cite file:line), same --log/--verify hooks as build.py (coordinate N5c). HELD for owner: Emperor a65 text, men pose+item, FP per-person sources.
+Found bug (not W107's): `build.py c06 v0 --head --nude2 A` → AssertionError 't8 item not in pose' since N5c pick_item (nude2 expects the old ITEMS t8 item) — told N5c.
+Method: pull under flock before each edit; snapshot (/home/user/wt/w107-tmp/snap.sh pattern: 5 people × tiers/states × a18/a51 × v0/v1) before/after, only intended files may differ; `python3 dev/art/coverage.py` after each block; keep __pycache__ out of commits (git checkout the tracked .pyc).
