@@ -243,8 +243,10 @@ function cfPlay(plan){dbg('push '+plan.wk);const gen=life;kmPush(done=>{dbg('run
    const deck=deckOf(S.nightWhy);if(!deck.length){dbg('nodeck');done();return}dbg('play '+deck.length);
    Promise.all([ART.a,ART.b,ART.hand,ART.seal].map(preload)).then(()=>{try{if(gen!==life){done();return}const sc=kitCardFlip({deck,pick:plan.pick,turned:plan.turned,resHTML:resHTML(plan,plan),onEnd:()=>{if(cur===sc)cur=null;done()}});cur=sc||null;window.cfLast=plan}catch(e){console.error(e);done()}})}catch(e){console.error(e);done()}};go()})}
 if(typeof flip==="function"){const f0=flip;flip=function(){inFlip=true;stoleFrom=null;let r;try{r=f0.apply(this,arguments)}finally{inFlip=false}
- try{if(want()){const plan=cfPlan();if(plan)cfPlay(plan)}else{/* co-op thin (hostnull d): her flip run on the host (her pick there): the scene is hers, shown on HER phone from her own night (cfShow) */const T=window.COOPW&&COOPW.ctx&&COOPW.thin;if(T&&T.uiCap)T.uiCap.push(["cfShow",[]])}}catch(e){console.error(e)}return r}}
-window.cfShow=function(){try{if(want()){const plan=cfPlan();if(plan)cfPlay(plan)}}catch(e){console.error(e)}};
+ try{if(want()){const plan=cfPlan();if(plan)cfPlay(plan)}else{/* co-op thin (hostnull d): her flip run on the host (her pick there): the scene is hers, shown on HER phone. The plan is taken HERE (her
+   night, her stoleFrom — per-seat state of this run; her phone does not have it) and plays there as is (review r1: cfShow with no plan re-read
+   stoleFrom on her phone = null → the wrong turned card after a stolen night) */const T=window.COOPW&&COOPW.ctx&&COOPW.thin;if(T&&T.uiCap){const plan=cfPlan();if(plan)T.uiCap.push(["cfShow",[JSON.parse(JSON.stringify(plan))]])}}}catch(e){console.error(e)}return r}}
+window.cfShow=function(plan){try{if(want()){const p=plan&&typeof plan==="object"&&plan.wk!=null?plan:cfPlan();if(p)cfPlay(p)}}catch(e){console.error(e)}};
 setTimeout(function warm(){try{if(typeof S==="undefined"||!S){setTimeout(warm,7000);return}[ART.a,ART.b,ART.hand,ART.seal].forEach(preload)}catch(e){}},12000);
 window.kitCardFlip=kitCardFlip;window.cfDeckOf=deckOf;window.cfGrid=grid;
 /* demo (kit page / tests): n cards from the live court, k of them barred; who = "me" | index | null */

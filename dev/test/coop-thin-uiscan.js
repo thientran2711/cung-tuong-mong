@@ -9,13 +9,13 @@
    Report: node dev/test/coop-thin-uiscan.js <file.json>… (merges the files, prints the markdown table). */
 if(typeof window==="undefined"){/* node: the report */
  const fs=require('fs');const A={};for(const f of process.argv.slice(2)){let o=null;try{o=JSON.parse(fs.readFileSync(f,'utf8'))}catch(e){console.error('skip',f,e.message);continue}
-  for(const [n,r] of Object.entries((o&&o.by)||{})){const a=A[n]=A[n]||{runs:0,ui:0,uiMax:0,gates:{},cap:{},drop:{},dom:{},flips:0,paint:0,lost:0};a.runs+=r.runs;a.uiMax=Math.max(a.uiMax,r.uiMax);a.flips+=r.flips;a.paint+=r.paint;a.lost+=r.lost||0;
+  for(const [n,r] of Object.entries((o&&o.by)||{})){const a=A[n]=A[n]||{runs:0,ui:0,uiMax:0,gates:{},cap:{},drop:{},dom:{},flips:0,paint:0,lost:0,domRuns:0,miss:0};a.runs+=r.runs;a.domRuns+=r.domRuns|0;a.miss+=r.miss|0;a.uiMax=Math.max(a.uiMax,r.uiMax);a.flips+=r.flips;a.paint+=r.paint;a.lost+=r.lost||0;
    for(const k of ['gates','cap','drop','dom'])for(const [x,c] of Object.entries(r[k]||{}))a[k][x]=(a[k][x]|0)+c}}
  const L=o=>Object.entries(o).sort((a,b)=>b[1]-a[1]).map(([k,c])=>k+(c>1?' ×'+c:'')).join(', ')||'—';
- console.log('| run | runs | captured → played | dropped (not captured) | screen gates "off" | host DOM written in her ctx | flips | ui max | host repaint | lost (cap) |');console.log('|---|---|---|---|---|---|---|---|---|---|');
- for(const n of Object.keys(A).sort()){const a=A[n];console.log(`| ${n} | ${a.runs} | ${L(a.cap)} | ${L(a.drop)} | ${L(a.gates)} | ${L(a.dom)} | ${a.flips} | ${a.uiMax} | ${a.paint} | ${a.lost} |`)}
+ console.log('| run | runs | captured → played | dropped (not captured) | screen gates "off" | host DOM written in her ctx | flips | ui max | runs that wrote host DOM | host repaint | DOM run with no repaint | lost (cap) |');console.log('|---|---|---|---|---|---|---|---|---|---|---|---|');
+ for(const n of Object.keys(A).sort()){const a=A[n];console.log(`| ${n} | ${a.runs} | ${L(a.cap)} | ${L(a.drop)} | ${L(a.gates)} | ${L(a.dom)} | ${a.flips} | ${a.uiMax} | ${a.domRuns} | ${a.paint} | ${a.miss} | ${a.lost} |`)}
 }else(function(){const W=window;W.__uiscan={by:{},n:0};let cur=null;
- const rec=n=>{const b=W.__uiscan.by;return b[n]=b[n]||{runs:0,uiMax:0,gates:{},cap:{},drop:{},dom:{},flips:0,paint:0,lost:0}};
+ const rec=n=>{const b=W.__uiscan.by;return b[n]=b[n]||{runs:0,uiMax:0,gates:{},cap:{},drop:{},dom:{},flips:0,paint:0,lost:0,domRuns:0,miss:0}};
  const inc=(o,k)=>{o[k]=(o[k]|0)+1};
  /* the emitter behind the gate: "gate<emitter<its caller" (the gate helpers kfOn / kmOn / ievOn / krOn / kpmOn / want / bot are named, then skipped) */
  const GATE=/^(kfOn|kmOn|ievOn|krOn|kpmOn|want|bot|botOff|kfAmbWant)$/;
@@ -33,6 +33,6 @@ if(typeof window==="undefined"){/* node: the report */
    const ui=(T&&T.ui?T.ui.length:0);const all=T&&T.uiAll!=null?T.uiAll:ui;
    /* the name: the F run logs ["run",name] right after; a pick = its card; else the do op */
    Promise.resolve().then(()=>{let n=me.do;try{if(me.do==='f'){const L=TH.F.log;for(let i=L.length-1;i>=0;i--)if(L[i][0]==='run'){n='F '+L[i][1];break}}else if(me.do==='pick')n='D pick';else n=me.do==='?'?'E step':'E/'+me.do}catch(e){}
-    setTimeout(()=>{const r=rec(n);r.runs++;r.uiMax=Math.max(r.uiMax,all);r.lost+=Math.max(0,all-ui);r.flips+=me.flips;r.paint+=((TH.paintN|0)>me.p0)?1:0;for(const k of ['gates','cap','drop','dom'])for(const [x,c] of Object.entries(me[k]))r[k][x]=(r[k][x]|0)+c;W.__uiscan.n++},0)});
+    setTimeout(()=>{const r=rec(n);r.runs++;r.uiMax=Math.max(r.uiMax,all);r.lost+=Math.max(0,all-ui);r.flips+=me.flips;const pd=(TH.paintN|0)>me.p0,dw=Object.keys(me.dom).length>0;r.paint+=pd?1:0;r.domRuns+=dw?1:0;r.miss+=dw&&!pd?1:0;for(const k of ['gates','cap','drop','dom'])for(const [x,c] of Object.entries(me[k]))r[k][x]=(r[k][x]|0)+c;W.__uiscan.n++},0)});
    return T};return true};
  const t=setInterval(()=>{try{if(go())clearInterval(t)}catch(e){console.error('uiscan',e);clearInterval(t)}},50)})();
