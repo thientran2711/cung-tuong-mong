@@ -48,3 +48,11 @@ LEDGER CAUTION: --log-fill fills the FIRST unfilled line with that ts — lines 
 magnific_prompt = the exact text passed to images_generate (from the builder file); not re-read with creations_get (context cost).
 Credits: about 34 gens × 135 + 3 cuts ≈ 4,600 cr this session.
 Open points for the foreman: (1) builder gives c17/c18/c19 the same a36/a51/a65 items (ruyi/censer/staff); (2) several gold items close to the robe gold (D3c contrast weak); (3) option C's five-tassel fringe puts a red bead on the forehead skin in about half the gens; (4) the model sometimes adds small pink silk flowers at the crown sides despite "no flowers" — the face crop does not show them, check the sides.
+
+## N6d (painter, ROOT-39 child) — c23 partial, STOPPED by ROOT-39 ("owner says c17+ ugly, stiff tube robe; no more gens; hold for new builder text")
+PRIORITY #1 CHECK: nude-mass-N6c/N6b reused, no duplicate (c24 untouched, c23 a51/a65 not generated).
+- Method as N6c (builder stdout verbatim, refs style 6AbGv6EiJO / face / swatch TdwDfOyVNR, gpt-2-6 1024x2304 2k transparent, folder ba4aecfe). c23 option = A (coral, no high collar); c24 would be option C (five tassels, wine-crimson).
+- c23 gens (3 × 135 cr): a18 SyhP5PAUb8 (face hu2urHIvqL) · a26 If3CT2QtvE (cpSphBA0eP) · a36 kselfqz16B (9ZHZTnLNYZ). Stored prompt read back with creations_get for all 3 = builder text; ledger filled in log order, --verify 3 PASS (lines 74–76). Not generated: c23 a51, a65, all of c24.
+- Looked at full + head crop (native): a18 clean (no flowers at crown sides, forehead bare, calm, butterfly ornament at chest). a26 clean (comb box at chest). a36: FAULT — a small jewel bead/drop sits on the forehead skin between the brows (redo or dedot needed); handkerchief at chest fine. Alpha clean on all (semi < 3.3 %, no haze). No sheet made (set incomplete); no CDN upload.
+- Note for the new builder text: all three read as the same long straight robe to the feet (the "tube" look the owner dislikes); a36 also shows tiny dark specks around the figure at preview size (alpha semi 2.9 %, not checked further).
+- HOLD for a new builder text.
