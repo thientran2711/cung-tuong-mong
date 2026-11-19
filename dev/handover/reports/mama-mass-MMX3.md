@@ -55,3 +55,8 @@ Otherwise good: jade green skirt, sash, sleeve cuffs/linings; vermilion vest/rob
 ## HOLD (ROOT-50, 19/11 after c07 gens): owner says Nữ đế used OLD-style face refs instead of her new M09-style redraws. NO new gens until ROOT-50 confirms the face refs.
 Face refs used (inherited from MMX1/MMX1b/MMX2, uploaded to Magnific 19/11): consorts c/p/bd = CDN img/hd/fig-consort-<id>-t1-a36.webp (a36) and -t1-a51.webp (a51 + a65), list + ids in mama-mass-persons.md / MMX1 HANDOVER; maids m = CDN img/fig-maid-<id>-a36.webp / -a51.webp (MMX2). If they must change, every one of my gens so far (c06 ×3, c07 ×3) would need redrawing with the new refs.
 Credits: 3 rejected c06 (405) + c06 ×3 with cuts (414) + c07 ×3 gens (405) = 1,224.
+
+## ROOT-50 answers (19/11 18:28Z) — still HOLD, wait for GO
+- Face refs: my refs (img/hd/fig-consort-*-t1, fig-maid-*) are the same pictures the owner just rejected for Nữ đế; ROOT-50 is asking her which reference is valid (only a thiếu nữ picture made from prompt + M09). c06 ×3 + c07 a36 may need redrawing with the new refs.
+- Lượt 521 rules (no item repeated across ages; J6 Nữ đế age text; forehead wording kept, BW2 strengthens it in the builder) apply to EVERY picture from now on, redraws included. Check done: no person in my 33 repeats an item across ages.
+- On GO: pull, rebuild the 99 prompts from the current builder (--twocol <sec> --noflower), re-run check_store, swap face refs as ROOT-50 says, resume at c07 a51/a65 (and the c07 a36 cut).
