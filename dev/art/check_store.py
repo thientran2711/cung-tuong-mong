@@ -811,7 +811,7 @@ def registry_md():
        "ledger line carries \"store_check\":\"PASS\" and \"approved_check\":\"PASS\". Audit: dev/art/APPROVED_AUDIT.md. Owner sheet: dev/handover/review-sheets/approved/.","",
        "Scopes: `tp1-8` thường phục rank (consorts c01–c32, m01–m52) · `pr1-8` princesses p01–p03 · `trieu1-8` triều phục · `mama` · `nude` Nữ đế · `all`. "
        "`scope` = REQUIRED (missing → FAIL); `confirm` = owner still to confirm there → WARN only. `store: yes` = a store sentence, already demanded by the store part when the prompt is checked with store args.","",
-       "Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as a whole** — sheet sent for her one-time OK.","","## Sentences (S)",""]
+       "Status: seeded Lượt 500 (AP1); **the owner has NOT yet approved this list as a whole** — sheet sent for her one-time OK.","","**NEW CHARACTER (owner Lượt 555):** the only new-person prompt = `dev/art/NEW_CHARACTER_TEMPLATE.md` (set B: COMMON_v3 + mNN.v3 line, ONE ref M09 eIyOFEidqL). RETIRED, never approved sentences: COMMON v1/v2 (dev/art/_retired/face-common/), style-image sentences for 6AbGv6EiJO / style2_portraits / style3_girls Xm9tPkMBfo, kc2k / khuê các 18/11 recipes, the 'new-character style sentence', one-ref from img/hd/fig-*-t1.","","## Sentences (S)",""]
     for e in APPROVED:
         L+=[f"### {e['id']} · {e['title']}",f"- text: `{e['text']}`",f"- scope: {e['scope']}",f"- confirm: {e['confirm'] or '-'}",f"- ages: {e['ages'] or 'all'}",
             f"- store: {'yes' if e['store'] else 'no'}",f"- luot: {e['luot']}",f"- source: {e['source']}",f"- proof: {e['proof']}",f"- picture: {e['picture']}",f"- vn: {e['vn']}",""]
