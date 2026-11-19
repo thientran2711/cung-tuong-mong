@@ -173,7 +173,8 @@ def phibach_colour(person,pal=None):
 def phi_bach(person,has_shawl=True):
     main,sec,fm,col,why=phibach_colour(person)
     intro="the sheer shawl draped behind her back and over her arms" if has_shawl else "over her outfit she wears a sheer silk shawl (phi bạch) draped behind her back and over her arms; the shawl"
-    return f"PHI BẠCH: {intro} is in a clearly DIFFERENT colour from her robe: {col} (another colour family and tone than her main robe colour {main}), so it never melts into the dress; it keeps its soft graceful drape."
+    # F12 (owner Lượt 601, ROOT-51 -> BW4): same secondary hue, but clearly MORE TRANSPARENT (a light airy veil, never an opaque band)
+    return f"PHI BẠCH: {intro} is a very sheer, highly translucent gauze shawl in {col} (her secondary colour, clearly different from her main robe colour {main}) — the robe, sleeves and arms are clearly visible through it, so it reads as a light airy veil of that hue, never an opaque solid band of colour; it keeps its soft graceful drape."
 # Lượt 397 item 5 (Tần-style capelet / collar): CURVED cut lines, front opens gradually (no closed, buttoned top-to-bottom front); flowing (uyển chuyển).
 # Lượt 412 (owner approved the Phù Tang t4 test): this Tần cut is the Tần outfit for EVERYONE. Lower-edge SHAPE varies per person (index = person number mod 6, like the Nữ đế crowns),
 # every variant still reads as the same short round shoulder capelet overall. (The store sentence says the outline is smooth and round; the variants only shape the LOWER EDGE; owner approved the result.)

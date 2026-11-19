@@ -820,6 +820,9 @@ PDATA={"nc":("dusty teal-blue and silver","oval face with soft cheeks, gentle al
 PTALL={"nc":"Nam Chiếu (Nanzhao, Yunnan) princess","bd":"Bắc Địch (northern steppe) princess"}
 for _k in ("bd","nc"):   # 19/11 Lượt 407: the 6 princess faces bd1-3 / nc1-3 as DATA rows (palette + face words of PDATA) so that `--state mama` works for them
     for _j in (1,2,3): DATA[f"{_k}{_j}"]=(PDATA[_k][0].replace(" fur",""),PDATA[_k][1])
+# OWNER-approved princess colours (ART_RULES B18 Lượt 592, ROOT-51 -> BW4 GO): nc1-nc3 replace the placeholder "dusty teal-blue and silver" (name in DATA, name + hex in ORIG1)
+for _id,_m,_mh,_s,_sh in (("nc1","indigo","#5E6694","warm ivory","#EAD7BF"),("nc2","soft jade green","#9EB28F","deep rose","#CF7E83"),("nc3","wisteria lilac","#CCA7C8","rose-red","#D18A92")):
+    DATA[_id]=(f"{_m} and {_s}",DATA[_id][1]); ORIG1[_id]=(f"{_m} silk like {_mh}",f"{_s} like {_sh}")
 IDENT=" From the identity reference keep ONLY her face, facial features and hairstyle colour; do NOT copy the outfit, hair ornaments or accessories of the reference, dress her in the NEW outfit below. The style reference image is only for skin, drawing style, fabric and embroidery: never copy its face, body or pose."
 TH_ITEMS=[("a string of sandalwood prayer beads","one"),("a jade-headed dragon-head staff","one"),("a thread-bound sutra book with a gold-brocade cover","two"),("a small gilded bronze hand censer","two"),("a scroll of calligraphy on yellow silk","two"),("an ivory-handled silk fan","one"),("a small white-jade ruyi","two"),("an embroidered silk prayer-bead pouch","one"),("a carved sandalwood box","two"),("a hand mirror in a bronze-and-jade frame","one")]
 # owner 18/11 ~22:55Z (FIGURE_GATE A0 REFERENCES): royal ranks incl. Thai hau = 3 images; image 3 = royal-yellow swatch TdwDfOyVNR
@@ -895,7 +898,7 @@ COLD_FAB=" The linen robe hangs straight and calm, the sleeves and sash fall nat
 # colour negatives = the approved yellow wording "not pale cream, beige or khaki" / "not beige/tan/ochre" (b10 prompts); a65 one step deeper than a51 (AGE_TXT a65 "clearly older than her 51-year-old self" + "DEEPER, DARKER").
 TYC_FACE=" Her face is HER OWN face from her first reference image (face and hair only — do NOT copy its outfit or sleeves), never a face from the style reference image."
 TYC_HUE=", still clearly {col} at a glance, never khaki, sand, beige or tan"   # {col} = the hue WITHOUT "pale" (fix1 round 2: "pale" pulled a65 back to pastel)
-_A51EX="(e.g. pink becomes deep rose-plum, blue becomes deep navy blue, green becomes deep dark jade, purple becomes deep aubergine, red becomes deep burgundy)"   # BW4: frozen copy of the pre-J2-rework a51 example list (ty-cold trung y only, not changed here: flagged to ROOT-51)
+_A51EX=""   # BW4: unused since J2 reached ty-cold (ROOT-51 GO); kept as an empty name
 def _tyhue(col): return "pearl ivory (never yellowed)" if col=="ivory" else col.replace("pale ","",1)   # ty1: pearl ivory = approved palette word (b10 v2 lists)
 # TY0 fix2 (owner Lượt 229b: c06 cold a36 / ty4 a65 face + hair differ from her live picture; ROOT-40 approved 03:52Z). Cause: identity line kept only "hairstyle colour",
 # the outfit text prescribed a NEW bun (COLD_OUTFIT "simple neat low bun", TY_HAIR "neat bun with soft strands" -> bangs), CLOSE forbade her horizontal pin, consort face WORDS overrode image 2.
@@ -921,8 +924,8 @@ def build_ty_cold(c,state):
         N=int(state[2:]); col=TY_COLOUR[N]
         item,hk=age_item(c,"t%d"%N,"an embroidered handkerchief","one")
         s+=f" Outfit (her trung y, the plain inner robe worn alone, no outer garment): a plain {col} silk trung y inner robe (simple crossed collar, tied sash, long skirt, no embroidery, no outer layer), {col}, matte soft silk with gentle folds, no gloss."+TYC_TY_HAIR
-        if AGE=="a51": s+=f" COLOUR RULE: the whole trung y is a deeper, more muted shade of the same {col}, same hue family (rich and dignified, never bright, never pastel, never black or brown)"+TYC_HUE.format(col=_tyhue(col))+"; no other colour anywhere; this replaces the colour examples above."
-        elif AGE=="a65": s+=f" COLOUR RULE: the whole trung y is an even deeper, more muted shade of the same {col} than at 51 (DEEPER than her 51-year-old trung y, never lighter or paler, at least as deep as at 51 {_A51EX}), same hue family (rich and dignified, never bright, never pastel, never black or brown)"+TYC_HUE.format(col=_tyhue(col))+"; no other colour anywhere; this replaces the colour examples above."
+        if AGE=="a51": s+=f" COLOUR RULE: the whole trung y is a calmer, more muted, less saturated shade of the same {col} at about the same lightness, same hue family (dignified, never darker or heavier, never bright, never pastel, never grey, black or brown)"   # J2 (ROOT-51 -> BW4: everywhere incl. ty-cold)+TYC_HUE.format(col=_tyhue(col))+"; no other colour anywhere; this replaces the colour examples above."
+        elif AGE=="a65": s+=f" COLOUR RULE: the whole trung y is an even calmer, more muted, less saturated shade of the same {col} than at 51 (quieter than her 51-year-old trung y, never darker or heavier, never paler or pastel), same hue family (dignified, never bright, never grey, black or brown)"   # J2 (BW4)+TYC_HUE.format(col=_tyhue(col))+"; no other colour anywhere; this replaces the colour examples above."
         else: s+=f" COLOUR RULE: the whole trung y, collar and sash are one plain {col}, as soft and pale as the rank-colour portrait frame; no other colour anywhere."
         s+=" Any flower or pattern on the fabric would be real silk embroidery, never printed or pasted-on."
     s=s+_pose(item,hk,right)+CLOSE+END   # TYC_PIN_RULE is dropped in __main__ AFTER spec5pose (it anchors on that sentence)
@@ -1008,7 +1011,7 @@ def build_mama(c):
 IDENT_LAW="From the identity reference keep ONLY her face, facial features, hair COLOUR and signature colour family; do NOT copy poses, outfit, HAIRSTYLE, hair ornaments or accessories of the reference, dress her in the NEW outfit below."
 IDENT_RX=re.compile(r"From the identity reference keep ONLY her face, facial features[^;]*; do NOT copy [^.;]*?hair ornaments or accessories(?: of the reference)?, dress her in the NEW outfit below\.")
 MAID_IDENT=IDENT.replace("and hairstyle colour","her own hairstyle (the same at every rank) and hair colour",1)
-TM_FADED=["grey-blue","light indigo","earth brown"]
+TM_FADED=["faded indigo-blue","light indigo","earth brown"]   # B19 (owner Lượt 591; ROOT-51 -> BW4): "grey-blue" -> a soft real faded colour
 TM_NAME={"tm0":"cung nữ thô sử","tm1":"tam đẳng cung nữ","tm2":"nhị đẳng cung nữ","tm3":"chưởng sự cô cô","tm4":"nữ quan"}
 TM_TONE=" COLOUR TONE: the main colour is a soft, held-back medium tone: medium-soft saturation and medium lightness, clear but quiet, NOT fresh or bright, NOT pale, NOT washed-out, NOT pastel-faded, NOT dark, NOT grey, NOT glaring."   # BW4 B18: maids held back
 # BW1 (owner Lượt 520, ART_RULES K15: only consorts wear hair flowers): tm1 'and a fresh flower' and tm2 'and small fresh flowers' removed from the hair clause (removal only, no new words); tm0/tm3/tm4 (nữ quan) had none. Ma ma: MMX3 --noflower.
