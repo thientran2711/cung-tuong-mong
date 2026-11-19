@@ -27,3 +27,9 @@ depth 4 (limit 8). START_CTX ~3 % (get_session reads 0; estimate). Parent ROOT-5
 4. The new hair has a long loose back fall and a hair ribbon that come from the thiếu nữ ref. The old ma ma had a neat high bun.
 
 ## STATUS: STOPPED, waiting for owner GO. No mass.
+
+## OWNER VERDICT Lượt 583 (via ROOT-51, 19:07Z)
+1. Colours of the OLD ones are fine (old m05 a36 a bit too fresh; older ages fine) → the new two-colour version must keep that soft, held-back tone (B18), not fresher.
+2. Hair UP in a neat bun at every age: no long loose fall, no ribbon (F11).
+3. Faces may look younger than their age but must clearly BE that age; a51 must never read 18–26 (D13).
+BW3 is fixing the builder. MMX4 on HOLD: NO gens until ROOT-51 says so.
