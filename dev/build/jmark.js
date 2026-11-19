@@ -64,6 +64,11 @@ function kitMeMark(fig){try{
  const W=Math.round(H*ar),top=bottom-H;
  mk.style.cssText=`left:${(cx-hr.left-W/2+host.scrollLeft).toFixed(1)}px;top:${(top-hr.top+host.scrollTop).toFixed(1)}px;width:${W}px;height:${H}px`;
  mk.dataset.r=r;mk.dataset.gap=(headTop-(top+H)).toFixed(1);mk.classList.toggle("kmmove",kmmMotion());return mk}catch(e){console.error("kitMeMark",e);return null}}
+/* KIT §78 MARKER LINE (owner OD 18/11 ~23:45Z): every marker that stands above a stage figure's head (the yellow round «!» of a returned errand person, §90) sits on the SAME top line as the
+   player's «ta ở đây» marker: kitMarkLine(st) = {top (viewport px), h} of the player's .kmemark box (the span is laid out, only its image bounces), or null when she has no marker on this stage.
+   Never a typed px, never per figure. */
+function kitMarkLine(st){try{const mk=(st||document).querySelector(".kmemark");if(!mk||!mk.offsetParent||mk.style.visibility==="hidden"||mk.style.display==="none")return null;const r=mk.getBoundingClientRect();return r.height>2?{top:r.top,h:r.height}:null}catch(e){return null}}
+window.kitMarkLine=kitMarkLine;
 /* drop markers whose figure is gone (scene change, dialog closed) */
 function kmmSweep(){document.querySelectorAll(".kmemark").forEach(m=>{const h=m.parentElement;if(!h||!(h.querySelector(":scope>#mefig")||h.querySelector(":scope>img.kesimg")&&h.closest(".kesme")))m.remove()})}
 function kmmAll(){kmmSweep();const me=document.getElementById("mefig");if(me)kitMeMark(me);document.querySelectorAll(".kesme img.kesimg").forEach(kitMeMark)}

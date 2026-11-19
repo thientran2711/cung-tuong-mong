@@ -52,7 +52,7 @@ function errLedger(){if(errOn()||!S||typeof j95on!=="function"||!j95on())return;
  if(ch)try{const k=j95kh();S.where=j95view(R,k);R.m[k]=j95counts(R,k);if(typeof j95stage==="function")j95stage(R,k)}catch(e){}}
 /* fallback landing: her clock reached khắc K */
 function errTick(){if(errOn()||!S||S.dead)return;const now=errNow();let ch=false;
- for(const t of errZ())if(!t.back&&t.due<=now){t.back=1;ch=true;try{if(errCan())errNotify(`${t.nm} đã về: có tin báo.`)}catch(e){}}
+ for(const t of errZ())if(!t.back&&t.due<=now){t.back=1;ch=true;try{if(errCan())errNotify(t.id,`${t.nm} đã về báo tin`,`${t.nm} đã về từ việc ${t.lbl||"được sai"}: có tin báo.`)}catch(e){}}
  if(ch){try{const day=errKH()*3;S.erra=errZ().filter(t=>!t.back||(!t.read&&t.rep)||now-t.due<day)}catch(e){}errLedger();errIcon()}}
 /* the report panel: ONE implementation for both adapters. kitPanel info spec: subject = the person who REALLY went and came back (law 6b), facts = what she learned
    (the act's own log lines), sections = the gain / loss chips (kit chips), «Đợi tin» only with the parallel-time core */
@@ -76,13 +76,13 @@ function errPanel(){const N=errNews(),W=errMine(),OQ=errOrders();const facts=[],
  setTimeout(()=>errSync(),0);const sp={title:"Tin chờ người sai đi",facts,sections:sec,opts};if(subj)try{const f=kitFace(subj);if(f)sp.subject=Object.assign({},f,{rk:typeof f.rk==='string'?f.rk:undefined})}catch(e){}return sp}
 function errIcon(){try{if(typeof kitStatusIcon==="undefined")return;kitStatusIcon.set("tin",{title:"Người được sai đi",glyph:"信",order:30,
  show:()=>!!(S&&!S.dead&&(errMine().length||errNews().length||errOrders().length)),busy:()=>!!(S&&errMine().length&&!errNews().length&&!errOrders().length),badge:()=>!!(S&&(errNews().length||errOrders().length)),panel:errPanel});kitStatusIcon.refresh()}catch(e){console.error("jerr icon",e)}}
-/* ONE adapter for the notice of an errand (OD 18/11 ~22:10Z: every notice of the game goes through the ONE notice system of stage-here, top «!» box + a short top chip, tap → small kit panel).
-   Until that kit part lands (window.kitNotice.add expected) the kit pill kitLine is used; swap here only. */
-function errNotify(text){try{if(window.kitNotice&&typeof kitNotice.add==="function"){kitNotice.add({id:"errand",text,ms:7000,onTap:()=>errOpen()});return}}catch(e){}try{if(typeof kitLine==="function")kitLine(text,2600)}catch(e){}}
+/* ONE call for the notice of an errand = the game's ONE notice entry point (stage-here r4, dev/build/jnotice.js): kitNotice({id,line,text,pic,go,goLabel}) lights the top-bar «!» box + one short top chip,
+   tap → small kit panel «Tin báo». No toast / chip / bar of my own. Until it is in the build (typeof kitNotice) the kit pill kitLine carries the line. Call sites: errAdd (sent), errTick (back); jptime lands call errNotify too. */
+function errNotify(id,line,text){try{if(typeof kitNotice==="function"){kitNotice({id:"errand:"+id,line,text:text||line,go:()=>errOpen(),goLabel:"Để ta xem"});return}}catch(e){console.error("errNotify",e)}try{if(typeof kitLine==="function")kitLine(line,2600)}catch(e){}}
 function errOpen(){try{if(typeof kitStatusIcon!=="undefined")kitStatusIcon.open("tin")}catch(e){console.error(e)}}
 /* the gate: run an errand action; in the fallback the action runs ONCE as before (no double charge, no deferred report), then the task is recorded */
 function errAdd(sv,spec,L,dl){const t0=errNow();/* fallback: away n khắc counted from the END of her order (the act's own khắc already paid); jptime counts from the tap with its own o/n rows */const w=ERRV[spec.k]||ERRV_DEFAULT;const t={id:"e"+(++ER.n)+"-"+t0,who:errId(sv),nm:sv.name,k:spec.k,lbl:"đi "+w,t0,due:t0+errN(spec.k),back:0,read:0,rep:{t:`${sv.name} ${w} trở về`,ok:null,L:L.length?L:[`${sv.name} đã về.`],d:dl||[]}};
- errZ().push(t);ER.seen[t.id]={fresh:1};try{errNotify(`${t.nm} đã đi ${w}, về ${errWhen(t.due)}.`)}catch(e){}errIcon();return t}
+ errZ().push(t);ER.seen[t.id]={fresh:1};try{errNotify(t.id,`${t.nm} đã đi ${w}, về ${errWhen(t.due)}`)}catch(e){}errIcon();return t}
 function errRun(fn,ctx,args,spec){
  if(!errCan()||errOn())return fn.apply(ctx,args);/* jptime builds its own task at the button (ptSend); this file only draws it */
  const sv=errRunner();if(!sv)return fn.apply(ctx,args);
@@ -145,7 +145,9 @@ function errSync(){if(!S||S.dead||ER.syncing)return;ER.syncing=1;try{
   else{/* the kit yellow round «!» (kitHapHtml = the Dư đồ mark) ABOVE HER HEAD, never on the emotion chip beside it (owner OD 18/11 ~22:10Z) */
    const w=document.createElement("span");w.innerHTML=typeof kitHapHtml==="function"?kitHapHtml(`${t.nm} đã về: có tin báo`,"button"):"";const c=w.firstChild;if(!c)continue;c.classList.add("kmerr-bang");c.setAttribute("tabindex","0");
    let hx=r.left+r.width/2,hy=r.top+r.height*.04;try{const b=typeof J59BB!=="undefined"&&img&&J59BB[img.getAttribute("src")];if(b){hx=r.left+(b.l+b.r)/2*r.width;hy=r.top+(typeof j59bt==="function"?j59bt(b):b.t)*r.height}}catch(e){}
-   c.style.left=((hx-sr.left)/sc-9.5)+"px";c.style.top=Math.max(2,(hy-sr.top)/sc-19-10)+"px";
+   /* the SAME top line as the player's «ta ở đây» marker (kitMarkLine, KIT §78); only raised when that would touch her head (head always wins), never typed px */
+   const ml=typeof kitMarkLine==="function"?kitMarkLine(st):null;const hh=c.offsetHeight||19;let topV=ml?ml.top:hy-hh-10;topV=Math.min(topV,hy-hh-2);c.dataset.line=ml?"mark":"head";
+   c.style.left=((hx-sr.left)/sc-9.5)+"px";c.style.top=Math.max(2,(topV-sr.top)/sc)+"px";
    const go=e=>{e.preventDefault();e.stopPropagation();errOpen();setTimeout(errSync,60)};c.addEventListener("click",go);c.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" ")go(e)});lay.appendChild(c)}}
  /* a person whose task is over and read: nobody keeps her hidden */
  for(const x of document.querySelectorAll("#tokens .tok.fig")){const g=x.querySelector(".tag");if(!g||x.style.visibility!=="hidden")continue;const nm=g.textContent;
