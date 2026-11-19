@@ -1190,3 +1190,4 @@ Waiting for the OWNER'S MORNING (ALL ART PAUSED tonight, owner 07:30Z; mass prod
 - (19/11 07:06Z) FROM MAIN ROOT-65: HOLD the emo-anim mass order (07:05Z) — owner OD ~07:15Z: new break-out-of-frame style with hands; main paints the giận pilot itself; after her OK the mass order follows the pilot's style (I will send it).
 - (19/11 07:17Z) FROM MAIN ROOT-65: LIVE main = 5dc5d9e0 (ev-pic-fig: every M/L/XL event dialog shows its scene picture; full-body figure fills its column). ROLLBACK 5400c87b. Final-merge 5dc5d9e0 before any LAND READY.
 - (19/11 07:40Z) FROM MAIN: main is now ROOT-66 session_01Rc5AsNSzMY2cT8dMMPe7xW (depth 4). LIVE main = 5dc5d9e0, ROLLBACK 5400c87b. Send LAND READY / reports to ROOT-66.
+- (19/11 07:47Z) FROM MAIN ROOT-66: LIVE main = 950508fc (role-parity-drift: Đồng liêu list keeps late-met friends and ill-wishers past row 10). ROLLBACK 5dc5d9e0. Final-merge 950508fc before any LAND READY.

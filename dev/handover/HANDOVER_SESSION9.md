@@ -1122,3 +1122,4 @@ Helper: /tmp/…/scratchpad/hpush.sh pattern = fetch, reset --hard FETCH_HEAD, r
 
 ## MAIN = ROOT-66 session_01Rc5AsNSzMY2cT8dMMPe7xW; START_CTX ~7 % of 1M (rollover at 32 %, ceiling 60 %); depth 4 (limit 8)
 - (19/11 07:40Z) LOAD: main running 1 (seal-lean-3 worker KzdGvNFd; owner bugs/UI/go-live only) | B 2 LAND READY (law3 4ed2831d SMALL, drift 950508fc BIG) + coop-thin F2-r2/F3/F4 in review, free 4 (no parallel whole job) | C-AG #22 ev-pic-followups SẴN SÀNG 59fb29c04 (its SMALL rv) | D npc-purpose remerging | E 9/12 foreign-princess-3 | moved: none. LIVE 5dc5d9e0, ROLLBACK 5400c87b.
+- (19/11 07:47Z) LANDED role-parity-drift → main 950508fc (BIG rv 522pSWxV PASS; my quickcheck PASS 187 s; FF). ROLLBACK 5dc5d9e0. CDN wiped (0). Landed BIG first so the SMALL is the stale one; law3 4ed2831d SELF-MERGE trial = CONFLICT (index.html/sw.js) → back to B rv 6f1q3NHg to final-merge 950508fc. Next: law3 → ev-pic-followups → npc-purpose → seal-lean-3.
