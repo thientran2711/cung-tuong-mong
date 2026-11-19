@@ -154,3 +154,54 @@ Step 0 table / moved paths / quiet-gated emitters / tripwire: sections 0a–0c +
 - F5's own ends (petcGain, shelfPlantGain, wkLessonEnd, tdFinish, tsSummonEnd, tsDenEnd): held / start costs as sent by her phone.
 - F6a RDIFF prCheck vs F6b prSkip / prPost overlap (idempotent) — drop one.
 - Merge coop-ptime-reds (session_01N1tNP4mYCDDrFNfWP327T3) and review/coop-thin-f6-r1 final sha when Foreman B sends them.
+
+## REVIEW r1 — reviewer session_01N1tNP3MvM7Uixh5xp1DqdQ (opus BIG), depth 8 (= limit: no children; did the fixes itself, as Foreman B ROOT-7 asked)
+PRIORITY #1 CHECK ('coop-thin-f6b review'): OD 0 | ledger 0 | claims: REVIEW row (this session) | main 2bda29a1 (no F5/F6) | review/*: coop-thin-f6b dcda88d7 (reviewed), coop-thin-f6-r1 be2a8fcc → 389da198 (F6a land sha, merged here) | archive 0.
+START_CTX ≈ 4 % of 1M (used_tokens reads 0; estimate) → rollover ≈ 29 %; finished below it.
+Branch review/coop-thin-f6b-r1 = dcda88d7 + merge origin/main 2bda29a1 (6e9445c8) + fixes R-a/R-b (153e8621) + merge be2a8fcc (4cdf69e2) + fix R-c (23dba2e2, de419976) + FAST PATH merge review/coop-thin-f6-r1 389da198 (a595b547) + test tweak V6 (ce5d81f1) + FAST PATH merge origin/main 3584ea42 (e54ed05d) + origin/main 71e7b382 (**6194dd6a**; only index.html / sw.js / assets.json conflicted, rebuilt by build_site.sh; the 71e7b382 step changes no code: j29 identical, same shell hash).
+
+### Fixed here (blocking; before → after)
+| # | finding | before (old build) | after |
+|---|---|---|---|
+| R-a | vlCraftEnd `vlHeld` checked the held khắc + Sức only, not the held bạc: vlCraftEnd gives the option's material back and vlCraft pays it once, so a held cost with bạc 0 made a «Kết bằng ngọc» veil (45 bạc) with NO material paid (law 4/6c: an item for a cost below BAL) | new row V5 **applied** (swap + 4G runs on the old build) | vlHeld also needs bạc ≤ -VL.mat[m]: V5 refused, nothing made or paid |
+| R-b | wdGroomEnd had no khắc check (its end runs spend(1)); solo wdGroomUI never opens the game without khắc | new row R3 **applied** with her khắc clock full | dec refuses unless can(1): R3 refused |
+| R-c | LAW 3 (cost-only path, not in the H list): a LIFTED exam pays its start (Sức BAL.ex.suc + khắc BAL.ex.k) on the host in act(i), but the host kept NO pending record (the exRun wrapper returned before e.pend; her phone ran on a throw-away state). Her reload / app kill mid-exam = cost paid, no result, the window still open → the exam card re-dealt next buổi (pay again). Solo: e.pend survives a reload and exTick / exSrvTick exAbort finishes it (môn played + exSkipRaw). Same family: a host-started veil (PEND.vlcraft picked in her context) paid khắc + Sức + material at the start, abandoned = paid, nothing (solo defers it). | no row (code path: exRun hctx branch / vlCraftGame capture) | the host keeps the start IN HER STATE (exam: e.pend {raws, sk, co} as solo exRun; veil: S.vlPend {m, co}); her exTick / exSrvTick are skipped while it is pending (the host's own #kg82 says nothing about her game); exEnd accepts the pending record as its start (survives a host reload, token kept as before); her phone keeps the môn played in localStorage (room + seat + start id) and, when a start is pending in her view with no game of hers running for 3 s (reload / app kill / her end dropped), sends the solo end once (exam: the môn played + exSkipRaw = solo exAbort; veil: «Kết nhanh», material back); resend after 20 s if still pending. Rows **L3** (exam, page gone after môn 1: ONE end, môn 1 kept, start paid once, window closed) and **V6** (host-started veil, page gone: ONE Kết nhanh end, bạc back, record cleared) green. The page-gone step is simulated (game frame closed + her flags dropped, localStorage kept), not a real page reload. |
+
+### Checks (brief items 1–7)
+1. Start + end once on the host, her phone only renders: L1 (her exam card lifted: act(i) on the host pays once, the game opens on HER phone, ONE end), T1/T1b steal card, C1/C2 host-started veil, M rows mirror, H1–H3 Hội phối đồ; D1 double end = one intent; resend/reconnect = F DONE dedupe (F5/F6a), now plus R-c for a page gone mid-game.
+2. Every cost / score from BAL on the host; both seats read the host number (`same` check, twin = solo in every applied row); khắc once (L1 suc 80-BAL.ex.suc; R1 used +1). one-core guard / bind / text / text-rule PASS.
+3. Forged / out of range refused, nothing applied: E2 / L2 / M4 / V3 / V4 / V5 / R2 / R3 / K1–K3 / E4 / E5. No item lost / duplicated: veil / mirror / dress rows trace every piece (law 6c). Orphans vs the report's H list: none left (R-a/R-b/R-c fixed here); in-range forged scores stay the F5 class (FOR B).
+4. Her result cards / sounds once on her phone, none on the host: hostCard false every row; LOOK below.
+5. Gate: TH.on(12) only when both seats run L12 (Worker min); every F6b wrapper (and the new R-c ones) checks on(); f6b at L10 = old road 29/29; f6 L11 38/38 ×2 + swap; f5 L10 30/30; TRIP F6b end writes = 0 (3 runs).
+6. Latency (local wrangler): LAG 0 median 571–631 ms; 4G (LAG 85 + host CPU ×4) median **822 / 1436 / 1556** over 3 runs (min 623–1077, max 2.6–2.9 s); LAG 85 alone 1232; CPU ×4 alone 552 (= LAG 0). Cause = the simulated network hops (about two lagged round trips per end) and run-to-run phase noise, NOT host CPU (PROF at 4G: withSeat avg 40 ms, flush 24–26, hostView 7, ctxOut 4 per intent). The worker's 775 is inside that range. No 3.9 s cluster in any run: the earlier 5× was the `used` drift F6a fixed (d8d8447f), confirmed.
+7. LOOK (scratch only, never git / CDN; deleted): host Fold 755x1000@2 after her veil / mirror end shows only its own screen (his Nhập cung reveal over his entry selection) — nothing of hers; guest iPad 1180x820@2: her mirror result card «Điểm trang: Trước gương đồng» (kit rows, kit chips, cổ trang words, no %), her veil row under the test's staged bag pop-up «Rương đồ» (staging, as F5 r1). The mirror figure shows the grey placeholder silhouette (art not loaded in the local harness; not F6b).
+Laws: 3 ✓ (R-c fixed) · 4 ✓ (R-a, one-core ×4) · 5 ✓ (solo parameters on her phone) · 6c ✓ (R-a, traced pieces) · 7 no new player word · 9–12 no UI part changed · 1/2/6ab/8/13–18 not touched.
+
+### Gates (local wrangler dev THINMAX 12 unless "live"; final = a595b547 code)
+| gate | result |
+|---|---|
+| coop-thin-f6b L12 / swap / 4G / TRIP | 41/41 / 42/42 / 41/41 / TRIP F6b 0 (E1 red only under TRIP=1, 3/3, also on dcda88d7+main before any fix: her phone's view of suc/sung lags under the trip instrumentation; twin diff {} — harness, watch) |
+| coop-thin-f6b L10 (old road) | 29/29 |
+| hostnull · f6 L11 + swap · f5 L10 | 15/15 · 38/38 + 38/38 · 30/30 |
+| f1 L12 / swap | 20/23 ×2, 18/22 swap: F2 gift ×2 = inherited (main 2bda29a1 same + the j29 sv reds, fixed by F6a-r1); **F2 host→guest laydo (steal): actor bag +2 / target −1** — red ×3 here AND on review/coop-thin-f6-r1 389da198 alone (F6b off at L11) → comes with F6a-r1 / hostnull, NOT F6b: FOR B (F6a reviewer / hostnull owner, law 6c candidate). Swap once: 'a real tap (doAct): her result card once the answer landed' (1 of 2) |
+| f2 L12 + swap | 24/25 ×2: P5 invite = inherited (main same) |
+| f3 L12 + swap | B1 first row (her rank set given on the host in her context at her first intent: F6a RDIFF / F6b prPost, the twin has no set) · G1 consort «trả lại» the gift (receiver-choice roll) · X1/X2 = inherited (main same) |
+| f4 L12 + swap / L11 | 17/18: P1 first row = the same rank-set staging; red at L11 too (F6b off) → not F6b |
+| coop-thin a L1 · b L4 · c L3 · d L1 · e L5 · e-net L6 (live) | 24/24 · 136/136 (8 reds once beside a parallel run, then green) · 16/16 · 3 red (main 2 red; see below) · 33/33 · 20/20 |
+| quiet scan | 41 quiet reads, 32 reachable (= before) |
+| coop-cyc THIN=12 / 11 / 12 swap | 73/73 / 73/73 / 73/73 then 71/73 once ('giau' host drew nobody = the worker's known flake) — mixed part vs .tmp/old.html = main 2bda29a1 dev build |
+| coop-e2e / swap · p2 (live) · night · timer | 68/68 / 68/68 · 45/45 · 105/105 · 43/43 |
+| one-world seeds 1–10 · one-core ×4 · Worker npm test | 10 × PASS · PASS ×4 · thin ALL OK |
+| on the final head (main 3584ea42 merged; 71e7b382 = no code change) | f6b L12 41/41 · swap 41/41 · f6 L11 40/40 · e2e 68/68 · one-core ×4 PASS · manifest guard PASS |
+| quickcheck | steps PASS (open ~1.5 s no errors, old save loads + plays a buổi, perf new/live render 230/233, tab 398/410, buổi 1062/962 ms); on a595b547 the core gate G4 manifest-guard failed = the CDN FIGURES-kc floor, red on main 2bda29a1 too; main 3584ea42 lowered the floor → PASS on the final head |
+
+### Inherited reds (identical on LIVE main, NOT a FAIL)
+f1 F2 gift ×2 (main same) · f2 P5 invite (main same) · f3 X1/X2 (main same), G1 consort returns the gift (receiver-choice roll) · d L1: kit thInv + Quà tặng giftin on main ×2 runs, «Thân sơ» patch red in 1 of 2 runs on BOTH branch and main · b L4 flake: 8 reds once under a parallel run, 136/136 alone · f3 B1 / f4 P1 first row (her rank set given on the host at her first intent; red on F6a 389da198 alone too).
+### FOR B / H
+- F2 host→guest laydo red comes with F6a-r1 389da198 (above) — owner F6a reviewer / hostnull.
+- Her rank set: the host gives it at her FIRST intent (F6a RDIFF / F6b prPost), not at her join → f3 B1 / f4 P1 twin rows red; give it at seat creation, or stage it in the tests (H).
+- E1 under TRIP=1: her phone's view of suc / sung lags behind the host's stage (harness watch).
+- Still H (unchanged from the report's list): aaMG lift, the jtoil top-row start without a card, F5's held costs as sent, prSkip/prPost vs F6a RDIFF overlap; in-range forged scores (F5 class).
+FOR MAIN: deploy the Worker with THINMAX 12 at landing (all L12 runs used a local wrangler dev).
+LOOK shots: scratch only (never git, never uploaded to the CDN, so img/_review/coop-thin-f6b/ was never created); deleted after the verdict.
+**VERDICT: PASS review/coop-thin-f6b-r1 6194dd6a** (descends from origin/main 71e7b382, re-fetched right before the push, and from review/coop-thin-f6-r1 389da198).
