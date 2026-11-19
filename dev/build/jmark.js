@@ -128,36 +128,35 @@ function ksayLay(st){let l=st.querySelector(":scope>.ksay-lay");if(!l){l=documen
 function ksayFigRange(f){const B=kmmBox(f);let l=0,r=1;try{const b=kitFigBody(f.currentSrc||f.getAttribute("src")||"");if(b){l=b.l;r=b.r}}catch(e){}return[B.bx+B.bw*l,B.bx+B.bw*r]}
 function ksayPlace(rec,placed){const st=rec.st,fig=rec.fig,el=rec.el;if(!st.isConnected||!fig.isConnected)return false;const sex=kitBadgeSex(fig),L=kitMarkLine(st,sex);if(!L)return null;
  const K=KIT_HEADMK,T=ksayTier(st),R=st.getBoundingClientRect(),sc=st.offsetWidth?R.width/st.offsetWidth:1,cx=kbCentre(fig),gap=K.sayGap*sc,top0=R.top+2*sc,avail=L.bottom-top0,sw=R.width-6*sc;
- /* 1. size: widest allowed, ≤ 2 lines → grown width → one line → smaller font */
+ const others=kbFigs(st).filter(f=>f!==fig).map(f=>({f,t:kitHeadTop(f),x:ksayFigRange(f)})),pad=gap;
+ /* placement of the current size: ideal = on the line at the centre line; shift sideways around placed bubbles / heads that reach into the band; last resort rise above the blocker */
+ const tryPlace=()=>{const r=el.getBoundingClientRect(),w=r.width,h=r.height;let bottom=L.bottom;
+  for(let tries=0;tries<6;tries++){const topY=bottom-h;if(topY<top0)return null;
+   const bad=[];for(const q of placed)if(q.top-pad<bottom&&q.bottom+pad>topY)bad.push([q.left-pad,q.right+pad]);
+   for(const o of others)if(o.t!=null&&o.t-2*sc<bottom)bad.push([o.x[0]-2*sc,o.x[1]+2*sc]);
+   const lo=R.left+2*sc,hi=R.right-2*sc-w,clamp=v=>Math.max(lo,Math.min(hi,v)),ideal=clamp(cx-w/2);
+   const hit=l=>bad.some(b=>l<b[1]&&l+w>b[0]);const C=[ideal];for(const b of bad){C.push(clamp(b[1]),clamp(b[0]-w))}
+   const good=C.filter(l=>l>=lo-.5&&l<=hi+.5&&!hit(l)).sort((a,b)=>{const ta=(cx>=a+10*sc&&cx<=a+w-10*sc)?0:1,tb=(cx>=b+10*sc&&cx<=b+w-10*sc)?0:1;return ta-tb||Math.abs(a-ideal)-Math.abs(b-ideal)});
+   if(good.length)return{left:good[0],bottom,w,h};
+   let up=bottom;for(const q of placed)if(q.left-pad<ideal+w&&q.right+pad>ideal)up=Math.min(up,q.top-pad);for(const o of others)if(o.t!=null&&o.x[0]-2*sc<ideal+w&&o.x[1]+2*sc>ideal&&o.t-2*sc<bottom)up=Math.min(up,o.t-6*sc);
+   if(up>=bottom-.5)return null;bottom=up}return null};
+ /* sizes, widest/largest first: ≤ 2 lines at W, 1.25 W, 1.5 W per font step down to KIT_HEADMK.sayMinF; then one line (smaller and smaller); the first size that fits the room AND finds a place wins */
+ const lines=()=>{const t=el.firstChild,cs=getComputedStyle(t),lh=parseFloat(cs.lineHeight)||parseFloat(cs.fontSize)*1.22,pd=parseFloat(cs.paddingTop)+parseFloat(cs.paddingBottom);return Math.round((t.getBoundingClientRect().height/sc-pd)/lh)};
  const fits=()=>{const r=el.getBoundingClientRect();return r.height<=avail&&r.width<=sw};
- const lines=()=>{const t=el.firstChild,lh=parseFloat(getComputedStyle(t).lineHeight)||parseFloat(getComputedStyle(t).fontSize)*1.22,cs=getComputedStyle(t),pad=parseFloat(cs.paddingTop)+parseFloat(cs.paddingBottom);return Math.round((t.getBoundingClientRect().height/sc-pad)/lh)};
- let ok=false;el.classList.remove("k1");
- for(let f=1;f>=K.sayMinF-.001&&!ok;f-=.1){el.style.setProperty("--ksay-fs",(T.fs*f).toFixed(2)+"px");
-  for(const wf of[1,1.25,1.5]){el.style.setProperty("--ksay-w",Math.min(T.w*wf,sw/sc).toFixed(1)+"px");if(lines()<=2&&fits()){ok=true;break}}}
- if(!ok){el.classList.add("k1");/* one line (no wrapping), then smaller */for(let f=1;f>=K.sayMinF-.001&&!ok;f-=.1){el.style.setProperty("--ksay-fs",(T.fs*f).toFixed(2)+"px");if(fits())ok=true}}
- if(!ok)return false;
- let r=el.getBoundingClientRect(),w=r.width,h=r.height,bottom=L.bottom,others=kbFigs(st).filter(f=>f!==fig).map(f=>({f,t:kitHeadTop(f),x:ksayFigRange(f)}));
- const pad=gap;let left=0,topY=0,done=false;
- for(let tries=0;tries<6&&!done;tries++){topY=bottom-h;if(topY<top0){return false}
-  /* forbidden x intervals at this height: bubbles already placed, figures whose head reaches into the band */
-  const bad=[];for(const q of placed)if(q.top-pad<bottom&&q.bottom+pad>topY)bad.push([q.left-pad,q.right+pad]);
-  for(const o of others)if(o.t!=null&&o.t-2*sc<bottom)bad.push([o.x[0]-2*sc,o.x[1]+2*sc]);
-  const lo=R.left+2*sc,hi=R.right-2*sc-w,clamp=v=>Math.max(lo,Math.min(hi,v)),ideal=clamp(cx-w/2);
-  const hit=l=>bad.some(b=>l<b[1]&&l+w>b[0]);const C=[ideal];for(const b of bad){C.push(clamp(b[1]),clamp(b[0]-w))}
-  const good=C.filter(l=>l>=lo-.5&&l<=hi+.5&&!hit(l)).sort((a,b)=>{const ta=(cx>=a+10*sc&&cx<=a+w-10*sc)?0:1,tb=(cx>=b+10*sc&&cx<=b+w-10*sc)?0:1;return ta-tb||Math.abs(a-ideal)-Math.abs(b-ideal)});
-  if(good.length){left=good[0];done=true;break}
-  /* no side room: rise above the lowest blocker (last resort), the tail then ends above the line */
-  let up=bottom;for(const q of placed)if(q.left-pad<left+w&&q.right+pad>left)up=Math.min(up,q.top-pad);for(const o of others)if(o.t!=null&&o.x[0]-2*sc<left+w&&o.x[1]+2*sc>left&&o.t-2*sc<bottom)up=Math.min(up,o.t-6*sc-0);
-  if(up>=bottom-.5)return false;bottom=up}
- if(!done)return false;
+ let P=null;el.classList.remove("k1");
+ for(let f=1;f>=K.sayMinF-.001&&!P;f-=.1){el.style.setProperty("--ksay-fs",(T.fs*f).toFixed(2)+"px");
+  for(const wf of[1,1.25,1.5]){el.style.setProperty("--ksay-w",Math.min(T.w*wf,sw/sc).toFixed(1)+"px");if(lines()<=2&&fits()){P=tryPlace();if(P)break}}}
+ if(!P){el.classList.add("k1");for(let f=1;f>=K.sayMinF-.001&&!P;f-=.1){el.style.setProperty("--ksay-fs",(T.fs*f).toFixed(2)+"px");if(fits())P=tryPlace()}}
+ if(!P){window.__kitSayWhy={avail:Math.round(avail),sw:Math.round(sw),placed:placed.map(q=>[Math.round(q.left),Math.round(q.right),Math.round(q.top),Math.round(q.bottom)]),others:others.map(o=>[o.t&&Math.round(o.t),o.x.map(Math.round)]),cx:Math.round(cx),L:[Math.round(L.top),Math.round(L.bottom)],R:[Math.round(R.left),Math.round(R.right)]};return false}
+ const left=P.left,bottom=P.bottom,w=P.w,h=P.h;
  const tx=Math.max(14*sc,Math.min(w-14*sc,cx-left))/sc;el.style.setProperty("--ksay-tx",tx.toFixed(1)+"px");
  const lay=el.parentNode,lr=lay.getBoundingClientRect(),ox=lr.left+lay.clientLeft*sc,oy=lr.top+lay.clientTop*sc;
  el.style.left=((left-ox)/sc).toFixed(1)+"px";el.style.top=((bottom-h-oy)/sc).toFixed(1)+"px";el.dataset.line=sex;el.dataset.raised=bottom<L.bottom-.5?"1":"";
  rec.rect={left,right:left+w,top:bottom-h,bottom};return true}
-function kitSayAll(){try{const by=new Map();for(let i=KSAY.length-1;i>=0;i--){const q=KSAY[i];if(!q.el.isConnected||!q.fig.isConnected){q.el.remove();KSAY.splice(i,1)}}
+function kitSayAll(){try{window.__kitSayAllRan=1;const by=new Map();for(let i=KSAY.length-1;i>=0;i--){const q=KSAY[i];if(!q.el.isConnected||!q.fig.isConnected){q.el.remove();KSAY.splice(i,1)}}
  for(const q of KSAY){const k=q.st;if(!by.has(k))by.set(k,[]);const pl=by.get(k);const ok=ksayPlace(q,pl);
   if(ok===true){q.el.style.visibility="";if(!q.shown){q.shown=1;if(!q.still)q.el.classList.add("kin")}pl.push(q.rect)}
-  else if(ok===false||Date.now()-q.t0>KIT_HEADMK.sayWait)q.close(true)}}catch(e){}}
+  else if(ok===false||Date.now()-q.t0>KIT_HEADMK.sayWait)q.close(true)}}catch(e){window.__kitSayWhy="EXCALL "+(e&&e.stack||e)}}
 window.kitSayAll=kitSayAll;
 function kitSay(st,fig,text,opts){try{opts=opts||{};st=st||document.getElementById("stage");if(!st||!fig||!st.isConnected||!fig.isConnected)return null;
  const K=KIT_HEADMK,w=document.createElement("span");w.innerHTML=kitHeadMarkHtml(opts.title||String(text),"img","say",text);const el=w.firstChild;if(!el)return null;
@@ -170,7 +169,7 @@ function kitSay(st,fig,text,opts){try{opts=opts||{};st=st||document.getElementBy
  if(ok===false){q.close(true);return null}
  if(ok===true){el.style.visibility="";q.shown=1;if(!still)el.classList.add("kin")}
  else{const poll=()=>{if(q.closed||q.shown)return;kitSayAll();if(!q.closed&&!q.shown)setTimeout(poll,150)};setTimeout(poll,150)}/* not measured yet (no kitMarkLine): retry until placed or KIT_HEADMK.sayWait */
- if(opts.ms)q.tm=setTimeout(()=>q.close(),opts.ms);return q}catch(e){return null}}
+ if(opts.ms)q.tm=setTimeout(()=>q.close(),opts.ms);return q}catch(e){window.__kitSayWhy="EXC "+(e&&e.stack||e);return null}}
 window.kitSay=kitSay;window.kitSayClear=function(st){for(const q of KSAY.slice())if(!st||q.st===st)q.close(true)};
 window.addEventListener("resize",()=>{try{kitSayAll()}catch(e){}});
 /* the mood chip size on a stage: one size per stage (the standard woman body), never per figure */

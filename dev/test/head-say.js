@@ -44,13 +44,13 @@ const {chromium}=require('./lib/pw-roulette');const fs=require('fs');const [,,BA
     const w=sorted.find(f=>sexOf(f)==='f'),m=sorted.find(f=>sexOf(f)==='m');if(w&&m)pairs.push(['cross-sex',w,m]);if(sorted.length>=2)pairs.push(['ends',sorted[0],sorted[sorted.length-1]])}
    const res=[];
    for(const [pn,A,B2] of pairs)for(const [tn,T] of [['short',SHORT],['long',LONG]]){
-    kitSayClear(st);const h1=kitSay(st,A,T[0]);const h2=kitSay(st,B2,T[1]);await Wt(600);try{kitSayAll()}catch(e){}await Wt(300);
+    kitSayClear(st);const fresh=()=>{const s2=[...document.querySelectorAll('#mefig,#tokens .tok.fig img.figimg')].filter(vis).filter(f=>f.naturalWidth).sort((a,b)=>cxOf(a)-cxOf(b));return s2};const F=fresh();const ia=sorted.indexOf(A),ib=sorted.indexOf(B2);const A1=F[ia]||A,B1=F[ib]||B2;const h1=kitSay(st,A1,T[0]);const h2=kitSay(st,B1,T[1]);await Wt(600);try{kitSayAll()}catch(e){}await Wt(300);
     const hs=[h1,h2];const rows=[];
-    hs.forEach((h,i)=>{const sp=i?B2:A;if(!h){rows.push({i,pair:pn,len:tn,dropped:true});return}const q=h.el.getBoundingClientRect(),L=kitMarkLine(st,sexOf(sp)),t=h.el.firstChild,tr=t.getBoundingClientRect();
+    hs.forEach((h,i)=>{const sp=i?B2:A;if(!h||!h.el.isConnected){rows.push({i,pair:pn,len:tn,dropped:true,why:window.__kitSayWhy});return}const q=h.el.getBoundingClientRect(),L=kitMarkLine(st,sexOf(sp)),t=h.el.firstChild,tr=t.getBoundingClientRect();
      const tx=parseFloat(h.el.style.getPropertyValue('--ksay-tx'));const lh=parseFloat(getComputedStyle(t).lineHeight)||0;
      rows.push({i,pair:pn,len:tn,dropped:false,left:+q.left.toFixed(1),right:+q.right.toFixed(1),top:+q.top.toFixed(1),bottom:+q.bottom.toFixed(1),w:+q.width.toFixed(1),dLine:+(q.bottom-L.bottom).toFixed(2),raised:h.el.dataset.raised==='1',
       alpha:opaqueIn(q),inside:q.left>=SR.left-.5&&q.right<=SR.right+.5&&q.top>=SR.top-.5&&q.bottom<=SR.bottom+.5,tailIn:tx>=0&&tx<=q.width,trunc:t.scrollHeight>t.clientHeight+1||t.scrollWidth>t.clientWidth+1,
-      lines:Math.round((tr.height-2*.37*parseFloat(getComputedStyle(t).fontSize))/(lh||1)),fs:getComputedStyle(t).fontSize,nm:i?'B':'A'})});
+      lines:Math.round((tr.height-2*.37*parseFloat(getComputedStyle(t).fontSize))/(lh||1)),fs:getComputedStyle(t).fontSize,nm:i?'B':'A',why:q.width===0?JSON.stringify(window.__kitSayWhy):undefined})});
     if(!hs[0]||!hs[1]){}else{const a=hs[0].el.getBoundingClientRect(),b2=hs[1].el.getBoundingClientRect();const ov=!(a.right<=b2.left||b2.right<=a.left||a.bottom<=b2.top||b2.bottom<=a.top);rows.forEach(r=>r.overlap=ov)}
     if(window.__shotKey!==undefined){}
     res.push({pair:pn,len:tn,rows});
