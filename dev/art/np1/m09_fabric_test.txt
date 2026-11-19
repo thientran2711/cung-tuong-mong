@@ -1,0 +1,14 @@
+REFS (proposed): image 1 = eIyOFEidqL (live M09 hd), image 2 = 6AbGv6EiJO (style: portraits c01 pink + c12 green, the m09-style redraws).
+(Original refs were image 1 = her older fig s78iwIbl8e + images 2-5 = four face portraits N2HYqYa6D9, bxVgMSX5Y2, dtPf4EDXSL, eIyaPEVdqL.)
+SETTINGS: gpt-2-6, width 1520, height 2688, count 1, folder ba4aecfe-efce-47e2-b53f-30d292091886, extraSettings {"transparentBackground": true}.
+
+CHANGED WORDING (everything else = brief2 template verbatim, PROP = "a small book held at the chest", age 18, maid → no huadian):
+1. BEFORE: "same hair, hairpins, outfit colours and embroidery"
+   AFTER:  "same hair, hairpins, outfit cut, layers and colours"
+2. BEFORE: "match the beauty portraits in images 2-5"
+   AFTER:  "match the two beauty portraits in image 2"
+3. BEFORE: "Embroidered fine silk with hairpins and small jewellery; she is a rich palace maid, nothing looks poor."
+   AFTER:  "FABRIC AND EMBROIDERY exactly like the robes of the two portraits in image 2 (not like image 1): thin, soft, smooth fine silk that drapes and folds lightly, with a faint tone-on-tone floral pattern woven into the silk; NOT thick, NOT coarse, NOT linen or canvas texture, NOT stiff. Collar bands, sleeve cuffs and hem borders embroidered with peonies and leaves in silk thread with fine gold-thread outlines, as in image 2, stitched directly into the fabric, flat, not appliqué, not raised, not glossy. Hairpins and small jewellery; she is a rich palace maid, nothing looks poor."
+
+FULL PROMPT (to send unchanged):
+Semi-realistic painterly guofeng portrait style, near-3D realistic rendering, soft natural light, fine detail. Redraw image 1 as the exact same full-body palace maid: same hair, hairpins, outfit cut, layers and colours, same age (about 18). Face, fair porcelain skin and painterly finish match the two beauty portraits in image 2: very beautiful, soft round-almond warm eyes, serene expression. FABRIC AND EMBROIDERY exactly like the robes of the two portraits in image 2 (not like image 1): thin, soft, smooth fine silk that drapes and folds lightly, with a faint tone-on-tone floral pattern woven into the silk; NOT thick, NOT coarse, NOT linen or canvas texture, NOT stiff. Collar bands, sleeve cuffs and hem borders embroidered with peonies and leaves in silk thread with fine gold-thread outlines, as in image 2, stitched directly into the fabric, flat, not appliqué, not raised, not glossy. Hairpins and small jewellery; she is a rich palace maid, nothing looks poor. Calm standing, frontal or slightly angled, facing the viewer; hands graceful, five fingers each, holding a small book held at the chest (replace any old prop with it). Maids have NO huadian: clean bare forehead. NO long trailing train or fish-tail skirt; hem ends at the feet, both shoes visible. FULLY TRANSPARENT BACKGROUND (real alpha channel, cut-out, no backdrop, no checkerboard, no ground shadow). Full body inside the canvas with margin.
