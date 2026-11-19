@@ -397,3 +397,76 @@ H8REF = {'truong-xuan-cung-hqp-ngu': '9ZHI728NYZ', 'truong-xuan-cung-hqp': 'jUoW
 assert all('{' not in v for v in out8.values())
 json.dump(out8, open(os.path.join(D, 'prompts_v8.json'), 'w'), ensure_ascii=False, indent=1)
 print('v8', {k: len(v) for k, v in out8.items()})
+
+# ---- v9 (owner Lượt 602/604/607/610, rules L13–L18; worker PR9 for ROOT-52): ONE COMMON room block + per-room parts.
+# Method KEPT (L17, Lượt 610): image 1 = tẩm cung gOmYI7iSXO, image 2 = M09 EbYJzsMuuO, image 3 = an APPROVED first-generation room picture
+# (never a re-gen of a re-gen: PR8 drift diagnosis). Luxury words moderate; colour LEVEL in words (B18); rank colours = triều phục option B (L17).
+# Fit the game as it is (L18): iPad dư đồ frame = people band 15.1–88.4 % H, feet line 88.4 %, centres x 14.5/36.2/56.3/76.4 %, empty floor 11.6 % under the feet.
+C9_STYLE = ("A brand-new painting of a natural, lived-in, richly furnished room in an ancient Chinese imperial palace, painted exactly like image 1 "
+    "(the bedroom): same hand, same brushwork, same soft painterly finish, same natural warm light, same depth with furniture, curtains and objects "
+    "arranged through the room; the soft painted style of our game, never glossy, never over-detailed, never a shiny 3D render. "
+    "COLOUR LEVEL: soft, clear colours at the same level as the girl in image 2 and the room in image 1: gentle, light and pretty, every colour clearly "
+    "readable, never saturated, never glaring, never neon, never pastel or washed out, never grey or dull. Wide panoramic view, summer morning.")
+C9_CAM = (" CAMERA AND SCALE: eye level of a standing woman, the same camera distance, eye level and natural people scale as image 3 {IMG3}; no ceiling "
+    "in the picture: the walls, pillars and hanging lanterns run out of the top edge. The room is made for four standing women placed later in front of "
+    "the furniture: each woman about three quarters of the picture height tall, her feet at about seven eighths of the picture height, spread across the "
+    "width (centres at about 15, 36, 56 and 76 % of the width). So the furniture stands BEHIND where they will stand: the bases of the beds, seats, tables "
+    "and stands in that band sit no lower than seven eighths of the picture height; below that, the floor of the room simply continues to the bottom "
+    "edge, open, nothing standing on it. The corners are furnished, never bare, and the left part of the room near the viewer holds only small, low "
+    "objects, never a large piece close up at the left edge.")
+C9_END = (" FLOOR: {FLOOR}, no large rug or carpet covering it. LIGHT: soft warm morning daylight from the right, like the light on the girl in image 2. "
+    "Natural and furnished, never an empty stage; people will be placed in it later. Empty of people, no text, no writing, no characters.")
+def room9(room, img3, floor):
+    return C9_STYLE + " ROOM: " + room + C9_CAM.replace('{IMG3}', img3) + C9_END.replace('{FLOOR}', floor)
+# rank colour sentences (triều phục option B codes, L17) with the medium-tone wording (B18)
+RC9 = {5: "RANK COLOUR: lavender-violet like #A88BCB, a soft medium lavender-violet, woven through the bedding, bed curtains, cushions and tassels, with ivory and soft jade-green as its partners.",
+       7: ("RANK COLOURS (Hoàng quý phi = orange + yellow, L14): honey-amber orange like #E3A25B, a soft medium honey-amber, is the main colour of the silks "
+           "(bedding, bed curtains, seat cushions, lantern tassels), with golden yellow like #EFBD69 as its partner in the borders, linings and embroidery; "
+           "clearly less yellow than an Empress's room; no red silks, no red bedding; the wood stays dark zitan with gold lacquer."),
+       8: ("RANK COLOURS (Hoàng hậu = yellow + red, L14): royal yellow like #EFBD69, a soft medium royal yellow, on the throne cushions, the ceremonial fans "
+           "and the curtains, mixed with brick-crimson like #C65A4C on the armchair cushions, the silk hangings and the tassels, and court red like #99443F on "
+           "the lacquer columns and beams, with gilt; festive and beautiful, never all yellow.")}
+# (a) Phi bedroom (t5): same room + arrangement as approved v6b aFGyN6afSh (1st gen of v3), redrawn to fit the iPad frame (L18).
+PHI9 = (CPA_BED + "at the centre of the room, the large clear main subject, " + RANK['phi']['bed'] + "; around it " + RANK['phi']['bedx'] + ". "
+        + CARD_CP + "PHI level, clearly richer than a Tần: deeper carving, jade-green inlay, gilt edging on the furniture, silk brocade, jade and porcelain treasures. "
+        + RC9[5] + NOPE + " Keep the same room and the same arrangement as image 3 (this same room as drawn before), the whole canopy bed with its top inside the picture.")
+PHI9 = PHI9.replace('soft purple gauze', 'lavender-violet gauze').replace('purple silk brocade', 'lavender-violet silk brocade').replace('purple cushions', 'lavender-violet cushions').replace('purple tassels', 'lavender-violet tassels').replace('a purple silk robe', 'a lavender-violet silk robe')
+# (b) HQP bedroom (t7): same room + arrangement as approved v6-level s7I0dD0l8e (owner Lượt 572: layout beautiful); orange + yellow (L14); moderate near-Empress luxury.
+HQPR = HQP['truong-xuan-cung-hqp-ngu']['room']
+HQP9 = HQPR[:HQPR.index(CARD_TX)]
+for a, b in [('ruby red silk curtains tied back inside', 'honey-amber silk curtains lined with golden yellow tied back inside'),
+             ('golden apricot brocade bedding', 'honey-amber silk brocade bedding with golden yellow borders,'),
+             ('lanterns with ruby red tassels', 'lanterns with honey-amber tassels'), ('a ruby red robe', 'a honey-amber silk robe')]:
+    assert a in HQP9, a; HQP9 = HQP9.replace(a, b)
+LUX9 = ("HOÀNG QUÝ PHI level, the Vice-Empress: one small step below the Empress: gilt carving on the bed and the main seats, gold lacquer, mother-of-pearl, "
+        "pearls, jade, coral, cloisonné and kingfisher-blue inlay, fine treasures on the shelves; the bed looks imperial with a tall carved gilded crown. "
+        "Phoenixes allowed: a pair of phoenixes carved or embroidered among magnolias on the bed, the screen and the cushions. ")
+HQP9 = HQP9 + CARD_TX + LUX9 + RC9[7] + RECT + " Keep the same room and the same arrangement as image 3 (this same room as drawn before); change the colours as written here."
+# (c) HH reception (t8): KN7 own layout (L11) WITHOUT any ceiling / height plan (owner Lượt 604); grandeur from throne, screen, columns, colours.
+KN9 = KN7[:KN7.index(EMP)]
+for a, b in [("a GRAND, very large and high hall (owner Lượt 563: never a small room), seen straight on", "a grand hall (owner Lượt 563: never a small room), seen straight on"),
+             ("a high coffered ceiling painted gold and red; ", ""), ("high on the back wall", "on the back wall"),
+             ("a carved gilded openwork floor-to-ceiling arch frame", "a tall carved gilded openwork arch frame"),
+             ("carved gilded square-backed armchairs with imperial yellow cushions", "carved gilded square-backed armchairs with brick-crimson cushions"),
+             ("imperial yellow silk cushions embroidered with phoenixes", "royal yellow silk cushions embroidered with phoenixes"),
+             ("a tall ceremonial fan of imperial yellow silk", "a tall ceremonial fan of royal yellow silk"),
+             ("imperial yellow silk curtains tied back with gold tassels", "royal yellow silk curtains tied back with brick-crimson tassels")]:
+    assert a in KN9, a; KN9 = KN9.replace(a, b)
+KN9 += (" The grandeur comes from the throne, the screen, the columns, the gilt and the colours, NOT from height: the hall is seen as close as an "
+        "ordinary approved room, the columns simply run out of the top of the picture. The most splendid room of the palace, yet in the same soft painted "
+        "style: phoenix motifs carved, embroidered and gilded, gilt on the red columns, fine treasures. " + RC9[8] + NOSOFA + RECT)
+G9 = 'gOmYI7iSXO', 'EbYJzsMuuO'
+out9 = {'canh-phuc-cung-phi-ngu': dict(prompt=room9(PHI9, "(this same room as drawn before)", "warm polished wooden floorboards"), refs=[*G9, 'aFGyN6afSh']),
+        'truong-xuan-cung-hqp-ngu': dict(prompt=room9(HQP9, "(this same room as drawn before)", "warm polished wooden floorboards"), refs=[*G9, 's7I0dD0l8e']),
+        'khon-ninh-cung': dict(prompt=room9(KN9, "(image 3 is another approved reception room, a guide ONLY for camera distance, eye level and people scale, NOT for its arrangement, colours or furniture: this hall has its own arrangement as written above)", "polished stone tiles"), refs=[*G9, 'rgXnolAxtc'])}
+# GATE v9: common block present, method refs kept, no drift words, no ceiling/height plan, image 3 never a re-gen chain picture (v7/v8 gens).
+DRIFT_IMG3 = {'9ZHI728NYZ', 'jUoWKaeLD0', 'P3Q8IIK42C', 'jUoc0VKLD0', 'EbYNiqeuuO', 'xSBW07fjfW', 'aFGyB4ZfSh'}
+for k, v in out9.items():
+    p = v['prompt']
+    assert p.startswith(C9_STYLE) and C9_CAM.split('{IMG3}')[0] in p and C9_END.split('{FLOOR}')[1] in p, k
+    assert v['refs'][:2] == list(G9) and len(v['refs']) == 3 and v['refs'][2] not in DRIFT_IMG3, k
+    for w in ('everywhere', 'BRIGHT', 'bright', 'MUCH HIGHER', 'coffered', 'high ceiling', 'floor-to-ceiling', 'farther back', 'throne-like', 'apricot', 'ruby', '{'):
+        assert w not in p, (k, w)
+    assert k != 'khon-ninh-cung' or 'imperial yellow' not in p
+json.dump(out9, open(os.path.join(D, 'prompts_v9.json'), 'w'), ensure_ascii=False, indent=1)
+print('v9', {k: len(v['prompt']) for k, v in out9.items()})
