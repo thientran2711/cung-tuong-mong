@@ -93,6 +93,15 @@ for sid,ty,age,hair,outfit,(mn,mh),(sn,sh),pose,ak in S:
     if sid=="s04": pose=pose.replace("a slim sheathed straight sword with a black lacquer scabbard and a white silk tassel held upright at her side in one hand","a sprig of white plum blossom held upright at chest height in one hand")
     out[f"{sid}.v4b"]=line(age,TYPES_B[ty]['face'],TYPES_B[ty]['expr'],hair,outfit,mn,mh,sn,sh,pose,ak)
 
+# ---- Lượt 644 (owner via ROOT-53): c06 redo — keep her ivory skirt (secondary = ivory, not jade green) + crown hairpin upright ----
+for i,(cid,age,face,shape,eyes,lips,hair,outfit,m,s,game,pose,item,itemshort) in enumerate(R):
+    if cid!="c06": continue
+    n=i+1; look=NS['LOOKS'][(n-1)%6]; ak=["FF","SL","SR","TL","TR","ST"][(n-1+(n-1)//6)%6]
+    mn,mh=RC[cid]['main'],RC[cid]['main_hex']; sn,sh=IVORY
+    o2=outfit.replace("of vermilion","of soft vermilion").replace("an ivory","a ivory").replace("ivory",sn)
+    h2=hair+", one small gold hairpin at the crown pointing straight upward"
+    out["c06.v3c"]=line(age,face,EXPR[look],h2,o2,mn,mh,sn,sh,pose,ak)
+
 for k,v in out.items():
     open(os.path.join(D,f'{k}.FULL.txt'),'w').write(v)
     print(f"== {k}\n{v}\n")
