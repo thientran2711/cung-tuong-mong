@@ -697,3 +697,118 @@ for k, src in [('truong-xuan-cung-hqp-ngu-A-r2', out11c['truong-xuan-cung-hqp-ng
     out11e[k] = dict(prompt=p, refs=src['refs'])
 json.dump(out11e, open(os.path.join(D, 'prompts_v11e.json'), 'w'), ensure_ascii=False, indent=1)
 print('v11e', list(out11e))
+# ---- v11f (owner Lượt 668/671/672 via ROOT-54; worker PR11). A17 diff vs the last prompts of each room:
+#  FRONTALS (HQP bedroom F3, Quý phi bedroom F2): FLOOR10 → FLOOR11F_BED (measured floor, owner Lượt 668); HQP F3 also BIG11 → BIG11L ('standing free with
+#  open floor around it' adds floor). ANGLED (all 5): ANG11/ANG11C/ANGB camera sentences → GOC11F = the góc xéo composition of the owner's praised bedrooms
+#  (Phi v9 4RFIyNR9Aa / Phi v3 SyhTG51Ub8 / Tần EbY494KuuO), image 4 = that model (mirrored 8aiwqQTIrU when the frontal has its windows on the LEFT);
+#  floor = FLOOR11F_BED / FLOOR11F_REC; LOGIC11 + BIG11L kept on bedrooms (owner Lượt 658/635). Everything else word for word.
+FLOOR11F_BED = (" FLOOR AMOUNT (owner Lượt 668, measured): the open floor in front of the furniture is a strip of about one eighth of the picture "
+    "height: the front of the bed step and footstool and the fronts of the side groups stand at about seven eighths of the picture height (never "
+    "higher up than four fifths of the picture height, never lower down than nine tenths), like the approved Empress bedroom.")
+FLOOR11F_REC = (" FLOOR AMOUNT (owner Lượt 668, measured): the same open floor as image 3: the front of the platform step and the fronts of the chair "
+    "rows stand at about four fifths of the picture height, so the open floor in front is a strip of about one fifth of the picture height, never more.")
+GOC11F = (" OBLIQUE VIEW (góc xéo, owner Lượt 671/672): this is the SAME room as image 3 (the same furniture, colours, walls, windows and objects), now "
+    "painted in the composition of image 4, the owner's model room: the back wall runs across the picture in gentle perspective and the {WIN} side wall "
+    "with its tall lattice windows runs towards the viewer on the {WIN}: two walls at a gentle angle, never a steep diagonal. The WHOLE {SUBJ} stands in "
+    "the middle of the picture against the back wall, seen slightly from its front corner so its front and one end show, completely inside the picture, "
+    "its top inside the picture, never cut by the picture edges; {GROUPS} stand on BOTH sides of it along the walls, like in image 4; a strip of open "
+    "floor in front like image 4; a tall room: the pillars and walls rise high and run out of the top edge. Image 4 is a guide ONLY for this composition "
+    "and camera angle, NOT for its colours, furniture or decoration.")
+GROUPS_BED = "the room's own furniture groups from image 3 (dressing table, screen, shelves, clothes stand, tea table and stools)"
+GROUPS_REC = "the chair rows with their tea tables and the room's own side pieces from image 3"
+def goc(p, subj, win, groups, floor_s):
+    room = p[p.index(' ROOM: ') + 7:p.index(' CAMERA AND SCALE:')]
+    floor = p[p.index(' FLOOR: ') + 8:p.index(', no large rug')]
+    for a, b in STRAIGHT: room = room.replace(a, b)
+    W2 = "TWO walls: the back wall and the " + win + " side wall with its tall windows, meeting at a square corner"
+    for a in ("THREE walls: the back wall straight across the middle of the picture and the left and right side walls running towards the viewer in clear perspective, meeting it at square corners",
+              "TWO walls only: the back wall straight across the picture and the LEFT side wall running towards the viewer in clear perspective, meeting at a square corner"):
+        room = room.replace(a, W2)
+    room = room.replace("with the back wall straight across the picture and both side walls running towards the viewer in correct perspective, meeting the back wall at square corners", "with " + W2)
+    assert 'THREE walls' not in room and 'both side walls' not in room, room[:400]
+    for old in (FLOOR10, FLOOR10B_BED, FLOOR10B_REC, FLOOR11F_BED, FLOOR11F_REC, BIG11):
+        room = room.replace(old, BIG11L if old == BIG11 else '')
+    assert 'straight on' not in room and 'image 3' not in room.replace('than in image 3', ''), room
+    room += GOC11F.replace('{WIN}', win).replace('{SUBJ}', subj).replace('{GROUPS}', groups) + floor_s
+    return room9(room, SAME_IMG3, floor)
+out11f = {}
+h = out11['truong-xuan-cung-hqp-ngu-F3']['prompt']; assert FLOOR10 in h and BIG11 in h
+out11f['truong-xuan-cung-hqp-ngu-F3-r1'] = dict(prompt=h.replace(FLOOR10, FLOOR11F_BED).replace(BIG11, BIG11L), refs=out11['truong-xuan-cung-hqp-ngu-F3']['refs'])
+q = out11['canh-phuc-cung-quyphi-ngu-F2']['prompt']; assert FLOOR10 in q
+out11f['canh-phuc-cung-quyphi-ngu-F2-r1'] = dict(prompt=q.replace(FLOOR10, FLOOR11F_BED), refs=out11['canh-phuc-cung-quyphi-ngu-F2']['refs'])
+# angled: HH bedroom (frontal cpS5YIl0eP, windows right → model SyhTG51Ub8), HQP reception (O6EoWbJynm, windows right → 4RFIyNR9Aa),
+# HH reception (bxMA4ov5Y2, windows both sides → 4RFIyNR9Aa, right wall)
+hhb = goc(out9['khon-ninh-cung-ngu-B3']['prompt'], 'canopy bed with its footstool', 'right', GROUPS_BED, FLOOR11F_BED)
+out11f['khon-ninh-cung-ngu-A-r3'] = dict(prompt=hhb.replace(' OBLIQUE VIEW', BIG11L + LOGIC11.replace('exactly as in image 3; the same arrangement as image 3, only seen from another angle;', 'as in image 3;') + ' OBLIQUE VIEW', 1), refs=[*G9, 'cpS5YIl0eP', 'SyhTG51Ub8'])
+out11f['truong-xuan-cung-hqp-A-r2'] = dict(prompt=goc(out10['truong-xuan-cung-hqp-3w']['prompt'], 'host daybed on its platform with the arch frame', 'right', GROUPS_REC, FLOOR11F_REC), refs=[*G9, 'O6EoWbJynm', '4RFIyNR9Aa'])
+out11f['khon-ninh-cung-A-r2'] = dict(prompt=goc(out10b['khon-ninh-cung-3w']['prompt'], 'throne platform with its arch frame and steps', 'right', GROUPS_REC, FLOOR11F_REC) , refs=[*G9, 'bxMA4ov5Y2', '4RFIyNR9Aa'])
+def goc_bed_from(frontal_key, frontal_gen, model):
+    p = goc(out11f[frontal_key]['prompt'], 'canopy bed with its footstool', 'left', GROUPS_BED, FLOOR11F_BED)
+    p = p.replace(' OBLIQUE VIEW', LOGIC11.replace('exactly as in image 3; the same arrangement as image 3, only seen from another angle;', 'as in image 3;') + ' OBLIQUE VIEW', 1)
+    return dict(prompt=p, refs=[*G9, frontal_gen, model])
+for k, v in out11f.items():
+    p = v['prompt']
+    assert p.startswith(C9_STYLE) and C9_END.split('{FLOOR}')[1] in p and v['refs'][:2] == list(G9), k
+    for w in ('standing free', 'ANGLED CAMERA', '{', 'seen straight on' if k.endswith(('A-r2', 'A-r3')) else '§§'): assert w not in p, (k, w)
+if True:
+    json.dump(out11f, open(os.path.join(D, 'prompts_v11f.json'), 'w'), ensure_ascii=False, indent=1)
+    print('v11f', {k: len(v['prompt']) for k, v in out11f.items()})
+# ---- v11g (A21 auto-redo after measure_floor.py: HQP bedroom F iG5fGfX3uK 16.0 % (> 15.6), HH bedroom A 3zKCnvmREY 15.2 % (Δ 3.5 vs 11.7),
+#      Quý phi bedroom F eIPlIUodqL 7.8 % (< 8.7, footstool/stools at the feet line)). ONLY the FLOOR AMOUNT sentence changes (A17).
+FLOOR11G_CLOSE = (" FLOOR AMOUNT (owner Lượt 668, measured; the last picture still showed too much floor): the camera stands a little closer, so the "
+    "open floor in front of the furniture is only a narrow strip of about one tenth of the picture height: the front of the bed step and footstool "
+    "and the fronts of the side groups stand at about nine tenths of the picture height, like the approved Empress bedroom.")
+FLOOR11G_BACK = (" FLOOR AMOUNT (owner Lượt 668, measured; the last picture had the footstool and the stools down at the feet line): the footstool, "
+    "the stools and the tea table stand back close to the bed and the walls, their fronts at about five sixths of the picture height, so a clear strip "
+    "of open floor of about one seventh of the picture height runs in front of all the furniture, nothing standing on it.")
+out11g = {}
+for k, src, F in [('truong-xuan-cung-hqp-ngu-F3-r2', 'truong-xuan-cung-hqp-ngu-F3-r1', FLOOR11G_CLOSE),
+                  ('khon-ninh-cung-ngu-A-r4', 'khon-ninh-cung-ngu-A-r3', FLOOR11G_CLOSE),
+                  ('canh-phuc-cung-quyphi-ngu-F2-r2', 'canh-phuc-cung-quyphi-ngu-F2-r1', FLOOR11G_BACK)]:
+    p = out11f[src]['prompt']; assert p.count(FLOOR11F_BED) == 1, k
+    out11g[k] = dict(prompt=p.replace(FLOOR11F_BED, F), refs=out11f[src]['refs'])
+json.dump(out11g, open(os.path.join(D, 'prompts_v11g.json'), 'w'), ensure_ascii=False, indent=1)
+print('v11g', list(out11g))
+# ---- v11h (wave 2): ANGLED HQP bedroom (frontal = VX7x8c8MMU, F3-r2) and Quý phi bedroom (frontal = eIPlheldqL, F2-r2); windows LEFT → model
+#      image 4 = mirrored Phi v9 8aiwqQTIrU. Floor sentence = the one that made its frontal pass (FLOOR11G_CLOSE / FLOOR11G_BACK).
+#      HQP: "in the RIGHT half of the room" dropped (owner Lượt 671/672: the whole bed centred against the back wall in the angled version).
+out11h = {}
+for k, fk, gen, F in [('truong-xuan-cung-hqp-ngu-A-r3', 'truong-xuan-cung-hqp-ngu-F3-r1', 'VX7x8c8MMU', FLOOR11G_CLOSE),
+                      ('canh-phuc-cung-quyphi-ngu-A-r3', 'canh-phuc-cung-quyphi-ngu-F2-r1', 'eIPlheldqL', FLOOR11G_BACK)]:
+    v = goc_bed_from(fk, gen, '8aiwqQTIrU'); p = v['prompt']
+    assert p.count(FLOOR11F_BED) == 1; p = p.replace(FLOOR11F_BED, F)
+    p = p.replace("against the back wall in the RIGHT half of the room, square to it,", "against the back wall, square to it,")
+    assert 'RIGHT half' not in p and 'THREE walls' not in p and 'seen straight on' not in p, k
+    out11h[k] = dict(prompt=p, refs=v['refs'])
+json.dump(out11h, open(os.path.join(D, 'prompts_v11h.json'), 'w'), ensure_ascii=False, indent=1)
+print('v11h', list(out11h))
+# ---- v11i (A21 auto-redo): HQP bedroom A 5jDzShyKxe 7.8 % (stools at the bottom edge; bed still in the right half = owner Lượt 671/672 point
+#      'bed centred' not met), Quý phi bedroom A ov6wu0U829 14.7 % (Δ 3.9 vs 10.8). Only the floor sentence (+ HQP: CENTRE11I for the owner's point).
+FLOOR11I = (" FLOOR AMOUNT (owner Lượt 668, measured): the camera stands a little closer, and the footstool, the stools and the tea tables stand "
+    "back close to the bed and the walls, their fronts at about seven eighths of the picture height, so a clear strip of open floor of about one "
+    "eighth of the picture height runs in front of all the furniture, nothing standing on it, nothing near the bottom edge.")
+CENTRE11I = (" BED IN THE MIDDLE (owner Lượt 671/672): in this view the canopy bed is NOT in the right half: it stands in the middle of the picture "
+    "width, between about one third and two thirds of the width, with the dressing table group on its left and the screen and cabinet on its right.")
+out11i = {}
+for k, src, F, extra in [('truong-xuan-cung-hqp-ngu-A-r4', 'truong-xuan-cung-hqp-ngu-A-r3', FLOOR11G_CLOSE, CENTRE11I),
+                         ('canh-phuc-cung-quyphi-ngu-A-r4', 'canh-phuc-cung-quyphi-ngu-A-r3', FLOOR11G_BACK, '')]:
+    p = out11h[src]['prompt']; assert p.count(F) == 1, k
+    out11i[k] = dict(prompt=p.replace(F, extra + FLOOR11I), refs=out11h[src]['refs'])
+json.dump(out11i, open(os.path.join(D, 'prompts_v11i.json'), 'w'), ensure_ascii=False, indent=1)
+print('v11i', list(out11i))
+# ---- v11j (A21): HQP bedroom A xSB0PcujfW passes the measure (13.9 %) but FAILS the eye check: same view as its frontal, bed in the right half
+#      (owner Lượt 671/672 not met) → image ORDER swapped: image 3 = the góc xéo model 8aiwqQTIrU (composition), image 4 = the frontal VX7x8c8MMU
+#      (room); text roles swapped accordingly, words unchanged. Quý phi bedroom A xSB0PTFjfW 14.7 % (Δ 3.9) → FLOOR11G_CLOSE (camera closer).
+def swap34(p):
+    i = p.index(' ROOM: ')
+    q = p[i:]
+    for a, b in (('mage 3', 'mage §'), ('mage 4', 'mage 3'), ('mage §', 'mage 4')): q = q.replace(a, b)
+    return p[:i] + q
+out11j = {}
+p = out11i['truong-xuan-cung-hqp-ngu-A-r4']['prompt']
+out11j['truong-xuan-cung-hqp-ngu-A-r5'] = dict(prompt=swap34(p), refs=[*G9, '8aiwqQTIrU', 'VX7x8c8MMU'])
+assert 'the composition of image 3' in out11j['truong-xuan-cung-hqp-ngu-A-r5']['prompt'] and 'Image 3 is a guide ONLY' in out11j['truong-xuan-cung-hqp-ngu-A-r5']['prompt']
+p = out11i['canh-phuc-cung-quyphi-ngu-A-r4']['prompt']; assert p.count(FLOOR11I) == 1
+out11j['canh-phuc-cung-quyphi-ngu-A-r5'] = dict(prompt=p.replace(FLOOR11I, FLOOR11G_CLOSE), refs=out11i['canh-phuc-cung-quyphi-ngu-A-r4']['refs'])
+json.dump(out11j, open(os.path.join(D, 'prompts_v11j.json'), 'w'), ensure_ascii=False, indent=1)
+print('v11j', list(out11j))

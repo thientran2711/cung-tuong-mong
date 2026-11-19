@@ -1,0 +1,217 @@
+# Nữ đế m05 vs Hoàng hậu t8 m05 — sentence-by-sentence (ROOT-55, owner Lượt 692)
+
+
+## a18  (HH 51 sentences, Nữ đế 46)
+
+- == 7 sentences identical
+- **HH only:** An imperial consort, the Empress.
+- **ND only:** An imperial consort, the Female Emperor (Nữ đế), the highest rank of all.
+- == 5 sentences identical
+- **HH only:** Outfit (the Empress (Hoàng hậu), clearly much richer and more splendid than the lower ranks): the Empress's imperial phoenix ceremonial robe of golden yellow silk mixed with coral red, richly embroidered on the chest, shoulders and wide sleeves with large phoenixes, peonies and clouds in gold and kingfisher-blue silk thread (far denser and richer embroidery than any other rank), over it a long ceremonial silk mantle falling from the shoulders to the floor, edged with a broad band of gold brocade and pearls, a wide jewelled gold-and-pearl cloud collar with layered pearl fringes over the shoulders, many long strands of pearls and jade across the chest, a jade-and-gold belt with long tassels and jade pendants, floor-length robe with slippers visible, slim tall silhouette;
+- **HH only:** the GRANDEST headdress of all: a FULL tall imperial nine-phoenix crown, clearly taller and wider than a noble consort's crown, with a large central gold phoenix holding a pearl string in its beak, jewelled wings spreading wide on both sides, kingfisher-blue inlay, rubies and pearls, and a few clean pearl tassels at the sides;
+- **HH only:** the most splendid outfit of all, clearly grander than every other rank.
+- **ND only:** Hair: ALL of her hair is pinned UP in a neat high imperial bun (chignon) under the crown, at every age;
+- **ND only:** NO loose hair: nothing hanging down her back, over her shoulders or in front of her chest.
+- **ND only:** Outfit (the Female Emperor (Nữ đế), equal to the Empress in colour but clearly more majestic, and different in design from the Empress's robe): a woman's imperial ceremonial dragon robe of golden yellow silk mixed with deep wine-crimson, richly embroidered on the chest, shoulders and wide sleeves with large dragons, peonies and clouds in gold and kingfisher-blue silk thread (far denser and richer embroidery than any other rank), over it a long ceremonial silk mantle falling from the shoulders to the floor, edged with a broad band of gold brocade and pearls, a STIFF, SHORT, structured shoulder piece (cầu vai cứng) of gold brocade edged with pearls over each shoulder, slightly pointed outward, many long strands of pearls and jade across the chest, a jade-and-gold belt with long tassels and jade pendants, floor-length robe with slippers visible, slim tall silhouette;
+- **ND only:** the GRANDEST headdress of all: a FULL tall imperial dragon crown, clearly taller and wider than the Empress's crown, one splendid imperial gold phoenix-and-dragon crown: a large gold dragon with a pearl in its claws rising from the centre of a tall gold crown band, a gold phoenix with raised wings on each side of the dragon, set with rubies, pearls and kingfisher-blue inlay, pure gold metalwork with no flowers and no flower ornaments anywhere on the crown or the hairpins, and a few gold hairpins with slim gold-and-pearl dangles at the sides, and a row of bead tassels (lưu) hanging in front from the rim of the crown to the forehead, ending above the eyebrows, the bare forehead clean under them;
+- **ND only:** the most majestic outfit of all, clearly grander than every other rank.
+- == 1 sentences identical
+- **HH only:** her ORIGINAL robe colour is kept exactly as in image 1 (her first reference): coral red silk like #D4897D, with teal like #499597 in the inner robe and linings;
+- **HH only:** the royal golden yellow is the DOMINANT colour of the robe, mantle, sleeves and skirt (more than half of everything visible), her colour is the second colour (collar, inner robe, wide borders and a few panels);
+- **ND only:** the royal golden yellow is the DOMINANT colour of the robe, mantle, sleeves and skirt (more than half of everything visible), a deep, quiet wine-crimson like #7E2A33 is the second colour (collar, inner robe, wide borders and a few panels);
+- == 4 sentences identical
+- **HH only:** The phoenix is the main embroidered motif, larger and more prominent than the flowers.
+- **HH only:** All flowers, birds and the phoenix are fine silk-thread embroidery stitched directly into the fabric, flat and integrated with the cloth, following its folds, not appliqué, not pasted patches, not raised.
+- **ND only:** The dragon is the main embroidered motif, larger and more prominent than the flowers.
+- **ND only:** All flowers, birds and the dragon are fine silk-thread embroidery stitched directly into the fabric, flat and integrated with the cloth, following its folds, not appliqué, not pasted patches, not raised.
+- **ND only:** FABRIC: thick gold-embroidered brocade with a graceful, flowing drape.
+- == 1 sentences identical
+- **HH only:** HAIR (rank law): ALL her hair is swept UP into a high bun / chignon, nothing loose hanging down her back.
+- == 3 sentences identical
+- **HH only:** NO flowers in the hair or on the crown at this rank (flowers only at ranks 1 to 6).
+- **HH only:** HEAD AND BODY: her head turns together with her shoulders and body in the same direction with natural anatomy, never a frontal head on a turned body.
+- **HH only:** FABRIC: thick gold-embroidered brocade with a graceful, flowing drape.
+- **HH only:** ANGLE: a clear THREE-QUARTER view toward the LEFT, NOT frontal: her whole body, hips and face turned about 45 degrees to the left, her right shoulder nearer the viewer, face fully visible (never side view);
+- **HH only:** her head turns together with her shoulders and body, never back-turned, never in profile.
+- **HH only:** GRACE (pose variety, every rank its own): a gentle S-curve through her body, her hips softly shifted to one side.
+- **HH only:** THREE-COLOUR RULE (t7/t8): the whole outfit uses EXACTLY THREE colours that clearly interact: the royal golden yellow (honey-gold like #EFBD69), the MAIN colour coral red like #D4897D and the SECONDARY colour teal like #499597, the secondary clearly visible in large areas (inner robe or skirt, wide borders, sash, cuffs, linings), never a single flat colour all over;
+- **HH only:** gold or silver only as thin accents, no other colour.
+- **HH only:** HELD ITEM COLOUR: the held item and any embroidery, painting or tassel on it are in a colour family clearly different from BOTH her robe colour coral red and her secondary colour teal like #499597.
+- **HH only:** Pose: a small step forward, a closed imperial phoenix-embroidered silk parasol with a jade handle held at her waist with both hands, head tilted gracefully, with stately grace, the robe falling still and straight.
+- **ND only:** Pose: calm standing pose;
+- **ND only:** a white-jade flute with gold dragon bands in one hand, the other hand gently touching it, the item held below the chin, with stately grace;
+- **ND only:** no flying, floating or windblown cloth.
+- **ND only:** Her hands interact naturally with the item (gently presenting, turning or touching it), lively and natural, while her head stays up facing the viewer, eyes open, lips closed, never looking down.
+- == 11 sentences identical
+
+## a26  (HH 51 sentences, Nữ đế 46)
+
+- == 7 sentences identical
+- **HH only:** An imperial consort, the Empress.
+- **ND only:** An imperial consort, the Female Emperor (Nữ đế), the highest rank of all.
+- == 5 sentences identical
+- **HH only:** Outfit (the Empress (Hoàng hậu), clearly much richer and more splendid than the lower ranks): the Empress's imperial phoenix ceremonial robe of golden yellow silk mixed with coral red, richly embroidered on the chest, shoulders and wide sleeves with large phoenixes, peonies and clouds in gold and kingfisher-blue silk thread (far denser and richer embroidery than any other rank), over it a long ceremonial silk mantle falling from the shoulders to the floor, edged with a broad band of gold brocade and pearls, a wide jewelled gold-and-pearl cloud collar with layered pearl fringes over the shoulders, many long strands of pearls and jade across the chest, a jade-and-gold belt with long tassels and jade pendants, floor-length robe with slippers visible, slim tall silhouette;
+- **HH only:** the GRANDEST headdress of all: a FULL tall imperial nine-phoenix crown, clearly taller and wider than a noble consort's crown, with a large central gold phoenix holding a pearl string in its beak, jewelled wings spreading wide on both sides, kingfisher-blue inlay, rubies and pearls, and a few clean pearl tassels at the sides;
+- **HH only:** the most splendid outfit of all, clearly grander than every other rank.
+- **ND only:** Hair: ALL of her hair is pinned UP in a neat high imperial bun (chignon) under the crown, at every age;
+- **ND only:** NO loose hair: nothing hanging down her back, over her shoulders or in front of her chest.
+- **ND only:** Outfit (the Female Emperor (Nữ đế), equal to the Empress in colour but clearly more majestic, and different in design from the Empress's robe): a woman's imperial ceremonial dragon robe of golden yellow silk mixed with deep wine-crimson, richly embroidered on the chest, shoulders and wide sleeves with large dragons, peonies and clouds in gold and kingfisher-blue silk thread (far denser and richer embroidery than any other rank), over it a long ceremonial silk mantle falling from the shoulders to the floor, edged with a broad band of gold brocade and pearls, a STIFF, SHORT, structured shoulder piece (cầu vai cứng) of gold brocade edged with pearls over each shoulder, slightly pointed outward, many long strands of pearls and jade across the chest, a jade-and-gold belt with long tassels and jade pendants, floor-length robe with slippers visible, slim tall silhouette;
+- **ND only:** the GRANDEST headdress of all: a FULL tall imperial dragon crown, clearly taller and wider than the Empress's crown, one splendid imperial gold phoenix-and-dragon crown: a large gold dragon with a pearl in its claws rising from the centre of a tall gold crown band, a gold phoenix with raised wings on each side of the dragon, set with rubies, pearls and kingfisher-blue inlay, pure gold metalwork with no flowers and no flower ornaments anywhere on the crown or the hairpins, and a few gold hairpins with slim gold-and-pearl dangles at the sides, and a row of bead tassels (lưu) hanging in front from the rim of the crown to the forehead, ending above the eyebrows, the bare forehead clean under them;
+- **ND only:** the most majestic outfit of all, clearly grander than every other rank.
+- == 1 sentences identical
+- **HH only:** her ORIGINAL robe colour is kept exactly as in image 1 (her first reference): coral red silk like #D4897D, with teal like #499597 in the inner robe and linings;
+- **HH only:** the royal golden yellow is the DOMINANT colour of the robe, mantle, sleeves and skirt (more than half of everything visible), her colour is the second colour (collar, inner robe, wide borders and a few panels);
+- **ND only:** the royal golden yellow is the DOMINANT colour of the robe, mantle, sleeves and skirt (more than half of everything visible), a deep, quiet wine-crimson like #7E2A33 is the second colour (collar, inner robe, wide borders and a few panels);
+- == 4 sentences identical
+- **HH only:** The phoenix is the main embroidered motif, larger and more prominent than the flowers.
+- **HH only:** All flowers, birds and the phoenix are fine silk-thread embroidery stitched directly into the fabric, flat and integrated with the cloth, following its folds, not appliqué, not pasted patches, not raised.
+- **ND only:** The dragon is the main embroidered motif, larger and more prominent than the flowers.
+- **ND only:** All flowers, birds and the dragon are fine silk-thread embroidery stitched directly into the fabric, flat and integrated with the cloth, following its folds, not appliqué, not pasted patches, not raised.
+- **ND only:** FABRIC: thick gold-embroidered brocade with a graceful, flowing drape.
+- == 1 sentences identical
+- **HH only:** HAIR (rank law): ALL her hair is swept UP into a high bun / chignon, nothing loose hanging down her back.
+- == 3 sentences identical
+- **HH only:** NO flowers in the hair or on the crown at this rank (flowers only at ranks 1 to 6).
+- **HH only:** HEAD AND BODY: her head turns together with her shoulders and body in the same direction with natural anatomy, never a frontal head on a turned body.
+- **HH only:** FABRIC: thick gold-embroidered brocade with a graceful, flowing drape.
+- **HH only:** ANGLE: a SLIGHT turn to the LEFT (about 15 degrees), body almost frontal, face toward the viewer;
+- **HH only:** her head turns together with her shoulders and body, never back-turned, never in profile.
+- **HH only:** GRACE (pose variety, every rank its own): her head tilted very slightly against the turn of her body, a lively graceful counter-line.
+- **HH only:** THREE-COLOUR RULE (t7/t8): the whole outfit uses EXACTLY THREE colours that clearly interact: the royal golden yellow (honey-gold like #EFBD69), the MAIN colour coral red like #D4897D and the SECONDARY colour teal like #499597, the secondary clearly visible in large areas (inner robe or skirt, wide borders, sash, cuffs, linings), never a single flat colour all over;
+- **HH only:** gold or silver only as thin accents, no other colour.
+- **HH only:** HELD ITEM COLOUR: the held item and any embroidery, painting or tassel on it are in a colour family clearly different from BOTH her robe colour coral red and her secondary colour teal like #499597.
+- **HH only:** Pose: a small step forward, a white-jade flute with gold phoenix bands held at her waist with both hands, head tilted gracefully, with stately grace, the robe falling still and straight.
+- **ND only:** Pose: calm standing pose;
+- **ND only:** a closed dragon-embroidered silk parasol with a jade handle upright in one hand at chest height below the chin, the other hand gently touching it, the item held below the chin, body turned slightly three-quarters to the right, with stately grace;
+- **ND only:** no flying, floating or windblown cloth.
+- **ND only:** Her hands interact naturally with the item (gently presenting, turning or touching it), lively and natural, while her head stays up facing the viewer, eyes open, lips closed, never looking down.
+- == 11 sentences identical
+
+## a36  (HH 51 sentences, Nữ đế 46)
+
+- == 7 sentences identical
+- **HH only:** An imperial consort, the Empress.
+- **ND only:** An imperial consort, the Female Emperor (Nữ đế), the highest rank of all.
+- == 5 sentences identical
+- **HH only:** Outfit (the Empress (Hoàng hậu), clearly much richer and more splendid than the lower ranks): the Empress's imperial phoenix ceremonial robe of golden yellow silk mixed with coral red, richly embroidered on the chest, shoulders and wide sleeves with large phoenixes, peonies and clouds in gold and kingfisher-blue silk thread (far denser and richer embroidery than any other rank), over it a long ceremonial silk mantle falling from the shoulders to the floor, edged with a broad band of gold brocade and pearls, a wide jewelled gold-and-pearl cloud collar with layered pearl fringes over the shoulders, many long strands of pearls and jade across the chest, a jade-and-gold belt with long tassels and jade pendants, floor-length robe with slippers visible, slim tall silhouette;
+- **HH only:** the GRANDEST headdress of all: a FULL tall imperial nine-phoenix crown, clearly taller and wider than a noble consort's crown, with a large central gold phoenix holding a pearl string in its beak, jewelled wings spreading wide on both sides, kingfisher-blue inlay, rubies and pearls, and a few clean pearl tassels at the sides;
+- **HH only:** the most splendid outfit of all, clearly grander than every other rank.
+- **ND only:** Hair: ALL of her hair is pinned UP in a neat high imperial bun (chignon) under the crown, at every age;
+- **ND only:** NO loose hair: nothing hanging down her back, over her shoulders or in front of her chest.
+- **ND only:** Outfit (the Female Emperor (Nữ đế), equal to the Empress in colour but clearly more majestic, and different in design from the Empress's robe): a woman's imperial ceremonial dragon robe of golden yellow silk mixed with deep wine-crimson, richly embroidered on the chest, shoulders and wide sleeves with large dragons, peonies and clouds in gold and kingfisher-blue silk thread (far denser and richer embroidery than any other rank), over it a long ceremonial silk mantle falling from the shoulders to the floor, edged with a broad band of gold brocade and pearls, a STIFF, SHORT, structured shoulder piece (cầu vai cứng) of gold brocade edged with pearls over each shoulder, slightly pointed outward, many long strands of pearls and jade across the chest, a jade-and-gold belt with long tassels and jade pendants, floor-length robe with slippers visible, slim tall silhouette;
+- **ND only:** the GRANDEST headdress of all: a FULL tall imperial dragon crown, clearly taller and wider than the Empress's crown, one splendid imperial gold phoenix-and-dragon crown: a large gold dragon with a pearl in its claws rising from the centre of a tall gold crown band, a gold phoenix with raised wings on each side of the dragon, set with rubies, pearls and kingfisher-blue inlay, pure gold metalwork with no flowers and no flower ornaments anywhere on the crown or the hairpins, and a few gold hairpins with slim gold-and-pearl dangles at the sides, and a row of bead tassels (lưu) hanging in front from the rim of the crown to the forehead, ending above the eyebrows, the bare forehead clean under them;
+- **ND only:** the most majestic outfit of all, clearly grander than every other rank.
+- == 1 sentences identical
+- **HH only:** her ORIGINAL robe colour is kept exactly as in image 1 (her first reference): coral red silk like #D4897D, with teal like #499597 in the inner robe and linings;
+- **HH only:** the royal golden yellow is the DOMINANT colour of the robe, mantle, sleeves and skirt (more than half of everything visible), her colour is the second colour (collar, inner robe, wide borders and a few panels);
+- **ND only:** the royal golden yellow is the DOMINANT colour of the robe, mantle, sleeves and skirt (more than half of everything visible), a deep, quiet wine-crimson like #7E2A33 is the second colour (collar, inner robe, wide borders and a few panels);
+- == 4 sentences identical
+- **HH only:** The phoenix is the main embroidered motif, larger and more prominent than the flowers.
+- **HH only:** All flowers, birds and the phoenix are fine silk-thread embroidery stitched directly into the fabric, flat and integrated with the cloth, following its folds, not appliqué, not pasted patches, not raised.
+- **ND only:** The dragon is the main embroidered motif, larger and more prominent than the flowers.
+- **ND only:** All flowers, birds and the dragon are fine silk-thread embroidery stitched directly into the fabric, flat and integrated with the cloth, following its folds, not appliqué, not pasted patches, not raised.
+- **ND only:** FABRIC: thick gold-embroidered brocade with a graceful, flowing drape.
+- == 1 sentences identical
+- **HH only:** HAIR (rank law): ALL her hair is swept UP into a high bun / chignon, nothing loose hanging down her back.
+- == 3 sentences identical
+- **HH only:** NO flowers in the hair or on the crown at this rank (flowers only at ranks 1 to 6).
+- **HH only:** HEAD AND BODY: her head turns together with her shoulders and body in the same direction with natural anatomy, never a frontal head on a turned body.
+- **HH only:** FABRIC: thick gold-embroidered brocade with a graceful, flowing drape.
+- **HH only:** ANGLE: a SLIGHT turn to the RIGHT (about 15 degrees), body almost frontal, face toward the viewer;
+- **HH only:** her head turns together with her shoulders and body, never back-turned, never in profile.
+- **HH only:** GRACE (pose variety, every rank its own): a gentle S-curve through her body, her hips softly shifted to one side.
+- **HH only:** THREE-COLOUR RULE (t7/t8): the whole outfit uses EXACTLY THREE colours that clearly interact: the royal golden yellow (honey-gold like #EFBD69), the MAIN colour coral red like #D4897D and the SECONDARY colour teal like #499597, the secondary clearly visible in large areas (inner robe or skirt, wide borders, sash, cuffs, linings), never a single flat colour all over;
+- **HH only:** gold or silver only as thin accents, no other colour.
+- **HH only:** HELD ITEM COLOUR: the held item and any embroidery, painting or tassel on it are in a colour family clearly different from BOTH her robe colour coral red and her secondary colour teal like #499597.
+- **HH only:** Pose: walking mid-step, raising a small pipa lute inlaid with mother-of-pearl phoenixes beside her cheek with one hand, chin slightly lifted, the other long sleeve floating out, with stately grace, the robe falling still and straight.
+- **ND only:** Pose: calm standing pose;
+- **ND only:** gently presenting a calligraphy brush with a jade shaft and a gold dragon cap in one hand at chest height, the other hand gently touching it, the item held below the chin, with stately grace;
+- **ND only:** no flying, floating or windblown cloth.
+- **ND only:** Her hands interact naturally with the item (gently presenting, turning or touching it), lively and natural, while her head stays up facing the viewer, eyes open, lips closed, never looking down.
+- == 11 sentences identical
+
+## a51  (HH 58 sentences, Nữ đế 53)
+
+- == 7 sentences identical
+- **HH only:** An imperial consort, the Empress.
+- **ND only:** An imperial consort, the Female Emperor (Nữ đế), the highest rank of all.
+- == 11 sentences identical
+- **HH only:** Outfit (the Empress (Hoàng hậu), clearly much richer and more splendid than the lower ranks): the Empress's imperial phoenix ceremonial robe of golden yellow silk mixed with coral red, richly embroidered on the chest, shoulders and wide sleeves with large phoenixes, peonies and clouds in gold and kingfisher-blue silk thread (far denser and richer embroidery than any other rank), over it a long ceremonial silk mantle falling from the shoulders to the floor, edged with a broad band of gold brocade and pearls, a wide jewelled gold-and-pearl cloud collar with layered pearl fringes over the shoulders, many long strands of pearls and jade across the chest, a jade-and-gold belt with long tassels and jade pendants, floor-length robe with slippers visible, slim tall silhouette;
+- **HH only:** the GRANDEST headdress of all: a FULL tall imperial nine-phoenix crown, clearly taller and wider than a noble consort's crown, with a large central gold phoenix holding a pearl string in its beak, jewelled wings spreading wide on both sides, kingfisher-blue inlay, rubies and pearls, and a few clean pearl tassels at the sides;
+- **HH only:** the most splendid outfit of all, clearly grander than every other rank.
+- **ND only:** Hair: ALL of her hair is pinned UP in a neat high imperial bun (chignon) under the crown, at every age;
+- **ND only:** NO loose hair: nothing hanging down her back, over her shoulders or in front of her chest.
+- **ND only:** Outfit (the Female Emperor (Nữ đế), equal to the Empress in colour but clearly more majestic, and different in design from the Empress's robe): a woman's imperial ceremonial dragon robe of golden yellow silk mixed with deep wine-crimson, richly embroidered on the chest, shoulders and wide sleeves with large dragons, peonies and clouds in gold and kingfisher-blue silk thread (far denser and richer embroidery than any other rank), over it a long ceremonial silk mantle falling from the shoulders to the floor, edged with a broad band of gold brocade and pearls, a STIFF, SHORT, structured shoulder piece (cầu vai cứng) of gold brocade edged with pearls over each shoulder, slightly pointed outward, many long strands of pearls and jade across the chest, a jade-and-gold belt with long tassels and jade pendants, floor-length robe with slippers visible, slim tall silhouette;
+- **ND only:** the GRANDEST headdress of all: a FULL tall imperial dragon crown, clearly taller and wider than the Empress's crown, one splendid imperial gold phoenix-and-dragon crown: a large gold dragon with a pearl in its claws rising from the centre of a tall gold crown band, a gold phoenix with raised wings on each side of the dragon, set with rubies, pearls and kingfisher-blue inlay, pure gold metalwork with no flowers and no flower ornaments anywhere on the crown or the hairpins, and a few gold hairpins with slim gold-and-pearl dangles at the sides, and a row of bead tassels (lưu) hanging in front from the rim of the crown to the forehead, ending above the eyebrows, the bare forehead clean under them;
+- **ND only:** the most majestic outfit of all, clearly grander than every other rank.
+- == 2 sentences identical
+- **HH only:** her ORIGINAL robe colour is kept exactly as in image 1 (her first reference): coral red silk like #D4897D, with teal like #499597 in the inner robe and linings;
+- **HH only:** the royal golden yellow is the DOMINANT colour of the robe, mantle, sleeves and skirt (more than half of everything visible), her colour is the second colour (collar, inner robe, wide borders and a few panels);
+- **ND only:** the royal golden yellow is the DOMINANT colour of the robe, mantle, sleeves and skirt (more than half of everything visible), a deep, quiet wine-crimson like #7E2A33 is the second colour (collar, inner robe, wide borders and a few panels);
+- == 4 sentences identical
+- **HH only:** The phoenix is the main embroidered motif, larger and more prominent than the flowers.
+- **HH only:** All flowers, birds and the phoenix are fine silk-thread embroidery stitched directly into the fabric, flat and integrated with the cloth, following its folds, not appliqué, not pasted patches, not raised.
+- **ND only:** The dragon is the main embroidered motif, larger and more prominent than the flowers.
+- **ND only:** All flowers, birds and the dragon are fine silk-thread embroidery stitched directly into the fabric, flat and integrated with the cloth, following its folds, not appliqué, not pasted patches, not raised.
+- **ND only:** FABRIC: thick gold-embroidered brocade with a graceful, flowing drape.
+- == 1 sentences identical
+- **HH only:** HAIR (rank law): ALL her hair is swept UP into a high bun / chignon, nothing loose hanging down her back.
+- == 3 sentences identical
+- **HH only:** NO flowers in the hair or on the crown at this rank (flowers only at ranks 1 to 6).
+- **HH only:** HEAD AND BODY: her head turns together with her shoulders and body in the same direction with natural anatomy, never a frontal head on a turned body.
+- **HH only:** FABRIC: thick gold-embroidered brocade with a graceful, flowing drape.
+- **HH only:** ANGLE: a SLIGHT shoulder turn to the LEFT (about 15 degrees), body almost frontal, face toward the viewer;
+- **HH only:** her head turns together with her shoulders and body, never back-turned, never in profile.
+- **HH only:** GRACE (pose variety, every rank its own): her head inclined gently toward the hand that holds the item, her face still toward the viewer.
+- **HH only:** THREE-COLOUR RULE (t7/t8): the whole outfit uses EXACTLY THREE colours that clearly interact: the royal golden yellow (honey-gold like #EFBD69), the MAIN colour coral red like #D4897D and the SECONDARY colour teal like #499597, the secondary clearly visible in large areas (inner robe or skirt, wide borders, sash, cuffs, linings), never a single flat colour all over;
+- **HH only:** gold or silver only as thin accents, no other colour.
+- **HH only:** HELD ITEM COLOUR: the held item and any embroidery, painting or tassel on it are in a colour family clearly different from BOTH her robe colour coral red and her secondary colour teal like #499597.
+- **HH only:** Pose: walking mid-step, raising an imperial book bound in gold-thread silk beside her cheek with one hand, chin slightly lifted, the other long sleeve floating out, with stately grace, the robe falling still and straight.
+- **ND only:** Pose: calm standing pose;
+- **ND only:** gently turning a gold-mounted jade tiger tally (hổ phù) on a silk cord in one hand at chest height, the other hand gently touching it, the item held below the chin, body turned slightly three-quarters to the right, with stately grace;
+- **ND only:** no flying, floating or windblown cloth.
+- **ND only:** Her hands interact naturally with the item (gently presenting, turning or touching it), lively and natural, while her head stays up facing the viewer, eyes open, lips closed, never looking down.
+- == 11 sentences identical
+
+## a65  (HH 57 sentences, Nữ đế 52)
+
+- == 7 sentences identical
+- **HH only:** An imperial consort, the Empress.
+- **ND only:** An imperial consort, the Female Emperor (Nữ đế), the highest rank of all.
+- == 9 sentences identical
+- **HH only:** Outfit (the Empress (Hoàng hậu), clearly much richer and more splendid than the lower ranks): the Empress's imperial phoenix ceremonial robe of golden yellow silk mixed with coral red, richly embroidered on the chest, shoulders and wide sleeves with large phoenixes, peonies and clouds in gold and kingfisher-blue silk thread (far denser and richer embroidery than any other rank), over it a long ceremonial silk mantle falling from the shoulders to the floor, edged with a broad band of gold brocade and pearls, a wide jewelled gold-and-pearl cloud collar with layered pearl fringes over the shoulders, many long strands of pearls and jade across the chest, a jade-and-gold belt with long tassels and jade pendants, floor-length robe with slippers visible, slim tall silhouette;
+- **HH only:** the GRANDEST headdress of all: a FULL tall imperial nine-phoenix crown, clearly taller and wider than a noble consort's crown, with a large central gold phoenix holding a pearl string in its beak, jewelled wings spreading wide on both sides, kingfisher-blue inlay, rubies and pearls, and a few clean pearl tassels at the sides;
+- **HH only:** the most splendid outfit of all, clearly grander than every other rank.
+- **ND only:** Hair: ALL of her hair is pinned UP in a neat high imperial bun (chignon) under the crown, at every age;
+- **ND only:** NO loose hair: nothing hanging down her back, over her shoulders or in front of her chest.
+- **ND only:** Outfit (the Female Emperor (Nữ đế), equal to the Empress in colour but clearly more majestic, and different in design from the Empress's robe): a woman's imperial ceremonial dragon robe of golden yellow silk mixed with deep wine-crimson, richly embroidered on the chest, shoulders and wide sleeves with large dragons, peonies and clouds in gold and kingfisher-blue silk thread (far denser and richer embroidery than any other rank), over it a long ceremonial silk mantle falling from the shoulders to the floor, edged with a broad band of gold brocade and pearls, a STIFF, SHORT, structured shoulder piece (cầu vai cứng) of gold brocade edged with pearls over each shoulder, slightly pointed outward, many long strands of pearls and jade across the chest, a jade-and-gold belt with long tassels and jade pendants, floor-length robe with slippers visible, slim tall silhouette;
+- **ND only:** the GRANDEST headdress of all: a FULL tall imperial dragon crown, clearly taller and wider than the Empress's crown, one splendid imperial gold phoenix-and-dragon crown: a large gold dragon with a pearl in its claws rising from the centre of a tall gold crown band, a gold phoenix with raised wings on each side of the dragon, set with rubies, pearls and kingfisher-blue inlay, pure gold metalwork with no flowers and no flower ornaments anywhere on the crown or the hairpins, and a few gold hairpins with slim gold-and-pearl dangles at the sides, and a row of bead tassels (lưu) hanging in front from the rim of the crown to the forehead, ending above the eyebrows, the bare forehead clean under them;
+- **ND only:** the most majestic outfit of all, clearly grander than every other rank.
+- == 3 sentences identical
+- **HH only:** her ORIGINAL robe colour is kept exactly as in image 1 (her first reference): coral red silk like #D4897D, with teal like #499597 in the inner robe and linings;
+- **HH only:** the royal golden yellow is the DOMINANT colour of the robe, mantle, sleeves and skirt (more than half of everything visible), her colour is the second colour (collar, inner robe, wide borders and a few panels);
+- **ND only:** the royal golden yellow is the DOMINANT colour of the robe, mantle, sleeves and skirt (more than half of everything visible), a deep, quiet wine-crimson like #7E2A33 is the second colour (collar, inner robe, wide borders and a few panels);
+- == 4 sentences identical
+- **HH only:** The phoenix is the main embroidered motif, larger and more prominent than the flowers.
+- **HH only:** All flowers, birds and the phoenix are fine silk-thread embroidery stitched directly into the fabric, flat and integrated with the cloth, following its folds, not appliqué, not pasted patches, not raised.
+- **ND only:** The dragon is the main embroidered motif, larger and more prominent than the flowers.
+- **ND only:** All flowers, birds and the dragon are fine silk-thread embroidery stitched directly into the fabric, flat and integrated with the cloth, following its folds, not appliqué, not pasted patches, not raised.
+- **ND only:** FABRIC: thick gold-embroidered brocade with a graceful, flowing drape.
+- == 1 sentences identical
+- **HH only:** HAIR (rank law): ALL her hair is swept UP into a high bun / chignon, nothing loose hanging down her back.
+- == 3 sentences identical
+- **HH only:** NO flowers in the hair or on the crown at this rank (flowers only at ranks 1 to 6).
+- **HH only:** HEAD AND BODY: her head turns together with her shoulders and body in the same direction with natural anatomy, never a frontal head on a turned body.
+- **HH only:** FABRIC: thick gold-embroidered brocade with a graceful, flowing drape.
+- **HH only:** ANGLE: FULLY FRONTAL, her body, shoulders and face squarely facing the viewer, no turn;
+- **HH only:** her head turns together with her shoulders and body, never back-turned, never in profile.
+- **HH only:** GRACE (pose variety, every rank its own): her head tilted very slightly against the turn of her body, a lively graceful counter-line.
+- **HH only:** THREE-COLOUR RULE (t7/t8): the whole outfit uses EXACTLY THREE colours that clearly interact: the royal golden yellow (honey-gold like #EFBD69), the MAIN colour coral red like #D4897D and the SECONDARY colour teal like #499597, the secondary clearly visible in large areas (inner robe or skirt, wide borders, sash, cuffs, linings), never a single flat colour all over;
+- **HH only:** gold or silver only as thin accents, no other colour.
+- **HH only:** HELD ITEM COLOUR: the held item and any embroidery, painting or tassel on it are in a colour family clearly different from BOTH her robe colour coral red and her secondary colour teal like #499597.
+- **HH only:** Pose: a small step forward, a pair of imperial-jade health balls held at her waist with both hands, head tilted gracefully, with stately grace, the robe falling still and straight.
+- **ND only:** Pose: calm standing pose;
+- **ND only:** a hand warmer of gold carved with dragons upright in one hand at chest height, the other hand gently touching it, the item held below the chin, with stately grace;
+- **ND only:** no flying, floating or windblown cloth.
+- **ND only:** Her hands interact naturally with the item (gently presenting, turning or touching it), lively and natural, while her head stays up facing the viewer, eyes open, lips closed, never looking down.
+- == 11 sentences identical

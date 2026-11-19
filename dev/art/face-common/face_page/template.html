@@ -1,0 +1,106 @@
+<title>Cung Tường Mộng Faces</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<style>
+/* layout: sticky tab strip over a dense grid of face cards; tick = "vẽ lại" */
+:root{
+  --bg:#f6f3f4; --panel:#ffffff; --fg:#2a2226; --muted:#7b6e74; --line:#e3dadd;
+  --accent:#9b2f4c; --accent-soft:#f3dde4; --tick:#c0392b; --tick-soft:#fbe3df;
+  --f-head:"Noto Serif","Georgia",serif; --f-body:"Be Vietnam Pro","Segoe UI",system-ui,sans-serif;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#1c1719; --panel:#262023; --fg:#efe6e9; --muted:#a8999f; --line:#3a3135;
+  --accent:#e08aa3; --accent-soft:#3d2830; --tick:#ff7a6b; --tick-soft:#43241f; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1c1719; --panel:#262023; --fg:#efe6e9; --muted:#a8999f; --line:#3a3135;
+  --accent:#e08aa3; --accent-soft:#3d2830; --tick:#ff7a6b; --tick-soft:#43241f; color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:16px 40px}
+h1{font-family:var(--f-head);font-weight:600;font-size:1.6rem;margin:0 0 4px;text-wrap:balance}
+.sub{color:var(--muted);margin:0 0 14px;max-width:70ch;line-height:1.5}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.tabs{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);display:flex;flex-wrap:wrap;gap:6px;padding-block:8px;border-bottom:1px solid var(--line);margin-bottom:14px}
+.tab{font:inherit;border:1px solid var(--line);background:var(--panel);color:var(--fg);border-radius:999px;padding:6px 12px;cursor:pointer;display:flex;gap:6px;align-items:center}
+.tab[aria-selected="true"]{background:var(--accent);border-color:var(--accent);color:#fff}
+.tab:focus-visible,.card label:focus-within{outline:2px solid var(--accent);outline-offset:2px}
+.n{font-variant-numeric:tabular-nums;font-size:.8em;opacity:.85}
+.t{font-variant-numeric:tabular-nums;font-size:.75em;background:var(--tick);color:#fff;border-radius:999px;padding:1px 7px}
+.t[data-z="1"]{display:none}
+.status{color:var(--muted);font-size:.85rem;margin:-6px 0 12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column}
+.card.on{border-color:var(--tick);box-shadow:0 0 0 2px var(--tick) inset;background:var(--tick-soft)}
+.card img{display:block;width:100%;aspect-ratio:300/340;object-fit:cover;background:var(--line)}
+.meta{padding:8px 10px 10px;display:flex;flex-direction:column;gap:2px;min-width:0}
+.id{font-weight:700;font-size:1rem}
+.g{color:var(--accent);font-size:.85rem}
+.src{color:var(--muted);font-size:.78rem;overflow-wrap:anywhere}
+.card label{display:flex;align-items:center;gap:8px;margin-top:6px;font-size:.88rem;cursor:pointer;user-select:none}
+.card input{width:18px;height:18px;accent-color:var(--tick)}
+.card input:disabled+span{color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.card{transition:background .15s,border-color .15s}}
+</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;600;700&family=Noto+Serif:wght@600&display=swap">
+
+<h1>Mặt các cô — chọn người cần vẽ lại</h1>
+<p class="sub">Tick vào mặt nào cần VẼ LẠI. Tick được lưu ngay để quản đốc đọc. Tab đầu là tất cả; mỗi tab sau là một nhóm mặt, để so trong nhóm ai bị lạc. Người trong KHO không hiện ở đây.</p>
+<nav class="tabs" id="tabs" role="tablist"></nav>
+<p class="status" id="status">Đang nối kho lưu tick…</p>
+<main class="grid" id="grid"></main>
+
+<script>
+const FACES=/*DATA*/[];
+const GROUPS=["Tươi tắn","Dịu dàng","Đoan trang","Sắc sảo","Tinh nghịch","Kiêu kỳ","Lạnh lùng","Quyến rũ"];
+let picks={}, cur="ALL", db=null, canWrite=false;
+const $=s=>document.querySelector(s);
+function count(g){return FACES.filter(f=>(g==="ALL"||f.group===g)&&picks[f.id]).length}
+function size(g){return FACES.filter(f=>g==="ALL"||f.group===g).length}
+function tabs(){
+  const nav=$("#tabs"); nav.textContent="";
+  for(const g of ["ALL",...GROUPS]){
+    const b=document.createElement("button"); b.className="tab"; b.id="tab-"+g; b.setAttribute("role","tab");
+    b.setAttribute("aria-selected",String(g===cur));
+    const name=document.createElement("span"); name.textContent=g==="ALL"?"Tất cả":g;
+    const n=document.createElement("span"); n.className="n"; n.textContent=size(g);
+    const t=document.createElement("span"); t.className="t"; const c=count(g); t.textContent=c+" vẽ lại"; t.dataset.z=c?"0":"1";
+    b.append(name,n,t); b.onclick=()=>{cur=g; try{localStorage.setItem("tab",g)}catch(e){} tabs(); grid()}; nav.append(b);
+  }
+}
+function grid(){
+  const m=$("#grid"); m.textContent="";
+  for(const f of FACES.filter(f=>cur==="ALL"||f.group===cur)){
+    const c=document.createElement("article"); c.className="card"+(picks[f.id]?" on":"");
+    const img=document.createElement("img"); img.src="faces/"+f.id+".jpg"; img.alt=f.id+" "+f.group; img.loading="lazy";
+    const meta=document.createElement("div"); meta.className="meta";
+    const a=document.createElement("div"); a.className="id"; a.textContent=f.id;
+    const g=document.createElement("div"); g.className="g"; g.textContent=f.group;
+    const s=document.createElement("div"); s.className="src"; s.textContent=f.src;
+    const lab=document.createElement("label"); const cb=document.createElement("input"); cb.type="checkbox"; cb.id="pick-"+f.id;
+    cb.checked=!!picks[f.id]; cb.disabled=!canWrite; const sp=document.createElement("span"); sp.textContent="Vẽ lại";
+    cb.onchange=()=>save(f,cb.checked); lab.append(cb,sp);
+    meta.append(a,g,s,lab); c.append(img,meta); m.append(c);
+  }
+}
+async function save(f,on){
+  picks[f.id]=on; tabs(); grid();
+  if(!db) return;
+  try{ await db.doc("picks/"+f.id).set({id:f.id,group:f.group,redraw:on,at:new Date().toISOString()}); }
+  catch(e){ $("#status").textContent="Không lưu được tick cho "+f.id+": "+(e&&e.code||"lỗi")+". Thử lại sau."; }
+}
+try{const t=localStorage.getItem("tab"); if(t&&(t==="ALL"||GROUPS.includes(t))) cur=t}catch(e){}
+tabs(); grid();
+(async()=>{
+  const timer=setTimeout(()=>{$("#status").textContent="Chưa nối được kho lưu tick — tick sẽ không được lưu."},10000);
+  try{
+    db=await claude.use("db");
+    const user=await claude.use("user");
+    if(!db){clearTimeout(timer); $("#status").textContent="Chỉ xem: không có kho lưu tick ở chế độ này."; return;}
+    canWrite=user? (user.can("data.write")!==false) : true;
+    db.collection("picks").onSnapshot(snap=>{
+      clearTimeout(timer); const p={};
+      for(const d of snap.docs){const v=d.data(); if(v&&v.redraw) p[d.id]=true}
+      picks=p; $("#status").textContent=canWrite?"Tick được lưu tự động.":"Chỉ xem: bạn không có quyền tick.";
+      tabs(); grid();
+    },err=>{clearTimeout(timer); $("#status").textContent="Lỗi đọc tick: "+(err&&err.code||"không rõ");});
+  }catch(e){clearTimeout(timer); $("#status").textContent="Chưa nối được kho lưu tick.";}
+})();
+</script>

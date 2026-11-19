@@ -1,0 +1,962 @@
+{
+ "m01": {
+  "group": "Tươi tắn",
+  "hidden": false,
+  "ts": "2026-11-19T06:40:52+00:00",
+  "cut": "hu2qEwOvqL",
+  "gen": "lJt4wwjgv9",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m01.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m02": {
+  "group": "Dịu dàng",
+  "hidden": false,
+  "ts": "2026-11-19T06:40:52+00:00",
+  "cut": "BhNCmskoQR",
+  "gen": "8aiuhC3IrU",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m02.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m03": {
+  "group": "Tươi tắn",
+  "hidden": false,
+  "ts": "2026-11-19T06:40:52+00:00",
+  "cut": "bxMlxKk5Y2",
+  "gen": "SyhNJiRUb8",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m03.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m04": {
+  "group": "Đoan trang",
+  "hidden": false,
+  "ts": "2026-11-19T06:49:47.621683+00:00",
+  "cut": "MBJtEqLDCm",
+  "gen": "aFG5rpsfSh",
+  "ver": "v3b",
+  "prompt_file": "dev/art/face-common/m04.v3b.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m05": {
+  "group": "Tươi tắn",
+  "hidden": false,
+  "ts": "2026-11-19T06:40:52+00:00",
+  "cut": "KLpSlnEkqp",
+  "gen": "9ZHz2M2NYZ",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m05.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m06": {
+  "group": "Tươi tắn",
+  "hidden": false,
+  "ts": "2026-11-19T06:40:52+00:00",
+  "cut": "gOm9JpLSXO",
+  "gen": "YMldTfCWeC",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m06.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m07": {
+  "group": "Tươi tắn",
+  "hidden": false,
+  "ts": "2026-11-19T06:40:52+00:00",
+  "cut": "3zKcnbDREY",
+  "gen": "nVseV0pYQD",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m07.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m08": {
+  "group": "Dịu dàng",
+  "hidden": false,
+  "ts": "2026-11-19T06:40:52+00:00",
+  "cut": "4RFGZQc9Aa",
+  "gen": "kseUss416B",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m08.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m09": {
+  "group": "Sắc sảo",
+  "hidden": false,
+  "ts": "2026-11-19T06:19:11.762209+00:00",
+  "cut": "gOm4HrsSXO",
+  "gen": "yiuZ1KKPW9",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m09.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m10": {
+  "group": "Đoan trang",
+  "hidden": false,
+  "ts": "2026-11-19T06:26:29.706446+00:00",
+  "cut": "O6ERgEUynm",
+  "gen": "w4a6jlX7EI",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m10.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m11": {
+  "group": "Tươi tắn",
+  "hidden": false,
+  "ts": "2026-11-19T06:19:11.762347+00:00",
+  "cut": "Syh9qs6Ub8",
+  "gen": "bxMsImL5Y2",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m11.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m12": {
+  "group": "Tinh nghịch",
+  "hidden": false,
+  "ts": "2026-11-19T06:23:02.443635+00:00",
+  "cut": "xSB7FTWjfW",
+  "gen": "CqnKBtpEEy",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m12.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m13": {
+  "group": "Kho",
+  "hidden": true,
+  "ts": "2026-11-19T06:40:52+00:00",
+  "cut": "VX7IB7sMMU",
+  "gen": "5jDgjs6Kxe",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m13.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m14": {
+  "group": "Dịu dàng",
+  "hidden": false,
+  "ts": "2026-11-19T07:02:43.680580+00:00",
+  "cut": "mEZHy3chJQ",
+  "gen": "fHzK9PmCDY",
+  "ver": "v3c",
+  "prompt_file": "dev/art/face-common/m14.v3c.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m15": {
+  "group": "Kho",
+  "hidden": true,
+  "ts": "2026-11-19T06:40:52+00:00",
+  "cut": "fHzKqW3CDY",
+  "gen": "5jDgjMaKxe",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m15.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m16": {
+  "group": "Đoan trang",
+  "hidden": false,
+  "ts": "2026-11-19T06:40:52+00:00",
+  "cut": "5jDgLXuKxe",
+  "gen": "4RFGRqM9Aa",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m16.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m17": {
+  "group": "Kho",
+  "hidden": true,
+  "ts": "2026-11-19T06:40:30+00:00",
+  "cut": "Cqnk5kDEEy",
+  "gen": "gOm9yZfSXO",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m17.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m18": {
+  "group": "Dịu dàng",
+  "hidden": false,
+  "ts": "2026-11-19T06:40:30+00:00",
+  "cut": "s7IPw0Ll8e",
+  "gen": "N2qn3ku6D9",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m18.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m19": {
+  "group": "Dịu dàng",
+  "hidden": false,
+  "ts": "2026-11-19T06:19:11.762365+00:00",
+  "cut": "tCRQ0thmZJ",
+  "gen": "8aiEYV3IrU",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m19.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m20": {
+  "group": "Dịu dàng",
+  "hidden": false,
+  "ts": "2026-11-19T06:40:30+00:00",
+  "cut": "UPv6ye3wny",
+  "gen": "eIPvB3pdqL",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m20.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m21": {
+  "group": "Kho",
+  "hidden": true,
+  "ts": "2026-11-19T06:40:30+00:00",
+  "cut": "6AbY2ahiJO",
+  "gen": "WDgXVCBcXe",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m21.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m22": {
+  "group": "Đoan trang",
+  "hidden": false,
+  "ts": "2026-11-19T06:40:30+00:00",
+  "cut": "eIPv8g3dqL",
+  "gen": "0eUoDFCTfW",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m22.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m23": {
+  "group": "Kho",
+  "hidden": true,
+  "ts": "2026-11-19T07:32:31Z",
+  "cut": "xSBOL8qjfW",
+  "gen": "gOmNUUoSXO",
+  "ver": "v4b",
+  "prompt_file": "dev/art/face-common/m23.v4b.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m24": {
+  "group": "Tinh nghịch",
+  "hidden": false,
+  "ts": "2026-11-19T06:40:30+00:00",
+  "cut": "p8yhIrDehw",
+  "gen": "Lw8yUxPswO",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m24.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m25": {
+  "group": "Tinh nghịch",
+  "hidden": false,
+  "ts": "2026-11-19T06:40:30+00:00",
+  "cut": "s7IPJ0xl8e",
+  "gen": "P3QAiPp42C",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m25.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m26": {
+  "group": "Kho",
+  "hidden": true,
+  "ts": "2026-11-19T06:40:30+00:00",
+  "cut": "aFG5H4ufSh",
+  "gen": "yiu2i9KPW9",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m26.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m27": {
+  "group": "Kho",
+  "hidden": true,
+  "ts": "2026-11-19T06:40:30+00:00",
+  "cut": "gOm9PO5SXO",
+  "gen": "If3QfDEtvE",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m27.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m28": {
+  "group": "Đoan trang",
+  "hidden": false,
+  "ts": "2026-11-19T06:40:30+00:00",
+  "cut": "9ZHzA2JNYZ",
+  "gen": "kseUsFL16B",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m28.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m29": {
+  "group": "Đoan trang",
+  "hidden": false,
+  "ts": "2026-11-19T06:40:30+00:00",
+  "cut": "kseUgS216B",
+  "gen": "Lw8yw1JswO",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m29.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m30": {
+  "group": "Tinh nghịch",
+  "hidden": false,
+  "ts": "2026-11-19T06:49:47.873736+00:00",
+  "cut": "xSBJ6nGjfW",
+  "gen": "kseUOH516B",
+  "ver": "v3b",
+  "prompt_file": "dev/art/face-common/m30.v3b.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m31": {
+  "group": "Kho",
+  "hidden": true,
+  "ts": "2026-11-19T06:49:47.948136+00:00",
+  "cut": "iG5Wphl3uK",
+  "gen": "3zKcD5YREY",
+  "ver": "v3b",
+  "prompt_file": "dev/art/face-common/m31.v3b.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m32": {
+  "group": "Kho",
+  "hidden": true,
+  "ts": "2026-11-19T06:40:57+00:00",
+  "cut": "u5Wrb7PQLD",
+  "gen": "lJt4w4Ugv9",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m32.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m33": {
+  "group": "Kho",
+  "hidden": true,
+  "ts": "2026-11-19T06:40:57+00:00",
+  "cut": "nVseTaFYQD",
+  "gen": "jUoOgPXLD0",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m33.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m34": {
+  "group": "Kho",
+  "hidden": true,
+  "ts": "2026-11-19T06:40:57+00:00",
+  "cut": "kseUL3T16B",
+  "gen": "If3Qv5PtvE",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m34.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m35": {
+  "group": "Kho",
+  "hidden": true,
+  "ts": "2026-11-19T06:40:57+00:00",
+  "cut": "rgX7l2oxtc",
+  "gen": "BhNCtKFoQR",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m35.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m36": {
+  "group": "Kho",
+  "hidden": true,
+  "ts": "2026-11-19T06:40:57+00:00",
+  "cut": "xSBJUZcjfW",
+  "gen": "DoOmofHpcl",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m36.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m37": {
+  "group": "Kho",
+  "hidden": true,
+  "ts": "2026-11-19T06:49:48.018466+00:00",
+  "cut": "Cqnkl9tEEy",
+  "gen": "eIPvuP6dqL",
+  "ver": "v3b",
+  "prompt_file": "dev/art/face-common/m37.v3b.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m38": {
+  "group": "Kho",
+  "hidden": true,
+  "ts": "2026-11-19T06:40:57+00:00",
+  "cut": "u5WrKP9QLD",
+  "gen": "5jDgjPYKxe",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m38.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m39": {
+  "group": "Kho",
+  "hidden": true,
+  "ts": "2026-11-19T07:28:11Z",
+  "cut": "JNCRSC2Oq4",
+  "gen": "tCRFXOSmZJ",
+  "ver": "v4",
+  "prompt_file": "dev/art/face-common/m39.v4.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m40": {
+  "group": "Kho",
+  "hidden": true,
+  "ts": "2026-11-19T06:40:57+00:00",
+  "cut": "gOm9yTKSXO",
+  "gen": "YMldMECWeC",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m40.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m41": {
+  "group": "Kho",
+  "hidden": true,
+  "ts": "2026-11-19T06:40:57+00:00",
+  "cut": "MBJto16DCm",
+  "gen": "If3QfgZtvE",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m41.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m42": {
+  "group": "Kho",
+  "hidden": true,
+  "ts": "2026-11-19T06:40:19+00:00",
+  "cut": "w4aiPRt7EI",
+  "gen": "1ldwLjhr4r",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m42.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m43": {
+  "group": "Kho",
+  "hidden": true,
+  "ts": "2026-11-19T06:42:15.463978+00:00",
+  "cut": "kseUUU416B",
+  "gen": "0eUoBbaTfW",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m43.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m44": {
+  "group": "Kho",
+  "hidden": true,
+  "ts": "2026-11-19T07:02:43.680638+00:00",
+  "cut": "nVsebgfYQD",
+  "gen": "EbY16GEuuO",
+  "ver": "v3c",
+  "prompt_file": "dev/art/face-common/m44.v3c.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m45": {
+  "group": "Kho",
+  "hidden": true,
+  "ts": "2026-11-19T06:40:19+00:00",
+  "cut": "YMldVttWeC",
+  "gen": "8aiuhFAIrU",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m45.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m46": {
+  "group": "Kho",
+  "hidden": true,
+  "ts": "2026-11-19T06:40:19+00:00",
+  "cut": "kseUL4n16B",
+  "gen": "EbY1HS5uuO",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m46.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m47": {
+  "group": "Kho",
+  "hidden": true,
+  "ts": "2026-11-19T06:40:19+00:00",
+  "cut": "jUoOS3uLD0",
+  "gen": "nVse0vFYQD",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m47.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m48": {
+  "group": "Kho",
+  "hidden": true,
+  "ts": "2026-11-19T06:40:19+00:00",
+  "cut": "BhNCvC8oQR",
+  "gen": "79f39OoJAL",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m48.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m49": {
+  "group": "Kho",
+  "hidden": true,
+  "ts": "2026-11-19T06:40:19+00:00",
+  "cut": "eIPvtakdqL",
+  "gen": "s7IP7Uol8e",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m49.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m50": {
+  "group": "Kho",
+  "hidden": true,
+  "ts": "2026-11-19T06:40:19+00:00",
+  "cut": "Tdw8XtrVNR",
+  "gen": "rgX7gg2xtc",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m50.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m51": {
+  "group": "Kho",
+  "hidden": true,
+  "ts": "2026-11-19T06:40:19+00:00",
+  "cut": "VX7IBvoMMU",
+  "gen": "DoOmoIfpcl",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m51.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "m52": {
+  "group": "Kho",
+  "hidden": true,
+  "ts": "2026-11-19T06:40:19+00:00",
+  "cut": "MBJtofgDCm",
+  "gen": "eIPvIvkdqL",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/m52.v3.FULL.txt",
+  "kind": "OWNER-DESIGN"
+ },
+ "c01": {
+  "group": "Tươi tắn",
+  "hidden": false,
+  "ts": "2026-11-19T18:53:28Z",
+  "cut": "WDgq62mcXe",
+  "gen": "BhNlWbZoQR",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/c01.v3.FULL.txt",
+  "kind": "SAMPLE"
+ },
+ "c02": {
+  "group": "Dịu dàng",
+  "hidden": false,
+  "ts": "2026-11-19T18:54:22Z",
+  "cut": "KLpAf5Hkqp",
+  "gen": "aFGydJ3fSh",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/c02.v3.FULL.txt",
+  "kind": "SAMPLE"
+ },
+ "c03": {
+  "group": "Tinh nghịch",
+  "hidden": false,
+  "ts": "2026-11-19T18:55:19Z",
+  "cut": "EbY9IHJuuO",
+  "gen": "aFGyXyRfSh",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/c03.v3.FULL.txt",
+  "kind": "SAMPLE"
+ },
+ "c04": {
+  "group": "Đoan trang",
+  "hidden": false,
+  "ts": "2026-11-19T18:56:08Z",
+  "cut": "xSBYH1yjfW",
+  "gen": "Lw8cbzSswO",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/c04.v3.FULL.txt",
+  "kind": "SAMPLE"
+ },
+ "c05": {
+  "group": "Sắc sảo",
+  "hidden": false,
+  "ts": "2026-11-19T20:45:00Z",
+  "cut": "MBJxg6WDCm",
+  "gen": "CqnNRAHEEy",
+  "ver": "v3b",
+  "prompt_file": "dev/art/face-common/c05.v3b.FULL.txt",
+  "kind": "REDRAW-629"
+ },
+ "c06": {
+  "group": "Sắc sảo",
+  "hidden": false,
+  "ts": "2026-11-19T21:40:00Z",
+  "cut": "rgXcT8Jxtc",
+  "gen": "UPvdXYlwny",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/c06.v5.FULL.txt",
+  "kind": "SACSAO-696"
+ },
+ "c07": {
+  "group": "Tươi tắn",
+  "hidden": false,
+  "ts": "2026-11-19T20:05:30Z",
+  "cut": "JNCBytcOq4",
+  "gen": "aFGPvslfSh",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/c07.v3.FULL.txt",
+  "kind": "OWNER-GO"
+ },
+ "c08": {
+  "group": "Dịu dàng",
+  "hidden": false,
+  "ts": "2026-11-19T20:05:30Z",
+  "cut": "Lw80qQpswO",
+  "gen": "vQAyefqa47",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/c08.v3.FULL.txt",
+  "kind": "OWNER-GO"
+ },
+ "c09": {
+  "group": "Tinh nghịch",
+  "hidden": false,
+  "ts": "2026-11-19T20:05:30Z",
+  "cut": "xSBWFuTjfW",
+  "gen": "xSBWQlajfW",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/c09.v3.FULL.txt",
+  "kind": "OWNER-GO"
+ },
+ "c10": {
+  "group": "Đoan trang",
+  "hidden": false,
+  "ts": "2026-11-19T20:05:30Z",
+  "cut": "jUocHFqLD0",
+  "gen": "gOmM5yySXO",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/c10.v3.FULL.txt",
+  "kind": "OWNER-GO"
+ },
+ "c11": {
+  "group": "Sắc sảo",
+  "hidden": false,
+  "ts": "2026-11-19T20:05:30Z",
+  "cut": "Cqn9IfbEEy",
+  "gen": "N2qmwLA6D9",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/c11.v3.FULL.txt",
+  "kind": "OWNER-GO"
+ },
+ "c12": {
+  "group": "Tinh nghịch",
+  "hidden": false,
+  "ts": "2026-11-19T20:05:30Z",
+  "cut": "aFG4C3ifSh",
+  "gen": "3zKaiomREY",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/c12.v3.FULL.txt",
+  "kind": "OWNER-GO"
+ },
+ "c13": {
+  "group": "Tươi tắn",
+  "hidden": false,
+  "ts": "2026-11-19T20:05:30Z",
+  "cut": "gOmMrUsSXO",
+  "gen": "Lw80bHuswO",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/c13.v3.FULL.txt",
+  "kind": "OWNER-GO"
+ },
+ "c14": {
+  "group": "Sắc sảo",
+  "hidden": false,
+  "ts": "2026-11-19T21:40:00Z",
+  "cut": "rgXcTIOxtc",
+  "gen": "5jDzn6nKxe",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/c14.v5.FULL.txt",
+  "kind": "SACSAO-696"
+ },
+ "c15": {
+  "group": "Tươi tắn",
+  "hidden": false,
+  "ts": "2026-11-19T20:05:30Z",
+  "cut": "xSBWKKMjfW",
+  "gen": "mEZJXdBhJQ",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/c15.v3.FULL.txt",
+  "kind": "OWNER-GO"
+ },
+ "c16": {
+  "group": "Đoan trang",
+  "hidden": false,
+  "ts": "2026-11-19T20:05:30Z",
+  "cut": "1ldnbKlr4r",
+  "gen": "1ldnH1wr4r",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/c16.v3.FULL.txt",
+  "kind": "OWNER-GO"
+ },
+ "c17": {
+  "group": "Kho",
+  "hidden": true,
+  "ts": "2026-11-19T20:05:30Z",
+  "cut": "aFGPtvEfSh",
+  "gen": "rgXYbLfxtc",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/c17.v3.FULL.txt",
+  "kind": "OWNER-GO"
+ },
+ "c18": {
+  "group": "Tinh nghịch",
+  "hidden": false,
+  "ts": "2026-11-19T20:05:30Z",
+  "cut": "1ldnb1Sr4r",
+  "gen": "0eUKzekTfW",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/c18.v3.FULL.txt",
+  "kind": "OWNER-GO"
+ },
+ "c19": {
+  "group": "Sắc sảo",
+  "hidden": false,
+  "ts": "2026-11-19T21:40:00Z",
+  "cut": "gOmpdCcSXO",
+  "gen": "UPvdX0Uwny",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/c19.v5.FULL.txt",
+  "kind": "SACSAO-696"
+ },
+ "c20": {
+  "group": "Dịu dàng",
+  "hidden": false,
+  "ts": "2026-11-19T20:05:30Z",
+  "cut": "jUocxySLD0",
+  "gen": "79fdS4wJAL",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/c20.v3.FULL.txt",
+  "kind": "OWNER-GO"
+ },
+ "c21": {
+  "group": "Tươi tắn",
+  "hidden": false,
+  "ts": "2026-11-19T20:05:30Z",
+  "cut": "bxM2qSV5Y2",
+  "gen": "lJtVjy0gv9",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/c21.v3.FULL.txt",
+  "kind": "OWNER-GO"
+ },
+ "c22": {
+  "group": "Đoan trang",
+  "hidden": false,
+  "ts": "2026-11-19T20:05:30Z",
+  "cut": "rgXY1yHxtc",
+  "gen": "nVsHAeSYQD",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/c22.v3.FULL.txt",
+  "kind": "OWNER-GO"
+ },
+ "c23": {
+  "group": "Kho",
+  "hidden": true,
+  "ts": "2026-11-19T20:05:30Z",
+  "cut": "O6EoPf6ynm",
+  "gen": "1ldn1yZr4r",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/c23.v3.FULL.txt",
+  "kind": "OWNER-GO"
+ },
+ "c24": {
+  "group": "Tinh nghịch",
+  "hidden": false,
+  "ts": "2026-11-19T20:05:30Z",
+  "cut": "xSBcLXwjfW",
+  "gen": "hu2OhrzvqL",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/c24.v3.FULL.txt",
+  "kind": "OWNER-GO"
+ },
+ "c25": {
+  "group": "Tinh nghịch",
+  "hidden": false,
+  "ts": "2026-11-19T20:05:30Z",
+  "cut": "EbY6qU4uuO",
+  "gen": "jUo0lqXLD0",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/c25.v3.FULL.txt",
+  "kind": "OWNER-GO"
+ },
+ "c26": {
+  "group": "Dịu dàng",
+  "hidden": false,
+  "ts": "2026-11-19T20:05:30Z",
+  "cut": "ov6UI6L829",
+  "gen": "bxM2b9o5Y2",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/c26.v3.FULL.txt",
+  "kind": "OWNER-GO"
+ },
+ "c27": {
+  "group": "Sắc sảo",
+  "hidden": false,
+  "ts": "2026-11-19T21:30:00Z",
+  "cut": "KLpnNqzkqp",
+  "gen": "gOmpGecSXO",
+  "ver": "v4",
+  "prompt_file": "dev/art/face-common/c27.v4.FULL.txt",
+  "kind": "NEWFACE-686"
+ },
+ "c28": {
+  "group": "Đoan trang",
+  "hidden": false,
+  "ts": "2026-11-19T20:05:30Z",
+  "cut": "JNCB9V9Oq4",
+  "gen": "iG5aZ9U3uK",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/c28.v3.FULL.txt",
+  "kind": "OWNER-GO"
+ },
+ "c29": {
+  "group": "Kho",
+  "hidden": true,
+  "ts": "2026-11-19T20:05:30Z",
+  "cut": "EbY6qOiuuO",
+  "gen": "iG5aZ673uK",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/c29.v3.FULL.txt",
+  "kind": "OWNER-GO"
+ },
+ "c30": {
+  "group": "Tinh nghịch",
+  "hidden": false,
+  "ts": "2026-11-19T20:05:30Z",
+  "cut": "hu2yEUcvqL",
+  "gen": "WDg5VTocXe",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/c30.v3.FULL.txt",
+  "kind": "OWNER-GO"
+ },
+ "c31": {
+  "group": "Sắc sảo",
+  "hidden": false,
+  "ts": "2026-11-19T21:40:00Z",
+  "cut": "SyheXu8Ub8",
+  "gen": "yiuItX4PW9",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/c31.v5.FULL.txt",
+  "kind": "SACSAO-696"
+ },
+ "c32": {
+  "group": "Dịu dàng",
+  "hidden": false,
+  "ts": "2026-11-19T20:05:30Z",
+  "cut": "lJtMJwTgv9",
+  "gen": "N2qhRHL6D9",
+  "ver": "v3",
+  "prompt_file": "dev/art/face-common/c32.v3.FULL.txt",
+  "kind": "OWNER-GO"
+ },
+ "s07": {
+  "group": "Sắc sảo",
+  "hidden": false,
+  "ts": "2026-11-19T21:30:00Z",
+  "cut": "gOmpzsdSXO",
+  "gen": "SyhezotUb8",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s07.v5.FULL.txt",
+  "kind": "SAMPLE-686"
+ },
+ "s08": {
+  "group": "Sắc sảo",
+  "hidden": false,
+  "ts": "2026-11-19T21:45:00Z",
+  "cut": "4RFmfAq9Aa",
+  "gen": "WDgKkfTcXe",
+  "ver": "v5b",
+  "prompt_file": "dev/art/face-common/s08.v5b.FULL.txt",
+  "kind": "REDRAW-701"
+ },
+ "s09": {
+  "group": "Sắc sảo",
+  "hidden": false,
+  "ts": "2026-11-19T21:30:00Z",
+  "cut": "w4aXWwe7EI",
+  "gen": "s7IM283l8e",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s09.v5.FULL.txt",
+  "kind": "SAMPLE-686"
+ },
+ "s10": {
+  "group": "Kiêu kỳ",
+  "hidden": false,
+  "ts": "2026-11-19T21:35:00Z",
+  "cut": "u5W3NLlQLD",
+  "gen": "YMl5uBoWeC",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s10.v5.FULL.txt",
+  "kind": "SAMPLE-689"
+ },
+ "s11": {
+  "group": "Kiêu kỳ",
+  "hidden": false,
+  "ts": "2026-11-19T21:35:00Z",
+  "cut": "cpSkbto0eP",
+  "gen": "1ldW2O1r4r",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s11.v5.FULL.txt",
+  "kind": "SAMPLE-689"
+ },
+ "s12": {
+  "group": "Kiêu kỳ",
+  "hidden": false,
+  "ts": "2026-11-19T21:35:00Z",
+  "cut": "fHzN9OxCDY",
+  "gen": "aFG9PMUfSh",
+  "ver": "v5b",
+  "prompt_file": "dev/art/face-common/s12.v5b.FULL.txt",
+  "kind": "SAMPLE-689"
+ },
+ "s13": {
+  "group": "Lạnh lùng",
+  "hidden": false,
+  "ts": "2026-11-19T21:35:00Z",
+  "cut": "bxMGZJJ5Y2",
+  "gen": "O6E8pl4ynm",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s13.v5.FULL.txt",
+  "kind": "SAMPLE-689"
+ },
+ "s14": {
+  "group": "Lạnh lùng",
+  "hidden": false,
+  "ts": "2026-11-19T21:35:00Z",
+  "cut": "nVsbFtaYQD",
+  "gen": "Syhe0x1Ub8",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s14.v5.FULL.txt",
+  "kind": "SAMPLE-689"
+ },
+ "s15": {
+  "group": "Lạnh lùng",
+  "hidden": false,
+  "ts": "2026-11-19T21:35:00Z",
+  "cut": "YMl5HhtWeC",
+  "gen": "jUoTzk2LD0",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s15.v5.FULL.txt",
+  "kind": "SAMPLE-689"
+ },
+ "s16": {
+  "group": "Quyến rũ",
+  "hidden": false,
+  "ts": "2026-11-19T21:35:00Z",
+  "cut": "s7IM02Wl8e",
+  "gen": "u5W34WVQLD",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s16.v5.FULL.txt",
+  "kind": "SAMPLE-689"
+ },
+ "s17": {
+  "group": "Quyến rũ",
+  "hidden": false,
+  "ts": "2026-11-19T21:35:00Z",
+  "cut": "WDgKqfpcXe",
+  "gen": "jUoTnh9LD0",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s17.v5.FULL.txt",
+  "kind": "SAMPLE-689"
+ },
+ "s18": {
+  "group": "Quyến rũ",
+  "hidden": false,
+  "ts": "2026-11-19T21:35:00Z",
+  "cut": "SyheMY2Ub8",
+  "gen": "9ZHhorQNYZ",
+  "ver": "v5",
+  "prompt_file": "dev/art/face-common/s18.v5.FULL.txt",
+  "kind": "SAMPLE-689"
+ }
+}

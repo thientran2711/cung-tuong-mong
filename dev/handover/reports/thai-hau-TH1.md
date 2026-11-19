@@ -139,3 +139,25 @@ How the redraw avoids it:
 - Gate PASS 48/48 (16 sắc sảo / tinh nghịch people × 3 ages).
 - v624/m05_thaihau_aNN.B22.prompt.txt = the current prompts. m05_thaihau_aNN.prompt.txt = exactly what was drawn at b71117d. DIFF_vs_1811_c04.md is regenerated.
 - No gens. Waiting for NF3's new m05 face block (owner: the face looks baby, not sắc sảo).
+
+## HANDOVER (TH1 rollover, context near START ≈5 % + 25 %) — for the successor the coordinator opens
+depth 5. State 19/11 ~21:15Z:
+- **IDLE.** OWNER STOP: no Sắc sảo face pictures and no Thái hậu gens until the owner regroups the faces (ROOT-54). NF3 is reworking the m05 face block (the owner said "baby, not sắc sảo").
+- **Thái hậu builder:** `python3 dev/art/store-all/build_all.py mNN thaihau --age a36|a51|a65` (functions `thaihau()`, `th1811()`, `gate_th()`).
+  - Base = `dev/art/elder-copy/THAIHAU_1811_c04_a36_BASE.txt` (18/11 c04 prompt, verbatim).
+  - Slots: face (KC_REFS face_words), colour name, item (TH_ITEMS[TH_AGE]) + hands.
+  - a51/a65 age+colour = `elder-copy/THAIHAU_1811_AGE_COLOUR.md`.
+  - B8 identity law; HH t8 law block copied from her HH build; 18/11 swatch sentence (image 2); D9.
+  - B22 yellow #CE9C48.
+  - Gate: tp8 with only S03/S33 exempt.
+  - Refs: her KC cut + swatch TdwDfOyVNR. Gens come back opaque, so run remove_bg.
+  - It does NOT check face groups: pick only people the owner allows.
+- **Drawn so far:** m05 a36/a51/a65 at b71117d; the owner OKed the yellow → B22. Sheet: `dev/handover/review-sheets/thai-hau-sample/v624/sheet_m05_thai_hau.jpg`.
+- **Superseded:** `build.py --state thaihau` (TH1 Lượt 615, no yellow); v618 files.
+- **Open flags (owner):**
+  - two yellow words (the base "deep antique-gold" + B22 hex — now consistent);
+  - HH richness words inside the outfit sentence not added;
+  - angle 45° only weakly followed;
+  - a36 already deep;
+  - c01–c32 have no B8 ref;
+  - nc1–nc3 not supported.
