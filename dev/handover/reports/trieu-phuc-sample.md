@@ -479,3 +479,24 @@ LOOK (full size + head/chest crops):
   - (4) t3 hốt gold edge is thin and hard to see.
   - (5) There is a sash tassel/pendant at the waist on t1–t5 (part of the store sash).
 - No redos: with the same seed and prompt a redo returns the same picture, and the prompt text may not be changed (LAW #1).
+
+## §28 — r19 t1–t6 (helper of Foreman C ROOT-47; owner Lượt 437 → 443 → 444) — 19/11 — 12 gens + 12 cuts
+ORDER (Lượt 437 on r18 final): KEEP t7/t8 (9ZHBGHqNYZ, 79fMiEWJAL). Redraw t1–t6 from the r18 final prompts, changing only: (1) sleeves t1–t3 KNEE, t4–t6 ANKLE; (2) brocade (gấm); (3) each rank its OWN hà bí style; (4) each rank its OWN bí trụy, rising in luxury. Mid-run: Lượt 443 = sleeve sentences VERBATIM from the builder (dev/art/owner-copy/mk_ranks_v3.py l.122–123, FIGURE_GATE OWNER LƯỢT 351), no own wording. Lượt 444 = ONE identical brocade sentence in ALL ranks, not only t1 (the rule for t7/t8 too).
+BUILD: `python3 r19/build_r19.py` (dev/art/owner-copy/trieu/). Base = r18/tN_c06_RAN.txt. Replaced: the hà bí sentence (now carries the rank's style + pendant); t2/t3 SLEEVES → builder t1–t3 sentence (t1 already had it; t4–t6 already had the builder ankle sentence). Added before SLEEVES on t1–t6: "FABRIC OF THIS COURT ROBE: the robe and sleeves are rich silk BROCADE (gấm) with a woven pattern, flowing as brocade flows, the same brocade on every rank, never thin, limp or flimsy."
+Per rank: t1 narrow plain-edged band, scattered florets / silver-filigree teardrop · t2 cloud-scroll border / carved-ivory heart · t3 twining lotus / jade gourd · t4 peony + butterflies / green-jade lotus in gold · t5 phoenix-tail scroll / gold ruyi + gem · t6 gold-couched clouds + pearl edge / gold phoenix + pearls.
+REFS/SETTINGS as r18: image 1 face TdU0vvvVNR, [t6: 2 swatch TdwDfOyVNR], last Nữ quan s7IO0AUl8e; no style image; gpt-2-6 1024x2304 2k seed 7172, folder ba4aecfe.
+STORE: t1–t5 FAIL with the same list as r18 (owner-named, ruling a); t6 PASS. Ledger: 12 lines (v1 ts 16:12Z SUPERSEDED, v2 ts 16:24Z FINAL) with store_check/store_fail/store_replaced.
+v1 (SUPERSEDED, own sleeve wording + brocade only on t1; prompts r19/v1_ownwords/): t1 w4aVdtb7EI→kseZTzc16B · t2 8ais7u7IrU→gOmcBpUSXO · t3 P3Qdtql42C→UPvT8XSwny · t4 8aisJ54IrU→jUozpDtLD0 · t5 1ld2cv9r4r→bxMiWcN5Y2 · t6 rgXATYQxtc→1ld2VpSr4r.
+v2 FINAL (r19/t1..t6_c06_RAN.txt): t1 VX7bgTOMMU→kseZd6916B · t2 u5WPzRUQLD→hu2UAgCvqL · t3 Lw8nBU6swO→KLpRe3zkqp · t4 u5WPnYPQLD→xSBGozEjfW · t5 xSBGXysjfW→w4aVfpd7EI · t6 Lw8noFaswO→kseZdn616B.
+CREDITS: 1656 (12×135 + 12×3). Over the 8-gen cap because ROOT-47 ordered the re-run (Lượt 443/444) after v1 was drawn.
+CDN: img/_review/trieu-phuc/r19/c06_a18_trieu19_t1..t6.png + c06_sheet19.jpg (t1–t6 r19 v2 + r18 t7/t8 KEPT). Scratchpad gui/17-trieu-phuc-r19.jpg. SKINS.md: r18 t1–t6 added.
+LOOK (v2 full size + pendant/band crops):
+- Brocade: a woven tone-on-tone damask pattern is visible in the red cloth on all six; t1 now has the same body as t2–t6.
+- Hà bí: six different bands, as ordered (t2's cloud curls are small but now visible at the edges). Colours stay deep.
+- Bí trụy: six different pendants, matching the list, clearly rising from silver to gold-phoenix-with-pearls.
+- Hair up, no flowers, hốt ladder unchanged.
+- Faults:
+  - (1) Sleeves t4–t6 end at the lower shin, not the ankle (t4 the shortest, about mid-shin). t1–t3 end at about the knee (t1 a little below it).
+  - (2) The band join + pendant sits at the lower shin/just above the ankle, as in r18.
+  - (3) t6 pendant is a phoenix although the store text says "no phoenix anywhere" (owner-named pendant).
+  - (4) The builder t1–t3 sleeve sentence says "thin light silk" next to the brocade sentence (both verbatim/owner-ordered).
